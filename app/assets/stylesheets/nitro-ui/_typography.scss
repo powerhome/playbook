@@ -1,0 +1,176 @@
+// -----------
+// Typography
+// -----------
+
+// Use modular scale to make our type relitive http://www.modularscale.com/
+
+@mixin general-heading-styles ($size: 'large') {
+  line-height: 1.1;
+  color: $ink-light;
+  small, .small {
+    font-weight: normal;
+    line-height: 1;
+    color: $ink-lightest;
+  }
+  @if $size == 'large' {
+    small, .small {
+      font-size: 65%;
+    }
+  } @else {
+    small, .small {
+      font-size: 75%;
+    }
+  }
+}
+
+// General type should not include margin. However heading tags are acceptable.
+h1, h2, h3 {
+  margin-top: $line-height-computed;
+  margin-bottom: ($line-height-computed / 2);
+  &:first-of-type {
+    margin-top: ($line-height-computed / 3);
+  }
+}
+h4, h5, h6 {
+  margin-top: ($line-height-computed / 2);
+  margin-bottom: ($line-height-computed / 2);
+  &:first-of-type {
+    margin-top: ($line-height-computed / 3);
+  }
+}
+
+.text-display, h1, .h1 {
+  font-size: $font-jumbo;
+  font-weight: $regular;
+  @include general-heading-styles;
+  @include mobile-only {
+    font-size: ($font-jumbo - 2px);
+  }
+  &-bold {
+    font-weight: $bold;
+    font-size: $font-jumbo;
+    @include general-heading-styles;
+    @include mobile-only {
+      font-size: ($font-jumbo - 2px);
+    }
+  }
+}
+
+.text-headline, h2, .h2 {
+  font-size: $font-largest;
+  font-weight: $regular;
+  @include general-heading-styles;
+  @include mobile-only {
+    font-size: ($font-largest - 2px);
+  }
+  &-bold {
+    font-weight: $bold;
+    font-size: $font-largest;
+    @include general-heading-styles;
+    @include mobile-only {
+      font-size: ($font-largest - 2px);
+    }
+  }
+}
+
+.text-title, h3, .h3 {
+  font-size: $font-larger;
+  font-weight: $regular;
+  @include general-heading-styles;
+  @include mobile-only {
+    font-size: ($font-larger - 2px);
+  }
+  &-bold {
+    font-weight: $bold;
+    font-size: $font-larger;
+    @include general-heading-styles;
+    @include mobile-only {
+      font-size: ($font-larger - 2px);
+    }
+  }
+}
+
+.text-subheader, h4, .h4 {
+  font-size: $font-large;
+  font-weight: $regular;
+  @include general-heading-styles('small');
+  @include mobile-only {
+    font-size: ($font-large - 2px);
+  }
+  &-bold {
+    font-weight: $bold;
+    font-size: $font-large;
+    @include general-heading-styles('small');
+    @include mobile-only {
+      font-size: ($font-large - 2px);
+    }
+  }
+}
+
+.text-body, h5, .h5 {
+  font-size: $font-base;
+  font-weight: $regular;
+  @include general-heading-styles('small');
+  @include mobile-only {
+    font-size: $font-small;
+  }
+  &-bold {
+    font-weight: $bold;
+    font-size: $font-base;
+    @include general-heading-styles('small');
+    @include mobile-only {
+      font-size: $font-small;
+    }
+  }
+}
+
+.text-meta, h6, .h6 {
+  font-size: $font-small;
+  font-weight: $regular;
+  @include general-heading-styles('small');
+  @include mobile-only {
+    font-size: $font-smaller;
+  }
+  &-bold {
+    font-weight: $bold;
+    font-size: $font-small;
+    @include general-heading-styles('small');
+    @include mobile-only {
+      font-size: $font-smaller;
+    }
+  }
+}
+
+.text-caption {
+  font-size: $font-smaller;
+  font-weight: $regular;
+  @include general-heading-styles('small');
+  @include mobile-only {
+    font-size: $font-smallest;
+  }
+  &-bold {
+    font-weight: $bold;
+    font-size: $font-smaller;
+    @include general-heading-styles('small');
+    @include mobile-only {
+      font-size: $font-smallest;
+    }
+  }
+}
+
+.text-discalimer {
+  font-size: $font-smallest;
+  font-weight: $regular;
+  @include general-heading-styles('small');
+  @include mobile-only {
+    font-size: ($font-smallest - 1px);
+  }
+  &-bold {
+    font-weight: $bold;
+    font-size: $font-smallest;
+    @include general-heading-styles('small');
+    @include mobile-only {
+      font-size: ($font-smallest - 1px);
+    }
+  }
+}

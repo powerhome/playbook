@@ -1,0 +1,106 @@
+.react-datetime {
+  &.rdt {
+    .rdtPicker {
+      visibility: hidden;
+    }
+    &Open {
+      .rdtPicker {
+        visibility: visible;
+      }
+    }
+  }
+  .rdtPicker {
+    position: absolute;
+    z-index: $z-1;
+    background: $white;
+    box-shadow: 0 6px 14px rgba($black, .5);
+    padding: $space-smaller;
+    bottom: $input-height-base;
+    right: 0;
+    @include tablet-and-below {
+      left: 25%;
+      bottom: 0;
+      tfoot {
+        td {
+          margin-top: $space-larger;
+        }
+      }
+    }
+    @include mobile-only {
+      width: 100%;
+      left: 0;
+    }
+    .rdt {
+      &Time, &Days, &Months, &Years {
+        & > table {
+          width: 100%;
+        }
+      }
+      &Time {
+        & > table {
+          td {
+            &:hover {
+              background: $white;
+              color: $black;
+            }
+          }
+        }
+      }
+    }
+    table {
+      thead {
+        th {
+          padding: $space-smaller;
+          text-align: center;
+          &.rdtSwitch {
+            @include solid-button(#fff);
+            display: table-cell;
+          }
+          &.rdtNext {
+            cursor: pointer;
+          }
+        }
+      }
+      tbody {
+        td {
+          padding: $space-smallest $space-small;
+          text-align: center;
+          cursor: pointer;
+          &:hover, &.rdtActive {
+            background: $power-blue;
+            color: $white;
+          }
+          &.current-day {
+            background: $light-yellow;
+          }
+          &.rdtOld, &.rdtNew {
+            color: $text-muted;
+            opacity: 0.7;
+          }
+        }
+      }
+      tfoot {
+        td {
+          margin-top: $space-base;
+          text-align: center;
+          @include solid-button($white);
+          display: table-cell;
+        }
+      }
+    }
+  }
+  .rdtTime {
+    .rdtCounters {
+      width: 50%;
+      margin: 0 auto;
+      font-size: $font-larger;
+      display: flex;
+      .rdtCounter {
+        flex: 1;
+        &Separator {
+          margin-top: $space-base * 4;
+        }
+      }
+    }
+  }
+}

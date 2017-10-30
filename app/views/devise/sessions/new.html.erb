@@ -1,0 +1,31 @@
+<div class="container login-container">
+  <div class="row">
+    <div class="col-sm-4 col-sm-offset-4">
+      <div class="login-container-form-wrapper">
+        <h2>Log in</h2>
+
+        <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+          <div class="form-inputs">
+            <div data-displayfield="id" class="form-group label-inside">
+              <label for="field1">Email</label>
+              <%= f.input :email, class: 'form-control', required: false, autofocus: true %>
+            </div>
+            <div data-displayfield="id" class="form-group label-inside">
+              <label for="field1">Email</label>
+              <%= f.input :password, class: 'form-control', required: false, autofocus: false %>
+            </div>
+            <div data-displayfield="id" class="form-group checkbox-input">
+              <%= f.input :remember_me, as: :boolean if devise_mapping.rememberable? %>
+            </div>
+          </div>
+
+          <div class="form-actions">
+            <%= f.submit 'Log in', :class => 'btn btn-sm btn-primary' %>
+          </div>
+        <% end %>
+
+        <%= render "devise/shared/links" %>
+      </div>
+    </div>
+  </div>
+</div>

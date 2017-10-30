@@ -1,0 +1,28 @@
+
+label, label.label {
+  display: inline-block;
+  max-width: 100%; // Force IE8 to wrap long content (see https://github.com/twbs/bootstrap/issues/13141)
+  margin-bottom: 5px;
+  font-weight: $bold;
+}
+
+.form-group label, .input-group label, label.label {
+  text-transform: uppercase;
+	font-size: $font-smallest;
+  line-height: $font-smallest;
+	color: $form-label-color;
+	@include smooth-font;
+}
+.form-group.label-inside, .input-group.label-inside, .label-inside {
+	position: relative;
+	padding-top: 8px;
+	label {
+		position: absolute;
+		background: $body-bg;
+		margin: 0;
+		padding: 0 4px;
+		top: 4px;
+		margin-left: (($padding-base-horizontal/1.5) - 3px);
+    z-index: 3; // Temp fix for input groups
+	}
+}

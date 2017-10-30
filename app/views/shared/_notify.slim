@@ -1,0 +1,12 @@
+/ Add the class "notify_container" & one of the following "content_hidden", "content_visible", "content_overlay" to the loading container
+
+- style       ||= "success"
+- style = 'success' if style == "notice"
+- style = 'error' if style == "alert"
+
+.nitro-notify class=".nitro-notify-#{style}"
+  .msg
+    = message
+  a.notify_close href="javascript:;"
+    span x
+        

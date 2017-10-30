@@ -1,0 +1,20 @@
+h1 Listing sections
+table
+  thead
+    tr
+      th Name
+      th
+      th
+      th
+
+  tbody
+    - @sections.each do |section|
+      tr
+        td = section.name
+        td = link_to 'Show', section
+        td = link_to 'Edit', edit_section_path(section)
+        td = link_to 'Destroy', section, data: { confirm: 'Are you sure?' }, method: :delete
+
+br
+
+= link_to 'New Section', new_section_path

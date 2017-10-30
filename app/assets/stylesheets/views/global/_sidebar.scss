@@ -1,0 +1,200 @@
+$icon-size: 44px;
+$active-color: $app-color;
+
+.sidebar {
+  .sidebar-nav {
+    list-style: none;
+    padding: $space-largest 0 0 0;
+    margin: 0;
+
+    li {
+      margin: $space-base+4 0;
+      position: relative;
+
+      .icon {
+        width: $icon-size;
+        height: $icon-size;
+        line-height: $icon-size;
+        display: block;
+        text-align: center;
+        float: left;
+        border: 1px solid $sky;
+        background: $white;
+        color: $ink-lighter;
+        border-radius: $icon-size/2;
+      }
+      .text {
+        display: block;
+        float: left;
+        width: calc(100% - $icon-size);
+        line-height: $icon-size;
+        text-transform: uppercase;
+        box-sizing: border-box;
+        padding-left: $space-base;
+        font-size: $font-base;
+        color: $ink-lighter;
+      }
+      .edit-action {
+        line-height: $icon-size - 2;
+        display: none;
+        position: absolute;
+        right: $space-large;
+        padding: 0 $space-base;
+        box-sizing: border-box;
+
+        a {
+          display: inline-block;
+
+          i {
+            color: $ink-lightest;
+          }
+        }
+      }
+
+      &.type {
+        &-component {
+          .icon {
+            background: $p-navy-opacity-2;
+            border-color: rgba($p-navy-opacity-2, 0);
+            color: $ink-lighter;
+          }
+        }
+      }
+      &.active {
+        .icon {
+          background: $active-color;
+          border-color: $active-color;
+          color: $white;
+        }
+        .text {
+          color: $ink;
+        }
+      }
+      &::after {
+        content: '';
+        clear: both;
+        float: none;
+        display: block;
+        width: 100%
+      }
+
+      .sub-page-nav {
+        clear: both;
+        display: block;
+        float: none;
+        list-style: none;
+        padding: 0 0 0 $icon-size + $space-large;
+        margin: 0;
+
+        li {
+          a {
+            font-size: $font-base;
+            line-height: $font-base;
+            color: $ink-lighter;
+
+            span {
+              line-height: $font-base;
+
+              i {
+                font-size: $font-smaller;
+                line-height: $font-base;
+              }
+            }
+          }
+          &.active {
+            a {
+              color: $active-color;
+              font-weight: $bold;
+            }
+          }
+
+          .block-nav {
+            padding: 0 0 0 $space-large;
+            margin: 0 0 $space-base 0;
+            list-style: none;
+
+            li {
+              margin: $space-smaller 0;
+
+              a {
+                font-weight: $regular;
+                color: $ink-lighter;
+                font-size: $font-small;
+                line-height: $font-small;
+              }
+
+              &.active {
+                a {
+                  color: $active-color;
+                }
+              }
+            }
+          }
+        }
+      }
+
+      &:hover {
+        .edit-action {
+          display: inline-block;
+        }
+      }
+    }
+  }
+
+  .new-page-link,
+  .new-category-link {
+    margin: 0;
+    padding: 0;
+    background: $white;
+    position: fixed;
+    top: 100px;
+    right: 30px;
+    width: 44px;
+    height: 44px;
+    line-height: 44px;
+    text-align: center;
+    z-index: 100;
+    border-radius: 22px;
+    border: 1px solid $sky;
+    box-shadow: 0 1px 6px rgba($ink-lighter, 0.2);
+    transition: all 0.3s ease;
+
+    a {
+      font-size: $font-large;
+      text-transform: uppercase;
+      color: $ink-lightest;
+      line-height: 40px;
+      padding: 0;
+      margin: 0;
+      display: block;
+      width: 100%;
+      height: 100%;
+      text-align: center;
+      vertical-align: middle;
+
+      i {
+        margin-right: 2px;
+        vertical-align: middle;
+
+        &.add-icon {
+          font-size: $font-smallest;
+        }
+        &.item-icon {
+          font-size: $font-large;
+          margin-right: 4px;
+        }
+      }
+    }
+
+    &:hover {
+      box-shadow: 0 0 0 rgba($ink-lighter, 0);
+    }
+  }
+  .new-category-link {
+    top: 160px;
+
+    a {
+      line-height: 42px;
+    }
+  }
+}

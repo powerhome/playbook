@@ -1,0 +1,77 @@
+.document-page {
+  background: $white;
+  border: 1px solid $sky;
+  border-radius: $border-rad-light;
+  position: relative;
+  box-shadow: 0 6px 10px 0 rgba($ink-lighter, 0.2);
+
+  &-header {
+    box-sizing: border-box;
+    padding: $space-smallest $space-base $space-smallest $space-larger;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: block;
+    z-index: 800;
+
+    .actions {
+      float: right;
+      padding: 14px $space-base;
+
+      .settings-btn,
+      .edit-btn {
+        float: right;
+      }
+    }
+    &::after {
+      content: '';
+      clear: both;
+      float: none;
+      display: block;
+      width: 100%;
+    }
+  }
+
+  &-body {
+    box-sizing: border-box;
+    padding: $space-largest*2.8 $space-largest*3.5 $space-largest*3.5;
+
+    h1 {
+      font-size: $font-jumbo;
+    }
+
+    input,
+    textarea {
+      outline: none;
+    }
+
+    .title-field {
+      input {
+        border: 0;
+        padding: 0;
+        display: block;
+        width: 100%;
+      }
+    }
+    .full-document-field {
+      clear: both;
+      float: none;
+      width: 100%;
+
+      textarea {
+        width: 100%;
+        border: 0;
+        min-height: calc(100vh - 450px);
+        display: inline-block;
+        resize: both;
+      }
+    }
+    .document-actions {
+      position: absolute;
+      top: 16px;
+      right: 124px;
+      z-index : 999999;
+    }
+  }
+}

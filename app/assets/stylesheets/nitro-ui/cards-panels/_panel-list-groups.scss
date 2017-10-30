@@ -1,0 +1,41 @@
+.panel {
+  > .list-group,
+  > .panel-collapse > .list-group {
+    margin-bottom: 0;
+
+    .list-group-item {
+      border-width: 1px 0;
+      border-radius: 0;
+    }
+
+    // Add border top radius for first one
+    &:first-child {
+      .list-group-item:first-child {
+        border-top: 0;
+        @include border-top-radius(($border-rad-light - 1));
+      }
+    }
+
+    // Add border bottom radius for last one
+    &:last-child {
+      .list-group-item:last-child {
+        border-bottom: 0;
+        @include border-bottom-radius(($border-rad-light - 1));
+      }
+    }
+  }
+  > .panel-heading + .panel-collapse > .list-group {
+    .list-group-item:first-child {
+      @include border-top-radius(0);
+    }
+  }
+}
+// Collapse space between when there's no additional content.
+.panel-heading + .list-group {
+  .list-group-item:first-child {
+    border-top-width: 0;
+  }
+}
+.list-group + .panel-footer {
+  border-top-width: 0;
+}

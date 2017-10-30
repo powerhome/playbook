@@ -1,0 +1,19 @@
+h1 Listing page_tags
+
+table
+  thead
+    tr
+      th
+      th
+      th
+
+  tbody
+    - @page_tags.each do |page_tag|
+      tr
+        td = link_to 'Show', page_tag
+        td = link_to 'Edit', edit_page_tag_path(page_tag)
+        td = link_to 'Destroy', page_tag, data: { confirm: 'Are you sure?' }, method: :delete
+
+br
+
+= link_to 'New Page tag', new_page_tag_path

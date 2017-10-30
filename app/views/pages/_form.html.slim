@@ -1,0 +1,20 @@
+= form_for [@category, @page] do |f|
+  - if @page.errors.any?
+    #error_explanation
+      h2 = "#{pluralize(@page.errors.count, "error")} prohibited this page from being saved:"
+      ul
+        - @page.errors.full_messages.each do |message|
+          li = message
+
+  .field.title-field
+    h1.font-weight-bold
+      = f.text_field :title, :placeholder => 'New Page Title'
+  .field.full-document-field
+    = f.text_area :body_markdown, as: :markdown_editor, :placeholder => 'Type page content here...'
+  .extra-fields
+    = f.hidden_field :body_html, value: nil if !@page.body_html
+    = f.hidden_field :category_id, value: @category.id if !@page.category_id
+    = f.hidden_field :user_id, value: current_user.id if !@page.user_id
+    = f.hidden_field :type_id, value: 1 if !@page.user_id
+    = f.hidden_field :order, value: @order_preset
+  .actions.document-actions = f.submit 'Save', :class => 'btn btn-sm btn-primary'

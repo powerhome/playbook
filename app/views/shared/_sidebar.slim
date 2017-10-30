@@ -1,0 +1,7 @@
+div.sidebar
+  ul.sidebar-nav
+    - @current_section.categories.each do |cat|
+      - if cat.pages.count > 0
+        = render :partial => "shared/sidebar-items", locals: { cat: cat }
+      - if user_signed_in? && cat.pages.count <= 0
+        = render :partial => "shared/sidebar-items-wnew", locals: { cat: cat }

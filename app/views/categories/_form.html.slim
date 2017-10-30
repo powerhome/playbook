@@ -1,0 +1,15 @@
+= form_for [@section, @category] do |f|
+  - if @category.errors.any?
+    #error_explanation
+      h2 = "#{pluralize(@category.errors.count, "error")} prohibited this category from being saved:"
+      ul
+        - @category.errors.full_messages.each do |message|
+          li = message
+
+  .field
+    = f.label :name
+    = f.text_field :name
+  .extra-fields
+    = f.hidden_field :order, value: @order_preset
+    = f.hidden_field :section_id, value: @section.id
+  .actions = f.submit

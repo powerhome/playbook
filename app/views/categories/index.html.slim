@@ -1,0 +1,25 @@
+h1 Listing categories
+
+table
+  thead
+    tr
+      th Name
+      th Order
+      th Section
+      th
+      th
+      th
+
+  tbody
+    - @categories.each do |category|
+      tr
+        td = category.name
+        td = category.order
+        td = category.section_id
+        td = link_to 'Show', category
+        td = link_to 'Edit', edit_category_path(category)
+        td = link_to 'Destroy', category, data: { confirm: 'Are you sure?' }, method: :delete
+
+br
+
+= link_to 'New Category', new_category_path

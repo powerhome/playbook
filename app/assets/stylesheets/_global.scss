@@ -1,0 +1,414 @@
+
+//
+// Scaffolding
+// --------------------------------------------------
+
+
+// Reset the box-sizing
+//
+// Heads up! This reset may cause conflicts with some third-party widgets.
+// For recommendations on resolving such conflicts, see
+// http://getbootstrap.com/getting-started/#third-box-sizing
+* {
+  @include box-sizing(border-box);
+}
+*:before,
+*:after {
+  @include box-sizing(border-box);
+}
+
+
+// Body reset
+
+html {
+  font-size: 10px;
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+
+body {
+  font-family: $font-family-base;
+  font-size: $font-size-base;
+  // line-height: $line-height-base;
+  line-height: 1.5;
+  color: $text-color;
+  background-color: $body-bg;
+}
+
+// Reset fonts for relevant elements
+input,
+button,
+select,
+textarea {
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+}
+
+
+
+
+
+// Figures
+//
+// We reset this here because previously Normalize had no `figure` margins. This
+// ensures we don't break anyone's use of the element.
+
+figure {
+  margin: 0;
+}
+
+
+// Images
+
+img {
+  vertical-align: middle;
+}
+
+// Responsive images (ensure images don't scale beyond their parents)
+.img-responsive {
+  @include img-responsive;
+}
+
+// Rounded corners // Move to borders
+.img-rounded {
+  border-radius: $border-radius-large;
+}
+
+// Image thumbnails
+//
+// Heads up! This is mixin-ed into thumbnails.less for `.thumbnail`.
+.img-thumbnail {
+  padding: $thumbnail-padding;
+  line-height: $line-height-base;
+  background-color: $thumbnail-bg;
+  border: 1px solid $thumbnail-border;
+  border-radius: $thumbnail-border-radius;
+  @include transition(all .2s ease-in-out);
+
+  // Keep them at most 100% wide
+  @include img-responsive(inline-block);
+}
+
+// Perfect circle // Move to borders
+.img-circle {
+  border-radius: 50%; // set radius in percents
+}
+
+
+// Horizontal rules
+
+hr {
+  margin-top:    $line-height-computed;
+  margin-bottom: $line-height-computed;
+  border: 0;
+  border-top: 1px solid $hr-border;
+}
+
+
+
+
+
+// iOS "clickable elements" fix for role="button"
+//
+// Fixes "clickability" issue (and more generally, the firing of events such as focus as well)
+// for traditionally non-focusable elements with role="button"
+// see https://developer.mozilla.org/en-US/docs/Web/Events/click#Safari_Mobile
+
+[role="button"] {
+  cursor: pointer;
+}
+
+
+// ^^ Bootstrap
+// -------------------
+
+
+
+
+/* disable resize ability for ALL textarea fields by default. */
+textarea {
+  resize: none;
+}
+body {
+  background: $sky-lighter;
+}
+
+// body { background: #f5f5f5 image-url("backgrounds/greyzz.png") repeat top left; }
+// Use Background Variable
+// body { background: #EFF3F6; }
+body.training { background: $sky-lighter }
+
+// @media
+// only screen and (-webkit-min-device-pixel-ratio: 2),
+// only screen and (   min--moz-device-pixel-ratio: 2),
+// only screen and (     -o-min-device-pixel-ratio: 2/1),
+// only screen and (        min-device-pixel-ratio: 2),
+// only screen and (                min-resolution: 192dpi),
+// only screen and (                min-resolution: 2dppx) {
+//   body { background: #f5f5f5 image-url("nitro_theme/backgrounds/greyzz_@2X.png") repeat top left / 149px 139px; }
+// }
+
+body {
+  letter-spacing: $lspace-normal;
+  font-weight: $regular;
+  font-style: normal;
+  text-rendering: optimizeLegibility;
+  -moz-font-feature-settings: "liga" on;
+  color: $black;
+}
+
+#main-view {
+  margin: 30px 15px;
+
+  &.full-width {
+    margin: 0;
+  }
+}
+
+.new-style {
+  .left { float:left; }
+  .right { float:right; }
+
+
+
+  .btn {
+    margin-bottom: .25rem;
+  }
+  .nav {
+    .btn {
+      margin-bottom: 0;
+    }
+  }
+
+  /* for modal-headers that use a bg color */
+  .modal-header {
+    -moz-border-radius-topleft: 4px;
+    -moz-border-radius-topright: 4px;
+    -webkit-border-top-left-radius: 4px;
+    -webkit-border-top-right-radius: 4px;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+  }
+
+  // .highlighter {
+  //   background-color: $medium-yellow;
+  // }
+
+  // .text-more-muted { color: #999; }
+
+  .hanging-indent {
+    padding-left: 1em;
+    text-indent: -1em;
+  }
+
+  .addAmt, .add-amount { color: #090; }
+  .minusAmt, .minus-amount { color: #f00; }
+  .pendingAmt, .pending-amount { color: orange; }
+  .cents {
+    font-size: .7em;
+    line-height: 1em;
+    margin-left: 2px;
+    text-decoration: underline;
+    vertical-align: top;
+  }
+  .positive {
+     background-color: #e6efc2 !important;
+     color: #529214 !important;
+     }
+  .negative {
+     background-color: #fbe3e4 !important;
+     color: #d12f19 !important;
+     }
+  .fund {
+     background-color: #aad2f8 !important;
+     color: #005ded !important;
+     }
+
+  .nowrap { white-space: nowrap; }
+
+  address { margin: 0; }
+
+  #spinner {
+    position: fixed;
+    right: 15px;
+    top: 90px;
+    z-index: 10000;
+
+    span.badge {
+      display: block;
+      background: rgba($sky-lighter, $opacity-9);
+      border-radius: $border-rad-light;
+      padding: $space-base;
+    }
+  }
+
+  /* FORM OVERRIDES */
+  .nitro-form {
+    .narrow { max-width: 600px; }
+    .nav-tabs + * { margin-top: 1em; } /* spacing after tabs on a form */
+    .form-group {
+      input[type="file"] {
+        margin: 5px 0;
+      }
+      input.inline, select.inline {
+        display: inline;
+        width: auto;
+      }
+
+      /* make input[type="number"] hide spinner buttons */
+      input[type=number]::-webkit-inner-spin-button,
+      input[type=number]::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+      }
+      input[type=number] { -moz-appearance: textfield; }
+
+    }
+  }
+  .form-control.date[readonly] {
+    background-color: #fff;
+    cursor: default;
+  }
+
+
+
+
+  /* calDate */
+  .calDate {
+    border-radius: 4px;
+    @include box-shadow(1px, 1px, 3px, rgba(0, 0, 0, 0.1));
+    border: solid 1px $medium-grey;
+    background-color: #fff;
+    color: $dark-grey;
+    font-size: 122%;
+    margin-bottom: 5px;
+    text-align: center;
+
+    .weekday {
+      -moz-border-radius-topleft: 4px;
+      -moz-border-radius-topright: 4px;
+      -webkit-border-top-left-radius: 4px;
+      -webkit-border-top-right-radius: 4px;
+      border-top-left-radius: 4px;
+      border-top-right-radius: 4px;
+      background-color: $dark-red;
+      color: #fff;
+      display: block;
+      padding: 5px;
+    }
+    .time { display: block; font-size: 175%; font-weight: bold; color: $dark-grey; padding: 5px;  }
+    .date { display: block; padding: 5px; }
+  }
+
+  /* stacked-date */
+  .stacked-date {
+    white-space: nowrap;
+
+    .date {
+      display: inline-block;
+
+      .day {
+        color: $ink;
+        display: block;
+        font-size: 1.5em;
+        font-weight: 600;
+        line-height: 0.9em;
+        margin-top: 0.2em;
+        text-align: right;
+      }
+      .month, .year {
+        color: $ink-lighter;
+        display: block;
+        font-size: 0.9em;
+        font-weight: 600;
+        line-height: 1em;
+        text-align: right;
+        text-transform: uppercase;
+      }
+    }
+
+    .time-info {
+      color: $ink;
+      display: inline-block;
+      font-size: 12px;
+      line-height: 1.2em;
+      margin-left: 0.7em;
+
+      .time {
+        display: block;
+        white-space: nowrap;
+      }
+      .timezone {
+        color: $ink-lighter;
+        display: block;
+      }
+    }
+  }
+  .text-danger {
+    .stacked-date {
+      .date {
+        .day {
+          color: $power-red;
+        }
+        .month, .year {
+          color: $p-red-opacity-6;
+        }
+      }
+    }
+  }
+
+
+}
+
+/* Firefox specific fix for pickadate dropdowns */
+@-moz-document url-prefix() {
+  .picker__select--month, .picker__select--year {
+    height: 100% !important;
+    padding: 5px !important;
+  }
+}
+
+
+
+/* For smaller displays have modal-lg fill the screen */
+@media only screen and (device-width: 768px),
+       only screen and (max-width: 768px) {
+  .modal-lg {
+    &.modal-dialog {
+      width: 100%;
+      height: 100%;
+      padding: 0;
+      margin: 0;
+    }
+    .modal-content {
+      min-height: 100%;
+      height: auto;
+    }
+  }
+
+  /* make the dropdown font-size bigger. */
+  .option-links {
+    .dropdown-menu {
+      font-size: 2em;
+    }
+  }
+}
+
+
+
+/* Back link that appears in the Nitro Mobile app for pages
+** that would normally open up in a new window. */
+.popup-back-link {
+  opacity: .8;
+  position: absolute;
+  right: -5px;
+  top: -3px;
+  z-index: 100;
+}
+
+
+/* for emphasis for project tabs */
+.navbar-default.project-tab-block {
+  @include box-shadow(2px, 2px, 5px, rgba(0, 0, 0, 0.2));
+  border: solid 1px $medium-grey;
+}

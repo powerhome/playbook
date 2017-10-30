@@ -1,0 +1,29 @@
+// select image settings
+@mixin select-arrow-image-settings {
+  background-position: 98% 50%, 0 0;
+  background-repeat: no-repeat, repeat;
+  background-size: 20px, auto;
+}
+
+// Custom Select
+@mixin select($select-color: (linear-gradient(to bottom, $white 10%, $gray-1 100%)), $arrow-color: $gray-5) {
+	background: $select-color;
+  background-image: image-url('nitro_theme/caret.svg'); /* fallback */
+  background-image: image-url('nitro_theme/caret.svg'), $select-color; /* W3C */
+  @include select-arrow-image-settings;
+	padding-right: 3em;
+}
+
+
+select.form-control {
+	@include select;
+  &:focus {
+    outline: 0;
+    border-color: $ink-lightest;
+    box-shadow: 0 2px 9px $p-navy-opacity-3;
+  }
+  &[multiple] {
+  	background: linear-gradient(to bottom, $white 10%, $gray-1 100%);
+    height: auto;
+  }
+}
