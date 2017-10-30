@@ -5,5 +5,5 @@ class Page < ApplicationRecord
   belongs_to :type
   belongs_to :category
 
-  has_one :page_tag, :dependent => :destroy
+  has_many :page_tag, :dependent => :destroy
 end
