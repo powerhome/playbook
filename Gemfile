@@ -29,7 +29,7 @@ gem 'redcarpet'
 gem 'simple_form_markdown_editor'
 
 group :development, :test do
-  gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  gem 'byebug'
   gem 'capybara', '~> 2.13'
   gem 'selenium-webdriver'
 end
