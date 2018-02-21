@@ -8,12 +8,14 @@
 /.bundle
 
 # Ignore all logfiles and tempfiles.
-/log/*
-/tmp/*
-!/log/.keep
-!/tmp/.keep
+/log/
+*.log
+/tmp/
 
 /node_modules
 /yarn-error.log
+
+/vendor/ruby
+/vendor/bundle
 
 .byebug_history
