@@ -1,0 +1,33 @@
+replicaCount: 2
+image:
+  repository: docker-registry.powerhrg.com/tools/playbook
+  tag: latest
+  pullPolicy: IfNotPresent
+  pullSecret: registry-user
+service:
+  name: playbook
+  type: ClusterIP
+  externalPort: 80
+  internalPort: 3000
+ingress:
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/whitelist-source-range: ""
+resources:
+  limits:
+    cpu: 100m
+    memory: 256Mi
+  requests:
+    cpu: 100m
+    memory: 256Mi
+appConfig:
+  rackEnv: "production"
+  railsEnv: "production"
+postgresql:
+  resources:
+    requests:
+      memory: 256Mi
+      cpu: 100m
+    limits:
+      memory: 256Mi
+      cpu: 100m

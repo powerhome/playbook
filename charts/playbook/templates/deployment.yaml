@@ -1,0 +1,66 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: {{ template "fullname" . }}
+  labels:
+    app: {{ template "name" . }}
+    chart: {{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  template:
+    metadata:
+      labels:
+        app: {{ template "name" . }}
+        release: {{ .Release.Name }}
+    spec:
+      imagePullSecrets:
+        - name: {{ .Values.image.pullSecret }}
+      containers:
+        - name: {{ .Chart.Name }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - containerPort: {{ .Values.service.internalPort }}
+          env:
+            - name: PORT
+              value: {{ .Values.service.internalPort | quote }}
+            - name: SECRET_KEY_BASE
+              valueFrom:
+                secretKeyRef:
+                  name: {{ template "fullname" . }}
+                  key: secret-key-base
+            - name: FORCE_SSL
+              value: "0"
+            - name: RACK_ENV
+              value: {{ .Values.appConfig.rackEnv | quote }}
+            - name: RAILS_ENV
+              value: {{ .Values.appConfig.railsEnv | quote }}
+            - name: APP_DATABASE_HOST
+              value: {{ .Release.Name }}-postgresql
+            - name: APP_DATABASE_USERNAME
+              value: {{ default "postgres" .Values.postgresql.postgresUser | quote }}
+            - name: APP_DATABASE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Release.Name }}-postgresql
+                  key: postgres-password
+          livenessProbe:
+            httpGet:
+              path: /health_check/site
+              port: {{ .Values.service.internalPort }}
+            initialDelaySeconds: 60
+            timeoutSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /health_check/site
+              port: {{ .Values.service.internalPort }}
+            initialDelaySeconds: 30
+            timeoutSeconds: 10
+          resources:
+{{ toYaml .Values.resources | indent 12 }}
+    {{- if .Values.nodeSelector }}
+      nodeSelector:
+{{ toYaml .Values.nodeSelector | indent 8 }}
+    {{- end }}

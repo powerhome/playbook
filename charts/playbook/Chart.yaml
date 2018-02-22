@@ -1,0 +1,7 @@
+apiVersion: v1
+name: playbook
+description: UIX Styleguide & Documentation
+version: 0.1.0
+home: http://playbook.powerhrg.com
+sources:
+  - https://github.com/powerhome/playbook

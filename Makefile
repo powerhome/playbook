@@ -30,3 +30,16 @@ stop:
 
 clean:
 	docker-compose down --rmi all --volumes
+
+deploy:
+	${RUN_DEPLOYER} --entrypoint /bin/gpg-agent-background ${DEPLOYER_IMAGE} helm-wrapper upgrade --install --wait playbook-$(environment) /app/charts/playbook --namespace playbook-$(environment) -f /app/config/deploy/$(environment)/secrets.yaml -f /app/config/deploy/$(environment)/values.yaml --set image.tag=$(tag)
+
+secrets:
+	${RUN_DEPLOYER} --entrypoint /bin/gpg-agent-background ${DEPLOYER_IMAGE} bash --login
+
+addKeyToRing:
+	gpg --export $(fingerprint) | gpg --no-default-keyring --keyring=config/secrets.keys --import
+
+grantSecretAccess:
+	gpg --import config/secrets.keys
+	$(foreach file,$(wildcard config/deploy/*/secrets.yaml),[[ $(file) == *"production"* ]] || ${RUN_DEPLOYER} --entrypoint /bin/gpg-agent-background ${DEPLOYER_IMAGE} sops --rotate --in-place --add-pgp $(fingerprint) /app/$(file) ;)
