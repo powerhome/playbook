@@ -13,7 +13,7 @@ gem 'puma', '~> 3.7'
 gem 'health_check'
 
 # AUTHENTICATION & ROLES
-gem 'devise'
+gem 'devise', '~> 4.4.0'
 
 # JAVASCRIPT & JSON
 gem 'sass-rails', '~> 5.0'
