@@ -11,7 +11,7 @@ node('docker') {
   }
 
   stage('Test') {
-    sh "docker run --tty --rm --env-file .env ${appImage.id} bin/rake"
+    sh "docker run --tty --rm ${appImage.id} bin/rake"
   }
 
   stage('Deploy') {
