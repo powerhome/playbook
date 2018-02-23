@@ -1,0 +1,8 @@
+appConfig:
+  phrgEnv: "production"
+ingress:
+  hosts:
+    - playbook.powerhrg.com
+  tls:
+    hosts:
+      playbook.powerhrg.com: route53-powerhrg-com

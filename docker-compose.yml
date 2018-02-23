@@ -1,0 +1,18 @@
+version: '3'
+volumes:
+  bundle:
+  database:
+services:
+  db:
+    image: postgres
+    volumes:
+      - database:/var/lib/postgresql/data
+  web:
+    build: .
+    volumes:
+      - .:/home/app
+      - bundle:/usr/local/bundle
+    ports:
+      - "8080:3000"
+    depends_on:
+      - db
