@@ -11,6 +11,9 @@ node('docker') {
   }
 
   stage('Test') {
+    echo "appImageId = ${appImage.id}"
+    echo "tag = ${tag}"
+    echo "Output for groovy string interpolation of appImage itself = ${appImage}"
     // sh "docker run --tty --rm ${appImage.id} bin/rake"
   }
 
