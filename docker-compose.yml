@@ -7,6 +7,8 @@ services:
     image: postgres
     volumes:
       - database:/var/lib/postgresql/data
+    ports:
+      - "8081:5432"
   web:
     build: .
     volumes:

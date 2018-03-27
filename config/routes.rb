@@ -1,11 +1,13 @@
 Rails.application.routes.draw do
-  devise_for :users
+
   mount SimpleFormMarkdownEditor::Engine => "/"
 
-  resources :sections
-  resources :categories
-  resources :page_tags
-  resources :pages
+  # NEED TO REDO THIS
+
+  # resources :sections
+  # resources :categories
+  # resources :page_tags
+  # resources :pages
 
   resources :sections do
     resources :categories
@@ -22,5 +24,9 @@ Rails.application.routes.draw do
   resources :tags
   resources :types
 
-  root to: "sections#index"
+  devise_for :users, controllers: {
+    sessions: 'users/sessions'
+  }
+
+  root to: "home#index"
 end
