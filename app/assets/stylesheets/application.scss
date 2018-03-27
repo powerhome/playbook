@@ -1,33 +1,10 @@
-/*
-*= require simple_form_markdown_editor
-*/
-
-// Base Mixins
-@import "base-mixins/all";
-
-// Base Variables
-@import "base-variables/all";
-
-// Class Helpers
-@import "class-helpers/all";
-
-// UI Components
-@import "nitro-ui/all";
-@import "components";
-
-// Vendor Overrides
-@import "vendor/nitro-dropzone";
-@import "vendor/bootstrap-overrides";
-@import "vendor/selectize";
-@import "vendor/react-datetime";
-@import "vendor/react-select";
-@import "vendor/type-ahead";
-
-// Base Scaffolding
-@import "base-variables/fonts";
-@import "normalize";
-@import "print";
-@import "global";
+@import "nui";
+@import "lazy-load";
 
 // Views
 @import "views/views";
+
+.turbolinks-progress-bar {
+  height: 4px;
+  background-color: $power-green;
+}
