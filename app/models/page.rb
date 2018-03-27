@@ -6,4 +6,8 @@ class Page < ApplicationRecord
   belongs_to :category
 
   has_many :page_tag, :dependent => :destroy
+
+  extend FriendlyId
+  friendly_id :title, use: :slugged
+
 end

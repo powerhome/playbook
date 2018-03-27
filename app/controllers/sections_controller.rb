@@ -1,5 +1,6 @@
 class SectionsController < ApplicationController
   before_action :set_section, only: [:show, :edit, :update, :destroy]
+  skip_before_action :authenticate_user!, only: [:show, :index]
 
   # GET /sections
   # GET /sections.json
@@ -18,20 +19,11 @@ class SectionsController < ApplicationController
 
   # GET /sections/new
   def new
-    if user_signed_in?
-      @section = Section.new
-    else
-      redirect_to root_path
-    end
+    @section = Section.new
   end
 
   # GET /sections/1/edit
   def edit
-    if user_signed_in?
-
-    else
-      redirect_to root_path
-    end
   end
 
   # POST /sections
