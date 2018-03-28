@@ -7,6 +7,8 @@ class User < ApplicationRecord
 
    def self.sign_in_or_create_user(sign_in_params)
 
+     require 'net/http'
+
      uri = URI.parse("https://nitro.powerhrg.com/api/v1/users/login")
      request = Net::HTTP::Get.new(uri)
      request.basic_auth(sign_in_params[:email], sign_in_params[:password])
