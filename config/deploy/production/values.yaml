@@ -1,5 +1,3 @@
-appConfig:
-  phrgEnv: "production"
 ingress:
   hosts:
     - playbook.powerhrg.com
