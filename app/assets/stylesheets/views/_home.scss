@@ -1,7 +1,7 @@
 .document-page {
   .top {
     @include clearfix;
-    background: url(home-background.jpg);
+    background: url(image_path('home-background.jpg'));
     @include border-top-radius(4px);
     padding: $space-mega $space-jumbo $space-large $space-jumbo;
     h1 {
