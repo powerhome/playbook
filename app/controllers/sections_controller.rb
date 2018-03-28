@@ -11,10 +11,10 @@ class SectionsController < ApplicationController
   # GET /sections/1
   # GET /sections/1.json
   def show
-    @section_first_record = Category.where(section: params[:id]).first
-    if @section_first_record.present?
-      redirect_to section_category_path(@section, @section_first_record)
-    end
+    # @section_first_record = Category.where(section: params[:id]).first
+    # if @section_first_record.present?
+    #   redirect_to section_category_path(@section, @section_first_record)
+    # end
   end
 
   # GET /sections/new

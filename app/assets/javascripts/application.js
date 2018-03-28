@@ -10,12 +10,11 @@
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
 //
-//= require rails-ujs
-//= require turbolinks
-//= require_tree .
-//= require simple_form_markdown_editor
 //= require jquery
 //= require jquery_ujs
+//= require rails-ujs
+//= require turbolinks
+//= require simple_form_markdown_editor
 
 
 $( document ).ready(function() {

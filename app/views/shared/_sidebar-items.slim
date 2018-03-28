@@ -1,5 +1,5 @@
 li class=((@category.present? && @category[:id] == cat.id) || (@page.present? && @page[:category_id] == cat.id) ? "type-content active" : "type-content")
-  a href="#{section_category_path(cat.section_id, cat.id)}"
+  a href="#{first_category_page_path(cat)}"
     span.icon
       - if cat.pages.count <= 0
         i.fa.fa-pencil
@@ -37,15 +37,8 @@ li class=((@category.present? && @category[:id] == cat.id) || (@page.present? &&
                   a href="#"
                     span Related components
       - if user_signed_in?
-        div.new-page-link
-          a href="#{new_category_page_path(cat)}"
+        li.type-content
+          a.text-power-blue href="#{new_category_page_path(cat)}"
             span
-              i.add-icon.fa.fa-plus
-              i.item-icon.fa.fa-file-o
-
-- if user_signed_in?
-  div.new-category-link
-    a href="#{new_section_category_path(@current_section)}"
-      span
-        i.add-icon.fa.fa-plus
-        i.item-icon.fa.fa-folder-o
+              i.item-icon.fa.fa-2x.fa-files-o
+            span = " Add Page"

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180327195455) do
+ActiveRecord::Schema.define(version: 20180328145144) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,18 +22,6 @@ ActiveRecord::Schema.define(version: 20180327195455) do
     t.datetime "updated_at", null: false
     t.bigint "section_id"
     t.index ["section_id"], name: "index_categories_on_section_id"
-  end
-
-  create_table "friendly_id_slugs", force: :cascade do |t|
-    t.string "slug", null: false
-    t.integer "sluggable_id", null: false
-    t.string "sluggable_type", limit: 50
-    t.string "scope"
-    t.datetime "created_at"
-    t.index ["slug", "sluggable_type", "scope"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type_and_scope", unique: true
-    t.index ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type"
-    t.index ["sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_id"
-    t.index ["sluggable_type"], name: "index_friendly_id_slugs_on_sluggable_type"
   end
 
   create_table "page_tags", force: :cascade do |t|
@@ -53,10 +41,8 @@ ActiveRecord::Schema.define(version: 20180327195455) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "user_id"
-    t.bigint "type_id"
     t.bigint "category_id"
     t.index ["category_id"], name: "index_pages_on_category_id"
-    t.index ["type_id"], name: "index_pages_on_type_id"
     t.index ["user_id"], name: "index_pages_on_user_id"
   end
 
@@ -68,13 +54,6 @@ ActiveRecord::Schema.define(version: 20180327195455) do
 
   create_table "tags", force: :cascade do |t|
     t.string "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "types", force: :cascade do |t|
-    t.string "name"
-    t.text "body_markdown"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -110,6 +89,5 @@ ActiveRecord::Schema.define(version: 20180327195455) do
   add_foreign_key "page_tags", "pages"
   add_foreign_key "page_tags", "tags"
   add_foreign_key "pages", "categories"
-  add_foreign_key "pages", "types"
   add_foreign_key "pages", "users"
 end

@@ -4,7 +4,15 @@ $header-height: 60px;
   .navbar-brand {
     margin-top: 2px;
   }
+  li.on-hover {
+    display: none;
+  }
+  &:hover li.on-hover {
+    display: block;
+  }
+
 }
+
 
 .nitro-notify {
   top: 0;

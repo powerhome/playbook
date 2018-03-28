@@ -2,9 +2,14 @@ nav.nav.navbar.navbar-default.navbar-static-top.m-0.uix-header
   .navbar-brand.py-3.mr-5
     .logo = image_tag("app_logo.svg")
   ul.nav.navbar-nav
-    - @navigation.each do |nav_item|
-      li class=(@current_section.present? && @current_section.id == nav_item.id ? "active" : "")
-        a href="#{section_path(nav_item)}" = nav_item.name
+    - @navigation.each do |section|
+      li class=(@current_section.present? && @current_section.id == section.id ? "active" : "")
+        a href="#{first_section_category_page_path(section)}" = section.name
+    - if user_signed_in?
+      li.on-hover
+        a href="#{new_section_path}"
+          i class="fa fa-plus" aria-hidden="true"
+          = " New Section"
 
   ul.nav.navbar-nav.navbar-right
     - if user_signed_in?

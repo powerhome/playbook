@@ -12,21 +12,23 @@ class CategoriesController < ApplicationController
   # GET /categories/1
   # GET /categories/1.json
   def show
-    @match_record = Page.where("category_id = ? AND lower(title) = ?", params[:id], @category.name.downcase).first
-    @first_record = Page.where(category: params[:id]).first
-    @cat_page_count = Page.where(category: params[:id]).count
-
-    if @match_record.present?
-      redirect_to category_page_path(@category, @match_record)
-    elsif @first_record.present?
-      redirect_to category_page_path(@category, @first_record)
-    elsif @cat_page_count <= 0
-      redirect_to new_category_page_path(@category)
-    end
+    # No Longer Shown
+    # @match_record = Page.where("category_id = ? AND lower(title) = ?", params[:id], @category.name.downcase).first
+    # @first_record = Page.where(category: params[:id]).first
+    # @cat_page_count = Page.where(category: params[:id]).count
+    #
+    # if @match_record.present?
+    #   redirect_to category_page_path(@category, @match_record)
+    # elsif @first_record.present?
+    #   redirect_to category_page_path(@category, @first_record)
+    # elsif @cat_page_count <= 0
+    #   redirect_to new_category_page_path(@category)
+    # end
   end
 
   # GET /categories/new
   def new
+    # AUTHENTICATE A DIFFERENT WAY
     if user_signed_in?
       @category = Category.new
       @order_preset = nil
@@ -37,6 +39,7 @@ class CategoriesController < ApplicationController
 
   # GET /categories/1/edit
   def edit
+    # AUTHENTICATE A DIFFERENT WAY
     if user_signed_in?
       @order_preset = @category.order
     else
