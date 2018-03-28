@@ -1,15 +1,12 @@
 = form_for [@section, @category] do |f|
   - if @category.errors.any?
-    #error_explanation
-      h2 = "#{pluralize(@category.errors.count, "error")} prohibited this category from being saved:"
-      ul
-        - @category.errors.full_messages.each do |message|
-          li = message
+    .notify_container.content_visible.notify
+      = render :partial => "shared/notify", locals: { position: "top", style: "error", message: "#{@category.errors.full_messages.join(",")}", animation: "fadeInDown"}
 
-  .field
+  .form-group.label-inside
     = f.label :name
-    = f.text_field :name
+    = f.text_field(:name, class: 'form-control')
   .extra-fields
     = f.hidden_field :order, value: @order_preset
     = f.hidden_field :section_id, value: @section.id
-  .actions = f.submit
+  .actions = f.submit(class: "btn btn-power-blue")

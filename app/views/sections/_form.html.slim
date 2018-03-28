@@ -1,17 +1,9 @@
 = form_for @section do |f|
   - if @section.errors.any?
-    h5.text-power-red = "#{pluralize(@section.errors.count, "error")} prohibited this section from being saved:"
-    #error_explanation.alert.alert-danger
-      ul
-        - @section.errors.full_messages.each do |message|
-          li = message
-
-  / - flash.each do |name, msg|
-  /   .notify_container.content_visible.notify
-  /     - name = "success" if name == "notice"
-  /     = render :partial => "shared/notify", locals: { position: "top", style: "#{name}", message: "#{msg}", animation: "fadeInDown"}
+    .notify_container.content_visible.notify
+      = render :partial => "shared/notify", locals: { position: "top", style: "error", message: "#{@section.errors.full_messages.join(",")}", animation: "fadeInDown"}
 
   .form-group.label-inside
     = f.label :name
     = f.text_field(:name, class: 'form-control')
-  .actions = f.submit(class: "btn btn-primary")
+  .actions = f.submit(class: "btn btn-power-blue")

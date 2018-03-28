@@ -14,7 +14,7 @@ class Users::SessionsController < Devise::SessionsController
       sign_in(:user, user)
       redirect_to :root, flash: { success: "Welcome #{user.goes_by}" }
     else
-      redirect_to :back, flash: { error: user["error"] }
+      redirect_to new_user_session_path, flash: { error: user["error"] }
     end
 
   end
