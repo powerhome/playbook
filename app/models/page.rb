@@ -7,7 +7,4 @@ class Page < ApplicationRecord
 
   has_many :page_tag, :dependent => :destroy
 
-  extend FriendlyId
-  friendly_id :title, use: :slugged
-
 end

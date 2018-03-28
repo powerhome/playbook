@@ -11,11 +11,11 @@ html
     = javascript_include_tag "https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
     = csrf_meta_tags
-  body.sidebar-layout.no-scroll
+  body class="#{controller_name} #{action_name}"
     - flash.each do |name, msg|
       .notify_container.content_visible.notify
-      - name = "success" if name == "notice"
-      = render :partial => "shared/notify", locals: { position: "top", style: "#{name}", message: "#{msg}", animation: "fadeInDown"}
+        - name = "success" if name == "notice"
+        = render :partial => "shared/notify", locals: { position: "top", style: "#{name}", message: "#{msg}", animation: "fadeInDown"}
 
     = render :partial => "shared/navigation"
     = yield

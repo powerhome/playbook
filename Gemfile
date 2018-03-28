@@ -13,7 +13,6 @@ gem 'puma', '~> 3.7'
 gem 'health_check'
 gem "paranoia", "~> 2.2"
 gem 'rails_admin', '~> 1.3'
-gem 'friendly_id', '~> 5.1.0'
 
 # AUTHENTICATION & ROLES
 gem 'devise', '~> 4.4.0'

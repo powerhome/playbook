@@ -16,3 +16,15 @@
 //= require simple_form_markdown_editor
 //= require jquery
 //= require jquery_ujs
+
+
+$( document ).ready(function() {
+  $(".notify .nitro-notify").hide();
+	$(".notify .nitro-notify").fadeIn("slow",function(){
+    setTimeout(function(){
+      $(".notify .nitro-notify").fadeOut("slow", function() {
+        $(this).parent().remove();
+      });
+    }, 4000);
+	});
+});

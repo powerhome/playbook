@@ -3,8 +3,5 @@ class Category < ApplicationRecord
 
   belongs_to :section
   has_many :pages
-
-  extend FriendlyId
-  friendly_id :name, use: :slugged
   
 end

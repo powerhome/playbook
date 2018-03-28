@@ -5,3 +5,14 @@ $header-height: 60px;
     margin-top: 2px;
   }
 }
+
+.nitro-notify {
+  top: 0;
+  z-index: 1001;
+  opacity: 0.9;
+  padding: $space-largest;
+  height: auto;
+  font-weight: $bold;
+  letter-spacing: $lspace-loose;
+  font-size: $font-large;
+}

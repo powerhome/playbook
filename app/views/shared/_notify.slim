@@ -4,9 +4,8 @@
 - style = 'success' if style == "notice"
 - style = 'error' if style == "alert"
 
-.nitro-notify class=".nitro-notify-#{style}"
+.nitro-notify class="nitro-notify-#{style}"
   .msg
     = message
-  a.notify_close href="javascript:;"
-    span x
-        
+  / a.notify_close href="javascript:;"
+  /   span.fa.fa-times
