@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   mount SimpleFormMarkdownEditor::Engine => "/"
 
   # NEED TO REDO THIS
