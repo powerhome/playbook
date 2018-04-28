@@ -5,7 +5,7 @@ ifdef TTY
 endif
 
 RUN_DEPLOYER = docker run --tty ${INTERACTIVE} --rm --volume ~/.kube:/root/.kube --volume ~/.gnupg/secring.gpg:/root/.gnupg/secring.gpg --volume ~/.gnupg/pubring.gpg:/root/.gnupg/pubring.gpg --volume ~/.gnupg/private-keys-v1.d:/root/.gnupg/private-keys-v1.d --volume $(shell pwd):/app --env BUILD_DEPS_AND_PACKAGE=false
-DEPLOYER_IMAGE = docker-registry.powerhrg.com/platform/deployer:master-66f6c3d820d7b95ad123c55a15f371f2688a03ae-25
+DEPLOYER_IMAGE = docker-registry.powerhrg.com/platform/deployer:master-44a3637009207ba2a319a6284b3c20f8c2d62f60-77
 
 start:
 	docker-compose up --build
