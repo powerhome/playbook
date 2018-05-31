@@ -1,0 +1,17 @@
+- @formSnippet = snippet || @subpage
+
+= form_for [@page.category, @formSnippet] do |f|
+  - if @formSnippet.errors.any?
+    .notify_container.content_visible.notify
+      = render :partial => "shared/notify", locals: { position: "top", style: "error", message: "#{@formSnippet.errors.full_messages.join(",")}", animation: "fadeInDown"}
+
+  .form-group
+    = f.text_field :title, :placeholder => 'Snippet Title', :class => 'form-control'
+  .form-group
+    = f.text_area :body_markdown, as: :markdown_editor, :placeholder => 'Type snippet html here...', :class => 'form-control', :rows => 8
+  .extra-fields
+    = f.hidden_field :body_html, value: nil
+    = f.hidden_field :category_id, value: @page.category_id
+    = f.hidden_field :user_id, value: current_user.id
+    = f.hidden_field :page_id, value: @page.id
+  .actions.document-actions = f.submit 'Save', :class => 'btn btn-sm btn-primary'

@@ -1,9 +1,9 @@
 GIT
   remote: https://github.com/powerhome/nitro-storybook.git
-  revision: 9ff3b261e3ca4cecfc197bdd09154ff23ebf80a9
-  tag: v1.6.1
+  revision: f2329b4739f1c9769dd055a82b2ceee26dbb14a2
+  tag: v1.9.6
   specs:
-    nitro_sg (1.6.1)
+    nitro_sg (1.9.2)
       rails (>= 4.2.9, < 6.0)
       sassc-rails (= 1.3.0)
       sprockets-rails (= 2.3.3)
@@ -153,6 +153,8 @@ GEM
     paranoia (2.4.0)
       activerecord (>= 4.0, < 5.2)
     pg (0.21.0)
+    prism-rails (1.6.0.3)
+      railties (>= 4.2, < 6)
     public_suffix (3.0.2)
     puma (3.11.3)
     rack (2.0.4)
@@ -308,6 +310,7 @@ DEPENDENCIES
   nitro_sg!
   paranoia (~> 2.2)
   pg (~> 0.18)
+  prism-rails
   puma (~> 3.7)
   rails (~> 5.1.4)
   rails-assets-lazysizes!

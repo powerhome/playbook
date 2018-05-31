@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180328145144) do
+ActiveRecord::Schema.define(version: 20180518133907) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -42,7 +42,9 @@ ActiveRecord::Schema.define(version: 20180328145144) do
     t.datetime "updated_at", null: false
     t.bigint "user_id"
     t.bigint "category_id"
+    t.bigint "page_id"
     t.index ["category_id"], name: "index_pages_on_category_id"
+    t.index ["page_id"], name: "index_pages_on_page_id"
     t.index ["user_id"], name: "index_pages_on_user_id"
   end
 
@@ -89,5 +91,6 @@ ActiveRecord::Schema.define(version: 20180328145144) do
   add_foreign_key "page_tags", "pages"
   add_foreign_key "page_tags", "tags"
   add_foreign_key "pages", "categories"
+  add_foreign_key "pages", "pages"
   add_foreign_key "pages", "users"
 end

@@ -29,5 +29,8 @@ Rails.application.routes.draw do
     sessions: 'users/sessions'
   }
 
+
+  get '/snippet/:page_id', to: 'snippets#show', as: 'snippet'
+
   root to: "home#index"
 end

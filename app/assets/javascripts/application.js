@@ -11,10 +11,70 @@
 // about supported directives.
 //
 //= require jquery
-//= require jquery_ujs
 //= require rails-ujs
 //= require turbolinks
 //= require simple_form_markdown_editor
+//= require prism
+
+
+var copySnippet = function(event, iframe_id) {
+  var copyText = window.frames[iframe_id].contentDocument.getElementById('snippet-container').innerHTML;
+  var dummy = document.createElement("textarea");
+
+  document.body.appendChild(dummy);
+  dummy.setAttribute("id", "dummy_id");
+  document.getElementById("dummy_id").value=copyText;
+  dummy.select();
+  document.execCommand("copy");
+  document.body.removeChild(dummy);
+
+  $(event.target).addClass('copied').text('Copied!');
+  setTimeout(function(){
+    $(event.target).removeClass('copied').text('Copy snippet');
+  }, 1000);
+
+  // alert('Snippet Copied');
+}
+
+var toggleSnippet = function(event, iframe_id) {
+  var previewEl = $('#'+iframe_id).parent().find('.toggle-snippet-preview');
+  if(previewEl.hasClass('shown')) {
+    previewEl.removeClass('shown').hide();
+    toggleLink.text('View Snippet');
+  } else {
+    previewEl.addClass('shown').show();
+    toggleLink.text('Hide Snippet');
+  }
+  // var matchingFrame = window.frames[iframe_id];
+  // var matchingFrameContent = matchingFrame.contentDocument;
+  //
+  // if(matchingFrameContent == undefined){
+  //   matchingFrameContent = matchingFrame[0].contentDocument;
+  // }
+  // var snippetContent = matchingFrameContent.getElementById('snippet-container').innerHTML;
+  // snippetContent = encodeHtml(snippetContent);
+  // var previewEl = $('#'+iframe_id).parent().find('.toggle-snippet-preview');
+  // var toggleLink = $('#'+iframe_id).parent().find('.uix-component-link.toggle');
+  //
+  // previewEl = previewEl.find('code').text(snippetContent);
+  //
+  // $('.toggle-snippet-preview').not(previewEl).removeClass('shown').hide();
+  //
+  // if(previewEl.hasClass('shown')) {
+  //   previewEl.removeClass('shown').hide();
+  //   toggleLink.text('View Snippet');
+  // } else {
+  //   previewEl.addClass('shown').show();
+  //   toggleLink.text('Hide Snippet');
+  // }
+}
+
+var encodeHtml = function(input) {
+    input = input.replace(/&/g, '&amp;');
+    input = input.replace(/</g, '&lt;');
+    input = input.replace(/>/g, '&gt;');
+    return input;
+}
 
 
 $( document ).ready(function() {

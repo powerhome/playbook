@@ -1,0 +1,48 @@
+- page_snippets = page_snippets || @page_snippets
+
+- if user_signed_in?
+  h6.mt-5.pt-4.text-uppercase.text-ink-lightest.text-center
+    i.fa.fa-cog.mr-2.text-sky-dark
+    span Manage Snippets
+
+
+  ul.list-group.mt-3.mb-5.pb-5
+    - if page_snippets.present?
+      - page_snippets.each do |snippet|
+        li.list-group-item.py-3.d-block
+          a.d-block type="button" data-target="#snippetEditModal#{snippet.id}" data-toggle="modal"
+            h6.m-0.text-ink-lightest.text-small.pull-left.mt-2
+              span.badge.badge-sm.badge-info.bg-power-blue ##{snippet.id}
+            h5.font-weight-bold.my-0.ml-4.pull-left.mt-1 = snippet.title
+
+          .modal id="snippetEditModal#{snippet.id}" aria-labelledby="snippetEditModal#{snippet.id}Label" role="dialog" tabindex="-1"
+            .modal-dialog.modal-lg role="document"
+              .modal-content
+                .modal-header
+                  button.close aria-label="Close" data-dismiss="modal" type="button"
+                    span aria-hidden="true"  &times;
+                  h4#myModalLabel.modal-title = snippet.title
+                .modal-body
+                  .bg-white
+                    .snippet-preview-frame.px-5.pb-4.pt-3
+                      .markdown-container = markdown("[snippet snippet_id=\"#{snippet.id}\" height=\"200\"]")
+                  .bg-sky-lighter
+                    .snippet-edit-form.mt-0.px-5.py-4.mb-4
+                      = render :partial => "snippets/snippet-form", :locals => {:snippet => snippet}
+
+                    .text-danger.pb-4.text-center
+                      = link_to 'Permanently Delete', category_page_path(snippet.category, snippet), data: { confirm: "Are you sure you want to delete #{snippet.title}?" }, method: :delete, class: 'btn btn-sm text-power-red'
+
+
+    li.list-group-item.py-0.text-center
+      a.btn.btn-light.mx-auto type="button" data-target="#snippetAddModal" data-toggle="modal" New Snippet
+
+      .modal id="snippetAddModal" aria-labelledby="snippetAddModalLabel" role="dialog" tabindex="-1"
+        .modal-dialog.modal-lg role="document"
+          .modal-content
+            .modal-header
+              button.close aria-label="Close" data-dismiss="modal" type="button"
+                span aria-hidden="true"  &times;
+              h4#myModalLabel.modal-title New Snippet
+            .modal-body
+              = render :partial => "snippets/snippet-form", :locals => {:snippet => @page_snippet}

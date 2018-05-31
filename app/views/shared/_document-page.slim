@@ -20,4 +20,6 @@
             span = page_tag.tag.name
     div.document-page-body
       h1.font-weight-bold = @page.title
-      div.markdown-container = markdown(@page.body_markdown)
+      .markdown-container = markdown(@page.body_markdown)
+
+  = render :partial => "snippets/snippet-list", :locals => {:page_snippets => @page_snippets}
