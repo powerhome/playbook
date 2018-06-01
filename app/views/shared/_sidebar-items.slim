@@ -15,7 +15,7 @@ li class=((@category.present? && @category[:id] == cat.id) || (@page.present? &&
   - if (@category.present? && @category[:id] == cat.id) || (@page.present? && @page[:category_id] == cat.id)
     ul.sub-page-nav
       - cat.pages.each do |page|
-        - if page.title.downcase != cat.name.downcase
+        - if (page.title.downcase != cat.name.downcase) && page.page_id.nil?
           li class=(@page.present? && @page[:id] == page.id ? "type-content active" : "type-content")
             a href="#{category_page_path(page.category_id, page.id)}"
               span = page.title

@@ -26,6 +26,7 @@ gem 'jbuilder', '~> 2.5'
 gem 'uglifier', '>= 1.3.0'
 gem 'rails-assets-simplemde', source: 'https://rails-assets.org'
 gem 'rails-assets-lazysizes', source: 'https://rails-assets.org'
+gem 'prism-rails'
 
 # MARKUP
 gem 'slim-rails'
@@ -36,7 +37,7 @@ gem 'redcarpet'
 gem 'simple_form_markdown_editor'
 
 # STYLES
-gem "nitro_sg", github: "powerhome/nitro-storybook", tag: "v1.6.1"
+gem "nitro_sg", github: "powerhome/nitro-storybook", tag: "v2.0.3"
 gem 'sass-rails', '~> 5.0'
 
 group :development, :test do

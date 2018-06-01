@@ -6,19 +6,23 @@ class PagesController < ApplicationController
   # GET /pages
   # GET /pages.json
   def index
-    @pages = Page.where(category: params[:category_id])
+    @pages = Page.where(category: params[:category_id], page_id: nil)
   end
 
   # GET /pages/1
   # GET /pages/1.json
   def show
     @page_tags = PageTag.joins(:page).where(:page_tags => { :page_id => @page.id })
+    @page_snippets = Page.where(page_id: @page.id)
+    @page_snippet = Page.new
   end
 
   # GET /pages/new
   def new
     if user_signed_in?
       @page = Page.new
+      @page_snippet = Page.new
+
       @order_preset = nil
       @category = Category.find(params[:category_id])
       @page_tags = PageTag.joins(:page).where(:page_tags => { :page_id => @page.id })
@@ -34,6 +38,8 @@ class PagesController < ApplicationController
       @category = Category.find(params[:category_id])
       @section = Section.where(:id => Category.find(params[:category_id]).section_id).first
       @page_tags = PageTag.joins(:page).where(:page_tags => { :page_id => @page.id })
+      @page_snippets = Page.where(page_id: @page.id)
+      @page_snippet = Page.new
     else
       redirect_to root_path
     end
@@ -46,7 +52,13 @@ class PagesController < ApplicationController
 
     respond_to do |format|
       if @page.save
-        format.html { redirect_to category_page_path(@page.category_id, @page.id), notice: 'Page was successfully created.' }
+        format.html {
+          if @page.page_id.nil?
+            redirect_to category_page_path(@page.category_id, @page.id), notice: 'Page was successfully created.'
+          else
+            redirect_to category_page_path(@page.category_id, @page.page_id), notice: 'Snippet was successfully created.'
+          end
+        }
         format.json { render :show, status: :created, location: @page }
       else
         format.html { render :new }
@@ -60,7 +72,13 @@ class PagesController < ApplicationController
   def update
     respond_to do |format|
       if @page.update(page_params)
-        format.html { redirect_to category_page_path(@page.category_id, @page.id), notice: 'Page was successfully updated.' }
+        format.html {
+          if @page.page_id.nil?
+            redirect_to category_page_path(@page.category_id, @page.id), notice: 'Page was successfully updated.'
+          else
+            redirect_to category_page_path(@page.category_id, @page.page_id), notice: 'Snippet was successfully updated.'
+          end
+        }
         format.json { render :show, status: :ok, location: @page }
       else
         format.html { render :edit }
@@ -76,7 +94,13 @@ class PagesController < ApplicationController
     @beforesection = Section.find(@beforecategory.section_id)
     @page.destroy
     respond_to do |format|
-      format.html { redirect_to section_category_path(@beforesection.id, @beforecategory.id), notice: 'Page was successfully destroyed.' }
+      format.html {
+        if @page.page_id.nil?
+          redirect_to section_category_path(@beforesection.id, @beforecategory.id), notice: 'Page was successfully destroyed.'
+        else
+          redirect_to category_page_path(@page.category_id, @page.page_id), notice: 'Snippet was successfully deleted.'
+        end
+      }
       format.json { head :no_content }
     end
   end
@@ -94,6 +118,6 @@ class PagesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def page_params
-      params.require(:page).permit(:title, :body_markdown, :body_html, :order, :user_id, :category_id)
+      params.require(:page).permit(:title, :body_markdown, :body_html, :order, :user_id, :category_id, :page_id)
     end
 end

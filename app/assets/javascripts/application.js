@@ -11,11 +11,41 @@
 // about supported directives.
 //
 //= require jquery
-//= require jquery_ujs
 //= require rails-ujs
 //= require turbolinks
 //= require simple_form_markdown_editor
+//= require prism
 
+
+var copySnippet = function(event, iframe_id) {
+  var copyText = window.frames[iframe_id].contentDocument.getElementById('snippet-container').innerHTML;
+  var dummy = document.createElement("textarea");
+
+  document.body.appendChild(dummy);
+  dummy.setAttribute("id", "dummy_id");
+  document.getElementById("dummy_id").value=copyText;
+  dummy.select();
+  document.execCommand("copy");
+  document.body.removeChild(dummy);
+
+  $(event.target).addClass('copied').text('Copied!');
+  setTimeout(function(){
+    $(event.target).removeClass('copied').text('Copy snippet');
+  }, 1000);
+}
+
+var toggleSnippet = function(event, iframe_id) {
+  var previewEl = $('#'+iframe_id).parent().find('.toggle-snippet-preview');
+  var toggleLink = $('#'+iframe_id).parent().find('.uix-component-link.toggle');
+
+  if(previewEl.hasClass('shown')) {
+    previewEl.removeClass('shown').hide();
+    toggleLink.text('View Snippet');
+  } else {
+    previewEl.addClass('shown').show();
+    toggleLink.text('Hide Snippet');
+  }
+}
 
 $( document ).ready(function() {
   $(".notify .nitro-notify").hide();

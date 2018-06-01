@@ -20,3 +20,5 @@
             span = page_tag.tag.name
     div.document-page-body
       == render 'form'
+      
+  = render :partial => "snippets/snippet-list", :locals => {:page_snippets => @page_snippets}

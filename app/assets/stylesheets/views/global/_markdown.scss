@@ -323,6 +323,7 @@
   }
   h2 {
     line-height: 1.2;
+    position: relative;
   }
   h3 {
     font-size: 22px;
@@ -359,7 +360,11 @@
 
   // Extensions
   .markdown-header-anchor {
-    position:relative;
+    position: absolute;
+    left: 0px;
+    top: -8px;
+    padding: 0;
+    font-size: $font-large;
 
     span {
       position: absolute;
@@ -454,18 +459,20 @@
   .uix-component-frame {
     position: relative;
     box-sizing: border-box;
-    overflow: hidden;
+    // overflow: hidden;
+    margin: $space-large 0;
 
     iframe {
       border: 0;
-      border-bottom: 1px solid $sky;
+      padding: $space-large;
+      border: 1px solid $sky;
       width: 100%;
       overflow: hidden;
     }
 
     .uix-component-link {
       float: right;
-      margin-top: -6px;
+      margin-top: -8px;
       padding: $space-smallest $space-large;
       border: 1px solid $sky;
       border-top: 0;
@@ -474,6 +481,9 @@
       text-transform: uppercase;
       font-size: $font-smallest;
       vertical-align: middle;
+      width: 130px;
+      text-align: center;
+      transition: all 0.3s ease;
 
       &::before {
         content: "\f0c1";
@@ -483,6 +493,21 @@
         text-decoration: inherit;
         margin-right: $space-smaller;
         color: $sky-dark;
+        transition: all 0.3s ease;
+      }
+
+      &.copy {
+        &::before {
+          content: "\f0c5"
+        }
+      }
+
+      &.copied {
+        color: $power-green;
+
+        &::before {
+          color: $power-green;
+        }
       }
     }
 
@@ -492,6 +517,38 @@
       float: none;
       display: block;
       width: 100%;
+    }
+
+    &.uix-snippet-frame {
+      border-left: 3px solid $sky-light;
+      padding-left: $space-base;
+
+      .toggle-snippet-preview {
+        display: block;
+        float: none;
+        clear: both;
+        width: 100%;
+        white-space: pre-wrap;
+        background: $sky-lighter;
+        font-size: $font-small;
+        padding: $space-large;
+        display: none;
+      }
+
+      iframe {
+        border: 0;
+      }
+
+      .uix-component-link {
+        float: left;
+        border: 0;
+
+        &.toggle {
+          &::before {
+            content: "\f06e"
+          }
+        }
+      }
     }
   }
 }
