@@ -9,11 +9,11 @@
   ul.list-group.mt-3.mb-5.pb-5
     - if page_snippets.present?
       - page_snippets.each do |snippet|
-        li.list-group-item.py-3.d-block
-          a.d-block type="button" data-target="#snippetEditModal#{snippet.id}" data-toggle="modal"
-            h6.m-0.text-ink-lightest.text-small.pull-left.mt-2
+        li.list-group-item.p-0.d-block
+          a.d-block.clearfix.p-3 type="button" data-target="#snippetEditModal#{snippet.id}" data-toggle="modal"
+            h6.m-0.text-ink-lightest.text-small.pull-left
               span.badge.badge-sm.badge-info.bg-power-blue ##{snippet.id}
-            h5.font-weight-bold.my-0.ml-4.pull-left.mt-1 = snippet.title
+            h5.font-weight-bold.my-0.ml-4.pull-left = snippet.title
 
           .modal id="snippetEditModal#{snippet.id}" aria-labelledby="snippetEditModal#{snippet.id}Label" role="dialog" tabindex="-1"
             .modal-dialog.modal-lg role="document"
