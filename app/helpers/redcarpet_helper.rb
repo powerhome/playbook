@@ -82,13 +82,16 @@ class HTMLBlockCode < Redcarpet::Render::HTML
         end
       end
 
-      @snippet_content = Page.find(@attr[0])
-      @snippet_encoded = (CGI.escapeHTML @snippet_content.body_markdown).html_safe
+      @snippet_content = Page.where(id: @attr[0]).first
 
-      if @attr[2] == true
-        %(\n<div class="uix-component-frame uix-snippet-frame"><iframe id="snippet#{@random_id}" scrolling="no" src="/snippet/#{@attr[0]}" width="100%" height="#{@attr[1]}"></iframe><a onclick="toggleSnippet(event, 'snippet#{@random_id}')" class="uix-component-link toggle">View snippet</a><a onclick="copySnippet(event, 'snippet#{@random_id}')" class="uix-component-link copy">Copy snippet</a><pre class="toggle-snippet-preview line-numbers language-markup"><code>#{@snippet_encoded}</code></pre></div>\n)
-      else
-        %(\n<div class="uix-component-frame uix-snippet-frame"><a onclick="toggleSnippet(event, 'snippet#{@random_id}')" class="uix-component-link toggle">View snippet</a><a onclick="copySnippet(event, 'snippet#{@random_id}')" class="uix-component-link copy">Copy snippet</a><pre class="toggle-snippet-preview line-numbers language-markup"><code>#{@snippet_encoded}</code></pre></div>\n)
+      if @snippet_content.present?
+        @snippet_encoded = (CGI.escapeHTML @snippet_content.body_markdown).html_safe
+
+        if @attr[2] == true
+          %(\n<div class="uix-component-frame uix-snippet-frame"><iframe id="snippet#{@random_id}" scrolling="no" src="/snippet/#{@attr[0]}" width="100%" height="#{@attr[1]}"></iframe><a onclick="toggleSnippet(event, 'snippet#{@random_id}')" class="uix-component-link toggle">View snippet</a><a onclick="copySnippet(event, 'snippet#{@random_id}')" class="uix-component-link copy">Copy snippet</a><pre class="toggle-snippet-preview line-numbers language-markup"><code>#{@snippet_encoded}</code></pre></div>\n)
+        else
+          %(\n<div class="uix-component-frame uix-snippet-frame"><a onclick="toggleSnippet(event, 'snippet#{@random_id}')" class="uix-component-link toggle">View snippet</a><a onclick="copySnippet(event, 'snippet#{@random_id}')" class="uix-component-link copy">Copy snippet</a><pre class="toggle-snippet-preview line-numbers language-markup"><code>#{@snippet_encoded}</code></pre></div>\n)
+        end
       end
 
     end
