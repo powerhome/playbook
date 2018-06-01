@@ -32,12 +32,12 @@ var copySnippet = function(event, iframe_id) {
   setTimeout(function(){
     $(event.target).removeClass('copied').text('Copy snippet');
   }, 1000);
-
-  // alert('Snippet Copied');
 }
 
 var toggleSnippet = function(event, iframe_id) {
   var previewEl = $('#'+iframe_id).parent().find('.toggle-snippet-preview');
+  var toggleLink = $('#'+iframe_id).parent().find('.uix-component-link.toggle');
+
   if(previewEl.hasClass('shown')) {
     previewEl.removeClass('shown').hide();
     toggleLink.text('View Snippet');
@@ -45,37 +45,7 @@ var toggleSnippet = function(event, iframe_id) {
     previewEl.addClass('shown').show();
     toggleLink.text('Hide Snippet');
   }
-  // var matchingFrame = window.frames[iframe_id];
-  // var matchingFrameContent = matchingFrame.contentDocument;
-  //
-  // if(matchingFrameContent == undefined){
-  //   matchingFrameContent = matchingFrame[0].contentDocument;
-  // }
-  // var snippetContent = matchingFrameContent.getElementById('snippet-container').innerHTML;
-  // snippetContent = encodeHtml(snippetContent);
-  // var previewEl = $('#'+iframe_id).parent().find('.toggle-snippet-preview');
-  // var toggleLink = $('#'+iframe_id).parent().find('.uix-component-link.toggle');
-  //
-  // previewEl = previewEl.find('code').text(snippetContent);
-  //
-  // $('.toggle-snippet-preview').not(previewEl).removeClass('shown').hide();
-  //
-  // if(previewEl.hasClass('shown')) {
-  //   previewEl.removeClass('shown').hide();
-  //   toggleLink.text('View Snippet');
-  // } else {
-  //   previewEl.addClass('shown').show();
-  //   toggleLink.text('Hide Snippet');
-  // }
 }
-
-var encodeHtml = function(input) {
-    input = input.replace(/&/g, '&amp;');
-    input = input.replace(/</g, '&lt;');
-    input = input.replace(/>/g, '&gt;');
-    return input;
-}
-
 
 $( document ).ready(function() {
   $(".notify .nitro-notify").hide();

@@ -56,9 +56,10 @@ class HTMLBlockCode < Redcarpet::Render::HTML
       @random_id = Random.rand(40)
       @string = $1
       @default_height = '160'
-      @attr = ['', @default_height]
+      @default_show = true
+      @attr = ['', @default_height, @default_show]
 
-      # Set src from attributes
+      # Set id from attributes
       @string.gsub(/id="(.*?)"/) do
         @attr[0] = $1
       end
@@ -72,10 +73,27 @@ class HTMLBlockCode < Redcarpet::Render::HTML
         end
       end
 
+      # Set preview from attributes
+      @string.gsub(/preview="(.*?)"/) do
+        if $1
+          @attr[2] = $1
+        else
+          @attr[2] = @default_show
+        end
+      end
+
       @snippet_content = Page.find(@attr[0])
       @snippet_encoded = (CGI.escapeHTML @snippet_content.body_markdown).html_safe
 
-      %(\n<div class="uix-component-frame uix-snippet-frame"><iframe id="snippet#{@random_id}" scrolling="no" src="/snippet/#{@attr[0]}" width="100%" height="#{@attr[1]}"></iframe><a onclick="toggleSnippet(event, 'snippet#{@random_id}')" class="uix-component-link toggle">View snippet</a><a onclick="copySnippet(event, 'snippet#{@random_id}')" class="uix-component-link copy">Copy snippet</a><pre class="toggle-snippet-preview line-numbers language-markup"><code>#{@snippet_encoded}</code></pre></div>\n)
+      pp "[[[[[[[[[[]]]]]]]]]]"
+      pp @attr[2]
+
+      if @attr[2] == true
+        %(\n<div class="uix-component-frame uix-snippet-frame"><iframe id="snippet#{@random_id}" scrolling="no" src="/snippet/#{@attr[0]}" width="100%" height="#{@attr[1]}"></iframe><a onclick="toggleSnippet(event, 'snippet#{@random_id}')" class="uix-component-link toggle">View snippet</a><a onclick="copySnippet(event, 'snippet#{@random_id}')" class="uix-component-link copy">Copy snippet</a><pre class="toggle-snippet-preview line-numbers language-markup"><code>#{@snippet_encoded}</code></pre></div>\n)
+      else
+        %(\n<div class="uix-component-frame uix-snippet-frame"><a onclick="toggleSnippet(event, 'snippet#{@random_id}')" class="uix-component-link toggle">View snippet</a><a onclick="copySnippet(event, 'snippet#{@random_id}')" class="uix-component-link copy">Copy snippet</a><pre class="toggle-snippet-preview line-numbers language-markup"><code>#{@snippet_encoded}</code></pre></div>\n)
+      end
+
     end
     full_document
   end

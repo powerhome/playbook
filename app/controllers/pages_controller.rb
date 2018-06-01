@@ -22,7 +22,7 @@ class PagesController < ApplicationController
     if user_signed_in?
       @page = Page.new
       @page_snippet = Page.new
-      
+
       @order_preset = nil
       @category = Category.find(params[:category_id])
       @page_tags = PageTag.joins(:page).where(:page_tags => { :page_id => @page.id })
@@ -48,7 +48,6 @@ class PagesController < ApplicationController
   # POST /pages
   # POST /pages.json
   def create
-    pp page_params
     @page = Page.new(page_params)
 
     respond_to do |format|

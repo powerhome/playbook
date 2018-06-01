@@ -3,8 +3,8 @@ require 'redcarpet_helper'
 module ApplicationHelper
 
   def first_category_page_path(cat)
-    if Page.where(category: cat.id).first
-      return category_page_path(cat.id, Page.where(category: cat.id).first)
+    if Page.where(category: cat.id, page_id: nil).first
+      return category_page_path(cat.id, Page.where(category: cat.id, page_id: nil).first)
     else
       return new_category_page_path(cat)
     end
