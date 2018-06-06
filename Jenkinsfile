@@ -7,7 +7,7 @@ node('docker') {
   stage('Build') {
     def scmVars = checkout scm
     tag = "${env.BRANCH_NAME.replaceAll('/', '_')}-${scmVars.GIT_COMMIT}-${env.BUILD_ID}"
-    appImage = docker.build("docker-registry.powerhrg.com/tools/playbook:${tag}")
+    appImage = docker.build("quay.io/powerhome/playbook:${tag}")
   }
 
   stage('Test') {

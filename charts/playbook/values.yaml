@@ -1,6 +1,6 @@
 replicaCount: 2
 image:
-  repository: docker-registry.powerhrg.com/tools/playbook
+  repository: quay.io/powerhome/playbook
   tag: latest
   pullPolicy: IfNotPresent
   pullSecret: registry-user
