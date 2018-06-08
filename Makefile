@@ -4,8 +4,9 @@ ifdef TTY
 	INTERACTIVE = --interactive
 endif
 
-RUN_DEPLOYER = docker run --tty ${INTERACTIVE} --rm --volume ~/.kube:/root/.kube --volume ~/.gnupg/secring.gpg:/root/.gnupg/secring.gpg --volume ~/.gnupg/pubring.gpg:/root/.gnupg/pubring.gpg --volume ~/.gnupg/private-keys-v1.d:/root/.gnupg/private-keys-v1.d --volume $(shell pwd):/app --env BUILD_DEPS_AND_PACKAGE=false
-DEPLOYER_IMAGE = docker-registry.powerhrg.com/platform/deployer:master-44a3637009207ba2a319a6284b3c20f8c2d62f60-77
+DEPLOYER_IMAGE = quay.io/powerhome/deployer:master-58086fd761c0ff59ff538a40a5a73a2925098585-98
+DEPLOYER_MOUNTS = --mount type=bind,source=$(HOME)/.kube,destination=/root/.kube --mount type=bind,source=$(shell pwd),destination=/app --env BUILD_DEPS_AND_PACKAGE=false
+RUN_DEPLOYER = docker run --tty ${INTERACTIVE} --env AWS_ACCESS_KEY_ID --env AWS_SECRET_ACCESS_KEY --rm --env BUILD_DEPS_AND_PACKAGE=false ${DEPLOYER_MOUNTS} ${DEPLOYER_IMAGE}
 
 start:
 	docker-compose up --build
@@ -32,14 +33,10 @@ clean:
 	docker-compose down --rmi all --volumes
 
 deploy:
-	${RUN_DEPLOYER} --entrypoint /bin/gpg-agent-background ${DEPLOYER_IMAGE} helm-wrapper upgrade --install --wait playbook-$(environment) /app/charts/playbook --namespace playbook-$(environment) -f /app/config/deploy/$(environment)/secrets.yaml -f /app/config/deploy/$(environment)/values.yaml --set image.tag=$(tag)
+	${RUN_DEPLOYER} helm-wrapper upgrade --install --wait playbook-$(environment) /app/charts/playbook --namespace playbook-$(environment) -f /app/config/deploy/$(environment)/secrets.yaml -f /app/config/deploy/$(environment)/values.yaml --set image.tag=$(tag)
+
+deploydiff:
+	${RUN_DEPLOYER} helm-wrapper diff upgrade playbook-$(environment) /app/charts/playbook -f /app/config/deploy/$(environment)/secrets.yaml -f /app/config/deploy/$(environment)/values.yaml --set image.tag=$(tag)
 
 secrets:
-	${RUN_DEPLOYER} --entrypoint /bin/gpg-agent-background ${DEPLOYER_IMAGE} bash --login
-
-addKeyToRing:
-	gpg --export $(fingerprint) | gpg --no-default-keyring --keyring=config/secrets.keys --import
-
-grantSecretAccess:
-	gpg --import config/secrets.keys
-	$(foreach file,$(wildcard config/deploy/*/secrets.yaml),[[ $(file) == *"production"* ]] || ${RUN_DEPLOYER} --entrypoint /bin/gpg-agent-background ${DEPLOYER_IMAGE} sops --rotate --in-place --add-pgp $(fingerprint) /app/$(file) ;)
+	${RUN_DEPLOYER} bash --login
