@@ -3,7 +3,9 @@ image:
   repository: quay.io/powerhome/playbook
   tag: latest
   pullPolicy: IfNotPresent
-  pullSecret: registry-user
+  pullSecrets:
+    - registry-user
+    - quay-robot-powerhome-tectonic
 service:
   name: playbook
   type: ClusterIP

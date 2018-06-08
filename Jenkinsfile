@@ -16,14 +16,20 @@ node('docker') {
 
   stage('Deploy') {
     appImage.push()
-    withCredentials([file(credentialsId: 'gpg-key', variable: 'PRIVATE_KEY_FILE')]) {
-      sh "gpg --import $PRIVATE_KEY_FILE || true"
-    }
     sh "helm lint --strict ./charts/playbook || true"
-    if (env.BRANCH_NAME == 'master') {
-      appImage.push('latest')
-      sh "make deploy environment=staging tag=${tag}"
-      sh "make deploy environment=production tag=${tag}"
+    withCredentials([usernamePassword(
+      credentialsId: 'jenkins-app-deploy-aws-access-key',
+      usernameVariable: 'AWS_ACCESS_KEY_ID',
+      passwordVariable: 'AWS_SECRET_ACCESS_KEY'
+    )]) {
+      if (env.BRANCH_NAME == 'master') {
+        appImage.push('latest')
+        sh "make deploy environment=staging tag=${tag}"
+        sh "make deploy environment=production tag=${tag}"
+      } else {
+        sh "make deploydiff environment=staging tag=${tag}"
+        sh "make deploydiff environment=production tag=${tag}"
+      }
     }
   }
 }

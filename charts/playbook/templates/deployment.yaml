@@ -15,8 +15,12 @@ spec:
         app: {{ template "name" . }}
         release: {{ .Release.Name }}
     spec:
+{{- if .Values.image.pullSecrets }}
       imagePullSecrets:
-        - name: {{ .Values.image.pullSecret }}
+      {{- range $pullSecret := .Values.image.pullSecrets }}
+        - name: {{ $pullSecret }}
+      {{- end }}
+{{- end }}
       containers:
         - name: {{ .Chart.Name }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
