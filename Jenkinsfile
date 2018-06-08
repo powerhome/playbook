@@ -18,7 +18,7 @@ node('docker') {
     appImage.push()
     sh "helm lint --strict ./charts/playbook || true"
     withCredentials([usernamePassword(
-      credentialsId: 'jenkins-app-job-aws-access-key',
+      credentialsId: 'jenkins-app-deploy-aws-access-key',
       usernameVariable: 'AWS_ACCESS_KEY_ID',
       passwordVariable: 'AWS_SECRET_ACCESS_KEY'
     )]) {
