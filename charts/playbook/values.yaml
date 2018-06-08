@@ -3,7 +3,7 @@ image:
   repository: quay.io/powerhome/playbook
   tag: latest
   pullPolicy: IfNotPresent
-  pullSecret:
+  pullSecrets:
     - registry-user
     - quay-robot-powerhome-tectonic
 service:
