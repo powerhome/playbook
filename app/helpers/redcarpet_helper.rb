@@ -57,6 +57,7 @@ class HTMLBlockCode < Redcarpet::Render::HTML
       @string = $1
       @default_height = '160'
       @default_show = true
+      @default_expand = false
       @attr = ['', @default_height, @default_show]
 
       # Set id from attributes
@@ -73,12 +74,27 @@ class HTMLBlockCode < Redcarpet::Render::HTML
         end
       end
 
-      # Set preview from attributes
       @string.gsub(/preview="(.*?)"/) do
         if $1
-          @attr[2] = $1
+          if $1 == "false"
+            @attr[2] = false
+          else
+            @attr[2] = $1
+          end
         else
           @attr[2] = @default_show
+        end
+      end
+
+      @string.gsub(/expand="(.*?)"/) do
+        if $1
+          if $1 == "true" || $1 == true
+            @attr[3] = true
+          else
+            @attr[3] = false
+          end
+        else
+          @attr[3] = @default_expand
         end
       end
 
@@ -86,12 +102,30 @@ class HTMLBlockCode < Redcarpet::Render::HTML
 
       if @snippet_content.present?
         @snippet_encoded = (CGI.escapeHTML @snippet_content.body_markdown).html_safe
+        @iframe = %(\n\n)
+        @image_preview = %(\n\n)
+        @action_buttons = %(\n\n)
+        @action_buttons = %(\n<div class="snippet-actions pb-4"><a onclick="toggleSnippet(event, 'snippet#{@random_id}')" class="uix-component-link toggle">View code</a><a onclick="copySnippet(event, 'snippet#{@random_id}')" class="uix-component-link copy">Copy snippet</a></div>\n)
 
         if @attr[2] == true
-          %(\n<div class="uix-component-frame uix-snippet-frame"><iframe id="snippet#{@random_id}" scrolling="no" src="/snippet/#{@attr[0]}" width="100%" height="#{@attr[1]}"></iframe><a onclick="toggleSnippet(event, 'snippet#{@random_id}')" class="uix-component-link toggle">View snippet</a><a onclick="copySnippet(event, 'snippet#{@random_id}')" class="uix-component-link copy">Copy snippet</a><pre class="toggle-snippet-preview line-numbers language-markup"><code>#{@snippet_encoded}</code></pre></div>\n)
+          @iframe = %(\n<iframe id="snippet#{@random_id}" scrolling="no" src="/snippet/#{@attr[0]}" width="100%" height="#{@attr[1]}"></iframe>\n)
         else
-          %(\n<div class="uix-component-frame uix-snippet-frame"><a onclick="toggleSnippet(event, 'snippet#{@random_id}')" class="uix-component-link toggle">View snippet</a><a onclick="copySnippet(event, 'snippet#{@random_id}')" class="uix-component-link copy">Copy snippet</a><pre class="toggle-snippet-preview line-numbers language-markup"><code>#{@snippet_encoded}</code></pre></div>\n)
+          @iframe = %(\n<iframe class="snippet-hidden" id="snippet#{@random_id}" scrolling="no" src="/snippet/#{@attr[0]}" width="0" height="0"></iframe>\n)
         end
+
+        if @attr[2] != true && @attr[2] != false
+          @image_preview = %(\n<div class="snippet-preview-image"><a href="#{Rails.application.routes.url_helpers.preview_snippet_path(@attr[0])}" target="_blank" class="uix-component-link preview-image-link m-4 p-0"><img src="#{@attr[2]}" /></a></div>\n)
+          @action_buttons = %(\n<div class="snippet-actions pb-4"><a onclick="toggleSnippet(event, 'snippet#{@random_id}')" class="uix-component-link toggle">View code</a><a onclick="copySnippet(event, 'snippet#{@random_id}')" class="uix-component-link copy">Copy snippet</a><a href="#{Rails.application.routes.url_helpers.preview_snippet_path(@attr[0])}" target="_blank" class="uix-component-link preview-window">Preview</a></div>\n)
+        end
+
+        if @attr[3] == true
+          @code = %(\n<pre class="mx-4 toggle-snippet-preview line-numbers language-markup shown"><code>#{@snippet_encoded}</code></pre>\n)
+          @action_buttons = %(\n<div class="snippet-actions pb-4"><a onclick="copySnippet(event, 'snippet#{@random_id}')" class="uix-component-link copy">Copy snippet</a></div>\n)
+        else
+          @code = %(\n<pre class="mx-4 toggle-snippet-preview line-numbers language-markup"><code>#{@snippet_encoded}</code></pre>\n)
+        end
+
+        %(\n<div class="uix-component-frame uix-snippet-frame">#{@iframe}#{@image_preview}#{@action_buttons}#{@code}</div>\n)
       end
 
     end

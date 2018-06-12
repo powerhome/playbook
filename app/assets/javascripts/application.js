@@ -39,11 +39,11 @@ var toggleSnippet = function(event, iframe_id) {
   var toggleLink = $('#'+iframe_id).parent().find('.uix-component-link.toggle');
 
   if(previewEl.hasClass('shown')) {
-    previewEl.removeClass('shown').hide();
-    toggleLink.text('View Snippet');
+    previewEl.removeClass('shown');
+    toggleLink.text('View code');
   } else {
-    previewEl.addClass('shown').show();
-    toggleLink.text('Hide Snippet');
+    previewEl.addClass('shown');
+    toggleLink.text('Hide code');
   }
 }
 
