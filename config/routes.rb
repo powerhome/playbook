@@ -31,6 +31,7 @@ Rails.application.routes.draw do
 
 
   get '/snippet/:page_id', to: 'snippets#show', as: 'snippet'
+  get '/preview/:page_id', to: 'snippets#preview', as: 'preview_snippet'
 
   root to: "home#index"
 end

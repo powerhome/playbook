@@ -1,0 +1,64 @@
+#snippet-responsive-preview {
+  height: 100vh;
+
+  iframe {
+    width: 100%;
+    max-width: 100%;
+    height: calc(100vh - 10px);
+    border: 0;
+    margin: 0 auto;
+    border: 1px solid $sky;
+
+    &.tablet {
+      max-width: 1024px;
+    }
+
+    &.mobile {
+      max-width: 425px;
+    }
+  }
+}
+#responsive-controls {
+  position: fixed;
+  top: 100px;
+  left: 0;
+  z-index: 99999;
+  background: $white;
+  border: 3px solid $sky;
+  border-left: 0;
+  border-radius: 0 $border-rad-light $border-rad-light 0;
+  padding: $space-base $space-smaller;
+
+  li {
+    display: block;
+    float: none;
+    clear: both;
+
+    a {
+      text-align: center;
+      padding: $space-smaller $space-base;
+      font-size: $font-base;
+      border-radius: $border-rad-light;
+      color: $sky-dark;
+      transition: all 0.3s ease;
+
+      &:hover,
+      &:active {
+        background: $sky-light;
+      }
+    }
+
+    &.active {
+      a {
+        color: $power-royal;
+      }
+    }
+
+    &:hover,
+    &:active {
+      a {
+        background: $sky-light;
+      }
+    }
+  }
+}

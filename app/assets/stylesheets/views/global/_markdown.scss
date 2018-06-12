@@ -467,13 +467,13 @@
       padding: $space-large;
       border: 1px solid $sky;
       width: 100%;
-      overflow: hidden;
+      // overflow: hidden;
     }
 
     .uix-component-link {
       float: right;
       margin-top: -8px;
-      padding: $space-smallest $space-large;
+      padding: $space-smallest $space-base;
       border: 1px solid $sky;
       border-top: 0;
       color: $ink-lightest;
@@ -481,7 +481,6 @@
       text-transform: uppercase;
       font-size: $font-smallest;
       vertical-align: middle;
-      width: 130px;
       text-align: center;
       transition: all 0.3s ease;
 
@@ -509,6 +508,48 @@
           color: $power-green;
         }
       }
+
+      &.preview-window {
+        &::before {
+          content: "\f08e"
+        }
+      }
+
+      &.preview-image-link {
+        position: relative;
+
+        &::before {
+          content: "";
+          display: none;
+        }
+
+        &::after {
+          content: "Preview";
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          opacity: 0;
+          background: rgba(0,0,0,0);
+          color: $white;
+          font-weight: $regular;
+          font-size: $font-jumbo;
+          text-align: center;
+          vertical-align: middle;
+          transition: all 0.3s ease;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+
+        &:hover {
+          &::after {
+            background: rgba(0,0,0,0.5);
+            opacity: 1;
+          }
+        }
+      }
     }
 
     &::after {
@@ -523,8 +564,18 @@
       border-left: 3px solid $sky-light;
       padding-left: $space-base;
 
-      .toggle-snippet-preview {
+      .snippet-preview-image {
+        width: 100%;
+        float: none;
+        clear: both;
         display: block;
+
+        img {
+          max-width: 100% !important;
+        }
+      }
+
+      .toggle-snippet-preview {
         float: none;
         clear: both;
         width: 100%;
@@ -533,10 +584,18 @@
         font-size: $font-small;
         padding: $space-large;
         display: none;
+
+        &.shown {
+          display: block !important;
+        }
       }
 
       iframe {
         border: 0;
+
+        &.snippet-hidden {
+          display: none !important;
+        }
       }
 
       .uix-component-link {
