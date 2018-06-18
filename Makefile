@@ -4,7 +4,7 @@ ifdef TTY
 	INTERACTIVE = --interactive
 endif
 
-DEPLOYER_IMAGE = quay.io/powerhome/deployer:master-58086fd761c0ff59ff538a40a5a73a2925098585-98
+DEPLOYER_IMAGE = quay.io/powerhome/deployer:master-16ba1d5c2ef09335ebff94ca10bf2e78919f46c2-153
 DEPLOYER_MOUNTS = --mount type=bind,source=$(HOME)/.kube,destination=/root/.kube --mount type=bind,source=$(shell pwd),destination=/app --env BUILD_DEPS_AND_PACKAGE=false
 RUN_DEPLOYER = docker run --tty ${INTERACTIVE} --env AWS_ACCESS_KEY_ID --env AWS_SECRET_ACCESS_KEY --rm --env BUILD_DEPS_AND_PACKAGE=false ${DEPLOYER_MOUNTS} ${DEPLOYER_IMAGE}
 
@@ -33,10 +33,10 @@ clean:
 	docker-compose down --rmi all --volumes
 
 deploy:
-	${RUN_DEPLOYER} helm-wrapper upgrade --install --wait playbook-$(environment) /app/charts/playbook --namespace playbook-$(environment) -f /app/config/deploy/$(environment)/secrets.yaml -f /app/config/deploy/$(environment)/values.yaml --set image.tag=$(tag)
+	${RUN_DEPLOYER} helm-wrapper upgrade --install --wait playbook-$(environment) /app/charts/playbook --namespace playbook-$(environment) -f /app/config/deploy/$(environment)/secrets.yaml -f /app/config/deploy/$(environment)/values.yaml --set image.tag=$(tag) --kube-context=tectonic-$(cluster)
 
 deploydiff:
-	${RUN_DEPLOYER} helm-wrapper diff upgrade playbook-$(environment) /app/charts/playbook -f /app/config/deploy/$(environment)/secrets.yaml -f /app/config/deploy/$(environment)/values.yaml --set image.tag=$(tag)
+	${RUN_DEPLOYER} helm-wrapper diff upgrade playbook-$(environment) /app/charts/playbook -f /app/config/deploy/$(environment)/secrets.yaml -f /app/config/deploy/$(environment)/values.yaml --set image.tag=$(tag) --kube-context=tectonic-$(cluster) --allow-unreleased
 
 secrets:
 	${RUN_DEPLOYER} bash --login
