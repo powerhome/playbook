@@ -25,14 +25,14 @@ node('docker') {
       if (env.BRANCH_NAME == 'master') {
         appImage.push('latest')
         sh "make deploy environment=staging tag=${tag} cluster=gotham"
-        sh "make deploy environment=staging tag=${tag} cluster=hq"
-        sh "make deploy environment=production tag=${tag} cluster=hq"
+        // sh "make deploy environment=staging tag=${tag} cluster=hq"
+        // sh "make deploy environment=production tag=${tag} cluster=hq"
         sh "make deploy environment=production tag=${tag} cluster=gotham"
       } else {
         sh "make deploydiff environment=staging tag=${tag} cluster=gotham"
-        sh "make deploydiff environment=staging tag=${tag} cluster=hq"
+        // sh "make deploydiff environment=staging tag=${tag} cluster=hq"
         sh "make deploydiff environment=production tag=${tag} cluster=gotham"
-        sh "make deploydiff environment=production tag=${tag} cluster=hq"
+        // sh "make deploydiff environment=production tag=${tag} cluster=hq"
       }
     }
   }
