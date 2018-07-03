@@ -1,9 +1,9 @@
 GIT
   remote: https://github.com/powerhome/nitro-storybook.git
-  revision: 5c8337f67ddc635b22cbe8b5c87263c121e65da4
-  tag: v2.0.3
+  revision: c59101c74bbef11646931abc8854eb3d77a4eddc
+  tag: v2.0.9
   specs:
-    nitro_sg (2.0.3)
+    nitro_sg (2.0.9)
       rails (>= 4.2.9, < 6.0)
       sassc-rails (= 1.3.0)
       sprockets-rails (= 2.3.3)
@@ -223,8 +223,7 @@ GEM
       sprockets (>= 2.8, < 4.0)
       sprockets-rails (>= 2.0, < 4.0)
       tilt (>= 1.1, < 3)
-    sassc (1.11.4)
-      bundler
+    sassc (1.12.0)
       ffi (~> 1.9.6)
       sass (>= 3.3.0)
     sassc-rails (1.3.0)

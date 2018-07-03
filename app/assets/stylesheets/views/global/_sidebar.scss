@@ -95,7 +95,7 @@ $active-color: $app-color;
             span {
               line-height: $font-base;
 
-              i {
+              i, svg {
                 font-size: $font-smaller;
                 line-height: $font-base;
               }

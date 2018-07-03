@@ -2,16 +2,16 @@ li class=((@category.present? && @category[:id] == cat.id) || (@page.present? &&
   a href="#{first_category_page_path(cat)}"
     span.icon
       - if cat.pages.count <= 0
-        i.fa.fa-pencil
+        i.far.fa-pencil
       - if cat.pages.count == 1
-        i.fa.fa-file-text-o
+        i.far.fa-file
       - if cat.pages.count > 1
-        i.fa.fa-folder-o
+        i.far.fa-folder
     span.text = cat.name
     - if user_signed_in?
       div.edit-action
         a href="#{edit_section_category_path(cat.section_id, cat.id)}"
-          i.fa.fa-pencil
+          i.far.fa-pencil
   - if (@category.present? && @category[:id] == cat.id) || (@page.present? && @page[:category_id] == cat.id)
     ul.sub-page-nav
       - cat.pages.each do |page|
@@ -40,5 +40,5 @@ li class=((@category.present? && @category[:id] == cat.id) || (@page.present? &&
         li.type-content
           a.text-power-blue href="#{new_category_page_path(cat)}"
             span
-              i.item-icon.fa.fa-2x.fa-files-o
+              i.item-icon.far.fa-copy.fa-2x
             span = " Add Page"

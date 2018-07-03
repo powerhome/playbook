@@ -5,16 +5,17 @@ nav.nav.navbar.navbar-default.navbar-static-top.m-0.uix-header
         .logo = image_tag("app_logo.svg")
     ul.nav.navbar-nav
       - @navigation.each do |section|
-        li class=(@current_section.present? && @current_section.id == section.id ? "active" : "")
-          a href="#{first_section_category_page_path(section)}" = section.name
-          - if user_signed_in?
-            div.edit-action.on-hover
-              a href="#{edit_section_path(section)}"
-                i.fa.fa-pencil
+        - unless section.name.downcase == "ux resources" && !user_signed_in?
+          li class=(@current_section.present? && @current_section.id == section.id ? "active" : "")
+            a href="#{first_section_category_page_path(section)}" = section.name
+            - if user_signed_in?
+              div.edit-action.on-hover
+                a href="#{edit_section_path(section)}"
+                  i.far.fa-pencil
       - if user_signed_in?
         li.on-hover
           a href="#{new_section_path}"
-            i class="fa fa-plus" aria-hidden="true"
+            i.far.fa-plus
             = " New Section"
 
     ul.nav.navbar-nav.navbar-right

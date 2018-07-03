@@ -13,6 +13,8 @@
 //= require jquery
 //= require rails-ujs
 //= require turbolinks
+//= require regular.js
+//= require fontawesome.js
 //= require simple_form_markdown_editor
 //= require prism
 
