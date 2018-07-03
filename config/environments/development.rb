@@ -54,7 +54,9 @@ Rails.application.configure do
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
 
   config.web_console.whitelisted_ips = '172.18.0.1'
-  
+
+  config.action_dispatch.default_headers = { 'X-Frame-Options' => 'ALLOWALL' }
+
 end
 
 BetterErrors::Middleware.allow_ip! "172.0.0.0/8"

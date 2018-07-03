@@ -21,7 +21,7 @@ Rails.application.configure do
 
   # Disable serving static files from the `/public` folder by default since
   config.serve_static_assets = false
-  
+
   # Apache or NGINX already handles this.
   config.public_file_server.enabled = true
 
@@ -90,6 +90,8 @@ Rails.application.configure do
     logger.formatter = config.log_formatter
     config.logger    = ActiveSupport::TaggedLogging.new(logger)
   end
+
+  config.action_dispatch.default_headers = { 'X-Frame-Options' => 'ALLOWALL' }
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
