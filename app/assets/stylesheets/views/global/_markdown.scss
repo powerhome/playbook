@@ -359,12 +359,14 @@
   }
 
   // Extensions
-  .markdown-header-anchor {
+  .markdown-header-anchor,
+  .markdown-snippet-anchor {
     position: absolute;
-    left: 0px;
-    top: -8px;
+    left: -34px;
+    top: 6px;
     padding: 0;
     font-size: $font-large;
+    color: $sky-dark;
 
     span {
       position: absolute;
@@ -378,6 +380,15 @@
       padding-right: $space-base;
       color: $sky-dark;
     }
+  }
+  .markdown-snippet-anchor {
+    left: -34px;
+    top: -6px;
+    font-size: 14px;
+    color: $sky-dark;
+    background: $sky-lighter;
+    padding: 2px 6px;
+    border-radius: 4px;
   }
   .uix-ruleset-block {
     padding: $space-large 0;
@@ -484,34 +495,11 @@
       text-align: center;
       transition: all 0.3s ease;
 
-      &::before {
-        content: "\f0c1";
-        font-family: FontAwesome;
-        font-style: normal;
-        font-weight: normal;
-        text-decoration: inherit;
-        margin-right: $space-smaller;
-        color: $sky-dark;
-        transition: all 0.3s ease;
-      }
-
-      &.copy {
-        &::before {
-          content: "\f0c5"
-        }
-      }
-
       &.copied {
         color: $power-green;
 
         &::before {
           color: $power-green;
-        }
-      }
-
-      &.preview-window {
-        &::before {
-          content: "\f08e"
         }
       }
 
@@ -601,12 +589,6 @@
       .uix-component-link {
         float: left;
         border: 0;
-
-        &.toggle {
-          &::before {
-            content: "\f06e"
-          }
-        }
       }
     }
   }

@@ -7,9 +7,9 @@ html
     link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel='stylesheet' type='text/css'
     script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous" type="text/javascript"
     script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"
-    script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"
     = javascript_include_tag "https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
+    = javascript_include_tag "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
     = csrf_meta_tags
   body class="#{controller_name} #{action_name}"
     - flash.each do |name, msg|
@@ -19,3 +19,17 @@ html
 
     = render :partial => "snippets/responsive_controls"
     = yield
+
+    - @snippet_encoded = (CGI.escapeHTML @page.body_markdown).html_safe
+    #viewCode.modal aria-labelledby="viewCodeLabel" role="dialog" tabindex="-1"
+      .modal-dialog.modal-lg role="document"
+        .modal-content
+          .modal-header
+            button.close aria-label="Close" data-dismiss="modal" type="button"
+              span aria-hidden="true"  &times;
+            h4#myModalLabel.modal-title.font-weight-bold View Code Snippet
+          .modal-body
+            pre class="mx-4 toggle-snippet-preview line-numbers language-markup"
+              code #{@snippet_encoded}
+          .modal-footer.clearfix
+            button.btn.btn-default.pull-right data-dismiss="modal" type="button"  Close
