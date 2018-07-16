@@ -19,7 +19,8 @@
 //= require prism
 
 
-var copySnippet = function(event, iframe_id) {
+var copySnippet = function(event, iframe_id, preview) {
+  preview = preview || false;
   var copyText = window.frames[iframe_id].contentDocument.getElementById('snippet-container').innerHTML;
   var dummy = document.createElement("textarea");
 
@@ -30,22 +31,42 @@ var copySnippet = function(event, iframe_id) {
   document.execCommand("copy");
   document.body.removeChild(dummy);
 
-  $(event.target).addClass('copied').text('Copied!');
-  setTimeout(function(){
-    $(event.target).removeClass('copied').text('Copy snippet');
-  }, 1000);
+  if(preview == false){
+    $(event.target).closest('#copy-text').text('Copied!');
+    $(event.target).closest('#copy-icon').addClass('hidden');
+    $(event.target).closest('#copied-icon').addClass('text-power-green').removeClass('hidden');
+    setTimeout(function(){
+      $(event.target).closest('#copy-text').text('Copy snippet');
+      $(event.target).closest('#copy-icon').removeClass('hidden');
+      $(event.target).closest('#copied-icon').removeClass('text-power-green').addClass('hidden');
+    }, 1000);
+  } else {
+    $('#copy-icon').addClass('hidden');
+    $('#copied-icon').addClass('text-power-green').removeClass('hidden');
+    setTimeout(function(){
+      $('#copy-icon').removeClass('hidden');
+      $('#copied-icon').removeClass('text-power-green').addClass('hidden');
+    }, 1000);
+  }
 }
 
-var toggleSnippet = function(event, iframe_id) {
+var snippetFrameLoad = function(id){
+ $("#copy-"+id).removeClass('hidden');
+}
+
+var toggleSnippet = function(event, iframe_id, preview) {
+  preview = preview || false;
   var previewEl = $('#'+iframe_id).parent().find('.toggle-snippet-preview');
   var toggleLink = $('#'+iframe_id).parent().find('.uix-component-link.toggle');
 
-  if(previewEl.hasClass('shown')) {
-    previewEl.removeClass('shown');
-    toggleLink.text('View code');
-  } else {
-    previewEl.addClass('shown');
-    toggleLink.text('Hide code');
+  if(preview == false){
+    if(previewEl.hasClass('shown')) {
+      previewEl.removeClass('shown');
+      toggleLink.html('<i class="far fa-eye mr-1"></i> View code');
+    } else {
+      previewEl.addClass('shown');
+      toggleLink.html('<i class="far fa-eye-slash mr-1"></i> Hide code');
+    }
   }
 }
 
@@ -58,4 +79,9 @@ $( document ).ready(function() {
       });
     }, 4000);
 	});
+  $('[data-toggle="tooltip"]').tooltip();
+});
+
+$( document ).on("turbolinks:load", function() {
+  FontAwesome.dom.i2svg();
 });
