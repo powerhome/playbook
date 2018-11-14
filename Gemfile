@@ -38,7 +38,7 @@ gem 'simple_form_markdown_editor'
 
 # STYLES
 gem "nitro_sg", github: "powerhome/nitro-storybook", tag: "v2.3.4"
-gem 'sass-rails', '~> 5.0'
+gem "sassc", "1.11.4"
 
 group :development, :test do
   gem 'byebug'
