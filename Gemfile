@@ -37,7 +37,7 @@ gem 'redcarpet'
 gem 'simple_form_markdown_editor'
 
 # STYLES
-gem "nitro_sg", github: "powerhome/nitro-storybook", tag: "v2.3.4"
+gem "nitro_sg", github: "powerhome/nitro-storybook", tag: "v2.4.1"
 gem "sassc", "1.11.4"
 
 group :development, :test do
