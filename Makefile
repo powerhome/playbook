@@ -33,10 +33,10 @@ clean:
 	docker-compose down --rmi all --volumes
 
 deploy:
-	${RUN_DEPLOYER} helm-wrapper upgrade --install --wait playbook-$(environment) /app/charts/playbook --namespace playbook-$(environment) -f /app/config/deploy/$(environment)/secrets.yaml -f /app/config/deploy/$(environment)/values.yaml --set image.tag=$(tag) --kube-context=$(cluster)
+	${RUN_DEPLOYER} helm-wrapper upgrade --install --wait playbook-$(environment) /app/charts/playbook --namespace playbook-$(environment) -f /app/config/deploy/$(environment)/secrets.yaml -f /app/config/deploy/$(environment)/values.yaml --set image.tag=$(tag) --kube-context=$(cluster) --tiller-namespace=app-tiller
 
 deploydiff:
-	${RUN_DEPLOYER} helm-wrapper diff upgrade playbook-$(environment) /app/charts/playbook -f /app/config/deploy/$(environment)/secrets.yaml -f /app/config/deploy/$(environment)/values.yaml --set image.tag=$(tag) --kube-context=$(cluster) --allow-unreleased
+	${RUN_DEPLOYER} helm-wrapper diff upgrade playbook-$(environment) /app/charts/playbook -f /app/config/deploy/$(environment)/secrets.yaml -f /app/config/deploy/$(environment)/values.yaml --set image.tag=$(tag) --kube-context=$(cluster) --allow-unreleased --tiller-namespace=app-tiler
 
 secrets:
 	${RUN_DEPLOYER} bash --login
