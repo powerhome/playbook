@@ -4,8 +4,7 @@ image:
   tag: latest
   pullPolicy: IfNotPresent
   pullSecrets:
-    - registry-user
-    - quay-robot-powerhome-tectonic
+    - quay-robot-powerhome
 service:
   name: playbook
   type: ClusterIP
