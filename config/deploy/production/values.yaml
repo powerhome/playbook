@@ -4,7 +4,7 @@ ingress:
     certmanager.k8s.io/acme-dns01-provider: route53-powerapp-cloud
     certmanager.k8s.io/cluster-issuer: production-certs
   hosts:
-    - playbook2.powerapp.cloud
+    - playbook.powerapp.cloud
   tls:
     hosts:
       playbook.powerapp.cloud: route53-powerapp-cloud
