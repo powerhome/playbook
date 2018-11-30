@@ -1,6 +1,6 @@
 ingress:
   hosts:
-    - playbook.powerapp.cloud
+    - playbook2.powerapp.cloud
   tls:
     hosts:
       playbook.powerapp.cloud: route53-powerapp-cloud
