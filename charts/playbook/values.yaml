@@ -24,6 +24,8 @@ appConfig:
   rackEnv: "production"
   railsEnv: "production"
 postgresql:
+  image: 'postgres'
+  imageTag: '10.6'
   resources:
     requests:
       memory: 256Mi
