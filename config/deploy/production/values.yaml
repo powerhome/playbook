@@ -5,7 +5,7 @@ ingress:
     certmanager.k8s.io/cluster-issuer: production-certs
     ingress.kubernetes.io/whitelist-source-range: '0.0.0.0/0'
   hosts:
-    - playbook2.powerapp.cloud
+    - playbook.powerapp.cloud
   tls:
     hosts:
       playbook.powerapp.cloud: route53-powerapp-cloud
