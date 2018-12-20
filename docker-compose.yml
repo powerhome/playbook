@@ -4,7 +4,7 @@ volumes:
   database:
 services:
   db:
-    image: postgres
+    image: postgres:10.6
     volumes:
       - database:/var/lib/postgresql/data
     ports:
