@@ -13,6 +13,7 @@ service:
 ingress:
   annotations:
     kubernetes.io/ingress.class: nginx
+    certmanager.k8s.io/cluster-issuer: production-certs
 resources:
   limits:
     cpu: 0.5
