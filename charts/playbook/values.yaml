@@ -15,10 +15,10 @@ ingress:
     kubernetes.io/ingress.class: nginx
 resources:
   limits:
-    cpu: 200m
+    cpu: 0.5
     memory: 256Mi
   requests:
-    cpu: 200m
+    cpu: 0.5
     memory: 256Mi
 appConfig:
   rackEnv: "production"
@@ -29,7 +29,7 @@ postgresql:
   resources:
     requests:
       memory: 256Mi
-      cpu: 100m
+      cpu: 0.5
     limits:
       memory: 256Mi
-      cpu: 100m
+      cpu: 0.5
