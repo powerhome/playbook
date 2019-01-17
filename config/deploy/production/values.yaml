@@ -2,8 +2,7 @@ ingress:
   annotations:
     certmanager.k8s.io/acme-challenge-type: dns01
     certmanager.k8s.io/acme-dns01-provider: route53-powerapp-cloud
-    certmanager.k8s.io/cluster-issuer: production-certs
-    ingress.kubernetes.io/whitelist-source-range: '0.0.0.0/0'
+    nginx.ingress.kubernetes.io/whitelist-source-range: '0.0.0.0/0'
   hosts:
     - playbook.powerapp.cloud
   tls:
