@@ -1,0 +1,66 @@
+$transition-speed: 0.2s;
+
+table {
+  &.table-sm,
+  &.table-md,
+  &.table-lg {
+    &:not(.no-hover) {
+      border-collapse: separate;
+
+      tbody {
+        tr {
+          box-shadow: 0 0 0 $white;
+          transition: box-shadow $transition-speed ease;
+
+          td {
+            border-top-color: transparent;
+            border-top-width: 1px !important;
+            transition: all $transition-speed ease;
+          }
+
+          &:hover {
+            box-shadow: 0 2px 10px 0 $black-opacity-1;
+
+            td {
+              background: $white;
+              border-color: $sky-dark;
+              border-top-width: 1px;
+              border-top-color: transparent;
+            }
+          }
+        }
+      }
+      &.as-cards {
+        tbody {
+          tr {
+            td {
+              border-top-color: $sky;
+              border-top-width: 1px;
+            }
+
+            &:hover {
+              td {
+                border-top-width: 1px;
+                border-top-color: $sky;
+              }
+            }
+          }
+        }
+      }
+      &.table-card {
+        tbody {
+          tr {
+            td {
+              &:first-child {
+                border-left-width: 1px;
+              }
+              &:last-child {
+                border-right-width: 1px;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

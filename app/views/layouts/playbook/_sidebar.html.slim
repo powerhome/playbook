@@ -1,0 +1,7 @@
+br
+= pb_rails("vertical_nav_list", props: {title: "Principles", link: principles_path}) do
+br
+= pb_rails("vertical_nav_list", props: {title: "Kits", link: kits_path}) do
+  - MENU["kits"].sort.each do |link|
+    - active = !@kit.nil? && @kit == link ? true : false
+    = pb_rails("vertical_nav_list/vertical_nav_list_item", props: { text: "#{pb_title(link)}", link: "#{kit_show_path(link)}", active: active })

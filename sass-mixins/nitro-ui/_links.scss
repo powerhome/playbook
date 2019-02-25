@@ -1,0 +1,69 @@
+// MIXINS
+@mixin link($color, $dark: false, $underline: false) {
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  cursor: pointer;
+  transition-property: border, color;
+  transition-duration: 0.15s;
+  transition-timing-function: $bezier;
+  @if $dark {
+    color: $white;
+    @if $underline {
+      border-bottom: 1px solid $color;
+    }
+  }
+  @else {
+    color: $color;
+    @if $underline {
+      border-bottom: 1px solid shade($color, 30%);
+    }
+  }
+  &:hover, &:active, &:focus {
+    outline: 0;
+    text-decoration: none;
+    @if $dark {
+      color: tint(saturate($color, 60%), 20%);
+      border-bottom: 1px solid tint($color, 70%);
+    }
+    @else {
+      color: shade(saturate($color, 60%), 20%);
+      @if $underline {
+        border-bottom: 1px solid shade($color, 100%);
+      }
+      @else {
+        border-bottom: 1px solid shade($color, 30%);
+      }
+    }
+  }
+}
+
+@mixin link-colors($colors-list, $dark: false, $underline: false) {
+  @each $name, $color in $colors-list {
+    &-#{$name} {
+      @include link($color: $color, $dark: $dark, $underline: $underline);
+    }
+  }
+}
+
+// BASE STYLE
+a {
+  @include link($power-royal);
+  border-color: transparent;
+  &:hover, &:active, &:focus {
+    border-color: transparent;
+  }
+}
+
+.link {
+  @include link-colors($power-colors);
+  &-inverted {
+    @include link-colors($power-colors, $dark: true);
+  }
+}
+
+.link-underline {
+  @include link-colors($power-colors, $underline: true);
+  &-inverted {
+    @include link-colors($power-colors, true, true);
+  }
+}

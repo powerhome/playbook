@@ -1,0 +1,24 @@
+// z-index variables
+$z-1: 100;
+$z-2: 200;
+$z-3: 300;
+$z-4: 400;
+$z-5: 500;
+$z-6: 600;
+$z-7: 700;
+$z-8: 800;
+$z-9: 900;
+$z-10: 1000;
+
+$z-layers: (
+  "header": $z-10,
+  "default": 0
+);
+
+@function z-index-for($layer) {
+  @if not map-has-key($z-layers, $layer) {
+    @error "No layer found for `#{$layer}` in $z-layers map.";
+  }
+
+  @return map-get($z-layers, $layer);
+}

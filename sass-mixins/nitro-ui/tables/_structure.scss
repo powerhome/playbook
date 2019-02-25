@@ -1,0 +1,39 @@
+table {
+  @each $name, $value in $cell-pad-list {
+    &.#{$name} {
+      width: 100%;
+      
+      thead {
+        tr {
+          th {
+            padding: $value $cell-gutter;
+
+            &:first-child {
+              padding-left: $cell-pad-endcap;
+            }
+            &:last-child {
+              padding-right: $cell-pad-endcap;
+            }
+          }
+        }
+      }
+      tbody {
+        tr {
+          td {
+            border-color: $sky;
+            border-style: solid;
+            border-width: 0 0 1px;
+            padding: $value $cell-gutter;
+
+            &:first-child {
+              padding-left: $cell-pad-endcap;
+            }
+            &:last-child {
+              padding-right: $cell-pad-endcap;
+            }
+          }
+        }
+      }
+    }
+  }
+}

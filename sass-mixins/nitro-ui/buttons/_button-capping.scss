@@ -1,0 +1,21 @@
+
+//Capping
+$bend:$btn-border-radius-base;
+
+//Cap Options
+$cap-top: $bend $bend 0 0 ;
+$cap-right: 0 $bend $bend 0;
+$cap-bottom: 0 0 $bend $bend;
+$cap-left: $bend 0 0 $bend;
+
+$cap-options:
+  "top" $cap-top,
+  "right" $cap-right,
+  "bottom" $cap-bottom,
+  "left" $cap-left;
+
+@each $cap in $cap-options {
+    .cap-#{nth($cap, 1)} {
+        border-radius: #{nth($cap, 2)} !important;
+    }
+}

@@ -1,0 +1,37 @@
+@import "../tokens/colors";
+@import "../tokens/typography";
+@import "../tokens/line_height";
+
+.body {
+
+  $selectors: (
+    "&",
+    "&_light",
+    "&_lighter",
+    "&_dark",
+    "&_light_dark",
+    "&_lighter_dark",
+  );
+
+  @each $selector in $selectors {
+    #{$selector} {
+      margin: 0;
+      line-height: $lh_tight;
+      @if $selector == "&_dark" {
+        color: $white;
+      } @else if $selector == "&_light" {
+        color: $ink_lightest;
+      } @else if $selector == "&_lighter" {
+        color: $sky_dark;
+      } @else if $selector == "&_light_dark" {
+        color: $white_opacity_6;
+      } @else if $selector == "&_lighter_dark" {
+        color: $white_opacity_4;
+      } @else {
+        color: $ink;
+      }
+
+    }
+  }
+
+}

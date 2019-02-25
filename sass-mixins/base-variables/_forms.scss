@@ -1,0 +1,44 @@
+// Colors
+$input-bg:                        $white;
+$input-bg-disabled:               $sky-lighter;
+$input-color:                     $gray-8;
+$input-border:                    $form-border-color;
+$input-group-addon-border-color:  $input-border;
+$input-border-focus:              $power-navy;
+$input-color-placeholder:         $gray-5;
+$legend-color:                    $gray-7;
+$legend-border-color:             $gray-2;
+$input-group-addon-bg:            $gray-1;
+
+
+// Font Sizing
+$input-font-size-base:      $component-font-size-base;
+$input-font-size-small:     floor($component-font-size-base * 0.867); // ~13px
+$input-font-size-large:     ceil($component-font-size-base * 1.133); // ~17px
+$input-font-size-huge:      floor($component-font-size-base * 1.467); // ~22px
+$input-icon-font-size:      ceil($component-font-size-base * 1.333);  // ~20px
+
+
+// Height/Size
+$input-line-height-base:    1.467; // ~22px
+$input-line-height-small:   1.462; // ~19px
+$input-line-height-large:   1.235; // ~21px
+$input-line-height-huge:    1.318; // ~29px
+$input-height-base:         ($line-height-computed + ($padding-base-vertical * 2) + 2);
+$input-height-large:        (ceil($font-size-large * $line-height-large) + ($padding-large-vertical * 2) + 2);
+$input-height-small:        (floor($font-size-small * $line-height-small) + ($padding-small-vertical * 2) + 2);
+$input-border-size:         1px;
+
+
+// Radius
+$input-border-radius:       $border-rad-light;
+$input-border-radius-small: $border-rad-light;
+$input-border-radius-large: $border-rad-heavy;
+
+
+// Spacing/Padding
+$form-group-margin-bottom:  $space-large;
+
+
+// General
+$cursor-disabled:           not-allowed;

@@ -1,0 +1,48 @@
+.fixed-confirmation-toast {
+  $height: 30px;
+  $spacing-sizes: (
+    "xs": 20px,
+    "sm": 40px,
+    "md": 50px,
+    "lg": 70px,
+    "xl": 100px,
+  );
+  $colors: (
+    "success": $power-green,
+    "tip": $ink-lightest,
+    "error": $power-red,
+  );
+  min-height: $height;
+  display: flex;
+  background: $sky;
+  border-radius: $border-rad-mega;
+  box-shadow: $shadow-deep;
+  color: $white;
+  padding-left: $space-small;
+  padding-right: $space-large;
+  align-items: center;
+  &-icon {
+    font-size: $font-base;
+    margin-right: $space-small;
+  }
+  &-message {
+    font-size: $font-small;
+    font-weight: $bold;
+    flex: 1;
+    text-align: center;
+  }
+  @each $name, $color in $colors {
+    &-#{$name} {
+      background: $color;
+    }
+  }
+  &-bottom {
+    @each $name, $size in $spacing-sizes {
+      &-#{$name} {
+        position: fixed;
+        @include center;
+        bottom: $size;
+      }
+    }
+  }
+}

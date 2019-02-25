@@ -1,0 +1,120 @@
+@import "base-variables/_colors.scss";
+@import "base-variables/_spacing.sass";
+@import "base-variables/_border-radius.sass";
+@import "base-variables/_typography.sass";
+
+$step-size-sm: 10px;
+
+.step-meter {
+  list-style-type: none;
+  padding: 0 $space-base;
+  margin: 0;
+
+  li {
+    background: $sky;
+    border-radius: $border-rad-heavy*2;
+    color: $ink-light;
+    font-size: $font-smallest - 1;
+    font-weight: 400;
+    display: inline-block;
+    height: 18px;
+    line-height: 20px;
+    margin: 0 $space-small;
+    min-width: 75px;
+    padding: 0 $space-smallest;
+    position: relative;
+    text-align: center;
+    text-transform: uppercase;
+
+    &::before {
+      content: '';
+      background: $sky;
+      position: absolute;
+      height: 4px;
+      left: -14px;
+      right: 0;
+      top: calc(50% - 2px);
+      width: 14px;
+    }
+
+    &:first-child {
+      &::before {
+        display: none;
+      }
+    }
+
+    &.done,
+    &.done::before {
+      background: $power-blue;
+    }
+    &.started,
+    &.started::before {
+      background: $power-blue;
+    }
+    &.error,
+    &.error::before {
+      background: $power-red;
+    }
+
+    &.done,
+    &.started,
+    &.error {
+      color: white;
+    }
+
+    span {
+      &:first-child {
+        margin-right: $space-smallest/2;
+      }
+    }
+  }
+
+  &.type-simple {
+    width: 100%;
+    display: flex;
+
+    li {
+      min-width: auto;
+      height: 10px;
+      line-height: 10px;
+      flex-grow: 1;
+      margin: 0;
+      background: transparent !important;
+
+      span {
+        display: none;
+      }
+
+      &::before {
+        height: 2px;
+        top: calc(50% - 1px);
+        left: calc(-50% + 5px);
+        width: calc(100% - 10px);
+      }
+      &::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: calc(50% - 5px);
+        width: $step-size-sm;
+        height: $step-size-sm;
+        border-radius: $step-size-sm/2;
+        background-color: $sky;
+        border: 2px solid $sky;
+      }
+
+      &.done::after, &.done::before {
+        background: $online-green;
+        border-color: $online-green;
+      }
+      &.error::after, &.error::before {
+        background: $power-red;
+        border-color: $power-red;
+      }
+      &.started::after {
+        background: transparent;
+        border-color: $power-blue;
+      }
+    }
+  }
+}

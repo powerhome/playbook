@@ -1,0 +1,88 @@
+table {
+  &.table-sm,
+  &.table-md,
+  &.table-lg {
+    &.table-card {
+      border-collapse: separate;
+      background: $white;
+
+      thead {
+        tr {
+          th {
+            border-color: $sky;
+            border-style: solid;
+            border-width: 1px 0 1px 0;
+
+            &:first-child {
+              border-radius: $border-rad-light 0 0 0;
+              border-width: 1px 0 1px 1px;
+            }
+            &:last-child {
+              border-radius: 0 $border-rad-light 0 0;
+              border-width: 1px 1px 1px 0;
+            }
+          }
+        }
+      }
+
+      tbody {
+        tr {
+          td {
+            border-color: $sky;
+            border-style: solid;
+            border-width: 0 0 1px 0;
+
+            &:first-child {
+              border-width: 0 0 1px 1px;
+            }
+            &:last-child {
+              border-width: 0 1px 1px 0;
+            }
+          }
+
+          &:last-child {
+            td {
+              border-width: 0 0 1px 0;
+
+              &:first-child {
+                border-radius: 0 0 0 $border-rad-light;
+                border-width: 0 0 1px 1px;
+              }
+              &:last-child {
+                border-radius: 0 0 $border-rad-light 0;
+                border-width: 0 1px 1px 0;
+              }
+            }
+          }
+        }
+      }
+
+      &.as-cards {
+        border: 1px solid $sky;
+        border-radius: 4px;
+
+        thead {
+          tr {
+            margin: $space-base 0 0;
+            padding: 0 $space-base;
+            border-bottom: 1px solid $sky;
+
+            th {
+              border-width: 0;
+            }
+          }
+        }
+        tbody {
+          tr {
+            margin: $space-base;
+            width: calc(100% - #{$space-base}*2);
+
+            td {
+              border-top-width: 1px;
+            }
+          }
+        }
+      }
+    }
+  }
+}

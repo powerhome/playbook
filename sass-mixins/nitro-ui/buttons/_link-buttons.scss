@@ -1,0 +1,53 @@
+@mixin link-button-hover($color) {
+  text-shadow: none;
+  text-decoration: none;
+  outline: 0;
+  border-color: transparent;
+  @if lightness($color) > 75% {
+    color: tint($color, 40%);
+  }
+  @else {
+    color: shade($color, 40%);
+  }
+}
+
+@mixin link-button-disabled($color) {
+  cursor: not-allowed;
+  opacity: $opacity-7;
+}
+
+@mixin link-button($color) {
+  text-align: initial;
+  @include button-base;
+  @include btn-styles;
+  color: $color;
+  background: none;
+  &:focus, &.focus {
+    @include link-button-hover($color);
+  }
+  &:hover {
+    @include link-button-hover($color);
+  }
+  &:active, &.active, .open > &.dropdown-toggle {
+    @include link-button-hover($color);
+    &:hover, &:focus, &.focus {
+      @include link-button-hover($color);
+    }
+  }
+  &:active, &.active, .open > &.dropdown-toggle {
+    background-image: none;
+  }
+  &.disabled, &[disabled], fieldset[disabled] & {
+    &, &:hover, &:focus, &.focus, &:active, &.active {
+      @include link-button-disabled($color);
+    }
+  }
+}
+
+@mixin link-button-colors($colors-list) {
+  @each $name, $color in $colors-list {
+    &-#{$name} {
+      @include link-button($color);
+    }
+  }
+}

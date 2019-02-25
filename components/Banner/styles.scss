@@ -1,0 +1,75 @@
+@import "base-mixins/_all.scss";
+@import "base-variables/_all.scss";
+
+$notifyHeight: 64px;
+
+@mixin banner {
+  position: fixed;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  text-align: center;
+  height: $notifyHeight;
+  padding: $space-base * 1.5 $space-base * 2;
+  color: $sky-lighter;
+  font-size: $font-large;
+  @include transition-property(top, bottom);
+  @include transition-duration(.5s);
+  @include transition-timing-function(ease);
+
+  @include tablet-and-below {
+    font-size: $font-base;
+    padding: $space-base * 2;
+    &-close {
+      font-size: $font-small;
+    }
+  }
+
+  a {
+    color: $sky-lighter;
+    text-decoration: underline;
+  }
+}
+
+.banner {
+  &-info {
+    @include banner;
+    background: $power-blue;
+  }
+  &-success {
+    @include banner;
+    background: $power-green;
+  }
+  &-warning {
+    @include banner;
+    background: $dark-orange;
+  }
+  &-danger {
+    @include banner;
+    background: $power-red;
+  }
+}
+
+.close {
+  color: $sky-lighter;
+  opacity: 1;
+  font-size: $font-largest;
+  font-weight: 300;
+}
+
+.show {
+  &-top {
+    top: 0;
+  }
+  &-bottom {
+    bottom: 0;
+  }
+}
+.hide {
+  &-top {
+    top: -$notifyHeight;
+  }
+  &-bottom {
+    bottom: -$notifyHeight;
+  }
+}

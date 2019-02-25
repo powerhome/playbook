@@ -1,0 +1,13 @@
+table {
+  &.table-sm,
+  &.table-md,
+  &.table-lg {
+    tbody {
+      tr {
+        td {
+          font-size: $default-font-size;
+        }
+      }
+    }
+  }
+}

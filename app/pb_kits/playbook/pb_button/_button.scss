@@ -1,0 +1,65 @@
+@mixin kit_btn {
+  line-height: 38px;
+  padding: 0 15px;
+  border-radius: 4px;
+  border: 1px solid $ink_lightest;
+  font-size: 14px;
+  background: transparent;
+}
+
+@mixin sizes {
+  &_large {
+    font-size: $font_large;
+    padding: 0 15px;
+    height: 40px;
+    color: $ink_lightest;
+  }
+
+  &_small {
+    font-size: $font_smaller;
+    padding: 0 7px;
+    height: 24px;
+    line-height: normal;
+    color: $ink_lightest;
+  }
+}
+
+.kit_btn_wrapper {
+  margin: 0 auto;
+  width: 100%;
+
+  .kit_btn {
+   @include kit_btn;
+   @include sizes;
+
+    &.red {
+      background: $power_red;
+      border: none;
+      color: $white;
+    }
+
+    &_primary {
+      @include kit_btn;
+      @include sizes;
+      background: $power_royal;
+      border: none;
+      color: $white;
+    }
+
+    &_danger {
+      @include kit_btn;
+      @include sizes;
+      background: $power_red;
+      border: none;
+      color: $white;
+    }
+
+    &_dashed {
+      @include kit_btn;
+      @include sizes;
+      background-color: $white;
+      color: $ink_lightest;
+      border: dashed 1px $ink_lightest;
+    }
+  }
+}
