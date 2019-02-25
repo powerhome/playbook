@@ -1,0 +1,81 @@
+@import "base-mixins/_all.scss";
+@import "base-variables/_all.scss";
+
+$file-icon-size: 80px;
+
+.file-card {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+
+  .lock {
+    position: absolute;
+    top: $space-small;
+    right: $space-small;
+    color: $gray-5;
+  }
+
+  .file-type-box {
+    padding: $space-largest $space-large $space-jumbo;
+    text-align: center;
+
+    .icon-large {
+      font-size: $file-icon-size;
+      line-height: $file-icon-size;
+      display: block;
+      color: $power-royal;
+    }
+  }
+
+  .file-content-box {
+    padding: $space-large $space-large;
+    border-top: 1px solid $gray-2;
+
+    display: flex;
+    flex-grow: 1;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;  
+  }
+
+  &.layout-{
+    &vertical {}
+    &horizontal {
+      display: flex;
+      flex-direction: row;
+
+      .file-type-box {
+        width: $file-icon-size;
+        box-sizing: border-box;
+        border-right: 1px solid $gray-2;
+        vertical-align: middle;
+        padding: $space-large;
+        flex: 0 0 $file-icon-size;
+
+        .icon-large {
+          font-size: $file-icon-size/2.5;
+          line-height: $file-icon-size - $space-large;
+        }
+      }
+      .file-content-box {
+        border-top: 0;
+        vertical-align: middle;
+        padding: $space-base $space-large;
+        flex: 0 0 calc(100% - #{$file-icon-size});
+
+        h5 {
+          line-height: 17.5px;
+          height: 17.5px;
+        }
+      }
+
+      &::after {
+        content: '';
+        clear: both;
+        float: none;
+        display: block;
+        width: 100%;
+      }
+    }
+  }
+}

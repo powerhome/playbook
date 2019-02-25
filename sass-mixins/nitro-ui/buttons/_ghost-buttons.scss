@@ -1,0 +1,58 @@
+@mixin ghost-button-hover($color, $active: false) {
+  text-decoration: none;
+  outline: 0;
+  @if $active {
+    background: tint($color, 10%);
+    @include text-color(tint($color, 10%), $more_contrast: true);
+    border-color: tint($color, 10%);
+  }
+  @else {
+    background: $color;
+    @include text-color($color, false, $more_contrast: true);
+    border-color: $color;
+  }
+}
+
+@mixin ghost-button-disabled($color) {
+  cursor: not-allowed;
+  opacity: $opacity-7;
+  background: none;
+  color: $color;
+  text-decoration: none;
+}
+
+@mixin ghost-button($color: white) {
+  @include button-base;
+  @include btn-styles;
+  background: none;
+  border-color: $color;
+  color: $black;
+  &:focus, &.focus {
+    @include ghost-button-hover($color);
+  }
+  &:hover {
+    @include ghost-button-hover($color);
+  }
+  &:active, &.active, .open > &.dropdown-toggle {
+    @include ghost-button-hover($color);
+    &:hover, &:focus, &.focus {
+      @include btn-hover($color);
+    }
+  }
+  &:active, &.active, .open > &.dropdown-toggle {
+    background-image: none;
+  }
+  &.disabled, &[disabled], fieldset[disabled] & {
+    &, &:hover, &:focus, &.focus, &:active, &.active {
+      @include ghost-button-disabled($color);
+    }
+  }
+}
+
+@mixin ghost-button-colors($colors-list) {
+  @each $name, $color in $colors-list {
+    &-#{$name} {
+      @include ghost-button($color);
+    }
+  }
+}

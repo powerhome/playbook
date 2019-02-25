@@ -1,0 +1,32 @@
+@import "base-mixins/_all.scss";
+@import "base-variables/_all.scss";
+
+.panel {
+  &-collapsible {
+
+  }
+  &-title {
+    display: flex;
+    &-main {
+      line-height: $space-base;
+      vertical-align: text-bottom;
+      &-subtitled {
+        vertical-align: middle;
+      }
+    }
+    &-subtitle {
+      line-height: $space-base;
+      vertical-align: top;
+    }
+  }
+}
+
+
+.icon {
+  font-size: $font-largest;
+}
+
+.toggle {
+  font-size: $font-large;
+  padding: $space-large;
+}

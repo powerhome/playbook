@@ -1,0 +1,149 @@
+// This is a text pattern used to style up stats and values.
+
+
+.value-stat {
+  $selector: ".value-stat";
+  &-container {
+    line-height: $font-large;
+    height: $font-large;
+    position: relative;
+    font-size: 0;
+    display: block;
+  }
+  &-pre {
+    color: $ink;
+    font-size: $font-smaller;
+    position: relative;
+    top: -6px;
+    display: inline-block;
+    padding-right: 1px;
+    @include smooth-font-off;
+  }
+  &-value {
+    color: $ink;
+    font-size: $font-large;
+    font-weight: $bold;
+    display: inline-block;
+  }
+  &-post {
+    font-size: $font-smaller;
+    color: $ink-lightest;
+    display: inline-block;
+    padding-left: 1px;
+    @include smooth-font-off;
+  }
+  &-description {
+    color: $ink-lightest;
+    font-size: $font-smaller;
+    display: block;
+  }
+  &-subtext {
+    color: $ink-lightest;
+    font-size: $font-smaller;
+    font-style: italic;
+    font-weight: $light;
+    display: block;
+  }
+  &.mega {
+    $font-mega: 40px;
+    #{$selector}-container {
+      line-height: $font-mega;
+      height: $font-mega;
+    }
+    #{$selector}-value {
+      font-size: ($font-mega - 2px);
+    }
+    #{$selector}-pre {
+      font-size: $font-base + 4px;
+      top: -13px;
+    }
+    #{$selector}-post {
+      font-size: $font-base + 2px;
+    }
+  }
+  &.jumbo {
+    #{$selector}-container {
+      line-height: $font-jumbo;
+      height: $font-jumbo;
+    }
+    #{$selector}-value {
+      font-size: ($font-jumbo - 2px);
+    }
+    #{$selector}-pre {
+      font-size: $font-base + 2px;
+      top: -11px;
+    }
+    #{$selector}-post {
+      font-size: $font-base;
+    }
+  }
+  &.largest {
+    #{$selector}-value {
+      font-size: $font-largest;
+    }
+    #{$selector}-pre {
+      font-size: $font-base;
+      top: -9px;
+    }
+    #{$selector}-post {
+      font-size: $font-small;
+    }
+  }
+  &.large {
+    #{$selector}-value {
+      font-size: $font-larger;
+    }
+    #{$selector}-pre {
+      font-size: $font-base;
+      top: -9px;
+    }
+    #{$selector}-post {
+      font-size: $font-small;
+    }
+  }
+  &.small {
+    #{$selector}-value {
+      font-size: $font-base;
+    }
+    #{$selector}-pre {
+      font-size: $font-smaller;
+      top: -3px;
+    }
+    #{$selector}-post {
+      font-size: $font-smaller;
+      padding-left: 2px;
+    }
+  }
+  &.white {
+    #{$selector}-value, #{$selector}-pre {
+      color: $white;
+      @include smooth-font;
+    }
+    #{$selector}-post, #{$selector}-description, #{$selector}-subtext {
+      color: $white-opacity-5;
+    }
+  }
+  &.royal {
+    #{$selector}-value, #{$selector}-pre {
+      color: $power-royal;
+      @include smooth-font;
+    }
+  }
+  &.green {
+    #{$selector}-value, #{$selector}-pre {
+      color: $power-green;
+      @include smooth-font;
+    }
+  }
+  &.red {
+    #{$selector}-value, #{$selector}-pre {
+      color: $power-red;
+      @include smooth-font;
+    }
+  }
+  &.one-line {
+    #{$selector}-container {
+      display: inline-block;
+    }
+  }
+}

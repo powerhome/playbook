@@ -1,0 +1,5 @@
+@import "caption_mixin";
+
+.caption {
+  @include caption;
+}

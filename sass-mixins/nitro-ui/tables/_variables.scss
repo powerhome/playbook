@@ -1,0 +1,23 @@
+//--------- PADDING ---------//
+
+// Cell padding between cells
+$cell-gutter: $space-base;
+
+// First & last cell padding
+$cell-pad-endcap: $space-largest;
+
+// Vertical cell padding
+$cell-pad-sm: $space-base;
+$cell-pad-md: $space-large;
+$cell-pad-lg: $space-largest;
+
+$cell-pad-list: (
+  table-sm: $cell-pad-sm,
+  table-md: $cell-pad-md,
+  table-lg: $cell-pad-lg
+);
+
+//--------- CONTENT ---------//
+
+$default-header-size: $font-smaller;
+$default-font-size: $font-small;

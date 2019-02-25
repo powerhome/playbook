@@ -1,0 +1,24 @@
+@import '../../sass-mixins/base-variables/colors';
+@import '../../sass-mixins/base-mixins/all';
+//highlight
+$borderStyle: "solid";
+$sides: "top" "right" "bottom" "left" ;
+$borderWidth: 4px;
+
+@mixin config-highlight-colors($prefix) {
+  @each $color in $power-colors {
+    .#{$prefix}-#{nth($color, 1)} {
+      border-color: #{nth($color,2)} !important;
+    }
+  }
+}
+
+@include config-highlight-colors("highlight");
+@each $side in $sides {
+
+  .highlight-#{$side} {
+    border:0;
+    border-#{$side}-style: #{$borderStyle};
+    border-#{$side}-width: $borderWidth;
+  }
+}

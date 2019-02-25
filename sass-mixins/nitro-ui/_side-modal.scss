@@ -1,0 +1,92 @@
+$modalSides:
+  "leftModal" 0 auto -25%,
+  "rightModal" auto 0 25%;
+
+@each $side in $modalSides{
+  .#{nth($side,1)}{
+    .modal-dialog {
+      position: fixed;
+      margin: 0;
+      right: #{nth($side,3)};
+      top: 0;
+      left: #{nth($side,2)};
+      bottom: auto;
+      height: 100vh;
+      width: 100%;
+      max-width: 40vw;
+
+
+      .mobile_close {
+        display: none;
+      }
+      @include media-max-width($screen-sm-min) {
+        max-width: 100%;
+
+        .mobile_close {
+          display: block;
+        }
+      }
+
+      .modal-content {
+        height: 100%;
+        border-radius: 0;
+        overflow-y: auto;
+      }
+
+
+    }
+
+
+    &.fade:not(.in) .modal-dialog {
+      -webkit-transform: translate3d(#{nth($side,4)},0,0);
+      transform: translate3d(#{nth($side,4)}, 0, 0);
+    }
+
+
+
+  //Sizes
+    $screenSizes:
+      "-xxs" 80px,
+      "-xs" 250px,
+      "-sm" 400px,
+      "-md" 60vw,
+      "-lg" 75vw,
+      "-xl" 85vw,
+      "-full" 100vw,
+      "-600" 600px
+      "-1000" 1000px;
+
+    $collapsedSizes:
+      "-xs",
+      "-sm",
+      "-md",
+      "-lg";
+
+     @each $size in $screenSizes{
+       &#{nth($size,1)} {
+         .modal-dialog {
+           max-width: #{nth($size,2)} !important;
+         }
+       }
+     }
+
+     @each $size in $collapsedSizes{
+       $collapseAt:"-collapse#{$size}" "$screen#{$size}-min" ;
+       &#{nth($collapseAt,1)}{
+         @include media-max-width(#{nth($collapseAt,2)}) {
+           .modal-dialog {
+             max-width: 100% !important ;
+
+             .mobile_close {
+               display: block;
+             }
+           }
+         }
+       }
+     }
+   }
+ }
+
+
+
+//starting edits

@@ -1,0 +1,88 @@
+@import "../tokens/colors";
+@import "../tokens/spacing";
+@import "../tokens/screen_sizes";
+@import "./sidebar_mixin";
+
+.sidebar {
+
+  $sidebar_sizes: (
+    "xs":   64px,
+    "sm":   200px,
+    "md":   250px,
+    "base": 250px,
+    "lg":   300px,
+    "xl":   365px,
+  );
+  $positions: (
+    "left",
+    "right",
+  );
+  $colors: (
+    "light",
+    "dark",
+    "transparent",
+  );
+
+  // Sections
+  &_section {
+    padding: $space_base $space_largest;
+    &_border {
+      padding: $space_base $space_largest;
+      border-bottom: 1px solid $sky;
+      &_margin {
+        margin: $space_base $space_largest;
+        border-bottom: 1px solid $sky;
+      }
+    }
+  }
+
+  // Aside and Body
+  @each $name, $size in $sidebar_sizes {
+    &_#{$name} {
+      @each $position in $positions {
+        &_#{$position} {
+          @each $color in $colors {
+            @if $color == "light" {
+              @include sidebar_settings($size, $position, $color, "#{&}");
+            } @else {
+              &_#{$color} {
+                @include sidebar_settings($size, $position, $color, "#{&}");
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+
+  // Collapse Settings
+  @each $position in $positions {
+    @each $breakpoint_name, $breakpoint in $breakpoints {
+      &_#{$position}_collapse_#{$breakpoint_name} {
+        @include break_at($breakpoint) {
+          @if $position == 'left' {
+            grid-template-areas: "sidebar_collapsed_#{$breakpoint_name}_aside" "sidebar_collapsed_#{$breakpoint_name}_body";
+            grid-template-rows: auto 1fr;
+
+          } @else {
+            grid-template-areas: "sidebar_collapsed_#{$breakpoint_name}_body" "sidebar_collapsed_#{$breakpoint_name}_aside";
+            grid-template-rows: 1fr auto;
+          }
+          grid-template-columns: 1fr;
+          &.full {
+            min-height: auto !important;
+          }
+          .sidebar_aside {
+            grid-area: sidebar_collapsed_#{$breakpoint_name}_aside;
+            border-width: 0 0 1px 0;
+          }
+          .sidebar_body {
+            grid-area: sidebar_collapsed_#{$breakpoint_name}_body;
+          }
+        }
+      }
+    }
+  }
+
+}

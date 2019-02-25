@@ -1,0 +1,23 @@
+<div id="pb--codeRails" class="pb--codeCopy">
+  <%= object.snippet %>
+</div>
+<% if defined?(object.props) && object.props.present? %>
+  <div class="pb--propsTable">
+    <table class="pb--propsTable--table">
+      <thead>
+        <tr>
+          <th>Prop</th>
+          <th>Value</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% object.props.each_with_index do |(key,value),index| %>
+          <tr>
+            <td><%= key %></td>
+            <td><%= value %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+<% end %>

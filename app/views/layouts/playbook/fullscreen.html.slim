@@ -1,0 +1,10 @@
+doctype html
+html
+  head
+    title Playbook Design System
+    = csrf_meta_tags
+    = csp_meta_tag
+    = stylesheet_pack_tag 'main'
+    = javascript_pack_tag 'application'
+  body
+    = yield

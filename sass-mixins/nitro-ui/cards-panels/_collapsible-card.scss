@@ -1,0 +1,19 @@
+.collapsible-card {
+  flex-direction: row;
+  flex-wrap: wrap;
+  &-top-content {
+    flex: 1;
+  }
+  &-hidden {
+    width: 100%;
+    &-content {
+      border-top: 1px solid $sky;
+    }
+  }
+
+  .btn-card-toggle {
+    flex-basis: auto;
+    flex-grow: 0;
+    flex-shrink: 0;
+  }
+}

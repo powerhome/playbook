@@ -1,0 +1,59 @@
+@import "../tokens/screen_sizes";
+
+@function str_replace($string, $search, $replace: '') {
+  $index: str_index($string, $search);
+  @if $index {
+    @return str_slice($string, 1, $index - 1) + $replace + str_replace(str_slice($string, $index + str_length($search)), $search, $replace);
+  }
+  @return $string;
+}
+
+@mixin sidebar_settings($size, $side, $color, $selector) {
+  $parent_name: str_replace($selector, '.', '');
+  $name: ".sidebar";
+  display: grid;
+
+  &.full {
+    min-height: 100vh;
+  }
+  @if $side == 'left' {
+    grid-template-areas: "#{$parent_name}_aside #{$parent_name}_body";
+    grid-template-columns: $size auto;
+  } @else {
+    grid-template-areas: "#{$parent_name}_body #{$parent_name}_aside";
+    grid-template-columns: auto $size;
+  }
+
+  > #{$name}_body {
+    grid-area: #{$parent_name}_body;
+  }
+  > #{$name}_aside {
+    grid-area: #{$parent_name}_aside;
+    @if $side == 'left' {
+      border-width: 0 1px 0 0;
+      border-style: solid;
+      @if $color == 'dark' {
+        background: $white_opacity_1;
+        border-color: $white_opacity_1;
+      } @else if $color == 'transparent' {
+        border-color: transparent;
+      } @else {
+        background: $white;
+        border-color: $sky;
+      }
+    }
+    @if $side == 'right' {
+      border-width: 0 0 0 1px;
+      border-style: solid;
+      @if $color == 'dark' {
+        background: $white_opacity_1;
+        border-color: $white_opacity_1;
+      } @else if $color == 'transparent' {
+        border-color: transparent;
+      } @else {
+        background: $white;
+        border-color: $sky;
+      }
+    }
+  }
+}
