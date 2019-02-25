@@ -1,0 +1,30 @@
+
+
+
+.circlebutton{
+  text-align: center !important;
+  border: none !important;
+  border-radius: 100% !important;
+  border: none;
+  appearance: none;
+
+}
+
+
+$circleButtonSizes:
+"md" 48px 16px,
+"lg" 56px 20px;
+
+@mixin config-sizes($prefix){
+  @each $size in $circleButtonSizes {
+    .#{$prefix}-#{nth($size,1)} {
+      text-align: center;
+      border-radius: 100%;
+      height: #{nth($size,2)} !important;
+      width: #{nth($size,2)}!important;
+      font-size: #{nth($size,3)} !important;
+    }
+  }
+}
+
+@include config-sizes("circlebutton");

@@ -1,0 +1,69 @@
+@mixin btn-hover($base-color, $active: false) {
+  outline: 0;
+  @if $active {
+    background: tint($base_color, 30%);
+    border-color: tint($base_color, 30%);
+    @include text-color(tint($base_color, 10%), $more_contrast: true);
+    text-shadow: none;
+    text-decoration: none;
+  }
+  @else {
+    background: tint($base_color, 20%);
+    border-color: tint($base_color, 20%);
+    @include text-color($base_color);
+    text-shadow: none;
+    text-decoration: none;
+  }
+}
+
+@mixin btn-disabled($base-color) {
+  cursor: not-allowed;
+  opacity: $opacity-7;
+  background: $gray-2;
+  border-color: $gray-2;
+  @include text-color($gray-2, false);
+  box-shadow: none;
+  text-shadow: none;
+  text-decoration: none;
+}
+
+@mixin solid-button($color) {
+  @include button-base;
+  @include btn-styles;
+  border-color: $color;
+  background: $color;
+  @include text-color($color, $more_contrast: true);
+  &:focus, &.focus {
+    @include btn-hover($color);
+  }
+  &:hover {
+    @include btn-hover($color);
+  }
+  &:active, &.active, .open > &.dropdown-toggle {
+    @include btn-hover($color, true);
+    &:hover, &:focus, &.focus {
+      @include btn-hover($color);
+    }
+  }
+  &:active, &.active, .open > &.dropdown-toggle {
+    background-image: none;
+  }
+  &.disabled, &[disabled], fieldset[disabled] & {
+    &, &:hover, &:focus, &.focus, &:active, &.active {
+      @include btn-disabled($color);
+    }
+  }
+  // Move?
+  .badge {
+    @include text-color(shade($color, 35%));
+    background-color: shade($color, 20%);
+  }
+}
+
+@mixin solid-button-colors($colors-list) {
+  @each $name, $color in $colors-list {
+    &-#{$name} {
+      @include solid-button($color);
+    }
+  }
+}

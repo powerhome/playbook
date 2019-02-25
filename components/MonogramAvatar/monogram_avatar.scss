@@ -1,0 +1,54 @@
+@import "base-variables/_colors.scss";
+@import "base-variables/_typography.sass";
+
+.monogram-avatar {
+
+  @mixin monogram-avatar($size, $border-width, $font-scale-factor) {
+    color: $white;
+    display: inline-block;
+    font-size: $size * $font-scale-factor;
+    height: $size;
+    line-height: $size;
+    overflow: hidden;
+    width: $size;
+    img, p {
+      background: $ink-lightest;
+      text-align: center;
+      border-radius: $border-width;
+    }
+    &.with-border {
+      border-color: $white;
+      border-radius: $border-width;
+      border-style: solid;
+      border-width: $border-width;
+      line-height: $size - (2 * $border-width);
+      img, p {
+        border-radius: 0;
+      }
+      img {
+        margin-left: -$border-width;
+        margin-top: -$border-width;
+      }
+    }
+  }
+
+  &-smaller {
+    @include monogram-avatar(30px, 2px, 0.4);
+  }
+
+  &-small {
+    @include monogram-avatar(60px, 2px, 0.32);
+  }
+
+  &-base {
+    @include monogram-avatar(90px, 4px, 0.32)
+  }
+
+  &-large {
+    @include monogram-avatar(115px, 4px, 0.32)
+  }
+
+  &-larger {
+    @include monogram-avatar(197px, 6px, 0.32)
+  }
+}

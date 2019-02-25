@@ -1,0 +1,516 @@
+$dashboard-container: transparent;
+$dashboard-region: transparent;
+$dashboard-border-width: 1px;
+$dashboard-border-color: $sky;
+
+@mixin flexbox {
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: -moz-flex;
+	display: -ms-flexbox;
+	display: flex;
+}
+
+@mixin flex-direction($value: row) {
+	@if $value == row-reverse {
+		-webkit-box-direction: reverse;
+		-webkit-box-orient: horizontal;
+	} @else if $value == column {
+		-webkit-box-direction: normal;
+		-webkit-box-orient: vertical;
+	} @else if $value == column-reverse {
+		-webkit-box-direction: reverse;
+		-webkit-box-orient: vertical;
+	} @else {
+		-webkit-box-direction: normal;
+		-webkit-box-orient: horizontal;
+	}
+	-webkit-flex-direction: $value;
+	-moz-flex-direction: $value;
+	-ms-flex-direction: $value;
+	flex-direction: $value;
+}
+
+@mixin flex-grow($int: 0) {
+	-webkit-box-flex: $int;
+	-webkit-flex-grow: $int;
+	-moz-flex-grow: $int;
+	-ms-flex-positive: $int;
+	flex-grow: $int;
+}
+
+@mixin flex-shrink($int: 1) {
+	-webkit-flex-shrink: $int;
+	-moz-flex-shrink: $int;
+	-ms-flex-negative: $int;
+	flex-shrink: $int;
+}
+
+@mixin flex-wrap($value: nowrap) {
+	// No Webkit Box fallback.
+	-webkit-flex-wrap: $value;
+	-moz-flex-wrap: $value;
+	@if $value == nowrap {
+		-ms-flex-wrap: none;
+	} @else {
+		-ms-flex-wrap: $value;
+	}
+	flex-wrap: $value;
+}
+
+.dashboard_container {
+  box-sizing: border-box;
+  @include flexbox;
+  @include flex-direction(row);
+  @include flex-grow(1);
+  @include flex-shrink(0);
+  @include flex-wrap(wrap);
+  margin: 0;
+  margin: 0;
+
+  &> div {
+    @include flexbox;
+    @include flex-grow(1);
+    @include flex-shrink(0);
+    align-items: stretch;
+    justify-content: center;
+    margin: 0;
+    padding: 0;
+
+    &> * {
+      @include flex-shrink(0);
+      width: 100%;
+    }
+  }
+
+  .expand {
+    @include flexbox;
+    justify-content: center;
+    height: 100%;
+  }
+
+  .dashboard_region {
+    @include flexbox;
+    @include flex-direction(column);
+    @include flex-wrap(nowrap);
+    @include flex-grow(1);
+    @include flex-shrink(0);
+    height: 100%;
+    margin: 0;
+
+    &> div {
+      @include flex-grow(1);
+      @include flex-shrink(0);
+      @include flexbox;
+      @include flex-direction(column);
+      align-items: stretch;
+      justify-content: center;
+      margin: 0;
+      padding: 0;
+			background: $dashboard-region;
+      width: 100%;
+
+      &> * {
+        @include flex-shrink(0);
+        // width: 100%;
+      }
+
+      iframe {
+        width: 100%;
+        border: 0;
+      }
+    }
+
+    .dashboard_flex_row {
+      clear: both;
+      float: none;
+      width: 100%;
+      @include flexbox;
+      @include flex-direction(row);
+      @include flex-grow(0);
+      @include flex-shrink(0);
+
+      &> div {
+        @include flexbox;
+        @include flex-grow(1);
+        @include flex-shrink(0);
+        align-items: stretch;
+        justify-content: center;
+        margin: 0;
+        padding: 0;
+
+        &> * {
+          @include flex-shrink(0);
+          width: 100%;
+        }
+      }
+
+      &.grid {
+        @include flex-wrap(wrap);
+      }
+    }
+
+    .dashboard_flex_column {
+      clear: both;
+      float: none;
+      width: 100%;
+      @include flexbox;
+      @include flex-direction(column);
+      @include flex-grow(1);
+      @include flex-shrink(0);
+
+      &> div {
+        @include flex-grow(1);
+        @include flex-shrink(0);
+        @include flexbox;
+        align-items: stretch;
+        justify-content: center;
+        margin: 0;
+        padding: 0;
+
+        &> * {
+          @include flex-shrink(0);
+          width: 100%;
+        }
+      }
+    }
+
+    &.flip {
+      @include flex-direction(column-reverse);
+    }
+  }
+
+  &.flip {
+    .dashboard_region {
+      @include flex-direction(column-reverse);
+    }
+  }
+  &.reverse {
+    @include flex-direction(row-reverse);
+  }
+
+	&.dashboard_bordered {
+		.dashboard_region {
+			& > div {
+        border-width: $dashboard-border-width;
+        border-bottom-width: 0;
+        border-color: $dashboard-border-color;
+        border-style: solid;
+
+        &.dashboard_flex_row {
+          border-width: 0;
+
+          & > div {
+            border-width: $dashboard-border-width;
+            border-right-width: 0;
+            border-bottom-width: 0;
+            border-color: $dashboard-border-color;
+            border-style: solid;
+
+            &:last-child {
+              border-right-width: $dashboard-border-width;
+            }
+          }
+        }
+
+        &:last-child {
+          border-bottom-width: $dashboard-border-width;
+
+          &.dashboard_flex_row {
+            border-bottom-width: $dashboard-border-width;
+          }
+          .dashboard_flex_column {
+            border-width: 0;
+          }
+        }
+      }
+      .dashboard_flex_column {
+        border-width: 0;
+
+        & > div {
+          border-width: 0;
+          border-bottom-width: $dashboard-border-width;
+          border-color: $dashboard-border-color;
+          border-style: solid;
+
+          &:last-child {
+            border-bottom-width: 0;
+          }
+        }
+      }
+		}
+	}
+  @for $i from 1 through 10 {
+     &.border-width-#{$i} {
+       .dashboard_region {
+          & > div {
+           border-width: #{$i}px;
+           border-bottom-width: 0;
+
+           &.dashboard_flex_row {
+             border-width: 0;
+
+             & > div {
+               border-width: #{$i}px;
+               border-right-width: 0;
+               border-bottom-width: 0;
+
+               &:last-child {
+                 border-right-width: #{$i}px;
+               }
+             }
+           }
+
+           &:last-child {
+             border-bottom-width: #{$i}px;
+
+             &.dashboard_flex_row {
+               border-bottom-width: #{$i}px;
+             }
+             .dashboard_flex_column {
+               border-width: 0;
+             }
+           }
+          }
+          .dashboard_flex_column {
+           border-width: 0;
+
+           & > div {
+             border-width: 0;
+             border-bottom-width: #{$i}px;
+
+             &:last-child {
+               border-bottom-width: 0;
+             }
+           }
+          }
+        }
+     }
+  }
+
+  &.kiosk {
+    height: 100vh;
+    width: 100vw;
+
+    .dashboard_flex_row {
+      flex-grow: 1;
+    }
+
+    .flex-no-grow {
+      flex-grow: 0;
+    }
+    .flex-no-shrink {
+      flex-shrink: 0;
+    }
+  }
+
+  .border-right {
+    border-right-style: solid;
+    border-right-width: 1px;
+  }
+  .border-left {
+    border-right-style: solid;
+    border-left-width: 1px;
+  }
+  .border-top {
+    border-right-style: solid;
+    border-top-width: 1px;
+  }
+  .border-bottom {
+    border-right-style: solid;
+    border-bottom-width: 1px;
+  }
+
+  .border-right-0 {
+    border-right-width: 0;
+  }
+  .border-left-0 {
+    border-left-width: 0;
+  }
+  .border-top-0 {
+    border-top-width: 0;
+  }
+  .border-bottom-0 {
+    border-bottom-width: 0;
+  }
+}
+
+@media (max-width: 575px) {
+  .dashboard_container {
+    .xs-flex-nowrap {
+      @include flex-wrap(nowrap);
+    }
+    .xs-flex-wrap {
+      @include flex-wrap(wrap);
+    }
+    .xs-text-center {
+      text-align: center;
+    }
+    .xs-text-left {
+      text-align: left;
+    }
+    .xs-text-right {
+      text-align: right;
+    }
+    .xs-border-right {
+      border-right-style: solid;
+      border-right-width: 1px;
+    }
+    .xs-border-left {
+      border-left-style: solid;
+      border-left-width: 1px;
+    }
+    .xs-border-top {
+      border-top-style: solid;
+      border-top-width: 1px;
+    }
+    .xs-border-bottom {
+      border-bottom-style: solid;
+      border-bottom-width: 1px;
+    }
+  }
+}
+
+@media (min-width: 576px) and (max-width: 768px) {
+  .dashboard_container {
+    .sm-flex-nowrap {
+      @include flex-wrap(nowrap);
+    }
+    .sm-flex-wrap {
+      @include flex-wrap(wrap);
+    }
+    .sm-text-center {
+      text-align: center;
+    }
+    .sm-text-left {
+      text-align: left;
+    }
+    .sm-text-right {
+      text-align: right;
+    }
+    .sm-border-right {
+      border-right-style: solid;
+      border-right-width: 1px;
+    }
+    .sm-border-left {
+      border-left-style: solid;
+      border-left-width: 1px;
+    }
+    .sm-border-top {
+      border-top-style: solid;
+      border-top-width: 1px;
+    }
+    .sm-border-bottom {
+      border-bottom-style: solid;
+      border-bottom-width: 1px;
+    }
+  }
+}
+
+@media (min-width: 769px) and (max-width: 992px) {
+  .dashboard_container {
+    .md-flex-nowrap {
+      @include flex-wrap(nowrap);
+    }
+    .md-flex-wrap {
+      @include flex-wrap(wrap);
+    }
+    .md-text-center {
+      text-align: center;
+    }
+    .md-text-left {
+      text-align: left;
+    }
+    .md-text-right {
+      text-align: right;
+    }
+    .md-border-right {
+      border-right-style: solid;
+      border-right-width: 1px;
+    }
+    .md-border-left {
+      border-left-style: solid;
+      border-left-width: 1px;
+    }
+    .md-border-top {
+      border-top-style: solid;
+      border-top-width: 1px;
+    }
+    .md-border-bottom {
+      border-bottom-style: solid;
+      border-bottom-width: 1px;
+    }
+  }
+}
+
+@media (min-width: 993px) and (max-width: 1200px) {
+  .dashboard_container {
+    .lg-flex-nowrap {
+      @include flex-wrap(nowrap);
+    }
+    .lg-flex-wrap {
+      @include flex-wrap(wrap);
+    }
+    .lg-text-center {
+      text-align: center;
+    }
+    .lg-text-left {
+      text-align: left;
+    }
+    .lg-text-right {
+      text-align: right;
+    }
+    .lg-border-right {
+      border-right-style: solid;
+      border-right-width: 1px;
+    }
+    .lg-border-left {
+      border-left-style: solid;
+      border-left-width: 1px;
+    }
+    .lg-border-top {
+      border-top-style: solid;
+      border-top-width: 1px;
+    }
+    .lg-border-bottom {
+      border-bottom-style: solid;
+      border-bottom-width: 1px;
+    }
+  }
+}
+
+@media (min-width: 1201px) {
+  .dashboard_container {
+    .xl-flex-nowrap {
+      @include flex-wrap(nowrap);
+    }
+    .xl-flex-wrap {
+      @include flex-wrap(wrap);
+    }
+    .xl-text-center {
+      text-align: center;
+    }
+    .xl-text-left {
+      text-align: left;
+    }
+    .xl-text-right {
+      text-align: right;
+    }
+    .xl-border-right {
+      border-right-style: solid;
+      border-right-width: 1px;
+    }
+    .xl-border-left {
+      border-left-style: solid;
+      border-left-width: 1px;
+    }
+    .xl-border-top {
+      border-top-style: solid;
+      border-top-width: 1px;
+    }
+    .xl-border-bottom {
+      border-bottom-style: solid;
+      border-bottom-width: 1px;
+    }
+  }
+}

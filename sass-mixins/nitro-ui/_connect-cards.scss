@@ -1,0 +1,150 @@
+.connect-card {
+  $card-border: $sky;
+  border-radius: $border-rad-heaviest + 1px;
+  border: 1px solid $card-border;
+  box-shadow: $shadow-shallow;
+  background: $white;
+  min-height: $space-base;
+  overflow: hidden;
+  width: 250px;
+  .new-style & .btn {
+    margin-bottom: 0;
+  }
+  &-stat {
+    padding: $space-larger $space-base;
+    background: $white;
+    border-bottom: 1px solid $card-border;
+    &.bg-power-green, &.bg-ink, &.bg-power-navy, &.bg-power-navy-darker {
+      border: 0;
+    }
+  }
+  &-image {
+    img, .image {
+      display: block;
+      height: 155px;
+      width: 100%;
+      object-fit: cover;
+      background-size: cover;
+      background-position: center;
+    }
+  }
+  &-text {
+    padding: $space-larger $space-base;
+    background: $white;
+    border-bottom: 1px solid $card-border;
+    &-title {
+      font-size: $font-small;
+      color: $ink;
+    }
+    &-description {
+      color: $ink-lightest;
+      font-size: $font-smaller;
+      display: block;
+    }
+    &-subtext {
+      color: $ink-lightest;
+      font-size: $font-smaller;
+      font-style: italic;
+      font-weight: $light;
+      display: block;
+    }
+
+  }
+  &-list {
+    padding: $space-large $space-large $space-base $space-large;
+    .progress {
+      margin-bottom: 0;
+      &.small {
+        height: 10px;
+      }
+    }
+    &-title {
+      text-transform: uppercase;
+      color: $ink;
+      font-size: $font-base;
+      line-height: $font-base + 2px;
+      margin-bottom: $space-large;
+      svg {
+        float: left;
+        margin: 0 $space-base 0 0
+      }
+      small {
+        text-transform: none;
+        font-size: $font-smaller;
+        line-height: $font-smaller + 1px;
+        display: block;
+        color: $ink-lighter;
+      }
+    }
+    .one-line {
+      display: inline-block;
+    }
+    &-avatar {
+      width: 30px;
+      height: 30px;
+      border-radius: $border-rad-lighter;
+      object-fit: cover;
+      margin-right: $space-small;
+      display: block;
+    }
+    &-item {
+      display: block;
+      font-weight: $bold;
+      font-size: $font-small;
+      line-height: $font-base;
+      color: $ink;
+      margin-right: $space-small;
+      svg {
+        margin-right: $space-small;
+      }
+      small {
+        text-transform: uppercase;
+        font-weight: $regular;
+        font-size: $font-smaller;
+        color: $ink-lighter
+      }
+    }
+    &-value {
+      text-align: center;
+      margin-left: auto;
+      white-space: nowrap;
+      color: $ink-lighter;
+      font-size: $font-small;
+    }
+    ul, ol {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+    ol {
+      counter-reset: connect-list-counter;
+      li:before {
+        content: counter(connect-list-counter);
+        counter-increment: connect-list-counter;
+        display: block;
+        width: 20px;
+        flex: 0 0 20px;
+        text-align: center;
+        color: $ink-lightest;
+        font-weight: $bold;
+        margin-right: $space-small;
+      }
+    }
+    li {
+      border-bottom: 1px solid $card-border;
+      padding: $space-base 0;
+      display: flex;
+      align-items: center;
+      &:last-child {
+        border-bottom: 0;
+        padding-bottom: 0;
+      }
+    }
+    &.no-borders li {
+      border-bottom: 0;
+    }
+  }
+  div:last-child {
+    border-bottom: 0;
+  }
+}

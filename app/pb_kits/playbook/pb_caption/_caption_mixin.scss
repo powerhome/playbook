@@ -1,0 +1,23 @@
+@import "../tokens/colors";
+@import "../tokens/typography";
+
+@mixin caption($font_size: $font_smaller) {
+  &, &_dark {
+    @if $font_size == 12px {
+      font-weight: $bold;
+    }
+    text-transform: uppercase;
+    font-size: $font_size;
+  }
+  & {
+    color: $ink_lightest;
+  }
+  &_dark {
+    color: $white_opacity_6;
+  }
+}
+
+
+@mixin caption_lg {
+  @include caption($font_large);
+}

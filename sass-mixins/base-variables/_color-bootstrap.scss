@@ -1,0 +1,62 @@
+// BOOTSTRAP COLORS
+$gray:                      $gray-5;
+$gray-light:                $gray-3;
+$inverse:                   $white;
+$text-color:                $black;
+
+$gray-lightest:             $gray-2;
+
+
+// Brand colors
+$brand-primary:             $power-royal;
+$brand-secondary:           $gray-2; // Used all over...as accent...maybe background?
+$brand-success:             $power-green;
+$brand-warning:             $medium-yellow;
+$brand-danger:              $power-red;
+$brand-info:                $power-blue;
+
+
+$success-color:             $power-green;
+$success-bg-color:          $p-green-opacity-5;
+$danger-color:              $power-red;
+$danger-bg-color:           $p-red-opacity-5;
+$primary-color:             $power-royal;
+$primary-bg-color:          $p-royal-opacity-5;
+$info-color:                $power-navy;
+$info-color-alt:            $p-blue-opacity-8;
+$info-bg-color:             $p-blue-opacity-2;
+$warning-color:             $power-blue;
+$warning-bg-color:          $p-blue-opacity-5;
+
+
+
+// SPECIFIC UI
+$form-border-color:         $sky;
+$form-label-color:          #7F8FA4; // get from new blues
+$body-bg:                   $white;
+$text-color:                $gray-9;
+$link-color:                $power-navy;
+$link-hover-color:          $power-blue;
+$component-active-color:    $white;
+$component-active-bg:       $power-royal;
+
+
+
+
+
+// Type
+//
+//##
+
+//** Text muted color
+$text-muted:                  $gray-light;
+//** Abbreviations and acronyms border color
+$abbr-border-color:           $gray-light;
+//** Headings small color
+$headings-small-color:        mix($brand-primary, $inverse, 12%);
+//** Blockquote small color
+$blockquote-small-color:      inherit;
+//** Blockquote border color
+$blockquote-border-color:     mix($brand-primary, $inverse, 12%);
+//** Page header border color
+$page-header-border-color:    mix($brand-primary, $inverse, 12%);

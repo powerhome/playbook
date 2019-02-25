@@ -1,0 +1,40 @@
+{
+  "variations": [
+    {
+      "name": "default",
+      "props": {
+        "tag": "div",
+        "text": "Caption",
+        "large": false,
+        "dark": false
+      }
+    },
+    {
+      "name": "large",
+      "props": {
+        "tag": "div",
+        "text": "Caption",
+        "large": true,
+        "dark": false
+      }
+    },
+    {
+      "name": "default dark",
+      "props": {
+        "tag": "div",
+        "text": "Caption",
+        "large": false,
+        "dark": true
+      }
+    },
+    {
+      "name": "large dark",
+      "props": {
+        "tag": "div",
+        "text": "Caption",
+        "large": true,
+        "dark": true
+      }
+    }
+  ]
+}

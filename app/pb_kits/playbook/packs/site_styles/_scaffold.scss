@@ -1,0 +1,42 @@
+@import "../../tokens/fonts";
+@import "../../tokens/typography";
+@import "../../tokens/colors";
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  &:before,
+  &:after {
+    box-sizing: border-box;
+  }
+}
+
+html {
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  height: 100vh;
+}
+
+body {
+  font-family: $font_family_base;
+  font-size: $font_base;
+  line-height: 1.5;
+  background-color: $sky_lighter;
+  height: 100%;
+  letter-spacing: $lspace_normal;
+  font-weight: $regular;
+  font-style: normal;
+  text-rendering: optimizeLegibility;
+  -moz-font-feature-settings: "liga" on;
+  color: $black;
+  margin: 0 !important;
+  padding: 0 !important;
+  box-sizing: border-box;
+  min-height: 100vh;
+  padding: 50px; // REMOVE AFTER STYLED
+}
+
+a {
+  text-decoration: none;
+  color: $power_royal;
+}

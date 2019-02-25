@@ -1,9 +1,0 @@
-= form_for @page_tag do |f|
-  - if @page_tag.errors.any?
-    #error_explanation
-      h2 = "#{pluralize(@page_tag.errors.count, "error")} prohibited this page_tag from being saved:"
-      ul
-        - @page_tag.errors.full_messages.each do |message|
-          li = message
-
-  .actions = f.submit

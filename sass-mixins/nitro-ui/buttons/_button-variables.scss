@@ -1,0 +1,51 @@
+// ---------
+// Bootstrap Variables
+// ---------
+
+$btn-font-size-base:         $component-font-size-base;
+$btn-font-size-xs:           ceil($component-font-size-base * 0.80);   // ~12px
+$btn-font-size-sm:           floor($component-font-size-base * 0.867); // ~13px
+$btn-font-size-lg:           ceil($component-font-size-base * 1.133);  // ~17px
+$btn-font-size-hg:           floor($component-font-size-base * 1.467); // ~22px
+
+$btn-line-height-base:       1.4;   // ~21px
+$btn-line-height-hg:         1.227; // ~27px
+$btn-line-height-lg:         1.471; // ~25px
+$btn-line-height-sm:         1.385; // ~16px
+$btn-line-height-xs:         1.083; // ~13px
+
+$btn-social-font-size-base:   floor($component-font-size-base * 0.867); // ~13px
+$btn-social-line-height-base: 1.077;  // ~14px
+
+$btn-font-weight:            normal;
+
+$btn-default-color:          $inverse;
+$btn-default-bg:             $gray-light;
+$btn-hover-bg:               mix($gray-light, white, 80%);
+$btn-active-bg:              mix($gray-light, black, 85%);
+
+$btn-primary-hover-bg:       mix($brand-secondary, white, 80%);
+$btn-primary-active-bg:      mix($brand-secondary, black, 85%);
+
+$btn-info-hover-bg:          mix($brand-info, white, 80%);
+$btn-info-active-bg:         mix($brand-info, black, 85%);
+
+$btn-success-hover-bg:       mix($brand-success, white, 80%);
+$btn-success-active-bg:      mix($brand-success, black, 85%);
+
+$btn-danger-hover-bg:        mix($brand-danger, white, 80%);
+$btn-danger-active-bg:       mix($brand-danger, black, 85%);
+
+$btn-warning-hover-bg:       overlay($brand-warning, darken(white, 37.5%));
+$btn-warning-active-bg:      mix($brand-warning, black, 85%);
+
+$btn-inverse-hover-bg:       overlay($brand-primary, darken(white, 37.5%));
+$btn-inverse-active-bg:      mix($brand-primary, black, 85%);
+
+$btn-link-disabled-color:    $gray-light;
+
+
+// Allows for customizing button radius independently from global border radius
+$btn-border-radius-base:         $border-radius-base !default;
+$btn-border-radius-large:        $border-radius-large !default;
+$btn-border-radius-small:        $border-radius-small !default;

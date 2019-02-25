@@ -1,0 +1,77 @@
+$toggle-width: 60px;
+$toggle-height: 30px;
+$slider: $toggle-height - 4px;
+$slider-offset: 2px;
+$sliding-calculation: $toggle-width - $slider;
+
+.checkbox-toggle, .form-group .checkbox-toggle, .form-group.checkbox-toggle {
+
+  label {
+    padding-left: $toggle-width + $space-small;
+  }
+
+  input[type=checkbox] {
+    margin-top: 0;
+    margin-left: -($toggle-width + $space-small);
+    appearance: none;
+    background: $sky;
+    border-radius: 30px;
+    width: $toggle-width;
+    height: $toggle-height;
+    position: absolute;
+    border: 0;
+    padding-right: $sliding-calculation;
+    text-align: center;
+    outline: none;
+    ~ span {
+      padding-top: 4px;
+      display: inline-block;
+    }
+    &:hover {
+      &:before {
+        overflow: hidden;
+        width: 100%;
+      }
+    }
+    &:after {
+      border-radius: $border-rad-mega;
+      content: ' ';
+      background: $white;
+      display: inline-block;
+      width: $slider;
+      height: $slider;
+      position: relative;
+      top: $slider-offset;
+      left: $slider-offset;
+    }
+    &:checked {
+      background: $power-green;
+      border: 0;
+      padding-left: $sliding-calculation -$slider-offset*2;
+      padding-right: 0;
+      box-shadow: none;
+      &:after {
+        top: $slider-offset;
+        left: 0;
+        content: '';
+        transform: initial;
+        position: relative;
+      }
+    }
+    &:hover {
+      transform: scale(1);
+    }
+  }
+  &.toggle-right {
+    input[type=checkbox] {
+      right: 0;
+      margin-left: 0;
+    }
+    label {
+      padding-right: $toggle-width + $space-small;
+      padding-left: 0;
+    }
+
+
+  }
+}

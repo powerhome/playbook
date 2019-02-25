@@ -1,0 +1,32 @@
+{
+  "variations": [
+    {
+      "name": "default",
+      "props": {
+        "title": "Title",
+        "link": "#link"
+      },
+      "children": [
+        {
+          "type": "kit",
+          "value": {
+            "name": "vertical_nav_list/vertical_nav_list_item",
+            "props": {
+              "text": "I am a kit child",
+              "active": true
+            }
+          }
+        },
+        {
+          "type": "kit",
+          "value": {
+            "name": "vertical_nav_list/vertical_nav_list_item",
+            "props": {
+              "text": "fdfdsa"
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

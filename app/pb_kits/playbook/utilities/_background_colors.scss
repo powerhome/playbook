@@ -1,0 +1,14 @@
+@import "colors";
+
+@mixin color-classes($colors-list) {
+  @each $name, $color in $colors-list {
+    .bg-#{$name} {
+      background-color: $color !important;
+    }
+  }
+}
+
+
+@include color-classes($power-colors);
+@include color-classes($opacity-colors);
+@include color-classes($interface-colors);

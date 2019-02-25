@@ -1,9 +1,0 @@
-= form_for @section do |f|
-  - if @section.errors.any?
-    .notify_container.content_visible.notify
-      = render :partial => "shared/notify", locals: { position: "top", style: "error", message: "#{@section.errors.full_messages.join(",")}", animation: "fadeInDown"}
-
-  .form-group.label-inside
-    = f.label :name
-    = f.text_field(:name, class: 'form-control')
-  .actions = f.submit(class: "btn btn-power-blue")
