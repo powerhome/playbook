@@ -1,0 +1,212 @@
+//== Pagination
+//
+//##
+
+
+$pagination-color:                     mix($brand-primary, white, 20%);
+$pagination-bg:                        #fff;
+$pagination-border:                    #ddd;
+
+$pagination-hover-color:               $link-hover-color;
+$pagination-hover-bg:                  $gray-5;
+$pagination-hover-border:              #ddd;
+
+$pagination-active-color:              #fff;
+$pagination-active-bg:                 $brand-primary;
+$pagination-active-border:             $brand-primary;
+
+$pagination-disabled-color:            $gray-light;
+$pagination-disabled-bg:               #fff;
+$pagination-disabled-border:           #ddd;
+
+
+
+// Pagination
+
+@mixin pagination-size($padding-vertical, $padding-horizontal, $font-size, $line-height, $border-radius) {
+  > li {
+    > a,
+    > span {
+      padding: $padding-vertical $padding-horizontal;
+      font-size: $font-size;
+      line-height: $line-height;
+    }
+    &:first-child {
+      > a,
+      > span {
+        @include border-left-radius($border-radius);
+      }
+    }
+    &:last-child {
+      > a,
+      > span {
+        @include border-right-radius($border-radius);
+      }
+    }
+  }
+}
+
+
+
+
+
+//
+// Pagination (multiple pages)
+// --------------------------------------------------
+.pagination {
+  display: inline-block;
+  padding-left: 0;
+  margin: $line-height-computed 0;
+  border-radius: $border-radius-base;
+
+  > li {
+    display: inline; // Remove list-style and block-level defaults
+    > a,
+    > span {
+      position: relative;
+      float: left; // Collapse white-space
+      padding: 3px 13px;
+      line-height: $line-height-base;
+      text-decoration: none;
+      color: $sky-dark;
+      font-size: $font-small;
+      @include smooth-font;
+      background-color: $white;
+      border: 1px solid $border-color;
+      margin-left: -1px;
+      font-weight: $bold
+    }
+    &:first-child {
+      > a,
+      > span {
+        margin-left: 0;
+        @include border-left-radius($border-radius-base);
+      }
+    }
+    &:last-child {
+      > a,
+      > span {
+        @include border-right-radius($border-radius-base);
+      }
+    }
+  }
+
+  > li > a,
+  > li > span {
+    &:hover,
+    &:focus {
+      z-index: 3;
+      color: $ink-lighter;
+      // background-color: $pagination-hover-bg;
+      // border-color: $border-color;
+    }
+  }
+
+  > .active > a,
+  > .active > span {
+    &,
+    &:hover,
+    &:focus {
+      z-index: 2;
+      @include text-color($ink-lighter);
+      background-color: $ink-lighter;
+      // border-color: $ink-lighter;
+      cursor: default;
+    }
+  }
+
+  > .disabled {
+    display: none;
+    > span,
+    > span:hover,
+    > span:focus,
+    > a,
+    > a:hover,
+    > a:focus {
+      color: $pagination-disabled-color;
+      background-color: $pagination-disabled-bg;
+      border-color: $pagination-disabled-border;
+      cursor: $cursor-disabled;
+    }
+  }
+}
+
+// Sizing
+// --------------------------------------------------
+
+// Large
+.pagination-lg {
+  @include pagination-size($padding-large-vertical, $padding-large-horizontal, $font-size-large, $line-height-large, $border-radius-large);
+}
+
+// Small
+.pagination-sm {
+  @include pagination-size($padding-small-vertical, $padding-small-horizontal, $font-size-small, $line-height-small, $border-radius-small);
+}
+
+
+// OVERRIDES FROM NITRO
+
+/* Only show previous, active and next links in pagination for smaller screens */
+.pagination {
+  margin: 10px 0;
+
+  @media print { display: none; }
+
+  &.alpha {
+    margin: 0 0 15px 0;
+
+    a {
+      font-size: 18px;
+      padding: 0 6px;
+
+      &:hover, &:focus {
+        border-radius: 4px;
+        background-color: #b6ea64;
+        text-decoration: none;
+      }
+    }
+
+    .current {
+      border-radius: 4px;
+      font-size: 18px;
+      padding: 0 6px;
+    }
+
+    .disabled {
+      font-size: 18px;
+      padding: 0 6px;
+    }
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .pagination {
+    li {
+      display: none;
+
+      &.prev,
+      &.next,
+      &.active { display: inline; }
+    }
+  }
+}
+
+/* smallest viewport - like mobile app */
+@media (max-width: 380px) {
+
+  .pagination {
+    &.alpha {
+      position: absolute;
+      right: 22px;
+      top: 163px;
+      width: 20px;
+      z-index: 1000;
+      line-height: 23px;
+      display: block;
+
+      a:hover, a:focus  { font-size: 25px; }
+    }
+  }
+
+} /*end of 380px media query*/

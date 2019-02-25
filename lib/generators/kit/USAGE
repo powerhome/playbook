@@ -1,0 +1,32 @@
+Description:
+    Create kit in the pb_kits folder
+
+Example:
+    rails g kit button
+//////////////
+
+    This will create:
+        app/pb_kits/pb_button/_button_story_rails.html.erb
+        app/pb_kits/pb_button/_button_story_react.html.erb
+        app/pb_kits/pb_button/_button.html.erb
+        app/pb_kits/pb_button/_button.scss
+        app/pb_kits/pb_button/_button.md
+        app/pb_kits/pb_button/_button.jsx
+
+        app/pb_kits/packs/pb_button.js
+
+/////////////
+
+    Add: @import "../../pb_button/button";
+
+    To the file: app/pb_kits/packs/site_styles/_kit_style_index.scss
+
+/////////////
+
+/////////////
+
+    Add: - button
+
+    To the file: app/config/data/menu.yml
+
+/////////////

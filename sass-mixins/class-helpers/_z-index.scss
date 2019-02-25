@@ -1,0 +1,10 @@
+// z-index Helpers
+@mixin z-layers($z-layers) {
+  @each $name, $z in $z-layers {
+    .#{$name} {
+      z-index: $z !important;
+    }
+  }
+}
+
+@include z-layers($z-layers);

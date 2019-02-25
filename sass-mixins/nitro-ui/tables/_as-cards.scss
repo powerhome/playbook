@@ -1,0 +1,49 @@
+table {
+  &.table-sm,
+  &.table-md,
+  &.table-lg {
+    &.as-cards {
+      thead {
+        tr {
+          display: flex;
+          width: 100%;
+
+          th {
+            flex-grow: 1;
+          }
+        }
+      }
+      tbody {
+        tr {
+          display: flex;
+          align-items: stretch;
+          flex-direction: row;
+          justify-content: flex-start;
+          width: 100%;
+          margin: $space-base 0;
+
+          td {
+            background: $white;
+            flex-grow: 1;
+            border-width: 1px 0;
+
+            &:first-child {
+              border-left-width: 1px;
+              border-radius: $border-rad-light 0 0 $border-rad-light;
+            }
+            &:last-child {
+              border-right-width: 1px;
+              border-radius: 0 $border-rad-light $border-rad-light 0;
+            }
+          }
+
+          &:last-child {
+            td {
+              border-top-width: 1px !important;
+            }
+          }
+        }
+      }
+    }
+  }
+}

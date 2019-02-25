@@ -1,0 +1,10 @@
+.pb--kit-type-nav
+  a href="#{kits_path('', type: 'rails')}" class="#{'active' if @type == 'rails'}" Rails
+  a href="#{kits_path('', type: 'react')}" class="#{'active' if @type == 'react'}" React
+
+
+= pb_rails("heading", props: { text: "Kits", tag: "h1", size: "1" })
+
+<br/>
+
+== pb_kits(type: @type)

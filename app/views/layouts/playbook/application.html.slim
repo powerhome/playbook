@@ -1,0 +1,16 @@
+doctype html
+html
+  head
+    title Playbook Design System
+    = csrf_meta_tags
+    = csp_meta_tag
+    = stylesheet_pack_tag 'main'
+    = javascript_pack_tag 'application'
+  body
+    = render 'layouts/playbook/nav'
+    = pb_rails("sidebar", props: {full: true})
+      = pb_rails("sidebar/sidebar_aside")
+        = render 'layouts/playbook/sidebar'
+      = pb_rails("sidebar/sidebar_body")
+        .pb--page--content--main
+          = yield

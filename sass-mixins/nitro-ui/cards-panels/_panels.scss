@@ -1,0 +1,120 @@
+
+// --------
+// Panels
+// --------
+
+$panel-bg:                    $white;
+$panel-body-padding:          15px;
+$panel-heading-padding:       10px 15px;
+$panel-footer-padding:        $panel-heading-padding;
+$panel-border-radius:         $border-radius-base;
+
+
+// Panels are becomming cards.
+// Style transition appropriately
+
+
+// Panels Mixins (color the panels)
+@mixin panel-variant($color) {
+  $border: shade($color, 10%);
+  border-color: $border;
+
+  & > .panel-heading {
+    @include text-color($color);
+    background-color: $color;
+    border-color: $border;
+
+    + .panel-collapse > .panel-body {
+      border-top-color: $border;
+    }
+    .badge {
+      background-color: shade($color, 20%);
+      @include text-color($color);
+    }
+  }
+  & > .panel-footer {
+    + .panel-collapse > .panel-body {
+      border-bottom-color: $border;
+    }
+  }
+}
+
+
+
+//
+// Panels
+// --------------------------------------------------
+
+
+// Base class
+.panel {
+  margin-bottom: $line-height-computed;
+  background-color: $white;
+  border: 1px solid transparent;
+  border-radius: $border-rad-light;
+  @include box-shadow(0 1px 1px rgba(0,0,0,.05));
+  &-body {
+    padding: $space-large;
+    @include clearfix;
+  }
+  &-heading {
+    padding: $space-base $space-large;
+    border-bottom: 1px solid transparent;
+    @include border-top-radius(($border-rad-light - 1));
+
+    > .dropdown .dropdown-toggle {
+      color: inherit;
+    }
+  }
+  &-title {
+    // Within heading, strip any `h*` tag of its default margins for spacing.
+    margin-top: 0;
+    margin-bottom: 0;
+    font-size: ceil(($font-base * 1.125));
+    color: inherit;
+
+    > a,
+    > small,
+    > .small,
+    > small > a,
+    > .small > a {
+      color: inherit;
+    }
+  }
+  &-footer {
+    padding: $space-base $space-large;
+    background-color: $sky-light;
+    border-top: 1px solid $border-color;
+    @include border-bottom-radius(($border-rad-light - 1));
+  }
+}
+
+
+
+@import "panel-list-groups";
+@import "panel-tables";
+@import "panel-collapse";
+
+
+
+
+
+// Contextual variations
+.panel-default {
+  @include panel-variant($white);
+}
+.panel-primary {
+  @include panel-variant($white);
+}
+.panel-success {
+  @include panel-variant($white);
+}
+.panel-info {
+  @include panel-variant($white);
+}
+.panel-warning {
+  @include panel-variant($white);
+}
+.panel-danger {
+  @include panel-variant($white);
+}

@@ -1,0 +1,12 @@
+select.form-control {
+	@include select;
+  &:focus {
+    outline: 0;
+    border-color: $ink-lightest;
+    box-shadow: 0 2px 9px $p-navy-opacity-3;
+  }
+  &[multiple] {
+  	background: linear-gradient(to bottom, $white 10%, $gray-1 100%);
+    height: auto;
+  }
+}

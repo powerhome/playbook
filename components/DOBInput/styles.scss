@@ -1,0 +1,11 @@
+@import "base-mixins/all";
+@import "base-variables/all";
+
+.dob {
+  :global {
+    .rdtDisabled {
+      color: $gray-1 !important;
+      cursor: not-allowed !important;
+    }
+  }
+}

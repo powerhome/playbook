@@ -1,0 +1,13 @@
+@import "colors";
+
+:export {
+
+  @mixin export-colors($colors-list) {
+    @each $name, $color in $colors-list {
+      #{$name}: $color;
+    }
+  }
+  @include export-colors($power-colors);
+  @include export-colors($interface-colors);
+  @include export-colors($opacity-colors);
+}

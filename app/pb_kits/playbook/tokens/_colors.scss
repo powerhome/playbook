@@ -1,0 +1,240 @@
+// POWER COLORS
+$power_navy:        #004976;
+$power_navy_darker: #1F2B52;
+$power_gold:        #daaa00;
+$power_blue:        #00a3e0;
+$power_red:         #f9423a;
+$power_royal:       #0072ce;
+$power_green:       #00bf6f;
+
+$power_colors: (
+  power_navy: $power_navy,
+  power_navy_darker: $power_navy_darker,
+  power_gold: $power_gold,
+  power_blue: $power_blue,
+  power_red: $power_red,
+  power_royal: $power_royal,
+  power_green: $power_green
+);
+
+
+// GRAY COLORS
+$white: #ffffff;
+$gray_1: mix(#000, #ffffff, 5%);
+$gray_2: mix(#000, #ffffff, 10%);
+$gray_3: mix(#000, #ffffff, 20%);
+$gray_4: mix(#000, #ffffff, 30%);
+$gray_5: mix(#000, #ffffff, 40%);
+$gray_6: mix(#000, #ffffff, 50%);
+$gray_7: mix(#000, #ffffff, 60%);
+$gray_8: mix(#000, #ffffff, 70%);
+$gray_9: mix(#000, #ffffff, 80%);
+$black: #1A1A1A;
+
+$gray_colors: (
+  white: $white,
+  gray_1: $gray_1,
+  gray_2: $gray_2,
+  gray_3: $gray_3,
+  gray_4: $gray_4,
+  gray_5: $gray_5,
+  gray_6: $gray_6,
+  gray_7: $gray_7,
+  gray_8: $gray_8,
+  gray_9: $gray_9,
+  black: $black
+);
+
+
+// INTERFACE COLORS
+$sky_lighter:     #F9FAFB;
+$sky_light:       #F4F6F8;
+$sky:             #DFE3E8;
+$sky_dark:        #C4CDD5;
+$ink_lightest:    #919EAB;
+$ink_lighter:     #637381;
+$ink_light:       #454F5B;
+$ink:             #273142;
+$ink_dark:        #212B36;
+
+$interface_colors: (
+  sky_lighter:   $sky_lighter,
+  sky_light:     $sky_light,
+  sky:           $sky,
+  sky_dark:      $sky_dark,
+  ink_lightest:  $ink_lightest,
+  ink_lighter:   $ink_lighter,
+  ink_light:     $ink_light,
+  ink:           $ink,
+  ink_dark:      $ink_dark
+);
+
+
+// OPACITY COLOR VARIATIONS
+$p_navy_opacity_1: rgba($power_navy, .1);
+$p_navy_opacity_2: rgba($power_navy, .2);
+$p_navy_opacity_3: rgba($power_navy, .3);
+$p_navy_opacity_4: rgba($power_navy, .4);
+$p_navy_opacity_5: rgba($power_navy, .5);
+$p_navy_opacity_6: rgba($power_navy, .6);
+$p_navy_opacity_7: rgba($power_navy, .7);
+$p_navy_opacity_8: rgba($power_navy, .8);
+$p_navy_opacity_9: rgba($power_navy, .9);
+
+$p_gold_opacity_1: rgba($power_gold, .1);
+$p_gold_opacity_2: rgba($power_gold, .2);
+$p_gold_opacity_3: rgba($power_gold, .3);
+$p_gold_opacity_4: rgba($power_gold, .4);
+$p_gold_opacity_5: rgba($power_gold, .5);
+$p_gold_opacity_6: rgba($power_gold, .6);
+$p_gold_opacity_7: rgba($power_gold, .7);
+$p_gold_opacity_8: rgba($power_gold, .8);
+$p_gold_opacity_9: rgba($power_gold, .9);
+
+$p_blue_opacity_1: rgba($power_blue, .1);
+$p_blue_opacity_2: rgba($power_blue, .2);
+$p_blue_opacity_3: rgba($power_blue, .3);
+$p_blue_opacity_4: rgba($power_blue, .4);
+$p_blue_opacity_5: rgba($power_blue, .5);
+$p_blue_opacity_6: rgba($power_blue, .6);
+$p_blue_opacity_7: rgba($power_blue, .7);
+$p_blue_opacity_8: rgba($power_blue, .8);
+$p_blue_opacity_9: rgba($power_blue, .9);
+
+$p_red_opacity_1: rgba($power_red, .1);
+$p_red_opacity_2: rgba($power_red, .2);
+$p_red_opacity_3: rgba($power_red, .3);
+$p_red_opacity_4: rgba($power_red, .4);
+$p_red_opacity_5: rgba($power_red, .5);
+$p_red_opacity_6: rgba($power_red, .6);
+$p_red_opacity_7: rgba($power_red, .7);
+$p_red_opacity_8: rgba($power_red, .8);
+$p_red_opacity_9: rgba($power_red, .9);
+
+$p_royal_opacity_1: rgba($power_royal, .1);
+$p_royal_opacity_2: rgba($power_royal, .2);
+$p_royal_opacity_3: rgba($power_royal, .3);
+$p_royal_opacity_4: rgba($power_royal, .4);
+$p_royal_opacity_5: rgba($power_royal, .5);
+$p_royal_opacity_6: rgba($power_royal, .6);
+$p_royal_opacity_7: rgba($power_royal, .7);
+$p_royal_opacity_8: rgba($power_royal, .8);
+$p_royal_opacity_9: rgba($power_royal, .9);
+
+$p_green_opacity_1: rgba($power_green, .1);
+$p_green_opacity_2: rgba($power_green, .2);
+$p_green_opacity_3: rgba($power_green, .3);
+$p_green_opacity_4: rgba($power_green, .4);
+$p_green_opacity_5: rgba($power_green, .5);
+$p_green_opacity_6: rgba($power_green, .6);
+$p_green_opacity_7: rgba($power_green, .7);
+$p_green_opacity_8: rgba($power_green, .8);
+$p_green_opacity_9: rgba($power_green, .9);
+
+$white_opacity_1: rgba($white, .1);
+$white_opacity_2: rgba($white, .2);
+$white_opacity_3: rgba($white, .3);
+$white_opacity_4: rgba($white, .4);
+$white_opacity_5: rgba($white, .5);
+$white_opacity_6: rgba($white, .6);
+$white_opacity_7: rgba($white, .7);
+$white_opacity_8: rgba($white, .8);
+$white_opacity_9: rgba($white, .9);
+
+$black_opacity_1: rgba(#000, .1);
+$black_opacity_2: rgba(#000, .2);
+$black_opacity_3: rgba(#000, .3);
+$black_opacity_4: rgba(#000, .4);
+$black_opacity_5: rgba(#000, .5);
+$black_opacity_6: rgba(#000, .6);
+$black_opacity_7: rgba(#000, .7);
+$black_opacity_8: rgba(#000, .8);
+$black_opacity_9: rgba(#000, .9);
+
+$opacity_colors: (
+  p_navy_opacity_1: $p_navy_opacity_1,
+  p_navy_opacity_2: $p_navy_opacity_2,
+  p_navy_opacity_3: $p_navy_opacity_3,
+  p_navy_opacity_4: $p_navy_opacity_4,
+  p_navy_opacity_5: $p_navy_opacity_5,
+  p_navy_opacity_6: $p_navy_opacity_6,
+  p_navy_opacity_7: $p_navy_opacity_7,
+  p_navy_opacity_8: $p_navy_opacity_8,
+  p_navy_opacity_9: $p_navy_opacity_9,
+
+  p_gold_opacity_1: $p_gold_opacity_1,
+  p_gold_opacity_2: $p_gold_opacity_2,
+  p_gold_opacity_3: $p_gold_opacity_3,
+  p_gold_opacity_4: $p_gold_opacity_4,
+  p_gold_opacity_5: $p_gold_opacity_5,
+  p_gold_opacity_6: $p_gold_opacity_6,
+  p_gold_opacity_7: $p_gold_opacity_7,
+  p_gold_opacity_8: $p_gold_opacity_8,
+  p_gold_opacity_9: $p_gold_opacity_9,
+
+  p_blue_opacity_1: $p_blue_opacity_1,
+  p_blue_opacity_2: $p_blue_opacity_2,
+  p_blue_opacity_3: $p_blue_opacity_3,
+  p_blue_opacity_4: $p_blue_opacity_4,
+  p_blue_opacity_5: $p_blue_opacity_5,
+  p_blue_opacity_6: $p_blue_opacity_6,
+  p_blue_opacity_7: $p_blue_opacity_7,
+  p_blue_opacity_8: $p_blue_opacity_8,
+  p_blue_opacity_9: $p_blue_opacity_9,
+
+  p_red_opacity_1: $p_red_opacity_1,
+  p_red_opacity_2: $p_red_opacity_2,
+  p_red_opacity_3: $p_red_opacity_3,
+  p_red_opacity_4: $p_red_opacity_4,
+  p_red_opacity_5: $p_red_opacity_5,
+  p_red_opacity_6: $p_red_opacity_6,
+  p_red_opacity_7: $p_red_opacity_7,
+  p_red_opacity_8: $p_red_opacity_8,
+  p_red_opacity_9: $p_red_opacity_9,
+
+  p_royal_opacity_1: $p_royal_opacity_1,
+  p_royal_opacity_2: $p_royal_opacity_2,
+  p_royal_opacity_3: $p_royal_opacity_3,
+  p_royal_opacity_4: $p_royal_opacity_4,
+  p_royal_opacity_5: $p_royal_opacity_5,
+  p_royal_opacity_6: $p_royal_opacity_6,
+  p_royal_opacity_7: $p_royal_opacity_7,
+  p_royal_opacity_8: $p_royal_opacity_8,
+  p_royal_opacity_9: $p_royal_opacity_9,
+
+  p_green_opacity_1: $p_green_opacity_1,
+  p_green_opacity_2: $p_green_opacity_2,
+  p_green_opacity_3: $p_green_opacity_3,
+  p_green_opacity_4: $p_green_opacity_4,
+  p_green_opacity_5: $p_green_opacity_5,
+  p_green_opacity_6: $p_green_opacity_6,
+  p_green_opacity_7: $p_green_opacity_7,
+  p_green_opacity_8: $p_green_opacity_8,
+  p_green_opacity_9: $p_green_opacity_9,
+
+  white_opacity_1: $white_opacity_1,
+  white_opacity_2: $white_opacity_2,
+  white_opacity_3: $white_opacity_3,
+  white_opacity_4: $white_opacity_4,
+  white_opacity_5: $white_opacity_5,
+  white_opacity_6: $white_opacity_6,
+  white_opacity_7: $white_opacity_7,
+  white_opacity_8: $white_opacity_8,
+  white_opacity_9: $white_opacity_9,
+
+  black_opacity_1: $black_opacity_1,
+  black_opacity_2: $black_opacity_2,
+  black_opacity_3: $black_opacity_3,
+  black_opacity_4: $black_opacity_4,
+  black_opacity_5: $black_opacity_5,
+  black_opacity_6: $black_opacity_6,
+  black_opacity_7: $black_opacity_7,
+  black_opacity_8: $black_opacity_8,
+  black_opacity_9: $black_opacity_9
+);
+
+// Highlight Colors
+$light_yellow:      #fffcda;
+$medium_yellow:     #FFFF9E;
+$light_blue:        #F0F3F8;
+$highlight_colors: (light_blue: $light_blue, light_yellow: $light_yellow, medium_yellow: $medium_yellow);
