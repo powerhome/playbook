@@ -1,18 +1,31 @@
-import React from "react";
-import List from "./List.jsx";
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import VerticalNavListItem from "./_vertical_nav_list_item";
+import Caption from "../pb_caption/_caption.jsx";
 
-class VerticalNavList extends React.Component {
+const propTypes = {
+  children: PropTypes.oneOfType([
+        PropTypes.arrayOf(PropTypes.node),
+        PropTypes.node
+    ])
+};
+
+class VerticalNavList extends Component {
+  static VerticalNavListItem = VerticalNavListItem;
   render() {
     return (
-      <List>
-        <List.Item text={"hello world"} />
-        <List.Item>{"testing here too"}</List.Item>
-        <List.Item text={"hello wow"} />
-        <List.Item text={"hello cool"} />
-        <List.Item text={"hello sweet"} />
-      </List>
+      <div className="vertical_nav_list">
+        <div className="vertical_nav_list_title">
+          <a>
+            <Caption />
+          </a>
+        </div>
+        <ul>{this.props.children}</ul>
+      </div>
     );
   }
 }
+
+VerticalNavList.propTypes = propTypes;
 
 export default VerticalNavList;
