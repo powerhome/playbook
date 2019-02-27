@@ -5,6 +5,6 @@ kits:
   - button
   - vertical_nav_list
   - body
-  - sidebar
+  - layout
   - image
   - list

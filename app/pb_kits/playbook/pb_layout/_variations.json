@@ -11,7 +11,7 @@
       "children": [
         {
           "type": "html",
-          "value": "<div class='sidebar_aside'><h1>Side</h1></div><div class='sidebar_body'><h1>Body</h1></div>"
+          "value": "<div class='layout_sidebar'><h1>Side</h1></div><div class='layout_body'><h1>Body</h1></div>"
         }
       ]
     }

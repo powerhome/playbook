@@ -1,11 +1,11 @@
 @import "../tokens/colors";
 @import "../tokens/spacing";
 @import "../tokens/screen_sizes";
-@import "./sidebar_mixin";
+@import "./layout_mixin";
 
-.sidebar {
+.layout {
 
-  $sidebar_sizes: (
+  $layout_sizes: (
     "xs":   64px,
     "sm":   200px,
     "md":   250px,
@@ -36,17 +36,17 @@
     }
   }
 
-  // Aside and Body
-  @each $name, $size in $sidebar_sizes {
+  // sidebar and Body
+  @each $name, $size in $layout_sizes {
     &_#{$name} {
       @each $position in $positions {
         &_#{$position} {
           @each $color in $colors {
             @if $color == "light" {
-              @include sidebar_settings($size, $position, $color, "#{&}");
+              @include layout_settings($size, $position, $color, "#{&}");
             } @else {
               &_#{$color} {
-                @include sidebar_settings($size, $position, $color, "#{&}");
+                @include layout_settings($size, $position, $color, "#{&}");
               }
             }
           }
@@ -62,23 +62,23 @@
       &_#{$position}_collapse_#{$breakpoint_name} {
         @include break_at($breakpoint) {
           @if $position == 'left' {
-            grid-template-areas: "sidebar_collapsed_#{$breakpoint_name}_aside" "sidebar_collapsed_#{$breakpoint_name}_body";
+            grid-template-areas: "layout_collapsed_#{$breakpoint_name}_sidebar" "layout_collapsed_#{$breakpoint_name}_body";
             grid-template-rows: auto 1fr;
 
           } @else {
-            grid-template-areas: "sidebar_collapsed_#{$breakpoint_name}_body" "sidebar_collapsed_#{$breakpoint_name}_aside";
+            grid-template-areas: "layout_collapsed_#{$breakpoint_name}_body" "layout_collapsed_#{$breakpoint_name}_sidebar";
             grid-template-rows: 1fr auto;
           }
           grid-template-columns: 1fr;
           &.full {
             min-height: auto !important;
           }
-          .sidebar_aside {
-            grid-area: sidebar_collapsed_#{$breakpoint_name}_aside;
+          .layout_sidebar {
+            grid-area: layout_collapsed_#{$breakpoint_name}_sidebar;
             border-width: 0 0 1px 0;
           }
-          .sidebar_body {
-            grid-area: sidebar_collapsed_#{$breakpoint_name}_body;
+          .layout_body {
+            grid-area: layout_collapsed_#{$breakpoint_name}_body;
           }
         }
       }
