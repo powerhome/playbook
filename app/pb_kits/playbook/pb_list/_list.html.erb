@@ -1,5 +1,7 @@
 
 
-<span class="pb_list">
-    <span>I am pb_list</span>
-</span>
+<div class="pb_list<%= object.borderless %><%= object.xpadding %><%= object.dark %><%= object.big %>">
+  <<%= object.ordered %>>
+    <%= object.yield(context: self) %>
+  </<%= object.ordered %>>
+</div>

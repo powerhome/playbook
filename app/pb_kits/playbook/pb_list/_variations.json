@@ -1,10 +1,561 @@
 {
   "variations": [
     {
-      "name": "default",
+      "name": "Default",
       "props": {
-      
-      }
+        "ordered":false,
+        "dark":false,
+        "borderless":false
+      },
+      "children": [
+        {
+          "type": "kit",
+          "value": {
+            "name": "list/list_item",
+            "props": {
+              "text": "I am a kit child"
+            }
+          }
+        },
+        {
+          "type": "kit",
+          "value": {
+            "name": "list/list_item",
+            "props": {
+              "text": "I am a kit child"
+            }
+          }
+        },
+        {
+          "type": "kit",
+          "value": {
+            "name": "list/list_item",
+            "props": {
+              "text": "I am a kit child"
+            }
+          }
+        },
+        {
+          "type": "kit",
+          "value": {
+            "name": "list/list_item",
+            "props": {
+              "text": "I am a kit child"
+            }
+          }
+        },
+        {
+          "type": "kit",
+          "value": {
+            "name": "list/list_item",
+            "props": {
+              "text": "I am a kit child"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Default Dark",
+      "props": {
+        "ordered":false,
+        "dark":true,
+        "borderless":false
+      },
+      "children": [
+        {
+          "type": "kit",
+          "value": {
+            "name": "list/list_item",
+            "props": {
+              "text": "I am a kit child"
+            }
+          }
+        },
+        {
+          "type": "kit",
+          "value": {
+            "name": "list/list_item",
+            "props": {
+              "text": "I am a kit child"
+            }
+          }
+        },
+        {
+          "type": "kit",
+          "value": {
+            "name": "list/list_item",
+            "props": {
+              "text": "I am a kit child"
+            }
+          }
+        },
+        {
+          "type": "kit",
+          "value": {
+            "name": "list/list_item",
+            "props": {
+              "text": "I am a kit child"
+            }
+          }
+        },
+        {
+          "type": "kit",
+          "value": {
+            "name": "list/list_item",
+            "props": {
+              "text": "I am a kit child"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Ordered",
+      "props": {
+        "ordered":true,
+        "dark":false,
+        "borderless":false
+      },
+      "children": [
+        {
+          "type": "kit",
+          "value": {
+            "name": "list/list_item",
+            "props": {
+              "text": "I am a kit child"
+            }
+          }
+        },
+        {
+          "type": "kit",
+          "value": {
+            "name": "list/list_item",
+            "props": {
+              "text": "I am a kit child"
+            }
+          }
+        },
+        {
+          "type": "kit",
+          "value": {
+            "name": "list/list_item",
+            "props": {
+              "text": "I am a kit child"
+            }
+          }
+        },
+        {
+          "type": "kit",
+          "value": {
+            "name": "list/list_item",
+            "props": {
+              "text": "I am a kit child"
+            }
+          }
+        },
+        {
+          "type": "kit",
+          "value": {
+            "name": "list/list_item",
+            "props": {
+              "text": "I am a kit child"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Ordered Dark",
+      "props": {
+        "ordered":true,
+        "dark":true,
+        "borderless":false
+      },
+      "children": [
+        {
+          "type": "kit",
+          "value": {
+            "name": "list/list_item",
+            "props": {
+              "text": "I am a kit child"
+            }
+          }
+        },
+        {
+          "type": "kit",
+          "value": {
+            "name": "list/list_item",
+            "props": {
+              "text": "I am a kit child"
+            }
+          }
+        },
+        {
+          "type": "kit",
+          "value": {
+            "name": "list/list_item",
+            "props": {
+              "text": "I am a kit child"
+            }
+          }
+        },
+        {
+          "type": "kit",
+          "value": {
+            "name": "list/list_item",
+            "props": {
+              "text": "I am a kit child"
+            }
+          }
+        },
+        {
+          "type": "kit",
+          "value": {
+            "name": "list/list_item",
+            "props": {
+              "text": "I am a kit child"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Borderless",
+      "props": {
+        "ordered":false,
+        "dark":false,
+        "borderless":true
+      },
+      "children": [
+        {
+          "type": "kit",
+          "value": {
+            "name": "list/list_item",
+            "props": {
+              "text": "I am a kit child"
+            }
+          }
+        },
+        {
+          "type": "kit",
+          "value": {
+            "name": "list/list_item",
+            "props": {
+              "text": "I am a kit child"
+            }
+          }
+        },
+        {
+          "type": "kit",
+          "value": {
+            "name": "list/list_item",
+            "props": {
+              "text": "I am a kit child"
+            }
+          }
+        },
+        {
+          "type": "kit",
+          "value": {
+            "name": "list/list_item",
+            "props": {
+              "text": "I am a kit child"
+            }
+          }
+        },
+        {
+          "type": "kit",
+          "value": {
+            "name": "list/list_item",
+            "props": {
+              "text": "I am a kit child"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Borderless Dark",
+      "props": {
+        "ordered":false,
+        "dark":true,
+        "borderless":true
+      },
+      "children": [
+        {
+          "type": "kit",
+          "value": {
+            "name": "list/list_item",
+            "props": {
+              "text": "I am a kit child"
+            }
+          }
+        },
+        {
+          "type": "kit",
+          "value": {
+            "name": "list/list_item",
+            "props": {
+              "text": "I am a kit child"
+            }
+          }
+        },
+        {
+          "type": "kit",
+          "value": {
+            "name": "list/list_item",
+            "props": {
+              "text": "I am a kit child"
+            }
+          }
+        },
+        {
+          "type": "kit",
+          "value": {
+            "name": "list/list_item",
+            "props": {
+              "text": "I am a kit child"
+            }
+          }
+        },
+        {
+          "type": "kit",
+          "value": {
+            "name": "list/list_item",
+            "props": {
+              "text": "I am a kit child"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Big",
+      "props": {
+        "ordered":false,
+        "dark":false,
+        "borderless":false,
+        "big":true
+      },
+      "children": [
+        {
+          "type": "kit",
+          "value": {
+            "name": "list/list_item",
+            "props": {
+              "text": "I am a kit child"
+            }
+          }
+        },
+        {
+          "type": "kit",
+          "value": {
+            "name": "list/list_item",
+            "props": {
+              "text": "I am a kit child"
+            }
+          }
+        },
+        {
+          "type": "kit",
+          "value": {
+            "name": "list/list_item",
+            "props": {
+              "text": "I am a kit child"
+            }
+          }
+        },
+        {
+          "type": "kit",
+          "value": {
+            "name": "list/list_item",
+            "props": {
+              "text": "I am a kit child"
+            }
+          }
+        },
+        {
+          "type": "kit",
+          "value": {
+            "name": "list/list_item",
+            "props": {
+              "text": "I am a kit child"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Big Dark",
+      "props": {
+        "ordered":false,
+        "dark":true,
+        "borderless":false,
+        "big":true
+      },
+      "children": [
+        {
+          "type": "kit",
+          "value": {
+            "name": "list/list_item",
+            "props": {
+              "text": "I am a kit child"
+            }
+          }
+        },
+        {
+          "type": "kit",
+          "value": {
+            "name": "list/list_item",
+            "props": {
+              "text": "I am a kit child"
+            }
+          }
+        },
+        {
+          "type": "kit",
+          "value": {
+            "name": "list/list_item",
+            "props": {
+              "text": "I am a kit child"
+            }
+          }
+        },
+        {
+          "type": "kit",
+          "value": {
+            "name": "list/list_item",
+            "props": {
+              "text": "I am a kit child"
+            }
+          }
+        },
+        {
+          "type": "kit",
+          "value": {
+            "name": "list/list_item",
+            "props": {
+              "text": "I am a kit child"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "XPadding",
+      "props": {
+        "ordered":false,
+        "dark":false,
+        "borderless":false,
+        "big":false,
+        "xpadding":true
+      },
+      "children": [
+        {
+          "type": "kit",
+          "value": {
+            "name": "list/list_item",
+            "props": {
+              "text": "I am a kit child"
+            }
+          }
+        },
+        {
+          "type": "kit",
+          "value": {
+            "name": "list/list_item",
+            "props": {
+              "text": "I am a kit child"
+            }
+          }
+        },
+        {
+          "type": "kit",
+          "value": {
+            "name": "list/list_item",
+            "props": {
+              "text": "I am a kit child"
+            }
+          }
+        },
+        {
+          "type": "kit",
+          "value": {
+            "name": "list/list_item",
+            "props": {
+              "text": "I am a kit child"
+            }
+          }
+        },
+        {
+          "type": "kit",
+          "value": {
+            "name": "list/list_item",
+            "props": {
+              "text": "I am a kit child"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "XPadding Dark",
+      "props": {
+        "ordered":false,
+        "dark":true,
+        "borderless":false,
+        "big":false,
+        "xpadding":true
+      },
+      "children": [
+        {
+          "type": "kit",
+          "value": {
+            "name": "list/list_item",
+            "props": {
+              "text": "I am a kit child"
+            }
+          }
+        },
+        {
+          "type": "kit",
+          "value": {
+            "name": "list/list_item",
+            "props": {
+              "text": "I am a kit child"
+            }
+          }
+        },
+        {
+          "type": "kit",
+          "value": {
+            "name": "list/list_item",
+            "props": {
+              "text": "I am a kit child"
+            }
+          }
+        },
+        {
+          "type": "kit",
+          "value": {
+            "name": "list/list_item",
+            "props": {
+              "text": "I am a kit child"
+            }
+          }
+        },
+        {
+          "type": "kit",
+          "value": {
+            "name": "list/list_item",
+            "props": {
+              "text": "I am a kit child"
+            }
+          }
+        }
+      ]
     }
+
   ]
 }
