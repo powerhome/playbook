@@ -8,9 +8,9 @@ html
     = javascript_pack_tag 'application'
   body
     = render 'layouts/playbook/nav'
-    = pb_rails("sidebar", props: {full: true})
-      = pb_rails("sidebar/sidebar_aside")
+    = pb_rails("layout", props: {full: true})
+      = pb_rails("layout/sidebar")
         = render 'layouts/playbook/sidebar'
-      = pb_rails("sidebar/sidebar_body")
+      = pb_rails("layout/body")
         .pb--page--content--main
           = yield
