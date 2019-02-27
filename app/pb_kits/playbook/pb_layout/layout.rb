@@ -1,6 +1,6 @@
 module Playbook
-  module PbSidebar
-    class Sidebar
+  module PbLayout
+    class Layout
       def initialize(position: default_configuration,
                    transparent: default_configuration,
                    size: default_configuration,
@@ -45,9 +45,9 @@ module Playbook
 
       def collapse
         if configured_collapse == default_configuration
-          " sidebar#{self.position}_collapse_xs"
+          " layout#{self.position}_collapse_xs"
         else
-          " sidebar#{self.position}_collapse_#{configured_collapse}"
+          " layout#{self.position}_collapse_#{configured_collapse}"
         end
       end
 
@@ -76,7 +76,7 @@ module Playbook
       end
 
       def to_partial_path
-        "pb_sidebar/sidebar"
+        "pb_layout/layout"
       end
 
     private
