@@ -5,15 +5,17 @@ module Playbook
                       dark: default_configuration,
                       ordered: default_configuration,
                       borderless: default_configuration,
-                      big: default_configuration,
+                      lg: default_configuration,
                       xpadding: default_configuration,
+                      layout: default_configuration,
                     &block)
         self.configured_class = default_configuration
         self.configured_dark = dark
         self.configured_ordered = ordered
         self.configured_borderless = borderless
-        self.configured_big = big
+        self.configured_lg = lg
         self.configured_xpadding = xpadding
+        self.configured_layout = layout
         self.block = block_given? ? block : nil
       end
 
@@ -34,11 +36,21 @@ module Playbook
         end
       end
 
-      def big
-        if configured_big == default_configuration
+      def layout
+        if configured_layout == default_configuration
           ""
-        elsif(configured_big == true)
-            "_big"
+        elsif(configured_layout == "left")
+            "_layout_left"
+        elsif(configured_layout == "right")
+              "_layout_right"
+        end
+      end
+
+      def lg
+        if configured_lg == default_configuration
+          ""
+        elsif(configured_lg == true)
+          "_lg"
         end
       end
 
@@ -86,8 +98,9 @@ module Playbook
       :configured_dark,
       :configured_ordered,
       :configured_borderless,
-      :configured_big,
+      :configured_lg,
       :configured_xpadding,
+      :configured_layout,
       :block
     end
   end
