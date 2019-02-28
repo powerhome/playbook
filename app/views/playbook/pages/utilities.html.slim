@@ -4,12 +4,14 @@ br
 = pb_rails("heading", props: { text: "Colors", tag: "h3", size: "3" })
 
 // Actions -------------------------
-= render :partial => "playbook/pages/utilities/pb_doc_color", locals:{ title: "Actions",
+= render :partial => "playbook/pages/utilities/pb_doc_color",
+    locals:{ title: "Actions",
     usage: "Used for links and action buttons",
     colors: [{name: "Primary Action", variable: "primary_action"}]}
 
 // Text ----------------------------
-= render :partial => "playbook/pages/utilities/pb_doc_color", locals:{ title: "Text Colors",
+= render :partial => "playbook/pages/utilities/pb_doc_color",
+    locals:{ title: "Text Colors",
     usage: "Used for text",
     colors: [{name: "Default", variable: "text_lt_default"},
         {name: "Light", variable: "text_lt_light"},
@@ -19,20 +21,23 @@ br
         {name: "Lighter Dk", variable: "text_dk_lighter", dark: true}]}
 
 // Backgrounds ---------------------
-= render :partial => "playbook/pages/utilities/pb_doc_color", locals:{ title: "Backgrounds",
+= render :partial => "playbook/pages/utilities/pb_doc_color",
+    locals:{ title: "Backgrounds",
     usage: "Used for backgrounds",
     colors: [{name: "Bg Light", variable: "bg_light"},
         {name: "Bg Dark", variable: "bg_dark"},
         {name: "Bg Gradient", class: "bg_gradient"}]}
 
 // Cards ---------------------------
-= render :partial => "playbook/pages/utilities/pb_doc_color", locals:{ title: "Cards",
+= render :partial => "playbook/pages/utilities/pb_doc_color",
+    locals:{ title: "Cards",
     usage: "Used for card backgrounds",
     colors: [{name: "Card Light", variable: "card_light"},
         {name: "Card Dark", variable: "card_dark"}]}
 
 // Status --------------------------
-= render :partial => "playbook/pages/utilities/pb_doc_color", locals:{ title: "Status",
+= render :partial => "playbook/pages/utilities/pb_doc_color",
+    locals:{ title: "Status",
     usage: "Used for status indicators",
     colors: [{name: "Success", variable: "success"},
         {name: "Warning", variable: "warning"},
@@ -41,7 +46,8 @@ br
         {name: "Neutral", variable: "neutral"}]}
 
 // Data ----------------------------
-= render :partial => "playbook/pages/utilities/pb_doc_color", locals:{ title: "Data",
+= render :partial => "playbook/pages/utilities/pb_doc_color",
+    locals:{ title: "Data",
     usage: "Used in graphs, charts and stats",
     colors: [{name: "Data 1", variable: "data_1"},
         {name: "Data 2", variable: "data_2"},
@@ -52,23 +58,27 @@ br
         {name: "Data 7", variable: "data_7"}]}
 
 // Active --------------------------
-= render :partial => "playbook/pages/utilities/pb_doc_color", locals:{ title: "Active",
+= render :partial => "playbook/pages/utilities/pb_doc_color",
+    locals:{ title: "Active",
     usage: "Used for active or selected states",
     colors: [{name: "Active Light", variable: "active_light"},
         {name: "Active Dark", variable: "active_dark", dark: true}]}
 
 // Border --------------------------
-= render :partial => "playbook/pages/utilities/pb_doc_color", locals:{ title: "Border",
+= render :partial => "playbook/pages/utilities/pb_doc_color",
+    locals:{ title: "Border",
     colors: [{name: "Border Light", variable: "border_light"},
         {name: "Border Dark", variable: "border_dark", dark: true}]}
 
 // Shadow --------------------------
-= render :partial => "playbook/pages/utilities/pb_doc_color", locals:{ title: "Shadow",
+= render :partial => "playbook/pages/utilities/pb_doc_color",
+    locals:{ title: "Shadow",
     colors: [{name: "Shadow Light", variable: "shadow_light"},
         {name: "Shadow Dark", variable: "shadow_dark", dark: true}]}
 
 // Products ------------------------
-= render :partial => "playbook/pages/utilities/pb_doc_color", locals:{ title: "Product Colors",
+= render :partial => "playbook/pages/utilities/pb_doc_color",
+    locals:{ title: "Product Colors",
     usage: "Used for specific product indicators",
     colors: [{name: "Windows", variable: "windows"},
         {name: "Siding", variable: "siding"},
