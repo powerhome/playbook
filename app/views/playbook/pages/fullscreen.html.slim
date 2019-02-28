@@ -1,10 +1,10 @@
-= pb_rails("sidebar", props: {full: true, size: "md"})
-  = pb_rails("sidebar/sidebar_aside")
+= pb_rails("layout", props: {full: true, size: "md"})
+  = pb_rails("layout/sidebar")
     h1 Sidebar
-  = pb_rails("sidebar/sidebar_body")
+  = pb_rails("layout/body")
 
-    = pb_rails("sidebar", props: {position: "right", size: "xl", collapse: "xl", full: true})
-      = pb_rails("sidebar/sidebar_aside")
+    = pb_rails("layout", props: {position: "right", size: "xl", collapse: "xl", full: true})
+      = pb_rails("layout/sidebar")
         h1 Sidebar
-      = pb_rails("sidebar/sidebar_body")
+      = pb_rails("layout/body")
         h1 Body
