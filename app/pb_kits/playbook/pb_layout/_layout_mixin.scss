@@ -8,27 +8,27 @@
   @return $string;
 }
 
-@mixin sidebar_settings($size, $side, $color, $selector) {
+@mixin layout_settings($size, $side, $color, $selector) {
   $parent_name: str_replace($selector, '.', '');
-  $name: ".sidebar";
+  $name: ".layout";
   display: grid;
 
   &.full {
     min-height: 100vh;
   }
   @if $side == 'left' {
-    grid-template-areas: "#{$parent_name}_aside #{$parent_name}_body";
+    grid-template-areas: "#{$parent_name}_sidebar #{$parent_name}_body";
     grid-template-columns: $size auto;
   } @else {
-    grid-template-areas: "#{$parent_name}_body #{$parent_name}_aside";
+    grid-template-areas: "#{$parent_name}_body #{$parent_name}_sidebar";
     grid-template-columns: auto $size;
   }
 
   > #{$name}_body {
     grid-area: #{$parent_name}_body;
   }
-  > #{$name}_aside {
-    grid-area: #{$parent_name}_aside;
+  > #{$name}_sidebar {
+    grid-area: #{$parent_name}_sidebar;
     @if $side == 'left' {
       border-width: 0 1px 0 0;
       border-style: solid;
