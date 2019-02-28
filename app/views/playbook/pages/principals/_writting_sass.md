@@ -1,5 +1,5 @@
-# Writing Sass
-
+### Writing Sass
+---
 #### Class names, chaining, and SASS
 A kit should be named using prefixed complex classes to try and avoid naming collision and style bleed. Class chaining should be avoided if possible.
 
