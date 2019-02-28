@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import VerticalNavListItem from "./_vertical_nav_list_item";
+import VerticalNavListItem from "./_item";
 import Caption from "../pb_caption/_caption.jsx";
 
 const propTypes = {
