@@ -32,7 +32,7 @@ class KitGenerator < Rails::Generators::NamedBase
         template "html.erb",        "app/pb_kits/playbook/pb_#{@name}/_#{@name}.html.erb"
         template "variations.erb",  "app/pb_kits/playbook/pb_#{@name}/_variations.json"
         template "ruby.erb",        "app/pb_kits/playbook/pb_#{@name}/#{@name}.rb"
-        
+
         #Add kit to styles scss
         open('app/pb_kits/playbook/packs/site_styles/_kit_style_index.scss', 'a') { |f|
           f.puts "@"+ "import "+ "\'" +"../../pb_#{@name}/#{@name}"+"\';"
