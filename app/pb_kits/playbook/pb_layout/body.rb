@@ -1,6 +1,6 @@
 module Playbook
-  module PbSidebar
-    class SidebarBody
+  module PbLayout
+    class Body
       def initialize(content: default_configuration,
                    &block)
         self.block = block_given? ? block : nil
@@ -11,7 +11,7 @@ module Playbook
       end
 
       def to_partial_path
-        "pb_sidebar/sidebar_body"
+        "pb_layout/body"
       end
 
     private

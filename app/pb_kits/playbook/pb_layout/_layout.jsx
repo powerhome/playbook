@@ -23,7 +23,7 @@ const defaultProps = {
   dark: false
 };
 
-class Sidebar extends Component {
+class Layout extends Component {
   render() {
     const {
       position,
@@ -38,14 +38,14 @@ class Sidebar extends Component {
     const transparent_class = transparent === true ? "_transparent" : ""
     const full_class = full === true ? "_full" : ""
     return (
-      <div className={`sidebar_${size}${position}${dark_class}${transparent_class}${full_class}${collapse}`}>
+      <div className={`layout_${size}${position}${dark_class}${transparent_class}${full_class}${collapse}`}>
         {children}
       </div>
     );
   }
 }
 
-Sidebar.propTypes = propTypes;
-Sidebar.defaultProps = defaultProps;
+Layout.propTypes = propTypes;
+Layout.defaultProps = defaultProps;
 
-export default Sidebar;
+export default Layout;
