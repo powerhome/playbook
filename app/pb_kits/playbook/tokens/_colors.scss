@@ -1,3 +1,178 @@
+//=====================================
+// Base colors should not be documented.
+// Only document color use.
+
+// Colors -----------------------------
+$royal:               #004DFF;
+$blue:                #0082FF;
+$purple:              #9E64E9;
+$teal:                #00C4D7;
+$red:                 #FF2229;
+$yellow:              #F9BB00;
+$green:               #00CA74;
+$colors: (
+  royal:              $royal,
+  blue:               $blue,
+  purple:             $purple,
+  teal:               $teal,
+  red:                $red,
+  yellow:             $yellow,
+  green:              $green
+);
+
+// Specialty Gradient -----------------
+$gradient_start:      #0083FF;
+$gradient_end:        #0B43D6;
+
+// Interface colors -------------------
+$white:               #FFFFFF;
+$silver:              #F3F7FB;
+$slate:               #C1CDD6;
+$charcoal:            #242B42;
+$interface_colors: (
+  white:              $white,
+  silver:             $silver,
+  slate:              $slate,
+  charcoal:           $charcoal,
+);
+
+// Main colors ------------------------
+$primary:             $royal;
+$secondary:           $blue;
+$tertiary:            $yellow;
+$main_colors: (
+  primary:            $primary,
+  secondary:          $secondary,
+  tertiary:           $tertiary
+);
+//=====================================
+
+// Background colors ------------------
+$bg_light:            $white;
+$bg_dark:             $charcoal;
+$background_colors: (
+  bg_light:           $bg_light,
+  bg_dark:            $bg_dark
+);
+
+// Card colors ------------------
+$card_light:          $white;
+$card_dark:           $charcoal;
+$card_colors: (
+  card_light:         $card_light,
+  card_dark:          $card_dark
+);
+
+// Active colors ----------------------
+$active_light:        #E5F2FF;
+$active_dark:         #144075;
+$active_colors: (
+  active_light:       $active_light,
+  active_dark:        $active_dark
+);
+
+// Hover colors -----------------------
+$hover_light:         darken($silver, 5%);
+$hover_dark:          lighten($charcoal, 5%);
+$hover_colors: (
+  hover_light:        $hover_light,
+  hover_dark:         $hover_dark
+);
+
+// Border colors ----------------------
+$border_light:        #E4E8F0;
+$border_dark:         #363D5B;
+$border_colors: (
+  border_light:       $border_light,
+  border_dark:        $border_dark
+);
+
+// Shadow colors ----------------------
+$shadow_light:        rgba($blue, 0.1);
+$shadow_dark:         rgba($slate, 0.1);
+$shadow_colors: (
+  shadow_light:       $shadow_light,
+  shadow_dark:        $shadow_dark
+);
+
+// Text colors ------------------------
+$text_lt_default:     $charcoal;
+$text_lt_light:       #919EAB;
+$text_lt_lighter:     $slate;
+$text_dk_default:     $white;
+$text_dk_light:       rgba($white, 0.6);
+$text_dk_lighter:     rgba($white, 0.4);
+$text_colors: (
+  text_lt_default:    $text_lt_default,
+  text_lt_light:      $text_lt_light,
+  text_lt_lighter:    $text_lt_lighter,
+  text_dk_default:    $text_dk_default,
+  text_dk_light:      $text_dk_light,
+  text_dk_lighter:    $text_dk_lighter
+);
+
+// Data colors ------------------------
+$data_1:              $royal;
+$data_2:              $blue;
+$data_3:              $purple;
+$data_4:              $teal;
+$data_5:              $green;
+$data_6:              $yellow;
+$data_7:              $red;
+$data_colors: (
+  data_1:             $data_1,
+  data_2:             $data_2,
+  data_3:             $data_3,
+  data_4:             $data_4,
+  data_5:             $data_5,
+  data_6:             $data_6,
+  data_7:             $data_7
+);
+
+// Status colors ----------------------
+$success:             $green;
+$warning:             $yellow;
+$error:               $red;
+$info:                $teal;
+$neutral:             $slate;
+$status_colors: (
+  success:            $success,
+  warning:            $warning,
+  error:              $error,
+  info:               $info,
+  neutral:            $neutral
+);
+
+// Link colors ------------------------
+$primary_action:      $primary;
+$action_colors: (
+  primary_action:     $primary_action
+);
+
+// Product colors ---------------------
+$windows:             $royal;
+$siding:              $yellow;
+$doors:               $blue;
+$solar:               $green;
+$roofs:               $teal;
+$gutters:             $purple;
+$product_colors: (
+  windows:            $windows,
+  siding:             $siding,
+  doors:              $doors,
+  solar:              $solar,
+  roofs:              $roofs,
+  gutters:            $gutters
+);
+
+
+
+
+
+//=====================================
+// DEPRECIATED COLORS
+//=====================================
+
 // POWER COLORS
 $power_navy:        #004976;
 $power_navy_darker: #1F2B52;

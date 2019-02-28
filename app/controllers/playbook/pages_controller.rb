@@ -1,4 +1,5 @@
 require_dependency "playbook/application_controller"
+require 'yaml'
 
 module Playbook
   class PagesController < ApplicationController
@@ -7,6 +8,10 @@ module Playbook
 
     def home
     end
+
+    def utilities
+    end
+
     def kits
       params[:type] ||= "rails"
       @type = params[:type]
