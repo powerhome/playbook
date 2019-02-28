@@ -7,3 +7,4 @@ import "./pb_card.js";
 import "./pb_heading.js";
 import "./pb_sidebar.js";
 import "./pb_vertical_nav_list.js";
+import "./pb_image.js";
