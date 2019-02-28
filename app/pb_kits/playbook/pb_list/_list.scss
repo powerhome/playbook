@@ -1,31 +1,14 @@
 @import "../tokens/spacing";
 @import "../tokens/colors";
+@import "../tokens/screen_sizes";
 
-// TBD
-// list-xs-
-// list-size-border-style
+$nspace-xs:  4px;
+$nspace-sm:  8px;
+$nspace-md:  16px;
+$nspace-lg:  24px;
+$nspace-xl:  32px;
 
-
-  $nspace-xs:  4px;
-  $nspace-sm:  8px;
-  $nspace-md:  16px;
-  $nspace-lg:  24px;
-  $nspace-xl:  32px;
-
-$list-sizes: (
-  "base":   nspace-small,
-  "big":    nspace-large,
-
-);
-
-$list-layouts: (
-  "value-left":   12px,
-  "full":         24px,
-  "value-right":  24px,
-);
-
-
-.pb_list, .pb_list_dark, .pb_list_borderless, .pb_list_borderless_dark, .pb_list_big, .pb_list_dark_big, .pb_list_xpadding, .pb_list_xpadding_dark {
+@mixin base-list-style {
   ul, ol {
     margin: 0;
     padding: 0;
@@ -55,48 +38,58 @@ $list-layouts: (
       // padding-bottom: 0;
     }
   }
+}
 
-  &_dark li {
+@mixin li-layout-grid {
+  display: grid;
+  grid-template: auto / repeat(12,1fr);
+  align-items: center;
+
+}
+
+[class*=pb_list]{
+  @include base-list-style;
+}
+
+[class^=pb_list]{
+
+  &[class*=_dark] li {
+    background:$ink-dark;
     color: $white ;
     border-bottom: 1px solid $white-opacity-1;
     &:before {
       color: $white-opacity-7;
     }
   }
-
-  &_big li {
-    padding: $nspace-lg 0;
+  &[class*=_lg] li {
+  padding: $nspace-lg 0;
   }
-  &_dark_big li {
-    color: $white;
-    padding: $nspace-lg 0;
-  }
-  &_xpadding li{
+  &[class*=_xpadding] li {
     padding-left: $nspace-md;
     padding-right: $nspace-md;
   }
-  &_xpadding_dark li{
-    color:$white;
-    padding-left: $nspace-md;
-    padding-right: $nspace-md;
-  }
-  &_borderless li {
+  &[class*=_borderless] li {
     border-bottom: 0;
   }
-  &_borderless_dark li {
-    border-bottom: 0;
-  }
-  &_layout_left li {
-    display: grid;
-    grid-template: auto / repeat(3,1fr);
-    align-items: center;
-
+  &[class*=_layout_left] li {
+    @include li-layout-grid;
     :nth-child(odd){
-      grid-column: 1 ;
+      grid-column: 1 / 1 ;
     }
     :nth-child(even){
-      grid-column: 3  ;
+      grid-column: 2 / -1 ;
+      text-align:left;
+    }
+  }
+  &[class*=_layout_right] li {
+    @include li-layout-grid;
+    :nth-child(odd){
+      grid-column: 1 / -2 ;
+    }
+    :nth-child(even){
+      grid-column: -1  ;
       text-align:right;
     }
   }
+
 }
