@@ -69,6 +69,7 @@
     "expose-loader": "0.7.3",
     "flow-bin": "0.54.1",
     "flow-runtime": "0.14.0",
+    "lazysizes": "^4.1.6",
     "lodash": "4.17.5",
     "lqip.macro": "^0.1.5",
     "moment-timezone": "0.5.13",

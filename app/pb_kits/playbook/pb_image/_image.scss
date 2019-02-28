@@ -30,3 +30,14 @@
     @include heading-4-dark;
   }
 }
+
+  .blur-up {
+		-webkit-filter: blur(6px);
+		filter: blur(6px);
+		transition: filter 550ms, -webkit-filter 550ms;
+	}
+
+	.blur-up.lazyloaded {
+		-webkit-filter: blur(0);
+		filter: blur(0);
+	}
