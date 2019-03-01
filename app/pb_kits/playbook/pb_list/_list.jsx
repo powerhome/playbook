@@ -1,31 +1,27 @@
 import React, { Component } from "react";
-import PropTypes from "prop-types";
-import "lazysizes";
 
 
-const propTypes = {
-  url: PropTypes.string.isRequired
-};
+type Props = {
+  //<!-- List props and their type here -->
+}
 
-const defaultProps = {
-  url: ''
-};
+class List extends Component<Props> {
 
+  static defaultProps = {
+    //<!-- List prop default values here -->
+  }
+  props: Props
 
-class Image extends Component {
   render() {
-    const { url } = this.props;
-    return (
-      <img  
-          alt="test"
-          className={"lazyload blur-up"} 
-          data-src={url}
-      />
-    );
+
+    const {
+      //<!-- List props here -->
+    } = this.props
+
+    return ()
+    //<!-- Build component here -->
+
   }
 }
 
-Image.propTypes = propTypes;
-Image.defaultProps = defaultProps;
-
-export default Image;
+export default List;
