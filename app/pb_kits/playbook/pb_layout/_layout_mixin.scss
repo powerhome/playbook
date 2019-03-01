@@ -26,6 +26,7 @@
 
   > #{$name}_body {
     grid-area: #{$parent_name}_body;
+    min-width: 0;
   }
   > #{$name}_sidebar {
     grid-area: #{$parent_name}_sidebar;

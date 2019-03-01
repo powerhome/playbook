@@ -1,0 +1,26 @@
+@mixin background-color($colors-list) {
+  @each $name, $color in $colors-list {
+    .#{$name} {
+      background-color: $color !important;
+    }
+  }
+}
+
+@mixin text-color($colors-list) {
+  @each $name, $color in $colors-list {
+    .#{$name} {
+      color: $color !important;
+    }
+  }
+}
+
+.bg_gradient {
+  background: $gradient_start;
+  background: -moz-linear-gradient(-45deg, $gradient_start 0%, $gradient_end 100%);
+  background: -webkit-linear-gradient(-45deg, $gradient_start 0%, $gradient_end 100%);
+  background: linear-gradient(135deg, $gradient_start 0%, $gradient_end 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#{$gradient_start}', endColorstr='#{$gradient_end}',GradientType=1 );
+}
+
+@include text-color($text_colors);
+@include background-color($background_colors);
