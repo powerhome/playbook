@@ -1,8 +1,8 @@
-### <a name="tith"></a> Getting Started
-
+### <a name="tith">ashfls</a> Getting Started
+<i class="far fa-user"></i>
 ---
 
-#### To watch for changes:
+#### 1. To watch for changes:
 `./bin/webpack --watch --colors --progress`
 
 #### Spin up the app

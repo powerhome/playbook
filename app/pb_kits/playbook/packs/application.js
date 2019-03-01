@@ -8,3 +8,5 @@ import "./pb_heading.js";
 import "./pb_layout.js";
 import "./pb_vertical_nav_list.js";
 import "./pb_image.js";
+import "../../../../fonts/fontawesome.js"
+import "../../../../fonts/regular.js"
