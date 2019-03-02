@@ -37,8 +37,8 @@ $interface_colors: (
 );
 
 // Main colors ------------------------
-$primary:             $royal;
-$secondary:           $blue;
+$primary:             $blue;
+$secondary:           $royal;
 $tertiary:            $yellow;
 $main_colors: (
   primary:            $primary,
@@ -48,7 +48,7 @@ $main_colors: (
 //=====================================
 
 // Background colors ------------------
-$bg_light:            $white;
+$bg_light:            $silver;
 $bg_dark:             $charcoal;
 $background_colors: (
   bg_light:           $bg_light,
@@ -112,8 +112,8 @@ $text_colors: (
 );
 
 // Data colors ------------------------
-$data_1:              $royal;
-$data_2:              $blue;
+$data_1:              $blue;
+$data_2:              $royal;
 $data_3:              $purple;
 $data_4:              $teal;
 $data_5:              $green;

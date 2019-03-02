@@ -4,24 +4,36 @@ include ActionView::Helpers::OutputSafetyHelper
 module Playbook
   module Config
     class PbDoc
-
       def initialize(props: default_configuration,
                    name: default_configuration,
                    nested: default_configuration,
                    type: default_configuration,
-                   doc_children: default_configuration)
+                   available_props: default_configuration)
         self.configured_props = props
         self.configured_name = name
         self.configured_nested = nested
         self.configured_type = type
-        self.configured_doc_children = doc_children
+        self.configured_avail_props = available_props
       end
 
       def props
         if configured_props == default_configuration
-          "{}"
+          {}
         else
           configured_props
+        end
+      end
+
+      def available_props
+        if configured_avail_props == default_configuration
+          configured_props
+        else
+          avail_props = Hash[configured_avail_props.map {|v| [v.to_sym, ""]}]
+          configured_props.each do |key, set_prop|
+            avail_props[key] = set_prop
+          end
+          avail_props[:block] = true if !configured_nested.nil?
+          avail_props = Hash[ avail_props.sort_by { |key, val| key } ]
         end
       end
 
@@ -43,15 +55,9 @@ module Playbook
 
       def snippet
         if configured_type == "rails"
-          if !configured_nested.nil?
-            rails_nested_snippet(configured_name, configured_props, configured_nested)
-          else
-            rails_snippet(configured_name, configured_props)
-          end
+          rails_snippet(configured_name, configured_props, configured_nested)
         else
-          reg = react_erb_snippet(configured_name, configured_props)
-          jsx = react_jsx_snippet(configured_name, configured_props)
-          reg+jsx
+          react_jsx_snippet(configured_name, configured_props)
         end
       end
 
@@ -61,31 +67,41 @@ module Playbook
 
     private
 
-      def rails_nested_snippet(name, props, nested)
-        raw rouge("<%= pb_rails(\"#{name}\", props: #{props.to_json}) do %>\n  #{configured_doc_children.join("\n  ")}\n<% end %>", "erb")
-      end
-
-      def rails_snippet(name, props)
-        props_display = props === nil ? "" : ", props: #{props.to_json}"
-        raw rouge("<%= pb_rails(\"#{name}\"#{props_display}) %>", "erb")
+      def rails_snippet(name, props, nested)
+        props_display = props === nil ? "" : ", props: #{pretty_props(props)}"
+        snip = "pb_rails(\"#{name}\"#{props_display})"
+        if defined?(nested) && !nested.nil?
+          if URI(File.dirname(nested.source_location[0])).path.split('/').last == "examples"
+            contents = File.read(nested.source_location[0])
+            remove_string = ", docs: true"
+            raw rouge(contents.gsub(remove_string, "").gsub(remove_string.delete(" "), ""), "erb")
+          else
+            raw rouge("<%= #{snip} do %>\n  ...\n<% end %>", "erb")
+          end
+        else
+          raw rouge("<%= #{snip} %>", "erb")
+        end
       end
 
       def react_erb_snippet(name, props)
-        props_display = props === nil ? "" : ", props: #{props.to_json}"
+        props_display = props === nil ? "" : ", props: #{pretty_props(props)}"
         raw rouge("<%= pb_react(\"#{name}\"#{props_display}) %>", "erb")
       end
 
       def react_jsx_snippet(name, props)
+        component_props = ""
         if( !props.nil? && !props.empty? )
           output = ""
-          props.each do |key, value|
-            output += "#{key}=\"#{value}\" "
-          end
+          props.each { |k,v|  output += "#{k}=\"#{v}\" " }
           component_props = output
-        else
-          component_props = ""
         end
-        raw rouge("<#{name.camelize} #{component_props} />", "html")
+        raw rouge("<#{name.camelize} #{component_props}/>", "html")
+      end
+
+      def pretty_props(props)
+        pretty_props = []
+        props.each { |k,v| pretty_props << "#{k}: \"#{v}\"" }
+        pretty_props = "{#{pretty_props.join(", ")}}"
       end
 
       DEFAULT = Object.new
@@ -97,7 +113,7 @@ module Playbook
           :configured_name,
           :configured_nested,
           :configured_type,
-          :configured_doc_children
+          :configured_avail_props
     end
   end
 end
