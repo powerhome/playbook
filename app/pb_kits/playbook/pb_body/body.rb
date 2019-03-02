@@ -1,6 +1,8 @@
 module Playbook
   module PbBody
     class Body
+      PROPS = [:configured_text, :configured_tag, :configured_color, :configured_dark].freeze
+
       def initialize(text: default_configuration,
                    tag: default_configuration,
                    color: default_configuration,
@@ -21,7 +23,7 @@ module Playbook
 
       def color
         if configured_color == default_configuration
-          "lighter"
+          ""
         else
           "_#{configured_color}"
         end
@@ -49,6 +51,10 @@ module Playbook
         "pb_body/body"
       end
 
+      def self.options
+        new_hash = PROPS.map { |e| e.to_s.remove("configured_") }
+      end
+
     private
 
       DEFAULT = Object.new
@@ -56,10 +62,7 @@ module Playbook
       def default_configuration
         DEFAULT
       end
-      attr_accessor :configured_text,
-          :configured_color,
-          :configured_dark,
-          :configured_tag
+      attr_accessor(*PROPS)
     end
   end
 end
