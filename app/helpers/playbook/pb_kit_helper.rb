@@ -4,41 +4,58 @@ require "webpacker/react/component"
 
 module Playbook
   module PbKitHelper
-    # Public helper to display rails kit
-    def pb_rails(kit, props:{}, &block)
-      render_rails(kit, props, &block)
+    def pb_rails(kit, props:{}, docs: false, &block)
+      render_rails(kit, props, docs, &block)
     end
 
-    # Public helper to display react kit
-    def pb_react(component_name, props = {}, options = {})
-      render_react(component_name, props, options)
+    def pb_react(kit, props:{}, docs: false, options:{})
+      render_react(kit, props, docs, options)
     end
 
   private
 
-    def render_rails(kit, props, &block)
+    def render_rails(kit, props, docs, &block)
       props = defined?(props) && !props.nil? ? props : {}
-      if( !kit.match(/[\/\\]/) )
-        kit_class_name = kit.to_s.tr(" ", "_").camelize
-        kit_class_obj = "Playbook::Pb#{kit_class_name}::#{kit_class_name}"
-      else
-        kit_folder_name = kit.split('/')[0].to_s.tr(" ", "_").camelize
-        kit_class_name = kit.split('/')[-1].to_s.tr(" ", "_").camelize
-        kit_class_obj = "Playbook::Pb#{kit_folder_name}::#{kit_class_name}"
-      end
-      kit_class_obj = kit_class_obj.safe_constantize
-      render(partial: kit_class_obj.new(**props, &block), as: :object)
+      kit_class_obj = get_class_name(kit)
+      available_props = kit_class_obj.options if defined? kit_class_obj.options
+
+      ui = render(partial: kit_class_obj.new(**props, &block), as: :object)
+      docs == true ? render_docs(kit, props, "rails", ui, available_props, block) : ui
     end
 
-    def render_react(component_name, props = {}, options = {})
+    def render_react(kit, props, docs, options)
       if defined?(props[:props]) && !props[:props].nil?
-        if props.keys[0] === :props
-          props = props[:props]
-        end
-      else
-        {}
+        props = props[:props] if props.keys[0] === :props
       end
-      ::Webpacker::React::Component.new(component_name.camelize).render(props, options)
+
+      ui = ::Webpacker::React::Component.new(kit.camelize).render(props, options)
+      docs == true ? render_docs(kit, props, "react", ui, nil) : ui
+    end
+
+    def is_subkit?(kit)
+      kit.match(/[\/\\]/)
+    end
+
+    def pb_camelize(string)
+      string.to_s.tr(" ", "_").camelize
+    end
+
+    def get_class_name(kit)
+      folder = is_subkit?(kit) ? pb_camelize(kit.split('/')[0]) : pb_camelize(kit)
+      item = is_subkit?(kit) ? pb_camelize(kit.split('/')[-1]) : pb_camelize(kit)
+      "Playbook::Pb#{folder}::#{item}".safe_constantize
+    end
+
+    def render_docs(kit, props, type, ui, available_props, block=nil)
+      if defined?(kit) && defined?(ui)
+        available_props ||= []
+        theme = defined?(props[:dark]) && props[:dark] == true ? "dark" : "light"
+        wrap = raw("<div class='pb--kit-example'>#{ui}</div>")
+        docs = render(partial: Playbook::Config::PbDoc.new(
+                {name: kit, props: props, nested: block, type: type, available_props: available_props}
+              ), as: :object)
+        raw "<div class=\"pb--doc #{theme}_ui\">#{wrap+docs}</div>"
+      end
     end
   end
 end

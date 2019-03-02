@@ -1,6 +1,14 @@
 module Playbook
   module PbLayout
     class Layout
+      PROPS = [:configured_position,
+        :configured_transparent,
+        :configured_size,
+        :configured_collapse,
+        :configured_dark,
+        :configured_full,
+        :block].freeze
+
       def initialize(position: default_configuration,
                    transparent: default_configuration,
                    size: default_configuration,
@@ -79,6 +87,10 @@ module Playbook
         "pb_layout/layout"
       end
 
+      def self.options
+        new_hash = PROPS.map { |e| e.to_s.remove("configured_") }
+      end
+
     private
 
       DEFAULT = Object.new
@@ -86,13 +98,7 @@ module Playbook
       def default_configuration
         DEFAULT
       end
-      attr_accessor :configured_position,
-          :configured_transparent,
-          :configured_size,
-          :configured_collapse,
-          :configured_dark,
-          :configured_full,
-          :block
+      attr_accessor(*PROPS)
     end
   end
 end
