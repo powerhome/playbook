@@ -11,7 +11,7 @@ module Playbook
       end
 
 
-      def class
+      def class_name
         if configured_class == default_configuration
           ""
         else
@@ -21,7 +21,7 @@ module Playbook
 
       def text
         if configured_text == default_configuration
-          ""
+          "I am a rails kit"
         else
           configured_text
         end
