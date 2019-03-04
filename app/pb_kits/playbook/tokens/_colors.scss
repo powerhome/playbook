@@ -48,7 +48,7 @@ $main_colors: (
 //=====================================
 
 // Background colors ------------------
-$bg_light:            $white;
+$bg_light:            $silver;
 $bg_dark:             $charcoal;
 $background_colors: (
   bg_light:           $bg_light,
@@ -145,8 +145,10 @@ $status_colors: (
 
 // Link colors ------------------------
 $primary_action:      $primary;
+$primary_action_dk:   $blue;
 $action_colors: (
-  primary_action:     $primary_action
+  primary_action:     $primary_action,
+  primary_action_dk:  $primary_action_dk
 );
 
 // Product colors ---------------------

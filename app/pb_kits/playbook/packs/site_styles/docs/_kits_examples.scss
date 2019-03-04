@@ -1,0 +1,25 @@
+@import "../../../tokens/colors";
+
+.pb--kits {
+  .pb--docItem {
+    margin: 0 0 40px 0;
+
+    .pb--docItem-ui {
+      .pb--doc {
+        box-shadow: 0 0 0 transparent;
+        padding: 0;
+        margin: 10px 0;
+
+        & > *:not(.pb--kit-example) {
+          display: none !important;
+        }
+        .pb--kit-example {
+          padding: 24px 30px 20px;
+        }
+      }
+    }
+  }
+  .docs {
+    display: none;
+  }
+}

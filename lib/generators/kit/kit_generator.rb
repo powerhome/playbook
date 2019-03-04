@@ -30,18 +30,24 @@ class KitGenerator < Rails::Generators::NamedBase
         template "scss.erb",        "app/pb_kits/playbook/pb_#{@name}/_#{@name}.scss"
         template "jsx.erb",         "app/pb_kits/playbook/pb_#{@name}/_#{@name}.jsx"
         template "html.erb",        "app/pb_kits/playbook/pb_#{@name}/_#{@name}.html.erb"
-        template "variations.erb",  "app/pb_kits/playbook/pb_#{@name}/_variations.json"
         template "ruby.erb",        "app/pb_kits/playbook/pb_#{@name}/#{@name}.rb"
+        template "storyrails.erb",  "app/pb_kits/playbook/pb_#{@name}/docs/_rails.html.erb"
+        template "storyreact.erb",  "app/pb_kits/playbook/pb_#{@name}/docs/_react.html.erb"
 
-        #Add kit to styles scss
+        # Add kit to styles scss
         open('app/pb_kits/playbook/packs/site_styles/_kit_style_index.scss', 'a') { |f|
           f.puts "@"+ "import "+ "\'" +"../../pb_#{@name}/#{@name}"+"\';"
         }
 
-        #Add to kit to YAML file
+        # Add to kit to YAML file
         open('config/data/menu.yml', 'a') { |f|
           f.puts "  - #{@name}"
         }
+
+        # Add kit pack file to application js
+        inject_into_file('app/pb_kits/playbook/packs/application.js', :before => "// END PACKS") do
+          "import \"./pb_#{@name}.js\";\n"
+        end
 
         # Recode this
         # f = File.open("lib/generators/kit/templates/logo.txt", "r")

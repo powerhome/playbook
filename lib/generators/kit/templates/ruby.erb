@@ -1,12 +1,17 @@
 module Playbook
   module Pb<%=name.titleize%>
     class <%=name.titleize%>
-      def initialize(class: default_configuration)
-        self.configured_class = default_configuration
+      PROPS = [:configured_class,
+          :configured_text].freeze
+
+      def initialize(class_name: default_configuration,
+                    text: default_configuration)
+        self.configured_class = class_name
+        self.configured_text = text
       end
 
 
-      def class
+      def class_name
         if configured_class == default_configuration
           ""
         else
@@ -14,8 +19,20 @@ module Playbook
         end
       end
 
+      def text
+        if configured_text == default_configuration
+          "I am a rails kit"
+        else
+          configured_text
+        end
+      end
+
       def to_partial_path
         "pb_<%=name%>/<%=name%>"
+      end
+
+      def self.options
+        new_hash = PROPS.map { |e| e.to_s.remove("configured_") }
       end
 
     private
@@ -25,7 +42,7 @@ module Playbook
       def default_configuration
         DEFAULT
       end
-      attr_accessor :configured_class
+      attr_accessor(*PROPS)
     end
   end
 end
