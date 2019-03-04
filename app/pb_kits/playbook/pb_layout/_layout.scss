@@ -24,12 +24,12 @@
 
   // Sections
   &_section {
-    padding: $space_base $space_largest;
+    padding: $space_sm $space_xl;
     &_border {
-      padding: $space_base $space_largest;
+      padding: $space_sm $space_xl;
       border-bottom: 1px solid $sky;
       &_margin {
-        margin: $space_base $space_largest;
+        margin: $space_sm $space_xl;
         border-bottom: 1px solid $sky;
       }
     }

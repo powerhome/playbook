@@ -1,15 +1,16 @@
-### <a name="tith">ashfls</a> Getting Started
-<i class="far fa-user"></i>
+### <a name="tith"></a> Getting Started
 ---
 
-#### 1. To watch for changes:
+####Commands to get you started.
+
+To watch for changes run:
+
 `./bin/webpack --watch --colors --progress`
 
-#### Spin up the app
+To spin up the app run:
+
 `bundle exec rails s`
 
----
-
-#### Generate a new kit
+To generate a new kit run:
 
 `rails g kit my_new_kit`
