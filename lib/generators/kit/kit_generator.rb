@@ -30,9 +30,9 @@ class KitGenerator < Rails::Generators::NamedBase
         template "scss.erb",        "app/pb_kits/playbook/pb_#{@name}/_#{@name}.scss"
         template "jsx.erb",         "app/pb_kits/playbook/pb_#{@name}/_#{@name}.jsx"
         template "html.erb",        "app/pb_kits/playbook/pb_#{@name}/_#{@name}.html.erb"
-        template "storyrails.erb",  "app/pb_kits/playbook/pb_#{@name}/_#{@name}/docs/_rails.html.erb"
-        template "storyreact.erb",  "app/pb_kits/playbook/pb_#{@name}/_#{@name}/docs/_react.html.erb"
         template "ruby.erb",        "app/pb_kits/playbook/pb_#{@name}/#{@name}.rb"
+        template "storyrails.erb",  "app/pb_kits/playbook/pb_#{@name}/docs/_rails.html.erb"
+        template "storyreact.erb",  "app/pb_kits/playbook/pb_#{@name}/docs/_react.html.erb"
 
         #Add kit to styles scss
         open('app/pb_kits/playbook/packs/site_styles/_kit_style_index.scss', 'a') { |f|
