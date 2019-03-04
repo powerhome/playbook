@@ -1,11 +1,12 @@
 module Playbook
   module Pb<%=name.titleize%>
     class <%=name.titleize%>
-      PROPS = [:configured_class, :configured_text].freeze
+      PROPS = [:configured_class,
+          :configured_text].freeze
 
-      def initialize(class: default_configuration,
+      def initialize(class_name: default_configuration,
                     text: default_configuration)
-        self.configured_class = class
+        self.configured_class = class_name
         self.configured_text = text
       end
 
