@@ -1,0 +1,11 @@
+= pb_rails("heading", props: { text: "Tokens", tag: "h1", size: "1" })
+br
+
+div class="markdown"
+  = render 'playbook/pages/tokens/spacing'
+  br
+
+= render :partial => "playbook/pages/utilities/pb_doc_spacing",
+    locals:{ title: "Actions",
+    usage: "Used for links and action buttons",
+    colors: [{name: "Primary Action", variable: "primary_action"}]}

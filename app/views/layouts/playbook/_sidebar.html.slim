@@ -10,3 +10,7 @@ br
 = pb_rails("vertical_nav_list", props: {title: "Utilities", link: utilities_path}) do
   - active = (controller_name == 'pages' && action_name == 'utilities') ? true : false
   = pb_rails("vertical_nav_list/vertical_nav_list_item", props: { text: "Colors", link: utilities_path, active: active })
+br
+= pb_rails("vertical_nav_list", props: {title: "Tokens", link: tokens_path}) do
+  - active = (controller_name == 'pages' && action_name == 'tokens') ? true : false
+  = pb_rails("vertical_nav_list/vertical_nav_list_item", props: { text: "Spacing", link: tokens_path, active: active })

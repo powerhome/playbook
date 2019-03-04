@@ -1,4 +1,4 @@
-.principles {
+.markdown {
   h1 {
     @include heading-1;
     margin: 1rem 0;
@@ -44,6 +44,36 @@
 
   body {
     font-size: 1rem;
+  }
+
+  ul, ol {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  ol {
+    counter-reset: list-counter;
+    li:before {
+      content: counter(list-counter);
+      counter-increment: list-counter;
+      display: block;
+      width: 20px;
+      flex: 0 0 20px;
+      text-align: left;
+      color: $ink-lightest;
+      font-weight: $bold;
+      margin-right: $space-sm;
+    }
+  }
+  li {
+    border-bottom: 1px solid $sky;
+    padding: $space-sm 0;
+    display: flex;
+    align-items: left;
+    &:last-child {
+      border-bottom: 0;
+      // padding-bottom: 0;
+    }
   }
 
 
