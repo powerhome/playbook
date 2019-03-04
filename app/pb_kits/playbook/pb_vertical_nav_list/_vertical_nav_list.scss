@@ -7,7 +7,7 @@
 .vertical_nav_list {
   $selector: ".vertical_nav_list";
   &_title {
-    padding: 0 $space_xl 0;
+    padding: 0 $space_xl $space_sm;
   }
   ul {
     padding: 0;
