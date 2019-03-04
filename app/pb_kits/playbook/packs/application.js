@@ -8,7 +8,7 @@ import "./pb_heading.js";
 import "./pb_layout.js";
 import "./pb_vertical_nav_list.js";
 import "./pb_image.js";
-
+// END PACKS -- Leave comment for kit generator
 
 $(document).on('click', '[data-toggle]', function(e){
   e.preventDefault();
