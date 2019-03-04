@@ -36,9 +36,12 @@ class Layout extends Component {
     } = this.props;
     const dark_class = dark === true ? "_dark" : ""
     const transparent_class = transparent === true ? "_transparent" : ""
-    const full_class = full === true ? "_full" : ""
+    const full_class = full === true ? " full" : ""
+    const size_class = "_"+size
+    const position_class = "_"+position
+    const collapse_class = " layout"+position_class+"_collapse_"+collapse
     return (
-      <div className={`layout_${size}${position}${dark_class}${transparent_class}${full_class}${collapse}`}>
+      <div className={`layout${size_class}${position_class}${dark_class}${transparent_class}${full_class}${collapse_class}`}>
         {children}
       </div>
     );
