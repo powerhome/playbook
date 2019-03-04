@@ -34,15 +34,20 @@ class KitGenerator < Rails::Generators::NamedBase
         template "storyrails.erb",  "app/pb_kits/playbook/pb_#{@name}/docs/_rails.html.erb"
         template "storyreact.erb",  "app/pb_kits/playbook/pb_#{@name}/docs/_react.html.erb"
 
-        #Add kit to styles scss
+        # Add kit to styles scss
         open('app/pb_kits/playbook/packs/site_styles/_kit_style_index.scss', 'a') { |f|
           f.puts "@"+ "import "+ "\'" +"../../pb_#{@name}/#{@name}"+"\';"
         }
 
-        #Add to kit to YAML file
+        # Add to kit to YAML file
         open('config/data/menu.yml', 'a') { |f|
           f.puts "  - #{@name}"
         }
+
+        # Add kit pack file to application js
+        inject_into_file('app/pb_kits/playbook/packs/appplication.js', :before => "// END Kit Pack Files") do
+          "\nimport \"./pb_image.js\";\n"
+        end
 
         # Recode this
         # f = File.open("lib/generators/kit/templates/logo.txt", "r")
