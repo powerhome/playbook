@@ -12,9 +12,9 @@ module Playbook
       lookup_context.find_all(story_file,[],true).any?
     end
 
-    def pb_kit(kit: "", type: "rails", show_docs: true)
+    def pb_kit(kit: "", type: "rails")
       story_file = "playbook/pb_#{kit}/docs/#{type}"
-      render partial: story_file, locals: {show_docs: show_docs} if
+      render partial: story_file if
           lookup_context.find_all(story_file,[],true).any?
     end
 
@@ -23,7 +23,7 @@ module Playbook
       MENU["kits"].sort.each do |kit|
         title = render_clickable_title(kit)
         ui = raw("<div class='pb--docItem-ui'>
-            #{pb_kit(kit: kit, type: type, show_docs: false)}</div>")
+            #{pb_kit(kit: kit, type: type)}</div>")
         display_kits << title+ui
       end
       raw("<div class='pb--docItem'>"+display_kits.map {
