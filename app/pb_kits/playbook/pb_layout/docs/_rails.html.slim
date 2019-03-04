@@ -11,3 +11,18 @@
 = render partial: "playbook/pb_layout/examples/layout_md_dark"
 = render partial: "playbook/pb_layout/examples/layout_lg_dark"
 = render partial: "playbook/pb_layout/examples/layout_xl_dark"
+
+br
+hr
+br
+
+= pb_rails("heading", props: { text: "Child Kits", tag: "h3", size: "3" })
+br
+
+= pb_rails("heading", props: { text: "Sidebar", tag: "h4", size: "4" })
+= pb_rails("layout/sidebar", docs: true) do
+  span Side
+
+= pb_rails("heading", props: { text: "Body", tag: "h4", size: "4" })
+= pb_rails("layout/body", docs: true) do
+  span Body
