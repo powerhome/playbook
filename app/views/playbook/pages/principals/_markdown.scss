@@ -18,11 +18,19 @@
     @include heading-4;
     margin: 1rem 0;
   }
+  h5 {
+    margin: 1rem 0;
+  }
+  h6 {
+    margin: 1rem 0;
+  }
 
   hr {
     margin: 2rem 0;
   }
-
+  p{
+    margin: 1.5rem 0;
+  }
   code {
     background: #122b3b;
     color: #faf6e4;
@@ -37,4 +45,6 @@
   body {
     font-size: 1rem;
   }
+
+
 }

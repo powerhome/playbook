@@ -10,6 +10,9 @@ import "./pb_vertical_nav_list.js";
 import "./pb_image.js";
 // END PACKS -- Leave comment for kit generator
 
+import "../../../../fonts/fontawesome.js"
+import "../../../../fonts/regular.js"
+
 $(document).on('click', '[data-toggle]', function(e){
   e.preventDefault();
   var kit_container = $(this).closest('.pb--doc');
