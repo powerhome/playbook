@@ -3,12 +3,6 @@
 br
 = pb_rails("heading", props: { text: "Colors", tag: "h3", size: "3" })
 
-// Actions -------------------------
-= render :partial => "playbook/pages/utilities/pb_doc_color",
-    locals:{ title: "Actions",
-    usage: "Used for links and action buttons",
-    colors: [{name: "Primary Action", variable: "primary_action"}]}
-
 // Text ----------------------------
 = render :partial => "playbook/pages/utilities/pb_doc_color",
     locals:{ title: "Text Colors",
@@ -56,6 +50,13 @@ br
         {name: "Data 5", variable: "data_5"},
         {name: "Data 6", variable: "data_6"},
         {name: "Data 7", variable: "data_7"}]}
+
+// Actions -------------------------
+= render :partial => "playbook/pages/utilities/pb_doc_color",
+    locals:{ title: "Actions",
+    usage: "Used for links and action buttons",
+    colors: [{name: "Primary", variable: "primary_action"},
+        {name: "Primary Dark", variable: "primary_action_dk", dark: true}]}
 
 // Active --------------------------
 = render :partial => "playbook/pages/utilities/pb_doc_color",

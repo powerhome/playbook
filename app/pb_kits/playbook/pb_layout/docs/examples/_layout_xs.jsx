@@ -1,7 +1,7 @@
 import React from "react"
-import Layout from "../_layout.jsx"
-import Sidebar from "../_sidebar.jsx"
-import Body from "../_body.jsx"
+import Layout from "../../_layout.jsx"
+import Sidebar from "../../_sidebar.jsx"
+import Body from "../../_body.jsx"
 
 function LayoutXS() {
   return (
