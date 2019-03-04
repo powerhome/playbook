@@ -2,23 +2,30 @@ import React from 'react';
 import PropTypes from "prop-types";
 
 const propTypes = {
-  className: PropTypes.string
+  className: PropTypes.string,
+  text: PropTypes.string
+};
+
+const defaultProps = {
+  text: "I am a react kit"
 };
 
 class <%= js_titleize_file_name %> extends React.Component {
   render() {
     const {
-      className
+      className,
+      text
     } = this.props;
 
     return (
       <div className={className}>
-        I am a react kit
+        <span>{text}</span>
       </div>
     )
   }
 }
 
 <%= js_titleize_file_name %>.propTypes = propTypes;
+<%= js_titleize_file_name %>.defaultProps = defaultProps;
 
 export default <%= js_titleize_file_name %>;
