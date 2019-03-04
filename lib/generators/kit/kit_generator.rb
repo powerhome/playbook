@@ -45,8 +45,8 @@ class KitGenerator < Rails::Generators::NamedBase
         }
 
         # Add kit pack file to application js
-        inject_into_file('app/pb_kits/playbook/packs/appplication.js', :before => "// END Kit Pack Files") do
-          "\nimport \"./pb_image.js\";\n"
+        inject_into_file('app/pb_kits/playbook/packs/appplication.js', :before => "// END") do
+          "\nimport \"./pb_#{@name}.js\";\n// END"
         end
 
         # Recode this
