@@ -164,5 +164,14 @@
     .pb--codeCopy {
       border-color: $border-dark;
     }
+    .pb--codeControls {
+      ul {
+        li {
+          a {
+            color: $primary_action_dk;
+          }
+        }
+      }
+    }
   }
 }
