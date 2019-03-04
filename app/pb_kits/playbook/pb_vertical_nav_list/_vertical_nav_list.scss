@@ -7,7 +7,7 @@
 .vertical_nav_list {
   $selector: ".vertical_nav_list";
   &_title {
-    padding: 0 $space_largest $space_base;
+    padding: 0 $space_xl $space_sm;
   }
   ul {
     padding: 0;
@@ -41,7 +41,7 @@
       text-decoration: none;
       display: flex;
       align-items: center;
-      padding: $space_base $space_largest;
+      padding: $space_sm $space_xl;
       border: 0 solid transparent;
       border-width: 0 0 0 3px;
       transition-property: color, border-color, background-color;
@@ -49,7 +49,7 @@
       transition-timing-function: cubic-bezier(0.7, 0, 0.3, 1);
       &_icon {
         font-size: $font_large;
-        margin-right: $space_base;
+        margin-right: $space_sm;
         color: $ink_lightest;
       }
       &_text {
