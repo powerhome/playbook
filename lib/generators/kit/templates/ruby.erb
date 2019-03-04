@@ -1,6 +1,8 @@
 module Playbook
   module Pb<%=name.titleize%>
     class <%=name.titleize%>
+      PROPS = [:configured_class].freeze
+
       def initialize(class: default_configuration)
         self.configured_class = default_configuration
       end
@@ -18,6 +20,10 @@ module Playbook
         "pb_<%=name%>/<%=name%>"
       end
 
+      def self.options
+        new_hash = PROPS.map { |e| e.to_s.remove("configured_") }
+      end
+
     private
 
       DEFAULT = Object.new
@@ -25,7 +31,7 @@ module Playbook
       def default_configuration
         DEFAULT
       end
-      attr_accessor :configured_class
+      attr_accessor(*PROPS)
     end
   end
 end

@@ -1,8 +1,10 @@
 module Playbook
   module PbLayout
     class Body
+      PROPS = [:block].freeze
+
       def initialize(content: default_configuration,
-                   &block)
+                  &block)
         self.block = block_given? ? block : nil
       end
 
@@ -14,6 +16,10 @@ module Playbook
         "pb_layout/body"
       end
 
+      def self.options
+        new_hash = PROPS.map { |e| e.to_s.remove("configured_") }
+      end
+
     private
 
       DEFAULT = Object.new
@@ -21,7 +27,7 @@ module Playbook
       def default_configuration
         DEFAULT
       end
-      attr_accessor :block
+      attr_accessor(*PROPS)
     end
   end
 end
