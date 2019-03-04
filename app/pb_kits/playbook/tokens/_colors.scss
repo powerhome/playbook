@@ -37,8 +37,8 @@ $interface_colors: (
 );
 
 // Main colors ------------------------
-$primary:             $blue;
-$secondary:           $royal;
+$primary:             $royal;
+$secondary:           $blue;
 $tertiary:            $yellow;
 $main_colors: (
   primary:            $primary,
@@ -112,8 +112,8 @@ $text_colors: (
 );
 
 // Data colors ------------------------
-$data_1:              $blue;
-$data_2:              $royal;
+$data_1:              $royal;
+$data_2:              $blue;
 $data_3:              $purple;
 $data_4:              $teal;
 $data_5:              $green;
@@ -145,8 +145,10 @@ $status_colors: (
 
 // Link colors ------------------------
 $primary_action:      $primary;
+$primary_action_dk:   $blue;
 $action_colors: (
-  primary_action:     $primary_action
+  primary_action:     $primary_action,
+  primary_action_dk:  $primary_action_dk
 );
 
 // Product colors ---------------------
