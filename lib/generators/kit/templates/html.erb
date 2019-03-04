@@ -1,9 +1,3 @@
-<%
-  props ||= {}
-  componentclass = props.fetch(:componentclass, "pb_#{name}")
-  text = props.fetch(:text, "I am pb_#{name}")
-%>
-
-<span class="<%= componentclass %>">
-    <span><%= text %></span>
+<span class="<%= object.className %>">
+    <span><%= object.text %></span>
 </span>
