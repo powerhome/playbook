@@ -6,7 +6,8 @@ RUN /pd_build/ruby_support/finalize.sh
 
 WORKDIR /home/app
 
-ADD Gemfile* /home/app/
+ADD lib/playbook/version.rb /home/app/lib/playbook/
+ADD Gemfile* *.gemspec /home/app/
 RUN bundle install --frozen
 
 ADD . /home/app
