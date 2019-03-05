@@ -18,3 +18,12 @@ services:
       - "8080:3000"
     depends_on:
       - db
+  webpacker:
+    build: .
+    env_file:
+      - '.env.docker'
+    command: ./bin/webpack-dev-server
+    volumes:
+      - .:/webpacker-example-app
+    ports:
+      - '3035:3035'
