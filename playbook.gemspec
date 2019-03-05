@@ -31,9 +31,7 @@ Gem::Specification.new do |s|
 
   s.add_development_dependency "test-unit", "3.1.5"
   s.add_development_dependency "rspec-rails"
-  s.add_development_dependency "simplecov", "0.10.0"
   s.add_development_dependency "rubocop", "0.49.1"
-  s.add_development_dependency "yard"
   s.add_development_dependency "rainbow", "2.1.0" # locked due to a Rubygems bug exposed in Rainbow 2.2.0. see https://www.pivotaltracker.com/story/show/139302571
   s.add_development_dependency 'pg', '~> 0.18'
   s.add_development_dependency 'better_errors'
