@@ -35,7 +35,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency "rubocop", "0.49.1"
   s.add_development_dependency "yard"
   s.add_development_dependency "rainbow", "2.1.0" # locked due to a Rubygems bug exposed in Rainbow 2.2.0. see https://www.pivotaltracker.com/story/show/139302571
-  s.add_development_dependency "sqlite3", "1.3.13"
+  s.add_development_dependency 'pg', '~> 0.18'
   s.add_development_dependency 'better_errors'
   s.add_development_dependency 'binding_of_caller'
   s.add_development_dependency 'byebug'
