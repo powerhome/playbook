@@ -1,0 +1,35 @@
+table {
+  &.single-line {
+    width: 100%;
+    max-width: 100vw;
+    table-layout: fixed;
+
+    tbody {
+      tr {
+        td {
+          white-space: nowrap;
+          text-overflow: ellipsis;
+          overflow: hidden;
+
+          & > * {
+            &:not(.btn, br) {
+              display: inline-block !important;
+            }
+          }
+
+          .btn {
+            display: block !important;
+          }
+
+          br {
+            content:' ' !important;
+
+            &::after {
+              content:' ';
+            }
+          }
+        }
+      }
+    }
+  }
+}
