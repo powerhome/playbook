@@ -34,8 +34,6 @@
   "devDependencies": {
     "@babel/plugin-proposal-decorators": "^7.3.0",
     "@babel/preset-env": "^7.3.4",
-    "@storybook/react": "3.2.8",
-    "@storybook/storybook-deployer": "2.0.0",
     "babel-eslint": "8.0.0",
     "babel-preset-flow": "6.23.0",
     "eslint-plugin-jsx-control-statements": "2.2.0",
@@ -51,8 +49,6 @@
     "@babel/core": "^7.3.4",
     "@babel/preset-react": "^7.0.0",
     "@rails/webpacker": "^4.0.0-rc.7",
-    "@storybook/addon-info": "3.2.9",
-    "@storybook/addon-knobs": "3.2.8",
     "babel-loader": "^8.0.5",
     "babel-plugin-flow-runtime": "0.11.1",
     "babel-plugin-jsx-control-statements": "3.2.8",

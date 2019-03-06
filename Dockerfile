@@ -14,4 +14,4 @@ ADD . /home/app
 RUN chown -R app:app /home/app
 RUN mkdir /etc/service/puma && ln -s /home/app/services/puma.sh /etc/service/puma/run
 
-RUN RAILS_ENV=production SECRET_KEY_BASE=does_not_matter_here bin/rails
+RUN RAILS_ENV=production SECRET_KEY_BASE=does_not_matter_here bin/webpack
