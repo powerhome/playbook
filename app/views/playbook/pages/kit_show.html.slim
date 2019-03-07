@@ -9,5 +9,6 @@
 
   - if(action_name == "kit_show_rails")
     = pb_kit(kit: @kit)
+    = pb_kit_api(@kit)
   - else
     = pb_kit(kit: @kit, type: "react")

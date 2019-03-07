@@ -88,7 +88,8 @@ module Playbook
       end
 
       def self.options
-        PROPS.map { |e| e.to_s.remove("configured_") }
+        options = PROPS.map { |e| e.to_s.remove("configured_") }
+        options = options.sort
       end
 
     private

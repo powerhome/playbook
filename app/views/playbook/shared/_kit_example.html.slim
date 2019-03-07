@@ -2,8 +2,32 @@
   - @kit_examples[:examples].each do |kit_example|
     - kit_example.each do |key, item|
       - if @type == "rails"
-        = pb_rails("heading", props: { text: item, tag: "h4", size: "4" })
-        = render partial: "playbook/pb_#{@kit_examples[:kit]}/docs/#{key}"
+        .pb--doc class=(key.include?("_dark") ? "dark_ui" : "light_ui")
+          .pb--kit-example
+            = pb_rails("caption", props: { text: item })
+            br
+            - example_file = "playbook/pb_#{@kit_examples[:kit]}/docs/#{key}"
+            = render partial: example_file
+            - contents = File.read("#{Playbook::Engine.root}/app/pb_kits/playbook/pb_#{@kit_examples[:kit]}/docs/_#{key}.html.erb")
+          .pb--codeControls
+            ul
+              li
+                a href="#" data-toggle="code_example" Code Example
+          .pb--codeCopy data-action="toggle" data-togglable="code_example"
+            a.pb--close-toggle href="#" data-toggle="false" Close
+            = raw rouge(contents, "erb")
       - else
-        = pb_react("heading", props: { text: item, tag: "h4", size: "4" })
-        = pb_react(key.camelize, docs: true)
+        .pb--doc class=(key.include?("_dark") ? "dark_ui" : "light_ui")
+          .pb--kit-example
+            = pb_rails("caption", props: { text: item })
+            br
+            = pb_react(key.camelize)
+            br
+            - contents = File.read("#{Playbook::Engine.root}/app/pb_kits/playbook/pb_#{@kit_examples[:kit]}/docs/_#{key}.jsx")
+          .pb--codeControls
+            ul
+              li
+                a href="#" data-toggle="code_example" Code Example
+          .pb--codeCopy data-action="toggle" data-togglable="code_example"
+            a.pb--close-toggle href="#" data-toggle="false" Close
+            = raw rouge(contents, "erb")

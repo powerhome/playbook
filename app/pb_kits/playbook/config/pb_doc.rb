@@ -73,8 +73,7 @@ module Playbook
         if defined?(nested) && !nested.nil?
           if URI(File.dirname(nested.source_location[0])).path.split('/').last == "docs"
             contents = File.read(nested.source_location[0])
-            remove_string = ", docs: true"
-            raw rouge(contents.gsub(remove_string, "").gsub(remove_string.delete(" "), ""), "erb")
+            raw rouge(contents, "erb")
           else
             raw rouge("<%= #{snip} do %>\n  ...\n<% end %>", "erb")
           end

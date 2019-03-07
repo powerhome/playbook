@@ -19,21 +19,6 @@ module Playbook
       render partial: "playbook/shared/kit_example"
     end
 
-    def pb_kit_first(kit: "", type: "rails")
-      @type = type
-      kit_example_list = get_kit_examples(kit, type)
-      @kit_examples = !kit_example_list.nil? && kit_example_list.count > 0 ? kit_example_list.take(1) : []
-      render partial: "playbook/shared/kit_example"
-    end
-
-    # DEPRECIATED - Please leave in place until finalized
-    # def pb_kit(kit: "", type: "rails")
-    #   story_file = "playbook/pb_#{kit}/docs/#{type}"
-    #   pb_kit_examples(kit, type)
-    #   render partial: story_file if
-    #       lookup_context.find_all(story_file,[],true).any?
-    # end
-
     def pb_kits(type: "rails")
       display_kits = []
       MENU["kits"].sort.each do |kit|
@@ -46,6 +31,12 @@ module Playbook
           |k| k }.join("</div><div class='pb--docItem'>")+"</div>")
     end
 
+    def pb_kit_api(kit)
+      kit_class_obj = get_class_name(kit)
+      @kit_api = kit_class_obj.options if defined? kit_class_obj.options
+      render partial: "playbook/config/pb_kit_api"
+    end
+
   private
     def get_kit_examples(kit, type)
       example_file = "#{Playbook::Engine.root}/app/pb_kits/playbook/pb_#{kit}/docs/example.yml"
@@ -55,11 +46,16 @@ module Playbook
         all_kit_examples = {}
         all_kit_examples[:kit] = kit
         all_kit_examples[:examples] = examples_list[:examples][type]
-        pp all_kit_examples[:examples]
         return all_kit_examples
       else
         return {}
       end
+    end
+
+    def get_class_name(kit)
+      folder = is_subkit?(kit) ? pb_camelize(kit.split('/')[0]) : pb_camelize(kit)
+      item = is_subkit?(kit) ? pb_camelize(kit.split('/')[-1]) : pb_camelize(kit)
+      "Playbook::Pb#{folder}::#{item}".safe_constantize
     end
 
     def render_clickable_title(kit)
