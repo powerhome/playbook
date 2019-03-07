@@ -1,6 +1,12 @@
 module Playbook
   module PbButton
     class Button
+      PROPS = [:configured_wrapperclass,
+          :configured_text,
+          :configured_type,
+          :configured_size,
+          :configured_dark].freeze
+
       def initialize(wrapperclass: default_configuration,
                    text: default_configuration,
                    type: default_configuration,
@@ -59,6 +65,10 @@ module Playbook
         "pb_button/button"
       end
 
+      def self.options
+        PROPS.map { |e| e.to_s.remove("configured_") }
+      end
+
     private
 
       DEFAULT = Object.new
@@ -66,11 +76,7 @@ module Playbook
       def default_configuration
         DEFAULT
       end
-      attr_accessor :configured_wrapperclass,
-          :configured_text,
-          :configured_type,
-          :configured_size,
-          :configured_dark
+      attr_accessor(*PROPS)
     end
   end
 end
