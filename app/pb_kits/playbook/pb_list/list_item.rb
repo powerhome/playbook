@@ -1,6 +1,8 @@
 module Playbook
   module PbList
     class ListItem
+      PROPS = [:configured_text].freeze
+
 
       def initialize(text: default_configuration)
         self.configured_text = text
@@ -14,6 +16,10 @@ module Playbook
         end
       end
 
+      def self.options
+        new_hash = PROPS.map { |e| e.to_s.remove("configured_") }
+      end
+
       def to_partial_path
         "pb_list/list_item"
       end
@@ -25,7 +31,7 @@ module Playbook
       def default_configuration
         DEFAULT
       end
-      attr_accessor :configured_text
+      attr_accessor(*PROPS)
     end
   end
 end

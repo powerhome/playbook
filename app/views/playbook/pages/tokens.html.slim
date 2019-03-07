@@ -1,11 +1,15 @@
 = pb_rails("heading", props: { text: "Tokens", tag: "h1", size: "1" })
+
 br
 
-div class="markdown"
-  = render 'playbook/pages/tokens/spacing'
-  br
+= pb_rails("heading", props: { text: "Spacing", tag: "h3", size: "3" })
 
-= render :partial => "playbook/pages/utilities/pb_doc_spacing",
-    locals:{ title: "Actions",
-    usage: "Used for links and action buttons",
-    colors: [{name: "Primary Action", variable: "primary_action"}]}
+br
+= render :partial => "playbook/pages/tokens/pb_doc_spacing",
+    locals:{ title: "Spacing Options",
+    usage: "Used for building Kits: Spacing is sized by 8px which serves as the starting point and base that all spacing options follow.",
+    sizes:[{name:"Extra Small",variable:"space_xs"},
+      {name:"Small",variable:"space_sm"},
+      {name:"Medium",variable:"space_md"},
+      {name:"Large",variable:"space_lg"},
+      {name:"Extra Large",variable:"space_xl"}]}

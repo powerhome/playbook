@@ -1,6 +1,14 @@
 module Playbook
   module PbList
     class List
+      PROPS = [:configured_class,
+      :configured_dark,
+      :configured_ordered,
+      :configured_borderless,
+      :configured_lg,
+      :configured_xpadding,
+      :configured_layout,
+      :block].freeze
       def initialize(class: default_configuration,
                       dark: default_configuration,
                       ordered: default_configuration,
@@ -83,6 +91,10 @@ module Playbook
         context.capture(&block)
       end
 
+      def self.options
+        new_hash = PROPS.map { |e| e.to_s.remove("configured_") }
+      end
+
       def to_partial_path
         "pb_list/list"
       end
@@ -94,14 +106,7 @@ module Playbook
       def default_configuration
         DEFAULT
       end
-      attr_accessor :configured_class,
-      :configured_dark,
-      :configured_ordered,
-      :configured_borderless,
-      :configured_lg,
-      :configured_xpadding,
-      :configured_layout,
-      :block
+      attr_accessor(*PROPS)
     end
   end
 end
