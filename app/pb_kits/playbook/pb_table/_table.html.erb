@@ -1,0 +1,10 @@
+<div>
+  <table class="table-<%= object.size %>
+      <%= object.dark %>
+      <%= object.container %>
+      <%= object.disable_hover %>
+      <%= object.single_line %>
+      <%= object.class_name %>">
+    <%= object.yield(context: self) %>
+  </table>
+</div>
