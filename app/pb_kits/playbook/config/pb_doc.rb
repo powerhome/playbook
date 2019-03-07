@@ -71,7 +71,7 @@ module Playbook
         props_display = props === nil ? "" : ", props: #{pretty_props(props)}"
         snip = "pb_rails(\"#{name}\"#{props_display})"
         if defined?(nested) && !nested.nil?
-          if URI(File.dirname(nested.source_location[0])).path.split('/').last == "examples"
+          if URI(File.dirname(nested.source_location[0])).path.split('/').last == "docs"
             contents = File.read(nested.source_location[0])
             remove_string = ", docs: true"
             raw rouge(contents.gsub(remove_string, "").gsub(remove_string.delete(" "), ""), "erb")

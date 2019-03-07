@@ -1,9 +1,9 @@
 import React from "react"
-import Layout from "../../_layout.jsx"
-import Sidebar from "../../_sidebar.jsx"
-import Body from "../../_body.jsx"
+import Layout from "../_layout.jsx"
+import Sidebar from "../_sidebar.jsx"
+import Body from "../_body.jsx"
 
-function LayoutXS() {
+function LayoutXs() {
   return (
     <Layout position="left" size="xs" collapse="sm">
       <Sidebar>{`Side`}</Sidebar>
@@ -12,4 +12,4 @@ function LayoutXS() {
   )
 }
 
-export default LayoutXS;
+export default LayoutXs;

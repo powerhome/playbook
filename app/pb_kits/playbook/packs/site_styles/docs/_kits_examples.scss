@@ -5,9 +5,6 @@
     margin: 0 0 40px 0;
 
     .pb--docItem-ui {
-      & > *:not(.pb--doc) {
-        display: none !important;
-      }
       .pb--doc {
         box-shadow: 0 0 0 transparent;
         padding: 0;

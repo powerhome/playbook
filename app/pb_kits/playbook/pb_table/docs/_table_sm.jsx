@@ -1,11 +1,9 @@
 import React from "react"
-import Table from "../../_table.jsx"
+import Table from "../_table.jsx"
 
-function TableDisableHover() {
+function TableSm() {
   return (
-    <Table disable_hover
-        size="md"
-    >
+    <Table size="sm">
       <thead>
         <tr>
           <th>{`Column 1`}</th>
@@ -42,4 +40,4 @@ function TableDisableHover() {
   )
 }
 
-export default TableDisableHover;
+export default TableSm;

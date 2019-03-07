@@ -1,0 +1,9 @@
+- if !@kit_examples[:examples].nil?
+  - @kit_examples[:examples].each do |kit_example|
+    - kit_example.each do |key, item|
+      - if @type == "rails"
+        = pb_rails("heading", props: { text: item, tag: "h4", size: "4" })
+        = render partial: "playbook/pb_#{@kit_examples[:kit]}/docs/#{key}"
+      - else
+        = pb_react("heading", props: { text: item, tag: "h4", size: "4" })
+        = pb_react(key.camelize, docs: true)

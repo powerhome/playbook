@@ -1,10 +1,9 @@
 import React from "react"
-import Table from "../../_table.jsx"
+import Table from "../_table.jsx"
 
-function TableContainerDark() {
+function TableDisableHover() {
   return (
-    <Table container
-        dark
+    <Table disable_hover
         size="md"
     >
       <thead>
@@ -43,4 +42,4 @@ function TableContainerDark() {
   )
 }
 
-export default TableContainerDark;
+export default TableDisableHover;

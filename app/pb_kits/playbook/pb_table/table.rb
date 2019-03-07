@@ -86,7 +86,7 @@ module Playbook
       end
 
       def self.options
-        new_hash = PROPS.map { |e| e.to_s.remove("configured_") }
+        PROPS.map { |e| e.to_s.remove("configured_") }
       end
 
     private

@@ -1,9 +1,11 @@
 import React from "react"
-import Table from "../../_table.jsx"
+import Table from "../_table.jsx"
 
-function TableMD() {
+function TableSingleLine() {
   return (
-    <Table size="md">
+    <Table single_line
+        size="sm"
+    >
       <thead>
         <tr>
           <th>{`Column 1`}</th>
@@ -15,23 +17,23 @@ function TableMD() {
       </thead>
       <tbody>
         <tr>
-          <td>{`Value 1`}</td>
+          <td>{`Value 1`}<br/>{`Value 1`}<br/>{`Value 1`}</td>
           <td>{`Value 2`}</td>
-          <td>{`Value 3`}</td>
+          <td>{`Value 3`}<br/>{`Value 3`}</td>
           <td>{`Value 4`}</td>
           <td>{`Value 5`}</td>
         </tr>
         <tr>
-          <td>{`Value 1`}</td>
+          <td>{`Value 1`}<br/>{`Value 1`}<br/>{`Value 1`}</td>
           <td>{`Value 2`}</td>
-          <td>{`Value 3`}</td>
+          <td>{`Value 3`}<br/>{`Value 3`}</td>
           <td>{`Value 4`}</td>
           <td>{`Value 5`}</td>
         </tr>
         <tr>
-          <td>{`Value 1`}</td>
+          <td>{`Value 1`}<br/>{`Value 1`}<br/>{`Value 1`}</td>
           <td>{`Value 2`}</td>
-          <td>{`Value 3`}</td>
+          <td>{`Value 3`}<br/>{`Value 3`}</td>
           <td>{`Value 4`}</td>
           <td>{`Value 5`}</td>
         </tr>
@@ -40,4 +42,4 @@ function TableMD() {
   )
 }
 
-export default TableMD;
+export default TableSingleLine;

@@ -1,9 +1,11 @@
 import React from "react"
-import Table from "../../_table.jsx"
+import Table from "../_table.jsx"
 
-function TableLG() {
+function TableDark() {
   return (
-    <Table size="lg">
+    <Table dark
+        size="md"
+    >
       <thead>
         <tr>
           <th>{`Column 1`}</th>
@@ -40,4 +42,4 @@ function TableLG() {
   )
 }
 
-export default TableLG;
+export default TableDark;
