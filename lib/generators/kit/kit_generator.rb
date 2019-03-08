@@ -8,7 +8,7 @@ class KitGenerator < Rails::Generators::NamedBase
 
   def create_templates
 
-      @name = name
+      @name = name.downcase
       @exists = nil
 
       f = File.open("config/data/menu.yml", "r")
