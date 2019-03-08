@@ -46,10 +46,10 @@ class KitGenerator < Rails::Generators::NamedBase
           f.puts "  - #{@name}"
         }
 
-        # Add kit pack file to application js
-        inject_into_file('app/pb_kits/playbook/packs/application.js', :before => "// END PACKS") do
-          "import \"./pb_#{@name}.js\";\n"
-        end
+        # Add kit pack file to kits js
+        open('app/pb_kits/playbook/packs/kits.js', 'a') { |f|
+          f.puts "import \"./pb_#{@name}.js\";\n"
+        }
 
         # Add kit examples to examples pack file
         open('app/pb_kits/playbook/packs/examples.js', 'a') { |f|
