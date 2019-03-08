@@ -1,27 +1,28 @@
 module Playbook
   module PbBody
     class Body
-      PROPS = [:configured_text,
-          :configured_tag,
+      PROPS = [:configured_classname,
           :configured_color,
-          :configured_dark].freeze
+          :configured_dark,
+          :configured_data,
+          :configured_id,
+          :configured_tag,
+          :configured_text].freeze
 
-      def initialize(text: default_configuration,
-                   tag: default_configuration,
+      def initialize(classname: default_configuration,
                    color: default_configuration,
-                   dark: default_configuration)
-        self.configured_tag = tag
+                   dark: default_configuration,
+                   data: default_configuration,
+                   id: default_configuration,
+                   tag: default_configuration,
+                   text: default_configuration)
+        self.configured_classname = classname
         self.configured_color = color
         self.configured_dark = dark
+        self.configured_data = data
+        self.configured_id = id
+        self.configured_tag = tag
         self.configured_text = text
-      end
-
-      def tag
-        if configured_tag == default_configuration
-          "p"
-        else
-          configured_tag
-        end
       end
 
       def color
@@ -42,11 +43,44 @@ module Playbook
         end
       end
 
+      def tag
+        if configured_tag == default_configuration
+          "p"
+        else
+          configured_tag
+        end
+      end
+
       def text
         if configured_text == default_configuration
           "This is some text"
         else
           configured_text
+        end
+      end
+
+      def classname(ui_classes="")
+        if configured_classname == default_configuration
+          ui_classes
+        else
+          ui_classes+" "+configured_classname
+        end
+      end
+
+      def data(ui_data={})
+        ui_data ||= {}
+        if configured_data == default_configuration
+          ui_data
+        else
+          configured_data.merge(ui_data)
+        end
+      end
+
+      def id(ui_id=nil)
+        if configured_id == default_configuration
+          ui_id
+        else
+          configured_id
         end
       end
 
