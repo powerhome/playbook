@@ -1,3 +1,6 @@
-<span class="<%%= object.class_name %>">
+<%%= content_tag(:div, object.text,
+    id: object.id,
+    data: object.data,
+    class: object.classname) do %>
   <span><%%= object.text %></span>
-</span>
+<%% end %>

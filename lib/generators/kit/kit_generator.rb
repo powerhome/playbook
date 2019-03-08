@@ -26,13 +26,15 @@ class KitGenerator < Rails::Generators::NamedBase
       if @exists == false
         puts "Creating Kit.../"
 
-        template "javascript.erb",  "app/pb_kits/playbook/packs/pb_#{@name}.js"
-        template "scss.erb",        "app/pb_kits/playbook/pb_#{@name}/_#{@name}.scss"
-        template "jsx.erb",         "app/pb_kits/playbook/pb_#{@name}/_#{@name}.jsx"
-        template "html.erb",        "app/pb_kits/playbook/pb_#{@name}/_#{@name}.html.erb"
-        template "ruby.erb",        "app/pb_kits/playbook/pb_#{@name}/#{@name}.rb"
-        template "storyrails.erb",  "app/pb_kits/playbook/pb_#{@name}/docs/_rails.html.erb"
-        template "storyreact.erb",  "app/pb_kits/playbook/pb_#{@name}/docs/_react.html.erb"
+        template "javascript.erb",      "app/pb_kits/playbook/packs/pb_#{@name}.js"
+        template "scss.erb",            "app/pb_kits/playbook/pb_#{@name}/_#{@name}.scss"
+        template "jsx.erb",             "app/pb_kits/playbook/pb_#{@name}/_#{@name}.jsx"
+        template "html.erb",            "app/pb_kits/playbook/pb_#{@name}/_#{@name}.html.erb"
+        template "ruby.erb",            "app/pb_kits/playbook/pb_#{@name}/#{@name}.rb"
+        template "example_yml.erb",     "app/pb_kits/playbook/pb_#{@name}/docs/example.yml"
+        template "example_rails.erb",   "app/pb_kits/playbook/pb_#{@name}/docs/_#{@name}_default.html.erb"
+        template "example_react.erb",   "app/pb_kits/playbook/pb_#{@name}/docs/_#{@name}_default.jsx"
+        template "example_index.erb",   "app/pb_kits/playbook/pb_#{@name}/docs/index.js"
 
         # Add kit to styles scss
         open('app/pb_kits/playbook/packs/site_styles/_kit_style_index.scss', 'a') { |f|
@@ -48,6 +50,11 @@ class KitGenerator < Rails::Generators::NamedBase
         inject_into_file('app/pb_kits/playbook/packs/application.js', :before => "// END PACKS") do
           "import \"./pb_#{@name}.js\";\n"
         end
+
+        # Add kit examples to examples pack file
+        open('app/pb_kits/playbook/packs/examples.js', 'a') { |f|
+          f.puts "import * as #{@name} from \"pb_#{@name}/docs\";\n WebpackerReact.setup (#{@name});\n\n"
+        }
 
         # Recode this
         # f = File.open("lib/generators/kit/templates/logo.txt", "r")
