@@ -54,7 +54,6 @@
 [class^=pb_list]{
 
   &[class*=_dark] li {
-    background:$ink-dark;
     color: $white ;
     border-bottom: 1px solid $white-opacity-1;
     &:before {

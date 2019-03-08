@@ -12,6 +12,9 @@ module Playbook
     def utilities
     end
 
+    def tokens
+    end
+
     def kits
       params[:type] ||= "rails"
       @type = params[:type]

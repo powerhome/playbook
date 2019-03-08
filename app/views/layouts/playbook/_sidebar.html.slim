@@ -13,6 +13,10 @@ br
     = pb_rails("vertical_nav/item", props: { text: pb_title(link), link: kit_show_path(link), active: active })
 
 br
-= pb_rails("vertical_nav", props: {title: "Utilities", link: utilities_path}) do
-  - active = (controller_name == 'pages' && action_name == 'utilities') ? true : false
-  = pb_rails("vertical_nav/item", props: { text: "Colors", link: utilities_path, active: active })
+
+// TODO: Clean up after merge
+= pb_rails("vertical_nav", props: {title: "Tokens", link: utilities_path}) do
+  - color_active = (controller_name == 'pages' && action_name == 'utilities') ? true : false
+  = pb_rails("vertical_nav/item", props: { text: "Colors", link: utilities_path, active: color_active })
+  - spacing_active = (controller_name == 'pages' && action_name == 'tokens') ? true : false
+  = pb_rails("vertical_nav/item", props: { text: "Spacing", link: tokens_path, active: spacing_active })

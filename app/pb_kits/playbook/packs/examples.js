@@ -18,6 +18,9 @@ WebpackerReact.setup (image);
 import * as layout from "pb_layout/docs";
 WebpackerReact.setup (layout);
 
+import * as list from "pb_list/docs";
+WebpackerReact.setup (list);
+
 import * as table from "pb_table/docs";
 WebpackerReact.setup (table);
 

@@ -12,6 +12,7 @@ module Playbook
       render_react(kit, props, options)
     end
 
+
   private
 
     def render_rails(kit, props, &block)
