@@ -1,6 +1,6 @@
 module Playbook
-  module PbVerticalNavList
-    class VerticalNavList
+  module PbVerticalNav
+    class VerticalNav
       def initialize(title: default_configuration,
                    link: default_configuration,
                    &block)
@@ -30,7 +30,7 @@ module Playbook
       end
 
       def to_partial_path
-        "pb_vertical_nav_list/vertical_nav_list"
+        "pb_vertical_nav/vertical_nav"
       end
 
     private

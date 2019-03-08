@@ -1,18 +1,18 @@
 br
-= pb_rails("vertical_nav_list", props: {title: "Principles", link: principles_path}) do
+= pb_rails("vertical_nav", props: {title: "Principles", link: principles_path}) do
   - principles_active = (controller_name == 'pages' && action_name == 'principles') ? true : false
-  = pb_rails("vertical_nav_list/vertical_nav_list_item", props: { text: "Getting Started", link: principles_path, active: principles_active })
+  = pb_rails("vertical_nav/item", props: { text: "Getting Started", link: principles_path, active: principles_active })
 
 br
-= pb_rails("vertical_nav_list", props: {title: "Kits", link: kits_path}) do
+= pb_rails("vertical_nav", props: {title: "Kits", link: kits_path}) do
   - all_active = (controller_name == 'pages' && action_name == 'kits') ? true : false
-  = pb_rails("vertical_nav_list/vertical_nav_list_item", props: { text: "All", link: kits_path, active: all_active })
+  = pb_rails("vertical_nav/item", props: { text: "All", link: kits_path, active: all_active })
 
   - MENU["kits"].sort.each do |link|
     - active = !@kit.nil? && @kit == link ? true : false
-    = pb_rails("vertical_nav_list/vertical_nav_list_item", props: { text: pb_title(link), link: kit_show_path(link), active: active })
+    = pb_rails("vertical_nav/item", props: { text: pb_title(link), link: kit_show_path(link), active: active })
 
 br
-= pb_rails("vertical_nav_list", props: {title: "Utilities", link: utilities_path}) do
+= pb_rails("vertical_nav", props: {title: "Utilities", link: utilities_path}) do
   - active = (controller_name == 'pages' && action_name == 'utilities') ? true : false
-  = pb_rails("vertical_nav_list/vertical_nav_list_item", props: { text: "Colors", link: utilities_path, active: active })
+  = pb_rails("vertical_nav/item", props: { text: "Colors", link: utilities_path, active: active })

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import VerticalNavListItem from "./_vertical_nav_list_item";
+import VerticalNavItem from "./_item";
 import Caption from "../pb_caption/_caption.jsx";
 
 const propTypes = {
@@ -10,8 +10,8 @@ const propTypes = {
     ])
 };
 
-class VerticalNavList extends Component {
-  static VerticalNavListItem = VerticalNavListItem;
+class VerticalNav extends Component {
+  static VerticalNavItem = VerticalNavItem;
   render() {
     return (
       <div className="vertical_nav_list">
@@ -26,6 +26,6 @@ class VerticalNavList extends Component {
   }
 }
 
-VerticalNavList.propTypes = propTypes;
+VerticalNav.propTypes = propTypes;
 
-export default VerticalNavList;
+export default VerticalNav;

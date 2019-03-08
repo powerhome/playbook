@@ -3,7 +3,7 @@ kits:
   - card
   - title
   - button
-  - vertical_nav_list
+  - vertical_nav
   - body
   - layout
   - image

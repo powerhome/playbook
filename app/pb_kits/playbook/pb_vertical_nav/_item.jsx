@@ -13,7 +13,7 @@ const defaultProps = {
   active: false
 };
 
-class VerticalNavListItem extends Component {
+class VerticalNavItem extends Component {
   render() {
     const { text, link, active } = this.props;
     return (
@@ -28,7 +28,7 @@ class VerticalNavListItem extends Component {
   }
 }
 
-VerticalNavListItem.propTypes = propTypes;
-VerticalNavListItem.defaultProps = defaultProps;
+VerticalNavItem.propTypes = propTypes;
+VerticalNavItem.defaultProps = defaultProps;
 
-export default VerticalNavListItem;
+export default VerticalNavItem;
