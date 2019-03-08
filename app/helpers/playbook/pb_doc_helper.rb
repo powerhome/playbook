@@ -16,7 +16,7 @@ module Playbook
     def pb_kit(kit: "", type: "rails")
       @type = type
       @kit_examples = get_kit_examples(kit, type)
-      return render partial: "playbook/shared/kit_example"
+      return render partial: "playbook/config/kit_example"
     end
 
     def pb_kits(type: "rails")

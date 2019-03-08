@@ -1,7 +1,10 @@
 module Playbook
   module PbBody
     class Body
-      PROPS = [:configured_text, :configured_tag, :configured_color, :configured_dark].freeze
+      PROPS = [:configured_text,
+          :configured_tag,
+          :configured_color,
+          :configured_dark].freeze
 
       def initialize(text: default_configuration,
                    tag: default_configuration,
