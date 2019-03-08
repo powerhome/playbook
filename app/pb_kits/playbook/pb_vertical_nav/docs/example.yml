@@ -1,0 +1,5 @@
+examples:
+  rails:
+  - default_nav: Default
+  react:
+  - default_nav: Default

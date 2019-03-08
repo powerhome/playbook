@@ -8,6 +8,7 @@ import * as image from "pb_image/docs";
 import * as layout from "pb_layout/docs";
 import * as table from "pb_table/docs";
 import * as title from "pb_title/docs";
+import * as vertical_nav from "pb_vertical_nav/docs";
 
 WebpackerReact.setup (body);
 WebpackerReact.setup (button);
@@ -17,3 +18,4 @@ WebpackerReact.setup (image);
 WebpackerReact.setup (layout);
 WebpackerReact.setup (table);
 WebpackerReact.setup (title);
+WebpackerReact.setup (vertical_nav);

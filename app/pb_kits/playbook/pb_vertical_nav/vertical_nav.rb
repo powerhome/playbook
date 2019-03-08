@@ -1,11 +1,24 @@
 module Playbook
   module PbVerticalNav
     class VerticalNav
-      def initialize(title: default_configuration,
+      PROPS = [:configured_classname,
+          :configured_data,
+          :configured_id,
+          :configured_link,
+          :configured_title,
+          :block].freeze
+
+      def initialize(classname: default_configuration,
+                   data: default_configuration,
+                   id: default_configuration,
                    link: default_configuration,
+                   title: default_configuration,
                    &block)
-        self.configured_title = title
+        self.configured_classname = classname
+        self.configured_data = data
+        self.configured_id = id
         self.configured_link = link
+        self.configured_title = title
         self.block = block_given? ? block : nil
       end
 
@@ -29,8 +42,37 @@ module Playbook
         context.capture(&block)
       end
 
+      def classname(ui_classes="")
+        if configured_classname == default_configuration
+          ui_classes
+        else
+          ui_classes+" "+configured_classname
+        end
+      end
+
+      def data(ui_data={})
+        ui_data ||= {}
+        if configured_data == default_configuration
+          ui_data
+        else
+          configured_data.merge(ui_data)
+        end
+      end
+
+      def id(ui_id=nil)
+        if configured_id == default_configuration
+          ui_id
+        else
+          configured_id
+        end
+      end
+
       def to_partial_path
         "pb_vertical_nav/vertical_nav"
+      end
+
+      def self.options
+        PROPS.map { |e| e.to_s.remove("configured_") }
       end
 
     private
@@ -40,9 +82,7 @@ module Playbook
       def default_configuration
         DEFAULT
       end
-      attr_accessor :configured_title,
-          :configured_link,
-          :block
+      attr_accessor(*PROPS)
     end
   end
 end
