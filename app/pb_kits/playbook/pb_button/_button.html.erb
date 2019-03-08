@@ -1,5 +1,9 @@
-<div class="<%= object.wrapperclass %>">
-  <button class="kit_btn<%= object.type %><%= object.size %><%= object.dark %>">
-    <span><%= object.text %></span>
-  </button>
-</div>
+<%= content_tag(:div,
+    class: object.wrapperclass) do %>
+    <%= content_tag(:button,
+        id: object.id,
+        data: object.data,
+        class: object.classname("kit_btn#{object.type}#{object.size}#{object.dark}")) do %>
+        <span><%= object.text %></span>
+    <% end %>
+<% end %>

@@ -1,7 +1,7 @@
 kits:
   - caption
   - card
-  - heading
+  - title
   - button
   - vertical_nav_list
   - body

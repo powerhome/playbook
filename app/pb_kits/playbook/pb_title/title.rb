@@ -1,34 +1,62 @@
 module Playbook
-  module PbCard
-    class Card
+  module PbTitle
+    class Title
       PROPS = [:configured_classname,
+          :configured_dark,
           :configured_data,
           :configured_id,
-          :configured_name,
-          :block].freeze
+          :configured_size,
+          :configured_tag,
+          :configured_text].freeze
 
       def initialize(classname: default_configuration,
+                   dark: default_configuration,
                    data: default_configuration,
                    id: default_configuration,
-                   name: default_configuration,
-                   &block)
+                   size: default_configuration,
+                   tag: default_configuration,
+                   text: default_configuration)
         self.configured_classname = classname
+        self.configured_dark = dark
         self.configured_data = data
         self.configured_id = id
-        self.configured_name = name
-        self.block = block_given? ? block : nil
+        self.configured_size = size
+        self.configured_tag = tag
+        self.configured_text = text
       end
 
-      def name
-        if configured_name == default_configuration
-          "Tim"
+      def tag
+        if configured_tag == default_configuration
+          "h1"
         else
-          configured_name
+          configured_tag
         end
       end
 
-      def yield(context:)
-        context.capture(&block)
+      def text
+        if configured_text == default_configuration
+          "Hello World"
+        else
+          configured_text
+        end
+      end
+
+      def size
+        if configured_size == default_configuration
+          "_1"
+        else
+          "_#{configured_size}"
+        end
+      end
+
+      def dark
+        if configured_dark == default_configuration
+          ""
+        else
+          if (configured_dark == true)
+            "_dark"
+          end
+        end
       end
 
       def classname(ui_classes="")
@@ -57,7 +85,7 @@ module Playbook
       end
 
       def to_partial_path
-        "pb_card/card"
+        "pb_title/title"
       end
 
       def self.options

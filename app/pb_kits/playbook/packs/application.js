@@ -4,7 +4,7 @@ import "./pb_body.js";
 import "./pb_button.js";
 import "./pb_caption.js";
 import "./pb_card.js";
-import "./pb_heading.js";
+import "./pb_title.js";
 import "./pb_layout.js";
 import "./pb_vertical_nav_list.js";
 import "./pb_image.js";

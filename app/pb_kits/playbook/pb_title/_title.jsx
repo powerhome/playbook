@@ -15,7 +15,7 @@ const defaultProps = {
   dark: false
 };
 
-class Heading extends Component {
+class Title extends Component {
   render() {
     const Tag = `${this.props.tag}`;
     const { size, dark, text } = this.props;
@@ -27,7 +27,7 @@ class Heading extends Component {
   }
 }
 
-Heading.propTypes = propTypes;
-Heading.defaultProps = defaultProps;
+Title.propTypes = propTypes;
+Title.defaultProps = defaultProps;
 
-export default Heading;
+export default Title;

@@ -1,0 +1,5 @@
+examples:
+  rails:
+  - card_light: Default
+  react:
+  - card_light: Default
