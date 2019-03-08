@@ -4,9 +4,9 @@ import Body from "../_body.jsx"
 function BodyDark() {
   return (
     <div>
-      <Body dark>{`I am a body kit (Default)`}</Body>
-      <Body color="light" dark>{`I am a body kit (Light)`}</Body>
-      <Body color="lighter" dark>{`I am a body kit (Lighter)`}</Body>
+      <Body dark text="I am a body kit (Default)" />
+      <Body dark color="light" text="I am a body kit (Light)" />
+      <Body dark color="lighter" text="I am a body kit (Lighter)" />
     </div>
   )
 }

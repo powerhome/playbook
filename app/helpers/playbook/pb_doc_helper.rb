@@ -1,22 +1,22 @@
 module Playbook
   module PbDocHelper
     def pb_title(title)
-      title.remove('pb_').titleize.tr("_", " ")
+      return title.remove('pb_').titleize.tr("_", " ")
     end
 
     def has_kit_type?(kit, type)
       type ||= "rails"
       if type == "rails"
-        Dir["playbook/pb_#{kit}/*.html.erb"].empty?
+        return Dir["playbook/pb_#{kit}/*.html.erb"].empty?
       elsif type == "react"
-        Dir["playbook/pb_#{kit}/*.jsx"].empty?
+        return Dir["playbook/pb_#{kit}/*.jsx"].empty?
       end
     end
 
     def pb_kit(kit: "", type: "rails")
       @type = type
       @kit_examples = get_kit_examples(kit, type)
-      render partial: "playbook/shared/kit_example"
+      return render partial: "playbook/shared/kit_example"
     end
 
     def pb_kits(type: "rails")
@@ -27,14 +27,14 @@ module Playbook
             #{pb_kit(kit: kit, type: type)}</div>")
         display_kits << title+ui
       end
-      raw("<div class='pb--docItem'>"+display_kits.map {
+      return raw("<div class='pb--docItem'>"+display_kits.map {
           |k| k }.join("</div><div class='pb--docItem'>")+"</div>")
     end
 
     def pb_kit_api(kit)
       kit_class_obj = get_class_name(kit)
       @kit_api = kit_class_obj.options if defined? kit_class_obj.options
-      render partial: "playbook/config/pb_kit_api"
+      return render partial: "playbook/config/pb_kit_api"
     end
 
   private
@@ -55,11 +55,13 @@ module Playbook
     def get_class_name(kit)
       folder = is_subkit?(kit) ? pb_camelize(kit.split('/')[0]) : pb_camelize(kit)
       item = is_subkit?(kit) ? pb_camelize(kit.split('/')[-1]) : pb_camelize(kit)
-      "Playbook::Pb#{folder}::#{item}".safe_constantize
+      return "Playbook::Pb#{folder}::#{item}".safe_constantize
     end
 
     def render_clickable_title(kit)
-      render :inline => "<a href='#{kit_show_path(kit)}'>#{pb_rails(:heading, props: { text: pb_title(kit), tag: 'h3', size: '2' })}</a>"
+      return render :inline => "<a href='#{kit_show_path(kit)}'>
+          #{pb_rails(:heading, props: { text: pb_title(kit),
+          tag: 'h3', size: '2' })}</a>"
     end
   end
 end
