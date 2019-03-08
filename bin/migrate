@@ -1,0 +1,3 @@
+#!/bin/bash
+
+bin/rails db:exists && bin/rails db:migrate || bin/rails db:setup

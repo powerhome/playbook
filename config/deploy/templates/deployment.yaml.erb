@@ -1,0 +1,65 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: playbook
+  labels:
+    app: playbook
+  annotations:
+    kubernetes-deploy.shopify.io/required-rollout: "maxUnavailable"
+spec:
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: playbook
+    spec:
+      imagePullSecrets:
+        - name: quay-robot-powerhome
+      containers:
+        - name: playbook
+          image: "quay.io/powerhome/playbook:<%= image_tag %>"
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 3000
+          env:
+            - name: PORT
+              value: "3000"
+            - name: SECRET_KEY_BASE
+              valueFrom:
+                secretKeyRef:
+                  name: playbook
+                  key: secret-key-base
+            - name: FORCE_SSL
+              value: "0"
+            - name: RACK_ENV
+              value: <%= appConfig["rackEnv"] %>
+            - name: RAILS_ENV
+              value: <%= appConfig["railsEnv"] %>
+            - name: APP_DATABASE_HOST
+              value: playbook-db-<%= environment %>-postgresql
+            - name: APP_DATABASE_USERNAME
+              value: "postgres"
+            - name: APP_DATABASE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: playbook-db-<%= environment %>-postgresql
+                  key: postgresql-password
+          livenessProbe:
+            httpGet:
+              path: /health_check/site
+              port: 3000
+            initialDelaySeconds: 30
+            timeoutSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /health_check/site
+              port: 3000
+            initialDelaySeconds: 60
+            timeoutSeconds: 10
+          resources:
+            limits:
+              cpu: 0.5
+              memory: 256Mi
+            requests:
+              cpu: 0.5
+              memory: 256Mi

@@ -1,4 +1,0 @@
-Find the application at:
-{{- range .Values.ingress.hosts }}
-  http://{{ . }}
-{{- end }}
