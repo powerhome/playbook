@@ -26,3 +26,6 @@ WebpackerReact.setup (title);
 
 import * as vertical_nav from "pb_vertical_nav/docs";
 WebpackerReact.setup (vertical_nav);
+import * as alert from "pb_alert/docs";
+ WebpackerReact.setup (alert);
+
