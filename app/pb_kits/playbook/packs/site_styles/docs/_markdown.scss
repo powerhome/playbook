@@ -1,3 +1,6 @@
+@import "../../../pb_title/title_mixin";
+@import "../../../tokens/spacing";
+
 .markdown {
   h1 {
     @include heading-1;
@@ -13,7 +16,6 @@
     @include heading-3;
     margin: 1rem 0;
   }
-
   h4 {
     @include heading-4;
     margin: 1rem 0;

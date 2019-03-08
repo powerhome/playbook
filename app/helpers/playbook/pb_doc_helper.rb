@@ -39,7 +39,8 @@ module Playbook
 
   private
     def get_kit_examples(kit, type)
-      example_file = "#{Playbook::Engine.root}/app/pb_kits/playbook/pb_#{kit}/docs/example.yml"
+      example_file = File.join(Playbook::Engine.root,
+          "app", "pb_kits", "playbook", "pb_#{kit}", "docs", "example.yml")
       if File.exist? example_file
         examples_list = YAML.load_file(example_file)
         examples_list = examples_list.inject({}){|item,(k,v)| item[k.to_sym] = v; item}
