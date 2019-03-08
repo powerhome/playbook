@@ -1,4 +1,7 @@
-<div class="vertical_nav_list">
+<%= content_tag(:div,
+    id: object.id,
+    data: object.data,
+    class: object.classname("vertical_nav_list")) do %>
   <div class="vertical_nav_list_title">
     <a class="vertical_nav_list_item_link_text" href="<%= object.link %>">
       <%= pb_rails("caption", props: { text: object.title, tag: "p" }) %>
@@ -7,4 +10,4 @@
   <ul>
     <%= object.yield(context: self) %>
   </ul>
-</div>
+<% end %>
