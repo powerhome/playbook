@@ -1,0 +1,5 @@
+examples:
+  rails:
+  - default_image: Default
+  react:
+  - default_image: Default

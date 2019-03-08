@@ -1,23 +1,27 @@
 module Playbook
-  module PbLayout
-    class Sidebar
+  module PbList
+    class Item
       PROPS = [:configured_classname,
           :configured_data,
           :configured_id,
-          :block].freeze
+          :configured_text].freeze
 
       def initialize(classname: default_configuration,
-                  data: default_configuration,
-                  id: default_configuration,
-                  &block)
+                   data: default_configuration,
+                   id: default_configuration,
+                   text: default_configuration)
         self.configured_classname = classname
         self.configured_data = data
         self.configured_id = id
-        self.block = block_given? ? block : nil
+        self.configured_text = text
       end
 
-      def yield(context:)
-        context.capture(&block)
+      def text
+        if configured_text == default_configuration
+          "List item"
+        else
+          configured_text
+        end
       end
 
       def classname(ui_classes="")
@@ -46,7 +50,7 @@ module Playbook
       end
 
       def to_partial_path
-        "pb_layout/sidebar"
+        "pb_list/item"
       end
 
       def self.options

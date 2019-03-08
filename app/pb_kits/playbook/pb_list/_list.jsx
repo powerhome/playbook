@@ -1,27 +1,31 @@
-// import React, { Component } from "react";
+// import React from 'react';
+// import PropTypes from "prop-types";
 //
+// const propTypes = {
+//   className: PropTypes.string,
+//   text: PropTypes.string
+// };
 //
-// type Props = {
-//   //<!-- List props and their type here -->
-// }
+// const defaultProps = {
+//   text: "I am a react kit"
+// };
 //
-// class List extends Component<Props> {
-//
-//   static defaultProps = {
-//     //<!-- List prop default values here -->
-//   }
-//   props: Props
-//
+// class List extends React.Component {
 //   render() {
-//
 //     const {
-//       //<!-- List props here -->
-//     } = this.props
+//       className,
+//       text
+//     } = this.props;
 //
-//     return ()
-//     //<!-- Build component here -->
-//
+//     return (
+//       <div className={className}>
+//         <span>{text}</span>
+//       </div>
+//     )
 //   }
 // }
+//
+// List.propTypes = propTypes;
+// List.defaultProps = defaultProps;
 //
 // export default List;

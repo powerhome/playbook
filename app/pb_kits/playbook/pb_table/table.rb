@@ -1,38 +1,35 @@
 module Playbook
   module PbTable
     class Table
-      PROPS = [:configured_class_name,
+      PROPS = [:configured_classname,
           :configured_container,
           :configured_dark,
+          :configured_data,
           :configured_disable_hover,
+          :configured_id,
           :configured_single_line,
           :configured_size,
           :configured_text,
           :block].freeze
 
-      def initialize(class_name: default_configuration,
+      def initialize(classname: default_configuration,
                     container: default_configuration,
                     dark: default_configuration,
+                    data: default_configuration,
                     disable_hover: default_configuration,
+                    id: default_configuration,
                     single_line: default_configuration,
                     size: default_configuration,
                     &block)
-        self.configured_class_name = class_name
+        self.configured_classname = classname
         self.configured_container = container
         self.configured_dark = dark
+        self.configured_data = data
         self.configured_disable_hover = disable_hover
+        self.configured_id = id
         self.configured_single_line = single_line
         self.configured_size = size
         self.block = block_given? ? block : nil
-      end
-
-
-      def class_name
-        if configured_class_name == default_configuration
-          ""
-        else
-          configured_class_name
-        end
       end
 
       def single_line
@@ -79,6 +76,33 @@ module Playbook
 
       def yield(context:)
         context.capture(&block)
+      end
+
+
+
+      def classname(ui_classes="")
+        if configured_classname == default_configuration
+          ui_classes
+        else
+          ui_classes+" "+configured_classname
+        end
+      end
+
+      def data(ui_data={})
+        ui_data ||= {}
+        if configured_data == default_configuration
+          ui_data
+        else
+          configured_data.merge(ui_data)
+        end
+      end
+
+      def id(ui_id=nil)
+        if configured_id == default_configuration
+          ui_id
+        else
+          configured_id
+        end
       end
 
       def to_partial_path

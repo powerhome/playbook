@@ -1,4 +1,4 @@
-<img
-    class="lazyload blur-up"
-    data-src="<%= object.url %>"
-/>
+<%= tag(:img,
+    id: object.id,
+    data: object.data(src: object.url),
+    class: object.classname("lazyload blur-up")) %>

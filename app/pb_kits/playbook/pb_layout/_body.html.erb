@@ -1,3 +1,6 @@
-<div class="layout_body">
+<%= content_tag(:div,
+    id: object.id,
+    data: object.data,
+    class: object.classname("layout_body")) do %>
   <%= object.yield(context: self) %>
-</div>
+<% end %>

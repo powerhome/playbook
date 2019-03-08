@@ -1,0 +1,4 @@
+examples:
+  rails:
+  - list_light: Light UI
+  - list_dark: Dark UI
