@@ -53,7 +53,7 @@ class KitGenerator < Rails::Generators::NamedBase
 
         # Add kit examples to examples pack file
         open('app/pb_kits/playbook/packs/examples.js', 'a') { |f|
-          f.puts "import * as #{@name} from \"pb_#{@name}/docs\";\n WebpackerReact.setup (#{@name});\n\n"
+          f.puts "\nimport * as #{@name} from \"pb_#{@name}/docs\";\n WebpackerReact.setup (#{@name});\n"
         }
 
         # Recode this
