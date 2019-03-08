@@ -78,8 +78,6 @@ module Playbook
         context.capture(&block)
       end
 
-
-
       def classname(ui_classes="")
         if configured_classname == default_configuration
           ui_classes
