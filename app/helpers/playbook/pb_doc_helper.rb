@@ -33,7 +33,7 @@ module Playbook
 
     def pb_kit_api(kit)
       kit_class_obj = get_class_name(kit)
-      @kit_api = kit_class_obj.options if defined? kit_class_obj.options
+      @kit_api = kit_class_obj.instance_method(:initialize).parameters.map(&:last)
       return render partial: "playbook/config/pb_kit_api"
     end
 

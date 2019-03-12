@@ -14,10 +14,10 @@ const defaultProps = {
 class Image extends Component {
   render() {
     const { url } = this.props;
-    return (  
+    return (
       <img 
           alt="test"
-          className={"lazyload blur-up"} 
+          className={"lazyload blur-up"}
           data-src={url}
       />
     );

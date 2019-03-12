@@ -1,17 +1,16 @@
 module Playbook
   module PbAvatar
-    class Avatar
-      def initialize(class: default_configuration)
-        self.configured_class = default_configuration
-      end
+    class Avatar < Playbook::PbKit::Base
+      PROPS = [:configured_classname,
+          :configured_data,
+          :configured_id].freeze
 
-
-      def class
-        if configured_class == default_configuration
-          ""
-        else
-          configured_class
-        end
+      def initialize(classname: default_configuration,
+                   data: default_configuration,
+                   id: default_configuration)
+        self.configured_classname = classname
+        self.configured_data = data
+        self.configured_id = id
       end
 
       def to_partial_path
@@ -25,7 +24,7 @@ module Playbook
       def default_configuration
         DEFAULT
       end
-      attr_accessor :configured_class
+      attr_accessor(*PROPS)
     end
   end
 end

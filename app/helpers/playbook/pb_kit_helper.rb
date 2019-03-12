@@ -18,7 +18,6 @@ module Playbook
     def render_rails(kit, props, &block)
       props = defined?(props) && !props.nil? ? props : {}
       kit_class_obj = get_class_name(kit)
-      available_props = kit_class_obj.options if defined? kit_class_obj.options
       return render(partial: kit_class_obj.new(**props, &block), as: :object)
     end
 
