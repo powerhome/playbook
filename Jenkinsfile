@@ -24,10 +24,10 @@ node('docker') {
     )]) {
       if (env.BRANCH_NAME == 'master') {
         appImage.push('latest')
-        sh "make deploy environment=staging tag=${tag} revision=${scmVars.GIT_COMMIT} cluster=APP-Gotham"
-        // sh "make deploy environment=staging tag=${tag} revision=${scmVars.GIT_COMMIT} cluster=APP-HQ"
-        sh "make deploy environment=production tag=${tag} revision=${scmVars.GIT_COMMIT} cluster=APP-Gotham"
-        // sh "make deploy environment=production tag=${tag} revision=${scmVars.GIT_COMMIT} cluster=APP-HQ"
+        // sh "make deploy environment=staging tag=${tag} revision=${scmVars.GIT_COMMIT} cluster=APP-Gotham"
+        sh "make deploy environment=staging tag=${tag} revision=${scmVars.GIT_COMMIT} cluster=APP-HQ"
+        // sh "make deploy environment=production tag=${tag} revision=${scmVars.GIT_COMMIT} cluster=APP-Gotham"
+        sh "make deploy environment=production tag=${tag} revision=${scmVars.GIT_COMMIT} cluster=APP-HQ"
       }
     }
   }
