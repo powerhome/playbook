@@ -6,7 +6,7 @@ ifdef TTY
 endif
 
 DEPLOYER_IMAGE = quay.io/powerhome/deployer:master-c94bf553840b07335fbb8904d5a9963dd5ffce00-336
-DEPLOYER_MOUNTS = --mount type=bind,source=$(HOME)/.kube,destination=/root/.kube --mount type=bind,source=$(shell pwd),destination=/app --env BUILD_DEPS_AND_PACKAGE=false
+DEPLOYER_MOUNTS = ${AWS_CREDS_MOUNT} --mount type=bind,source=$(HOME)/.kube,destination=/root/.kube --mount type=bind,source=$(shell pwd),destination=/app --env BUILD_DEPS_AND_PACKAGE=false
 RUN_DEPLOYER = docker run --tty ${INTERACTIVE} --env AWS_ACCESS_KEY_ID --env AWS_SECRET_ACCESS_KEY --rm --env BUILD_DEPS_AND_PACKAGE=false ${DEPLOYER_MOUNTS} ${DEPLOYER_IMAGE}
 
 start:
