@@ -1,20 +1,39 @@
-version: '3'
+version: '3.5'
 volumes:
-  bundle:
   database:
 services:
   db:
+    restart: always
     image: postgres:10.6
     volumes:
       - database:/var/lib/postgresql/data
     ports:
-      - "8081:5432"
+      - "5433:5432"
   web:
-    build: .
+    build:
+      context: .
+      target: frontend
     volumes:
+      - /home/app/tmp/pids
+      - /home/app/node_modules
       - .:/home/app
-      - bundle:/usr/local/bundle
-    ports:
-      - "8080:3000"
     depends_on:
       - db
+  webpacker:
+    build:
+      context: .
+      target: frontend
+    command: "./bin/webpack-dev-server"
+    volumes:
+      - /home/app/node_modules
+      - .:/home/app
+  nginx:
+    restart: always
+    build:
+      context: .
+      target: nginx
+    depends_on:
+      - web
+      - webpacker
+    ports:
+      - 3000:3000
