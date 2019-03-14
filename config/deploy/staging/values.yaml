@@ -1,9 +1,3 @@
 ingress:
-  annotations:
-    certmanager.k8s.io/acme-challenge-type: dns01
-    certmanager.k8s.io/acme-dns01-provider: route53-powerapp-cloud
   hosts:
     - staging.playbook.powerapp.cloud
-  tls:
-    hosts:
-      staging.playbook.powerapp.cloud: route53-powerapp-cloud

@@ -1,0 +1,31 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: playbook
+  labels:
+    app: playbook
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    certmanager.k8s.io/cluster-issuer: production-certs
+    certmanager.k8s.io/acme-challenge-type: dns01
+    certmanager.k8s.io/acme-dns01-provider: route53-powerapp-cloud
+    <% if environment == 'production' %>
+    nginx.ingress.kubernetes.io/whitelist-source-range: '0.0.0.0/0'
+    <% end %>
+spec:
+  tls:
+  - hosts:
+      <% ingress["hosts"].each do |host| %>
+      - <%= host %>
+      <% end %>
+    secretName: playbook-tls
+  rules:
+    <% ingress["hosts"].each do |host| %>
+    - host: <%= host %>
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: playbook
+              servicePort: 80
+    <% end %>

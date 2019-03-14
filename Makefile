@@ -2,10 +2,11 @@ TTY:=$(shell [ -t 0 ] && echo 1)
 
 ifdef TTY
 	INTERACTIVE = --interactive
+	AWS_CREDS_MOUNT = --mount type=bind,source=$(HOME)/.aws/credentials,destination=/root/.aws/credentials,readonly
 endif
 
-DEPLOYER_IMAGE = quay.io/powerhome/deployer:master-6be5bc480c8afa8a1036cea4679616e2a97ebc6a-231
-DEPLOYER_MOUNTS = --mount type=bind,source=$(HOME)/.kube,destination=/root/.kube --mount type=bind,source=$(shell pwd),destination=/app --env BUILD_DEPS_AND_PACKAGE=false
+DEPLOYER_IMAGE = quay.io/powerhome/deployer:master-c94bf553840b07335fbb8904d5a9963dd5ffce00-336
+DEPLOYER_MOUNTS = ${AWS_CREDS_MOUNT} --mount type=bind,source=$(HOME)/.kube,destination=/root/.kube --mount type=bind,source=$(shell pwd),destination=/app --env BUILD_DEPS_AND_PACKAGE=false
 RUN_DEPLOYER = docker run --tty ${INTERACTIVE} --env AWS_ACCESS_KEY_ID --env AWS_SECRET_ACCESS_KEY --rm --env BUILD_DEPS_AND_PACKAGE=false ${DEPLOYER_MOUNTS} ${DEPLOYER_IMAGE}
 
 start:
@@ -33,10 +34,7 @@ clean:
 	docker-compose down --rmi all --volumes
 
 deploy:
-	${RUN_DEPLOYER} helm-wrapper upgrade --install --wait playbook-$(environment) /app/charts/playbook --namespace playbook-$(environment) -f /app/config/deploy/$(environment)/secrets.yaml -f /app/config/deploy/$(environment)/values.yaml --set image.tag=$(tag) --kube-context=$(cluster) --tiller-namespace=app-tiller
-
-deploydiff:
-	${RUN_DEPLOYER} helm-wrapper diff upgrade playbook-$(environment) /app/charts/playbook -f /app/config/deploy/$(environment)/secrets.yaml -f /app/config/deploy/$(environment)/values.yaml --set image.tag=$(tag) --kube-context=$(cluster) --allow-unreleased --tiller-namespace=app-tiller
+	${RUN_DEPLOYER} /app/bin/deploy ${environment} ${revision} ${tag} ${cluster}
 
 secrets:
 	${RUN_DEPLOYER} bash --login

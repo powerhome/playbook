@@ -3,9 +3,10 @@
 node('docker') {
   def appImage
   def tag
+  def scmVars
 
   stage('Build') {
-    def scmVars = checkout scm
+    scmVars = checkout scm
     tag = "${env.BRANCH_NAME.replaceAll('/', '_')}-${scmVars.GIT_COMMIT}-${env.BUILD_ID}"
     appImage = docker.build("quay.io/powerhome/playbook:${tag}")
   }
@@ -16,7 +17,6 @@ node('docker') {
 
   stage('Deploy') {
     appImage.push()
-    sh "helm lint --strict ./charts/playbook || true"
     withCredentials([usernamePassword(
       credentialsId: 'jenkins-app-deploy-aws-access-key',
       usernameVariable: 'AWS_ACCESS_KEY_ID',
@@ -24,15 +24,10 @@ node('docker') {
     )]) {
       if (env.BRANCH_NAME == 'master') {
         appImage.push('latest')
-        // sh "make deploy environment=staging tag=${tag} cluster=APP-Gotham"
-        sh "make deploy environment=staging tag=${tag} cluster=APP-HQ"
-        // sh "make deploy environment=production tag=${tag} cluster=APP-Gotham"
-        sh "make deploy environment=production tag=${tag} cluster=APP-HQ"
-      } else {
-        // sh "make deploydiff environment=staging tag=${tag} cluster=APP-Gotham"
-        sh "make deploydiff environment=staging tag=${tag} cluster=APP-HQ"
-        // sh "make deploydiff environment=production tag=${tag} cluster=APP-Gotham"
-        sh "make deploydiff environment=production tag=${tag} cluster=APP-HQ"
+        // sh "make deploy environment=staging tag=${tag} revision=${scmVars.GIT_COMMIT} cluster=APP-Gotham"
+        sh "make deploy environment=staging tag=${tag} revision=${scmVars.GIT_COMMIT} cluster=APP-HQ"
+        // sh "make deploy environment=production tag=${tag} revision=${scmVars.GIT_COMMIT} cluster=APP-Gotham"
+        sh "make deploy environment=production tag=${tag} revision=${scmVars.GIT_COMMIT} cluster=APP-HQ"
       }
     }
   }

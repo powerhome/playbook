@@ -1,0 +1,40 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: "huddle-db-migrate-<%= deployment_id %>"
+  labels:
+    app: playbook
+spec:
+  restartPolicy: Never
+  imagePullSecrets:
+    - name: quay-robot-powerhome
+  containers:
+  - name: db-migrate
+    image: "quay.io/powerhome/playbook:<%= image_tag %>"
+    command: ["bin/migrate"]
+    env:
+      - name: SECRET_KEY_BASE
+        valueFrom:
+          secretKeyRef:
+            name: playbook
+            key: secret-key-base
+      - name: RACK_ENV
+        value: <%= appConfig["rackEnv"] %>
+      - name: RAILS_ENV
+        value: <%= appConfig["railsEnv"] %>
+      - name: APP_DATABASE_HOST
+        value: playbook-db-<%= environment %>-postgresql
+      - name: APP_DATABASE_USERNAME
+        value: "postgres"
+      - name: APP_DATABASE_PASSWORD
+        valueFrom:
+          secretKeyRef:
+            name: playbook-db-<%= environment %>-postgresql
+            key: postgresql-password
+    resources:
+      limits:
+        cpu: 0.5
+        memory: 256Mi
+      requests:
+        cpu: 0.5
+        memory: 256Mi
