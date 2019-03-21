@@ -1,6 +1,6 @@
-<%= content_tag(:div, object.text,
+<%= content_tag(:div,
     id: object.id,
     data: object.data,
-    class: object.classname) do %>
-  <span><%= object.text %></span>
+    class: object.classname("avatar-#{object.size}")) do %>
+  <%= pb_rails("image", props: { url: object.url, alt: object.alt }) %>
 <% end %>

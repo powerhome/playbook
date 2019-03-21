@@ -1,0 +1,22 @@
+@import "../tokens/border_radius";
+
+.avatar {
+  $avatar-sizes: (
+    "xs":   28px,
+    "sm":   38px,
+    "md":   60px,
+    "base": 60px,
+    "lg":   80px,
+    "xl":   100px,
+  );
+
+  @each $name, $size in $avatar-sizes {
+    &-#{$name}, &-#{$name}-thumb {
+      width: $size;
+      height: $size;
+      object-fit: cover;
+      border-radius: $border-rad-mega;
+      overflow: hidden;
+    }
+  }
+}
