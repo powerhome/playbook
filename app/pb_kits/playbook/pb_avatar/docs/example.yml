@@ -1,0 +1,5 @@
+examples:
+  rails:
+  - avatar_default: Default
+  react:
+  - avatar_default: Default

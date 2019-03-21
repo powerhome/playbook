@@ -29,3 +29,6 @@ WebpackerReact.setup (title);
 
 import * as vertical_nav from "pb_vertical_nav/docs";
 WebpackerReact.setup (vertical_nav);
+
+import * as avatar from "pb_avatar/docs";
+ WebpackerReact.setup (avatar);

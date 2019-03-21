@@ -7,3 +7,4 @@ import "./pb_layout.js";
 import "./pb_vertical_nav.js";
 import "./pb_image.js";
 import "./pb_table.js";
+import "./pb_avatar.js";

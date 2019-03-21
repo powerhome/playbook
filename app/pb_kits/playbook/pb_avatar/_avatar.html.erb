@@ -1,5 +1,6 @@
-
-
-<span class="pb_avatar">
-    <span>I am pb_avatar</span>
-</span>
+<%= content_tag(:div, object.text,
+    id: object.id,
+    data: object.data,
+    class: object.classname) do %>
+  <span><%= object.text %></span>
+<% end %>
