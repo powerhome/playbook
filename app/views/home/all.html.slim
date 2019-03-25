@@ -1,0 +1,11 @@
+.container.mt-5
+  .document-page
+    .top
+      h1.text-jumbo.text-white.mb-1
+        span Playbook Design System
+      p.text-large.text-white-opacity-6 Our design system helps us work together to build a great experience for all Nitro users.
+    .bottom
+      - @all_docs.each do |doc|
+        h1 = doc.title
+        .body_markdown style="white-space: pre;" = doc.body_markdown.html_safe
+        hr
