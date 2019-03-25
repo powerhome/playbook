@@ -10,6 +10,8 @@ Rails.application.routes.draw do
   # resources :page_tags
   # resources :pages
 
+  get 'all', to: 'home#all'
+
   resources :sections do
     resources :categories
   end
