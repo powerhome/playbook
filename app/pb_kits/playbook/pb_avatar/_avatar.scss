@@ -1,4 +1,6 @@
 @import "../tokens/border_radius";
+@import "../tokens/colors";
+@import "../tokens/typography";
 
 .avatar {
   $avatar-sizes: (
@@ -11,12 +13,37 @@
   );
 
   @each $name, $size in $avatar-sizes {
-    &-#{$name}, &-#{$name}-thumb {
+    &_#{$name}, &_#{$name}_thumb {
       width: $size;
       height: $size;
       object-fit: cover;
       border-radius: $border-rad-mega;
+      background: $slate;
       overflow: hidden;
+      position: relative;
+
+      &::before {
+        content: attr(data-initials);
+        width: 100%;
+        height: 100%;
+        display: block;
+        color: $white;
+        text-align: center;
+        font-size: $size * 0.38;
+        line-height: $size;
+        text-transform: uppercase;
+        position: relative;
+        z-index: 0;
+      }
+
+      img {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 1;
+      }
     }
   }
 }

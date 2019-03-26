@@ -1,39 +1,56 @@
 import React from 'react';
 import PropTypes from "prop-types";
 import classnames from 'classnames';
+import { map } from 'lodash'
 import Image from "../pb_image/_image.jsx";
 
 const propTypes = {
-  alt: PropTypes.string,
   className: PropTypes.string,
+  name: PropTypes.string,
   size: PropTypes.string,
-  url: PropTypes.string.isRequired
+  url: PropTypes.string
 };
 
 const defaultProps = {
-  alt: "",
+  name: null,
   size: "base"
+};
+
+const initials = function(name) {
+  if (name) {
+    return map(name.split(/\s/), name => name[0]).join('').substring(0,2)
+  }
+};
+
+const image = function(url, name) {
+  if (url) {
+    return (
+      <Image alt={name}
+          url={url}
+      />
+    )
+  }
 };
 
 class Avatar extends React.Component {
   render() {
     const {
-      alt,
       className,
+      name,
       size,
       url
     } = this.props;
 
     const css = classnames([
-      `avatar-${size}`,
+      `avatar_${size}`,
       className,
     ])
 
     return (
-      <div className={css}>
-        <Image alt={alt}
-            url={url}
-        />
+      <div className={css}
+          data-initials={initials(name)}
+      >
+        {image(url, name)}
       </div>
     )
   }
