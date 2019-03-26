@@ -32,3 +32,6 @@ WebpackerReact.setup (vertical_nav);
 
 import * as avatar from "pb_avatar/docs";
  WebpackerReact.setup (avatar);
+
+import * as input from "pb_input/docs";
+ WebpackerReact.setup (input);

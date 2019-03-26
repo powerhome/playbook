@@ -8,3 +8,4 @@ import "./pb_vertical_nav.js";
 import "./pb_image.js";
 import "./pb_table.js";
 import "./pb_avatar.js";
+import "./pb_input.js";

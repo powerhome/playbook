@@ -1,0 +1,5 @@
+examples:
+  rails:
+  - input_default: Default
+  react:
+  - input_default: Default
