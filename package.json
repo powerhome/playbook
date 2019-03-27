@@ -38,6 +38,7 @@
     "@storybook/storybook-deployer": "2.0.0",
     "babel-eslint": "8.0.0",
     "babel-preset-flow": "6.23.0",
+    "clean-webpack-plugin": "^2.0.1",
     "eslint-plugin-jsx-control-statements": "2.2.0",
     "eslint-plugin-react": "7.3.0",
     "extract-text-webpack-plugin": "3.0.0",
