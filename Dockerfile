@@ -4,6 +4,19 @@ RUN bash -lc 'rvm remove all --force && rvm install ruby-2.5.0 && rvm --default 
 RUN /pd_build/ruby_support/install_ruby_utils.sh
 RUN /pd_build/ruby_support/finalize.sh
 
+ENV NVM_VERSION v0.33.8
+ENV NODE_VERSION v8.9.4
+ENV NPM_VERSION 5.4.2
+ENV YARN_VERSION 1.13.0
+ENV NVM_DIR /home/app/.nvm
+ENV PATH $NVM_DIR/versions/node/$NODE_VERSION/bin:$PATH
+RUN curl -o- https://raw.githubusercontent.com/creationix/nvm/$NVM_VERSION/install.sh | bash \
+    && . $NVM_DIR/nvm.sh \
+    && nvm install $NODE_VERSION \
+    && nvm alias default $NODE_VERSION \
+    && nvm use default \
+    && npm install -g npm@$NPM_VERSION yarn@$YARN_VERSION
+
 WORKDIR /home/app
 
 ADD lib/playbook/version.rb /home/app/lib/playbook/
