@@ -1,4 +1,4 @@
 #!/bin/bash
 set -e
-cd /home/app/
-exec /home/app/bin/rails server --binding 0.0.0.0
+cd /home/app/src/
+exec /home/app/src/bin/rails server --binding 0.0.0.0
