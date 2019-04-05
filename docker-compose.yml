@@ -12,7 +12,7 @@ services:
   web:
     build: .
     volumes:
-      - .:/home/app
+      - .:/home/app/src
       - bundle:/usr/local/bundle
     ports:
       - "8080:3000"

@@ -17,14 +17,14 @@ RUN curl -o- https://raw.githubusercontent.com/creationix/nvm/$NVM_VERSION/insta
     && nvm use default \
     && npm install -g npm@$NPM_VERSION yarn@$YARN_VERSION
 
-WORKDIR /home/app
+WORKDIR /home/app/src
 
-ADD lib/playbook/version.rb /home/app/lib/playbook/
-ADD Gemfile* *.gemspec /home/app/
+ADD lib/playbook/version.rb /home/app/src/lib/playbook/
+ADD Gemfile* *.gemspec /home/app/src/
 RUN bundle install --frozen
 
-ADD . /home/app
-RUN chown -R app:app /home/app
-RUN mkdir /etc/service/puma && ln -s /home/app/services/puma.sh /etc/service/puma/run
+ADD . /home/app/src
+RUN chown -R app:app /home/app/src
+RUN mkdir /etc/service/puma && ln -s /home/app/src/services/puma.sh /etc/service/puma/run
 
-RUN RAILS_ENV=production SECRET_KEY_BASE=does_not_matter_here bin/webpack
+# RUN cd spec/dummy; RAILS_ENV=production SECRET_KEY_BASE=does_not_matter_here bin/rails assets:precompile webpacker:compile
