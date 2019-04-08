@@ -44,15 +44,10 @@ module.exports = function(api) {
     ].filter(Boolean),
     plugins: [
       require('babel-plugin-macros'),
-      
+
       require('@babel/plugin-syntax-dynamic-import').default,
       isTestEnv && require('babel-plugin-dynamic-import-node'),
       require('@babel/plugin-transform-destructuring').default,
-      [require('@babel/plugin-proposal-decorators').default,
-        { 
-          legacy: true 
-        }
-      ],
       [
         require('@babel/plugin-proposal-class-properties').default,
         {

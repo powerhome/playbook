@@ -1,4 +1,5 @@
 require "sassc-rails"
+require "webpacker"
 require "playbook/engine"
 
 module Playbook
