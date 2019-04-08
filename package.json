@@ -68,7 +68,7 @@
     "lodash": "4.17.5",
     "lqip.macro": "^0.1.5",
     "moment-timezone": "0.5.13",
-    "node-sass": "4.5.3",
+    "node-sass": "^4.11.0",
     "prop-types": "^15.6.2",
     "rails-erb-loader": "^5.5.1",
     "react": "^16.7.0",
