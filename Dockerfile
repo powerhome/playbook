@@ -27,4 +27,4 @@ ADD . /home/app/src
 RUN chown -R app:app /home/app/src
 RUN mkdir /etc/service/puma && ln -s /home/app/src/services/puma.sh /etc/service/puma/run
 
-RUN RAILS_ENV=production SECRET_KEY_BASE=does_not_matter_here bin/webpack
+RUN cd spec/dummy; RAILS_ENV=production SECRET_KEY_BASE=does_not_matter_here bin/rails assets:precompile

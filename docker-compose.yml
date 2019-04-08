@@ -24,6 +24,6 @@ services:
       - '.env.docker'
     command: ./bin/webpack-dev-server
     volumes:
-      - .:/webpacker-example-app
+      - .:/home/app/src
     ports:
       - '3035:3035'
