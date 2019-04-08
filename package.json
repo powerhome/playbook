@@ -32,7 +32,6 @@
   },
   "homepage": "https://github.com/powerhome/nitro-storybook#readme",
   "devDependencies": {
-    "@babel/plugin-proposal-decorators": "^7.3.0",
     "@babel/preset-env": "^7.3.4",
     "babel-eslint": "8.0.0",
     "babel-preset-flow": "6.23.0",
