@@ -32,7 +32,7 @@ The application is configured through a set of environment variables which can b
 
 ## Deployments
 
-* A staging environment is automatically deployed on every master build. Manual deployments are possible (via `make deploy environment=staging tag=PR-X-$SHA1-$BUILDNUMBER`) but are discouraged.
+* A staging environment is automatically deployed on every master build. Manual deployments are possible (via `make deploy cluster=APP-HQ environment=staging tag=PR-X-$SHA1-$BUILDNUMBER`) but are discouraged.
 * A production environment that is automatically deployed on every master build. Manual deployments are strongly discouraged.
 
 These environments are deployed from the same container used for local development, which is built by CI on every commit.
