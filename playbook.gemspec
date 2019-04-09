@@ -22,7 +22,6 @@ Gem::Specification.new do |s|
   s.add_dependency "webpacker-react", "~> 0.3.2"
   s.add_dependency "redcarpet", "3.4.0"
   s.add_dependency "rouge", "~> 1.10.1"
-  s.add_dependency "health_check", "~> 3.0.0"
   s.add_dependency "method_source", "~> 0.9.2"
 
   # LOOK AT REMOVING
