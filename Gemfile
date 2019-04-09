@@ -5,3 +5,5 @@ git_source(:github) do |repo_name|
 end
 
 gemspec
+
+gem "health_check"
