@@ -1,14 +1,28 @@
 module Playbook
   module PbCaption
-    class Caption
-      def initialize(tag: default_configuration,
-                   text: default_configuration,
+    class Caption < Playbook::PbKit::Base
+      PROPS = [:configured_classname,
+          :configured_dark,
+          :configured_data,
+          :configured_id,
+          :configured_large,
+          :configured_tag,
+          :configured_text].freeze
+
+      def initialize(classname: default_configuration,
+                   dark: default_configuration,
+                   data: default_configuration,
+                   id: default_configuration,
                    large: default_configuration,
-                   dark: default_configuration)
+                   tag: default_configuration,
+                   text: default_configuration)
+        self.configured_classname = classname
+        self.configured_dark = dark
+        self.configured_data = data
+        self.configured_id = id
+        self.configured_large = large
         self.configured_tag = tag
         self.configured_text = text
-        self.configured_large = large
-        self.configured_dark = dark
       end
 
       def tag
@@ -58,10 +72,7 @@ module Playbook
       def default_configuration
         DEFAULT
       end
-      attr_accessor :configured_tag,
-          :configured_text,
-          :configured_large,
-          :configured_dark
+      attr_accessor(*PROPS)
     end
   end
 end

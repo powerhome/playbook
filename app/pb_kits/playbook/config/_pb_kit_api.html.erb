@@ -1,0 +1,18 @@
+<% if defined?(@kit_api) && @kit_api.present? %>
+  <div data-action="toggle" data-togglable="prop_example" class="pb--propsTable">
+    <table class="pb--propsTable--table">
+      <thead>
+        <tr>
+          <th>Available Props</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @kit_api.each_with_index do |(key,value),index| %>
+          <tr>
+            <td><%= key %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+<% end %>
