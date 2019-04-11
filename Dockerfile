@@ -26,8 +26,7 @@ RUN bundle install --frozen
 ADD package.json yarn.lock /home/app/src/
 RUN yarn install
 
-ADD . /home/app/src
-RUN chown -R app:app /home/app/src
+ADD --chown=app:app . /home/app/src
 RUN mkdir /etc/service/puma && ln -s /home/app/src/services/puma.sh /etc/service/puma/run
 
 RUN cd spec/dummy; RAILS_ENV=production SECRET_KEY_BASE=does_not_matter_here bin/rails assets:precompile
