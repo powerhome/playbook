@@ -1,0 +1,12 @@
+<%= content_tag(:div) do %>
+  <%= content_tag(:table,
+      id: object.id,
+      data: object.data,
+      class: object.classname("table-#{object.size}
+          #{object.dark}
+          #{object.container}
+          #{object.disable_hover}
+          #{object.single_line}")) do %>
+    <%= object.yield(context: self) %>
+  <% end %>
+<% end %>

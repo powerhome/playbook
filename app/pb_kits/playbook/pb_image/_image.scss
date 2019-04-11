@@ -1,43 +1,15 @@
-@import "image_mixin";
+.pb_image {
+	max-width: 100%;
+	max-height: 100%;
 
-// FEEBACK: STYLING H1's & Strongs can have unxepected results
-// What happends if I do this <strong class="heading-1" or <h1 class="heading-3"
-
-.heading-1 {
-  @include heading-1;
-  &-dark {
-    @include heading-1-dark;
-  }
-}
-
-.heading-2 {
-  @include heading-2;
-  &-dark {
-    @include heading-2-dark;
-  }
-}
-
-.heading-3 {
-  @include heading-3;
-  &-dark {
-    @include heading-3-dark;
-  }
-}
-
-.heading-4, strong {
-  @include heading-4;
-  &-dark {
-    @include heading-4-dark;
-  }
-}
-
-  .blur-up {
+	.blur_up {
 		-webkit-filter: blur(6px);
 		filter: blur(6px);
 		transition: filter 550ms, -webkit-filter 550ms;
 	}
 
-	.blur-up.lazyloaded {
+	.blur_up.lazyloaded {
 		-webkit-filter: blur(0);
 		filter: blur(0);
 	}
+}

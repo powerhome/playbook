@@ -7,59 +7,47 @@
   background: transparent;
 }
 
-@mixin sizes {
-  &_large {
-    font-size: $font_large;
-    padding: 0 15px;
-    height: 40px;
-    color: $ink_lightest;
-  }
-
-  &_small {
-    font-size: $font_smaller;
-    padding: 0 7px;
-    height: 24px;
-    line-height: normal;
-    color: $ink_lightest;
-  }
-}
-
 .kit_btn_wrapper {
-  margin: 0 auto;
-  width: 100%;
+  display: inline-block;
 
-  .kit_btn {
-   @include kit_btn;
-   @include sizes;
+  [class^=pb_button] {
+    @include kit_btn;
 
-    &.red {
-      background: $power_red;
-      border: none;
-      color: $white;
-    }
-
-    &_primary {
-      @include kit_btn;
-      @include sizes;
+    &[class*=_primary] {
       background: $power_royal;
       border: none;
       color: $white;
     }
 
-    &_danger {
-      @include kit_btn;
-      @include sizes;
+    &[class*=_danger] {
       background: $power_red;
       border: none;
       color: $white;
     }
 
-    &_dashed {
-      @include kit_btn;
-      @include sizes;
+    &[class*=_dashed] {
       background-color: $white;
       color: $ink_lightest;
       border: dashed 1px $ink_lightest;
+    }
+
+    &[class*=_large] {
+      font-size: $font_large;
+      padding: 0 15px;
+      height: 40px;
+    }
+
+    &[class*=_small] {
+      font-size: $font_smaller;
+      padding: 0 7px;
+      height: 24px;
+      line-height: normal;
+    }
+
+    &.red {
+      background: $power_red;
+      border: none;
+      color: $white;
     }
   }
 }

@@ -1,16 +1,31 @@
 module Playbook
   module PbButton
-    class Button
-      def initialize(wrapperclass: default_configuration,
+    class Button < Playbook::PbKit::Base
+      PROPS = [:configured_classname,
+          :configured_dark,
+          :configured_data,
+          :configured_id,
+          :configured_size,
+          :configured_text,
+          :configured_type,
+          :configured_wrapperclass].freeze
+
+      def initialize(classname: default_configuration,
+                   dark: default_configuration,
+                   data: default_configuration,
+                   id: default_configuration,
                    text: default_configuration,
                    type: default_configuration,
                    size: default_configuration,
-                   dark: default_configuration)
-        self.configured_wrapperclass = wrapperclass
+                   wrapperclass: default_configuration)
+        self.configured_classname = classname
+        self.configured_dark = dark
+        self.configured_data = data
+        self.configured_id = id
         self.configured_text = text
         self.configured_type = type
         self.configured_size = size
-        self.configured_dark = dark
+        self.configured_wrapperclass = wrapperclass
       end
 
       def wrapperclass
@@ -66,11 +81,7 @@ module Playbook
       def default_configuration
         DEFAULT
       end
-      attr_accessor :configured_wrapperclass,
-          :configured_text,
-          :configured_type,
-          :configured_size,
-          :configured_dark
+      attr_accessor(*PROPS)
     end
   end
 end

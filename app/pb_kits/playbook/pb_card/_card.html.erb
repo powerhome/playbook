@@ -1,4 +1,6 @@
-<div class="pb_card">
-  <h1>I am card-Rails, <%= object.name %></h1>
-  <div><%= object.yield(context: self) %></div>
-</div>
+<%= content_tag(:div,
+    id: object.id,
+    data: object.data,
+    class: object.classname("pb_card")) do %>
+    <div><%= object.yield(context: self) %></div>
+<% end %>

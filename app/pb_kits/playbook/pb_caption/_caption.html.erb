@@ -1,1 +1,2 @@
-<%= content_tag(:"#{object.tag}", object.text, class: "caption#{object.large}#{object.dark}") %>
+<%= content_tag(:"#{object.tag}", object.text,
+    class: object.classname("caption#{object.large}#{object.dark}")) %>
