@@ -23,6 +23,9 @@ ADD lib/playbook/version.rb /home/app/src/lib/playbook/
 ADD Gemfile* *.gemspec /home/app/src/
 RUN bundle install --frozen
 
+ADD package.json yarn.lock /home/app/src/
+RUN yarn install
+
 ADD . /home/app/src
 RUN chown -R app:app /home/app/src
 RUN mkdir /etc/service/puma && ln -s /home/app/src/services/puma.sh /etc/service/puma/run
