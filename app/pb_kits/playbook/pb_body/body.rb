@@ -1,24 +1,28 @@
 module Playbook
   module PbBody
-    class Body
-      PROPS = [:configured_text, :configured_tag, :configured_color, :configured_dark].freeze
+    class Body < Playbook::PbKit::Base
+      PROPS = [:configured_classname,
+          :configured_color,
+          :configured_dark,
+          :configured_data,
+          :configured_id,
+          :configured_tag,
+          :configured_text].freeze
 
-      def initialize(text: default_configuration,
-                   tag: default_configuration,
+      def initialize(classname: default_configuration,
                    color: default_configuration,
-                   dark: default_configuration)
-        self.configured_tag = tag
+                   dark: default_configuration,
+                   data: default_configuration,
+                   id: default_configuration,
+                   tag: default_configuration,
+                   text: default_configuration)
+        self.configured_classname = classname
         self.configured_color = color
         self.configured_dark = dark
+        self.configured_data = data
+        self.configured_id = id
+        self.configured_tag = tag
         self.configured_text = text
-      end
-
-      def tag
-        if configured_tag == default_configuration
-          "p"
-        else
-          configured_tag
-        end
       end
 
       def color
@@ -39,6 +43,14 @@ module Playbook
         end
       end
 
+      def tag
+        if configured_tag == default_configuration
+          "p"
+        else
+          configured_tag
+        end
+      end
+
       def text
         if configured_text == default_configuration
           "This is some text"
@@ -49,10 +61,6 @@ module Playbook
 
       def to_partial_path
         "pb_body/body"
-      end
-
-      def self.options
-        new_hash = PROPS.map { |e| e.to_s.remove("configured_") }
       end
 
     private

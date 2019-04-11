@@ -1,0 +1,7 @@
+examples:
+  rails:
+  - title_light: Light UI
+  - title_dark: Dark UI
+  react:
+  - title_light: Light UI
+  - title_dark: Dark UI

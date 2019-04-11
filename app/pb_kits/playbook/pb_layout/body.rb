@@ -1,10 +1,18 @@
 module Playbook
   module PbLayout
-    class Body
-      PROPS = [:block].freeze
+    class Body < Playbook::PbKit::Base
+      PROPS = [:configured_classname,
+          :configured_data,
+          :configured_id,
+          :block].freeze
 
-      def initialize(content: default_configuration,
+      def initialize(classname: default_configuration,
+                  data: default_configuration,
+                  id: default_configuration,
                   &block)
+        self.configured_classname = classname
+        self.configured_data = data
+        self.configured_id = id
         self.block = block_given? ? block : nil
       end
 
@@ -14,10 +22,6 @@ module Playbook
 
       def to_partial_path
         "pb_layout/body"
-      end
-
-      def self.options
-        new_hash = PROPS.map { |e| e.to_s.remove("configured_") }
       end
 
     private

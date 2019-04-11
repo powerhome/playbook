@@ -26,7 +26,7 @@ class Button extends Component {
 
     return (
       <div className={wrapperclass}>
-        <button className={'kit_btn' + (type !== null ? `_${type}` : "" ) + (size !== null ? `_${size}` : "" ) + (dark === true ? "_dark" : "") + (componentclass !== "" ? `${componentclass}` : ""  )}>
+        <button className={'pb_button' + (type !== null ? `_${type}` : "" ) + (size !== null ? `_${size}` : "" ) + (dark === true ? "_dark" : "") + (componentclass !== "" ? `${componentclass}` : ""  )}>
             <span>{text}</span>
         </button>
       </div>

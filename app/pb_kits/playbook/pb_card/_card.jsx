@@ -1,12 +1,17 @@
 import React from 'react';
+import PropTypes from "prop-types";
+
+const propTypes = {
+  children: PropTypes.oneOfType([
+      PropTypes.arrayOf(PropTypes.node),
+      PropTypes.node
+  ])
+};
 
 class Card extends React.Component {
   render() {
     return (
       <div className="pb_card">
-        <h1>
-           I am card-React, {this.props.name}
-        </h1>
         <div className="pb_card_body">
           { this.props.children }
         </div>
@@ -14,5 +19,7 @@ class Card extends React.Component {
     )
   }
 }
+
+Card.propTypes = propTypes;
 
 export default Card;

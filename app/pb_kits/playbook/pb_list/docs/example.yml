@@ -1,0 +1,14 @@
+examples:
+  rails:
+  - list_default: Default
+  - list_lg: Large
+  - list_ordered: Ordered
+  - list_borderless: Borderless
+  - list_xpadding: Horizontal Padding
+  - list_dark: Dark Default
+  - list_dark_lg: Dark Large
+  - list_dark_ordered: Dark Ordered
+  - list_dark_borderless: Dark Borderless
+  - list_dark_xpadding: Dark Horizontal Padding
+  react:
+  - list_default: Default

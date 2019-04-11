@@ -1,18 +1,19 @@
 module Playbook
   module PbCard
-    class Card
-      def initialize(name: default_configuration,
-                     &block)
-        self.configured_name = name
-        self.block = block_given? ? block : nil
-      end
+    class Card < Playbook::PbKit::Base
+      PROPS = [:configured_classname,
+          :configured_data,
+          :configured_id,
+          :block].freeze
 
-      def name
-        if configured_name == default_configuration
-          "Tim"
-        else
-          configured_name
-        end
+      def initialize(classname: default_configuration,
+                   data: default_configuration,
+                   id: default_configuration,
+                   &block)
+        self.configured_classname = classname
+        self.configured_data = data
+        self.configured_id = id
+        self.block = block_given? ? block : nil
       end
 
       def yield(context:)
@@ -30,8 +31,7 @@ module Playbook
       def default_configuration
         DEFAULT
       end
-      attr_accessor :configured_name,
-          :block
+      attr_accessor(*PROPS)
     end
   end
 end

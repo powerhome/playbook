@@ -1,5 +1,5 @@
 .pb--kit-show
-  = pb_rails("heading", props: { text: pb_title(@kit), tag: "h1", size: "1" })
+  = pb_rails("title", props: { text: pb_title(@kit), tag: "h1", size: "1" })
 
   .pb--kit-type-nav
     - if has_kit_type?(@kit, "rails")
@@ -9,5 +9,6 @@
 
   - if(action_name == "kit_show_rails")
     = pb_kit(kit: @kit)
+    = pb_kit_api(@kit)
   - else
     = pb_kit(kit: @kit, type: "react")

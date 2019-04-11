@@ -1,0 +1,7 @@
+examples:
+  rails:
+  - body_light: Light UI
+  - body_dark: Dark UI
+  react:
+  - body_light: Light UI
+  - body_dark: Dark UI

@@ -1,27 +1,36 @@
 module Playbook
   module PbLayout
-    class Layout
-      PROPS = [:configured_position,
-        :configured_transparent,
-        :configured_size,
+    class Layout < Playbook::PbKit::Base
+      PROPS = [:configured_classname,
         :configured_collapse,
         :configured_dark,
+        :configured_data,
         :configured_full,
+        :configured_id,
+        :configured_position,
+        :configured_transparent,
+        :configured_size,
         :block].freeze
 
-      def initialize(position: default_configuration,
-                   transparent: default_configuration,
-                   size: default_configuration,
+      def initialize(classname: default_configuration,
                    collapse: default_configuration,
                    dark: default_configuration,
+                   data: default_configuration,
                    full: default_configuration,
+                   id: default_configuration,
+                   position: default_configuration,
+                   transparent: default_configuration,
+                   size: default_configuration,
                    &block)
+        self.configured_classname = classname
+        self.configured_collapse = collapse
+        self.configured_dark = dark
+        self.configured_data = data
+        self.configured_full = full
+        self.configured_id = id
         self.configured_position = position
         self.configured_transparent = transparent
         self.configured_size = size
-        self.configured_collapse = collapse
-        self.configured_dark = dark
-        self.configured_full = full
         self.block = block_given? ? block : nil
       end
 
@@ -85,10 +94,6 @@ module Playbook
 
       def to_partial_path
         "pb_layout/layout"
-      end
-
-      def self.options
-        new_hash = PROPS.map { |e| e.to_s.remove("configured_") }
       end
 
     private

@@ -1,7 +1,7 @@
-### <a name="tith"></a> Getting Started
+### Getting Started
 ---
 
-####Commands to get you started.
+#### Commands to get you started.
 
 To watch for changes run:
 
@@ -10,7 +10,3 @@ To watch for changes run:
 To spin up the app run:
 
 `bundle exec rails s`
-
-To generate a new kit run:
-
-`rails g kit my_new_kit`
