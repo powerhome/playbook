@@ -12,4 +12,7 @@ Playbook::Engine.routes.draw do
   get 'kits/:name', to: "pages#kit_show_rails", as: 'kit_show'
   get 'kits/:name/rails', to: "pages#kit_show_rails", as: 'kit_show_rails'
   get 'kits/:name/react', to: "pages#kit_show_react", as: 'kit_show_reacts'
+
+  get 'guides',     to: "guides#create_kit"
+  get 'guides/use-in-nitro', to: "guides#use_nitro"
 end
