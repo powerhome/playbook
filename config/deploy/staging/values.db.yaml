@@ -1,2 +1,2 @@
 persistence:
-  storageClass: 'staging-performance'
+  storageClass: 'staging-standard'
