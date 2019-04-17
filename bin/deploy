@@ -5,13 +5,19 @@ revision=$2
 tag=$3
 cluster=$4
 
+environmentDbValuesFile=""
+if [ -e /app/config/deploy/$environment/values.db.yaml ]; then
+    environmentDbValuesFile="-f /app/config/deploy/$environment/values.db.yaml"
+fi
+
 # deploy postgresql with helm
 sops --decrypt /app/config/deploy/${environment}/secrets.db.yaml > /app/config/deploy/${environment}/secrets.db.dec.yaml
 helm upgrade --install --wait --timeout 600 \
     playbook-db-${environment} stable/postgresql --version 3.9.1 \
     --namespace playbook-${environment} --kube-context=${cluster} --tiller-namespace=app-tiller \
     -f /app/config/deploy/${environment}/secrets.db.dec.yaml \
-    -f /app/config/deploy/values.db.yaml
+    -f /app/config/deploy/values.db.yaml \
+    ${environmentDbValuesFile}
 
 helm_exit=$?
 rm /app/config/deploy/${environment}/secrets.db.dec.yaml
