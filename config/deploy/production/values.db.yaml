@@ -1,2 +1,2 @@
 persistence:
-  storageClass: 'production-performance'
+  storageClass: 'production-standard'
