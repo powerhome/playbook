@@ -21,10 +21,11 @@ WORKDIR /home/app/src
 
 ADD lib/playbook/version.rb /home/app/src/lib/playbook/
 ADD Gemfile* *.gemspec /home/app/src/
-RUN bundle install --frozen
+RUN bundle check || bundle install --frozen
+RUN /bin/sh -c "rm -f /home/app/src/spec/dummy/tmp/pids/server.pid"
 
 ADD package.json yarn.lock /home/app/src/
-RUN yarn install
+RUN yarn install --check-files
 
 ADD --chown=app:app . /home/app/src
 RUN mkdir /etc/service/puma && ln -s /home/app/src/services/puma.sh /etc/service/puma/run
