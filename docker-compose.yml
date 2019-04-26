@@ -18,6 +18,7 @@ services:
       - "8080:3000"
     depends_on:
       - db
+      - webpacker
   webpacker:
     build: .
     env_file:
