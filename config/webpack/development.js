@@ -11,4 +11,5 @@ environment.plugins.append(
     verbose: true
   })
 )
+
 module.exports = environment.toWebpackConfig()
