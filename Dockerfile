@@ -21,12 +21,13 @@ WORKDIR /home/app/src
 
 ADD lib/playbook/version.rb /home/app/src/lib/playbook/
 ADD Gemfile* *.gemspec /home/app/src/
-RUN bundle install --frozen
+RUN bundle check || bundle install --frozen
 
 ADD package.json yarn.lock /home/app/src/
 RUN yarn install --check-files
 
 ADD --chown=app:app . /home/app/src
+RUN ln -s public spec/dummy/public
 RUN mkdir /etc/service/puma && ln -s /home/app/src/services/puma.sh /etc/service/puma/run
 
 RUN cd spec/dummy; RAILS_ENV=production SECRET_KEY_BASE=does_not_matter_here bin/rails assets:precompile

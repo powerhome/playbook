@@ -2,3 +2,5 @@ charts
 Dockerfile
 node_modules
 **/tmp
+docker-compose.yml
+.git*
