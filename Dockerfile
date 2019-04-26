@@ -21,8 +21,7 @@ WORKDIR /home/app/src
 
 ADD lib/playbook/version.rb /home/app/src/lib/playbook/
 ADD Gemfile* *.gemspec /home/app/src/
-RUN bundle check || bundle install --frozen
-RUN /bin/sh -c "rm -f /home/app/src/spec/dummy/tmp/pids/server.pid"
+RUN bundle install --frozen
 
 ADD package.json yarn.lock /home/app/src/
 RUN yarn install --check-files
