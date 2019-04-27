@@ -18,6 +18,7 @@ RUN curl -o- https://raw.githubusercontent.com/creationix/nvm/$NVM_VERSION/insta
     && npm install -g npm@$NPM_VERSION yarn@$YARN_VERSION
 
 WORKDIR /home/app/src
+COPY . /home/app/src
 
 ADD lib/playbook/version.rb /home/app/src/lib/playbook/
 ADD Gemfile* *.gemspec /home/app/src/

@@ -23,7 +23,7 @@ services:
     build: .
     env_file:
       - '.env.docker'
-    command: ./bin/webpack-dev-server
+    command: ./bin/webpack --watch
     volumes:
       - .:/home/app/src
     ports:
