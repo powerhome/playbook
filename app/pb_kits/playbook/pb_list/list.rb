@@ -34,67 +34,51 @@ module Playbook
         self.block = block_given? ? block : nil
       end
 
-
-      def class
-        if configured_class == default_configuration
-          ""
-        else
-          configured_class
-        end
+      def dark
+        self.true_value(configured_dark, "_dark", "")
       end
 
-      def dark
-        if configured_dark == default_configuration
-          ""
-        elsif(configured_dark == true)
-            "_dark"
+      def one_of_value(value, options = [], default = "")
+        if self.is_set?(value)
+          options.include?(value) ? value : default
+        else
+          default
         end
       end
 
       def layout
-        if configured_layout == default_configuration
-          ""
-        elsif(configured_layout == "left")
-            "_layout_left"
-        elsif(configured_layout == "right")
-              "_layout_right"
+        self.one_of_value(configured_layout, %w(left right), default = "")
+      end
+
+      def layout_class
+        layout_default = ""
+        processed_layout = self.layout
+        if processed_layout != layout_default
+          "_layout_#{processed_layout}"
+        else
+          layout_default
         end
       end
 
       def lg
-        if configured_lg == default_configuration
-          ""
-        elsif(configured_lg == true)
-          "_lg"
-        end
+        self.true_value(configured_lg, "_lg", "")
       end
 
       def ordered
-        if configured_ordered == false
-          "ul"
-        else
-          "ol"
-        end
+        self.false_value(configured_ordered, "ul", "ol")
       end
 
       def xpadding
-        if configured_xpadding == default_configuration
-          ""
-        elsif(configured_xpadding == true)
-            "_xpadding"
-        end
+        self.true_value(configured_xpadding, "_xpadding", "")
       end
 
       def borderless
-        if configured_borderless == false
-          ""
-        else
-          "_borderless"
-        end
+        self.default_value(configured_borderless, "_borderless")
       end
 
       def yield(context:)
-        context.capture(&block)
+        default_block = ""
+        block.present? ? context.capture(&block) : default_block
       end
 
       def to_partial_path

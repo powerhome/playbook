@@ -23,29 +23,15 @@ module Playbook
       end
 
       def active
-        if configured_active == default_configuration
-          ""
-        else
-          if (configured_active == true)
-            "_active"
-          end
-        end
+        self.true_value(configured_active, "_active", "")
       end
 
       def link
-        if configured_link == default_configuration
-          "#"
-        else
-          configured_link
-        end
+        self.default_value(configured_link, "#")
       end
 
       def text
-        if configured_text == default_configuration
-          ""
-        else
-          configured_text
-        end
+        self.default_value(configured_text, "")
       end
 
       def to_partial_path

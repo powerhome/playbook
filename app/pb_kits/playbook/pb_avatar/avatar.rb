@@ -26,43 +26,24 @@ module Playbook
       end
 
       def name
-        if configured_name == default_configuration
-          ""
-        else
-          configured_name
-        end
+        self.default_value(configured_name, "")
       end
 
       def initials
-        if configured_name == default_configuration
-          ""
-        else
-          configured_name.split.map(&:first).join.downcase
-        end
+        self.is_set?(configured_name) ?
+            configured_name.split.map(&:first).join.downcase : ""
       end
 
       def size
-        if configured_size == default_configuration
-          "base"
-        else
-          configured_size
-        end
+        self.one_of_value(configured_size, %w(xs sm md base lg xl), "base")
       end
 
       def text
-        if configured_text == default_configuration
-          ""
-        else
-          configured_text
-        end
+        self.default_value(configured_text, "")
       end
 
       def url
-        if configured_url == default_configuration
-          ""
-        else
-          configured_url
-        end
+        self.default_value(configured_url, "")
       end
 
       def to_partial_path

@@ -26,37 +26,19 @@ module Playbook
       end
 
       def color
-        if configured_color == default_configuration
-          ""
-        else
-          "_#{configured_color}"
-        end
+        self.is_set?(configured_color) ? "_#{configured_color}" : ""
       end
 
       def dark
-        if configured_dark == default_configuration
-          ""
-        else
-          if (configured_dark == true)
-            "_dark"
-          end
-        end
+        self.true_value(configured_dark, "_dark", "")
       end
 
       def tag
-        if configured_tag == default_configuration
-          "p"
-        else
-          configured_tag
-        end
+        self.default_value(configured_tag, "p")
       end
 
       def text
-        if configured_text == default_configuration
-          "This is some text"
-        else
-          configured_text
-        end
+        self.default_value(configured_text, "This is some text")
       end
 
       def to_partial_path

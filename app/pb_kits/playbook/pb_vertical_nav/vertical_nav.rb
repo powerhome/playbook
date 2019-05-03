@@ -23,23 +23,16 @@ module Playbook
       end
 
       def title
-        if configured_title == default_configuration
-          ""
-        else
-          configured_title
-        end
+        self.default_value(configured_title, "")
       end
 
       def link
-        if configured_link == default_configuration
-          "#"
-        else
-          configured_link
-        end
+        self.default_value(configured_link, "#")
       end
 
       def yield(context:)
-        context.capture(&block)
+        default_block = ""
+        block.present? ? context.capture(&block) : default_block
       end
 
       def to_partial_path

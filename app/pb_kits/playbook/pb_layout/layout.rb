@@ -35,57 +35,31 @@ module Playbook
       end
 
       def position
-        if configured_position == default_configuration
-          "_left"
-        else
-          "_#{configured_position}"
-        end
+        self.is_set?(configured_position) ? "_#{configured_position}" : "_left"
       end
 
       def transparent
-        if configured_transparent == default_configuration
-          ""
-        else
-          if (configured_transparent == true)
-            "_transparent"
-          end
-        end
+        self.true_value(configured_transparent, "_transparent", "")
       end
 
       def size
-        if configured_size == default_configuration
-          "md"
-        else
-          configured_size
-        end
+        self.default_value(configured_size, "md")
       end
 
       def collapse
-        if configured_collapse == default_configuration
-          " layout#{self.position}_collapse_xs"
-        else
+        if self.is_set?(configured_collapse)
           " layout#{self.position}_collapse_#{configured_collapse}"
+        else
+          " layout#{self.position}_collapse_xs"
         end
       end
 
       def full
-        if configured_full == default_configuration
-          ""
-        else
-          if (configured_full == true)
-            " full"
-          end
-        end
+        self.true_value(configured_full, " full", "")
       end
 
       def dark
-        if configured_dark == default_configuration
-          ""
-        else
-          if (configured_dark == true)
-            "_dark"
-          end
-        end
+        self.true_value(configured_dark, "_dark", "")
       end
 
       def yield(context:)

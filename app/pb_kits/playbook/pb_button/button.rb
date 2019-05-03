@@ -29,45 +29,23 @@ module Playbook
       end
 
       def wrapperclass
-        if configured_wrapperclass == default_configuration
-          "kit_btn_wrapper"
-        else
-          configured_wrapperclass
-        end
+        self.default_value(configured_wrapperclass, "kit_btn_wrapper")
       end
 
       def text
-        if configured_text == default_configuration
-          "Button"
-        else
-          configured_text
-        end
+        self.default_value(configured_text, "Button")
       end
 
       def type
-        if configured_type == default_configuration
-          ""
-        else
-          "_#{configured_type}"
-        end
+        self.is_set?(configured_type) ? "_#{configured_type}" : ""
       end
 
       def size
-        if configured_size == default_configuration
-          ""
-        else
-          "_#{configured_size}"
-        end
+        self.is_set?(configured_size) ? "_#{configured_size}" : ""
       end
 
       def dark
-        if configured_dark == default_configuration
-          ""
-        else
-          if (configured_dark == true)
-            "_dark"
-          end
-        end
+        self.true_value(configured_dark, "_dark", "")
       end
 
       def to_partial_path

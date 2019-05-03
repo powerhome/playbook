@@ -26,37 +26,24 @@ module Playbook
       end
 
       def tag
-        if configured_tag == default_configuration
-          "h1"
-        else
-          configured_tag
-        end
+        self.default_value(configured_tag, "h1")
       end
 
       def text
-        if configured_text == default_configuration
-          "Hello World"
-        else
-          configured_text
-        end
+        self.default_value(configured_text, "Hello World")
       end
 
       def size
-        if configured_size == default_configuration
-          "_1"
-        else
-          "_#{configured_size}"
-        end
+        self.one_of_value(configured_size, [1,2,3,4], 1)
+      end
+
+      def size_class
+        processed_size = self.size
+        "_#{processed_size}"
       end
 
       def dark
-        if configured_dark == default_configuration
-          ""
-        else
-          if (configured_dark == true)
-            "_dark"
-          end
-        end
+        self.true_value(configured_dark, "_dark", "")
       end
 
       def to_partial_path

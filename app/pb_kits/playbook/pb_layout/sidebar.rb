@@ -17,7 +17,8 @@ module Playbook
       end
 
       def yield(context:)
-        context.capture(&block)
+        default_block = ""
+        block.present? ? context.capture(&block) : default_block
       end
 
       def to_partial_path

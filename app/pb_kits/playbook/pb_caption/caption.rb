@@ -26,39 +26,19 @@ module Playbook
       end
 
       def tag
-        if configured_tag == default_configuration
-          "div"
-        else
-          configured_tag
-        end
+        self.default_value(configured_tag, "div")
       end
 
       def text
-        if configured_text == default_configuration
-          "Caption"
-        else
-          configured_text
-        end
+        self.default_value(configured_text, "Caption")
       end
 
       def large
-        if configured_large == default_configuration
-          ""
-        else
-          if (configured_large == true)
-            "_lg"
-          end
-        end
+        self.true_value(configured_large, "_lg", "")
       end
 
       def dark
-        if configured_dark == default_configuration
-          ""
-        else
-          if (configured_dark == true)
-            "_dark"
-          end
-        end
+        self.true_value(configured_dark, "_dark", "")
       end
 
       def to_partial_path

@@ -29,43 +29,23 @@ module Playbook
       end
 
       def label
-        if configured_label == default_configuration
-          ""
-        else
-          configured_label
-        end
+        self.default_value(configured_label, "")
       end
 
       def name
-        if configured_name == default_configuration
-          ""
-        else
-          configured_name
-        end
+        self.default_value(configured_name, "")
       end
 
       def placeholder
-        if configured_placeholder == default_configuration
-          ""
-        else
-          configured_placeholder
-        end
+        self.default_value(configured_placeholder, "")
       end
 
       def type
-        if configured_type == default_configuration
-          "text"
-        else
-          configured_type
-        end
+        self.default_value(configured_type, "text")
       end
 
       def value
-        if configured_value == default_configuration
-          ""
-        else
-          configured_value
-        end
+        self.default_value(configured_value, "")
       end
 
       def to_partial_path

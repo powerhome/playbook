@@ -20,19 +20,11 @@ module Playbook
       end
 
       def alt
-        if configured_alt == default_configuration
-          ""
-        else
-          configured_alt
-        end
+        self.default_value(configured_alt, "")
       end
 
       def url
-        if configured_url == default_configuration
-          "path/to/some/image/placeholder.jpg"
-        else
-          configured_url
-        end
+        self.default_value(configured_url, "path/to/some/image/placeholder.jpg")
       end
 
       def to_partial_path

@@ -33,49 +33,28 @@ module Playbook
       end
 
       def single_line
-        if configured_single_line == default_configuration
-          ""
-        else
-          configured_single_line === true ? "single-line" : ""
-        end
+        self.true_value(configured_single_line, "single-line", "")
       end
 
       def size
-        size_options = %w(sm md lg)
-        size_default = "sm"
-        if configured_size == default_configuration
-          size_default
-        else
-          size_options.include?(configured_size) ? configured_size : size_default
-        end
+        self.one_of_value(configured_size, %w(sm md lg), "sm")
       end
 
       def dark
-        if configured_dark == default_configuration
-          ""
-        else
-          configured_dark === true ? "table-dark" : ""
-        end
+        self.true_value(configured_dark, "table-dark", "")
       end
 
       def disable_hover
-        if configured_disable_hover == default_configuration
-          ""
-        else
-          configured_disable_hover === true ? "no-hover" : ""
-        end
+        self.true_value(configured_disable_hover, "no-hover", "")
       end
 
       def container
-        if configured_container == default_configuration
-          ""
-        else
-          configured_container === true ? "table-card" : ""
-        end
+        self.true_value(configured_container, "table-card", "")
       end
 
       def yield(context:)
-        context.capture(&block)
+        default_block = ""
+        block.present? ? context.capture(&block) : default_block
       end
 
       def to_partial_path
