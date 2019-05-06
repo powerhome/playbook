@@ -22,7 +22,6 @@ services:
     build: .
     env_file:
       - '.env.docker'
-    command: ./bin/webpack-dev-server
     command: bash -c "rm -rf /app/public/packs; ./bin/webpack-dev-server"
     volumes:
       - .:/home/app/src
