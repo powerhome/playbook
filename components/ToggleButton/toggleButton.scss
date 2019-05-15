@@ -1,0 +1,70 @@
+@import "base-variables/_colors.scss";
+@import "base-variables/_spacing.sass";
+@import "base-variables/_typography.sass";
+
+.root {
+  cursor: pointer;
+}
+
+.toggle-button {
+
+  @mixin toggle-btn($radius) {
+    $inactive: $gray-2;
+    $active: $power-green;
+    $offset: $radius / ($radius / 2);
+    border: 1px solid $inactive;
+    border-radius: $radius;
+    background: $inactive;
+    float: left;
+    margin-right: $space-base;
+    padding: $radius / 2;
+    position: relative;
+    width: $radius * 2;
+    transition-property: background border;
+    transition-duration: 0.5s;
+    &::before {
+      content: ' ';
+      cursor: pointer;
+      border-radius: $radius;
+      background: $white;
+      padding: ($radius / 2) - $offset;
+      position: absolute;
+      left: $offset + 0px;
+      top: $offset + 0px;
+      transition-property: all;
+      transition-duration: 0.5s;
+    }
+    &-active {
+      background: $active;
+      border: 1px solid $active;
+      &::before {
+        left: $radius;
+      }
+    }
+  }
+
+  $radius: 30px;
+
+  &-small {
+    @include toggle-btn($radius / 2);
+    &-label {
+      cursor: pointer;
+      font-size: $font-smaller;
+    }
+  }
+  &-med {
+    @include toggle-btn($radius);
+    &-label {
+      cursor: pointer;
+      margin-top: 5px;
+    }
+  }
+  &-large {
+    @include toggle-btn($radius * 2);
+    &-label {
+      cursor: pointer;
+      margin-top: 5px;
+      font-size: $font-larger;
+    }
+  }
+}

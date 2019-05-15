@@ -1,0 +1,16 @@
+br
+= pb_rails("title", props: { text: title, tag: "h4", size: "4" })
+
+- if defined?(usage) && usage.present?
+  = pb_rails("body", props: {"tag": "p", "text": usage})
+
+br
+ul.pb--tokens-spacing
+  - sizes.each do |item|
+    - variable = (defined?(item[:variable]) && !item[:variable].nil?) ? "$#{item[:variable]}" : ""
+    - item[:dark] ||= false
+    - item[:class] ||= item[:variable]
+
+    li class=(item[:dark] == true ? "dark" : "") data-name="#{item[:name]}" data-variable="#{variable}"
+      div
+        div class="pb--spacing_#{item[:class]}"

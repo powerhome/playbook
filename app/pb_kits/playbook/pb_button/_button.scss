@@ -1,0 +1,53 @@
+@mixin kit_btn {
+  line-height: 38px;
+  padding: 0 15px;
+  border-radius: 4px;
+  border: 1px solid $ink_lightest;
+  font-size: 14px;
+  background: transparent;
+}
+
+.kit_btn_wrapper {
+  display: inline-block;
+
+  [class^=pb_button] {
+    @include kit_btn;
+
+    &[class*=_primary] {
+      background: $power_royal;
+      border: none;
+      color: $white;
+    }
+
+    &[class*=_danger] {
+      background: $power_red;
+      border: none;
+      color: $white;
+    }
+
+    &[class*=_dashed] {
+      background-color: $white;
+      color: $ink_lightest;
+      border: dashed 1px $ink_lightest;
+    }
+
+    &[class*=_large] {
+      font-size: $font_large;
+      padding: 0 15px;
+      height: 40px;
+    }
+
+    &[class*=_small] {
+      font-size: $font_smaller;
+      padding: 0 7px;
+      height: 24px;
+      line-height: normal;
+    }
+
+    &.red {
+      background: $power_red;
+      border: none;
+      color: $white;
+    }
+  }
+}

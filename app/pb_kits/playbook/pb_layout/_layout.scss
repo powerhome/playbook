@@ -1,0 +1,87 @@
+@import "../tokens/colors";
+@import "../tokens/spacing";
+@import "../tokens/screen_sizes";
+@import "./layout_mixin";
+
+.layout {
+
+  $layout_sizes: (
+    "xs":   64px,
+    "sm":   200px,
+    "md":   250px,
+    "lg":   300px,
+    "xl":   365px,
+  );
+  $positions: (
+    "left",
+    "right",
+  );
+  $colors: (
+    "light",
+    "dark",
+    "transparent",
+  );
+
+  // Sections
+  &_section {
+    padding: $space_sm $space_xl;
+    &_border {
+      padding: $space_sm $space_xl;
+      border-bottom: 1px solid $sky;
+      &_margin {
+        margin: $space_sm $space_xl;
+        border-bottom: 1px solid $sky;
+      }
+    }
+  }
+
+  // sidebar and Body
+  @each $name, $size in $layout_sizes {
+    &_#{$name} {
+      @each $position in $positions {
+        &_#{$position} {
+          @each $color in $colors {
+            @if $color == "light" {
+              @include layout_settings($size, $position, $color, "#{&}");
+            } @else {
+              &_#{$color} {
+                @include layout_settings($size, $position, $color, "#{&}");
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+
+  // Collapse Settings
+  @each $position in $positions {
+    @each $breakpoint_name, $breakpoint in $breakpoints {
+      &_#{$position}_collapse_#{$breakpoint_name} {
+        @include break_at($breakpoint) {
+          @if $position == 'left' {
+            grid-template-areas: "layout_collapsed_#{$breakpoint_name}_sidebar" "layout_collapsed_#{$breakpoint_name}_body";
+            grid-template-rows: auto 1fr;
+
+          } @else {
+            grid-template-areas: "layout_collapsed_#{$breakpoint_name}_body" "layout_collapsed_#{$breakpoint_name}_sidebar";
+            grid-template-rows: 1fr auto;
+          }
+          grid-template-columns: 1fr;
+          &.full {
+            min-height: auto !important;
+          }
+          .layout_sidebar {
+            grid-area: layout_collapsed_#{$breakpoint_name}_sidebar;
+            border-width: 0 0 1px 0;
+          }
+          .layout_body {
+            grid-area: layout_collapsed_#{$breakpoint_name}_body;
+          }
+        }
+      }
+    }
+  }
+
+}

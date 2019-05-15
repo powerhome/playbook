@@ -1,0 +1,121 @@
+//== Labels
+//
+//##
+
+//** Default label background color
+$label-default-bg:            $gray-light !default;
+//** Primary label background color
+$label-primary-bg:            $brand-primary !default;
+//** Success label background color
+$label-success-bg:            $brand-success !default;
+//** Info label background color
+$label-info-bg:               $brand-info !default;
+//** Warning label background color
+$label-warning-bg:            $brand-warning !default;
+//** Danger label background color
+$label-danger-bg:             $brand-danger !default;
+
+//** Default label text color
+$label-color:                 #fff !default;
+//** Default text color of a linked label
+$label-link-hover-color:      #fff !default;
+
+
+
+
+
+
+// Labels
+
+@mixin label-variant($color) {
+  background-color: $color;
+  @include text-color($color);
+  @if $color == $white {
+    border: 1px solid $border-color;
+  }
+
+  &[href] {
+    &:hover,
+    &:focus {
+      background-color: darken($color, 10%);
+    }
+  }
+}
+
+
+
+
+
+
+
+//
+// Labels
+// --------------------------------------------------
+
+.label {
+  display: inline;
+  padding: .15em .8em;
+  font-size: 75%;
+  font-weight: $bold;
+  @include smooth-font;
+  line-height: 1;
+  color: $label-color;
+  background: $label-default-bg;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: baseline;
+  border-radius: .25em;
+
+  table & {
+    @include smooth-font-off;
+  }
+
+
+  // Colors
+  // Contextual variations (linked badges get darker on :hover)
+
+  &-default {
+    @include label-variant($white);
+  }
+  &-primary {
+    @include label-variant($power-royal);
+  }
+  &-success {
+    @include label-variant($power-green);
+  }
+  &-info {
+    @include label-variant($medium-teal);
+  }
+  &-warning {
+    @include label-variant($dark-orange);
+  }
+  &-danger {
+    @include label-variant($power-red);
+  }
+  &-inverse {
+    @include label-variant($ink);
+  }
+
+
+
+  // Empty labels collapse automatically (not available in IE8)
+  &:empty {
+    display: none;
+  }
+
+  // Quick fix for labels in buttons
+  .btn & {
+    position: relative;
+    top: -1px;
+  }
+}
+
+// Add hover effects, but only for links
+a.label {
+  &:hover,
+  &:focus {
+    color: $label-link-hover-color;
+    text-decoration: none;
+    cursor: pointer;
+  }
+}

@@ -1,0 +1,173 @@
+@import "../../../tokens/colors";
+
+.pb--doc {
+  margin-bottom: 20px;
+  border: 1px solid $border-light;
+  border-radius: 4px;
+  box-shadow: 0 4px 10px $shadow_light;
+  background: $white;
+  overflow: hidden;
+
+  .pb--close-toggle {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    background: rgba($white, 0.8);
+    padding: 0 10px;
+    border-radius: 2px;
+    height: 22px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 12px;
+    font-weight: 600;
+    z-index: 100;
+  }
+
+  .pb--kit-example {
+    padding: calc(2rem + 4px) 2rem 1rem;
+    position: relative;
+
+    &::after {
+      content: '';
+      width: 100%;
+      height: 4px;
+      background: $border-light;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+  }
+
+  .pb--codeControls {
+    ul {
+      height: 45px;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      list-style: none;
+      margin: 0;
+      padding: 0 20px;
+
+      li {
+        font-size: 12px;
+        margin: 0;
+        padding: 0;
+        position: relative;
+
+        a {
+          color: $primary_action;
+          padding: 0 10px;
+          line-height: 45px;
+          display: inline-block;
+        }
+
+        &::after {
+          content: '';
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          width: 100%;
+          height: 2px;
+          opacity: 0.9;
+          background-color: transparent;
+        }
+
+        &.active {
+          font-weight: 600;
+
+          &::after {
+            background-color: $primary_action;
+            opacity: 0.2;
+          }
+        }
+      }
+    }
+  }
+
+  .pb--codeCopy {
+    padding: 20px 40px;
+    background: $bg_dark;
+    position: relative;
+    border-top: 1px solid $border-light;
+    display: none;
+  }
+
+  &.dark_ui {
+    background: $bg_dark;
+
+    .pb--kit-example {
+      color: $white;
+
+      &::after {
+        background: $border-dark;
+      }
+    }
+    .pb--codeCopy {
+      border-color: $border-dark;
+    }
+    .pb--codeControls {
+      ul {
+        li {
+          a {
+            color: $primary_action_dk;
+          }
+        }
+      }
+    }
+  }
+}
+
+.pb--propsTable {
+  position: relative;
+  margin: 40px 0 0;
+  background: $sky-lighter;
+  color: #faf6e4;
+  padding: 10px 30px 10px 30px;
+  border: 1px solid $border-light;
+
+  &--table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 10px;
+
+    tr {
+      padding: 10px;
+
+      th {
+        text-align: left;
+        padding: 10px 10px 5px 10px;
+        color: $ink_lighter;
+        opacity: 0.7;
+        font-size: 12px;
+        text-transform: uppercase;
+      }
+
+      td {
+        border-bottom: 1px solid $border-light;
+        padding: 5px 10px;
+        font-size: 14px;
+        color: $ink;
+        font-weight: 600;
+      }
+
+      &:last-child {
+        td {
+          border-bottom-width: 0;
+        }
+      }
+    }
+
+    &--notset {
+      font-size: 12px;
+      opacity: 0.4;
+      font-style: italic;
+      position: relative;
+      font-weight: 400;
+
+      &:after {
+        content: "not set";
+      }
+    }
+  }
+}

@@ -1,0 +1,6 @@
+<%= content_tag(:div,
+    id: object.id,
+    data: object.data,
+    class: object.classname("layout_sidebar")) do %>
+  <%= object.yield(context: self) %>
+<% end %>

@@ -1,0 +1,14 @@
+.pb--kit-show
+  = pb_rails("title", props: { text: pb_title(@kit), tag: "h1", size: "1" })
+
+  .pb--kit-type-nav
+    - if has_kit_type?(@kit, "rails")
+      a href="#{kit_show_rails_path(@kit)}" class="#{'active' if action_name == 'kit_show_rails'}" Rails
+    - if has_kit_type?(@kit, "react")
+      a href="#{kit_show_reacts_path(@kit)}" class="#{'active' if action_name == 'kit_show_react'}" React
+
+  - if(action_name == "kit_show_rails")
+    = pb_kit(kit: @kit)
+    = pb_kit_api(@kit)
+  - else
+    = pb_kit(kit: @kit, type: "react")

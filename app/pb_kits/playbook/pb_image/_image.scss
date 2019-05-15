@@ -1,0 +1,15 @@
+.pb_image {
+	max-width: 100%;
+	max-height: 100%;
+
+	.blur_up {
+		-webkit-filter: blur(6px);
+		filter: blur(6px);
+		transition: filter 550ms, -webkit-filter 550ms;
+	}
+
+	.blur_up.lazyloaded {
+		-webkit-filter: blur(0);
+		filter: blur(0);
+	}
+}

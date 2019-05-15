@@ -1,0 +1,17 @@
+table {
+  &.table-sm,
+  &.table-md,
+  &.table-lg {
+    thead {
+      tr {
+        th {
+          color: $ink-lightest;
+          font-size: $default-header-size;
+          font-weight: $regular;
+          text-transform: uppercase;
+          border-bottom: 1px solid $sky;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "variations": [
+    {
+      "name": "primary",
+      "props": {
+        "type": "primary",
+        "dark": false,
+        "text": "Default Button"
+      }
+    },
+    {
+      "name": "danger"
+    }
+  ]
+}

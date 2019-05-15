@@ -12,9 +12,18 @@ services:
   web:
     build: .
     volumes:
-      - .:/home/app
+      - .:/home/app/src
       - bundle:/usr/local/bundle
     ports:
       - "8080:3000"
     depends_on:
       - db
+  webpacker:
+    build: .
+    env_file:
+      - '.env.docker'
+    command: bash -c "rm -rf /app/public/packs; ./bin/webpack-dev-server"
+    volumes:
+      - .:/home/app/src
+    ports:
+      - '3035:3035'

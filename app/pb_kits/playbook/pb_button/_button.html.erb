@@ -1,0 +1,9 @@
+<%= content_tag(:div,
+    class: object.wrapperclass) do %>
+    <%= content_tag(:button,
+        id: object.id,
+        data: object.data,
+        class: object.classname("pb_button#{object.type}#{object.size}#{object.dark}")) do %>
+        <span><%= object.text %></span>
+    <% end %>
+<% end %>

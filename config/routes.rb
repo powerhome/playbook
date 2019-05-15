@@ -1,39 +1,18 @@
-Rails.application.routes.draw do
+Playbook::Engine.routes.draw do
+  root              to: "pages#kits"
+  get 'home',       to: "pages#home"
+  get 'principles', to: "pages#principles"
+  get 'fullscreen', to: "pages#fullscreen"
+  get 'grid',       to: "pages#grid"
+  get 'tokens',     to: "pages#tokens"
+  get 'kits',       to: "pages#kits"
+  get 'examples',   to: "pages#examples"
+  get 'utilities',  to: "pages#utilities"
+  get 'resources',  to: "pages#resources"
+  get 'kits/:name', to: "pages#kit_show_rails", as: 'kit_show'
+  get 'kits/:name/rails', to: "pages#kit_show_rails", as: 'kit_show_rails'
+  get 'kits/:name/react', to: "pages#kit_show_react", as: 'kit_show_reacts'
 
-  mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
-  mount SimpleFormMarkdownEditor::Engine => "/"
-
-  # NEED TO REDO THIS
-
-  # resources :sections
-  # resources :categories
-  # resources :page_tags
-  # resources :pages
-
-  get 'all', to: 'home#all'
-
-  resources :sections do
-    resources :categories
-  end
-
-  resources :categories do
-    resources :pages
-  end
-
-  resources :pages do
-    resources :page_tags
-  end
-
-  resources :tags
-  resources :types
-
-  devise_for :users, controllers: {
-    sessions: 'users/sessions'
-  }
-
-
-  get '/snippet/:page_id', to: 'snippets#show', as: 'snippet'
-  get '/preview/:page_id', to: 'snippets#preview', as: 'preview_snippet'
-
-  root to: "home#index"
+  get 'guides',     to: "guides#create_kit"
+  get 'guides/use-in-nitro', to: "guides#use_nitro"
 end

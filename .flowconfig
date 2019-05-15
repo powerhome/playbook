@@ -1,0 +1,16 @@
+[include]
+.*/components
+
+[ignore]
+# Ignore invalid JSON file; see https://github.com/dylang/changelog/pull/30
+.*/node_modules/.*/changelog/examples/node.json
+.*/node_modules/radium
+.*/node_modules/babel-plugin-flow-runtime
+
+[options]
+
+; Extensions
+module.file_ext=.css
+module.file_ext=.scss
+module.file_ext=.sass
+module.file_ext=.scss.module

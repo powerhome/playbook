@@ -1,0 +1,157 @@
+@import "./milestones_variables";
+
+.milestone-item {
+  position: relative;
+  vertical-align: top;
+  display: inline-block;
+  text-align: center;
+  padding: 0 $space-larger;
+  height: $step-progress-li-height;
+  line-height: $step-progress-bubble-height;
+
+
+  .milestone-item-label {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    opacity: $opacity-5;
+    font-size: $font-small;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .icon {
+    position: absolute;
+    top: 10px;
+    left: 0;
+    width: 100%;
+    font-size: $font-small;
+  }
+
+
+  &::before {
+    content: '';
+    display: block;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+    font-family: $icon-font;
+    font-size: $font-small;
+    width: $step-progress-bubble-height;
+    height: $step-progress-bubble-height;
+    border: $step-progress-line-height solid $ink-lightest;
+    border-radius: $step-progress-bubble-height/2;
+    line-height: calc(#{$step-progress-bubble-height} - (#{$step-progress-line-height} * 2));
+    font-weight: $bold;
+    margin: 0 auto $space-smaller;
+  }
+  &::after {
+    content: '';
+    position: absolute;
+    width: calc(100% - (#{$step-progress-bubble-height} - #{$step-progress-line-height}));
+    height: $step-progress-line-height;
+    top: calc((#{$step-progress-bubble-height}/2) - (#{$step-progress-line-height}/2));
+    left: calc(-50% + (#{$step-progress-bubble-height}/2));
+    z-index: 0;
+  }
+  &:first-child {
+    &::after {
+      display: none;
+    }
+  }
+
+  &::before {
+    background: transparent;
+  }
+
+  &.status-{
+    &done {
+      &::before {
+        border-color: $power-green !important;
+      }
+      .icon {
+        color: $power-green !important;
+      }
+    }
+    &started {
+      .milestone-item-label {
+        opacity: 1;
+      }
+      &::before {
+        border-color: $power-blue !important;
+      }
+      .icon {
+        color: $power-blue !important;
+      }
+    }
+  }
+
+  &.background-dark {
+    .milestone-item-label {
+      color: $bg-dark-text;
+    }
+
+    &::before {
+      background: $bg-dark-color;
+      color: $bg-dark-text;
+    }
+    &::after {
+      background: $bg-dark-color;
+    }
+
+    &.status-{
+      &done {
+        &::before {
+          background: transparent;
+        }
+        &::after {
+          background: $power-green;
+        }
+      }
+      &started {
+        &::before {
+          background: transparent;
+        }
+        &::after {
+          background: $power-blue;
+        }
+      }
+    }
+  }
+
+  &.background-light {
+    .milestone-item-label {
+      color: $bg-light-text;
+    }
+
+    &::before {
+      background: $bg-light-color;
+      border-color: $bg-light-color;
+      color: $bg-light-text;
+    }
+    &::after {
+      background: $bg-light-color;
+    }
+
+    &.status-{
+      &done {
+        &::before {
+          background: transparent;
+        }
+        &::after {
+          background: $power-green;
+        }
+      }
+      &started {
+        &::before {
+          background: transparent;
+        }
+        &::after {
+          background: $power-blue;
+        }
+      }
+    }
+  }
+}

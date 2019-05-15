@@ -1,0 +1,17 @@
+table {
+  &.table-sm,
+  &.table-md,
+  &.table-lg {
+    border-collapse: collapse;
+    background-color: unset;
+    background: unset;
+
+    thead {
+      tr {
+        th {
+          text-align: inherit;
+        }
+      }
+    }
+  }
+}

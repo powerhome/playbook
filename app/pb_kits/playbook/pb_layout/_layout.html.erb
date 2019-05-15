@@ -1,0 +1,6 @@
+<%= content_tag(:div,
+    id: object.id,
+    data: object.data,
+    class: object.classname("layout_#{object.size}#{object.position}#{object.dark}#{object.transparent}#{object.full}#{object.collapse}")) do %>
+  <%= object.yield(context: self) %>
+<% end %>
