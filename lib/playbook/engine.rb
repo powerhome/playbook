@@ -18,7 +18,7 @@ module Playbook
 
     initializer "webpacker.proxy" do |app|
         insert_middleware = begin
-                            MyEngine.webpacker.config.dev_server.present?
+                            Playbook.webpacker.config.dev_server.present?
                           rescue
                             nil
                           end
@@ -27,7 +27,7 @@ module Playbook
         app.middleware.insert_before(
           0, Webpacker::DevServerProxy,
           ssl_verify_none: true,
-          webpacker: MyEngine.webpacker
+          webpacker: Playbook.webpacker
         )
       end
   end

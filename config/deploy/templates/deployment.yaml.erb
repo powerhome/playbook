@@ -44,6 +44,8 @@ spec:
                 secretKeyRef:
                   name: playbook-db-<%= environment %>-postgresql
                   key: postgresql-password
+            - name: RAILS_SERVE_STATIC_FILES
+              value: "true"
           livenessProbe:
             httpGet:
               path: /health_check/site
