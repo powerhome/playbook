@@ -14,11 +14,8 @@ require File.expand_path "../dummy/config/environment", __FILE__
 
 require "rspec/rails"
 require "rspec/expectations"
-require "factory_girl_rails"
 
 RSpec.configure do |config|
-  config.include FactoryGirl::Syntax::Methods
-
   config.infer_spec_type_from_file_location!
   config.use_transactional_fixtures = false # database cleaner
 end

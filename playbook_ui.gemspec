@@ -27,7 +27,6 @@ Gem::Specification.new do |s|
   # LOOK AT REMOVING
   s.add_dependency 'devise', '~> 4.4.0'
 
-  s.add_development_dependency "test-unit", "3.1.5"
   s.add_development_dependency "rspec-rails"
   s.add_development_dependency "rubocop", "0.49.1"
   s.add_development_dependency "rainbow", "2.1.0" # locked due to a Rubygems bug exposed in Rainbow 2.2.0. see https://www.pivotaltracker.com/story/show/139302571
@@ -36,6 +35,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'binding_of_caller'
   s.add_development_dependency 'byebug'
   s.add_development_dependency 'tzinfo-data'
+  s.add_development_dependency 'simplecov'
   s.add_development_dependency 'web-console', '>= 3.3.0'
   s.add_development_dependency 'spring'
   s.add_development_dependency 'spring-watcher-listen', '~> 2.0.0'
