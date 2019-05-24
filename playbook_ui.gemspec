@@ -3,7 +3,7 @@ $LOAD_PATH.push File.expand_path("../lib", __FILE__)
 require 'playbook/version'
 
 Gem::Specification.new do |s|
-  s.name        = "playbook"
+  s.name        = "playbook_ui"
   s.version     = Playbook::VERSION
   s.authors     = ["Power UX", "Power Devs"]
   s.email       = ["nitroux@powerhrg.com", "dev@powerhrg.com"]
@@ -11,7 +11,7 @@ Gem::Specification.new do |s|
   s.summary     = "Playbook Design System"
   s.description = "Playbook Design System"
 
-  s.files = Dir["{app,config,db,lib}/**/*"] + ["Rakefile", "README.md"]
+  s.files = Dir["{app,components,db,fonts,lib,stories}/**/*"] + ["Rakefile", "README.md"]
 
   s.add_dependency "rails", ">= 5.1.6", "< 6.0"
   s.add_dependency "sassc-rails", "1.3.0"
@@ -27,7 +27,6 @@ Gem::Specification.new do |s|
   # LOOK AT REMOVING
   s.add_dependency 'devise', '~> 4.4.0'
 
-
   s.add_development_dependency "test-unit", "3.1.5"
   s.add_development_dependency "rspec-rails"
   s.add_development_dependency "rubocop", "0.49.1"
@@ -41,7 +40,4 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'spring'
   s.add_development_dependency 'spring-watcher-listen', '~> 2.0.0'
   s.add_development_dependency 'uglifier'
-
-
-
 end
