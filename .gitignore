@@ -1,4 +1,5 @@
 node_modules
+coverage
 webpack-bundle.js
 public
 !spec/dummy/public
