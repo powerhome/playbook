@@ -25,7 +25,7 @@ Gem::Specification.new do |s|
   s.add_dependency "method_source", "~> 0.9.2"
 
   # LOOK AT REMOVING
-  s.add_dependency 'devise', '~> 4.4.0'
+  s.add_dependency 'devise', '>= 4.4', '< 4.7'
 
   s.add_development_dependency "rspec-rails"
   s.add_development_dependency "rubocop", "0.49.1"
