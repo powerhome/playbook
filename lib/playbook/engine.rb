@@ -1,5 +1,5 @@
 require 'action_mailer/railtie'
-require 'sass-rails'
+require 'sassc-rails'
 require 'slim-rails'
 
 module Playbook

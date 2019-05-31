@@ -24,7 +24,7 @@ ADD Gemfile* *.gemspec /home/app/src/
 RUN bundle install --frozen
 
 ADD package.json yarn.lock /home/app/src/
-RUN yarn install
+RUN yarn install --check-files
 
 ADD --chown=app:app . /home/app/src
 RUN mkdir /etc/service/puma && ln -s /home/app/src/services/puma.sh /etc/service/puma/run
