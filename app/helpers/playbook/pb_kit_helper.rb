@@ -12,13 +12,19 @@ module Playbook
       render_react(kit, props, options)
     end
 
-
   private
 
     def render_rails(kit, props, &block)
       props = defined?(props) && !props.nil? ? props : {}
       kit_class_obj = get_class_name(kit)
-      return render(partial: kit_class_obj.new(**props, &block), as: :object)
+      original_value = ActionView::Base.prefix_partial_path_with_controller_namespace
+
+      render(partial: kit_class_obj.new(**props, &block), as: :object)
+    rescue ActionView::MissingTemplate
+      ActionView::Base.prefix_partial_path_with_controller_namespace = false
+      render(partial: kit_class_obj.new(**props, &block), as: :object)
+    ensure
+      ActionView::Base.prefix_partial_path_with_controller_namespace = original_value
     end
 
     def render_react(kit, props, options)
