@@ -1,5 +1,5 @@
 {
-  "name": "Playbook",
+  "name": "playbook-ui",
   "version": "2.7.1",
   "description": "Nitro UI Styleguide + React component dev env",
   "main": "components/index.js",
