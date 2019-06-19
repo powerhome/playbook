@@ -1,2 +1,6 @@
 <div class="<%= object.class_name %>" id="mychart"></div>
-<%= object.js %>
+<% content_for :pb_js do %>
+  <%= javascript_tag do %>
+    <%= object.js %>
+  <% end %>
+<% end %>

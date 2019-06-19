@@ -2,6 +2,7 @@ doctype html
 html
   head
     title Playbook Design System
+    meta http-equiv="Content-Security-Policy" content="default-src *; style-src 'self' http://* 'unsafe-inline'; script-src 'self' http://* 'unsafe-inline' 'unsafe-eval'"
     = csrf_meta_tags
     = csp_meta_tag
     = stylesheet_pack_tag 'main'
@@ -19,3 +20,4 @@ html
   = javascript_include_tag "https://code.highcharts.com/highcharts.js"
   = javascript_pack_tag 'application'
   = javascript_pack_tag 'examples'
+= yield :pb_js
