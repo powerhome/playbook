@@ -169,6 +169,30 @@ $product_colors: (
 
 
 
+:export {
+
+  @mixin export-colors($colors-list) {
+    @each $name, $color in $colors-list {
+      #{$name}: $color;
+    }
+  }
+  @include export-colors($product_colors);
+  @include export-colors($action_colors);
+  @include export-colors($status_colors);
+  @include export-colors($data_colors);
+  @include export-colors($shadow_colors);
+  @include export-colors($colors);
+  @include export-colors($interface_colors);
+  @include export-colors($main_colors);
+  @include export-colors($background_colors);
+  @include export-colors($card_colors);
+  @include export-colors($active_colors);
+  @include export-colors($hover_colors);
+  @include export-colors($border_colors);
+  @include export-colors($text_colors);
+  gradient_start: $gradient_start;
+  gradient_end: $gradient_end;
+}
 
 
 //=====================================
