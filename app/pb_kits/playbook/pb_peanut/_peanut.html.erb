@@ -1,0 +1,22 @@
+<% inactive_class = object.selected ? "" : "inactive" %>
+
+<%= content_tag(:div,
+    id: object.id,
+    data: object.data,
+    class: object.classname("card selectable-card #{inactive_class}")) do %>
+  <div class="content-align">
+    <div class="title">
+      <div><%= object.title %></div>
+      <% if !object.subtext.nil? && !object.subtext.empty? %>
+        <div class="subtext"> <%= object.subtext %> </div>
+      <% end %>
+    </div>
+    <div class="checkbox">
+      <% if object.selected %>
+        <i class="fas fa-check-circle">T</i>
+      <% else %>
+        <i class="fas fa-circle">F</i>
+      <% end %>
+    </div>
+  </div>
+<% end %>

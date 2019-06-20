@@ -1,0 +1,174 @@
+// @mixin selectable-card(){
+//   width: auto;
+//   height: 125px;
+//   border: 1px solid #2E5BFF;
+//   box-shadow: 0 0 0;
+//   border-radius: 10px;
+//   padding-top: 15px;
+//   padding-left: 25px;
+//   margin-bottom: 15px;
+// }
+//
+// .selectable-card {
+//   @include selectable-card;
+//
+//   &-inactive {
+//     @include selectable-card;
+//     border: 1px solid #D5DEFF;
+//   }
+//
+//   .text-center {
+//     padding-top: 25px;
+//
+//     &.container {
+//       width: 100%;
+//     }
+//
+//     .one {
+//       width: 50%;
+//       float: left;
+//
+//       .subtext {
+//         color: #8798AD;
+//       }
+//     }
+//
+//     .two {
+//       width: 50%;
+//       float: right;
+//       padding-left: 222px;
+//       padding-top: 11px;
+//     }
+//
+//     .fa-check-circle {
+//       width: 25px;
+//       height: 25px;
+//       color: #2E5BFF;
+//     }
+//
+//     .fa-circle {
+//       width: 25px;
+//       height: 25px;
+//       color: #D5DEFF;
+//     }
+//   }
+// }
+
+
+// $icon-size: 25px;
+//
+// .selectable-card {
+//   i,
+//   svg {
+//     width: $icon-size;
+//     height: $icon-size;
+//
+//     &.fa-check-circle {
+//       color: #2E5BFF;
+//     }
+//     &.fa-circle {
+//       color: #D5DEFF;
+//     }
+//   }
+// }
+//
+// .selectable-card i.fa-check-circle {
+//   width: 25px;
+//   height: 25px;
+//   color: #2E5BFF;
+// }
+// .selectable-card svg.fa-check-circle {
+//   width: 25px;
+//   height: 25px;
+//   color: #2E5BFF;
+// }
+// .selectable-card i.fa-circle {
+//   width: 25px;
+//   height: 25px;
+//   color: #D5DEFF;
+// }
+// .selectable-card svg.fa-circle {
+//   width: 25px;
+//   height: 25px;
+//   color: #D5DEFF;
+// }
+
+
+@mixin selectable-card(){
+  width: auto;
+  height: 125px;
+  border: 1px solid #2E5BFF;
+  box-shadow: 0 0 0;
+  border-radius: 10px;
+  margin-bottom: 15px;
+}
+
+.selectable-card {
+  @include selectable-card;
+
+  &.inactive {
+    @include selectable-card;
+    border: 1px solid #D5DEFF;
+  }
+
+  .content-align {
+    padding: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+
+    .title {
+      flex-grow: 1;
+    }
+    .checkbox {
+      flex-basis: 30px;
+      min-width: 30px;
+      flex-grow: 0;
+      flex-shrink: 0;
+    }
+  }
+}
+
+// .selectable-card {
+//   width: auto;
+//   // height: 125px;
+//   border: 1px solid #2E5BFF;
+//   box-shadow: 0 0 0;
+//   border-radius: 10px;
+//   // padding-top: 15px;
+//   // padding-left: 25px;
+//   margin-bottom: 15px;
+// }
+//
+// .selectable-card-inactive {
+//   width: auto;
+//   // height: 125px;
+//   border: 1px solid #D5DEFF;
+//   box-shadow: 0 0 0;
+//   border-radius: 10px;
+//   // padding-top: 15px;
+//   // padding-left: 25px;
+//   margin-bottom: 15px;
+// }
+
+.fa-check-circle {
+  width: 25px;
+  height: 25px;
+  color: #2E5BFF;
+}
+
+.fa-circle {
+  width: 25px;
+  height: 25px;
+  color: #D5DEFF;
+}
+
+.subtext {
+  color: #8798AD;
+}
+
+// .font {
+//   font-family: rubik, proxima nova, arial;
+// }

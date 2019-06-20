@@ -1,0 +1,7 @@
+examples:
+  rails:
+  - peanut_default: Default
+  - peanut_inactive: Inactive
+
+  react:
+  - peanut_default: Default
