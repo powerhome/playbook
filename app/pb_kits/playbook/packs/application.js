@@ -1,6 +1,6 @@
 import "../../../../fonts/fontawesome.js"
 import "../../../../fonts/regular.js"
-import "../pb_charts/settings.js";
+import "../pb_charts/pbChart.js";
 import "./main.scss";
 import "./kits.js";
 

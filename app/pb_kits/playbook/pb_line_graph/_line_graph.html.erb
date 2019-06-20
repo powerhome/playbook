@@ -1,12 +1,8 @@
 <div class="<%= object.class_name %>" id="mychart"></div>
 <% content_for :pb_js do %>
   <%= javascript_tag do %>
-
-
-    <%= object.js %>
-    <%= render partial: 'playbook/' + object.to_partial_path, formats: :js, :locals => {:random_variable => "Hello World"}  %>
-
+    new PBChart('.selector', {
+      data: <%= object.data %>
+    });
   <% end %>
-
-
 <% end %>
