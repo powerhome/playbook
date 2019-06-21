@@ -1,13 +1,14 @@
-import {
-  colors,
-  styleChartContainer,
-  styleLegend,
-  sizeColumns,
-  styleAxis,
-  _adjustAxisStyle
-} from './pbLineSettings.js';
-
-
+// import {
+//   colors,
+//   styleChartContainer,
+//   styleLegend,
+//   sizeColumns,
+//   styleAxis,
+//   _adjustAxisStyle
+// } from './pbLineSettings.js';
+import { colors, add } from './pbLineSettings'
+console.log(add(1, 1));
+console.log(colors);
 debugger
 
 ;

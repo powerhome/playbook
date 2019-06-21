@@ -1,6 +1,10 @@
 import colors from '../tokens/_colors.scss';
 
-function styleChartContainer(highchart) {
+export function add(a, b){
+  return a + b;
+}
+
+export function styleChartContainer(highchart) {
   highchart.chart.spacingTop = 30;
   highchart.chart.spacingBottom = 40;
   highchart.chart.spacingLeft = 60;
@@ -8,7 +12,7 @@ function styleChartContainer(highchart) {
 };
 
 /* Style Legend */
-function styleLegend(highchart) {
+export function styleLegend(highchart) {
   highchart.legend.itemStyle.fontFamily = "Proxima Nova";
   highchart.legend.itemStyle.color = "#8798AD";
   highchart.legend.itemStyle.fontWeight = "300";
@@ -17,7 +21,7 @@ function styleLegend(highchart) {
 
 
 /* Size columns */
-function sizeColumns(highchart) {
+export function sizeColumns(highchart) {
   highchart.plotOptions.column.borderRadius = 6;
   highchart.plotOptions.column.pointPadding = 0.3;
   highchart.plotOptions.column.groupPadding = 0.2;
@@ -30,7 +34,7 @@ function sizeColumns(highchart) {
 };
 
 /* Remove grid from background */
-function styleAxis(highchart) {
+export function styleAxis(highchart) {
   if (Array.isArray(highchart.yAxis)) {
     highchart.yAxis.forEach(function(item, index) {
       _adjustAxisStyle(item);
@@ -48,7 +52,7 @@ function styleAxis(highchart) {
   }
 }
 
-function _adjustAxisStyle(axis) {
+export function _adjustAxisStyle(axis) {
 
   /* Styles grid */
   axis.minorGridLineColor = "#E0E6EC";
@@ -68,6 +72,8 @@ function _adjustAxisStyle(axis) {
   axis.labels.style.fontSize = "14px";
 };
 
+export { colors };
+
 // module.exports = {
 //   colors,
 //   styleChartContainer,
@@ -76,4 +82,4 @@ function _adjustAxisStyle(axis) {
 //   styleAxis,
 //   _adjustAxisStyle
 // }
-export { colors, styleChartContainer, styleLegend, sizeColumns, styleAxis, _adjustAxisStyle };
+// export { colors, styleChartContainer, styleLegend, sizeColumns, styleAxis, _adjustAxisStyle };
