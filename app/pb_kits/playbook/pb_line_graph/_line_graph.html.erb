@@ -2,7 +2,11 @@
 <% content_for :pb_js do %>
   <%= javascript_tag do %>
     new PBChart('.selector', {
-      data: <%= object.data %>
+      data: <%= object.data %>,
+      title: "<%= object.title %>",
+      subtitle: "<%= object.subtitle %>",
+      axisTitle: "<%= object.axis_title %>",
+      pointStart: <%= object.point_start %>,
     });
   <% end %>
 <% end %>

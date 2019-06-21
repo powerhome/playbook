@@ -3,16 +3,25 @@ module Playbook
     class LineGraph
       PROPS = [:configured_class,
           :configured_data,
-          :configured_text].freeze
+          :configured_title,
+          :configured_subtitle,
+          :configured_axis_title,
+          :configured_point_start].freeze
 
       def initialize(
         class_name: default_configuration,
         data: default_configuration,
-        text: default_configuration
+        title: default_configuration,
+        subtitle: default_configuration,
+        axis_title: default_configuration,
+        point_start: default_configuration
       )
         self.configured_class = class_name
-        self.configured_text = text
+        self.configured_title = title
+        self.configured_subtitle = subtitle
+        self.configured_axis_title = axis_title
         self.configured_data = data
+        self.configured_point_start = point_start
       end
 
       def class_name
@@ -23,11 +32,27 @@ module Playbook
         end
       end
 
-      def text
-        if configured_text == default_configuration
-          "I am a rails kit"
+      def title
+        if configured_title == default_configuration
+          ""
         else
-          configured_text
+          configured_title
+        end
+      end
+
+      def subtitle
+        if configured_subtitle == default_configuration
+          ""
+        else
+          configured_subtitle
+        end
+      end
+
+      def axis_title
+        if configured_axis_title == default_configuration
+          ""
+        else
+          configured_axis_title
         end
       end
 
@@ -35,27 +60,23 @@ module Playbook
         "pb_line_graph/line_graph"
       end
 
+      def point_start
+        if configured_point_start == default_configuration
+          "2012"
+        else
+          configured_point_start
+        end
+      end
+
       def data
         if configured_data == default_configuration
           data = [{
               name: 'Installation',
               data: [43934, 52503, 57177, 69658, 97031, 119931, 137133, 154175]
-          }, {
-              name: 'Manufacturing',
-              data: [24916, 24064, 29742, 29851, 32490, 30282, 38121, 40434]
-          }, {
-              name: 'Sales & Distribution',
-              data: [11744, 17722, 16005, 19771, 20185, 24377, 32147, 39387]
-          }, {
-              name: 'Project Development',
-              data: [nil, nil, 7988, 12169, 15112, 22452, 34400, 34227]
-          }, {
-              name: 'Other',
-              data: [12908, 5948, 8105, 11248, 8989, 11816, 18274, 18111]
           }]
           return data.to_json.html_safe
         else
-          configured_data
+          configured_data.to_json.html_safe
         end
       end
 

@@ -62,3 +62,25 @@ $boldest:       800;
 $bolder:        700;
 $light:         300;
 $lighter:       100;
+
+
+
+:export {
+  text_jumbo: $text_jumbo;
+  text_largest: $text_largest;
+  text_larger: $text_larger;
+  text_large: $text_large;
+  text_base: $text_base;
+  text_default: $text_default;
+  text_normal: $text_normal;
+  text_medium: $text_medium;
+  text_small: $text_small;
+  text_smaller: $text_smaller;
+  text_smallest: $text_smallest;
+  heading_1: $heading_1;
+  heading_2: $heading_2;
+  heading_3: $heading_3;
+  heading_4: $heading_4;
+  bold: $bold;
+  regular: $regular;
+}

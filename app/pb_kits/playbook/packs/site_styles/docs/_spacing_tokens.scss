@@ -65,8 +65,8 @@ ul {
 
 @each $name, $value in $spaces{
   div.pb--spacing_#{$name}{
-    width: #{$value} ;
+    width: #{$value};
     height: 78px;
-    background: $p_red_opacity_2 ;
+    background: $shadow_light;
   }
 }

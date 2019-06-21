@@ -1,15 +1,6 @@
-// import {
-//   colors,
-//   styleChartContainer,
-//   styleLegend,
-//   sizeColumns,
-//   styleAxis,
-//   _adjustAxisStyle
-// } from './pbLineSettings.js';
-import { colors, add } from './pbLineSettings'
-console.log(add(1, 1));
-console.log(colors);
-debugger
+import { legendOptions } from './pbLineSettings.js';
+import { highchartsTheme } from './pbChartsLightTheme.js';
+
 
 ;
 (function(root, factory) {
@@ -83,53 +74,28 @@ debugger
         plugin.settings.callbackInitializeBefore.call();
       }
 
+
+      Highcharts.theme = highchartsTheme;
+      Highcharts.setOptions(Highcharts.theme);
       Highcharts.chart('mychart', {
-
         title: {
-          text: 'Solar Employment Growth by Sector, 2010-2016'
+          text: plugin.defaults.title
         },
-
         subtitle: {
-          text: 'Source: thesolarfoundation.com'
+          text: plugin.defaults.subtitle
         },
-
         yAxis: {
           title: {
-            text: 'Number of Employees'
+            text: plugin.defaults.axisTitle
           }
         },
-        legend: {
-          layout: 'vertical',
-          align: 'right',
-          verticalAlign: 'middle'
-        },
-
         plotOptions: {
           series: {
-            label: {
-              connectorAllowed: false
-            },
-            pointStart: 2010
+            pointStart: plugin.defaults.pointStart
           }
         },
-
         series: plugin.defaults.data,
-
-        responsive: {
-          rules: [{
-            condition: {
-              maxWidth: 500
-            },
-            chartOptions: {
-              legend: {
-                layout: 'horizontal',
-                align: 'center',
-                verticalAlign: 'bottom'
-              }
-            }
-          }]
-        }
-
+        credits: false,
       });
 
 
