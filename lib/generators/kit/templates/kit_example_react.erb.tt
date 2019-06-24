@@ -1,0 +1,12 @@
+import React from "react"
+import <%= @kit_name_pascal %> from "../_<%= @kit_name_underscore %>.jsx"
+
+function <%= @kit_name_pascal %>Default() {
+  return (
+    <div>
+      <<%= @kit_name_pascal %> />
+    </div>
+  )
+}
+
+export default <%= @kit_name_pascal %>Default;

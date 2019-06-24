@@ -1,0 +1,9 @@
+examples:
+  <% if @rails_kit %>
+  rails:
+  - <%= @kit_name_underscore %>_default: Default
+  <% end %>
+  <% if @react_kit %>
+  react:
+  - <%= @kit_name_underscore %>_default: Default
+  <% end %>

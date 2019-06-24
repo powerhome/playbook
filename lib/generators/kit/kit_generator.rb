@@ -1,86 +1,76 @@
-# the generator extends from NamedBase base class which makes sure
-# alleast a name must be provided to the generator
-
 class KitGenerator < Rails::Generators::NamedBase
-
+  desc "This generator creates a new Playbook Kit"
   source_root File.expand_path("../templates/", __FILE__)
-
+  class_option :props, type: :array, default: []
 
   def create_templates
+    kit_name = name.strip.downcase
+    @kit_name_uppercase = kit_name.upcase
+    @kit_name_lowercase = kit_name
+    @kit_name_capitalize = kit_name.capitalize
+    @kit_name_underscore = kit_name.parameterize.underscore
+    @kit_name_pascal = kit_name.titleize.gsub(/\s+/, '')
 
-      @name = name
-      @exists = nil
+    # Check if kit already exists =======================
+    if File.directory?("app/pb_kits/playbook/pb_#{@kit_name_underscore}")
+      say_status  "#{@kit_name_capitalize} kit already exists.",
+          "Please choose another name or manually make changes to the existing kit.",
+          :red
+      return
+    else
+      # Add kit to Playbook meu ==========================
+      open('config/data/menu.yml', 'a') { |f|
+        f.puts "  - #{@kit_name_underscore}"
+      }
+      say_status  "complete",
+          "#{@kit_name_capitalize} kit added to Playbook menu.",
+          :green
 
-      f = File.open("config/data/menu.yml", "r")
-        f.each_line do |line|
-          if line.include? "  - pb_#{@name}"
-            puts "This kit exists"
-            @exists = true
-          else
-            @exists = false
+      # Generate SCSS files ==============================
+      template "kit_scss.erb", "app/pb_kits/playbook/pb_#{@kit_name_underscore}/_#{@kit_name_underscore}.scss"
+      open('app/pb_kits/playbook/packs/site_styles/_kit_style_index.scss', 'a') { |f|
+        f.puts "@"+ "import "+ "\'" +"../../pb_#{@kit_name_underscore}/#{@kit_name_underscore}"+"\';"
+      }
+      say_status  "complete",
+          "#{@kit_name_capitalize} kit stylesheet successfully created and imported.",
+          :green
 
-          end
-        end
-      f.close
-
-      if @exists == false
-        puts "Creating Kit.../"
-
-        template "javascript.erb",  "app/pb_kits/playbook/packs/pb_#{@name}.js"
-        template "scss.erb",        "app/pb_kits/playbook/pb_#{@name}/_#{@name}.scss"
-        template "jsx.erb",         "app/pb_kits/playbook/pb_#{@name}/_#{@name}.jsx"
-        template "html.erb",        "app/pb_kits/playbook/pb_#{@name}/_#{@name}.html.erb"
-        template "ruby.erb",        "app/pb_kits/playbook/pb_#{@name}/#{@name}.rb"
-        template "storyrails.erb",  "app/pb_kits/playbook/pb_#{@name}/docs/_rails.html.erb"
-        template "storyreact.erb",  "app/pb_kits/playbook/pb_#{@name}/docs/_react.html.erb"
-
-        # Add kit to styles scss
-        open('app/pb_kits/playbook/packs/site_styles/_kit_style_index.scss', 'a') { |f|
-          f.puts "@"+ "import "+ "\'" +"../../pb_#{@name}/#{@name}"+"\';"
-        }
-
-        # Add to kit to YAML file
-        open('config/data/menu.yml', 'a') { |f|
-          f.puts "  - #{@name}"
-        }
-
-        # Add kit pack file to application js
-        inject_into_file('app/pb_kits/playbook/packs/application.js', :before => "// END PACKS") do
-          "import \"./pb_#{@name}.js\";\n"
-        end
-
-        # Recode this
-        # f = File.open("lib/generators/kit/templates/logo.txt", "r")
-        #   f.each_line do |line|
-        #     puts line
-        #   end
-        # f.close
+      # Ask user if Rails version should be generated ======
+      if yes?("Create RAILS #{@kit_name_underscore} kit? (y/N)")
+        @rails_kit = true
+        template "kit_ruby.erb", "app/pb_kits/playbook/pb_#{@kit_name_underscore}/#{@kit_name_underscore}.rb"
+        template "kit_html.erb", "app/pb_kits/playbook/pb_#{@kit_name_underscore}/_#{@kit_name_underscore}.html.erb"
+        template "kit_example_rails.erb", "app/pb_kits/playbook/pb_#{@kit_name_underscore}/docs/_#{@kit_name_underscore}_default.html.erb"
+        say_status  "complete",
+            "#{@kit_name_capitalize} rails kit successfully created.",
+            :green
       end
 
+      # Ask user if React version should be generated ======
+      if yes?("Create REACT #{@kit_name_pascal} kit? (y/N)")
+        @react_kit = true
+        template "kit_jsx.erb", "app/pb_kits/playbook/pb_#{@kit_name_underscore}/_#{@kit_name_underscore}.jsx"
+        template "kit_example_react.erb", "app/pb_kits/playbook/pb_#{@kit_name_underscore}/docs/_#{@kit_name_underscore}_default.jsx"
+        template "kit_js.erb", "app/pb_kits/playbook/pb_#{@kit_name_underscore}/docs/index.js"
+        template "kit_pack.erb", "app/pb_kits/playbook/packs/pb_#{@kit_name_underscore}.js"
+
+        # Import in all kits.js  =========================
+        append_to_file('app/pb_kits/playbook/packs/kits.js') do
+          "import \"./pb_#{@kit_name_underscore}.js\";\n"
+        end
+
+        # Import kit examples  ===========================
+        append_to_file('app/pb_kits/playbook/packs/examples.js') do
+          "\nimport * as #{@kit_name_pascal} from \"pb_#{@kit_name_underscore}/docs\";\nWebpackerReact.setup (#{@kit_name_pascal});\n"
+        end
+
+        say_status  "complete",
+            "#{@kit_name_capitalize} react kit successfully created.",
+            :green
+      end
+
+      # Create kit example.yml
+      template "kit_example_yml.erb", "app/pb_kits/playbook/pb_#{@kit_name_underscore}/docs/example.yml"
+    end
   end
-
-
-
-
-  private
-
-    def parts
-      name.split('/')
-    end
-
-    def js_titleize_file_name
-      name = ""
-      parts.each do |part|
-        name += part.titleize
-      end
-      name
-    end
-
-    def javascript_pack_tag_snippet
-      "<%= javascript_pack_tag '#{name}' %>"
-    end
-
-    def stylesheet_pack_tag_snippet
-      "<%= stylesheet_pack_tag '#{name}' %>"
-    end
 end

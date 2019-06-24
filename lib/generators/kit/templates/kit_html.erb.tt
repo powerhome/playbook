@@ -1,0 +1,14 @@
+<%%
+# ===========================================
+# Generated file from kit generator.
+#
+# <%= @kit_name_uppercase %> RAILS HTML
+# ===========================================
+%>
+
+<%%= content_tag(:div,
+    id: object.id,
+    data: object.data,
+    class: object.classname("pb_<%= @kit_name_underscore %>")) do %>
+  <span><%= @kit_name_uppercase %> CONTENT</span>
+<%% end %>

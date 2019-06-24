@@ -1,3 +1,9 @@
+// ===========================================
+// Generated file from kit generator.
+//
+// KIT EXAMPLES
+// ===========================================
+
 import WebpackerReact from "webpacker-react";
 
 import * as body from "pb_body/docs";
@@ -31,7 +37,7 @@ import * as vertical_nav from "pb_vertical_nav/docs";
 WebpackerReact.setup (vertical_nav);
 
 import * as avatar from "pb_avatar/docs";
- WebpackerReact.setup (avatar);
+WebpackerReact.setup (avatar);
 
 import * as input from "pb_input/docs";
- WebpackerReact.setup (input);
+WebpackerReact.setup (input);
