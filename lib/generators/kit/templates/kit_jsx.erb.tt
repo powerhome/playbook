@@ -1,0 +1,21 @@
+import React from 'react';
+import PropTypes from "prop-types";
+
+const propTypes = {
+  className: PropTypes.string,
+  id: PropTypes.string
+};
+
+class <%= @kit_name_pascal %> extends React.Component {
+  render() {
+    return (
+      <div className="pb_<%= @kit_name_underscore %>">
+        <span><%= @kit_name_uppercase %> CONTENT</span>
+      </div>
+    )
+  }
+}
+
+<%= @kit_name_pascal %>.propTypes = propTypes;
+
+export default <%= @kit_name_pascal %>;
