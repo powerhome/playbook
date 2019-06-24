@@ -65,7 +65,7 @@
     "flow-bin": "0.54.1",
     "flow-runtime": "0.14.0",
     "lazysizes": "^4.1.6",
-    "lodash": "4.17.5",
+    "lodash": "4.17.11",
     "lqip.macro": "^0.1.5",
     "moment-timezone": "0.5.13",
     "node-sass": "^4.11.0",
