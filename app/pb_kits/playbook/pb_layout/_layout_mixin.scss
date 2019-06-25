@@ -34,26 +34,26 @@
       border-width: 0 1px 0 0;
       border-style: solid;
       @if $color == 'dark' {
-        background: $white_opacity_1;
-        border-color: $white_opacity_1;
+        background: $bg_dark;
+        border-color: $border_dark;
       } @else if $color == 'transparent' {
         border-color: transparent;
       } @else {
         background: $white;
-        border-color: $sky;
+        border-color: $border_light;
       }
     }
     @if $side == 'right' {
       border-width: 0 0 0 1px;
       border-style: solid;
       @if $color == 'dark' {
-        background: $white_opacity_1;
-        border-color: $white_opacity_1;
+        background: $bg_dark;
+        border-color: $border_dark;
       } @else if $color == 'transparent' {
         border-color: transparent;
       } @else {
         background: $white;
-        border-color: $sky;
+        border-color: $border_light;
       }
     }
   }

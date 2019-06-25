@@ -5,11 +5,11 @@ table {
     thead {
       tr {
         th {
-          color: $ink-lightest;
+          color: $text_lt_lighter;
           font-size: $default-header-size;
           font-weight: $regular;
           text-transform: uppercase;
-          border-bottom: 1px solid $sky;
+          border-bottom: 1px solid $border_light;
         }
       }
     }

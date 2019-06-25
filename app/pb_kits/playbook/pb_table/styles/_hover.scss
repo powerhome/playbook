@@ -19,11 +19,11 @@ table {
           }
 
           &:hover {
-            box-shadow: 0 2px 10px 0 $black-opacity-1;
+            box-shadow: 0 2px 10px 0 $active_dark;
 
             td {
               background: $white;
-              border-color: $sky-dark;
+              border-color: darken($border_light, 10%);
               border-top-width: 1px;
               border-top-color: transparent;
             }
@@ -34,14 +34,14 @@ table {
         tbody {
           tr {
             td {
-              border-top-color: $sky;
+              border-top-color: $border_light;
               border-top-width: 1px;
             }
 
             &:hover {
               td {
                 border-top-width: 1px;
-                border-top-color: $sky;
+                border-top-color: $border_light;
               }
             }
           }

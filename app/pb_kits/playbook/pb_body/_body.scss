@@ -18,17 +18,17 @@
       margin: 0;
       line-height: $lh_tight;
       @if $selector == "&_dark" {
-        color: $white;
+        color: $text_dk_default;
       } @else if $selector == "&_light" {
-        color: $ink_lightest;
+        color: $text_lt_light;
       } @else if $selector == "&_lighter" {
-        color: $sky_dark;
+        color: $text_lt_lighter;
       } @else if $selector == "&_light_dark" {
-        color: $white_opacity_6;
+        color: $text_dk_light;
       } @else if $selector == "&_lighter_dark" {
-        color: $white_opacity_4;
+        color: $text_dk_lighter;
       } @else {
-        color: $ink;
+        color: $text_lt_default;
       }
 
     }

@@ -9,7 +9,7 @@ table {
       thead {
         tr {
           th {
-            border-color: $sky;
+            border-color: $border_light;
             border-style: solid;
             border-width: 1px 0 1px 0;
 
@@ -28,7 +28,7 @@ table {
       tbody {
         tr {
           td {
-            border-color: $sky;
+            border-color: $border_light;
             border-style: solid;
             border-width: 0 0 1px 0;
 
@@ -58,14 +58,14 @@ table {
       }
 
       &.as-cards {
-        border: 1px solid $sky;
+        border: 1px solid $border_light;
         border-radius: 4px;
 
         thead {
           tr {
             margin: $space-xs 0 0;
             padding: 0 $space-xs;
-            border-bottom: 1px solid $sky;
+            border-bottom: 1px solid $border_light;
 
             th {
               border-width: 0;
