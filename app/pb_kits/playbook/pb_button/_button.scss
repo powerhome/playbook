@@ -2,7 +2,7 @@
   line-height: 38px;
   padding: 0 15px;
   border-radius: 4px;
-  border: 1px solid $ink_lightest;
+  border: 1px solid $border_light;
   font-size: 14px;
   background: transparent;
 }
@@ -14,21 +14,21 @@
     @include kit_btn;
 
     &[class*=_primary] {
-      background: $power_royal;
+      background: $primary;
       border: none;
       color: $white;
     }
 
     &[class*=_danger] {
-      background: $power_red;
+      background: $error;
       border: none;
       color: $white;
     }
 
     &[class*=_dashed] {
       background-color: $white;
-      color: $ink_lightest;
-      border: dashed 1px $ink_lightest;
+      color: $text_lt_default;
+      border: dashed 1px $border_light;
     }
 
     &[class*=_large] {
@@ -45,7 +45,7 @@
     }
 
     &.red {
-      background: $power_red;
+      background: $error;
       border: none;
       color: $white;
     }

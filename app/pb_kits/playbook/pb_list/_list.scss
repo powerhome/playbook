@@ -23,13 +23,13 @@
       width: 20px;
       flex: 0 0 20px;
       text-align: left;
-      color: $ink-lightest;
+      color: $text_lt_lighter;
       font-weight: $bold;
       margin-right: $space-sm;
     }
   }
   li {
-    border-bottom: 1px solid $sky;
+    border-bottom: 1px solid $border_light;
     padding: $space-sm 0;
     display: flex;
     align-items: left;
@@ -55,9 +55,9 @@
 
   &[class*=_dark] li {
     color: $white ;
-    border-bottom: 1px solid $white-opacity-1;
+    border-bottom: 1px solid $border_dark;
     &:before {
-      color: $white-opacity-7;
+      color: $text_dk_light;
     }
   }
   &[class*=_lg] li {

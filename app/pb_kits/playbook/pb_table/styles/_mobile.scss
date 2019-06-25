@@ -25,16 +25,15 @@
           border-left-width: 1px !important;
           border-right-width: 1px !important;
           border-bottom-width: 0 !important;
-          border-color: $sky !important;
+          border-color: $border_light !important;
           min-height: 2.2em;
           padding-left: 34%;
           position: relative;
           text-align:left;
           white-space: normal;
-
           &:before {
             content: attr(data-title);
-            color: $ink !important;
+            color: $text_lt_default !important;
             font-weight: $bold !important;
             text-align: left !important;
             width: 100% !important;
@@ -51,7 +50,7 @@
           &:first-child {
             margin-top: $space_md !important;
             border-top-width: 1px !important;
-            border-top-color: $sky !important;
+            border-top-color: $border_light !important;
             border-radius: 4px 4px 0 0;
           }
 

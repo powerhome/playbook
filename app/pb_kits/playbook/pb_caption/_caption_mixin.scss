@@ -10,10 +10,10 @@
     font-size: $font_size;
   }
   & {
-    color: $ink_lightest;
+    color: $text_lt_lighter;
   }
   &_dark {
-    color: $white_opacity_6;
+    color: $text_dk_light;
   }
 }
 
