@@ -11,6 +11,21 @@ class KitGenerator < Rails::Generators::NamedBase
     @kit_name_underscore = kit_name.parameterize.underscore
     @kit_name_pascal = kit_name.titleize.gsub(/\s+/, '')
 
+    kit_props = options[:props].concat( %w(id:string classname:string data:object) )
+    @kit_props = kit_props.map {|hash| [hash.partition(':').first, hash.partition(':').last]}.to_h
+    @kit_props = @kit_props.sort_by{|key| key}.to_h
+    @unique_props = @kit_props.symbolize_keys.without(:id, :classname, :data)
+
+    @kit_class_init = Array.new
+    @kit_props.each do |key,val|
+      @kit_class_init.push("#{key.parameterize.underscore}: default_configuration".to_sym)
+    end
+
+    @kit_class_val = Array.new
+    @kit_props.each do |key, value|
+      @kit_class_val.push("self.configured_#{key.parameterize.underscore} = #{key.parameterize.underscore}")
+    end
+
     # Check if kit already exists =======================
     if File.directory?("app/pb_kits/playbook/pb_#{@kit_name_underscore}")
       say_status  "#{@kit_name_capitalize} kit already exists.",
