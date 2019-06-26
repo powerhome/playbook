@@ -18,7 +18,8 @@ const highchartsTheme = {
     borderRadius: 0,
     plotBackgroundColor: null,
     plotShadow: false,
-    plotBorderWidth: 0
+    plotBorderWidth: 0,
+
   },
   title: {
     style: {
@@ -122,10 +123,23 @@ const highchartsTheme = {
     }
   },
 
-
   plotOptions: {
     series: {
-      nullColor: colors.text_lt_lighter
+      type: 'area',
+      nullColor: colors.text_lt_lighter,
+      fillColor: {
+        linearGradient: {
+          x1: 0,
+          y1: 0,
+          x2: 0,
+          y2: 1
+        },
+        stops: [
+          [0, 'blue'],
+          [1, 'orange']
+        ]
+      },
+      threshold: null
     },
     line: {
       dataLabels: {
@@ -133,20 +147,27 @@ const highchartsTheme = {
       },
       marker: {
         lineColor: '#333'
+      },
+      area: {
+        fillColor: {
+            linearGradient: { x1: 0, y1: 0, x2: 0, y2: 1},
+            stops: [
+                [0, '#ff0000'],
+                [1, '#f4f4f4']
+            ]
+        },
+        lineWidth: 1,
+        marker: {
+            enabled: false
+        },
+        shadow: false,
+        states: {
+            hover: {
+                lineWidth: 1
+            }
+        },
+        threshold: null
       }
-    },
-    spline: {
-      marker: {
-        lineColor: '#333'
-      }
-    },
-    scatter: {
-      marker: {
-        lineColor: '#333'
-      }
-    },
-    candlestick: {
-      lineColor: 'white'
     }
   },
 

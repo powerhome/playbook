@@ -1,5 +1,12 @@
 import colors from '../tokens/_colors.scss';
 
+
+// Connect to Sisense
+Sisense.connect("http://10.1.1.242:8081").then(function(app) {
+  var dashboard_id = "5cd43e9035a43704b0be554b";
+  console.log("Sisense is connected");
+});
+
 /* Apply custom playbook colors through script */
 function applyCustomColors(highchart) {
   var colors = [
