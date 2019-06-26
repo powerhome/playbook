@@ -12,8 +12,7 @@ module Playbook
         :configured_variant,
         :configured_tag,
         :configured_text,
-        :block
-      ].freeze
+        :block].freeze
 
       def initialize(aria_label: default_configuration,
                    classname: default_configuration,

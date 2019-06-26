@@ -5,6 +5,7 @@ examples:
   - button_link: Button Links
   - button_block_content: Button Block Content
   - button_accessibility: Button Accessibility Options
+  - button_default_dark: Button Variants Dark
   react:
   - button_sizes: Button Sizes
   - button_light: Buttons Light UI

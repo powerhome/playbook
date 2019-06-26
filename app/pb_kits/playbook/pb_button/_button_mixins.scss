@@ -1,75 +1,87 @@
+@import "../tokens/border_radius";
 @import "../tokens/colors";
 @import "../tokens/opacity";
-@import "../tokens/typography";
 @import "../tokens/shadows";
+@import "../tokens/transition";
+@import "../tokens/typography";
 
 $pb_button-size: 40px;
-$pb_button-side-padding: 34px;
+$pb_button_side_padding: 34px;
+$pb_button_hover_darken: 4%;
+$pb_button_border_width: 1px;
 
-@mixin pb_button(){
+@mixin pb_button($bg: $primary_action, $color: $text_dk_default) {
   display: inline-block;
   font-size: $font_small;
   font-weight: $regular;
   text-align: center;
   text-transform: none;
-  border-width: 0;
+  border-width: $pb_button_border_width;
   border-color: transparent;
   border-style: solid;
-  border-radius: 4px;
+  border-radius: $border_rad_light;
   height: $pb_button-size;
   line-height: $pb_button-size;
-  padding: 0 $pb_button-side-padding;
+  padding: 0 $pb_button_side_padding;
   cursor: pointer;
-  opacity: 1;
-  box-shadow: 0 0 0 transparent;
-  transition: all 0.3s ease;
+  background-color: $bg;
+  color: $color;
+  outline: none;
+  transition: $transition_default;
+
+  &:hover {
+    outline: none;
+  }
+
+  &:active,
+  &:focus {
+    outline: none;
+    border-width: $pb_button_border_width;
+    border-color: darken($bg, $pb_button_hover_darken);
+  }
 };
 
-@mixin pb_button_primary(){
+@mixin pb_button_hover($bg: darken($primary_action, $pb_button_hover_darken)){
+  background-color: $bg;
+}
+
+// Primary ======================
+@mixin pb_button_primary {
   @include pb_button;
-  background-color: $primary_action;
-  color: $text_dk_default;
 
   &:hover {
-    background-color: darken($primary_action, 4%);
+    @include pb_button_hover;
   }
 }
 
-@mixin pb_button_secondary(){
-  @include pb_button;
-  background-color: rgba($secondary_action, $opacity_1);
-  color: $secondary_action;
+// Secondary ====================
+@mixin pb_button_secondary {
+  $secondary_bg: rgba($secondary_action, $opacity_2);
+  @include pb_button($secondary_bg, $secondary_action);
 
   &:hover {
-    background-color: rgba($secondary_action, $opacity_2);
+    @include pb_button_hover(rgba($secondary_action, $opacity_3));
   }
 }
 
-@mixin pb_button_link(){
-  @include pb_button;
-  background-color: transparent;
-  color: $secondary_action;
-  padding: 0 $pb_button-side-padding/2;
+// Link =========================
+@mixin pb_button_link {
+  @include pb_button($transparent, $secondary_action);
 
   &:hover {
-    background-color: $silver;
+    @include pb_button_hover($transparent);
   }
 }
 
-@mixin pb_button_disabled(){
-  @include pb_button;
-  cursor: not-allowed;
+// Disabled ====================
+@mixin pb_button_disabled {
+  $disabled_color: rgba($charcoal, $opacity_5);
+  @include pb_button(rgba($slate, $opacity_4), $disabled_color);
   pointer-events: none;
-  background-color: $silver;
-  color: rgba($charcoal, $opacity_4);
-
-  &:hover {
-    background-color: rgba($slate, $opacity_3);
-  }
 }
 
-@mixin pb_button_block(){
-  @include pb_button;
+// Block =======================
+@mixin pb_button_block {
   display: block;
   width: 100%;
 }
