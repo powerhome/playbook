@@ -22,10 +22,8 @@ module Playbook
       render(partial: kit_class_obj.new(**props, &block), as: :object)
     rescue ActionView::MissingTemplate
       ActionView::Base.prefix_partial_path_with_controller_namespace = false
-      puts "hhhhhh========="
       render(partial: kit_class_obj.new(**props, &block), as: :object)
     ensure
-      puts "xxxxxx======"
       ActionView::Base.prefix_partial_path_with_controller_namespace = original_value
     end
 
