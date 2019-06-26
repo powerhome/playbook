@@ -1,6 +1,10 @@
 examples:
   rails:
-  - button_sizes: Button Sizes
+  - button_default: Button Variants
+  - button_full_width: Button Full Width
+  - button_link: Button Links
+  - button_block_content: Button Block Content
+  - button_accessibility: Button Accessibility Options
   react:
   - button_sizes: Button Sizes
   - button_light: Buttons Light UI
