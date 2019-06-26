@@ -27,6 +27,8 @@ $pb_button_border_width: 1px;
   background-color: $bg;
   color: $color;
   outline: none;
+  white-space: nowrap;
+  box-sizing: content-box;
   transition: $transition_default;
 
   &:hover {
