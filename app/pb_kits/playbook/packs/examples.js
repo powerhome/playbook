@@ -41,3 +41,6 @@ WebpackerReact.setup (avatar);
 
 import * as input from "pb_input/docs";
 WebpackerReact.setup (input);
+
+import * as BarGraph from "pb_bar_graph/docs";
+WebpackerReact.setup (BarGraph);
