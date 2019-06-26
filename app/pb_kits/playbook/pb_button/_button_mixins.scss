@@ -2,34 +2,41 @@
 @import "../tokens/colors";
 @import "../tokens/opacity";
 @import "../tokens/shadows";
+@import "../tokens/spacing";
 @import "../tokens/transition";
 @import "../tokens/typography";
 
 $pb_button-size: 40px;
-$pb_button_side_padding: 34px;
+$pb_button_v_padding: 7px;
+$pb_button_h_padding: 34px;
 $pb_button_hover_darken: 4%;
 $pb_button_border_width: 1px;
 
 @mixin pb_button($bg: $primary_action, $color: $text_dk_default) {
-  display: inline-block;
+  text-rendering: optimizeLegibility;
   font-size: $font_small;
   font-weight: $regular;
   text-align: center;
+  vertical-align: middle;
   text-transform: none;
   border-width: $pb_button_border_width;
   border-color: transparent;
   border-style: solid;
   border-radius: $border_rad_light;
-  height: $pb_button-size;
-  line-height: $pb_button-size;
-  padding: 0 $pb_button_side_padding;
+  min-height: $pb_button-size;
+  line-height: 1.5;
+  padding: $pb_button_v_padding $pb_button_h_padding;
   cursor: pointer;
   background-color: $bg;
   color: $color;
   outline: none;
-  white-space: nowrap;
-  box-sizing: content-box;
-  transition: $transition_default;
+  transition: background $transition_default ease, color $transition_default ease;
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-basis: auto;
+  width: fit-content;
 
   &:hover {
     outline: none;
@@ -84,6 +91,7 @@ $pb_button_border_width: 1px;
 
 // Block =======================
 @mixin pb_button_block {
-  display: block;
+  display: flex;
+  flex-basis: 100%;
   width: 100%;
 }
