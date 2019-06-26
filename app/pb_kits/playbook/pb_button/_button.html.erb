@@ -1,9 +1,21 @@
-<%= content_tag(:div,
-    class: object.wrapperclass) do %>
-    <%= content_tag(:button,
-        id: object.id,
-        data: object.data,
-        class: object.classname("pb_button#{object.type}#{object.size}#{object.dark}")) do %>
-        <span><%= object.text %></span>
-    <% end %>
+<% case object.tag %>
+<% when "button" %>
+  <%# Buttons should not have the link options: href, target %>
+  <%= content_tag(object.tag,
+      id: object.id,
+      data: object.data,
+      class: object.classname(object.kit_class),
+      disabled: object.disabled) do %>
+      <%= object.yield(context: self) %>
+  <% end %>
+<% else %>
+  <%= content_tag(object.tag,
+      id: object.id,
+      data: object.data,
+      class: object.classname(object.kit_class),
+      disabled: object.disabled,
+      href: object.link,
+      target: object.new_window) do %>
+      <%= object.yield(context: self) %>
+  <% end %>
 <% end %>

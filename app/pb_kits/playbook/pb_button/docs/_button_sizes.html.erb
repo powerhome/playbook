@@ -1,3 +1,18 @@
-<%= pb_rails("button", props: { type: "primary", size: "small" }) %>
-<%= pb_rails("button", props: { type: "primary", size: "medium" }) %>
-<%= pb_rails("button", props: { type: "primary", size: "large" }) %>
+<%= pb_rails("button") do %>
+  Primary Button
+<% end %>
+
+<%= pb_rails("button", props: { text: "Button Secondary", variant: "secondary" }) %>
+<%= pb_rails("button", props: { text: "Button Link", variant: "link" }) %>
+<%= pb_rails("button", props: { text: "Button Disabled", disabled: true }) %>
+
+<br/><br/>
+
+<%= pb_rails("button", props: { text: "Button Full Width", full_width: true }) %>
+
+<br/><br/>
+
+<%= pb_rails("button", props: { text: "A Tag Button", tag: "a", link: "http://google.com" }) %>
+<%= pb_rails("button", props: { text: "Open in new Window", tag: "a", new_window: true, link: "http://google.com" }) %>
+<%= pb_rails("button", props: { text: "A Tag Button Disabled", disabled: true, tag: "a", link: "http://google.com" }) %>
+<%= pb_rails("button", props: { text: "Button with aria label", aria_label: "This is a button", tag: "a", link: "http://google.com" }) %>
