@@ -1,7 +1,8 @@
 module Playbook
   module PbIcon
     class Icon < Playbook::PbKit::Base
-      PROPS = [:configured_border,
+      PROPS = [:configured_aria,
+          :configured_border,
 					:configured_classname,
 					:configured_data,
 					:configured_fixed_width,
@@ -16,7 +17,8 @@ module Playbook
 					:configured_size,
 					:configured_spin].freeze
 
-      def initialize(border: default_configuration,
+      def initialize(aria: default_configuration,
+              border: default_configuration,
 							classname: default_configuration,
 							data: default_configuration,
 							fixed_width: default_configuration,
@@ -30,6 +32,7 @@ module Playbook
 							rotation: default_configuration,
 							size: default_configuration,
 							spin: default_configuration)
+        self.configured_aria = aria
         self.configured_border = border
 				self.configured_classname = classname
 				self.configured_data = data

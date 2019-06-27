@@ -1,7 +1,8 @@
 module Playbook
   module PbTable
     class Table < Playbook::PbKit::Base
-      PROPS = [:configured_classname,
+      PROPS = [:configured_aria,
+          :configured_classname,
           :configured_container,
           :configured_dark,
           :configured_data,
@@ -12,7 +13,8 @@ module Playbook
           :configured_text,
           :block].freeze
 
-      def initialize(classname: default_configuration,
+      def initialize(aria: default_configuration,
+                    classname: default_configuration,
                     container: default_configuration,
                     dark: default_configuration,
                     data: default_configuration,
@@ -21,6 +23,7 @@ module Playbook
                     single_line: default_configuration,
                     size: default_configuration,
                     &block)
+        self.configured_aria = aria
         self.configured_classname = classname
         self.configured_container = container
         self.configured_dark = dark

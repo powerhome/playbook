@@ -1,7 +1,7 @@
 module Playbook
   module PbButton
     class Button < Playbook::PbKit::Base
-      PROPS = [:configured_aria_label,
+      PROPS = [:configured_aria,
         :configured_classname,
         :configured_data,
         :configured_disabled,
@@ -14,7 +14,7 @@ module Playbook
         :configured_text,
         :block].freeze
 
-      def initialize(aria_label: default_configuration,
+      def initialize(aria: default_configuration,
                    classname: default_configuration,
                    data: default_configuration,
                    disabled: default_configuration,
@@ -26,7 +26,7 @@ module Playbook
                    tag: default_configuration,
                    text: default_configuration,
                    &block)
-        self.configured_aria_label = aria_label
+        self.configured_aria = aria
         self.configured_classname = classname
         self.configured_data = data
         self.configured_disabled = disabled
@@ -38,10 +38,6 @@ module Playbook
         self.configured_tag = tag
         self.configured_text = text
         self.block = block_given? ? block : nil
-      end
-
-      def aria_label
-        default_value(configured_aria_label, "button")
       end
 
       def disabled
