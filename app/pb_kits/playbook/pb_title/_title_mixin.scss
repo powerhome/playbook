@@ -6,52 +6,52 @@
   font-size: $heading_1;
   letter-spacing: $lspace_tight;
   font-weight: $lighter;
-  color: $ink;
+  color: $text_lt_default;
   margin: 0;
   line-height: $lh_tighter;
 }
 
 @mixin heading_1_dark {
   @include heading_1;
-  color: $white;
+  color: $text_dk_default;
 }
 
 @mixin heading_2 {
   font-size: $heading_2;
   font-weight: $lighter;
-  color: $ink;
+  color: $text_lt_default;
   margin: 0;
   line-height: 0.96;
 }
 
 @mixin heading_2_dark {
   @include heading_2;
-  color: $white;
+  color: $text_dk_default;
 }
 
 @mixin heading_3 {
   font-size: $heading_3;
   font-weight: $lighter;
-  color: $ink;
+  color: $text_lt_default;
   margin: 0;
   line-height: $lh_tighter;
 }
 
 @mixin heading_3_dark {
   @include heading_3;
-  color: $white;
+  color: $text_dk_default;
 }
 
 
 @mixin heading_4 {
   font-size: $heading_4;
   font-weight: $bolder;
-  color: $ink;
+  color: $text_lt_default;
   margin: 0;
   line-height: $lh_tighter;
 }
 
 @mixin heading_4_dark {
   @include heading_4;
-  color: $white;
+  color: $text_dk_default;
 }

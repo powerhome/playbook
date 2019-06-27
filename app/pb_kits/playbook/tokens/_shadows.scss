@@ -1,8 +1,15 @@
 @import "colors";
 @import "opacity";
 
-$shadow_shallow: 0 1px 1px 0 rgba($black, 0.05);
-$shadow_default: 0 1px 5px 0 $black_opacity_2;
-$shadow_deep: 0 2px 10px 0 $black_opacity_2;
-$shadow_deeper: 0 7px 18px 0 $black_opacity_2;
-$shadow_deepest: 0 31px 41px 0 rgba($ink_dark, $opacity_2), 0 2px 16px 0 rgba($ink_dark, 0.08);
+$shadow_shallow: 0 1px 1px 0 $shadow_light;
+$shadow_default: 0 1px 5px 0 $shadow_light;
+$shadow_deep: 0 2px 10px 0 $shadow_light;
+$shadow_deeper: 0 7px 18px 0 $shadow_light;
+$shadow_deepest: 0 31px 41px 0 rgba($bg_dark, $opacity_2), 0 2px 16px 0 rgba($bg_dark, 0.08);
+$box_shadows: (
+  shadow_shallow: $shadow_shallow,
+  shadow_default: $shadow_default,
+  shadow_deep: $shadow_deep,
+  shadow_deeper: $shadow_deeper,
+  shadow_deepest: $shadow_deepest
+);

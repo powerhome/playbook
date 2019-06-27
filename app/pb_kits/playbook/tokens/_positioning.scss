@@ -9,6 +9,17 @@ $z_7: 700;
 $z_8: 800;
 $z_9: 900;
 $z_10: 1000;
+$z_index: (
+  zindex_1: $z_1,
+  zindex_2: $z_1,
+  zindex_3: $z_1,
+  zindex_4: $z_1,
+  zindex_5: $z_1,
+  zindex_6: $z_1,
+  zindex_7: $z_1,
+  zindex_8: $z_1,
+  zindex_9: $z_1,
+);
 
 $z_layers: (
   "header": $z_10,

@@ -3,7 +3,6 @@
 @import "../tokens/colors";
 
 // Another style should be borders like buttons
-
 .vertical_nav_list {
   $selector: ".vertical_nav_list";
   &_title {
@@ -16,7 +15,7 @@
   }
   &_border_item {
     list-style: none;
-    border-bottom: 1px solid $sky;
+    border-bottom: 1px solid $border_light;
     &:last-child {
       border-bottom: 0;
     }
@@ -25,15 +24,15 @@
   &_border_item {
     &_active,
     &.active {
-      background-color: $p_royal_opacity_1;
+      background-color: $active_light;
       #{$selector}_item_link,
       #{$selector}_border_item_link {
-        border-color: $power_royal;
+        border-color: $primary;
         &_icon {
-          color: $power_royal;
+          color: $primary;
         }
         &_text {
-          color: $power_royal;
+          color: $primary;
         }
       }
     }
@@ -50,22 +49,22 @@
       &_icon {
         font-size: $font_large;
         margin-right: $space_sm;
-        color: $ink_lightest;
+        color: $text_lt_lighter;
       }
       &_text {
         font-size: $font_base;
         font-weight: $bold;
-        color: $ink;
+        color: $text_lt_default;
       }
       &:hover {
-        background-color: rgba($power_royal, 0.03);
+        background-color: rgba($primary, 0.03);
         #{$selector}_item_link_icon,
         #{$selector}_border_item_link_icon {
-          color: $power_royal;
+          color: $primary;
         }
         #{$selector}_item_link_text,
         #{$selector}_border_item_link_text {
-          color: $power_royal;
+          color: $primary;
         }
       }
     }

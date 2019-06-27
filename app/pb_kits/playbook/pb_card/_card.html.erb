@@ -1,6 +1,7 @@
 <%= content_tag(:div,
     id: object.id,
     data: object.data,
-    class: object.classname("pb_card")) do %>
+    class: object.classname("pb_card #{object.shadow_class}")) do %>
     <div><%= object.yield(context: self) %></div>
+    <%= object.shadow %>
 <% end %>

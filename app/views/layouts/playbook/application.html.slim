@@ -2,12 +2,11 @@ doctype html
 html
   head
     title Playbook Design System
+    meta http-equiv="Content-Security-Policy" content="default-src *; style-src 'self' http://* 'unsafe-inline'; script-src 'self' http://* 'unsafe-inline' 'unsafe-eval'"
     = csrf_meta_tags
     = csp_meta_tag
-    = javascript_include_tag "https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"
     = stylesheet_pack_tag 'main'
-    = javascript_pack_tag 'application'
-    = javascript_pack_tag 'examples'
+
   body
     = render 'layouts/playbook/nav'
     = pb_rails("layout", props: {full: true})
@@ -16,3 +15,9 @@ html
       = pb_rails("layout/body")
         .pb--page--content--main
           = yield
+
+  = javascript_include_tag "https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"
+  = javascript_include_tag "https://code.highcharts.com/highcharts.js"
+  = javascript_pack_tag 'application'
+  = javascript_pack_tag 'examples'
+= yield :pb_js

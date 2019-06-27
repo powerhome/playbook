@@ -1,28 +1,83 @@
 module Playbook
   module PbKit
     class Base
+      #============= Default props =============
       def classname(ui_classes="")
-        if configured_classname == default_configuration
-          ui_classes
-        else
-          ui_classes+" "+configured_classname
-        end
+        self.concat_value(configured_classname, ui_classes)
       end
 
       def data(ui_data={})
-        ui_data ||= {}
-        if configured_data == default_configuration
-          ui_data
-        else
-          configured_data.merge(ui_data)
-        end
+        self.merge_value(configured_data, ui_data)
       end
 
       def id(ui_id=nil)
-        if configured_id == default_configuration
-          ui_id
+        self.default_value(configured_id, ui_id)
+      end
+
+      #============= Type checking =============
+      def is_true?(value)
+        self.is_boolean?(value) && value == true
+      end
+
+      def is_string?(value)
+        value.is_a? String
+      end
+
+      def is_integer?(value)
+        value.is_a? Integer
+      end
+
+      def is_boolean?(value)
+        [true, false].include? value
+      end
+
+      def one_of?(value, options = [])
+        options.include? value
+      end
+
+      def is_set?(value)
+        value != default_configuration
+      end
+
+      #============= Default value =============
+      def default_value(value, default_value)
+        self.is_set?(value) ? value : default_value
+      end
+
+      def adjusted_value(value, adjusted_value, default_value)
+        self.is_set?(value) ? adjusted_value : default_value
+      end
+
+      def concat_value(value, value_2)
+        self.is_set?(value) ? value_2+" "+value : value_2
+      end
+
+      def merge_value(value, value_2)
+        value_2 ||= {}
+        self.is_set?(value) ? value.merge(value_2) : value_2
+      end
+
+      def one_of_value(value, options = [], default = "")
+        if self.is_set?(value)
+          options.include?(value) ? value : default
         else
-          configured_id
+          default
+        end
+      end
+
+      def true_value(value, true_value = "", false_value = "")
+        if self.is_set?(value)
+          is_true?(value) ? true_value : false_value
+        else
+          false_value
+        end
+      end
+
+      def false_value(value, false_value = "", true_value = "")
+        if self.is_set?(value)
+          is_true?(value) ? true_value : false_value
+        else
+          false_value
         end
       end
 

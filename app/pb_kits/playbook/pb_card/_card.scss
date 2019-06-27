@@ -1,14 +1,33 @@
+@import "../tokens/shadows";
+
 .pb_card {
   width: 300px;
   height: 200px;
   background: white;
   border: 1px solid #dedede;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   padding: 20px;
   margin: 20px 0;
 
   h1 {
     font-weight: normal;
     font-size: 28px;
+  }
+
+  &.shadow {
+    &_shallow {
+      box-shadow: $shadow_shallow;
+    }
+    &_default {
+      box-shadow: $shadow_default;
+    }
+    &_deep {
+      box-shadow: $shadow_deep;
+    }
+    &_deeper {
+      box-shadow: $shadow_deeper;
+    }
+    &_deepest {
+      box-shadow: $shadow_deepest;
+    }
   }
 }

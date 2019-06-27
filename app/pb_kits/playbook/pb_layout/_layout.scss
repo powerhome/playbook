@@ -27,10 +27,10 @@
     padding: $space_sm $space_xl;
     &_border {
       padding: $space_sm $space_xl;
-      border-bottom: 1px solid $sky;
+      border-bottom: 1px solid $border_light;
       &_margin {
         margin: $space_sm $space_xl;
-        border-bottom: 1px solid $sky;
+        border-bottom: 1px solid $border_light;
       }
     }
   }

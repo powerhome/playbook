@@ -1,8 +1,10 @@
 import "../../../../fonts/fontawesome.js"
 import "../../../../fonts/regular.js"
+import "../pb_charts/pbChart.js";
 import "./main.scss";
 import "./kits.js";
 
+// Move to separate file
 $(document).on('click', '[data-toggle]', function(e){
   e.preventDefault();
   var kit_container = $(this).closest('.pb--doc');
