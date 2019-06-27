@@ -1,5 +1,5 @@
 .pb--kit-show
-  = pb_rails("title", props: { text: pb_title(@kit), tag: "h1", size: "1" })
+  = pb_rails("title", props: { text: pb_kit_title(@kit), tag: "h1", size: "1" })
 
   .pb--kit-type-nav
     - if has_kit_type?(@kit, "rails")

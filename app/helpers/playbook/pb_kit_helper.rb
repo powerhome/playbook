@@ -18,7 +18,7 @@ module Playbook
       props = defined?(props) && !props.nil? ? props : {}
       kit_class_obj = get_class_name(kit)
       original_value = ActionView::Base.prefix_partial_path_with_controller_namespace
-
+      ActionView::Base.prefix_partial_path_with_controller_namespace = true
       render(partial: kit_class_obj.new(**props, &block), as: :object)
     rescue ActionView::MissingTemplate
       ActionView::Base.prefix_partial_path_with_controller_namespace = false
