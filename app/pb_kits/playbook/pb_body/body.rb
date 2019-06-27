@@ -8,7 +8,7 @@ module Playbook
           :configured_id,
           :configured_tag,
           :configured_text,
-          :block].freeze,
+          :block].freeze
 
 
       def initialize(classname: default_configuration,
