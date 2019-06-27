@@ -1,0 +1,12 @@
+examples:
+  rails:
+  - icon_default: Icon Default
+  - icon_rotate: Icon Rotate
+  - icon_flip: Icon Flip
+  - icon_animate: Icon Animation
+  - icon_pull: Icon Pull
+  - icon_border: Icon Border
+  - icon_sizes: Icon Sizes
+  - icon_default_dark: Icon Default Dark
+  react:
+  - icon_default: Default
