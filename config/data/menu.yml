@@ -10,3 +10,5 @@ kits:
   - list
   - avatar
   - line_graph
+  - icon
+  - table

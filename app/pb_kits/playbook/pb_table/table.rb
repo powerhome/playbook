@@ -32,46 +32,41 @@ module Playbook
         self.block = block_given? ? block : nil
       end
 
-      def single_line
-        if configured_single_line == default_configuration
-          ""
-        else
-          configured_single_line === true ? "single-line" : ""
-        end
+      def single_line_class
+        true_value(configured_single_line, "single-line", nil)
       end
 
       def size
         size_options = %w(sm md lg)
-        size_default = "sm"
-        if configured_size == default_configuration
-          size_default
-        else
-          size_options.include?(configured_size) ? configured_size : size_default
-        end
+        one_of_value(configured_size, size_options, default_configuration)
       end
 
-      def dark
-        if configured_dark == default_configuration
-          ""
-        else
-          configured_dark === true ? "table-dark" : ""
-        end
+      def size_class
+        adjusted_value(configured_size, "table-#{self.size}", "table-md")
       end
 
-      def disable_hover
-        if configured_disable_hover == default_configuration
-          ""
-        else
-          configured_disable_hover === true ? "no-hover" : ""
-        end
+      def dark_class
+        true_value(configured_dark, "table-dark", nil)
       end
 
-      def container
-        if configured_container == default_configuration
-          ""
-        else
-          configured_container === true ? "table-card" : ""
-        end
+      def disable_hover_class
+        true_value(configured_disable_hover, "no-hover", nil)
+      end
+
+      def container_class
+        true_value(configured_container, "table-card", nil)
+      end
+
+      def kit_class
+        table_options = [
+          "pb_table",
+          size_class,
+          single_line_class,
+          dark_class,
+          disable_hover_class,
+          container_class
+        ]
+        table_options.reject(&:nil?).join(" ")
       end
 
       def yield(context:)
