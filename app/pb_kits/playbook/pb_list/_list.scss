@@ -56,20 +56,27 @@
   &[class*=_dark] li {
     color: $white ;
     border-bottom: 1px solid $border_dark;
+    &:last-child {
+      border-bottom: 0;
+    }
     &:before {
       color: $text_dk_light;
     }
   }
+
   &[class*=_lg] li {
   padding: $space-lg 0;
   }
+
   &[class*=_xpadding] li {
     padding-left: $space-md;
     padding-right: $space-md;
   }
+
   &[class*=_borderless] li {
     border-bottom: 0;
   }
+
   &[class*=_layout_left] li {
     @include li-layout-grid;
     :nth-child(odd){
@@ -80,6 +87,7 @@
       text-align:left;
     }
   }
+  
   &[class*=_layout_right] li {
     @include li-layout-grid;
     :nth-child(odd){
