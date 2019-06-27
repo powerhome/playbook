@@ -26,37 +26,34 @@ module Playbook
       end
 
       def tag
-        if configured_tag == default_configuration
-          "h1"
-        else
-          configured_tag
-        end
+        tag_options = %w(h1 h2 h3 h4 h5 h6 p div span)
+        one_of_value(configured_tag, tag_options, "h3")
       end
 
       def text
-        if configured_text == default_configuration
-          "Hello World"
-        else
-          configured_text
-        end
+        default_value(configured_text, "Title text")
       end
 
       def size
-        if configured_size == default_configuration
-          "_1"
-        else
-          "_#{configured_size}"
-        end
+        size_options = [1, 2, 3, 4]
+        one_of_value(configured_size, size_options, 3)
       end
 
-      def dark
-        if configured_dark == default_configuration
-          ""
-        else
-          if (configured_dark == true)
-            "_dark"
-          end
-        end
+      def size_class
+        adjusted_value(self.size, self.size, nil)
+      end
+
+      def dark_class
+        true_value(configured_dark, "dark", nil)
+      end
+
+      def kit_class
+        title_options = [
+          "pb_title",
+          size_class,
+          dark_class
+        ]
+        title_options.reject(&:nil?).join("_")
       end
 
       def to_partial_path
