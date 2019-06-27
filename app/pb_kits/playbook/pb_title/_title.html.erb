@@ -1,1 +1,4 @@
-<%= content_tag(:"#{object.tag}", object.text, class: "heading#{object.size}#{object.dark}") %>
+<%= content_tag(object.tag, object.text,
+    id: object.id,
+    data: object.data,
+    class: object.classname(object.kit_class)) %>

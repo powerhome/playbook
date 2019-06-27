@@ -1,111 +1,113 @@
 @media only screen and (max-width: $screen-xs-max) {
-  .table-sm,
-  .table-md,
-  .table-lg {
-    width: 100%;
-    background: none !important;
+  [class^=pb_table] {
+    .table-sm,
+    .table-md,
+    .table-lg {
+      width: 100%;
+      background: none !important;
 
-    thead {
-      tr {
-        left: -9999px;
-        position: absolute;
-        top: -9999px;
+      thead {
+        tr {
+          left: -9999px;
+          position: absolute;
+          top: -9999px;
 
-        th {
-          display: block;
-          visibility: visible;
+          th {
+            display: block;
+            visibility: visible;
+          }
         }
       }
-    }
-    tbody {
-      tr {
-        td {
-          display: block;
-          visibility: visible;
-          border-left-width: 1px !important;
-          border-right-width: 1px !important;
-          border-bottom-width: 0 !important;
-          border-color: $border_light !important;
-          min-height: 2.2em;
-          padding-left: 34%;
-          position: relative;
-          text-align:left;
-          white-space: normal;
-          &:before {
-            content: attr(data-title);
-            color: $text_lt_default !important;
-            font-weight: $bold !important;
-            text-align: left !important;
-            width: 100% !important;
-            white-space: nowrap !important;
-            text-overflow: ellipsis !important;
-            position: relative !important;
-            top: 0 !important;
-            left: 0 !important;
-            height: 100% !important;
-            padding-left: 0 !important;
-            display: block !important;
+      tbody {
+        tr {
+          td {
+            display: block;
+            visibility: visible;
+            border-left-width: 1px !important;
+            border-right-width: 1px !important;
+            border-bottom-width: 0 !important;
+            border-color: $border_light !important;
+            min-height: 2.2em;
+            padding-left: 34%;
+            position: relative;
+            text-align:left;
+            white-space: normal;
+            &:before {
+              content: attr(data-title);
+              color: $text_lt_default !important;
+              font-weight: $bold !important;
+              text-align: left !important;
+              width: 100% !important;
+              white-space: nowrap !important;
+              text-overflow: ellipsis !important;
+              position: relative !important;
+              top: 0 !important;
+              left: 0 !important;
+              height: 100% !important;
+              padding-left: 0 !important;
+              display: block !important;
+            }
+
+            &:first-child {
+              margin-top: $space_md !important;
+              border-top-width: 1px !important;
+              border-top-color: $border_light !important;
+              border-radius: 4px 4px 0 0;
+            }
+
+            &:last-child {
+              border-radius: 0 0 4px 4px;
+              border-bottom-width: 1px !important;
+            }
           }
 
           &:first-child {
-            margin-top: $space_md !important;
-            border-top-width: 1px !important;
-            border-top-color: $border_light !important;
-            border-radius: 4px 4px 0 0;
-          }
-
-          &:last-child {
-            border-radius: 0 0 4px 4px;
-            border-bottom-width: 1px !important;
-          }
-        }
-
-        &:first-child {
-          td {
-            &:first-child {
-              margin-top: $space-xs !important;
+            td {
+              &:first-child {
+                margin-top: $space-xs !important;
+              }
             }
           }
         }
       }
-    }
-    &.table-card {
-      background: none !important;
+      &.table-card {
+        background: none !important;
 
-      tbody {
-        tr {
-          td {
-            background: $white !important;
-            border-left-width: 1px !important;
-            border-right-width: 1px !important;
-            border-top-width: 1px !important;
+        tbody {
+          tr {
+            td {
+              background: $white !important;
+              border-left-width: 1px !important;
+              border-right-width: 1px !important;
+              border-top-width: 1px !important;
 
-            &:first-child {
-              border-radius: 4px 4px 0 0 !important;
-            }
-            &:last-child {
-              border-radius: 0 0 4px 4px !important;
+              &:first-child {
+                border-radius: 4px 4px 0 0 !important;
+              }
+              &:last-child {
+                border-radius: 0 0 4px 4px !important;
+              }
             }
           }
         }
       }
-    }
-    &:hover {
-      tbody {
-        tr {
-          box-shadow: 0 0 0 $white !important;
+      &:hover {
+        tbody {
+          tr {
+            box-shadow: 0 0 0 $white !important;
+          }
         }
       }
     }
-  }
-  @each $name, $value in $cell-pad-list {
-    &.#{$name} {
-      tbody {
-        tr {
-          td {
-            &:first-child,
-            &:last-child {
-              padding: $value $cell-gutter !important;
+    @each $name, $value in $cell-pad-list {
+      &.#{$name} {
+        tbody {
+          tr {
+            td {
+              &:first-child,
+              &:last-child {
+                padding: $value $cell-gutter !important;
+              }
             }
           }
         }
@@ -115,19 +117,21 @@
 }
 
 @media only screen and (max-width: $screen-xs-max) {
-  .table-sm,
-  .table-md,
-  .table-lg {
-    &.hide-labels {
-      tbody {
-        tr {
-          td {
-            &::before {
-              content: '';
-              left: 0;
-              padding-right: 0;
-              position: relative;
-              width: 0;
+  [class^=pb_table] {
+    .table-sm,
+    .table-md,
+    .table-lg {
+      &.hide-labels {
+        tbody {
+          tr {
+            td {
+              &::before {
+                content: '';
+                left: 0;
+                padding-right: 0;
+                position: relative;
+                width: 0;
+              }
             }
           }
         }
