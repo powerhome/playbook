@@ -1,68 +1,52 @@
 module Playbook
   module PbAvatar
     class Avatar < Playbook::PbKit::Base
-      PROPS = [:configured_classname,
+      PROPS = [:configured_aria,
+            :configured_classname,
             :configured_data,
             :configured_id,
             :configured_name,
             :configured_size,
-            :configured_text,
-            :configured_url].freeze
+            :configured_image].freeze
 
-      def initialize(classname: default_configuration,
+      def initialize(aria: default_configuration,
+                    classname: default_configuration,
                     data: default_configuration,
                     id: default_configuration,
                     name: default_configuration,
                     size: default_configuration,
-                    text: default_configuration,
-                    url: default_configuration)
+                    image: default_configuration)
+        self.configured_aria = aria
         self.configured_classname = classname
         self.configured_data = data
         self.configured_id = id
         self.configured_name = name
         self.configured_size = size
-        self.configured_text = text
-        self.configured_url = url
+        self.configured_image = image
       end
 
-      def name
-        if configured_name == default_configuration
-          ""
-        else
-          configured_name
+      def image
+        if is_set? configured_image
+          pb_image = Playbook::PbImage::Image.new(configured_image)
+          ApplicationController.renderer.render(partial: pb_image, as: :object)
         end
       end
 
       def initials
-        if configured_name == default_configuration
-          ""
-        else
-          configured_name.split.map(&:first).join.downcase
-        end
+        adjusted_value(configured_name, configured_name.split.map(&:first).join.downcase, String.new)
       end
 
       def size
-        if configured_size == default_configuration
-          "base"
-        else
-          configured_size
-        end
+        size_options = %w(xs sm md base lg xl)
+        one_of_value(configured_size, size_options, "md")
       end
 
-      def text
-        if configured_text == default_configuration
-          ""
-        else
-          configured_text
-        end
-      end
-
-      def url
-        if configured_url == default_configuration
-          ""
-        else
-          configured_url
-        end
+      def kit_class
+        avatar_options = [
+          "pb_avatar",
+          size
+        ]
+        avatar_options.reject(&:nil?).join("_")
       end
 
       def to_partial_path

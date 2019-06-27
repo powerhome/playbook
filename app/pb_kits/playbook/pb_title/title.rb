@@ -1,7 +1,8 @@
 module Playbook
   module PbTitle
     class Title < Playbook::PbKit::Base
-      PROPS = [:configured_classname,
+      PROPS = [:configured_aria,
+          :configured_classname,
           :configured_dark,
           :configured_data,
           :configured_id,
@@ -9,13 +10,15 @@ module Playbook
           :configured_tag,
           :configured_text].freeze
 
-      def initialize(classname: default_configuration,
+      def initialize(aria: default_configuration,
+                   classname: default_configuration,
                    dark: default_configuration,
                    data: default_configuration,
                    id: default_configuration,
                    size: default_configuration,
                    tag: default_configuration,
                    text: default_configuration)
+        self.configured_aria = aria
         self.configured_classname = classname
         self.configured_dark = dark
         self.configured_data = data

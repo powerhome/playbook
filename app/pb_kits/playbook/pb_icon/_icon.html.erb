@@ -1,0 +1,7 @@
+<% if !object.icon_class.nil? %>
+  <%= content_tag(:i, nil,
+      id: object.id,
+      data: object.data,
+      class: object.classname(object.kit_class),
+      aria: object.aria) %>
+<% end %>

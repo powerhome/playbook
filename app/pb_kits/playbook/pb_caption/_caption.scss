@@ -1,5 +1,13 @@
 @import "caption_mixin";
 
-.caption {
+[class^=pb_caption] {
   @include caption;
+
+  &[class*=_lg]  {
+    @include caption_lg;
+  }
+
+  &[class*=_dark]  {
+    @include caption_dark;
+  }
 }
