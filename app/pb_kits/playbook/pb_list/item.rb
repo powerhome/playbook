@@ -13,7 +13,6 @@ module Playbook
         self.configured_classname = classname
         self.configured_data = data
         self.configured_id = id
-        self.configured_text = text
         self.block = block_given? ? block : nil
       end
 
