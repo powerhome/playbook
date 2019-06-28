@@ -2,18 +2,19 @@
 @import "../tokens/colors";
 @import "../tokens/typography";
 
-.avatar {
-  $avatar-sizes: (
-    "xs":   28px,
-    "sm":   38px,
-    "md":   60px,
-    "base": 60px,
-    "lg":   80px,
-    "xl":   100px,
-  );
+$avatar-sizes: (
+  "xs":   28px,
+  "sm":   38px,
+  "md":   60px,
+  "base": 60px,
+  "lg":   80px,
+  "xl":   100px,
+);
 
+[class^=pb_avatar] {
   @each $name, $size in $avatar-sizes {
-    &_#{$name}, &_#{$name}_thumb {
+    &[class*=_#{$name}],
+    &[class*=_#{$name}_thumb] {
       width: $size;
       height: $size;
       object-fit: cover;

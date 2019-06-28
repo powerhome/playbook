@@ -2,17 +2,20 @@ module Playbook
   module PbImage
     class Image < Playbook::PbKit::Base
       PROPS = [:configured_alt,
+          :configured_aria,
           :configured_classname,
           :configured_data,
           :configured_id,
           :configured_url].freeze
 
       def initialize(alt: default_configuration,
+                   aria: default_configuration,
                    classname: default_configuration,
                    data: default_configuration,
                    id: default_configuration,
                    url: default_configuration)
         self.configured_alt = alt
+        self.configured_aria = aria
         self.configured_classname = classname
         self.configured_data = data
         self.configured_id = id
@@ -20,19 +23,20 @@ module Playbook
       end
 
       def alt
-        if configured_alt == default_configuration
-          ""
-        else
-          configured_alt
-        end
+        default_value(configured_alt, String.new)
       end
 
       def url
-        if configured_url == default_configuration
-          "path/to/some/image/placeholder.jpg"
-        else
-          configured_url
-        end
+        default_value(configured_url, String.new)
+      end
+
+      def kit_class
+        image_options = [
+          "pb_image",
+          "lazyload",
+          "blur_up"
+        ]
+        image_options.reject(&:nil?).join(" ")
       end
 
       def to_partial_path
@@ -46,6 +50,7 @@ module Playbook
       def default_configuration
         DEFAULT
       end
+      attr_reader(*PROPS)
       attr_accessor(*PROPS)
 
     end

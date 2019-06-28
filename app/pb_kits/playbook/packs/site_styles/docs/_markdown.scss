@@ -3,21 +3,21 @@
 
 .markdown {
   h1 {
-    @include heading-1;
+    @include pb_title_1;
     margin: 1rem 0;
   }
 
   h2 {
-    @include heading-2;
+    @include pb_title_2;
     margin: 1rem 0;
   }
 
   h3 {
-    @include heading-3;
+    @include pb_title_3;
     margin: 1rem 0;
   }
   h4 {
-    @include heading-4;
+    @include pb_title_4;
     margin: 1rem 0;
   }
   h5 {

@@ -1,5 +1,6 @@
 <%= tag(:img,
     id: object.id,
     data: object.data(src: object.url),
-    class: object.classname("pb_image lazyload blur_up"),
+    class: object.classname(object.kit_class),
+    aria: object.aria,
     alt: object.alt) %>

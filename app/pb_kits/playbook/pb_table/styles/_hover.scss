@@ -1,6 +1,6 @@
 $transition-speed: 0.2s;
 
-table {
+[class^=pb_table] {
   &.table-sm,
   &.table-md,
   &.table-lg {
@@ -19,7 +19,7 @@ table {
           }
 
           &:hover {
-            box-shadow: 0 2px 10px 0 $active_dark;
+            box-shadow: 0 2px 10px 0 rgba($slate, $opacity-6);
 
             td {
               background: $white;

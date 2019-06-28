@@ -41,3 +41,6 @@ WebpackerReact.setup (avatar);
 
 import * as input from "pb_input/docs";
 WebpackerReact.setup (input);
+
+import * as Icon from "pb_icon/docs";
+WebpackerReact.setup (Icon);
