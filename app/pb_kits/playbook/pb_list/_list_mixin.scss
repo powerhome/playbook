@@ -1,0 +1,102 @@
+@import "../tokens/spacing";
+@import "../tokens/colors";
+@import "../tokens/screen_sizes";
+
+// $nspace-xs:  4px;
+// $nspace-sm:  8px;
+// $nspace-md:  16px;
+// $nspace-lg:  24px;
+// $nspace-xl:  32px;
+
+@mixin base-list-style {
+  ul, ol {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  ol {
+    counter-reset: list-counter;
+    li:before {
+      content: counter(list-counter);
+      counter-increment: list-counter;
+      display: block;
+      width: 20px;
+      flex: 0 0 20px;
+      text-align: left;
+      color: $text_lt_lighter;
+      font-weight: $bold;
+      margin-right: $space-sm;
+    }
+  }
+  li {
+    border-bottom: 1px solid $border_light;
+    padding: $space-sm 0;
+    display: flex;
+    align-items: left;
+    &:last-child {
+      border-bottom: 0;
+      // padding-bottom: 0;
+    }
+  }
+}
+
+@mixin li-layout-grid {
+  display: grid;
+  grid-template: auto / repeat(12,1fr);
+  align-items: center;
+
+}
+
+[class*=pb_list]{
+  @include base-list-style;
+}
+
+[class^=pb_list]{
+
+  &[class*=_dark] li {
+    color: $white ;
+    border-bottom: 1px solid $border_dark;
+    &:last-child {
+      border-bottom: 0;
+    }
+    &:before {
+      color: $text_dk_light;
+    }
+  }
+
+  &[class*=_lg] li {
+  padding: $space-lg 0;
+  }
+
+  &[class*=_xpadding] li {
+    padding-left: $space-md;
+    padding-right: $space-md;
+  }
+
+  &[class*=_borderless] li {
+    border-bottom: 0;
+  }
+
+  &[class*=_layout_left] li {
+    @include li-layout-grid;
+    :nth-child(odd){
+      grid-column: 1 / 1 ;
+    }
+    :nth-child(even){
+      grid-column: 2 / -1 ;
+      text-align:left;
+    }
+  }
+  
+  &[class*=_layout_right] li {
+    @include li-layout-grid;
+    :nth-child(odd){
+      grid-column: 1 / -2 ;
+    }
+    :nth-child(even){
+      grid-column: -1  ;
+      text-align:right;
+    }
+  }
+
+}
