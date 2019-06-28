@@ -6,26 +6,26 @@
 
 [class^=pb_list] {
   &[class*=_dark] li {
-    @include dark
+    @include pb_list_dark;
   }
 
   &[class*=_lg] li {
-    @include large;
+    @include pb_list_large;
   }
 
   &[class*=_xpadding] li {
-    @include x-padding;
+    @include pb_list_x_padding;
   }
 
   &[class*=_borderless] li {
-    @include borderless;
+    @include pb_list_borderless;
   }
 
   &[class*=_layout_left] li {
-    @include layout_left;
+    @include pb_list_layout_left;
   }
 
   &[class*=_layout_right] li {
-    @include layout_right;
+    @include pb_list_layout_right;
   }
 }

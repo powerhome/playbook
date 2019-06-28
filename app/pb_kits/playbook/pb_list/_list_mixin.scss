@@ -40,13 +40,13 @@
     }
   }
 }
-@mixin layout_grid {
+@mixin pb_list_layout_grid {
   display: grid;
   grid-template: auto / repeat(12,1fr);
   align-items: center;
 }
-@mixin layout_left {
-  @include layout_grid;
+@mixin pb_list_layout_left {
+  @include pb_list_layout_grid;
 
   :nth-child(odd) {
     grid-column: 1 / 1;
@@ -57,8 +57,8 @@
     text-align: left;
   }
 }
-@mixin layout_right {
-  @include layout_grid;
+@mixin pb_list_layout_right {
+  @include pb_list_layout_grid;
 
   :nth-child(odd) {
     grid-column: 1 / -2;
@@ -69,7 +69,7 @@
     text-align: right;
   }
 }
-@mixin dark {
+@mixin pb_list_dark {
   color: $white;
   border-bottom: 1px solid $border_dark;
 
@@ -81,13 +81,13 @@
     color: $text_dk_light;
   }
 }
-@mixin large {
+@mixin pb_list_large {
   padding: $space-lg 0;
 }
-@mixin x-padding {
+@mixin pb_list_x_padding {
   padding-left: $space-md;
   padding-right: $space-md;
 }
-@mixin borderless {
+@mixin pb_list_borderless {
   border-bottom: 0;
 }
