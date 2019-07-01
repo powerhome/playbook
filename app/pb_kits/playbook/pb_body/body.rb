@@ -1,7 +1,8 @@
 module Playbook
   module PbBody
     class Body < Playbook::PbKit::Base
-      PROPS = [:configured_classname,
+      PROPS = [:configured_aria,
+          :configured_classname,
           :configured_color,
           :configured_dark,
           :configured_data,
@@ -11,7 +12,8 @@ module Playbook
           :block].freeze
 
 
-      def initialize(classname: default_configuration,
+      def initialize(aria: default_configuration,
+                   classname: default_configuration,
                    color: default_configuration,
                    dark: default_configuration,
                    data: default_configuration,
@@ -19,6 +21,8 @@ module Playbook
                    tag: default_configuration,
                    text: default_configuration,
                    &block)
+        
+        self.configured_aria = aria
         self.configured_classname = classname
         self.configured_color = color
         self.configured_dark = dark

@@ -2,56 +2,34 @@
 @import "../tokens/typography";
 @import "../tokens/line_height";
 
-@mixin heading_1 {
-  font-size: $heading_1;
+@mixin pb_title(
+    $fontSize: $heading_1, 
+    $fontWeight: $lighter,
+    $lineHeight: $lh_tighter){
+  font-size: $fontSize;
   letter-spacing: $lspace_tight;
-  font-weight: $lighter;
+  font-weight: $fontWeight;
   color: $text_lt_default;
   margin: 0;
-  line-height: $lh_tighter;
+  line-height: $lineHeight;
 }
 
-@mixin heading_1_dark {
-  @include heading_1;
-  color: $text_dk_default;
+@mixin pb_title_1 {
+  @include pb_title($heading_1);
 }
 
-@mixin heading_2 {
-  font-size: $heading_2;
-  font-weight: $lighter;
-  color: $text_lt_default;
-  margin: 0;
-  line-height: 0.96;
+@mixin pb_title_2 {
+  @include pb_title($heading_2, $lighter, 0.96);
 }
 
-@mixin heading_2_dark {
-  @include heading_2;
-  color: $text_dk_default;
+@mixin pb_title_3 {
+  @include pb_title($heading_3);
 }
 
-@mixin heading_3 {
-  font-size: $heading_3;
-  font-weight: $lighter;
-  color: $text_lt_default;
-  margin: 0;
-  line-height: $lh_tighter;
+@mixin pb_title_4 {
+  @include pb_title($heading_4, $bolder);
 }
 
-@mixin heading_3_dark {
-  @include heading_3;
-  color: $text_dk_default;
-}
-
-
-@mixin heading_4 {
-  font-size: $heading_4;
-  font-weight: $bolder;
-  color: $text_lt_default;
-  margin: 0;
-  line-height: $lh_tighter;
-}
-
-@mixin heading_4_dark {
-  @include heading_4;
+@mixin pb_title_dark {
   color: $text_dk_default;
 }
