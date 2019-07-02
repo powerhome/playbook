@@ -1,10 +1,7 @@
 @import "../tokens/spacing";
 @import "../tokens/colors";
 @import "../tokens/screen_sizes"; // $nspace-xs:  4px;
-// $nspace-sm:  8px;
-// $nspace-md:  16px;
-// $nspace-lg:  24px;
-// $nspace-xl:  32px;
+
 @mixin pb_list {
   ol,
   ul {
