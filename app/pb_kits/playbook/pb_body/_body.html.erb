@@ -2,5 +2,5 @@
   id: object.id,
   data: object.data,
   class: object.classname("body#{object.color}#{object.dark}")) do %>
- <div><%= object.yield(context: self) %></div>
+<%= object.yield(context: self) %>
 <% end %>
