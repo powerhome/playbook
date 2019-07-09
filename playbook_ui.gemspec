@@ -33,4 +33,5 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'spring'
   s.add_development_dependency 'spring-watcher-listen', '~> 2.0.0'
   s.add_development_dependency 'uglifier'
+  s.add_development_dependency "rubocop", "0.72.0"
 end

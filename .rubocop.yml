@@ -1,0 +1,53 @@
+AllCops:
+  TargetRubyVersion: 2.5
+  Exclude:
+    - "bin/*"
+    - "config/**/*"
+    - "db/**/*"
+    - "db/schema.rb"
+    - "node_modules/**/*"
+    - "Rakefile"
+    - "spec/**/*"
+    - "vendor/**/*"
+
+Layout/AccessModifierIndentation:
+  EnforcedStyle: outdent
+
+Lint/ScriptPermission:
+  Enabled: false
+
+Metrics:
+  Enabled: false
+
+Naming/FileName:
+  Exclude:
+    - "Guardfile"
+    - "Capfile"
+
+Naming/UncommunicativeMethodParamName:
+  AllowedNames:
+    - io
+    - id
+    - to
+    - by
+    - "on"
+    - in
+    - at
+
+Style/Documentation:
+  Enabled: false
+
+Style/Lambda:
+  EnforcedStyle: literal
+
+Style/RescueStandardError:
+  EnforcedStyle: implicit
+
+Style/StringLiterals:
+  EnforcedStyle: double_quotes
+
+Style/TrailingCommaInArrayLiteral:
+  EnforcedStyleForMultiline: comma
+
+Style/TrailingCommaInHashLiteral:
+  EnforcedStyleForMultiline: comma
