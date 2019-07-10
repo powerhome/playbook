@@ -1,5 +1,6 @@
-<%= content_tag(:"#{object.tag}", object.text,
-    id: object.id,
-    data: object.data,
-    class: object.classname("body#{object.color}#{object.dark}"),
-    aria: object.aria) %>
+<%= content_tag(object.tag,
+  id: object.id,
+  data: object.data,
+  class: object.classname("body#{object.color}#{object.dark}")) do %>
+<%= object.yield(context: self) %>
+<% end %>

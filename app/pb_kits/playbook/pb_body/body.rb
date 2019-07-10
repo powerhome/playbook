@@ -8,7 +8,8 @@ module Playbook
           :configured_data,
           :configured_id,
           :configured_tag,
-          :configured_text].freeze
+          :block].freeze
+
 
       def initialize(aria: default_configuration,
                    classname: default_configuration,
@@ -17,7 +18,8 @@ module Playbook
                    data: default_configuration,
                    id: default_configuration,
                    tag: default_configuration,
-                   text: default_configuration)
+                   &block)
+
         self.configured_aria = aria
         self.configured_classname = classname
         self.configured_color = color
@@ -25,7 +27,7 @@ module Playbook
         self.configured_data = data
         self.configured_id = id
         self.configured_tag = tag
-        self.configured_text = text
+        self.block = block_given? ? block : nil
       end
 
       def color
@@ -64,6 +66,10 @@ module Playbook
 
       def to_partial_path
         "pb_body/body"
+      end
+
+      def yield(context:)
+        context.capture(&block)
       end
 
     private
