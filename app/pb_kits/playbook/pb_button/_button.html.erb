@@ -1,9 +1,19 @@
-<%= content_tag(:div,
-    class: object.wrapperclass) do %>
-    <%= content_tag(:button,
-        id: object.id,
-        data: object.data,
-        class: object.classname("pb_button#{object.type}#{object.size}#{object.dark}")) do %>
-        <span><%= object.text %></span>
-    <% end %>
+<%
+  # Buttons should not have link options: href, target
+  options = {
+    id: object.id,
+    data: object.data,
+    class: object.classname(object.kit_class),
+    disabled: object.disabled,
+    aria: object.aria
+  }
+  link_options = {
+    href: object.link,
+    target: object.new_window
+  }
+%>
+
+<%= content_tag(object.tag,
+    object.tag == "button" ? options : options.merge(link_options)) do %>
+  <%= object.yield(context: self) %>
 <% end %>

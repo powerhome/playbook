@@ -14,7 +14,7 @@ br
 
   - MENU["kits"].sort.each do |link|
     - active = !@kit.nil? && @kit == link ? true : false
-    = pb_rails("vertical_nav/item", props: { text: pb_title(link), link: kit_show_path(link), active: active })
+    = pb_rails("vertical_nav/item", props: { text: pb_kit_title(link), link: kit_show_path(link), active: active })
 
 br
 

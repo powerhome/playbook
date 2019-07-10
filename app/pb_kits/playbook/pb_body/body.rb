@@ -1,28 +1,33 @@
 module Playbook
   module PbBody
     class Body < Playbook::PbKit::Base
-      PROPS = [:configured_classname,
+      PROPS = [:configured_aria,
+          :configured_classname,
           :configured_color,
           :configured_dark,
           :configured_data,
           :configured_id,
           :configured_tag,
-          :configured_text].freeze
+          :block].freeze
 
-      def initialize(classname: default_configuration,
+
+      def initialize(aria: default_configuration,
+                   classname: default_configuration,
                    color: default_configuration,
                    dark: default_configuration,
                    data: default_configuration,
                    id: default_configuration,
                    tag: default_configuration,
-                   text: default_configuration)
+                   &block)
+
+        self.configured_aria = aria
         self.configured_classname = classname
         self.configured_color = color
         self.configured_dark = dark
         self.configured_data = data
         self.configured_id = id
         self.configured_tag = tag
-        self.configured_text = text
+        self.block = block_given? ? block : nil
       end
 
       def color
@@ -61,6 +66,10 @@ module Playbook
 
       def to_partial_path
         "pb_body/body"
+      end
+
+      def yield(context:)
+        context.capture(&block)
       end
 
     private

@@ -11,3 +11,5 @@ kits:
   - avatar
   - line_graph
   - bar_graph
+  - icon
+  - table

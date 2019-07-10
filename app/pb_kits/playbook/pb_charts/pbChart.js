@@ -2,7 +2,6 @@ import { legendOptions } from './pbLineSettings.js';
 import { highchartsTheme } from './pbChartsLightTheme.js';
 
 
-;
 (function(root, factory) {
   // Set the plugin name
   const plugin_name = 'PBChart';
@@ -74,12 +73,13 @@ import { highchartsTheme } from './pbChartsLightTheme.js';
         plugin.settings.callbackInitializeBefore.call();
       }
 
-
-      Highcharts.theme = highchartsTheme;
-      Highcharts.setOptions(Highcharts.theme);
+      Highcharts.setOptions(highchartsTheme);
       Highcharts.chart('mychart', {
         title: {
           text: plugin.defaults.title
+        },
+        chart: {
+          type: plugin.defaults.type
         },
         subtitle: {
           text: plugin.defaults.subtitle

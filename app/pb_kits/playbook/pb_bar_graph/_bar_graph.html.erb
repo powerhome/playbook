@@ -1,6 +1,14 @@
-<%= content_tag(:div,
-    id: object.id,
-    data: object.data,
-    class: object.classname("pb_bar_graph")) do %>
-  <span>BAR GRAPH CONTENT</span>
+<script type="text/javascript" src="http://10.1.1.242:8081/js/sisense.js"></script>
+<div class="<%= object.class_name %>" id="mychart"></div>
+<% content_for :pb_js do %>
+  <%= javascript_tag do %>
+    new PBChart('.selector', {
+      orientation: <% object.orientation %>
+      data: <%= object.chart_data %>,
+      title: "<%= object.title %>",
+      subtitle: "<%= object.subtitle %>",
+      axisTitle: "<%= object.axis_title %>",
+      pointStart: <%= object.point_start %>,
+    });
+  <% end %>
 <% end %>

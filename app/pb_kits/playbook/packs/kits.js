@@ -10,3 +10,4 @@ import "./pb_table.js";
 import "./pb_avatar.js";
 import "./pb_input.js";
 import "./pb_bar_graph.js";
+import "./pb_icon.js";

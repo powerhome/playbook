@@ -1,4 +1,5 @@
 import colors from '../tokens/_colors.scss';
+import { chartContainerSpacing } from "./pbLineSettings";
 
 
 // Connect to Sisense
@@ -26,7 +27,7 @@ function applyCustomColors(highchart) {
       data_item.color = selected_color;
     });
   });
-};
+}
 
 
 function styleChartContainer(highchart) {
@@ -34,7 +35,7 @@ function styleChartContainer(highchart) {
   highchart.chart.spacingBottom = chartContainerSpacing.chart.spacingTop;
   highchart.chart.spacingLeft = chartContainerSpacing.chart.spacingTop;
   highchart.chart.spacingRight = chartContainerSpacing.chart.spacingTop;
-};
+}
 
 
 /* Style Legend */
@@ -43,7 +44,7 @@ function styleLegend(highchart) {
   highchart.legend.itemStyle.color = legendOptions.itemStyle.color;
   highchart.legend.itemStyle.fontWeight = legendOptions.itemStyle.fontWeight;
   highchart.legend.itemStyle.fontSize = legendOptions.itemStyle.fontSize;
-};
+}
 
 
 /* Size columns */
@@ -96,7 +97,7 @@ function _adjustAxisStyle(axis) {
   axis.labels.style.color = "#B0BAC9";
   axis.labels.style.fontWeight = "300";
   axis.labels.style.fontSize = "14px";
-};
+}
 
 
 export {

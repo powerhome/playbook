@@ -2,5 +2,5 @@
     id: object.id,
     data: object.data,
     class: object.classname) do %>
-    <span><%= object.text %></span>
+    <%= object.yield(context: self) %>
 <% end %>
