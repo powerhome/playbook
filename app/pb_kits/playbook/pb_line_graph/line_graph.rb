@@ -1,11 +1,12 @@
 module Playbook
   module PbLineGraph
-    class LineGraph
+    class LineGraph < Playbook::PbKit::Base
       PROPS = [:configured_class,
           :configured_data,
           :configured_title,
           :configured_subtitle,
           :configured_axis_title,
+          :configured_gradient,
           :configured_point_start].freeze
 
       def initialize(
@@ -14,7 +15,8 @@ module Playbook
         title: default_configuration,
         subtitle: default_configuration,
         axis_title: default_configuration,
-        point_start: default_configuration
+        point_start: default_configuration,
+        gradient: default_configuration
       )
         self.configured_class = class_name
         self.configured_title = title
@@ -22,6 +24,7 @@ module Playbook
         self.configured_axis_title = axis_title
         self.configured_data = data
         self.configured_point_start = point_start
+        self.configured_gradient = gradient
       end
 
       def class_name
@@ -29,6 +32,22 @@ module Playbook
           ""
         else
           configured_class
+        end
+      end
+
+      def gradient 
+        gradient_options = %w(on off)
+        one_of_value(configured_gradient, gradient_options, "off")
+      end
+
+      def chart_type
+        case self.gradient 
+        when "off"
+          "line"
+        when "on"
+          "area" 
+        else
+          "line"
         end
       end
 

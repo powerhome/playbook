@@ -1,10 +1,9 @@
-<script type="text/javascript" src="http://10.1.1.242:8081/js/sisense.js"></script>
-<div class="<%= object.class_name %>" id="mychart"></div>
+<div class="<%= object.classname %>" id="mychart"></div>
 <% content_for :pb_js do %>
   <%= javascript_tag do %>
     new PBChart('.selector', {
-      orientation: <% object.orientation %>
       data: <%= object.chart_data %>,
+      type: "<%= object.chart_type %>",
       title: "<%= object.title %>",
       subtitle: "<%= object.subtitle %>",
       axisTitle: "<%= object.axis_title %>",

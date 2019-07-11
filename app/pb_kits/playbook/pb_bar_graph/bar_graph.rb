@@ -1,12 +1,14 @@
 module Playbook
   module PbBarGraph 
     class BarGraph < Playbook::PbKit::Base
-      PROPS = [:configured_type,
+      PROPS = [
+          :configured_classname,
           :configured_chart_data,
           :configured_title,
           :configured_subtitle,
           :configured_axis_title,
-          :configured_point_start].freeze
+          :configured_point_start,
+          :configured_orientation].freeze
 
       def initialize(
         chart_data: default_configuration,
@@ -14,29 +16,32 @@ module Playbook
         subtitle: default_configuration,
         axis_title: default_configuration,
         point_start: default_configuration,
-        type: "default_configuration"
+        classname: default_configuration,
+        orientation: default_configuration
       )
-
-        self.configured_type = type
+        self.configured_classname = classname
+        self.configured_chart_data = chart_data
         self.configured_title = title
         self.configured_subtitle = subtitle
         self.configured_axis_title = axis_title
         self.configured_point_start = point_start
+        self.configured_orientation = orientation
       end
 
-      def type 
-        if configured_type == default_configuration
+      def orientation 
+        orientation_options = %w(vertical horizontal)
+        one_of_value(configured_orientation, orientation_options, "vertical")
+      end
+
+      def chart_type
+        case self.orientation 
+        when "vertical"
           "column"
+        when "horizontal"
+          "bar" 
         else
-          configured_type
+          "column"
         end
-      end
-
-      def orientation
-        if configured_type == default_configuration | "vertical"
-          configured_type == "vertical"
-        elsif configured_type == "horizontal"
-           configured_type == "bar"
       end
 
       def title
@@ -76,7 +81,7 @@ module Playbook
       end
 
       def chart_data
-        if configured_data == default_configuration
+        if configured_chart_data == default_configuration
           data = [{
               name: 'Installation',
               data: [43934, 52503, 57177, 69658, 97031, 119931, 137133, 154175]
