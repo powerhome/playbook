@@ -34,15 +34,12 @@ module Playbook
       end
 
       def text
-        if block_given?
+        if configured_text == default_configuration
+          ''
         else
-         if configured_text == default_configuration
-           ''
-         else
-           configured_text
-         end
-       end
-     end
+          configured_text 
+        end
+      end
 
       def link
         if configured_link == default_configuration
@@ -53,7 +50,7 @@ module Playbook
       end
 
       def yield(context:)
-        context.capture(&block)
+        !block.nil? ? context.capture(&block) : ''
       end
 
       def to_partial_path
