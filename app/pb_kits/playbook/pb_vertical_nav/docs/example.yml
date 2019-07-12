@@ -1,5 +1,6 @@
 examples:
   rails:
   - default_nav: Default
+  - block_nav: Block
   react:
   - default_nav: Default

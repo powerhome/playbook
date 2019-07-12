@@ -2,7 +2,7 @@
     id: object.id,
     data: object.data,
     class: object.classname("vertical_nav_list_border_item#{object.active}")) do %>
-  <a href=<%= object.link %> class="vertical_nav_list_item_link">
-    <span class="vertical_nav_list_item_link_text"><%= object.text %></span>
-  </a>
+    <a href=<%= object.link %> class="vertical_nav_list_item_link">
+     <span class="vertical_nav_list_item_link_text"><%= object.text %><%= object.yield(context: self) %></span>
+   </a>
 <% end %>
