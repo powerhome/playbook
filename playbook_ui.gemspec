@@ -11,7 +11,7 @@ Gem::Specification.new do |s|
   s.summary     = "Playbook Design System"
   s.description = "Playbook Design System"
 
-  s.files = Dir["{app,components,fonts,lib,stories}/**/*"] + ["Rakefile", "README.md"]
+  s.files = Dir["{app,fonts,lib,stories}/**/*"] + ["Rakefile", "README.md"]
 
   s.add_dependency "rails", ">= 5.1.6", "< 6.0"
   s.add_dependency "sassc-rails", "1.3.0"
