@@ -36,15 +36,15 @@ module Playbook
       end
 
       def gradient 
-        gradient_options = %w(on off)
-        one_of_value(configured_gradient, gradient_options, "off")
+        gradient_options = %w(true false)
+        one_of_value(configured_gradient, gradient_options, "false")
       end
 
       def chart_type
         case self.gradient 
-        when "off"
+        when "false"
           "line"
-        when "on"
+        when "true"
           "area" 
         else
           "line"

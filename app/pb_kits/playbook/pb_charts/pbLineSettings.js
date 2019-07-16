@@ -1,11 +1,12 @@
 import colors from '../tokens/_colors.scss';
+import typography from '../tokens/_typography.scss';
 
 const legendOptions = {
   itemStyle: {
-    fontFamily: "Proxima Nova",
-    color: "#8798AD",
-    fontWeight: "300",
-    fontSize: "14px",
+    fontFamily: typography.font_family_base,
+    color: colors.data_1,
+    fontWeight: typography.light,
+    fontSize: typography.text_largest,
   },
   layout: 'horizontal',
   align: 'center',
@@ -20,8 +21,6 @@ const chartContainerSpacing = {
     spacingRight: 60,
   }
 }
-
-
 
 export {
   legendOptions,

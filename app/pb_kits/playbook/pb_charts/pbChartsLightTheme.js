@@ -1,8 +1,6 @@
 import colors from '../tokens/_colors.scss';
 import typography from '../tokens/_typography.scss';
 
-const fontFamily = "Proxima Nova, Helvetica Neue, Helvetica, Arial, sans-serif"
-
 const highchartsTheme = {
   colors: [
     colors.data_1,
@@ -24,14 +22,14 @@ const highchartsTheme = {
   title: {
     style: {
       color: colors.text_lt_default,
-      fontFamily: fontFamily,
+      fontFamily: typography.font_family_base,
       fontWeight: typography.regular,
       fontSize: typography.heading_3,
     }
   },
   subtitle: {
     style: {
-      fontFamily: fontFamily,
+      fontFamily: typography.font_family_base,
       color: colors.text_lt_light,
       fontWeight: typography.regular,
       fontSize: typography.text_base,
@@ -43,7 +41,7 @@ const highchartsTheme = {
     tickColor: colors.border_light,
     labels: {
       style: {
-        fontFamily: fontFamily,
+        fontFamily: typography.font_family_base,
         color: colors.text_lt_lighter,
         fontWeight: typography.bold,
         fontSize: typography.text_smaller,
@@ -52,7 +50,7 @@ const highchartsTheme = {
     title: {
       style: {
         color: colors.text_lt_default,
-        fontFamily: fontFamily,
+        fontFamily: typography.font_family_base,
         fontWeight: typography.regular,
         fontSize: typography.heading_4,
       }
@@ -67,7 +65,7 @@ const highchartsTheme = {
     tickWidth: 0,
     labels: {
       style: {
-        fontFamily: fontFamily,
+        fontFamily: typography.font_family_base,
         color: colors.text_lt_lighter,
         fontWeight: typography.bold,
         fontSize: typography.text_smaller,
@@ -75,7 +73,7 @@ const highchartsTheme = {
     },
     title: {
       style: {
-        fontFamily: fontFamily,
+        fontFamily: typography.font_family_base,
         color: colors.text_lt_lighter,
         fontWeight: typography.bold,
         fontSize: typography.text_smaller,
@@ -87,10 +85,10 @@ const highchartsTheme = {
     align: 'center',
     verticalAlign: 'bottom',
     itemStyle: {
-      fontFamily: fontFamily,
+      fontFamily: typography.font_family_base,
       color: colors.text_lt_light,
       fontWeight: typography.regular,
-      fontSize: typography.text_base,
+      fontSize: typography.text_smaller
     },
     itemHoverStyle: {
       color: colors.text_lt_default,
@@ -116,7 +114,7 @@ const highchartsTheme = {
     borderWidth: 0,
     borderRadius: 10,
     style: {
-      fontFamily: fontFamily,
+      fontFamily: typography.font_family_base,
       color: colors.text_dk_default,
       fontWeight: typography.regular,
       fontSize: typography.text_smaller,
