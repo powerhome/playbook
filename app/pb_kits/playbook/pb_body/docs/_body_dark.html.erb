@@ -7,3 +7,13 @@ I am a body kit (Light)
 <%= pb_rails("body", props: { color: "lighter", dark: true }) do %>
   I am a body kit (Lighter)
 <% end %>
+
+<br><br>
+
+<%= pb_rails("body", props: { status: "negative", dark: true }) do %>
+  I am a body kit (Status: negative)
+<% end %>
+
+<%= pb_rails("body", props: { status: "positive", dark: true }) do %>
+  I am a body kit (Status: positive)
+<% end %>

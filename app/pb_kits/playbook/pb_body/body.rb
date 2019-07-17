@@ -7,6 +7,7 @@ module Playbook
           :configured_dark,
           :configured_data,
           :configured_id,
+          :configured_status,
           :configured_tag,
           :block].freeze
 
@@ -17,6 +18,7 @@ module Playbook
                    dark: default_configuration,
                    data: default_configuration,
                    id: default_configuration,
+                   status: default_configuration,
                    tag: default_configuration,
                    &block)
 
@@ -26,42 +28,53 @@ module Playbook
         self.configured_dark = dark
         self.configured_data = data
         self.configured_id = id
+        self.configured_status = status
         self.configured_tag = tag
         self.block = block_given? ? block : nil
       end
 
       def color
-        if configured_color == default_configuration
-          ""
-        else
-          "_#{configured_color}"
-        end
+        color_options = %w(default light lighter dark light_dark lighter_dark)
+        one_of_value(configured_color, color_options, "default")
+      end
+
+      def color_class
+        self.color != "default" ? self.color : nil
       end
 
       def dark
-        if configured_dark == default_configuration
-          ""
-        else
-          if (configured_dark == true)
-            "_dark"
-          end
-        end
+        is_true? configured_dark
+      end
+
+      def dark_class
+        true_value(configured_dark, "dark", nil)
+      end
+
+      def status
+        status_options = %w(default negative positive)
+        one_of_value(configured_status, status_options, "default")
+      end
+
+      def status_class
+        self.status != "default" ? self.status : nil
       end
 
       def tag
-        if configured_tag == default_configuration
-          "p"
-        else
-          configured_tag
-        end
+        default_value(configured_tag, "p")
       end
 
       def text
-        if configured_text == default_configuration
-          "This is some text"
-        else
-          configured_text
-        end
+        default_value(configured_text, "Body text")
+      end
+
+      def kit_class
+        body_options = [
+          "pb_body",
+          color_class,
+          dark_class,
+          status_class
+        ]
+        body_options.reject(&:nil?).join("_")
       end
 
       def to_partial_path
