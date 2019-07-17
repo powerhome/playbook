@@ -1,12 +1,15 @@
-let applyCustomColors = function(highchart) {
+import colors from '../tokens/_colors.scss';
+import typography from '../tokens/_typography.scss';
+
+const applyCustomColors = function(highchart) {
   var colors = [
-    "#004DFF",
-    "#9E64E9",
-    "#00C4D7",
-    "#0082FF",
-    "#00CA74",
-    "#F9BB00",
-    "#FF2229"
+    colors.data_1,
+    colors.data_2,
+    colors.data_3,
+    colors.data_4,
+    colors.data_5,
+    colors.data_6,
+    colors.data_7
   ];
 
   highchart.series.forEach(function(item, index) {
@@ -18,18 +21,18 @@ let applyCustomColors = function(highchart) {
   });
 };
 
-let styleChartContainer = function(highchart) {
+const styleChartContainer = function(highchart) {
   highchart.chart.spacingTop = 30;
   highchart.chart.spacingBottom = 40;
-  highchart.chart.spacingLeft = 60;
-  highchart.chart.spacingRight = 60;
+  highchart.chart.spacingLeft = 50;
+  highchart.chart.spacingRight = 50;
 };
 
-let styleLegend = function(highchart) {
-  highchart.legend.itemStyle.fontFamily = "Proxima Nova";
-  highchart.legend.itemStyle.color = "#8798AD";
-  highchart.legend.itemStyle.fontWeight = "300";
-  highchart.legend.itemStyle.fontSize = "14px";
+const styleLegend = function(highchart) {
+  highchart.legend.itemStyle.fontFamily = typography.font_family_base;
+  highchart.legend.itemStyle.color = colors.text_lt_light;
+  highchart.legend.itemStyle.fontWeight = typography.regular;
+  highchart.legend.itemStyle.fontSize = typography.text_smaller;
 };
 
 

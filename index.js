@@ -1,2 +1,5 @@
 import applyLineGraphStyles from "./app/pb_kits/playbook/pb_charts/pbLineGraph";  
-export default applyLineGraphStyles;
+import applyGlobalStyles from "./app/pb_kits/playbook/pb_charts/global";
+
+
+export { applyLineGraphStyles, applyGlobalStyles };
