@@ -2,7 +2,7 @@ import colors from '../tokens/_colors.scss';
 import typography from '../tokens/_typography.scss';
 
 const applyCustomColors = function(highchart) {
-  var colors = [
+  var data_colors = [
     colors.data_1,
     colors.data_2,
     colors.data_3,
@@ -13,7 +13,7 @@ const applyCustomColors = function(highchart) {
   ];
 
   highchart.series.forEach(function(item, index) {
-    var selected_color = colors[index % colors.length];
+    var selected_color = data_colors[index % data_colors.length];
     item.color = selected_color;
     item.data.forEach(function(data_item) {
       data_item.color = selected_color;
