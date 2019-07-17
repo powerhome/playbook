@@ -51,12 +51,12 @@ module Playbook
       end
 
       def status
-        status_options = %w(default negative positive)
-        one_of_value(configured_status, status_options, "default")
+        status_options = %w(neutral negative positive)
+        one_of_value(configured_status, status_options, "neutral")
       end
 
       def status_class
-        self.status != "default" ? self.status : nil
+        self.status != "neutral" ? self.status : nil
       end
 
       def tag
@@ -65,6 +65,10 @@ module Playbook
 
       def text
         default_value(configured_text, "Body text")
+      end
+
+      def yield(context:)
+        context.capture(&block)
       end
 
       def kit_class
@@ -79,10 +83,6 @@ module Playbook
 
       def to_partial_path
         "pb_body/body"
-      end
-
-      def yield(context:)
-        context.capture(&block)
       end
 
     private

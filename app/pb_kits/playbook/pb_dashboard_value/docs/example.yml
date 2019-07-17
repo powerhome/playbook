@@ -1,0 +1,10 @@
+examples:
+
+  rails:
+  - dashboard_value_default: Usage
+  - dashboard_value_change: Change
+  - dashboard_value_label: Label
+
+
+  react:
+  - dashboard_value_default: Default

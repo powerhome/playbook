@@ -1,0 +1,10 @@
+<%= content_tag(:div,
+    id: object.id,
+    data: object.data,
+    class: object.classname(object.kit_class)) do %>
+  <div class="pb_stat_value_wrapper">
+    <%= object.display_value %>
+    &nbsp;
+    <%= object.display_unit %>
+  </div>
+<% end %>
