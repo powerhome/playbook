@@ -57,7 +57,7 @@ module Playbook
         'pb_vertical_nav/item'
       end
 
-      private
+    private
 
       DEFAULT = Object.new
       private_constant :DEFAULT

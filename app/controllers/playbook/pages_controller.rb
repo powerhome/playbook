@@ -37,7 +37,7 @@ module Playbook
       render template: 'playbook/pages/kit_show'
     end
 
-    private
+  private
       def set_kit
         menu =  MENU["kits"]
         unless menu.include?(params[:name])
