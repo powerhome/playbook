@@ -2,19 +2,20 @@ module Playbook
   module PbDashboardValue
     class StatValue < Playbook::PbKit::Base
       PROPS = [:configured_classname,
-					:configured_data,
-					:configured_id,
-          :configured_unit,
-          :configured_value].freeze
+        :configured_data,
+        :configured_id,
+        :configured_unit,
+        :configured_value].freeze
 
       def initialize(classname: default_configuration,
-							data: default_configuration,
-							id: default_configuration,
-              unit: default_configuration,
-              value: default_configuration)
+        data: default_configuration,
+        id: default_configuration,
+        unit: default_configuration,
+        value: default_configuration)
+        
         self.configured_classname = classname
-				self.configured_data = data
-				self.configured_id = id
+        self.configured_data = data
+        self.configured_id = id
         self.configured_unit = unit
         self.configured_value = value
       end

@@ -2,14 +2,14 @@ module Playbook
   module PbBody
     class Body < Playbook::PbKit::Base
       PROPS = [:configured_aria,
-          :configured_classname,
-          :configured_color,
-          :configured_dark,
-          :configured_data,
-          :configured_id,
-          :configured_status,
-          :configured_tag,
-          :block].freeze
+        :configured_classname,
+        :configured_color,
+        :configured_dark,
+        :configured_data,
+        :configured_id,
+        :configured_status,
+        :configured_tag,
+        :block].freeze
 
 
       def initialize(aria: default_configuration,

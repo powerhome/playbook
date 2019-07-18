@@ -10,19 +10,20 @@ module Playbook
         :configured_stat_value].freeze
 
       def initialize(align: default_configuration,
-              classname: default_configuration,
-							data: default_configuration,
-							id: default_configuration,
-              stat_change: default_configuration,
-              stat_label: default_configuration,
-              stat_value: default_configuration)
+        classname: default_configuration,
+        data: default_configuration,
+        id: default_configuration,
+        stat_change: default_configuration,
+        stat_label: default_configuration,
+        stat_value: default_configuration)
+
         self.configured_align = align
         self.configured_classname = classname
-				self.configured_data = data
-				self.configured_id = id
-				self.configured_stat_change = stat_change
-				self.configured_stat_label = stat_label
-				self.configured_stat_value = stat_value
+        self.configured_data = data
+        self.configured_id = id
+        self.configured_stat_change = stat_change
+        self.configured_stat_label = stat_label
+        self.configured_stat_value = stat_value
       end
 
       def align
