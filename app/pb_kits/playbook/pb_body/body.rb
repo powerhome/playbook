@@ -1,26 +1,25 @@
 module Playbook
   module PbBody
     class Body < Playbook::PbKit::Base
-      PROPS = [:configured_aria,
-        :configured_classname,
-        :configured_color,
-        :configured_dark,
-        :configured_data,
-        :configured_id,
-        :configured_status,
-        :configured_tag,
-        :block].freeze
-
+      PROPS = %i[configured_aria
+                 configured_classname
+                 configured_color
+                 configured_dark
+                 configured_data
+                 configured_id
+                 configured_status
+                 configured_tag
+                 block].freeze
 
       def initialize(aria: default_configuration,
-                   classname: default_configuration,
-                   color: default_configuration,
-                   dark: default_configuration,
-                   data: default_configuration,
-                   id: default_configuration,
-                   status: default_configuration,
-                   tag: default_configuration,
-                   &block)
+                     classname: default_configuration,
+                     color: default_configuration,
+                     dark: default_configuration,
+                     data: default_configuration,
+                     id: default_configuration,
+                     status: default_configuration,
+                     tag: default_configuration,
+                     &block)
 
         self.configured_aria = aria
         self.configured_classname = classname
@@ -34,12 +33,12 @@ module Playbook
       end
 
       def color
-        color_options = %w(default light lighter dark light_dark lighter_dark)
-        one_of_value(configured_color, color_options, "default")
+        color_options = %w[default light lighter dark light_dark lighter_dark]
+        one_of_value(configured_color, color_options, 'default')
       end
 
       def color_class
-        self.color != "default" ? self.color : nil
+        color != 'default' ? color : nil
       end
 
       def dark
@@ -47,24 +46,24 @@ module Playbook
       end
 
       def dark_class
-        true_value(configured_dark, "dark", nil)
+        true_value(configured_dark, 'dark', nil)
       end
 
       def status
-        status_options = %w(neutral negative positive)
-        one_of_value(configured_status, status_options, "neutral")
+        status_options = %w[neutral negative positive]
+        one_of_value(configured_status, status_options, 'neutral')
       end
 
       def status_class
-        self.status != "neutral" ? self.status : nil
+        status != 'neutral' ? status : nil
       end
 
       def tag
-        default_value(configured_tag, "p")
+        default_value(configured_tag, 'p')
       end
 
       def text
-        default_value(configured_text, "Body text")
+        default_value(configured_text, 'Body text')
       end
 
       def yield(context:)
@@ -73,19 +72,19 @@ module Playbook
 
       def kit_class
         body_options = [
-          "pb_body",
+          'pb_body',
           color_class,
           dark_class,
           status_class
         ]
-        body_options.compact.join("_")
+        body_options.compact.join('_')
       end
 
       def to_partial_path
-        "pb_body/body"
+        'pb_body/body'
       end
 
-    private
+      private
 
       DEFAULT = Object.new
       private_constant :DEFAULT

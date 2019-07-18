@@ -1,21 +1,21 @@
 module Playbook
   module PbDashboardValue
     class DashboardValue < Playbook::PbKit::Base
-      PROPS = [:configured_align,
-        :configured_classname,
-        :configured_data,
-        :configured_id,
-        :configured_stat_change,
-        :configured_stat_label,
-        :configured_stat_value].freeze
+      PROPS = %i[configured_align
+                 configured_classname
+                 configured_data
+                 configured_id
+                 configured_stat_change
+                 configured_stat_label
+                 configured_stat_value].freeze
 
       def initialize(align: default_configuration,
-        classname: default_configuration,
-        data: default_configuration,
-        id: default_configuration,
-        stat_change: default_configuration,
-        stat_label: default_configuration,
-        stat_value: default_configuration)
+                     classname: default_configuration,
+                     data: default_configuration,
+                     id: default_configuration,
+                     stat_change: default_configuration,
+                     stat_label: default_configuration,
+                     stat_value: default_configuration)
 
         self.configured_align = align
         self.configured_classname = classname
@@ -27,8 +27,8 @@ module Playbook
       end
 
       def align
-        align_options = %w(left center right)
-        one_of_value(configured_align, align_options, "left")
+        align_options = %w[left center right]
+        one_of_value(configured_align, align_options, 'left')
       end
 
       def stat_label
@@ -54,17 +54,17 @@ module Playbook
 
       def kit_class
         kit_options = [
-          "pb_dashboard_value",
+          'pb_dashboard_value',
           align
         ]
-        kit_options.join("_")
+        kit_options.join('_')
       end
 
       def to_partial_path
-        "pb_dashboard_value/dashboard_value"
+        'pb_dashboard_value/dashboard_value'
       end
 
-    private
+      private
 
       DEFAULT = Object.new
       private_constant :DEFAULT
