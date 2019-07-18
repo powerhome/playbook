@@ -1,4 +1,3 @@
-import { legendOptions } from './pbLineSettings.js';
 import { highchartsTheme } from './pbChartsLightTheme.js';
 
 
