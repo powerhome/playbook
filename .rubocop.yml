@@ -49,6 +49,9 @@ Style/GuardClause:
 Style/Lambda:
   EnforcedStyle: literal
 
+Style/NumericLiterals:
+  Enabled: false
+
 Style/RescueStandardError:
   EnforcedStyle: implicit
 
