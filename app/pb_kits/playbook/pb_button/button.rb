@@ -63,7 +63,11 @@ module Playbook
 
       def tag
         tag_options = %w(button a)
-        one_of_value(configured_tag, tag_options, "button")
+        if self.link.empty?
+          one_of_value(configured_tag, tag_options, "button")
+        else
+          "a"
+        end
       end
 
       def new_window

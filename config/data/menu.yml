@@ -12,3 +12,4 @@ kits:
   - line_graph
   - icon
   - table
+  - dashboard_value
