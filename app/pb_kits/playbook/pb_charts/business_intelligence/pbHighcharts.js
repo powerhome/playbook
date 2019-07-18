@@ -43,7 +43,7 @@ const adjustAxisStyle = function(axis) {
 /* Remove grid from background */
 const styleAxis = function(highchart) {
   if (Array.isArray(highchart.yAxis)) {
-    highchart.yAxis.forEach(function(item, index) {
+    highchart.yAxis.forEach(function(item) {
       adjustAxisStyle(item);
     });
   } else {
@@ -51,7 +51,7 @@ const styleAxis = function(highchart) {
   }
 
   if (Array.isArray(highchart.xAxis)) {
-    highchart.xAxis.forEach(function(item, index) {
+    highchart.xAxis.forEach(function(item) {
       adjustAxisStyle(item);
     });
   } else {
