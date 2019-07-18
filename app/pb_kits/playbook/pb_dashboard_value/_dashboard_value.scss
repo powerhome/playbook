@@ -1,5 +1,10 @@
+@import "dashboard_value_mixins";
 @import "child_kits/stat_value";
 
 [class^=pb_dashboard_value]{
-  
+  @each $align_name, $align_value in $pb_dashboard_value_align {
+    &[class*=_#{$align_name}]  {
+      @include pb_dashboard_value($align_value);
+    }
+  }
 }

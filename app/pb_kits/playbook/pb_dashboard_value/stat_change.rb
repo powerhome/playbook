@@ -70,7 +70,7 @@ module Playbook
       def kit_class
         stat_options = [
           "pb_stat_change",
-          self.status
+          status
         ]
         stat_options.reject(&:nil?).join("_")
       end

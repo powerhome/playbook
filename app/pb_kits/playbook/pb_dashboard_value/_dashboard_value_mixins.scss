@@ -1,0 +1,12 @@
+$pb_dashboard_value_align: (
+  left:     flex-start,
+  center:   center,
+  right:    flex-end,
+);
+
+@mixin pb_dashboard_value($align: "flex-start") {
+  display: flex;
+  justify-content: flex-start;
+  align-items: $align;
+  flex-direction: column;
+}

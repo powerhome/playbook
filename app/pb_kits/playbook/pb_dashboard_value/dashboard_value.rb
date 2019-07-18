@@ -1,25 +1,33 @@
 module Playbook
   module PbDashboardValue
     class DashboardValue < Playbook::PbKit::Base
-      PROPS = [:configured_classname,
+      PROPS = [:configured_align,
+          :configured_classname,
 					:configured_data,
 					:configured_id,
           :configured_stat_change,
           :configured_stat_label,
           :configured_stat_value].freeze
 
-      def initialize(classname: default_configuration,
+      def initialize(align: default_configuration,
+              classname: default_configuration,
 							data: default_configuration,
 							id: default_configuration,
               stat_change: default_configuration,
               stat_label: default_configuration,
               stat_value: default_configuration)
+        self.configured_align = align
         self.configured_classname = classname
 				self.configured_data = data
 				self.configured_id = id
 				self.configured_stat_change = stat_change
 				self.configured_stat_label = stat_label
 				self.configured_stat_value = stat_value
+      end
+
+      def align
+        align_options = %w(left center right)
+        one_of_value(configured_align, align_options, "left")
       end
 
       def stat_label
@@ -41,6 +49,14 @@ module Playbook
           pb_change = Playbook::PbDashboardValue::StatChange.new(configured_stat_change)
           ApplicationController.renderer.render(partial: pb_change, as: :object)
         end
+      end
+
+      def kit_class
+        kit_options = [
+          "pb_dashboard_value",
+          align
+        ]
+        kit_options.reject(&:nil?).join("_")
       end
 
       def to_partial_path
