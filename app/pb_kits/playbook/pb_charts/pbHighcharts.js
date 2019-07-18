@@ -1,5 +1,5 @@
-import colors from '../tokens/_colors.scss';
-import typography from '../tokens/_typography.scss';
+import colors from "../tokens/_colors.scss";
+import typography from "../tokens/_typography.scss";
 
 const applyCustomColors = function(highchart) {
   var data_colors = [
@@ -35,12 +35,11 @@ const styleLegend = function(highchart) {
   highchart.legend.itemStyle.fontSize = typography.text_smaller;
 };
 
-
 // Exportable Global Styles Function
-export const applyGlobalStyles = function(highchart) {
+export const pbHighCharts = function(highchart) {
   applyCustomColors(highchart);
   styleChartContainer(highchart);
   styleLegend(highchart);
 };
 
-export default applyGlobalStyles;
+export default pbHighCharts;

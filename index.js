@@ -1,5 +1,5 @@
-import applyLineGraphStyles from "./app/pb_kits/playbook/pb_charts/pbLineGraph";  
-import applyGlobalStyles from "./app/pb_kits/playbook/pb_charts/global";
+import pbHighcharts from "./app/pb_kits/playbook/pb_charts/global";
+import pbLineGraph from "./app/pb_kits/playbook/pb_charts/pbLineGraph";
+import pbIndicator from "./app/pb_kits/playbook/pb_charts/pbIndicator";
 
-
-export { applyLineGraphStyles, applyGlobalStyles };
+export { pbHighcharts, pbLineGraph, pbIndicator };
