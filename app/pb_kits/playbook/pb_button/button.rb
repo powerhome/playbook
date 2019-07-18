@@ -56,46 +56,46 @@ module Playbook
       end
 
       def loading_icon
-        pb_icon = Playbook::PbIcon::Icon.new(icon: 'spinner',
+        pb_icon = Playbook::PbIcon::Icon.new(icon: "spinner",
                                              pulse: true,
                                              spin: true,
                                              fixed_width: true,
-                                             classname: 'loading-icon')
+                                             classname: "loading-icon")
         ApplicationController.renderer.render(partial: pb_icon, as: :object)
       end
 
       def disabled_class
-        true_value(disabled, 'disabled', 'enabled')
+        true_value(disabled, "disabled", "enabled")
       end
 
       def full_width_class
-        true_value(configured_full_width, 'block', 'inline')
+        true_value(configured_full_width, "block", "inline")
       end
 
       def link
-        default_value(configured_link, '')
+        default_value(configured_link, "")
       end
 
       def variant
         variant_options = %w[primary secondary link]
-        one_of_value(configured_variant, variant_options, 'primary')
+        one_of_value(configured_variant, variant_options, "primary")
       end
 
       def tag
         tag_options = %w[button a]
         if link.empty?
-          one_of_value(configured_tag, tag_options, 'button')
+          one_of_value(configured_tag, tag_options, "button")
         else
-          'a'
+          "a"
         end
       end
 
       def new_window
-        true_value(configured_new_window, '_blank', '_self')
+        true_value(configured_new_window, "_blank", "_self")
       end
 
       def text
-        default_value(configured_text, '')
+        default_value(configured_text, "")
       end
 
       def yield(context:)
@@ -104,17 +104,17 @@ module Playbook
 
       def kit_class
         kit_options = [
-          'pb_button',
+          "pb_button",
           variant,
           full_width_class,
           disabled_class,
           loading_class
         ]
-        kit_options.compact.join('_')
+        kit_options.compact.join("_")
       end
 
       def to_partial_path
-        'pb_button/button'
+        "pb_button/button"
       end
 
       private
