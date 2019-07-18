@@ -6,7 +6,7 @@
 @import "../tokens/transition";
 @import "../tokens/typography";
 
-$pb_button-size: 40px;
+$pb_button_size: 40px;
 $pb_button_v_padding: 7px;
 $pb_button_h_padding: 34px;
 $pb_button_hover_darken: 4%;
@@ -23,7 +23,7 @@ $pb_button_border_width: 1px;
   border-color: transparent;
   border-style: solid;
   border-radius: $border_rad_light;
-  min-height: $pb_button-size;
+  min-height: $pb_button_size;
   line-height: 1.5;
   padding: $pb_button_v_padding $pb_button_h_padding;
   cursor: pointer;

@@ -1,0 +1,7 @@
+[class^=pb_stat_value]{
+  &[class*=_wrapper] {
+    display: flex;
+    justify-content: flex-start;
+    align-items: baseline;
+  }
+}

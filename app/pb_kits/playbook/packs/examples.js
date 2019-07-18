@@ -47,3 +47,6 @@ WebpackerReact.setup (BarGraph);
 
 import * as Icon from "pb_icon/docs";
 WebpackerReact.setup (Icon);
+
+import * as DashboardValue from "pb_dashboard_value/docs";
+WebpackerReact.setup (DashboardValue);
