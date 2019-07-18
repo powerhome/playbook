@@ -58,7 +58,6 @@ module Playbook
       def loading_icon
         pb_icon = Playbook::PbIcon::Icon.new(icon: "spinner",
                                              pulse: true,
-                                             spin: true,
                                              fixed_width: true,
                                              classname: "loading-icon")
         ApplicationController.renderer.render(partial: pb_icon, as: :object)
@@ -117,7 +116,7 @@ module Playbook
         "pb_button/button"
       end
 
-      private
+    private
 
       DEFAULT = Object.new
       private_constant :DEFAULT
