@@ -1,5 +1,5 @@
-import colors from "../tokens/_colors.scss";
-import typography from "../tokens/_typography.scss";
+import colors from "../../tokens/_colors.scss";
+import typography from "../../tokens/_typography.scss";
 
 const pbIndicator = {
   title: {
