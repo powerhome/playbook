@@ -1,3 +1,5 @@
+inherit_from: .rubocop_todo.yml
+
 AllCops:
   TargetRubyVersion: 2.5
   Exclude:
@@ -18,11 +20,6 @@ Lint/ScriptPermission:
 
 Metrics:
   Enabled: false
-
-Naming/FileName:
-  Exclude:
-    - "Guardfile"
-    - "Capfile"
 
 Naming/UncommunicativeMethodParamName:
   AllowedNames:
