@@ -21,6 +21,44 @@ const applyCustomColors = function(highchart) {
   });
 };
 
+const adjustAxisStyle = function(axis) {
+  /* Styles grid */
+  axis.minorGridLineColor = "#E0E6EC";
+  axis.minorGridLineWidth = 0.5;
+  axis.minorGridLineDashStyle = "Dash";
+  axis.gridLineWidth = 0.5;
+  axis.gridLineColor = "#E0E6EC";
+  axis.gridLineDashStyle = "Dash";
+
+  /* Change line color to $sky */
+  axis.lineColor = "#E0E7FF";
+
+  /* Change axis label styles */
+  axis.labels.style.fontFamily = "Proxima Nova";
+  axis.labels.style.color = "#B0BAC9";
+  axis.labels.style.fontWeight = "300";
+  axis.labels.style.fontSize = "14px";
+};
+
+/* Remove grid from background */
+const styleAxis = function(highchart) {
+  if (Array.isArray(highchart.yAxis)) {
+    highchart.yAxis.forEach(function(item, index) {
+      adjustAxisStyle(item);
+    });
+  } else {
+    adjustAxisStyle(highchart.yAxis);
+  }
+
+  if (Array.isArray(highchart.xAxis)) {
+    highchart.xAxis.forEach(function(item, index) {
+      adjustAxisStyle(item);
+    });
+  } else {
+    adjustAxisStyle(highchart.xAxis);
+  }
+};
+
 const styleChartContainer = function(highchart) {
   highchart.chart.spacingTop = 30;
   highchart.chart.spacingBottom = 40;
@@ -38,6 +76,7 @@ const styleLegend = function(highchart) {
 // Exportable Global Styles Function
 export const pbHighCharts = function(highchart) {
   applyCustomColors(highchart);
+  styleAxis(highchart);
   styleChartContainer(highchart);
   styleLegend(highchart);
 };
