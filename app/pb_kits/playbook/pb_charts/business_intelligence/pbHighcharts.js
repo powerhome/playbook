@@ -23,21 +23,21 @@ const applyCustomColors = function(highchart) {
 
 const adjustAxisStyle = function(axis) {
   /* Styles grid */
-  axis.minorGridLineColor = "#E0E6EC";
+  axis.minorGridLineColor = colors.slate;
   axis.minorGridLineWidth = 0.5;
   axis.minorGridLineDashStyle = "Dash";
   axis.gridLineWidth = 0.5;
-  axis.gridLineColor = "#E0E6EC";
+  axis.gridLineColor = colors.slate;
   axis.gridLineDashStyle = "Dash";
 
   /* Change line color to $sky */
-  axis.lineColor = "#E0E7FF";
+  axis.lineColor = colors.sky;
 
   /* Change axis label styles */
-  axis.labels.style.fontFamily = "Proxima Nova";
-  axis.labels.style.color = "#B0BAC9";
-  axis.labels.style.fontWeight = "300";
-  axis.labels.style.fontSize = "14px";
+  axis.labels.style.fontFamily = typography.font_family_base;
+  axis.labels.style.color = colors.charcoal;
+  axis.labels.style.fontWeight = typography.light;
+  axis.labels.style.fontSize = typography.font_small;
 };
 
 /* Remove grid from background */
