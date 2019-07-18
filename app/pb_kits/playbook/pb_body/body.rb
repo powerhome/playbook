@@ -78,7 +78,7 @@ module Playbook
           dark_class,
           status_class
         ]
-        body_options.reject(&:nil?).join("_")
+        body_options.compact.join("_")
       end
 
       def to_partial_path

@@ -2,12 +2,12 @@ module Playbook
   module PbDashboardValue
     class DashboardValue < Playbook::PbKit::Base
       PROPS = [:configured_align,
-          :configured_classname,
-					:configured_data,
-					:configured_id,
-          :configured_stat_change,
-          :configured_stat_label,
-          :configured_stat_value].freeze
+        :configured_classname,
+        :configured_data,
+        :configured_id,
+        :configured_stat_change,
+        :configured_stat_label,
+        :configured_stat_value].freeze
 
       def initialize(align: default_configuration,
               classname: default_configuration,
@@ -56,7 +56,7 @@ module Playbook
           "pb_dashboard_value",
           align
         ]
-        kit_options.reject(&:nil?).join("_")
+        kit_options.join("_")
       end
 
       def to_partial_path

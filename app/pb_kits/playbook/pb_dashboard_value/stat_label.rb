@@ -30,10 +30,7 @@ module Playbook
       end
 
       def kit_class
-        stat_options = [
-          "pb_stat_label"
-        ]
-        stat_options.reject(&:nil?).join("_")
+        "pb_stat_label"
       end
 
       def to_partial_path

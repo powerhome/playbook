@@ -72,7 +72,7 @@ module Playbook
           "pb_stat_change",
           status
         ]
-        stat_options.reject(&:nil?).join("_")
+        stat_options.join("_")
       end
 
       def to_partial_path
