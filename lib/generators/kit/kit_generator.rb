@@ -29,8 +29,8 @@ class KitGenerator < Rails::Generators::NamedBase
     # Check if kit already exists =======================
     if File.directory?("app/pb_kits/playbook/pb_#{@kit_name_underscore}")
       say_status  "#{@kit_name_capitalize} kit already exists.",
-          "Please choose another name or manually make changes to the existing kit.",
-          :red
+                  "Please choose another name or manually make changes to the existing kit.",
+                  :red
       return
     else
       # Add kit to Playbook meu ==========================
@@ -38,8 +38,8 @@ class KitGenerator < Rails::Generators::NamedBase
         f.puts "  - #{@kit_name_underscore}"
       }
       say_status  "complete",
-          "#{@kit_name_capitalize} kit added to Playbook menu.",
-          :green
+                  "#{@kit_name_capitalize} kit added to Playbook menu.",
+                  :green
 
       # Generate SCSS files ==============================
       template "kit_scss.erb", "app/pb_kits/playbook/pb_#{@kit_name_underscore}/_#{@kit_name_underscore}.scss"
@@ -47,8 +47,8 @@ class KitGenerator < Rails::Generators::NamedBase
         f.puts "@"+ "import "+ "\'" +"../../pb_#{@kit_name_underscore}/#{@kit_name_underscore}"+"\';"
       }
       say_status  "complete",
-          "#{@kit_name_capitalize} kit stylesheet successfully created and imported.",
-          :green
+                  "#{@kit_name_capitalize} kit stylesheet successfully created and imported.",
+                  :green
 
       # Ask user if Rails version should be generated ======
       if yes?("Create RAILS #{@kit_name_underscore} kit? (y/N)")
@@ -57,8 +57,8 @@ class KitGenerator < Rails::Generators::NamedBase
         template "kit_html.erb", "app/pb_kits/playbook/pb_#{@kit_name_underscore}/_#{@kit_name_underscore}.html.erb"
         template "kit_example_rails.erb", "app/pb_kits/playbook/pb_#{@kit_name_underscore}/docs/_#{@kit_name_underscore}_default.html.erb"
         say_status  "complete",
-            "#{@kit_name_capitalize} rails kit successfully created.",
-            :green
+                    "#{@kit_name_capitalize} rails kit successfully created.",
+                    :green
       end
 
       # Ask user if React version should be generated ======
@@ -80,8 +80,8 @@ class KitGenerator < Rails::Generators::NamedBase
         end
 
         say_status  "complete",
-            "#{@kit_name_capitalize} react kit successfully created.",
-            :green
+                    "#{@kit_name_capitalize} react kit successfully created.",
+                    :green
       end
 
       # Create kit example.yml
