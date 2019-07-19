@@ -80,5 +80,3 @@ export const pbHighcharts = function(highchart) {
   styleChartContainer(highchart);
   styleLegend(highchart);
 };
-
-export default pbHighcharts;
