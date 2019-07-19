@@ -1,4 +1,4 @@
-import pbHighcharts from "./pbHighcharts.js"
+import { pbHighcharts } from "./pbHighcharts.js"
 
 const markerStyles = function(highchart){
   highchart.plotOptions.line.marker.enabled = true;
