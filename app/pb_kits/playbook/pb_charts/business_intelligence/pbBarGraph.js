@@ -1,4 +1,4 @@
-import { pbHighcharts } from "./pbHighcharts.js";
+import pbHighcharts from "./pbHighcharts.js";
 
 const sizeColumns = function(highchart) {
     let column = highchart.plotOptions.column;
