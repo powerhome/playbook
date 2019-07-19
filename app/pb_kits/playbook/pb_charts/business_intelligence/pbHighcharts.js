@@ -74,9 +74,11 @@ const styleLegend = function(highchart) {
 };
 
 // Exportable Global Styles Function
-export const pbHighcharts = function(highchart) {
+const pbHighcharts = function(highchart) {
   applyCustomColors(highchart);
   styleAxis(highchart);
   styleChartContainer(highchart);
   styleLegend(highchart);
 };
+
+export default pbHighcharts;
