@@ -2,14 +2,14 @@ module Playbook
   module PbInput
     class Input < Playbook::PbKit::Base
       PROPS = [:configured_aria,
-            :configured_classname,
-            :configured_data,
-            :configured_id,
-            :configured_name,
-            :configured_label,
-            :configured_placeholder,
-            :configured_type,
-            :configured_value].freeze
+               :configured_classname,
+               :configured_data,
+               :configured_id,
+               :configured_name,
+               :configured_label,
+               :configured_placeholder,
+               :configured_type,
+               :configured_value].freeze
 
       def initialize(aria: default_configuration,
                     classname: default_configuration,

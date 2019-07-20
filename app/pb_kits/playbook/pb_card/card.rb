@@ -2,11 +2,11 @@ module Playbook
   module PbCard
     class Card < Playbook::PbKit::Base
       PROPS = [:configured_aria,
-            :configured_classname,
-            :configured_data,
-            :configured_id,
-            :configured_shadow,
-            :block].freeze
+               :configured_classname,
+               :configured_data,
+               :configured_id,
+               :configured_shadow,
+               :block].freeze
 
       def initialize(aria: default_configuration,
                    classname: default_configuration,

@@ -6,28 +6,6 @@
 # Note that changes in the inspected code, or installation of new
 # versions of RuboCop, may require this file to be generated again.
 
-# Offense count: 118
-# Cop supports --auto-correct.
-Layout/AlignArray:
-  Exclude:
-    - 'app/pb_kits/playbook/pb_avatar/avatar.rb'
-    - 'app/pb_kits/playbook/pb_body/body.rb'
-    - 'app/pb_kits/playbook/pb_button/button.rb'
-    - 'app/pb_kits/playbook/pb_caption/caption.rb'
-    - 'app/pb_kits/playbook/pb_card/card.rb'
-    - 'app/pb_kits/playbook/pb_icon/icon.rb'
-    - 'app/pb_kits/playbook/pb_image/image.rb'
-    - 'app/pb_kits/playbook/pb_input/input.rb'
-    - 'app/pb_kits/playbook/pb_layout/body.rb'
-    - 'app/pb_kits/playbook/pb_layout/layout.rb'
-    - 'app/pb_kits/playbook/pb_layout/sidebar.rb'
-    - 'app/pb_kits/playbook/pb_line_graph/line_graph.rb'
-    - 'app/pb_kits/playbook/pb_list/item.rb'
-    - 'app/pb_kits/playbook/pb_list/list.rb'
-    - 'app/pb_kits/playbook/pb_table/table.rb'
-    - 'app/pb_kits/playbook/pb_title/title.rb'
-    - 'app/pb_kits/playbook/pb_vertical_nav/vertical_nav.rb'
-
 # Offense count: 5
 # Cop supports --auto-correct.
 # Configuration parameters: AllowMultipleStyles, EnforcedHashRocketStyle, EnforcedColonStyle, EnforcedLastArgumentHashStyle.

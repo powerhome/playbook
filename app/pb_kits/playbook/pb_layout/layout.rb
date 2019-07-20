@@ -2,15 +2,15 @@ module Playbook
   module PbLayout
     class Layout < Playbook::PbKit::Base
       PROPS = [:configured_classname,
-        :configured_collapse,
-        :configured_dark,
-        :configured_data,
-        :configured_full,
-        :configured_id,
-        :configured_position,
-        :configured_transparent,
-        :configured_size,
-        :block].freeze
+               :configured_collapse,
+               :configured_dark,
+               :configured_data,
+               :configured_full,
+               :configured_id,
+               :configured_position,
+               :configured_transparent,
+               :configured_size,
+               :block].freeze
 
       def initialize(classname: default_configuration,
                    collapse: default_configuration,

@@ -2,11 +2,11 @@ module Playbook
   module PbLineGraph
     class LineGraph
       PROPS = [:configured_class,
-          :configured_data,
-          :configured_title,
-          :configured_subtitle,
-          :configured_axis_title,
-          :configured_point_start].freeze
+               :configured_data,
+               :configured_title,
+               :configured_subtitle,
+               :configured_axis_title,
+               :configured_point_start].freeze
 
       def initialize(
         class_name: default_configuration,

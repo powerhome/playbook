@@ -107,7 +107,7 @@ module Playbook
           variant,
           full_width_class,
           disabled_class,
-          loading_class
+          loading_class,
         ]
         kit_options.compact.join("_")
       end

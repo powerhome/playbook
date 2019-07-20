@@ -2,16 +2,16 @@ module Playbook
   module PbTable
     class Table < Playbook::PbKit::Base
       PROPS = [:configured_aria,
-          :configured_classname,
-          :configured_container,
-          :configured_dark,
-          :configured_data,
-          :configured_disable_hover,
-          :configured_id,
-          :configured_single_line,
-          :configured_size,
-          :configured_text,
-          :block].freeze
+               :configured_classname,
+               :configured_container,
+               :configured_dark,
+               :configured_data,
+               :configured_disable_hover,
+               :configured_id,
+               :configured_single_line,
+               :configured_size,
+               :configured_text,
+               :block].freeze
 
       def initialize(aria: default_configuration,
                     classname: default_configuration,

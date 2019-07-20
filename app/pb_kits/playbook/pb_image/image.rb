@@ -2,11 +2,11 @@ module Playbook
   module PbImage
     class Image < Playbook::PbKit::Base
       PROPS = [:configured_alt,
-          :configured_aria,
-          :configured_classname,
-          :configured_data,
-          :configured_id,
-          :configured_url].freeze
+               :configured_aria,
+               :configured_classname,
+               :configured_data,
+               :configured_id,
+               :configured_url].freeze
 
       def initialize(alt: default_configuration,
                    aria: default_configuration,

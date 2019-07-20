@@ -2,13 +2,13 @@ module Playbook
   module PbCaption
     class Caption < Playbook::PbKit::Base
       PROPS = [:configured_aria,
-          :configured_classname,
-          :configured_dark,
-          :configured_data,
-          :configured_id,
-          :configured_large,
-          :configured_tag,
-          :configured_text].freeze
+               :configured_classname,
+               :configured_dark,
+               :configured_data,
+               :configured_id,
+               :configured_large,
+               :configured_tag,
+               :configured_text].freeze
 
       def initialize(aria: default_configuration,
                    classname: default_configuration,
