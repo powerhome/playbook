@@ -1,13 +1,13 @@
 module Playbook
   module PbAvatar
     class Avatar < Playbook::PbKit::Base
-      PROPS = [:configured_aria,
-               :configured_classname,
-               :configured_data,
-               :configured_id,
-               :configured_name,
-               :configured_size,
-               :configured_image].freeze
+      PROPS = %i[configured_aria
+                 configured_classname
+                 configured_data
+                 configured_id
+                 configured_name
+                 configured_size
+                 configured_image].freeze
 
       def initialize(aria: default_configuration,
                      classname: default_configuration,
@@ -44,7 +44,7 @@ module Playbook
       def kit_class
         avatar_options = [
           "pb_avatar",
-          size
+          size,
         ]
         avatar_options.reject(&:nil?).join("_")
       end

@@ -1,7 +1,7 @@
-require 'redcarpet'
-require 'rouge'
-require 'rouge/plugins/redcarpet'
-require 'action_view'
+require "redcarpet"
+require "rouge"
+require "rouge/plugins/redcarpet"
+require "action_view"
 
 module Playbook
   module RedcarpetHelper
@@ -9,11 +9,11 @@ module Playbook
       options = {
         filter_html: false,
         hard_wrap: true,
-        link_attributes: { rel: 'nofollow', target: "_blank" },
+        link_attributes: { rel: "nofollow", target: "_blank" },
         space_after_headers: true,
         fenced_code_blocks: true,
         no_styles: false,
-        safe_links_only: true
+        safe_links_only: true,
       }
 
       extensions = {
@@ -36,7 +36,7 @@ module Playbook
     end
 
     def rouge(text, language)
-      formatter = Rouge::Formatters::HTML.new(css_class: 'highlight')
+      formatter = Rouge::Formatters::HTML.new(css_class: "highlight")
       lexer = Rouge::Lexer.find(language)
       formatter.format(lexer.lex(text))
     end
@@ -45,7 +45,7 @@ module Playbook
       render_options = {
         filter_html: true,
         hard_wrap: true,
-        link_attributes: { rel: 'nofollow' }
+        link_attributes: { rel: "nofollow" },
       }
       renderer = HTML.new(render_options)
 
@@ -55,7 +55,7 @@ module Playbook
         lax_spacing: true,
         no_intra_emphasis: true,
         strikethrough: true,
-        superscript: true
+        superscript: true,
       }
       markdown = Redcarpet::Markdown.new(renderer, extensions)
       markdown.render(text)
@@ -94,8 +94,8 @@ module Playbook
     def preprocess(full_document)
       full_document.gsub(/\[component (.*)\]/) do
         @string = Regexp.last_match(1)
-        @default_height = '160'
-        @attr = ['', @default_height]
+        @default_height = "160"
+        @attr = ["", @default_height]
 
         # Set src from attributes
         @string.gsub(/src="(.*?)"/) do
@@ -118,8 +118,8 @@ module Playbook
       if @list_items[0].include?("[do]") || @list_items[0].include?("[dont]")
         @element_items = []
         @list_items.each do |item, _index|
-          item.gsub(/\<li>(.*)\<\/li>/) do
-            @element_items.push(Regexp.last_match(1));
+          item.gsub(%r{\<li>(.*)\</li>}) do
+            @element_items.push(Regexp.last_match(1))
           end
         end
 
@@ -132,13 +132,13 @@ module Playbook
         @do_items.each do |item, _index|
           @do_list.push("<li>#{item.sub('[do] ', '')}</li>")
         end
-        @do_list = "<ul class='uix-ruleset do-list'>#{@do_list.join("")}</ul>"
+        @do_list = "<ul class='uix-ruleset do-list'>#{@do_list.join('')}</ul>"
 
         @dont_list = []
         @dont_items.each do |item, _index|
           @dont_list.push("<li>#{item.sub('[dont] ', '')}</li>")
         end
-        @dont_list = "<ul class='uix-ruleset dont-list'>#{@dont_list.join("")}</ul>"
+        @dont_list = "<ul class='uix-ruleset dont-list'>#{@dont_list.join('')}</ul>"
 
         "<div class='row uix-ruleset-block'><div class='col-sm-6'>#{@do_list}</div><div class='col-sm-6'>#{@dont_list}</div></div>"
       else

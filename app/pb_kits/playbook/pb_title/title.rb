@@ -1,14 +1,14 @@
 module Playbook
   module PbTitle
     class Title < Playbook::PbKit::Base
-      PROPS = [:configured_aria,
-               :configured_classname,
-               :configured_dark,
-               :configured_data,
-               :configured_id,
-               :configured_size,
-               :configured_tag,
-               :configured_text].freeze
+      PROPS = %i[configured_aria
+                 configured_classname
+                 configured_dark
+                 configured_data
+                 configured_id
+                 configured_size
+                 configured_tag
+                 configured_text].freeze
 
       def initialize(aria: default_configuration,
                      classname: default_configuration,
@@ -54,7 +54,7 @@ module Playbook
         title_options = [
           "pb_title",
           size_class,
-          dark_class
+          dark_class,
         ]
         title_options.reject(&:nil?).join("_")
       end

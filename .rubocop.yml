@@ -49,6 +49,9 @@ Style/Lambda:
 Style/RescueStandardError:
   EnforcedStyle: implicit
 
+Style/Semicolon:
+  Enabled: false
+
 Style/StringLiterals:
   EnforcedStyle: double_quotes
 

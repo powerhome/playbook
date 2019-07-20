@@ -1,12 +1,12 @@
 module Playbook
   module PbLineGraph
     class LineGraph
-      PROPS = [:configured_class,
-               :configured_data,
-               :configured_title,
-               :configured_subtitle,
-               :configured_axis_title,
-               :configured_point_start].freeze
+      PROPS = %i[configured_class
+                 configured_data
+                 configured_title
+                 configured_subtitle
+                 configured_axis_title
+                 configured_point_start].freeze
 
       def initialize(
         class_name: default_configuration,
@@ -71,8 +71,8 @@ module Playbook
       def data
         if configured_data == default_configuration
           data = [{
-            name: 'Installation',
-            data: [43_934, 52_503, 57_177, 69_658, 97_031, 119_931, 137_133, 154_175]
+            name: "Installation",
+            data: [43_934, 52_503, 57_177, 69_658, 97_031, 119_931, 137_133, 154_175],
           }]
           data.to_json.html_safe
         else

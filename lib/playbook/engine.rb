@@ -1,6 +1,6 @@
-require 'action_mailer/railtie'
-require 'sassc-rails'
-require 'slim-rails'
+require "action_mailer/railtie"
+require "sassc-rails"
+require "slim-rails"
 
 module Playbook
   class Engine < ::Rails::Engine

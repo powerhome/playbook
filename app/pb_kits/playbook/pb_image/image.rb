@@ -1,12 +1,12 @@
 module Playbook
   module PbImage
     class Image < Playbook::PbKit::Base
-      PROPS = [:configured_alt,
-               :configured_aria,
-               :configured_classname,
-               :configured_data,
-               :configured_id,
-               :configured_url].freeze
+      PROPS = %i[configured_alt
+                 configured_aria
+                 configured_classname
+                 configured_data
+                 configured_id
+                 configured_url].freeze
 
       def initialize(alt: default_configuration,
                      aria: default_configuration,
@@ -34,7 +34,7 @@ module Playbook
         image_options = [
           "pb_image",
           "lazyload",
-          "blur_up"
+          "blur_up",
         ]
         image_options.reject(&:nil?).join(" ")
       end

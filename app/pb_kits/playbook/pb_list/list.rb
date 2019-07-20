@@ -1,16 +1,16 @@
 module Playbook
   module PbList
     class List < Playbook::PbKit::Base
-      PROPS = [:configured_borderless,
-               :configured_classname,
-               :configured_dark,
-               :configured_data,
-               :configured_id,
-               :configured_layout,
-               :configured_lg,
-               :configured_ordered,
-               :configured_xpadding,
-               :block].freeze
+      PROPS = %i[configured_borderless
+                 configured_classname
+                 configured_dark
+                 configured_data
+                 configured_id
+                 configured_layout
+                 configured_lg
+                 configured_ordered
+                 configured_xpadding
+                 block].freeze
 
       def initialize(borderless: default_configuration,
                      classname: default_configuration,

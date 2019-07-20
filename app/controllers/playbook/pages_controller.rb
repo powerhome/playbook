@@ -1,9 +1,9 @@
 require_dependency "playbook/application_controller"
-require 'yaml'
+require "yaml"
 
 module Playbook
   class PagesController < ApplicationController
-    before_action :set_kit, only: [:kit_show_rails, :kit_show_react]
+    before_action :set_kit, only: %i[kit_show_rails kit_show_react]
 
     def home; end
 
@@ -27,11 +27,11 @@ module Playbook
     end
 
     def kit_show_rails
-      render template: 'playbook/pages/kit_show'
+      render template: "playbook/pages/kit_show"
     end
 
     def kit_show_react
-      render template: 'playbook/pages/kit_show'
+      render template: "playbook/pages/kit_show"
     end
 
   private

@@ -1,6 +1,6 @@
-$LOAD_PATH.push File.expand_path('lib', __dir__)
+$LOAD_PATH.push File.expand_path("lib", __dir__)
 
-require 'playbook/version'
+require "playbook/version"
 
 Gem::Specification.new do |s|
   s.name        = "playbook_ui"
@@ -23,15 +23,15 @@ Gem::Specification.new do |s|
   s.add_dependency "webpacker", "4.0.2"
   s.add_dependency "webpacker-react", "~> 0.3.2"
 
-  s.add_development_dependency 'better_errors'
-  s.add_development_dependency 'binding_of_caller'
-  s.add_development_dependency 'byebug'
-  s.add_development_dependency 'pg', '~> 0.18'
+  s.add_development_dependency "better_errors"
+  s.add_development_dependency "binding_of_caller"
+  s.add_development_dependency "byebug"
+  s.add_development_dependency "pg", "~> 0.18"
   s.add_development_dependency "rainbow", "2.2.2"
   s.add_development_dependency "rubocop", "0.72.0"
-  s.add_development_dependency 'spring'
-  s.add_development_dependency 'spring-watcher-listen', '~> 2.0.0'
-  s.add_development_dependency 'tzinfo-data'
-  s.add_development_dependency 'uglifier'
-  s.add_development_dependency 'web-console', '>= 3.3.0'
+  s.add_development_dependency "spring"
+  s.add_development_dependency "spring-watcher-listen", "~> 2.0.0"
+  s.add_development_dependency "tzinfo-data"
+  s.add_development_dependency "uglifier"
+  s.add_development_dependency "web-console", ">= 3.3.0"
 end

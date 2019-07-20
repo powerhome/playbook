@@ -35,7 +35,7 @@ module Playbook
     end
 
     def is_subkit?(kit)
-      kit.match(/[\/\\]/)
+      kit.match(%r{[/\\]})
     end
 
     def pb_camelize(string)
@@ -43,8 +43,8 @@ module Playbook
     end
 
     def get_class_name(kit)
-      folder = is_subkit?(kit) ? pb_camelize(kit.split('/')[0]) : pb_camelize(kit)
-      item = is_subkit?(kit) ? pb_camelize(kit.split('/')[-1]) : pb_camelize(kit)
+      folder = is_subkit?(kit) ? pb_camelize(kit.split("/")[0]) : pb_camelize(kit)
+      item = is_subkit?(kit) ? pb_camelize(kit.split("/")[-1]) : pb_camelize(kit)
       "Playbook::Pb#{folder}::#{item}".safe_constantize
     end
   end

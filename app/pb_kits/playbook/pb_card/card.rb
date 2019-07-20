@@ -1,12 +1,12 @@
 module Playbook
   module PbCard
     class Card < Playbook::PbKit::Base
-      PROPS = [:configured_aria,
-               :configured_classname,
-               :configured_data,
-               :configured_id,
-               :configured_shadow,
-               :block].freeze
+      PROPS = %i[configured_aria
+                 configured_classname
+                 configured_data
+                 configured_id
+                 configured_shadow
+                 block].freeze
 
       def initialize(aria: default_configuration,
                      classname: default_configuration,
@@ -38,7 +38,7 @@ module Playbook
       def kit_class
         card_options = [
           "pb_card",
-          shadow_class
+          shadow_class,
         ]
         card_options.reject(&:nil?).join(" ")
       end

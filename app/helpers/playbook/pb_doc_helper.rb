@@ -1,7 +1,7 @@
 module Playbook
   module PbDocHelper
     def pb_kit_title(title)
-      title.remove('pb_').titleize.tr("_", " ")
+      title.remove("pb_").titleize.tr("_", " ")
     end
 
     def has_kit_type?(kit, type)
@@ -54,8 +54,8 @@ module Playbook
     end
 
     def get_class_name(kit)
-      folder = is_subkit?(kit) ? pb_camelize(kit.split('/')[0]) : pb_camelize(kit)
-      item = is_subkit?(kit) ? pb_camelize(kit.split('/')[-1]) : pb_camelize(kit)
+      folder = is_subkit?(kit) ? pb_camelize(kit.split("/")[0]) : pb_camelize(kit)
+      item = is_subkit?(kit) ? pb_camelize(kit.split("/")[-1]) : pb_camelize(kit)
       "Playbook::Pb#{folder}::#{item}".safe_constantize
     end
 

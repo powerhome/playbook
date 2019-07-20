@@ -1,13 +1,13 @@
 module Playbook
   module PbVerticalNav
     class VerticalNav < Playbook::PbKit::Base
-      PROPS = [:configured_aria,
-               :configured_classname,
-               :configured_data,
-               :configured_id,
-               :configured_link,
-               :configured_title,
-               :block].freeze
+      PROPS = %i[configured_aria
+                 configured_classname
+                 configured_data
+                 configured_id
+                 configured_link
+                 configured_title
+                 block].freeze
 
       def initialize(aria: default_configuration,
                      classname: default_configuration,

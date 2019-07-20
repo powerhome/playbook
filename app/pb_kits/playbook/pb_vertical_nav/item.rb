@@ -30,7 +30,7 @@ module Playbook
       end
 
       def active_class
-        '_active' if active == true
+        "_active" if active == true
       end
 
       def text

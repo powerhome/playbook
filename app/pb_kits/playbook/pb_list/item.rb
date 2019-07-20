@@ -1,10 +1,10 @@
 module Playbook
   module PbList
     class Item < Playbook::PbKit::Base
-      PROPS = [:configured_classname,
-               :configured_data,
-               :configured_id,
-               :block].freeze
+      PROPS = %i[configured_classname
+                 configured_data
+                 configured_id
+                 block].freeze
 
       def initialize(classname: default_configuration,
                      data: default_configuration,
