@@ -19,6 +19,7 @@ module Playbook
       params[:type] ||= "rails"
       @type = params[:type]
     end
+
     def principles
     end
 
@@ -33,6 +34,7 @@ module Playbook
     def kit_show_rails
       render template: 'playbook/pages/kit_show'
     end
+
     def kit_show_react
       render template: 'playbook/pages/kit_show'
     end

@@ -34,7 +34,6 @@ module Playbook
         self.block = block_given? ? block : nil
       end
 
-
       def class
         if configured_class == default_configuration
           ""
