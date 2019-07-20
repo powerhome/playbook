@@ -9,11 +9,11 @@ module Playbook
                :configured_url].freeze
 
       def initialize(alt: default_configuration,
-                   aria: default_configuration,
-                   classname: default_configuration,
-                   data: default_configuration,
-                   id: default_configuration,
-                   url: default_configuration)
+                     aria: default_configuration,
+                     classname: default_configuration,
+                     data: default_configuration,
+                     id: default_configuration,
+                     url: default_configuration)
         self.configured_alt = alt
         self.configured_aria = aria
         self.configured_classname = classname

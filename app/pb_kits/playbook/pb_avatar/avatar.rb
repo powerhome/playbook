@@ -10,12 +10,12 @@ module Playbook
                :configured_image].freeze
 
       def initialize(aria: default_configuration,
-                    classname: default_configuration,
-                    data: default_configuration,
-                    id: default_configuration,
-                    name: default_configuration,
-                    size: default_configuration,
-                    image: default_configuration)
+                     classname: default_configuration,
+                     data: default_configuration,
+                     id: default_configuration,
+                     name: default_configuration,
+                     size: default_configuration,
+                     image: default_configuration)
         self.configured_aria = aria
         self.configured_classname = classname
         self.configured_data = data

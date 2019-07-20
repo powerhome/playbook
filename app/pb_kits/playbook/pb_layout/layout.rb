@@ -13,15 +13,15 @@ module Playbook
                :block].freeze
 
       def initialize(classname: default_configuration,
-                   collapse: default_configuration,
-                   dark: default_configuration,
-                   data: default_configuration,
-                   full: default_configuration,
-                   id: default_configuration,
-                   position: default_configuration,
-                   transparent: default_configuration,
-                   size: default_configuration,
-                   &block)
+                     collapse: default_configuration,
+                     dark: default_configuration,
+                     data: default_configuration,
+                     full: default_configuration,
+                     id: default_configuration,
+                     position: default_configuration,
+                     transparent: default_configuration,
+                     size: default_configuration,
+                     &block)
         self.configured_classname = classname
         self.configured_collapse = collapse
         self.configured_dark = dark

@@ -12,14 +12,14 @@ module Playbook
                :configured_value].freeze
 
       def initialize(aria: default_configuration,
-                    classname: default_configuration,
-                    data: default_configuration,
-                    id: default_configuration,
-                    name: default_configuration,
-                    label: default_configuration,
-                    placeholder: default_configuration,
-                    type: default_configuration,
-                    value: default_configuration)
+                     classname: default_configuration,
+                     data: default_configuration,
+                     id: default_configuration,
+                     name: default_configuration,
+                     label: default_configuration,
+                     placeholder: default_configuration,
+                     type: default_configuration,
+                     value: default_configuration)
         self.configured_aria = aria
         self.configured_classname = classname
         self.configured_data = data

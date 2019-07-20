@@ -11,13 +11,13 @@ module Playbook
                :configured_text].freeze
 
       def initialize(aria: default_configuration,
-                   classname: default_configuration,
-                   dark: default_configuration,
-                   data: default_configuration,
-                   id: default_configuration,
-                   size: default_configuration,
-                   tag: default_configuration,
-                   text: default_configuration)
+                     classname: default_configuration,
+                     dark: default_configuration,
+                     data: default_configuration,
+                     id: default_configuration,
+                     size: default_configuration,
+                     tag: default_configuration,
+                     text: default_configuration)
         self.configured_aria = aria
         self.configured_classname = classname
         self.configured_dark = dark

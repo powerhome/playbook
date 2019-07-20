@@ -10,12 +10,12 @@ module Playbook
                :block].freeze
 
       def initialize(aria: default_configuration,
-                   classname: default_configuration,
-                   data: default_configuration,
-                   id: default_configuration,
-                   link: default_configuration,
-                   title: default_configuration,
-                   &block)
+                     classname: default_configuration,
+                     data: default_configuration,
+                     id: default_configuration,
+                     link: default_configuration,
+                     title: default_configuration,
+                     &block)
         self.configured_aria = aria
         self.configured_classname = classname
         self.configured_data = data

@@ -18,20 +18,20 @@ module Playbook
 					          :configured_spin].freeze
 
       def initialize(aria: default_configuration,
-              border: default_configuration,
-							classname: default_configuration,
-							data: default_configuration,
-							fixed_width: default_configuration,
-							flip: default_configuration,
-							icon: default_configuration,
-							id: default_configuration,
-							inverse: default_configuration,
-							list_item: default_configuration,
-							pull: default_configuration,
-							pulse: default_configuration,
-							rotation: default_configuration,
-							size: default_configuration,
-							spin: default_configuration)
+                     border: default_configuration,
+							              classname: default_configuration,
+							              data: default_configuration,
+							              fixed_width: default_configuration,
+							              flip: default_configuration,
+							              icon: default_configuration,
+							              id: default_configuration,
+							              inverse: default_configuration,
+							              list_item: default_configuration,
+							              pull: default_configuration,
+							              pulse: default_configuration,
+							              rotation: default_configuration,
+							              size: default_configuration,
+							              spin: default_configuration)
         self.configured_aria = aria
         self.configured_border = border
 				self.configured_classname = classname

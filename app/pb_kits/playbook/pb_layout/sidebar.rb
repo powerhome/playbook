@@ -7,9 +7,9 @@ module Playbook
                :block].freeze
 
       def initialize(classname: default_configuration,
-                  data: default_configuration,
-                  id: default_configuration,
-                  &block)
+                     data: default_configuration,
+                     id: default_configuration,
+                     &block)
         self.configured_classname = classname
         self.configured_data = data
         self.configured_id = id

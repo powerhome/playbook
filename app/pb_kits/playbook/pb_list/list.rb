@@ -13,15 +13,15 @@ module Playbook
                :block].freeze
 
       def initialize(borderless: default_configuration,
-                   classname: default_configuration,
-                   dark: default_configuration,
-                   data: default_configuration,
-                   id: default_configuration,
-                   layout: default_configuration,
-                   lg: default_configuration,
-                   ordered: default_configuration,
-                   xpadding: default_configuration,
-                   &block)
+                     classname: default_configuration,
+                     dark: default_configuration,
+                     data: default_configuration,
+                     id: default_configuration,
+                     layout: default_configuration,
+                     lg: default_configuration,
+                     ordered: default_configuration,
+                     xpadding: default_configuration,
+                     &block)
         self.configured_borderless = borderless
         self.configured_classname = classname
         self.configured_dark = dark
