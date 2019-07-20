@@ -80,10 +80,6 @@ module Playbook
         end
       end
 
-      def self.options
-        new_hash = PROPS.map { |e| e.to_s.remove("configured_") }
-      end
-
     private
 
       DEFAULT = Object.new

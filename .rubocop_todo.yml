@@ -7,28 +7,6 @@
 # versions of RuboCop, may require this file to be generated again.
 
 
-
-# Offense count: 7
-# Cop supports --auto-correct.
-# Configuration parameters: IgnoreEmptyBlocks, AllowUnusedKeywordArguments.
-Lint/UnusedBlockArgument:
-  Exclude:
-    - 'app/helpers/playbook/redcarpet_helper.rb'
-    - 'lib/generators/kit/kit_generator.rb'
-
-# Offense count: 3
-# Cop supports --auto-correct.
-# Configuration parameters: AllowUnusedKeywordArguments, IgnoreEmptyMethods.
-Lint/UnusedMethodArgument:
-  Exclude:
-    - 'app/helpers/playbook/layout_helper.rb'
-    - 'app/helpers/playbook/redcarpet_helper.rb'
-
-# Offense count: 1
-Lint/UselessAssignment:
-  Exclude:
-    - 'app/pb_kits/playbook/pb_line_graph/line_graph.rb'
-
 # Offense count: 7
 # Configuration parameters: NamePrefix, NamePrefixBlacklist, NameWhitelist, MethodDefinitionMacros.
 # NamePrefix: is_, has_, have_

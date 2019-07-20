@@ -1,6 +1,6 @@
 module Playbook
   module LayoutHelper
-    def layout(name, &block)
+    def layout(_name)
       Dir["../*"]
     end
   end

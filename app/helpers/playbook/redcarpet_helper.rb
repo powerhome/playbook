@@ -115,13 +115,13 @@ module Playbook
       end
     end
 
-    def list(contents, list_type)
+    def list(contents, _list_type)
       @contents = contents
       @list_items = contents.split("\n")
 
       if @list_items[0].include? "[do]" or @list_items[0].include? "[dont]"
         @element_items = []
-        @list_items.each do |item, index|
+        @list_items.each do |item, _index|
           item.gsub(/\<li>(.*)\<\/li>/) do
             @element_items.push($1);
           end
@@ -129,17 +129,17 @@ module Playbook
 
         # Doing both because we could have either/both
         # clean up
-        @dont_items, @trash_items_dont = @element_items.partition { |x, i| x.include? "[dont]" }
-        @do_items, @trash_items_do = @element_items.partition { |x, i|  x.include? "[do]" }
+        @dont_items, @trash_items_dont = @element_items.partition { |x, _i| x.include? "[dont]" }
+        @do_items, @trash_items_do = @element_items.partition { |x, _i| x.include? "[do]" }
 
         @do_list = []
-        @do_items.each do |item, index|
+        @do_items.each do |item, _index|
           @do_list.push("<li>#{item.sub('[do] ', '')}</li>")
         end
         @do_list = "<ul class='uix-ruleset do-list'>#{@do_list.join("")}</ul>"
 
         @dont_list = []
-        @dont_items.each do |item, index|
+        @dont_items.each do |item, _index|
           @dont_list.push("<li>#{item.sub('[dont] ', '')}</li>")
         end
         @dont_list = "<ul class='uix-ruleset dont-list'>#{@dont_list.join("")}</ul>"
