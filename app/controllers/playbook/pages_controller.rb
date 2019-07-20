@@ -38,10 +38,10 @@ module Playbook
 
     def set_kit
       menu = MENU["kits"]
-      unless menu.include?(params[:name])
-        redirect_to root_path
-      else
+      if menu.include?(params[:name])
         @kit = params[:name]
+      else
+        redirect_to root_path
       end
     end
   end

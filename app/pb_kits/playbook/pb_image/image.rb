@@ -31,10 +31,10 @@ module Playbook
       end
 
       def kit_class
-        image_options = [
-          "pb_image",
-          "lazyload",
-          "blur_up",
+        image_options = %w[
+          pb_image
+          lazyload
+          blur_up
         ]
         image_options.reject(&:nil?).join(" ")
       end
