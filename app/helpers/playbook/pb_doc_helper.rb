@@ -27,8 +27,7 @@ module Playbook
             #{pb_kit(kit: kit, type: type)}</div>")
         display_kits << title+ui
       end
-      return raw("<div class='pb--docItem'>"+display_kits.map {
-          |k| k }.join("</div><div class='pb--docItem'>")+"</div>")
+      return raw("<div class='pb--docItem'>"+display_kits.join("</div><div class='pb--docItem'>")+"</div>")
     end
 
     def pb_kit_api(kit)

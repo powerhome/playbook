@@ -7,18 +7,6 @@
 # versions of RuboCop, may require this file to be generated again.
 
 
-# Offense count: 1
-# Cop supports --auto-correct.
-Layout/BlockEndNewline:
-  Exclude:
-    - 'app/helpers/playbook/pb_doc_helper.rb'
-
-# Offense count: 1
-# Cop supports --auto-correct.
-Layout/EmptyLineAfterGuardClause:
-  Exclude:
-    - 'app/helpers/playbook/redcarpet_helper.rb'
-
 # Offense count: 4
 # Cop supports --auto-correct.
 # Configuration parameters: AllowAdjacentOneLineDefs, NumberOfEmptyLines.
