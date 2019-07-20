@@ -52,7 +52,6 @@ module Playbook
       end
       attr_reader(*PROPS)
       attr_accessor(*PROPS)
-
     end
   end
 end

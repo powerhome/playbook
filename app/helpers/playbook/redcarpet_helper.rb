@@ -5,7 +5,6 @@ require 'action_view'
 
 module Playbook
   module RedcarpetHelper
-
     def markdown(text)
       options = {
         filter_html: false,
@@ -130,7 +129,7 @@ module Playbook
 
         # Doing both because we could have either/both
         # clean up
-        @dont_items, @trash_items_dont = @element_items.partition { |x, i|  x.include? "[dont]" }
+        @dont_items, @trash_items_dont = @element_items.partition { |x, i| x.include? "[dont]" }
         @do_items, @trash_items_do = @element_items.partition { |x, i|  x.include? "[do]" }
 
         @do_list = []

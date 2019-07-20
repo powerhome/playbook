@@ -37,6 +37,7 @@ module Playbook
     end
 
   private
+
     def get_kit_examples(kit, type)
       example_file = File.join(Playbook::Engine.root,
                                "app", "pb_kits", "playbook", "pb_#{kit}", "docs", "example.yml")

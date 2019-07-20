@@ -7,40 +7,6 @@
 # versions of RuboCop, may require this file to be generated again.
 
 
-# Offense count: 2
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyle.
-# SupportedStyles: around, only_before
-Layout/EmptyLinesAroundAccessModifier:
-  Exclude:
-    - 'app/controllers/playbook/pages_controller.rb'
-    - 'app/helpers/playbook/pb_doc_helper.rb'
-
-# Offense count: 1
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyle.
-# SupportedStyles: empty_lines, empty_lines_except_namespace, empty_lines_special, no_empty_lines, beginning_only, ending_only
-Layout/EmptyLinesAroundClassBody:
-  Exclude:
-    - 'app/pb_kits/playbook/pb_image/image.rb'
-
-# Offense count: 1
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyle.
-# SupportedStyles: empty_lines, empty_lines_except_namespace, empty_lines_special, no_empty_lines
-Layout/EmptyLinesAroundModuleBody:
-  Exclude:
-    - 'app/helpers/playbook/redcarpet_helper.rb'
-
-# Offense count: 6
-# Cop supports --auto-correct.
-# Configuration parameters: AllowForAlignment, AllowBeforeTrailingComments, ForceEqualSignAlignment.
-Layout/ExtraSpacing:
-  Exclude:
-    - 'app/controllers/playbook/pages_controller.rb'
-    - 'app/helpers/playbook/redcarpet_helper.rb'
-    - 'lib/generators/kit/kit_generator.rb'
-
 # Offense count: 3
 # Cop supports --auto-correct.
 # Configuration parameters: EnforcedStyle, IndentationWidth.
