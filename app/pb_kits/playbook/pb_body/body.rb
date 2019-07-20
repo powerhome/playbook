@@ -9,7 +9,6 @@ module Playbook
                  configured_dark
                  configured_data
                  configured_id
-                 configured_status
                  configured_tag
                  block].freeze
 
