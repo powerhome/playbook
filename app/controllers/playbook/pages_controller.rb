@@ -5,22 +5,18 @@ module Playbook
   class PagesController < ApplicationController
     before_action :set_kit, only: [:kit_show_rails, :kit_show_react]
 
-    def home
-    end
+    def home; end
 
-    def utilities
-    end
+    def utilities; end
 
-    def tokens
-    end
+    def tokens; end
 
     def kits
       params[:type] ||= "rails"
       @type = params[:type]
     end
 
-    def principles
-    end
+    def principles; end
 
     def fullscreen
       render layout: "layouts/playbook/fullscreen"
