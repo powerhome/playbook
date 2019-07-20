@@ -11,13 +11,13 @@ class KitGenerator < Rails::Generators::NamedBase
     @kit_name_underscore = kit_name.parameterize.underscore
     @kit_name_pascal = kit_name.titleize.gsub(/\s+/, '')
 
-    kit_props = options[:props].concat( %w(id:string classname:string data:object) )
-    @kit_props = kit_props.map {|hash| [hash.partition(':').first, hash.partition(':').last]}.to_h
-    @kit_props = @kit_props.sort_by{|key| key}.to_h
+    kit_props = options[:props].concat(%w(id:string classname:string data:object))
+    @kit_props = kit_props.map { |hash| [hash.partition(':').first, hash.partition(':').last] }.to_h
+    @kit_props = @kit_props.sort_by { |key| key }.to_h
     @unique_props = @kit_props.symbolize_keys.without(:id, :classname, :data)
 
     @kit_class_init = Array.new
-    @kit_props.each do |key,val|
+    @kit_props.each do |key, val|
       @kit_class_init.push("#{key.parameterize.underscore}: default_configuration".to_sym)
     end
 
@@ -44,7 +44,7 @@ class KitGenerator < Rails::Generators::NamedBase
       # Generate SCSS files ==============================
       template "kit_scss.erb", "app/pb_kits/playbook/pb_#{@kit_name_underscore}/_#{@kit_name_underscore}.scss"
       open('app/pb_kits/playbook/packs/site_styles/_kit_style_index.scss', 'a') { |f|
-        f.puts "@"+ "import "+ "\'" +"../../pb_#{@kit_name_underscore}/#{@kit_name_underscore}"+"\';"
+        f.puts "@" + "import " + "\'" + "../../pb_#{@kit_name_underscore}/#{@kit_name_underscore}" + "\';"
       }
       say_status  "complete",
                   "#{@kit_name_capitalize} kit stylesheet successfully created and imported.",

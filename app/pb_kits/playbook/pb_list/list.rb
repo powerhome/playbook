@@ -45,7 +45,7 @@ module Playbook
       def dark
         if configured_dark == default_configuration
           ""
-        elsif(configured_dark == true)
+        elsif configured_dark == true
           "_dark"
         end
       end
@@ -53,9 +53,9 @@ module Playbook
       def layout
         if configured_layout == default_configuration
           ""
-        elsif(configured_layout == "left")
+        elsif configured_layout == "left"
           "_layout_left"
-        elsif(configured_layout == "right")
+        elsif configured_layout == "right"
           "_layout_right"
         end
       end
@@ -63,7 +63,7 @@ module Playbook
       def lg
         if configured_lg == default_configuration
           ""
-        elsif(configured_lg == true)
+        elsif configured_lg == true
           "_lg"
         end
       end
@@ -79,7 +79,7 @@ module Playbook
       def xpadding
         if configured_xpadding == default_configuration
           ""
-        elsif(configured_xpadding == true)
+        elsif configured_xpadding == true
           "_xpadding"
         end
       end

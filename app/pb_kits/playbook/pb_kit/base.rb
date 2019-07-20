@@ -2,19 +2,19 @@ module Playbook
   module PbKit
     class Base
       #============= Default props =============
-      def aria(ui_aria={})
+      def aria(ui_aria = {})
         self.merge_value(configured_aria, ui_aria)
       end
 
-      def classname(ui_classes="")
+      def classname(ui_classes = "")
         self.concat_value(configured_classname, ui_classes)
       end
 
-      def data(ui_data={})
+      def data(ui_data = {})
         self.merge_value(configured_data, ui_data)
       end
 
-      def id(ui_id=nil)
+      def id(ui_id = nil)
         self.default_value(configured_id, ui_id)
       end
 
@@ -53,7 +53,7 @@ module Playbook
       end
 
       def concat_value(value, value_2)
-        self.is_set?(value) ? value_2+" "+value : value_2
+        self.is_set?(value) ? value_2 + " " + value : value_2
       end
 
       def merge_value(value, value_2)

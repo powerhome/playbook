@@ -25,9 +25,9 @@ module Playbook
         title = render_clickable_title(kit)
         ui = raw("<div class='pb--docItem-ui'>
             #{pb_kit(kit: kit, type: type)}</div>")
-        display_kits << title+ui
+        display_kits << title + ui
       end
-      return raw("<div class='pb--docItem'>"+display_kits.join("</div><div class='pb--docItem'>")+"</div>")
+      return raw("<div class='pb--docItem'>" + display_kits.join("</div><div class='pb--docItem'>") + "</div>")
     end
 
     def pb_kit_api(kit)
@@ -43,7 +43,7 @@ module Playbook
                                "app", "pb_kits", "playbook", "pb_#{kit}", "docs", "example.yml")
       if File.exist? example_file
         examples_list = YAML.load_file(example_file)
-        examples_list = examples_list.inject({}){|item,(k,v)| item[k.to_sym] = v; item}
+        examples_list = examples_list.inject({}) { |item, (k, v)| item[k.to_sym] = v; item }
         all_kit_examples = {}
         all_kit_examples[:kit] = kit
         all_kit_examples[:examples] = examples_list[:examples][type]

@@ -4,11 +4,11 @@ require "webpacker/react/component"
 
 module Playbook
   module PbKitHelper
-    def pb_rails(kit, props:{}, &block)
+    def pb_rails(kit, props: {}, &block)
       render_rails(kit, props, &block)
     end
 
-    def pb_react(kit, props:{}, options:{})
+    def pb_react(kit, props: {}, options: {})
       render_react(kit, props, options)
     end
 

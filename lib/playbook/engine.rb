@@ -20,8 +20,8 @@ module Playbook
     initializer "webpacker.proxy" do |app|
       insert_middleware = begin
                           Playbook.webpacker.config.dev_server.present?
-                        rescue
-                          nil
+                          rescue
+                            nil
                         end
       next unless insert_middleware
 

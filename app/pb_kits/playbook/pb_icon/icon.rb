@@ -3,50 +3,50 @@ module Playbook
     class Icon < Playbook::PbKit::Base
       PROPS = [:configured_aria,
                :configured_border,
-					          :configured_classname,
-					          :configured_data,
-					          :configured_fixed_width,
-					          :configured_flip,
-					          :configured_icon,
-					          :configured_id,
-					          :configured_inverse,
-					          :configured_list_item,
-					          :configured_pull,
-					          :configured_pulse,
-					          :configured_rotation,
-					          :configured_size,
-					          :configured_spin].freeze
+               :configured_classname,
+               :configured_data,
+               :configured_fixed_width,
+               :configured_flip,
+               :configured_icon,
+               :configured_id,
+               :configured_inverse,
+               :configured_list_item,
+               :configured_pull,
+               :configured_pulse,
+               :configured_rotation,
+               :configured_size,
+               :configured_spin].freeze
 
       def initialize(aria: default_configuration,
                      border: default_configuration,
-							              classname: default_configuration,
-							              data: default_configuration,
-							              fixed_width: default_configuration,
-							              flip: default_configuration,
-							              icon: default_configuration,
-							              id: default_configuration,
-							              inverse: default_configuration,
-							              list_item: default_configuration,
-							              pull: default_configuration,
-							              pulse: default_configuration,
-							              rotation: default_configuration,
-							              size: default_configuration,
-							              spin: default_configuration)
+                     classname: default_configuration,
+                     data: default_configuration,
+                     fixed_width: default_configuration,
+                     flip: default_configuration,
+                     icon: default_configuration,
+                     id: default_configuration,
+                     inverse: default_configuration,
+                     list_item: default_configuration,
+                     pull: default_configuration,
+                     pulse: default_configuration,
+                     rotation: default_configuration,
+                     size: default_configuration,
+                     spin: default_configuration)
         self.configured_aria = aria
         self.configured_border = border
-				    self.configured_classname = classname
-				    self.configured_data = data
-				    self.configured_fixed_width = fixed_width
-				    self.configured_flip = flip
-				    self.configured_icon = icon
-				    self.configured_id = id
-				    self.configured_inverse = inverse
-				    self.configured_list_item = list_item
-				    self.configured_pull = pull
-				    self.configured_pulse = pulse
-				    self.configured_rotation = rotation
-				    self.configured_size = size
-				    self.configured_spin = spin
+        self.configured_classname = classname
+        self.configured_data = data
+        self.configured_fixed_width = fixed_width
+        self.configured_flip = flip
+        self.configured_icon = icon
+        self.configured_id = id
+        self.configured_inverse = inverse
+        self.configured_list_item = list_item
+        self.configured_pull = pull
+        self.configured_pulse = pulse
+        self.configured_rotation = rotation
+        self.configured_size = size
+        self.configured_spin = spin
       end
 
       def border_class
