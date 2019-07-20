@@ -37,7 +37,7 @@ module Playbook
         if configured_text == default_configuration
           ''
         else
-          configured_text 
+          configured_text
         end
       end
 
