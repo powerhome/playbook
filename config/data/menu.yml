@@ -13,3 +13,5 @@ kits:
   - icon
   - table
   - dashboard_value
+  - message
+  - timestamp

@@ -11,3 +11,5 @@ import "./pb_avatar.js";
 import "./pb_input.js";
 import "./pb_icon.js";
 import "./pb_dashboard_value.js";
+import "./pb_message.js";
+import "./pb_timestamp.js";

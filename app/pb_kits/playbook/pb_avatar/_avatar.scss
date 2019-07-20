@@ -22,6 +22,9 @@ $avatar-sizes: (
       background: $slate;
       overflow: hidden;
       position: relative;
+      flex-shrink: 0;
+      flex-grow: 0;
+      flex-basis: $size;
 
       &::before {
         content: attr(data-initials);

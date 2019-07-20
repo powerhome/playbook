@@ -1,0 +1,42 @@
+<%= pb_rails("message", props: {
+  label: "Message",
+  message: "How can we assist you today?",
+  timestamp: "20 seconds ago",
+  avatar: {
+    name: "Mike Bishop",
+    image: { url: "https://randomuser.me/api/portraits/men/50.jpg" }
+  }
+}) %>
+
+<br><br>
+
+<%= pb_rails("message", props: {
+  message: "To processs your order, I'll need your full name.",
+  timestamp: "20 seconds ago",
+  avatar: {
+    name: "Lisa Thompson",
+    image: { url: "https://randomuser.me/api/portraits/women/39.jpg" }
+  }
+}) %>
+
+<br><br>
+
+<%= pb_rails("message", props: {
+  label: "Application",
+  message: "Application for Kate Smith is waiting for your approval",
+  avatar: {
+    name: "Becca Jacobs",
+    image: { url: "https://randomuser.me/api/portraits/women/50.jpg" }
+  }
+}) %>
+
+<br><br>
+
+<%= pb_rails("message", props: {
+  label: "Complaint",
+  message: "We're so sorry you had a bad experience!",
+  timestamp: "2 days ago",
+  avatar: {
+    name: "Tim Wenhold"
+  }
+}) %>
