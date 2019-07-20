@@ -5,29 +5,29 @@ $pb_online_status_border: 2px;
 
 $pb_online_status_statuses: (
   online: $success,
-  away: $error,
+  away: $warning,
   offline: $neutral,
 );
 
-@mixin pb_online_status($background: $neutral) {
+@mixin pb_online_status($background: $neutral, $bordercolor: $white) {
   width: $pb_online_status_size;
   height: $pb_online_status_size;
   flex-basis: $pb_online_status_size;
   flex-grow: 0;
   flex-shrink: 0;
   border-width: $pb_online_status_border;
-  border-color: $white;
+  border-color: $bordercolor;
   border-style: solid;
   border-radius: 50%;
   background: $background;
 }
 
 @mixin pb_online_status_away {
-  @include pb_online_status($success);
+  @include pb_online_status($warning);
 }
 
 @mixin pb_online_status_online {
-  @include pb_online_status($error);
+  @include pb_online_status($success);
 }
 
 @mixin pb_online_status_offline {
