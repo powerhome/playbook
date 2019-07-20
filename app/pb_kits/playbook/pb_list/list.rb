@@ -1,27 +1,29 @@
+# frozen_string_literal: true
+
 module Playbook
   module PbList
     class List < Playbook::PbKit::Base
-      PROPS = [:configured_borderless,
-          :configured_classname,
-          :configured_dark,
-          :configured_data,
-          :configured_id,
-          :configured_layout,
-          :configured_lg,
-          :configured_ordered,
-          :configured_xpadding,
-          :block].freeze
+      PROPS = %i[configured_borderless
+                 configured_classname
+                 configured_dark
+                 configured_data
+                 configured_id
+                 configured_layout
+                 configured_lg
+                 configured_ordered
+                 configured_xpadding
+                 block].freeze
 
       def initialize(borderless: default_configuration,
-                   classname: default_configuration,
-                   dark: default_configuration,
-                   data: default_configuration,
-                   id: default_configuration,
-                   layout: default_configuration,
-                   lg: default_configuration,
-                   ordered: default_configuration,
-                   xpadding: default_configuration,
-                   &block)
+                     classname: default_configuration,
+                     dark: default_configuration,
+                     data: default_configuration,
+                     id: default_configuration,
+                     layout: default_configuration,
+                     lg: default_configuration,
+                     ordered: default_configuration,
+                     xpadding: default_configuration,
+                     &block)
         self.configured_borderless = borderless
         self.configured_classname = classname
         self.configured_dark = dark
@@ -34,7 +36,6 @@ module Playbook
         self.block = block_given? ? block : nil
       end
 
-
       def class
         if configured_class == default_configuration
           ""
@@ -46,25 +47,25 @@ module Playbook
       def dark
         if configured_dark == default_configuration
           ""
-        elsif(configured_dark == true)
-            "_dark"
+        elsif configured_dark == true
+          "_dark"
         end
       end
 
       def layout
         if configured_layout == default_configuration
           ""
-        elsif(configured_layout == "left")
-            "_layout_left"
-        elsif(configured_layout == "right")
-              "_layout_right"
+        elsif configured_layout == "left"
+          "_layout_left"
+        elsif configured_layout == "right"
+          "_layout_right"
         end
       end
 
       def lg
         if configured_lg == default_configuration
           ""
-        elsif(configured_lg == true)
+        elsif configured_lg == true
           "_lg"
         end
       end
@@ -80,8 +81,8 @@ module Playbook
       def xpadding
         if configured_xpadding == default_configuration
           ""
-        elsif(configured_xpadding == true)
-            "_xpadding"
+        elsif configured_xpadding == true
+          "_xpadding"
         end
       end
 

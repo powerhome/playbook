@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Playbook
   module PbDashboardValue
     class StatChange < Playbook::PbKit::Base
@@ -22,26 +24,26 @@ module Playbook
 
       def change
         change_options = %w[neutral increase decrease]
-        one_of_value(configured_change, change_options, 'neutral')
+        one_of_value(configured_change, change_options, "neutral")
       end
 
       def status
         case change
-        when 'increase'
-          'positive'
-        when 'decrease'
-          'negative'
+        when "increase"
+          "positive"
+        when "decrease"
+          "negative"
         else
-          'neutral'
+          "neutral"
         end
       end
 
       def icon
         case change
-        when 'increase'
-          'arrow-up'
-        when 'decrease'
-          'arrow-down'
+        when "increase"
+          "arrow-up"
+        when "decrease"
+          "arrow-down"
         end
       end
 
@@ -50,12 +52,12 @@ module Playbook
           pb_icon = Playbook::PbIcon::Icon.new(icon: icon, fixed_width: true)
           ApplicationController.renderer.render(partial: pb_icon, as: :object)
         else
-          ''
+          ""
         end
       end
 
       def value
-        default_value(configured_value, '')
+        default_value(configured_value, "")
       end
 
       def display_value
@@ -68,17 +70,17 @@ module Playbook
 
       def kit_class
         stat_options = [
-          'pb_stat_change',
-          status
+          "pb_stat_change",
+          status,
         ]
-        stat_options.join('_')
+        stat_options.join("_")
       end
 
       def to_partial_path
-        'pb_dashboard_value/child_kits/stat_change'
+        "pb_dashboard_value/child_kits/stat_change"
       end
 
-      private
+    private
 
       DEFAULT = Object.new
       private_constant :DEFAULT

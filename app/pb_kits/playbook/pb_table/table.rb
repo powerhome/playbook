@@ -1,28 +1,30 @@
+# frozen_string_literal: true
+
 module Playbook
   module PbTable
     class Table < Playbook::PbKit::Base
-      PROPS = [:configured_aria,
-          :configured_classname,
-          :configured_container,
-          :configured_dark,
-          :configured_data,
-          :configured_disable_hover,
-          :configured_id,
-          :configured_single_line,
-          :configured_size,
-          :configured_text,
-          :block].freeze
+      PROPS = %i[configured_aria
+                 configured_classname
+                 configured_container
+                 configured_dark
+                 configured_data
+                 configured_disable_hover
+                 configured_id
+                 configured_single_line
+                 configured_size
+                 configured_text
+                 block].freeze
 
       def initialize(aria: default_configuration,
-                    classname: default_configuration,
-                    container: default_configuration,
-                    dark: default_configuration,
-                    data: default_configuration,
-                    disable_hover: default_configuration,
-                    id: default_configuration,
-                    single_line: default_configuration,
-                    size: default_configuration,
-                    &block)
+                     classname: default_configuration,
+                     container: default_configuration,
+                     dark: default_configuration,
+                     data: default_configuration,
+                     disable_hover: default_configuration,
+                     id: default_configuration,
+                     single_line: default_configuration,
+                     size: default_configuration,
+                     &block)
         self.configured_aria = aria
         self.configured_classname = classname
         self.configured_container = container
@@ -40,12 +42,12 @@ module Playbook
       end
 
       def size
-        size_options = %w(sm md lg)
+        size_options = %w[sm md lg]
         one_of_value(configured_size, size_options, default_configuration)
       end
 
       def size_class
-        adjusted_value(configured_size, "table-#{self.size}", "table-md")
+        adjusted_value(configured_size, "table-#{size}", "table-md")
       end
 
       def dark_class
@@ -67,7 +69,7 @@ module Playbook
           single_line_class,
           dark_class,
           disable_hover_class,
-          container_class
+          container_class,
         ]
         table_options.reject(&:nil?).join(" ")
       end

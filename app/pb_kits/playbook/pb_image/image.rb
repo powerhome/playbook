@@ -1,19 +1,21 @@
+# frozen_string_literal: true
+
 module Playbook
   module PbImage
     class Image < Playbook::PbKit::Base
-      PROPS = [:configured_alt,
-          :configured_aria,
-          :configured_classname,
-          :configured_data,
-          :configured_id,
-          :configured_url].freeze
+      PROPS = %i[configured_alt
+                 configured_aria
+                 configured_classname
+                 configured_data
+                 configured_id
+                 configured_url].freeze
 
       def initialize(alt: default_configuration,
-                   aria: default_configuration,
-                   classname: default_configuration,
-                   data: default_configuration,
-                   id: default_configuration,
-                   url: default_configuration)
+                     aria: default_configuration,
+                     classname: default_configuration,
+                     data: default_configuration,
+                     id: default_configuration,
+                     url: default_configuration)
         self.configured_alt = alt
         self.configured_aria = aria
         self.configured_classname = classname
@@ -23,18 +25,18 @@ module Playbook
       end
 
       def alt
-        default_value(configured_alt, String.new)
+        default_value(configured_alt, "")
       end
 
       def url
-        default_value(configured_url, String.new)
+        default_value(configured_url, "")
       end
 
       def kit_class
-        image_options = [
-          "pb_image",
-          "lazyload",
-          "blur_up"
+        image_options = %w[
+          pb_image
+          lazyload
+          blur_up
         ]
         image_options.reject(&:nil?).join(" ")
       end
@@ -52,7 +54,6 @@ module Playbook
       end
       attr_reader(*PROPS)
       attr_accessor(*PROPS)
-
     end
   end
 end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 namespace :db do
   task exists: :environment do
     ActiveRecord::Base.connection

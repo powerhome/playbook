@@ -1,19 +1,21 @@
+# frozen_string_literal: true
+
 module Playbook
   module PbCard
     class Card < Playbook::PbKit::Base
-      PROPS = [:configured_aria,
-            :configured_classname,
-            :configured_data,
-            :configured_id,
-            :configured_shadow,
-            :block].freeze
+      PROPS = %i[configured_aria
+                 configured_classname
+                 configured_data
+                 configured_id
+                 configured_shadow
+                 block].freeze
 
       def initialize(aria: default_configuration,
-                   classname: default_configuration,
-                   data: default_configuration,
-                   id: default_configuration,
-                   shadow: default_configuration,
-                   &block)
+                     classname: default_configuration,
+                     data: default_configuration,
+                     id: default_configuration,
+                     shadow: default_configuration,
+                     &block)
         self.configured_aria = aria
         self.configured_classname = classname
         self.configured_data = data
@@ -23,12 +25,12 @@ module Playbook
       end
 
       def shadow
-        shadow_options = %w(shallow default deep deeper deepest)
+        shadow_options = %w[shallow default deep deeper deepest]
         one_of_value(configured_shadow, shadow_options, "")
       end
 
       def shadow_class
-        adjusted_value(self.shadow, "shadow_#{self.shadow}", nil)
+        adjusted_value(shadow, "shadow_#{shadow}", nil)
       end
 
       def yield(context:)
@@ -38,7 +40,7 @@ module Playbook
       def kit_class
         card_options = [
           "pb_card",
-          shadow_class
+          shadow_class,
         ]
         card_options.reject(&:nil?).join(" ")
       end

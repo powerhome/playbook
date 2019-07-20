@@ -1,21 +1,23 @@
+# frozen_string_literal: true
+
 module Playbook
   module PbAvatar
     class Avatar < Playbook::PbKit::Base
-      PROPS = [:configured_aria,
-            :configured_classname,
-            :configured_data,
-            :configured_id,
-            :configured_name,
-            :configured_size,
-            :configured_image].freeze
+      PROPS = %i[configured_aria
+                 configured_classname
+                 configured_data
+                 configured_id
+                 configured_name
+                 configured_size
+                 configured_image].freeze
 
       def initialize(aria: default_configuration,
-                    classname: default_configuration,
-                    data: default_configuration,
-                    id: default_configuration,
-                    name: default_configuration,
-                    size: default_configuration,
-                    image: default_configuration)
+                     classname: default_configuration,
+                     data: default_configuration,
+                     id: default_configuration,
+                     name: default_configuration,
+                     size: default_configuration,
+                     image: default_configuration)
         self.configured_aria = aria
         self.configured_classname = classname
         self.configured_data = data
@@ -33,18 +35,18 @@ module Playbook
       end
 
       def initials
-        adjusted_value(configured_name, configured_name.split.map(&:first).join.downcase, String.new)
+        adjusted_value(configured_name, configured_name.split.map(&:first).join.downcase, "")
       end
 
       def size
-        size_options = %w(xs sm md base lg xl)
+        size_options = %w[xs sm md base lg xl]
         one_of_value(configured_size, size_options, "md")
       end
 
       def kit_class
         avatar_options = [
           "pb_avatar",
-          size
+          size,
         ]
         avatar_options.reject(&:nil?).join("_")
       end
