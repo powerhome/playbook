@@ -59,7 +59,7 @@ module Playbook
           "pb_avatar",
           size,
         ]
-        avatar_options.reject(&:nil?).join("_")
+        avatar_options.join("_")
       end
 
       def to_partial_path
