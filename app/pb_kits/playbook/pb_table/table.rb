@@ -40,7 +40,7 @@ module Playbook
       end
 
       def size
-        size_options = %w(sm md lg)
+        size_options = %w[sm md lg]
         one_of_value(configured_size, size_options, default_configuration)
       end
 

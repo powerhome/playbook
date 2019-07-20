@@ -29,7 +29,7 @@ module Playbook
       end
 
       def tag
-        tag_options = %w(h1 h2 h3 h4 h5 h6 p span div)
+        tag_options = %w[h1 h2 h3 h4 h5 h6 p span div]
         one_of_value(configured_tag, tag_options, "div")
       end
 

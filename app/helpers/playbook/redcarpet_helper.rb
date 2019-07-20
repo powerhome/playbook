@@ -77,7 +77,7 @@ module Playbook
           loop do
             break unless @headers.include?(permalink)
 
-            permalink.gsub!(/\_(\d+)$/, "_#{$1.to_i + 1}")
+            permalink.gsub!(/\_(\d+)$/, "_#{Regexp.last_match(1).to_i + 1}")
           end
         end
         @headers << permalink
@@ -93,18 +93,18 @@ module Playbook
 
     def preprocess(full_document)
       full_document.gsub(/\[component (.*)\]/) do
-        @string = $1
+        @string = Regexp.last_match(1)
         @default_height = '160'
         @attr = ['', @default_height]
 
         # Set src from attributes
         @string.gsub(/src="(.*?)"/) do
-          @attr[0] = $1
+          @attr[0] = Regexp.last_match(1)
         end
 
         # Set height from attributes
         @string.gsub(/height="(.*?)"/) do
-          @attr[1] = ($1 || @default_height)
+          @attr[1] = (Regexp.last_match(1) || @default_height)
         end
 
         %(\n<div class="uix-component-frame"><iframe scrolling="no" id="component-preview" src="#{@attr[0]}" width="100%" height="#{@attr[1]}"></iframe><a href="#{@attr[0]}" target="_blank" class="uix-component-link">View component</a></div>\n)
@@ -119,7 +119,7 @@ module Playbook
         @element_items = []
         @list_items.each do |item, _index|
           item.gsub(/\<li>(.*)\<\/li>/) do
-            @element_items.push($1);
+            @element_items.push(Regexp.last_match(1));
           end
         end
 

@@ -72,35 +72,6 @@ Style/FrozenStringLiteralComment:
     - 'playbook_ui.gemspec'
 
 
-# Offense count: 11
-# Cop supports --auto-correct.
-# Configuration parameters: PreferredDelimiters.
-Style/PercentLiteralDelimiters:
-  Exclude:
-    - 'app/pb_kits/playbook/pb_avatar/avatar.rb'
-    - 'app/pb_kits/playbook/pb_button/button.rb'
-    - 'app/pb_kits/playbook/pb_caption/caption.rb'
-    - 'app/pb_kits/playbook/pb_card/card.rb'
-    - 'app/pb_kits/playbook/pb_icon/icon.rb'
-    - 'app/pb_kits/playbook/pb_table/table.rb'
-    - 'app/pb_kits/playbook/pb_title/title.rb'
-    - 'lib/generators/kit/kit_generator.rb'
-
-# Offense count: 6
-# Cop supports --auto-correct.
-Style/PerlBackrefs:
-  Exclude:
-    - 'app/helpers/playbook/redcarpet_helper.rb'
-
-# Offense count: 11
-# Cop supports --auto-correct.
-# Configuration parameters: AllowMultipleReturnValues.
-Style/RedundantReturn:
-  Exclude:
-    - 'app/helpers/playbook/pb_doc_helper.rb'
-    - 'app/helpers/playbook/pb_kit_helper.rb'
-    - 'app/pb_kits/playbook/pb_line_graph/line_graph.rb'
-
 # Offense count: 31
 # Cop supports --auto-correct.
 Style/RedundantSelf:

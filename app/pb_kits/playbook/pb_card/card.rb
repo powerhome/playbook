@@ -23,7 +23,7 @@ module Playbook
       end
 
       def shadow
-        shadow_options = %w(shallow default deep deeper deepest)
+        shadow_options = %w[shallow default deep deeper deepest]
         one_of_value(configured_shadow, shadow_options, "")
       end
 

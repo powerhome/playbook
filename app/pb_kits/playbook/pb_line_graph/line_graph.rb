@@ -74,7 +74,7 @@ module Playbook
             name: 'Installation',
             data: [43_934, 52_503, 57_177, 69_658, 97_031, 119_931, 137_133, 154_175]
           }]
-          return data.to_json.html_safe
+          data.to_json.html_safe
         else
           configured_data.to_json.html_safe
         end

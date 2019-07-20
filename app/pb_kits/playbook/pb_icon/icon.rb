@@ -58,7 +58,7 @@ module Playbook
       end
 
       def flip
-        flip_options = %w(horizontal vertical both)
+        flip_options = %w[horizontal vertical both]
         one_of_value(configured_flip, flip_options, nil)
       end
 
@@ -88,7 +88,7 @@ module Playbook
       end
 
       def pull
-        pull_options = %w(left right)
+        pull_options = %w[left right]
         one_of_value(configured_pull, pull_options, default_configuration)
       end
 
@@ -110,7 +110,7 @@ module Playbook
       end
 
       def size
-        size_options = %w(lg xs sm 1x 2x 3x 4x 5x 6x 7x 8x 9x 10x)
+        size_options = %w[lg xs sm 1x 2x 3x 4x 5x 6x 7x 8x 9x 10x]
         one_of_value(configured_size, size_options, default_configuration)
       end
 
