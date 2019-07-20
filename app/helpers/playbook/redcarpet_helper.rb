@@ -119,7 +119,7 @@ module Playbook
       @contents = contents
       @list_items = contents.split("\n")
 
-      if @list_items[0].include? "[do]" or @list_items[0].include? "[dont]"
+      if @list_items[0].include?("[do]") || @list_items[0].include?("[dont]")
         @element_items = []
         @list_items.each do |item, _index|
           item.gsub(/\<li>(.*)\<\/li>/) do
