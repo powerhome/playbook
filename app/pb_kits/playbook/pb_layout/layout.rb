@@ -56,9 +56,9 @@ module Playbook
 
       def collapse
         if configured_collapse == default_configuration
-          " layout#{self.position}_collapse_xs"
+          " layout#{position}_collapse_xs"
         else
-          " layout#{self.position}_collapse_#{configured_collapse}"
+          " layout#{position}_collapse_#{configured_collapse}"
         end
       end
 

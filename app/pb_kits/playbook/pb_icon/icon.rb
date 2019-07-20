@@ -65,7 +65,7 @@ module Playbook
       def flip_class
         h_class = "fa-flip-horizontal"
         v_class = "fa-flip-vertical"
-        case self.flip
+        case flip
         when "horizontal"
           h_class
         when "vertical"
@@ -93,7 +93,7 @@ module Playbook
       end
 
       def pull_class
-        adjusted_value(self.pull, "fa-pull-#{self.pull}", nil)
+        adjusted_value(pull, "fa-pull-#{pull}", nil)
       end
 
       def pulse_class
@@ -106,7 +106,7 @@ module Playbook
       end
 
       def rotation_class
-        adjusted_value(self.rotation, "fa-rotate-#{self.rotation}", nil)
+        adjusted_value(rotation, "fa-rotate-#{rotation}", nil)
       end
 
       def size
@@ -115,7 +115,7 @@ module Playbook
       end
 
       def size_class
-        adjusted_value(self.size, "fa-#{self.size}", nil)
+        adjusted_value(size, "fa-#{size}", nil)
       end
 
       def spin_class

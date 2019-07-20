@@ -43,7 +43,7 @@ module Playbook
       end
 
       def size_class
-        adjusted_value(self.size, self.size, nil)
+        adjusted_value(size, size, nil)
       end
 
       def dark_class

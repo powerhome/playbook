@@ -45,7 +45,7 @@ module Playbook
       end
 
       def size_class
-        adjusted_value(configured_size, "table-#{self.size}", "table-md")
+        adjusted_value(configured_size, "table-#{size}", "table-md")
       end
 
       def dark_class

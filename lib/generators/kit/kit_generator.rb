@@ -13,7 +13,7 @@ class KitGenerator < Rails::Generators::NamedBase
 
     kit_props = options[:props].concat(%w[id:string classname:string data:object])
     @kit_props = kit_props.map { |hash| [hash.partition(':').first, hash.partition(':').last] }.to_h
-    @kit_props = @kit_props.sort_by { |key| key }.to_h
+    @kit_props = @kit_props.sort.to_h
     @unique_props = @kit_props.symbolize_keys.without(:id, :classname, :data)
 
     @kit_class_init = []

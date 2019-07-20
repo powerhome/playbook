@@ -28,7 +28,7 @@ module Playbook
       end
 
       def shadow_class
-        adjusted_value(self.shadow, "shadow_#{self.shadow}", nil)
+        adjusted_value(shadow, "shadow_#{shadow}", nil)
       end
 
       def yield(context:)
