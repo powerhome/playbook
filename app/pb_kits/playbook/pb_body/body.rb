@@ -10,6 +10,7 @@ module Playbook
                  configured_data
                  configured_id
                  configured_tag
+                 configured_status
                  block].freeze
 
       def initialize(aria: default_configuration,
