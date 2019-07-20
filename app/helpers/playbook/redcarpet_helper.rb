@@ -67,7 +67,6 @@ module Playbook
     include Rouge::Plugins::Redcarpet
   end
 
-
   class HTMLBlockCode < Redcarpet::Render::HTML
     include ActionView::Helpers::AssetTagHelper
     def header(title, level)

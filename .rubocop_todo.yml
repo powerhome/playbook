@@ -7,15 +7,6 @@
 # versions of RuboCop, may require this file to be generated again.
 
 
-# Offense count: 4
-# Cop supports --auto-correct.
-Layout/EmptyLines:
-  Exclude:
-    - 'app/controllers/playbook/pages_controller.rb'
-    - 'app/helpers/playbook/redcarpet_helper.rb'
-    - 'app/pb_kits/playbook/pb_body/body.rb'
-    - 'app/pb_kits/playbook/pb_list/list.rb'
-
 # Offense count: 2
 # Cop supports --auto-correct.
 # Configuration parameters: EnforcedStyle.

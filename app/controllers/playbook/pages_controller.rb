@@ -5,7 +5,6 @@ module Playbook
   class PagesController < ApplicationController
     before_action :set_kit, only: [:kit_show_rails, :kit_show_react]
 
-
     def home
     end
 
