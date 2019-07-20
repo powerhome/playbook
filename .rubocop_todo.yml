@@ -27,27 +27,6 @@ Naming/UncommunicativeMethodParamName:
   Exclude:
     - 'app/pb_kits/playbook/pb_list/list.rb'
 
-# Offense count: 1
-# Cop supports --auto-correct.
-Style/EachWithObject:
-  Exclude:
-    - 'app/helpers/playbook/pb_doc_helper.rb'
-
-# Offense count: 1
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyle.
-# SupportedStyles: empty, nil, both
-Style/EmptyElse:
-  Exclude:
-    - 'app/pb_kits/playbook/pb_icon/icon.rb'
-
-# Offense count: 5
-# Cop supports --auto-correct.
-Style/EmptyLiteral:
-  Exclude:
-    - 'app/pb_kits/playbook/pb_avatar/avatar.rb'
-    - 'app/pb_kits/playbook/pb_image/image.rb'
-    - 'lib/generators/kit/kit_generator.rb'
 
 # Offense count: 4
 # Cop supports --auto-correct.

@@ -72,8 +72,6 @@ module Playbook
           v_class
         when "both"
           [h_class, v_class].join(" ")
-        else
-          nil
         end
       end
 

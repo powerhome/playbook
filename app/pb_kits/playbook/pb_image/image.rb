@@ -23,11 +23,11 @@ module Playbook
       end
 
       def alt
-        default_value(configured_alt, String.new)
+        default_value(configured_alt, "")
       end
 
       def url
-        default_value(configured_url, String.new)
+        default_value(configured_url, "")
       end
 
       def kit_class

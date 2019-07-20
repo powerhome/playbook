@@ -37,6 +37,9 @@ Style/CaseEquality:
 Style/Documentation:
   Enabled: false
 
+Style/EachWithObject:
+  Enabled: false
+
 Style/GuardClause:
   Enabled: false
 

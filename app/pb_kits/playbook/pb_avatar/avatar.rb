@@ -33,7 +33,7 @@ module Playbook
       end
 
       def initials
-        adjusted_value(configured_name, configured_name.split.map(&:first).join.downcase, String.new)
+        adjusted_value(configured_name, configured_name.split.map(&:first).join.downcase, "")
       end
 
       def size

@@ -16,12 +16,12 @@ class KitGenerator < Rails::Generators::NamedBase
     @kit_props = @kit_props.sort_by { |key| key }.to_h
     @unique_props = @kit_props.symbolize_keys.without(:id, :classname, :data)
 
-    @kit_class_init = Array.new
+    @kit_class_init = []
     @kit_props.each do |key, _val|
       @kit_class_init.push("#{key.parameterize.underscore}: default_configuration".to_sym)
     end
 
-    @kit_class_val = Array.new
+    @kit_class_val = []
     @kit_props.each do |key, _value|
       @kit_class_val.push("self.configured_#{key.parameterize.underscore} = #{key.parameterize.underscore}")
     end
