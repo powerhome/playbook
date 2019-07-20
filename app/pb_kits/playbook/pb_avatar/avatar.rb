@@ -48,7 +48,7 @@ module Playbook
 
       def status
         if is_set? configured_status
-          online_status_props = { status: configured_status }
+          online_status_props = { status: configured_status, classname: "size_#{size}" }
           pb_status = Playbook::PbOnlineStatus::OnlineStatus.new(online_status_props)
           ApplicationController.renderer.render(partial: pb_status, as: :object)
         end

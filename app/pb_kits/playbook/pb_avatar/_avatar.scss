@@ -64,7 +64,28 @@ $avatar-sizes: (
         position: absolute;
         right: 0;
         top: 0;
+        bottom: auto;
+        left: auto;
         z-index: 500;
+
+        &.size_xs {
+          right: -4px;
+        }
+
+        &.size_md {
+          top: auto;
+          bottom: 6px;
+        }
+
+        &.size_lg {
+          top: auto;
+          bottom: 14px;
+        }
+
+        &.size_xl {
+          top: auto;
+          bottom: 22px;
+        }
       }
     }
   }
