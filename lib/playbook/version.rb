@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Playbook
-  VERSION = "2.7.2".freeze
+  VERSION = "2.7.2"
 end

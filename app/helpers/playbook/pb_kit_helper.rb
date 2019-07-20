@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "webpacker/react/railtie" if defined?(Rails)
 require "webpacker/react/helpers"
 require "webpacker/react/component"

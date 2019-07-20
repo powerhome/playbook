@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Playbook
   module PbInput
     class Input < Playbook::PbKit::Base

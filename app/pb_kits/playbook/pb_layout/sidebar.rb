@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Playbook
   module PbLayout
     class Sidebar < Playbook::PbKit::Base

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Playbook
   module PbDocHelper
     def pb_kit_title(title)

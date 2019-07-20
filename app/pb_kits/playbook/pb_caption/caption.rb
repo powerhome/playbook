@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Playbook
   module PbCaption
     class Caption < Playbook::PbKit::Base

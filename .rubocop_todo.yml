@@ -6,67 +6,9 @@
 # Note that changes in the inspected code, or installation of new
 # versions of RuboCop, may require this file to be generated again.
 
-
-# Offense count: 7
-# Configuration parameters: NamePrefix, NamePrefixBlacklist, NameWhitelist, MethodDefinitionMacros.
-# NamePrefix: is_, has_, have_
-# NamePrefixBlacklist: is_, has_, have_
-# NameWhitelist: is_a?
-# MethodDefinitionMacros: define_method, define_singleton_method
-Naming/PredicateName:
-  Exclude:
-    - 'spec/**/*'
-    - 'app/helpers/playbook/pb_doc_helper.rb'
-    - 'app/helpers/playbook/pb_kit_helper.rb'
-    - 'app/pb_kits/playbook/pb_kit/base.rb'
-
 # Offense count: 1
 # Configuration parameters: MinNameLength, AllowNamesEndingInNumbers, AllowedNames, ForbiddenNames.
 # AllowedNames: io, id, to, by, on, in, at, ip, db
 Naming/UncommunicativeMethodParamName:
   Exclude:
     - 'app/pb_kits/playbook/pb_list/list.rb'
-
-
-# Offense count: 36
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyle.
-# SupportedStyles: always, never
-Style/FrozenStringLiteralComment:
-  Exclude:
-    - 'Gemfile'
-    - 'app/controllers/playbook/application_controller.rb'
-    - 'app/controllers/playbook/guides_controller.rb'
-    - 'app/controllers/playbook/pages_controller.rb'
-    - 'app/helpers/playbook/application_helper.rb'
-    - 'app/helpers/playbook/layout_helper.rb'
-    - 'app/helpers/playbook/pb_doc_helper.rb'
-    - 'app/helpers/playbook/pb_kit_helper.rb'
-    - 'app/helpers/playbook/redcarpet_helper.rb'
-    - 'app/pb_kits/playbook/pb_avatar/avatar.rb'
-    - 'app/pb_kits/playbook/pb_body/body.rb'
-    - 'app/pb_kits/playbook/pb_button/button.rb'
-    - 'app/pb_kits/playbook/pb_caption/caption.rb'
-    - 'app/pb_kits/playbook/pb_card/card.rb'
-    - 'app/pb_kits/playbook/pb_icon/icon.rb'
-    - 'app/pb_kits/playbook/pb_image/image.rb'
-    - 'app/pb_kits/playbook/pb_input/input.rb'
-    - 'app/pb_kits/playbook/pb_kit/base.rb'
-    - 'app/pb_kits/playbook/pb_layout/body.rb'
-    - 'app/pb_kits/playbook/pb_layout/layout.rb'
-    - 'app/pb_kits/playbook/pb_layout/sidebar.rb'
-    - 'app/pb_kits/playbook/pb_line_graph/line_graph.rb'
-    - 'app/pb_kits/playbook/pb_list/item.rb'
-    - 'app/pb_kits/playbook/pb_list/list.rb'
-    - 'app/pb_kits/playbook/pb_table/table.rb'
-    - 'app/pb_kits/playbook/pb_title/title.rb'
-    - 'app/pb_kits/playbook/pb_vertical_nav/item.rb'
-    - 'app/pb_kits/playbook/pb_vertical_nav/vertical_nav.rb'
-    - 'config.ru'
-    - 'lib/generators/kit/kit_generator.rb'
-    - 'lib/playbook.rb'
-    - 'lib/playbook/engine.rb'
-    - 'lib/playbook/version.rb'
-    - 'lib/tasks/db.rake'
-    - 'lib/tasks/playbook_tasks.rake'
-    - 'playbook_ui.gemspec'

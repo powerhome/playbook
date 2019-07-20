@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Playbook
   module PbVerticalNav
     class VerticalNav < Playbook::PbKit::Base

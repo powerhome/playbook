@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Playbook
   module PbList
     class List < Playbook::PbKit::Base

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class KitGenerator < Rails::Generators::NamedBase
   desc "This generator creates a new Playbook Kit"
   source_root File.expand_path("templates", __dir__)

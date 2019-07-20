@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Playbook
   module PbTitle
     class Title < Playbook::PbKit::Base

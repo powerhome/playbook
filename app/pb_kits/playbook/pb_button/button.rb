@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Playbook
   module PbButton
     class Button < Playbook::PbKit::Base

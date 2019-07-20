@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Playbook
   module PbBody
     class Body < Playbook::PbKit::Base

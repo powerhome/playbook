@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_dependency "playbook/application_controller"
 
 module Playbook
