@@ -31,6 +31,9 @@ Naming/UncommunicativeMethodParamName:
     - in
     - at
 
+Style/CaseEquality:
+  Enabled: false
+
 Style/Documentation:
   Enabled: false
 

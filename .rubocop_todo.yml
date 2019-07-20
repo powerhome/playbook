@@ -27,20 +27,6 @@ Naming/UncommunicativeMethodParamName:
   Exclude:
     - 'app/pb_kits/playbook/pb_list/list.rb'
 
-
-# Offense count: 1
-Style/CaseEquality:
-  Exclude:
-    - 'app/helpers/playbook/pb_kit_helper.rb'
-
-# Offense count: 1
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyle, SingleLineConditionsOnly, IncludeTernaryExpressions.
-# SupportedStyles: assign_to_condition, assign_inside_condition
-Style/ConditionalAssignment:
-  Exclude:
-    - 'app/helpers/playbook/redcarpet_helper.rb'
-
 # Offense count: 1
 # Cop supports --auto-correct.
 Style/EachWithObject:

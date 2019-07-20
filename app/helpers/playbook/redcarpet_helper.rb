@@ -104,11 +104,7 @@ module Playbook
 
         # Set height from attributes
         @string.gsub(/height="(.*?)"/) do
-          if $1
-            @attr[1] = $1
-          else
-            @attr[1] = @default_height
-          end
+          @attr[1] = ($1 || @default_height)
         end
 
         %(\n<div class="uix-component-frame"><iframe scrolling="no" id="component-preview" src="#{@attr[0]}" width="100%" height="#{@attr[1]}"></iframe><a href="#{@attr[0]}" target="_blank" class="uix-component-link">View component</a></div>\n)
