@@ -72,43 +72,6 @@ Style/FrozenStringLiteralComment:
     - 'playbook_ui.gemspec'
 
 
-# Offense count: 5
-# Configuration parameters: AllowIfModifier.
-Style/IfInsideElse:
-  Exclude:
-    - 'app/pb_kits/playbook/pb_body/body.rb'
-    - 'app/pb_kits/playbook/pb_layout/layout.rb'
-    - 'app/pb_kits/playbook/pb_vertical_nav/item.rb'
-
-# Offense count: 4
-# Cop supports --auto-correct.
-Style/IfUnlessModifier:
-  Exclude:
-    - 'app/pb_kits/playbook/pb_body/body.rb'
-    - 'app/pb_kits/playbook/pb_layout/layout.rb'
-
-# Offense count: 1
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyle.
-# SupportedStyles: both, prefix, postfix
-Style/NegatedIf:
-  Exclude:
-    - 'app/helpers/playbook/redcarpet_helper.rb'
-
-# Offense count: 8
-# Cop supports --auto-correct.
-# Configuration parameters: Strict.
-Style/NumericLiterals:
-  MinDigits: 7
-
-# Offense count: 4
-# Cop supports --auto-correct.
-# Configuration parameters: AllowSafeAssignment, AllowInMultilineConditions.
-Style/ParenthesesAroundCondition:
-  Exclude:
-    - 'app/pb_kits/playbook/pb_body/body.rb'
-    - 'app/pb_kits/playbook/pb_layout/layout.rb'
-
 # Offense count: 11
 # Cop supports --auto-correct.
 # Configuration parameters: PreferredDelimiters.

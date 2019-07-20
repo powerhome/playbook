@@ -26,35 +26,27 @@ module Playbook
       end
 
       def active
-        if configured_active == default_configuration
-          ''
-        else
-          '_active' if configured_active == true
-        end
+        is_true? configured_active
+      end
+
+      def active_class
+        '_active' if active == true
       end
 
       def text
-        if configured_text == default_configuration
-          ''
-        else
-          configured_text
-        end
+        default_value(configured_text, "")
       end
 
       def link
-        if configured_link == default_configuration
-          '#'
-        else
-          configured_link
-        end
+        default_value(configured_link, "#")
       end
 
       def yield(context:)
-        !block.nil? ? context.capture(&block) : ''
+        !block.nil? ? context.capture(&block) : ""
       end
 
       def to_partial_path
-        'pb_vertical_nav/item'
+        "pb_vertical_nav/item"
       end
 
     private

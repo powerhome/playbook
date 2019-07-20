@@ -43,13 +43,7 @@ module Playbook
       end
 
       def transparent
-        if configured_transparent == default_configuration
-          ""
-        else
-          if (configured_transparent == true)
-            "_transparent"
-          end
-        end
+        true_value(configured_transparent, "_transparent", "")
       end
 
       def size
@@ -69,23 +63,11 @@ module Playbook
       end
 
       def full
-        if configured_full == default_configuration
-          ""
-        else
-          if (configured_full == true)
-            " full"
-          end
-        end
+        true_value(configured_full, " full", "")
       end
 
       def dark
-        if configured_dark == default_configuration
-          ""
-        else
-          if (configured_dark == true)
-            "_dark"
-          end
-        end
+        true_value(configured_dark, "_dark", "")
       end
 
       def yield(context:)

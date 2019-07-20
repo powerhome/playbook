@@ -75,7 +75,7 @@ module Playbook
         if @headers.include?(permalink)
           permalink += "_1"
           loop do
-            break if !@headers.include?(permalink)
+            break unless @headers.include?(permalink)
 
             permalink.gsub!(/\_(\d+)$/, "_#{$1.to_i + 1}")
           end
