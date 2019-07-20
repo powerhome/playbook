@@ -7,33 +7,6 @@
 # versions of RuboCop, may require this file to be generated again.
 
 
-# Offense count: 3
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyle, IndentationWidth.
-# SupportedStyles: special_inside_parentheses, consistent, align_braces
-Layout/IndentFirstHashElement:
-  Exclude:
-    - 'app/helpers/playbook/redcarpet_helper.rb'
-    - 'app/pb_kits/playbook/pb_line_graph/line_graph.rb'
-
-# Offense count: 14
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyle.
-# SupportedStyles: normal, indented_internal_methods
-Layout/IndentationConsistency:
-  Exclude:
-    - 'app/controllers/playbook/pages_controller.rb'
-    - 'app/pb_kits/playbook/pb_icon/icon.rb'
-
-# Offense count: 9
-# Cop supports --auto-correct.
-# Configuration parameters: Width, IgnoredPatterns.
-Layout/IndentationWidth:
-  Exclude:
-    - 'app/controllers/playbook/pages_controller.rb'
-    - 'app/helpers/playbook/layout_helper.rb'
-    - 'app/pb_kits/playbook/pb_list/list.rb'
-    - 'lib/tasks/playbook_tasks.rake'
 
 # Offense count: 1
 # Cop supports --auto-correct.

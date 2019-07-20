@@ -34,19 +34,19 @@ module Playbook
 							              spin: default_configuration)
         self.configured_aria = aria
         self.configured_border = border
-				self.configured_classname = classname
-				self.configured_data = data
-				self.configured_fixed_width = fixed_width
-				self.configured_flip = flip
-				self.configured_icon = icon
-				self.configured_id = id
-				self.configured_inverse = inverse
-				self.configured_list_item = list_item
-				self.configured_pull = pull
-				self.configured_pulse = pulse
-				self.configured_rotation = rotation
-				self.configured_size = size
-				self.configured_spin = spin
+				    self.configured_classname = classname
+				    self.configured_data = data
+				    self.configured_fixed_width = fixed_width
+				    self.configured_flip = flip
+				    self.configured_icon = icon
+				    self.configured_id = id
+				    self.configured_inverse = inverse
+				    self.configured_list_item = list_item
+				    self.configured_pull = pull
+				    self.configured_pulse = pulse
+				    self.configured_rotation = rotation
+				    self.configured_size = size
+				    self.configured_spin = spin
       end
 
       def border_class

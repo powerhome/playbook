@@ -71,8 +71,8 @@ module Playbook
       def data
         if configured_data == default_configuration
           data = [{
-              name: 'Installation',
-              data: [43934, 52503, 57177, 69658, 97031, 119931, 137133, 154175]
+            name: 'Installation',
+            data: [43934, 52503, 57177, 69658, 97031, 119931, 137133, 154175]
           }]
           return data.to_json.html_safe
         else
