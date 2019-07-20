@@ -1,0 +1,9 @@
+examples:
+  
+  rails:
+  - label_value_default: Default
+  
+  
+  react:
+  - label_value_default: Default
+  
