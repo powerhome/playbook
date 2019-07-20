@@ -34,18 +34,18 @@ class KitGenerator < Rails::Generators::NamedBase
       return
     else
       # Add kit to Playbook meu ==========================
-      open('config/data/menu.yml', 'a') { |f|
+      open('config/data/menu.yml', 'a') do |f|
         f.puts "  - #{@kit_name_underscore}"
-      }
+      end
       say_status  "complete",
                   "#{@kit_name_capitalize} kit added to Playbook menu.",
                   :green
 
       # Generate SCSS files ==============================
       template "kit_scss.erb", "app/pb_kits/playbook/pb_#{@kit_name_underscore}/_#{@kit_name_underscore}.scss"
-      open('app/pb_kits/playbook/packs/site_styles/_kit_style_index.scss', 'a') { |f|
+      open('app/pb_kits/playbook/packs/site_styles/_kit_style_index.scss', 'a') do |f|
         f.puts "@" + "import " + "\'" + "../../pb_#{@kit_name_underscore}/#{@kit_name_underscore}" + "\';"
-      }
+      end
       say_status  "complete",
                   "#{@kit_name_capitalize} kit stylesheet successfully created and imported.",
                   :green
