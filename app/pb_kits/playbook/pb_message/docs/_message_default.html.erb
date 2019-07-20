@@ -4,7 +4,20 @@
   timestamp: "20 seconds ago",
   avatar: {
     name: "Mike Bishop",
-    image: { url: "https://randomuser.me/api/portraits/men/50.jpg" }
+    image: { url: "https://randomuser.me/api/portraits/men/50.jpg" },
+    status: "online"
+  }
+}) %>
+
+<br><br>
+
+<%= pb_rails("message", props: {
+  label: "Support",
+  message: "We'll escalate this issue to a Senior Support agent.",
+  timestamp: "9 minutes ago",
+  avatar: {
+    name: "Wade Winningham",
+    image: { url: "https://randomuser.me/api/portraits/men/14.jpg" }
   }
 }) %>
 
@@ -12,7 +25,7 @@
 
 <%= pb_rails("message", props: {
   message: "To processs your order, I'll need your full name.",
-  timestamp: "20 seconds ago",
+  timestamp: "4 hours ago",
   avatar: {
     name: "Lisa Thompson",
     image: { url: "https://randomuser.me/api/portraits/women/39.jpg" }

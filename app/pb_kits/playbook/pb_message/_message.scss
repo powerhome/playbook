@@ -1,4 +1,4 @@
-@import "message-mixins";
+@import "message_mixins";
 
 [class^=pb_message] {
   @include pb_message;

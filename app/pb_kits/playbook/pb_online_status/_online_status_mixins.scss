@@ -1,0 +1,35 @@
+@import "../tokens/colors";
+
+$pb_online_status_size: 10px;
+$pb_online_status_border: 2px;
+
+$pb_online_status_statuses: (
+  online: $success,
+  away: $error,
+  offline: $neutral,
+);
+
+@mixin pb_online_status($background: $neutral) {
+  width: $pb_online_status_size;
+  height: $pb_online_status_size;
+  flex-basis: $pb_online_status_size;
+  flex-grow: 0;
+  flex-shrink: 0;
+  border-width: $pb_online_status_border;
+  border-color: $white;
+  border-style: solid;
+  border-radius: 50%;
+  background: $background;
+}
+
+@mixin pb_online_status_away {
+  @include pb_online_status($success);
+}
+
+@mixin pb_online_status_online {
+  @include pb_online_status($error);
+}
+
+@mixin pb_online_status_offline {
+  @include pb_online_status($neutral);
+}

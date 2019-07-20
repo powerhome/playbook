@@ -53,3 +53,6 @@ WebpackerReact.setup (Message);
 
 import * as Timestamp from "pb_timestamp/docs";
 WebpackerReact.setup (Timestamp);
+
+import * as OnlineStatus from "pb_online_status/docs";
+WebpackerReact.setup (OnlineStatus);
