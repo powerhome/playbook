@@ -27,12 +27,6 @@ Naming/UncommunicativeMethodParamName:
   Exclude:
     - 'app/pb_kits/playbook/pb_list/list.rb'
 
-# Offense count: 3
-# Configuration parameters: EnforcedStyle.
-# SupportedStyles: snake_case, normalcase, non_integer
-Naming/VariableNumber:
-  Exclude:
-    - 'app/pb_kits/playbook/pb_kit/base.rb'
 
 # Offense count: 1
 # Cop supports --auto-correct.

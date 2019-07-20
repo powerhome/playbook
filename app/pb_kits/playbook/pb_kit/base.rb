@@ -52,13 +52,13 @@ module Playbook
         self.is_set?(value) ? adjusted_value : default_value
       end
 
-      def concat_value(value, value_2)
-        self.is_set?(value) ? value_2 + " " + value : value_2
+      def concat_value(value, value2)
+        self.is_set?(value) ? value2 + " " + value : value2
       end
 
-      def merge_value(value, value_2)
-        value_2 ||= {}
-        self.is_set?(value) ? value.merge(value_2) : value_2
+      def merge_value(value, value2)
+        value2 ||= {}
+        self.is_set?(value) ? value.merge(value2) : value2
       end
 
       def one_of_value(value, options = [], default = "")
