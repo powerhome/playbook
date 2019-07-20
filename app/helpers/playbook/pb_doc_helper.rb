@@ -62,7 +62,7 @@ module Playbook
     def render_clickable_title(kit)
       return render :inline => "<a href='#{kit_show_path(kit)}'>
           #{pb_rails(:title, props: { text: pb_kit_title(kit),
-          tag: 'h3', size: '2' })}</a>"
+                                      tag: 'h3', size: '2' })}</a>"
     end
   end
 end

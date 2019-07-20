@@ -34,6 +34,9 @@ Naming/UncommunicativeMethodParamName:
 Style/Documentation:
   Enabled: false
 
+Style/GuardClause:
+  Enabled: false
+
 Style/Lambda:
   EnforcedStyle: literal
 

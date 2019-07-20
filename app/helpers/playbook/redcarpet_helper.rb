@@ -8,8 +8,8 @@ module Playbook
 
     def markdown(text)
       options = {
-        filter_html:     false,
-        hard_wrap:       true,
+        filter_html: false,
+        hard_wrap: true,
         link_attributes: { rel: 'nofollow', target: "_blank" },
         space_after_headers: true,
         fenced_code_blocks: true,
@@ -18,8 +18,8 @@ module Playbook
       }
 
       extensions = {
-        autolink:           true,
-        superscript:        true,
+        autolink: true,
+        superscript: true,
         fenced_code_blocks: true,
         tables: true,
         disable_indented_code_blocks: false,
