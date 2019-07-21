@@ -21,10 +21,6 @@ module Playbook
         self.configured_variant = variant
       end
 
-      def text
-        default_value(configured_text.downcase, "")
-      end
-
       def display_text
         pb_text = Playbook::PbTitle::Title.new(size: 4, text: text)
         ApplicationController.renderer.render(partial: pb_text, as: :object)
@@ -47,6 +43,10 @@ module Playbook
       def variant
         variant_options = %w[success warning error info neutral]
         one_of_value(configured_variant, variant_options, "neutral")
+      end
+
+      def text
+        default_value(configured_text.downcase, "")
       end
 
       DEFAULT = Object.new
