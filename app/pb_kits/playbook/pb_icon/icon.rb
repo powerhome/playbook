@@ -126,6 +126,7 @@ module Playbook
 
       def kit_class
         icon_options = [
+          "pb_icon",
           "far",
           icon_class,
           border_class,
