@@ -51,7 +51,7 @@ module Playbook
       end
 
       def format_number(n)
-        n.to_s.reverse.gsub(/...(?=.)/,'\&,').reverse
+        n.to_s.reverse.gsub(/...(?=.)/, '\&,').reverse
       end
 
       def kit_class
