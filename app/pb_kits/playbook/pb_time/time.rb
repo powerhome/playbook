@@ -82,7 +82,7 @@ module Playbook
       end
 
       def timezone
-        "<span class='pb__time_timezone'>#{timezone_value}</span>".html_safe if is_set? configured_timestamp
+        "<span class='pb__time_timezone'>#{timezone_abbr}</span>".html_safe if is_set? configured_timestamp
       end
 
       def size
@@ -96,7 +96,7 @@ module Playbook
       end
 
       def text
-        "<span>#{format_time_string}</span> #{timezone_abbr}".html_safe if is_set? configured_timestamp
+        "<span>#{format_time_string}</span> #{timezone}".html_safe if is_set? configured_timestamp
       end
 
       def display_value_sm
@@ -113,7 +113,7 @@ module Playbook
         if is_set? configured_timestamp
           title_props = {
             size: 3,
-            text: "#{format_time_string} #{timezone_abbr}".html_safe,
+            text: "#{format_time_string} #{timezone}".html_safe,
           }
           pb_value_lg = Playbook::PbTitle::Title.new(title_props)
           ApplicationController.renderer.render(partial: pb_value_lg, as: :object)
