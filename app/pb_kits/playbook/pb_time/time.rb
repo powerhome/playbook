@@ -64,7 +64,7 @@ module Playbook
       def meridian
         if is_set? configured_timestamp
           timestamp = convert_to_timestamp(configured_timestamp)
-          timestamp.strftime("%P")[0,1]
+          timestamp.strftime("%P")[0, 1]
         end
       end
 
@@ -78,13 +78,11 @@ module Playbook
 
       def timezone_abbr
         timestamp = convert_to_timestamp(configured_timestamp)
-        timestamp.strftime('%Z').upcase
+        timestamp.strftime("%Z").upcase
       end
 
       def timezone
-        if is_set? configured_timestamp
-          "<span class='pb__time_timezone'>#{timezone_value}</span>".html_safe
-        end
+        "<span class='pb__time_timezone'>#{timezone_value}</span>".html_safe if is_set? configured_timestamp
       end
 
       def size
@@ -113,7 +111,8 @@ module Playbook
 
       def display_value_lg
         if is_set? configured_timestamp
-          pb_value_lg = Playbook::PbTitle::Title.new(size: 3, text: "#{format_time_string} #{timezone_abbr}".html_safe)
+          title_props = { size: 3, text: "#{format_time_string} #{timezone_abbr}".html_safe }
+          pb_value_lg = Playbook::PbTitle::Title.new(title_props)
           ApplicationController.renderer.render(partial: pb_value_lg, as: :object)
         end
       end
