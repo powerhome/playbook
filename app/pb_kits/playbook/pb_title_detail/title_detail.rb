@@ -3,22 +3,30 @@
 module Playbook
   module PbTitleDetail
     class TitleDetail < Playbook::PbKit::Base
-      PROPS = %i[configured_classname
+      PROPS = %i[configured_align
+                 configured_classname
                  configured_data
                  configured_detail
                  configured_id
                  configured_title].freeze
 
-      def initialize(classname: default_configuration,
+      def initialize(align: default_configuration,
+                     classname: default_configuration,
                      data: default_configuration,
                      detail: default_configuration,
                      id: default_configuration,
                      title: default_configuration)
+        self.configured_align = align
         self.configured_classname = classname
         self.configured_data = data
         self.configured_detail = detail
         self.configured_id = id
         self.configured_title = title
+      end
+
+      def align
+        align_options = %w[left center right]
+        one_of_value(configured_align, align_options, "left")
       end
 
       def title
@@ -38,7 +46,11 @@ module Playbook
       end
 
       def kit_class
-        "pb_title_detail"
+        kit_options = [
+          "pb_title_detail",
+          align,
+        ]
+        kit_options.join("_")
       end
 
       def to_partial_path
