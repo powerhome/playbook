@@ -1,0 +1,9 @@
+[class^=pb_title_count] {
+  display: flex;
+  justify-content: flex-start;
+  align-items: baseline;
+
+  & > [class^=pb_title] {
+    margin-right: $space-xs;
+  }
+}
