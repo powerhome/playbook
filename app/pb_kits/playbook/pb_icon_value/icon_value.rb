@@ -24,20 +24,6 @@ module Playbook
         self.configured_text = text
       end
 
-      def icon
-        if is_set? configured_icon
-          icon_props = { icon: configured_icon, fixed_width: true }
-          pb_icon = Playbook::PbIcon::Icon.new(icon_props)
-          ApplicationController.renderer.render(partial: pb_icon, as: :object)
-        else
-          ""
-        end
-      end
-
-      def text
-        default_value(configured_text, "")
-      end
-
       def value
         if is_set? configured_text
           pb_icon_value = Playbook::PbBody::Body.new(color: "light") do
@@ -65,6 +51,20 @@ module Playbook
       def align
         align_options = %w[left center right]
         one_of_value(configured_align, align_options, "left")
+      end
+
+      def icon
+        if is_set? configured_icon
+          icon_props = { icon: configured_icon, fixed_width: true }
+          pb_icon = Playbook::PbIcon::Icon.new(icon_props)
+          ApplicationController.renderer.render(partial: pb_icon, as: :object)
+        else
+          ""
+        end
+      end
+
+      def text
+        default_value(configured_text, "")
       end
 
       DEFAULT = Object.new
