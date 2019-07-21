@@ -83,7 +83,7 @@ module Playbook
       end
 
       def icon
-        pb_icon = Playbook::PbIcon::Icon.new(icon: "calendar", fixed_width: true)
+        pb_icon = Playbook::PbIcon::Icon.new(icon: "clock", fixed_width: true)
         ApplicationController.renderer.render(partial: pb_icon, as: :object)
       end
 
