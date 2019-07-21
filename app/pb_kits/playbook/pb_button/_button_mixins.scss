@@ -76,7 +76,7 @@ $pb_button_border_width: 1px;
   @include pb_button($white, $primary_action, $primary_action);
 
   &:hover {
-    @include pb_button_hover(rgba($secondary_action, $opacity_3));
+    @include pb_button_hover(rgba($secondary_action, $opacity_1));
   }
 }
 

@@ -1,0 +1,73 @@
+[class^=pb_button_group]{
+  // Orientation =========
+  &[class*=_horizontal]  {
+    display: inline-flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+
+    & > [class^=pb_button]  {
+      margin-right: $space-xs;
+
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+  }
+  &[class*=_vertical]  {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+
+    & > [class^=pb_button]  {
+      display: block;
+      flex-grow: 1;
+      flex-shrink: 1;
+      flex-basis: auto;
+      width: 100%;
+      margin-bottom: $space-xs;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+
+  // Connect =============
+  &[class*=_connect]  {
+    & > [class^=pb_button]  {
+      margin: 0;
+    }
+
+    &[class*=_horizontal] {
+      & > [class^=pb_button]  {
+        &:not(:last-child){
+          border-bottom-right-radius: 0;
+          border-top-right-radius: 0;
+          border-right-width: 0;
+        }
+        &:not(:first-child){
+          border-bottom-left-radius: 0;
+          border-top-left-radius: 0;
+          border-left-width: 0;
+        }
+      }
+    }
+
+    &[class*=_vertical] {
+      & > [class^=pb_button]  {
+        &:not(:last-child){
+          border-bottom-right-radius: 0;
+          border-bottom-left-radius: 0;
+          border-bottom-width: 0;
+        }
+        &:not(:first-child){
+          border-top-right-radius: 0;
+          border-top-left-radius: 0;
+          border-top-width: 0;
+        }
+      }
+    }
+  }
+}

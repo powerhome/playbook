@@ -1,0 +1,16 @@
+<div class="pb--doc-demo-row">
+  <div>
+    <%= pb_rails("button_group", props: { orientation: "vertical" }) do %>
+      <%= pb_rails("button", props: { text: "Button Primary" }) %>
+      <%= pb_rails("button", props: { text: "Button Secondary", variant: "secondary" }) %>
+      <%= pb_rails("button", props: { text: "Button Secondary", variant: "secondary" }) %>
+    <% end %>
+  </div>
+  <div>
+    <%= pb_rails("button_group", props: { orientation: "vertical", connect: true }) do %>
+      <%= pb_rails("button", props: { text: "Button Primary" }) %>
+      <%= pb_rails("button", props: { text: "Button Secondary", variant: "secondary" }) %>
+      <%= pb_rails("button", props: { text: "Button Secondary", variant: "secondary" }) %>
+    <% end %>
+  </div>
+</div>

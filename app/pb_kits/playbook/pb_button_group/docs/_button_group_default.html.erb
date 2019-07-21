@@ -1,0 +1,11 @@
+<%= pb_rails("button_group", props: { orientation: "horizontal" }) do %>
+  <%= pb_rails("button", props: { text: "Button Primary" }) %>
+  <%= pb_rails("button", props: { text: "Button Secondary", variant: "secondary" }) %>
+  <%= pb_rails("button", props: { text: "Button Secondary", variant: "secondary" }) %>
+<% end %>
+
+<%= pb_rails("button_group", props: { orientation: "horizontal", connect: true }) do %>
+  <%= pb_rails("button", props: { text: "Button Primary" }) %>
+  <%= pb_rails("button", props: { text: "Button Secondary", variant: "secondary" }) %>
+  <%= pb_rails("button", props: { text: "Button Secondary", variant: "secondary" }) %>
+<% end %>
