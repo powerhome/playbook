@@ -51,7 +51,7 @@ module Playbook
 
       def avatar
         if is_set? configured_avatar
-          avatar_obj = configured_avatar == true ? Hash.new : configured_avatar
+          avatar_obj = configured_avatar == true ? {} : configured_avatar
           avatar_obj[:size] = avatar_size
           avatar_obj[:name] = configured_name if is_set? configured_name
           pb_avatar = Playbook::PbAvatar::Avatar.new(avatar_obj)
@@ -95,7 +95,7 @@ module Playbook
           "pb_user",
           align,
           orientation,
-          size
+          size,
         ]
         kit_options.join("_")
       end
