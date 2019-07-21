@@ -15,6 +15,10 @@
     align-items: center;
     margin: 50px 0;
     flex-wrap: wrap;
+
+    & > div {
+      margin: 20px 0;
+    }
   }
 
   .pb--close-toggle {
