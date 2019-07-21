@@ -42,17 +42,9 @@ module Playbook
 
     private
 
-      def timezone_value
-        default_value(configured_timezone, "EST").upcase
-      end
-
-      def size
-        size_options = %w[lg sm]
-        one_of_value(configured_size, size_options, "sm")
-      end
-
       def convert_to_timestamp(ts)
-        ts.is_a?(String) ? DateTime.parse(ts) : nil
+        ts.is_a?(String) ? DateTime.parse(ts) : ts
+        ts.in_time_zone(timezone_value)
       end
 
       def hour
@@ -69,12 +61,6 @@ module Playbook
         end
       end
 
-      def timezone
-        if is_set? configured_timestamp
-          "<span class='pb__time_timezone'>#{timezone_value}</span>".html_safe
-        end
-      end
-
       def meridian
         if is_set? configured_timestamp
           timestamp = convert_to_timestamp(configured_timestamp)
@@ -82,17 +68,37 @@ module Playbook
         end
       end
 
+      def format_time_string
+        format_time = "#{hour}:#{minutes}#{meridian}"
+      end
+
+      def timezone_value
+        default_value(configured_timezone, "America/New_York")
+      end
+
+      def timezone_abbr
+        timestamp = convert_to_timestamp(configured_timestamp)
+        timestamp.strftime('%Z').upcase
+      end
+
+      def timezone
+        if is_set? configured_timestamp
+          "<span class='pb__time_timezone'>#{timezone_value}</span>".html_safe
+        end
+      end
+
+      def size
+        size_options = %w[lg sm]
+        one_of_value(configured_size, size_options, "sm")
+      end
+
       def icon
         pb_icon = Playbook::PbIcon::Icon.new(icon: "clock", fixed_width: true)
         ApplicationController.renderer.render(partial: pb_icon, as: :object)
       end
 
-      def format_time_string
-        format_time = "#{hour}:#{minutes}#{meridian}"
-      end
-
       def text
-        "<span>#{format_time_string}</span> #{timezone}".html_safe if is_set? configured_timestamp
+        "<span>#{format_time_string}</span> #{timezone_abbr}".html_safe if is_set? configured_timestamp
       end
 
       def display_value_sm
@@ -107,7 +113,7 @@ module Playbook
 
       def display_value_lg
         if is_set? configured_timestamp
-          pb_value_lg = Playbook::PbTitle::Title.new(size: 3, text: "#{format_time_string} #{timezone}".html_safe)
+          pb_value_lg = Playbook::PbTitle::Title.new(size: 3, text: "#{format_time_string} #{timezone_abbr}".html_safe)
           ApplicationController.renderer.render(partial: pb_value_lg, as: :object)
         end
       end
