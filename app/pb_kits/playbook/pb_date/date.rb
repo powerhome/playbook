@@ -7,18 +7,21 @@ module Playbook
                  configured_data
                  configured_id
                  configured_size
-                 configured_timestamp].freeze
+                 configured_timestamp
+                 configured_timezone].freeze
 
       def initialize(classname: default_configuration,
                      data: default_configuration,
                      id: default_configuration,
                      size: default_configuration,
-                     timestamp: default_configuration)
+                     timestamp: default_configuration,
+                     timezone: default_configuration)
         self.configured_classname = classname
         self.configured_data = data
         self.configured_id = id
         self.configured_size = size
         self.configured_timestamp = timestamp
+        self.configured_timezone = timezone
       end
 
       def display_value
@@ -41,7 +44,12 @@ module Playbook
       end
 
       def convert_to_timestamp(ts)
-        ts.is_a?(String) ? DateTime.parse(ts) : nil
+        ts.is_a?(String) ? DateTime.parse(ts) : ts
+        ts.in_time_zone(timezone_value)
+      end
+
+      def timezone_value
+        default_value(configured_timezone, "America/New_York")
       end
 
       def day_of_week
