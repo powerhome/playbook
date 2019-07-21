@@ -3,25 +3,33 @@
 module Playbook
   module PbTitleCount
     class TitleCount < Playbook::PbKit::Base
-      PROPS = %i[configured_classname
+      PROPS = %i[configured_align
+                 configured_classname
                  configured_count
                  configured_data
                  configured_id
                  configured_size
                  configured_title].freeze
 
-      def initialize(classname: default_configuration,
+      def initialize(align: default_configuration,
+                     classname: default_configuration,
                      count: default_configuration,
                      data: default_configuration,
                      id: default_configuration,
                      size: default_configuration,
                      title: default_configuration)
+        self.configured_align = align
         self.configured_classname = classname
         self.configured_count = count
         self.configured_data = data
         self.configured_id = id
         self.configured_size = size
         self.configured_title = title
+      end
+
+      def align
+        align_options = %w[left center right]
+        one_of_value(configured_align, align_options, "left")
       end
 
       def size
@@ -55,7 +63,11 @@ module Playbook
       end
 
       def kit_class
-        "pb_title_count"
+        kit_options = [
+          "pb_title_count",
+          align,
+        ]
+        kit_options.join("_")
       end
 
       def to_partial_path

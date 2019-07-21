@@ -6,4 +6,12 @@
   & > [class^=pb_title] {
     margin-right: $space-xs;
   }
+
+  &[class*=_center] {
+    justify-content: center;
+  }
+
+  &[class*=_right] {
+    justify-content: flex-end;
+  }
 }
