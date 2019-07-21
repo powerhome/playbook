@@ -71,9 +71,7 @@ module Playbook
       end
 
       def text
-        if is_set? configured_timestamp
-          "<span>#{day_of_week.upcase} &middot; #{month.upcase} #{day}</span>".html_safe
-        end
+        "<span>#{day_of_week.upcase} &middot; #{month.upcase} #{day}</span>".html_safe if is_set? configured_timestamp
       end
 
       def display_value_sm
