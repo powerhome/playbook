@@ -111,7 +111,10 @@ module Playbook
 
       def display_value_lg
         if is_set? configured_timestamp
-          title_props = { size: 3, text: "#{format_time_string} #{timezone_abbr}".html_safe }
+          title_props = {
+            size: 3,
+            text: "#{format_time_string} #{timezone_abbr}".html_safe,
+          }
           pb_value_lg = Playbook::PbTitle::Title.new(title_props)
           ApplicationController.renderer.render(partial: pb_value_lg, as: :object)
         end
