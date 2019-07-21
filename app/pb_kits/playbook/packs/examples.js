@@ -47,3 +47,6 @@ WebpackerReact.setup (Icon);
 
 import * as DashboardValue from "pb_dashboard_value/docs";
 WebpackerReact.setup (DashboardValue);
+
+import * as TitleDetail from "pb_title_detail/docs";
+WebpackerReact.setup (TitleDetail);
