@@ -4,9 +4,12 @@
 @import "../tokens/opacity";
 
 $pb_icon_circle_sizes: (
-  "sm":   28px,
-  "md":   38px,
-  "lg":   60px,
+  "xs":   28px,
+  "sm":   38px,
+  "md":   60px,
+  "base": 60px,
+  "lg":   80px,
+  "xl":   100px,
 );
 
 [class^=pb_icon_circle] {
