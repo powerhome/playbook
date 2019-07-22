@@ -10,3 +10,16 @@ PreCommit:
     on_warn: fail
     problem_on_unmodified_line: ignore
     command: ['bundle', 'exec', 'rubocop']
+
+CommitMsg:
+  CapitalizedSubject:
+    enabled: false
+
+  SingleLineSubject:
+    enabled: false
+
+  TextWidth:
+    enabled: false
+
+  TrailingPeriod:
+    enabled: false
