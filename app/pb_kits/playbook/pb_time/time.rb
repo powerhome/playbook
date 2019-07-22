@@ -42,34 +42,31 @@ module Playbook
 
     private
 
+      def timestamp
+        convert_to_timestamp(configured_timestamp)
+      end
+
       def convert_to_timestamp(ts)
         ts.is_a?(String) ? DateTime.parse(ts) : ts
         ts.in_time_zone(timezone_value)
       end
 
-      def hour
+      def format_time_string
         if is_set? configured_timestamp
-          timestamp = convert_to_timestamp(configured_timestamp)
-          timestamp.strftime("%l")
+          format_time = "#{hour}:#{minutes}#{meridian}"
         end
+      end
+
+      def hour
+        timestamp.strftime("%l")
       end
 
       def minutes
-        if is_set? configured_timestamp
-          timestamp = convert_to_timestamp(configured_timestamp)
-          timestamp.strftime("%M")
-        end
+        timestamp.strftime("%M")
       end
 
       def meridian
-        if is_set? configured_timestamp
-          timestamp = convert_to_timestamp(configured_timestamp)
-          timestamp.strftime("%P")[0, 1]
-        end
-      end
-
-      def format_time_string
-        format_time = "#{hour}:#{minutes}#{meridian}"
+        timestamp.strftime("%P")[0, 1]
       end
 
       def timezone_value
@@ -77,7 +74,6 @@ module Playbook
       end
 
       def timezone_abbr
-        timestamp = convert_to_timestamp(configured_timestamp)
         timestamp.strftime("%Z").upcase
       end
 
