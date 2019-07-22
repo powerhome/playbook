@@ -1,0 +1,54 @@
+@import "../tokens/border_radius";
+@import "../tokens/colors";
+@import "../tokens/typography";
+@import "../tokens/opacity";
+
+$pb_icon_circle_sizes: (
+  "sm":   28px,
+  "md":   38px,
+  "lg":   60px,
+);
+
+[class^=pb_icon_circle] {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  i,
+  svg {
+    &[class^=pb_icon] {
+      width: 100%;
+      height: 100%;
+      display: block;
+      text-align: center;
+      text-transform: uppercase;
+      position: relative;
+      z-index: 0;
+    }
+  }
+
+  @each $name, $size in $pb_icon_circle_sizes {
+    &[class*=_#{$name}] {
+      width: $size;
+      height: $size;
+      object-fit: cover;
+      border-radius: $size/2;
+      background: $silver;
+      color: $text_lt_light;
+      overflow: hidden;
+      position: relative;
+
+      &[class^=pb_icon] {
+        font-size: $size * 0.38;
+        line-height: $size;
+      }
+    }
+  }
+
+  @each $color_name, $color_value in $colors {
+    &[class*=_#{$color_name}] {
+      color: $color_value;
+      background: rgba($color_value, $opacity-1);
+    }
+  }
+}
