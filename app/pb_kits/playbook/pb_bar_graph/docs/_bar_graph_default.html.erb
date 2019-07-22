@@ -1,1 +1,20 @@
-<%= pb_rails("bar_graph") %>
+<% data = [{
+    name: 'Installation',
+    data: [154175]
+}, {
+    name: 'Manufacturing',
+    data: [40434]
+}, {
+    name: 'Sales & Distribution',
+    data: [39387]
+}, {
+    name: 'Project Development',
+    data: [34227]
+}, {
+    name: 'Other',
+    data: [18111]
+}] %>
+
+<%= pb_rails("bar_graph", props: { id: "bar-test", chart_data: data, point_start: "2012", title: 'Solar Employment Growth by Sector, 2010-2016', subtitle: 'Source: thesolarfoundation.com', axis_title: 'Number of Employees' }  ) %>
+
+

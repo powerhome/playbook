@@ -2,15 +2,17 @@ module Playbook
   module PbBarGraph 
     class BarGraph < Playbook::PbKit::Base
       PROPS = [
+          :configured_axis_title,
           :configured_classname,
           :configured_chart_data,
+          :configured_id,
           :configured_title,
           :configured_subtitle,
-          :configured_axis_title,
           :configured_point_start,
           :configured_orientation].freeze
 
       def initialize(
+        id: default_configuration, 
         chart_data: default_configuration,
         title: default_configuration,
         subtitle: default_configuration,
@@ -19,6 +21,7 @@ module Playbook
         classname: default_configuration,
         orientation: default_configuration
       )
+        self.configured_id = id
         self.configured_classname = classname
         self.configured_chart_data = chart_data
         self.configured_title = title
@@ -29,43 +32,24 @@ module Playbook
       end
 
       def orientation 
-        orientation_options = %w(vertical horizontal)
+        orientation_options = %w[vertical horizontal]
         one_of_value(configured_orientation, orientation_options, "vertical")
       end
 
       def chart_type
-        case self.orientation 
-        when "vertical"
-          "column"
-        when "horizontal"
-          "bar" 
-        else
-          "column"
-        end
+        orientation == "horizontal" ? "bar" : "column"
       end
 
       def title
-        if configured_title == default_configuration
-          ""
-        else
-          configured_title
-        end
+        default_value(configured_title, "")
       end
 
       def subtitle
-        if configured_subtitle == default_configuration
-          ""
-        else
-          configured_subtitle
-        end
+        default_value(configured_subtitle, "")
       end
 
       def axis_title
-        if configured_axis_title == default_configuration
-          ""
-        else
-          configured_axis_title
-        end
+        default_value(configured_axis_title, "")
       end
 
       def to_partial_path
@@ -73,27 +57,11 @@ module Playbook
       end
 
       def point_start
-        if configured_point_start == default_configuration
-          "2012"
-        else
-          configured_point_start
-        end
+        default_value(configured_point_start, "")
       end
 
       def chart_data
-        if configured_chart_data == default_configuration
-          data = [{
-              name: 'Installation',
-              data: [43934, 52503, 57177, 69658, 97031, 119931, 137133, 154175]
-          }]
-          return data.to_json.html_safe
-        else
-          configured_data.to_json.html_safe
-        end
-      end
-
-      def self.options
-        new_hash = PROPS.map { |e| e.to_s.remove("configured_") }
+        adjusted_value(configured_chart_data, configured_chart_data.to_json.html_safe, {})
       end
 
     private

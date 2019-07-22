@@ -17,8 +17,8 @@ const sizeColumns = function(highchart) {
 };
 
 const pbBarGraph = function(highchart) {
-  sizeColumns(highchart);
   pbHighcharts(highchart);
+  sizeColumns(highchart);
 };
 
 export default pbBarGraph;

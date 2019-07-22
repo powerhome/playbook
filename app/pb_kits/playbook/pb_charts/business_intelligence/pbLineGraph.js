@@ -8,8 +8,8 @@ const markerStyles = function(highchart){
 }
 
 const pbLineGraph = function(highchart) {
-  markerStyles(highchart);
   pbHighcharts(highchart);
+  markerStyles(highchart);
 };
 
 export default pbLineGraph;

@@ -133,8 +133,8 @@ const highchartsTheme = {
           y2: 1
         },
         stops: [
-          [0, 'blue'],
-          [1, 'white']
+          [0, Highcharts.getOptions().colors[0]],
+          [1, "white"]
         ]
       },
       threshold: null
@@ -147,17 +147,6 @@ const highchartsTheme = {
         lineColor: '#333'
       },
       area: {
-        fillColor: {
-            linearGradient: { x1: 0, y1: 0, x2: 0, y2: 1},
-            stops: [
-                [0, '#ff0000'],
-                [1, '#f4f4f4']
-            ]
-        },
-        lineWidth: 1,
-        marker: {
-            enabled: false
-        },
         shadow: false,
         states: {
             hover: {
