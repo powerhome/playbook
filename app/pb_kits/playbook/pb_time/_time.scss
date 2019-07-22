@@ -5,6 +5,13 @@
   [class^=pb_body] {
     font-weight: $bold !important;
   }
+
+  [class^=pb__time_timezone] {
+    font-size: $font-small;
+    font-weight: $regular;
+    color: $text-lt-light;
+  }
+
   &[class*=_lg] {
     [class^=pb__time_timezone] {
       font-size: $font-large !important;
