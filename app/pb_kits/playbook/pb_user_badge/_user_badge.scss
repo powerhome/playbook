@@ -1,0 +1,24 @@
+$badge-sizes: (
+  "sm":   16px,
+  "md":   26px,
+  "lg":   36px
+);
+
+[class^=pb_user_badge] {
+  .pb__user_badge_wrapper {
+    svg,
+    img {
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  @each $name, $size in $badge-sizes {
+    &[class*=_#{$name}] {
+      .pb__user_badge_wrapper {
+        width: $size;
+        height: $size;
+      }
+    }
+  }
+}

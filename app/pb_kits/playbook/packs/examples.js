@@ -47,3 +47,6 @@ WebpackerReact.setup (Icon);
 
 import * as DashboardValue from "pb_dashboard_value/docs";
 WebpackerReact.setup (DashboardValue);
+
+import * as UserBadge from "pb_user_badge/docs";
+WebpackerReact.setup (UserBadge);
