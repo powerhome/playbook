@@ -13,6 +13,9 @@ $pb_icon_circle_sizes: (
   display: flex;
   justify-content: center;
   align-items: center;
+  object-fit: cover;
+  overflow: hidden;
+  position: relative;
 
   i,
   svg {
@@ -31,12 +34,9 @@ $pb_icon_circle_sizes: (
     &[class*=_#{$name}] {
       width: $size;
       height: $size;
-      object-fit: cover;
       border-radius: $size/2;
       background: $silver;
       color: $text_lt_light;
-      overflow: hidden;
-      position: relative;
 
       &[class^=pb_icon] {
         font-size: $size * 0.38;
