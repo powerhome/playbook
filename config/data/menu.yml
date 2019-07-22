@@ -14,3 +14,6 @@ kits:
   - table
   - dashboard_value
   - label_value
+  - message
+  - timestamp
+  - online_status
