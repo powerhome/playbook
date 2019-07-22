@@ -38,9 +38,8 @@ module Playbook
 
     private
 
-      def size
-        size_options = %w[lg sm]
-        one_of_value(configured_size, size_options, "sm")
+      def timestamp
+        timestamp = convert_to_timestamp(configured_timestamp)
       end
 
       def convert_to_timestamp(ts)
@@ -53,24 +52,20 @@ module Playbook
       end
 
       def day_of_week
-        if is_set? configured_timestamp
-          timestamp = convert_to_timestamp(configured_timestamp)
-          timestamp.strftime("%a")
-        end
+        timestamp.strftime("%a").upcase
       end
 
       def month
-        if is_set? configured_timestamp
-          timestamp = convert_to_timestamp(configured_timestamp)
-          timestamp.strftime("%^b")
-        end
+        timestamp.strftime("%^b").upcase
       end
 
       def day
-        if is_set? configured_timestamp
-          timestamp = convert_to_timestamp(configured_timestamp)
-          timestamp.strftime("%e")
-        end
+        timestamp.strftime("%e")
+      end
+
+      def size
+        size_options = %w[lg sm]
+        one_of_value(configured_size, size_options, "sm")
       end
 
       def icon
@@ -79,7 +74,7 @@ module Playbook
       end
 
       def text
-        "<span>#{day_of_week.upcase} &middot; #{month.upcase} #{day}</span>".html_safe if is_set? configured_timestamp
+        "<span>#{day_of_week} &middot; #{month} #{day}</span>".html_safe
       end
 
       def display_value_sm
@@ -94,7 +89,7 @@ module Playbook
 
       def display_value_lg
         if is_set? configured_timestamp
-          pb_value_lg = Playbook::PbTitle::Title.new(size: 3, text: "#{month.upcase} #{day}")
+          pb_value_lg = Playbook::PbTitle::Title.new(size: 3, text: "#{month} #{day}")
           ApplicationController.renderer.render(partial: pb_value_lg, as: :object)
         end
       end
