@@ -52,9 +52,7 @@ module Playbook
       end
 
       def format_time_string
-        if is_set? configured_timestamp
-          format_time = "#{hour}:#{minutes}#{meridian}"
-        end
+        format_time = "#{hour}:#{minutes}#{meridian}" if is_set? configured_timestamp
       end
 
       def hour
@@ -78,7 +76,7 @@ module Playbook
       end
 
       def timezone
-        "<span class='pb__time_timezone'>#{timezone_abbr}</span>".html_safe if is_set? configured_timestamp
+        "<span class='pb__time_timezone'>#{timezone_abbr}</span>".html_safe
       end
 
       def size
@@ -92,7 +90,7 @@ module Playbook
       end
 
       def text
-        "<span>#{format_time_string}</span> #{timezone}".html_safe if is_set? configured_timestamp
+        "<span>#{format_time_string}</span> #{timezone}".html_safe
       end
 
       def display_value_sm
