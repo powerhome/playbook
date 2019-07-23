@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 module Playbook
-    module LayoutHelper
-        def layout(name, &block)
-            Dir["../*"]
-        end
+  module LayoutHelper
+    def layout(_name)
+      Dir["../*"]
     end
+  end
 end

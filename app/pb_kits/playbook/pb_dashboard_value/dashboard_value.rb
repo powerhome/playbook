@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Playbook
   module PbDashboardValue
     class DashboardValue < Playbook::PbKit::Base
@@ -28,7 +30,7 @@ module Playbook
 
       def align
         align_options = %w[left center right]
-        one_of_value(configured_align, align_options, 'left')
+        one_of_value(configured_align, align_options, "left")
       end
 
       def stat_label
@@ -54,17 +56,17 @@ module Playbook
 
       def kit_class
         kit_options = [
-          'pb_dashboard_value',
-          align
+          "pb_dashboard_value",
+          align,
         ]
-        kit_options.join('_')
+        kit_options.join("_")
       end
 
       def to_partial_path
-        'pb_dashboard_value/dashboard_value'
+        "pb_dashboard_value/dashboard_value"
       end
 
-      private
+    private
 
       DEFAULT = Object.new
       private_constant :DEFAULT

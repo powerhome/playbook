@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Playbook
   module PbDashboardValue
     class StatValue < Playbook::PbKit::Base
@@ -41,14 +43,14 @@ module Playbook
       end
 
       def kit_class
-        'pb_stat_value'
+        "pb_stat_value"
       end
 
       def to_partial_path
-        'pb_dashboard_value/child_kits/stat_value'
+        "pb_dashboard_value/child_kits/stat_value"
       end
 
-      private
+    private
 
       DEFAULT = Object.new
       private_constant :DEFAULT

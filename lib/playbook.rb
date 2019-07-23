@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "sassc-rails"
 require "webpacker"
 require "playbook/engine"

@@ -1,0 +1,9 @@
+examples:
+  
+  rails:
+  - message_default: Default
+  
+  
+  react:
+  - message_default: Default
+  

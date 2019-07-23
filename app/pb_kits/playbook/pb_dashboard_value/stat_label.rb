@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Playbook
   module PbDashboardValue
     class StatLabel < Playbook::PbKit::Base
@@ -23,7 +25,7 @@ module Playbook
 
       def display_label
         unless label.nil?
-          pb_label = Playbook::PbBody::Body.new(color: 'light') do
+          pb_label = Playbook::PbBody::Body.new(color: "light") do
             label
           end
           ApplicationController.renderer.render(partial: pb_label, as: :object)
@@ -31,14 +33,14 @@ module Playbook
       end
 
       def kit_class
-        'pb_stat_label'
+        "pb_stat_label"
       end
 
       def to_partial_path
-        'pb_dashboard_value/child_kits/stat_label'
+        "pb_dashboard_value/child_kits/stat_label"
       end
 
-      private
+    private
 
       DEFAULT = Object.new
       private_constant :DEFAULT

@@ -1,26 +1,28 @@
+# frozen_string_literal: true
+
 module Playbook
   module PbKit
     class Base
       #============= Default props =============
-      def aria(ui_aria={})
-        self.merge_value(configured_aria, ui_aria)
+      def aria(ui_aria = {})
+        merge_value(configured_aria, ui_aria)
       end
 
-      def classname(ui_classes="")
-        self.concat_value(configured_classname, ui_classes)
+      def classname(ui_classes = "")
+        concat_value(configured_classname, ui_classes)
       end
 
-      def data(ui_data={})
-        self.merge_value(configured_data, ui_data)
+      def data(ui_data = {})
+        merge_value(configured_data, ui_data)
       end
 
-      def id(ui_id=nil)
-        self.default_value(configured_id, ui_id)
+      def id(ui_id = nil)
+        default_value(configured_id, ui_id)
       end
 
       #============= Type checking =============
       def is_true?(value)
-        self.is_boolean?(value) && value == true
+        is_boolean?(value) && value == true
       end
 
       def is_string?(value)
@@ -45,24 +47,24 @@ module Playbook
 
       #============= Default value =============
       def default_value(value, default_value)
-        self.is_set?(value) ? value : default_value
+        is_set?(value) ? value : default_value
       end
 
       def adjusted_value(value, adjusted_value, default_value)
-        self.is_set?(value) ? adjusted_value : default_value
+        is_set?(value) ? adjusted_value : default_value
       end
 
-      def concat_value(value, value_2)
-        self.is_set?(value) ? value_2+" "+value : value_2
+      def concat_value(value, value2)
+        is_set?(value) ? value2 + " " + value : value2
       end
 
-      def merge_value(value, value_2)
-        value_2 ||= {}
-        self.is_set?(value) ? value.merge(value_2) : value_2
+      def merge_value(value, value2)
+        value2 ||= {}
+        is_set?(value) ? value.merge(value2) : value2
       end
 
       def one_of_value(value, options = [], default = "")
-        if self.is_set?(value)
+        if is_set?(value)
           options.include?(value) ? value : default
         else
           default
@@ -70,7 +72,7 @@ module Playbook
       end
 
       def true_value(value, true_value = "", false_value = "")
-        if self.is_set?(value)
+        if is_set?(value)
           is_true?(value) ? true_value : false_value
         else
           false_value
@@ -78,7 +80,7 @@ module Playbook
       end
 
       def false_value(value, false_value = "", true_value = "")
-        if self.is_set?(value)
+        if is_set?(value)
           is_true?(value) ? true_value : false_value
         else
           false_value

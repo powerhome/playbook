@@ -12,38 +12,80 @@ $avatar-sizes: (
 );
 
 [class^=pb_avatar] {
+  position: relative;
+
   @each $name, $size in $avatar-sizes {
     &[class*=_#{$name}],
     &[class*=_#{$name}_thumb] {
       width: $size;
       height: $size;
       object-fit: cover;
-      border-radius: $border-rad-mega;
-      background: $slate;
-      overflow: hidden;
       position: relative;
+      flex-shrink: 0;
+      flex-grow: 0;
+      flex-basis: $size;
 
-      &::before {
-        content: attr(data-initials);
-        width: 100%;
-        height: 100%;
-        display: block;
-        color: $white;
-        text-align: center;
-        font-size: $size * 0.38;
-        line-height: $size;
-        text-transform: uppercase;
+      .avatar_wrapper {
+        width: $size;
+        height: $size;
+        object-fit: cover;
+        border-radius: $border-rad-mega;
+        background: $slate;
+        overflow: hidden;
         position: relative;
-        z-index: 0;
-      }
+        flex-shrink: 0;
+        flex-grow: 0;
+        flex-basis: $size;
 
-      img {
-        width: 100%;
-        height: 100%;
+        &::before {
+          content: attr(data-initials);
+          width: 100%;
+          height: 100%;
+          display: block;
+          color: $white;
+          text-align: center;
+          font-size: $size * 0.38;
+          line-height: $size;
+          text-transform: uppercase;
+          position: relative;
+          z-index: 0;
+        }
+
+        img {
+          width: 100%;
+          height: 100%;
+          position: absolute;
+          top: 0;
+          left: 0;
+          z-index: 1;
+        }
+      }
+      [class^=pb_online_status] {
         position: absolute;
+        right: 0;
         top: 0;
-        left: 0;
-        z-index: 1;
+        bottom: auto;
+        left: auto;
+        z-index: 500;
+
+        &.size_xs {
+          right: -4px;
+        }
+
+        &.size_md {
+          top: auto;
+          bottom: 6px;
+        }
+
+        &.size_lg {
+          top: auto;
+          bottom: 14px;
+        }
+
+        &.size_xl {
+          top: auto;
+          bottom: 22px;
+        }
       }
     }
   }
