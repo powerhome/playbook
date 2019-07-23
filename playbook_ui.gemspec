@@ -28,6 +28,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency "better_errors"
   s.add_development_dependency "binding_of_caller"
   s.add_development_dependency "byebug"
+  s.add_development_dependency "overcommit", "0.49.0"
   s.add_development_dependency "pg", "~> 0.18"
   s.add_development_dependency "rainbow", "2.2.2"
   s.add_development_dependency "rubocop", "0.72.0"
