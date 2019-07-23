@@ -3,17 +3,18 @@
 module Playbook
   module PbLineGraph
     class LineGraph < Playbook::PbKit::Base
-      PROPS = [ 
-                :configured_aria,
-                :configured_axis_title,
-                :configured_chart_data, 
-                :configured_classname,
-                :configured_data,
-                :configured_gradient,
-                :configured_id,
-                :configured_point_start,
-                :configured_subtitle,
-                :configured_title].freeze
+      PROPS = %i[
+        configured_aria
+        configured_axis_title
+        configured_chart_data
+        configured_classname
+        configured_data
+        configured_gradient
+        configured_id
+        configured_point_start
+        configured_subtitle
+        configured_title
+      ].freeze
 
       def initialize(
         aria: default_configuration,
@@ -39,7 +40,7 @@ module Playbook
         self.configured_title = title
       end
 
-      def gradient 
+      def gradient
         is_true? configured_gradient
       end
 

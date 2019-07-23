@@ -1,17 +1,18 @@
 module Playbook
-  module PbBarGraph 
+  module PbBarGraph
     class BarGraph < Playbook::PbKit::Base
-      PROPS = [ 
-                :configured_aria,
-                :configured_axis_title,
-                :configured_chart_data, 
-                :configured_classname,
-                :configured_data,
-                :configured_id,
-                :configured_orientation,
-                :configured_point_start,
-                :configured_subtitle,
-                :configured_title].freeze
+      PROPS = %i[
+        configured_aria
+        configured_axis_title
+        configured_chart_data
+        configured_classname
+        configured_data
+        configured_id
+        configured_orientation
+        configured_point_start
+        configured_subtitle
+        configured_title
+      ].freeze
 
       def initialize(
         aria: default_configuration,
@@ -37,7 +38,7 @@ module Playbook
         self.configured_title = title
       end
 
-      def orientation 
+      def orientation
         orientation_options = %w[vertical horizontal]
         one_of_value(configured_orientation, orientation_options, "vertical")
       end
