@@ -51,6 +51,9 @@ WebpackerReact.setup (DashboardValue);
 import * as Time from "pb_time/docs";
 WebpackerReact.setup (Time);
 
+import * as User from "pb_user/docs";
+WebpackerReact.setup (User);
+
 import * as LabelValue from "pb_label_value/docs";
 WebpackerReact.setup (LabelValue);
 
