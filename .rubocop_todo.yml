@@ -8,4 +8,4 @@
 
 Style/FrozenStringLiteralComment:
   Exclude:
-    - 'app/pb_kits/playbook/pb_bar_graph/bar_graph.rb'
+    - 'app/pb_kits/playbook/pb_list/list.rb'
