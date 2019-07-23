@@ -1,27 +1,29 @@
+# frozen_string_literal: true
+
 module Playbook
   module PbLayout
     class Layout < Playbook::PbKit::Base
-      PROPS = [:configured_classname,
-        :configured_collapse,
-        :configured_dark,
-        :configured_data,
-        :configured_full,
-        :configured_id,
-        :configured_position,
-        :configured_transparent,
-        :configured_size,
-        :block].freeze
+      PROPS = %i[configured_classname
+                 configured_collapse
+                 configured_dark
+                 configured_data
+                 configured_full
+                 configured_id
+                 configured_position
+                 configured_transparent
+                 configured_size
+                 block].freeze
 
       def initialize(classname: default_configuration,
-                   collapse: default_configuration,
-                   dark: default_configuration,
-                   data: default_configuration,
-                   full: default_configuration,
-                   id: default_configuration,
-                   position: default_configuration,
-                   transparent: default_configuration,
-                   size: default_configuration,
-                   &block)
+                     collapse: default_configuration,
+                     dark: default_configuration,
+                     data: default_configuration,
+                     full: default_configuration,
+                     id: default_configuration,
+                     position: default_configuration,
+                     transparent: default_configuration,
+                     size: default_configuration,
+                     &block)
         self.configured_classname = classname
         self.configured_collapse = collapse
         self.configured_dark = dark
@@ -43,13 +45,7 @@ module Playbook
       end
 
       def transparent
-        if configured_transparent == default_configuration
-          ""
-        else
-          if (configured_transparent == true)
-            "_transparent"
-          end
-        end
+        true_value(configured_transparent, "_transparent", "")
       end
 
       def size
@@ -62,30 +58,18 @@ module Playbook
 
       def collapse
         if configured_collapse == default_configuration
-          " layout#{self.position}_collapse_xs"
+          " layout#{position}_collapse_xs"
         else
-          " layout#{self.position}_collapse_#{configured_collapse}"
+          " layout#{position}_collapse_#{configured_collapse}"
         end
       end
 
       def full
-        if configured_full == default_configuration
-          ""
-        else
-          if (configured_full == true)
-            " full"
-          end
-        end
+        true_value(configured_full, " full", "")
       end
 
       def dark
-        if configured_dark == default_configuration
-          ""
-        else
-          if (configured_dark == true)
-            "_dark"
-          end
-        end
+        true_value(configured_dark, "_dark", "")
       end
 
       def yield(context:)

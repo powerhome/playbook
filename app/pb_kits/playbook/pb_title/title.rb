@@ -1,23 +1,25 @@
+# frozen_string_literal: true
+
 module Playbook
   module PbTitle
     class Title < Playbook::PbKit::Base
-      PROPS = [:configured_aria,
-          :configured_classname,
-          :configured_dark,
-          :configured_data,
-          :configured_id,
-          :configured_size,
-          :configured_tag,
-          :configured_text].freeze
+      PROPS = %i[configured_aria
+                 configured_classname
+                 configured_dark
+                 configured_data
+                 configured_id
+                 configured_size
+                 configured_tag
+                 configured_text].freeze
 
       def initialize(aria: default_configuration,
-                   classname: default_configuration,
-                   dark: default_configuration,
-                   data: default_configuration,
-                   id: default_configuration,
-                   size: default_configuration,
-                   tag: default_configuration,
-                   text: default_configuration)
+                     classname: default_configuration,
+                     dark: default_configuration,
+                     data: default_configuration,
+                     id: default_configuration,
+                     size: default_configuration,
+                     tag: default_configuration,
+                     text: default_configuration)
         self.configured_aria = aria
         self.configured_classname = classname
         self.configured_dark = dark
@@ -29,7 +31,7 @@ module Playbook
       end
 
       def tag
-        tag_options = %w(h1 h2 h3 h4 h5 h6 p div span)
+        tag_options = %w[h1 h2 h3 h4 h5 h6 p div span]
         one_of_value(configured_tag, tag_options, "h3")
       end
 
@@ -43,7 +45,7 @@ module Playbook
       end
 
       def size_class
-        adjusted_value(self.size, self.size, nil)
+        adjusted_value(size, size, nil)
       end
 
       def dark_class
@@ -54,7 +56,7 @@ module Playbook
         title_options = [
           "pb_title",
           size_class,
-          dark_class
+          dark_class,
         ]
         title_options.reject(&:nil?).join("_")
       end

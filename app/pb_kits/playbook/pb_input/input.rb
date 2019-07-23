@@ -1,25 +1,27 @@
+# frozen_string_literal: true
+
 module Playbook
   module PbInput
     class Input < Playbook::PbKit::Base
-      PROPS = [:configured_aria,
-            :configured_classname,
-            :configured_data,
-            :configured_id,
-            :configured_name,
-            :configured_label,
-            :configured_placeholder,
-            :configured_type,
-            :configured_value].freeze
+      PROPS = %i[configured_aria
+                 configured_classname
+                 configured_data
+                 configured_id
+                 configured_name
+                 configured_label
+                 configured_placeholder
+                 configured_type
+                 configured_value].freeze
 
       def initialize(aria: default_configuration,
-                    classname: default_configuration,
-                    data: default_configuration,
-                    id: default_configuration,
-                    name: default_configuration,
-                    label: default_configuration,
-                    placeholder: default_configuration,
-                    type: default_configuration,
-                    value: default_configuration)
+                     classname: default_configuration,
+                     data: default_configuration,
+                     id: default_configuration,
+                     name: default_configuration,
+                     label: default_configuration,
+                     placeholder: default_configuration,
+                     type: default_configuration,
+                     value: default_configuration)
         self.configured_aria = aria
         self.configured_classname = classname
         self.configured_data = data
