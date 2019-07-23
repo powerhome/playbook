@@ -6,6 +6,6 @@
 # Note that changes in the inspected code, or installation of new
 # versions of RuboCop, may require this file to be generated again.
 
-Style/FrozenStringLiteralComment:
+Naming/UncommunicativeMethodParamName:
   Exclude:
     - 'app/pb_kits/playbook/pb_list/list.rb'
