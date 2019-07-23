@@ -1,33 +1,40 @@
 module Playbook
   module PbLineGraph
     class LineGraph < Playbook::PbKit::Base
-      PROPS = [ :configured_id,
-                :configured_classname,
-                :configured_chart_data,
-                :configured_title,
-                :configured_subtitle,
+      PROPS = [ 
+                :configured_aria,
                 :configured_axis_title,
+                :configured_chart_data, 
+                :configured_classname,
+                :configured_data,
                 :configured_gradient,
-                :configured_point_start].freeze
+                :configured_id,
+                :configured_point_start,
+                :configured_subtitle,
+                :configured_title].freeze
 
       def initialize(
-        id: default_configuration,
-        classname: default_configuration,
-        chart_data: default_configuration,
-        title: default_configuration,
-        subtitle: default_configuration,
+        aria: default_configuration,
         axis_title: default_configuration,
+        chart_data: default_configuration,
+        classname: default_configuration,
+        data: default_configuration,
+        gradient: default_configuration,
+        id: default_configuration,
         point_start: default_configuration,
-        gradient: default_configuration
+        subtitle: default_configuration,
+        title: default_configuration
       )
-        self.configured_id = id
-        self.configured_classname = classname
-        self.configured_title = title
-        self.configured_subtitle = subtitle
+        self.configured_aria = aria
         self.configured_axis_title = axis_title
         self.configured_chart_data = chart_data
-        self.configured_point_start = point_start
+        self.configured_classname = classname
+        self.configured_data = data
         self.configured_gradient = gradient
+        self.configured_id = id
+        self.configured_point_start = point_start
+        self.configured_subtitle = subtitle
+        self.configured_title = title
       end
 
       def gradient 
@@ -35,11 +42,7 @@ module Playbook
       end
 
       def chart_type
-        if gradient == true
-          "area"
-        else
-          "line"
-        end
+        gradient == true ? "area" : "line"
       end
 
       def title
