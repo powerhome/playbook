@@ -8,6 +8,19 @@
   background: $white;
   overflow: hidden;
 
+  &-demo-row {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin: 50px 0;
+    flex-wrap: wrap;
+
+    & > div {
+      margin: 20px 0;
+    }
+  }
+
   .pb--close-toggle {
     position: absolute;
     right: 10px;

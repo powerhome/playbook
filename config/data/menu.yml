@@ -13,6 +13,7 @@ kits:
   - icon
   - table
   - dashboard_value
+  - user
   - label_value
   - message
   - timestamp
