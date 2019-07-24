@@ -10,7 +10,14 @@ kits:
   - list
   - avatar
   - line_graph
+  - bar_graph
   - icon
   - table
   - dashboard_value
   - progress_simple
+  - title_count
+  - user
+  - label_value
+  - message
+  - timestamp
+  - online_status

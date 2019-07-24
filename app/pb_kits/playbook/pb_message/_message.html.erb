@@ -1,0 +1,11 @@
+<%= content_tag(:div,
+    id: object.id,
+    data: object.data,
+    class: object.classname(object.kit_class)) do %>
+    <%= object.avatar %>
+    <div class="content_wrapper">
+      <%= object.label %>
+      <%= object.message %>
+      <%= object.timestamp %>
+    </div>
+<% end %>
