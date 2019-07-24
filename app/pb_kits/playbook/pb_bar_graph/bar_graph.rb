@@ -1,16 +1,16 @@
 # frozen_string_literal: true
 
 module Playbook
-  module PbLineGraph
-    class LineGraph < Playbook::PbKit::Base
+  module PbBarGraph
+    class BarGraph < Playbook::PbKit::Base
       PROPS = %i[
         configured_aria
         configured_axis_title
         configured_chart_data
         configured_classname
         configured_data
-        configured_gradient
         configured_id
+        configured_orientation
         configured_point_start
         configured_subtitle
         configured_title
@@ -22,8 +22,8 @@ module Playbook
         chart_data: default_configuration,
         classname: default_configuration,
         data: default_configuration,
-        gradient: default_configuration,
         id: default_configuration,
+        orientation: default_configuration,
         point_start: default_configuration,
         subtitle: default_configuration,
         title: default_configuration
@@ -33,19 +33,20 @@ module Playbook
         self.configured_chart_data = chart_data
         self.configured_classname = classname
         self.configured_data = data
-        self.configured_gradient = gradient
         self.configured_id = id
+        self.configured_orientation = orientation
         self.configured_point_start = point_start
         self.configured_subtitle = subtitle
         self.configured_title = title
       end
 
-      def gradient
-        is_true? configured_gradient
+      def orientation
+        orientation_options = %w[vertical horizontal]
+        one_of_value(configured_orientation, orientation_options, "vertical")
       end
 
       def chart_type
-        gradient == true ? "area" : "line"
+        orientation == "horizontal" ? "bar" : "column"
       end
 
       def title
@@ -61,7 +62,7 @@ module Playbook
       end
 
       def to_partial_path
-        "pb_line_graph/line_graph"
+        "pb_bar_graph/bar_graph"
       end
 
       def point_start
