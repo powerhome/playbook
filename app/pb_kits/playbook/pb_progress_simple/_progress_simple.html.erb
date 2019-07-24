@@ -1,0 +1,11 @@
+<%= content_tag(:div, class: "pb__progress_simple_wrapper_#{object.align}") do %>
+  <%= content_tag(:div,
+  id: object.id,
+  data: object.data({value: object.number_value}),
+  class: object.classname(object.kit_class),
+  style: "width:#{object.width};") do %>
+    <%= content_tag(:div, "",
+      class: "progress_simple_value",
+      style: "width:#{object.percent_value};") %>
+  <% end %>
+<% end %>
