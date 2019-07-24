@@ -50,3 +50,18 @@ WebpackerReact.setup (DashboardValue);
 
 import * as TitleCount from "pb_title_count/docs";
 WebpackerReact.setup (TitleCount);
+
+import * as User from "pb_user/docs";
+WebpackerReact.setup (User);
+
+import * as LabelValue from "pb_label_value/docs";
+WebpackerReact.setup (LabelValue);
+
+import * as Message from "pb_message/docs";
+WebpackerReact.setup (Message);
+
+import * as Timestamp from "pb_timestamp/docs";
+WebpackerReact.setup (Timestamp);
+
+import * as OnlineStatus from "pb_online_status/docs";
+WebpackerReact.setup (OnlineStatus);

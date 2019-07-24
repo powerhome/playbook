@@ -1,0 +1,51 @@
+@import "../tokens/spacing";
+
+[class^=pb_user]{
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-direction: row;
+
+  // Orientation =============
+  &[class*=_vertical]  {
+    flex-direction: column;
+
+    &[class*=_center]  {
+      align-items: center;
+
+      [class^=pb_title],
+      [class^=pb_body] {
+        text-align: center;
+      }
+    }
+
+    &[class*=_right]  {
+      align-items: flex-end;
+
+      [class^=pb_title],
+      [class^=pb_body] {
+        text-align: right;
+      }
+    }
+
+    [class^=pb_avatar] {
+      margin-bottom: $space-xs;
+    }
+  }
+
+  &[class*=_horizontal]  {
+    align-items: center;
+
+    &[class*=_center]  {
+      justify-content: center;
+    }
+
+    &[class*=_right]  {
+      justify-content: flex-end;
+    }
+
+    [class^=pb_avatar] {
+      margin-right: $space-sm;
+    }
+  }
+}
