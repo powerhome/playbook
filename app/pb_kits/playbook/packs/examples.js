@@ -51,6 +51,9 @@ WebpackerReact.setup (Icon);
 import * as DashboardValue from "pb_dashboard_value/docs";
 WebpackerReact.setup (DashboardValue);
 
+import * as TitleCount from "pb_title_count/docs";
+WebpackerReact.setup (TitleCount);
+
 import * as User from "pb_user/docs";
 WebpackerReact.setup (User);
 
