@@ -1,4 +1,4 @@
-import Table from "pb_table/_table.jsx";
+import Table from "../pb_table/_table.jsx";
 
 // Examples
 // import TableSm from "pb_table/docs/_table_sm.jsx";
