@@ -2,7 +2,7 @@ import { highchartsTheme } from './pbChartsLightTheme.js';
 
 
 (function(root, factory) {
-  const plugin_name = 'PBChart';
+  const plugin_name = 'pbChart';
 
   if (typeof define === 'function' && define.amd) {
     define([], factory(plugin_name));

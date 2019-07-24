@@ -1,4 +1,4 @@
-import pbHighcharts from "./pbHighcharts.js";
+import commonSettings from "../pb_dashboard/commonSettings.js";
 
 const sizeColumns = function(highchart) {
     let column = highchart.plotOptions.column;
@@ -17,7 +17,7 @@ const sizeColumns = function(highchart) {
 };
 
 const pbBarGraph = function(highchart) {
-  pbHighcharts(highchart);
+  commonSettings(highchart);
   sizeColumns(highchart);
 };
 
