@@ -51,6 +51,9 @@ WebpackerReact.setup (Icon);
 import * as DashboardValue from "pb_dashboard_value/docs";
 WebpackerReact.setup (DashboardValue);
 
+import * as ProgressSimple from "pb_progress_simple/docs";
+WebpackerReact.setup (ProgressSimple);
+
 import * as TitleCount from "pb_title_count/docs";
 WebpackerReact.setup (TitleCount);
 
