@@ -6,7 +6,7 @@
     ) %>
 <% content_for :pb_js do %>
   <%= javascript_tag do %>
-    new PBChart('.selector', {
+    new pbChart('.selector', {
       id: "<%= object.id %>",
       chartData: <%= object.chart_data %>,
       type: "<%= object.chart_type %>",

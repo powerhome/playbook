@@ -1,5 +1,5 @@
-import colors from "../../tokens/_colors.scss";
-import typography from "../../tokens/_typography.scss";
+import colors from "../tokens/_colors.scss"
+import typography from "../tokens/_typography.scss";
 
 const applyCustomColors = function(highchart) {
   var data_colors = [
@@ -74,11 +74,11 @@ const styleLegend = function(highchart) {
 };
 
 // Exportable Global Styles Function
-const pbHighcharts = function(highchart) {
+const commonSettings = function(highchart) {
   applyCustomColors(highchart);
   styleAxis(highchart);
   styleChartContainer(highchart);
   styleLegend(highchart);
 };
 
-export default pbHighcharts;
+export default commonSettings;

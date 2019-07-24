@@ -1,4 +1,4 @@
-import pbHighcharts from "./pbHighcharts.js"
+import commonSettings from "../pb_dashboard/commonSettings.js";
 
 const markerStyles = function(highchart){
   highchart.plotOptions.line.marker.enabled = true;
@@ -8,7 +8,7 @@ const markerStyles = function(highchart){
 }
 
 const pbLineGraph = function(highchart) {
-  pbHighcharts(highchart);
+  commonSettings(highchart);
   markerStyles(highchart);
 };
 
