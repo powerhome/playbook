@@ -1,0 +1,30 @@
+@import "../tokens/typography";
+@import "../tokens/spacing";
+
+[class^=pb_icon_value] {
+  display: flex;
+  align-items: center;
+
+  [class^=pb_body] {
+    font-size: $font-small !important;
+    display: inline-flex;
+    justify-content: flex-start;
+    align-items: center;
+
+    [class*=pb_icon] {
+      font-size: $font-large !important;
+      margin-right: $space-xs !important;
+      flex-shrink: 0;
+    }
+  }
+
+  &[class*=_left] {
+    justify-content: flex-start;
+  }
+  &[class*=_center] {
+    justify-content: center;
+  }
+  &[class*=_right] {
+    justify-content: flex-end;
+  }
+}

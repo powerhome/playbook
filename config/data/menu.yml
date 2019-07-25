@@ -14,6 +14,13 @@ kits:
   - icon
   - table
   - dashboard_value
+  - date
+  - title_detail
+  - icon_circle
+  - icon_value
+  - star_rating
+  - progress_simple
+  - title_count
   - user
   - label_value
   - message

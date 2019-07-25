@@ -61,7 +61,7 @@ module Playbook
       end
 
       def display_value
-        pb_icon_element = Playbook::PbBody::Body.new(status: status) do |_x|
+        pb_icon_element = Playbook::PbBody::Body.new(status: status) do
           display_icon +
             value
         end
