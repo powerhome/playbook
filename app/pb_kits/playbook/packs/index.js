@@ -16,16 +16,16 @@ import List from "../pb_list/_list";
 import Message from "../pb_message/_message";
 import OnlineStatus from "../pb_online_status/_online_status";
 import Table from "../pb_table/_table";
-import TimeStamp from "../pb_time_stamp/_time_stamp";
+import TimeStamp from "../pb_time_stamp/_timestamp";
 import Title from "../pb_title/_title";
 import User from "../pb_user/_user";
 import VerticalNav from "../pb_vertical_nav/_vertical_nav";
 
 // Dashboard Settings
-import commonSettings from "./app/pb_kits/playbook/pb_dashboard/commonSettings";
-import lineGraphSettings from "./app/pb_kits/playbook/pb_line_graph/lineGraphSettings";
-import barGraphSettings from "./app/pb_kits/playbook/pb_bar_graph/barGraphSettings";
-import dashboardValueSettings from "./app/pb_kits/playbook/pb_dashboard_value/dashboardValueSettings";
+import commonSettings from "../pb_dashboard/commonSettings";
+import lineGraphSettings from "../pb_line_graph/lineGraphSettings";
+import barGraphSettings from "../pb_bar_graph/barGraphSettings";
+import dashboardValueSettings from "../pb_dashboard_value/dashboardValueSettings";
 
 // All Exports for Consumption in Nitro
 export {
