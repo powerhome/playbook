@@ -16,7 +16,7 @@ import List from "../pb_list/_list";
 import Message from "../pb_message/_message";
 import OnlineStatus from "../pb_online_status/_online_status";
 import Table from "../pb_table/_table";
-import TimeStamp from "../pb_time_stamp/_timestamp";
+import TimeStamp from "../pb_timestamp/_timestamp";
 import Title from "../pb_title/_title";
 import User from "../pb_user/_user";
 import VerticalNav from "../pb_vertical_nav/_vertical_nav";
