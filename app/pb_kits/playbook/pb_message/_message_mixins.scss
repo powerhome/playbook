@@ -1,3 +1,5 @@
+@import "../tokens/spacing";
+
 @mixin pb_message {
   display: flex;
   justify-content: flex-start;
