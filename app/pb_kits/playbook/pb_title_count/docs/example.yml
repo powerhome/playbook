@@ -1,0 +1,9 @@
+examples:
+
+  rails:
+  - title_count_default: Default
+  - title_count_align: Align
+
+
+  react:
+  - title_count_default: Default
