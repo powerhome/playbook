@@ -1,0 +1,9 @@
+examples:
+  
+  rails:
+  - date_default: Default
+  
+  
+  react:
+  - date_default: Default
+  

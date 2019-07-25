@@ -1,0 +1,25 @@
+# Use this file to configure the Overcommit hooks you wish to use. This will
+# extend the default configuration defined in:
+# https://github.com/brigade/overcommit/blob/master/config/default.yml
+
+verify_signatures: false
+
+PreCommit:
+  RuboCop:
+    enabled: true
+    on_warn: fail
+    problem_on_unmodified_line: ignore
+    command: ['bundle', 'exec', 'rubocop']
+
+CommitMsg:
+  CapitalizedSubject:
+    enabled: false
+
+  SingleLineSubject:
+    enabled: false
+
+  TextWidth:
+    enabled: false
+
+  TrailingPeriod:
+    enabled: false

@@ -1,0 +1,12 @@
+examples:
+
+  rails:
+  - progress_simple_default: Default
+  - progress_simple_value: Setting Values
+  - progress_simple_width: Progress Bar Width
+  - progress_simple_muted: Muted
+  - progress_simple_align: Align
+
+
+  react:
+  - progress_simple_default: Default
