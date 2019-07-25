@@ -27,12 +27,3 @@ import "./pb_label_value.js";
 import "./pb_message.js";
 import "./pb_timestamp.js";
 import "./pb_online_status.js";
-
-
-// // Dashboard Settings
-// import commonSettings from "../pb_dashboard/commonSettings.js";
-// import lineGraphSettings from "../pb_line_graph/lineGraphSettings.js";
-// import barGraphSettings from "../pb_bar_graph/barGraphSettings.js";
-// import dashboardValueSettings from "../pb_dashboard_value/dashboardValueSettings.js";
-
-// export { commonSettings, lineGraphSettings, barGraphSettings, dashboardValueSettings };
