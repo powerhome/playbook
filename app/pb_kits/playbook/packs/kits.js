@@ -12,6 +12,7 @@ import "./pb_input.js";
 import "./pb_bar_graph.js";
 import "./pb_icon.js";
 import "./pb_dashboard_value.js";
+import "./pb_icon_value.js";
 import "./pb_star_rating.js";
 import "./pb_progress_simple.js";
 import "./pb_title_count.js";
