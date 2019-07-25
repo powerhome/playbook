@@ -1,0 +1,9 @@
+examples:
+  
+  rails:
+  - title_detail_default: Default
+  
+  
+  react:
+  - title_detail_default: Default
+  
