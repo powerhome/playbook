@@ -1,0 +1,10 @@
+examples:
+
+  rails:
+  - icon_circle_default: Default
+  - icon_circle_sizes: Size
+  - icon_circle_color: Color
+
+
+  react:
+  - icon_circle_default: Default
