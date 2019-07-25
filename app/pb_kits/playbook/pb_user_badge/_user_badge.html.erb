@@ -1,0 +1,8 @@
+<%= content_tag(:div,
+    id: object.id,
+    data: object.data,
+    class: object.classname(object.kit_class)) do %>
+  <%= content_tag(:div, class: "pb__user_badge_wrapper") do %>
+    <%= render partial: object.display_badge %>
+  <% end %>
+<% end %>
