@@ -54,6 +54,9 @@ WebpackerReact.setup (DashboardValue);
 import * as Time from "pb_time/docs";
 WebpackerReact.setup (Time);
 
+import * as Pill from "pb_pill/docs";
+WebpackerReact.setup (Pill);
+
 import * as UserBadge from "pb_user_badge/docs";
 WebpackerReact.setup (UserBadge);
 

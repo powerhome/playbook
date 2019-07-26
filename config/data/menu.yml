@@ -15,6 +15,7 @@ kits:
   - table
   - dashboard_value
   - time
+  - pill
   - user_badge
   - date
   - title_detail
