@@ -1,0 +1,9 @@
+examples:
+
+  rails:
+  - user_badge_default: Default
+  - user_badge_size: Sizes
+
+
+  react:
+  - user_badge_default: Default

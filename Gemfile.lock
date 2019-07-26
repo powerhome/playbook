@@ -67,6 +67,8 @@ GEM
       debug_inspector (>= 0.0.1)
     builder (3.2.3)
     byebug (11.0.0)
+    childprocess (1.0.1)
+      rake (< 13.0)
     coderay (1.1.2)
     concurrent-ruby (1.1.4)
     crass (1.0.4)
@@ -80,6 +82,7 @@ GEM
       railties (>= 5.0)
     i18n (1.5.3)
       concurrent-ruby (~> 1.0)
+    iniparse (1.4.4)
     jaro_winkler (1.5.3)
     listen (3.1.5)
       rb-fsevent (~> 0.9, >= 0.9.4)
@@ -100,6 +103,9 @@ GEM
     nio4r (2.3.1)
     nokogiri (1.10.1)
       mini_portile2 (~> 2.4.0)
+    overcommit (0.49.0)
+      childprocess (>= 0.6.3, < 2.0)
+      iniparse (~> 1.4)
     parallel (1.17.0)
     parser (2.6.3.0)
       ast (~> 2.4.0)
@@ -218,6 +224,7 @@ DEPENDENCIES
   binding_of_caller
   byebug
   health_check
+  overcommit (= 0.49.0)
   pg (~> 0.18)
   playbook_ui!
   rainbow (= 2.2.2)
