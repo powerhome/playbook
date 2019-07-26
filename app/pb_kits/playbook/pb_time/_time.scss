@@ -10,6 +10,10 @@
     font-size: $font-small;
     font-weight: $regular;
     color: $text-lt-light;
+
+    &::before {
+      content: " ";
+    }
   }
 
   &[class*=_lg] {

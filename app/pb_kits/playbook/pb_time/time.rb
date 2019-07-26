@@ -1,5 +1,8 @@
 # frozen_string_literal: true
 
+include ActionView::Helpers::TagHelper
+include ActionView::Context
+
 module Playbook
   module PbTime
     class Time < Playbook::PbKit::Base
@@ -76,7 +79,9 @@ module Playbook
       end
 
       def timezone
-        "<span class='pb__time_timezone'>#{timezone_abbr}</span>".html_safe
+        content_tag(:span, class: "pb__time_timezone") do
+          timezone_abbr
+        end
       end
 
       def size
@@ -90,7 +95,12 @@ module Playbook
       end
 
       def text
-        "<span>#{format_time_string}</span> #{timezone}".html_safe
+        content_tag(:time, datetime: timestamp.iso8601) do
+          content_tag(:span) do
+            format_time_string
+          end +
+            timezone
+        end
       end
 
       def display_value_sm
@@ -107,7 +117,7 @@ module Playbook
         if is_set? configured_timestamp
           title_props = {
             size: 3,
-            text: "#{format_time_string} #{timezone}".html_safe,
+            text: text,
           }
           pb_value_lg = Playbook::PbTitle::Title.new(title_props)
           ApplicationController.renderer.render(partial: pb_value_lg, as: :object)
