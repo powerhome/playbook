@@ -143,6 +143,14 @@ $status_colors: (
   neutral:            $neutral
 );
 
+$status_color_text: (
+  success:            $success,
+  warning:            darken($warning, 10%),
+  error:              $error,
+  info:               $info,
+  neutral:            darken($neutral, 10%)
+);
+
 // Link colors ------------------------
 $primary_action:      $primary;
 $primary_action_dk:   $blue;
