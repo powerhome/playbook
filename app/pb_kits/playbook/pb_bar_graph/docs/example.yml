@@ -1,0 +1,9 @@
+examples:
+  
+  rails:
+  - bar_graph_default: Default
+  
+  
+  react:
+  - bar_graph_default: Default
+  
