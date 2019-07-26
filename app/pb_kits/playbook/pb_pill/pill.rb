@@ -22,7 +22,9 @@ module Playbook
       end
 
       def display_text
-        pb_text = Playbook::PbTitle::Title.new(size: 4, text: text)
+        pb_text = Playbook::PbBody::Body.new do
+          text
+        end
         ApplicationController.renderer.render(partial: pb_text, as: :object)
       end
 

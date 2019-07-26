@@ -1,6 +1,5 @@
 @import "../tokens/spacing";
 @import "../tokens/colors";
-@import "../tokens/typography";
 @import "../tokens/opacity";
 
 $pb_pill_height: 22px;
@@ -13,20 +12,12 @@ $pb_pill_height: 22px;
   height: $pb_pill_height;
   border-radius: $pb_pill_height/2;
 
-  [class^=pb_title] {
-    &[class*=_4] {
-      font-size: $text-small !important;
-    }
-  }
-
   @each $color_name, $color_value in $status_color_text {
     &[class*=_#{$color_name}]  {
       background: rgba($color_value, $opacity-1);
 
-      [class^=pb_title] {
-        &[class*=_4] {
-          color: $color_value !important;
-        }
+      [class^=pb_body] {
+        color: $color_value !important;
       }
     }
   }

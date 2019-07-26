@@ -145,10 +145,10 @@ $status_colors: (
 
 $status_color_text: (
   success:            $success,
-  warning:            darken($warning, 5%),
+  warning:            darken($warning, 10%),
   error:              $error,
   info:               $info,
-  neutral:            darken($neutral, 5%)
+  neutral:            darken($neutral, 10%)
 );
 
 // Link colors ------------------------
