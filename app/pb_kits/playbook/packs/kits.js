@@ -12,6 +12,7 @@ import "./pb_input.js";
 import "./pb_bar_graph.js";
 import "./pb_icon.js";
 import "./pb_dashboard_value.js";
+import "./pb_time.js";
 import "./pb_pill.js";
 import "./pb_user_badge.js";
 import "./pb_date.js";
