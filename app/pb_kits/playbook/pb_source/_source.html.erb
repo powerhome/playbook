@@ -1,0 +1,18 @@
+<%= content_tag(:div,
+    id: object.id,
+    data: object.data,
+    class: object.classname("pb_source")) do %>
+  <div class="pb__source_layout">
+    <% if object.hide_icon == false %>
+      <%= object.type_icon %>
+      <%= object.avatar %>
+    <% end %>
+    <div class="pb__source_content">
+      <%= object.source %>
+      <div class="pb__source_value">
+        <%= object.type_text %>
+        <%= object.user_id %>
+      </div>
+    </div>
+  </div>
+<% end %>
