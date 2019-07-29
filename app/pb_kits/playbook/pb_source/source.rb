@@ -52,7 +52,7 @@ module Playbook
 
       def avatar
         if is_set?(configured_user) && (type == "user" || type == "referral")
-          avatar_props = configured_user
+          avatar_props = configured_user.clone
           avatar_props[:size] = "sm"
           avatar_props.delete(:user_id)
           pb_avatar = Playbook::PbAvatar::Avatar.new(avatar_props)
