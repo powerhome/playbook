@@ -28,7 +28,7 @@ module Playbook
       end
 
       def source
-        pb_source_title = Playbook::PbTitle::Title.new(size: 4, text: configured_source.upcase)
+        pb_source_title = Playbook::PbTitle::Title.new(size: 4, text: configured_source)
         ApplicationController.renderer.render(partial: pb_source_title, as: :object)
       end
 
