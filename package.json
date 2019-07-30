@@ -1,6 +1,6 @@
 {
   "name": "playbook-ui",
-  "version": "2.7.2",
+  "version": "2.8.0",
   "description": "Nitro UI Styleguide + React component dev env",
   "main": "./app/pb_kits/playbook/packs/index.js",
   "scripts": {
