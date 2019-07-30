@@ -3,6 +3,7 @@ $font_family_base: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_seri
 
 
 // CLEAN UP AND REMOVE
+$font_big_jumbo:    48px;
 $font_jumbo:        36px;
 $font_largest:      32px;
 $font_larger:       28px;
@@ -16,6 +17,7 @@ $font_smaller:      12px;
 $font_smallest:     11px;
 
 
+$text_big_jumbo:    $font_big_jumbo;
 $text_jumbo:        $font_jumbo;
 $text_largest:      $font_largest;
 $text_larger:       $font_larger;
@@ -67,6 +69,7 @@ $lighter:       100;
 
 :export {
   font_family_base: $font_family_base;
+  text_big_jumbo: $text_big_jumbo;
   text_jumbo: $text_jumbo;
   text_largest: $text_largest;
   text_larger: $text_larger;
@@ -82,6 +85,7 @@ $lighter:       100;
   heading_2: $heading_2;
   heading_3: $heading_3;
   heading_4: $heading_4;
+  lighter: $lighter;
   light: $light;
   bold: $bold;
   regular: $regular;
