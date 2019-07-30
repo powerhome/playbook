@@ -1,37 +1,17 @@
-@import "../tokens/colors";
-@import "../tokens/typography";
-@import "../tokens/line_height";
+@import "./body_mixins";
 
-.body {
+[class^=pb_body]{
+  @include pb_body;
 
-  $selectors: (
-    "&",
-    "&_light",
-    "&_lighter",
-    "&_dark",
-    "&_light_dark",
-    "&_lighter_dark",
-  );
-
-  @each $selector in $selectors {
-    #{$selector} {
-      margin: 0;
-      line-height: $lh_tight;
-      @if $selector == "&_dark" {
-        color: $text_dk_default;
-      } @else if $selector == "&_light" {
-        color: $text_lt_light;
-      } @else if $selector == "&_lighter" {
-        color: $text_lt_lighter;
-      } @else if $selector == "&_light_dark" {
-        color: $text_dk_light;
-      } @else if $selector == "&_lighter_dark" {
-        color: $text_dk_lighter;
-      } @else {
-        color: $text_lt_default;
-      }
-
+  @each $color_name, $color_value in $pb_body_colors {
+    &[class*=_#{$color_name}] {
+      @include pb_body($color_value);
     }
   }
 
+  @each $status_name, $status_value in $pb_body_status {
+    &[class*=_#{$status_name}] {
+      @include pb_body($status_value);
+    }
+  }
 }

@@ -6,13 +6,13 @@
 @import "../tokens/transition";
 @import "../tokens/typography";
 
-$pb_button-size: 40px;
+$pb_button_size: 40px;
 $pb_button_v_padding: 7px;
 $pb_button_h_padding: 34px;
 $pb_button_hover_darken: 4%;
 $pb_button_border_width: 1px;
 
-@mixin pb_button($bg: $primary_action, $color: $text_dk_default) {
+@mixin pb_button($bg: $primary_action, $color: $text_dk_default, $border: transparent) {
   text-rendering: optimizeLegibility;
   font-size: $font_small;
   font-weight: $regular;
@@ -20,10 +20,10 @@ $pb_button_border_width: 1px;
   vertical-align: middle;
   text-transform: none;
   border-width: $pb_button_border_width;
-  border-color: transparent;
+  border-color: $border;
   border-style: solid;
   border-radius: $border_rad_light;
-  min-height: $pb_button-size;
+  min-height: $pb_button_size;
   line-height: 1.5;
   padding: $pb_button_v_padding $pb_button_h_padding;
   cursor: pointer;
@@ -37,6 +37,14 @@ $pb_button_border_width: 1px;
   justify-content: center;
   flex-basis: auto;
   width: fit-content;
+
+  .loading-icon {
+    position: absolute;
+    display: none;
+  }
+  .pb_button_content {
+    visibility: visible;
+  }
 
   &:hover {
     outline: none;
@@ -65,8 +73,7 @@ $pb_button_border_width: 1px;
 
 // Secondary ====================
 @mixin pb_button_secondary {
-  $secondary_bg: rgba($secondary_action, $opacity_2);
-  @include pb_button($secondary_bg, $secondary_action);
+  @include pb_button($white, $primary_action, $primary_action);
 
   &:hover {
     @include pb_button_hover(rgba($secondary_action, $opacity_3));
@@ -94,4 +101,16 @@ $pb_button_border_width: 1px;
   display: flex;
   flex-basis: 100%;
   width: 100%;
+}
+
+// Loading =====================
+@mixin pb_button_loading($loading: false) {
+  @if $loading == true {
+    .loading-icon {
+      display: block;
+    }
+    .pb_button_content {
+      visibility: hidden;
+    }
+  }
 }

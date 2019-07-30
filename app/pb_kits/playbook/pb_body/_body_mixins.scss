@@ -1,0 +1,53 @@
+@import "../tokens/colors";
+@import "../tokens/line_height";
+
+$pb_body_colors: (
+  default:        $text_lt_default,
+  light:          $text_lt_light,
+  lighter:        $text_lt_lighter,
+  dark:           $text_dk_default,
+  light_dark:     $text_dk_light,
+  lighter_dark:   $text_dk_lighter,
+);
+
+$pb_body_status: (
+  default:        $text_lt_default,
+  negative:       $error,
+  positive:       $success,
+);
+
+@mixin pb_body($color: $text_lt_default) {
+  margin: 0;
+  line-height: $lh_tight;
+  color: $color;
+}
+
+// Colors ======================
+@mixin pb_body_light {
+  @include pb_body($text_lt_light);
+}
+
+@mixin pb_body_lighter {
+  @include pb_body($text_lt_lighter);
+}
+
+@mixin pb_body_dark {
+  @include pb_body($text_dk_default);
+}
+
+@mixin pb_body_light_dark {
+  @include pb_body($text_dk_light);
+}
+
+@mixin pb_body_lighter_dark {
+  @include pb_body($text_dk_lighter);
+}
+
+// Statuses =====================
+@mixin pb_body_negative {
+  @include pb_body($error);
+}
+
+@mixin pb_body_positive {
+  @include pb_body($success);
+}

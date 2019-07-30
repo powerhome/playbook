@@ -42,5 +42,56 @@ WebpackerReact.setup (avatar);
 import * as input from "pb_input/docs";
 WebpackerReact.setup (input);
 
+import * as BarGraph from "pb_bar_graph/docs";
+WebpackerReact.setup (BarGraph);
+
 import * as Icon from "pb_icon/docs";
 WebpackerReact.setup (Icon);
+
+import * as DashboardValue from "pb_dashboard_value/docs";
+WebpackerReact.setup (DashboardValue);
+
+import * as Time from "pb_time/docs";
+WebpackerReact.setup (Time);
+
+import * as Pill from "pb_pill/docs";
+WebpackerReact.setup (Pill);
+
+import * as UserBadge from "pb_user_badge/docs";
+WebpackerReact.setup (UserBadge);
+
+import * as Date from "pb_date/docs";
+WebpackerReact.setup (Date);
+
+import * as TitleDetail from "pb_title_detail/docs";
+WebpackerReact.setup (TitleDetail);
+
+import * as IconCircle from "pb_icon_circle/docs";
+WebpackerReact.setup (IconCircle);
+
+import * as IconValue from "pb_icon_value/docs";
+WebpackerReact.setup (IconValue);
+
+import * as StarRating from "pb_star_rating/docs";
+WebpackerReact.setup (StarRating);
+
+import * as ProgressSimple from "pb_progress_simple/docs";
+WebpackerReact.setup (ProgressSimple);
+
+import * as TitleCount from "pb_title_count/docs";
+WebpackerReact.setup (TitleCount);
+
+import * as User from "pb_user/docs";
+WebpackerReact.setup (User);
+
+import * as LabelValue from "pb_label_value/docs";
+WebpackerReact.setup (LabelValue);
+
+import * as Message from "pb_message/docs";
+WebpackerReact.setup (Message);
+
+import * as Timestamp from "pb_timestamp/docs";
+WebpackerReact.setup (Timestamp);
+
+import * as OnlineStatus from "pb_online_status/docs";
+WebpackerReact.setup (OnlineStatus);

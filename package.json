@@ -2,18 +2,12 @@
   "name": "playbook-ui",
   "version": "2.8.0",
   "description": "Nitro UI Styleguide + React component dev env",
-  "main": "components/index.js",
+  "main": "./app/pb_kits/playbook/packs/index.js",
   "scripts": {
-    "storybook": "yarn run applicationcss && start-storybook -p 9001 -c .storybook -s ./public",
     "test": "echo \"Error: no test specified\" && exit 1",
     "flow": "flow",
-    "deploy": "storybook-to-ghpages",
-    "build-storybook": "build-storybook -s public -o .out",
     "lint": "./node_modules/eslint/bin/eslint.js . --ext .js,.jsx",
-    "lint-fix": "./node_modules/eslint/bin/eslint.js . --ext .js,.jsx --fix",
-    "applicationcss:watch": "node-sass -w ./sass-mixins/application.scss --include-path=components -o ./public",
-    "applicationcss": "node-sass ./sass-mixins/application.scss --include-path=components -o ./public",
-    "powerbuilder": "webpack --config .storybook/powuhbuilda.webpack.config.js"
+    "lint-fix": "./node_modules/eslint/bin/eslint.js . --ext .js,.jsx --fix"
   },
   "repository": {
     "type": "git",
@@ -65,7 +59,7 @@
     "flow-bin": "0.54.1",
     "flow-runtime": "0.14.0",
     "lazysizes": "^4.1.6",
-    "lodash": "4.17.11",
+    "lodash": "4.17.13",
     "lqip.macro": "^0.1.5",
     "moment-timezone": "0.5.13",
     "node-sass": "^4.12.0",

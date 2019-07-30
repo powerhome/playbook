@@ -1,15 +1,17 @@
+# frozen_string_literal: true
+
 module Playbook
   module PbLayout
     class Body < Playbook::PbKit::Base
-      PROPS = [:configured_classname,
-          :configured_data,
-          :configured_id,
-          :block].freeze
+      PROPS = %i[configured_classname
+                 configured_data
+                 configured_id
+                 block].freeze
 
       def initialize(classname: default_configuration,
-                  data: default_configuration,
-                  id: default_configuration,
-                  &block)
+                     data: default_configuration,
+                     id: default_configuration,
+                     &block)
         self.configured_classname = classname
         self.configured_data = data
         self.configured_id = id

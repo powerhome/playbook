@@ -1,0 +1,19 @@
+<%= content_tag(:div, "",
+    aria: object.aria,
+    id: object.id,
+    data: object.data,
+    class: object.classname("pb_bar_graph")
+    ) %>
+<% content_for :pb_js do %>
+  <%= javascript_tag do %>
+    new pbChart('.selector', {
+      id: "<%= object.id %>",
+      chartData: <%= object.chart_data %>,
+      type: "<%= object.chart_type %>",
+      title: "<%= object.title %>",
+      subtitle: "<%= object.subtitle %>",
+      axisTitle: "<%= object.axis_title %>",
+      pointStart: <%= object.point_start %>,
+    });
+  <% end %>
+<% end %>

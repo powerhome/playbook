@@ -3,5 +3,10 @@
     data: object.data(initials: object.initials),
     class: object.classname(object.kit_class),
     aria: object.aria) do %>
-  <%= object.image %>
+  <%= content_tag(:div,
+      data: { initials: object.initials },
+      class: "avatar_wrapper") do %>
+    <%= object.image %>
+  <% end %>
+  <%= object.status %>
 <% end %>

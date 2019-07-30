@@ -1,0 +1,24 @@
+@import "../tokens/spacing";
+
+@mixin pb_message {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+
+  .content_wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: column;
+
+    .message_text {
+      margin: 0 0 $space-xs/2;
+    }
+  }
+
+  &[class*=_avatar]  {
+    .content_wrapper {
+      margin-left: $space-sm;
+    }
+  }
+}

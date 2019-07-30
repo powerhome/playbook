@@ -1,59 +1,63 @@
+# frozen_string_literal: true
+
 module Playbook
   module PbLineGraph
-    class LineGraph
-      PROPS = [:configured_class,
-          :configured_data,
-          :configured_title,
-          :configured_subtitle,
-          :configured_axis_title,
-          :configured_point_start].freeze
+    class LineGraph < Playbook::PbKit::Base
+      PROPS = %i[
+        configured_aria
+        configured_axis_title
+        configured_chart_data
+        configured_classname
+        configured_data
+        configured_gradient
+        configured_id
+        configured_point_start
+        configured_subtitle
+        configured_title
+      ].freeze
 
       def initialize(
-        class_name: default_configuration,
-        data: default_configuration,
-        title: default_configuration,
-        subtitle: default_configuration,
+        aria: default_configuration,
         axis_title: default_configuration,
-        point_start: default_configuration
+        chart_data: default_configuration,
+        classname: default_configuration,
+        data: default_configuration,
+        gradient: default_configuration,
+        id: default_configuration,
+        point_start: default_configuration,
+        subtitle: default_configuration,
+        title: default_configuration
       )
-        self.configured_class = class_name
-        self.configured_title = title
-        self.configured_subtitle = subtitle
+        self.configured_aria = aria
         self.configured_axis_title = axis_title
+        self.configured_chart_data = chart_data
+        self.configured_classname = classname
         self.configured_data = data
+        self.configured_gradient = gradient
+        self.configured_id = id
         self.configured_point_start = point_start
+        self.configured_subtitle = subtitle
+        self.configured_title = title
       end
 
-      def class_name
-        if configured_class == default_configuration
-          ""
-        else
-          configured_class
-        end
+      def gradient
+        is_true? configured_gradient
+      end
+
+      def chart_type
+        gradient == true ? "area" : "line"
       end
 
       def title
-        if configured_title == default_configuration
-          ""
-        else
-          configured_title
-        end
+        default_value(configured_title, "")
       end
 
       def subtitle
-        if configured_subtitle == default_configuration
-          ""
-        else
-          configured_subtitle
-        end
+        default_value(configured_subtitle, "")
       end
 
       def axis_title
-        if configured_axis_title == default_configuration
-          ""
-        else
-          configured_axis_title
-        end
+        default_value(configured_axis_title, "")
       end
 
       def to_partial_path
@@ -61,27 +65,11 @@ module Playbook
       end
 
       def point_start
-        if configured_point_start == default_configuration
-          "2012"
-        else
-          configured_point_start
-        end
+        default_value(configured_point_start, "")
       end
 
-      def data
-        if configured_data == default_configuration
-          data = [{
-              name: 'Installation',
-              data: [43934, 52503, 57177, 69658, 97031, 119931, 137133, 154175]
-          }]
-          return data.to_json.html_safe
-        else
-          configured_data.to_json.html_safe
-        end
-      end
-
-      def self.options
-        new_hash = PROPS.map { |e| e.to_s.remove("configured_") }
+      def chart_data
+        adjusted_value(configured_chart_data, configured_chart_data.to_json.html_safe, {})
       end
 
     private

@@ -1,0 +1,25 @@
+@import "../tokens/colors";
+@import "../tokens/typography";
+
+[class^=pb_time] {
+  [class^=pb_body] {
+    font-weight: $bold !important;
+  }
+
+  [class^=pb__time_timezone] {
+    font-size: $font-small;
+    font-weight: $regular;
+    color: $text-lt-light;
+
+    &::before {
+      content: " ";
+    }
+  }
+
+  &[class*=_lg] {
+    [class^=pb__time_timezone] {
+      font-size: $font-large !important;
+      color: $text-lt-light;
+    }
+  }
+}

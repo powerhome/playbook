@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "webpacker"
 
 namespace :playbook do
@@ -10,14 +12,14 @@ namespace :playbook do
     end
 
     desc "Compile JavaScript packs using webpack for production with digests"
-    task compile: [:yarn_install, :environment] do
+    task compile: %i[yarn_install environment] do
       ::Webpacker.with_node_env("production") do
-          if Playbook.webpacker.commands.compile
-            # Successful compilation!
-          else
-            # Failed compilation
-            exit!
-          end
+        if Playbook.webpacker.commands.compile
+          # Successful compilation!
+        else
+          # Failed compilation
+          exit!
+        end
       end
     end
   end

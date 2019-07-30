@@ -1,3 +1,5 @@
+@import "../../tokens/colors";
+
 [class^=pb_table] {
   @each $name, $value in $cell-pad-list {
     &.#{$name} {
