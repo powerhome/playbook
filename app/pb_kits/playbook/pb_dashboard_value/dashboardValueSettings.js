@@ -24,11 +24,11 @@ const pbIndicator = {
   },
   value: {
     fontFamily: typography.font_family_base,
-    color: colors.charcoal,
+    color: colors.text_lt_default,
     fontWeight: typography.lighter,
     fontSizes: {
-      big: typography.text_big_jumbo,
-      medium: typography.text_big_jumbo,
+      big: typography.heading_1,
+      medium: typography.heading_1,
       small: typography.text_base,
       micro: typography.text_small
     }
