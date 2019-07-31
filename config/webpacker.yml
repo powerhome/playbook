@@ -53,6 +53,7 @@ default: &default
 development:
   <<: *default
   compile: true
+  webpack_compile_output: true
 
   # Verifies that versions and hashed value of the package contents in the project's package.json
   check_yarn_integrity: true

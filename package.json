@@ -1,8 +1,8 @@
 {
   "name": "playbook-ui",
-  "version": "2.7.2",
-  "description": "Nitro UI Styleguide + React component dev env",
-  "main": "index.js",
+  "version": "2.8.0",
+  "description": "Nitro's Design System",
+  "main": "./app/pb_kits/playbook/packs/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "flow": "flow",
