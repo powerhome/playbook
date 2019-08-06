@@ -1,5 +1,5 @@
 [include]
-.*/components
+.*/pb_kits
 
 [ignore]
 # Ignore invalid JSON file; see https://github.com/dylang/changelog/pull/30
