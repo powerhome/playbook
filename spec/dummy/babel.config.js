@@ -40,7 +40,7 @@ module.exports = function(api) {
           development: isDevelopmentEnv || isTestEnv
         }
       ],
-      '@babel/flow'
+      '@babel/preset-flow'
     ].filter(Boolean),
     plugins: [
       require('babel-plugin-macros'),
