@@ -90,6 +90,8 @@ class KitGenerator < Rails::Generators::NamedBase
 
       # Create kit example.yml
       template "kit_example_yml.erb", "#{full_kit_directory}/docs/example.yml"
+
+      `rubocop --safe-auto-correct #{full_kit_directory}`
     end
   end
 end
