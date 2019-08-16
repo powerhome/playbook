@@ -1,3 +1,6 @@
+require "action_view"
+include ActionView::Helpers::NumberHelper
+
 module Playbook
   module PbPhone
     class Phone < Playbook::PbKit::Base
@@ -31,10 +34,14 @@ module Playbook
 
       def number
         if is_set? configured_number
-          if configured_number =~ /^(\d{3})(\d{3})(\d{4})$/
-            return "(#{$1}) #{$2}-#{$3}"
+          if formatted_number
+            return number_to_phone(formatted_number, area_code: true)
           end
         end
+      end
+
+      def formatted_number
+        configured_number.to_s.gsub(/\D/, "")
       end
 
       def value
