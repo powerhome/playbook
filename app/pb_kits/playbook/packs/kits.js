@@ -27,4 +27,3 @@ import "./pb_label_value.js";
 import "./pb_message.js";
 import "./pb_timestamp.js";
 import "./pb_online_status.js";
-import "./pb_owner.js";

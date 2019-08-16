@@ -95,6 +95,3 @@ WebpackerReact.setup (Timestamp);
 
 import * as OnlineStatus from "pb_online_status/docs";
 WebpackerReact.setup (OnlineStatus);
-
-import * as Owner from "pb_owner/docs";
-WebpackerReact.setup (Owner);
