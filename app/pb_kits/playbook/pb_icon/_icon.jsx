@@ -19,3 +19,4 @@ class Icon extends React.Component {
 Icon.propTypes = propTypes;
 
 export default Icon;
+export default Owner;

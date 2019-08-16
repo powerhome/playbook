@@ -31,3 +31,4 @@ Title.propTypes = propTypes;
 Title.defaultProps = defaultProps;
 
 export default Title;
+

@@ -104,3 +104,6 @@ WebpackerReact.setup (Phone);
 
 import * as OwnerPhone from "pb_owner_phone/docs";
 WebpackerReact.setup (OwnerPhone);
+
+import * as Owner from "pb_owner/docs";
+WebpackerReact.setup (Owner);
