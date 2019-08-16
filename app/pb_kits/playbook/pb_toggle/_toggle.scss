@@ -7,10 +7,6 @@ $toggle_sizes: (
   "sm": 50px,
   "md": 60px,
 );
-$toggle_state: (
-  "on": "on",
-  "off": "off"
-);
 
 [class^=pb_toggle] {
   position: relative;

@@ -2,7 +2,7 @@ examples:
 
   rails:
   - toggle_default: Sizes
-  - toggle_states: States
+  - toggle_checked: Default State
 
 
   react:
