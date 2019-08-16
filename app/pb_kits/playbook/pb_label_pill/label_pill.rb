@@ -28,7 +28,6 @@ module Playbook
           pb_caption = Playbook::PbCaption::Caption.new(text: configured_label, classname: "pb_label_pill_label")
         ApplicationController.renderer.render(partial: pb_caption, as: :object)
         end
-
       end
 
       def pill
