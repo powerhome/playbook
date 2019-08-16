@@ -20,7 +20,7 @@ class Title extends Component {
     const Tag = `${this.props.tag}`;
     const { size, dark, text } = this.props;
     return (
-      <Tag className={`heading_${size}` + (dark === true ? "_dark" : "")}>
+      <Tag className={`pb_title${size}` + (dark === true ? "_dark" : "")}>
         {text}
       </Tag>
     );

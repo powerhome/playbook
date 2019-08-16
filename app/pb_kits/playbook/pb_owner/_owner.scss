@@ -1,0 +1,11 @@
+@import "../pb_title/title";
+@import "../pb_body/body";
+@import "../tokens/spacing"
+
+.pb_owner {
+  display: flex;
+  align-items: baseline;
+  &_first {
+    margin: 0 ($space_xs - 4px) 0 0;
+  }
+}
