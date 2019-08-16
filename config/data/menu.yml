@@ -29,3 +29,4 @@ kits:
   - message
   - timestamp
   - online_status
+  - label_pill

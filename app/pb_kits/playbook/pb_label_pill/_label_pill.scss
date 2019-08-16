@@ -1,0 +1,8 @@
+.pb_label_pill {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  .pb_caption {
+    margin-right: $space-xs;
+  }
+}
