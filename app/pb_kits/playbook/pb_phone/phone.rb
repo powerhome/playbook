@@ -31,12 +31,14 @@ module Playbook
 
       def number
         if is_set? configured_number
-          configured_number
+          if configured_number =~ /^(\d{3})(\d{3})(\d{4})$/
+            return "(#{$1}) #{$2}-#{$3}"
+          end
         end
       end
 
       def value
-        pb_body = Playbook::PbBody::Body.new(classname: "phone") do
+        pb_body = Playbook::PbBody::Body.new(color: "light") do
           icon + number
         end
         ApplicationController.renderer.render(partial: pb_body, as: :object)
