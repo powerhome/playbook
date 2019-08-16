@@ -98,3 +98,6 @@ WebpackerReact.setup (OnlineStatus);
 
 import * as LabelPill from "pb_label_pill/docs";
 WebpackerReact.setup (LabelPill);
+
+import * as Phone from "pb_phone/docs";
+WebpackerReact.setup (Phone);

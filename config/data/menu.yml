@@ -30,3 +30,4 @@ kits:
   - timestamp
   - online_status
   - label_pill
+  - phone
