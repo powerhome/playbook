@@ -1,0 +1,61 @@
+@import "../tokens/colors";
+
+$color_checkbox_success: $data_1;
+$color_checkbox_default: $border_light;
+$transition: .2s cubic-bezier(0.95, 0.05, 0.795, 0.035);
+$toggle_sizes: (
+  "sm": 50px,
+  "md": 60px,
+);
+$toggle_state: (
+  "on": "on",
+  "off": "off"
+);
+
+[class^=pb_toggle] {
+  position: relative;
+
+  @each $name, $size in $toggle_sizes {
+    &[class*=_#{$name}] {
+
+      $width: $size;
+      $height: $width/2;
+
+      .pb_toggle_wrapper {
+        .pb_toggle_control {
+          transition: $transition;
+          width: $width;
+          height: $height;
+          display: block;
+          border-radius: $height;
+          border: 3px solid $color_checkbox_default;
+          background-color: $color_checkbox_default;
+          position: relative;
+          box-sizing: content-box;
+          &:after {
+            transition: $transition;
+            content: "";
+            width: $width/2;
+            height: $height;
+            display: block;
+            background-color: $white;
+            border-radius: 50%;
+            position: absolute;
+            top: 0;
+            left: 0;
+          }
+        }
+        input {
+          display: none;
+          &:checked + .pb_toggle_control {
+            border-color: $color_checkbox_success;
+            background-color: $color_checkbox_success;
+            &:after{
+              left: $width/2;
+            }
+          }
+        }
+      }
+    }
+  }
+}

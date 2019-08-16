@@ -1,0 +1,12 @@
+<%= content_tag(:div,
+    id: object.id,
+    data: object.data,
+    class: object.classname(object.kit_class),
+    ) do %>
+
+    <label class="pb_toggle_wrapper">
+      <input type="checkbox" <%= object.state %> />
+      <div class="pb_toggle_control"></div>
+    </label>
+
+<% end %>

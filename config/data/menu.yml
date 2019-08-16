@@ -33,3 +33,4 @@ kits:
   - phone
   - owner_phone
   - owner
+  - toggle

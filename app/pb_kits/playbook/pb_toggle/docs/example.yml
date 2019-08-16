@@ -1,0 +1,9 @@
+examples:
+
+  rails:
+  - toggle_default: Sizes
+  - toggle_states: States
+
+
+  react:
+  - toggle_default: Default
