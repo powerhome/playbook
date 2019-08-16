@@ -2,10 +2,6 @@
     id: object.id,
     data: object.data,
     class: object.classname("pb_owner")) do %>
-      <div class="owner_first">
-        <div> <%= object.first_name %> </div>
-      </div>
-      <div class="owner_last">
-        <div> <%= object.last_name %> </div>
-      </div>
+      <%= object.first_name %>
+      <%= object.last_name %>
 <% end %>
