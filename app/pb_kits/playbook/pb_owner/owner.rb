@@ -48,4 +48,3 @@ module Playbook
     end
   end
 end
-

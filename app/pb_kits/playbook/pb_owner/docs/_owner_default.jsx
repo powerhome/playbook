@@ -10,4 +10,3 @@ function OwnerDefault() {
 }
 
 export default OwnerDefault;
-
