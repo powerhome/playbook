@@ -101,3 +101,6 @@ WebpackerReact.setup (LabelPill);
 
 import * as Phone from "pb_phone/docs";
 WebpackerReact.setup (Phone);
+
+import * as OwnerPhone from "pb_owner_phone/docs";
+WebpackerReact.setup (OwnerPhone);
