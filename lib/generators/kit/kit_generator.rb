@@ -28,8 +28,10 @@ class KitGenerator < Rails::Generators::NamedBase
       @kit_class_val.push("self.configured_#{key.parameterize.underscore} = #{key.parameterize.underscore}")
     end
 
+    full_kit_directory = "app/pb_kits/playbook/pb_#{@kit_name_underscore}"
+
     # Check if kit already exists =======================
-    if File.directory?("app/pb_kits/playbook/pb_#{@kit_name_underscore}")
+    if File.directory?(full_kit_directory)
       say_status  "#{@kit_name_capitalize} kit already exists.",
                   "Please choose another name or manually make changes to the existing kit.",
                   :red
@@ -44,7 +46,7 @@ class KitGenerator < Rails::Generators::NamedBase
                   :green
 
       # Generate SCSS files ==============================
-      template "kit_scss.erb", "app/pb_kits/playbook/pb_#{@kit_name_underscore}/_#{@kit_name_underscore}.scss"
+      template "kit_scss.erb", "#{full_kit_directory}/_#{@kit_name_underscore}.scss"
       open("app/pb_kits/playbook/packs/site_styles/_kit_style_index.scss", "a") do |f|
         f.puts "@" + "import " + "\'" + "../../pb_#{@kit_name_underscore}/#{@kit_name_underscore}" + "\';"
       end
@@ -55,9 +57,9 @@ class KitGenerator < Rails::Generators::NamedBase
       # Ask user if Rails version should be generated ======
       if yes?("Create RAILS #{@kit_name_underscore} kit? (y/N)")
         @rails_kit = true
-        template "kit_ruby.erb", "app/pb_kits/playbook/pb_#{@kit_name_underscore}/#{@kit_name_underscore}.rb"
-        template "kit_html.erb", "app/pb_kits/playbook/pb_#{@kit_name_underscore}/_#{@kit_name_underscore}.html.erb"
-        template "kit_example_rails.erb", "app/pb_kits/playbook/pb_#{@kit_name_underscore}/docs/_#{@kit_name_underscore}_default.html.erb"
+        template "kit_ruby.erb", "#{full_kit_directory}/#{@kit_name_underscore}.rb"
+        template "kit_html.erb", "#{full_kit_directory}/_#{@kit_name_underscore}.html.erb"
+        template "kit_example_rails.erb", "#{full_kit_directory}/docs/_#{@kit_name_underscore}_default.html.erb"
         say_status  "complete",
                     "#{@kit_name_capitalize} rails kit successfully created.",
                     :green
@@ -66,9 +68,9 @@ class KitGenerator < Rails::Generators::NamedBase
       # Ask user if React version should be generated ======
       if yes?("Create REACT #{@kit_name_pascal} kit? (y/N)")
         @react_kit = true
-        template "kit_jsx.erb", "app/pb_kits/playbook/pb_#{@kit_name_underscore}/_#{@kit_name_underscore}.jsx"
-        template "kit_example_react.erb", "app/pb_kits/playbook/pb_#{@kit_name_underscore}/docs/_#{@kit_name_underscore}_default.jsx"
-        template "kit_js.erb", "app/pb_kits/playbook/pb_#{@kit_name_underscore}/docs/index.js"
+        template "kit_jsx.erb", "#{full_kit_directory}/_#{@kit_name_underscore}.jsx"
+        template "kit_example_react.erb", "#{full_kit_directory}/docs/_#{@kit_name_underscore}_default.jsx"
+        template "kit_js.erb", "#{full_kit_directory}/docs/index.js"
         template "kit_pack.erb", "app/pb_kits/playbook/packs/pb_#{@kit_name_underscore}.js"
 
         # Import in all kits.js  =========================
@@ -87,7 +89,9 @@ class KitGenerator < Rails::Generators::NamedBase
       end
 
       # Create kit example.yml
-      template "kit_example_yml.erb", "app/pb_kits/playbook/pb_#{@kit_name_underscore}/docs/example.yml"
+      template "kit_example_yml.erb", "#{full_kit_directory}/docs/example.yml"
+
+      `rubocop --safe-auto-correct #{full_kit_directory}`
     end
   end
 end
