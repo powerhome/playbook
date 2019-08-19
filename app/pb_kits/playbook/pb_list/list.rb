@@ -9,7 +9,7 @@ module Playbook
                  configured_data
                  configured_id
                  configured_layout
-                 configured_lg
+                 configured_size
                  configured_ordered
                  configured_xpadding
                  block].freeze
@@ -20,7 +20,7 @@ module Playbook
                      data: default_configuration,
                      id: default_configuration,
                      layout: default_configuration,
-                     lg: default_configuration,
+                     size: default_configuration,
                      ordered: default_configuration,
                      xpadding: default_configuration,
                      &block)
@@ -30,7 +30,7 @@ module Playbook
         self.configured_data = data
         self.configured_id = id
         self.configured_layout = layout
-        self.configured_lg = lg
+        self.configured_size = size
         self.configured_ordered = ordered
         self.configured_xpadding = xpadding
         self.block = block_given? ? block : nil
@@ -62,11 +62,12 @@ module Playbook
         end
       end
 
-      def lg
-        if configured_lg == default_configuration
+      def size
+        case configured_size
+        when default_configuration
           ""
-        elsif configured_lg == true
-          "_lg"
+        when "large"
+          "_large"
         end
       end
 
