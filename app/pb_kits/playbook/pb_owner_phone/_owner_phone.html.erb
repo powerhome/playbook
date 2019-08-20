@@ -1,0 +1,8 @@
+<%= content_tag(:div,
+    id: object.id,
+    data: object.data,
+    class: object.classname("pb_owner_phone")) do %>
+  <span><%= object.name %></span>
+    <span><%= object.icon %><%= object.number %></span>
+
+<% end %>
