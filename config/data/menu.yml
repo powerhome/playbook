@@ -32,3 +32,4 @@ kits:
   - label_pill
   - phone
   - owner_phone
+  - owner

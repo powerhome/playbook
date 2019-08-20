@@ -23,6 +23,7 @@ module Playbook
       end
 
       def icon
+        # TODO: Strict options and automaticlly pass the correct icon name
         if is_set? configured_icon
           icon_props = { icon: configured_icon, fixed_width: true}
           pb_icon = Playbook::PbIcon::Icon.new(icon_props)
