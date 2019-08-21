@@ -11,14 +11,15 @@ Gem::Specification.new do |s|
   s.email       = ["nitroux@powerhrg.com", "dev@powerhrg.com"]
   s.homepage    = "http://playbook.powerapp.cloud"
   s.summary     = "Playbook Design System"
-  s.description = "Playbook Design System"
+  s.description = "Playbook Design System. Built for Nitro, but powering all."
+  s.license     = 'MIT'
 
   s.files = Dir["{app,fonts,lib,stories}/**/*"] + ["Rakefile", "README.md"]
 
-  s.add_dependency "method_source", "~> 0.9.2"
+  s.add_dependency "method_source", "0.9.2"
   s.add_dependency "rails", ">= 5.1.6", "< 6.0"
   s.add_dependency "redcarpet", "3.4.0"
-  s.add_dependency "rouge", "~> 1.10.1"
+  s.add_dependency "rouge", "1.10.1"
   s.add_dependency "sassc-rails", "1.3.0"
   s.add_dependency "slim-rails", "3.2.0"
   s.add_dependency "sprockets-rails", "2.3.3"
