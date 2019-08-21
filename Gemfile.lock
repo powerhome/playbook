@@ -101,7 +101,7 @@ GEM
     mini_portile2 (2.4.0)
     minitest (5.11.3)
     nio4r (2.4.0)
-    nokogiri (1.10.1)
+    nokogiri (1.10.4)
       mini_portile2 (~> 2.4.0)
     overcommit (0.49.0)
       childprocess (>= 0.6.3, < 2.0)
