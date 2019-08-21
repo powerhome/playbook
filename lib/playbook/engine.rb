@@ -14,6 +14,7 @@ module Playbook
 
     config.assets.paths ||= []
     config.assets.paths << "#{Gem.loaded_specs['playbook_ui'].full_gem_path}/fonts"
+    config.assets.paths << "#{Gem.loaded_specs['playbook_ui'].full_gem_path}/app/pb_kits/playbook"
 
     config.sass.load_paths ||= []
     config.sass.load_paths << "#{Gem.loaded_specs['playbook_ui'].full_gem_path}/app/pb_kits/playbook"

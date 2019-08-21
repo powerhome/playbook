@@ -19,3 +19,4 @@ spec/dummy/tmp/
 spec/dummy/log/
 tmp/
 .vscode
+*.gem
