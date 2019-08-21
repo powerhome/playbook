@@ -4,38 +4,41 @@ module Playbook
       PROPS = [:configured_classname,
 					:configured_data,
 					:configured_id,
-          :configured_name,
+          :configured_first_name,
+          :configured_last_name,
           :configured_number,
           :configured_icon].freeze
 
       def initialize(classname: default_configuration,
 							data: default_configuration,
 							id: default_configuration,
-              name: default_configuration,
+              first_name: default_configuration,
+              last_name: default_configuration,
               number: default_configuration,
               icon: default_configuration)
         self.configured_classname = classname
 				self.configured_data = data
 				self.configured_id = id
-        self.configured_name = name
+        self.configured_first_name = first_name
+        self.configured_last_name = last_name
         self.configured_number = number
         self.configured_icon = icon
       end
 
       def icon
-       if is_set? configured_icon
-          icon_props = { icon: configured_icon, fixed_width: true }
-          pb_icon = Playbook::PbIcon::Icon.new(icon_props)
-          ApplicationController.renderer.render(partial: pb_icon, as: :object)
-        else
-          ""
+        if is_set? configured_icon
+          configured_icon
         end
       end
 
+      def phone
+        phone = Playbook::PbPhone::Phone.new({ icon: configured_icon, number: configured_number })
+        ApplicationController.renderer.render(partial: phone, as: :object)
+      end
+
       def name
-        if is_set? configured_name
-          configured_name
-        end
+        owner = Playbook::PbOwner::Owner.new({ first_name: configured_first_name, last_name: configured_last_name })
+        ApplicationController.renderer.render(partial: owner, as: :object)
       end
 
       def number

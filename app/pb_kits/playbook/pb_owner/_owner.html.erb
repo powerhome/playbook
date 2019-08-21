@@ -1,0 +1,7 @@
+<%= content_tag(:div,
+    id: object.id,
+    data: object.data,
+    class: object.classname("pb_owner")) do %>
+      <%= object.first_name %>
+      <%= object.last_name %>
+<% end %>
