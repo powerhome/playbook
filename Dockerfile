@@ -24,6 +24,7 @@ ADD Gemfile* *.gemspec /home/app/src/
 RUN bundle install --frozen
 
 ADD package.json yarn.lock /home/app/src/
+RUN yarn add --force node-sass
 RUN yarn install
 
 ADD --chown=app:app . /home/app/src
