@@ -9,11 +9,12 @@ $pb_card_body_padding:(
   xl: $space_xl,
 );
 
-[class^=pb_card_body]{
+[class^=pb__card_card_body]{
   flex-grow: 0;
   flex-shrink: 0;
   flex-basis: auto;
   min-height: 1px;
+  border: 0;
 
   @each $name, $padding_size in $pb_card_body_padding {
     &[class*=_#{$name}] {

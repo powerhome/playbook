@@ -35,7 +35,7 @@ module Playbook
 
       def kit_class
         card_body_options = [
-          "pb_card_body",
+          "pb__card_card_body",
           padding_class,
         ]
         card_body_options.join("_")
