@@ -2,14 +2,12 @@
 
 module Playbook
   module PbCard
-    class Card < Playbook::PbKit::Base
+    class CardBody < Playbook::PbKit::Base
       PROPS = %i[configured_aria
                  configured_classname
                  configured_data
                  configured_id
                  configured_padding
-                 configured_selected
-                 configured_shadow
                  block].freeze
 
       def initialize(aria: default_configuration,
@@ -17,52 +15,34 @@ module Playbook
                      data: default_configuration,
                      id: default_configuration,
                      padding: default_configuration,
-                     selected: default_configuration,
-                     shadow: default_configuration,
                      &block)
         self.configured_aria = aria
         self.configured_classname = classname
         self.configured_data = data
         self.configured_id = id
         self.configured_padding = padding
-        self.configured_selected = selected
-        self.configured_shadow = shadow
         self.block = block_given? ? block : nil
       end
 
-      def selected_class
-        true_value(configured_selected, "selected", "deselected")
-      end
-
-      def shadow
-        shadow_options = %w[none shallow default deep deeper deepest]
-        one_of_value(configured_shadow, shadow_options, "none")
-      end
-
-      def shadow_class
-        adjusted_value(shadow, "shadow_#{shadow}", nil)
+      def padding_class
+        padding_options = %w[none xs sm md lg xl]
+        one_of_value(configured_padding.to_s, padding_options, "md")
       end
 
       def yield(context:)
-        if !block.nil?
-          pb_card_body = Playbook::PbCard::CardBody.new(padding: configured_padding) do
-            context.capture(&block)
-          end
-          ApplicationController.renderer.render(partial: pb_card_body, as: :object)
-        end
+        context.capture(&block)
       end
 
       def kit_class
-        card_options = [
-          "pb_card",
-          selected_class,
-          shadow_class,
+        card_body_options = [
+          "pb_card_body",
+          padding_class,
         ]
-        card_options.reject(&:nil?).join("_")
+        card_body_options.join("_")
       end
 
       def to_partial_path
-        "pb_card/card"
+        "pb_card/child_kits/card_body"
       end
 
     private
