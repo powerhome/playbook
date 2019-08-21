@@ -107,3 +107,6 @@ WebpackerReact.setup (OwnerPhone);
 
 import * as Owner from "pb_owner/docs";
 WebpackerReact.setup (Owner);
+
+import * as Toggle from "pb_toggle/docs";
+WebpackerReact.setup (Toggle);
