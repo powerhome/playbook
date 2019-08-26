@@ -27,6 +27,7 @@ import "./pb_label_value.js";
 import "./pb_message.js";
 import "./pb_timestamp.js";
 import "./pb_online_status.js";
+import "./pb_source.js";
 import "./pb_label_pill.js";
 import "./pb_phone.js";
 import "./pb_owner_phone.js";

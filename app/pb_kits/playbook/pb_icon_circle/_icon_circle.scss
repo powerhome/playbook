@@ -40,6 +40,9 @@ $pb_icon_circle_sizes: (
       border-radius: $size/2;
       background: $silver;
       color: $text_lt_light;
+      flex-shrink: 0;
+      flex-grow: 0;
+      flex-basis: $size;
 
       &[class^=pb_icon] {
         font-size: $size * 0.38;

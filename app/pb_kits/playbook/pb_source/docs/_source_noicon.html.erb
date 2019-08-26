@@ -1,0 +1,26 @@
+<%= pb_rails("source", props: {
+  source: "BJ's Johnston-208",
+  type: "retail",
+  hide_icon: true
+}) %>
+
+<br><br>
+
+<%= pb_rails("source", props: {
+  source: "Referral-phrg",
+  type: "inbound",
+  hide_icon: true
+}) %>
+
+<br><br>
+
+<%= pb_rails("source", props: {
+  source: "BJ's Future CB",
+  type: "user",
+  user: {
+    name: "Anna Black",
+    image: {url: "https://randomuser.me/api/portraits/women/44.jpg"},
+    user_id: "48582"
+  },
+  hide_icon: true
+}) %>

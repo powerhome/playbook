@@ -1,0 +1,10 @@
+examples:
+
+  rails:
+  - source_default: Default
+  - source_noicon: Hide Icon
+  - source_types: Source Types
+
+
+  react:
+  - source_default: Default
