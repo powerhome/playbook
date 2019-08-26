@@ -10,6 +10,16 @@ PreCommit:
     on_warn: fail
     problem_on_unmodified_line: ignore
     command: ['bundle', 'exec', 'rubocop']
+  EsLint:
+    enabled: true
+    on_warn: fail
+    required_executable: 'yarn'
+    problem_on_unmodified_line: ignore
+    command: ['yarn', 'lint', '--', '-f', 'compact']
+    include:
+      - '.eslintrc'
+      - 'app/pb_kits/playbook/**/*.js'
+      - 'app/pb_kits/playbook/**/*.jsx'
 
 CommitMsg:
   CapitalizedSubject:
