@@ -30,3 +30,8 @@ kits:
   - timestamp
   - online_status
   - source
+  - label_pill
+  - phone
+  - owner_phone
+  - owner
+  - toggle

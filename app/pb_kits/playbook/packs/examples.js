@@ -98,3 +98,18 @@ WebpackerReact.setup (OnlineStatus);
 
 import * as Source from "pb_source/docs";
 WebpackerReact.setup (Source);
+
+import * as LabelPill from "pb_label_pill/docs";
+WebpackerReact.setup (LabelPill);
+
+import * as Phone from "pb_phone/docs";
+WebpackerReact.setup (Phone);
+
+import * as OwnerPhone from "pb_owner_phone/docs";
+WebpackerReact.setup (OwnerPhone);
+
+import * as Owner from "pb_owner/docs";
+WebpackerReact.setup (Owner);
+
+import * as Toggle from "pb_toggle/docs";
+WebpackerReact.setup (Toggle);

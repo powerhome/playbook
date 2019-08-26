@@ -1,0 +1,11 @@
+@import "../pb_caption/caption";
+@import "../pb_pill/pill";
+
+.pb_label_pill {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  &_label {
+    margin-right: $space-xs;
+  }
+}

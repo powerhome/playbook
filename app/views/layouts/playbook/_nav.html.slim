@@ -1,3 +1,6 @@
 .pb--page--topNav
   h1
-    a href="#{root_path}" class="text-power-gold" Playbook
+    = link_to "Playbook", root_url
+    | &nbsp;
+    = pb_rails("caption", props: { tag: "span", text: Playbook::VERSION })
+

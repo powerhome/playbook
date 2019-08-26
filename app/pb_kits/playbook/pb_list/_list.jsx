@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 const propTypes = {
   dark:PropTypes.bool,
   borderless:PropTypes.bool,
-  size:PropTypes.bool,
+  size:PropTypes.oneOf(["", "large"]),
   ordered:PropTypes.bool,
   layout: PropTypes.oneOf(["", "left", "right"]),
   xpadding:PropTypes.bool,
@@ -17,7 +17,7 @@ const propTypes = {
 const defaultProps = {
   dark:false,
   borderless:false,
-  size:false,
+  size:"",
   ordered:false,
   layout:"",
   xpadding:false
@@ -36,7 +36,7 @@ class List extends Component {
     } = this.props;
     const dark_class = dark === true ? "_dark" : ""
     const borderless_class = borderless === true ? "list_borderless" : ""
-    const size_class = size === true ? "_lg" : ""
+    const size_class = "_" + size
     const ordered_class = ordered === true ? "_ordered" : ""
     const layout_class = "_"+ layout
     const xpadding_class = xpadding === true ? "_xpadding" : ""
