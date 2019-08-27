@@ -29,6 +29,7 @@ kits:
   - message
   - timestamp
   - online_status
+  - source
   - label_pill
   - phone
   - owner_phone

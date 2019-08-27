@@ -43,6 +43,9 @@ $pb_icon_circle_sizes: (
       color: $text_lt_light;
       font-size: $size * 0.38;
       line-height: $size;
+      flex-shrink: 0;
+      flex-grow: 0;
+      flex-basis: $size;
     }
   }
 
