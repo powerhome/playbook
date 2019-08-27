@@ -2,10 +2,11 @@
 @import "../pb_body/body";
 @import "../tokens/spacing";
 
- .pb_owner {
+[class^=pb_owner_kit] {
   display: flex;
   align-items: baseline;
-  &_first {
+
+  .pb_owner_first {
     margin: 0 ($space_xs - 4px) 0 0;
   }
 }

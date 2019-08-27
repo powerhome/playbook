@@ -8,7 +8,7 @@ $toggle_sizes: (
   "md": 60px,
 );
 
-[class^=pb_toggle] {
+[class^=pb_toggle_kit] {
   position: relative;
 
   @each $name, $size in $toggle_sizes {

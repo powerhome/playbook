@@ -33,7 +33,7 @@ module Playbook
 
       def kit_class
         kit_options = [
-          "pb_time",
+          "pb_time_kit",
           size,
         ]
         kit_options.join("_")
@@ -79,7 +79,7 @@ module Playbook
       end
 
       def timezone
-        content_tag(:span, class: "pb__time_timezone") do
+        content_tag(:span, class: "pb_time_timezone") do
           timezone_abbr
         end
       end

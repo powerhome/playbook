@@ -54,7 +54,7 @@ module Playbook
 
       def kit_class
         card_options = [
-          "pb_card",
+          "pb_card_kit",
           selected_class,
           shadow_class,
         ]

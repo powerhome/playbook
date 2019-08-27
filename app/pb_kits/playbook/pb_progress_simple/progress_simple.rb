@@ -56,7 +56,7 @@ module Playbook
 
       def kit_class
         kit_options = [
-          "pb_progress_simple",
+          "pb_progress_simple_kit",
           muted,
           align,
         ]

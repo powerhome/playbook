@@ -25,7 +25,7 @@ module Playbook
 
       def kit_class
         kit_options = [
-          "pb_online_status",
+          "pb_online_status_kit",
           status,
         ]
         kit_options.join("_")

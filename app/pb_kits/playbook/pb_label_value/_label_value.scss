@@ -1,7 +1,9 @@
 @import "../tokens/spacing";
+@import "../pb_caption/caption";
+@import "../pb_body/body";
 
-[class^=pb_label_value] {
-  [class^=pb_caption]  {
+[class^=pb_label_value_kit] {
+  [class^=pb_caption_kit]  {
     margin-bottom: $space-xs/1.5;
   }
 }

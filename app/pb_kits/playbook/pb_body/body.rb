@@ -61,7 +61,7 @@ module Playbook
       end
 
       def tag
-        default_value(configured_tag, "p")
+        default_value(configured_tag, "div")
       end
 
       def text
@@ -74,7 +74,7 @@ module Playbook
 
       def kit_class
         body_options = [
-          "pb_body",
+          "pb_body_kit",
           color_class,
           dark_class,
           status_class,

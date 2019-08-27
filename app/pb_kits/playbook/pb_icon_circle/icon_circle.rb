@@ -33,7 +33,7 @@ module Playbook
 
       def kit_class
         kit_options = [
-          "pb_icon_circle",
+          "pb_icon_circle_kit",
           size,
           variant,
         ]

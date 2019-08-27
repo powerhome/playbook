@@ -1,10 +1,11 @@
 @import "../tokens/spacing";
 @import "../tokens/colors";
 @import "../tokens/opacity";
+@import "../pb_body/body";
 
 $pb_pill_height: 22px;
 
-[class^=pb_pill] {
+[class^=pb_pill_kit] {
   display: inline-flex;
   justify-content: center;
   align-items: center;
@@ -16,7 +17,7 @@ $pb_pill_height: 22px;
     &[class*=_#{$color_name}]  {
       background: rgba($color_value, $opacity-1);
 
-      [class^=pb_body] {
+      [class^=pb_body_kit] {
         color: $color_value !important;
       }
     }

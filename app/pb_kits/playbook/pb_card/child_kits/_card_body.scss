@@ -9,7 +9,7 @@ $pb_card_body_padding:(
   xl: $space_xl,
 );
 
-[class^=pb__card_card_body]{
+[class^=pb_card_body_kit] {
   flex-grow: 0;
   flex-shrink: 0;
   flex-basis: auto;

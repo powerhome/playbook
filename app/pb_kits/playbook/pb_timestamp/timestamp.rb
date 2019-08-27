@@ -30,7 +30,7 @@ module Playbook
       end
 
       def kit_class
-        "pb_timestamp"
+        "pb_timestamp_kit"
       end
 
       def to_partial_path

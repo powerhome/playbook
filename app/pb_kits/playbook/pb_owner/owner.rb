@@ -22,7 +22,7 @@ module Playbook
       end
 
        def first_name
-        pb_first_name = Playbook::PbBody::Body.new(classname: "pb_owner_first") do
+        pb_first_name = Playbook::PbBody::Body.new(tag: "span", classname: "pb_owner_first") do
           default_value(configured_first_name, "")
         end
         ApplicationController.renderer.render(partial: pb_first_name, as: :object)

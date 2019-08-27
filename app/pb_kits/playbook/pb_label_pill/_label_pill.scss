@@ -1,11 +1,12 @@
 @import "../pb_caption/caption";
 @import "../pb_pill/pill";
 
-.pb_label_pill {
+[class^=pb_label_pill_kit] {
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  &_label {
+
+  .pb_label_pill_label {
     margin-right: $space-xs;
   }
 }

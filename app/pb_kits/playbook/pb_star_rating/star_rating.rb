@@ -43,7 +43,7 @@ module Playbook
 
       def kit_class
         kit_options = [
-          "pb_star_rating",
+          "pb_star_rating_kit",
           hide_rating,
         ]
         kit_options.compact.join("_")

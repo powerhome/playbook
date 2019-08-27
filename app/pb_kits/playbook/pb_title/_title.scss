@@ -1,6 +1,6 @@
 @import "title_mixin";
 
-[class^=pb_title]{
+[class^=pb_title_kit]{
   &[class*=_1] {
     @include pb_title_1;
   }

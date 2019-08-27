@@ -18,6 +18,12 @@ module Playbook
     config.sass.load_paths ||= []
     config.sass.load_paths << "#{Gem.loaded_specs['playbook_ui'].full_gem_path}/app/pb_kits/playbook"
 
+    initializer 'playbook_ui.add_view_paths', :after => :add_view_paths do |app|
+      ActiveSupport.on_load(:action_controller) do
+        append_view_path "#{Gem.loaded_specs['playbook_ui'].full_gem_path}/app/pb_kits/playbook"
+      end
+    end
+
     initializer "webpacker.proxy" do |app|
       insert_middleware = begin
                           Playbook.webpacker.config.dev_server.present?

@@ -1,6 +1,7 @@
 @import "./button_mixins";
+@import "../pb_icon/icon";
 
-[class^=pb_button]{
+[class^=pb_button_kit]{
   // Variants =================
   &[class*=_primary]  {
     @include pb_button_primary;

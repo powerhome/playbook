@@ -24,12 +24,12 @@ module Playbook
       end
 
       def display_badge
-        "playbook/pb_user_badge/badges/#{badge}" if is_set? configured_badge
+        "pb_user_badge/badges/#{badge}" if is_set? configured_badge
       end
 
       def kit_class
         kit_options = [
-          "pb_user_badge",
+          "pb_user_badge_kit",
           size,
         ]
         kit_options.join("_")

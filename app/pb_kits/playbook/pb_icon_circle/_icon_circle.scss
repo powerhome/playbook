@@ -2,6 +2,7 @@
 @import "../tokens/colors";
 @import "../tokens/typography";
 @import "../tokens/opacity";
+@import "../pb_icon/icon";
 
 $pb_icon_circle_sizes: (
   "xs":   28px,
@@ -12,7 +13,7 @@ $pb_icon_circle_sizes: (
   "xl":   100px,
 );
 
-[class^=pb_icon_circle] {
+[class^=pb_icon_circle_kit] {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -22,7 +23,7 @@ $pb_icon_circle_sizes: (
 
   i,
   svg {
-    &[class^=pb_icon] {
+    &[class^=pb_icon_kit] {
       width: 100%;
       height: 100%;
       display: block;
@@ -40,11 +41,8 @@ $pb_icon_circle_sizes: (
       border-radius: $size/2;
       background: $silver;
       color: $text_lt_light;
-
-      &[class^=pb_icon] {
-        font-size: $size * 0.38;
-        line-height: $size;
-      }
+      font-size: $size * 0.38;
+      line-height: $size;
     }
   }
 

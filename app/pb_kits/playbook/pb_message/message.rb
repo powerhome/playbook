@@ -66,7 +66,7 @@ module Playbook
 
       def kit_class
         kit_options = [
-          "pb_message",
+          "pb_message_kit",
           avatar_class,
         ]
         kit_options.compact.join("_")

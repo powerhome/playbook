@@ -7,7 +7,7 @@
 $pb_card_border_width: 1px;
 $pb_card_border_radius: $border_rad_heavier;
 
-[class^=pb_card]{
+[class^=pb_card_kit] {
   position: relative;
   display: flex;
   flex-direction: column;

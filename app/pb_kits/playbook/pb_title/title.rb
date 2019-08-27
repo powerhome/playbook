@@ -54,7 +54,7 @@ module Playbook
 
       def kit_class
         title_options = [
-          "pb_title",
+          "pb_title_kit",
           size_class,
           dark_class,
         ]

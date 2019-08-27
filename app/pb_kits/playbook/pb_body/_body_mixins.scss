@@ -1,5 +1,6 @@
 @import "../tokens/colors";
 @import "../tokens/line_height";
+@import "../tokens/typography";
 
 $pb_body_colors: (
   default:        $text_lt_default,
@@ -17,9 +18,9 @@ $pb_body_status: (
 );
 
 @mixin pb_body($color: $text_lt_default) {
-  margin: 0;
   line-height: $lh_tight;
   color: $color;
+  font-size: $text_default;
 }
 
 // Colors ======================

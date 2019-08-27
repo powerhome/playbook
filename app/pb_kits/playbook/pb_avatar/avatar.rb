@@ -56,7 +56,7 @@ module Playbook
 
       def kit_class
         avatar_options = [
-          "pb_avatar",
+          "pb_avatar_kit",
           size,
         ]
         avatar_options.join("_")
