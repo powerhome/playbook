@@ -1,6 +1,5 @@
 import "../../../../fonts/fontawesome.js";
 import "../../../../fonts/regular.js";
-import "../pb_dashboard/pbChartPlugin.js";
 import "./main.scss";
 import "./kits.js";
 
