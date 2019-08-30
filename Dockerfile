@@ -30,4 +30,4 @@ RUN yarn install
 ADD --chown=app:app . /home/app/src
 RUN mkdir /etc/service/puma && ln -s /home/app/src/services/puma.sh /etc/service/puma/run
 
-RUN cd spec/dummy; RAILS_ENV=production SECRET_KEY_BASE=does_not_matter_here bin/rails assets:precompile
+RUN cd spec/dummy; RAILS_ENV=development SECRET_KEY_BASE=does_not_matter_here bin/rails assets:precompile --trace
