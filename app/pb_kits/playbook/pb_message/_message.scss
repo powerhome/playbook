@@ -1,5 +1,9 @@
 @import "message_mixins";
+@import "../pb_avatar/avatar";
+@import "../pb_body/body";
+@import "../pb_caption/caption";
+@import "../pb_timestamp/timestamp";
 
-[class^=pb_message] {
+[class^=pb_message_kit] {
   @include pb_message;
 }

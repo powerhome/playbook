@@ -1,10 +1,10 @@
 @import "list_mixin";
 
-[class*=pb_list] {
+[class*=pb_list_kit] {
   @include pb_list;
 }
 
-[class^=pb_list] {
+[class^=pb_list_kit] {
   &[class*=_dark] li {
     @include pb_list_dark;
   }

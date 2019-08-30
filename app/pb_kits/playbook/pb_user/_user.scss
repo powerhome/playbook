@@ -1,6 +1,9 @@
+@import "../pb_title/title";
+@import "../pb_body/body";
+@import "../pb_avatar/avatar";
 @import "../tokens/spacing";
 
-[class^=pb_user]{
+[class^=pb_user_kit]{
   display: flex;
   justify-content: flex-start;
   align-items: flex-start;

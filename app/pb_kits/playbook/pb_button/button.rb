@@ -105,7 +105,7 @@ module Playbook
 
       def kit_class
         kit_options = [
-          "pb_button",
+          "pb_button_kit",
           variant,
           full_width_class,
           disabled_class,

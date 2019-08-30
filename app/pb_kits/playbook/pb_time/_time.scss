@@ -1,12 +1,15 @@
 @import "../tokens/colors";
 @import "../tokens/typography";
+@import "../pb_icon/icon";
+@import "../pb_body/body";
+@import "../pb_title/title";
 
-[class^=pb_time] {
+[class^=pb_time_kit] {
   [class^=pb_body] {
     font-weight: $bold !important;
   }
 
-  [class^=pb__time_timezone] {
+  [class^=pb_time_timezone] {
     font-size: $font-small;
     font-weight: $regular;
     color: $text-lt-light;
@@ -17,7 +20,7 @@
   }
 
   &[class*=_lg] {
-    [class^=pb__time_timezone] {
+    [class^=pb_time_timezone] {
       font-size: $font-large !important;
       color: $text-lt-light;
     }

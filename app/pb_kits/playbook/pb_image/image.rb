@@ -34,7 +34,7 @@ module Playbook
 
       def kit_class
         image_options = %w[
-          pb_image
+          pb_image_kit
           lazyload
           blur_up
         ]

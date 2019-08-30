@@ -35,7 +35,7 @@ module Playbook
 
       def kit_class
         toggle_options = [
-          "pb_toggle",
+          "pb_toggle_kit",
           size,
           checked_class
         ]

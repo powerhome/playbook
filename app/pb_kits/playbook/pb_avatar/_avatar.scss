@@ -1,6 +1,8 @@
 @import "../tokens/border_radius";
 @import "../tokens/colors";
 @import "../tokens/typography";
+@import "../pb_online_status/online_status";
+@import "../pb_image/image";
 
 $avatar-sizes: (
   "xs":   28px,
@@ -11,7 +13,7 @@ $avatar-sizes: (
   "xl":   100px,
 );
 
-[class^=pb_avatar] {
+[class^=pb_avatar_kit] {
   position: relative;
 
   @each $name, $size in $avatar-sizes {

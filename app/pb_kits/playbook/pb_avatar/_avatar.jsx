@@ -42,6 +42,7 @@ class Avatar extends React.Component {
     } = this.props;
 
     const css = classnames([
+      `pb_avatar_kit`,
       `avatar_${size}`,
       className,
     ])

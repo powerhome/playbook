@@ -56,7 +56,7 @@ module Playbook
 
       def kit_class
         kit_options = [
-          "pb_dashboard_value",
+          "pb_dashboard_value_kit",
           align,
         ]
         kit_options.join("_")

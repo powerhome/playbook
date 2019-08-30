@@ -36,7 +36,7 @@ module Playbook
       end
 
       def kit_class
-        "pb_label_value"
+        "pb_label_value_kit"
       end
 
       def to_partial_path

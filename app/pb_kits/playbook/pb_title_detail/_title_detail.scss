@@ -1,4 +1,7 @@
-[class^=pb_title_detail]{
+@import "../pb_title/title";
+@import "../pb_body/body";
+
+[class^=pb_title_detail_kit]{
   &[class*=_center]  {
     & > [class^=pb_title],
     & > [class^=pb_body] {

@@ -92,7 +92,7 @@ module Playbook
 
       def kit_class
         kit_options = [
-          "pb_user",
+          "pb_user_kit",
           align,
           orientation,
           size,

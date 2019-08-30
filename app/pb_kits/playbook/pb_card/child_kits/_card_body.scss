@@ -1,0 +1,24 @@
+@import "../../tokens/spacing";
+
+$pb_card_body_padding:(
+  none: 0,
+  xs: $space_xs,
+  sm: $space_sm,
+  md: $space_md,
+  lg: $space_lg,
+  xl: $space_xl,
+);
+
+[class^=pb_card_body_kit] {
+  flex-grow: 0;
+  flex-shrink: 0;
+  flex-basis: auto;
+  min-height: 1px;
+  border: 0;
+
+  @each $name, $padding_size in $pb_card_body_padding {
+    &[class*=_#{$name}] {
+      padding: $padding_size;
+    }
+  }
+}

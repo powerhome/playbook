@@ -43,7 +43,7 @@ module Playbook
       end
 
       def kit_class
-        "pb_stat_value"
+        "pb_stat_value_kit"
       end
 
       def to_partial_path

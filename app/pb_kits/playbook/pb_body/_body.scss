@@ -1,6 +1,6 @@
 @import "./body_mixins";
 
-[class^=pb_body]{
+[class^=pb_body_kit]{
   @include pb_body;
 
   @each $color_name, $color_value in $pb_body_colors {

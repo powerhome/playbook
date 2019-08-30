@@ -29,7 +29,7 @@ module Playbook
       end
 
       def kit_class
-        "pb_date"
+        "pb_date_kit"
       end
 
       def to_partial_path

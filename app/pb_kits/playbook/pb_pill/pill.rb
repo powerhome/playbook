@@ -22,7 +22,7 @@ module Playbook
       end
 
       def display_text
-        pb_text = Playbook::PbBody::Body.new do
+        pb_text = Playbook::PbBody::Body.new(tag: "span") do
           text
         end
         ApplicationController.renderer.render(partial: pb_text, as: :object)
@@ -30,7 +30,7 @@ module Playbook
 
       def kit_class
         kit_options = [
-          "pb_pill",
+          "pb_pill_kit",
           variant,
         ]
         kit_options.join("_")

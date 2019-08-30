@@ -1,6 +1,6 @@
 @import "caption_mixin";
 
-[class^=pb_caption] {
+[class^=pb_caption_kit] {
   @include caption;
 
   &[class*=_lg]  {

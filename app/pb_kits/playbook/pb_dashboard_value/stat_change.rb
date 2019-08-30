@@ -70,7 +70,7 @@ module Playbook
 
       def kit_class
         stat_options = [
-          "pb_stat_change",
+          "pb_stat_change_kit",
           status,
         ]
         stat_options.join("_")

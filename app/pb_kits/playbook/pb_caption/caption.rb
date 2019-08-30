@@ -49,7 +49,7 @@ module Playbook
 
       def kit_class
         caption_options = [
-          "pb_caption",
+          "pb_caption_kit",
           large_class,
           dark_class,
         ]

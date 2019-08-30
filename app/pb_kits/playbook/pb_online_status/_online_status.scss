@@ -1,6 +1,6 @@
 @import "online_status_mixins";
 
-[class^=pb_online_status] {
+[class^=pb_online_status_kit] {
   @include pb_online_status;
 
   @each $status_name, $status_value in $pb_online_status_statuses {

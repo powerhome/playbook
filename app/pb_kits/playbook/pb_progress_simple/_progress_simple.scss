@@ -17,7 +17,7 @@ $pb_progress_simple_height: 4px;
   }
 }
 
-[class^=pb_progress_simple] {
+[class^=pb_progress_simple_kit] {
   width: 100%;
   height: $pb_progress_simple_height;
   border-radius: $pb_progress_simple_height/2;
