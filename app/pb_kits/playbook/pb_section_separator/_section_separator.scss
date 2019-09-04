@@ -1,0 +1,29 @@
+@import "../tokens/colors";
+@import "../tokens/spacing";
+@import "../pb_caption/caption";
+
+.pb_section_separator {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+
+  span {
+    display: inline-block;
+    padding: 0 $space_xs;
+    background: $bg_light;
+    position: relative;
+    z-index: 1;
+  }
+
+  &::after {
+    content: "";
+    height: 1px;
+    width: 100%;
+    background: $border_light;
+    position: absolute;
+    top: 50%;
+    left: 0;
+    z-index: 0;
+  }
+}

@@ -35,3 +35,4 @@ kits:
   - owner_phone
   - owner
   - toggle
+  - section_separator
