@@ -27,6 +27,9 @@ import lineGraphSettings from "../pb_line_graph/lineGraphSettings";
 import barGraphSettings from "../pb_bar_graph/barGraphSettings";
 import dashboardValueSettings from "../pb_dashboard_value/dashboardValueSettings";
 
+// Other JS/Plugins
+import pbChart from "../plugins/pb_chart_plugin"
+
 // All Exports for Consumption in Nitro
 export {
   Avatar,
@@ -53,5 +56,6 @@ export {
   commonSettings,
   lineGraphSettings,
   barGraphSettings,
-  dashboardValueSettings
+  dashboardValueSettings,
+  pbChart,
 };
