@@ -1,9 +1,3 @@
-if(typeof(Highcharts) !== 'object') {
-  const script = document.createElement('script')
-  script.src   = 'https://code.highcharts.com/highcharts.js'
-  document.body.appendChild(script)
-}
-
 import { highchartsTheme } from '../pb_dashboard/pbChartsLightTheme.js'
 
 class pbChart {
