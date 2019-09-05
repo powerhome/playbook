@@ -1,3 +1,5 @@
+import Highcharts from 'highcharts'
+
 import { highchartsTheme } from '../pb_dashboard/pbChartsLightTheme.js'
 
 class pbChart {
