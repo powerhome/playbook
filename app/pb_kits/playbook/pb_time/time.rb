@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
-include ActionView::Helpers::TagHelper
-include ActionView::Context
-
 module Playbook
   module PbTime
     class Time < Playbook::PbKit::Base
+      include ActionView::Helpers::TagHelper
+      include ActionView::Context
+
       PROPS = %i[configured_classname
                  configured_data
                  configured_id
