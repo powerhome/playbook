@@ -119,3 +119,6 @@ WebpackerReact.setup (StatValue);
 
 import * as StatChange from "pb_stat_change/docs";
 WebpackerReact.setup (StatChange);
+
+import * as Currency from "pb_currency/docs";
+WebpackerReact.setup (Currency);
