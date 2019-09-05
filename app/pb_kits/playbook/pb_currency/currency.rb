@@ -77,7 +77,7 @@ module Playbook
 
       def kit_class
         kit_options = [
-          "pb_currency",
+          "pb_currency_kit",
           align,
         ]
         kit_options.join("_")

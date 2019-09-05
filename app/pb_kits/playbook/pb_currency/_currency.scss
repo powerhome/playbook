@@ -1,5 +1,5 @@
 
-  [class^=pb_currency]{
+  [class^=pb_currency_kit]{
     &[class*=_center]  {
       & > [class^=pb_caption],
       & > [class^=pb_title],
@@ -35,14 +35,14 @@
 
   }
 
-  [class^=pb_currency_center] {
+  [class^=pb_currency_kit_center] {
     & > [class*=_wrapper] {
       justify-content: center;
     }
 
   }
 
-  [class^=pb_currency_right] {
+  [class^=pb_currency_kit_right] {
     & > [class*=_wrapper] {
       justify-content: flex-end;
     }
