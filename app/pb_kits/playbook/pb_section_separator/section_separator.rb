@@ -25,6 +25,10 @@ module Playbook
         end
       end
 
+      def kit_class
+        "pb_section_separator_kit"
+      end
+
       def to_partial_path
         "pb_section_separator/section_separator"
       end

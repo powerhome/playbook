@@ -2,7 +2,7 @@
 @import "../tokens/spacing";
 @import "../pb_caption/caption";
 
-.pb_section_separator {
+[class^=pb_section_separator_kit] {
   display: flex;
   justify-content: center;
   align-items: center;
