@@ -3,6 +3,9 @@
 module Playbook
   module PbVerticalNav
     class VerticalNav < Playbook::PbKit::Base
+      include ActionView::Helpers::TagHelper
+      include ActionView::Context
+
       PROPS = %i[configured_aria
                  configured_classname
                  configured_data
