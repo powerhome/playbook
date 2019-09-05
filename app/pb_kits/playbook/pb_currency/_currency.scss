@@ -6,17 +6,22 @@
       & > [class^=pb_body] {
         text-align: center;
       }
-
+      & > [class*=pb_currency_wrapper] {
+     justify-content: center;
     }
+  }
+}
     &[class*=_right]  {
       & > [class^=pb_caption],
       & > [class^=pb_title],
       & > [class^=pb_body] {
         text-align: right;
       }
+      & > [class*=pb_currency_wrapper] {
+      justify-content: flex-end;
     }
-
   }
+}
 
   [class^=pb_currency_wrapper] {
     display: flex;
@@ -32,19 +37,4 @@
     & > [class*=pb_currency_value] {
       line-height: .9;
       }
-
-  }
-
-  [class^=pb_currency_kit_center] {
-    & > [class*=_wrapper] {
-      justify-content: center;
-    }
-
-  }
-
-  [class^=pb_currency_kit_right] {
-    & > [class*=_wrapper] {
-      justify-content: flex-end;
-    }
-
   }
