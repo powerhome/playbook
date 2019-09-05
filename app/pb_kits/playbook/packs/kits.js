@@ -34,3 +34,4 @@ import "./pb_owner_phone.js";
 import "./pb_owner.js";
 import "./pb_toggle.js";
 import "./pb_section_separator.js";
+import "./pb_currency.js";
