@@ -27,20 +27,23 @@ module Playbook
         self.block = block_given? ? block : nil
       end
 
+      def title_text
+        pb_title = Playbook::PbCaption::Caption.new(text: configured_title)
+        ApplicationController.renderer.render(partial: pb_title, as: :object)
+      end
+
       def title
-        if configured_title == default_configuration
-          ""
-        else
-          configured_title
+        if is_set? configured_title
+          content_tag(:div, class: "vertical_nav_list_title") do
+            content_tag(:a, class: "vertical_nav_list_item_link_text", href: link) do
+              title_text
+            end
+          end
         end
       end
 
       def link
-        if configured_link == default_configuration
-          "#"
-        else
-          configured_link
-        end
+        default_value(configured_link, "#")
       end
 
       def yield(context:)
