@@ -1,0 +1,40 @@
+
+  [class^=pb_currency_kit]{
+    &[class*=_center]  {
+      & > [class^=pb_caption],
+      & > [class^=pb_title],
+      & > [class^=pb_body] {
+        text-align: center;
+      }
+      & > [class*=pb_currency_wrapper] {
+     justify-content: center;
+    }
+  }
+
+    &[class*=_right]  {
+      & > [class^=pb_caption],
+      & > [class^=pb_title],
+      & > [class^=pb_body] {
+        text-align: right;
+      }
+      & > [class*=pb_currency_wrapper] {
+      justify-content: flex-end;
+    }
+  }
+}
+
+  [class^=pb_currency_wrapper] {
+    display: flex;
+
+    & > [class*=dollar_sign] {
+      display: flex;
+      align-items: flex-start;
+    }
+    & > [class*=unit] {
+      display: flex;
+      align-items: flex-end;
+    }
+    & > [class*=pb_currency_value] {
+      line-height: .9;
+      }
+  }

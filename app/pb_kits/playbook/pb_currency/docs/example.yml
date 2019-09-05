@@ -1,0 +1,9 @@
+examples:
+
+  rails:
+  - currency_small: Small
+  - currency_large: Large
+
+
+  react:
+  - currency_default: Default
