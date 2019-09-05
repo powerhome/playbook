@@ -35,3 +35,5 @@ kits:
   - owner_phone
   - owner
   - toggle
+  - stat_value
+  - stat_change

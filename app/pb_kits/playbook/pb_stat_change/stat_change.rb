@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Playbook
-  module PbDashboardValue
+  module PbStatChange
     class StatChange < Playbook::PbKit::Base
       PROPS = %i[configured_change
                  configured_classname
@@ -14,7 +14,6 @@ module Playbook
                      data: default_configuration,
                      id: default_configuration,
                      value: default_configuration)
-
         self.configured_change = change
         self.configured_classname = classname
         self.configured_data = data
@@ -77,7 +76,7 @@ module Playbook
       end
 
       def to_partial_path
-        "pb_dashboard_value/child_kits/stat_change"
+        "pb_stat_change/stat_change"
       end
 
     private

@@ -1,0 +1,9 @@
+examples:
+
+  rails:
+  - stat_value_default: Default
+  - stat_value_unit: Unit Value
+
+
+  react:
+  - stat_value_default: Default

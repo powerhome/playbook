@@ -1,8 +1,7 @@
 @import "dashboard_value_mixins";
-@import "child_kits/stat_value";
-@import "../pb_icon/icon";
+@import "../pb_stat_value/stat_value";
+@import "../pb_stat_change/stat_change";
 @import "../pb_body/body";
-@import "../pb_title/title";
 
 [class^=pb_dashboard_value_kit]{
   @each $align_name, $align_value in $pb_dashboard_value_align {

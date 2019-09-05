@@ -35,21 +35,23 @@ module Playbook
 
       def stat_label
         if is_set? configured_stat_label
-          pb_label = Playbook::PbDashboardValue::StatLabel.new(configured_stat_label)
+          pb_label = Playbook::PbBody::Body.new(color: "light") do
+            configured_stat_label[:label]
+          end
           ApplicationController.renderer.render(partial: pb_label, as: :object)
         end
       end
 
       def stat_value
         if is_set? configured_stat_value
-          pb_value = Playbook::PbDashboardValue::StatValue.new(configured_stat_value)
+          pb_value = Playbook::PbStatValue::StatValue.new(configured_stat_value)
           ApplicationController.renderer.render(partial: pb_value, as: :object)
         end
       end
 
       def stat_change
         if is_set? configured_stat_change
-          pb_change = Playbook::PbDashboardValue::StatChange.new(configured_stat_change)
+          pb_change = Playbook::PbStatChange::StatChange.new(configured_stat_change)
           ApplicationController.renderer.render(partial: pb_change, as: :object)
         end
       end
