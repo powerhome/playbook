@@ -44,7 +44,7 @@ module Playbook
       end
 
       def yield(context:)
-        if !block.nil?
+        unless block.nil?
           pb_card_body = Playbook::PbCard::CardBody.new(padding: configured_padding) do
             context.capture(&block)
           end
