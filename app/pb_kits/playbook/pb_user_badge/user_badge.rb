@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
-include ActionView::Helpers::AssetTagHelper
-
 module Playbook
   module PbUserBadge
     class UserBadge < Playbook::PbKit::Base
+      include ActionView::Helpers::AssetTagHelper
+
       PROPS = %i[configured_badge
                  configured_classname
                  configured_data

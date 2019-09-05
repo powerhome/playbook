@@ -50,8 +50,12 @@ module Playbook
 
       def count
         if is_set? configured_count
-          value = configured_count.is_a?(Integer) || configured_count.is_a?(Float) ?
-            format_number(configured_count) : configured_count
+          value = if configured_count.is_a?(Integer) || configured_count.is_a?(Float)
+                    format_number(configured_count)
+                  else
+                    configured_count
+                  end
+
           pb_count = Playbook::PbBody::Body.new(color: "light") do
             value.to_s
           end
@@ -59,8 +63,8 @@ module Playbook
         end
       end
 
-      def format_number(n)
-        n.to_s.gsub(/(\d)(?=\d{3}+(?:\.|$))(\d{3}\..*)?/, '\1,\2')
+      def format_number(number)
+        number.to_s.gsub(/(\d)(?=\d{3}+(?:\.|$))(\d{3}\..*)?/, '\1,\2')
       end
 
       def kit_class

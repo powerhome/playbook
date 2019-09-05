@@ -49,13 +49,13 @@ module Playbook
         convert_to_timestamp(configured_timestamp)
       end
 
-      def convert_to_timestamp(ts)
-        ts.is_a?(String) ? DateTime.parse(ts) : ts
-        ts.in_time_zone(timezone_value)
+      def convert_to_timestamp(time)
+        time.is_a?(String) ? DateTime.parse(time) : time
+        time.in_time_zone(timezone_value)
       end
 
       def format_time_string
-        format_time = "#{hour}:#{minutes}#{meridian}" if is_set? configured_timestamp
+        "#{hour}:#{minutes}#{meridian}" if is_set? configured_timestamp
       end
 
       def hour
