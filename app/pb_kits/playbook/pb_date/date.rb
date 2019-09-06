@@ -3,6 +3,9 @@
 module Playbook
   module PbDate
     class Date < Playbook::PbKit::Base
+      include ActionView::Helpers::TagHelper
+      include ActionView::Context
+
       PROPS = %i[configured_classname
                  configured_data
                  configured_id
@@ -39,12 +42,12 @@ module Playbook
     private
 
       def timestamp
-        timestamp = convert_to_timestamp(configured_timestamp)
+        convert_to_timestamp(configured_timestamp)
       end
 
-      def convert_to_timestamp(ts)
-        ts.is_a?(String) ? DateTime.parse(ts) : ts
-        ts.in_time_zone(timezone_value)
+      def convert_to_timestamp(time)
+        time.is_a?(String) ? DateTime.parse(time) : time
+        time.in_time_zone(timezone_value)
       end
 
       def timezone_value
@@ -74,15 +77,14 @@ module Playbook
       end
 
       def text
-        "<span>#{day_of_week} &middot; #{month} #{day}</span>".html_safe
+        content_tag(:span) do
+          "#{day_of_week} &middot; #{month} #{day}".html_safe
+        end
       end
 
       def display_value_sm
         if is_set? configured_timestamp
-          pb_value = Playbook::PbBody::Body.new(color: "default") do
-            icon +
-              text
-          end
+          pb_value = Playbook::PbTitle::Title.new(size: 4, text: icon + text)
           ApplicationController.renderer.render(partial: pb_value, as: :object)
         end
       end

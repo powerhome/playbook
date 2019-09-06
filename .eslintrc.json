@@ -2,12 +2,14 @@
     "root": true,
     "plugins": [
       "react",
-      "jsx-control-statements"
+      "jsx-control-statements",
+      "flowtype"
     ],
     "extends": [
       "eslint:recommended",
       "plugin:react/recommended",
-      "plugin:jsx-control-statements/recommended"
+      "plugin:jsx-control-statements/recommended",
+      "plugin:flowtype/recommended"
     ],
     "parser": "babel-eslint",
     "parserOptions": {

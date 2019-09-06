@@ -1,10 +1,8 @@
 import "../../../../fonts/fontawesome.js"
 import "../../../../fonts/regular.js"
-import pbChart from "../plugins/pb_chart_plugin.js"
 import "./main.scss"
 import "./kits.js"
-
-window.pbChart = pbChart
+import "../vendor.js"
 
 // Move to separate file
 $(document).on("click", "[data-toggle]", function(e) {

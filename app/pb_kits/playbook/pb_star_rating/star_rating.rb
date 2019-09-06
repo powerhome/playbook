@@ -27,8 +27,8 @@ module Playbook
 
       def rating
         rating_options = []
-        (0..5).step(0.5) do |n|
-          rating_options.push strip_trailing_zero(n)
+        (0..5).step(0.5) do |number|
+          rating_options.push strip_trailing_zero(number)
         end
         one_of_value(configured_rating.to_s, rating_options, "0")
       end
@@ -55,8 +55,8 @@ module Playbook
 
     private
 
-      def strip_trailing_zero(n)
-        n.to_s.sub(/\.?0+$/, "")
+      def strip_trailing_zero(number)
+        number.to_s.sub(/\.?0+$/, "")
       end
 
       DEFAULT = Object.new

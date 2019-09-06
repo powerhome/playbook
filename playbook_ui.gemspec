@@ -12,7 +12,7 @@ Gem::Specification.new do |s|
   s.homepage    = "http://playbook.powerapp.cloud"
   s.summary     = "Playbook Design System"
   s.description = "Playbook Design System. Built for Nitro, but powering all."
-  s.license     = 'MIT'
+  s.license     = "MIT"
 
   s.files = Dir["{app,fonts,lib,stories}/**/*"] + ["Rakefile", "README.md"]
 
