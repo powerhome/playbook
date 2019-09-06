@@ -1,5 +1,7 @@
+@import "../pb_title/title";
+
 [class^=pb_stat_value_kit]{
-  &[class*=_wrapper] {
+  [class^=pb_stat_value_wrapper] {
     display: flex;
     justify-content: flex-start;
     align-items: baseline;

@@ -114,6 +114,12 @@ WebpackerReact.setup (Owner);
 import * as Toggle from "pb_toggle/docs";
 WebpackerReact.setup (Toggle);
 
+import * as StatValue from "pb_stat_value/docs";
+WebpackerReact.setup (StatValue);
+
+import * as StatChange from "pb_stat_change/docs";
+WebpackerReact.setup (StatChange);
+
 import * as SectionSeparator from "pb_section_separator/docs";
 WebpackerReact.setup (SectionSeparator);
 

@@ -2,8 +2,6 @@ examples:
 
   rails:
   - dashboard_value_default: Full Example
-  - dashboard_value_change: Change
-  - dashboard_value_label: Label
   - dashboard_value_align: Align
 
 

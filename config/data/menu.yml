@@ -35,5 +35,7 @@ kits:
   - owner_phone
   - owner
   - toggle
+  - stat_value
+  - stat_change
   - section_separator
   - currency
