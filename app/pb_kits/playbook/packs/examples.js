@@ -114,5 +114,8 @@ WebpackerReact.setup (Owner);
 import * as Toggle from "pb_toggle/docs";
 WebpackerReact.setup (Toggle);
 
+import * as SectionSeparator from "pb_section_separator/docs";
+WebpackerReact.setup (SectionSeparator);
+
 import * as Currency from "pb_currency/docs";
 WebpackerReact.setup (Currency);
