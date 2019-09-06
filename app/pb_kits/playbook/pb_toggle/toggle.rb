@@ -1,21 +1,22 @@
+# frozen_string_literal: true
+
 module Playbook
   module PbToggle
     class Toggle < Playbook::PbKit::Base
-      PROPS = [:configured_classname,
-					:configured_data,
-					:configured_id,
-          :configured_size,
-          :configured_checked
-        ].freeze
+      PROPS = %i[configured_classname
+                 configured_data
+                 configured_id
+                 configured_size
+                 configured_checked].freeze
 
       def initialize(classname: default_configuration,
-							data: default_configuration,
-							id: default_configuration,
-              size: default_configuration,
-              checked: default_configuration)
+                     data: default_configuration,
+                     id: default_configuration,
+                     size: default_configuration,
+                     checked: default_configuration)
         self.configured_classname = classname
-				self.configured_data = data
-				self.configured_id = id
+        self.configured_data = data
+        self.configured_id = id
         self.configured_size = size
         self.configured_checked = checked
       end
@@ -37,7 +38,7 @@ module Playbook
         toggle_options = [
           "pb_toggle_kit",
           size,
-          checked_class
+          checked_class,
         ]
         toggle_options.join("_")
       end

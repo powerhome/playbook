@@ -37,4 +37,5 @@ kits:
   - toggle
   - stat_value
   - stat_change
+  - section_separator
   - currency

@@ -35,4 +35,5 @@ import "./pb_owner.js";
 import "./pb_toggle.js";
 import "./pb_stat_value.js";
 import "./pb_stat_change.js";
+import "./pb_section_separator.js";
 import "./pb_currency.js";

@@ -1,0 +1,9 @@
+examples:
+
+  rails:
+  - section_separator_text: Text Separator
+  - section_separator_line: Line Separator
+
+
+  react:
+  - section_separator_default: Default

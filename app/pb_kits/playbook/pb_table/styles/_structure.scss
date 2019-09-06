@@ -8,7 +8,7 @@
       thead {
         tr {
           th {
-            padding: $value $cell-gutter;
+            padding: $cell-pad-md $cell-gutter;
 
             &:first-child {
               padding-left: $cell-pad-endcap;
