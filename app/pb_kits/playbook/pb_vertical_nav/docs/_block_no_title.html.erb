@@ -1,0 +1,5 @@
+<%= pb_rails("vertical_nav") do %>
+  <%= pb_rails("vertical_nav/item", props: { link: "#", active: true }) do%>Active Nav Item using block<% end %>
+  <%= pb_rails("vertical_nav/item", props: { link: "#" }) do%>Nav Item using block<% end %>
+  <%= pb_rails("vertical_nav/item", props: { link: "#" }) do%>Nav Item using block<% end %>
+<% end %>
