@@ -1,9 +1,2 @@
 @import "../pb_icon/icon";
-@import "../pb_body/body";
 @import "../pb_title/title";
-
-[class^=pb_date_kit] {
-  [class^=pb_body] {
-    font-weight: $bold !important;
-  }
-}
