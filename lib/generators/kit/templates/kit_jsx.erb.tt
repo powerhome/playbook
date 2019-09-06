@@ -1,21 +1,39 @@
-import React from 'react';
-import PropTypes from "prop-types";
+/* @flow */
+/*eslint-disable react/no-multi-comp, flowtype/space-before-type-colon */
 
-const propTypes = {
-  className: PropTypes.string,
-  id: PropTypes.string
-};
+import React from 'react'
 
-class <%= @kit_name_pascal %> extends React.Component {
+import classnames from 'classnames'
+
+type <%= @kit_name_pascal %>Props = {
+  className?: String,
+  text: String,
+}
+
+class <%= @kit_name_pascal %> extends React.Component<<%= @kit_name_pascal %>Props> {
+  static defaultProps = {
+    text: '<%= @kit_name_uppercase %>'
+  }
+
+  props: <%= @kit_name_pascal %>Props
+
   render() {
+    const {
+      className,
+      text
+    } = this.props
+
+    const css = classnames([
+      `pb_<%= @kit_name_underscore %>_kit`,
+      className,
+    ])
+
     return (
-      <div className="pb_<%= @kit_name_underscore %>">
-        <span><%= @kit_name_uppercase %> CONTENT</span>
+      <div className={css}>
+        {text}
       </div>
     )
   }
 }
 
-<%= @kit_name_pascal %>.propTypes = propTypes;
-
-export default <%= @kit_name_pascal %>;
+export default <%= @kit_name_pascal %>
