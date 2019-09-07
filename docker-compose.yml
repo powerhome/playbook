@@ -10,7 +10,10 @@ services:
     ports:
       - "8081:5432"
   web:
-    build: .
+    build:
+      context: .
+      args:
+        precompileassets: "disable"
     volumes:
       - .:/home/app/src
       - bundle:/usr/local/bundle
@@ -19,7 +22,10 @@ services:
     depends_on:
       - db
   webpacker:
-    build: .
+    build:
+      context: .
+      args:
+        precompileassets: "disable"
     env_file:
       - '.env.docker'
     command: bash -c "rm -rf /app/public/packs; rm -rf /home/app/src/spec/dummy/tmp/pids/server.pid; ./bin/webpack-dev-server"
@@ -27,3 +33,5 @@ services:
       - .:/home/app/src
     ports:
       - '3035:3035'
+    environment:
+      NODE_OPTIONS: "--max-old-space-size=4096"
