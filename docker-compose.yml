@@ -33,5 +33,3 @@ services:
       - .:/home/app/src
     ports:
       - '3035:3035'
-    environment:
-      NODE_OPTIONS: "--max-old-space-size=4096"
