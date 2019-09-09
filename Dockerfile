@@ -1,4 +1,5 @@
 FROM phusion/passenger-customizable:0.9.27
+ARG precompileassets
 
 RUN bash -lc 'rvm remove all --force && rvm install ruby-2.5.0 && rvm --default use ruby-2.5.0 && gem install bundler -v 1.16.1'
 RUN /pd_build/ruby_support/install_ruby_utils.sh
@@ -24,10 +25,12 @@ ADD Gemfile* *.gemspec /home/app/src/
 RUN bundle install --frozen
 
 ADD package.json yarn.lock /home/app/src/
-RUN yarn add --force node-sass
 RUN yarn install
+
+COPY ./startup.sh /
+RUN chmod +x /startup.sh
 
 ADD --chown=app:app . /home/app/src
 RUN mkdir /etc/service/puma && ln -s /home/app/src/services/puma.sh /etc/service/puma/run
 
-RUN cd spec/dummy; RAILS_ENV=production SECRET_KEY_BASE=does_not_matter_here bin/rails assets:precompile
+RUN /startup.sh $precompileassets
