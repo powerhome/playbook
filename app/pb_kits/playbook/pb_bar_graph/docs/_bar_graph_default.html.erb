@@ -15,6 +15,13 @@
     data: [18111]
 }] %>
 
-<%= pb_rails("bar_graph", props: { id: "bar-test", chart_data: data, point_start: "2012", title: 'Solar Employment Growth by Sector, 2010-2016', subtitle: 'Source: thesolarfoundation.com', axis_title: 'Number of Employees' }  ) %>
+<%= pb_rails("bar_graph", props: {
+    axis_title: 'Number of Employees',
+    chart_data: data,
+    id: "bar-test",
+    point_start: "2012",
+    subtitle: 'Source: thesolarfoundation.com',
+    title: 'Solar Employment Growth by Sector, 2010-2016'
+}) %>
 
 
