@@ -7,3 +7,7 @@ examples:
   - card_content: Content Size
   react:
   - card_light: Default
+  - card_selected: Selected
+  - card_padding: Padding Size
+  - card_shadow: Shadow Size
+  - card_content: Content Size
