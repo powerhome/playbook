@@ -1,0 +1,19 @@
+@import "../tokens/spacing";
+
+[class^=pb_icon_title_kit]{
+  display: flex;
+  align-items: center;
+  .content{
+    margin-left: $space_sm;
+  }
+  &[class*=_column]{
+    display:flex;
+    flex-direction: column;
+    align-items: flex-start;
+
+    .content{
+      margin-top: $space_sm;
+      margin-left: 0;
+    }
+  }
+}

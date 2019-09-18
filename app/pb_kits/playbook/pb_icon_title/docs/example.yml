@@ -1,0 +1,12 @@
+examples:
+
+  rails:
+  - icon_title_default: Default
+  - icon_title_large: Large
+  - icon_title_default_column: Default Column
+  - icon_title_large_column: Large Column
+  - icon_title_default_dark: Default Dark
+  - icon_title_large_dark: Large Dark
+  - icon_title_variants: Color Variants
+  react:
+  - icon_title_default: Default

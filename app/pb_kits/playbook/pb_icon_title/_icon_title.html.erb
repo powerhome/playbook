@@ -1,0 +1,12 @@
+<%= content_tag(:div, id: object.id,  data: object.data, class: object.classname(object.kit_class)) do %>
+
+<%= pb_rails("icon_circle", props: {
+  icon: "#{object.icon}",
+  size: object.column_sizing ,
+  variant:"#{object.icon_variant}"}) %>
+<div class="content">
+
+  <%= pb_rails("title", props: { text: object.value, size: object.size === "lg" ? 1 : 3 , dark: object.dark === "dark" ?  true : false }) %>
+  <%= pb_rails("caption", props: { text: object.description , dark: object.dark === "dark" ?  true : false}) %>
+</div>
+<% end %>
