@@ -3,9 +3,7 @@ import StatValue from "../_stat_value.jsx"
 
 function StatValueDefault() {
   return (
-    <div>
-      <StatValue />
-    </div>
+    <h1>{`Coming Soon...`}</h1>
   )
 }
 

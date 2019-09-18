@@ -3,9 +3,7 @@ import TitleCount from "../_title_count.jsx"
 
 function TitleCountDefault() {
   return (
-    <div>
-      <TitleCount />
-    </div>
+    <h1>{`Coming Soon...`}</h1>
   )
 }
 

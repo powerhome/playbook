@@ -3,9 +3,7 @@ import Owner from "../_owner.jsx"
 
 function OwnerDefault() {
   return (
-    <div>
-      <Owner />
-    </div>
+    <h1>{`Coming Soon...`}</h1>
   )
 }
 

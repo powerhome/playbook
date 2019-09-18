@@ -3,9 +3,7 @@ import LabelValue from "../_label_value.jsx"
 
 function LabelValueDefault() {
   return (
-    <div>
-      <LabelValue />
-    </div>
+    <h1>{`Coming Soon...`}</h1>
   )
 }
 

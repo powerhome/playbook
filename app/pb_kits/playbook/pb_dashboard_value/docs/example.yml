@@ -3,7 +3,5 @@ examples:
   rails:
   - dashboard_value_default: Full Example
   - dashboard_value_align: Align
-
-
   react:
   - dashboard_value_default: Default

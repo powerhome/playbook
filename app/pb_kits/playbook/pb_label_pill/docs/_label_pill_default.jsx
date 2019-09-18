@@ -3,9 +3,7 @@ import LabelPill from "../_label_pill.jsx"
 
 function LabelPillDefault() {
   return (
-    <div>
-      <LabelPill />
-    </div>
+    <h1>{`Coming Soon...`}</h1>
   )
 }
 
