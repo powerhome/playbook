@@ -28,7 +28,14 @@ module Playbook
       end
 
       def display_value
-        size == "lg" ? display_value_lg : display_value_sm
+        case size
+        when "lg"
+          display_value_lg
+        when "sm"
+          display_value_sm
+        else
+          display_value_xs
+        end
       end
 
       def kit_class
@@ -85,7 +92,7 @@ module Playbook
       end
 
       def size
-        size_options = %w[lg sm]
+        size_options = %w[lg sm xs]
         one_of_value(configured_size, size_options, "sm")
       end
 
@@ -103,6 +110,15 @@ module Playbook
         end
       end
 
+      def display_value_xs
+        if is_set? configured_timestamp
+          pb_value = Playbook::PbBody::Body.new(color: "default") do
+            text
+          end
+          ApplicationController.renderer.render(partial: pb_value, as: :object)
+        end
+      end
+
       def display_value_sm
         if is_set? configured_timestamp
           pb_value = Playbook::PbBody::Body.new(color: "default") do
@@ -115,11 +131,7 @@ module Playbook
 
       def display_value_lg
         if is_set? configured_timestamp
-          title_props = {
-            size: 3,
-            text: text,
-          }
-          pb_value_lg = Playbook::PbTitle::Title.new(title_props)
+          pb_value_lg = Playbook::PbTitle::Title.new(size: 3, text: text)
           ApplicationController.renderer.render(partial: pb_value_lg, as: :object)
         end
       end
