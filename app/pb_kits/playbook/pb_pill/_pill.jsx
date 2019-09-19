@@ -1,21 +1,27 @@
-import React from 'react';
-import PropTypes from "prop-types";
+/* @flow */
+/*eslint-disable react/no-multi-comp, flowtype/space-before-type-colon */
 
-const propTypes = {
-  className: PropTypes.string,
-  id: PropTypes.string
-};
+import React from 'react'
+import Body from '../pb_body/_body.jsx'
 
-class Pill extends React.Component {
-  render() {
-    return (
-      <div className="pb_pill">
-        <span>PILL CONTENT</span>
-      </div>
-    )
-  }
+type PillProps = {
+  className?: String,
+  id?: String,
+  text: String,
+  variant?: 'success' | 'warning' | 'error' | 'info' | 'neutral',
 }
 
-Pill.propTypes = propTypes;
+const Pill = ({ className, id, text, variant }: PillProps) => (
+  <div className={`pb_pill_kit_${variant} ${className}`}>
+    <Body tag="span">
+      {text}
+    </Body>
+  </div>
+)
 
-export default Pill;
+Pill.defaultProps = {
+  className: "",
+  variant: "neutral"
+};
+
+export default Pill
