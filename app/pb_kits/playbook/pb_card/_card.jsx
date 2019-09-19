@@ -1,25 +1,40 @@
-import React from 'react';
-import PropTypes from "prop-types";
+/* @flow */
 
-const propTypes = {
-  children: PropTypes.oneOfType([
-      PropTypes.arrayOf(PropTypes.node),
-      PropTypes.node
-  ])
-};
+import React from 'react'
 
-class Card extends React.Component {
-  render() {
-    return (
-      <div className="pb_card">
-        <div className="pb_card_body">
-          { this.props.children }
-        </div>
-      </div>
-    )
-  }
+type CardPropTypes = {
+  children: Array<React.ReactNode> | React.ReactNode,
+  padding?: 'none' | 'xs' | 'sm' | 'md' | 'lg' | 'xl',
+  selected?: Boolean,
+  shadow?: 'none' | 'shallow' | 'default' | 'deep' | 'deeper' | 'deepest',
 }
 
-Card.propTypes = propTypes;
+const cardCSS = ({
+  selected=false,
+  shadow='none',
+}: CardPropTypes) => {
+  let css = ''
+  css += selected ? '_selected' : '_deselected'
+  css += `_shadow_${shadow}`
+  return css
+}
 
-export default Card;
+const bodyCSS = ({padding='md'}: CardPropTypes) => {
+  let css = ''
+  css += `_${padding}`
+  return css
+}
+
+const Card = (props: CardPropTypes) => {
+  const {children} = props
+
+  return (
+    <div className={`pb_card_kit${cardCSS(props)}`}>
+      <div className={`pb_card_body_kit${bodyCSS(props)}`}>
+        { children }
+      </div>
+    </div>
+  )
+}
+
+export default Card

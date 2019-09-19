@@ -3,9 +3,7 @@ import SectionSeparator from "../_section_separator.jsx"
 
 function SectionSeparatorDefault() {
   return (
-    <div>
-      <SectionSeparator />
-    </div>
+    <h1>{`Coming Soon...`}</h1>
   )
 }
 

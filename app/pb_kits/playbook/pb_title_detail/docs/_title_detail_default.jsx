@@ -3,9 +3,7 @@ import TitleDetail from "../_title_detail.jsx"
 
 function TitleDetailDefault() {
   return (
-    <div>
-      <TitleDetail />
-    </div>
+    <h1>{`Coming Soon...`}</h1>
   )
 }
 

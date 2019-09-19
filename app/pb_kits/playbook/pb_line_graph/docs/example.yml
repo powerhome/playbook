@@ -1,5 +1,8 @@
 examples:
+  
   rails:
-  - rails: Line Graph
+  - line_graph_default: Default
+  
+  
   react:
-  - react: Line Graph
+  - line_graph_default: Default

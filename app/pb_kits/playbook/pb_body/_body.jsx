@@ -1,36 +1,49 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
+/* @flow */
 
-const propTypes = {
-  text: PropTypes.string.isRequired,
-  tag: PropTypes.string,
-  color: PropTypes.string,
-  dark: PropTypes.bool
-};
+import React from 'react'
+import classnames from 'classnames'
 
-const defaultProps = {
-  text: "Hello Body Component",
-  tag: "p",
-  color: "",
-  dark: false
-};
-
-class Body extends Component {
-  render() {
-    const { tag, text, color, dark } = this.props;
-    // If color prop is not an empty string then render the given class
-    const colorstyle = color !== "" ? `_${color}` : "";
-
-    // If dark prop is true add the '-dark' class
-    const themestyle = dark === true ? "_dark" : "";
-
-    const Tag = `${tag}`;
-
-    return <Tag className={"body" + colorstyle + themestyle}>{text}</Tag>;
-  }
+type BodyProps = {
+  className?: String,
+  children?: Array<React.ReactChild>,
+  color: 'light' | 'lighter',
+  dark?: Boolean,
+  status?: 'negative' | 'positive',
+  tag: String,
+  text?: String,
 }
 
-Body.propTypes = propTypes;
-Body.defaultProps = defaultProps;
+const bodyCSS = ({
+  color='light',
+  dark=false,
+  status='',
 
-export default Body;
+}: BodyProps) => {
+
+  const colorStyle = color !== '' ? `_${color}` : ''
+  
+  const themeStyle = dark === true ? '_dark' : ''
+
+  const statusStyle = status !== '' ? `_${status}` : ''
+
+  return 'pb_body_kit' + colorStyle + themeStyle + statusStyle
+}
+
+const Body = (props: BodyProps) => {
+  const {
+    className,
+    children,
+    text, 
+    tag='p',
+  } = props
+
+  const Tag = `${tag}`
+    
+  return (
+    <Tag className={classnames(bodyCSS(props), className)}>
+      { text || children }
+    </Tag>
+  )
+}
+
+export default Body

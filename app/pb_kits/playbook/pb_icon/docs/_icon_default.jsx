@@ -4,7 +4,7 @@ import Icon from "../_icon.jsx"
 function IconDefault() {
   return (
     <div>
-      <Icon />
+      <h1>{`Coming Soon...`}</h1>
     </div>
   )
 }

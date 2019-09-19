@@ -4,7 +4,20 @@ import Currency from "../_currency.jsx"
 function CurrencyDefault() {
   return (
     <div>
-      <Currency />
+      <Currency
+          label='Caption'
+          value='2,000'
+      />
+      <Currency
+          align='center'
+          label='Caption'
+          value='2,000'
+      />
+      <Currency
+          align='right'
+          label='Caption'
+          value='2,000'
+      />
     </div>
   )
 }

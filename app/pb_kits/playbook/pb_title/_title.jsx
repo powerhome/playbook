@@ -1,33 +1,44 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
+/* @flow */
 
-const propTypes = {
-  text: PropTypes.string.isRequired,
-  tag: PropTypes.string.isRequired,
-  size: PropTypes.oneOf([1, 2, 3, 4]).isRequired,
-  dark: PropTypes.bool
-};
+import React from 'react'
+import classnames from 'classnames'
 
-const defaultProps = {
-  text: "Hello World",
-  tag: "h1",
-  size: 1,
-  dark: false
-};
-
-class Title extends Component {
-  render() {
-    const Tag = `${this.props.tag}`;
-    const { size, dark, text } = this.props;
-    return (
-      <Tag className={`heading_${size}` + (dark === true ? "_dark" : "")}>
-        {text}
-      </Tag>
-    );
-  }
+type TitleProps = {
+  className?: String,
+  children?: Array<React.ReactNode> | React.ReactNode,
+  dark?: Boolean,
+  size?: 1 | 2 | 3 | 4,
+  text?: String,
+  tag?: 'h1' | 'h2' | 'h3',
 }
 
-Title.propTypes = propTypes;
-Title.defaultProps = defaultProps;
+const tagCSS = ({
+  dark=false,
+  size=3,
+}) => {
+  let css = ''
 
-export default Title;
+  css += `_${size}` 
+  css += dark === true ? '_dark' : ''
+
+  return css
+}
+
+const Title = (props: TitleProps) => {
+  const {
+    className,
+    children,
+    text,
+    tag='h3',
+  } = props
+
+  const Tag = `${tag}`
+  
+  return (
+    <Tag className={classnames(`pb_title_kit${tagCSS(props)}`, className)}>
+      { text || children }
+    </Tag>
+  )
+}
+
+export default Title

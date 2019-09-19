@@ -35,46 +35,35 @@ const PbStatus = ({ size, status } : { size: String, status: String }) => (
   <div className={`pb_online_status_kit_${status} size_${size}`}/>
 )
 
-class Avatar extends React.Component<AvatarProps> {
-  static defaultProps = {
-    name: null,
-    size: 'md'
-  }
-  
-  props: AvatarProps
+const Avatar = ({
+  className,
+  name=null,
+  size='md',
+  status,
+  url
+}: AvatarProps) => {
+  const css = classnames([
+    `pb_avatar_kit`,
+    `avatar_${size}`,
+    className,
+  ])
 
-  render() {
-    const {
-      className,
-      name,
-      size,
-      status,
-      url
-    } = this.props
-
-    const css = classnames([
-      `pb_avatar_kit`,
-      `avatar_${size}`,
-      className,
-    ])
-
-    return (
-      <div className={css}
+  return (
+    <div className={css}
+        data-initials={initials(name)}
+    >
+      <div 
+          className="avatar_wrapper"
           data-initials={initials(name)}
       >
-        <div 
-            className="avatar_wrapper"
-            data-initials={initials(name)}
-        >
-          {image(url, name)}
-        </div>
-        <PbStatus 
-            size={size}
-            status={status}
-        />
+        {image(url, name)}
       </div>
-    )
-  }
+      <PbStatus 
+          size={size}
+          status={status}
+      />
+    </div>
+  )
 }
 
 export default Avatar

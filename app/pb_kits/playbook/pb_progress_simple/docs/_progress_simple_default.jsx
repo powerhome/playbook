@@ -3,9 +3,7 @@ import ProgressSimple from "../_progress_simple.jsx"
 
 function ProgressSimpleDefault() {
   return (
-    <div>
-      <ProgressSimple />
-    </div>
+    <h1>{`Coming Soon...`}</h1>
   )
 }
 

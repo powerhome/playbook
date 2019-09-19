@@ -45,6 +45,9 @@ WebpackerReact.setup (input);
 import * as BarGraph from "pb_bar_graph/docs";
 WebpackerReact.setup (BarGraph);
 
+import * as LineGraph from "pb_line_graph/docs";
+WebpackerReact.setup (LineGraph);
+
 import * as Icon from "pb_icon/docs";
 WebpackerReact.setup (Icon);
 

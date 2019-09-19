@@ -3,9 +3,7 @@ import DashboardValue from "../_dashboard_value.jsx"
 
 function DashboardValueDefault() {
   return (
-    <div>
-      <DashboardValue />
-    </div>
+    <h1>{`Coming Soon...`}</h1>
   )
 }
 

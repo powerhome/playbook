@@ -3,9 +3,7 @@ import OnlineStatus from "../_online_status.jsx"
 
 function OnlineStatusDefault() {
   return (
-    <div>
-      <OnlineStatus />
-    </div>
+    <h1>{`Coming Soon...`}</h1>
   )
 }
 
