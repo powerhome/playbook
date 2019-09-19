@@ -3,9 +3,7 @@ import Message from "../_message.jsx"
 
 function MessageDefault() {
   return (
-    <div>
-      <Message />
-    </div>
+    <h1>{`Coming Soon...`}</h1>
   )
 }
 

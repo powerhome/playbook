@@ -3,9 +3,7 @@ import StarRating from "../_star_rating.jsx"
 
 function StarRatingDefault() {
   return (
-    <div>
-      <StarRating />
-    </div>
+    <h1>{`Coming Soon...`}</h1>
   )
 }
 

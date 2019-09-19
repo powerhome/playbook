@@ -3,9 +3,7 @@ import Phone from "../_phone.jsx"
 
 function PhoneDefault() {
   return (
-    <div>
-      <Phone />
-    </div>
+    <h1>{`Coming Soon...`}</h1>
   )
 }
 

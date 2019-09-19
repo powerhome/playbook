@@ -3,9 +3,7 @@ import OwnerPhone from "../_owner_phone.jsx"
 
 function OwnerPhoneDefault() {
   return (
-    <div>
-      <OwnerPhone />
-    </div>
+    <h1>{`Coming Soon...`}</h1>
   )
 }
 

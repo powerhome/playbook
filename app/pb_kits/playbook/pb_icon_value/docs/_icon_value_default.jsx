@@ -3,9 +3,7 @@ import IconValue from "../_icon_value.jsx"
 
 function IconValueDefault() {
   return (
-    <div>
-      <IconValue />
-    </div>
+    <h1>{`Coming Soon...`}</h1>
   )
 }
 
