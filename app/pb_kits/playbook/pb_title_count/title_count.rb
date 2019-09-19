@@ -43,7 +43,7 @@ module Playbook
 
       def title
         if is_set? configured_title
-          pb_title = Playbook::PbTitle::Title.new(size: title_size, text: configured_title)
+          pb_title = Playbook::PbTitle::Title.new(size: title_size, text: configured_title, classname: "pb_title_count_text")
           ApplicationController.renderer.render(partial: pb_title, as: :object)
         end
       end

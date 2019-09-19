@@ -6,8 +6,8 @@
   justify-content: flex-start;
   align-items: baseline;
 
-  & > [class^=pb_title_kit] {
-    margin-right: $space-xs;
+  & > .pb_title_count_text {
+    padding-right: $space-xs;
   }
 
   &[class*=_center] {
