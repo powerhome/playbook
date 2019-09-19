@@ -128,3 +128,6 @@ WebpackerReact.setup (SectionSeparator);
 
 import * as Currency from "pb_currency/docs";
 WebpackerReact.setup (Currency);
+
+import * as WeekdayStacked from "pb_weekday_stacked/docs";
+WebpackerReact.setup (WeekdayStacked);

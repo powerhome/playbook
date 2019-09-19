@@ -1,0 +1,17 @@
+@import "../pb_caption/caption"; //used for weekday (caption)
+@import "../pb_title/title";   //used for date (title 1)
+
+[class^=pb_weekday_stacked_kit] {
+    &[class*=_center]  {
+      & > [class^=pb_caption],
+      & > [class^=pb_title] {
+        text-align: center;
+      }
+  }
+    &[class*=_right]  {
+      & > [class^=pb_caption],
+      & > [class^=pb_title] {
+        text-align: right;
+      }
+    }
+}

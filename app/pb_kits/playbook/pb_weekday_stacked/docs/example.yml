@@ -1,0 +1,10 @@
+examples:
+
+  rails:
+  - weekday_stacked_default: Default
+  - weekday_stacked_align: Align
+  - weekday_stacked_dark: Dark
+
+
+  react:
+  - weekday_stacked_default: Default
