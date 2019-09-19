@@ -3,10 +3,7 @@ import Toggle from "../_toggle.jsx"
 
 function ToggleDefault() {
   return (
-    <div>
-      <Toggle size="sm"/>
-      <Toggle size="md"/>
-    </div>
+    <h1>{`Coming Soon...`}</h1>
   )
 }
 

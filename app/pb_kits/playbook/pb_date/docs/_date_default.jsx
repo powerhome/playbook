@@ -4,7 +4,7 @@ import Date from "../_date.jsx"
 function DateDefault() {
   return (
     <div>
-      <Date />
+      <h1>{`Coming Soon...`}</h1>
     </div>
   )
 }

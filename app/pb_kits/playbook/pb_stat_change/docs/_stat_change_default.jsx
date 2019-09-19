@@ -3,9 +3,7 @@ import StatChange from "../_stat_change.jsx"
 
 function StatChangeDefault() {
   return (
-    <div>
-      <StatChange />
-    </div>
+    <h1>{`Coming Soon...`}</h1>
   )
 }
 

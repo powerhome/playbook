@@ -3,9 +3,7 @@ import Time from "../_time.jsx"
 
 function TimeDefault() {
   return (
-    <div>
-      <Time />
-    </div>
+    <h1>{`Coming Soon...`}</h1>
   )
 }
 

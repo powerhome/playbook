@@ -9,13 +9,13 @@ examples:
     - table_single_line: Force Single Line
     - table_dark: Table Dark
     - table_container_dark: Table Container Dark
-  react:
-    - table_sm: Small
-    - table_md: Medium
-    - table_lg: Large
-    - table_container: Table Container
-    - table_disable_hover: Disable Hover
-    - table_multiline: Multi-line
-    - table_single_line: Force Single Line
-    - table_dark: Table Dark
-    - table_container_dark: Table Container Dark
+  # react:
+  #   - table_sm: Small
+  #   - table_md: Medium
+  #   - table_lg: Large
+  #   - table_container: Table Container
+  #   - table_disable_hover: Disable Hover
+  #   - table_multiline: Multi-line
+  #   - table_single_line: Force Single Line
+  #   - table_dark: Table Dark
+  #   - table_container_dark: Table Container Dark

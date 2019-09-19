@@ -3,9 +3,7 @@ import User from "../_user.jsx"
 
 function UserDefault() {
   return (
-    <div>
-      <User />
-    </div>
+    <h1>{`Coming Soon...`}</h1>
   )
 }
 

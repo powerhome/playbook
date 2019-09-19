@@ -9,9 +9,7 @@ const propTypes = {
 class IconCircle extends React.Component {
   render() {
     return (
-      <div className="pb_icon_circle">
-        <span>ICON CIRCLE CONTENT</span>
-      </div>
+      <h1>{`Coming Soon...`}</h1>
     )
   }
 }

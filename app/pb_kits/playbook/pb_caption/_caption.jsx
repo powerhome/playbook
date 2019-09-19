@@ -1,39 +1,36 @@
-import React from "react";
-import PropTypes from "prop-types";
+/* @flow */
 
-const propTypes = {
-  tag: PropTypes.string.isRequired,
-  text: PropTypes.string.isRequired,
-  large: PropTypes.bool,
-  dark: PropTypes.bool
-};
+import React from 'react'
 
-const defaultProps = {
-  tag: "div",
-  text: "Hello Cool React Caption",
-  large: false,
-  dark: false
-};
-
-class Caption extends React.Component {
-  render() {
-    const { tag, text, large, dark } = this.props;
-    const Tag = `${tag}`;
-    return (
-      <Tag
-          className={
-          `caption` +
-          (large === true ? "_lg" : "") +
-          (dark === true ? "_dark" : "")
-        }
-      >
-        {text}
-      </Tag>
-    );
-  }
+type CaptionProps = {
+  children: Array<React.ReactNode> | React.ReactNode,
+  dark?: Boolean,
+  large?: Boolean,
+  tag: String,
+  text: String,
 }
 
-Caption.propTypes = propTypes;
-Caption.defaultProps = defaultProps;
+const Caption = ({
+  children,
+  dark=false,
+  large=false,
+  tag='div',
+  text,
+}: CaptionProps) => {
 
-export default Caption;
+  const Tag = `${tag}`
+
+  return (
+    <Tag
+        className={
+        `pb_caption_kit` +
+        (large === true ? '_lg' : '') +
+        (dark === true ? '_dark' : '')
+      }
+    >
+      {text || children}
+    </Tag>
+  )
+}
+
+export default Caption

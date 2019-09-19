@@ -4,11 +4,7 @@ import VerticalNavItem from "../_item.jsx"
 
 function DefaultNav() {
   return (
-    <VerticalNav title="Title Example">
-      <VerticalNavItem active text="Active Nav Item" />
-      <VerticalNavItem text="Nav Item" />
-      <VerticalNavItem text="Nav Item" />
-    </VerticalNav>
+    <h1>{`Coming Soon...`}</h1>
   )
 }
 

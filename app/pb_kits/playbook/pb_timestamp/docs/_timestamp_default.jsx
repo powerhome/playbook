@@ -3,9 +3,7 @@ import Timestamp from "../_timestamp.jsx"
 
 function TimestampDefault() {
   return (
-    <div>
-      <Timestamp />
-    </div>
+    <h1>{`Coming Soon...`}</h1>
   )
 }
 

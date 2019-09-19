@@ -1,3 +1,7 @@
-export {default as ButtonDark} from './_button_dark.jsx';
-export {default as ButtonLight} from './_button_light.jsx';
-export {default as ButtonSizes} from './_button_sizes.jsx';
+export {default as ButtonDefault} from './_button_default.jsx'
+export {default as ButtonFullWidth} from './_button_full_width.jsx'
+export {default as ButtonLink} from './_button_link.jsx'
+export {default as ButtonLoading} from './_button_loading.jsx'
+export {default as ButtonBlockContent} from './_button_block_content.jsx'
+export {default as ButtonAccessibility} from './_button_accessibility.jsx'
+export {default as ButtonDefaultDark} from './_button_default_dark.jsx'

@@ -3,9 +3,7 @@ import UserBadge from "../_user_badge.jsx"
 
 function UserBadgeDefault() {
   return (
-    <div>
-      <UserBadge />
-    </div>
+    <h1>{`Coming Soon...`}</h1>
   )
 }
 
