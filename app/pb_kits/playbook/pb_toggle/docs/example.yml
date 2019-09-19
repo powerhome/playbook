@@ -3,7 +3,7 @@ examples:
   rails:
   - toggle_default: Sizes
   - toggle_checked: Default State
-
+  - toggle_name: Name and Value
 
   react:
   - toggle_default: Default

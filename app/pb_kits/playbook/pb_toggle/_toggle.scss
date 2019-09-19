@@ -19,6 +19,7 @@ $toggle_sizes: (
 
       .pb_toggle_wrapper {
         .pb_toggle_control {
+          cursor: pointer;
           transition: $transition;
           width: $width;
           height: $height;

@@ -3,22 +3,39 @@
 module Playbook
   module PbToggle
     class Toggle < Playbook::PbKit::Base
-      PROPS = %i[configured_classname
+      PROPS = %i[configured_aria
+                 configured_classname
+                 configured_checked
                  configured_data
                  configured_id
+                 configured_name
                  configured_size
-                 configured_checked].freeze
+                 configured_value].freeze
 
-      def initialize(classname: default_configuration,
+      def initialize(aria: default_configuration,
+                     classname: default_configuration,
+                     checked: default_configuration,
                      data: default_configuration,
                      id: default_configuration,
+                     name: default_configuration,
                      size: default_configuration,
-                     checked: default_configuration)
+                     value: default_configuration)
+        self.configured_aria = aria
         self.configured_classname = classname
+        self.configured_checked = checked
         self.configured_data = data
         self.configured_id = id
+        self.configured_name = name
         self.configured_size = size
-        self.configured_checked = checked
+        self.configured_value = value
+      end
+
+      def checked
+        true_value(configured_checked, "checked='true'", "")
+      end
+
+      def name
+        "name=\"#{configured_name}\"" if is_set? configured_name
       end
 
       def size
@@ -26,12 +43,8 @@ module Playbook
         one_of_value(configured_size, size_options, "md")
       end
 
-      def checked
-        true_value(configured_checked, "checked='true'", "")
-      end
-
-      def checked_class
-        checked ? "on" : "off"
+      def value
+        "value=\"#{configured_value}\"" if is_set? configured_value
       end
 
       def kit_class
@@ -48,6 +61,10 @@ module Playbook
       end
 
     private
+
+      def checked_class
+        checked ? "on" : "off"
+      end
 
       DEFAULT = Object.new
       private_constant :DEFAULT
