@@ -1,0 +1,25 @@
+<%= pb_rails("title", props: { size: 4, text: "Which of the following vehicles do you own?" }) %>
+
+<br>
+
+<label>
+  <%= pb_rails("caption", props: { text: "Car" }) %>
+  <%= pb_rails("toggle", props: {
+    size: "sm",
+    checked: false,
+    name: "vehicle",
+    value: "car"
+  }) %>
+</label>
+
+<br>
+
+<label>
+  <%= pb_rails("caption", props: { text: "Bike" }) %>
+  <%= pb_rails("toggle", props: {
+    size: "sm",
+    checked: false,
+    name: "vehicle",
+    value: "bike"
+  }) %>
+</label>
