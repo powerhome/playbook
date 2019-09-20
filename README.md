@@ -17,6 +17,7 @@ To clean up this project from your local machine, run `make stop`, which will dr
 
 <details><summary>Making changes to the Gemfile:</summary>
 <p>
+  
 When making changes to the Gemfile:
 
 * Stop the `make start` process
