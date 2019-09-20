@@ -2,7 +2,9 @@
 /*eslint-disable react/no-multi-comp, flowtype/space-before-type-colon */
 
 import React from 'react'
-import Body from '../pb_body/_body.jsx'
+
+import classnames from 'classnames'
+import Title from '../pb_title/_title.jsx'
 
 type PillProps = {
   className?: String,
@@ -11,17 +13,22 @@ type PillProps = {
   variant?: 'success' | 'warning' | 'error' | 'info' | 'neutral',
 }
 
-const Pill = ({ className, id, text, variant }: PillProps) => (
-  <div className={`pb_pill_kit_${variant} ${className}`}>
-    <Body tag="span">
-      {text}
-    </Body>
-  </div>
-)
+const Pill = ({
+  className,
+  id,
+  text,
+  variant='neutral'
+}: PillProps) => {
+  const css = classnames([
+    `pb_pill_kit_${variant}`,
+    className,
+  ])
 
-Pill.defaultProps = {
-  className: "",
-  variant: "neutral"
-};
+  return (
+    <div className={css}>
+      <Title size={4} className="pb_pill_text" text={text} />
+    </div>
+  )
+}
 
 export default Pill
