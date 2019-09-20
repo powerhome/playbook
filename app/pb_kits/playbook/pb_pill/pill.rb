@@ -22,9 +22,7 @@ module Playbook
       end
 
       def display_text
-        pb_text = Playbook::PbBody::Body.new(tag: "span") do
-          text
-        end
+        pb_text = Playbook::PbTitle::Title.new(size: 4, text: text, classname: "pb_pill_text")
         ApplicationController.renderer.render(partial: pb_text, as: :object)
       end
 

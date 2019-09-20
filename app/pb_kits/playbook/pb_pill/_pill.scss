@@ -17,7 +17,7 @@ $pb_pill_height: 22px;
     &[class*=_#{$color_name}]  {
       background: rgba($color_value, $opacity-1);
 
-      [class^=pb_body_kit] {
+      .pb_pill_text {
         color: $color_value !important;
       }
     }
