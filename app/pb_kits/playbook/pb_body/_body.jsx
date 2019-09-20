@@ -14,14 +14,14 @@ type BodyProps = {
 }
 
 const bodyCSS = ({
-  color='light',
+  color='default',
   dark=false,
   status='',
 
 }: BodyProps) => {
 
   const colorStyle = color !== '' ? `_${color}` : ''
-  
+
   const themeStyle = dark === true ? '_dark' : ''
 
   const statusStyle = status !== '' ? `_${status}` : ''
@@ -33,12 +33,12 @@ const Body = (props: BodyProps) => {
   const {
     className,
     children,
-    text, 
+    text,
     tag='p',
   } = props
 
   const Tag = `${tag}`
-    
+
   return (
     <Tag className={classnames(bodyCSS(props), className)}>
       { text || children }
