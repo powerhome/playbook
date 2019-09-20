@@ -1,0 +1,22 @@
+<%= pb_rails("title", props: { size: 4, text: "Select one option:" }) %>
+
+<br>
+
+<%= pb_rails("caption", props: { text: "Male" }) %>
+<%= pb_rails("toggle", props: { size: "sm" }) do %>
+  <input type="radio" name="gender" value="male">
+<% end %>
+
+<br/>
+
+<%= pb_rails("caption", props: { text: "Female" }) %>
+<%= pb_rails("toggle", props: { size: "sm" }) do %>
+  <input type="radio" name="gender" value="female">
+<% end %>
+
+<br/>
+
+<%= pb_rails("caption", props: { text: "Other" }) %>
+<%= pb_rails("toggle", props: { size: "sm" }) do %>
+  <input type="radio" name="gender" value="other">
+<% end %>
