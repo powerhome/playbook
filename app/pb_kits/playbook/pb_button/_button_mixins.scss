@@ -15,7 +15,7 @@ $pb_button_border_width: 1px;
 @mixin pb_button($bg: $primary_action, $color: $text_dk_default, $border: transparent) {
   text-rendering: optimizeLegibility;
   font-size: $font_small;
-  font-weight: $regular;
+  font-weight: $bold;
   text-align: center;
   vertical-align: middle;
   text-transform: none;
