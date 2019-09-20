@@ -20,6 +20,9 @@ import TimeStamp from "../pb_timestamp/_timestamp";
 import Title from "../pb_title/_title";
 import User from "../pb_user/_user";
 import VerticalNav from "../pb_vertical_nav/_vertical_nav";
+import Pill from "../pb_pill/_pill";
+import Currency from "../pb_currency/_currency";
+import Toggle from "../pb_toggle/_toggle";
 
 // Dashboard Settings
 import commonSettings from "../pb_dashboard/commonSettings";
@@ -53,6 +56,9 @@ export {
   Title,
   User,
   VerticalNav,
+  Pill,
+  Currency,
+  Toggle,
   commonSettings,
   lineGraphSettings,
   barGraphSettings,
