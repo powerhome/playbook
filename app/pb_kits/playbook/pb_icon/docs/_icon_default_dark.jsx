@@ -1,7 +1,7 @@
 import React from "react"
 import Icon from "../_icon.jsx"
 
-function IconDefault() {
+function IconDefaultDark() {
   return (
     <div>
       <Icon icon="user" fixedWidth />
@@ -9,4 +9,4 @@ function IconDefault() {
   )
 }
 
-export default IconDefault;
+export default IconDefaultDark;
