@@ -64,6 +64,7 @@
     "jsx-control-statements": "^3.2.8",
     "lazysizes": "^4.1.6",
     "lodash": "4.17.15",
+    "node-sass": "^4.12.0",
     "prop-types": "^15.6.2",
     "rails-erb-loader": "^5.5.1",
     "react": "^16.7.0",

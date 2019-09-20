@@ -1,0 +1,9 @@
+examples:
+
+  rails:
+  - status_default: Default
+
+
+
+  react:
+  - status_default: Default
