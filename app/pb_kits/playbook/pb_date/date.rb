@@ -28,7 +28,14 @@ module Playbook
       end
 
       def display_value
-        size == "lg" ? display_value_lg : display_value_sm
+        case size
+        when "lg"
+          display_value_lg
+        when "sm"
+          display_value_sm
+        else
+          display_value_xs
+        end
       end
 
       def kit_class
@@ -67,7 +74,7 @@ module Playbook
       end
 
       def size
-        size_options = %w[lg sm]
+        size_options = %w[lg sm xs]
         one_of_value(configured_size, size_options, "sm")
       end
 
@@ -79,6 +86,13 @@ module Playbook
       def text
         content_tag(:span) do
           "#{day_of_week} &middot; #{month} #{day}".html_safe
+        end
+      end
+
+      def display_value_xs
+        if is_set? configured_timestamp
+          pb_value = Playbook::PbTitle::Title.new(size: 4, text: text)
+          ApplicationController.renderer.render(partial: pb_value, as: :object)
         end
       end
 
