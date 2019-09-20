@@ -3,7 +3,17 @@ import StatChange from "../_stat_change.jsx"
 
 function StatChangeDefault() {
   return (
-    <h1>{`Coming Soon...`}</h1>
+    <div>
+      <StatChange change="increase" value="28.4%" />
+
+      <br/>
+
+      <StatChange change="decrease" value="6.1%" />
+
+      <br/>
+
+      <StatChange change="neutral" value="98%" />
+    </div>
   )
 }
 

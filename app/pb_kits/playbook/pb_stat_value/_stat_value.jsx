@@ -1,21 +1,49 @@
-import React from 'react';
-import PropTypes from "prop-types";
+/* @flow */
 
-const propTypes = {
-  className: PropTypes.string,
-  id: PropTypes.string
-};
+import React from 'react'
+import classnames from 'classnames'
+import Title from '../pb_title/_title.jsx'
 
-class StatValue extends React.Component {
-  render() {
-    return (
-      <div className="pb_stat_value">
-        <span>STAT VALUE CONTENT</span>
-      </div>
-    )
-  }
+type StatValueProps = {
+  className?: String,
+  id?: String,
+  unit?: String,
+  value: String | Number
 }
 
-StatValue.propTypes = propTypes;
+const StatValue = (props: StatValueProps) => {
+  const {
+    className,
+    id,
+    unit,
+    value=0
+  } = props
 
-export default StatValue;
+  const displayValue = function(value) {
+    if (value) {
+      return (
+        <Title size={1} text={value} />
+      )
+    }
+  }
+
+  const displayUnit = function(unit) {
+    if (unit) {
+      return (
+        <Title size={3} text={unit} />
+      )
+    }
+  }
+
+  return (
+    <div id={id} className={classnames('pb_stat_value_kit', className)}>
+      <div className="pb_stat_value_wrapper">
+        {displayValue(value)}
+        &nbsp;
+        {displayUnit(unit)}
+      </div>
+    </div>
+  )
+}
+
+export default StatValue
