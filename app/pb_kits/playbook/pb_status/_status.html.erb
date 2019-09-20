@@ -6,4 +6,6 @@
   <div class="status_wrapper">
     <% object.statuses.each do |status| %>
       <div class="status_item <%= object.active == status ? "active" : "" %>" id="<%= status %>"></div>
+    <% end %>
   </div>
+<% end %>

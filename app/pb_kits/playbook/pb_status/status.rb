@@ -6,8 +6,6 @@ module Playbook
       PROPS = %i[configured_classname
                  configured_data
                  configured_active
-                 configured_size
-                 configured_variant
                  configured_status
                  configured_statuses
                  configured_id].freeze
@@ -15,16 +13,12 @@ module Playbook
       def initialize(classname: default_configuration,
                      data: default_configuration,
                      active: default_configuration,
-                     size: default_configuration,
-                     variant: default_configuration,
                      status: default_configuration,
                      statuses: default_configuration,
                      id: default_configuration)
         self.configured_classname = classname
         self.configured_data = data
         self.configured_active = active
-        self.configured_size = size
-        self.configured_variant = variant
         self.configured_status = status
         self.configured_statuses = statuses
         self.configured_id = id
@@ -48,8 +42,6 @@ module Playbook
       def kit_class
         kit_options = [
           "pb_status",
-          size,
-          variant,
         ]
         kit_options.join("_")
       end
@@ -60,15 +52,6 @@ module Playbook
 
     private
 
-    def size
-      size_options = %w[xs sm]
-      one_of_value(configured_size, size_options, "sm")
-    end
-
-    def variant
-      variant_options = %w[default queued in-progress validation done ]
-      one_of_value(configured_variant, variant_options, "default")
-    end
 
       DEFAULT = Object.new
       private_constant :DEFAULT
