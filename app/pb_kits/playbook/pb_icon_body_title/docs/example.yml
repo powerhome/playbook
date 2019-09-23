@@ -1,0 +1,11 @@
+examples:
+  
+  rails:
+  - icon_body_title_default: Default
+  - icon_body_title_no_link: No Link
+  
+  
+  react:
+  - icon_body_title_default: Default
+  - icon_body_title_no_link: No Link
+  
