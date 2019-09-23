@@ -1,0 +1,9 @@
+examples:
+  
+  rails:
+  - range_slider_default: Default
+  
+  
+  react:
+  - range_slider_default: Default
+  

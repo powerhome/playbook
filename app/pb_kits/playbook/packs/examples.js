@@ -128,3 +128,6 @@ WebpackerReact.setup (SectionSeparator);
 
 import * as Currency from "pb_currency/docs";
 WebpackerReact.setup (Currency);
+
+import * as RangeSlider from "pb_range_slider/docs";
+WebpackerReact.setup (RangeSlider);

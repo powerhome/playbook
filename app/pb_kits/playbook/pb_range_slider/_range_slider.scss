@@ -1,0 +1,58 @@
+[class^=pb_range_slider] {
+  /*
+   * Simulates the progress section of the range. Unfortunately, Chrome
+   * does not provide a pseudo-element for style the range's progress like
+   * Mozilla (-moz-range-progress) and MS (-ms-fill-lower) does.
+   *
+   * This creates multiple static box-shadow elements side by side next to the
+   * range's thumb element, in order to simulate the range's progress.
+   */
+  @function make-progress($color) {
+    $val: 5px 0 0 -6px $color;
+
+    @for $i from 6 through 2000 {
+      $val: #{$val}, #{$i}px 0 0 -6px #{$color};
+    }
+
+    @return $val;
+  }
+
+  input[type="range"] {
+    outline: 0;
+    border: 0;
+    max-width: 100%;
+    transition: box-shadow 0.2s ease-in-out;
+
+    & {
+      overflow: hidden;
+      height: 16px;
+      -webkit-appearance: none
+    }
+
+    &::-webkit-slider-runnable-track {
+      height: 4px;
+      -webkit-appearance: none;
+      margin-top: -1px;
+      background-color: $primary_action;
+      border-radius: 2px;
+    }
+
+    &::-webkit-slider-thumb {
+      width: 16px;
+      -webkit-appearance: none;
+      height: 16px;
+      cursor: pointer;
+      background: #fff;
+      box-shadow: make-progress($border_light);
+      border: 3px solid $primary_action;
+      border-radius: 50%;
+      position: relative;
+      top: -6px;
+      transition: box-shadow 0.2s ease-in-out;
+    }
+
+    &:active::-webkit-slider-thumb {
+      box-shadow: make-progress($border_light), inset 0 0 0 3px $primary_action;
+    }
+  }
+}
