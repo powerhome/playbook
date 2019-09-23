@@ -1,6 +1,7 @@
 /* @flow */
 
 import React from 'react'
+import classnames from 'classnames'
 
 import { pbChart } from "../"
 
@@ -10,7 +11,7 @@ type BarGraphProps = {
     name: String,
     data: Array<Number>,
   }>,
-  className?: String,
+  className?: String | Array<String>,
   id: Number,
   pointStart: Number,
   subTitle?: String,
@@ -19,7 +20,6 @@ type BarGraphProps = {
 
 export default class BarGraph extends React.Component<BarGraphProps> {
   static defaultProps = {
-    className: 'pb_bar_graph',
     type: 'column',
   }
 
@@ -53,7 +53,7 @@ export default class BarGraph extends React.Component<BarGraphProps> {
 
     return (
       <div
-          className={className}
+          className={classnames('pb_bar_graph', className)}
           id={id}
       />
     )

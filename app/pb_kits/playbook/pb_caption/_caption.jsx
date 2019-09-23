@@ -1,9 +1,11 @@
 /* @flow */
 
 import React from 'react'
+import classnames from 'classnames'
 
 type CaptionProps = {
   children: Array<React.ReactNode> | React.ReactNode,
+  className?: String | Array<String>,
   dark?: Boolean,
   large?: Boolean,
   tag: String,
@@ -12,6 +14,7 @@ type CaptionProps = {
 
 const Caption = ({
   children,
+  className,
   dark=false,
   large=false,
   tag='div',
@@ -22,11 +25,12 @@ const Caption = ({
 
   return (
     <Tag
-        className={
-        `pb_caption_kit` +
-        (large === true ? '_lg' : '') +
-        (dark === true ? '_dark' : '')
-      }
+        className={classnames([
+        `pb_caption_kit`,
+        (large === true ? '_lg' : ''),
+        (dark === true ? '_dark' : ''),
+        className
+      ])}
     >
       {text || children}
     </Tag>

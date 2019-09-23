@@ -4,7 +4,7 @@ import React from 'react'
 import classnames from 'classnames'
 
 type BodyProps = {
-  className?: String,
+  className?: String | Array<String>,
   children?: Array<React.ReactChild>,
   color: 'light' | 'lighter',
   dark?: Boolean,

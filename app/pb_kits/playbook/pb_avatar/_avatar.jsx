@@ -8,7 +8,7 @@ import { map } from 'lodash'
 import { Image } from "../"
 
 type AvatarProps = {
-  className?: String,
+  className?: String | Array<String>,
   name: String,
   size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl',
   status: 'online' | 'away',
@@ -52,13 +52,13 @@ const Avatar = ({
     <div className={css}
         data-initials={initials(name)}
     >
-      <div 
+      <div
           className="avatar_wrapper"
           data-initials={initials(name)}
       >
         {image(url, name)}
       </div>
-      <PbStatus 
+      <PbStatus
           size={size}
           status={status}
       />
