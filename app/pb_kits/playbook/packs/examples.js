@@ -128,3 +128,6 @@ WebpackerReact.setup (SectionSeparator);
 
 import * as Currency from "pb_currency/docs";
 WebpackerReact.setup (Currency);
+
+import * as LoadingInline from "pb_loading_inline/docs";
+WebpackerReact.setup (LoadingInline);

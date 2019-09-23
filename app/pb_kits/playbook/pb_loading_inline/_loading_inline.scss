@@ -1,0 +1,29 @@
+@import "../pb_body/body";
+
+[class^=pb_loading_inline_kit] {
+  display: inline-flex;
+  align-items: baseline;
+
+  & > .pb_loading_inline_text {
+    padding-right: $space-xs;
+  }
+
+  &[class*=_center] {
+    justify-content: center;
+  }
+
+  &[class*=_left] {
+    justify-content: flex-start;
+  }
+
+  &[class*=_right] {
+    justify-content: flex-end;
+  }
+  &[class*=_dark] {
+    color: #FFFFFF;
+  }
+
+  &[class*=_light] {
+    color: #8798AD;
+  }
+}
