@@ -38,3 +38,5 @@ import "./pb_stat_value.js";
 import "./pb_stat_change.js";
 import "./pb_section_separator.js";
 import "./pb_currency.js";
+import "./pb_icon_body_title.js";
+import "./pb_inventory_location.js";

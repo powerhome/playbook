@@ -128,3 +128,9 @@ WebpackerReact.setup (SectionSeparator);
 
 import * as Currency from "pb_currency/docs";
 WebpackerReact.setup (Currency);
+
+import * as IconBodyTitle from "pb_icon_body_title/docs";
+WebpackerReact.setup (IconBodyTitle);
+
+import * as InventoryLocation from "pb_inventory_location/docs";
+WebpackerReact.setup (InventoryLocation);

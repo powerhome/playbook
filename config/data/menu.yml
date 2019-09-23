@@ -39,3 +39,5 @@ kits:
   - stat_change
   - section_separator
   - currency
+  - icon_body_title
+  - inventory_location
