@@ -1,0 +1,7 @@
+<%= content_tag(:time,
+    id: object.id,
+    data: object.data,
+    class: object.classname(object.kit_class),
+    datetime: object.time_iso) do %>
+  <%= object.text %>
+<% end %>

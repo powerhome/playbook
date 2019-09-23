@@ -1,0 +1,67 @@
+[class^=pb_time_stacked_kit] {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+
+  &[class*=_left] {
+    align-items: flex-start;
+  }
+
+  &[class*=_center] {
+    align-items: center;
+  }
+
+  &[class*=_right] {
+    align-items: flex-end;
+  }
+}
+
+// @import "../tokens/colors";
+// @import "../tokens/typography";
+// @import "../pb_icon/icon";
+// @import "../pb_body/body";
+// @import "../pb_title/title";
+//
+// [class^=pb_time_stacked_kit] {
+//   &[class*=_center]  {
+//     [class^=pb_body] {
+//       text-align: center;
+//     }
+//   }
+//
+//   &[class*=_right]  {
+//     [class^=pb_body] {
+//       text-align: right;
+//     }
+//   }
+//
+//   [class^=pb_body] {
+//     font-weight: $bold !important;
+//     color: $text_lt_lighter;
+//     time {
+//       .pb_time_timezone {
+//         display: block;
+//         font-size: $text-small;
+//         line-height: $lh-tightest;
+//       }
+//     }
+//   }
+//
+//   [class^=pb_time_stacked_timezone] {
+//     font-size: $font-small;
+//     font-weight: $regular;
+//     color: $text-lt-light;
+//
+//     &::before {
+//       content: " ";
+//     }
+//   }
+//
+//   &[class*=_lg] {
+//     [class^=pb_time_stacked_timezone] {
+//       font-size: $font-large !important;
+//       color: $text-lt-light;
+//     }
+//   }
+// }

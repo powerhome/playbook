@@ -1,0 +1,17 @@
+<%= pb_rails("time_stacked", props: {
+  time: Time.now,
+  dark: true
+}) %>
+
+<%= pb_rails("time_stacked", props: {
+  time: "2012-08-02T15:49:29Z",
+  align: "center",
+  dark: true
+}) %>
+
+<%= pb_rails("time_stacked", props: {
+  time: Time.now,
+  timezone: "America/Chicago",
+  align: "right",
+  dark: true
+}) %>

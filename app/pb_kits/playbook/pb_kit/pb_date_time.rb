@@ -1,12 +1,13 @@
 module Playbook
   module PbKit
     class PbDateTime
-      def initialize(value, zone)
+      attr_accessor :value, :zone
+
+      def initialize(value, zone = "America/New_York")
         @value = self.convert_to_timestamp_and_zone(value, zone)
       end
 
-      def convert_to_timestamp_and_zone(value, zone = nil)
-        zone ||= "America/New_York"
+      def convert_to_timestamp_and_zone(value, zone)
         converted_time = value.is_a?(String) ? DateTime.parse(value) : value
         converted_time.in_time_zone(zone)
       end
@@ -15,8 +16,7 @@ module Playbook
         @value = @value.is_a?(String) ? DateTime.parse(@value) : @value
       end
 
-      def convert_to_timezone(zone)
-        zone ||= "America/New_York"
+      def convert_to_timezone(zone = "America/New_York")
         @value = @value.in_time_zone(zone)
       end
 

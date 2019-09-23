@@ -1,0 +1,10 @@
+examples:
+
+  rails:
+  - time_stacked_default: Align
+  - time_stacked_dark_default: Align Dark
+
+
+  react:
+  - time_stacked_default: Default
+  - time_stacked_dark_default: Default Dark
