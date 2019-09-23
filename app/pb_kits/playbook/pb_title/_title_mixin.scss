@@ -3,7 +3,7 @@
 @import "../tokens/line_height";
 
 @mixin pb_title(
-    $fontSize: $heading_1, 
+    $fontSize: $heading_1,
     $fontWeight: $lighter,
     $lineHeight: $lh_tighter){
   font-size: $fontSize;
@@ -16,6 +16,7 @@
 
 @mixin pb_title_1 {
   @include pb_title($heading_1);
+  letter-spacing: -0.03em;
 }
 
 @mixin pb_title_2 {
