@@ -1,0 +1,32 @@
+.pb_home_address_city {
+  .address-delimeter {
+    width: 8px;
+    height: 22px;
+    opacity: 100%;
+    content: ".";
+    font-family: NotoSansLinearB;
+    font-size: 16px;
+    color: #393E00;
+    letter-spacing: 0;
+    line-height: 22px;
+  }
+
+  .home-hashtag {
+    background: #064DFF;
+    .home-id {
+      font-family: ProximaNova-Bold;
+      font-size: 10px;
+      color: #064DFF;
+      letter-spacing: 0;
+      text-align: center;
+    }
+  }
+
+  .state-sm {
+    font-family: ProximaNova-Regular;
+    font-size: 13px;
+    color: #8798AD;
+    letter-spacing: 0;
+    line-height: 22px;
+  }
+}

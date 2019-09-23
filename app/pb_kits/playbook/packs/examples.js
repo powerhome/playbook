@@ -128,3 +128,6 @@ WebpackerReact.setup (SectionSeparator);
 
 import * as Currency from "pb_currency/docs";
 WebpackerReact.setup (Currency);
+
+import * as HomeAddressCity from "pb_home_address_city/docs";
+WebpackerReact.setup (HomeAddressCity);

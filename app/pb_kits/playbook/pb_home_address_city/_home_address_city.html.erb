@@ -1,0 +1,8 @@
+<%= content_tag(:div,
+    id: object.id,
+    data: object.data,
+    class: object.classname("pb_home_address_city")) do %>
+  <%= object.address1 %> <span class="address-delimeter"><span> <%= object.house_style %>
+  <%= object.city %> <span>, <span> <%= object.state %> <%= object.zip_code %>
+  <span class="home-id"><%="#{object.home_id}".prepend('H#')%></span> <%= object.state_sm %>
+<% end %>
