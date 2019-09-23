@@ -1,13 +1,14 @@
 /* @flow */
 
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
+import classnames from 'classnames'
 
 type ButtonPropTypes = {
   aria?: {
     label: String,
   },
   children?: Array<React.ReactChild>,
+  className?: String | Array<String>,
   dark: Boolean,
   disabled?: Boolean,
   fixedWidth?: Boolean,
@@ -62,6 +63,7 @@ const Button = (props : ButtonPropTypes) => {
   const {
     aria={},
     children,
+    className,
     icon=null,
     loading=false,
     link=null,
@@ -70,7 +72,7 @@ const Button = (props : ButtonPropTypes) => {
   } = props
 
   const buttonAria  = buttonAriaProps(props)
-  const css         = buttonClassName(props)
+  const css         = classnames(buttonClassName(props), className)
   const loadingIcon = <i className="pb_icon_kit far fa-spinner fa-fw fa-pulse loading-icon"/>
 
   const content     = (
