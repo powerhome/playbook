@@ -9,7 +9,7 @@ type TitleProps = {
   dark?: Boolean,
   size?: 1 | 2 | 3 | 4,
   text?: String,
-  tag?: 'h1' | 'h2' | 'h3',
+  tag?: 'h1' | 'h2' | 'h3' | ' h4',
 }
 
 const tagCSS = ({
