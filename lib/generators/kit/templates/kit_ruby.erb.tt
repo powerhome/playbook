@@ -9,7 +9,7 @@ module Playbook
         <%= @kit_class_val.join("\n\t\t\t\t") %>
       end
       <% @unique_props.each do |key, val| %>
-      def <%= key.to_s.underscore %><% case val %><% when "array", "arr" %>
+      def <%= key.to_s.underscore %><% case val %><% when "enum", "one_of" %>
         <%= key.to_s.underscore %>_options = %w(option1 option2)
         one_of_value(configured_<%= key.to_s.underscore %>, <%= key.to_s.underscore %>_options, "")<% when "boolean", "bool" %>
         true_value(configured_<%= key.to_s.underscore %>, "true value", "false value")<% else %>
