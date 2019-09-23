@@ -10,6 +10,7 @@ module Playbook
                  configured_data
                  configured_id
                  configured_tag
+                 configured_text
                  configured_status
                  block].freeze
 
@@ -21,6 +22,7 @@ module Playbook
                      id: default_configuration,
                      status: default_configuration,
                      tag: default_configuration,
+                     text: default_configuration,
                      &block)
 
         self.configured_aria = aria
@@ -31,6 +33,7 @@ module Playbook
         self.configured_id = id
         self.configured_status = status
         self.configured_tag = tag
+        self.configured_text = text
         self.block = block_given? ? block : nil
       end
 
@@ -69,7 +72,7 @@ module Playbook
       end
 
       def yield(context:)
-        context.capture(&block)
+        !block.nil? ? context.capture(&block) : text
       end
 
       def kit_class
