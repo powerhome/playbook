@@ -1,0 +1,9 @@
+examples:
+  
+  rails:
+  - inventory_location_default: Default
+  
+  
+  react:
+  - inventory_location_default: Default
+  
