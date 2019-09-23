@@ -3,5 +3,5 @@
     data: object.data,
     class: object.classname(object.kit_class)) do %>
   <%= object.label %>
-  <%= object.value %>
+  <%= object.value || object.yield(context: self)%>
 <% end %>

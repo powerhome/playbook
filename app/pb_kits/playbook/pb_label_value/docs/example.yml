@@ -2,8 +2,10 @@ examples:
   
   rails:
   - label_value_default: Default
+  - label_value_block: Using Blocks
   
   
   react:
   - label_value_default: Default
+  - label_value_custom: Custom Content
   

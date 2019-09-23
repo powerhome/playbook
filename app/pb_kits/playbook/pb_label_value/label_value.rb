@@ -7,18 +7,21 @@ module Playbook
                  configured_data
                  configured_id
                  configured_label
-                 configured_value].freeze
+                 configured_value
+                 block].freeze
 
       def initialize(classname: default_configuration,
                      data: default_configuration,
                      id: default_configuration,
                      label: default_configuration,
-                     value: default_configuration)
+                     value: default_configuration,
+                     &block)
         self.configured_classname = classname
         self.configured_data = data
         self.configured_id = id
         self.configured_label = label
         self.configured_value = value
+        self.block = block_given? ? block : nil
       end
 
       def label
@@ -29,10 +32,12 @@ module Playbook
       end
 
       def value
-        pb_body = Playbook::PbBody::Body.new do
-          default_value(configured_value, "")
+        if is_set?(configured_value)
+          pb_body = Playbook::PbBody::Body.new do
+            configured_value
+          end
+          ApplicationController.renderer.render(partial: pb_body, as: :object)
         end
-        ApplicationController.renderer.render(partial: pb_body, as: :object)
       end
 
       def kit_class
@@ -41,6 +46,10 @@ module Playbook
 
       def to_partial_path
         "pb_label_value/label_value"
+      end
+
+      def yield(context:)
+        context.capture(&block)
       end
 
     private

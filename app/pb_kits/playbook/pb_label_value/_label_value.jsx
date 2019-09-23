@@ -1,21 +1,31 @@
+// @flow
 import React from 'react';
-import PropTypes from "prop-types";
+import Body from "../pb_body/_body.jsx";
+import Caption from "../pb_caption/_caption.jsx";
 
-const propTypes = {
-  className: PropTypes.string,
-  id: PropTypes.string
+type Props = {
+  className?: string,
+  id?: string,
+  label?: string,
+  value?: string,
+  children?: React.Node,
 };
 
-class LabelValue extends React.Component {
-  render() {
-    return (
-      <div className="pb_label_value">
-        <span>LABEL VALUE CONTENT</span>
-      </div>
-    )
-  }
+const LabelValue = ({id, className, label, value, children}: Props) => {
+  return (
+    <div className={className || "pb_label_value_kit"} id={id}>
+      <Caption text={label} />
+      <Choose>
+        <When condition={!!value}>
+          <Body text={value} />
+        </When>
+        <Otherwise>
+          {children}
+        </Otherwise>
+      </Choose>
+    </div>
+  )
 }
 
-LabelValue.propTypes = propTypes;
 
 export default LabelValue;
