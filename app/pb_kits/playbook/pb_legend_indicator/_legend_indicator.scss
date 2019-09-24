@@ -1,0 +1,23 @@
+@import "../tokens/colors";
+@import "../pb_body/body";
+
+@mixin pb_button($color: $primary) {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 5px;
+  background: $color;
+}
+
+[class^=pb_legend_indicator_kit] {
+  &[class*=_blue] {
+    .pb_legend_indicator_circle {
+      @include pb_button($primary);
+    }
+  }
+  &[class*=_green] {
+    .pb_legend_indicator_circle {
+      @include pb_button($success);
+    }
+  }
+}

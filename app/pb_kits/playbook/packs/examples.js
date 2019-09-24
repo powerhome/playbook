@@ -128,3 +128,6 @@ WebpackerReact.setup (SectionSeparator);
 
 import * as Currency from "pb_currency/docs";
 WebpackerReact.setup (Currency);
+
+import * as LegendIndicator from "pb_legend_indicator/docs";
+WebpackerReact.setup (LegendIndicator);

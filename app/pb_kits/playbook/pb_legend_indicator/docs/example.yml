@@ -1,0 +1,9 @@
+examples:
+  
+  rails:
+  - legend_indicator_default: Default
+  
+  
+  react:
+  - legend_indicator_default: Default
+  
