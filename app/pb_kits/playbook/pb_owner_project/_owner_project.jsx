@@ -1,19 +1,37 @@
 /* @flow */
 /*eslint-disable react/no-multi-comp, flowtype/space-before-type-colon */
 
-import React from 'react'
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import Title from "../pb_title/_title.jsx";
+import Caption from "../pb_caption/_caption.jsx";
+import Body from "../pb_body/_body.jsx";
+import Icon from "../pb_icon/_icon.jsx";
 
-type OwnerProjectProps = {
-  className?: String,
-  data?: String,
-  id?: String,
-  
+const propTypes = {
+  className: PropTypes.string,
+  data: PropTypes.string,
+  id: PropTypes.string,
+
+};
+
+const defaultProps = {
+  className: '',
+  data: '',
+  id: ''
+};
+
+class OwnerProject extends Component {
+  render() {
+    const { className, data, id } = this.props;
+    return (
+      <div>
+        <Caption text="Project"/>
+
+        <Icon icon="home"/>
+      </div>
+    );
+  }
 }
 
-const OwnerProject = ({ className, data, id }: OwnerProjectProps) => (
-  <div>
-    {`kit content`}
-  </div>
-)
-
-export default OwnerProject
+export default OwnerProject;
