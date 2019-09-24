@@ -8,7 +8,7 @@ $pb_pill_height: 25px;
   display: inline-flex;
   justify-content: center;
   align-items: center;
-  padding: 5px $space-md;
+  padding: $space_xs $space-md;
   border-radius: $pb_pill_height;
 
   @each $color_name, $color_value in $status_colors {
@@ -16,11 +16,11 @@ $pb_pill_height: 25px;
       background: $color_value;
 
       .pb_fixed_confirmation_toast_text {
-        color: white;
-        margin: 0px 25px 0px 25px;
+        color: $white;
+        margin: 0 $space_md 0 $space_md;
       }
       .pb_icon {
-        color: white;
+        color: $white;
       }
     }
   }

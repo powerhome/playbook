@@ -14,7 +14,7 @@ function FixedConfirmationToastDefault() {
         <FixedConfirmationToast text="Items Successfully Moved" status="success" />
       </div>
 
-      <br/><br/
+      <br/><br/>
 
       <div>
         <FixedConfirmationToast text="Scan to Assign Selected Items" status="neutral" />
