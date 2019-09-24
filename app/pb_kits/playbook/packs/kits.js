@@ -41,3 +41,4 @@ import "./pb_currency.js";
 import "./pb_icon_body_title.js";
 import "./pb_inventory_location.js";
 import "./pb_installer.js";
+import "./pb_project.js";

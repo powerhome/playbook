@@ -137,3 +137,6 @@ WebpackerReact.setup (InventoryLocation);
 
 import * as Installer from "pb_installer/docs";
 WebpackerReact.setup (Installer);
+
+import * as Project from "pb_project/docs";
+WebpackerReact.setup (Project);
