@@ -3,3 +3,9 @@
 <br><br>
 
 <%= pb_rails("range_slider", props: { step: 10 }) %>
+
+<br><br>
+
+<%= pb_rails("range_slider") do %>
+  <input type="range" step="5" />
+<% end %>

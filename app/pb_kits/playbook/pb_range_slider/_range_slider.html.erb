@@ -2,5 +2,9 @@
     id: object.id,
     data: object.data,
     class: object.classname("pb_range_slider")) do %>
-  <input type="range" min="<%= object.min %>" max="<%= object.max %>" step="<%= object.step %>" />
+    <% if object.block? %>
+      <%= object.yield(context: self) %>
+    <% else %>
+      <input type="range" min="<%= object.min %>" max="<%= object.max %>" step="<%= object.step %>" />
+    <% end %>
 <% end %>

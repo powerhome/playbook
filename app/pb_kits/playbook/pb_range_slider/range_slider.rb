@@ -9,7 +9,8 @@ module Playbook
                  configured_max
                  configured_min
                  configured_step
-                 configured_value].freeze
+                 configured_value
+                 block].freeze
 
       def initialize(classname: default_configuration,
                      data: default_configuration,
@@ -17,7 +18,8 @@ module Playbook
                      max: default_configuration,
                      min: default_configuration,
                      step: default_configuration,
-                     value: default_configuration)
+                     value: default_configuration,
+                     &block)
         self.configured_classname = classname
         self.configured_data = data
         self.configured_id = id
@@ -25,6 +27,7 @@ module Playbook
         self.configured_min = min
         self.configured_step = step
         self.configured_value = value
+        self.block = block_given? ? block : nil
       end
 
       def max
@@ -45,6 +48,14 @@ module Playbook
 
       def to_partial_path
         "pb_range_slider/range_slider"
+      end
+
+      def yield(context:)
+        context.capture(&block)
+      end
+
+      def block?
+        block.present?
       end
 
     private
