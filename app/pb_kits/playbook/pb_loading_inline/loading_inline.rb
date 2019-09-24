@@ -21,39 +21,35 @@ module Playbook
         self.configured_id = id
       end
 
-      def value
-          pb_icon_value = Playbook::PbBody::Body.new(color: "light") do
-            icon + "Loading..."
-          end
-          ApplicationController.renderer.render(partial: pb_icon_value, as: :object)
-      end
-
       def align
         align_options = %w[left center right]
         one_of_value(configured_align, align_options, "left")
+      end
+
+      def dark
+        is_true? configured_dark
+      end
+
+      def icon
+        pb_icon = Playbook::PbIcon::Icon.new(fixed_width: true, icon: "spinner", pulse: true)
+        ApplicationController.renderer.render(partial: pb_icon, as: :object)
+      end
+
+      def value
+        pb_icon_value = Playbook::PbBody::Body.new(color: "light", dark: dark) do
+          icon + "Loading"
+        end
+        ApplicationController.renderer.render(partial: pb_icon_value, as: :object)
       end
 
       def to_partial_path
         "pb_loading_inline/loading_inline"
       end
 
-      def icon
-        pb_icon = Playbook::PbIcon::Icon.new(icon: "spinner",
-                                             pulse: true,
-                                             fixed_width: true,
-                                             classname: "loading-icon")
-        ApplicationController.renderer.render(partial: pb_icon, as: :object)
-      end
-
-      def dark_class
-        true_value(configured_dark, "dark", "dark")
-      end
-
       def kit_class
         loading_inline_options = [
           "pb_loading_inline_kit",
-          dark_class,
-          align
+          align,
         ]
         loading_inline_options.join("_")
       end

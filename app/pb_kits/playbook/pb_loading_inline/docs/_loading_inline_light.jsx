@@ -4,7 +4,9 @@ import LoadingInline from "../_loading_inline.jsx"
 function LoadingInlineLight() {
   return (
     <div>
-      <LoadingInline light />
+      <LoadingInline />
+      <LoadingInline align="center" />
+      <LoadingInline align="right" />
     </div>
   )
 }

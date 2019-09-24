@@ -1,12 +1,9 @@
 @import "../pb_body/body";
+@import "../pb_icon/icon";
 
 [class^=pb_loading_inline_kit] {
-  display: inline-flex;
+  display: flex;
   align-items: baseline;
-
-  & > .pb_loading_inline_text {
-    padding-right: $space-xs;
-  }
 
   &[class*=_center] {
     justify-content: center;
@@ -18,12 +15,5 @@
 
   &[class*=_right] {
     justify-content: flex-end;
-  }
-  &[class*=_dark] {
-    color: #FFFFFF;
-  }
-
-  &[class*=_light] {
-    color: #8798AD;
   }
 }
