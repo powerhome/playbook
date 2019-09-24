@@ -9,14 +9,14 @@ import Body from '../pb_body/_body.jsx'
 import Title from '../pb_title/_title.jsx'
 
 type HomeAddressStreetProps = {
-  address?: String,
-  city?: String,
+  address: String,
+  city: String,
   className?: String,
   dark?: Boolean,
-  homeId?: Number,
-  houseStyle?: String,
-  state?: String,
-  zipcode?: String,
+  homeId: Number,
+  houseStyle: String,
+  state: String,
+  zipcode: String,
 }
 
 const classes = (className, dark) => (
@@ -27,14 +27,14 @@ const classes = (className, dark) => (
 )
 
 const HomeAddressStreet = ({
-  address='',
-  city='',
+  address,
+  city,
   className,
-  dark = false,
-  homeId='',
-  houseStyle='',
-  state='',
-  zipcode='',
+  dark=false,
+  homeId,
+  houseStyle,
+  state,
+  zipcode,
 }: HomeAddressStreetProps) => (
   <div className={classes(className, dark)}>
     <Title
