@@ -1,0 +1,34 @@
+@import "../tokens/colors";
+
+$bar-colors: map-values($data_colors);
+
+[class^=pb_distribution_bar]{
+  font-size: 0px;
+}
+
+.pb_distribution_bar_sm {
+  height: 8px;
+}
+
+.pb_distribution_bar_lg {
+  height: 36px;
+}
+
+[class^=pb_distribution_value]{
+  height: 100%;
+  font-size: 16px;
+  display: inline-block;
+  @for $i from 1 through length($bar-colors) {
+    &:nth-child(#{length($bar-colors)}n+#{$i}) {
+      background-color: nth($bar-colors, $i);
+    }
+  }
+  &:first-child {
+    border-top-left-radius: 18px;
+    border-bottom-left-radius: 18px;
+  }
+  &:last-child {
+    border-top-right-radius: 18px;
+    border-bottom-right-radius: 18px;
+  }
+}

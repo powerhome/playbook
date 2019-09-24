@@ -149,3 +149,6 @@ WebpackerReact.setup (DateYearStacked);
 
 import * as DateRangeInline from "pb_date_range_inline/docs";
 WebpackerReact.setup (DateRangeInline);
+
+import * as DistributionBar from "pb_distribution_bar/docs";
+WebpackerReact.setup (DistributionBar);
