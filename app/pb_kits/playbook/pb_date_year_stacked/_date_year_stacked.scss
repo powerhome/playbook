@@ -1,0 +1,12 @@
+[class^=pb_date_year_stacked] {
+    &[class*=_center] {
+      & > [class^=pb_title], & > [class^=pb_body] {
+        text-align: center;
+      }
+    }
+  &[class*=_right]  {
+    & > [class^=pb_title], & > [class^=pb_body] {
+      text-align: right;
+    }
+  }
+}

@@ -42,4 +42,8 @@ kits:
   - fixed_confirmation_toast
   - loading_inline
   - checkbox
+<<<<<<< HEAD
   - home_address_street
+=======
+  - date_year_stacked
+>>>>>>> Stubbed out the rails kit without @markiearnold 's date helpers
