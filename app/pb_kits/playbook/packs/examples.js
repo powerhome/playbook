@@ -137,3 +137,6 @@ WebpackerReact.setup (LoadingInline);
 
 import * as Checkbox from "pb_checkbox/docs";
 WebpackerReact.setup (Checkbox);
+
+import * as HomeAddressStreet from "pb_home_address_street/docs";
+WebpackerReact.setup (HomeAddressStreet);

@@ -42,3 +42,4 @@ kits:
   - fixed_confirmation_toast
   - loading_inline
   - checkbox
+  - home_address_street
