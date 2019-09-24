@@ -38,5 +38,6 @@ import "./pb_stat_value.js";
 import "./pb_stat_change.js";
 import "./pb_section_separator.js";
 import "./pb_currency.js";
+import "./pb_fixed_confirmation_toast.js";
 import "./pb_loading_inline.js";
 import "./pb_checkbox.js";
