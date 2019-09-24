@@ -1,0 +1,9 @@
+@import "../pb_body/body";
+@import "../pb_icon/icon";
+
+.address_field {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-direction: column;
+}

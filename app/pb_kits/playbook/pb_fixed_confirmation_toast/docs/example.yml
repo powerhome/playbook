@@ -1,0 +1,9 @@
+examples:
+  
+  rails:
+  - fixed_confirmation_toast_default: Default
+  
+  
+  react:
+  - fixed_confirmation_toast_default: Default
+  

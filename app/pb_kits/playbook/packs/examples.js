@@ -128,3 +128,6 @@ WebpackerReact.setup (SectionSeparator);
 
 import * as Currency from "pb_currency/docs";
 WebpackerReact.setup (Currency);
+
+import * as FixedConfirmationToast from "pb_fixed_confirmation_toast/docs";
+WebpackerReact.setup (FixedConfirmationToast);
