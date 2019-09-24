@@ -20,7 +20,7 @@ module Playbook
                      icon: default_configuration,
                      id: default_configuration,
                      title: default_configuration,
-                     link: default_configuration)
+                     link: nil)
         self.configured_body = body
         self.configured_classname = classname
         self.configured_data = data
@@ -51,7 +51,7 @@ module Playbook
 
       def title
         if is_set? configured_title
-          title_text = if is_set?(configured_link)
+          title_text = if configured_link
             content_tag(:a, href: link) { configured_title } 
           else
             configured_title
@@ -62,7 +62,7 @@ module Playbook
       end
 
       def link
-        default_value(configured_link, "")
+        default_value(configured_link, nil)
       end
 
       def to_partial_path

@@ -1,1 +1,5 @@
-<%= pb_rails("inventory_location") %>
+<%= pb_rails("inventory_location", props: { type: "rack", bin: "C-01-02", link: "#" }) %>
+<br />
+<%= pb_rails("inventory_location", props: { type: "cart", bin: "C-01", link: "#" }) %>
+<br />
+<%= pb_rails("inventory_location", props: { type: "zone", bin: "C" }) %>

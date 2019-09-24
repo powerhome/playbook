@@ -1,6 +1,6 @@
 <%= content_tag(:div,
     id: object.id,
     data: object.data,
-    class: object.classname("pb_inventory_location")) do %>
-  <span>INVENTORY LOCATION CONTENT</span>
-<% end %>
+    class: object.classname("pb_inventory_location")) do 
+      object.content
+end %>

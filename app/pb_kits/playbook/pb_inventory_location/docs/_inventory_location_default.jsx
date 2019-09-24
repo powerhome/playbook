@@ -5,7 +5,9 @@ function InventoryLocationDefault() {
   return (
     <div>
       <InventoryLocation type="cart" bin="01" link="#" />
+      <br />
       <InventoryLocation type="rack" bin="C-01-01" link="#" />
+      <br />
       <InventoryLocation type="zone" bin="C" />
     </div>
   )
