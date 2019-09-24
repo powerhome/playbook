@@ -1,12 +1,36 @@
 [class^=pb_range_slider] {
-  /*
-   * Simulates the progress section of the range. Unfortunately, Chrome
-   * does not provide a pseudo-element for style the range's progress like
-   * Mozilla (-moz-range-progress) and MS (-ms-fill-lower) does.
-   *
-   * This creates multiple static box-shadow elements side by side next to the
-   * range's thumb element, in order to simulate the range's progress.
-   */
+
+  @mixin track {
+    height: 4px;
+    -webkit-appearance: none;
+    appearance: none;
+    margin-top: -1px;
+    background-color: $primary_action;
+    border-radius: 2px;
+  }
+
+  @mixin thumb {
+    width: 16px;
+    -webkit-appearance: none;
+    appearance: none;
+    height: 16px;
+    cursor: pointer;
+    background: #fff;
+    box-shadow: make-progress($border_light);
+    border: 3px solid $primary_action;
+    border-radius: 50%;
+    position: relative;
+    top: -6px;
+    transition: box-shadow 0.2s ease-in-out;
+    &:after {
+      content: '';
+      background: #808080;
+      display: block;
+      width: 100vw;
+      height: 4px;
+    }
+  }
+
   @function make-progress($color) {
     $val: 5px 0 0 -6px $color;
 
@@ -22,25 +46,40 @@
     border: 0;
     max-width: 100%;
     transition: box-shadow 0.2s ease-in-out;
+    display: block;
+    width: 100%;
+
+
+
+    &::-moz-focus-outer {
+      border: 0;
+    }
 
     & {
       overflow: hidden;
       height: 16px;
-      -webkit-appearance: none
+      -webkit-appearance: none;
+      appearance: none
     }
 
     &::-webkit-slider-runnable-track {
-      height: 4px;
-      -webkit-appearance: none;
-      margin-top: -1px;
-      background-color: $primary_action;
-      border-radius: 2px;
+      @include track;
+    }
+
+    &::-moz-range-track {
+      @include track;
     }
 
     &::-webkit-slider-thumb {
-      width: 16px;
+      @include thumb;
+    }
+
+    &::-moz-range-thumb {
+      height: 10px;
+      width: 10px;
       -webkit-appearance: none;
-      height: 16px;
+      appearance: none;
+      display: block;
       cursor: pointer;
       background: #fff;
       box-shadow: make-progress($border_light);
@@ -49,9 +88,14 @@
       position: relative;
       top: -6px;
       transition: box-shadow 0.2s ease-in-out;
+
     }
 
     &:active::-webkit-slider-thumb {
+      box-shadow: make-progress($border_light), inset 0 0 0 3px $primary_action;
+    }
+
+    &:active::-moz-range-thumb {
       box-shadow: make-progress($border_light), inset 0 0 0 3px $primary_action;
     }
   }

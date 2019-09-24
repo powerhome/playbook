@@ -5,6 +5,6 @@
     <% if object.block? %>
       <%= object.yield(context: self) %>
     <% else %>
-      <input type="range" min="<%= object.min %>" max="<%= object.max %>" step="<%= object.step %>" />
+      <input type="range" min="<%= object.min %>" max="<%= object.max %>" value="<%= object.value %>" step="<%= object.step %>" />
     <% end %>
 <% end %>
