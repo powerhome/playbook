@@ -1,0 +1,8 @@
+examples:
+
+  rails:
+  - checkbox_default: Default
+  - checkbox_dark: Dark
+
+  react:
+    - checkbox_default: Default

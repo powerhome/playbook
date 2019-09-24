@@ -128,3 +128,6 @@ WebpackerReact.setup (SectionSeparator);
 
 import * as Currency from "pb_currency/docs";
 WebpackerReact.setup (Currency);
+
+import * as Checkbox from "pb_checkbox/docs";
+WebpackerReact.setup (Checkbox);
