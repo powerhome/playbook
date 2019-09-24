@@ -39,4 +39,5 @@ kits:
   - stat_change
   - section_separator
   - currency
+  - loading_inline
   - checkbox
