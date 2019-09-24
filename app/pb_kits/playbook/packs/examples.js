@@ -128,3 +128,6 @@ WebpackerReact.setup (SectionSeparator);
 
 import * as Currency from "pb_currency/docs";
 WebpackerReact.setup (Currency);
+
+import * as DateYear from "pb_date_year/docs";
+WebpackerReact.setup (DateYear);
