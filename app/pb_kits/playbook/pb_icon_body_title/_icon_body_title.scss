@@ -9,9 +9,6 @@
 
   .pb_icon_body_title_kit_title, .pb_icon_body_title_kit_body, .pb_icon_body_title_kit_icon {
     line-height: $lh_normal;
-  }
-
-  .pb_icon_body_title_kit_title, .pb_icon_body_title_kit_body {
-    margin-left: $space-xs;
+    margin-right: $space-xs;
   }
 }

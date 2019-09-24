@@ -134,3 +134,6 @@ WebpackerReact.setup (IconBodyTitle);
 
 import * as InventoryLocation from "pb_inventory_location/docs";
 WebpackerReact.setup (InventoryLocation);
+
+import * as Installer from "pb_installer/docs";
+WebpackerReact.setup (Installer);

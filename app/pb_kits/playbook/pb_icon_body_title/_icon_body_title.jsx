@@ -21,10 +21,10 @@ const IconBodyTitle = ({ body, className, data, icon, id, title, link }: IconBod
   const titleContent = !!link ? (<a href={link}>{title}</a>) : title 
   return (
     <div className={classnames(`pb_icon_body_title_kit_${icon}`, className)} id={id} data={data}>
-      <Icon icon={icon} className="pb_icon_body_title_kit_icon" />
-      <If condition={!!body}>
-        <Body color="light" text={body} className="pb_icon_body_title_kit_body"></Body>
-      </If>
+      <Body color="light" className="pb_icon_body_title_kit_body">
+        <Icon icon={icon} className="pb_icon_body_title_kit_icon" />
+        {body}
+      </Body>
       <Title text={titleContent} tag="h4" size={4} className="pb_icon_body_title_kit_title" />
     </div>
   )

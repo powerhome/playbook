@@ -14,7 +14,7 @@ module Playbook
                  configured_title
                  configured_link].freeze
 
-      def initialize(body: default_configuration,
+      def initialize(body: "",
                      classname: default_configuration,
                      data: default_configuration,
                      icon: default_configuration,
@@ -31,12 +31,10 @@ module Playbook
       end
 
       def body
-        if is_set? configured_body
-          pb_body = Playbook::PbBody::Body.new(color: "light", classname: "pb_icon_body_title_kit_body") do
-            configured_body
-          end
-          ApplicationController.renderer.render(partial: pb_body, as: :object)
+        pb_body = Playbook::PbBody::Body.new(color: "light", classname: "pb_icon_body_title_kit_body") do
+          icon + configured_body
         end
+        ApplicationController.renderer.render(partial: pb_body, as: :object)
       end
 
       def icon
@@ -52,17 +50,13 @@ module Playbook
       def title
         if is_set? configured_title
           title_text = if configured_link
-            content_tag(:a, href: link) { configured_title } 
+            content_tag(:a, href: configured_link) { configured_title } 
           else
             configured_title
           end
           pb_title = Playbook::PbTitle::Title.new(size: 4, tag: "h4", text: title_text, classname: "pb_icon_body_title_kit_title")
           ApplicationController.renderer.render(partial: pb_title, as: :object)
         end
-      end
-
-      def link
-        default_value(configured_link, nil)
       end
 
       def to_partial_path
