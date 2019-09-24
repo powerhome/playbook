@@ -1,0 +1,9 @@
+examples:
+  
+  rails:
+  - hashtag_default: Default
+  
+  
+  react:
+  - hashtag_default: Default
+  

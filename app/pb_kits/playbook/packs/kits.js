@@ -46,3 +46,4 @@ import "../kits/pb_badge.js";
 import "../kits/pb_date_year_stacked.js";
 import "../kits/pb_date_range_inline.js";
 import "../kits/pb_distribution_bar.js";
+import "../kits/pb_hashtag.js";

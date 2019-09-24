@@ -1,0 +1,6 @@
+<%= content_tag(:div,
+    id: object.id,
+    data: object.data,
+    class: object.classname("pb_hashtag_kit"), url: object.url, text: object.text, type: object.type) do %>  
+    <%= pb_rails("button", props: { variant: "link" ,text: object.full_hashtag, tag: "a", link: object.url }) %>
+<% end %>
