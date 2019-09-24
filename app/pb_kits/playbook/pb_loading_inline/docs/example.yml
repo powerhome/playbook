@@ -1,0 +1,11 @@
+examples:
+  
+  rails:
+  - loading_inline_light: Light
+  - loading_inline_dark: Dark
+  
+  
+  react:
+  - loading_inline_light: Default
+  - loading_inline_dark: Default
+  

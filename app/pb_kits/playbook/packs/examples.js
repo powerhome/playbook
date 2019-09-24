@@ -131,3 +131,9 @@ WebpackerReact.setup (Currency);
 
 import * as FixedConfirmationToast from "pb_fixed_confirmation_toast/docs";
 WebpackerReact.setup (FixedConfirmationToast);
+
+import * as LoadingInline from "pb_loading_inline/docs";
+WebpackerReact.setup (LoadingInline);
+
+import * as Checkbox from "pb_checkbox/docs";
+WebpackerReact.setup (Checkbox);

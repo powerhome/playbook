@@ -40,3 +40,5 @@ kits:
   - section_separator
   - currency
   - fixed_confirmation_toast
+  - loading_inline
+  - checkbox
