@@ -5,11 +5,10 @@
 
   <%= pb_rails("caption", props: { text: "Project" })%>
 
-  <%= pb_rails("title", props: { text: "Home Owner",
-    size: 4 }) %>
+  <%= object.title %>
 
   <%= pb_rails("body", props:  { color: "light" }) do %>
     <%= pb_rails("icon", props: { icon: "home" })%>
-    33-333333
+    <%= object.project_number %>
   <% end %>
 <% end %>

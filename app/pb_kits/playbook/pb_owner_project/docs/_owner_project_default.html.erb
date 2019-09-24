@@ -1,1 +1,7 @@
-<%= pb_rails("owner_project") %>
+<%= pb_rails("owner_project", props: { project_number: "33-12345",
+                                       name: "Jefferson-Smith" }) %>
+<br />
+
+<%= pb_rails("owner_project", props: { project_number: "33-12345",
+                                       name: "Jefferson-Smith",
+                                       date: Time.zone.now })%>
