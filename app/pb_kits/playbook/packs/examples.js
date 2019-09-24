@@ -128,3 +128,6 @@ WebpackerReact.setup (SectionSeparator);
 
 import * as Currency from "pb_currency/docs";
 WebpackerReact.setup (Currency);
+
+import * as OwnerProject from "pb_owner_project/docs";
+WebpackerReact.setup (OwnerProject);
