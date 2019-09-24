@@ -1,3 +1,9 @@
-.pb_owner_project {
+@import "../tokens/colors";
 
+[class^=pb_owner_project]{
+  &[class*=_link_title] {
+    h3 {
+      color: $primary_action !important;
+    }
+  }
 }
