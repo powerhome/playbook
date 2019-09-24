@@ -4,7 +4,12 @@ import IconBodyTitle from "../_icon_body_title.jsx"
 function IconBodyTitleDefault() {
   return (
     <div>
-      <IconBodyTitle icon="user" title="Nitro" body="Virtual Assistant" link="#" />
+      <IconBodyTitle 
+        body="Virtual Assistant" 
+        icon="user" 
+        link="#"
+        title="Nitro" 
+      />
     </div>
   )
 }
