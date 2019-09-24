@@ -1,21 +1,23 @@
-<%= pb_rails("body") do %>
-  I am a body kit
-<% end %>
+<%= pb_rails("body", props: {
+  text: "I am a body kit"
+}) %>
 
-<%= pb_rails("body", props: { color: "light" }) do %>
-  I am a body kit (Light)
-<% end %>
+<%= pb_rails("body", props: {
+  text: "I am a body kit (Light)",
+  color: "light"
+}) %>
 
-<%= pb_rails("body", props: { color: "lighter" }) do %>
-  I am a body kit (Lighter)
-<% end %>
+<%= pb_rails("body", props: {
+  text: "I am a body kit (Lighter)",
+  color: "lighter"
+}) %>
 
-<br><br>
+<%= pb_rails("body", props: {
+  text: "I am a body kit (Status: negative)",
+  status: "negative"
+}) %>
 
-<%= pb_rails("body", props: { status: "negative" }) do %>
-  I am a body kit (Status: negative)
-<% end %>
-
-<%= pb_rails("body", props: { status: "positive" }) do %>
-  I am a body kit (Status: positive)
-<% end %>
+<%= pb_rails("body", props: {
+  text: "I am a body kit (Status: positive)",
+  status: "positive"
+}) %>

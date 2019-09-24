@@ -41,7 +41,7 @@ class Layout extends Component {
     const position_class = "_"+position
     const collapse_class = " layout"+position_class+"_collapse_"+collapse
     return (
-      <div className={`layout${size_class}${position_class}${dark_class}${transparent_class}${full_class}${collapse_class}`}>
+      <div className={`pb_layout${size_class}${position_class}${dark_class}${transparent_class}${full_class}${collapse_class}`}>
         {children}
       </div>
     );
