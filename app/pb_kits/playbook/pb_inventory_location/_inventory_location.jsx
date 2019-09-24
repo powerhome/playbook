@@ -21,7 +21,7 @@ const icons = {
 }
 
 const InventoryLocation = ({ bin, className, data,  id, link, type }: InventoryLocationProps) => {
-  return (<div className={className} id={id} data={data}>
+  return (<div className={className || "pb_inventory_location_kit"} id={id} data={data}>
     <LabelValue label="Location">
       <IconBodyTitle icon={icons[type]} body={type} title={bin} link={link} />
     </LabelValue>
