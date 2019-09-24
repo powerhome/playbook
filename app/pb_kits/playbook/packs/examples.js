@@ -128,3 +128,6 @@ WebpackerReact.setup (SectionSeparator);
 
 import * as Currency from "pb_currency/docs";
 WebpackerReact.setup (Currency);
+
+import * as CircleIconButton from "pb_circle_icon_button/docs";
+WebpackerReact.setup (CircleIconButton);

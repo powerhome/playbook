@@ -39,3 +39,4 @@ kits:
   - stat_change
   - section_separator
   - currency
+  - circle_icon_button
