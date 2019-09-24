@@ -1,0 +1,66 @@
+@import "../tokens/colors";
+$transition: $transition_cubic;
+
+[class^=pb_checkbox_kit] {
+  .pb_checkbox_label {
+    display: block;
+    position: relative;
+    padding-left: $space_lg;
+    cursor: pointer;
+    font-size: $text_lt_default;
+    user-select: none;
+  }
+  .pb_checkbox_checkmark {
+    position: absolute;
+    height: 22px;
+    width: 22px;
+    border: solid $border_light 2px;
+    border-radius: $border_rad_light;
+    .check_icon{
+      opacity: 0;
+      position: relative;
+      top: -2px;
+      left: 1px;
+      height: 16px;
+      width:16px;
+      color: $white;
+
+    }
+  }
+
+  &:hover input ~ .pb_checkbox_checkmark {
+    border-color: $primary_action;
+  }
+
+  input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+    display: none;
+    &:checked ~ .pb_checkbox_checkmark {
+      background-color: $primary_action;
+      border-color: $primary_action;
+    }
+    &:checked ~ .pb_checkbox_checkmark {
+      display: block;
+      .check_icon{
+        opacity: $opacity_10;
+      }
+    }
+  }
+
+
+
+  &[class*=_dark] {
+    input:checked ~ .pb_checkbox_checkmark {
+      background-color: $primary_action_dk;
+      border-color: $primary_action_dk;
+    }
+
+    &:hover .pb_checkbox_checkmark {
+      border-color: $primary_action_dk;
+    }
+  }
+}

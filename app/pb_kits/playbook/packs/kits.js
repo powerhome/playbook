@@ -39,3 +39,4 @@ import "./pb_stat_change.js";
 import "./pb_section_separator.js";
 import "./pb_currency.js";
 import "./pb_loading_inline.js";
+import "./pb_checkbox.js";

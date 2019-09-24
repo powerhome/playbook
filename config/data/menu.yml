@@ -40,3 +40,4 @@ kits:
   - section_separator
   - currency
   - loading_inline
+  - checkbox
