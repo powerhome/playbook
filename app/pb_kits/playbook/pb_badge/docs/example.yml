@@ -1,0 +1,9 @@
+examples:
+  
+  rails:
+  - badge_default: Default
+  
+  
+  react:
+  - badge_default: Default
+  

@@ -1,0 +1,28 @@
+@import "../tokens/spacing";
+@import "../tokens/colors";
+@import "../tokens/opacity";
+@import "../pb_body/body";
+@import "../tokens/border_radius";
+@import "../tokens/typography";
+
+[class^=pb_badge_kit] {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 9px;
+  padding: .5px;
+  min-width: 18px;
+  min-height: 18px;
+
+  @each $color_name, $color_value in $status_colors {
+    &[class*=_#{$color_name}]  {
+      background: rgba($color_value, $opacity-1);
+      color: $color_value;
+      font-size: $font_smaller;
+      font-weight: $bold;
+    }
+  }
+  &[class*="rectangle"] {
+    border-radius: $border_rad_light;
+  }
+}
