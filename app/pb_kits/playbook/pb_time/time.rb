@@ -10,6 +10,7 @@ module Playbook
                  configured_data
                  configured_id
                  configured_size
+                 configured_time
                  configured_timestamp
                  configured_timezone].freeze
 
@@ -17,12 +18,14 @@ module Playbook
                      data: default_configuration,
                      id: default_configuration,
                      size: default_configuration,
+                     time: default_configuration,
                      timestamp: default_configuration,
                      timezone: default_configuration)
         self.configured_classname = classname
         self.configured_data = data
         self.configured_id = id
         self.configured_size = size
+        self.configured_time = time
         self.configured_timestamp = timestamp
         self.configured_timezone = timezone
       end
@@ -53,41 +56,25 @@ module Playbook
     private
 
       def timestamp
-        convert_to_timestamp(configured_timestamp)
-      end
-
-      def convert_to_timestamp(time)
-        time.is_a?(String) ? DateTime.parse(time) : time
-        time.in_time_zone(timezone_value)
-      end
-
-      def format_time_string
-        "#{hour}:#{minutes}#{meridian}" if is_set? configured_timestamp
-      end
-
-      def hour
-        timestamp.strftime("%l")
-      end
-
-      def minutes
-        timestamp.strftime("%M")
-      end
-
-      def meridian
-        timestamp.strftime("%P")[0, 1]
+        if is_set? configured_time
+          time = configured_time
+        else
+          time = configured_timestamp
+        end
+        Playbook::PbKit::PbDateTime.new(time, timezone_value)
       end
 
       def timezone_value
         default_value(configured_timezone, "America/New_York")
       end
 
-      def timezone_abbr
-        timestamp.strftime("%Z").upcase
+      def format_time_string
+        "#{timestamp.to_hour}:#{timestamp.to_minutes}#{timestamp.to_meridian}"
       end
 
       def timezone
         content_tag(:span, class: "pb_time_timezone") do
-          timezone_abbr
+          timestamp.to_timezone.upcase
         end
       end
 
@@ -102,7 +89,7 @@ module Playbook
       end
 
       def text
-        content_tag(:time, datetime: timestamp.iso8601) do
+        content_tag(:time, datetime: timestamp.to_iso) do
           content_tag(:span) do
             format_time_string
           end +
@@ -111,7 +98,7 @@ module Playbook
       end
 
       def display_value_xs
-        if is_set? configured_timestamp
+        if is_set?(configured_timestamp) || is_set?(configured_time)
           pb_value = Playbook::PbBody::Body.new(color: "default") do
             text
           end
@@ -120,7 +107,7 @@ module Playbook
       end
 
       def display_value_sm
-        if is_set? configured_timestamp
+        if is_set?(configured_timestamp) || is_set?(configured_time)
           pb_value = Playbook::PbBody::Body.new(color: "default") do
             icon +
               text
@@ -130,7 +117,7 @@ module Playbook
       end
 
       def display_value_lg
-        if is_set? configured_timestamp
+        if is_set?(configured_timestamp) || is_set?(configured_time)
           pb_value_lg = Playbook::PbTitle::Title.new(size: 3, text: text)
           ApplicationController.renderer.render(partial: pb_value_lg, as: :object)
         end

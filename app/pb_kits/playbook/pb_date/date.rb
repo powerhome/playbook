@@ -8,6 +8,7 @@ module Playbook
 
       PROPS = %i[configured_classname
                  configured_data
+                 configured_date
                  configured_id
                  configured_size
                  configured_timestamp
@@ -15,12 +16,14 @@ module Playbook
 
       def initialize(classname: default_configuration,
                      data: default_configuration,
+                     date: default_configuration,
                      id: default_configuration,
                      size: default_configuration,
                      timestamp: default_configuration,
                      timezone: default_configuration)
         self.configured_classname = classname
         self.configured_data = data
+        self.configured_date = date
         self.configured_id = id
         self.configured_size = size
         self.configured_timestamp = timestamp
@@ -49,28 +52,16 @@ module Playbook
     private
 
       def timestamp
-        convert_to_timestamp(configured_timestamp)
-      end
-
-      def convert_to_timestamp(time)
-        time.is_a?(String) ? DateTime.parse(time) : time
-        time.in_time_zone(timezone_value)
+        if is_set? configured_date
+          date = configured_date
+        else
+          date = configured_timestamp
+        end
+        Playbook::PbKit::PbDateTime.new(date, timezone_value)
       end
 
       def timezone_value
         default_value(configured_timezone, "America/New_York")
-      end
-
-      def day_of_week
-        timestamp.strftime("%a").upcase
-      end
-
-      def month
-        timestamp.strftime("%^b").upcase
-      end
-
-      def day
-        timestamp.strftime("%e")
       end
 
       def size
@@ -85,27 +76,27 @@ module Playbook
 
       def text
         content_tag(:span) do
-          "#{day_of_week} &middot; #{month} #{day}".html_safe
+          "#{timestamp.to_day_of_week.upcase} &middot; #{timestamp.to_month.upcase} #{timestamp.to_day}".html_safe
         end
       end
 
       def display_value_xs
-        if is_set? configured_timestamp
+        if is_set?(configured_timestamp) || is_set?(configured_date)
           pb_value = Playbook::PbTitle::Title.new(size: 4, text: text)
           ApplicationController.renderer.render(partial: pb_value, as: :object)
         end
       end
 
       def display_value_sm
-        if is_set? configured_timestamp
+        if is_set?(configured_timestamp) || is_set?(configured_date)
           pb_value = Playbook::PbTitle::Title.new(size: 4, text: icon + text)
           ApplicationController.renderer.render(partial: pb_value, as: :object)
         end
       end
 
       def display_value_lg
-        if is_set? configured_timestamp
-          pb_value_lg = Playbook::PbTitle::Title.new(size: 3, text: "#{month} #{day}")
+        if is_set?(configured_timestamp) || is_set?(configured_date)
+          pb_value_lg = Playbook::PbTitle::Title.new(size: 3, text: "#{timestamp.to_month.upcase} #{timestamp.to_day}")
           ApplicationController.renderer.render(partial: pb_value_lg, as: :object)
         end
       end
