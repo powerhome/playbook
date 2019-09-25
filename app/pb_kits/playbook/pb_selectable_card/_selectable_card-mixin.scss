@@ -52,6 +52,7 @@
 
     padding: $space_sm;
     cursor: pointer;
+    display: inline-block;
 
     &:hover {
       box-shadow: $shadow-default;

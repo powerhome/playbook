@@ -9,6 +9,7 @@ module Playbook
                  configured_data
                  configured_disabled
                  configured_id
+                 configured_multi
                  configured_name
                  configured_show_selected
                  configured_show_unselected
@@ -21,6 +22,7 @@ module Playbook
                      data: default_configuration,
                      disabled: default_configuration,
                      id: default_configuration,
+                     multi: default_configuration,
                      name: default_configuration,
                      show_selected: default_configuration,
                      show_unselected: default_configuration,
@@ -32,6 +34,7 @@ module Playbook
         self.configured_data = data
         self.configured_disabled = disabled
         self.configured_id = id
+        self.configured_multi = multi
         self.configured_name = name
         self.configured_show_selected = show_selected
         self.configured_show_unselected = show_unselected
@@ -49,6 +52,14 @@ module Playbook
 
       def disabled
         true_value(configured_disabled, true, false)
+      end
+
+      def multi
+        if is_set?(configured_multi)
+          true_value(configured_multi, true, false)
+        else
+          true
+        end
       end
 
       def name

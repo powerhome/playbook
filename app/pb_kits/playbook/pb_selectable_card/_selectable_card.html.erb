@@ -3,6 +3,11 @@
                 data: object.data,
                 class: object.kit_class) do %>
 
-  <%= check_box_tag object.name, object.value, object.checked, disabled: object.disabled %>
-  <%= label_tag object.name, object.text, disabled: object.disabled %>
+  <% if object.multi %>
+    <%= check_box_tag object.name, object.value, object.checked, disabled: object.disabled %>
+    <%= label_tag object.name, object.text, disabled: object.disabled %>
+  <% else %>
+    <%= radio_button_tag object.name, object.value, object.checked, disabled: object.disabled %>
+    <%= label_tag "#{object.name}_#{object.value}", object.text, disabled: object.disabled %>
+  <% end %>
 <% end %>
