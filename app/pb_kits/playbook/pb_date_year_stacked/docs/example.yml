@@ -4,6 +4,6 @@ examples:
   - date_year_stacked_default: Default
   - date_year_stacked_dark: Dark
 
-
   react:
   - date_year_stacked_default: Default
+  - date_year_stacked_dark: Dark

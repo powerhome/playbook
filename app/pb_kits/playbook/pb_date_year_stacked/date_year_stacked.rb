@@ -34,7 +34,7 @@ module Playbook
       end
 
       def date
-        Playbook::PbKit::PbDateTime.new(configured_date, "America/New_York")
+        Playbook::PbKit::PbDateTime.new(configured_date)
       end
 
       def year
