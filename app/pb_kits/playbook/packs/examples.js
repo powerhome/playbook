@@ -140,3 +140,6 @@ WebpackerReact.setup (Checkbox);
 
 import * as HomeAddressStreet from "pb_home_address_street/docs";
 WebpackerReact.setup (HomeAddressStreet);
+
+import * as SelectableCard from "pb_selectable_card/docs";
+WebpackerReact.setup (SelectableCard);
