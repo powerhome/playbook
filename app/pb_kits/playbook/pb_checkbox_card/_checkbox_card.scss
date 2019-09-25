@@ -1,0 +1,14 @@
+.pb_checkbox_card {
+  .pb_checkbox_card_container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+  .pb_checkbox_card_checkbox {
+    display: inline-block;
+    border-right: 1px solid $border-light;
+    padding: 20px;
+    margin-right: 20px;
+  }
+
+}
