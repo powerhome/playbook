@@ -6,8 +6,8 @@
   &[class*=_disabled] {
     @include selectable-card-disabled;
   }
-}
 
-.pb_selectable_card_dark {
-  @include selectable-card(true);
+  &[class*=_dark] {
+    @include selectable-card(true);
+  }
 }

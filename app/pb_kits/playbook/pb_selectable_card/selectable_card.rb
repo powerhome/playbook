@@ -5,6 +5,7 @@ module Playbook
     class SelectableCard < Playbook::PbKit::Base
       PROPS = %i[configured_checked
                  configured_classname
+                 configured_dark
                  configured_data
                  configured_disabled
                  configured_id
@@ -16,6 +17,7 @@ module Playbook
 
       def initialize(checked: default_configuration,
                      classname: default_configuration,
+                     dark: default_configuration,
                      data: default_configuration,
                      disabled: default_configuration,
                      id: default_configuration,
@@ -26,6 +28,7 @@ module Playbook
                      value: default_configuration)
         self.configured_checked = checked
         self.configured_classname = classname
+        self.configured_dark = dark
         self.configured_data = data
         self.configured_disabled = disabled
         self.configured_id = id
@@ -38,6 +41,10 @@ module Playbook
 
       def checked
         true_value(configured_checked, true, false)
+      end
+
+      def dark
+        true_value(configured_dark, true, false)
       end
 
       def disabled
@@ -64,6 +71,10 @@ module Playbook
         default_value(configured_value, "")
       end
 
+      def dark_class
+        true_value(dark, "dark", "")
+      end
+
       def disabled_class
         true_value(disabled, "disabled", "enabled")
       end
@@ -71,6 +82,7 @@ module Playbook
       def kit_class
         kit_options = [
           "pb_selectable_card_kit",
+          dark_class,
           disabled_class,
         ]
         kit_options.compact.join("_")
