@@ -34,15 +34,19 @@ module Playbook
       end
 
       def date
-        day_month = "configured_date.convert_to_this + configured_date.convert_to_this"
-        pb_title = Playbook::PbTitle::Title.new(text: "18 Jun", size: 4, dark: dark)
-        ApplicationController.renderer.render(partial: pb_title, as: :object)
+        Playbook::PbKit::PbDateTime.new(configured_date, "America/New_York")
       end
 
       def year
-        year = "configured_date.convert_to_this"
-        pb_body = Playbook::PbBody::Body.new(text: "2019", color: "light", dark: dark)
+        year = date.to_year
+        pb_body = Playbook::PbBody::Body.new(text: year, color: "light", dark: dark)
         ApplicationController.renderer.render(partial: pb_body, as: :object)
+      end
+
+      def day_month
+        day_month = "#{date.to_day} #{date.to_month}"
+        pb_title = Playbook::PbTitle::Title.new(text: day_month, size: 4, dark: dark)
+        ApplicationController.renderer.render(partial: pb_title, as: :object)
       end
 
       def to_partial_path

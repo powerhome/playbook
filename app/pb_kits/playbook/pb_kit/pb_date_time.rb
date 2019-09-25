@@ -24,6 +24,10 @@ module Playbook
         @value.strftime("%a")
       end
 
+      def to_year
+        @value.strftime("%Y")
+      end
+
       def to_month
         @value.strftime("%^b")
       end
