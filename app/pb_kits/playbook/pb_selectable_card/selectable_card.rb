@@ -37,11 +37,11 @@ module Playbook
       end
 
       def checked
-        true_value(configured_checked, "true value", "false value")
+        true_value(configured_checked, true, false)
       end
 
       def disabled
-        true_value(configured_disabled, "true value", "false value")
+        true_value(configured_disabled, true, false)
       end
 
       def name
@@ -62,6 +62,18 @@ module Playbook
 
       def value
         default_value(configured_value, "")
+      end
+
+      def disabled_class
+        true_value(disabled, "disabled", "enabled")
+      end
+
+      def kit_class
+        kit_options = [
+          "pb_selectable_card_kit",
+          disabled_class,
+        ]
+        kit_options.compact.join("_")
       end
 
       def to_partial_path
