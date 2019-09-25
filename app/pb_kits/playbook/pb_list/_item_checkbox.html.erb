@@ -1,0 +1,8 @@
+<%= content_tag(:li,
+    id: object.id,
+    data: object.data,
+    class: object.classname) do %>
+    <%= object.yield(context: self) %>
+    <%= object.item_checkbox %>
+
+<% end %>

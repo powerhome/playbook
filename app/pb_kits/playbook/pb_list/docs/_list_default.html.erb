@@ -5,3 +5,11 @@
 <%= pb_rails("list/item") do %> List Item <% end %>
 <%= pb_rails("list/item") do %> List Item <% end %>
 <% end %>
+
+
+<%= pb_rails("list", props: {ordered: false, dark: false, borderless: false}) do %>
+<%= pb_rails("list/item_checkbox", props: {checkbox: { text:"Unselected", value:"checkbox-value", icon:"check"}}) do %><% end %>
+<%= pb_rails("list/item_checkbox", props: {checkbox: { text:"Hover", value:"checkbox-value", icon:"check" }}) do %>  <% end %>
+<%= pb_rails("list/item_checkbox", props: {checkbox: { text:"Selected", value:"checkbox-value", icon:"check", checked: true}}) do %><% end %>
+<%= pb_rails("list/item_checkbox", props: {checkbox: { text:"Unselected Last", value:"checkbox-value", icon:"check" }}) do %><% end %>
+<% end %>
