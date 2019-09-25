@@ -4,7 +4,12 @@ import ProgressPills from "../_progress_pills.jsx"
 function ProgressPillsDefault() {
   return (
     <div>
-      <ProgressPills />
+      <ProgressPills steps={3} />
+
+      <ProgressPills
+          active={2}
+          steps={3}
+      />
     </div>
   )
 }

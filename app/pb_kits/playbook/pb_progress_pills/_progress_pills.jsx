@@ -5,15 +5,22 @@ import React from 'react'
 
 type ProgressPillsProps = {
   active?: String,
-  className?: String,
-  data?: String,
-  id?: String,
   steps?: String,
 }
 
-const ProgressPills = ({ active, className, data, id, steps }: ProgressPillsProps) => (
-  <div>
-    {`kit content`}
+const printSteps = (steps, active) => {
+  let items = []
+
+  for(let step = 1; step <= steps; step++) {
+    items.push(<span className={step <= active ? "active" : "inactive"}></span>)
+  }
+
+  return items
+}
+
+const ProgressPills = ({ active = 0, steps = 0 }: ProgressPillsProps) => (
+  <div className="pb_progress_pills_kit">
+    {printSteps(steps, active)}
   </div>
 )
 
