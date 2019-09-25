@@ -26,6 +26,7 @@ RUN bundle install --frozen
 
 ADD package.json yarn.lock /home/app/src/
 RUN yarn install
+RUN npm rebuild node-sass
 
 COPY ./startup.sh /
 RUN chmod +x /startup.sh
