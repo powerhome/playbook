@@ -1,0 +1,7 @@
+examples:
+
+  rails:
+  - progress_pills_default: Default
+
+  react:
+  - progress_pills_default: Default

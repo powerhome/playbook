@@ -140,3 +140,6 @@ WebpackerReact.setup (Checkbox);
 
 import * as HomeAddressStreet from "pb_home_address_street/docs";
 WebpackerReact.setup (HomeAddressStreet);
+
+import * as ProgressPills from "pb_progress_pills/docs";
+WebpackerReact.setup (ProgressPills);
