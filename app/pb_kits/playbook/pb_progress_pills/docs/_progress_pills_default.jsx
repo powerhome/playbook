@@ -6,6 +6,9 @@ function ProgressPillsDefault() {
     <div>
       <ProgressPills steps={3} />
 
+      <br />
+      <br />
+
       <ProgressPills
           active={2}
           steps={3}

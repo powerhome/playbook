@@ -13,6 +13,7 @@ const printSteps = (steps, active) => {
 
   for(let step = 1; step <= steps; step++) {
     items.push(<span className={step <= active ? "active" : "inactive"}></span>)
+    items.push(<span> </span>)
   }
 
   return items
