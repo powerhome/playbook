@@ -4,22 +4,22 @@ module Playbook
   module PbBadge
     class Badge < Playbook::PbKit::Base
       PROPS = %i[
-          configured_classname
-					configured_data
-          configured_id
-          configured_text
-          configured_variant
-          configured_rectangle].freeze
+        configured_classname
+        configured_data
+        configured_id
+        configured_text
+        configured_variant
+        configured_rectangle
+      ].freeze
 
-      def initialize(class: default_configuration,
-							classname: default_configuration,
-							data: default_configuration,
-              id: default_configuration,
-            text: default_configuration,
-          variant: default_configuration,
-        rectangle: default_configuration)
-				self.configured_classname = classname
-				self.configured_data = data
+      def initialize(classname: default_configuration,
+                     data: default_configuration,
+                     id: default_configuration,
+                     text: default_configuration,
+                     variant: default_configuration,
+                     rectangle: default_configuration)
+        self.configured_classname = classname
+        self.configured_data = data
         self.configured_id = id
         self.configured_text = text
         self.configured_variant = variant
@@ -42,7 +42,7 @@ module Playbook
         kit_options = [
           "pb_badge_kit",
           variant,
-          rectangle?
+          rectangle?,
         ]
         kit_options.join("_")
       end
