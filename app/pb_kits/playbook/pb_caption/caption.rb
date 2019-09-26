@@ -5,8 +5,8 @@ module Playbook
     class Caption
       include Playbook::Props
 
-      prop :dark, default: false
-      prop :large, default: false
+      prop :dark, type: Playbook::Props::Boolean, default: false
+      prop :large, type: Playbook::Props::Boolean, default: false
       prop :tag, type: Playbook::Props::Enum,
                  values: %w[h1 h2 h3 h4 h5 h6 p span div],
                  default: "div"
