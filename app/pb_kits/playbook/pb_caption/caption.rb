@@ -7,7 +7,9 @@ module Playbook
 
       prop :dark, default: false
       prop :large, default: false
-      prop :tag, default: "div"
+      prop :tag, type: Playbook::Props::Enum,
+                 values: %w[h1 h2 h3 h4 h5 h6 p span div],
+                 default: "div"
       prop :text, default: "Caption"
 
       def classname
