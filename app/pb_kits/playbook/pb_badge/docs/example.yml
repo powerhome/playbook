@@ -1,0 +1,10 @@
+examples:
+  rails:
+  - badge_default: Rectangle
+  - badge_rounded: Rounded
+  - badge_colors: Colors
+
+  react:
+  - badge_default: Rectangle
+  - badge_rounded: Rounded
+  - badge_colors: Colors

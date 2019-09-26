@@ -141,5 +141,8 @@ WebpackerReact.setup (Checkbox);
 import * as HomeAddressStreet from "pb_home_address_street/docs";
 WebpackerReact.setup (HomeAddressStreet);
 
+import * as Badge from "pb_badge/docs";
+WebpackerReact.setup (Badge);
+
 import * as DateYearStacked from "pb_date_year_stacked/docs";
 WebpackerReact.setup (DateYearStacked);
