@@ -1,59 +1,27 @@
 # frozen_string_literal: true
 
+require "playbook/pb_kit/props"
+
 module Playbook
   module PbCaption
-    class Caption < Playbook::PbKit::Base
-      PROPS = %i[configured_aria
-                 configured_classname
-                 configured_dark
-                 configured_data
-                 configured_id
-                 configured_large
-                 configured_tag
-                 configured_text].freeze
+    class Caption
+      include Playbook::PbKit::Props
+      # tag_options = %w[h1 h2 h3 h4 h5 h6 p span div]
 
-      def initialize(aria: default_configuration,
-                     classname: default_configuration,
-                     dark: default_configuration,
-                     data: default_configuration,
-                     id: default_configuration,
-                     large: default_configuration,
-                     tag: default_configuration,
-                     text: default_configuration)
-        self.configured_aria = aria
-        self.configured_classname = classname
-        self.configured_dark = dark
-        self.configured_data = data
-        self.configured_id = id
-        self.configured_large = large
-        self.configured_tag = tag
-        self.configured_text = text
-      end
+      prop :dark, default: false
+      prop :large, default: false
+      prop :tag, default: "div"
+      prop :text, default: "Caption"
 
-      def tag
-        tag_options = %w[h1 h2 h3 h4 h5 h6 p span div]
-        one_of_value(configured_tag, tag_options, "div")
-      end
-
-      def text
-        default_value(configured_text, "Caption")
-      end
-
-      def large_class
-        true_value(configured_large, "lg", nil)
-      end
-
-      def dark_class
-        true_value(configured_dark, "dark", nil)
-      end
-
-      def kit_class
-        caption_options = [
-          "pb_caption_kit",
-          large_class,
-          dark_class,
-        ]
-        caption_options.reject(&:nil?).join("_")
+      def classname
+        [
+          [
+            "pb_caption_kit",
+            large_class,
+            dark_class,
+          ].compact.join("_"),
+          prop(:classname),
+        ].join(" ")
       end
 
       def to_partial_path
@@ -62,12 +30,13 @@ module Playbook
 
     private
 
-      DEFAULT = Object.new
-      private_constant :DEFAULT
-      def default_configuration
-        DEFAULT
+      def large_class
+        large ? "lg" : nil
       end
-      attr_accessor(*PROPS)
+
+      def dark_class
+        dark ? "dark" : nil
+      end
     end
   end
 end

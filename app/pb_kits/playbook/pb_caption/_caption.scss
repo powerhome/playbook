@@ -3,11 +3,11 @@
 [class^=pb_caption_kit] {
   @include caption;
 
-  &[class*=_lg]  {
+  &.pb_caption_lg  {
     @include caption_lg;
   }
 
-  &[class*=_dark]  {
+  &.pb_caption_dark  {
     @include caption_dark;
   }
 }
