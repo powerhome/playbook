@@ -2,5 +2,5 @@
     id: object.id,
     data: object.data,
     class: object.classname("pb_text_input")) do %>
-  <span>TEXT INPUT CONTENT</span>
+    <%= object.yield(context: self) %>
 <% end %>
