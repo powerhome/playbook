@@ -1,5 +1,5 @@
 <%= content_tag(:label, id: object.id, data: object.data, class: object.classname(object.kit_class)) do %>
-<input type="checkbox" value="<%=object.value%>" name="<%=object.name%>" <%=object.checked%>>
+<%= object.yield(context: self) %>
 <span class="pb_checkbox_checkmark">
   <%= object.icon %>
 </span>

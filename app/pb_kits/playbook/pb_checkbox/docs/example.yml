@@ -2,6 +2,7 @@ examples:
 
   rails:
   - checkbox_default: Default
+  - checkbox_custom: Custom
   - checkbox_dark: Dark
 
   react:

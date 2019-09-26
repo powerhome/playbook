@@ -3,6 +3,10 @@
 module Playbook
   module PbCheckbox
     class Checkbox < Playbook::PbKit::Base
+
+      include ActionView::Helpers::FormTagHelper
+      include ActionView::Context
+
       PROPS = %i[configured_classname
                  configured_data
                  configured_id
@@ -11,7 +15,8 @@ module Playbook
                 configured_value
               configured_name
               configured_checked
-              configured_icon
+
+              block
             ].freeze
 
       def initialize(classname: default_configuration,
@@ -22,7 +27,8 @@ module Playbook
                    value: default_configuration,
                  name: default_configuration,
                  checked: default_configuration,
-                 icon: default_configuration
+
+                 &block
                )
         self.configured_classname = classname
         self.configured_data = data
@@ -32,7 +38,9 @@ module Playbook
         self.configured_value = value
         self.configured_name = name
         self.configured_checked = checked
-        self.configured_icon = icon
+
+        self.block = block_given? ? block : nil
+
 
       end
 
@@ -41,10 +49,16 @@ module Playbook
       end
 
       def icon
-        if is_set? configured_icon
           pb_icon = Playbook::PbIcon::Icon.new(icon: "check", id: "check_icon", classname: "check_icon", fixed_width: true)
           ApplicationController.renderer.render(partial: pb_icon, as: :object)
-        end
+      end
+
+      def input
+        check_box_tag(name, value, checked)
+      end
+
+      def yield(context:)
+        !block.nil? ? context.capture(&block) : input
       end
 
       def text
