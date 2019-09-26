@@ -1,0 +1,9 @@
+examples:
+  
+  rails:
+  - appointment_result_default: Default
+  
+  
+  react:
+  - appointment_result_default: Default
+  

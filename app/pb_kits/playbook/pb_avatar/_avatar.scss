@@ -15,6 +15,7 @@ $avatar-sizes: (
 
 [class^=pb_avatar_kit] {
   position: relative;
+  display: flex;
 
   @each $name, $size in $avatar-sizes {
     &[class*=_#{$name}],

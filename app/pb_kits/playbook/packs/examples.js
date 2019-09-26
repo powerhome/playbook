@@ -140,3 +140,6 @@ WebpackerReact.setup (Checkbox);
 
 import * as HomeAddressStreet from "pb_home_address_street/docs";
 WebpackerReact.setup (HomeAddressStreet);
+
+import * as AppointmentResult from "pb_appointment_result/docs";
+WebpackerReact.setup (AppointmentResult);

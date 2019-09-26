@@ -1,0 +1,16 @@
+<%= content_tag(:div,
+    id: object.id,
+    data: object.data,
+    class: object.classname("pb_appointment_result")) do %>
+  <%= pb_rails("icon_circle", props: {
+  icon: "comment-slash"
+    }) %>
+  <%= pb_rails("user", props: {
+      name: object.result,
+      title: object.user,
+      orientation: "horizontal",
+      align: "left",
+      avatar: {
+        image: { url: "https://randomuser.me/api/portraits/women/44.jpg"} }
+      }) %>
+<% end %>
