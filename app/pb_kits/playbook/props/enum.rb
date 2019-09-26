@@ -7,6 +7,10 @@ module Playbook
         super(**options)
         @values = values
       end
+
+      def validate(value)
+        @values.include?(value)
+      end
     end
   end
 end
