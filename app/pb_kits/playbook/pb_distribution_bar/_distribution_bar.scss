@@ -1,34 +1,31 @@
 @import "../tokens/colors";
 
-$bar-colors: map-values($data_colors);
-
-[class^=pb_distribution_bar]{
-  font-size: 0px;
-}
-
-.pb_distribution_bar_sm {
-  height: 8px;
-}
-
-.pb_distribution_bar_lg {
-  height: 36px;
-}
-
-[class^=pb_distribution_value]{
-  height: 100%;
-  font-size: 16px;
-  display: inline-block;
-  @for $i from 1 through length($bar-colors) {
-    &:nth-child(#{length($bar-colors)}n+#{$i}) {
-      background-color: nth($bar-colors, $i);
+[class^=pb_distribution_bar] {
+  $bar_colors: map-values($data_colors);
+  $small_bar: 8px;
+  $large_bar: 36px;
+  display: flex;
+  .pb_distribution_value {
+    height: 100%;
+    display: inline-block;
+    @for $i from 1 through length($bar_colors) {
+      &:nth-child(#{length($bar_colors)}n+#{$i}) {
+        background-color: nth($bar_colors, $i);
+      }
+    }
+    &:first-child {
+      border-top-left-radius: 18px;
+      border-bottom-left-radius: 18px;
+    }
+    &:last-child {
+      border-top-right-radius: 18px;
+      border-bottom-right-radius: 18px;
     }
   }
-  &:first-child {
-    border-top-left-radius: 18px;
-    border-bottom-left-radius: 18px;
+  &[class*=_sm] {
+    height: $small_bar;
   }
-  &:last-child {
-    border-top-right-radius: 18px;
-    border-bottom-right-radius: 18px;
+  &[class*=_lg] {
+    height: $large_bar;
   }
 }

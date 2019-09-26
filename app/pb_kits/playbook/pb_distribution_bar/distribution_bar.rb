@@ -43,9 +43,13 @@ module Playbook
       end
       attr_accessor(*PROPS)
 
+      def normalize_characters(value)
+        return value.to_s.gsub(/(\d\.\d)|[^a-zA-Z\d]/, '\\1').to_i
+      end
+
       def values_to_percents
-        total = configured_values.sum
-        configured_values.map{ |value| (value.to_f*100/total).round(2) }
+        normalized_values = configured_values.map(&method(:normalize_characters))
+        normalized_values.map { |value| (value.to_f * 100 / normalized_values.sum ).round(2) }
       end
     end
   end
