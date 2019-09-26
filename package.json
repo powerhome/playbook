@@ -2,7 +2,7 @@
   "name": "playbook-ui",
   "version": "2.9.0",
   "description": "Nitro's Design System",
-  "main": "./app/pb_kits/playbook/packs/index.js",
+  "main": "./app/pb_kits/playbook/index.js",
   "scripts": {
     "build": "./bin/webpack --profile --progress",
     "flow": "flow",
@@ -64,6 +64,9 @@
     "jsx-control-statements": "^3.2.8",
     "lazysizes": "^4.1.6",
     "lodash": "4.17.15",
+    "moment": "^2.24.0",
+    "moment-strftime": "^0.5.0",
+    "moment-timezone": "^0.5.26",
     "node-sass": "^4.12.0",
     "prop-types": "^15.6.2",
     "rails-erb-loader": "^5.5.1",
