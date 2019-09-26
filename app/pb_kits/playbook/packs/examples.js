@@ -152,3 +152,5 @@ WebpackerReact.setup (DateRangeInline);
 
 import * as DistributionBar from "pb_distribution_bar/docs";
 WebpackerReact.setup (DistributionBar);
+import * as TextInput from "pb_text_input/docs";
+WebpackerReact.setup (TextInput);

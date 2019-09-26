@@ -46,3 +46,4 @@ import "./pb_badge.js";
 import "./pb_date_year_stacked.js";
 import "./pb_date_range_inline.js";
 import "./pb_distribution_bar.js";
+import "./pb_text_input.js";
