@@ -1,12 +1,9 @@
 # frozen_string_literal: true
 
-require "playbook/pb_kit/props"
-
 module Playbook
   module PbCaption
     class Caption
-      include Playbook::PbKit::Props
-      # tag_options = %w[h1 h2 h3 h4 h5 h6 p span div]
+      include Playbook::Props
 
       prop :dark, default: false
       prop :large, default: false
