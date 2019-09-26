@@ -27,9 +27,9 @@ module Playbook
         @props
       end
 
-      def prop(name, **options)
+      def prop(name, type: Playbook::Props::String, **options)
         @props ||= {}
-        @props[name] = Playbook::Props::Base.new(**options)
+        @props[name] = type.new(**options)
 
         define_method(name) { prop(name) }
       end
