@@ -21,3 +21,4 @@ tmp/
 .vscode
 *.gem
 yarn-error.log
+.byebug_history
