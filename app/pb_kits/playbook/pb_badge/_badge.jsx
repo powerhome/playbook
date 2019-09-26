@@ -5,30 +5,28 @@ import React from 'react'
 import classnames from 'classnames'
 
 type BadgeProps = {
-  class?: String,
   className?: String,
-  data?: String,
   id?: String,
   text?: String,
   variant?: 'success' | 'warning' | 'error' | 'info' | 'neutral',
-  rectangle?: Boolean
+  rounded?: Boolean
 }
 const Badge = ({
   className,
   id,
   text,
   variant = 'neutral',
-  rectangle = false
+  rounded = false
 }: BadgeProps) => {
-  const rectangleValue = rectangle == true ? "rectangle" : ""
+  const roundedValue = rounded == true ? "rounded" : ""
   const css = classnames([
-    `pb_badge_kit_${variant}_${rectangleValue}`,
+    `pb_badge_kit_${variant}_${roundedValue}`,
     className,
   ])
 
   return (
     <div id={id} className={css}>
-        {text}
+        <span>{text}</span>
     </div>
   )
 }

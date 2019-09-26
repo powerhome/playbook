@@ -9,7 +9,7 @@ module Playbook
         configured_id
         configured_text
         configured_variant
-        configured_rectangle
+        configured_rounded
       ].freeze
 
       def initialize(classname: default_configuration,
@@ -17,39 +17,35 @@ module Playbook
                      id: default_configuration,
                      text: default_configuration,
                      variant: default_configuration,
-                     rectangle: default_configuration)
+                     rounded: default_configuration)
         self.configured_classname = classname
         self.configured_data = data
         self.configured_id = id
         self.configured_text = text
         self.configured_variant = variant
-        self.configured_rectangle = rectangle
+        self.configured_rounded = rounded
       end
 
       def text
         default_value(configured_text, "")
       end
 
-      def rectangle
-        default_value(configured_rectangle, false)
+      def rounded
+        true_value(configured_rounded, "rounded", nil)
       end
 
-      def rectangle?
-        "rectangle" if rectangle == true
+      def variant
+        variant_options = %w[success warning error info neutral primary]
+        one_of_value(configured_variant, variant_options, "neutral")
       end
 
       def kit_class
         kit_options = [
           "pb_badge_kit",
           variant,
-          rectangle?,
+          rounded,
         ]
-        kit_options.join("_")
-      end
-
-      def variant
-        variant_options = %w[success warning error info neutral primary]
-        one_of_value(configured_variant, variant_options, "neutral")
+        kit_options.compact.join("_")
       end
 
       def to_partial_path
