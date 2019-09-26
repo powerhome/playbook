@@ -15,7 +15,7 @@ module Playbook
       end
 
       def validate!(input_value)
-        validate(value(input_value)) || raise(Playbook::Props::Error, "Invalid value (#{input_value}) for prop (#{inspect})")
+        validate(value(input_value)) || raise(Playbook::Props::Error, "Invalid value (#{input_value.inspect}) for prop (#{inspect})")
       end
 
       def validate(_value)
