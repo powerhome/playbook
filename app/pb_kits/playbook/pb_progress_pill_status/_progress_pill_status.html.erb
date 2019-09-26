@@ -1,0 +1,13 @@
+<%= content_tag(:div,
+    id: object.id,
+    data: object.data,
+    class: object.classname("pb_progress_pills_kit")) do %>
+      <%= pb_rails("title", props: { tag: "span", text: "Status:", size: 4 }) %>
+      <%= pb_rails("body", props: { tag: "span", text: "Orientation", color: "light" }) %>
+    <div>
+    <% 1.upto(object.steps) do |step| %>
+      <span class=<%= step <= object.active ? "active" : "inactive" %>></span>
+    <% end %>
+  </div>
+<% end %>
+

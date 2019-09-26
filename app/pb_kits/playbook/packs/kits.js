@@ -43,3 +43,4 @@ import "./pb_loading_inline.js";
 import "./pb_checkbox.js";
 import "./pb_home_address_street.js";
 import "./pb_progress_pills.js";
+import "./pb_progress_pill_status.js";

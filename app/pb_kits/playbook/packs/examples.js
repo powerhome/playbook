@@ -143,3 +143,6 @@ WebpackerReact.setup (HomeAddressStreet);
 
 import * as ProgressPills from "pb_progress_pills/docs";
 WebpackerReact.setup (ProgressPills);
+
+import * as ProgressPillStatus from "pb_progress_pill_status/docs";
+WebpackerReact.setup (ProgressPillStatus);

@@ -1,0 +1,18 @@
+@mixin pb_progress_pill_status_kit {
+  width: 45px;
+  height: 4px;
+  display: inline-block;
+  border-radius: 4px;
+}
+
+[class^=pb_progress_pill_status_kit] {
+  .inactive {
+    @include pb_progress_pill_status_kit;
+    background-color: #E4E8F0;
+  }
+
+  .active {
+    @include pb_progress_pill_status_kit;
+    background-color: #064DFF;
+  }
+}

@@ -44,3 +44,4 @@ kits:
   - checkbox
   - home_address_street
   - progress_pills
+  - progress_pill_status
