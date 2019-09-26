@@ -1,5 +1,5 @@
 import React from "react"
-import Input from "../_input.jsx"
+import {Input} from "../../"
 
 function InputDefault() {
   return (
@@ -13,4 +13,4 @@ function InputDefault() {
   )
 }
 
-export default InputDefault;
+export default InputDefault

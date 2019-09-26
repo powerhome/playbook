@@ -1,5 +1,5 @@
 import React from "react"
-import Timestamp from "../_timestamp.jsx"
+import {Timestamp} from "../../"
 
 function TimestampDefault() {
   return (
@@ -7,4 +7,4 @@ function TimestampDefault() {
   )
 }
 
-export default TimestampDefault;
+export default TimestampDefault

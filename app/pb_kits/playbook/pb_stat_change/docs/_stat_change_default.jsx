@@ -1,5 +1,5 @@
 import React from "react"
-import StatChange from "../_stat_change.jsx"
+import {StatChange} from "../../"
 
 function StatChangeDefault() {
   return (

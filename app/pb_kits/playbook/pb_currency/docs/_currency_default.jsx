@@ -1,5 +1,5 @@
 import React from "react"
-import Currency from "../_currency.jsx"
+import {Currency} from "../../"
 
 function CurrencyDefault() {
   return (

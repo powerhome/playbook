@@ -1,5 +1,5 @@
 import React from "react"
-import Owner from "../_owner.jsx"
+import {Owner} from "../../"
 
 function OwnerDefault() {
   return (

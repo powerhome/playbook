@@ -2,9 +2,12 @@
 
 import React from 'react'
 import classnames from 'classnames'
-import Body from '../pb_body/_body.jsx'
-import StatChange from '../pb_stat_change/_stat_change.jsx'
-import StatValue from '../pb_stat_value/_stat_value.jsx'
+
+import {
+  Body,
+  StatChange,
+  StatValue,
+} from '../'
 
 type DashboardValueProps = {
   align?: 'left' | 'center' | 'right',

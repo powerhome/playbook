@@ -1,5 +1,5 @@
 import React from "react"
-import OnlineStatus from "../_online_status.jsx"
+import {OnlineStatus} from "../../"
 
 function OnlineStatusDefault() {
   return (
@@ -7,4 +7,4 @@ function OnlineStatusDefault() {
   )
 }
 
-export default OnlineStatusDefault;
+export default OnlineStatusDefault

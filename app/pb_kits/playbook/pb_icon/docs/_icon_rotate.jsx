@@ -1,5 +1,5 @@
 import React from "react"
-import Icon from "../_icon.jsx"
+import {Icon} from "../../"
 
 function IconRotate() {
   return (

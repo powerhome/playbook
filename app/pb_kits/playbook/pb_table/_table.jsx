@@ -36,6 +36,7 @@ class Table extends React.Component {
     } = this.props;
 
     const css = classnames([
+      'pb_table',
       `table-${size}`,
       container ? `table-card` : null,
       dark ? `table-dark` : null,

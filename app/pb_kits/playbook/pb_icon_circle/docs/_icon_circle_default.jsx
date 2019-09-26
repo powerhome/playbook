@@ -1,5 +1,5 @@
 import React from "react"
-import IconCircle from "../_icon_circle.jsx"
+import {IconCircle} from "../../"
 
 function IconCircleDefault() {
   return (
@@ -9,4 +9,4 @@ function IconCircleDefault() {
   )
 }
 
-export default IconCircleDefault;
+export default IconCircleDefault

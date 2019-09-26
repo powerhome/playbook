@@ -1,5 +1,5 @@
 import React from "react"
-import User from "../_user.jsx"
+import {User} from "../../"
 
 function UserDefault() {
   return (

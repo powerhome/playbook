@@ -1,7 +1,7 @@
-import React from 'react';
-import PropTypes from "prop-types";
-import classnames from 'classnames';
-import Caption from "../pb_caption/_caption.jsx";
+import React from 'react'
+import PropTypes from "prop-types"
+import classnames from 'classnames'
+import {Caption} from "../"
 
 const propTypes = {
   className: PropTypes.string,
@@ -13,11 +13,11 @@ const propTypes = {
       PropTypes.string,
       PropTypes.number
   ])
-};
+}
 
 const defaultProps = {
   type: "text"
-};
+}
 
 class Input extends React.Component {
   render() {
@@ -28,7 +28,7 @@ class Input extends React.Component {
       placeholder,
       type,
       value
-    } = this.props;
+    } = this.props
 
     const css = classnames([
       `input_field`,
@@ -51,7 +51,7 @@ class Input extends React.Component {
   }
 }
 
-Input.propTypes = propTypes;
-Input.defaultProps = defaultProps;
+Input.propTypes = propTypes
+Input.defaultProps = defaultProps
 
-export default Input;
+export default Input

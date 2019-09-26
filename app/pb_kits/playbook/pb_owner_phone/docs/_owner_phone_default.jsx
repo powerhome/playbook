@@ -1,5 +1,5 @@
 import React from "react"
-import OwnerPhone from "../_owner_phone.jsx"
+import {OwnerPhone} from "../../"
 
 function OwnerPhoneDefault() {
   return (
@@ -7,4 +7,4 @@ function OwnerPhoneDefault() {
   )
 }
 
-export default OwnerPhoneDefault;
+export default OwnerPhoneDefault

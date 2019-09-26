@@ -1,11 +1,11 @@
 import React from 'react'
 import {Checkbox} from '../../'
 
-function CheckboxDefault() {
+function CheckboxDark() {
   return (
     <div>
       <Checkbox
-
+          dark
           label='Checkbox label'
           name='default name'
           value='default value'
@@ -14,4 +14,4 @@ function CheckboxDefault() {
   )
 }
 
-export default CheckboxDefault;
+export default CheckboxDark;

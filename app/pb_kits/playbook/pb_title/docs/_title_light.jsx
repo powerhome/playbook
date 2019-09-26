@@ -1,5 +1,5 @@
 import React from "react"
-import Title from "../_title.jsx"
+import {Title} from "../../"
 
 function TitleLight() {
   return (

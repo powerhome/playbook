@@ -1,5 +1,5 @@
 import React from "react"
-import Table from "../_table.jsx"
+import {Table} from "../../"
 
 function TableMultiline() {
   return (

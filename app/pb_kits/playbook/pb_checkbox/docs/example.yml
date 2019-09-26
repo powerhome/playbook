@@ -5,4 +5,5 @@ examples:
   - checkbox_dark: Dark
 
   react:
-    - checkbox_default: Default
+  - checkbox_default: Default
+  - checkbox_dark: Dark
