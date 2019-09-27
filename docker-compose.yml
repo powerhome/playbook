@@ -3,12 +3,6 @@ volumes:
   bundle:
   database:
 services:
-  db:
-    image: postgres:10.6
-    volumes:
-      - database:/var/lib/postgresql/data
-    ports:
-      - "8081:5432"
   web:
     build:
       context: .
@@ -19,8 +13,6 @@ services:
       - bundle:/usr/local/bundle
     ports:
       - "8080:3000"
-    depends_on:
-      - db
   webpacker:
     build:
       context: .
