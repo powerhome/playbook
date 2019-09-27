@@ -1,0 +1,9 @@
+examples:
+  
+  rails:
+  - date_range_inline_default: Default
+  
+  
+  react:
+  - date_range_inline_default: Default
+  
