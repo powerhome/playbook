@@ -32,6 +32,5 @@ COPY ./startup.sh /
 RUN chmod +x /startup.sh
 
 ADD --chown=app:app . /home/app/src
-RUN mkdir /etc/service/puma && ln -s /home/app/src/services/puma.sh /etc/service/puma/run
 
 RUN /startup.sh $precompileassets
