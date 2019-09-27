@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-require "action_mailer/railtie"
 require "sassc-rails"
 require "slim-rails"
 
