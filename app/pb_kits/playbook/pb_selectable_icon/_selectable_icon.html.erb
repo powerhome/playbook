@@ -1,0 +1,10 @@
+<%= content_tag(:div,
+    id: object.id,
+    data: object.data,
+    class: object.classname(object.kit_class)) do %>
+  <label class="pb_selectable_icon_wrapper">
+    <%= object.yield(context: self) %>
+    <%= object.icon %>
+    <%= object.label %>
+  </label>
+<% end %>

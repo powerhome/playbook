@@ -146,3 +146,6 @@ WebpackerReact.setup (Badge);
 
 import * as DateYearStacked from "pb_date_year_stacked/docs";
 WebpackerReact.setup (DateYearStacked);
+
+import * as SelectableIcon from "pb_selectable_icon/docs";
+WebpackerReact.setup (SelectableIcon);
