@@ -7,6 +7,8 @@ import Caption from "./pb_caption/_caption.jsx"
 import Card from "./pb_card/_card.jsx"
 import DashboardValue from "./pb_dashboard_value/_dashboard_value.jsx"
 import DateYearStacked from "./pb_date_year_stacked/_date_year_stacked.jsx"
+import DateRangeInline from "./pb_date_range_inline/_date_range_inline.jsx"
+import DistributionBar from "./pb_distribution_bar/_distribution_bar.jsx"
 import Icon from "./pb_icon/_icon.jsx"
 import Image from "./pb_image/_image.jsx"
 import Input from "./pb_input/_input.jsx"
@@ -24,7 +26,6 @@ import VerticalNav from "./pb_vertical_nav/_vertical_nav.jsx"
 import Pill from "./pb_pill/_pill.jsx"
 import Currency from "./pb_currency/_currency.jsx"
 import Toggle from "./pb_toggle/_toggle.jsx"
-import DateRangeInline from "./pb_date_range_inline/_date_range_inline.jsx"
 
 // Dashboard Settings
 import commonSettings from "./pb_dashboard/commonSettings"
@@ -45,6 +46,8 @@ export {
   Card,
   DashboardValue,
   DateYearStacked,
+  DateRangeInline,
+  DistributionBar,
   Icon,
   Image,
   Input,
@@ -62,7 +65,6 @@ export {
   Pill,
   Currency,
   Toggle,
-  DateRangeInline,
   commonSettings,
   lineGraphSettings,
   barGraphSettings,
