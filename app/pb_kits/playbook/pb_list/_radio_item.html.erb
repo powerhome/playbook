@@ -1,0 +1,12 @@
+<%= pb_rails("list/item") do %>
+  <label>
+  <%= content_tag(:input,
+      id: object.id,
+      type: "radio",
+      name: object.name,
+      data: object.data,
+      class: object.classname) do %>
+      <%= object.yield(context: self) %>
+  <% end %>
+  </label>
+<% end %>

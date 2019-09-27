@@ -10,5 +10,6 @@ examples:
   - list_dark_ordered: Dark Ordered
   - list_dark_borderless: Dark Borderless
   - list_dark_xpadding: Dark Horizontal Padding
+  - list_radio_item: List Radio Item
   react:
   - list_default: Default
