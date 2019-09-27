@@ -28,12 +28,19 @@ module Playbook
         type_options = %w[default project home]
         set_type = one_of_value(configured_type, type_options, "default")
         if set_type === "home"
-          "h#"
+          "H#"
         elsif set_type === "project"
-          "p#"
+          "P#"
         else
           "#"
         end
+      end
+
+      def hashtag
+        pb_hashtag = Playbook::PbBadge::Badge.new(text: "Hashtag", variant: "primary") do
+          default_value(configured_hashtag, "")
+        end
+        ApplicationController.renderer.render(partial: pb_hashtag, as: :object)
       end
 
       def text
@@ -55,6 +62,7 @@ module Playbook
       def full_hashtag
         "#{type}#{text}"
       end
+
       def to_partial_path
         "pb_hashtag/hashtag"
       end
