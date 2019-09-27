@@ -5,28 +5,6 @@ revision=$2
 tag=$3
 cluster=$4
 
-environmentDbValuesFile=""
-if [ -e $(pwd)/config/deploy/$environment/values.db.yaml ]; then
-    environmentDbValuesFile="-f $(pwd)/config/deploy/$environment/values.db.yaml"
-fi
-
-# deploy postgresql with helm
-sops --decrypt $(pwd)/config/deploy/${environment}/secrets.db.yaml > $(pwd)/config/deploy/${environment}/secrets.db.dec.yaml
-helm upgrade --install --wait --timeout 600 \
-    playbook-db-${environment} stable/postgresql --version 3.9.1 \
-    --namespace playbook-${environment} --kube-context=${cluster} --tiller-namespace=app-tiller \
-    -f $(pwd)/config/deploy/${environment}/secrets.db.dec.yaml \
-    -f $(pwd)/config/deploy/values.db.yaml \
-    ${environmentDbValuesFile}
-
-helm_exit=$?
-rm $(pwd)/config/deploy/${environment}/secrets.db.dec.yaml
-
-if [ $helm_exit != 0 ]; then
-  echo "helm deploy failed"
-  exit $helm_exit
-fi
-
 sops --decrypt $(pwd)/config/deploy/${environment}/secrets.yaml > $(pwd)/config/deploy/${environment}/secrets.dec.yaml
 REVISION=${revision} kubernetes-deploy \
     --selector='app=playbook' \
