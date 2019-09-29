@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require "active_support/concern"
+Dir[File.expand_path("./props/*.rb", __dir__)].each { |f| require f }
 
 module Playbook
   module Props

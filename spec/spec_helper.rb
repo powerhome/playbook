@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require_relative "../app/pb_kits/playbook/props.rb"
-Dir[File.expand_path("../app/pb_kits/playbook/props/*.rb", __dir__)].each { |f| require f }
 require "byebug"
 
 RSpec.configure do |config|
