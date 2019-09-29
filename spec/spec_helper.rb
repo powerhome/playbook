@@ -2,8 +2,6 @@
 
 require_relative "../app/pb_kits/playbook/props.rb"
 Dir[File.expand_path("../app/pb_kits/playbook/props/*.rb", __dir__)].each { |f| require f }
-Dir[File.expand_path("../app/pb_kits/playbook/pb_kit/*.rb", __dir__)].each { |f| require f }
-Dir[File.expand_path("../app/pb_kits/playbook/**/*.rb", __dir__)].each { |f| require f }
 require "byebug"
 
 RSpec.configure do |config|
