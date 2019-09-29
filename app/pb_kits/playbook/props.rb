@@ -19,10 +19,10 @@ module Playbook
     end
 
     included do
-      prop :id
-      prop :data, default: {}
-      prop :classname
-      prop :aria, default: {}
+      prop :id, default: nil
+      prop :data, type: Playbook::Props::Hash, default: {}
+      prop :classname, default: ""
+      prop :aria, type: Playbook::Props::Hash, default: {}
     end
 
     class_methods do
