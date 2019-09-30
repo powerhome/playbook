@@ -44,3 +44,5 @@ import "./pb_checkbox.js";
 import "./pb_home_address_street.js";
 import "./pb_badge.js";
 import "./pb_date_year_stacked.js";
+import "./pb_date_range_inline.js";
+import "./pb_distribution_bar.js";

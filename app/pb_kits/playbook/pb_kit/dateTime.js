@@ -38,4 +38,8 @@ export default class DateTime {
   toDay() {
     return this.value.strftime("%e")
   }
+
+  toIso() {
+    return this.value.toISOString();
+  }
 }

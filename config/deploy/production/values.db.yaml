@@ -1,2 +1,0 @@
-persistence:
-  storageClass: 'production-standard'
