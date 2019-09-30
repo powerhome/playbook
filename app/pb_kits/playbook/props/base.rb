@@ -2,10 +2,11 @@
 
 module Playbook
   module Props
-    class Error < StandardError
-    end
+    class Error < StandardError; end
 
     class Base
+      attr_reader :default
+
       def initialize(default: nil)
         @default = default
       end
