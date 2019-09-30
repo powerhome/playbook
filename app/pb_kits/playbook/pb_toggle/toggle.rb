@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require "action_view"
+
 module Playbook
   module PbToggle
     class Toggle < Playbook::PbKit::Base
