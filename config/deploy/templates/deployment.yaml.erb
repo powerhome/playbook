@@ -35,15 +35,6 @@ spec:
               value: <%= appConfig["rackEnv"] %>
             - name: RAILS_ENV
               value: <%= appConfig["railsEnv"] %>
-            - name: APP_DATABASE_HOST
-              value: playbook-db-<%= environment %>-postgresql
-            - name: APP_DATABASE_USERNAME
-              value: "postgres"
-            - name: APP_DATABASE_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: playbook-db-<%= environment %>-postgresql
-                  key: postgresql-password
             - name: RAILS_SERVE_STATIC_FILES
               value: "true"
           livenessProbe:

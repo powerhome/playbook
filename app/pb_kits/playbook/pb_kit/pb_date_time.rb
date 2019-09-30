@@ -32,6 +32,10 @@ module Playbook
         @value.strftime("%^b")
       end
 
+      def to_month_downcase
+        @value.strftime("%b")
+      end
+
       def to_month_full
         @value.strftime("%B")
       end
