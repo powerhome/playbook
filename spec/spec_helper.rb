@@ -1,9 +1,11 @@
 # frozen_string_literal: true
 
 require_relative "../app/pb_kits/playbook/props.rb"
+Dir[File.expand_path("support/**/*.rb", __dir__)].each { |f| require f }
 require "byebug"
 
 RSpec.configure do |config|
+  config.include Playbook::Rspec, type: :kit
   # rspec-expectations config goes here. You can use an alternate
   # assertion/expectation library such as wrong or the stdlib/minitest
   # assertions if you prefer.

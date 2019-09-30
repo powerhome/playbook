@@ -4,46 +4,13 @@ require_relative "../../../../app/pb_kits/playbook/pb_caption/caption"
 
 module Playbook
   module PbCaption
-    describe Caption do
-      describe ":dark prop" do
-        it "is Boolean type" do
-          expect(Caption.props[:dark].class).to eq(Props::Boolean)
-        end
+    describe Caption, type: :kit do
+      subject { Caption }
 
-        it "defaults to false" do
-          expect(Caption.props[:dark].default).to eq(false)
-        end
-      end
-
-      describe ":large prop" do
-        it "is Boolean type" do
-          expect(Caption.props[:large].class).to eq(Props::Boolean)
-        end
-
-        it "defaults to false" do
-          expect(Caption.props[:large].default).to eq(false)
-        end
-      end
-
-      describe ":tag prop" do
-        it "is Enum type" do
-          expect(Caption.props[:tag].class).to eq(Props::Enum)
-        end
-
-        it "defaults to 'div'" do
-          expect(Caption.props[:tag].default).to eq("div")
-        end
-      end
-
-      describe ":text prop" do
-        it "is String type" do
-          expect(Caption.props[:text].class).to eq(Props::String)
-        end
-
-        it "defaults to 'Caption'" do
-          expect(Caption.props[:text].default).to eq("Caption")
-        end
-      end
+      it { is_expected.to define_prop(:dark).of_type(Props::Boolean).with_default(false) }
+      it { is_expected.to define_prop(:large).of_type(Props::Boolean).with_default(false) }
+      it { is_expected.to define_prop(:tag).of_type(Props::Enum).with_default("div") }
+      it { is_expected.to define_prop(:text).of_type(Props::String).with_default("Caption") }
 
       describe "#classname" do
         it "returns namespaced class name", :aggregate_failures do
