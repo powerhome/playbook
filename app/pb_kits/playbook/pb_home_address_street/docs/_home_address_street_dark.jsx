@@ -4,11 +4,11 @@ import HomeAddressStreet from "../_home_address_street.jsx"
 function HomeAddressStreetDark() {
   return (
     <HomeAddressStreet
-        address="70 prospect Ave"
+        address="70 Prospect Ave"
         city="North Arlington"
         dark
         homeId={8250263}
-        houseStyle="Colonal"
+        houseStyle="Colonial"
         state="NJ"
         zipcode="07031"
     />
