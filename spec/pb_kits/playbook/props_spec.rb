@@ -7,25 +7,12 @@ module Playbook
     end
 
     describe "base props" do
-      it "includes id with default of nil" do
-        test_class_instance = BasePropsClass.new({})
-        expect(test_class_instance.id).to eq(nil)
-      end
+      subject { BasePropsClass }
 
-      it "includes data with default of {}" do
-        test_class_instance = BasePropsClass.new({})
-        expect(test_class_instance.data).to eq({})
-      end
-
-      it "includes classname with default of ''" do
-        test_class_instance = BasePropsClass.new({})
-        expect(test_class_instance.classname).to eq("")
-      end
-
-      it "includes aria with default of {}" do
-        test_class_instance = BasePropsClass.new({})
-        expect(test_class_instance.aria).to eq({})
-      end
+      it { is_expected.to define_prop(:id).with_default(nil) }
+      it { is_expected.to define_prop(:data).of_type(Props::Hash).with_default({}) }
+      it { is_expected.to define_prop(:classname).with_default("") }
+      it { is_expected.to define_prop(:aria).of_type(Props::Hash).with_default({}) }
 
       describe "can be overwritten with custom values" do
         it "#id" do
@@ -62,25 +49,12 @@ module Playbook
     end
 
     describe "additional props" do
-      it "can declare string prop with default" do
-        test_class_instance = ExtendedPropsClass.new({})
-        expect(test_class_instance.string_prop).to eq("foo")
-      end
+      subject { ExtendedPropsClass }
 
-      it "can declare boolean string prop with default" do
-        test_class_instance = ExtendedPropsClass.new({})
-        expect(test_class_instance.boolean_prop).to eq(true)
-      end
-
-      it "can declare hash string prop with default" do
-        test_class_instance = ExtendedPropsClass.new({})
-        expect(test_class_instance.hash_prop).to eq({ baz: :foo})
-      end
-
-      it "can declare enum string prop with default" do
-        test_class_instance = ExtendedPropsClass.new({})
-        expect(test_class_instance.enum_prop).to eq(:right)
-      end
+      it { is_expected.to define_prop(:string_prop).with_default("foo") }
+      it { is_expected.to define_prop(:boolean_prop).of_type(Props::Boolean).with_default(true) }
+      it { is_expected.to define_prop(:hash_prop).of_type(Props::Hash).with_default(baz: :foo) }
+      it { is_expected.to define_prop(:enum_prop).of_type(Props::Enum).with_default(:right) }
 
       describe "can be overwritten with custom values" do
         it "as string" do

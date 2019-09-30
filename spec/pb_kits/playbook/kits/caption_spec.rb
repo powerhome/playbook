@@ -4,7 +4,7 @@ require_relative "../../../../app/pb_kits/playbook/pb_caption/caption"
 
 module Playbook
   module PbCaption
-    describe Caption, type: :kit do
+    describe Caption do
       subject { Caption }
 
       it { is_expected.to define_prop(:dark).of_type(Props::Boolean).with_default(false) }
