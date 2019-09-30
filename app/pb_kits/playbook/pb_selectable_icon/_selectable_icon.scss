@@ -4,35 +4,35 @@
 @import "../pb_icon/icon";
 
 
-[class^=pb_selectable_icon] {
-    .pb_selectable_icon_wrapper {
-      display: inline-flex;
-      flex-direction: column;
-      align-items: flex-start;
-      cursor: pointer;
+[class^=pb_selectable_icon_kit] {
+  .pb_selectable_icon_wrapper {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: flex-start;
+    cursor: pointer;
 
-      .pb_selectable_icon_kit_icon {
-        color: $neutral;
-        align-self: center;
-        margin-bottom: $space_xs;
-      }
+    .pb_selectable_icon_kit_icon {
+      color: $neutral;
+      align-self: center;
+      margin-bottom: $space_xs;
+    }
 
-      .pb_selectable_icon_kit_title {
-        align-self: center;
-      }
+    .pb_selectable_icon_kit_title {
+      align-self: center;
+    }
 
-      input[type=checkbox] {
-        visibility: hidden;
-        &:checked {
-          & ~ {
-            .pb_selectable_icon_kit_icon {
-              color: $primary;
-            }
-            .pb_selectable_icon_kit_title {
-              color: $primary !important;
-            }
+    input[type=checkbox] {
+      visibility: hidden;
+      &:checked {
+        & ~ {
+          .pb_selectable_icon_kit_icon {
+            color: $primary;
+          }
+          .pb_selectable_icon_kit_title {
+            color: $primary !important;
           }
         }
       }
+    }
   }
 }

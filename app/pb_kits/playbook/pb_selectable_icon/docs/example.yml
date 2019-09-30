@@ -1,9 +1,8 @@
 examples:
-  
+
   rails:
   - selectable_icon_default: Default
-  
-  
+
+
   react:
   - selectable_icon_default: Default
-  
