@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+set -e
+
+# Build
+
+echo ">>> Building"
+time bin/rubocop --display-cop-names --extra-details --parallel --display-style-guide --config .rubocop.yml
+npm run lint

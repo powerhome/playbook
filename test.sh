@@ -1,7 +1,6 @@
 #!/bin/sh
-set -e
 
-# there is no bin/build, bin/doc, nor bin/test
+set -e
 
 bin/setup
 bin/build

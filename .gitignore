@@ -22,3 +22,4 @@ tmp/
 *.gem
 yarn-error.log
 .byebug_history
+spec_results/
