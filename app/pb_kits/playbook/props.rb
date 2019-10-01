@@ -1,7 +1,11 @@
 # frozen_string_literal: true
 
 require "active_support/concern"
-Dir[File.expand_path("./props/*.rb", __dir__)].each { |f| require f }
+require_relative "./props/base"
+require_relative "./props/boolean"
+require_relative "./props/enum"
+require_relative "./props/hash"
+require_relative "./props/string"
 
 module Playbook
   module Props
