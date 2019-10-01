@@ -32,7 +32,7 @@ app.build(application: application, cluster: cluster, deployerVersion: deployerV
     sh "docker push ${appImage}"
   }
 
-  stage('Test') {
+  app.dockerStage('Test') {
     sh "docker run --tty --rm ${appImage} bash -lc 'bin/test'"
   }
 
