@@ -9,9 +9,9 @@ module Playbook
     describe "base props" do
       subject { BasePropsClass }
 
-      it { is_expected.to define_prop(:id).with_default(nil) }
+      it { is_expected.to define_prop(:id) }
       it { is_expected.to define_prop(:data).of_type(Props::Hash).with_default({}) }
-      it { is_expected.to define_prop(:classname).with_default(nil) }
+      it { is_expected.to define_prop(:classname) }
       it { is_expected.to define_prop(:aria).of_type(Props::Hash).with_default({}) }
 
       describe "can be overwritten with custom values" do
@@ -40,21 +40,23 @@ module Playbook
     class ExtendedPropsClass
       include Playbook::Props
 
-      prop :string_prop, default: "foo"
+      prop :string_prop, type: Playbook::Props::String, default: "foo"
       prop :boolean_prop, type: Playbook::Props::Boolean, default: true
       prop :hash_prop, type: Playbook::Props::Hash, default: { baz: :foo }
       prop :enum_prop, type: Playbook::Props::Enum,
                        values: %i[up down left right],
                        default: :right
+      prop :default_prop
     end
 
     describe "additional props" do
       subject { ExtendedPropsClass }
 
-      it { is_expected.to define_prop(:string_prop).with_default("foo") }
+      it { is_expected.to define_prop(:string_prop).of_type(Props::String).with_default("foo") }
       it { is_expected.to define_prop(:boolean_prop).of_type(Props::Boolean).with_default(true) }
       it { is_expected.to define_prop(:hash_prop).of_type(Props::Hash).with_default(baz: :foo) }
       it { is_expected.to define_prop(:enum_prop).of_type(Props::Enum).with_default(:right) }
+      it { is_expected.to define_prop(:default_prop).of_type(Props::String).with_default(nil) }
 
       describe "can be overwritten with custom values" do
         it "as string" do
@@ -82,10 +84,10 @@ module Playbook
     describe ".props" do
       it "returns collection of available properties", :aggregate_failures do
         expect(BasePropsClass.props).to include(:id, :data, :classname, :aria)
-        expect(BasePropsClass.props).to_not include(:string_prop, :boolean_prop, :hash_prop, :enum_prop)
+        expect(BasePropsClass.props).to_not include(:string_prop, :boolean_prop, :hash_prop, :enum_prop, :default_prop)
 
         expect(ExtendedPropsClass.props).to include(:id, :data, :classname, :aria)
-        expect(ExtendedPropsClass.props).to include(:string_prop, :boolean_prop, :hash_prop, :enum_prop)
+        expect(ExtendedPropsClass.props).to include(:string_prop, :boolean_prop, :hash_prop, :enum_prop, :default_prop)
       end
     end
   end

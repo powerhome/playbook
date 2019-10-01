@@ -11,8 +11,8 @@ module Playbook
       it { is_expected.to define_prop(:text).with_default("") }
       it { is_expected.to define_prop(:value).with_default("") }
       it { is_expected.to define_prop(:name).with_default("") }
-      it { is_expected.to define_prop(:checked).with_default(nil) }
-      it { is_expected.to define_prop(:icon).with_default(nil) }
+      it { is_expected.to define_prop(:checked) }
+      it { is_expected.to define_prop(:icon) }
 
       describe "#classname" do
         it "returns namespaced class name", :aggregate_failures do

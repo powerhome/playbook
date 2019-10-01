@@ -9,8 +9,8 @@ module Playbook
       prop :text, default: ""
       prop :value, default: ""
       prop :name, default: ""
-      prop :checked, default: nil
-      prop :icon, default: nil
+      prop :checked
+      prop :icon
 
       def to_partial_path
         "pb_checkbox/checkbox"
