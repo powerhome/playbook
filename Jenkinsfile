@@ -24,15 +24,16 @@ app.build(application: application, cluster: cluster, deployerVersion: deployerV
   stage('Code Checkout') {
     scmVars = checkout scm
     tag = "${env.BRANCH_NAME.replaceAll('/', '_')}-${scmVars.GIT_COMMIT}-${env.BUILD_ID}"
+    appImage = "quay.io/powerhome/${application}:${tag}"
   }
 
   app.dockerStage('Container Build') {
-    sh "docker build -t quay.io/powerhome/${application}:${tag} ."
-    sh "docker push quay.io/powerhome/${application}:${tag}"
+    sh "docker build -t ${appImage} ."
+    sh "docker push ${appImage}"
   }
 
   stage('Test') {
-    sh "docker run --tty --rm ${appImage.id} bin/test"
+    sh "docker run --tty --rm ${appImage} bin/test"
   }
 
   app.deployerStage('Deploy', cluster) {
