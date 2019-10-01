@@ -32,7 +32,7 @@ app.build(application: application, cluster: cluster, deployerVersion: deployerV
   }
 
   stage('Test') {
-    // sh "docker run --tty --rm ${appImage.id} bin/rake"
+    sh "docker run --tty --rm ${appImage.id} bin/test"
   }
 
   app.deployerStage('Deploy', cluster) {

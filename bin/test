@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+set -e
+
+# Test
+
+echo ">>> Testing"
+trap "kill -TERM $PID" TERM
+time bin/rspec --format progress --format html --out ./spec_results/playbook/index.html --profile 100 spec &
+PID=$!
+wait $PID
