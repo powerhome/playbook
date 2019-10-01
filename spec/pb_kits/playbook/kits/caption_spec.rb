@@ -14,10 +14,10 @@ module Playbook
 
       describe "#classname" do
         it "returns namespaced class name", :aggregate_failures do
-          expect(Caption.new({}).classname).to eq "pb_caption_kit "
-          expect(Caption.new(dark: true).classname).to eq "pb_caption_kit_dark "
-          expect(Caption.new(large: true).classname).to eq "pb_caption_kit_lg "
-          expect(Caption.new(dark: true, large: true).classname).to eq "pb_caption_kit_lg_dark "
+          expect(Caption.new({}).classname).to eq "pb_caption_kit"
+          expect(Caption.new(dark: true).classname).to eq "pb_caption_kit_dark"
+          expect(Caption.new(large: true).classname).to eq "pb_caption_kit_lg"
+          expect(Caption.new(dark: true, large: true).classname).to eq "pb_caption_kit_lg_dark"
           expect(Caption.new(classname: "additional_class").classname).to eq "pb_caption_kit additional_class"
         end
       end

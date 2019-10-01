@@ -11,7 +11,7 @@ module Playbook
 
       it { is_expected.to define_prop(:id).with_default(nil) }
       it { is_expected.to define_prop(:data).of_type(Props::Hash).with_default({}) }
-      it { is_expected.to define_prop(:classname).with_default("") }
+      it { is_expected.to define_prop(:classname).with_default(nil) }
       it { is_expected.to define_prop(:aria).of_type(Props::Hash).with_default({}) }
 
       describe "can be overwritten with custom values" do

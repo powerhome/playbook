@@ -20,7 +20,7 @@ module Playbook
             dark_class,
           ].compact.join("_"),
           prop(:classname),
-        ].join(" ")
+        ].compact.join(" ")
       end
 
       def to_partial_path

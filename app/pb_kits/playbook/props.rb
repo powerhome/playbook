@@ -25,7 +25,7 @@ module Playbook
     included do
       prop :id, default: nil
       prop :data, type: Playbook::Props::Hash, default: {}
-      prop :classname, default: ""
+      prop :classname, default: nil
       prop :aria, type: Playbook::Props::Hash, default: {}
     end
 
