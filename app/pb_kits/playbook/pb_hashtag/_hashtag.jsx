@@ -15,8 +15,8 @@ type HashtagProps = {
 
 
 const HashType = {
-  "home": "h#",
-  "project": "p#",
+  "home": "H#",
+  "project": "P#",
   "default": "#"
 }
 
@@ -31,9 +31,9 @@ const Hashtag = ({
 
 
 
-<div>
+<div className={`pb_hashtag_kit_${type}`}>
   <a href={url}>
-    <Badge variant="primary" text={HashType[`${type}`] + text}/>
+    <Badge variant="primary" text={HashType[type] + text}></Badge>
   </a>
 </div>
 )

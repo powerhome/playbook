@@ -37,14 +37,13 @@ module Playbook
       end
 
       def hashtag
-        pb_hashtag = Playbook::PbBadge::Badge.new(text: "Hashtag", variant: "primary") do
-          default_value(configured_hashtag, "")
-        end
+        pb_hashtag = Playbook::PbBadge::Badge.new(text: hashtag_value, variant: "primary")
         ApplicationController.renderer.render(partial: pb_hashtag, as: :object)
       end
 
-      def text
-        default_value(configured_text, "")
+      def hashtag_value
+        text = default_value(configured_text, "")
+        type + text
       end
 
       def url
@@ -56,12 +55,9 @@ module Playbook
           "pb_hashtag_kit",
           type,
         ]
-        kit_options.compact.join("_")
+        kit_options.join("_")
       end
 
-      def full_hashtag
-        "#{type}#{text}"
-      end
 
       def to_partial_path
         "pb_hashtag/hashtag"
