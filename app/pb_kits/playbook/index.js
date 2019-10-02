@@ -1,5 +1,6 @@
 // React Component JSX Imports from the React Kits
 import Avatar from "./pb_avatar/_avatar.jsx"
+import Badge from "./pb_badge/_badge.jsx"
 import BarGraph from "./pb_bar_graph/_bar_graph.jsx"
 import Body from "./pb_body/_body.jsx"
 import Button from "./pb_button/_button.jsx"
@@ -12,6 +13,7 @@ import DateRangeInline from "./pb_date_range_inline/_date_range_inline.jsx"
 import DateYearStacked from "./pb_date_year_stacked/_date_year_stacked.jsx"
 import DistributionBar from "./pb_distribution_bar/_distribution_bar.jsx"
 import FixedConfirmationToast from "./pb_fixed_confirmation_toast/_fixed_confirmation_toast.jsx"
+import Hashtag from "./pb_hashtag/_hashtag.jsx"
 import HomeAddressStreet from "./pb_home_address_street/_home_address_street.jsx"
 import Icon from "./pb_icon/_icon.jsx"
 import IconCircle from "./pb_icon_circle/_icon_circle.jsx"
@@ -58,6 +60,7 @@ import pbChart from "./plugins/pb_chart_plugin.js"
 // All Exports for Consumption in Nitro
 export {
   Avatar,
+  Badge,
   BarGraph,
   Body,
   Button,
@@ -70,6 +73,7 @@ export {
   DateYearStacked,
   DistributionBar,
   FixedConfirmationToast,
+  Hashtag,
   HomeAddressStreet,
   Icon,
   IconCircle,

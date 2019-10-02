@@ -1,0 +1,10 @@
+<%= content_tag(:div,
+    id: object.id,
+    data: object.data,
+    class: object.classname(object.kit_class)) do %>
+
+  <%= link_to object.url do %>
+    <%= object.hashtag %>
+  <% end %>
+
+<% end %>
