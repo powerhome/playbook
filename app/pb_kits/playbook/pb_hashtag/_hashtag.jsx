@@ -2,7 +2,7 @@
 /* eslint-disable react/no-multi-comp, flowtype/space-before-type-colon */
 
 import React from 'react'
-import Button from '../pb_button/_button.jsx'
+import {Badge} from '../'
 
 type HashtagProps = {
   className?: String,
@@ -10,7 +10,7 @@ type HashtagProps = {
   id?: String,
   text?: String,
   type: 'default' | 'home' | 'project',
-  url?: String
+  url?: String,
 }
 
 
@@ -32,8 +32,10 @@ const Hashtag = ({
 
 
 <div>
-  <Button variant="link" link={url} text={HashType[`${type}`] + text}></Button>
-  </div>
+  <a href={url}>
+    <Badge variant="primary" text={HashType[`${type}`] + text}/>
+  </a>
+</div>
 )
 
 export default Hashtag
