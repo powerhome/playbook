@@ -1,5 +1,5 @@
 import React from "react"
-import TitleCount from "../_title_count.jsx"
+import {TitleCount} from "../../"
 
 function TitleCountDefault() {
   return (

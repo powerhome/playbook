@@ -1,5 +1,5 @@
 import React from "react"
-import Body from "../_body.jsx"
+import {Body} from "../../"
 
 function BodyDark() {
   return (

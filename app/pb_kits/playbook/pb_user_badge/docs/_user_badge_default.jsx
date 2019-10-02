@@ -1,5 +1,5 @@
 import React from "react"
-import UserBadge from "../_user_badge.jsx"
+import {UserBadge} from "../../"
 
 function UserBadgeDefault() {
   return (

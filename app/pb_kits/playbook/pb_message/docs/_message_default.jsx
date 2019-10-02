@@ -1,5 +1,5 @@
 import React from "react"
-import Message from "../_message.jsx"
+import Message from "../../"
 
 function MessageDefault() {
   return (
@@ -7,4 +7,4 @@ function MessageDefault() {
   )
 }
 
-export default MessageDefault;
+export default MessageDefault

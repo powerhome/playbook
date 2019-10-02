@@ -1,5 +1,5 @@
 import React from "react"
-import Toggle from "../_toggle.jsx"
+import {Toggle} from "../../"
 
 function ToggleDefault() {
   return (
@@ -7,4 +7,4 @@ function ToggleDefault() {
   )
 }
 
-export default ToggleDefault;
+export default ToggleDefault

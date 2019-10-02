@@ -5,7 +5,7 @@ import React from 'react'
 
 import classnames from 'classnames'
 import { map } from 'lodash'
-import Image from "../pb_image/_image.jsx"
+import { Image } from "../"
 
 type AvatarProps = {
   className?: String,

@@ -1,5 +1,5 @@
 import React from "react"
-import HomeAddressStreet from "../_home_address_street.jsx"
+import {HomeAddressStreet} from "../../"
 
 function HomeAddressStreetDark() {
   return (

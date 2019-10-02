@@ -3,9 +3,11 @@
 import React from 'react'
 import classnames from 'classnames'
 
-import Body from '../pb_body/_body.jsx'
-import Caption from '../pb_caption/_caption.jsx'
-import Title from '../pb_title/_title.jsx'
+import {
+  Body,
+  Caption,
+  Title,
+} from '../'
 
 type CurrencyProps = {
   align?: 'left' | 'center' | 'right',

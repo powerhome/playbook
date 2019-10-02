@@ -1,5 +1,5 @@
 import React from "react"
-import StarRating from "../_star_rating.jsx"
+import {StarRating} from "../../"
 
 function StarRatingDefault() {
   return (
@@ -7,4 +7,4 @@ function StarRatingDefault() {
   )
 }
 
-export default StarRatingDefault;
+export default StarRatingDefault

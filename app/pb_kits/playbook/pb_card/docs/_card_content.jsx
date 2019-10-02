@@ -1,5 +1,5 @@
 import React from 'react'
-import Card from '../_card.jsx'
+import {Card} from '../../'
 
 function CardContent() {
   return (

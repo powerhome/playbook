@@ -1,5 +1,5 @@
 import React from "react"
-import LineGraph from "../_line_graph.jsx"
+import {LineGraph} from "../../"
 
 const data = [{
     name: 'Installation',

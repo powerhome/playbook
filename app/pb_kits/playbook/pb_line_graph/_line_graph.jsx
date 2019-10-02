@@ -2,7 +2,7 @@
 
 import React from "react"
 
-import pbChart from "../plugins/pb_chart_plugin.js"
+import {pbChart} from "../"
 
 type LineGraphProps = {
     axisTitle?: String,
@@ -36,7 +36,7 @@ export default class LineGraph extends React.Component<LineGraphProps> {
             title,
             type,
         } = this.props
-    
+
         new pbChart(`.${className}`, {
             axisTitle: axisTitle,
             chartData: chartData,
@@ -52,7 +52,7 @@ export default class LineGraph extends React.Component<LineGraphProps> {
 
     render() {
       const { className, id } = this.props
-  
+
       return (
         <div
             className={className}

@@ -2,8 +2,11 @@
 
 import React from 'react'
 import classnames from 'classnames'
-import Body from '../pb_body/_body.jsx'
-import Icon from '../pb_icon/_icon.jsx'
+
+import {
+  Body,
+  Icon,
+} from '../'
 
 type StatChangeProps = {
   change?: 'increase' | 'decrease' | 'neutral',

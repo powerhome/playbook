@@ -2,8 +2,11 @@
 /*eslint-disable react/no-multi-comp, flowtype/space-before-type-colon */
 
 import React from 'react'
-import Icon from '../pb_icon/_icon.jsx'
-import Body from '../pb_body/_body.jsx'
+
+import {
+  Body,
+  Icon,
+} from '../'
 
 type LoadingInlineProps = {
   align?: 'left' | 'center' | 'right',

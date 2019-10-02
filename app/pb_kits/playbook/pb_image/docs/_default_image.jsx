@@ -1,5 +1,5 @@
 import React from "react"
-import Image from "../_image.jsx"
+import {Image} from "../../"
 
 function DefaultImage() {
   return (
@@ -9,4 +9,4 @@ function DefaultImage() {
   )
 }
 
-export default DefaultImage;
+export default DefaultImage
