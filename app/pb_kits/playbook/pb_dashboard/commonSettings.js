@@ -1,7 +1,7 @@
 import colors from "../tokens/_colors.scss"
 import typography from "../tokens/_typography.scss";
 
-const applyCustomColors = function(highchart) {
+const applyCustomSeriesColors = function(highchart) {
   var data_colors = [
     colors.data_1,
     colors.data_2,
@@ -17,6 +17,9 @@ const applyCustomColors = function(highchart) {
     item.color = selected_color;
     item.data.forEach(function(data_item) {
       data_item.color = selected_color;
+      data_item.marker.lineColor = selected_color;
+      data_item.marker.states.hover.lineColor = selected_color;
+      data_item.marker.states.select.lineColor = selected_color;
     });
   });
 };
@@ -75,7 +78,7 @@ const styleLegend = function(highchart) {
 
 // Exportable Global Styles Function
 const commonSettings = function(highchart) {
-  applyCustomColors(highchart);
+  applyCustomSeriesColors(highchart);
   styleAxis(highchart);
   styleChartContainer(highchart);
   styleLegend(highchart);
