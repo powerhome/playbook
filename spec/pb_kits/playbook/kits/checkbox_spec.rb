@@ -12,7 +12,7 @@ module Playbook
       it { is_expected.to define_prop(:value).with_default("") }
       it { is_expected.to define_prop(:name).with_default("") }
       it { is_expected.to define_prop(:checked).of_type(Props::Boolean).with_default(false) }
-      it { is_expected.to define_prop(:icon) }
+      it { is_expected.to define_prop(:icon).of_type(Props::Boolean).with_default(false) }
 
       describe "#classname" do
         it "returns namespaced class name", :aggregate_failures do

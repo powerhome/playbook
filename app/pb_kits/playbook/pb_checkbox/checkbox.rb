@@ -7,20 +7,13 @@ module Playbook
 
       prop :dark, type: Playbook::Props::Boolean, default: false
       prop :checked, type: Playbook::Props::Boolean, default: false
+      prop :icon, type: Playbook::Props::Boolean, default: false
       prop :text, default: ""
       prop :value, default: ""
       prop :name, default: ""
-      prop :icon
 
       def to_partial_path
         "pb_checkbox/checkbox"
-      end
-
-      def icon_html
-        unless icon.nil?
-          pb_icon = Playbook::PbIcon::Icon.new(icon: "check", id: "check_icon", classname: "check_icon", fixed_width: true)
-          ApplicationController.renderer.render(partial: pb_icon, as: :object)
-        end
       end
 
       def checked_html
