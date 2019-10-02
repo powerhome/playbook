@@ -1,5 +1,5 @@
 import React from "react"
-import Source from "../_source.jsx"
+import {Source} from "../../"
 
 function SourceDefault() {
   return (

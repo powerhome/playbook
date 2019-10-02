@@ -16,8 +16,10 @@ Gem::Specification.new do |s|
 
   s.files = Dir["{app,fonts,lib,stories}/**/*"] + ["Rakefile", "README.md"]
 
+  s.add_dependency "actionpack", ">= 5.1.6", "< 6.0"
+  s.add_dependency "actionview", ">= 5.1.6", "< 6.0"
+  s.add_dependency "activesupport", ">= 5.1.6", "< 6.0"
   s.add_dependency "method_source", "0.9.2"
-  s.add_dependency "rails", ">= 5.1.6", "< 6.0"
   s.add_dependency "redcarpet", "3.4.0"
   s.add_dependency "rouge", "1.10.1"
   s.add_dependency "sassc-rails", "1.3.0"
@@ -30,8 +32,8 @@ Gem::Specification.new do |s|
   s.add_development_dependency "binding_of_caller", "0.8.0"
   s.add_development_dependency "byebug", "11.0.0"
   s.add_development_dependency "overcommit", "0.49.0"
-  s.add_development_dependency "pg", "0.21.0"
   s.add_development_dependency "rainbow", "2.2.2"
+  s.add_development_dependency "rspec", "~> 3.8.0"
   s.add_development_dependency "rubocop", "0.72.0"
   s.add_development_dependency "spring", "2.0.2"
   s.add_development_dependency "spring-watcher-listen", "2.0.1"

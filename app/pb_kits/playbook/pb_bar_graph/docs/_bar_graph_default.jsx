@@ -1,5 +1,5 @@
 import React from "react"
-import BarGraph from "../_bar_graph.jsx"
+import { BarGraph } from "../../"
 
 const chartData = [{
   name: 'Installation',

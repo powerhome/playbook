@@ -1,5 +1,5 @@
 import React from "react"
-import Phone from "../_phone.jsx"
+import {Phone} from "../../"
 
 function PhoneDefault() {
   return (
@@ -7,4 +7,4 @@ function PhoneDefault() {
   )
 }
 
-export default PhoneDefault;
+export default PhoneDefault

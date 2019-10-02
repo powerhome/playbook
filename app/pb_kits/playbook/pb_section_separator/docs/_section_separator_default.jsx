@@ -1,5 +1,5 @@
 import React from "react"
-import SectionSeparator from "../_section_separator.jsx"
+import {SectionSeparator} from "../../"
 
 function SectionSeparatorDefault() {
   return (

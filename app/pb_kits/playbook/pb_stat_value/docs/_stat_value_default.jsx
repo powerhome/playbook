@@ -1,5 +1,5 @@
 import React from "react"
-import StatValue from "../_stat_value.jsx"
+import {StatValue} from "../../"
 
 function StatValueDefault() {
   return (

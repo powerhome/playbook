@@ -1,5 +1,5 @@
 import React from "react"
-import LabelPill from "../_label_pill.jsx"
+import {LabelPill} from "../../"
 
 function LabelPillDefault() {
   return (
@@ -7,4 +7,4 @@ function LabelPillDefault() {
   )
 }
 
-export default LabelPillDefault;
+export default LabelPillDefault

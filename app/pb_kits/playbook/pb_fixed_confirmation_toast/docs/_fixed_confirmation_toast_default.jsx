@@ -1,5 +1,5 @@
 import React from "react"
-import FixedConfirmationToast from "../_fixed_confirmation_toast.jsx"
+import {FixedConfirmationToast} from "../../"
 
 function FixedConfirmationToastDefault() {
   return (

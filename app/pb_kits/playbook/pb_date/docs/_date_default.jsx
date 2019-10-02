@@ -1,5 +1,5 @@
 import React from "react"
-import Date from "../_date.jsx"
+import Date from "../../"
 
 function DateDefault() {
   return (

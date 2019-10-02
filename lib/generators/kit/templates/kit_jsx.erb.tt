@@ -3,6 +3,11 @@
 
 import React from 'react'
 
+/*
+// Un-comment to import kits here
+import { Body } from '../'
+*/
+
 type <%= @kit_name_pascal %>Props = {
   <% @kit_props.each do |key,val| %><%= key == "classname" ? "className?: " : "#{key.camelize(:lower)}?: " %><% case val %><% when "enum", "one_of" %>'option_1' | 'option_2',<% when "boolean", "bool" %>Boolean,<% else %>String,<% end %>
   <% end %>

@@ -1,0 +1,22 @@
+<%= content_tag(:div,
+    id: object.id,
+    data: object.data,
+    class: object.classname("pb_date_range_inline")) do %>
+
+    <%= pb_rails("body", props: { tag: "span", color: "light" }) do %>
+      <%= pb_rails("icon", props: { icon: "calendar-alt", fixed_width: true }) %>
+    <% end %>
+
+    <%= pb_rails("body", props: { tag: "span"}) do %>
+      <%= object.start_date %>
+    <% end %>
+
+    <%= pb_rails("body", props: { tag: "span", color: "light" }) do %>
+      <%= pb_rails("icon", props: { icon: "long-arrow-right", fixed_width: true }) %>
+    <% end %>
+
+    <%= pb_rails("body", props: { tag: "span"}) do %>
+      <%= object.end_date %>
+    <% end %>
+
+<% end %>

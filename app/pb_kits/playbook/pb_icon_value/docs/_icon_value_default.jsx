@@ -1,5 +1,5 @@
 import React from "react"
-import IconValue from "../_icon_value.jsx"
+import {IconValue} from "../../"
 
 function IconValueDefault() {
   return (
@@ -7,4 +7,4 @@ function IconValueDefault() {
   )
 }
 
-export default IconValueDefault;
+export default IconValueDefault

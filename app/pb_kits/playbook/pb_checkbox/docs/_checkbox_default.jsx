@@ -1,5 +1,5 @@
-import React from "react"
-import Checkbox from "../_checkbox.jsx"
+import React from 'react'
+import {Checkbox} from '../../'
 
 function CheckboxDefault() {
   return (
@@ -7,8 +7,8 @@ function CheckboxDefault() {
       <Checkbox
 
           label='Checkbox label'
-          name="default name"
-          value="default value"
+          name='default name'
+          value='default value'
       />
     </div>
   )

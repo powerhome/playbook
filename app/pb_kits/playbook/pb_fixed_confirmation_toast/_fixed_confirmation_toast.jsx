@@ -3,8 +3,11 @@
 
 import React from 'react'
 import classnames from 'classnames'
-import Title from "../pb_title/_title.jsx"
-import Icon from "../pb_icon/_icon.jsx"
+
+import {
+  Icon,
+  Title,
+} from '../'
 
 type FixedConfirmationToastProps = {
   className?: String,

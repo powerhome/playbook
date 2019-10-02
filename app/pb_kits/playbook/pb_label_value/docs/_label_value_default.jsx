@@ -1,5 +1,5 @@
 import React from "react"
-import LabelValue from "../_label_value.jsx"
+import {LabelValue} from "../../"
 
 function LabelValueDefault() {
   return (
@@ -7,4 +7,4 @@ function LabelValueDefault() {
   )
 }
 
-export default LabelValueDefault;
+export default LabelValueDefault

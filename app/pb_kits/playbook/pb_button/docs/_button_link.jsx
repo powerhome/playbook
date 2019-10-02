@@ -1,5 +1,5 @@
 import React from 'react'
-import Button from '../_button.jsx'
+import {Button} from '../../'
 
 const ButtonLink = () => (
     <div>

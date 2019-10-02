@@ -1,6 +1,8 @@
 import React from "react"
-import List from "../_list.jsx"
-import ListItem from "../_list_item.jsx"
+import {
+  ListItem,
+  List,
+} from "../../"
 
 
 function ListDefault() {

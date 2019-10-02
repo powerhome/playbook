@@ -1,5 +1,5 @@
 import React from "react"
-import <%= @kit_name_pascal %> from "../_<%= @kit_name_underscore %>.jsx"
+import {<%= @kit_name_pascal %>} from "../../"
 
 function <%= @kit_name_pascal %>Default() {
   return (
@@ -9,4 +9,4 @@ function <%= @kit_name_pascal %>Default() {
   )
 }
 
-export default <%= @kit_name_pascal %>Default;
+export default <%= @kit_name_pascal %>Default

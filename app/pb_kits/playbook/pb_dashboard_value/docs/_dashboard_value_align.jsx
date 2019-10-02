@@ -1,5 +1,5 @@
 import React from "react"
-import DashboardValue from "../_dashboard_value.jsx"
+import {DashboardValue} from "../../"
 
 function DashboardValueAlign() {
   return (

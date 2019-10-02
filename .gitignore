@@ -20,3 +20,6 @@ spec/dummy/log/
 tmp/
 .vscode
 *.gem
+yarn-error.log
+.byebug_history
+spec_results/

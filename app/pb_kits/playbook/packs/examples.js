@@ -146,3 +146,12 @@ WebpackerReact.setup (Badge);
 
 import * as DateYearStacked from "pb_date_year_stacked/docs";
 WebpackerReact.setup (DateYearStacked);
+
+import * as DateRangeInline from "pb_date_range_inline/docs";
+WebpackerReact.setup (DateRangeInline);
+
+import * as DistributionBar from "pb_distribution_bar/docs";
+WebpackerReact.setup (DistributionBar);
+
+import * as Hashtag from "pb_hashtag/docs";
+WebpackerReact.setup (Hashtag);
