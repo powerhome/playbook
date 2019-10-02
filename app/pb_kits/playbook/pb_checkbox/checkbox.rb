@@ -6,10 +6,10 @@ module Playbook
       include Playbook::Props
 
       prop :dark, type: Playbook::Props::Boolean, default: false
+      prop :checked, type: Playbook::Props::Boolean, default: false
       prop :text, default: ""
       prop :value, default: ""
       prop :name, default: ""
-      prop :checked
       prop :icon
 
       def to_partial_path
