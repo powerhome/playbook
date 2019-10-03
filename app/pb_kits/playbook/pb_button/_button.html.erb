@@ -5,8 +5,11 @@
     data: object.data,
     class: object.classname(object.kit_class),
     disabled: object.disabled,
-    aria: object.aria
-  }
+    aria: object.aria,
+    type: object.type,
+    value: object.value
+  }.compact
+
   link_options = {
     href: object.link,
     target: object.new_window
