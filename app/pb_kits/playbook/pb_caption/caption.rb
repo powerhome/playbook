@@ -15,14 +15,7 @@ module Playbook
       prop :text, default: "Caption"
 
       def classname
-        [
-          [
-            "pb_caption_kit",
-            large_class,
-            dark_class,
-          ].compact.join("_"),
-          prop(:classname),
-        ].compact.join(" ")
+        generate_classname("pb_caption_kit", large_class, dark_class)
       end
 
     private

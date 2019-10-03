@@ -22,6 +22,13 @@ module Playbook
       self.class.props[name].value @values[name]
     end
 
+    def generate_classname(*name_parts)
+      [
+        name_parts.compact.join("_"),
+        prop(:classname),
+      ].compact.join(" ")
+    end
+
     included do
       prop :id
       prop :data, type: Playbook::Props::Hash, default: {}

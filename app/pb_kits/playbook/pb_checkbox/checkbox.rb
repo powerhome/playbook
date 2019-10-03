@@ -19,14 +19,7 @@ module Playbook
       end
 
       def classname
-        [
-          [
-            "pb_checkbox_kit",
-            dark_class,
-            checked_class,
-          ].compact.join("_"),
-          prop(:classname),
-        ].compact.join(" ")
+        generate_classname("pb_checkbox_kit", dark_class, checked_class)
       end
 
     private
