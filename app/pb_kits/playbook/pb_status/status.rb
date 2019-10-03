@@ -41,9 +41,17 @@ module Playbook
 
       def kit_class
         kit_options = [
-          "pb_status",
+          "pb_status_kit",
         ]
         kit_options.join("_")
+      end
+
+      def first_class
+        statuses.first() == configured_active ? "status_first" : nil
+      end
+
+      def last_class
+        statuses.last() == configured_active ? "status_last" : nil
       end
 
       def to_partial_path

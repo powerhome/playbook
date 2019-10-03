@@ -1,25 +1,41 @@
-.pb_status_kit {
-  .status_wrapper {
+@import "../tokens/colors";
+
+$pb_status_started: $neutral;
+$pb_status_incomplete: $active_dark;
+$pb_status_done: $success;
+
+.status_wrapper {
+  display: inline-flex;
+  align-items: center;
+
+  .status_item {
+    width: 6px;
+    height: 6px;
+    border-radius: 3px;
+    background: $pb_status_incomplete;
+    display: inline-block;
+    margin: 0 2px;
+
+    &.active {
+      width: 10px;
+      height: 10px;
+      border-radius: 5px;
+
+      & ~ div {
+        background: $pb_status_started;
+      }
+    }
+  }
+
+  &.status_first {
     .status_item {
-      width: 6px;
-      height: 6px;
-      border-radius: 3px;
-      background: grey;
+      background: $pb_status_started;
+    }
+  }
 
-      &.active {
-        width: 10px;
-        height: 10px;
-        border-radius: 5px;
-        background-color: $active_dark;
-      }
-
-      &:first-child {
-        background: blue;
-      }
-
-      &:last-child {
-        background: green;
-      }
+  &.status_last {
+    .status_item {
+      background: $pb_status_done;
     }
   }
 }

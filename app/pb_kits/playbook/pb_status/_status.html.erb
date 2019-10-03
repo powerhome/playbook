@@ -3,7 +3,7 @@
     data: object.data,
     class: object.classname(object.kit_class)) do %>
 
-  <div class="status_wrapper">
+<div class='status_wrapper <%="#{object.first_class} #{object.last_class}"%>'>
     <% object.statuses.each do |status| %>
       <div class="status_item <%= object.active == status ? "active" : "" %>" id="<%= status %>"></div>
     <% end %>
