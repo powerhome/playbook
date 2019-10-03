@@ -40,6 +40,10 @@ module Playbook
 
         define_method(name) { prop(name) }
       end
+
+      def partial(path)
+        define_method(:to_partial_path) { path }
+      end
     end
   end
 end

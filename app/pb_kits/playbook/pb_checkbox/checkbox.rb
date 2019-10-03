@@ -5,16 +5,14 @@ module Playbook
     class Checkbox
       include Playbook::Props
 
+      partial "pb_checkbox/checkbox"
+
       prop :dark, type: Playbook::Props::Boolean, default: false
       prop :checked, type: Playbook::Props::Boolean, default: false
       prop :icon, type: Playbook::Props::Boolean, default: false
       prop :text, default: ""
       prop :value, default: ""
       prop :name, default: ""
-
-      def to_partial_path
-        "pb_checkbox/checkbox"
-      end
 
       def checked_html
         checked ? "checked='true'" : nil
