@@ -12,6 +12,8 @@ module Playbook
       it { is_expected.to define_prop(:tag).of_type(Props::Enum).with_default("div") }
       it { is_expected.to define_prop(:text).of_type(Props::String).with_default("Caption") }
 
+      it { is_expected.to define_partial }
+
       describe "#classname" do
         it "returns namespaced class name", :aggregate_failures do
           expect(Caption.new({}).classname).to eq "pb_caption_kit"

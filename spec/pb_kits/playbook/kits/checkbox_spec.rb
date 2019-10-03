@@ -14,6 +14,8 @@ module Playbook
       it { is_expected.to define_prop(:checked).of_type(Props::Boolean).with_default(false) }
       it { is_expected.to define_prop(:icon).of_type(Props::Boolean).with_default(false) }
 
+      it { is_expected.to define_partial }
+
       describe "#classname" do
         it "returns namespaced class name", :aggregate_failures do
           expect(Checkbox.new({}).classname).to eq "pb_checkbox_kit_off"

@@ -42,5 +42,11 @@ module Playbook
         end
       end
     end
+
+    matcher :define_partial do
+      match do |subject_class|
+        subject_class.instance_methods.include?(:to_partial_path)
+      end
+    end
   end
 end
