@@ -22,10 +22,17 @@ module Playbook
       self.class.props[name].value @values[name]
     end
 
+    def generate_classname(*name_parts)
+      [
+        name_parts.compact.join("_"),
+        prop(:classname),
+      ].compact.join(" ")
+    end
+
     included do
-      prop :id, default: nil
+      prop :id
       prop :data, type: Playbook::Props::Hash, default: {}
-      prop :classname, default: ""
+      prop :classname
       prop :aria, type: Playbook::Props::Hash, default: {}
     end
 
@@ -39,6 +46,10 @@ module Playbook
         @props[name] = type.new(**options)
 
         define_method(name) { prop(name) }
+      end
+
+      def partial(path)
+        define_method(:to_partial_path) { path }
       end
     end
   end
