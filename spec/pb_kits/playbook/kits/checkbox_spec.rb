@@ -8,9 +8,9 @@ module Playbook
       subject { Checkbox }
 
       it { is_expected.to define_boolean_prop(:dark).with_default(false) }
-      it { is_expected.to define_prop(:text).with_default("") }
-      it { is_expected.to define_prop(:value).with_default("") }
-      it { is_expected.to define_prop(:name).with_default("") }
+      it { is_expected.to define_prop(:text) }
+      it { is_expected.to define_prop(:value) }
+      it { is_expected.to define_prop(:name) }
       it { is_expected.to define_boolean_prop(:checked).with_default(false) }
       it { is_expected.to define_boolean_prop(:icon).with_default(false) }
 

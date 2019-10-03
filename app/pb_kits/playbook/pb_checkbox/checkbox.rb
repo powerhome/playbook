@@ -10,9 +10,9 @@ module Playbook
       prop :dark, type: Playbook::Props::Boolean, default: false
       prop :checked, type: Playbook::Props::Boolean, default: false
       prop :icon, type: Playbook::Props::Boolean, default: false
-      prop :text, default: ""
-      prop :value, default: ""
-      prop :name, default: ""
+      prop :text
+      prop :value
+      prop :name
 
       def checked_html
         checked ? "checked='true'" : nil
