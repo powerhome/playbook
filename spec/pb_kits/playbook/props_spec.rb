@@ -10,9 +10,9 @@ module Playbook
       subject { BasePropsClass }
 
       it { is_expected.to define_prop(:id) }
-      it { is_expected.to define_prop(:data).of_type(Props::Hash).with_default({}) }
+      it { is_expected.to define_hash_prop(:data).with_default({}) }
       it { is_expected.to define_prop(:classname) }
-      it { is_expected.to define_prop(:aria).of_type(Props::Hash).with_default({}) }
+      it { is_expected.to define_hash_prop(:aria).with_default({}) }
 
       describe "can be overwritten with custom values" do
         it "#id" do
@@ -52,11 +52,11 @@ module Playbook
     describe "additional props" do
       subject { ExtendedPropsClass }
 
-      it { is_expected.to define_prop(:string_prop).of_type(Props::String).with_default("foo") }
-      it { is_expected.to define_prop(:boolean_prop).of_type(Props::Boolean).with_default(true) }
-      it { is_expected.to define_prop(:hash_prop).of_type(Props::Hash).with_default(baz: :foo) }
-      it { is_expected.to define_prop(:enum_prop).of_type(Props::Enum).with_default(:right) }
-      it { is_expected.to define_prop(:default_prop).of_type(Props::String).with_default(nil) }
+      it { is_expected.to define_string_prop(:string_prop).with_default("foo") }
+      it { is_expected.to define_boolean_prop(:boolean_prop).with_default(true) }
+      it { is_expected.to define_hash_prop(:hash_prop).with_default(baz: :foo) }
+      it { is_expected.to define_enum_prop(:enum_prop).with_default(:right) }
+      it { is_expected.to define_string_prop(:default_prop).with_default(nil) }
 
       describe "can be overwritten with custom values" do
         it "as string" do

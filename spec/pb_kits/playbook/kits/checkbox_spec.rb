@@ -7,12 +7,12 @@ module Playbook
     describe Checkbox do
       subject { Checkbox }
 
-      it { is_expected.to define_prop(:dark).of_type(Props::Boolean).with_default(false) }
+      it { is_expected.to define_boolean_prop(:dark).with_default(false) }
       it { is_expected.to define_prop(:text).with_default("") }
       it { is_expected.to define_prop(:value).with_default("") }
       it { is_expected.to define_prop(:name).with_default("") }
-      it { is_expected.to define_prop(:checked).of_type(Props::Boolean).with_default(false) }
-      it { is_expected.to define_prop(:icon).of_type(Props::Boolean).with_default(false) }
+      it { is_expected.to define_boolean_prop(:checked).with_default(false) }
+      it { is_expected.to define_boolean_prop(:icon).with_default(false) }
 
       it { is_expected.to define_partial }
 

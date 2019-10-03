@@ -7,10 +7,10 @@ module Playbook
     describe Caption do
       subject { Caption }
 
-      it { is_expected.to define_prop(:dark).of_type(Props::Boolean).with_default(false) }
-      it { is_expected.to define_prop(:large).of_type(Props::Boolean).with_default(false) }
-      it { is_expected.to define_prop(:tag).of_type(Props::Enum).with_default("div") }
-      it { is_expected.to define_prop(:text).of_type(Props::String).with_default("Caption") }
+      it { is_expected.to define_boolean_prop(:dark).with_default(false) }
+      it { is_expected.to define_boolean_prop(:large).with_default(false) }
+      it { is_expected.to define_enum_prop(:tag).with_default("div") }
+      it { is_expected.to define_string_prop(:text).with_default("Caption") }
 
       it { is_expected.to define_partial }
 
