@@ -15,7 +15,6 @@ const applyCustomSeriesColors = function(highchart) {
   highchart.series.forEach(function(item, index) {
     const selected_color = data_colors[index];
     item.color = selected_color;
-
     item.data.forEach(function(data_item) {
       if(data_item.color){
         data_item.color = selected_color;
