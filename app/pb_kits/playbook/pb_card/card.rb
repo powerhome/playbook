@@ -7,9 +7,13 @@ module Playbook
 
       partial "pb_card/card"
 
-      prop :padding, type: Playbook::Props::Enum, values: %w[none xs sm md lg xl], default: "md"
       prop :selected, type: Playbook::Props::Boolean, default: false
-      prop :shadow, type: Playbook::Props::Enum, values: %w[none shallow default deep deeper deepest], default: "none"
+      prop :padding, type: Playbook::Props::Enum,
+                     values: %w[none xs sm md lg xl],
+                     default: "md"
+      prop :shadow, type: Playbook::Props::Enum,
+                    values: %w[none shallow default deep deeper deepest],
+                    default: "none"
 
       def classname
         generate_classname("pb_card_kit", selected_class, shadow_class)
