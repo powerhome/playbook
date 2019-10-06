@@ -3,5 +3,5 @@
     data: object.data,
     class: object.classname,
     aria: object.aria) do %>
-  <%= object.yield(context: self) %>
+  <%= capture(&object.block) %>
 <% end %>

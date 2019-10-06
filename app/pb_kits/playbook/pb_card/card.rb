@@ -11,15 +11,6 @@ module Playbook
       prop :selected, type: Playbook::Props::Boolean, default: false
       prop :shadow, type: Playbook::Props::Enum, values: %w[none shallow default deep deeper deepest], default: "none"
 
-      def yield(context:)
-        unless block.nil?
-          pb_card_body = Playbook::PbCard::CardBody.new(padding: padding) do
-            context.capture(&block)
-          end
-          ApplicationController.renderer.render(partial: pb_card_body, as: :object)
-        end
-      end
-
       def classname
         generate_classname("pb_card_kit", selected_class, shadow_class)
       end

@@ -3,5 +3,7 @@
     data: object.data,
     class: object.classname,
     aria: object.aria) do %>
-  <%= object.yield(context: self) %>
+  <% if object.block %>
+    <%= pb_rails("card/card_body", props: { padding: object.padding}) { capture(&object.block) } %>
+  <% end %>
 <% end %>

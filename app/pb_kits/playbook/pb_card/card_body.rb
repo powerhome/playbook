@@ -9,10 +9,6 @@ module Playbook
 
       prop :padding
 
-      def yield(context:)
-        context.capture(&block)
-      end
-
       def classname
         generate_classname("pb_card_body_kit", padding)
       end
