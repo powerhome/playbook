@@ -7,6 +7,8 @@ module Playbook
     describe Caption do
       subject { Caption }
 
+      it { is_expected.to define_partial }
+
       it { is_expected.to define_boolean_prop(:dark).with_default(false) }
       it { is_expected.to define_boolean_prop(:large).with_default(false) }
       it do
@@ -16,8 +18,6 @@ module Playbook
                                     "h6", "p", "span", "div")
       end
       it { is_expected.to define_string_prop(:text).with_default("Caption") }
-
-      it { is_expected.to define_partial }
 
       describe "#classname" do
         it "returns namespaced class name", :aggregate_failures do
