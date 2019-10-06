@@ -10,8 +10,17 @@ module Playbook
       it { is_expected.to define_partial }
 
       it { is_expected.to define_boolean_prop(:selected).with_default(false) }
-      it { is_expected.to define_enum_prop(:padding).with_default("md") }
-      it { is_expected.to define_enum_prop(:shadow).with_default("none") }
+      it do
+        is_expected.to define_enum_prop(:padding)
+                       .with_default("md")
+                       .with_values("none", "xs", "sm", "md", "lg", "xl")
+      end
+      it do
+        is_expected.to define_enum_prop(:shadow)
+                       .with_default("none")
+                       .with_values("none", "shallow", "default",
+                                    "deep", "deeper", "deepest")
+      end
 
       describe "#classname" do
         it "returns namespaced class name", :aggregate_failures do

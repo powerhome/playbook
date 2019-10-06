@@ -9,7 +9,11 @@ module Playbook
 
       it { is_expected.to define_partial }
 
-      it { is_expected.to define_enum_prop(:padding).with_default("md") }
+      it do
+        is_expected.to define_enum_prop(:padding)
+                       .with_default("md")
+                       .with_values("none", "xs", "sm", "md", "lg", "xl")
+      end
 
       describe "#classname" do
         it "returns namespaced class name", :aggregate_failures do

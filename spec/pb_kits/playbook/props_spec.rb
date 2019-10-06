@@ -55,7 +55,11 @@ module Playbook
       it { is_expected.to define_string_prop(:string_prop).with_default("foo") }
       it { is_expected.to define_boolean_prop(:boolean_prop).with_default(true) }
       it { is_expected.to define_hash_prop(:hash_prop).with_default(baz: :foo) }
-      it { is_expected.to define_enum_prop(:enum_prop).with_default(:right) }
+      it do
+        is_expected.to define_enum_prop(:enum_prop)
+                       .with_default(:right)
+                       .with_values(:up, :down, :left, :right)
+      end
       it { is_expected.to define_string_prop(:default_prop).with_default(nil) }
 
       describe "can be overwritten with custom values" do

@@ -9,7 +9,12 @@ module Playbook
 
       it { is_expected.to define_boolean_prop(:dark).with_default(false) }
       it { is_expected.to define_boolean_prop(:large).with_default(false) }
-      it { is_expected.to define_enum_prop(:tag).with_default("div") }
+      it do
+        is_expected.to define_enum_prop(:tag)
+                       .with_default("div")
+                       .with_values("h1", "h2", "h3", "h4", "h5",
+                                    "h6", "p", "span", "div")
+      end
       it { is_expected.to define_string_prop(:text).with_default("Caption") }
 
       it { is_expected.to define_partial }
