@@ -19,10 +19,6 @@ module Playbook
         generate_classname("pb_card_kit", selected_class, shadow_class)
       end
 
-      def to_partial_path
-        "pb_card/card"
-      end
-
     private
 
       def selected_class
