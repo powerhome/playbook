@@ -2,63 +2,26 @@
 
 module Playbook
   module PbCard
-    class Card < Playbook::PbKit::Base
-      PROPS = %i[configured_aria
-                 configured_classname
-                 configured_data
-                 configured_id
-                 configured_padding
-                 configured_selected
-                 configured_shadow
-                 block].freeze
+    class Card
+      include Playbook::Props
 
-      def initialize(aria: default_configuration,
-                     classname: default_configuration,
-                     data: default_configuration,
-                     id: default_configuration,
-                     padding: default_configuration,
-                     selected: default_configuration,
-                     shadow: default_configuration,
-                     &block)
-        self.configured_aria = aria
-        self.configured_classname = classname
-        self.configured_data = data
-        self.configured_id = id
-        self.configured_padding = padding
-        self.configured_selected = selected
-        self.configured_shadow = shadow
-        self.block = block_given? ? block : nil
-      end
+      partial "pb_card/card"
 
-      def selected_class
-        true_value(configured_selected, "selected", "deselected")
-      end
-
-      def shadow
-        shadow_options = %w[none shallow default deep deeper deepest]
-        one_of_value(configured_shadow, shadow_options, "none")
-      end
-
-      def shadow_class
-        adjusted_value(shadow, "shadow_#{shadow}", nil)
-      end
+      prop :padding, type: Playbook::Props::Enum, values: %w[none xs sm md lg xl], default: "md"
+      prop :selected, type: Playbook::Props::Boolean, default: false
+      prop :shadow, type: Playbook::Props::Enum, values: %w[none shallow default deep deeper deepest], default: "none"
 
       def yield(context:)
         unless block.nil?
-          pb_card_body = Playbook::PbCard::CardBody.new(padding: configured_padding) do
+          pb_card_body = Playbook::PbCard::CardBody.new(padding: padding) do
             context.capture(&block)
           end
           ApplicationController.renderer.render(partial: pb_card_body, as: :object)
         end
       end
 
-      def kit_class
-        card_options = [
-          "pb_card_kit",
-          selected_class,
-          shadow_class,
-        ]
-        card_options.reject(&:nil?).join("_")
+      def classname
+        generate_classname("pb_card_kit", selected_class, shadow_class)
       end
 
       def to_partial_path
@@ -67,12 +30,13 @@ module Playbook
 
     private
 
-      DEFAULT = Object.new
-      private_constant :DEFAULT
-      def default_configuration
-        DEFAULT
+      def selected_class
+        selected ? "selected" : "deselected"
       end
-      attr_accessor(*PROPS)
+
+      def shadow_class
+        shadow != "none" ? "shadow_#{shadow}" : nil
+      end
     end
   end
 end
