@@ -2,7 +2,7 @@ import colors from "../tokens/_colors.scss"
 import typography from "../tokens/_typography.scss";
 
 const applyCustomSeriesColors = function(highchart) {
-  var data_colors = [
+  const data_colors = [
     colors.data_1,
     colors.data_2,
     colors.data_3,
@@ -13,21 +13,24 @@ const applyCustomSeriesColors = function(highchart) {
   ];
 
   highchart.series.forEach(function(item, index) {
-    var selected_color = data_colors[index % data_colors.length];
+    const selected_color = data_colors[index];
     item.color = selected_color;
-    console.log(item.data.length);
+
     item.data.forEach(function(data_item) {
       if(data_item.color){
         data_item.color = selected_color;
       }
+
+      if(!data_item.marker) return;
+
       if(data_item.marker.lineColor){
         data_item.marker.lineColor = selected_color;
       }
+
       if(data_item.marker.states.hover !== undefined){
         data_item.marker.states.hover.lineColor = selected_color;
-      } else {
-        console.log('once');
       }
+      
       if(data_item.marker.states.select.lineColor){
         data_item.marker.states.select.lineColor = selected_color;
       }
