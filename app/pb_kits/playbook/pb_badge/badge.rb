@@ -2,64 +2,26 @@
 
 module Playbook
   module PbBadge
-    class Badge < Playbook::PbKit::Base
-      PROPS = %i[
-        configured_classname
-        configured_data
-        configured_id
-        configured_text
-        configured_variant
-        configured_rounded
-      ].freeze
+    class Badge
+      include Playbook::Props
 
-      def initialize(classname: default_configuration,
-                     data: default_configuration,
-                     id: default_configuration,
-                     text: default_configuration,
-                     variant: default_configuration,
-                     rounded: default_configuration)
-        self.configured_classname = classname
-        self.configured_data = data
-        self.configured_id = id
-        self.configured_text = text
-        self.configured_variant = variant
-        self.configured_rounded = rounded
-      end
+      partial "pb_badge/badge"
 
-      def text
-        default_value(configured_text, "")
-      end
+      prop :rounded, type: Playbook::Props::Boolean, default: false
+      prop :text
+      prop :variant, type: Playbook::Props::Enum,
+                     values: %w[success warning error info neutral primary],
+                     default: "neutral"
 
-      def rounded
-        true_value(configured_rounded, "rounded", nil)
-      end
-
-      def variant
-        variant_options = %w[success warning error info neutral primary]
-        one_of_value(configured_variant, variant_options, "neutral")
-      end
-
-      def kit_class
-        kit_options = [
-          "pb_badge_kit",
-          variant,
-          rounded,
-        ]
-        kit_options.compact.join("_")
-      end
-
-      def to_partial_path
-        "pb_badge/badge"
+      def classname
+        generate_classname("pb_badge_kit", variant, rounded_class)
       end
 
     private
 
-      DEFAULT = Object.new
-      private_constant :DEFAULT
-      def default_configuration
-        DEFAULT
+      def rounded_class
+        rounded ? "rounded" : nil
       end
-      attr_accessor(*PROPS)
     end
   end
 end
