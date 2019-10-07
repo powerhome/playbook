@@ -11,11 +11,14 @@ module Playbook
   module Props
     extend ActiveSupport::Concern
 
-    def initialize(prop_values)
+    attr_reader :block
+
+    def initialize(prop_values, &block)
       @values = prop_values
       self.class.props.each do |key, definition|
         definition.validate! @values[key]
       end
+      @block = block_given? ? block : nil
     end
 
     def prop(name)

@@ -3,6 +3,8 @@
 module Playbook
   module Props
     class Enum < Playbook::Props::Base
+      attr_reader :values
+
       def initialize(values:, **options)
         super(**options)
         @values = values
