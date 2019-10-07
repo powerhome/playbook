@@ -48,21 +48,43 @@ module Playbook
         @default = default
       end
 
+      chain :with_values do |*values|
+        @values = values
+      end
+
       match do |subject_class|
         is_enum = subject_class.props[prop_key]&.class == Props::Enum
 
-        if @default
-          is_enum && subject_class.props[prop_key].default == @default
+        return false unless is_enum
+
+        values = subject_class.props[prop_key].values if @values
+
+        if @default && @values
+          subject_class.props[prop_key].default == @default &&
+            values.sort == @values.sort
+        elsif @default && !@values
+          subject_class.props[prop_key].default == @default
+        elsif !@default && @values
+          values.sort == @values.sort
         else
-          is_enum
+          true
         end
       end
 
       failure_message do |subject_class|
         base_message = "expected #{subject_class} to define :#{prop_key} enum prop"
         default_message = "with default of #{@default}"
+        values_message = "with values of #{@values&.join(", ")}"
 
-        @default ? [base_message, default_message].join(" ") : base_message
+        if @default && @values
+          [base_message, default_message, values_message].join(" ")
+        elsif @default && !@values
+          [base_message, default_message].join(" ")
+        elsif !@default && @values
+          [base_message, values_message].join(" ")
+        else
+          base_message
+        end
       end
     end
 
