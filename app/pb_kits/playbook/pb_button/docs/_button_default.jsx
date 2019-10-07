@@ -3,7 +3,7 @@ import {Button} from '../../'
 
 const ButtonDefault = () => (
     <div>
-        <Button text="Button Primary"/>
+        <Button text="Button Primary" />
         <Button
                 text="Button Secondary"
                 variant="secondary"

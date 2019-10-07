@@ -15,6 +15,8 @@ module Playbook
                  configured_variant
                  configured_tag
                  configured_text
+                 configured_type
+                 configured_value
                  block].freeze
 
       def initialize(aria: default_configuration,
@@ -29,6 +31,8 @@ module Playbook
                      variant: default_configuration,
                      tag: default_configuration,
                      text: default_configuration,
+                     type: default_configuration,
+                     value: default_configuration,
                      &block)
         self.configured_aria = aria
         self.configured_classname = classname
@@ -42,6 +46,8 @@ module Playbook
         self.configured_variant = variant
         self.configured_tag = tag
         self.configured_text = text
+        self.configured_type = type
+        self.configured_value = value
         self.block = block_given? ? block : nil
       end
 
@@ -97,6 +103,14 @@ module Playbook
 
       def text
         default_value(configured_text, "")
+      end
+
+      def type
+        default_value(configured_type, "button")
+      end
+
+      def value
+        configured_value unless configured_value == DEFAULT
       end
 
       def yield(context:)

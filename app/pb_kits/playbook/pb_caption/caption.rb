@@ -5,6 +5,8 @@ module Playbook
     class Caption
       include Playbook::Props
 
+      partial "pb_caption/caption"
+
       prop :dark, type: Playbook::Props::Boolean, default: false
       prop :large, type: Playbook::Props::Boolean, default: false
       prop :tag, type: Playbook::Props::Enum,
@@ -13,18 +15,7 @@ module Playbook
       prop :text, default: "Caption"
 
       def classname
-        [
-          [
-            "pb_caption_kit",
-            large_class,
-            dark_class,
-          ].compact.join("_"),
-          prop(:classname),
-        ].join(" ")
-      end
-
-      def to_partial_path
-        "pb_caption/caption"
+        generate_classname("pb_caption_kit", large_class, dark_class)
       end
 
     private

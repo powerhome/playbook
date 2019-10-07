@@ -19,6 +19,8 @@ type ButtonPropTypes = {
   size: 'large' | 'medium' | 'small',
   text?: String,
   type: 'inline' | null,
+  htmlType: String | 'button',
+  value?: String | null,
   variant: 'primary' | 'secondary' | 'link',
   wrapperClass: String,
 }
@@ -69,6 +71,8 @@ const Button = (props : ButtonPropTypes) => {
     link=null,
     newWindow=false,
     text,
+    htmlType='button',
+    value
   } = props
 
   const buttonAria  = buttonAriaProps(props)
@@ -98,7 +102,12 @@ const Button = (props : ButtonPropTypes) => {
         {content}
       </a>
     <Else/>
-      <button {...buttonAria} className={css}>
+      <button
+          {...buttonAria}
+          className={css}
+          type={htmlType}
+          value={value}
+      >
         <If condition={loading}>
             {loadingIcon}
         </If>
