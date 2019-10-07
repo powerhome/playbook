@@ -25,14 +25,11 @@ module Playbook
       kit.match(%r{[/\\]})
     end
 
-    def pb_camelize(string)
-      string.to_s.tr(" ", "_").camelize
-    end
-
     def build_view_model(kit, props, &block)
-      folder = is_subkit?(kit) ? pb_camelize(kit.split("/")[0]) : pb_camelize(kit)
-      item = is_subkit?(kit) ? pb_camelize(kit.split("/")[-1]) : pb_camelize(kit)
-      "Playbook::Pb#{folder}::#{item}".safe_constantize.new(props, &block)
+      folder = is_subkit?(kit) ? kit.split("/")[0] : kit
+      item = is_subkit?(kit) ? kit.split("/")[-1] : kit
+      class_name = "Playbook::Pb#{folder.camelize}::#{item.camelize}"
+      class_name.safe_constantize.new(props, &block)
     end
   end
 end
