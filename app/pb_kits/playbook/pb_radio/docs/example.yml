@@ -1,0 +1,10 @@
+examples:
+
+  rails:
+  - radio_default: Default
+  - radio_dark: Dark
+
+
+  react:
+  - radio_default: Default
+  - radio_dark: Dark

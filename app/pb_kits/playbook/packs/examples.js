@@ -155,3 +155,6 @@ WebpackerReact.setup (DistributionBar);
 
 import * as Hashtag from "pb_hashtag/docs";
 WebpackerReact.setup (Hashtag);
+
+import * as Radio from "pb_radio/docs";
+WebpackerReact.setup (Radio);
