@@ -63,11 +63,11 @@ const buttonAriaProps = (props: ButtonPropTypes) => {
 
 const Button = (props : ButtonPropTypes) => {
   const {
-    aria={},
     children,
     className,
     icon=null,
     loading=false,
+    onClick = () => {},
     link=null,
     newWindow=false,
     text,
@@ -105,6 +105,7 @@ const Button = (props : ButtonPropTypes) => {
       <button
           {...buttonAria}
           className={css}
+          onClick={onClick}
           type={htmlType}
           value={value}
       >

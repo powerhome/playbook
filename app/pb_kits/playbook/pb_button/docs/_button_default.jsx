@@ -3,18 +3,24 @@ import {Button} from '../../'
 
 const ButtonDefault = () => (
     <div>
-        <Button text="Button Primary" />
         <Button
+                onClick={() => console.log("button clicked!")}
+                text="Button Primary"
+        />
+        <Button
+                onClick={() => console.log("button clicked!")}
                 text="Button Secondary"
                 variant="secondary"
         />
         <Button
+                onClick={() => console.log("button clicked!")}
                 text="Button Link"
                 variant="link"
         />
         <Button
-                text="Button Disabled"
                 disabled
+                onClick={() => console.log("button clicked!")}
+                text="Button Disabled"
         />
     </div>
 )
