@@ -9,7 +9,9 @@ RSpec.describe Playbook::PbBadge::Badge do
 
   it { is_expected.to define_prop(:text) }
   it { is_expected.to define_boolean_prop(:rounded).with_default(false) }
-  it { is_expected.to define_enum_prop(:variant).with_default("neutral") }
+  it { is_expected.to define_enum_prop(:variant)
+                      .with_default("neutral")
+                      .with_values("success", "warning", "error", "info", "neutral", "primary") }
 
   describe "#classname" do
     it "returns namespaced class name", :aggregate_failures do
