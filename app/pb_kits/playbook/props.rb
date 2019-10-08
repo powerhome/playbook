@@ -6,7 +6,7 @@ require_relative "./props/boolean"
 require_relative "./props/enum"
 require_relative "./props/hash"
 require_relative "./props/string"
-require_relative "./props/children"
+require_relative "./props/proc"
 
 module Playbook
   module Props
@@ -35,7 +35,7 @@ module Playbook
       prop :data, type: Playbook::Props::Hash, default: {}
       prop :classname
       prop :aria, type: Playbook::Props::Hash, default: {}
-      prop :children, type: Playbook::Props::Children
+      prop :children, type: Playbook::Props::Proc
     end
 
     class_methods do
