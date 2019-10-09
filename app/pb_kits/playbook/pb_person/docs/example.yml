@@ -1,0 +1,9 @@
+examples:
+  
+  rails:
+  - person_default: Default
+  
+  
+  react:
+  - person_default: Default
+  

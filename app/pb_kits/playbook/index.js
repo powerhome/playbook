@@ -30,6 +30,7 @@ import ListItem from "./pb_list/_list_item.jsx"
 import LoadingInline from "./pb_loading_inline/_loading_inline.jsx"
 import Message from "./pb_message/_message.jsx"
 import OnlineStatus from "./pb_online_status/_online_status.jsx"
+import Person from "./pb_person/_person.jsx"
 import Pill from "./pb_pill/_pill.jsx"
 import ProgressSimple from "./pb_progress_simple/_progress_simple.jsx"
 import SectionSeparator from "./pb_section_separator/_section_separator.jsx"
@@ -60,14 +61,17 @@ export {
   Avatar,
   Badge,
   BarGraph,
+  barGraphSettings,
   Body,
   Button,
   Caption,
   Card,
   Checkbox,
+  commonSettings,
   Contact,
   Currency,
   DashboardValue,
+  dashboardValueSettings,
   DateRangeInline,
   DateYearStacked,
   DistributionBar,
@@ -83,11 +87,14 @@ export {
   LabelValue,
   Layout,
   LineGraph,
+  lineGraphSettings,
   List,
   ListItem,
   LoadingInline,
   Message,
   OnlineStatus,
+  pbChart,
+  Person,
   Pill,
   ProgressSimple,
   SectionSeparator,
@@ -103,9 +110,4 @@ export {
   User,
   UserBadge,
   VerticalNav,
-  commonSettings,
-  lineGraphSettings,
-  barGraphSettings,
-  dashboardValueSettings,
-  pbChart,
 }

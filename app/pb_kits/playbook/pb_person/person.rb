@@ -1,19 +1,23 @@
 # frozen_string_literal: true
 
 module Playbook
-  module PbOwner
-    class Owner < Playbook::PbKit::Base
-      PROPS = %i[configured_classname
-                 configured_data
-                 configured_id
-                 configured_first_name
-                 configured_last_name].freeze
+  module PbPerson
+    class Person < Playbook::PbKit::Base
+      PROPS = %i[
+        configured_classname
+        configured_data
+        configured_id
+        configured_first_name
+        configured_last_name
+      ].freeze
 
-      def initialize(classname: default_configuration,
-                     data: default_configuration,
-                     id: default_configuration,
-                     first_name: default_configuration,
-                     last_name: default_configuration)
+      def initialize(
+          classname: default_configuration,
+          data: default_configuration,
+          id: default_configuration,
+          first_name: default_configuration,
+          last_name: default_configuration
+        )
         self.configured_classname = classname
         self.configured_data = data
         self.configured_id = id
@@ -22,7 +26,7 @@ module Playbook
       end
 
       def first_name
-        pb_first_name = Playbook::PbBody::Body.new(tag: "span", classname: "pb_owner_first") do
+        pb_first_name = Playbook::PbBody::Body.new(tag: "span", classname: "pb_person_first") do
           default_value(configured_first_name, "")
         end
         ApplicationController.renderer.render(partial: pb_first_name, as: :object)
@@ -36,7 +40,7 @@ module Playbook
       end
 
       def to_partial_path
-        "pb_owner/owner"
+        "pb_person/person"
       end
 
     private
