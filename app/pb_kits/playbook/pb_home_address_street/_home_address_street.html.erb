@@ -1,7 +1,7 @@
 <%= content_tag(:div,
     id: object.id,
     data: object.data,
-    class: object.classname(["pb_home_address_street", object.dark ? "dark" : nil].compact.join("_"))) do %>
+    class: object.classname) do %>
 
   <%= pb_rails "title", props: {
     classname: "pb_home_address_street_address",
