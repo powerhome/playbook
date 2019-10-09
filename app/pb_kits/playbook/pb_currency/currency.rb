@@ -39,13 +39,6 @@ module Playbook
         one_of_value(configured_align, align_options, "left")
       end
 
-      def currency_indicator
-        pb_currency_indicator = Playbook::PbBody::Body.new(classname: "currency_indicator", color: "light") do
-          default_value(configured_currency_indicator, "")
-        end
-        ApplicationController.renderer.render(partial: pb_currency_indicator, as: :object)
-      end
-
       def label
         if is_set? configured_label
           pb_label = Playbook::PbCaption::Caption.new(text: configured_label)
@@ -62,19 +55,30 @@ module Playbook
         size == "lg" ? 1 : 2
       end
 
+      def formatted_value
+        number_to_currency(configured_value)
+      end
+
       def value
         if is_set? configured_value
-          number_to_currency(configured_value)
-          pb_title = Playbook::PbTitle::Title.new(size: value_size, text: configured_value, classname: "pb_currency_value")
+          display_value = formatted_value[1...-2]
+          pb_title = Playbook::PbTitle::Title.new(size: value_size, text: display_value, classname: "pb_currency_value")
           ApplicationController.renderer.render(partial: pb_title, as: :object)
         end
       end
 
       def unit
         pb_unit = Playbook::PbBody::Body.new(classname: "unit", color: "light") do
-          default_value(configured_unit, "")
+          formatted_value.last(2)
         end
         ApplicationController.renderer.render(partial: pb_unit, as: :object)
+      end
+
+      def currency_indicator
+        pb_currency_indicator = Playbook::PbBody::Body.new(classname: "currency_indicator", color: "light") do
+          formatted_value.first(1)
+        end
+        ApplicationController.renderer.render(partial: pb_currency_indicator, as: :object)
       end
 
       def kit_class
