@@ -31,9 +31,7 @@ kits:
   - online_status
   - source
   - label_pill
-  - phone
-  - owner_phone
-  - owner
+  - contact
   - toggle
   - stat_value
   - stat_change

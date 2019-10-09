@@ -1,0 +1,8 @@
+examples:
+
+  rails:
+  - contact_default: Default
+
+
+  react:
+  - contact_default: Default

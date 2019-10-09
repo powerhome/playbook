@@ -11,6 +11,13 @@
     border-bottom: 1px solid $border_light;
     padding: 20px 30px;
     background: $white;
+    h1 {
+      display: flex;
+      align-items: center;
+      img {
+        display: flex;
+      }
+    }
   }
 
   &--content {
