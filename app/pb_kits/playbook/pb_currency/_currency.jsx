@@ -56,14 +56,14 @@ const Currency = (props: CurrencyProps) => {
     <div className={kitCSS(props)}>
       <Caption>{label}</Caption>
       <div className='pb_currency_wrapper'>
-        <Body className={symbolCSS(currencySymbol)}>{currencySymbol}</Body>
+        <Body color={'light'} className={symbolCSS(currencySymbol)}>{currencySymbol}</Body>
         <Title
             className='pb_currency_value'
             size={sizes[size]}
         >
           {`${value}${separator}`}
         </Title>
-        <Body className='unit'>{units}</Body>
+        <Body color={'light'} className='unit'>{units}</Body>
       </div>
     </div>
   )

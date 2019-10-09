@@ -5,19 +5,19 @@ function CurrencyDefault() {
   return (
     <div>
       <Currency
-          label='Caption'
+          label='Left'
           size='lg'
           value='2,000'
       />
       <Currency
           align='center'
-          label='Caption'
+          label='Center'
           size='lg'
           value='2,000'
       />
       <Currency
           align='right'
-          label='Caption'
+          label='Right'
           size='lg'
           value='2,000'
       />
