@@ -33,22 +33,6 @@ RSpec.describe Playbook::Props do
         instance = subject.new(aria: { bar: :baz })
         expect(instance.aria).to eq(bar: :baz)
       end
-
-      describe "#children" do
-        it "allows to be passed as prop" do
-          block = -> { 42 }
-
-          kit = subject.new(children: block)
-
-          expect(kit.children.call).to eql 42
-        end
-
-        it "allows to be passed as a block" do
-          kit = subject.new({}) { 42 }
-
-          expect(kit.children.call).to eql 42
-        end
-      end
     end
 
     describe ".props" do
