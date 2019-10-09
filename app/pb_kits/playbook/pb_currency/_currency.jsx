@@ -33,7 +33,7 @@ const bodyCSS = ({}: CurrencyProps) => {
 
 const symbolCSS = (currencySymbol) => {
   return classnames({
-    dollar_sign: currencySymbol === '$',
+    currency_indicator: currencySymbol === '$',
   })
 }
 

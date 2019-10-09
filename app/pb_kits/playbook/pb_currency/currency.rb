@@ -3,6 +3,7 @@
 module Playbook
   module PbCurrency
     class Currency < Playbook::PbKit::Base
+      include ActionView::Helpers::NumberHelper
       PROPS = %i[configured_align
                  configured_classname
                  configured_data
@@ -10,7 +11,7 @@ module Playbook
                  configured_label
                  configured_value
                  configured_unit
-                 configured_dollar_sign
+                 configured_currency_indicator
                  configured_size].freeze
 
       def initialize(align: default_configuration,
@@ -20,7 +21,7 @@ module Playbook
                      label: default_configuration,
                      value: default_configuration,
                      unit: default_configuration,
-                     dollar_sign: default_configuration,
+                     currency_indicator: default_configuration,
                      size: default_configuration)
         self.configured_align = align
         self.configured_classname = classname
@@ -29,7 +30,7 @@ module Playbook
         self.configured_label = label
         self.configured_value = value
         self.configured_unit = unit
-        self.configured_dollar_sign = dollar_sign
+        self.configured_currency_indicator = currency_indicator
         self.configured_size = size
       end
 
@@ -38,11 +39,11 @@ module Playbook
         one_of_value(configured_align, align_options, "left")
       end
 
-      def dollar_sign
-        pb_dollar_sign = Playbook::PbBody::Body.new(classname: "dollar_sign", color: "light") do
-          default_value(configured_dollar_sign, "")
+      def currency_indicator
+        pb_currency_indicator = Playbook::PbBody::Body.new(classname: "currency_indicator", color: "light") do
+          default_value(configured_currency_indicator, "")
         end
-        ApplicationController.renderer.render(partial: pb_dollar_sign, as: :object)
+        ApplicationController.renderer.render(partial: pb_currency_indicator, as: :object)
       end
 
       def label
@@ -63,6 +64,7 @@ module Playbook
 
       def value
         if is_set? configured_value
+          number_to_currency(configured_value)
           pb_title = Playbook::PbTitle::Title.new(size: value_size, text: configured_value, classname: "pb_currency_value")
           ApplicationController.renderer.render(partial: pb_title, as: :object)
         end

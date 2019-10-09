@@ -26,7 +26,7 @@
   [class^=pb_currency_wrapper] {
     display: flex;
 
-    & > [class*=dollar_sign] {
+    & > [class*=currency_indicator] {
       display: flex;
       align-items: flex-start;
     }
