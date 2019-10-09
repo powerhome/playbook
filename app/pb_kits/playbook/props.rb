@@ -7,17 +7,19 @@ require_relative "./props/enum"
 require_relative "./props/hash"
 require_relative "./props/number_array"
 require_relative "./props/string"
-require_relative "./props/proc"
 
 module Playbook
   module Props
     extend ActiveSupport::Concern
 
+    attr_reader :block
+
     def initialize(prop_values, &block)
-      @values = { children: block }.merge(prop_values)
+      @values = prop_values
       self.class.props.each do |key, definition|
         definition.validate! @values[key]
       end
+      @block = block_given? ? block : nil
     end
 
     def prop(name)
@@ -36,7 +38,6 @@ module Playbook
       prop :data, type: Playbook::Props::Hash, default: {}
       prop :classname
       prop :aria, type: Playbook::Props::Hash, default: {}
-      prop :children, type: Playbook::Props::Proc
     end
 
     class_methods do
