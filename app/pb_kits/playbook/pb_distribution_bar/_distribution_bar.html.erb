@@ -1,8 +1,8 @@
 <%= content_tag(:figure,
     id: object.id,
     data: object.data,
-    class: object.classname("pb_distribution_bar_#{object.size}")) do %>
-  <% object.values.each do |value| %>
-    <div class="pb_distribution_value" style="width:<%=value%>%"></div>
+    class: object.classname) do %>
+  <% object.widths_to_percentages.each do |percentage| %>
+    <div class="pb_distribution_width" style="width:<%= percentage %>%"></div>
   <% end %>
 <% end %>

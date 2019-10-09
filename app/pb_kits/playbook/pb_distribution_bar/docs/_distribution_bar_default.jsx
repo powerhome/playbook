@@ -6,7 +6,7 @@ function DistributionBarDefault() {
     <React.Fragment>
       <div>
         <DistributionBar
-          values={[1,2,3,4,5,3,3,7]}
+          widths={[1,2,3,4,5,3,3,7]}
         />
       </div>
       <br/>
@@ -14,7 +14,7 @@ function DistributionBarDefault() {
       <div>
         <DistributionBar
           size='sm'
-          values={[1,2,3,4,5,3,3,7]}
+          widths={[1,2,3,4,5,3,3,7]}
         />
       </div>
     </React.Fragment>

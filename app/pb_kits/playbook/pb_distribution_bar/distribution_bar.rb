@@ -2,54 +2,25 @@
 
 module Playbook
   module PbDistributionBar
-    class DistributionBar < Playbook::PbKit::Base
-      PROPS = %i[configured_classname
-                 configured_data
-                 configured_id
-                 configured_size
-                 configured_values].freeze
+    class DistributionBar
+      include Playbook::Props
 
-      def initialize(classname: default_configuration,
-                     data: default_configuration,
-                     id: default_configuration,
-                     size: default_configuration,
-                     values: default_configuration)
-        self.configured_classname = classname
-        self.configured_data = data
-        self.configured_id = id
-        self.configured_size = size
-        self.configured_values = values
+      partial "pb_distribution_bar/distribution_bar"
+
+      prop :size, type: Playbook::Props::Enum,
+                  values: %w[lg sm],
+                  default: "lg"
+      prop :widths, type: Playbook::Props::NumberArray,
+                    default: [1]
+
+      def classname
+        generate_classname("pb_distribution_bar", size)
       end
 
-      def size
-        size_options = %w[lg sm]
-        one_of_value(configured_size, size_options, "lg")
-      end
-
-      def values
-        default_value(values_to_percents, [1])
-      end
-
-      def to_partial_path
-        "pb_distribution_bar/distribution_bar"
-      end
-
-    private
-
-      DEFAULT = Object.new
-      private_constant :DEFAULT
-      def default_configuration
-        DEFAULT
-      end
-      attr_accessor(*PROPS)
-
-      def normalize_characters(value)
-        return value.to_s.gsub(/(\d\.\d)|[^a-zA-Z\d]/, '\\1').to_i
-      end
-
-      def values_to_percents
-        normalized_values = configured_values.map(&method(:normalize_characters))
-        normalized_values.map { |value| (value.to_f * 100 / normalized_values.sum ).round(2) }
+      def widths_to_percentages
+        widths.map do |width|
+          (width.to_f * 100 / widths.sum).round(2)
+        end
       end
     end
   end
