@@ -5,6 +5,7 @@ require_relative "./props/base"
 require_relative "./props/boolean"
 require_relative "./props/enum"
 require_relative "./props/hash"
+require_relative "./props/number_array"
 require_relative "./props/string"
 
 module Playbook

@@ -5,7 +5,7 @@
   $small_bar: 8px;
   $large_bar: 36px;
   display: flex;
-  .pb_distribution_value {
+  .pb_distribution_width {
     height: 100%;
     display: inline-block;
     @for $i from 1 through length($bar_colors) {
