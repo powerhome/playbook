@@ -38,13 +38,13 @@ RSpec.describe Playbook::Props do
         it "allows to be passed as prop" do
           block = -> { 42 }
 
-          kit = BasePropsClass.new(children: block)
+          kit = subject.new(children: block)
 
           expect(kit.children.call).to eql 42
         end
 
         it "allows to be passed as a block" do
-          kit = BasePropsClass.new({}) { 42 }
+          kit = subject.new({}) { 42 }
 
           expect(kit.children.call).to eql 42
         end
