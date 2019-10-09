@@ -73,5 +73,9 @@
     "react": "^16.7.0",
     "react-dom": "^16.8.6",
     "webpacker-react": "^0.3.2"
+  },
+  "resolutions": {
+    "lodash": "^4.17.13",
+    "set-value": "^2.0.1"
   }
 }
