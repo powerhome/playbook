@@ -29,6 +29,7 @@ import "../kits/pb_loading_inline.js";
 import "../kits/pb_message.js";
 import "../kits/pb_online_status.js";
 import "../kits/pb_person.js";
+import "../kits/pb_person_contact.js";
 import "../kits/pb_pill.js";
 import "../kits/pb_progress_simple.js";
 import "../kits/pb_section_separator.js";

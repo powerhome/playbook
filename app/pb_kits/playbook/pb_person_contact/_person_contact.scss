@@ -1,8 +1,8 @@
 @import "../tokens/spacing";
-@import "../pb_phone/phone";
-@import "../pb_owner/owner";
+@import "../pb_contact/contact";
+@import "../pb_person/person";
 
-.pb_owner_phone_kit {
+.pb_person_contact_kit {
   display: flex;
   justify-content: flex-start;
   align-items: flex-start;

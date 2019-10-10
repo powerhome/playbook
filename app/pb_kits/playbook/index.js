@@ -31,6 +31,7 @@ import LoadingInline from "./pb_loading_inline/_loading_inline.jsx"
 import Message from "./pb_message/_message.jsx"
 import OnlineStatus from "./pb_online_status/_online_status.jsx"
 import Person from "./pb_person/_person.jsx"
+import PersonContact from "./pb_person_contact/_person_contact.jsx"
 import Pill from "./pb_pill/_pill.jsx"
 import ProgressSimple from "./pb_progress_simple/_progress_simple.jsx"
 import SectionSeparator from "./pb_section_separator/_section_separator.jsx"
@@ -95,6 +96,7 @@ export {
   OnlineStatus,
   pbChart,
   Person,
+  PersonContact,
   Pill,
   ProgressSimple,
   SectionSeparator,
