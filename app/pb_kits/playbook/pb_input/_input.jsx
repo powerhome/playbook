@@ -31,7 +31,7 @@ class Input extends React.Component {
     } = this.props
 
     const css = classnames([
-      `input_field`,
+      `pb_input_kit`,
       className,
     ])
 

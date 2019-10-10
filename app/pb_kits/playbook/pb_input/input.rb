@@ -14,7 +14,7 @@ module Playbook
       prop :type, default: "text"
 
       def classname
-        generate_classname("pb_input_field_kit")
+        generate_classname("pb_input_kit")
       end
     end
   end

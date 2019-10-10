@@ -15,8 +15,8 @@ RSpec.describe Playbook::PbInput::Input do
 
   describe "#classname" do
     it "returns namespaced class name", :aggregate_failures do
-      expect(subject.new({}).classname).to eq "pb_input_field_kit"
-      expect(subject.new(classname: "additional_class").classname).to eq "pb_input_field_kit additional_class"
+      expect(subject.new({}).classname).to eq "pb_input_kit"
+      expect(subject.new(classname: "additional_class").classname).to eq "pb_input_kit additional_class"
     end
   end
 end
