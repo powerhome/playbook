@@ -6,7 +6,7 @@
     <% object.contacts.each do |contact| %>
       <%= pb_rails("contact", props: {
         contact_type: contact[:contact_type],
-        value: contact[:value],
+        contact_value: contact[:contact_value],
       }) %>
     <% end %>
 <% end %>

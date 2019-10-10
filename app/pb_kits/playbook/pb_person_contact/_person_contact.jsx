@@ -14,15 +14,15 @@ type PersonContactProps = {
   dark?: Boolean,
   firstName: String,
   lastName: String,
-  contacts?: Array<{contact_type: String, value: String}>,
+  contacts?: Array<{contactType: String, contactValue: String}>,
 }
 
 const contactsArray = ({contacts=[]}: PersonContactProps) => {
-  return contacts.map((anObjectMapped, index) => {
+  return contacts.map((contactObject, index) => {
     return (
       <Contact
-        contactType={anObjectMapped.contact_type}
-        value={anObjectMapped.value}
+        contactType={contactObject.contactType}
+        contactValue={contactObject.contactValue}
       />
     );
   })

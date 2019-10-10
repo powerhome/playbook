@@ -11,19 +11,19 @@ function PersonContactDefault() {
         lastName="Smith"
         contacts={[
           {
-            contact_type: "email",
-            value: "email@example.com"
+            contactType: "email",
+            contactValue: "email@example.com"
           },
           {
-            value: "5555555555",
+            contactValue: "5555555555",
           },
           {
-            contact_type: "email",
-            value: "email@example.com",
+            contactType: "email",
+            contactValue: "email@example.com",
           },
           {
-            contact_type: "work",
-            value: "3245627482",
+            contactType: "work",
+            contactValue: "3245627482",
           }
         ]}
       />

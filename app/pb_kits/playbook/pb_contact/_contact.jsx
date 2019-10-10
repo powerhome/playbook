@@ -13,7 +13,7 @@ type ContactProps = {
   contactType?: 'cell' | 'home' | 'work' | 'email',
   className?: String | Array<String>,
   dark?: Boolean,
-  value: String,
+  contactValue: String,
 }
 
 const kitClasses = ({}: ContactProps) => {
@@ -25,7 +25,7 @@ const Contact = ({
   contactType,
   className,
   dark=false,
-  value,
+  contactValue,
 }: ContactProps) => {
 
   const css = classnames(kitClasses({contactType}), className)
@@ -63,7 +63,7 @@ const Contact = ({
     <div className={css}>
       <Body dark={dark} color="light" >
         <Icon icon={contactTypeIcon} fixedWidth="true" />
-        {` ${formatPhoneNumber(value, contactType)}`}
+        {` ${formatPhoneNumber(contactValue, contactType)}`}
       </Body>
     </div>
   )

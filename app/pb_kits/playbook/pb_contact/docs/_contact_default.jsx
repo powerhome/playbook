@@ -6,18 +6,18 @@ function ContactDefault() {
     <div>
       <Contact
         contactType="cell"
-        value="349-185-9988"
+        contactValue="349-185-9988"
       />
       <Contact
-        value="5555555555"
+        contactValue="5555555555"
       />
       <Contact
         contactType="email"
-        value="email@example.com"
+        contactValue="email@example.com"
       />
       <Contact
         contactType="work"
-        value="3245627482"
+        contactValue="3245627482"
       />
     </div>
   )
