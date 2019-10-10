@@ -96,4 +96,22 @@ RSpec.describe Playbook::Props do
       end
     end
   end
+
+  describe "required props" do
+    subject do
+      Class.new do
+        include Playbook::Props
+
+        prop :required_prop, required: true
+      end
+    end
+
+    it "raises error when not given a value" do
+      expect { subject.new({}) }.to raise_error(Playbook::Props::Error)
+    end
+
+    it "does not raise error when given a value" do
+      expect(subject.new(required_prop: "value").required_prop).to eq "value"
+    end
+  end
 end

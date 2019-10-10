@@ -1,10 +1,10 @@
 <%= content_tag(:div,
     id: object.id,
     data: object.data,
-    class: object.classname(object.kit_class)) do %>
+    class: object.classname) do %>
 
   <%= link_to object.url do %>
-    <%= object.hashtag %>
+    <%= pb_rails("badge", props: { variant: "primary", text: object.hashtag_text }) %>
   <% end %>
 
 <% end %>
