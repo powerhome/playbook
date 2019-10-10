@@ -11,7 +11,7 @@ $transition: $transition_cubic;
     user-select: none;
   }
   .pb_checkbox_checkmark {
-    position: absolute;
+    position: relative;
     height: 22px;
     width: 22px;
     border: solid $border_light 2px;
@@ -33,7 +33,7 @@ $transition: $transition_cubic;
   }
 
   input {
-    position: absolute;
+    position: relative;
     opacity: 0;
     cursor: pointer;
     height: 0;
