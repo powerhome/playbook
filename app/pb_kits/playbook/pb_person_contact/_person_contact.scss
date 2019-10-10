@@ -1,0 +1,10 @@
+@import "../tokens/spacing";
+@import "../pb_contact/contact";
+@import "../pb_person/person";
+
+.pb_person_contact_kit {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-direction: column;
+}

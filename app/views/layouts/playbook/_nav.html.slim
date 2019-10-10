@@ -1,6 +1,6 @@
 .pb--page--topNav
   h1
-    = link_to "Playbook", root_url
+    = link_to root_url do
+      = image_tag("pb.logo.svg")
     | &nbsp;
     = pb_rails("caption", props: { tag: "span", text: Playbook::VERSION })
-

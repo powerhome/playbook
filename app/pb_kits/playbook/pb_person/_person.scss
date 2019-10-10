@@ -1,0 +1,12 @@
+@import "../pb_title/title";
+@import "../pb_body/body";
+@import "../tokens/spacing";
+
+[class^=pb_person_kit] {
+  display: flex;
+  align-items: baseline;
+
+  .pb_person_first {
+    margin: 0 ($space_xs - 4px) 0 0;
+  }
+}
