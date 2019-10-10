@@ -5,10 +5,11 @@ module Playbook
     class Error < StandardError; end
 
     class Base
-      attr_reader :default
+      attr_reader :default, :required
 
-      def initialize(default: nil)
+      def initialize(default: nil, required: false)
         @default = default
+        @required = required
       end
 
       def value(value)
@@ -16,7 +17,10 @@ module Playbook
       end
 
       def validate!(input_value)
-        validate(value(input_value)) || raise(Playbook::Props::Error, "Invalid value (#{input_value.inspect}) for prop (#{inspect})")
+        raise(Playbook::Props::Error, "#{inspect} is a required prop and needs to be provided a value") if required && input_value.nil?
+
+        validate(value(input_value)) ||
+          raise(Playbook::Props::Error, "Invalid value (#{input_value.inspect}) for prop (#{inspect})")
       end
 
       def validate(_value)
