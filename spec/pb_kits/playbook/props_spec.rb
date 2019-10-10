@@ -110,8 +110,7 @@ RSpec.describe Playbook::Props do
       expect { subject.new({}) }.to raise_error(Playbook::Props::Error)
     end
 
-    it "does not raise error when given a value", :aggregate_failures do
-      expect { subject.new(required_prop: "value") }.to_not raise_error(Playbook::Props::Error)
+    it "does not raise error when given a value" do
       expect(subject.new(required_prop: "value").required_prop).to eq "value"
     end
   end
