@@ -33,7 +33,7 @@ module Playbook
     end
 
     def pb_kit_api(kit)
-      kit_class_obj = get_class_name(kit)
+      kit_class_obj = get_class_name(kit.to_s)
       @kit_api = if kit_class_obj < Playbook::PbKit::Base
                    kit_class_obj.instance_method(:initialize).parameters.map(&:last)
                  else
@@ -60,9 +60,9 @@ module Playbook
     end
 
     def get_class_name(kit)
-      folder = is_subkit?(kit) ? pb_camelize(kit.split("/")[0]) : pb_camelize(kit)
-      item = is_subkit?(kit) ? pb_camelize(kit.split("/")[-1]) : pb_camelize(kit)
-      "Playbook::Pb#{folder}::#{item}".safe_constantize
+      folder = is_subkit?(kit) ? kit.split("/")[0] : kit
+      item = is_subkit?(kit) ? kit.split("/")[-1] : kit
+      "Playbook::Pb#{folder.camelize}::#{item.camelize}".safe_constantize
     end
 
     def render_clickable_title(kit)

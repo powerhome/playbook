@@ -9,7 +9,7 @@ module Playbook
     def pb_rails(kit, props: {}, &block)
       previous = prefix_partial_path_with_controller_namespace
       self.prefix_partial_path_with_controller_namespace = false
-      kit = build_view_model(kit, props, &block)
+      kit = build_view_model(kit.to_s, props, &block)
       render(partial: kit, as: :object)
     ensure
       self.prefix_partial_path_with_controller_namespace = previous
