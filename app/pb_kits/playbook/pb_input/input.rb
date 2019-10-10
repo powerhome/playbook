@@ -7,11 +7,14 @@ module Playbook
 
       partial "pb_input/input"
 
-        prop :label
-        prop :name
-        prop :placeholder
-        prop :value
-        prop :type, default: "text"
+      prop :label
+      prop :name
+      prop :placeholder
+      prop :value
+      prop :type, default: "text"
+
+      def classname
+        generate_classname("pb_input_field_kit")
       end
     end
   end
