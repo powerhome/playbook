@@ -4,11 +4,10 @@
     class: object.classname,
     aria: object.aria) do %>
   
-  <%= object.label %>
+  <%= pb_rails("caption", props: {text: object.label}) %>
   <div class="pb_currency_wrapper">
-    <%= pb_rails("body", props: { color: "light", text: object.currency_indicator }) %>
-    <%= pb_rails("title", props: { size: object.value_size, text: object.display_amount, classname: "pb_currency_value" }) %>
     <%= pb_rails("body", props: { color: "light", text: object.unit }) %>
+    <%= pb_rails("title", props: { size: object.title_size, text: object.display_amount, classname: "pb_currency_value" }) %>
+    <%= pb_rails("body", props: { color: "light", text: object.cents }) %>
   </div>
-
 <% end %>
