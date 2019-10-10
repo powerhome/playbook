@@ -3,5 +3,5 @@
     data: object.data,
     class: object.classname,
     aria: object.aria) do %>
-  <%= capture(&object.block) %>
+  <%= capture(&object.children) %>
 <% end %>

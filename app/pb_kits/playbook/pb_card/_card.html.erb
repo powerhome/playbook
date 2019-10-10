@@ -3,7 +3,7 @@
     data: object.data,
     class: object.classname,
     aria: object.aria) do %>
-  <% if object.block %>
-    <%= pb_rails("card/card_body", props: { padding: object.padding}) { capture(&object.block) } %>
+  <% if object.children %>
+    <%= pb_rails("card/card_body", props: { padding: object.padding, children: object.children }) %>
   <% end %>
 <% end %>
