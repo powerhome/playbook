@@ -6,12 +6,12 @@
   <%= pb_rails "title", props: {
     classname: "pb_home_address_street_address",
     size: 4,
-    text: "#{object.address} \u00b7 #{object.house_style}"
+    text: object.address_house_style
   } %>
 
   <%= pb_rails "body", props: {
     color: "light",
-    text: "#{object.city}, #{object.state}",
+    text: object.city_state,
   } %>
 
   <%= pb_rails "body", props: { classname: "home-hashtag", tag: "span" } do %>

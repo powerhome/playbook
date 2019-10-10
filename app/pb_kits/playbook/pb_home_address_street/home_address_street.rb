@@ -19,6 +19,14 @@ module Playbook
         generate_classname("pb_home_address_street_kit", dark_class)
       end
 
+      def city_state
+        "#{city}, #{state}"
+      end
+
+      def address_house_style
+        "#{address} \u00b7 #{house_style}"
+      end
+
     private
 
       def dark_class
