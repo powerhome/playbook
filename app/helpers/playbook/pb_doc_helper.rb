@@ -9,9 +9,9 @@ module Playbook
     def has_kit_type?(kit, type)
       type ||= "rails"
       if type == "rails"
-        return Dir["playbook/pb_#{kit}/*.html.erb"].empty?
+        Dir["playbook/pb_#{kit}/*.html.erb"].empty?
       elsif type == "react"
-        return Dir["playbook/pb_#{kit}/*.jsx"].empty?
+        Dir["playbook/pb_#{kit}/*.jsx"].empty?
       end
     end
 
@@ -49,13 +49,10 @@ module Playbook
                                "app", "pb_kits", "playbook", "pb_#{kit}", "docs", "example.yml")
       if File.exist? example_file
         examples_list = YAML.load_file(example_file)
-        examples_list = examples_list.inject({}) { |item, (k, v)| item[k.to_sym] = v; item }
-        all_kit_examples = {}
-        all_kit_examples[:kit] = kit
-        all_kit_examples[:examples] = examples_list[:examples][type]
-        return all_kit_examples
+                            .inject({}) { |item, (k, v)| item[k.to_sym] = v; item }
+        { kit: kit, examples: examples_list[:examples][type] }
       else
-        return {}
+        {}
       end
     end
 
