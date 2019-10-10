@@ -10,8 +10,6 @@ module Playbook
                  configured_id
                  configured_label
                  configured_value
-                 configured_unit
-                 configured_currency_indicator
                  configured_size].freeze
 
       def initialize(align: default_configuration,
@@ -20,8 +18,6 @@ module Playbook
                      id: default_configuration,
                      label: default_configuration,
                      value: default_configuration,
-                     unit: default_configuration,
-                     currency_indicator: default_configuration,
                      size: default_configuration)
         self.configured_align = align
         self.configured_classname = classname
@@ -29,8 +25,6 @@ module Playbook
         self.configured_id = id
         self.configured_label = label
         self.configured_value = value
-        self.configured_unit = unit
-        self.configured_currency_indicator = currency_indicator
         self.configured_size = size
       end
 
