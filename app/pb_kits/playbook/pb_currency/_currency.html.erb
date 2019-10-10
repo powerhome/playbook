@@ -1,13 +1,14 @@
 <%= content_tag(:div,
     id: object.id,
     data: object.data,
-    class: object.classname(object.kit_class)) do %>
-
+    class: object.classname,
+    aria: object.aria) do %>
+  
   <%= object.label %>
   <div class="pb_currency_wrapper">
-    <%= object.currency_indicator %>
-    <%= object.value %>
-    <%= object.unit %>
+    <%= pb_rails("body", props: { color: "light", text: object.currency_indicator }) %>
+    <%= pb_rails("title", props: { size: object.value_size, text: object.display_amount, classname: "pb_currency_value" }) %>
+    <%= pb_rails("body", props: { color: "light", text: object.unit }) %>
   </div>
 
 <% end %>
