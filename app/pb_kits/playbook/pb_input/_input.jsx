@@ -36,7 +36,7 @@ class Input extends React.Component {
     ])
 
     return (
-      <div className="pb_input">
+      <div className="pb_input_kit">
         <Caption text={label} />
         <div className="input_wrapper">
           <input className={css}
