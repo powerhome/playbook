@@ -3,7 +3,7 @@
                         class: object.classname) do %>
   <input type="checkbox" value="<%=object.value%>" name="<%=object.name%>" <%= object.checked_html %>>
   <span class="pb_checkbox_checkmark">
-    <%= pb_rails("icon", props: { icon: "check", id: "check_icon", classname: "check_icon", fixed_width: true}) if object.icon %>
+    <%= pb_rails("icon", props: { icon: "check", id: "check_icon", classname: "check_icon", fixed_width: true}) %>
   </span>
   <span class="pb_checkbox_label">
     <%= pb_rails("body", props: { text: object.text, dark: object.dark }) %>

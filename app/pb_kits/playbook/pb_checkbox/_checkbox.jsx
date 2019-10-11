@@ -5,21 +5,28 @@ import Body from '../pb_body/_body.jsx'
 import Icon from '../pb_icon/_icon.jsx'
 
 type CheckboxProps = {
-  dark?: Boolean,
-  label: String,
-  name:String,
-  value:String,
   checked?: Boolean,
+  dark?: Boolean,
+  name:String,
+  text: String,
+  value:String,
+
 }
 
 const Checkbox = ({
+  checked=false,
   dark=false,
   name='',
+  text='',
   value='',
-  label='',
-  checked=false,
-}: CheckboxProps) => {
 
+
+}: CheckboxProps) => {
+  
+  const bodyClassName = {
+    'pb_checkbox_label': true,
+    '_dark': dark,
+  }
 
   return (
     <label
@@ -31,7 +38,7 @@ const Checkbox = ({
   <span className="pb_checkbox_checkmark">
       <Icon className="check_icon" icon="check" fixedWidth />
     </span>
-    <Body className={(dark === true ? '_dark' : '') + ` pb_checkbox_label`}  >{label}</Body>
+    <Body className={bodyClassName}>{text}</Body>
     </label>
   )
 }
