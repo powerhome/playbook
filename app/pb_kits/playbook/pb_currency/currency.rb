@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require "action_view"
+
 module Playbook
   module PbCurrency
     class Currency
