@@ -11,6 +11,7 @@ import "../kits/pb_currency.js";
 import "../kits/pb_dashboard_value.js";
 import "../kits/pb_date.js";
 import "../kits/pb_date_range_inline.js";
+import "../kits/pb_date_range_stacked.js";
 import "../kits/pb_date_year_stacked.js";
 import "../kits/pb_distribution_bar.js";
 import "../kits/pb_fixed_confirmation_toast.js";

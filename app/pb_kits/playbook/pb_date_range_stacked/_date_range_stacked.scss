@@ -1,0 +1,20 @@
+@import "../tokens/spacing";
+
+[class^=pb_date_range_stacked] {
+  display: flex;
+  flex-direction: row;
+  [class*=_start_date_wrapper] {
+    display: flex;
+    flex-direction: column;
+    [class^=pb_title],
+    [class^=pb_body]{
+      text-align: right;
+    }
+  }
+  [class*=icon_wrapper] {
+     margin: 0px $space_sm 0px $space_sm;
+    [class^=pb_body_kit] {
+      align-self: center;
+    }
+  }
+}

@@ -1,0 +1,22 @@
+<%= content_tag(:div,
+    id: object.id,
+    data: object.data,
+    class: object.classname(object.kit_class)) do %>
+
+<div class="pb_date_range_stacked_start_date_wrapper">
+  <%= object.start_day_month %>
+  <%= object.start_year %>
+</div>
+
+<div class="pb_date_range_stacked_icon_wrapper">
+  <%= pb_rails("body", props: { tag: "span", color: "light" }) do %>
+    <%= pb_rails("icon", props: { icon: "long-arrow-right", fixed_width: true }) %>
+  <% end %>
+</div>
+
+<div class="">
+  <%= object.end_day_month %>
+  <%= object.end_year %>
+</div>
+
+<% end %>

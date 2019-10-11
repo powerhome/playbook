@@ -11,6 +11,7 @@ import Contact from "./pb_contact/_contact.jsx"
 import Currency from "./pb_currency/_currency.jsx"
 import DashboardValue from "./pb_dashboard_value/_dashboard_value.jsx"
 import DateRangeInline from "./pb_date_range_inline/_date_range_inline.jsx"
+import DateRangeStacked from "./pb_date_range_stacked/_date_range_stacked.jsx"
 import DateYearStacked from "./pb_date_year_stacked/_date_year_stacked.jsx"
 import DistributionBar from "./pb_distribution_bar/_distribution_bar.jsx"
 import FixedConfirmationToast from "./pb_fixed_confirmation_toast/_fixed_confirmation_toast.jsx"
@@ -71,6 +72,7 @@ export {
   Currency,
   DashboardValue,
   DateRangeInline,
+  DateRangeStacked,
   DateYearStacked,
   DistributionBar,
   FixedConfirmationToast,
