@@ -7,6 +7,7 @@ import Button from "./pb_button/_button.jsx"
 import Caption from "./pb_caption/_caption.jsx"
 import Card from "./pb_card/_card.jsx"
 import Checkbox from "./pb_checkbox/_checkbox.jsx"
+import Contact from "./pb_contact/_contact.jsx"
 import Currency from "./pb_currency/_currency.jsx"
 import DashboardValue from "./pb_dashboard_value/_dashboard_value.jsx"
 import DateRangeInline from "./pb_date_range_inline/_date_range_inline.jsx"
@@ -29,9 +30,8 @@ import ListItem from "./pb_list/_list_item.jsx"
 import LoadingInline from "./pb_loading_inline/_loading_inline.jsx"
 import Message from "./pb_message/_message.jsx"
 import OnlineStatus from "./pb_online_status/_online_status.jsx"
-import Owner from "./pb_owner/_owner.jsx"
-import OwnerPhone from "./pb_owner_phone/_owner_phone.jsx"
-import Phone from "./pb_phone/_phone.jsx"
+import Person from "./pb_person/_person.jsx"
+import PersonContact from "./pb_person_contact/_person_contact.jsx"
 import Pill from "./pb_pill/_pill.jsx"
 import ProgressSimple from "./pb_progress_simple/_progress_simple.jsx"
 import SectionSeparator from "./pb_section_separator/_section_separator.jsx"
@@ -62,13 +62,17 @@ export {
   Avatar,
   Badge,
   BarGraph,
+  barGraphSettings,
   Body,
   Button,
   Caption,
   Card,
   Checkbox,
+  commonSettings,
+  Contact,
   Currency,
   DashboardValue,
+  dashboardValueSettings,
   DateRangeInline,
   DateYearStacked,
   DistributionBar,
@@ -84,14 +88,15 @@ export {
   LabelValue,
   Layout,
   LineGraph,
+  lineGraphSettings,
   List,
   ListItem,
   LoadingInline,
   Message,
   OnlineStatus,
-  Owner,
-  OwnerPhone,
-  Phone,
+  pbChart,
+  Person,
+  PersonContact,
   Pill,
   ProgressSimple,
   SectionSeparator,
@@ -107,9 +112,4 @@ export {
   User,
   UserBadge,
   VerticalNav,
-  commonSettings,
-  lineGraphSettings,
-  barGraphSettings,
-  dashboardValueSettings,
-  pbChart,
 }

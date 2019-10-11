@@ -1,50 +1,51 @@
 kits:
+  - avatar
+  - badge
+  - bar_graph
+  - body
+  - button
   - caption
   - card
-  - title
-  - button
-  - vertical_nav
-  - body
-  - layout
-  - image
-  - list
-  - avatar
-  - line_graph
-  - bar_graph
-  - icon
-  - table
+  - checkbox
+  - contact
+  - currency
   - dashboard_value
-  - time
-  - pill
-  - user_badge
   - date
-  - title_detail
+  - date_range_inline
+  - date_year_stacked
+  - distribution_bar
+  - fixed_confirmation_toast
+  - hashtag
+  - home_address_street
+  - icon
   - icon_circle
   - icon_value
-  - star_rating
-  - progress_simple
-  - title_count
-  - user
-  - label_value
-  - message
-  - timestamp
-  - online_status
-  - source
+  - image
+  - input
   - label_pill
-  - phone
-  - owner_phone
-  - owner
-  - toggle
-  - stat_value
-  - stat_change
-  - section_separator
-  - currency
-  - fixed_confirmation_toast
+  - label_value
+  - layout
+  - line_graph
+  - list
   - loading_inline
-  - checkbox
-  - home_address_street
-  - badge
-  - date_year_stacked
-  - date_range_inline
-  - distribution_bar
-  - hashtag
+  - message
+  - online_status
+  - person
+  - person_contact
+  - pill
+  - progress_simple
+  - section_separator
+  - source
+  - star_rating
+  - stat_change
+  - stat_value
+  - table
+  - time
+  - timestamp
+  - title
+  - title_count
+  - title_detail
+  - toggle
+  - user
+  - user_badge
+  - vertical_nav

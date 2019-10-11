@@ -31,12 +31,12 @@ class Input extends React.Component {
     } = this.props
 
     const css = classnames([
-      `input_field`,
+      `pb_input_kit`,
       className,
     ])
 
     return (
-      <div className="pb_input">
+      <div className="pb_input_kit">
         <Caption text={label} />
         <div className="input_wrapper">
           <input className={css}

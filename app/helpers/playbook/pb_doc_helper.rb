@@ -9,9 +9,9 @@ module Playbook
     def has_kit_type?(kit, type)
       type ||= "rails"
       if type == "rails"
-        return Dir["playbook/pb_#{kit}/*.html.erb"].empty?
+        Dir["playbook/pb_#{kit}/*.html.erb"].empty?
       elsif type == "react"
-        return Dir["playbook/pb_#{kit}/*.jsx"].empty?
+        Dir["playbook/pb_#{kit}/*.jsx"].empty?
       end
     end
 
@@ -33,7 +33,7 @@ module Playbook
     end
 
     def pb_kit_api(kit)
-      kit_class_obj = get_class_name(kit)
+      kit_class_obj = get_class_name(kit.to_s)
       @kit_api = if kit_class_obj < Playbook::PbKit::Base
                    kit_class_obj.instance_method(:initialize).parameters.map(&:last)
                  else
@@ -49,20 +49,17 @@ module Playbook
                                "app", "pb_kits", "playbook", "pb_#{kit}", "docs", "example.yml")
       if File.exist? example_file
         examples_list = YAML.load_file(example_file)
-        examples_list = examples_list.inject({}) { |item, (k, v)| item[k.to_sym] = v; item }
-        all_kit_examples = {}
-        all_kit_examples[:kit] = kit
-        all_kit_examples[:examples] = examples_list[:examples][type]
-        return all_kit_examples
+                            .inject({}) { |item, (k, v)| item[k.to_sym] = v; item }
+        { kit: kit, examples: examples_list[:examples][type] }
       else
-        return {}
+        {}
       end
     end
 
     def get_class_name(kit)
-      folder = is_subkit?(kit) ? pb_camelize(kit.split("/")[0]) : pb_camelize(kit)
-      item = is_subkit?(kit) ? pb_camelize(kit.split("/")[-1]) : pb_camelize(kit)
-      "Playbook::Pb#{folder}::#{item}".safe_constantize
+      folder = is_subkit?(kit) ? kit.split("/")[0] : kit
+      item = is_subkit?(kit) ? kit.split("/")[-1] : kit
+      "Playbook::Pb#{folder.camelize}::#{item.camelize}".safe_constantize
     end
 
     def render_clickable_title(kit)
