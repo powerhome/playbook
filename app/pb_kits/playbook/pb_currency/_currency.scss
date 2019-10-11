@@ -1,8 +1,8 @@
-[class^="pb_currency"] {
+[class^="pb_currency_kit"] {
   &[class*="_center"] {
-    & > [class^="pb_caption"],
-    & > [class^="pb_title"],
-    & > [class^="pb_body"] {
+    & > [class^="pb_caption_kit"],
+    & > [class^="pb_title_kit"],
+    & > [class^="pb_body_kit"] {
       text-align: center;
     }
     & > [class*="pb_currency_wrapper"] {
@@ -11,9 +11,9 @@
   }
 
   &[class*="_right"] {
-    & > [class^="pb_caption"],
-    & > [class^="pb_title"],
-    & > [class^="pb_body"] {
+    & > [class^="pb_caption_kit"],
+    & > [class^="pb_title_kit"],
+    & > [class^="pb_body_kit"] {
       text-align: right;
     }
     & > [class*="pb_currency_wrapper"] {
@@ -24,16 +24,13 @@
 
 [class^="pb_currency_wrapper"] {
   display: flex;
+  align-items: baseline;
 
   & > [class*="dollar_sign"] {
-    display: flex;
-    align-items: flex-start;
+    align-self: flex-start;
   }
-  & > [class*="cents"] {
-    display: flex;
-    align-items: flex-end;
-  }
+
   & > [class*="pb_currency_value"] {
-    line-height: 0.9;
+    line-height: 1 !important;
   }
 }

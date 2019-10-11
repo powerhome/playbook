@@ -15,10 +15,10 @@ RSpec.describe Playbook::PbCurrency::Currency do
 
    describe "#classname" do
     it "returns namespaced class name", :aggregate_failures do
-      expect(subject.new(amount: "100").classname).to eq "pb_currency_left"
-      expect(subject.new(amount: "100", align: "center").classname).to eq "pb_currency_center"
-      expect(subject.new(amount: "100", align: "right").classname).to eq "pb_currency_right"
-      expect(subject.new(amount: "100", classname: "additional_class").classname).to eq "pb_currency_left additional_class"
+      expect(subject.new(amount: "100").classname).to eq "pb_currency_kit_left"
+      expect(subject.new(amount: "100", align: "center").classname).to eq "pb_currency_kit_center"
+      expect(subject.new(amount: "100", align: "right").classname).to eq "pb_currency_kit_right"
+      expect(subject.new(amount: "100", classname: "additional_class").classname).to eq "pb_currency_kit_left additional_class"
     end
   end
 

@@ -21,7 +21,7 @@ module Playbook
       prop :unit, default: "$"
 
       def classname
-        generate_classname("pb_currency", align)
+        generate_classname("pb_currency_kit", align)
       end
 
       def title_size

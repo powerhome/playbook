@@ -6,8 +6,8 @@
   
   <%= pb_rails("caption", props: {text: object.label}) %>
   <div class="pb_currency_wrapper">
-    <%= pb_rails("body", props: { color: "light", text: object.unit }) %>
-    <%= pb_rails("title", props: { size: object.title_size, text: object.display_amount, classname: "pb_currency_value" }) %>
+    <%= pb_rails("body", props: { classname: "dollar_sign", color: "light", text: object.unit }) %>
+    <%= pb_rails("title", props: { classname: "pb_currency_value", size: object.title_size, text: object.display_amount  }) %>
     <%= pb_rails("body", props: { classname: "cents", color: "light", text: object.cents }) %>
   </div>
 <% end %>
