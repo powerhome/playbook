@@ -19,7 +19,7 @@ module Playbook
       prop :unit, default: "$"
 
       def classname
-        generate_classname("pb_currency_kit", align_class)
+        generate_classname("pb_currency", align)
       end
 
       def title_size
@@ -35,16 +35,6 @@ module Playbook
       end
 
     private
-
-      def align_class
-        if align == "center"
-          "center"
-        elsif align == "right"
-          "right"
-        else
-          "left"
-        end
-      end
 
       def formatted_amount
         number_to_currency(amount)
