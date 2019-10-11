@@ -11,15 +11,15 @@ RSpec.describe Playbook::PbCurrency::Currency do
                       .with_default("left")
                       .with_values("left", "center", "right") }
   it { is_expected.to define_prop(:amount)
-                      .of_type(Playbook::Props::String)
+                      .of_type(Playbook::Props::String) }
   it { is_expected.to define_prop(:label)
-                      .of_type(Playbook::Props::String) 
+                      .of_type(Playbook::Props::String) }
   it { is_expected.to define_enum_prop(:size)
                       .with_default("sm")
                       .with_values("lg", "sm") }
   it { is_expected.to define_prop(:unit)
                       .of_type(Playbook::Props::String) 
-                      .with_default("$")        
+                      .with_default("$") }
 
    describe "#classname" do
     it "returns namespaced class name", :aggregate_failures do
