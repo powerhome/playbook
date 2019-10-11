@@ -122,6 +122,8 @@ RSpec.describe Playbook::Props do
       end
     end
 
+    it { is_expected.to define_string_prop(:required_prop).that_is_required }
+
     it "raises error when not given a value" do
       expect { subject.new({}) }.to raise_error(Playbook::Props::Error)
     end

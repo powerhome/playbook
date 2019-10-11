@@ -13,7 +13,13 @@ module Playbook
         @default = default
       end
 
+      chain :that_is_required do
+        @required = true
+      end
+
       match do |subject_class|
+        return false if @required && !subject_class.props[prop_key].required
+
         if @type_class && @default
           subject_class.props[prop_key].class == @type_class &&
             subject_class.props[prop_key].default == @default
@@ -31,12 +37,14 @@ module Playbook
         type_message = "of #{@type_class} type"
         default_message = "with default of #{@default}"
 
-        if @type_class && @default
+        if @type_class && @default && !@required
           [base_message, type_message, default_message].join(" ")
-        elsif @type_class && !@default
+        elsif @type_class && !@default && !@required
           [base_message, type_message].join(" ")
-        elsif !@type_class && @default
+        elsif !@type_class && @default && !@required
           [base_message, default_message].join(" ")
+        elsif @required
+          "expected #{prop_key} to be required"
         else
           base_message
         end
@@ -116,7 +124,13 @@ module Playbook
         @default = default
       end
 
+      chain :that_is_required do
+        @required = true
+      end
+
       match do |subject_class|
+        return false if @required && !subject_class.props[prop_key].required
+
         is_string = subject_class.props[prop_key]&.class == Props::String
 
         if @default
@@ -130,7 +144,13 @@ module Playbook
         base_message = "expected #{subject_class} to define :#{prop_key} string prop"
         default_message = "with default of #{@default}"
 
-        @default ? [base_message, default_message].join(" ") : base_message
+        if @default && !@required
+          [base_message, default_message].join(" ")
+        elsif @required
+          "expected #{prop_key} to be required"
+        else
+          base_message
+        end
       end
     end
 
