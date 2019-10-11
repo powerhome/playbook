@@ -1,4 +1,4 @@
-import commonSettings from "../pb_dashboard/commonSettings.js"
+import { commonSettings } from "../pb_dashboard/commonSettings.js";
 import typography from "../tokens/_typography.scss";
 
 const sizeColumns = function(highchart) {
