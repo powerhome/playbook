@@ -10,6 +10,7 @@ $teal:                #00C4D7;
 $red:                 #FF2229;
 $yellow:              #F9BB00;
 $green:               #00CA74;
+$orange:              #FD804C;
 $colors: (
   royal:              $royal,
   blue:               $blue,
@@ -17,7 +18,8 @@ $colors: (
   teal:               $teal,
   red:                $red,
   yellow:             $yellow,
-  green:              $green
+  green:              $green,
+  orange:             $orange
 );
 
 // Specialty Gradient -----------------
@@ -113,12 +115,13 @@ $text_colors: (
 
 // Data colors ------------------------
 $data_1:              $royal;
-$data_2:              $purple;
-$data_3:              $blue;
-$data_4:              $teal;
-$data_5:              $green;
-$data_6:              $yellow;
-$data_7:              $red;
+$data_2:              $yellow;
+$data_3:              $purple;
+$data_4:              $green;
+$data_5:              $orange;
+$data_6:              $active_dark;
+$data_7:              $teal;
+$data_8:              $red;
 $data_colors: (
   data_1:             $data_1,
   data_2:             $data_2,
@@ -126,7 +129,8 @@ $data_colors: (
   data_4:             $data_4,
   data_5:             $data_5,
   data_6:             $data_6,
-  data_7:             $data_7
+  data_7:             $data_7,
+  data_8:             $data_8
 );
 
 // Status colors ----------------------
