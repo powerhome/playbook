@@ -1,21 +1,21 @@
 import colors from "../tokens/_colors.scss"
 import typography from "../tokens/_typography.scss";
 
+const dataColors = [
+  colors.data_1,
+  colors.data_2,
+  colors.data_3,
+  colors.data_4,
+  colors.data_5,
+  colors.data_6,
+  colors.data_7,
+  colors.data_8,
+]
+
 const applyCustomSeriesColors = function(highchart) {
-  const data_colors = [
-    colors.data_1,
-    colors.data_2,
-    colors.data_3,
-    colors.data_4,
-    colors.data_5,
-    colors.data_6,
-    colors.data_7
-  ];
-
   highchart.series.forEach(function(item, index) {
-    const selected_color = data_colors[index];
+    const selected_color = dataColors[index];
     item.color = selected_color;
-
     item.data.forEach(function(data_item) {
       if(data_item.color){
         data_item.color = selected_color;
@@ -98,4 +98,7 @@ const commonSettings = function(highchart) {
   styleLegend(highchart);
 };
 
-export default commonSettings;
+export {
+  commonSettings,
+  dataColors,
+}

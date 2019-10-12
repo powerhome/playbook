@@ -49,7 +49,7 @@ import UserBadge from "./pb_user_badge/_user_badge.jsx"
 import VerticalNav from "./pb_vertical_nav/_vertical_nav.jsx"
 
 // Dashboard Settings
-import commonSettings from "./pb_dashboard/commonSettings"
+import { commonSettings, dataColors } from "./pb_dashboard/commonSettings"
 import lineGraphSettings from "./pb_line_graph/lineGraphSettings"
 import barGraphSettings from "./pb_bar_graph/barGraphSettings"
 import dashboardValueSettings from "./pb_dashboard_value/dashboardValueSettings"
@@ -62,17 +62,14 @@ export {
   Avatar,
   Badge,
   BarGraph,
-  barGraphSettings,
   Body,
   Button,
   Caption,
   Card,
   Checkbox,
-  commonSettings,
   Contact,
   Currency,
   DashboardValue,
-  dashboardValueSettings,
   DateRangeInline,
   DateYearStacked,
   DistributionBar,
@@ -88,13 +85,11 @@ export {
   LabelValue,
   Layout,
   LineGraph,
-  lineGraphSettings,
   List,
   ListItem,
   LoadingInline,
   Message,
   OnlineStatus,
-  pbChart,
   Person,
   PersonContact,
   Pill,
@@ -112,4 +107,10 @@ export {
   User,
   UserBadge,
   VerticalNav,
+  barGraphSettings,
+  commonSettings,
+  dashboardValueSettings,
+  dataColors,
+  lineGraphSettings,
+  pbChart,
 }
