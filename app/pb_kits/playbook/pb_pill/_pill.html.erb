@@ -1,6 +1,6 @@
 <%= content_tag(:div,
     id: object.id,
     data: object.data,
-    class: object.classname(object.kit_class)) do %>
-  <%= object.display_text %>
+    class: object.classname) do %>
+  <%= pb_rails("title", props: { text: object.display_text, tag: "h4", size: 4, classname: "pb_pill_text" }) %>
 <% end %>
