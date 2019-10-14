@@ -20,7 +20,6 @@ RSpec.describe Playbook::PbBarGraph::BarGraph do
   describe "#classname" do
     it "returns namespaced class name", :aggregate_failures do
       expect(subject.new({}).classname).to eq "pb_bar_graph"
-      expect(subject.new(orientation: "horizontal").classname).to eq "pb_bar_graph"
       expect(subject.new(classname: "additional_class").classname).to eq "pb_bar_graph additional_class"
     end
   end
