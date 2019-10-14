@@ -25,9 +25,9 @@ module Playbook
       self.class.props[name].value @values[name]
     end
 
-    def generate_classname(*name_parts)
+    def generate_classname(*name_parts, separator: "_")
       [
-        name_parts.compact.join("_"),
+        name_parts.compact.join(separator),
         prop(:classname),
       ].compact.join(" ")
     end

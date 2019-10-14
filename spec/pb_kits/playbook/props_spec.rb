@@ -56,6 +56,30 @@ RSpec.describe Playbook::Props do
         expect(subject.props).to include(:id, :data, :classname, :aria)
       end
     end
+
+    describe "#generate_classname" do
+      it "with default separator" do
+        instance = subject.new(classname: "passed_classname")
+
+        expect(instance.generate_classname("separate", "with", "default")).to eq(
+          "separate_with_default passed_classname"
+        )
+      end
+
+      it "with custom separator" do
+        instance = subject.new(classname: "passed_classname")
+
+        expect(instance.generate_classname("separate", "with", "custom", separator: "X")).to eq(
+          "separateXwithXcustom passed_classname"
+        )
+
+        another_instance = subject.new(classname: "passed_classname")
+
+        expect(instance.generate_classname("separate", "with", "custom", separator: " ")).to eq(
+          "separate with custom passed_classname"
+        )
+      end
+    end
   end
 
   describe "additional props" do
