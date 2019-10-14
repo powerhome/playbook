@@ -39,7 +39,7 @@ module Playbook
       end
 
       def variant
-        default_value(configured_variant, "")
+        default_value(configured_variant, "neutral")
       end
 
       def to_partial_path
