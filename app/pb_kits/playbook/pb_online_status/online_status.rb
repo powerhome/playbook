@@ -7,12 +7,12 @@ module Playbook
 
       partial "pb_online_status/online_status"
 
-      prop :type, type: Playbook::Props::Enum,
+      prop :status, type: Playbook::Props::Enum,
                   values: %w[online offline away],
                   default: "offline"
 
       def classname
-        generate_classname("pb_online_status_kit")
+        generate_classname("pb_online_status_kit", status)
       end
     end
   end
