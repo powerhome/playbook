@@ -48,7 +48,7 @@ class KitGenerator < Rails::Generators::NamedBase
       # Generate SCSS files ==============================
       template "kit_scss.erb", "#{full_kit_directory}/_#{@kit_name_underscore}.scss"
       open("app/pb_kits/playbook/_playbook.scss", "a") do |f|
-        f.puts "@" + "import " + "\'" + "../../pb_#{@kit_name_underscore}/#{@kit_name_underscore}" + "\';"
+        f.puts "@" + "import " + "\'" + "pb_#{@kit_name_underscore}/#{@kit_name_underscore}" + "\';"
       end
       say_status  "complete",
                   "#{@kit_name_capitalize} kit stylesheet successfully created and imported.",
@@ -60,6 +60,7 @@ class KitGenerator < Rails::Generators::NamedBase
         template "kit_ruby.erb", "#{full_kit_directory}/#{@kit_name_underscore}.rb"
         template "kit_html.erb", "#{full_kit_directory}/_#{@kit_name_underscore}.html.erb"
         template "kit_example_rails.erb", "#{full_kit_directory}/docs/_#{@kit_name_underscore}_default.html.erb"
+        template "kit_ruby_spec.erb", "spec/pb_kits/playbook/kits/#{@kit_name_underscore}_spec.rb"
         say_status  "complete",
                     "#{@kit_name_capitalize} rails kit successfully created.",
                     :green
@@ -75,7 +76,7 @@ class KitGenerator < Rails::Generators::NamedBase
 
         # Import in all kits.js  =========================
         append_to_file("app/pb_kits/playbook/packs/kits.js") do
-          "import \"./pb_#{@kit_name_underscore}.js\";\n"
+          "import \"../kits/pb_#{@kit_name_underscore}.js\";\n"
         end
 
         # Import kit examples  ===========================

@@ -2,33 +2,10 @@
 
 module Playbook
   module Pb<%= @kit_name_pascal %>
-    class <%= @kit_name_pascal %> < Playbook::PbKit::Base
-      PROPS = %i[<%= @kit_props.map{|key,val| "configured_#{key.parameterize.underscore}".to_sym }.join("\n\t\t\t\t\t") %>].freeze
+    class <%= @kit_name_pascal %>
+      include Playbook::Props
 
-      def initialize(<%= @kit_class_init.join(",\n\t\t\t\t\t\t\t") %>)
-        <%= @kit_class_val.join("\n\t\t\t\t") %>
-      end
-      <% @unique_props.each do |key, val| %>
-      def <%= key.to_s.underscore %><% case val %><% when "enum", "one_of" %>
-        <%= key.to_s.underscore %>_options = %w(option1 option2)
-        one_of_value(configured_<%= key.to_s.underscore %>, <%= key.to_s.underscore %>_options, "")<% when "boolean", "bool" %>
-        true_value(configured_<%= key.to_s.underscore %>, "true value", "false value")<% else %>
-        default_value(configured_<%= key.to_s.underscore %>, "")<% end %>
-      end
-      <% end %>
-
-      def to_partial_path
-        "<%= "pb_#{@kit_name_underscore}/#{@kit_name_underscore}" %>"
-      end
-
-    private
-
-      DEFAULT = Object.new
-      private_constant :DEFAULT
-      def default_configuration
-        DEFAULT
-      end
-      attr_accessor(*PROPS)
+      partial "<%= "pb_#{@kit_name_underscore}/#{@kit_name_underscore}" %>"
     end
   end
 end
