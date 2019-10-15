@@ -14,6 +14,7 @@ RSpec.describe Playbook::PbLoadingInline::LoadingInline do
     it "returns namespaced class name", :aggregate_failures do
       expect(subject.new({}).classname).to eq "pb_loading_inline_kit_left"
       expect(subject.new(classname: "additional_class").classname).to eq "pb_loading_inline_kit_left additional_class"
+      expect(subject.new(align: "center").classname).to eq "pb_loading_inline_kit_center"
     end
   end
 end
