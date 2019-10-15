@@ -1,7 +1,11 @@
 # frozen_string_literal: true
 
 require "active_support/concern"
+
+# Base must be defined first as other prop types inherit from it
 require_relative "./props/base"
+
+require_relative "./props/array"
 require_relative "./props/boolean"
 require_relative "./props/enum"
 require_relative "./props/hash"

@@ -2,14 +2,13 @@
     aria: object.aria,
     id: object.id,
     data: object.data,
-    class: object.classname("pb_bar_graph")
-    ) %>
+    class: object.classname) %>
 <% content_for :pb_js do %>
   <%= javascript_tag do %>
     window.addEventListener('DOMContentLoaded', function() {
       new pbChart('.selector', {
         id: "<%= object.id %>",
-        chartData: <%= object.chart_data %>,
+        chartData: <%= object.sanitized_chart_data %>,
         type: "<%= object.chart_type %>",
         title: "<%= object.title %>",
         subtitle: "<%= object.subtitle %>",
