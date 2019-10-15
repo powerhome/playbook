@@ -7,6 +7,7 @@ RSpec.describe Playbook::Props::Percentage do
       expect(Playbook::Props::Percentage.new.validate(45.5)).to eq true
       expect(Playbook::Props::Percentage.new.validate(0.0)).to eq true
       expect(Playbook::Props::Percentage.new.validate(100)).to eq true
+      expect(Playbook::Props::Percentage.new.validate(nil)).to eq true
     end
 
     it "returns false given anything less than 0", :aggregate_failures do
