@@ -1,10 +1,43 @@
-import React from "react"
-import {Toggle} from "../../"
+// @flow
 
-function ToggleDefault() {
-  return (
-    <h1>{`Coming Soon...`}</h1>
-  )
+import React from "react"
+import { Toggle } from "../../"
+
+class Example extends React.Component {
+  state = {
+    toggle1: false,
+    toggle2: true,
+  }
+
+  handleChange = event => {
+    this.setState({
+      [event.target.name]: event.target.checked
+    })
+  }
+
+  render() {
+    return (
+      <>
+        <Toggle
+            checked={this.state.toggle1}
+            name="toggle1"
+            onChange={this.handleChange}
+            onCheck={event => console.log(`${event.target.name} checked!`)}
+            onUncheck={event => console.log(`${event.target.name} unchecked!`)}
+        />
+
+        <br />
+
+        <Toggle
+            checked={this.state.toggle2}
+            name="toggle2"
+            onChange={this.handleChange}
+            onCheck={event => console.log(`${event.target.name} checked!`)}
+            onUncheck={event => console.log(`${event.target.name} unchecked!`)}
+        />
+      </>
+    )
+  }
 }
 
-export default ToggleDefault
+export default Example
