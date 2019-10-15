@@ -9,3 +9,5 @@ examples:
 
   react:
   - toggle_default: Default
+  - toggle_accessibility: Toggle Accessibility
+  - toggle_data: Toggle Data Props

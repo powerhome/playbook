@@ -1,21 +1,68 @@
-import React from 'react';
-import PropTypes from "prop-types";
+// @flow
 
-const propTypes = {
-  className: PropTypes.string,
-  id: PropTypes.string
-};
+import React from 'react'
 
-class Toggle extends React.Component {
-  render() {
-    return (
-      <div className="pb_toggle">
-        <span>TOGGLE CONTENT</span>
-      </div>
-    )
-  }
+import type {
+  InputCallback
+} from "../types"
+
+import {
+  buildAriaProps,
+  buildDataProps,
+  buildCss,
+  noop,
+} from '../utilities/props'
+
+type Props = {
+  aria: object,
+  checked: boolean,
+  data: object,
+  onChange: InputCallback,
+  onCheck: InputCallback,
+  onUncheck: InputCallback,
+  size: 'sm' | 'md',
 }
 
-Toggle.propTypes = propTypes;
+const Toggle = ({
+  aria = {},
+  checked = false,
+  data = {},
+  onChange = noop,
+  onCheck = noop,
+  onUncheck = noop,
+  size = 'md',
+  ...props,
+}: Props) =>{
+  const ariaProps = buildAriaProps(aria)
+  const dataProps = buildDataProps(data)
+  const handleChange = event => {
+    onChange(event)
+    event.target.checked ?
+      onCheck(event) :
+      onUncheck(event)
+  }
 
-export default Toggle;
+  const css = buildCss({
+    'pb_toggle_kit': true,
+    [size]: true,
+    'on': checked,
+    'off': !checked,
+  })
+
+  return (
+    <div {...ariaProps} {...dataProps} className={css}>
+      <label className="pb_toggle_wrapper">
+        <input
+            {...props}
+            type="checkbox"
+            checked={checked}
+            onChange={handleChange}
+        />
+
+        <div className="pb_toggle_control" />
+      </label>
+    </div>
+  )
+}
+
+export default Toggle
