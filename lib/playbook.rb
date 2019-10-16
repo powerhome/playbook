@@ -7,6 +7,9 @@ require "playbook/engine"
 module Playbook
   ROOT_PATH = Pathname.new(File.join(__dir__, ".."))
 
+  class ConflictingPropsError < StandardError; end
+  class MissingPropError < StandardError; end
+
   # @return [Boolean] indication of whether the request is a web view within Nitro Mobile
   def self.web_page_within_mobile_app?(request)
     request.user_agent.try(:downcase) =~ /^nitro/

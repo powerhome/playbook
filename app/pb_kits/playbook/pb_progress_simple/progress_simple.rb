@@ -5,6 +5,8 @@ module Playbook
     class ProgressSimple
       include Playbook::Props
 
+      class ProgressError < StandardError; end
+
       partial "pb_progress_simple/progress_simple"
 
       prop :align, type: Playbook::Props::Enum,
@@ -16,19 +18,21 @@ module Playbook
            default: false
       prop :percent, type: Playbook::Props::Percentage
       # :width prop should not probably be a string type
-      # Should we be allowing the user to pass value at all?
+      # Should we be allowing the user to pass this value at all?
       # could this possibly be [sm, md, lg]?
       prop :width, default: "100%"
 
       def number_value
+        validate_required_progress_props
+
         if percent
+          validate_percent
+
           percent
         else
-          if value && max
-            (value * 100) / max
-          else
-            0
-          end
+          validate_value_max
+
+          (value * 100) / max
         end
       end
 
@@ -57,7 +61,38 @@ module Playbook
       def muted_class
         muted ? "muted" : nil
       end
+
+      def validate_required_progress_props
+        unless percent || value || max
+          raise(
+            ProgressError,
+            "Pass `percent` or pass both `value` and `max` to this kit."
+          )
+        end
+      end
+
+      def validate_percent
+        if max || value
+          raise(
+            ConflictingPropsError,
+            "Do not use `value` or `max` props when passing `percent`"
+          )
+        end
+      end
+
+      def validate_value_max
+        if !value
+          raise(
+            MissingPropError,
+            "Must pass `value` when passing `max`"
+          )
+        elsif !max
+          raise(
+            MissingPropError,
+            "Must pass `max` when passing `value`"
+          )
+        end
+      end
     end
   end
 end
-
