@@ -17,10 +17,10 @@ module Playbook
       prop :percent, type: Playbook::Props::Percentage # Float type
       prop :width, default: "100%" # Create type that validates only valid css measurements
 
-      def number_value # if % passes => format_percent(num)
+      def number_value
         if percent
           percent
-        else # if not, passes to calc_value_from_max
+        else
           if value && max
             (value * 100) / max
           else
