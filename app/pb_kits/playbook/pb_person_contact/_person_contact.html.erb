@@ -1,8 +1,9 @@
 <%= content_tag(:div,
     id: object.id,
     data: object.data,
-    class: object.classname("pb_person_contact_kit")) do %>
+    class: object.classname) do %>
     <%= object.name %>
+    <% object.person %>
     <% object.contacts.each do |contact| %>
       <%= pb_rails("contact", props: {
         contact_type: contact[:contact_type],
