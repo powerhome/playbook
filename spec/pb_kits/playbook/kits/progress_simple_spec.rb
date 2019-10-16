@@ -9,11 +9,11 @@ RSpec.describe Playbook::PbProgressSimple::ProgressSimple do
   it { is_expected.to define_enum_prop(:align)
     .with_values("left", "center", "right")
     .with_default("left") }
-  it { is_expected.to define_prop(:value) }
-  it { is_expected.to define_prop(:max) }
+  it { is_expected.to define_prop(:value).of_type(Playbook::Props::Number) }
+  it { is_expected.to define_prop(:max).of_type(Playbook::Props::Number) }
   it { is_expected.to define_boolean_prop(:muted)
     .with_default(false) }
-  it { is_expected.to define_prop(:percent) }
+  it { is_expected.to define_prop(:percent).of_type(Playbook::Props::Percentage) }
   it { is_expected.to define_prop(:width) }
 
   describe "#classname" do

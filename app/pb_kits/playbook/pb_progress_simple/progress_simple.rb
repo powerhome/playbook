@@ -14,8 +14,11 @@ module Playbook
       prop :max, type: Playbook::Props::Number
       prop :muted, type: Playbook::Props::Boolean,
            default: false
-      prop :percent, type: Playbook::Props::Percentage # Float type
-      prop :width, default: "100%" # Create type that validates only valid css measurements
+      prop :percent, type: Playbook::Props::Percentage
+      # :width prop should not probably be a string type
+      # Should we be allowing the user to pass value at all?
+      # could this possibly be [sm, md, lg]?
+      prop :width, default: "100%"
 
       def number_value
         if percent
