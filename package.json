@@ -1,6 +1,6 @@
 {
   "name": "playbook-ui",
-  "version": "2.9.3",
+  "version": "2.9.4",
   "description": "Nitro's Design System",
   "main": "./app/pb_kits/playbook/index.js",
   "scripts": {
