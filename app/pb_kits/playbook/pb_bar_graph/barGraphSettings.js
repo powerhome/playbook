@@ -7,12 +7,12 @@ const sizeColumns = function(highchart) {
 
   column.borderRadius = 0;
   column.pointPadding = 0.3;
-  column.groupPadding = 0.2;
+  column.groupPadding = 0;
 
   series.borderWidth = 0;
   series.shadow = false;
-  series.pointPadding = 0.3;
-  series.groupPadding = 0.2;
+  series.pointPadding = 0.25;
+  series.groupPadding = 0;
 };
 
 const styleDataLabels = highchart => {
@@ -20,6 +20,7 @@ const styleDataLabels = highchart => {
 
   series.dataLabels.style.fontFamily = typography.font_family_base;
   series.dataLabels.style.fontSize = typography.text_small;
+  series.dataLabels.style.fontWeight = typography.bold;
 };
 
 const barGraphSettings = function(highchart) {

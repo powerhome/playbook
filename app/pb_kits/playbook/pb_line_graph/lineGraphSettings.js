@@ -17,6 +17,7 @@ const styleDataLabels = highchart => {
 
   series.dataLabels.style.fontFamily = typography.font_family_base;
   series.dataLabels.style.fontSize = typography.text_small;
+  series.dataLabels.style.fontWeight = typography.bold;
 };
 
 const pbLineGraph = highchart => {
