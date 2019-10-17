@@ -12,6 +12,7 @@ require_relative "./props/hash"
 require_relative "./props/number"
 require_relative "./props/number_array"
 require_relative "./props/string"
+require_relative "./props/percentage"
 require_relative "./props/proc"
 
 module Playbook

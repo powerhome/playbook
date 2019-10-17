@@ -2,99 +2,97 @@
 
 module Playbook
   module PbProgressSimple
-    class ProgressSimple < Playbook::PbKit::Base
-      PROPS = %i[configured_align
-                 configured_classname
-                 configured_data
-                 configured_id
-                 configured_max
-                 configured_muted
-                 configured_percent
-                 configured_value
-                 configured_width].freeze
+    class ProgressSimple
+      include Playbook::Props
 
-      def initialize(align: default_configuration,
-                     classname: default_configuration,
-                     data: default_configuration,
-                     id: default_configuration,
-                     max: default_configuration,
-                     muted: default_configuration,
-                     percent: default_configuration,
-                     value: default_configuration,
-                     width: default_configuration)
-        self.configured_align = align
-        self.configured_classname = classname
-        self.configured_data = data
-        self.configured_id = id
-        self.configured_max = max
-        self.configured_muted = muted
-        self.configured_percent = percent
-        self.configured_value = value
-        self.configured_width = width
-      end
+      class ProgressError < StandardError; end
 
-      def width
-        default_value(configured_width, "100%")
-      end
+      partial "pb_progress_simple/progress_simple"
+
+      prop :align, type: Playbook::Props::Enum,
+           values: %w[left center right],
+           default: "left"
+      prop :value, type: Playbook::Props::Number
+      prop :max, type: Playbook::Props::Number
+      prop :muted, type: Playbook::Props::Boolean,
+           default: false
+      prop :percent, type: Playbook::Props::Percentage
+      # :width prop should not probably be a string type
+      # Should we be allowing the user to pass this value at all?
+      # could this possibly be [sm, md, lg]?
+      prop :width, default: "100%"
 
       def number_value
-        if is_set? configured_percent
+        validate_required_progress_props
+
+        if percent
+          validate_percent
+
           percent
         else
-          calc_value_from_max
+          validate_value_max
+
+          (value * 100) / max
         end
       end
 
-      def percent_value
-        format_percent(number_value)
+      def data_values
+        prop(:data).merge(value: number_value)
       end
 
-      def align
-        align_options = %w[left center right]
-        one_of_value(configured_align, align_options, "left")
+      def style
+        "width:#{width};"
       end
 
-      def kit_class
-        kit_options = [
-          "pb_progress_simple_kit",
-          muted,
-          align,
-        ]
-        kit_options.compact.join("_")
+      def value_style
+        "width:#{number_value}%;"
       end
 
-      def to_partial_path
-        "pb_progress_simple/progress_simple"
+      def wrapper_classname
+        "pb_progress_simple_wrapper_#{align}"
+      end
+
+      def classname
+        generate_classname("pb_progress_simple_kit", muted_class, align)
       end
 
     private
 
-      def percent
-        default_value(configured_percent, 0)
+      def muted_class
+        muted ? "muted" : nil
       end
 
-      def format_percent(num)
-        "#{num}%"
-      end
-
-      def calc_value_from_max
-        if is_set?(configured_value) && is_set?(configured_max)
-          (configured_value.to_i * 100) / configured_max.to_i
-        else
-          0
+      def validate_required_progress_props
+        unless percent || value || max
+          raise(
+            ProgressError,
+            "Pass `percent` or pass both `value` and `max` to this kit."
+          )
         end
       end
 
-      def muted
-        true_value(configured_muted, "muted", nil)
+      def validate_percent
+        if max || value
+          raise(
+            ConflictingPropsError,
+            "Do not use `value` or `max` props when passing `percent`"
+          )
+        end
       end
 
-      DEFAULT = Object.new
-      private_constant :DEFAULT
-      def default_configuration
-        DEFAULT
+      def validate_value_max
+        if !value
+          raise(
+            MissingPropError,
+            "Must pass `value` when passing `max`"
+          )
+        elsif !max
+          raise(
+            MissingPropError,
+            "Must pass `max` when passing `value`"
+          )
+        end
       end
-      attr_accessor(*PROPS)
     end
   end
 end
