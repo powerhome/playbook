@@ -2,12 +2,16 @@
     id: object.id,
     data: object.data,
     class: object.classname) do %>
-    <%= object.name %>
-    <% object.person %>
+    <% object.people.each do |person| %>
+      <%= pb_rails("person", props: {
+          first_name: person[:first_name],
+          last_name: person[:last_name],
+      }) %>
+    <% end %>
     <% object.contacts.each do |contact| %>
       <%= pb_rails("contact", props: {
-        contact_type: contact[:contact_type],
-        contact_value: contact[:contact_value],
+          contact_type: contact[:contact_type],
+          contact_value: contact[:contact_value],
       }) %>
     <% end %>
 <% end %>

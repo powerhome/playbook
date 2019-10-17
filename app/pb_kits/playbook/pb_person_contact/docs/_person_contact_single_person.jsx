@@ -1,15 +1,11 @@
 import React from "react"
 import {PersonContact} from "../../"
 
-function PersonContactDefault() {
+function PersonContactSinglePerson() {
   return (
     <div>
       <PersonContact
         people={[
-          {
-            firstName: "Pauline",
-            lastName: "Smith",
-          },
           {
             firstName: "Harvey",
             lastName: "Walters"
@@ -24,10 +20,6 @@ function PersonContactDefault() {
             contactValue: "5555555555",
           },
           {
-            contactType: "email",
-            contactValue: "email@example.com",
-          },
-          {
             contactType: "work",
             contactValue: "3245627482",
           }
@@ -37,4 +29,4 @@ function PersonContactDefault() {
   )
 }
 
-export default PersonContactDefault;
+export default PersonContactSinglePerson;

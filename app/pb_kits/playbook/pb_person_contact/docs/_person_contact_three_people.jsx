@@ -1,7 +1,7 @@
 import React from "react"
 import {PersonContact} from "../../"
 
-function PersonContactDefault() {
+function PersonContactThreePeople() {
   return (
     <div>
       <PersonContact
@@ -13,20 +13,13 @@ function PersonContactDefault() {
           {
             firstName: "Harvey",
             lastName: "Walters"
+          },
+          {
+            firstName: "Bart",
+            lastName: "Simpson"
           }
         ]}
         contacts={[
-          {
-            contactType: "email",
-            contactValue: "email@example.com"
-          },
-          {
-            contactValue: "5555555555",
-          },
-          {
-            contactType: "email",
-            contactValue: "email@example.com",
-          },
           {
             contactType: "work",
             contactValue: "3245627482",
@@ -37,4 +30,4 @@ function PersonContactDefault() {
   )
 }
 
-export default PersonContactDefault;
+export default PersonContactThreePeople;
