@@ -12,8 +12,7 @@ import {
 type PersonContactProps = {
   className?: String | Array<String>,
   dark?: Boolean,
-  firstName: String,
-  lastName: String,
+  people?: Array<{firstName: String, lastName: String}>,
   contacts?: Array<{contactType: String, contactValue: String}>,
 }
 
@@ -28,19 +27,30 @@ const contactsArray = ({contacts=[]}: PersonContactProps) => {
   })
 }
 
+const peopleArray = ({people=[]}: PersonContactProps) => {
+  return people.map((personObject, index) => {
+    return (
+      <Person
+        firstName={personObject.firstName}
+        lastName={personObject.lastName}
+      />
+    );
+  })
+}
+
 const PersonContact = ({
   className,
   dark=false,
-  firstName,
-  lastName,
+  people,
   contacts,
 }: PersonContactProps) => {
 
   const contactKits = contactsArray({contacts})
+  const personKits = peopleArray({people})
 
   return (
     <div className={classnames('pb_person_contact_kit', className)}>
-      <Person firstName={firstName} lastName={lastName} />
+      {personKits}
       {contactKits}
     </div>
   )
