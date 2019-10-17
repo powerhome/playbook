@@ -19,7 +19,7 @@ RSpec.describe Playbook::Props::NumberArray do
       expect(Playbook::Props::NumberArray.new.validate(nil)).to eq false
     end
 
-    it "returns false given anything an array that does not contain integers", :aggregate_failures do
+    it "returns false given an array that does not contain integers", :aggregate_failures do
       expect(Playbook::Props::NumberArray.new.validate([true])).to eq false
       expect(Playbook::Props::NumberArray.new.validate([:false])).to eq false
       expect(Playbook::Props::NumberArray.new.validate([{}])).to eq false
@@ -27,7 +27,7 @@ RSpec.describe Playbook::Props::NumberArray do
       expect(Playbook::Props::NumberArray.new.validate([nil])).to eq false
     end
 
-    it "returns false given anything an array that doesn't only contain integers", :aggregate_failures do
+    it "returns false given an array that doesn't only contain integers", :aggregate_failures do
       expect(Playbook::Props::NumberArray.new.validate([7, true])).to eq false
       expect(Playbook::Props::NumberArray.new.validate([8, :false])).to eq false
       expect(Playbook::Props::NumberArray.new.validate([{}, 9])).to eq false
