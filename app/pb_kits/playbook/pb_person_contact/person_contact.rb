@@ -7,8 +7,8 @@ module Playbook
 
       partial "pb_person_contact/person_contact"
 
-      prop :contacts, type: Playbook::Props::HashArray, required: true
-      prop :people, type: Playbook::Props::HashArray, required: true
+      prop :contacts, type: Playbook::Props::HashArray, default: []
+      prop :people, type: Playbook::Props::HashArray, default: []
 
       def classname
         generate_classname("pb_person_contact_kit")

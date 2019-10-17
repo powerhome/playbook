@@ -5,7 +5,6 @@ module Playbook
     class HashArray < Playbook::Props::Base
       def validate(value)
         return false unless value.is_a?(::Array)
-        return false if value.empty?
 
         value.all?(::Hash)
       end

@@ -6,10 +6,7 @@ RSpec.describe Playbook::Props::HashArray do
       expect(Playbook::Props::HashArray.new.validate([{}])).to eq true
       expect(Playbook::Props::HashArray.new.validate([{a: 1}])).to eq true
       expect(Playbook::Props::HashArray.new.validate([{"asdf": nil, foo: false}])).to eq true
-    end
-
-    it "returns false given an empty array" do
-      expect(Playbook::Props::HashArray.new.validate([])).to eq false
+      expect(Playbook::Props::HashArray.new.validate([])).to eq true
     end
 
     it "returns false given anything something besides an array", :aggregate_failures do
