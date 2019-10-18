@@ -2,28 +2,13 @@
 
 module Playbook
   module PbPerson
-    class Person < Playbook::PbKit::Base
-      PROPS = %i[
-        configured_classname
-        configured_data
-        configured_id
-        configured_first_name
-        configured_last_name
-      ].freeze
+    class Person
+      include Playbook::Props
 
-      def initialize(
-          classname: default_configuration,
-          data: default_configuration,
-          id: default_configuration,
-          first_name: default_configuration,
-          last_name: default_configuration
-        )
-        self.configured_classname = classname
-        self.configured_data = data
-        self.configured_id = id
-        self.configured_first_name = first_name
-        self.configured_last_name = last_name
-      end
+      partial "pb_person/person"
+
+      prop :first_name
+      prop :last_name
 
       def first_name
         pb_first_name = Playbook::PbBody::Body.new(tag: "span", classname: "pb_person_first") do
@@ -39,18 +24,9 @@ module Playbook
         end
       end
 
-      def to_partial_path
-        "pb_person/person"
+      def classname
+        generate_classname("pb_person_kit", first_name, last_name)
       end
-
-    private
-
-      DEFAULT = Object.new
-      private_constant :DEFAULT
-      def default_configuration
-        DEFAULT
-      end
-      attr_accessor(*PROPS)
     end
   end
 end
