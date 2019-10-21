@@ -21,7 +21,7 @@ module Playbook
       prop :text
 
       def classname
-        generate_classname("pb_caption_kit", color_class, dark_class, status_class)
+        generate_classname("pb_body_kit", color_class, dark_class, status_class)
       end
 
       def color_class
