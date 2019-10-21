@@ -11,7 +11,7 @@ module Playbook
       prop :last_name
 
       def classname
-        generate_classname("pb_person_kit", first_name, last_name)
+        generate_classname("pb_person_kit")
       end
     end
   end
