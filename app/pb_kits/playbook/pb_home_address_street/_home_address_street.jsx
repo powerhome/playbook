@@ -47,7 +47,7 @@ const HomeAddressStreet = ({
       {address} {`\u00b7`} {houseStyle}
     </Title>
     <Body color="light">
-      {city}, {state}
+      {city}, {state} {zipcode}
     </Body>
     <Body
         className="home-hashtag"
@@ -59,7 +59,7 @@ const HomeAddressStreet = ({
         color="light"
         tag="span"
     >
-      <small>{state}</small>
+      <small>{territory}</small>
     </Body>
   </div>
 )
