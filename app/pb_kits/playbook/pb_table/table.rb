@@ -17,7 +17,7 @@ module Playbook
       prop :disable_hover, type: Playbook::Props::Boolean,
                            default: false
       prop :container, type: Playbook::Props::Boolean,
-                       default: false
+                       default: true
       prop :text
 
       def classname
