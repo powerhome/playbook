@@ -14,14 +14,15 @@ module Playbook
       prop :house_style
       prop :state
       prop :zipcode
+      prop :territory
       prop :dark, type: Playbook::Props::Boolean, default: false
 
       def classname
         generate_classname("pb_home_address_street_kit", dark_class)
       end
 
-      def city_state
-        "#{city}, #{state}"
+      def city_state_zip
+        "#{city}, #{state} #{zipcode}"
       end
 
       def address_house_style

@@ -17,7 +17,7 @@
 
   <%= pb_rails "body", props: {
     color: "light",
-    text: object.city_state,
+    text: object.city_state_zip,
   } %>
 
   <%= pb_rails "body", props: { classname: "home-hashtag", tag: "span" } do %>
@@ -25,7 +25,7 @@
   <% end %>
 
   <%= pb_rails "body", props: { color: "light", tag: "span" } do %>
-    <small><%= object.state %></small>
+    <small><%= object.territory %></small>
   <% end %>
 
 <% end %>

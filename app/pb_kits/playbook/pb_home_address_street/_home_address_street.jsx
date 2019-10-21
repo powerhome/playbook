@@ -18,6 +18,7 @@ type HomeAddressStreetProps = {
   houseStyle: String,
   state: String,
   zipcode: String,
+  territory: String,
 }
 
 const classes = (className, dark) => (
@@ -36,6 +37,7 @@ const HomeAddressStreet = ({
   houseStyle,
   state,
   zipcode,
+  territory,
 }: HomeAddressStreetProps) => (
   <div className={classes(className, dark)}>
     <Title

@@ -5,12 +5,13 @@ function HomeAddressStreetDark() {
   return (
     <HomeAddressStreet
         address="70 Prospect Ave"
-        city="North Arlington"
+        city="West Chester"
         dark
         homeId={8250263}
         houseStyle="Colonial"
-        state="NJ"
-        zipcode="07031"
+        state="PA"
+        zipcode="19382"
+        territory= "PHL"
     />
   )
 }
