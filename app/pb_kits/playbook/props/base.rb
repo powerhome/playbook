@@ -13,7 +13,7 @@ module Playbook
       end
 
       def value(value)
-        value || @default
+        value.nil? ? @default : value
       end
 
       def validate!(input_value)
