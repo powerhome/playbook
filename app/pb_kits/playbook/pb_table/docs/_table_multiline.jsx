@@ -3,7 +3,7 @@ import {Table} from "../../"
 
 function TableMultiline() {
   return (
-    <Table size="sm">
+    <Table size="sm" container={false}>
       <thead>
         <tr>
           <th>{`Column 1`}</th>

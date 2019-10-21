@@ -16,7 +16,7 @@ const propTypes = {
 };
 
 const defaultProps = {
-  container: false,
+  container: true,
   dark: false,
   disable_hover: false,
   single_line: false,

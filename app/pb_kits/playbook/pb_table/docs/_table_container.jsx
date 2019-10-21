@@ -3,7 +3,7 @@ import {Table} from "../../"
 
 function TableContainer() {
   return (
-    <Table container
+    <Table
         size="md"
     >
       <thead>

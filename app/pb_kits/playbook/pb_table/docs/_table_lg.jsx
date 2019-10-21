@@ -3,7 +3,7 @@ import {Table} from "../../"
 
 function TableLg() {
   return (
-    <Table size="lg">
+    <Table size="lg" container={false}>
       <thead>
         <tr>
           <th>{`Column 1`}</th>
