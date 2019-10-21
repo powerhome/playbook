@@ -21,7 +21,19 @@ module Playbook
       prop :text
 
       def classname
-        generate_classname("pb_caption_kit")
+        generate_classname("pb_caption_kit", color_class, dark_class, status_class)
+      end
+
+      def color_class
+        color != "default" ? color : nil
+      end
+
+      def dark_class
+        dark ? "dark" : nil
+      end
+
+      def status_class
+        status != "neutral" ? status : nil
       end
 
       def yield_children
