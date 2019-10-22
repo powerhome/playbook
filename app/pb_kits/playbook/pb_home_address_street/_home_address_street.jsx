@@ -9,8 +9,18 @@ import {
   Title,
 } from '../'
 
+
+  const selector = (houseStyle) =>
+    { if (houseStyle == "") {
+      return ""
+    } else {
+      "\u00b7"
+    }
+  }
+
 type HomeAddressStreetProps = {
   address: String,
+  address_cont: String,
   city: String,
   className?: String,
   dark?: Boolean,
@@ -28,8 +38,10 @@ const classes = (className, dark) => (
   })
 )
 
+
 const HomeAddressStreet = ({
   address,
+  address_cont,
   city,
   className,
   dark=false,
@@ -44,7 +56,13 @@ const HomeAddressStreet = ({
         className="pb_home_address_street_address"
         size={4}
     >
-      {address} {`\u00b7`} {houseStyle}
+      {address} {selector} {houseStyle}
+    </Title>
+    <Title
+        className="pb_home_address_street_address"
+        size={4}
+    >
+      {address_cont}
     </Title>
     <Body color="light">
       {city}, {state} {zipcode}
