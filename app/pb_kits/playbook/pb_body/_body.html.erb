@@ -2,5 +2,5 @@
   id: object.id,
   data: object.data,
   class: object.classname) do %>
-  <%= object.yield_children %>
+  <%= !object.children.nil? ? capture(&object.children) : object.text %>
 <% end %>

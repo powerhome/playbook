@@ -24,6 +24,8 @@ module Playbook
         generate_classname("pb_body_kit", color_class, dark_class, status_class)
       end
 
+    private
+
       def color_class
         color != "default" ? color : nil
       end
@@ -34,10 +36,6 @@ module Playbook
 
       def status_class
         status != "neutral" ? status : nil
-      end
-
-      def yield_children
-        !children.nil? ? capture(&children) : text
       end
     end
   end
