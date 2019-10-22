@@ -9,8 +9,15 @@ import {
   Title,
 } from '../'
 
+const dot = (houseStyle) =>
+  { if (houseStyle !== undefined) {
+    return "\u00b7"
+  }
+}
+
 type HomeAddressStreetProps = {
   address: String,
+  address_cont: String,
   city: String,
   className?: String,
   dark?: Boolean,
@@ -18,6 +25,7 @@ type HomeAddressStreetProps = {
   houseStyle: String,
   state: String,
   zipcode: String,
+  territory: String,
 }
 
 const classes = (className, dark) => (
@@ -27,8 +35,10 @@ const classes = (className, dark) => (
   })
 )
 
+
 const HomeAddressStreet = ({
   address,
+  address_cont,
   city,
   className,
   dark=false,
@@ -36,16 +46,23 @@ const HomeAddressStreet = ({
   houseStyle,
   state,
   zipcode,
+  territory,
 }: HomeAddressStreetProps) => (
   <div className={classes(className, dark)}>
     <Title
         className="pb_home_address_street_address"
         size={4}
     >
-      {address} {`\u00b7`} {houseStyle}
+      {address} {dot(houseStyle)} {houseStyle}
+    </Title>
+    <Title
+        className="pb_home_address_street_address"
+        size={4}
+    >
+      {address_cont}
     </Title>
     <Body color="light">
-      {city}, {state}
+      {city}, {state} {zipcode}
     </Body>
     <Body
         className="home-hashtag"
@@ -57,7 +74,7 @@ const HomeAddressStreet = ({
         color="light"
         tag="span"
     >
-      <small>{state}</small>
+      <small>{territory}</small>
     </Body>
   </div>
 )

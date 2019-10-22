@@ -1,13 +1,11 @@
 import React from "react"
 import {HomeAddressStreet} from "../../"
 
-function HomeAddressStreetDark() {
+function HomeAddressStreetModified() {
   return (
     <HomeAddressStreet
         address="70 Prospect Ave"
-        address_cont="Apt M18"
         city="West Chester"
-        dark
         homeId={8250263}
         state="PA"
         zipcode="19382"
@@ -16,4 +14,4 @@ function HomeAddressStreetDark() {
   )
 }
 
-export default HomeAddressStreetDark;
+export default HomeAddressStreetModified;
