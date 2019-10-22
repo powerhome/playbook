@@ -5,8 +5,8 @@ function CheckboxDefault() {
   return (
     <div>
       <Checkbox
-          label='Checkbox label'
           name='default name'
+          text='Checkbox label'
           value='default value'
       />
     </div>

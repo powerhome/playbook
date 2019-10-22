@@ -9,7 +9,6 @@ module Playbook
 
       prop :dark, type: Playbook::Props::Boolean, default: false
       prop :checked, type: Playbook::Props::Boolean, default: false
-      prop :icon, type: Playbook::Props::Boolean, default: false
       prop :text
       prop :value
       prop :name

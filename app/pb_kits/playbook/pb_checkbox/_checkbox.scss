@@ -2,16 +2,15 @@
 $transition: $transition_cubic;
 
 [class^=pb_checkbox_kit] {
+  display: inline-flex;
   .pb_checkbox_label {
-    display: block;
-    position: relative;
-    padding-left: $space_lg;
+    padding-left: $space_xs;
     cursor: pointer;
     font-size: $text_lt_default;
     user-select: none;
   }
   .pb_checkbox_checkmark {
-    position: absolute;
+    position: relative;
     height: 22px;
     width: 22px;
     border: solid $border_light 2px;
@@ -33,7 +32,7 @@ $transition: $transition_cubic;
   }
 
   input {
-    position: absolute;
+    position: relative;
     opacity: 0;
     cursor: pointer;
     height: 0;
@@ -44,7 +43,7 @@ $transition: $transition_cubic;
       border-color: $primary_action;
     }
     &:checked ~ .pb_checkbox_checkmark {
-      display: block;
+      display: inline-block;
       .check_icon{
         opacity: $opacity_10;
       }
