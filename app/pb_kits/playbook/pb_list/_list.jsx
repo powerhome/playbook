@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 const propTypes = {
   dark:PropTypes.bool,
   borderless:PropTypes.bool,
-  size:PropTypes.oneOf(["", "large"]),
+  size:PropTypes.oneOf(["","small", "large"]),
   ordered:PropTypes.bool,
   layout: PropTypes.oneOf(["", "left", "right"]),
   xpadding:PropTypes.bool,

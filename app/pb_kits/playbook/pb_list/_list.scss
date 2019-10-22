@@ -9,6 +9,10 @@
     @include pb_list_dark;
   }
 
+  &[class*=_small] li {
+    @include pb_list_small;
+  }
+
   &[class*=_large] li {
     @include pb_list_large;
   }

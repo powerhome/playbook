@@ -35,7 +35,16 @@ module Playbook
         ordered ? "ol" : "ul"
       end
 
-    private
+      def size
+        case configured_size
+        when default_configuration
+          ""
+        when "large"
+          "_large"
+        when "small"
+          "_small"
+        end
+      end
 
       def borderless_class
         borderless ? "borderless" : nil
