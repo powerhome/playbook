@@ -2,8 +2,6 @@
     id: object.id,
     data: object.data,
     class: object.classname) do %>
-      <%= pb_rails("body", props: { tag: "span", classname: "pb_person_first" }) do %>
-        <%= object.first_name %>
-      <% end %>
+      <%= pb_rails("body", props: { tag: "span", classname: "pb_person_first", children: -> { object.first_name } }) %>
       <%= pb_rails("title", props: { text: object.last_name, size: 4 }) if object.last_name %>
 <% end %>
