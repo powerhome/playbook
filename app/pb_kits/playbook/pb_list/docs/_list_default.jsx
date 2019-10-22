@@ -7,7 +7,11 @@ import {
 
 function ListDefault() {
   return (
-    <h1>{`Coming Soon...`}</h1>
+    <List>
+      <ListItem />
+      <ListItem />
+      <ListItem />
+    </List>
   )
 }
 

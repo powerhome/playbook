@@ -68,6 +68,8 @@ module Playbook
           ""
         when "large"
           "_large"
+        when "small"
+          "_small"
         end
       end
 
