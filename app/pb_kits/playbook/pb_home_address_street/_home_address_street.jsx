@@ -9,14 +9,11 @@ import {
   Title,
 } from '../'
 
-
-  const selector = (houseStyle) =>
-    { if (houseStyle == "") {
-      return ""
-    } else {
-      "\u00b7"
-    }
+const dot = (houseStyle) =>
+  { if (houseStyle !== undefined) {
+    return "\u00b7"
   }
+}
 
 type HomeAddressStreetProps = {
   address: String,
@@ -56,7 +53,7 @@ const HomeAddressStreet = ({
         className="pb_home_address_street_address"
         size={4}
     >
-      {address} {selector} {houseStyle}
+      {address} {dot(houseStyle)} {houseStyle}
     </Title>
     <Title
         className="pb_home_address_street_address"

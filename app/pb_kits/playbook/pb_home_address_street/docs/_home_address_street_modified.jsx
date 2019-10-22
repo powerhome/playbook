@@ -1,7 +1,7 @@
 import React from "react"
 import {HomeAddressStreet} from "../../"
 
-function HomeAddressStreetDefault() {
+function HomeAddressStreetModified() {
   return (
     <HomeAddressStreet
         address="70 Prospect Ave"
@@ -14,4 +14,4 @@ function HomeAddressStreetDefault() {
   )
 }
 
-export default HomeAddressStreetDefault;
+export default HomeAddressStreetModified;
