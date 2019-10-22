@@ -7,10 +7,10 @@ import {
 
 function ListDefault() {
   return (
-    <List>
-      <ListItem />
-      <ListItem />
-      <ListItem />
+    <List layout={"left"} size={"small"} ordered={true} >
+      <ListItem>Blah</ListItem>
+      <ListItem>Cool</ListItem>
+      <ListItem>Awesome</ListItem>
     </List>
   )
 }
