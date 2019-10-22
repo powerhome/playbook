@@ -2,94 +2,48 @@
 
 module Playbook
   module PbTable
-    class Table < Playbook::PbKit::Base
-      PROPS = %i[configured_aria
-                 configured_classname
-                 configured_container
-                 configured_dark
-                 configured_data
-                 configured_disable_hover
-                 configured_id
-                 configured_single_line
-                 configured_size
-                 configured_text
-                 block].freeze
+    class Table
+      include Playbook::Props
 
-      def initialize(aria: default_configuration,
-                     classname: default_configuration,
-                     container: default_configuration,
-                     dark: default_configuration,
-                     data: default_configuration,
-                     disable_hover: default_configuration,
-                     id: default_configuration,
-                     single_line: default_configuration,
-                     size: default_configuration,
-                     &block)
-        self.configured_aria = aria
-        self.configured_classname = classname
-        self.configured_container = container
-        self.configured_dark = dark
-        self.configured_data = data
-        self.configured_disable_hover = disable_hover
-        self.configured_id = id
-        self.configured_single_line = single_line
-        self.configured_size = size
-        self.block = block_given? ? block : nil
-      end
+      partial "pb_table/table"
 
-      def single_line_class
-        true_value(configured_single_line, "single-line", nil)
-      end
+      prop :size, type: Playbook::Props::Enum,
+                  values: %w[sm md lg],
+                  default: "md"
+      prop :single_line, type: Playbook::Props::Boolean,
+                         default: false
+      prop :dark, type: Playbook::Props::Boolean,
+                  default: false
+      prop :disable_hover, type: Playbook::Props::Boolean,
+                           default: false
+      prop :container, type: Playbook::Props::Boolean,
+                       default: true
+      prop :text
 
-      def size
-        size_options = %w[sm md lg]
-        one_of_value(configured_size, size_options, default_configuration)
-      end
-
-      def size_class
-        adjusted_value(configured_size, "table-#{size}", "table-md")
-      end
-
-      def dark_class
-        true_value(configured_dark, "table-dark", nil)
-      end
-
-      def disable_hover_class
-        true_value(configured_disable_hover, "no-hover", nil)
-      end
-
-      def container_class
-        true_value(configured_container, "table-card", nil)
-      end
-
-      def kit_class
-        table_options = [
-          "pb_table",
-          size_class,
-          single_line_class,
-          dark_class,
-          disable_hover_class,
-          container_class,
-        ]
-        table_options.reject(&:nil?).join(" ")
-      end
-
-      def yield(context:)
-        context.capture(&block)
-      end
-
-      def to_partial_path
-        "pb_table/table"
+      def classname
+        generate_classname(
+          "pb_table", "table-#{size}", single_line_class, dark_class,
+          disable_hover_class, container_class, separator: " "
+        )
       end
 
     private
 
-      DEFAULT = Object.new
-      private_constant :DEFAULT
-      def default_configuration
-        DEFAULT
+      def dark_class
+        dark ? "dark" : nil
       end
-      attr_accessor(*PROPS)
+
+      def single_line_class
+        single_line ? "single-line" : nil
+      end
+
+      def disable_hover_class
+        disable_hover ? "no-hover" : nil
+      end
+
+      def container_class
+        container ? "table-card" : nil
+      end
     end
   end
 end

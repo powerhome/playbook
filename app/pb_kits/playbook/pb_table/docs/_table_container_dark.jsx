@@ -3,7 +3,7 @@ import {Table} from "../../"
 
 function TableContainerDark() {
   return (
-    <Table container
+    <Table
         dark
         size="md"
     >

@@ -1,7 +1,9 @@
 <%= content_tag(:div,
     id: object.id,
     data: object.data,
-    class: object.classname("pb_person_kit")) do %>
-      <%= object.first_name %>
-      <%= object.last_name %>
+    class: object.classname) do %>
+      <%= pb_rails("body", props: { tag: "span", classname: "pb_person_first" }) do %>
+        <%= object.first_name %>
+      <% end %>
+      <%= pb_rails("title", props: { text: object.last_name, size: 4 }) if object.last_name %>
 <% end %>
