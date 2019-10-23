@@ -3,7 +3,7 @@
   data: object.data,
   class: object.classname) do %>
     <%= pb_rails("body", props: { color: "light" }) do %>
-      object.value %>
+      <%= pb_rails("icon", props: { icon: object.icon, fixed_width: true }) %>
+      <%= object.text %>
     <% end %>
-    <%= pb_rails("icon", props: { icon: object.icon, fixed_width: true }) %>
 <% end %>
