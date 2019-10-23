@@ -1,41 +1,45 @@
 /* @flow */
 
 import React from 'react'
+import Body from '../pb_body/_body.jsx'
+import Icon from '../pb_icon/_icon.jsx'
 
 type CheckboxProps = {
-  dark?: Boolean,
-  tag: String,
-  label: String,
-  name:String,
-  value:String,
   checked?: Boolean,
+  dark?: Boolean,
+  name:String,
+  text: String,
+  value:String,
+
 }
 
 const Checkbox = ({
-  dark=false,
-  tag='label',
-  label,
-  name='',
-  value='',
   checked=false,
-}: CheckboxProps) => {
+  dark=false,
+  name='',
+  text='',
+  value='',
 
-  const Tag = `${tag}`
+
+}: CheckboxProps) => {
+  
+  const bodyClassName = {
+    'pb_checkbox_label': true,
+    '_dark': dark,
+  }
 
   return (
-    <Tag
+    <label
         className={
         `pb_checkbox_kit` +
         (dark === true ? '_dark' : '')
       }
     > <input type="checkbox" name={name} value={value} defaultChecked={checked}/>
   <span className="pb_checkbox_checkmark">
-      <i className="far fa-check check_icon"></i>
+      <Icon className="check_icon" icon="check" fixedWidth />
     </span>
-    <span className="pb_checkbox_label">
-      {label}
-    </span>
-    </Tag>
+    <Body className={bodyClassName}>{text}</Body>
+    </label>
   )
 }
 

@@ -20,7 +20,7 @@ module Playbook
   module Props
     extend ActiveSupport::Concern
 
-    def initialize(prop_values, &block)
+    def initialize(prop_values = {}, &block)
       @values = { children: block }.merge(prop_values)
       self.class.props.each do |key, definition|
         definition.validate! @values[key]

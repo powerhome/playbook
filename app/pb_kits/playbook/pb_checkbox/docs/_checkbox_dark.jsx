@@ -6,8 +6,8 @@ function CheckboxDark() {
     <div>
       <Checkbox
           dark
-          label='Checkbox label'
           name='default name'
+          text='Checkbox label'
           value='default value'
       />
     </div>

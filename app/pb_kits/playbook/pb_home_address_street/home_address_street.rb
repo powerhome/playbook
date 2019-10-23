@@ -8,7 +8,7 @@ module Playbook
       partial "pb_home_address_street/home_address_street"
 
       prop :address
-      prop :address2
+      prop :address_cont
       prop :city
       prop :home_id, type: Playbook::Props::Number
       prop :house_style
@@ -30,7 +30,7 @@ module Playbook
       end
 
       def address_house_style2
-        address2
+        address_cont
       end
 
       def separator

@@ -2,101 +2,41 @@
 
 module Playbook
   module PbBody
-    class Body < Playbook::PbKit::Base
-      PROPS = %i[configured_aria
-                 configured_classname
-                 configured_color
-                 configured_dark
-                 configured_data
-                 configured_id
-                 configured_tag
-                 configured_text
-                 configured_status
-                 block].freeze
+    class Body
+      include Playbook::Props
 
-      def initialize(aria: default_configuration,
-                     classname: default_configuration,
-                     color: default_configuration,
-                     dark: default_configuration,
-                     data: default_configuration,
-                     id: default_configuration,
-                     status: default_configuration,
-                     tag: default_configuration,
-                     text: default_configuration,
-                     &block)
+      partial "pb_body/body"
 
-        self.configured_aria = aria
-        self.configured_classname = classname
-        self.configured_color = color
-        self.configured_dark = dark
-        self.configured_data = data
-        self.configured_id = id
-        self.configured_status = status
-        self.configured_tag = tag
-        self.configured_text = text
-        self.block = block_given? ? block : nil
+      prop :color, type: Playbook::Props::Enum,
+                   values: %w[default light lighter dark light_dark lighter_dark],
+                   default: "default"
+      prop :dark, type: Playbook::Props::Boolean,
+                  default: false
+      prop :status, type: Playbook::Props::Enum,
+                    values: %w[neutral negative positive],
+                    default: "neutral"
+      prop :tag, type: Playbook::Props::Enum,
+                 values: %w[h1 h2 h3 h4 h5 h6 p span div],
+                 default: "div"
+      prop :text
+
+      def classname
+        generate_classname("pb_body_kit", color_class, dark_class, status_class)
       end
 
-      def color
-        color_options = %w[default light lighter dark light_dark lighter_dark]
-        one_of_value(configured_color, color_options, "default")
-      end
+    private
 
       def color_class
         color != "default" ? color : nil
       end
 
-      def dark
-        is_true? configured_dark
-      end
-
       def dark_class
-        true_value(configured_dark, "dark", nil)
-      end
-
-      def status
-        status_options = %w[neutral negative positive]
-        one_of_value(configured_status, status_options, "neutral")
+        dark ? "dark" : nil
       end
 
       def status_class
         status != "neutral" ? status : nil
       end
-
-      def tag
-        default_value(configured_tag, "div")
-      end
-
-      def text
-        default_value(configured_text, "Body text")
-      end
-
-      def yield(context:)
-        !block.nil? ? context.capture(&block) : text
-      end
-
-      def kit_class
-        body_options = [
-          "pb_body_kit",
-          color_class,
-          dark_class,
-          status_class,
-        ]
-        body_options.compact.join("_")
-      end
-
-      def to_partial_path
-        "pb_body/body"
-      end
-
-    private
-
-      DEFAULT = Object.new
-      private_constant :DEFAULT
-      def default_configuration
-        DEFAULT
-      end
-      attr_accessor(*PROPS)
     end
   end
 end
