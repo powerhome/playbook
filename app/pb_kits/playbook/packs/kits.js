@@ -6,6 +6,7 @@ import "../kits/pb_button.js";
 import "../kits/pb_caption.js";
 import "../kits/pb_card.js";
 import "../kits/pb_checkbox.js";
+import "../kits/pb_circle_icon_button.js";
 import "../kits/pb_contact.js";
 import "../kits/pb_currency.js";
 import "../kits/pb_dashboard_value.js";
@@ -48,3 +49,4 @@ import "../kits/pb_toggle.js";
 import "../kits/pb_user.js";
 import "../kits/pb_user_badge.js";
 import "../kits/pb_vertical_nav.js";
+

@@ -7,6 +7,7 @@ import Button from "./pb_button/_button.jsx"
 import Caption from "./pb_caption/_caption.jsx"
 import Card from "./pb_card/_card.jsx"
 import Checkbox from "./pb_checkbox/_checkbox.jsx"
+import CircleIconButton from "./pb_circle_icon_button/_circle_icon_button.jsx"
 import Contact from "./pb_contact/_contact.jsx"
 import Currency from "./pb_currency/_currency.jsx"
 import DashboardValue from "./pb_dashboard_value/_dashboard_value.jsx"
@@ -67,6 +68,7 @@ export {
   Caption,
   Card,
   Checkbox,
+  CircleIconButton,
   Contact,
   Currency,
   DashboardValue,
