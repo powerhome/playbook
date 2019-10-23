@@ -12,9 +12,19 @@ module Playbook
       prop :orientation, type: Playbook::Props::Enum,
                          values: %w[vertical horizontal],
                          default: "vertical"
-      prop :point_start
+      prop :point_start, default: 0
       prop :subtitle
       prop :title
+      prop :x_min, default: "null"
+      prop :x_max, default: "null"
+      prop :x_tick_interval, default: "undefined"
+      prop :x_categories, type: Playbook::Props::Array,
+                          default: []
+      prop :y_min, default: "null"
+      prop :y_max, default: "null"
+      prop :y_tick_interval, default: "undefined"
+      prop :y_categories, type: Playbook::Props::Array,
+                          default: []
 
       def chart_type
         orientation == "horizontal" ? "bar" : "column"
@@ -24,8 +34,16 @@ module Playbook
         generate_classname("pb_bar_graph")
       end
 
-      def sanitized_chart_data
-        chart_data.to_json.html_safe
+      def sanitized_data(data)
+        data.to_json.html_safe
+      end
+
+      def sanitized_x_categories
+        x_categories.to_json.html_safe
+      end
+
+      def sanitized_y_categories
+        y_categories.to_json.html_safe
       end
     end
   end

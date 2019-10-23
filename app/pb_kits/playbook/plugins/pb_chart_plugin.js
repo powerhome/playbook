@@ -42,10 +42,20 @@ class pbChart {
       subtitle: {
         text: this.defaults.subtitle
       },
+      xAxis: {
+        tickInterval: this.defaults.xTickInterval,
+        min: this.defaults.xMin,
+        max: this.defaults.xMax,
+        categories: this.defaults.xCategories
+      }, 
       yAxis: {
         title: {
           text: this.defaults.axisTitle
-        }
+        },
+        tickInterval: this.defaults.yTickInterval,
+        min: this.defaults.yMin,
+        max: this.defaults.yMax,
+        categories: this.defaults.yCategories
       },
       plotOptions: {
         series: {

@@ -12,16 +12,18 @@
     data: [34227]
 }, {
     name: 'Other',
-    data: [18111]
+    data: [18111, 10000, 1999999]
 }] %>
+
+<% categories = ["apple", "bananas", "oranges"] %>
 
 <%= pb_rails("bar_graph", props: {
     axis_title: 'Number of Employees',
     chart_data: data,
     id: "bar-test",
-    point_start: "2012",
     subtitle: 'Source: thesolarfoundation.com',
-    title: 'Solar Employment Growth by Sector, 2010-2016'
+    title: 'Solar Employment Growth by Sector, 2010-2016',
+    x_categories: categories
 }) %>
 
 
