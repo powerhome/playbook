@@ -39,7 +39,7 @@
       @include pb_button_link_dark;
     }
     &[class*=_disabled]  {
-      @include pb_button_disabled;
+      @include pb_button_disabled_dark;
     }
   }
   
