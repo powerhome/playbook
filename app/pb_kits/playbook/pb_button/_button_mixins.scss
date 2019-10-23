@@ -82,7 +82,7 @@ $pb_button_border_width: 1px;
 
 // Link =========================
 @mixin pb_button_link {
-  @include pb_button($transparent, $secondary_action);
+  @include pb_button($transparent, $primary_action);
 
   &:hover {
     @include pb_button_hover($transparent);
@@ -113,4 +113,38 @@ $pb_button_border_width: 1px;
       visibility: hidden;
     }
   }
+}
+
+// Dark Primary =================
+@mixin pb_button_primary_dark{
+  @include pb_button($secondary_action);
+
+  &:hover {
+    @include pb_button_hover($bg: darken($secondary_action, $pb_button_hover_darken));
+  }
+}
+
+// Dark Secondary ==============
+@mixin pb_button_secondary_dark{
+  @include pb_button($transparent, $secondary_action, $secondary_action);
+
+  &:hover {
+    @include pb_button_hover(rgba($secondary_action, $opacity_2));
+  }
+}
+
+// Dark Link =============
+@mixin pb_button_link_dark {
+  @include pb_button($transparent, $secondary_action);
+
+  &:hover {
+    @include pb_button_hover($transparent);
+  }
+}
+
+// Dark Disabled ====================
+@mixin pb_button_disabled_dark {
+  $disabled_color: rgba($charcoal, $opacity_5);
+  @include pb_button(rgba($slate, $opacity_4), $disabled_color);
+  pointer-events: none;
 }

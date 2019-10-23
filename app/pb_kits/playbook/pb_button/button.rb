@@ -5,6 +5,7 @@ module Playbook
     class Button < Playbook::PbKit::Base
       PROPS = %i[configured_aria
                  configured_classname
+                 configured_dark
                  configured_data
                  configured_disabled
                  configured_full_width
@@ -21,6 +22,7 @@ module Playbook
 
       def initialize(aria: default_configuration,
                      classname: default_configuration,
+                     dark: default_configuration,
                      data: default_configuration,
                      disabled: default_configuration,
                      full_width: default_configuration,
@@ -36,6 +38,7 @@ module Playbook
                      &block)
         self.configured_aria = aria
         self.configured_classname = classname
+        self.configured_dark = dark
         self.configured_data = data
         self.configured_disabled = disabled
         self.configured_full_width = full_width
@@ -49,6 +52,14 @@ module Playbook
         self.configured_type = type
         self.configured_value = value
         self.block = block_given? ? block : nil
+      end
+
+      def dark
+        is_true? configured_dark
+      end
+
+      def dark_class
+        true_value(configured_dark, "dark", nil)
       end
 
       def disabled
@@ -124,6 +135,7 @@ module Playbook
           full_width_class,
           disabled_class,
           loading_class,
+          dark_class,
         ]
         kit_options.compact.join("_")
       end

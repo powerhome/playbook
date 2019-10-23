@@ -27,4 +27,20 @@
   &[class*=_loading]  {
     @include pb_button_loading(true);
   }
+  // Dark Variants =============
+  &[class*=_dark]  {
+    &[class*=_primary]  {
+      @include pb_button_primary_dark;
+    }
+    &[class*=_secondary]  {
+      @include pb_button_secondary_dark;
+    }
+    &[class*=_link]  {
+      @include pb_button_link_dark;
+    }
+    &[class*=_disabled]  {
+      @include pb_button_disabled;
+    }
+  }
+  
 }
