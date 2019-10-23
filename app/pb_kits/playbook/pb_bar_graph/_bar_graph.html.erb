@@ -8,17 +8,17 @@
     window.addEventListener('DOMContentLoaded', function() {
       new pbChart('.selector', {
         id: "<%= object.id %>",
-        chartData: <%= object.sanitized_data(chart_data) %>,
+        chartData: <%= object.sanitized_chart_data %>,
         type: "<%= object.chart_type %>",
         title: "<%= object.title %>",
         subtitle: "<%= object.subtitle %>",
         axisTitle: "<%= object.axis_title %>",
         pointStart: <%= object.point_start %>,
-        xCategories: <%= object.x_categories.any? ? object.sanitized_data(x_categories) : "undefined" %>,
+        xCategories: <%= object.x_categories.any? ? object.sanitized_x_categories : "undefined" %>,
         xMin: <%= object.x_min %>,
         xMax:<%= object.x_max %>,
         xTickInterval: <%= object.x_tick_interval %>,
-        yCategories: <%= object.y_categories.any? ? object.sanitized_data(y_categories) : "undefined"  %>,
+        yCategories: <%= object.y_categories.any? ? object.sanitized_y_categories : "undefined"  %>,
         yMin: <%= object.y_min %>,
         yMax: <%= object.y_max %>,
         yTickInterval:<%= object.y_tick_interval %>

@@ -34,8 +34,8 @@ module Playbook
         generate_classname("pb_bar_graph")
       end
 
-      def sanitized_data(data)
-        data.to_json.html_safe
+      def sanitized_chart_data
+        chart_data.to_json.html_safe
       end
 
       def sanitized_x_categories
@@ -43,7 +43,7 @@ module Playbook
       end
 
       def sanitized_y_categories
-        y_categories.to_json.html_safe
+        x_categories.to_json.html_safe
       end
     end
   end
