@@ -61,7 +61,7 @@ module Playbook
       end
 
       def classname
-        generate_classname("pb_source")
+        generate_classname("pb_source_kit")
       end
     end
   end
