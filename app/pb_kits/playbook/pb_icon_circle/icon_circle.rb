@@ -7,7 +7,7 @@ module Playbook
 
       partial "pb_icon_circle/icon_circle"
 
-      prop :icon
+      prop :icon, required: true
       prop :size, type: Playbook::Props::Enum,
                   values: %w[xs sm md base lg xl],
                   default: "md"
