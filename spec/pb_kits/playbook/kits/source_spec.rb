@@ -29,7 +29,7 @@ RSpec.describe Playbook::PbSource::Source do
       expect(subject.new(type: "prospecting").show_icon?).to eq true
     end
 
-    it "returns false when passed a type that uses an avatar and a user" do
+    it "returns false when passed a type that uses an avatar (either 'referral' or 'user') and a user" do
       expect(subject.new(type: "referral", user: {name: "user"}).show_icon?).to eq false
     end
   end
