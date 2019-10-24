@@ -2,11 +2,14 @@
     id: object.id,
     data: object.data,
     aria: object.aria,
-    class: object.classname(object.kit_class),
-    ) do %>
+    class: object.classname) do %>
 
     <label class="pb_toggle_wrapper">
-      <%= object.yield(context: self) %>
+      <% if object.children %>
+        <%= capture(&object.children) %>
+      <% else %>
+        <%= object.input %>
+      <% end %>
       <div class="pb_toggle_control"></div>
     </label>
 <% end %>
