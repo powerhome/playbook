@@ -11,8 +11,7 @@ module Playbook
       prop :url
 
       def classname
-        generate_classname(
-          "pb_image_kit", "lazyload", "blur_up", separator: " ")
+        generate_classname("pb_image_kit lazyload blur_up")
       end
     end
   end
