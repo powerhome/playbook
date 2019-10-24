@@ -14,9 +14,7 @@
       <%= pb_rails("title", props: { text: object.source, tag: "h4", size: 4 }) %>
       <div class="pb__source_value">
         <%= pb_rails("body", props: { text: object.type_text, color: "light" }) %>
-        <% if object.user_id %>
-          <%= pb_rails("caption", props: { text: object.user_id }) %>
-        <% end %>
+        <%= pb_rails("caption", props: { text: object.user_id }) if object.user_id %>
       </div>
     </div>
   </div>
