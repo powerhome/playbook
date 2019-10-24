@@ -38,8 +38,7 @@ module Playbook
 
       def user_id
         if user && user[:user_id].present?
-          pb_user_id = Playbook::PbCaption::Caption.new(text: user[:user_id])
-          ApplicationController.renderer.render(partial: pb_user_id, as: :object)
+          user[:user_id]
         end
       end
 

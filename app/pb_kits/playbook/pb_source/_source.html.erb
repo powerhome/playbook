@@ -3,7 +3,7 @@
     data: object.data,
     class: object.classname) do %>
   <div class="pb__source_layout">
-    <% if object.hide_icon == false %>
+    <% if !object.hide_icon %>
       <% if object.show_icon? %>
         <%= pb_rails("icon_circle", props: { icon: object.type_icon_name, size: "sm" }) %>
       <% else %>
@@ -11,10 +11,12 @@
       <% end %>
     <% end %>
     <div class="pb__source_content">
-      <%= pb_rails("title", props: { text: object.source, tag: "h4", size: 4}) %>
+      <%= pb_rails("title", props: { text: object.source, tag: "h4", size: 4 }) %>
       <div class="pb__source_value">
         <%= pb_rails("body", props: { text: object.type_text, color: "light" }) %>
-        <%= object.user_id %>
+        <% if object.user_id %>
+          <%= pb_rails("caption", props: { text: object.user_id }) %>
+        <% end %>
       </div>
     </div>
   </div>

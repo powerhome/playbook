@@ -24,27 +24,36 @@ RSpec.describe Playbook::PbSource::Source do
     end
   end
 
-  describe "#show_icon?" do
-    it "returns true when passed a type that uses an icon and no user is present" do
-      expect(subject.new(type: "prospecting").show_icon?).to eq true
-    end
+  describe "#user_id" do
+    it "returns the user_id if a user is present with a user id, or returns nil", :aggregate_failures do
+      expect(subject.new(type: "prospecting", user: {}).user_id).to eq nil
+      expect(subject.new(type: "referral", user: { name: "User" }).user_id).to eq nil
+      expect(subject.new(type: "user", user: { name: "User", user_id: 435 }).user_id).to eq 435
 
-    it "returns false when passed a type that uses an avatar (either 'referral' or 'user') and a user" do
+    end
+  end
+
+  describe "#show_icon?" do
+    it "returns true only when passed a type that uses an icon and no user is present", :aggregate_failures do
+      expect(subject.new(type: "prospecting", user: {}).show_icon?).to eq true
       expect(subject.new(type: "referral", user: {name: "user"}).show_icon?).to eq false
+      expect(subject.new(type: "user", user: {name: "First User"}).show_icon?).to eq false
     end
   end
 
   describe "#avatar" do
-    it "returns nil when passed a type that uses an icon, and not passed a user" do
+    it "returns nil when not passed a user, and when the type is one that should have an icon", :aggregate_failures  do
       expect(subject.new(type: "referral").avatar).to eq nil
+      expect(subject.new(type: "user").avatar).to eq nil
     end
 
-    it "removes the user's id from the hash if one is passed"do
+    it "removes the user's id from the hash if one is passed" do
       expect(subject.new(type: "user", user: { name: "First User", user_id: 33 }).avatar).to_not include(:user_id => 33)
     end
 
     it "updates avatar props hash with size: sm" do
       expect(subject.new(type: "referral", user: { name: "user" }).avatar).to include(:size => "sm")
+      expect(subject.new(type: "referral", user: { name: "user", size: "lg" }).avatar).to include(:size => "sm")
     end
   end
 
