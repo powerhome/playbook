@@ -5,16 +5,16 @@ module Playbook
     class TitleCount
       include Playbook::Props
 
-        partial "pb_title_count/title_count"
+      partial "pb_title_count/title_count"
 
-        prop :align, type: Playbook::Props::Enum,
-             values: %w[left center right],
-             default: "left"
-        prop :size, type: Playbook::Props::Enum,
-                    values: %w[lg sm],
-                    default: "sm"
-        prop :title
-        prop :count
+      prop :align, type: Playbook::Props::Enum,
+           values: %w[left center right],
+           default: "left"
+      prop :size, type: Playbook::Props::Enum,
+                  values: %w[lg sm],
+                  default: "sm"
+      prop :title
+      prop :count
 
       def classname
         generate_classname("pb_title_count")
