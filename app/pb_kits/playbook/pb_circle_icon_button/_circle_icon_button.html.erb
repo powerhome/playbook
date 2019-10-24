@@ -4,7 +4,7 @@
     class: object.classname) do %>
 
     <%= link_to object.link do %>
-      <%= object.icon %>
+      <%= pb_rails("icon", props:{icon: object.icon, fixed_width: true, size: "md" }) %>
     <% end %>
 
 <% end %>

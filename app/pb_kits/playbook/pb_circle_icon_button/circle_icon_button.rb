@@ -22,13 +22,6 @@ module Playbook
       def dark_class
         dark ? "dark" : nil
       end
-      
-      def icon
-        if is_set? configured_icon
-          pb_icon = Playbook::PbIcon::Icon.new(icon: configured_icon, fixed_width: true, size: "md")
-          ApplicationController.renderer.render(partial: pb_icon, as: :object)
-        end
-      end
 
       def kit_class
         kit_options = [
