@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require "pry"
-
 module Playbook
   module Rspec
     extend RSpec::Matchers::DSL
