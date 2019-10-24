@@ -37,9 +37,7 @@ module Playbook
       end
 
       def user_id
-        if user.dig(:user_id)
-          user[:user_id]
-        end
+        user.dig(:user_id)
       end
 
       def type_icon_name
