@@ -1,7 +1,7 @@
 <%= content_tag(:div,
     id: object.id,
     data: object.data,
-    class: object.classname(object.kit_class)) do %>
-  <%= object.icon %>
-  <%= object.text %>
+    class: object.classname) do %>
+  <%= pb_rails("icon", props: { icon: object.icon_value, classname: "pb_icon" }) %>
+  <%= pb_rails("title", props: { text: object.text, size: 4, classname: "pb_fixed_confirmation_toast_text" }) if object.show_text?%>
 <% end %>
