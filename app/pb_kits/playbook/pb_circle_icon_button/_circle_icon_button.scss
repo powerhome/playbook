@@ -4,6 +4,8 @@
 @import "../pb_icon/icon";
 @import "../pb_button/button_mixins";
 
+$pb_circle_icon_button_size: 40px;
+
 @mixin pb_circle_icon_button {
   display: flex;
   justify-content: center;
@@ -11,25 +13,24 @@
   object-fit: cover;
   overflow: hidden;
   position: relative;
-  width: 40px;
-  height: 40px;
+  width: $pb_circle_icon_button_size;
+  height: $pb_circle_icon_button_size;
   border-radius: $border_rad_mega;
-  line-height: 40px;
+  line-height: $pb_circle_icon_button_size;
   flex-shrink: 0;
   flex-grow: 0;
-  flex-basis: 40px;
-  max-width: 40px;
+  flex-basis: $pb_circle_icon_button_size;
+  min-width: $pb_circle_icon_button_size;
   padding: 0;
 }
 
-
-[class^=pb_circle_icon_button_kit] {
+[class^="pb_circle_icon_button_kit"] {
   & > a {
     @include pb_button_primary;
     @include pb_circle_icon_button;
   }
 
-  &[class*=_secondary]{
+  &[class*="_secondary"] {
     & > a {
       @include pb_button_secondary;
       @include pb_circle_icon_button;
@@ -38,7 +39,7 @@
 
   i,
   svg {
-    &[class^=pb_icon_kit] {
+    &[class^="pb_icon_kit"] {
       width: 100%;
       height: 100%;
       display: block;

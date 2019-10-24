@@ -11,7 +11,7 @@ type CircleIconButtonProps = {
   icon: String,
   id?: String,
   link: String,
-  variant?: "primary" | "secondary"
+  variant?: "primary" | "secondary" | "link"
 };
 
 const CircleIconButton = ({
