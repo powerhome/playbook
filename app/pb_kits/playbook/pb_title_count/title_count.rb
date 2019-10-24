@@ -17,7 +17,7 @@ module Playbook
       prop :count
 
       def classname
-        generate_classname("pb_title_count")
+        generate_classname("pb_title_count_kit")
       end
 
       def title_size
