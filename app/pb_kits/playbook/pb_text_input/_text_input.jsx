@@ -1,34 +1,33 @@
-import React from 'react'
-import PropTypes from "prop-types"
-import classnames from 'classnames'
-import {Caption} from "../"
+import React from "react";
+import PropTypes from "prop-types";
+import classnames from "classnames";
+import { Caption } from "../";
 
 const propTypes = {
   className: PropTypes.string,
+  onChange: PropTypes.func,
   name: PropTypes.string,
   label: PropTypes.string,
   placeholder: PropTypes.string,
   type: PropTypes.string,
-  value: PropTypes.oneOfType([
-      PropTypes.string,
-      PropTypes.number
-  ])
-}
+  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+};
 
 const defaultProps = {
   type: "text"
-}
+};
 
 class TextInput extends React.Component {
   render() {
     const {
       className,
-      name,
       label,
+      name,
+      onChange,
       placeholder,
       type,
       value
-    } = this.props
+    } = this.props;
 
     const css = classnames([
       `pb_text_input_kit`,
@@ -41,13 +40,14 @@ class TextInput extends React.Component {
         <div className="text_input_wrapper">
           <input className={css}
               name={name}
+              onChange={onChange}
               placeholder={placeholder}
               type={type}
               value={value}
           />
         </div>
       </div>
-    )
+    );
   }
 }
 
