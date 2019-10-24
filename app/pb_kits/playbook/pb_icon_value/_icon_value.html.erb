@@ -1,6 +1,9 @@
 <%= content_tag(:div,
-    id: object.id,
-    data: object.data,
-    class: object.classname(object.kit_class)) do %>
-  <%= object.value %>
+  id: object.id,
+  data: object.data,
+  class: object.classname) do %>
+    <%= pb_rails("body", props: { color: "light" }) do %>
+      <%= pb_rails("icon", props: { icon: object.icon, fixed_width: true }) %>
+      <%= object.text %>
+    <% end %>
 <% end %>
