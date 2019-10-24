@@ -16,7 +16,7 @@ module Playbook
       prop :user, type: Playbook::Props::Hash, default: {}
 
       def type_text
-        if type == "user" || (type == "referral" && user)
+        if type == "user" || (type == "referral" && user.present?)
           user[:name]
         else
           type.titleize
@@ -24,11 +24,11 @@ module Playbook
       end
 
       def show_icon?
-        !type_icon_name.nil? && avatar.nil? ? true : false
+        !type_icon_name.nil? && avatar.nil?
       end
 
       def avatar
-        if user != {} && (type == "user" || type == "referral")
+        if user.present? && (type == "user" || type == "referral")
           avatar_props = user.clone
           avatar_props[:size] = "sm"
           avatar_props.delete(:user_id)
@@ -37,7 +37,7 @@ module Playbook
       end
 
       def user_id
-        if user && user[:user_id].present?
+        if user.dig(:user_id)
           user[:user_id]
         end
       end
