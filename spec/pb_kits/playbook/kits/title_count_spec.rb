@@ -9,8 +9,9 @@ RSpec.describe Playbook::PbTitleCount::TitleCount do
 
   describe "#classname" do
     it "returns namespaced class name", :aggregate_failures do
-      expect(subject.new({}).classname).to eq "pb_title_count_kit"
-      expect(subject.new(align: "center").classname).to eq "pb_title_count_kit_center"
+      expect(subject.new({}).classname).to eq "pb_title_count_kit_left_sm"
+      expect(subject.new(align: "center").classname).to eq "pb_title_count_kit_center_sm"
+      expect(subject.new(size: "lg").classname).to eq "pb_title_count_kit_left_lg"
     end
   end
 end

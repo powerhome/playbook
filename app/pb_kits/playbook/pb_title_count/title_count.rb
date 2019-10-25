@@ -17,7 +17,7 @@ module Playbook
       prop :count
 
       def classname
-        generate_classname("pb_title_count_kit")
+        generate_classname("pb_title_count_kit", align, size)
       end
 
       def title_size
@@ -33,11 +33,7 @@ module Playbook
 
       def count
         if is_set? configured_count
-          value = if configured_count.is_a?(Integer) || configured_count.is_a?(Float)
-                    format_number(configured_count)
-                  else
-                    configured_count
-                  end
+          value = format_number(configured_count)
 
           pb_count = Playbook::PbBody::Body.new(color: "light") do
             value.to_s
