@@ -1,10 +1,12 @@
 import React from "react";
 import { CircleIconButton } from "../../";
 
-const CircleIconButtonDefault = () => (
+const CircleIconButtonDark = () => (
   <div>
-    <CircleIconButton icon="plus"
+    <CircleIconButton 
+        icon="plus"
         link="https://www.google.com"
+        dark
     />
     <br />
     <br />
@@ -12,8 +14,9 @@ const CircleIconButtonDefault = () => (
         icon="pen"
         link="https://www.google.com"
         variant="secondary"
+        dark
     />
   </div>
 );
 
-export default CircleIconButtonDefault;
+export default CircleIconButtonDark;
