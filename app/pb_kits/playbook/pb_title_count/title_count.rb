@@ -14,7 +14,7 @@ module Playbook
                   values: %w[lg sm],
                   default: "sm"
       prop :title
-      prop :count
+      prop :count, type: Playbook::Props::Numeric
 
       def classname
         generate_classname("pb_title_count_kit", align, size)
@@ -24,26 +24,8 @@ module Playbook
         size == "lg" ? 3 : 4
       end
 
-      def title
-        if is_set? configured_title
-          pb_title = Playbook::PbTitle::Title.new(size: title_size, text: configured_title, classname: "pb_title_count_text")
-          ApplicationController.renderer.render(partial: pb_title, as: :object)
-        end
-      end
-
-      def count
-        if is_set? configured_count
-          value = format_number(configured_count)
-
-          pb_count = Playbook::PbBody::Body.new(color: "light") do
-            value.to_s
-          end
-          ApplicationController.renderer.render(partial: pb_count, as: :object)
-        end
-      end
-
-      def format_number(number)
-        number.to_s.gsub(/(\d)(?=\d{3}+(?:\.|$))(\d{3}\..*)?/, '\1,\2')
+      def format_count
+        count.to_s.gsub(/(\d)(?=\d{3}+(?:\.|$))(\d{3}\..*)?/, '\1,\2')
       end
     end
   end

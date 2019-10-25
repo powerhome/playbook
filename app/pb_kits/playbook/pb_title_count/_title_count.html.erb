@@ -2,6 +2,9 @@
     id: object.id,
     data: object.data,
     class: object.classname) do %>
-  <%= object.title %>
-  <%= object.count %>
+  <%= pb_rails("title", props: {
+    size: object.title_size,
+    text: object.title,
+    classname: "pb_title_count_text" }) if object.title %>
+  <%= pb_rails("body", props: { color: "light" }) { object.format_count } if object.count %>
 <% end %>
