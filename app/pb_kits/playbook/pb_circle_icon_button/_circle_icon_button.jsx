@@ -7,6 +7,7 @@ import Icon from "../pb_icon/_icon.jsx";
 
 type CircleIconButtonProps = {
   className?: String,
+  dark: Boolean,
   data?: String,
   icon: String,
   id?: String,

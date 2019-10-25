@@ -1,6 +1,4 @@
-@import "../tokens/border_radius";
-@import "../tokens/colors";
-@import "../tokens/typography";
+@import '../pb_circle_icon_button/circle_button_icon_mixins';
 @import "../pb_icon/icon";
 @import "../pb_button/button_mixins";
 
@@ -24,16 +22,38 @@ $pb_circle_icon_button_size: 40px;
   padding: 0;
 }
 
-[class^="pb_circle_icon_button_kit"] {
-  & > a {
-    @include pb_button_primary;
-    @include pb_circle_icon_button;
+[class^=pb_circle_icon_button_kit] {
+  &[class*=_primary] {
+      @include pb_circle_icon_button_primary;
   }
 
-  &[class*="_secondary"] {
-    & > a {
-      @include pb_button_secondary;
-      @include pb_circle_icon_button;
+  &[class*=_secondary] {
+      @include pb_circle_icon_button_secondary;
+  }
+
+  &[class*=_disabled] {
+    @include pb_circle_icon_button_disabled;
+  }
+
+  &[class*=_link] {
+    @include pb_circle_icon_button_link;
+  }
+
+  &[class*=_dark] {
+    &[class*=_primary] {
+      @include pb_circle_icon_button_primary_dark;
+    }
+
+    &[class*=_secondary] {
+      @include pb_circle_icon_button_secondary_dark;
+    }
+
+    &[class*=_disabled] {
+      @include pb_circle_icon_button_disabled_dark;
+    }
+
+    &[class*=_link] {
+      @include pb_circle_icon_button_link_dark;
     }
   }
 
