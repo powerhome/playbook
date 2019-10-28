@@ -14,6 +14,7 @@ RSpec.describe Playbook::PbLabelPill::LabelPill do
   describe "#classname" do
     it "returns namespaced class name", :aggregate_failures do
       expect(subject.new({}).classname).to eq "pb_label_pill_kit_neutral"
+      expect(subject.new(variant: "success").classname).to eq "pb_label_pill_kit_success"
       expect(subject.new(classname: "additional_class").classname).to eq "pb_label_pill_kit_neutral additional_class"
     end
   end
