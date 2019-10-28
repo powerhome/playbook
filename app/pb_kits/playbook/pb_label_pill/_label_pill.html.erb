@@ -1,7 +1,9 @@
 <%= content_tag(:div,
     id: object.id,
     data: object.data,
-    class: object.classname("pb_label_pill_kit")) do %>
+    class: object.classname) do %>
+      <%= pb_rails("label", props: { text: object.label }) %>
+      <%= pb_rails("pill", props: { variant: object.variant }) %>
   <%= object.label %>
   <%= object.pill %>
 <% end %>
