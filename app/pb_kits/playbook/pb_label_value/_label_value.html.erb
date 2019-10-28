@@ -2,8 +2,6 @@
     id: object.id,
     data: object.data,
     class: object.classname) do %>
-  <% if object.label? %>
-    <%= pb_rails("caption", props: { text: "#{object.label}" }) %>
-  <% end %>
+  <%= pb_rails("caption", props: { text: "#{object.label}" }) if object.label? %>
   <%= pb_rails("body", props: { text: "#{object.value}" }) %>
 <% end %>
