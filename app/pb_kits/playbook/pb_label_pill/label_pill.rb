@@ -7,12 +7,14 @@ module Playbook
 
       partial "pb_label_pill/label_pill"
 
-      prop :variant, default: "neutral"
+      prop :variant, type: Playbook::Props::Enum,
+                     values: %w[success warning error info neutral],
+                     default: "neutral"
       prop :label
       prop :pill_value
 
       def classname
-        generate_classname("pb_label_pill_kit", label, pill_value)
+        generate_classname("pb_label_pill_kit", varient)
       end
     end
   end
