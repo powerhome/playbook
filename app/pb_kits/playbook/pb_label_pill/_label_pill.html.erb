@@ -3,7 +3,5 @@
     data: object.data,
     class: object.classname) do %>
       <%= pb_rails("caption", props: { text: object.label, classname: "pb_label_pill_label" }) %>
-      <%= pb_rails("pill", props: { text: object.pill_value, variant: object.variant, classname: "pb_label_pill_pill" }) do %>
-          <%= object.pill %>
-        <% end %>
+      <%= pb_rails("pill", props: { text: object.pill_value, variant: object.variant, classname: "pb_label_pill_pill" }) %>
 <% end %>
