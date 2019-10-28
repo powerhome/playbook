@@ -1,7 +1,7 @@
 <%= content_tag(:div,
     id: object.id,
     data: object.data,
-    class: object.classname(object.kit_class)) do %>
-  <%= object.title %>
-  <%= object.detail %>
+    class: object.classname) do %>
+  <%= pb_rails("title", props: { text: "#{object.title}", size: 4 }) if object.title? %>
+  <%= pb_rails("body", props: { text: "#{object.detail}", color: "light" }) if object.detail? %>
 <% end %>
