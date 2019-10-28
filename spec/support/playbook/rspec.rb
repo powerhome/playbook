@@ -69,11 +69,11 @@ module Playbook
 
         if @default && @values
           subject_class.props[prop_key].default == @default &&
-            values.sort == @values.sort
+            values.map(&:to_s).sort == @values.map(&:to_s).sort
         elsif @default && !@values
           subject_class.props[prop_key].default == @default
         elsif !@default && @values
-          values.sort == @values.sort
+          values.map(&:to_s).sort == @values.map(&:to_s).sort
         else
           true
         end
