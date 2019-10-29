@@ -11,10 +11,6 @@ module Playbook
       prop :value, type: Playbook::Props::String,
                    default: ""
 
-      def label?
-        label.present?
-      end
-
       def classname
         generate_classname("pb_label_value_kit")
       end

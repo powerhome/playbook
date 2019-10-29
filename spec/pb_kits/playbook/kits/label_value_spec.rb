@@ -15,12 +15,4 @@ RSpec.describe Playbook::PbLabelValue::LabelValue do
       expect(subject.new(classname: "additional_class").classname).to eq "pb_label_value_kit additional_class"
     end
   end
-
-  describe "#label?" do
-    it "returns true when a label is passed, and false when a label is not", :aggregate_failures do
-      expect(subject.new({}).label?).to eq false
-      expect(subject.new({label: ""}).label?).to eq false
-      expect(subject.new({label: "Label"}).label?).to eq true
-    end
-  end
 end
