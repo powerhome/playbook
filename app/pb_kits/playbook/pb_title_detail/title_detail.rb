@@ -10,8 +10,8 @@ module Playbook
       prop :align, type: Playbook::Props::Enum,
                    values: %w[left center right],
                    default: "left"
-      prop :detail
-      prop :title
+      prop :detail, required: true
+      prop :title, required: true
 
       def classname
         generate_classname("pb_title_detail_kit", align)
