@@ -7,7 +7,7 @@ RSpec.describe Playbook::PbLineGraph::LineGraph do
 
   it { is_expected.to define_partial }
   it { is_expected.to define_prop(:axis_title).of_type(Playbook::Props::String).with_default("") }
-  it { is_expected.to define_prop(:point_start).of_type(Playbook::Props::Numeric).with_default(1) }
+  it { is_expected.to define_prop(:point_start).of_type(Playbook::Props::Numeric) }
   it { is_expected.to define_prop(:subtitle).of_type(Playbook::Props::String).with_default("") }
   it { is_expected.to define_prop(:title).of_type(Playbook::Props::String).with_default("") }
   it { is_expected.to define_prop(:chart_data).of_type(Playbook::Props::Array).with_default([]) }

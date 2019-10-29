@@ -13,8 +13,7 @@ module Playbook
                         default: []
       prop :gradient, type: Playbook::Props::Boolean,
                       default: false
-      prop :point_start, type: Playbook::Props::Numeric,
-                         default: 1
+      prop :point_start, type: Playbook::Props::Numeric
       prop :subtitle, type: Playbook::Props::String,
                       default: ""
       prop :title, type: Playbook::Props::String,

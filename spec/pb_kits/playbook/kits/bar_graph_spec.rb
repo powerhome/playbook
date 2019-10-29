@@ -8,7 +8,7 @@ RSpec.describe Playbook::PbBarGraph::BarGraph do
   it { is_expected.to define_partial }
 
   it { is_expected.to define_prop(:axis_title) }
-  it { is_expected.to define_prop(:point_start) }
+  it { is_expected.to define_prop(:point_start).of_type(Playbook::Props::Numeric) }
   it { is_expected.to define_prop(:subtitle) }
   it { is_expected.to define_prop(:title) }
   it { is_expected.to define_enum_prop(:orientation)

@@ -12,8 +12,7 @@ module Playbook
       prop :orientation, type: Playbook::Props::Enum,
                          values: %w[vertical horizontal],
                          default: "vertical"
-      prop :point_start, type: Playbook::Props::Numeric,
-                         default: 1
+      prop :point_start, type: Playbook::Props::Numeric
       prop :subtitle
       prop :title
 
