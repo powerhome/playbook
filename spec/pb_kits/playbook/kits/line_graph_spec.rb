@@ -7,7 +7,7 @@ RSpec.describe Playbook::PbLineGraph::LineGraph do
 
   it { is_expected.to define_partial }
   it { is_expected.to define_prop(:axis_title).of_type(Playbook::Props::String).with_default("") }
-  it { is_expected.to define_prop(:point_start).of_type(Playbook::Props::String).with_default("") }
+  it { is_expected.to define_prop(:point_start).of_type(Playbook::Props::Numeric).with_default(1) }
   it { is_expected.to define_prop(:subtitle).of_type(Playbook::Props::String).with_default("") }
   it { is_expected.to define_prop(:title).of_type(Playbook::Props::String).with_default("") }
   it { is_expected.to define_prop(:chart_data).of_type(Playbook::Props::Array).with_default([]) }
@@ -25,6 +25,14 @@ RSpec.describe Playbook::PbLineGraph::LineGraph do
       expect(subject.new({}).chart_type).to eq "line"
       expect(subject.new({gradient: false}).chart_type).to eq "line"
       expect(subject.new({gradient: true}).chart_type).to eq "area"
+    end
+  end
+
+  describe "#chart_options" do
+    it "returns the correct options in a json object", :aggregate_failures do
+      expect(subject.new({gradient: true}).chart_options).to include "\"type\":\"area\""
+      expect(subject.new({title: "New Chart"}).chart_options).to include "\"type\":\"line\",\"title\":\"New Chart\""
+      expect(subject.new({point_start: 4}).chart_options).to include "\"pointStart\":4"
     end
   end
 end

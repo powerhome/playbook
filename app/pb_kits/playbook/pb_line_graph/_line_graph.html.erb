@@ -7,15 +7,7 @@
 <% content_for :pb_js do %>
   <%= javascript_tag do %>
     window.addEventListener('DOMContentLoaded', function() {
-      new pbChart('.selector', {
-        id: "<%= object.id %>",
-        chartData: <%= object.chart_data.to_json.html_safe %>,
-        type: "<%= object.chart_type %>",
-        title: "<%= object.title %>",
-        subtitle: "<%= object.subtitle %>",
-        axisTitle: "<%= object.axis_title %>",
-        pointStart: <%= object.point_start %>,
-      })
+      new pbChart('.selector', <%= object.chart_options %>)
     })
   <% end %>
 <% end %>
