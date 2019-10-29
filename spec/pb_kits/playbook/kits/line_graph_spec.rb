@@ -6,10 +6,10 @@ RSpec.describe Playbook::PbLineGraph::LineGraph do
   subject { Playbook::PbLineGraph::LineGraph }
 
   it { is_expected.to define_partial }
-  it { is_expected.to define_prop(:axis_title).of_type(Playbook::Props::String).with_default("") }
+  it { is_expected.to define_string_prop(:axis_title) }
   it { is_expected.to define_prop(:point_start).of_type(Playbook::Props::Numeric) }
-  it { is_expected.to define_prop(:subtitle).of_type(Playbook::Props::String).with_default("") }
-  it { is_expected.to define_prop(:title).of_type(Playbook::Props::String).with_default("") }
+  it { is_expected.to define_string_prop(:subtitle) }
+  it { is_expected.to define_string_prop(:title) }
   it { is_expected.to define_prop(:chart_data).of_type(Playbook::Props::Array).with_default([]) }
   it { is_expected.to define_prop(:gradient).of_type(Playbook::Props::Boolean).with_default(false) }
 

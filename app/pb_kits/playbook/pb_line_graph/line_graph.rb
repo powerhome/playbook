@@ -7,17 +7,14 @@ module Playbook
 
       partial "pb_line_graph/line_graph"
 
-      prop :axis_title, type: Playbook::Props::String,
-                        default: ""
+      prop :axis_title
       prop :chart_data, type: Playbook::Props::Array,
                         default: []
       prop :gradient, type: Playbook::Props::Boolean,
                       default: false
       prop :point_start, type: Playbook::Props::Numeric
-      prop :subtitle, type: Playbook::Props::String,
-                      default: ""
-      prop :title, type: Playbook::Props::String,
-                   default: ""
+      prop :subtitle
+      prop :title
 
       def chart_type
         gradient ? "area" : "line"
