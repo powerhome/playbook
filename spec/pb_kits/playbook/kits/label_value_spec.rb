@@ -6,8 +6,8 @@ RSpec.describe Playbook::PbLabelValue::LabelValue do
   subject { Playbook::PbLabelValue::LabelValue }
 
   it { is_expected.to define_partial }
-  it { is_expected.to define_prop(:label).of_type(Playbook::Props::String) }
-  it { is_expected.to define_prop(:value).of_type(Playbook::Props::String).with_default("") }
+  it { is_expected.to define_string_prop(:label) }
+  it { is_expected.to define_string_prop(:value) }
 
   describe "#classname" do
     it "returns namespaced class name", :aggregate_failures do

@@ -7,9 +7,8 @@ module Playbook
 
       partial "pb_label_value/label_value"
 
-      prop :label, type: Playbook::Props::String
-      prop :value, type: Playbook::Props::String,
-                   default: ""
+      prop :label
+      prop :value
 
       def classname
         generate_classname("pb_label_value_kit")
