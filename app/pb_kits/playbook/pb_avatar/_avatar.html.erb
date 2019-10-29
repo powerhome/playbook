@@ -6,7 +6,7 @@
   <%= content_tag(:div,
       data: { initials: object.initials },
       class: "avatar_wrapper") do %>
-    <%= pb_rails("image", props: object.image) if object.image.present? %>
-  <% end %>
-  <%= pb_rails("online_status", props: object.online_status_props) if object.status %>
+       <%= pb_rails("image", props: object.image) if object.image.present? %>
+      <% end %>
+       <%= pb_rails("online_status", props: object.online_status_props) if object.status %>
 <% end %>
