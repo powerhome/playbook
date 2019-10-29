@@ -8,7 +8,7 @@ module Playbook
       partial "pb_label_value/label_value"
 
       prop :label, required: true
-      prop :value
+      prop :value, required: true
 
       def classname
         generate_classname("pb_label_value_kit")

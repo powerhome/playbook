@@ -7,12 +7,14 @@ RSpec.describe Playbook::PbLabelValue::LabelValue do
 
   it { is_expected.to define_partial }
   it { is_expected.to define_string_prop(:label).that_is_required }
-  it { is_expected.to define_string_prop(:value) }
+  it { is_expected.to define_string_prop(:value).that_is_required }
 
   describe "#classname" do
     it "returns namespaced class name", :aggregate_failures do
-      expect(subject.new({}).classname).to eq "pb_label_value_kit"
-      expect(subject.new(classname: "additional_class").classname).to eq "pb_label_value_kit additional_class"
+      label = "Label!"
+      value = "Value!"
+      expect(subject.new(label: label, value: value).classname).to eq "pb_label_value_kit"
+      expect(subject.new(label: label, value: value, classname: "additional_class").classname).to eq "pb_label_value_kit additional_class"
     end
   end
 end
