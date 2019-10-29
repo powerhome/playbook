@@ -7,28 +7,23 @@ module Playbook
 
       partial "pb_avatar/avatar"
 
-      prop :image
-      prop :name
+      prop :image, type: Playbook::Props::Hash, default: {}
+      prop :name, default: ""
       prop :size, type: Playbook::Props::Enum,
                   values: %w[xs sm md base lg xl],
                   default: "md"
       prop :status
 
-
-
-      # def image
-      #   if is_set? configured_image
-      #     pb_image = Playbook::PbImage::Image.new(configured_image)
-      #     ApplicationController.renderer.render(partial: pb_image, as: :object)
-      #   end
-      # end
-
       def initials
-        adjusted_value(configured_name, configured_name.split.map(&:first).join.downcase, "")
+        name.split.map(&:first).join.downcase
       end
 
       def classname
         generate_classname("pb_avatar_kit", size)
+      end
+
+      def online_status_props
+        { status: status, classname: "size_#{size}" }
       end
 
       # def status
