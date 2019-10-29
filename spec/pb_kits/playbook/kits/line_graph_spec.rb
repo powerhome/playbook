@@ -15,8 +15,8 @@ RSpec.describe Playbook::PbLineGraph::LineGraph do
 
   describe "#classname" do
     it "returns namespaced class name", :aggregate_failures do
-      expect(subject.new({}).classname).to eq "pb_line_graph_kit"
-      expect(subject.new(classname: "additional_class").classname).to eq "pb_line_graph_kit additional_class"
+      expect(subject.new({}).classname).to eq "pb_line_graph"
+      expect(subject.new(classname: "additional_class").classname).to eq "pb_line_graph additional_class"
     end
   end
 

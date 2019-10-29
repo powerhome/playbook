@@ -25,7 +25,7 @@ module Playbook
       end
 
       def classname
-        generate_classname("pb_line_graph_kit")
+        generate_classname("pb_line_graph")
       end
     end
   end
