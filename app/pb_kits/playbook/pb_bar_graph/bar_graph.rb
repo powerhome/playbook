@@ -12,7 +12,8 @@ module Playbook
       prop :orientation, type: Playbook::Props::Enum,
                          values: %w[vertical horizontal],
                          default: "vertical"
-      prop :point_start
+      prop :point_start, type: Playbook::Props::Numeric,
+                         default: 1
       prop :subtitle
       prop :title
 
@@ -20,12 +21,20 @@ module Playbook
         orientation == "horizontal" ? "bar" : "column"
       end
 
-      def classname
-        generate_classname("pb_bar_graph")
+      def chart_options
+        {
+          id: id,
+          chartData: chart_data,
+          type: chart_type,
+          title: title,
+          subtitle: subtitle,
+          axisTitle: axis_title,
+          pointStart: point_start
+        }.to_json.html_safe
       end
 
-      def sanitized_chart_data
-        chart_data.to_json.html_safe
+      def classname
+        generate_classname("pb_bar_graph")
       end
     end
   end
