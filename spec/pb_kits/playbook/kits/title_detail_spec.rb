@@ -6,8 +6,8 @@ RSpec.describe Playbook::PbTitleDetail::TitleDetail do
   subject { Playbook::PbTitleDetail::TitleDetail }
 
   it { is_expected.to define_partial }
-  it { is_expected.to define_prop(:title).of_type(Playbook::Props::String) }
-  it { is_expected.to define_prop(:detail).of_type(Playbook::Props::String) }
+  it { is_expected.to define_string_prop(:title) }
+  it { is_expected.to define_string_prop(:detail) }
   it { is_expected.to define_enum_prop(:align)
                       .with_values("left", "center", "right")
                       .with_default("left") }
