@@ -1,12 +1,12 @@
 <%= content_tag(:div,
     id: object.id,
     data: object.data(initials: object.initials),
-    class: object.classname(object.kit_class),
+    class: object.classname,
     aria: object.aria) do %>
   <%= content_tag(:div,
       data: { initials: object.initials },
       class: "avatar_wrapper") do %>
-    <%= object.image %>
+    <%= pb_rails("image", props: { text: object.image}) if object.image %>
   <% end %>
-  <%= object.status %>
+  <%= pb_rails("online_status", props: { status: object.status }) if object.status%>
 <% end %>
