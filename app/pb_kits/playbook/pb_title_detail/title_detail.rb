@@ -13,15 +13,6 @@ module Playbook
       prop :detail, type: Playbook::Props::String
       prop :title, type: Playbook::Props::String
 
-
-      def title?
-        title.present?
-      end
-
-      def detail?
-        detail.present?
-      end
-
       def classname
         generate_classname("pb_title_detail_kit", align)
       end
