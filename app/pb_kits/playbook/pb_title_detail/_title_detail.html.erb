@@ -2,6 +2,6 @@
     id: object.id,
     data: object.data,
     class: object.classname) do %>
-  <%= pb_rails("title", props: { text: object.title, size: 4 }) if object.title %>
-  <%= pb_rails("body", props: { text: object.detail, color: "light" }) if object.detail %>
+  <%= pb_rails("title", props: { text: object.title, size: 4 }) %>
+  <%= pb_rails("body", props: { text: object.detail, color: "light" }) %>
 <% end %>
