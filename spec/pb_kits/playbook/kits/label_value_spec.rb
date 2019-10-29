@@ -6,7 +6,7 @@ RSpec.describe Playbook::PbLabelValue::LabelValue do
   subject { Playbook::PbLabelValue::LabelValue }
 
   it { is_expected.to define_partial }
-  it { is_expected.to define_string_prop(:label) }
+  it { is_expected.to define_string_prop(:label).that_is_required }
   it { is_expected.to define_string_prop(:value) }
 
   describe "#classname" do
