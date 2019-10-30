@@ -7,6 +7,7 @@ require_relative "./props/base"
 
 require_relative "./props/array"
 require_relative "./props/boolean"
+require_relative "./props/date"
 require_relative "./props/enum"
 require_relative "./props/hash"
 require_relative "./props/hash_array"
