@@ -35,6 +35,7 @@ import "../kits/pb_person_contact.js";
 import "../kits/pb_pill.js";
 import "../kits/pb_progress_simple.js";
 import "../kits/pb_section_separator.js";
+import "../kits/pb_selectable_card.js";
 import "../kits/pb_source.js";
 import "../kits/pb_star_rating.js";
 import "../kits/pb_stat_change.js";
@@ -49,4 +50,3 @@ import "../kits/pb_toggle.js";
 import "../kits/pb_user.js";
 import "../kits/pb_user_badge.js";
 import "../kits/pb_vertical_nav.js";
-

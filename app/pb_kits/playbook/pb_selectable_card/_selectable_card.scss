@@ -1,0 +1,13 @@
+@import "selectable_card_mixins";
+
+[class^=pb_selectable_card] {
+  @include selectable-card;
+
+  &[class*=_disabled] {
+    @include selectable-card-disabled;
+  }
+
+  &[class*=_dark] {
+    @include selectable-card(true);
+  }
+}

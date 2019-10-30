@@ -1,0 +1,84 @@
+@import "../tokens/border_radius";
+@import "../tokens/spacing";
+@import "../tokens/colors";
+@import "../tokens/shadows";
+
+@mixin card($dark: false) {
+  border-radius: $pb_card_border_radius;
+
+  @if $dark {
+    border: $pb_card_border_width solid $border_dark;
+    background: $card_dark;
+    color: $white;
+  } @else {
+    border: $pb_card_border_width solid $border_light;
+    background: $card_light;
+  }
+}
+
+@mixin selectable-card-transition {
+  transition-property: color, border-color, background-color, box-shadow;
+  transition-duration: 0.15s;
+  transition-timing-function: cubic-bezier(0.7, 0, 0.3, 1);
+}
+
+@mixin selectable-card($dark: false) {
+  $highlight-color: $royal;
+  display: inline-block;
+  
+  input[type="checkbox"], input[type="radio"] {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    display: none;
+
+    &:checked ~ label {
+      @include selectable-card-transition;
+      border-color: $highlight-color;
+      box-shadow: $shadow-default;
+      position: relative;
+      &:after {
+        opacity: 1;
+      }
+    }
+  }
+
+  label {
+    @if $dark {
+      @include card(true);
+    } @else {
+      @include card;
+    }
+    @include selectable-card-transition;
+
+    padding: $space_sm;
+    cursor: pointer;
+    display: inline-block;
+
+    &:hover {
+      box-shadow: $shadow-default;
+      border-color: $slate;
+    }
+    &:after {
+      $dot-size: 18px;
+      content: '';
+      display: block;
+      height: $dot-size;
+      width: $dot-size;
+      border-radius: 100%;
+      background: $highlight-color;
+      position: absolute;
+      top: -($dot-size/2);
+      right: -($dot-size/2);
+      opacity: 0;
+      transition-property: opacity;
+      transition-duration: 0.15s;
+      transition-timing-function: cubic-bezier(0.7, 0, 0.3, 1);
+    }
+  }
+}
+
+@mixin selectable-card-disabled($dark: false) {
+  @include selectable-card($dark);
+  pointer-events: none;
+}

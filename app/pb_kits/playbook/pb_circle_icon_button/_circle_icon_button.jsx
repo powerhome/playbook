@@ -1,37 +1,32 @@
 /* @flow */
 /*eslint-disable react/no-multi-comp, flowtype/space-before-type-colon */
 
-import React from "react";
-import classnames from "classnames";
-import Icon from "../pb_icon/_icon.jsx";
+import React from 'react'
+import classnames from "classnames"
+import {Button, Icon} from "../"
 
 type CircleIconButtonProps = {
   className?: String,
-  dark: Boolean,
-  data?: String,
   icon: String,
   id?: String,
-  link: String,
-  variant?: "primary" | "secondary" | "link"
+  button: Any,
 };
-
-const CircleIconButton = ({
-  className,
-  data,
-  icon,
-  id,
-  link,
-  variant = "primary"
-}: CircleIconButtonProps) => {
+const CircleIconButton = (props: CircleIconButtonProps) => {
+  const {
+    button,
+    className,
+    icon,
+    id,
+  } = props
   return (
-    <div className={`pb_circle_icon_button_kit_${variant} ${className}`}>
-      <a href={link}>
+    <div id={id} className={`pb_circle_icon_button_kit ${className}`}>
+      <Button {...button}>
         <Icon fixedWidth
             icon={icon}
         />
-      </a>
+      </Button>
     </div>
   );
-};
+}
 
 export default CircleIconButton;

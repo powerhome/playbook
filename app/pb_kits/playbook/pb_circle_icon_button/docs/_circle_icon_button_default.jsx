@@ -3,15 +3,19 @@ import { CircleIconButton } from "../../";
 
 const CircleIconButtonDefault = () => (
   <div>
-    <CircleIconButton icon="plus"
-        link="https://www.google.com"
+    <CircleIconButton icon="plus"   
     />
-    <br />
-    <br />
-    <CircleIconButton
-        icon="pen"
-        link="https://www.google.com"
-        variant="secondary"
+  <br/>
+    <CircleIconButton icon="pen"
+      button={{variant: "secondary"}}
+    />
+  <br/>
+    <CircleIconButton icon="pen"
+      button={{disabled: true}}
+    />
+  <br/>
+    <CircleIconButton icon="pen"
+      button={{variant: "link"}}
     />
   </div>
 );
