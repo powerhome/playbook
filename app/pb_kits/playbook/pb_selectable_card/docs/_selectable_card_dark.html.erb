@@ -1,0 +1,51 @@
+<div>
+  <%= pb_rails("selectable_card", props: {
+        name: "selectable_card_dark",
+        text: "Selectable Card",
+        checked: true,
+        dark: true,
+      }) %>
+
+  <%= pb_rails("selectable_card", props: {
+        name: "selectable_card_dark_2",
+        text: "Selectable Card",
+        dark: true,
+      }) %>
+
+  <%= pb_rails("selectable_card", props: {
+        name: "unselectable_card_dark",
+        text: "Disabled (Un)Selectable Card",
+        disabled: true,
+        dark: true,
+      }) %>
+</div>
+
+<br>
+
+<div>
+  <%= pb_rails("selectable_card", props: {
+        multi: false,
+        name: "single_selectable_card_dark",
+        text: "Single-selectable Card",
+        value: "1",
+        checked: true,
+        dark: true,
+    }) %>
+
+  <%= pb_rails("selectable_card", props: {
+        multi: false,
+        name: "single_selectable_card_dark",
+        text: "Single-selectable Card",
+        value: "2",
+        dark: true,
+    }) %>
+
+  <%= pb_rails("selectable_card", props: {
+        multi: false,
+        name: "single_selectable_card_dark",
+        text: "Disabled (Un)Selectable Card",
+        value: "3",
+        disabled: true,
+        dark: true,
+    }) %>
+</div>

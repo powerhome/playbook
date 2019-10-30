@@ -7,6 +7,7 @@ kits:
   - caption
   - card
   - checkbox
+  - circle_icon_button
   - contact
   - currency
   - dashboard_value
@@ -35,6 +36,7 @@ kits:
   - pill
   - progress_simple
   - section_separator
+  - selectable_card
   - source
   - star_rating
   - stat_change
