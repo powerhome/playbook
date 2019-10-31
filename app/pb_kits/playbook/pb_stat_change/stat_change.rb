@@ -2,29 +2,16 @@
 
 module Playbook
   module PbStatChange
-    class StatChange < Playbook::PbKit::Base
-      PROPS = %i[configured_change
-                 configured_classname
-                 configured_data
-                 configured_id
-                 configured_value].freeze
+    class StatChange
+      include Playbook::Props
 
-      def initialize(change: default_configuration,
-                     classname: default_configuration,
-                     data: default_configuration,
-                     id: default_configuration,
-                     value: default_configuration)
-        self.configured_change = change
-        self.configured_classname = classname
-        self.configured_data = data
-        self.configured_id = id
-        self.configured_value = value
-      end
+        partial "pb_stat_change/stat_change"
 
-      def change
-        change_options = %w[neutral increase decrease]
-        one_of_value(configured_change, change_options, "neutral")
-      end
+        prop :change, type: Playbook::Props::Enum,
+                      values: %w[neutral increase decrease],
+                      default: "neutral"
+        prop :value, default: ""
+
 
       def status
         case change
@@ -46,47 +33,26 @@ module Playbook
         end
       end
 
-      def display_icon
-        if !icon.nil?
-          pb_icon = Playbook::PbIcon::Icon.new(icon: icon, fixed_width: true)
-          ApplicationController.renderer.render(partial: pb_icon, as: :object)
-        else
-          ""
-        end
-      end
+      # def display_icon
+      #   if !icon.nil?
+      #     pb_icon = Playbook::PbIcon::Icon.new(icon: icon, fixed_width: true)
+      #     ApplicationController.renderer.render(partial: pb_icon, as: :object)
+      #   else
+      #     ""
+      #   end
+      # end
 
-      def value
-        default_value(configured_value, "")
-      end
+      # def display_value
+      #   pb_icon_element = Playbook::PbBody::Body.new(status: status) do
+      #     display_icon +
+      #       value
+      #   end
+      #   ApplicationController.renderer.render(partial: pb_icon_element, as: :object)
+      # end
 
-      def display_value
-        pb_icon_element = Playbook::PbBody::Body.new(status: status) do
-          display_icon +
-            value
-        end
-        ApplicationController.renderer.render(partial: pb_icon_element, as: :object)
+      def classname
+        generate_classname("pb_stat_change_kit", status,)
       end
-
-      def kit_class
-        stat_options = [
-          "pb_stat_change_kit",
-          status,
-        ]
-        stat_options.join("_")
-      end
-
-      def to_partial_path
-        "pb_stat_change/stat_change"
-      end
-
-    private
-
-      DEFAULT = Object.new
-      private_constant :DEFAULT
-      def default_configuration
-        DEFAULT
-      end
-      attr_accessor(*PROPS)
     end
   end
 end
