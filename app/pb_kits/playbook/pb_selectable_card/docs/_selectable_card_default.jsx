@@ -10,6 +10,12 @@ function SelectableCardDefault() {
         name={"selectable_card"}
         text={"Selectable Card"}
       />
+      <SelectableCard 
+        className={"pb_selectable_card_kit"}
+        id={"selectable_card"}
+        name={"selectable_card"}
+        text={"Selectable Card"}
+      />
     </div>
   )
 }
