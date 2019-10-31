@@ -1,23 +1,5 @@
-<%
-  # Buttons should not have link options: href, target
-  options = {
-    id: object.id,
-    data: object.data,
-    class: object.classname,
-    disabled: object.disabled,
-    aria: object.aria,
-    type: object.type,
-    value: object.value
-  }.compact
-
-  link_options = {
-    href: object.link,
-    target: object.new_window
-  }
-%>
-
 <%= content_tag(object.tag,
-    object.tag == "button" ? options : options.merge(link_options)) do %>
-    <%= object.loading_icon %>
-    <span class="pb_button_content"><%= capture(&object.children) %></span>
+    object.tag == "button" ? object.options : object.link_options) do %>
+    <%= pb_rails("icon", props: { icon: "spinner", pulse: true, fixed_width: true, classname: "loading-icon" }) %>
+    <span class="pb_button_content"><%= !object.children.nil? ? capture(&object.children) : object.text %></span>
 <% end %>

@@ -7,61 +7,61 @@ module Playbook
 
       partial "pb_button/button"
 
-      prop :disabled, type: Playbook::Props::Enum,
-                      values: %w[disabled enabled],
-                      default: "enabled"
-      prop :full_width, type: Playbook::Props::Enum,
-                        values: %w[block inline],
-                        default: "inline"
+      prop :disabled, type: Playbook::Props::Boolean,
+                      default: false
+      prop :full_width, type: Playbook::Props::Boolean,
+                        default: false
       prop :link
       prop :loading, type: Playbook::Props::Boolean,
                      default: false
-      prop :new_window
+      prop :new_window, type: Playbook::Props::Boolean,
+                        default: false
       prop :variant, type: Playbook::Props::Enum,
                      values: %w[primary secondary link],
                      default: "primary"
-      prop :tag
       prop :text
       prop :type
       prop :value
 
-      def classname
-        generate_classname("pb_button", variant, full_width, disabled_class)
+      def options
+        {
+          id: id,
+          data: data,
+          class: classname,
+          disabled: disabled,
+          aria: aria,
+          type: type,
+          value: value,
+        }.compact
       end
 
-      def loading_icon
-        pb_icon = Playbook::PbIcon::Icon.new(icon: "spinner",
-                                             pulse: true,
-                                             fixed_width: true,
-                                             classname: "loading-icon")
-        ApplicationController.renderer.render(partial: pb_icon, as: :object)
+      def link_options
+        options.merge(
+          href: link,
+          target: new_window ? "_blank" : "_self"
+        )
       end
 
-      # def new_window
-      #   true_value(configured_new_window, "_blank", "_self")
-      # end
-
-      # def tag
-      #   tag_options = %w[button a]
-      #   if link.empty?
-      #     one_of_value(configured_tag, tag_options, "button")
-      #   else
-      #     "a"
-      #   end
-      # end
-
-      # def value
-      #   configured_value unless configured_value == DEFAULT
-      # end
+      def tag
+        link ? "a" : "button"
+      end
 
     private
 
-      def loading_class
-        loading ? "loading" : nil
+      def classname
+        generate_classname("pb_button_kit", variant, full_width_class, disabled_class, loading_class)
       end
 
       def disabled_class
-        disabled ? "enabled" : "disabled"
+        disabled ? "disabled" : "enabled"
+      end
+
+      def full_width_class
+        full_width ? "block" : "inline"
+      end
+
+      def loading_class
+        loading ? "loading" : nil
       end
     end
   end
