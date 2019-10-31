@@ -2,14 +2,14 @@
 /*eslint-disable react/no-multi-comp, flowtype/space-before-type-colon */
 
 import React from 'react'
+import classnames from 'classnames'
+import { Card } from "../"
 
 type SelectableCardProps = {
   checked?: Boolean,
   className?: String,
   dark?: Boolean,
-  data?: String,
   disabled?: Boolean,
-  id?: String,
   name?: String,
   showSelected?: Boolean,
   showUnselected?: Boolean,
@@ -26,10 +26,8 @@ const cardCSS = ({ selected = false }: CardPropTypes) => {
 const SelectableCard = ({ 
   checked, 
   className, 
-  dark, 
-  data, 
+  dark,
   disabled, 
-  id, 
   name, 
   showSelected, 
   showUnselected, 
@@ -42,8 +40,9 @@ const SelectableCard = ({
   ])
 
   return (
-    <div className={`pb_selectable_card_kit${cardCSS(props)} ${className}`}>
-     {`kit content`}
+    <div className={`pb_selectable_card_kit ${className} ${showSelected} ${showUnselected} ${checked}`}>
+     <SelectableCard
+     />
     </div>
   )
 }
