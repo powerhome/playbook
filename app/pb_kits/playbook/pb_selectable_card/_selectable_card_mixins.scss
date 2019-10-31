@@ -8,7 +8,7 @@
 
   @if $dark {
     border: $pb_card_border_width solid $border_dark;
-    background: $card_dark;
+    background: transparent;
     color: $white;
   } @else {
     border: $pb_card_border_width solid $border_light;
@@ -23,7 +23,7 @@
 }
 
 @mixin selectable-card($dark: false) {
-  $highlight-color: $royal;
+  $highlight-color: $primary_action;
   display: inline-block;
   
   input[type="checkbox"], input[type="radio"] {
