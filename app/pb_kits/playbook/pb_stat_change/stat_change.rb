@@ -10,8 +10,7 @@ module Playbook
         prop :change, type: Playbook::Props::Enum,
                       values: %w[neutral increase decrease],
                       default: "neutral"
-        prop :value, default: ""
-
+        prop :value, type: Playbook::Props::Percentage
 
       def status
         case change
@@ -30,28 +29,13 @@ module Playbook
           "arrow-up"
         when "decrease"
           "arrow-down"
+        else
+          false
         end
       end
 
-      # def display_icon
-      #   if !icon.nil?
-      #     pb_icon = Playbook::PbIcon::Icon.new(icon: icon, fixed_width: true)
-      #     ApplicationController.renderer.render(partial: pb_icon, as: :object)
-      #   else
-      #     ""
-      #   end
-      # end
-
-      # def display_value
-      #   pb_icon_element = Playbook::PbBody::Body.new(status: status) do
-      #     display_icon +
-      #       value
-      #   end
-      #   ApplicationController.renderer.render(partial: pb_icon_element, as: :object)
-      # end
-
       def classname
-        generate_classname("pb_stat_change_kit", status,)
+        generate_classname("pb_stat_change_kit", status)
       end
     end
   end
