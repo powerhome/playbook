@@ -12,6 +12,7 @@ module Playbook
 
       prop :contact_type
       prop :contact_value
+      prop :contact_detail
 
       def classname
         generate_classname("pb_contact_kit")
@@ -40,10 +41,18 @@ module Playbook
         end
       end
 
+      def formatted_contact_details
+        "#{formatted_contact_value} #{separator} #{contact_detail}"
+      end
+
     private
 
       def formatted_value
         contact_value.to_s.gsub(/\D/, "")
+      end
+
+      def separator
+        contact_detail ? "\u00b7" : ""
       end
     end
   end
