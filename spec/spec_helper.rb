@@ -1,7 +1,8 @@
 # frozen_string_literal: true
 
 require_relative "../lib/playbook"
-require_relative "../app/pb_kits/playbook/props.rb"
+require_relative "../app/pb_kits/playbook/props"
+require_relative "../app/pb_kits/playbook/pb_kit/pb_date_time"
 Dir[File.expand_path("support/**/*.rb", __dir__)].each { |f| require f }
 require "byebug"
 
