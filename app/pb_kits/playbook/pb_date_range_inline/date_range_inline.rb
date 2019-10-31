@@ -9,15 +9,14 @@ module Playbook
 
       partial "pb_date_range_inline/date_range_inline"
 
-      prop :end_date
-      prop :start_date
-
+      prop :end_date, type: Playbook::Props::Date, required: true
+      prop :start_date, type: Playbook::Props::Date, required: true
 
       def classname
-        generate_classname("pb_date_range_inline_kit", end_date_display, start_date_display)
+        generate_classname("pb_date_range_inline_kit")
       end
 
-def end_date_display
+      def end_date_display
         date_time = Playbook::PbKit::PbDateTime.new(end_date)
         content_tag(:time, datetime: date_time.to_iso) do
           "#{date_time.to_day} #{date_time.to_month_downcase} #{date_time.to_year}"
