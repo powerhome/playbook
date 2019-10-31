@@ -15,7 +15,7 @@ RSpec.describe Playbook::PbCaption::Caption do
                    .with_values("h1", "h2", "h3", "h4", "h5",
                                 "h6", "p", "span", "div")
   end
-  it { is_expected.to define_string_prop(:text).with_default("Caption") }
+  it { is_expected.to define_string_prop(:text) }
 
   describe "#classname" do
     it "returns namespaced class name", :aggregate_failures do
