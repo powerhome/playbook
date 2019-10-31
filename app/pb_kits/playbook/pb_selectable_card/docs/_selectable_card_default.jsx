@@ -4,12 +4,12 @@ import SelectableCard from "../_selectable_card.jsx"
 function SelectableCardDefault() {
   return (
     <div>
-      <SelectableCard>
-        {'Selectable Card'}
-      </SelectableCard>
-      <br/>
-      <SelectableCard selected>{'Selected Card'}
-      </SelectableCard>
+      <SelectableCard 
+        className={"pb_selectable_card_kit"}
+        id={"selectable_card"}
+        name={"selectable_card"}
+        text={"Selectable Card"}
+      />
     </div>
   )
 }
