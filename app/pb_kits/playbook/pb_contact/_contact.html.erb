@@ -4,6 +4,6 @@
     class: object.classname) do %>
   <%= pb_rails("body", props: { tag: "span", classname: "pb_contact_kit", color: "light" }) do %>
     <%= pb_rails("icon", props: { icon: object.contact_icon, fixed_width: true }) %>
-    <%= object.formatted_contact_value if object.contact_value%>
+    <%= object.formatted_contact_details if object.contact_value%>
   <% end %>
 <% end %>

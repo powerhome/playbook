@@ -33,6 +33,12 @@ module Playbook
         end
       end
 
+      def formatted_contact_details
+        "#{formatted_contact_value} #{separator} #{contact_detail}"
+      end
+
+    private
+
       def formatted_contact_value
         if contact_type == "email"
           contact_value
@@ -40,12 +46,6 @@ module Playbook
           number_to_phone(formatted_value, area_code: true)
         end
       end
-
-      def formatted_contact_details
-        "#{formatted_contact_value} #{separator} #{contact_detail}"
-      end
-
-    private
 
       def formatted_value
         contact_value.to_s.gsub(/\D/, "")
