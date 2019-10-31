@@ -33,7 +33,7 @@ module Playbook
         end
       end
 
-      def formatted_contact_details
+      def formatted_contact_info
         "#{formatted_contact_value} #{separator} #{contact_detail}"
       end
 
