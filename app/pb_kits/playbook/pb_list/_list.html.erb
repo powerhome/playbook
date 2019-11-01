@@ -1,9 +1,8 @@
-<%= content_tag(:div,
-    class: "pb_list_kit#{object.xpadding}#{object.borderless}#{object.dark}#{object.size}#{object.layout}") do %>
-    <%= content_tag(:"#{object.ordered}",
+<%= content_tag(:div, class: object.list_classname) do %>
+  <%= content_tag(:"#{object.ordered_class}",
       id: object.id,
       data: object.data,
       class: object.classname) do %>
-      <%= object.yield(context: self) %>
+      <%= capture(&object.children) %>
   <% end %>
 <% end %>
