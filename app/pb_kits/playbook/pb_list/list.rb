@@ -17,7 +17,8 @@ module Playbook
       prop :size
       prop :ordered, type: Playbook::Props::Boolean,
                      default: false
-      prop :xpadding
+      prop :xpadding, type: Playbook::Props::Boolean,
+                      default: false
 
       def list_classname
         [
