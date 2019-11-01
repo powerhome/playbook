@@ -46,12 +46,12 @@ module Playbook
       end
 
       def layout_class
-        if layout == ""
-          ""
+        if layout == "right"
+          "layout_right"
         elsif layout == "left"
           "layout_left"
         else
-          "layout_right"
+          ""
         end
       end
 
