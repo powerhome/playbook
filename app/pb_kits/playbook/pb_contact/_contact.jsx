@@ -27,14 +27,14 @@ const Contact = ({
   className,
   dark=false,
   contactValue,
-  contactDetail,
+  contactDetail="",
 }: ContactProps) => {
 
   const formatDetail = (contactDetail) => {
     if (contactDetail !== undefined) {
       return `\u00b7 ${contactDetail}`
     } else {
-      return ""
+      return contactDetail
     }
   }
 
@@ -44,11 +44,11 @@ const Contact = ({
     if (contactType == "email") {
       return contactString
     } else {
-      let cleaned = ('' + contactString).replace(/\D/g, '')
-      let match = cleaned.match(/^(1|)?(\d{3})(\d{3})(\d{4})$/)
-      if (match) {
-        let intlCode = (match[1] ? '+1 ' : '')
-        return [intlCode, '(', match[2], ') ', match[3], '-', match[4]].join('')
+      const cleaned = contactString.replace(/\D/g, '')
+      const phoneNumber = cleaned.match(/^(1|)?(\d{3})(\d{3})(\d{4})$/)
+      if (phoneNumber) {
+        let intlCode = (phoneNumber[1] ? '+1 ' : '')
+        return [intlCode, '(', phoneNumber[2], ') ', phoneNumber[3], '-', phoneNumber[4]].join('')
       }
       return null
     }
