@@ -7,13 +7,18 @@ module Playbook
 
       partial "pb_layout/layout"
 
-      prop :collapse, default: "xs"
+      prop :collapse, type: Playbook::Props::Enum,
+                      values: %w[xs sm md lg xl],
+                      default: "xs"
       prop :dark, type: Playbook::Props::Boolean, default: false
       prop :full, type: Playbook::Props::Boolean, default: false
-      prop :position, default: "left"
+      prop :position, type: Playbook::Props::Enum,
+                      values: %w[left right],
+                      default: "left"
       prop :transparent, type: Playbook::Props::Boolean, default: false
-      prop :size, default: "md"
-
+      prop :size, type: Playbook::Props::Enum,
+                      values: %w[xs sm md base lg xl],
+                      default: "md"
       def dark_class
         dark ? "dark" : nil
       end
