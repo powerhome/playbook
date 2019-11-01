@@ -15,6 +15,7 @@ module Playbook
       prop :state
       prop :zipcode
       prop :territory
+      prop :url
       prop :dark, type: Playbook::Props::Boolean, default: false
 
       def classname
