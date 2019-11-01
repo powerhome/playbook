@@ -1,6 +1,6 @@
 <%= content_tag(:div,
     id: object.id,
     data: object.data,
-    class: object.classname("pb_layout_#{object.size}#{object.position}#{object.dark}#{object.transparent}#{object.full}#{object.collapse}")) do %>
+    class: object.classname) do %>
   <%= object.yield(context: self) %>
 <% end %>
