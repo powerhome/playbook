@@ -17,7 +17,7 @@ module Playbook
                       default: "left"
       prop :transparent, type: Playbook::Props::Boolean, default: false
       prop :size, type: Playbook::Props::Enum,
-                      values: %w[xs sm md base lg xl],
+                      values: %w[xs sm md lg xl],
                       default: "md"
       def dark_class
         dark ? "dark" : nil
@@ -32,7 +32,7 @@ module Playbook
       end
 
       def collapse_class
-        collapse == "xs" ? " layout_#{position}_collapse_xs" : " layout_#{position}_collapse_#{collapse}"
+        " layout_#{position}_collapse_#{collapse}"
       end
 
       def classname
