@@ -2,33 +2,21 @@
 
 module Playbook
   module PbDate
-    class Date < Playbook::PbKit::Base
+    class Date
       include ActionView::Helpers::TagHelper
       include ActionView::Context
+      include Playbook::Props
+      partial "pb_date/date"
 
-      PROPS = %i[configured_classname
-                 configured_data
-                 configured_date
-                 configured_id
-                 configured_size
-                 configured_timestamp
-                 configured_timezone].freeze
+      prop :date
+      prop :size, type: Playbook::Props::Enum,
+                  values: %w[lg sm xs],
+                  default: "sm"
+      prop :timestamp
+      prop :timezone, type: Playbook::Props::Enum,
+                      default: "America/New_York"
 
-      def initialize(classname: default_configuration,
-                     data: default_configuration,
-                     date: default_configuration,
-                     id: default_configuration,
-                     size: default_configuration,
-                     timestamp: default_configuration,
-                     timezone: default_configuration)
-        self.configured_classname = classname
-        self.configured_data = data
-        self.configured_date = date
-        self.configured_id = id
-        self.configured_size = size
-        self.configured_timestamp = timestamp
-        self.configured_timezone = timezone
-      end
+
 
       def display_value
         case size
@@ -41,38 +29,30 @@ module Playbook
         end
       end
 
-      def kit_class
-        "pb_date_kit"
+      def classname
+        generate_classname("pb_date")
       end
 
-      def to_partial_path
-        "pb_date/date"
-      end
 
     private
 
       def timestamp
-        if is_set? configured_date
-          date = configured_date
+        if is_set? date
+          date = date
         else
-          date = configured_timestamp
+          date = timestamp
         end
         Playbook::PbKit::PbDateTime.new(date, timezone_value)
       end
 
-      def timezone_value
-        default_value(configured_timezone, "America/New_York")
-      end
+      # def timezone_value
+      #   default_value(configured_timezone, "America/New_York")
+      # end
 
-      def size
-        size_options = %w[lg sm xs]
-        one_of_value(configured_size, size_options, "sm")
-      end
-
-      def icon
-        pb_icon = Playbook::PbIcon::Icon.new(icon: "calendar", fixed_width: true)
-        ApplicationController.renderer.render(partial: pb_icon, as: :object)
-      end
+      # def icon
+      #   pb_icon = Playbook::PbIcon::Icon.new(icon: "calendar", fixed_width: true)
+      #   ApplicationController.renderer.render(partial: pb_icon, as: :object)
+      # end
 
       def text
         content_tag(:span) do
@@ -81,32 +61,25 @@ module Playbook
       end
 
       def display_value_xs
-        if is_set?(configured_timestamp) || is_set?(configured_date)
+        if is_set?(timestamp) || is_set?(date)
           pb_value = Playbook::PbTitle::Title.new(size: 4, text: text)
           ApplicationController.renderer.render(partial: pb_value, as: :object)
         end
       end
 
       def display_value_sm
-        if is_set?(configured_timestamp) || is_set?(configured_date)
+        if is_set?(timestamp) || is_set?(date)
           pb_value = Playbook::PbTitle::Title.new(size: 4, text: icon + text)
           ApplicationController.renderer.render(partial: pb_value, as: :object)
         end
       end
 
       def display_value_lg
-        if is_set?(configured_timestamp) || is_set?(configured_date)
+        if is_set?(timestamp) || is_set?(date)
           pb_value_lg = Playbook::PbTitle::Title.new(size: 3, text: "#{timestamp.to_month.upcase} #{timestamp.to_day}")
           ApplicationController.renderer.render(partial: pb_value_lg, as: :object)
         end
       end
-
-      DEFAULT = Object.new
-      private_constant :DEFAULT
-      def default_configuration
-        DEFAULT
-      end
-      attr_accessor(*PROPS)
     end
   end
 end

@@ -1,6 +1,7 @@
 <%= content_tag(:div,
     id: object.id,
     data: object.data,
-    class: object.classname(object.kit_class)) do %>
-  <%= object.display_value %>
+    class: object.classname) do %>
+  <%= pb_rails("icon", props: { icon: "calendar", fixed_width: true, icon: object.icon }) if object.icon %>
+  <%= "#{object.value}%" if object.value %>
 <% end %>
