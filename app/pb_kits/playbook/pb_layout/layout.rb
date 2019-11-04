@@ -17,8 +17,8 @@ module Playbook
                       default: "left"
       prop :transparent, type: Playbook::Props::Boolean, default: false
       prop :size, type: Playbook::Props::Enum,
-                      values: %w[xs sm md lg xl],
-                      default: "md"
+                  values: %w[xs sm md lg xl],
+                  default: "md"
 
       def classname
         first_class = generate_classname("pb_layout", size, position, dark_class, transparent_class)
