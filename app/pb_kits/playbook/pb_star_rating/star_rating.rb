@@ -10,7 +10,6 @@ module Playbook
       prop :hide_rating, type: Playbook::Props::Boolean,
                          default: false
       prop :rating, type: Playbook::Props::Numeric,
-                    values: [0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5],
                     default: 0
 
       def star_count
@@ -22,7 +21,7 @@ module Playbook
       end
 
       def classname
-        generate_classname("pb_star_rating_kit", hide_rating)
+        generate_classname("pb_star_rating_kit")
       end
     end
   end
