@@ -9,15 +9,9 @@ module Playbook
 
       prop :hide_rating, type: Playbook::Props::Boolean,
                          default: false
-      prop :rating
-
-      def rating
-        rating_options = []
-        (0..5).step(0.5) do |number|
-          rating_options.push strip_trailing_zero(number)
-        end
-        one_of_value(rating.to_s, rating_options, "0")
-      end
+      prop :rating, type: Playbook::Props::Numeric,
+                    values: [0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5],
+                    default: 0
 
       def star_count
         [*1..rating.to_f]
@@ -28,13 +22,7 @@ module Playbook
       end
 
       def classname
-        generate_classname("pb_star_rating", hide_rating)
-      end
-
-    private
-
-      def strip_trailing_zero(number)
-        number.to_s.sub(/\.?0+$/, "")
+        generate_classname("pb_star_rating_kit", hide_rating)
       end
     end
   end
