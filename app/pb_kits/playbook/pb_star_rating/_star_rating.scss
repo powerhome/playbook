@@ -12,7 +12,7 @@ $pb_star_rating_height: 26px;
   justify-content: flex-start;
   align-items: flex-start;
 
-  .pb__star_rating_number {
+  .pb_star_rating_number {
     flex-shrink: 0;
     flex-grow: 0;
     flex-basis: $pb_star_rating_number_width;
@@ -26,7 +26,7 @@ $pb_star_rating_height: 26px;
     align-items: center;
   }
 
-  .pb__star_rating_wrapper {
+  .pb_star_rating_wrapper {
     position: relative;
     width: $pb_star_rating_wrapper_width;
     flex-basis: $pb_star_rating_wrapper_width;
@@ -34,7 +34,7 @@ $pb_star_rating_height: 26px;
     flex-grow: 1;
     min-height: $pb_star_rating_height;
 
-    .pb__star_rating_highlight {
+    .pb_star_rating_highlight {
       position: absolute;
       top: 0;
       left: 0;
@@ -42,7 +42,7 @@ $pb_star_rating_height: 26px;
       color: $yellow;
       line-height: $pb_star_rating_height;
     }
-    .pb__star_rating_base {
+    .pb_star_rating_base {
       position: absolute;
       top: 0;
       left: 0;
@@ -53,7 +53,7 @@ $pb_star_rating_height: 26px;
   }
 
   &[class*=_hide_rating] {
-    .pb__star_rating_number {
+    .pb_star_rating_number {
       display: none;
     }
   }
