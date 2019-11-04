@@ -24,7 +24,7 @@ module Playbook
       end
 
       def full_class
-        full ? " full" : ""
+        full ? "full" : ""
       end
 
       def transparent_class
@@ -32,16 +32,13 @@ module Playbook
       end
 
       def collapse_class
-        " layout_#{position}_collapse_#{collapse}"
+        "layout_#{position}_collapse_#{collapse}"
       end
 
       def classname
         first_class = generate_classname("pb_layout", size, position, dark_class, transparent_class)
         classname = first_class + full_class + collapse_class
-      end
-
-      def yield(context:)
-        context.capture(&children)
+        [first_class, full_class, collapse_class].reject(&:empty?).join(" ")
       end
     end
   end

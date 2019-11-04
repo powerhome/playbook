@@ -28,9 +28,9 @@ RSpec.describe Playbook::PbLayout::Layout do
   end
 
   describe "#full_class" do
-    it "returns ' full' if full prop is true", :aggregate_failures do
+    it "returns 'full' if full prop is true", :aggregate_failures do
       expect(subject.new({}).full_class).to eq ""
-      expect(subject.new(full: true).full_class).to eq " full"
+      expect(subject.new(full: true).full_class).to eq "full"
     end
   end
 
@@ -43,9 +43,9 @@ RSpec.describe Playbook::PbLayout::Layout do
 
   describe "#collapse_class" do
     it "returns the correct class with collapse and position props", :aggregate_failures do
-      expect(subject.new({}).collapse_class).to eq " layout_left_collapse_xs"
-      expect(subject.new(collapse: "md").collapse_class).to eq " layout_left_collapse_md"
-      expect(subject.new(position: "right", collapse: "xl").collapse_class).to eq " layout_right_collapse_xl"
+      expect(subject.new({}).collapse_class).to eq "layout_left_collapse_xs"
+      expect(subject.new(collapse: "md").collapse_class).to eq "layout_left_collapse_md"
+      expect(subject.new(position: "right", collapse: "xl").collapse_class).to eq "layout_right_collapse_xl"
     end
   end
 

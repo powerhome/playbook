@@ -10,10 +10,6 @@ module Playbook
       def classname
         generate_classname("layout_sidebar")
       end
-
-      def yield(context:)
-        context.capture(&children)
-      end
     end
   end
 end
