@@ -20,35 +20,6 @@ RSpec.describe Playbook::PbLayout::Layout do
                       .with_values("xs", "sm", "md", "lg", "xl")
                       .with_default("md") }
 
-  describe "#dark_class" do
-    it "returns 'dark' if dark prop is true", :aggregate_failures do
-      expect(subject.new({}).dark_class).to eq nil
-      expect(subject.new(dark: true).dark_class).to eq "dark"
-    end
-  end
-
-  describe "#full_class" do
-    it "returns 'full' if full prop is true", :aggregate_failures do
-      expect(subject.new({}).full_class).to eq ""
-      expect(subject.new(full: true).full_class).to eq "full"
-    end
-  end
-
-  describe "#transparent_class" do
-    it "returns 'transparent' if transparent prop is true", :aggregate_failures do
-      expect(subject.new({}).transparent_class).to eq nil
-      expect(subject.new(transparent: true).transparent_class).to eq "transparent"
-    end
-  end
-
-  describe "#collapse_class" do
-    it "returns the correct class with collapse and position props", :aggregate_failures do
-      expect(subject.new({}).collapse_class).to eq "layout_left_collapse_xs"
-      expect(subject.new(collapse: "md").collapse_class).to eq "layout_left_collapse_md"
-      expect(subject.new(position: "right", collapse: "xl").collapse_class).to eq "layout_right_collapse_xl"
-    end
-  end
-
   describe "#classname" do
     it "returns namespaced class name", :aggregate_failures do
       text = "Test text"

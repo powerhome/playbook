@@ -19,6 +19,15 @@ module Playbook
       prop :size, type: Playbook::Props::Enum,
                       values: %w[xs sm md lg xl],
                       default: "md"
+
+      def classname
+        first_class = generate_classname("pb_layout", size, position, dark_class, transparent_class)
+        classname = first_class + full_class + collapse_class
+        [first_class, full_class, collapse_class].reject(&:empty?).join(" ")
+      end
+
+    private
+
       def dark_class
         dark ? "dark" : nil
       end
@@ -33,12 +42,6 @@ module Playbook
 
       def collapse_class
         "layout_#{position}_collapse_#{collapse}"
-      end
-
-      def classname
-        first_class = generate_classname("pb_layout", size, position, dark_class, transparent_class)
-        classname = first_class + full_class + collapse_class
-        [first_class, full_class, collapse_class].reject(&:empty?).join(" ")
       end
     end
   end
