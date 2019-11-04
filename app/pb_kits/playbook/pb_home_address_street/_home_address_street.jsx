@@ -15,6 +15,24 @@ const dot = (houseStyle) =>
   }
 }
 
+function titleize(sentence) {
+    if(!sentence.split) return sentence;
+    var _titleizeWord = function(string) {
+            return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
+        },
+        result = [];
+    sentence.split(" ").forEach(function(w) {
+        result.push(_titleizeWord(w));
+    });
+    return result.join(" ");
+}
+
+function titleize_address_cont(address_cont) {
+  if (!!address_cont) {
+   return titleize(address_cont);
+  }
+}
+
 type HomeAddressStreetProps = {
   address: String,
   address_cont: String,
@@ -53,16 +71,17 @@ const HomeAddressStreet = ({
         className="pb_home_address_street_address"
         size={4}
     >
-      {address} {dot(houseStyle)} {houseStyle}
+      {titleize(address)} {dot(houseStyle)} {houseStyle}
     </Title>
+
     <Title
         className="pb_home_address_street_address"
         size={4}
     >
-      {address_cont}
+      {titleize_address_cont(address_cont)}
     </Title>
     <Body color="light">
-      {city}, {state} {zipcode}
+      {titleize(city)}, {state} {zipcode}
     </Body>
     <Body
         className="home-hashtag"
