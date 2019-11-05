@@ -1,11 +1,26 @@
 <%= content_tag(:div,
     id: object.id,
     data: object.data,
-    class: object.classname(object.kit_class)) do %>
-    <%= object.avatar %>
+    class: object.classname) do %>
+    <% if object.avatar_url.present? || object.avatar %>
+      <%= pb_rails("avatar", props: {
+        name: object.avatar_name,
+        size: "sm",
+        image: {
+          url: object.avatar_url
+        },
+        status: object.avatar_status
+      }) %>
+      <% end %>
     <div class="content_wrapper">
-      <%= object.label %>
-      <%= object.message %>
-      <%= object.timestamp %>
+      <%= pb_rails("caption", props: {
+        text: object.label
+      }) %>
+      <%= pb_rails("body", props: {
+        text: object.message
+      }) %>
+      <%= pb_rails("timestamp", props: {
+        text: object.timestamp
+      }) %>
     </div>
 <% end %>
