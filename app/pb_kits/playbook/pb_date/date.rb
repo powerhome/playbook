@@ -30,7 +30,7 @@ module Playbook
       end
 
       def classname
-        generate_classname("pb_date")
+        generate_classname("pb_date_kit")
       end
 
 
