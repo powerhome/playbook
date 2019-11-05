@@ -7,8 +7,7 @@ RSpec.describe Playbook::PbAvatar::Avatar do
 
   it { is_expected.to define_partial }
   it { is_expected.to define_prop(:status) }
-  it { is_expected.to define_prop(:image)
-                      .with_default({}) }
+  it { is_expected.to define_prop(:image_url) }
   it { is_expected.to define_prop(:name)
                       .with_default("") }
   it { is_expected.to define_enum_prop(:size)
