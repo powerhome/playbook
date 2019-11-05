@@ -2,7 +2,7 @@
     id: object.id,
     data: object.data,
     class: object.classname) do %>
-    <% if object.avatar_url.present? || object.avatar_name %>
+    <% if object.valid? %>
       <%= pb_rails("avatar", props: {
         name: object.avatar_name,
         size: "sm",

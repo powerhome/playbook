@@ -18,6 +18,10 @@ module Playbook
         generate_classname("pb_message_kit", avatar_class)
       end
 
+      def valid?
+        avatar_url.present? || avatar_name
+      end
+
     private
 
       def avatar_class
