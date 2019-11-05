@@ -18,10 +18,12 @@ function PersonContactDefault() {
         contacts={[
           {
             contactType: "email",
-            contactValue: "email@example.com"
+            contactValue: "email@example.com",
+            contactDetail: "Pauline's Email",
           },
           {
             contactValue: "5555555555",
+            contactDetail: "Home",
           },
           {
             contactType: "email",
@@ -30,6 +32,7 @@ function PersonContactDefault() {
           {
             contactType: "work",
             contactValue: "3245627482",
+            contactDetail: "Harvey's Work"
           }
         ]}
       />
