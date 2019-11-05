@@ -1,8 +1,16 @@
 <%= content_tag(:div,
     id: object.id,
     data: object.data,
-    class: object.classname(object.kit_class)) do %>
-  <%= object.stat_label %>
-  <%= object.stat_value %>
-  <%= object.stat_change %>
+    class: object.classname) do %>
+  <% if object.stat_label.present? %>
+    <%= pb_rails("body", props: { color: "light", text: object.stat_label[:label] } ) %>
+  <% end %>
+
+  <% if object.stat_value.present? %>
+    <%= pb_rails("stat_value", props: object.stat_value) %>
+  <% end %>
+
+  <% if object.stat_change.present? %>
+    <%= pb_rails("stat_change", props: object.stat_change) %>
+  <% end %>
 <% end %>
