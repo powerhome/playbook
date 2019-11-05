@@ -5,7 +5,7 @@ function DashboardValueAlign() {
   return (
     <div>
       <DashboardValue
-          stat_label={{label: "Top Title Value"}}
+          stat_label="Top Title Value"
           stat_value={{value: "1,428", unit: "appts"}}
           stat_change={{change: "decrease", value: "26.1"}} />
 
@@ -13,7 +13,7 @@ function DashboardValueAlign() {
 
       <DashboardValue
           align="center"
-          stat_label={{label: "Top Title Value"}}
+          stat_label="Top Title Value"
           stat_value={{value: "1,428", unit: "appts"}}
           stat_change={{change: "decrease", value: 56.1}} />
 
@@ -21,7 +21,7 @@ function DashboardValueAlign() {
 
       <DashboardValue
           align="right"
-          stat_label={{label: "Top Title Value"}}
+          stat_label="Top Title Value"
           stat_value={{value: "1,428", unit: "appts"}}
           stat_change={{change: "decrease", value: 86}} />
     </div>
