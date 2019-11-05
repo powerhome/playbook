@@ -2,12 +2,21 @@
                 id: object.id,
                 data: object.data,
                 class: object.kit_class) do %>
-
   <% if object.multi %>
     <%= check_box_tag object.name, object.value, object.checked, disabled: object.disabled %>
-    <%= label_tag object.name, object.text, disabled: object.disabled %>
+    <label for="<%= object.name %>">
+      <%= object.text %>
+      <div class="pb_selectable_card_circle">
+        <%= pb_rails("icon", props: { icon: "check", fixed_width: true }) if object.icon %>
+      </div>
+    </label>
   <% else %>
     <%= radio_button_tag object.name, object.value, object.checked, disabled: object.disabled %>
-    <%= label_tag "#{object.name}_#{object.value}", object.text, disabled: object.disabled %>
+    <label for='<%= "#{object.name}_#{object.value}" %>'>
+      <%= object.text %>
+      <div class="pb_selectable_card_circle">
+        <%= pb_rails("icon", props: { icon: "check", fixed_width: true }) if object.icon %>
+      </div>
+    </label>
   <% end %>
 <% end %>
