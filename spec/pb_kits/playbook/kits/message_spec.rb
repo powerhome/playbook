@@ -7,7 +7,6 @@ RSpec.describe Playbook::PbMessage::Message do
 
   it { is_expected.to define_partial }
 
-  it { is_expected.to define_prop(:avatar) }
   it { is_expected.to define_prop(:avatar_name) }
   it { is_expected.to define_prop(:avatar_status) }
   it { is_expected.to define_prop(:avatar_url) }
