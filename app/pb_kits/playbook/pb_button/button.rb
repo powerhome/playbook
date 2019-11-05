@@ -7,6 +7,8 @@ module Playbook
 
       partial "pb_button/button"
 
+      prop :dark, type: Playbook::Props::Boolean,
+                  default: false
       prop :disabled, type: Playbook::Props::Boolean,
                       default: false
       prop :full_width, type: Playbook::Props::Boolean,
@@ -49,7 +51,11 @@ module Playbook
     private
 
       def classname
-        generate_classname("pb_button_kit", variant, full_width_class, disabled_class, loading_class)
+        generate_classname("pb_button_kit", variant, full_width_class, disabled_class, loading_class, dark_class)
+      end
+
+      def dark_class
+        dark ? "dark" : nil
       end
 
       def disabled_class
