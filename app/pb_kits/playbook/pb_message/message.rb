@@ -7,7 +7,6 @@ module Playbook
 
       partial "pb_message/message"
 
-      prop :avatar
       prop :avatar_name
       prop :avatar_status
       prop :avatar_url
@@ -22,7 +21,7 @@ module Playbook
     private
 
       def avatar_class
-        avatar ? "avatar" : nil
+        avatar_name ? "avatar" : nil
       end
     end
   end

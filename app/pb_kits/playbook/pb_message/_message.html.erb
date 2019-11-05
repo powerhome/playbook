@@ -2,16 +2,14 @@
     id: object.id,
     data: object.data,
     class: object.classname) do %>
-    <% if object.avatar_url.present? || object.avatar %>
+    <% if object.avatar_url.present? || object.avatar_name %>
       <%= pb_rails("avatar", props: {
         name: object.avatar_name,
         size: "sm",
-        image: {
-          url: object.avatar_url
-        },
+        image_url: object.avatar_url,
         status: object.avatar_status
       }) %>
-      <% end %>
+    <% end %>
     <div class="content_wrapper">
       <%= pb_rails("caption", props: {
         text: object.label
