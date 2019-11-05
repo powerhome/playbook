@@ -12,8 +12,7 @@ RSpec.describe Playbook::PbDashboardValue::DashboardValue do
                       .with_default("left") }
   it { is_expected.to define_prop(:stat_change)
                       .of_type(Playbook::Props::Hash) }
-  it { is_expected.to define_prop(:stat_label)
-                      .of_type(Playbook::Props::Hash) }
+  it { is_expected.to define_string_prop(:stat_label) }
   it { is_expected.to define_prop(:stat_value)
                       .of_type(Playbook::Props::Hash) }
 

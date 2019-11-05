@@ -3,7 +3,7 @@
     data: object.data,
     class: object.classname) do %>
   <% if object.stat_label.present? %>
-    <%= pb_rails("body", props: { color: "light", text: object.stat_label[:label] } ) %>
+    <%= pb_rails("body", props: { color: "light", text: object.stat_label } ) %>
   <% end %>
 
   <% if object.stat_value.present? %>

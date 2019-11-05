@@ -12,8 +12,7 @@ module Playbook
                    default: "left"
       prop :stat_change, type: Playbook::Props::Hash,
                          default: {}
-      prop :stat_label, type: Playbook::Props::Hash,
-                        default: {}
+      prop :stat_label
       prop :stat_value, type: Playbook::Props::Hash,
                         default: {}
 
