@@ -2,36 +2,15 @@
 
 module Playbook
   module PbStarRating
-    class StarRating < Playbook::PbKit::Base
-      PROPS = %i[configured_classname
-                 configured_data
-                 configured_hide_rating
-                 configured_id
-                 configured_rating].freeze
+    class StarRating
+      include Playbook::Props
 
-      def initialize(classname: default_configuration,
-                     data: default_configuration,
-                     hide_rating: default_configuration,
-                     id: default_configuration,
-                     rating: default_configuration)
-        self.configured_classname = classname
-        self.configured_data = data
-        self.configured_hide_rating = hide_rating
-        self.configured_id = id
-        self.configured_rating = rating
-      end
+      partial "pb_star_rating/star_rating"
 
-      def hide_rating
-        true_value(configured_hide_rating, "hide_rating", nil)
-      end
-
-      def rating
-        rating_options = []
-        (0..5).step(0.5) do |number|
-          rating_options.push strip_trailing_zero(number)
-        end
-        one_of_value(configured_rating.to_s, rating_options, "0")
-      end
+      prop :hide_rating, type: Playbook::Props::Boolean,
+                         default: false
+      prop :rating, type: Playbook::Props::Numeric,
+                    default: 0
 
       def star_count
         [*1..rating.to_f]
@@ -41,30 +20,9 @@ module Playbook
         (rating.to_f % 1).zero?
       end
 
-      def kit_class
-        kit_options = [
-          "pb_star_rating_kit",
-          hide_rating,
-        ]
-        kit_options.compact.join("_")
+      def classname
+        generate_classname("pb_star_rating_kit")
       end
-
-      def to_partial_path
-        "pb_star_rating/star_rating"
-      end
-
-    private
-
-      def strip_trailing_zero(number)
-        number.to_s.sub(/\.?0+$/, "")
-      end
-
-      DEFAULT = Object.new
-      private_constant :DEFAULT
-      def default_configuration
-        DEFAULT
-      end
-      attr_accessor(*PROPS)
     end
   end
 end
