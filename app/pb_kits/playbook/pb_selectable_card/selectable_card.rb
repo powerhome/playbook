@@ -8,6 +8,7 @@ module Playbook
                  configured_dark
                  configured_data
                  configured_disabled
+                 configured_icon
                  configured_id
                  configured_multi
                  configured_name
@@ -21,6 +22,7 @@ module Playbook
                      dark: default_configuration,
                      data: default_configuration,
                      disabled: default_configuration,
+                     icon: default_configuration,
                      id: default_configuration,
                      multi: default_configuration,
                      name: default_configuration,
@@ -33,6 +35,7 @@ module Playbook
         self.configured_dark = dark
         self.configured_data = data
         self.configured_disabled = disabled
+        self.configured_icon = icon
         self.configured_id = id
         self.configured_multi = multi
         self.configured_name = name
@@ -52,6 +55,10 @@ module Playbook
 
       def disabled
         true_value(configured_disabled, true, false)
+      end
+
+      def icon
+        is_true? configured_icon
       end
 
       def multi

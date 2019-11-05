@@ -7,7 +7,17 @@
 $pb_card_border_width: 1px;
 $pb_card_border_radius: $border_rad_heavier;
 
-[class^=pb_card_kit] {
+@mixin pb_card_selected {
+  border-color: $primary;
+  border-width: $pb_card_border_width * 2;
+}
+
+@mixin pb_card_dark_selected {
+  border-color: $secondary_action;
+  border-width: $pb_card_border_width * 2;
+}
+
+@mixin pb_card {
   position: relative;
   display: flex;
   flex-direction: column;
@@ -19,14 +29,42 @@ $pb_card_border_radius: $border_rad_heavier;
   border-radius: $pb_card_border_radius;
   transition: all 0.3s ease;
 
-  &[class*=_selected] {
-    border-color: $primary;
-    border-width: $pb_card_border_width * 2;
+  @each $name, $shadow in $box_shadows {
+    &[class*=_#{$name}] {
+      box-shadow: $shadow;
+    }
   }
+}
+
+@mixin pb_card_dark {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  word-wrap: break-word;
+  background-color: $card_dark;
+  background-clip: border-box;
+  border: $pb_card_border_width solid $border_dark;
+  border-radius: $pb_card_border_radius;
+  transition: all 0.3s ease;
 
   @each $name, $shadow in $box_shadows {
     &[class*=_#{$name}] {
       box-shadow: $shadow;
     }
   }
+}
+
+[class^=pb_card_kit] {
+  @include pb_card;
+
+  &[class^=_selected] {
+    @include pb_card_selected;
+  }
+  &[class*=_dark] {
+    &[class*=_selected] {
+      @include pb_card_dark_selected;
+    }
+  }
+
 }
