@@ -6,9 +6,7 @@
     <%= pb_rails("avatar", props: {
       name: object.name,
       size: object.avatar_size,
-      image: {
-        url: object.avatar_url
-      }
+      image_url: object.avatar_url
     }) %>
   <% end %>
   <%= content_tag(:div,
