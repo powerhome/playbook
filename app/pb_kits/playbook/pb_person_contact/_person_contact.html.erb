@@ -15,4 +15,13 @@
           contact_detail: contact[:contact_detail],
       }) %>
     <% end %>
+    <% unless object.wrong_contacts.length == 0 %>
+      <%= pb_rails("caption", props: { text: "wrong number" })%>
+      <% object.wrong_numbers.each do |wrong_number| %>
+        <%= pb_rails("contact", props: {
+            contact_type: wrong_number[:contact_type],
+            contact_value: wrong_number[:contact_value],
+        }) %>
+      <% end %>
+    <% end %>
 <% end %>

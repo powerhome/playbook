@@ -10,7 +10,7 @@ import {
 } from '../'
 
 type ContactProps = {
-  contactType?: 'cell' | 'home' | 'work' | 'email',
+  contactType?: 'cell' | 'home' | 'work' | 'email' | 'wrong number',
   className?: String | Array<String>,
   dark?: Boolean,
   contactValue: String,
@@ -64,6 +64,8 @@ const Contact = ({
         return 'phone-office';
       case 'email':
         return 'envelope';
+      case 'wrong number' :
+        return 'slash-phone';
       default:
         return 'phone';
     }
