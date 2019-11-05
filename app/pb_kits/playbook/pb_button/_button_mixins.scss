@@ -73,7 +73,7 @@ $pb_button_border_width: 1px;
 
 // Secondary ====================
 @mixin pb_button_secondary {
-  @include pb_button($white, $primary_action, $primary_action);
+  @include pb_button(rgba($primary_action, 0.05), $primary_action);
 
   &:hover {
     @include pb_button_hover(rgba($secondary_action, $opacity_3));
