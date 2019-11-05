@@ -2,115 +2,66 @@
 
 module Playbook
   module PbList
-    class List < Playbook::PbKit::Base
-      PROPS = %i[configured_borderless
-                 configured_classname
-                 configured_dark
-                 configured_data
-                 configured_id
-                 configured_layout
-                 configured_size
-                 configured_ordered
-                 configured_xpadding
-                 block].freeze
+    class List
+      include Playbook::Props
 
-      def initialize(borderless: default_configuration,
-                     classname: default_configuration,
-                     dark: default_configuration,
-                     data: default_configuration,
-                     id: default_configuration,
-                     layout: default_configuration,
-                     size: default_configuration,
-                     ordered: default_configuration,
-                     xpadding: default_configuration,
-                     &block)
-        self.configured_borderless = borderless
-        self.configured_classname = classname
-        self.configured_dark = dark
-        self.configured_data = data
-        self.configured_id = id
-        self.configured_layout = layout
-        self.configured_size = size
-        self.configured_ordered = ordered
-        self.configured_xpadding = xpadding
-        self.block = block_given? ? block : nil
+      partial "pb_list/list"
+
+      prop :borderless, type: Playbook::Props::Boolean,
+                        default: false
+      prop :dark, type: Playbook::Props::Boolean,
+                  default: false
+      prop :layout, type: Playbook::Props::Enum,
+                    values: ["left", "right", ""],
+                    default: ""
+      prop :size
+      prop :ordered, type: Playbook::Props::Boolean,
+                     default: false
+      prop :xpadding, type: Playbook::Props::Boolean,
+                      default: false
+
+      def list_classname
+        [
+          "pb_list_kit",
+          xpadding_class,
+          borderless_class,
+          dark_class,
+          size_class,
+          layout_class,
+        ].compact.join("_")
       end
 
-      def class
-        if configured_class == default_configuration
-          ""
-        else
-          configured_class
-        end
-      end
-
-      def dark
-        if configured_dark == default_configuration
-          ""
-        elsif configured_dark == true
-          "_dark"
-        end
-      end
-
-      def layout
-        if configured_layout == default_configuration
-          ""
-        elsif configured_layout == "left"
-          "_layout_left"
-        elsif configured_layout == "right"
-          "_layout_right"
-        end
-      end
-
-      def size
-        case configured_size
-        when default_configuration
-          ""
-        when "large"
-          "_large"
-        end
-      end
-
-      def ordered
-        if configured_ordered == false
-          "ul"
-        else
-          "ol"
-        end
-      end
-
-      def xpadding
-        if configured_xpadding == default_configuration
-          ""
-        elsif configured_xpadding == true
-          "_xpadding"
-        end
-      end
-
-      def borderless
-        if configured_borderless == false
-          ""
-        else
-          "_borderless"
-        end
-      end
-
-      def yield(context:)
-        context.capture(&block)
-      end
-
-      def to_partial_path
-        "pb_list/list"
+      def ordered_class
+        ordered ? "ol" : "ul"
       end
 
     private
 
-      DEFAULT = Object.new
-      private_constant :DEFAULT
-      def default_configuration
-        DEFAULT
+      def borderless_class
+        borderless ? "borderless" : nil
       end
-      attr_accessor(*PROPS)
+
+      def dark_class
+        dark ? "dark" : nil
+      end
+
+      def layout_class
+        if layout == "right"
+          "layout_right"
+        elsif layout == "left"
+          "layout_left"
+        else
+          ""
+        end
+      end
+
+      def size_class
+        size ? "large" : nil
+      end
+
+      def xpadding_class
+        xpadding ? "xpadding" : nil
+      end
     end
   end
 end
