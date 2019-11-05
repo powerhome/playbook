@@ -1,8 +1,10 @@
 <%= content_tag(:li,
     id: object.id,
     data: object.data,
-    class: object.classname("vertical_nav_list_border_item#{object.active_class}")) do %>
+    class: object.classname) do %>
     <a href=<%= object.link %> class="vertical_nav_list_item_link">
-     <span class="vertical_nav_list_item_link_text"><%= object.text %><%= object.yield(context: self) %></span>
+     <span class="vertical_nav_list_item_link_text">
+      <%= object.text %><%= capture(&object.children) if !object.children.nil? %>
+    </span>
    </a>
 <% end %>
