@@ -15,11 +15,11 @@ module Playbook
       prop :date
 
       def year
-        year = as_date.to_year
+        as_date.to_year
       end
 
       def day_month
-        day_month = "#{as_date.to_day.strip} #{as_date.to_month}"
+        "#{as_date.to_day.strip} #{as_date.to_month}"
       end
 
       def classname
