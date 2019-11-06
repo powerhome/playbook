@@ -2,74 +2,35 @@
 
 module Playbook
   module PbDateYearStacked
-    class DateYearStacked < Playbook::PbKit::Base
-      PROPS = %i[configured_align
-                 configured_classname
-                 configured_dark
-                 configured_data
-                 configured_date
-                 configured_id].freeze
+    class DateYearStacked
+      include Playbook::Props
 
-      def initialize(align: default_configuration,
-                     classname: default_configuration,
-                     dark: default_configuration,
-                     data: default_configuration,
-                     date: default_configuration,
-                     id: default_configuration)
-        self.configured_align = align
-        self.configured_classname = classname
-        self.configured_dark = dark
-        self.configured_data = data
-        self.configured_date = date
-        self.configured_id = id
-      end
+      partial "pb_date_year_stacked/date_year_stacked"
 
-      def align
-        align_options = %w[left center right]
-        one_of_value(configured_align, align_options, "left")
-      end
-
-      def dark
-        is_true? configured_dark
-      end
-
-      def date
-        Playbook::PbKit::PbDateTime.new(configured_date)
-      end
+      prop :align, type: Playbook::Props::Enum,
+                   values: %w[left center right],
+                   default: "left"
+      prop :dark, type: Playbook::Props::Boolean,
+                  default: false
+      prop :date
 
       def year
-        year = date.to_year
-        pb_body = Playbook::PbBody::Body.new(text: year, color: "light", dark: dark)
-        ApplicationController.renderer.render(partial: pb_body, as: :object)
+        year = as_date.to_year
       end
 
       def day_month
-        day_month = "#{date.to_day} #{date.to_month}"
-        pb_title = Playbook::PbTitle::Title.new(text: day_month, size: 4, dark: dark)
-        ApplicationController.renderer.render(partial: pb_title, as: :object)
+        day_month = "#{as_date.to_day.strip} #{as_date.to_month}"
       end
 
-      def to_partial_path
-        "pb_date_year_stacked/date_year_stacked"
-      end
-
-      def kit_class
-        kit_options = [
-          "pb_date_year_stacked",
-          align,
-
-        ]
-        kit_options.join("_")
+      def classname
+        generate_classname("pb_date_year_stacked", align)
       end
 
     private
 
-      DEFAULT = Object.new
-      private_constant :DEFAULT
-      def default_configuration
-        DEFAULT
+      def as_date
+        Playbook::PbKit::PbDateTime.new(date)
       end
-      attr_accessor(*PROPS)
     end
   end
 end
