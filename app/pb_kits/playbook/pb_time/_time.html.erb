@@ -2,5 +2,12 @@
     id: object.id,
     data: object.data,
     class: object.classname) do %>
-  <%= object.display_value %>
+  <% if object.size == "lg" %>
+    <%= pb_rails("title", props: { text: object.format_time_string, size: 3 }) %>
+  <% elsif object.size == "sm" %>
+    <%= pb_rails("icon", props: { icon: "clock", fixed_width: true }) %>
+    <%= pb_rails("body", props: { tag: "span", text: object.format_time_string }) %>
+  <% else %>
+    <%= pb_rails("body", props: { text: object.format_time_string }) %>
+  <% end %>
 <% end %>

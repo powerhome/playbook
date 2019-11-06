@@ -9,7 +9,7 @@ RSpec.describe Playbook::PbTime::Time do
 
   describe "classname" do
     it "returns namespaced class name", :aggregate_failures do
-      expect(subject.new({}).classname).to eq "pb_title_count_kit_left_sm"
+      expect(subject.new({}).classname).to eq "pb_time_kit_sm"
     end
   end
 end
