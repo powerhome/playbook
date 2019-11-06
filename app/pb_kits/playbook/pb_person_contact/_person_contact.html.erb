@@ -15,7 +15,7 @@
           contact_detail: contact[:contact_detail],
       }) %>
     <% end %>
-    <% unless object.wrong_contacts.length == 0 %>
+    <% unless object.wrong_contacts.empty? %>
       <%= pb_rails("caption", props: { text: "wrong number" })%>
     <% end %>
       <% object.wrong_contacts.each do |wrong_number| %>
