@@ -2,58 +2,25 @@
 
 module Playbook
   module PbTime
-    class Time < Playbook::PbKit::Base
-      include ActionView::Helpers::TagHelper
-      include ActionView::Context
+    class Time
+      include Playbook::Props
 
-      PROPS = %i[configured_classname
-                 configured_data
-                 configured_id
-                 configured_size
-                 configured_time
-                 configured_timestamp
-                 configured_timezone].freeze
+      partial "pb_time/time"
 
-      def initialize(classname: default_configuration,
-                     data: default_configuration,
-                     id: default_configuration,
-                     size: default_configuration,
-                     time: default_configuration,
-                     timestamp: default_configuration,
-                     timezone: default_configuration)
-        self.configured_classname = classname
-        self.configured_data = data
-        self.configured_id = id
-        self.configured_size = size
-        self.configured_time = time
-        self.configured_timestamp = timestamp
-        self.configured_timezone = timezone
+      prop :size, type: Playbook::Props::Enum,
+                  values: %w[lg sm xs],
+                  default: "sm"
+      prop :time
+      prop :timestamp
+      prop :timezone
+
+      self.configured_time = time
+      self.configured_timestamp = timestamp
+      self.configured_timezone = timezone
+
+      def classname
+        generate_classname("pb_time_kit", size)
       end
-
-      def display_value
-        case size
-        when "lg"
-          display_value_lg
-        when "sm"
-          display_value_sm
-        else
-          display_value_xs
-        end
-      end
-
-      def kit_class
-        kit_options = [
-          "pb_time_kit",
-          size,
-        ]
-        kit_options.join("_")
-      end
-
-      def to_partial_path
-        "pb_time/time"
-      end
-
-    private
 
       def timestamp
         if is_set? configured_time
@@ -76,11 +43,6 @@ module Playbook
         content_tag(:span, class: "pb_time_timezone") do
           timestamp.to_timezone.upcase
         end
-      end
-
-      def size
-        size_options = %w[lg sm xs]
-        one_of_value(configured_size, size_options, "sm")
       end
 
       def icon
@@ -122,13 +84,6 @@ module Playbook
           ApplicationController.renderer.render(partial: pb_value_lg, as: :object)
         end
       end
-
-      DEFAULT = Object.new
-      private_constant :DEFAULT
-      def default_configuration
-        DEFAULT
-      end
-      attr_accessor(*PROPS)
     end
   end
 end
