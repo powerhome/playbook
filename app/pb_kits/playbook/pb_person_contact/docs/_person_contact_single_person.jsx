@@ -14,17 +14,14 @@ function PersonContactSinglePerson() {
         contacts={[
           {
             contactType: "email",
-            contactValue: "email@example.com",
-            contactDetail: "Harvey's Email",
+            contactValue: "email@example.com"
           },
           {
             contactValue: "5555555555",
-            contactDetail: "Home",
           },
           {
             contactType: "work",
             contactValue: "3245627482",
-            contactDetail: "Harvey's Work",
           }
         ]}
       />

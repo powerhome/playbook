@@ -14,7 +14,6 @@ type ContactProps = {
   className?: String | Array<String>,
   dark?: Boolean,
   contactValue: String,
-  contactDetail?: String,
 }
 
 const kitClasses = ({}: ContactProps) => {
@@ -27,28 +26,19 @@ const Contact = ({
   className,
   dark=false,
   contactValue,
-  contactDetail="",
 }: ContactProps) => {
-
-  const formatDetail = (contactDetail) => {
-    if (contactDetail !== undefined) {
-      return `\u00b7 ${contactDetail}`
-    } else {
-      return contactDetail
-    }
-  }
 
   const css = classnames(kitClasses({contactType}), className)
 
-  const formatContact = (contactString, contactType) => {
+  const formatPhoneNumber = (phoneNumberString, contactType) => {
     if (contactType == "email") {
-      return contactString
+      return phoneNumberString
     } else {
-      const cleaned = contactString.replace(/\D/g, '')
-      const phoneNumber = cleaned.match(/^(1|)?(\d{3})(\d{3})(\d{4})$/)
-      if (phoneNumber) {
-        let intlCode = (phoneNumber[1] ? '+1 ' : '')
-        return [intlCode, '(', phoneNumber[2], ') ', phoneNumber[3], '-', phoneNumber[4]].join('')
+      let cleaned = ('' + phoneNumberString).replace(/\D/g, '')
+      let match = cleaned.match(/^(1|)?(\d{3})(\d{3})(\d{4})$/)
+      if (match) {
+        let intlCode = (match[1] ? '+1 ' : '')
+        return [intlCode, '(', match[2], ') ', match[3], '-', match[4]].join('')
       }
       return null
     }
@@ -73,7 +63,7 @@ const Contact = ({
     <div className={css}>
       <Body dark={dark} color="light" >
         <Icon icon={contactTypeIcon} fixedWidth="true" />
-        {` ${formatContact(contactValue, contactType)} ${formatDetail(contactDetail)}`}
+        {` ${formatPhoneNumber(contactValue, contactType)}`}
       </Body>
     </div>
   )

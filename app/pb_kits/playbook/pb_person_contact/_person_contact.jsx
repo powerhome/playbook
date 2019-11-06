@@ -13,7 +13,7 @@ type PersonContactProps = {
   className?: String | Array<String>,
   dark?: Boolean,
   people?: Array<{firstName: String, lastName: String}>,
-  contacts?: Array<{contactType: String, contactValue: String, contactDetail: String}>,
+  contacts?: Array<{contactType: String, contactValue: String}>,
 }
 
 const contactsArray = ({contacts=[]}: PersonContactProps) => {
@@ -22,7 +22,6 @@ const contactsArray = ({contacts=[]}: PersonContactProps) => {
       <Contact
         contactType={contactObject.contactType}
         contactValue={contactObject.contactValue}
-        contactDetail={contactObject.contactDetail}
       />
     );
   })

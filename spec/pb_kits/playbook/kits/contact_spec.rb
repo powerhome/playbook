@@ -9,7 +9,6 @@ RSpec.describe Playbook::PbContact::Contact do
 
   it { is_expected.to define_prop(:contact_type) }
   it { is_expected.to define_prop(:contact_value) }
-  it { is_expected.to define_prop(:contact_detail) }
 
   describe "#classname" do
     it "returns namespaced class name", :aggregate_failures do
