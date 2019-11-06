@@ -6,7 +6,7 @@ function HomeAddressStreetModified() {
     <HomeAddressStreet
         address="70 Prospect Ave"
         city="West Chester"
-        address_cont="M18"
+        addressCont="M18"
         homeId={8250263}
         state="PA"
         zipcode="19382"

@@ -5,7 +5,7 @@ function HomeAddressStreetDefault() {
   return (
     <HomeAddressStreet
         address="70 Prospect Ave"
-        address_cont="Apt M18"
+        addressCont="Apt M18"
         city="West Chester"
         homeId={8250263}
         houseStyle="Colonial"

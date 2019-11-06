@@ -16,16 +16,12 @@ const dot = (houseStyle) =>
     return "\u00b7"
   }
 }
+const titleizeAddessCont = (addressCont) => addressCont ? titleize(addressCont) : null;
 
-function titleize_address_cont(address_cont) {
-  if (!!address_cont) {
-   return titleize(address_cont);
-  }
-}
 
 type HomeAddressStreetProps = {
   address: String,
-  address_cont: String,
+  addressCont: String,
   city: String,
   className?: String,
   dark?: Boolean,
@@ -46,7 +42,7 @@ const classes = (className, dark) => (
 
 const HomeAddressStreet = ({
   address,
-  address_cont,
+  addressCont,
   city,
   className,
   dark=false,
@@ -68,7 +64,7 @@ const HomeAddressStreet = ({
         className="pb_home_address_street_address"
         size={4}
     >
-      {titleize_address_cont(address_cont)}
+      {titleizeAddessCont(addressCont)}
     </Title>
     <Body color="light">
       {titleize(city)}, {state} {zipcode}
