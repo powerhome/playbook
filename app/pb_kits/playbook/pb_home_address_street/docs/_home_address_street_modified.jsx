@@ -4,9 +4,9 @@ import {HomeAddressStreet} from "../../"
 function HomeAddressStreetModified() {
   return (
     <HomeAddressStreet
-        address="70 prospect ave"
-        city="WEST CHESTER"
-        address_cont="m18"
+        address="70 Prospect Ave"
+        city="West Chester"
+        address_cont="M18"
         homeId={8250263}
         state="PA"
         zipcode="19382"

@@ -3,6 +3,8 @@
 
 import React from 'react'
 import classnames from 'classnames'
+import { titleize } from '../utilities/text.js'
+
 
 import {
   Body,
@@ -13,18 +15,6 @@ const dot = (houseStyle) =>
   { if (houseStyle !== undefined) {
     return "\u00b7"
   }
-}
-
-function titleize(sentence) {
-    if(!sentence.split) return sentence;
-    var _titleizeWord = function(string) {
-            return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
-        },
-        result = [];
-    sentence.split(" ").forEach(function(w) {
-        result.push(_titleizeWord(w));
-    });
-    return result.join(" ");
 }
 
 function titleize_address_cont(address_cont) {
