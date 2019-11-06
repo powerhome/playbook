@@ -8,7 +8,7 @@
           last_name: person[:last_name],
       }) %>
     <% end %>
-    <% object.contacts.each do |contact| %>
+    <% object.valid_contacts.each do |contact| %>
       <%= pb_rails("contact", props: {
           contact_type: contact[:contact_type],
           contact_value: contact[:contact_value],
@@ -17,11 +17,11 @@
     <% end %>
     <% unless object.wrong_contacts.length == 0 %>
       <%= pb_rails("caption", props: { text: "wrong number" })%>
-      <% object.wrong_numbers.each do |wrong_number| %>
+    <% end %>
+      <% object.wrong_contacts.each do |wrong_number| %>
         <%= pb_rails("contact", props: {
             contact_type: wrong_number[:contact_type],
             contact_value: wrong_number[:contact_value],
         }) %>
       <% end %>
-    <% end %>
 <% end %>
