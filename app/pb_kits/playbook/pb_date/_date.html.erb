@@ -2,14 +2,13 @@
     id: object.id,
     data: object.data,
     class: object.classname) do %>
-    <% if object.display_size == "lg" %>
-      <%= pb_rails("title", props: { text: object.lg_date_string, size: 3 }) %>
-    <% elsif object.display_size == "sm" %>
-      <%= pb_rails("title", props: { text: object.lg_date_string, size: 3 }) do %>
-       <%= pb_rails("icon", props: { icon: "calendar", fixed_width: true }) %>
+    <% if object.size == "lg" %>
+      <%= pb_rails("title", props: { text: object.lg_date, size: 3 }) %>
+    <% elsif object.size == "sm" %>
+      <%= pb_rails("icon", props: { icon: "calendar", fixed_width: true }) %>
+      <%= pb_rails("title", props: { tag: "span", text: object.sm_date, size: 4 }) %>
     <% else %>
-      <%= pb_rails("title", props: { text: object.xs_date_string, size: 4 }) %>
-    <% end %>
-    <%= object.display_value %>
+      <%= pb_rails("title", props: { text: object.xs_date, size: 4 }) %>
   <% end %>
 <% end %>
+
