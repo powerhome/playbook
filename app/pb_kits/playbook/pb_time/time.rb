@@ -7,7 +7,7 @@ module Playbook
 
       partial "pb_time/time"
 
-      prop :time, required: true
+      prop :time
       prop :size, type: Playbook::Props::Enum,
                   values: %w[lg sm xs],
                   default: "sm"
@@ -18,13 +18,7 @@ module Playbook
       end
 
       def format_time_string
-        "#{pb_date_time.to_hour}:#{pb_date_time.to_minutes}#{pb_date_time.to_meridian}".html_safe
-      end
-
-      def timezone
-        content_tag(:span, class: "pb_time_timezone") do
-          timestamp.to_timezone.upcase
-        end
+        "#{pb_date_time.to_hour}:#{pb_date_time.to_minutes}#{pb_date_time.to_meridian} #{pb_date_time.to_timezone}"
       end
 
     private
