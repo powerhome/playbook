@@ -6,9 +6,8 @@ RSpec.describe Playbook::PbTime::Time do
   subject { Playbook::PbTime::Time }
 
   it { is_expected.to define_partial }
-
   it { is_expected.to define_prop(:time) }
-
+  it { is_expected.to define_prop(:timezone).with_default("America/New_York") }
   it do
     is_expected.to define_enum_prop(:size)
       .with_default("sm")
