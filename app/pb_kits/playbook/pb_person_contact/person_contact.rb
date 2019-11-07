@@ -10,6 +10,14 @@ module Playbook
       prop :contacts, type: Playbook::Props::HashArray, default: []
       prop :people, type: Playbook::Props::HashArray, default: []
 
+      def wrong_contacts
+        contacts.select {|contact| contact[:contact_type] == "wrong number" }
+      end
+
+      def valid_contacts
+        contacts.select {|contact| contact[:contact_type] != "wrong number" }
+      end
+
       def classname
         generate_classname("pb_person_contact_kit")
       end

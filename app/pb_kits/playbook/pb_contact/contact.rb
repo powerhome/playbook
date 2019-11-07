@@ -28,6 +28,8 @@ module Playbook
           "phone-office"
         when "email"
           "envelope"
+        when "wrong number"
+          "phone-slash"
         else # "unknown" || "other"
           "phone"
         end
