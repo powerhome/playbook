@@ -3,11 +3,14 @@
     data: object.data,
     class: object.classname) do %>
   <% if object.size == "lg" %>
-    <%= pb_rails("title", props: { text: object.format_time_string, size: 3 }) %>
+    <%= pb_rails("title", props: { tag: "span", text: object.format_time_string, size: 3 }) %>
+    <%= pb_rails("body", props: { tag: "span", text: object.format_timezone_string, color: "lighter" }) %>
   <% elsif object.size == "sm" %>
     <%= pb_rails("icon", props: { icon: "clock", fixed_width: true }) %>
     <%= pb_rails("body", props: { tag: "span", text: object.format_time_string }) %>
+    <%= pb_rails("body", props: { tag: "span", text: object.format_timezone_string, color: "lighter" }) %>
   <% else %>
-    <%= pb_rails("body", props: { text: object.format_time_string }) %>
+    <%= pb_rails("body", props: { tag: "span", text: object.format_time_string }) %>
+    <%= pb_rails("body", props: { tag: "span", text: object.format_timezone_string, color: "lighter" }) %>
   <% end %>
 <% end %>

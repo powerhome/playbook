@@ -18,7 +18,11 @@ module Playbook
       end
 
       def format_time_string
-        "#{pb_date_time.to_hour}:#{pb_date_time.to_minutes}#{pb_date_time.to_meridian} #{pb_date_time.to_timezone}"
+        "#{pb_date_time.to_hour}:#{pb_date_time.to_minutes}#{pb_date_time.to_meridian}"
+      end
+
+      def format_timezone_string
+        "#{pb_date_time.to_timezone}"
       end
 
     private
