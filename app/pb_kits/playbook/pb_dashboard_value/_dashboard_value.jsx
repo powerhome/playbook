@@ -17,9 +17,7 @@ type DashboardValueProps = {
     change?: String,
     value?: String | Number
   },
-  stat_label?: {
-    label?: String
-  },
+  stat_label?: String,
   stat_value?: {
     unit?: String,
     value?: String | Number
@@ -49,7 +47,7 @@ const DashboardValue = (props: DashboardValueProps) => {
   const statLabel = function(stat_label) {
     if (stat_label) {
       return (
-        <Body color="light">{stat_label.label}</Body>
+        <Body color="light">{stat_label}</Body>
       )
     }
   }
