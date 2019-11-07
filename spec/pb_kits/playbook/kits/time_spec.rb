@@ -7,9 +7,20 @@ RSpec.describe Playbook::PbTime::Time do
 
   it { is_expected.to define_partial }
 
-  describe "classname" do
+  it { is_expected.to define_prop(:time) }
+
+  it do
+    is_expected.to define_enum_prop(:size)
+      .with_default("sm")
+      .with_values("lg", "sm", "xs")
+  end
+
+  describe "#classname" do
     it "returns namespaced class name", :aggregate_failures do
-      expect(subject.new({}).classname).to eq "pb_time_kit_sm"
+      required_props = { time: Time.now }
+
+      expect(subject.new(required_props).classname).to eq "pb_time_kit_sm"
+      expect(subject.new(required_props.merge(size: "lg")).classname).to eq "pb_time_kit_lg"
     end
   end
 end

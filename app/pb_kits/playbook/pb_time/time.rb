@@ -7,7 +7,7 @@ module Playbook
 
       partial "pb_time/time"
 
-      prop :time
+      prop :time, required: true
       prop :size, type: Playbook::Props::Enum,
                   values: %w[lg sm xs],
                   default: "sm"
@@ -24,8 +24,6 @@ module Playbook
       def format_timezone_string
         "#{pb_date_time.to_timezone}"
       end
-
-    private
 
       def pb_date_time
         pb_date_time ||= Playbook::PbKit::PbDateTime.new(time, timezone)
