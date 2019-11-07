@@ -3,14 +3,14 @@
 @import "../tokens/spacing";
 @import "../tokens/typography";
 
-.pb_input_kit {
+.pb_text_input_kit {
   margin: 8px;
 
-  .input_wrapper {
+  .text_input_wrapper {
     margin-bottom: 1rem;
   }
 
-  .pb_input_kit {
+  .pb_text_input_kit {
     border: 1px solid $border-light;
     border-radius: $border-rad-light;
     display: block;

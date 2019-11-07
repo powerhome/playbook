@@ -21,7 +21,6 @@ kits:
   - icon_circle
   - icon_value
   - image
-  - input
   - label_pill
   - label_value
   - layout
@@ -40,6 +39,7 @@ kits:
   - stat_change
   - stat_value
   - table
+  - text_input
   - time
   - timestamp
   - title

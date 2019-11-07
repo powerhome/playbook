@@ -1,30 +1,32 @@
 import React from "react"
 import {PersonContact} from "../../"
 
-function PersonContactSinglePerson() {
+function PersonContactMultiple() {
   return (
     <div>
       <PersonContact
-        people={[
-          {
-            firstName: "Harvey",
-            lastName: "Walters"
-          }
-        ]}
+        firstName="Harvey"
+        lastName="Walters"
         contacts={[
           {
             contactType: "email",
             contactValue: "email@example.com",
-            contactDetail: "Harvey's Email",
           },
           {
             contactValue: "5555555555",
-            contactDetail: "Home",
           },
           {
             contactType: "work",
             contactValue: "3245627482",
-            contactDetail: "Harvey's Work",
+          }
+        ]}
+      />
+      <PersonContact
+        firstName="Brenda"
+        lastName="Walters"
+        contacts={[
+          {
+            contactValue: "5555555555",
           }
         ]}
       />
@@ -32,4 +34,4 @@ function PersonContactSinglePerson() {
   )
 }
 
-export default PersonContactSinglePerson;
+export default PersonContactMultiple;

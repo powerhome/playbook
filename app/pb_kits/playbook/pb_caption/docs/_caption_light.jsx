@@ -5,7 +5,8 @@ function CaptionLight() {
   return (
     <div>
       <Caption text="Caption" />
-      <Caption large text="Caption Large" />
+      <Caption size="lg" text="Caption Large" />
+      <Caption size="xs" text="Subcaption" />
     </div>
   )
 }

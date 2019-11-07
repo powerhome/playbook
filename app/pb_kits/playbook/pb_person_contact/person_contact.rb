@@ -8,7 +8,8 @@ module Playbook
       partial "pb_person_contact/person_contact"
 
       prop :contacts, type: Playbook::Props::HashArray, default: []
-      prop :people, type: Playbook::Props::HashArray, default: []
+      prop :first_name
+      prop :last_name
 
       def wrong_contacts
         contacts.select {|contact| contact[:contact_type] == "wrong number" }

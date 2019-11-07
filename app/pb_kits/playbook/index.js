@@ -20,7 +20,6 @@ import Icon from "./pb_icon/_icon.jsx"
 import IconCircle from "./pb_icon_circle/_icon_circle.jsx"
 import IconValue from "./pb_icon_value/_icon_value.jsx"
 import Image from "./pb_image/_image.jsx"
-import Input from "./pb_input/_input.jsx"
 import LabelPill from "./pb_label_pill/_label_pill.jsx"
 import LabelValue from "./pb_label_value/_label_value.jsx"
 import Layout from "./pb_layout/_layout.jsx"
@@ -40,6 +39,7 @@ import StarRating from "./pb_star_rating/_star_rating.jsx"
 import StatChange from "./pb_stat_change/_stat_change.jsx"
 import StatValue from "./pb_stat_value/_stat_value.jsx"
 import Table from "./pb_table/_table.jsx"
+import TextInput from "./pb_text_input/_text_input.jsx"
 import Time from "./pb_time/_time.jsx"
 import TimeStamp from "./pb_timestamp/_timestamp.jsx"
 import Title from "./pb_title/_title.jsx"
@@ -62,14 +62,18 @@ export {
   Avatar,
   Badge,
   BarGraph,
+  barGraphSettings,
   Body,
   Button,
   Caption,
   Card,
   Checkbox,
+  commonSettings,
   Contact,
   Currency,
   DashboardValue,
+  dashboardValueSettings,
+  dataColors,
   DateRangeInline,
   DateYearStacked,
   DistributionBar,
@@ -80,16 +84,17 @@ export {
   IconCircle,
   IconValue,
   Image,
-  Input,
   LabelPill,
   LabelValue,
   Layout,
   LineGraph,
+  lineGraphSettings,
   List,
   ListItem,
   LoadingInline,
   Message,
   OnlineStatus,
+  pbChart,
   Person,
   PersonContact,
   Pill,
@@ -100,6 +105,7 @@ export {
   StatChange,
   StatValue,
   Table,
+  TextInput,
   Time,
   TimeStamp,
   Title,
@@ -107,10 +113,4 @@ export {
   User,
   UserBadge,
   VerticalNav,
-  barGraphSettings,
-  commonSettings,
-  dashboardValueSettings,
-  dataColors,
-  lineGraphSettings,
-  pbChart,
 }
