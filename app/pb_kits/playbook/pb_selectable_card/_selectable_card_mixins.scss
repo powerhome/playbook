@@ -6,7 +6,7 @@
 @import "../pb_card/card";
 
 @mixin pb_selectable_card {
-  $dot-size: 20px;
+  $dot-size: 22px;
 
   input[type="checkbox"],
   input[type="radio"] {
@@ -61,7 +61,7 @@
 }
 
 @mixin pb_selectable_card_dark{
-  $dot-size: 20px;
+  $dot-size: 22px;
 
   input[type="checkbox"],
   input[type="radio"] {
@@ -89,7 +89,7 @@
 
     &:hover {
       box-shadow: $shadow-default;
-      border-color: $slate;
+      border-color: $bg_dark;
     }
 
     .pb_selectable_card_circle {
@@ -100,13 +100,13 @@
       height: $dot-size;
       width: $dot-size;
       border-radius: ($dot-size/2);
-      border: 1px solid $white;
+      border: 2px solid $card_dark;
       background: $secondary_action;
       position: absolute;
       top: -($dot-size/2);
       right: -($dot-size/2);
       opacity: 0;
-      padding-top: 2px;
+      padding: 2px;
 
       transition-property: opacity;
       transition-duration: 0.15s;
