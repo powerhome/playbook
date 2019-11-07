@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    playbook_ui (2.9.6)
+    playbook_ui (2.9.7)
       actionpack (>= 5.1.6, < 6.0)
       actionview (>= 5.1.6, < 6.0)
       activesupport (>= 5.1.6, < 6.0)
