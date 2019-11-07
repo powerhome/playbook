@@ -10,19 +10,10 @@ module Playbook
       prop :contacts, type: Playbook::Props::HashArray, default: []
       prop :people, type: Playbook::Props::HashArray, default: []
 
-      # def filter_number
-      #   if contact_type = "wrong number"
-      #     wrong_number << contact
-      #     positon = contacts.find_index(contact)
-      #     contacts.delete_at(position)
-      #   end
-      #   wrong_number
-      #   contacts
-      # end
-
       def wrong_contacts
         contacts.select {|contact| contact[:contact_type] == "wrong number" }
       end
+
       def valid_contacts
         contacts.select {|contact| contact[:contact_type] != "wrong number" }
       end
