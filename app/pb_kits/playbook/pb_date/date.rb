@@ -6,6 +6,7 @@ module Playbook
       include ActionView::Helpers::TagHelper
       include ActionView::Context
       include Playbook::Props
+
       partial "pb_date/date"
 
       prop :date, required: true

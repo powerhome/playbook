@@ -16,8 +16,8 @@ RSpec.describe Playbook::PbDate::Date do
 
   describe "#classname" do
     it "returns namespaced class name", :aggregate_failures do
-      expect(subject.new({}).classname).to eq "pb_date_kit_sm"
-      expect(subject.new(size: "lg").classname).to eq "pb_date_kit_lg"
+      expect(subject.new({}).classname).to eq "pb_date_kit"
+      expect(subject.new(classname: "additional_class").classname).to eq "pb_date_kit additional_class"
     end
   end
 end
