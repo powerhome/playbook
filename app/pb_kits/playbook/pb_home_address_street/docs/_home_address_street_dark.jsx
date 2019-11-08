@@ -5,7 +5,7 @@ function HomeAddressStreetDark() {
   return (
     <HomeAddressStreet
         address="70 Prospect Ave"
-        address_cont="Apt M18"
+        addressCont="Apt M18"
         city="West Chester"
         dark
         homeId={8250263}

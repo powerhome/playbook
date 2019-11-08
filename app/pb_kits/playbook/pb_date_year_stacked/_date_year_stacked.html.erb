@@ -1,7 +1,7 @@
 <%= content_tag(:div,
     id: object.id,
     data: object.data,
-    class: object.classname(object.kit_class)) do %>
-  <%= object.day_month %>
-  <%= object.year %>
+    class: object.classname) do %>
+  <%= pb_rails("title", props: { text: object.day_month, size: 4, dark: object.dark }) %>
+  <%= pb_rails("body", props: { text: object.year, size: 4, color: "light", dark: object.dark }) %>
 <% end %>

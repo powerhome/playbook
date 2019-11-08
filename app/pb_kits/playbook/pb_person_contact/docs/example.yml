@@ -2,11 +2,12 @@ examples:
 
   rails:
   - person_contact_default: Default
-  - person_contact_single_person: One Person
-  - person_contact_three_people: Three People
+  - person_contact_multiple: Multiple People
+  - person_contact_with_detail: With Detail
+
 
 
   react:
   - person_contact_default: Default
-  - person_contact_single_person: One Person
-  - person_contact_three_people: Three People
+  - person_contact_multiple: Multiple People
+  - person_contact_with_detail: With Detail

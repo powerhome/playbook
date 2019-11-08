@@ -22,15 +22,15 @@ module Playbook
       end
 
       def city_state_zip
-        "#{city}, #{state} #{zipcode}"
+        "#{city.titleize}, #{state} #{zipcode}"
       end
 
       def address_house_style
-        "#{address} #{separator} #{house_style}"
+        "#{address.titleize} #{separator} #{house_style}"
       end
 
       def address_house_style2
-        address_cont
+        address_cont&.titleize
       end
 
       def separator

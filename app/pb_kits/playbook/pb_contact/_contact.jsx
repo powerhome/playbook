@@ -6,11 +6,12 @@ import classnames from 'classnames'
 
 import {
   Body,
+  Caption,
   Icon,
 } from '../'
 
 type ContactProps = {
-  contactType?: 'cell' | 'home' | 'work' | 'email',
+  contactType?: 'cell' | 'home' | 'work' | 'email' | 'wrong number',
   className?: String | Array<String>,
   dark?: Boolean,
   contactValue: String,
@@ -32,7 +33,9 @@ const Contact = ({
 
   const formatDetail = (contactDetail) => {
     if (contactDetail !== undefined) {
-      return `\u00b7 ${contactDetail}`
+      return (
+        <Caption size="xs" text={contactDetail} tag="span" />
+      );
     } else {
       return contactDetail
     }
@@ -64,16 +67,19 @@ const Contact = ({
         return 'phone-office';
       case 'email':
         return 'envelope';
+      case 'wrong number' :
+        return 'slash-phone';
       default:
         return 'phone';
     }
   })(contactType)
 
+
   return (
     <div className={css}>
-      <Body dark={dark} color="light" >
+      <Body dark={dark} color="light" tag="span" className="pb_contact_kit" >
         <Icon icon={contactTypeIcon} fixedWidth="true" />
-        {` ${formatContact(contactValue, contactType)} ${formatDetail(contactDetail)}`}
+        {` ${formatContact(contactValue, contactType)} `}{formatDetail(contactDetail)}
       </Body>
     </div>
   )

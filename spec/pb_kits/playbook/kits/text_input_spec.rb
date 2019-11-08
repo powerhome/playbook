@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
-require_relative "../../../../app/pb_kits/playbook/pb_input/input"
+require_relative "../../../../app/pb_kits/playbook/pb_text_input/text_input"
 
-RSpec.describe Playbook::PbInput::Input do
-  subject { Playbook::PbInput::Input }
+RSpec.describe Playbook::PbTextInput::TextInput do
+  subject { Playbook::PbTextInput::TextInput }
 
   it { is_expected.to define_partial }
 
@@ -15,8 +15,8 @@ RSpec.describe Playbook::PbInput::Input do
 
   describe "#classname" do
     it "returns namespaced class name", :aggregate_failures do
-      expect(subject.new({}).classname).to eq "pb_input_kit"
-      expect(subject.new(classname: "additional_class").classname).to eq "pb_input_kit additional_class"
+      expect(subject.new({}).classname).to eq "pb_text_input_kit"
+      expect(subject.new(classname: "additional_class").classname).to eq "pb_text_input_kit additional_class"
     end
   end
 end
