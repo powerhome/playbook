@@ -1,0 +1,5 @@
+<%= pb_rails("vertical_nav", props: { orientation: "horizontal"}) do %>
+  <%= pb_rails("vertical_nav/item", props: { text: "Active Nav Item using text prop", link: "#", active: true }) %>
+  <%= pb_rails("vertical_nav/item", props: { text: "Nav Item using text prop", link: "#" }) %>
+  <%= pb_rails("vertical_nav/item", props: { text: "Nav Item using text prop", link: "#" }) %>
+<% end %>

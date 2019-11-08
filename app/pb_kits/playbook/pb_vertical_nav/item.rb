@@ -12,7 +12,7 @@ module Playbook
       prop :text
 
       def classname
-        generate_classname("vertical_nav_list_border_item", active_class)
+        generate_classname("pb_nav_list_border_item", active_class)
       end
 
     private

@@ -10,10 +10,18 @@ module Playbook
 
       prop :link, default: "#"
       prop :title
+      prop :orientation, type: Playbook::Props::Enum,
+                    values: ["vertical", "horizontal"],
+                    default: "vertical"
 
       def classname
-        generate_classname("vertical_nav_list")
+        [
+          "pb_nav_list",
+          orientation
+        ].compact.join("_")
       end
+
+
     end
   end
 end

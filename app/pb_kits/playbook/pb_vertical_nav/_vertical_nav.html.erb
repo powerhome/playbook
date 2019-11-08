@@ -3,8 +3,8 @@
     data: object.data,
     class: object.classname) do %>
   <% if object.title %>
-    <%= content_tag(:div, class: "vertical_nav_list_title") do %>
-      <%= content_tag(:a, class: "vertical_nav_list_item_link_text", href: object.link) do %>
+    <%= content_tag(:div, class: "#{object.classname}_title") do %>
+      <%= content_tag(:a, class: "#{object.classname}_item_link_text", href: object.link) do %>
         <%= pb_rails("caption", props: { text: object.title }) %>
       <% end %>
     <% end %>
