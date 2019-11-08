@@ -1,0 +1,143 @@
+@import "../tokens/typography";
+@import "../tokens/spacing";
+@import "../tokens/colors"; // Another style should be borders like buttons
+$selector: ".pb_nav_list";
+
+[class^=pb_nav_list][class*=_vertical] {
+  ul {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
+
+  [class*=_title] {
+    padding: 0 $space_xl $space_sm;
+  }
+
+  [class*=_border_item] {
+    list-style: none;
+    border-bottom: 1px solid $border_light;
+
+    &:last-child {
+      border-bottom: 0;
+    }
+
+    [class*=_link] {
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      padding: $space_sm $space_xl;
+      border: 0 solid transparent;
+      border-width: 0 0 0 3px;
+      transition-property: color, border-color, background-color;
+      transition-duration: 0.15s;
+      transition-timing-function: cubic-bezier(0.7, 0, 0.3, 1);
+
+      [class*=_icon] {
+        font-size: $font_large;
+        margin-right: $space_sm;
+        color: $text_lt_lighter;
+      }
+
+      [class*=_text] {
+        font-size: $font_base;
+        font-weight: $bold;
+        color: $text_lt_default;
+      }
+
+      &:hover {
+        background-color: rgba($primary, 0.03);
+
+        #{$selector}_item_icon {
+          color: $primary;
+        }
+
+        #{$selector}_item_text {
+          color: $primary;
+        }
+      }
+    }
+  }
+
+  [class*=_active] {
+    background-color: $active_light;
+
+    #{$selector}_item_link {
+      border-color: $primary;
+
+      [class*=_item_icon] {
+        color: $primary;
+      }
+
+      [class*=_item_text] {
+        color: $primary;
+      }
+    }
+  }
+}
+
+[class^=pb_nav_list][class*=_horizontal] {
+  ul {
+    display: flex;
+    align-items: center;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
+
+  [class*=_border_item] {
+    transition-property: border-color;
+    transition-duration: 0.15s;
+    transition-timing-function: cubic-bezier(0.7, 0, 0.3, 1);
+    padding: 0;
+
+    [class*=_link] {
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      padding: $space_sm $space_xl;
+      border: 0 solid transparent;
+      border-width: 0 0 3px 0;
+      border-color: $border_light;
+      transition-property: color, border-color, background-color;
+      transition-duration: 0.15s;
+      transition-timing-function: cubic-bezier(0.7, 0, 0.3, 1);
+      color: $text_lt_default;
+
+      &_icon {
+        font-size: $font_large;
+        margin-right: $space_sm;
+        color: $text_lt_lighter;
+      }
+
+      &_text {
+        font-size: $font_base;
+        font-weight: $bold;
+        color: $text_lt_default;
+      }
+
+      &:hover {
+        color: $primary;
+        #{$selector}_item_icon,
+        #{$selector}_item_text {
+          color: $primary;
+        }
+      }
+    }
+  }
+
+  [class*=_active] {
+    #{$selector}_item_link {
+      border-color: $primary;
+
+      [class*=_item_icon] {
+        color: $text_lt_default;
+      }
+
+      [class*=_item_text] {
+        color: $text_lt_default;
+        font-weight: $bold;
+      }
+    }
+  }
+}
