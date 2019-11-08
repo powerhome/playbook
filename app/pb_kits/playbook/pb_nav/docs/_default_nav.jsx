@@ -1,6 +1,6 @@
 import React from "react"
-import {VerticalNav} from "../../"
-import VerticalNavItem from "../_item.jsx"
+import {Nav} from "../../"
+import NavItem from "../_item.jsx"
 
 function DefaultNav() {
   return (

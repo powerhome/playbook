@@ -1,29 +1,29 @@
 br
-= pb_rails("vertical_nav", props: {title: "Principles", link: principles_path}) do
+= pb_rails("nav", props: {title: "Principles", link: principles_path}) do
   - principles_active = (controller_name == 'pages' && action_name == 'principles') ? true : false
   - guides_active = (controller_name == 'guides' && action_name == 'create_kit') ? true : false
   - use_nitro_active = (controller_name == 'guides' && action_name == 'use_nitro') ? true : false
-  = pb_rails("vertical_nav/item", props: { text: "Getting Started", link: principles_path, active: principles_active })
-  //= pb_rails("vertical_nav/item", props: { text: "Using in Nitro", link: guides_use_in_nitro_path, active: use_nitro_active })
-  = pb_rails("vertical_nav/item", props: { text: "Creating Kits", link: guides_path, active: guides_active })
+  = pb_rails("nav/item", props: { text: "Getting Started", link: principles_path, active: principles_active })
+  //= pb_rails("nav/item", props: { text: "Using in Nitro", link: guides_use_in_nitro_path, active: use_nitro_active })
+  = pb_rails("nav/item", props: { text: "Creating Kits", link: guides_path, active: guides_active })
 
 br
-= pb_rails("vertical_nav", props: {title: "Kits", link: kits_path}) do
+= pb_rails("nav", props: {title: "Kits", link: kits_path}) do
   - all_active = (controller_name == 'pages' && action_name == 'kits') ? true : false
-  = pb_rails("vertical_nav/item", props: { text: "All", link: kits_path, active: all_active })
+  = pb_rails("nav/item", props: { text: "All", link: kits_path, active: all_active })
 
   - MENU["kits"].sort.each do |link|
     - active = !@kit.nil? && @kit == link ? true : false
-    = pb_rails("vertical_nav/item", props: { text: pb_kit_title(link), link: kit_show_path(link), active: active })
+    = pb_rails("nav/item", props: { text: pb_kit_title(link), link: kit_show_path(link), active: active })
 
 br
 
 // TODO: Clean up after merge
-= pb_rails("vertical_nav", props: {title: "Tokens", link: utilities_path}) do
+= pb_rails("nav", props: {title: "Tokens", link: utilities_path}) do
   - color_active = (controller_name == 'pages' && action_name == 'utilities') ? true : false
-  = pb_rails("vertical_nav/item", props: { text: "Colors", link: utilities_path, active: color_active })
+  = pb_rails("nav/item", props: { text: "Colors", link: utilities_path, active: color_active })
   - spacing_active = (controller_name == 'pages' && action_name == 'tokens') ? true : false
-  = pb_rails("vertical_nav/item", props: { text: "Spacing", link: tokens_path, active: spacing_active })
+  = pb_rails("nav/item", props: { text: "Spacing", link: tokens_path, active: spacing_active })
 
 br
 br

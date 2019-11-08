@@ -46,4 +46,4 @@ import "../kits/pb_title_detail.js";
 import "../kits/pb_toggle.js";
 import "../kits/pb_user.js";
 import "../kits/pb_user_badge.js";
-import "../kits/pb_vertical_nav.js";
+import "../kits/pb_nav.js";

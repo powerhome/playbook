@@ -1,12 +1,12 @@
 # frozen_string_literal: true
 
 module Playbook
-  module PbVerticalNav
-    class VerticalNav
+  module PbNav
+    class Nav
       include ActionView::Helpers::TagHelper
       include Playbook::Props
 
-      partial "pb_vertical_nav/vertical_nav"
+      partial "pb_nav/nav"
 
       prop :link, default: "#"
       prop :title

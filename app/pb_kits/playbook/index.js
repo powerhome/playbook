@@ -46,7 +46,7 @@ import Title from "./pb_title/_title.jsx"
 import Toggle from "./pb_toggle/_toggle.jsx"
 import User from "./pb_user/_user.jsx"
 import UserBadge from "./pb_user_badge/_user_badge.jsx"
-import VerticalNav from "./pb_vertical_nav/_vertical_nav.jsx"
+import Nav from "./pb_nav/_nav.jsx"
 
 // Dashboard Settings
 import { commonSettings, dataColors } from "./pb_dashboard/commonSettings"
@@ -106,7 +106,7 @@ export {
   Toggle,
   User,
   UserBadge,
-  VerticalNav,
+  Nav,
   barGraphSettings,
   commonSettings,
   dashboardValueSettings,

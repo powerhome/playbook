@@ -61,7 +61,7 @@ import * as TitleDetail from "pb_title_detail/docs";
 import * as Toggle from "pb_toggle/docs";
 import * as User from "pb_user/docs";
 import * as UserBadge from "pb_user_badge/docs";
-import * as vertical_nav from "pb_vertical_nav/docs";
+import * as Nav from "pb_nav/docs";
 
 WebpackerReact.setup (avatar);
 WebpackerReact.setup (Badge);
@@ -112,4 +112,4 @@ WebpackerReact.setup (TitleDetail);
 WebpackerReact.setup (Toggle);
 WebpackerReact.setup (User);
 WebpackerReact.setup (UserBadge);
-WebpackerReact.setup (vertical_nav);
+WebpackerReact.setup (Nav);
