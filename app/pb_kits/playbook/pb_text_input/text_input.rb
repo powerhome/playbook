@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
 module Playbook
-  module PbInput
-    class Input
+  module PbTextInput
+    class TextInput
       include Playbook::Props
 
-      partial "pb_input/input"
+      partial "pb_text_input/text_input"
 
       prop :label
       prop :name
@@ -14,7 +14,7 @@ module Playbook
       prop :type, default: "text"
 
       def classname
-        generate_classname("pb_input_kit")
+        generate_classname("pb_text_input_kit")
       end
     end
   end

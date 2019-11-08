@@ -35,12 +35,6 @@ module Playbook
         end
       end
 
-      def formatted_contact_info
-        "#{formatted_contact_value} #{separator} #{contact_detail}"
-      end
-
-    private
-
       def formatted_contact_value
         if contact_type == "email"
           contact_value
@@ -49,13 +43,12 @@ module Playbook
         end
       end
 
+    private
+
       def formatted_value
         contact_value.to_s.gsub(/\D/, "")
       end
 
-      def separator
-        contact_detail ? "\u00b7" : ""
-      end
     end
   end
 end

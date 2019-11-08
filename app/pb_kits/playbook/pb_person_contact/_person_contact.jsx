@@ -4,15 +4,19 @@
 import React from 'react'
 import classnames from 'classnames'
 
+
+
 import {
   Person,
+  Body,
   Contact,
 } from '../'
 
 type PersonContactProps = {
   className?: String | Array<String>,
   dark?: Boolean,
-  people?: Array<{firstName: String, lastName: String}>,
+  firstName: String,
+  lastName: String,
   contacts?: Array<{contactType: String, contactValue: String, contactDetail: String}>,
 }
 
@@ -28,30 +32,20 @@ const contactsArray = ({contacts=[]}: PersonContactProps) => {
   })
 }
 
-const peopleArray = ({people=[]}: PersonContactProps) => {
-  return people.map((personObject, index) => {
-    return (
-      <Person
-        firstName={personObject.firstName}
-        lastName={personObject.lastName}
-      />
-    );
-  })
-}
 
 const PersonContact = ({
   className,
   dark=false,
-  people,
+  firstName,
+  lastName,
   contacts,
 }: PersonContactProps) => {
 
   const contactKits = contactsArray({contacts})
-  const personKits = peopleArray({people})
 
   return (
     <div className={classnames('pb_person_contact_kit', className)}>
-      {personKits}
+      <Person firstName={firstName} lastName={lastName} />
       {contactKits}
     </div>
   )

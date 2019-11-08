@@ -19,7 +19,7 @@ const defaultProps = {
   type: "text"
 }
 
-class Input extends React.Component {
+class TextInput extends React.Component {
   render() {
     const {
       className,
@@ -31,14 +31,14 @@ class Input extends React.Component {
     } = this.props
 
     const css = classnames([
-      `pb_input_kit`,
+      `pb_text_input_kit`,
       className,
     ])
 
     return (
-      <div className="pb_input_kit">
+      <div className="pb_text_input_kit">
         <Caption text={label} />
-        <div className="input_wrapper">
+        <div className="text_input_wrapper">
           <input className={css}
               name={name}
               placeholder={placeholder}
@@ -51,7 +51,7 @@ class Input extends React.Component {
   }
 }
 
-Input.propTypes = propTypes
-Input.defaultProps = defaultProps
+TextInput.propTypes = propTypes
+TextInput.defaultProps = defaultProps
 
-export default Input
+export default TextInput

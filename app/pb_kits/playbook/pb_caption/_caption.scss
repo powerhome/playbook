@@ -7,6 +7,10 @@
     @include caption_lg;
   }
 
+  &[class*=_xs] {
+    @include caption_xs;
+  }
+
   &[class*=_dark] {
     @include caption_dark;
   }

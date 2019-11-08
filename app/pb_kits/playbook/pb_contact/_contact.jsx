@@ -6,6 +6,7 @@ import classnames from 'classnames'
 
 import {
   Body,
+  Caption,
   Icon,
 } from '../'
 
@@ -32,7 +33,9 @@ const Contact = ({
 
   const formatDetail = (contactDetail) => {
     if (contactDetail !== undefined) {
-      return `\u00b7 ${contactDetail}`
+      return (
+        <Caption size="xs" text={contactDetail} tag="span" />
+      );
     } else {
       return contactDetail
     }
@@ -71,11 +74,12 @@ const Contact = ({
     }
   })(contactType)
 
+
   return (
     <div className={css}>
-      <Body dark={dark} color="light" >
+      <Body dark={dark} color="light" tag="span" className="pb_contact_kit" >
         <Icon icon={contactTypeIcon} fixedWidth="true" />
-        {` ${formatContact(contactValue, contactType)} ${formatDetail(contactDetail)}`}
+        {` ${formatContact(contactValue, contactType)} `}{formatDetail(contactDetail)}
       </Body>
     </div>
   )

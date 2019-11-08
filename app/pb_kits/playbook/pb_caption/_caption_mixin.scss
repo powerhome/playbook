@@ -2,17 +2,21 @@
 @import "../tokens/typography";
 
 @mixin caption($font_size: $font_smaller, $font_weight: $bold) {
-  & {
-    font-weight: $font_weight;
-    color: $text_lt_lighter;
-    text-transform: uppercase;
-    font-size: $font_size;
-    letter-spacing: $lspace_looser;
-  }
+  font-weight: $font_weight;
+  color: $text_lt_lighter;
+  text-transform: uppercase;
+  font-size: $font_size;
+  letter-spacing: $lspace_looser;
 }
 
 @mixin caption_lg {
   @include caption($font_large, $regular);
+}
+
+@mixin caption_xs {
+  @include caption($font_smaller, $regular);
+  text-transform: none;
+  letter-spacing: unset;
 }
 
 @mixin caption_dark {
