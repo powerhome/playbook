@@ -1,8 +1,8 @@
 examples:
   rails:
   - default_nav: Default
+  - horizontal_nav: Horizontal Nav
   - block_nav: Block
   - block_no_title: Without Title
-  - horizontal_nav: Horizontal Nav
   react:
   - default_nav: Default

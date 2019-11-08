@@ -1,12 +1,10 @@
+@import 'pb_avatar/avatar';
+@import 'pb_badge/badge';
+@import 'pb_bar_graph/bar_graph';
 @import "pb_body/body";
 @import "pb_button/button";
 @import "pb_caption/caption";
 @import "pb_card/card";
-@import "pb_title/title";
-@import "pb_nav/nav";
-@import 'pb_avatar/avatar';
-@import 'pb_badge/badge';
-@import 'pb_bar_graph/bar_graph';
 @import 'pb_checkbox/checkbox';
 @import 'pb_contact/contact';
 @import 'pb_currency/currency';
@@ -29,8 +27,8 @@
 @import 'pb_list/list';
 @import 'pb_loading_inline/loading_inline';
 @import 'pb_message/message';
-@import 'pb_online_status/online_status';
 @import 'pb_nav/nav';
+@import 'pb_online_status/online_status';
 @import 'pb_person/person';
 @import 'pb_person_contact/person_contact';
 @import 'pb_pill/pill';
@@ -44,6 +42,7 @@
 @import 'pb_text_input/text_input';
 @import 'pb_time/time';
 @import 'pb_timestamp/timestamp';
+@import "pb_title/title";
 @import 'pb_title_count/title_count';
 @import 'pb_title_detail/title_detail';
 @import 'pb_toggle/toggle';

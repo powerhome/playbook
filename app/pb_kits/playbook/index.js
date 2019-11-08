@@ -114,10 +114,4 @@ export {
   Toggle,
   User,
   UserBadge,
-  barGraphSettings,
-  commonSettings,
-  dashboardValueSettings,
-  dataColors,
-  lineGraphSettings,
-  pbChart,
 }

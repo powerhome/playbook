@@ -18,7 +18,6 @@ br
 
 br
 
-// TODO: Clean up after merge
 = pb_rails("nav", props: {title: "Tokens", link: utilities_path}) do
   - color_active = (controller_name == 'pages' && action_name == 'utilities') ? true : false
   = pb_rails("nav/item", props: { text: "Colors", link: utilities_path, active: color_active })
