@@ -40,8 +40,7 @@ module Playbook
       end
 
       def dark
-        dark ? "_dark" : ""
-
+        dark ? "dark" : nil
       end
 
 
