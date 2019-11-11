@@ -5,6 +5,7 @@ import { Caption } from "../";
 
 const propTypes = {
   className: PropTypes.string,
+  dark: PropTypes.bool,
   onChange: PropTypes.func,
   name: PropTypes.string,
   label: PropTypes.string,
@@ -21,6 +22,7 @@ class Input extends React.Component {
   render() {
     const {
       className,
+      dark,
       label,
       name,
       onChange,
@@ -29,7 +31,7 @@ class Input extends React.Component {
       value
     } = this.props;
 
-    const css = classnames([`pb_input_kit`, className]);
+    const css = classnames([`pb_input_kit${dark === true ? '_dark' : ""}`, className]);
 
     return (
       <div className="pb_input_kit">

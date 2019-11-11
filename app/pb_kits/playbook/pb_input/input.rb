@@ -7,6 +7,8 @@ module Playbook
 
       partial "pb_input/input"
 
+      prop :dark, type: Playbook::Props::Boolean,
+                  default: false
       prop :label
       prop :name
       prop :placeholder
@@ -14,7 +16,13 @@ module Playbook
       prop :type, default: "text"
 
       def classname
-        generate_classname("pb_input_kit")
+        generate_classname("pb_input_kit", dark_class)
+      end
+
+      private
+
+      def dark_class
+        dark ? "dark" : nil
       end
     end
   end

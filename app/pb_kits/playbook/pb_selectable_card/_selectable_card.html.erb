@@ -5,7 +5,7 @@
   <% if object.multi %>
     <%= check_box_tag object.name, object.value, object.checked, disabled: object.disabled %>
     <label for="<%= object.name %>">
-      <%= object.text %>
+      <%= object.yield(context: self) %>
       <div class="pb_selectable_card_circle">
         <%= pb_rails("icon", props: { icon: "check", fixed_width: true }) if object.icon %>
       </div>
