@@ -5,10 +5,10 @@
 @import "../pb_image/image";
 
 
-[class^=pb_avatar_kit] {
+[class^=pb_multiple_users_kitl] {
   position: relative;
 
-  @each $name, $size in $avatar-sizes {
+  @each $name, $numbers in $multiple_users-numbers {
     &[class*=_#{$name}],
     &[class*=_#{$name}_thumb] {
       width: $size;
@@ -54,32 +54,7 @@
           z-index: 1;
         }
       }
-      [class^=pb_online_status] {
-        position: absolute;
-        right: 0;
-        top: 0;
-        bottom: auto;
-        left: auto;
-        z-index: 500;
-
-        &.size_xs {
-          right: -4px;
-        }
-
-        &.size_md {
-          top: auto;
-          bottom: 6px;
-        }
-
-        &.size_lg {
-          top: auto;
-          bottom: 14px;
-        }
-
-        &.size_xl {
-          top: auto;
-          bottom: 22px;
-        }
+    
       }
     }
   }
