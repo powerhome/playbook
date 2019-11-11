@@ -1,0 +1,8 @@
+examples:
+
+  rails:
+  - multiple_users_default: Default
+
+
+  react:
+  - multiple_users_default: Default
