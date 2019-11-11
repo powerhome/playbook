@@ -12,6 +12,7 @@ kits:
   - dashboard_value
   - date
   - date_range_inline
+  - date_stacked
   - date_year_stacked
   - distribution_bar
   - fixed_confirmation_toast
