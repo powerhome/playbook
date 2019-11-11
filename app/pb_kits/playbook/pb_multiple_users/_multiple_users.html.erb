@@ -1,0 +1,11 @@
+<%= content_tag(:div,
+    id: object.id,
+    data: object.data.merge(initials: object.initials),
+    class: object.classname,
+    aria: object.aria) do %>
+  <%= content_tag(:div,
+      data: { initials: object.initials },
+      class: "multiple_users_wrapper") do %>
+       <%= pb_rails("image", props: { url: object.image_url }) if object.image_url.present? %>
+      <% end %>
+<% end %>

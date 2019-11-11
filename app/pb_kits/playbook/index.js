@@ -28,6 +28,7 @@ import List from "./pb_list/_list.jsx"
 import ListItem from "./pb_list/_list_item.jsx"
 import LoadingInline from "./pb_loading_inline/_loading_inline.jsx"
 import Message from "./pb_message/_message.jsx"
+import MultipleUsers from "./pb_multiple_users/_multiple_users.jsx"
 import OnlineStatus from "./pb_online_status/_online_status.jsx"
 import Person from "./pb_person/_person.jsx"
 import PersonContact from "./pb_person_contact/_person_contact.jsx"
@@ -93,6 +94,7 @@ export {
   ListItem,
   LoadingInline,
   Message,
+  MultipleUsers,
   OnlineStatus,
   pbChart,
   Person,
