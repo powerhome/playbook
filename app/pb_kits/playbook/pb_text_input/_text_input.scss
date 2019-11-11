@@ -3,56 +3,82 @@
 @import "../tokens/spacing";
 @import "../tokens/typography";
 
+@mixin pb_input ($bg: $white, $bc: $border-light, $color: $text_lt_default) {
+  -webkit-appearance: none;
+  border: 1px solid $bc;
+  border-radius: $border-rad-light;
+  display: block;
+  width: 100%;
+  color: $color;
+  font-weight: bold;
+  background: $bg;
+  padding: $space_xs $space_sm;
+  transition: 0.2s all;
+  outline: none;
+  font-size: $font_small;
+  margin: .1rem 0 0;
+
+  &:focus {
+    border-color: $primary-action;
+  }
+
+  &::-webkit-input-placeholder {
+    color: $text_lt_lighter;
+    opacity: 1;
+    font-weight: normal;
+  }
+
+  &:-ms-input-placeholder {
+    color: $text_lt_lighter;
+    opacity: 1;
+  }
+
+  &::-ms-input-placeholder {
+    color: $text_lt_lighter;
+    opacity: 1;
+  }
+
+  &::placeholder {
+    color: $text_lt_lighter;
+    opacity: 1;
+  }
+
+  &:-ms-input-placeholder {
+    color: $text_lt_lighter;
+  }
+
+  &::-ms-input-placeholder {
+    color: $text_lt_lighter;
+  }
+}
+
+@mixin pb_input_dark {
+  @include pb_input(rgba($white, $opacity_1), rgba($white, $opacity_2), $text_dk_default)
+}
+
 .pb_text_input_kit {
+  @include pb_input
   margin: 8px;
 
   .text_input_wrapper {
     margin-bottom: 1rem;
   }
 
-  .pb_text_input_kit {
-    border: 1px solid $border-light;
-    border-radius: $border-rad-light;
-    display: block;
-    width: 100%;
-    color: $text_lt_default;
-    background: $white;
-    padding: $space_xs $space_sm;
-    transition: 0.2s all;
-    outline: none;
-    font-size: $font_small;
-    margin: .1rem 0 0;
+}
 
-    &:focus {
-      border-color: $primary-action;
-    }
 
-    &::-webkit-input-placeholder {
-      color: $text_lt_lighter;
-      opacity: 1;
-    }
+.pb_text_input_kit {
+  margin: 8px;
 
-    &:-ms-input-placeholder {
-      color: $text_lt_lighter;
-      opacity: 1;
-    }
+  .input_wrapper {
+    margin-bottom: 1rem;
+  }
 
-    &::-ms-input-placeholder {
-      color: $text_lt_lighter;
-      opacity: 1;
-    }
+  .pb_text_input_kit_dark {
+    @include pb_input_dark;
 
-    &::placeholder {
-      color: $text_lt_lighter;
-      opacity: 1;
-    }
-
-    &:-ms-input-placeholder {
-      color: $text_lt_lighter;
-    }
-
-    &::-ms-input-placeholder {
-      color: $text_lt_lighter;
+    &:focus{
+      border-color: $secondary_action;
     }
   }
 }

@@ -15,7 +15,8 @@ module Playbook
                  configured_show_selected
                  configured_show_unselected
                  configured_text
-                 configured_value].freeze
+                 configured_value
+                 block].freeze
 
       def initialize(checked: default_configuration,
                      classname: default_configuration,
@@ -29,7 +30,8 @@ module Playbook
                      show_selected: default_configuration,
                      show_unselected: default_configuration,
                      text: default_configuration,
-                     value: default_configuration)
+                     value: default_configuration,
+                     &block)
         self.configured_checked = checked
         self.configured_classname = classname
         self.configured_dark = dark
@@ -43,6 +45,7 @@ module Playbook
         self.configured_show_unselected = show_unselected
         self.configured_text = text
         self.configured_value = value
+        self.block = block_given? ? block : nil
       end
 
       def checked
@@ -87,6 +90,10 @@ module Playbook
 
       def value
         default_value(configured_value, "")
+      end
+
+      def yield(context:)
+        !block.nil? ? context.capture(&block) : text
       end
 
       def dark_class
