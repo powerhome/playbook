@@ -8,6 +8,7 @@ type SelectableCardProps = {
   className?: String,
   data?: String,
   disabled?: Boolean,
+  icon?: Boolean,
   id?: String,
   name?: String,
   showSelected?: Boolean,
@@ -22,6 +23,7 @@ const SelectableCard = ({
   className,
   data,
   disabled,
+  icon,
   id,
   name,
   showSelected,
@@ -31,7 +33,12 @@ const SelectableCard = ({
 }: SelectableCardProps) => (
   <span className={className}>
     <input type="checkbox" name={name} id={id} value={value} checked={checked}/>
-    <label for={name}>{text}</label>
+    <label for={name}>
+      {text}
+      <div className={"pb_selectable_card_circle"}> 
+        <svg icon={icon}></svg>
+      </div>
+    </label>
   </span>
 )
 
