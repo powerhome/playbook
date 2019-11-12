@@ -6,30 +6,33 @@ function SelectableCardDark() {
   return (
     <div>
       <SelectableCard 
-        className={"pb_selectable_card_kit_dark"}
         id={"selectable_card_dark"}
         name={"selectable_card_dark"}
-        text={"Selectable Card"}
         value={"1"}
         checked={true}
-        dark={true}
-      />
+        dark
+      >
+       <div>
+        Selectable Card 1
+       </div>   
+      </SelectableCard>
 
       <br></br>
 
       <SelectableCard 
-        className={"pb_selectable_card_kit_dark"}
         id={"selectable_card_dark_2"}
         name={"selectable_card_dark_2"}
-        text={"Selectable Card"}
         value={"2"}
         dark={true}
-      />
+        >
+        <div>
+        Selectable Card 2
+        </div>
+        </SelectableCard>
 
       <br></br>
 
-      <SelectableCard 
-        className={"pb_selectable_card_kit_dark"}
+      <SelectableCard
         id={"selectable_card_dark_3"}
         name={"selectable_card_dark_3"}
         value={"3"}
@@ -45,15 +48,17 @@ function SelectableCardDark() {
 
      <br></br>
 
-      <SelectableCard 
-        className={"pb_selectable_card_kit_dark"}
-        id={"selectable_card_dark_3"}
+      <SelectableCard
+        id={"selectable_card_dark_4"}
         name={"selectable_card_dark_4"}
-        text={"Selectable Card Disabled"}
         value={"4"}
         dark={true}
         disabled={true}
-      />
+      >
+        <div>
+          Selectable Card Disabled
+        </div>
+      </SelectableCard>
     </div>
   )
 }
