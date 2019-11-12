@@ -1,18 +1,11 @@
 @import "../pb_title/title";
-@import "../pb_body/body";
 @import "../pb_caption/caption";
 @import "../tokens/colors";
-@import "../tokens/line_height";
 
-
-.pb_date_stacked_year {
-  font-size: $font_small;
-}
 
 [class^=pb_date_stacked_kit]{
   &[class*=_center]  {
     & > * [class^=pb_title_kit],
-    & > * [class^=pb_body_kit],
     & > * [class^=pb_caption_kit],
     & > [class^=pb_date_stacked_year_kit] {
       text-align: center;
@@ -20,15 +13,9 @@
   }
   &[class*=_right]  {
     & > * [class^=pb_title_kit],
-    & > * [class^=pb_body_kit],
     & > * [class^=pb_caption_kit],
     & > [class^=pb_date_stacked_year] {
       text-align: right;
-    }
-  }
-  &[class*=_md] {
-    & > * [class^=pb_title_kit] {
-      line-height: $lh_tightest;
     }
   }
   &[class*=_reverse] {
@@ -39,9 +26,6 @@
   }
   &[class*=_dark] {
     & > * [class^=pb_title_kit] {
-      color: $text_dk_default;
-    }
-    & > * [class^=pb_body_kit] {
       color: $text_dk_default;
     }
     & > * [class^=pb_caption_kit] {

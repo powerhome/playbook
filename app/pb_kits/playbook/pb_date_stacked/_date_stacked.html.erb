@@ -6,15 +6,11 @@
     <div class="pb_date_stacked_day_month">
       <%= pb_rails("caption", props: { text: object.month }) %>
       <%= pb_rails("title", props: { text: object.day , size: object.title_size }) do %>
-        <%= object.day %>
       <% end %>
     </div>
 
-
     <div class="pb_date_stacked_year">
-      <%= pb_rails("body", props: { color:"light" }) do %>
-        <%= object.year %>
-      <% end %>
+      <%= pb_rails("caption", props: { text: object.year, size:"xs" }) %>
     </div>
 
 <% end %>
