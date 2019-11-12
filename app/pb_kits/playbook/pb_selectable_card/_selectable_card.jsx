@@ -2,10 +2,12 @@
 /*eslint-disable react/no-multi-comp, flowtype/space-before-type-colon */
 
 import React from 'react'
+import { Icon } from '../'
 
 type SelectableCardProps = {
   checked?: Boolean,
   className?: String,
+  dark?: Boolean,
   data?: String,
   disabled?: Boolean,
   icon?: Boolean,
@@ -21,6 +23,7 @@ type SelectableCardProps = {
 const SelectableCard = ({ 
   checked,
   className,
+  dark,
   data,
   disabled,
   icon,
@@ -31,12 +34,12 @@ const SelectableCard = ({
   text,
   value
 }: SelectableCardProps) => (
-  <span className={className}>
+  <span className={className} >
     <input type="checkbox" name={name} id={id} value={value} checked={checked}/>
-    <label for={name}>
+    <label htmlFor={name} dark={true}>
       {text}
       <div className={"pb_selectable_card_circle"}> 
-        <svg icon={icon}></svg>
+        <Icon icon="check" fixedWidth={true}/>
       </div>
     </label>
   </span>

@@ -8,3 +8,4 @@ examples:
 
   react:
   - selectable_card_default: Default
+  - selectable_card_dark: Dark
