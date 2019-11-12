@@ -21,19 +21,19 @@ RSpec.describe Playbook::PbDateStacked::DateStacked do
 
   describe "#month" do
     it "returns the date prop's month and month as a string" do
-      expect(subject.new(date: Date.today).month).to eq Date.today.month.to_s
+      expect(subject.new(date: Date.today).month).to_s eq Date.today.month.to_s
     end
   end
 
   describe "#day" do
     it "returns the date prop's day and month as a string" do
-      expect(subject.new(date: Date.today).day).to eq Date.today.day.to_s
+      expect(subject.new(date: Date.today).day).to_s eq Date.today.day.to_s
     end
   end
 
   describe "#year" do
     it "returns the date prop's year as a string if date prop's year is not current year" do
-      expect(subject.new(date: Date.new(2018, 03, 20)).year).to include "2018"
+      expect(subject.new(date: Date.new(2018, 03, 20)).year).to_s include "2018"
     end
   end
 
