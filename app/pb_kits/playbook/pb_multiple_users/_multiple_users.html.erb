@@ -1,11 +1,26 @@
 <%= content_tag(:div,
     id: object.id,
-    data: object.data.merge(initials: object.initials),
-    class: object.classname,
-    aria: object.aria) do %>
-  <%= content_tag(:div,
-      data: { initials: object.initials },
-      class: "multiple_users_wrapper") do %>
-       <%= pb_rails("image", props: { url: object.image_url }) if object.image_url.present? %>
-      <% end %>
-<% end %>
+    data: object.data,
+    class: object.classname) do %>
+    <%= pb_rails("people", props: {
+        first_name: object.first_name,
+        last_name: object.last_name,
+    }) %>
+  <% object.people.each do |user| %>
+    <%= pb_rails("user", props: {
+        user_one: user[:user_one],
+        user_two: user[:user_two],
+        user_three: user[:user_three],
+        user_four: user[:user_four],
+    }) %>
+    <% end %>
+  <% unless object.wrong_contacts.empty? %>
+    <%= pb_rails("caption", props: { text: "wrong number" })%>
+  <% end %>
+    <% object.wrong_contacts.each do |wrong_number| %>
+      <%= pb_rails("user", props: {
+          contact_type: wrong_number[:contact_type],
+          contact_value: wrong_number[:contact_value],
+      }) %>
+    <% end %>
+  <% end %>
