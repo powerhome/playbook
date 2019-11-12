@@ -6,6 +6,7 @@ import { Icon } from '../'
 
 type SelectableCardProps = {
   checked?: Boolean,
+  children?: Array<React.ReactChild>,
   className?: String,
   dark?: Boolean,
   data?: String,
@@ -22,6 +23,7 @@ type SelectableCardProps = {
 
 const SelectableCard = ({ 
   checked,
+  children,
   className,
   dark,
   data,
@@ -35,11 +37,11 @@ const SelectableCard = ({
   value
 }: SelectableCardProps) => (
   <span className={className} >
-    <input type="checkbox" name={name} id={id} value={value} checked={checked}/>
-    <label htmlFor={name} dark={true}>
-      {text}
+    <input type="checkbox" name={name} id={id} value={value} defaultChecked={checked} showSelected />
+    <label htmlFor={name} dark>
+      { text || children }
       <div className={"pb_selectable_card_circle"}> 
-        <Icon icon="check" fixedWidth={true}/>
+        <Icon icon="check" fixedWidth/>
       </div>
     </label>
   </span>
