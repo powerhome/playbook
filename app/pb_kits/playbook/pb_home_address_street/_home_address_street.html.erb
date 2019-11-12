@@ -20,8 +20,10 @@
     text: object.city_state_zip,
   } %>
 
-  <%= pb_rails "body", props: { classname: "home-hashtag", tag: "span" } do %>
-    H#<%= object.home_id %>
+  <% if object.home_id %>
+    <%= pb_rails "body", props: { classname: "home-hashtag", tag: "span" } do %>
+      H#<%= object.home_id %>
+    <% end %>
   <% end %>
 
   <%= pb_rails "body", props: { color: "light", tag: "span" } do %>

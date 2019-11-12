@@ -3,6 +3,8 @@
 
 import React from 'react'
 import classnames from 'classnames'
+import { titleize } from '../utilities/text.js'
+
 
 import {
   Body,
@@ -14,10 +16,12 @@ const dot = (houseStyle) =>
     return "\u00b7"
   }
 }
+const titleizeAddessCont = (addressCont) => addressCont ? titleize(addressCont) : null;
+
 
 type HomeAddressStreetProps = {
   address: String,
-  address_cont: String,
+  addressCont: String,
   city: String,
   className?: String,
   dark?: Boolean,
@@ -38,7 +42,7 @@ const classes = (className, dark) => (
 
 const HomeAddressStreet = ({
   address,
-  address_cont,
+  addressCont,
   city,
   className,
   dark=false,
@@ -53,16 +57,17 @@ const HomeAddressStreet = ({
         className="pb_home_address_street_address"
         size={4}
     >
-      {address} {dot(houseStyle)} {houseStyle}
+      {titleize(address)} {dot(houseStyle)} {houseStyle}
     </Title>
+
     <Title
         className="pb_home_address_street_address"
         size={4}
     >
-      {address_cont}
+      {titleizeAddessCont(addressCont)}
     </Title>
     <Body color="light">
-      {city}, {state} {zipcode}
+      {titleize(city)}, {state} {zipcode}
     </Body>
     <Body
         className="home-hashtag"

@@ -1,6 +1,14 @@
 <%= content_tag(:div,
     id: object.id,
     data: object.data,
-    class: object.classname(object.kit_class)) do %>
-  <%= object.display_value %>
+    class: object.classname) do %>
+    <% if object.size == "lg" %>
+      <%= pb_rails("title", props: { text: object.lg_date, size: 3 }) %>
+    <% elsif object.size == "sm" %>
+      <%= pb_rails("icon", props: { icon: "calendar", fixed_width: true }) %>
+      <%= pb_rails("title", props: { tag: "span", text: object.sm_date, size: 4 }) %>
+    <% else %>
+      <%= pb_rails("title", props: { text: object.xs_date, size: 4 }) %>
+  <% end %>
 <% end %>
+

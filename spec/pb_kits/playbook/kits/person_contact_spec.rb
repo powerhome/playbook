@@ -7,9 +7,8 @@ RSpec.describe Playbook::PbPersonContact::PersonContact do
 
   it { is_expected.to define_partial }
 
-  it { is_expected.to define_prop(:people)
-                      .of_type(Playbook::Props::HashArray)
-                      .with_default([]) }
+  it { is_expected.to define_prop(:first_name) }
+  it { is_expected.to define_prop(:last_name) }
   it { is_expected.to define_prop(:contacts)
                       .of_type(Playbook::Props::HashArray)
                       .with_default([]) }

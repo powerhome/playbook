@@ -2,54 +2,33 @@
 
 module Playbook
   module PbDateRangeInline
-    class DateRangeInline < Playbook::PbKit::Base
+    class DateRangeInline
       include ActionView::Helpers::TagHelper
       include ActionView::Context
+      include Playbook::Props
 
-      PROPS = %i[configured_classname
-                 configured_data
-                 configured_end_date
-                 configured_id
-                 configured_start_date].freeze
+      partial "pb_date_range_inline/date_range_inline"
 
-      def initialize(classname: default_configuration,
-                     data: default_configuration,
-                     end_date: default_configuration,
-                     id: default_configuration,
-                     start_date: default_configuration)
-        self.configured_classname = classname
-        self.configured_data = data
-        self.configured_id = id
-        self.configured_end_date = end_date
-        self.configured_start_date = start_date
+      prop :end_date, type: Playbook::Props::Date, required: true
+      prop :start_date, type: Playbook::Props::Date, required: true
+
+      def classname
+        generate_classname("pb_date_range_inline_kit")
       end
 
-      def end_date
-        date_time = Playbook::PbKit::PbDateTime.new(default_value(configured_end_date, ""))
+      def end_date_display
+        date_time = Playbook::PbKit::PbDateTime.new(end_date)
         content_tag(:time, datetime: date_time.to_iso) do
           "#{date_time.to_day} #{date_time.to_month_downcase} #{date_time.to_year}"
         end
       end
 
-      def start_date
-        date_time = Playbook::PbKit::PbDateTime.new(default_value(configured_start_date, ""))
+      def start_date_display
+        date_time = Playbook::PbKit::PbDateTime.new(start_date)
         content_tag(:time, datetime: date_time.to_iso) do
           "#{date_time.to_day} #{date_time.to_month_downcase} #{date_time.to_year}"
         end
       end
-
-      def to_partial_path
-        "pb_date_range_inline/date_range_inline"
-      end
-
-    private
-
-      DEFAULT = Object.new
-      private_constant :DEFAULT
-      def default_configuration
-        DEFAULT
-      end
-      attr_accessor(*PROPS)
     end
   end
 end

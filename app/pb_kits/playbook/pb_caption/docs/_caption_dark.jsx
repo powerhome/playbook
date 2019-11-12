@@ -5,7 +5,8 @@ function CaptionDark() {
   return (
     <div>
       <Caption dark text="Caption" />
-      <Caption dark large text="Caption Large" />
+      <Caption dark size="lg" text="Caption Large" />
+      <Caption dark size="xs" text="Subcaption" />
     </div>
   )
 }
