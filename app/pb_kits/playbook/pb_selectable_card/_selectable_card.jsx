@@ -3,6 +3,7 @@
 
 import React from 'react'
 import { Icon } from '../'
+import classnames from 'classnames'
 
 type SelectableCardProps = {
   checked?: Boolean,
@@ -13,38 +14,69 @@ type SelectableCardProps = {
   disabled?: Boolean,
   icon?: Boolean,
   id?: String,
+  multi?: Boolean,
   name?: String,
-  showSelected?: Boolean,
-  showUnselected?: Boolean,
   text?: String,
   value?: String,
 
 }
 
-const SelectableCard = ({ 
-  checked,
-  children,
-  className,
-  dark,
-  data,
-  disabled,
-  icon,
-  id,
-  name,
-  showSelected,
-  showUnselected,
-  text,
-  value
-}: SelectableCardProps) => (
-  <span className={className} >
-    <input type="checkbox" name={name} id={id} value={value} defaultChecked={checked} showSelected />
-    <label htmlFor={name} dark>
-      { text || children }
-      <div className={"pb_selectable_card_circle"}> 
-        <Icon icon="check" fixedWidth/>
-      </div>
-    </label>
-  </span>
-)
+const selectablecardCSS = ({
+  checked=false,
+  dark=false,
+  disabled=false,
 
+}: SelectableCardProps) => {
+
+  const checkedStyle = checked === true ? '_checked' : ''
+
+  const themeStyle = dark === true ? '_dark' : ''
+
+  const disabledStyle = disabled == true ? '_disabled' : '_enabled'
+
+
+  return 'pb_selectable_card_kit' + checkedStyle + themeStyle + disabledStyle
+}
+
+const CheckboxRadio = ({
+  name,
+  multi,
+  id,
+  value,
+  checked,
+  disabled,
+}: SelectableCardProps) => {
+  if( multi === false ) return <input type="radio" name={name} id={id} value={value} defaultChecked={checked} disabled={disabled}/>
+
+  return <input type="checkbox" name={name} id={id} value={value} defaultChecked={checked} disabled={disabled}/> 
+}
+
+const SelectableCard = (props: SelectableCardProps) => { 
+  const {
+    checked,
+    children,
+    className,
+    data,
+    disabled,
+    icon,
+    id,
+    multi=true,
+    name,
+    text,
+    value
+  } = props
+  
+ 
+  return (
+    <span className={classnames(selectablecardCSS(props), className)} >
+      <CheckboxRadio {...props} />
+        <label htmlFor={name} dark>
+        { text || children }
+        <div className={"pb_selectable_card_circle"}> 
+          <Icon icon="check" fixedWidth/>
+        </div>
+      </label>
+    </span>
+  )
+}
 export default SelectableCard
