@@ -5,41 +5,33 @@ import classnames from 'classnames'
 import DateTime from '../pb_kit/dateTime.js'
 
 import {
-  Body,
   Title,
   Caption
 } from '../'
 
 type DateStackedProps = {
-  className?: String | Array<String>,
-  data?: String,
-  id?: String,
-  date: String,
   align?: 'center' | 'right',
+  className?: String | Array<String>,
+  dark?: Boolean,
+  data?: String,
+  date: String,
   size?: 'sm' | 'md',
+  id?: String,
   reverse?: Boolean,
-  dark?: Boolean
 }
 
-const kitClasses = ({align='left', size='sm'}: DateStackedProps) => {
-  let classname = 'pb_date_stacked_kit'
-  classname += `_${align}`
-  classname += `_${size}`
-  return classname
-}
+const kitClasses = ({
+  align='left',
+  size='sm',
+  dark=false,
+  reverse=false,
 
-const is_not_same_year = (input_date) => {
-  current_year = new Date().getFullYear()
-  if (current_year != input_date.toYear()) {
-    return (
-      <div class="pb_date_stacked_year">
-        <Body color="light">{ dateTimestamp.toYear() }</Body>
-      </div>
-    )
-  }
-  else {
-    return null;
-  }
+}: DateStackedProps) => {
+  const alignStyle = align !== '' ? `_${align}` : ''
+  const sizeStyle = size !== '' ? `_${size}` : ''
+  const themeStyle = dark === true ? '_dark' : ''
+  const reverseStyle = reverse === true ? '_reverse' : ''
+  return 'pb_date_stacked_kit' + alignStyle + sizeStyle + themeStyle + reverseStyle
 }
 
 const sizes = {
@@ -49,29 +41,46 @@ const sizes = {
 
 const DateStacked = (props: DateStackedProps) => {
   const {
-    align,
-    size='sm',
+    align='left',
     className,
     dark=false,
+    reverse=false,
     date,
+    size='sm'
   } = props
 
   const dateTimestamp = new DateTime({ value: date })
-  const css = classnames(kitClasses({align, size}), className)
-  const inputYear = is_not_same_year({date})
+  const css = classnames(kitClasses(props), className)
+
+  const current_year = new Date().getFullYear().toString()
+  const input_year = dateTimestamp.toYear().toString()
+
+  const print_year = dateTimestamp => {
+    if (current_year != input_year) {
+      return (
+        <Caption size='xs'>{input_year}</Caption>
+      )
+    }
+    else {
+      return null;
+    }
+  }
 
   return (
     <div className={css}>
       <div class="pb_date_stacked_day_month">
         <Caption
-          text={`${dateTimestamp.toMonth().toUpperCase()}`}/>
+          text={`${dateTimestamp.toMonth().toUpperCase()}`}
+        />
         <Title
           dark={dark}
           size={sizes[size]}
-          text={`${dateTimestamp.toDay()}`}/>
-        {inputYear}
+          text={`${dateTimestamp.toDay()}`}
+        />
       </div>
-
+      <div class="pb_date_stacked_year">
+        {print_year(date)}
+      </div>
     </div>
   )
 }

@@ -5,11 +5,11 @@ function DateStackedDefault() {
   return (
     <div>
       
-      <DateStacked date={new Date()} align='left' size='sm'/>
+      <DateStacked date={new Date()} align='left' size='sm' reverse={true}/>
 
       <br/>
 
-      <DateStacked date={new Date()} size='md'/>
+      <DateStacked date={new Date()} size='md'reverse={true}/>
 
     </div>
   )
