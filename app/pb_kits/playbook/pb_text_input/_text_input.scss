@@ -80,5 +80,34 @@
     &:focus{
       border-color: $secondary_action;
     }
+
+    &::-webkit-input-placeholder {
+      color: $text_dk_lighter;
+      opacity: 1;
+      font-weight: normal;
+    }
+  
+    &:-ms-input-placeholder {
+      color: $text_dk_lighter;
+      opacity: 1;
+    }
+  
+    &::-ms-input-placeholder {
+      color: $text_dk_lighter;
+      opacity: 1;
+    }
+  
+    &::placeholder {
+      color: $text_dk_lighter;
+      opacity: 1;
+    }
+  
+    &:-ms-input-placeholder {
+      color: $text_dk_lighter;
+    }
+  
+    &::-ms-input-placeholder {
+      color: $text_dk_lighter;
+    }
   }
 }
