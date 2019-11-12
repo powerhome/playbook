@@ -7,20 +7,25 @@ module Playbook
 
       partial "pb_multiple_users/multiple_users"
 
-      prop :image_url
-      prop :name, default: ""
-      prop :size, type: Playbook::Props::Enum,
-                  values: %w[1 2 3 4 ],
-                  default: "1"
+      prop :user, type: Playbook::Props::HashArray, default: []
+      prop :user_one
+      prop :user_two
+      prop :user_three
+      prop :user_four
 
-      def initials
-        name.split.map(&:first).join.downcase
+
+
+      def more_than_four
+        user.select {|user| user[:user_type] == "wrong number" }
+      end
+
+      def valid_contacts
+        user.select {|user| user[:user_type] != "wrong number" }
       end
 
       def classname
-        generate_classname("pb_multiple_users_kit", size)
+        generate_classname("pb_person_contact_kit")
       end
-
     end
   end
 end

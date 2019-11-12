@@ -2,7 +2,10 @@ examples:
 
   rails:
   - multiple_users_default: Default
-
+  - multiple_users_two: Two
+  - multiple_users_three: Three
+  - multiple_users_four: Four
+  - multiple_users_four+: More Than Four
 
   react:
   - multiple_users_default: Default
