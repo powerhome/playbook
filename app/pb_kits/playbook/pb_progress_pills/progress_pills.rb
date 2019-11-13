@@ -13,9 +13,6 @@ module Playbook
                  default: false
       prop :steps, default: 3
       prop :status
-      prop :variant, type: Playbook::Props::Enum,
-                     values: %w[success warning error info neutral],
-                     default: "neutral"
 
       def classname
         generate_classname("pb_progress_pills_kit",dark_class)
