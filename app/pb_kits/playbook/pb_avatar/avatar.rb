@@ -7,7 +7,7 @@ module Playbook
 
       partial "pb_avatar/avatar"
 
-      prop :image, type: Playbook::Props::Hash, default: {}
+      prop :image_url
       prop :name, default: ""
       prop :size, type: Playbook::Props::Enum,
                   values: %w[xs sm md base lg xl],

@@ -12,6 +12,7 @@ module Playbook
 
       prop :contact_type
       prop :contact_value
+      prop :contact_detail
 
       def classname
         generate_classname("pb_contact_kit")
@@ -27,6 +28,8 @@ module Playbook
           "phone-office"
         when "email"
           "envelope"
+        when "wrong number"
+          "phone-slash"
         else # "unknown" || "other"
           "phone"
         end
@@ -45,6 +48,7 @@ module Playbook
       def formatted_value
         contact_value.to_s.gsub(/\D/, "")
       end
+
     end
   end
 end

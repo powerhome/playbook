@@ -24,7 +24,7 @@ To clean up this project from your local machine, run `make stop`, which will dr
 * Run `make bundle` to (un-)install gems and update the `Gemfile.lock`
 * Re-start the server with `make start`
 
-To run the tests, do `make test`. To launch a shell in the container run `make shell`, or to launch a Rails console run `make console`
+To run the tests, do `bin/test`. To launch a shell in the container run `make shell`, or to launch a Rails console run `make console`
 
 </p>
 </details>

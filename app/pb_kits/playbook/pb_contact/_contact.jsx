@@ -6,14 +6,16 @@ import classnames from 'classnames'
 
 import {
   Body,
+  Caption,
   Icon,
 } from '../'
 
 type ContactProps = {
-  contactType?: 'cell' | 'home' | 'work' | 'email',
+  contactType?: 'cell' | 'home' | 'work' | 'email' | 'wrong number',
   className?: String | Array<String>,
   dark?: Boolean,
   contactValue: String,
+  contactDetail?: String,
 }
 
 const kitClasses = ({}: ContactProps) => {
@@ -26,19 +28,30 @@ const Contact = ({
   className,
   dark=false,
   contactValue,
+  contactDetail="",
 }: ContactProps) => {
+
+  const formatDetail = (contactDetail) => {
+    if (contactDetail !== undefined) {
+      return (
+        <Caption size="xs" text={contactDetail} tag="span" />
+      );
+    } else {
+      return contactDetail
+    }
+  }
 
   const css = classnames(kitClasses({contactType}), className)
 
-  const formatPhoneNumber = (phoneNumberString, contactType) => {
+  const formatContact = (contactString, contactType) => {
     if (contactType == "email") {
-      return phoneNumberString
+      return contactString
     } else {
-      let cleaned = ('' + phoneNumberString).replace(/\D/g, '')
-      let match = cleaned.match(/^(1|)?(\d{3})(\d{3})(\d{4})$/)
-      if (match) {
-        let intlCode = (match[1] ? '+1 ' : '')
-        return [intlCode, '(', match[2], ') ', match[3], '-', match[4]].join('')
+      const cleaned = contactString.replace(/\D/g, '')
+      const phoneNumber = cleaned.match(/^(1|)?(\d{3})(\d{3})(\d{4})$/)
+      if (phoneNumber) {
+        let intlCode = (phoneNumber[1] ? '+1 ' : '')
+        return [intlCode, '(', phoneNumber[2], ') ', phoneNumber[3], '-', phoneNumber[4]].join('')
       }
       return null
     }
@@ -54,16 +67,19 @@ const Contact = ({
         return 'phone-office';
       case 'email':
         return 'envelope';
+      case 'wrong number' :
+        return 'slash-phone';
       default:
         return 'phone';
     }
   })(contactType)
 
+
   return (
     <div className={css}>
-      <Body dark={dark} color="light" >
+      <Body dark={dark} color="light" tag="span" className="pb_contact_kit" >
         <Icon icon={contactTypeIcon} fixedWidth="true" />
-        {` ${formatPhoneNumber(contactValue, contactType)}`}
+        {` ${formatContact(contactValue, contactType)} `}{formatDetail(contactDetail)}
       </Body>
     </div>
   )

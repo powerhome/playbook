@@ -5,27 +5,15 @@ function PersonContactDefault() {
   return (
     <div>
       <PersonContact
-        people={[
-          {
-            firstName: "Pauline",
-            lastName: "Smith",
-          },
-          {
-            firstName: "Harvey",
-            lastName: "Walters"
-          }
-        ]}
+        firstName="Pauline"
+        lastName="Smith"
         contacts={[
           {
             contactType: "email",
-            contactValue: "email@example.com"
+            contactValue: "email@example.com",
           },
           {
             contactValue: "5555555555",
-          },
-          {
-            contactType: "email",
-            contactValue: "email@example.com",
           },
           {
             contactType: "work",

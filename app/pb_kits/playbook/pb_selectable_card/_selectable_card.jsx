@@ -5,6 +5,8 @@ import React from 'react'
 import { Icon } from '../'
 import classnames from 'classnames'
 
+type EventHandler = (SyntheticInputEvent<HTMLInputElement>) => void
+
 type SelectableCardProps = {
   checked?: Boolean,
   children?: Array<React.ReactChild>,
@@ -16,9 +18,9 @@ type SelectableCardProps = {
   id?: String,
   multi?: Boolean,
   name?: String,
+  onSelect?: EventHandler,
   text?: String,
-  value?: String,
-
+  value?: String
 }
 
 const selectablecardCSS = ({
@@ -40,30 +42,24 @@ const selectablecardCSS = ({
 
 const CheckboxRadio = ({
   name,
-  multi,
+  multi=true,
   id,
+  onSelect,
   value,
   checked,
-  disabled,
+  disabled
 }: SelectableCardProps) => {
-  if( multi === false ) return <input type="radio" name={name} id={id} value={value} defaultChecked={checked} disabled={disabled}/>
+  if( multi === false ) return <input type="radio" name={name} id={id} value={value} defaultChecked={checked} disabled={disabled} onChange={onSelect} />
 
-  return <input type="checkbox" name={name} id={id} value={value} defaultChecked={checked} disabled={disabled}/> 
+  return <input type="checkbox" name={name} id={id} value={value} defaultChecked={checked} disabled={disabled} onChange={onSelect} /> 
 }
 
 const SelectableCard = (props: SelectableCardProps) => { 
   const {
-    checked,
     children,
     className,
-    data,
-    disabled,
-    icon,
-    id,
-    multi=true,
     name,
-    text,
-    value
+    text
   } = props
   
  

@@ -1,3 +1,5 @@
+@import "../../pb_caption/caption_mixin";
+
 [class^=pb_table] {
   &.table-sm,
   &.table-md,
@@ -5,10 +7,7 @@
     thead {
       tr {
         th {
-          color: $text_lt_lighter;
-          font-size: $default-header-size;
-          font-weight: $regular;
-          text-transform: uppercase;
+          @include caption;
           border-bottom: 1px solid $border_light;
         }
       }

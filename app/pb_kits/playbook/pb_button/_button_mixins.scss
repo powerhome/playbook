@@ -12,7 +12,11 @@ $pb_button_h_padding: 34px;
 $pb_button_hover_darken: 4%;
 $pb_button_border_width: 1px;
 
-@mixin pb_button($bg: $primary_action, $color: $text_dk_default, $border: transparent) {
+@mixin pb_button(
+  $bg: $primary_action,
+  $color: $text_dk_default,
+  $border: transparent
+) {
   text-rendering: optimizeLegibility;
   font-size: $font_small;
   font-weight: $bold;
@@ -30,7 +34,8 @@ $pb_button_border_width: 1px;
   background-color: $bg;
   color: $color;
   outline: none;
-  transition: background $transition_default ease, color $transition_default ease;
+  transition: background $transition_default ease,
+    color $transition_default ease;
   box-sizing: border-box;
   display: inline-flex;
   align-items: center;
@@ -56,9 +61,9 @@ $pb_button_border_width: 1px;
     border-width: $pb_button_border_width;
     border-color: darken($bg, $pb_button_hover_darken);
   }
-};
+}
 
-@mixin pb_button_hover($bg: darken($primary_action, $pb_button_hover_darken)){
+@mixin pb_button_hover($bg: darken($primary_action, $pb_button_hover_darken)) {
   background-color: $bg;
 }
 
@@ -116,16 +121,18 @@ $pb_button_border_width: 1px;
 }
 
 // Dark Primary =================
-@mixin pb_button_primary_dark{
+@mixin pb_button_primary_dark {
   @include pb_button($secondary_action);
 
   &:hover {
-    @include pb_button_hover($bg: darken($secondary_action, $pb_button_hover_darken));
+    @include pb_button_hover(
+      $bg: darken($secondary_action, $pb_button_hover_darken)
+    );
   }
 }
 
 // Dark Secondary ==============
-@mixin pb_button_secondary_dark{
+@mixin pb_button_secondary_dark {
   @include pb_button(rgba($white, 0.2), $white);
 
   &:hover {
