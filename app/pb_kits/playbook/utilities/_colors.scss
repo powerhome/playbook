@@ -1,3 +1,7 @@
+@function tint($color, $percentage) {
+  @return mix($white, $color, $percentage);
+}
+
 @mixin background-color($colors-list) {
   @each $name, $color in $colors-list {
     .#{$name} {

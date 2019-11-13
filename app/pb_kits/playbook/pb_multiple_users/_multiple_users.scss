@@ -1,69 +1,51 @@
+@import "../tokens/colors";
+@import "../utilities/colors";
+@import "../tokens/opacity";
 @import "../pb_avatar/avatar";
 
-$multiple-users-overlap: 20%;
-$multiple-users-overlap_5: -60%;
-
+$multiple-users-overlap: 30%;
 
 [class^=pb_multiple_users_kit] {
   display: inline-flex;
+  
+  .multiple_users_badge {
+    width: map-get($avatar-sizes, "xs");
+    height: map-get($avatar-sizes, "xs");
+    border-radius: 1000px;
+    background: tint($primary, 90%);
+    color: $primary;
+    font-weight: bold;
+    font-size: 12px !important;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    border: 1px solid white;
+    z-index: 5;
+    transform: translateX(#{$multiple-users-overlap});
+  }
 
-    .multiple_users_badge {
-      width: map-get($avatar-sizes, "xs");
-      background: lightblue;
-      color: $primary;
-      font-weight: bold;
-      align-items: center;
-      justify-content: center;
-      display: flex;
-      border-radius: 1000px;
-      z-index: 5;
-      transform: translateX(#{$multiple-users-overlap_5});
-
-    }
-    .pb_avatar_kit_xs {
-      .avatar_wrapper {
-        border: 2px solid blue;
-      }
-      &:nth-child(2) {
-        transform: translateX(-#{$multiple-users-overlap});
-        z-index: 1;
-      }
-
-      &:nth-child(3) {
-        transform: translateX(-#{$multiple-users-overlap*2});
-        z-index: 2;
-      }
-
-      &:nth-child(4) {
-        transform: translateX(-#{$multiple-users-overlap*3});
-        z-index: 3;
-      }
-
-      &:nth-child(5) {
-        transform: translateX(-#{$multiple-users-overlap*4});
-        z-index: 4;
-      }
+  .pb_multiple_users_item {
+    .avatar_wrapper {
+      border: 1px solid white;
     }
 
-    &.reverse {
-      flex-direction: row-reverse;
-      .pb_avatar_kit_xs {
-        &:nth-child(2) {
-          transform: translateX(#{$multiple-users-overlap});
-        }
-
-        &:nth-child(3) {
-          transform: translateX(#{$multiple-users-overlap*2});
-        }
-
-        &:nth-child(4) {
-          transform: translateX(#{$multiple-users-overlap*3});
-        }
-
-        &:nth-child(5) {
-          transform: translateX(#{$multiple-users-overlap*4});
-        }
-
+    @each $item in [1, 2, 3, 4, 5] {
+      &:nth-child(#{$item}) {
+        transform: translateX(-#{$multiple-users-overlap * ($item - 1)});
+        z-index: #{$item - 1};
       }
     }
   }
+
+  &[class*=_reverse] {
+    flex-direction: row-reverse;
+
+    .pb_multiple_users_item {
+      @each $item in [1, 2, 3, 4, 5] {
+        &:nth-child(#{$item}) {
+          transform: translateX(#{$multiple-users-overlap * ($item - 1)});
+        }
+      }
+    }
+  }
+}
