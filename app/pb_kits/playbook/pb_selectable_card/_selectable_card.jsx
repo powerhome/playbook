@@ -18,7 +18,7 @@ type SelectableCardProps = {
   id?: String,
   multi?: Boolean,
   name?: String,
-  onSelect?: EventHandler,
+  onSelect?: () => void,
   text?: String,
   value?: String
 }
@@ -49,26 +49,33 @@ const CheckboxRadio = ({
   checked,
   disabled
 }: SelectableCardProps) => {
-  if( multi === false ) return <input type="radio" name={name} id={id} value={value} defaultChecked={checked} disabled={disabled} onChange={onSelect} />
-
-  return <input type="checkbox" name={name} id={id} value={value} defaultChecked={checked} disabled={disabled} onChange={onSelect} /> 
+  const inputType = multi === false ? "radio" : "checkbox"
+  return (
+    <input
+        type="checkbox"
+        name={name}
+        id={id}
+        value={value}
+        checked={checked}
+        disabled={disabled}
+        onChange={onSelect}
+    />
+  )
 }
 
-const SelectableCard = (props: SelectableCardProps) => { 
+const SelectableCard = (props: SelectableCardProps) => {
   const {
     children,
     className,
     name,
     text
   } = props
-  
- 
   return (
     <span className={classnames(selectablecardCSS(props), className)} >
       <CheckboxRadio {...props} />
         <label htmlFor={name} dark>
         { text || children }
-        <div className={"pb_selectable_card_circle"}> 
+        <div className={"pb_selectable_card_circle"}>
           <Icon icon="check" fixedWidth/>
         </div>
       </label>
