@@ -47,3 +47,4 @@ import "../kits/pb_toggle.js";
 import "../kits/pb_user.js";
 import "../kits/pb_user_badge.js";
 import "../kits/pb_vertical_nav.js";
+import "../kits/pb_progress_pills.js";

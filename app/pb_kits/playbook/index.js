@@ -32,6 +32,7 @@ import OnlineStatus from "./pb_online_status/_online_status.jsx"
 import Person from "./pb_person/_person.jsx"
 import PersonContact from "./pb_person_contact/_person_contact.jsx"
 import Pill from "./pb_pill/_pill.jsx"
+import ProgressPills from "./pb_progress_pills/_progress_pills.jsx"
 import ProgressSimple from "./pb_progress_simple/_progress_simple.jsx"
 import SectionSeparator from "./pb_section_separator/_section_separator.jsx"
 import Source from "./pb_source/_source.jsx"
@@ -98,6 +99,7 @@ export {
   Person,
   PersonContact,
   Pill,
+  ProgressPills,
   ProgressSimple,
   SectionSeparator,
   Source,

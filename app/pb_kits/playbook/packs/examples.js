@@ -113,3 +113,6 @@ WebpackerReact.setup (Toggle);
 WebpackerReact.setup (User);
 WebpackerReact.setup (UserBadge);
 WebpackerReact.setup (vertical_nav);
+
+import * as ProgressPills from "pb_progress_pills/docs";
+WebpackerReact.setup (ProgressPills);

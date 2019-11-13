@@ -1,0 +1,34 @@
+@mixin pb_progress_pill {
+  width: 45px;
+  height: 4px;
+  border-radius: 4px;
+  margin-right: $space_xs;
+}
+
+[class^=pb_progress_pills_kit] {
+
+  [class*=pills]{
+    display: flex ;
+  }
+
+  [class*=status]{
+    display: flex;
+    align-items: center;
+    margin-bottom: $space_xs;
+    [class*=title]{
+      margin-right: $space_xs;
+    }
+  }
+
+  [class*=pb_progress_pill] {
+    @include pb_progress_pill;
+
+    &[class*=_inactive] {
+      background-color: $border_light;
+    }
+
+    &[class*=_active] {
+      background-color: $primary_action ;
+    }
+  }
+}

@@ -1,0 +1,19 @@
+<%= content_tag(:div,
+    id: object.id,
+    data: object.data,
+    class: object.classname) do %>
+    <div class="d-flex flex-column">
+      <div class="status d-flex">
+      <% if object.status != nil %>
+        <%= pb_rails("title", props: { text: object.status, tag: "h4", size: 4, dark: object.dark})%>
+        <%= pb_rails("body", props: { text: object.text, color: "light", dark:object.dark}) %>
+      <% end %>
+      </div>
+      <div class="pills">
+        <% 1.upto(object.steps) do |step| %>
+          <span class="pb_progress_pill<%= step <= object.active ? "_active" : "_inactive" %>"></span>
+        <% end %>
+      </div>
+
+    </div>
+<% end %>
