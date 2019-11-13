@@ -3,10 +3,10 @@
 
 import React from 'react'
 
-/*
-// Un-comment to import kits here
-import { Body } from '../'
-*/
+
+import {
+  Body
+} from '../'
 
 type MultipleUsersProps = {
   className?: String,
@@ -17,7 +17,7 @@ type MultipleUsersProps = {
 
 const MultipleUsers = ({ className, data, id }: MultipleUsersProps) => (
   <div>
-    {`kit content`}
+    {`pb_multiple_users`}
   </div>
 )
 
