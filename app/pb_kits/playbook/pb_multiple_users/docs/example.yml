@@ -2,6 +2,7 @@ examples:
 
   rails:
   - multiple_users_default: Default
+  - multiple_users_reverse: Reverse
   - multiple_users_two: Two
   - multiple_users_three: Three
   - multiple_users_four: Four
