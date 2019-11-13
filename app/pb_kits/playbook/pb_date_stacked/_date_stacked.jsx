@@ -61,9 +61,6 @@ const DateStacked = (props: DateStackedProps) => {
         <Caption size='xs'>{input_year}</Caption>
       )
     }
-    else {
-      return null;
-    }
   }
 
   return (
@@ -78,9 +75,7 @@ const DateStacked = (props: DateStackedProps) => {
           text={`${dateTimestamp.toDay()}`}
         />
       </div>
-      <div class="pb_date_stacked_year">
         {print_year(date)}
-      </div>
     </div>
   )
 }

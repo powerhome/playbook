@@ -17,31 +17,33 @@ RSpec.describe Playbook::PbDateStacked::DateStacked do
                       .with_default false }
   it { is_expected.to define_boolean_prop(:reverse)
                       .with_default false }
-  it { is_expected.to define_string_prop(:date) }
+                      it { is_expected.to define_prop(:date) }
+
 
   describe "#month" do
     it "returns the date prop's month and month as a string" do
-      expect(subject.new(date: Date.today).month).to_s eq Date.today.month.to_s
+      expect(subject.new(date: Date.today).month).to include Date.today.month.to_s
     end
   end
 
   describe "#day" do
     it "returns the date prop's day and month as a string" do
-      expect(subject.new(date: Date.today).day).to_s eq Date.today.day.to_s
+      expect(subject.new(date: Date.today).day).to include Date.today.day.to_s
     end
   end
 
   describe "#year" do
     it "returns the date prop's year as a string if date prop's year is not current year" do
-      expect(subject.new(date: Date.new(2018, 03, 20)).year).to_s include "2018"
+      if subject.new(date: Date.today).year != subject.new(date: Date.new(2018, 10, 19)).year
+        expect(subject.new(date: Date.new(2018, 10, 19).year)).to include "2018"
     end
   end
 
   describe "#classname" do
     it "returns namespaced class name", :aggregate_failures do
-      expect(subject.new({}).classname).to eq "pb_date_year_stacked_left"
-      expect(subject.new(align: "right").classname).to eq "pb_date_year_stacked_right"
-      expect(subject.new(classname: "additional_class").classname).to eq "pb_date_year_stacked_left additional_class"
+      expect(subject.new({}).classname).to eq "pb_date_stacked_left_sm"
+      expect(subject.new(align: "right").classname).to eq "pb_date_stacked_right_sm"
+      expect(subject.new(classname: "additional_class").classname).to eq "pb_date_stacked_left_sm additional_class"
     end
   end
 end
