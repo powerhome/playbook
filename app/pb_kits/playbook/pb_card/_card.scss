@@ -29,4 +29,30 @@ $pb_card_border_radius: $border_rad_heavier;
       box-shadow: $shadow;
     }
   }
+
+  $highlight_colors: map-merge($status_colors, $product_colors);
+
+  @mixin pb_card_highlight($borderTop, $borderSide) {
+    display: flex;
+    height: 4px;
+    content: '';
+    border-top-left-radius: $border_rad_heavier;
+    border-top-right-radius: $border_rad_heavier;
+  }
+
+    &[class*=_highlight_side] {
+      @each $color_name, $color_value in $highlight_colors {
+        &[class*=_highlight_#{$color_name}]:before  {
+          @include pb_card_highlight(solid 1px $border_light, solid 4px $color_value);
+        }
+      }
+    }
+
+    &[class*=_highlight_top] {
+    @each $color_name, $color_value in $highlight_colors {
+      &[class*=_highlight_#{$color_name}]:before  {
+        @include pb_card_highlight(solid 4px $color_value, solid 1px $border_light);
+      }
+    }
+  }
 }
