@@ -9,25 +9,25 @@ import { Body,Title } from '../'
 
 
 type ProgressPillsProps = {
-  active?: String,
-  steps?: String,
+  active?: Number,
+  steps?: Number,
   status?: String,
   text?: String,
   dark?: Boolean,
 }
 
-const showSteps = (steps, active) => {
+const showSteps = (steps, active, dark) => {
   let items = []
 
   for(let step = 1; step <= steps; step++) {
-    items.push(<div className={`pb_progress_pill${step <= active ? "_active" : "_inactive"}`} key={step}></div>)
+    items.push(<div className={`pb_progress_pill${step <= active ? "_active" : "_inactive"}${dark ? "_dark" : null}`} key={step}></div>)
   }
 
   return items
 }
 
-const ProgressPills = ({ active = 2, steps = 3, status = null, text = null, dark=false }: ProgressPillsProps) => (
-  <div className="pb_progress_pills_kit">
+const ProgressPills = ({ active = 0, steps = 3, status = null, text = null, dark=false }: ProgressPillsProps) => (
+  <div className={`pb_progress_pills_kit${dark ? "_dark": null}`}>
     {status ?
     <div className="status">
       <Title text={status} size={4} tag="h4" dark={dark}/>
@@ -35,7 +35,7 @@ const ProgressPills = ({ active = 2, steps = 3, status = null, text = null, dark
     </div> : null}
 
     <div className="pills">
-      {showSteps(steps, active)}
+      {showSteps(steps, active, dark)}
     </div>
   </div>
 )

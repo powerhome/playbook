@@ -6,29 +6,33 @@
 }
 
 [class^=pb_progress_pills_kit] {
-
-  [class*=pills]{
-    display: flex ;
+  [class*=pills] {
+    display: flex;
   }
 
-  [class*=status]{
+  [class*=status] {
     display: flex;
     align-items: center;
     margin-bottom: $space_xs;
-    [class*=title]{
+
+    [class*=title] {
       margin-right: $space_xs;
     }
   }
+
 
   [class*=pb_progress_pill] {
     @include pb_progress_pill;
 
     &[class*=_inactive] {
       background-color: $border_light;
+      &[class*=_dark]{
+      background-color: $border_dark;  
+      }
     }
 
     &[class*=_active] {
-      background-color: $primary_action ;
+      background-color: $primary_action;
     }
   }
 }

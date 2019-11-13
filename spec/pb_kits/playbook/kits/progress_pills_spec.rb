@@ -8,11 +8,25 @@ RSpec.describe Playbook::PbProgressPills::ProgressPills do
   it { is_expected.to define_partial }
   it { is_expected.to define_boolean_prop(:dark)
                       .with_default(false) }
+  it { is_expected.to define_prop(:steps)
+                      .of_type(Playbook::Props::Number)
+                      .with_default(3) }
+  it { is_expected.to define_prop(:active)
+                      .of_type(Playbook::Props::Number)
+                      .with_default(0) }
+  it { is_expected.to define_prop(:status)
+                      .with_default(nil) }
+  it { is_expected.to define_prop(:text)
+                      .with_default(nil) }
 
-  # Do not leave this file blank. Use other spec files for example tests.
+
   describe "#classname" do
     it "returns namespaced class name", :aggregate_failures do
       expect(subject.new({}).classname).to eq "pb_progress_pills_kit"
+      expect(subject.new({dark:true}).classname).to eq "pb_progress_pills_kit_dark"
     end
   end
+
+  
+
 end
