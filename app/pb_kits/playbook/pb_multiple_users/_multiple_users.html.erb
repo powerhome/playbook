@@ -3,18 +3,19 @@
     data: object.data,
     class: object.classname) do %>
 
+    <% userCount = object.more_than_four ? 3 : object.users.count %>
+
+    <% object.users.take(userCount).each do |user| %>
+      <%
+        user[:size]="xs"
+        user[:classname]="pb_multiple_users_item"
+      %>
+      <%= pb_rails("avatar", props: user ) %>
+    <% end %>
+
     <% if object.more_than_four %>
-      <% object.users.take(3).each do |user| %>
-        <% user[:size]="xs" %>
-        <%= pb_rails("avatar", props: user ) %>
-      <% end %>
-      <div class="multiple_users_badge">
-        +<%= object.users.drop(3).count %>
+      <div class="pb_multiple_users_item multiple_users_badge">
+        +<%= object.users.drop(userCount).count %>
       </div>
-    <% else %>
-      <% object.users.each do |user| %>
-        <% user[:size]="xs" %>
-        <%= pb_rails("avatar", props: user ) %>
-      <% end %>
-  <% end %>
+    <% end %>
 <% end %>
