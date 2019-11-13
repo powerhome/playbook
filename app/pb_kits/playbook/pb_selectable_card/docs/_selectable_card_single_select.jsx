@@ -1,6 +1,5 @@
 import React from "react"
 import SelectableCard from "../_selectable_card.jsx"
-import Icon from "../../pb_icon/_icon.jsx"
 
 function SelectableCardSingleSelect() {
   return (
