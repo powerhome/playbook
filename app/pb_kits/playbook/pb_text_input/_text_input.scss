@@ -3,7 +3,7 @@
 @import "../tokens/spacing";
 @import "../tokens/typography";
 
-@mixin pb_input ($bg: $white, $bc: $border-light, $color: $text_lt_default) {
+@mixin pb_text_input ($bg: $white, $bc: $border-light, $color: $text_lt_default) {
   -webkit-appearance: none;
   border: 1px solid $bc;
   border-radius: $border-rad-light;
@@ -52,9 +52,9 @@
   }
 }
 
-@mixin pb_input_dark {
-  @include pb_input(rgba($white, $opacity_1), rgba($white, $opacity_2), $text_dk_default)
-}
+@mixin pb_text_input_dark {
+  @include pb_text_input(rgba($white, $opacity_1), rgba($white, $opacity_2), $text_dk_default)
+};
 
 .pb_text_input_kit {
   @include pb_input
@@ -64,50 +64,23 @@
     margin-bottom: 1rem;
   }
 
-}
-
+  .pb_text_input_kit {
+    @include pb_text_input
+  }
+};
 
 .pb_text_input_kit {
   margin: 8px;
 
-  .input_wrapper {
+  .text_input_wrapper {
     margin-bottom: 1rem;
   }
 
   .pb_text_input_kit_dark {
-    @include pb_input_dark;
+    @include pb_text_input_dark;
 
     &:focus{
       border-color: $secondary_action;
     }
-
-    &::-webkit-input-placeholder {
-      color: $text_dk_lighter;
-      opacity: 1;
-      font-weight: normal;
-    }
-  
-    &:-ms-input-placeholder {
-      color: $text_dk_lighter;
-      opacity: 1;
-    }
-  
-    &::-ms-input-placeholder {
-      color: $text_dk_lighter;
-      opacity: 1;
-    }
-  
-    &::placeholder {
-      color: $text_dk_lighter;
-      opacity: 1;
-    }
-  
-    &:-ms-input-placeholder {
-      color: $text_dk_lighter;
-    }
-  
-    &::-ms-input-placeholder {
-      color: $text_dk_lighter;
-    }
   }
-}
+};
