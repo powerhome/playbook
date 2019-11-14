@@ -12,7 +12,7 @@ $selector: ".pb_nav_list";
   [class*=_border_item] {
     transition-property: border-color;
     transition-duration: 0.15s;
-    transition-timing-function: cubic-bezier(0.7, 0, 0.3, 1);
+    transition-timing-function: $bezier;
     padding: 0;
 
     [class*=_link] {

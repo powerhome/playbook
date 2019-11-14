@@ -29,7 +29,7 @@ $selector: ".pb_nav_list";
       border-width: 0 0 0 3px;
       transition-property: color, border-color, background-color;
       transition-duration: 0.15s;
-      transition-timing-function: cubic-bezier(0.7, 0, 0.3, 1);
+      transition-timing-function: $bezier;
 
       [class*=_icon] {
         font-size: $font_large;
