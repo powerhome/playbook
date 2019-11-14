@@ -2,81 +2,103 @@
 /*eslint-disable react/no-multi-comp, flowtype/space-before-type-colon */
 
 import React from 'react'
-import { Icon } from '../'
 import classnames from 'classnames'
+import { Icon } from '../'
 
-type EventHandler = (SyntheticInputEvent<HTMLInputElement>) => void
+import type {
+  InputCallback
+} from "../types"
 
-type SelectableCardProps = {
-  checked?: Boolean,
+import {
+  buildAriaProps,
+  buildDataProps,
+  buildCss,
+  noop,
+} from '../utilities/props'
+
+type Props = {
+  aria: Object,
+  checked: Boolean,
   children?: Array<React.ReactChild>,
   className?: String,
   dark?: Boolean,
-  data?: String,
+  data: Object,
   disabled?: Boolean,
   icon?: Boolean,
   id?: String,
   multi?: Boolean,
   name?: String,
-  onSelect?: () => void,
+  onChange: InputCallback,
+  onSelect: InputCallback,
+  onUnselect: InputCallback,
   text?: String,
   value?: String
 }
 
-const selectablecardCSS = ({
-  checked=false,
-  dark=false,
-  disabled=false,
-
-}: SelectableCardProps) => {
-
-  const checkedStyle = checked === true ? '_checked' : ''
-
-  const themeStyle = dark === true ? '_dark' : ''
-
-  const disabledStyle = disabled == true ? '_disabled' : '_enabled'
-
-
-  return 'pb_selectable_card_kit' + checkedStyle + themeStyle + disabledStyle
-}
-
-const CheckboxRadio = ({
+const SelectableCard = ({
+  aria = {},
+  checked = false,
+  children,
+  className,
+  dark = false,
+  data = {},
+  disabled = false,
+  icon = true,
+  id = null,
+  multi = true,
   name,
-  multi=true,
-  id,
-  onSelect,
+  onChange = noop,
+  onSelect = noop,
+  onUnselect = noop,
+  text,
   value,
-  checked,
-  disabled
-}: SelectableCardProps) => {
-  const inputType = multi === false ? "radio" : "checkbox"
-  return (
-    <input
-        type="checkbox"
-        name={name}
-        id={id}
-        value={value}
-        checked={checked}
-        disabled={disabled}
-        onChange={onSelect}
-    />
-  )
-}
+  ...props
+}: Props) => {
+  const ariaProps = buildAriaProps(aria)
+  const dataProps = buildDataProps(data)
+  const handleChange = event => {
+    onChange(event)
+    event.target.checked ?
+      onSelect(event) :
+      onUnselect(event)
+  }
 
-const SelectableCard = (props: SelectableCardProps) => {
-  const {
-    children,
-    className,
-    name,
-    text
-  } = props
+  const css = buildCss({
+    'pb_selectable_card_kit': true,
+    'checked': checked,
+    'dark': dark,
+    'disabled': disabled,
+    'enabled': !disabled,
+  })
+
+  const displayIcon = () => {
+    if(icon === true) {
+      return (
+        <Icon icon="check" fixedWidth />
+      )
+    }
+  }
+
+  const inputType = multi === false ? "radio" : "checkbox"
+
+  const htmlFor = id !== null ? id : name
+
   return (
-    <span className={classnames(selectablecardCSS(props), className)} >
-      <CheckboxRadio {...props} />
-        <label htmlFor={name} dark>
+    <span {...ariaProps} {...dataProps} className={classnames(css, className)}>
+      <input
+          {...props}
+          name={name}
+          value={value}
+          id={htmlFor}
+          type={inputType}
+          checked={checked}
+          disabled={disabled}
+          onChange={handleChange}
+      />
+      <label htmlFor={htmlFor}>
         { text || children }
-        <div className={"pb_selectable_card_circle"}>
-          <Icon icon="check" fixedWidth/>
+        <div className="pb_selectable_card_circle">
+          {displayIcon()}
         </div>
       </label>
     </span>

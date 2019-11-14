@@ -3,11 +3,10 @@ import SelectableCard from "../_selectable_card.jsx"
 import Icon from "../../pb_icon/_icon.jsx"
 
 
-class SelectableCardDefault extends React.Component {
+class SelectableCardNoIconDark extends React.Component {
   state = {
-    car: true,
-    bike: false,
-    boat: false
+    movies: true,
+    books: false
   }
 
   handleSelect = event => {
@@ -20,44 +19,35 @@ class SelectableCardDefault extends React.Component {
     return (
       <div>
         <SelectableCard
-            id="car"
-            name="car"
-            value="car"
-            checked={this.state.car}
+            dark
+            id="movies"
+            name="movies"
+            value="movies"
+            icon={false}
+            checked={this.state.movies}
             onChange={this.handleSelect}
             onSelect={event => console.log(`${event.target.name} checked!`)}
             onUnselect={event => console.log(`${event.target.name} unchecked!`)}>
-          I have a car
+          I like movies
         </SelectableCard>
 
         <br></br>
 
         <SelectableCard
-            id="bike"
-            name="bike"
-            value="bike"
-            checked={this.state.bike}
+            dark
+            id="books"
+            name="books"
+            value="books"
+            icon={false}
+            checked={this.state.books}
             onChange={this.handleSelect}
             onSelect={event => console.log(`${event.target.name} checked!`)}
             onUnselect={event => console.log(`${event.target.name} unchecked!`)}>
-          I have a bike
-        </SelectableCard>
-
-        <br></br>
-
-        <SelectableCard
-            id="boat"
-            name="boat"
-            value="boat"
-            checked={this.state.boat}
-            onChange={this.handleSelect}
-            onSelect={event => console.log(`${event.target.name} checked!`)}
-            onUnselect={event => console.log(`${event.target.name} unchecked!`)}>
-          I have a boat
+          I like books
         </SelectableCard>
       </div>
     )
   }
 }
 
-export default SelectableCardDefault;
+export default SelectableCardNoIconDark;

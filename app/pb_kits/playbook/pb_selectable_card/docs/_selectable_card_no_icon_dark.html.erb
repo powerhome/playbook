@@ -1,0 +1,23 @@
+<%= pb_rails("selectable_card", props: {
+  id: "movies",
+  name: "movies",
+  value: "movies",
+  checked: true,
+  dark: true,
+  icon: false
+}) do %>
+  I like movies
+<% end %>
+
+<br/>
+
+<%= pb_rails("selectable_card", props: {
+  id: "books",
+  name: "books",
+  value: "books",
+  checked: false,
+  dark: true,
+  icon: false
+}) do %>
+  I like books
+<% end %>
