@@ -10,9 +10,9 @@ import { Image } from "../"
 type AvatarProps = {
   className?: String,
   name: String,
+  image_url: String,
   size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl',
   status: 'online' | 'away',
-  url: String,
 }
 
 const initials = function(name) {
@@ -21,11 +21,11 @@ const initials = function(name) {
   }
 }
 
-const image = function(url, name) {
-  if (url) {
+const image = function(image_url, name) {
+  if (image_url) {
     return (
       <Image alt={name}
-          url={url}
+          url={image_url}
       />
     )
   }
@@ -38,10 +38,22 @@ const PbStatus = ({ size, status } : { size: String, status: String }) => (
 const Avatar = ({
   className,
   name=null,
+  image_url,
   size='md',
-  status,
-  url
+  status=null
 }: AvatarProps) => {
+
+  const statusDisplay = () => {
+    if(status !== null){
+      return (
+        <PbStatus
+            size={size}
+            status={status}
+        />
+      );
+    }
+  }
+
   const css = classnames([
     `pb_avatar_kit`,
     `avatar_${size}`,
@@ -52,16 +64,13 @@ const Avatar = ({
     <div className={css}
         data-initials={initials(name)}
     >
-      <div 
+      <div
           className="avatar_wrapper"
           data-initials={initials(name)}
       >
-        {image(url, name)}
+        {image(image_url, name)}
       </div>
-      <PbStatus 
-          size={size}
-          status={status}
-      />
+      {statusDisplay()}
     </div>
   )
 }

@@ -3,35 +3,37 @@
 @import "../tokens/opacity";
 @import "../pb_avatar/avatar";
 
-$multiple-users-overlap: 30%;
+$pb_multiple_users_overlap: -9px;
+$pb_multiple_users_border_size: 1px;
+$pb_multiple_users_size: map-get($avatar-sizes, "xs");
 
 [class^=pb_multiple_users_kit] {
   display: inline-flex;
-  
+
   .multiple_users_badge {
-    width: map-get($avatar-sizes, "xs");
-    height: map-get($avatar-sizes, "xs");
-    border-radius: 1000px;
-    background: tint($primary, 90%);
-    color: $primary;
-    font-weight: bold;
-    font-size: 12px !important;
+    display: flex;
     align-items: center;
     justify-content: center;
-    display: flex;
-    border: 1px solid white;
-    z-index: 5;
-    transform: translateX(#{$multiple-users-overlap});
+    width: $pb_multiple_users_size;
+    height: $pb_multiple_users_size;
+    border-radius: ($pb_multiple_users_size/2) + 2;
+    background: tint($primary, 90%);
+    border: $pb_multiple_users_border_size solid $white;
+    color: $primary;
+    font-weight: $bold;
+    font-size: $font_smallest - 1;
   }
 
   .pb_multiple_users_item {
+    margin-left: $pb_multiple_users_overlap;
+    margin-right: 0;
+
     .avatar_wrapper {
-      border: 1px solid white;
+      border: $pb_multiple_users_border_size solid $white;
     }
 
     @each $item in [1, 2, 3, 4, 5] {
       &:nth-child(#{$item}) {
-        transform: translateX(-#{$multiple-users-overlap * ($item - 1)});
         z-index: #{$item - 1};
       }
     }
@@ -41,11 +43,8 @@ $multiple-users-overlap: 30%;
     flex-direction: row-reverse;
 
     .pb_multiple_users_item {
-      @each $item in [1, 2, 3, 4, 5] {
-        &:nth-child(#{$item}) {
-          transform: translateX(#{$multiple-users-overlap * ($item - 1)});
-        }
-      }
+      margin-left: 0;
+      margin-right: $pb_multiple_users_overlap;
     }
   }
 }
