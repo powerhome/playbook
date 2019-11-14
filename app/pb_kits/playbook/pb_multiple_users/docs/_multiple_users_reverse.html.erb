@@ -1,44 +1,41 @@
 <%= pb_rails("multiple_users", props: {
-    size: "xs",
-    reverse: true,
+  reverse: true,
+  users: [
+    {
+      name: "Patrick Welch",
+      image_url: "https://randomuser.me/api/portraits/men/9.jpg",
+    },
+    {
+      name: "Lucille Sanchez",
+      image_url: "https://randomuser.me/api/portraits/women/6.jpg",
+    },
+    {
+      name: "Beverly Reyes",
+      image_url: "https://randomuser.me/api/portraits/women/74.jpg",
+    },
+    {
+      name: "Keith Craig",
+      image_url: "https://randomuser.me/api/portraits/men/40.jpg",
+    },
+    {
+      name: "Alicia Cooper",
+      image_url: "https://randomuser.me/api/portraits/women/46.jpg",
+    }
+  ]
+}) %>
 
-    users: [
-      {
-        name: "Terry Johnson",
-        image_url: "https://randomuser.me/api/portraits/men/45.jpg",
-      },
-      {
-        name: "Terry Johnson",
-        image_url: "https://randomuser.me/api/portraits/men/6.jpg",
-      },
-      {
-        name: "Terry Johnson",
-        image_url: "https://randomuser.me/api/portraits/men/48.jpg",
-      },
-      {
-        name: "Terry Johnson",
-        image_url: "https://randomuser.me/api/portraits/men/40.jpg",
-      },
-      {
-        name: "Terry Johnson",
-        image_url: "https://randomuser.me/api/portraits/men/46.jpg",
-      },
-    ]
-  }) %>
+<br/><br/>
 
-
-  <%= pb_rails("multiple_users", props: {
-      size: "xs",
-      reverse: true,
-
-      users: [
-        {
-          name: "Terry Johnson",
-          image_url: "https://randomuser.me/api/portraits/men/48.jpg",
-        },
-        {
-          name: "Terry Johnson",
-          image_url: "https://randomuser.me/api/portraits/men/40.jpg",
-        },
-      ]
-    }) %>
+<%= pb_rails("multiple_users", props: {
+  reverse: true,
+  users: [
+    {
+      name: "Shawn Palmer",
+      image_url: "https://randomuser.me/api/portraits/men/93.jpg",
+    },
+    {
+      name: "Andrew Murray",
+      image_url: "https://randomuser.me/api/portraits/men/75.jpg",
+    }
+  ]
+}) %>

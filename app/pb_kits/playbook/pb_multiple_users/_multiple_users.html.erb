@@ -2,20 +2,13 @@
     id: object.id,
     data: object.data,
     class: object.classname) do %>
-
-    <% userCount = object.more_than_four ? 3 : object.users.count %>
-
-    <% object.users.take(userCount).each do |user| %>
-      <%
-        user[:size]="xs"
-        user[:classname]="pb_multiple_users_item"
-      %>
-      <%= pb_rails("avatar", props: user ) %>
+    <% object.users.take(object.display_count).each do |user| %>
+      <%= pb_rails("avatar", props: user.merge({size: "xs", classname: "pb_multiple_users_item"}) ) %>
     <% end %>
 
     <% if object.more_than_four %>
       <div class="pb_multiple_users_item multiple_users_badge">
-        +<%= object.users.drop(userCount).count %>
+        <%= "+#{object.users.count - object.display_count}" %>
       </div>
     <% end %>
 <% end %>
