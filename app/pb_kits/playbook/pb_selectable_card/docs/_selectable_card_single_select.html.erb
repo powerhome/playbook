@@ -1,42 +1,30 @@
 <%= pb_rails("selectable_card", props: {
-    multi: false,
-    name: "single_selectable_card",
-    text: "Single-selectable Card",
-    value: "1",
-    checked: true,
-    icon: true,
-  }) %>
-
-<br>
-
-<%= pb_rails("selectable_card", props: {
-    multi: false,
-    name: "single_selectable_card",
-    text: "Single-selectable Card",
-    value: "2",
-    icon: true,
-  }) %>
-
-<br>
-
-<%= pb_rails("selectable_card", props: {
-    multi: false,
-    name: "single_selectable_card",
-    text: "Single-selectable Card",
-    value: "3",
-    icon: true,
-  }) do %>
-  <%= pb_rails("icon", props: { icon: "user" }) %>
-  Selectable Card content goes here
+  id: "male",
+  name: "gender",
+  value: "male",
+  multi: false
+}) do %>
+  Male
 <% end %>
 
-<br>
+<br/>
 
 <%= pb_rails("selectable_card", props: {
-    multi: false,
-    name: "single_selectable_card",
-    text: "Disabled (Un)Selectable Card",
-    value: "4",
-    disabled: true,
-    icon: true,
-  }) %>
+  id: "female",
+  name: "gender",
+  value: "female",
+  multi: false
+}) do %>
+  Female
+<% end %>
+
+<br/>
+
+<%= pb_rails("selectable_card", props: {
+  id: "other",
+  name: "gender",
+  value: "other",
+  multi: false
+}) do %>
+  Other
+<% end %>
