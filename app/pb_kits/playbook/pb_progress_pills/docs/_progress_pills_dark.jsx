@@ -9,9 +9,9 @@ return (
     <ProgressPills
         active={2}
         dark
-        status="Status:"
+        title="Status:"
         steps={3}
-        text="Orientation"
+        value="Orientation"
     />
 
   </div>

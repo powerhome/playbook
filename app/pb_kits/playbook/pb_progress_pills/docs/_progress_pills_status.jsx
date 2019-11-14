@@ -8,9 +8,9 @@ return (
   <div>
     <ProgressPills
         active={2}
-        status="Status:"
+        title="Status:"
         steps={3}
-        text="Orientation"
+        value="Orientation"
     />
 
   </div>

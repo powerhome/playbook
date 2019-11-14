@@ -9,12 +9,12 @@ module Playbook
 
       prop :active, type: Playbook::Props::Number,
                     default: 0
-      prop :text
+      prop :value
       prop :dark, type: Playbook::Props::Boolean,
                   default: false
       prop :steps, type: Playbook::Props::Number,
                    default: 3
-      prop :status
+      prop :title
 
       def classname
         generate_classname("pb_progress_pills_kit", dark_class)
@@ -25,7 +25,7 @@ module Playbook
       end
 
       def with_status
-        yield status if status.present?
+        yield title if title.present?
       end
 
       def each_step(&block)

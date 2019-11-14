@@ -11,8 +11,8 @@ import { Body,Title } from '../'
 type ProgressPillsProps = {
   active?: Number,
   steps?: Number,
-  status?: String,
-  text?: String,
+  title?: String,
+  value?: String,
   dark?: Boolean,
 }
 
@@ -26,12 +26,12 @@ const showSteps = (steps, active, dark) => {
   return items
 }
 
-const ProgressPills = ({ active = 0, steps = 3, status = null, text = null, dark=false }: ProgressPillsProps) => (
+const ProgressPills = ({ active = 0, steps = 3, title = null, value = null, dark=false }: ProgressPillsProps) => (
   <div className={`pb_progress_pills_kit${dark ? "_dark": null}`}>
-    {status ?
+    {title ?
     <div className="status">
-      <Title text={status} size={4} tag="h4" dark={dark}/>
-      <Body color="light" text={text} dark={dark}/>
+      <Title text={title} size={4} tag="h4" dark={dark}/>
+      <Body color="light" text={value} dark={dark}/>
     </div> : null}
 
     <div className="pills">

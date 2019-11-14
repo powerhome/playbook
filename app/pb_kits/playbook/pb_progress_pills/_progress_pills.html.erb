@@ -5,8 +5,8 @@
 
       <div class="status">
       <% object.with_status do |status| %>
-        <%= pb_rails("title", props: { text: object.status, tag: "h4", size: 4, dark: object.dark})%>
-        <%= pb_rails("body", props: { text: object.text, color: "light", dark:object.dark}) %>
+        <%= pb_rails("title", props: { text: object.title, tag: "h4", size: 4, dark: object.dark})%>
+        <%= pb_rails("body", props: { text: object.value, color: "light", dark:object.dark}) %>
       <% end %>
       </div>
 

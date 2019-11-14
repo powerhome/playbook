@@ -14,9 +14,11 @@ RSpec.describe Playbook::PbProgressPills::ProgressPills do
   it { is_expected.to define_prop(:active)
                       .of_type(Playbook::Props::Number)
                       .with_default(0) }
-  it { is_expected.to define_prop(:status)
+  it { is_expected.to define_prop(:title)
+                      .of_type(Playbook::Props::String)
                       .with_default(nil) }
-  it { is_expected.to define_prop(:text)
+  it { is_expected.to define_prop(:value)
+                      .of_type(Playbook::Props::String)
                       .with_default(nil) }
 
 
@@ -27,6 +29,6 @@ RSpec.describe Playbook::PbProgressPills::ProgressPills do
     end
   end
 
-  
+
 
 end
