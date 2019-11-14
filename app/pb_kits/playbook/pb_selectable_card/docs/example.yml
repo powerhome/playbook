@@ -1,13 +1,17 @@
 examples:
 
   rails:
-  - selectable_card_default: Default
+  - selectable_card_default: Multiple Select
   - selectable_card_single_select: Single Select
-  - selectable_card_dark: Dark
-  - selectable_card_single_select_dark: Dark Single Select
+  - selectable_card_no_icon: No Icon
+  - selectable_card_block: Block
+  - selectable_card_dark: Default Dark
+  - selectable_card_no_icon_dark: No Icon Dark
 
   react:
-  - selectable_card_default: Default
+  - selectable_card_default: Multiple Select
   - selectable_card_single_select: Single Select
-  - selectable_card_dark: Dark
-  - selectable_card_single_select_dark: Dark Single Select
+  - selectable_card_no_icon: No Icon
+  - selectable_card_block: Block
+  - selectable_card_dark: Default Dark
+  - selectable_card_no_icon_dark: No Icon Dark

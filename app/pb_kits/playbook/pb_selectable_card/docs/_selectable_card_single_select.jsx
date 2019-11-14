@@ -3,47 +3,57 @@ import SelectableCard from "../_selectable_card.jsx"
 
 class SelectableCardSingleSelect extends React.Component {
   state = {
-    selectedCardNumber: "1",
+    selected: null
   }
 
-  handleOnSelect = event => {
-    const selectedNumber = event.target.value
-
-    //update state
-    this.setState({selectedCardNumber: selectedNumber})
+  handleSelect = event => {
+    this.setState({
+      selected: event.target.value
+    })
   }
 
   render() {
-    const { selectedCardNumber } = this.state
-
     return (
       <div>
         <SelectableCard
-            checked={selectedCardNumber === "1"}
-            id="selectable_card_single_select"
-            name="selectable_card_single_select"
-            onSelect={this.handleOnSelect}
-            value="1"
-        >
-          <div>
-            {`Single Selectable Card 1`}
-          </div>
+            id="male1"
+            name="gender"
+            value="male"
+            multi={false}
+            checked={this.state.selected === 'male'}
+            onChange={this.handleSelect.bind(this)}
+            onSelect={event => console.log(`${event.target.value} selected!`)}
+            onUnselect={event => console.log(`${event.target.value} unselected!`)}>
+          Male
         </SelectableCard>
 
-        <br/><br/>
+        <br></br>
 
         <SelectableCard
-            checked={selectedCardNumber === "2"}
-            id="selectable_card_single_select_2"
-            name="selectable_card_single_select_2"
-            onSelect={this.handleOnSelect}
-            value="2"
-        >
-          <div>
-            {`Single Selectable Card 2`}
-          </div>
+            id="female1"
+            name="gender"
+            value="female"
+            multi={false}
+            checked={this.state.selected === 'female'}
+            onChange={this.handleSelect.bind(this)}
+            onSelect={event => console.log(`${event.target.value} selected!`)}
+            onUnselect={event => console.log(`${event.target.value} unselected!`)}>
+          Female
         </SelectableCard>
 
+        <br></br>
+
+        <SelectableCard
+            id="other1"
+            name="gender"
+            value="other"
+            multi={false}
+            checked={this.state.selected === 'other'}
+            onChange={this.handleSelect.bind(this)}
+            onSelect={event => console.log(`${event.target.value} selected!`)}
+            onUnselect={event => console.log(`${event.target.value} unselected!`)}>
+          Other
+        </SelectableCard>
       </div>
     )
   }

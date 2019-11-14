@@ -1,39 +1,33 @@
-<div>
-  <%= pb_rails("selectable_card", props: {
-        name: "selectable_card_dark",
-        text: "Selectable Card",
-        checked: true,
-        dark: true,
-        icon: true,
-      }) %>
-
-  </br>
-
-  <%= pb_rails("selectable_card", props: {
-        name: "selectable_card_dark_2",
-        text: "Selectable Card",
-        dark: true,
-        icon: true,
-      }) %>
-
-  </br>
-
-  <%= pb_rails("selectable_card", props: {
-      name: "selectable_card_dark_3",
-      dark: true,
-      icon: true,
+<%= pb_rails("selectable_card", props: {
+  id: "pizza",
+  name: "pizza",
+  value: "pizza",
+  checked: true,
+  dark: true
 }) do %>
-  <%= pb_rails("icon", props: { icon: "user" }) %>
-  Selectable Card content goes here
+  I love pizza
 <% end %>
 
-</br>
+<br/>
 
-  <%= pb_rails("selectable_card", props: {
-        name: "unselectable_card_dark",
-        text: "Disabled (Un)Selectable Card",
-        disabled: true,
-        dark: true,
-        icon: true,
-      }) %>
-</div>
+<%= pb_rails("selectable_card", props: {
+  id: "hamburgers",
+  name: "hamburgers",
+  value: "hamburgers",
+  checked: false,
+  dark: true
+}) do %>
+  I love hamburgers
+<% end %>
+
+<br/>
+
+<%= pb_rails("selectable_card", props: {
+  id: "apples",
+  name: "apples",
+  value: "apples",
+  checked: false,
+  dark: true
+}) do %>
+  I love apples
+<% end %>

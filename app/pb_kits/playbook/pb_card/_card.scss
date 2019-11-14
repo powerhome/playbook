@@ -2,32 +2,37 @@
 @import "../tokens/border_radius";
 @import "../tokens/shadows";
 @import "../tokens/colors";
+@import "../tokens/transition";
+@import "../tokens/animation-curves";
 @import "child_kits/card_body";
 
 $pb_card_border_width: 1px;
 $pb_card_border_radius: $border_rad_heavier;
 
-@mixin pb_card_selected {
-  border-color: $primary;
+@mixin pb_card_selected($border_color: $primary) {
+  border-color: $border_color;
   border-width: $pb_card_border_width * 2;
 }
 
-@mixin pb_card_dark_selected {
-  border-color: $secondary_action;
-  border-width: $pb_card_border_width * 2;
+@mixin pb_card_selected_dark {
+  @include pb_card_selected($secondary_action);
 }
 
-@mixin pb_card {
+@mixin pb_card($background: $card_light, $border_color: $border_light) {
   position: relative;
   display: flex;
   flex-direction: column;
   min-width: 0;
   word-wrap: break-word;
-  background-color: $card_light;
+  background-color: $background;
   background-clip: border-box;
-  border: $pb_card_border_width solid $border_light;
+  border-width: $pb_card_border_width;
+  border-style: solid;
+  border-color: $border_color;
   border-radius: $pb_card_border_radius;
-  transition: all 0.3s ease;
+  transition-property: all;
+  transition-duration: $transition_short;
+  transition-timing-function: $easeIn;
 
   @each $name, $shadow in $box_shadows {
     &[class*=_#{$name}] {
@@ -37,22 +42,7 @@ $pb_card_border_radius: $border_rad_heavier;
 }
 
 @mixin pb_card_dark {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  min-width: 0;
-  word-wrap: break-word;
-  background-color: $card_dark;
-  background-clip: border-box;
-  border: $pb_card_border_width solid $border_dark;
-  border-radius: $pb_card_border_radius;
-  transition: all 0.3s ease;
-
-  @each $name, $shadow in $box_shadows {
-    &[class*=_#{$name}] {
-      box-shadow: $shadow;
-    }
-  }
+  @include pb_card($card_dark, $border_dark);
 }
 
 [class^=pb_card_kit] {
@@ -63,7 +53,7 @@ $pb_card_border_radius: $border_rad_heavier;
   }
   &[class*=_dark] {
     &[class*=_selected] {
-      @include pb_card_dark_selected;
+      @include pb_card_selected_dark;
     }
   }
 

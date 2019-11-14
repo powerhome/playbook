@@ -3,11 +3,11 @@ import SelectableCard from "../_selectable_card.jsx"
 import Icon from "../../pb_icon/_icon.jsx"
 
 
-class SelectableCardDefault extends React.Component {
+class SelectableCardNoIcon extends React.Component {
   state = {
-    car: true,
-    bike: false,
-    boat: false
+    sandals: true,
+    sneakers: false,
+    boots: false
   }
 
   handleSelect = event => {
@@ -20,44 +20,47 @@ class SelectableCardDefault extends React.Component {
     return (
       <div>
         <SelectableCard
-            id="car"
-            name="car"
-            value="car"
-            checked={this.state.car}
+            id="sandals"
+            name="sandals"
+            value="sandals"
+            icon={false}
+            checked={this.state.sandals}
             onChange={this.handleSelect}
             onSelect={event => console.log(`${event.target.name} checked!`)}
             onUnselect={event => console.log(`${event.target.name} unchecked!`)}>
-          I have a car
+          I have sandals
         </SelectableCard>
 
         <br></br>
 
         <SelectableCard
-            id="bike"
-            name="bike"
-            value="bike"
-            checked={this.state.bike}
+            id="sneakers"
+            name="sneakers"
+            value="sneakers"
+            icon={false}
+            checked={this.state.sneakers}
             onChange={this.handleSelect}
             onSelect={event => console.log(`${event.target.name} checked!`)}
             onUnselect={event => console.log(`${event.target.name} unchecked!`)}>
-          I have a bike
+          I have sneakers
         </SelectableCard>
 
         <br></br>
 
         <SelectableCard
-            id="boat"
-            name="boat"
-            value="boat"
-            checked={this.state.boat}
+            id="boots"
+            name="boots"
+            value="boots"
+            icon={false}
+            checked={this.state.boots}
             onChange={this.handleSelect}
             onSelect={event => console.log(`${event.target.name} checked!`)}
             onUnselect={event => console.log(`${event.target.name} unchecked!`)}>
-          I have a boat
+          I have boots
         </SelectableCard>
       </div>
     )
   }
 }
 
-export default SelectableCardDefault;
+export default SelectableCardNoIcon;
