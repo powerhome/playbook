@@ -1,22 +1,22 @@
 import React from "react"
-import {Hashtag} from "../../"
+import { Tag } from "../../"
 
-function HashtagDefault() {
+function TagDefault() {
   return (
     <div>
-      <Hashtag
+      <Tag
           text="470297"
           type="project"
           url="https://google.com"
       />
       <br/><br/>
-      <Hashtag
+      <Tag
           text="123456"
           type="home"
           url="https://google.com"
       />
       <br/><br/>
-      <Hashtag
+      <Tag
           text="654321"
           type="default"
           url="https://google.com"
@@ -25,4 +25,4 @@ function HashtagDefault() {
   )
 }
 
-export default HashtagDefault;
+export default Tag;

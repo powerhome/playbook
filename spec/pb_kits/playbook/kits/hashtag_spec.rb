@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
-require_relative "../../../../app/pb_kits/playbook/pb_hashtag/hashtag"
+require_relative "../../../../app/pb_kits/playbook/pb_tag/tag"
 
-RSpec.describe Playbook::PbHashtag::Hashtag do
-  subject { Playbook::PbHashtag::Hashtag }
+RSpec.describe Playbook::PbTag::Tag do
+  subject { Playbook::PbTag::Tag }
 
   it { is_expected.to define_partial }
 

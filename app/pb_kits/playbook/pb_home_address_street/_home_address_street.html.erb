@@ -21,7 +21,7 @@
   } %>
 
   <% if object.home_id %>
-    <%= pb_rails "body", props: { classname: "home-hashtag", tag: "span" } do %>
+    <%= pb_rails "body", props: { classname: "home-tag", tag: "span" } do %>
       H#<%= object.home_id %>
     <% end %>
   <% end %>

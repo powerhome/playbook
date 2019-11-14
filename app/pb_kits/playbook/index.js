@@ -14,7 +14,6 @@ import DateRangeInline from "./pb_date_range_inline/_date_range_inline.jsx"
 import DateYearStacked from "./pb_date_year_stacked/_date_year_stacked.jsx"
 import DistributionBar from "./pb_distribution_bar/_distribution_bar.jsx"
 import FixedConfirmationToast from "./pb_fixed_confirmation_toast/_fixed_confirmation_toast.jsx"
-import Hashtag from "./pb_hashtag/_hashtag.jsx"
 import HomeAddressStreet from "./pb_home_address_street/_home_address_street.jsx"
 import Icon from "./pb_icon/_icon.jsx"
 import IconCircle from "./pb_icon_circle/_icon_circle.jsx"
@@ -39,6 +38,7 @@ import StarRating from "./pb_star_rating/_star_rating.jsx"
 import StatChange from "./pb_stat_change/_stat_change.jsx"
 import StatValue from "./pb_stat_value/_stat_value.jsx"
 import Table from "./pb_table/_table.jsx"
+import Tag from "./pb_tag/_tag.jsx"
 import TextInput from "./pb_text_input/_text_input.jsx"
 import Time from "./pb_time/_time.jsx"
 import TimeStamp from "./pb_timestamp/_timestamp.jsx"
@@ -78,7 +78,6 @@ export {
   DateYearStacked,
   DistributionBar,
   FixedConfirmationToast,
-  Hashtag,
   HomeAddressStreet,
   Icon,
   IconCircle,
@@ -105,6 +104,7 @@ export {
   StatChange,
   StatValue,
   Table,
+  Tag,
   TextInput,
   Time,
   TimeStamp,

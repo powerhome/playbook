@@ -1,0 +1,8 @@
+examples:
+
+  rails:
+  - tag_default: Tag Types
+
+
+  react:
+  - tag_default: Tag Types

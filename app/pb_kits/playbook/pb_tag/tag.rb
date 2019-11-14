@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
 module Playbook
-  module PbHashtag
-    class Hashtag
+  module PbTag
+    class Tag
       include Playbook::Props
 
-      partial "pb_hashtag/hashtag"
+      partial "pb_tag/tag"
 
       prop :text
       prop :type, type: Playbook::Props::Enum,
@@ -17,7 +17,7 @@ module Playbook
         generate_classname("pb_hastag_kit")
       end
 
-      def hashtag_text
+      def tag_text
         type_text + text
       end
 

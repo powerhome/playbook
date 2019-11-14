@@ -15,7 +15,6 @@ kits:
   - date_year_stacked
   - distribution_bar
   - fixed_confirmation_toast
-  - hashtag
   - home_address_street
   - icon
   - icon_circle
@@ -39,6 +38,7 @@ kits:
   - stat_change
   - stat_value
   - table
+  - tag
   - text_input
   - time
   - timestamp

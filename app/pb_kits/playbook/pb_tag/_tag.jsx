@@ -4,7 +4,7 @@
 import React from 'react'
 import {Badge} from '../'
 
-type HashtagProps = {
+type TagProps = {
   className?: String,
   data?: String,
   id?: String,
@@ -13,29 +13,26 @@ type HashtagProps = {
   url?: String,
 }
 
-
-const HashType = {
+const TagType = {
   "home": "H#",
   "project": "P#",
   "default": "#"
 }
 
-const Hashtag = ({
+const Tag = ({
   className,
   data,
   id,
   text,
   type,
   url
-} : HashtagProps) => (
+} : TagProps) => (
 
-
-
-<div className={`pb_hashtag_kit_${type}`}>
+<div className={`pb_tag_kit_${type}`}>
   <a href={url}>
     <Badge variant="primary" text={HashType[type] + text}></Badge>
   </a>
 </div>
 )
 
-export default Hashtag
+export default Tag

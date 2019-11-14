@@ -1,4 +1,4 @@
-import Hashtag from "../pb_hashtag/_hashtag.jsx";
+import Tag from "../pb_tag/_tag.jsx";
 
 import WebpackerReact from "webpacker-react";
-WebpackerReact.setup({ Hashtag });
+WebpackerReact.setup({ Tag });

@@ -70,7 +70,7 @@ const HomeAddressStreet = ({
       {titleize(city)}, {state} {zipcode}
     </Body>
     <Body
-        className="home-hashtag"
+        className="home-tag"
         tag="span"
     >
       H#{homeId}
