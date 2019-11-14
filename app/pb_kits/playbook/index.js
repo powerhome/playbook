@@ -28,6 +28,7 @@ import List from "./pb_list/_list.jsx"
 import ListItem from "./pb_list/_list_item.jsx"
 import LoadingInline from "./pb_loading_inline/_loading_inline.jsx"
 import Message from "./pb_message/_message.jsx"
+import Nav from "./pb_nav/_nav.jsx"
 import OnlineStatus from "./pb_online_status/_online_status.jsx"
 import Person from "./pb_person/_person.jsx"
 import PersonContact from "./pb_person_contact/_person_contact.jsx"
@@ -46,7 +47,7 @@ import Title from "./pb_title/_title.jsx"
 import Toggle from "./pb_toggle/_toggle.jsx"
 import User from "./pb_user/_user.jsx"
 import UserBadge from "./pb_user_badge/_user_badge.jsx"
-import VerticalNav from "./pb_vertical_nav/_vertical_nav.jsx"
+
 
 // Dashboard Settings
 import { commonSettings, dataColors } from "./pb_dashboard/commonSettings"
@@ -93,6 +94,7 @@ export {
   ListItem,
   LoadingInline,
   Message,
+  Nav,
   OnlineStatus,
   pbChart,
   Person,
@@ -112,5 +114,4 @@ export {
   Toggle,
   User,
   UserBadge,
-  VerticalNav,
 }
