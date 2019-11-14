@@ -1,11 +1,11 @@
 /* @flow */
 /*eslint-disable react/no-multi-comp, flowtype/space-before-type-colon */
 
-import React from 'react'
-import { Icon } from '../'
-import classnames from 'classnames'
+import React from "react";
+import { Icon } from "../";
+import classnames from "classnames";
 
-type EventHandler = (SyntheticInputEvent<HTMLInputElement>) => void
+type EventHandler = (SyntheticInputEvent<HTMLInputElement>) => void;
 
 type SelectableCardProps = {
   checked?: Boolean,
@@ -21,65 +21,57 @@ type SelectableCardProps = {
   onSelect?: () => void,
   text?: String,
   value?: String
-}
+};
 
 const selectablecardCSS = ({
-  checked=false,
-  dark=false,
-  disabled=false,
-
+  checked = false,
+  dark = false,
+  disabled = false
 }: SelectableCardProps) => {
+  const checkedStyle = checked === true ? "_checked" : "";
 
-  const checkedStyle = checked === true ? '_checked' : ''
+  const themeStyle = dark === true ? "_dark" : "";
 
-  const themeStyle = dark === true ? '_dark' : ''
+  const disabledStyle = disabled == true ? "_disabled" : "_enabled";
 
-  const disabledStyle = disabled == true ? '_disabled' : '_enabled'
-
-
-  return 'pb_selectable_card_kit' + checkedStyle + themeStyle + disabledStyle
-}
+  return "pb_selectable_card_kit" + checkedStyle + themeStyle + disabledStyle;
+};
 
 const CheckboxRadio = ({
   name,
-  multi=true,
+  multi = true,
   id,
   onSelect,
   value,
   checked,
   disabled
 }: SelectableCardProps) => {
-  const inputType = multi === false ? "radio" : "checkbox"
+  const inputType = multi === false ? "radio" : "checkbox";
   return (
     <input
-        type="checkbox"
-        name={name}
-        id={id}
-        value={value}
-        checked={checked}
-        disabled={disabled}
-        onChange={onSelect}
+      type="checkbox"
+      name={name}
+      id={id}
+      value={value}
+      checked={checked}
+      disabled={disabled}
+      onChange={onSelect}
     />
-  )
-}
+  );
+};
 
 const SelectableCard = (props: SelectableCardProps) => {
-  const {
-    children,
-    className,
-    name,
-    text
-  } = props
+  const { children, className, name, text } = props;
   return (
-    <span className={classnames(selectablecardCSS(props), className)} >
+    <span className={classnames(selectablecardCSS(props), className)}>
       <CheckboxRadio {...props} />
-        <label htmlFor={name} dark>
-        { text || children }
+      <label htmlFor={name}>
+        {text || children}
         <div className={"pb_selectable_card_circle"}>
-          <Icon icon="check" fixedWidth/>
+          <Icon icon="check" fixedWidth />
         </div>
       </label>
     </span>
-  )
-}
-export default SelectableCard
+  );
+};
+export default SelectableCard;
