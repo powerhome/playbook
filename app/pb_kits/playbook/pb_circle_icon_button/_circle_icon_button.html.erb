@@ -3,8 +3,8 @@
     data: object.data,
     class: object.classname) do %>
 
-    <%= pb_rails("button", props: object.button) do %>
-      <%= pb_rails("icon", props: {icon: object.icon, fixed_width: true }) %>
-    <% end %>
+  <%= pb_rails("button", props: object.button.merge(id: "pb_circle_icon_button_button")) do %>
+    <%= pb_rails("icon", props: {icon: object.icon, fixed_width: true }) %>
+  <% end %>
 
 <% end %>

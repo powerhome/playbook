@@ -15,6 +15,7 @@ type ButtonPropTypes = {
   fixedWidth?: Boolean,
   fullWidth?: Boolean,
   icon?: String,
+  id?: String,
   loading?: Boolean,
   newWindow?: Boolean,
   onClick?: EventHandler,
@@ -68,6 +69,7 @@ const Button = (props: ButtonPropTypes) => {
     children,
     className,
     icon = null,
+    id,
     loading = false,
     onClick = () => {},
     link = null,
@@ -96,6 +98,7 @@ const Button = (props: ButtonPropTypes) => {
     <If condition={link !== null}>
       <a
         {...buttonAria}
+        id={id}
         className={css}
         href={link}
         target={newWindow ? '_blank' : null}>
@@ -105,6 +108,7 @@ const Button = (props: ButtonPropTypes) => {
       <Else />
       <button
         {...buttonAria}
+        id={id}
         className={css}
         onClick={onClick}
         type={htmlType}
