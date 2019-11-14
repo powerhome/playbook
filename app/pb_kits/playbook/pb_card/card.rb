@@ -18,7 +18,11 @@ module Playbook
                        default: {}
 
       def classname
-        generate_classname("pb_card_kit", selected_class, shadow_class, highlight_position_class, highlight_color_class)
+        generate_classname("pb_card_kit",
+                           selected_class,
+                           shadow_class,
+                           highlight_position_class,
+                           highlight_color_class)
       end
 
     private
