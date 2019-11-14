@@ -6,6 +6,7 @@ import classnames from 'classnames'
 
 type BadgeProps = {
   className?: String,
+  dark?: Boolean,
   id?: String,
   text?: String,
   variant?: 'success' | 'warning' | 'error' | 'info' | 'neutral',
@@ -13,14 +14,16 @@ type BadgeProps = {
 }
 const Badge = ({
   className,
+  dark = false,
   id,
   text,
   variant = 'neutral',
   rounded = false
 }: BadgeProps) => {
-  const roundedValue = rounded == true ? "rounded" : ""
+  const roundedClass = rounded === true ? "rounded" : ""
+  const darkClass = dark === true ? "dark" : ""
   const css = classnames([
-    `pb_badge_kit_${variant}_${roundedValue}`,
+    `pb_badge_kit_${variant}_${roundedClass}_${darkClass}`,
     className,
   ])
 
