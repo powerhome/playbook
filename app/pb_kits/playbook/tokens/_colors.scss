@@ -1,10 +1,11 @@
+@import "./opacity";
+
 //=====================================
 // Base colors should not be documented.
 // Only document color use.
 
 // Colors -----------------------------
-$royal:               #004DFF;
-$blue:                #0082FF;
+$royal:               #0056CF;
 $purple:              #9E64E9;
 $teal:                #00C4D7;
 $red:                 #FF2229;
@@ -13,7 +14,6 @@ $green:               #00CA74;
 $orange:              #FD804C;
 $colors: (
   royal:              $royal,
-  blue:               $blue,
   purple:             $purple,
   teal:               $teal,
   red:                $red,
@@ -40,8 +40,8 @@ $interface_colors: (
 
 // Main colors ------------------------
 $primary:             $royal;
-$secondary:           $blue;
-$tertiary:            $yellow;
+$secondary:           $yellow;
+$tertiary:            $purple;
 $main_colors: (
   primary:            $primary,
   secondary:          $secondary,
@@ -51,7 +51,7 @@ $main_colors: (
 
 // Background colors ------------------
 $bg_light:            $silver;
-$bg_dark:             $charcoal;
+$bg_dark:             #172257;
 $background_colors: (
   bg_light:           $bg_light,
   bg_dark:            $bg_dark
@@ -59,11 +59,13 @@ $background_colors: (
 
 // Card colors ------------------
 $card_light:          $white;
-$card_dark:           $charcoal;
+$card_dark:           rgba($white, $opacity_1);
 $card_colors: (
   card_light:         $card_light,
   card_dark:          $card_dark
 );
+
+$primary-action:      $primary;
 
 // Active colors ----------------------
 $active_light:        #E5F2FF;
@@ -75,7 +77,7 @@ $active_colors: (
 
 // Hover colors -----------------------
 $hover_light:         darken($silver, 5%);
-$hover_dark:          lighten($charcoal, 5%);
+$hover_dark:          rgba($white, $opacity_2);
 $hover_colors: (
   hover_light:        $hover_light,
   hover_dark:         $hover_dark
@@ -83,15 +85,15 @@ $hover_colors: (
 
 // Border colors ----------------------
 $border_light:        #E4E8F0;
-$border_dark:         #363D5B;
+$border_dark:         rgba($white, $opacity_1);
 $border_colors: (
   border_light:       $border_light,
   border_dark:        $border_dark
 );
 
 // Shadow colors ----------------------
-$shadow_light:        rgba($blue, 0.1);
-$shadow_dark:         rgba($slate, 0.1);
+$shadow_light:        rgba($royal, $opacity_1);
+$shadow_dark:         rgba($slate, $opacity_1);
 $shadow_colors: (
   shadow_light:       $shadow_light,
   shadow_dark:        $shadow_dark
@@ -102,8 +104,8 @@ $text_lt_default:     $charcoal;
 $text_lt_light:       #919EAB;
 $text_lt_lighter:     $slate;
 $text_dk_default:     $white;
-$text_dk_light:       rgba($white, 0.6);
-$text_dk_lighter:     rgba($white, 0.4);
+$text_dk_light:       rgba($white, $opacity_6);
+$text_dk_lighter:     rgba($white, $opacity_4);
 $text_colors: (
   text_lt_default:    $text_lt_default,
   text_lt_light:      $text_lt_light,
@@ -153,22 +155,17 @@ $status_color_text: (
   warning:            darken($warning, 10%),
   error:              $error,
   info:               $info,
-  neutral:            darken($neutral, 10%)
+  neutral:            darken($neutral, 15%),
+  primary:            lighten($primary, 10%)
 );
 
 // Link colors ------------------------
 $primary_action:      $primary;
-$primary_action_dk:   $blue;
-$secondary_action:      $blue;
-$action_colors: (
-  primary_action:     $primary_action,
-  primary_action_dk:  $primary_action_dk
-);
 
 // Product colors ---------------------
 $windows:             $royal;
 $siding:              $yellow;
-$doors:               $blue;
+$doors:               $red;
 $solar:               $green;
 $roofs:               $teal;
 $gutters:             $purple;
@@ -191,7 +188,6 @@ $transparent: transparent;
     }
   }
   @include export-colors($product_colors);
-  @include export-colors($action_colors);
   @include export-colors($status_colors);
   @include export-colors($data_colors);
   @include export-colors($shadow_colors);

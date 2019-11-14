@@ -7,12 +7,12 @@ import {Badge} from '../'
 type HashtagProps = {
   className?: String,
   data?: String,
+  dark?: Boolean,
   id?: String,
   text?: String,
   type: 'default' | 'home' | 'project',
   url?: String,
 }
-
 
 const HashType = {
   "home": "H#",
@@ -23,19 +23,21 @@ const HashType = {
 const Hashtag = ({
   className,
   data,
+  dark = false,
   id,
   text,
   type,
   url
-} : HashtagProps) => (
+} : HashtagProps) => {
+  const darkClass = dark === true ? "dark" : ""
 
-
-
-<div className={`pb_hashtag_kit_${type}`}>
-  <a href={url}>
-    <Badge variant="primary" text={HashType[type] + text}></Badge>
-  </a>
-</div>
-)
+  return (
+    <div className={`pb_hashtag_kit_${darkClass}`}>
+      <a href={url}>
+        <Badge variant="primary" text={HashType[type] + text} dark={dark}></Badge>
+      </a>
+    </div>
+  )
+}
 
 export default Hashtag
