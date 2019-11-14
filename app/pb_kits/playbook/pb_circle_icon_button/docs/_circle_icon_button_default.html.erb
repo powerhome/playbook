@@ -1,7 +1,33 @@
-<%= pb_rails("circle_icon_button", props: { icon: "plus"}) %>
+<%= pb_rails("circle_icon_button", props: {
+  button: {
+    variant: "primary"
+  },
+  icon: "plus"
+}) %>
+
 <br/>
-<%= pb_rails("circle_icon_button", props: { button: {text: "Button", variant: "secondary"}, icon: "pen"}) %>
+
+<%= pb_rails("circle_icon_button", props: {
+  button: {
+    variant: "secondary"
+  },
+  icon: "pen"
+}) %>
+
 <br/>
-<%= pb_rails("circle_icon_button", props: { button: {text: "Button", disabled: true}, icon: "times" }) %>
+
+<%= pb_rails("circle_icon_button", props: {
+  button: {
+    disabled: true
+  },
+  icon: "times"
+}) %>
+
 <br/>
-<%= pb_rails("circle_icon_button", props: {  button: {text: "Button", variant: "link"}, icon: "user" }) %>
+
+<%= pb_rails("circle_icon_button", props: {
+  button: {
+    variant: "link"
+  },
+  icon: "user"
+}) %>
