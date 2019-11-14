@@ -2,9 +2,11 @@
 
 import React from "react";
 
+type EventHandler = (SyntheticInputEvent<HTMLInputElement>) => void;
 type CardPropTypes = {
   children: Array<React.ReactNode> | React.ReactNode,
   className?: String,
+  onClick?: EventHandler,
   padding?: "none" | "xs" | "sm" | "md" | "lg" | "xl",
   selected?: Boolean,
   shadow?: "none" | "shallow" | "default" | "deep" | "deeper" | "deepest"
@@ -24,10 +26,13 @@ const bodyCSS = ({ padding = "md" }: CardPropTypes) => {
 };
 
 const Card = (props: CardPropTypes) => {
-  const { children, className } = props;
+  const { children, className, onClick = () => {} } = props;
 
   return (
-    <div className={`pb_card_kit${cardCSS(props)} ${className}`}>
+    <div
+      onClick={onClick}
+      className={`pb_card_kit${cardCSS(props)} ${className}`}
+    >
       <div className={`pb_card_body_kit${bodyCSS(props)}`}>{children}</div>
     </div>
   );

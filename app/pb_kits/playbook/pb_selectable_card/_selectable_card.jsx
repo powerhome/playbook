@@ -3,6 +3,9 @@
 
 import React from "react";
 import { Icon } from "../";
+import classnames from "classnames";
+
+type EventHandler = (SyntheticInputEvent<HTMLInputElement>) => void;
 
 type EventHandler = (SyntheticInputEvent<HTMLInputElement>) => void;
 type SelectableCardProps = {
@@ -21,13 +24,23 @@ type SelectableCardProps = {
   value?: String
 };
 
-const SelectableCard = ({
-  checked,
-  children,
-  className,
-  data,
-  disabled,
-  icon,
+const selectablecardCSS = ({
+  checked = false,
+  dark = false,
+  disabled = false
+}: SelectableCardProps) => {
+  const checkedStyle = checked === true ? "_checked" : "";
+
+  const themeStyle = dark === true ? "_dark" : "";
+
+  const disabledStyle = disabled == true ? "_disabled" : "_enabled";
+
+  return "pb_selectable_card_kit" + checkedStyle + themeStyle + disabledStyle;
+};
+
+const CheckboxRadio = ({
+  name,
+  multi = true,
   id,
   name,
   onSelect,
@@ -35,37 +48,32 @@ const SelectableCard = ({
   checked,
   disabled
 }: SelectableCardProps) => {
-  const inputType = multi === false ? "radio" : "checkbox"
+  const inputType = multi === false ? "radio" : "checkbox";
   return (
     <input
-        type="checkbox"
-        name={name}
-        id={id}
-        value={value}
-        checked={checked}
-        disabled={disabled}
-        onChange={onSelect}
+      type="checkbox"
+      name={name}
+      id={id}
+      value={value}
+      checked={checked}
+      disabled={disabled}
+      onChange={onSelect}
     />
-  )
-}
+  );
+};
 
 const SelectableCard = (props: SelectableCardProps) => {
-  const {
-    children,
-    className,
-    name,
-    text
-  } = props
+  const { children, className, name, text } = props;
   return (
-    <span className={classnames(selectablecardCSS(props), className)} >
+    <span className={classnames(selectablecardCSS(props), className)}>
       <CheckboxRadio {...props} />
-        <label htmlFor={name} dark>
-        { text || children }
+      <label htmlFor={name}>
+        {text || children}
         <div className={"pb_selectable_card_circle"}>
-          <Icon icon="check" fixedWidth/>
+          <Icon icon="check" fixedWidth />
         </div>
       </label>
     </span>
-  )
-}
-export default SelectableCard
+  );
+};
+export default SelectableCard;
