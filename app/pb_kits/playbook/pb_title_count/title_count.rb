@@ -8,8 +8,8 @@ module Playbook
       partial "pb_title_count/title_count"
 
       prop :align, type: Playbook::Props::Enum,
-           values: %w[left center right],
-           default: "left"
+                   values: %w[left center right],
+                   default: "left"
       prop :size, type: Playbook::Props::Enum,
                   values: %w[lg sm],
                   default: "sm"

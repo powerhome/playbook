@@ -5,12 +5,12 @@ module Playbook
     class StatChange
       include Playbook::Props
 
-        partial "pb_stat_change/stat_change"
+      partial "pb_stat_change/stat_change"
 
-        prop :change, type: Playbook::Props::Enum,
-                      values: %w[neutral increase decrease],
-                      default: "neutral"
-        prop :value, type: Playbook::Props::Percentage
+      prop :change, type: Playbook::Props::Enum,
+                    values: %w[neutral increase decrease],
+                    default: "neutral"
+      prop :value, type: Playbook::Props::Percentage
 
       def status
         case change
