@@ -11,7 +11,7 @@ PreCommit:
     problem_on_unmodified_line: ignore
     command: ['bundle', 'exec', 'rubocop']
   EsLint:
-    enabled: true
+    enabled: false
     on_warn: fail
     required_executable: 'yarn'
     problem_on_unmodified_line: ignore
