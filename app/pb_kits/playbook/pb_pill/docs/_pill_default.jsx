@@ -25,6 +25,10 @@ function PillDefault() {
       <br/><br/>
 
       <Pill text="neutral" variant="neutral" />
+
+      <br/><br/>
+
+      <Pill text="primary" variant="primary" />
     </div>
   )
 }

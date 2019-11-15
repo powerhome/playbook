@@ -28,10 +28,12 @@ kits:
   - list
   - loading_inline
   - message
+  - nav
   - online_status
   - person
   - person_contact
   - pill
+  - progress_pills
   - progress_simple
   - section_separator
   - source
@@ -48,5 +50,5 @@ kits:
   - toggle
   - user
   - user_badge
-  - vertical_nav
-  - progress_pills
+
+

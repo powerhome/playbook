@@ -9,7 +9,7 @@ module Playbook
 
       prop :text
       prop :variant, type: Playbook::Props::Enum,
-                     values: %w[success warning error info neutral],
+                     values: %w[success warning error info neutral primary],
                      default: "neutral"
 
       def classname

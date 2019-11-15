@@ -13,22 +13,22 @@ const defaultProps = {
   active: false
 };
 
-class VerticalNavItem extends Component {
+class NavItem extends Component {
   render() {
     const { text, link, active } = this.props;
     return (
-      <li className={"vertical_nav_list_border_item" + active}>
-        <a className="vertical_nav_list_item_link"
+      <li className={"pb_nav_list_border_item" + active}>
+        <a className="pb_nav_list_item_link"
             href={link}
         >
-          <span className="vertical_nav_list_item_link-text">{text}</span>
+          <span className="pb_nav_list_item_text">{text}</span>
         </a>
       </li>
     );
   }
 }
 
-VerticalNavItem.propTypes = propTypes;
-VerticalNavItem.defaultProps = defaultProps;
+NavItem.propTypes = propTypes;
+NavItem.defaultProps = defaultProps;
 
-export default VerticalNavItem;
+export default NavItem;

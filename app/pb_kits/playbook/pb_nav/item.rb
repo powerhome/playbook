@@ -1,18 +1,18 @@
 # frozen_string_literal: true
 
 module Playbook
-  module PbVerticalNav
+  module PbNav
     class Item
       include Playbook::Props
 
-      partial "pb_vertical_nav/item"
+      partial "pb_nav/item"
 
       prop :active, type: Playbook::Props::Boolean, default: false
       prop :link, default: "#"
       prop :text
 
       def classname
-        generate_classname("vertical_nav_list_border_item", active_class)
+        generate_classname("pb_nav_list_border_item", active_class)
       end
 
     private

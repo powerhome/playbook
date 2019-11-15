@@ -8,7 +8,7 @@ module Playbook
       partial "pb_label_pill/label_pill"
 
       prop :variant, type: Playbook::Props::Enum,
-                     values: %w[success warning error info neutral],
+                     values: %w[success warning error info neutral primary],
                      default: "neutral"
       prop :label
       prop :pill_value
