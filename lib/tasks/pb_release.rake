@@ -4,7 +4,6 @@ namespace :pb_release do
   desc "Update the version number in preparation to release"
   task version: :environment do
     old_version = Playbook::VERSION
-    new_version = ""
     STDOUT.puts "What would you like the next release number to be? Currently #{old_version}"
     new_version = STDIN.gets.chomp
 
@@ -54,7 +53,6 @@ namespace :pb_release do
 
     # Tags
     puts "\nPushed to NPM. Now lets create a tag..."
-    description = ""
     puts "\nWrite a brief tag release description. You can edit this later on GitHub."
     description = STDIN.gets.chomp
     puts "\nCreating Tag..."

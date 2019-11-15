@@ -48,7 +48,6 @@ module Playbook
       def formatted_value
         contact_value.to_s.gsub(/\D/, "")
       end
-
     end
   end
 end
