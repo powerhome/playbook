@@ -57,7 +57,6 @@
 };
 
 .pb_text_input_kit {
-  @include pb_input
   margin: 8px;
 
   .text_input_wrapper {
@@ -80,7 +79,7 @@
     @include pb_text_input_dark;
 
     &:focus{
-      border-color: $secondary_action;
+      border-color: $primary-action;
     }
   }
 };

@@ -15,7 +15,7 @@ $pb_card_border_radius: $border_rad_heavier;
 }
 
 @mixin pb_card_selected_dark {
-  @include pb_card_selected($secondary_action);
+  @include pb_card_selected($primary_action);
 }
 
 @mixin pb_card($background: $card_light, $border_color: $border_light) {
