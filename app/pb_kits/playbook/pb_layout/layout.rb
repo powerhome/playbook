@@ -12,6 +12,7 @@ module Playbook
                       default: "xs"
       prop :dark, type: Playbook::Props::Boolean, default: false
       prop :full, type: Playbook::Props::Boolean, default: false
+      prop :gradient, type: Playbook::Props::Boolean, default: false
       prop :position, type: Playbook::Props::Enum,
                       values: %w[left right],
                       default: "left"
@@ -29,6 +30,10 @@ module Playbook
 
       def dark_class
         dark ? "dark" : nil
+      end
+
+      def gradient_class
+        gradient ? "gradient" : nil
       end
 
       def full_class

@@ -3,7 +3,7 @@
 @import "../tokens/screen_sizes";
 @import "./layout_mixin";
 
-.pb_layout {
+.pb_layout_kit {
 
   $layout_sizes: (
     "xs":   64px,
@@ -19,6 +19,7 @@
   $colors: (
     "light",
     "dark",
+    "gradient",
     "transparent",
   );
 

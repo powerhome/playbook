@@ -5,6 +5,7 @@ examples:
   - layout_md: Medium
   - layout_lg: Large
   - layout_xl: Extra Large
+  - layout_gradient: Gradient
   - layout_xs_dark: Extra Small Dark
   - layout_sm_dark: Small Dark
   - layout_md_dark: Medium Dark
