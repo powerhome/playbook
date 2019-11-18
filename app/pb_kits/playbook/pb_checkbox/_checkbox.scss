@@ -54,12 +54,12 @@ $transition: $transition_cubic;
 
   &[class*=_dark] {
     input:checked ~ .pb_checkbox_checkmark {
-      background-color: $primary_action_dk;
-      border-color: $primary_action_dk;
+      background-color: $primary_action;
+      border-color: $primary_action;
     }
 
     &:hover .pb_checkbox_checkmark {
-      border-color: $primary_action_dk;
+      border-color: $primary_action;
     }
   }
 }

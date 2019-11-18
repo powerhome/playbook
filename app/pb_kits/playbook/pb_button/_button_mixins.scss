@@ -81,7 +81,7 @@ $pb_button_border_width: 1px;
   @include pb_button(rgba($primary_action, 0.05), $primary_action);
 
   &:hover {
-    @include pb_button_hover(rgba($secondary_action, $opacity_3));
+    @include pb_button_hover(rgba($primary_action, $opacity_3));
   }
 }
 
@@ -121,13 +121,11 @@ $pb_button_border_width: 1px;
 }
 
 // Dark Primary =================
-@mixin pb_button_primary_dark {
-  @include pb_button($secondary_action);
+@mixin pb_button_primary_dark{
+  @include pb_button($primary_action);
 
   &:hover {
-    @include pb_button_hover(
-      $bg: darken($secondary_action, $pb_button_hover_darken)
-    );
+    @include pb_button_hover($bg: darken($primary_action, $pb_button_hover_darken));
   }
 }
 
@@ -136,13 +134,13 @@ $pb_button_border_width: 1px;
   @include pb_button(rgba($white, 0.2), $white);
 
   &:hover {
-    @include pb_button_hover(rgba($secondary_action, $opacity_2));
+    @include pb_button_hover(rgba($primary_action, $opacity_2));
   }
 }
 
 // Dark Link =============
 @mixin pb_button_link_dark {
-  @include pb_button($transparent, $secondary_action);
+  @include pb_button($transparent, $primary_action);
 
   &:hover {
     @include pb_button_hover($transparent);

@@ -69,10 +69,11 @@ $pb_selectable_card_border: 2px;
   &[class*=_dark] {
     label {
       @include pb_card_dark;
+      background: transparent;
 
       .pb_selectable_card_circle {
         border-color: $bg_dark;
-        background: $primary_action_dk;
+        background: $primary-action;
       }
     }
 
@@ -80,6 +81,7 @@ $pb_selectable_card_border: 2px;
     input[type="radio"] {
       &:checked ~ label {
         @include pb_card_selected_dark;
+        background: transparent;
       }
     }
   }

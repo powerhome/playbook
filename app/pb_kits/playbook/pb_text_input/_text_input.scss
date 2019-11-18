@@ -79,7 +79,7 @@
     @include pb_text_input_dark;
 
     &:focus{
-      border-color: $secondary_action;
+      border-color: $primary-action;
     }
   }
 };

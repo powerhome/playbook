@@ -29,6 +29,7 @@ kits:
   - list
   - loading_inline
   - message
+  - nav
   - online_status
   - person
   - person_contact
@@ -50,4 +51,4 @@ kits:
   - toggle
   - user
   - user_badge
-  - vertical_nav
+  - circle_icon_button
