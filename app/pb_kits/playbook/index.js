@@ -73,7 +73,6 @@ export {
   Checkbox,
   CircleIconButton,
   commonSettings,
-  CircleIconButton,
   Contact,
   Currency,
   DashboardValue,
