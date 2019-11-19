@@ -20,9 +20,7 @@ module Playbook
         generate_classname("pb_progress_pills_kit", dark_class)
       end
 
-      def dark_class
-        dark ? "dark" : nil
-      end
+
 
       def with_status
         yield title if title.present?
@@ -38,6 +36,12 @@ module Playbook
 
       def dark_pill
           dark ? "_dark" : nil
+      end
+
+      private
+      
+      def dark_class
+        dark ? "dark" : nil
       end
 
     end
