@@ -22,7 +22,6 @@ module Playbook
 
       def classname
         first_class = generate_classname("pb_layout", size, position, dark_class, transparent_class)
-        classname = first_class + full_class + collapse_class
         [first_class, full_class, collapse_class].reject(&:empty?).join(" ")
       end
 

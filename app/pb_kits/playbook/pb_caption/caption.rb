@@ -22,7 +22,6 @@ module Playbook
 
     private
 
-
       def dark_class
         dark ? "dark" : nil
       end

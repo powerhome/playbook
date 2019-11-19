@@ -12,11 +12,11 @@ module Playbook
       prop :last_name
 
       def wrong_contacts
-        contacts.select {|contact| contact[:contact_type] == "wrong number" }
+        contacts.select { |contact| contact[:contact_type] == "wrong number" }
       end
 
       def valid_contacts
-        contacts.select {|contact| contact[:contact_type] != "wrong number" }
+        contacts.reject { |contact| contact[:contact_type] == "wrong number" }
       end
 
       def classname

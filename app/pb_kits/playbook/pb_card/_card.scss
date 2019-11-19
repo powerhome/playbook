@@ -6,6 +6,8 @@
 
 $pb_card_border_width: 1px;
 $pb_card_border_radius: $border_rad_heavier;
+$pb_card_highlight_colors: map-merge($status_colors, $product_colors);
+$pb_card_highlight_size: 4px;
 
 [class^=pb_card_kit] {
   position: relative;
@@ -27,6 +29,37 @@ $pb_card_border_radius: $border_rad_heavier;
   @each $name, $shadow in $box_shadows {
     &[class*=_#{$name}] {
       box-shadow: $shadow;
+    }
+  }
+
+  @mixin pb_card_highlight($width, $height, $background){
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: $width;
+    height: $height;
+    background: $background;
+    z-index: 10;
+  }
+
+  &[class*=_highlight] {
+    overflow: hidden;
+  }
+
+  &[class*=_highlight_side] {
+    @each $color_name, $color_value in $pb_card_highlight_colors {
+      &[class*=_highlight_#{$color_name}]::before {
+        @include pb_card_highlight(100%, $pb_card_highlight_size, $color_value);
+      }
+    }
+  }
+
+  &[class*=_highlight_top] {
+    @each $color_name, $color_value in $pb_card_highlight_colors {
+      &[class*=_highlight_#{$color_name}]::before {
+        @include pb_card_highlight($pb_card_highlight_size, 100%, $color_value);
+      }
     }
   }
 }
