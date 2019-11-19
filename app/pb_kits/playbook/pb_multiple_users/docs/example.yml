@@ -1,0 +1,9 @@
+examples:
+
+  rails:
+  - multiple_users_default: Default
+  - multiple_users_reverse: Reverse
+
+  react:
+  - multiple_users_default: Default
+  - multiple_users_reverse: Reverse
