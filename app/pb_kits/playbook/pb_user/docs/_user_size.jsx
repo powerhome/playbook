@@ -4,47 +4,27 @@ import {User} from "../../"
 function UserDefault() {
   return (
     <div class="pb--doc-demo-row">
-
-      <div>
-        <User
+      <User
           name='Anna Black'
           title='Remodeling Consultant'
-          orientation="vertical"
-          align="center"
+          size='sm'
+          avatar_url="https://randomuser.me/api/portraits/women/44.jpg"
+      />
+
+      <User
+          name='Anna Black'
+          title='Remodeling Consultant'
+          size='md'
+          avatar_url="https://randomuser.me/api/portraits/women/44.jpg"
+      />
+
+      <User
+          name='Anna Black'
+          title='Remodeling Consultant'
           size='lg'
           avatar_url="https://randomuser.me/api/portraits/women/44.jpg"
-        />
-      </div>
-
-      <div>
-        <User
-          name='Anna Black'
-          title='Remodeling Consultant'
-          orientation="horizontal"
-          align="left"
-          avatar_url="https://randomuser.me/api/portraits/women/44.jpg"
-        />
-      </div>
-
-      <div>
-        <User
-          name='Anna Black'
-          orientation="horizontal"
-          align="left"
-          avatar_url="https://randomuser.me/api/portraits/women/44.jpg"
-        />
-
-        <br/>
-
-        <User
-          name='Anna Black'
-          orientation="horizontal"
-          align="left"
-          avatar={true}
-        />
-      </div>
-
-    </div>
+      />
+    </div> 
   )
 }
 

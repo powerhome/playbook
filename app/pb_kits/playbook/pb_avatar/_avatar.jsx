@@ -55,8 +55,7 @@ const Avatar = ({
   }
 
   const css = classnames([
-    `pb_avatar_kit`,
-    `avatar_${size}`,
+    `pb_avatar_kit_${size}`,
     className,
   ])
 
