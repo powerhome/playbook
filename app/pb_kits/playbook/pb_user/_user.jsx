@@ -1,6 +1,7 @@
 /* @flow */
 
 import React from 'react';
+import classnames from 'classnames';
 
 import {
   Title,
@@ -46,7 +47,7 @@ const User = (props: UserProps) => {
   const print_avatar = (avatar, avatar_url) => {
     if (avatar == true | avatar_url != null ) {
       return (
-        <Avatar name={name} size={avatarSizes[size]} url={avatar_url}/>
+        <Avatar name={name} size={avatarSizes[size]} image_url={avatar_url}/>
       )
     }
   }
