@@ -14,9 +14,15 @@ module Playbook
       prop :shadow, type: Playbook::Props::Enum,
                     values: %w[none shallow default deep deeper deepest],
                     default: "none"
+      prop :highlight, type: Playbook::Props::Hash,
+                       default: {}
 
       def classname
-        generate_classname("pb_card_kit", selected_class, shadow_class)
+        generate_classname("pb_card_kit",
+                           selected_class,
+                           shadow_class,
+                           highlight_position_class,
+                           highlight_color_class)
       end
 
     private
@@ -27,6 +33,14 @@ module Playbook
 
       def shadow_class
         shadow != "none" ? "shadow_#{shadow}" : nil
+      end
+
+      def highlight_position_class
+        highlight[:position].present? ? "highlight_#{highlight[:position]}" : nil
+      end
+
+      def highlight_color_class
+        highlight[:color].present? ? "highlight_#{highlight[:color]}" : nil
       end
     end
   end

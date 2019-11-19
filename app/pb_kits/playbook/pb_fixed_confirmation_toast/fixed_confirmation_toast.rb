@@ -12,7 +12,6 @@ module Playbook
                     default: "neutral"
       prop :text, type: Playbook::Props::String
 
-
       def show_text?
         text.present?
       end

@@ -22,11 +22,11 @@ module Playbook
       end
 
       def format_timezone_string
-        "#{pb_date_time.to_timezone}"
+        pb_date_time.to_timezone.to_s
       end
 
       def pb_date_time
-        pb_date_time ||= Playbook::PbKit::PbDateTime.new(time, timezone)
+        Playbook::PbKit::PbDateTime.new(time, timezone)
       end
     end
   end

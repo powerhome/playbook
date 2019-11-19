@@ -10,12 +10,12 @@ module Playbook
       partial "pb_progress_simple/progress_simple"
 
       prop :align, type: Playbook::Props::Enum,
-           values: %w[left center right],
-           default: "left"
+                   values: %w[left center right],
+                   default: "left"
       prop :value, type: Playbook::Props::Number
       prop :max, type: Playbook::Props::Number
       prop :muted, type: Playbook::Props::Boolean,
-           default: false
+                   default: false
       prop :percent, type: Playbook::Props::Percentage
       # :width prop should not probably be a string type
       # Should we be allowing the user to pass this value at all?
