@@ -1,0 +1,13 @@
+<%= content_tag(:div,
+    id: object.id,
+    data: object.data,
+    class: object.classname) do %>
+
+    <div class="pb_date_stacked_day_month">
+      <%= pb_rails("caption", props: { text: object.month }) %>
+      <%= pb_rails("title", props: { text: object.day , size: object.title_size }) do %>
+      <% end %>
+    </div>
+    <%= pb_rails("caption", props: { text: object.year, size:"xs" }) %>
+
+<% end %>
