@@ -1,0 +1,22 @@
+examples:
+
+  rails:
+  - date_stacked_default: Default
+  - date_stacked_not_current_year: Not Current Year
+  - date_stacked_reverse: Day & Month Reverse
+  - date_stacked_sizes: Sizes
+  - date_stacked_align: Alignment
+  - date_stacked_dark: Dark
+
+
+
+  react:
+  - date_stacked_default: Default
+  - date_stacked_not_current_year: Not Current Year
+  - date_stacked_reverse: Day & Month Reverse
+  - date_stacked_sizes: Sizes
+  - date_stacked_align: Alignment
+  - date_stacked_dark: Dark
+
+
+
