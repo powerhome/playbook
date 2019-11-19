@@ -3,18 +3,17 @@
     data: object.data,
     class: object.classname) do %>
 
-      <div class="status">
+    <div class="progress_pills_status">
       <% object.with_status do |status| %>
         <%= pb_rails("title", props: { text: object.title, tag: "h4", size: 4, dark: object.dark})%>
         <%= pb_rails("body", props: { text: object.value, color: "light", dark:object.dark}) %>
       <% end %>
-      </div>
+    </div>
 
-      <div class="pills">
-        <% object.each_step do |step| %>
-          <span class="pb_progress_pill<%= object.active_step(step) %><%= object.dark_pill %>"></span>
-        <% end %>
-      </div>
-
+    <div class="progress_pills">
+      <% object.each_step do |step| %>
+        <span class="pb_progress_pill<%= object.active_step(step) %><%= object.dark_pill %>"></span>
+      <% end %>
+    </div>
 
 <% end %>

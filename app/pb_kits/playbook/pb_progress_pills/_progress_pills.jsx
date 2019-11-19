@@ -2,9 +2,6 @@
 /*eslint-disable react/no-multi-comp, flowtype/space-before-type-colon */
 
 import React from 'react'
-
-
-// Un-comment to import kits here
 import { Body,Title } from '../'
 
 
@@ -14,6 +11,7 @@ type ProgressPillsProps = {
   title?: String,
   value?: String,
   dark?: Boolean,
+
 }
 
 const showSteps = (steps, active, dark) => {
@@ -32,18 +30,22 @@ const ProgressPill = ({
     step,
 }: ProgressPillProps) => (<div className={`pb_progress_pill${step <= active ? "_active" : "_inactive"}${dark ? "_dark" : null}`} key={step}></div>)
 
-const ProgressPills = ({ active = 0, steps = 3, title = null, value = null, dark=false }: ProgressPillsProps) => (
-  <div className={`pb_progress_pills_kit${dark ? "_dark": null}`}>
-    {title ?
-    <div className="status">
-      <Title text={title} size={4} tag="h4" dark={dark}/>
-      <Body color="light" text={value} dark={dark}/>
-    </div> : null}
+const ProgressPills = ({ active = 0, steps = 3, title = null, value = null, dark=false } : ProgressPillsProps) => {
 
-    <div className="pills">
+  const darkClass = dark ? "_dark" : ""
+
+  return(
+    <div className={`pb_progress_pills_kit${darkClass}`}>
+      {title ?
+      <div className="progress_pills_status">
+        <Title text={title} size={4} tag="h4" dark={dark}/>
+        <Body color="light" text={value} dark={dark}/>
+      </div> : null}
+
+    <div className="progress_pills">
       {showSteps(steps, active, dark)}
     </div>
   </div>
-)
+)}
 
 export default ProgressPills
