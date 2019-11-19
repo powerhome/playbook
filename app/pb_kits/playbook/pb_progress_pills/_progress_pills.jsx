@@ -20,11 +20,17 @@ const showSteps = (steps, active, dark) => {
   let items = []
 
   for(let step = 1; step <= steps; step++) {
-    items.push(<div className={`pb_progress_pill${step <= active ? "_active" : "_inactive"}${dark ? "_dark" : null}`} key={step}></div>)
+    items.push(ProgressPill({step,active,dark}))
   }
 
   return items
 }
+
+const ProgressPill = ({
+    active,
+    dark,
+    step,
+}: ProgressPillProps) => (<div className={`pb_progress_pill${step <= active ? "_active" : "_inactive"}${dark ? "_dark" : null}`} key={step}></div>)
 
 const ProgressPills = ({ active = 0, steps = 3, title = null, value = null, dark=false }: ProgressPillsProps) => (
   <div className={`pb_progress_pills_kit${dark ? "_dark": null}`}>
