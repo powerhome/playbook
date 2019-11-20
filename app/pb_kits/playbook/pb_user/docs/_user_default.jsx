@@ -12,7 +12,7 @@ function UserDefault() {
           orientation="vertical"
           align="center"
           size='lg'
-          avatar_url="https://randomuser.me/api/portraits/women/44.jpg"
+          avatarUrl="https://randomuser.me/api/portraits/women/44.jpg"
         />
       </div>
 
@@ -22,7 +22,7 @@ function UserDefault() {
           title='Remodeling Consultant'
           orientation="horizontal"
           align="left"
-          avatar_url="https://randomuser.me/api/portraits/women/44.jpg"
+          avatarUrl="https://randomuser.me/api/portraits/women/44.jpg"
         />
       </div>
 
@@ -31,7 +31,7 @@ function UserDefault() {
           name='Anna Black'
           orientation="horizontal"
           align="left"
-          avatar_url="https://randomuser.me/api/portraits/women/44.jpg"
+          avatarUrl="https://randomuser.me/api/portraits/women/44.jpg"
         />
 
         <br/>

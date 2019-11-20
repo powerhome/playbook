@@ -18,7 +18,7 @@ type UserProps = {
   align?: 'left' | 'center' | 'right',
   orientation?: 'horiztonal' | 'vertical',
   avatar?: Boolean,
-  avatar_url?: String,
+  avatarUrl?: String,
 }
 
 const userSizes = {
@@ -41,20 +41,20 @@ const User = (props: UserProps) => {
     orientation='horizontal',
     size='sm',
     avatar=false,
-    avatar_url,
+    avatarUrl,
   } = props 
 
-  const print_avatar = (avatar, avatar_url) => {
-    if (avatar == true | avatar_url != null ) {
+  const print_avatar = (avatar, avatarUrl) => {
+    if (avatar == true | avatarUrl != null ) {
       return (
-        <Avatar name={name} size={avatarSizes[size]} image_url={avatar_url}/>
+        <Avatar name={name} size={avatarSizes[size]} image_url={avatarUrl}/>
       )
     }
   }
 
   return (
     <div className={`pb_user_kit_${align}_${orientation}_${size}`}>
-      {print_avatar(avatar, avatar_url)}
+      {print_avatar(avatar, avatarUrl)}
       <div className="content_wrapper">
         <Title size={userSizes[size]} text={`${name}`}/>
         <Body color='light'>{`${title}`}</Body>
