@@ -27,7 +27,7 @@ br
     locals:{ title: "Cards",
     usage: "Used for card backgrounds",
     colors: [{name: "Card Light", variable: "card_light"},
-        {name: "Card Dark", variable: "card_dark"}]}
+        {name: "Card Dark", variable: "card_dark", dark: true}]}
 
 // Status --------------------------
 = render :partial => "playbook/pages/utilities/pb_doc_color",
@@ -49,14 +49,14 @@ br
         {name: "Data 4", variable: "data_4"},
         {name: "Data 5", variable: "data_5"},
         {name: "Data 6", variable: "data_6"},
-        {name: "Data 7", variable: "data_7"}]}
+        {name: "Data 7", variable: "data_7"},
+        {name: "Data 8", variable: "data_8"}]}
 
 // Actions -------------------------
 = render :partial => "playbook/pages/utilities/pb_doc_color",
     locals:{ title: "Actions",
     usage: "Used for links and action buttons",
-    colors: [{name: "Primary", variable: "primary_action"},
-        {name: "Primary Dark", variable: "primary_action_dk", dark: true}]}
+    colors: [{name: "Primary", variable: "primary_action"}]}
 
 // Active --------------------------
 = render :partial => "playbook/pages/utilities/pb_doc_color",
