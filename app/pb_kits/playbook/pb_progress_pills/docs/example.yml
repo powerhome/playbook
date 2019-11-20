@@ -1,0 +1,12 @@
+examples:
+
+  rails:
+  - progress_pills_default: Default
+  - progress_pills_status: Status
+  - progress_pills_dark: Dark
+
+
+  react:
+  - progress_pills_default: Default
+  - progress_pills_status: Status
+  - progress_pills_dark: Dark

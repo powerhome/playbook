@@ -1,0 +1,42 @@
+@import "../tokens/spacing";
+@import "../tokens/colors";
+@import "../tokens/border_radius";
+
+@mixin pb_progress_pill {
+  width: 45px;
+  height: 4px;
+  border-radius: $border_rad_light;
+  margin-right: $space_xs;
+}
+
+[class^=pb_progress_pills_kit] {
+  [class*=progress_pills] {
+    display: flex;
+  }
+
+  [class*=progress_pills_status] {
+    display: flex;
+    align-items: center;
+    margin-bottom: $space_xs;
+
+    [class*=title] {
+      margin-right: $space_xs;
+    }
+  }
+
+
+  [class*=pb_progress_pill] {
+    @include pb_progress_pill;
+
+    &[class*=_inactive] {
+      background-color: $border_light;
+      &[class*=_dark]{
+      background-color: $border_dark;
+      }
+    }
+
+    &[class*=_active] {
+      background-color: $primary_action;
+    }
+  }
+}

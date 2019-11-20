@@ -33,6 +33,7 @@ import "../kits/pb_online_status.js";
 import "../kits/pb_person.js";
 import "../kits/pb_person_contact.js";
 import "../kits/pb_pill.js";
+import "../kits/pb_progress_pills.js";
 import "../kits/pb_progress_simple.js";
 import "../kits/pb_section_separator.js";
 import "../kits/pb_source.js";
@@ -49,3 +50,5 @@ import "../kits/pb_title_detail.js";
 import "../kits/pb_toggle.js";
 import "../kits/pb_user.js";
 import "../kits/pb_user_badge.js";
+
+
