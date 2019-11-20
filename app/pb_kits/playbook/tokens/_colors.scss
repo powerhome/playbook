@@ -66,6 +66,9 @@ $card_colors: (
 );
 
 $primary-action:      $primary;
+$action_colors: (
+  primary_action:            $primary-action
+);
 
 // Active colors ----------------------
 $active_light:        #E5F2FF;
@@ -197,6 +200,7 @@ $transparent: transparent;
   @include export-colors($background_colors);
   @include export-colors($card_colors);
   @include export-colors($active_colors);
+  @include export-colors($action_colors);
   @include export-colors($hover_colors);
   @include export-colors($border_colors);
   @include export-colors($text_colors);
