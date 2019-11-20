@@ -5,25 +5,28 @@ function DashboardValueAlign() {
   return (
     <div>
       <DashboardValue
-          stat_label="Top Title Value"
-          stat_value={{value: "1,428", unit: "appts"}}
-          stat_change={{change: "decrease", value: "26.1"}} />
+          statChange={{change: "decrease", value: "26.1"}}
+          statLabel="Top Title Value"
+          statValue={{value: "1,428", unit: "appts"}}
+      />
 
       <br/><br/>
 
       <DashboardValue
           align="center"
-          stat_label="Top Title Value"
-          stat_value={{value: "1,428", unit: "appts"}}
-          stat_change={{change: "decrease", value: 56.1}} />
+          statChange={{change: "decrease", value: 56.1}}
+          statLabel="Top Title Value"
+          statValue={{value: "1,428", unit: "appts"}}
+      />
 
       <br/><br/>
 
       <DashboardValue
           align="right"
-          stat_label="Top Title Value"
-          stat_value={{value: "1,428", unit: "appts"}}
-          stat_change={{change: "decrease", value: 86}} />
+          statChange={{change: "decrease", value: 86}}
+          statLabel="Top Title Value"
+          statValue={{value: "1,428", unit: "appts"}}
+      />
     </div>
   )
 }
