@@ -5,38 +5,38 @@ function AvatarDefault() {
   return (
     <div>
       <Avatar
+          imageUrl="https://randomuser.me/api/portraits/men/44.jpg"
           name="Terry Johnson"
           size="xs"
           status="online"
-          url="https://randomuser.me/api/portraits/men/44.jpg"
       />
       <br/>
       <Avatar
+          imageUrl="https://randomuser.me/api/portraits/men/44.jpg"
           name="Terry Johnson"
           size="sm"
           status="online"
-          url="https://randomuser.me/api/portraits/men/44.jpg"
       />
       <br/>
       <Avatar
+          imageUrl="https://randomuser.me/api/portraits/men/44.jpg"
           name="Terry Johnson"
           size="md"
           status="away"
-          url="https://randomuser.me/api/portraits/men/44.jpg"
       />
       <br/>
       <Avatar
+          imageUrl="https://randomuser.me/api/portraits/men/44.jpg"
           name="Terry Johnson"
           size="lg"
           status="offline"
-          url="https://randomuser.me/api/portraits/men/44.jpg"
       />
       <br/>
       <Avatar
+          imageUrl="https://randomuser.me/api/portraits/men/44.jpg"
           name="Terry Johnson"
           size="xl"
           status="offline"
-          url="https://randomuser.me/api/portraits/men/44.jpg"
       />
     </div>
   )
