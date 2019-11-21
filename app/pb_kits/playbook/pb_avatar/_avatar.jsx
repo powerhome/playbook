@@ -10,7 +10,7 @@ import { Image } from "../"
 type AvatarProps = {
   className?: String,
   name: String,
-  image_url: String,
+  imageUrl: String,
   size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl',
   status: 'online' | 'away',
 }
@@ -21,11 +21,11 @@ const initials = function(name) {
   }
 }
 
-const image = function(image_url, name) {
-  if (image_url) {
+const image = function(imageUrl, name) {
+  if (imageUrl) {
     return (
       <Image alt={name}
-          url={image_url}
+          url={imageUrl}
       />
     )
   }
@@ -38,7 +38,7 @@ const PbStatus = ({ size, status } : { size: String, status: String }) => (
 const Avatar = ({
   className,
   name=null,
-  image_url,
+  imageUrl,
   size='md',
   status=null
 }: AvatarProps) => {
@@ -68,7 +68,7 @@ const Avatar = ({
           className="avatar_wrapper"
           data-initials={initials(name)}
       >
-        {image(image_url, name)}
+        {image(imageUrl, name)}
       </div>
       {statusDisplay()}
     </div>
