@@ -27,6 +27,9 @@
     "globals": {
     },
     "rules": {
+      "camelcase": [2, {
+        "ignoreDestructuring": false
+      }],
       "no-console": 1,
       "react/prop-types": 1,
       "react/forbid-prop-types": 2,
@@ -50,6 +53,7 @@
       "react/prefer-es6-class": 2,
       "react/self-closing-comp": 1,
       "react/sort-comp": 1,
-      "react/jsx-no-undef": [2, { "allowGlobals": true }]
+      "react/jsx-no-undef": [2, { "allowGlobals": true }],
+      "semi": [2, "never"]
     }
 }
