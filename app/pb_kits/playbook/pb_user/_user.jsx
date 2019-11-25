@@ -54,7 +54,7 @@ const User = (props: UserProps) => {
     }
   }
 
-  const print_territory = (territory="") => {
+  const print_details = (territory="") => {
     if (territory !== "") {
       return (
         <Body color='light'>{`${territory} • ${title}`}</Body>
@@ -72,7 +72,7 @@ const User = (props: UserProps) => {
       {print_avatar(avatar, avatarUrl)}
       <div className="content_wrapper">
         <Title size={userSizes[size]} text={`${name}`}/>
-        {print_territory(territory)}
+        {print_details(territory)}
       </div>
     </div> 
   )
