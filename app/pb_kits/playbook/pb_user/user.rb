@@ -21,7 +21,7 @@ module Playbook
                   values: %w[lg md sm],
                   default: "sm"
       prop :title
-      prop :territory
+      prop :user_territory
 
       def classname
         generate_classname("pb_user_kit", align, orientation, size)
@@ -42,10 +42,11 @@ module Playbook
         size == "lg" ? 3 : 4
       end
 
-      def show_territory
-        if !territory.blank?
-          "#{territory} • "
+      def details
+        if user_territory.present?
+          [user_territory, title].compact.join(" • ")
         else
+          title
         end
       end
     end

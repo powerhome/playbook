@@ -54,8 +54,8 @@ const User = (props: UserProps) => {
     }
   }
 
-  const print_territory = (territory) => {
-    if (territory != "") {
+  const print_territory = (territory="") => {
+    if (territory !== "") {
       return (
         <Body color='light'>{`${territory} • ${title}`}</Body>
       )

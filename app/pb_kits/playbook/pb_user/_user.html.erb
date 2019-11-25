@@ -13,7 +13,7 @@
       class: "content_wrapper") do %>
     <%= pb_rails("title", props: { text: object.name, size: object.title_size }) %>
     <%= pb_rails("body", props: {
-      text: "#{object.show_territory}#{object.title}",
+      text: "#{object.details}",
       color: "light"
     }) %>
   <% end %>
