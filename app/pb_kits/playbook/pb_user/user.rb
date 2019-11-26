@@ -43,11 +43,7 @@ module Playbook
       end
 
       def details
-        if territory.present?
-          [territory, title].compact.join(" • ")
-        else
-          title
-        end
+        [territory, title].reject(&:blank?).join(" • ")
       end
     end
   end
