@@ -1,0 +1,40 @@
+<div class="pb--doc-demo-row">
+  <div>
+    <%= pb_rails("user", props: {
+      name: "Anna Black",
+      territory: "PHL",
+      title: "Remodeling Consultant",
+      orientation: "vertical",
+      align: "center",
+      size: "lg",
+      avatar_url: "https://randomuser.me/api/portraits/women/44.jpg"
+      }) %>
+  </div>
+  <div>
+    <%= pb_rails("user", props: {
+      name: "Anna Black",
+      territory: "PHL",
+      title: "Remodeling Consultant",
+      orientation: "horizontal",
+      align: "left",
+      avatar_url: "https://randomuser.me/api/portraits/women/44.jpg"
+      }) %>
+  </div>
+  <div>
+  <%= pb_rails("user", props: {
+      name: "Anna Black",
+      territory: "PHL",
+      title: "Remodeling Consultant",
+      orientation: "horizontal",
+      align: "center",
+      size: "sm"}) %>
+      <br>
+    <%= pb_rails("user", props: {
+      name: "Anna Black",
+      territory: "PHL",
+      title: "Remodeling Consultant",
+      orientation: "horizontal",
+      align: "center",
+      size: "lg"}) %>
+  </div>
+</div>
