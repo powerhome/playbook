@@ -42,6 +42,7 @@ import StarRating from "./pb_star_rating/_star_rating.jsx"
 import StatChange from "./pb_stat_change/_stat_change.jsx"
 import StatValue from "./pb_stat_value/_stat_value.jsx"
 import Table from "./pb_table/_table.jsx"
+import Textarea from "./pb_textarea/_textarea.jsx"
 import TextInput from "./pb_text_input/_text_input.jsx"
 import Time from "./pb_time/_time.jsx"
 import TimeStamp from "./pb_timestamp/_timestamp.jsx"
@@ -111,6 +112,7 @@ export {
   StatChange,
   StatValue,
   Table,
+  Textarea,
   TextInput,
   Time,
   TimeStamp,

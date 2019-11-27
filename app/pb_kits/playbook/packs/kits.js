@@ -52,3 +52,4 @@ import "../kits/pb_user.js";
 import "../kits/pb_user_badge.js";
 
 
+import "../kits/pb_textarea.js";

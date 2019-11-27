@@ -43,6 +43,7 @@ kits:
   - stat_change
   - stat_value
   - table
+  - textarea
   - text_input
   - time
   - timestamp

@@ -1,0 +1,13 @@
+examples:
+  
+  rails:
+  - textarea_default: Default
+  - textarea_dark: Dark
+
+  
+  
+  react:
+  - textarea_default: Default
+  - textarea_dark: Dark
+
+  

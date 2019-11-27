@@ -1,0 +1,15 @@
+<%= content_tag(:div,
+    id: object.id,
+    data: object.data,
+    class: object.classname) do %>
+  <% if object.label.present? %>
+    <%= pb_rails("caption", props: {text: object.label}) %>
+  <% end %>
+   <%= text_area(
+      nil, 
+      nil, 
+      :class => "#{object.classname}_textarea_input form-control", 
+      :placeholder => object.placeholder, 
+      :rows => 4,
+      :value => object.value )%>
+<% end %>
