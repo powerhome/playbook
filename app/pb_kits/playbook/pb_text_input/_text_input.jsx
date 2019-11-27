@@ -1,12 +1,15 @@
+/* @flow */
+
 import React from 'react'
-import PropTypes from "prop-types"
+import PropTypes from 'prop-types'
 import classnames from 'classnames'
-import {Caption} from "../"
+import {Caption} from '../'
 
 const propTypes = {
   className: PropTypes.string,
   name: PropTypes.string,
   label: PropTypes.string,
+  onChange: PropTypes.func,
   placeholder: PropTypes.string,
   type: PropTypes.string,
   value: PropTypes.oneOfType([
@@ -16,7 +19,8 @@ const propTypes = {
 }
 
 const defaultProps = {
-  type: "text"
+  onChange: () => {},
+  type: 'text'
 }
 
 class TextInput extends React.Component {
@@ -25,6 +29,7 @@ class TextInput extends React.Component {
       className,
       name,
       label,
+      onChange = () => {},
       placeholder,
       type,
       value
@@ -36,11 +41,12 @@ class TextInput extends React.Component {
     ])
 
     return (
-      <div className="pb_text_input_kit">
+      <div className='pb_text_input_kit'>
         <Caption text={label} />
-        <div className="text_input_wrapper">
+        <div className='text_input_wrapper'>
           <input className={css}
               name={name}
+              onChange={onChange}
               placeholder={placeholder}
               type={type}
               value={value}
