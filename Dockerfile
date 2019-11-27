@@ -26,7 +26,7 @@ RUN bundle install --frozen
 
 ADD package.json yarn.lock /home/app/src/
 RUN yarn install
-RUN npm rebuild node-sass
+RUN curl https://github.com/sass/node-sass/releases/download/v4.13.0/linux-x64-64_binding.node -o /home/app/src/node_modules/node-sass/vendor/linux-x64-64_binding.node
 
 COPY ./startup.sh /
 RUN chmod +x /startup.sh
