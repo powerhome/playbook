@@ -1,0 +1,17 @@
+<%= content_tag(:label,
+    id: object.id,
+    data: object.data,
+    text: object.text,
+    value: object.value,
+    checked: object.checked,
+    class: object.classname) do %>
+
+
+    <input type="radio" value="<%= object.value %>" name="<%= object.name %>" <%= object.selected %>>
+    <span class="pb_radio_button">
+      <div class="radio"></div>
+    </span>
+    <span class="pb_radio_label">
+      <%= object.text %>
+    </span>
+<% end %>
