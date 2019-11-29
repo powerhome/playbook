@@ -1,5 +1,5 @@
 import React from 'react'
-import {Radio} from '../_radio.jsx'
+import {Radio} from '../../'
 
 function RadioDark() {
   return (

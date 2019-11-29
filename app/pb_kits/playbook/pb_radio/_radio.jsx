@@ -2,8 +2,11 @@
 /*eslint-disable react/no-multi-comp, flowtype/space-before-type-colon */
 
 import React from 'react'
-import Body from '../pb_body/_body.jsx'
 
+/*
+// Un-comment to import kits here
+import { Body } from '../'
+*/
 
 type RadioProps = {
   className?: String,
@@ -17,28 +20,14 @@ type RadioProps = {
 
 }
 
-export const Radio = ({
-  checked,
-  className,
-  dark,
-  data,
-  id,
-  label,
-  name,
-  value,
-}: RadioProps) => (
+export const Radio = ({ className, data, id, label, name, value, checked, dark}: RadioProps) => (
 
     <label className={`pb_radio_kit` + (dark === true ? '_dark' : '')}>
-      <input
-          defaultChecked={checked}
-          name={name}
-          type='radio'
-          value={value}
-      />
-      <span className='pb_radio_button'>
-        <div className='radio'></div>
+      <input type="radio" name={name} value={value} defaultChecked={checked}/>
+      <span className="pb_radio_button">
+        <div className="radio"></div>
       </span>
-      <span className='body'>{label}</span>
+      <span className="pb_radio_label">{label}</span>
     </label>
 
 )

@@ -6,15 +6,12 @@
     checked: object.checked,
     class: object.classname) do %>
 
-    <%= radio_button_tag object.name, object.value, object.selected %>
+
+    <input type="radio" value="<%= object.value %>" name="<%= object.name %>" <%= object.selected %>>
     <span class="pb_radio_button">
-      <div class="radio">
-        <% if object.children %>
-        <%= capture(&object.children) %>
-      <% else %>
-        <%= object.input %>
-      <% end %>
-      </div>
+      <div class="radio"></div>
     </span>
-    <%= pb_rails("body", props: { text: object.text, dark: object.dark }) %>
+    <span class="pb_radio_label">
+      <%= object.text %>
+    </span>
 <% end %>

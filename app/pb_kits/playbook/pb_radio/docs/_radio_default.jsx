@@ -1,21 +1,21 @@
 import React from 'react'
-import {Radio} from '../_radio.jsx'
+import {Radio} from '../../'
 
 function RadioDefault() {
   return (
     <>
       <Radio label='Power'
-          name='Group1'
+          name='Group2'
           value='Power'
       />
       <br/>
       <Radio label='Nitro'
-          name='Group1'
+          name='Group2'
           value='Nitro'
       />
       <br/>
       <Radio label='Google'
-          name='Group1'
+          name='Group2'
           value='Google'
       />
     </>
