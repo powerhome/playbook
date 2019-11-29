@@ -31,7 +31,7 @@ const Textarea = ( props: TextareaProps) => {
     rows = 4,
   } = props
 
-  const textarea_input = `${textareaCSS(props)}_textarea_input form-control`
+  const textarea_input = `${textareaCSS(props)} form-control`
   
   return (
     <div className={classnames(textareaCSS(props), className)}>

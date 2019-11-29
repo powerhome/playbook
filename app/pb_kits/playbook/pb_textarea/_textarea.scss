@@ -5,22 +5,22 @@
   textarea::placeholder {
     @include pb_body_light;
   }
-  &[class*=_textarea_input] {
+  > textarea {
     @include pb_textarea_light;
   }
   &:focus {
-    @include pb_textarea_hover_light;
+    @include pb_textarea_focus_light;
   }
 
   &[class*=_dark] {
     textarea::placeholder {
       @include pb_body_light_dark;
     } 
-    &[class*=_textarea_input] {
+    > textarea {
       @include pb_textarea_dark;
     }
     &:focus {
-      @include pb_textarea_hover_dark;
+      @include pb_textarea_focus_dark;
     }
   }
 }
