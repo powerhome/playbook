@@ -1,0 +1,46 @@
+@import "../tokens/colors";
+@import "../tokens/opacity";
+@import "../tokens/border_radius";
+@import "../tokens/spacing";
+
+@mixin pb_textarea_hover($hover_colors: $hover_light) {
+    background: $hover_colors;
+}
+
+@mixin pb_textarea($border_colors, $background_colors, $text_colors){
+    @include pb_title_4;
+    border: 1px solid $border_colors;
+    border-radius: $border_rad_light;
+    display: block;
+    width: 100%;
+    color: $text_colors;
+    background: $background_colors;
+    padding: $space_xs $space_sm;
+    transition: 0.2s all;
+    outline: none;
+    margin: .1rem 0 0;
+    overflow: auto;
+    overflow-wrap: break-word;
+    resize: none;
+}
+
+// Textarea ======================
+@mixin pb_textarea_light {
+    @include pb_textarea($border_light, $white, $text_lt_default);
+}
+
+@mixin pb_textarea_dark {
+    @include pb_textarea($border_dark, $bg_dark, $text_dk_default);
+}
+
+// Hovers ======================
+@mixin pb_textarea_hover_light {
+    @include pb_textarea_hover($hover_light);
+}
+
+@mixin pb_textarea_hover_dark {
+    @include pb_textarea_hover($hover_dark);
+}
+
+
+

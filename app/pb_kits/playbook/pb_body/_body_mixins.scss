@@ -21,7 +21,10 @@ $pb_body_status: (
   line-height: $lh_tight;
   color: $color;
   font-size: $text_default;
+  font-weight: $regular;
+
 }
+
 
 // Colors ======================
 @mixin pb_body_light {

@@ -9,6 +9,15 @@ type TextareaProps = {
   label?: String,
   placeholder?: String,
   value?: String,
+  rows?: Number,
+  dark?: Boolean,
+}
+
+const textareaCSS =({
+    dark=false,
+}: TextareaProps) => {
+  const themeStyle = dark === true ? '_dark' : ''
+  return 'pb_textarea_kit' + themeStyle
 }
 
 const Textarea = ( props: TextareaProps) => {
@@ -17,22 +26,19 @@ const Textarea = ( props: TextareaProps) => {
     className,
     label,
     placeholder,
-    value
+    value,
+    dark=false,
+    rows = 4,
   } = props
 
-  const css = classnames([
-    'pb_text_input_kit',
-    className,
-  ])
-
-  const textarea_input ='pb_textarea_kit_textarea_input form-control'
+  const textarea_input = `${textareaCSS(props)}_textarea_input form-control`
   
   return (
-    <div className={css, className}>
-      <Caption text={label}/>
+    <div className={classnames(textareaCSS(props), className)}>
+      <Caption text={label} dark={dark}/>
       <textarea className={textarea_input}
         placeholder={placeholder}
-        rows={4}>
+        rows={rows}>
         {value}
       </textarea>
     </div>

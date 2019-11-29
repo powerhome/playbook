@@ -5,13 +5,15 @@
 @mixin pb_title(
     $fontSize: $heading_1,
     $fontWeight: $lighter,
-    $lineHeight: $lh_tighter){
+    $lineHeight: $lh_tighter
+){
   font-size: $fontSize;
   letter-spacing: $lspace_tight;
   font-weight: $fontWeight;
   color: $text_lt_default;
   margin: 0;
   line-height: $lineHeight;
+  font-family: $font_family_base;
 }
 
 @mixin pb_title_1 {

@@ -79,8 +79,8 @@ $active_colors: (
 );
 
 // Hover colors -----------------------
-$hover_light:         darken($silver, 5%);
-$hover_dark:          rgba($white, $opacity_2);
+$hover_light:         rgba($active_light, $opacity_2);
+$hover_dark:          rgba($active_dark, $opacity_2);
 $hover_colors: (
   hover_light:        $hover_light,
   hover_dark:         $hover_dark

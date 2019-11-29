@@ -3,13 +3,17 @@
     data: object.data,
     class: object.classname) do %>
   <% if object.label.present? %>
-    <%= pb_rails("caption", props: {text: object.label}) %>
+    <%= pb_rails("caption", props: {text: object.label, dark: object.dark}) %>
   <% end %>
-   <%= text_area(
-      nil, 
-      nil, 
-      :class => "#{object.classname}_textarea_input form-control", 
-      :placeholder => object.placeholder, 
-      :rows => 4,
-      :value => object.value )%>
+  <% if object.children %>
+    <%= capture(&object.children) %>
+  <% else %>
+    <%= text_area(
+        nil, 
+        nil, 
+        :class => "#{object.classname}_textarea_input form-control", 
+        :placeholder => object.placeholder, 
+        :rows => object.rows,
+        :value => object.value )%>
+  <% end %>
 <% end %>

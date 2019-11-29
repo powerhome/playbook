@@ -1,53 +1,26 @@
-@import "../tokens/typography";
-@import "../tokens/spacing";
-@import "../tokens/border_radius";
-@import "../tokens/colors";
-
-
-
-@mixin pb_text_input ($bg: $white, $bc: $border-light, $color: $text_lt_default) {
-  -webkit-appearance: none;
-  border: 1px solid $bc;
-  border-radius: $border-rad-light;
-}
-
-@mixin pb_text_input_dark {
-  @include pb_text_input(rgba($white, $opacity_1), rgba($white, $opacity_2), $text_dk_default)
-};
-
+@import "../pb_body/body_mixins";
+@import "./textarea_mixin";
 
 [class^=pb_textarea_kit] {
-
-  .textarea_wrapper {
-      margin-bottom: 1rem;
-    }
-
+  textarea::placeholder {
+    @include pb_body_light;
+  }
   &[class*=_textarea_input] {
-    border: 1px solid $border-light;
-    border-radius: $border-rad-light;
-    display: block;
-    width: 100%;
-    color: $text_lt_default;
-    background: $white;
-    padding: $space_xs $space_sm;
-    transition: 0.2s all;
-    outline: none;
-    font-size: $font_small;
-    margin: .1rem 0 0;
-    overflow: auto;
-    overflow-wrap: break-word;
-    resize: none;
+    @include pb_textarea_light;
+  }
+  &:focus {
+    @include pb_textarea_hover_light;
+  }
 
-    &:focus{
-      border-color: $secondary_action;
+  &[class*=_dark] {
+    textarea::placeholder {
+      @include pb_body_light_dark;
+    } 
+    &[class*=_textarea_input] {
+      @include pb_textarea_dark;
     }
-
-    &[class*=_dark] {
-         background: rgba($white, $opacity_1);
-
-        &[class*=_caption] {
-          color: $text_dk_light
-        }
+    &:focus {
+      @include pb_textarea_hover_dark;
     }
   }
 }
