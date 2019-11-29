@@ -1,0 +1,41 @@
+@import "../tokens/colors";
+@import "../tokens/spacing";
+
+
+[class^=pb_radio_kit] {
+  display: inline-flex;
+  .pb_radio_label {
+    padding-right: $space_sm;
+    font-size: $text_lt_default;
+    display: inline-flex;
+    flex-direction: row-reverse;
+  }
+  .pb_radio_button {
+    width: 22px;
+    height: 22px;
+    border-radius: 1000px;
+    border: 2px solid $border_light;
+    margin-right: $space_xs;
+  }
+
+  &:hover .pb_radio_button {
+    border-color: $primary_action;
+  }
+
+  input {
+    position: relative;
+    display: none;
+    &:checked ~ .pb_radio_button {
+      border: 6px solid $primary;
+    }
+  }
+  &[class*=_dark] {
+      input:checked ~ .pb_radio_button {
+        border: 6px solid $primary;
+      }
+
+      &:hover .pb_radio_button {
+        border-color: $primary_action;
+      }
+    }
+}
