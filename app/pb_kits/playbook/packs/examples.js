@@ -126,3 +126,5 @@ WebpackerReact.setup (Toggle);
 WebpackerReact.setup (User);
 WebpackerReact.setup (UserBadge);
 
+import * as Select from "pb_select/docs";
+WebpackerReact.setup (Select);
