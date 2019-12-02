@@ -2,6 +2,11 @@
 @import "../pb_button/button";
 
 $pb_circle_icon_button_size: 40px;
+$pb_button_styles: [
+  "primary",
+  "secondary",
+  "link",
+];
 
 @mixin pb_circle_icon_button {
   position: relative;
@@ -20,7 +25,9 @@ $pb_circle_icon_button_size: 40px;
 }
 
 [class^=pb_circle_icon_button_kit] {
-  #pb_circle_icon_button_button {
-    @include pb_circle_icon_button;
+  @each $style in $pb_button_styles {
+    [class^=pb_button_kit][class*=_#{$style}] {
+      @include pb_circle_icon_button;
+    }
   }
 }
