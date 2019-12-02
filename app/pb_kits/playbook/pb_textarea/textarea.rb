@@ -7,9 +7,12 @@ module Playbook
 
       partial "pb_textarea/textarea"
 
+      prop :object
+      prop :method
       prop :label
       prop :placeholder
       prop :value
+      prop :name
       prop :dark, type: Playbook::Props::Boolean,
                   default: false
       prop :rows, type: Playbook::Props::Number,

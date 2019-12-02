@@ -2,12 +2,14 @@ examples:
   
   rails:
   - textarea_default: Default
+  - textarea_custom: Custom Textarea Input
   - textarea_dark: Dark
 
   
   
   react:
   - textarea_default: Default
+  - textarea_custom: Custom Textarea Input
   - textarea_dark: Dark
 
   

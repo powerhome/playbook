@@ -11,7 +11,7 @@
     color: $text_color;
     background: $background_color;
     padding: $space_xs $space_sm;
-    transition: 0.2s all;
+    transition: $easeIn;
     outline: none;
     margin-top: $space_xs;
     margin-bottom: $space_sm;

@@ -9,9 +9,10 @@
     <%= capture(&object.children) %>
   <% else %>
     <%= text_area(
-        nil, 
-        nil, 
-        :class => "#{object.classname} form-control", 
+        :object, 
+        :method, 
+        :class => "#{object.classname}", 
+        :name => object.name,
         :placeholder => object.placeholder, 
         :rows => object.rows,
         :value => object.value )%>

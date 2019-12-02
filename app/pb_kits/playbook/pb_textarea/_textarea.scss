@@ -8,7 +8,7 @@
   > textarea {
     @include pb_textarea_light;
   }
-  &:focus {
+  textarea:focus {
     @include pb_textarea_focus_light;
   }
 
@@ -19,7 +19,7 @@
     > textarea {
       @include pb_textarea_dark;
     }
-    &:focus {
+    textarea:focus {
       @include pb_textarea_focus_dark;
     }
   }

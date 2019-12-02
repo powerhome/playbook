@@ -8,6 +8,8 @@ RSpec.describe Playbook::PbTextarea::Textarea do
   it { is_expected.to define_partial }
 
   it { is_expected.to define_string_prop(:label) }
+  it { is_expected.to define_string_prop(:object) }
+  it { is_expected.to define_string_prop(:method) }
   it { is_expected.to define_string_prop(:placeholder) }
   it { is_expected.to define_string_prop(:value) }
   it { is_expected.to define_boolean_prop(:dark)

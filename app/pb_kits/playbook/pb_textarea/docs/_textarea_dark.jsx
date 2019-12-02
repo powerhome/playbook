@@ -12,7 +12,7 @@ function TextareaDark() {
 
       <br/>
 
-      <Textarea label="Label" placeholder="Placeholder text" value="Default value text" dark/>
+      <Textarea label="Label" name="comment" placeholder="Placeholder text" value="Default value text" dark/>
       
     </div>
   )
