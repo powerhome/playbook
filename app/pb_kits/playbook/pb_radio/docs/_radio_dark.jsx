@@ -5,21 +5,21 @@ function RadioDark() {
   return (
     <>
       <Radio
-        dark
+          dark
           label="Power"
           name="Group1"
           value="Power"
       />
     <br/>
       <Radio
-        dark
+          dark
           label="Nitro"
           name="Group1"
           value="Nitro"
       />
     <br/>
       <Radio
-        dark
+          dark
           label="Google"
           name="Group1"
           value="Google"

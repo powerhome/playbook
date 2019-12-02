@@ -6,7 +6,18 @@ RSpec.describe Playbook::PbRadio::Radio do
   subject { Playbook::PbRadio::Radio }
 
   it { is_expected.to define_partial }
+  it { is_expected.to define_boolean_prop(:checked).with_default(false) }
+  it { is_expected.to define_boolean_prop(:dark).with_default(false) }
+  it { is_expected.to define_prop(:name) }
+  it { is_expected.to define_prop(:value) }
 
-  # Do not leave this file blank. Use other spec files for example tests.
 
+    describe "#classname" do
+      it "returns namespaced class name", :aggregate_failures do
+        expect(subject.new({}).classname).to eq "pb_radio_kit_Radio Item_off"
+        expect(subject.new(dark: true).classname).to eq "pb_radio_kit_Radio Item_off_dark"
+        expect(subject.new(checked: true).classname).to eq "pb_radio_kit_Radio Item_on"
+        expect(subject.new(dark: true, checked: true).classname).to eq "pb_radio_kit_Radio Item_on_dark"
+    end
+  end
 end
