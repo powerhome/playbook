@@ -119,3 +119,6 @@ WebpackerReact.setup (TitleDetail);
 WebpackerReact.setup (Toggle);
 WebpackerReact.setup (User);
 WebpackerReact.setup (UserBadge);
+
+import * as CircleIconButton from "pb_circle_icon_button/docs";
+WebpackerReact.setup (CircleIconButton);

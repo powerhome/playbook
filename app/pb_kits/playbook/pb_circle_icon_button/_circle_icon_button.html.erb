@@ -1,0 +1,10 @@
+<%= content_tag(:div,
+  id: object.id,
+  data: object.data,
+  class: object.classname) do %>
+
+  <%= pb_rails("button", props: {variant: object.variant, disabled: object.disabled, id: "pb_circle_icon_button_button", dark: object.dark}) do %>
+    <%= pb_rails("icon", props: {icon: object.icon, fixed_width: true, dark: object.dark}) %>
+  <% end %>
+
+<% end %>
