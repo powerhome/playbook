@@ -2,11 +2,8 @@
 /*eslint-disable react/no-multi-comp, flowtype/space-before-type-colon */
 
 import React from 'react'
+import Body from '../pb_body/_body.jsx'
 
-/*
-// Un-comment to import kits here
-import { Body } from '../'
-*/
 
 type RadioProps = {
   className?: String,
@@ -27,7 +24,7 @@ export const Radio = ({ className, data, id, label, name, value, checked, dark}:
       <span className="pb_radio_button">
         <div className="radio"></div>
       </span>
-      <span className="pb_radio_label">{label}</span>
+      <span className="body">{label}</span>
     </label>
 
 )
