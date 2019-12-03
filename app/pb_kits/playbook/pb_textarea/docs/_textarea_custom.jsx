@@ -4,9 +4,7 @@ import {Textarea} from "../../"
 function TextareaCustom() {
   return (
     <div>
-        <Textarea label="Label">
-            Default text
-        </Textarea>
+        <Textarea label="Label" />
     </div>
   )
 }
