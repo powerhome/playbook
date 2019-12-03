@@ -2,8 +2,8 @@
 
 require_relative "../../../../app/pb_kits/playbook/pb_circle_icon_button/circle_icon_button"
 
-RSpec.describe Playbook::PbCircle icon button::Circle icon button do
-  subject { Playbook::PbCircle icon button::Circle icon button }
+RSpec.describe Playbook::PbCircleIconButton::CircleIconButton do
+  subject { Playbook::PbCircleIconButton::CircleIconButton }
 
   it { is_expected.to define_partial }
 
