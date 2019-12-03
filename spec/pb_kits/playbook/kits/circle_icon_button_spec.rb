@@ -7,6 +7,15 @@ RSpec.describe Playbook::PbCircle icon button::Circle icon button do
 
   it { is_expected.to define_partial }
 
-  # Do not leave this file blank. Use other spec files for example tests.
+  it { is_expected.to define_enum_prop(:variant)
+                      .with_default("primary")
+                      .with_values("primary", "secondary", "link") }
+  it { is_expected.to define_boolean_prop(:dark).with_default(false) }
+  it { is_expected.to define_boolean_prop(:disabled).with_default(false) }
 
+  describe "#classname" do
+    it "returns namespaced class name", :aggregate_failures do
+      expect(subject.new({}).classname).to eq "pb_circle_icon_button_kit"
+    end
+  end
 end
