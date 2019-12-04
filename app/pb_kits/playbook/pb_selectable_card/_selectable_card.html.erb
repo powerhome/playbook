@@ -1,0 +1,18 @@
+<%= content_tag(:div,
+  data: object.data,
+  class: object.classname) do %>
+
+  <% if object.multi %>
+    <%= check_box_tag object.name, object.value, object.checked, id: object.html_for, disabled: object.disabled %>
+  <% else %>
+    <%= radio_button_tag object.name, object.value, object.checked, id: object.html_for, disabled: object.disabled %>
+  <% end %>
+
+  <label for="<%= object.html_for %>">
+    <%= !object.children.nil? ? capture(&object.children) : object.text %>
+    <div class="pb_selectable_card_circle">
+      <%= pb_rails("icon", props: { icon: "check", fixed_width: true }) if object.icon %>
+    </div>
+  </label>
+
+<% end %>

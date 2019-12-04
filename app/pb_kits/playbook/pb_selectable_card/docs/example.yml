@@ -1,0 +1,23 @@
+examples:
+  
+  rails:
+  - selectable_card_default: Default
+  - selectable_card_no_icon: No Icon
+  - selectable_card_single_select: Single Select
+  - selectable_card_block: Block
+  - selectable_card_dark: Dark
+  - selectable_card_no_icon_dark: No Icon
+  
+
+
+
+  
+  
+  react:
+  - selectable_card_default: Default
+  - selectable_card_no_icon: No Icon
+  - selectable_card_single_select: Single Select
+  - selectable_card_block: Block
+  - selectable_card_dark: Dark
+  - selectable_card_no_icon_dark: No Icon
+  

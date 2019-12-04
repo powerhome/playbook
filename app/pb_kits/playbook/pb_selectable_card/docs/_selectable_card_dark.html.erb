@@ -1,0 +1,33 @@
+<%= pb_rails("selectable_card", props: {
+  id: "pizza",
+  name: "pizza",
+  value: "pizza",
+  checked: true,
+  dark: true
+}) do %>
+  I love pizza
+<% end %>
+
+<br/>
+
+<%= pb_rails("selectable_card", props: {
+  id: "hamburgers",
+  name: "hamburgers",
+  value: "hamburgers",
+  checked: false,
+  dark: true
+}) do %>
+  I love hamburgers
+<% end %>
+
+<br/>
+
+<%= pb_rails("selectable_card", props: {
+  id: "apples",
+  name: "apples",
+  value: "apples",
+  checked: false,
+  dark: true
+}) do %>
+  I love apples
+<% end %>

@@ -1,0 +1,30 @@
+<%= pb_rails("selectable_card", props: {
+  id: "car",
+  name: "car",
+  value: "car",
+  checked: true
+}) do %>
+  I have a car
+<% end %>
+
+<br/>
+
+<%= pb_rails("selectable_card", props: {
+  id: "bike",
+  name: "bike",
+  value: "bike",
+  checked: false
+}) do %>
+  I have a bike
+<% end %>
+
+<br/>
+
+<%= pb_rails("selectable_card", props: {
+  id: "boat",
+  name: "boat",
+  value: "boat",
+  checked: false
+}) do %>
+  I have a boat
+<% end %>
