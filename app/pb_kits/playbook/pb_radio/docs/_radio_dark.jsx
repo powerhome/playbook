@@ -21,7 +21,7 @@ function RadioDark() {
       <Radio
           dark
           label='Google'
-          name="Group1"
+          name='Group1'
           value="Google"
       />
     </>
