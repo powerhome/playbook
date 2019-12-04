@@ -9,6 +9,7 @@ import Card from "./pb_card/_card.jsx"
 import Checkbox from "./pb_checkbox/_checkbox.jsx"
 import Contact from "./pb_contact/_contact.jsx"
 import Currency from "./pb_currency/_currency.jsx"
+import Date from "./pb_date/_date.jsx"
 import DashboardValue from "./pb_dashboard_value/_dashboard_value.jsx"
 import DateRangeInline from "./pb_date_range_inline/_date_range_inline.jsx"
 import DateYearStacked from "./pb_date_year_stacked/_date_year_stacked.jsx"
@@ -77,6 +78,7 @@ export {
   DashboardValue,
   dashboardValueSettings,
   dataColors,
+  Date,
   DateRangeInline,
   DateYearStacked,
   DistributionBar,
