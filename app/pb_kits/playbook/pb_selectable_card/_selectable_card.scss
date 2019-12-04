@@ -15,8 +15,7 @@ $pb_selectable_card_border: 2px;
 
   label {
     @include pb_card;
-    padding: $space_sm;
-    margin: $pb_selectable_card_border/2;
+    padding: $space_sm + 1;
     cursor: pointer;
 
     &:hover {
@@ -58,7 +57,7 @@ $pb_selectable_card_border: 2px;
     &:checked ~ label {
       position: relative;
       @include pb_card_selected;
-      margin: 0;
+      padding: $space_sm;
 
       .pb_selectable_card_circle {
         opacity: $opacity_10;
