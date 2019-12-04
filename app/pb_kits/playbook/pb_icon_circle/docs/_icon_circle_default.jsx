@@ -1,12 +1,13 @@
-import React from "react"
-import {IconCircle} from "../../"
+import React from 'react'
+import classnames from 'classnames'
+import {IconCircle} from '../../'
 
 function IconCircleDefault() {
   return (
     <div>
-      <IconCircle />
+      <IconCircle icon="rocket" size="md"/>
     </div>
   )
 }
 
-export default IconCircleDefault
+export default IconCircleDefault;
