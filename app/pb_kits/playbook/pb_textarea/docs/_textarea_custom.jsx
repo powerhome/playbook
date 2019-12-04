@@ -4,10 +4,11 @@ import {Textarea} from "../../"
 function TextareaCustom() {
   return (
     <div>
-<Textarea label="Label">
-    <textarea class="my_custom_class" name="custom_textarea" rows=4>{`Content goes here.`} 
-    </textarea>
-</Textarea>
+      <Textarea label="Label">
+          <textarea class="my_custom_class" name="custom_textarea" rows={4}>
+            {`Content goes here.`} 
+          </textarea>
+      </Textarea>
     </div>
   )
 }
