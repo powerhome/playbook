@@ -20,7 +20,7 @@ function RadioDark() {
     <br/>
       <Radio
           dark
-          label="Google"
+          label='Google'
           name="Group1"
           value="Google"
       />
