@@ -1,6 +1,6 @@
 #!/usr/bin/env groovy
 
-library identifier: 'ci-kubed@v2.0.0', retriever: modernSCM([
+library identifier: 'ci-kubed@v2.6.0', retriever: modernSCM([
   $class: 'GitSCMSource',
   remote: 'git@github.com:powerhome/ci-kubed.git',
   credentialsId: 'powerci-github-ssh-key'
@@ -28,8 +28,14 @@ app.build(application: application, cluster: cluster, deployerVersion: deployerV
   }
 
   app.dockerStage('Container Build') {
-    sh "docker build -t ${appImage} ."
-    sh "docker push ${appImage}"
+    try {
+      sh "docker build -t ${appImage} ."
+      sh "docker push ${appImage}"
+      github.setImageBuildState(scmVars.GIT_COMMIT, scmVars.GIT_URL, 'SUCCESS')
+    } catch(e) {
+      github.setImageBuildState(scmVars.GIT_COMMIT, scmVars.GIT_URL, 'FAILURE')
+      throw e
+    }
   }
 
   app.dockerStage('Test') {
