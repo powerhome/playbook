@@ -29,6 +29,7 @@ app.build(application: application, cluster: cluster, deployerVersion: deployerV
 
   app.dockerStage('Container Build') {
     try {
+      github.setImageBuildState(scmVars.GIT_COMMIT, scmVars.GIT_URL, 'PENDING')
       sh "docker build -t ${appImage} ."
       sh "docker push ${appImage}"
       github.setImageBuildState(scmVars.GIT_COMMIT, scmVars.GIT_URL, 'SUCCESS')
