@@ -22,7 +22,7 @@ function RadioDark() {
           dark
           label='Google'
           name='Group1'
-          value="Google"
+          value='Google'
       />
     </>
   )
