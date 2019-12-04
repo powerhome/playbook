@@ -36,7 +36,7 @@ export const Radio = ({
           value={value}
       />
       <span className='pb_radio_button'>
-        <div className="radio"></div>
+        <div className='radio'></div>
       </span>
       <span className="body">{label}</span>
     </label>
