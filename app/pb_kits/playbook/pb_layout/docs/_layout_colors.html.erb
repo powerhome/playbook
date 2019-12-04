@@ -1,0 +1,24 @@
+<%= pb_rails("layout", props: {position: "left", size: "sm", collapse: "md"}) do %>
+  <%= pb_rails("layout/sidebar") do %>
+    <%= pb_rails("body", props: { text: "Light" }) %>
+  <% end %>
+  <%= pb_rails("layout/body") do %> Body <% end %>
+<% end %>
+
+<br/><br/>
+
+<%= pb_rails("layout", props: {position: "left", size: "sm", collapse: "md", variant: "dark"}) do %>
+  <%= pb_rails("layout/sidebar") do %>
+    <%= pb_rails("body", props: { text: "Dark", dark: true }) %>
+  <% end %>
+  <%= pb_rails("layout/body") do %> Body <% end %>
+<% end %>
+
+<br/><br/>
+
+<%= pb_rails("layout", props: {position: "left", size: "sm", collapse: "md", variant: "gradient"}) do %>
+  <%= pb_rails("layout/sidebar") do %>
+    <%= pb_rails("body", props: { text: "Gradient", dark: true }) %>
+  <% end %>
+  <%= pb_rails("layout/body") do %> Body <% end %>
+<% end %>

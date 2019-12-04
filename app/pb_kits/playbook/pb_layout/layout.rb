@@ -10,31 +10,24 @@ module Playbook
       prop :collapse, type: Playbook::Props::Enum,
                       values: %w[xs sm md lg xl],
                       default: "xs"
-      prop :dark, type: Playbook::Props::Boolean, default: false
       prop :full, type: Playbook::Props::Boolean, default: false
-      prop :gradient, type: Playbook::Props::Boolean, default: false
       prop :position, type: Playbook::Props::Enum,
                       values: %w[left right],
                       default: "left"
-      prop :transparent, type: Playbook::Props::Boolean, default: false
       prop :size, type: Playbook::Props::Enum,
                   values: %w[xs sm md lg xl],
                   default: "md"
+      prop :transparent, type: Playbook::Props::Boolean, default: false
+      prop :variant, type: Playbook::Props::Enum,
+                  values: %w[light dark gradient],
+                  default: "light"
 
       def classname
-        first_class = generate_classname("pb_layout", size, position, dark_class, transparent_class)
+        first_class = generate_classname("pb_layout_kit", "size_#{size}", position, variant, transparent_class)
         [first_class, full_class, collapse_class].reject(&:empty?).join(" ")
       end
 
     private
-
-      def dark_class
-        dark ? "dark" : nil
-      end
-
-      def gradient_class
-        gradient ? "gradient" : nil
-      end
 
       def full_class
         full ? "full" : ""
