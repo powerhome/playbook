@@ -16,7 +16,5 @@
       <% end %>
       </div>
     </span>
-    <span class="body">
-      <%= object.text %>
-    </span>
+    <%= pb_rails("body", props: { text: object.text, dark: object.dark }) %>
 <% end %>

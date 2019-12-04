@@ -1,20 +1,20 @@
-import React from "react"
-import {Radio} from "../_radio.jsx"
+import React from 'react'
+import {Radio} from '../_radio.jsx'
 
 function RadioDark() {
   return (
     <>
       <Radio
           dark
-          label="Power"
-          name="Group1"
-          value="Power"
+          label='Power'
+          name='Group1'
+          value='Power'
       />
     <br/>
       <Radio
           dark
-          label="Nitro"
-          name="Group1"
+          label='Nitro'
+          name='Group1'
           value='Nitro'
       />
     <br/>
