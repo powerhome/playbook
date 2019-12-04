@@ -1,6 +1,34 @@
 <%= content_tag(:div,
-    id: object.id,
-    data: object.data,
-    class: object.classname) do %>
-  <span>SELECT CONTENT</span>
+  id: object.id,
+  data: object.data,
+  aria: object.aria,
+  class: object.classname) do %>
+  <% if object.label %>
+    <label class="pb_select_kit_label" for="<%= object.name %>">
+      <%= pb_rails("caption", props: { text: object.label, dark: object.dark, }) %>
+    </label>
+  <% end %>
+  <label class="pb_select_kit_wrapper" for="<%= object.name %>">
+    <% if object.children %>
+      <%= capture(&object.children) %>
+    <% else %>
+      <%= select_tag(
+        object.name,
+        options_for_select(
+          object.options_to_array,
+          selected: object.selected,
+          disabled: object.disabled_options,
+        ),
+        prompt: object.blank_selection,
+        disabled: object.disabled,
+        required: object.required,
+        multiple: object.multiple,
+        onchange: object.onchange,
+        include_blank: object.include_blank,
+      )
+      %>
+    <% end %>
+    <%= pb_rails("icon", props: { icon: "angle-down", fixed_width: true, classname: "pb_select_kit_caret"}) %>
+  </label>
+
 <% end %>

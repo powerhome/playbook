@@ -1,9 +1,15 @@
 examples:
-  
+
   rails:
   - select_default: Default
-  
-  
+  - select_blank: Blank Selection Text
+  - select_disabled_options: Disabled Options
+  - select_disabled: Disabled Select Field
+  - select_required: Required Select Field
+  - select_value_text_same: Equal option value and value text
+  - select_custom_select: Custom Select
+  - select_dark: Dark Select
+
+
   react:
   - select_default: Default
-  

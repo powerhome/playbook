@@ -1,0 +1,17 @@
+<%= pb_rails("select", props: {
+  label: "Which shoe do you tie first?",
+  required: true,
+  name: "shoe",
+  blank_selection: "Select One...",
+  options: [
+    {
+      value: "Left",
+    },
+    {
+      value: "Right",
+    },
+    {
+      value: "I go without laces",
+    },
+  ]
+}) %>

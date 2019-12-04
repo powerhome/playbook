@@ -4,7 +4,7 @@ import {Select} from "../../"
 function SelectDefault() {
   return (
     <div>
-      <Select />
+      <h1>{`Coming Soon...`}</h1>
     </div>
   )
 }
