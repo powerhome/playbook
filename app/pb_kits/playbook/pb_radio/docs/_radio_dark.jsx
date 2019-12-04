@@ -15,7 +15,7 @@ function RadioDark() {
           dark
           label="Nitro"
           name="Group1"
-          value="Nitro"
+          value='Nitro'
       />
     <br/>
       <Radio
