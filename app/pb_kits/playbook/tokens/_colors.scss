@@ -86,6 +86,14 @@ $hover_colors: (
   hover_dark:         $hover_dark
 );
 
+// Focus colors -----------------------
+$focus_input_light:   rgba($active_light, $opacity_2);
+$focus_input_dark:    rgba($active_dark, $opacity_2);
+$focus_input_colors: (
+  focus_input_light:        $focus_input_light,
+  focus_input_dark:         $focus_input_dark
+);
+
 // Border colors ----------------------
 $border_light:        #E4E8F0;
 $border_dark:         rgba($white, $opacity_1);

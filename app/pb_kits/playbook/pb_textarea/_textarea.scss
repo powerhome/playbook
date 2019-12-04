@@ -1,0 +1,26 @@
+@import "../pb_body/body_mixins";
+@import "./textarea_mixin";
+
+[class^=pb_textarea_kit] {
+  textarea::placeholder {
+    @include pb_body_light;
+  }
+  > textarea {
+    @include pb_textarea_light;
+  }
+  textarea:focus {
+    @include pb_textarea_focus_light;
+  }
+
+  &[class*=_dark] {
+    textarea::placeholder {
+      @include pb_body_light_dark;
+    } 
+    > textarea {
+      @include pb_textarea_dark;
+    }
+    textarea:focus {
+      @include pb_textarea_focus_dark;
+    }
+  }
+}

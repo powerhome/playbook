@@ -1,0 +1,20 @@
+<%= content_tag(:div,
+    id: object.id,
+    data: object.data,
+    class: object.classname) do %>
+  <% if object.label.present? %>
+    <%= pb_rails("caption", props: {text: object.label, dark: object.dark}) %>
+  <% end %>
+  <% if object.children %>
+    <%= capture(&object.children) %>
+  <% else %>
+    <%= text_area(
+        :object, 
+        :method, 
+        :class => "#{object.classname}", 
+        :name => object.name,
+        :placeholder => object.placeholder, 
+        :rows => object.rows,
+        :value => object.value )%>
+  <% end %>
+<% end %>

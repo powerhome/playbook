@@ -43,6 +43,7 @@ import "../kits/pb_stat_change.js";
 import "../kits/pb_stat_value.js";
 import "../kits/pb_table.js";
 import "../kits/pb_text_input.js";
+import "../kits/pb_textarea.js";
 import "../kits/pb_time.js";
 import "../kits/pb_timestamp.js";
 import "../kits/pb_title.js";
@@ -51,5 +52,3 @@ import "../kits/pb_title_detail.js";
 import "../kits/pb_toggle.js";
 import "../kits/pb_user.js";
 import "../kits/pb_user_badge.js";
-
-
