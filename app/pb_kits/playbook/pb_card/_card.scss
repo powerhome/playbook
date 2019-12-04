@@ -47,6 +47,17 @@ $pb_card_highlight_size: 4px;
   @include pb_card($card_dark, $border_dark);
 }
 
+@mixin pb_card_highlight($width, $height, $background){
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: $width;
+  height: $height;
+  background: $background;
+  z-index: 10;
+}
+
 [class^=pb_card_kit] {
   @include pb_card;
 
@@ -63,17 +74,6 @@ $pb_card_highlight_size: 4px;
     &[class*=_#{$name}] {
       box-shadow: $shadow;
     }
-  }
-
-  @mixin pb_card_highlight($width, $height, $background){
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: $width;
-    height: $height;
-    background: $background;
-    z-index: 10;
   }
 
   &[class*=_highlight] {
