@@ -29,7 +29,12 @@ export const Radio = ({
 }: RadioProps) => (
 
     <label className={`pb_radio_kit` + (dark === true ? '_dark' : '')}>
-      <input type="radio" name={name} value={value} defaultChecked={checked}/>
+      <input
+          defaultChecked={checked}
+          name={name}
+          type='radio'
+          value={value}
+      />
       <span className="pb_radio_button">
         <div className="radio"></div>
       </span>
