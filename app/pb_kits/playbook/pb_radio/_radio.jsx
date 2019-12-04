@@ -17,7 +17,16 @@ type RadioProps = {
 
 }
 
-export const Radio = ({ className, data, id, label, name, value, checked, dark}: RadioProps) => (
+export const Radio = ({
+  checked,
+  className,
+  dark,
+  data,
+  id,
+  label,
+  name,
+  value,
+}: RadioProps) => (
 
     <label className={`pb_radio_kit` + (dark === true ? '_dark' : '')}>
       <input type="radio" name={name} value={value} defaultChecked={checked}/>
