@@ -28,26 +28,29 @@ const Layout = ({
   dark = false,
   data = {},
   full = false,
-  gradient = false,
   position = 'left',
   transparent = false,
-  size = 'base'
+  size = 'base',
 }: LayoutProps) => {
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
 
-  const collapse_class = 'layout'+position_class+'_collapse_'+collapse;
+  const collapseClass = 'layout' + position + '_collapse_' + collapse
   const css = buildCss({
     'pb_layout_kit': true,
     [size]: true,
     [position]: true,
     'dark': dark === true,
     'transparent': transparent === true,
-    'full': full === true
+    'full': full === true,
   })
 
   return (
-    <div {...ariaProps} {...dataProps} className={classnames(css, collapse_class)}>
+    <div
+        {...ariaProps}
+        {...dataProps}
+        className={classnames(css, collapseClass)}
+    >
       {children}
     </div>
   )

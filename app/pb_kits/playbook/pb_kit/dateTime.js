@@ -40,7 +40,7 @@ export default class DateTime {
   }
 
   toWeekday() {
-    return this.value.strftime("%a")
+    return this.value.strftime('%a')
   }
 
   toIso() {

@@ -1,15 +1,9 @@
-import React from "react"
+import React from 'react'
 
-import {
-  Layout,
-} from "../.."
+const LayoutDefault = () => (
+  <div>
+    <h1>{'Coming Soon...'}</h1>
+  </div>
+)
 
-function LayoutDefault() {
-  return (
-    <div>
-      <h1>{`Coming Soon...`}</h1>
-    </div>
-  )
-}
-
-export default LayoutDefault;
+export default LayoutDefault
