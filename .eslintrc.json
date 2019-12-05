@@ -46,7 +46,15 @@
       "react/jsx-no-literals": 1,
       "react/jsx-pascal-case": 2,
       "react/jsx-sort-props": 1,
-      "react/jsx-wrap-multilines": 1,
+      "react/jsx-wrap-multilines": [2, {
+        "declaration": "parens-new-line",
+        "assignment": "parens-new-line",
+        "return": "parens-new-line",
+        "arrow": "parens-new-line",
+        "condition": "ignore",
+        "logical": "ignore",
+        "prop": "ignore"
+      }],
       "react/no-danger": 1,
       "react/no-did-mount-set-state": 2,
       "react/no-did-update-set-state": 2,

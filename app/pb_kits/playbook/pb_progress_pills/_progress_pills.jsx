@@ -28,10 +28,12 @@ const ProgressPill = ({
     active,
     dark,
     step,
-}: ProgressPillProps) => (<div
-    className={`pb_progress_pill${step <= active ? '_active' : '_inactive'}${dark ? '_dark' : null}`}
-    key={step}
-                          />)
+}: ProgressPillProps) => (
+  <div
+      className={`pb_progress_pill${step <= active ? '_active' : '_inactive'}${dark ? '_dark' : null}`}
+      key={step}
+  />
+)
 
 const ProgressPills = ({ active = 0, steps = 3, title = null, value = null, dark=false } : ProgressPillsProps) => {
 
