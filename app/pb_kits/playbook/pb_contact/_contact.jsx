@@ -48,7 +48,7 @@ const Contact = ({
       const cleaned = contactString.replace(/\D/g, '')
       const phoneNumber = cleaned.match(/^(1|)?(\d{3})(\d{3})(\d{4})$/)
       if (phoneNumber) {
-        let intlCode = (phoneNumber[1] ? '+1 ' : '')
+        const intlCode = (phoneNumber[1] ? '+1 ' : '')
         return [intlCode, '(', phoneNumber[2], ') ', phoneNumber[3], '-', phoneNumber[4]].join('')
       }
       return null

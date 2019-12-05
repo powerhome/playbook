@@ -18,12 +18,12 @@ type DateRangeInlineProps = {
 }
 
 const dateTimestamp = (dateValue) => {
-  let date = new DateTime({ value: dateValue })
+  const date = new DateTime({ value: dateValue })
   return `${date.toDay()} ${date.toMonth()} ${date.toYear()}`
 }
 
 const dateTimeIso = (dateValue) => {
-  let date = new DateTime({ value: dateValue })
+  const date = new DateTime({ value: dateValue })
   return date.toIso()
 }
 

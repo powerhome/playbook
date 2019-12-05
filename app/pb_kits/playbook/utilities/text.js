@@ -5,7 +5,7 @@ export const titleize = (sentence) => {
     return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase()
   }
 
-  let result = []
+  const result = []
   sentence.split(' ').forEach((w) => {
     result.push(titleizedWord(w))
   })

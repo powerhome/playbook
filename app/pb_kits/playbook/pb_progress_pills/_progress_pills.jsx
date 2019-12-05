@@ -14,7 +14,7 @@ type ProgressPillsProps = {
 }
 
 const showSteps = (steps, active, dark) => {
-  let items = []
+  const items = []
 
   for (let step = 1; step <= steps; step++) {
     items.push(ProgressPill({ step, active, dark }))

@@ -14,7 +14,7 @@ class pbChart {
   }
 
   extendDefaults(defaults, options) {
-    for (let property in options) {
+    for (const property in options) {
       if (Object.prototype.hasOwnProperty.call(options, property)) {
         defaults[property] = options[property]
       }

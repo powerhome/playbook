@@ -18,8 +18,8 @@ const normalizeCharacters = (widths) => {
 }
 
 const barValues = (normalizedValues) => {
-  let arrSum = (value) => value.reduce((a, b) => (a + b), 0)
-  let widthSum = arrSum(normalizedValues)
+  const arrSum = (value) => value.reduce((a, b) => (a + b), 0)
+  const widthSum = arrSum(normalizedValues)
   return normalizedValues.map((value, i) => {
     return (
       <div

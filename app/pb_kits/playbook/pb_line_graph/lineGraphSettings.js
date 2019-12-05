@@ -13,7 +13,7 @@ const fixTooltipStyles = () => {
 }
 
 const styleDataLabels = (highchart) => {
-  let series = highchart.plotOptions.series
+  const series = highchart.plotOptions.series
 
   series.dataLabels.style.fontFamily = typography.font_family_base
   series.dataLabels.style.fontSize = typography.text_small

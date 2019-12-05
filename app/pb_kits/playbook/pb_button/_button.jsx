@@ -58,7 +58,7 @@ const buttonAriaProps = (props: ButtonPropTypes) => {
   if (typeof aria !== 'object') return {}
   const { label } = aria
 
-  let ariaProps = {}
+  const ariaProps = {}
 
   if (label !== null) ariaProps['aria-label'] = label
 
