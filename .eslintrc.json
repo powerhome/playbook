@@ -67,7 +67,8 @@
       "comma-spacing": 2,
       "arrow-spacing": 2,
       "react/jsx-space-before-closing": 2,
-      "no-trailing-spaces": 2
+      "no-trailing-spaces": 2,
+      "key-spacing": 2
     },
     "settings": {
       "react": {

@@ -2,12 +2,12 @@ import React, { Component } from "react"
 import PropTypes from "prop-types"
 
 const propTypes = {
-  dark:PropTypes.bool,
-  borderless:PropTypes.bool,
-  size:PropTypes.oneOf(["", "large"]),
-  ordered:PropTypes.bool,
+  dark: PropTypes.bool,
+  borderless: PropTypes.bool,
+  size: PropTypes.oneOf(["", "large"]),
+  ordered: PropTypes.bool,
   layout: PropTypes.oneOf(["", "left", "right"]),
-  xpadding:PropTypes.bool,
+  xpadding: PropTypes.bool,
   children: PropTypes.oneOfType([
       PropTypes.arrayOf(PropTypes.node),
       PropTypes.node
@@ -15,12 +15,12 @@ const propTypes = {
 }
 
 const defaultProps = {
-  dark:false,
-  borderless:false,
-  size:"",
-  ordered:false,
-  layout:"",
-  xpadding:false
+  dark: false,
+  borderless: false,
+  size: "",
+  ordered: false,
+  layout: "",
+  xpadding: false
 }
 
 class List extends Component {
