@@ -18,9 +18,9 @@ const normalizeCharacters = (widths) => {
 }
 
 const barValues = (normalizedValues) => {
-  let arrSum = value => value.reduce((a,b) => (a + b), 0)
+  let arrSum = value => value.reduce((a, b) => (a + b), 0)
   let widthSum = arrSum(normalizedValues)
-  return normalizedValues.map((value,i) => {
+  return normalizedValues.map((value, i) => {
     return (
       <div
           className={`pb_distribution_width`}

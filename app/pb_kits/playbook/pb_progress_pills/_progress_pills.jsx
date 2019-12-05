@@ -2,7 +2,7 @@
 /*eslint-disable react/no-multi-comp, flowtype/space-before-type-colon */
 
 import React from 'react'
-import { Body,Title } from '../'
+import { Body, Title } from '../'
 
 
 type ProgressPillsProps = {
@@ -18,7 +18,7 @@ const showSteps = (steps, active, dark) => {
   let items = []
 
   for (let step = 1; step <= steps; step++) {
-    items.push(ProgressPill({ step,active,dark }))
+    items.push(ProgressPill({ step, active, dark }))
   }
 
   return items

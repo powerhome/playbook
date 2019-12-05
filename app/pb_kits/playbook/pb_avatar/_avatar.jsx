@@ -17,7 +17,7 @@ type AvatarProps = {
 
 const initials = function(name) {
   if (name) {
-    return map(name.split(/\s/), name => name[0]).join('').substring(0,2)
+    return map(name.split(/\s/), name => name[0]).join('').substring(0, 2)
   }
 }
 
