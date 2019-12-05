@@ -11,7 +11,7 @@ type DateTimeType = {
 }
 
 export default class DateTime {
-  constructor({ value, zone='America/New_York' }: DateTimeType) {
+  constructor({ value, zone = 'America/New_York' }: DateTimeType) {
     this.value = this.convertToTimestampZone(value, zone)
   }
 

@@ -17,7 +17,7 @@ type PersonContactProps = {
   contacts?: Array<{contactType: String, contactValue: String, contactDetail: String}>,
 }
 
-const contactsArray = ({ contacts=[] }: PersonContactProps) => {
+const contactsArray = ({ contacts = [] }: PersonContactProps) => {
   return contacts.map((contactObject, index) => {
     return (
       <Contact

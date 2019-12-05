@@ -22,7 +22,7 @@ const statChangeCSS = (status) => {
 
 const StatChange = (props: StatChangeProps) => {
   const {
-    change='neutral',
+    change = 'neutral',
     className,
     id,
     value,

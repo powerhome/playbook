@@ -15,9 +15,9 @@ type CaptionProps = {
 const Caption = ({
   className,
   children,
-  dark=false,
-  size='md',
-  tag='div',
+  dark = false,
+  size = 'md',
+  tag = 'div',
   text,
 }: CaptionProps) => {
   const Tag = `${tag}`

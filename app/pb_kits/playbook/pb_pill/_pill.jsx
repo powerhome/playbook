@@ -16,7 +16,7 @@ type PillProps = {
 const Pill = ({
   className,
   text,
-  variant='neutral',
+  variant = 'neutral',
 }: PillProps) => {
   const css = classnames([
     `pb_pill_kit_${variant}`,

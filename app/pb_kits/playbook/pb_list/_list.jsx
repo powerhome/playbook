@@ -38,7 +38,7 @@ class List extends Component {
     const borderlessClass = borderless === true ? 'list_borderless' : ''
     const sizeClass = '_' + size
     const orderedClass = ordered === true ? '_ordered' : ''
-    const layoutClass = '_'+ layout
+    const layoutClass = '_' + layout
     const xpaddingClass = xpadding === true ? '_xpadding' : ''
 
     return (

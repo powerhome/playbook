@@ -18,7 +18,7 @@ type MultipleUsersProps = {
 const MultipleUsers = ({
   className,
   id,
-  reverse=false,
+  reverse = false,
   users,
 }: MultipleUsersProps) => {
   const multipleUsersCss = () => {

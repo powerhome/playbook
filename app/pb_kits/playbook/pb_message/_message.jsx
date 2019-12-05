@@ -35,12 +35,12 @@ const printTimestamp = (timestamp) => {
 
 const Message = (props: MessageProps) => {
   const {
-    avatarName='',
-    avatarUrl='',
-    label='',
-    message='',
-    timestamp='',
-    avatarStatus=null,
+    avatarName = '',
+    avatarUrl = '',
+    label = '',
+    message = '',
+    timestamp = '',
+    avatarStatus = null,
   } = props
 
   const printAvatar = (avatarName, avatarUrl, avatarStatus) => {

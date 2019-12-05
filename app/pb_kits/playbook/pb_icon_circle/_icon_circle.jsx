@@ -13,8 +13,8 @@ const IconCircleProps = {
 
 const IconCircle = ({
   icon,
-  size='md',
-  variant='default',
+  size = 'md',
+  variant = 'default',
 }: IconCircleProps) => (
   <div className={`pb_icon_circle_kit_${size}_${variant}`}>
     <Icon icon={icon} />

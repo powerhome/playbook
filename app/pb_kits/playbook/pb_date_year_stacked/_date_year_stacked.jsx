@@ -20,7 +20,7 @@ type DateYearStackedProps = {
   id?: String,
 }
 
-const kitClasses = ({ align='left' }: DateYearStackedProps) => {
+const kitClasses = ({ align = 'left' }: DateYearStackedProps) => {
   let classname = 'pb_date_year_stacked'
   classname += `_${align}`
   return classname
@@ -29,7 +29,7 @@ const kitClasses = ({ align='left' }: DateYearStackedProps) => {
 const DateYearStacked = ({
   align,
   className,
-  dark=false,
+  dark = false,
   date,
 }: DateYearStackedProps) => {
   const dateTimestamp = new DateTime({ value: date })

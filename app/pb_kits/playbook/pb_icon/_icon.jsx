@@ -22,19 +22,19 @@ type IconProps = {
 
 const Icon = (props: IconProps) => {
   const {
-    border=false,
+    border = false,
     className,
-    fixedWidth=true,
-    flip=false,
+    fixedWidth = true,
+    flip = false,
     icon,
     id,
-    inverse=false,
-    listItem=false,
+    inverse = false,
+    listItem = false,
     pull,
-    pulse=false,
+    pulse = false,
     rotation,
     size,
-    spin=false,
+    spin = false,
   } = props
 
   const hClass = 'fa-flip-horizontal'

@@ -21,10 +21,10 @@ type DateStackedProps = {
 }
 
 const kitClasses = ({
-  align='left',
-  size='sm',
-  dark=false,
-  reverse=false,
+  align = 'left',
+  size = 'sm',
+  dark = false,
+  reverse = false,
 
 }: DateStackedProps) => {
   const alignStyle = align !== '' ? `_${align}` : ''
@@ -42,9 +42,9 @@ const sizes = {
 const DateStacked = (props: DateStackedProps) => {
   const {
     className,
-    dark=false,
+    dark = false,
     date,
-    size='sm',
+    size = 'sm',
   } = props
 
   const dateTimestamp = new DateTime({ value: date })

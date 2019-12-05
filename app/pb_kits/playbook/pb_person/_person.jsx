@@ -18,7 +18,7 @@ type PersonProps = {
 
 const Person = ({
   className,
-  dark=false,
+  dark = false,
   firstName,
   lastName,
 }: PersonProps) => {

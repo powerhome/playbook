@@ -42,7 +42,7 @@ const HomeAddressStreet = ({
   addressCont,
   city,
   className,
-  dark=false,
+  dark = false,
   homeId,
   houseStyle,
   state,

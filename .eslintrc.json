@@ -91,7 +91,8 @@
       "comma-dangle": [2, "always-multiline"],
       "func-call-spacing": 2,
       "no-whitespace-before-property": 2,
-      "prefer-const": 2
+      "prefer-const": 2,
+      "space-infix-ops": 2
     },
     "settings": {
       "react": {

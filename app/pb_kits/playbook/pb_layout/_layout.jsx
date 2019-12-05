@@ -37,9 +37,9 @@ class Layout extends Component {
     const darkClass = dark === true ? '_dark' : ''
     const transparentClass = transparent === true ? '_transparent' : ''
     const fullClass = full === true ? ' full' : ''
-    const sizeClass = '_'+size
-    const positionClass = '_'+position
-    const collapseClass = ' layout'+positionClass+'_collapse_'+collapse
+    const sizeClass = '_' + size
+    const positionClass = '_' + position
+    const collapseClass = ' layout' + positionClass + '_collapse_' + collapse
 
     return (
       <div className={`pb_layout${sizeClass}${positionClass}${darkClass}${transparentClass}${fullClass}${collapseClass}`}>

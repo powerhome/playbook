@@ -21,9 +21,9 @@ type ContactProps = {
 const Contact = ({
   contactType,
   className,
-  dark=false,
+  dark = false,
   contactValue,
-  contactDetail='',
+  contactDetail = '',
 }: ContactProps) => {
   const formatDetail = (contactDetail) => {
     if (contactDetail !== undefined) {

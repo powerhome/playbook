@@ -14,9 +14,9 @@ type BodyProps = {
 }
 
 const bodyCSS = ({
-  color='',
-  dark=false,
-  status='',
+  color = '',
+  dark = false,
+  status = '',
 
 }: BodyProps) => {
   const colorStyle = color !== '' ? `_${color}` : ''
@@ -33,7 +33,7 @@ const Body = (props: BodyProps) => {
     className,
     children,
     text,
-    tag='div',
+    tag = 'div',
   } = props
 
   const Tag = `${tag}`

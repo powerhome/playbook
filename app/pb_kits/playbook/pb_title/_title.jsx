@@ -13,8 +13,8 @@ type TitleProps = {
 }
 
 const tagCSS = ({
-  dark=false,
-  size=3,
+  dark = false,
+  size = 3,
 }) => {
   let css = ''
 
@@ -29,7 +29,7 @@ const Title = (props: TitleProps) => {
     className,
     children,
     text,
-    tag='h3',
+    tag = 'h3',
   } = props
 
   const Tag = `${tag}`

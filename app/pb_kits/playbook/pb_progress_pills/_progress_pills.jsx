@@ -34,7 +34,7 @@ const ProgressPill = ({
   />
 )
 
-const ProgressPills = ({ active = 0, steps = 3, title = null, value = null, dark=false } : ProgressPillsProps) => {
+const ProgressPills = ({ active = 0, steps = 3, title = null, value = null, dark = false } : ProgressPillsProps) => {
   const darkClass = dark ? '_dark' : ''
 
   return (

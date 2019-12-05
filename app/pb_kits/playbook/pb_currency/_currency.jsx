@@ -20,7 +20,7 @@ type CurrencyProps = {
   units?: '00',
 }
 
-const kitCSS = ({ align='left' }: CurrencyProps) => {
+const kitCSS = ({ align = 'left' }: CurrencyProps) => {
   let css = 'pb_currency_kit'
   css += `_${align}`
   return css
@@ -39,11 +39,11 @@ const sizes = {
 
 const Currency = (props: CurrencyProps) => {
   const {
-    currencySymbol='$',
-    label='',
-    separator='.',
-    size='sm',
-    units='00',
+    currencySymbol = '$',
+    label = '',
+    separator = '.',
+    size = 'sm',
+    units = '00',
     value,
   } = props
 

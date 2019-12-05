@@ -19,7 +19,7 @@ type FixedConfirmationToastProps = {
 
 const FixedConfirmationToast = ({
   className,
-  status='neutral',
+  status = 'neutral',
   text,
 }: FixedConfirmationToastProps) => {
   const css = classnames([

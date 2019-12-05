@@ -26,8 +26,8 @@ const Textarea = (props: TextareaProps) => {
     label,
     placeholder,
     value,
-    dark=false,
-    rows=4,
+    dark = false,
+    rows = 4,
     name,
   } = props
 

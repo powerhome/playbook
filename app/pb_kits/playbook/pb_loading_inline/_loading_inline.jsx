@@ -17,7 +17,7 @@ type LoadingInlineProps = {
 }
 
 const LoadingInline = ({
-  align='left',
+  align = 'left',
 }: LoadingInlineProps) => (
   <div className={`pb_loading_inline_kit_${align}`}>
     <Body color="light">

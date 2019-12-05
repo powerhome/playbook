@@ -14,11 +14,11 @@ type CheckboxProps = {
 }
 
 const Checkbox = ({
-  checked=false,
-  dark=false,
-  name='',
-  text='',
-  value='',
+  checked = false,
+  dark = false,
+  name = '',
+  text = '',
+  value = '',
 
 }: CheckboxProps) => {
   const bodyClassName = {

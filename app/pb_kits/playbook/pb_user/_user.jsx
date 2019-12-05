@@ -35,13 +35,13 @@ const avatarSizes = {
 
 const User = (props: UserProps) => {
   const {
-    name='Anna Black',
-    territory='',
-    title='',
-    align='left',
-    orientation='horizontal',
-    size='sm',
-    avatar=false,
+    name = 'Anna Black',
+    territory = '',
+    title = '',
+    align = 'left',
+    orientation = 'horizontal',
+    size = 'sm',
+    avatar = false,
     avatarUrl,
   } = props
 
@@ -57,7 +57,7 @@ const User = (props: UserProps) => {
     }
   }
 
-  const printDetails = (territory='') => {
+  const printDetails = (territory = '') => {
     if (territory !== '') {
       return (
         <Body color='light'>{`${territory} • ${title}`}</Body>

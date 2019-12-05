@@ -38,10 +38,10 @@ const PbStatus = ({ size, status } : { size: String, status: String }) => (
 
 const Avatar = ({
   className,
-  name=null,
+  name = null,
   imageUrl,
-  size='md',
-  status=null,
+  size = 'md',
+  status = null,
 }: AvatarProps) => {
   const statusDisplay = () => {
     if (status !== null){

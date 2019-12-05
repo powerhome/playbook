@@ -16,7 +16,7 @@ const StatValue = (props: StatValueProps) => {
     className,
     id,
     unit,
-    value=0,
+    value = 0,
   } = props
 
   const displayValue = function(value) {
