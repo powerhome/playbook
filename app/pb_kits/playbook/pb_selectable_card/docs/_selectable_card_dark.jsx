@@ -20,7 +20,7 @@ class SelectableCardDark extends React.Component {
 
         <SelectableCard
             dark
-            id="selected_with_icon_dark"
+            inputId="selected_with_icon_dark"
             name="selected_with_icon_dark"
             value="selected_with_icon_dark"
             checked={this.state.selected_with_icon_dark}
@@ -30,7 +30,7 @@ class SelectableCardDark extends React.Component {
 
         <SelectableCard
             dark
-            id="selected_without_icon_dark"
+            inputId="selected_without_icon_dark"
             name="selected_without_icon_dark"
             value="selected_without_icon_dark"
             icon={false}
@@ -41,7 +41,7 @@ class SelectableCardDark extends React.Component {
 
         <SelectableCard
             dark
-            id="unselected_dark"
+            inputId="unselected_dark"
             name="unselected_dark"
             value="unselected_dark"
             checked={this.state.unselected_dark}

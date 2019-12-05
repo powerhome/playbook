@@ -4,12 +4,12 @@
   class: object.classname) do %>
 
   <% if object.multi %>
-    <%= check_box_tag object.name, object.value, object.checked, id: object.html_for, disabled: object.disabled %>
+    <%= check_box_tag object.name, object.value, object.checked, id: object.input_id_present, disabled: object.disabled %>
   <% else %>
-    <%= radio_button_tag object.name, object.value, object.checked, id: object.html_for, disabled: object.disabled %>
+    <%= radio_button_tag object.name, object.value, object.checked, id: object.input_id_present, disabled: object.disabled %>
   <% end %>
 
-  <label for="<%= object.html_for %>">
+  <label for="<%= object.input_id_present %>">
     <% if object.children.nil? %>
       <%= pb_rails("body", props: { text: object.text }) %>
     <% else %>

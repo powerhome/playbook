@@ -23,6 +23,7 @@ type Props = {
   disabled?: Boolean,
   icon?: Boolean,
   id?: String,
+  inputId?: String,
   multi?: Boolean,
   name?: String,
   onChange: InputCallback,
@@ -40,6 +41,7 @@ const SelectableCard = ({
   disabled = false,
   icon = true,
   id = null,
+  inputId = null,
   multi = true,
   name,
   onChange = noop,
@@ -71,27 +73,28 @@ const SelectableCard = ({
 
   const inputType = multi === false ? "radio" : "checkbox"
 
-  const htmlFor = id !== null ? id : name
+  const inputIdPresent = inputId !== null ? inputId : name
+
 
   return (
-    <span {...ariaProps} {...dataProps} className={classnames(css, className)}>
+    <div {...ariaProps} {...dataProps} className={classnames(css, className)}>
       <input
           {...props}
           name={name}
           value={value}
-          id={htmlFor}
+          id={inputIdPresent}
           type={inputType}
           checked={checked}
           disabled={disabled}
           onChange={handleChange}
       />
-      <label htmlFor={htmlFor}>
+      <label htmlFor={inputIdPresent}>
         { text || children }
         <div className="pb_selectable_card_circle">
           {displayIcon()}
         </div>
       </label>
-    </span>
+    </div>
   );
 };
 export default SelectableCard;

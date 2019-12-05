@@ -15,7 +15,7 @@ module Playbook
                   default: true
       prop :multi, type: Playbook::Props::Boolean,
                   default: true
-      prop :label_for, type: Playbook::Props::String
+      prop :input_id, type: Playbook::Props::String
       prop :name
       prop :text
       prop :value
@@ -24,8 +24,8 @@ module Playbook
         generate_classname("pb_selectable_card_kit", checked_class, dark_class, enable_disabled_class)
       end
 
-      def html_for
-        label_for.present? ? label_for : name
+      def input_id_present
+        input_id.present? ? input_id : name
       end
 
     private

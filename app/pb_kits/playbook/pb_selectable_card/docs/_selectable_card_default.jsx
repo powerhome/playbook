@@ -21,7 +21,7 @@ class SelectableCardDefault extends React.Component {
       <div class="pb--doc-demo-row">
 
         <SelectableCard
-            id="selected_with_icon"
+            inputId="selected_with_icon"
             name="selected_with_icon"
             value="selected_with_icon"
             checked={this.state.selected_with_icon}
@@ -30,7 +30,7 @@ class SelectableCardDefault extends React.Component {
         </SelectableCard>
 
         <SelectableCard
-            id="selected_without_icon"
+            inputId="selected_without_icon"
             name="selected_without_icon"
             value="selected_without_icon"
             icon={false}
@@ -40,7 +40,7 @@ class SelectableCardDefault extends React.Component {
         </SelectableCard>
 
         <SelectableCard
-            id="unselected"
+            inputId="unselected"
             name="unselected"
             value="unselected"
             checked={this.state.unselected}
@@ -49,7 +49,7 @@ class SelectableCardDefault extends React.Component {
         </SelectableCard>
 
         <SelectableCard
-            id="disabled"
+            inputId="disabled"
             name="disabled"
             value="disabled"
             disabled={true}

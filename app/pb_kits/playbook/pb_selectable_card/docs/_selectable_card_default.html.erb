@@ -1,7 +1,7 @@
 <div class="pb--doc-demo-row">
 
   <%= pb_rails("selectable_card", props: {
-    label_for: "selected_with_icon",
+    input_id: "selected_with_icon",
     name: "selected_with_icon",
     value: "selected_with_icon",
     checked: true
@@ -10,7 +10,7 @@
   <% end %>
 
   <%= pb_rails("selectable_card", props: {
-    label_for: "selected_without_icon",
+    input_id: "selected_without_icon",
     name: "selected_without_icon",
     value: "selected_without_icon",
     checked: true,
@@ -20,7 +20,7 @@
   <% end %>
 
   <%= pb_rails("selectable_card", props: {
-    label_for: "unselected",
+    input_id: "unselected",
     name: "unselected",
     value: "unselected",
   }) do %>
@@ -28,7 +28,7 @@
   <% end %>
 
   <%= pb_rails("selectable_card", props: {
-    label_for: "disabled",
+    input_id: "disabled",
     name: "disabled",
     value: "disabled",
     disabled: true

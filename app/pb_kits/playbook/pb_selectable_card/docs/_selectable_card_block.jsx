@@ -22,7 +22,7 @@ class SelectableCardBlock extends React.Component {
       <div class="pb--doc-demo-row">
 
         <SelectableCard
-            id="block"
+            inputId="block"
             name="block"
             value="block"
             checked={this.state.block}
@@ -32,7 +32,7 @@ class SelectableCardBlock extends React.Component {
         </SelectableCard>
 
         <SelectableCard
-            id="tag"
+            inputId="tag"
             name="tag"
             value="tag"
             checked={this.state.tag}

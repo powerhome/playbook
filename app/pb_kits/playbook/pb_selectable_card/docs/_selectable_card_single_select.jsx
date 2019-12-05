@@ -17,7 +17,7 @@ class SelectableCardSingleSelect extends React.Component {
       <div class="pb--doc-demo-row">
 
         <SelectableCard
-            id="male1"
+            inputId="male1"
             name="gender"
             value="male"
             multi={false}
@@ -27,7 +27,7 @@ class SelectableCardSingleSelect extends React.Component {
         </SelectableCard>
 
         <SelectableCard
-            id="female1"
+            inputId="female1"
             name="gender"
             value="female"
             multi={false}
@@ -37,7 +37,7 @@ class SelectableCardSingleSelect extends React.Component {
         </SelectableCard>
 
         <SelectableCard
-            id="other1"
+            inputId="other1"
             name="gender"
             value="other"
             multi={false}
