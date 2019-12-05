@@ -5,6 +5,7 @@
     name: "selected_with_icon_dark",
     value: "selected_with_icon_dark",
     checked: true,
+    icon: true,
     dark: true
   }) do %>
     Selected, with icon
@@ -29,6 +30,16 @@
     dark: true
   }) do %>
     Unselected
+  <% end %>
+
+  <%= pb_rails("selectable_card", props: {
+    input_id: "unselected_dark",
+    name: "unselected_dark",
+    value: "unselected_dark",
+    disabled: true,
+    dark: true
+  }) do %>
+    Disabled
   <% end %>
   
 </div>

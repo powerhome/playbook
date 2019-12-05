@@ -23,6 +23,7 @@ class SelectableCardDark extends React.Component {
             inputId="selected_with_icon_dark"
             name="selected_with_icon_dark"
             value="selected_with_icon_dark"
+            icon={true}
             checked={this.state.selected_with_icon_dark}
             onChange={this.handleSelect}>
           {'Selected, with icon'}
@@ -45,6 +46,16 @@ class SelectableCardDark extends React.Component {
             name="unselected_dark"
             value="unselected_dark"
             checked={this.state.unselected_dark}
+            onChange={this.handleSelect}>
+          {'Unselected'}
+        </SelectableCard>
+
+        <SelectableCard
+            dark
+            inputId="unselected_dark"
+            name="unselected_dark"
+            value="unselected_dark"
+            disabled={true}
             onChange={this.handleSelect}>
           {'Unselected'}
         </SelectableCard>

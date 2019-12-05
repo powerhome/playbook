@@ -37,6 +37,7 @@ $pb_selectable_card_border: 2px;
       color: $white;
       font-size: $font_smaller;
       text-align: center;
+      padding: 1px;
       position: absolute;
       top: -($pb_selectable_card_indicator_size/2);
       right: -($pb_selectable_card_indicator_size/2);

@@ -39,7 +39,7 @@ const SelectableCard = ({
   dark = false,
   data = {},
   disabled = false,
-  icon = true,
+  icon = false,
   id = null,
   inputId = null,
   multi = true,
@@ -63,7 +63,9 @@ const SelectableCard = ({
   const displayIcon = () => {
     if(icon === true) {
       return (
-        <Icon icon="check" fixedWidth />
+        <div className="pb_selectable_card_circle">
+          <Icon icon="check" fixedWidth/>
+        </div>
       )
     }
   }
@@ -87,9 +89,7 @@ const SelectableCard = ({
       />
       <label htmlFor={inputIdPresent}>
         { text || children }
-        <div className="pb_selectable_card_circle">
-          {displayIcon()}
-        </div>
+        {displayIcon()}
       </label>
     </div>
   );
