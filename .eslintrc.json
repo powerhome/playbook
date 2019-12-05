@@ -82,7 +82,8 @@
       "quotes": [2, "single"],
       "no-multiple-empty-lines": [2, { "max": 1 }],
       "arrow-parens": [2, "always"],
-      "indent": [2, 2, { "ignoredNodes": ["JSXElement *", "JSXElement"]}]
+      "indent": [2, 2, { "ignoredNodes": ["JSXElement *", "JSXElement"]}],
+      "brace-style": [2, "1tbs"]
     },
     "settings": {
       "react": {

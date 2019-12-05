@@ -59,6 +59,7 @@ const ProgressPills = ({ active = 0, steps = 3, title = null, value = null, dark
         {showSteps(steps, active, dark)}
       </div>
     </div>
-  )}
+  )
+}
 
 export default ProgressPills

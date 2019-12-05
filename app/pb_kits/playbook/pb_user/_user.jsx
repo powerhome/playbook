@@ -63,8 +63,7 @@ const User = (props: UserProps) => {
       return (
         <Body color='light'>{`${territory} • ${title}`}</Body>
       )
-    }
-    else {
+    } else {
       return (
         <Body color='light'>{`${title}`}</Body>
       )

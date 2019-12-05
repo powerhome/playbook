@@ -66,8 +66,7 @@ const Message = (props: MessageProps) => {
   const messageCSS = (avatarUrl, avatarName) => {
     if (avatarUrl != '' || avatarName != '') {
       return 'pb_message_kit_avatar'
-    }
-    else {
+    } else {
       return 'pb_message_kit'
     }
   }
