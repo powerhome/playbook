@@ -1,0 +1,14 @@
+<%= pb_rails("form", props: { form_system_options: { scope: :example, method: :get } }) do |form| %>
+  <%= form.text_field :example_text_field, props: { label: true } %>
+  <%= form.telephone_field :example_phone_field, props: { label: true } %>
+  <%= form.email_field :example_email_field, props: { label: true } %>
+  <%= form.number_field :example_number_field, props: { label: true } %>
+  <%= form.search_field :example_search_field, props: { label: true } %>
+  <%= form.password_field :example_password_field, props: { label: true } %>
+  <%= form.url_field :example_url_field, props: { label: true } %>
+
+  <%= form.actions do |action| %>
+    <%= action.submit %>
+    <%= action.button props: { type: "reset", text: "Cancel", variant: "secondary" } %>
+  <% end %>
+<% end %>

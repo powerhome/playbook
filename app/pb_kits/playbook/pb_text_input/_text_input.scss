@@ -8,51 +8,51 @@
 
   .text_input_wrapper {
     margin-bottom: 1rem;
-  }
+    > input:first-child {
+      box-sizing: border-box;
+      border: 1px solid $border-light;
+      border-radius: $border-rad-light;
+      display: block;
+      width: 100%;
+      color: $text_lt_default;
+      background: $white;
+      padding: $space_xs $space_sm;
+      transition: 0.2s all;
+      outline: none;
+      font-size: $font_small;
+      margin: .1rem 0 0;
 
-  .pb_text_input_kit {
-    border: 1px solid $border-light;
-    border-radius: $border-rad-light;
-    display: block;
-    width: 100%;
-    color: $text_lt_default;
-    background: $white;
-    padding: $space_xs $space_sm;
-    transition: 0.2s all;
-    outline: none;
-    font-size: $font_small;
-    margin: .1rem 0 0;
+      &:focus {
+        border-color: $primary-action;
+      }
 
-    &:focus {
-      border-color: $primary-action;
-    }
+      &::-webkit-input-placeholder {
+        color: $text_lt_lighter;
+        opacity: 1;
+      }
 
-    &::-webkit-input-placeholder {
-      color: $text_lt_lighter;
-      opacity: 1;
-    }
+      &:-ms-input-placeholder {
+        color: $text_lt_lighter;
+        opacity: 1;
+      }
 
-    &:-ms-input-placeholder {
-      color: $text_lt_lighter;
-      opacity: 1;
-    }
+      &::-ms-input-placeholder {
+        color: $text_lt_lighter;
+        opacity: 1;
+      }
 
-    &::-ms-input-placeholder {
-      color: $text_lt_lighter;
-      opacity: 1;
-    }
+      &::placeholder {
+        color: $text_lt_lighter;
+        opacity: 1;
+      }
 
-    &::placeholder {
-      color: $text_lt_lighter;
-      opacity: 1;
-    }
+      &:-ms-input-placeholder {
+        color: $text_lt_lighter;
+      }
 
-    &:-ms-input-placeholder {
-      color: $text_lt_lighter;
-    }
-
-    &::-ms-input-placeholder {
-      color: $text_lt_lighter;
+      &::-ms-input-placeholder {
+        color: $text_lt_lighter;
+      }
     }
   }
 }
