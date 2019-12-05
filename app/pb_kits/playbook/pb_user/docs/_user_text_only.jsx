@@ -17,7 +17,7 @@ function UserTextOnly() {
           orientation='horizontal'
           title='Remodeling Consultant'
       />
-    </div> 
+    </div>
   )
 }
 

@@ -22,7 +22,7 @@ const Checkbox = ({
 
 
 }: CheckboxProps) => {
-  
+
   const bodyClassName = {
     'pb_checkbox_label': true,
     '_dark': dark,

@@ -44,7 +44,7 @@ const User = (props: UserProps) => {
     size='sm',
     avatar=false,
     avatarUrl,
-  } = props 
+  } = props
 
   const print_avatar = (avatar, avatarUrl) => {
     if (avatar == true | avatarUrl != null) {
@@ -81,7 +81,7 @@ const User = (props: UserProps) => {
         />
         {print_details(territory)}
       </div>
-    </div> 
+    </div>
   )
 }
 

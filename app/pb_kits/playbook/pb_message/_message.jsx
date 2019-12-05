@@ -40,7 +40,7 @@ const Message = (props: MessageProps) => {
     timestamp='',
     avatarStatus=null
   } = props
-  
+
   const print_avatar = (avatarName, avatarUrl, avatarStatus) => {
     if (avatarUrl !== '' && avatarName !== '') {
       return (

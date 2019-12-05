@@ -4,7 +4,7 @@ import DateStacked from "../_date_stacked.jsx"
 function DateStackedDark() {
   return (
     <div>
-      <DateStacked 
+      <DateStacked
           dark
           date={new Date()}
           size='sm'
@@ -12,7 +12,7 @@ function DateStackedDark() {
 
       <br />
 
-      <DateStacked 
+      <DateStacked
           dark
           date={new Date()}
           size='md'

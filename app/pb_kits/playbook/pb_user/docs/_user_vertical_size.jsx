@@ -30,7 +30,7 @@ function UserVerticalSize() {
           size='lg'
           title='Remodeling Consultant'
       />
-    </div> 
+    </div>
   )
 }
 

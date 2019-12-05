@@ -30,7 +30,7 @@ const applyCustomSeriesColors = function(highchart) {
       if (data_item.marker.states.hover !== undefined){
         data_item.marker.states.hover.lineColor = selected_color
       }
-      
+
       if (data_item.marker.states.select.lineColor){
         data_item.marker.states.select.lineColor = selected_color
       }

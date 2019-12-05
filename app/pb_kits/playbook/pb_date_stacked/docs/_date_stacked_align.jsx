@@ -14,7 +14,7 @@ function DateStackedAlign() {
       <DateStacked
           align='center'
           date={new Date()}
-      />  
+      />
 
       <br />
 
@@ -22,7 +22,7 @@ function DateStackedAlign() {
           align='right'
           date={new Date()}
       />
-      
+
       <br />
 
       <DateStacked
@@ -36,7 +36,7 @@ function DateStackedAlign() {
           align='center'
           date={new Date()}
           size='md'
-      />  
+      />
 
       <br />
 

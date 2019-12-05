@@ -18,7 +18,7 @@ const tagCSS = ({
 }) => {
   let css = ''
 
-  css += `_${size}` 
+  css += `_${size}`
   css += dark === true ? '_dark' : ''
 
   return css
@@ -33,7 +33,7 @@ const Title = (props: TitleProps) => {
   } = props
 
   const Tag = `${tag}`
-  
+
   return (
     <Tag className={classnames(`pb_title_kit${tagCSS(props)}`, className)}>
       { text || children }

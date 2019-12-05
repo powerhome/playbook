@@ -10,7 +10,7 @@ function TextareaCustom() {
               name="custom_textarea"
               rows={4}
           >
-            {`Content goes here.`} 
+            {`Content goes here.`}
           </textarea>
       </Textarea>
     </div>

@@ -27,7 +27,7 @@ function TextareaDark() {
           placeholder="Placeholder text"
           value="Default value text"
       />
-      
+
     </div>
   )
 }

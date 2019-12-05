@@ -4,11 +4,11 @@ import DateStacked from "../_date_stacked.jsx"
 function DateStackedSizes() {
   return (
     <div>
-      <DateStacked 
+      <DateStacked
           date={new Date()}
           size='sm'
       /><br />
-      <DateStacked 
+      <DateStacked
           date={new Date()}
           size='md'
       />

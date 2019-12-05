@@ -4,7 +4,7 @@ import { Button } from '../../'
 const ButtonDefaultDark = () => (
     <div>
         <Button
-            dark 
+            dark
             text="Button Primary"
         />
         <Button

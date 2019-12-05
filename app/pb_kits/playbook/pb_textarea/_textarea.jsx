@@ -38,7 +38,7 @@ const Textarea = (props: TextareaProps) => {
   } = props
 
   const textarea_input = `${textareaCSS(props)}`
-  
+
   return (
     <div className={classnames(textareaCSS(props), className)}>
       <Caption
