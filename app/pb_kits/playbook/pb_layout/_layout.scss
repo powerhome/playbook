@@ -3,8 +3,7 @@
 @import "../tokens/screen_sizes";
 @import "./layout_mixin";
 
-.pb_layout {
-
+[class^=pb_layout_kit] {
   $layout_sizes: (
     "xs":   64px,
     "sm":   200px,
@@ -19,16 +18,17 @@
   $colors: (
     "light",
     "dark",
+    "gradient",
     "transparent",
   );
 
   // Sections
-  &_section {
+  &[class*=_section] {
     padding: $space_sm $space_xl;
-    &_border {
+    &[class*=_border] {
       padding: $space_sm $space_xl;
       border-bottom: 1px solid $border_light;
-      &_margin {
+      &[class*=_margin] {
         margin: $space_sm $space_xl;
         border-bottom: 1px solid $border_light;
       }
@@ -37,16 +37,12 @@
 
   // sidebar and Body
   @each $name, $size in $layout_sizes {
-    &_#{$name} {
+    &[class*=_size_#{$name}] {
       @each $position in $positions {
-        &_#{$position} {
+        &[class*=_#{$position}] {
           @each $color in $colors {
-            @if $color == "light" {
+            &[class*=_#{$color}] {
               @include layout_settings($size, $position, $color, "#{&}");
-            } @else {
-              &_#{$color} {
-                @include layout_settings($size, $position, $color, "#{&}");
-              }
             }
           }
         }

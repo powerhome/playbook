@@ -1,0 +1,5 @@
+examples:
+
+  rails:
+  - form_form_with: Default (Form With)
+  - form_simple_form: Default (Simple Form)

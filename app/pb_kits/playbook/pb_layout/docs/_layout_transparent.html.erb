@@ -1,0 +1,8 @@
+<%= pb_rails("layout", props: {position: "left", size: "xs", collapse: "sm", transparent: true}) do %>
+  <%= pb_rails("layout/sidebar") do %>
+    <%= pb_rails("body", props: { text: "Side" }) %>
+  <% end %>
+  <%= pb_rails("layout/body") do %>
+    <%= pb_rails("body", props: { text: "Body" }) %>
+  <% end %>
+<% end %>

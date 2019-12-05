@@ -1,1 +1,1 @@
-export { default as LayoutXs } from './_layout_xs.jsx'
+export {default as LayoutDefault} from './_layout_default.jsx';

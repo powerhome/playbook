@@ -1,55 +1,56 @@
-import React, { Component } from 'react'
-import PropTypes from 'prop-types'
+/* @flow */
 
-const propTypes = {
-  position: PropTypes.oneOf(['left', 'right']),
-  transparent: PropTypes.bool,
-  size: PropTypes.oneOf(['xs', 'sm', 'md', 'base', 'lg', 'xl']),
-  collapse: PropTypes.oneOf(['xs', 'sm', 'md', 'lg', 'xl']),
-  full: PropTypes.bool,
-  dark: PropTypes.bool,
-  children: PropTypes.oneOfType([
-    PropTypes.arrayOf(PropTypes.node),
-    PropTypes.node,
-  ]),
+import React from 'react'
+import classnames from 'classnames'
+
+import {
+  buildAriaProps,
+  buildDataProps,
+  buildCss,
+} from '../utilities/props'
+
+type LayoutProps = {
+  aria?: object,
+  children?: Array<React.ReactChild>,
+  collapse?: 'xs' | 'sm' | 'md' | 'lg' | 'xl',
+  dark?: Boolean,
+  data?: object,
+  full?: Boolean,
+  position?: 'left' | 'right',
+  size?: 'xs' | 'sm' | 'md' | 'base' | 'lg' | 'xl',
+  transparent?: Boolean
 }
 
-const defaultProps = {
-  position: 'left',
-  transparent: false,
-  size: 'base',
-  collapse: 'md',
-  full: false,
-  dark: false,
+const Layout = ({
+  aria = {},
+  children,
+  collapse = 'md',
+  dark = false,
+  data = {},
+  full = false,
+  gradient = false,
+  position = 'left',
+  transparent = false,
+  size = 'base'
+}: LayoutProps) => {
+  const ariaProps = buildAriaProps(aria)
+  const dataProps = buildDataProps(data)
+
+  const collapse_class = 'layout'+position_class+'_collapse_'+collapse;
+  const css = buildCss({
+    'pb_layout_kit': true,
+    [size]: true,
+    [position]: true,
+    'dark': dark === true,
+    'transparent': transparent === true,
+    'full': full === true
+  })
+
+  return (
+    <div {...ariaProps} {...dataProps} className={classnames(css, collapse_class)}>
+      {children}
+    </div>
+  )
 }
-
-class Layout extends Component {
-  render() {
-    const {
-      position,
-      transparent,
-      size,
-      collapse,
-      full,
-      dark,
-      children,
-    } = this.props
-    const darkClass = dark === true ? '_dark' : ''
-    const transparentClass = transparent === true ? '_transparent' : ''
-    const fullClass = full === true ? ' full' : ''
-    const sizeClass = '_' + size
-    const positionClass = '_' + position
-    const collapseClass = ' layout' + positionClass + '_collapse_' + collapse
-
-    return (
-      <div className={`pb_layout${sizeClass}${positionClass}${darkClass}${transparentClass}${fullClass}${collapseClass}`}>
-        {children}
-      </div>
-    )
-  }
-}
-
-Layout.propTypes = propTypes
-Layout.defaultProps = defaultProps
 
 export default Layout

@@ -9,3 +9,4 @@ end
 gemspec
 
 gem "health_check"
+gem "simple_form", ">= 5.0.1", "< 6.0.0"

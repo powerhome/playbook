@@ -1,0 +1,36 @@
+<%
+  require "simple_form" unless defined?(SimpleForm)
+  require "active_model/railtie" unless defined?(ActiveModel)
+
+  example_form_model = Class.new do
+    include ::ActiveModel::Model
+    attr_accessor :example_text_field,
+                  :example_phone_field,
+                  :example_email_field,
+                  :example_number_field,
+                  :example_search_field,
+                  :example_password_field,
+                  :example_url_field
+
+
+   def self.model_name
+     ActiveModel::Name.new(self, nil, "ExampleFormModel")
+   end
+  end
+%>
+
+
+<%= pb_rails("form", props: { form_system: "simple_form", form_system_options: [example_form_model.new, url: "", method: :get] }) do |form| %>
+  <%= form.input :example_text_field, as: :string %>
+  <%= form.input :example_phone_field, as: :tel %>
+  <%= form.input :example_email_field, as: :email %>
+  <%= form.input :example_number_field, as: :integer %>
+  <%= form.input :example_search_field, as: :search %>
+  <%= form.input :example_password_field, as: :password %>
+  <%= form.input :example_url_field, as: :url %>
+
+  <%= form.actions do |action| %>
+    <%= action.submit %>
+    <%= action.button props: { type: "reset", text: "Cancel", variant: "secondary" } %>
+  <% end %>
+<% end %>
