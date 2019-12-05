@@ -28,10 +28,7 @@ const dateTimeIso = (dateValue) => {
 }
 
 const DateRangeInline = ({
-  className,
-  data,
   endDate,
-  id,
   startDate
 }: DateRangeInlineProps) => (
   <div>

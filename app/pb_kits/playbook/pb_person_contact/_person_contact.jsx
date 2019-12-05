@@ -6,7 +6,6 @@ import classnames from 'classnames'
 
 import {
   Person,
-  Body,
   Contact,
 } from '../'
 
@@ -25,6 +24,7 @@ const contactsArray = ({ contacts=[] }: PersonContactProps) => {
           contactDetail={contactObject.contactDetail}
           contactType={contactObject.contactType}
           contactValue={contactObject.contactValue}
+          key={index}
       />
     )
   })
@@ -32,7 +32,6 @@ const contactsArray = ({ contacts=[] }: PersonContactProps) => {
 
 const PersonContact = ({
   className,
-  dark=false,
   firstName,
   lastName,
   contacts,

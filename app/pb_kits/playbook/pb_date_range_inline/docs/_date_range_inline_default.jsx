@@ -1,7 +1,7 @@
 import React from 'react'
 import DateRangeInline from '../_date_range_inline.jsx'
 
-function DateRangeInlineDefault() {
+const DateRangeInlineDefault = () => {
   return (
     <div>
       <DateRangeInline

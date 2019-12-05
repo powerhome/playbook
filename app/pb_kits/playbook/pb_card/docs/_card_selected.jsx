@@ -1,7 +1,7 @@
 import React from 'react'
 import Card from '../_card.jsx'
 
-function CardSelected() {
+const CardSelected = () => {
   return (
     <div>
       <Card>{'Card content'}</Card>

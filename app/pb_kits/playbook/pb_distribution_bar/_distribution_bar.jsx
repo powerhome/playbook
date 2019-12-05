@@ -32,9 +32,6 @@ const barValues = (normalizedValues) => {
 }
 
 const DistributionBar = ({
-  className,
-  data,
-  id,
   size='lg',
   widths=[1]
 }: DistributionBarProps) => {

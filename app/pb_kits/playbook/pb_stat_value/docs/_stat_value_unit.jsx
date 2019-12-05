@@ -1,7 +1,7 @@
 import React from 'react'
 import StatValue from '../_stat_value.jsx'
 
-function StatValueUnit() {
+const StatValueUnit = () => {
   return (
     <StatValue
         unit="appt"

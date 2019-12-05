@@ -1,7 +1,7 @@
 import React from 'react'
 import { Table } from '../../'
 
-function TableSm() {
+const TableSm = () => {
   return (
     <Table
         container={false}

@@ -1,7 +1,6 @@
 import React from 'react'
-import { Time } from '../../'
 
-function TimeDefault() {
+const TimeDefault = () => {
   return (
     <h1>{'Coming Soon...'}</h1>
   )

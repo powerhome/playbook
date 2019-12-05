@@ -1,10 +1,6 @@
 import React from 'react'
-import {
-  ListItem,
-  List,
-} from '../../'
 
-function ListDefault() {
+const ListDefault = () => {
   return (
     <h1>{'Coming Soon...'}</h1>
   )

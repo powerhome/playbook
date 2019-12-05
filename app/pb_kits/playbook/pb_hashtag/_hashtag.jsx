@@ -21,10 +21,7 @@ const HashType = {
 }
 
 const Hashtag = ({
-  className,
-  data,
   dark = false,
-  id,
   text,
   type,
   url

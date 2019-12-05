@@ -1,7 +1,7 @@
 import React from 'react'
 import { DateYearStacked } from '../../'
 
-function DateYearStackedDark() {
+const DateYearStackedDark = () => {
   return (
     <div>
       <DateYearStacked

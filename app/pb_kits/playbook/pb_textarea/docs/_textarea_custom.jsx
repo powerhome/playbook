@@ -1,7 +1,7 @@
 import React from 'react'
 import { Textarea } from '../../'
 
-function TextareaCustom() {
+const TextareaCustom = () => {
   return (
     <div>
       <Textarea label="Label">

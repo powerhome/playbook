@@ -1,7 +1,6 @@
 import React from 'react'
-import { LabelPill } from '../../'
 
-function LabelPillDefault() {
+const LabelPillDefault = () => {
   return (
     <h1>{'Coming Soon...'}</h1>
   )

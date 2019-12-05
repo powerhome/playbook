@@ -1,7 +1,7 @@
 import React from 'react'
 import { Card } from '../../'
 
-function CardPadding() {
+const CardPadding = () => {
   return (
     <div>
       <Card padding='none'>{'Card content'}</Card>

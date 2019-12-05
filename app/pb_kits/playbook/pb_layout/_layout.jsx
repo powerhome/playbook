@@ -34,14 +34,15 @@ class Layout extends Component {
       dark,
       children
     } = this.props
-    const dark_class = dark === true ? '_dark' : ''
-    const transparent_class = transparent === true ? '_transparent' : ''
-    const full_class = full === true ? ' full' : ''
-    const size_class = '_'+size
-    const position_class = '_'+position
-    const collapse_class = ' layout'+position_class+'_collapse_'+collapse
+    const darkClass = dark === true ? '_dark' : ''
+    const transparentClass = transparent === true ? '_transparent' : ''
+    const fullClass = full === true ? ' full' : ''
+    const sizeClass = '_'+size
+    const positionClass = '_'+position
+    const collapseClass = ' layout'+positionClass+'_collapse_'+collapse
+
     return (
-      <div className={`pb_layout${size_class}${position_class}${dark_class}${transparent_class}${full_class}${collapse_class}`}>
+      <div className={`pb_layout${sizeClass}${positionClass}${darkClass}${transparentClass}${fullClass}${collapseClass}`}>
         {children}
       </div>
     )

@@ -10,16 +10,16 @@ const propTypes = {
   className: PropTypes.string,
   container: PropTypes.bool,
   dark: PropTypes.bool,
-  disable_hover: PropTypes.bool,
-  single_line: PropTypes.bool,
+  disableHover: PropTypes.bool,
+  singleLine: PropTypes.bool,
   size: PropTypes.oneOf(['sm', 'md', 'lg'])
 }
 
 const defaultProps = {
   container: true,
   dark: false,
-  disable_hover: false,
-  single_line: false,
+  disableHover: false,
+  singleLine: false,
   size: 'sm'
 }
 
@@ -30,8 +30,8 @@ class Table extends React.Component {
       className,
       container,
       dark,
-      disable_hover,
-      single_line,
+      disableHover,
+      singleLine,
       size
     } = this.props
 
@@ -40,8 +40,8 @@ class Table extends React.Component {
       `table-${size}`,
       container ? 'table-card' : null,
       dark ? 'table-dark' : null,
-      single_line ? 'single-line' : null,
-      disable_hover ? 'no-hover' : null,
+      singleLine ? 'single-line' : null,
+      disableHover ? 'no-hover' : null,
       className,
     ])
 

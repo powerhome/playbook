@@ -15,9 +15,8 @@ type StatChangeProps = {
   value?: String | Number
 }
 
-const statChangeCSS = ({}: StatChangeProps, status) => {
+const statChangeCSS = (status) => {
   const statusStyle = status !== '' ? `_${status}` : ''
-
   return 'pb_stat_change_kit' + statusStyle
 }
 
@@ -78,7 +77,7 @@ const StatChange = (props: StatChangeProps) => {
 
   return (
     <div
-        className={classnames(statChangeCSS(props, status), className)}
+        className={classnames(statChangeCSS(status), className)}
         id={id}
     >
       {displayValue(status, value)}

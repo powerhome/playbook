@@ -1,7 +1,7 @@
 import React from 'react'
 import { HomeAddressStreet } from '../../'
 
-function HomeAddressStreetDark() {
+const HomeAddressStreetDark = () => {
   return (
     <HomeAddressStreet
         address="70 Prospect Ave"

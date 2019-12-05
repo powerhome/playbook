@@ -1,8 +1,6 @@
 import React from 'react'
-import { Nav } from '../../'
-import NavItem from '../_item.jsx'
 
-function DefaultNav() {
+const DefaultNav = () => {
   return (
     <h1>{'Coming Soon...'}</h1>
   )

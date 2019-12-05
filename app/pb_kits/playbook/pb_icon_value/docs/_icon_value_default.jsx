@@ -1,7 +1,6 @@
 import React from 'react'
-import { IconValue } from '../../'
 
-function IconValueDefault() {
+const IconValueDefault = () => {
   return (
     <h1>{'Coming Soon...'}</h1>
   )

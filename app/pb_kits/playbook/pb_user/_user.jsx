@@ -1,7 +1,6 @@
 /* @flow */
 
 import React from 'react'
-import classnames from 'classnames'
 
 import {
   Title,
@@ -46,7 +45,7 @@ const User = (props: UserProps) => {
     avatarUrl,
   } = props
 
-  const print_avatar = (avatar, avatarUrl) => {
+  const printAvatar = (avatar, avatarUrl) => {
     if (avatar == true | avatarUrl != null) {
       return (
         <Avatar
@@ -58,7 +57,7 @@ const User = (props: UserProps) => {
     }
   }
 
-  const print_details = (territory='') => {
+  const printDetails = (territory='') => {
     if (territory !== '') {
       return (
         <Body color='light'>{`${territory} • ${title}`}</Body>
@@ -72,13 +71,13 @@ const User = (props: UserProps) => {
 
   return (
     <div className={`pb_user_kit_${align}_${orientation}_${size}`}>
-      {print_avatar(avatar, avatarUrl)}
+      {printAvatar(avatar, avatarUrl)}
       <div className="content_wrapper">
         <Title
             size={userSizes[size]}
             text={`${name}`}
         />
-        {print_details(territory)}
+        {printDetails(territory)}
       </div>
     </div>
   )

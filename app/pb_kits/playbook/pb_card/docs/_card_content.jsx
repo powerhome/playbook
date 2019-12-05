@@ -1,7 +1,7 @@
 import React from 'react'
 import { Card } from '../../'
 
-function CardContent() {
+const CardContent = () => {
   return (
     <div>
       <Card>{'Card content'}</Card>

@@ -1,7 +1,7 @@
 import React from 'react'
 import { Table } from '../../'
 
-function TableContainerDark() {
+const TableContainerDark = () => {
   return (
     <Table
         dark

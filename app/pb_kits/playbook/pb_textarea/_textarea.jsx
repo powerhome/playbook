@@ -1,3 +1,5 @@
+/* @flow */
+
 import React from 'react'
 import classnames from 'classnames'
 import { Caption } from '../'
@@ -17,13 +19,6 @@ type TextareaProps = {
   dark?: Boolean,
 }
 
-const textareaCSS =({
-  dark=false,
-}: TextareaProps) => {
-  const themeStyle = dark === true ? '_dark' : ''
-  return 'pb_textarea_kit' + themeStyle
-}
-
 const Textarea = (props: TextareaProps) => {
   const {
     className,
@@ -36,10 +31,10 @@ const Textarea = (props: TextareaProps) => {
     name,
   } = props
 
-  const textarea_input = `${textareaCSS(props)}`
+  const textAreaClass = 'pb_textarea_kit' + (dark ? '_dark' : '')
 
   return (
-    <div className={classnames(textareaCSS(props), className)}>
+    <div className={classnames(textAreaClass, className)}>
       <Caption
           dark={dark}
           text={label}
@@ -48,7 +43,7 @@ const Textarea = (props: TextareaProps) => {
         {children}
         <Else />
         <textarea
-            className={textarea_input}
+            className={textAreaClass}
             name={name}
             placeholder={placeholder}
             rows={rows}

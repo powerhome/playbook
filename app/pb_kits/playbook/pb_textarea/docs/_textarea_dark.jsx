@@ -1,7 +1,7 @@
 import React from 'react'
 import { Textarea } from '../../'
 
-function TextareaDark() {
+const TextareaDark = () => {
   return (
     <div>
       <Textarea

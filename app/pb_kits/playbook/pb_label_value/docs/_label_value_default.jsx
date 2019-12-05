@@ -1,7 +1,6 @@
 import React from 'react'
-import { LabelValue } from '../../'
 
-function LabelValueDefault() {
+const LabelValueDefault = () => {
   return (
     <h1>{'Coming Soon...'}</h1>
   )

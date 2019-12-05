@@ -1,7 +1,7 @@
 import React from 'react'
 import { DashboardValue } from '../../'
 
-function DashboardValueAlign() {
+const DashboardValueAlign = () => {
   return (
     <div>
       <DashboardValue

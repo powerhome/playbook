@@ -1,7 +1,7 @@
 import React from 'react'
 import { Hashtag } from '../../'
 
-function HashtagDefault() {
+const HashtagDefault = () => {
   return (
     <div>
       <Hashtag

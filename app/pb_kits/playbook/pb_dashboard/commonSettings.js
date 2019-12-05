@@ -14,25 +14,26 @@ const dataColors = [
 
 const applyCustomSeriesColors = function(highchart) {
   highchart.series.forEach((item, index) => {
-    const selected_color = dataColors[index]
-    item.color = selected_color
-    item.data.forEach((data_item) => {
-      if (data_item.color){
-        data_item.color = selected_color
+    const selectedColor = dataColors[index]
+    item.color = selectedColor
+
+    item.data.forEach((dataItem) => {
+      if (dataItem.color){
+        dataItem.color = selectedColor
       }
 
-      if (!data_item.marker) return
+      if (!dataItem.marker) return
 
-      if (data_item.marker.lineColor){
-        data_item.marker.lineColor = selected_color
+      if (dataItem.marker.lineColor){
+        dataItem.marker.lineColor = selectedColor
       }
 
-      if (data_item.marker.states.hover !== undefined){
-        data_item.marker.states.hover.lineColor = selected_color
+      if (dataItem.marker.states.hover !== undefined){
+        dataItem.marker.states.hover.lineColor = selectedColor
       }
 
-      if (data_item.marker.states.select.lineColor){
-        data_item.marker.states.select.lineColor = selected_color
+      if (dataItem.marker.states.select.lineColor){
+        dataItem.marker.states.select.lineColor = selectedColor
       }
     })
   })

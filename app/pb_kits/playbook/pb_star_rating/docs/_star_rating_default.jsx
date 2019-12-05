@@ -1,7 +1,6 @@
 import React from 'react'
-import { StarRating } from '../../'
 
-function StarRatingDefault() {
+const StarRatingDefault = () => {
   return (
     <h1>{'Coming Soon...'}</h1>
   )

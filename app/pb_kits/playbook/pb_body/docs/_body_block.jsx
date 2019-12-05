@@ -1,14 +1,10 @@
 import React from 'react'
 import { Body } from '../../'
 
-function BodyBlock() {
-  return (
-    <div>
-      <Body>
-        I am a body kit
-      </Body>
-    </div>
-  )
-}
+const BodyBlock = () => (
+  <Body>
+    {'I am a body kit'}
+  </Body>
+)
 
 export default BodyBlock

@@ -1,7 +1,7 @@
 import React from 'react'
 import { Checkbox } from '../../'
 
-function CheckboxDefault() {
+const CheckboxDefault = () => {
   return (
     <div>
       <Checkbox

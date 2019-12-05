@@ -1,7 +1,7 @@
 import React from 'react'
 import { Icon } from '../../'
 
-function IconBorder() {
+const IconBorder = () => {
   return (
     <div>
       <Icon

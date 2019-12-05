@@ -34,14 +34,15 @@ class List extends Component {
       xpadding,
       children
     } = this.props
-    const dark_class = dark === true ? '_dark' : ''
-    const borderless_class = borderless === true ? 'list_borderless' : ''
-    const size_class = '_' + size
-    const ordered_class = ordered === true ? '_ordered' : ''
-    const layout_class = '_'+ layout
-    const xpadding_class = xpadding === true ? '_xpadding' : ''
+    const darkClass = dark === true ? '_dark' : ''
+    const borderlessClass = borderless === true ? 'list_borderless' : ''
+    const sizeClass = '_' + size
+    const orderedClass = ordered === true ? '_ordered' : ''
+    const layoutClass = '_'+ layout
+    const xpaddingClass = xpadding === true ? '_xpadding' : ''
+
     return (
-      <div className={`pb_list${dark_class}${borderless_class}${size_class}${ordered_class}${layout_class}${xpadding_class}`}>
+      <div className={`pb_list${darkClass}${borderlessClass}${sizeClass}${orderedClass}${layoutClass}${xpaddingClass}`}>
         <ul>
           {children}
         </ul>

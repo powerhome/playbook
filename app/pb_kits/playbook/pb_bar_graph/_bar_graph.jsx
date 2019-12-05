@@ -15,6 +15,7 @@ type BarGraphProps = {
   pointStart: Number,
   subTitle?: String,
   title: String,
+  type: String,
 }
 
 export default class BarGraph extends React.Component<BarGraphProps> {

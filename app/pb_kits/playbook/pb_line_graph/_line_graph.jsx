@@ -16,6 +16,7 @@ type LineGraphProps = {
     pointStart: Number,
     subTitle?: String,
     title: String,
+    type?: String,
 }
 
 export default class LineGraph extends React.Component<LineGraphProps> {

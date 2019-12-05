@@ -1,4 +1,4 @@
-function titleize(sentence) {
+export const titleize = (sentence) => {
   if (!sentence.split) return sentence
 
   const titleizedWord = function(string) {
@@ -12,5 +12,3 @@ function titleize(sentence) {
 
   return result.join(' ')
 }
-
-export { titleize }

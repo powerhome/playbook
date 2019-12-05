@@ -1,7 +1,7 @@
 import React from 'react'
 import { Hashtag } from '../../'
 
-function HashtagDark() {
+const HashtagDark = () => {
   return (
     <div>
       <Hashtag

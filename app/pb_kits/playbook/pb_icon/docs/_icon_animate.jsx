@@ -1,7 +1,7 @@
 import React from 'react'
 import { Icon } from '../../'
 
-function IconAnimate() {
+const IconAnimate = () => {
   return (
     <div>
       <p>

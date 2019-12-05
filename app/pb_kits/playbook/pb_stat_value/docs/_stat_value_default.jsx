@@ -1,7 +1,7 @@
 import React from 'react'
 import { StatValue } from '../../'
 
-function StatValueDefault() {
+const StatValueDefault = () => {
   return (
     <StatValue value={1048} />
   )

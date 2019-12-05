@@ -2,7 +2,7 @@
 import React from 'react'
 import ProgressPills from '../_progress_pills.jsx'
 
-function ProgressPillsDefault() {
+const ProgressPillsDefault = () => {
   return (
     <div>
       <ProgressPills

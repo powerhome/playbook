@@ -1,3 +1,5 @@
+/* @flow */
+
 import React from 'react'
 
 import {
@@ -15,7 +17,7 @@ type MessageProps = {
   timestamp?: String,
 }
 
-const print_label = (label) => {
+const printLabel = (label) => {
   if (label != null) {
     return (
       <Caption>{`${label}`}</Caption>
@@ -23,7 +25,7 @@ const print_label = (label) => {
   }
 }
 
-const print_timestamp = (timestamp) => {
+const printTimestamp = (timestamp) => {
   if (timestamp != null) {
     return (
       <Caption size='xs'>{`${timestamp}`}</Caption>
@@ -41,7 +43,7 @@ const Message = (props: MessageProps) => {
     avatarStatus=null
   } = props
 
-  const print_avatar = (avatarName, avatarUrl, avatarStatus) => {
+  const printAvatar = (avatarName, avatarUrl, avatarStatus) => {
     if (avatarUrl !== '' && avatarName !== '') {
       return (
         <Avatar
@@ -73,11 +75,11 @@ const Message = (props: MessageProps) => {
 
   return (
     <div className={messageCSS(avatarName, avatarUrl)}>
-      {print_avatar(avatarName, avatarUrl, avatarStatus)}
+      {printAvatar(avatarName, avatarUrl, avatarStatus)}
       <div className="content_wrapper">
-        {print_label(label)}
+        {printLabel(label)}
         <Body>{message}</Body>
-        {print_timestamp(timestamp)}
+        {printTimestamp(timestamp)}
       </div>
     </div>
   )

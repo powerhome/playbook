@@ -1,7 +1,7 @@
 import React from 'react'
 import { Card } from '../../'
 
-function CardShadow() {
+const CardShadow = () => {
   return (
     <div>
       <Card shadow='none'>{'Card content'}</Card>

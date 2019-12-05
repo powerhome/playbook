@@ -3,7 +3,7 @@ import Layout from '../_layout.jsx'
 import Sidebar from '../_sidebar.jsx'
 import Body from '../_body.jsx'
 
-function LayoutXs() {
+const LayoutXs = () => {
   return (
     <Layout
         collapse="sm"

@@ -1,7 +1,7 @@
 import React from 'react'
 import DistributionBar from '../_distribution_bar.jsx'
 
-function DistributionBarDefault() {
+const DistributionBarDefault = () => {
   return (
     <React.Fragment>
       <div>

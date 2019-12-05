@@ -41,10 +41,8 @@ const sizes = {
 
 const DateStacked = (props: DateStackedProps) => {
   const {
-    align='left',
     className,
     dark=false,
-    reverse=false,
     date,
     size='sm'
   } = props
@@ -52,13 +50,13 @@ const DateStacked = (props: DateStackedProps) => {
   const dateTimestamp = new DateTime({ value: date })
   const css = classnames(kitClasses(props), className)
 
-  const current_year = new Date().getFullYear().toString()
-  const input_year = dateTimestamp.toYear().toString()
+  const currentYear = new Date().getFullYear().toString()
+  const inputYear = dateTimestamp.toYear().toString()
 
-  const print_year = (dateTimestamp) => {
-    if (current_year != input_year) {
+  const printYear = () => {
+    if (currentYear != inputYear) {
       return (
-        <Caption size='xs'>{input_year}</Caption>
+        <Caption size='xs'>{inputYear}</Caption>
       )
     }
   }
@@ -72,10 +70,10 @@ const DateStacked = (props: DateStackedProps) => {
         <Title
             dark={dark}
             size={sizes[size]}
-            text={`${dateTimestamp.toDay()}`}
+            text={dateTimestamp.toDay()}
         />
       </div>
-      {print_year(date)}
+      {printYear(date)}
     </div>
   )
 }

@@ -17,7 +17,7 @@ type CurrencyProps = {
   separator?: '.' | ',',
   size?: 'sm' | 'lg',
   value?: String,
-  unit?: '00',
+  units?: '00',
 }
 
 const kitCSS = ({ align='left' }: CurrencyProps) => {
@@ -26,14 +26,9 @@ const kitCSS = ({ align='left' }: CurrencyProps) => {
   return css
 }
 
-const bodyCSS = ({}: CurrencyProps) => {
-  let css = ''
-  return css
-}
-
 const symbolCSS = (currencySymbol) => {
   return classnames({
-    dollar_sign: currencySymbol === '$',
+    'dollar_sign': currencySymbol === '$',
   })
 }
 

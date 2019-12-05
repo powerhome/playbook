@@ -26,7 +26,6 @@ type DashboardValueProps = {
 
 const dashboardValueCSS = ({
   align='left',
-
 }: DashboardValueProps) => {
   const alignStyle = align !== '' ? `_${align}` : ''
 
@@ -35,7 +34,6 @@ const dashboardValueCSS = ({
 
 const DashboardValue = (props: DashboardValueProps) => {
   const {
-    align='left',
     className,
     id,
     statChange,

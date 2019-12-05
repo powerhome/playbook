@@ -1,7 +1,7 @@
 import React from 'react'
 import Card from '../_card.jsx'
 
-function CardLight() {
+const CardLight = () => {
   return (
     <div>
       <Card>{'Card content'}</Card>

@@ -1,7 +1,7 @@
 import React from 'react'
 import { FixedConfirmationToast } from '../../'
 
-function FixedConfirmationToastDefault() {
+const FixedConfirmationToastDefault = () => {
   return (
     <div>
       <div>
