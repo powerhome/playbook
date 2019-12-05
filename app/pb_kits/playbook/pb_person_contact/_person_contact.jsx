@@ -4,8 +4,6 @@
 import React from 'react'
 import classnames from 'classnames'
 
-
-
 import {
   Person,
   Body,
@@ -31,7 +29,6 @@ const contactsArray = ({ contacts=[] }: PersonContactProps) => {
     )
   })
 }
-
 
 const PersonContact = ({
   className,

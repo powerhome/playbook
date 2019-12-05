@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
-
 const propTypes = {
   url: PropTypes.string.isRequired,
   alt: PropTypes.string
@@ -11,7 +10,6 @@ const defaultProps = {
   alt: '',
   url: ''
 }
-
 
 class Image extends Component {
   render() {

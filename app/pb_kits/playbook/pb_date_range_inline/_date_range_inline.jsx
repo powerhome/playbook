@@ -9,7 +9,6 @@ import {
   Icon,
 } from '../'
 
-
 type DateRangeInlineProps = {
   className?: String,
   data?: String,

@@ -4,7 +4,6 @@
 import React from 'react'
 import { Body, Title } from '../'
 
-
 type ProgressPillsProps = {
   active?: Number,
   steps?: Number,

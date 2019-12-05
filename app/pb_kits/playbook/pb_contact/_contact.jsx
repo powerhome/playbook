@@ -78,7 +78,6 @@ const Contact = ({
     }
   })(contactType)
 
-
   return (
     <div className={css}>
       <Body

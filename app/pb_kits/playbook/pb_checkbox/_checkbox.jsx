@@ -20,7 +20,6 @@ const Checkbox = ({
   text='',
   value='',
 
-
 }: CheckboxProps) => {
 
   const bodyClassName = {

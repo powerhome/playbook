@@ -5,7 +5,6 @@ import React from 'react'
 import classnames from 'classnames'
 import { titleize } from '../utilities/text.js'
 
-
 import {
   Body,
   Title,
@@ -17,7 +16,6 @@ const dot = (houseStyle) =>
   }
 }
 const titleizeAddessCont = (addressCont) => addressCont ? titleize(addressCont) : null
-
 
 type HomeAddressStreetProps = {
   address: String,
@@ -38,7 +36,6 @@ const classes = (className, dark) => (
     'pb_home_address_street_dark': dark,
   })
 )
-
 
 const HomeAddressStreet = ({
   address,

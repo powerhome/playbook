@@ -52,7 +52,6 @@ import Toggle from './pb_toggle/_toggle.jsx'
 import User from './pb_user/_user.jsx'
 import UserBadge from './pb_user_badge/_user_badge.jsx'
 
-
 // Dashboard Settings
 import { commonSettings, dataColors } from './pb_dashboard/commonSettings'
 import lineGraphSettings from './pb_line_graph/lineGraphSettings'
