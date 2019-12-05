@@ -86,7 +86,8 @@
       "brace-style": [2, "1tbs"],
       "func-style": [2, "expression"],
       "prefer-arrow-callback": 2,
-      "padded-blocks": [2, "never"]
+      "padded-blocks": [2, "never"],
+      "eol-last": 2
     },
     "settings": {
       "react": {
