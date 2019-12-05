@@ -8,15 +8,18 @@ function IconCircleSize() {
       <IconCircle
           icon="rocket"
           size="sm"
-      /><br />
+      />
+      <br />
       <IconCircle
           icon="rocket"
           size="md"
-      /><br />
+      />
+      <br />
       <IconCircle
           icon="rocket"
           size="lg"
-      /><br />
+      />
+      <br />
       <IconCircle
           icon="rocket"
           size="xl"

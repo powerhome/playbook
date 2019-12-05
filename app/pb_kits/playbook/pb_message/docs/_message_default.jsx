@@ -14,7 +14,8 @@ function MessageDefault() {
           timestamp='20 seconds ago'
       />
 
-      <br /><br />
+      <br />
+      <br />
 
       <Message
           avatarName='Wade Winningham'
@@ -24,7 +25,8 @@ function MessageDefault() {
           timestamp='9 minutes ago'
       />
 
-      <br /><br />
+      <br />
+      <br />
 
       <Message
           avatarName='Lisa Thompson'
@@ -33,7 +35,8 @@ function MessageDefault() {
           timestamp='4 hours ago'
       />
 
-      <br /><br />
+      <br />
+      <br />
 
       <Message
           avatarName='Becca Jacobs'
@@ -43,7 +46,8 @@ function MessageDefault() {
           timestamp='2 days ago'
       />
 
-      <br /><br />
+      <br />
+      <br />
 
       <Message
           avatarName='Timothy Wenhold'
@@ -52,7 +56,8 @@ function MessageDefault() {
           timestamp='2 days ago'
       />
 
-      <br /><br />
+      <br />
+      <br />
 
       <Message
           label='Support'

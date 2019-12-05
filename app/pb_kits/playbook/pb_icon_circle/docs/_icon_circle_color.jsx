@@ -9,32 +9,38 @@ function IconCircleColor() {
           icon="rocket"
           size="sm"
           variant="royal"
-      /><br />
+      />
+      <br />
       <IconCircle
           icon="rocket"
           size="sm"
           variant="blue"
-      /><br />
+      />
+      <br />
       <IconCircle
           icon="rocket"
           size="sm"
           variant="purple"
-      /><br />
+      />
+      <br />
       <IconCircle
           icon="rocket"
           size="sm"
           variant="teal"
-      /><br />
+      />
+      <br />
       <IconCircle
           icon="rocket"
           size="sm"
           variant="red"
-      /><br />
+      />
+      <br />
       <IconCircle
           icon="rocket"
           size="sm"
           variant="yellow"
-      /><br />
+      />
+      <br />
       <IconCircle
           icon="rocket"
           size="sm"

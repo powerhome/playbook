@@ -29,8 +29,8 @@ const LoadingInline = ({
           fixedWidth
           icon="spinner"
           pulse
-      />&nbsp;
-      {`Loading`}
+      />
+      {` Loading`}
     </Body>
   </div>
 )

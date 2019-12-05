@@ -11,7 +11,8 @@ function FixedConfirmationToastDefault() {
         />
       </div>
 
-      <br /><br />
+      <br />
+      <br />
 
       <div>
         <FixedConfirmationToast
@@ -20,7 +21,8 @@ function FixedConfirmationToastDefault() {
         />
       </div>
 
-      <br /><br />
+      <br />
+      <br />
 
       <div>
         <FixedConfirmationToast

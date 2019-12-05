@@ -12,7 +12,8 @@ function UserVerticalSize() {
           size='sm'
           title='Remodeling Consultant'
       />
-      <br /><br />
+      <br />
+      <br />
       <User
           align='center'
           avatarUrl='https://randomuser.me/api/portraits/women/44.jpg'
@@ -21,7 +22,8 @@ function UserVerticalSize() {
           size='md'
           title='Remodeling Consultant'
       />
-      <br /><br />
+      <br />
+      <br />
       <User
           align='center'
           avatarUrl='https://randomuser.me/api/portraits/women/44.jpg'

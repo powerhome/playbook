@@ -19,23 +19,53 @@ function TableSingleLine() {
       </thead>
       <tbody>
         <tr>
-          <td>{`Value 1`}<br />{`Value 1`}<br />{`Value 1`}</td>
+          <td>
+            {`Value 1`}
+            <br />
+            {`Value 1`}
+            <br />
+            {`Value 1`}
+          </td>
           <td>{`Value 2`}</td>
-          <td>{`Value 3`}<br />{`Value 3`}</td>
+          <td>
+            {`Value 3`}
+            <br />
+            {`Value 3`}
+          </td>
           <td>{`Value 4`}</td>
           <td>{`Value 5`}</td>
         </tr>
         <tr>
-          <td>{`Value 1`}<br />{`Value 1`}<br />{`Value 1`}</td>
+          <td>
+            {`Value 1`}
+            <br />
+            {`Value 1`}
+            <br />
+            {`Value 1`}
+          </td>
           <td>{`Value 2`}</td>
-          <td>{`Value 3`}<br />{`Value 3`}</td>
+          <td>
+            {`Value 3`}
+            <br />
+            {`Value 3`}
+          </td>
           <td>{`Value 4`}</td>
           <td>{`Value 5`}</td>
         </tr>
         <tr>
-          <td>{`Value 1`}<br />{`Value 1`}<br />{`Value 1`}</td>
+          <td>
+            {`Value 1`}
+            <br />
+            {`Value 1`}
+            <br />
+            {`Value 1`}
+          </td>
           <td>{`Value 2`}</td>
-          <td>{`Value 3`}<br />{`Value 3`}</td>
+          <td>
+            {`Value 3`}
+            <br />
+            {`Value 3`}
+          </td>
           <td>{`Value 4`}</td>
           <td>{`Value 5`}</td>
         </tr>

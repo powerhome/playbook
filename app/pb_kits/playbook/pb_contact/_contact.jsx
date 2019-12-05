@@ -91,7 +91,8 @@ const Contact = ({
             fixedWidth="true"
             icon={contactTypeIcon}
         />
-        {` ${formatContact(contactValue, contactType)} `}{formatDetail(contactDetail)}
+        {` ${formatContact(contactValue, contactType)} `}
+        {formatDetail(contactDetail)}
       </Body>
     </div>
   )

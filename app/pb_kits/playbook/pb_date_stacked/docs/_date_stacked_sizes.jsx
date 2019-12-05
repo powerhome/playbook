@@ -7,7 +7,8 @@ function DateStackedSizes() {
       <DateStacked
           date={new Date()}
           size='sm'
-      /><br />
+      />
+      <br />
       <DateStacked
           date={new Date()}
           size='md'

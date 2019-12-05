@@ -34,11 +34,13 @@ const Checkbox = ({
         `pb_checkbox_kit` +
         (dark === true ? '_dark' : '')
       }
-    > <input
-        defaultChecked={checked}
-        name={name}
-        type="checkbox"
-        value={value}
+    >
+      {' '}
+      <input
+          defaultChecked={checked}
+          name={name}
+          type="checkbox"
+          value={value}
       />
       <span className="pb_checkbox_checkmark">
         <Icon

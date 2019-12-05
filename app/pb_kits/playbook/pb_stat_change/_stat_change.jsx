@@ -71,7 +71,7 @@ const StatChange = (props: StatChangeProps) => {
       return (
         <Body status={status}>
           {displayIcon(icon)}
-          {value}%
+          {`${value}%`}
         </Body>
       )
     }

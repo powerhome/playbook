@@ -4,7 +4,8 @@ import { Title } from "../../"
 function TitleLight() {
   return (
     <div>
-      <Title text="Default Title" /><br />
+      <Title text="Default Title" />
+      <br />
       <Title
           size={4}
           tag="h4"

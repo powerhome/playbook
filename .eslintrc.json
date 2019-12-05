@@ -43,6 +43,7 @@
       "react/jsx-key": 2,
       "react/jsx-no-bind": 0,
       "react/jsx-no-literals": 1,
+      "react/jsx-one-expression-per-line": [2, { "allow": "single-child" }],
       "react/jsx-pascal-case": 2,
       "react/jsx-sort-props": 1,
       "react/jsx-wrap-multilines": 1,

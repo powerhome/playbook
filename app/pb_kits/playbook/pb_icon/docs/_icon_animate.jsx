@@ -4,19 +4,27 @@ import { Icon } from "../../"
 function IconAnimate() {
   return (
     <div>
-      <p><Icon
-          fixedWidth
-          icon="spinner"
-          size="2x"
-          spin
-         /> <span>Spin</span></p>
+      <p>
+        <Icon
+            fixedWidth
+            icon="spinner"
+            size="2x"
+            spin
+        />
+        {' '}
+        <span>Spin</span>
+      </p>
       <br />
-      <p><Icon
-          fixedWidth
-          icon="spinner"
-          pulse
-          size="2x"
-         /> <span>Pulse</span></p>
+      <p>
+        <Icon
+            fixedWidth
+            icon="spinner"
+            pulse
+            size="2x"
+        />
+        {' '}
+        <span>Pulse</span>
+      </p>
     </div>
   )
 }

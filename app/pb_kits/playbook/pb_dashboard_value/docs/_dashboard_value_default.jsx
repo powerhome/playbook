@@ -10,7 +10,8 @@ function DashboardValueDefault() {
           statValue={{ value: "1,428", unit: "appts" }}
       />
 
-      <br /><br />
+      <br />
+      <br />
 
       <DashboardValue
           statChange={{ change: "increase", value: 56.1 }}
@@ -18,7 +19,8 @@ function DashboardValueDefault() {
           statValue={{ value: "938", unit: "homes" }}
       />
 
-      <br /><br />
+      <br />
+      <br />
 
       <DashboardValue
           statChange={{ value: 86 }}

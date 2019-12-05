@@ -57,7 +57,7 @@ const HomeAddressStreet = ({
         className="pb_home_address_street_address"
         size={4}
     >
-      {titleize(address)} {dot(houseStyle)} {houseStyle}
+      {`${titleize(address)} ${dot(houseStyle)} ${houseStyle}`}
     </Title>
 
     <Title
@@ -67,13 +67,13 @@ const HomeAddressStreet = ({
       {titleizeAddessCont(addressCont)}
     </Title>
     <Body color="light">
-      {titleize(city)}, {state} {zipcode}
+      {`${titleize(city)}, ${state} ${zipcode}`}
     </Body>
     <Body
         className="home-hashtag"
         tag="span"
     >
-      H#{homeId}
+      {`H#${homeId}`}
     </Body>
     <Body
         color="light"
