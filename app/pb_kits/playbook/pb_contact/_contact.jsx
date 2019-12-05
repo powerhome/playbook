@@ -30,7 +30,6 @@ const Contact = ({
   contactValue,
   contactDetail='',
 }: ContactProps) => {
-
   const formatDetail = (contactDetail) => {
     if (contactDetail !== undefined) {
       return (

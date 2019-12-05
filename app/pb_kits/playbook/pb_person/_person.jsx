@@ -22,7 +22,6 @@ const Person = ({
   firstName,
   lastName,
 }: PersonProps) => {
-
   return (
     <div className={classnames('pb_person_kit', className)}>
       <Body

@@ -28,7 +28,6 @@ const dashboardValueCSS = ({
   align='left',
 
 }: DashboardValueProps) => {
-
   const alignStyle = align !== '' ? `_${align}` : ''
 
   return 'pb_dashboard_value_kit' + alignStyle

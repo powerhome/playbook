@@ -25,7 +25,6 @@ const textareaCSS =({
 }
 
 const Textarea = (props: TextareaProps) => {
-
   const {
     className,
     children,

@@ -37,7 +37,6 @@ const PersonContact = ({
   lastName,
   contacts,
 }: PersonContactProps) => {
-
   const contactKits = contactsArray({ contacts })
 
   return (

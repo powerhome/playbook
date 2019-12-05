@@ -43,7 +43,6 @@ const Avatar = ({
   size='md',
   status=null
 }: AvatarProps) => {
-
   const statusDisplay = () => {
     if (status !== null){
       return (

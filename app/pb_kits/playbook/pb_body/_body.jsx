@@ -19,7 +19,6 @@ const bodyCSS = ({
   status='',
 
 }: BodyProps) => {
-
   const colorStyle = color !== '' ? `_${color}` : ''
 
   const themeStyle = dark === true ? '_dark' : ''

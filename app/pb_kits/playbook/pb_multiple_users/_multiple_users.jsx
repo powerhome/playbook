@@ -21,7 +21,6 @@ const MultipleUsers = ({
   reverse=false,
   users
 }: MultipleUsersProps) => {
-
   const multipleUsersCss = () => {
     let css = 'pb_multiple_users_kit'
     css += reverse === true ? '_reverse' : ''

@@ -20,7 +20,6 @@ const Caption = ({
   tag='div',
   text,
 }: CaptionProps) => {
-
   const Tag = `${tag}`
 
   const css = classnames([

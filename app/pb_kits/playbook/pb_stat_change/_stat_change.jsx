@@ -16,7 +16,6 @@ type StatChangeProps = {
 }
 
 const statChangeCSS = ({}: StatChangeProps, status) => {
-
   const statusStyle = status !== '' ? `_${status}` : ''
 
   return 'pb_stat_change_kit' + statusStyle

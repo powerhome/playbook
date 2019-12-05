@@ -85,7 +85,8 @@
       "indent": [2, 2, { "ignoredNodes": ["JSXElement *", "JSXElement"]}],
       "brace-style": [2, "1tbs"],
       "func-style": [2, "expression"],
-      "prefer-arrow-callback": 2
+      "prefer-arrow-callback": 2,
+      "padded-blocks": [2, "never"]
     },
     "settings": {
       "react": {

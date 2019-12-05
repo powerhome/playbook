@@ -32,7 +32,6 @@ const DateYearStacked = ({
   dark=false,
   date,
 }: DateYearStackedProps) => {
-
   const dateTimestamp = new DateTime({ value: date })
   const css = classnames(kitClasses({ align }), className)
 
