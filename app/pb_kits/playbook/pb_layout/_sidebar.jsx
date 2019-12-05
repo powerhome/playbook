@@ -14,7 +14,7 @@ class Sidebar extends Component {
       children
     } = this.props
     return (
-      <div className={'layout_sidebar'}>
+      <div className="layout_sidebar">
         {children}
       </div>
     )

@@ -10,7 +10,7 @@ class Source extends React.Component {
   render() {
     return (
       <div className="pb_source">
-        <span>SOURCE CONTENT</span>
+        <span>{'SOURCE CONTENT'}</span>
       </div>
     )
   }

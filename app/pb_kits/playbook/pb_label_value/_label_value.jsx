@@ -10,7 +10,7 @@ class LabelValue extends React.Component {
   render() {
     return (
       <div className="pb_label_value">
-        <span>LABEL VALUE CONTENT</span>
+        <span>{'LABEL VALUE CONTENT'}</span>
       </div>
     )
   }

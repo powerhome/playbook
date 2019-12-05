@@ -10,7 +10,7 @@ class LabelPill extends React.Component {
   render() {
     return (
       <div className="pb_label_pill">
-        <span>LABEL PILL CONTENT</span>
+        <span>{'LABEL PILL CONTENT'}</span>
       </div>
     )
   }

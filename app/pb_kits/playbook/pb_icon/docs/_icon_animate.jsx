@@ -12,7 +12,7 @@ function IconAnimate() {
             spin
         />
         {' '}
-        <span>Spin</span>
+        <span>{'Spin'}</span>
       </p>
       <br />
       <p>
@@ -23,7 +23,7 @@ function IconAnimate() {
             size="2x"
         />
         {' '}
-        <span>Pulse</span>
+        <span>{'Pulse'}</span>
       </p>
     </div>
   )

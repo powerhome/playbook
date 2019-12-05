@@ -10,7 +10,7 @@ class OnlineStatus extends React.Component {
   render() {
     return (
       <div className="pb_online_status">
-        <span>ONLINE STATUS CONTENT</span>
+        <span>{'ONLINE STATUS CONTENT'}</span>
       </div>
     )
   }

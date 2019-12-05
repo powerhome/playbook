@@ -10,7 +10,7 @@ class Date extends React.Component {
   render() {
     return (
       <div className="pb_date">
-        <span>DATE CONTENT</span>
+        <span>{'DATE CONTENT'}</span>
       </div>
     )
   }

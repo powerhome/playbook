@@ -10,7 +10,7 @@ class Timestamp extends React.Component {
   render() {
     return (
       <div className="pb_timestamp">
-        <span>TIMESTAMP CONTENT</span>
+        <span>{'TIMESTAMP CONTENT'}</span>
       </div>
     )
   }

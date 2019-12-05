@@ -19,7 +19,7 @@ const CircleIconButton = (props: CircleIconButtonProps) => {
   } = props
 
   return (
-    <div className={'pb_circle_icon_button_kit'}>
+    <div className="pb_circle_icon_button_kit">
       <Button
           dark={dark}
           disabled={disabled}

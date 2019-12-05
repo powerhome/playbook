@@ -10,7 +10,7 @@ function IconSizes() {
             size="lg"
         />
         {' '}
-        <span>Large</span>
+        <span>{'Large'}</span>
       </p>
       <p>
         <Icon
@@ -18,7 +18,7 @@ function IconSizes() {
             size="sm"
         />
         {' '}
-        <span>Small</span>
+        <span>{'Small'}</span>
       </p>
       <p>
         <Icon
@@ -26,7 +26,7 @@ function IconSizes() {
             size="xs"
         />
         {' '}
-        <span>XSmall</span>
+        <span>{'XSmall'}</span>
       </p>
 
       <br />
@@ -38,7 +38,7 @@ function IconSizes() {
             size="1x"
         />
         {' '}
-        <span>1x</span>
+        <span>{'1x'}</span>
       </p>
       <p>
         <Icon
@@ -46,7 +46,7 @@ function IconSizes() {
             size="2x"
         />
         {' '}
-        <span>2x</span>
+        <span>{'2x'}</span>
       </p>
       <p>
         <Icon
@@ -54,7 +54,7 @@ function IconSizes() {
             size="3x"
         />
         {' '}
-        <span>3x</span>
+        <span>{'3x'}</span>
       </p>
       <p>
         <Icon
@@ -62,7 +62,7 @@ function IconSizes() {
             size="4x"
         />
         {' '}
-        <span>4x</span>
+        <span>{'4x'}</span>
       </p>
       <p>
         <Icon
@@ -70,7 +70,7 @@ function IconSizes() {
             size="5x"
         />
         {' '}
-        <span>5x</span>
+        <span>{'5x'}</span>
       </p>
       <p>
         <Icon
@@ -78,7 +78,7 @@ function IconSizes() {
             size="6x"
         />
         {' '}
-        <span>6x</span>
+        <span>{'6x'}</span>
       </p>
       <p>
         <Icon
@@ -86,7 +86,7 @@ function IconSizes() {
             size="7x"
         />
         {' '}
-        <span>7x</span>
+        <span>{'7x'}</span>
       </p>
       <p>
         <Icon
@@ -94,7 +94,7 @@ function IconSizes() {
             size="8x"
         />
         {' '}
-        <span>8x</span>
+        <span>{'8x'}</span>
       </p>
       <p>
         <Icon
@@ -102,7 +102,7 @@ function IconSizes() {
             size="9x"
         />
         {' '}
-        <span>9x</span>
+        <span>{'9x'}</span>
       </p>
       <p>
         <Icon
@@ -110,7 +110,7 @@ function IconSizes() {
             size="10x"
         />
         {' '}
-        <span>10x</span>
+        <span>{'10x'}</span>
       </p>
     </div>
   )

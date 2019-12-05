@@ -10,7 +10,7 @@ class UserBadge extends React.Component {
   render() {
     return (
       <div className="pb_user_badge">
-        <span>USER BADGE CONTENT</span>
+        <span>{'USER BADGE CONTENT'}</span>
       </div>
     )
   }

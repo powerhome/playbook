@@ -10,7 +10,7 @@ class TitleDetail extends React.Component {
   render() {
     return (
       <div className="pb_title_detail">
-        <span>TITLE DETAIL CONTENT</span>
+        <span>{'TITLE DETAIL CONTENT'}</span>
       </div>
     )
   }

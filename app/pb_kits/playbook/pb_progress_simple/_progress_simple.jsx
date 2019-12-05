@@ -10,7 +10,7 @@ class ProgressSimple extends React.Component {
   render() {
     return (
       <div className="pb_progress_simple">
-        <span>PROGRESS SIMPLE CONTENT</span>
+        <span>{'PROGRESS SIMPLE CONTENT'}</span>
       </div>
     )
   }

@@ -19,7 +19,7 @@ class Image extends Component {
     return (
       <img
           alt={alt}
-          className={'pb_image lazyload blur_up'}
+          className="pb_image lazyload blur_up"
           data-src={url}
       />
     )

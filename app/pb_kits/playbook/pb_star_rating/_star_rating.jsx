@@ -10,7 +10,7 @@ class StarRating extends React.Component {
   render() {
     return (
       <div className="pb_star_rating">
-        <span>STAR RATING CONTENT</span>
+        <span>{'STAR RATING CONTENT'}</span>
       </div>
     )
   }

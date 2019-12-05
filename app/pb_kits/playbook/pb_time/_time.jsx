@@ -10,7 +10,7 @@ class Time extends React.Component {
   render() {
     return (
       <div className="pb_time">
-        <span>TIME CONTENT</span>
+        <span>{'TIME CONTENT'}</span>
       </div>
     )
   }

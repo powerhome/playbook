@@ -10,7 +10,7 @@ class IconValue extends React.Component {
   render() {
     return (
       <div className="pb_icon_value">
-        <span>ICON VALUE CONTENT</span>
+        <span>{'ICON VALUE CONTENT'}</span>
       </div>
     )
   }

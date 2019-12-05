@@ -14,7 +14,7 @@ class Body extends Component {
       children
     } = this.props
     return (
-      <div className={'layout_body'}>
+      <div className="layout_body">
         {children}
       </div>
     )

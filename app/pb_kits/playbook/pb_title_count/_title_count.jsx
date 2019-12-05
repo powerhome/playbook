@@ -10,7 +10,7 @@ class TitleCount extends React.Component {
   render() {
     return (
       <div className="pb_title_count">
-        <span>TITLE COUNT CONTENT</span>
+        <span>{'TITLE COUNT CONTENT'}</span>
       </div>
     )
   }
