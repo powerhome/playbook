@@ -51,10 +51,7 @@ const SelectableCard = ({
 }: Props) => {
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
-  const handleChange = event => {
-    onChange(event)
-  }
-
+  
   const css = buildCss({
     'pb_selectable_card_kit': true,
     'checked': checked,
@@ -86,7 +83,7 @@ const SelectableCard = ({
           type={inputType}
           checked={checked}
           disabled={disabled}
-          onChange={handleChange}
+          onChange={onChange}
       />
       <label htmlFor={inputIdPresent}>
         { text || children }
