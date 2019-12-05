@@ -38,7 +38,7 @@
       "react/jsx-closing-bracket-location": 1,
       "react/jsx-curly-spacing": 2,
       "react/jsx-handler-names": 2,
-      "react/jsx-indent-props": 1,
+      "react/jsx-indent-props": [2, 4],
       "react/jsx-indent": [2, 2],
       "react/jsx-key": 2,
       "react/jsx-no-bind": 0,
