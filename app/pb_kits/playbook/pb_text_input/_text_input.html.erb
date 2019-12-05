@@ -10,6 +10,7 @@
     <% else %>
       <%= tag(:input,
           id: object.id,
+          class: object.classname,
           data: object.data,
           name: object.name,
           placeholder: object.placeholder,
