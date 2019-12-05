@@ -15,7 +15,7 @@ const sizeColumns = function(highchart) {
   series.groupPadding = 0
 }
 
-const styleDataLabels = highchart => {
+const styleDataLabels = (highchart) => {
   let series = highchart.plotOptions.series
 
   series.dataLabels.style.fontFamily = typography.font_family_base

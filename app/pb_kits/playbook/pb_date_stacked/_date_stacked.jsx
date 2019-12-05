@@ -55,7 +55,7 @@ const DateStacked = (props: DateStackedProps) => {
   const current_year = new Date().getFullYear().toString()
   const input_year = dateTimestamp.toYear().toString()
 
-  const print_year = dateTimestamp => {
+  const print_year = (dateTimestamp) => {
     if (current_year != input_year) {
       return (
         <Caption size='xs'>{input_year}</Caption>

@@ -35,7 +35,7 @@ const Toggle = ({
 }: Props) => {
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
-  const handleChange = event => {
+  const handleChange = (event) => {
     onChange(event)
     event.target.checked ?
       onCheck(event) :

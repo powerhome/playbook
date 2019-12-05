@@ -12,13 +12,13 @@ type DistributionBarProps = {
 }
 
 const normalizeCharacters = (widths) => {
-  return widths.map(width => {
+  return widths.map((width) => {
     return parseInt(width.toString().replace(/[^0-9.]/gi, ''))
   })
 }
 
 const barValues = (normalizedValues) => {
-  let arrSum = value => value.reduce((a, b) => (a + b), 0)
+  let arrSum = (value) => value.reduce((a, b) => (a + b), 0)
   let widthSum = arrSum(normalizedValues)
   return normalizedValues.map((value, i) => {
     return (

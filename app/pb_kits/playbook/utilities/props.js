@@ -29,7 +29,7 @@ export const noop = () => {}
  * @param {Object} aria the object containing the aria prop values.
  * @returns {Object} an object holding the HTML valid aria props and their values.
  */
-export const buildAriaProps = aria => buildPrefixedProps('aria', aria)
+export const buildAriaProps = (aria) => buildPrefixedProps('aria', aria)
 
 /**
  * Maps a given data object into HTML valid data attribtues and their values.
@@ -37,7 +37,7 @@ export const buildAriaProps = aria => buildPrefixedProps('aria', aria)
  * @param {Object} data the object containing the data prop values.
  * @returns {Object} an object holding the HTML valid data props and their values.
  */
-export const buildDataProps = data => buildPrefixedProps('data', data)
+export const buildDataProps = (data) => buildPrefixedProps('data', data)
 
 /**
  * Builds a Playbook valid root className off of the incoming css rules.
