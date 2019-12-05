@@ -16,7 +16,7 @@ type MessageProps = {
 }
 
 const print_label = (label) => {
-  if ( label != null ) {
+  if (label != null) {
     return (
       <Caption>{`${label}`}</Caption>
     )
@@ -24,7 +24,7 @@ const print_label = (label) => {
 }
 
 const print_timestamp = (timestamp) => {
-  if ( timestamp != null ) {
+  if (timestamp != null) {
     return(
       <Caption size='xs'>{`${timestamp}`}</Caption>
     )
@@ -42,7 +42,7 @@ const Message = (props: MessageProps) => {
   } = props
   
   const print_avatar = (avatarName, avatarUrl, avatarStatus) => {
-    if ( avatarUrl !== '' && avatarName !== '' ) {
+    if (avatarUrl !== '' && avatarName !== '') {
       return (
         <Avatar
             imageUrl={avatarUrl}
@@ -52,7 +52,7 @@ const Message = (props: MessageProps) => {
         />
       )
     }
-    if ( avatarUrl === '' && avatarName !== '' ) {
+    if (avatarUrl === '' && avatarName !== '') {
       return (
         <Avatar
             name={avatarName}
@@ -63,7 +63,7 @@ const Message = (props: MessageProps) => {
     }
   }
 
-  const messageCSS = ( avatarUrl, avatarName ) => {
+  const messageCSS = (avatarUrl, avatarName) => {
     if (avatarUrl != '' || avatarName != '') {
       return 'pb_message_kit_avatar'
     }

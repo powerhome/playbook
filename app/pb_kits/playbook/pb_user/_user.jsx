@@ -47,7 +47,7 @@ const User = (props: UserProps) => {
   } = props 
 
   const print_avatar = (avatar, avatarUrl) => {
-    if (avatar == true | avatarUrl != null ) {
+    if (avatar == true | avatarUrl != null) {
       return (
         <Avatar
             image_url={avatarUrl}

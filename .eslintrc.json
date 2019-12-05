@@ -60,7 +60,8 @@
         {
           "maximum": 1
         }
-      ]
+      ],
+      "space-in-parens": ["error", "never"]
     },
     "settings": {
       "react": {

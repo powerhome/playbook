@@ -24,7 +24,7 @@ const textareaCSS =({
   return 'pb_textarea_kit' + themeStyle
 }
 
-const Textarea = ( props: TextareaProps) => {
+const Textarea = (props: TextareaProps) => {
 
   const {
     className,
