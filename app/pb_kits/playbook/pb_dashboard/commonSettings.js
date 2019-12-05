@@ -13,10 +13,10 @@ const dataColors = [
 ]
 
 const applyCustomSeriesColors = function(highchart) {
-  highchart.series.forEach(function(item, index) {
+  highchart.series.forEach((item, index) => {
     const selected_color = dataColors[index]
     item.color = selected_color
-    item.data.forEach(function(data_item) {
+    item.data.forEach((data_item) => {
       if (data_item.color){
         data_item.color = selected_color
       }
@@ -60,7 +60,7 @@ const adjustAxisStyle = function(axis) {
 /* Remove grid from background */
 const styleAxis = function(highchart) {
   if (Array.isArray(highchart.yAxis)) {
-    highchart.yAxis.forEach(function(item) {
+    highchart.yAxis.forEach((item) => {
       adjustAxisStyle(item)
     })
   } else {
@@ -68,7 +68,7 @@ const styleAxis = function(highchart) {
   }
 
   if (Array.isArray(highchart.xAxis)) {
-    highchart.xAxis.forEach(function(item) {
+    highchart.xAxis.forEach((item) => {
       adjustAxisStyle(item)
     })
   } else {

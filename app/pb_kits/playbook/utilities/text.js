@@ -6,7 +6,7 @@ function titleize(sentence) {
   }
 
   let result = []
-  sentence.split(' ').forEach(function(w) {
+  sentence.split(' ').forEach((w) => {
     result.push(titleizedWord(w))
   })
 
