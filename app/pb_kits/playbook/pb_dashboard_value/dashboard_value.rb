@@ -16,6 +16,10 @@ module Playbook
       prop :stat_value, type: Playbook::Props::Hash,
                         default: {}
 
+      def formatted_stat_value
+        { **stat_value, value: stat_value[:value].to_i }
+      end
+
       def classname
         generate_classname("pb_dashboard_value_kit", align)
       end
