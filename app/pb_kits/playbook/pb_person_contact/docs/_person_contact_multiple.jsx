@@ -16,7 +16,7 @@ const PersonContactMultiple = () => {
           {
             contactType: 'work',
             contactValue: '3245627482',
-          }
+          },
         ]}
           firstName="Harvey"
           lastName="Walters"
@@ -25,7 +25,7 @@ const PersonContactMultiple = () => {
           contacts={[
           {
             contactValue: '5555555555',
-          }
+          },
         ]}
           firstName="Brenda"
           lastName="Walters"

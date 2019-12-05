@@ -33,7 +33,7 @@ const barValues = (normalizedValues) => {
 
 const DistributionBar = ({
   size='lg',
-  widths=[1]
+  widths=[1],
 }: DistributionBarProps) => {
   const normalizedValues = normalizeCharacters(widths)
 

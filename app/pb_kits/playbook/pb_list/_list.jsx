@@ -10,8 +10,8 @@ const propTypes = {
   xpadding: PropTypes.bool,
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
-    PropTypes.node
-  ])
+    PropTypes.node,
+  ]),
 }
 
 const defaultProps = {
@@ -20,7 +20,7 @@ const defaultProps = {
   size: '',
   ordered: false,
   layout: '',
-  xpadding: false
+  xpadding: false,
 }
 
 class List extends Component {
@@ -32,7 +32,7 @@ class List extends Component {
       ordered,
       layout,
       xpadding,
-      children
+      children,
     } = this.props
     const darkClass = dark === true ? '_dark' : ''
     const borderlessClass = borderless === true ? 'list_borderless' : ''

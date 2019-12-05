@@ -4,13 +4,13 @@ import PropTypes from 'prop-types'
 const propTypes = {
   text: PropTypes.string.isRequired,
   link: PropTypes.string,
-  active: PropTypes.bool
+  active: PropTypes.bool,
 }
 
 const defaultProps = {
   text: 'Hello Item',
   link: '#',
-  active: false
+  active: false,
 }
 
 class NavItem extends Component {

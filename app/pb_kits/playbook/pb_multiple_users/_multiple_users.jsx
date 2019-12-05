@@ -5,7 +5,7 @@ import React from 'react'
 import classnames from 'classnames'
 
 import {
-  Avatar
+  Avatar,
 } from '../'
 
 type MultipleUsersProps = {
@@ -19,7 +19,7 @@ const MultipleUsers = ({
   className,
   id,
   reverse=false,
-  users
+  users,
 }: MultipleUsersProps) => {
   const multipleUsersCss = () => {
     let css = 'pb_multiple_users_kit'

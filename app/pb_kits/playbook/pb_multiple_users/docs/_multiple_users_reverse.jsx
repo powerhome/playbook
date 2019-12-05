@@ -26,7 +26,7 @@ const MultipleUsersReverse = () => {
           {
             name: 'Alicia Cooper',
             imageUrl: 'https://randomuser.me/api/portraits/women/46.jpg',
-          }
+          },
         ]}
       />
 
@@ -43,7 +43,7 @@ const MultipleUsersReverse = () => {
           {
             name: 'Andrew Murray',
             imageUrl: 'https://randomuser.me/api/portraits/men/75.jpg',
-          }
+          },
         ]}
       />
     </div>

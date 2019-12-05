@@ -7,7 +7,7 @@ import {
 
 class TextInputDefault extends React.Component {
   state = {
-    firstName: ''
+    firstName: '',
   }
 
   render() {

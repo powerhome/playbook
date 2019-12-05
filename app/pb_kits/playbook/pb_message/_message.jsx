@@ -40,7 +40,7 @@ const Message = (props: MessageProps) => {
     label='',
     message='',
     timestamp='',
-    avatarStatus=null
+    avatarStatus=null,
   } = props
 
   const printAvatar = (avatarName, avatarUrl, avatarStatus) => {

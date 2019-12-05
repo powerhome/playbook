@@ -41,7 +41,7 @@ const Avatar = ({
   name=null,
   imageUrl,
   size='md',
-  status=null
+  status=null,
 }: AvatarProps) => {
   const statusDisplay = () => {
     if (status !== null){

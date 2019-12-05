@@ -4,14 +4,14 @@ import PropTypes from 'prop-types'
 const propTypes = {
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
-    PropTypes.node
-  ])
+    PropTypes.node,
+  ]),
 }
 
 class Body extends Component {
   render() {
     const {
-      children
+      children,
     } = this.props
     return (
       <div className="layout_body">

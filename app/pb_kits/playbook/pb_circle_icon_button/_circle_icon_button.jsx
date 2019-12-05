@@ -17,7 +17,7 @@ const CircleIconButton = (props: CircleIconButtonProps) => {
     variant,
     disabled,
     icon,
-    dark
+    dark,
   } = props
 
   return (

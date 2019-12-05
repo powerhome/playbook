@@ -3,7 +3,7 @@
 import React from 'react'
 
 import type {
-  InputCallback
+  InputCallback,
 } from '../types'
 
 import {

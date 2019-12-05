@@ -17,14 +17,14 @@ type HashtagProps = {
 const HashType = {
   'home': 'H#',
   'project': 'P#',
-  'default': '#'
+  'default': '#',
 }
 
 const Hashtag = ({
   dark = false,
   text,
   type,
-  url
+  url,
 } : HashtagProps) => {
   const darkClass = dark === true ? 'dark' : ''
 

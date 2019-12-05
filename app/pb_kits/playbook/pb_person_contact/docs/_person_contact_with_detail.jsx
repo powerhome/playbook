@@ -18,7 +18,7 @@ const PersonContactWithDetail = () => {
             contactType: 'work',
             contactValue: '3245627482',
             contactDetail: 'Work',
-          }
+          },
         ]}
           firstName="Harvey"
           lastName="Walters"

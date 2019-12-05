@@ -29,7 +29,7 @@ const dateTimeIso = (dateValue) => {
 
 const DateRangeInline = ({
   endDate,
-  startDate
+  startDate,
 }: DateRangeInlineProps) => (
   <div>
     <Body

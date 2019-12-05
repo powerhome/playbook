@@ -3,19 +3,19 @@ import { BarGraph } from '../../'
 
 const chartData = [{
   name: 'Installation',
-  data: [154175]
+  data: [154175],
 }, {
   name: 'Manufacturing',
-  data: [40434]
+  data: [40434],
 }, {
   name: 'Sales & Distribution',
-  data: [39387]
+  data: [39387],
 }, {
   name: 'Project Development',
-  data: [34227]
+  data: [34227],
 }, {
   name: 'Other',
-  data: [18111]
+  data: [18111],
 }]
 
 const BarGraphDefault = () => (

@@ -11,7 +11,7 @@ class Example extends React.Component {
 
   handleChange = (event) => {
     this.setState({
-      [event.target.name]: event.target.checked
+      [event.target.name]: event.target.checked,
     })
   }
 

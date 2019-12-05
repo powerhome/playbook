@@ -6,7 +6,7 @@ import DateTime from '../pb_kit/dateTime.js'
 
 import {
   Title,
-  Caption
+  Caption,
 } from '../'
 
 type DateStackedProps = {
@@ -44,7 +44,7 @@ const DateStacked = (props: DateStackedProps) => {
     className,
     dark=false,
     date,
-    size='sm'
+    size='sm',
   } = props
 
   const dateTimestamp = new DateTime({ value: date })

@@ -34,7 +34,7 @@ const Icon = (props: IconProps) => {
     pulse=false,
     rotation,
     size,
-    spin=false
+    spin=false,
   } = props
 
   const hClass = 'fa-flip-horizontal'

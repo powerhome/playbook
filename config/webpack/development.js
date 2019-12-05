@@ -8,7 +8,7 @@ environment.plugins.append(
   'CleanWebpackPlugin',
   new CleanWebpackPlugin({
     root: path.resolve(__dirname, '../../public'),
-    verbose: true
+    verbose: true,
   })
 )
 

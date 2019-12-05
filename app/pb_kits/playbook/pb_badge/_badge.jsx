@@ -18,7 +18,7 @@ const Badge = ({
   id,
   text,
   variant = 'neutral',
-  rounded = false
+  rounded = false,
 }: BadgeProps) => {
   const roundedClass = rounded === true ? 'rounded' : ''
   const darkClass = dark === true ? 'dark' : ''

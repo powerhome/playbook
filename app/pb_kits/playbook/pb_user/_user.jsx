@@ -5,7 +5,7 @@ import React from 'react'
 import {
   Title,
   Body,
-  Avatar
+  Avatar,
 } from '../'
 
 type UserProps = {

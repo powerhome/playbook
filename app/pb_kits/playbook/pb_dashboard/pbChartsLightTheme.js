@@ -11,7 +11,7 @@ const highchartsTheme = {
     colors.data_4,
     colors.data_5,
     colors.data_6,
-    colors.data_7
+    colors.data_7,
   ],
   chart: {
     borderWidth: 0,
@@ -27,7 +27,7 @@ const highchartsTheme = {
       fontFamily: typography.font_family_base,
       fontWeight: typography.regular,
       fontSize: typography.heading_3,
-    }
+    },
   },
   subtitle: {
     style: {
@@ -35,7 +35,7 @@ const highchartsTheme = {
       color: colors.text_lt_light,
       fontWeight: typography.regular,
       fontSize: typography.text_base,
-    }
+    },
   },
   xAxis: {
     gridLineWidth: 0,
@@ -47,7 +47,7 @@ const highchartsTheme = {
         color: colors.text_lt_lighter,
         fontWeight: typography.bold,
         fontSize: typography.text_smaller,
-      }
+      },
     },
     title: {
       style: {
@@ -55,8 +55,8 @@ const highchartsTheme = {
         fontFamily: typography.font_family_base,
         fontWeight: typography.regular,
         fontSize: typography.heading_4,
-      }
-    }
+      },
+    },
   },
   yAxis: {
     alternateGridColor: null,
@@ -71,7 +71,7 @@ const highchartsTheme = {
         color: colors.text_lt_lighter,
         fontWeight: typography.bold,
         fontSize: typography.text_smaller,
-      }
+      },
     },
     title: {
       style: {
@@ -79,8 +79,8 @@ const highchartsTheme = {
         color: colors.text_lt_lighter,
         fontWeight: typography.bold,
         fontSize: typography.text_smaller,
-      }
-    }
+      },
+    },
   },
   legend: {
     layout: 'horizontal',
@@ -90,27 +90,27 @@ const highchartsTheme = {
       fontFamily: typography.font_family_base,
       color: colors.text_lt_light,
       fontWeight: typography.regular,
-      fontSize: typography.text_smaller
+      fontSize: typography.text_smaller,
     },
     itemHoverStyle: {
       color: colors.text_lt_default,
     },
     itemHiddenStyle: {
       color: colors.text_lt_lighter,
-    }
+    },
   },
   labels: {
     style: {
       color: colors.primary,
-    }
+    },
   },
   tooltip: {
     backgroundColor: {
       linearGradient: { x1: 0, y1: 0, x2: 0, y2: 1 },
       stops: [
         [0, colors.bg_dark],
-        [1, colors.bg_dark]
-      ]
+        [1, colors.bg_dark],
+      ],
     },
     shadow: false,
     borderWidth: 0,
@@ -120,7 +120,7 @@ const highchartsTheme = {
       color: colors.text_dk_default,
       fontWeight: typography.regular,
       fontSize: typography.text_smaller,
-    }
+    },
   },
 
   plotOptions: {
@@ -132,32 +132,32 @@ const highchartsTheme = {
           x1: 0,
           y1: 0,
           x2: 0,
-          y2: 1
+          y2: 1,
         },
         stops: [
           [0, Highcharts.getOptions().colors[0]],
-          [1, 'white']
-        ]
+          [1, 'white'],
+        ],
       },
-      threshold: null
+      threshold: null,
     },
     line: {
       dataLabels: {
-        color: '#CCC'
+        color: '#CCC',
       },
       marker: {
-        lineColor: '#333'
+        lineColor: '#333',
       },
       area: {
         shadow: false,
         states: {
           hover: {
-            lineWidth: 1
-          }
+            lineWidth: 1,
+          },
         },
-        threshold: null
-      }
-    }
+        threshold: null,
+      },
+    },
   },
 }
 

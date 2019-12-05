@@ -14,13 +14,13 @@ const propTypes = {
   type: PropTypes.string,
   value: PropTypes.oneOfType([
     PropTypes.string,
-    PropTypes.number
-  ])
+    PropTypes.number,
+  ]),
 }
 
 const defaultProps = {
   onChange: () => {},
-  type: 'text'
+  type: 'text',
 }
 
 class TextInput extends React.Component {
@@ -32,7 +32,7 @@ class TextInput extends React.Component {
       onChange = () => {},
       placeholder,
       type,
-      value
+      value,
     } = this.props
 
     const css = classnames([

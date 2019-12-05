@@ -87,7 +87,8 @@
       "func-style": [2, "expression"],
       "prefer-arrow-callback": 2,
       "padded-blocks": [2, "never"],
-      "eol-last": 2
+      "eol-last": 2,
+      "comma-dangle": [2, "always-multiline"]
     },
     "settings": {
       "react": {

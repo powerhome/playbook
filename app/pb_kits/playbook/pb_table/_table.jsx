@@ -5,14 +5,14 @@ import PropTypes from 'prop-types'
 const propTypes = {
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
-    PropTypes.node
+    PropTypes.node,
   ]),
   className: PropTypes.string,
   container: PropTypes.bool,
   dark: PropTypes.bool,
   disableHover: PropTypes.bool,
   singleLine: PropTypes.bool,
-  size: PropTypes.oneOf(['sm', 'md', 'lg'])
+  size: PropTypes.oneOf(['sm', 'md', 'lg']),
 }
 
 const defaultProps = {
@@ -20,7 +20,7 @@ const defaultProps = {
   dark: false,
   disableHover: false,
   singleLine: false,
-  size: 'sm'
+  size: 'sm',
 }
 
 class Table extends React.Component {
@@ -32,7 +32,7 @@ class Table extends React.Component {
       dark,
       disableHover,
       singleLine,
-      size
+      size,
     } = this.props
 
     const css = classnames([

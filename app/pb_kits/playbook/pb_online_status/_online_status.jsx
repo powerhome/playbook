@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 
 const propTypes = {
   className: PropTypes.string,
-  id: PropTypes.string
+  id: PropTypes.string,
 }
 
 class OnlineStatus extends React.Component {

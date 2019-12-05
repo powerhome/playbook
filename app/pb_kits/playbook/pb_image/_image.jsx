@@ -3,12 +3,12 @@ import PropTypes from 'prop-types'
 
 const propTypes = {
   url: PropTypes.string.isRequired,
-  alt: PropTypes.string
+  alt: PropTypes.string,
 }
 
 const defaultProps = {
   alt: '',
-  url: ''
+  url: '',
 }
 
 class Image extends Component {

@@ -10,8 +10,8 @@ const propTypes = {
   dark: PropTypes.bool,
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
-    PropTypes.node
-  ])
+    PropTypes.node,
+  ]),
 }
 
 const defaultProps = {
@@ -20,7 +20,7 @@ const defaultProps = {
   size: 'base',
   collapse: 'md',
   full: false,
-  dark: false
+  dark: false,
 }
 
 class Layout extends Component {
@@ -32,7 +32,7 @@ class Layout extends Component {
       collapse,
       full,
       dark,
-      children
+      children,
     } = this.props
     const darkClass = dark === true ? '_dark' : ''
     const transparentClass = transparent === true ? '_transparent' : ''
