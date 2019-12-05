@@ -25,7 +25,7 @@ const print_label = (label) => {
 
 const print_timestamp = (timestamp) => {
   if (timestamp != null) {
-    return(
+    return (
       <Caption size='xs'>{`${timestamp}`}</Caption>
     )
   }

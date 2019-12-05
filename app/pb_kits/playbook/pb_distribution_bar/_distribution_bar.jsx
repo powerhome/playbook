@@ -21,7 +21,7 @@ const barValues = (normalizedValues) => {
   let arrSum = value => value.reduce((a,b) => (a + b), 0)
   let widthSum = arrSum(normalizedValues)
   return normalizedValues.map((value,i) => {
-    return(
+    return (
       <div
           className={`pb_distribution_width`}
           key={i}
@@ -40,7 +40,7 @@ const DistributionBar = ({
   }: DistributionBarProps) => {
     const normalizedValues = normalizeCharacters(widths)
 
-    return(
+    return (
       <div className={`pb_distribution_bar_${size}`}>
         {barValues(normalizedValues)}
       </div>

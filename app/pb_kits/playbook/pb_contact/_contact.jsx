@@ -62,7 +62,7 @@ const Contact = ({
   }
 
   const contactTypeIcon = (function(contactType) {
-    switch(contactType) {
+    switch (contactType) {
       case 'cell':
         return 'mobile'
       case 'home':

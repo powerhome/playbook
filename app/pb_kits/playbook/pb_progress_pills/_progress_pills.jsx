@@ -17,7 +17,7 @@ type ProgressPillsProps = {
 const showSteps = (steps, active, dark) => {
   let items = []
 
-  for(let step = 1; step <= steps; step++) {
+  for (let step = 1; step <= steps; step++) {
     items.push(ProgressPill({ step,active,dark }))
   }
 
@@ -37,7 +37,7 @@ const ProgressPills = ({ active = 0, steps = 3, title = null, value = null, dark
 
   const darkClass = dark ? "_dark" : ""
 
-  return(
+  return (
     <div className={`pb_progress_pills_kit${darkClass}`}>
       {title ?
       <div className="progress_pills_status">

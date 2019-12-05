@@ -30,7 +30,7 @@ const FixedConfirmationToast = ({
   ])
 
 const icon = (function(status) {
-  switch(status) {
+  switch (status) {
     case "success":
       return "check"
     case "error":

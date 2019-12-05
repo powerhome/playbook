@@ -62,7 +62,8 @@
         }
       ],
       "space-in-parens": ["error", "never"],
-      "object-curly-spacing": [2, "always"]
+      "object-curly-spacing": [2, "always"],
+      "keyword-spacing": 2
     },
     "settings": {
       "react": {

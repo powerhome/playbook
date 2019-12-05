@@ -50,7 +50,7 @@ const MultipleUsers = ({
   }
 
   const plusUsers = () => {
-    if(moreThanFour() === true) {
+    if (moreThanFour() === true) {
       return (
         <div className="pb_multiple_users_item multiple_users_badge">
           {`+${users.length - displayCount()}`}

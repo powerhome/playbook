@@ -17,21 +17,21 @@ const applyCustomSeriesColors = function(highchart) {
     const selected_color = dataColors[index]
     item.color = selected_color
     item.data.forEach(function(data_item) {
-      if(data_item.color){
+      if (data_item.color){
         data_item.color = selected_color
       }
 
-      if(!data_item.marker) return
+      if (!data_item.marker) return
 
-      if(data_item.marker.lineColor){
+      if (data_item.marker.lineColor){
         data_item.marker.lineColor = selected_color
       }
 
-      if(data_item.marker.states.hover !== undefined){
+      if (data_item.marker.states.hover !== undefined){
         data_item.marker.states.hover.lineColor = selected_color
       }
       
-      if(data_item.marker.states.select.lineColor){
+      if (data_item.marker.states.select.lineColor){
         data_item.marker.states.select.lineColor = selected_color
       }
     })

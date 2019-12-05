@@ -42,7 +42,7 @@ const Icon = (props: IconProps) => {
   const vClass = "fa-flip-vertical"
 
   const flipClass = (function(flip) {
-    switch(flip) {
+    switch (flip) {
       case 'horizontal':
         return hClass
       case 'vertical':

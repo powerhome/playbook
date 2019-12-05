@@ -45,7 +45,7 @@ const Avatar = ({
 }: AvatarProps) => {
 
   const statusDisplay = () => {
-    if(status !== null){
+    if (status !== null){
       return (
         <PbStatus
             size={size}

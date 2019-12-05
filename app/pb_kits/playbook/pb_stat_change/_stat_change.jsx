@@ -31,7 +31,7 @@ const StatChange = (props: StatChangeProps) => {
   } = props
 
   const status = (function(change) {
-    switch(change) {
+    switch (change) {
       case 'increase':
         return 'positive'
       case 'decrease':
@@ -42,7 +42,7 @@ const StatChange = (props: StatChangeProps) => {
   })(change)
 
   const icon = (function(change) {
-    switch(change) {
+    switch (change) {
       case 'increase':
         return 'arrow-up'
       case 'decrease':
