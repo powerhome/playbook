@@ -151,9 +151,9 @@ const highchartsTheme = {
       area: {
         shadow: false,
         states: {
-            hover: {
-                lineWidth: 1
-            }
+          hover: {
+            lineWidth: 1
+          }
         },
         threshold: null
       }

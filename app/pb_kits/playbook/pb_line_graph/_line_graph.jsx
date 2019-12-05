@@ -20,32 +20,32 @@ type LineGraphProps = {
 
 export default class LineGraph extends React.Component<LineGraphProps> {
     static defaultProps = {
-        className: 'pb_bar_graph',
-        gradient: false,
-        type: 'line',
+      className: 'pb_bar_graph',
+      gradient: false,
+      type: 'line',
     }
 
     componentDidMount() {
-        const {
-            axisTitle,
-            className,
-            chartData,
-            id,
-            pointStart,
-            subTitle,
-            title,
-            type,
-        } = this.props
+      const {
+        axisTitle,
+        className,
+        chartData,
+        id,
+        pointStart,
+        subTitle,
+        title,
+        type,
+      } = this.props
 
-        new pbChart(`.${className}`, {
-            axisTitle: axisTitle,
-            chartData: chartData,
-            id: id,
-            pointStart: pointStart,
-            subtitle: subTitle,
-            type,
-            title: title,
-        })
+      new pbChart(`.${className}`, {
+        axisTitle: axisTitle,
+        chartData: chartData,
+        id: id,
+        pointStart: pointStart,
+        subtitle: subTitle,
+        type,
+        title: title,
+      })
     }
 
     props: LineGraphProps

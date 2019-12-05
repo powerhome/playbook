@@ -9,8 +9,8 @@ const propTypes = {
   layout: PropTypes.oneOf(['', 'left', 'right']),
   xpadding: PropTypes.bool,
   children: PropTypes.oneOfType([
-      PropTypes.arrayOf(PropTypes.node),
-      PropTypes.node
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node
   ])
 }
 

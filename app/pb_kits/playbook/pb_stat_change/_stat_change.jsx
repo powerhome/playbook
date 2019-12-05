@@ -32,23 +32,23 @@ const StatChange = (props: StatChangeProps) => {
 
   const status = (function(change) {
     switch (change) {
-      case 'increase':
-        return 'positive'
-      case 'decrease':
-        return 'negative'
-      default:
-        return 'neutral'
+    case 'increase':
+      return 'positive'
+    case 'decrease':
+      return 'negative'
+    default:
+      return 'neutral'
     }
   })(change)
 
   const icon = (function(change) {
     switch (change) {
-      case 'increase':
-        return 'arrow-up'
-      case 'decrease':
-        return 'arrow-down'
-      default:
-        return null
+    case 'increase':
+      return 'arrow-up'
+    case 'decrease':
+      return 'arrow-down'
+    default:
+      return null
     }
   })(change)
 

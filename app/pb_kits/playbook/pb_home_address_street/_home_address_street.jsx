@@ -11,9 +11,9 @@ import {
 } from '../'
 
 const dot = (houseStyle) =>
-  { if (houseStyle !== undefined) {
-    return '\u00b7'
-  }
+{ if (houseStyle !== undefined) {
+  return '\u00b7'
+}
 }
 const titleizeAddessCont = (addressCont) => addressCont ? titleize(addressCont) : null
 

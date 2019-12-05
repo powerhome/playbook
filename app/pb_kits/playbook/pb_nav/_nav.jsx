@@ -5,9 +5,9 @@ import { Caption } from '../'
 
 const propTypes = {
   children: PropTypes.oneOfType([
-        PropTypes.arrayOf(PropTypes.node),
-        PropTypes.node
-    ])
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node
+  ])
 }
 
 class Nav extends Component {

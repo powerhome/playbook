@@ -24,9 +24,9 @@ const showSteps = (steps, active, dark) => {
 }
 
 const ProgressPill = ({
-    active,
-    dark,
-    step,
+  active,
+  dark,
+  step,
 }: ProgressPillProps) => (
   <div
       className={`pb_progress_pill${step <= active ? '_active' : '_inactive'}${dark ? '_dark' : null}`}
@@ -59,6 +59,6 @@ const ProgressPills = ({ active = 0, steps = 3, title = null, value = null, dark
         {showSteps(steps, active, dark)}
       </div>
     </div>
-)}
+  )}
 
 export default ProgressPills

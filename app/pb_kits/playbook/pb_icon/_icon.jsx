@@ -43,14 +43,14 @@ const Icon = (props: IconProps) => {
 
   const flipClass = (function(flip) {
     switch (flip) {
-      case 'horizontal':
-        return hClass
-      case 'vertical':
-        return vClass
-      case 'both':
-        return `${vClass} ${hClass}`
-      default:
-        return ''
+    case 'horizontal':
+      return hClass
+    case 'vertical':
+      return vClass
+    case 'both':
+      return `${vClass} ${hClass}`
+    default:
+      return ''
     }
   })(flip)
 

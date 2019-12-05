@@ -32,19 +32,19 @@ const barValues = (normalizedValues) => {
 }
 
 const DistributionBar = ({
-    className,
-    data,
-    id,
-    size='lg',
-    widths=[1]
-  }: DistributionBarProps) => {
-    const normalizedValues = normalizeCharacters(widths)
+  className,
+  data,
+  id,
+  size='lg',
+  widths=[1]
+}: DistributionBarProps) => {
+  const normalizedValues = normalizeCharacters(widths)
 
-    return (
-      <div className={`pb_distribution_bar_${size}`}>
-        {barValues(normalizedValues)}
-      </div>
-    )
+  return (
+    <div className={`pb_distribution_bar_${size}`}>
+      {barValues(normalizedValues)}
+    </div>
+  )
 }
 
 export default DistributionBar

@@ -13,8 +13,8 @@ const propTypes = {
   placeholder: PropTypes.string,
   type: PropTypes.string,
   value: PropTypes.oneOfType([
-      PropTypes.string,
-      PropTypes.number
+    PropTypes.string,
+    PropTypes.number
   ])
 }
 

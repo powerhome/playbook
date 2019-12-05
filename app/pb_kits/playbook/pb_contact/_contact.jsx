@@ -63,18 +63,18 @@ const Contact = ({
 
   const contactTypeIcon = (function(contactType) {
     switch (contactType) {
-      case 'cell':
-        return 'mobile'
-      case 'home':
-        return 'phone'
-      case 'work':
-        return 'phone-office'
-      case 'email':
-        return 'envelope'
-      case 'wrong number' :
-        return 'slash-phone'
-      default:
-        return 'phone'
+    case 'cell':
+      return 'mobile'
+    case 'home':
+      return 'phone'
+    case 'work':
+      return 'phone-office'
+    case 'email':
+      return 'envelope'
+    case 'wrong number' :
+      return 'slash-phone'
+    default:
+      return 'phone'
     }
   })(contactType)
 

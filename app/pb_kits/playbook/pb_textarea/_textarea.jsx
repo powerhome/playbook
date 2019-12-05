@@ -18,7 +18,7 @@ type TextareaProps = {
 }
 
 const textareaCSS =({
-    dark=false,
+  dark=false,
 }: TextareaProps) => {
   const themeStyle = dark === true ? '_dark' : ''
   return 'pb_textarea_kit' + themeStyle

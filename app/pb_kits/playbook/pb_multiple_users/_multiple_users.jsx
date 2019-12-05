@@ -16,11 +16,11 @@ type MultipleUsersProps = {
 }
 
 const MultipleUsers = ({
-    className,
-    id,
-    reverse=false,
-    users
-  }: MultipleUsersProps) => {
+  className,
+  id,
+  reverse=false,
+  users
+}: MultipleUsersProps) => {
 
   const multipleUsersCss = () => {
     let css = 'pb_multiple_users_kit'
