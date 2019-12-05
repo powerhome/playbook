@@ -32,7 +32,7 @@ const Badge = ({
         className={css}
         id={id}
     >
-        <span>{text}</span>
+      <span>{text}</span>
     </div>
   )
 }

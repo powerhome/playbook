@@ -75,7 +75,7 @@ const DateStacked = (props: DateStackedProps) => {
             text={`${dateTimestamp.toDay()}`}
         />
       </div>
-        {print_year(date)}
+      {print_year(date)}
     </div>
   )
 }

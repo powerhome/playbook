@@ -40,14 +40,14 @@ const Checkbox = ({
         type="checkbox"
         value={value}
       />
-  <span className="pb_checkbox_checkmark">
-      <Icon
-          className="check_icon"
-          fixedWidth
-          icon="check"
-      />
-    </span>
-    <Body className={bodyClassName}>{text}</Body>
+      <span className="pb_checkbox_checkmark">
+        <Icon
+            className="check_icon"
+            fixedWidth
+            icon="check"
+        />
+      </span>
+      <Body className={bodyClassName}>{text}</Body>
     </label>
   )
 }

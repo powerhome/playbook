@@ -40,24 +40,24 @@ const ProgressPills = ({ active = 0, steps = 3, title = null, value = null, dark
   return (
     <div className={`pb_progress_pills_kit${darkClass}`}>
       {title ?
-      <div className="progress_pills_status">
-        <Title
-            dark={dark}
-            size={4}
-            tag="h4"
-            text={title}
-        />
-        <Body
-            color="light"
-            dark={dark}
-            text={value}
-        />
-      </div> : null}
+        <div className="progress_pills_status">
+          <Title
+              dark={dark}
+              size={4}
+              tag="h4"
+              text={title}
+          />
+          <Body
+              color="light"
+              dark={dark}
+              text={value}
+          />
+        </div> : null}
 
-    <div className="progress_pills">
-      {showSteps(steps, active, dark)}
+      <div className="progress_pills">
+        {showSteps(steps, active, dark)}
+      </div>
     </div>
-  </div>
 )}
 
 export default ProgressPills

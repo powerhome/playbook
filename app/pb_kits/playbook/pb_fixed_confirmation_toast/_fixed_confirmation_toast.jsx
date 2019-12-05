@@ -62,7 +62,7 @@ return (
         size={4}
         text={text}
     />
-    </div>
+  </div>
   )
 }
 
