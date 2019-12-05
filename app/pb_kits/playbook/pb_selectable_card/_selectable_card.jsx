@@ -26,8 +26,6 @@ type Props = {
   multi?: Boolean,
   name?: String,
   onChange: InputCallback,
-  onSelect: InputCallback,
-  onUnselect: InputCallback,
   text?: String,
   value?: String
 };
@@ -45,8 +43,6 @@ const SelectableCard = ({
   multi = true,
   name,
   onChange = noop,
-  onSelect = noop,
-  onUnselect = noop,
   text,
   value,
   ...props
@@ -55,9 +51,6 @@ const SelectableCard = ({
   const dataProps = buildDataProps(data)
   const handleChange = event => {
     onChange(event)
-    event.target.checked ?
-      onSelect(event) :
-      onUnselect(event)
   }
 
   const css = buildCss({

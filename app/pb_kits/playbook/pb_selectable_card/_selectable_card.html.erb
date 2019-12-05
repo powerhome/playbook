@@ -1,4 +1,5 @@
 <%= content_tag(:div,
+  id: object.id,
   data: object.data,
   class: object.classname) do %>
 
@@ -9,7 +10,11 @@
   <% end %>
 
   <label for="<%= object.html_for %>">
-    <%= !object.children.nil? ? capture(&object.children) : object.text %>
+    <% if object.children.nil? %>
+      <%= pb_rails("body", props: { text: object.text }) %>
+    <% else %>
+      <%= capture(&object.children) %>
+    <% end %>
     <div class="pb_selectable_card_circle">
       <%= pb_rails("icon", props: { icon: "check", fixed_width: true }) if object.icon %>
     </div>

@@ -1,30 +1,30 @@
-<%= pb_rails("selectable_card", props: {
-  id: "male",
-  name: "gender",
-  value: "male",
-  multi: false
-}) do %>
-  Male
-<% end %>
+<div class="pb--doc-demo-row">
 
-<br/>
+  <%= pb_rails("selectable_card", props: {
+    label_for: "male",
+    name: "gender",
+    value: "male",
+    multi: false
+  }) do %>
+    Male
+  <% end %>
 
-<%= pb_rails("selectable_card", props: {
-  id: "female",
-  name: "gender",
-  value: "female",
-  multi: false
-}) do %>
-  Female
-<% end %>
+  <%= pb_rails("selectable_card", props: {
+    label_for: "female",
+    name: "gender",
+    value: "female",
+    multi: false
+  }) do %>
+    Female
+  <% end %>
 
-<br/>
-
-<%= pb_rails("selectable_card", props: {
-  id: "other",
-  name: "gender",
-  value: "other",
-  multi: false
-}) do %>
-  Other
-<% end %>
+  <%= pb_rails("selectable_card", props: {
+    label_for: "other",
+    name: "gender",
+    value: "other",
+    multi: false
+  }) do %>
+    Other
+  <% end %>
+  
+</div>

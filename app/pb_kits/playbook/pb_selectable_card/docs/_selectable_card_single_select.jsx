@@ -14,20 +14,17 @@ class SelectableCardSingleSelect extends React.Component {
 
   render() {
     return (
-      <div>
+      <div class="pb--doc-demo-row">
+
         <SelectableCard
             id="male1"
             name="gender"
             value="male"
             multi={false}
             checked={this.state.selected === 'male'}
-            onChange={this.handleSelect.bind(this)}
-            onSelect={event => console.log(`${event.target.value} selected!`)}
-            onUnselect={event => console.log(`${event.target.value} unselected!`)}>
-          Male
+            onChange={this.handleSelect.bind(this)}>
+          {`Male`}
         </SelectableCard>
-
-        <br></br>
 
         <SelectableCard
             id="female1"
@@ -35,13 +32,9 @@ class SelectableCardSingleSelect extends React.Component {
             value="female"
             multi={false}
             checked={this.state.selected === 'female'}
-            onChange={this.handleSelect.bind(this)}
-            onSelect={event => console.log(`${event.target.value} selected!`)}
-            onUnselect={event => console.log(`${event.target.value} unselected!`)}>
-          Female
+            onChange={this.handleSelect.bind(this)}>
+          {`Female`}
         </SelectableCard>
-
-        <br></br>
 
         <SelectableCard
             id="other1"
@@ -49,11 +42,10 @@ class SelectableCardSingleSelect extends React.Component {
             value="other"
             multi={false}
             checked={this.state.selected === 'other'}
-            onChange={this.handleSelect.bind(this)}
-            onSelect={event => console.log(`${event.target.value} selected!`)}
-            onUnselect={event => console.log(`${event.target.value} unselected!`)}>
-          Other
+            onChange={this.handleSelect.bind(this)}>
+          {`Other`}
         </SelectableCard>
+        
       </div>
     );
   }

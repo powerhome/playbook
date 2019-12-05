@@ -1,30 +1,39 @@
-<%= pb_rails("selectable_card", props: {
-  id: "car",
-  name: "car",
-  value: "car",
-  checked: true
-}) do %>
-  I have a car
-<% end %>
+<div class="pb--doc-demo-row">
 
-<br/>
+  <%= pb_rails("selectable_card", props: {
+    label_for: "selected_with_icon",
+    name: "selected_with_icon",
+    value: "selected_with_icon",
+    checked: true
+  }) do %>
+    Selected, with icon
+  <% end %>
 
-<%= pb_rails("selectable_card", props: {
-  id: "bike",
-  name: "bike",
-  value: "bike",
-  checked: false
-}) do %>
-  I have a bike
-<% end %>
+  <%= pb_rails("selectable_card", props: {
+    label_for: "selected_without_icon",
+    name: "selected_without_icon",
+    value: "selected_without_icon",
+    checked: true,
+    icon: false
+  }) do %>
+    Selected, without icon
+  <% end %>
 
-<br/>
+  <%= pb_rails("selectable_card", props: {
+    label_for: "unselected",
+    name: "unselected",
+    value: "unselected",
+  }) do %>
+    Unselected
+  <% end %>
 
-<%= pb_rails("selectable_card", props: {
-  id: "boat",
-  name: "boat",
-  value: "boat",
-  checked: false
-}) do %>
-  I have a boat
-<% end %>
+  <%= pb_rails("selectable_card", props: {
+    label_for: "disabled",
+    name: "disabled",
+    value: "disabled",
+    disabled: true
+  }) do %>
+    Disabled
+  <% end %>
+  
+</div>

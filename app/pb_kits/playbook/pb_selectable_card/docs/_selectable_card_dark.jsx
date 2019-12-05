@@ -1,13 +1,11 @@
 import React from "react"
 import SelectableCard from "../_selectable_card.jsx"
-import Icon from "../../pb_icon/_icon.jsx"
-
 
 class SelectableCardDark extends React.Component {
   state = {
-    pizza: true,
-    hamburgers: false,
-    apples: false
+    selected_with_icon_dark: true,
+    selected_without_icon_dark: true,
+    unselected_dark: false
   }
 
   handleSelect = event => {
@@ -18,46 +16,39 @@ class SelectableCardDark extends React.Component {
 
   render() {
     return (
-      <div>
-        <SelectableCard
-            dark
-            id="pizza"
-            name="pizza"
-            value="pizza"
-            checked={this.state.pizza}
-            onChange={this.handleSelect}
-            onSelect={event => console.log(`${event.target.name} checked!`)}
-            onUnselect={event => console.log(`${event.target.name} unchecked!`)}>
-          I love pizza
-        </SelectableCard>
-
-        <br></br>
+      <div class="pb--doc-demo-row">
 
         <SelectableCard
             dark
-            id="hamburgers"
-            name="hamburgers"
-            value="hamburgers"
-            checked={this.state.hamburgers}
-            onChange={this.handleSelect}
-            onSelect={event => console.log(`${event.target.name} checked!`)}
-            onUnselect={event => console.log(`${event.target.name} unchecked!`)}>
-          I love hamburgers
+            id="selected_with_icon_dark"
+            name="selected_with_icon_dark"
+            value="selected_with_icon_dark"
+            checked={this.state.selected_with_icon_dark}
+            onChange={this.handleSelect}>
+          {'Selected, with icon'}
         </SelectableCard>
-
-        <br></br>
 
         <SelectableCard
             dark
-            id="apples"
-            name="apples"
-            value="apples"
-            checked={this.state.apples}
-            onChange={this.handleSelect}
-            onSelect={event => console.log(`${event.target.name} checked!`)}
-            onUnselect={event => console.log(`${event.target.name} unchecked!`)}>
-          I love apples
+            id="selected_without_icon_dark"
+            name="selected_without_icon_dark"
+            value="selected_without_icon_dark"
+            icon={false}
+            checked={this.state.selected_without_icon_dark}
+            onChange={this.handleSelect}>
+          {'Selected, without icon'}
         </SelectableCard>
+
+        <SelectableCard
+            dark
+            id="unselected_dark"
+            name="unselected_dark"
+            value="unselected_dark"
+            checked={this.state.unselected_dark}
+            onChange={this.handleSelect}>
+          {'Unselected'}
+        </SelectableCard>
+
       </div>
     )
   }

@@ -1,25 +1,25 @@
-<%= pb_rails("selectable_card", props: {
-  id: "chrome",
-  name: "chrome",
-  value: "chrome",
-  checked: true
-}) do %>
-  <%= pb_rails("title", props: { text: "Browser", size: 4 }) %>
-  <%= pb_rails("body", props: { tag: "span"}) do %>
-    I enjoy using Chrome
-  <% end %>
-<% end %>
+<div class="pb--doc-demo-row">
 
-<br/>
-
-<%= pb_rails("selectable_card", props: {
-  id: "firefox",
-  name: "firefox",
-  value: "firefox",
-  checked: false
-}) do %>
-  <%= pb_rails("title", props: { text: "Browser", size: 4 }) %>
-  <%= pb_rails("body", props: { tag: "span"}) do %>
-    I enjoy using Firefox
+  <%= pb_rails("selectable_card", props: {
+    label_for: "block",
+    name: "block",
+    value: "block",
+    checked: true
+  }) do %>
+    <%= pb_rails("title", props: { text: "Block", size: 4 }) %>
+    <%= pb_rails("body", props: { tag: "span"}) do %>
+      This uses block
+    <% end %>
   <% end %>
-<% end %>
+
+  <br><br>
+
+  <%= pb_rails("selectable_card", props: {
+    label_for: "tag",
+    name: "tag",
+    value: "tag",
+    text: "This passes in text",
+    checked: false
+  }) %>
+
+</div>

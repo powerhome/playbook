@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 module Playbook
   module PbSelectableCard
     class SelectableCard
@@ -17,25 +15,30 @@ module Playbook
                   default: true
       prop :multi, type: Playbook::Props::Boolean,
                   default: true
+      prop :label_for, type: Playbook::Props::String
       prop :name
       prop :text
       prop :value
 
       def classname
-        generate_classname("pb_selectable_card_kit", dark_class, disabled_class)
+        generate_classname("pb_selectable_card_kit", checked_class, dark_class, enable_disabled_class)
       end
 
       def html_for
-        id.present? ? id : name
+        label_for.present? ? label_for : name
       end
 
-      private
+    private
+      
+      def checked_class
+        checked ? "checked" : nil 
+      end
 
       def dark_class
-        dark ?  "dark" : nil
+        dark ? "dark" : nil
       end
 
-      def disabled_class
+      def enable_disabled_class
         disabled ? "disabled" : "enabled"
       end
     end
