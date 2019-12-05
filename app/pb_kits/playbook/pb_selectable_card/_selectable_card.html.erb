@@ -15,9 +15,9 @@
     <% else %>
       <%= capture(&object.children) %>
     <% end %>
-    <% if object.icon%>
+    <% if object.icon %>
       <div class="pb_selectable_card_circle">
-        <%= pb_rails("icon", props: { icon: "check", fixed_width: true,}) %>
+        <%= pb_rails("icon", props: { icon: "check", fixed_width: true}) %>
       </div>
     <% end %>
   </label>
