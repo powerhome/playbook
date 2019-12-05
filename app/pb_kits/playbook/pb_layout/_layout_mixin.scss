@@ -36,6 +36,9 @@
       @if $color == 'dark' {
         background: $bg_dark;
         border-color: $border_dark;
+      } @else if $color == 'gradient' {
+        border-color: $border_dark;
+        @include gradient;
       } @else if $color == 'transparent' {
         border-color: transparent;
       } @else {
@@ -49,6 +52,9 @@
       @if $color == 'dark' {
         background: $bg_dark;
         border-color: $border_dark;
+      } @else if $color == 'gradient' {
+        border-color: $border_dark;
+        @include gradient;
       } @else if $color == 'transparent' {
         border-color: transparent;
       } @else {
