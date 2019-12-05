@@ -32,7 +32,7 @@ const Toggle = ({
   onUncheck = noop,
   size = 'md',
   ...props
-}: Props) =>{
+}: Props) => {
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
   const handleChange = event => {
