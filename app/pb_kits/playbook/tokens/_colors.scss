@@ -191,6 +191,14 @@ $product_colors: (
 
 $transparent: transparent;
 
+@mixin gradient($start: $gradient_start, $end: $gradient_end) {
+  background: $start;
+  background: -moz-linear-gradient(-45deg,  $start 0%, $end 100%);
+  background: -webkit-linear-gradient(-45deg,  $start 0%, $end 100%);
+  background: linear-gradient(135deg,  $start 0%, $end 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#{$start}', endColorstr='#{$end}', GradientType=1);
+}
+
 :export {
 
   @mixin export-colors($colors-list) {

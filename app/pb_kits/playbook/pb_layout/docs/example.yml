@@ -1,14 +1,8 @@
 examples:
   rails:
-  - layout_xs: Extra Small
-  - layout_sm: Small
-  - layout_md: Medium
-  - layout_lg: Large
-  - layout_xl: Extra Large
-  - layout_xs_dark: Extra Small Dark
-  - layout_sm_dark: Small Dark
-  - layout_md_dark: Medium Dark
-  - layout_lg_dark: Large Dark
-  - layout_xl_dark: Extra Large Dark
+  - layout_colors: Colors
+  - layout_transparent: Transparent
+  - layout_sizes: Sizes
+  - layout_sizes_dark: Sizes Dark
   react:
-  - layout_xs: Extra Small
+  - layout_default: Default
