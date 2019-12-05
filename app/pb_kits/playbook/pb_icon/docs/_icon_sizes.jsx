@@ -17,7 +17,7 @@ function IconSizes() {
           size="xs"
          /> <span>XSmall</span></p>
 
-      <br/><br/>
+      <br /><br />
 
       <p><Icon
           icon="user"

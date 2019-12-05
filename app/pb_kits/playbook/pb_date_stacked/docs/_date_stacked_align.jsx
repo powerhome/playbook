@@ -9,28 +9,28 @@ function DateStackedAlign() {
           size='sm'
       />
 
-      <br/>
+      <br />
 
       <DateStacked
           align='center'
           date={new Date()}
       />  
 
-      <br/>
+      <br />
 
       <DateStacked
           align='right'
           date={new Date()}
       />
       
-      <br/>
+      <br />
 
       <DateStacked
           date={new Date()}
           size='md'
       />
 
-      <br/>
+      <br />
 
       <DateStacked
           align='center'
@@ -38,7 +38,7 @@ function DateStackedAlign() {
           size='md'
       />  
 
-      <br/>
+      <br />
 
       <DateStacked
           align='right'

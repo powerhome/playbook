@@ -44,15 +44,15 @@ class TextInputDefault extends React.Component {
             type="number"
         />
 
-        <br/>
-        <br/>
+        <br />
+        <br />
 
         <Title>{`Event Handler Props`}</Title>
 
-        <br/>
+        <br />
         <Caption>{`onChange`}</Caption>
 
-        <br/>
+        <br />
 
         <TextInput
             label="First Name"

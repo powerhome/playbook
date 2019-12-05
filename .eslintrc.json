@@ -65,7 +65,8 @@
       "object-curly-spacing": [2, "always"],
       "keyword-spacing": 2,
       "comma-spacing": 2,
-      "arrow-spacing": 2
+      "arrow-spacing": 2,
+      "react/jsx-space-before-closing": 2
     },
     "settings": {
       "react": {

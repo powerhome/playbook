@@ -10,7 +10,7 @@ function IconAnimate() {
           size="2x"
           spin
          /> <span>Spin</span></p>
-      <br/>
+      <br />
       <p><Icon
           fixedWidth
           icon="spinner"

@@ -5,17 +5,17 @@ function CardShadow() {
   return (
     <div>
       <Card shadow='none'>{`Card content`}</Card>
-      <br/>
+      <br />
       <Card shadow='shallow'>{`Card content`}</Card>
-      <br/>
+      <br />
       <Card shadow='default'>{`Card content`}</Card>
-      <br/>
+      <br />
       <Card shadow='deep'>{`Card content`}</Card>
-      <br/>
+      <br />
       <Card shadow='deeper'>{`Card content`}</Card>
-      <br/>
+      <br />
       <Card shadow='deepest'>{`Card content`}</Card>
-      <br/>
+      <br />
     </div>
   )
 }

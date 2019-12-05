@@ -10,7 +10,7 @@ function DateStackedNotCurrentYear() {
           size='sm'
       />
 
-      <br/>
+      <br />
 
       <DateStacked
           date={new Date('20 Mar 2018')}

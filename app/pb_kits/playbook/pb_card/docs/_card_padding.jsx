@@ -5,17 +5,17 @@ function CardPadding() {
   return (
     <div>
       <Card padding='none'>{`Card content`}</Card>
-      <br/>
+      <br />
       <Card padding='xs'>{`Card content`}</Card>
-      <br/>
+      <br />
       <Card padding='sm'>{`Card content`}</Card>
-      <br/>
+      <br />
       <Card padding='md'>{`Card content`}</Card>
-      <br/>
+      <br />
       <Card padding='lg'>{`Card content`}</Card>
-      <br/>
+      <br />
       <Card padding='xl'>{`Card content`}</Card>
-      <br/>
+      <br />
     </div>
   )
 }

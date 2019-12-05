@@ -30,7 +30,7 @@ function MultipleUsersReverse() {
         ]}
       />
 
-      <br/><br/>
+      <br /><br />
 
       <MultipleUsers
           reverse

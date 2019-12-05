@@ -29,7 +29,7 @@ function MultipleUsersDefault() {
       ]}
       />
 
-      <br/><br/>
+      <br /><br />
 
       <MultipleUsers
           users={[

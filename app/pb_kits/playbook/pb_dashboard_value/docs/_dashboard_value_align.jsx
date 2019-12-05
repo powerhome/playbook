@@ -10,7 +10,7 @@ function DashboardValueAlign() {
           statValue={{ value: "1,428", unit: "appts" }}
       />
 
-      <br/><br/>
+      <br /><br />
 
       <DashboardValue
           align="center"
@@ -19,7 +19,7 @@ function DashboardValueAlign() {
           statValue={{ value: "1,428", unit: "appts" }}
       />
 
-      <br/><br/>
+      <br /><br />
 
       <DashboardValue
           align="right"

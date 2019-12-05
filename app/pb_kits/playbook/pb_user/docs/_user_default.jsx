@@ -34,7 +34,7 @@ function UserDefault() {
             orientation="horizontal"
         />
 
-        <br/>
+        <br />
 
         <User
             align="left"

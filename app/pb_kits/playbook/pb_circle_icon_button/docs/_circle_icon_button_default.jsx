@@ -8,21 +8,21 @@ const CircleIconButtonDefault = () => (
         variant="primary"
     />
 
-    <br/>
+    <br />
 
     <CircleIconButton
         icon="pen"
         variant="secondary"
     />
 
-    <br/>
+    <br />
 
     <CircleIconButton
         disabled
         icon="times"
     />
 
-    <br/>
+    <br />
 
     <CircleIconButton
         icon="user"

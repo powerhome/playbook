@@ -8,7 +8,7 @@ function CardHighlight() {
         {`Card content`}
       </Card>
 
-      <br/>
+      <br />
 
       <Card highlight={{ position: "top", color: "warning" }}>
         {`Card content`}

@@ -9,13 +9,13 @@ function HashtagDefault() {
           type="project"
           url="https://google.com"
       />
-      <br/>
+      <br />
       <Hashtag
           text="123456"
           type="home"
           url="https://google.com"
       />
-      <br/>
+      <br />
       <Hashtag
           text="654321"
           type="default"

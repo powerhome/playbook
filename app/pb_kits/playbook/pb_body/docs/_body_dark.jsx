@@ -18,8 +18,8 @@ function BodyDark() {
           dark
           text="I am a body kit (Lighter)"
       />
-      <br/>
-      <br/>
+      <br />
+      <br />
       <Body
           dark
           status="negative"

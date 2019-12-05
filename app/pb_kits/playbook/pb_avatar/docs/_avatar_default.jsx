@@ -10,28 +10,28 @@ function AvatarDefault() {
           size="xs"
           status="online"
       />
-      <br/>
+      <br />
       <Avatar
           imageUrl="https://randomuser.me/api/portraits/men/44.jpg"
           name="Terry Johnson"
           size="sm"
           status="online"
       />
-      <br/>
+      <br />
       <Avatar
           imageUrl="https://randomuser.me/api/portraits/men/44.jpg"
           name="Terry Johnson"
           size="md"
           status="away"
       />
-      <br/>
+      <br />
       <Avatar
           imageUrl="https://randomuser.me/api/portraits/men/44.jpg"
           name="Terry Johnson"
           size="lg"
           status="offline"
       />
-      <br/>
+      <br />
       <Avatar
           imageUrl="https://randomuser.me/api/portraits/men/44.jpg"
           name="Terry Johnson"

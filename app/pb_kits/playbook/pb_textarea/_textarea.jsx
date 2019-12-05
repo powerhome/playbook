@@ -47,7 +47,7 @@ const Textarea = (props: TextareaProps) => {
       />
       <If condition={children}>
         {children}
-      <Else/>
+      <Else />
         <textarea
             className={textarea_input}
             name={name}

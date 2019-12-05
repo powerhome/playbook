@@ -12,7 +12,7 @@ function DateStackedDefault() {
           size='sm'
       />
 
-      <br/>
+      <br />
 
       <DateStacked
           date={new Date()}

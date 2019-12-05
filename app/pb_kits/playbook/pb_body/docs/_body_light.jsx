@@ -13,8 +13,8 @@ function BodyLight() {
           color="lighter"
           text="I am a body kit (Lighter)"
       />
-      <br/>
-      <br/>
+      <br />
+      <br />
       <Body
           status="negative"
           text="I am a body kit (Status: negative)"

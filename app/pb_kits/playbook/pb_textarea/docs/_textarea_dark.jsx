@@ -10,7 +10,7 @@ function TextareaDark() {
           rows={4}
       />
 
-      <br/>
+      <br />
 
       <Textarea
           dark
@@ -18,7 +18,7 @@ function TextareaDark() {
           placeholder="Placeholder text"
       />
 
-      <br/>
+      <br />
 
       <Textarea
           dark

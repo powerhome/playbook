@@ -38,7 +38,7 @@ function UserWithTerritory() {
             title='Remodeling Consultant'
         />
 
-        <br/>
+        <br />
 
         <User
             align='left'

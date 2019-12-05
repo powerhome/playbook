@@ -6,42 +6,42 @@ function PillDefault() {
     <div>
       <Pill text="default" />
 
-      <br/><br/>
+      <br /><br />
 
       <Pill
           text="success"
           variant="success"
       />
 
-      <br/><br/>
+      <br /><br />
 
       <Pill
           text="error"
           variant="error"
       />
 
-      <br/><br/>
+      <br /><br />
 
       <Pill
           text="warning"
           variant="warning"
       />
 
-      <br/><br/>
+      <br /><br />
 
       <Pill
           text="info"
           variant="info"
       />
 
-      <br/><br/>
+      <br /><br />
 
       <Pill
           text="neutral"
           variant="neutral"
       />
 
-      <br/><br/>
+      <br /><br />
 
       <Pill
           text="primary"

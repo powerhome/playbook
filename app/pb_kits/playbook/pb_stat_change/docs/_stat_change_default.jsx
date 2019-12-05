@@ -9,14 +9,14 @@ function StatChangeDefault() {
           value="28.4"
       />
 
-      <br/>
+      <br />
 
       <StatChange
           change="decrease"
           value={6.1}
       />
 
-      <br/>
+      <br />
 
       <StatChange
           change="neutral"

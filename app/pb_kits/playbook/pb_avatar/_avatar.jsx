@@ -33,7 +33,7 @@ const image = function(imageUrl, name) {
 }
 
 const PbStatus = ({ size, status } : { size: String, status: String }) => (
-  <div className={`pb_online_status_kit_${status} size_${size}`}/>
+  <div className={`pb_online_status_kit_${status} size_${size}`} />
 )
 
 const Avatar = ({

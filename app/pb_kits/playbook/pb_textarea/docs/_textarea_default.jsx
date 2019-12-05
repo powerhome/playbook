@@ -9,14 +9,14 @@ function TextareaDefault() {
           rows={4}
       />
 
-      <br/>
+      <br />
 
       <Textarea
           label="Label"
           placeholder="Placeholder text"
       />
 
-      <br/>
+      <br />
 
       <Textarea
           label="Label"

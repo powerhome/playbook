@@ -5,7 +5,7 @@ function CardSelected() {
   return (
     <div>
       <Card>{`Card content`}</Card>
-      <br/>
+      <br />
       <Card selected>{`Card content`}</Card>
     </div>
   )

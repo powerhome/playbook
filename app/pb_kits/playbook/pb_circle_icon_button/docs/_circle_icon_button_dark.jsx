@@ -9,7 +9,7 @@ const CircleIconButtonDark = () => (
         variant="primary"
     />
 
-    <br/>
+    <br />
 
     <CircleIconButton
         dark
@@ -17,7 +17,7 @@ const CircleIconButtonDark = () => (
         variant="secondary"
     />
 
-    <br/>
+    <br />
 
     <CircleIconButton
         dark
@@ -25,7 +25,7 @@ const CircleIconButtonDark = () => (
         icon="times"
     />
 
-    <br/>
+    <br />
 
     <CircleIconButton
         dark

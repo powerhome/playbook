@@ -10,14 +10,14 @@ function HashtagDark() {
           type="project"
           url="https://google.com"
       />
-      <br/>
+      <br />
       <Hashtag
           dark
           text="123456"
           type="home"
           url="https://google.com"
       />
-      <br/>
+      <br />
       <Hashtag
           dark
           text="654321"
