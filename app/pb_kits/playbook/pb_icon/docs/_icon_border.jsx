@@ -4,9 +4,14 @@ import {Icon} from "../../"
 function IconBorder() {
   return (
     <div>
-      <Icon icon="user" size="2x" border fixedWidth />
+      <Icon
+          border
+          fixedWidth
+          icon="user"
+          size="2x"
+      />
     </div>
   )
 }
 
-export default IconBorder;
+export default IconBorder

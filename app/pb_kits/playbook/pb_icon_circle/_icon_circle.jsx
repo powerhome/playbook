@@ -1,7 +1,7 @@
 /* @flow */
 
-import React from 'react';
-import {Icon} from "../";
+import React from 'react'
+import {Icon} from "../"
 
 const IconCircleProps = {
   className: String,
@@ -9,7 +9,7 @@ const IconCircleProps = {
   id: String,
   size: String,
   variant: String,
-};
+}
 
 const IconCircle = ({
   icon,

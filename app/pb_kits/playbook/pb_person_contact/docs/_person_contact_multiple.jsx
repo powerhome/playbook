@@ -5,9 +5,7 @@ function PersonContactMultiple() {
   return (
     <div>
       <PersonContact
-        firstName="Harvey"
-        lastName="Walters"
-        contacts={[
+          contacts={[
           {
             contactType: "email",
             contactValue: "email@example.com",
@@ -20,18 +18,20 @@ function PersonContactMultiple() {
             contactValue: "3245627482",
           }
         ]}
+          firstName="Harvey"
+          lastName="Walters"
       />
       <PersonContact
-        firstName="Brenda"
-        lastName="Walters"
-        contacts={[
+          contacts={[
           {
             contactValue: "5555555555",
           }
         ]}
+          firstName="Brenda"
+          lastName="Walters"
       />
     </div>
   )
 }
 
-export default PersonContactMultiple;
+export default PersonContactMultiple

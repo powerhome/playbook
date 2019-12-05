@@ -14,4 +14,4 @@ function CheckboxDark() {
   )
 }
 
-export default CheckboxDark;
+export default CheckboxDark

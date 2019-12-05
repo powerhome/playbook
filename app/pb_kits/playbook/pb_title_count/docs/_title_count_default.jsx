@@ -7,4 +7,4 @@ function TitleCountDefault() {
   )
 }
 
-export default TitleCountDefault;
+export default TitleCountDefault

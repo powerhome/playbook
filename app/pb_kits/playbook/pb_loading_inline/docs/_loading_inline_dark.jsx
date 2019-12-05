@@ -5,10 +5,16 @@ function LoadingInlineDark() {
   return (
     <div>
       <LoadingInline dark />
-      <LoadingInline dark align="center" />
-      <LoadingInline dark align="right" />
+      <LoadingInline
+          align="center"
+          dark
+      />
+      <LoadingInline
+          align="right"
+          dark
+      />
     </div>
   )
 }
 
-export default LoadingInlineDark;
+export default LoadingInlineDark

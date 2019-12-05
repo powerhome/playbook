@@ -1,7 +1,7 @@
 /* @flow */
 
-import React from 'react';
-import classnames from 'classnames';
+import React from 'react'
+import classnames from 'classnames'
 
 import {
   Title,
@@ -49,7 +49,11 @@ const User = (props: UserProps) => {
   const print_avatar = (avatar, avatarUrl) => {
     if (avatar == true | avatarUrl != null ) {
       return (
-        <Avatar name={name} size={avatarSizes[size]} image_url={avatarUrl}/>
+        <Avatar
+            image_url={avatarUrl}
+            name={name}
+            size={avatarSizes[size]}
+        />
       )
     }
   }
@@ -71,11 +75,14 @@ const User = (props: UserProps) => {
     <div className={`pb_user_kit_${align}_${orientation}_${size}`}>
       {print_avatar(avatar, avatarUrl)}
       <div className="content_wrapper">
-        <Title size={userSizes[size]} text={`${name}`}/>
+        <Title
+            size={userSizes[size]}
+            text={`${name}`}
+        />
         {print_details(territory)}
       </div>
     </div> 
   )
 }
 
-export default User;
+export default User

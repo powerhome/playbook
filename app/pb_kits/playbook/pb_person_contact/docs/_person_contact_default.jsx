@@ -5,9 +5,7 @@ function PersonContactDefault() {
   return (
     <div>
       <PersonContact
-        firstName="Pauline"
-        lastName="Smith"
-        contacts={[
+          contacts={[
           {
             contactType: "email",
             contactValue: "email@example.com",
@@ -20,9 +18,11 @@ function PersonContactDefault() {
             contactValue: "3245627482",
           }
         ]}
+          firstName="Pauline"
+          lastName="Smith"
       />
     </div>
   )
 }
 
-export default PersonContactDefault;
+export default PersonContactDefault

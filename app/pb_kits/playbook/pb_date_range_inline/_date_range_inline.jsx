@@ -36,14 +36,26 @@ const DateRangeInline = ({
   startDate
 }: DateRangeInlineProps) => (
   <div>
-    <Body tag="span" color="light">
-      <Icon icon="calendar-alt" fixedWidth="true" />
+    <Body
+        color="light"
+        tag="span"
+    >
+      <Icon
+          fixedWidth="true"
+          icon="calendar-alt"
+      />
     </Body>
     <Body tag="span">
       <time dateTime={dateTimeIso(startDate)} >{` ${dateTimestamp(startDate)} `}</time>
     </Body>
-    <Body tag="span" color="light">
-      <Icon icon="long-arrow-right" fixedWidth="true" />
+    <Body
+        color="light"
+        tag="span"
+    >
+      <Icon
+          fixedWidth="true"
+          icon="long-arrow-right"
+      />
     </Body>
     <Body tag="span">
       <time dateTime={dateTimeIso(endDate)} >{` ${dateTimestamp(endDate)} `}</time>

@@ -50,13 +50,17 @@ const Toggle = ({
   })
 
   return (
-    <div {...ariaProps} {...dataProps} className={css}>
+    <div
+        {...ariaProps}
+        {...dataProps}
+        className={css}
+    >
       <label className="pb_toggle_wrapper">
         <input
             {...props}
-            type="checkbox"
             checked={checked}
             onChange={handleChange}
+            type="checkbox"
         />
 
         <div className="pb_toggle_control" />

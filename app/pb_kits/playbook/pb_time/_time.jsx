@@ -1,10 +1,10 @@
-import React from 'react';
-import PropTypes from "prop-types";
+import React from 'react'
+import PropTypes from "prop-types"
 
 const propTypes = {
   className: PropTypes.string,
   id: PropTypes.string
-};
+}
 
 class Time extends React.Component {
   render() {
@@ -16,6 +16,6 @@ class Time extends React.Component {
   }
 }
 
-Time.propTypes = propTypes;
+Time.propTypes = propTypes
 
-export default Time;
+export default Time

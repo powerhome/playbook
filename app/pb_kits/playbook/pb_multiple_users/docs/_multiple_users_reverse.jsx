@@ -5,8 +5,8 @@ function MultipleUsersReverse() {
   return (
     <div>
       <MultipleUsers
-        reverse
-        users={[
+          reverse
+          users={[
           {
             name: "Patrick Welch",
             image_url: "https://randomuser.me/api/portraits/men/9.jpg",
@@ -27,13 +27,14 @@ function MultipleUsersReverse() {
             name: "Alicia Cooper",
             image_url: "https://randomuser.me/api/portraits/women/46.jpg",
           }
-        ]} />
+        ]}
+      />
 
       <br/><br/>
 
       <MultipleUsers
-        reverse
-        users={[
+          reverse
+          users={[
           {
             name: "Shawn Palmer",
             image_url: "https://randomuser.me/api/portraits/men/93.jpg",
@@ -42,7 +43,8 @@ function MultipleUsersReverse() {
             name: "Andrew Murray",
             image_url: "https://randomuser.me/api/portraits/men/75.jpg",
           }
-        ]} />
+        ]}
+      />
     </div>
   )
 }

@@ -7,4 +7,4 @@ function StatValueDefault() {
   )
 }
 
-export default StatValueDefault;
+export default StatValueDefault

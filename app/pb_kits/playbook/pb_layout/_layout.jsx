@@ -1,5 +1,5 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
+import React, { Component } from "react"
+import PropTypes from "prop-types"
 
 const propTypes = {
   position: PropTypes.oneOf(["left", "right"]),
@@ -12,7 +12,7 @@ const propTypes = {
       PropTypes.arrayOf(PropTypes.node),
       PropTypes.node
   ])
-};
+}
 
 const defaultProps = {
   position: "left",
@@ -21,7 +21,7 @@ const defaultProps = {
   collapse: "md",
   full: false,
   dark: false
-};
+}
 
 class Layout extends Component {
   render() {
@@ -33,7 +33,7 @@ class Layout extends Component {
       full,
       dark,
       children
-    } = this.props;
+    } = this.props
     const dark_class = dark === true ? "_dark" : ""
     const transparent_class = transparent === true ? "_transparent" : ""
     const full_class = full === true ? " full" : ""
@@ -44,11 +44,11 @@ class Layout extends Component {
       <div className={`pb_layout${size_class}${position_class}${dark_class}${transparent_class}${full_class}${collapse_class}`}>
         {children}
       </div>
-    );
+    )
   }
 }
 
-Layout.propTypes = propTypes;
-Layout.defaultProps = defaultProps;
+Layout.propTypes = propTypes
+Layout.defaultProps = defaultProps
 
-export default Layout;
+export default Layout

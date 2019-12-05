@@ -44,7 +44,8 @@ class TextInput extends React.Component {
       <div className='pb_text_input_kit'>
         <Caption text={label} />
         <div className='text_input_wrapper'>
-          <input className={css}
+          <input
+              className={css}
               name={name}
               onChange={onChange}
               placeholder={placeholder}

@@ -32,20 +32,24 @@ const FixedConfirmationToast = ({
 const icon = (function(status) {
   switch(status) {
     case "success":
-      return "check";
+      return "check"
     case "error":
-      return "exclamation-triangle";
+      return "exclamation-triangle"
     case "neutral":
-      return "info-circle";
+      return "info-circle"
     default:
-      return null;
+      return null
   }
 })(status)
 
 const displayIcon = function(icon) {
   if (icon) {
     return (
-      <Icon icon={icon} fixed_width={true} className="pb_icon"/>
+      <Icon
+          className="pb_icon"
+          fixed_width
+          icon={icon}
+      />
     )
   }
 }
@@ -53,7 +57,11 @@ const displayIcon = function(icon) {
 return (
   <div className={css}>
     {displayIcon(icon)}
-    <Title size={4} className="pb_fixed_confirmation_toast_text" text={text} />
+    <Title
+        className="pb_fixed_confirmation_toast_text"
+        size={4}
+        text={text}
+    />
     </div>
   )
 }

@@ -1,4 +1,4 @@
-import Table from "../pb_table/_table.jsx";
+import Table from "../pb_table/_table.jsx"
 
 // Examples
 // import TableSm from "../pb_table/docs/_table_sm.jsx";
@@ -11,6 +11,6 @@ import Table from "../pb_table/_table.jsx";
 // import TableSingleLine from "../pb_table/docs/_table_single_line.jsx";
 // import TableMultiline from "../pb_table/docs/_table_multiline.jsx";
 
-import WebpackerReact from "webpacker-react";
+import WebpackerReact from "webpacker-react"
 
-WebpackerReact.setup({ Table });
+WebpackerReact.setup({ Table })

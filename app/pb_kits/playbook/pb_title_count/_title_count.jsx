@@ -1,10 +1,10 @@
-import React from 'react';
-import PropTypes from "prop-types";
+import React from 'react'
+import PropTypes from "prop-types"
 
 const propTypes = {
   className: PropTypes.string,
   id: PropTypes.string
-};
+}
 
 class TitleCount extends React.Component {
   render() {
@@ -16,6 +16,6 @@ class TitleCount extends React.Component {
   }
 }
 
-TitleCount.propTypes = propTypes;
+TitleCount.propTypes = propTypes
 
-export default TitleCount;
+export default TitleCount

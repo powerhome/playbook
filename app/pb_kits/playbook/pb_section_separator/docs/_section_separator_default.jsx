@@ -7,4 +7,4 @@ function SectionSeparatorDefault() {
   )
 }
 
-export default SectionSeparatorDefault;
+export default SectionSeparatorDefault

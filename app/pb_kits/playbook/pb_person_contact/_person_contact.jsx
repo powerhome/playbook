@@ -24,11 +24,11 @@ const contactsArray = ({contacts=[]}: PersonContactProps) => {
   return contacts.map((contactObject, index) => {
     return (
       <Contact
-        contactType={contactObject.contactType}
-        contactValue={contactObject.contactValue}
-        contactDetail={contactObject.contactDetail}
+          contactDetail={contactObject.contactDetail}
+          contactType={contactObject.contactType}
+          contactValue={contactObject.contactValue}
       />
-    );
+    )
   })
 }
 
@@ -45,7 +45,10 @@ const PersonContact = ({
 
   return (
     <div className={classnames('pb_person_contact_kit', className)}>
-      <Person firstName={firstName} lastName={lastName} />
+      <Person
+          firstName={firstName}
+          lastName={lastName}
+      />
       {contactKits}
     </div>
   )

@@ -31,4 +31,4 @@ function DashboardValueAlign() {
   )
 }
 
-export default DashboardValueAlign;
+export default DashboardValueAlign

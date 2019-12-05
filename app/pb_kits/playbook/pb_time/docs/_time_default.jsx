@@ -7,4 +7,4 @@ function TimeDefault() {
   )
 }
 
-export default TimeDefault;
+export default TimeDefault

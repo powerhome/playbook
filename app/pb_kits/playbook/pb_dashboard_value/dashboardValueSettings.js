@@ -1,5 +1,5 @@
-import colors from "../tokens/_colors.scss";
-import typography from "../tokens/_typography.scss";
+import colors from "../tokens/_colors.scss"
+import typography from "../tokens/_typography.scss"
 
 const pbIndicator = {
   title: {
@@ -42,6 +42,6 @@ const pbIndicator = {
       micro: typography.text_small
     }
   }
-};
+}
 
-export default pbIndicator;
+export default pbIndicator

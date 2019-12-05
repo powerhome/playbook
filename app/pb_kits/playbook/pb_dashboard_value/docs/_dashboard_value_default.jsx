@@ -29,4 +29,4 @@ function DashboardValueDefault() {
   )
 }
 
-export default DashboardValueDefault;
+export default DashboardValueDefault

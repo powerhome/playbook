@@ -1,4 +1,4 @@
-import Contact from "../pb_contact/_contact.jsx";
+import Contact from "../pb_contact/_contact.jsx"
 
-import WebpackerReact from "webpacker-react";
-WebpackerReact.setup({ Contact });
+import WebpackerReact from "webpacker-react"
+WebpackerReact.setup({ Contact })

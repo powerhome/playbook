@@ -34,7 +34,11 @@ const Hashtag = ({
   return (
     <div className={`pb_hashtag_kit_${darkClass}`}>
       <a href={url}>
-        <Badge variant="primary" text={HashType[type] + text} dark={dark}></Badge>
+        <Badge
+            dark={dark}
+            text={HashType[type] + text}
+            variant="primary"
+        />
       </a>
     </div>
   )

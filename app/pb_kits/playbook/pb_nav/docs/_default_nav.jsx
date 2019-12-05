@@ -8,4 +8,4 @@ function DefaultNav() {
   )
 }
 
-export default DefaultNav;
+export default DefaultNav

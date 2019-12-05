@@ -3,8 +3,11 @@ import StatValue from "../_stat_value.jsx"
 
 function StatValueUnit() {
   return (
-    <StatValue value="5,294" unit="appt" />
+    <StatValue
+        unit="appt"
+        value="5,294"
+    />
   )
 }
 
-export default StatValueUnit;
+export default StatValueUnit

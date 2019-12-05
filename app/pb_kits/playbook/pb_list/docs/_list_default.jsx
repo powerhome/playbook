@@ -11,4 +11,4 @@ function ListDefault() {
   )
 }
 
-export default ListDefault;
+export default ListDefault

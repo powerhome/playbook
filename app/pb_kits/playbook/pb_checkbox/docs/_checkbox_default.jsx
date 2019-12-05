@@ -13,4 +13,4 @@ function CheckboxDefault() {
   )
 }
 
-export default CheckboxDefault;
+export default CheckboxDefault

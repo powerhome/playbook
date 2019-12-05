@@ -1,10 +1,10 @@
-import React from 'react';
-import PropTypes from "prop-types";
+import React from 'react'
+import PropTypes from "prop-types"
 
 const propTypes = {
   className: PropTypes.string,
   id: PropTypes.string
-};
+}
 
 class LabelPill extends React.Component {
   render() {
@@ -16,6 +16,6 @@ class LabelPill extends React.Component {
   }
 }
 
-LabelPill.propTypes = propTypes;
+LabelPill.propTypes = propTypes
 
-export default LabelPill;
+export default LabelPill

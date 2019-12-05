@@ -23,8 +23,8 @@ const barValues = (normalizedValues) => {
   return normalizedValues.map((value,i) => {
     return(
       <div
-          key={i}
           className={`pb_distribution_width`}
+          key={i}
           style={{width:`${value*100/widthSum}%`}}
       />
     )

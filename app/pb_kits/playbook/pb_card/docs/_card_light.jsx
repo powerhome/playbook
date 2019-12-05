@@ -9,4 +9,4 @@ function CardLight() {
   )
 }
 
-export default CardLight;
+export default CardLight

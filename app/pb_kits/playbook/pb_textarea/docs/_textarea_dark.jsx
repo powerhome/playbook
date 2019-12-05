@@ -4,15 +4,29 @@ import {Textarea} from "../../"
 function TextareaDark() {
   return (
     <div>
-      <Textarea label="Label"rows={4} dark/>
+      <Textarea
+          dark
+          label="Label"
+          rows={4}
+      />
 
       <br/>
 
-      <Textarea label="Label" placeholder="Placeholder text" dark/>
+      <Textarea
+          dark
+          label="Label"
+          placeholder="Placeholder text"
+      />
 
       <br/>
 
-      <Textarea label="Label" name="comment" placeholder="Placeholder text" value="Default value text" dark/>
+      <Textarea
+          dark
+          label="Label"
+          name="comment"
+          placeholder="Placeholder text"
+          value="Default value text"
+      />
       
     </div>
   )

@@ -4,8 +4,8 @@ import {Button} from '../../'
 const ButtonFullWidth = () => (
     <div>
         <Button
-                text="Button Full Width"
-                fullWidth
+            fullWidth
+            text="Button Full Width"
         />
     </div>
 )

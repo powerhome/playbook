@@ -39,9 +39,9 @@ const DateYearStacked = ({
   return (
     <div className={css}>
       <Title
-        dark={dark}
-        size={4}
-        text={`${dateTimestamp.toDay()} ${dateTimestamp.toMonth().toUpperCase()}`}
+          dark={dark}
+          size={4}
+          text={`${dateTimestamp.toDay()} ${dateTimestamp.toMonth().toUpperCase()}`}
       />
       <Body color="light">{ dateTimestamp.toYear() }</Body>
     </div>

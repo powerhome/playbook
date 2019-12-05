@@ -1,10 +1,10 @@
-import React from 'react';
-import PropTypes from "prop-types";
+import React from 'react'
+import PropTypes from "prop-types"
 
 const propTypes = {
   className: PropTypes.string,
   id: PropTypes.string
-};
+}
 
 class UserBadge extends React.Component {
   render() {
@@ -16,6 +16,6 @@ class UserBadge extends React.Component {
   }
 }
 
-UserBadge.propTypes = propTypes;
+UserBadge.propTypes = propTypes
 
-export default UserBadge;
+export default UserBadge

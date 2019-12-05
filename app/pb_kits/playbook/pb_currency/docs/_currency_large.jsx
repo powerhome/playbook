@@ -25,4 +25,4 @@ function CurrencyDefault() {
   )
 }
 
-export default CurrencyDefault;
+export default CurrencyDefault

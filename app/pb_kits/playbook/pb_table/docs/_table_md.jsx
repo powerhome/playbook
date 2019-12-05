@@ -3,7 +3,10 @@ import {Table} from "../../"
 
 function TableMd() {
   return (
-    <Table size="md" container={false}>
+    <Table
+        container={false}
+        size="md"
+    >
       <thead>
         <tr>
           <th>{`Column 1`}</th>
@@ -40,4 +43,4 @@ function TableMd() {
   )
 }
 
-export default TableMd;
+export default TableMd

@@ -15,4 +15,4 @@ return (
 )
 }
 
-export default ProgressPillsDefault;
+export default ProgressPillsDefault

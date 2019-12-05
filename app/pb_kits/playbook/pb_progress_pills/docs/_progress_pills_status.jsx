@@ -8,8 +8,8 @@ return (
   <div>
     <ProgressPills
         active={2}
-        title="Status:"
         steps={3}
+        title="Status:"
         value="Orientation"
     />
 
@@ -17,4 +17,4 @@ return (
 )
 }
 
-export default ProgressPillsStatus;
+export default ProgressPillsStatus

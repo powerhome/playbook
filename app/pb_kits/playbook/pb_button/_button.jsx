@@ -97,22 +97,24 @@ const Button = (props: ButtonPropTypes) => {
   return (
     <If condition={link !== null}>
       <a
-        {...buttonAria}
-        className={css}
-        href={link}
-        id={id}
-        target={newWindow ? '_blank' : null}>
+          {...buttonAria}
+          className={css}
+          href={link}
+          id={id}
+          target={newWindow ? '_blank' : null}
+      >
         <If condition={loading}>{loadingIcon}</If>
         {content}
       </a>
       <Else />
       <button
-        {...buttonAria}
-        className={css}
-        id={id}
-        onClick={onClick}
-        type={htmlType}
-        value={value}>
+          {...buttonAria}
+          className={css}
+          id={id}
+          onClick={onClick}
+          type={htmlType}
+          value={value}
+      >
         <If condition={loading}>{loadingIcon}</If>
         {content}
       </button>

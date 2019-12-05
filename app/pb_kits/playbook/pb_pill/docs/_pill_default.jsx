@@ -8,29 +8,47 @@ function PillDefault() {
 
       <br/><br/>
 
-      <Pill text="success" variant="success" />
+      <Pill
+          text="success"
+          variant="success"
+      />
 
       <br/><br/>
 
-      <Pill text="error" variant="error" />
+      <Pill
+          text="error"
+          variant="error"
+      />
 
       <br/><br/>
 
-      <Pill text="warning" variant="warning" />
+      <Pill
+          text="warning"
+          variant="warning"
+      />
 
       <br/><br/>
 
-      <Pill text="info" variant="info" />
+      <Pill
+          text="info"
+          variant="info"
+      />
 
       <br/><br/>
 
-      <Pill text="neutral" variant="neutral" />
+      <Pill
+          text="neutral"
+          variant="neutral"
+      />
 
       <br/><br/>
 
-      <Pill text="primary" variant="primary" />
+      <Pill
+          text="primary"
+          variant="primary"
+      />
     </div>
   )
 }
 
-export default PillDefault;
+export default PillDefault

@@ -1,4 +1,4 @@
-import Timestamp from "../pb_timestamp/_timestamp.jsx";
+import Timestamp from "../pb_timestamp/_timestamp.jsx"
 
-import WebpackerReact from "webpacker-react";
-WebpackerReact.setup({ Timestamp });
+import WebpackerReact from "webpacker-react"
+WebpackerReact.setup({ Timestamp })

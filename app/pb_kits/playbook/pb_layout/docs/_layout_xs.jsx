@@ -5,11 +5,15 @@ import Body from "../_body.jsx"
 
 function LayoutXs() {
   return (
-    <Layout position="left" size="xs" collapse="sm">
+    <Layout
+        collapse="sm"
+        position="left"
+        size="xs"
+    >
       <Sidebar>{`Side`}</Sidebar>
       <Body>{`Body`}</Body>
     </Layout>
   )
 }
 
-export default LayoutXs;
+export default LayoutXs

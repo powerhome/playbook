@@ -33,22 +33,22 @@ const StatChange = (props: StatChangeProps) => {
   const status = (function(change) {
     switch(change) {
       case 'increase':
-        return 'positive';
+        return 'positive'
       case 'decrease':
-        return 'negative';
+        return 'negative'
       default:
-        return 'neutral';
+        return 'neutral'
     }
   })(change)
 
   const icon = (function(change) {
     switch(change) {
       case 'increase':
-        return 'arrow-up';
+        return 'arrow-up'
       case 'decrease':
-        return 'arrow-down';
+        return 'arrow-down'
       default:
-        return null;
+        return null
     }
   })(change)
 
@@ -56,7 +56,10 @@ const StatChange = (props: StatChangeProps) => {
     if (icon) {
       return (
         <span>
-          <Icon icon={icon} fixed_width={true} />
+          <Icon
+              fixed_width
+              icon={icon}
+          />
           &nbsp;
         </span>
       )
@@ -75,7 +78,10 @@ const StatChange = (props: StatChangeProps) => {
   }
 
   return (
-    <div id={id} className={classnames(statChangeCSS(props, status), className)}>
+    <div
+        className={classnames(statChangeCSS(props, status), className)}
+        id={id}
+    >
       {displayValue(status, value)}
     </div>
   )

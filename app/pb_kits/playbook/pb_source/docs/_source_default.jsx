@@ -7,4 +7,4 @@ function SourceDefault() {
   )
 }
 
-export default SourceDefault;
+export default SourceDefault

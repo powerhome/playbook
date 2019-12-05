@@ -28,7 +28,10 @@ const Badge = ({
   ])
 
   return (
-    <div id={id} className={css}>
+    <div
+        className={css}
+        id={id}
+    >
         <span>{text}</span>
     </div>
   )

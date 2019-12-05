@@ -7,4 +7,4 @@ function UserBadgeDefault() {
   )
 }
 
-export default UserBadgeDefault;
+export default UserBadgeDefault

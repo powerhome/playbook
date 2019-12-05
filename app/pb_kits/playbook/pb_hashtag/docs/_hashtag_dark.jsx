@@ -28,4 +28,4 @@ function HashtagDark() {
   )
 }
 
-export default HashtagDark;
+export default HashtagDark

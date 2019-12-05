@@ -4,9 +4,12 @@ import {Icon} from "../../"
 function IconDefaultDark() {
   return (
     <div>
-      <Icon icon="user" fixedWidth />
+      <Icon
+          fixedWidth
+          icon="user"
+      />
     </div>
   )
 }
 
-export default IconDefaultDark;
+export default IconDefaultDark

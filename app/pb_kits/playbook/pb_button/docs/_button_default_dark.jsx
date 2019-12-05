@@ -3,23 +3,24 @@ import {Button} from '../../'
 
 const ButtonDefaultDark = () => (
     <div>
-        <Button text="Button Primary" 
-                dark
+        <Button
+            dark 
+            text="Button Primary"
         />
         <Button
-                text="Button Secondary"
-                variant="secondary"
-                dark
+            dark
+            text="Button Secondary"
+            variant="secondary"
         />
         <Button
-                text="Button Link"
-                variant="link"
-                dark
+            dark
+            text="Button Link"
+            variant="link"
         />
         <Button
-                text="Button Disabled"
-                disabled
-                dark
+            dark
+            disabled
+            text="Button Disabled"
         />
     </div>
 )

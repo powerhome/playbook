@@ -6,19 +6,19 @@ function DistributionBarDefault() {
     <React.Fragment>
       <div>
         <DistributionBar
-          widths={[1,2,3,4,5,3,3,7]}
+            widths={[1,2,3,4,5,3,3,7]}
         />
       </div>
       <br/>
       <br/>
       <div>
         <DistributionBar
-          size='sm'
-          widths={[1,2,3,4,5,3,3,7]}
+            size='sm'
+            widths={[1,2,3,4,5,3,3,7]}
         />
       </div>
     </React.Fragment>
   )
 }
 
-export default DistributionBarDefault;
+export default DistributionBarDefault

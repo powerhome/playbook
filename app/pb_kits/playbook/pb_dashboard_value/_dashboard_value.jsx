@@ -45,15 +45,24 @@ const DashboardValue = (props: DashboardValueProps) => {
   } = props
 
   return (
-    <div id={id} className={classnames(dashboardValueCSS(props), className)}>
+    <div
+        className={classnames(dashboardValueCSS(props), className)}
+        id={id}
+    >
       <If condition={statLabel}>
         <Body color="light">{statLabel}</Body>
       </If>
       <If condition={statValue}>
-        <StatValue value={statValue.value} unit={statValue.unit} />
+        <StatValue
+            unit={statValue.unit}
+            value={statValue.value}
+        />
       </If>
       <If condition={statChange}>
-        <StatChange change={statChange.change} value={statChange.value} />
+        <StatChange
+            change={statChange.change}
+            value={statChange.value}
+        />
       </If>
     </div>
   )

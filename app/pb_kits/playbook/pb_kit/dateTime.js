@@ -40,6 +40,6 @@ export default class DateTime {
   }
 
   toIso() {
-    return this.value.toISOString();
+    return this.value.toISOString()
   }
 }

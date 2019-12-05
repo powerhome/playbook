@@ -43,4 +43,4 @@ function TableContainerDark() {
   )
 }
 
-export default TableContainerDark;
+export default TableContainerDark

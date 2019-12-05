@@ -40,10 +40,11 @@ const MultipleUsers = ({
     return users.slice(0, displayCount()).map((userObject, index) => {
       return (
         <Avatar
-          {...userObject}
-          key={index}
-          size="xs"
-          className="pb_multiple_users_item" />
+            {...userObject}
+            className="pb_multiple_users_item"
+            key={index}
+            size="xs"
+        />
       )
     })
   }
@@ -59,7 +60,10 @@ const MultipleUsers = ({
   }
 
   return (
-    <div id={id} className={classnames(multipleUsersCss(), className)}>
+    <div
+        className={classnames(multipleUsersCss(), className)}
+        id={id}
+    >
       {multipleUsers()}
       {plusUsers()}
     </div>

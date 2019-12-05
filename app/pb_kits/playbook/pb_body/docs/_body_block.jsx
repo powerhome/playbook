@@ -11,4 +11,4 @@ function BodyBlock() {
   )
 }
 
-export default BodyBlock;
+export default BodyBlock

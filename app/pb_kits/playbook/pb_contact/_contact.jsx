@@ -34,8 +34,12 @@ const Contact = ({
   const formatDetail = (contactDetail) => {
     if (contactDetail !== undefined) {
       return (
-        <Caption size="xs" text={contactDetail} tag="span" />
-      );
+        <Caption
+            size="xs"
+            tag="span"
+            text={contactDetail}
+        />
+      )
     } else {
       return contactDetail
     }
@@ -60,25 +64,33 @@ const Contact = ({
   const contactTypeIcon = (function(contactType) {
     switch(contactType) {
       case 'cell':
-        return 'mobile';
+        return 'mobile'
       case 'home':
-        return 'phone';
+        return 'phone'
       case 'work':
-        return 'phone-office';
+        return 'phone-office'
       case 'email':
-        return 'envelope';
+        return 'envelope'
       case 'wrong number' :
-        return 'slash-phone';
+        return 'slash-phone'
       default:
-        return 'phone';
+        return 'phone'
     }
   })(contactType)
 
 
   return (
     <div className={css}>
-      <Body dark={dark} color="light" tag="span" className="pb_contact_kit" >
-        <Icon icon={contactTypeIcon} fixedWidth="true" />
+      <Body
+          className="pb_contact_kit"
+          color="light"
+          dark={dark}
+          tag="span"
+      >
+        <Icon
+            fixedWidth="true"
+            icon={contactTypeIcon}
+        />
         {` ${formatContact(contactValue, contactType)} `}{formatDetail(contactDetail)}
       </Body>
     </div>

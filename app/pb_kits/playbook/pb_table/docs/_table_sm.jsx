@@ -3,7 +3,10 @@ import {Table} from "../../"
 
 function TableSm() {
   return (
-    <Table size="sm" container={false}>
+    <Table
+        container={false}
+        size="sm"
+    >
       <thead>
         <tr>
           <th>{`Column 1`}</th>
@@ -40,4 +43,4 @@ function TableSm() {
   )
 }
 
-export default TableSm;
+export default TableSm

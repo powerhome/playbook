@@ -1,4 +1,4 @@
-import Person from "../pb_person/_person.jsx";
+import Person from "../pb_person/_person.jsx"
 
-import WebpackerReact from "webpacker-react";
-WebpackerReact.setup({ Person });
+import WebpackerReact from "webpacker-react"
+WebpackerReact.setup({ Person })

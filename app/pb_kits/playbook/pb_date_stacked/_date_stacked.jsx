@@ -65,14 +65,14 @@ const DateStacked = (props: DateStackedProps) => {
 
   return (
     <div className={css}>
-      <div class="pb_date_stacked_day_month">
+      <div className="pb_date_stacked_day_month">
         <Caption
-          text={`${dateTimestamp.toMonth().toUpperCase()}`}
+            text={`${dateTimestamp.toMonth().toUpperCase()}`}
         />
         <Title
-          dark={dark}
-          size={sizes[size]}
-          text={`${dateTimestamp.toDay()}`}
+            dark={dark}
+            size={sizes[size]}
+            text={`${dateTimestamp.toDay()}`}
         />
       </div>
         {print_year(date)}

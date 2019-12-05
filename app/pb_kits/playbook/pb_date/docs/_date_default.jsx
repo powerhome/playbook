@@ -9,4 +9,4 @@ function DateDefault() {
   )
 }
 
-export default DateDefault;
+export default DateDefault

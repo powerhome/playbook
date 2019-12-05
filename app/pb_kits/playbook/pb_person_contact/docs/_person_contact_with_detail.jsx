@@ -5,9 +5,7 @@ function PersonContactWithDetail() {
   return (
     <div>
       <PersonContact
-        firstName="Harvey"
-        lastName="Walters"
-        contacts={[
+          contacts={[
           {
             contactType: "email",
             contactValue: "email@example.com",
@@ -22,9 +20,11 @@ function PersonContactWithDetail() {
             contactDetail: "Work",
           }
         ]}
+          firstName="Harvey"
+          lastName="Walters"
       />
     </div>
   )
 }
 
-export default PersonContactWithDetail;
+export default PersonContactWithDetail

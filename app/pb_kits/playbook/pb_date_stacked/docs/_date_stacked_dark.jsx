@@ -5,20 +5,20 @@ function DateStackedDark() {
   return (
     <div>
       <DateStacked 
-        date={new Date()}
-        size='sm'
-        dark={true}
+          dark
+          date={new Date()}
+          size='sm'
       />
 
-      <br></br>
+      <br />
 
       <DateStacked 
-        date={new Date()}
-        size='md'
-        dark={true}
+          dark
+          date={new Date()}
+          size='md'
       />
     </div>
   )
 }
 
-export default DateStackedDark;
+export default DateStackedDark

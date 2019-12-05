@@ -4,7 +4,8 @@ import {MultipleUsers} from "../../"
 function MultipleUsersDefault() {
   return (
     <div>
-      <MultipleUsers users={[
+      <MultipleUsers
+          users={[
         {
           name: "Patrick Welch",
           image_url: "https://randomuser.me/api/portraits/men/9.jpg",
@@ -25,11 +26,13 @@ function MultipleUsersDefault() {
           name: "Alicia Cooper",
           image_url: "https://randomuser.me/api/portraits/women/46.jpg",
         }
-      ]} />
+      ]}
+      />
 
       <br/><br/>
 
-      <MultipleUsers users={[
+      <MultipleUsers
+          users={[
         {
           name: "Shawn Palmer",
           image_url: "https://randomuser.me/api/portraits/men/93.jpg",
@@ -38,7 +41,8 @@ function MultipleUsersDefault() {
           name: "Andrew Murray",
           image_url: "https://randomuser.me/api/portraits/men/75.jpg",
         }
-      ]} />
+      ]}
+      />
     </div>
   )
 }

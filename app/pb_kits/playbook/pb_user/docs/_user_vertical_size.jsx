@@ -5,33 +5,33 @@ function UserVerticalSize() {
   return (
     <div>
       <User
-          name='Anna Black'
-          title='Remodeling Consultant'
-          orientation='vertical'
           align='center'
+          avatarUrl='https://randomuser.me/api/portraits/women/44.jpg'
+          name='Anna Black'
+          orientation='vertical'
           size='sm'
-          avatarUrl='https://randomuser.me/api/portraits/women/44.jpg'
+          title='Remodeling Consultant'
       />
       <br/><br/>
       <User
-          name='Anna Black'
-          title='Remodeling Consultant'
-          orientation='vertical'
           align='center'
+          avatarUrl='https://randomuser.me/api/portraits/women/44.jpg'
+          name='Anna Black'
+          orientation='vertical'
           size='md'
-          avatarUrl='https://randomuser.me/api/portraits/women/44.jpg'
+          title='Remodeling Consultant'
       />
       <br/><br/>
       <User
-          name='Anna Black'
-          title='Remodeling Consultant'
-          orientation='vertical'
           align='center'
-          size='lg'
           avatarUrl='https://randomuser.me/api/portraits/women/44.jpg'
+          name='Anna Black'
+          orientation='vertical'
+          size='lg'
+          title='Remodeling Consultant'
       />
     </div> 
   )
 }
 
-export default UserVerticalSize;
+export default UserVerticalSize

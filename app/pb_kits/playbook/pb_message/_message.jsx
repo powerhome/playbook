@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 
 import {
   Body,
@@ -44,12 +44,21 @@ const Message = (props: MessageProps) => {
   const print_avatar = (avatarName, avatarUrl, avatarStatus) => {
     if ( avatarUrl !== '' && avatarName !== '' ) {
       return (
-        <Avatar name={avatarName} size='sm' imageUrl={avatarUrl} status={avatarStatus}/>
+        <Avatar
+            imageUrl={avatarUrl}
+            name={avatarName}
+            size='sm'
+            status={avatarStatus}
+        />
       )
     }
     if ( avatarUrl === '' && avatarName !== '' ) {
       return (
-        <Avatar name={avatarName} size='sm' status={avatarStatus}/>
+        <Avatar
+            name={avatarName}
+            size='sm'
+            status={avatarStatus}
+        />
       )
     }
   }
@@ -66,7 +75,7 @@ const Message = (props: MessageProps) => {
   return (
     <div className={messageCSS(avatarName, avatarUrl)}>
       {print_avatar(avatarName, avatarUrl, avatarStatus)}
-      <div class="content_wrapper">
+      <div className="content_wrapper">
         {print_label(label)}
         <Body>{message}</Body>
         {print_timestamp(timestamp)}
@@ -75,4 +84,4 @@ const Message = (props: MessageProps) => {
   )
 }
 
-export default Message;
+export default Message

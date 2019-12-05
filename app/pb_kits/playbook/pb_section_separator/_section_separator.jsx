@@ -1,10 +1,10 @@
-import React from 'react';
-import PropTypes from "prop-types";
+import React from 'react'
+import PropTypes from "prop-types"
 
 const propTypes = {
   className: PropTypes.string,
   id: PropTypes.string
-};
+}
 
 class SectionSeparator extends React.Component {
   render() {
@@ -16,6 +16,6 @@ class SectionSeparator extends React.Component {
   }
 }
 
-SectionSeparator.propTypes = propTypes;
+SectionSeparator.propTypes = propTypes
 
-export default SectionSeparator;
+export default SectionSeparator

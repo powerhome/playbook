@@ -3,7 +3,9 @@ import {Table} from "../../"
 
 function TableDisableHover() {
   return (
-    <Table disable_hover container={false}
+    <Table
+        container={false}
+        disable_hover
         size="md"
     >
       <thead>
@@ -42,4 +44,4 @@ function TableDisableHover() {
   )
 }
 
-export default TableDisableHover;
+export default TableDisableHover

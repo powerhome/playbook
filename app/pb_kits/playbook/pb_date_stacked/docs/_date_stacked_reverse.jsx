@@ -5,14 +5,23 @@ function DateStackedDefault() {
   return (
     <div>
       
-      <DateStacked date={new Date()} align='left' size='sm' reverse={true}/>
+      <DateStacked
+          align='left'
+          date={new Date()}
+          reverse
+          size='sm'
+      />
 
       <br/>
 
-      <DateStacked date={new Date()} size='md'reverse={true}/>
+      <DateStacked
+          date={new Date()}
+          reverse
+          size='md'
+      />
 
     </div>
   )
 }
 
-export default DateStackedDefault;
+export default DateStackedDefault

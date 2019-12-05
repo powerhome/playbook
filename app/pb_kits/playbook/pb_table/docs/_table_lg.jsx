@@ -3,7 +3,10 @@ import {Table} from "../../"
 
 function TableLg() {
   return (
-    <Table size="lg" container={false}>
+    <Table
+        container={false}
+        size="lg"
+    >
       <thead>
         <tr>
           <th>{`Column 1`}</th>
@@ -40,4 +43,4 @@ function TableLg() {
   )
 }
 
-export default TableLg;
+export default TableLg

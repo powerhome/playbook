@@ -1,10 +1,10 @@
-import React from 'react';
-import PropTypes from "prop-types";
+import React from 'react'
+import PropTypes from "prop-types"
 
 const propTypes = {
   className: PropTypes.string,
   id: PropTypes.string
-};
+}
 
 class StarRating extends React.Component {
   render() {
@@ -16,6 +16,6 @@ class StarRating extends React.Component {
   }
 }
 
-StarRating.propTypes = propTypes;
+StarRating.propTypes = propTypes
 
-export default StarRating;
+export default StarRating

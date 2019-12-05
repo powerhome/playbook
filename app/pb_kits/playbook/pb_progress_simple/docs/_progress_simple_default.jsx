@@ -7,4 +7,4 @@ function ProgressSimpleDefault() {
   )
 }
 
-export default ProgressSimpleDefault;
+export default ProgressSimpleDefault

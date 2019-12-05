@@ -9,8 +9,8 @@ return (
     <ProgressPills
         active={2}
         dark
-        title="Status:"
         steps={3}
+        title="Status:"
         value="Orientation"
     />
 
@@ -18,4 +18,4 @@ return (
 )
 }
 
-export default ProgressPillsDark;
+export default ProgressPillsDark

@@ -16,7 +16,7 @@ const dot = (houseStyle) =>
     return "\u00b7"
   }
 }
-const titleizeAddessCont = (addressCont) => addressCont ? titleize(addressCont) : null;
+const titleizeAddessCont = (addressCont) => addressCont ? titleize(addressCont) : null
 
 
 type HomeAddressStreetProps = {

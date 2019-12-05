@@ -42,4 +42,4 @@ function TableContainer() {
   )
 }
 
-export default TableContainer;
+export default TableContainer

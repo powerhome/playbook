@@ -24,7 +24,8 @@ const initials = function(name) {
 const image = function(imageUrl, name) {
   if (imageUrl) {
     return (
-      <Image alt={name}
+      <Image
+          alt={name}
           url={imageUrl}
       />
     )
@@ -50,7 +51,7 @@ const Avatar = ({
             size={size}
             status={status}
         />
-      );
+      )
     }
   }
 
@@ -61,7 +62,8 @@ const Avatar = ({
   ])
 
   return (
-    <div className={css}
+    <div
+        className={css}
         data-initials={initials(name)}
     >
       <div

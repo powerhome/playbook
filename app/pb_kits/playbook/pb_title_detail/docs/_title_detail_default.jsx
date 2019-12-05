@@ -7,4 +7,4 @@ function TitleDetailDefault() {
   )
 }
 
-export default TitleDetailDefault;
+export default TitleDetailDefault

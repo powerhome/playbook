@@ -4,10 +4,10 @@ import {Person} from "../../"
 function PersonDefault() {
   return (
     <Person
-      firstName="Kyle"
-      lastName="Fadigan"
+        firstName="Kyle"
+        lastName="Fadigan"
     />
   )
 }
 
-export default PersonDefault;
+export default PersonDefault

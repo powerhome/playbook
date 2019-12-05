@@ -3,7 +3,9 @@ import {Table} from "../../"
 
 function TableSingleLine() {
   return (
-    <Table single_line container={false}
+    <Table
+        container={false}
+        single_line
         size="sm"
     >
       <thead>
@@ -42,4 +44,4 @@ function TableSingleLine() {
   )
 }
 
-export default TableSingleLine;
+export default TableSingleLine

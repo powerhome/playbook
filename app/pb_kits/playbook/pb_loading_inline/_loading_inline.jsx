@@ -25,7 +25,11 @@ const LoadingInline = ({
 }: LoadingInlineProps) => (
   <div className={`pb_loading_inline_kit_${align}`}>
     <Body color="light">
-      <Icon fixedWidth pulse icon="spinner" />&nbsp;
+      <Icon
+          fixedWidth
+          icon="spinner"
+          pulse
+      />&nbsp;
       {`Loading`}
     </Body>
   </div>

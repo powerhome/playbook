@@ -5,9 +5,12 @@ import {IconCircle} from '../../'
 function IconCircleDefault() {
   return (
     <div>
-      <IconCircle icon="rocket" size="md"/>
+      <IconCircle
+          icon="rocket"
+          size="md"
+      />
     </div>
   )
 }
 
-export default IconCircleDefault;
+export default IconCircleDefault

@@ -4,30 +4,50 @@ import DateStacked from "../_date_stacked.jsx"
 function DateStackedAlign() {
   return (
     <div>
-      <DateStacked date={new Date()} size='sm'/>
+      <DateStacked
+          date={new Date()}
+          size='sm'
+      />
 
       <br/>
 
-      <DateStacked date={new Date()} align='center'/>  
+      <DateStacked
+          align='center'
+          date={new Date()}
+      />  
 
       <br/>
 
-      <DateStacked date={new Date()} align='right'/>
+      <DateStacked
+          align='right'
+          date={new Date()}
+      />
       
       <br/>
 
-      <DateStacked date={new Date()} size='md'/>
+      <DateStacked
+          date={new Date()}
+          size='md'
+      />
 
       <br/>
 
-      <DateStacked date={new Date()} size='md' align='center'/>  
+      <DateStacked
+          align='center'
+          date={new Date()}
+          size='md'
+      />  
 
       <br/>
 
-      <DateStacked date={new Date()} size='md' align='right'/>
+      <DateStacked
+          align='right'
+          date={new Date()}
+          size='md'
+      />
 
     </div>
   )
 }
 
-export default DateStackedAlign;
+export default DateStackedAlign

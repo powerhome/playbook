@@ -1,6 +1,6 @@
-import React from 'react';
-import classnames from 'classnames';
-import PropTypes from "prop-types";
+import React from 'react'
+import classnames from 'classnames'
+import PropTypes from "prop-types"
 
 const propTypes = {
   children: PropTypes.oneOfType([
@@ -13,7 +13,7 @@ const propTypes = {
   disable_hover: PropTypes.bool,
   single_line: PropTypes.bool,
   size: PropTypes.oneOf(["sm", "md", "lg"])
-};
+}
 
 const defaultProps = {
   container: true,
@@ -21,7 +21,7 @@ const defaultProps = {
   disable_hover: false,
   single_line: false,
   size: "sm"
-};
+}
 
 class Table extends React.Component {
   render() {
@@ -33,7 +33,7 @@ class Table extends React.Component {
       disable_hover,
       single_line,
       size
-    } = this.props;
+    } = this.props
 
     const css = classnames([
       'pb_table',
@@ -55,7 +55,7 @@ class Table extends React.Component {
   }
 }
 
-Table.propTypes = propTypes;
-Table.defaultProps = defaultProps;
+Table.propTypes = propTypes
+Table.defaultProps = defaultProps
 
-export default Table;
+export default Table

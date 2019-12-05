@@ -1,10 +1,10 @@
-import React from 'react';
-import PropTypes from "prop-types";
+import React from 'react'
+import PropTypes from "prop-types"
 
 const propTypes = {
   className: PropTypes.string,
   id: PropTypes.string
-};
+}
 
 class OnlineStatus extends React.Component {
   render() {
@@ -16,6 +16,6 @@ class OnlineStatus extends React.Component {
   }
 }
 
-OnlineStatus.propTypes = propTypes;
+OnlineStatus.propTypes = propTypes
 
-export default OnlineStatus;
+export default OnlineStatus

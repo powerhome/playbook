@@ -25,4 +25,4 @@ function HashtagDefault() {
   )
 }
 
-export default HashtagDefault;
+export default HashtagDefault

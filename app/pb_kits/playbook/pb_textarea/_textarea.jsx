@@ -41,11 +41,20 @@ const Textarea = ( props: TextareaProps) => {
   
   return (
     <div className={classnames(textareaCSS(props), className)}>
-      <Caption text={label} dark={dark}/>
+      <Caption
+          dark={dark}
+          text={label}
+      />
       <If condition={children}>
         {children}
       <Else/>
-        <textarea className={textarea_input} name={name} placeholder={placeholder} rows={rows} value={value} />
+        <textarea
+            className={textarea_input}
+            name={name}
+            placeholder={placeholder}
+            rows={rows}
+            value={value}
+        />
       </If>
     </div>
   )

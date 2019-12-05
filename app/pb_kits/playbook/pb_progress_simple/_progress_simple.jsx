@@ -1,10 +1,10 @@
-import React from 'react';
-import PropTypes from "prop-types";
+import React from 'react'
+import PropTypes from "prop-types"
 
 const propTypes = {
   className: PropTypes.string,
   id: PropTypes.string
-};
+}
 
 class ProgressSimple extends React.Component {
   render() {
@@ -16,6 +16,6 @@ class ProgressSimple extends React.Component {
   }
 }
 
-ProgressSimple.propTypes = propTypes;
+ProgressSimple.propTypes = propTypes
 
-export default ProgressSimple;
+export default ProgressSimple

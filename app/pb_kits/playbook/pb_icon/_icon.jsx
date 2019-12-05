@@ -44,13 +44,13 @@ const Icon = (props: IconProps) => {
   const flipClass = (function(flip) {
     switch(flip) {
       case 'horizontal':
-        return hClass;
+        return hClass
       case 'vertical':
-        return vClass;
+        return vClass
       case 'both':
-        return `${vClass} ${hClass}`;
+        return `${vClass} ${hClass}`
       default:
-        return '';
+        return ''
     }
   })(flip)
 
@@ -83,7 +83,10 @@ const Icon = (props: IconProps) => {
   )
 
   return (
-    <i id={id} className={iconCss}></i>
+    <i
+        className={iconCss}
+        id={id}
+    />
   )
 }
 

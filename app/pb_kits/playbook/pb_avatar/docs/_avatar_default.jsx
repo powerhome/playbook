@@ -42,4 +42,4 @@ function AvatarDefault() {
   )
 }
 
-export default AvatarDefault;
+export default AvatarDefault

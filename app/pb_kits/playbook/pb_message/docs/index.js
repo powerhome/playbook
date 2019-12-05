@@ -1,1 +1,1 @@
-export {default as MessageDefault} from './_message_default.jsx';
+export {default as MessageDefault} from './_message_default.jsx'

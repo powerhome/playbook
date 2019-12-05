@@ -1,5 +1,5 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
+import React, { Component } from "react"
+import PropTypes from "prop-types"
 
 const propTypes = {
   dark:PropTypes.bool,
@@ -12,7 +12,7 @@ const propTypes = {
       PropTypes.arrayOf(PropTypes.node),
       PropTypes.node
   ])
-};
+}
 
 const defaultProps = {
   dark:false,
@@ -21,7 +21,7 @@ const defaultProps = {
   ordered:false,
   layout:"",
   xpadding:false
-};
+}
 
 class List extends Component {
   render() {
@@ -33,7 +33,7 @@ class List extends Component {
       layout,
       xpadding,
       children
-    } = this.props;
+    } = this.props
     const dark_class = dark === true ? "_dark" : ""
     const borderless_class = borderless === true ? "list_borderless" : ""
     const size_class = "_" + size
@@ -46,11 +46,11 @@ class List extends Component {
           {children}
         </ul>
       </div>
-    );
+    )
   }
 }
 
-List.propTypes = propTypes;
-List.defaultProps = defaultProps;
+List.propTypes = propTypes
+List.defaultProps = defaultProps
 
-export default List;
+export default List

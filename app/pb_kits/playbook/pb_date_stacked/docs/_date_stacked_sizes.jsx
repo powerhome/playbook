@@ -5,15 +5,15 @@ function DateStackedSizes() {
   return (
     <div>
       <DateStacked 
-        date={new Date()}
-        size='sm'
-      /><br></br>
+          date={new Date()}
+          size='sm'
+      /><br />
       <DateStacked 
-        date={new Date()}
-        size='md'
+          date={new Date()}
+          size='md'
       />
     </div>
   )
 }
 
-export default DateStackedSizes;
+export default DateStackedSizes

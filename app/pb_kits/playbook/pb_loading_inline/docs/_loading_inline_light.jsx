@@ -11,4 +11,4 @@ function LoadingInlineLight() {
   )
 }
 
-export default LoadingInlineLight;
+export default LoadingInlineLight

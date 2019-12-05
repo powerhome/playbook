@@ -5,18 +5,18 @@ function ContactDefault() {
   return (
     <div>
       <Contact
-        contactType="cell"
-        contactValue="349-185-9988"
-        contactDetail="Cell"
+          contactDetail="Cell"
+          contactType="cell"
+          contactValue="349-185-9988"
       />
       <Contact
-        contactValue="5555555555"
-        contactDetail="Home"
+          contactDetail="Home"
+          contactValue="5555555555"
       />
       <Contact
-        contactType="work"
-        contactValue="3245627482"
-        contactDetail="Work"
+          contactDetail="Work"
+          contactType="work"
+          contactValue="3245627482"
       />
     </div>
   )
