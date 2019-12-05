@@ -1,10 +1,10 @@
-import React from "react"
-import Date from "../../"
+import React from 'react'
+import Date from '../../'
 
 function DateDefault() {
   return (
     <div>
-      <h1>{`Coming Soon...`}</h1>
+      <h1>{'Coming Soon...'}</h1>
     </div>
   )
 }

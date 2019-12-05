@@ -1,5 +1,5 @@
-import React from "react"
-import { User } from "../../"
+import React from 'react'
+import { User } from '../../'
 
 function UserDefault() {
   return (

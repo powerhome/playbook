@@ -1,5 +1,5 @@
-import React from "react"
-import { FixedConfirmationToast } from "../../"
+import React from 'react'
+import { FixedConfirmationToast } from '../../'
 
 function FixedConfirmationToastDefault() {
   return (

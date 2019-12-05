@@ -1,5 +1,5 @@
-import colors from "../tokens/_colors.scss"
-import typography from "../tokens/_typography.scss"
+import colors from '../tokens/_colors.scss'
+import typography from '../tokens/_typography.scss'
 
 const dataColors = [
   colors.data_1,
@@ -42,10 +42,10 @@ const adjustAxisStyle = function(axis) {
   /* Styles grid */
   axis.minorGridLineColor = colors.slate
   axis.minorGridLineWidth = 0.5
-  axis.minorGridLineDashStyle = "Dash"
+  axis.minorGridLineDashStyle = 'Dash'
   axis.gridLineWidth = 0.5
   axis.gridLineColor = colors.slate
-  axis.gridLineDashStyle = "Dash"
+  axis.gridLineDashStyle = 'Dash'
 
   /* Change line color to $sky */
   axis.lineColor = colors.sky

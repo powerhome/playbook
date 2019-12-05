@@ -1,7 +1,7 @@
-import React, { Component } from "react"
-import PropTypes from "prop-types"
-import NavItem from "./_item"
-import { Caption } from "../"
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import NavItem from './_item'
+import { Caption } from '../'
 
 const propTypes = {
   children: PropTypes.oneOfType([

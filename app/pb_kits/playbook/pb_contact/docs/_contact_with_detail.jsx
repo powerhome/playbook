@@ -1,5 +1,5 @@
-import React from "react"
-import { Contact } from "../../"
+import React from 'react'
+import { Contact } from '../../'
 
 function ContactDefault() {
   return (

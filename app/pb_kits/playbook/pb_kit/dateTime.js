@@ -24,19 +24,19 @@ export default class DateTime {
   }
 
   toYear() {
-    return this.value.strftime("%Y")
+    return this.value.strftime('%Y')
   }
 
   toMonth() {
-    return this.value.strftime("%b")
+    return this.value.strftime('%b')
   }
 
   toMonthFull() {
-    return this.value.strftime("%B")
+    return this.value.strftime('%B')
   }
 
   toDay() {
-    return this.value.strftime("%e")
+    return this.value.strftime('%e')
   }
 
   toIso() {

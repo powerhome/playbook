@@ -31,12 +31,12 @@ const FixedConfirmationToast = ({
 
 const icon = (function(status) {
   switch (status) {
-    case "success":
-      return "check"
-    case "error":
-      return "exclamation-triangle"
-    case "neutral":
-      return "info-circle"
+    case 'success':
+      return 'check'
+    case 'error':
+      return 'exclamation-triangle'
+    case 'neutral':
+      return 'info-circle'
     default:
       return null
   }

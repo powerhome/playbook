@@ -1,5 +1,5 @@
-import React from "react"
-import { Title } from "../../"
+import React from 'react'
+import { Title } from '../../'
 
 function TitleLight() {
   return (

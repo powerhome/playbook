@@ -1,8 +1,8 @@
 /* @flow */
 
-import React from "react"
+import React from 'react'
 
-import { pbChart } from "../"
+import { pbChart } from '../'
 
 type LineGraphProps = {
     axisTitle?: String,

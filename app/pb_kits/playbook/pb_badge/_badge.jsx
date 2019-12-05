@@ -20,8 +20,8 @@ const Badge = ({
   variant = 'neutral',
   rounded = false
 }: BadgeProps) => {
-  const roundedClass = rounded === true ? "rounded" : ""
-  const darkClass = dark === true ? "dark" : ""
+  const roundedClass = rounded === true ? 'rounded' : ''
+  const darkClass = dark === true ? 'dark' : ''
   const css = classnames([
     `pb_badge_kit_${variant}_${roundedClass}_${darkClass}`,
     className,

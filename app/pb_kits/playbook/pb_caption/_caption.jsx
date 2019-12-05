@@ -24,7 +24,7 @@ const Caption = ({
   const Tag = `${tag}`
 
   const css = classnames([
-    `pb_caption_kit` +
+    'pb_caption_kit' +
     `_${size}` +
     (dark === true ? '_dark' : ''),
     className,

@@ -1,5 +1,5 @@
-import React from "react"
-import DistributionBar from "../_distribution_bar.jsx"
+import React from 'react'
+import DistributionBar from '../_distribution_bar.jsx'
 
 function DistributionBarDefault() {
   return (

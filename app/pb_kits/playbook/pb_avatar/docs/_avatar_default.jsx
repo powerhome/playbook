@@ -1,5 +1,5 @@
-import React from "react"
-import { Avatar } from "../../"
+import React from 'react'
+import { Avatar } from '../../'
 
 function AvatarDefault() {
   return (

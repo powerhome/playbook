@@ -1,5 +1,5 @@
-import React from "react"
-import { Textarea } from "../../"
+import React from 'react'
+import { Textarea } from '../../'
 
 function TextareaDark() {
   return (

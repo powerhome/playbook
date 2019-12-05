@@ -4,17 +4,17 @@ import { Card } from '../../'
 function CardShadow() {
   return (
     <div>
-      <Card shadow='none'>{`Card content`}</Card>
+      <Card shadow='none'>{'Card content'}</Card>
       <br />
-      <Card shadow='shallow'>{`Card content`}</Card>
+      <Card shadow='shallow'>{'Card content'}</Card>
       <br />
-      <Card shadow='default'>{`Card content`}</Card>
+      <Card shadow='default'>{'Card content'}</Card>
       <br />
-      <Card shadow='deep'>{`Card content`}</Card>
+      <Card shadow='deep'>{'Card content'}</Card>
       <br />
-      <Card shadow='deeper'>{`Card content`}</Card>
+      <Card shadow='deeper'>{'Card content'}</Card>
       <br />
-      <Card shadow='deepest'>{`Card content`}</Card>
+      <Card shadow='deepest'>{'Card content'}</Card>
       <br />
     </div>
   )

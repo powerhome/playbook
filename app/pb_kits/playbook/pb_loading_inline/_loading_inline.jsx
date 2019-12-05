@@ -30,7 +30,7 @@ const LoadingInline = ({
           icon="spinner"
           pulse
       />
-      {` Loading`}
+      {' Loading'}
     </Body>
   </div>
 )

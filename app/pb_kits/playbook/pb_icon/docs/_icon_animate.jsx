@@ -1,5 +1,5 @@
-import React from "react"
-import { Icon } from "../../"
+import React from 'react'
+import { Icon } from '../../'
 
 function IconAnimate() {
   return (

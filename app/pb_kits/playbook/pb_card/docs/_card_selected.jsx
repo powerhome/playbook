@@ -1,12 +1,12 @@
-import React from "react"
-import Card from "../_card.jsx"
+import React from 'react'
+import Card from '../_card.jsx'
 
 function CardSelected() {
   return (
     <div>
-      <Card>{`Card content`}</Card>
+      <Card>{'Card content'}</Card>
       <br />
-      <Card selected>{`Card content`}</Card>
+      <Card selected>{'Card content'}</Card>
     </div>
   )
 }

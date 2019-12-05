@@ -1,5 +1,5 @@
-import React from "react"
-import { StatChange } from "../../"
+import React from 'react'
+import { StatChange } from '../../'
 
 function StatChangeDefault() {
   return (

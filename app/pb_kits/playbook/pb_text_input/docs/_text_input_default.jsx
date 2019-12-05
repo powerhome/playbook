@@ -1,13 +1,13 @@
-import React from "react"
+import React from 'react'
 import {
   Caption,
   TextInput,
   Title,
-} from "../../"
+} from '../../'
 
 class TextInputDefault extends React.Component {
   state = {
-    firstName: ""
+    firstName: ''
   }
 
   render() {
@@ -47,10 +47,10 @@ class TextInputDefault extends React.Component {
         <br />
         <br />
 
-        <Title>{`Event Handler Props`}</Title>
+        <Title>{'Event Handler Props'}</Title>
 
         <br />
-        <Caption>{`onChange`}</Caption>
+        <Caption>{'onChange'}</Caption>
 
         <br />
 
@@ -61,7 +61,7 @@ class TextInputDefault extends React.Component {
             value={firstName}
         />
 
-        <If condition={firstName !== ""}>
+        <If condition={firstName !== ''}>
           {`First name is: ${firstName}`}
         </If>
       </div>

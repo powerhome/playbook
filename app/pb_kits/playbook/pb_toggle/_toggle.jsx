@@ -4,7 +4,7 @@ import React from 'react'
 
 import type {
   InputCallback
-} from "../types"
+} from '../types'
 
 import {
   buildAriaProps,

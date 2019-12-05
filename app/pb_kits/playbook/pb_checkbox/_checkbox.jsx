@@ -31,7 +31,7 @@ const Checkbox = ({
   return (
     <label
         className={
-        `pb_checkbox_kit` +
+        'pb_checkbox_kit' +
         (dark === true ? '_dark' : '')
       }
     >

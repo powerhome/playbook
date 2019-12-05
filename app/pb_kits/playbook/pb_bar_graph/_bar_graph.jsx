@@ -2,7 +2,7 @@
 
 import React from 'react'
 
-import { pbChart } from "../"
+import { pbChart } from '../'
 
 type BarGraphProps = {
   axisTitle: String,

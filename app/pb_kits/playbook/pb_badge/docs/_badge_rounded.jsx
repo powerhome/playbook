@@ -1,5 +1,5 @@
-import React from "react"
-import Badge from "../_badge.jsx"
+import React from 'react'
+import Badge from '../_badge.jsx'
 
 function BadgeRounded() {
   return (

@@ -1,10 +1,10 @@
-import React from "react"
-import Card from "../_card.jsx"
+import React from 'react'
+import Card from '../_card.jsx'
 
 function CardLight() {
   return (
     <div>
-      <Card>{`Card content`}</Card>
+      <Card>{'Card content'}</Card>
     </div>
   )
 }

@@ -15,9 +15,9 @@ type HashtagProps = {
 }
 
 const HashType = {
-  "home": "H#",
-  "project": "P#",
-  "default": "#"
+  'home': 'H#',
+  'project': 'P#',
+  'default': '#'
 }
 
 const Hashtag = ({
@@ -29,7 +29,7 @@ const Hashtag = ({
   type,
   url
 } : HashtagProps) => {
-  const darkClass = dark === true ? "dark" : ""
+  const darkClass = dark === true ? 'dark' : ''
 
   return (
     <div className={`pb_hashtag_kit_${darkClass}`}>

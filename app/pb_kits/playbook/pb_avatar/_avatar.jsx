@@ -5,7 +5,7 @@ import React from 'react'
 
 import classnames from 'classnames'
 import { map } from 'lodash'
-import { Image } from "../"
+import { Image } from '../'
 
 type AvatarProps = {
   className?: String,
@@ -56,7 +56,7 @@ const Avatar = ({
   }
 
   const css = classnames([
-    `pb_avatar_kit`,
+    'pb_avatar_kit',
     `avatar_${size}`,
     className,
   ])

@@ -136,7 +136,7 @@ const highchartsTheme = {
         },
         stops: [
           [0, Highcharts.getOptions().colors[0]],
-          [1, "white"]
+          [1, 'white']
         ]
       },
       threshold: null

@@ -1,5 +1,5 @@
-import React, { Component } from "react"
-import PropTypes from "prop-types"
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 
 const propTypes = {
   children: PropTypes.oneOfType([
@@ -14,7 +14,7 @@ class Sidebar extends Component {
       children
     } = this.props
     return (
-      <div className={`layout_sidebar`}>
+      <div className={'layout_sidebar'}>
         {children}
       </div>
     )

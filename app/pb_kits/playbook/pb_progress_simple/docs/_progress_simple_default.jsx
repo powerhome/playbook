@@ -1,9 +1,9 @@
-import React from "react"
-import { ProgressSimple } from "../../"
+import React from 'react'
+import { ProgressSimple } from '../../'
 
 function ProgressSimpleDefault() {
   return (
-    <h1>{`Coming Soon...`}</h1>
+    <h1>{'Coming Soon...'}</h1>
   )
 }
 

@@ -1,5 +1,5 @@
-import React, { Component } from "react"
-import PropTypes from "prop-types"
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 
 const propTypes = {
   children: PropTypes.oneOfType([
@@ -14,7 +14,7 @@ class Body extends Component {
       children
     } = this.props
     return (
-      <div className={`layout_body`}>
+      <div className={'layout_body'}>
         {children}
       </div>
     )

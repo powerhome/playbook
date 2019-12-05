@@ -38,8 +38,8 @@ const Icon = (props: IconProps) => {
     spin=false
   } = props
 
-  const hClass = "fa-flip-horizontal"
-  const vClass = "fa-flip-vertical"
+  const hClass = 'fa-flip-horizontal'
+  const vClass = 'fa-flip-vertical'
 
   const flipClass = (function(flip) {
     switch (flip) {

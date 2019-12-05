@@ -1,5 +1,5 @@
-import React from "react"
-import { PersonContact } from "../../"
+import React from 'react'
+import { PersonContact } from '../../'
 
 function PersonContactDefault() {
   return (
@@ -7,15 +7,15 @@ function PersonContactDefault() {
       <PersonContact
           contacts={[
           {
-            contactType: "email",
-            contactValue: "email@example.com",
+            contactType: 'email',
+            contactValue: 'email@example.com',
           },
           {
-            contactValue: "5555555555",
+            contactValue: '5555555555',
           },
           {
-            contactType: "work",
-            contactValue: "3245627482",
+            contactType: 'work',
+            contactValue: '3245627482',
           }
         ]}
           firstName="Pauline"

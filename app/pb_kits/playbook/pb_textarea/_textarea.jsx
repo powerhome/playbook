@@ -1,6 +1,6 @@
 import React from 'react'
 import classnames from 'classnames'
-import { Caption } from "../"
+import { Caption } from '../'
 
 type TextareaProps = {
   className?: String,

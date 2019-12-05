@@ -1,5 +1,5 @@
-import React from "react"
-import { HomeAddressStreet } from "../../"
+import React from 'react'
+import { HomeAddressStreet } from '../../'
 
 function HomeAddressStreetModified() {
   return (

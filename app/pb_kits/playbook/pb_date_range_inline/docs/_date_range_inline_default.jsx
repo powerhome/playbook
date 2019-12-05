@@ -1,5 +1,5 @@
-import React from "react"
-import DateRangeInline from "../_date_range_inline.jsx"
+import React from 'react'
+import DateRangeInline from '../_date_range_inline.jsx'
 
 function DateRangeInlineDefault() {
   return (

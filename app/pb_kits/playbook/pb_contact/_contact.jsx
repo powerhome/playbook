@@ -28,7 +28,7 @@ const Contact = ({
   className,
   dark=false,
   contactValue,
-  contactDetail="",
+  contactDetail='',
 }: ContactProps) => {
 
   const formatDetail = (contactDetail) => {
@@ -48,7 +48,7 @@ const Contact = ({
   const css = classnames(kitClasses({ contactType }), className)
 
   const formatContact = (contactString, contactType) => {
-    if (contactType == "email") {
+    if (contactType == 'email') {
       return contactString
     } else {
       const cleaned = contactString.replace(/\D/g, '')

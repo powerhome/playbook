@@ -1,5 +1,5 @@
-import React from "react"
-import { DateYearStacked } from "../../"
+import React from 'react'
+import { DateYearStacked } from '../../'
 
 function DateYearStackedDefault() {
   return (

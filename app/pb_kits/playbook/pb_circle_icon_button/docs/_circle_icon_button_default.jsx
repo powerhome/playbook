@@ -1,5 +1,5 @@
-import React from "react"
-import { CircleIconButton } from "../../"
+import React from 'react'
+import { CircleIconButton } from '../../'
 
 const CircleIconButtonDefault = () => (
   <div>

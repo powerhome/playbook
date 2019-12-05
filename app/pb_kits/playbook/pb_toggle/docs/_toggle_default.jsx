@@ -1,7 +1,7 @@
 // @flow
 
-import React from "react"
-import { Toggle } from "../../"
+import React from 'react'
+import { Toggle } from '../../'
 
 class Example extends React.Component {
   state = {

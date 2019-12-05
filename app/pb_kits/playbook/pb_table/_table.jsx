@@ -1,6 +1,6 @@
 import React from 'react'
 import classnames from 'classnames'
-import PropTypes from "prop-types"
+import PropTypes from 'prop-types'
 
 const propTypes = {
   children: PropTypes.oneOfType([
@@ -12,7 +12,7 @@ const propTypes = {
   dark: PropTypes.bool,
   disable_hover: PropTypes.bool,
   single_line: PropTypes.bool,
-  size: PropTypes.oneOf(["sm", "md", "lg"])
+  size: PropTypes.oneOf(['sm', 'md', 'lg'])
 }
 
 const defaultProps = {
@@ -20,7 +20,7 @@ const defaultProps = {
   dark: false,
   disable_hover: false,
   single_line: false,
-  size: "sm"
+  size: 'sm'
 }
 
 class Table extends React.Component {
@@ -38,10 +38,10 @@ class Table extends React.Component {
     const css = classnames([
       'pb_table',
       `table-${size}`,
-      container ? `table-card` : null,
-      dark ? `table-dark` : null,
-      single_line ? `single-line` : null,
-      disable_hover ? `no-hover` : null,
+      container ? 'table-card' : null,
+      dark ? 'table-dark' : null,
+      single_line ? 'single-line' : null,
+      disable_hover ? 'no-hover' : null,
       className,
     ])
 

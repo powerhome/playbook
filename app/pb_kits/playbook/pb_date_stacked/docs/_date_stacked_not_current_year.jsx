@@ -1,5 +1,5 @@
-import React from "react"
-import DateStacked from "../_date_stacked.jsx"
+import React from 'react'
+import DateStacked from '../_date_stacked.jsx'
 
 function DateStackedNotCurrentYear() {
   return (

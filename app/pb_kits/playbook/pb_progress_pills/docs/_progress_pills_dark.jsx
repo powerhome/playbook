@@ -1,6 +1,6 @@
 
-import React from "react"
-import ProgressPills from "../_progress_pills.jsx"
+import React from 'react'
+import ProgressPills from '../_progress_pills.jsx'
 
 
 function ProgressPillsDark() {

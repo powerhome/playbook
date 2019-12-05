@@ -1,5 +1,5 @@
-import React from "react"
-import { BarGraph } from "../../"
+import React from 'react'
+import { BarGraph } from '../../'
 
 const chartData = [{
   name: 'Installation',

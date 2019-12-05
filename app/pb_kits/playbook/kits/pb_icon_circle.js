@@ -1,4 +1,4 @@
-import IconCircle from "../pb_icon_circle/_icon_circle.jsx"
+import IconCircle from '../pb_icon_circle/_icon_circle.jsx'
 
-import WebpackerReact from "webpacker-react"
+import WebpackerReact from 'webpacker-react'
 WebpackerReact.setup({ IconCircle })
