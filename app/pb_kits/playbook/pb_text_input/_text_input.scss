@@ -8,8 +8,8 @@
 
   .text_input_wrapper {
     margin-bottom: 1rem;
+
     > input:first-child {
-      box-sizing: border-box;
       border: 1px solid $border-light;
       border-radius: $border-rad-light;
       display: block;
@@ -20,7 +20,7 @@
       transition: 0.2s all;
       outline: none;
       font-size: $font_small;
-      margin: .1rem 0 0;
+      margin: 0.1rem 0 0;
 
       &:focus {
         border-color: $primary-action;

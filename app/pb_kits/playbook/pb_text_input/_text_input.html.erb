@@ -1,21 +1,21 @@
-<%= content_tag(:div, class: "pb_text_input_kit") do %>
+<%= content_tag(:div,
+    class: object.classname) do %>
   <% if object.label.present? %>
     <%= pb_rails("caption", props: {text: object.label}) %>
   <% end %>
-
-  <%= content_tag(:div, class: "text_input_wrapper") do %>
+  <%= content_tag(:div,
+      class: "text_input_wrapper") do %>
     <% if object.children.present? %>
       <% instance_exec &object.children %>
     <% else %>
       <%= tag(:input,
-              id: object.id,
-              data: object.data,
-              class: object.classname,
-              name: object.name,
-              placeholder: object.placeholder,
-              type: object.type,
-              value: object.value) %>
-
+          id: object.id,
+          class: object.classname,
+          data: object.data,
+          name: object.name,
+          placeholder: object.placeholder,
+          type: object.type,
+          value: object.value) %>
     <% end %>
   <% end %>
 <% end %>
