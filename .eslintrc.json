@@ -61,5 +61,10 @@
           "maximum": 1
         }
       ]
+    },
+    "settings": {
+      "react": {
+        "version": "detect"
+      }
     }
 }
