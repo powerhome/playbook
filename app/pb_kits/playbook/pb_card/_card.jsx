@@ -28,7 +28,7 @@ const cardCSS = ({
   return css
 }
 
-const bodyCSS = ({padding='md'}: CardPropTypes) => {
+const bodyCSS = ({ padding='md' }: CardPropTypes) => {
   let css = 'pb_card_body_kit'
   css += `_${padding}`
   return css

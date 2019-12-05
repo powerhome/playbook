@@ -1,5 +1,5 @@
 import React from "react"
-import {Caption} from '../../'
+import { Caption } from '../../'
 
 function CaptionDark() {
   return (

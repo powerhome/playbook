@@ -1,6 +1,6 @@
 import React from 'react'
 import classnames from 'classnames'
-import {IconCircle} from '../../'
+import { IconCircle } from '../../'
 
 function IconCircleDefault() {
   return (

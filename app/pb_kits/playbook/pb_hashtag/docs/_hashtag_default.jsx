@@ -1,5 +1,5 @@
 import React from "react"
-import {Hashtag} from "../../"
+import { Hashtag } from "../../"
 
 function HashtagDefault() {
   return (

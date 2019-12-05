@@ -45,7 +45,7 @@ const Contact = ({
     }
   }
 
-  const css = classnames(kitClasses({contactType}), className)
+  const css = classnames(kitClasses({ contactType }), className)
 
   const formatContact = (contactString, contactType) => {
     if (contactType == "email") {

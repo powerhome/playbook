@@ -1,5 +1,5 @@
 import React from "react"
-import {MultipleUsers} from "../../"
+import { MultipleUsers } from "../../"
 
 function MultipleUsersDefault() {
   return (

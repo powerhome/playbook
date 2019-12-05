@@ -1,5 +1,5 @@
 import React from "react"
-import {Person} from "../../"
+import { Person } from "../../"
 
 function PersonDefault() {
   return (

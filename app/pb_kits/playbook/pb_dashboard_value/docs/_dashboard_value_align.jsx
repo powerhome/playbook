@@ -1,31 +1,31 @@
 import React from "react"
-import {DashboardValue} from "../../"
+import { DashboardValue } from "../../"
 
 function DashboardValueAlign() {
   return (
     <div>
       <DashboardValue
-          statChange={{change: "decrease", value: "26.1"}}
+          statChange={{ change: "decrease", value: "26.1" }}
           statLabel="Top Title Value"
-          statValue={{value: "1,428", unit: "appts"}}
+          statValue={{ value: "1,428", unit: "appts" }}
       />
 
       <br/><br/>
 
       <DashboardValue
           align="center"
-          statChange={{change: "decrease", value: 56.1}}
+          statChange={{ change: "decrease", value: 56.1 }}
           statLabel="Top Title Value"
-          statValue={{value: "1,428", unit: "appts"}}
+          statValue={{ value: "1,428", unit: "appts" }}
       />
 
       <br/><br/>
 
       <DashboardValue
           align="right"
-          statChange={{change: "decrease", value: 86}}
+          statChange={{ change: "decrease", value: 86 }}
           statLabel="Top Title Value"
-          statValue={{value: "1,428", unit: "appts"}}
+          statValue={{ value: "1,428", unit: "appts" }}
       />
     </div>
   )

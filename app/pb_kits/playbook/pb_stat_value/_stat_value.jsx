@@ -2,7 +2,7 @@
 
 import React from 'react'
 import classnames from 'classnames'
-import {Title} from '../'
+import { Title } from '../'
 
 type StatValueProps = {
   className?: String,

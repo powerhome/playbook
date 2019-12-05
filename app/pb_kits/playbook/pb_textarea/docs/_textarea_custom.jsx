@@ -1,5 +1,5 @@
 import React from "react"
-import {Textarea} from "../../"
+import { Textarea } from "../../"
 
 function TextareaCustom() {
   return (

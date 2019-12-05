@@ -1,5 +1,5 @@
 import React from "react"
-import {IconValue} from "../../"
+import { IconValue } from "../../"
 
 function IconValueDefault() {
   return (

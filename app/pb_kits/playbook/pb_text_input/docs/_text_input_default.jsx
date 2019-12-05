@@ -11,7 +11,7 @@ class TextInputDefault extends React.Component {
   }
 
   render() {
-    const handleOnChange = ({target}) => this.setState({firstName: target.value})
+    const handleOnChange = ({ target }) => this.setState({ firstName: target.value })
 
     const {
       firstName,

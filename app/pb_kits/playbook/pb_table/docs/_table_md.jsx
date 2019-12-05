@@ -1,5 +1,5 @@
 import React from "react"
-import {Table} from "../../"
+import { Table } from "../../"
 
 function TableMd() {
   return (

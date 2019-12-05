@@ -1,5 +1,5 @@
 import React from "react"
-import {LabelValue} from "../../"
+import { LabelValue } from "../../"
 
 function LabelValueDefault() {
   return (

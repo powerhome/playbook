@@ -1,5 +1,5 @@
 import React from "react"
-import {StatValue} from "../../"
+import { StatValue } from "../../"
 
 function StatValueDefault() {
   return (

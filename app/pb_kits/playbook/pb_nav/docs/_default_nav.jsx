@@ -1,5 +1,5 @@
 import React from "react"
-import {Nav} from "../../"
+import { Nav } from "../../"
 import NavItem from "../_item.jsx"
 
 function DefaultNav() {

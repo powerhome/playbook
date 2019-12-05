@@ -1,5 +1,5 @@
 import React from "react"
-import {Time} from "../../"
+import { Time } from "../../"
 
 function TimeDefault() {
   return (

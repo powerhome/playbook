@@ -1,5 +1,5 @@
 import React from "react"
-import {Body} from "../../"
+import { Body } from "../../"
 
 function BodyLight() {
   return (

@@ -1,5 +1,5 @@
 import React from 'react'
-import {Button, Icon} from "../"
+import { Button, Icon } from "../"
 
 type CircleIconButtonProps = {
   variant?: 'primary' | 'secondary' | 'link',

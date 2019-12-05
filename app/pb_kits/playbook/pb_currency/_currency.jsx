@@ -20,7 +20,7 @@ type CurrencyProps = {
   unit?: '00',
 }
 
-const kitCSS = ({align='left'}: CurrencyProps) => {
+const kitCSS = ({ align='left' }: CurrencyProps) => {
   let css = 'pb_currency_kit'
   css += `_${align}`
   return css

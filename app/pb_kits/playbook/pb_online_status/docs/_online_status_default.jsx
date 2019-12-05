@@ -1,5 +1,5 @@
 import React from "react"
-import {OnlineStatus} from "../../"
+import { OnlineStatus } from "../../"
 
 function OnlineStatusDefault() {
   return (

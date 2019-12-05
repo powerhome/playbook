@@ -1,5 +1,5 @@
 import React from "react"
-import {TitleDetail} from "../../"
+import { TitleDetail } from "../../"
 
 function TitleDetailDefault() {
   return (

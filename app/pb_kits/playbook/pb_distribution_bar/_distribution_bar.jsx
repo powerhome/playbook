@@ -25,7 +25,7 @@ const barValues = (normalizedValues) => {
       <div
           className={`pb_distribution_width`}
           key={i}
-          style={{width:`${value*100/widthSum}%`}}
+          style={{ width:`${value*100/widthSum}%` }}
       />
     )
   })

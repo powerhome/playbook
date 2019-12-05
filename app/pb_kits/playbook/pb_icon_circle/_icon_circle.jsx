@@ -1,7 +1,7 @@
 /* @flow */
 
 import React from 'react'
-import {Icon} from "../"
+import { Icon } from "../"
 
 const IconCircleProps = {
   className: String,

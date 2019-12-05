@@ -1,5 +1,5 @@
 import React from "react"
-import {LoadingInline} from "../../"
+import { LoadingInline } from "../../"
 
 function LoadingInlineLight() {
   return (

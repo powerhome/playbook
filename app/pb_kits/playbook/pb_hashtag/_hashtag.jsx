@@ -2,7 +2,7 @@
 /* eslint-disable react/no-multi-comp, flowtype/space-before-type-colon */
 
 import React from 'react'
-import {Badge} from '../'
+import { Badge } from '../'
 
 type HashtagProps = {
   className?: String,

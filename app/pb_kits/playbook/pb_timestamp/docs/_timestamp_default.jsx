@@ -1,5 +1,5 @@
 import React from "react"
-import {Timestamp} from "../../"
+import { Timestamp } from "../../"
 
 function TimestampDefault() {
   return (

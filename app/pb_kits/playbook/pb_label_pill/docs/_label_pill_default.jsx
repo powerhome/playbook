@@ -1,5 +1,5 @@
 import React from "react"
-import {LabelPill} from "../../"
+import { LabelPill } from "../../"
 
 function LabelPillDefault() {
   return (

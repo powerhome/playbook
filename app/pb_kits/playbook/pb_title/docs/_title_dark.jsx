@@ -1,5 +1,5 @@
 import React from "react"
-import {Title} from "../../"
+import { Title } from "../../"
 
 function TitleDark() {
   return (

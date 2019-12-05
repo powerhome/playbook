@@ -1,1 +1,1 @@
-export {default as PersonDefault} from './_person_default.jsx'
+export { default as PersonDefault } from './_person_default.jsx'

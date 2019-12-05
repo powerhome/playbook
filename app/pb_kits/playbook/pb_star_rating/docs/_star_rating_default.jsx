@@ -1,5 +1,5 @@
 import React from "react"
-import {StarRating} from "../../"
+import { StarRating } from "../../"
 
 function StarRatingDefault() {
   return (

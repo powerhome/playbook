@@ -1,5 +1,5 @@
 import React from "react"
-import {PersonContact} from "../../"
+import { PersonContact } from "../../"
 
 function PersonContactDefault() {
   return (
