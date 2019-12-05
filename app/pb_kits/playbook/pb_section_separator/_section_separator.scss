@@ -2,18 +2,27 @@
 @import "../tokens/spacing";
 @import "../pb_caption/caption";
 
+$section_colors: (
+  background:   $bg_light,
+  card:   $card_light,
+);
+
 [class^=pb_section_separator_kit] {
   display: flex;
   justify-content: center;
   align-items: center;
   position: relative;
 
-  span {
-    display: inline-block;
-    padding: 0 $space_xs;
-    background: $bg_light;
-    position: relative;
-    z-index: 1;
+  @each $color_name, $color_value in $section_colors {
+    &[class*=_#{$color_name}] {
+      span {
+        display: inline-block;
+        padding: 0 $space_xs;
+        background: #{$color_value};
+        position: relative;
+        z-index: 1;
+      }
+    }
   }
 
   &::after {
