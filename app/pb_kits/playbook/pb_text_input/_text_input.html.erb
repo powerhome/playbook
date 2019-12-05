@@ -5,13 +5,17 @@
   <% end %>
   <%= content_tag(:div,
       class: "text_input_wrapper") do %>
-    <%= tag(:input,
-        id: object.id,
-        data: object.data,
-        class: "text_input",
-        name: object.name,
-        placeholder: object.placeholder,
-        type: object.type,
-        value: object.value) %>
+    <% if object.children.present? %>
+      <% instance_exec &object.children %>
+    <% else %>
+      <%= tag(:input,
+          id: object.id,
+          data: object.data,
+          class: "text_input",
+          name: object.name,
+          placeholder: object.placeholder,
+          type: object.type,
+          value: object.value) %>
+    <% end %>
   <% end %>
 <% end %>
