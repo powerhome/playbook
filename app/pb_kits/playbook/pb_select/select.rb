@@ -22,7 +22,6 @@ module Playbook
       prop :options, type: Playbook::Props::HashArray, required: false, default: []
       prop :dark, type: Playbook::Props::Boolean, default: false
 
-
       def classname
         generate_classname("pb_select", dark_class)
       end
@@ -55,7 +54,7 @@ module Playbook
         def dark_class
           dark ? "dark" : nil
         end
-        
+
     end
   end
 end

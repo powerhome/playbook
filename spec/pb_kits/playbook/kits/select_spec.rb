@@ -7,6 +7,19 @@ RSpec.describe Playbook::PbSelect::Select do
 
   it { is_expected.to define_partial }
 
-  # Do not leave this file blank. Use other spec files for example tests.
+  it { is_expected.to define_string_prop(:label) }
+  it { is_expected.to define_string_prop(:name) }
+  it { is_expected.to define_string_prop(:onchange) }
+  it { is_expected.to define_string_prop(:include_blank) }
+  it { is_expected.to define_string_prop(:blank_selection) }
+  it { is_expected.to define_boolean_prop(:dark).with_default(false) }
+  it { is_expected.to define_boolean_prop(:required).with_default(false) }
+  it { is_expected.to define_boolean_prop(:disabled).with_default(false) }
+  it { is_expected.to define_boolean_prop(:multiple).with_default(false) }
 
+  describe "#classname" do
+    it "returns namespaced class name", :aggregate_failures do
+      expect(subject.new({}).classname).to eq "pb_select"
+    end
+  end
 end
