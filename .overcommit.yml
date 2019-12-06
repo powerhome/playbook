@@ -11,11 +11,11 @@ PreCommit:
     problem_on_unmodified_line: ignore
     command: ['bundle', 'exec', 'rubocop']
   EsLint:
-    enabled: true
+    enabled: false
     on_warn: fail
     required_executable: 'yarn'
     problem_on_unmodified_line: ignore
-    command: ['yarn', 'lint', '-f', 'compact']
+    command: ['yarn', 'lint', '--', '-f', 'compact']
     include:
       - '.eslintrc'
       - 'app/pb_kits/playbook/**/*.js'

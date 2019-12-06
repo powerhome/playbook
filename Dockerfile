@@ -6,8 +6,8 @@ RUN /pd_build/ruby_support/install_ruby_utils.sh
 RUN /pd_build/ruby_support/finalize.sh
 
 ENV NVM_VERSION v0.33.8
-ENV NODE_VERSION v10.17.0
-ENV NPM_VERSION 6.11.3
+ENV NODE_VERSION v8.9.4
+ENV NPM_VERSION 5.4.2
 ENV YARN_VERSION 1.13.0
 ENV NVM_DIR /home/app/.nvm
 ENV PATH $NVM_DIR/versions/node/$NODE_VERSION/bin:$PATH
