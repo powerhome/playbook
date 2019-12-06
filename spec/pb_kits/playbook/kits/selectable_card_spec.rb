@@ -10,7 +10,7 @@ RSpec.describe Playbook::PbSelectableCard::SelectableCard do
   it { is_expected.to define_boolean_prop(:checked).with_default(false) }
   it { is_expected.to define_boolean_prop(:dark).with_default(false) }
   it { is_expected.to define_boolean_prop(:disabled).with_default(false) }
-  it { is_expected.to define_boolean_prop(:icon).with_default(true) }
+  it { is_expected.to define_boolean_prop(:icon).with_default(false) }
   it { is_expected.to define_boolean_prop(:multi).with_default(true) }
   it { is_expected.to define_prop(:name) }
   it { is_expected.to define_prop(:text) }
