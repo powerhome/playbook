@@ -1,12 +1,10 @@
-import React from "react"
-import {<%= @kit_name_pascal %>} from "../../"
+import React from 'react'
+import { <%= @kit_name_pascal %> } from '../../'
 
-function <%= @kit_name_pascal %>Default() {
-  return (
-    <div>
-      <<%= @kit_name_pascal %> />
-    </div>
-  )
-}
+const <%= @kit_name_pascal %>Default = () => (
+  <div>
+    <<%= @kit_name_pascal %> />
+  </div>
+)
 
 export default <%= @kit_name_pascal %>Default

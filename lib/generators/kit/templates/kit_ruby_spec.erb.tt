@@ -8,5 +8,4 @@ RSpec.describe Playbook::Pb<%= @kit_name_capitalize %>::<%= @kit_name_capitalize
   it { is_expected.to define_partial }
 
   # Do not leave this file blank. Use other spec files for example tests.
-
 end
