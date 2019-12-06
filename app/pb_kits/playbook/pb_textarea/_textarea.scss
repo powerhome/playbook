@@ -2,6 +2,11 @@
 @import "./textarea_mixin";
 
 [class^=pb_textarea_kit] {
+  margin-bottom: $space_sm;
+  .pb_textarea_kit_label {
+    margin-bottom: $space_xs;
+    display: block;
+  }
   textarea::placeholder {
     @include pb_body_light;
   }
@@ -15,7 +20,7 @@
   &[class*=_dark] {
     textarea::placeholder {
       @include pb_body_light_dark;
-    } 
+    }
     > textarea {
       @include pb_textarea_dark;
     }

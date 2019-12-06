@@ -1,0 +1,50 @@
+@import "../pb_body/body_mixins";
+@import "../pb_textarea/textarea_mixin";
+@import "../tokens/colors";
+
+[class^=pb_select] {
+  margin-bottom: $space_sm;
+  select {
+    @include pb_textarea_light;
+    appearance: none;
+    cursor: pointer;
+    box-shadow: inset 0 -11px 20px rgba($primary, 0.05);
+    padding-right: $space_lg;
+    &:hover, &:active, &:focus {
+      background-color: $focus_input_light;
+    }
+    &:disabled ~ .pb_select_kit_caret {
+      opacity: 0.5;
+    }
+  }
+  .pb_select_kit_label {
+    margin-bottom: $space_xs;
+    display: block;
+  }
+  .pb_select_kit_wrapper {
+    position: relative;
+    display: block;
+  }
+  .pb_select_kit_caret {
+    position: absolute;
+    right: $space_sm;
+    top: 50%;
+    display: block;
+    color: $text_lt_default;
+    font-size: ($font_large + 3);
+    transform: translateY(-50%);
+  }
+  &[class*=_dark] {
+    select {
+      @include pb_textarea_dark;
+      background: $focus_input_dark;
+      box-shadow: inset 0 -11px 20px rgba($white, 0.05);
+      &:hover, &:active, &:focus {
+        background-color: tint($focus_input_dark, 5%);
+      }
+    }
+    .pb_select_kit_caret {
+      color: $white;
+    }
+  }
+}
