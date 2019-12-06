@@ -39,6 +39,7 @@ kits:
   - progress_pills
   - progress_simple
   - section_separator
+  - selectable_card
   - source
   - star_rating
   - stat_change

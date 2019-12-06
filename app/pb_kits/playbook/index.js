@@ -39,6 +39,7 @@ import Pill from "./pb_pill/_pill.jsx"
 import ProgressPills from "./pb_progress_pills/_progress_pills.jsx"
 import ProgressSimple from "./pb_progress_simple/_progress_simple.jsx"
 import SectionSeparator from "./pb_section_separator/_section_separator.jsx"
+import SelectableCard from "./pb_selectable_card/_selectable_card.jsx"
 import Source from "./pb_source/_source.jsx"
 import StarRating from "./pb_star_rating/_star_rating.jsx"
 import StatChange from "./pb_stat_change/_stat_change.jsx"
@@ -111,6 +112,7 @@ export {
   ProgressPills,
   ProgressSimple,
   SectionSeparator,
+  SelectableCard,
   Source,
   StarRating,
   StatChange,

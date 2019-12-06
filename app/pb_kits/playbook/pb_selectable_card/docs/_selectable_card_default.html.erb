@@ -1,0 +1,39 @@
+<div class="pb--doc-demo-row">
+
+  <%= pb_rails("selectable_card", props: {
+    input_id: "selected_with_icon",
+    name: "selected_with_icon",
+    value: "selected_with_icon",
+    checked: true,
+    icon: true
+  }) do %>
+    Selected, with icon
+  <% end %>
+
+  <%= pb_rails("selectable_card", props: {
+    input_id: "selected_without_icon",
+    name: "selected_without_icon",
+    value: "selected_without_icon",
+    checked: true,
+  }) do %>
+    Selected, without icon
+  <% end %>
+
+  <%= pb_rails("selectable_card", props: {
+    input_id: "unselected",
+    name: "unselected",
+    value: "unselected",
+  }) do %>
+    Unselected
+  <% end %>
+
+  <%= pb_rails("selectable_card", props: {
+    input_id: "disabled",
+    name: "disabled",
+    value: "disabled",
+    disabled: true
+  }) do %>
+    Disabled
+  <% end %>
+  
+</div>
