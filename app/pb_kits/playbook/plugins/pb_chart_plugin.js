@@ -10,12 +10,12 @@ class pbChart {
     callbackRefreshAfter: () => {},
     callbackDestroyBefore: () => {},
     callbackDestroyAfter: () => {},
-    property: 'Value'
+    property: 'Value',
   }
 
   extendDefaults(defaults, options) {
-    for (let property in options) {
-      if (options.hasOwnProperty(property)) {
+    for (const property in options) {
+      if (Object.prototype.hasOwnProperty.call(options, property)) {
         defaults[property] = options[property]
       }
     }
@@ -34,23 +34,23 @@ class pbChart {
 
     Highcharts.chart(this.defaults.id, {
       title: {
-        text: this.defaults.title
+        text: this.defaults.title,
       },
       chart: {
-        type: this.defaults.type
+        type: this.defaults.type,
       },
       subtitle: {
-        text: this.defaults.subtitle
+        text: this.defaults.subtitle,
       },
       yAxis: {
         title: {
-          text: this.defaults.axisTitle
-        }
+          text: this.defaults.axisTitle,
+        },
       },
       plotOptions: {
         series: {
-          pointStart: this.defaults.pointStart
-        }
+          pointStart: this.defaults.pointStart,
+        },
       },
       series: this.defaults.chartData,
       credits: false,
