@@ -1,10 +1,10 @@
 <%= content_tag(:div,
-  id: object.id,
-  data: object.data,
-  class: object.classname) do %>
+    id: object.id,
+    data: object.data,
+    class: object.classname) do %>
 
-  <%= pb_rails("button", props: {variant: object.variant, disabled: object.disabled, dark: object.dark}) do %>
-    <%= pb_rails("icon", props: {icon: object.icon, fixed_width: true, dark: object.dark}) %>
+  <%= pb_rails("button", props: object.button.merge(id: "pb_circle_icon_button_button")) do %>
+    <%= pb_rails("icon", props: {icon: object.icon, fixed_width: true }) %>
   <% end %>
 
 <% end %>

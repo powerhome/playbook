@@ -1,25 +1,25 @@
-<div class="pb--doc-demo-row">
-
-  <%= pb_rails("selectable_card", props: {
-    input_id: "block",
-    name: "block",
-    value: "block",
-    checked: true
-  }) do %>
-    <%= pb_rails("title", props: { text: "Block", size: 4 }) %>
-    <%= pb_rails("body", props: { tag: "span"}) do %>
-      This uses block
-    <% end %>
+<%= pb_rails("selectable_card", props: {
+  id: "chrome",
+  name: "chrome",
+  value: "chrome",
+  checked: true
+}) do %>
+  <%= pb_rails("title", props: { text: "Browser", size: 4 }) %>
+  <%= pb_rails("body", props: { tag: "span"}) do %>
+    I enjoy using Chrome
   <% end %>
+<% end %>
 
-  <br><br>
+<br/>
 
-  <%= pb_rails("selectable_card", props: {
-    input_id: "tag",
-    name: "tag",
-    value: "tag",
-    text: "This passes in text",
-    checked: false
-  }) %>
-
-</div>
+<%= pb_rails("selectable_card", props: {
+  id: "firefox",
+  name: "firefox",
+  value: "firefox",
+  checked: false
+}) do %>
+  <%= pb_rails("title", props: { text: "Browser", size: 4 }) %>
+  <%= pb_rails("body", props: { tag: "span"}) do %>
+    I enjoy using Firefox
+  <% end %>
+<% end %>

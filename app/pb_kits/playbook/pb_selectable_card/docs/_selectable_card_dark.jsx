@@ -1,11 +1,13 @@
 import React from "react"
 import SelectableCard from "../_selectable_card.jsx"
+import Icon from "../../pb_icon/_icon.jsx"
+
 
 class SelectableCardDark extends React.Component {
   state = {
-    selected_with_icon_dark: true,
-    selected_without_icon_dark: true,
-    unselected_dark: false
+    pizza: true,
+    hamburgers: false,
+    apples: false
   }
 
   handleSelect = event => {
@@ -16,50 +18,46 @@ class SelectableCardDark extends React.Component {
 
   render() {
     return (
-      <div class="pb--doc-demo-row">
+      <div>
+        <SelectableCard
+            dark
+            id="pizza"
+            name="pizza"
+            value="pizza"
+            checked={this.state.pizza}
+            onChange={this.handleSelect}
+            onSelect={event => console.log(`${event.target.name} checked!`)}
+            onUnselect={event => console.log(`${event.target.name} unchecked!`)}>
+          I love pizza
+        </SelectableCard>
+
+        <br></br>
 
         <SelectableCard
             dark
-            inputId="selected_with_icon_dark"
-            name="selected_with_icon_dark"
-            value="selected_with_icon_dark"
-            icon={true}
-            checked={this.state.selected_with_icon_dark}
-            onChange={this.handleSelect}>
-          {'Selected, with icon'}
+            id="hamburgers"
+            name="hamburgers"
+            value="hamburgers"
+            checked={this.state.hamburgers}
+            onChange={this.handleSelect}
+            onSelect={event => console.log(`${event.target.name} checked!`)}
+            onUnselect={event => console.log(`${event.target.name} unchecked!`)}>
+          I love hamburgers
         </SelectableCard>
+
+        <br></br>
 
         <SelectableCard
             dark
-            inputId="selected_without_icon_dark"
-            name="selected_without_icon_dark"
-            value="selected_without_icon_dark"
-            icon={false}
-            checked={this.state.selected_without_icon_dark}
-            onChange={this.handleSelect}>
-          {'Selected, without icon'}
+            id="apples"
+            name="apples"
+            value="apples"
+            checked={this.state.apples}
+            onChange={this.handleSelect}
+            onSelect={event => console.log(`${event.target.name} checked!`)}
+            onUnselect={event => console.log(`${event.target.name} unchecked!`)}>
+          I love apples
         </SelectableCard>
-
-        <SelectableCard
-            dark
-            inputId="unselected_dark"
-            name="unselected_dark"
-            value="unselected_dark"
-            checked={this.state.unselected_dark}
-            onChange={this.handleSelect}>
-          {'Unselected'}
-        </SelectableCard>
-
-        <SelectableCard
-            dark
-            inputId="unselected_dark"
-            name="unselected_dark"
-            value="unselected_dark"
-            disabled={true}
-            onChange={this.handleSelect}>
-          {'Unselected'}
-        </SelectableCard>
-
       </div>
     )
   }

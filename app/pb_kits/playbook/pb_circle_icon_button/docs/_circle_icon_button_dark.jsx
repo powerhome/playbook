@@ -4,33 +4,29 @@ import { CircleIconButton } from "../../";
 const CircleIconButtonDark = () => (
   <div>
     <CircleIconButton
-      variant="primary"
+      button={{dark: true}}
       icon="plus"
-      dark
     />
 
     <br/>
 
     <CircleIconButton
-      variant="secondary"
+      button={{variant: "secondary", dark: true}}
       icon="pen"
-      dark
     />
 
     <br/>
 
     <CircleIconButton
-      disabled={true}
+      button={{disabled: true, dark: true}}
       icon="times"
-      dark
     />
 
     <br/>
 
     <CircleIconButton
-      variant="link"
+      button={{variant: "link", dark: true}}
       icon="user"
-      dark
     />
   </div>
 );

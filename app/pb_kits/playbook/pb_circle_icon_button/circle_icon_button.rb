@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Playbook
   module PbCircleIconButton
     class CircleIconButton
@@ -5,14 +7,8 @@ module Playbook
 
       partial "pb_circle_icon_button/circle_icon_button"
 
-      prop :variant, type: Playbook::Props::Enum,
-                     values: %w[primary secondary link],
-                     default: "primary"
-      prop :disabled, type: Playbook::Props::Boolean,
-                     default: false
+      prop :button, type: Playbook::Props::Hash, required: true
       prop :icon, required: true
-      prop :dark, type: Playbook::Props::Boolean,
-                     default: false
 
       def classname
         generate_classname("pb_circle_icon_button_kit")

@@ -7,7 +7,7 @@
   <% end %>
 
   <% if object.stat_value.present? %>
-    <%= pb_rails("stat_value", props: object.formatted_stat_value) %>
+    <%= pb_rails("stat_value", props: object.stat_value) %>
   <% end %>
 
   <% if object.stat_change.present? %>

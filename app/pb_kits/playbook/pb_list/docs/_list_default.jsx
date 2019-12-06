@@ -7,7 +7,11 @@ import {
 
 function ListDefault() {
   return (
-    <h1>{`Coming Soon...`}</h1>
+    <List layout={"left"} size={"small"} ordered={true} >
+      <ListItem>Blah</ListItem>
+      <ListItem>Cool</ListItem>
+      <ListItem>Awesome</ListItem>
+    </List>
   )
 }
 

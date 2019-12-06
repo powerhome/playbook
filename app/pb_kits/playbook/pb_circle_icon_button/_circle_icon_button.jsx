@@ -1,10 +1,12 @@
+/* @flow */
+/*eslint-disable react/no-multi-comp, flowtype/space-before-type-colon */
+
 import React from 'react'
+import classnames from "classnames"
 import {Button, Icon} from "../"
 
 type CircleIconButtonProps = {
-  variant?: 'primary' | 'secondary' | 'link',
-  disabled?: Boolean,
-  dark?: Boolean,
+  button: Object,
   className?: String,
   icon: String,
   id?: String,
@@ -12,15 +14,15 @@ type CircleIconButtonProps = {
 
 const CircleIconButton = (props: CircleIconButtonProps) => {
   const {
-    variant,
-    disabled,
+    button,
+    className,
     icon,
-    dark
+    id,
   } = props
-
+  
   return (
-    <div className={'pb_circle_icon_button_kit'}>
-      <Button text={null} variant={variant} disabled={disabled} dark={dark}>
+    <div id={id} className={classnames(`pb_circle_icon_button_kit`, className)}>
+      <Button {...button} text={null} id="pb_circle_icon_button_button">
         <Icon fixedWidth icon={icon} />
       </Button>
     </div>

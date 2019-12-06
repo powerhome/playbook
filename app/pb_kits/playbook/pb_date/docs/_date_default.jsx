@@ -1,18 +1,10 @@
 import React from "react"
-import {Date} from "../../"
+import Date from "../../"
 
 function DateDefault() {
   return (
     <div>
-      <Date size='lg' value='1995-12-25' />
-
-      <br/>
-
-      <Date value='17 Mar 69' />
-
-      <br/>
-
-      <Date size='xs' value='2020-04-20T04:20:00.000Z' />
+      <h1>{`Coming Soon...`}</h1>
     </div>
   )
 }

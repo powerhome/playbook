@@ -1,50 +1,43 @@
-/* @flow */
-
-import React from 'react'
-import PropTypes from 'prop-types'
-import classnames from 'classnames'
-import {Caption} from '../'
+import React from "react";
+import PropTypes from "prop-types";
+import classnames from "classnames";
+import { Caption } from "../";
 
 const propTypes = {
   className: PropTypes.string,
+  dark: PropTypes.bool,
+  onChange: PropTypes.func,
   name: PropTypes.string,
   label: PropTypes.string,
-  onChange: PropTypes.func,
   placeholder: PropTypes.string,
   type: PropTypes.string,
-  value: PropTypes.oneOfType([
-      PropTypes.string,
-      PropTypes.number
-  ])
-}
+  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+};
 
 const defaultProps = {
-  onChange: () => {},
-  type: 'text'
-}
+  type: "text"
+};
 
 class TextInput extends React.Component {
   render() {
     const {
       className,
-      name,
+      dark,
       label,
-      onChange = () => {},
+      name,
+      onChange,
       placeholder,
       type,
       value
-    } = this.props
+    } = this.props;
 
-    const css = classnames([
-      `pb_text_input_kit`,
-      className,
-    ])
+    const css = classnames([`pb_text_input_kit{dark === true ? '_dark' : ""}`, className]);
 
     return (
-      <div className={css}>
+      <div className="pb_text_input_kit">
         <Caption text={label} />
-        <div className='text_input_wrapper'>
-          <input className='text_input'
+        <div className="text_input_wrapper">
+          <input className={css}
               name={name}
               onChange={onChange}
               placeholder={placeholder}
@@ -53,7 +46,7 @@ class TextInput extends React.Component {
           />
         </div>
       </div>
-    )
+    );
   }
 }
 

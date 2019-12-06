@@ -13,12 +13,12 @@ type DashboardValueProps = {
   align?: 'left' | 'center' | 'right',
   className?: String,
   id?: String,
-  statChange?: {
+  stat_change?: {
     change?: String,
     value?: String | Number
   },
-  statLabel?: String,
-  statValue?: {
+  stat_label?: String,
+  stat_value?: {
     unit?: String,
     value?: String | Number
   }
@@ -39,22 +39,40 @@ const DashboardValue = (props: DashboardValueProps) => {
     align='left',
     className,
     id,
-    statChange,
-    statLabel,
-    statValue,
+    stat_change,
+    stat_label,
+    stat_value,
   } = props
+
+  const statLabel = function(stat_label) {
+    if (stat_label) {
+      return (
+        <Body color="light">{stat_label}</Body>
+      )
+    }
+  }
+
+  const statChange = function(stat_change) {
+    if (stat_change) {
+      return (
+        <StatChange change={stat_change.change} value={stat_change.value} />
+      )
+    }
+  }
+
+  const statValue = function(stat_value) {
+    if (stat_value) {
+      return (
+        <StatValue value={stat_value.value} unit={stat_value.unit} />
+      )
+    }
+  }
 
   return (
     <div id={id} className={classnames(dashboardValueCSS(props), className)}>
-      <If condition={statLabel}>
-        <Body color="light">{statLabel}</Body>
-      </If>
-      <If condition={statValue}>
-        <StatValue value={statValue.value} unit={statValue.unit} />
-      </If>
-      <If condition={statChange}>
-        <StatChange change={statChange.change} value={statChange.value} />
-      </If>
+      {statLabel(stat_label)}
+      {statValue(stat_value)}
+      {statChange(stat_change)}
     </div>
   )
 }

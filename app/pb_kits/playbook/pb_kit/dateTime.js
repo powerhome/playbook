@@ -39,10 +39,6 @@ export default class DateTime {
     return this.value.strftime("%e")
   }
 
-  toWeekday() {
-    return this.value.strftime("%a")
-  }
-
   toIso() {
     return this.value.toISOString();
   }

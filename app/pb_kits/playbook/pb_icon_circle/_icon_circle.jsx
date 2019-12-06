@@ -1,24 +1,19 @@
-/* @flow */
-
 import React from 'react';
-import {Icon} from "../";
+import PropTypes from "prop-types";
 
-const IconCircleProps = {
-  className: String,
-  icon: String,
-  id: String,
-  size: String,
-  variant: String,
+const propTypes = {
+  className: PropTypes.string,
+  id: PropTypes.string
 };
 
-const IconCircle = ({
-  icon,
-  size='md',
-  variant='default'
-}: IconCircleProps) => (
-  <div className={`pb_icon_circle_kit_${size}_${variant}`}>
-    <Icon icon={icon} />
-  </div>
-)
+class IconCircle extends React.Component {
+  render() {
+    return (
+      <h1>{`Coming Soon...`}</h1>
+    )
+  }
+}
 
-export default IconCircle
+IconCircle.propTypes = propTypes;
+
+export default IconCircle;

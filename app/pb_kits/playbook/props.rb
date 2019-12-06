@@ -23,14 +23,14 @@ module Playbook
     extend ActiveSupport::Concern
 
     def initialize(prop_values = {}, &block)
-      self.values = { children: block }.merge(Hash(prop_values))
+      @values = { children: block }.merge(prop_values)
       self.class.props.each do |key, definition|
-        definition.validate! values[key]
+        definition.validate! @values[key]
       end
     end
 
     def prop(name)
-      self.class.props[name].value values[name]
+      self.class.props[name].value @values[name]
     end
 
     def generate_classname(*name_parts, separator: "_")
@@ -39,9 +39,6 @@ module Playbook
         prop(:classname),
       ].compact.join(" ")
     end
-
-    attr_accessor :values
-    private :values, :values=
 
     included do
       prop :id
@@ -54,11 +51,6 @@ module Playbook
     class_methods do
       def props
         @props
-      end
-
-      def clear_props
-        @props.keys.each { |prop_name| remove_method(prop_name) }
-        @props.clear
       end
 
       def prop(name, type: Playbook::Props::String, **options)

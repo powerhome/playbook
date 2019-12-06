@@ -11,10 +11,8 @@
   <% end %>
   <%= content_tag(:div,
       class: "content_wrapper") do %>
-    <%= pb_rails("title", props: { text: object.name, size: object.title_size, dark: object.dark }) %>
+    <%= pb_rails("title", props: { text: object.name, size: object.title_size }) %>
     <%= pb_rails("body", props: {
-      text: object.name,
-      dark: object.dark,
       text: object.title,
       color: "light"
     }) %>

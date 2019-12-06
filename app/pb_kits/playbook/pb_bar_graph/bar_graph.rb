@@ -28,7 +28,7 @@ module Playbook
           title: title,
           subtitle: subtitle,
           axisTitle: axis_title,
-          pointStart: point_start,
+          pointStart: point_start
         }.to_json.html_safe
       end
 

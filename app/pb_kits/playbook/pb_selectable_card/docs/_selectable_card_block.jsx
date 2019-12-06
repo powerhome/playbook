@@ -5,10 +5,11 @@ import {
   Title
 } from "../../"
 
+
 class SelectableCardBlock extends React.Component {
   state = {
-    block: true,
-    tag: false
+    chrome: true,
+    firefox: false
   }
 
   handleSelect = event => {
@@ -19,27 +20,32 @@ class SelectableCardBlock extends React.Component {
 
   render() {
     return (
-      <div class="pb--doc-demo-row">
-
+      <div>
         <SelectableCard
-            inputId="block"
-            name="block"
-            value="block"
-            checked={this.state.block}
-            onChange={this.handleSelect}>
-          <Title text="Block" size={4} />
-          <Body tag="span">This uses block</Body>
-        </SelectableCard>
-
-        <SelectableCard
-            inputId="tag"
-            name="tag"
-            value="tag"
-            checked={this.state.tag}
+            id="chrome"
+            name="chrome"
+            value="chrome"
+            checked={this.state.chrome}
             onChange={this.handleSelect}
-            text="This passes text through the tag">
+            onSelect={event => console.log(`${event.target.name} checked!`)}
+            onUnselect={event => console.log(`${event.target.name} unchecked!`)}>
+          <Title text="Browser" size={4} />
+          <Body tag="span">I enjoy using Chrome</Body>
         </SelectableCard>
 
+        <br></br>
+
+        <SelectableCard
+            id="firefox"
+            name="firefox"
+            value="firefox"
+            checked={this.state.firefox}
+            onChange={this.handleSelect}
+            onSelect={event => console.log(`${event.target.name} checked!`)}
+            onUnselect={event => console.log(`${event.target.name} unchecked!`)}>
+          <Title text="Browser" size={4} />
+          <Body tag="span">I enjoy using Firefox</Body>
+        </SelectableCard>
       </div>
     )
   }

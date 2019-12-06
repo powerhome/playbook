@@ -1,56 +1,60 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
+/* @flow */
 
-const propTypes = {
-  dark:PropTypes.bool,
-  borderless:PropTypes.bool,
-  size:PropTypes.oneOf(["", "large"]),
-  ordered:PropTypes.bool,
-  layout: PropTypes.oneOf(["", "left", "right"]),
-  xpadding:PropTypes.bool,
-  children: PropTypes.oneOfType([
-      PropTypes.arrayOf(PropTypes.node),
-      PropTypes.node
-  ])
-};
+import React from 'react'
+import classnames from 'classnames'
 
-const defaultProps = {
-  dark:false,
-  borderless:false,
-  size:"",
-  ordered:false,
-  layout:"",
-  xpadding:false
-};
-
-class List extends Component {
-  render() {
-    const {
-      dark,
-      borderless,
-      size,
-      ordered,
-      layout,
-      xpadding,
-      children
-    } = this.props;
-    const dark_class = dark === true ? "_dark" : ""
-    const borderless_class = borderless === true ? "list_borderless" : ""
-    const size_class = "_" + size
-    const ordered_class = ordered === true ? "_ordered" : ""
-    const layout_class = "_"+ layout
-    const xpadding_class = xpadding === true ? "_xpadding" : ""
-    return (
-      <div className={`pb_list${dark_class}${borderless_class}${size_class}${ordered_class}${layout_class}${xpadding_class}`}>
-        <ul>
-          {children}
-        </ul>
-      </div>
-    );
-  }
+type ListProps = {
+  borderless?: Boolean,
+  children?: Array<React.ReactChild>,
+  className?: String,
+  dark?: Boolean,
+  layout?: '' | 'left' | 'right',
+  ordered?: Boolean,
+  size?: '' | 'small' | 'large',
+  xpadding?: Boolean
 }
 
-List.propTypes = propTypes;
-List.defaultProps = defaultProps;
+const listCSS = ({
+  borderless=false,
+  dark=false,
+  layout="",
+  ordered=false,
+  size="",
+  xpadding=false
+}: ListProps) => {
 
-export default List;
+  const borderStyle = borderless === true ? '_borderless' : ''
+  const layoutStyle = "_"+ layout
+  const orderedStyle = ordered === true ? "_ordered" : ""
+  const sizeStyle = "_" + size
+  const themeStyle = dark === true ? '_dark' : ''
+  const xpaddingStyle = xpadding === true ? `_xpadding` : ''
+
+  return 'pb_list_kit' + borderStyle + layoutStyle + orderedStyle + sizeStyle + themeStyle + xpaddingStyle
+}
+
+
+const List = (props: ListProps) => {
+  const {
+    borderless,
+    children,
+    className,
+    dark,
+    layout,
+    ordered,   
+    size,
+    xpadding,
+  } = props;
+  
+  const Tag = ordered === true ? `ol` : `ul`
+
+  return (
+    <div className={classnames(listCSS(props), className)}>
+      <Tag>
+        {children}
+      </Tag>
+    </div>
+  );
+}
+
+export default List

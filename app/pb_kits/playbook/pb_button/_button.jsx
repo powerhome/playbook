@@ -98,9 +98,9 @@ const Button = (props: ButtonPropTypes) => {
     <If condition={link !== null}>
       <a
         {...buttonAria}
+        id={id}
         className={css}
         href={link}
-        id={id}
         target={newWindow ? '_blank' : null}>
         <If condition={loading}>{loadingIcon}</If>
         {content}
@@ -108,8 +108,8 @@ const Button = (props: ButtonPropTypes) => {
       <Else />
       <button
         {...buttonAria}
-        className={css}
         id={id}
+        className={css}
         onClick={onClick}
         type={htmlType}
         value={value}>

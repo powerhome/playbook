@@ -1,52 +1,41 @@
 /* @flow */
 
-import React from 'react'
-import classnames from 'classnames'
+import React from "react";
 
+type EventHandler = (SyntheticInputEvent<HTMLInputElement>) => void;
 type CardPropTypes = {
   children: Array<React.ReactNode> | React.ReactNode,
   className?: String,
-  highlight?: {
-    position?: String,
-    color?: String
-  },
-  padding?: 'none' | 'xs' | 'sm' | 'md' | 'lg' | 'xl',
+  onClick?: EventHandler,
+  padding?: "none" | "xs" | "sm" | "md" | "lg" | "xl",
   selected?: Boolean,
-  shadow?: 'none' | 'shallow' | 'default' | 'deep' | 'deeper' | 'deepest',
-}
+  shadow?: "none" | "shallow" | "default" | "deep" | "deeper" | "deepest"
+};
 
-const cardCSS = ({
-  highlight={},
-  selected=false,
-  shadow='none'
-}: CardPropTypes) => {
-  let css = 'pb_card_kit'
-  css += highlight.position ? `_highlight_${highlight.position}` : null
-  css += highlight.color ? `_highlight_${highlight.color}` : null
-  css += selected ? '_selected' : '_deselected'
-  css += `_shadow_${shadow}`
-  return css
-}
+const cardCSS = ({ selected = false, shadow = "none" }: CardPropTypes) => {
+  let css = "";
+  css += selected ? "_selected" : "_deselected";
+  css += `_shadow_${shadow}`;
+  return css;
+};
 
-const bodyCSS = ({padding='md'}: CardPropTypes) => {
-  let css = 'pb_card_body_kit'
-  css += `_${padding}`
-  return css
-}
+const bodyCSS = ({ padding = "md" }: CardPropTypes) => {
+  let css = "";
+  css += `_${padding}`;
+  return css;
+};
 
 const Card = (props: CardPropTypes) => {
-  const {
-    children,
-    className
-  } = props
+  const { children, className, onClick = () => {} } = props;
 
   return (
-    <div className={classnames(cardCSS(props), className)}>
-      <div className={bodyCSS(props)}>
-        { children }
-      </div>
+    <div
+      onClick={onClick}
+      className={`pb_card_kit${cardCSS(props)} ${className}`}
+    >
+      <div className={`pb_card_body_kit${bodyCSS(props)}`}>{children}</div>
     </div>
-  )
-}
+  );
+};
 
-export default Card
+export default Card;

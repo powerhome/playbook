@@ -66,9 +66,6 @@ $card_colors: (
 );
 
 $primary-action:      $primary;
-$action_colors: (
-  primary_action:            $primary-action
-);
 
 // Active colors ----------------------
 $active_light:        #E5F2FF;
@@ -84,14 +81,6 @@ $hover_dark:          rgba($white, $opacity_2);
 $hover_colors: (
   hover_light:        $hover_light,
   hover_dark:         $hover_dark
-);
-
-// Focus colors -----------------------
-$focus_input_light:   rgba($active_light, $opacity_2);
-$focus_input_dark:    rgba($active_dark, $opacity_2);
-$focus_input_colors: (
-  focus_input_light:        $focus_input_light,
-  focus_input_dark:         $focus_input_dark
 );
 
 // Border colors ----------------------
@@ -191,14 +180,6 @@ $product_colors: (
 
 $transparent: transparent;
 
-@mixin gradient($start: $gradient_start, $end: $gradient_end) {
-  background: $start;
-  background: -moz-linear-gradient(-45deg,  $start 0%, $end 100%);
-  background: -webkit-linear-gradient(-45deg,  $start 0%, $end 100%);
-  background: linear-gradient(135deg,  $start 0%, $end 100%);
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#{$start}', endColorstr='#{$end}', GradientType=1);
-}
-
 :export {
 
   @mixin export-colors($colors-list) {
@@ -216,7 +197,6 @@ $transparent: transparent;
   @include export-colors($background_colors);
   @include export-colors($card_colors);
   @include export-colors($active_colors);
-  @include export-colors($action_colors);
   @include export-colors($hover_colors);
   @include export-colors($border_colors);
   @include export-colors($text_colors);

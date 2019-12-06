@@ -1,78 +1,21 @@
 import React from 'react';
+import PropTypes from "prop-types";
 
-import {
-  Body,
-  Caption,
-  Avatar,
-} from '../'
+const propTypes = {
+  className: PropTypes.string,
+  id: PropTypes.string
+};
 
-type MessageProps = {
-  avatarName?: String,
-  avatarStatus?: String,
-  avatarUrl?: String,
-  label?: String,
-  message: String,
-  timestamp?: String,
-}
-
-const print_label = (label) => {
-  if ( label != null ) {
+class Message extends React.Component {
+  render() {
     return (
-      <Caption>{`${label}`}</Caption>
-    )
-  }
-}
-
-const print_timestamp = (timestamp) => {
-  if ( timestamp != null ) {
-    return(
-      <Caption size='xs'>{`${timestamp}`}</Caption>
-    )
-  }
-}
-
-const Message = (props: MessageProps) => {
-  const {
-    avatarName='',
-    avatarUrl='',
-    label='',
-    message='',
-    timestamp='',
-    avatarStatus=null
-  } = props
-  
-  const print_avatar = (avatarName, avatarUrl, avatarStatus) => {
-    if ( avatarUrl !== '' && avatarName !== '' ) {
-      return (
-        <Avatar name={avatarName} size='sm' imageUrl={avatarUrl} status={avatarStatus}/>
-      )
-    }
-    if ( avatarUrl === '' && avatarName !== '' ) {
-      return (
-        <Avatar name={avatarName} size='sm' status={avatarStatus}/>
-      )
-    }
-  }
-
-  const messageCSS = ( avatarUrl, avatarName ) => {
-    if (avatarUrl != '' || avatarName != '') {
-      return 'pb_message_kit_avatar'
-    }
-    else {
-      return 'pb_message_kit'
-    }
-  }
-
-  return (
-    <div className={messageCSS(avatarName, avatarUrl)}>
-      {print_avatar(avatarName, avatarUrl, avatarStatus)}
-      <div class="content_wrapper">
-        {print_label(label)}
-        <Body>{message}</Body>
-        {print_timestamp(timestamp)}
+      <div className="pb_message">
+        <span>MESSAGE CONTENT</span>
       </div>
-    </div>
-  )
+    )
+  }
 }
+
+Message.propTypes = propTypes;
 
 export default Message;

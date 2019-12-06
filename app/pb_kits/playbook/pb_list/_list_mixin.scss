@@ -9,6 +9,7 @@
     margin: 0;
     padding: 0;
     list-style: none;
+
   }
 
   ol {
@@ -78,6 +79,9 @@
   &:before {
     color: $text_dk_light;
   }
+}
+@mixin pb_list_small {
+  padding: $space-xs 0;
 }
 @mixin pb_list_large {
   padding: $space-lg 0;

@@ -1,12 +1,10 @@
-# frozen_string_literal: true
-
 module Playbook
   module PbKit
     class PbDateTime
       attr_accessor :value, :zone
 
       def initialize(value, zone = "America/New_York")
-        @value = convert_to_timestamp_and_zone(value, zone)
+        @value = self.convert_to_timestamp_and_zone(value, zone)
       end
 
       def convert_to_timestamp_and_zone(value, zone)

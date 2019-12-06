@@ -1,28 +1,21 @@
-/* @flow */
-import React from 'react'
-import classnames from 'classnames'
+import React from 'react';
+import PropTypes from "prop-types";
 
-import Caption from '../pb_caption/_caption.jsx'
-
-type SectionSeparatorProps = {
-  className: String,
-  text: String,
-  variant?: 'card' | 'background'
+const propTypes = {
+  className: PropTypes.string,
+  id: PropTypes.string
 };
 
-const SectionSeparator = ({
-  className,
-  text,
-  variant = 'card'
-}: SectionSeparatorProps) => {
-
-  const css = classnames([`pb_section_separator_kit_${variant}`, className])
-
-  return (<div className={css}>
-    <span>
-      <Caption text={text}/>
-    </span>
-  </div>)
+class SectionSeparator extends React.Component {
+  render() {
+    return (
+      <div className="pb_section_separator">
+        <span>SECTION SEPARATOR CONTENT</span>
+      </div>
+    )
+  }
 }
 
-export default SectionSeparator
+SectionSeparator.propTypes = propTypes;
+
+export default SectionSeparator;

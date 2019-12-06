@@ -1,5 +1,7 @@
 examples:
   rails:
   - text_input_default: Default
+  - text_input_dark: Dark
   react:
   - text_input_default: Default
+  - text_input_dark: Dark

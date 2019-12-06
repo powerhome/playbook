@@ -13,11 +13,9 @@ kits:
   - dashboard_value
   - date
   - date_range_inline
-  - date_stacked
   - date_year_stacked
   - distribution_bar
   - fixed_confirmation_toast
-  - form
   - hashtag
   - home_address_street
   - icon
@@ -31,16 +29,13 @@ kits:
   - list
   - loading_inline
   - message
-  - multiple_users
   - nav
   - online_status
   - person
   - person_contact
   - pill
-  - progress_pills
   - progress_simple
   - section_separator
-  - select
   - selectable_card
   - source
   - star_rating
@@ -48,7 +43,6 @@ kits:
   - stat_value
   - table
   - text_input
-  - textarea
   - time
   - timestamp
   - title
@@ -57,3 +51,4 @@ kits:
   - toggle
   - user
   - user_badge
+  - circle_icon_button

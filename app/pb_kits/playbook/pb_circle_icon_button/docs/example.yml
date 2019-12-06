@@ -1,9 +1,10 @@
 examples:
   
   rails:
-  - circle_icon_button_default: Default
-  - circle_icon_button_dark: Dark
+  - circle_icon_button_default: Button Variants
+  - circle_icon_button_dark: Button Variants Dark
   
   react:
-  - circle_icon_button_default: Default
-  - circle_icon_button_dark: Dark
+  - circle_icon_button_default: Button Variants
+  - circle_icon_button_dark: Button Variants Dark
+  

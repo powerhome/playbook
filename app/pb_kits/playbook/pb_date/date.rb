@@ -33,7 +33,7 @@ module Playbook
     private
 
       def pb_date_time
-        Playbook::PbKit::PbDateTime.new(date)
+        pb_date_time ||= Playbook::PbKit::PbDateTime.new(date)
       end
     end
   end

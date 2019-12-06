@@ -1,17 +1,18 @@
-import React from 'react'
-import classnames from 'classnames'
-import { Icon } from '../'
+/* @flow */
+/*eslint-disable react/no-multi-comp, flowtype/space-before-type-colon */
 
-import type {
-  InputCallback
-} from "../types"
+import React from "react";
+import classnames from "classnames";
+import { Icon } from "../";
+
+import type { InputCallback } from "../types";
 
 import {
   buildAriaProps,
   buildDataProps,
   buildCss,
-  noop,
-} from '../utilities/props'
+  noop
+} from "../utilities/props";
 
 type Props = {
   aria: Object,
@@ -23,10 +24,11 @@ type Props = {
   disabled?: Boolean,
   icon?: Boolean,
   id?: String,
-  inputId?: String,
   multi?: Boolean,
   name?: String,
   onChange: InputCallback,
+  onSelect: InputCallback,
+  onUnselect: InputCallback,
   text?: String,
   value?: String
 };
@@ -39,59 +41,59 @@ const SelectableCard = ({
   dark = false,
   data = {},
   disabled = false,
-  icon = false,
+  icon = true,
   id = null,
-  inputId = null,
   multi = true,
   name,
   onChange = noop,
+  onSelect = noop,
+  onUnselect = noop,
   text,
   value,
   ...props
 }: Props) => {
-  const ariaProps = buildAriaProps(aria)
-  const dataProps = buildDataProps(data)
-  
+  const ariaProps = buildAriaProps(aria);
+  const dataProps = buildDataProps(data);
+  const handleChange = event => {
+    onChange(event);
+    event.target.checked ? onSelect(event) : onUnselect(event);
+  };
+
   const css = buildCss({
-    'pb_selectable_card_kit': true,
-    'checked': checked,
-    'dark': dark,
-    'disabled': disabled,
-    'enabled': !disabled,
-  })
+    pb_selectable_card_kit: true,
+    checked: checked,
+    dark: dark,
+    disabled: disabled,
+    enabled: !disabled
+  });
 
   const displayIcon = () => {
-    if(icon === true) {
-      return (
-        <div className="pb_selectable_card_circle">
-          <Icon icon="check" fixedWidth/>
-        </div>
-      )
+    if (icon === true) {
+      return <Icon icon="check" fixedWidth />;
     }
-  }
+  };
 
-  const inputType = multi === false ? "radio" : "checkbox"
+  const inputType = multi === false ? "radio" : "checkbox";
 
-  const inputIdPresent = inputId !== null ? inputId : name
-
+  const htmlFor = id !== null ? id : name;
 
   return (
-    <div {...ariaProps} {...dataProps} className={classnames(css, className)}>
+    <span {...ariaProps} {...dataProps} className={classnames(css, className)}>
       <input
-          {...props}
-          name={name}
-          value={value}
-          id={inputIdPresent}
-          type={inputType}
-          checked={checked}
-          disabled={disabled}
-          onChange={onChange}
+        {...props}
+        name={name}
+        value={value}
+        id={htmlFor}
+        type={inputType}
+        checked={checked}
+        disabled={disabled}
+        onChange={handleChange}
       />
-      <label htmlFor={inputIdPresent}>
-        { text || children }
-        {displayIcon()}
+      <label htmlFor={htmlFor}>
+        {text || children}
+        <div className="pb_selectable_card_circle">{displayIcon()}</div>
       </label>
-    </div>
+    </span>
   );
 };
 export default SelectableCard;
