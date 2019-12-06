@@ -6,6 +6,9 @@ examples:
   - user_text_only: Text Only
   - user_size: Horizontal Size
   - user_vertical_size: Vertical Size
+  - user_dark: Dark
+  - user_text_only_dark: Text Only
+
 
 
   react:
@@ -14,4 +17,3 @@ examples:
   - user_text_only: Text Only
   - user_size: Horizontal Size
   - user_vertical_size: Vertical Size
-

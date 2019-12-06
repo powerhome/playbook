@@ -21,10 +21,11 @@ module Playbook
                   values: %w[lg md sm],
                   default: "sm"
       prop :title
-      prop :territory
+      prop :dark, type: Playbook::Props::Boolean,
+                          default: false
 
       def classname
-        generate_classname("pb_user_kit", align, orientation, size)
+        generate_classname("pb_user_kit", align, orientation, size, dark_class)
       end
 
       def avatar_size
@@ -37,6 +38,11 @@ module Playbook
           "sm"
         end
       end
+
+      def dark_class
+        dark ? "dark" : nil
+      end
+
 
       def title_size
         size == "lg" ? 3 : 4
