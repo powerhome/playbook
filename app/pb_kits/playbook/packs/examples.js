@@ -52,6 +52,8 @@ import * as Pill from 'pb_pill/docs'
 import * as ProgressPills from 'pb_progress_pills/docs'
 import * as ProgressSimple from 'pb_progress_simple/docs'
 import * as SectionSeparator from 'pb_section_separator/docs'
+import * as Select from 'pb_select/docs'
+import * as SelectableCard from 'pb_selectable_card/docs'
 import * as Source from 'pb_source/docs'
 import * as StarRating from 'pb_star_rating/docs'
 import * as StatChange from 'pb_stat_change/docs'
@@ -108,6 +110,8 @@ WebpackerReact.setup(Pill)
 WebpackerReact.setup(ProgressPills)
 WebpackerReact.setup(ProgressSimple)
 WebpackerReact.setup(SectionSeparator)
+WebpackerReact.setup(Select)
+WebpackerReact.setup(SelectableCard)
 WebpackerReact.setup(Source)
 WebpackerReact.setup(StarRating)
 WebpackerReact.setup(StatChange)
@@ -123,4 +127,3 @@ WebpackerReact.setup(TitleDetail)
 WebpackerReact.setup(Toggle)
 WebpackerReact.setup(User)
 WebpackerReact.setup(UserBadge)
-

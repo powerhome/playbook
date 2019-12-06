@@ -1,0 +1,87 @@
+@import "../tokens/animation-curves";
+@import "../tokens/colors";
+@import "../tokens/opacity";
+@import "../tokens/shadows";
+@import "../tokens/spacing";
+@import "../tokens/transition";
+@import "../tokens/typography";
+@import "../pb_card/card";
+
+$pb_selectable_card_indicator_size: 22px;
+$pb_selectable_card_border: 2px;
+
+[class^=pb_selectable_card_kit] {
+  display: block;
+
+  label {
+    @include pb_card;
+    padding: $space_sm + 1;
+    cursor: pointer;
+
+    &:hover {
+      box-shadow: $shadow-default;
+      border-color: $slate;
+    }
+
+    .pb_selectable_card_circle {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: $pb_selectable_card_indicator_size;
+      width: $pb_selectable_card_indicator_size;
+      border-radius: ($pb_selectable_card_indicator_size/2) + ($pb_selectable_card_border/2);
+      border-width: $pb_selectable_card_border;
+      border-style: solid;
+      border-color: $white;
+      background: $primary_action;
+      color: $white;
+      font-size: $font_smaller;
+      text-align: center;
+      position: absolute;
+      top: -($pb_selectable_card_indicator_size/2);
+      right: -($pb_selectable_card_indicator_size/2);
+      opacity: 0;
+      transition-property: opacity;
+      transition-duration: $transition_short;
+      transition-timing-function: $easeIn;
+    }
+  }
+
+  input[type="checkbox"],
+  input[type="radio"] {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    display: none;
+
+    &:checked ~ label {
+      position: relative;
+      @include pb_card_selected;
+      padding: $space_sm;
+
+      .pb_selectable_card_circle {
+        opacity: $opacity_10;
+      }
+    }
+  }
+
+  &[class*=_dark] {
+    label {
+      @include pb_card_dark;
+      background: transparent;
+
+      .pb_selectable_card_circle {
+        border-color: $bg_dark;
+        background: $primary-action;
+      }
+    }
+
+    input[type="checkbox"],
+    input[type="radio"] {
+      &:checked ~ label {
+        @include pb_card_selected_dark;
+        background: transparent;
+      }
+    }
+  }
+}

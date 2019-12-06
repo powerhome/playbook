@@ -17,6 +17,7 @@ kits:
   - date_year_stacked
   - distribution_bar
   - fixed_confirmation_toast
+  - form
   - hashtag
   - home_address_street
   - icon
@@ -39,13 +40,15 @@ kits:
   - progress_pills
   - progress_simple
   - section_separator
+  - select
+  - selectable_card
   - source
   - star_rating
   - stat_change
   - stat_value
   - table
-  - textarea
   - text_input
+  - textarea
   - time
   - timestamp
   - title
@@ -54,4 +57,3 @@ kits:
   - toggle
   - user
   - user_badge
-  - form

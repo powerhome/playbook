@@ -1,0 +1,33 @@
+<%= pb_rails("select", props: {
+  label: "Favorite Coffee",
+  name: "coffee",
+  options: [
+    {
+      value: "1",
+      disabled: true,
+      value_text: "Espresso",
+    },
+    {
+      value: "2",
+      selected: true,
+      value_text: "Americano",
+    },
+    {
+      value: "3",
+      disabled: true,
+      value_text: "Cappuccino",
+    },
+    {
+      value: "4",
+      value_text: "Mocha",
+    },
+    {
+      value: "5",
+      value_text: "Flat White",
+    },
+    {
+      value: "6",
+      value_text: "Latte",
+    },
+  ]
+}) %>

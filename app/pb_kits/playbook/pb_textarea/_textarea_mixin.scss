@@ -1,46 +1,51 @@
 @import "../tokens/colors";
 @import "../tokens/border_radius";
 @import "../tokens/spacing";
+@import "../tokens/animation-curves";
+@import "../pb_title/title_mixin";
 
-@mixin pb_textarea($border_color, $background_color, $text_color){
-    @include pb_title_4;
-    border: 1px solid $border_color;
-    border-radius: $border_rad_light;
-    display: block;
-    width: 100%;
-    color: $text_color;
-    background: $background_color;
-    padding: $space_xs $space_sm;
-    transition: $easeIn;
-    outline: none;
-    margin-top: $space_xs;
-    margin-bottom: $space_sm;
-    overflow: auto;
-    overflow-wrap: break-word;
-    resize: none;
+@mixin pb_textarea($border_color, $background_color, $text_color) {
+  @include pb_title_4;
+  border: 1px solid $border_color;
+  border-radius: $border_rad_heavier;
+  display: block;
+  width: 100%;
+  color: $text_color;
+  background-color: $background_color;
+  padding: ($space_xs + 4) $space_sm;
+  transition: $easeIn;
+  outline: none;
+  overflow: auto;
+  overflow-wrap: break-word;
+  resize: none;
+  transition-property: border-color, box-shadow, color, background-color;
+  transition-duration: .24s;
+  transition-timing-function: $bezier;
+  &:disabled, &:disabled:hover, &:disabled:focus, &:disabled:active {
+    background-color: shade($background_color, 5%);
+    box-shadow: none;
+    opacity: 0.5;
+  }
 }
 
 @mixin pb_textarea_focus($focus_color: $focus_input_light) {
-    background: $focus_color;
+  background-color: $focus_color;
 }
 
 // Textarea ======================
 @mixin pb_textarea_light {
-    @include pb_textarea($border_light, $white, $text_lt_default);
+  @include pb_textarea($border_light, $white, $text_lt_default);
 }
 
 @mixin pb_textarea_dark {
-    @include pb_textarea($border_dark, $bg_dark, $text_dk_default);
+  @include pb_textarea($border_dark, $bg_dark, $text_dk_default);
 }
 
 // Hovers ======================
 @mixin pb_textarea_focus_light {
-    @include pb_textarea_focus($focus_input_light);
+  @include pb_textarea_focus($focus_input_light);
 }
 
 @mixin pb_textarea_focus_dark {
-    @include pb_textarea_focus($focus_input_dark);
+  @include pb_textarea_focus($focus_input_dark);
 }
-
-
-

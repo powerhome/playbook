@@ -3,17 +3,17 @@
     data: object.data,
     class: object.classname) do %>
   <% if object.label.present? %>
-    <%= pb_rails("caption", props: {text: object.label, dark: object.dark}) %>
+    <%= pb_rails("caption", props: {text: object.label, dark: object.dark, classname: "pb_textarea_kit_label"}) %>
   <% end %>
   <% if object.children %>
     <%= capture(&object.children) %>
   <% else %>
     <%= text_area(
-        :object, 
-        :method, 
-        :class => "#{object.classname}", 
+        :object,
+        :method,
+        :class => "#{object.classname}",
         :name => object.name,
-        :placeholder => object.placeholder, 
+        :placeholder => object.placeholder,
         :rows => object.rows,
         :value => object.value )%>
   <% end %>
