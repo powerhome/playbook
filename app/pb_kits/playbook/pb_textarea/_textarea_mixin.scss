@@ -2,6 +2,7 @@
 @import "../tokens/border_radius";
 @import "../tokens/spacing";
 @import "../tokens/animation-curves";
+@import "../pb_title/title_mixin";
 
 @mixin pb_textarea($border_color, $background_color, $text_color) {
   @include pb_title_4;

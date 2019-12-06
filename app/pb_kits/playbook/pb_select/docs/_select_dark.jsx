@@ -1,12 +1,13 @@
 import React from 'react'
 import {Select} from '../../'
 
-function SelectDefault() {
+function SelectDark() {
   return (
     <div>
       <Select
         label='Favorite Food'
         name='food'
+        dark
         options={[
           {
             value: '1',
@@ -27,4 +28,4 @@ function SelectDefault() {
   )
 }
 
-export default SelectDefault
+export default SelectDark

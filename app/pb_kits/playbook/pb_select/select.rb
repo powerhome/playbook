@@ -2,18 +2,6 @@
 
 require "action_view"
 
-# label: STRING
-# required: BOOL
-# disabled: BOOL
-# name: STRING
-# blank_selection: STRING
-# options: ARRAY
-#   HASH
-#     value: STRING
-#     selected: BOOL
-#     disabled: BOOL
-#     value_text: STRING
-
 module Playbook
   module PbSelect
     class Select
@@ -67,8 +55,7 @@ module Playbook
         def dark_class
           dark ? "dark" : nil
         end
-
-
+        
     end
   end
 end
