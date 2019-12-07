@@ -44,6 +44,7 @@ module.exports = function(api) {
     ].filter(Boolean),
     plugins: [
       'babel-plugin-jsx-control-statements',
+      '@babel/plugin-proposal-export-default-from',
       require('babel-plugin-macros'),
       require('@babel/plugin-syntax-dynamic-import').default,
       isTestEnv && require('babel-plugin-dynamic-import-node'),
