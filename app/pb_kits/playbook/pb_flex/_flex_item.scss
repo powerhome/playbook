@@ -1,0 +1,15 @@
+[class^=pb_flex_item_kit] {
+  &[class*=_fixed_size] {
+    flex-grow: 0;
+    flex-shrink: 0;
+  }
+
+  &[class*=_grow] {
+    flex-grow: 1;
+
+    & > * {
+      height: 100%;
+      width: 100%;
+    }
+  }
+}
