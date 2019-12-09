@@ -1,0 +1,90 @@
+@import "flex_item";
+
+[class^=pb_flex_kit] {
+  display: flex;
+  flex-wrap: nowrap;
+
+  // Inline
+  &[class*=_inline] {
+    display: inline-flex;
+  }
+
+  // Wrap
+  &[class*=_wrap] {
+    flex-wrap: wrap;
+  }
+
+  // Orientation
+  &[class*=_orientation_row] {
+    flex-direction: row;
+  }
+
+  &[class*=_orientation_row_reverse] {
+    flex-direction: row-reverse;
+  }
+
+  &[class*=_orientation_column] {
+    flex-direction: column;
+  }
+
+  &[class*=_orientation_column_reverse] {
+    flex-direction: column-reverse;
+  }
+
+  // Alignment: Justify Content
+  &[class*=justify_content_left],
+  &[class*=justify_content_top] {
+    justify-content: flex-start;
+  }
+
+  &[class*=justify_content_left_reverse],
+  &[class*=justify_content_top_reverse] {
+    justify-content: flex-end;
+  }
+
+  &[class*=justify_content_right],
+  &[class*=justify_content_bottom] {
+    justify-content: flex-end;
+  }
+
+  &[class*=justify_content_right_reverse],
+  &[class*=justify_content_bottom_reverse] {
+    justify-content: flex-start;
+  }
+
+  &[class*=justify_content_center] {
+    justify-content: center;
+  }
+
+  // Alignment: Align Items
+  &[class*=align_items_left],
+  &[class*=align_items_top] {
+    align-items: flex-start;
+  }
+
+  &[class*=align_items_right],
+  &[class*=align_items_bottom] {
+    align-items: flex-end;
+  }
+
+  &[class*=align_items_center] {
+    align-items: center;
+  }
+
+  &[class*=align_items_stretch] {
+    align-items: stretch;
+  }
+
+  // Spacing
+  &[class*=spacing_around] {
+    justify-content: space-around;
+  }
+
+  &[class*=spacing_between] {
+    justify-content: space-between;
+  }
+
+  &[class*=spacing_evenly] {
+    justify-content: space-evenly;
+  }
+}
