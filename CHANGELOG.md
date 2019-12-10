@@ -8,8 +8,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- Introduce CHANGELOG file [@rafbgarcia]()
-- Include Card Separator example in Card kit docs [@rruiz85](#439)
+- Introduce CHANGELOG file (#498 @rafbgarcia)
+- Include Card Separator example in Card kit docs (#439 @rruiz85)
 
 ## [3.0.1] - 2019-12-06
 
