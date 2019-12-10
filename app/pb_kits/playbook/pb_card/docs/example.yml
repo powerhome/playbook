@@ -6,7 +6,7 @@ examples:
   - card_padding: Padding Size
   - card_shadow: Shadow Size
   - card_content: Content Size
-
+  - card_separator: Separator Card
   react:
   - card_light: Default
   - card_highlight: Highlight Cards
@@ -14,3 +14,4 @@ examples:
   - card_padding: Padding Size
   - card_shadow: Shadow Size
   - card_content: Content Size
+  - card_separator: Separator Card
