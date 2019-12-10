@@ -1,21 +1,39 @@
+<%
+break_lines = lambda do |list, spaces = 2, separator = ","|
+  list.join("#{separator}\n#{" " * spaces}") + separator
+end
+
+type_name = "#{@kit_name_pascal}Props"
+
+props_types = @kit_props.map do |key, val|
+  prop_name = key == "classname" ? "className" : key.camelize(:lower)
+  prop_type = case val
+              when "enum", "one_of" then "'option_1' | 'option_2'"
+              when "boolean", "bool" then "Boolean"
+              else "String"
+              end
+
+  "#{prop_name}?: #{prop_type}"
+end
+puts props_types.inspect
+
+props_names = @kit_props.map { |key,| key == "classname" ? "className" : key.camelize(:lower) }
+
+props_and_values = props_names.map { |prop| "<p>{`#{prop}: ${#{prop}}`}</p>" }
+-%>
 /* @flow */
-/*eslint-disable react/no-multi-comp, flowtype/space-before-type-colon */
 
 import React from 'react'
 
-/*
-// Un-comment to import kits here
-import { Body } from '../'
-*/
-
-type <%= @kit_name_pascal %>Props = {
-  <% @kit_props.each do |key,val| %><%= key == "classname" ? "className?: " : "#{key.camelize(:lower)}?: " %><% case val %><% when "enum", "one_of" %>'option_1' | 'option_2',<% when "boolean", "bool" %>Boolean,<% else %>String,<% end %>
-  <% end %>
+type <%= type_name %> = {
+  <%= break_lines.call(props_types) %>
 }
 
-const <%= @kit_name_pascal %> = ({ <%= @kit_props.map{|key,val| key == "classname" ? "className" : "#{key.camelize(:lower)}" }.join(", ") %> }: <%= @kit_name_pascal %>Props) => (
+const <%= @kit_name_pascal %> = ({
+  <%= break_lines.call(props_names) %>
+}: <%= type_name %>) => (
   <div>
-    {`kit content`}
+    <%= break_lines.call(props_and_values, 4, "") %>
   </div>
 )
 

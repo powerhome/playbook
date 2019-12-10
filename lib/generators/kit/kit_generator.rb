@@ -76,12 +76,12 @@ class KitGenerator < Rails::Generators::NamedBase
 
         # Import in all kits.js  =========================
         append_to_file("app/pb_kits/playbook/packs/kits.js") do
-          "import \"../kits/pb_#{@kit_name_underscore}.js\";\n"
+          "import '../kits/pb_#{@kit_name_underscore}.js'\n"
         end
 
         # Import kit examples  ===========================
         append_to_file("app/pb_kits/playbook/packs/examples.js") do
-          "\nimport * as #{@kit_name_pascal} from \"pb_#{@kit_name_underscore}/docs\";\nWebpackerReact.setup (#{@kit_name_pascal});\n"
+          "import * as #{@kit_name_pascal} from 'pb_#{@kit_name_underscore}/docs'\nWebpackerReact.setup(#{@kit_name_pascal})\n"
         end
 
         say_status  "complete",

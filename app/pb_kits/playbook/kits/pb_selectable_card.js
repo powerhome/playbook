@@ -1,4 +1,4 @@
-import SelectableCard from "../pb_selectable_card/_selectable_card.jsx";
+import SelectableCard from '../pb_selectable_card/_selectable_card.jsx'
 
-import WebpackerReact from "webpacker-react";
-WebpackerReact.setup({ SelectableCard });
+import WebpackerReact from 'webpacker-react'
+WebpackerReact.setup({ SelectableCard })

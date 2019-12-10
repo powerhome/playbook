@@ -1,1 +1,1 @@
-export {default as <%= @kit_name_pascal %>Default} from './_<%= @kit_name_underscore %>_default.jsx';
+export { default as <%= @kit_name_pascal %>Default } from './_<%= @kit_name_underscore %>_default.jsx'

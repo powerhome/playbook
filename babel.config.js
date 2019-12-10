@@ -21,9 +21,9 @@ module.exports = function(api) {
         require('@babel/preset-env').default,
         {
           targets: {
-            node: 'current'
-          }
-        }
+            node: 'current',
+          },
+        },
       ],
       (isProductionEnv || isDevelopmentEnv) && [
         require('@babel/preset-env').default,
@@ -31,19 +31,20 @@ module.exports = function(api) {
           forceAllTransforms: true,
           useBuiltIns: 'entry',
           modules: false,
-          exclude: ['transform-typeof-symbol']
-        }
+          exclude: ['transform-typeof-symbol'],
+        },
       ],
       [
         require('@babel/preset-react').default,
         {
-          development: isDevelopmentEnv || isTestEnv
-        }
+          development: isDevelopmentEnv || isTestEnv,
+        },
       ],
-      '@babel/preset-flow'
+      '@babel/preset-flow',
     ].filter(Boolean),
     plugins: [
-      "babel-plugin-jsx-control-statements",
+      'babel-plugin-jsx-control-statements',
+      '@babel/plugin-proposal-export-default-from',
       require('babel-plugin-macros'),
       require('@babel/plugin-syntax-dynamic-import').default,
       isTestEnv && require('babel-plugin-dynamic-import-node'),
@@ -51,34 +52,34 @@ module.exports = function(api) {
       [
         require('@babel/plugin-proposal-class-properties').default,
         {
-          loose: true
-        }
+          loose: true,
+        },
       ],
       [
         require('@babel/plugin-proposal-object-rest-spread').default,
         {
-          useBuiltIns: true
-        }
+          useBuiltIns: true,
+        },
       ],
       [
         require('@babel/plugin-transform-runtime').default,
         {
           helpers: false,
-          regenerator: true
-        }
+          regenerator: true,
+        },
       ],
       [
         require('@babel/plugin-transform-regenerator').default,
         {
-          async: false
-        }
+          async: false,
+        },
       ],
       isProductionEnv && [
         require('babel-plugin-transform-react-remove-prop-types').default,
         {
-          removeImport: true
-        }
-      ]
-    ].filter(Boolean)
+          removeImport: true,
+        },
+      ],
+    ].filter(Boolean),
   }
 }

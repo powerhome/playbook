@@ -1,4 +1,4 @@
-import <%= @kit_name_pascal %> from "../pb_<%= @kit_name_underscore %>/_<%= @kit_name_underscore %>.jsx";
+import <%= @kit_name_pascal %> from '../pb_<%= @kit_name_underscore %>/_<%= @kit_name_underscore %>.jsx'
 
-import WebpackerReact from "webpacker-react";
-WebpackerReact.setup({ <%= @kit_name_pascal %> });
+import WebpackerReact from 'webpacker-react'
+WebpackerReact.setup({ <%= @kit_name_pascal %> })
