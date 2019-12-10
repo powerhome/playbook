@@ -4,7 +4,6 @@
 import React from 'react'
 import Body from '../pb_body/_body.jsx'
 
-
 type RadioProps = {
   className?: String,
   data?: String,
@@ -13,34 +12,41 @@ type RadioProps = {
   name: String,
   value: String,
   checked?: Boolean,
-  dark?: Boolean
-
+  dark?: Boolean,
 }
 
-export const Radio = ({
-  checked,
-  className,
-  dark,
-  data,
-  id,
-  label,
-  name,
-  value,
-}: RadioProps) => (
+const Radio = (props: RadioProps) => {
+  const {
+    checked=false,
+    children,
+    className,
+    dark=false,
+    data,
+    id,
+    label,
+    name,
+    value,
+  } = props
 
-    <label className={`pb_radio_kit` + (dark === true ? '_dark' : '')}>
+  return (
+    <label
+        className={`pb_radio_kit` + (dark === true ? '_dark' : '')}
+        htmlFor={id}
+    >
       <input
           defaultChecked={checked}
           name={name}
           type='radio'
           value={value}
       />
-      <span className='pb_radio_button'>
-        <div className='radio'></div>
-      </span>
-      <span className='body'>{label}</span>
+      <span class="pb_radio_button"/>
+      <If condition={children}>
+        {children}
+      <Else/>
+        <Body text={label} />
+      </If>
     </label>
-
-)
+  );
+};
 
 export default Radio

@@ -16,13 +16,14 @@ module Playbook
       prop :dark, type: Playbook::Props::Boolean,
                       default: false
       prop :name, type: Playbook::Props::String,
-                      default: "RadioGroup"
+                      default: "radio_name"
       prop :text, type: Playbook::Props::String,
-                      default: "Radio Item"
+                      default: "Radio Text"
       prop :value, type: Playbook::Props::String,
-                      default: "placeholder-value"
+                      default: "radio_text"
+      prop :object
       def classname
-        generate_classname("pb_radio_kit", text, checked_class, dark_class)
+        generate_classname("pb_radio_kit", dark_class)
       end
 
       def input
@@ -36,10 +37,6 @@ module Playbook
       end
 
     private
-
-      def checked_class
-        checked ? "on" : "off"
-      end
 
       def dark_class
         dark ? "dark" : nil

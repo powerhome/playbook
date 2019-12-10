@@ -3,7 +3,7 @@ import {Radio} from '../../'
 
 function RadioDark() {
   return (
-    <>
+    <div>
       <Radio
           dark
           label='Power'
@@ -17,7 +17,7 @@ function RadioDark() {
           name='Group1'
           value='Nitro'
       />
-    </>
+    </div>
   )
 }
 export default RadioDark

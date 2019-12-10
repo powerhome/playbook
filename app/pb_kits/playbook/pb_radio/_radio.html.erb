@@ -1,20 +1,16 @@
 <%= content_tag(:label,
     id: object.id,
     data: object.data,
-    text: object.text,
     value: object.value,
     checked: object.checked,
     class: object.classname) do %>
 
-    <%= radio_button_tag object.name, object.value, object.selected %>
-    <span class="pb_radio_button">
-      <div class="radio">
-        <% if object.children %>
-        <%= capture(&object.children) %>
-      <% else %>
-        <%= object.input %>
-      <% end %>
-      </div>
-    </span>
-    <%= pb_rails("body", props: { text: object.text, dark: object.dark }) %>
+    <% if object.children %>
+      <%= capture(&object.children) %>
+    <% else %>
+      <%= radio_button_tag object.name, object.value, object.selected %>
+    <% end %>
+
+    <span class="pb_radio_button"></span>
+    <%= pb_rails("body", props: { text: object.text, dark: object.dark}) %>
 <% end %>
