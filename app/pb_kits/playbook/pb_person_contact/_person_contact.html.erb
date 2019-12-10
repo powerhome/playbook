@@ -1,25 +1,26 @@
 <%= content_tag(:div,
-    id: object.id,
-    data: object.data,
-    class: object.classname) do %>
-    <%= pb_rails("person", props: {
-        first_name: object.first_name,
-        last_name: object.last_name,
+  id: object.id,
+  data: object.data,
+  class: object.classname) do %>
+  <%= pb_rails("person", props: {
+      first_name: object.first_name,
+      last_name: object.last_name,
+  }) %>
+  <% object.valid_contacts.each do |contact| %>
+    <%= pb_rails("contact", props: {
+        contact_type: contact[:contact_type],
+        contact_value: contact[:contact_value],
+        contact_detail: contact[:contact_detail],
     }) %>
-    <% object.contacts.each do |contact| %>
+  <% end %>
+  <% unless object.wrong_contacts.empty? %>
+    <%= pb_rails("caption", props: { text: "wrong number" }) %>
+
+    <% object.wrong_contacts.each do |wrong_number| %>
       <%= pb_rails("contact", props: {
-          contact_type: contact[:contact_type],
-          contact_value: contact[:contact_value],
-          contact_detail: contact[:contact_detail],
+        contact_type: wrong_number[:contact_type],
+        contact_value: wrong_number[:contact_value],
       }) %>
     <% end %>
-    <% unless object.wrong_contacts.empty? %>
-      <%= pb_rails("caption", props: { text: "wrong number" })%>
-    <% end %>
-      <% object.wrong_contacts.each do |wrong_number| %>
-        <%= pb_rails("contact", props: {
-            contact_type: wrong_number[:contact_type],
-            contact_value: wrong_number[:contact_value],
-        }) %>
-      <% end %>
+  <% end %>
 <% end %>
