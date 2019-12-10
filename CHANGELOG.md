@@ -1,4 +1,5 @@
 # Changelog
+
 All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
@@ -10,6 +11,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Introduce CHANGELOG file (#498 @rafbgarcia)
 - Include Card Separator example in Card kit docs (#439 @rruiz85)
+
+[#498]: https://github.com/powerhome/playbook/pull/498
+[#439]: https://github.com/powerhome/playbook/pull/439
+
 
 ## [3.0.1] - 2019-12-06
 
@@ -32,6 +37,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - New Kit - Circle Icon Button Kit (#469 @christinaatai)
 - New React Kit - User Kit (#456 @christinaatai)
 
+[#498]: https://github.com/powerhome/playbook/pull/498
+[#478]: https://github.com/powerhome/playbook/pull/478
+[#474]: https://github.com/powerhome/playbook/pull/474
+[#480]: https://github.com/powerhome/playbook/pull/480
+[#473]: https://github.com/powerhome/playbook/pull/473
+[#376]: https://github.com/powerhome/playbook/pull/376
+[#471]: https://github.com/powerhome/playbook/pull/471
+[#466]: https://github.com/powerhome/playbook/pull/466
+[#467]: https://github.com/powerhome/playbook/pull/467
+[#469]: https://github.com/powerhome/playbook/pull/469
+[#456]: https://github.com/powerhome/playbook/pull/456
+
 ### Changed
 
 - Dark mode for User Kit (#436 @evalouderback)
@@ -45,10 +62,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Add node binding for node-sass (#465 @thestephenmarshall)
 - Enable ESLint in overcommit (#462 @thestephenmarshall)
 
+[#436]: https://github.com/powerhome/playbook/pull/436
+[#479]: https://github.com/powerhome/playbook/pull/479
+[#476]: https://github.com/powerhome/playbook/pull/476
+[#454]: https://github.com/powerhome/playbook/pull/454
+[#477]: https://github.com/powerhome/playbook/pull/477
+[#464]: https://github.com/powerhome/playbook/pull/464
+[#463]: https://github.com/powerhome/playbook/pull/463
+[#472]: https://github.com/powerhome/playbook/pull/472
+[#465]: https://github.com/powerhome/playbook/pull/465
+[#462]: https://github.com/powerhome/playbook/pull/462
+
 ### Fixed
 
 - Bug Fix - Form kit dependencies (#481 @terryfinn)
 
+[#462]: https://github.com/powerhome/playbook/pull/481
 
 ### Removed (breaking changes)
 
