@@ -1,0 +1,17 @@
+<%= pb_rails("person_contact", props: {
+  first_name: "Pauline",
+  last_name: "Smith",
+  contacts: [
+    {
+      contact_type: "email",
+      contact_value: "email@example.com",
+    },
+    {
+      contact_value: 5555555555
+    },
+    {
+      contact_type: "wrong number",
+      contact_value: "3245627482",
+    }
+  ]
+}) %>
