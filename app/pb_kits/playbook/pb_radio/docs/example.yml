@@ -3,9 +3,11 @@ examples:
   rails:
   - radio_default: Default
   - radio_dark: Default
+  - radio_custom: Default
 
 
 
   react:
   - radio_default: Default
   - radio_dark: Default
+  - radio_custom: Default

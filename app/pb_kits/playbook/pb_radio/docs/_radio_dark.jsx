@@ -17,7 +17,14 @@ function RadioDark() {
           name='Group1'
           value='Nitro'
       />
-    </>
+      <br/>
+      <Radio
+          dark
+          label='Google'
+          name='Group1'
+          value='Google'
+      />
+    </div>
   )
 }
 export default RadioDark

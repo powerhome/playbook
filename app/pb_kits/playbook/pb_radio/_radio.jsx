@@ -35,10 +35,12 @@ export const Radio = ({
           type='radio'
           value={value}
       />
-      <span className='pb_radio_button'>
-        <div className='radio'></div>
-      </span>
-      <span className='body'>{label}</span>
+      <span className="pb_radio_button"/>
+      <If condition={children}>
+        {children}
+      <Else/>
+        <Body text={label} dark={dark}  />
+      </If>
     </label>
 
 )
