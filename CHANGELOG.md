@@ -22,6 +22,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Move `eslint` to devDependencies ([#489][] @gmfvpereira)
 
+[#489]: https://github.com/powerhome/playbook/pull/489
+
 ## [3.0.0] - 2019-12-05
 
 ### Added
