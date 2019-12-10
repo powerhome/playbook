@@ -9,8 +9,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- Introduce CHANGELOG file (#498 @rafbgarcia)
-- Include Card Separator example in Card kit docs (#439 @rruiz85)
+- Introduce CHANGELOG file ([#498][] @rafbgarcia)
+- Include Card Separator example in Card kit docs ([#439][] @rruiz85)
 
 [#498]: https://github.com/powerhome/playbook/pull/498
 [#439]: https://github.com/powerhome/playbook/pull/439
@@ -20,22 +20,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
-- Move `eslint` to devDependencies (#489 @gmfvpereira)
+- Move `eslint` to devDependencies ([#489][] @gmfvpereira)
 
 ## [3.0.0] - 2019-12-05
 
 ### Added
 
-- New Form Kit - Select Kit (#478 @jasoncypret)
-- New Form Kit - Selectable Card Kit (#474 @christinaatai)
-- New React Kit - Section Separator Kit: Added variant & react version (#480 @kre8sions)
-- New React Kit - Date kit (#473 @Annihilous)
-- New Form Kit - Add rails form kit with text inputs and buttons (#376 @terryfinn)
-- New React Kit - Message Kit (#471 @christinaatai)
-- New React Kit - Icon Circle (#466 @Annihilous)
-- New Form Kit - Textarea kit (#467 @christinaatai)
-- New Kit - Circle Icon Button Kit (#469 @christinaatai)
-- New React Kit - User Kit (#456 @christinaatai)
+- New Form Kit - Select Kit ([#478][] @jasoncypret)
+- New Form Kit - Selectable Card Kit ([#474][] @christinaatai)
+- New React Kit - Section Separator Kit: Added variant & react version ([#480][] @kre8sions)
+- New React Kit - Date kit ([#473][] @Annihilous)
+- New Form Kit - Add rails form kit with text inputs and buttons ([#376][] @terryfinn)
+- New React Kit - Message Kit ([#471][] @christinaatai)
+- New React Kit - Icon Circle ([#466][] @Annihilous)
+- New Form Kit - Textarea kit ([#467][] @christinaatai)
+- New Kit - Circle Icon Button Kit ([#469][] @christinaatai)
+- New React Kit - User Kit ([#456][] @christinaatai)
 
 [#498]: https://github.com/powerhome/playbook/pull/498
 [#478]: https://github.com/powerhome/playbook/pull/478
@@ -51,16 +51,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- Dark mode for User Kit (#436 @evalouderback)
-- Use number with delimiter for stat_value.value (#479 @thestephenmarshall)
-- Text Input: Added classname support (#476 @kre8sions)
-- Layout sidebar colors (#454 @markiearnold)
-- Add formatted_stat_value (#477 @thestephenmarshall)
-- Add onChange prop to TextInput jsx (#464 @thestephenmarshall)
-- User kit, Territory Prop Added (#463 @christinaatai)
-- Sets image build status for Milano compatibility (#472 @viniciusgama)
-- Add node binding for node-sass (#465 @thestephenmarshall)
-- Enable ESLint in overcommit (#462 @thestephenmarshall)
+- Dark mode for User Kit ([#436][] @evalouderback)
+- Use number with delimiter for stat_value.value ([#479][] @thestephenmarshall)
+- Text Input: Added classname support ([#476][] @kre8sions)
+- Layout sidebar colors ([#454][] @markiearnold)
+- Add formatted_stat_value ([#477][] @thestephenmarshall)
+- Add onChange prop to TextInput jsx ([#464][] @thestephenmarshall)
+- User kit, Territory Prop Added ([#463][] @christinaatai)
+- Sets image build status for Milano compatibility ([#472][] @viniciusgama)
+- Add node binding for node-sass ([#465][] @thestephenmarshall)
+- Enable ESLint in overcommit ([#462][] @thestephenmarshall)
 
 [#436]: https://github.com/powerhome/playbook/pull/436
 [#479]: https://github.com/powerhome/playbook/pull/479
@@ -75,7 +75,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
-- Bug Fix - Form kit dependencies (#481 @terryfinn)
+- Bug Fix - Form kit dependencies ([#481][] @terryfinn)
 
 [#462]: https://github.com/powerhome/playbook/pull/481
 
