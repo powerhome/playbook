@@ -1,7 +1,7 @@
 import React from 'react'
 import classnames from 'classnames'
 import { Caption } from "../"
-import { InputCallback } from '../../types'
+import { InputCallback } from '../types.js'
 
 type TextareaProps = {
   className?: String,
