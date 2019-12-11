@@ -52,9 +52,9 @@ class SelectableCardDark extends React.Component {
 
         <SelectableCard
             dark
-            inputId="unselected_dark"
-            name="unselected_dark"
-            value="unselected_dark"
+            inputId="disabled_dark"
+            name="disabled_dark"
+            value="disabled_dark"
             disabled={true}
             onChange={this.handleSelect}>
           {'Unselected'}
