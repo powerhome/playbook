@@ -14,12 +14,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Text Input Dark mode added, Text Input updated to use Textarea mixins and Textarea mixin fix to remove number field arrows ([#494][] @megantrimble)
 - Introduce Pull Request Template ([#508][] @rafbgarcia)
 - Extend Form Kit to use Textarea Kit for textarea form fields ([#506][] @roxannecojocariu)
+- Text Input Dark mode added, Text Input updated to use Textarea mixins and Textarea mixin fix to remove number field arrows ([#494][] @megantrimble) 
+- Nav React Kit ([#504][] @christinaatai)
+
 
 [#498]: https://github.com/powerhome/playbook/pull/498
 [#439]: https://github.com/powerhome/playbook/pull/439
 [#494]: https://github.com/powerhome/playbook/pull/494
 [#508]: https://github.com/powerhome/playbook/pull/508
 [#506]: https://github.com/powerhome/playbook/pull/506
+[#504]: https://github.com/powerhome/playbook/pull/504
+
 
 ### Changed
 
@@ -40,6 +45,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [#496]: https://github.com/powerhome/playbook/pull/496
 
 ---
+- Fixes code example bug in Selectable Card kit ([#495][] @christinaatai)
+
+
+[#500]: https://github.com/powerhome/playbook/pull/500
+[#495]: https://github.com/powerhome/playbook/pull/495
+
 
 ## [3.0.1] - 2019-12-06
 
