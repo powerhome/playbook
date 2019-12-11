@@ -24,6 +24,14 @@
   transition-property: border-color, box-shadow, color, background-color;
   transition-duration: .24s;
   transition-timing-function: $bezier;
+  &[type=number] {
+    -moz-appearance:textfield;
+    &::-webkit-inner-spin-button,
+    &::-webkit-outer-spin-button {
+      -webkit-appearance: none; 
+      margin: 0; 
+    }
+  }
   &:disabled, &:disabled:hover, &:disabled:focus, &:disabled:active {
     background-color: shade($background_color, 5%);
     box-shadow: none;
