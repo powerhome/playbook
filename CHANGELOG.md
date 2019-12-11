@@ -92,7 +92,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
-- Bug Fix - Form kit dependencies ([#481][] @terryfinn)
+- Bug Fix - Null class concatenation on Card Kit ([#497][] @jasperfurniss)
 
 [#481]: https://github.com/powerhome/playbook/pull/481
 
