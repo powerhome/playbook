@@ -13,6 +13,7 @@
   color: $text_color;
   background-color: $background_color;
   padding: ($space_xs + 4) $space_sm;
+  appearance: none;
   transition: $easeIn;
   outline: none;
   overflow: auto;
