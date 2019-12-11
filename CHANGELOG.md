@@ -42,6 +42,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- New React Style - Card Kit ([#496][] @jasperfurniss)
 - New Form Kit - Select Kit ([#478][] @jasoncypret)
 - New Form Kit - Selectable Card Kit ([#474][] @christinaatai)
 - New React Kit - Section Separator Kit: Added variant & react version ([#480][] @kre8sions)
@@ -53,6 +54,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - New Kit - Circle Icon Button Kit ([#469][] @christinaatai)
 - New React Kit - User Kit ([#456][] @christinaatai)
 
+[#496]: https://github.com/powerhome/playbook/pull/496
 [#498]: https://github.com/powerhome/playbook/pull/498
 [#478]: https://github.com/powerhome/playbook/pull/478
 [#474]: https://github.com/powerhome/playbook/pull/474
