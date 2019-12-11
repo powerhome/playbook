@@ -3,33 +3,44 @@
 namespace :pb_release do
   desc "Update the version number in preparation to release"
   task version: :environment do
-    old_version = Playbook::VERSION
-    STDOUT.puts "What would you like the next release number to be? Currently #{old_version}"
-    new_version = STDIN.gets.chomp
+    puts "\n"
+    puts "*" * 20 + " Create New Playbook Release " + "*" * 20
+    ack = "\nFirst, before creating a new version please make sure you are familiar with SemVer guidlines: "
+    ack += "\nhttps://semver.org/#semantic-versioning-specification-semver. "
+    ack += "\n\nDoing so will ensure the proper version is selected for the release. "
+    ack += "\nSee also: https://github.com/powerhome/playbook/wiki/Releasing-a-New-Version#determining-the-version."
+    ack += "\n\nReady to start? y/N"
+    STDOUT.puts ack
+    agreed = STDIN.gets.chomp.downcase
 
-    puts "Ok great, let's make version #{new_version}"
-    puts "\n\n"
+    if agreed == "y"
+      old_version = Playbook::VERSION
+      STDOUT.puts "What would you like the next release number to be? Currently #{old_version}"
+      new_version = STDIN.gets.chomp
+      puts "Ok great, let's make version #{new_version}"
+      puts "\n\n"
 
-    # Update package.json
-    package = File.read("package.json")
-    new_package = package.gsub(/"version": "#{old_version}",/, "\"version\": \"#{new_version}\",")
-    File.open("package.json", "w") { |file| file.puts new_package }
-    puts "Updated package.json"
+      # Update package.json
+      package = File.read("package.json")
+      new_package = package.gsub(/"version": "#{old_version}",/, "\"version\": \"#{new_version}\",")
+      File.open("package.json", "w") { |file| file.puts new_package }
+      puts "Updated package.json"
 
-    # Update version.rb
-    version_rb = File.read("lib/playbook/version.rb")
-    new_version_rb = version_rb.gsub(/VERSION = "#{old_version}".freeze/, "VERSION = \"#{new_version}\".freeze")
-    File.open("lib/playbook/version.rb", "w") { |file| file.puts new_version_rb }
-    puts "Updated lib/playbook/version.rb"
+      # Update version.rb
+      version_rb = File.read("lib/playbook/version.rb")
+      new_version_rb = version_rb.gsub(/VERSION = "#{old_version}".freeze/, "VERSION = \"#{new_version}\".freeze")
+      File.open("lib/playbook/version.rb", "w") { |file| file.puts new_version_rb }
+      puts "Updated lib/playbook/version.rb"
 
-    # Update gemfile.lock
-    gemfile = File.read("Gemfile.lock")
-    new_gemfile = gemfile.gsub(/playbook_ui \(#{Regexp.escape(old_version)}\)/, "playbook_ui (#{new_version})")
-    File.open("Gemfile.lock", "w") { |file| file.puts new_gemfile }
-    puts "Updated Gemfile.lock"
-    puts "\n\n"
+      # Update gemfile.lock
+      gemfile = File.read("Gemfile.lock")
+      new_gemfile = gemfile.gsub(/playbook_ui \(#{Regexp.escape(old_version)}\)/, "playbook_ui (#{new_version})")
+      File.open("Gemfile.lock", "w") { |file| file.puts new_gemfile }
+      puts "Updated Gemfile.lock"
+      puts "\n\n"
 
-    puts "Commit your changes and create a PR to merge to master"
+      puts "Commit your changes and create a PR to merge to master"
+    end
   end
 
   desc "Publish to RubyGems, NPM, and Create a Tag"
