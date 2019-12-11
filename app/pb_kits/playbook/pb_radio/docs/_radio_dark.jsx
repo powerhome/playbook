@@ -3,7 +3,7 @@ import {Radio} from '../../'
 
 function RadioDark() {
   return (
-    <>
+    <div>
       <Radio
           dark
           label='Power'

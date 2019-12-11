@@ -3,7 +3,7 @@ import {Radio} from '../../'
 
 function RadioDefault() {
   return (
-    <>
+    <div>
       <Radio label='Power'
           name='Group2'
           value='Power'
@@ -18,7 +18,7 @@ function RadioDefault() {
           name='Group2'
           value='Google'
       />
-    </>
+    </div>
   )
 }
 export default RadioDefault
