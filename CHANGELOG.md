@@ -17,7 +17,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
-- Display wrong numbers in Person Contact Kit ([#499][] @KFad11)
+- Display wrong numbers in Person Contact Kit. The Kit will now display a caption "wrong number" and have the wrong numbers listed beneath the caption ([#499][] @KFad11)
 
 [#499]: https://github.com/powerhome/playbook/pull/499
 
