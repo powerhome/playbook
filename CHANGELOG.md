@@ -11,9 +11,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Introduce CHANGELOG file ([#498][] @rafbgarcia)
 - Include Card Separator example in Card kit docs ([#439][] @rruiz85)
+- Text Input Dark mode & style updates ([#494][] @megantrimble) 
 
 [#498]: https://github.com/powerhome/playbook/pull/498
 [#439]: https://github.com/powerhome/playbook/pull/439
+[#494]: https://github.com/powerhome/playbook/pull/494
 
 
 ## [3.0.1] - 2019-12-06
