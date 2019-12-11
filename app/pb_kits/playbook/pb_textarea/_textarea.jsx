@@ -1,6 +1,7 @@
 import React from 'react'
 import classnames from 'classnames'
 import { Caption } from "../"
+import { InputCallback } from '../../types'
 
 type TextareaProps = {
   className?: String,
@@ -15,7 +16,7 @@ type TextareaProps = {
   name?: String,
   rows?: Number,
   dark?: Boolean,
-  onChange?: Func
+  onChange?: InputCallback
 }
 
 const textareaCSS =({
@@ -47,7 +48,14 @@ const Textarea = ( props: TextareaProps) => {
       <If condition={children}>
         {children}
       <Else/>
-        <textarea onChange={onChange} className={textarea_input} name={name} placeholder={placeholder} rows={rows} value={value} />
+        <textarea 
+          className={textarea_input} 
+          name={name} 
+          onChange={onChange} 
+          placeholder={placeholder} 
+          rows={rows} 
+          value={value} 
+        />
       </If>
     </div>
   )
