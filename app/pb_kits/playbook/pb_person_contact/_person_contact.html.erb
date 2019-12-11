@@ -13,8 +13,8 @@
         contact_detail: contact[:contact_detail],
     }) %>
   <% end %>
-  <% unless object.wrong_contacts.empty? %>
-    <div class="wrong_numbers"> <%= pb_rails("caption", props: { text: "wrong number" }) %></div>
+  <% if object.wrong_contacts.present? %>
+    <%= pb_rails("caption", props: { classname: "wrong_numbers", text: "wrong number" }) %>
 
     <% object.wrong_contacts.each do |wrong_number| %>
       <%= pb_rails("contact", props: {
