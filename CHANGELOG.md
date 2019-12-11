@@ -12,16 +12,25 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Introduce CHANGELOG file ([#498][] @rafbgarcia)
 - Include Card Separator example in Card kit docs ([#439][] @rruiz85)
 - Text Input Dark mode added, Text Input updated to use Textarea mixins and Textarea mixin fix to remove number field arrows ([#494][] @megantrimble) 
+- Nav React Kit ([#504][] @christinaatai)
+
 
 [#498]: https://github.com/powerhome/playbook/pull/498
 [#439]: https://github.com/powerhome/playbook/pull/439
+[#494]: https://github.com/powerhome/playbook/pull/494
+[#504]: https://github.com/powerhome/playbook/pull/504
+
 
 
 ### Fixed
 
 - Fixes master branch (regression introduced by myself on #498) ([#500][] @rafbgarcia)
+- Fixes code example bug in Selectable Card kit ([#495][] @christinaatai)
+
 
 [#500]: https://github.com/powerhome/playbook/pull/500
+[#495]: https://github.com/powerhome/playbook/pull/495
+
 
 ## [3.0.1] - 2019-12-06
 
