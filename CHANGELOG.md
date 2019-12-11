@@ -86,7 +86,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Bug Fix - Form kit dependencies ([#481][] @terryfinn)
 
-[#462]: https://github.com/powerhome/playbook/pull/481
+[#481]: https://github.com/powerhome/playbook/pull/481
 
 ### Removed (breaking changes)
 
