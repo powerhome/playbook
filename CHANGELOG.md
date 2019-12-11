@@ -16,6 +16,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [#439]: https://github.com/powerhome/playbook/pull/439
 
 
+### Fixed
+
+- Fixes master branch (regression introduced by myself on #498) ([#500][] @rafbgarcia)
+
+[#500]: https://github.com/powerhome/playbook/pull/500
+
 ## [3.0.1] - 2019-12-06
 
 ### Fixed
