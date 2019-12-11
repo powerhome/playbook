@@ -2,7 +2,10 @@
 @import "../pb_body/body_mixins";
 
 [class^=pb_text_input_kit] {
-  margin: $space_xs;
+  .pb_text_input_kit_label {
+    margin-bottom: $space_xs;
+    display: block;
+  }
 
   .text_input_wrapper {
     margin-bottom: $space_sm;
@@ -11,7 +14,7 @@
     input::placeholder {
       @include pb_body_light;
     }
-    
+
     > input:first-child {
       @include pb_textarea_light;
       overflow: hidden;

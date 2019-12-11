@@ -10,7 +10,8 @@
                   :example_number_field,
                   :example_search_field,
                   :example_password_field,
-                  :example_url_field
+                  :example_url_field,
+                  :example_text_area
 
 
    def self.model_name
@@ -28,6 +29,7 @@
   <%= form.input :example_search_field, as: :search %>
   <%= form.input :example_password_field, as: :password %>
   <%= form.input :example_url_field, as: :url %>
+  <%= form.input :example_text_area, as: :text %>
 
   <%= form.actions do |action| %>
     <%= action.submit %>

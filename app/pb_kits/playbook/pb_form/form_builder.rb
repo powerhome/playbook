@@ -6,13 +6,14 @@ module Playbook
       extend ActiveSupport::Concern
 
       included do
-        prepend(TextInputBuilder.new(:email_field))
-        prepend(TextInputBuilder.new(:number_field))
-        prepend(TextInputBuilder.new(:search_field))
-        prepend(TextInputBuilder.new(:telephone_field))
-        prepend(TextInputBuilder.new(:text_field))
-        prepend(TextInputBuilder.new(:password_field))
-        prepend(TextInputBuilder.new(:url_field))
+        prepend(FormFieldBuilder.new(:email_field, kit_name: "text_input"))
+        prepend(FormFieldBuilder.new(:number_field, kit_name: "text_input"))
+        prepend(FormFieldBuilder.new(:search_field, kit_name: "text_input"))
+        prepend(FormFieldBuilder.new(:telephone_field, kit_name: "text_input"))
+        prepend(FormFieldBuilder.new(:text_field, kit_name: "text_input"))
+        prepend(FormFieldBuilder.new(:password_field, kit_name: "text_input"))
+        prepend(FormFieldBuilder.new(:url_field, kit_name: "text_input"))
+        prepend(FormFieldBuilder.new(:text_area, kit_name: "textarea"))
 
         def actions(&block)
           ActionArea.new(self).wrapper(&block)
