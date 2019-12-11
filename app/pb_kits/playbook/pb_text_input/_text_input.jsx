@@ -38,7 +38,7 @@ class TextInput extends React.Component {
     } = this.props
 
     const css = classnames([
-      `pb_text_input_kit${dark === true ? '_dark' : ""}`,
+      `pb_text_input_kit${dark === true ? '_dark' : ''}`,
       className,
     ])
 
