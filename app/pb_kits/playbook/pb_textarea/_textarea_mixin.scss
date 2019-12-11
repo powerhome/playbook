@@ -14,6 +14,8 @@
   background-color: $background_color;
   padding: ($space_xs + 4) $space_sm;
   appearance: none;
+  -moz-appearance: none;
+  -webkit-appearance: none;
   transition: $easeIn;
   outline: none;
   overflow: auto;
