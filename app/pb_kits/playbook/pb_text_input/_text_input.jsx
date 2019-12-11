@@ -7,6 +7,7 @@ import {Caption} from '../'
 
 const propTypes = {
   className: PropTypes.string,
+  dark: PropTypes.bool,
   name: PropTypes.string,
   label: PropTypes.string,
   onChange: PropTypes.func,
@@ -27,6 +28,7 @@ class TextInput extends React.Component {
   render() {
     const {
       className,
+      dark,
       name,
       label,
       onChange = () => {},
@@ -36,13 +38,13 @@ class TextInput extends React.Component {
     } = this.props
 
     const css = classnames([
-      `pb_text_input_kit`,
+      `pb_text_input_kit${dark === true ? '_dark' : ""}`,
       className,
     ])
 
     return (
       <div className={css}>
-        <Caption text={label} />
+        <Caption text={label} dark={dark} />
         <div className='text_input_wrapper'>
           <input className='text_input'
               name={name}

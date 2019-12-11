@@ -1,57 +1,44 @@
-@import "../tokens/border_radius";
-@import "../tokens/colors";
-@import "../tokens/spacing";
-@import "../tokens/typography";
+@import "../pb_textarea/textarea_mixin";
+@import "../pb_body/body_mixins";
 
-.pb_text_input_kit {
-  margin: 8px;
+[class^=pb_text_input_kit] {
+  margin: $space_xs;
 
   .text_input_wrapper {
-    margin-bottom: 1rem;
+    margin-bottom: $space_sm;
+    display: block;
 
+    input::placeholder {
+      @include pb_body_light;
+    }
+    
     > input:first-child {
-      border: 1px solid $border-light;
-      border-radius: $border-rad-light;
-      display: block;
-      width: 100%;
-      color: $text_lt_default;
-      background: $white;
+      @include pb_textarea_light;
+      overflow: hidden;
       padding: $space_xs $space_sm;
-      transition: 0.2s all;
-      outline: none;
-      font-size: $font_small;
-      margin: 0.1rem 0 0;
+    }
 
-      &:focus {
-        border-color: $primary-action;
+    input:focus {
+      @include pb_textarea_focus;
+    }
+  }
+
+  &[class*=_dark] {
+    .text_input_wrapper {
+      margin-bottom: 1rem;
+
+      input::placeholder {
+        @include pb_body_light_dark;
       }
 
-      &::-webkit-input-placeholder {
-        color: $text_lt_lighter;
-        opacity: 1;
+      > input:first-child {
+        @include pb_textarea_dark;
+        overflow: hidden;
+        padding: $space_xs $space_sm;
       }
 
-      &:-ms-input-placeholder {
-        color: $text_lt_lighter;
-        opacity: 1;
-      }
-
-      &::-ms-input-placeholder {
-        color: $text_lt_lighter;
-        opacity: 1;
-      }
-
-      &::placeholder {
-        color: $text_lt_lighter;
-        opacity: 1;
-      }
-
-      &:-ms-input-placeholder {
-        color: $text_lt_lighter;
-      }
-
-      &::-ms-input-placeholder {
-        color: $text_lt_lighter;
+      input:focus {
+        @include pb_textarea_focus_dark;
       }
     }
   }

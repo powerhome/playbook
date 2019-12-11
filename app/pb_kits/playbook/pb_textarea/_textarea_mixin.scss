@@ -13,6 +13,9 @@
   color: $text_color;
   background-color: $background_color;
   padding: ($space_xs + 4) $space_sm;
+  appearance: none;
+  -moz-appearance: none;
+  -webkit-appearance: none;
   transition: $easeIn;
   outline: none;
   overflow: auto;
@@ -21,6 +24,14 @@
   transition-property: border-color, box-shadow, color, background-color;
   transition-duration: .24s;
   transition-timing-function: $bezier;
+  &[type=number] {
+    -moz-appearance:textfield;
+    &::-webkit-inner-spin-button,
+    &::-webkit-outer-spin-button {
+      -webkit-appearance: none; 
+      margin: 0; 
+    }
+  }
   &:disabled, &:disabled:hover, &:disabled:focus, &:disabled:active {
     background-color: shade($background_color, 5%);
     box-shadow: none;
