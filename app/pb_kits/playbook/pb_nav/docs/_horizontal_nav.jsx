@@ -2,9 +2,9 @@ import React from "react"
 import {Nav} from "../../"
 import NavItem from "../_item.jsx"
 
-function DefaultNav() {
+function HorizontalNav() {
   return (
-    <Nav title="Title example" link="#" orientation="vertical">
+    <Nav title="Title example" link="#" orientation="horizontal">
         <NavItem text="Active Nav Item using text prop" link="#" active={true}/>
         <NavItem text="Nav Item using text prop" link="#" />
         <NavItem text="Nav Item using text prop" link="#" />
@@ -12,4 +12,4 @@ function DefaultNav() {
   )
 }
 
-export default DefaultNav;
+export default HorizontalNav;

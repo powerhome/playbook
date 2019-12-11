@@ -4,6 +4,9 @@ import NavItem from "./_item"
 import {Caption} from "../"
 
 const propTypes = {
+  link: PropTypes.string,
+  title: PropTypes.string,
+  orientation: PropTypes.oneOf(["vertical", "horizontal"]),
   children: PropTypes.oneOfType([
         PropTypes.arrayOf(PropTypes.node),
         PropTypes.node
@@ -13,11 +16,15 @@ const propTypes = {
 class Nav extends Component {
   static NavItem = NavItem
   render() {
+    const {
+      title='',
+      orientation='vertical',
+    } = this.props;
     return (
-      <div className="pb_nav_list">
-        <div className="pb_nav_list_title">
-          <a>
-            <Caption />
+      <div className={`pb_nav_list_${orientation}`}>
+        <div className={`pb_nav_list_title`}>
+          <a className="pb_nav_list_item_link_text">
+            <Caption size="md" text={`${title}`} />
           </a>
         </div>
         <ul>{this.props.children}</ul>
