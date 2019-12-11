@@ -14,7 +14,7 @@
     }) %>
   <% end %>
   <% unless object.wrong_contacts.empty? %>
-    <%= pb_rails("caption", props: { text: "wrong number" }) %>
+    <div style="padding-top: 10px"> <%= pb_rails("caption", props: { text: "wrong number" }) %></div>
 
     <% object.wrong_contacts.each do |wrong_number| %>
       <%= pb_rails("contact", props: {
