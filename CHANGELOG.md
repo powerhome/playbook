@@ -11,10 +11,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Introduce CHANGELOG file ([#498][] @rafbgarcia)
 - Include Card Separator example in Card kit docs ([#439][] @rruiz85)
-- Text Input Dark mode added, Text Input updated to use Textarea mixins and Textarea mixin fix to remove number field arrows ([#494][] @megantrimble) 
+- Text Input Dark mode added, Text Input updated to use Textarea mixins and Textarea mixin fix to remove number field arrows ([#494][] @megantrimble)
+- Introduce Pull Request Template ([#508][] @rafbgarcia)
 
 [#498]: https://github.com/powerhome/playbook/pull/498
 [#439]: https://github.com/powerhome/playbook/pull/439
+[#508]: https://github.com/powerhome/playbook/pull/508
 
 
 ### Fixed
