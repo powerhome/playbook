@@ -2,12 +2,12 @@ examples:
 
   rails:
   - radio_default: Default
-  - radio_dark: Default
-  - radio_custom: Default
+  - radio_dark: Dark
+  - radio_custom: Custom
 
 
 
   react:
   - radio_default: Default
-  - radio_dark: Default
-  - radio_custom: Default
+  - radio_dark: Dark
+  - radio_custom: Custom
