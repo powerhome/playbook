@@ -13,7 +13,7 @@ const NavItem = (props: NavItemProps) => {
     link = '', 
     active = false, 
     children
-  } = this.props;
+  } = props;
 
   const active_class = active === true ? '_active' : ''
 

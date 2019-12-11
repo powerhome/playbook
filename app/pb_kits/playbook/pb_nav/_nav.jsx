@@ -1,6 +1,5 @@
-import React, { Component } from 'react'
-import NavItem from './_item'
-import {Caption} from '../'
+import React from 'react'
+import { Caption } from '../'
 
 type NavProps = {
   link: String,
@@ -9,11 +8,12 @@ type NavProps = {
   children?: Array<React.ReactNode> | React.ReactNode,
 }
 
-const Nav = (props: Nav) => {
+const Nav = (props: NavProps) => {
   const {
     title = '',
     orientation = 'vertical',
-  } = this.props;
+    children
+  } = props;
 
   return (
     <div className={`pb_nav_list_${orientation}`}>
@@ -22,7 +22,7 @@ const Nav = (props: Nav) => {
           <Caption size='md' text={`${title}`} />
         </a>
       </div>
-      <ul>{this.props.children}</ul>
+      <ul>{children}</ul>
     </div>
   )
 }
