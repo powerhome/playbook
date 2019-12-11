@@ -25,7 +25,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 - Fixes master branch (regression introduced by myself on #498) ([#500][] @rafbgarcia)
-- Fixes code example bug in Selectable Card kit ([#495][] @christinaatai)
+- Fixed code example bug in Selectable Card kit ([#495][] @christinaatai)
 
 
 [#500]: https://github.com/powerhome/playbook/pull/500
