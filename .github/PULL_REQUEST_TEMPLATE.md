@@ -6,5 +6,5 @@
 
 #### Checklist:
 
-- [ ] SPECS: please cover your changes with specs
-- [ ] CHANGELOG: please add an entry on `[Unreleased]` section to every functionality `ADDED`/`CHANGED`/`DEPRECATED`/`REMOVED`/`FIXED`
+- [ ] **SPECS** Please cover your changes with specs
+- [ ] **CHANGELOG** Please add an entry on `[Unreleased]` section to every functionality `ADDED`/`CHANGED`/`DEPRECATED`/`REMOVED`/`FIXED`
