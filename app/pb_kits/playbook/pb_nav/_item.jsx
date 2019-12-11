@@ -1,44 +1,31 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
+import React, { Component } from 'react';
 
-const propTypes = {
-  text: PropTypes.string.isRequired,
-  link: PropTypes.string,
-  active: PropTypes.bool,
-  children: PropTypes.oneOfType([
-    PropTypes.arrayOf(PropTypes.node),
-    PropTypes.node
-  ])
-};
-
-const defaultProps = {
-  link: "#",
-  active: false,
-  text: ''
-};
-
-class NavItem extends Component {
-  render() {
-    const { 
-      text, 
-      link, 
-      active, 
-      children
-    } = this.props;
-    const active_class = active === true ? "_active" : ""
-    return (
-      <li className={`pb_nav_list_border_item${active_class}`}>
-        <a className="pb_nav_list_item_link" href={link}>
-          <span className="pb_nav_list_item_text">
-            { text || children }
-          </span>
-        </a>
-      </li>
-    );
-  }
+type NavItemProps = {
+  text: String,
+  link: String,
+  active?: Boolean,
+  children: Array<React.ReactChild> | React.ReactChild,
 }
 
-NavItem.propTypes = propTypes;
-NavItem.defaultProps = defaultProps;
+const NavItem = (props: NavItemProps) => {
+  const { 
+    text = '', 
+    link = '', 
+    active = false, 
+    children
+  } = this.props;
+
+  const active_class = active === true ? '_active' : ''
+
+  return (
+    <li className={`pb_nav_list_border_item${active_class}`}>
+      <a className='pb_nav_list_item_link' href={link}>
+        <span className='pb_nav_list_item_text'>
+          { text || children }
+        </span>
+      </a>
+    </li>
+  );
+}
 
 export default NavItem;
