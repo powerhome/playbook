@@ -21,8 +21,8 @@ const cardCSS = ({
   shadow='none'
 }: CardPropTypes) => {
   let css = 'pb_card_kit'
-  css += highlight.position ? `_highlight_${highlight.position}` : null
-  css += highlight.color ? `_highlight_${highlight.color}` : null
+  css += highlight.position ? `_highlight_${highlight.position}` : ''
+  css += highlight.color ? `_highlight_${highlight.color}` : ''
   css += selected ? '_selected' : '_deselected'
   css += `_shadow_${shadow}`
   return css
