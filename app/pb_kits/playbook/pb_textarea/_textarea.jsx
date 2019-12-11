@@ -15,6 +15,7 @@ type TextareaProps = {
   name?: String,
   rows?: Number,
   dark?: Boolean,
+  onChange?: Func
 }
 
 const textareaCSS =({
@@ -35,6 +36,7 @@ const Textarea = ( props: TextareaProps) => {
     dark=false,
     rows=4,
     name,
+    onChange = () => {}
   } = props
 
   const textarea_input = `${textareaCSS(props)}`
@@ -45,7 +47,7 @@ const Textarea = ( props: TextareaProps) => {
       <If condition={children}>
         {children}
       <Else/>
-        <textarea className={textarea_input} name={name} placeholder={placeholder} rows={rows} value={value} />
+        <textarea onChange={onChange} className={textarea_input} name={name} placeholder={placeholder} rows={rows} value={value} />
       </If>
     </div>
   )
