@@ -63,6 +63,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Sets image build status for Milano compatibility ([#472][] @viniciusgama)
 - Add node binding for node-sass ([#465][] @thestephenmarshall)
 - Enable ESLint in overcommit ([#462][] @thestephenmarshall)
+- Display wrong numbers in Person Contact Kit ([#499][] @KFad11)
 
 [#436]: https://github.com/powerhome/playbook/pull/436
 [#479]: https://github.com/powerhome/playbook/pull/479
@@ -74,6 +75,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [#472]: https://github.com/powerhome/playbook/pull/472
 [#465]: https://github.com/powerhome/playbook/pull/465
 [#462]: https://github.com/powerhome/playbook/pull/462
+[#499]: https://github.com/powerhome/playbook/pull/499
 
 ### Fixed
 
