@@ -14,6 +14,7 @@ module Playbook
         prepend(FormFieldBuilder.new(:password_field, kit_name: "text_input"))
         prepend(FormFieldBuilder.new(:url_field, kit_name: "text_input"))
         prepend(FormFieldBuilder.new(:text_area, kit_name: "textarea"))
+        prepend(SelectBuilder)
 
         def actions(&block)
           ActionArea.new(self).wrapper(&block)

@@ -11,7 +11,8 @@
                   :example_search_field,
                   :example_password_field,
                   :example_url_field,
-                  :example_text_area
+                  :example_text_area,
+                  :example_select_area
 
 
    def self.model_name
@@ -30,6 +31,7 @@
   <%= form.input :example_password_field, as: :password %>
   <%= form.input :example_url_field, as: :url %>
   <%= form.input :example_text_area, as: :text %>
+  <%= form.select :example_select_area, [["Yes", 1], ["No", 2]] %>
 
   <%= form.actions do |action| %>
     <%= action.submit %>

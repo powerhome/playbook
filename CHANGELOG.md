@@ -14,17 +14,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Text Input Dark mode added, Text Input updated to use Textarea mixins and Textarea mixin fix to remove number field arrows ([#494][] @megantrimble)
 - Introduce Pull Request Template ([#508][] @rafbgarcia)
 - Extend Form Kit to use Textarea Kit for textarea form fields ([#506][] @roxannecojocariu)
-- Nav React Kit ([#513][] @christinaatai)
-
-- Introduce Pull Request Template ([#508][] @rafbgarcia)
+- Nav React Kit ([#504][] @christinaatai)
+- Extend Form Kit to use Select Kit for select form fields ([#511][] @web-kat)
 
 [#498]: https://github.com/powerhome/playbook/pull/498
 [#439]: https://github.com/powerhome/playbook/pull/439
 [#494]: https://github.com/powerhome/playbook/pull/494
 [#508]: https://github.com/powerhome/playbook/pull/508
 [#506]: https://github.com/powerhome/playbook/pull/506
-[#504]: https://github.com/powerhome/playbook/pull/513
-
+[#504]: https://github.com/powerhome/playbook/pull/504
+[#511]: https://github.com/powerhome/playbook/pull/511
 
 ### Changed
 
