@@ -23,10 +23,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Fixes master branch (regression introduced by myself on #498) ([#500][] @rafbgarcia)
 - Display wrong numbers in Person Contact Kit. The Kit will now display a caption "wrong number" and have the wrong numbers listed beneath the caption ([#499][] @KFad11)
 - Bug Fix - Null class concatenation on Card Kit ([#497][] @jasperfurniss)
+- New React Style with the separator inside of Cards - Card Kit ([#496][] @jasperfurniss)
 
 [#500]: https://github.com/powerhome/playbook/pull/500
 [#499]: https://github.com/powerhome/playbook/pull/499
 [#497]: https://github.com/powerhome/playbook/pull/497
+[#496]: https://github.com/powerhome/playbook/pull/496
 
 ---
 
