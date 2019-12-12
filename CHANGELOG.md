@@ -18,6 +18,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [#439]: https://github.com/powerhome/playbook/pull/439
 [#508]: https://github.com/powerhome/playbook/pull/508
 
+### Changed
+
+- Added an OnChange event handler for the TextArea React Kit ([#505][] @jasperfurniss)
+
+[#505]: https://github.com/powerhome/playbook/pull/505
+
 ### Fixed
 
 - Fixes master branch (regression introduced by myself on #498) ([#500][] @rafbgarcia)
