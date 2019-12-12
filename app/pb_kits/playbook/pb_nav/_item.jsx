@@ -4,7 +4,7 @@ type NavItemProps = {
   text: String,
   link: String,
   active?: Boolean,
-  children: Array<React.ReactChild> | React.ReactChild,
+  children: React.Node,
 }
 
 const NavItem = (props: NavItemProps) => {

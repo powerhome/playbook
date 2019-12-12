@@ -5,7 +5,7 @@ type NavProps = {
   link: String,
   title: String,
   orientation?: 'vertical' | 'horizontal',
-  children?: Array<React.ReactNode> | React.ReactNode,
+  children?: React.Node,
 }
 
 const Nav = (props: NavProps) => {
