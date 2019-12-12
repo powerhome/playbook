@@ -2,62 +2,48 @@
 
 import React from "react"
 
-import {pbChart} from "../"
+import { pbChart } from "../"
 
 type LineGraphProps = {
-    axisTitle?: String,
-    className?: String,
-    chartData: Array<{
-        name: String,
-        data: Array<Number>,
-    }>,
-    gradient?: Boolean,
-    id: String,
-    pointStart: Number,
-    subTitle?: String,
-    title: String,
+  axisTitle?: String,
+  className?: String,
+  chartData: Array<{
+      name: String,
+      data: Array<Number>,
+  }>,
+  gradient?: Boolean,
+  id: String,
+  pointStart: Number,
+  subTitle?: String,
+  title: String,
 }
 
-export default class LineGraph extends React.Component<LineGraphProps> {
-    static defaultProps = {
-        className: 'pb_bar_graph',
-        gradient: false,
-        type: 'line',
-    }
+ const LineGraph = ({
+  axisTitle,
+  className = 'pb_bar_graph',
+  chartData,
+  id,
+  pointStart,
+  subTitle,
+  title,
+  type = 'line',
+ }: LineGraphProps) => {
+  new pbChart(`.${className}`, {
+      axisTitle: axisTitle,
+      chartData: chartData,
+      id: id,
+      pointStart: pointStart,
+      subtitle: subTitle,
+      type,
+      title: title,
+  })
 
-    componentDidMount() {
-        const {
-            axisTitle,
-            className,
-            chartData,
-            id,
-            pointStart,
-            subTitle,
-            title,
-            type,
-        } = this.props
-
-        new pbChart(`.${className}`, {
-            axisTitle: axisTitle,
-            chartData: chartData,
-            id: id,
-            pointStart: pointStart,
-            subtitle: subTitle,
-            type,
-            title: title,
-        })
-    }
-
-    props: LineGraphProps
-
-    render() {
-      const { className, id } = this.props
-
-      return (
-        <div
-            className={className}
-            id={id}
-        />
-      )
-    }
+  return (
+    <div
+        className={className}
+        id={id}
+    />
+  )
 }
+
+export default LineGraph
