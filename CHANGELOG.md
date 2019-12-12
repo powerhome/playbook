@@ -5,7 +5,7 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased]
+## [3.1.0] 2019-12-12
 
 ### Added
 
@@ -14,22 +14,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Text Input Dark mode added, Text Input updated to use Textarea mixins and Textarea mixin fix to remove number field arrows ([#494][] @megantrimble)
 - Introduce Pull Request Template ([#508][] @rafbgarcia)
 - Extend Form Kit to use Textarea Kit for textarea form fields ([#506][] @roxannecojocariu)
-- Nav React Kit ([#504][] @christinaatai)
-
+- Nav React Kit ([#513][] @christinaatai)
 
 [#498]: https://github.com/powerhome/playbook/pull/498
 [#439]: https://github.com/powerhome/playbook/pull/439
 [#494]: https://github.com/powerhome/playbook/pull/494
 [#508]: https://github.com/powerhome/playbook/pull/508
 [#506]: https://github.com/powerhome/playbook/pull/506
-[#504]: https://github.com/powerhome/playbook/pull/504
+[#504]: https://github.com/powerhome/playbook/pull/513
 
 
 ### Changed
 
 - Added an OnChange event handler for the TextArea React Kit ([#505][] @jasperfurniss)
+- Update `pb_release:version` task to include confirmation and versioning info
 
 [#505]: https://github.com/powerhome/playbook/pull/505
+[#509]: https://github.com/powerhome/playbook/pull/509
 
 ### Fixed
 
@@ -38,12 +39,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Bug Fix - Null class concatenation on Card Kit ([#497][] @jasperfurniss)
 - New React Style with the separator inside of Cards - Card Kit ([#496][] @jasperfurniss)
 - Fixes code example bug in Selectable Card kit ([#495][] @christinaatai)
+- Card kit null class fix
 
 [#500]: https://github.com/powerhome/playbook/pull/500
 [#499]: https://github.com/powerhome/playbook/pull/499
 [#497]: https://github.com/powerhome/playbook/pull/497
 [#496]: https://github.com/powerhome/playbook/pull/496
 [#495]: https://github.com/powerhome/playbook/pull/495
+[#501]: https://github.com/powerhome/playbook/pull/501
 
 ## [3.0.1] - 2019-12-06
 
