@@ -24,6 +24,8 @@ RSpec.describe Playbook::PbContact::Contact do
       expect(subject.new(contact_type: "home").contact_icon).to eq "phone"
       expect(subject.new(contact_type: "work").contact_icon).to eq "phone-office"
       expect(subject.new(contact_type: "email").contact_icon).to eq "envelope"
+      expect(subject.new(contact_type: "wrong-phone").contact_icon).to eq "phone-slash"
+      expect(subject.new(contact_type: "intentionally-wrong-type").contact_icon).to eq "phone"
       expect(subject.new(contact_type: "").contact_icon).to eq "phone"
     end
   end

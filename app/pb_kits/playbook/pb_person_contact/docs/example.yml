@@ -4,8 +4,7 @@ examples:
   - person_contact_default: Default
   - person_contact_multiple: Multiple People
   - person_contact_with_detail: With Detail
-
-
+  - person_contact_with_wrong_numbers: With Wrong Numbers
 
   react:
   - person_contact_default: Default
