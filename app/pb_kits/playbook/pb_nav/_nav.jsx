@@ -1,31 +1,30 @@
-import React, { Component } from "react"
-import PropTypes from "prop-types"
-import NavItem from "./_item"
-import {Caption} from "../"
+import React from 'react'
+import { Caption } from '../'
 
-const propTypes = {
-  children: PropTypes.oneOfType([
-        PropTypes.arrayOf(PropTypes.node),
-        PropTypes.node
-    ])
+type NavProps = {
+  link: String,
+  title: String,
+  orientation?: 'vertical' | 'horizontal',
+  children?: React.Node,
 }
 
-class Nav extends Component {
-  static NavItem = NavItem
-  render() {
-    return (
-      <div className="pb_nav_list">
-        <div className="pb_nav_list_title">
-          <a>
-            <Caption />
-          </a>
-        </div>
-        <ul>{this.props.children}</ul>
+const Nav = (props: NavProps) => {
+  const {
+    title = '',
+    orientation = 'vertical',
+    children
+  } = props;
+
+  return (
+    <div className={`pb_nav_list_${orientation}`}>
+      <div className={`pb_nav_list_title`}>
+        <a className='pb_nav_list_item_link_text'>
+          <Caption size='md' text={`${title}`} />
+        </a>
       </div>
-    )
-  }
+      <ul>{children}</ul>
+    </div>
+  )
 }
-
-Nav.propTypes = propTypes
 
 export default Nav
