@@ -3,7 +3,7 @@
 module Playbook
   module PbForm
     module FormBuilder
-      module SelectBuilder
+      module SelectField
         def select(name, choices = nil, options = {}, html_options = {}, props: {}, &block)
           props[:label] = @template.label(@object_name, name) if props[:label] == true
           options[:skip_default_ids] = false unless options.has_key?(:skip_default_ids)
