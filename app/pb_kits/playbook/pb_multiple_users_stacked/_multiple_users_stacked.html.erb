@@ -1,0 +1,14 @@
+<%= content_tag(:div,
+    id: object.id,
+    data: object.data,
+    class: object.classname) do %>
+    <% object.users.take(object.display_count).each do |user| %>
+      <%= pb_rails("avatar", props: user.merge({size: "xs", classname: "pb_multiple_users_stacked_item"}) ) %>
+    <% end %>
+
+    <% if object.more_than_four %>
+      <div class="pb_multiple_users_stacked_item multiple_users_stacked_badge">
+        <%= "+#{object.users.count - object.display_count}" %>
+      </div>
+    <% end %>
+<% end %>

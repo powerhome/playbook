@@ -1,0 +1,50 @@
+@import "../tokens/colors";
+@import "../utilities/colors";
+@import "../tokens/opacity";
+@import "../pb_avatar/avatar";
+
+$pb_multiple_users_stacked_overlap: -9px;
+$pb_multiple_users_stacked_border_size: 1px;
+$pb_multiple_users_stacked_size: map-get($avatar-sizes, "xs");
+
+[class^=pb_multiple_users_stacked_kit] {
+  display: inline-flex;
+
+  .multiple_users_stacked_badge {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: $pb_multiple_users_stacked_size;
+    height: $pb_multiple_users_stacked_size;
+    border-radius: ($pb_multiple_users_stacked_size/2) + 2;
+    background: tint($primary, 90%);
+    border: $pb_multiple_users_stacked_border_size solid $white;
+    color: $primary;
+    font-weight: $bold;
+    font-size: $font_smallest - 1;
+  }
+
+  .pb_multiple_users_stacked_item {
+    margin-left: $pb_multiple_users_stacked_overlap;
+    margin-right: 0;
+
+    .avatar_wrapper {
+      border: $pb_multiple_users_stacked_border_size solid $white;
+    }
+
+    @each $item in [1, 2, 3, 4, 5] {
+      &:nth-child(#{$item}) {
+        z-index: #{$item - 1};
+      }
+    }
+  }
+
+  &[class*=_reverse] {
+    flex-direction: row-reverse;
+
+    .pb_multiple_users_stacked_item {
+      margin-left: 0;
+      margin-right: $pb_multiple_users_stacked_overlap;
+    }
+  }
+}

@@ -32,6 +32,7 @@ kits:
   - loading_inline
   - message
   - multiple_users
+  - multiple_users_stacked
   - nav
   - online_status
   - person
