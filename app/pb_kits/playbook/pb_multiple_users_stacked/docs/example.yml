@@ -2,8 +2,6 @@ examples:
 
   rails:
   - multiple_users_stacked_default: Default
-  - multiple_users_stacked_reverse: Reverse
 
   react:
   - multiple_users_stacked_default: Default
-  - multiple_users_stacked_reverse: Reverse

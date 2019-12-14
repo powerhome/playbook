@@ -11,33 +11,30 @@ import {
 type MultipleUsersStackedProps = {
   className?: String,
   id?: String,
-  reverse?: Boolean,
   users: Array<Object>,
 }
 
 const MultipleUsersStacked = ({
     className,
     id,
-    reverse=false,
     users
   }: MultipleUsersStackedProps) => {
 
   const multipleUsersStackedCss = () => {
     let css = 'pb_multiple_users_stacked_kit'
-    css += reverse === true ? '_reverse' : ''
     return css
   }
 
-  const moreThanFour = () => {
-    return users.length > 4
+  const moreThanTwo = () => {
+    return users.length > 2
   }
 
   const displayCount = () => {
-    return moreThanFour() ? 3 : users.length
+    return moreThanTwo() ? 1 : users.length
   }
 
   const multipleUsersStacked = () => {
-    return users.slice(0, displayCount()).map((userObject, index) => {
+    return users.slice(0, 1).map((userObject, index) => {
       return (
         <Avatar
           {...userObject}
@@ -48,8 +45,22 @@ const MultipleUsersStacked = ({
     })
   }
 
+  const displaySecond = () => {
+      if( moreThanTwo() === false ) {
+    return users.slice(1, 2).map((userObject, index) => {
+      return (
+        <Avatar
+          {...userObject}
+          key={index}
+          size="xs"
+          className="second_displayed" />
+      )
+    })
+  }
+  }
+
   const plusUsers = () => {
-    if( moreThanFour() === true ) {
+    if( moreThanTwo() === true ) {
       return (
         <div className="pb_multiple_users_stacked_item multiple_users_stacked_badge">
           {`+${users.length - displayCount()}`}
@@ -61,6 +72,7 @@ const MultipleUsersStacked = ({
   return (
     <div id={id} className={classnames(multipleUsersStackedCss(), className)}>
       {multipleUsersStacked()}
+      {displaySecond()}
       {plusUsers()}
     </div>
   )

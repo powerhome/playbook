@@ -26,17 +26,15 @@ function MultipleUsersStackedDefault() {
           image_url: "https://randomuser.me/api/portraits/women/46.jpg",
         }
       ]} />
-
-      <br/><br/>
-
+<br/>
       <MultipleUsersStacked users={[
         {
-          name: "Shawn Palmer",
-          image_url: "https://randomuser.me/api/portraits/men/93.jpg",
+          name: "Patrick Welch",
+          image_url: "https://randomuser.me/api/portraits/men/9.jpg",
         },
         {
-          name: "Andrew Murray",
-          image_url: "https://randomuser.me/api/portraits/men/75.jpg",
+          name: "Lucille Sanchez",
+          image_url: "https://randomuser.me/api/portraits/women/6.jpg",
         }
       ]} />
     </div>

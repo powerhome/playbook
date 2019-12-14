@@ -7,26 +7,22 @@ module Playbook
 
       partial "pb_multiple_users_stacked/multiple_users_stacked"
 
-      prop :reverse, type: Playbook::Props::Boolean, default: false
       prop :users, type: Playbook::Props::HashArray, required: true
 
-      def more_than_four
-        users.count > 4
+      def more_than_two
+        users.count > 2
       end
 
       def display_count
-        more_than_four ? 3 : users.count
+        more_than_two ? 1 : users.count
       end
 
       def classname
-        generate_classname("pb_multiple_users_stacked_kit", reverse_class)
+        generate_classname("pb_multiple_users_stacked_kit")
       end
 
     private
 
-      def reverse_class
-        reverse ? "reverse" : nil
-      end
     end
   end
 end
