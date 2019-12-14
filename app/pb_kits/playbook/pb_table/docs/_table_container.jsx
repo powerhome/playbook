@@ -1,7 +1,7 @@
 import React from 'react'
 import { Table } from '../../'
 
-function TableContainer() {
+const TableContainer = () => {
   return (
     <Table
         size="md"

@@ -1,7 +1,6 @@
 import React from 'react'
-import { OnlineStatus } from '../../'
 
-function OnlineStatusDefault() {
+const OnlineStatusDefault = () => {
   return (
     <h1>{'Coming Soon...'}</h1>
   )

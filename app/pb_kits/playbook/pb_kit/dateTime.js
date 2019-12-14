@@ -19,7 +19,7 @@ export default class DateTime {
     return moment(value).tz(zone)
   }
 
-  convertToTimezone(zone = 'America/New_York') {
+  convertToTimezone() {
     return this.value.strftime('%a')
   }
 

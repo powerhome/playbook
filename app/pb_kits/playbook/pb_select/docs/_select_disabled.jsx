@@ -1,7 +1,7 @@
 import React from 'react'
 import { Select } from '../../'
 
-function SelectDisabled() {
+const SelectDisabled = () => {
   return (
     <div>
       <Select

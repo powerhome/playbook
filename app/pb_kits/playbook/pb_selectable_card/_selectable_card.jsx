@@ -1,10 +1,10 @@
+/* @flow */
+
 import React from 'react'
 import classnames from 'classnames'
 import { Icon } from '../'
 
-import type {
-  InputCallback,
-} from '../types'
+import { type InputCallback } from '../types'
 
 import {
   buildAriaProps,
@@ -29,7 +29,7 @@ type Props = {
   onChange: InputCallback,
   text?: String,
   value?: String
-};
+}
 
 const SelectableCard = ({
   aria = {},
@@ -40,7 +40,6 @@ const SelectableCard = ({
   data = {},
   disabled = false,
   icon = false,
-  id = null,
   inputId = null,
   multi = true,
   name,

@@ -1,7 +1,7 @@
 import React from 'react'
 import { User } from '../../'
 
-function UserTextOnly() {
+const UserTextOnly = () => {
   return (
     <div className="pb--doc-demo-row">
       <User

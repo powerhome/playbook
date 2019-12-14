@@ -1,7 +1,7 @@
 import React from 'react'
 import { Avatar } from '../../'
 
-function AvatarDefault() {
+const AvatarDefault = () => {
   return (
     <div>
       <Avatar

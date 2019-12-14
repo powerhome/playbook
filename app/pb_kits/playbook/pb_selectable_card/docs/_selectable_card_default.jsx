@@ -1,11 +1,10 @@
 import React from 'react'
 import SelectableCard from '../_selectable_card.jsx'
-import Icon from '../../pb_icon/_icon.jsx'
 
 class SelectableCardDefault extends React.Component {
   state = {
-    selected_with_icon: true,
-    selected_without_icon: true,
+    selectedWithIcon: true,
+    selectedWithoutIcon: true,
     unselected: false,
   }
 
@@ -20,23 +19,23 @@ class SelectableCardDefault extends React.Component {
       <div className="pb--doc-demo-row">
 
         <SelectableCard
-            checked={this.state.selected_with_icon}
+            checked={this.state.selectedWithIcon}
             icon
-            inputId="selected_with_icon"
-            name="selected_with_icon"
+            inputId="selectedWithIcon"
+            name="selectedWithIcon"
             onChange={this.handleSelect}
-            value="selected_with_icon"
+            value="selectedWithIcon"
         >
           {'Selected, with icon'}
         </SelectableCard>
 
         <SelectableCard
-            checked={this.state.selected_without_icon}
+            checked={this.state.selectedWithoutIcon}
             icon={false}
-            inputId="selected_without_icon"
-            name="selected_without_icon"
+            inputId="selectedWithoutIcon"
+            name="selectedWithoutIcon"
             onChange={this.handleSelect}
-            value="selected_without_icon"
+            value="selectedWithoutIcon"
         >
           {'Selected, without icon'}
         </SelectableCard>

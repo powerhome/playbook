@@ -1,7 +1,7 @@
 import React from 'react'
 import { DashboardValue } from '../../'
 
-function DashboardValueDefault() {
+const DashboardValueDefault = () => {
   return (
     <div>
       <DashboardValue

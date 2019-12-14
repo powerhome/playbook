@@ -1,7 +1,7 @@
 import React from 'react'
 import { Table } from '../../'
 
-function TableMultiline() {
+const TableMultiline = () => {
   return (
     <Table
         container={false}

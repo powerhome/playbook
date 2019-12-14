@@ -1,7 +1,7 @@
 import React from 'react'
 import { Select } from '../../'
 
-function SelectRequired() {
+const SelectRequired = () => {
   return (
     <div>
       <Select

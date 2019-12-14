@@ -1,8 +1,7 @@
 import React from 'react'
-import classnames from 'classnames'
 import { IconCircle } from '../..'
 
-function IconCircleSize() {
+const IconCircleSize = () => {
   return (
     <div>
       <IconCircle

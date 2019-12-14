@@ -18,11 +18,6 @@ type ContactProps = {
   contactDetail?: String,
 }
 
-const kitClasses = ({}: ContactProps) => {
-  const classname = 'pb_contact_kit'
-  return classname
-}
-
 const Contact = ({
   contactType,
   className,
@@ -44,7 +39,7 @@ const Contact = ({
     }
   }
 
-  const css = classnames(kitClasses({ contactType }), className)
+  const css = classnames('pb_contact_kit', className)
 
   const formatContact = (contactString, contactType) => {
     if (contactType == 'email') {

@@ -1,7 +1,6 @@
 import React from 'react'
-import { TitleDetail } from '../../'
 
-function TitleDetailDefault() {
+const TitleDetailDefault = () => {
   return (
     <h1>{'Coming Soon...'}</h1>
   )

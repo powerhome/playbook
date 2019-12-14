@@ -1,7 +1,7 @@
 import React from 'react'
 import { Contact } from '../../'
 
-function ContactDefault() {
+const ContactDefault = () => {
   return (
     <div>
       <Contact

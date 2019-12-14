@@ -1,7 +1,7 @@
 import React from 'react'
 import { Title } from '../../'
 
-function TitleLight() {
+const TitleLight = () => {
   return (
     <div>
       <Title text="Default Title" />

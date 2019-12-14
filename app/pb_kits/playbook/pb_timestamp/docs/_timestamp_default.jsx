@@ -1,7 +1,6 @@
 import React from 'react'
-import { Timestamp } from '../../'
 
-function TimestampDefault() {
+const TimestampDefault = () => {
   return (
     <h1>{'Coming Soon...'}</h1>
   )

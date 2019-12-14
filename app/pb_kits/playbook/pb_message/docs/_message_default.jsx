@@ -1,7 +1,7 @@
 import React from 'react'
 import { Message } from '../../'
 
-function MessageDefault() {
+const MessageDefault = () => {
   return (
     <div>
 

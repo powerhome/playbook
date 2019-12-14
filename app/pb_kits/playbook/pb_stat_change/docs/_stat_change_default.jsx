@@ -1,7 +1,7 @@
 import React from 'react'
 import { StatChange } from '../../'
 
-function StatChangeDefault() {
+const StatChangeDefault = () => {
   return (
     <div>
       <StatChange

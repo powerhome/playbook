@@ -1,3 +1,5 @@
+/* @flow */
+
 import React from 'react'
 import { Button, Icon } from '../'
 
@@ -8,7 +10,7 @@ type CircleIconButtonProps = {
   className?: String,
   icon: String,
   id?: String,
-};
+}
 
 const CircleIconButton = (props: CircleIconButtonProps) => {
   const {

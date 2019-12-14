@@ -19,8 +19,6 @@ type FixedConfirmationToastProps = {
 
 const FixedConfirmationToast = ({
   className,
-  data,
-  id,
   status = 'neutral',
   text,
 }: FixedConfirmationToastProps) => {

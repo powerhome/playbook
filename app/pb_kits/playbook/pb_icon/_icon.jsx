@@ -22,7 +22,6 @@ type IconProps = {
 
 const Icon = (props: IconProps) => {
   const {
-    aria,
     border = false,
     className,
     fixedWidth = true,

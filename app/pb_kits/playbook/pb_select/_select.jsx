@@ -2,7 +2,6 @@
 /*eslint-disable react/no-multi-comp, flowtype/space-before-type-colon */
 
 import React from 'react'
-import classnames from 'classnames'
 
 import {
   Caption,
@@ -39,6 +38,7 @@ const optionsArray = ({ options = [] }: SelectProps) => {
     return (
       <option
           disabled={optionObject.disabled}
+          key={index}
           selected={optionObject.selected}
           value={optionObject.value}
       >
@@ -50,15 +50,11 @@ const optionsArray = ({ options = [] }: SelectProps) => {
 
 const Select = (props: SelectProps) => {
   const {
-    className,
     children,
     label,
-    value,
     dark = false,
     name,
-    id,
     options,
-    includeBlank,
     blankSelection,
     required = false,
     disabled = false,

@@ -1,3 +1,5 @@
+/* @flow */
+
 import React from 'react'
 import classnames from 'classnames'
 import { Caption } from '../'
@@ -19,30 +21,21 @@ type TextareaProps = {
   onChange?: InputCallback,
 }
 
-const textareaCSS = ({
+const Textarea = ({
+  className,
+  children,
+  label,
+  onChange = () => {},
+  placeholder,
+  value,
   dark = false,
+  rows = 4,
+  name,
 }: TextareaProps) => {
-  const themeStyle = dark === true ? '_dark' : ''
-  return 'pb_textarea_kit' + themeStyle
-}
-
-const Textarea = (props: TextareaProps) => {
-  const {
-    className,
-    children,
-    label,
-    placeholder,
-    value,
-    dark = false,
-    rows = 4,
-    name,
-    onChange = () => {},
-  } = props
-
-  const textarea_input = `${textareaCSS(props)}`
+  const textareaClass = `pb_textarea_kit${dark ? '_dark' : ''}`
 
   return (
-    <div className={classnames(textareaCSS(props), className)}>
+    <div className={classnames(textareaClass, className)}>
       <Caption
           dark={dark}
           text={label}
@@ -51,7 +44,7 @@ const Textarea = (props: TextareaProps) => {
         {children}
         <Else />
         <textarea
-            className={textarea_input}
+            className={textareaClass}
             name={name}
             onChange={onChange}
             placeholder={placeholder}

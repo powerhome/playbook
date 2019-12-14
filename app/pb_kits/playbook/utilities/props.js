@@ -45,4 +45,4 @@ export const buildDataProps = (data) => buildPrefixedProps('data', data)
  * @param {Object} rules a 'classnames' compliant rules object, used to derive the root className.
  * @returns {String} the derived root className value.
  */
-export const buildCss = (rules, delimiter = '_') => classnames(rules).replace(/\s/g, delimiter)
+export const buildCss = (...rules) => classnames(rules).replace(/\s/g, '_')

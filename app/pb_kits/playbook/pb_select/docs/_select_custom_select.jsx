@@ -1,7 +1,7 @@
 import React from 'react'
 import { Select } from '../../'
 
-function SelectCustomSelect() {
+const SelectCustomSelect = () => {
   return (
     <div>
       <Select label='Favorite Holiday'>

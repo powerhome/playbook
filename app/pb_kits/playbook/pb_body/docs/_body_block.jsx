@@ -1,7 +1,7 @@
 import React from 'react'
 import { Body } from '../../'
 
-function BodyBlock() {
+const BodyBlock = () => {
   return (
     <div>
       <Body>

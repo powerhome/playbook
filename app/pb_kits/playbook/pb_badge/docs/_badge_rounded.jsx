@@ -1,7 +1,7 @@
 import React from 'react'
 import Badge from '../_badge.jsx'
 
-function BadgeRounded() {
+const BadgeRounded = () => {
   return (
     <div>
       <Badge

@@ -1,7 +1,7 @@
 import React from 'react'
 import Badge from '../_badge.jsx'
 
-function BadgeDefault() {
+const BadgeDefault = () => {
   return (
     <div>
       <Badge

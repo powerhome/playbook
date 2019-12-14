@@ -1,7 +1,7 @@
 import React from 'react'
 import { Icon } from '../../'
 
-function IconSizes() {
+const IconSizes = () => {
   return (
     <div>
       <p>

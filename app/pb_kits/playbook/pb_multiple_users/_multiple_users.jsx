@@ -4,13 +4,13 @@
 import React from 'react'
 import classnames from 'classnames'
 
-import {
-  Avatar,
-} from '../'
+import { buildCss } from '../utilities/props'
+import { Avatar } from '../'
 
 type MultipleUsersProps = {
   className?: String,
   id?: String,
+  maxDisplayedUsers?: Number,
   reverse?: Boolean,
   users: Array<Object>,
 }
@@ -18,53 +18,32 @@ type MultipleUsersProps = {
 const MultipleUsers = ({
   className,
   id,
+  maxDisplayedUsers = 4,
   reverse = false,
   users,
 }: MultipleUsersProps) => {
-  const multipleUsersCss = () => {
-    let css = 'pb_multiple_users_kit'
-    css += reverse === true ? '_reverse' : ''
-    return css
-  }
+  const displayCount = users.length > maxDisplayedUsers ? maxDisplayedUsers - 1 : users.length
+  const usersToDisplay = users.slice(0, displayCount)
 
-  const moreThanFour = () => {
-    return users.length > 4
-  }
-
-  const displayCount = () => {
-    return moreThanFour() ? 3 : users.length
-  }
-
-  const multipleUsers = () => {
-    return users.slice(0, displayCount()).map((userObject, index) => {
-      return (
+  return (
+    <div
+        className={classnames(className, buildCss('pb_multiple_users_kit', reverse && 'reverse'))}
+        id={id}
+    >
+      {usersToDisplay.map((avatarData, index) => (
         <Avatar
-            {...userObject}
+            {...avatarData}
             className="pb_multiple_users_item"
             key={index}
             size="xs"
         />
-      )
-    })
-  }
+      ))}
 
-  const plusUsers = () => {
-    if (moreThanFour() === true) {
-      return (
+      <If condition={users.length > maxDisplayedUsers}>
         <div className="pb_multiple_users_item multiple_users_badge">
-          {`+${users.length - displayCount()}`}
+          {`+${users.length - 3}`}
         </div>
-      )
-    }
-  }
-
-  return (
-    <div
-        className={classnames(multipleUsersCss(), className)}
-        id={id}
-    >
-      {multipleUsers()}
-      {plusUsers()}
+      </If>
     </div>
   )
 }

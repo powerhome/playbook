@@ -3,9 +3,9 @@ import SelectableCard from '../_selectable_card.jsx'
 
 class SelectableCardDark extends React.Component {
   state = {
-    selected_with_icon_dark: true,
-    selected_without_icon_dark: true,
-    unselected_dark: false,
+    selectedWithIconDark: true,
+    selectedWithoutIconDark: true,
+    unselectedDark: false,
   }
 
   handleSelect = (event) => {
@@ -19,36 +19,36 @@ class SelectableCardDark extends React.Component {
       <div className="pb--doc-demo-row">
 
         <SelectableCard
-            checked={this.state.selected_with_icon_dark}
+            checked={this.state.selectedWithIconDark}
             dark
             icon
-            inputId="selected_with_icon_dark"
-            name="selected_with_icon_dark"
+            inputId="selectedWithIconDark"
+            name="selectedWithIconDark"
             onChange={this.handleSelect}
-            value="selected_with_icon_dark"
+            value="selectedWithIconDark"
         >
           {'Selected, with icon'}
         </SelectableCard>
 
         <SelectableCard
-            checked={this.state.selected_without_icon_dark}
+            checked={this.state.selectedWithoutIconDark}
             dark
             icon={false}
-            inputId="selected_without_icon_dark"
-            name="selected_without_icon_dark"
+            inputId="selectedWithoutIconDark"
+            name="selectedWithoutIconDark"
             onChange={this.handleSelect}
-            value="selected_without_icon_dark"
+            value="selectedWithoutIconDark"
         >
           {'Selected, without icon'}
         </SelectableCard>
 
         <SelectableCard
-            checked={this.state.unselected_dark}
+            checked={this.state.unselectedDark}
             dark
-            inputId="unselected_dark"
-            name="unselected_dark"
+            inputId="unselectedDark"
+            name="unselectedDark"
             onChange={this.handleSelect}
-            value="unselected_dark"
+            value="unselectedDark"
         >
           {'Unselected'}
         </SelectableCard>

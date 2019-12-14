@@ -1,7 +1,7 @@
 import React from 'react'
 import { Body } from '../../'
 
-function BodyLight() {
+const BodyLight = () => {
   return (
     <div>
       <Body text="I am a body kit (Default)" />

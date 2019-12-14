@@ -1,7 +1,7 @@
 import React from 'react'
 import { Icon } from '../../'
 
-function IconPull() {
+const IconPull = () => {
   return (
     <div>
       <Icon

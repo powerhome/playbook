@@ -15,7 +15,6 @@ type PillProps = {
 
 const Pill = ({
   className,
-  id,
   text,
   variant = 'neutral',
 }: PillProps) => {

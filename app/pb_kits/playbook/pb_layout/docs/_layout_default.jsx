@@ -1,13 +1,12 @@
 import React from 'react'
+import { Layout } from '../../'
 
-import {
-  Layout,
-} from '../..'
-
-function LayoutDefault() {
+const LayoutDefault = () => {
   return (
     <div>
-      <h1>{'Coming Soon...'}</h1>
+      <Layout>
+        {'This is great!'}
+      </Layout>
     </div>
   )
 }

@@ -1,7 +1,7 @@
 import React from 'react'
 import { Select } from '../../'
 
-function SelectValueTextSame() {
+const SelectValueTextSame = () => {
   return (
     <div>
       <Select

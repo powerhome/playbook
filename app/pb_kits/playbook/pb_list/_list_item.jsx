@@ -14,7 +14,7 @@ class ListItem extends Component {
       children,
     } = this.props
     return (
-      <li>
+      <li className="pb_item_kit">
         {children}
       </li>
     )

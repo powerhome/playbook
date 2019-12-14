@@ -1,7 +1,7 @@
 import React from 'react'
 import { User } from '../../'
 
-function UserWithTerritory() {
+const UserWithTerritory = () => {
   return (
     <div className="pb--doc-demo-row">
 

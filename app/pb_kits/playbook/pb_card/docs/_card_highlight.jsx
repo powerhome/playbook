@@ -1,7 +1,7 @@
 import React from 'react'
 import { Card } from '../../'
 
-function CardHighlight() {
+const CardHighlight = () => {
   return (
     <div>
       <Card highlight={{ position: 'side', color: 'windows' }}>

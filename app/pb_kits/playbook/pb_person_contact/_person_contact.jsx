@@ -4,50 +4,42 @@
 import React from 'react'
 import classnames from 'classnames'
 
-import {
-  Body,
-  Contact,
-  Person,
-} from '../'
+import { Contact, Person } from '../'
+
+type ContactItem = {
+  contactType: String,
+  contactValue: String,
+  contactDetail: String,
+}
 
 type PersonContactProps = {
   className?: String | Array<String>,
   dark?: Boolean,
   firstName: String,
   lastName: String,
-  contacts?: Array<{contactType: String, contactValue: String, contactDetail: String}>,
-}
-
-const contactsArray = ({ contacts = [] }: PersonContactProps) => {
-  return contacts.map((contactObject, index) => {
-    return (
-      <Contact
-          contactDetail={contactObject.contactDetail}
-          contactType={contactObject.contactType}
-          contactValue={contactObject.contactValue}
-      />
-    )
-  })
+  contacts?: Array<ContactItem>,
 }
 
 const PersonContact = ({
   className,
-  dark = false,
   firstName,
   lastName,
   contacts,
-}: PersonContactProps) => {
-  const contactKits = contactsArray({ contacts })
-
-  return (
-    <div className={classnames('pb_person_contact_kit', className)}>
-      <Person
-          firstName={firstName}
-          lastName={lastName}
+}: PersonContactProps) => (
+  <div className={classnames('pb_person_contact_kit', className)}>
+    <Person
+        firstName={firstName}
+        lastName={lastName}
+    />
+    {contacts.map((contactObject, index) => (
+      <Contact
+          contactDetail={contactObject.contactDetail}
+          contactType={contactObject.contactType}
+          contactValue={contactObject.contactValue}
+          key={index}
       />
-      {contactKits}
-    </div>
-  )
-}
+    ))}
+  </div>
+)
 
 export default PersonContact

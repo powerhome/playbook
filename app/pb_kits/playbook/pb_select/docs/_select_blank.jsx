@@ -1,7 +1,7 @@
 import React from 'react'
 import { Select } from '../../'
 
-function SelectBlank() {
+const SelectBlank = () => {
   return (
     <div>
       <Select

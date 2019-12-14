@@ -7,8 +7,8 @@ import Caption from '../pb_caption/_caption.jsx'
 type SectionSeparatorProps = {
   className: String,
   text: String,
-  variant?: 'card' | 'background'
-};
+  variant?: 'card' | 'background',
+}
 
 const SectionSeparator = ({
   className,

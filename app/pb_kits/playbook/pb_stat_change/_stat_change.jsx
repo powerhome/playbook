@@ -3,10 +3,18 @@
 import React from 'react'
 import classnames from 'classnames'
 
-import {
-  Body,
-  Icon,
-} from '../'
+import { buildCss } from '../utilities/props'
+import { Body, Icon } from '../'
+
+const statusMap = {
+  'increase': 'positive',
+  'decrease': 'negative',
+}
+
+const iconMap = {
+  'increase': 'arrow-up',
+  'decrease': 'arrow-down',
+}
 
 type StatChangeProps = {
   change?: 'increase' | 'decrease' | 'neutral',
@@ -15,75 +23,33 @@ type StatChangeProps = {
   value?: String | Number
 }
 
-const statChangeCSS = ({}: StatChangeProps, status) => {
-  const statusStyle = status !== '' ? `_${status}` : ''
-
-  return 'pb_stat_change_kit' + statusStyle
-}
-
-const StatChange = (props: StatChangeProps) => {
-  const {
-    change = 'neutral',
-    className,
-    id,
-    value,
-  } = props
-
-  const status = (function(change) {
-    switch (change) {
-    case 'increase':
-      return 'positive'
-    case 'decrease':
-      return 'negative'
-    default:
-      return 'neutral'
-    }
-  })(change)
-
-  const icon = (function(change) {
-    switch (change) {
-    case 'increase':
-      return 'arrow-up'
-    case 'decrease':
-      return 'arrow-down'
-    default:
-      return null
-    }
-  })(change)
-
-  const displayIcon = function(icon) {
-    if (icon) {
-      return (
-        <span>
-          <Icon
-              fixed_width
-              icon={icon}
-          />
-          &nbsp;
-        </span>
-      )
-    }
-  }
-
-  const displayValue = function(status, value) {
-    if (value) {
-      return (
-        <Body status={status}>
-          {displayIcon(icon)}
-          {value}
-          {'%'}
-        </Body>
-      )
-    }
-  }
+const StatChange = ({
+  change = 'neutral',
+  className,
+  id,
+  value,
+}: StatChangeProps) => {
+  const status = statusMap[change] || 'neutral'
+  const icon = iconMap[change]
 
   return (
-    <div
-        className={classnames(statChangeCSS(props, status), className)}
-        id={id}
-    >
-      {displayValue(status, value)}
-    </div>
+    <If condition={value}>
+      <div
+          className={classnames(className, buildCss('pb_stat_change_kit', status))}
+          id={id}
+      >
+        <Body status={status}>
+          <If condition={icon}>
+            <Icon
+                fixed_width
+                icon={icon}
+            />
+            {' '}
+          </If>
+          {`${value}%`}
+        </Body>
+      </div>
+    </If>
   )
 }
 

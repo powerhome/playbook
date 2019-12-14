@@ -1,7 +1,7 @@
 import React from 'react'
 import { LoadingInline } from '../../'
 
-function LoadingInlineDark() {
+const LoadingInlineDark = () => {
   return (
     <div>
       <LoadingInline dark />

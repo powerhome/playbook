@@ -1,7 +1,6 @@
 import React from 'react'
-import { TitleCount } from '../../'
 
-function TitleCountDefault() {
+const TitleCountDefault = () => {
   return (
     <h1>{'Coming Soon...'}</h1>
   )

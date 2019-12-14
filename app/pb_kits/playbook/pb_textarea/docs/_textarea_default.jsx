@@ -1,7 +1,7 @@
 import React from 'react'
 import { Textarea } from '../../'
 
-function TextareaDefault() {
+const TextareaDefault = () => {
   return (
     <div>
       <Textarea

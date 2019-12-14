@@ -12,33 +12,33 @@ const dataColors = [
   colors.data_8,
 ]
 
-const applyCustomSeriesColors = function(highchart) {
+const applyCustomSeriesColors = (highchart) => {
   highchart.series.forEach((item, index) => {
-    const selected_color = dataColors[index]
-    item.color = selected_color
-    item.data.forEach((data_item) => {
-      if (data_item.color){
-        data_item.color = selected_color
+    const selectedColor = dataColors[index]
+    item.color = selectedColor
+    item.data.forEach((dataItem) => {
+      if (dataItem.color){
+        dataItem.color = selectedColor
       }
 
-      if (!data_item.marker) return
+      if (!dataItem.marker) return
 
-      if (data_item.marker.lineColor){
-        data_item.marker.lineColor = selected_color
+      if (dataItem.marker.lineColor){
+        dataItem.marker.lineColor = selectedColor
       }
 
-      if (data_item.marker.states.hover !== undefined){
-        data_item.marker.states.hover.lineColor = selected_color
+      if (dataItem.marker.states.hover !== undefined){
+        dataItem.marker.states.hover.lineColor = selectedColor
       }
 
-      if (data_item.marker.states.select.lineColor){
-        data_item.marker.states.select.lineColor = selected_color
+      if (dataItem.marker.states.select.lineColor){
+        dataItem.marker.states.select.lineColor = selectedColor
       }
     })
   })
 }
 
-const adjustAxisStyle = function(axis) {
+const adjustAxisStyle = (axis) => {
   /* Styles grid */
   axis.minorGridLineColor = colors.slate
   axis.minorGridLineWidth = 0.5
@@ -58,7 +58,7 @@ const adjustAxisStyle = function(axis) {
 }
 
 /* Remove grid from background */
-const styleAxis = function(highchart) {
+const styleAxis = (highchart) => {
   if (Array.isArray(highchart.yAxis)) {
     highchart.yAxis.forEach((item) => {
       adjustAxisStyle(item)
@@ -76,14 +76,14 @@ const styleAxis = function(highchart) {
   }
 }
 
-const styleChartContainer = function(highchart) {
+const styleChartContainer = (highchart) => {
   highchart.chart.spacingTop = 30
   highchart.chart.spacingBottom = 40
   highchart.chart.spacingLeft = 50
   highchart.chart.spacingRight = 50
 }
 
-const styleLegend = function(highchart) {
+const styleLegend = (highchart) => {
   highchart.legend.itemStyle.fontFamily = typography.font_family_base
   highchart.legend.itemStyle.color = colors.text_lt_light
   highchart.legend.itemStyle.fontWeight = typography.regular
@@ -91,7 +91,7 @@ const styleLegend = function(highchart) {
 }
 
 // Exportable Global Styles Function
-const commonSettings = function(highchart) {
+const commonSettings = (highchart) => {
   applyCustomSeriesColors(highchart)
   styleAxis(highchart)
   styleChartContainer(highchart)

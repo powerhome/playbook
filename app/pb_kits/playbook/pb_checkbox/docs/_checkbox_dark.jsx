@@ -1,7 +1,7 @@
 import React from 'react'
 import { Checkbox } from '../../'
 
-function CheckboxDark() {
+const CheckboxDark = () => {
   return (
     <div>
       <Checkbox

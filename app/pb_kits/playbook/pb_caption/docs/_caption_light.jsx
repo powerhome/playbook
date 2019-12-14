@@ -1,7 +1,7 @@
 import React from 'react'
 import { Caption } from '../../'
 
-function CaptionLight() {
+const CaptionLight = () => {
   return (
     <div>
       <Caption text="Caption" />

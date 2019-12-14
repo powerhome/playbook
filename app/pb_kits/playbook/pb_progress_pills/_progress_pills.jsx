@@ -34,12 +34,12 @@ const ProgressPill = ({
   />
 )
 
-const ProgressPills = ({ active = 0, steps = 3, title = null, value = null, dark = false } : ProgressPillsProps) => {
+const ProgressPills = ({ active = 0, steps = 3, title = null, value = null, dark = false }: ProgressPillsProps) => {
   const darkClass = dark ? '_dark' : ''
 
   return (
     <div className={`pb_progress_pills_kit${darkClass}`}>
-      {title ?
+      <If condition={title}>
         <div className="progress_pills_status">
           <Title
               dark={dark}
@@ -52,7 +52,8 @@ const ProgressPills = ({ active = 0, steps = 3, title = null, value = null, dark
               dark={dark}
               text={value}
           />
-        </div> : null}
+        </div>
+      </If>
 
       <div className="progress_pills">
         {showSteps(steps, active, dark)}

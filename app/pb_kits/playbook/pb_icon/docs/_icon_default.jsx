@@ -1,7 +1,7 @@
 import React from 'react'
 import { Icon } from '../../'
 
-function IconDefault() {
+const IconDefault = () => {
   return (
     <div>
       <Icon

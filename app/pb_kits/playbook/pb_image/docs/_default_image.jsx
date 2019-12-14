@@ -1,7 +1,7 @@
 import React from 'react'
 import { Image } from '../../'
 
-function DefaultImage() {
+const DefaultImage = () => {
   return (
     <div>
       <Image url="https://unsplash.it/500/400/?image=634" />

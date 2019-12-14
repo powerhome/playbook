@@ -1,7 +1,7 @@
 import React from 'react'
 import { SectionSeparator } from '../../'
 
-function SectionSeparatorTextBackground() {
+const SectionSeparatorTextBackground = () => {
   return (
     <SectionSeparator
         text="Title Separator"

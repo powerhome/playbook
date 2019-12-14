@@ -10,10 +10,30 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - Extend Form Kit to use Select Kit for select form fields ([#511][] @web-kat)
+- JS kit `MultipleUsers`: added prop `maxDisplayedUsers` defaults to `4` ([#PRNUMBER][] @rafbgarcia)
+- JS kit `List`: added default and dark docs ([#PRNUMBER][] @rafbgarcia)
+- JS kit `Layout`: added default docs ([#PRNUMBER][] @rafbgarcia)
+- JS kit `DateStacked`: added `left` as `align` option ([#PRNUMBER][] @rafbgarcia)
 
 [#511]: https://github.com/powerhome/playbook/pull/511
+[#PRNUMBER]: https://github.com/powerhome/playbook/pull/PRNUMBER
 
+### Fixed
 
+- JS kit `MultipleUsers` docs: displays avatar image by renaming `image_url` to `imageUrl` ([#PRNUMBER][] @rafbgarcia)
+- JS kit `User`: displays avatar image by renaming `image_url` to `imageUrl` ([#PRNUMBER][] @rafbgarcia)
+- JS kit `Avatar`: fixed OR condition in `if (avatar == true | avatarUrl != null)` ([#PRNUMBER][] @rafbgarcia)
+- JS kit `List`: fixed class name: `list_borderless` to `_borderless` ([#PRNUMBER][] @rafbgarcia)
+- JS kit `List`: fixed class name: `pb_list` to `pb_list_kit` ([#PRNUMBER][] @rafbgarcia)
+- JS kit `Layout`: fixed error `position_class is not defined` ([#PRNUMBER][] @rafbgarcia)
+
+[#PRNUMBER]: https://github.com/powerhome/playbook/pull/PRNUMBER
+
+### Breaking Changes
+
+- JS kit `Table`: renamed props `disable_hover` to `disableHover`, `single_line` to `singleLine` ([#PRNUMBER][] @rafbgarcia)
+
+[#PRNUMBER]: https://github.com/powerhome/playbook/pull/PRNUMBER
 
 ## [3.1.0] 2019-12-12
 

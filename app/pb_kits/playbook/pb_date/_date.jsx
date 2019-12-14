@@ -2,15 +2,9 @@
 
 import React from 'react'
 import DateTime from '../pb_kit/dateTime.js'
-import moment from 'moment'
 import { Icon } from '../'
 
-type DateProps = {
-  size?: 'xs' | 'sm' | 'lg',
-  value?: String,
-}
-
-const defaultDateString = (value) => {
+const defaultDateString = (value: DateTime) => {
   const weekday = value.toWeekday().toUpperCase()
   const month = value.toMonth().toUpperCase()
   const day = value.toDay()
@@ -18,18 +12,22 @@ const defaultDateString = (value) => {
   return `${weekday} · ${month} ${day}`
 }
 
-const largeDateString = (value) => {
+const largeDateString = (value: DateTime) => {
   const month = value.toMonth().toUpperCase()
   const day = value.toDay()
 
   return `${month} ${day}`
 }
 
-const ExtraSmallDate = ({ value }) => (
+type DateSubcomponent = {
+  value: DateTime
+}
+
+const ExtraSmallDate = ({ value }: DateSubcomponent) => (
   <h3 className='pb_title_kit_4'>{defaultDateString(value)}</h3>
 )
 
-const SmallDate = ({ value }) => (
+const SmallDate = ({ value }: DateSubcomponent) => (
   <h3 className='pb_title_kit_4'>
     <Icon
         fixedWidth="true"
@@ -39,20 +37,24 @@ const SmallDate = ({ value }) => (
   </h3>
 )
 
-const LargeDate = ({ value }) => (
+const LargeDate = ({ value }: DateSubcomponent) => (
   <h3 className='pb_title_kit_3'>{largeDateString(value)}</h3>
 )
 
-export default function Date(props: DateProps) {
-  const {
-    size,
-    value,
-  } = props
-
-  const dateTimeValue = new DateTime({ value: value })
-
-  if (size == 'xs') return <ExtraSmallDate value={dateTimeValue} />
-  if (size == 'lg') return <LargeDate value={dateTimeValue} />
-
-  return <SmallDate value={dateTimeValue} />
+type PbDateProps = {
+  size?: 'xs' | 'sm' | 'lg',
+  value?: String,
 }
+
+const PbDate = ({
+  size,
+  value,
+}: PbDateProps) => {
+  const date = new DateTime({ value: value })
+
+  if (size == 'xs') return <ExtraSmallDate value={date} />
+  if (size == 'lg') return <LargeDate value={date} />
+  return <SmallDate value={date} />
+}
+
+export default PbDate

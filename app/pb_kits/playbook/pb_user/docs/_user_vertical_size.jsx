@@ -1,7 +1,7 @@
 import React from 'react'
 import { User } from '../../'
 
-function UserVerticalSize() {
+const UserVerticalSize = () => {
   return (
     <div>
       <User

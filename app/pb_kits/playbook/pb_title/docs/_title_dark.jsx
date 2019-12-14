@@ -1,7 +1,7 @@
 import React from 'react'
 import { Title } from '../../'
 
-function TitleDark() {
+const TitleDark = () => {
   return (
     <div>
       <Title

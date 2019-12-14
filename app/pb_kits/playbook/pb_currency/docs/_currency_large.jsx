@@ -1,7 +1,7 @@
 import React from 'react'
 import { Currency } from '../../'
 
-function CurrencyDefault() {
+const CurrencyDefault = () => {
   return (
     <div>
       <Currency

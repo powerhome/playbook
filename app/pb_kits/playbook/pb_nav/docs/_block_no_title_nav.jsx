@@ -2,7 +2,7 @@ import React from 'react'
 import { Nav } from '../../'
 import NavItem from '../_item.jsx'
 
-function BlockNoTitleNav() {
+const BlockNoTitleNav = () => {
   return (
     <Nav
         link='#'

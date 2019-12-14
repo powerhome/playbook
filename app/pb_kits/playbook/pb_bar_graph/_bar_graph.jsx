@@ -1,6 +1,6 @@
 /* @flow */
 
-import React from 'react'
+import React, { useEffect } from 'react'
 
 import { pbChart } from '../'
 
@@ -15,6 +15,7 @@ type BarGraphProps = {
   pointStart: Number,
   subTitle?: String,
   title: String,
+  type?: String,
 }
 
 const BarGraph = ({
@@ -27,14 +28,16 @@ const BarGraph = ({
   title,
   type = 'column',
 }: BarGraphProps) => {
-  new pbChart(`.${className}`, {
-    axisTitle: axisTitle,
-    chartData: chartData,
-    id: id,
-    pointStart: pointStart,
-    subtitle: subTitle,
-    type,
-    title: title,
+  useEffect(() => {
+    new pbChart(`.${className}`, {
+      axisTitle,
+      chartData,
+      id,
+      pointStart,
+      subtitle: subTitle,
+      type,
+      title,
+    })
   })
 
   return (

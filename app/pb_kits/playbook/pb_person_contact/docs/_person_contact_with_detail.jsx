@@ -1,7 +1,7 @@
 import React from 'react'
 import { PersonContact } from '../../'
 
-function PersonContactWithDetail() {
+const PersonContactWithDetail = () => {
   return (
     <div>
       <PersonContact

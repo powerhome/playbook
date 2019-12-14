@@ -1,7 +1,7 @@
 import React from 'react'
 import { Icon } from '../../'
 
-function IconRotate() {
+const IconRotate = () => {
   return (
     <div>
       <Icon

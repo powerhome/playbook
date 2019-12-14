@@ -16,6 +16,7 @@ type ButtonPropTypes = {
   fullWidth?: Boolean,
   icon?: String,
   id?: String,
+  link?: String,
   loading?: Boolean,
   newWindow?: Boolean,
   onClick?: EventHandler,

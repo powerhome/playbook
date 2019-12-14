@@ -1,7 +1,7 @@
 import React from 'react'
 import { PersonContact } from '../../'
 
-function PersonContactMultiple() {
+const PersonContactMultiple = () => {
   return (
     <div>
       <PersonContact

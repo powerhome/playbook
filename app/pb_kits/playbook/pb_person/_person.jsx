@@ -29,7 +29,7 @@ const Person = ({
           dark={dark}
           tag="span"
       >
-        {`${firstName}`}
+        {firstName}
       </Body>
       <Title
           className="pb_person_first"

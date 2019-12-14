@@ -4,6 +4,7 @@
 import React from 'react'
 import classnames from 'classnames'
 
+import { buildCss } from '../utilities/props'
 import DateTime from '../pb_kit/dateTime.js'
 
 import {
@@ -20,12 +21,6 @@ type DateYearStackedProps = {
   id?: String,
 }
 
-const kitClasses = ({ align = 'left' }: DateYearStackedProps) => {
-  let classname = 'pb_date_year_stacked'
-  classname += `_${align}`
-  return classname
-}
-
 const DateYearStacked = ({
   align,
   className,
@@ -33,7 +28,7 @@ const DateYearStacked = ({
   date,
 }: DateYearStackedProps) => {
   const dateTimestamp = new DateTime({ value: date })
-  const css = classnames(kitClasses({ align }), className)
+  const css = classnames(className, buildCss('pb_date_year_stacked', align))
 
   return (
     <div className={css}>

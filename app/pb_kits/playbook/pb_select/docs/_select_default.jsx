@@ -1,7 +1,7 @@
 import React from 'react'
 import { Select } from '../../'
 
-function SelectDefault() {
+const SelectDefault = () => {
   return (
     <div>
       <Select
