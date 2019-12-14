@@ -1,24 +1,24 @@
-import React from "react"
-import {User} from "../../"
+import React from 'react'
+import { User } from '../../'
 
 function UserTextOnly() {
   return (
-    <div class="pb--doc-demo-row">
+    <div className="pb--doc-demo-row">
       <User
-          name='Anna Black'
-          title='Remodeling Consultant'
-          orientation='horizontal'
           align='center'
+          name='Anna Black'
+          orientation='horizontal'
           size='lg'
+          title='Remodeling Consultant'
       />
       <User
-          name='Anna Black'
-          title='Remodeling Consultant'
-          orientation='horizontal'
           align='left'
+          name='Anna Black'
+          orientation='horizontal'
+          title='Remodeling Consultant'
       />
-    </div> 
+    </div>
   )
 }
 
-export default UserTextOnly;
+export default UserTextOnly

@@ -1,5 +1,5 @@
-import React from "react"
-import {Hashtag} from "../../"
+import React from 'react'
+import { Hashtag } from '../../'
 
 function HashtagDefault() {
   return (
@@ -9,13 +9,13 @@ function HashtagDefault() {
           type="project"
           url="https://google.com"
       />
-      <br/>
+      <br />
       <Hashtag
           text="123456"
           type="home"
           url="https://google.com"
       />
-      <br/>
+      <br />
       <Hashtag
           text="654321"
           type="default"
@@ -25,4 +25,4 @@ function HashtagDefault() {
   )
 }
 
-export default HashtagDefault;
+export default HashtagDefault

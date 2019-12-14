@@ -15,16 +15,15 @@ type CaptionProps = {
 const Caption = ({
   className,
   children,
-  dark=false,
-  size='md',
-  tag='div',
+  dark = false,
+  size = 'md',
+  tag = 'div',
   text,
 }: CaptionProps) => {
-
   const Tag = `${tag}`
 
   const css = classnames([
-    `pb_caption_kit` +
+    'pb_caption_kit' +
     `_${size}` +
     (dark === true ? '_dark' : ''),
     className,

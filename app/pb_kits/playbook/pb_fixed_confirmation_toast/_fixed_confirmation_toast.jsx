@@ -21,39 +21,47 @@ const FixedConfirmationToast = ({
   className,
   data,
   id,
-  status='neutral',
-  text
+  status = 'neutral',
+  text,
 }: FixedConfirmationToastProps) => {
   const css = classnames([
     `pb_fixed_confirmation_toast_kit_${status}`,
     className,
   ])
 
-const icon = (function(status) {
-  switch(status) {
-    case "success":
-      return "check";
-    case "error":
-      return "exclamation-triangle";
-    case "neutral":
-      return "info-circle";
+  const icon = (function(status) {
+    switch (status) {
+    case 'success':
+      return 'check'
+    case 'error':
+      return 'exclamation-triangle'
+    case 'neutral':
+      return 'info-circle'
     default:
-      return null;
-  }
-})(status)
+      return null
+    }
+  })(status)
 
-const displayIcon = function(icon) {
-  if (icon) {
-    return (
-      <Icon icon={icon} fixed_width={true} className="pb_icon"/>
-    )
+  const displayIcon = function(icon) {
+    if (icon) {
+      return (
+        <Icon
+            className="pb_icon"
+            fixed_width
+            icon={icon}
+        />
+      )
+    }
   }
-}
 
-return (
-  <div className={css}>
-    {displayIcon(icon)}
-    <Title size={4} className="pb_fixed_confirmation_toast_text" text={text} />
+  return (
+    <div className={css}>
+      {displayIcon(icon)}
+      <Title
+          className="pb_fixed_confirmation_toast_text"
+          size={4}
+          text={text}
+      />
     </div>
   )
 }

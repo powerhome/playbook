@@ -1,36 +1,60 @@
-import React from "react"
-import Pill from "../_pill.jsx"
+import React from 'react'
+import Pill from '../_pill.jsx'
 
 function PillDefault() {
   return (
     <div>
       <Pill text="default" />
 
-      <br/><br/>
+      <br />
+      <br />
 
-      <Pill text="success" variant="success" />
+      <Pill
+          text="success"
+          variant="success"
+      />
 
-      <br/><br/>
+      <br />
+      <br />
 
-      <Pill text="error" variant="error" />
+      <Pill
+          text="error"
+          variant="error"
+      />
 
-      <br/><br/>
+      <br />
+      <br />
 
-      <Pill text="warning" variant="warning" />
+      <Pill
+          text="warning"
+          variant="warning"
+      />
 
-      <br/><br/>
+      <br />
+      <br />
 
-      <Pill text="info" variant="info" />
+      <Pill
+          text="info"
+          variant="info"
+      />
 
-      <br/><br/>
+      <br />
+      <br />
 
-      <Pill text="neutral" variant="neutral" />
+      <Pill
+          text="neutral"
+          variant="neutral"
+      />
 
-      <br/><br/>
+      <br />
+      <br />
 
-      <Pill text="primary" variant="primary" />
+      <Pill
+          text="primary"
+          variant="primary"
+      />
     </div>
   )
 }
 
-export default PillDefault;
+export default PillDefault

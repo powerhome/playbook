@@ -1,5 +1,5 @@
-import React from "react"
-import {Hashtag} from "../../"
+import React from 'react'
+import { Hashtag } from '../../'
 
 function HashtagDark() {
   return (
@@ -10,14 +10,14 @@ function HashtagDark() {
           type="project"
           url="https://google.com"
       />
-      <br/>
+      <br />
       <Hashtag
           dark
           text="123456"
           type="home"
           url="https://google.com"
       />
-      <br/>
+      <br />
       <Hashtag
           dark
           text="654321"
@@ -28,4 +28,4 @@ function HashtagDark() {
   )
 }
 
-export default HashtagDark;
+export default HashtagDark

@@ -1,5 +1,5 @@
 import React from 'react'
-import {Checkbox} from '../../'
+import { Checkbox } from '../../'
 
 function CheckboxDefault() {
   return (
@@ -13,4 +13,4 @@ function CheckboxDefault() {
   )
 }
 
-export default CheckboxDefault;
+export default CheckboxDefault

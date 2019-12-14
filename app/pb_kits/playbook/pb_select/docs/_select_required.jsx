@@ -1,15 +1,14 @@
 import React from 'react'
-import {Select} from '../../'
+import { Select } from '../../'
 
 function SelectRequired() {
   return (
     <div>
       <Select
-        label='Which shoe do you tie first?'
-        required
-        name='shoe'
-        blankSelection='Select One...'
-        options={[
+          blankSelection='Select One...'
+          label='Which shoe do you tie first?'
+          name='shoe'
+          options={[
           {
             value: 'Left',
           },
@@ -20,6 +19,7 @@ function SelectRequired() {
             value: 'I go without laces',
           },
         ]}
+          required
       />
     </div>
   )

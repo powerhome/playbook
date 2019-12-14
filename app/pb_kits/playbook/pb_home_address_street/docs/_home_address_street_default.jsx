@@ -1,5 +1,5 @@
-import React from "react"
-import {HomeAddressStreet} from "../../"
+import React from 'react'
+import { HomeAddressStreet } from '../../'
 
 function HomeAddressStreetDefault() {
   return (
@@ -10,10 +10,10 @@ function HomeAddressStreetDefault() {
         homeId={8250263}
         houseStyle="Colonial"
         state="PA"
-        zipcode="19382"
         territory="PHL"
+        zipcode="19382"
     />
   )
 }
 
-export default HomeAddressStreetDefault;
+export default HomeAddressStreetDefault

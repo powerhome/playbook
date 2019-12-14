@@ -5,7 +5,7 @@ import React from 'react'
 
 import classnames from 'classnames'
 import { map } from 'lodash'
-import { Image } from "../"
+import { Image } from '../'
 
 type AvatarProps = {
   className?: String,
@@ -17,14 +17,15 @@ type AvatarProps = {
 
 const initials = function(name) {
   if (name) {
-    return map(name.split(/\s/), name => name[0]).join('').substring(0,2)
+    return map(name.split(/\s/), (name) => name[0]).join('').substring(0, 2)
   }
 }
 
 const image = function(imageUrl, name) {
   if (imageUrl) {
     return (
-      <Image alt={name}
+      <Image
+          alt={name}
           url={imageUrl}
       />
     )
@@ -32,36 +33,36 @@ const image = function(imageUrl, name) {
 }
 
 const PbStatus = ({ size, status } : { size: String, status: String }) => (
-  <div className={`pb_online_status_kit_${status} size_${size}`}/>
+  <div className={`pb_online_status_kit_${status} size_${size}`} />
 )
 
 const Avatar = ({
   className,
-  name=null,
+  name = null,
   imageUrl,
-  size='md',
-  status=null
+  size = 'md',
+  status = null,
 }: AvatarProps) => {
-
   const statusDisplay = () => {
-    if(status !== null){
+    if (status !== null){
       return (
         <PbStatus
             size={size}
             status={status}
         />
-      );
+      )
     }
   }
 
   const css = classnames([
-    `pb_avatar_kit`,
+    'pb_avatar_kit',
     `avatar_${size}`,
     className,
   ])
 
   return (
-    <div className={css}
+    <div
+        className={css}
         data-initials={initials(name)}
     >
       <div

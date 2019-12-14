@@ -1,13 +1,13 @@
 import React from 'react'
-import {Select} from '../../'
+import { Select } from '../../'
 
 function SelectDisabledOptions() {
   return (
     <div>
       <Select
-        label='Favorite Coffee'
-        name='coffee'
-        options={[
+          label='Favorite Coffee'
+          name='coffee'
+          options={[
           {
             value: '1',
             disabled: true,

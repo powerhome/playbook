@@ -1,48 +1,52 @@
-import React from "react"
+import React from 'react'
 import {
   Body,
   SelectableCard,
-  Title
-} from "../../"
+  Title,
+} from '../../'
 
 class SelectableCardBlock extends React.Component {
   state = {
     block: true,
-    tag: false
+    tag: false,
   }
 
-  handleSelect = event => {
+  handleSelect = (event) => {
     this.setState({
-      [event.target.id]: event.target.checked
+      [event.target.id]: event.target.checked,
     })
   }
 
   render() {
     return (
-      <div class="pb--doc-demo-row">
+      <div className="pb--doc-demo-row">
 
         <SelectableCard
+            checked={this.state.block}
             inputId="block"
             name="block"
+            onChange={this.handleSelect}
             value="block"
-            checked={this.state.block}
-            onChange={this.handleSelect}>
-          <Title text="Block" size={4} />
-          <Body tag="span">This uses block</Body>
+        >
+          <Title
+              size={4}
+              text="Block"
+          />
+          <Body tag="span">{'This uses block'}</Body>
         </SelectableCard>
 
         <SelectableCard
+            checked={this.state.tag}
             inputId="tag"
             name="tag"
-            value="tag"
-            checked={this.state.tag}
             onChange={this.handleSelect}
-            text="This passes text through the tag">
-        </SelectableCard>
+            text="This passes text through the tag"
+            value="tag"
+        />
 
       </div>
     )
   }
 }
 
-export default SelectableCardBlock;
+export default SelectableCardBlock

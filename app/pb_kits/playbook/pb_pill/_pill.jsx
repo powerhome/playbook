@@ -17,7 +17,7 @@ const Pill = ({
   className,
   id,
   text,
-  variant='neutral'
+  variant = 'neutral',
 }: PillProps) => {
   const css = classnames([
     `pb_pill_kit_${variant}`,
@@ -26,7 +26,11 @@ const Pill = ({
 
   return (
     <div className={css}>
-      <Title size={4} className="pb_pill_text" text={text} />
+      <Title
+          className="pb_pill_text"
+          size={4}
+          text={text}
+      />
     </div>
   )
 }

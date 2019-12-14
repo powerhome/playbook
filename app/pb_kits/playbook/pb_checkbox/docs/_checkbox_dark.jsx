@@ -1,5 +1,5 @@
 import React from 'react'
-import {Checkbox} from '../../'
+import { Checkbox } from '../../'
 
 function CheckboxDark() {
   return (
@@ -14,4 +14,4 @@ function CheckboxDark() {
   )
 }
 
-export default CheckboxDark;
+export default CheckboxDark

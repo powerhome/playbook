@@ -1,14 +1,32 @@
-import React from "react"
-import {Icon} from "../../"
+import React from 'react'
+import { Icon } from '../../'
 
 function IconAnimate() {
   return (
     <div>
-      <p><Icon icon="spinner" size="2x" spin fixedWidth /> <span>Spin</span></p>
-      <br/>
-      <p><Icon icon="spinner" size="2x" pulse fixedWidth /> <span>Pulse</span></p>
+      <p>
+        <Icon
+            fixedWidth
+            icon="spinner"
+            size="2x"
+            spin
+        />
+        {' '}
+        <span>{'Spin'}</span>
+      </p>
+      <br />
+      <p>
+        <Icon
+            fixedWidth
+            icon="spinner"
+            pulse
+            size="2x"
+        />
+        {' '}
+        <span>{'Pulse'}</span>
+      </p>
     </div>
   )
 }
 
-export default IconAnimate;
+export default IconAnimate

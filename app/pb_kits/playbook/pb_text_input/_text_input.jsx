@@ -23,18 +23,22 @@ const TextInput = ({
   onChange = () => {},
   placeholder,
   type = 'text',
-  value
+  value,
 }: TextInputProps) => {
   const css = classnames([
-    `pb_text_input_kit${dark === true ? '_dark' : ""}`,
+    `pb_text_input_kit${dark === true ? '_dark' : ''}`,
     className,
   ])
 
   return (
     <div className={css}>
-      <Caption text={label} dark={dark} />
+      <Caption
+          dark={dark}
+          text={label}
+      />
       <div className='text_input_wrapper'>
-        <input className='text_input'
+        <input
+            className='text_input'
             name={name}
             onChange={onChange}
             placeholder={placeholder}

@@ -1,13 +1,17 @@
-import React from "react"
-import {Textarea} from "../../"
+import React from 'react'
+import { Textarea } from '../../'
 
 function TextareaCustom() {
   return (
     <div>
       <Textarea label="Label">
-          <textarea class="my_custom_class" name="custom_textarea" rows={4}>
-            {`Content goes here.`} 
-          </textarea>
+        <textarea
+            className="my_custom_class"
+            name="custom_textarea"
+            rows={4}
+        >
+          {'Content goes here.'}
+        </textarea>
       </Textarea>
     </div>
   )

@@ -1,14 +1,14 @@
 import React from 'react'
-import {Select} from '../../'
+import { Select } from '../../'
 
 function SelectBlank() {
   return (
     <div>
       <Select
-        label='Where do you live'
-        name='location'
-        blankSelection='Select One...'
-        options={[
+          blankSelection='Select One...'
+          label='Where do you live'
+          name='location'
+          options={[
           {
             value: 'USA',
           },

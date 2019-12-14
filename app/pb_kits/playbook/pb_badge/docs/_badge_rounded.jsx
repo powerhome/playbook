@@ -1,20 +1,32 @@
-import React from "react"
-import Badge from "../_badge.jsx"
+import React from 'react'
+import Badge from '../_badge.jsx'
 
 function BadgeRounded() {
   return (
     <div>
-      <Badge text="+1" variant="primary" rounded />
+      <Badge
+          rounded
+          text="+1"
+          variant="primary"
+      />
 
       &nbsp;
 
-      <Badge text="+4" variant="primary" rounded />
+      <Badge
+          rounded
+          text="+4"
+          variant="primary"
+      />
 
       &nbsp;
 
-      <Badge text="+1000" variant="primary" rounded />
+      <Badge
+          rounded
+          text="+1000"
+          variant="primary"
+      />
     </div>
   )
 }
 
-export default BadgeRounded;
+export default BadgeRounded

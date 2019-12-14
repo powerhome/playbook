@@ -1,12 +1,15 @@
-import React from "react"
-import {Icon} from "../../"
+import React from 'react'
+import { Icon } from '../../'
 
 function IconDefault() {
   return (
     <div>
-      <Icon icon="user" fixedWidth />
+      <Icon
+          fixedWidth
+          icon="user"
+      />
     </div>
   )
 }
 
-export default IconDefault;
+export default IconDefault

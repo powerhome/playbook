@@ -1,31 +1,31 @@
-import React from "react"
-import {User} from "../../"
+import React from 'react'
+import { User } from '../../'
 
 function UserDefault() {
   return (
-    <div class="pb--doc-demo-row">
+    <div className="pb--doc-demo-row">
       <User
+          avatarUrl="https://randomuser.me/api/portraits/women/44.jpg"
           name='Anna Black'
-          title='Remodeling Consultant'
           size='sm'
-          avatarUrl="https://randomuser.me/api/portraits/women/44.jpg"
+          title='Remodeling Consultant'
       />
 
       <User
+          avatarUrl="https://randomuser.me/api/portraits/women/44.jpg"
           name='Anna Black'
-          title='Remodeling Consultant'
           size='md'
-          avatarUrl="https://randomuser.me/api/portraits/women/44.jpg"
+          title='Remodeling Consultant'
       />
 
       <User
-          name='Anna Black'
-          title='Remodeling Consultant'
-          size='lg'
           avatarUrl="https://randomuser.me/api/portraits/women/44.jpg"
+          name='Anna Black'
+          size='lg'
+          title='Remodeling Consultant'
       />
-    </div> 
+    </div>
   )
 }
 
-export default UserDefault;
+export default UserDefault

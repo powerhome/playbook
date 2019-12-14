@@ -1,9 +1,9 @@
-import React from "react"
-import {StarRating} from "../../"
+import React from 'react'
+import { StarRating } from '../../'
 
 function StarRatingDefault() {
   return (
-    <h1>{`Coming Soon...`}</h1>
+    <h1>{'Coming Soon...'}</h1>
   )
 }
 

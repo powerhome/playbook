@@ -5,19 +5,17 @@ import React from 'react'
 import classnames from 'classnames'
 import { titleize } from '../utilities/text.js'
 
-
 import {
   Body,
   Title,
 } from '../'
 
-const dot = (houseStyle) =>
-  { if (houseStyle !== undefined) {
-    return "\u00b7"
+const dot = (houseStyle) => {
+  if (houseStyle !== undefined) {
+    return '\u00b7'
   }
 }
-const titleizeAddessCont = (addressCont) => addressCont ? titleize(addressCont) : null;
-
+const titleizeAddessCont = (addressCont) => addressCont ? titleize(addressCont) : null
 
 type HomeAddressStreetProps = {
   address: String,
@@ -39,13 +37,12 @@ const classes = (className, dark) => (
   })
 )
 
-
 const HomeAddressStreet = ({
   address,
   addressCont,
   city,
   className,
-  dark=false,
+  dark = false,
   homeId,
   houseStyle,
   state,
@@ -57,7 +54,11 @@ const HomeAddressStreet = ({
         className="pb_home_address_street_address"
         size={4}
     >
-      {titleize(address)} {dot(houseStyle)} {houseStyle}
+      {titleize(address)}
+      {' '}
+      {dot(houseStyle)}
+      {' '}
+      {houseStyle}
     </Title>
 
     <Title
@@ -67,13 +68,18 @@ const HomeAddressStreet = ({
       {titleizeAddessCont(addressCont)}
     </Title>
     <Body color="light">
-      {titleize(city)}, {state} {zipcode}
+      {titleize(city)}
+      {', '}
+      {state}
+      {' '}
+      {zipcode}
     </Body>
     <Body
         className="home-hashtag"
         tag="span"
     >
-      H#{homeId}
+      {'H#'}
+      {homeId}
     </Body>
     <Body
         color="light"

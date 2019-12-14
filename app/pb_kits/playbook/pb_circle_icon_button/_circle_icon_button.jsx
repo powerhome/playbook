@@ -1,5 +1,5 @@
 import React from 'react'
-import {Button, Icon} from "../"
+import { Button, Icon } from '../'
 
 type CircleIconButtonProps = {
   variant?: 'primary' | 'secondary' | 'link',
@@ -15,16 +15,24 @@ const CircleIconButton = (props: CircleIconButtonProps) => {
     variant,
     disabled,
     icon,
-    dark
+    dark,
   } = props
 
   return (
-    <div className={'pb_circle_icon_button_kit'}>
-      <Button text={null} variant={variant} disabled={disabled} dark={dark}>
-        <Icon fixedWidth icon={icon} />
+    <div className="pb_circle_icon_button_kit">
+      <Button
+          dark={dark}
+          disabled={disabled}
+          text={null}
+          variant={variant}
+      >
+        <Icon
+            fixedWidth
+            icon={icon}
+        />
       </Button>
     </div>
-  );
+  )
 }
 
-export default CircleIconButton;
+export default CircleIconButton

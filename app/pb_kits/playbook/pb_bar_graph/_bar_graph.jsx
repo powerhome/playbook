@@ -2,7 +2,7 @@
 
 import React from 'react'
 
-import { pbChart } from "../"
+import { pbChart } from '../'
 
 type BarGraphProps = {
   axisTitle: String,
@@ -17,7 +17,7 @@ type BarGraphProps = {
   title: String,
 }
 
- const BarGraph = ({
+const BarGraph = ({
   axisTitle,
   className = 'pb_bar_graph',
   chartData,
@@ -26,7 +26,7 @@ type BarGraphProps = {
   subTitle,
   title,
   type = 'column',
- }: BarGraphProps) => {
+}: BarGraphProps) => {
   new pbChart(`.${className}`, {
     axisTitle: axisTitle,
     chartData: chartData,

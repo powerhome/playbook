@@ -1,18 +1,18 @@
-import React from "react"
-import {HomeAddressStreet} from "../../"
+import React from 'react'
+import { HomeAddressStreet } from '../../'
 
 function HomeAddressStreetModified() {
   return (
     <HomeAddressStreet
         address="70 Prospect Ave"
-        city="West Chester"
         addressCont="M18"
+        city="West Chester"
         homeId={8250263}
         state="PA"
-        zipcode="19382"
         territory="PHL"
+        zipcode="19382"
     />
   )
 }
 
-export default HomeAddressStreetModified;
+export default HomeAddressStreetModified

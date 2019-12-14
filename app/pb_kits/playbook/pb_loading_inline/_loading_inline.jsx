@@ -17,16 +17,21 @@ type LoadingInlineProps = {
 }
 
 const LoadingInline = ({
-  align='left',
+  align = 'left',
   className,
-  dark=false,
+  dark = false,
   data,
-  id
+  id,
 }: LoadingInlineProps) => (
   <div className={`pb_loading_inline_kit_${align}`}>
     <Body color="light">
-      <Icon fixedWidth pulse icon="spinner" />&nbsp;
-      {`Loading`}
+      <Icon
+          fixedWidth
+          icon="spinner"
+          pulse
+      />
+&nbsp;
+      {'Loading'}
     </Body>
   </div>
 )

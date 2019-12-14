@@ -5,7 +5,7 @@ import React from 'react'
 import classnames from 'classnames'
 
 import {
-  Avatar
+  Avatar,
 } from '../'
 
 type MultipleUsersProps = {
@@ -16,12 +16,11 @@ type MultipleUsersProps = {
 }
 
 const MultipleUsers = ({
-    className,
-    id,
-    reverse=false,
-    users
-  }: MultipleUsersProps) => {
-
+  className,
+  id,
+  reverse = false,
+  users,
+}: MultipleUsersProps) => {
   const multipleUsersCss = () => {
     let css = 'pb_multiple_users_kit'
     css += reverse === true ? '_reverse' : ''
@@ -40,16 +39,17 @@ const MultipleUsers = ({
     return users.slice(0, displayCount()).map((userObject, index) => {
       return (
         <Avatar
-          {...userObject}
-          key={index}
-          size="xs"
-          className="pb_multiple_users_item" />
+            {...userObject}
+            className="pb_multiple_users_item"
+            key={index}
+            size="xs"
+        />
       )
     })
   }
 
   const plusUsers = () => {
-    if( moreThanFour() === true ) {
+    if (moreThanFour() === true) {
       return (
         <div className="pb_multiple_users_item multiple_users_badge">
           {`+${users.length - displayCount()}`}
@@ -59,7 +59,10 @@ const MultipleUsers = ({
   }
 
   return (
-    <div id={id} className={classnames(multipleUsersCss(), className)}>
+    <div
+        className={classnames(multipleUsersCss(), className)}
+        id={id}
+    >
       {multipleUsers()}
       {plusUsers()}
     </div>

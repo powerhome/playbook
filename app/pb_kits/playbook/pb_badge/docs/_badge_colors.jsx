@@ -1,82 +1,142 @@
-import React from "react"
-import Badge from "../_badge.jsx"
+import React from 'react'
+import Badge from '../_badge.jsx'
 
 function BadgeColors() {
   return (
     <div>
       <div>
-        <Badge text="+1" variant="primary" rounded />
+        <Badge
+            rounded
+            text="+1"
+            variant="primary"
+        />
 
         &nbsp;
 
-        <Badge text="+4" variant="primary" />
+        <Badge
+            text="+4"
+            variant="primary"
+        />
 
         &nbsp;
 
-        <Badge text="+1000" variant="primary" />
+        <Badge
+            text="+1000"
+            variant="primary"
+        />
       </div>
 
       <div>
-        <Badge text="+1" variant="success" rounded />
+        <Badge
+            rounded
+            text="+1"
+            variant="success"
+        />
 
         &nbsp;
 
-        <Badge text="+4" variant="success" />
+        <Badge
+            text="+4"
+            variant="success"
+        />
 
         &nbsp;
 
-        <Badge text="+1000" variant="success" />
+        <Badge
+            text="+1000"
+            variant="success"
+        />
       </div>
 
       <div>
-        <Badge text="+1" variant="warning" rounded />
+        <Badge
+            rounded
+            text="+1"
+            variant="warning"
+        />
 
         &nbsp;
 
-        <Badge text="+4" variant="warning" />
+        <Badge
+            text="+4"
+            variant="warning"
+        />
 
         &nbsp;
 
-        <Badge text="+1000" variant="warning" />
+        <Badge
+            text="+1000"
+            variant="warning"
+        />
       </div>
 
       <div>
-        <Badge text="+1" variant="error" rounded />
+        <Badge
+            rounded
+            text="+1"
+            variant="error"
+        />
 
         &nbsp;
 
-        <Badge text="+4" variant="error" />
+        <Badge
+            text="+4"
+            variant="error"
+        />
 
         &nbsp;
 
-        <Badge text="+1000" variant="error" />
+        <Badge
+            text="+1000"
+            variant="error"
+        />
       </div>
 
       <div>
-        <Badge text="+1" variant="info" rounded />
+        <Badge
+            rounded
+            text="+1"
+            variant="info"
+        />
 
         &nbsp;
 
-        <Badge text="+4" variant="info" />
+        <Badge
+            text="+4"
+            variant="info"
+        />
 
         &nbsp;
 
-        <Badge text="+1000" variant="info" />
+        <Badge
+            text="+1000"
+            variant="info"
+        />
       </div>
 
       <div>
-        <Badge text="+1" variant="neutral" rounded />
+        <Badge
+            rounded
+            text="+1"
+            variant="neutral"
+        />
 
         &nbsp;
 
-        <Badge text="+4" variant="neutral" />
+        <Badge
+            text="+4"
+            variant="neutral"
+        />
 
         &nbsp;
 
-        <Badge text="+1000" variant="neutral" />
+        <Badge
+            text="+1000"
+            variant="neutral"
+        />
       </div>
     </div>
   )
 }
 
-export default BadgeColors;
+export default BadgeColors

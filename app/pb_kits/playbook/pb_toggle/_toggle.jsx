@@ -3,13 +3,13 @@
 import React from 'react'
 
 import type {
-  InputCallback
-} from "../types"
+  InputCallback,
+} from '../types'
 
 import {
   buildAriaProps,
-  buildDataProps,
   buildCss,
+  buildDataProps,
   noop,
 } from '../utilities/props'
 
@@ -32,10 +32,10 @@ const Toggle = ({
   onUncheck = noop,
   size = 'md',
   ...props
-}: Props) =>{
+}: Props) => {
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
-  const handleChange = event => {
+  const handleChange = (event) => {
     onChange(event)
     event.target.checked ?
       onCheck(event) :
@@ -50,13 +50,17 @@ const Toggle = ({
   })
 
   return (
-    <div {...ariaProps} {...dataProps} className={css}>
+    <div
+        {...ariaProps}
+        {...dataProps}
+        className={css}
+    >
       <label className="pb_toggle_wrapper">
         <input
             {...props}
-            type="checkbox"
             checked={checked}
             onChange={handleChange}
+            type="checkbox"
         />
 
         <div className="pb_toggle_control" />

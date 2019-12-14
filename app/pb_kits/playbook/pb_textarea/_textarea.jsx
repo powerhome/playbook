@@ -1,7 +1,7 @@
 import React from 'react'
 import classnames from 'classnames'
-import { Caption } from "../"
-import { InputCallback } from '../types.js'
+import { Caption } from '../'
+import { type InputCallback } from '../types.js'
 
 type TextareaProps = {
   className?: String,
@@ -16,45 +16,47 @@ type TextareaProps = {
   name?: String,
   rows?: Number,
   dark?: Boolean,
-  onChange?: InputCallback
+  onChange?: InputCallback,
 }
 
-const textareaCSS =({
-    dark=false,
+const textareaCSS = ({
+  dark = false,
 }: TextareaProps) => {
   const themeStyle = dark === true ? '_dark' : ''
   return 'pb_textarea_kit' + themeStyle
 }
 
-const Textarea = ( props: TextareaProps) => {
-
+const Textarea = (props: TextareaProps) => {
   const {
     className,
     children,
     label,
     placeholder,
     value,
-    dark=false,
-    rows=4,
+    dark = false,
+    rows = 4,
     name,
-    onChange = () => {}
+    onChange = () => {},
   } = props
 
   const textarea_input = `${textareaCSS(props)}`
-  
+
   return (
     <div className={classnames(textareaCSS(props), className)}>
-      <Caption text={label} dark={dark}/>
+      <Caption
+          dark={dark}
+          text={label}
+      />
       <If condition={children}>
         {children}
-      <Else/>
-        <textarea 
-          className={textarea_input} 
-          name={name} 
-          onChange={onChange} 
-          placeholder={placeholder} 
-          rows={rows} 
-          value={value} 
+        <Else />
+        <textarea
+            className={textarea_input}
+            name={name}
+            onChange={onChange}
+            placeholder={placeholder}
+            rows={rows}
+            value={value}
         />
       </If>
     </div>

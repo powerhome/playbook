@@ -18,18 +18,21 @@ const Badge = ({
   id,
   text,
   variant = 'neutral',
-  rounded = false
+  rounded = false,
 }: BadgeProps) => {
-  const roundedClass = rounded === true ? "rounded" : ""
-  const darkClass = dark === true ? "dark" : ""
+  const roundedClass = rounded === true ? 'rounded' : ''
+  const darkClass = dark === true ? 'dark' : ''
   const css = classnames([
     `pb_badge_kit_${variant}_${roundedClass}_${darkClass}`,
     className,
   ])
 
   return (
-    <div id={id} className={css}>
-        <span>{text}</span>
+    <div
+        className={css}
+        id={id}
+    >
+      <span>{text}</span>
     </div>
   )
 }

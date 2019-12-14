@@ -13,16 +13,17 @@ type SectionSeparatorProps = {
 const SectionSeparator = ({
   className,
   text,
-  variant = 'card'
+  variant = 'card',
 }: SectionSeparatorProps) => {
-
   const css = classnames([`pb_section_separator_kit_${variant}`, className])
 
-  return (<div className={css}>
-    <span>
-      <Caption text={text}/>
-    </span>
-  </div>)
+  return (
+    <div className={css}>
+      <span>
+        <Caption text={text} />
+      </span>
+    </div>
+  )
 }
 
 export default SectionSeparator

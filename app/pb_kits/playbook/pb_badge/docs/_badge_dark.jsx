@@ -1,82 +1,160 @@
-import React from "react"
-import Badge from "../_badge.jsx"
+import React from 'react'
+import Badge from '../_badge.jsx'
 
 function BadgeDark() {
   return (
     <div>
       <div>
-        <Badge text="+1" variant="primary" rounded dark />
+        <Badge
+            dark
+            rounded
+            text="+1"
+            variant="primary"
+        />
 
         &nbsp;
 
-        <Badge text="+4" variant="primary" dark />
+        <Badge
+            dark
+            text="+4"
+            variant="primary"
+        />
 
         &nbsp;
 
-        <Badge text="+1000" variant="primary" dark />
+        <Badge
+            dark
+            text="+1000"
+            variant="primary"
+        />
       </div>
 
       <div>
-        <Badge text="+1" variant="success" rounded dark />
+        <Badge
+            dark
+            rounded
+            text="+1"
+            variant="success"
+        />
 
         &nbsp;
 
-        <Badge text="+4" variant="success" dark />
+        <Badge
+            dark
+            text="+4"
+            variant="success"
+        />
 
         &nbsp;
 
-        <Badge text="+1000" variant="success" dark />
+        <Badge
+            dark
+            text="+1000"
+            variant="success"
+        />
       </div>
 
       <div>
-        <Badge text="+1" variant="warning" rounded dark />
+        <Badge
+            dark
+            rounded
+            text="+1"
+            variant="warning"
+        />
 
         &nbsp;
 
-        <Badge text="+4" variant="warning" dark />
+        <Badge
+            dark
+            text="+4"
+            variant="warning"
+        />
 
         &nbsp;
 
-        <Badge text="+1000" variant="warning" dark />
+        <Badge
+            dark
+            text="+1000"
+            variant="warning"
+        />
       </div>
 
       <div>
-        <Badge text="+1" variant="error" rounded dark />
+        <Badge
+            dark
+            rounded
+            text="+1"
+            variant="error"
+        />
 
         &nbsp;
 
-        <Badge text="+4" variant="error" dark />
+        <Badge
+            dark
+            text="+4"
+            variant="error"
+        />
 
         &nbsp;
 
-        <Badge text="+1000" variant="error" dark />
+        <Badge
+            dark
+            text="+1000"
+            variant="error"
+        />
       </div>
 
       <div>
-        <Badge text="+1" variant="info" rounded dark />
+        <Badge
+            dark
+            rounded
+            text="+1"
+            variant="info"
+        />
 
         &nbsp;
 
-        <Badge text="+4" variant="info" dark />
+        <Badge
+            dark
+            text="+4"
+            variant="info"
+        />
 
         &nbsp;
 
-        <Badge text="+1000" variant="info" dark />
+        <Badge
+            dark
+            text="+1000"
+            variant="info"
+        />
       </div>
 
       <div>
-        <Badge text="+1" variant="neutral" rounded dark />
+        <Badge
+            dark
+            rounded
+            text="+1"
+            variant="neutral"
+        />
 
         &nbsp;
 
-        <Badge text="+4" variant="neutral" dark />
+        <Badge
+            dark
+            text="+4"
+            variant="neutral"
+        />
 
         &nbsp;
 
-        <Badge text="+1000" variant="neutral" dark />
+        <Badge
+            dark
+            text="+1000"
+            variant="neutral"
+        />
       </div>
     </div>
   )
 }
 
-export default BadgeDark;
+export default BadgeDark

@@ -1,9 +1,9 @@
-import React from "react"
-import {SectionSeparator} from "../../"
+import React from 'react'
+import { SectionSeparator } from '../../'
 
 function SectionSeparatorText() {
   return (
-    <SectionSeparator text="Title Separator"/>
+    <SectionSeparator text="Title Separator" />
   )
 }
 

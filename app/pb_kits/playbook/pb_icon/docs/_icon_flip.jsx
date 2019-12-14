@@ -1,14 +1,29 @@
-import React from "react"
-import {Icon} from "../../"
+import React from 'react'
+import { Icon } from '../../'
 
 function IconFlip() {
   return (
     <div>
-      <Icon icon="question-circle" flip="horizontal" size="2x" fixedWidth />
-      <Icon icon="question-circle" flip="vertical" size="2x" fixedWidth />
-      <Icon icon="question-circle" flip="both" size="2x" fixedWidth />
+      <Icon
+          fixedWidth
+          flip="horizontal"
+          icon="question-circle"
+          size="2x"
+      />
+      <Icon
+          fixedWidth
+          flip="vertical"
+          icon="question-circle"
+          size="2x"
+      />
+      <Icon
+          fixedWidth
+          flip="both"
+          icon="question-circle"
+          size="2x"
+      />
     </div>
   )
 }
 
-export default IconFlip;
+export default IconFlip

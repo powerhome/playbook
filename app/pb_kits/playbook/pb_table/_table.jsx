@@ -1,7 +1,7 @@
 /* @flow */
 
-import React, { type Node } from 'react';
-import classnames from 'classnames';
+import React, { type Node } from 'react'
+import classnames from 'classnames'
 
 type TableProps = {
   children: Array<Node> | Node,
@@ -25,10 +25,10 @@ const Table = ({
   const css = classnames([
     'pb_table',
     `table-${size}`,
-    container ? `table-card` : null,
-    dark ? `table-dark` : null,
-    single_line ? `single-line` : null,
-    disable_hover ? `no-hover` : null,
+    container ? 'table-card' : null,
+    dark ? 'table-dark' : null,
+    single_line ? 'single-line' : null,
+    disable_hover ? 'no-hover' : null,
     className,
   ])
 
@@ -41,4 +41,4 @@ const Table = ({
   )
 }
 
-export default Table;
+export default Table

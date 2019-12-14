@@ -1,8 +1,8 @@
 /* @flow */
 
-import React from "react"
+import React from 'react'
 
-import { pbChart } from "../"
+import { pbChart } from '../'
 
 type LineGraphProps = {
   axisTitle?: String,
@@ -18,7 +18,7 @@ type LineGraphProps = {
   title: String,
 }
 
- const LineGraph = ({
+const LineGraph = ({
   axisTitle,
   className = 'pb_bar_graph',
   chartData,
@@ -27,15 +27,15 @@ type LineGraphProps = {
   subTitle,
   title,
   type = 'line',
- }: LineGraphProps) => {
+}: LineGraphProps) => {
   new pbChart(`.${className}`, {
-      axisTitle: axisTitle,
-      chartData: chartData,
-      id: id,
-      pointStart: pointStart,
-      subtitle: subTitle,
-      type,
-      title: title,
+    axisTitle: axisTitle,
+    chartData: chartData,
+    id: id,
+    pointStart: pointStart,
+    subtitle: subTitle,
+    type,
+    title: title,
   })
 
   return (

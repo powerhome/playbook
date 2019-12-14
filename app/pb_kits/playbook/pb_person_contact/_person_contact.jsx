@@ -4,12 +4,10 @@
 import React from 'react'
 import classnames from 'classnames'
 
-
-
 import {
-  Person,
   Body,
   Contact,
+  Person,
 } from '../'
 
 type PersonContactProps = {
@@ -20,32 +18,33 @@ type PersonContactProps = {
   contacts?: Array<{contactType: String, contactValue: String, contactDetail: String}>,
 }
 
-const contactsArray = ({contacts=[]}: PersonContactProps) => {
+const contactsArray = ({ contacts = [] }: PersonContactProps) => {
   return contacts.map((contactObject, index) => {
     return (
       <Contact
-        contactType={contactObject.contactType}
-        contactValue={contactObject.contactValue}
-        contactDetail={contactObject.contactDetail}
+          contactDetail={contactObject.contactDetail}
+          contactType={contactObject.contactType}
+          contactValue={contactObject.contactValue}
       />
-    );
+    )
   })
 }
 
-
 const PersonContact = ({
   className,
-  dark=false,
+  dark = false,
   firstName,
   lastName,
   contacts,
 }: PersonContactProps) => {
-
-  const contactKits = contactsArray({contacts})
+  const contactKits = contactsArray({ contacts })
 
   return (
     <div className={classnames('pb_person_contact_kit', className)}>
-      <Person firstName={firstName} lastName={lastName} />
+      <Person
+          firstName={firstName}
+          lastName={lastName}
+      />
       {contactKits}
     </div>
   )

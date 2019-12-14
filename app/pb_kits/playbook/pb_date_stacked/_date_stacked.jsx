@@ -5,8 +5,8 @@ import classnames from 'classnames'
 import DateTime from '../pb_kit/dateTime.js'
 
 import {
+  Caption,
   Title,
-  Caption
 } from '../'
 
 type DateStackedProps = {
@@ -21,10 +21,10 @@ type DateStackedProps = {
 }
 
 const kitClasses = ({
-  align='left',
-  size='sm',
-  dark=false,
-  reverse=false,
+  align = 'left',
+  size = 'sm',
+  dark = false,
+  reverse = false,
 
 }: DateStackedProps) => {
   const alignStyle = align !== '' ? `_${align}` : ''
@@ -41,12 +41,12 @@ const sizes = {
 
 const DateStacked = (props: DateStackedProps) => {
   const {
-    align='left',
+    align = 'left',
     className,
-    dark=false,
-    reverse=false,
+    dark = false,
+    reverse = false,
     date,
-    size='sm'
+    size = 'sm',
   } = props
 
   const dateTimestamp = new DateTime({ value: date })
@@ -55,7 +55,7 @@ const DateStacked = (props: DateStackedProps) => {
   const current_year = new Date().getFullYear().toString()
   const input_year = dateTimestamp.toYear().toString()
 
-  const print_year = dateTimestamp => {
+  const print_year = (dateTimestamp) => {
     if (current_year != input_year) {
       return (
         <Caption size='xs'>{input_year}</Caption>
@@ -65,17 +65,17 @@ const DateStacked = (props: DateStackedProps) => {
 
   return (
     <div className={css}>
-      <div class="pb_date_stacked_day_month">
+      <div className="pb_date_stacked_day_month">
         <Caption
-          text={`${dateTimestamp.toMonth().toUpperCase()}`}
+            text={`${dateTimestamp.toMonth().toUpperCase()}`}
         />
         <Title
-          dark={dark}
-          size={sizes[size]}
-          text={`${dateTimestamp.toDay()}`}
+            dark={dark}
+            size={sizes[size]}
+            text={`${dateTimestamp.toDay()}`}
         />
       </div>
-        {print_year(date)}
+      {print_year(date)}
     </div>
   )
 }

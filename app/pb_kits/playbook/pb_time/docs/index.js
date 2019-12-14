@@ -1,1 +1,1 @@
-export {default as TimeDefault} from './_time_default.jsx';
+export { default as TimeDefault } from './_time_default.jsx'

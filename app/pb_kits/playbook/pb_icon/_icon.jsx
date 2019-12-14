@@ -23,34 +23,34 @@ type IconProps = {
 const Icon = (props: IconProps) => {
   const {
     aria,
-    border=false,
+    border = false,
     className,
-    fixedWidth=true,
-    flip=false,
+    fixedWidth = true,
+    flip = false,
     icon,
     id,
-    inverse=false,
-    listItem=false,
+    inverse = false,
+    listItem = false,
     pull,
-    pulse=false,
+    pulse = false,
     rotation,
     size,
-    spin=false
+    spin = false,
   } = props
 
-  const hClass = "fa-flip-horizontal"
-  const vClass = "fa-flip-vertical"
+  const hClass = 'fa-flip-horizontal'
+  const vClass = 'fa-flip-vertical'
 
   const flipClass = (function(flip) {
-    switch(flip) {
-      case 'horizontal':
-        return hClass;
-      case 'vertical':
-        return vClass;
-      case 'both':
-        return `${vClass} ${hClass}`;
-      default:
-        return '';
+    switch (flip) {
+    case 'horizontal':
+      return hClass
+    case 'vertical':
+      return vClass
+    case 'both':
+      return `${vClass} ${hClass}`
+    default:
+      return ''
     }
   })(flip)
 
@@ -83,7 +83,10 @@ const Icon = (props: IconProps) => {
   )
 
   return (
-    <i id={id} className={iconCss}></i>
+    <i
+        className={iconCss}
+        id={id}
+    />
   )
 }
 

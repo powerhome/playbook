@@ -1,7 +1,7 @@
 // @flow
 
-import React from "react"
-import { Toggle } from "../../"
+import React from 'react'
+import { Toggle } from '../../'
 
 class Example extends React.Component {
   state = {
@@ -9,9 +9,9 @@ class Example extends React.Component {
     toggle2: true,
   }
 
-  handleChange = event => {
+  handleChange = (event) => {
     this.setState({
-      [event.target.name]: event.target.checked
+      [event.target.name]: event.target.checked,
     })
   }
 
@@ -22,8 +22,8 @@ class Example extends React.Component {
             checked={this.state.toggle1}
             name="toggle1"
             onChange={this.handleChange}
-            onCheck={event => console.log(`${event.target.name} checked!`)}
-            onUncheck={event => console.log(`${event.target.name} unchecked!`)}
+            onCheck={(event) => console.log(`${event.target.name} checked!`)}
+            onUncheck={(event) => console.log(`${event.target.name} unchecked!`)}
         />
 
         <br />
@@ -32,8 +32,8 @@ class Example extends React.Component {
             checked={this.state.toggle2}
             name="toggle2"
             onChange={this.handleChange}
-            onCheck={event => console.log(`${event.target.name} checked!`)}
-            onUncheck={event => console.log(`${event.target.name} unchecked!`)}
+            onCheck={(event) => console.log(`${event.target.name} checked!`)}
+            onUncheck={(event) => console.log(`${event.target.name} unchecked!`)}
         />
       </>
     )

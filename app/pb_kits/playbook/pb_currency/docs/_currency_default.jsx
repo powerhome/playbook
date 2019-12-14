@@ -1,5 +1,5 @@
-import React from "react"
-import {Currency} from "../../"
+import React from 'react'
+import { Currency } from '../../'
 
 function CurrencyDefault() {
   return (
@@ -22,4 +22,4 @@ function CurrencyDefault() {
   )
 }
 
-export default CurrencyDefault;
+export default CurrencyDefault

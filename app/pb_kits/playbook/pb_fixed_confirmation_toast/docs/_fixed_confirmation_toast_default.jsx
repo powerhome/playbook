@@ -1,26 +1,37 @@
-import React from "react"
-import {FixedConfirmationToast} from "../../"
+import React from 'react'
+import { FixedConfirmationToast } from '../../'
 
 function FixedConfirmationToastDefault() {
   return (
     <div>
       <div>
-        <FixedConfirmationToast text="Error Message" status="error" />
+        <FixedConfirmationToast
+            status="error"
+            text="Error Message"
+        />
       </div>
 
-      <br/><br/>
+      <br />
+      <br />
 
       <div>
-        <FixedConfirmationToast text="Items Successfully Moved" status="success" />
+        <FixedConfirmationToast
+            status="success"
+            text="Items Successfully Moved"
+        />
       </div>
 
-      <br/><br/>
+      <br />
+      <br />
 
       <div>
-        <FixedConfirmationToast text="Scan to Assign Selected Items" status="neutral" />
+        <FixedConfirmationToast
+            status="neutral"
+            text="Scan to Assign Selected Items"
+        />
       </div>
     </div>
   )
 }
 
-export default FixedConfirmationToastDefault;
+export default FixedConfirmationToastDefault

@@ -9,7 +9,6 @@ import {
   Icon,
 } from '../'
 
-
 type DateRangeInlineProps = {
   className?: String,
   data?: String,
@@ -19,12 +18,12 @@ type DateRangeInlineProps = {
 }
 
 const dateTimestamp = (dateValue) => {
-  let date = new DateTime({ value: dateValue })
+  const date = new DateTime({ value: dateValue })
   return `${date.toDay()} ${date.toMonth()} ${date.toYear()}`
 }
 
 const dateTimeIso = (dateValue) => {
-  let date = new DateTime({ value: dateValue })
+  const date = new DateTime({ value: dateValue })
   return date.toIso()
 }
 
@@ -33,17 +32,29 @@ const DateRangeInline = ({
   data,
   endDate,
   id,
-  startDate
+  startDate,
 }: DateRangeInlineProps) => (
   <div>
-    <Body tag="span" color="light">
-      <Icon icon="calendar-alt" fixedWidth="true" />
+    <Body
+        color="light"
+        tag="span"
+    >
+      <Icon
+          fixedWidth="true"
+          icon="calendar-alt"
+      />
     </Body>
     <Body tag="span">
       <time dateTime={dateTimeIso(startDate)} >{` ${dateTimestamp(startDate)} `}</time>
     </Body>
-    <Body tag="span" color="light">
-      <Icon icon="long-arrow-right" fixedWidth="true" />
+    <Body
+        color="light"
+        tag="span"
+    >
+      <Icon
+          fixedWidth="true"
+          icon="long-arrow-right"
+      />
     </Body>
     <Body tag="span">
       <time dateTime={dateTimeIso(endDate)} >{` ${dateTimestamp(endDate)} `}</time>

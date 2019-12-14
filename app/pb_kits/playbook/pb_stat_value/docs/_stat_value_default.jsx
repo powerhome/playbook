@@ -1,5 +1,5 @@
-import React from "react"
-import {StatValue} from "../../"
+import React from 'react'
+import { StatValue } from '../../'
 
 function StatValueDefault() {
   return (
@@ -7,4 +7,4 @@ function StatValueDefault() {
   )
 }
 
-export default StatValueDefault;
+export default StatValueDefault

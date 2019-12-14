@@ -1,32 +1,30 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
-
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 
 const propTypes = {
   url: PropTypes.string.isRequired,
-  alt: PropTypes.string
-};
+  alt: PropTypes.string,
+}
 
 const defaultProps = {
   alt: '',
-  url: ''
-};
-
+  url: '',
+}
 
 class Image extends Component {
   render() {
-    const { alt, url } = this.props;
+    const { alt, url } = this.props
     return (
       <img
           alt={alt}
-          className={"pb_image lazyload blur_up"}
+          className="pb_image lazyload blur_up"
           data-src={url}
       />
-    );
+    )
   }
 }
 
-Image.propTypes = propTypes;
-Image.defaultProps = defaultProps;
+Image.propTypes = propTypes
+Image.defaultProps = defaultProps
 
-export default Image;
+export default Image

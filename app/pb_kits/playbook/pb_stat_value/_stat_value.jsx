@@ -2,7 +2,7 @@
 
 import React from 'react'
 import classnames from 'classnames'
-import {Title} from '../'
+import { Title } from '../'
 
 type StatValueProps = {
   className?: String,
@@ -16,13 +16,16 @@ const StatValue = (props: StatValueProps) => {
     className,
     id,
     unit,
-    value=0
+    value = 0,
   } = props
 
   const displayValue = function(value) {
     if (value) {
       return (
-        <Title size={1} text={value} />
+        <Title
+            size={1}
+            text={value}
+        />
       )
     }
   }
@@ -30,13 +33,19 @@ const StatValue = (props: StatValueProps) => {
   const displayUnit = function(unit) {
     if (unit) {
       return (
-        <Title size={3} text={unit} />
+        <Title
+            size={3}
+            text={unit}
+        />
       )
     }
   }
 
   return (
-    <div id={id} className={classnames('pb_stat_value_kit', className)}>
+    <div
+        className={classnames('pb_stat_value_kit', className)}
+        id={id}
+    >
       <div className="pb_stat_value_wrapper">
         {displayValue(value)}
         &nbsp;

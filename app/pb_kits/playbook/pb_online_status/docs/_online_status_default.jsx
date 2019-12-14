@@ -1,9 +1,9 @@
-import React from "react"
-import {OnlineStatus} from "../../"
+import React from 'react'
+import { OnlineStatus } from '../../'
 
 function OnlineStatusDefault() {
   return (
-    <h1>{`Coming Soon...`}</h1>
+    <h1>{'Coming Soon...'}</h1>
   )
 }
 
