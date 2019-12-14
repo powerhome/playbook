@@ -62,13 +62,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Introduce Pull Request Template ([#508][] @rafbgarcia)
 - Extend Form Kit to use Textarea Kit for textarea form fields ([#506][] @roxannecojocariu)
 - Nav React Kit ([#513][] @christinaatai)
+- Multiple Users Stacked Kit ([#517][] @evalouderback)
+
 
 [#498]: https://github.com/powerhome/playbook/pull/498
 [#439]: https://github.com/powerhome/playbook/pull/439
 [#494]: https://github.com/powerhome/playbook/pull/494
 [#508]: https://github.com/powerhome/playbook/pull/508
 [#506]: https://github.com/powerhome/playbook/pull/506
-[#513]: https://github.com/powerhome/playbook/pull/513
+[#504]: https://github.com/powerhome/playbook/pull/513
+[#517]: https://github.com/powerhome/playbook/pull/517
+
+
 
 ### Changed
 
