@@ -9,11 +9,11 @@ const UserWithTerritory = () => {
         <User
             align="center"
             avatarUrl="https://randomuser.me/api/portraits/women/44.jpg"
-            name='Anna Black'
+            name="Anna Black"
             orientation="vertical"
-            size='lg'
-            territory='PHL'
-            title='Remodeling Consultant'
+            size="lg"
+            territory="PHL"
+            title="Remodeling Consultant"
         />
       </div>
 
@@ -21,32 +21,32 @@ const UserWithTerritory = () => {
         <User
             align="left"
             avatarUrl="https://randomuser.me/api/portraits/women/44.jpg"
-            name='Anna Black'
+            name="Anna Black"
             orientation="horizontal"
-            territory='PHL'
-            title='Remodeling Consultant'
+            territory="PHL"
+            title="Remodeling Consultant"
         />
       </div>
 
       <div>
         <User
-            align='center'
-            name='Anna Black'
-            orientation='horizontal'
-            size='sm'
-            territory='PHL'
-            title='Remodeling Consultant'
+            align="center"
+            name="Anna Black"
+            orientation="horizontal"
+            size="sm"
+            territory="PHL"
+            title="Remodeling Consultant"
         />
 
         <br />
 
         <User
-            align='left'
-            name='Anna Black'
-            orientation='horizontal'
-            size='lg'
-            territory='PHL'
-            title='Remodeling Consultant'
+            align="left"
+            name="Anna Black"
+            orientation="horizontal"
+            size="lg"
+            territory="PHL"
+            title="Remodeling Consultant"
         />
       </div>
 

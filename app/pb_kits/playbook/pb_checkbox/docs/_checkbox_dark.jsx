@@ -6,9 +6,9 @@ const CheckboxDark = () => {
     <div>
       <Checkbox
           dark
-          name='default name'
-          text='Checkbox label'
-          value='default value'
+          name="default name"
+          text="Checkbox label"
+          value="default value"
       />
     </div>
   )

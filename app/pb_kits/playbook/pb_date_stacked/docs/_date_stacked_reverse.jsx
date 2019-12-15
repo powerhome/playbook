@@ -6,10 +6,10 @@ const DateStackedDefault = () => {
     <div>
 
       <DateStacked
-          align='left'
+          align="left"
           date={new Date()}
           reverse
-          size='sm'
+          size="sm"
       />
 
       <br />
@@ -17,7 +17,7 @@ const DateStackedDefault = () => {
       <DateStacked
           date={new Date()}
           reverse
-          size='md'
+          size="md"
       />
 
     </div>

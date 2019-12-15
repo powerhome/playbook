@@ -5,9 +5,9 @@ const SelectBlank = () => {
   return (
     <div>
       <Select
-          blankSelection='Select One...'
-          label='Where do you live'
-          name='location'
+          blankSelection="Select One..."
+          label="Where do you live"
+          name="location"
           options={[
           {
             value: 'USA',

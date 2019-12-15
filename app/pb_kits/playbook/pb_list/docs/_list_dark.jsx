@@ -10,7 +10,7 @@ const ListDark = () => {
           dark
           layout="right"
           ordered
-          size='large'
+          size="large"
           xpadding
       >
         <ListItem>{'Item 1'}</ListItem>

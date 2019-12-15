@@ -1,21 +1,10 @@
 /* @flow */
-/*eslint-disable react/no-multi-comp, flowtype/space-before-type-colon */
 
 import React from 'react'
 import classnames from 'classnames'
-import { titleize } from '../utilities/text.js'
 
-import {
-  Body,
-  Title,
-} from '../'
-
-const dot = (houseStyle) => {
-  if (houseStyle !== undefined) {
-    return '\u00b7'
-  }
-}
-const titleizeAddessCont = (addressCont) => addressCont ? titleize(addressCont) : null
+import { joinPresent, titleize } from '../utilities/text'
+import { Body, Hashtag, Title } from '../'
 
 type HomeAddressStreetProps = {
   address: String,
@@ -52,35 +41,31 @@ const HomeAddressStreet = ({
   <div className={classes(className, dark)}>
     <Title
         className="pb_home_address_street_address"
+        dark={dark}
         size={4}
     >
-      {titleize(address)}
-      {' '}
-      {dot(houseStyle)}
-      {' '}
-      {houseStyle}
+      {joinPresent([titleize(address), houseStyle], ' · ')}
     </Title>
 
     <Title
         className="pb_home_address_street_address"
+        dark={dark}
         size={4}
     >
-      {titleizeAddessCont(addressCont)}
+      {titleize(addressCont)}
     </Title>
     <Body color="light">
-      {titleize(city)}
-      {', '}
-      {state}
-      {' '}
-      {zipcode}
+      {`${titleize(city)}, ${state} ${zipcode}`}
     </Body>
-    <Body
-        className="home-hashtag"
-        tag="span"
-    >
-      {'H#'}
-      {homeId}
-    </Body>
+    <If condition={homeId}>
+      <Hashtag
+          text={homeId}
+          url="#"
+          type="home"
+          dark={dark}
+          classname="home-hashtag"
+      />
+    </If>
     <Body
         color="light"
         tag="span"

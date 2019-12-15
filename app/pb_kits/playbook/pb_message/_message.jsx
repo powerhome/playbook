@@ -30,7 +30,7 @@ const Message = ({
         <Avatar
             imageUrl={avatarUrl}
             name={avatarName}
-            size='sm'
+            size="sm"
             status={avatarStatus}
         />
       </If>
@@ -40,7 +40,7 @@ const Message = ({
         </If>
         <Body>{message}</Body>
         <If condition={timestamp}>
-          <Caption size='xs'>{timestamp}</Caption>
+          <Caption size="xs">{timestamp}</Caption>
         </If>
       </div>
     </div>

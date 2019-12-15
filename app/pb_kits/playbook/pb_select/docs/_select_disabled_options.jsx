@@ -5,8 +5,8 @@ const SelectDisabledOptions = () => {
   return (
     <div>
       <Select
-          label='Favorite Coffee'
-          name='coffee'
+          label="Favorite Coffee"
+          name="coffee"
           options={[
           {
             value: '1',

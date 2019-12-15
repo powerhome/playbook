@@ -13,7 +13,7 @@ const DistributionBarDefault = () => {
       <br />
       <div>
         <DistributionBar
-            size='sm'
+            size="sm"
             widths={[1, 2, 3, 4, 5, 3, 3, 7]}
         />
       </div>

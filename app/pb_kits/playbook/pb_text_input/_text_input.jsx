@@ -36,9 +36,9 @@ const TextInput = ({
           dark={dark}
           text={label}
       />
-      <div className='text_input_wrapper'>
+      <div className="text_input_wrapper">
         <input
-            className='text_input'
+            className="text_input"
             name={name}
             onChange={onChange}
             placeholder={placeholder}

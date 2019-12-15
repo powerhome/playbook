@@ -6,12 +6,12 @@ const DateStackedSizes = () => {
     <div>
       <DateStacked
           date={new Date()}
-          size='sm'
+          size="sm"
       />
       <br />
       <DateStacked
           date={new Date()}
-          size='md'
+          size="md"
       />
     </div>
   )

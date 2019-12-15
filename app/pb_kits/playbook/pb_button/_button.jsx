@@ -83,11 +83,11 @@ const Button = (props: ButtonPropTypes) => {
   const buttonAria = buttonAriaProps(props)
   const css = classnames(buttonClassName(props), className)
   const loadingIcon = (
-    <i className='pb_icon_kit far fa-spinner fa-fw fa-pulse loading-icon' />
+    <i className="pb_icon_kit far fa-spinner fa-fw fa-pulse loading-icon" />
   )
 
   const content = (
-    <span className='pb_button_content'>
+    <span className="pb_button_content">
       <If condition={icon !== null}>
         <i className={`pb_icon_kit far fa-${icon} fa-fw`} />
       </If>

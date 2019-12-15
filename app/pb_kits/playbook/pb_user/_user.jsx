@@ -45,7 +45,7 @@ const User = ({
           size={size == 'lg' ? 3 : 4}
           text={name}
       />
-      <Body color='light'>
+      <Body color="light">
         {territory == '' ? title : `${territory} • ${title}`}
       </Body>
     </div>

@@ -9,12 +9,12 @@ const DateYearStackedDark = () => {
           date={new Date()}
       />
       <DateYearStacked
-          align='center'
+          align="center"
           dark
           date={new Date()}
       />
       <DateYearStacked
-          align='right'
+          align="right"
           dark
           date={new Date()}
       />

@@ -1,5 +1,4 @@
 /* @flow */
-/*eslint-disable react/no-multi-comp, flowtype/space-before-type-colon */
 
 import React from 'react'
 
@@ -80,7 +79,7 @@ const Select = (props: SelectProps) => {
     >
       <If condition={label}>
         <label
-            className='pb_select_kit_label'
+            className="pb_select_kit_label"
             htmlFor={name}
         >
           <Caption
@@ -90,7 +89,7 @@ const Select = (props: SelectProps) => {
         </label>
       </If>
       <label
-          className='pb_select_kit_wrapper'
+          className="pb_select_kit_wrapper"
           htmlFor={name}
       >
         <If condition={children}>
@@ -111,7 +110,7 @@ const Select = (props: SelectProps) => {
           </select>
         </If>
         <Icon
-            className='pb_select_kit_caret'
+            className="pb_select_kit_caret"
             fixedWidth
             icon="angle-down"
         />

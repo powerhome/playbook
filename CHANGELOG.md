@@ -10,30 +10,34 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - Extend Form Kit to use Select Kit for select form fields ([#511][] @web-kat)
-- JS kit `MultipleUsers`: added prop `maxDisplayedUsers` defaults to `4` ([#PRNUMBER][] @rafbgarcia)
-- JS kit `List`: added default and dark docs ([#PRNUMBER][] @rafbgarcia)
-- JS kit `Layout`: added default docs ([#PRNUMBER][] @rafbgarcia)
-- JS kit `DateStacked`: added `left` as `align` option ([#PRNUMBER][] @rafbgarcia)
+- JS kit `MultipleUsers`: added prop `maxDisplayedUsers` defaults to `4` ([#518][] @rafbgarcia)
+- JS kit `List`: added default and dark docs ([#518][] @rafbgarcia)
+- JS kit `Layout`: added default docs ([#518][] @rafbgarcia)
+- JS kit `DateStacked`: added `left` as `align` option ([#518][] @rafbgarcia)
 
 [#511]: https://github.com/powerhome/playbook/pull/511
-[#PRNUMBER]: https://github.com/powerhome/playbook/pull/PRNUMBER
+[#518]: https://github.com/powerhome/playbook/pull/518
 
 ### Fixed
 
-- JS kit `MultipleUsers` docs: displays avatar image by renaming `image_url` to `imageUrl` ([#PRNUMBER][] @rafbgarcia)
-- JS kit `User`: displays avatar image by renaming `image_url` to `imageUrl` ([#PRNUMBER][] @rafbgarcia)
-- JS kit `Avatar`: fixed OR condition in `if (avatar == true | avatarUrl != null)` ([#PRNUMBER][] @rafbgarcia)
-- JS kit `List`: fixed class name: `list_borderless` to `_borderless` ([#PRNUMBER][] @rafbgarcia)
-- JS kit `List`: fixed class name: `pb_list` to `pb_list_kit` ([#PRNUMBER][] @rafbgarcia)
-- JS kit `Layout`: fixed error `position_class is not defined` ([#PRNUMBER][] @rafbgarcia)
+- JS kit `MultipleUsers` docs: displays avatar image by renaming `image_url` to `imageUrl` ([#518][] @rafbgarcia)
+- JS kit `User`: displays avatar image by renaming `image_url` to `imageUrl` ([#518][] @rafbgarcia)
+- JS kit `Avatar`: fixed OR condition in `if (avatar == true | avatarUrl != null)` ([#518][] @rafbgarcia)
+- JS kit `List`: fixed class name: `list_borderless` to `_borderless` ([#518][] @rafbgarcia)
+- JS kit `List`: fixed class name: `pb_list` to `pb_list_kit` ([#518][] @rafbgarcia)
+- JS kit `Layout`: fixed error `position_class is not defined` ([#518][] @rafbgarcia)
+- JS kit `HomeAddressStreet`: fixed Hashtag style by using `Hashtag` kit ([#518][] @rafbgarcia)
+- JS kit `HomeAddressStreet`: fixed address and city not appearing beucase `titleize` function inside `utilities/text.js` wasn't returning anything ([#518][] @rafbgarcia)
+- JS kit `HomeAddressStreet`: passed `dark` prop to Title's ([#518][] @rafbgarcia)
+- JS kit `Hashtag`: use `span` instead of `div` to match rails' style ([#518][] @rafbgarcia)
 
-[#PRNUMBER]: https://github.com/powerhome/playbook/pull/PRNUMBER
+[#518]: https://github.com/powerhome/playbook/pull/518
 
 ### Breaking Changes
 
-- JS kit `Table`: renamed props `disable_hover` to `disableHover`, `single_line` to `singleLine` ([#PRNUMBER][] @rafbgarcia)
+- JS kit `Table`: renamed props `disable_hover` to `disableHover`, `single_line` to `singleLine` ([#518][] @rafbgarcia)
 
-[#PRNUMBER]: https://github.com/powerhome/playbook/pull/PRNUMBER
+[#518]: https://github.com/powerhome/playbook/pull/518
 
 ## [3.1.0] 2019-12-12
 

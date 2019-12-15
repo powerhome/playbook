@@ -1,5 +1,4 @@
 /* @flow */
-/*eslint-disable react/no-multi-comp, flowtype/space-before-type-colon */
 
 import React from 'react'
 import DateTime from '../pb_kit/dateTime.js'
@@ -37,24 +36,24 @@ const DateRangeInline = ({
         tag="span"
     >
       <Icon
-          fixedWidth="true"
+          fixedWidth
           icon="calendar-alt"
       />
     </Body>
     <Body tag="span">
-      <time dateTime={dateTimeIso(startDate)} >{` ${dateTimestamp(startDate)} `}</time>
+      <time dateTime={dateTimeIso(startDate)}>{` ${dateTimestamp(startDate)} `}</time>
     </Body>
     <Body
         color="light"
         tag="span"
     >
       <Icon
-          fixedWidth="true"
+          fixedWidth
           icon="long-arrow-right"
       />
     </Body>
     <Body tag="span">
-      <time dateTime={dateTimeIso(endDate)} >{` ${dateTimestamp(endDate)} `}</time>
+      <time dateTime={dateTimeIso(endDate)}>{` ${dateTimestamp(endDate)} `}</time>
     </Body>
   </div>
 )

@@ -1,6 +1,6 @@
 /* @flow */
 
-import React, { useEffect } from 'react'
+import React from 'react'
 
 import { pbChart } from '../'
 
@@ -19,17 +19,25 @@ type LineGraphProps = {
   type?: String,
 }
 
-const LineGraph = ({
-  axisTitle,
-  className = 'pb_bar_graph',
-  chartData,
-  id,
-  pointStart,
-  subTitle,
-  title,
-  type = 'line',
-}: LineGraphProps) => {
-  useEffect(() => {
+export default class LineGraph extends React.Component<LineGraphProps> {
+  static defaultProps = {
+    className: 'pb_bar_graph',
+    gradient: false,
+    type: 'line',
+  }
+
+  componentDidMount() {
+    const {
+      axisTitle,
+      className,
+      chartData,
+      id,
+      pointStart,
+      subTitle,
+      title,
+      type,
+    } = this.props
+
     new pbChart(`.${className}`, {
       axisTitle: axisTitle,
       chartData: chartData,
@@ -39,14 +47,18 @@ const LineGraph = ({
       type,
       title: title,
     })
-  })
+  }
 
-  return (
-    <div
-        className={className}
-        id={id}
-    />
-  )
+  props: LineGraphProps
+
+  render() {
+    const { className, id } = this.props
+
+    return (
+      <div
+          className={className}
+          id={id}
+      />
+    )
+  }
 }
-
-export default LineGraph

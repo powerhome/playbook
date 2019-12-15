@@ -9,10 +9,10 @@ const UserDefault = () => {
         <User
             align="center"
             avatarUrl="https://randomuser.me/api/portraits/women/44.jpg"
-            name='Anna Black'
+            name="Anna Black"
             orientation="vertical"
-            size='lg'
-            title='Remodeling Consultant'
+            size="lg"
+            title="Remodeling Consultant"
         />
       </div>
 
@@ -20,9 +20,9 @@ const UserDefault = () => {
         <User
             align="left"
             avatarUrl="https://randomuser.me/api/portraits/women/44.jpg"
-            name='Anna Black'
+            name="Anna Black"
             orientation="horizontal"
-            title='Remodeling Consultant'
+            title="Remodeling Consultant"
         />
       </div>
 
@@ -30,7 +30,7 @@ const UserDefault = () => {
         <User
             align="left"
             avatarUrl="https://randomuser.me/api/portraits/women/44.jpg"
-            name='Anna Black'
+            name="Anna Black"
             orientation="horizontal"
         />
 
@@ -39,7 +39,7 @@ const UserDefault = () => {
         <User
             align="left"
             avatar
-            name='Anna Black'
+            name="Anna Black"
             orientation="horizontal"
         />
       </div>

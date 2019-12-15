@@ -17,9 +17,9 @@ const Nav = ({
 }: NavProps) => (
   <div className={`pb_nav_list_${orientation}`}>
     <div className="pb_nav_list_title">
-      <a className='pb_nav_list_item_link_text'>
+      <a className="pb_nav_list_item_link_text">
         <Caption
-            size='md'
+            size="md"
             text={`${title}`}
         />
       </a>

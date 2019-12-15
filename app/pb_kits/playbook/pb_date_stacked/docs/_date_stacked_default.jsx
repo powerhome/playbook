@@ -6,16 +6,16 @@ const DateStackedDefault = () => {
     <div>
 
       <DateStacked
-          align='left'
+          align="left"
           date={new Date()}
-          size='sm'
+          size="sm"
       />
 
       <br />
 
       <DateStacked
           date={new Date()}
-          size='md'
+          size="md"
       />
 
     </div>

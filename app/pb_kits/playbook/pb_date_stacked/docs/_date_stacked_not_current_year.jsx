@@ -7,14 +7,14 @@ const DateStackedNotCurrentYear = () => {
 
       <DateStacked
           date={new Date('20 Mar 2018')}
-          size='sm'
+          size="sm"
       />
 
       <br />
 
       <DateStacked
           date={new Date('20 Mar 2018')}
-          size='md'
+          size="md"
       />
 
     </div>

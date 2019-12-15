@@ -7,7 +7,7 @@ const DateStackedDark = () => {
       <DateStacked
           dark
           date={new Date()}
-          size='sm'
+          size="sm"
       />
 
       <br />
@@ -15,7 +15,7 @@ const DateStackedDark = () => {
       <DateStacked
           dark
           date={new Date()}
-          size='md'
+          size="md"
       />
     </div>
   )

@@ -2,7 +2,10 @@
 /* eslint-disable react/no-multi-comp, flowtype/space-before-type-colon */
 
 import React from 'react'
+import classnames from 'classnames'
+
 import { Badge } from '../'
+import { buildCss } from '../utilities/props'
 
 type HashtagProps = {
   className?: String,
@@ -14,31 +17,28 @@ type HashtagProps = {
   url?: String,
 }
 
-const HashType = {
+const typeMap = {
   'home': 'H#',
   'project': 'P#',
   'default': '#',
 }
 
 const Hashtag = ({
+  className,
   dark = false,
   text,
   type,
   url,
-} : HashtagProps) => {
-  const darkClass = dark === true ? 'dark' : ''
-
-  return (
-    <div className={`pb_hashtag_kit_${darkClass}`}>
-      <a href={url}>
-        <Badge
-            dark={dark}
-            text={HashType[type] + text}
-            variant="primary"
-        />
-      </a>
-    </div>
-  )
-}
+}: HashtagProps) => (
+  <span className={classnames(className, buildCss('pb_hashtag_kit', { 'dark': dark }))}>
+    <a href={url}>
+      <Badge
+          dark={dark}
+          text={typeMap[type] + text}
+          variant="primary"
+      />
+    </a>
+  </span>
+)
 
 export default Hashtag

@@ -5,19 +5,19 @@ const DateDefault = () => {
   return (
     <div>
       <Date
-          size='lg'
-          value='1995-12-25'
+          size="lg"
+          value="1995-12-25"
       />
 
       <br />
 
-      <Date value='17 Mar 69' />
+      <Date value="17 Mar 69" />
 
       <br />
 
       <Date
-          size='xs'
-          value='2020-04-20T04:20:00.000Z'
+          size="xs"
+          value="2020-04-20T04:20:00.000Z"
       />
     </div>
   )

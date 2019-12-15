@@ -24,13 +24,13 @@ type DateSubcomponent = {
 }
 
 const ExtraSmallDate = ({ value }: DateSubcomponent) => (
-  <h3 className='pb_title_kit_4'>{defaultDateString(value)}</h3>
+  <h3 className="pb_title_kit_4">{defaultDateString(value)}</h3>
 )
 
 const SmallDate = ({ value }: DateSubcomponent) => (
-  <h3 className='pb_title_kit_4'>
+  <h3 className="pb_title_kit_4">
     <Icon
-        fixedWidth="true"
+        fixedWidth
         icon="calendar"
     />
     {defaultDateString(value)}
@@ -38,7 +38,7 @@ const SmallDate = ({ value }: DateSubcomponent) => (
 )
 
 const LargeDate = ({ value }: DateSubcomponent) => (
-  <h3 className='pb_title_kit_3'>{largeDateString(value)}</h3>
+  <h3 className="pb_title_kit_3">{largeDateString(value)}</h3>
 )
 
 type PbDateProps = {

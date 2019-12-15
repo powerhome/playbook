@@ -44,16 +44,16 @@ const DateStacked = ({
     <div className={classes}>
       <div className="pb_date_stacked_day_month">
         <Caption
-            text={`${dateTimestamp.toMonth().toUpperCase()}`}
+            text={dateTimestamp.toMonth().toUpperCase()}
         />
         <Title
             dark={dark}
             size={sizes[size]}
-            text={`${dateTimestamp.toDay()}`}
+            text={dateTimestamp.toDay()}
         />
       </div>
       <If condition={currentYear != inputYear}>
-        <Caption size='xs'>{inputYear}</Caption>
+        <Caption size="xs">{inputYear}</Caption>
       </If>
     </div>
   )

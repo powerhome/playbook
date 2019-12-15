@@ -5,9 +5,9 @@ const CheckboxDefault = () => {
   return (
     <div>
       <Checkbox
-          name='default name'
-          text='Checkbox label'
-          value='default value'
+          name="default name"
+          text="Checkbox label"
+          value="default value"
       />
     </div>
   )

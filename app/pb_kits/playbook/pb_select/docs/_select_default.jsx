@@ -5,8 +5,8 @@ const SelectDefault = () => {
   return (
     <div>
       <Select
-          label='Favorite Food'
-          name='food'
+          label="Favorite Food"
+          name="food"
           options={[
           {
             value: '1',

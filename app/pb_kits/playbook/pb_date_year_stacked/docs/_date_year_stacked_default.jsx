@@ -6,11 +6,11 @@ const DateYearStackedDefault = () => {
     <div>
       <DateYearStacked date={new Date()} />
       <DateYearStacked
-          align='center'
+          align="center"
           date={new Date()}
       />
       <DateYearStacked
-          align='right'
+          align="right"
           date={new Date()}
       />
     </div>

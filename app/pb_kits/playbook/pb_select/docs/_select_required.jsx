@@ -5,9 +5,9 @@ const SelectRequired = () => {
   return (
     <div>
       <Select
-          blankSelection='Select One...'
-          label='Which shoe do you tie first?'
-          name='shoe'
+          blankSelection="Select One..."
+          label="Which shoe do you tie first?"
+          name="shoe"
           options={[
           {
             value: 'Left',

@@ -5,17 +5,17 @@ const UserTextOnly = () => {
   return (
     <div className="pb--doc-demo-row">
       <User
-          align='center'
-          name='Anna Black'
-          orientation='horizontal'
-          size='lg'
-          title='Remodeling Consultant'
+          align="center"
+          name="Anna Black"
+          orientation="horizontal"
+          size="lg"
+          title="Remodeling Consultant"
       />
       <User
-          align='left'
-          name='Anna Black'
-          orientation='horizontal'
-          title='Remodeling Consultant'
+          align="left"
+          name="Anna Black"
+          orientation="horizontal"
+          title="Remodeling Consultant"
       />
     </div>
   )

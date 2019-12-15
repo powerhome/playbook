@@ -6,20 +6,20 @@ const DateStackedAlign = () => {
     <div>
       <DateStacked
           date={new Date()}
-          size='sm'
+          size="sm"
       />
 
       <br />
 
       <DateStacked
-          align='center'
+          align="center"
           date={new Date()}
       />
 
       <br />
 
       <DateStacked
-          align='right'
+          align="right"
           date={new Date()}
       />
 
@@ -27,23 +27,23 @@ const DateStackedAlign = () => {
 
       <DateStacked
           date={new Date()}
-          size='md'
+          size="md"
       />
 
       <br />
 
       <DateStacked
-          align='center'
+          align="center"
           date={new Date()}
-          size='md'
+          size="md"
       />
 
       <br />
 
       <DateStacked
-          align='right'
+          align="right"
           date={new Date()}
-          size='md'
+          size="md"
       />
 
     </div>

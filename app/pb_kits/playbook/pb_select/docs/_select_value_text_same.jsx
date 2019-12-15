@@ -5,8 +5,8 @@ const SelectValueTextSame = () => {
   return (
     <div>
       <Select
-          label='Favorite Sport'
-          name='sports'
+          label="Favorite Sport"
+          name="sports"
           options={[
           {
             value: 'Football',
