@@ -1,8 +1,28 @@
-import React from 'react'
+import React from "react"
+import { IconValue } from "../../"
 
 const IconValueDefault = () => {
   return (
-    <h1>{'Coming Soon...'}</h1>
+    <div>
+      <IconValue
+          icon="clipboard"
+          text="33-123456"
+      />
+
+      <br />
+
+      <IconValue
+          icon="heart"
+          text="93"
+      />
+
+      <br />
+
+      <IconValue
+          icon="clock"
+          text="15min"
+      />
+    </div>
   )
 }
 
