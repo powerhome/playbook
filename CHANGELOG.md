@@ -5,6 +5,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## Unreleased
+
+### Added
+
+- Extend Form Kit to use Select Kit for select form fields ([#511][] @web-kat)
+
+[#511]: https://github.com/powerhome/playbook/pull/511
+
+
+
 ## [3.1.0] 2019-12-12
 
 ### Added
@@ -21,8 +31,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [#494]: https://github.com/powerhome/playbook/pull/494
 [#508]: https://github.com/powerhome/playbook/pull/508
 [#506]: https://github.com/powerhome/playbook/pull/506
-[#504]: https://github.com/powerhome/playbook/pull/513
-
+[#513]: https://github.com/powerhome/playbook/pull/513
 
 ### Changed
 
@@ -47,6 +56,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [#496]: https://github.com/powerhome/playbook/pull/496
 [#495]: https://github.com/powerhome/playbook/pull/495
 [#501]: https://github.com/powerhome/playbook/pull/501
+
 
 ## [3.0.1] - 2019-12-06
 

@@ -5,19 +5,36 @@
   example_form_model = Class.new do
     include ::ActiveModel::Model
     attr_accessor :example_text_field,
-                  :example_phone_field,
-                  :example_email_field,
-                  :example_number_field,
-                  :example_search_field,
-                  :example_password_field,
-                  :example_url_field,
-                  :example_text_area
+    :example_phone_field,
+    :example_email_field,
+    :example_number_field,
+    :example_search_field,
+    :example_password_field,
+    :example_url_field,
+    :example_text_area,
+    :example_select_field,
+    :example_collection_select_field
 
 
-   def self.model_name
-     ActiveModel::Name.new(self, nil, "ExampleFormModel")
-   end
+    def self.model_name
+      ActiveModel::Name.new(self, nil, "ExampleFormModel")
+    end
   end
+%>
+
+<%
+  example_collection = [
+    OpenStruct.new(name: "Alabama", value: 1),
+    OpenStruct.new(name: "Alaska", value: 2),
+    OpenStruct.new(name: "Arizona", value: 3),
+    OpenStruct.new(name: "Arkansas", value: 4),
+    OpenStruct.new(name: "California", value: 5),
+    OpenStruct.new(name: "Colorado", value: 6),
+    OpenStruct.new(name: "Connecticut", value: 7),
+    OpenStruct.new(name: "Delaware", value: 8),
+    OpenStruct.new(name: "Florida", value: 9),
+    OpenStruct.new(name: "Georgia", value: 10),
+  ]
 %>
 
 
@@ -30,6 +47,8 @@
   <%= form.input :example_password_field, as: :password %>
   <%= form.input :example_url_field, as: :url %>
   <%= form.input :example_text_area, as: :text %>
+  <%= form.select :example_select_field, [["Yes", 1], ["No", 2]], props: { label: true } %>
+  <%= form.collection_select :example_collection_select_field, example_collection, :value, :name, props: { label: true } %>
 
   <%= form.actions do |action| %>
     <%= action.submit %>
