@@ -70,7 +70,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [#494]: https://github.com/powerhome/playbook/pull/494
 [#508]: https://github.com/powerhome/playbook/pull/508
 [#506]: https://github.com/powerhome/playbook/pull/506
-[#504]: https://github.com/powerhome/playbook/pull/513
+[#513]: https://github.com/powerhome/playbook/pull/513
 [#517]: https://github.com/powerhome/playbook/pull/517
 
 
