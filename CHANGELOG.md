@@ -10,8 +10,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - Extend Form Kit to use Select Kit for select form fields ([#511][] @web-kat)
+- Text Input padding override was removed for input child ([#526][] @megantrimble)
 
 [#511]: https://github.com/powerhome/playbook/pull/511
+[#526]: https://github.com/powerhome/playbook/pull/526
 
 
 
