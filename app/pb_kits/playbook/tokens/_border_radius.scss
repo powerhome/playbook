@@ -19,15 +19,12 @@ $border_radius: (
   heaviest: $border_rad_heaviest
 );
 
-// Bootstrap
-$border_radius_base:      $border_rad_light;
-$border_radius_large:     $border_rad_heavy;
-$border_radius_small:     $border_rad_lighter;
-$border_radius:           $border_rad_light;
-$border_radius_lg:        $border_rad_heavy;
-$border_radius_sm:        $border_rad_lighter;
 
-$panel_border_radius:     $border_rad_light;
-
-// Change to borders
-$border_color: $border_light;
+:export {
+  @mixin export_border_radius($border_radius_list) {
+    @each $name, $size in $border_radius_list {
+      #{$name}: $size;
+    }
+  }
+  @include export_border_radius($border_radius);
+}
