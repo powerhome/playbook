@@ -14,6 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - JS kit `List`: added default and dark docs ([#518][] @rafbgarcia)
 - JS kit `Layout`: added default docs ([#518][] @rafbgarcia)
 - JS kit `DateStacked`: added `left` as `align` option ([#518][] @rafbgarcia)
+- JS kit `Table`: add props `disableHover` and `singleLine` to replace their respective snake case versions ([#518][] @rafbgarcia)
 
 [#511]: https://github.com/powerhome/playbook/pull/511
 [#518]: https://github.com/powerhome/playbook/pull/518
@@ -33,9 +34,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 [#518]: https://github.com/powerhome/playbook/pull/518
 
-### Breaking Changes
+### Deprecated
 
-- JS kit `Table`: renamed props `disable_hover` to `disableHover`, `single_line` to `singleLine` ([#518][] @rafbgarcia)
+- JS kit `Table`: deprecate props `disable_hover` and `single_line`, please use their camelcase versions ([#518][] @rafbgarcia)
 
 [#518]: https://github.com/powerhome/playbook/pull/518
 
