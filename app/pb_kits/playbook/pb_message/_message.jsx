@@ -40,7 +40,7 @@ const Message = (props: MessageProps) => {
     timestamp='',
     avatarStatus=null
   } = props
-  
+
   const print_avatar = (avatarName, avatarUrl, avatarStatus) => {
     if ( avatarUrl !== '' && avatarName !== '' ) {
       return (
@@ -66,7 +66,7 @@ const Message = (props: MessageProps) => {
   return (
     <div className={messageCSS(avatarName, avatarUrl)}>
       {print_avatar(avatarName, avatarUrl, avatarStatus)}
-      <div class="content_wrapper">
+      <div className="content_wrapper">
         {print_label(label)}
         <Body>{message}</Body>
         {print_timestamp(timestamp)}
