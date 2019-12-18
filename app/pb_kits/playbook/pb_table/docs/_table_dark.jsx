@@ -3,7 +3,8 @@ import {Table} from "../../"
 
 function TableDark() {
   return (
-    <Table dark container={false}
+    <Table
+        dark
         size="md"
     >
       <thead>

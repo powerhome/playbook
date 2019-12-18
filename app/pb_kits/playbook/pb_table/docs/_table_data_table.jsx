@@ -1,12 +1,9 @@
 import React from "react"
 import {Table} from "../../"
 
-function TableSingleLine() {
+function TableDataTable() {
   return (
-    <Table
-        single_line
-        size="sm"
-    >
+    <Table dataTable={true}>
       <thead>
         <tr>
           <th>{`Column 1`}</th>
@@ -18,23 +15,23 @@ function TableSingleLine() {
       </thead>
       <tbody>
         <tr>
-          <td>{`Value 1`}<br/>{`Value 1`}<br/>{`Value 1`}</td>
+          <td>{`Value 1`}</td>
           <td>{`Value 2`}</td>
-          <td>{`Value 3`}<br/>{`Value 3`}</td>
+          <td>{`Value 3`}</td>
           <td>{`Value 4`}</td>
           <td>{`Value 5`}</td>
         </tr>
         <tr>
-          <td>{`Value 1`}<br/>{`Value 1`}<br/>{`Value 1`}</td>
+          <td>{`Value 1`}</td>
           <td>{`Value 2`}</td>
-          <td>{`Value 3`}<br/>{`Value 3`}</td>
+          <td>{`Value 3`}</td>
           <td>{`Value 4`}</td>
           <td>{`Value 5`}</td>
         </tr>
         <tr>
-          <td>{`Value 1`}<br/>{`Value 1`}<br/>{`Value 1`}</td>
+          <td>{`Value 1`}</td>
           <td>{`Value 2`}</td>
-          <td>{`Value 3`}<br/>{`Value 3`}</td>
+          <td>{`Value 3`}</td>
           <td>{`Value 4`}</td>
           <td>{`Value 5`}</td>
         </tr>
@@ -43,4 +40,4 @@ function TableSingleLine() {
   )
 }
 
-export default TableSingleLine;
+export default TableDataTable;

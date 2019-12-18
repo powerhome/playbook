@@ -12,10 +12,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Extend Form Kit to use Select Kit for select form fields ([#511][] @web-kat)
 - Text Input padding override was removed for input child ([#526][] @megantrimble)
 - Added exports for border-radius, line-height, opacity, z-index, breakpoints, shadows, and spacing  + updated the correct gradient colors ([#527][] @jasoncypret)
+- Increased contrast for captions + Corrected table docs and fixed broken border-radius + Added data-table option for cases where we want to display lots of data with very tight spacing ([#528][] @jasoncypret)
 
 [#511]: https://github.com/powerhome/playbook/pull/511
 [#526]: https://github.com/powerhome/playbook/pull/526
-[#526]: https://github.com/powerhome/playbook/pull/527
+[#527]: https://github.com/powerhome/playbook/pull/527
+[#528]: https://github.com/powerhome/playbook/pull/528
 
 ## [3.1.0] 2019-12-12
 

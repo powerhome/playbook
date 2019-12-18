@@ -10,6 +10,7 @@ const propTypes = {
   className: PropTypes.string,
   container: PropTypes.bool,
   dark: PropTypes.bool,
+  dataTable: PropTypes.bool,
   disable_hover: PropTypes.bool,
   single_line: PropTypes.bool,
   size: PropTypes.oneOf(["sm", "md", "lg"])
@@ -18,6 +19,7 @@ const propTypes = {
 const defaultProps = {
   container: true,
   dark: false,
+  dataTable: false,
   disable_hover: false,
   single_line: false,
   size: "sm"
@@ -30,6 +32,7 @@ class Table extends React.Component {
       className,
       container,
       dark,
+      dataTable,
       disable_hover,
       single_line,
       size
@@ -40,6 +43,7 @@ class Table extends React.Component {
       `table-${size}`,
       container ? `table-card` : null,
       dark ? `table-dark` : null,
+      dataTable ? `data_table` : null,
       single_line ? `single-line` : null,
       disable_hover ? `no-hover` : null,
       className,
