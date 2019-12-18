@@ -59,11 +59,11 @@ const HomeAddressStreet = ({
     </Body>
     <If condition={homeId}>
       <Hashtag
-          text={homeId}
-          url="#"
-          type="home"
-          dark={dark}
           classname="home-hashtag"
+          dark={dark}
+          text={homeId}
+          type="home"
+          url="#"
       />
     </If>
     <Body
