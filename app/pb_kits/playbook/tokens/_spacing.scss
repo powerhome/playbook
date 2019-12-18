@@ -1,6 +1,3 @@
-// TODO: Convert to em's or rem
-// Base on 1290 desktop
-
 $space_xs: 8px;
 $space_sm: 16px;
 $space_md: 24px;
@@ -15,12 +12,11 @@ $spaces:(
 );
 
 
-// $space_smallest:            2px
-// $space_smaller:             5px
-// $space_small:               7px
-// $space_base:                10px
-// $space_large:               16px
-// $space_larger:              24px
-// $space_largest:             30px
-// $space_jumbo:               40px
-// $space_mega:                60px
+:export {
+  @mixin export_spacing($spacing_list) {
+    @each $name, $size in $spacing_list {
+      #{$name}: $size;
+    }
+  }
+  @include export_spacing($spaces);
+}

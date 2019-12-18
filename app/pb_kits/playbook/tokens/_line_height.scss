@@ -14,3 +14,12 @@ $line_height: (
   looser: $lh_looser,
   loosest: $lh_loosest
 );
+
+:export {
+  @mixin export_line_height($line_height_list) {
+    @each $name, $settings in $line_height_list {
+      #{$name}: $settings;
+    }
+  }
+  @include export_line_height($line_height);
+}

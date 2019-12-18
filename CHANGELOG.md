@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Extend Form Kit to use Select Kit for select form fields ([#511][] @web-kat)
 - Text Input padding override was removed for input child ([#526][] @megantrimble)
+- Added exports for border-radius, line-height, opacity, z-index, breakpoints, shadows, and spacing  + updated the correct gradient colors ([#527][] @jasoncypret)
 - JS kit `MultipleUsers`: added prop `maxDisplayedUsers` defaults to `4` ([#518][] @rafbgarcia)
 - JS kit `List`: added default and dark docs ([#518][] @rafbgarcia)
 - JS kit `Layout`: added default docs ([#518][] @rafbgarcia)
@@ -19,6 +20,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 [#511]: https://github.com/powerhome/playbook/pull/511
 [#526]: https://github.com/powerhome/playbook/pull/526
+[#527]: https://github.com/powerhome/playbook/pull/527
 [#518]: https://github.com/powerhome/playbook/pull/518
 
 ### Fixed
