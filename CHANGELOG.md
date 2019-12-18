@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - Extend Form Kit to use Select Kit for select form fields ([#511][] @web-kat)
+- Text Input padding override was removed for input child ([#526][] @megantrimble)
 - JS kit `MultipleUsers`: added prop `maxDisplayedUsers` defaults to `4` ([#518][] @rafbgarcia)
 - JS kit `List`: added default and dark docs ([#518][] @rafbgarcia)
 - JS kit `Layout`: added default docs ([#518][] @rafbgarcia)
@@ -17,6 +18,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - JS kit `Table`: add props `disableHover` and `singleLine` to replace their respective snake case versions ([#518][] @rafbgarcia)
 
 [#511]: https://github.com/powerhome/playbook/pull/511
+[#526]: https://github.com/powerhome/playbook/pull/526
 [#518]: https://github.com/powerhome/playbook/pull/518
 
 ### Fixed
@@ -56,8 +58,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [#494]: https://github.com/powerhome/playbook/pull/494
 [#508]: https://github.com/powerhome/playbook/pull/508
 [#506]: https://github.com/powerhome/playbook/pull/506
-[#504]: https://github.com/powerhome/playbook/pull/513
-
+[#513]: https://github.com/powerhome/playbook/pull/513
 
 ### Changed
 
@@ -82,6 +83,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [#496]: https://github.com/powerhome/playbook/pull/496
 [#495]: https://github.com/powerhome/playbook/pull/495
 [#501]: https://github.com/powerhome/playbook/pull/501
+
 
 ## [3.0.1] - 2019-12-06
 
