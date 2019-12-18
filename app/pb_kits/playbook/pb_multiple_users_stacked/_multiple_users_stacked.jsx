@@ -20,17 +20,12 @@ const MultipleUsersStacked = ({
     users
   }: MultipleUsersStackedProps) => {
 
-  const multipleUsersStackedCss = () => {
-    let css = 'pb_multiple_users_stacked_kit'
-    return css
-  }
+  const multipleUsersStackedCss = 'pb_multiple_users_stacked_kit'
 
-  const moreThanTwo = () => {
-    return users.length > 2
-  }
+  const moreThanTwo = users.length > 2
 
   const displayCount = () => {
-    return moreThanTwo() ? 1 : users.length
+    return moreThanTwo ? 1 : users.length
   }
 
   const multipleUsersStacked = () => {
@@ -46,7 +41,7 @@ const MultipleUsersStacked = ({
   }
 
   const displaySecond = () => {
-      if( moreThanTwo() === false ) {
+      if( moreThanTwo === false ) {
     return users.slice(1, 2).map((userObject, index) => {
       return (
         <Avatar
@@ -60,7 +55,7 @@ const MultipleUsersStacked = ({
   }
 
   const plusUsers = () => {
-    if( moreThanTwo() === true ) {
+    if( moreThanTwo === true ) {
       return (
         <div className="pb_multiple_users_stacked_item multiple_users_stacked_badge">
           {`+${users.length - displayCount()}`}
@@ -70,7 +65,7 @@ const MultipleUsersStacked = ({
   }
 
   return (
-    <div id={id} className={classnames(multipleUsersStackedCss(), className)}>
+    <div id={id} className={classnames(multipleUsersStackedCss, className)}>
       {multipleUsersStacked()}
       {displaySecond()}
       {plusUsers()}
