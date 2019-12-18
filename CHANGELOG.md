@@ -56,7 +56,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [#494]: https://github.com/powerhome/playbook/pull/494
 [#508]: https://github.com/powerhome/playbook/pull/508
 [#506]: https://github.com/powerhome/playbook/pull/506
-[#513]: https://github.com/powerhome/playbook/pull/513
+[#504]: https://github.com/powerhome/playbook/pull/513
+
 
 ### Changed
 
@@ -81,7 +82,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [#496]: https://github.com/powerhome/playbook/pull/496
 [#495]: https://github.com/powerhome/playbook/pull/495
 [#501]: https://github.com/powerhome/playbook/pull/501
-
 
 ## [3.0.1] - 2019-12-06
 

@@ -1,18 +1,3 @@
-<%
-  example_collection = [
-    OpenStruct.new(name: "Alabama", value: 1),
-    OpenStruct.new(name: "Alaska", value: 2),
-    OpenStruct.new(name: "Arizona", value: 3),
-    OpenStruct.new(name: "Arkansas", value: 4),
-    OpenStruct.new(name: "California", value: 5),
-    OpenStruct.new(name: "Colorado", value: 6),
-    OpenStruct.new(name: "Connecticut", value: 7),
-    OpenStruct.new(name: "Delaware", value: 8),
-    OpenStruct.new(name: "Florida", value: 9),
-    OpenStruct.new(name: "Georgia", value: 10),
-  ]
-%>
-
 <%= pb_rails("form", props: { form_system_options: { scope: :example, method: :get } }) do |form| %>
   <%= form.text_field :example_text_field, props: { label: true } %>
   <%= form.telephone_field :example_phone_field, props: { label: true } %>
@@ -22,8 +7,6 @@
   <%= form.password_field :example_password_field, props: { label: true } %>
   <%= form.url_field :example_url_field, props: { label: true } %>
   <%= form.text_area :example_text_area, props: { label: true } %>
-  <%= form.select :example_select, [ ["Yes", 1], ["No", 2] ], props: { label: true } %>
-  <%= form.collection_select :example_collection_select, example_collection, :value, :name, props: { label: true } %>
 
   <%= form.actions do |action| %>
     <%= action.submit %>
