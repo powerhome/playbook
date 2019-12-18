@@ -5,6 +5,7 @@ function TableContainer() {
   return (
     <Table
         size="md"
+        container={false}
     >
       <thead>
         <tr>

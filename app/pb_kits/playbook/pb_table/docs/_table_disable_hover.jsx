@@ -3,7 +3,8 @@ import {Table} from "../../"
 
 function TableDisableHover() {
   return (
-    <Table disable_hover container={false}
+    <Table
+        disable_hover
         size="md"
     >
       <thead>
