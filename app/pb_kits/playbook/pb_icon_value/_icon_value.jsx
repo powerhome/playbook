@@ -14,12 +14,12 @@ import {
 } from '../utilities/props'
 
 type IconValueProps = {
-  align: 'left' | 'center' | 'right',
-  aria: object,
-  className: string,
-  data: object,
+  align?: 'left' | 'center' | 'right',
+  aria?: object,
+  className?: string,
+  data?: object,
   icon: string,
-  id: number,
+  id?: number,
   text: string,
 }
 
