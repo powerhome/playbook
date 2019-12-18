@@ -12,6 +12,7 @@ RSpec.describe Playbook::PbTable::Table do
                       .with_values("sm", "md", "lg") }
   it { is_expected.to define_boolean_prop(:single_line).with_default(false) }
   it { is_expected.to define_boolean_prop(:dark).with_default(false) }
+  it { is_expected.to define_boolean_prop(:data_table).with_default(false) }
   it { is_expected.to define_boolean_prop(:disable_hover).with_default(false) }
   it { is_expected.to define_boolean_prop(:container).with_default(true) }
   it { is_expected.to define_prop(:text) }
@@ -27,6 +28,7 @@ RSpec.describe Playbook::PbTable::Table do
       expect(subject.new({}).classname).to eq "pb_table table-md table-card"
       expect(subject.new(classname: "additional_class").classname).to eq "pb_table table-md table-card additional_class"
       expect(subject.new(dark: true).classname).to eq "pb_table table-md dark table-card"
+      expect(subject.new(data_table: true).classname).to eq "pb_table table-md table-card data_table"
       expect(subject.new(size: "sm").classname).to eq "pb_table table-sm table-card"
       expect(subject.new(single_line: true).classname).to eq "pb_table table-md single-line table-card"
       expect(subject.new(container: false).classname).to eq "pb_table table-md"
