@@ -2,7 +2,8 @@
 
 set -e
 
-# Test
+echo ">>> eslint"
+time yarn lint
 
 echo ">>> Testing"
 trap "kill -TERM $PID" TERM
