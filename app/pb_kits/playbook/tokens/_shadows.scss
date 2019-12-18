@@ -15,3 +15,12 @@ $box_shadows: (
   shadow_deeper: $shadow_deeper,
   shadow_deepest: $shadow_deepest
 );
+
+:export {
+  @mixin export_shadows($shadows_list) {
+    @each $name, $settings in $shadows_list {
+      #{$name}: $settings;
+    }
+  }
+  @include export_shadows($box_shadows);
+}
