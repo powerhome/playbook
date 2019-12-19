@@ -4,8 +4,7 @@ import { Table } from '../../'
 const TableDisableHover = () => {
   return (
     <Table
-        container={false}
-        disable_hover
+        disableHover
         size="md"
     >
       <thead>

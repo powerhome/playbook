@@ -16,6 +16,8 @@ module Playbook
                   default: false
       prop :disable_hover, type: Playbook::Props::Boolean,
                            default: false
+      prop :data_table, type: Playbook::Props::Boolean,
+                  default: false
       prop :container, type: Playbook::Props::Boolean,
                        default: true
       prop :text
@@ -23,7 +25,7 @@ module Playbook
       def classname
         generate_classname(
           "pb_table", "table-#{size}", single_line_class, dark_class,
-          disable_hover_class, container_class, separator: " "
+          disable_hover_class, container_class, data_table_class, separator: " "
         )
       end
 
@@ -31,6 +33,10 @@ module Playbook
 
       def dark_class
         dark ? "dark" : nil
+      end
+
+      def data_table_class
+        data_table ? "data_table" : nil
       end
 
       def single_line_class

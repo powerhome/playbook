@@ -12,6 +12,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Extend Form Kit to use Select Kit for select form fields ([#511][] @web-kat)
 - Text Input padding override was removed for input child ([#526][] @megantrimble)
 - Added exports for border-radius, line-height, opacity, z-index, breakpoints, shadows, and spacing  + updated the correct gradient colors ([#527][] @jasoncypret)
+- Increased contrast for captions + Corrected table docs and fixed broken border-radius + Added data-table option for cases where we want to display lots of data with very tight spacing ([#528][] @jasoncypret)
+- Added territory back to user kit ([#529][] @jasoncypret)
 - JS kit `MultipleUsers`: added prop `maxDisplayedUsers` defaults to `4` ([#518][] @rafbgarcia)
 - JS kit `List`: added default and dark docs ([#518][] @rafbgarcia)
 - JS kit `Layout`: added default docs ([#518][] @rafbgarcia)
@@ -19,9 +21,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - JS kit `Table`: add props `disableHover` and `singleLine` to replace their respective snake case versions ([#518][] @rafbgarcia)
 
 [#511]: https://github.com/powerhome/playbook/pull/511
+[#518]: https://github.com/powerhome/playbook/pull/518
 [#526]: https://github.com/powerhome/playbook/pull/526
 [#527]: https://github.com/powerhome/playbook/pull/527
-[#518]: https://github.com/powerhome/playbook/pull/518
+[#528]: https://github.com/powerhome/playbook/pull/528
+[#529]: https://github.com/powerhome/playbook/pull/529
 
 ### Fixed
 

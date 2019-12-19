@@ -8,6 +8,7 @@ type TableProps = {
   className: string,
   container: boolean,
   dark: boolean,
+  dataTable: boolean,
   // @deprecated disable_hover since version 3.2.0, please use `disableHover`
   disable_hover: boolean, // eslint-disable-line camelcase
   disableHover: boolean,
@@ -22,6 +23,7 @@ const Table = ({
   className,
   container = true,
   dark = false,
+  dataTable = false,
   disable_hover = false, // eslint-disable-line camelcase
   disableHover = false,
   single_line = false, // eslint-disable-line camelcase
@@ -31,15 +33,16 @@ const Table = ({
   disableHover = disableHover || disable_hover // eslint-disable-line camelcase
   singleLine = singleLine || single_line // eslint-disable-line camelcase
 
-  const tableClasses = classnames(className, 'pb_table', `table-${size}`, {
+  const classes = classnames(className, 'pb_table', `table-${size}`, {
     'table-card': container,
     'table-dark': dark,
+    'data_table': dataTable,
     'single-line': singleLine,
     'no-hover': disableHover,
   })
 
   return (
-    <table className={tableClasses}>
+    <table className={classes}>
       {children}
     </table>
   )

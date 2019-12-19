@@ -4,8 +4,7 @@ import { Table } from '../../'
 const TableSingleLine = () => {
   return (
     <Table
-        container={false}
-        single_line
+        singleLine
         size="sm"
     >
       <thead>

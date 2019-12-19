@@ -4,7 +4,6 @@ import { Table } from '../../'
 const TableDark = () => {
   return (
     <Table
-        container={false}
         dark
         size="md"
     >

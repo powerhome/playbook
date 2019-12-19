@@ -23,6 +23,7 @@ module Playbook
       prop :title
       prop :dark, type: Playbook::Props::Boolean,
                           default: false
+      prop :territory
 
       def classname
         generate_classname("pb_user_kit", align, orientation, size, dark_class)
@@ -42,7 +43,6 @@ module Playbook
       def dark_class
         dark ? "dark" : nil
       end
-
 
       def title_size
         size == "lg" ? 3 : 4

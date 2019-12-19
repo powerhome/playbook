@@ -6,6 +6,7 @@ const TableContainerDark = () => {
     <Table
         dark
         size="md"
+        container={false}
     >
       <thead>
         <tr>

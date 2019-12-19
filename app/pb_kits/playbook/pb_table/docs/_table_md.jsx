@@ -3,10 +3,7 @@ import { Table } from '../../'
 
 const TableMd = () => {
   return (
-    <Table
-        container={false}
-        size="md"
-    >
+    <Table size="md">
       <thead>
         <tr>
           <th>{'Column 1'}</th>
