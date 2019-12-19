@@ -3,14 +3,14 @@
 import React from 'react'
 import classnames from 'classnames'
 import {
-  Icon,
   Body,
+  Icon,
 } from '../'
 
 import {
   buildAriaProps,
-  buildDataProps,
   buildCss,
+  buildDataProps,
 } from '../utilities/props'
 
 type IconValueProps = {
@@ -45,8 +45,8 @@ const IconValue = ({
     >
       <Body color="light">
         <Icon
-            icon={icon}
             fixedWidth
+            icon={icon}
         />
         {text}
       </Body>

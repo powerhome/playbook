@@ -1,5 +1,5 @@
-import React from "react"
-import { IconValue } from "../../"
+import React from 'react'
+import { IconValue } from '../../'
 
 const IconValueDefault = () => {
   return (
