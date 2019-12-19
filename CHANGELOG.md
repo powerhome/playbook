@@ -22,6 +22,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - JS Kit `IconValue`: Implement React version of Icon Value kit ([#521][] @drborges)
 - [Technical]: Run yarn autofix on pre commit hook ([#533][] @rafbgarcia)
 - Added Gradient & Multi Line to Fixed Confirmation Toast ([#534][] @megantrimble)
+- New Multiple User Stacked Kit ([#517][] @evalouderback)
 
 [#511]: https://github.com/powerhome/playbook/pull/511
 [#518]: https://github.com/powerhome/playbook/pull/518
@@ -32,6 +33,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [#521]: https://github.com/powerhome/playbook/pull/521
 [#533]: https://github.com/powerhome/playbook/pull/533
 [#534]: https://github.com/powerhome/playbook/pull/534
+[#517]: https://github.com/powerhome/playbook/pull/517
 
 ### Fixed
 
