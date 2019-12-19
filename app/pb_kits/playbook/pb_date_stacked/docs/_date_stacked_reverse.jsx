@@ -1,18 +1,27 @@
-import React from "react"
-import DateStacked from "../_date_stacked.jsx"
+import React from 'react'
+import DateStacked from '../_date_stacked.jsx'
 
-function DateStackedDefault() {
+const DateStackedDefault = () => {
   return (
     <div>
-      
-      <DateStacked date={new Date()} align='left' size='sm' reverse={true}/>
 
-      <br/>
+      <DateStacked
+          align="left"
+          date={new Date()}
+          reverse
+          size="sm"
+      />
 
-      <DateStacked date={new Date()} size='md'reverse={true}/>
+      <br />
+
+      <DateStacked
+          date={new Date()}
+          reverse
+          size="md"
+      />
 
     </div>
   )
 }
 
-export default DateStackedDefault;
+export default DateStackedDefault

@@ -1,26 +1,26 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 
 const propTypes = {
   children: PropTypes.oneOfType([
-      PropTypes.arrayOf(PropTypes.node),
-      PropTypes.node
-  ])
-};
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node,
+  ]),
+}
 
 class ListItem extends Component {
   render() {
     const {
-      children
-    } = this.props;
+      children,
+    } = this.props
     return (
-      <li>
+      <li className="pb_item_kit">
         {children}
       </li>
-    );
+    )
   }
 }
 
-ListItem.propTypes = propTypes;
+ListItem.propTypes = propTypes
 
-export default ListItem;
+export default ListItem

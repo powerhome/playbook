@@ -1,5 +1,4 @@
 /* @flow */
-/*eslint-disable react/no-multi-comp, flowtype/space-before-type-colon */
 
 import React from 'react'
 import DateTime from '../pb_kit/dateTime.js'
@@ -8,7 +7,6 @@ import {
   Body,
   Icon,
 } from '../'
-
 
 type DateRangeInlineProps = {
   className?: String,
@@ -19,34 +17,43 @@ type DateRangeInlineProps = {
 }
 
 const dateTimestamp = (dateValue) => {
-  let date = new DateTime({ value: dateValue })
+  const date = new DateTime({ value: dateValue })
   return `${date.toDay()} ${date.toMonth()} ${date.toYear()}`
 }
 
 const dateTimeIso = (dateValue) => {
-  let date = new DateTime({ value: dateValue })
+  const date = new DateTime({ value: dateValue })
   return date.toIso()
 }
 
 const DateRangeInline = ({
-  className,
-  data,
   endDate,
-  id,
-  startDate
+  startDate,
 }: DateRangeInlineProps) => (
   <div>
-    <Body tag="span" color="light">
-      <Icon icon="calendar-alt" fixedWidth="true" />
+    <Body
+        color="light"
+        tag="span"
+    >
+      <Icon
+          fixedWidth
+          icon="calendar-alt"
+      />
     </Body>
     <Body tag="span">
-      <time dateTime={dateTimeIso(startDate)} >{` ${dateTimestamp(startDate)} `}</time>
+      <time dateTime={dateTimeIso(startDate)}>{` ${dateTimestamp(startDate)} `}</time>
     </Body>
-    <Body tag="span" color="light">
-      <Icon icon="long-arrow-right" fixedWidth="true" />
+    <Body
+        color="light"
+        tag="span"
+    >
+      <Icon
+          fixedWidth
+          icon="long-arrow-right"
+      />
     </Body>
     <Body tag="span">
-      <time dateTime={dateTimeIso(endDate)} >{` ${dateTimestamp(endDate)} `}</time>
+      <time dateTime={dateTimeIso(endDate)}>{` ${dateTimestamp(endDate)} `}</time>
     </Body>
   </div>
 )

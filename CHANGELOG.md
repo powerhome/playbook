@@ -14,11 +14,39 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Added exports for border-radius, line-height, opacity, z-index, breakpoints, shadows, and spacing  + updated the correct gradient colors ([#527][] @jasoncypret)
 - Increased contrast for captions + Corrected table docs and fixed broken border-radius + Added data-table option for cases where we want to display lots of data with very tight spacing ([#528][] @jasoncypret)
 - Added territory back to user kit ([#529][] @jasoncypret)
+- JS kit `MultipleUsers`: added prop `maxDisplayedUsers` defaults to `4` ([#518][] @rafbgarcia)
+- JS kit `List`: added default and dark docs ([#518][] @rafbgarcia)
+- JS kit `Layout`: added default docs ([#518][] @rafbgarcia)
+- JS kit `DateStacked`: added `left` as `align` option ([#518][] @rafbgarcia)
+- JS kit `Table`: add props `disableHover` and `singleLine` to replace their respective snake case versions ([#518][] @rafbgarcia)
 
 [#511]: https://github.com/powerhome/playbook/pull/511
+[#518]: https://github.com/powerhome/playbook/pull/518
 [#526]: https://github.com/powerhome/playbook/pull/526
 [#527]: https://github.com/powerhome/playbook/pull/527
+[#528]: https://github.com/powerhome/playbook/pull/528
 [#529]: https://github.com/powerhome/playbook/pull/529
+
+### Fixed
+
+- JS kit `MultipleUsers` docs: displays avatar image by renaming `image_url` to `imageUrl` ([#518][] @rafbgarcia)
+- JS kit `User`: displays avatar image by renaming `image_url` to `imageUrl` ([#518][] @rafbgarcia)
+- JS kit `Avatar`: fixed OR condition in `if (avatar == true | avatarUrl != null)` ([#518][] @rafbgarcia)
+- JS kit `List`: fixed class name: `list_borderless` to `_borderless` ([#518][] @rafbgarcia)
+- JS kit `List`: fixed class name: `pb_list` to `pb_list_kit` ([#518][] @rafbgarcia)
+- JS kit `Layout`: fixed error `position_class is not defined` ([#518][] @rafbgarcia)
+- JS kit `HomeAddressStreet`: fixed Hashtag style by using `Hashtag` kit ([#518][] @rafbgarcia)
+- JS kit `HomeAddressStreet`: fixed address and city not appearing beucase `titleize` function inside `utilities/text.js` wasn't returning anything ([#518][] @rafbgarcia)
+- JS kit `HomeAddressStreet`: passed `dark` prop to Title's ([#518][] @rafbgarcia)
+- JS kit `Hashtag`: use `span` instead of `div` to match rails' style ([#518][] @rafbgarcia)
+
+[#518]: https://github.com/powerhome/playbook/pull/518
+
+### Deprecated
+
+- JS kit `Table`: deprecate props `disable_hover` and `single_line`, please use their camelcase versions ([#518][] @rafbgarcia)
+
+[#518]: https://github.com/powerhome/playbook/pull/518
 
 ## [3.1.0] 2019-12-12
 

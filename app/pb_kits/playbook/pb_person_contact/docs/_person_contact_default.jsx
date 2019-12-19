@@ -1,28 +1,28 @@
-import React from "react"
-import {PersonContact} from "../../"
+import React from 'react'
+import { PersonContact } from '../../'
 
-function PersonContactDefault() {
+const PersonContactDefault = () => {
   return (
     <div>
       <PersonContact
-        firstName="Pauline"
-        lastName="Smith"
-        contacts={[
+          contacts={[
           {
-            contactType: "email",
-            contactValue: "email@example.com",
+            contactType: 'email',
+            contactValue: 'email@example.com',
           },
           {
-            contactValue: "5555555555",
+            contactValue: '5555555555',
           },
           {
-            contactType: "work",
-            contactValue: "3245627482",
-          }
+            contactType: 'work',
+            contactValue: '3245627482',
+          },
         ]}
+          firstName="Pauline"
+          lastName="Smith"
       />
     </div>
   )
 }
 
-export default PersonContactDefault;
+export default PersonContactDefault

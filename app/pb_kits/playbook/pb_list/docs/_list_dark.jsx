@@ -2,10 +2,17 @@ import React from 'react'
 
 import { List, ListItem } from '../../'
 
-const ListDefault = () => {
+const ListDark = () => {
   return (
     <>
-      <List>
+      <List
+          borderless
+          dark
+          layout="right"
+          ordered
+          size="large"
+          xpadding
+      >
         <ListItem>{'Item 1'}</ListItem>
         <ListItem>{'Item 2'}</ListItem>
         <ListItem>{'Item 3'}</ListItem>
@@ -14,4 +21,4 @@ const ListDefault = () => {
   )
 }
 
-export default ListDefault
+export default ListDark

@@ -1,7 +1,7 @@
-import React from "react"
-import {LoadingInline} from "../../"
+import React from 'react'
+import { LoadingInline } from '../../'
 
-function LoadingInlineLight() {
+const LoadingInlineLight = () => {
   return (
     <div>
       <LoadingInline />
@@ -11,4 +11,4 @@ function LoadingInlineLight() {
   )
 }
 
-export default LoadingInlineLight;
+export default LoadingInlineLight

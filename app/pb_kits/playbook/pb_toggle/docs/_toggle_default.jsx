@@ -1,43 +1,33 @@
 // @flow
 
-import React from "react"
-import { Toggle } from "../../"
+import React, { useState } from 'react'
+import { Toggle } from '../../'
 
-class Example extends React.Component {
-  state = {
-    toggle1: false,
-    toggle2: true,
-  }
+const Example = () => {
+  const [toggle1, setToggle1] = useState(false)
+  const [toggle2, setToggle2] = useState(false)
 
-  handleChange = event => {
-    this.setState({
-      [event.target.name]: event.target.checked
-    })
-  }
+  return (
+    <>
+      <Toggle
+          checked={toggle1}
+          name="toggle1"
+          onChange={(event) => setToggle1(event.target.value)}
+          onCheck={(event) => alert(`${event.target.name} checked!`)}
+          onUncheck={(event) => alert(`${event.target.name} unchecked!`)}
+      />
 
-  render() {
-    return (
-      <>
-        <Toggle
-            checked={this.state.toggle1}
-            name="toggle1"
-            onChange={this.handleChange}
-            onCheck={event => console.log(`${event.target.name} checked!`)}
-            onUncheck={event => console.log(`${event.target.name} unchecked!`)}
-        />
+      <br />
 
-        <br />
-
-        <Toggle
-            checked={this.state.toggle2}
-            name="toggle2"
-            onChange={this.handleChange}
-            onCheck={event => console.log(`${event.target.name} checked!`)}
-            onUncheck={event => console.log(`${event.target.name} unchecked!`)}
-        />
-      </>
-    )
-  }
+      <Toggle
+          checked={toggle2}
+          name="toggle2"
+          onChange={(event) => setToggle2(event.target.value)}
+          onCheck={(event) => alert(`${event.target.name} checked!`)}
+          onUncheck={(event) => alert(`${event.target.name} unchecked!`)}
+      />
+    </>
+  )
 }
 
 export default Example

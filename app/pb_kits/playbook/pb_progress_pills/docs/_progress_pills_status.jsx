@@ -1,20 +1,19 @@
 
-import React from "react"
-import ProgressPills from "../_progress_pills.jsx"
+import React from 'react'
+import ProgressPills from '../_progress_pills.jsx'
 
+const ProgressPillsStatus = () => {
+  return (
+    <div>
+      <ProgressPills
+          active={2}
+          steps={3}
+          title="Status:"
+          value="Orientation"
+      />
 
-function ProgressPillsStatus() {
-return (
-  <div>
-    <ProgressPills
-        active={2}
-        title="Status:"
-        steps={3}
-        value="Orientation"
-    />
-
-  </div>
-)
+    </div>
+  )
 }
 
-export default ProgressPillsStatus;
+export default ProgressPillsStatus

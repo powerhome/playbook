@@ -1,9 +1,8 @@
-import React from "react"
-import {Timestamp} from "../../"
+import React from 'react'
 
-function TimestampDefault() {
+const TimestampDefault = () => {
   return (
-    <h1>{`Coming Soon...`}</h1>
+    <h1>{'Coming Soon...'}</h1>
   )
 }
 

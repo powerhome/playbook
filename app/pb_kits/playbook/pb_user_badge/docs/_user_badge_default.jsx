@@ -1,10 +1,9 @@
-import React from "react"
-import {UserBadge} from "../../"
+import React from 'react'
 
-function UserBadgeDefault() {
+const UserBadgeDefault = () => {
   return (
-    <h1>{`Coming Soon...`}</h1>
+    <h1>{'Coming Soon...'}</h1>
   )
 }
 
-export default UserBadgeDefault;
+export default UserBadgeDefault

@@ -1,62 +1,66 @@
-import React from "react"
-import SelectableCard from "../_selectable_card.jsx"
+import React from 'react'
+import SelectableCard from '../_selectable_card.jsx'
 
 class SelectableCardDark extends React.Component {
   state = {
-    selected_with_icon_dark: true,
-    selected_without_icon_dark: true,
-    unselected_dark: false
+    selectedWithIconDark: true,
+    selectedWithoutIconDark: true,
+    unselectedDark: false,
   }
 
-  handleSelect = event => {
+  handleSelect = (event) => {
     this.setState({
-      [event.target.id]: event.target.checked
+      [event.target.id]: event.target.checked,
     })
   }
 
   render() {
     return (
-      <div class="pb--doc-demo-row">
+      <div className="pb--doc-demo-row">
 
         <SelectableCard
+            checked={this.state.selectedWithIconDark}
             dark
-            inputId="selected_with_icon_dark"
-            name="selected_with_icon_dark"
-            value="selected_with_icon_dark"
-            icon={true}
-            checked={this.state.selected_with_icon_dark}
-            onChange={this.handleSelect}>
+            icon
+            inputId="selectedWithIconDark"
+            name="selectedWithIconDark"
+            onChange={this.handleSelect}
+            value="selectedWithIconDark"
+        >
           {'Selected, with icon'}
         </SelectableCard>
 
         <SelectableCard
+            checked={this.state.selectedWithoutIconDark}
             dark
-            inputId="selected_without_icon_dark"
-            name="selected_without_icon_dark"
-            value="selected_without_icon_dark"
             icon={false}
-            checked={this.state.selected_without_icon_dark}
-            onChange={this.handleSelect}>
+            inputId="selectedWithoutIconDark"
+            name="selectedWithoutIconDark"
+            onChange={this.handleSelect}
+            value="selectedWithoutIconDark"
+        >
           {'Selected, without icon'}
         </SelectableCard>
 
         <SelectableCard
+            checked={this.state.unselectedDark}
             dark
-            inputId="unselected_dark"
-            name="unselected_dark"
-            value="unselected_dark"
-            checked={this.state.unselected_dark}
-            onChange={this.handleSelect}>
+            inputId="unselectedDark"
+            name="unselectedDark"
+            onChange={this.handleSelect}
+            value="unselectedDark"
+        >
           {'Unselected'}
         </SelectableCard>
 
         <SelectableCard
             dark
+            disabled
             inputId="disabled_dark"
             name="disabled_dark"
+            onChange={this.handleSelect}
             value="disabled_dark"
-            disabled={true}
-            onChange={this.handleSelect}>
+        >
           {'Unselected'}
         </SelectableCard>
 
@@ -65,4 +69,4 @@ class SelectableCardDark extends React.Component {
   }
 }
 
-export default SelectableCardDark;
+export default SelectableCardDark

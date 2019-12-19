@@ -1,11 +1,11 @@
 // @flow
 
-import React from "react"
-import { Toggle } from "../.."
+import React from 'react'
+import { Toggle } from '../..'
 
 const Example = () => {
   return (
-    <Toggle aria={{ label: "toggle", expanded: false }} />
+    <Toggle aria={{ label: 'toggle', expanded: false }} />
   )
 }
 

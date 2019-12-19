@@ -16,6 +16,7 @@ type ButtonPropTypes = {
   fullWidth?: Boolean,
   icon?: String,
   id?: String,
+  link?: String,
   loading?: Boolean,
   newWindow?: Boolean,
   onClick?: EventHandler,
@@ -57,7 +58,7 @@ const buttonAriaProps = (props: ButtonPropTypes) => {
   if (typeof aria !== 'object') return {}
   const { label } = aria
 
-  let ariaProps = {}
+  const ariaProps = {}
 
   if (label !== null) ariaProps['aria-label'] = label
 
@@ -82,11 +83,11 @@ const Button = (props: ButtonPropTypes) => {
   const buttonAria = buttonAriaProps(props)
   const css = classnames(buttonClassName(props), className)
   const loadingIcon = (
-    <i className='pb_icon_kit far fa-spinner fa-fw fa-pulse loading-icon' />
+    <i className="pb_icon_kit far fa-spinner fa-fw fa-pulse loading-icon" />
   )
 
   const content = (
-    <span className='pb_button_content'>
+    <span className="pb_button_content">
       <If condition={icon !== null}>
         <i className={`pb_icon_kit far fa-${icon} fa-fw`} />
       </If>
@@ -97,22 +98,24 @@ const Button = (props: ButtonPropTypes) => {
   return (
     <If condition={link !== null}>
       <a
-        {...buttonAria}
-        className={css}
-        href={link}
-        id={id}
-        target={newWindow ? '_blank' : null}>
+          {...buttonAria}
+          className={css}
+          href={link}
+          id={id}
+          target={newWindow ? '_blank' : null}
+      >
         <If condition={loading}>{loadingIcon}</If>
         {content}
       </a>
       <Else />
       <button
-        {...buttonAria}
-        className={css}
-        id={id}
-        onClick={onClick}
-        type={htmlType}
-        value={value}>
+          {...buttonAria}
+          className={css}
+          id={id}
+          onClick={onClick}
+          type={htmlType}
+          value={value}
+      >
         <If condition={loading}>{loadingIcon}</If>
         {content}
       </button>

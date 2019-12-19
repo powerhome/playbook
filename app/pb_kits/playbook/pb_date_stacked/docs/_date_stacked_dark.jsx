@@ -1,24 +1,24 @@
-import React from "react"
-import DateStacked from "../_date_stacked.jsx"
+import React from 'react'
+import DateStacked from '../_date_stacked.jsx'
 
-function DateStackedDark() {
+const DateStackedDark = () => {
   return (
     <div>
-      <DateStacked 
-        date={new Date()}
-        size='sm'
-        dark={true}
+      <DateStacked
+          dark
+          date={new Date()}
+          size="sm"
       />
 
-      <br></br>
+      <br />
 
-      <DateStacked 
-        date={new Date()}
-        size='md'
-        dark={true}
+      <DateStacked
+          dark
+          date={new Date()}
+          size="md"
       />
     </div>
   )
 }
 
-export default DateStackedDark;
+export default DateStackedDark

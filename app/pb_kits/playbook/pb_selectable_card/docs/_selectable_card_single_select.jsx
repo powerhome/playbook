@@ -1,54 +1,57 @@
-import React from "react";
-import SelectableCard from "../_selectable_card.jsx";
+import React from 'react'
+import SelectableCard from '../_selectable_card.jsx'
 
 class SelectableCardSingleSelect extends React.Component {
   state = {
-    selected: null
+    selected: null,
   }
 
-  handleSelect = event => {
+  handleSelect = (event) => {
     this.setState({
-      selected: event.target.value
+      selected: event.target.value,
     })
   }
 
   render() {
     return (
-      <div class="pb--doc-demo-row">
+      <div className="pb--doc-demo-row">
 
         <SelectableCard
-            inputId="male1"
-            name="gender"
-            value="male"
-            multi={false}
             checked={this.state.selected === 'male'}
-            onChange={this.handleSelect.bind(this)}>
-          {`Male`}
+            inputId="male1"
+            multi={false}
+            name="gender"
+            onChange={this.handleSelect.bind(this)}
+            value="male"
+        >
+          {'Male'}
         </SelectableCard>
 
         <SelectableCard
-            inputId="female1"
-            name="gender"
-            value="female"
-            multi={false}
             checked={this.state.selected === 'female'}
-            onChange={this.handleSelect.bind(this)}>
-          {`Female`}
+            inputId="female1"
+            multi={false}
+            name="gender"
+            onChange={this.handleSelect.bind(this)}
+            value="female"
+        >
+          {'Female'}
         </SelectableCard>
 
         <SelectableCard
-            inputId="other1"
-            name="gender"
-            value="other"
-            multi={false}
             checked={this.state.selected === 'other'}
-            onChange={this.handleSelect.bind(this)}>
-          {`Other`}
+            inputId="other1"
+            multi={false}
+            name="gender"
+            onChange={this.handleSelect.bind(this)}
+            value="other"
+        >
+          {'Other'}
         </SelectableCard>
-        
+
       </div>
-    );
+    )
   }
 }
 
-export default SelectableCardSingleSelect;
+export default SelectableCardSingleSelect

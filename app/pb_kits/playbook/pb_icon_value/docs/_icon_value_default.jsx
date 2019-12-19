@@ -1,9 +1,8 @@
-import React from "react"
-import {IconValue} from "../../"
+import React from 'react'
 
-function IconValueDefault() {
+const IconValueDefault = () => {
   return (
-    <h1>{`Coming Soon...`}</h1>
+    <h1>{'Coming Soon...'}</h1>
   )
 }
 

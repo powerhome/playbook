@@ -1,34 +1,34 @@
-import React from "react";
-import { CircleIconButton } from "../../";
+import React from 'react'
+import { CircleIconButton } from '../../'
 
 const CircleIconButtonDefault = () => (
   <div>
     <CircleIconButton
-      variant="primary"
-      icon="plus"
+        icon="plus"
+        variant="primary"
     />
 
-    <br/>
+    <br />
 
     <CircleIconButton
-      variant="secondary"
-      icon="pen"
+        icon="pen"
+        variant="secondary"
     />
 
-    <br/>
+    <br />
 
     <CircleIconButton
-      disabled={true}
-      icon="times"
+        disabled
+        icon="times"
     />
 
-    <br/>
+    <br />
 
     <CircleIconButton
-      variant="link"
-      icon="user"
+        icon="user"
+        variant="link"
     />
   </div>
-);
+)
 
-export default CircleIconButtonDefault;
+export default CircleIconButtonDefault

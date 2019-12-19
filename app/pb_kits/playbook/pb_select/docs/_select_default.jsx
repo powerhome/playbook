@@ -1,13 +1,13 @@
 import React from 'react'
-import {Select} from '../../'
+import { Select } from '../../'
 
-function SelectDefault() {
+const SelectDefault = () => {
   return (
     <div>
       <Select
-        label='Favorite Food'
-        name='food'
-        options={[
+          label="Favorite Food"
+          name="food"
+          options={[
           {
             value: '1',
             valueText: 'Burgers',

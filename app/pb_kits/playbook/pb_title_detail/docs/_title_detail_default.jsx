@@ -1,10 +1,9 @@
-import React from "react"
-import {TitleDetail} from "../../"
+import React from 'react'
 
-function TitleDetailDefault() {
+const TitleDetailDefault = () => {
   return (
-    <h1>{`Coming Soon...`}</h1>
+    <h1>{'Coming Soon...'}</h1>
   )
 }
 
-export default TitleDetailDefault;
+export default TitleDetailDefault

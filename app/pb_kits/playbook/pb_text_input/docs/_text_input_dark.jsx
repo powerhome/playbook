@@ -1,78 +1,78 @@
-import React from "react"
+import React from 'react'
 import {
   Caption,
   TextInput,
   Title,
-} from "../../"
+} from '../../'
 
 class TextInputDark extends React.Component {
     state = {
-      firstName: ""
+      firstName: '',
     }
 
     render() {
-        const handleOnChange = ({target}) => this.setState({firstName: target.value})
+      const handleOnChange = ({ target }) => this.setState({ firstName: target.value })
 
-        const {
-          firstName,
-        } = this.state
+      const {
+        firstName,
+      } = this.state
 
-        return (
-            <div>
-                <TextInput
-                    label="First Name" 
-                    placeholder="Enter first name" 
-                    value="Timothy Wenhold" 
-                    dark
-                />
-                <TextInput
-                    label="Last Name" 
-                    placeholder="Enter last name" 
-                    dark  
-                />
-                <TextInput
-                    label="Phone Number"
-                    placeholder="Enter phone number"
-                    type="phone"
-                    dark
-                />
-                <TextInput
-                    label="Email Address"
-                    placeholder="Enter email address"
-                    type="email"
-                    dark
-                />
-                <TextInput
-                    label="Zip Code"
-                    placeholder="Enter zip code"
-                    type="number"
-                    dark
-                />
+      return (
+        <div>
+          <TextInput
+              dark
+              label="First Name"
+              placeholder="Enter first name"
+              value="Timothy Wenhold"
+          />
+          <TextInput
+              dark
+              label="Last Name"
+              placeholder="Enter last name"
+          />
+          <TextInput
+              dark
+              label="Phone Number"
+              placeholder="Enter phone number"
+              type="phone"
+          />
+          <TextInput
+              dark
+              label="Email Address"
+              placeholder="Enter email address"
+              type="email"
+          />
+          <TextInput
+              dark
+              label="Zip Code"
+              placeholder="Enter zip code"
+              type="number"
+          />
 
-                <br/>
-                <br/>
+          <br />
+          <br />
 
-                <Title dark>{`Event Handler Props`}</Title>
+          <Title dark>{'Event Handler Props'}</Title>
 
-                <br/>
-                <Caption>{`onChange`}</Caption>
+          <br />
+          <Caption>{'onChange'}</Caption>
 
-                <br/>
+          <br />
 
-                <TextInput
-                    label="First Name"
-                    onChange={handleOnChange}
-                    placeholder="Enter first name"
-                    value={firstName}
-                    dark
-                />
+          <TextInput
+              dark
+              label="First Name"
+              onChange={handleOnChange}
+              placeholder="Enter first name"
+              value={firstName}
+          />
 
-                <If condition={firstName !== ""}>
-                {`First name is: ${firstName}`}
-                </If>
-            </div>
-        )
+          <If condition={firstName !== ''}>
+            {`First name is: ${firstName}`}
+          </If>
+        </div>
+      )
     }
 }
-  
+
 export default TextInputDark

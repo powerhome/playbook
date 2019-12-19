@@ -1,27 +1,28 @@
 import React from 'react'
-import {Button} from '../../'
+import { Button } from '../../'
 
 const ButtonDefaultDark = () => (
-    <div>
-        <Button text="Button Primary" 
-                dark
-        />
-        <Button
-                text="Button Secondary"
-                variant="secondary"
-                dark
-        />
-        <Button
-                text="Button Link"
-                variant="link"
-                dark
-        />
-        <Button
-                text="Button Disabled"
-                disabled
-                dark
-        />
-    </div>
+  <div>
+    <Button
+        dark
+        text="Button Primary"
+    />
+    <Button
+        dark
+        text="Button Secondary"
+        variant="secondary"
+    />
+    <Button
+        dark
+        text="Button Link"
+        variant="link"
+    />
+    <Button
+        dark
+        disabled
+        text="Button Disabled"
+    />
+  </div>
 )
 
 export default ButtonDefaultDark

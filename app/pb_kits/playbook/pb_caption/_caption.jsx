@@ -2,6 +2,7 @@
 
 import React from 'react'
 import classnames from 'classnames'
+import { buildCss } from '../utilities/props'
 
 type CaptionProps = {
   className?: String,
@@ -15,23 +16,19 @@ type CaptionProps = {
 const Caption = ({
   className,
   children,
-  dark=false,
-  size='md',
-  tag='div',
+  dark = false,
+  size = 'md',
+  tag = 'div',
   text,
 }: CaptionProps) => {
-
   const Tag = `${tag}`
 
-  const css = classnames([
-    `pb_caption_kit` +
-    `_${size}` +
-    (dark === true ? '_dark' : ''),
-    className,
-  ])
+  const css = classnames(className, buildCss('pb_caption_kit', size, {
+    'dark': dark,
+  }))
 
   return (
-    <Tag className={css} >
+    <Tag className={css}>
       {text || children}
     </Tag>
   )

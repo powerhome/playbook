@@ -1,5 +1,4 @@
 /* @flow */
-/*eslint-disable react/no-multi-comp, flowtype/space-before-type-colon */
 
 import React from 'react'
 import classnames from 'classnames'
@@ -18,17 +17,25 @@ type PersonProps = {
 
 const Person = ({
   className,
-  dark=false,
+  dark = false,
   firstName,
   lastName,
 }: PersonProps) => {
-
   return (
     <div className={classnames('pb_person_kit', className)}>
-      <Body tag="span" dark={dark} className="pb_person_first">
-        {`${firstName}`}
+      <Body
+          className="pb_person_first"
+          dark={dark}
+          tag="span"
+      >
+        {firstName}
       </Body>
-      <Title text={` ${lastName}`} dark={dark} size={4} className="pb_person_first" />
+      <Title
+          className="pb_person_first"
+          dark={dark}
+          size={4}
+          text={` ${lastName}`}
+      />
     </div>
   )
 }

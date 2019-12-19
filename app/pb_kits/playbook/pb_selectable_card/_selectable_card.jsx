@@ -1,15 +1,15 @@
+/* @flow */
+
 import React from 'react'
 import classnames from 'classnames'
 import { Icon } from '../'
 
-import type {
-  InputCallback
-} from "../types"
+import { type InputCallback } from '../types'
 
 import {
   buildAriaProps,
-  buildDataProps,
   buildCss,
+  buildDataProps,
   noop,
 } from '../utilities/props'
 
@@ -29,7 +29,7 @@ type Props = {
   onChange: InputCallback,
   text?: String,
   value?: String
-};
+}
 
 const SelectableCard = ({
   aria = {},
@@ -40,7 +40,6 @@ const SelectableCard = ({
   data = {},
   disabled = false,
   icon = false,
-  id = null,
   inputId = null,
   multi = true,
   name,
@@ -51,7 +50,7 @@ const SelectableCard = ({
 }: Props) => {
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
-  
+
   const css = buildCss({
     'pb_selectable_card_kit': true,
     'checked': checked,
@@ -61,37 +60,43 @@ const SelectableCard = ({
   })
 
   const displayIcon = () => {
-    if(icon === true) {
+    if (icon === true) {
       return (
         <div className="pb_selectable_card_circle">
-          <Icon icon="check" fixedWidth/>
+          <Icon
+              fixedWidth
+              icon="check"
+          />
         </div>
       )
     }
   }
 
-  const inputType = multi === false ? "radio" : "checkbox"
+  const inputType = multi === false ? 'radio' : 'checkbox'
 
   const inputIdPresent = inputId !== null ? inputId : name
 
-
   return (
-    <div {...ariaProps} {...dataProps} className={classnames(css, className)}>
+    <div
+        {...ariaProps}
+        {...dataProps}
+        className={classnames(css, className)}
+    >
       <input
           {...props}
-          name={name}
-          value={value}
-          id={inputIdPresent}
-          type={inputType}
           checked={checked}
           disabled={disabled}
+          id={inputIdPresent}
+          name={name}
           onChange={onChange}
+          type={inputType}
+          value={value}
       />
       <label htmlFor={inputIdPresent}>
         { text || children }
         {displayIcon()}
       </label>
     </div>
-  );
-};
-export default SelectableCard;
+  )
+}
+export default SelectableCard

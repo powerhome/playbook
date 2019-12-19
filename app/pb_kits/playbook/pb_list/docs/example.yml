@@ -12,3 +12,4 @@ examples:
   - list_dark_xpadding: Dark Horizontal Padding
   react:
   - list_default: Default
+  - list_dark: Dark

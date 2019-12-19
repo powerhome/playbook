@@ -1,20 +1,29 @@
-import React from "react"
-import {StatChange} from "../../"
+import React from 'react'
+import { StatChange } from '../../'
 
-function StatChangeDefault() {
+const StatChangeDefault = () => {
   return (
     <div>
-      <StatChange change="increase" value="28.4" />
+      <StatChange
+          change="increase"
+          value="28.4"
+      />
 
-      <br/>
+      <br />
 
-      <StatChange change="decrease" value={6.1} />
+      <StatChange
+          change="decrease"
+          value={6.1}
+      />
 
-      <br/>
+      <br />
 
-      <StatChange change="neutral" value={98} />
+      <StatChange
+          change="neutral"
+          value={98}
+      />
     </div>
   )
 }
 
-export default StatChangeDefault;
+export default StatChangeDefault

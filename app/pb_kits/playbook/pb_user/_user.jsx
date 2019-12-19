@@ -1,12 +1,11 @@
 /* @flow */
 
-import React from 'react';
-import classnames from 'classnames';
+import React from 'react'
 
 import {
-  Title,
+  Avatar,
   Body,
-  Avatar
+  Title,
 } from '../'
 
 type UserProps = {
@@ -22,60 +21,35 @@ type UserProps = {
   avatarUrl?: String,
 }
 
-const userSizes = {
-  sm: 4,
-  md: 4,
-  lg: 3,
-}
+const User = ({
+  name = '',
+  territory = '',
+  title = '',
+  align = 'left',
+  orientation = 'horizontal',
+  size = 'sm',
+  avatar = false,
+  avatarUrl,
+}: UserProps) => (
+  <div className={`pb_user_kit_${align}_${orientation}_${size}`}>
+    <If condition={avatar || avatarUrl}>
+      <Avatar
+          imageUrl={avatarUrl}
+          name={name}
+          size={size}
+      />
+    </If>
 
-const avatarSizes = {
-  sm: 'sm',
-  md: 'md',
-  lg: 'xl',
-}
+    <div className="content_wrapper">
+      <Title
+          size={size == 'lg' ? 3 : 4}
+          text={name}
+      />
+      <Body color="light">
+        {territory == '' ? title : `${territory} • ${title}`}
+      </Body>
+    </div>
+  </div>
+)
 
-const User = (props: UserProps) => {
-  const {
-    name='Anna Black',
-    territory='',
-    title='',
-    align='left',
-    orientation='horizontal',
-    size='sm',
-    avatar=false,
-    avatarUrl,
-  } = props 
-
-  const print_avatar = (avatar, avatarUrl) => {
-    if (avatar == true | avatarUrl != null ) {
-      return (
-        <Avatar name={name} size={avatarSizes[size]} image_url={avatarUrl}/>
-      )
-    }
-  }
-
-  const print_details = (territory="") => {
-    if (territory !== "") {
-      return (
-        <Body color='light'>{`${territory} • ${title}`}</Body>
-      )
-    }
-    else {
-      return (
-        <Body color='light'>{`${title}`}</Body>
-      )
-    }
-  }
-
-  return (
-    <div className={`pb_user_kit_${align}_${orientation}_${size}`}>
-      {print_avatar(avatar, avatarUrl)}
-      <div className="content_wrapper">
-        <Title size={userSizes[size]} text={`${name}`}/>
-        {print_details(territory)}
-      </div>
-    </div> 
-  )
-}
-
-export default User;
+export default User

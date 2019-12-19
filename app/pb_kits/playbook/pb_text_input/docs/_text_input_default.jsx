@@ -1,17 +1,17 @@
-import React from "react"
+import React from 'react'
 import {
   Caption,
   TextInput,
   Title,
-} from "../../"
+} from '../../'
 
 class TextInputDefault extends React.Component {
   state = {
-    firstName: ""
+    firstName: '',
   }
 
   render() {
-    const handleOnChange = ({target}) => this.setState({firstName: target.value})
+    const handleOnChange = ({ target }) => this.setState({ firstName: target.value })
 
     const {
       firstName,
@@ -44,15 +44,15 @@ class TextInputDefault extends React.Component {
             type="number"
         />
 
-        <br/>
-        <br/>
+        <br />
+        <br />
 
-        <Title>{`Event Handler Props`}</Title>
+        <Title>{'Event Handler Props'}</Title>
 
-        <br/>
-        <Caption>{`onChange`}</Caption>
+        <br />
+        <Caption>{'onChange'}</Caption>
 
-        <br/>
+        <br />
 
         <TextInput
             label="First Name"
@@ -61,7 +61,7 @@ class TextInputDefault extends React.Component {
             value={firstName}
         />
 
-        <If condition={firstName !== ""}>
+        <If condition={firstName !== ''}>
           {`First name is: ${firstName}`}
         </If>
       </div>

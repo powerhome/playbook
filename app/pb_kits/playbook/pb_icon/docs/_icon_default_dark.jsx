@@ -1,12 +1,15 @@
-import React from "react"
-import {Icon} from "../../"
+import React from 'react'
+import { Icon } from '../../'
 
-function IconDefaultDark() {
+const IconDefaultDark = () => {
   return (
     <div>
-      <Icon icon="user" fixedWidth />
+      <Icon
+          fixedWidth
+          icon="user"
+      />
     </div>
   )
 }
 
-export default IconDefaultDark;
+export default IconDefaultDark

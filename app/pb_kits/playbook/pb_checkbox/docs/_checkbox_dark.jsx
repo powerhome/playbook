@@ -1,17 +1,17 @@
 import React from 'react'
-import {Checkbox} from '../../'
+import { Checkbox } from '../../'
 
-function CheckboxDark() {
+const CheckboxDark = () => {
   return (
     <div>
       <Checkbox
           dark
-          name='default name'
-          text='Checkbox label'
-          value='default value'
+          name="default name"
+          text="Checkbox label"
+          value="default value"
       />
     </div>
   )
 }
 
-export default CheckboxDark;
+export default CheckboxDark

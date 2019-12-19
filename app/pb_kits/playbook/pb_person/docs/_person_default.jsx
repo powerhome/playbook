@@ -1,13 +1,13 @@
-import React from "react"
-import {Person} from "../../"
+import React from 'react'
+import { Person } from '../../'
 
-function PersonDefault() {
+const PersonDefault = () => {
   return (
     <Person
-      firstName="Kyle"
-      lastName="Fadigan"
+        firstName="Kyle"
+        lastName="Fadigan"
     />
   )
 }
 
-export default PersonDefault;
+export default PersonDefault

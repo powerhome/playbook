@@ -1,10 +1,9 @@
-import React from "react"
-import {Time} from "../../"
+import React from 'react'
 
-function TimeDefault() {
+const TimeDefault = () => {
   return (
-    <h1>{`Coming Soon...`}</h1>
+    <h1>{'Coming Soon...'}</h1>
   )
 }
 
-export default TimeDefault;
+export default TimeDefault
