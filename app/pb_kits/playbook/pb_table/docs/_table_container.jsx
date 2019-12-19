@@ -4,8 +4,8 @@ import { Table } from '../../'
 const TableContainer = () => {
   return (
     <Table
-        size="md"
         container={false}
+        size="md"
     >
       <thead>
         <tr>
