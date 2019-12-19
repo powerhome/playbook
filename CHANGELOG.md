@@ -20,6 +20,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - JS kit `DateStacked`: added `left` as `align` option ([#518][] @rafbgarcia)
 - JS kit `Table`: add props `disableHover` and `singleLine` to replace their respective snake case versions ([#518][] @rafbgarcia)
 - JS Kit `IconValue`: Implement React version of Icon Value kit ([#521][] @drborges)
+- [Technical]: Run yarn autofix on pre commit hook ([#533][] @rafbgarcia)
 
 [#511]: https://github.com/powerhome/playbook/pull/511
 [#518]: https://github.com/powerhome/playbook/pull/518
@@ -28,6 +29,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [#528]: https://github.com/powerhome/playbook/pull/528
 [#529]: https://github.com/powerhome/playbook/pull/529
 [#521]: https://github.com/powerhome/playbook/pull/521
+[#533]: https://github.com/powerhome/playbook/pull/533
 
 ### Fixed
 
