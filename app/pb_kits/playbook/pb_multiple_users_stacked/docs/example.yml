@@ -1,0 +1,7 @@
+examples:
+
+  rails:
+  - multiple_users_stacked_default: Default
+
+  react:
+  - multiple_users_stacked_default: Default
