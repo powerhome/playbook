@@ -10,7 +10,7 @@ cluster=$4
 sops --decrypt $(pwd)/config/deploy/${environment}/secrets.yaml > $(pwd)/config/deploy/${environment}/secrets.dec.yaml
 krane render \
     --filenames=$(pwd)/config/deploy/templates \
-    --bindings "@$(pwd)/config/deploy/values.yaml" "@$(pwd)/config/deploy/${environment}/values.yaml" "@$(pwd)/config/deploy/${environment}/secrets.dec.yaml" "image_tag=${tag}" "environment=${environment}" \
+    --bindings="@$(pwd)/config/deploy/values.yaml" "@$(pwd)/config/deploy/${environment}/values.yaml" "@$(pwd)/config/deploy/${environment}/secrets.dec.yaml" "image_tag=${tag}" "environment=${environment}" \
     --current-sha=${tag} | krane deploy playbook-${environment} ${cluster} \
     --selector='app=playbook' \
     --verbose-log-prefix \
