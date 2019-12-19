@@ -8,7 +8,7 @@ module Playbook
       partial "pb_fixed_confirmation_toast/fixed_confirmation_toast"
 
       prop :status, type: Playbook::Props::Enum,
-                    values: %w[success error neutral],
+                    values: %w[success error neutral tip],
                     default: "neutral"
       prop :text, type: Playbook::Props::String
 
@@ -23,6 +23,8 @@ module Playbook
         when "error"
           "exclamation-triangle"
         when "neutral"
+          "info-circle"
+        when "tip"
           "info-circle"
         end
       end
