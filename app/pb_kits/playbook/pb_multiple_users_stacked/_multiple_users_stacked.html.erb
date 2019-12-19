@@ -1,16 +1,19 @@
 <%= content_tag(:div,
-    id: object.id,
-    data: object.data,
-    class: object.classname) do %>
-      <%= pb_rails("avatar", props: object.users[0].merge({size: "xs", classname: "pb_multiple_users_stacked_item"}) ) %>
+  id: object.id,
+  data: object.data,
+  class: object.classname) do %>
+  <%= pb_rails("avatar", props: object.users[0].merge({size: "xs", classname: "pb_multiple_users_stacked_item"}) ) %>
 
-  <% if !object.more_than_two %>
-      <%= pb_rails("avatar", props: object.users[1].merge({size: "xs", classname: "second_displayed"}) ) %>
+  <% unless object.only_one %>
+    <% if object.more_than_two %>
+      <%= pb_rails("badge", props: {
+        text: "+#{object.users.count - object.display_count}",
+        variant: "primary",
+        rounded: true,
+        classname: "pb_multiple_users_stacked_item second_item" }) %>
+    <% else %>
+      <%= pb_rails("avatar", props: object.users[1].merge({size: "xs", classname: "pb_multiple_users_stacked_item second_item"}) ) %>
+    <% end %>
   <% end %>
 
-    <% if object.more_than_two %>
-      <div class="pb_multiple_users_stacked_item multiple_users_stacked_badge">
-        <%= "+#{object.users.count - object.display_count}" %>
-      </div>
-    <% end %>
 <% end %>

@@ -5,69 +5,93 @@ import React from 'react'
 import classnames from 'classnames'
 
 import {
-  Avatar
+  Avatar,
+  Badge,
 } from '../'
+
+import {
+  buildAriaProps,
+  buildCss,
+  buildDataProps,
+} from '../utilities/props'
 
 type MultipleUsersStackedProps = {
   className?: String,
   id?: String,
+  data?: object,
+  aria?: object,
   users: Array<Object>,
 }
 
 const MultipleUsersStacked = ({
-    className,
-    id,
-    users
-  }: MultipleUsersStackedProps) => {
-
-  const multipleUsersStackedCss = 'pb_multiple_users_stacked_kit'
-
+  className,
+  id,
+  aria = {},
+  data = {},
+  users,
+}: MultipleUsersStackedProps) => {
   const moreThanTwo = users.length > 2
-
+  const onlyOne = users.length == 1
   const displayCount = () => {
     return moreThanTwo ? 1 : users.length
   }
+  const ariaProps = buildAriaProps(aria)
+  const dataProps = buildDataProps(data)
+  const css = buildCss({
+    'pb_multiple_users_stacked_kit': true,
+    'single': onlyOne,
+  })
 
-  const multipleUsersStacked = () => {
+  const firstUser = () => {
     return users.slice(0, 1).map((userObject, index) => {
       return (
         <Avatar
-          {...userObject}
-          key={index}
-          size="xs"
-          className="pb_multiple_users_stacked_item" />
+            {...userObject}
+            className="pb_multiple_users_stacked_item"
+            key={index}
+            size="xs"
+        />
       )
     })
   }
 
-  const displaySecond = () => {
-      if( moreThanTwo === false ) {
-    return users.slice(1, 2).map((userObject, index) => {
-      return (
-        <Avatar
-          {...userObject}
-          key={index}
-          size="xs"
-          className="second_displayed" />
-      )
-    })
-  }
+  const secondUser = () => {
+    if (moreThanTwo === false) {
+      return users.slice(1, 2).map((userObject, index) => {
+        return (
+          <Avatar
+              {...userObject}
+              className="pb_multiple_users_stacked_item second_item"
+              key={index}
+              size="xs"
+          />
+        )
+      })
+    }
   }
 
   const plusUsers = () => {
-    if( moreThanTwo === true ) {
+    if (moreThanTwo === true) {
       return (
-        <div className="pb_multiple_users_stacked_item multiple_users_stacked_badge">
-          {`+${users.length - displayCount()}`}
-        </div>
+        <Badge
+            className="pb_multiple_users_stacked_item second_item"
+            rounded
+            text={`+${users.length - displayCount()}`}
+            variant="primary"
+        />
       )
     }
   }
 
   return (
-    <div id={id} className={classnames(multipleUsersStackedCss, className)}>
-      {multipleUsersStacked()}
-      {displaySecond()}
+    <div
+        {...ariaProps}
+        {...dataProps}
+        className={classnames(css, className)}
+        id={id}
+    >
+      {firstUser()}
+      {secondUser()}
       {plusUsers()}
     </div>
   )

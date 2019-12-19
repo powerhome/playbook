@@ -1,56 +1,57 @@
 @import "../tokens/colors";
-@import "../utilities/colors";
+@import "../tokens/border_radius";
 @import "../tokens/opacity";
-
-$pb_multiple_users_stacked_overlap: -15px;
-$pb_multiple_users_stacked_border_size: 1px;
-$pb_multiple_users_stacked_size: 18px;
+@import "../pb_avatar/avatar";
 
 [class^=pb_multiple_users_stacked_kit] {
+  $container_size: map-get($avatar-sizes, "xs");
+  $overlap: -15px;
+  $border_size: 1px;
+  $stacked_size: 18px;
+  $max_to_display: 1, 2;
   display: inline-flex;
-
-  .multiple_users_stacked_badge {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: $pb_multiple_users_stacked_size;
-    height: $pb_multiple_users_stacked_size;
-    border-radius: ($pb_multiple_users_stacked_size/2) + 2;
-    background: tint($primary, 90%);
-    border: $pb_multiple_users_stacked_border_size solid $white;
-    color: $primary;
-    font-weight: $bold;
-    font-size: $font_smallest - 1;
-    margin-top: 10px;
-  }
-
-  .second_displayed{
-    margin-top: 10px;
-    margin-left: -20px;
-    .avatar_wrapper {
-      border: $pb_multiple_users_stacked_border_size solid $white;
-      margin-left: 5px;
-      height: $pb_multiple_users_stacked_size;
-      width: $pb_multiple_users_stacked_size;
-
-    }
-  }
-
+  width: $container_size;
+  height: $container_size;
+  flex-basis: $container_size;
+  position: relative;
+  flex-shrink: 0;
+  flex-grow: 0;
   .pb_multiple_users_stacked_item {
-    margin-left: $pb_multiple_users_stacked_overlap;
-
+    height: $stacked_size;
+    width: $stacked_size;
     .avatar_wrapper {
-      border: $pb_multiple_users_stacked_border_size solid $white;
-      margin-left: 5px;
-      height: $pb_multiple_users_stacked_size;
-      width: $pb_multiple_users_stacked_size;
-
-    }
-
-    @each $item in [1, 2] {
-      &:nth-child(#{$item}) {
-        z-index: #{$item - 1};
+      border: $border_size solid $white;
+      height: $stacked_size;
+      width: $stacked_size;
+      img {
+        z-index: 0;
       }
     }
+  }
+  &[class*=_single] .pb_multiple_users_stacked_item {
+    width: $container_size;
+    height: $container_size;
+    .avatar_wrapper {
+      width: $container_size;
+      height: $container_size;
+    }
+  }
+  .second_item {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    z-index: 2;
+    background: tint($primary, 90%);
+    border-radius: $border_rad_mega;
+    .avatar_wrapper {
+      border: $border_size solid $white;
+      height: $stacked_size;
+      width: $stacked_size;
+
+    }
+  }
+  .stacked_item .avatar_wrapper::before {
+    font-size: 0;
+    color: transparent;
   }
 }
