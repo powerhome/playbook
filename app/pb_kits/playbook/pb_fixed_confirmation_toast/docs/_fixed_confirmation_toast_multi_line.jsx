@@ -1,7 +1,7 @@
 import React from 'react'
 import { FixedConfirmationToast } from '../../'
 
-function FixedConfirmationToastMultiLine() {
+const FixedConfirmationToastMultiLine = () => {
   return (
     <div>
       <FixedConfirmationToast
