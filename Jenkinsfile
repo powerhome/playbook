@@ -8,7 +8,7 @@ library identifier: 'ci-kubed@v3.0.0', retriever: modernSCM([
 
 def application = "playbook"
 def cluster = "APP-HQ"
-def deployerVersion = "master-c94bf553840b07335fbb8904d5a9963dd5ffce00-336"
+def deployerVersion = "master-e4c01702624ac34f2663f894fbdb68a369b09629-588"
 def resources = [
   requestCpu: '1',
   limitCpu: '2',

@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    playbook_ui (3.1.0)
+    playbook_ui (3.2.0)
       actionpack (>= 5.1.6, < 6.0)
       actionview (>= 5.1.6, < 6.0)
       activesupport (>= 5.1.6, < 6.0)
@@ -81,7 +81,7 @@ GEM
     parallel (1.17.0)
     parser (2.6.3.0)
       ast (~> 2.4.0)
-    rack (2.0.6)
+    rack (2.0.8)
     rack-proxy (0.6.5)
       rack
     rack-test (1.1.0)

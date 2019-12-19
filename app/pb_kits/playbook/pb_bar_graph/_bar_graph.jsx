@@ -2,7 +2,7 @@
 
 import React from 'react'
 
-import { pbChart } from "../"
+import { pbChart } from '../'
 
 type BarGraphProps = {
   axisTitle: String,
@@ -15,6 +15,7 @@ type BarGraphProps = {
   pointStart: Number,
   subTitle?: String,
   title: String,
+  type?: String,
 }
 
 export default class BarGraph extends React.Component<BarGraphProps> {

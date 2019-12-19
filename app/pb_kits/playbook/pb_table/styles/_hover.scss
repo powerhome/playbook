@@ -8,7 +8,6 @@ $transition-speed: 0.2s;
   &.table-lg {
     &:not(.no-hover) {
       border-collapse: collapse;
-
       tbody {
         tr {
           box-shadow: 0 0 0 $white;
@@ -50,6 +49,7 @@ $transition-speed: 0.2s;
         }
       }
       &.table-card {
+        border-collapse: separate;
         tbody {
           tr {
             td {

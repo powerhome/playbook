@@ -1,5 +1,4 @@
 /* @flow */
-/*eslint-disable react/no-multi-comp, flowtype/space-before-type-colon */
 
 import React from 'react'
 
@@ -17,16 +16,16 @@ type LoadingInlineProps = {
 }
 
 const LoadingInline = ({
-  align='left',
-  className,
-  dark=false,
-  data,
-  id
+  align = 'left',
 }: LoadingInlineProps) => (
   <div className={`pb_loading_inline_kit_${align}`}>
     <Body color="light">
-      <Icon fixedWidth pulse icon="spinner" />&nbsp;
-      {`Loading`}
+      <Icon
+          fixedWidth
+          icon="spinner"
+          pulse
+      />
+      {' Loading'}
     </Body>
   </div>
 )

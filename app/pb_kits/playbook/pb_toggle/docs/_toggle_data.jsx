@@ -1,13 +1,13 @@
 // @flow
 
-import React from "react"
-import { Toggle } from "../.."
+import React from 'react'
+import { Toggle } from '../..'
 
 const Example = () => {
   return (
     <Toggle
         checked
-        data={{ id: "the-toggle", expanded: true }}
+        data={{ id: 'the-toggle', expanded: true }}
     />
   )
 }

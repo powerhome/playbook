@@ -1,16 +1,16 @@
 import React from 'react'
-import {Checkbox} from '../../'
+import { Checkbox } from '../../'
 
-function CheckboxDefault() {
+const CheckboxDefault = () => {
   return (
     <div>
       <Checkbox
-          name='default name'
-          text='Checkbox label'
-          value='default value'
+          name="default name"
+          text="Checkbox label"
+          value="default value"
       />
     </div>
   )
 }
 
-export default CheckboxDefault;
+export default CheckboxDefault

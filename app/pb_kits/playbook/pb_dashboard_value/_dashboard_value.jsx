@@ -25,10 +25,9 @@ type DashboardValueProps = {
 }
 
 const dashboardValueCSS = ({
-  align='left',
+  align = 'left',
 
 }: DashboardValueProps) => {
-
   const alignStyle = align !== '' ? `_${align}` : ''
 
   return 'pb_dashboard_value_kit' + alignStyle
@@ -36,7 +35,6 @@ const dashboardValueCSS = ({
 
 const DashboardValue = (props: DashboardValueProps) => {
   const {
-    align='left',
     className,
     id,
     statChange,
@@ -45,15 +43,24 @@ const DashboardValue = (props: DashboardValueProps) => {
   } = props
 
   return (
-    <div id={id} className={classnames(dashboardValueCSS(props), className)}>
+    <div
+        className={classnames(dashboardValueCSS(props), className)}
+        id={id}
+    >
       <If condition={statLabel}>
         <Body color="light">{statLabel}</Body>
       </If>
       <If condition={statValue}>
-        <StatValue value={statValue.value} unit={statValue.unit} />
+        <StatValue
+            unit={statValue.unit}
+            value={statValue.value}
+        />
       </If>
       <If condition={statChange}>
-        <StatChange change={statChange.change} value={statChange.value} />
+        <StatChange
+            change={statChange.change}
+            value={statChange.value}
+        />
       </If>
     </div>
   )

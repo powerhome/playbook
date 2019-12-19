@@ -16,9 +16,9 @@ type CardPropTypes = {
 }
 
 const cardCSS = ({
-  highlight={},
-  selected=false,
-  shadow='none'
+  highlight = {},
+  selected = false,
+  shadow = 'none',
 }: CardPropTypes) => {
   let css = 'pb_card_kit'
   css += highlight.position ? `_highlight_${highlight.position}` : ''
@@ -28,7 +28,7 @@ const cardCSS = ({
   return css
 }
 
-const bodyCSS = ({padding='md'}: CardPropTypes) => {
+const bodyCSS = ({ padding = 'md' }: CardPropTypes) => {
   let css = 'pb_card_body_kit'
   css += `_${padding}`
   return css
@@ -37,7 +37,7 @@ const bodyCSS = ({padding='md'}: CardPropTypes) => {
 const Card = (props: CardPropTypes) => {
   const {
     children,
-    className
+    className,
   } = props
 
   return (

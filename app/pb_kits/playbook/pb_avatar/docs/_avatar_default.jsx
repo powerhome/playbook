@@ -1,7 +1,7 @@
-import React from "react"
-import { Avatar } from "../../"
+import React from 'react'
+import { Avatar } from '../../'
 
-function AvatarDefault() {
+const AvatarDefault = () => {
   return (
     <div>
       <Avatar
@@ -10,28 +10,28 @@ function AvatarDefault() {
           size="xs"
           status="online"
       />
-      <br/>
+      <br />
       <Avatar
           imageUrl="https://randomuser.me/api/portraits/men/44.jpg"
           name="Terry Johnson"
           size="sm"
           status="online"
       />
-      <br/>
+      <br />
       <Avatar
           imageUrl="https://randomuser.me/api/portraits/men/44.jpg"
           name="Terry Johnson"
           size="md"
           status="away"
       />
-      <br/>
+      <br />
       <Avatar
           imageUrl="https://randomuser.me/api/portraits/men/44.jpg"
           name="Terry Johnson"
           size="lg"
           status="offline"
       />
-      <br/>
+      <br />
       <Avatar
           imageUrl="https://randomuser.me/api/portraits/men/44.jpg"
           name="Terry Johnson"
@@ -42,4 +42,4 @@ function AvatarDefault() {
   )
 }
 
-export default AvatarDefault;
+export default AvatarDefault

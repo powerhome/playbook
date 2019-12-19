@@ -1,24 +1,24 @@
-import React from "react"
-import DistributionBar from "../_distribution_bar.jsx"
+import React from 'react'
+import DistributionBar from '../_distribution_bar.jsx'
 
-function DistributionBarDefault() {
+const DistributionBarDefault = () => {
   return (
     <React.Fragment>
       <div>
         <DistributionBar
-          widths={[1,2,3,4,5,3,3,7]}
+            widths={[1, 2, 3, 4, 5, 3, 3, 7]}
         />
       </div>
-      <br/>
-      <br/>
+      <br />
+      <br />
       <div>
         <DistributionBar
-          size='sm'
-          widths={[1,2,3,4,5,3,3,7]}
+            size="sm"
+            widths={[1, 2, 3, 4, 5, 3, 3, 7]}
         />
       </div>
     </React.Fragment>
   )
 }
 
-export default DistributionBarDefault;
+export default DistributionBarDefault

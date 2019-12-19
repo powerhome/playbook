@@ -1,37 +1,37 @@
-import React from "react"
-import {PersonContact} from "../../"
+import React from 'react'
+import { PersonContact } from '../../'
 
-function PersonContactMultiple() {
+const PersonContactMultiple = () => {
   return (
     <div>
       <PersonContact
-        firstName="Harvey"
-        lastName="Walters"
-        contacts={[
+          contacts={[
           {
-            contactType: "email",
-            contactValue: "email@example.com",
+            contactType: 'email',
+            contactValue: 'email@example.com',
           },
           {
-            contactValue: "5555555555",
+            contactValue: '5555555555',
           },
           {
-            contactType: "work",
-            contactValue: "3245627482",
-          }
+            contactType: 'work',
+            contactValue: '3245627482',
+          },
         ]}
+          firstName="Harvey"
+          lastName="Walters"
       />
       <PersonContact
-        firstName="Brenda"
-        lastName="Walters"
-        contacts={[
+          contacts={[
           {
-            contactValue: "5555555555",
-          }
+            contactValue: '5555555555',
+          },
         ]}
+          firstName="Brenda"
+          lastName="Walters"
       />
     </div>
   )
 }
 
-export default PersonContactMultiple;
+export default PersonContactMultiple

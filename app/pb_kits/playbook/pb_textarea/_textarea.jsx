@@ -1,7 +1,9 @@
+/* @flow */
+
 import React from 'react'
 import classnames from 'classnames'
-import { Caption } from "../"
-import { InputCallback } from '../types.js'
+import { Caption } from '../'
+import { type InputCallback } from '../types.js'
 
 type TextareaProps = {
   className?: String,
@@ -16,45 +18,38 @@ type TextareaProps = {
   name?: String,
   rows?: Number,
   dark?: Boolean,
-  onChange?: InputCallback
+  onChange?: InputCallback,
 }
 
-const textareaCSS =({
-    dark=false,
+const Textarea = ({
+  className,
+  children,
+  label,
+  onChange = () => {},
+  placeholder,
+  value,
+  dark = false,
+  rows = 4,
+  name,
 }: TextareaProps) => {
-  const themeStyle = dark === true ? '_dark' : ''
-  return 'pb_textarea_kit' + themeStyle
-}
+  const textareaClass = `pb_textarea_kit${dark ? '_dark' : ''}`
 
-const Textarea = ( props: TextareaProps) => {
-
-  const {
-    className,
-    children,
-    label,
-    placeholder,
-    value,
-    dark=false,
-    rows=4,
-    name,
-    onChange = () => {}
-  } = props
-
-  const textarea_input = `${textareaCSS(props)}`
-  
   return (
-    <div className={classnames(textareaCSS(props), className)}>
-      <Caption text={label} dark={dark}/>
+    <div className={classnames(textareaClass, className)}>
+      <Caption
+          dark={dark}
+          text={label}
+      />
       <If condition={children}>
         {children}
-      <Else/>
-        <textarea 
-          className={textarea_input} 
-          name={name} 
-          onChange={onChange} 
-          placeholder={placeholder} 
-          rows={rows} 
-          value={value} 
+        <Else />
+        <textarea
+            className={textareaClass}
+            name={name}
+            onChange={onChange}
+            placeholder={placeholder}
+            rows={rows}
+            value={value}
         />
       </If>
     </div>

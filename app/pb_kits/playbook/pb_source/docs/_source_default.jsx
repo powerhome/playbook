@@ -1,10 +1,9 @@
-import React from "react"
-import {Source} from "../../"
+import React from 'react'
 
-function SourceDefault() {
+const SourceDefault = () => {
   return (
-    <h1>{`Coming Soon...`}</h1>
+    <h1>{'Coming Soon...'}</h1>
   )
 }
 
-export default SourceDefault;
+export default SourceDefault

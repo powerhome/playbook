@@ -1,15 +1,24 @@
 import React from 'react'
-import {Nav} from '../../'
+import { Nav } from '../../'
 import NavItem from '../_item.jsx'
 
-function BlockNav() {
+const BlockNav = () => {
   return (
-    <Nav title='Title example' link='#' orientation='vertical'>
-        <NavItem link='#' active={true}>{`Active Nav Item using text prop`}</NavItem>
-        <NavItem link='#'>{`Nav Item using text prop`}</NavItem>
-        <NavItem link='#'>{`Nav Item using text prop`}</NavItem>
+    <Nav
+        link="#"
+        orientation="vertical"
+        title="Title example"
+    >
+      <NavItem
+          active
+          link="#"
+      >
+        {'Active Nav Item using text prop'}
+      </NavItem>
+      <NavItem link="#">{'Nav Item using text prop'}</NavItem>
+      <NavItem link="#">{'Nav Item using text prop'}</NavItem>
     </Nav>
   )
 }
 
-export default BlockNav;
+export default BlockNav

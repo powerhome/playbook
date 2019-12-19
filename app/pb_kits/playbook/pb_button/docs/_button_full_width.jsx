@@ -1,13 +1,13 @@
 import React from 'react'
-import {Button} from '../../'
+import { Button } from '../../'
 
 const ButtonFullWidth = () => (
-    <div>
-        <Button
-                text="Button Full Width"
-                fullWidth
-        />
-    </div>
+  <div>
+    <Button
+        fullWidth
+        text="Button Full Width"
+    />
+  </div>
 )
 
 export default ButtonFullWidth

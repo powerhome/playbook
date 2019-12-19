@@ -1,61 +1,51 @@
-import React from 'react';
-import classnames from 'classnames';
-import PropTypes from "prop-types";
+/* @flow */
 
-const propTypes = {
-  children: PropTypes.oneOfType([
-      PropTypes.arrayOf(PropTypes.node),
-      PropTypes.node
-  ]),
-  className: PropTypes.string,
-  container: PropTypes.bool,
-  dark: PropTypes.bool,
-  disable_hover: PropTypes.bool,
-  single_line: PropTypes.bool,
-  size: PropTypes.oneOf(["sm", "md", "lg"])
-};
+import React, { type Node } from 'react'
+import classnames from 'classnames'
 
-const defaultProps = {
-  container: true,
-  dark: false,
-  disable_hover: false,
-  single_line: false,
-  size: "sm"
-};
-
-class Table extends React.Component {
-  render() {
-    const {
-      children,
-      className,
-      container,
-      dark,
-      disable_hover,
-      single_line,
-      size
-    } = this.props;
-
-    const css = classnames([
-      'pb_table',
-      `table-${size}`,
-      container ? `table-card` : null,
-      dark ? `table-dark` : null,
-      single_line ? `single-line` : null,
-      disable_hover ? `no-hover` : null,
-      className,
-    ])
-
-    return (
-      <div>
-        <table className={css}>
-          {children}
-        </table>
-      </div>
-    )
-  }
+type TableProps = {
+  children: Array<Node> | Node,
+  className: string,
+  container: boolean,
+  dark: boolean,
+  dataTable: boolean,
+  // @deprecated disable_hover since version 3.2.0, please use `disableHover`
+  disable_hover: boolean, // eslint-disable-line camelcase
+  disableHover: boolean,
+  // @deprecated single_line since version 3.2.0, please use `singleLine`
+  single_line: boolean, // eslint-disable-line camelcase
+  singleLine: boolean,
+  size: "sm" | "md" | "lg",
 }
 
-Table.propTypes = propTypes;
-Table.defaultProps = defaultProps;
+const Table = ({
+  children,
+  className,
+  container = true,
+  dark = false,
+  dataTable = false,
+  disable_hover = false, // eslint-disable-line camelcase
+  disableHover = false,
+  single_line = false, // eslint-disable-line camelcase
+  singleLine = false,
+  size = 'sm',
+}: TableProps) => {
+  disableHover = disableHover || disable_hover // eslint-disable-line camelcase
+  singleLine = singleLine || single_line // eslint-disable-line camelcase
 
-export default Table;
+  const classes = classnames(className, 'pb_table', `table-${size}`, {
+    'table-card': container,
+    'table-dark': dark,
+    'data_table': dataTable,
+    'single-line': singleLine,
+    'no-hover': disableHover,
+  })
+
+  return (
+    <table className={classes}>
+      {children}
+    </table>
+  )
+}
+
+export default Table

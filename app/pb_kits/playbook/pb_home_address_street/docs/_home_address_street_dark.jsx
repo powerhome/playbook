@@ -1,7 +1,7 @@
-import React from "react"
-import {HomeAddressStreet} from "../../"
+import React from 'react'
+import { HomeAddressStreet } from '../../'
 
-function HomeAddressStreetDark() {
+const HomeAddressStreetDark = () => {
   return (
     <HomeAddressStreet
         address="70 Prospect Ave"
@@ -10,10 +10,10 @@ function HomeAddressStreetDark() {
         dark
         homeId={8250263}
         state="PA"
-        zipcode="19382"
         territory="PHL"
+        zipcode="19382"
     />
   )
 }
 
-export default HomeAddressStreetDark;
+export default HomeAddressStreetDark

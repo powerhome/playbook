@@ -4,7 +4,6 @@
   @each $name, $value in $cell-pad-list {
     &.#{$name} {
       width: 100%;
-
       thead {
         tr {
           th {
@@ -34,6 +33,16 @@
               padding-right: $cell-pad-endcap;
             }
           }
+        }
+      }
+      &.data_table {
+        thead tr th {
+          padding-top: $cell-pad-sm;
+          padding-bottom: $cell-pad-sm;
+        }
+        tbody tr td {
+          padding-top: $cell-pad-sm;
+          padding-bottom: $cell-pad-sm;
         }
       }
     }

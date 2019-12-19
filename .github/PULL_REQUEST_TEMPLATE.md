@@ -1,10 +1,9 @@
 #### Runway Ticket URL
 
 
-#### Beaking Changes
+#### Breaking Changes
 
 _Please reflect if your changes may break in some way (changes like removing/renaming props are examples of breaking changes)_
-
 
 #### How to Ninja test this (screenshots are really helpful)
 

@@ -1,20 +1,20 @@
 #!/bin/bash
 
+set -o pipefail
+
 environment=$1
 revision=$2
 tag=$3
 cluster=$4
 
 sops --decrypt $(pwd)/config/deploy/${environment}/secrets.yaml > $(pwd)/config/deploy/${environment}/secrets.dec.yaml
-REVISION=${revision} kubernetes-deploy \
+krane render \
+    --filenames=$(pwd)/config/deploy/templates \
+    --bindings="@$(pwd)/config/deploy/values.yaml" "@$(pwd)/config/deploy/${environment}/values.yaml" "@$(pwd)/config/deploy/${environment}/secrets.dec.yaml" "image_tag=${tag}" "environment=${environment}" \
+    --current-sha=${tag} | krane deploy playbook-${environment} ${cluster} \
     --selector='app=playbook' \
-    --template-dir=$(pwd)/config/deploy/templates \
-    --bindings="@$(pwd)/config/deploy/values.yaml" \
-    --bindings="@$(pwd)/config/deploy/${environment}/values.yaml" \
-    --bindings="@$(pwd)/config/deploy/${environment}/secrets.dec.yaml" \
-    --bindings="image_tag=${tag}" \
-    --bindings="environment=${environment}" \
-    playbook-${environment} ${cluster}
+    --verbose-log-prefix \
+    --stdin
 
 deploy_exit=$?
 rm $(pwd)/config/deploy/${environment}/secrets.dec.yaml

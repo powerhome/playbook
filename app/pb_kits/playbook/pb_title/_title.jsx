@@ -13,12 +13,12 @@ type TitleProps = {
 }
 
 const tagCSS = ({
-  dark=false,
-  size=3,
+  dark = false,
+  size = 3,
 }) => {
   let css = ''
 
-  css += `_${size}` 
+  css += `_${size}`
   css += dark === true ? '_dark' : ''
 
   return css
@@ -29,11 +29,11 @@ const Title = (props: TitleProps) => {
     className,
     children,
     text,
-    tag='h3',
+    tag = 'h3',
   } = props
 
   const Tag = `${tag}`
-  
+
   return (
     <Tag className={classnames(`pb_title_kit${tagCSS(props)}`, className)}>
       { text || children }

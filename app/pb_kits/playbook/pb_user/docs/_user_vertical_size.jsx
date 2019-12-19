@@ -1,37 +1,39 @@
-import React from "react"
-import {User} from "../../"
+import React from 'react'
+import { User } from '../../'
 
-function UserVerticalSize() {
+const UserVerticalSize = () => {
   return (
     <div>
       <User
-          name='Anna Black'
-          title='Remodeling Consultant'
-          orientation='vertical'
-          align='center'
-          size='sm'
-          avatarUrl='https://randomuser.me/api/portraits/women/44.jpg'
+          align="center"
+          avatarUrl="https://randomuser.me/api/portraits/women/44.jpg"
+          name="Anna Black"
+          orientation="vertical"
+          size="sm"
+          title="Remodeling Consultant"
       />
-      <br/><br/>
+      <br />
+      <br />
       <User
-          name='Anna Black'
-          title='Remodeling Consultant'
-          orientation='vertical'
-          align='center'
-          size='md'
-          avatarUrl='https://randomuser.me/api/portraits/women/44.jpg'
+          align="center"
+          avatarUrl="https://randomuser.me/api/portraits/women/44.jpg"
+          name="Anna Black"
+          orientation="vertical"
+          size="md"
+          title="Remodeling Consultant"
       />
-      <br/><br/>
+      <br />
+      <br />
       <User
-          name='Anna Black'
-          title='Remodeling Consultant'
-          orientation='vertical'
-          align='center'
-          size='lg'
-          avatarUrl='https://randomuser.me/api/portraits/women/44.jpg'
+          align="center"
+          avatarUrl="https://randomuser.me/api/portraits/women/44.jpg"
+          name="Anna Black"
+          orientation="vertical"
+          size="lg"
+          title="Remodeling Consultant"
       />
-    </div> 
+    </div>
   )
 }
 
-export default UserVerticalSize;
+export default UserVerticalSize

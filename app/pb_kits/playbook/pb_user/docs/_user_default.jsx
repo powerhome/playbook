@@ -1,46 +1,46 @@
-import React from "react"
-import {User} from "../../"
+import React from 'react'
+import { User } from '../../'
 
-function UserDefault() {
+const UserDefault = () => {
   return (
-    <div class="pb--doc-demo-row">
+    <div className="pb--doc-demo-row">
 
       <div>
         <User
-          name='Anna Black'
-          title='Remodeling Consultant'
-          orientation="vertical"
-          align="center"
-          size='lg'
-          avatarUrl="https://randomuser.me/api/portraits/women/44.jpg"
+            align="center"
+            avatarUrl="https://randomuser.me/api/portraits/women/44.jpg"
+            name="Anna Black"
+            orientation="vertical"
+            size="lg"
+            title="Remodeling Consultant"
         />
       </div>
 
       <div>
         <User
-          name='Anna Black'
-          title='Remodeling Consultant'
-          orientation="horizontal"
-          align="left"
-          avatarUrl="https://randomuser.me/api/portraits/women/44.jpg"
+            align="left"
+            avatarUrl="https://randomuser.me/api/portraits/women/44.jpg"
+            name="Anna Black"
+            orientation="horizontal"
+            title="Remodeling Consultant"
         />
       </div>
 
       <div>
         <User
-          name='Anna Black'
-          orientation="horizontal"
-          align="left"
-          avatarUrl="https://randomuser.me/api/portraits/women/44.jpg"
+            align="left"
+            avatarUrl="https://randomuser.me/api/portraits/women/44.jpg"
+            name="Anna Black"
+            orientation="horizontal"
         />
 
-        <br/>
+        <br />
 
         <User
-          name='Anna Black'
-          orientation="horizontal"
-          align="left"
-          avatar={true}
+            align="left"
+            avatar
+            name="Anna Black"
+            orientation="horizontal"
         />
       </div>
 
@@ -48,4 +48,4 @@ function UserDefault() {
   )
 }
 
-export default UserDefault;
+export default UserDefault

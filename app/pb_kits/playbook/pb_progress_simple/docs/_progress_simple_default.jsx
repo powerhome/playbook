@@ -1,10 +1,9 @@
-import React from "react"
-import {ProgressSimple} from "../../"
+import React from 'react'
 
-function ProgressSimpleDefault() {
+const ProgressSimpleDefault = () => {
   return (
-    <h1>{`Coming Soon...`}</h1>
+    <h1>{'Coming Soon...'}</h1>
   )
 }
 
-export default ProgressSimpleDefault;
+export default ProgressSimpleDefault

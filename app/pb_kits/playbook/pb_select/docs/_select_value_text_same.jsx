@@ -1,13 +1,13 @@
 import React from 'react'
-import {Select} from '../../'
+import { Select } from '../../'
 
-function SelectValueTextSame() {
+const SelectValueTextSame = () => {
   return (
     <div>
       <Select
-        label='Favorite Sport'
-        name='sports'
-        options={[
+          label="Favorite Sport"
+          name="sports"
+          options={[
           {
             value: 'Football',
           },

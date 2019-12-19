@@ -1,21 +1,57 @@
-import React from 'react';
-import PropTypes from "prop-types";
+/* @flow */
 
-const propTypes = {
-  className: PropTypes.string,
-  id: PropTypes.string
-};
+import React from 'react'
+import classnames from 'classnames'
+import {
+  Body,
+  Icon,
+} from '../'
 
-class IconValue extends React.Component {
-  render() {
-    return (
-      <div className="pb_icon_value">
-        <span>ICON VALUE CONTENT</span>
-      </div>
-    )
-  }
+import {
+  buildAriaProps,
+  buildCss,
+  buildDataProps,
+} from '../utilities/props'
+
+type IconValueProps = {
+  align?: 'left' | 'center' | 'right',
+  aria?: object,
+  className?: string,
+  data?: object,
+  icon: string,
+  id?: number,
+  text: string,
 }
 
-IconValue.propTypes = propTypes;
+const IconValue = ({
+  align = 'left',
+  aria = {},
+  className,
+  data = {},
+  icon,
+  id,
+  text,
+}: IconValueProps) => {
+  const ariaProps = buildAriaProps(aria)
+  const dataProps = buildDataProps(data)
+  const pbCss = buildCss('pb_icon_value_kit', align)
 
-export default IconValue;
+  return (
+    <div
+        {...ariaProps}
+        {...dataProps}
+        className={classnames(className, pbCss)}
+        id={id}
+    >
+      <Body color="light">
+        <Icon
+            fixedWidth
+            icon={icon}
+        />
+        {text}
+      </Body>
+    </div>
+  )
+}
+
+export default IconValue

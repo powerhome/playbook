@@ -1,8 +1,8 @@
 /* @flow */
-/*eslint-disable react/no-multi-comp, flowtype/space-before-type-colon */
 
 import React from 'react'
 import classnames from 'classnames'
+import { buildCss } from '../utilities/props'
 
 type BadgeProps = {
   className?: String,
@@ -18,18 +18,19 @@ const Badge = ({
   id,
   text,
   variant = 'neutral',
-  rounded = false
+  rounded = false,
 }: BadgeProps) => {
-  const roundedClass = rounded === true ? "rounded" : ""
-  const darkClass = dark === true ? "dark" : ""
-  const css = classnames([
-    `pb_badge_kit_${variant}_${roundedClass}_${darkClass}`,
-    className,
-  ])
+  const css = classnames(className, buildCss('pb_badge_kit', variant, {
+    'rounded': rounded,
+    'dark': dark,
+  }))
 
   return (
-    <div id={id} className={css}>
-        <span>{text}</span>
+    <div
+        className={css}
+        id={id}
+    >
+      <span>{text}</span>
     </div>
   )
 }

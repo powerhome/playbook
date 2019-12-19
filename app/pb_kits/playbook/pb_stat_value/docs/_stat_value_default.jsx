@@ -1,10 +1,10 @@
-import React from "react"
-import {StatValue} from "../../"
+import React from 'react'
+import { StatValue } from '../../'
 
-function StatValueDefault() {
+const StatValueDefault = () => {
   return (
     <StatValue value={1048} />
   )
 }
 
-export default StatValueDefault;
+export default StatValueDefault

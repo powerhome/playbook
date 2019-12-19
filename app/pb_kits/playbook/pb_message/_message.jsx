@@ -1,10 +1,8 @@
-import React from 'react';
+/* @flow */
 
-import {
-  Body,
-  Caption,
-  Avatar,
-} from '../'
+import React from 'react'
+
+import { Avatar, Body, Caption } from '../'
 
 type MessageProps = {
   avatarName?: String,
@@ -15,64 +13,38 @@ type MessageProps = {
   timestamp?: String,
 }
 
-const print_label = (label) => {
-  if ( label != null ) {
-    return (
-      <Caption>{`${label}`}</Caption>
-    )
-  }
-}
-
-const print_timestamp = (timestamp) => {
-  if ( timestamp != null ) {
-    return(
-      <Caption size='xs'>{`${timestamp}`}</Caption>
-    )
-  }
-}
-
-const Message = (props: MessageProps) => {
-  const {
-    avatarName='',
-    avatarUrl='',
-    label='',
-    message='',
-    timestamp='',
-    avatarStatus=null
-  } = props
-  
-  const print_avatar = (avatarName, avatarUrl, avatarStatus) => {
-    if ( avatarUrl !== '' && avatarName !== '' ) {
-      return (
-        <Avatar name={avatarName} size='sm' imageUrl={avatarUrl} status={avatarStatus}/>
-      )
-    }
-    if ( avatarUrl === '' && avatarName !== '' ) {
-      return (
-        <Avatar name={avatarName} size='sm' status={avatarStatus}/>
-      )
-    }
-  }
-
-  const messageCSS = ( avatarUrl, avatarName ) => {
-    if (avatarUrl != '' || avatarName != '') {
-      return 'pb_message_kit_avatar'
-    }
-    else {
-      return 'pb_message_kit'
-    }
-  }
+const Message = ({
+  avatarName = '',
+  avatarUrl = '',
+  label = '',
+  message = '',
+  timestamp = '',
+  avatarStatus = null,
+}: MessageProps) => {
+  const shouldDisplayAvatar = avatarUrl || avatarName
+  const classes = shouldDisplayAvatar ? 'pb_message_kit_avatar' : 'pb_message_kit'
 
   return (
-    <div className={messageCSS(avatarName, avatarUrl)}>
-      {print_avatar(avatarName, avatarUrl, avatarStatus)}
-      <div class="content_wrapper">
-        {print_label(label)}
+    <div className={classes}>
+      <If condition={shouldDisplayAvatar}>
+        <Avatar
+            imageUrl={avatarUrl}
+            name={avatarName}
+            size="sm"
+            status={avatarStatus}
+        />
+      </If>
+      <div className="content_wrapper">
+        <If condition={label}>
+          <Caption>{label}</Caption>
+        </If>
         <Body>{message}</Body>
-        {print_timestamp(timestamp)}
+        <If condition={timestamp}>
+          <Caption size="xs">{timestamp}</Caption>
+        </If>
       </div>
     </div>
   )
 }
 
-export default Message;
+export default Message
