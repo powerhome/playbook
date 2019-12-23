@@ -7,7 +7,7 @@ type CardPropTypes = {
   children: Array<React.ReactNode> | React.ReactNode,
   className?: String,
   highlight?: {
-    position?: String,
+    position?: 'side' | 'top',
     color?: String
   },
   padding?: 'none' | 'xs' | 'sm' | 'md' | 'lg' | 'xl',
