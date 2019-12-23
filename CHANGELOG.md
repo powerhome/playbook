@@ -10,8 +10,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 - Fixed broken eslint ref + removed unused file ([#540][] @jasoncypret)
+- Swap implementation of highlight position values for Card Kit ([#536][] @drborges)
 
 [#540]: https://github.com/powerhome/playbook/pull/540
+[#536]: https://github.com/powerhome/playbook/pull/536
 
 
 ## [3.2.0] 2019-12-19
