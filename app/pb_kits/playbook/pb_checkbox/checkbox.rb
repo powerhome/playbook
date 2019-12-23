@@ -4,6 +4,10 @@ module Playbook
   module PbCheckbox
     class Checkbox
       include Playbook::Props
+      include ActionView::Helpers::FormTagHelper
+      include ActionView::Context
+
+
 
       partial "pb_checkbox/checkbox"
 
@@ -19,6 +23,10 @@ module Playbook
 
       def classname
         generate_classname("pb_checkbox_kit", dark_class, checked_class)
+      end
+
+      def input
+        check_box_tag(name, value, checked)
       end
 
     private

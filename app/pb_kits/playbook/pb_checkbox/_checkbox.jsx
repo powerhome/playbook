@@ -10,7 +10,6 @@ type CheckboxProps = {
   name: String,
   text: String,
   value: String,
-
 }
 
 const Checkbox = ({
@@ -19,7 +18,6 @@ const Checkbox = ({
   name = '',
   text = '',
   value = '',
-
 }: CheckboxProps) => {
   const bodyClassName = {
     'pb_checkbox_label': true,
@@ -33,13 +31,13 @@ const Checkbox = ({
         (dark === true ? '_dark' : '')
       }
     >
-      {' '}
       <input
           defaultChecked={checked}
           name={name}
           type="checkbox"
           value={value}
       />
+
       <span className="pb_checkbox_checkmark">
         <Icon
             className="check_icon"
