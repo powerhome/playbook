@@ -80,7 +80,7 @@ $pb_card_highlight_size: 4px;
     overflow: hidden;
   }
 
-  &[class*=_highlight_side] {
+  &[class*=_highlight_top] {
     @each $color_name, $color_value in $pb_card_highlight_colors {
       &[class*=_highlight_#{$color_name}]::before {
         @include pb_card_highlight(100%, $pb_card_highlight_size, $color_value);
@@ -88,7 +88,7 @@ $pb_card_highlight_size: 4px;
     }
   }
 
-  &[class*=_highlight_top] {
+  &[class*=_highlight_side] {
     @each $color_name, $color_value in $pb_card_highlight_colors {
       &[class*=_highlight_#{$color_name}]::before {
         @include pb_card_highlight($pb_card_highlight_size, 100%, $color_value);
