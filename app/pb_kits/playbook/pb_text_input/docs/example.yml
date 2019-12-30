@@ -2,7 +2,9 @@ examples:
   rails:
   - text_input_default: Default
   - text_input_dark: Dark
+  - text_input_custom: Custom
   react:
   - text_input_default: Default
   - text_input_dark: Dark
+  - text_input_custom: Custom
 
