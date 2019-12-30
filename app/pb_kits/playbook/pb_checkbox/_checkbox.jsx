@@ -11,6 +11,7 @@ type CheckboxProps = {
   text: String,
   value: String,
   children: Node,
+  onChange: (Boolean) => void,
 }
 
 const Checkbox = ({
@@ -20,6 +21,7 @@ const Checkbox = ({
   text = '',
   value = '',
   children = null,
+  onChange = () => {},
 
 }: CheckboxProps) => {
   const bodyClassName = {
@@ -40,6 +42,7 @@ const Checkbox = ({
         <input
             defaultChecked={checked}
             name={name}
+            onChange={onChange}
             type="checkbox"
             value={value}
         />
