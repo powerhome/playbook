@@ -58,9 +58,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - JS kit `HomeAddressStreet`: fixed address and city not appearing beucase `titleize` function inside `utilities/text.js` wasn't returning anything ([#518][] @rafbgarcia)
 - JS kit `HomeAddressStreet`: passed `dark` prop to Title's ([#518][] @rafbgarcia)
 - JS kit `Hashtag`: use `span` instead of `div` to match rails' style ([#518][] @rafbgarcia)
+- Rails/JS kit `Checkbox` : can take optional block ([#538][] @kre8sions)
 
 [#518]: https://github.com/powerhome/playbook/pull/518
-
+[#538]: https://github.com/powerhome/playbook/pull/538
 ### Deprecated
 
 - JS kit `Table`: deprecate props `disable_hover` and `single_line`, please use their camelcase versions ([#518][] @rafbgarcia)
