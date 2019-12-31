@@ -5,7 +5,23 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## Unreleased
+## [3.3.0] Unreleased
+
+### Added
+- Radio Button Kit ([#516][] @evalouderback)
+
+### Fixed
+
+- Fixed broken eslint ref + removed unused file ([#540][] @jasoncypret)
+- Add className support to React version of icon circle kit ([#537][] @drborges)
+
+
+[#516]: https://github.com/powerhome/playbook/pull/516
+[#540]: https://github.com/powerhome/playbook/pull/540
+[#537]: https://github.com/powerhome/playbook/pull/537
+
+
+## [3.2.0] 2019-12-19
 
 ### Added
 
@@ -21,6 +37,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - JS kit `Table`: add props `disableHover` and `singleLine` to replace their respective snake case versions ([#518][] @rafbgarcia)
 - JS Kit `IconValue`: Implement React version of Icon Value kit ([#521][] @drborges)
 - [Technical]: Run yarn autofix on pre commit hook ([#533][] @rafbgarcia)
+- Added Gradient & Multi Line to Fixed Confirmation Toast ([#534][] @megantrimble)
+- New Multiple User Stacked Kit ([#517][] @evalouderback)
 
 [#511]: https://github.com/powerhome/playbook/pull/511
 [#518]: https://github.com/powerhome/playbook/pull/518
@@ -30,6 +48,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [#529]: https://github.com/powerhome/playbook/pull/529
 [#521]: https://github.com/powerhome/playbook/pull/521
 [#533]: https://github.com/powerhome/playbook/pull/533
+[#534]: https://github.com/powerhome/playbook/pull/534
+[#517]: https://github.com/powerhome/playbook/pull/517
 
 ### Fixed
 
@@ -62,7 +82,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Introduce Pull Request Template ([#508][] @rafbgarcia)
 - Extend Form Kit to use Textarea Kit for textarea form fields ([#506][] @roxannecojocariu)
 - Nav React Kit ([#513][] @christinaatai)
-- Radio Button Kit ([#516][] @evalouderback)
 
 [#498]: https://github.com/powerhome/playbook/pull/498
 [#439]: https://github.com/powerhome/playbook/pull/439
@@ -70,7 +89,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [#508]: https://github.com/powerhome/playbook/pull/508
 [#506]: https://github.com/powerhome/playbook/pull/506
 [#513]: https://github.com/powerhome/playbook/pull/513
-[#516]: https://github.com/powerhome/playbook/pull/516
 
 ### Changed
 
