@@ -31,5 +31,4 @@ const IconCircle = ({
   )
 }
 
-
 export default IconCircle
