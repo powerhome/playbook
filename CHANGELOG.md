@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### Fixed
+
+- Fixed broken eslint ref + removed unused file ([#540][] @jasoncypret)
+
+[#540]: https://github.com/powerhome/playbook/pull/540
+
 
 ## [3.2.0] 2019-12-19
 
