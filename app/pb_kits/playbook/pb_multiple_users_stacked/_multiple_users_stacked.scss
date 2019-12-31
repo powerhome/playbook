@@ -1,0 +1,57 @@
+@import "../tokens/colors";
+@import "../tokens/border_radius";
+@import "../tokens/opacity";
+@import "../pb_avatar/avatar";
+
+[class^=pb_multiple_users_stacked_kit] {
+  $container_size: map-get($avatar-sizes, "xs");
+  $overlap: -15px;
+  $border_size: 1px;
+  $stacked_size: 18px;
+  $max_to_display: 1, 2;
+  display: inline-flex;
+  width: $container_size;
+  height: $container_size;
+  flex-basis: $container_size;
+  position: relative;
+  flex-shrink: 0;
+  flex-grow: 0;
+  .pb_multiple_users_stacked_item {
+    height: $stacked_size;
+    width: $stacked_size;
+    .avatar_wrapper {
+      border: $border_size solid $white;
+      height: $stacked_size;
+      width: $stacked_size;
+      img {
+        z-index: 0;
+      }
+    }
+  }
+  &[class*=_single] .pb_multiple_users_stacked_item {
+    width: $container_size;
+    height: $container_size;
+    .avatar_wrapper {
+      width: $container_size;
+      height: $container_size;
+    }
+  }
+  .second_item {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    z-index: 2;
+    background: tint($primary, 90%);
+    border-radius: $border_rad_mega;
+    .avatar_wrapper {
+      border: $border_size solid $white;
+      height: $stacked_size;
+      width: $stacked_size;
+
+    }
+  }
+  .stacked_item .avatar_wrapper::before {
+    font-size: 0;
+    color: transparent;
+  }
+}

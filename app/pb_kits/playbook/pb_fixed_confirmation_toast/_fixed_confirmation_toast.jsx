@@ -9,13 +9,15 @@ const iconMap = {
   'success': 'check',
   'error': 'exclamation-triangle',
   'neutral': 'info-circle',
+  'tip': 'info-circle',
+
 }
 
 type FixedConfirmationToastProps = {
   className?: String,
   data?: String,
   id?: String,
-  status?: 'success' | 'error' | 'neutral',
+  status?: 'success' | 'error' | 'neutral' | 'tip',
   text: String,
 }
 
