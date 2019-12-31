@@ -1,24 +1,31 @@
 /* @flow */
 
 import React from 'react'
-import { Icon } from '../'
+import classnames from 'classnames'
 
-const IconCircleProps = {
-  className: String,
-  icon: String,
-  id: String,
-  size: String,
-  variant: String,
+import { Icon } from '../'
+import { buildCss } from '../utilities/props'
+
+type IconCircleProps = {
+  className?: string,
+  icon: string,
+  size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl',
+  variant?: 'default' | 'royal' | 'blue' | 'purple' | 'teal' | 'red' | 'yellow' | 'green',
 }
 
 const IconCircle = ({
+  className,
   icon,
   size = 'md',
   variant = 'default',
-}: IconCircleProps) => (
-  <div className={`pb_icon_circle_kit_${size}_${variant}`}>
-    <Icon icon={icon} />
-  </div>
-)
+}: IconCircleProps) => {
+  const css = buildCss('pb_icon_circle_kit', size, variant)
+
+  return (
+    <div className={classnames(className, css)}>
+      <Icon icon={icon} />
+    </div>
+  )
+}
 
 export default IconCircle

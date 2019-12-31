@@ -10,8 +10,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 - Fixed broken eslint ref + removed unused file ([#540][] @jasoncypret)
+- Add className support to React version of icon circle kit ([#537][] @drborges)
 
 [#540]: https://github.com/powerhome/playbook/pull/540
+[#537]: https://github.com/powerhome/playbook/pull/537
 
 
 ## [3.2.0] 2019-12-19
