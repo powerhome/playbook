@@ -14,41 +14,50 @@ type RadioProps = {
   checked?: Boolean,
   dark?: Boolean,
   text: String,
+  children?: Node,
+  onChange: (Boolean)=>void,
 }
 
 const Radio = (props: RadioProps) => {
   const {
-    checked=false,
+    checked = false,
     children,
     className,
-    dark=false,
+    dark = false,
     data,
     id,
     label,
     name,
     value,
     text,
+    onChange = () => {},
   } = props
 
   return (
     <label
-        className={`pb_radio_kit` + (dark === true ? '_dark' : '')}
+        className={'pb_radio_kit' + (dark === true ? '_dark ' : ' ') + className}
         htmlFor={id}
     >
-      <input
-          defaultChecked={checked}
-          name={name}
-          type='radio'
-          value={value}
-      />
-      <span class="pb_radio_button"/>
       <If condition={children}>
         {children}
-      <Else/>
-        <Body text={label} dark={dark} />
+        <Else />
+        <input
+            data={data}
+            defaultChecked={checked}
+            name={name}
+            onChange={onChange}
+            text={text}
+            type="radio"
+            value={value}
+        />
       </If>
+      <span className="pb_radio_button" />
+      <Body
+          dark={dark}
+          text={label}
+      />
     </label>
-  );
-};
+  )
+}
 
 export default Radio

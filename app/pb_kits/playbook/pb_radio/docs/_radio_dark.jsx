@@ -1,28 +1,28 @@
 import React from 'react'
-import {Radio} from '../../'
+import { Radio } from '../../'
 
-function RadioDark() {
+const RadioDark = () => {
   return (
     <div>
       <Radio
           dark
-          label='Power'
-          name='Group1'
-          value='Power'
+          label="Power"
+          name="Group1"
+          value="Power"
       />
-    <br/>
+      <br />
       <Radio
           dark
-          label='Nitro'
-          name='Group1'
-          value='Nitro'
+          label="Nitro"
+          name="Group1"
+          value="Nitro"
       />
-      <br/>
+      <br />
       <Radio
           dark
-          label='Google'
-          name='Group1'
-          value='Google'
+          label="Google"
+          name="Group1"
+          value="Google"
       />
     </div>
   )

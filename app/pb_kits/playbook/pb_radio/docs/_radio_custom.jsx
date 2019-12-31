@@ -1,19 +1,41 @@
 import React from 'react'
-import {Radio} from '../../'
+import { Radio } from '../../'
 
-function RadioCustom() {
+const RadioCustom = () => {
   return (
     <div>
-      <Radio className="my_custom_class" text="power" name="group 1" value="power">
-        {`Power`}
+      <Radio
+          className="my_custom_class"
+          label="Custom Power"
+      >
+        <input
+            defaultChecked
+            name="custom"
+            type="radio"
+            value="power"
+        />
       </Radio>
-      <br/>
-      <Radio className="my_custom_class" text="nitro" name="group 1" value="nitro">
-        {`Nitro`}
+      <br />
+      <Radio
+          className="my_custom_class"
+          label="Custom Nitro"
+      >
+        <input
+            name="custom"
+            type="radio"
+            value="nitro"
+        />
       </Radio>
-      <br/>
-      <Radio className="my_custom_class" text="google" name="group 1" value="google">
-        {`Google`}
+      <br />
+      <Radio
+          className="my_custom_class"
+          label="Custom Google"
+      >
+        <input
+            name="custom"
+            type="radio"
+            value="google"
+        />
       </Radio>
     </div>
   )
