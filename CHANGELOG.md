@@ -7,7 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 
 
-## [3.3.0] Unreleased
+## [3.3.0] 2019-1-2
 
 ### Added
 - Radio Button Kit ([#516][] @evalouderback)
@@ -19,12 +19,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - JS kit `Caption`: swapped the position of classname in classnames to stop style bleed in other components ([#539][] @kre8sions)
 - Fixed broken eslint ref + removed unused file ([#540][] @jasoncypret)
 
-### Deprecated
-
 ### Changed
 - Swap implementation of highlight position values for Card Kit ([#536][] @drborges)
-
-### Removed
 
 
 [#516]: https://github.com/powerhome/playbook/pull/516
