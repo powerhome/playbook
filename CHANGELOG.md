@@ -5,9 +5,20 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## Unreleased
+## [3.3.0] Unreleased
+
+### Added
+- Rails/JS kit `TextInput`: added optional blocks to accept custom inputs ([#539][] @kre8sions)
 
 ### Fixed
+- JS kit `Caption`: swapped the position of classname in classnames to stop style bleed in other components ([#539][] @kre8sions)
+
+### Deprecated
+### Changed
+### Removed
+
+[#539]: https://github.com/powerhome/playbook/pull/539
+
 
 - Fixed broken eslint ref + removed unused file ([#540][] @jasoncypret)
 - Swap implementation of highlight position values for Card Kit ([#536][] @drborges)
@@ -16,6 +27,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [#540]: https://github.com/powerhome/playbook/pull/540
 [#536]: https://github.com/powerhome/playbook/pull/536
 [#537]: https://github.com/powerhome/playbook/pull/537
+
 
 
 ## [3.2.0] 2019-12-19
