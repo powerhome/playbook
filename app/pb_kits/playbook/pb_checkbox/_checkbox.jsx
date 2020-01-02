@@ -10,7 +10,8 @@ type CheckboxProps = {
   name: String,
   text: String,
   value: String,
-
+  children: Node,
+  onChange: (Boolean) => void,
 }
 
 const Checkbox = ({
@@ -19,6 +20,8 @@ const Checkbox = ({
   name = '',
   text = '',
   value = '',
+  children = null,
+  onChange = () => {},
 
 }: CheckboxProps) => {
   const bodyClassName = {
@@ -33,13 +36,18 @@ const Checkbox = ({
         (dark === true ? '_dark' : '')
       }
     >
-      {' '}
-      <input
-          defaultChecked={checked}
-          name={name}
-          type="checkbox"
-          value={value}
-      />
+      <If condition={children}>
+        {children}
+        <Else />
+        <input
+            defaultChecked={checked}
+            name={name}
+            onChange={onChange}
+            type="checkbox"
+            value={value}
+        />
+      </If>
+
       <span className="pb_checkbox_checkmark">
         <Icon
             className="check_icon"

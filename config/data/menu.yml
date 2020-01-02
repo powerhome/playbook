@@ -40,6 +40,7 @@ kits:
   - pill
   - progress_pills
   - progress_simple
+  - radio
   - section_separator
   - select
   - selectable_card

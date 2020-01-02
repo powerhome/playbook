@@ -3,11 +3,13 @@
 import React from 'react'
 import classnames from 'classnames'
 
+import { buildCss } from '../utilities/props'
+
 type CardPropTypes = {
   children: Array<React.ReactNode> | React.ReactNode,
   className?: String,
   highlight?: {
-    position?: String,
+    position?: 'side' | 'top',
     color?: String
   },
   padding?: 'none' | 'xs' | 'sm' | 'md' | 'lg' | 'xl',
@@ -15,35 +17,26 @@ type CardPropTypes = {
   shadow?: 'none' | 'shallow' | 'default' | 'deep' | 'deeper' | 'deepest',
 }
 
-const cardCSS = ({
+const Card = ({
+  children,
+  className,
   highlight = {},
+  padding = 'md',
   selected = false,
   shadow = 'none',
 }: CardPropTypes) => {
-  let css = 'pb_card_kit'
-  css += highlight.position ? `_highlight_${highlight.position}` : ''
-  css += highlight.color ? `_highlight_${highlight.color}` : ''
-  css += selected ? '_selected' : '_deselected'
-  css += `_shadow_${shadow}`
-  return css
-}
-
-const bodyCSS = ({ padding = 'md' }: CardPropTypes) => {
-  let css = 'pb_card_body_kit'
-  css += `_${padding}`
-  return css
-}
-
-const Card = (props: CardPropTypes) => {
-  const {
-    children,
-    className,
-  } = props
+  const bodyCSS = buildCss('pb_card_body_kit', padding)
+  const cardCss = buildCss('pb_card_kit', `shadow_${shadow}`, {
+    selected,
+    deselected: !selected,
+    [`highlight_${highlight.position}`]: highlight.position,
+    [`highlight_${highlight.color}`]: highlight.color,
+  })
 
   return (
-    <div className={classnames(cardCSS(props), className)}>
-      <div className={bodyCSS(props)}>
-        { children }
+    <div className={classnames(cardCss, className)}>
+      <div className={bodyCSS}>
+        {children}
       </div>
     </div>
   )

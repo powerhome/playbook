@@ -52,6 +52,7 @@ import * as PersonContact from 'pb_person_contact/docs'
 import * as Pill from 'pb_pill/docs'
 import * as ProgressPills from 'pb_progress_pills/docs'
 import * as ProgressSimple from 'pb_progress_simple/docs'
+import * as Radio from 'pb_radio/docs'
 import * as SectionSeparator from 'pb_section_separator/docs'
 import * as Select from 'pb_select/docs'
 import * as SelectableCard from 'pb_selectable_card/docs'
@@ -111,6 +112,7 @@ WebpackerReact.setup(PersonContact)
 WebpackerReact.setup(Pill)
 WebpackerReact.setup(ProgressPills)
 WebpackerReact.setup(ProgressSimple)
+WebpackerReact.setup(Radio)
 WebpackerReact.setup(SectionSeparator)
 WebpackerReact.setup(Select)
 WebpackerReact.setup(SelectableCard)
