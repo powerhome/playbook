@@ -10,7 +10,6 @@ const iconMap = {
   'error': 'exclamation-triangle',
   'neutral': 'info-circle',
   'tip': 'info-circle',
-
 }
 
 type FixedConfirmationToastProps = {

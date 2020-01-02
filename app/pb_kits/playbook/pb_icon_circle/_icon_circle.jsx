@@ -12,7 +12,6 @@ type IconCircleProps = {
   icon: string,
   size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl',
   variant?: 'default' | 'royal' | 'blue' | 'purple' | 'teal' | 'red' | 'yellow' | 'green',
-
 }
 
 const IconCircle = ({
@@ -20,7 +19,6 @@ const IconCircle = ({
   icon,
   size = 'md',
   variant = 'default',
-
 }: IconCircleProps) => {
   const css = buildCss('pb_icon_circle_kit', size, variant)
 
