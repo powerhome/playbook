@@ -6,22 +6,33 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 
+
 ## [3.3.0] Unreleased
 
 ### Added
 - Radio Button Kit ([#516][] @evalouderback)
-
+- Add className support to React version of icon circle kit ([#537][] @drborges)
+- Rails/JS kit `Checkbox` : can take optional block ([#538][] @kre8sions)
+- Rails/JS kit `TextInput`: added optional blocks to accept custom inputs ([#539][] @kre8sions)
 
 ### Fixed
-
+- JS kit `Caption`: swapped the position of classname in classnames to stop style bleed in other components ([#539][] @kre8sions)
 - Fixed broken eslint ref + removed unused file ([#540][] @jasoncypret)
-- Add className support to React version of icon circle kit ([#537][] @drborges)
+
+### Deprecated
+
+### Changed
+- Swap implementation of highlight position values for Card Kit ([#536][] @drborges)
+
+### Removed
 
 
 [#516]: https://github.com/powerhome/playbook/pull/516
 [#540]: https://github.com/powerhome/playbook/pull/540
+[#536]: https://github.com/powerhome/playbook/pull/536
 [#537]: https://github.com/powerhome/playbook/pull/537
-
+[#538]: https://github.com/powerhome/playbook/pull/538
+[#539]: https://github.com/powerhome/playbook/pull/539
 
 ## [3.2.0] 2019-12-19
 

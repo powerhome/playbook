@@ -23,9 +23,9 @@ const Caption = ({
 }: CaptionProps) => {
   const Tag = `${tag}`
 
-  const css = classnames(className, buildCss('pb_caption_kit', size, {
+  const css = classnames(buildCss('pb_caption_kit', size, {
     'dark': dark,
-  }))
+  }), className)
 
   return (
     <Tag className={css}>

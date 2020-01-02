@@ -3,7 +3,9 @@ examples:
     - checkbox_default: Default
     - checkbox_checked: Load as checked
     - checkbox_dark: Dark
+    - checkbox_custom: Custom Checkbox
 
   react:
   - checkbox_default: Default
   - checkbox_dark: Dark
+  - checkbox_custom: Custom Checkbox
