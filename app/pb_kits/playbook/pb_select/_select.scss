@@ -33,6 +33,7 @@
     color: $text_lt_default;
     font-size: ($font_large + 3);
     transform: translateY(-50%);
+    pointer-events: none;
   }
   &[class*=_dark] {
     select {
