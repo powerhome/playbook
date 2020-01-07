@@ -12,8 +12,8 @@ const RadioDark = () => {
       />
       <br />
       <Radio
+          checked
           dark
-          defaultChecked
           label="Nitro"
           name="Group1"
           value="Nitro"

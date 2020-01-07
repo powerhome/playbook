@@ -11,7 +11,7 @@ type RadioProps = {
   label: String,
   name: String,
   value: String,
-  defaultChecked?: Boolean,
+  checked?: Boolean,
   dark?: Boolean,
   text: String,
   children?: Node,
@@ -20,7 +20,7 @@ type RadioProps = {
 
 const Radio = (props: RadioProps) => {
   const {
-    defaultChecked = false,
+    checked = false,
     children,
     className,
     dark = false,
@@ -42,7 +42,7 @@ const Radio = (props: RadioProps) => {
         {children}
         <Else />
         <input
-            checked={defaultChecked}
+            checked={checked}
             data={data}
             name={name}
             onChange={onChange}

@@ -20,7 +20,7 @@ const RadioCustom = () => {
           label="Custom Nitro"
       >
         <input
-            defaultChecked
+            checked
             name="custom"
             type="radio"
             value="nitro"

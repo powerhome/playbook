@@ -11,7 +11,7 @@ const RadioDefault = () => {
       />
       <br />
       <Radio
-          defaultChecked
+          checked
           label="Nitro"
           name="Group2"
           value="Nitro"
