@@ -8,7 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [3.4.0] Unreleased
 
 ### Fixed
-- Fixed radio bug in docs and checked prop in react ([#546][] @kre8sions) 
+- Fixed radio bug in docs ([#546][] @kre8sions) 
 
 
 [#546]: https://github.com/powerhome/playbook/pull/546
