@@ -1,8 +1,12 @@
 <%= content_tag(:div, class: object.list_classname) do %>
   <%= content_tag(:"#{object.ordered_class}",
-      id: object.id,
-      data: object.data,
-      class: object.classname) do %>
+                  id: object.id,
+                  data: object.data,
+                  class: object.classname,
+                  role: object.role,
+                  aria: object.aria,
+                  tabindex: object.tabindex
+    ) do %>
       <%= capture(&object.children) %>
   <% end %>
 <% end %>
