@@ -103,8 +103,8 @@ $border_colors: (
 );
 
 // Shadow colors ----------------------
-$shadow_light:        rgba($royal, $opacity_1);
-$shadow_dark:         rgba($slate, $opacity_1);
+$shadow_light:        rgba(#3C6AAC, $opacity_2);
+$shadow_dark:         rgba(#3C6AAC, $opacity_2);
 $shadow_colors: (
   shadow_light:       $shadow_light,
   shadow_dark:        $shadow_dark
