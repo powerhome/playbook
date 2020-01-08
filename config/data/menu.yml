@@ -27,6 +27,7 @@ kits:
   - label_pill
   - label_value
   - layout
+  - legend
   - line_graph
   - list
   - loading_inline

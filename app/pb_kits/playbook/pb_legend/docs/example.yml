@@ -1,0 +1,15 @@
+examples:
+  
+  rails:
+  - legend_default: Default
+  - legend_prefix: With Prefix Text
+  - legend_dark: Dark Mode
+  - legend_dark_prefix: Dark Mode with Prefix Text
+  
+  
+  react:
+  - legend_default: Default
+  - legend_prefix: With Prefix Text
+  - legend_dark: Dark Mode
+  - legend_dark_prefix: Dark Mode with Prefix Text
+  
