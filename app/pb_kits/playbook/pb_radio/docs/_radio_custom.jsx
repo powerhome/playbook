@@ -9,7 +9,6 @@ const RadioCustom = () => {
           label="Custom Power"
       >
         <input
-            defaultChecked
             name="custom"
             type="radio"
             value="power"
@@ -21,6 +20,7 @@ const RadioCustom = () => {
           label="Custom Nitro"
       >
         <input
+            checked
             name="custom"
             type="radio"
             value="nitro"

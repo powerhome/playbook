@@ -12,6 +12,7 @@ const RadioDark = () => {
       />
       <br />
       <Radio
+          checked
           dark
           label="Nitro"
           name="Group1"
