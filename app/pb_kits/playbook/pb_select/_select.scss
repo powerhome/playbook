@@ -16,6 +16,11 @@
     &:disabled ~ .pb_select_kit_caret {
       opacity: 0.5;
     }
+    color: transparent !important;
+    text-shadow: 0 0 0 $text_lt_default !important;
+  }
+  option {
+    color: $text_lt_default;
   }
   .pb_select_kit_label {
     margin-bottom: $space_xs;
@@ -33,6 +38,7 @@
     color: $text_lt_default;
     font-size: ($font_large + 3);
     transform: translateY(-50%);
+    pointer-events: none;
   }
   &[class*=_dark] {
     select {
