@@ -1,5 +1,10 @@
 # frozen_string_literal: true
 
+# DEPRECATION NOTICE - DO NOT USE Shadow Shallow and Shadow Default!
+# Shadow Options: Shallow and Default targed to be removed in release v4.0.0.
+# [https://github.com/powerhome/playbook/issues/550]
+# END DEPRECATION NOTICE
+
 module Playbook
   module PbCard
     class Card

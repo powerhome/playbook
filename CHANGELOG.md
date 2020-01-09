@@ -8,14 +8,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [3.4.0] Unreleased
 ### Fixed
 - Rails/JS Kit `Select`: fixed caret to trigger select menu removed black border on select options ([#548][] @kre8sions)
+- Fixed radio bug in docs ([#546][] @kre8sions)
 
-### Fixed
-- Fixed radio bug in docs ([#546][] @kre8sions) 
+### Changed
+- Shadow colors and sizes updated. Deprecation notice added. ([#551][] @megantrimble)
 
 
 [#546]: https://github.com/powerhome/playbook/pull/546
-
 [#548]: https://github.com/powerhome/playbook/pull/548
+[#551]: https://github.com/powerhome/playbook/pull/551
+
 ## [3.3.0] 2019-1-2
 
 ### Added
