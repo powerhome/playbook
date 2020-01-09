@@ -42,8 +42,8 @@ const Radio = (props: RadioProps) => {
         {children}
         <Else />
         <input
+            checked={checked}
             data={data}
-            defaultChecked={checked}
             name={name}
             onChange={onChange}
             text={text}
