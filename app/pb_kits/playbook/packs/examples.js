@@ -39,6 +39,7 @@ import * as image from 'pb_image/docs'
 import * as LabelPill from 'pb_label_pill/docs'
 import * as LabelValue from 'pb_label_value/docs'
 import * as layout from 'pb_layout/docs'
+import * as Legend from 'pb_legend/docs'
 import * as LineGraph from 'pb_line_graph/docs'
 import * as list from 'pb_list/docs'
 import * as LoadingInline from 'pb_loading_inline/docs'
@@ -99,6 +100,7 @@ WebpackerReact.setup(image)
 WebpackerReact.setup(LabelPill)
 WebpackerReact.setup(LabelValue)
 WebpackerReact.setup(layout)
+WebpackerReact.setup(Legend)
 WebpackerReact.setup(LineGraph)
 WebpackerReact.setup(list)
 WebpackerReact.setup(LoadingInline)

@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [3.4.0] Unreleased
+
+### Added
+- Legend Kit (Complete) [#549](https://github.com/powerhome/playbook/pull/549)
+
 ### Fixed
 - Rails/JS Kit `Select`: fixed caret to trigger select menu removed black border on select options ([#548][] @kre8sions)
 - Fixed radio bug in docs ([#546][] @kre8sions)

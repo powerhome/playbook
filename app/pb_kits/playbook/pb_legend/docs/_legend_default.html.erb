@@ -1,0 +1,5 @@
+<% labels = %W[Windows Doors Roofing Siding Solar Gutters Insulation Other] %>
+
+<% (1..7).each do |n, i| %>
+   <%= pb_rails("legend", props: { color: "data_#{n}", text: "#{labels[n]}" }) %> 
+<% end %>
