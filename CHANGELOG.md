@@ -11,7 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Fixed radio bug in docs ([#546][] @kre8sions)
 
 ### Changed
-- Shadow colors and sizes style updated. Deprecation notice added. ([#551][] @megantrimble)
+- Shadow colors and sizes updated. Deprecation notice added. ([#551][] @megantrimble)
 
 
 [#546]: https://github.com/powerhome/playbook/pull/546
