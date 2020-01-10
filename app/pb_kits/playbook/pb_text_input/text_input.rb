@@ -9,17 +9,26 @@ module Playbook
 
       prop :dark, type: Playbook::Props::Boolean,
                   default: false
+      prop :disabled, type: Playbook::Props::Boolean,
+                      default: false
+      prop :error
       prop :label
       prop :name
       prop :placeholder
-      prop :value
+      prop :required, type: Playbook::Props::Boolean,
+                      default: false
       prop :type, default: "text"
+      prop :value
 
       def classname
-        generate_classname("pb_text_input_kit", dark_class)
+        generate_classname("pb_text_input_kit", dark_class) + error_class
       end
 
-      private
+    private
+
+      def error_class
+        error ? " error" : ""
+      end
 
       def dark_class
         dark ? "dark" : nil
