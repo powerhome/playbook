@@ -42,5 +42,27 @@
         @include pb_textarea_focus_dark;
       }
     }
+
+    &.error {
+      .text_input_wrapper {
+        > input:first-child {
+          border-color: $error_dark;
+        }
+        [class*=pb_body_kit] {
+          color: $error_dark_body;
+        }
+      }
+    }
+  }
+
+  &.error {
+    .text_input_wrapper {
+      [class*=pb_body_kit] {
+        margin-top: $space_xs / 2;
+      }
+      > input:first-child {
+        border-color: $error;
+      }
+    }
   }
 }
