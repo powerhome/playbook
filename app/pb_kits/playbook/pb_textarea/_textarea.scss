@@ -17,6 +17,15 @@
     @include pb_textarea_focus_light;
   }
 
+  &.error {
+    [class*=pb_body_kit] {
+      margin-top: $space_xs / 2;
+    }
+    > textarea {
+      border-color: $error;
+    }
+  }
+
   &[class*=_dark] {
     textarea::placeholder {
       @include pb_body_light_dark;
@@ -26,6 +35,14 @@
     }
     textarea:focus {
       @include pb_textarea_focus_dark;
+    }
+    &.error {
+      > textarea {
+        border-color: $error_dark;
+      }
+      [class*=pb_body_kit] {
+        color: $error_dark_body;
+      }
     }
   }
 }
