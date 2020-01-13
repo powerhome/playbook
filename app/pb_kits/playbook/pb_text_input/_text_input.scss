@@ -45,13 +45,11 @@
 
     &.error {
       .text_input_wrapper {
-        $lighten_error: lighten($error, 5%);
-
         > input:first-child {
-          border-color: $lighten_error;
+          border-color: $error_dark;
         }
         [class*=pb_body_kit] {
-          color: lighten($lighten_error, 2%);
+          color: $error_dark_body;
         }
       }
     }
