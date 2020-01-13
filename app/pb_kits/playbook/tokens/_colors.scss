@@ -159,6 +159,8 @@ $data_colors: (
 $success:             $green;
 $warning:             $yellow;
 $error:               $red;
+$error_dark:          lighten($error, 5%);
+$error_dark_body:     lighten($error_dark, 2%);
 $info:                $teal;
 $neutral:             $slate;
 $status_colors: (
