@@ -13,6 +13,7 @@ $pb_body_colors: (
 
 $pb_body_status: (
   default:        $text_lt_default,
+  dark_negative:  $error_dark_body !important,
   negative:       $error,
   positive:       $success,
 );
@@ -50,6 +51,10 @@ $pb_body_status: (
 // Statuses =====================
 @mixin pb_body_negative {
   @include pb_body($error);
+}
+
+@mixin pb_body_dark_negative {
+  @include pb_body($error_dark_body);
 }
 
 @mixin pb_body_positive {
