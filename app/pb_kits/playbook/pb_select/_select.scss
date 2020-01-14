@@ -54,9 +54,6 @@
     }
     &.error {
       .pb_select_kit_wrapper {
-        [class*=pb_body_kit] {
-          color: $error_dark_body;
-        }
         > select:first-child {
           border-color: $error_dark;
         }

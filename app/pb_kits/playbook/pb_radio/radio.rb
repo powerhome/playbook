@@ -36,6 +36,10 @@ module Playbook
         "checked" if checked == true
       end
 
+      def body_status
+        error ? "negative" : nil
+      end
+
     private
 
       def error_class
