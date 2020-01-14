@@ -15,6 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - Highlight Kit ([#586](https://github.com/powerhome/playbook/pull/586) @kre8sions)
 - Full Page Examples V1 ([#609](https://github.com/powerhome/playbook/pull/609) @jasperfurniss)
+- Date range stacked Kit [#559](https://github.com/powerhome/playbook/pull/559)
 - Add Appointment type to Hashtag kit ([#599](https://github.com/powerhome/nitro-web/pull/14015) @garettarrowood)
 - React Popover kit ([#607](https://github.com/powerhome/playbook/pull/607) @thestephenmarshall)
 - Dev Docs Reformatting ([#605](https://github.com/powerhome/playbook/pull/605) @kre8sions)
