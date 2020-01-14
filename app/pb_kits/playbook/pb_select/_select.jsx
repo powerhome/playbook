@@ -3,6 +3,7 @@
 import React from 'react'
 
 import {
+  Body,
   Caption,
   Icon,
 } from '../'
@@ -14,22 +15,23 @@ import {
 } from '../utilities/props'
 
 type SelectProps = {
-  className?: String,
   aria?: object,
-  data?: object,
-  onChange: PropTypes.func,
+  blankSelection?: String,
   children?: Array<React.ReactChild>,
+  className?: String,
+  dark?: Boolean,
+  data?: object,
+  disabled?: Boolean,
+  error?: String,
+  onChange: PropTypes.func,
   options: Array<Object>,
   id?: String,
-  label?: String,
-  value?: String,
-  name?: String,
-  dark?: Boolean,
   includeBlank?: String,
-  blankSelection?: String,
-  required?: Boolean,
-  disabled?: Boolean,
+  label?: String,
   multiple?: Boolean,
+  name?: String,
+  required?: Boolean,
+  value?: String,
 }
 
 const optionsArray = ({ options = [] }: SelectProps) => {
@@ -49,24 +51,26 @@ const optionsArray = ({ options = [] }: SelectProps) => {
 
 const Select = (props: SelectProps) => {
   const {
-    children,
-    label,
-    dark = false,
-    name,
-    options,
-    blankSelection,
-    required = false,
-    disabled = false,
-    multiple = false,
-    onChange = () => {},
     aria = {},
+    blankSelection,
+    children,
+    dark = false,
     data = {},
+    disabled = false,
+    error,
+    label,
+    multiple = false,
+    name,
+    onChange = () => {},
+    options,
+    required = false,
   } = props
 
+  const errorClass = error ? ' error' : ''
   const css = buildCss({
     'pb_select': true,
     'dark': dark === true,
-  })
+  }) + errorClass
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
   const optionsList = optionsArray({ options })
@@ -108,6 +112,13 @@ const Select = (props: SelectProps) => {
             </If>
             {optionsList}
           </select>
+        </If>
+        <If condition={error}>
+          <Body
+              dark={dark}
+              status="negative"
+              text={error}
+          />
         </If>
         <Icon
             className="pb_select_kit_caret"
