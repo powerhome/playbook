@@ -7,6 +7,7 @@ import Icon from '../pb_icon/_icon.jsx'
 type CheckboxProps = {
   checked?: Boolean,
   dark?: Boolean,
+  error?: Boolean,
   name: String,
   text: String,
   value: String,
@@ -17,6 +18,7 @@ type CheckboxProps = {
 const Checkbox = ({
   checked = false,
   dark = false,
+  error = false,
   name = '',
   text = '',
   value = '',
@@ -26,14 +28,14 @@ const Checkbox = ({
 }: CheckboxProps) => {
   const bodyClassName = {
     'pb_checkbox_label': true,
-    '_dark': dark,
   }
 
   return (
     <label
         className={
         'pb_checkbox_kit' +
-        (dark === true ? '_dark' : '')
+        (dark === true ? '_dark' : '') +
+        (error === true ? ' error' : '')
       }
     >
       <If condition={children}>
@@ -55,7 +57,13 @@ const Checkbox = ({
             icon="check"
         />
       </span>
-      <Body className={bodyClassName}>{text}</Body>
+      <Body
+          className={bodyClassName}
+          dark={dark}
+          status={error ? 'negative' : null}
+      >
+        {text}
+      </Body>
     </label>
   )
 }

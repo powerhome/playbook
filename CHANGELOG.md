@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Added error state to Textarea kit [#555](https://github.com/powerhome/playbook/pull/555)
 - Added error state to Select kit [#556](https://github.com/powerhome/playbook/pull/556)
 - Added error state to Radio kit [#558](https://github.com/powerhome/playbook/pull/558)
+- Added error state to Checkbox kit [#560](https://github.com/powerhome/playbook/pull/560)
 
 ## [3.4.0] 2019-1-9
 
