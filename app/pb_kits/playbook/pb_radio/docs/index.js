@@ -1,3 +1,5 @@
 export { default as RadioDefault } from './_radio_default.jsx'
 export { default as RadioDark } from './_radio_dark.jsx'
 export { default as RadioCustom } from './_radio_custom.jsx'
+export { default as RadioError } from './_radio_error.jsx'
+export { default as RadioDarkError } from './_radio_dark_error.jsx'
