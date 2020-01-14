@@ -20,7 +20,7 @@ module Playbook
       end
 
       def classname
-        generate_classname("pb_date_range_stacked_kit")
+        generate_classname("pb_date_range_stacked")
       end
       
     private
