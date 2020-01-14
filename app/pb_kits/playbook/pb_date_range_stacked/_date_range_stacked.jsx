@@ -55,6 +55,7 @@ const DateRangeStacked = ({
             tag="span"
         >
           <Icon
+              className="pb_date_range_stacked_arrow"
               fixedWidth
               icon="long-arrow-right"
           />
