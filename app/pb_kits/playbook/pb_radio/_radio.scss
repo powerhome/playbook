@@ -29,12 +29,28 @@
     }
   }
   &[class*=_dark] {
-      input:checked ~ .pb_radio_button {
-        border: 6px solid $primary;
-      }
+    input:checked ~ .pb_radio_button {
+      border: 6px solid $primary;
+    }
 
-      &:hover .pb_radio_button {
-        border-color: $primary_action;
+    &:hover .pb_radio_button {
+      border-color: $primary_action;
+    }
+    &.error {
+      [class*=pb_body_kit] {
+        color: $error_dark_body;
+      }
+      > .pb_radio_button {
+        border-color: $error_dark;
       }
     }
+  }
+  &.error {
+    [class*=pb_body_kit] {
+      color: $error;
+    }
+    > .pb_radio_button {
+      border-color: $error;
+    }
+  }
 }
