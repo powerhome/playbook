@@ -11,10 +11,11 @@ $pb_body_colors: (
   lighter_dark:   $text_dk_lighter,
 );
 
+// Order is important here!
 $pb_body_status: (
   default:        $text_lt_default,
-  dark_negative:  $error_dark_body !important,
   negative:       $error,
+  dark_negative:  $error_dark_body,
   positive:       $success,
 );
 

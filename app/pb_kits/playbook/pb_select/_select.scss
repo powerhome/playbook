@@ -17,7 +17,7 @@
       opacity: 0.5;
     }
     color: transparent !important;
-    text-shadow: 0 0 0 $text_lt_default !important;
+    text-shadow: 0 0 0 $text_lt_default;
   }
   option {
     color: $text_lt_default;
@@ -48,6 +48,7 @@
       &:hover, &:active, &:focus {
         background-color: tint($focus_input_dark, 5%);
       }
+      text-shadow: 0 0 0 $text_dk_default;
     }
     .pb_select_kit_caret {
       color: $white;
