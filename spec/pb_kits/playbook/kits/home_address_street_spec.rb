@@ -10,6 +10,7 @@ RSpec.describe Playbook::PbHomeAddressStreet::HomeAddressStreet do
   it { is_expected.to define_prop(:city) }
   it { is_expected.to define_prop(:home_id)
                       .of_type(Playbook::Props::Number) }
+  it { is_expected.to define_prop(:home_url) }
   it { is_expected.to define_prop(:house_style) }
   it { is_expected.to define_prop(:state) }
   it { is_expected.to define_prop(:zipcode) }

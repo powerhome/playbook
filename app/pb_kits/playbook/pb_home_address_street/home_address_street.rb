@@ -11,6 +11,7 @@ module Playbook
       prop :address_cont
       prop :city
       prop :home_id, type: Playbook::Props::Number
+      prop :home_url
       prop :house_style
       prop :state
       prop :zipcode
