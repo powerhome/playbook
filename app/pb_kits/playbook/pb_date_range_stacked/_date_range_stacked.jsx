@@ -46,9 +46,6 @@ const DateRangeStacked = ({
           { startDateTimestamp.toYear() }
         </Body>
       </div>
-
-      &nbsp;
-
       <div className="pb_date_range_stacked_display">
         <Body
             color="light"
@@ -61,9 +58,6 @@ const DateRangeStacked = ({
           />
         </Body>
       </div>
-
-      &nbsp;
-
       <div className="pb_date_range_stacked_display">
         <Title
             dark={dark}
