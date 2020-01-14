@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - Added error state to Text Input kit [#554](https://github.com/powerhome/playbook/pull/554)
 - Added error state to Textarea kit [#555](https://github.com/powerhome/playbook/pull/555)
+- Added error state to Select kit [#556](https://github.com/powerhome/playbook/pull/556)
 
 ## [3.4.0] 2019-1-9
 

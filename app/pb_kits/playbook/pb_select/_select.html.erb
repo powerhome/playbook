@@ -11,6 +11,7 @@
   <label class="pb_select_kit_wrapper" for="<%= object.name %>">
     <% if object.children %>
       <%= capture(&object.children) %>
+      <%= pb_rails("body", props: { status: "negative", text: object.error }) %>
     <% else %>
       <%= select_tag(
         object.name,
@@ -27,6 +28,7 @@
         include_blank: object.include_blank,
       )
       %>
+      <%= pb_rails("body", props: { status: "negative", text: object.error }) %>
     <% end %>
     <%= pb_rails("icon", props: { icon: "angle-down", fixed_width: true, classname: "pb_select_kit_caret"}) %>
   </label>

@@ -11,25 +11,25 @@ module Playbook
 
       partial "pb_select/select"
 
-      prop :label
-      prop :required, type: Playbook::Props::Boolean, default: false
+      prop :blank_selection
+      prop :dark, type: Playbook::Props::Boolean, default: false
       prop :disabled, type: Playbook::Props::Boolean, default: false
+      prop :error
+      prop :include_blank
+      prop :label
       prop :multiple, type: Playbook::Props::Boolean, default: false
       prop :name
       prop :onchange
-      prop :include_blank
-      prop :blank_selection
       prop :options, type: Playbook::Props::HashArray, required: false, default: []
-      prop :dark, type: Playbook::Props::Boolean, default: false
+      prop :required, type: Playbook::Props::Boolean, default: false
 
       def classname
-        generate_classname("pb_select", dark_class)
+        generate_classname("pb_select", dark_class) + error_class
       end
 
       def options_to_array
         options.map { |option| [option[:value_text] || option[:value], option[:value]] }
       end
-
 
       def selected
         selections = options.map { |option| option[:value] if option[:selected] == true }.compact
@@ -49,12 +49,15 @@ module Playbook
         end
       end
 
-      private
+    private
 
-        def dark_class
-          dark ? "dark" : nil
-        end
+      def error_class
+        error ? " error" : ""
+      end
 
+      def dark_class
+        dark ? "dark" : nil
+      end
     end
   end
 end
