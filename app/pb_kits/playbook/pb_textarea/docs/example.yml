@@ -4,6 +4,8 @@ examples:
   - textarea_default: Default
   - textarea_custom: Custom Textarea Input
   - textarea_dark: Dark
+  - textarea_error: Textarea w/ Error
+  - textarea_dark_error: Textarea w/ Error
 
   
   
@@ -11,5 +13,7 @@ examples:
   - textarea_default: Default
   - textarea_custom: Custom Textarea Input
   - textarea_dark: Dark
+  - textarea_error: Textarea w/ Error
+  - textarea_dark_error: Textarea w/ Error
 
   
