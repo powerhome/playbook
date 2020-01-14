@@ -52,5 +52,28 @@
     .pb_select_kit_caret {
       color: $white;
     }
+    &.error {
+      .pb_select_kit_wrapper {
+        [class*=pb_body_kit] {
+          color: $error_dark_body;
+        }
+        > select:first-child {
+          border-color: $error_dark;
+        }
+      }
+    }
+  }
+  &.error {
+    .pb_select_kit_wrapper {
+      [class*=pb_body_kit] {
+        margin-top: $space_xs / 2;
+      }
+      > select:first-child {
+        border-color: $error;
+      }
+      .pb_select_kit_caret {
+        top: 35%;
+      }
+    }
   }
 }
