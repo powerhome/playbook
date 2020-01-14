@@ -17,7 +17,6 @@
 
     <div class="pb_date_range_stacked_display">
       <%= pb_rails("title", props: { text: object.day_month(object.end_date), size: 4, dark: object.dark }) %>
-      <%= pb_rails("body", props: { text: object.year(object.end_date), size: 4, color: "light", dark: object.dark,
-        classname: "pb_date_range_stacked_end_date" }) %>
+      <%= pb_rails("body", props: { text: object.year(object.end_date), size: 4, color: "light", dark: object.dark }) %>
     </div>
 <% end %>
