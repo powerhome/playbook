@@ -30,12 +30,12 @@ const DateRangeStacked = ({
 
   return (
     <div className={css}>
-      <div className="pb_date_range_stacked_display pb_date_range_stacked_start_date">
-        <DateYearStacked
-            dark={dark}
-            date={startDate}
-        />
-      </div>
+      <DateYearStacked
+          className="pb_date_range_stacked_display pb_date_range_stacked_start_date"
+          dark={dark}
+          date={startDate}
+      />
+
       <div className="pb_date_range_stacked_display">
         <Body
             color="light"
@@ -48,12 +48,12 @@ const DateRangeStacked = ({
           />
         </Body>
       </div>
-      <div className="pb_date_range_stacked_display">
-        <DateYearStacked
-            dark={dark}
-            date={endDate}
-        />
-      </div>
+
+      <DateYearStacked
+          className="pb_date_range_stacked_display"
+          dark={dark}
+          date={endDate}
+      />
     </div>
   )
 }
