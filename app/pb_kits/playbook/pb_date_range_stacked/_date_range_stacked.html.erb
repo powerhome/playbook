@@ -3,11 +3,9 @@
     data: object.data,
     class: object.classname) do %>
 
-    <div class="pb_date_range_stacked_display">
-      <%= pb_rails("title", props: { text: object.day_month(object.start_date), size: 4, dark: object.dark }) %>
-      <%= pb_rails("body", props: { text: object.year(object.start_date), size: 4, color: "light", dark: object.dark,
-        classname: "pb_date_range_stacked_start_date" }) %>
-    </div>
+    <%= pb_rails("date_year_stacked", props: { date: object.start_date,
+                                               classname: "pb_date_range_stacked_display pb_date_range_stacked_start_date",
+                                               dark: object.dark }) %>
 
     <div class="pb_date_range_stacked_display">
       <%= pb_rails("body", props: { tag: "span", color: "light" }) do %>
@@ -15,8 +13,7 @@
       <% end %>
     </div>
 
-    <div class="pb_date_range_stacked_display">
-      <%= pb_rails("title", props: { text: object.day_month(object.end_date), size: 4, dark: object.dark }) %>
-      <%= pb_rails("body", props: { text: object.year(object.end_date), size: 4, color: "light", dark: object.dark }) %>
-    </div>
+    <%= pb_rails("date_year_stacked", props: { date: object.end_date,
+                                               classname: "pb_date_range_stacked_display",
+                                               dark: object.dark }) %>
 <% end %>
