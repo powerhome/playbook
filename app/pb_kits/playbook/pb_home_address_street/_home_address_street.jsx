@@ -14,6 +14,7 @@ type HomeAddressStreetProps = {
   dark?: Boolean,
   homeId: Number,
   houseStyle: String,
+  homeUrl: String,
   state: String,
   zipcode: String,
   territory: String,
@@ -33,6 +34,7 @@ const HomeAddressStreet = ({
   className,
   dark = false,
   homeId,
+  homeUrl,
   houseStyle,
   state,
   zipcode,
@@ -63,7 +65,7 @@ const HomeAddressStreet = ({
           dark={dark}
           text={homeId}
           type="home"
-          url="#"
+          url={homeUrl || '#'}
       />
     </If>
     <Body

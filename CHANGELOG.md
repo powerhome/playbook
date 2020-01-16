@@ -8,6 +8,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [3.5.0] Unreleased
 
+### Added
+- Rails/JS kit `HomeAddressStreet`: added home_url prop. Defaults to `"#"` ([#557][] @stephenagreer)
+
+
+[#557]: https://github.com/powerhome/playbook/pull/557
+
 ## [3.4.0] 2019-1-9
 
 ### Added
