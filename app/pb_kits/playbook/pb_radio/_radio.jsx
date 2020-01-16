@@ -7,6 +7,7 @@ import Body from '../pb_body/_body.jsx'
 type RadioProps = {
   className?: String,
   data?: String,
+  error?: Boolean,
   id?: String,
   label: String,
   name: String,
@@ -22,9 +23,10 @@ const Radio = (props: RadioProps) => {
   const {
     checked = false,
     children,
-    className,
+    className = '',
     dark = false,
     data,
+    error = false,
     id,
     label,
     name,
@@ -33,9 +35,11 @@ const Radio = (props: RadioProps) => {
     onChange = () => {},
   } = props
 
+  const errorClass = error ? 'error' : ''
+
   return (
     <label
-        className={'pb_radio_kit' + (dark === true ? '_dark ' : ' ') + className}
+        className={'pb_radio_kit' + (dark === true ? '_dark ' : ' ') + errorClass + ' ' + className}
         htmlFor={id}
     >
       <If condition={children}>
@@ -52,10 +56,13 @@ const Radio = (props: RadioProps) => {
         />
       </If>
       <span className="pb_radio_button" />
-      <Body
-          dark={dark}
-          text={label}
-      />
+      <If condition={error}>
+        <Body
+            dark={dark}
+            status="negative"
+            text={label}
+        />
+      </If>
     </label>
   )
 }

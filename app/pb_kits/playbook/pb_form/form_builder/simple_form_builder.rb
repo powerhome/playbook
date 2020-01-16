@@ -10,7 +10,7 @@ if defined?(SimpleForm)
           def input(attribute_name, options = {}, &block)
             super(
               attribute_name,
-              options.merge(label: false, input_html: {
+              options.deep_merge(label: false, input_html: {
                               props: {
                                 label: true,
                               },

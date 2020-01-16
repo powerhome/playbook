@@ -8,6 +8,7 @@ RSpec.describe Playbook::PbCheckbox::Checkbox do
   it { is_expected.to define_partial }
 
   it { is_expected.to define_boolean_prop(:dark).with_default(false) }
+  it { is_expected.to define_boolean_prop(:error).with_default(false) }
   it { is_expected.to define_prop(:text) }
   it { is_expected.to define_prop(:value) }
   it { is_expected.to define_prop(:name) }
@@ -20,6 +21,8 @@ RSpec.describe Playbook::PbCheckbox::Checkbox do
       expect(subject.new(checked: true).classname).to eq "pb_checkbox_kit_on"
       expect(subject.new(dark: true, checked: true).classname).to eq "pb_checkbox_kit_dark_on"
       expect(subject.new(classname: "additional_class").classname).to eq "pb_checkbox_kit_off additional_class"
+      expect(subject.new(error: true).classname).to eq "pb_checkbox_kit_off error"
+      expect(subject.new(dark: true, error: true).classname).to eq "pb_checkbox_kit_dark_off error"
     end
   end
 end

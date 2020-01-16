@@ -17,7 +17,7 @@
       opacity: 0.5;
     }
     color: transparent !important;
-    text-shadow: 0 0 0 $text_lt_default !important;
+    text-shadow: 0 0 0 $text_lt_default;
   }
   option {
     color: $text_lt_default;
@@ -48,9 +48,30 @@
       &:hover, &:active, &:focus {
         background-color: tint($focus_input_dark, 5%);
       }
+      text-shadow: 0 0 0 $text_dk_default;
     }
     .pb_select_kit_caret {
       color: $white;
+    }
+    &.error {
+      .pb_select_kit_wrapper {
+        > select:first-child {
+          border-color: $error_dark;
+        }
+      }
+    }
+  }
+  &.error {
+    .pb_select_kit_wrapper {
+      [class*=pb_body_kit] {
+        margin-top: $space_xs / 2;
+      }
+      > select:first-child {
+        border-color: $error;
+      }
+      .pb_select_kit_caret {
+        top: 35%;
+      }
     }
   }
 }
