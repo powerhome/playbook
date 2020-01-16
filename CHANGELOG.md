@@ -7,13 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [3.5.0] 2020-1-16
 
-## [3.5.0] Unreleased
 ### Changed
-- Added error state to Text Input kit [#554](https://github.com/powerhome/playbook/pull/554)
-- Added error state to Textarea kit [#555](https://github.com/powerhome/playbook/pull/555)
-- Added error state to Select kit [#556](https://github.com/powerhome/playbook/pull/556)
-- Added error state to Radio kit [#558](https://github.com/powerhome/playbook/pull/558)
-- Added error state to Checkbox kit [#560](https://github.com/powerhome/playbook/pull/560)
+- Added error state to Text Input, Textarea, Select, Radio & Checkbox kits [#554](https://github.com/powerhome/playbook/pull/554)
 
 ### Added
 - Rails/JS kit `HomeAddressStreet`: added home_url prop. Defaults to `"#"` ([#557][https://github.com/powerhome/playbook/pull/557] @stephenagreer)
