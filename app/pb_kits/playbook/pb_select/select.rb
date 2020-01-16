@@ -24,7 +24,11 @@ module Playbook
       prop :required, type: Playbook::Props::Boolean, default: false
 
       def classname
-        generate_classname("pb_select", dark_class) + error_class
+        generate_classname("pb_select", dark_class)
+      end
+
+      def select_wrapper_class
+        "pb_select_kit_wrapper" + error_class
       end
 
       def options_to_array

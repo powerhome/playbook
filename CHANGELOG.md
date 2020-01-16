@@ -9,9 +9,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- Modernize and update API of the Currency kit [#565]()
+- Modernize and update API of the Currency kit [#565](https://github.com/powerhome/playbook/pull/565)
+- Renamed `pb_chart_plugin.js` to `pb_chart.js`
+- Added `validate` prop to Form kit for enabling JS form constraint validation (listed above)
+- Added `validation` prop and enabled `required` attribute for Text Input kit
 
-[#565]: https://github.com/powerhome/playbook/pull/565
+### Added
+- Form kit field constraint validation [#567](https://github.com/powerhome/playbook/pull/567)
 
 ## [3.5.0] 2020-1-16
 

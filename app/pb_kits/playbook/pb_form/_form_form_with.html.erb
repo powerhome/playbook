@@ -1,3 +1,13 @@
 <%= form_with object.merged_form_system_options do |form| %>
   <% instance_exec form, &object.children %>
+
+  <% if object.validate %>
+    <% content_for :pb_js do %>
+      <%= javascript_tag do %>
+        window.addEventListener('DOMContentLoaded', function() {
+          PbFormValidation.start()
+        })
+      <% end %>
+    <% end %>
+  <% end %>
 <% end %>

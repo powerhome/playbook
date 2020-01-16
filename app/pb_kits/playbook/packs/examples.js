@@ -136,3 +136,5 @@ WebpackerReact.setup(UserBadge)
 
 import PbTypeahead from 'pb_typeahead'
 PbTypeahead.start()
+
+import '../pb_form/pb_form_validation'
