@@ -1,0 +1,16 @@
+<%= content_tag(:div,
+                id: object.id,
+                data: object.data,
+                class: object.classname) do %>
+  <div class="pb_typeahead_wrapper">
+    <%= pb_rails("text_input", props: { type: "search", label: object.label, placeholder: object.placeholder }) %>
+    <%= pb_rails("list", props: { ordered: false, dark: false, borderless: false, xpadding: true, role: "status", aria: { live: "polite" }, data: { pb_typeahead_kit_results: true } }) do %>
+    <% end %>
+  </div>
+
+  <template data-pb-typeahead-kit-result-option>
+    <%= pb_rails("list/item") do %>
+      <button type="button" data-result-option-item><%= tag(:slot, name: :content) %></button>
+    <% end %>
+  </template>
+<% end %>

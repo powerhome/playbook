@@ -133,3 +133,6 @@ WebpackerReact.setup(TitleDetail)
 WebpackerReact.setup(Toggle)
 WebpackerReact.setup(User)
 WebpackerReact.setup(UserBadge)
+
+import PbTypeahead from 'pb_typeahead'
+PbTypeahead.start()

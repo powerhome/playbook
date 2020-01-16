@@ -1,0 +1,3 @@
+examples:
+  rails:
+  - typeahead_default: Default

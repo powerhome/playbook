@@ -1,0 +1,51 @@
+<%= pb_rails("typeahead", props: { data: { typeahead_example: true } }) %>
+
+<br><br><br>
+
+<%= pb_rails("card", props: { padding: "xl", data: { typeahead_example_selected_option: true } }) do %>
+  <%= pb_rails("body") do %>
+    Use the above input to search for users on Github, and see the results as you type.
+  <% end %>
+
+  <%= pb_rails("body") do %>
+    When you make a selection, you will see it apear in the list below
+  <% end %>
+
+  <div data-selected-option></div>
+<% end %>
+
+<template data-typeahead-example-result-option>
+  <%= pb_rails("user", props: {
+    name: tag(:slot, name: "name"),
+    orientation: "horizontal",
+    align: "left",
+    avatar_url: "placeholder"
+    }) %>
+</template>
+
+<%= javascript_tag defer: "defer" do %>
+  document.addEventListener("pb-typeahead-kit-search", function(event) {
+    if (!event.target.dataset.typeaheadExample) return;
+
+    fetch(`https://api.github.com/search/users?q=${encodeURIComponent(event.detail.searchingFor)}`)
+      .then(response => response.json())
+      .then((result) => {
+        const resultOptionTemplate = document.querySelector("[data-typeahead-example-result-option]")
+
+        event.detail.setResults((result.items || []).map((user) => {
+          const wrapper = resultOptionTemplate.content.cloneNode(true)
+          wrapper.querySelector('slot[name="name"]').replaceWith(user.login)
+          wrapper.querySelector('img').setAttribute("src", user.avatar_url)
+          return wrapper
+        }))
+      })
+  })
+
+
+  document.addEventListener("pb-typeahead-kit-result-option-selected", function(event) {
+    if (!event.target.dataset.typeaheadExample) return;
+
+    document.querySelector("[data-typeahead-example-selected-option] [data-selected-option]").innerHTML = ""
+    document.querySelector("[data-typeahead-example-selected-option] [data-selected-option]").appendChild(event.detail.selected)
+  })
+<% end %>

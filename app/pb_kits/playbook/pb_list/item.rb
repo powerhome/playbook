@@ -5,6 +5,8 @@ module Playbook
     class Item
       include Playbook::Props
 
+      prop :tabindex
+
       partial "pb_list/item"
 
       def classname
