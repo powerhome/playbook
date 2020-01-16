@@ -56,13 +56,11 @@ const Radio = (props: RadioProps) => {
         />
       </If>
       <span className="pb_radio_button" />
-      <If condition={error}>
-        <Body
-            dark={dark}
-            status="negative"
-            text={label}
-        />
-      </If>
+      <Body
+          dark={dark}
+          status={error ? 'negative' : null}
+          text={label}
+      />
     </label>
   )
 }
