@@ -5,10 +5,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.5.0] 2020-1-16
 
-## [3.5.0] Unreleased
+### Changed
+- Added error state to Text Input, Textarea, Select, Radio & Checkbox kits [#554](https://github.com/powerhome/playbook/pull/554)
 
-## [3.4.0] 2019-1-9
+### Added
+- Rails/JS kit `HomeAddressStreet`: added home_url prop. Defaults to `"#"` ([#557][https://github.com/powerhome/playbook/pull/557] @stephenagreer)
+- Typeahead kit - new kit added [#547](https://github.com/powerhome/playbook/pull/547)
+
+## [3.4.0] 2020-1-9
 
 ### Added
 - Legend Kit (Complete) [#549](https://github.com/powerhome/playbook/pull/549)
@@ -25,7 +31,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [#548]: https://github.com/powerhome/playbook/pull/548
 [#551]: https://github.com/powerhome/playbook/pull/551
 
-## [3.3.0] 2019-1-2
+## [3.3.0] 2020-1-2
 
 ### Added
 - Radio Button Kit ([#516][] @evalouderback)

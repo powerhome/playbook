@@ -61,5 +61,17 @@ $transition: $transition_cubic;
     &:hover .pb_checkbox_checkmark {
       border-color: $primary_action;
     }
+
+    &.error {
+      > .pb_checkbox_checkmark {
+        border-color: $error_dark;
+      }
+    }
+  }
+
+  &.error {
+    > .pb_checkbox_checkmark {
+      border-color: $error;
+    }
   }
 }

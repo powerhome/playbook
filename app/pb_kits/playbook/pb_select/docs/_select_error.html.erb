@@ -1,0 +1,24 @@
+<%= pb_rails("select", props: {
+  error: "Please make a valid selection",
+  label: "Favorite Food",
+  name: "food",
+  options: [
+    {
+      value: "1",
+      value_text: "Burgers",
+    },
+    {
+      value: "2",
+      selected: true,
+      value_text: "Pizza",
+    },
+    {
+      value: "3",
+      value_text: "Tacos",
+    },
+    {
+      value: "4",
+      value_text: "BBQ",
+    },
+  ]
+}) %>

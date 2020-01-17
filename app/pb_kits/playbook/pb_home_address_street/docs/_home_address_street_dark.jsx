@@ -9,6 +9,7 @@ const HomeAddressStreetDark = () => {
         city="West Chester"
         dark
         homeId={8250263}
+        homeUrl="https://powerhrg.com/"
         state="PA"
         territory="PHL"
         zipcode="19382"
