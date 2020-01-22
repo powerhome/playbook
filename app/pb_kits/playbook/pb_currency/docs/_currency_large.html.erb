@@ -1,25 +1,20 @@
 <%= pb_rails("currency", props: {
-  dollar_sign: "$",
-  label: "Caption",
-  value: "2,000.",
-  unit: "00",
+  amount: "2,000.50",
   size: "lg"
 }) %>
 
 <%= pb_rails("currency", props: {
   align: "center",
-  dollar_sign: "$",
+  amount: "2,000",
   label: "Caption",
-  value: "2,000.",
-  unit: "00",
-  size: "lg"
+  size: "lg",
+  symbol: "$",
 }) %>
 
 <%= pb_rails("currency", props: {
   align: "right",
-  dollar_sign: "$",
+  amount: "2,000.00",
   label: "Caption",
-  value: "2,000.",
-  unit: "00",
-  size: "lg"
+  size: "lg",
+  symbol: "$",
 }) %>

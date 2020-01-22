@@ -1,13 +1,13 @@
 <%= content_tag(:div,
     id: object.id,
     data: object.data,
-    class: object.classname(object.kit_class)) do %>
+    class: object.classname) do %>
 
-  <%= object.label %>
+  <%= object.label_element %>
+
   <div class="pb_currency_wrapper">
-    <%= object.dollar_sign %>
-    <%= object.value %>
-    <%= object.unit %>
+    <%= object.currency_symbol_element %>
+    <%= object.amount_element %>
+    <%= object.units_element %>
   </div>
-
 <% end %>

@@ -1,26 +1,18 @@
 /* @flow */
 
 import React from 'react'
-import classnames from 'classnames'
 
 import { Body, Caption, Title } from '../'
 import { buildCss } from '../utilities/props'
 
 type CurrencyProps = {
   align?: 'left' | 'center' | 'right',
-  className: String,
-  currencySymbol: String,
-  label?: String,
+  amount: string,
+  className?: string,
+  label?: string,
   separator?: '.' | ',',
   size?: 'sm' | 'lg',
-  value?: String,
-  units?: String,
-}
-
-const symbolCSS = (currencySymbol) => {
-  return classnames({
-    'dollar_sign': currencySymbol === '$',
-  })
+  symbol?: string,
 }
 
 const sizes = {
@@ -30,26 +22,43 @@ const sizes = {
 
 const Currency = ({
   align = 'left',
-  currencySymbol = '$',
+  amount,
+  className,
   label = '',
   separator = '.',
   size = 'sm',
-  units = '00',
-  value,
-}: CurrencyProps) => (
-  <div className={buildCss('pb_currency_kit', align)}>
-    <Caption>{label}</Caption>
-    <div className="pb_currency_wrapper">
-      <Body className={symbolCSS(currencySymbol)}>{currencySymbol}</Body>
-      <Title
-          className="pb_currency_value"
-          size={sizes[size]}
-      >
-        {`${value}${separator}`}
-      </Title>
-      <Body className="unit">{units}</Body>
+  symbol = '$',
+}: CurrencyProps) => {
+  const [whole, decimal = '00'] = amount.split(separator)
+
+  return (
+    <div className={buildCss('pb_currency_kit', align, className)}>
+      <Caption>{label}</Caption>
+
+      <div className="pb_currency_wrapper">
+        <Body
+            className="dollar_sign"
+            color="light"
+        >
+          {symbol}
+        </Body>
+
+        <Title
+            className="pb_currency_value"
+            size={sizes[size]}
+        >
+          {`${whole}${separator}`}
+        </Title>
+
+        <Body
+            className="unit"
+            color="light"
+        >
+          {decimal}
+        </Body>
+      </div>
     </div>
-  </div>
-)
+  )
+}
 
 export default Currency
