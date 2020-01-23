@@ -1,0 +1,52 @@
+@import "../../tokens/fonts";
+@import "../../tokens/typography";
+@import "../../tokens/colors";
+@import "../../utilities/colors";
+@import "../../tokens/spacing";
+
+.dashboard-layout {
+  .centered {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .outer-padding {
+    padding: $space_sm $space_lg !important;
+  }
+  .flex {
+    display: flex;
+    padding: $space_sm 0;
+  }
+
+  .pb_title_detail_kit_left {
+    padding: 5px 20px !important;
+
+    & > .pb_title_kit_4 {
+      padding-left: 0px;
+      padding-bottom: 0px;
+    }
+  }
+
+  .pb_nav_list_border_item_active
+    > .pb_nav_list_item_link
+    > .pb_nav_list_item_text
+    > svg {
+    margin-right: 8px;
+    color: #0056cf !important;
+  }
+
+  [class^="pb_nav_list"][class*="_vertical"]
+    [class*="_border_item"]
+    [class*="_link"]
+    [class*="_icon"] {
+    margin-right: 8px;
+  }
+
+  .pb_nav_list_item_link {
+    padding-left: $space_lg !important;
+  }
+  .pb_title_detail_kit_left:first-child {
+    padding-left: $space_lg !important;
+  }
+}
