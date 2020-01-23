@@ -29,6 +29,7 @@ import * as DateRangeInline from 'pb_date_range_inline/docs'
 import * as DateStacked from 'pb_date_stacked/docs'
 import * as DateYearStacked from 'pb_date_year_stacked/docs'
 import * as DistributionBar from 'pb_distribution_bar/docs'
+import * as Editor from 'pb_editor/docs'
 import * as FixedConfirmationToast from 'pb_fixed_confirmation_toast/docs'
 import * as Hashtag from 'pb_hashtag/docs'
 import * as HomeAddressStreet from 'pb_home_address_street/docs'
@@ -90,6 +91,7 @@ WebpackerReact.setup(DateRangeInline)
 WebpackerReact.setup(DateStacked)
 WebpackerReact.setup(DateYearStacked)
 WebpackerReact.setup(DistributionBar)
+WebpackerReact.setup(Editor)
 WebpackerReact.setup(FixedConfirmationToast)
 WebpackerReact.setup(Hashtag)
 WebpackerReact.setup(HomeAddressStreet)
