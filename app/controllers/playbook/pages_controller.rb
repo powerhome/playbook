@@ -21,6 +21,10 @@ module Playbook
 
     def principles; end
 
+    def dashboards
+      render template: "playbook/pages/examples/dashboards/dashboards", layout: "layouts/playbook/fullscreen"
+    end
+
     def fullscreen
       render layout: "layouts/playbook/fullscreen"
     end
