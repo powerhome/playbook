@@ -10,7 +10,13 @@ Rails.application.config.content_security_policy do |p|
   # a separate docker container
   if Rails.env.development?
     p.connect_src :self, :https, 'http://localhost:3035', 'ws://localhost:3035', 'http://0.0.0.0:3035', 'ws://0.0.0.0:3035'
+    p.script_src :self, :https, :unsafe_eval, :unsafe_inline
   end
+  # if Rails.env.development?
+    
+  # else
+  #   p.script_src :self, :https
+  # end
 
   # Specify URI for violation reports
   # p.report_uri "/csp-violation-report-endpoint"
