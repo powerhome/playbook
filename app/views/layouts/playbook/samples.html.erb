@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Full Screen Examples</title>
+        <%= csrf_meta_tags %>
+        <%= csp_meta_tag %>
+        <%= stylesheet_pack_tag 'main' %>
+    </head>
+    <body>
+        <div class="editor-toggle">
+            <a data-toggle="code_example" href="#">
+                <%= pb_rails("icon", props: {icon: 'eye' }) %>
+            </a>
+        </div>
+    
+    
+  
+              <%= render :partial => "playbook/samples/dashboards/dashboards" %>
+        
+              <%= react_component('Dashboards') %>
+     
+
+        <% contents = File.read("#{Playbook::Engine.root}/app/views/playbook/samples/dashboards/index.html.erb") %>
+        
+
+        <div class="pb--kit-show">
+            <div class="pb--doc light_ui">
+                <div class="pb--codeControls">
+                    <ul>
+                        <li>
+                            <a data-toggle="code_example" href="#">Code Example</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="pb--codeCopy" data-action="toggle" data-togglable="code_example">
+                    <a class="pb--close-toggle" data-toggle="false" href="#">Close</a>
+                    <%= raw rouge(contents, "erb") %>
+                </div>
+            </div>
+        </div>
+
+    </body>
+
+    <%= javascript_include_tag "https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js" %>
+    <%= javascript_pack_tag 'application' %>
+    <%= javascript_pack_tag 'examples' %>
+    <%= yield :pb_js %>
+</html>
