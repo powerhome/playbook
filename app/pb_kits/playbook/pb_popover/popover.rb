@@ -11,8 +11,8 @@ module Playbook
       prop :tooltipId
       prop :offset, type: Playbook::Props::Boolean, default: false
 
-      def offset
-        offset == true ? [0, 8] : [0, 0]
+      def popover_offset
+        offset ? [0, 8] : [0, 0]
       end
 
       def classname
