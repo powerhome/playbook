@@ -39,6 +39,7 @@ kits:
   - person
   - person_contact
   - pill
+  - popover
   - progress_pills
   - progress_simple
   - radio
@@ -58,6 +59,6 @@ kits:
   - title_count
   - title_detail
   - toggle
+  - typeahead
   - user
   - user_badge
-  - typeahead

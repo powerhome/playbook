@@ -1,0 +1,7 @@
+examples:
+  rails:
+    - popover_default: Default
+    - popover_list: With Children
+
+  react:
+    - popover_default: Default
