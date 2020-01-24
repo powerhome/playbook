@@ -6,6 +6,7 @@ module Playbook
       include Playbook::Props
 
       partial "pb_highlight/highlight"
+<<<<<<< HEAD
 
       prop :text
 
@@ -14,6 +15,8 @@ module Playbook
       end
 
 
+=======
+>>>>>>> added highlight kit
     end
   end
 end
