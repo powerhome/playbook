@@ -20,6 +20,7 @@ kits:
   - flex
   - form
   - hashtag
+  - highlight
   - home_address_street
   - icon
   - icon_circle

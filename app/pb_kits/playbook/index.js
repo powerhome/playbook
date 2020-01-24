@@ -20,6 +20,7 @@ export FixedConfirmationToast from './pb_fixed_confirmation_toast/_fixed_confirm
 export Flex from './pb_flex/_flex.jsx'
 export FlexItem from './pb_flex/_flex_item.jsx'
 export Hashtag from './pb_hashtag/_hashtag.jsx'
+export Highlight from './pb_highlight/_highlight.jsx'
 export HomeAddressStreet from './pb_home_address_street/_home_address_street.jsx'
 export Icon from './pb_icon/_icon.jsx'
 export IconCircle from './pb_icon_circle/_icon_circle.jsx'
