@@ -3,7 +3,7 @@
     data: object.data,
     class: object.classname) do %>
     
-      <div class="popover_tooltip" id="<%= object.tooltipId %>" role="tooltip">
+      <div class="popover_tooltip" id="<%= object.tooltip_id %>" role="tooltip">
         <%= pb_rails("card", props: {shadow: "deeper"}) do %>
           <%= capture(&object.children) %>
         <% end %>

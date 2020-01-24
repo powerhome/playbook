@@ -8,8 +8,8 @@ RSpec.describe Playbook::PbPopover::Popover do
   it { is_expected.to define_partial }
 
   it { is_expected.to define_prop(:position) }
-  it { is_expected.to define_prop(:triggerElementId) }
-  it { is_expected.to define_prop(:tooltipId) }
+  it { is_expected.to define_prop(:trigger_element_id) }
+  it { is_expected.to define_prop(:tooltip_id) }
   it { is_expected.to define_boolean_prop(:offset).with_default(false) }
 
   describe "#classname" do
