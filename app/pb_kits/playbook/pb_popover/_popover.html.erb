@@ -17,7 +17,7 @@
   <%= javascript_tag do %>
     window.addEventListener('DOMContentLoaded', function() {
     new Popover(
-        "#<%= object.buttonId %>", 
+        "#<%= object.triggerElementId %>", 
         "#<%= object.tooltipId %>", 
          "<%= object.position %>",
           <%= object.popover_offset %>,
