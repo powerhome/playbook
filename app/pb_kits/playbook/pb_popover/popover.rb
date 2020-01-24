@@ -7,8 +7,8 @@ module Playbook
       partial "pb_popover/popover"
 
       prop :position
-      prop :triggerElementId
-      prop :tooltipId
+      prop :trigger_element_id
+      prop :tooltip_id
       prop :offset, type: Playbook::Props::Boolean, default: false
 
       def popover_offset
