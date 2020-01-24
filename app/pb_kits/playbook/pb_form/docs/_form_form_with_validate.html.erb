@@ -1,0 +1,35 @@
+<%
+  example_collection = [
+    OpenStruct.new(name: "Alabama", value: 1),
+    OpenStruct.new(name: "Alaska", value: 2),
+    OpenStruct.new(name: "Arizona", value: 3),
+    OpenStruct.new(name: "Arkansas", value: 4),
+    OpenStruct.new(name: "California", value: 5),
+    OpenStruct.new(name: "Colorado", value: 6),
+    OpenStruct.new(name: "Connecticut", value: 7),
+    OpenStruct.new(name: "Delaware", value: 8),
+    OpenStruct.new(name: "Florida", value: 9),
+    OpenStruct.new(name: "Georgia", value: 10),
+  ]
+%>
+
+<%= pb_rails("form", props: {
+    form_system_options: { scope: :example, method: :get },
+    validate: true
+  }) do |form| %>
+  <%= form.text_field :example_text_field, props: { label: true, required: true } %>
+  <%= form.telephone_field :example_phone_field, props: { label: true, required: true, validation: { pattern: "[0-9]{3}-[0-9]{3}-[0-9]{4}", message: "Please enter a valid phone number (example: 888-888-8888)." } } %>
+  <%= form.email_field :example_email_field, props: { label: true, required: true } %>
+  <%= form.number_field :example_number_field, props: { label: true, required: true } %>
+  <%= form.search_field :example_project_number, props: { label: true, required: true, validation: { pattern: "[0-9]{2}-[0-9]{5}", message: "Please enter a valid project number (example: 33-12345)." } } %>
+  <%= form.password_field :example_password_field, props: { label: true, required: true } %>
+  <%= form.url_field :example_url_field, props: { label: true, required: true } %>
+  <%= form.text_area :example_text_area, props: { label: true, required: true } %>
+  <%= form.select :example_select, [ ["Yes", 1], ["No", 2] ], props: { label: true, blank_selection: "Select One...", required: true } %>
+  <%= form.collection_select :example_collection_select, example_collection, :value, :name, props: { label: true, blank_selection: "Select One...", required: true } %>
+
+  <%= form.actions do |action| %>
+    <%= action.submit %>
+    <%= action.button props: { type: "reset", text: "Cancel", variant: "secondary" } %>
+  <% end %>
+<% end %>
