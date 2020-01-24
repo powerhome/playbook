@@ -15,8 +15,8 @@ class Popover {
   }
 
   //getters
-  get triggerElement() {
-    return document.querySelector(this.button)
+  get popoverTriggerElement() {
+    return document.querySelector(this.triggerElement)
   }
   get popoverTooltip() {
     return document.querySelector(this.tooltip)
@@ -29,13 +29,13 @@ class Popover {
   }
 
   attachEvents() {
-    this.triggerElement.addEventListener('click', () => {
+    this.popoverTriggerElement.addEventListener('click', () => {
       this.popoverTooltip.classList.toggle('show')
     })
   }
 
   setupPopper() {
-    createPopper(this.triggerElement, this.popoverTooltip, {
+    createPopper(this.popoverTriggerElement, this.popoverTooltip, {
       placement: this.popoverPlacement,
       modifiers: [
         {
