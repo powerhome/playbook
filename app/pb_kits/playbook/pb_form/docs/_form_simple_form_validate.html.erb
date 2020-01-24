@@ -1,0 +1,57 @@
+<%
+  require "simple_form" unless defined?(SimpleForm)
+  require "active_model/railtie" unless defined?(ActiveModel)
+
+  example_form_model = Class.new do
+    include ::ActiveModel::Model
+    attr_accessor :example_text_field,
+    :example_phone_field,
+    :example_email_field,
+    :example_number_field,
+    :example_search_field,
+    :example_password_field,
+    :example_url_field,
+    :example_text_area,
+    :example_select_field,
+    :example_collection_select_field
+
+
+    def self.model_name
+      ActiveModel::Name.new(self, nil, "ExampleFormModel")
+    end
+  end
+%>
+
+<%
+  example_collection = [
+    OpenStruct.new(name: "Alabama", value: 1),
+    OpenStruct.new(name: "Alaska", value: 2),
+    OpenStruct.new(name: "Arizona", value: 3),
+    OpenStruct.new(name: "Arkansas", value: 4),
+    OpenStruct.new(name: "California", value: 5),
+    OpenStruct.new(name: "Colorado", value: 6),
+    OpenStruct.new(name: "Connecticut", value: 7),
+    OpenStruct.new(name: "Delaware", value: 8),
+    OpenStruct.new(name: "Florida", value: 9),
+    OpenStruct.new(name: "Georgia", value: 10),
+  ]
+%>
+
+
+<%= pb_rails("form", props: { validate: true, form_system: "simple_form", form_system_options: [example_form_model.new, url: "", method: :get] }) do |form| %>
+  <%= form.input :example_text_field, {as: :string, input_html: {props: {required: true}}} %>
+  <%= form.input :example_phone_field, {as: :tel, input_html: {props: {required: true, validation: { pattern: "[0-9]{3}-[0-9]{3}-[0-9]{4}", message: "Please enter a valid phone number (example: 888-888-8888)." }}}} %>
+  <%= form.input :example_email_field, {as: :email, input_html: {props: {required: true}}} %>
+  <%= form.input :example_number_field, {as: :integer, input_html: {props: {required: true}}} %>
+  <%= form.input :example_search_field, {as: :search, input_html: {props: {required: true, validation: { pattern: "[0-9]{2}-[0-9]{5}", message: "Please enter a valid project number (example: 33-12345)." }}}} %>
+  <%= form.input :example_password_field, {as: :password, input_html: {props: {required: true}}} %>
+  <%= form.input :example_url_field, {as: :url, input_html: {props: {required: true}}} %>
+  <%= form.input :example_text_area, {as: :text, input_html: {props: {required: true}}} %>
+  <%= form.select :example_select_field, [["Yes", 1], ["No", 2]], props: { required: true, blank_selection: "Select One...", label: true } %>
+  <%= form.collection_select :example_collection_select_field, example_collection, :value, :name, props: { required: true, blank_selection: "Select One...", label: true } %>
+
+  <%= form.actions do |action| %>
+    <%= action.submit %>
+    <%= action.button props: { type: "reset", text: "Cancel", variant: "secondary" } %>
+  <% end %>
+<% end %>

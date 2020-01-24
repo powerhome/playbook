@@ -16,6 +16,7 @@ module Playbook
           [
             Array(form_system_options)[0],
             Hash(Array(form_system_options)[1]).merge(
+              data: { "pb-form-validation": validate },
               html: merged_html,
               builder: form_builder
             ),

@@ -29,6 +29,17 @@
   .pb_select_kit_wrapper {
     position: relative;
     display: block;
+    &.error {
+      [class*=pb_body_kit] {
+        margin-top: $space_xs / 2;
+      }
+      > select:first-child {
+        border-color: $error;
+      }
+      .pb_select_kit_caret {
+        top: 35%;
+      }
+    }
   }
   .pb_select_kit_caret {
     position: absolute;
@@ -53,25 +64,15 @@
     .pb_select_kit_caret {
       color: $white;
     }
-    &.error {
-      .pb_select_kit_wrapper {
-        > select:first-child {
-          border-color: $error_dark;
+    .pb_select_kit_wrapper {
+      &.error {
+        .pb_select_kit_wrapper {
+          > select:first-child {
+            border-color: $error_dark;
+          }
         }
       }
     }
   }
-  &.error {
-    .pb_select_kit_wrapper {
-      [class*=pb_body_kit] {
-        margin-top: $space_xs / 2;
-      }
-      > select:first-child {
-        border-color: $error;
-      }
-      .pb_select_kit_caret {
-        top: 35%;
-      }
-    }
-  }
+  
 }
