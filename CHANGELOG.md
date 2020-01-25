@@ -5,13 +5,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [4.0.0] Unreleased
-### Changed
-- Modernize and update API of the Currency kit [#565](https://github.com/powerhome/playbook/pull/565)
-- Shadow Shallow, Default and Dark Deprecated, shadow_light changed to shadow, all affected files updated. ([#568][] @megantrimble)
+## [4.0.0] 2020-1-25
 
-[#565]: https://github.com/powerhome/playbook/pull/565
-[#568]: https://github.com/powerhome/playbook/pull/568
+### Changed
+- Modernize and update API of the Currency kit [#565](https://github.com/powerhome/playbook/pull/565) @drborges
+- Shadow Shallow, Default and Dark Deprecated, shadow_light changed to shadow, all affected files updated. [#568](https://github.com/powerhome/playbook/pull/568) @megantrimble
+- Renamed `pb_chart_plugin.js` to `pb_chart.js`
+- Added `validate` prop to Form kit for enabling JS form constraint validation (listed above)
+- Added `validation` prop and enabled `required` attribute for Text Input kit
+
+### Added
+- Form kit field constraint validation [#567](https://github.com/powerhome/playbook/pull/567) @thestephenmarshall
+- Popover Kit (New Kit - Rails only) [#569]([#568]: https://github.com/powerhome/playbook/pull/569) @jasperfurniss
 
 ## [3.5.0] 2020-1-16
 
