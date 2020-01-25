@@ -39,7 +39,7 @@
 
 
 <%= pb_rails("form", props: { form_system: "simple_form", form_system_options: [example_form_model.new, url: "", method: :get] }) do |form| %>
-  <%= form.input :example_text_field, {as: :string, input_html: {props: {error: "Please enter a valid first name"}}} %>
+  <%= form.input :example_text_field, as: :string %>
   <%= form.input :example_phone_field, as: :tel %>
   <%= form.input :example_email_field, as: :email %>
   <%= form.input :example_number_field, as: :integer %>

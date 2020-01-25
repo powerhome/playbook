@@ -13,6 +13,7 @@ module Playbook
                          default: "form_with"
       prop :form_system_options, type: Playbook::Props::Base
       prop :children, type: Playbook::Props::Proc
+      prop :validate, type: Playbook::Props::Boolean, default: false
 
       delegate :to_partial_path, to: :specific_form
       delegate :merged_form_system_options, to: :specific_form
