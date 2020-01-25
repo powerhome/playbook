@@ -103,20 +103,9 @@ $border_colors: (
 );
 
 // Shadow colors ----------------------
-$shadow_light:        rgba(#3C6AAC, $opacity_2);
-
-/*
-DEPRECATED - DO NOT USE! 
-This targed to be removed in release v4.0.0.
-[https://github.com/powerhome/playbook/issues/550]
-*/
-$shadow_dark:         rgba(#3C6AAC, $opacity_2);
-
-/* END DEPRECATION */
-
+$shadow:        rgba(#3C6AAC, $opacity_2);
 $shadow_colors: (
-  shadow_light:       $shadow_light,
-  shadow_dark:        $shadow_dark
+  shadow:       $shadow,
 );
 
 // Text colors ------------------------
