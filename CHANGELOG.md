@@ -21,7 +21,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 - Form kit field constraint validation [#567](https://github.com/powerhome/playbook/pull/567) @thestephenmarshall
-- Popover Kit (New Kit - Rails only) [#569]([#568]: https://github.com/powerhome/playbook/pull/569) @jasperfurniss
+- Popover Kit (New Kit - Rails only) [#569](https://github.com/powerhome/playbook/pull/569) @jasperfurniss
 
 ## [3.5.0] 2020-1-16
 
