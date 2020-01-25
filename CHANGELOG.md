@@ -8,8 +8,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [4.0.0] Unreleased
 ### Changed
 - Modernize and update API of the Currency kit [#565](https://github.com/powerhome/playbook/pull/565)
+- Shadow Shallow, Default and Dark Deprecated, shadow_light changed to shadow, all affected files updated. ([#568][] @megantrimble)
 
 [#565]: https://github.com/powerhome/playbook/pull/565
+[#568]: https://github.com/powerhome/playbook/pull/568
 
 ## [3.5.0] 2020-1-16
 

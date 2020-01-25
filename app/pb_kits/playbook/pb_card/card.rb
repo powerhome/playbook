@@ -1,10 +1,5 @@
 # frozen_string_literal: true
 
-# DEPRECATION NOTICE - DO NOT USE Shadow Shallow and Shadow Default!
-# Shadow Options: Shallow and Default targed to be removed in release v4.0.0.
-# [https://github.com/powerhome/playbook/issues/550]
-# END DEPRECATION NOTICE
-
 module Playbook
   module PbCard
     class Card
@@ -17,7 +12,7 @@ module Playbook
                      values: %w[none xs sm md lg xl],
                      default: "md"
       prop :shadow, type: Playbook::Props::Enum,
-                    values: %w[none shallow default deep deeper deepest],
+                    values: %w[none deep deeper deepest],
                     default: "none"
       prop :highlight, type: Playbook::Props::Hash,
                        default: {}
