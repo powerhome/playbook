@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [4.0.1] 2020-1-28
 
 ### Changed
+- Remove JSX Popover references [#571](https://github.com/powerhome/playbook/pull/571)
 - Add using prop to be optional in the Currency kit [#572](https://github.com/powerhome/playbook/pull/572) @jasoncypret
 
 ## [4.0.0] 2020-1-25
