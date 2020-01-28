@@ -5,4 +5,3 @@ examples:
     - popover_list: With any children
 
   react:
-    - popover_default: Default
