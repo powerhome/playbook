@@ -8,9 +8,9 @@ import { buildCss } from '../utilities/props'
 type CurrencyProps = {
   align?: 'left' | 'center' | 'right',
   amount: string,
+  unit: string,
   className?: string,
   label?: string,
-  separator?: '.' | ',',
   size?: 'sm' | 'lg',
   symbol?: string,
 }
@@ -23,13 +23,13 @@ const sizes = {
 const Currency = ({
   align = 'left',
   amount,
+  unit,
   className,
   label = '',
-  separator = '.',
   size = 'sm',
   symbol = '$',
 }: CurrencyProps) => {
-  const [whole, decimal = '00'] = amount.split(separator)
+  const [whole, decimal = '00'] = amount.split('.')
 
   return (
     <div className={buildCss('pb_currency_kit', align, className)}>
@@ -47,14 +47,18 @@ const Currency = ({
             className="pb_currency_value"
             size={sizes[size]}
         >
-          {`${whole}${separator}`}
+          {`${whole}`}
         </Title>
 
         <Body
             className="unit"
             color="light"
         >
-          {decimal}
+          <If condition={unit}>
+            {unit}
+            <Else />
+            {`.${decimal}`}
+          </If>
         </Body>
       </div>
     </div>

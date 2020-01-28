@@ -19,14 +19,14 @@ module Playbook
       prop :label, type: Playbook::Props::String,
                    default: ""
 
-      prop :separator, type: Playbook::Props::String,
-                       default: "."
-
       prop :symbol, type: Playbook::Props::String,
                     default: "$"
 
       prop :amount, type: Playbook::Props::String,
                     required: true
+
+      prop :unit, type: Playbook::Props::String,
+                  required: false
 
       def classname
         generate_classname("pb_currency_kit", align)
@@ -54,11 +54,10 @@ module Playbook
       end
 
       def amount_element
-        whole_part, _ = amount.split(separator)
-
+        whole_part = amount.split(".")
         pb_title = Playbook::PbTitle::Title.new(
           size: size_value,
-          text: "#{whole_part}#{separator}",
+          text: whole_part.first.to_s,
           classname: "pb_currency_value"
         )
 
@@ -69,17 +68,12 @@ module Playbook
       end
 
       def units_element
-        _, decimal_part = amount.split(separator)
-
-        pb_unit = Playbook::PbBody::Body.new(
-          classname: "unit",
-          color: "light"
-        ) { decimal_part || "00" }
-
-        ApplicationController.renderer.render(
-          partial: pb_unit,
-          as: :object
-        )
+        _, decimal_part = amount.split(".")
+        if unit.nil?
+          decimal_part.nil? ? ".00" : ".#{decimal_part}"
+        else
+          unit
+        end
       end
 
     private
