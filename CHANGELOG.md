@@ -5,6 +5,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [4.0.1] 2020-1-28
+
+### Changed
+- Remove JSX Popover references [#571](https://github.com/powerhome/playbook/pull/571)
+- Add using prop to be optional in the Currency kit [#572](https://github.com/powerhome/playbook/pull/572) @jasoncypret
+
 ## [4.0.0] 2020-1-25
 
 ### Changed
