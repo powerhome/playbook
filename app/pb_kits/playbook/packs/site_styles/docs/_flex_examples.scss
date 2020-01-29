@@ -2,9 +2,3 @@
   .flex-item,
   [class^=pb_flex_item_kit] { background: #E4E8F0; min-width: 30px; min-height: 30px; color: #242B42; }
   .tall {min-height: 200px;}
-
-  // [class^=pb_flex_kit][class*=wide]{
-  //     [class^=pb_flex_item_kit]{
-  //       flex-basis: 300px;
-  //     }
-  // }

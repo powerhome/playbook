@@ -20,13 +20,13 @@ type FlexProps = {
 const Flex = ({
   children,
   className,
-  inline,
-  horizontal,
-  orientation,
-  spacing,
-  reverse,
-  vertical,
-  wrap,
+  inline = false,
+  horizontal = 'left',
+  orientation = 'row',
+  spacing = 'none',
+  reverse = false,
+  vertical = 'top',
+  wrap = false,
 }: FlexProps) => {
   const orientationClass = orientation !== undefined ? `orientation_${orientation}` : ''
   const horizontalClass = horizontal !== undefined ? `justify_content_${horizontal}` : ''
