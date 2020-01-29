@@ -9,6 +9,7 @@ RSpec.describe Playbook::PbTypeahead::Typeahead do
 
   it { is_expected.to define_prop(:label) }
   it { is_expected.to define_prop(:name) }
+  it { is_expected.to define_prop(:value) }
   it { is_expected.to define_prop(:placeholder) }
   it { is_expected.to define_prop(:search_term_minimum_length).with_default(3) }
   it { is_expected.to define_prop(:search_debounce_timeout).with_default(250) }

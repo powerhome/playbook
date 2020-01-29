@@ -7,6 +7,7 @@ module Playbook
 
       prop :label
       prop :name
+      prop :value
       prop :placeholder
       prop :search_term_minimum_length, default: 3
       prop :search_debounce_timeout, default: 250
