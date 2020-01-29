@@ -8,7 +8,6 @@ module Playbook
       partial "pb_flex/flex_item"
 
       prop :fixed_size, default: nil
-
       prop :grow, type: Playbook::Props::Boolean,
                   default: false
 

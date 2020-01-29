@@ -17,39 +17,35 @@
   // Orientation
   &[class*=_orientation_row] {
     flex-direction: row;
-  }
 
-  &[class*=_orientation_row_reverse] {
-    flex-direction: row-reverse;
+    &[class*=_reverse] {
+      flex-direction: row-reverse;
+    }
   }
 
   &[class*=_orientation_column] {
     flex-direction: column;
-  }
 
-  &[class*=_orientation_column_reverse] {
-    flex-direction: column-reverse;
+    &[class*=_reverse] {
+      flex-direction: column-reverse;
+    }
   }
 
   // Alignment: Justify Content
   &[class*=justify_content_left],
   &[class*=justify_content_top] {
     justify-content: flex-start;
-  }
-
-  &[class*=justify_content_left_reverse],
-  &[class*=justify_content_top_reverse] {
-    justify-content: flex-end;
+    &[class*=_reverse] {
+      justify-content: flex-end;
+    }
   }
 
   &[class*=justify_content_right],
   &[class*=justify_content_bottom] {
     justify-content: flex-end;
-  }
-
-  &[class*=justify_content_right_reverse],
-  &[class*=justify_content_bottom_reverse] {
-    justify-content: flex-start;
+     &[class*=_reverse] {
+      justify-content: flex-start;
+    }
   }
 
   &[class*=justify_content_center] {
