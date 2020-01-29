@@ -5,6 +5,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [4.1.0] 2020-1-29
+
+### Changed
+- Update Form kit to allow Typeahead kit with label and name [#574](https://github.com/powerhome/playbook/pull/574)
+
 ## [4.0.1] 2020-1-28
 
 ### Changed

@@ -3,7 +3,7 @@
                 data: object.data,
                 class: object.classname) do %>
   <div class="pb_typeahead_wrapper">
-    <%= pb_rails("text_input", props: { type: "search", label: object.label, placeholder: object.placeholder }) %>
+    <%= pb_rails("text_input", props: { type: "search", label: object.label, name: object.name, placeholder: object.placeholder }) %>
     <%= pb_rails("list", props: { ordered: false, dark: false, borderless: false, xpadding: true, role: "status", aria: { live: "polite" }, data: { pb_typeahead_kit_results: true } }) do %>
     <% end %>
   </div>
