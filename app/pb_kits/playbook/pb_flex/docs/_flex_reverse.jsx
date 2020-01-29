@@ -1,7 +1,7 @@
 import React from 'react'
-import { Flex, FlexItem, Title } from  '../../'
+import { Flex, FlexItem, Title } from  '../..'
 
-const FlexDefault = () => {
+const FlexReverse = () => {
   return (
     <>
       <Title
@@ -10,7 +10,10 @@ const FlexDefault = () => {
       />
       <br />
       <Flex
+          className="bg_light"
+          horizontal="left"
           orientation="row"
+          reverse
       >
         <FlexItem>
           {'1'}
@@ -33,7 +36,9 @@ const FlexDefault = () => {
       />
       <br />
       <Flex
+          className="bg_light"
           orientation="column"
+          reverse
           vertical="left"
       >
         <FlexItem>
@@ -54,4 +59,4 @@ const FlexDefault = () => {
   )
 }
 
-export default FlexDefault
+export default FlexReverse

@@ -12,3 +12,9 @@ examples:
 
   react:
   - flex_default: Default
+  - flex_inline: Inline
+  - flex_reverse: Reverse
+  - flex_wrap: Wrap
+  - flex_spacing: Spacing
+  - flex_horizontal: Horizontal Alignment
+  - flex_vertical: Vertical Alignment
