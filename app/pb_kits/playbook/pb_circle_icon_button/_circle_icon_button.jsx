@@ -4,6 +4,7 @@ import React from 'react'
 import { Button, Icon } from '../'
 
 type CircleIconButtonProps = {
+  type?: 'button' | 'submit' | 'reset',
   variant?: 'primary' | 'secondary' | 'link',
   disabled?: Boolean,
   dark?: Boolean,
@@ -14,6 +15,7 @@ type CircleIconButtonProps = {
 
 const CircleIconButton = (props: CircleIconButtonProps) => {
   const {
+    type,
     variant,
     disabled,
     icon,
@@ -23,6 +25,7 @@ const CircleIconButton = (props: CircleIconButtonProps) => {
   return (
     <div className="pb_circle_icon_button_kit">
       <Button
+          type={type}
           dark={dark}
           disabled={disabled}
           text={null}
