@@ -1,14 +1,12 @@
 <%= content_tag(:div,
-    id: object.id,
-    data: object.data,
-    class: object.classname) do %>
-    
-      <div class="popover_tooltip" id="<%= object.tooltip_id %>" role="tooltip">
-        <%= pb_rails("card", props: {shadow: "deeper"}) do %>
-          <%= capture(&object.children) %>
-        <% end %>
-      </div>
-    
+  id: object.id,
+  data: object.data,
+  class: object.classname) do %>
+    <div class="popover_tooltip" id="<%= object.tooltip_id %>" role="tooltip">
+      <%= pb_rails("card", props: {shadow: "deeper"}) do %>
+        <%= capture(&object.children) %>
+      <% end %>
+    </div>
 <% end %>
 
 
@@ -16,12 +14,12 @@
 <% content_for :pb_js do %>
   <%= javascript_tag do %>
     window.addEventListener('DOMContentLoaded', function() {
-    new Popover(
-        "#<%= object.trigger_element_id %>", 
-        "#<%= object.tooltip_id %>", 
+      new Popover(
+        "#<%= object.trigger_element_id %>",
+        "#<%= object.tooltip_id %>",
          "<%= object.position %>",
           <%= object.popover_offset %>,
-      ); 
+      )
     })
   <% end %>
 <% end %>

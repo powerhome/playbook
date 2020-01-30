@@ -31,11 +31,12 @@ class Popover {
   attachEvents() {
     this.popoverTriggerElement.addEventListener('click', () => {
       this.popoverTooltip.classList.toggle('show')
+      this.popper.update()
     })
   }
 
   setupPopper() {
-    createPopper(this.popoverTriggerElement, this.popoverTooltip, {
+    this.popper = createPopper(this.popoverTriggerElement, this.popoverTooltip, {
       placement: this.popoverPlacement,
       modifiers: [
         {

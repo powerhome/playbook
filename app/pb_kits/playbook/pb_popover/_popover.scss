@@ -1,8 +1,8 @@
 [class^="pb_popover_kit"] {
   .popover_tooltip {
-    opacity: 0;
+    display: none;
     &.show {
-      opacity: 1;
+      display: block;
     }
   }
 }
