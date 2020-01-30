@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 - Fix Form kit data prop merge [#587](https://github.com/powerhome/playbook/pull/587)
+- Fixed WebpackerReact registration [#589](https://github.com/powerhome/playbook/pull/589)
 
 
 ## [4.1.2] 2020-1-30
