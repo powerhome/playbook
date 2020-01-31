@@ -14,30 +14,32 @@ class Popover {
     this.setupPopper()
   }
 
-  //getters
-  get popoverTriggerElement() {
-    return document.querySelector(this.triggerElement)
-  }
-  get popoverTooltip() {
-    return document.querySelector(this.tooltip)
-  }
-  get popoverPlacement() {
-    return this.placement
-  }
-  get popoverOffset() {
-    return this.offset
+  bodyClick = (event) => {
+    const { target } = event
+
+    if (target === this.popoverTriggerElement) return
+
+    this.popoverTooltip.classList.remove('show')
+    this.popoverTooltip.classList.add('hide')
+    document.body.removeEventListener('click', this.bodyClick, false)
   }
 
   attachEvents() {
-    this.popoverTriggerElement.addEventListener('click', () => {
+    this.popoverTriggerElement.addEventListener('click', (event) => {
       this.popoverTooltip.classList.toggle('show')
       this.popper.update()
+
+      event.stopPropagation()
+      document.body.addEventListener('click', this.bodyClick, false)
     })
   }
 
   setupPopper() {
+    this.popoverTriggerElement = document.querySelector(this.triggerElement)
+    this.popoverTooltip = document.querySelector(this.tooltip)
+
     this.popper = createPopper(this.popoverTriggerElement, this.popoverTooltip, {
-      placement: this.popoverPlacement,
+      placement: this.placement,
       modifiers: [
         {
           name: 'offset',
