@@ -15,21 +15,31 @@ module Playbook
       end
     end
 
-    def pb_kit(kit: "", type: "rails")
+    def pb_kit(kit: "", type: "rails", show_code: true)
       @type = type
       @kit_examples = get_kit_examples(kit, type)
-      render partial: "playbook/config/kit_example"
+      @show_code = show_code
+      render partial: "config/kit_example"
     end
 
     def pb_kits(type: "rails")
       display_kits = []
-      MENU["kits"].sort.each do |kit|
-        title = render_clickable_title(kit)
-        ui = raw("<div class='pb--docItem-ui'>
-            #{pb_kit(kit: kit, type: type)}</div>")
-        display_kits << title + ui
+      kits = get_kits()
+      kits.sort.each do |kit|
+       display_kits << render_pb_doc_kit(kit, type, false)
       end
       raw("<div class='pb--docItem'>" + display_kits.join("</div><div class='pb--docItem'>") + "</div>")
+    end
+
+    def get_kits
+      menu = YAML.load_file("#{Playbook::Engine.root}/app/pb_kits/playbook/data/MENU.yml")
+      return menu["kits"]
+    end
+
+    def render_pb_doc_kit(kit, type, code=true)
+      title = render_clickable_title(kit)
+      ui = raw("<div class='pb--docItem-ui'>#{pb_kit(kit: kit, type: type, show_code: code)}</div>")
+      return  title + ui
     end
 
     def pb_kit_api(kit)
@@ -63,9 +73,13 @@ module Playbook
     end
 
     def render_clickable_title(kit)
-      render inline: "<a href='#{kit_show_path(kit)}'>
-          #{pb_rails(:title, props: { text: pb_kit_title(kit),
-                                      tag: 'h3', size: 2 })}</a>"
+      url = "#"
+      begin
+        url = kit_show_path(kit)
+      rescue
+        puts "Kit Path Not Avaliable"
+      end
+        render inline: "<a href='#{url}'>#{ pb_rails(:title, props: { text: pb_kit_title(kit), tag: 'h3', size: 2 })}</a>"
     end
   end
 end
