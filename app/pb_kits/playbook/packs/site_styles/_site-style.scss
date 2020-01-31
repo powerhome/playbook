@@ -1,10 +1,14 @@
 @import "../../tokens/colors";
+@import "../../tokens/spacing";
 
 // Main Home Page Layout with Sidebar
+body {
+  height: 100vh;
+}
 .pb--page {
   display: flex;
   flex-direction: column;
-  height: 100%;
+  height: 100vh;
 
   &--topNav {
     flex: 0 0;
@@ -19,25 +23,28 @@
       }
     }
   }
-
   &--content {
     display: flex;
     flex-direction: row;
     flex: 1 1 100%;
-
-    &--sideNav {
-      flex: 0 0 250px;
-      padding: 0;
-      background: $white;
-      border-right: 1px solid $border_light;
-      max-width: 250px;
-      min-height: calc(100vh - 89px);
-    }
-
     &--main {
       flex-grow: 1;
       padding: 40px 60px;
-      // max-width: calc(100vw - 250px);
+      height: calc(100vh - 89px);
+      overflow: auto;
+    }
+  }
+  &--sideNav {
+    height: calc(100vh - 89px);
+    overflow: auto;
+    .category_section {
+      &.active {
+        padding: $space_xs 0;
+        background: $bg_light;
+      }
+      .sub_category {
+        padding-left: $space_md;
+      }
     }
   }
 }
@@ -77,6 +84,3 @@
     }
   }
 }
-
-
-

@@ -1,4 +1,13 @@
+@import "../tokens/spacing";
+@import "../tokens/colors";
+@import "../tokens/border_radius";
+@import "../tokens/animation-curves";
+@import "../tokens/typography";
+@import "../pb_body/body_mixins";
+@import "../pb_title/title_mixin";
+
 $selector: ".pb_nav_list";
+
 [class^=pb_nav_list][class*=_vertical] {
   ul {
     padding: 0;
@@ -7,67 +16,120 @@ $selector: ".pb_nav_list";
   }
 
   [class*=_title] {
-    padding: 0 $space_xl $space_sm;
+    padding: 0 $space_md $space_sm;
   }
 
-  [class*=_border_item] {
-    list-style: none;
-    border-bottom: 1px solid $border_light;
+  // Normal Variant
+  &[class*=_normal]  {
+    [class*=pb_nav_list_kit_item] {
+      list-style: none;
+      border-bottom: 1px solid $border_light;
+      &[class*=_active] {
+        [class*=_link] {
+          border-color: $primary;
+          [class*=_item_icon] {
+            color: $primary;
+          }
+          [class*=_item_text] {
+            color: $primary;
+          }
+        }
+      }
+      [class*=_link] {
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        padding: $space_sm $space_md $space_sm ($space_md - 3px);
+        border: 0 solid transparent;
+        border-width: 0 0 0 3px;
+        transition-property: color, border-color, background-color;
+        transition-duration: 0.15s;
+        transition-timing-function: $bezier;
+        &:hover {
+          background-color: rgba($primary, 0.03);
+          [class*=_icon] {
+            color: $primary;
+          }
+          [class*=_text] {
+            color: $primary;
+          }
+        }
+        [class*=_icon_left] {
+          font-size: $font_large;
+          margin-right: $space_md;
+          color: $text_lt_lighter;
+        }
+        [class*=_icon_right] {
+          font-size: $font_large;
+          margin-left: $space_md;
+          color: $text_lt_default;
+        }
+        [class*=_text] {
+          font-size: $font_base;
+          font-weight: $bold;
+          color: $text_lt_default;
+          flex: 1;
+        }
+      }
+      &:last-child {
+        border-bottom: 0;
+      }
+    }
 
-    &:last-child {
+  }
+
+
+  // Subtle Variant
+  &[class*=_subtle]  {
+    [class*=pb_nav_list_kit_item] {
+      list-style: none;
+      border-radius: $border_rad_heavier;
       border-bottom: 0;
-    }
-
-    [class*=_link] {
-      text-decoration: none;
-      display: flex;
-      align-items: center;
-      padding: $space_sm $space_xl;
-      border: 0 solid transparent;
-      border-width: 0 0 0 3px;
-      transition-property: color, border-color, background-color;
-      transition-duration: 0.15s;
-      transition-timing-function: $bezier;
-
-      [class*=_icon] {
-        font-size: $font_large;
-        margin-right: $space_sm;
-        color: $text_lt_lighter;
-      }
-
-      [class*=_text] {
-        font-size: $font_base;
-        font-weight: $bold;
-        color: $text_lt_default;
-      }
-
-      &:hover {
-        background-color: rgba($primary, 0.03);
-
-        #{$selector}_item_icon {
-          color: $primary;
+      margin: $space_xs ($space_sm - 2px);
+      [class*=_link] {
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        padding: $space_xs ($space_sm - 2px);
+        transition-property: color, background-color;
+        transition-duration: 0.15s;
+        transition-timing-function: $bezier;
+        border-radius: $border_rad_heavier;
+        @include pb_body($text_lt_default);
+        [class*=_icon_left] {
+          margin-right: ($space_xs + 2px);
+          color: $text_lt_lighter;
         }
-
-        #{$selector}_item_text {
-          color: $primary;
+        [class*=_icon_right] {
+          margin-left: ($space_xs + 2px);
+          color: $text_lt_default;
+        }
+        [class*=_text] {
+          flex: 1;
+        }
+        &:hover {
+          background-color: rgba($primary, 0.03);
+          [class*=_icon] {
+            color: $primary;
+          }
+          [class*=_text] {
+            color: $primary;
+          }
         }
       }
-    }
-  }
-
-  [class*=_active] {
-    background-color: $active_light;
-
-    #{$selector}_item_link {
-      border-color: $primary;
-
-      [class*=_item_icon] {
-        color: $primary;
-      }
-
-      [class*=_item_text] {
+      &[class*=_active] [class*=_link] {
+        @include pb_title_4;
         color: $primary;
       }
     }
   }
+
+  // Show Highlight
+  &[class*=_highlight]  {
+    [class*=_active] {
+      background-color: $active_light;
+    }
+  }
+
+
 }

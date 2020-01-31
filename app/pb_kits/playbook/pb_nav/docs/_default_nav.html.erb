@@ -3,3 +3,48 @@
   <%= pb_rails("nav/item", props: { text: "Nav Item using text prop", link: "#" }) %>
   <%= pb_rails("nav/item", props: { text: "Nav Item using text prop", link: "#" }) %>
 <% end %>
+<br>
+
+<%= pb_rails("nav", props: {title: "Title Example", link: "#"}) do %>
+  <%= pb_rails("nav/item", props: { active: true, icon_left: "users", }) do %>
+    Users
+  <% end %>
+  <%= pb_rails("nav/item", props: { link: "#", icon_left: "users", }) do %>
+    Users
+  <% end %>
+  <%= pb_rails("nav/item", props: { icon_left: "users", icon_right: "angle-down", link: "#" }) do %>
+    Users
+  <% end %>
+<% end %>
+<br>
+<%= pb_rails("nav", props: {highlight: false}) do %>
+  <%= pb_rails("nav/item", props: { active: true, icon_right: "angle-down" }) do %>
+    Active Nav Item using text prop
+  <% end %>
+
+  <%= pb_rails("nav/item", props: { text: "Nav Item using text prop", link: "#" }) %>
+  <%= pb_rails("nav/item", props: { text: "Nav Item using text prop", link: "#" }) %>
+<% end %>
+
+<br>
+
+<%= pb_rails("nav", props: {variant: "subtle"}) do %>
+  <%= pb_rails("nav/item", props: { text: "Active Nav Item using text prop", link: "#", active: true }) %>
+  <%= pb_rails("nav/item", props: { text: "Nav Item using text prop", link: "#", icon_right: "angle-down"  }) %>
+  <%= pb_rails("nav/item", props: { text: "Nav Item using text prop", link: "#" }) %>
+<% end %>
+
+<br>
+
+<%= pb_rails("nav", props: {variant: "subtle", highlight: false}) do %>
+  <%= pb_rails("nav/item", props: { text: "Active Nav Item using text prop", link: "#", active: true }) %>
+  <%= pb_rails("nav/item", props: { text: "Nav Item using text prop", link: "#" }) %>
+  <%= pb_rails("nav/item", props: { text: "Nav Item using text prop", link: "#" }) %>
+<% end %>
+
+
+<%= pb_rails("nav", props: {variant: "subtle"}) do %>
+  <%= pb_rails("nav/item", props: { icon_left: "users", text: "Active Nav Item using text prop", link: "#", active: true }) %>
+  <%= pb_rails("nav/item", props: { icon_left: "users", text: "Nav Item using text prop", link: "#", icon_right: "angle-down"  }) %>
+  <%= pb_rails("nav/item", props: { icon_left: "users", text: "Nav Item using text prop", link: "#" }) %>
+<% end %>
