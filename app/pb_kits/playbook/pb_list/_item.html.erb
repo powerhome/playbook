@@ -1,6 +1,8 @@
 <%= content_tag(:li,
-    id: object.id,
-    data: object.data,
-    class: object.classname) do %>
+                id: object.id,
+                data: object.data,
+                class: object.classname,
+                tabindex: object.tabindex
+  ) do %>
     <%= capture(&object.children) %>
 <% end %>

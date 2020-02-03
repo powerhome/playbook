@@ -29,12 +29,22 @@
     }
   }
   &[class*=_dark] {
-      input:checked ~ .pb_radio_button {
-        border: 6px solid $primary;
-      }
+    input:checked ~ .pb_radio_button {
+      border: 6px solid $primary;
+    }
 
-      &:hover .pb_radio_button {
-        border-color: $primary_action;
+    &:hover .pb_radio_button {
+      border-color: $primary_action;
+    }
+    &.error {
+      > .pb_radio_button {
+        border-color: $error_dark;
       }
     }
+  }
+  &.error {
+    > .pb_radio_button {
+      border-color: $error;
+    }
+  }
 }

@@ -2,13 +2,14 @@
 
 import React from 'react'
 import classnames from 'classnames'
-import { Caption } from '../'
+import { Body, Caption } from '../'
 import { type InputCallback } from '../types.js'
 
 type TextareaProps = {
   className?: String,
   children?: Array<React.ReactChild>,
   data?: String,
+  error?: String,
   id?: String,
   object?: String,
   method?: String,
@@ -24,18 +25,20 @@ type TextareaProps = {
 const Textarea = ({
   className,
   children,
+  dark = false,
+  error,
   label,
+  name,
   onChange = () => {},
   placeholder,
-  value,
-  dark = false,
   rows = 4,
-  name,
+  value,
 }: TextareaProps) => {
   const textareaClass = `pb_textarea_kit${dark ? '_dark' : ''}`
+  const errorClass = error ? 'error' : null
 
   return (
-    <div className={classnames(textareaClass, className)}>
+    <div className={classnames(textareaClass, className, errorClass)}>
       <Caption
           dark={dark}
           text={label}
@@ -51,6 +54,13 @@ const Textarea = ({
             rows={rows}
             value={value}
         />
+        <If condition={error}>
+          <Body
+              dark={dark}
+              status="negative"
+              text={error}
+          />
+        </If>
       </If>
     </div>
   )

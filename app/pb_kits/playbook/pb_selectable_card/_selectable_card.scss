@@ -19,7 +19,7 @@ $pb_selectable_card_border: 2px;
     cursor: pointer;
 
     &:hover {
-      box-shadow: $shadow-default;
+      box-shadow: $shadow-deep;
       border-color: $slate;
     }
 

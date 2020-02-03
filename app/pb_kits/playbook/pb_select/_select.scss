@@ -17,7 +17,7 @@
       opacity: 0.5;
     }
     color: transparent !important;
-    text-shadow: 0 0 0 $text_lt_default !important;
+    text-shadow: 0 0 0 $text_lt_default;
   }
   option {
     color: $text_lt_default;
@@ -29,6 +29,17 @@
   .pb_select_kit_wrapper {
     position: relative;
     display: block;
+    &.error {
+      [class*=pb_body_kit] {
+        margin-top: $space_xs / 2;
+      }
+      > select:first-child {
+        border-color: $error;
+      }
+      .pb_select_kit_caret {
+        top: 35%;
+      }
+    }
   }
   .pb_select_kit_caret {
     position: absolute;
@@ -48,9 +59,20 @@
       &:hover, &:active, &:focus {
         background-color: tint($focus_input_dark, 5%);
       }
+      text-shadow: 0 0 0 $text_dk_default;
     }
     .pb_select_kit_caret {
       color: $white;
     }
+    .pb_select_kit_wrapper {
+      &.error {
+        .pb_select_kit_wrapper {
+          > select:first-child {
+            border-color: $error_dark;
+          }
+        }
+      }
+    }
   }
+  
 }

@@ -5,21 +5,23 @@ const CurrencyDefault = () => {
   return (
     <div>
       <Currency
+          amount="2,000.50"
           label="Caption"
           size="lg"
-          value="2,000"
       />
       <Currency
           align="center"
+          amount="342"
           label="Caption"
           size="lg"
-          value="2,000"
+          symbol="€"
       />
       <Currency
           align="right"
+          amount="45"
           label="Caption"
           size="lg"
-          value="2,000"
+          unit="/mo"
       />
     </div>
   )

@@ -1,23 +1,28 @@
 /* @flow */
 import React from 'react'
 import classnames from 'classnames'
-import { Caption } from '../'
+import {
+  Body,
+  Caption,
+} from '../'
 
 type TextInputProps = {
-  className: string,
+  className: String,
   dark: boolean,
-  name: string,
-  label: string,
-  onChange: (string) => void,
-  placeholder: string,
-  type: string,
-  value: string | number,
+  error?: String,
+  name: String,
+  label: String,
+  onChange: (String) => void,
+  placeholder: String,
+  type: String,
+  value: String | number,
   children: Node,
 }
 
 const TextInput = ({
   className,
-  dark,
+  dark = false,
+  error,
   name,
   label,
   onChange = () => {},
@@ -29,6 +34,7 @@ const TextInput = ({
   const css = classnames([
     `pb_text_input_kit${dark === true ? '_dark' : ''}`,
     className,
+    error ? 'error' : null,
   ])
 
   return (
@@ -50,6 +56,13 @@ const TextInput = ({
               type={type}
               value={value}
           />
+          <If condition={error}>
+            <Body
+                dark={dark}
+                status="negative"
+                text={error}
+            />
+          </If>
         </If>
       </div>
     </div>

@@ -6,16 +6,24 @@
   <%= content_tag(:div,
       class: "text_input_wrapper") do %>
     <% if object.children.present? %>
-      <% capture(&object.children) %>
+      <%= capture(&object.children) %>
+      <% if object.error %>
+        <%= pb_rails("body", props: {dark: object.dark, status: "negative", text: object.error}) %>
+      <% end %>
     <% else %>
       <%= tag(:input,
           id: object.id,
           class: object.classname,
           data: object.data,
           name: object.name,
+          pattern: object.validation_pattern,
           placeholder: object.placeholder,
+          required: object.required,
           type: object.type,
           value: object.value) %>
+      <% if object.error %>
+        <%= pb_rails("body", props: {dark: object.dark, status: "negative", text: object.error}) %>
+      <% end %>
     <% end %>
   <% end %>
 <% end %>

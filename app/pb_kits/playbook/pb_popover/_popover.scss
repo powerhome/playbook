@@ -1,0 +1,8 @@
+[class^="pb_popover_kit"] {
+  .popover_tooltip {
+    display: none;
+    &.show {
+      display: block;
+    }
+  }
+}

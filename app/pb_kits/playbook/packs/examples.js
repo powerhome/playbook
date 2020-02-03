@@ -12,6 +12,7 @@ import WebpackerReact from 'webpacker-react'
 // Generated file from kit generator.
 // KIT EXAMPLES
 
+import '../pb_form/pb_form_validation'
 import * as avatar from 'pb_avatar/docs'
 import * as Badge from 'pb_badge/docs'
 import * as BarGraph from 'pb_bar_graph/docs'
@@ -73,7 +74,9 @@ import * as TitleDetail from 'pb_title_detail/docs'
 import * as Toggle from 'pb_toggle/docs'
 import * as User from 'pb_user/docs'
 import * as UserBadge from 'pb_user_badge/docs'
+import PbTypeahead from 'pb_typeahead'
 
+PbTypeahead.start()
 WebpackerReact.setup(avatar)
 WebpackerReact.setup(Badge)
 WebpackerReact.setup(BarGraph)
@@ -114,6 +117,7 @@ WebpackerReact.setup(OnlineStatus)
 WebpackerReact.setup(Person)
 WebpackerReact.setup(PersonContact)
 WebpackerReact.setup(Pill)
+WebpackerReact.setup(Popover)
 WebpackerReact.setup(ProgressPills)
 WebpackerReact.setup(ProgressSimple)
 WebpackerReact.setup(Radio)

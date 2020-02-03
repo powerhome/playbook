@@ -68,4 +68,5 @@ export barGraphSettings from './pb_bar_graph/barGraphSettings'
 export dashboardValueSettings from './pb_dashboard_value/dashboardValueSettings'
 
 // Other JS/Plugins
-export pbChart from './plugins/pb_chart_plugin.js'
+export pbChart from './plugins/pb_chart.js'
+export PbTypeahead from './pb_typeahead'

@@ -21,8 +21,7 @@ RSpec.describe Playbook::PbCard::Card do
   it do
     is_expected.to define_enum_prop(:shadow)
                    .with_default("none")
-                   .with_values("none", "shallow", "default",
-                                "deep", "deeper", "deepest")
+                   .with_values("none", "deep", "deeper", "deepest")
   end
 
   describe "#classname" do
@@ -30,7 +29,7 @@ RSpec.describe Playbook::PbCard::Card do
       expect(subject.new({}).classname).to eq "pb_card_kit_deselected"
       expect(subject.new(selected: true).classname).to eq "pb_card_kit_selected"
       expect(subject.new(shadow: "deeper").classname).to eq "pb_card_kit_deselected_shadow_deeper"
-      expect(subject.new(selected: true, shadow: "shallow").classname).to eq "pb_card_kit_selected_shadow_shallow"
+      expect(subject.new(selected: true, shadow: "deep").classname).to eq "pb_card_kit_selected_shadow_deep"
       expect(subject.new(classname: "additional_class").classname).to eq "pb_card_kit_deselected additional_class"
       expect(subject.new(highlight: {position: "top"}).classname).to eq "pb_card_kit_deselected_highlight_top"
       expect(subject.new(highlight: {position: "side"}).classname).to eq "pb_card_kit_deselected_highlight_side"

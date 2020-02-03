@@ -15,6 +15,7 @@ module Playbook
         def merged_form_system_options
           Hash(form_system_options).merge(
             class: merged_class,
+            data: { "pb-form-validation": validate },
             builder: form_builder
           )
         end

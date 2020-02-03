@@ -7,6 +7,9 @@
   <% end %>
   <% if object.children %>
     <%= capture(&object.children) %>
+    <% if object.error %>
+      <%= pb_rails("body", props: {dark: object.dark, status: "negative", text: object.error}) %>
+    <% end %>
   <% else %>
     <%= text_area(
         :object,
@@ -16,5 +19,8 @@
         :placeholder => object.placeholder,
         :rows => object.rows,
         :value => object.value )%>
+    <% if object.error %>
+      <%= pb_rails("body", props: {dark: object.dark, status: "negative", text: object.error}) %>
+    <% end %>
   <% end %>
 <% end %>

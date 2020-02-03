@@ -1,6 +1,6 @@
 {
   "name": "playbook-ui",
-  "version": "3.4.0",
+  "version": "4.1.2",
   "description": "Nitro's Design System",
   "main": "./app/pb_kits/playbook/index.js",
   "scripts": {
@@ -50,6 +50,7 @@
     "@babel/preset-env": "^7.5.5",
     "@babel/preset-flow": "^7.0.0",
     "@babel/preset-react": "^7.0.0",
+    "@popperjs/core": "^2.0.0",
     "@rails/webpacker": "^4.0.7",
     "babel-loader": "^8.0.5",
     "babel-plugin-flow-runtime": "0.11.1",

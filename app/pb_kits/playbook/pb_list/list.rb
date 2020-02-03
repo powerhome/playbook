@@ -19,6 +19,8 @@ module Playbook
                      default: false
       prop :xpadding, type: Playbook::Props::Boolean,
                       default: false
+      prop :role
+      prop :tabindex
 
       def list_classname
         [
