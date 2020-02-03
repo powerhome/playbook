@@ -2,5 +2,33 @@
     id: object.id,
     data: object.data,
     class: object.classname) do %>
-  <span>FILTER CONTENT</span>
+    <%= pb_rails("card",props: {padding:"none"}) do%>
+  <div class="d-flex align-items-center">
+      <%= pb_rails("circle_icon_button", props: { variant: "secondary", icon: "filter", classname: "py-4 pl-4"}) %>
+      <div class="maskContainer">
+          <div class="filters py-4" id="">
+              <div class="left_gradient"></div>
+            
+              <div class="right_gradient"></div>
+          </div>
+      </div>
+  </div>
+  <%= pb_rails("section_separator") %>
+  <div class="d-flex align-items-center justify-content-between p-4">
+  <div class="d-flex align-items-center">
+      <%= pb_rails("title", props: { text: "Results:", tag: "h4", size: 4 }) %>
+      <%= pb_rails("body", props: { text: "25", classname: "ml-2", color: "light"}) %>
+  </div>
+
+  <div class="d-flex align-items-center">
+      <%= pb_rails("caption", props: { text: "sort by:"}) %>
+      <%= pb_rails("button", props: {variant: "link" ,classname: "p-0 ml-3"}) do %>
+          <span>Popularity</span>
+          <%= pb_rails("icon", props: { icon: "sort-amount-down", fixed_width: true }) %>
+      <% end %>
+  </div>
+  </div>
+
+
+  <% end %>
 <% end %>
