@@ -1,0 +1,9 @@
+<%= pb_rails("nav", props: {variant: "subtle"}) do %>
+  <%= pb_rails("nav/item", props: { icon_left: "city", text: "City", link: "#" }) %>
+  <%= pb_rails("nav/item", props: { icon_left: "user-friends", text: "People", link: "#", icon_right: "angle-down" }) %>
+  <%= pb_rails("nav/item", props: { icon_left: "user-tie", text: "Business", link: "#", active: true }) %>
+  <%= pb_rails("nav/item", props: { icon_left: "theater-masks", text: "Entertainment", link: "#" }) %>
+  <%= pb_rails("nav/item", props: { icon_left: "salad", text: "Food", link: "#", icon_right: "angle-down" }) %>
+  <%= pb_rails("nav/item", props: { icon_left: "sunglasses", text: "Style", link: "#" }) %>
+  <%= pb_rails("nav/item", props: { icon_left: "child", text: "Childern", link: "#" }) %>
+<% end %>

@@ -56,12 +56,12 @@ $selector: ".pb_nav_list";
         }
         [class*=_icon_left] {
           font-size: $font_large;
-          margin-right: $space_md;
+          margin-right: $space_sm;
           color: $text_lt_lighter;
         }
         [class*=_icon_right] {
           font-size: $font_large;
-          margin-left: $space_md;
+          margin-left: $space_sm;
           color: $text_lt_default;
         }
         [class*=_text] {

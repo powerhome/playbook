@@ -1,4 +1,4 @@
-<%= pb_rails("nav") do %>
+<%= pb_rails("nav", props: {title: "Browse", link: "#"}) do %>
   <%= pb_rails("nav/item", props: { icon_left: "newspaper", text: "News Feed"  }) %>
   <%= pb_rails("nav/item", props: { icon_left: "comments-alt", link: "#", text: "Messages", active: true }) %>
   <%= pb_rails("nav/item", props: { icon_left: "calendar-check", icon_right: "angle-down", link: "#", text: "Events" }) %>

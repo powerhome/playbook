@@ -5,13 +5,13 @@
   <%= content_tag(object.tag,
     object.link ? object.link_options : object.options) do %>
     <% if object.icon_left %>
-      <%= pb_rails("icon", props: { icon: object.icon_left, classname: "pb_nav_list_item_icon_left"}) %>
+      <%= pb_rails("icon", props: { icon: object.icon_left, classname: "pb_nav_list_item_icon_left", fixed_width: true}) %>
     <% end %>
     <span class="pb_nav_list_item_text">
       <%= object.text %><%= capture(&object.children) if !object.children.nil? %>
     </span>
     <% if object.icon_right %>
-      <%= pb_rails("icon", props: { icon: object.icon_right, classname: "pb_nav_list_item_icon_right"}) %>
+      <%= pb_rails("icon", props: { icon: object.icon_right, classname: "pb_nav_list_item_icon_right", fixed_width: true}) %>
     <% end %>
   <% end %>
 <% end %>
