@@ -11,15 +11,14 @@
     = pb_react(key.camelize)
   br
 
-- if @show_code
-  .pb--codeControls
-    ul
-      li
-        a href="#" data-toggle="code_example" Code Example
+.pb--codeControls
+  ul
+    li
+      a href="#" data-toggle="code_example" Code Example
 
-  .pb--codeCopy data-action="toggle" data-togglable="code_example"
-    a.pb--close-toggle href="#" data-toggle="false" Close
-    - if type == "rails"
-      = raw rouge(contents, "erb")
-    - elsif type == "react"
-      = raw rouge(contents, "erb")
+.pb--codeCopy data-action="toggle" data-togglable="code_example"
+  a.pb--close-toggle href="#" data-toggle="false" Close
+  - if type == "rails"
+    = raw rouge(contents, "erb")
+  - elsif type == "react"
+    = raw rouge(contents, "erb")
