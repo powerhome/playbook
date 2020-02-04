@@ -20,10 +20,6 @@ module Playbook
 
     def principles; end
 
-    def fullscreen
-      render layout: "layouts/playbook/fullscreen"
-    end
-
     def grid
       render layout: "layouts/playbook/grid"
     end
