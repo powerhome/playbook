@@ -16,6 +16,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Removed popover from examples.js and used MENU constant in doc helper [#591](https://github.com/powerhome/playbook/pull/591)
 [#493]:https://github.com/powerhome/playbook/pull/493
 
+### Changed
+- Fix Form kit data prop merge [#587](https://github.com/powerhome/playbook/pull/587)
+
 
 ## [4.1.2] 2020-1-30
 
