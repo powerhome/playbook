@@ -19,15 +19,15 @@ module Playbook
       #   return text
       # end
 
-      def highlight
-        if text['<:'] && text[':>']
-          text.gsub! '<:', ''
-          text.gsub! ':>', ''
-          return content_tag(:span,text,class:['pb_highlight_kit'])
-        else
-          return text
-        end
-      end
+      # def highlight
+      #   if text['<:'] && text[':>']
+      #     text.gsub! '<:', ''
+      #     text.gsub! ':>', ''
+      #     return content_tag(:span,text,class:['pb_highlight_kit'])
+      #   else
+      #     return text
+      #   end
+      # end
 
     end
   end

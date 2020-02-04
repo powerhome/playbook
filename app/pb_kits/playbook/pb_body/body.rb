@@ -27,15 +27,27 @@ module Playbook
 
       def highlight
         if text['<:'] && text[':>']
-          text.gsub! '<:', ''
-          text.gsub! ':>', ''
-          return content_tag(:span,text,class:['pb_highlight_kit'])
+          input_string = text
+          l_marker = "<:"
+          r_marker = ":>"
+          highlight_text = input_string[/#{l_marker}(.*?)#{r_marker}/m, 1]
+          puts '*' * 50
+          puts highlight_text
+          puts '*' * 50
+          # text.gsub! '<:', ''
+          # text.gsub! ':>', ''
+          return content_tag(:span,highlight_text,class:['pb_highlight_kit'])
         else
           return text
         end
       end
 
+
+      def string_between_markers marker1, marker2
+        self[/#{Regexp.escape(marker1)}(.*?)#{Regexp.escape(marker2)}/m, 1]
+      end
     private
+
 
       def color_class
         color != "default" ? color : nil
