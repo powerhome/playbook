@@ -2,31 +2,28 @@ import React from 'react'
 import { Nav } from '../../'
 import NavItem from '../_item.jsx'
 
-const HorizontalNav = () => {
+const NoHighlightNav = () => {
   return (
-    <Nav
-        link="#"
-        orientation="horizontal"
-    >
-      <NavItem
-          link="#"
-          text="About"
-      />
+    <Nav highlight={false}>
       <NavItem
           active
           link="#"
-          text="Case Studies"
+          text="All Categories"
       />
       <NavItem
           link="#"
-          text="Service"
+          text="Food"
       />
       <NavItem
           link="#"
-          text="Contacts"
+          text="Digital"
+      />
+      <NavItem
+          link="#"
+          text="Design Art"
       />
     </Nav>
   )
 }
 
-export default HorizontalNav
+export default NoHighlightNav

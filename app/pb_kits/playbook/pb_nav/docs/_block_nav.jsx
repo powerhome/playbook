@@ -6,17 +6,17 @@ const BlockNav = () => {
   return (
     <Nav
         link="#"
-        orientation="vertical"
-        title="Title example"
+        title="Menu"
     >
       <NavItem
           active
           link="#"
       >
-        {'Active Nav Item using text prop'}
+        {'Photos'}
       </NavItem>
-      <NavItem link="#">{'Nav Item using text prop'}</NavItem>
-      <NavItem link="#">{'Nav Item using text prop'}</NavItem>
+      <NavItem link="#">{'Music'}</NavItem>
+      <NavItem link="#">{'Video'}</NavItem>
+      <NavItem link="#">{'Files'}</NavItem>
     </Nav>
   )
 }
