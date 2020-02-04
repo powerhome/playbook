@@ -15,7 +15,7 @@ module Playbook
         def merged_form_system_options
           Hash(form_system_options).merge(
             class: merged_class,
-            data: { "pb-form-validation": validate },
+            data: { "pb-form-validation": validate }.merge(Hash(form_system_options).fetch(:data, {})),
             builder: form_builder
           )
         end
