@@ -40,7 +40,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [4.1.2] 2020-1-30
 
 ### Changed
-- Call uppdate method on Popover library to allow block show/hide [577](https://github.com/powerhome/playbook/pull/577/files?file-filters%5B%5D=.erb&file-filters%5B%5D=.js&file-filters%5B%5D=.scss)
+- Call update method on Popover library to allow block show/hide [577](https://github.com/powerhome/playbook/pull/577/files?file-filters%5B%5D=.erb&file-filters%5B%5D=.js&file-filters%5B%5D=.scss)
 
 ## [4.1.1] 2020-1-29
 

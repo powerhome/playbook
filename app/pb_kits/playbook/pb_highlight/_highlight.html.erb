@@ -1,6 +1,6 @@
-<%= content_tag(:div,
+<%= content_tag(:span,
     id: object.id,
     data: object.data,
     class: object.classname) do %>
-  <div class="pb_highlight_kit"><%= capture(&object.children) %></div>
+    <%= !object.children.nil? ? capture(&object.children) : object.highlight %>
 <% end %>

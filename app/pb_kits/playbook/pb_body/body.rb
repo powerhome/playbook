@@ -4,6 +4,7 @@ module Playbook
   module PbBody
     class Body
       include Playbook::Props
+      include ActionView::Helpers
 
       partial "pb_body/body"
 
@@ -22,6 +23,16 @@ module Playbook
 
       def classname
         generate_classname("pb_body_kit", color_class, dark_class, status_class)
+      end
+
+      def highlight
+        if text['<:'] && text[':>']
+          text.gsub! '<:', ''
+          text.gsub! ':>', ''
+          return content_tag(:span,text,class:['pb_highlight_kit'])
+        else
+          return text
+        end
       end
 
     private

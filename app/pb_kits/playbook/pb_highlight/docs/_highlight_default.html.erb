@@ -1,7 +1,11 @@
 <%= pb_rails("body") do%>
-This is an example
-<%= pb_rails("highlight") do%>
-Highlight Example
+This an example<%= pb_rails("highlight") do%>Highlight Example<% end %>around.
 <% end %>
-around
-<% end %>
+</br>
+
+<%= pb_rails("body", props: {text: "<:hello:> helpers are great even highlighting this"})%>
+</br>
+
+</br>
+
+<%= pb_rails("body", props: {text: "hello there :: i know its highlighted"}) %>
