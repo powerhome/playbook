@@ -1,13 +1,4 @@
 <br>
-<%= pb_rails("nav", props: {title: "Principles", link: principles_path}) do %>
-  <% principles_active = (controller_name == 'pages' && action_name == 'principles') ? true : false %>
-  <% guides_active = (controller_name == 'guides' && action_name == 'create_kit') ? true : false %>
-  <% use_nitro_active = (controller_name == 'guides' && action_name == 'use_nitro') ? true : false %>
-  <%= pb_rails("nav/item", props: { text: "Getting Started", link: principles_path, active: principles_active }) %>
-  <%= pb_rails("nav/item", props: { text: "Creating Kits", link: guides_path, active: guides_active }) %>
-<% end %>
-<%= pb_rails("section_separator") %>
-<br>
 <%= pb_rails("nav", props: {title: "Kits", link: kits_path, variant: "subtle"}) do %>
   <% all_active = (controller_name == 'pages' && action_name == 'kits') ? true : false %>
   <% pb_rails("nav/item", props: { text: "All", link: kits_path, active: all_active }) %>
@@ -34,6 +25,7 @@
 <% end %>
 <br>
 <%= pb_rails("section_separator") %>
+<br>
 <%= pb_rails("nav", props: {title: "Tokens", link: utilities_path}) do %>
   <% color_active = (controller_name == 'pages' && action_name == 'utilities') ? true : false %>
   <%= pb_rails("nav/item", props: { text: "Colors", link: utilities_path, active: color_active }) %>

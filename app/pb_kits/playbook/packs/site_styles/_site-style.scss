@@ -1,15 +1,8 @@
 @import "../../tokens/colors";
 @import "../../tokens/spacing";
 
-// Main Home Page Layout with Sidebar
-body {
-  height: 100vh;
-}
-.pb--page {
-  display: flex;
-  flex-direction: column;
-  height: 100vh;
 
+.pb--page {
   &--topNav {
     flex: 0 0;
     border-bottom: 1px solid $border_light;
@@ -24,9 +17,7 @@ body {
     }
   }
   &--content {
-    display: flex;
-    flex-direction: row;
-    flex: 1 1 100%;
+    min-height: calc(100vh - 89px);
     &--main {
       flex-grow: 1;
       padding: 40px 60px;

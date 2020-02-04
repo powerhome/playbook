@@ -26,9 +26,9 @@ module Playbook
       display_kits = []
       MENU["kits"].each do |kit|
         if kit.is_a?(Hash)
-          # nav_hash_array(kit).each do |sub_kit|
-          #   display_kits << render_pb_doc_kit(sub_kit, type)
-          # end
+          nav_hash_array(kit).each do |sub_kit|
+            display_kits << render_pb_doc_kit(sub_kit, type)
+          end
         else
           display_kits << render_pb_doc_kit(kit, type, false)
         end
