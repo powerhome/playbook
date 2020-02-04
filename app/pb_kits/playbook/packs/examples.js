@@ -100,6 +100,7 @@ WebpackerReact.setup({
   ...FixedConfirmationToast,
   ...Flex,
   ...Hashtag,
+  ...Highlight,
   ...HomeAddressStreet,
   ...Icon,
   ...IconCircle,
