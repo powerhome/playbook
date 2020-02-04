@@ -1,0 +1,19 @@
+doctype html
+html
+  head
+    title Full Screen Examples
+    = csrf_meta_tags
+    = csp_meta_tag 
+    = stylesheet_pack_tag 'main'
+
+  body
+    div class="editor-toggle"
+      = pb_rails("icon", props: {icon: 'eye' })
+    = yield
+
+  = javascript_include_tag "https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"
+  = javascript_pack_tag 'application'
+  = javascript_pack_tag 'examples'
+= yield :pb_js
+
+
