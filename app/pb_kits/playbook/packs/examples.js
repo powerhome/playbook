@@ -31,6 +31,7 @@ import * as DateStacked from 'pb_date_stacked/docs'
 import * as DateYearStacked from 'pb_date_year_stacked/docs'
 import * as DistributionBar from 'pb_distribution_bar/docs'
 import * as FixedConfirmationToast from 'pb_fixed_confirmation_toast/docs'
+import * as Flex from 'pb_flex/docs'
 import * as Hashtag from 'pb_hashtag/docs'
 import * as HomeAddressStreet from 'pb_home_address_street/docs'
 import * as Icon from 'pb_icon/docs'
@@ -94,6 +95,7 @@ WebpackerReact.setup(DateStacked)
 WebpackerReact.setup(DateYearStacked)
 WebpackerReact.setup(DistributionBar)
 WebpackerReact.setup(FixedConfirmationToast)
+WebpackerReact.setup(Flex)
 WebpackerReact.setup(Hashtag)
 WebpackerReact.setup(HomeAddressStreet)
 WebpackerReact.setup(Icon)

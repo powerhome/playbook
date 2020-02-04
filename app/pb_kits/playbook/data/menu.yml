@@ -17,6 +17,7 @@ kits:
   - date_year_stacked
   - distribution_bar
   - fixed_confirmation_toast
+  - flex
   - form
   - hashtag
   - home_address_street
