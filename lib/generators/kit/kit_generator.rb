@@ -38,7 +38,7 @@ class KitGenerator < Rails::Generators::NamedBase
       return
     else
       # Add kit to Playbook menu ==========================
-      open("config/data/menu.yml", "a") do |f|
+      open("app/pb_kits/playbook/data/menu.yml", "a") do |f|
         f.puts "  - #{@kit_name_underscore}"
       end
       say_status  "complete",
