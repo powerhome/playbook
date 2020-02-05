@@ -24,17 +24,17 @@ module Playbook
 
     def pb_kits(type: "rails")
       display_kits = []
-      kits = get_kits()
+      kits = MENU['kits']
       kits.sort.each do |kit|
        display_kits << render_pb_doc_kit(kit, type, false)
       end
       raw("<div class='pb--docItem'>" + display_kits.join("</div><div class='pb--docItem'>") + "</div>")
     end
 
-    def get_kits
-      menu = YAML.load_file("#{Playbook::Engine.root}/app/pb_kits/playbook/data/MENU.yml")
-      return menu["kits"]
-    end
+    # def get_kits
+    #   menu = YAML.load_file("#{Playbook::Engine.root}/app/pb_kits/playbook/data/menu.yml")
+    #   return menu["kits"]
+    # end
 
     def render_pb_doc_kit(kit, type, code=true)
       title = render_clickable_title(kit)
