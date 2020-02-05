@@ -5,7 +5,7 @@ require "yaml"
 
 module Playbook
   class SamplesController < ApplicationController
-    layout "playbook/fullscreen"
+    layout "playbook/samples"
     def dashboards
       render template: "playbook/samples/dashboards/index"
     end
