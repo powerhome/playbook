@@ -8,13 +8,32 @@ html
     = javascript_pack_tag 'application'
 
   body
-    = render 'layouts/playbook/nav'
-    = pb_rails("layout", props: {classname: "pb--page--content"})
-      = pb_rails("layout/sidebar", props: { classname: "pb--page--sideNav" })
-        = render 'layouts/playbook/sidebar'
-      = pb_rails("layout/body")
-        .pb--page--content--main
-          = yield
+    div class="editor-toggle"
+      = pb_rails("icon", props: {icon: 'eye' })
+
+    - contents = File.read("#{Playbook::Engine.root}/app/views/playbook/samples/dashboards/index.html.erb")
+    = yield
+
+    .layout_body
+      .pb--page--content--main
+        .pb--kit-show
+          div class="pb--doc light_ui"
+            .pb--kit-example
+              br
+        
+              br
+
+            .pb--codeControls
+              ul
+                li
+                  a href="#" data-toggle="code_example" Code Example
+    
+
+            .pb--codeCopy data-action="toggle" data-togglable="code_example"
+              a.pb--close-toggle href="#" data-toggle="false" 
+                = raw rouge(contents, "erb")
+      
+
 
   = javascript_include_tag "https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"
   = javascript_pack_tag 'examples'
