@@ -25,10 +25,10 @@ const CircleIconButton = (props: CircleIconButtonProps) => {
   return (
     <div className="pb_circle_icon_button_kit">
       <Button
-          type={type}
           dark={dark}
           disabled={disabled}
           text={null}
+          type={type}
           variant={variant}
       >
         <Icon
