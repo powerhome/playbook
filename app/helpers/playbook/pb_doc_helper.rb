@@ -15,21 +15,40 @@ module Playbook
       end
     end
 
-    def pb_kit(kit: "", type: "rails")
+    def pb_kit(kit: "", type: "rails", show_code: true)
       @type = type
       @kit_examples = get_kit_examples(kit, type)
-      render partial: "playbook/config/kit_example"
+      @show_code = show_code
+      render partial: "config/kit_example"
     end
 
     def pb_kits(type: "rails")
       display_kits = []
-      MENU["kits"].sort.each do |kit|
-        title = render_clickable_title(kit)
-        ui = raw("<div class='pb--docItem-ui'>
-            #{pb_kit(kit: kit, type: type)}</div>")
-        display_kits << title + ui
+      MENU["kits"].each do |kit|
+        if kit.is_a?(Hash)
+          nav_hash_array(kit).each do |sub_kit|
+            display_kits << render_pb_doc_kit(sub_kit, type)
+          end
+        else
+          display_kits << render_pb_doc_kit(kit, type, false)
+        end
       end
       raw("<div class='pb--docItem'>" + display_kits.join("</div><div class='pb--docItem'>") + "</div>")
+    end
+
+    def pb_category_kits(category_kits: [], type: "rails")
+      display_kits = []
+      category_kits.each do |kit|
+        display_kits << render_pb_doc_kit(kit, type, false)
+      end
+      raw("<div class='pb--docItem'>" + display_kits.join("</div><div class='pb--docItem'>") + "</div>")
+    end
+
+    def render_pb_doc_kit(kit, type, code = true)
+      title = render_clickable_title(kit)
+      ui = raw("<div class='pb--docItem-ui'>
+          #{pb_kit(kit: kit, type: type, show_code: code)}</div>")
+      title + ui
     end
 
     def pb_kit_api(kit)
@@ -40,6 +59,14 @@ module Playbook
                    kit_class_obj.props.keys
                  end
       render partial: "playbook/config/pb_kit_api"
+    end
+
+    def nav_hash_category(link)
+      link.keys.first
+    end
+
+    def nav_hash_array(link)
+      link.first.last
     end
 
   private

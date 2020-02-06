@@ -6,20 +6,24 @@ const DefaultNav = () => (
   <Nav
       link="#"
       orientation="vertical"
-      title="Title example"
+      title="Menu"
   >
+    <NavItem
+        link="#"
+        text="Photos"
+    />
+    <NavItem
+        link="#"
+        text="Music"
+    />
     <NavItem
         active
         link="#"
-        text="Active Nav Item using text prop"
+        text="Video"
     />
     <NavItem
         link="#"
-        text="Nav Item using text prop"
-    />
-    <NavItem
-        link="#"
-        text="Nav Item using text prop"
+        text="Files"
     />
   </Nav>
 )

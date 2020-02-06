@@ -11,17 +11,20 @@ module Playbook
       prop :link, default: "#"
       prop :title
       prop :orientation, type: Playbook::Props::Enum,
-                    values: ["vertical", "horizontal"],
-                    default: "vertical"
+                         values: %w[vertical horizontal],
+                         default: "vertical"
+      prop :variant, type: Playbook::Props::Enum,
+                     values: %w[normal subtle],
+                     default: "normal"
+      prop :highlight, type: Playbook::Props::Boolean, default: true
 
       def classname
-        [
-          "pb_nav_list",
-          orientation
-        ].compact.join("_")
+        generate_classname("pb_nav_list", variant, orientation, highlight_class)
       end
 
-
+      def highlight_class
+        highlight ? "highlight" : nil
+      end
     end
   end
 end

@@ -1,5 +1,6 @@
 <%= pb_rails("nav", props: { orientation: "horizontal"}) do %>
-  <%= pb_rails("nav/item", props: { text: "Active Nav Item using text prop", link: "#", active: true }) %>
-  <%= pb_rails("nav/item", props: { text: "Nav Item using text prop", link: "#" }) %>
-  <%= pb_rails("nav/item", props: { text: "Nav Item using text prop", link: "#" }) %>
+  <%= pb_rails("nav/item", props: { text: "About", link: "#" }) %>
+  <%= pb_rails("nav/item", props: { text: "Case Studies", link: "#", active: true }) %>
+  <%= pb_rails("nav/item", props: { text: "Service ", link: "#" }) %>
+  <%= pb_rails("nav/item", props: { text: "Contacts", link: "#" }) %>
 <% end %>

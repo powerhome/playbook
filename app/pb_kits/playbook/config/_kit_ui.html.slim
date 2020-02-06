@@ -9,19 +9,21 @@
   = pb_rails("caption", props: { text: item })
   br
   - if type == "rails"
-    = render partial: "playbook/pb_#{@kit_examples[:kit]}/docs/#{key}"
+    = render partial: "pb_#{@kit_examples[:kit]}/docs/#{key}"
   - elsif type == "react"
     = pb_react(key.camelize)
   br
 
-.pb--codeControls
-  ul
-    li
-      a href="#" data-toggle="code_example" Code Example
 
-.pb--codeCopy data-action="toggle" data-togglable="code_example"
-  a.pb--close-toggle href="#" data-toggle="false" Close
-  - if type == "rails"
-    = raw rouge(contents, "erb")
-  - elsif type == "react"
-    = raw rouge(contents, "erb")
+- if @show_code
+  .pb--codeControls
+    ul
+      li
+        a href="#" data-toggle="code_example" Code Example
+
+  .pb--codeCopy data-action="toggle" data-togglable="code_example"
+    a.pb--close-toggle href="#" data-toggle="false" Close
+    - if type == "rails"
+      = raw rouge(contents, "erb")
+    - elsif type == "react"
+      = raw rouge(contents, "erb")

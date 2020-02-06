@@ -1,4 +1,10 @@
+@import "../tokens/spacing";
+@import "../tokens/colors";
+@import "../tokens/animation-curves";
+@import "../tokens/typography";
+
 $selector: ".pb_nav_list";
+
 [class^=pb_nav_list][class*=_horizontal] {
   ul {
     display: flex;
@@ -8,7 +14,7 @@ $selector: ".pb_nav_list";
     list-style: none;
   }
 
-  [class*=_border_item] {
+  [class*=pb_nav_list_kit_item] {
     transition-property: border-color;
     transition-duration: 0.15s;
     transition-timing-function: $bezier;
@@ -18,7 +24,7 @@ $selector: ".pb_nav_list";
       text-decoration: none;
       display: flex;
       align-items: center;
-      padding: $space_sm $space_xl;
+      padding: $space_sm $space_md;
       border: 0 solid transparent;
       border-width: 0 0 3px 0;
       border-color: $border_light;
@@ -27,13 +33,13 @@ $selector: ".pb_nav_list";
       transition-timing-function: cubic-bezier(0.7, 0, 0.3, 1);
       color: $text_lt_default;
 
-      &_icon {
+      [class*=_icon_left] {
         font-size: $font_large;
         margin-right: $space_sm;
         color: $text_lt_lighter;
       }
 
-      &_text {
+      [class*=_text] {
         font-size: $font_base;
         font-weight: $bold;
         color: $text_lt_default;

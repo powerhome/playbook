@@ -1,5 +1,6 @@
-<%= pb_rails("nav", props: {title: "Title Example", link: "#"}) do %>
-  <%= pb_rails("nav/item", props: { text: "Active Nav Item using text prop", link: "#", active: true }) %>
-  <%= pb_rails("nav/item", props: { text: "Nav Item using text prop", link: "#" }) %>
-  <%= pb_rails("nav/item", props: { text: "Nav Item using text prop", link: "#" }) %>
+<%= pb_rails("nav", props: {title: "Menu", link: "#"}) do %>
+  <%= pb_rails("nav/item", props: { text: "Photos", link: "#" }) %>
+  <%= pb_rails("nav/item", props: { text: "Music", link: "#" }) %>
+  <%= pb_rails("nav/item", props: { text: "Video", link: "#", active: true }) %>
+  <%= pb_rails("nav/item", props: { text: "Files", link: "#" }) %>
 <% end %>
