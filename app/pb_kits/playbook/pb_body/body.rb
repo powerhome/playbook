@@ -25,27 +25,11 @@ module Playbook
         generate_classname("pb_body_kit", color_class, dark_class, status_class)
       end
 
-      def highlight
-        if text['<:'] && text[':>']
-          input_string = text
-          l_marker = "<:"
-          r_marker = ":>"
-          highlight_text = input_string[/#{l_marker}(.*?)#{r_marker}/m, 1]
-          puts '*' * 50
-          puts highlight_text
-          puts '*' * 50
-          # text.gsub! '<:', ''
-          # text.gsub! ':>', ''
-          return content_tag(:span,highlight_text,class:['pb_highlight_kit'])
-        else
-          return text
-        end
-      end
+     def highlight
+      text.gsub(/(^|\s):{2}(.+?):{2}/m, "\\1<span class=\"pb_highlight_kit\">\\2</span>").html_safe
+     end
 
 
-      def string_between_markers marker1, marker2
-        self[/#{Regexp.escape(marker1)}(.*?)#{Regexp.escape(marker2)}/m, 1]
-      end
     private
 
 
