@@ -2,12 +2,14 @@ import React from 'react'
 import { Nav } from '../../'
 import NavItem from '../_item.jsx'
 
-const BlockNoTitleNav = () => {
+const WithIconsNav = () => {
   return (
-    <Nav>
+    <Nav
+        link="#"
+        title="Browse"
+    >
       <NavItem
           iconLeft="newspaper"
-          link="#"
           text="News Feed"
       />
       <NavItem
@@ -23,10 +25,9 @@ const BlockNoTitleNav = () => {
           text="Events"
       />
       <NavItem
-          iconLeft="calendar-check"
-          iconRight="angle-down"
+          iconLeft="users"
           link="#"
-          text="Events"
+          text="Friends"
       />
       <NavItem
           iconLeft="users-class"
@@ -38,4 +39,4 @@ const BlockNoTitleNav = () => {
   )
 }
 
-export default BlockNoTitleNav
+export default WithIconsNav

@@ -31,11 +31,6 @@ module Playbook
       raw("<div class='pb--docItem'>" + display_kits.join("</div><div class='pb--docItem'>") + "</div>")
     end
 
-    # def get_kits
-    #   menu = YAML.load_file("#{Playbook::Engine.root}/app/pb_kits/playbook/data/menu.yml")
-    #   return menu["kits"]
-    # end
-
     def render_pb_doc_kit(kit, type, code=true)
       title = render_clickable_title(kit)
       ui = raw("<div class='pb--docItem-ui'>#{pb_kit(kit: kit, type: type, show_code: code)}</div>")
@@ -50,6 +45,14 @@ module Playbook
                    kit_class_obj.props.keys
                  end
       render partial: "playbook/config/pb_kit_api"
+    end
+
+    def nav_hash_category(link)
+      link.keys.first
+    end
+
+    def nav_hash_array(link)
+      link.first.last
     end
 
   private

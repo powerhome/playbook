@@ -71,7 +71,7 @@ $action_colors: (
 );
 
 // Active colors ----------------------
-$active_light:        #E5F2FF;
+$active_light:        lighten(#E5F2FF, 3.5%);
 $active_dark:         #144075;
 $active_colors: (
   active_light:       $active_light,

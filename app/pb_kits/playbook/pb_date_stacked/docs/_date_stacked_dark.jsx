@@ -6,7 +6,7 @@ const DateStackedDark = () => {
     <div>
       <DateStacked
           dark
-          date={new Date()}
+          date={new Date().toLocaleString('en-US', { timeZone: 'Pacific/Tongatapu' })}
           size="sm"
       />
 
@@ -14,7 +14,7 @@ const DateStackedDark = () => {
 
       <DateStacked
           dark
-          date={new Date()}
+          date={new Date().toLocaleString('en-US', { timeZone: 'America/New_York' })}
           size="md"
       />
     </div>

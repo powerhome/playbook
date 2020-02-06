@@ -9,7 +9,7 @@
   = pb_rails("caption", props: { text: item })
   br
   - if type == "rails"
-    = render partial: "playbook/pb_#{@kit_examples[:kit]}/docs/#{key}"
+    = render partial: "pb_#{@kit_examples[:kit]}/docs/#{key}"
   - elsif type == "react"
     = pb_react(key.camelize)
   br

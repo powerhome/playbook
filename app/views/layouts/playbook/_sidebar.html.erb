@@ -1,0 +1,36 @@
+<br>
+<%= pb_rails("nav", props: {title: "Kits", link: kits_path, variant: "subtle"}) do %>
+  <% all_active = (controller_name == 'pages' && action_name == 'kits') ? true : false %>
+  <% pb_rails("nav/item", props: { text: "All", link: kits_path, active: all_active }) %>
+
+  <% MENU["kits"].each do |link| %>
+    <% active = !@kit.nil? && @kit == link ? true : false %>
+    <% if link.is_a?(Hash) %>
+      <div class="category_section">
+        <% active = !@category.nil? && @category == nav_hash_category(link) ? true : false %>
+        <%= pb_rails("nav/item", props: { active: active, classname: "category", icon_right: "angle-down", link: kit_category_show_path(nav_hash_category(link)) }) do %>
+          <%= pb_kit_title(nav_hash_category(link)) %>
+        <% end %>
+        <%= pb_rails("nav", props: { variant: "subtle", classname: "sub_category"}) do %>
+          <% nav_hash_array(link).each do |sub_link| %>
+            <% sub_active = !@kit.nil? && @kit == sub_link ? true : false %>
+            <%= pb_rails("nav/item", props: { text: pb_kit_title(sub_link), link: kit_show_path(sub_link), active: sub_active }) %>
+          <% end %>
+        <% end %>
+      </div>
+    <% else %>
+      <%= pb_rails("nav/item", props: { text: pb_kit_title(link), link: kit_show_path(link), active: active }) %>
+    <% end %>
+  <% end %>
+<% end %>
+<br>
+<%= pb_rails("section_separator") %>
+<br>
+<%= pb_rails("nav", props: {title: "Tokens", link: utilities_path}) do %>
+  <% color_active = (controller_name == 'pages' && action_name == 'utilities') ? true : false %>
+  <%= pb_rails("nav/item", props: { text: "Colors", link: utilities_path, active: color_active }) %>
+  <% spacing_active = (controller_name == 'pages' && action_name == 'tokens') ? true : false %>
+  <%= pb_rails("nav/item", props: { text: "Spacing", link: tokens_path, active: spacing_active }) %>
+<% end %>
+<br>
+<br>
