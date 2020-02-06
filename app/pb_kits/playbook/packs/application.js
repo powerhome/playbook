@@ -1,7 +1,6 @@
 import '../../../../fonts/fontawesome.min.js'
 import '../../../../fonts/regular.min.js'
 import './main.scss'
-import './kits.js'
 import '../vendor.js'
 
 // Move to separate file

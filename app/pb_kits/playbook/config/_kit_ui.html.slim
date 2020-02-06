@@ -1,6 +1,9 @@
 - type ||= "rails"
-- file_name = type == "rails" ? "_#{key}.html.erb" : "_#{key}.jsx"
-- contents = File.read("#{Playbook::Engine.root}/app/pb_kits/playbook/pb_#{@kit_examples[:kit]}/docs/#{file_name}")
+
+- if type == "react"
+  - contents = "<%= react_component('kits/#{key}') %>"
+- else
+  - contents = File.read("#{Playbook::Engine.root}/app/pb_kits/playbook/pb_#{@kit_examples[:kit]}/docs/_#{key}.html.erb")
 
 .pb--kit-example
   = pb_rails("caption", props: { text: item })
