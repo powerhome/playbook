@@ -19,6 +19,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Fix Form kit data prop merge [#587](https://github.com/powerhome/playbook/pull/587)
 - Fixed WebpackerReact registration [#589](https://github.com/powerhome/playbook/pull/589)
 - New navigation options [#582](https://github.com/powerhome/playbook/pull/582)
+- Added z-index fix to popover [#583](https://github.com/powerhome/playbook/pull/593)
 
 ## [4.1.2] 2020-1-30
 
