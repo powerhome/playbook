@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### Fixed
+- Fixed timezone issue on DateStacked ([#592][] @gmfvpereira)
 
 ## [4.2.0] 2020-2-6
 
