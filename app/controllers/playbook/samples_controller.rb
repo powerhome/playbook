@@ -8,12 +8,12 @@ module Playbook
     before_action :set_sample, only: %i[sample_show_rails sample_show_react]
     # before_action only: %i[sample_show_rails sample_show_react]
 
-    layout "playbook/samples"
+    # layout "playbook/samples"
 
-    def samples
-      params[:type] ||= "rails"
-      @type = params[:type]
-    end
+    # def samples
+    #   params[:type] ||= "rails"
+    #   @type = params[:type]
+    # end
 
     def sample_show_rails
       render template: "playbook/samples/sample_show"
@@ -23,15 +23,15 @@ module Playbook
       render template: "playbook/samples/sample_show"
     end
 
-    private
+  private
 
     def set_sample
-      # menu = MENU["samples"]
-      # if menu.include?(params[:name])
-      #   @kit = params[:name]
-      # else
-      #   redirect_to root_path
-      # end
+      menu = MENU["samples"]
+      if menu.include?(params[:name])
+        @sample = params[:name]
+      else
+        redirect_to root_path
+      end
     end
   end
 end
