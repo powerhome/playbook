@@ -5,15 +5,15 @@ const SelectDark = () => {
   const options = [
     {
       value: '1',
-      valueText: 'Burgers',
+      text: 'Burgers',
     },
     {
       value: '2',
-      valueText: 'Pizza',
+      text: 'Pizza',
     },
     {
       value: '3',
-      valueText: 'Tacos',
+      text: 'Tacos',
     },
   ]
 

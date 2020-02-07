@@ -18,7 +18,7 @@ import type { InputCallback } from '../types'
 
 type SelectOption = {
   value: string,
-  valueText: string,
+  text: string,
   disabled?: boolean,
 }
 
@@ -48,7 +48,7 @@ const createOptions = (options: SelectOption[]) => options.map((option, index) =
       key={index}
       value={option.value}
   >
-    {option.valueText || option.value}
+    {option.text || option.value}
   </option>
 ))
 

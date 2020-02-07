@@ -6,28 +6,28 @@ const SelectDisabledOptions = () => {
     {
       value: '1',
       disabled: true,
-      valueText: 'Espresso',
+      text: 'Espresso',
     },
     {
       value: '2',
-      valueText: 'Americano',
+      text: 'Americano',
     },
     {
       value: '3',
       disabled: true,
-      valueText: 'Cappuccino',
+      text: 'Cappuccino',
     },
     {
       value: '4',
-      valueText: 'Mocha',
+      text: 'Mocha',
     },
     {
       value: '5',
-      valueText: 'Flat White',
+      text: 'Flat White',
     },
     {
       value: '6',
-      valueText: 'Latte',
+      text: 'Latte',
     },
   ]
 
