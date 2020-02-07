@@ -43,20 +43,16 @@ type SelectProps = {
   value?: string,
 }
 
-const optionsArray = (options: SelectOption[]) => {
-  return options.map((optionObject, index) => {
-    return (
-      <option
-          disabled={optionObject.disabled}
-          key={index}
-          selected={optionObject.selected}
-          value={optionObject.value}
-      >
-        {optionObject.valueText || optionObject.value}
-      </option>
-    )
-  })
-}
+const createOptions = (options: SelectOption[]) => options.map((option, index) => (
+  <option
+      disabled={option.disabled}
+      key={index}
+      selected={option.selected}
+      value={option.value}
+  >
+    {option.valueText || option.value}
+  </option>
+))
 
 const Select = ({
   aria = {},
@@ -77,7 +73,7 @@ const Select = ({
   const css = buildCss({ 'pb_select': true, 'dark': dark === true }) + errorClass
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
-  const optionsList = optionsArray(options)
+  const optionsList = createOptions(options)
 
   return (
     <div
