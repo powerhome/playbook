@@ -3,7 +3,7 @@
 import React from 'react'
 import classnames from 'classnames'
 import { Body, Caption } from '../'
-import { type InputCallback } from '../types.js'
+import type { InputCallback } from '../types.js'
 
 type TextareaProps = {
   className?: String,
@@ -19,7 +19,7 @@ type TextareaProps = {
   name?: String,
   rows?: Number,
   dark?: Boolean,
-  onChange?: InputCallback,
+  onChange?: InputCallback<HTMLTextAreaElement>,
 }
 
 const Textarea = ({

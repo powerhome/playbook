@@ -14,27 +14,36 @@ import {
   buildDataProps,
 } from '../utilities/props'
 
-type SelectProps = {
-  aria?: object,
-  blankSelection?: String,
-  children?: Array<React.ReactChild>,
-  className?: String,
-  dark?: Boolean,
-  data?: object,
-  disabled?: Boolean,
-  error?: String,
-  onChange: PropTypes.func,
-  options: Array<Object>,
-  id?: String,
-  includeBlank?: String,
-  label?: String,
-  multiple?: Boolean,
-  name?: String,
-  required?: Boolean,
-  value?: String,
+import type { InputCallback } from '../types'
+
+type SelectOption = {
+  value: string,
+  valueText: string,
+  disabled?: boolean,
+  selected?: boolean,
 }
 
-const optionsArray = ({ options = [] }: SelectProps) => {
+type SelectProps = {
+  aria?: object,
+  blankSelection?: string,
+  children?: React.Node,
+  className?: string,
+  dark?: boolean,
+  data?: object,
+  disabled?: boolean,
+  error?: string,
+  onChange: InputCallback<HTMLSelectElement>,
+  options: SelectOption[],
+  id?: string,
+  includeBlank?: string,
+  label?: string,
+  multiple?: boolean,
+  name?: string,
+  required?: boolean,
+  value?: string,
+}
+
+const optionsArray = (options: SelectOption[]) => {
   return options.map((optionObject, index) => {
     return (
       <option
@@ -49,31 +58,26 @@ const optionsArray = ({ options = [] }: SelectProps) => {
   })
 }
 
-const Select = (props: SelectProps) => {
-  const {
-    aria = {},
-    blankSelection,
-    children,
-    dark = false,
-    data = {},
-    disabled = false,
-    error,
-    label,
-    multiple = false,
-    name,
-    onChange = () => {},
-    options,
-    required = false,
-  } = props
-
+const Select = ({
+  aria = {},
+  blankSelection,
+  children,
+  dark = false,
+  data = {},
+  disabled = false,
+  error,
+  label,
+  multiple = false,
+  name,
+  onChange = () => {},
+  options = [],
+  required = false,
+}: SelectProps) => {
   const errorClass = error ? ' error' : ''
-  const css = buildCss({
-    'pb_select': true,
-    'dark': dark === true,
-  }) + errorClass
+  const css = buildCss({ 'pb_select': true, 'dark': dark === true }) + errorClass
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
-  const optionsList = optionsArray({ options })
+  const optionsList = optionsArray(options)
 
   return (
     <div
