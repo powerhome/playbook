@@ -4,10 +4,9 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
-## [4.2.0]
 
-### Changed
-- Add a type prop to the circle icon button kit to allow users to set a button type.[#579](ttps://github.com/powerhome/playbook/pull/579)
+## Unreleased
+
 
 ## [4.2.0] 2020-2-6
 
@@ -24,6 +23,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Fixed WebpackerReact registration [#589](https://github.com/powerhome/playbook/pull/589)
 - New navigation options [#582](https://github.com/powerhome/playbook/pull/582)
 - Added z-index fix to popover [#583](https://github.com/powerhome/playbook/pull/593)
+- Add a type prop to the circle icon button kit to allow users to set a button type.[#579](ttps://github.com/powerhome/playbook/pull/579)
 
 ## [4.1.2] 2020-1-30
 
