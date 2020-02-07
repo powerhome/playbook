@@ -6,14 +6,13 @@ require "yaml"
 module Playbook
   class SamplesController < ApplicationController
     before_action :set_sample, only: %i[sample_show_rails sample_show_react]
-    # before_action only: %i[sample_show_rails sample_show_react]
 
-    # layout "playbook/samples"
+    layout "playbook/samples"
 
-    # def samples
-    #   params[:type] ||= "rails"
-    #   @type = params[:type]
-    # end
+    def samples
+      params[:type] ||= "rails"
+      @type = params[:type]
+    end
 
     def sample_show_rails
       render template: "playbook/samples/sample_show"
