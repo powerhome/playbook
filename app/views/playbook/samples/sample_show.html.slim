@@ -5,8 +5,8 @@
     - if has_sample_type?(@sample, "react")
       a href="#{sample_show_reacts_path(@sample)}" class="#{'active' if action_name == 'sample_show_react'}" React
 
-  - if(action_name == "sample_show_rails")
-    = pb_sample(sample: @sample)
-    = pb_sample_api(@sample)
-  - else
-    = pb_sample(sample: @sample, type: "react")
+  / - if(action_name == "sample_show_rails")
+  /   = pb_sample(sample: @sample)
+  /   = pb_sample_api(@sample)
+  / - else
+  /   = pb_sample(sample: @sample, type: "react")

@@ -1,32 +1,10 @@
-/ = pb_rails("layout", props: {full: true, size: "md"})
-/   = pb_rails("layout/sidebar")
-/     h1 Sidebar
-/   = pb_rails("layout/body")
+= pb_rails("layout", props: {full: true, size: "md"})
+  = pb_rails("layout/sidebar")
+    h1 Sidebar
+  = pb_rails("layout/body")
 
-/     = pb_rails("layout", props: {position: "right", size: "xl", collapse: "xl", full: true})
-/       = pb_rails("layout/sidebar")
-/         h1 Sidebar
-/       = pb_rails("layout/body")
-/         h1 Body
-- contents = File.read("#{Playbook::Engine.root}/app/pb_kits/playbook/pb_#{@kit_examples[:kit]}/docs/#{file_name}")
-
-.pb--kit-example
-  = pb_rails("caption", props: { text: item })
-  br
-  - if type == "rails"
-    = render partial: "playbook/pb_#{@kit_examples[:kit]}/docs/#{key}"
-  - elsif type == "react"
-    = pb_react(key.camelize)
-  br
-
-.pb--codeControls
-  ul
-    li
-      a href="#" data-toggle="code_example" Code Example
-
-.pb--codeCopy data-action="toggle" data-togglable="code_example"
-  a.pb--close-toggle href="#" data-toggle="false" Close
-  - if type == "rails"
-    = raw rouge(contents, "erb")
-  - elsif type == "react"
-    = raw rouge(contents, "erb")
+    = pb_rails("layout", props: {position: "right", size: "xl", collapse: "xl", full: true})
+      = pb_rails("layout/sidebar")
+        h1 Sidebar
+      = pb_rails("layout/body")
+        h1 Body
