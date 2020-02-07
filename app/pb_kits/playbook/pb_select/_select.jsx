@@ -20,7 +20,6 @@ type SelectOption = {
   value: string,
   valueText: string,
   disabled?: boolean,
-  selected?: boolean,
 }
 
 type SelectProps = {
@@ -47,7 +46,6 @@ const createOptions = (options: SelectOption[]) => options.map((option, index) =
   <option
       disabled={option.disabled}
       key={index}
-      selected={option.selected}
       value={option.value}
   >
     {option.valueText || option.value}
@@ -68,6 +66,7 @@ const Select = ({
   onChange = () => {},
   options = [],
   required = false,
+  value,
 }: SelectProps) => {
   const errorClass = error ? ' error' : ''
   const css = buildCss({ 'pb_select': true, 'dark': dark === true }) + errorClass
@@ -106,6 +105,7 @@ const Select = ({
               name={name}
               onChange={onChange}
               required={required}
+              value={value}
           >
             <If condition={blankSelection}>
               <option value="">{blankSelection}</option>
