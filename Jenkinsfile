@@ -13,7 +13,7 @@ def resources = [
   requestCpu: '1',
   limitCpu: '2',
   requestMemory: '4Gi',
-  limitMemory: '6Gi',
+  limitMemory: '12Gi',
 ]
 
 app.build(application: application, cluster: cluster, deployerVersion: deployerVersion, resources: resources) {

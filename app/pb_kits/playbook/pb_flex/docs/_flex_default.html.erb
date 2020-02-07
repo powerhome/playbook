@@ -1,0 +1,19 @@
+<%= pb_rails("title", props: {size: 4, text: "Row"}) %><br/>
+
+<%= pb_rails("flex") do %>
+  <%= pb_rails("body", props: {classname: "flex-item"}) do %>1<% end %>
+  <%= pb_rails("body", props: {classname: "flex-item"}) do %>2<% end %>
+  <%= pb_rails("body", props: {classname: "flex-item"}) do %>3<% end %>
+  <%= pb_rails("body", props: {classname: "flex-item"}) do %>4<% end %>
+<% end %>
+
+<br/><br/>
+
+<%= pb_rails("title", props: {size: 4, text: "Column"}) %><br/>
+
+<%= pb_rails("flex", props: {orientation: "column"}) do %>
+  <%= pb_rails("body", props: {classname: "flex-item"}) do %>1<% end %>
+  <%= pb_rails("body", props: {classname: "flex-item"}) do %>2<% end %>
+  <%= pb_rails("body", props: {classname: "flex-item"}) do %>3<% end %>
+  <%= pb_rails("body", props: {classname: "flex-item"}) do %>4<% end %>
+<% end %>

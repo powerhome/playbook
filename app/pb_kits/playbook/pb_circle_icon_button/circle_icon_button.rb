@@ -5,6 +5,9 @@ module Playbook
 
       partial "pb_circle_icon_button/circle_icon_button"
 
+      prop :type, type: Playbook::Props::Enum,
+                  values: %w[button submit reset],
+                  default: "button"
       prop :variant, type: Playbook::Props::Enum,
                      values: %w[primary secondary link],
                      default: "primary"

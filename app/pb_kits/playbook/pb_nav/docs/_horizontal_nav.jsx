@@ -7,20 +7,23 @@ const HorizontalNav = () => {
     <Nav
         link="#"
         orientation="horizontal"
-        title="Title example"
     >
+      <NavItem
+          link="#"
+          text="About"
+      />
       <NavItem
           active
           link="#"
-          text="Active Nav Item using text prop"
+          text="Case Studies"
       />
       <NavItem
           link="#"
-          text="Nav Item using text prop"
+          text="Service"
       />
       <NavItem
           link="#"
-          text="Nav Item using text prop"
+          text="Contacts"
       />
     </Nav>
   )

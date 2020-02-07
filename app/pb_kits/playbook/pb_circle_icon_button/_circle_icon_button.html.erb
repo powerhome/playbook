@@ -3,7 +3,7 @@
   data: object.data,
   class: object.classname) do %>
 
-  <%= pb_rails("button", props: {variant: object.variant, disabled: object.disabled, dark: object.dark}) do %>
+  <%= pb_rails("button", props: {type: object.type, variant: object.variant, disabled: object.disabled, dark: object.dark}) do %>
     <%= pb_rails("icon", props: {icon: object.icon, fixed_width: true, dark: object.dark}) %>
   <% end %>
 

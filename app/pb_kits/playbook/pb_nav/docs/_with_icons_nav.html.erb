@@ -1,0 +1,7 @@
+<%= pb_rails("nav", props: {title: "Browse", link: "#"}) do %>
+  <%= pb_rails("nav/item", props: { icon_left: "newspaper", text: "News Feed"  }) %>
+  <%= pb_rails("nav/item", props: { icon_left: "comments-alt", link: "#", text: "Messages", active: true }) %>
+  <%= pb_rails("nav/item", props: { icon_left: "calendar-check", icon_right: "angle-down", link: "#", text: "Events" }) %>
+  <%= pb_rails("nav/item", props: { icon_left: "users", link: "#", text: "Friends" }) %>
+  <%= pb_rails("nav/item", props: { icon_left: "users-class", icon_right: "angle-down", link: "#", text: "Groups" }) %>
+<% end %>
