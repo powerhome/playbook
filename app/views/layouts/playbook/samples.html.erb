@@ -13,16 +13,8 @@
             </a>
         </div>
     
-    
-  
-        <%= render :partial => "playbook/samples/dashboards/dashboards" %>
-        
-        <%= react_component('Dashboards') %>
-     
-
         <% contents = File.read("#{Playbook::Engine.root}/app/views/playbook/samples/dashboards/index.html.erb") %>
-        
-
+        <%= yield %>
         <div class="pb--kit-show">
             <div class="pb--doc light_ui">
                 <div class="pb--codeControls">
