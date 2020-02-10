@@ -22,7 +22,7 @@ Gem::Specification.new do |s|
   s.add_dependency "method_source", "0.9.2"
   s.add_dependency "react-rails", "2.6.0"
   s.add_dependency "redcarpet", "3.4.0"
-  s.add_dependency "rouge", "1.10.1"
+  s.add_dependency "rouge", "3.15.0"
   s.add_dependency "sassc-rails", "1.3.0"
   s.add_dependency "slim-rails", "3.2.0"
   s.add_dependency "sprockets-rails", "2.3.3"
