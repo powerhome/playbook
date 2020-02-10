@@ -1,7 +1,7 @@
 - type ||= "rails"
 
 - if type == "react"
-  - contents = "<%= react_component('kits/#{key}') %>"
+  - contents = File.read("#{Playbook::Engine.root}/app/pb_kits/playbook/pb_#{@kit_examples[:kit]}/docs/_#{key}.jsx")
 - else
   - contents = File.read("#{Playbook::Engine.root}/app/pb_kits/playbook/pb_#{@kit_examples[:kit]}/docs/_#{key}.html.erb")
 
