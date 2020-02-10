@@ -8,6 +8,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## Unreleased
 
 
+### Changed
+- Update rouge gem to latest for JSX support [#602](https://github.com/powerhome/playbook/pull/602)
+
 ## [4.2.0] 2020-2-6
 
 ### Added

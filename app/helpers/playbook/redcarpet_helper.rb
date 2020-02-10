@@ -38,7 +38,7 @@ module Playbook
     end
 
     def rouge(text, language)
-      formatter = Rouge::Formatters::HTML.new(css_class: "highlight")
+      formatter = Rouge::Formatters::HTML.new(scope: ".highlight")
       lexer = Rouge::Lexer.find(language)
       formatter.format(lexer.lex(text))
     end
