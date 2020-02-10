@@ -10,6 +10,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 - Fixed timezone issue on DateStacked ([#592][] @gmfvpereira)
 
+### Added
+- Add Appointment type to Hashtag kit ([#599](https://github.com/powerhome/nitro-web/pull/14015) @garettarrowood)
+
 ## [4.2.0] 2020-2-6
 
 ### Added
