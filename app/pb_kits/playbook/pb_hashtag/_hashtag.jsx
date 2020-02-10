@@ -13,13 +13,14 @@ type HashtagProps = {
   dark?: Boolean,
   id?: String,
   text?: String,
-  type: 'default' | 'home' | 'project',
+  type: 'default' | 'home' | 'project' | 'appointment',
   url?: String,
 }
 
 const typeMap = {
   'home': 'H#',
   'project': 'P#',
+  'appointment': 'A#',
   'default': '#',
 }
 
