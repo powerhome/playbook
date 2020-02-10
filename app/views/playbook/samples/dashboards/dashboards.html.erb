@@ -1,0 +1,81 @@
+<%= pb_rails("layout", props: {full: true, position: "left", size: "xl", collapse: "md"}) do %>
+  <%= pb_rails("layout/sidebar") do %>
+    <%= pb_rails("user", props: {
+          name: "Jon Zazula",
+          title: "User Experience Designer",
+          orientation: "horizontal",
+          align: "left",
+          size: "md",
+          avatar_url: "https://s3-hq-f5.powerhrg.com/nitro-production/avatars/55553/badge/business-technology-jonathan-zazula.jpg?AWSAccessKeyId=IWSW00NEQHMEYQTLZ7E9&Signature=S0EN3l5sfIr7yk442Q2MeledXGc%3D&Expires=3161514974"
+      }) %>
+
+    <br>
+    <hr style="height:1px;border:none;color:#e4e8f0;background-color:#e4e8f0;margin: 15px;" />
+
+    <%= pb_rails("nav", props: {variant: "subtle"}) do %>
+      <%= pb_rails("nav/item", props: { icon_left: "city", text: "City", link: "#" }) %>
+      <%= pb_rails("nav/item", props: { icon_left: "user-friends", text: "People", link: "#", icon_right: "angle-down" }) %>
+      <%= pb_rails("nav/item", props: { icon_left: "user-tie", text: "Growth Dashboard", link: "#", active: true }) %>
+      <%= pb_rails("nav/item", props: { icon_left: "clock", text: "History", link: "#" }) %>
+      <%= pb_rails("nav/item", props: { icon_left: "clipboard", text: "Memos", link: "#", icon_right: "angle-down" }) %>
+      <%= pb_rails("nav/item", props: { icon_left: "phone", text: "Contacts", link: "#" }) %>
+    <% end %>
+  <% end %>
+
+  <%= pb_rails("layout/body") do %> 
+
+    <% data = [{
+        name: 'Installation',
+        data: [154175]
+    }, {
+        name: 'Manufacturing',
+        data: [40434]
+    }, {
+        name: 'Sales & Distribution',
+        data: [39387]
+    }, {
+        name: 'Project Development',
+        data: [34227]
+    }, {
+        name: 'Other',
+        data: [18111]
+    }] %>
+
+    <%= pb_rails("bar_graph", props: {
+        axis_title: 'Number of Employees',
+        chart_data: data,
+        id: "bar-test",
+        point_start: 2012,
+        subtitle: 'Source: thesolarfoundation.com',
+        title: 'Solar Employment Growth by Sector, 2010-2016'
+    }) %>
+    <% data2 = [{
+    name: 'Installation',
+    data: [43934, 52503, 57177, 69658, 97031, 119931, 137133, 154175]
+}, {
+    name: 'Manufacturing',
+    data: [24916, 24064, 29742, 29851, 32490, 30282, 38121, 40434]
+}, {
+    name: 'Sales & Distribution',
+    data: [11744, 17722, 16005, 19771, 20185, 24377, 32147, 39387]
+}, {
+    name: 'Project Development',
+    data: [nil, nil, 7988, 12169, 15112, 22452, 34400, 34227]
+}, {
+    name: 'Other',
+    data: [12908, 5948, 8105, 11248, 8989, 11816, 18274, 18111]
+}] %>
+
+<%= pb_rails("line_graph", props: { id: "line-test", gradient: false, chart_data: data2, point_start: 1, title: 'Solar Employment Growth by Sector, 2010-2016', subtitle: 'Source: thesolarfoundation.com', axis_title: 'Number of Employees' }  ) %>
+
+
+    
+
+  <% end %>
+<% end %>
+
+
+  
+
+
+
