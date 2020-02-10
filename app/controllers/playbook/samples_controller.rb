@@ -29,11 +29,11 @@ module Playbook
   private
 
     def set_sample
-      menu = MENU["samples"]
-      if menu.include?(params[:name])
+      menu = MENU["samples"].map { |link| link.is_a?(Hash) ? link.first.last : link }
+      if menu.flatten.include?(params[:name])
         @sample = params[:name]
       else
-        redirect_to root_path
+        redirect_to root_path, flash: { error: "That kit does not exist" }
       end
     end
   end

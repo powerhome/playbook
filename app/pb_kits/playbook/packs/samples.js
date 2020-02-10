@@ -46,4 +46,3 @@ $('.copy-clipboard').click(() => {
   var copyText = document.querySelector('.hiddenCodeforCopy').textContent
   setClipboard(copyText)
 })
-
