@@ -20,13 +20,6 @@ const HashtagDark = () => {
       <br />
       <Hashtag
           dark
-          text="456789"
-          type="appointment"
-          url="https://google.com"
-      />
-      <br />
-      <Hashtag
-          dark
           text="654321"
           type="default"
           url="https://google.com"

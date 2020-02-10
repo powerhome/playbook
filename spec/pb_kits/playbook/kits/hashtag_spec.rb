@@ -11,7 +11,7 @@ RSpec.describe Playbook::PbHashtag::Hashtag do
   it { is_expected.to define_boolean_prop(:dark).with_default(false) }
   it { is_expected.to define_enum_prop(:type)
                       .with_default("default")
-                      .with_values("default", "project", "home", "appointment") }
+                      .with_values("default", "project", "home") }
   it { is_expected.to define_prop(:url) }
 
   describe "#classname" do

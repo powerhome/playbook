@@ -10,7 +10,7 @@ module Playbook
       prop :text
       prop :dark, type: Playbook::Props::Boolean, default: false
       prop :type, type: Playbook::Props::Enum,
-                  values: %w[default project home appointment],
+                  values: %w[default project home],
                   default: "default"
       prop :url
 
@@ -33,8 +33,6 @@ module Playbook
           "H#"
         elsif type === "project"
           "P#"
-        elsif type === "appointment"
-          "A#"
         else
           "#"
         end

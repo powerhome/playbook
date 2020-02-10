@@ -17,12 +17,6 @@ const HashtagDefault = () => {
       />
       <br />
       <Hashtag
-          text="456789"
-          type="appointment"
-          url="https://google.com"
-      />
-      <br />
-      <Hashtag
           text="654321"
           type="default"
           url="https://google.com"
