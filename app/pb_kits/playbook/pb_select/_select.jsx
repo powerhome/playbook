@@ -69,7 +69,7 @@ const Select = ({
   value,
 }: SelectProps) => {
   const errorClass = error ? ' error' : ''
-  const css = buildCss({ 'pb_select': true, 'dark': dark === true }) + errorClass
+  const css = buildCss('pb_select', { dark }) + errorClass
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
   const optionsList = createOptions(options)
