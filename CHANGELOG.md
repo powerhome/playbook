@@ -9,9 +9,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 - Add Appointment type to Hashtag kit ([#599](https://github.com/powerhome/nitro-web/pull/14015) @garettarrowood)
+- React Popover kit [#607](https://github.com/powerhome/playbook/pull/607)
 
 ### Changed
 - Update rouge gem to latest for JSX support [#602](https://github.com/powerhome/playbook/pull/602)
+- Renamed vanilla JS version of `Popover` to `PbPopover` to help prevent collision [#607](https://github.com/powerhome/playbook/pull/607)
 
 ### Changed
 - Update rouge gem to latest for JSX support [#602](https://github.com/powerhome/playbook/pull/602)
