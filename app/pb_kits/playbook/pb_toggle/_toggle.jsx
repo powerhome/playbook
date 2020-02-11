@@ -17,9 +17,9 @@ type Props = {
   aria: object,
   checked: boolean,
   data: object,
-  onChange: InputCallback,
-  onCheck: InputCallback,
-  onUncheck: InputCallback,
+  onChange: InputCallback<HTMLInputElement>,
+  onCheck: InputCallback<HTMLInputElement>,
+  onUncheck: InputCallback<HTMLInputElement>,
   size: 'sm' | 'md',
 }
 

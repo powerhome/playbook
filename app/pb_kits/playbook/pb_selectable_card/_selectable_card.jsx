@@ -4,7 +4,7 @@ import React from 'react'
 import classnames from 'classnames'
 import { Icon } from '../'
 
-import { type InputCallback } from '../types'
+import type { InputCallback } from '../types'
 
 import {
   buildAriaProps,
@@ -26,7 +26,7 @@ type Props = {
   inputId?: String,
   multi?: Boolean,
   name?: String,
-  onChange: InputCallback,
+  onChange: InputCallback<HTMLInputElement>,
   text?: String,
   value?: String
 }
