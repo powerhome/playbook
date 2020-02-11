@@ -7,6 +7,7 @@ type HighlightProps = {
   className?: String,
   data?: String,
   id?: String,
+  children?: Array<React.ReactChild>,
 }
 
 const Highlight = ({

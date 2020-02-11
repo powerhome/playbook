@@ -1,9 +1,31 @@
+
+<%= pb_rails("highlight", props: {text: "Highlight Kit"})%>
+<br>
+<br>
+<%= pb_rails("title", props: {text: "Kit wrapping",size: 4})%>
+<br>
 <%= pb_rails("body") do%>
 This an example<%= pb_rails("highlight") do%>Highlight Example<% end %>around.
 <% end %>
-</br>
-
+<br>
+<br>
+<%= pb_rails("title", props: {text: "Character wrapping",size: 4})%>
+<br>
 <%= pb_rails("body", props: {text: "::hello:: helpers are great even highlighting this"})%>
 </br>
+<%= pb_rails("body", props: {text: "::hello:: helpers are great even highlighting this", enable_highlight: true})%>
 
-<%= pb_rails("body", props: {text: "hello there ::i know its highlighted::"}) %>
+<br>
+<br>
+<%= pb_rails("caption", props: {size: "xs", text: "To enable highlighting make sure the [enable_highlight] flag is turned on. By default content wrapped in :: will highlight."}) %>
+<br>
+<br>
+
+<%= pb_rails("title", props: {text: "Custom Character wrapping",size: 4})%>
+</br>
+<%= pb_rails("body", props: {text: "hello there %%i know its highlighted%%"}) %>
+</br>
+<%= pb_rails("body", props: {text: "hello there %%i know its highlighted%%", enable_highlight: true, highlight_marker: "%"}) %>
+<br>
+<br>
+<%= pb_rails("caption", props: {size: "xs", text: "Custom highlight markers can be implemented by assigning a value to the [highlight_marker] prop. This will change the regex to look for content wrapped by double of what the highlight marker is."}) %>

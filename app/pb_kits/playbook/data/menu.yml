@@ -22,6 +22,7 @@ kits:
     - textarea
     - typeahead
     - toggle
+  - highlight
   - hashtag
   - icon
   - icon_circle

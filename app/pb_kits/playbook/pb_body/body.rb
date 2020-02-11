@@ -3,6 +3,7 @@
 module Playbook
   module PbBody
     class Body
+      include Playbook::PbKitHelper
       include Playbook::Props
       include ActionView::Helpers
 
@@ -20,18 +21,24 @@ module Playbook
                  values: %w[h1 h2 h3 h4 h5 h6 p span div],
                  default: "div"
       prop :text
+      prop :enable_highlight, type: Playbook::Props::Boolean,
+                              default: false
+      prop :highlight_marker
 
       def classname
         generate_classname("pb_body_kit", color_class, dark_class, status_class)
       end
 
-     def highlight
-      text.gsub(/(^|\s):{2}(.+?):{2}/m, "\\1<span class=\"pb_highlight_kit\">\\2</span>").html_safe
-     end
-
+      def content
+        enable_highlight ? highlight : text
+      end
 
     private
 
+      def highlight
+        m = highlight_marker != nil ? highlight_marker : ':'
+        text.gsub(/(^|\s)#{m}{2}(.+?)#{m}{2}/m, "\\1<span class=\"pb_highlight_kit\">\\2</span>").html_safe
+      end
 
       def color_class
         color != "default" ? color : nil
