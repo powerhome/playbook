@@ -2,26 +2,27 @@ import React from 'react'
 import { Select } from '../../'
 
 const SelectDefault = () => {
+  const options = [
+    {
+      value: '1',
+      text: 'Burgers',
+    },
+    {
+      value: '2',
+      text: 'Pizza',
+    },
+    {
+      value: '3',
+      text: 'Tacos',
+    },
+  ]
+
   return (
     <div>
       <Select
           label="Favorite Food"
           name="food"
-          options={[
-          {
-            value: '1',
-            valueText: 'Burgers',
-          },
-          {
-            value: '2',
-            selected: true,
-            valueText: 'Pizza',
-          },
-          {
-            value: '3',
-            valueText: 'Tacos',
-          },
-        ]}
+          options={options}
       />
     </div>
   )
