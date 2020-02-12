@@ -3,7 +3,6 @@
 module Playbook
   module PbBody
     class Body
-      include Playbook::PbKitHelper
       include Playbook::Props
       include ActionView::Helpers
 
@@ -37,8 +36,22 @@ module Playbook
 
       def highlight
         m = highlight_marker != nil ? highlight_marker : ':'
-        text.gsub(/(^|\s)#{m}{2}(.+?)#{m}{2}/m, "\\1<span class=\"pb_highlight_kit\">\\2</span>").html_safe
+        puts text
+        # puts text =~ /(^|\s)#{m}{2}(.+?)#{m}{2}/m
+        h_content = text.match(/(^|\s)#{m}{2}(.+?)#{m}{2}/m)
+        puts h_content
+        pb_highlight = Playbook::PbHighlight::Highlight.new() { h_content }
+        text.gsub(/(^|\s)#{m}{2}#{h_content}#{m}{2}/m, pb_highlight.to_s ).html_safe
+        
+        # text.gsub(/(^|\s)#{m}{2}#{h_content}#{m}{2}/m,pb_highlight ).html_safe
+        
+        # ApplicationController.renderer.render(partial: pb_highlight, as: :object)
       end
+
+      # def h 
+      #   pb_highlight = Playbook::PbHighlight::Highlight.new() { h_content }
+      #   ApplicationController.renderer.render(partial: pb_highlight, as: :object)
+      # end
 
       def color_class
         color != "default" ? color : nil
