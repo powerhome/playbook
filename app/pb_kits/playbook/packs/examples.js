@@ -96,6 +96,7 @@ WebpackerReact.setup({
   ...DashboardValue,
   ...Date,
   ...DateRangeInline,
+  ...DateRangeStacked,
   ...DateStacked,
   ...DateYearStacked,
   ...DistributionBar,
