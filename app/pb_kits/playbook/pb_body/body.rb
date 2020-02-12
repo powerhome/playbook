@@ -40,12 +40,11 @@ module Playbook
         # puts text =~ /(^|\s)#{m}{2}(.+?)#{m}{2}/m
         h_content = text.match(/(^|\s)#{m}{2}(.+?)#{m}{2}/m)
         puts h_content
-        pb_highlight = Playbook::PbHighlight::Highlight.new() { h_content }
-        text.gsub(/(^|\s)#{m}{2}#{h_content}#{m}{2}/m, pb_highlight.to_s ).html_safe
-        
+        h_content.gsub(/(^|\s)#{m}{2}#{h_content}#{m}{2}/m, "\\1/s\\2/s" ).html_safe
+        puts h_content
         # text.gsub(/(^|\s)#{m}{2}#{h_content}#{m}{2}/m,pb_highlight ).html_safe
-        
-        # ApplicationController.renderer.render(partial: pb_highlight, as: :object)
+        pb_highlight = Playbook::PbHighlight::Highlight.new() { h_content }
+        ApplicationController.renderer.render(partial: pb_highlight, as: :object)
       end
 
       # def h 
