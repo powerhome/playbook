@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+- Changed the doc helper and kit_ui slim file for dev docs kit generation.
 ### Fixed
 - Fixed timezone issue on DateStacked ([#592][] @gmfvpereira)
 

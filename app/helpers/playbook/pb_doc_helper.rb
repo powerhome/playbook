@@ -24,7 +24,8 @@ module Playbook
 
     def pb_kits(type: "rails")
       display_kits = []
-      MENU["kits"].each do |kit|
+      kits = get_kits()
+      kits.each do |kit|
         if kit.is_a?(Hash)
           nav_hash_array(kit).each do |sub_kit|
             display_kits << render_pb_doc_kit(sub_kit, type)
@@ -34,6 +35,11 @@ module Playbook
         end
       end
       raw("<div class='pb--docItem'>" + display_kits.join("</div><div class='pb--docItem'>") + "</div>")
+    end
+
+    def get_kits
+      menu = YAML.load_file("#{Playbook::Engine.root}/app/pb_kits/playbook/data/menu.yml")
+      return menu['kits']
     end
 
     def pb_category_kits(category_kits: [], type: "rails")
