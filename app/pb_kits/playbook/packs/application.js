@@ -13,3 +13,4 @@ window.$(document).on('click', '[data-toggle]', function(e) {
   window.$(kitContainer).find('[data-action="toggle"]').hide()
   window.$(kitContainer).find('[data-togglable="' + toggleTarget + '"]').show()
 })
+

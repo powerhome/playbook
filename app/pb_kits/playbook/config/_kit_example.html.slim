@@ -1,6 +1,0 @@
-- if !@kit_examples[:examples].nil?
-  - @kit_examples[:examples].each do |kit_example|
-    - kit_example.each do |key, item|
-      .pb--doc class=(key.include?("_dark") ? "dark_ui" : "light_ui")
-        = render partial: "playbook/config/kit_ui", locals: { key: key, type: @type, item: item }
-

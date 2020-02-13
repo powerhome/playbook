@@ -14,6 +14,8 @@
     = pb_react(key.camelize)
   br
 
+- if @samples
+  = render partial: "kit_samples_list"
 
 - if @show_code
   .pb--codeControls

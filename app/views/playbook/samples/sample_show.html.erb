@@ -1,0 +1,23 @@
+<div class="pb--kit-show sample-nav">
+  <div class="sample-actions">
+    <div class="items">
+      <%= pb_rails("circle_icon_button", props: {variant: "primary", icon: "angle-left", dark: true}) %>
+    </div>
+  </div>
+  <div class="pb--kit-type-nav sample">
+    <%= pb_rails("nav", props: { orientation: "horizontal", classname: "code-controls"}) do %>
+      <%= pb_rails("nav/item", props: { text: "Rails", link: "#{sample_show_rails_path(@sample)}", active: action_name == 'sample_show_rails' }) %>
+      <%= pb_rails("nav/item", props: { text: "React", link: "#{sample_show_reacts_path(@sample)}", active: action_name == 'sample_show_react' }) %>
+    <% end %>
+  </div>
+  <div class="sample-actions-right">
+    <div class="items">
+      <%= pb_rails("circle_icon_button", props: { classname:"toggle-button", data: {toggle:"code_example"}, variant: "secondary", icon: "code", dark: true}) %>
+    </div>
+    <div class="items">
+      <%= pb_rails("circle_icon_button", props:{ variant: "secondary", icon: "expand", dark: true}) %>
+    </div>
+  </div>
+</div>
+
+
