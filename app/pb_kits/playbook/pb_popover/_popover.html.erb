@@ -14,7 +14,7 @@
 <% content_for :pb_js do %>
   <%= javascript_tag do %>
     window.addEventListener('DOMContentLoaded', function() {
-      new Popover(
+      new PbPopover(
         "#<%= object.trigger_element_id %>",
         "#<%= object.tooltip_id %>",
          "<%= object.position %>",
