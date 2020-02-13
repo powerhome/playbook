@@ -2,7 +2,7 @@
 
 import React from 'react'
 import classnames from 'classnames'
-import moment from 'moment'
+import DateTime from '../pb_kit/dateTime.js'
 
 import { buildCss } from '../utilities/props'
 import { Caption, Title } from '../'
@@ -36,20 +36,20 @@ const DateStacked = ({
     'reverse': reverse,
   }))
 
-  const currentYear = moment().year()
-  const dateObject = moment(date)
-  const inputYear = dateObject.format('Y')
+  const currentYear = new Date().getFullYear().toString()
+  const dateTimestamp = new DateTime({ value: date })
+  const inputYear = dateTimestamp.toYear().toString()
 
   return (
     <div className={classes}>
       <div className="pb_date_stacked_day_month">
         <Caption
-            text={dateObject.format('MMM').toUpperCase()}
+            text={dateTimestamp.toMonth().toUpperCase()}
         />
         <Title
             dark={dark}
             size={sizes[size]}
-            text={dateObject.format('D')}
+            text={dateTimestamp.toDay()}
         />
       </div>
       <If condition={currentYear != inputYear}>
