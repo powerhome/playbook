@@ -12,12 +12,14 @@
   </div>
   <div class="sample-actions-right">
     <div class="items">
-      <%= pb_rails("circle_icon_button", props: { classname:"toggle-button", data: {toggle:"code_example"}, variant: "secondary", icon: "code", dark: true}) %>
+      <%= pb_rails("circle_icon_button", props: { classname:"toggle-button", variant: "secondary", icon: "code", dark: true}) %>
     </div>
     <div class="items">
-      <%= pb_rails("circle_icon_button", props:{ variant: "secondary", icon: "expand", dark: true}) %>
+      <%= pb_rails("circle_icon_button", props:{ classname: "expand", variant: "secondary", icon: "expand", dark: true}) %>
     </div>
   </div>
 </div>
 
+
+<%= pb_rails("circle_icon_button", props:{ classname: "compress", variant: "link", icon: "compress"}) %>
 
