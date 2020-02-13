@@ -9,5 +9,5 @@ import './pb_form/pb_form_validation'
 import 'lazysizes'
 
 // Popovers
-import Popover from './pb_popover/_popover'
-window.Popover = Popover
+import PbPopover from './pb_popover/_popover.js'
+window.PbPopover = PbPopover

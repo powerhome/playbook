@@ -12,7 +12,7 @@ def deployerVersion = "master-e4c01702624ac34f2663f894fbdb68a369b09629-588"
 def resources = [
   requestCpu: '1',
   limitCpu: '2',
-  requestMemory: '4Gi',
+  requestMemory: '6Gi',
   limitMemory: '12Gi',
 ]
 
