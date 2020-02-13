@@ -8,6 +8,8 @@ import { buildCss } from '../utilities/props'
 import {
   Body,
   DateYearStacked,
+  Flex,
+  FlexItem,
   Icon,
 } from '../'
 
@@ -30,30 +32,35 @@ const DateRangeStacked = ({
 
   return (
     <div className={css}>
-      <DateYearStacked
-          className="pb_date_range_stacked_display pb_date_range_stacked_start_date"
-          dark={dark}
-          date={startDate}
-      />
-
-      <div className="pb_date_range_stacked_display">
-        <Body
-            color="light"
-            tag="span"
-        >
-          <Icon
-              className="pb_date_range_stacked_arrow"
-              fixedWidth
-              icon="long-arrow-right"
+      <Flex>
+        <FlexItem>
+          <DateYearStacked
+              align="right"
+              dark={dark}
+              date={startDate}
           />
-        </Body>
-      </div>
-
-      <DateYearStacked
-          className="pb_date_range_stacked_display"
-          dark={dark}
-          date={endDate}
-      />
+        </FlexItem>
+        <FlexItem>
+          <div>
+            <Body
+                color="light"
+                tag="span"
+            >
+              <Icon
+                  className="pb_date_range_stacked_arrow"
+                  fixedWidth
+                  icon="long-arrow-right"
+              />
+            </Body>
+          </div>
+        </FlexItem>
+        <FlexItem>
+          <DateYearStacked
+              dark={dark}
+              date={endDate}
+          />
+        </FlexItem>
+      </Flex>
     </div>
   )
 }
