@@ -1,9 +1,22 @@
 import React from 'react'
-import { Highlight } from '../../'
+import { Body, Highlight } from '../../'
 
 const HighlightDefault = () => (
   <div>
-    <Highlight />
+    <Highlight text="This is the Highlight Kit" />
+    <br />
+    <Body>
+      {' '}
+      {'Hello this is a'}
+      {' '}
+      <Highlight>{' highlight wrapped'}</Highlight>
+    </Body>
+    <br />
+    <Body
+        highlightedText={['highlight']}
+        highlighting
+        text="This is text highlighted in the Body Kit using the text prop."
+    />
   </div>
 )
 

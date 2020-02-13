@@ -5,7 +5,7 @@ module Playbook
     class Body
       include Playbook::Props
       include ActionView::Helpers
-
+      
       partial "pb_body/body"
 
       prop :color, type: Playbook::Props::Enum,
@@ -20,38 +20,28 @@ module Playbook
                  values: %w[h1 h2 h3 h4 h5 h6 p span div],
                  default: "div"
       prop :text
-      prop :enable_highlight, type: Playbook::Props::Boolean,
+      prop :highlighting, type: Playbook::Props::Boolean,
                               default: false
-      prop :highlight_marker
+      prop :highlighted_text, type: Playbook::Props::Array,
+                              default: []
 
       def classname
         generate_classname("pb_body_kit", color_class, dark_class, status_class)
       end
 
       def content
-        enable_highlight ? highlight : text
+        highlighting ? apply_highlight : text
       end
 
     private
 
-      def highlight
-        m = highlight_marker != nil ? highlight_marker : ':'
-        puts text
-        # puts text =~ /(^|\s)#{m}{2}(.+?)#{m}{2}/m
-        h_content = text.match(/(^|\s)#{m}{2}(.+?)#{m}{2}/m)
-        puts h_content
-        h_content.gsub(/(^|\s)#{m}{2}#{h_content}#{m}{2}/m, "\\1/s\\2/s" ).html_safe
-        puts h_content
-        # text.gsub(/(^|\s)#{m}{2}#{h_content}#{m}{2}/m,pb_highlight ).html_safe
-        pb_highlight = Playbook::PbHighlight::Highlight.new() { h_content }
-        ApplicationController.renderer.render(partial: pb_highlight, as: :object)
+      def apply_highlight
+        pb_highlight = Playbook::PbHighlight::Highlight.new() {"|"}
+        pb_highlight_output = ApplicationController.renderer.render(partial: pb_highlight, as: :object)
+        highlight_tags = pb_highlight_output.split("|")
+        highlight(text, highlighted_text, highlighter: "#{highlight_tags.first.html_safe} \\1 #{highlight_tags.last.html_safe}")
       end
-
-      # def h 
-      #   pb_highlight = Playbook::PbHighlight::Highlight.new() { h_content }
-      #   ApplicationController.renderer.render(partial: pb_highlight, as: :object)
-      # end
-
+     
       def color_class
         color != "default" ? color : nil
       end

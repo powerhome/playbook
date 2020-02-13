@@ -4,7 +4,6 @@ module Playbook
   module PbHighlight
     class Highlight
       include Playbook::Props
-      include Playbook::PbKitHelper
 
       partial "pb_highlight/highlight"
 
