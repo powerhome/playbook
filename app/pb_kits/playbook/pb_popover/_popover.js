@@ -1,11 +1,11 @@
-import { createPopper } from '@popperjs/core'
+import Popper from 'popper.js'
 
-class Popover {
+class PbPopover {
   constructor(
     triggerElement = '#triggerElement',
     tooltip = '#tooltip',
     placement = 'left',
-    offset = ''
+    offset,
   ) {
     this.triggerElement = triggerElement
     this.tooltip = tooltip
@@ -15,41 +15,32 @@ class Popover {
   }
 
   //getters
-  get popoverTriggerElement() {
+  get referenceElement() {
     return document.querySelector(this.triggerElement)
   }
   get popoverTooltip() {
     return document.querySelector(this.tooltip)
   }
-  get popoverPlacement() {
-    return this.placement
-  }
-  get popoverOffset() {
-    return this.offset
-  }
 
   attachEvents() {
-    this.popoverTriggerElement.addEventListener('click', () => {
+    this.referenceElement.addEventListener('click', () => {
       this.popoverTooltip.classList.toggle('show')
-      this.popper.update()
+      this.popper.scheduleUpdate()
     })
   }
 
   setupPopper() {
-    this.popper = createPopper(this.popoverTriggerElement, this.popoverTooltip, {
-      placement: this.popoverPlacement,
-      modifiers: [
-        {
-          name: 'offset',
-          options: {
-            offset: this.offset,
-          },
+    this.popper = new Popper(this.referenceElement, this.popoverTooltip, {
+      placement: this.placement,
+      modifiers: {
+        offset: {
+          offset: this.offset,
         },
-      ],
+      },
     })
 
     this.attachEvents()
   }
 }
 
-export default Popover
+export default PbPopover
