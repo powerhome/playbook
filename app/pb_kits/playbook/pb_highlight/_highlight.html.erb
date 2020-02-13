@@ -2,5 +2,5 @@
     id: object.id,
     data: object.data,
     class: object.classname) do %>
-    <%= !object.children.nil? ? capture(&object.children) : object.text %>
+    <%= object.children.nil? ? object.text : capture(&object.children) %>
 <% end %>

@@ -6,6 +6,9 @@ RSpec.describe Playbook::PbHighlight::Highlight do
   subject { Playbook::PbHighlight::Highlight }
 
   it { is_expected.to define_partial }
-
-  # Do not leave this file blank. Use other spec files for example tests.
+  describe "#classname" do
+   it "returns namespaced class name", :aggregate_failures do
+     expect(subject.new({}).classname).to eq "pb_highlight_kit"
+   end
+ end
 end

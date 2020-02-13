@@ -10,8 +10,6 @@ This an example<%= pb_rails("highlight") do%>Highlight Example<% end %>around.
 <br>
 <br>
 <%= pb_rails("title", props: {text: "Search",size: 4})%>
-<br>
-<%= pb_rails("body", props: {text: "hello helpers are great even highlighting this"})%>
 </br>
 <%= pb_rails("body", props: {text: "hello helpers are great even highlighting this", highlighting: true, highlighted_text: ["hello","great"]})%>
 
@@ -20,4 +18,3 @@ This an example<%= pb_rails("highlight") do%>Highlight Example<% end %>around.
 <%= pb_rails("caption", props: {size: "xs", text: "To enable highlighting make sure the [highlighting] flag is set to true. "}) %>
 <br>
 <br>
-

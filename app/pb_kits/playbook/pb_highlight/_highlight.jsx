@@ -7,7 +7,7 @@ type HighlightProps = {
   className?: String,
   data?: String,
   id?: String,
-  children?: Array<React.ReactChild>,
+  children?: Array<React.ReactNode>,
   text?: String,
   highlightedText?: Array<String>
 }
@@ -18,20 +18,20 @@ const Highlight = ({
   data,
   id,
   text,
-  highlightedText = ['the', 'highlight'],
+  highlightedText = ['highlight'],
 }: HighlightProps) => {
   return (
-    <>
-      <Highlighter
-          autoEscape
-          data={data}
-          highlightClassName={className}
-          highlightTag="span"
-          id={id}
-          searchWords={highlightedText}
-          textToHighlight={text || children}
-      />
-    </>
+
+    <Highlighter
+        autoEscape
+        data={data}
+        highlightClassName={className}
+        highlightTag="span"
+        id={id}
+        searchWords={highlightedText}
+        textToHighlight={text || children}
+    />
+
   )
 }
 

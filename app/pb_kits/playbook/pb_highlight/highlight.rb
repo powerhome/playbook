@@ -12,7 +12,6 @@ module Playbook
       def classname
         generate_classname("pb_highlight_kit")
       end
-
     end
   end
 end
