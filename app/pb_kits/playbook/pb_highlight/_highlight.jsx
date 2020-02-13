@@ -7,7 +7,7 @@ type HighlightProps = {
   className?: String,
   data?: String,
   id?: String,
-  children?: Array<React.ReactNode>,
+  children?: React.Node,
   text?: String,
   highlightedText?: Array<String>
 }
