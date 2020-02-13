@@ -5,6 +5,7 @@ RUN bash -lc 'rvm remove all --force && rvm install ruby-2.5.0 && rvm --default 
 RUN /pd_build/ruby_support/install_ruby_utils.sh
 RUN /pd_build/ruby_support/finalize.sh
 
+ENV NODE_OPTIONS "--max_old_space_size=4096"
 ENV NVM_VERSION v0.33.8
 ENV NODE_VERSION v10.17.0
 ENV NPM_VERSION 6.11.3
