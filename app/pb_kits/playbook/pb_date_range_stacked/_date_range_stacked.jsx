@@ -32,7 +32,7 @@ const DateRangeStacked = ({
 
   return (
     <div className={css}>
-      <Flex>
+      <Flex vertical="center">
         <FlexItem>
           <DateYearStacked
               align="right"
