@@ -9,7 +9,6 @@ module Playbook
       elsif type == "react"
         Dir["../../views/playbook/samples/#{sample}/*.jsx"].empty?
       end
-      raw("<div class='pb--docItem'>" + display_samples.join("</div><div class='pb--docItem'>") + "</div>")
     end
 
     def pb_sample(sample: "", type: "rails")
