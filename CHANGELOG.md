@@ -7,9 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## Unreleased
 
 ### Added
-- Flex Kit ([#493][] @markiearnold @kre8sions)
-
-[#493]:https://github.com/powerhome/playbook/pull/493
+- Highlight Kit ([#586](https://github.com/powerhome/playbook/pull/586) @kre8sions)
 
 
 ## Unreleased
