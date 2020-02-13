@@ -19,16 +19,9 @@
             <%= react_component("Dashboards") %>
             <div class="pb--kit-show">
                 <div class="pb--doc light_ui">
-                    <div class="pb--codeControls">
-                        <ul>
-                            <li>
-                                <a data-toggle="code_example" href="#">Code Example</a>
-                            </li>
-                        </ul>
-                    </div>
-
-                    <div class="pb--codeCopy" data-action="toggle" data-togglable="code_example">
-                        <a class="pb--close-toggle" data-toggle="false" href="#">Close</a>
+                    <div class="pb--codeCopy close" >
+                        <a class="pb--close-toggle copy-clipboard" href="#">Copy to Clipboard</a>
+                        <div class="hiddenCodeforCopy"><%= contents %></div>
                         <%= raw rouge(contents, "erb") %>
                     </div>
                 </div>
