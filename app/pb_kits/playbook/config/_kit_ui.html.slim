@@ -14,17 +14,20 @@
     = pb_react(key.camelize)
   br
 
-- if defined?(rouge)
-  - if @show_code
-    .pb--codeControls
-      ul
-        li
-          a href="#" data-toggle="code_example" Code Example
+- if @samples
+  = render partial: "kit_samples_list"
 
-    .pb--codeCopy data-action="toggle" data-togglable="code_example"
-      a.pb--close-toggle href="#" data-toggle="false" Close
-      pre.highlight
-        - if type == "rails"
-          = raw rouge(contents, "erb")
-        - elsif type == "react"
-          = raw rouge(contents, "react")
+- if @show_code
+  .pb--codeControls
+    ul
+      li
+        a href="#" data-toggle="code_example" Code Example
+
+  .pb--codeCopy data-action="toggle" data-togglable="code_example"
+    a.pb--close-toggle href="#" data-toggle="false" Close
+    pre.highlight
+      - if type == "rails"
+        = raw rouge(contents, "erb")
+      - elsif type == "react"
+        = raw rouge(contents, "react")
+        

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Full Screen Examples</title>
+        <%= csrf_meta_tags %>
+        <%= csp_meta_tag %>
+        <%= stylesheet_pack_tag 'main' %>
+    </head>
+    <body>
+        <div class="sample-layout">
+            <%= yield %>
+        
+            <% if @type == "rails" %> 
+                <% contents = File.read("#{Playbook::Engine.root}/app/views/playbook/samples/dashboards/dashboards.html.erb") %>
+                <%= render template: "playbook/samples/dashboards/dashboards.html.erb", locals: { type: @type } %>
+            <% elsif @type == "react" %>
+                <% contents = File.read("#{Playbook::Engine.root}/app/views/playbook/samples/dashboards/dashboards.jsx") %>
+            <% end %>
+            <%= react_component("Dashboards") %>
+            <div class="pb--kit-show">
+                <div class="pb--doc light_ui">
+                    <div class="pb--codeCopy close" >
+                        <a class="pb--close-toggle copy-clipboard" href="#">Copy to Clipboard</a>
+                        <div class="hiddenCodeforCopy"><%= contents %></div>
+                        <%= raw rouge(contents, "erb") %>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+
+    <%= javascript_include_tag "https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js" %>
+    <%= javascript_pack_tag 'application' %>
+    <%= javascript_pack_tag 'examples' %>
+    <%= javascript_pack_tag 'samples' %>
+    <%= yield :pb_js %>
+</html>

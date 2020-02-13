@@ -46,6 +46,12 @@
   line-height: 34px;
   border-bottom: 2px solid rgba($border_light, 0.6);
 
+  &.sample {
+    margin: 0;
+    border-bottom: 2px solid rgba(228, 232, 240, 0.6);
+    background: rgb(23, 34, 87) !important;
+  }
+
   a {
     padding: 0 10px;
     line-height: 34px;
