@@ -1,4 +1,5 @@
 .sample-layout {
+  overflow-y: hidden;
   .sample {
     padding-left: 50px;
     border-bottom: 0px;
@@ -19,7 +20,6 @@
     background: #172257;
     display: flex;
     width: 100%;
-    height: 70px;
     flex-basis: 200px;
 
   }
@@ -42,5 +42,30 @@
   }
   .pb--doc {
     margin-bottom: 0px;
+  }
+  .pb--codeCopy {
+    border: 0px;
+    position: fixed;
+    width: 100%;
+    height: calc(50vh - 45px);
+    bottom: 0;
+    left: 0;
+    transition: all .4s;
+  }
+
+  .pb--codeCopy.close {
+    top: 100%;
+    height: 0px;
+    transition: all .4s;
+  }
+  .compress {
+    position: absolute;
+    top: 15px;
+    right: 30px;
+    display: none;
+    z-index: 4;
+  }
+  .hiddenCodeforCopy {
+    display: none;
   }
 }
