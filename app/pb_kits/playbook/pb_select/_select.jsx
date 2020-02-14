@@ -14,66 +14,65 @@ import {
   buildDataProps,
 } from '../utilities/props'
 
+import type { InputCallback } from '../types'
+
+type SelectOption = {
+  value: string,
+  text: string,
+  disabled?: boolean,
+}
+
 type SelectProps = {
   aria?: object,
-  blankSelection?: String,
-  children?: Array<React.ReactChild>,
-  className?: String,
-  dark?: Boolean,
+  blankSelection?: string,
+  children?: React.Node,
+  className?: string,
+  dark?: boolean,
   data?: object,
-  disabled?: Boolean,
-  error?: String,
-  onChange: PropTypes.func,
-  options: Array<Object>,
-  id?: String,
-  includeBlank?: String,
-  label?: String,
-  multiple?: Boolean,
-  name?: String,
-  required?: Boolean,
-  value?: String,
+  disabled?: boolean,
+  error?: string,
+  onChange: InputCallback<HTMLSelectElement>,
+  options: SelectOption[],
+  id?: string,
+  includeBlank?: string,
+  label?: string,
+  multiple?: boolean,
+  name?: string,
+  required?: boolean,
+  value?: string,
 }
 
-const optionsArray = ({ options = [] }: SelectProps) => {
-  return options.map((optionObject, index) => {
-    return (
-      <option
-          disabled={optionObject.disabled}
-          key={index}
-          selected={optionObject.selected}
-          value={optionObject.value}
-      >
-        {optionObject.valueText || optionObject.value}
-      </option>
-    )
-  })
-}
+const createOptions = (options: SelectOption[]) => options.map((option, index) => (
+  <option
+      disabled={option.disabled}
+      key={index}
+      value={option.value}
+  >
+    {option.text || option.value}
+  </option>
+))
 
-const Select = (props: SelectProps) => {
-  const {
-    aria = {},
-    blankSelection,
-    children,
-    dark = false,
-    data = {},
-    disabled = false,
-    error,
-    label,
-    multiple = false,
-    name,
-    onChange = () => {},
-    options,
-    required = false,
-  } = props
-
+const Select = ({
+  aria = {},
+  blankSelection,
+  children,
+  dark = false,
+  data = {},
+  disabled = false,
+  error,
+  label,
+  multiple = false,
+  name,
+  onChange = () => {},
+  options = [],
+  required = false,
+  value,
+}: SelectProps) => {
   const errorClass = error ? ' error' : ''
-  const css = buildCss({
-    'pb_select': true,
-    'dark': dark === true,
-  }) + errorClass
+  const css = buildCss('pb_select', { dark }) + errorClass
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
-  const optionsList = optionsArray({ options })
+  const optionsList = createOptions(options)
 
   return (
     <div
@@ -106,6 +105,7 @@ const Select = (props: SelectProps) => {
               name={name}
               onChange={onChange}
               required={required}
+              value={value}
           >
             <If condition={blankSelection}>
               <option value="">{blankSelection}</option>

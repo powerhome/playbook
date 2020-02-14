@@ -1,3 +1,5 @@
+samples: 
+  - dashboards
 kits:
   - avatar
   - badge
@@ -22,6 +24,7 @@ kits:
     - textarea
     - typeahead
     - toggle
+  - highlight
   - hashtag
   - icon
   - icon_circle
@@ -68,3 +71,4 @@ kits:
     - title_detail
   - user
   - user_badge
+  - editor

@@ -2,25 +2,19 @@ import React from 'react'
 import { Select } from '../../'
 
 const SelectValueTextSame = () => {
+  const options = [
+    { value: 'Football' },
+    { value: 'Baseball' },
+    { value: 'Basketball' },
+    { value: 'Hockey' },
+  ]
+
   return (
     <div>
       <Select
           label="Favorite Sport"
           name="sports"
-          options={[
-          {
-            value: 'Football',
-          },
-          {
-            value: 'Baseball',
-          },
-          {
-            value: 'Basketball',
-          },
-          {
-            value: 'Hockey',
-          },
-        ]}
+          options={options}
       />
     </div>
   )

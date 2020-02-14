@@ -33,6 +33,7 @@ import * as DistributionBar from 'pb_distribution_bar/docs'
 import * as FixedConfirmationToast from 'pb_fixed_confirmation_toast/docs'
 import * as Flex from 'pb_flex/docs'
 import * as Hashtag from 'pb_hashtag/docs'
+import * as Highlight from 'pb_highlight/docs'
 import * as HomeAddressStreet from 'pb_home_address_street/docs'
 import * as Icon from 'pb_icon/docs'
 import * as IconCircle from 'pb_icon_circle/docs'
@@ -50,6 +51,7 @@ import * as MultipleUsers from 'pb_multiple_users/docs'
 import * as MultipleUsersStacked from 'pb_multiple_users_stacked/docs'
 import * as Nav from 'pb_nav/docs'
 import * as OnlineStatus from 'pb_online_status/docs'
+import * as PbReactPopover from 'pb_popover/docs'
 import * as Person from 'pb_person/docs'
 import * as PersonContact from 'pb_person_contact/docs'
 import * as Pill from 'pb_pill/docs'
@@ -99,6 +101,7 @@ WebpackerReact.setup({
   ...FixedConfirmationToast,
   ...Flex,
   ...Hashtag,
+  ...Highlight,
   ...HomeAddressStreet,
   ...Icon,
   ...IconCircle,
@@ -116,6 +119,7 @@ WebpackerReact.setup({
   ...MultipleUsersStacked,
   ...Nav,
   ...OnlineStatus,
+  ...PbReactPopover,
   ...Person,
   ...PersonContact,
   ...Pill,
