@@ -2,6 +2,7 @@
 
 import React from 'react'
 import classnames from 'classnames'
+import { Highlight } from '../'
 
 type BodyProps = {
   className?: String,
@@ -11,6 +12,8 @@ type BodyProps = {
   status?: 'negative' | 'positive',
   tag: String,
   text?: String,
+  highlighting?: Boolean,
+  highlightedText?: Array<String>
 }
 
 const bodyCSS = ({
@@ -34,13 +37,19 @@ const Body = (props: BodyProps) => {
     children,
     text,
     tag = 'div',
+    highlightedText,
+    highlighting = false,
   } = props
 
   const Tag = `${tag}`
 
   return (
     <Tag className={classnames(bodyCSS(props), className)}>
-      { text || children }
+      <If condition={highlighting}>
+        <Highlight highlightedText={highlightedText}>{text || children}</Highlight>
+        <Else />
+        { text || children }
+      </If>
     </Tag>
   )
 }

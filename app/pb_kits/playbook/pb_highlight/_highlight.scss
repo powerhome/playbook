@@ -1,0 +1,6 @@
+@import "../tokens/colors";
+@import "../tokens/opacity";
+
+[class^=pb_highlight_kit] {
+  background-color: rgba($yellow,$opacity_2);
+}

@@ -1,0 +1,20 @@
+
+<%= pb_rails("highlight", props: {text: "Highlight Kit"})%>
+<br>
+<br>
+<%= pb_rails("title", props: {text: "Kit wrapping",size: 4})%>
+<br>
+<%= pb_rails("body") do%>
+This an example<%= pb_rails("highlight") do%>Highlight Example<% end %>around.
+<% end %>
+<br>
+<br>
+<%= pb_rails("title", props: {text: "Search",size: 4})%>
+</br>
+<%= pb_rails("body", props: {text: "hello helpers are great even highlighting this", highlighting: true, highlighted_text: ["hello","great"]})%>
+
+<br>
+<br>
+<%= pb_rails("caption", props: {size: "xs", text: "To enable highlighting make sure the [highlighting] flag is set to true. "}) %>
+<br>
+<br>
