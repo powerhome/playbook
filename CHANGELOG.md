@@ -6,13 +6,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 
-
 ## [4.3.0] 2020-2-14
 
-
-
-## Unreleased
-- Changed the doc helper and kit_ui slim file for dev docs kit generation.
 
 ### Fixed
 - Fixed timezone issue on DateStacked ([#592][] @gmfvpereira)
@@ -21,14 +16,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Highlight Kit ([#586](https://github.com/powerhome/playbook/pull/586) @kre8sions)
 - Full Page Examples V1 ([#609](https://github.com/powerhome/playbook/pull/609) @jasperfurniss)
 - Add Appointment type to Hashtag kit ([#599](https://github.com/powerhome/nitro-web/pull/14015) @garettarrowood)
-- React Popover kit [#607](https://github.com/powerhome/playbook/pull/607)
+- React Popover kit ([#607](https://github.com/powerhome/playbook/pull/607) @thestephenmarshall)
+- Dev Docs Reformatting ([#605](https://github.com/powerhome/playbook/pull/605) @kre8sions)
 
 ### Changed
 - Update rouge gem to latest for JSX support [#602](https://github.com/powerhome/playbook/pull/602)
 - Renamed vanilla JS version of `Popover` to `PbPopover` to help prevent collision [#607](https://github.com/powerhome/playbook/pull/607)
 
-### Changed
-- Update rouge gem to latest for JSX support [#602](https://github.com/powerhome/playbook/pull/602)
+
 
 ## [4.2.0] 2020-2-6
 
