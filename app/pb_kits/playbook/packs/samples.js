@@ -14,9 +14,7 @@ import Dashboards from '../../../views/playbook/samples/dashboards/dashboards.js
 
 WebpackerReact.setup({ Dashboards })
 
-debugger
-
-(($) => {
+$(document).ready(() => {
   $('.pb--codeCopy').show()
   $('.compress').hide()
 
@@ -49,4 +47,4 @@ debugger
     var copyText = document.querySelector('.hiddenCodeforCopy').textContent
     setClipboard(copyText)
   })
-})(jQuery)
+})
