@@ -4,19 +4,22 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+
+
+
+## [4.3.0] 2020-2-14
+
+
+
 ## Unreleased
-
-### Added
-- Highlight Kit ([#586](https://github.com/powerhome/playbook/pull/586) @kre8sions)
-
-
-## Unreleased
-
 - Changed the doc helper and kit_ui slim file for dev docs kit generation.
+
 ### Fixed
 - Fixed timezone issue on DateStacked ([#592][] @gmfvpereira)
 
 ### Added
+- Highlight Kit ([#586](https://github.com/powerhome/playbook/pull/586) @kre8sions)
+- Full Page Examples V1 ([#609](https://github.com/powerhome/playbook/pull/609) @jasperfurniss)
 - Add Appointment type to Hashtag kit ([#599](https://github.com/powerhome/nitro-web/pull/14015) @garettarrowood)
 - React Popover kit [#607](https://github.com/powerhome/playbook/pull/607)
 
