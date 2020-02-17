@@ -1,11 +1,17 @@
 import Popper from 'popper.js'
 
+const POPOVER_OFFSET_Y = {
+  offset: {
+    offset: '0, 8',
+  },
+}
+
 class PbPopover {
   constructor(
     triggerElement = '#triggerElement',
     tooltip = '#tooltip',
     placement = 'left',
-    offset,
+    offset = false,
   ) {
     this.triggerElement = triggerElement
     this.tooltip = tooltip
@@ -32,11 +38,7 @@ class PbPopover {
   setupPopper() {
     this.popper = new Popper(this.referenceElement, this.popoverTooltip, {
       placement: this.placement,
-      modifiers: {
-        offset: {
-          offset: this.offset,
-        },
-      },
+      modifiers: this.offset ? POPOVER_OFFSET_Y : {},
     })
 
     this.attachEvents()
