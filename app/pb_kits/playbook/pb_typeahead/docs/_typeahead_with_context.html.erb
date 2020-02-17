@@ -1,0 +1,51 @@
+<%= pb_rails("select", props: {
+  label: "Colors",
+  name: "foo",
+  data: { context_select: true },
+  options: [
+    { value: "red", value_text: "Red" },
+    { value: "orange", value_text: "Orange" },
+    { value: "yellow", value_text: "Yellow" },
+    { value: "green", value_text: "Green" },
+    { value: "blue", value_text: "Blue" },
+    { value: "purple", value_text: "Purple" },
+  ]
+  }) %>
+<%= pb_rails("typeahead", props: { label: "Crayola Crayons", name: :foo, data: { typeahead_example2: true, search_context_value_selector: "[data-context-select] select" } }) %>
+
+<br><br><br>
+
+
+<%= javascript_tag defer: "defer" do %>
+  document.addEventListener("pb-typeahead-kit-search", function(event) {
+    if (!event.target.dataset.typeaheadExample2) return;
+
+    const fuzzyMatch = function(string, term) {
+      const ratio = 0.5;
+      string = string.toLowerCase();
+      const compare = term.toLowerCase();
+      let matches = 0;
+
+      if (string.indexOf(compare) > -1) return true;
+
+      for (let index = 0; index < compare.length; index++) {
+        if (string.indexOf(compare[index]) > -1) {
+          matches += 1
+        } else {
+          matches -=1;
+        }
+      }
+
+      return (matches / string.length >= ratio || term == "")
+    };
+
+    const colors = { red: ["Red", "Scarlet", "Chestnut", "Mahogany"],
+                     orange: ["Orange", "Apricot", "Peach", "Melon", "Burnt Sienna", "Macaroni and Cheese"],
+                     yellow: ["Yellow", "Gold", "Goldenrod", "Canary", "Laser Lemon"],
+                     green: ["Green", "Olive Green", "Granny Smith Apple", "Spring Green", "Sea Green"],
+                     blue: ["Blue", "Cerulean", "Bluetiful", "Sky Blue", "Cadet Blue", "Cornflower"],
+                     purple: ["Violet", "Indigo", "Wisteria", "Purple Mountain Majesty", "Lavender"] };
+
+    event.detail.setResults(colors[event.detail.searchingContext].filter((color) => fuzzyMatch(color, event.detail.searchingFor)).map((color) => document.createTextNode(color)));
+  })
+<% end %>
