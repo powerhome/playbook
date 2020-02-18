@@ -1,0 +1,40 @@
+
+<% type ||= "rails" %>
+
+<% if type == "react" %>
+  <% contents = File.read("#{Playbook::Engine.root}/app/pb_kits/playbook/pb_#{@kit_examples[:kit]}/docs/_#{key}.jsx") %>
+<% else %>
+  <% contents = File.read("#{Playbook::Engine.root}/app/pb_kits/playbook/pb_#{@kit_examples[:kit]}/docs/_#{key}.html.erb") %>
+<% end %>
+
+<div class="pb--kit-example">
+  <%= pb_rails("caption", props: { text: item }) %>
+  <br>
+  <% if type == "rails" %>
+    <%= render partial: "pb_#{@kit_examples[:kit]}/docs/#{key}" %>
+  <% elsif type == "react" %>
+    <%= pb_react(key.camelize) %> 
+  <% end %>
+  <br>
+</div>
+
+  <% if @show_code%>
+    <div class="markdown pb--kit-example-markdown">
+      <%= markdown(get_per_sample_descriptions(@kit_examples[:kit], key)) %>
+    </div>
+    <div class="pb--codeControls">
+      <ul>
+        <li>
+          <a href="#" data-toggle="code_example">Code Example</a>
+        </li>
+      </ul>
+    </div>
+    <div class="pb--codeCopy" data-action="toggle" data-togglable="code_example">
+      <a href="#" data-toggle="false" class="pb--close-toggle">Close</a>
+      <% if type == "rails" %>
+        <pre class="highlight"><%= raw rouge(contents, "erb") %></pre>
+      <% elsif type == "react" %>
+        <pre class="highlight"><%= raw rouge(contents, "react")%></pre>
+      <% end %>
+    </div>  
+  <% end %>
