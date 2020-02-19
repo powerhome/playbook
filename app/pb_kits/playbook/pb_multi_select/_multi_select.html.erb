@@ -1,0 +1,12 @@
+<%= content_tag(:div,
+    id: object.id,
+    data: object.data,
+    class: object.classname) do %>
+  <%= pb_rails("title", props: { text: object.display_text, size: 4, classname: "pb_multi_select_text" }) %>
+  <% if object.avatar_url.present? || object.avatar %>
+    <%= pb_rails("avatar", props: {
+      name: object.name,
+      image_url: object.avatar_url
+    }) %>
+  <% end %>
+<% end %>

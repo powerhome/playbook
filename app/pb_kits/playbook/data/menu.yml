@@ -1,4 +1,4 @@
-samples: 
+samples:
   - dashboards
 kits:
   - avatar
@@ -33,6 +33,7 @@ kits:
   - layout
   - list
   - loading_inline
+  - multi_select
   - multiple_users
   - multiple_users_stacked
   - nav

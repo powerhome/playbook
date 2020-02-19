@@ -1,0 +1,7 @@
+examples:
+
+  rails:
+  - multi_select_default: Multi-Select
+
+  react:
+  - multi_select_default: Multi-Select

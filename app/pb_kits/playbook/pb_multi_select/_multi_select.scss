@@ -1,0 +1,27 @@
+@import "../tokens/spacing";
+@import "../tokens/colors";
+@import "../tokens/opacity";
+@import "../pb_body/body";
+@import "../pb_avatar/avatar";
+
+
+$pb_multi_select_height: 22px;
+
+[class^=pb_multi_select_kit] {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 $space-sm/1.8;
+  height: $pb_multi_select_height;
+  border-radius: $pb_multi_select_height/2;
+
+  @each $color_name, $color_value in $status_color_text {
+    &[class*=_#{$color_name}]  {
+      background: rgba($color_value, $opacity-1);
+
+      .pb_multi_select_text {
+        color: $color_value !important;
+      }
+    }
+  }
+}
