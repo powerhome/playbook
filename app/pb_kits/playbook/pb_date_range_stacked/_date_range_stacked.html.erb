@@ -1,0 +1,24 @@
+<%= content_tag(:div,
+    id: object.id,
+    data: object.data,
+    class: object.classname) do %>
+
+    <%= pb_rails("flex", props: {vertical: "center"}) do %>
+      <%= pb_rails("flex/flex_item") do %>
+        <%= pb_rails("date_year_stacked", props: { align: 'right',
+                                                   date: object.start_date,
+                                                   dark: object.dark }) %>
+      <% end %>
+      <%= pb_rails("flex/flex_item") do %>
+        <div>
+          <%= pb_rails("body", props: { tag: "span", color: "light" }) do %>
+            <%= pb_rails("icon", props: { icon: "long-arrow-right", fixed_width: true, classname: "pb_date_range_stacked_arrow" }) %>
+          <% end %>
+        </div>
+      <% end %>
+      <%= pb_rails("flex/flex_item") do %>
+        <%= pb_rails("date_year_stacked", props: { date: object.end_date,
+                                                   dark: object.dark }) %>
+      <% end %>
+    <% end %>
+<% end %>
