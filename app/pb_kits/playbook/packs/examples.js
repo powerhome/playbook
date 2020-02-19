@@ -81,6 +81,9 @@ import * as UserBadge from 'pb_user_badge/docs'
 import PbTypeahead from 'pb_typeahead'
 PbTypeahead.start()
 
+import PbPopover from 'pb_popover'
+PbPopover.start()
+
 WebpackerReact.setup({
   ...Avatar,
   ...Badge,
