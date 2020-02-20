@@ -44,7 +44,7 @@ kits:
   - section_separator
   - source
   - star_rating
-  - stat_changea
+  - stat_change
   - table
   - typography:
     - body
