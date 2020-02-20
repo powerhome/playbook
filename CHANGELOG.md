@@ -10,6 +10,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - Date range stacked Kit [#559](https://github.com/powerhome/playbook/pull/559)
 
+### Changed
+- Adds ability to give context to the Typeahead kit ([#621](https://github.com/powerhome/playbook/pull/621) @terryfinn @web-kat)
+
+
 ## [4.3.0] 2020-2-14
 
 
