@@ -36,9 +36,12 @@
     font-weight: 600;
     z-index: 100;
   }
+  
+  .pb--kit-example, .pb--kit-example-markdown {
+    padding: calc(2rem + 4px) 2rem 1rem;
+  }
 
   .pb--kit-example {
-    padding: calc(2rem + 4px) 2rem 1rem;
     position: relative;
 
     &::after {
