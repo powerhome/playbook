@@ -1,6 +1,8 @@
 import PbEnhancedElement from '../pb_enhanced_element'
 import Popper from 'popper.js'
 
+const POPOVER_OFFSET_Y = '0,8'
+
 export default class PbPopover extends PbEnhancedElement {
   static get selector() {
     return '[data-pb-popover-kit]'
@@ -11,7 +13,7 @@ export default class PbPopover extends PbEnhancedElement {
       placement: this.position,
       modifiers: {
         offset: {
-          offset: this.offset,
+          offset: this.offset === 'true' ? POPOVER_OFFSET_Y : '0,0',
         },
       },
     })
