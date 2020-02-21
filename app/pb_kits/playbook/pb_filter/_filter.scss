@@ -1,14 +1,36 @@
 @import "../tokens/spacing";
 @import "../tokens/colors";
+
 [class^=pb_filter_kit] {
   [class^=pb_circle_icon_button_kit]{
     padding-left: $space_sm !important;
     padding-top: $space_sm !important;
     padding-bottom: $space_sm !important;
   }
-  #sort-button{
+  [class^=pb_card_body_kit][class*=_md]{
     padding: 0 !important;
-    margin-left: $space_sm !important;
+  }
+  [class^=pb_list_kit] li{
+    padding: 0 $space_sm !important;
+  }
+  [class^=pb-form]{
+    padding: $space_sm ;
+  }
+  [class^=pb_button_kit][class*=_link]{
+    flex-shrink:0;
+    padding: 0 $space_xs !important;
+    [id^="sort"]{
+      margin-left: $space_xs !important;
+    }
+  }
+   .sort-by{
+    flex-shrink:0;
+    margin-left: $space_xs !important;
+  }
+  .filter-results{
+    margin-left: $space_xs !important;
+    margin-right: $space_xs !important;
+    flex-shrink:0 !important;
   }
   .filter-bottom{
     padding-left: $space_sm !important;
@@ -22,11 +44,12 @@
   }
   .filters {
     display: flex;
+    flex-shrink: 1;
     flex-wrap: nowrap;
     overflow-x: scroll;
     padding-right: 80px;
-    padding-top: $space_sm;
-    padding-bottom: $space_sm;
+    padding-top: $space_md;
+    padding-bottom: $space_md;
 
    &::-webkit-scrollbar{
        display: none;
@@ -39,12 +62,11 @@
     }
 
 }
-
 .maskContainer::after {
     content: " ";
     background-image: linear-gradient(to right, rgba($card_light,.3) , rgba($card_light,1));
     height: 48px;
-    padding-left: $space_lg;
+    padding-left: $space_xl;
     margin-left: -$space_lg;
     z-index: 1;
 }

@@ -1,8 +1,19 @@
 import React from 'react'
+import { TitleCount } from '../../'
 
 const TitleCountDefault = () => {
   return (
-    <h1>{'Coming Soon...'}</h1>
+    <>
+      <TitleCount
+          count={35}
+          title="Appointments"
+      />
+      <TitleCount
+          count={35}
+          size="lg"
+          title="Appointments"
+      />
+    </>
   )
 }
 
