@@ -1,9 +1,8 @@
 import React from 'react'
-import { Filter } from '../../'
 
 const FilterDefault = () => (
   <div>
-    <Filter />
+    <h1>{'Coming Soon!'}</h1>
   </div>
 )
 

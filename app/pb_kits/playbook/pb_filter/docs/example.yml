@@ -2,7 +2,7 @@ examples:
   
   rails:
   - filter_default: Default
-  
+  - filter_single: Single
   
   react:
   - filter_default: Default

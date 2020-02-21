@@ -7,17 +7,27 @@ module Playbook
 
       partial "pb_filter/filter"
 
-      def sort_list
-        sort_item = Playbook::PbList::Item.new( 
-          text: "it works"
-        )
-        sort_list = Playbook::PbList::List.new(
-          ) { sort_item}
-        ApplicationController.renderer.render(partial: sort_list, as: :object)
-      end
+      prop :filters, type: Playbook::Props::HashArray, default: [{name: ''}]
+      prop :sort_menu, type: Playbook::Props::HashArray, default: [{}]
+      prop :results, type: Playbook::Props::Numeric
+      prop :template, type: Playbook::Props::Enum,
+                      values: %w[default single],
+                      default: "default"
+
 
       def classname
         generate_classname("pb_filter_kit")
+      end
+
+      def sort_icon(direction)
+        case direction
+        when "asc"
+          "sort-amount-up"
+        when "des"
+          "sort-amount-down"
+        else
+          ""
+        end
       end
     end
   end
