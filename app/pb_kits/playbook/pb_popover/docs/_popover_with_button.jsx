@@ -24,6 +24,7 @@ export default class PopoverWithButton extends React.Component {
 
     return (
       <PbReactPopover
+          offset
           placement="bottom"
           reference={popoverReference}
           show={this.state.showPopover}

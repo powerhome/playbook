@@ -1,3 +1,4 @@
 examples:
   rails:
   - typeahead_default: Default
+  - typeahead_with_context: With Context

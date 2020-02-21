@@ -5,6 +5,22 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## Unreleased
+
+
+## [4.4.0] 2020-2-20
+
+### Added
+- Date range stacked Kit [#559](https://github.com/powerhome/playbook/pull/559)
+
+### Changed
+- Adds ability to give context to the Typeahead kit ([#621](https://github.com/powerhome/playbook/pull/621) @terryfinn @web-kat)
+
+### Fixed
+- Correct Popover offset docs [#611](https://github.com/powerhome/playbook/pull/611)
+- Fixed typo of stat change kit in yml file [#629] (https://github.com/powerhome/playbook/pull/629)
+
+- PbPopover behavior works after turbolinks navigation events. This behavior is now applied with a [Mutation Observer](https://developer.mozilla.org/en-US/docs/Web/API/MutationObserver) via the [`PbEnhancedElement` class](https://github.com/powerhome/playbook/blob/v4.4.0/app/pb_kits/playbook/pb_enhanced_element/index.js).>>>>>>> Use mutation observer to bind behavior of PbPopover
 
 ## [4.3.0] 2020-2-14
 

@@ -8,20 +8,3 @@
       <% end %>
     </div>
 <% end %>
-
-
-<%# Javascript for the Popover Instance %>
-<% content_for :pb_js do %>
-  <%= javascript_tag do %>
-    window.addEventListener('DOMContentLoaded', function() {
-      new PbPopover(
-        "#<%= object.trigger_element_id %>",
-        "#<%= object.tooltip_id %>",
-         "<%= object.position %>",
-          <%= object.popover_offset %>,
-      )
-    })
-  <% end %>
-<% end %>
-
-

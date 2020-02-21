@@ -25,24 +25,27 @@ export default class PbTypeahead extends PbEnhancedElement {
 
   search() {
     if (this.searchTerm.length < this.searchTermMinimumLength) return this.clearResults()
-    if (this.resultsOptionCache.has(this.searchTerm)) return this.showResults()
+
+    this.showResults()
 
     const searchTerm = this.searchTerm
+    const searchContext = this.searchContext
     const search = {
       searchingFor: searchTerm,
+      searchingContext: searchContext,
       setResults: (results) => {
-        this.resultsCacheUpdate(searchTerm, results)
+        this.resultsCacheUpdate(searchTerm, searchContext, results)
       },
     }
-
     this.element.dispatchEvent(new CustomEvent('pb-typeahead-kit-search', { bubbles: true, detail: search }))
   }
 
-  resultsCacheUpdate(searchTerm, results) {
-    if (this.resultsOptionCache.has(searchTerm)) this.resultsOptionCache.delete(searchTerm)
+  resultsCacheUpdate(searchTerm, searchContext, results) {
+    const searchTermAndContext = this.cacheKeyFor(searchTerm, searchContext)
+    if (this.resultsOptionCache.has(searchTermAndContext)) this.resultsOptionCache.delete(searchTermAndContext)
     if (this.resultsOptionCache.size > 32) this.resultsOptionCache.delete(this.resultsOptionCache.keys[0])
 
-    this.resultsOptionCache.set(searchTerm, results)
+    this.resultsOptionCache.set(searchTermAndContext, results)
     this.showResults()
   }
 
@@ -58,10 +61,10 @@ export default class PbTypeahead extends PbEnhancedElement {
   }
 
   showResults() {
-    if (!this.resultsOptionCache.has(this.searchTerm)) return
+    if (!this.resultsOptionCache.has(this.searchTermAndContext)) return
 
     this.clearResults()
-    for (const result of this.resultsOptionCache.get(this.searchTerm)) {
+    for (const result of this.resultsOptionCache.get(this.searchTermAndContext)) {
       this.resultsElement.appendChild(this.newResultOption(result.cloneNode(true)))
     }
     for (const result of this.resultsElement.querySelectorAll('[data-result-option-item]')) {
@@ -124,6 +127,30 @@ export default class PbTypeahead extends PbEnhancedElement {
 
   get searchTerm() {
     return this.searchInput.value
+  }
+
+  get searchContext() {
+    if (this._searchContext) return this._searchContext
+
+    const selector = this.element.dataset.searchContextValueSelector
+    if (selector) return (
+      this.element.parentNode.querySelector(selector) ||
+        this.element.closest(selector)
+    ).value
+
+    return null
+  }
+
+  set searchContext(value) {
+    this._searchContext = value
+  }
+
+  get searchTermAndContext() {
+    return this.cacheKeyFor(this.searchTerm, this.searchContext)
+  }
+
+  cacheKeyFor(searchTerm, searchContext) {
+    return [searchTerm, JSON.stringify(searchContext)].join()
   }
 
   searchInputClear() {
