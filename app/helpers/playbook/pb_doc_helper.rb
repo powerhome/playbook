@@ -51,7 +51,7 @@ module Playbook
       kits.each do |kit|
         if kit.is_a?(Hash)
           nav_hash_array(kit).each do |sub_kit|
-            display_kits << render_pb_doc_kit(sub_kit, type)
+            display_kits << render_pb_doc_kit(sub_kit, type, false)
           end
         else
           display_kits << render_pb_doc_kit(kit, type, false)

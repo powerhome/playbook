@@ -8,6 +8,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## Unreleased
 
 
+## [4.4.1] 2020-2-21
+
+### Fixed
+- Fixed the `pb_kits` call to always remove code from view (@jasoncypret)
+
 ## [4.4.0] 2020-2-20
 
 ### Added
