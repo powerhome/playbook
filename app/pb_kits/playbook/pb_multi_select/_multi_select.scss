@@ -1,17 +1,16 @@
 @import "../tokens/spacing";
 @import "../tokens/colors";
 @import "../tokens/opacity";
-@import "../pb_body/body";
 @import "../pb_avatar/avatar";
 
 
-$pb_multi_select_height: 22px;
+$pb_multi_select_height: 37px;
 
 [class^=pb_multi_select_kit] {
   display: inline-flex;
   justify-content: center;
   align-items: center;
-  padding: 0 $space-sm/1.8;
+  padding: 0 $space-sm/3;
   height: $pb_multi_select_height;
   border-radius: $pb_multi_select_height/2;
 
@@ -21,6 +20,15 @@ $pb_multi_select_height: 22px;
 
       .pb_multi_select_text {
         color: $color_value !important;
+        padding-left: $space-sm;
+        padding-right: $space-sm/4;
+
+      }
+      .pb_multi_select_tag {
+        color: $color_value !important;
+        padding-left: $space-sm/2;
+        padding-right: $space-sm/4;
+
       }
     }
   }
