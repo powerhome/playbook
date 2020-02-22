@@ -1,7 +1,10 @@
 examples:
 
   rails:
-  - multi_select_default: Multi-Select
+  - multi_select_user: Multi-Select User
+  - multi_select_tag: Multi-Select Tag
+
 
   react:
-  - multi_select_default: Multi-Select
+  - multi_select_user: Multi-Select User
+  - multi_select_tag: Multi-Select Tag

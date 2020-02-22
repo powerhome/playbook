@@ -10,16 +10,13 @@ module Playbook
       prop :avatar_url
       prop :name
       prop :text
-      prop :variant, type: Playbook::Props::Enum,
-                     values: %w[success warning error info neutral primary],
-                     default: "neutral"
 
       def classname
-        generate_classname("pb_multi_select_kit", variant)
+        generate_classname("pb_multi_select_kit", "primary", name, text)
       end
 
       def display_text
-        text.downcase
+        name.downcase
       end
     end
   end
