@@ -1,6 +1,20 @@
 [class^=pb_typeahead_kit] {
   .pb_typeahead_wrapper {
     position: relative;
+
+    .pb_typeahead_loading_indicator {
+      position: relative;
+      width: min-content;
+      top: 3.8em;
+      left: 1em;
+      visibility: hidden;
+    }
+  }
+
+  [class^=pb_text_input_kit] {
+    input {
+      padding-left: $space_xl !important;
+    }
   }
 
   .pb_item_kit {
