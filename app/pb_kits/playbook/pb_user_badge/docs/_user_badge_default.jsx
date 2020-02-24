@@ -9,13 +9,6 @@ const UserBadgeDefault = () => {
         size="md"
       />
     </div>
-
-    // <div>
-    //   <UserBadge
-    //     badge="million-dollar"
-    //     size="md"
-    //   />
-    // </div>
   )
 }
 

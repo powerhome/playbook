@@ -1,3 +1,4 @@
+/* @flow */
 import React from 'react'
 
 type UserBadgeProps = {
@@ -10,9 +11,11 @@ type UserBadgeProps = {
 const UserBadge = ({
   badge = 'million-dollar',
   size = 'md',
-}: UserBadgeProps) => (
-  <div className={`pb_user_badge_kit__${size}`}>
-    
+}) => (
+  <div className={`pb_user_badge_kit_${size}`}>
+    <If condition={UserBadgeProps.badge == "veteran"}>
+      <Image source={require('./badges/_veteran.svg')} />
+    </If>
   </div>
 )
 
