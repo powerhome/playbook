@@ -1,11 +1,15 @@
 <%= pb_rails("user_badge", props: {
   badge: "veteran",
   size: "md"
-}) %>
+}) do %>
+  <%= render partial: "pb_user_badge/badges/veteran" %>
+<% end %>
 
 <br><br>
 
 <%= pb_rails("user_badge", props: {
   badge: "million-dollar",
   size: "md"
-}) %>
+}) do %>
+  <%= render partial: "pb_user_badge/badges/veteran" %>
+<% end %>

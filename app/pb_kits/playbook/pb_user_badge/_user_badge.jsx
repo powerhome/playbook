@@ -4,18 +4,18 @@ import React from 'react'
 type UserBadgeProps = {
   className?: String,
   id?: String,
-  badge?: 'million-dollar' | 'veteran' ,
+  badge: React.ReactNode,
   size?: 'sm' | 'md' | 'lg',
 }
 
 const UserBadge = ({
-  badge = 'million-dollar',
+  badge,
   size = 'md',
-}) => (
+}: UserBadgeProps) => (
   <div className={`pb_user_badge_kit_${size}`}>
-    <If condition={UserBadgeProps.badge == "veteran"}>
-      <Image source={require('./badges/_veteran.svg')} />
-    </If>
+    <div className={`pb_user_badge_wrapper`}>
+      { badge }
+    </div>
   </div>
 )
 
