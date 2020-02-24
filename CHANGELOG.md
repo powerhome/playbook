@@ -10,6 +10,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - Fix Layout Kit SCSS ([#648](https://github.com/powerhome/playbook/pull/648) @thestephenmarshall)
 
+### Added
+- Added documentation to Form, Radio, Select, Selectable Card, Text Input, Textarea, Typeahead, Toggle, Highlight, Hashtag, Icon, Icon Circle ([#637](https://github.com/powerhome/playbook/pull/637) @megantrimble)
+
 ## [4.5.1] 2020-2-28
 
 ### Changed
