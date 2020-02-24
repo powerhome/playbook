@@ -1,8 +1,21 @@
 import React from 'react'
+import { UserBadge } from '../../'
 
 const UserBadgeDefault = () => {
   return (
-    <h1>{'Coming Soon...'}</h1>
+    <div>
+      <UserBadge
+        badge="veteran"
+        size="md"
+      />
+    </div>
+
+    // <div>
+    //   <UserBadge
+    //     badge="million-dollar"
+    //     size="md"
+    //   />
+    // </div>
   )
 }
 
