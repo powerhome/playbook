@@ -19,27 +19,21 @@ const FormPill = ({
   className,
   text,
   name,
-  avatar = false,
   onClick = () => {},
   avatarUrl,
 }: FormPillProps) => {
   const css = classnames([
-`pb_form_pill_kit_${'primary'}`,
-className,
+    `pb_form_pill_kit_${'primary'}`,
+    className,
   ])
   return (
-
     <div className={css}>
-
-      <If condition={avatar || avatarUrl}>
+      <If condition={name}>
         <Avatar
             imageUrl={avatarUrl}
             name={name}
             size="xs"
         />
-      </If>
-
-      <If condition={name}>
         <Title
             className="pb_form_pill_text"
             size={4}
@@ -53,22 +47,14 @@ className,
             text={text}
         />
       </If>
-      <div className="pb_form_pill_text">
+      <div className="pb_form_pill_close">
         <Icon
             fixedWidth
             icon="times"
             onClick={onClick}
-
         />
-        <div className="content_wrapper">
-          <Title
-              size={4}
-          />
-
-        </div>
       </div>
     </div>
-
   )
 }
 export default FormPill

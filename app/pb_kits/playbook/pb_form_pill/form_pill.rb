@@ -5,8 +5,6 @@ module Playbook
 
       partial "pb_form_pill/form_pill"
 
-      prop :avatar, type: Playbook::Props::Boolean,
-                    default: false
       prop :avatar_url
       prop :name
       prop :text

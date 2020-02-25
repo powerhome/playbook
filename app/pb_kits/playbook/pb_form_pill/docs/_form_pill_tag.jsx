@@ -4,9 +4,7 @@ import FormPill from '../_form_pill.jsx'
 const FormPillDefault = () => {
   return (
     <div>
-      <FormPill
-          text="this is a tag"
-      />
+      <FormPill text="this is a tag" />
     </div>
   )
 }

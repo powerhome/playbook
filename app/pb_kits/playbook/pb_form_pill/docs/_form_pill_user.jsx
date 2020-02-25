@@ -11,10 +11,7 @@ const FormPillDefault = () => {
       />
       <br />
       <br />
-      <FormPill
-          avatar
-          name="Anna Black"
-      />
+      <FormPill name="Anna Black" />
     </div>
   )
 }
