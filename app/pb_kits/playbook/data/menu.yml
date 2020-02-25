@@ -15,9 +15,9 @@ kits:
     - distribution_bar
   - fixed_confirmation_toast
   - flex
-  - form_pill
   - forms:
     - form
+    - form_pill
     - radio
     - select
     - selectable_card
