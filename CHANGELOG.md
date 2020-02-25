@@ -67,6 +67,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - PbPopover behavior works after turbolinks navigation events. This behavior is now applied with a [Mutation Observer](https://developer.mozilla.org/en-US/docs/Web/API/MutationObserver) via the [`PbEnhancedElement` class](https://github.com/powerhome/playbook/blob/v4.4.0/app/pb_kits/playbook/pb_enhanced_element/index.js).>>>>>>> Use mutation observer to bind behavior of PbPopover
 
+## [Unreleased]
+### Added
+- Created Form Pills for rails and react [#625](https://github.com/powerhome/playbook/pull/625)
+
+
 ## [4.3.0] 2020-2-14
 
 
