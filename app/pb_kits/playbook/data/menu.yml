@@ -15,6 +15,7 @@ kits:
     - distribution_bar
   - fixed_confirmation_toast
   - flex
+  - form_pill
   - forms:
     - form
     - radio
@@ -33,7 +34,6 @@ kits:
   - layout
   - list
   - loading_inline
-  - multi_select
   - multiple_users
   - multiple_users_stacked
   - nav

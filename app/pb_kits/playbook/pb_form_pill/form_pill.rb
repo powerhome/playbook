@@ -1,9 +1,9 @@
 module Playbook
-  module PbMultiSelect
-    class MultiSelect
+  module PbFormPill
+    class FormPill
       include Playbook::Props
 
-      partial "pb_multi_select/multi_select"
+      partial "pb_form_pill/form_pill"
 
       prop :avatar, type: Playbook::Props::Boolean,
                     default: false
@@ -12,7 +12,7 @@ module Playbook
       prop :text
 
       def classname
-        generate_classname("pb_multi_select_kit", "primary", name, text)
+        generate_classname("pb_form_pill_kit", "primary", name, text)
       end
 
       def display_text
