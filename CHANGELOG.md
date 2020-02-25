@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [4.5.2] 2020-3-03
 
+### Changed
+- Added loading indicator to Typeahead kit ([#635](https://github.com/powerhome/playbook/pull/635) @web-kat)
 
 ### Changed
 - Fix Layout Kit SCSS ([#648](https://github.com/powerhome/playbook/pull/648) @thestephenmarshall)
