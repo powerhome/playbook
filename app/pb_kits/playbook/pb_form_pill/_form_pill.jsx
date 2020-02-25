@@ -5,24 +5,26 @@ import Title from '../pb_title/_title.jsx'
 import Icon from '../pb_icon/_icon.jsx'
 import Avatar from '../pb_avatar/_avatar.jsx'
 
-type MultiSelectProps = {
+type FormPillProps = {
 
 className?: String,
 id?: String,
 text: String,
 name: String,
+onClick?: EventHandler,
 avatar?: Boolean,
 avatarUrl?: String,
 }
-const MultiSelect = ({
+const FormPill = ({
   className,
   text,
   name,
   avatar = false,
+  onClick = () => {},
   avatarUrl,
-}: MultiSelectProps) => {
+}: FormPillProps) => {
   const css = classnames([
-`pb_multi_select_kit_${'primary'}`,
+`pb_form_pill_kit_${'primary'}`,
 className,
   ])
   return (
@@ -39,22 +41,24 @@ className,
 
       <If condition={name}>
         <Title
-            className="pb_multi_select_text"
+            className="pb_form_pill_text"
             size={4}
             text={name}
         />
       </If>
       <If condition={text}>
         <Title
-            className="pb_multi_select_tag"
+            className="pb_form_pill_tag"
             size={4}
             text={text}
         />
       </If>
-      <div className="pb_multi_select_text">
+      <div className="pb_form_pill_text">
         <Icon
             fixedWidth
             icon="times"
+            onClick={onClick}
+
         />
         <div className="content_wrapper">
           <Title
@@ -67,4 +71,4 @@ className,
 
   )
 }
-export default MultiSelect
+export default FormPill

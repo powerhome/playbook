@@ -34,6 +34,7 @@ import * as DistributionBar from 'pb_distribution_bar/docs'
 import * as Filter from 'pb_filter/docs'
 import * as FixedConfirmationToast from 'pb_fixed_confirmation_toast/docs'
 import * as Flex from 'pb_flex/docs'
+import * as FormPill from 'pb_form_pill/docs'
 import * as Hashtag from 'pb_hashtag/docs'
 import * as Highlight from 'pb_highlight/docs'
 import * as HomeAddressStreet from 'pb_home_address_street/docs'
@@ -49,7 +50,6 @@ import * as LineGraph from 'pb_line_graph/docs'
 import * as List from 'pb_list/docs'
 import * as LoadingInline from 'pb_loading_inline/docs'
 import * as Message from 'pb_message/docs'
-import * as MultiSelect from 'pb_multi_select/docs'
 import * as MultipleUsers from 'pb_multiple_users/docs'
 import * as MultipleUsersStacked from 'pb_multiple_users_stacked/docs'
 import * as Nav from 'pb_nav/docs'
@@ -102,6 +102,7 @@ WebpackerReact.setup({
   ...Filter,
   ...FixedConfirmationToast,
   ...Flex,
+  ...FormPill,
   ...Hashtag,
   ...Highlight,
   ...HomeAddressStreet,
@@ -117,7 +118,6 @@ WebpackerReact.setup({
   ...List,
   ...LoadingInline,
   ...Message,
-  ...MultiSelect,
   ...MultipleUsers,
   ...MultipleUsersStacked,
   ...Nav,

@@ -9,16 +9,16 @@
         image_url: object.avatar_url,
         size: "xs"
       }) %>
-      <%= pb_rails("title", props: { text: object.name, size: 4, classname: "pb_multi_select_text" }) do %>
+      <%= pb_rails("title", props: { text: object.name, size: 4, classname: "pb_form_pill_text" }) do %>
       <% end %>
 
     <% elsif object.text.present? %>
-      <%= pb_rails("title", props: { text: object.text, size: 4, classname: "pb_multi_select_tag" }) do %>
-        <% end %>
+      <%= pb_rails("title", props: { text: object.text, size: 4, classname: "pb_form_pill_tag" }) do %>
+      <% end %>
     <% end %>
 
-    <%= pb_rails("body", props: { classname: "pb_multi_select_text" }) do %>
+    <%= pb_rails("body", props: { classname: "pb_form_pill_text" }) do %>
       <%= pb_rails("icon", props: { icon: 'times', fixed_width: true }) %>
     <% end %>
 
-  <% end %>
+<% end %>
