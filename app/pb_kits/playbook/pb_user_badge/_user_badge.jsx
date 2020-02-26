@@ -16,7 +16,7 @@ const UserBadge = ({
 
   return (
     <div className={`pb_user_badge_kit_${size}`}>
-      <div className="pb__user_badge_wrapper">
+      <div className="pb_user_badge_wrapper">
         <img src={image} />
       </div>
     </div>
