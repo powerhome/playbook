@@ -1,21 +1,25 @@
+/* @flow */
 import React from 'react'
-import PropTypes from 'prop-types'
 
-const propTypes = {
-  className: PropTypes.string,
-  id: PropTypes.string,
+type UserBadgeProps = {
+  className?: String,
+  id?: String,
+  badge?: 'million-dollar' | 'veteran',
+  size?: 'sm' | 'md' | 'lg',
 }
 
-class UserBadge extends React.Component {
-  render() {
-    return (
-      <div className="pb_user_badge">
-        <span>{'USER BADGE CONTENT'}</span>
+const UserBadge = ({
+  badge = 'million-dollar',
+  size = 'md',
+}: UserBadgeProps) => {
+  const image = require(`./badges/_${badge}.svg`)
+
+  return (
+    <div className={`pb_user_badge_kit_${size}`}>
+      <div className="pb_user_badge_wrapper">
+        <img src={image} />
       </div>
-    )
-  }
+    </div>
+  )
 }
-
-UserBadge.propTypes = propTypes
-
 export default UserBadge

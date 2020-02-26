@@ -5,7 +5,7 @@ $badge-sizes: (
 );
 
 [class^=pb_user_badge_kit] {
-  .pb__user_badge_wrapper {
+  .pb_user_badge_wrapper {
     svg,
     img {
       width: 100%;
@@ -15,7 +15,7 @@ $badge-sizes: (
 
   @each $name, $size in $badge-sizes {
     &[class*=_#{$name}] {
-      .pb__user_badge_wrapper {
+      .pb_user_badge_wrapper {
         width: $size;
         height: $size;
       }
