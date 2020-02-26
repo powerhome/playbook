@@ -4,20 +4,26 @@ import { UserBadge } from '../../'
 const UserBadgeSize = () => {
   return (
     <div>
-      <UserBadge
-          badge="veteran"
-          size="sm"
-      />
-
-      <UserBadge
-          badge="veteran"
-          size="md"
-      />
-
-      <UserBadge
-          badge="veteran"
-          size="lg"
-      />
+      <div>
+        <UserBadge
+            badge="veteran"
+            size="sm"
+        />
+      </div>
+      <br />
+      <div>
+        <UserBadge
+            badge="veteran"
+            size="md"
+        />
+      </div>
+      <br />
+      <div>
+        <UserBadge
+            badge="veteran"
+            size="lg"
+        />
+      </div>
     </div>
   )
 }
