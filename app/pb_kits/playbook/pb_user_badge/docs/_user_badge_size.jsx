@@ -11,12 +11,14 @@ const UserBadgeSize = () => {
         />
       </div>
       <br />
+      <br />
       <div>
         <UserBadge
             badge="veteran"
             size="md"
         />
       </div>
+      <br />
       <br />
       <div>
         <UserBadge
