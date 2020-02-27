@@ -1,0 +1,1 @@
+When using Icon Circle Button, the icon must be clear a clear indication of what the button does because there is no text. Icon Circle Buttons take up less space on the page compared to normal buttons. The link variant is used for times you only want to have an icon for a button without having a background.
