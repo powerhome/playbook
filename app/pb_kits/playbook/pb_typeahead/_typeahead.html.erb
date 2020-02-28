@@ -3,6 +3,9 @@
                 data: object.data,
                 class: object.classname) do %>
   <div class="pb_typeahead_wrapper">
+    <div class="pb_typeahead_loading_indicator" data-pb-typeahead-kit-loading-indicator>
+      <i class="far fa-spinner fa-spin"></i>
+    </div>
     <%= pb_rails("text_input", props: {
       type: "search",
       label: object.label,

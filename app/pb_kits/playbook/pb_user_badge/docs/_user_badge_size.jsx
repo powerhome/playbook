@@ -1,9 +1,17 @@
 import React from 'react'
 import { UserBadge } from '../../'
 
-const UserBadgeDefault = () => {
+const UserBadgeSize = () => {
   return (
     <div>
+      <div>
+        <UserBadge
+            badge="veteran"
+            size="sm"
+        />
+      </div>
+      <br />
+      <br />
       <div>
         <UserBadge
             badge="veteran"
@@ -14,12 +22,12 @@ const UserBadgeDefault = () => {
       <br />
       <div>
         <UserBadge
-            badge="million-dollar"
-            size="md"
+            badge="veteran"
+            size="lg"
         />
       </div>
     </div>
   )
 }
 
-export default UserBadgeDefault
+export default UserBadgeSize
