@@ -1,2 +1,2 @@
 ### Things to Avoid
-Do not use for large text amounts (use textarea instead).
+Do not use for large amounts of text (use textarea instead).

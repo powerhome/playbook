@@ -1,1 +1,1 @@
-Area where user can enter larger amounts of text.
+Area where user can enter larger amounts of text. Commonly used in forms.
