@@ -1,22 +1,28 @@
 import React from 'react'
 import { BarGraph } from '../../../../pb_kits/playbook'
 
-const chartData = [{
-  name: 'Installation',
-  data: [154175],
-}, {
-  name: 'Manufacturing',
-  data: [40434],
-}, {
-  name: 'Sales & Distribution',
-  data: [39387],
-}, {
-  name: 'Project Development',
-  data: [34227],
-}, {
-  name: 'Other',
-  data: [18111],
-}]
+const chartData = [
+  {
+    name: 'Installation',
+    data: [154175],
+  },
+  {
+    name: 'Manufacturing',
+    data: [40434],
+  },
+  {
+    name: 'Sales & Distribution',
+    data: [39387],
+  },
+  {
+    name: 'Project Development',
+    data: [34227],
+  },
+  {
+    name: 'Other',
+    data: [18111],
+  },
+]
 
 const Dashboards = () => (
   <div>
