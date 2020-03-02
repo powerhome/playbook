@@ -15,6 +15,29 @@ module Playbook
       end
     end
 
+    def read_file(filename)
+      if File.file?(filename)
+        File.read(filename)
+      else
+        ""
+      end
+    end
+
+    def get_kit_description(kit)
+      filename = "#{Playbook::Engine.root}/app/pb_kits/playbook/pb_#{@kit}/docs/_description.md"
+      read_file(filename)
+    end
+
+    def get_per_sample_descriptions(kit, key)
+      filename = "#{Playbook::Engine.root}/app/pb_kits/playbook/pb_#{kit}/docs/_#{key}.md"
+      read_file(filename)
+    end
+
+    def get_kit_footer(kit)
+      filename = "#{Playbook::Engine.root}/app/pb_kits/playbook/pb_#{kit}/docs/_footer.md"
+      read_file(filename)
+    end
+
     def pb_kit(kit: "", type: "rails", show_code: true)
       @type = type
       @kit_examples = get_kit_examples(kit, type)
@@ -28,7 +51,7 @@ module Playbook
       kits.each do |kit|
         if kit.is_a?(Hash)
           nav_hash_array(kit).each do |sub_kit|
-            display_kits << render_pb_doc_kit(sub_kit, type)
+            display_kits << render_pb_doc_kit(sub_kit, type, false)
           end
         else
           display_kits << render_pb_doc_kit(kit, type, false)

@@ -19,7 +19,7 @@ module Playbook
       end
 
       def display_badge
-        "pb_user_badge/badges/#{badge}"
+        "pb_user_badge/badges/#{badge}.svg"
       end
     end
   end
