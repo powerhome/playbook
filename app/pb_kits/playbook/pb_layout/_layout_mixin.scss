@@ -25,11 +25,11 @@
   }
 
   > #{$name}_body {
-    grid-area: #{$parent_name}_body;
+    grid-area:"#{$parent_name}_body";
     min-width: 0;
   }
   > #{$name}_sidebar {
-    grid-area: #{$parent_name}_sidebar;
+    grid-area: "#{$parent_name}_sidebar";
     @if $side == 'left' {
       border-width: 0 1px 0 0;
       border-style: solid;
