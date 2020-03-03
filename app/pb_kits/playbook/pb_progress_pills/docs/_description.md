@@ -1,0 +1,1 @@
+Progress pills indicate a specific point in time of a series of sequential steps. They are used to track progress of something over time.

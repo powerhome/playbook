@@ -1,0 +1,1 @@
+The loading kit is used to indicate to users that a page is still loading, or an action is still being processed.
