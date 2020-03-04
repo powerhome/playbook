@@ -10,3 +10,6 @@ import 'lazysizes'
 
 import PbPopover from './pb_popover'
 PbPopover.start()
+
+import PbTypeahead from './pb_typeahead'
+PbTypeahead.start()
