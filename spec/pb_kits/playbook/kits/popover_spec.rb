@@ -11,6 +11,9 @@ RSpec.describe Playbook::PbPopover::Popover do
   it { is_expected.to define_prop(:trigger_element_id) }
   it { is_expected.to define_prop(:tooltip_id) }
   it { is_expected.to define_boolean_prop(:offset).with_default(false) }
+  it { is_expected.to define_enum_prop(:close_on_click)
+                      .with_default("none")
+                      .with_values("none", "outside", "inside", "any") }
 
   describe "#classname" do
     it "returns namespaced class name", :aggregate_failures do

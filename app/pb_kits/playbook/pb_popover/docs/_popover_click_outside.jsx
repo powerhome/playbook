@@ -4,14 +4,18 @@ import {
   PbReactPopover,
 } from '../..'
 
-const PopoverPortal = () => {
+const PopoverClickOutside = () => {
   const [showPopover, setShowPopover] = useState(false)
 
   const handleTogglePopover = () => {
     setShowPopover(!showPopover)
   }
 
-  const popoverReference = (
+  const handleShouldClosePopover = (shouldClosePopover) => {
+    setShowPopover(!shouldClosePopover)
+  }
+
+  const popoverTrigger = (
     <Button
         onClick={handleTogglePopover}
         text="Button Secondary"
@@ -21,14 +25,16 @@ const PopoverPortal = () => {
 
   return (
     <PbReactPopover
+        closeOnClick="outside"
+        offset
         placement="bottom"
-        reference={popoverReference}
+        reference={popoverTrigger}
+        shouldClosePopover={handleShouldClosePopover}
         show={showPopover}
-        usePortal
     >
-      {'Whoa. I\'m a portal popover.'}
+      {'Whoa. I\'m a popover.'}
     </PbReactPopover>
   )
 }
 
-export default PopoverPortal
+export default PopoverClickOutside

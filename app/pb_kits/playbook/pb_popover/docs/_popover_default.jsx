@@ -1,29 +1,26 @@
-import React from 'react'
+import React, { useState } from 'react'
 import {
   PbReactPopover,
 } from '../..'
 
-export default class PopoverDefault extends React.Component {
-  state = {
-    showPopover: false,
-  }
+const PopoverDefault = () => {
+  const [showPopover, setShowPopover] = useState(false)
 
-  handleTogglePopover = () => {
-    this.setState({ showPopover: !this.state.showPopover })
+  const handleTogglePopover = () => {
+    setShowPopover(!showPopover)
   }
+  const popoverReference = (
+    <span onClick={handleTogglePopover}>{'Click me.'}</span>
+  )
 
-  render() {
-    const popoverReference = (
-      <span onClick={this.handleTogglePopover}>{'Click me.'}</span>
-    )
-
-    return (
-      <PbReactPopover
-          reference={popoverReference}
-          show={this.state.showPopover}
-      >
-        {'Whoa. I\'m a popover.'}
-      </PbReactPopover>
-    )
-  }
+  return (
+    <PbReactPopover
+        reference={popoverReference}
+        show={showPopover}
+    >
+      {'Whoa. I\'m a popover.'}
+    </PbReactPopover>
+  )
 }
+
+export default PopoverDefault
