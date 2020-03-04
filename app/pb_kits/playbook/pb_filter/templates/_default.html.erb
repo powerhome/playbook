@@ -30,7 +30,7 @@
   <% end %>
 <% end %>
 
-<%= pb_rails("popover", props: {trigger_element_id: "filter", tooltip_id: "filter-form"}) do %>
+<%= pb_rails("popover", props: {trigger_element_id: "filter", tooltip_id: "filter-form", position: 'bottom'}) do %>
   <%= capture(&object.children) %>
 <% end %>
 

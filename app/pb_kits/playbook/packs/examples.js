@@ -79,13 +79,6 @@ import * as Toggle from 'pb_toggle/docs'
 import * as User from 'pb_user/docs'
 import * as UserBadge from 'pb_user_badge/docs'
 
-import PbTypeahead from 'pb_typeahead'
-
-PbTypeahead.start()
-
-import PbPopover from 'pb_popover'
-PbPopover.start()
-
 WebpackerReact.setup({
   ...Avatar,
   ...Badge,

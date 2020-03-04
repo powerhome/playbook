@@ -15,8 +15,7 @@
         </div>
     </div>
 
- 
-    <%= pb_rails("caption", props: { text: "sort by:", classname: "sort-by"}) %>
+    <%= pb_rails("caption", props: {text: "#{object.results} Results", size:"xs", classname:"filter-results"}) %>  
     <%= pb_rails("button", props: {variant: "link",id: "sort-button#{object.id}"}) do %>
       <% object.sort_menu.each do |item| %>
           <% if item[:active] == true %>
@@ -25,12 +24,12 @@
           <%end%>
           <% end %>
     <% end %>
-    <%= pb_rails("caption", props: {text: "#{object.results} Results", size:"xs", classname:"filter-results"}) %>  
+    
 
   <% end %>
 <% end %> 
 
-<%= pb_rails("popover", props: {trigger_element_id: "filter#{object.id}", tooltip_id: "filter-form#{object.id}"}) do %>
+<%= pb_rails("popover", props: {trigger_element_id: "filter#{object.id}", tooltip_id: "filter-form#{object.id}", position: 'bottom'}) do %>
   <%= capture(&object.children) %>
 <% end %>
 
