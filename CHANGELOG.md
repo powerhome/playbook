@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [4.6.0] 2020-3-05
 
 ### Added
-- Added Filter Rails Kit / Add TitleCount JS / Moved Popover & Typeahead initializers to vendorJS ([#638](https://github.com/powerhome/playbook/pull/638) @kre8sions)
+- Added Filter Rails Kit / Add TitleCount JS ([#638](https://github.com/powerhome/playbook/pull/638) @kre8sions)
 
 ### Changed
 - Move popover and typeahead initialize to vendor.js ([#651](https://github.com/powerhome/playbook/pull/651) @thestephenmarshall)
