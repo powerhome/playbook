@@ -1,0 +1,1 @@
+A pill uses both a keyword and a specific color to categorize an item. Each pill directly corresponds to a data color here: https://playbook.powerapp.cloud/utilities

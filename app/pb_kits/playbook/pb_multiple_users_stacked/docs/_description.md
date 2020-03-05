@@ -1,0 +1,1 @@
+Multiple users stacked is used in tight spaces, where we need to indicate that multiple users are associated to a specific action or item.
