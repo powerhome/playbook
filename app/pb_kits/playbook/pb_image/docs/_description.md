@@ -1,0 +1,1 @@
+A responsive image component.

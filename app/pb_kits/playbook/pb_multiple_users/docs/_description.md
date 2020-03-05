@@ -1,0 +1,1 @@
+The multiple users kit is used to show that more than one user is associated to an action or item.

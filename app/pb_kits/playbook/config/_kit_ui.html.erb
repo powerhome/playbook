@@ -13,7 +13,7 @@
   <% if type == "rails" %>
     <%= render partial: "pb_#{@kit_examples[:kit]}/docs/#{key}" %>
   <% elsif type == "react" %>
-    <%= pb_react(key.camelize) %> 
+    <%= pb_react(key.camelize) %>
   <% end %>
   <br>
 </div>
@@ -29,12 +29,12 @@
         </li>
       </ul>
     </div>
-    <div class="pb--codeCopy" data-action="toggle" data-togglable="code_example">
+    <div class="pb--codeCopy" data-action="toggle" data-togglable="code_example" style="display: none" >
       <a href="#" data-toggle="false" class="pb--close-toggle">Close</a>
       <% if type == "rails" %>
         <pre class="highlight"><%= raw rouge(contents, "erb") %></pre>
       <% elsif type == "react" %>
         <pre class="highlight"><%= raw rouge(contents, "react")%></pre>
       <% end %>
-    </div>  
+    </div>
   <% end %>
