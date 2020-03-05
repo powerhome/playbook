@@ -18,10 +18,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - Move popover and typeahead initialize to vendor.js ([#651](https://github.com/powerhome/playbook/pull/651) @thestephenmarshall)
 
-### Fixed 
+### Fixed
 - Fix Full Page Samples code display ([#650](https://github.com/powerhome/playbook/pull/650) @jasperfurniss)
 - Update Kit Generator ([#652](https://github.com/powerhome/playbook/pull/652) @thestephenmarshall)
 - Removed Stale Editor Kit ([#646](https://github.com/powerhome/playbook/pull/646) @jasperfurniss)
+- Corrected Typeahead Loading position + Cuttoff from filter kit docs popover ([#653](https://github.com/powerhome/playbook/pull/653) @jasoncypret)
 
 ## [4.5.2] 2020-3-03
 

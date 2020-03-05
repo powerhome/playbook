@@ -3,9 +3,9 @@
     position: relative;
 
     .pb_typeahead_loading_indicator {
-      position: relative;
+      position: absolute;
       width: min-content;
-      top: 3.8em;
+      bottom: 0.6em;
       left: 1em;
       visibility: hidden;
     }
