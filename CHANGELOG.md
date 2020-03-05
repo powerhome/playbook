@@ -5,7 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## Unreleased
+
+## [4.6.0] 2020-3-05
+
+### Added
+- Added Filter Rails Kit / Add TitleCount JS / Moved Popover & Typeahead initializers to vendorJS ([#638](https://github.com/powerhome/playbook/pull/638) @kre8sions)
+
+### Changed
 - Move popover and typeahead initialize to vendor.js ([#651](https://github.com/powerhome/playbook/pull/651) @thestephenmarshall)
 
 ## [4.5.2] 2020-3-03

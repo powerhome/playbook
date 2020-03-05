@@ -1,21 +1,39 @@
+/* @flow */
 import React from 'react'
-import PropTypes from 'prop-types'
+import { Body, Title } from '../'
 
-const propTypes = {
-  className: PropTypes.string,
-  id: PropTypes.string,
+type TitleCountProps = {
+  className?: String,
+  data?: String,
+  id?: String,
+  title?: String,
+  count?: Number,
+  size?: String
 }
 
-class TitleCount extends React.Component {
-  render() {
-    return (
-      <div className="pb_title_count">
-        <span>{'TITLE COUNT CONTENT'}</span>
-      </div>
-    )
-  }
-}
-
-TitleCount.propTypes = propTypes
+const TitleCount = ({
+  className = 'pb_title_count_kit',
+  data,
+  count,
+  id,
+  title,
+  size,
+}: TitleCountProps) => (
+  <div
+      className={className}
+      data={data}
+      id={id}
+  >
+    <Title
+        className="pb_title_count_text"
+        size={size == 'lg' ? 3 : 4}
+        text={title}
+    />
+    <Body
+        color="light"
+        text={`${count}`}
+    />
+  </div>
+)
 
 export default TitleCount
