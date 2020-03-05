@@ -21,7 +21,6 @@ window.$(document).on('click', '[data-toggle]', function(e) {
 })
 
 window.$(document).ready(() => {
-  $('.pb--codeCopy').show()
   $('.compress').hide()
 
   window.$(document).on('click', '.toggle-button', (e) => {
