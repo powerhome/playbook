@@ -1,0 +1,1 @@
+Use large caption when supplementary text covers a lot more than what just a regular caption can cover.
