@@ -1,0 +1,6 @@
+<%= content_tag(:div,
+    id: object.id,
+    data: object.data,
+    class: object.classname) do %>
+    <%= render partial: "pb_filter/templates/#{object.template}", locals: {object: object}%>
+<% end %>

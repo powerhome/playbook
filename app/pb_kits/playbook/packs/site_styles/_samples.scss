@@ -14,7 +14,7 @@
       }
     }
   }
-  
+
   .sample-nav {
     padding: 0 25px;
     background: #172257;
@@ -23,7 +23,7 @@
     flex-basis: 200px;
 
   }
-  
+
   .sample-actions {
     display: flex;
     align-items: center;
@@ -51,6 +51,7 @@
     bottom: 0;
     left: 0;
     transition: all .4s;
+    border-radius: 0 0 6px 6px;
   }
 
   .pb--codeCopy.close {

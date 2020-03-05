@@ -1,0 +1,1 @@
+Use table size `"lg"` to add padding around each row to maximize reading comfortability. 

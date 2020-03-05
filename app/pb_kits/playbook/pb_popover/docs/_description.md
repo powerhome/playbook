@@ -1,0 +1,1 @@
+A popover is a way to toggle content on top of other content. It can be used for small texts, small forms, or even dropdowns.
