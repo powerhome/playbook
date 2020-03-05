@@ -4,14 +4,15 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+### Unreleased
+
+### Added
+- Added documentation to Form, Radio, Select, Selectable Card, Text Input, Textarea, Typeahead, Toggle, Highlight, Hashtag, Icon, Icon Circle ([#637](https://github.com/powerhome/playbook/pull/637) @megantrimble)
 
 ## [4.5.2] 2020-3-03
 
 ### Changed
 - Fix Layout Kit SCSS ([#648](https://github.com/powerhome/playbook/pull/648) @thestephenmarshall)
-
-### Added
-- Added documentation to Form, Radio, Select, Selectable Card, Text Input, Textarea, Typeahead, Toggle, Highlight, Hashtag, Icon, Icon Circle ([#637](https://github.com/powerhome/playbook/pull/637) @megantrimble)
 
 ## [4.5.1] 2020-2-28
 
