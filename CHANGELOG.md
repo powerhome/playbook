@@ -16,7 +16,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed 
 - Fix Full Page Samples code display ([#650](https://github.com/powerhome/playbook/pull/650) @jasperfurniss)
-- Update Kit Generator ([#652](https://github.com/powerhome/playbook/pull/652)
+- Update Kit Generator ([#652](https://github.com/powerhome/playbook/pull/652) @thestephenmarshall)
 - Removed Stale Editor Kit ([#646](https://github.com/powerhome/playbook/pull/646) @jasperfurniss)
 
 ## [4.5.2] 2020-3-03
