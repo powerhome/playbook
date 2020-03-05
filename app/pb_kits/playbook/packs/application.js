@@ -1,5 +1,5 @@
-import '../../../../fonts/fontawesome.min.js'
-import '../../../../fonts/regular.min.js'
+import '../../../../fonts/fontawesome-min.js'
+import '../../../../fonts/regular-min.js'
 import './main.scss'
 import '../vendor.js'
 

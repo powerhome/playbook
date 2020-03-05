@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 - Move popover and typeahead initialize to vendor.js ([#651](https://github.com/powerhome/playbook/pull/651) @thestephenmarshall)
+- Updated FontAwesome to 5.12.1 ([#654](https://github.com/powerhome/playbook/pull/654) @kre8sions)
 
 ### Fixed
 - Fix Full Page Samples code display ([#650](https://github.com/powerhome/playbook/pull/650) @jasperfurniss)
