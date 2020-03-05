@@ -9,6 +9,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Move popover and typeahead initialize to vendor.js ([#651](https://github.com/powerhome/playbook/pull/651) @thestephenmarshall)
 
 ## [4.5.2] 2020-3-03
+### Fixed 
+- Fix Full Page Samples code display([#650](https://github.com/powerhome/playbook/pull/650) @jasperfurniss)
 
 ### Changed
 - Fix Layout Kit SCSS ([#648](https://github.com/powerhome/playbook/pull/648) @thestephenmarshall)
