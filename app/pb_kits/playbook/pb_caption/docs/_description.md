@@ -1,0 +1,1 @@
+Use to provide supplementary context. Default size is best when providing supplementary context to a small section (i.e. label for a text input, label for a paragraph). Use large caption when supplementary text covers more content.
