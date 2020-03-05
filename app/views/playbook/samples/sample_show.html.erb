@@ -1,7 +1,9 @@
 <div class="pb--kit-show sample-nav">
   <div class="sample-actions">
     <div class="items">
-      <%= pb_rails("circle_icon_button", props: {variant: "primary", icon: "angle-left", dark: true}) %>
+      <a href="/">
+        <%= pb_rails("circle_icon_button", props: {variant: "primary", icon: "angle-left", dark: true}) %>
+      </a>
     </div>
   </div>
   <div class="pb--kit-type-nav sample">
@@ -19,7 +21,16 @@
     </div>
   </div>
 </div>
-
-
 <%= pb_rails("circle_icon_button", props:{ classname: "compress", variant: "link", icon: "compress"}) %>
 
+<%= render_sample_ui(@sample, @type) %>
+
+<div class="pb--kit-show">
+    <div class="pb--doc light_ui">
+        <div class="pb--codeCopy close" >
+            <a class="pb--close-toggle copy-clipboard" href="#">Copy to Clipboard</a>
+            <div class="hiddenCodeforCopy"><%= get_raw_code(@sample, @type) %></div>
+            <pre class="highlight"><%= get_sample_code_content(@sample, @type) %></pre>
+        </div>
+    </div>
+</div>

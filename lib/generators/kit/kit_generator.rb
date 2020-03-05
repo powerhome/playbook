@@ -72,12 +72,6 @@ class KitGenerator < Rails::Generators::NamedBase
         template "kit_jsx.erb", "#{full_kit_directory}/_#{@kit_name_underscore}.jsx"
         template "kit_example_react.erb", "#{full_kit_directory}/docs/_#{@kit_name_underscore}_default.jsx"
         template "kit_js.erb", "#{full_kit_directory}/docs/index.js"
-        template "kit_pack.erb", "app/pb_kits/playbook/kits/pb_#{@kit_name_underscore}.js"
-
-        # Import in all kits.js  =========================
-        append_to_file("app/pb_kits/playbook/packs/kits.js") do
-          "import '../kits/pb_#{@kit_name_underscore}.js'\n"
-        end
 
         # Import kit examples  ===========================
         append_to_file("app/pb_kits/playbook/packs/examples.js") do
