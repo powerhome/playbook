@@ -1,1 +1,1 @@
-Use to display customers' or users' contact information.
+Use to display customer's or user's contact information.

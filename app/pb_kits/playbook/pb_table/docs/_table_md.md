@@ -1,0 +1,1 @@
+Use table size `"md"` to add padding around each row to increase reading comfortability. 
