@@ -36,7 +36,7 @@
 <%= pb_rails("popover", props: { trigger_element_id: "sort-button#{object.id}", tooltip_id: "sort-filter-btn-tooltip#{object.id}", position: 'bottom'}) do %>
     <%= pb_rails("list") do %>
       <% object.sort_menu.each do |item| %>
-        <%= pb_rails("list/item") do%> <%= pb_rails("button", props: {variant: "link" ,classname: "p-0", text: item[:item]}) %><% end %>
+        <%= pb_rails("list/item") do%> <%= pb_rails("button", props: {variant: "link" ,classname: "p-0", text: item[:item], link: item[:link]}) %><% end %>
       <% end %> 
     <% end %>
 <% end %>
