@@ -148,3 +148,5 @@ WebpackerReact.setup({
   ...User,
   ...UserBadge,
 })
+import * as RichTextEditor from 'pb_rich_text_editor/docs'
+WebpackerReact.setup(RichTextEditor)

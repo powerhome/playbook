@@ -50,6 +50,7 @@ export Pill from './pb_pill/_pill.jsx'
 export ProgressPills from './pb_progress_pills/_progress_pills.jsx'
 export ProgressSimple from './pb_progress_simple/_progress_simple.jsx'
 export Radio from './pb_radio/_radio.jsx'
+export RichTextEditor from './pb_rich_text_editor/_rich_text_editor.jsx'
 export SectionSeparator from './pb_section_separator/_section_separator.jsx'
 export Select from './pb_select/_select.jsx'
 export SelectableCard from './pb_selectable_card/_selectable_card.jsx'
@@ -67,6 +68,7 @@ export TitleCount from './pb_title_count/_title_count.jsx'
 export Toggle from './pb_toggle/_toggle.jsx'
 export User from './pb_user/_user.jsx'
 export UserBadge from './pb_user_badge/_user_badge.jsx'
+//////////
 
 // Dashboard Settings
 export { commonSettings, dataColors } from './pb_dashboard/commonSettings'

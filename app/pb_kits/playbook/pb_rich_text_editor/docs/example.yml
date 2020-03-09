@@ -1,0 +1,9 @@
+examples:
+  
+  rails:
+  - rich_text_editor_default: Default
+  
+  
+  react:
+  - rich_text_editor_default: Default
+  

@@ -78,6 +78,11 @@ class KitGenerator < Rails::Generators::NamedBase
           "import * as #{@kit_name_pascal} from 'pb_#{@kit_name_underscore}/docs'\nWebpackerReact.setup(#{@kit_name_pascal})\n"
         end
 
+        # Append the export to the index.js of playbook so Nitro can consume the react kit =============
+        append_to_file("app/pb_kits/playbook/index.js") do
+          "export #{@kit_name_pascal} from './pb_#{@kit_name_underscore}/_#{@kit_name_underscore}.jsx'"
+        end
+
         say_status  "complete",
                     "#{@kit_name_capitalize} react kit successfully created.",
                     :green
