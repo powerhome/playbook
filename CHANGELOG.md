@@ -6,6 +6,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 ### Unreleased
 
+## [4.6.1] 2020-3-09
+
+### Fixed 
+- Fix Filter variants to look for link prop in sort_menu ([#656](https://github.com/powerhome/playbook/pull/656) @kre8sions)
+
 ## [4.6.0] 2020-3-05
 
 ### Added
