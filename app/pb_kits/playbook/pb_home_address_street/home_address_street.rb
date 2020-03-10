@@ -10,6 +10,7 @@ module Playbook
       prop :address
       prop :address_cont
       prop :city
+      prop :emphasis
       prop :home_id, type: Playbook::Props::Number
       prop :home_url
       prop :house_style
