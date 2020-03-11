@@ -1,0 +1,14 @@
+<%= pb_rails("button", props: { text: "Click me then click outside", variant: "secondary", id: 'outside-popover-1' }) %>
+<%= pb_rails("popover", props: {
+  close_on_click: "outside",
+  trigger_element_id: "outside-popover-1",
+  tooltip_id: "outside-tooltip-1",
+  position: 'right',
+  offset: false
+}) do %>
+    Whoa. I'm a popover that can be closed by clicking outside of me.
+<% end %>
+
+
+
+

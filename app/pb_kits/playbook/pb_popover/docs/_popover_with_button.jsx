@@ -1,36 +1,34 @@
-import React from 'react'
+import React, { useState } from 'react'
 import {
   Button,
   PbReactPopover,
 } from '../..'
 
-export default class PopoverWithButton extends React.Component {
-  state = {
-    showPopover: false,
+const PopoverWithButton = () => {
+  const [showPopover, setShowPopover] = useState(false)
+
+  const handleTogglePopover = () => {
+    setShowPopover(!showPopover)
   }
 
-  handleTogglePopover = () => {
-    this.setState({ showPopover: !this.state.showPopover })
-  }
+  const popoverReference = (
+    <Button
+        onClick={handleTogglePopover}
+        text="Button Secondary"
+        variant="secondary"
+    />
+  )
 
-  render() {
-    const popoverReference = (
-      <Button
-          onClick={this.handleTogglePopover}
-          text="Button Secondary"
-          variant="secondary"
-      />
-    )
-
-    return (
-      <PbReactPopover
-          offset
-          placement="bottom"
-          reference={popoverReference}
-          show={this.state.showPopover}
-      >
-        {'Whoa. I\'m a popover.'}
-      </PbReactPopover>
-    )
-  }
+  return (
+    <PbReactPopover
+        offset
+        placement="bottom"
+        reference={popoverReference}
+        show={showPopover}
+    >
+      {'Whoa. I\'m a popover.'}
+    </PbReactPopover>
+  )
 }
+
+export default PopoverWithButton
