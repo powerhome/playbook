@@ -10,7 +10,7 @@
   text: object.address_house_style2,
   dark: object.dark
 } %>
-<span>
+<div class="pb_city_street_zip_container">
   <%= pb_rails "title", props: {
     size: 4,
     text: object.city_state,
@@ -22,7 +22,7 @@
     text: object.zip,
     dark: object.dark
   } %>
-</span>
+</div>
 
 <% if object.home_id %>
   <%= pb_rails("hashtag", props: {
