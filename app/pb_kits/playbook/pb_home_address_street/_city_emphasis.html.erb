@@ -1,0 +1,38 @@
+<%= pb_rails "body", props: {
+  classname: "pb_home_address_street_address",
+  color: "light",
+  text: object.address_house_style,
+  dark: object.dark
+} %>
+<%= pb_rails "body", props: {
+  classname: "pb_home_address_street_address",
+  color: "light",
+  text: object.address_house_style2,
+  dark: object.dark
+} %>
+<span>
+  <%= pb_rails "title", props: {
+    size: 4,
+    text: object.city_state,
+    dark: object.dark
+  } %>
+  <%= pb_rails "body", props: {
+    classname: "pb_home_zip",
+    color: "light",
+    text: object.zip,
+    dark: object.dark
+  } %>
+</span>
+
+<% if object.home_id %>
+  <%= pb_rails("hashtag", props: {
+    text: "#{object.home_id}",
+    url: object.home_url || "#",
+    type: "home",
+    dark: object.dark,
+    classname: "home-hashtag"}) %>
+<% end %>
+
+<%= pb_rails "body", props: { color: "light", tag: "span", dark: object.dark } do %>
+  <small><%= object.territory %></small>
+<% end %>

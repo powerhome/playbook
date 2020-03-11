@@ -27,6 +27,14 @@ module Playbook
         "#{city.titleize}, #{state} #{zipcode}"
       end
 
+      def city_state
+        "#{city.titleize}, #{state}"
+      end
+
+      def zip
+        zipcode.to_s
+      end
+
       def address_house_style
         "#{address.titleize} #{separator} #{house_style}"
       end
