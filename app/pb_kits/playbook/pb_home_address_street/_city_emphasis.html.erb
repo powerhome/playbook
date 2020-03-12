@@ -10,13 +10,15 @@
   text: object.address_house_style2,
   dark: object.dark
 } %>
-<div class="pb_city_street_zip_container">
+<div>
   <%= pb_rails "title", props: {
+    tag: "span",
     size: 4,
     text: object.city_state,
     dark: object.dark
   } %>
   <%= pb_rails "body", props: {
+    tag: "span",
     classname: "pb_home_zip",
     color: "light",
     text: object.zip,
