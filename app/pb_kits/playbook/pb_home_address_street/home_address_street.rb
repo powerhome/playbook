@@ -10,6 +10,9 @@ module Playbook
       prop :address
       prop :address_cont
       prop :city
+      prop :emphasis, type: Playbook::Props::Enum,
+                      values: %w[street city],
+                      default: "street"
       prop :home_id, type: Playbook::Props::Number
       prop :home_url
       prop :house_style
@@ -24,6 +27,14 @@ module Playbook
 
       def city_state_zip
         "#{city.titleize}, #{state} #{zipcode}"
+      end
+
+      def city_state
+        "#{city.titleize}, #{state}"
+      end
+
+      def zip
+        zipcode.to_s
       end
 
       def address_house_style
