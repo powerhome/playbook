@@ -1,4 +1,4 @@
-samples: 
+samples:
   - dashboards
 kits:
   - avatar
@@ -18,6 +18,7 @@ kits:
   - flex
   - forms:
     - form
+    - form_pill
     - radio
     - select
     - selectable_card

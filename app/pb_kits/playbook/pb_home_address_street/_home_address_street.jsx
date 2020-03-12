@@ -12,6 +12,7 @@ type HomeAddressStreetProps = {
   city: String,
   className?: String,
   dark?: Boolean,
+  emphasis: 'street' | 'city',
   homeId: Number,
   houseStyle: String,
   homeUrl: String,
@@ -33,6 +34,7 @@ const HomeAddressStreet = ({
   city,
   className,
   dark = false,
+  emphasis = 'street',
   homeId,
   homeUrl,
   houseStyle,
@@ -41,24 +43,58 @@ const HomeAddressStreet = ({
   territory,
 }: HomeAddressStreetProps) => (
   <div className={classes(className, dark)}>
-    <Title
-        className="pb_home_address_street_address"
-        dark={dark}
-        size={4}
-    >
-      {joinPresent([titleize(address), houseStyle], ' · ')}
-    </Title>
+    {
+      <Choose>
+        <When condition={emphasis == 'street'}>
+          <div>
+            <Title
+                className="pb_home_address_street_address"
+                dark={dark}
+                size={4}
+            >
+              {joinPresent([titleize(address), houseStyle], ' · ')}
+            </Title>
+            <Title
+                className="pb_home_address_street_address"
+                dark={dark}
+                size={4}
+            >
+              {titleize(addressCont)}
+            </Title>
+            <Body color="light">
+              {`${titleize(city)}, ${state} ${zipcode}`}
+            </Body>
+          </div>
+        </When>
+        <When condition={emphasis == 'city'}>
+          <div>
+            <Body color="light">
+              {joinPresent([titleize(address), houseStyle], ' · ')}
+            </Body>
+            <Body color="light">
+              {titleize(addressCont)}
+            </Body>
+            <div>
+              <Title
+                  className="pb_home_address_street_address"
+                  dark={dark}
+                  size={4}
+                  tag="span"
+              >
+                {`${titleize(city)}, ${state}`}
+              </Title>
+              <Body
+                  color="light"
+                  tag="span"
+              >
+                {` ${zipcode}`}
+              </Body>
+            </div>
+          </div>
+        </When>
+      </Choose>
+    }
 
-    <Title
-        className="pb_home_address_street_address"
-        dark={dark}
-        size={4}
-    >
-      {titleize(addressCont)}
-    </Title>
-    <Body color="light">
-      {`${titleize(city)}, ${state} ${zipcode}`}
-    </Body>
     <If condition={homeId}>
       <Hashtag
           classname="home-hashtag"

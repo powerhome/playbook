@@ -1,0 +1,10 @@
+examples:
+
+  rails:
+  - form_pill_user: Form Pill User
+  - form_pill_tag: Form Pill Tag
+
+
+  react:
+  - form_pill_user: Form Pill User
+  - form_pill_tag: Form Pill Tag

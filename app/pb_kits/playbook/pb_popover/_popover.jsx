@@ -10,14 +10,20 @@ import {
   Reference as PopperReference,
 } from 'react-popper'
 
-import { buildCss } from '../utilities/props'
+import {
+  buildCss,
+  noop,
+} from '../utilities/props'
+
 import { Card } from '../'
 
 type PbPopoverProps = {
   className?: String,
+  closeOnClick?: 'outside' | 'inside',
   offset?: Boolean,
   reference: PopperReference,
   show?: Boolean,
+  shouldClosePopover?: () => Boolean,
 } & PopperProps
 
 const POPOVER_OFFSET_Y = {
@@ -65,57 +71,100 @@ const Popover = ({
   </Popper>
 )
 
-const PbReactPopover = ({
-  className,
-  children,
-  modifiers = {},
-  offset = false,
-  placement = 'left',
-  portal = 'body',
-  reference,
-  referenceElement,
-  show = false,
-  usePortal = false,
-}: PbPopoverProps) => {
-  const popoverComponent = (
-    <Popover
-        className={className}
-        modifiers={modifiers}
-        offset={offset}
-        placement={placement}
-        referenceElement={referenceElement}
-        show={show}
-    >
-      {children}
-    </Popover>
-  )
+export default class PbReactPopover extends React.Component<PbPopoverProps> {
+  static defaultProps = {
+    modifiers: {},
+    offset: false,
+    placement: 'left',
+    portal: 'body',
+    show: false,
+    shouldClosePopover: noop,
+    usePortal: false,
+  }
 
-  return (
-    <PopperManager>
-      <If condition={reference && !referenceElement}>
-        <PopperReference>
-          {({ ref }) => (
-            <span
-                className="pb_popover_reference_wrapper"
-                ref={ref}
-            >
-              <reference.type
-                  {...reference.props}
-              />
-            </span>
+  componentDidMount() {
+    const { closeOnClick, shouldClosePopover } = this.props
+
+    if (!closeOnClick) return
+
+    document.body.addEventListener('click', ({ target }) => {
+      const targetIsPopover = target.closest('[class^=popover_tooltip]') !== null
+      const targetIsReference = target.closest('.pb_popover_reference_wrapper') !== null
+
+      if (targetIsReference) return
+
+      switch (closeOnClick) {
+      case 'outside':
+        if (!targetIsPopover) {
+          shouldClosePopover(true)
+        }
+        break
+      case 'inside':
+        if (targetIsPopover) {
+          shouldClosePopover(true)
+        }
+        break
+      case 'any':
+        shouldClosePopover(true)
+        break
+      }
+    })
+  }
+
+  props: PbPopoverProps
+
+  render() {
+    const {
+      className,
+      children,
+      modifiers,
+      offset,
+      placement,
+      portal,
+      reference,
+      referenceElement,
+      show,
+      usePortal,
+    } = this.props
+
+    const popoverComponent = (
+      <Popover
+          className={className}
+          modifiers={modifiers}
+          offset={offset}
+          placement={placement}
+          referenceElement={referenceElement}
+          show={show}
+      >
+        {children}
+      </Popover>
+    )
+
+    return (
+      <PopperManager>
+        <If condition={reference && !referenceElement}>
+          <PopperReference>
+            {({ ref }) => (
+              <span
+                  className="pb_popover_reference_wrapper"
+                  ref={ref}
+              >
+                <reference.type
+                    {...reference.props}
+                />
+              </span>
+            )}
+          </PopperReference>
+        </If>
+        <If condition={usePortal}>
+          {ReactDOM.createPortal(
+            popoverComponent,
+            document.querySelector(portal)
           )}
-        </PopperReference>
-      </If>
-      <If condition={usePortal}>
-        {ReactDOM.createPortal(
-          popoverComponent,
-          document.querySelector(portal)
-        )}
-        <Else />
-        {popoverComponent}
-      </If>
-    </PopperManager>
-  )
+          <Else />
+          {popoverComponent}
+        </If>
+      </PopperManager>
+    )
+  }
 }
-
-export default PbReactPopover

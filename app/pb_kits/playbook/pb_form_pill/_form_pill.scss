@@ -1,0 +1,49 @@
+@import "../tokens/spacing";
+@import "../tokens/colors";
+@import "../tokens/opacity";
+@import "../tokens/shadows";
+@import "../pb_avatar/avatar";
+
+$selector: ".pb_form_pill";
+$pb_form_pill_height: 37px;
+$form_pill_colors: (
+  primary: map-get($status_color_text, "primary"),
+);
+
+
+[class^=pb_form_pill_kit] {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 $space-sm/3;
+  height: $pb_form_pill_height;
+  border-radius: $pb_form_pill_height/2;
+  @each $color_name, $color_value in $form_pill_colors {
+    &[class*=_#{$color_name}]  {
+      background-color: rgba($color_value, $opacity-1);
+      transition: background-color 0.2s ease;
+      box-shadow: none;
+      &:hover {
+        background-color: rgba($color_value, $opacity-2);
+      }
+      #{$selector}_text {
+        color: $color_value;
+        padding-left: $space-sm;
+        padding-right: $space-sm/4;
+      }
+      #{$selector}_close {
+        color: $color_value;
+        padding-left: $space-sm/2;
+        padding-right: $space-sm/4;
+        display: flex;
+        align-items: center;
+        height: 100%;
+        cursor: pointer;
+      }
+      #{$selector}_tag {
+        color: $color_value;
+        padding-left: $space-sm;
+      }
+    }
+  }
+}

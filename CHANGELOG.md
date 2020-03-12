@@ -4,11 +4,18 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
-### Unreleased
+
+## [4.7.0] 2020-3-12
+
+### Added
+- Created Form Pills for rails and react [#625](https://github.com/powerhome/playbook/pull/625)
+
+### Changed
+- Enable popover close on click outside/inside ([#666 👹](https://nitro.powerhrg.com/runway/backlog_items/NUX-666) @thestephenmarshall)
 
 ## [4.6.1] 2020-3-09
 
-### Fixed 
+### Fixed
 - Fix Filter variants to look for link prop in sort_menu ([#656](https://github.com/powerhome/playbook/pull/656) @kre8sions)
 
 ## [4.6.0] 2020-3-05
@@ -28,7 +35,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Corrected Typeahead Loading position + Cuttoff from filter kit docs popover ([#653](https://github.com/powerhome/playbook/pull/653) @jasoncypret)
 
 ## [4.5.2] 2020-3-03
-
 
 ### Changed
 - Fix Layout Kit SCSS ([#648](https://github.com/powerhome/playbook/pull/648) @thestephenmarshall)

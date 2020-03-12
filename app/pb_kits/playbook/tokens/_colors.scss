@@ -167,7 +167,7 @@ $status_color_text: (
   error:              $error,
   info:               $info,
   neutral:            darken($neutral, 15%),
-  primary:            lighten($primary, 10%)
+  primary:            $primary
 );
 
 // Link colors ------------------------
