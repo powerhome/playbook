@@ -2,11 +2,9 @@
     id: object.id,
     data: object.data,
     class: object.classname) do %>
-    
-	<% if object.emphasis == "city" %>
+  <% if object.emphasis == "city" %>
 		<%= render partial:"pb_home_address_street/city_emphasis.html.erb", locals: {object: object}%>
 	<% elsif object.emphasis == "street" %>
 		<%= render partial:"pb_home_address_street/street_emphasis.html.erb", locals: {object: object} %>
 	<% end %>
-
 <% end %>
