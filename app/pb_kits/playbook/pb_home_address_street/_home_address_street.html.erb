@@ -5,7 +5,7 @@
     
 	<% if object.emphasis == "city" %>
 		<%= render partial:"pb_home_address_street/city_emphasis.html.erb", locals: {object: object}%>
-	<% else %>
+	<% elsif object.emphasis == "street" %>
 		<%= render partial:"pb_home_address_street/street_emphasis.html.erb", locals: {object: object} %>
 	<% end %>
 
