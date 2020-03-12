@@ -34,6 +34,7 @@ import * as DistributionBar from 'pb_distribution_bar/docs'
 import * as Filter from 'pb_filter/docs'
 import * as FixedConfirmationToast from 'pb_fixed_confirmation_toast/docs'
 import * as Flex from 'pb_flex/docs'
+import * as FormPill from 'pb_form_pill/docs'
 import * as Hashtag from 'pb_hashtag/docs'
 import * as Highlight from 'pb_highlight/docs'
 import * as HomeAddressStreet from 'pb_home_address_street/docs'
@@ -101,6 +102,7 @@ WebpackerReact.setup({
   ...Filter,
   ...FixedConfirmationToast,
   ...Flex,
+  ...FormPill,
   ...Hashtag,
   ...Highlight,
   ...HomeAddressStreet,

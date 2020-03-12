@@ -1,0 +1,22 @@
+<%= content_tag(:div,
+    id: object.id,
+    data: object.data,
+    class: object.classname) do %>
+
+    <% if object.name.present? %>
+      <%= pb_rails("avatar", props: {
+        name: object.name,
+        image_url: object.avatar_url,
+        size: "xs"
+      }) %>
+      <%= pb_rails("title", props: { text: object.name, size: 4, classname: "pb_form_pill_text" }) %>
+
+    <% elsif object.text.present? %>
+      <%= pb_rails("title", props: { text: object.text, size: 4, classname: "pb_form_pill_tag" }) %>
+    <% end %>
+
+    <%= pb_rails("body", props: { classname: "pb_form_pill_close" }) do %>
+      <%= pb_rails("icon", props: { icon: 'times', fixed_width: true }) %>
+    <% end %>
+
+<% end %>
