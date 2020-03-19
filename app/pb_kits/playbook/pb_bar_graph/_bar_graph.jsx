@@ -6,6 +6,9 @@ import { pbChart } from '../'
 
 type BarGraphProps = {
   axisTitle: String,
+  xAxisCategories: Array,
+  yAxisMin: Number,
+  yAxisMax: Number,
   chartData: Array<{
     name: String,
     data: Array<Number>,
@@ -27,6 +30,9 @@ export default class BarGraph extends React.Component<BarGraphProps> {
   componentDidMount() {
     const {
       axisTitle,
+      xAxisCategories,
+      yAxisMin,
+      yAxisMax,
       className,
       chartData,
       id,
@@ -44,6 +50,9 @@ export default class BarGraph extends React.Component<BarGraphProps> {
       subtitle: subTitle,
       type,
       title: title,
+      xAxisCategories: xAxisCategories,
+      yAxisMin: yAxisMin,
+      yAxisMax: yAxisMax,
     })
   }
 
