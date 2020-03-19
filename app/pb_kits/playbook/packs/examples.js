@@ -148,3 +148,5 @@ WebpackerReact.setup({
   ...User,
   ...UserBadge,
 })
+import * as Project from 'pb_project/docs'
+WebpackerReact.setup(Project)
