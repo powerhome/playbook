@@ -1,5 +1,4 @@
 <%= content_tag(:div,
-  id: object.id,
   data: object.data,
   aria: object.aria,
   class: object.classname) do %>
@@ -20,6 +19,7 @@
           selected: object.selected,
           disabled: object.disabled_options,
         ),
+        id: object.id,
         prompt: object.blank_selection,
         disabled: object.disabled,
         required: object.required,
