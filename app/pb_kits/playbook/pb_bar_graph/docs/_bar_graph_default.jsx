@@ -3,19 +3,19 @@ import { BarGraph } from '../../'
 
 const chartData = [{
   name: 'Installation',
-  data: [154175],
+  data: [1475, 200, 3000, 654, 656],
 }, {
   name: 'Manufacturing',
-  data: [40434],
+  data: [4434, 524, 2320, 440, 500],
 }, {
   name: 'Sales & Distribution',
-  data: [39387],
+  data: [3387, 743, 1344, 434, 440],
 }, {
   name: 'Project Development',
-  data: [34227],
+  data: [3227, 878, 999, 780, 1000],
 }, {
   name: 'Other',
-  data: [18111],
+  data: [1111, 677, 3245, 500, 200],
 }]
 
 const BarGraphDefault = () => (
@@ -24,9 +24,10 @@ const BarGraphDefault = () => (
         axisTitle="Number of Employees"
         chartData={chartData}
         id="bar-test"
-        pointStart={2012}
         subTitle="Source: thesolarfoundation.com"
         title="Solar Employment Growth by Sector, 2010-2016"
+        xAxisCategories={['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']}
+        yAxisMin={0}
     />
   </div>
 )

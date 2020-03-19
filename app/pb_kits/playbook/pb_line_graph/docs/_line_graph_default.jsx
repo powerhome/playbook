@@ -23,10 +23,11 @@ const LineGraphDefault = () => (
     <LineGraph
         axisTitle="Number of Employees"
         chartData={data}
-        id="line-test"
-        pointStart={1}
+        id="bar-test"
         subTitle="Source: thesolarfoundation.com"
         title="Solar Employment Growth by Sector, 2010-2016"
+        xAxisCategories={['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']}
+        yAxisMin={0}
     />
   </div>
 )

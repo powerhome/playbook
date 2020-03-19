@@ -6,6 +6,9 @@ import { pbChart } from '../'
 
 type LineGraphProps = {
   axisTitle?: String,
+  xAxisCategories: Array,
+  yAxisMin: Number,
+  yAxisMax: Number,
   className?: String,
   chartData: Array<{
       name: String,
@@ -29,6 +32,9 @@ export default class LineGraph extends React.Component<LineGraphProps> {
   componentDidMount() {
     const {
       axisTitle,
+      xAxisCategories,
+      yAxisMin,
+      yAxisMax,
       className,
       chartData,
       id,
@@ -46,6 +52,9 @@ export default class LineGraph extends React.Component<LineGraphProps> {
       subtitle: subTitle,
       type,
       title: title,
+      xAxisCategories: xAxisCategories,
+      yAxisMin: yAxisMin,
+      yAxisMax: yAxisMax,
     })
   }
 
