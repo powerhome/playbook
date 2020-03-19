@@ -43,9 +43,14 @@ class pbChart {
         text: this.defaults.subtitle,
       },
       yAxis: {
+        min: this.defaults.yAxisMin,
+        max: this.defaults.yAxisMax,
         title: {
           text: this.defaults.axisTitle,
         },
+      },
+      xAxis: {
+        categories: this.defaults.xAxisCategories,
       },
       plotOptions: {
         series: {

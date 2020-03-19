@@ -15,6 +15,11 @@ module Playbook
       prop :point_start, type: Playbook::Props::Numeric
       prop :subtitle
       prop :title
+      prop :x_axis_categories, type: Playbook::Props::Array,
+                                default:[]
+      prop :y_axis_min, type: Playbook::Props::Numeric
+      prop :y_axis_max, type: Playbook::Props::Numeric
+
 
       def chart_type
         orientation == "horizontal" ? "bar" : "column"
@@ -29,6 +34,9 @@ module Playbook
           subtitle: subtitle,
           axisTitle: axis_title,
           pointStart: point_start,
+          xAxisCategories: x_axis_categories,
+          yAxisMin: y_axis_min,
+          yAxisMax: y_axis_max,
         }.to_json.html_safe
       end
 
