@@ -11,6 +11,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Allow form field placeholder + select field id [👹 #666 🤘🐐](https://github.com/powerhome/playbook/pull/666)
 - Fix line height on currency large ()[#668](https://github.com/powerhome/playbook/pull/668) @jasoncypret)
 
+### Added
+- Table header alignment changed to left align ([#670](https://github.com/powerhome/playbook/pull/670) @megantrimble)
+
 ## [4.7.0] 2020-3-12
 
 ### Added
