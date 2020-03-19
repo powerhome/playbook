@@ -34,7 +34,7 @@
     display: flex;
     align-items: flex-end;
   }
-  & > [class*=pb_currency_value] {
+  & > [class^=pb_title_kit_1][class*=pb_currency_value] {
     line-height: .9;
   }
 }
