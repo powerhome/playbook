@@ -9,7 +9,7 @@ RSpec.describe Playbook::PbFormPill::FormPill do
   it { is_expected.to define_prop(:text) }
   it { is_expected.to define_prop(:name) }
   it { is_expected.to define_boolean_prop(:avatar)	
-    .with_default(false) }
+                      .with_default(false) }
   it { is_expected.to define_prop(:avatar_url) }
 
 
