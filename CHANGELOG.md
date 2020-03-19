@@ -17,6 +17,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - Table header alignment changed to left align ([#670](https://github.com/powerhome/playbook/pull/670) @megantrimble)
 
+### Added
+- Created ProgressSimple React Playbook Kit [#665](https://github.com/powerhome/playbook/pull/665)
+
 ## [4.7.0] 2020-3-12
 
 ### Added
