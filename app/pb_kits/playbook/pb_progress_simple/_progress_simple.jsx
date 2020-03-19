@@ -9,7 +9,7 @@ type ProgressSimpleProps = {
   dark?: Boolean,
   data?: String,
   id?: String,
-  max: String,
+  max?: String,
   muted: Boolean,
   percent: String,
   value: Number,
@@ -22,7 +22,7 @@ const ProgressSimple = ({
   dark = false,
   max,
   muted = false,
-  percent,
+  percent = '',
   value,
   width = '100%',
 }: ProgressSimpleProps) => {
@@ -31,11 +31,7 @@ const ProgressSimple = ({
   }
 
   const valueStyles = {
-    width: `${percent}%`,
-  }
-
-  const nonPercentStyles = {
-    width: `${(value * 100) / max}%`,
+    width: percent ? `${percent}%` : `${(value * 100) / max}%`,
   }
 
   const wrapperClass = classnames(
@@ -55,17 +51,10 @@ const ProgressSimple = ({
           data-value={value}
           style={styles}
       >
-        <If condition={percent}>
-          <div
-              className="progress_simple_value"
-              style={valueStyles}
-          />
-          <Else />
-          <div
-              className="progress_simple_value"
-              style={nonPercentStyles}
-          />
-        </If>
+        <div
+            className="progress_simple_value"
+            style={valueStyles}
+        />
       </div>
     </div>
   )
