@@ -1,8 +1,11 @@
 import React from 'react'
+import { ProgressSimple } from '../..'
 
 const ProgressSimpleDefault = () => {
   return (
-    <h1>{'Coming Soon...'}</h1>
+    <div>
+      <ProgressSimple percent={45} />
+    </div>
   )
 }
 
