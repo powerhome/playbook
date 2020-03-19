@@ -6,8 +6,18 @@
       <%= pb_rails("caption", props: { text: "Project" }) %>
       <div class="pb_project-details">
         <%= pb_rails("flex", props: {orientation: "row", vertical: "center"}) do %>
-          <%= pb_rails("body", props: { color: "light", text: object.project_number } ) %>
-          <%= pb_rails("title", props: { text: object.project_name, tag: "h4", size: 4 }) %>
+          <%= pb_rails("icon_value", props: { icon: "home", text: object.project_number}) %>
+          <% if object.link %>
+            <%= link_to object.link do %>
+              <%= pb_rails("flex", props: {orientation: "row", vertical: "center"}) do %>
+                <%= pb_rails("title", props: { text: object.project_name, tag: "h4", size: 4 }) %>
+                <%= pb_rails("title", props: { text: object.date_element, tag: "h4", size: 4 }) if object.date.present? %>
+              <% end %>
+            <% end %>
+          <% else%>
+             <%= pb_rails("title", props: { text: object.project_name, tag: "h4", size: 4 }) %>
+             <%= pb_rails("title", props: { text: object.date_element, tag: "h4", size: 4 }) if object.date.present? %>
+          <% end %>
         <% end %>
       </div>
     </div>

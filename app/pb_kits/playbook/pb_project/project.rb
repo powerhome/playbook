@@ -11,8 +11,14 @@ module Playbook
       prop :project_name
       prop :project_number
       prop :date
+      prop :link
+
       def classname
         generate_classname("pb_project")
+      end
+
+      def date_element
+        "&middot; #{date.strftime('%m/%d')}".html_safe
       end
     end
   end
