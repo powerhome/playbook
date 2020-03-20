@@ -15,9 +15,11 @@ app.build(
     limitMemory: '12Gi',
   ]
 ) {
+  def application = "playbook"
   def appImage
   def tag
   def scmVars
+  def cluster = "APP-HQ"
 
   stage('Code Checkout') {
     scmVars = checkout scm
@@ -40,8 +42,6 @@ app.build(
   app.dockerStage('Test') {
     sh "docker run --tty --rm ${appImage} bin/test"
   }
-
-  def cluster = "APP-HQ"
 
   app.deployerStage('Deploy', cluster) {
     withCredentials([usernamePassword(
