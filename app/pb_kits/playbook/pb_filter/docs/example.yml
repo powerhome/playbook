@@ -3,6 +3,7 @@ examples:
   rails:
   - filter_default: Default
   - filter_single: Single
+  - filter_no_background: No Background
   
   react:
   - filter_default: Default

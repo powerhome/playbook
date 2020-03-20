@@ -13,7 +13,7 @@ module Playbook
       prop :template, type: Playbook::Props::Enum,
                       values: %w[default single],
                       default: "default"
-
+      prop :background, type: Playbook::Props::Boolean, default: true
 
       def classname
         generate_classname("pb_filter_kit")
@@ -23,7 +23,7 @@ module Playbook
         case direction
         when "asc"
           "sort-amount-up"
-        when "des"
+        when "desc"
           "sort-amount-down"
         else
           ""

@@ -45,6 +45,7 @@
     padding-left: $space_xs - 7px;
     padding-right: $space_xs - 7px;
   }
+  
   &[class*=_sm] [class^=pb_currency_wrapper] [class*=pb_currency_value] {
     line-height: 1.4;
     padding-left: $space_xs - 7px;

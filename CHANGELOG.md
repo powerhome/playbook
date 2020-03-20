@@ -4,6 +4,21 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+## [4.8.0] 2020-3-19
+### Added
+- New props for bar & line graph ([#669](https://github.com/powerhome/playbook/pull/669) @kre8sions)
+
+## Unreleased
+
+### Fixed
+- Allow form field placeholder + select field id [👹 #666 🤘🐐](https://github.com/powerhome/playbook/pull/666)
+- Fix line height on currency large ()[#668](https://github.com/powerhome/playbook/pull/668) @jasoncypret)
+
+### Added
+- Table header alignment changed to left align ([#670](https://github.com/powerhome/playbook/pull/670) @megantrimble)
+
+### Added
+- Created ProgressSimple React Playbook Kit [#665](https://github.com/powerhome/playbook/pull/665)
 
 ## [4.7.0] 2020-3-12
 
