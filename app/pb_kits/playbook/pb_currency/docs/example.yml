@@ -2,7 +2,11 @@ examples:
 
   rails:
   - currency_small: Small
+  - currency_medium: Medium
   - currency_large: Large
+  - currency_dark: Dark
   react:
-  - currency_default: Small
+  - currency_small: Small
+  - currency_medium: Medium
   - currency_large: Large
+  - currency_dark: Dark
