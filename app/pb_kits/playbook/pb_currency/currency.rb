@@ -13,8 +13,8 @@ module Playbook
                    default: "left"
 
       prop :size, type: Playbook::Props::Enum,
-                  values: %w[lg sm],
-                  default: "sm"
+                  values: %w[lg md sm],
+                  default: "md"
 
       prop :label, type: Playbook::Props::String,
                    default: ""
@@ -28,14 +28,18 @@ module Playbook
       prop :unit, type: Playbook::Props::String,
                   required: false
 
+      prop :dark, type: Playbook::Props::Boolean,
+                  default: false
+
       def classname
-        generate_classname("pb_currency_kit", align)
+        generate_classname("pb_currency_kit", align, size, dark_class)
       end
 
       def currency_symbol_element
         pb_dollar_sign = Playbook::PbBody::Body.new(
           classname: "dollar_sign",
-          color: "light"
+          color: "light",
+          dark: dark
         ) { symbol }
 
         ApplicationController.renderer.render(
@@ -58,7 +62,8 @@ module Playbook
         pb_title = Playbook::PbTitle::Title.new(
           size: size_value,
           text: whole_part.first.to_s,
-          classname: "pb_currency_value"
+          classname: "pb_currency_value",
+          dark: dark
         )
 
         ApplicationController.renderer.render(
@@ -79,7 +84,18 @@ module Playbook
     private
 
       def size_value
-        size == "lg" ? 1 : 2
+        case size
+        when "lg"
+          1
+        when "md"
+          3
+        else
+          4
+        end
+      end
+
+      def dark_class
+        dark ? "dark" : nil
       end
     end
   end
