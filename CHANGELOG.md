@@ -20,6 +20,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Fix line height on currency large ([#668](https://github.com/powerhome/playbook/pull/668) @jasoncypret)
 - Run CI Builds on any available cluster ([#671](https://github.com/powerhome/playbook/pull/671) @benlangfeld)
 
+### Added
+- Added resize option to textarea ([674](https://github.com/powerhome/playbook/pull/674) @jasoncypret)
+
 ## [4.7.0] 2020-3-12
 
 ### Added

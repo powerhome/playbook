@@ -1,19 +1,19 @@
 examples:
-  
+
   rails:
   - textarea_default: Default
   - textarea_custom: Custom Textarea Input
   - textarea_dark: Dark
+  - textarea_resize: Resize
   - textarea_error: Textarea w/ Error
   - textarea_dark_error: Textarea w/ Error
 
-  
-  
+
+
   react:
   - textarea_default: Default
   - textarea_custom: Custom Textarea Input
   - textarea_dark: Dark
+  - textarea_resize: Resize
   - textarea_error: Textarea w/ Error
   - textarea_dark_error: Textarea w/ Error
-
-  
