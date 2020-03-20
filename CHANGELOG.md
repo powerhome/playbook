@@ -8,20 +8,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 
 ## [4.8.0] 2020-3-19
+
 ### Added
 - New props for bar & line graph ([#669](https://github.com/powerhome/playbook/pull/669) @kre8sions)
 - Table header alignment changed to left align ([#670](https://github.com/powerhome/playbook/pull/670) @megantrimble)
 - Created ProgressSimple React Playbook Kit ([#665](https://github.com/powerhome/playbook/pull/665) @jasperfurniss)
 - Filter Kit Updates ([#664](https://github.com/powerhome/playbook/pull/664) @kre8sions)
 - Currency sizing + dark mode updates ([#673](https://github.com/powerhome/playbook/pull/673) @rruiz85)
+- Added resize option to textarea ([#674](https://github.com/powerhome/playbook/pull/674) @jasoncypret)
 
 ### Fixed
 - Allow form field placeholder + select field id ([👹 #666 🤘🐐](https://github.com/powerhome/playbook/pull/666) @thestephenmarshall)
 - Fix line height on currency large ([#668](https://github.com/powerhome/playbook/pull/668) @jasoncypret)
 - Run CI Builds on any available cluster ([#671](https://github.com/powerhome/playbook/pull/671) @benlangfeld)
 
-### Added
-- Added resize option to textarea ([674](https://github.com/powerhome/playbook/pull/674) @jasoncypret)
 
 ## [4.7.0] 2020-3-12
 

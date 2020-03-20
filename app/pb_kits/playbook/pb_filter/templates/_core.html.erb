@@ -32,7 +32,7 @@
       <%= pb_rails("title_count", props: {title: "Results:",count: object.results, align:"center"}) %>
         <%= pb_rails("flex", props: {orientation: "row", vertical: "center"}) do %>
           <%= pb_rails("caption", props: { text: "sort by:"}) %>
-          <%= pb_rails("button", props: {variant: "link" ,classname: "p-0 ml-3",id: "sort-button"}) do %>
+          <%= pb_rails("button", props: {variant: "link" ,classname: "p-0 ml-3",id: "sort-button#{object.id}"}) do %>
           <% object.sort_menu.each do |item| %>
             <% if item[:active] == true %>
               <%= item[:item] %>
