@@ -1,11 +1,13 @@
 @import "../pb_body/body_mixins";
 @import "../pb_textarea/textarea_mixin";
+@import "../pb_title/title_mixin";
 @import "../tokens/colors";
 
 [class^=pb_select] {
   margin-bottom: $space_sm;
   select {
     @include pb_textarea_light;
+    @include pb_title_4;
     appearance: none;
     cursor: pointer;
     box-shadow: inset 0 -11px 20px rgba($primary, 0.05);
@@ -54,6 +56,8 @@
   &[class*=_dark] {
     select {
       @include pb_textarea_dark;
+      @include pb_title_4;
+      @include pb_title_dark;
       background: $focus_input_dark;
       box-shadow: inset 0 -11px 20px rgba($white, 0.05);
       &:hover, &:active, &:focus {
@@ -74,5 +78,5 @@
       }
     }
   }
-  
+
 }

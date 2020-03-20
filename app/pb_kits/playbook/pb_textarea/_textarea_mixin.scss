@@ -2,10 +2,10 @@
 @import "../tokens/border_radius";
 @import "../tokens/spacing";
 @import "../tokens/animation-curves";
-@import "../pb_title/title_mixin";
+@import "../pb_body/body_mixins";
 
 @mixin pb_textarea($border_color, $background_color, $text_color) {
-  @include pb_title_4;
+  @include pb_body_dark;
   border: 1px solid $border_color;
   border-radius: $border_rad_heavier;
   display: block;
@@ -28,8 +28,8 @@
     -moz-appearance:textfield;
     &::-webkit-inner-spin-button,
     &::-webkit-outer-spin-button {
-      -webkit-appearance: none; 
-      margin: 0; 
+      -webkit-appearance: none;
+      margin: 0;
     }
   }
   &:disabled, &:disabled:hover, &:disabled:focus, &:disabled:active {

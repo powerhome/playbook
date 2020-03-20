@@ -1,5 +1,5 @@
 @import "../pb_textarea/textarea_mixin";
-@import "../pb_body/body_mixins";
+@import "../pb_title/title_mixin";
 
 [class^=pb_text_input_kit] {
   .pb_text_input_kit_label {
@@ -17,6 +17,7 @@
 
     > input:first-child {
       @include pb_textarea_light;
+      @include pb_title_4;
       overflow: hidden;
     }
 
@@ -35,6 +36,8 @@
 
       > input:first-child {
         @include pb_textarea_dark;
+        @include pb_title_4;
+        @include pb_title_dark;
         overflow: hidden;
       }
 
