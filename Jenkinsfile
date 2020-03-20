@@ -6,20 +6,20 @@ library identifier: 'ci-kubed@v3.1.0', retriever: modernSCM([
   credentialsId: 'powerci-github-ssh-key'
 ])
 
-def application = "playbook"
-def cluster = "APP-HQ"
-def deployerVersion = "master-e4c01702624ac34f2663f894fbdb68a369b09629-588"
-def resources = [
-  requestCpu: '1',
-  limitCpu: '2',
-  requestMemory: '6Gi',
-  limitMemory: '12Gi',
-]
-
-app.build(application: application, cluster: cluster, deployerVersion: deployerVersion, resources: resources) {
+app.build(
+  deployerVersion: "master-e4c01702624ac34f2663f894fbdb68a369b09629-588",
+  resources: [
+    requestCpu: '1',
+    limitCpu: '2',
+    requestMemory: '6Gi',
+    limitMemory: '12Gi',
+  ]
+) {
+  def application = "playbook"
   def appImage
   def tag
   def scmVars
+  def cluster = "APP-HQ"
 
   stage('Code Checkout') {
     scmVars = checkout scm
