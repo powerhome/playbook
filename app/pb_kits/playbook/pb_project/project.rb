@@ -14,11 +14,17 @@ module Playbook
       prop :link
 
       def classname
-        generate_classname("pb_project_kit")
+        generate_classname("pb_project_kit", dark_class)
       end
 
       def date_element
         "&middot; #{date.strftime('%m/%d')}".html_safe
+      end
+
+    private
+
+      def dark_class
+        dark ? "dark" : nil
       end
     end
   end

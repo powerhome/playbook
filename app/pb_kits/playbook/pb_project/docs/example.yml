@@ -1,9 +1,10 @@
 examples:
-  
+
   rails:
   - project_default: Default
-  
-  
+  - project_dark: Dark
+
+
   react:
   - project_default: Default
-  
+

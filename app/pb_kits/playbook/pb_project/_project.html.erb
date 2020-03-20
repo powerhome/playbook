@@ -8,12 +8,12 @@
       <%= object.project_number%>
       <% if object.link %>
         <%= link_to object.link, class: "links" do %>
-          <%= pb_rails("title", props: { text: object.project_name, tag: "span", size: 4,classname: "links" }) %>
-          <%= pb_rails("title", props: { text: object.date_element, tag: "span", size: 4 }) if object.date.present? %>
+          <%= pb_rails("title", props: { text: object.project_name, tag: "span", size: 4, dark: object.dark }) %>
+          <%= pb_rails("title", props: { text: object.date_element, tag: "span", size: 4, dark: object.dark }) if object.date.present? %>
         <% end %>
       <% else %>
-        <%= pb_rails("title", props: { text: object.project_name, tag: "span", size: 4,classname: "links" }) %>
-        <%= pb_rails("title", props: { text: object.date_element, tag: "span", size: 4 }) if object.date.present? %>
+        <%= pb_rails("title", props: { text: object.project_name, tag: "span", size: 4, dark: object.dark }) %>
+        <%= pb_rails("title", props: { text: object.date_element, tag: "span", size: 4, dark: object.dark} ) if object.date.present? %>
       <% end %>
     <% end %>
 <% end %>
