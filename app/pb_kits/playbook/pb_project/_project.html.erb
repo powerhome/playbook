@@ -2,23 +2,18 @@
     id: object.id,
     data: object.data,
     class: object.classname) do %>
-    <div class="pb_project_wrapper">
+    <%= pb_rails("body", props: { classname: "", color: "light" }) do %>
       <%= pb_rails("caption", props: { text: "Project" }) %>
-      <div class="pb_project-details">
-        <%= pb_rails("flex", props: {orientation: "row", vertical: "center"}) do %>
-          <%= pb_rails("icon_value", props: { icon: "home", text: object.project_number}) %>
-          <% if object.link %>
-            <%= link_to object.link do %>
-              <%= pb_rails("flex", props: {orientation: "row", vertical: "center"}) do %>
-                <%= pb_rails("title", props: { text: object.project_name, tag: "h4", size: 4 }) %>
-                <%= pb_rails("title", props: { text: object.date_element, tag: "h4", size: 4 }) if object.date.present? %>
-              <% end %>
-            <% end %>
-          <% else%>
-             <%= pb_rails("title", props: { text: object.project_name, tag: "h4", size: 4 }) %>
-             <%= pb_rails("title", props: { text: object.date_element, tag: "h4", size: 4 }) if object.date.present? %>
-          <% end %>
+      <%= pb_rails("icon", props: { icon: "home", fixed_width: true }) %>
+      <%= object.project_number%>
+      <% if object.link %>
+        <%= link_to object.link, class: "links" do %>
+          <%= pb_rails("title", props: { text: object.project_name, tag: "span", size: 4,classname: "links" }) %>
+          <%= pb_rails("title", props: { text: object.date_element, tag: "span", size: 4 }) if object.date.present? %>
         <% end %>
-      </div>
-    </div>
+      <% else %>
+        <%= pb_rails("title", props: { text: object.project_name, tag: "span", size: 4,classname: "links" }) %>
+        <%= pb_rails("title", props: { text: object.date_element, tag: "span", size: 4 }) if object.date.present? %>
+      <% end %>
+    <% end %>
 <% end %>

@@ -14,7 +14,7 @@ module Playbook
       prop :link
 
       def classname
-        generate_classname("pb_project")
+        generate_classname("pb_project_kit")
       end
 
       def date_element

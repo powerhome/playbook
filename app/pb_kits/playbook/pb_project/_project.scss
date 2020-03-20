@@ -1,3 +1,7 @@
-.pb_project {
-
+[class^=pb_project_kit] {
+  .links{
+    span{
+      color: $data_1 ;
+    }
+  }
 }
