@@ -1,0 +1,45 @@
+
+  <%= pb_rails("flex", props: {orientation: "row", vertical: "center"}) do %>
+    <%= pb_rails("circle_icon_button", props: { variant: "secondary", icon: "filter", id:"filter#{object.id}"}) %>
+
+    <div class="maskContainer">
+        <div class="filters">
+            <div class="left_gradient"></div>
+                  <% object.filters.each do |filter| %>
+                  <div class="filter">
+                    <%= pb_rails("caption", props: { text: filter[:name]}) %>
+                    <%= pb_rails("title", props: { size: 4, tag:"h4", text: filter[:value]}) %>
+                    </div>
+                  <% end %>   
+            <div class="right_gradient"></div>
+        </div>
+    </div>
+    <% if object.template == "single" %>
+      <%= pb_rails("caption", props: {text: "#{object.results} Results", size:"xs", classname:"filter-results"}) %>  
+      <%= pb_rails("button", props: {variant: "link",id: "sort-button#{object.id}"}) do %>
+        <% object.sort_menu.each do |item| %>
+            <% if item[:active] == true %>
+              <%= item[:item] %>
+              <%= pb_rails("icon", props: { icon: object.sort_icon(item[:direction]), fixed_width: true }) %>
+            <%end%>
+            <% end %>
+      <% end %>
+    <% end %>
+  <% end %>
+  <% if object.template == "default"%>
+    <%= pb_rails("section_separator") %>
+    <%= pb_rails("flex", props: {orientation: "row", vertical: "center", spacing: "between", classname: "filter-bottom"}) do %>
+      <%= pb_rails("title_count", props: {title: "Results:",count: object.results, align:"center"}) %>
+        <%= pb_rails("flex", props: {orientation: "row", vertical: "center"}) do %>
+          <%= pb_rails("caption", props: { text: "sort by:"}) %>
+          <%= pb_rails("button", props: {variant: "link" ,classname: "p-0 ml-3",id: "sort-button#{object.id}"}) do %>
+          <% object.sort_menu.each do |item| %>
+            <% if item[:active] == true %>
+              <%= item[:item] %>
+              <%= pb_rails("icon", props: { icon: object.sort_icon(item[:direction]), fixed_width: true }) %>
+            <%end%>
+            <% end %>
+          <% end %>
+        <% end %>
+    <% end %>
+  <% end %>

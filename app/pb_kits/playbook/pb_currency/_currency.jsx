@@ -11,13 +11,15 @@ type CurrencyProps = {
   unit: string,
   className?: string,
   label?: string,
-  size?: 'sm' | 'lg',
+  size?: 'sm' | 'md' | 'lg',
   symbol?: string,
+  dark?: boolean,
 }
 
 const sizes = {
   lg: 1,
-  sm: 2,
+  md: 3,
+  sm: 4,
 }
 
 const Currency = ({
@@ -28,23 +30,27 @@ const Currency = ({
   label = '',
   size = 'sm',
   symbol = '$',
+  dark = false,
 }: CurrencyProps) => {
   const [whole, decimal = '00'] = amount.split('.')
 
   return (
-    <div className={buildCss('pb_currency_kit', align, className)}>
+    <div className={buildCss('pb_currency_kit', align, className, { dark: dark }, size)}>
       <Caption>{label}</Caption>
 
       <div className="pb_currency_wrapper">
         <Body
             className="dollar_sign"
             color="light"
+            dark={dark}
+
         >
           {symbol}
         </Body>
 
         <Title
             className="pb_currency_value"
+            dark={dark}
             size={sizes[size]}
         >
           {`${whole}`}
@@ -53,6 +59,8 @@ const Currency = ({
         <Body
             className="unit"
             color="light"
+            dark={dark}
+
         >
           <If condition={unit}>
             {unit}

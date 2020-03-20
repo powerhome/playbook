@@ -2,5 +2,5 @@
     id: object.id,
     data: object.data,
     class: object.classname) do %>
-    <%= render partial: "pb_filter/templates/#{object.template}", locals: {object: object}%>
+    <%= render partial: "pb_filter/templates/default", locals: {object: object}%>
 <% end %>

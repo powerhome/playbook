@@ -19,6 +19,7 @@ type TextareaProps = {
   name?: String,
   rows?: Number,
   dark?: Boolean,
+  resize: 'none' | 'both' | 'horizontal' | 'vertical',
   onChange?: InputCallback<HTMLTextAreaElement>,
 }
 
@@ -26,6 +27,7 @@ const Textarea = ({
   className,
   children,
   dark = false,
+  resize = 'none',
   error,
   label,
   name,
@@ -36,9 +38,10 @@ const Textarea = ({
 }: TextareaProps) => {
   const textareaClass = `pb_textarea_kit${dark ? '_dark' : ''}`
   const errorClass = error ? 'error' : null
+  const resizeClass = ` resize_${resize}`
 
   return (
-    <div className={classnames(textareaClass, className, errorClass)}>
+    <div className={classnames(textareaClass, className, errorClass, resizeClass)}>
       <Caption
           dark={dark}
           text={label}
