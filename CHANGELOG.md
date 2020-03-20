@@ -8,6 +8,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## Unreleased
 - Allow form field placeholder + select field id [👹 #666 🤘🐐](https://github.com/powerhome/playbook/pull/666)
 
+### Added
+- Added resize option to textarea ([674](https://github.com/powerhome/playbook/pull/674) @jasoncypret)
+
 ## [4.7.0] 2020-3-12
 
 ### Added
