@@ -3,8 +3,8 @@
 import React from 'react'
 
 type TimeRangeInlineProps = {
-  alignment?: String,
   className?: String,
+  alignment?: String,
   dark?: Boolean,
   data?: String,
   icon?: Boolean,
@@ -13,8 +13,8 @@ type TimeRangeInlineProps = {
 }
 
 const TimeRangeInline = ({
-  alignment,
   className,
+  alignment,
   dark,
   data,
   icon,
