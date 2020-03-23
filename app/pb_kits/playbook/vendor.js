@@ -13,3 +13,6 @@ PbPopover.start()
 
 import PbTypeahead from './pb_typeahead'
 PbTypeahead.start()
+
+import PbTable from './pb_table'
+PbTable.start()

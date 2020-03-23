@@ -17,15 +17,19 @@ module Playbook
       prop :disable_hover, type: Playbook::Props::Boolean,
                            default: false
       prop :data_table, type: Playbook::Props::Boolean,
-                  default: false
+                        default: false
       prop :container, type: Playbook::Props::Boolean,
                        default: true
+      prop :responsive, type: Playbook::Props::Enum,
+                        values: %w[collapse scroll none],
+                        default: "collapse"
       prop :text
 
       def classname
         generate_classname(
           "pb_table", "table-#{size}", single_line_class, dark_class,
-          disable_hover_class, container_class, data_table_class, separator: " "
+          disable_hover_class, container_class, data_table_class,
+          "table-responsive-#{responsive}", separator: " "
         )
       end
 

@@ -1,9 +1,0 @@
-.pb--page--topNav
-  h1
-    = link_to root_url do
-      = image_tag("pb.logo.svg")
-    | &nbsp;
-    = pb_rails("caption", props: { tag: "span", text: Playbook::VERSION })
-- flash.each do |name, msg|
-  - name = "success" if name == "notice"
-  = pb_rails("fixed_confirmation_toast", props: { text: msg, status: name })
