@@ -13,7 +13,6 @@ const dateString = (value: DateTime) => {
 }
 
 type ProjectProps = {
-  className?: String,
   dark?: Boolean,
   date: String,
   link?: String,
@@ -22,7 +21,6 @@ type ProjectProps = {
 }
 
 const Project = ({
-  className,
   dark = false,
   date,
   link,
@@ -42,7 +40,7 @@ const Project = ({
             icon="home"
         />
 
-        {projectNumber}
+        {` ${projectNumber}`}
 
         <Choose>
           <When condition={link}>
