@@ -18,6 +18,21 @@ const ProjectDark = () => (
         projectName="Jefferson-Smith"
         projectNumber="33-12345"
     />
+    <br />
+    <br />
+    <Project
+        dark
+        link="#"
+        projectName="Jefferson-Smith"
+        projectNumber="33-12345"
+    />
+    <br />
+    <br />
+    <Project
+        dark
+        projectName="Jefferson-Smith"
+        projectNumber="33-12345"
+    />
   </div>
 )
 

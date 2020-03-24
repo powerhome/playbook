@@ -16,6 +16,19 @@ const ProjectDefault = () => (
         projectName="Jefferson-Smith"
         projectNumber="33-12345"
     />
+    <br />
+    <br />
+    <Project
+        link="#"
+        projectName="Jefferson-Smith"
+        projectNumber="33-12345"
+    />
+    <br />
+    <br />
+    <Project
+        projectName="Jefferson-Smith"
+        projectNumber="33-12345"
+    />
   </div>
 )
 

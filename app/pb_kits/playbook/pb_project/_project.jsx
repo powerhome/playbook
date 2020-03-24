@@ -48,20 +48,44 @@ const Project = ({
                 className="links"
                 href={link}
             >
-              <Title
-                  size={4}
-                  tag="span"
-                  text={' ' + projectName + dateString(formattedDate)}
-              />
+              <Choose>
+                <When condition={date}>
+                  <Title
+                      size={4}
+                      tag="span"
+                      text={' ' + projectName + dateString(formattedDate)}
+                  />
+                </When>
+                <Otherwise>
+                  <Title
+                      size={4}
+                      tag="span"
+                      text={' ' + projectName}
+                  />
+                </Otherwise>
+              </Choose>
             </a>
           </When>
           <Otherwise>
-            <Title
-                dark={dark}
-                size={4}
-                tag="span"
-                text={' ' + projectName + dateString(formattedDate)}
-            />
+            <Choose>
+              <When condition={date}>
+                <Title
+                    dark={dark}
+                    size={4}
+                    tag="span"
+                    text={' ' + projectName + dateString(formattedDate)}
+                />
+              </When>
+              <Otherwise>
+                <Title
+                    dark={dark}
+                    size={4}
+                    tag="span"
+                    text={' ' + projectName}
+                />
+              </Otherwise>
+            </Choose>
+
           </Otherwise>
         </Choose>
       </Body>
