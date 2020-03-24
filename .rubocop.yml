@@ -22,7 +22,7 @@ Metrics:
 Naming/PredicateName:
   Enabled: false
 
-Naming/UncommunicativeMethodParamName:
+Naming/MethodParameterName:
   AllowedNames:
     - io
     - id

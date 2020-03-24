@@ -3,9 +3,9 @@
 $table-dark-card-bg: $bg_dark;
 
 [class^=pb_table] {
-  .table-sm,
-  .table-md,
-  .table-lg {
+  &.table-sm,
+  &.table-md,
+  &.table-lg {
     &.table-dark {
       thead {
         tr {
@@ -61,9 +61,9 @@ $table-dark-card-bg: $bg_dark;
 
 @media only screen and (max-width: $screen-xs-max) {
   [class^=pb_table] {
-    .table-sm,
-    .table-md,
-    .table-lg {
+    &.table-sm,
+    &.table-md,
+    &.table-lg {
       &.table-card {
         &.table-dark {
           background: none !important;

@@ -1,6 +1,14 @@
 @import "../../tokens/colors";
 @import "../../tokens/spacing";
+@import "../../tokens/screen_sizes";
+@import "../../tokens/border_radius";
+@import "../../tokens/shadows";
 
+$selector: ".pb--page";
+
+body {
+  overflow-x: hidden;
+}
 
 .pb--page {
   &--topNav {
@@ -18,13 +26,57 @@
   }
   &--content {
     min-height: calc(100vh - 89px);
+    @include break_at(breakpoint("lg")) {
+      grid-template-columns: auto auto !important;
+    }
     &--main {
       flex-grow: 1;
       padding: 40px 60px;
       height: calc(100vh - 89px);
       overflow: auto;
+      @include break_at(breakpoint("lg")) {
+        padding: $space-lg $space-xl;
+      }
     }
   }
+  &--hamburger, &--checkbox {
+    position: absolute;
+    right: $space-xl;
+    top: 30px;
+    display: none;
+    font-size: $space-xl;
+    width: 30px;
+    height: 30px;
+    color: $primary;
+    cursor: pointer;
+    @include break_at(breakpoint("lg")) {
+      display: block;
+    }
+  }
+  &--checkbox {
+    opacity: 0;
+     ~ #{$selector}--sideNav {
+      @include break_at(breakpoint("lg")) {
+        position: absolute;
+        transform-origin: 0% 0%;
+        transform: translate(100%, 0);
+        transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0);
+        border-radius: $border_rad_heavier;
+        box-shadow: $shadow_deepest;
+        top: 100px;
+        right: 0;
+        width: auto !important;
+        padding: $space-xl;
+        z-index: 1000;
+      }
+    }
+    &:checked ~ #{$selector}--sideNav {
+      @include break_at(breakpoint("lg")) {
+        transform: translate(-10%, 0);
+      }
+    }
+  }
+
   &--sideNav {
     height: calc(100vh - 89px);
     overflow: auto;

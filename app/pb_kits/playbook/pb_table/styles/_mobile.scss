@@ -1,8 +1,11 @@
+@import "../../tokens/border_radius";
+@import "../../pb_caption/caption_mixin";
+
 @media only screen and (max-width: $screen-xs-max) {
   [class^=pb_table] {
-    .table-sm,
-    .table-md,
-    .table-lg {
+    &.table-sm,
+    &.table-md,
+    &.table-lg {
       width: 100%;
       background: none !important;
 
@@ -28,15 +31,13 @@
             border-bottom-width: 0 !important;
             border-color: $border_light !important;
             min-height: 2.2em;
-            padding-left: 34%;
+            // padding-left: 34%;
             position: relative;
             text-align:left;
             white-space: normal;
             &:before {
               content: attr(data-title);
-              color: $text_lt_default !important;
-              font-weight: $bold !important;
-              text-align: left !important;
+              @include caption;
               width: 100% !important;
               white-space: nowrap !important;
               text-overflow: ellipsis !important;
@@ -52,11 +53,11 @@
               margin-top: $space_md !important;
               border-top-width: 1px !important;
               border-top-color: $border_light !important;
-              border-radius: 4px 4px 0 0;
+              border-radius: $border_rad_light $border_rad_light 0 0;
             }
 
             &:last-child {
-              border-radius: 0 0 4px 4px;
+              border-radius: 0 0 $border_rad_light $border_rad_light;
               border-bottom-width: 1px !important;
             }
           }
@@ -82,10 +83,10 @@
               border-top-width: 1px !important;
 
               &:first-child {
-                border-radius: 4px 4px 0 0 !important;
+                border-radius: $border_rad_light $border_rad_light 0 0 !important;
               }
               &:last-child {
-                border-radius: 0 0 4px 4px !important;
+                border-radius: 0 0 $border_rad_light $border_rad_light !important;
               }
             }
           }
@@ -99,6 +100,7 @@
         }
       }
     }
+    // reset the first and last to normalize
     @each $name, $value in $cell-pad-list {
       &.#{$name} {
         tbody {
@@ -114,25 +116,16 @@
       }
     }
   }
-}
-
-@media only screen and (max-width: $screen-xs-max) {
-  [class^=pb_table] {
-    .table-sm,
-    .table-md,
-    .table-lg {
-      &.hide-labels {
-        tbody {
-          tr {
-            td {
-              &::before {
-                content: '';
-                left: 0;
-                padding-right: 0;
-                position: relative;
-                width: 0;
-              }
-            }
+  &.hide-labels {
+    tbody {
+      tr {
+        td {
+          &::before {
+            content: '';
+            left: 0;
+            padding-right: 0;
+            position: relative;
+            width: 0;
           }
         }
       }
