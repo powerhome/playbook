@@ -2,7 +2,7 @@
     id: object.id,
     data: object.data,
     class: object.classname) do %>
-    <%= pb_rails("body", props: { classname: "", color: "light" }) do %>
+    <%= pb_rails("body", props: {color: "light" }) do %>
       <%= pb_rails("caption", props: { text: "Project" }) %>
       <%= pb_rails("icon", props: { icon: "home", fixed_width: true }) %>
       <%= object.project_number%>

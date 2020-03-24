@@ -31,6 +31,10 @@ export default class DateTime {
     return this.value.strftime('%b')
   }
 
+  toMonthNumber() {
+    return this.value.strftime('%m')
+  }
+
   toMonthFull() {
     return this.value.strftime('%B')
   }
