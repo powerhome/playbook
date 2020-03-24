@@ -12,9 +12,12 @@ module Playbook
       prop :alignment, type: Playbook::Props::Enum,
                        values: %w[left center right],
                        default: "left"
+      prop :size, type: Playbook::Props::Enum,
+                  values: %w[sm xs],
+                  default: "sm"
       prop :dark, default: false
       prop :icon, default: false
-      prop :timezone, default: "America/New_York"
+      prop :timezone, default: false
 
       def classname
         generate_classname("pb_time_range_inline_kit", dark_class)
@@ -33,15 +36,15 @@ module Playbook
       end
 
       def format_end_timezone_string
-        pb_date_end_time.to_timezone.to_s
+        pb_date_end_time.convert_to_timezone.to_timezone.to_s
       end
 
       def pb_date_start_time
-        Playbook::PbKit::PbDateTime.new(start_time, timezone)
+        Playbook::PbKit::PbDateTime.new(start_time)
       end
 
       def pb_date_end_time
-        Playbook::PbKit::PbDateTime.new(end_time, timezone)
+        Playbook::PbKit::PbDateTime.new(end_time)
       end
 
     private
