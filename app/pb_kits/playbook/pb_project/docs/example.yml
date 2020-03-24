@@ -7,4 +7,5 @@ examples:
 
   react:
   - project_default: Default
+  - project_dark: Dark
 

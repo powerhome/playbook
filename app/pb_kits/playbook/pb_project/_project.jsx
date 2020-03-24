@@ -33,7 +33,7 @@ const Project = ({
 
   return (
     <div
-        className={classnames('pb_project_kit', className)}
+        className={classnames('pb_project_kit')}
     >
       <Body color="light">
         <Caption text="Project" />
