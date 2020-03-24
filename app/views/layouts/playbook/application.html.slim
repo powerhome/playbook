@@ -9,6 +9,7 @@ html
   body
     = render 'layouts/playbook/nav'
     = pb_rails("layout", props: {classname: "pb--page--content"})
+      = render 'layouts/playbook/mobile_hamburger'
       = pb_rails("layout/sidebar", props: { classname: "pb--page--sideNav" })
         = render 'layouts/playbook/sidebar'
       = pb_rails("layout/body")
