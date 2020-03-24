@@ -31,7 +31,7 @@ module Playbook
       end
 
       def validation_pattern
-        validation[:pattern] || ""
+        validation[:pattern] || nil
       end
 
       def data
