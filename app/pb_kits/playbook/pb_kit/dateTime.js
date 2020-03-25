@@ -43,6 +43,18 @@ export default class DateTime {
     return this.value.strftime('%a')
   }
 
+  toHour() {
+    return this.value.strftime('%l')
+  }
+
+  toMinute() {
+    return this.value.strftime('%M')
+  }
+
+  toMeridian() {
+    return this.value.strftime('%P')[0]
+  }
+
   toIso() {
     return this.value.toISOString()
   }
