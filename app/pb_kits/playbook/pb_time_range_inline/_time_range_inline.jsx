@@ -61,12 +61,7 @@ const TimeRangeInline = ({
             tag="span"
         >
           <time dateTime={dateTimeIso(startTime)}>{` ${dateTimestamp(startTime)} `}</time>
-        </Caption>
-        {separator}
-        <Caption
-            dark={dark}
-            tag="span"
-        >
+          {separator}
           <time dateTime={dateTimeIso(endTime)}>{` ${dateTimestamp(endTime)} `}</time>
           <If condition={timezone}>
             {timezoneString(endTime)}
@@ -79,12 +74,7 @@ const TimeRangeInline = ({
             tag="span"
         >
           <time dateTime={dateTimeIso(startTime)}>{` ${dateTimestamp(startTime)} `}</time>
-        </Body>
-        {separator}
-        <Body
-            dark={dark}
-            tag="span"
-        >
+          {separator}
           <time dateTime={dateTimeIso(endTime)}>{` ${dateTimestamp(endTime)} `}</time>
         </Body>
         <If condition={timezone}>
