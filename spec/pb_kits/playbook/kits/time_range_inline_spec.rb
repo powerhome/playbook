@@ -2,8 +2,8 @@
 
 require_relative "../../../../app/pb_kits/playbook/pb_time_range_inline/time_range_inline"
 
-RSpec.describe Playbook::PbTime_range_inline::Time_range_inline do
-  subject { Playbook::PbTime_range_inline::Time_range_inline }
+RSpec.describe Playbook::PbTimeRangeInline::TimeRangeInline do
+  subject { Playbook::PbTimeRangeInline::TimeRangeInline }
 
   it { is_expected.to define_partial }
 
