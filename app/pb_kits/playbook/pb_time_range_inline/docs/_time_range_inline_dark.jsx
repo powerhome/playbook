@@ -1,15 +1,17 @@
 import React from 'react'
 import { TimeRangeInline } from '../../'
 
-const TimeRangeInlineDefault = () => (
+const TimeRangeInlineDark = () => (
   <div>
     <TimeRangeInline
+        dark
         endTime="2012-08-02T17:49:29Z"
         size="xs"
         startTime="2012-08-02T15:49:29Z"
     />
     <br />
     <TimeRangeInline
+        dark
         endTime="2012-08-02T17:49:29Z"
         size="sm"
         startTime="2012-08-02T15:49:29Z"
@@ -17,6 +19,7 @@ const TimeRangeInlineDefault = () => (
     <br />
     <br />
     <TimeRangeInline
+        dark
         endTime="2012-08-02T17:49:29Z"
         size="xs"
         startTime="2012-08-02T15:49:29Z"
@@ -24,6 +27,7 @@ const TimeRangeInlineDefault = () => (
     />
     <br />
     <TimeRangeInline
+        dark
         endTime="2012-08-02T17:49:29Z"
         size="sm"
         startTime="2012-08-02T15:49:29Z"
@@ -32,6 +36,7 @@ const TimeRangeInlineDefault = () => (
     <br />
     <br />
     <TimeRangeInline
+        dark
         endTime="2012-08-02T17:49:29Z"
         icon="true"
         size="xs"
@@ -39,6 +44,7 @@ const TimeRangeInlineDefault = () => (
     />
     <br />
     <TimeRangeInline
+        dark
         endTime="2012-08-02T17:49:29Z"
         icon="true"
         size="sm"
@@ -47,6 +53,7 @@ const TimeRangeInlineDefault = () => (
     <br />
     <br />
     <TimeRangeInline
+        dark
         endTime="2012-08-02T17:49:29Z"
         icon="true"
         size="xs"
@@ -55,6 +62,7 @@ const TimeRangeInlineDefault = () => (
     />
     <br />
     <TimeRangeInline
+        dark
         endTime="2012-08-02T17:49:29Z"
         icon="true"
         size="sm"
@@ -64,4 +72,4 @@ const TimeRangeInlineDefault = () => (
   </div>
 )
 
-export default TimeRangeInlineDefault
+export default TimeRangeInlineDark

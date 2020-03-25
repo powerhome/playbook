@@ -7,4 +7,5 @@ examples:
   
   react:
   - time_range_inline_default: Default
+  - time_range_inline_dark: Dark
   
