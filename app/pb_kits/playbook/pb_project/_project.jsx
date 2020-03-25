@@ -45,7 +45,7 @@ const Project = ({
         <Choose>
           <When condition={link}>
             <a
-                className="links"
+                className="pb_project_kit_links"
                 href={link}
             >
               <Choose>

@@ -43,6 +43,7 @@ kits:
   - popover
   - progress_pills
   - progress_simple
+  - project
   - section_separator
   - source
   - star_rating
@@ -74,4 +75,3 @@ kits:
     - title_detail
   - user
   - user_badge
-  - project

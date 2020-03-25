@@ -7,7 +7,7 @@
       <%= pb_rails("icon", props: { icon: "home", fixed_width: true }) %>
       <%= object.project_number%>
       <% if object.link %>
-        <%= link_to object.link, class: "links" do %>
+        <%= link_to object.link, class: "pb_project_kit_links" do %>
           <%= pb_rails("title", props: { text: object.project_name, tag: "span", size: 4, dark: object.dark }) %>
           <%= pb_rails("title", props: { text: object.date_element, tag: "span", size: 4, dark: object.dark }) if object.date.present? %>
         <% end %>
