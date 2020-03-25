@@ -20,7 +20,7 @@ export default class DateTime {
   }
 
   convertToTimezone() {
-    return this.value.strftime('%a')
+    return this.value.strftime('%Z')
   }
 
   toYear() {
