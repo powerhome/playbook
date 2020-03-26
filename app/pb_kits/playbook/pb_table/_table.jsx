@@ -12,6 +12,7 @@ type TableProps = {
   // @deprecated disable_hover since version 3.2.0, please use `disableHover`
   disable_hover: boolean, // eslint-disable-line camelcase
   disableHover: boolean,
+  responsive: "collapse" | "scroll" | "none",
   // @deprecated single_line since version 3.2.0, please use `singleLine`
   single_line: boolean, // eslint-disable-line camelcase
   singleLine: boolean,
@@ -26,6 +27,7 @@ const Table = ({
   dataTable = false,
   disable_hover = false, // eslint-disable-line camelcase
   disableHover = false,
+  responsive = 'collapse',
   single_line = false, // eslint-disable-line camelcase
   singleLine = false,
   size = 'sm',
@@ -33,7 +35,7 @@ const Table = ({
   disableHover = disableHover || disable_hover // eslint-disable-line camelcase
   singleLine = singleLine || single_line // eslint-disable-line camelcase
 
-  const classes = classnames(className, 'pb_table', `table-${size}`, {
+  const classes = classnames(className, 'pb_table', `table-${size}`, `table-responsive-${responsive}`, {
     'table-card': container,
     'table-dark': dark,
     'data_table': dataTable,
