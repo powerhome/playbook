@@ -1,0 +1,49 @@
+[class^=pb_datetime] {
+  &[class*=_left]  {
+    & > [class^=pb_body] {
+        text-align: left;
+    }
+  }
+    
+  &[class*=_center]  {
+    & > [class^=pb_body] {
+      text-align: center;
+    }
+  }
+
+  &[class*=_right] {
+    & > [class^=pb_body] {
+      text-align: right;
+    }
+  }
+
+  &[class*=_inline]  {
+    & > [class^=pb_body] {
+      & > [class^=pb_title] {
+        display: inline;
+        padding-right: 25px;
+      }
+    }
+  }
+
+  [class^=pb_time_timezone] {
+    font-size: $font-small;
+    font-weight: $regular;
+    color: $text-lt-light;
+
+    &::before {
+      content: " ";
+    }
+  }
+
+  &[class*=_dark] {
+    & > [class^=pb_body] {
+      color: $text_dk_default;
+
+      & > [class^=pb_title] {
+        color: $text_dk_default;
+      }
+    }
+  }
+}
+  

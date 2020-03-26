@@ -1,0 +1,17 @@
+<%= content_tag(:div,
+    id: object.id,
+    data: object.data,
+    class: object.classname) do %>
+    <%= pb_rails("body", props: { tag: "div", text: object.format_time }) do %>
+      <%= pb_rails("title", props: { text: object.format_date, size: 4 }) %>
+      <%= pb_rails("icon", props: { icon: "clock", fixed_width: true }) unless object.hide_clock_icon %>
+      <%= content_tag(:time, datetime: object.pb_date_time.to_iso) do %>
+        <%= content_tag(:span) do %>
+          <%= object.format_time %>
+          <%= content_tag(:span, class: "pb_time_timezone") do %>
+            <%= object.pb_date_time.to_timezone.upcase %>
+          <% end %>
+        <% end %>
+      <% end %>
+    <% end %>
+<% end %>
