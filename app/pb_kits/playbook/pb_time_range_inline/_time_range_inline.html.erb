@@ -9,10 +9,11 @@
           <% text_kit = "body" %>
           <% text_timezone_color = "light" %>
         <% end %>
+        <% html_icon = "" %>
         <% if object.icon == true %>
-          <%= pb_rails("icon", props: { icon: "clock", dark: object.dark, classname:"space-right", fixed_width: true }) %>
+          <% html_icon = pb_rails("icon", props: { icon: "clock", dark: object.dark, classname:"space-right", fixed_width: true, size: object.size }) %>
         <% end %>
-        <%= pb_rails(text_kit, props: { tag: "span", dark: object.dark, text: object.format_start_time_string }) %>
+        <%= pb_rails(text_kit, props: { tag: "span", dark: object.dark, text: html_icon + object.format_start_time_string }) %>
         <%= pb_rails(text_kit, props: { tag: "span", dark: object.dark, classname:"dash", text: "—" }) %>
         <%= pb_rails(text_kit, props: { tag: "span", dark: object.dark, text: object.format_end_time_string }) %>
         <% if object.timezone == true %>

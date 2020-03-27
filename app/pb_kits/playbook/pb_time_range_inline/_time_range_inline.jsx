@@ -45,23 +45,30 @@ const TimeRangeInline = ({
 }: TimeRangeInlineProps) => {
   const separator = `${' — '}`
 
+  const iconContent = () => {
+    return (
+      <If condition={icon}>
+        <Icon
+            className="space-right"
+            dark={dark}
+            fixedWidth
+            icon="clock"
+            size={size}
+            tag="span"
+        />
+      </If>
+    )
+  }
+
   return (
     <div className={classnames('pb_time_range_inline_kit', className)}>
       <div className={'align-' + alignment}>
-        <If condition={icon}>
-          <Icon
-              className="space-right"
-              dark={dark}
-              fixedWidth
-              icon="clock"
-              tag="span"
-          />
-        </If>
         <If condition={size == 'xs'}>
           <Caption
               dark={dark}
               tag="span"
           >
+            {iconContent()}
             <time dateTime={dateTimeIso(startTime)}>{` ${dateTimestamp(startTime)} `}</time>
           </Caption>
           <Caption
@@ -91,6 +98,7 @@ const TimeRangeInline = ({
               dark={dark}
               tag="span"
           >
+            {iconContent()}
             <time dateTime={dateTimeIso(startTime)}>{` ${dateTimestamp(startTime)} `}</time>
           </Body>
           <Body
