@@ -5,7 +5,10 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## Unreleased
+## [4.9.0] 2020-3-27
+- Update webpacker to version 4.2.2 ([#679](https://github.com/powerhome/playbook/pull/679) @viniciusgama)
+- Prevent empty pattern attribute on Text Input kit ([#681](https://github.com/powerhome/playbook/pull/681) @thestephenmarshall)
+- Rename roofs to roofing ([#685](https://github.com/powerhome/playbook/pull/685) @stephenagreer)
 - Fixed mobile scaling in PB UI + Table responsive setting improvements + Avatar cropping issues ([686](https://github.com/powerhome/playbook/pull/686) @jasoncypret)
 
 ## [4.8.2] 2020-3-24
