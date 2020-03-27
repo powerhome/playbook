@@ -3,9 +3,9 @@
 
 @media only screen and (max-width: $screen-xs-max) {
   [class^=pb_table] {
-    &.table-sm,
-    &.table-md,
-    &.table-lg {
+    &.table-sm.table-responsive-collapse,
+    &.table-md.table-responsive-collapse,
+    &.table-lg.table-responsive-collapse {
       width: 100%;
       background: none !important;
 
@@ -31,7 +31,6 @@
             border-bottom-width: 0 !important;
             border-color: $border_light !important;
             min-height: 2.2em;
-            // padding-left: 34%;
             position: relative;
             text-align:left;
             white-space: normal;
@@ -99,16 +98,16 @@
           }
         }
       }
-    }
-    // reset the first and last to normalize
-    @each $name, $value in $cell-pad-list {
-      &.#{$name} {
-        tbody {
-          tr {
-            td {
-              &:first-child,
-              &:last-child {
-                padding: $value $cell-gutter !important;
+      // reset the first and last to normalize
+      @each $name, $value in $cell-pad-list {
+        &.#{$name} {
+          tbody {
+            tr {
+              td {
+                &:first-child,
+                &:last-child {
+                  padding: $value $cell-gutter !important;
+                }
               }
             }
           }
