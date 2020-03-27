@@ -60,6 +60,9 @@ $avatar-sizes: (
           top: 0;
           left: 0;
           z-index: 1;
+          border-radius: $border-rad-mega;
+          object-fit: cover;
+          display: block;
         }
       }
       [class^=pb_online_status] {
