@@ -19,6 +19,7 @@ const TimeRangeInlineDark = () => (
     <br />
     <br />
     <TimeRangeInline
+        alignment="center"
         dark
         endTime="2012-08-02T17:49:29Z"
         size="xs"
@@ -27,6 +28,7 @@ const TimeRangeInlineDark = () => (
     />
     <br />
     <TimeRangeInline
+        alignment="center"
         dark
         endTime="2012-08-02T17:49:29Z"
         size="sm"
@@ -36,6 +38,7 @@ const TimeRangeInlineDark = () => (
     <br />
     <br />
     <TimeRangeInline
+        alignment="center"
         dark
         endTime="2012-08-02T17:49:29Z"
         icon="true"
@@ -44,6 +47,7 @@ const TimeRangeInlineDark = () => (
     />
     <br />
     <TimeRangeInline
+        alignment="center"
         dark
         endTime="2012-08-02T17:49:29Z"
         icon="true"
@@ -53,6 +57,7 @@ const TimeRangeInlineDark = () => (
     <br />
     <br />
     <TimeRangeInline
+        alignment="right"
         dark
         endTime="2012-08-02T17:49:29Z"
         icon="true"
@@ -62,6 +67,7 @@ const TimeRangeInlineDark = () => (
     />
     <br />
     <TimeRangeInline
+        alignment="right"
         dark
         endTime="2012-08-02T17:49:29Z"
         icon="true"

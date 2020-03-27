@@ -2,7 +2,7 @@
     id: object.id,
     data: object.data,
     class: object.classname) do %>
-      <span class="align-<%= object.alignment %>">
+      <div class="align-<%= object.alignment %>">
         <% text_kit = "caption" %>
         <% text_timezone_color = nil %>
         <% if object.size == "sm" %>
@@ -18,5 +18,5 @@
         <% if object.timezone == true %>
           <%= pb_rails(text_kit, props: { tag: "span", color: text_timezone_color, classname:"space-left", text: object.pb_date_end_time.to_timezone.upcase }) %>
         <% end %>
-      </span>
+      </div>
 <% end %>

@@ -17,6 +17,7 @@ const TimeRangeInlineDefault = () => (
     <br />
     <br />
     <TimeRangeInline
+        alignment="center"
         endTime="2012-08-02T17:49:29Z"
         size="xs"
         startTime="2012-08-02T15:49:29Z"
@@ -24,6 +25,7 @@ const TimeRangeInlineDefault = () => (
     />
     <br />
     <TimeRangeInline
+        alignment="center"
         endTime="2012-08-02T17:49:29Z"
         size="sm"
         startTime="2012-08-02T15:49:29Z"
@@ -32,6 +34,7 @@ const TimeRangeInlineDefault = () => (
     <br />
     <br />
     <TimeRangeInline
+        alignment="center"
         endTime="2012-08-02T17:49:29Z"
         icon="true"
         size="xs"
@@ -39,6 +42,7 @@ const TimeRangeInlineDefault = () => (
     />
     <br />
     <TimeRangeInline
+        alignment="center"
         endTime="2012-08-02T17:49:29Z"
         icon="true"
         size="sm"
@@ -47,6 +51,7 @@ const TimeRangeInlineDefault = () => (
     <br />
     <br />
     <TimeRangeInline
+        alignment="right"
         endTime="2012-08-02T17:49:29Z"
         icon="true"
         size="xs"
@@ -55,6 +60,7 @@ const TimeRangeInlineDefault = () => (
     />
     <br />
     <TimeRangeInline
+        alignment="right"
         endTime="2012-08-02T17:49:29Z"
         icon="true"
         size="sm"
