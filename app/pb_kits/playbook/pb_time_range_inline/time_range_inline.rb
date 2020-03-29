@@ -20,7 +20,7 @@ module Playbook
       prop :timezone, default: false
 
       def classname
-        generate_classname("pb_time_range_inline_kit", dark_class)
+        generate_classname("pb_time_range_inline_kit", dark_class, alignment)
       end
 
       def format_start_time_string
@@ -45,6 +45,21 @@ module Playbook
 
       def pb_date_end_time
         Playbook::PbKit::PbDateTime.new(end_time)
+      end
+
+      def text_timezone_color
+        return "light" if size == "sm"
+
+        nil
+      end
+
+      def text_kit
+        case size
+        when "xs"
+          "caption"
+        when "sm"
+          "body"
+        end
       end
 
     private

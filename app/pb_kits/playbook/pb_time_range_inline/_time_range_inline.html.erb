@@ -2,22 +2,15 @@
     id: object.id,
     data: object.data,
     class: object.classname) do %>
-      <div class="align-<%= object.alignment %>">
-        <% text_kit = "caption" %>
-        <% text_timezone_color = nil %>
-        <% if object.size == "sm" %>
-          <% text_kit = "body" %>
-          <% text_timezone_color = "light" %>
-        <% end %>
-        <% html_icon = "" %>
+      <div class="pb_time_range_inline_wrapper">
         <% if object.icon == true %>
-          <% html_icon = pb_rails("icon", props: { icon: "clock", dark: object.dark, classname:"space-right", fixed_width: true, size: object.size }) %>
+          <%= pb_rails(object.text_kit, props: { tag: "span", dark: object.dark, text: pb_rails("icon", props: { icon: "clock", dark: object.dark, classname:"pb_time_range_inline_icon", fixed_width: true, size: object.size }) }) %>
         <% end %>
-        <%= pb_rails(text_kit, props: { tag: "span", dark: object.dark, text: html_icon + object.format_start_time_string }) %>
-        <%= pb_rails(text_kit, props: { tag: "span", dark: object.dark, classname:"dash", text: "—" }) %>
-        <%= pb_rails(text_kit, props: { tag: "span", dark: object.dark, text: object.format_end_time_string }) %>
+        <%= pb_rails(object.text_kit, props: { tag: "span", dark: object.dark, text: object.format_start_time_string }) %>
+        <%= pb_rails(object.text_kit, props: { tag: "span", dark: object.dark, classname:"pb_time_range_inline_dash", text: "—" }) %>
+        <%= pb_rails(object.text_kit, props: { tag: "span", dark: object.dark, text: object.format_end_time_string }) %>
         <% if object.timezone == true %>
-          <%= pb_rails(text_kit, props: { tag: "span", color: text_timezone_color, classname:"space-left", text: object.pb_date_end_time.to_timezone.upcase }) %>
+          <%= pb_rails(object.text_kit, props: { tag: "span", color: object.text_timezone_color, classname:"pb_time_range_inline_timezone", text: object.pb_date_end_time.to_timezone.upcase }) %>
         <% end %>
       </div>
 <% end %>

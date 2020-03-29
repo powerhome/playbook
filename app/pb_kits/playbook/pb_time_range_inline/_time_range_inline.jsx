@@ -43,13 +43,13 @@ const TimeRangeInline = ({
   startTime,
   endTime,
 }: TimeRangeInlineProps) => {
-  const separator = `${' — '}`
+  const separator = `${'—'}`
 
   const iconContent = () => {
     return (
       <If condition={icon}>
         <Icon
-            className="space-right"
+            className="pb_time_range_inline_icon"
             dark={dark}
             fixedWidth
             icon="clock"
@@ -61,8 +61,8 @@ const TimeRangeInline = ({
   }
 
   return (
-    <div className={classnames('pb_time_range_inline_kit', className)}>
-      <div className={'align-' + alignment}>
+    <div className={classnames('pb_time_range_inline_kit_' + alignment, className)}>
+      <div className="pb_time_range_inline_wrapper">
         <If condition={size == 'xs'}>
           <Caption
               dark={dark}
@@ -72,7 +72,7 @@ const TimeRangeInline = ({
             <time dateTime={dateTimeIso(startTime)}>{` ${dateTimestamp(startTime)} `}</time>
           </Caption>
           <Caption
-              className="dash"
+              className="pb_time_range_inline_dash"
               dark={dark}
               tag="span"
           >
@@ -86,6 +86,7 @@ const TimeRangeInline = ({
           </Caption>
           <If condition={timezone}>
             <Caption
+                className="pb_time_range_inline_timezone"
                 dark={dark}
                 tag="span"
             >
@@ -102,7 +103,7 @@ const TimeRangeInline = ({
             <time dateTime={dateTimeIso(startTime)}>{` ${dateTimestamp(startTime)} `}</time>
           </Body>
           <Body
-              className="dash"
+              className="pb_time_range_inline_dash"
               dark={dark}
               tag="span"
           >
@@ -116,7 +117,7 @@ const TimeRangeInline = ({
           </Body>
           <If condition={timezone}>
             <Body
-                className="space-left"
+                className="pb_time_range_inline_timezone"
                 color="light"
                 dark={dark}
                 tag="span"
