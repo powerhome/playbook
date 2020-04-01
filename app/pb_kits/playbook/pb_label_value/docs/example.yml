@@ -2,8 +2,9 @@ examples:
   
   rails:
   - label_value_default: Default
+  - label_value_dark: Dark
   
   
   react:
   - label_value_default: Default
-  
+  - label_value_dark: Dark
