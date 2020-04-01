@@ -6,4 +6,12 @@
   [class^=pb_caption_kit]  {
     margin-bottom: $space-xs/1.5;
   }
+  &[class*=_dark]  {
+    [class^=pb_caption_kit] {
+      color: $text_dk_light;
+    }
+    [class^=pb_body_kit] {
+      color: $text_dk_default;
+    }
+  }
 }

@@ -1,21 +1,38 @@
+/* @flow */
+
 import React from 'react'
-import PropTypes from 'prop-types'
+import classnames from 'classnames'
+import { Body, Caption } from '../'
 
-const propTypes = {
-  className: PropTypes.string,
-  id: PropTypes.string,
+type LabelValueProps = {
+  className?: String,
+  label?: String,
+  value?: String,
+  dark?: Boolean
 }
 
-class LabelValue extends React.Component {
-  render() {
-    return (
-      <div className="pb_label_value">
-        <span>{'LABEL VALUE CONTENT'}</span>
-      </div>
-    )
-  }
-}
+const LabelValue = ({
+  className,
+  label,
+  value,
+  dark = false,
+}: LabelValueProps) => {
+  const themeStyle = dark === true ? '_dark' : ''
+  const css = classnames([
+    'pb_label_value_kit' + themeStyle,
+    className,
+  ])
 
-LabelValue.propTypes = propTypes
+  return (
+    <div className={css}>
+      <Caption
+          text={label}
+      />
+      <Body
+          text={value}
+      />
+    </div>
+  )
+}
 
 export default LabelValue
