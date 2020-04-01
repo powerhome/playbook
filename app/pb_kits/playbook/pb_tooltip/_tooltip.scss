@@ -1,0 +1,23 @@
+@import "../tokens/positioning";
+
+[class^="pb_tooltip_kit"] {
+  .tooltip_tooltip {
+    display: none;
+    &.show {
+      display: block;
+      z-index: $z_9;
+    }
+  }
+}
+
+.pb_tooltip_reference_wrapper {
+  display: inline-block;
+}
+
+.showme {
+  display: none;
+}
+
+.showhim:hover .showme {
+  display: block;
+}

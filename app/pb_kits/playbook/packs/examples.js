@@ -83,6 +83,7 @@ import * as Title from 'pb_title/docs'
 import * as TitleCount from 'pb_title_count/docs'
 import * as TitleDetail from 'pb_title_detail/docs'
 import * as Toggle from 'pb_toggle/docs'
+import * as Tooltip from 'pb_tooltip/docs'
 import * as User from 'pb_user/docs'
 import * as UserBadge from 'pb_user_badge/docs'
 import * as WeekdayStacked from 'pb_weekday_stacked/docs'
@@ -158,6 +159,7 @@ WebpackerReact.setup({
   ...TitleCount,
   ...TitleDetail,
   ...Toggle,
+  ...Tooltip,
   ...User,
   ...UserBadge,
   ...WeekdayStacked,

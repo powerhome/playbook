@@ -1,0 +1,8 @@
+examples:
+
+  rails:
+  - tooltip_default: Default
+
+
+  react:
+  - tooltip_default: Default

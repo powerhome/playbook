@@ -1,0 +1,10 @@
+<%= content_tag(:div,
+  id: object.id,
+  data: object.data,
+  class: object.classname) do %>
+    <div class="tooltip_tooltip" id="<%= object.tooltip_id %>" role="tooltip">
+      <%= pb_rails("card", props: {shadow: "deeper"}) do %>
+        <%= capture(&object.children) %>
+      <% end %>
+    </div>
+<% end %>
