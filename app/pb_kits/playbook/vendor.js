@@ -11,6 +11,9 @@ import 'lazysizes'
 import PbPopover from './pb_popover'
 PbPopover.start()
 
+import PbTooltip from './pb_tooltip'
+PbTooltip.start()
+
 import PbTypeahead from './pb_typeahead'
 PbTypeahead.start()
 

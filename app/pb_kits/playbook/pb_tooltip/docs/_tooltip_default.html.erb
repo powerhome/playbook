@@ -1,9 +1,15 @@
 <span id='regular-tooltip-1'>Click Me.</span>
-<%= pb_rails("tooltip", props: {trigger_element_id: "regular-tooltip-1", tooltip_id: "tooltip-1", position: 'right', offset: false, classname: "showme" }) do %>
-    Whoa. I'm a popover.
+
+<%= pb_rails("tooltip", props: {
+  trigger_element_id: "regular-tooltip-1",
+  tooltip_id: "tooltip-1",
+  position: 'top'
+}) do %>
+    Whoa. I'm a tooltip.
 <% end %>
 
-
+<!--
 <div class="showhim">HOVER ME
   <div class="showme">hai</div>
 </div>
+-->
