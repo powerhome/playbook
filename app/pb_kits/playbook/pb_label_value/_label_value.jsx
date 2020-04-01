@@ -6,8 +6,8 @@ import { Body, Caption } from '../'
 
 type LabelValueProps = {
   className?: String,
-  label?: String,
-  value?: String,
+  label: String,
+  value: String,
   dark?: Boolean
 }
 
