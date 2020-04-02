@@ -31,6 +31,7 @@ import * as DateRangeStacked from 'pb_date_range_stacked/docs'
 import * as DateStacked from 'pb_date_stacked/docs'
 import * as DateYearStacked from 'pb_date_year_stacked/docs'
 import * as DistributionBar from 'pb_distribution_bar/docs'
+import * as FileUpload from 'pb_file_upload/docs'
 import * as Filter from 'pb_filter/docs'
 import * as FixedConfirmationToast from 'pb_fixed_confirmation_toast/docs'
 import * as Flex from 'pb_flex/docs'
@@ -102,6 +103,7 @@ WebpackerReact.setup({
   ...DateStacked,
   ...DateYearStacked,
   ...DistributionBar,
+  ...FileUpload,
   ...Filter,
   ...FixedConfirmationToast,
   ...Flex,

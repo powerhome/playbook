@@ -5,6 +5,10 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+# Unreleased
+- New Kit - File Upload Kit ([#730](https://github.com/powerhome/playbook/pull/730) @thestephenmarshall)
+  - Make doc tabs intelligently sense whether an example is available for either Rails or React versions of a kit and show accordingly
+
 ## [4.10.0] 2020-4-10
 - Added Filter only & Sort only templates to filter kit + React Version ([#702](https://github.com/powerhome/playbook/pull/702)@kre8sions)
 - Add onClick prop to kits in need ([#694](https://github.com/powerhome/playbook/pull/694) @thestephenmarshall)
