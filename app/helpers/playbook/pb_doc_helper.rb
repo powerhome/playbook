@@ -9,9 +9,11 @@ module Playbook
     def has_kit_type?(kit, type)
       type ||= "rails"
       if type == "rails"
-        Dir["playbook/pb_#{kit}/*.html.erb"].empty?
+        erbfiles = File.join("**", "*.erb")
+        Dir.glob(erbfiles, base: "#{kit_path(kit)}/docs").present?
       elsif type == "react"
-        Dir["playbook/pb_#{kit}/*.jsx"].empty?
+        jsxfiles = File.join("**", "*.jsx")
+        Dir.glob(jsxfiles, base: "#{kit_path(kit)}/docs").present?
       end
     end
 
@@ -23,7 +25,11 @@ module Playbook
       end
     end
 
-    def get_kit_description(_kit)
+    def kit_path(kit)
+      "#{Playbook::Engine.root}/app/pb_kits/playbook/pb_#{kit}"
+    end
+
+    def get_kit_description(kit)
       filename = "#{Playbook::Engine.root}/app/pb_kits/playbook/pb_#{@kit}/docs/_description.md"
       read_file(filename)
     end
