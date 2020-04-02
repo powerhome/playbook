@@ -2,9 +2,7 @@
 @import "../pb_textarea/textarea_mixin";
 
 .pb_rich_text_editor {
-
     trix-editor {
         @include pb_textarea_light;
     }
-
 }

@@ -61,6 +61,7 @@ import * as Pill from 'pb_pill/docs'
 import * as ProgressPills from 'pb_progress_pills/docs'
 import * as ProgressSimple from 'pb_progress_simple/docs'
 import * as Radio from 'pb_radio/docs'
+import * as RichTextEditor from 'pb_rich_text_editor/docs'
 import * as SectionSeparator from 'pb_section_separator/docs'
 import * as Select from 'pb_select/docs'
 import * as SelectableCard from 'pb_selectable_card/docs'
@@ -129,6 +130,7 @@ WebpackerReact.setup({
   ...ProgressPills,
   ...ProgressSimple,
   ...Radio,
+  ...RichTextEditor,
   ...SectionSeparator,
   ...Select,
   ...SelectableCard,
@@ -148,5 +150,4 @@ WebpackerReact.setup({
   ...User,
   ...UserBadge,
 })
-import * as RichTextEditor from 'pb_rich_text_editor/docs'
-WebpackerReact.setup(RichTextEditor)
+
