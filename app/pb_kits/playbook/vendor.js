@@ -16,3 +16,5 @@ PbTypeahead.start()
 
 import PbTable from './pb_table'
 PbTable.start()
+
+import 'trix'
