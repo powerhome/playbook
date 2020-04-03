@@ -2,7 +2,9 @@ examples:
 
   rails:
   - tooltip_default: Default
+  - tooltip_dark: Dark
 
 
   react:
   - tooltip_default: Default
+  - tooltip_dark: Dark

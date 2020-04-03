@@ -9,6 +9,8 @@ module Playbook
       prop :position
       prop :trigger_element_id
       prop :tooltip_id
+      prop :dark, type: Playbook::Props::Boolean,
+                          default: false
 
       def classname
         generate_classname("pb_tooltip_kit")

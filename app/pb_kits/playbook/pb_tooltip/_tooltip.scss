@@ -3,21 +3,47 @@
 [class^="pb_tooltip_kit"] {
   .tooltip_tooltip {
     display: none;
+    &::after{
+      content: " ";
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      margin-left: -10px;
+      border-width: 10px;
+      border-style: solid;
+      margin-bottom: 50px;
+      border-color: white transparent transparent transparent;
+    }
     &.show {
       display: block;
       z-index: $z_9;
+      margin-bottom: $space_sm;
+      background-color: white;
+      padding: $space_sm;
+      box-shadow: $shadow_deeper;
+      border-radius: 3px;
+    }
+    &._dark{
+      &::after{
+        opacity: 85%;
+        border-color: $bg_dark transparent transparent transparent;
+      }
+      &.show{
+      opacity: 85%;
+      background-color: $bg_dark;
+      }
     }
   }
 }
 
+
+
+.tooltip_tooltip.top {
+  padding: 5px 0;
+}
+
+
 .pb_tooltip_reference_wrapper {
   display: inline-block;
-}
 
-.showme {
-  display: none;
-}
-
-.showhim:hover .showme {
-  display: block;
 }
