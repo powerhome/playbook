@@ -8,11 +8,3 @@
 <% end %>
 
 
-<%= content_tag(:div,
-  id: object.id,
-  data: object.data,
-  class: object.classname) do %>
-    <div class="tooltip_tooltip_dark" id="<%= object.tooltip_id %>" role="tooltip">
-      <%= capture(&object.children) %>
-    </div>
-<% end %>

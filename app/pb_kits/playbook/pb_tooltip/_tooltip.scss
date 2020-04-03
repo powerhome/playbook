@@ -23,7 +23,9 @@
       box-shadow: $shadow_deeper;
       border-radius: 3px;
     }
-    &._dark{
+  }
+  &[class*=_dark]{
+    .tooltip_tooltip{
       &::after{
         opacity: 85%;
         border-color: $bg_dark transparent transparent transparent;
@@ -34,6 +36,7 @@
       }
     }
   }
+  
 }
 
 

@@ -13,7 +13,7 @@ module Playbook
                           default: false
 
       def classname
-        generate_classname("pb_tooltip_kit")
+        generate_classname("pb_tooltip_kit",dark_class)
       end
 
       def data
@@ -23,6 +23,11 @@ module Playbook
           pb_tooltip_trigger_element_id: trigger_element_id,
           pb_tooltip_tooltip_id: tooltip_id,
         )
+      end
+
+      private
+      def dark_class
+        dark ? "dark" : nil
       end
     end
   end
