@@ -1,8 +1,146 @@
 @import "~trix/dist/trix.css";
 @import "../pb_textarea/textarea_mixin";
+@import "../pb_button/_button_mixins";
+@import "../tokens/border_radius";
+@import "../tokens/colors";
+@import "../tokens/typography";
+@import "../tokens/opacity";
+@import "../tokens/spacing";
+@import "../pb_icon/icon";
 
-.pb_rich_text_editor {
-    trix-editor {
-        @include pb_textarea_light;
+
+
+[class^=pb_rich_text_editor_kit] {
+  trix-editor {
+    background-color: $focus_input_light;
+    @include pb_textarea_light;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+  }
+
+  trix-toolbar {
+    .trix-button--icon {
+      height: $space_lg;
+      width: $space_lg;
+      margin: $space_xs / 2;
+      border-radius: $space_xs / 4;
+      &::before {
+        background-size: auto;
+      }
     }
+    .trix-button-row {
+      border: 1px solid #E4E8F0;
+      border-bottom: none;
+      padding: $space_xs / 2;
+      border-top-left-radius: $border_rad_heavier;
+      border-top-right-radius: $border_rad_heavier;
+
+      .trix-button-group {
+        margin-bottom: 0 !important;
+        border: none !important;
+  
+        .trix-button {
+          border: none;
+
+          &.trix-active {
+            background: $bg_light;
+          }
+        }
+      } 
+    }
+  }
+
+  // Trix doesn't provide customization to their icons. 
+  // https://github.com/basecamp/trix/issues/464#issuecomment-564683997
+  
+  &[class*=_dark] {
+    // Dark SVG Icon Styles
+    .trix-button--icon-bold::before {
+      background-image: url("data:image/svg+xml,%3Csvg width='11px' height='14px' viewBox='0 0 11 14' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'%3E%3Cg id='Symbols' stroke='none' stroke-width='1' fill='none' fill-rule='evenodd' fill-opacity='0.6'%3E%3Cg id='Rich-Text/Dark/Field-Only/Empty' transform='translate(-19.000000, -17.000000)' fill='%23FFFFFF' fill-rule='nonzero'%3E%3Cg id='Styling1' transform='translate(7.000000, 7.000000)'%3E%3Cpath d='M20.6,16.79 C21.565,16.115 22.25,15.025 22.25,14 C22.25,11.745 20.505,10 18.25,10 L12,10 L12,24 L19.04,24 C21.135,24 22.75,22.3 22.75,20.21 C22.75,18.69 21.885,17.395 20.6,16.79 Z M15,12.5 L18,12.5 C18.83,12.5 19.5,13.17 19.5,14 C19.5,14.83 18.83,15.5 18,15.5 L15,15.5 L15,12.5 L15,12.5 Z M18.5,21.5 L15,21.5 L15,18.5 L18.5,18.5 C19.33,18.5 20,19.17 20,20 C20,20.83 19.33,21.5 18.5,21.5 Z' id='Shape'%3E%3C/path%3E%3C/g%3E%3C/g%3E%3C/g%3E%3C/svg%3E");    
+    }
+
+    .trix-button--icon-italic::before {
+      background-image: url("data:image/svg+xml,%3Csvg width='12px' height='14px' viewBox='0 0 12 14' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'%3E%3Cg id='Symbols' stroke='none' stroke-width='1' fill='none' fill-rule='evenodd' fill-opacity='0.6'%3E%3Cg id='Rich-Text/Dark/Field-Only/Empty' transform='translate(-52.000000, -17.000000)' fill='%23FFFFFF' fill-rule='nonzero'%3E%3Cg id='Styling1' transform='translate(7.000000, 7.000000)'%3E%3Cpolygon id='Shape' points='49 10 49 13 51.215 13 47.785 21 45 21 45 24 53 24 53 21 50.785 21 54.215 13 57 13 57 10'%3E%3C/polygon%3E%3C/g%3E%3C/g%3E%3C/g%3E%3C/svg%3E");    
+    }
+
+    .trix-button--icon-strike::before {
+      background-image: url("data:image/svg+xml,%3Csvg width='18px' height='15px' viewBox='0 0 18 15' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'%3E%3Cg id='Symbols' stroke='none' stroke-width='1' fill='none' fill-rule='evenodd' fill-opacity='0.6'%3E%3Cg id='Rich-Text/Dark/Field-Only/Empty' transform='translate(-83.000000, -17.000000)' fill='%23FFFFFF' fill-rule='nonzero'%3E%3Cg id='Styling1' transform='translate(7.000000, 7.000000)'%3E%3Cpath d='M90.938,19.2 C90.979,19.439 91,19.69 91,19.954 C91,20.823 90.753,21.594 90.259,22.268 C89.765,22.942 89.052,23.466 88.121,23.84 C87.19,24.213 86.098,24.4 84.845,24.4 C83.799,24.4 82.9219,24.335 82.2129,24.204 C81.5039,24.073 80.7663,23.844 80,23.519 L80,23.519 L80,20.146 C80.8092,20.517 81.6507,20.806 82.5244,21.013 C83.398,21.221 84.2,21.325 84.931,21.325 C85.561,21.325 86.023,21.227 86.316,21.032 C86.61,20.838 86.757,20.587 86.757,20.28 C86.757,20.089 86.698,19.921 86.58,19.777 C86.461,19.634 86.272,19.488 86.01,19.341 C85.944,19.304 85.85,19.257 85.728,19.2 L85.728,19.2 Z M94,16.2 L94,18.2 L76,18.2 L76,16.2 L94,16.2 Z M86.026,10 C87.652,10 89.31,10.3353 91,11.006 L89.7,13.9281 C88.232,13.3277 86.965,13.0275 85.897,13.0275 C85.346,13.0275 84.945,13.1138 84.694,13.2862 C84.444,13.4587 84.318,13.6727 84.318,13.9281 C84.318,14.2028 84.478,14.4487 84.796,14.6659 C84.975,14.7877 85.326,14.9657 85.848,15.2 L80.2303,15.2 C80.1484,14.8642 80.1074,14.4978 80.1074,14.1006 C80.1074,12.8104 80.6338,11.8044 81.6865,11.0826 C82.7393,10.3609 84.186,10 86.026,10 Z' id='Combined-Shape'%3E%3C/path%3E%3C/g%3E%3C/g%3E%3C/g%3E%3C/svg%3E");    
+    }
+
+    .trix-button--icon-link::before {
+      background-image: url("data:image/svg+xml,%3Csvg width='18px' height='18px' viewBox='0 0 18 18' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'%3E%3Cg id='Symbols' stroke='none' stroke-width='1' fill='none' fill-rule='evenodd' fill-opacity='0.6'%3E%3Cg id='Rich-Text/Dark/Field-Only/Empty' transform='translate(-117.000000, -15.000000)' fill='%23FFFFFF' fill-rule='nonzero'%3E%3Cg id='Styling1' transform='translate(7.000000, 7.000000)'%3E%3Cpath d='M120.695234,15.0178906 C122.367547,16.6902031 122.367547,19.4110156 120.695234,21.0833281 L117.320234,24.4583281 C116.510234,25.2683281 115.433047,25.7143906 114.287234,25.7143906 C113.141422,25.7143906 112.064234,25.2683281 111.254234,24.4583281 C109.581922,22.7860156 109.581922,20.0652031 111.254234,18.3928906 L113.178729,16.4902344 C113.535917,16.1330469 114.114729,16.1330469 114.471354,16.4902344 C114.827979,16.8474219 114.828542,17.4256719 114.471354,17.7828594 L112.546859,19.6855156 C111.587234,20.6451406 111.587234,22.2060781 112.546859,23.1657031 C113.011484,23.6303281 113.629672,23.8862656 114.287234,23.8862656 C114.944797,23.8862656 115.562422,23.6303281 116.027609,23.1657031 L119.402609,19.7907031 C120.362234,18.8310781 120.362234,17.2701406 119.402609,16.3105156 C119.045422,15.9533281 119.045422,15.3750781 119.402609,15.0178906 C119.759797,14.6607031 120.338047,14.6607031 120.695234,15.0178906 Z M123.287234,8 C124.433047,8 125.509672,8.4460625 126.320234,9.2560625 C127.992547,10.928375 127.992547,13.6491875 126.320234,15.3215 L124.358055,17.0365667 C124.000867,17.3937542 123.422617,17.3937542 123.06543,17.0365667 C122.708242,16.6793792 122.708242,16.1011292 123.06543,15.7439417 L125.027609,14.028875 C125.987234,13.06925 125.987234,11.5083125 125.027609,10.5486875 C124.562984,10.0840625 123.944797,9.828125 123.287234,9.828125 C122.629672,9.828125 122.012047,10.0840625 121.546859,10.5486875 L118.171859,13.9236875 C117.212234,14.8833125 117.212234,16.44425 118.171859,17.403875 C118.529047,17.7610625 118.529047,18.3393125 118.171859,18.6965 C117.993547,18.8748125 117.759547,18.96425 117.525547,18.96425 C117.291547,18.96425 117.057547,18.8748125 116.879234,18.6965 C115.206922,17.0241875 115.206922,14.303375 116.879234,12.6310625 L120.254234,9.2560625 C121.064234,8.4460625 122.141422,8 123.287234,8 Z' id='Combined-Shape'%3E%3C/path%3E%3C/g%3E%3C/g%3E%3C/g%3E%3C/svg%3E");    
+    }
+
+    .trix-button--icon-heading-1::before {
+      background-image: url("data:image/svg+xml,%3Csvg width='19px' height='15px' viewBox='0 0 19 15' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'%3E%3Cg id='Symbols' stroke='none' stroke-width='1' fill='none' fill-rule='evenodd' fill-opacity='0.6'%3E%3Cg id='Rich-Text/Dark/Field-Only/Empty' transform='translate(-171.000000, -17.000000)' fill='%23FFFFFF' fill-rule='nonzero'%3E%3Cg id='Styling2' transform='translate(163.000000, 7.000000)'%3E%3Cpath d='M17,15.016 L17,18.016 L14,18.016 L14,25 L11,25 L11,18.016 L8,18.016 L8,15.016 L17,15.016 L17,15.016 Z M13.968,10 L26.999,10 L26.999,13 L21.983,13 L21.983,25 L18.983,25 L18.983,13 L13.967,13 L13.967,10 L13.968,10 Z' id='Shape'%3E%3C/path%3E%3C/g%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    }
+
+    .trix-button--icon-quote::before {
+      background-image: url("data:image/svg+xml,%3Csvg width='14px' height='10px' viewBox='0 0 14 10' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'%3E%3Cg id='Symbols' stroke='none' stroke-width='1' fill='none' fill-rule='evenodd' fill-opacity='0.6'%3E%3Cg id='Rich-Text/Dark/Field-Only/Empty' transform='translate(-207.000000, -19.000000)' fill='%23FFFFFF' fill-rule='nonzero'%3E%3Cg id='Styling2' transform='translate(163.000000, 7.000000)'%3E%3Cpath d='M45,22 L48,22 L50,18 L50,12 L44,12 L44,18 L47,18 L45,22 Z M53,22 L56,22 L58,18 L58,12 L52,12 L52,18 L55,18 L53,22 Z' id='Shape'%3E%3C/path%3E%3C/g%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    }
+
+    .trix-button--icon-code::before {
+      background-image: url("data:image/svg+xml,%3Csvg width='18px' height='10px' viewBox='0 0 18 10' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'%3E%3Cg id='Symbols' stroke='none' stroke-width='1' fill='none' fill-rule='evenodd' fill-opacity='0.6'%3E%3Cg id='Rich-Text/Dark/Field-Only/Empty' transform='translate(-239.000000, -19.000000)' fill='%23FFFFFF' fill-rule='nonzero'%3E%3Cg id='Styling2' transform='translate(163.000000, 7.000000)'%3E%3Cpath d='M91.17,16.585 L88,19.755 L89.415,21.17 L94,16.585 L89.415,12 L88,13.415 L91.17,16.585 Z M78.83,16.585 L82,13.415 L80.585,12 L76,16.585 L80.585,21.17 L82,19.755 L78.83,16.585 L78.83,16.585 Z' id='Shape'%3E%3C/path%3E%3C/g%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    }
+
+    .trix-button--icon-bullet-list::before {
+      background-image: url("data:image/svg+xml,%3Csvg width='20px' height='16px' viewBox='0 0 20 16' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'%3E%3Cg id='Symbols' stroke='none' stroke-width='1' fill='none' fill-rule='evenodd' fill-opacity='0.6'%3E%3Cg id='Rich-Text/Dark/Field-Only/Empty' transform='translate(-272.000000, -16.000000)' fill='%23FFFFFF' fill-rule='nonzero'%3E%3Cg id='Styling2' transform='translate(163.000000, 7.000000)'%3E%3Cpath d='M111,9 C109.8933,9 109,9.8933 109,11 C109,12.1067 109.8933,13 111,13 C112.1067,13 113,12.1067 113,11 C113,9.8933 112.1067,9 111,9 Z M111,15 C109.8933,15 109,15.893 109,17 C109,18.107 109.8933,19 111,19 C112.1067,19 113,18.107 113,17 C113,15.893 112.1067,15 111,15 Z M111,21 C109.8933,21 109,21.893 109,23 C109,24.107 109.8933,25 111,25 C112.1067,25 113,24.107 113,23 C113,21.893 112.1067,21 111,21 Z M115,24 L129,24 L129,22 L115,22 L115,24 Z M115,18 L129,18 L129,16 L115,16 L115,18 Z M115,10 L115,12 L129,12 L129,10 L115,10 Z' id='Shape'%3E%3C/path%3E%3C/g%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    }
+
+    .trix-button--icon-number-list::before {
+      background-image: url("data:image/svg+xml,%3Csvg width='19px' height='16px' viewBox='0 0 19 16' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'%3E%3Cg id='Symbols' stroke='none' stroke-width='1' fill='none' fill-rule='evenodd' fill-opacity='0.6'%3E%3Cg id='Rich-Text/Dark/Field-Only/Empty' transform='translate(-307.000000, -16.000000)' fill='%23FFFFFF' fill-rule='nonzero'%3E%3Cg id='Styling2' transform='translate(163.000000, 7.000000)'%3E%3Cpath d='M144,22 L146,22 L146,22.5 L145,22.5 L145,23.5 L146,23.5 L146,24 L144,24 L144,25 L147,25 L147,21 L144,21 L144,22 Z M145,13 L146,13 L146,9 L144,9 L144,10 L145,10 L145,13 Z M144,16 L145.8,16 L144,18.1 L144,19 L147,19 L147,18 L145.2,18 L147,15.9 L147,15 L144,15 L144,16 Z M149,10 L149,12 L163,12 L163,10 L149,10 Z M149,24 L163,24 L163,22 L149,22 L149,24 Z M149,18 L163,18 L163,16 L149,16 L149,18 Z' id='Shape'%3E%3C/path%3E%3C/g%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    }
+
+    .trix-button--icon-decrease-nesting-level::before {
+      background-image: url("data:image/svg+xml,%3Csvg width='21px' height='14px' viewBox='0 0 21 14' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'%3E%3Cg id='Symbols' stroke='none' stroke-width='1' fill='none' fill-rule='evenodd' fill-opacity='0.6'%3E%3Cg id='Rich-Text/Dark/Field-Only/Empty' transform='translate(-340.000000, -17.000000)' fill='%23FFFFFF' fill-rule='nonzero'%3E%3Cg id='Styling2' transform='translate(163.000000, 7.000000)'%3E%3Cpath d='M179,24 L198,24 L198,22 L179,22 L179,24 L179,24 Z M186,18 L198,18 L198,16 L186,16 L186,18 L186,18 Z M177.707107,17.7426407 L180.535534,20.5710678 L181.949747,19.1568542 L179.828427,17.0355339 L181.949747,14.9142136 L180.535534,13.5 L177,17.0355339 L177.707107,17.7426407 Z M179,10 L179,12 L198,12 L198,10 L179,10 Z' id='Shape'%3E%3C/path%3E%3C/g%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    }
+
+    .trix-button--icon-increase-nesting-level::before {
+      background-image: url("data:image/svg+xml,%3Csvg width='21px' height='14px' viewBox='0 0 21 14' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'%3E%3Cg id='Symbols' stroke='none' stroke-width='1' fill='none' fill-rule='evenodd' fill-opacity='0.6'%3E%3Cg id='Rich-Text/Dark/Field-Only/Empty' transform='translate(-374.000000, -17.000000)' fill='%23FFFFFF' fill-rule='nonzero'%3E%3Cg id='Styling2' transform='translate(163.000000, 7.000000)'%3E%3Cpath d='M213,24 L232,24 L232,22 L213,22 L213,24 L213,24 Z M220,18 L232,18 L232,16 L220,16 L220,18 L220,18 Z M213.12132,17.0355339 L211,19.1568542 L212.414214,20.5710678 L215.949747,17.0355339 L215.242641,16.3284271 L212.414214,13.5 L211,14.9142136 L213.12132,17.0355339 Z M213,10 L213,12 L232,12 L232,10 L213,10 Z' id='Shape-Copy'%3E%3C/path%3E%3C/g%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    }
+
+    .trix-button--icon-attach::before {
+      background-image: url("data:image/svg+xml,%3Csvg width='11px' height='22px' viewBox='0 0 11 22' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'%3E%3Cg id='Symbols' stroke='none' stroke-width='1' fill='none' fill-rule='evenodd'%3E%3Cg id='Rich-Text/Dark/Field-Only/Default' transform='translate(-385.000000, -139.000000)' fill='%23ABAFC2' fill-rule='nonzero'%3E%3Cg id='For-Future' transform='translate(338.000000, 139.000000)'%3E%3Cpath d='M56.5,5 L56.5,16.5 C56.5,18.71 54.71,20.5 52.5,20.5 C50.29,20.5 48.5,18.71 48.5,16.5 L48.5,4 C48.5,2.62 49.62,1.5 51,1.5 C52.38,1.5 53.5,2.62 53.5,4 L53.5,14.5 C53.5,15.05 53.055,15.5 52.5,15.5 C51.945,15.5 51.5,15.05 51.5,14.5 L51.5,5 L50,5 L50,14.5 C50,15.88 51.12,17 52.5,17 C53.88,17 55,15.88 55,14.5 L55,4 C55,1.79 53.21,0 51,0 C48.79,0 47,1.79 47,4 L47,16.5 C47,19.54 49.465,22 52.5,22 C55.535,22 58,19.54 58,16.5 L58,5 L56.5,5 Z' id='Path'%3E%3C/path%3E%3C/g%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    }
+
+    .trix-button--icon-undo::before {
+      background-image: url("data:image/svg+xml,%3Csvg width='21px' height='9px' viewBox='0 0 21 9' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'%3E%3Cg id='Symbols' stroke='none' stroke-width='1' fill='none' fill-rule='evenodd' fill-opacity='0.6'%3E%3Cg id='Rich-Text/Dark/Field-Only/Empty' transform='translate(-666.000000, -20.000000)' fill='%23FFFFFF' fill-rule='nonzero'%3E%3Cg id='Undo/Redo' transform='translate(659.000000, 7.000000)'%3E%3Cpath d='M17.5,14 C14.855,14 12.445,14.985 10.6,16.6 L7,13 L7,22 L16,22 L12.385,18.385 C13.77,17.22 15.545,16.5 17.5,16.5 C21.045,16.5 24.045,18.805 25.095,22 L27.46,21.22 C26.085,17.03 22.15,14 17.5,14 Z' id='Path'%3E%3C/path%3E%3C/g%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    }
+
+    .trix-button--icon-redo::before {
+      background-image: url("data:image/svg+xml,%3Csvg width='21px' height='9px' viewBox='0 0 21 9' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'%3E%3Cg id='Symbols' stroke='none' stroke-width='1' fill='none' fill-rule='evenodd' fill-opacity='0.6'%3E%3Cg id='Rich-Text/Dark/Field-Only/Empty' transform='translate(-700.000000, -20.000000)' fill='%23FFFFFF' fill-rule='nonzero'%3E%3Cg id='Undo/Redo' transform='translate(659.000000, 7.000000)'%3E%3Cpath d='M57.855,16.6 C56.015,14.985 53.605,14 50.96,14 C46.31,14 42.375,17.03 41,21.22 L43.365,22 C44.415,18.805 47.415,16.5 50.96,16.5 C52.915,16.5 54.69,17.22 56.075,18.385 L52.46,22 L61.46,22 L61.46,13 L57.855,16.6 Z' id='Path'%3E%3C/path%3E%3C/g%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    }
+
+
+    // Placeholder Dark Mode
+    trix-editor:empty:not(:focus)::before {
+      color: $text_dk_light;
+    }
+
+    trix-editor {
+      @include pb_textarea_dark;
+      background: #2f3968;
+      border-top-left-radius: 0;
+      border-top-right-radius: 0;
+    }
+
+    trix-toolbar {
+      .trix-button-row {
+        background: #2f3968;
+        border: 1px solid rgba(255, 255, 255, 0.1) !important;
+      }
+    }
+
+    trix-editor:focus {
+      @include pb_textarea_focus_dark;
+    }
+
+    &.error {
+      > trix-editor {
+        border-color: $error_dark;
+      }
+    }
+  }
 }
+
+

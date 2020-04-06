@@ -8,7 +8,7 @@ module Playbook
 
 
       def classname
-        generate_classname("pb_rich_text_editor")
+        generate_classname("pb_rich_text_editor_kit")
       end
     end
   end

@@ -5,19 +5,24 @@ import classnames from 'classnames'
 
 type RichTextEditorProps = {
   className?: String,
+  dark?: Boolean
 }
 
-const RichTextEditor = ({
-  className,
-}: RichTextEditorProps) => (
-  <div>
-    <input
-        className={classnames('pb_rich_text_editor_kit', className)}
-        id="trix"
-        type="hidden"
-    />
-    <trix-editor input="trix" />
-  </div>
-)
+const RichTextEditor = ({ className, dark = false }: RichTextEditorProps) => {
+  const RichTextEditorClass = `pb_rich_text_editor_kit${dark ? '_dark' : ''}`
+
+  return (
+    <div className={classnames(RichTextEditorClass, className)}>
+      <input
+          id="trix"
+          type="hidden"
+      />
+      <trix-editor
+          input="trix"
+          placeholder="Empty Placeholder"
+      />
+    </div>
+  )
+}
 
 export default RichTextEditor
