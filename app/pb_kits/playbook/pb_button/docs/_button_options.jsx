@@ -5,6 +5,7 @@ const ButtonOptions = () => (
   <div>
     <Button
         htmlType="submit"
+        onClick={() => alert('Click!')}
         text="Button with options"
         value="1234"
     />
