@@ -1,33 +1,37 @@
-<%= pb_rails("title", props: {size: 4, text: "None"}) %><br/>
+<div class="flex-doc-example">
 
-<%= pb_rails("flex", props: {classname: "flex-container"}) do %>
-  <%= pb_rails("flex/flex_item") do %>1<% end %>
-  <%= pb_rails("flex/flex_item") do %>2<% end %>
-<% end %>
+  <%= pb_rails("title", props: {size: 4, text: "None"}) %><br/>
 
-<br/><br/>
+  <%= pb_rails("flex", props: {classname: "flex-container"}) do %>
+    <%= pb_rails("flex/flex_item") do %>1<% end %>
+    <%= pb_rails("flex/flex_item") do %>2<% end %>
+  <% end %>
 
-<%= pb_rails("title", props: {size: 4, text: "Around"}) %><br/>
+  <br/><br/>
 
-<%= pb_rails("flex", props: {classname: "flex-container", spacing: "around"}) do %>
-  <%= pb_rails("flex/flex_item") do %>1<% end %>
-  <%= pb_rails("flex/flex_item") do %>2<% end %>
-<% end %>
+  <%= pb_rails("title", props: {size: 4, text: "Around"}) %><br/>
 
-<br/><br/>
+  <%= pb_rails("flex", props: {classname: "flex-container", spacing: "around"}) do %>
+    <%= pb_rails("flex/flex_item") do %>1<% end %>
+    <%= pb_rails("flex/flex_item") do %>2<% end %>
+  <% end %>
 
-<%= pb_rails("title", props: {size: 4, text: "Evenly"}) %><br/>
+  <br/><br/>
 
-<%= pb_rails("flex", props: {classname: "flex-container", spacing: "evenly"}) do %>
-  <%= pb_rails("flex/flex_item") do %>1<% end %>
-  <%= pb_rails("flex/flex_item") do %>2<% end %>
-<% end %>
+  <%= pb_rails("title", props: {size: 4, text: "Evenly"}) %><br/>
 
-<br/><br/>
+  <%= pb_rails("flex", props: {classname: "flex-container", spacing: "evenly"}) do %>
+    <%= pb_rails("flex/flex_item") do %>1<% end %>
+    <%= pb_rails("flex/flex_item") do %>2<% end %>
+  <% end %>
 
-<%= pb_rails("title", props: {size: 4, text: "Between"}) %><br/>
+  <br/><br/>
 
-<%= pb_rails("flex", props: {classname: "flex-container", spacing: "between"}) do %>
-  <%= pb_rails("flex/flex_item") do %>1<% end %>
-  <%= pb_rails("flex/flex_item") do %>2<% end %>
-<% end %>
+  <%= pb_rails("title", props: {size: 4, text: "Between"}) %><br/>
+
+  <%= pb_rails("flex", props: {classname: "flex-container", spacing: "between"}) do %>
+    <%= pb_rails("flex/flex_item") do %>1<% end %>
+    <%= pb_rails("flex/flex_item") do %>2<% end %>
+  <% end %>
+
+</div>
