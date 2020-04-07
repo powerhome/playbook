@@ -13,7 +13,6 @@ type IconProps = {
   id?: String,
   inverse?: Boolean,
   listItem?: Boolean,
-  onClick?: EventHandler,
   pull?: 'left' | 'right' | 'none',
   pulse?: Boolean,
   rotation?: 90 | 180 | 270,
@@ -36,7 +35,6 @@ const Icon = ({
   id,
   inverse = false,
   listItem = false,
-  onClick = () => {},
   pull,
   pulse = false,
   rotation,
@@ -60,7 +58,6 @@ const Icon = ({
     <i
         className={classes}
         id={id}
-        onClick={onClick}
     />
   )
 }
