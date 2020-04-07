@@ -2,6 +2,7 @@ examples:
   rails:
   - card_light: Default
   - card_highlight: Highlight Cards
+  - card_header: Header Cards
   - card_selected: Selected
   - card_padding: Padding Size
   - card_shadow: Shadow Size
@@ -10,6 +11,7 @@ examples:
   react:
   - card_light: Default
   - card_highlight: Highlight Cards
+  - card_header: Header Cards
   - card_selected: Selected
   - card_padding: Padding Size
   - card_shadow: Shadow Size
