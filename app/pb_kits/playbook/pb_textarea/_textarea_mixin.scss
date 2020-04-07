@@ -37,10 +37,18 @@
     box-shadow: none;
     opacity: 0.5;
   }
+  &:-webkit-autofill,
+  &:-webkit-autofill:hover,
+  &:-internal-autofill-selected {
+    -webkit-text-fill-color: $text_color;
+    -webkit-box-shadow: 0 0 0px 1000px transparent inset;
+    transition: background-color 5000s ease-in-out 0s;
+    font-family: $font_family_base;
+  }
 }
 
 @mixin pb_textarea_focus($focus_color: $focus_input_light) {
-  background-color: $focus_color;
+  background-color: $focus_color !important;
 }
 
 // Textarea ======================
