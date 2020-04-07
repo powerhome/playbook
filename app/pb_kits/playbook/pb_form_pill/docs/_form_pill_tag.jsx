@@ -4,7 +4,10 @@ import FormPill from '../_form_pill.jsx'
 const FormPillDefault = () => {
   return (
     <div>
-      <FormPill text="this is a tag" />
+      <FormPill
+          onClick={() => alert('Click!')}
+          text="this is a tag"
+      />
     </div>
   )
 }

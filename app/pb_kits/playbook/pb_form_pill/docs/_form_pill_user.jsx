@@ -8,10 +8,14 @@ const FormPillDefault = () => {
       <FormPill
           avatarUrl="https://randomuser.me/api/portraits/women/44.jpg"
           name="Anna Black"
+          onClick={() => alert('Click!')}
       />
       <br />
       <br />
-      <FormPill name="Anna Black" />
+      <FormPill
+          name="Anna Black"
+          onClick={() => alert('Click!')}
+      />
     </div>
   )
 }
