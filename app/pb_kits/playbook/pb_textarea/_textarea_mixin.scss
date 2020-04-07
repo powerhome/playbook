@@ -21,7 +21,7 @@
   overflow: auto;
   overflow-wrap: break-word;
   resize: none;
-  transition-property: border-color, box-shadow, color, background-color;
+  transition-property: box-shadow, color, background-color;
   transition-duration: .24s;
   transition-timing-function: $bezier;
   &[type=number] {
