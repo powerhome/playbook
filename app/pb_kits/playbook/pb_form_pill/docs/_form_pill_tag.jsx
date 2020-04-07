@@ -5,9 +5,7 @@ const FormPillDefault = () => {
   return (
     <div>
       <FormPill
-          onClick={() => {
-alert('Click!')
-}}
+          onClick={() => alert('Click!')}
           text="this is a tag"
       />
     </div>
