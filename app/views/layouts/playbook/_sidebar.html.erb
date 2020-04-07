@@ -1,25 +1,28 @@
 <br>
-<%= pb_rails("nav", props: {title: "Kits", link: kits_path, variant: "subtle"}) do %>
+<% all_link = @type == 'react' ? kits_path('', type: 'react') : kits_path %>
+<%= pb_rails("nav", props: {title: "Kits", link: all_link, variant: "subtle"}) do %>
   <% all_active = (controller_name == 'pages' && action_name == 'kits') ? true : false %>
-  <% pb_rails("nav/item", props: { text: "All", link: kits_path, active: all_active }) %>
-
+  <% pb_rails("nav/item", props: { text: "All", link: all_link, active: all_active }) %>
   <% MENU["kits"].each do |link| %>
     <% active = !@kit.nil? && @kit == link ? true : false %>
     <% if link.is_a?(Hash) %>
       <div class="category_section">
         <% active = !@category.nil? && @category == nav_hash_category(link) ? true : false %>
-        <%= pb_rails("nav/item", props: { active: active, classname: "category", icon_right: "angle-down", link: kit_category_show_path(nav_hash_category(link)) }) do %>
+        <% cat_link = @type == 'react' ? kit_category_show_path(nav_hash_category(link), type: 'react') : kit_category_show_path(nav_hash_category(link), type: 'rails') %>
+        <%= pb_rails("nav/item", props: { active: active, classname: "category", icon_right: "angle-down", link: cat_link }) do %>
           <%= pb_kit_title(nav_hash_category(link)) %>
         <% end %>
         <%= pb_rails("nav", props: { variant: "subtle", classname: "sub_category"}) do %>
           <% nav_hash_array(link).each do |sub_link| %>
             <% sub_active = !@kit.nil? && @kit == sub_link ? true : false %>
-            <%= pb_rails("nav/item", props: { text: pb_kit_title(sub_link), link: kit_show_path(sub_link), active: sub_active }) %>
+            <% sub_cat_link = @type == 'react' ? kit_show_reacts_path(sub_link) : kit_show_path(sub_link) %>
+            <%= pb_rails("nav/item", props: { text: pb_kit_title(sub_link), link: sub_cat_link, active: sub_active }) %>
           <% end %>
         <% end %>
       </div>
     <% else %>
-      <%= pb_rails("nav/item", props: { text: pb_kit_title(link), link: kit_show_path(link), active: active }) %>
+      <% reg_link = @type == 'react' ? kit_show_reacts_path(link) : kit_show_path(link) %>
+      <%= pb_rails("nav/item", props: { text: pb_kit_title(link), link: reg_link, active: active }) %>
     <% end %>
   <% end %>
 <% end %>
