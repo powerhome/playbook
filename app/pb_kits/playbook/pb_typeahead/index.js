@@ -26,7 +26,7 @@ export default class PbTypeahead extends PbEnhancedElement {
   search() {
     if (this.searchTerm.length < this.searchTermMinimumLength) return this.clearResults()
 
-    this.toggleResultsLoadingIndicator(1)
+    this.toggleResultsLoadingIndicator(true)
     this.showResults()
 
     const searchTerm = this.searchTerm
@@ -64,7 +64,7 @@ export default class PbTypeahead extends PbEnhancedElement {
   showResults() {
     if (!this.resultsOptionCache.has(this.searchTermAndContext)) return
 
-    this.toggleResultsLoadingIndicator(0)
+    this.toggleResultsLoadingIndicator(false)
     this.clearResults()
     for (const result of this.resultsOptionCache.get(this.searchTermAndContext)) {
       this.resultsElement.appendChild(this.newResultOption(result.cloneNode(true)))
@@ -192,7 +192,9 @@ export default class PbTypeahead extends PbEnhancedElement {
     )
   }
 
-  toggleResultsLoadingIndicator(visibilityProperty) {
+  toggleResultsLoadingIndicator(visible) {
+    var visibilityProperty = 0
+    if (visible) visibilityProperty = 1
     this.resultsLoadingIndicator.style.opacity = visibilityProperty
   }
 }

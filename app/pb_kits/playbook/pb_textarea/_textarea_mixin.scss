@@ -48,7 +48,7 @@
 }
 
 @mixin pb_textarea_focus($focus_color: $focus_input_light) {
-  background-color: $focus_color !important;
+  background-color: $focus_color;
 }
 
 // Textarea ======================

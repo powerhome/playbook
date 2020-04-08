@@ -17,8 +17,8 @@
   }
 
   [class^=pb_text_input_kit] {
-    input {
-      padding-right: $space_xl !important;
+    .text_input_wrapper > input:first-child {
+      padding-right: $space_xl;
     }
   }
 
@@ -29,7 +29,7 @@
       background-color: $bg_light;
     }
   }
-  // &:focus-within
+  
   [class^=pb_list_kit] {
     max-height: 18em;
     overflow-y: auto;

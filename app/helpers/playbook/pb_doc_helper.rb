@@ -98,6 +98,50 @@ module Playbook
       link.first.last
     end
 
+    def all_link(type)
+      type == "react" ? kits_path("", type: "react") : kits_path
+    end
+
+    def category_link(type, link)
+      if type == "react"
+        kit_category_show_path(nav_hash_category(link), type: "react")
+      else
+        kit_category_show_path(nav_hash_category(link), type: "rails")
+      end
+    end
+
+    def sub_category_link(type, link)
+      if type == "react"
+        kit_show_reacts_path(link)
+      else
+        kit_show_path(link)
+      end
+    end
+
+    def kit_link(type, link)
+      if type == "react"
+        kit_show_reacts_path(link)
+      else
+        kit_show_path(link)
+      end
+    end
+
+    def all_active(controller_name, action_name)
+      (controller_name == "pages" && action_name == "kits")
+    end
+
+    def category_active(category, link)
+      (!category.nil? && category == nav_hash_category(link))
+    end
+
+    def kit_active(kit, link)
+      (!kit.nil? && kit == link)
+    end
+
+    def sub_category_active(kit, link)
+      (!kit.nil? && @kit == link)
+    end
+
   private
 
     def get_kit_examples(kit, type)
