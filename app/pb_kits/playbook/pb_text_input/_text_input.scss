@@ -1,5 +1,7 @@
 @import "../pb_textarea/textarea_mixin";
 @import "../pb_title/title_mixin";
+@import "../tokens/colors";
+
 
 [class^=pb_text_input_kit] {
   .pb_text_input_kit_label {
@@ -21,8 +23,10 @@
       overflow: hidden;
     }
 
-    input:focus {
+    input:focus, input:-webkit-autofill:focus {
       @include pb_textarea_focus;
+      -webkit-box-shadow: 0 0 0px 1000px $focus_input_light inset;
+      transition: background-color 5000s ease-in-out 0s;
     }
   }
 
@@ -41,8 +45,10 @@
         overflow: hidden;
       }
 
-      input:focus {
+      input:focus, input:-webkit-autofill:focus {
         @include pb_textarea_focus_dark;
+        -webkit-box-shadow: 0 0 0px 1000px $focus_input_dark inset;
+        transition: background-color 5000s ease-in-out 0s;
       }
     }
 

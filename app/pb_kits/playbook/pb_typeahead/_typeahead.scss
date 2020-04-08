@@ -1,3 +1,6 @@
+@import "../tokens/colors";
+@import "../tokens/border_radius";
+
 [class^=pb_typeahead_kit] {
   .pb_typeahead_wrapper {
     position: relative;
@@ -6,14 +9,16 @@
       position: absolute;
       width: min-content;
       bottom: 0.6em;
-      left: 1em;
-      visibility: hidden;
+      right: 1em;
+      opacity: 0;
+      color: $text_lt_light;
+      transition: opacity .15s ease-in-out;
     }
   }
 
   [class^=pb_text_input_kit] {
-    input {
-      padding-left: $space_xl !important;
+    .text_input_wrapper > input:first-child {
+      padding-right: $space_xl;
     }
   }
 
@@ -24,8 +29,8 @@
       background-color: $bg_light;
     }
   }
-
-  &:focus-within [class^=pb_list_kit] {
+  
+  [class^=pb_list_kit] {
     max-height: 18em;
     overflow-y: auto;
     overscroll-behavior: contain;
@@ -35,23 +40,33 @@
     background: white;
     box-shadow: $shadow_deep;
     z-index: 100;
+    border-radius: $border_rad_heavier;
+    transition: opacity .25s ease-in-out;
+  }
+
+  &:focus-within [class^=pb_list_kit] {
+    display: block;
+    opacity: 1;
   }
 
   &:not(:focus-within) [class^=pb_list_kit] {
     display: none;
+    opacity: 0;
   }
 
   [class^=pb_list_kit] {
     margin-top: -$space-sm;
-
+    li {
+      transition: background-color .25s ease-in-out;
+    }
     & > [data-pb-typeahead-kit-results] > li {
       &:focus-within {
-        background: $bg_light;
+        background-color: $active_light;
       }
 
       > button {
         background: none;
-        color: inherit;
+        color: $text_lt_default;
         border: none;
         padding: 0;
         font: inherit;
@@ -61,6 +76,12 @@
         height: 100%;
         text-align: left;
       }
+    }
+  }
+
+  &[class*=_dark] {
+    .pb_typeahead_wrapper .pb_typeahead_loading_indicator {
+      color: $text_dk_light;
     }
   }
 }
