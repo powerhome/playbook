@@ -70,6 +70,7 @@ kits:
     - stat_value
     - time
     - timestamp
+    - time_range_inline
     - title_count
     - title_detail
   - user
