@@ -3,17 +3,11 @@
 <%end%>
 
 <%= pb_rails("filter", props: {
-  id: "1",
+  id: "fo",
   filters: [
     {name: "name", value: "John Wick"}
     ],
-  sort_menu: [
-    {item:"Popularity", link:"#", active: true, direction:"desc"},
-    {item:"Title", link:"#", active: false},
-    {item:"Name", link:"#", active: false},
-  ],
-  template:"default",
-  results: 546,
+  template:"filter_only"
   }) do%>
 <%
   example_collection = [

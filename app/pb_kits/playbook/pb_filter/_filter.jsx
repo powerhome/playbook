@@ -1,7 +1,18 @@
 /* @flow */
 
-import React from 'react'
-import { Button, Caption, Card, CircleIconButton, Flex, Icon, PbReactPopover, SectionSeparator, Title, TitleCount } from '../'
+import React, { useState } from 'react'
+import {
+  Button,
+  Caption,
+  Card,
+  CircleIconButton,
+  Flex,
+  Icon,
+  PbReactPopover,
+  SectionSeparator,
+  Title,
+  TitleCount,
+} from '../'
 
 type FilterProps = {
   className?: String,
@@ -17,9 +28,22 @@ const Filter = ({
   data,
   id,
   children,
-  sortMenu,
-  filters,
 }: FilterProps) => {
+  const [showFilterOptions, setShowFilterOptions] = useState(false)
+  const handleToggleFilters = () => {
+    setShowFilterOptions(!showFilterOptions)
+  }
+
+  const filterButton = (
+    <CircleIconButton
+        icon="filter"
+        id="filter"
+        onClick={handleToggleFilters}
+        text="filter"
+        variant="secondary"
+    />
+  )
+
   return (
     <div
         className={className}
@@ -31,16 +55,18 @@ const Filter = ({
             orientation="row"
             vertical="center"
         >
-          <CircleIconButton
-              icon="filter"
-              id="filter"
-              variant="secondary"
-          />
+          <PbReactPopover
+              placement="bottom"
+              reference={filterButton}
+              show={showFilterOptions}
+          >
+            {children}
+          </PbReactPopover>
           <div className="maskContainer">
             <div className="filters">
               <div className="left_gradient" />
               <div className="filter">
-                <Caption text={`${filters[0].name}`} />
+                <Caption text="{`${filters[0].name}`}" />
                 <Title
                     size={4}
                     tag="h4"
@@ -70,7 +96,7 @@ const Filter = ({
             <Caption text="sort by:" />
             <Button
                 id="sort-button"
-                text={`${sortMenu[0].item}`}
+                text={'`${sortMenu[0].item}`'}
                 variant="link"
             >
               <Icon />
@@ -78,9 +104,7 @@ const Filter = ({
           </Flex>
         </Flex>
       </Card>
-      <PbReactPopover>
-        {children}
-      </PbReactPopover>
+
     </div>
   )
 }

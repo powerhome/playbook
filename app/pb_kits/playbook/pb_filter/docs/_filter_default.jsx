@@ -1,9 +1,7 @@
 import React from 'react'
 
 const FilterDefault = () => (
-  <div>
-    <h1>{'Coming Soon!'}</h1>
-  </div>
+  <h1>{'Coming Soon...'}</h1>
 )
 
 export default FilterDefault
