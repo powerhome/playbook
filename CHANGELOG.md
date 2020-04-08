@@ -9,6 +9,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Add onClick prop to kits in need ([#694](https://github.com/powerhome/playbook/pull/694) @thestephenmarshall)
 - Add Renovate bot ([#492](https://github.com/powerhome/playbook/pull/492) @viniciusgama)
 
+- Raise Rubocop version from 0.72.0 to 0.81.0 ([#699](https://github.com/powerhome/playbook/pull/699) @garettarrowood)
+
 ## [4.10.0] 2020-4-2
 - Added react and dark version for Label Value Kit ([#688](https://github.com/powerhome/playbook/pull/688) @christinaatai)
 
