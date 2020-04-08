@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Raise Rubocop version from 0.72.0 to 0.81.0 ([#699](https://github.com/powerhome/playbook/pull/699) @garettarrowood)
 - Fixed flexbox docs, autofill form color, typeahead loading position + dark mode, fixed react navigation Playbook ([#696](https://github.com/powerhome/playbook/pull/696) @jasoncypret)
 - New Kit - Time Range Inline ([#680](https://github.com/powerhome/playbook/pull/680) @evertoncunha)
+- New Kit - Weekday Stacked ([#705](https://github.com/powerhome/playbook/pull/705) @thestephenmarshall)
 
 ## [4.10.0] 2020-4-2
 - Added react and dark version for Label Value Kit ([#688](https://github.com/powerhome/playbook/pull/688) @christinaatai)

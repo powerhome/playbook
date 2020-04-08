@@ -73,5 +73,6 @@ kits:
     - time_range_inline
     - title_count
     - title_detail
+    - weekday_stacked
   - user
   - user_badge

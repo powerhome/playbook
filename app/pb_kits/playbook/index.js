@@ -68,6 +68,7 @@ export TitleCount from './pb_title_count/_title_count.jsx'
 export Toggle from './pb_toggle/_toggle.jsx'
 export User from './pb_user/_user.jsx'
 export UserBadge from './pb_user_badge/_user_badge.jsx'
+export WeekdayStacked from './pb_weekday_stacked/_weekday_stacked.jsx'
 
 // Dashboard Settings
 export { commonSettings, dataColors } from './pb_dashboard/commonSettings'
