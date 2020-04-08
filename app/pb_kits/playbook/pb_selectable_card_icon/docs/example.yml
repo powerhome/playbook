@@ -1,0 +1,9 @@
+examples:
+  
+  rails:
+  - selectable_card_icon_default: Default
+  
+  
+  react:
+  - selectable_card_icon_default: Default
+  
