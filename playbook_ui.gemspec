@@ -35,7 +35,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency "overcommit", "0.49.0"
   s.add_development_dependency "rainbow", "2.2.2"
   s.add_development_dependency "rspec-rails", "~> 3.8.0"
-  s.add_development_dependency "rubocop", "0.72.0"
+  s.add_development_dependency "rubocop", "0.81.0"
   s.add_development_dependency "simple_form", ">= 5.0.1", "< 6.0.0"
   s.add_development_dependency "spring", "2.0.2"
   s.add_development_dependency "spring-watcher-listen", "2.0.1"

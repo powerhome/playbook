@@ -6,7 +6,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## Unreleased
-- Added Filter only & Sort only templates to filter kit (@kre8sions) 
+
+- Added Filter only & Sort only templates to filter kit ([#702](https://github.com/powerhome/playbook/pull/702)@kre8sions) 
+- Add onClick prop to kits in need ([#694](https://github.com/powerhome/playbook/pull/694) @thestephenmarshall)
+- Add Renovate bot ([#492](https://github.com/powerhome/playbook/pull/492) @viniciusgama)
+- Raise Rubocop version from 0.72.0 to 0.81.0 ([#699](https://github.com/powerhome/playbook/pull/699) @garettarrowood)
+- Fixed flexbox docs, autofill form color, typeahead loading position + dark mode, fixed react navigation Playbook ([#696](https://github.com/powerhome/playbook/pull/696) @jasoncypret)
+- New Kit - Time Range Inline ([#680](https://github.com/powerhome/playbook/pull/680) @evertoncunha)
+
 
 ## [4.10.0] 2020-4-2
 - Added react and dark version for Label Value Kit ([#688](https://github.com/powerhome/playbook/pull/688) @christinaatai)

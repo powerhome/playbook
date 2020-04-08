@@ -6,4 +6,5 @@ examples:
   
   react:
   - circle_icon_button_default: Default
+  - circle_icon_button_click: Click Handler
   - circle_icon_button_dark: Dark

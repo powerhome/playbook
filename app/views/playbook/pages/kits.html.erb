@@ -1,0 +1,12 @@
+<div class="pb--kits">
+  <%= pb_rails("title", props: { text: "Kits", tag: "h1", size: 1 }) %>
+  <br>
+  <%= pb_rails("nav", props: { orientation: "horizontal" }) do %>
+    <%= pb_rails("nav/item", props: { text: "Rails", link: kits_path('', type: 'rails'), active: @type == 'rails' }) %>
+    <%= pb_rails("nav/item", props: { text: "React", link: kits_path('', type: 'react'), active: @type == 'react' }) %>
+  <% end %>
+  <%= pb_rails("section_separator") %>
+  <br>
+  <br>
+  <%= pb_kits(type: @type) %>
+</div>

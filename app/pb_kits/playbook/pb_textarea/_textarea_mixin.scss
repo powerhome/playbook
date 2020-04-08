@@ -21,7 +21,7 @@
   overflow: auto;
   overflow-wrap: break-word;
   resize: none;
-  transition-property: border-color, box-shadow, color, background-color;
+  transition-property: box-shadow, color, background-color;
   transition-duration: .24s;
   transition-timing-function: $bezier;
   &[type=number] {
@@ -36,6 +36,14 @@
     background-color: shade($background_color, 5%);
     box-shadow: none;
     opacity: 0.5;
+  }
+  &:-webkit-autofill,
+  &:-webkit-autofill:hover,
+  &:-internal-autofill-selected {
+    -webkit-text-fill-color: $text_color;
+    -webkit-box-shadow: 0 0 0px 1000px transparent inset;
+    transition: background-color 5000s ease-in-out 0s;
+    font-family: $font_family_base;
   }
 }
 

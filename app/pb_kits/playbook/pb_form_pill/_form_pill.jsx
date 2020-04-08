@@ -47,11 +47,13 @@ const FormPill = ({
             text={text}
         />
       </If>
-      <div className="pb_form_pill_close">
+      <div
+          className="pb_form_pill_close"
+          onClick={onClick}
+      >
         <Icon
             fixedWidth
             icon="times"
-            onClick={onClick}
         />
       </div>
     </div>
