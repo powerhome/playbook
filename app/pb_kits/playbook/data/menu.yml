@@ -74,3 +74,4 @@ kits:
     - title_detail
   - user
   - user_badge
+  - date_time_stacked

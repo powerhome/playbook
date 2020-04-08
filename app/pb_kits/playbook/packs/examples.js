@@ -148,3 +148,5 @@ WebpackerReact.setup({
   ...User,
   ...UserBadge,
 })
+import * as DateTimeStacked from 'pb_date_time_stacked/docs'
+WebpackerReact.setup(DateTimeStacked)
