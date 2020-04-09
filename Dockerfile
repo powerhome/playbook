@@ -1,4 +1,4 @@
-FROM phusion/passenger-customizable:0.9.27
+FROM phusion/passenger-customizable:0.9.35
 ARG precompileassets
 
 RUN bash -lc 'rvm remove all --force && rvm install ruby-2.5.0 && rvm --default use ruby-2.5.0 && gem install bundler -v 1.16.1'
