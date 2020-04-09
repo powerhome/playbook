@@ -60,6 +60,7 @@ kits:
     - date_range_inline
     - date_range_stacked
     - date_stacked
+    - date_time_stacked
     - date_year_stacked
     - home_address_street
     - label_pill

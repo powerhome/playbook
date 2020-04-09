@@ -1,9 +1,11 @@
 examples:
-  
+
   rails:
   - date_time_stacked_default: Default
-  
-  
+  - date_time_stacked_dark: Dark
+
+
   react:
   - date_time_stacked_default: Default
-  
+  - date_time_stacked_dark: Dark
+

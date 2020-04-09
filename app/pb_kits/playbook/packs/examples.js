@@ -29,6 +29,7 @@ import * as Date from 'pb_date/docs'
 import * as DateRangeInline from 'pb_date_range_inline/docs'
 import * as DateRangeStacked from 'pb_date_range_stacked/docs'
 import * as DateStacked from 'pb_date_stacked/docs'
+import * as DateTimeStacked from 'pb_date_time_stacked/docs'
 import * as DateYearStacked from 'pb_date_year_stacked/docs'
 import * as DistributionBar from 'pb_distribution_bar/docs'
 import * as Filter from 'pb_filter/docs'
@@ -98,6 +99,7 @@ WebpackerReact.setup({
   ...DateRangeInline,
   ...DateRangeStacked,
   ...DateStacked,
+  ...DateTimeStacked,
   ...DateYearStacked,
   ...DistributionBar,
   ...Filter,
@@ -150,5 +152,3 @@ WebpackerReact.setup({
   ...User,
   ...UserBadge,
 })
-import * as DateTimeStacked from 'pb_date_time_stacked/docs'
-WebpackerReact.setup(DateTimeStacked)
