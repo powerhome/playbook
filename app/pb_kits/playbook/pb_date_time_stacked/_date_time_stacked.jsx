@@ -9,7 +9,6 @@ import {
 } from '../'
 
 type DateTimeStackedProps = {
-  className?: String,
   data?: String,
   id?: String,
   date: Date,
@@ -17,9 +16,6 @@ type DateTimeStackedProps = {
 }
 
 const DateTimeStacked = ({
-  className,
-  data,
-  id,
   date,
   dark,
 }: DateTimeStackedProps) => (
