@@ -1,0 +1,33 @@
+[class^=pb_time_range_inline_kit] {
+  &[class*=_center]  {
+    & > [class^=pb_caption],
+    & > [class^=pb_body] {
+      text-align: center;
+    }
+    & > [class*=pb_time_range_inline_wrapper] {
+      justify-content: center;
+    }
+  }
+  &[class*=_right] {
+    & > [class^=pb_caption],
+    & > [class^=pb_body] {
+      text-align: right;
+    }
+    & > [class*=pb_time_range_inline_wrapper] {
+      justify-content: flex-end;
+    }
+  }
+  [class^=pb_time_range_inline_wrapper] {
+    display: flex;
+    [class*=pb_time_range_inline_dash] {
+      margin-left: 4px;
+      margin-right: 4px;
+    }
+    [class*=pb_time_range_inline_timezone] {
+      margin-left: 4px;
+    }
+    [class*=pb_time_range_inline_icon] {
+      margin-right: 4px;
+    }
+  }
+}

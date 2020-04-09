@@ -1,12 +1,15 @@
-.pb--kit-show.flex-kit {
-  [class^=pb_flex_kit] { background: #F3F7FB; }
-
+.flex-doc-example {
+  overflow: auto;
+  [class^=pb_flex_kit] {
+    background: #F3F7FB;
+  }
   .flex-item, [class^=pb_flex_item_kit] {
     background: #E4E8F0;
     min-width: 30px;
     min-height: 30px;
     color: #242B42;
   }
-
-  .tall { min-height: 200px; }
+  .tall {
+    min-height: 200px;
+  }
 }

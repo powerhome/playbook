@@ -20,7 +20,7 @@ export default class DateTime {
   }
 
   convertToTimezone() {
-    return this.value.strftime('%a')
+    return this.value.strftime('%Z')
   }
 
   toYear() {
@@ -41,6 +41,18 @@ export default class DateTime {
 
   toWeekday() {
     return this.value.strftime('%a')
+  }
+
+  toHour() {
+    return this.value.strftime('%l')
+  }
+
+  toMinute() {
+    return this.value.strftime('%M')
+  }
+
+  toMeridian() {
+    return this.value.strftime('%P')[0]
   }
 
   toIso() {

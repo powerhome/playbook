@@ -14,6 +14,7 @@
 @import 'pb_date/date';
 @import 'pb_date_range_inline/date_range_inline';
 @import 'pb_date_range_stacked/date_range_stacked';
+@import 'pb_date_time_stacked/date_time_stacked';
 @import 'pb_date_stacked/date_stacked';
 @import 'pb_date_year_stacked/date_year_stacked';
 @import 'pb_distribution_bar/distribution_bar';
@@ -58,6 +59,8 @@
 @import 'pb_text_input/text_input';
 @import 'pb_textarea/textarea';
 @import 'pb_time/time';
+@import 'pb_time_range_inline/time_range_inline';
+@import 'pb_time_stacked/time_stacked';
 @import 'pb_timestamp/timestamp';
 @import 'pb_title_count/title_count';
 @import 'pb_title_detail/title_detail';
@@ -66,5 +69,3 @@
 @import 'pb_user/user';
 @import 'pb_user_badge/user_badge';
 @import 'pb_filter/filter';
-@import 'pb_date_time_stacked/date_time_stacked';
-@import 'pb_time_stacked/time_stacked';

@@ -72,6 +72,7 @@ kits:
     - time
     - time_stacked
     - timestamp
+    - time_range_inline
     - title_count
     - title_detail
   - user

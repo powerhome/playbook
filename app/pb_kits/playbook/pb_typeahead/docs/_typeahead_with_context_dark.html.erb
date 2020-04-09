@@ -1,6 +1,7 @@
 <%= pb_rails("select", props: {
   label: "Colors",
   name: "foo",
+  dark: true,
   data: { context_select: true },
   options: [
     { value: "red", value_text: "Red" },
@@ -11,7 +12,7 @@
     { value: "purple", value_text: "Purple" },
   ]
   }) %>
-<%= pb_rails("typeahead", props: { label: "Crayola Crayons", name: :foo, data: { typeahead_example2: true, search_context_value_selector: "[data-context-select] select" } }) %>
+<%= pb_rails("typeahead", props: { label: "Crayola Crayons", dark: true, name: :foo, data: { typeahead_example2: true, search_context_value_selector: "[data-context-select] select" } }) %>
 
 <br><br><br>
 

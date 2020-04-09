@@ -6,7 +6,9 @@ library identifier: 'ci-kubed@v3.1.0', retriever: modernSCM([
   credentialsId: 'powerci-github-ssh-key'
 ])
 
+def cluster = "APP-HQ"
 app.build(
+  cluster: cluster, 
   deployerVersion: "master-e4c01702624ac34f2663f894fbdb68a369b09629-588",
   resources: [
     requestCpu: '1',
@@ -19,7 +21,6 @@ app.build(
   def appImage
   def tag
   def scmVars
-  def cluster = "APP-HQ"
 
   stage('Code Checkout') {
     scmVars = checkout scm
@@ -43,6 +44,8 @@ app.build(
     sh "docker run --tty --rm ${appImage} bin/test"
   }
 
+  // This cluster MUST be the same as the cluster passed to `app.build` or weird shit
+  // will happen. Deploy using Milano instead.
   app.deployerStage('Deploy', cluster) {
     withCredentials([usernamePassword(
       credentialsId: 'jenkins-app-deploy-aws-access-key',

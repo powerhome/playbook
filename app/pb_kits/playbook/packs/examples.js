@@ -75,6 +75,7 @@ import * as TextInput from 'pb_text_input/docs'
 import * as Time from 'pb_time/docs'
 import * as TimeStacked from 'pb_time_stacked/docs'
 import * as Timestamp from 'pb_timestamp/docs'
+import * as TimeRangeInline from 'pb_time_range_inline/docs'
 import * as Title from 'pb_title/docs'
 import * as TitleCount from 'pb_title_count/docs'
 import * as TitleDetail from 'pb_title_detail/docs'
@@ -145,6 +146,7 @@ WebpackerReact.setup({
   ...Time,
   ...TimeStacked,
   ...Timestamp,
+  ...TimeRangeInline,
   ...Title,
   ...TitleCount,
   ...TitleDetail,
