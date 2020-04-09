@@ -40,7 +40,7 @@ RSpec.describe Playbook::PbTimeStacked::TimeStacked do
 
   describe "#format_time_string" do
     it "returns a formatted string" do
-      time = DateTime.current
+      time = "10:00am".to_datetime
       result = "#{time.strftime("%I:%M")}#{time.strftime("%P")[0, 1]}"
 
       expect(subject.new(date: time).format_time_string).to eq result
