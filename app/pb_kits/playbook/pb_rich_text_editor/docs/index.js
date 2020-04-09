@@ -1,2 +1,5 @@
 export { default as RichTextEditorDefault } from './_rich_text_editor_default.jsx'
 export { default as RichTextEditorDark } from './_rich_text_editor_dark.jsx'
+export { default as RichTextEditorSimple } from './_rich_text_editor_simple.jsx'
+export { default as RichTextEditorFocus } from './_rich_text_editor_focus.jsx'
+export { default as RichTextEditorSticky } from './_rich_text_editor_sticky.jsx'

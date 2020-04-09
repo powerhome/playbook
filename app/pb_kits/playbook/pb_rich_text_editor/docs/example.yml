@@ -3,9 +3,13 @@ examples:
   rails:
   - rich_text_editor_default: Default
   - rich_text_editor_dark: Dark
+
   
   
   react:
   - rich_text_editor_default: Default
   - rich_text_editor_dark: Dark
+  - rich_text_editor_simple: Simple
+  - rich_text_editor_focus: Focus
+  - rich_text_editor_sticky: Sticky
   

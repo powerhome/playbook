@@ -11,14 +11,63 @@
 
 
 [class^=pb_rich_text_editor_kit] {
+
+  // trix-toolbar { display: none; }
+  // Disables File Attatchment Button in Toolbar
+  trix-toolbar [data-trix-button-group="file-tools"] {
+    display: none;
+  }
+
+  // Simple Mode (shows only BOLD & ITALIC)
+  &.simple {
+    [data-trix-button-group="history-tools"] {
+      display: none;
+    }
+    [data-trix-button-group="text-tools"] {
+      [data-trix-attribute="strike"] {
+        display: none;
+      }
+      [data-trix-attribute="href"] {
+        display: none;
+      }
+    }
+    [data-trix-button-group="block-tools"] {
+      display: none;
+    }
+    [data-trix-button-group="file-tools"] {
+      display: none;
+    }
+  }
+
+  // Focused Styles for Border Radius
+  &.focus-editor-targets {
+    trix-toolbar {
+      display: none;
+    }
+    :not(.focused-editor) {
+      border-top-left-radius: $border_rad_heavier !important;
+      border-top-right-radius: $border_rad_heavier !important;
+    }
+  }
+
+  &.sticky {
+    trix-toolbar {
+      position: sticky;
+      top: 0;
+      z-index: 1;
+    }
+  }
+
+
   trix-editor {
-    background-color: $focus_input_light;
+    // background-color: $focus_input_light;
     @include pb_textarea_light;
     border-top-left-radius: 0;
     border-top-right-radius: 0;
   }
 
   trix-toolbar {
+    
     .trix-button--icon {
       height: $space_lg;
       width: $space_lg;
@@ -29,6 +78,7 @@
       }
     }
     .trix-button-row {
+      background: $white;
       border: 1px solid #E4E8F0;
       border-bottom: none;
       padding: $space_xs / 2;
@@ -49,6 +99,8 @@
       } 
     }
   }
+
+
 
   // Trix doesn't provide customization to their icons. 
   // https://github.com/basecamp/trix/issues/464#issuecomment-564683997
@@ -112,7 +164,9 @@
     }
 
 
-    // Placeholder Dark Mode
+
+
+    // Dark Mode Placeholder 
     trix-editor:empty:not(:focus)::before {
       color: $text_dk_light;
     }
