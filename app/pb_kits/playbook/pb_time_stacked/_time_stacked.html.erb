@@ -1,0 +1,11 @@
+<%= content_tag(:div,
+    id: object.id,
+    data: object.data,
+    class: object.classname) do %>
+
+    <div class="pb_time_stacked">
+      <%= pb_rails("caption", props: { text: object.format_time_string }) %>
+      <%= pb_rails("caption", props: { text: object.format_timezone }) %>
+    </div>
+
+<% end %>
