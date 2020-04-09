@@ -5003,9 +5003,10 @@ last-call-webpack-plugin@^3.0.0:
     lodash "^4.17.5"
     webpack-sources "^1.1.0"
 
-lazysizes@^4.1.6:
-  version "4.1.6"
-  resolved "https://registry.yarnpkg.com/lazysizes/-/lazysizes-4.1.6.tgz#a8b1e0cc6b6cf3ddc0a0e7c44768aeed27ca343a"
+lazysizes@^5.0.0:
+  version "5.2.0"
+  resolved "https://registry.yarnpkg.com/lazysizes/-/lazysizes-5.2.0.tgz#352c2f095e1528b190f61178c140522dcf9ffce4"
+  integrity sha512-931KnHwsdCm7U7/S0GDj6FSkPvQ3ugGw65J5Plp2Mq1gBTPl9VShU+cIIX6uRr+dit+APDLmvx1FwjDll5bHLQ==
 
 lcid@^1.0.0:
   version "1.0.0"
