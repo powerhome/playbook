@@ -71,6 +71,7 @@ kits:
     - person_contact
     - stat_value
     - time
+    - time_stacked
     - timestamp
     - time_range_inline
     - title_count
@@ -78,4 +79,3 @@ kits:
     - weekday_stacked
   - user
   - user_badge
-  - date_time_stacked
