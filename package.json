@@ -84,7 +84,7 @@
   },
   "resolutions": {
     "lodash": "^4.17.13",
-    "set-value": "^2.0.1"
+    "set-value": "^3.0.0"
   },
   "husky": {
     "hooks": {
