@@ -81,10 +81,6 @@ export default class DateTime {
     return this.value.strftime('%Z')
   }
 
-  toMeridian() {
-    return this.value.strftime('p')[0]
-  }
-
   toTimeWithMeridian() {
     return this.toTime() + this.toMeridian()
   }
