@@ -18,7 +18,7 @@ import {
 type PbTooltipProps = {
   className?: String,
   closeOnClick?: 'outside' | 'inside',
-  dark: boolean,
+  dark: Boolean,
   offset?: Boolean,
   reference: PopperReference,
   show?: Boolean,
@@ -70,7 +70,7 @@ const Popover = ({
   </Popper>
 )
 
-export default class PbReactTooltip extends React.Component<PbTooltipProps> {
+export default class Tooltip extends React.Component<PbTooltipProps> {
   static defaultProps = {
     modifiers: {},
     offset: false,

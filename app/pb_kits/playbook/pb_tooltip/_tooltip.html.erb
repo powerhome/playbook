@@ -4,5 +4,7 @@
   class: object.classname) do %>
     <div class="tooltip_tooltip" id="<%= object.tooltip_id %>" role="tooltip">
       <%= capture(&object.children) %>
+      <div class="arrow" id="<%= object.tooltip_id %>-arrow">
     </div>
+    
 <% end %>

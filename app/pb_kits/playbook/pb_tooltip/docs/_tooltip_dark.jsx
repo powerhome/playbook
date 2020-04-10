@@ -1,7 +1,5 @@
 import React, { useState } from 'react'
-import {
-  PbReactTooltip,
-} from '../..'
+import { Tooltip } from '../..'
 
 const TooltipDark = () => {
   const [showTooltip, setShowTooltip] = useState(false)
@@ -14,12 +12,13 @@ const TooltipDark = () => {
   )
 
   return (
-    <PbReactTooltip
+    <Tooltip
+        dark
         reference={popoverReference}
         show={showTooltip}
     >
       {'Whoa. I\'m a tooltip.'}
-    </PbReactTooltip>
+    </Tooltip>
   )
 }
 

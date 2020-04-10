@@ -15,6 +15,12 @@ export default class PbTooltip extends PbEnhancedElement {
         offset: {
           offset: POPOVER_OFFSET_Y,
         },
+        arrow: {
+          element: `#${this.tooltipId}-arrow`,
+          options: {
+            padding: 5, // 5px from the edges of the popper
+          },
+        },
       },
     })
 
