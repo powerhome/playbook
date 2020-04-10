@@ -4,8 +4,8 @@
     class: object.classname) do %>
 
     <div class="pb_time_stacked">
-      <%= pb_rails("caption", props: { text: object.format_time_string }) %>
-      <%= pb_rails("caption", props: { text: object.format_timezone }) %>
+      <%= pb_rails("body", props: { text: object.format_time_string, color: "light" }) %>
+      <%= pb_rails("body", props: { text: object.format_timezone, color: "light" }) %>
     </div>
 
 <% end %>

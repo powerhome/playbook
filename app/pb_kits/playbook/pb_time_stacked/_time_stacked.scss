@@ -3,7 +3,7 @@
 @import "../tokens/colors";
 
 
-[class^=pb_time_stacked_kit]{
+[class^=pb_time_stacked_kit] {
   &[class*=_dark] {
     & > * [class^=pb_title_kit] {
       color: $text_dk_default;
@@ -11,5 +11,12 @@
     & > * [class^=pb_caption_kit] {
       color: $text_dk_light;
     }
+  }
+
+  &[class*=_center]  {
+    text-align: center;
+  }
+  &[class*=_right]  {
+    text-align: right;
   }
 }

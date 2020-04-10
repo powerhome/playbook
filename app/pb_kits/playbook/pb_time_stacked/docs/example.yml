@@ -3,9 +3,13 @@ examples:
   rails:
   - time_stacked_default: Default
   - time_stacked_dark: Dark
+  - time_stacked_align: Alignment
+  - time_stacked_dark_align: Dark Alignment
 
 
   react:
   - time_stacked_default: Default
   - time_stacked_dark: Dark
+  - time_stacked_align: Alignment
+  - time_stacked_dark_align: Dark Alignment
 

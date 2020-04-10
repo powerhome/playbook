@@ -5,7 +5,7 @@ import classnames from 'classnames'
 
 import DateTime from '../pb_kit/dateTime.js'
 import { buildCss } from '../utilities/props'
-import { Caption } from '../'
+import { Body } from '../'
 
 type TimeStackedProps = {
   className?: String | Array<String>,
@@ -13,14 +13,16 @@ type TimeStackedProps = {
   data?: String,
   date: String,
   id?: String,
+  align?: 'left' | 'center' | 'right',
 }
 
 const TimeStacked = ({
   className,
   dark = false,
   date,
+  align = 'left',
 }: TimeStackedProps) => {
-  const classes = classnames(className, buildCss('pb_time_stacked_kit', {
+  const classes = classnames(className, buildCss('pb_time_stacked_kit', align, {
     'dark': dark,
   }))
 
@@ -29,10 +31,12 @@ const TimeStacked = ({
   return (
     <div className={classes}>
       <div className="pb_time_stacked_day_month">
-        <Caption
+        <Body
+            color="light"
             text={dateTimestamp.toTimeWithMeridian()}
         />
-        <Caption
+        <Body
+            color="light"
             text={dateTimestamp.toTimezone()}
         />
       </div>

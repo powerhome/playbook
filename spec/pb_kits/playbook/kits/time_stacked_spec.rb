@@ -9,8 +9,10 @@ RSpec.describe Playbook::PbTimeStacked::TimeStacked do
 
   it { is_expected.to define_prop(:dark)
                       .of_type(Playbook::Props::Boolean) }
+  it { is_expected.to define_enum_prop(:align)
+                      .with_values("left", "center", "right") }
   it { is_expected.to define_prop(:date)
-                      .of_type(Playbook::Props::Date)
+                      .of_type(Playbook::Props::Time)
                       .that_is_required }
   it { is_expected.to define_prop(:classnames)
                       .of_type(Playbook::Props::String)
@@ -18,21 +20,21 @@ RSpec.describe Playbook::PbTimeStacked::TimeStacked do
 
   describe "#month" do
     it "returns the date prop's month and month as a string" do
-      expect(subject.new(date: Date.today).month).to include Date.today.month.to_s
+      expect(subject.new(date: DateTime.current).month).to include DateTime.current.month.to_s
     end
   end
 
   describe "#day" do
     it "returns the date prop's day and month as a string" do
-      expect(subject.new(date: Date.today).day).to include Date.today.day.to_s
+      expect(subject.new(date: DateTime.current).day).to include DateTime.current.day.to_s
     end
   end
 
   describe "#classname" do
     it "returns namespaced class name", :aggregate_failures do
-      date = Date.today
+      date = DateTime.new(2020, 04, 06).in_time_zone("America/New_York")
 
-      expect(subject.new(date: date).classname).to eq "pb_time_stacked_kit"
+      expect(subject.new(date: date).classname).to eq "pb_time_stacked_kit_left"
       expect(subject.new(date: date, dark: true).classname).to include "_dark"
 
     end
@@ -40,7 +42,7 @@ RSpec.describe Playbook::PbTimeStacked::TimeStacked do
 
   describe "#format_time_string" do
     it "returns a formatted string" do
-      time = "10:00am".to_datetime
+      time = DateTime.new(2020, 04, 06, 10, 0, 0).in_time_zone("America/New_York")
       result = "#{time.strftime("%I:%M")}#{time.strftime("%P")[0, 1]}"
 
       expect(subject.new(date: time).format_time_string).to eq result
@@ -49,7 +51,9 @@ RSpec.describe Playbook::PbTimeStacked::TimeStacked do
 
   describe "#format_timezone" do
     it "returns a formatted timezone" do
-      expect(subject.new(date: DateTime.current).format_timezone).to eq "EDT"
+      date = DateTime.new(2020, 04, 06, 10, 0, 0).in_time_zone("America/New_York")
+
+      expect(subject.new(date: date).format_timezone).to eq "EDT"
     end
   end
 end
