@@ -1,0 +1,15 @@
+examples:
+  
+  rails:
+  - weekday_stacked_default: Default
+  - weekday_stacked_day_only: Day Only
+  - weekday_stacked_compact: Day Only - Compact
+  - weekday_stacked_dark: Dark
+  
+  
+  react:
+  - weekday_stacked_default: Default
+  - weekday_stacked_day_only: Day Only
+  - weekday_stacked_compact: Day Only - Compact
+  - weekday_stacked_dark: Dark
+  

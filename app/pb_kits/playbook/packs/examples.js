@@ -81,6 +81,7 @@ import * as TitleDetail from 'pb_title_detail/docs'
 import * as Toggle from 'pb_toggle/docs'
 import * as User from 'pb_user/docs'
 import * as UserBadge from 'pb_user_badge/docs'
+import * as WeekdayStacked from 'pb_weekday_stacked/docs'
 
 WebpackerReact.setup({
   ...Avatar,
@@ -151,4 +152,5 @@ WebpackerReact.setup({
   ...Toggle,
   ...User,
   ...UserBadge,
+  ...WeekdayStacked,
 })
