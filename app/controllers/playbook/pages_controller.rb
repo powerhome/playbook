@@ -15,7 +15,7 @@ module Playbook
     def tokens; end
 
     def kits
-      params[:type] ||= "rails"
+      params[:type] ||= "react"
       @type = params[:type]
     end
 
