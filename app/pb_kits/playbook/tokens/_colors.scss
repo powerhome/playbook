@@ -176,17 +176,19 @@ $primary_action:      $primary;
 // Product colors ---------------------
 $windows:             $royal;
 $siding:              $yellow;
-$doors:               $red;
+$doors:               $teal;
 $solar:               $green;
-$roofing:             $teal;
+$roofing:             $slate;
 $gutters:             $purple;
+$insulation:          $red;
 $product_colors: (
   windows:            $windows,
   siding:             $siding,
   doors:              $doors,
   solar:              $solar,
   roofing:            $roofing,
-  gutters:            $gutters
+  gutters:            $gutters,
+  insulation:         $insulation
 );
 
 $transparent: transparent;
