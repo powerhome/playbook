@@ -17,6 +17,8 @@ type CardPropTypes = {
   shadow?: 'none' | 'shallow' | 'default' | 'deep' | 'deeper' | 'deepest',
 }
 
+const Header = () => null
+
 const Card = ({
   children,
   className,
@@ -33,8 +35,22 @@ const Card = ({
     [`highlight_${highlight.color}`]: highlight.color,
   })
 
+  const renderHeader = () => {
+    const content = React.Children.map((children, child) => {
+      if (child.type.displayName === 'Header' || child.type.name === 'Header') {
+        return React.cloneElement(child)
+      }
+    })
+    return (
+      <div className="collapsible-card-top-content">
+        {content.length > 0 ? content[0].props.children : '' }
+      </div>
+    )
+  }
+
   return (
     <div className={classnames(cardCss, className)}>
+      {renderHeader()}
       <div className={bodyCSS}>
         {children}
       </div>
@@ -42,4 +58,5 @@ const Card = ({
   )
 }
 
+Card.Header = Header
 export default Card

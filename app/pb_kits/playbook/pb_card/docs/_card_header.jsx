@@ -1,13 +1,12 @@
 import React from 'react'
-import CardTest from '../_card_test.jsx'
-
+import Card from '../_card.jsx'
 
 const CardHeader = () => {
   return (
-      <CardTest>
-          <CardTest.Header>Header</CardTest.Header>
-          <CardTest.Body>Body</CardTest.Body>
-      </CardTest>
+    <Card>
+      <Card.Header>{'Header'}</Card.Header>
+      {'Body'}
+    </Card>
   )
 }
 
