@@ -35,6 +35,7 @@ kits:
   - layout
   - list
   - loading_inline
+  - logistic
   - multiple_users
   - multiple_users_stacked
   - nav
