@@ -1,10 +1,9 @@
 import React from 'react'
-import { Project } from '../../'
+import { Logistic } from '../../'
 
-const ProjectDark = () => (
+const LogisticDefault = () => (
   <div>
-    <Project
-        dark
+    <Logistic
         date={new Date('18 Nov 2019')}
         link="#"
         projectName="Jefferson-Smith"
@@ -12,28 +11,25 @@ const ProjectDark = () => (
     />
     <br />
     <br />
-    <Project
-        dark
+    <Logistic
         date={new Date('18 Nov 2019')}
         projectName="Jefferson-Smith"
         projectNumber="33-12345"
     />
     <br />
     <br />
-    <Project
-        dark
+    <Logistic
         link="#"
         projectName="Jefferson-Smith"
         projectNumber="33-12345"
     />
     <br />
     <br />
-    <Project
-        dark
+    <Logistic
         projectName="Jefferson-Smith"
         projectNumber="33-12345"
     />
   </div>
 )
 
-export default ProjectDark
+export default LogisticDefault

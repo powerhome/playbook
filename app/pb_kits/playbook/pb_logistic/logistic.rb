@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
 module Playbook
-  module PbProject
-    class Project
+  module PbLogistic
+    class Logistic
       include Playbook::Props
 
-      partial "pb_project/project"
+      partial "pb_logistic/logistic"
 
       prop :dark, type: Playbook::Props::Boolean, default: false
       prop :project_name
@@ -14,7 +14,7 @@ module Playbook
       prop :link
 
       def classname
-        generate_classname("pb_project_kit", dark_class)
+        generate_classname("pb_logistic_kit", dark_class)
       end
 
       def date_element

@@ -35,6 +35,7 @@ kits:
   - layout
   - list
   - loading_inline
+  - logistic
   - multiple_users
   - multiple_users_stacked
   - nav
@@ -43,7 +44,6 @@ kits:
   - popover
   - progress_pills
   - progress_simple
-  - project
   - section_separator
   - source
   - star_rating

@@ -12,7 +12,7 @@ const dateString = (value: DateTime) => {
   return ` · ${month}/${day}`
 }
 
-type ProjectProps = {
+type LogisticProps = {
   dark?: Boolean,
   date: String,
   link?: String,
@@ -20,18 +20,18 @@ type ProjectProps = {
   projectNumber: Number,
 }
 
-const Project = ({
+const Logistic = ({
   dark = false,
   date,
   link,
   projectName,
   projectNumber,
-}: ProjectProps) => {
+}: LogisticProps) => {
   const formattedDate = new DateTime({ value: date })
 
   return (
     <div
-        className={classnames('pb_project_kit')}
+        className={classnames('pb_logistic_kit')}
     >
       <Body color="light">
         <Caption text="Project" />
@@ -45,7 +45,7 @@ const Project = ({
         <Choose>
           <When condition={link}>
             <a
-                className="pb_project_kit_links"
+                className="pb_logistic_kit_links"
                 href={link}
             >
               <Choose>
@@ -93,4 +93,4 @@ const Project = ({
   )
 }
 
-export default Project
+export default Logistic

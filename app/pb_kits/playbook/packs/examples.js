@@ -49,6 +49,7 @@ import * as Legend from 'pb_legend/docs'
 import * as LineGraph from 'pb_line_graph/docs'
 import * as List from 'pb_list/docs'
 import * as LoadingInline from 'pb_loading_inline/docs'
+import * as Logistic from 'pb_logistic/docs'
 import * as Message from 'pb_message/docs'
 import * as MultipleUsers from 'pb_multiple_users/docs'
 import * as MultipleUsersStacked from 'pb_multiple_users_stacked/docs'
@@ -60,7 +61,6 @@ import * as PersonContact from 'pb_person_contact/docs'
 import * as Pill from 'pb_pill/docs'
 import * as ProgressPills from 'pb_progress_pills/docs'
 import * as ProgressSimple from 'pb_progress_simple/docs'
-import * as Project from 'pb_project/docs'
 import * as Radio from 'pb_radio/docs'
 import * as SectionSeparator from 'pb_section_separator/docs'
 import * as Select from 'pb_select/docs'
@@ -118,6 +118,7 @@ WebpackerReact.setup({
   ...LineGraph,
   ...List,
   ...LoadingInline,
+  ...Logistic,
   ...Message,
   ...MultipleUsers,
   ...MultipleUsersStacked,
@@ -129,7 +130,6 @@ WebpackerReact.setup({
   ...Pill,
   ...ProgressPills,
   ...ProgressSimple,
-  ...Project,
   ...Radio,
   ...SectionSeparator,
   ...Select,

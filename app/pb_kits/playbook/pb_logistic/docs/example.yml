@@ -1,0 +1,11 @@
+examples:
+
+  rails:
+  - logistic_default: Default
+  - logistic_dark: Dark
+
+
+  react:
+  - logistic_default: Default
+  - logistic_dark: Dark
+
