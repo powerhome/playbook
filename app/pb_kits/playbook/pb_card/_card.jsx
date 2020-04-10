@@ -15,11 +15,13 @@ type CardPropTypes = {
   padding?: 'none' | 'xs' | 'sm' | 'md' | 'lg' | 'xl',
   selected?: Boolean,
   shadow?: 'none' | 'shallow' | 'default' | 'deep' | 'deeper' | 'deepest',
+  dark?: Boolean,
 }
 
 const Card = ({
   children,
   className,
+  dark = false,
   highlight = {},
   padding = 'md',
   selected = false,
@@ -27,6 +29,7 @@ const Card = ({
 }: CardPropTypes) => {
   const bodyCSS = buildCss('pb_card_body_kit', padding)
   const cardCss = buildCss('pb_card_kit', `shadow_${shadow}`, {
+    'dark': dark,
     selected,
     deselected: !selected,
     [`highlight_${highlight.position}`]: highlight.position,

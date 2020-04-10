@@ -1,6 +1,7 @@
 examples:
   rails:
   - card_light: Default
+  - card_dark: Dark Cards
   - card_highlight: Highlight Cards
   - card_selected: Selected
   - card_padding: Padding Size
@@ -9,6 +10,7 @@ examples:
   - card_separator: Separator Card
   react:
   - card_light: Default
+  - card_dark: Dark Cards
   - card_highlight: Highlight Cards
   - card_selected: Selected
   - card_padding: Padding Size
