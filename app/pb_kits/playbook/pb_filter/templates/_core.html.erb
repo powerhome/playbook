@@ -1,7 +1,7 @@
 
 <%= pb_rails("flex", props: {orientation: "row", vertical: "center"}) do %>
 
-    <% if (object.template == "default" || "filter_only" || "single") %>
+    <% if (object.template != "sort_only") %>
       <%= pb_rails("circle_icon_button", props: { variant: "secondary", icon: "filter", id:"filter#{object.id}"}) %>
       <div class="maskContainer">
         <div class="filters">

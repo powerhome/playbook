@@ -9,5 +9,8 @@ examples:
   
   react:
   - filter_default: Default
-
+  - filter_single: Single
+  - filter_no_background: No Background
+  - filter_only: Filter Only
+  - sort_only: Sort Only
   

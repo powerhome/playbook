@@ -13,7 +13,7 @@ RSpec.describe Playbook::PbFilter::Filter do
                       .of_type(Playbook::Props::Numeric) }
   it { is_expected.to define_enum_prop(:template)
                       .with_default("default")
-                      .with_values("default", "single") }
+                      .with_values("default", "single","filter_only","sort_only") }
 
   it { is_expected.to define_partial }
 
