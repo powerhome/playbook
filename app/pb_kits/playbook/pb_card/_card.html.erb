@@ -2,7 +2,8 @@
     id: object.id,
     data: object.data,
     class: object.classname,
-    aria: object.aria) do %>
+    aria: object.aria,
+    dark: object.dark) do %>
   <% if object.children %>
     <%= pb_rails("card/card_body", props: { padding: object.padding, children: object.children }) %>
   <% end %>

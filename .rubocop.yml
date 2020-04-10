@@ -13,8 +13,17 @@ AllCops:
 Layout/AccessModifierIndentation:
   EnforcedStyle: outdent
 
+Layout/LineLength:
+  Enabled: false
+
+Lint/RaiseException:
+  Enabled: true
+
 Lint/ScriptPermission:
   Enabled: false
+
+Lint/StructNewOverride:
+  Enabled: true
 
 Metrics:
   Enabled: false
@@ -42,6 +51,15 @@ Style/EachWithObject:
   Enabled: false
 
 Style/GuardClause:
+  Enabled: false
+
+Style/HashEachMethods:
+  Enabled: false
+
+Style/HashTransformKeys:
+  Enabled: false
+
+Style/HashTransformValues:
   Enabled: false
 
 Style/Lambda:

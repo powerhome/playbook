@@ -3,23 +3,31 @@
 import React from 'react'
 import { Button, Icon } from '../'
 
+import type { Callback } from '../types'
+
+import {
+  noop,
+} from '../utilities/props'
+
 type CircleIconButtonProps = {
-  type?: 'button' | 'submit' | 'reset',
-  variant?: 'primary' | 'secondary' | 'link',
-  disabled?: Boolean,
-  dark?: Boolean,
   className?: String,
+  dark?: Boolean,
+  disabled?: Boolean,
   icon: String,
   id?: String,
+  onClick?: Callback,
+  type?: 'button' | 'submit' | 'reset',
+  variant?: 'primary' | 'secondary' | 'link',
 }
 
 const CircleIconButton = (props: CircleIconButtonProps) => {
   const {
-    type,
-    variant,
+    dark,
     disabled,
     icon,
-    dark,
+    onClick = noop,
+    type,
+    variant,
   } = props
 
   return (
@@ -27,6 +35,7 @@ const CircleIconButton = (props: CircleIconButtonProps) => {
       <Button
           dark={dark}
           disabled={disabled}
+          onClick={onClick}
           text={null}
           type={type}
           variant={variant}

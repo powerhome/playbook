@@ -11,12 +11,23 @@ module Playbook
       prop :sort_menu, type: Playbook::Props::HashArray, default: [{}]
       prop :results, type: Playbook::Props::Numeric
       prop :template, type: Playbook::Props::Enum,
-                      values: %w[default single],
+                      values: %w[default single filter_only sort_only],
                       default: "default"
       prop :background, type: Playbook::Props::Boolean, default: true
 
       def classname
         generate_classname("pb_filter_kit")
+      end
+
+      def result_text
+        case results
+        when 1
+          "#{results} Result"
+        when nil
+          nil
+        else
+          "#{results} Results"
+        end
       end
 
       def sort_icon(direction)

@@ -49,6 +49,7 @@ import * as Legend from 'pb_legend/docs'
 import * as LineGraph from 'pb_line_graph/docs'
 import * as List from 'pb_list/docs'
 import * as LoadingInline from 'pb_loading_inline/docs'
+import * as Logistic from 'pb_logistic/docs'
 import * as Message from 'pb_message/docs'
 import * as MultipleUsers from 'pb_multiple_users/docs'
 import * as MultipleUsersStacked from 'pb_multiple_users_stacked/docs'
@@ -73,12 +74,14 @@ import * as Textarea from 'pb_textarea/docs'
 import * as TextInput from 'pb_text_input/docs'
 import * as Time from 'pb_time/docs'
 import * as Timestamp from 'pb_timestamp/docs'
+import * as TimeRangeInline from 'pb_time_range_inline/docs'
 import * as Title from 'pb_title/docs'
 import * as TitleCount from 'pb_title_count/docs'
 import * as TitleDetail from 'pb_title_detail/docs'
 import * as Toggle from 'pb_toggle/docs'
 import * as User from 'pb_user/docs'
 import * as UserBadge from 'pb_user_badge/docs'
+import * as WeekdayStacked from 'pb_weekday_stacked/docs'
 
 WebpackerReact.setup({
   ...Avatar,
@@ -117,6 +120,7 @@ WebpackerReact.setup({
   ...LineGraph,
   ...List,
   ...LoadingInline,
+  ...Logistic,
   ...Message,
   ...MultipleUsers,
   ...MultipleUsersStacked,
@@ -141,10 +145,12 @@ WebpackerReact.setup({
   ...TextInput,
   ...Time,
   ...Timestamp,
+  ...TimeRangeInline,
   ...Title,
   ...TitleCount,
   ...TitleDetail,
   ...Toggle,
   ...User,
   ...UserBadge,
+  ...WeekdayStacked,
 })

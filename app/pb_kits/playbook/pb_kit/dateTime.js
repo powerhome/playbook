@@ -10,6 +10,8 @@ type DateTimeType = {
   zone?: String,
 }
 
+const ABBR_DAYS = ['SU', 'M', 'T', 'W', 'TH', 'F', 'S']
+
 export default class DateTime {
   constructor({ value, zone = 'America/New_York' }: DateTimeType) {
     this.value = this.convertToTimestampZone(value, zone)
@@ -20,7 +22,7 @@ export default class DateTime {
   }
 
   convertToTimezone() {
-    return this.value.strftime('%a')
+    return this.value.strftime('%Z')
   }
 
   toYear() {
@@ -31,6 +33,10 @@ export default class DateTime {
     return this.value.strftime('%b')
   }
 
+  toMonthNum() {
+    return this.value.strftime('%-m')
+  }
+
   toMonthFull() {
     return this.value.strftime('%B')
   }
@@ -39,8 +45,24 @@ export default class DateTime {
     return this.value.strftime('%e')
   }
 
+  toDayAbbr() {
+    return ABBR_DAYS[this.value.day()]
+  }
+
   toWeekday() {
     return this.value.strftime('%a')
+  }
+
+  toHour() {
+    return this.value.strftime('%l')
+  }
+
+  toMinute() {
+    return this.value.strftime('%M')
+  }
+
+  toMeridian() {
+    return this.value.strftime('%P')[0]
   }
 
   toIso() {

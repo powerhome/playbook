@@ -35,6 +35,7 @@ kits:
   - layout
   - list
   - loading_inline
+  - logistic
   - multiple_users
   - multiple_users_stacked
   - nav
@@ -70,7 +71,9 @@ kits:
     - stat_value
     - time
     - timestamp
+    - time_range_inline
     - title_count
     - title_detail
+    - weekday_stacked
   - user
   - user_badge
