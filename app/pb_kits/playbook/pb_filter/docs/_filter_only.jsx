@@ -1,7 +1,7 @@
 import React from 'react'
 import { Button, Filter, Flex, Select, TextInput } from '../../'
 
-const FilterDefault = () => {
+const FilterOnly = () => {
   const options = [
     { value: 'USA' },
     { value: 'Canada' },
@@ -11,16 +11,13 @@ const FilterDefault = () => {
   ]
   return (
     <Filter
+        background={false}
         filters={[
         { name: 'Full Name', value: 'John Wick' },
         { name: 'Territory', value: 'San Francisco' },
       ]}
-        results={256}
-        sortMenu={[
-      { item: 'Popularity', link: '#', active: true, direction: 'desc' },
-      { item: 'Title', link: '#', active: false },
-      { item: 'Name', link: '#', active: false },
-    ]}
+        results={1}
+        template="filter_only"
     >
       <TextInput
           label="Full Name"
@@ -48,4 +45,4 @@ const FilterDefault = () => {
   )
 }
 
-export default FilterDefault
+export default FilterOnly
