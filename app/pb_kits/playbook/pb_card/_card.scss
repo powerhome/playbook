@@ -65,6 +65,8 @@ $pb_card_highlight_size: 4px;
     @include pb_card_selected;
   }
   &[class*=_dark] {
+    @include pb_card_dark;
+        
     &[class*=_selected] {
       @include pb_card_selected_dark;
     }

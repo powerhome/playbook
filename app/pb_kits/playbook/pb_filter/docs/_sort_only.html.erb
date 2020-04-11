@@ -1,0 +1,18 @@
+<% 5.times do%>
+<br>
+<%end%>
+
+<%= pb_rails("filter", props: {
+  id: "so",
+  sort_menu: [
+    {item:"Popularity", link:"#", active: true, direction:"desc"},
+    {item:"Title", link:"#", active: false},
+    {item:"Name", link:"#", active: false},
+  ],
+  template:"sort_only",
+  background: false,
+  }) do%>
+<% end %>
+<% 5.times do%>
+<br>
+<%end%>

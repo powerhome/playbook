@@ -1,0 +1,11 @@
+[class^='pb_weekday_stacked'] {
+  &[class*='_left'] {
+    text-align: left;
+  }
+  &[class*='_center'] {
+    text-align: center;
+  }
+  &[class*='_right'] {
+    text-align: right;
+  }
+}

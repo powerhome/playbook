@@ -50,6 +50,7 @@ import * as Legend from 'pb_legend/docs'
 import * as LineGraph from 'pb_line_graph/docs'
 import * as List from 'pb_list/docs'
 import * as LoadingInline from 'pb_loading_inline/docs'
+import * as Logistic from 'pb_logistic/docs'
 import * as Message from 'pb_message/docs'
 import * as MultipleUsers from 'pb_multiple_users/docs'
 import * as MultipleUsersStacked from 'pb_multiple_users_stacked/docs'
@@ -82,6 +83,7 @@ import * as TitleDetail from 'pb_title_detail/docs'
 import * as Toggle from 'pb_toggle/docs'
 import * as User from 'pb_user/docs'
 import * as UserBadge from 'pb_user_badge/docs'
+import * as WeekdayStacked from 'pb_weekday_stacked/docs'
 
 WebpackerReact.setup({
   ...Avatar,
@@ -121,6 +123,7 @@ WebpackerReact.setup({
   ...LineGraph,
   ...List,
   ...LoadingInline,
+  ...Logistic,
   ...Message,
   ...MultipleUsers,
   ...MultipleUsersStacked,
@@ -153,4 +156,5 @@ WebpackerReact.setup({
   ...Toggle,
   ...User,
   ...UserBadge,
+  ...WeekdayStacked,
 })

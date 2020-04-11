@@ -26,12 +26,25 @@ module Playbook
         @value.strftime("%a")
       end
 
+      def to_day_of_week_compact
+        abbr_days = %w[SU M T W TH F S]
+        abbr_days[@value.strftime("%w").to_i]
+      end
+
       def to_year
         @value.strftime("%Y")
       end
 
       def to_month
         @value.strftime("%^b")
+      end
+
+      def to_month_number
+        @value.strftime("%m")
+      end
+
+      def to_unpadded_month_number
+        @value.strftime("%-m")
       end
 
       def to_month_downcase
@@ -44,6 +57,10 @@ module Playbook
 
       def to_day
         @value.strftime("%e")
+      end
+
+      def to_unpadded_day
+        @value.strftime("%-d")
       end
 
       def to_hour

@@ -1,0 +1,40 @@
+<% 5.times do%>
+<br>
+<%end%>
+
+<%= pb_rails("filter", props: {
+  id: "fo",
+  filters: [
+    {name: "name", value: "John Wick"}
+    ],
+  template:"filter_only"
+  }) do%>
+<%
+  example_collection = [
+    OpenStruct.new(name: "Alabama", value: 1),
+    OpenStruct.new(name: "Alaska", value: 2),
+    OpenStruct.new(name: "Arizona", value: 3),
+    OpenStruct.new(name: "Arkansas", value: 4),
+    OpenStruct.new(name: "California", value: 5),
+    OpenStruct.new(name: "Colorado", value: 6),
+    OpenStruct.new(name: "Connecticut", value: 7),
+    OpenStruct.new(name: "Delaware", value: 8),
+    OpenStruct.new(name: "Florida", value: 9),
+    OpenStruct.new(name: "Georgia", value: 10),
+  ]
+%>
+
+<%= pb_rails("form", props: { form_system_options: { scope: :example, method: :get } }) do |form| %>
+  <%= form.text_field :example_text_field, props: { label: true } %>
+  <%= form.collection_select :example_collection_select, example_collection, :value, :name, props: { label: true } %>
+
+  <%= form.actions do |action| %>
+    <%= action.submit props: { text: "Apply", data: { disable_with: "<i class='far fa-spinner fa-spin mr-3'></i>Searching...".html_safe },}%>
+    <%= action.button props: { type: "reset", text: "Clear", variant: "secondary" } %>
+  <% end %>
+<% end %>
+
+<% end %>
+<% 5.times do%>
+<br>
+<%end%>
