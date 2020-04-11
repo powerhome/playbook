@@ -37,6 +37,7 @@ const DateTimeStacked = ({
           className="pb_date_time_stacked_kit"
           dark={dark}
           date={date}
+          tag="caption"
       />
     </FlexItem>
   </Flex>
