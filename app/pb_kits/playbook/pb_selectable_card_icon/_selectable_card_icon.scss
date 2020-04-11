@@ -1,3 +1,19 @@
-.pb_selectable_card_icon {
+@import "../tokens/colors";
 
+[class^=pb_selectable_card_icon_kit] {
+    .checked {
+        color: $primary;
+    }
+    .unchecked {
+        color: gray;
+    }
+    display: block;
+    width: 150px;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    
+    .testStyle{
+        height: 200px;
+    }
 }

@@ -1,7 +1,10 @@
 /* @flow */
 
 import React from 'react'
+import classnames from 'classnames'
 import { Body, Icon, SelectableCard, Title } from '../'
+
+import { buildCss } from '../utilities/props'
 
 type SelectableCardIconProps = {
   className?: String,
@@ -12,8 +15,6 @@ type SelectableCardIconProps = {
   onChange?: (e) => void,
 }
 
-
-
 const SelectableCardIcon = ({
   className,
   icon,
@@ -22,9 +23,19 @@ const SelectableCardIcon = ({
   checked,
   onChange,
 }: SelectableCardIconProps) => {
+
+  const css = buildCss({
+    'pb_selectable_card_icon_kit': true,
+    // 'checked': checked,
+    // 'unchecked': !checked,
+  })
+
+  // console.log(checked)
+
   return (
-    <div className={className}>
+    <div className={classnames(css, className)}>
       <SelectableCard
+          className="testStyle"
           checked={checked}
           icon={false}
           inputId="selectedWithoutIcon"
@@ -34,10 +45,13 @@ const SelectableCardIcon = ({
       >
         {
           <>
-            <Icon
-                icon={icon}
-                size="2x"
-            />
+            <span>
+              <Icon
+                  className={checked ? 'checked' : 'unchecked'}
+                  icon={icon}
+                  size="2x"
+              />
+            </span>
             <Title
                 size={4}
                 tag="h4"

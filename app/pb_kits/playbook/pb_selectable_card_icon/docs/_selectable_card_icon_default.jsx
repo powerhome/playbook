@@ -8,7 +8,7 @@ const SelectableCardIconDefault = () => {
     <div>
       <SelectableCardIcon
           checked={selected}
-          className="class"
+          className=""
           icon="calendar"
           onChange={() => setSelected(!selected)}
           text="Some text that might explain"

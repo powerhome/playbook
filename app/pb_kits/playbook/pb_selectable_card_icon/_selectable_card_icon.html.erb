@@ -2,5 +2,18 @@
     id: object.id,
     data: object.data,
     class: object.classname) do %>
-  <span>SELECTABLE CARD ICON CONTENT</span>
+  
+  <%= pb_rails("selectable_card", props: {
+    input_id: "selected_without_icon",
+    name: "selected_without_icon",
+    value: "selected_without_icon",
+    checked: true,
+  }) do %>
+    <%= pb_rails("icon", props: { classname: "checked", icon: object.icon, size: "2x" }) %>
+    <%= pb_rails("title", props: { text: object.title, tag: "h4", size: 4 }) %>
+    <%= pb_rails("body", props: {
+      text: object.text,
+      color: "light"
+    }) %>
+  <% end %>
 <% end %>
