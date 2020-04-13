@@ -8,6 +8,7 @@ import { buildCss } from '../utilities/props'
 
 type SelectableCardIconProps = {
   className?: String,
+  dark?: Boolean,
   icon?: String,
   title?: String,
   text?: String,
@@ -17,6 +18,7 @@ type SelectableCardIconProps = {
 
 const SelectableCardIcon = ({
   className,
+  dark,
   icon,
   title,
   text,
@@ -37,6 +39,7 @@ const SelectableCardIcon = ({
       <SelectableCard
           className="testStyle"
           checked={checked}
+          dark={dark}
           icon={false}
           inputId="selectedWithoutIcon"
           name="selectedWithoutIcon"

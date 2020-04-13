@@ -1,16 +1,17 @@
 import React, { useState } from 'react'
 import { SelectableCardIcon } from '../../'
 
-const SelectableCardIconDefault = () => {
-  const [selectedDefault, setSelectedDefault] = useState(true)
+const SelectableCardIconDark = () => {
+  const [selectedDark, setSelectedDark] = useState(true)
 
   return (
     <div>
       <SelectableCardIcon
-          checked={selectedDefault}
+          checked={selectedDark}
           className=""
+          dark
           icon="calendar"
-          onChange={() => setSelectedDefault(!selectedDefault)}
+          onChange={() => setSelectedDark(!selectedDark)}
           text="Some text that might explain"
           title="Title"
       />
@@ -18,4 +19,4 @@ const SelectableCardIconDefault = () => {
   )
 }
 
-export default SelectableCardIconDefault
+export default SelectableCardIconDark
