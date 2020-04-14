@@ -11,9 +11,12 @@ const SelectableCardIconDark = () => {
           className=""
           dark
           icon="calendar"
+          inputId="selectedWithoutIconDark"
+          name="selectedWithoutIconDark"
           onChange={() => setSelectedDark(!selectedDark)}
           text="Some text that might explain"
           title="Title"
+          value="selectedWithoutIconDark"
       />
     </div>
   )

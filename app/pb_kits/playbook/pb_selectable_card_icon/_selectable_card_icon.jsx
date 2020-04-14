@@ -10,8 +10,11 @@ type SelectableCardIconProps = {
   className?: String,
   dark?: Boolean,
   icon?: String,
+  inputId?: String,
+  name?: String,
   title?: String,
   text?: String,
+  value?: String,
   checked?: Boolean,
   onChange?: (e) => void,
 }
@@ -20,8 +23,11 @@ const SelectableCardIcon = ({
   className,
   dark,
   icon,
+  inputId,
+  name,
   title,
   text,
+  value,
   checked,
   onChange,
 }: SelectableCardIconProps) => {
@@ -41,10 +47,10 @@ const SelectableCardIcon = ({
           checked={checked}
           dark={dark}
           icon={false}
-          inputId="selectedWithoutIcon"
-          name="selectedWithoutIcon"
+          inputId={inputId}
+          name={name}
           onChange={onChange}
-          value="selectedWithoutIcon"
+          value={value}
       >
         {
           <>

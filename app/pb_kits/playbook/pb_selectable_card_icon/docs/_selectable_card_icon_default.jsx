@@ -10,9 +10,12 @@ const SelectableCardIconDefault = () => {
           checked={selectedDefault}
           className=""
           icon="calendar"
+          inputId="selectedWithoutIcon"
+          name="selectedWithoutIcon"
           onChange={() => setSelectedDefault(!selectedDefault)}
           text="Some text that might explain"
           title="Title"
+          value="selectedWithoutIcon"
       />
     </div>
   )
