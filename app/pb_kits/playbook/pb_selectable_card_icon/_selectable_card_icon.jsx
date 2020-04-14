@@ -62,12 +62,14 @@ const SelectableCardIcon = ({
               />
             </span>
             <Title
+                dark={dark}
                 size={4}
                 tag="h4"
                 text={title}
             />
             <Body
                 color="light"
+                dark={dark}
                 text={text}
             />
           </>
