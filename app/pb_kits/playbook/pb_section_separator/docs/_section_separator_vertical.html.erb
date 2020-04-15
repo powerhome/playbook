@@ -1,0 +1,9 @@
+<%= pb_rails("flex", props: {classname: "flex-container", spacing: "between", inline: true}) do %>
+    <%= pb_rails("body", props: {classname: "flex-item"}) do %>Text<% end %>
+    <%= pb_rails("section_separator", props: { classname: "flex-item", orientation: "vertical" }) %>
+    <%= pb_rails("body", props: {classname: "flex-item"}) do %>Text<% end %>
+    <%= pb_rails("section_separator", props: { classname: "flex-item", orientation: "vertical" }) %>
+    <%= pb_rails("body", props: {classname: "flex-item"}) do %>Text<% end %>
+    <%= pb_rails("section_separator", props: { classname: "flex-item", orientation: "vertical" }) %>
+    <%= pb_rails("body", props: {classname: "flex-item"}) do %>Text<% end %>
+<% end %>

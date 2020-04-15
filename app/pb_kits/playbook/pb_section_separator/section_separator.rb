@@ -9,11 +9,14 @@ module Playbook
 
       prop :text
       prop :variant, type: Playbook::Props::Enum,
-                 values: %w[card background],
-                 default: "card"
+                     values: %w[card background],
+                     default: "card"
+      prop :orientation, type: Playbook::Props::Enum,
+                         values: %w[horizontal vertical],
+                         default: "horizontal"
 
       def classname
-        generate_classname("pb_section_separator_kit",variant)
+        generate_classname("pb_section_separator_kit", variant, orientation)
       end
     end
   end

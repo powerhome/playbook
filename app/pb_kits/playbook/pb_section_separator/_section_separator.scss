@@ -35,4 +35,17 @@ $section_colors: (
     left: 0;
     z-index: 0;
   }
+  &[class*=_horizontal] {
+    justify-content: center;
+  }
+  &[class*=_vertical] {
+    content: "";
+    height: 50px;
+    width: 1px;
+    margin-left: $space_xs;
+    margin-right: $space_xs;
+    background: $border_light;
+    position: relative;
+    z-index: 0;
+  }
 }

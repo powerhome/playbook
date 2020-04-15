@@ -2,5 +2,10 @@
     id: object.id,
     data: object.data,
     class: object.classname) do %>
- <span><%= pb_rails("caption", props: { text: object.text }) %></span>
+    <% if object.orientation === 'horizontal' %>
+        <span><%= pb_rails("caption", props: { text: object.text }) %></span>
+    <% end %>
+    <% if object.orientation === 'vertical' %>
+        <div class="vertical_separator"></div>
+    <%end%>
 <% end %>
