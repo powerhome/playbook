@@ -25,6 +25,9 @@ module Playbook
       prop :day_only, type: Playbook::Props::Boolean,
                       default: false
 
+      prop :format, type: String,
+                    default: "%-m/%-d"
+
       def classname
         generate_classname("pb_weekday_stacked_kit", align)
       end
@@ -46,7 +49,7 @@ module Playbook
       def month_and_day
         month_and_day = Playbook::PbKit::PbDateTime.new(date)
         content_tag(:time, datetime: month_and_day.to_iso) do
-          "#{month_and_day.to_unpadded_month_number}/#{month_and_day.to_unpadded_day}"
+          date.strftime(format)
         end
       end
 
@@ -59,3 +62,4 @@ module Playbook
     end
   end
 end
+

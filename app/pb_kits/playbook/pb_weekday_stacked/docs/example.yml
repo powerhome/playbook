@@ -5,6 +5,7 @@ examples:
   - weekday_stacked_day_only: Day Only
   - weekday_stacked_compact: Day Only - Compact
   - weekday_stacked_dark: Dark
+  - weekday_stacked_custom_format: Custom Format
   
   
   react:
@@ -12,4 +13,5 @@ examples:
   - weekday_stacked_day_only: Day Only
   - weekday_stacked_compact: Day Only - Compact
   - weekday_stacked_dark: Dark
+  - weekday_stacked_custom_format: Custom Format
   

@@ -21,6 +21,7 @@ type WeekdayStackedProps = {
   dark?: Boolean,
   date: Date,
   dayOnly?: Boolean,
+  format?: String,
   id?: String,
 }
 
@@ -33,12 +34,12 @@ const getDayOfWeek = (date, compact) => {
   }
 }
 
-const getFormattedDate = (date, dayOnly) => {
+const getFormattedDate = (date, dayOnly, format) => {
   const dateTime = new DateTime({ value: date })
   if (dayOnly) {
     return dateTime.toDay()
   } else {
-    return `${dateTime.toMonthNum()}/${dateTime.toDay()}`
+    return dateTime.toCustomFormat(format)
   }
 }
 
@@ -49,6 +50,7 @@ const WeekdayStacked = ({
   dark = false,
   date = new Date(),
   dayOnly = false,
+  format,
 }: WeekdayStackedProps) => (
   <div
       className={classnames(buildCss('pb_weekday_stacked_kit', align), className)}
@@ -58,7 +60,7 @@ const WeekdayStacked = ({
         dark={dark}
         size={4}
         tag="span"
-        text={getFormattedDate(date, dayOnly)}
+        text={getFormattedDate(date, dayOnly, format)}
     />
   </div>
 )
