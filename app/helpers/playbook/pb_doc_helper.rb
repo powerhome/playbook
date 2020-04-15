@@ -30,7 +30,7 @@ module Playbook
     end
 
     def get_kit_description(kit)
-      filename = "#{Playbook::Engine.root}/app/pb_kits/playbook/pb_#{@kit}/docs/_description.md"
+      filename = "#{Playbook::Engine.root}/app/pb_kits/playbook/pb_#{kit}/docs/_description.md"
       read_file(filename)
     end
 

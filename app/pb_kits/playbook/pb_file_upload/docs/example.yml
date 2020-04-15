@@ -3,5 +3,6 @@ examples:
   rails:
   
   react:
-  - file_upload_default: Default List of Files to Upload
+  - file_upload_default: Default List of files to upload
+  - file_upload_accept: Accept only certain types of files
   

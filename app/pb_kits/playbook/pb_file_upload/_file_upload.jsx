@@ -16,13 +16,13 @@ import {
 } from '..'
 
 type FileUploadProps = {
-  acceptedFiles?: FileList,
+  accept?: Array<String>,
   className?: String,
   onFilesAccepted: Callback,
 }
 
 const FileUpload = ({
-  acceptedFiles = [],
+  accept = ['image/png', 'image/jpg', 'image/jpeg', 'image/svg+xml'],
   className,
   onFilesAccepted = noop,
 }: FileUploadProps) => {
@@ -34,7 +34,10 @@ const FileUpload = ({
     getRootProps,
     getInputProps,
     isDragActive,
-  } = useDropzone({ onDrop })
+  } = useDropzone({
+    accept,
+    onDrop,
+  })
 
   return (
     <div
