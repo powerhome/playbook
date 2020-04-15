@@ -1,6 +1,6 @@
 #!/usr/bin/env groovy
 
-library identifier: 'ci-kubed@v3.1.0', retriever: modernSCM([
+library identifier: 'ci-kubed@deprecate-deployer-stage-method', retriever: modernSCM([
   $class: 'GitSCMSource',
   remote: 'git@github.com:powerhome/ci-kubed.git',
   credentialsId: 'powerci-github-ssh-key'
@@ -8,7 +8,7 @@ library identifier: 'ci-kubed@v3.1.0', retriever: modernSCM([
 
 def cluster = "APP-HQ"
 app.build(
-  cluster: cluster, 
+  cluster: cluster,
   deployerVersion: "master-e4c01702624ac34f2663f894fbdb68a369b09629-588",
   resources: [
     requestCpu: '1',
