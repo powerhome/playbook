@@ -2,16 +2,14 @@ examples:
   
   rails:
   - weekday_stacked_default: Default
-  - weekday_stacked_day_only: Day Only
-  - weekday_stacked_compact: Day Only - Compact
   - weekday_stacked_dark: Dark
-  - weekday_stacked_custom_format: Custom Format
+  - weekday_stacked_compact: Compact
+  - weekday_stacked_variant: Variant
   
   
   react:
   - weekday_stacked_default: Default
-  - weekday_stacked_day_only: Day Only
-  - weekday_stacked_compact: Day Only - Compact
   - weekday_stacked_dark: Dark
-  - weekday_stacked_custom_format: Custom Format
+  - weekday_stacked_compact: Compact
+  - weekday_stacked_variant: Variant
   

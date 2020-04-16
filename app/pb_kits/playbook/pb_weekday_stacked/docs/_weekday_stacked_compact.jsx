@@ -1,48 +1,25 @@
 import React from 'react'
 import {
-  Flex,
-  // FlexItem,
   WeekdayStacked,
-} from '../..'
+} from '../../'
 
 const WeekdayStackedCompact = () => (
-  <Flex spacing="evenly">
+  <div>
     <WeekdayStacked
         compact
-        date={new Date('2019/11/4')}
-        dayOnly
+        variant="day_only"
     />
     <WeekdayStacked
+        align="center"
         compact
-        date={new Date('2019/11/5')}
-        dayOnly
+        variant="month_day"
     />
     <WeekdayStacked
+        align="right"
         compact
-        date={new Date('2019/11/6')}
-        dayOnly
+        variant="expanded"
     />
-    <WeekdayStacked
-        compact
-        date={new Date('2019/11/7')}
-        dayOnly
-    />
-    <WeekdayStacked
-        compact
-        date={new Date('2019/11/8')}
-        dayOnly
-    />
-    <WeekdayStacked
-        compact
-        date={new Date('2019/11/9')}
-        dayOnly
-    />
-    <WeekdayStacked
-        compact
-        date={new Date('2019/11/10')}
-        dayOnly
-    />
-  </Flex>
+  </div>
 )
 
 export default WeekdayStackedCompact
