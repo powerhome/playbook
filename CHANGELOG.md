@@ -14,7 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - New Kit - Time Range Inline ([#680](https://github.com/powerhome/playbook/pull/680) @evertoncunha)
 - New Kit - Weekday Stacked ([#705](https://github.com/powerhome/playbook/pull/705) @thestephenmarshall)
 - Remove `method_source` `0.9.2` dependency ([#723](https://github.com/powerhome/playbook/pull/723) @wadewinningham)
-
+- Deploy staging/production via Milano rather than Jenkins ([#731](https://github.com/powerhome/playbook/pull/731) @benlangfeld)
 
 ## [4.10.0] 2020-4-2
 - Added react and dark version for Label Value Kit ([#688](https://github.com/powerhome/playbook/pull/688) @christinaatai)
