@@ -1,9 +1,13 @@
-<%= pb_rails("flex", props: {classname: "flex-container", spacing: "between", inline: true}) do %>
-    <%= pb_rails("body", props: {classname: "flex-item"}) do %>Text<% end %>
-    <%= pb_rails("section_separator", props: { classname: "flex-item", orientation: "vertical" }) %>
-    <%= pb_rails("body", props: {classname: "flex-item"}) do %>Text<% end %>
-    <%= pb_rails("section_separator", props: { classname: "flex-item", orientation: "vertical" }) %>
-    <%= pb_rails("body", props: {classname: "flex-item"}) do %>Text<% end %>
-    <%= pb_rails("section_separator", props: { classname: "flex-item", orientation: "vertical" }) %>
-    <%= pb_rails("body", props: {classname: "flex-item"}) do %>Text<% end %>
+<%= pb_rails("flex", props: {classname: "flex-container", vertical: "stretch"}) do %>
+    <%= pb_rails("body", props: {classname: "flex-item"}) do %>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua
+    <% end %>
+    <%= pb_rails("section_separator", props: { orientation: "vertical" }) %>
+    <%= pb_rails("body", props: {classname: "flex-item"}) do %>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua
+    <% end %>
+    <%= pb_rails("section_separator", props: { orientation: "vertical" }) %>
+    <%= pb_rails("body", props: {classname: "flex-item"}) do %>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua
+    <% end %>
 <% end %>
