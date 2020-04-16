@@ -4,8 +4,12 @@ examples:
   - section_separator_text: Text Separator
   - section_separator_line: Line Separator
   - section_separator_text_background: Background Variant
+  - section_separator_vertical: Vertical
+  - section_separator_dark: Dark
 
   react:
   - section_separator_text: Text Separator
   - section_separator_line: Line Separator
   - section_separator_text_background: Background Variant
+  - section_separator_vertical: Vertical
+  - section_separator_dark: Dark
