@@ -9,10 +9,12 @@ const WeekdayStackedVariant = () => (
         variant="day_only"
     />
     <WeekdayStacked
-        variant="compact"
+        align="center"
+        variant="month_day"
     />
     <WeekdayStacked
-        variant="month_expanded"
+        align="right"
+        variant="expanded"
     />
   </div>
 )

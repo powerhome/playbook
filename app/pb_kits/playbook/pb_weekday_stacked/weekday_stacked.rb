@@ -13,20 +13,18 @@ module Playbook
                    values: %w[left center right],
                    default: "left"
 
-      prop :compact, type: Playbook::Props::Boolean,
-                     default: false
-
       prop :dark, type: Playbook::Props::Boolean,
                   default: false
 
       prop :date, type: Playbook::Props::Date,
                   default: ::Date.current
+                  
+      prop :compact, type: Playbook::Props::Boolean,
+                     default: false
 
-      prop :day_only, type: Playbook::Props::Boolean,
-                      default: false
-
-      prop :format, type: String,
-                    default: "%-m/%-d"
+      prop :variant, type: Playbook::Props::Enum,
+                     values: %w[day_only expanded month_day],
+                     default: "month_day"
 
       def classname
         generate_classname("pb_weekday_stacked_kit", align)
@@ -41,12 +39,16 @@ module Playbook
       end
 
       def formatted_month_and_day
-        compact || day_only ? day : month_and_day
+        case variant
+        when "day_only" then day
+        when "expanded" then month_and_day(format: "%b %-d")
+        else month_and_day
+        end
       end
 
     private
 
-      def month_and_day
+      def month_and_day(format: "%-m/%-d")
         month_and_day = Playbook::PbKit::PbDateTime.new(date)
         content_tag(:time, datetime: month_and_day.to_iso) do
           date.strftime(format)
@@ -62,4 +64,3 @@ module Playbook
     end
   end
 end
-
