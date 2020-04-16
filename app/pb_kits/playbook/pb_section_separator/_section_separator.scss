@@ -24,7 +24,7 @@ $section_colors: (
       }
     }
   }
-
+ 
   &::after {
     content: "";
     height: 1px;
@@ -34,5 +34,55 @@ $section_colors: (
     top: 50%;
     left: 0;
     z-index: 0;
+  }
+
+  &[class*=_horizontal] {
+    justify-content: center;
+  }
+  &[class*=_vertical] {
+    &::after {
+      content: "";
+      height: 100%;
+      width: 1px;
+      margin-left: $space_xs;
+      margin-right: $space_xs;
+      background: $border_light;
+      position: initial;
+      z-index: 0;
+    }
+  }
+  
+  &[class*=_dark] {
+    &::after {
+      content: "";
+      height: 1px;
+      width: 100%;
+      background: $border_dark;
+      position: absolute;
+      top: 50%;
+      left: 0;
+      z-index: 0;
+    }
+    &[class*=_background] {
+      span {
+        display: inline-block;
+        padding: 0 $space_xs;
+        background: $bg_dark;
+        position: relative;
+        z-index: 1;
+      }
+    }
+    &[class*=_vertical] {
+      &::after {
+        content: "";
+        height: 100%;
+        width: 1px;
+        margin-left: $space_xs;
+        margin-right: $space_xs;
+        background: $border_dark;
+        position: initial;
+        z-index: 0;
+      }
+    }
   }
 }
