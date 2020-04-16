@@ -1,0 +1,16 @@
+#!/bin/sh
+
+set -e
+
+if [ -t 0 ]; then
+  INTERACTIVE="--interactive"
+  AWS_CREDS_MOUNT="--mount type=bind,source=${HOME}/.aws/credentials,destination=/root/.aws/credentials,readonly"
+fi
+
+DEPLOYER_IMAGE="quay.io/powerhome/deployer:master-e4c01702624ac34f2663f894fbdb68a369b09629-588"
+DEPLOYER_MOUNTS="${AWS_CREDS_MOUNT} --mount type=bind,source=$(pwd),destination=/app --mount type=bind,source=${HOME}/.kube,destination=/root/.kube"
+RUN_DEPLOYER="docker run --tty ${INTERACTIVE} ${EXTRA_ARGS} --rm --env AWS_ACCESS_KEY_ID --env AWS_SECRET_ACCESS_KEY ${DEPLOYER_MOUNTS} ${DEPLOYER_IMAGE}"
+
+docker pull --quiet $DEPLOYER_IMAGE
+
+${RUN_DEPLOYER} "$@"

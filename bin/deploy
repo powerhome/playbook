@@ -2,11 +2,6 @@
 
 set -o pipefail
 
-environment=$1
-revision=$2
-tag=$3
-cluster=$4
-
 sops --decrypt $(pwd)/config/deploy/${environment}/secrets.yaml > $(pwd)/config/deploy/${environment}/secrets.dec.yaml
 krane render \
     --filenames=$(pwd)/config/deploy/templates \
