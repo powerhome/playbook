@@ -1,3 +1,6 @@
+dependencies:
+  override: []
+
 deploy:
   max_commits: # Automatically deploy all commits, no matter how many.
   override:
