@@ -6,6 +6,7 @@ require "yaml"
 module Playbook
   class PagesController < ApplicationController
     before_action :set_kit, only: %i[kit_show_rails kit_show_react]
+    before_action :ensure_rails_kit_exists, only: %i[kit_show_rails]
     before_action :set_category, only: %i[kit_category_show_rails kit_category_show_react]
 
     def home; end
@@ -63,6 +64,13 @@ module Playbook
       else
         redirect_to root_path, flash: { error: "That kit does not exist" }
       end
+    end
+
+    def ensure_rails_kit_exists
+      # TODO: unsure why we cannot simply use the helpers that are included in ApplicationController - fix this
+      erbfiles = File.join("**", "*.erb")
+      kit_files = Dir.glob(erbfiles, base: "#{Playbook::Engine.root}/app/pb_kits/playbook/pb_#{@kit}/docs").present?
+      redirect_to action: "kit_show_react" unless kit_files.present?
     end
   end
 end
