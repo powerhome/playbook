@@ -17,6 +17,7 @@ kits:
   - fixed_confirmation_toast
   - flex
   - forms:
+    - file_upload
     - form
     - form_pill
     - radio
@@ -77,3 +78,4 @@ kits:
     - weekday_stacked
   - user
   - user_badge
+

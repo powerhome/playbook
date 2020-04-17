@@ -3,23 +3,20 @@ import {
   WeekdayStacked,
 } from '../../'
 
-const WeekdayStackedCompact = () => (
+const WeekdayStackedVariant = () => (
   <div>
     <WeekdayStacked
-        compact
         variant="day_only"
     />
     <WeekdayStacked
         align="center"
-        compact
         variant="month_day"
     />
     <WeekdayStacked
         align="right"
-        compact
         variant="expanded"
     />
   </div>
 )
 
-export default WeekdayStackedCompact
+export default WeekdayStackedVariant
