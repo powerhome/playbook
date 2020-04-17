@@ -25,6 +25,10 @@ export default class DateTime {
     return this.value.strftime('%Z')
   }
 
+  toCustomFormat(format = '%-m/%-d') {
+    return this.value.strftime(format)
+  }
+
   toYear() {
     return this.value.strftime('%Y')
   }
