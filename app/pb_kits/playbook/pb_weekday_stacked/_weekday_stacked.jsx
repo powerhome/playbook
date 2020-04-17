@@ -17,10 +17,10 @@ import DateTime from '../pb_kit/dateTime.js'
 type WeekdayStackedProps = {
   align?: 'left' | 'center' | 'right',
   className?: String,
-  compact?: Boolean,
   dark?: Boolean,
   date: Date,
-  dayOnly?: Boolean,
+  variant?: 'day_only' | 'month_day' | 'expanded',
+  compact?: Boolean,
   id?: String,
 }
 
@@ -33,22 +33,23 @@ const getDayOfWeek = (date, compact) => {
   }
 }
 
-const getFormattedDate = (date, dayOnly) => {
+const getFormattedDate = (date, variant) => {
   const dateTime = new DateTime({ value: date })
-  if (dayOnly) {
+  if (variant === 'day_only') {
     return dateTime.toDay()
   } else {
-    return `${dateTime.toMonthNum()}/${dateTime.toDay()}`
+    const format = variant === 'expanded' ? '%b %-d' : '%-m/%-d'
+    return dateTime.toCustomFormat(format)
   }
 }
 
 const WeekdayStacked = ({
   align = 'left',
   className,
-  compact = false,
   dark = false,
   date = new Date(),
-  dayOnly = false,
+  variant = 'month_day',
+  compact = false,
 }: WeekdayStackedProps) => (
   <div
       className={classnames(buildCss('pb_weekday_stacked_kit', align), className)}
@@ -58,7 +59,7 @@ const WeekdayStacked = ({
         dark={dark}
         size={4}
         tag="span"
-        text={getFormattedDate(date, dayOnly)}
+        text={getFormattedDate(date, variant)}
     />
   </div>
 )
