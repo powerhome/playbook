@@ -5,42 +5,37 @@ import { Body } from '../../'
 const CardHeader = () => {
   return (
     <div>
-      Default
-      <CardTest>
-        <CardTest.Header>
+      <CardTest padding="none">
+        {/* <CardTest.Header>
           <Body dark 
                 text="Header"  />
-        </CardTest.Header>
+        </CardTest.Header> */}
         <CardTest.Body>
           <Body text="Body" />
         </CardTest.Body>
       </CardTest>
+
       <br />
-      Header and body padding large
-      <CardTest bodyPadding="lg" 
-                headerPadding="lg">
-        <CardTest.Header>
+
+      <CardTest padding="none">
+        <CardTest.Header 
+          padding="md"
+          color="category_11">
           <Body dark 
-                text="Header"  />
+                text="Header" />
         </CardTest.Header>
-        <CardTest.Body>
+        <CardTest.Body
+          padding="lg">
           <Body text="Body" />
         </CardTest.Body>
       </CardTest>
+      
       <br />
-      Only body
-      <CardTest>
-        <CardTest.Body>
-          Body
-        </CardTest.Body>
+
+      <CardTest highlight={{ position: 'side', color: 'windows' }}>
+        Text
       </CardTest>
-      <br />
-      Only header
-      <CardTest>
-        <CardTest.Header>
-          Header
-        </CardTest.Header>
-      </CardTest>
+
     </div>
   )
 }

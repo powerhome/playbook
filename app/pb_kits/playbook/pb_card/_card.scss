@@ -11,7 +11,7 @@ $pb_card_border_width: 1px;
 $pb_card_border_radius: $border_rad_heavier;
 $pb_card_highlight_colors: map-merge($status_colors, $product_colors);
 $pb_card_highlight_size: 4px;
-$pb_card_header_height: 2.75em;
+$pb_card_header_colors: $category_colors;
 
 @mixin pb_card_selected($border_color: $primary) {
   border-color: $border_color;
@@ -60,16 +60,9 @@ $pb_card_header_height: 2.75em;
   z-index: 10;
 }
 
-/*
-@mixin pb_card_header($width){
-  content: "";
-  position: absolute;
-  width: $width;
-  height: 2.75em;
-  background: $data_1;
-  z-index: 10;
+@mixin pb_card_header($category_color) {
+  background: $category_color;
 }
-*/
 
 [class^=pb_card_kit] {
   @include pb_card;
@@ -82,6 +75,14 @@ $pb_card_header_height: 2.75em;
         
     &[class*=_selected] {
       @include pb_card_selected_dark;
+    }
+  }
+
+  [class^=pb_card_header_kit] {
+    @each $color_name, $color_value in $category_colors {
+      &[class*=_#{$color_name}] {
+        @include pb_card_header($color_value);
+      }
     }
   }
 

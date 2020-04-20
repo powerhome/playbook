@@ -23,6 +23,7 @@
 @include doc-color($data_colors);
 @include doc-color($status_colors);
 @include doc-color($product_colors);
+@include doc-color($category_colors);
 
 .pb--color_bg_gradient {
   background: $gradient_start;
