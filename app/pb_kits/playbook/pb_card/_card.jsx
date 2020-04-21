@@ -37,7 +37,7 @@ const Header = ({
   children,
   className,
   padding = 'sm',
-  color = 'category_14',
+  color = 'category_1',
 }: CardHeaderProps) => {
   const headerCSS = buildCss('pb_card_header_kit', padding, color)
   return (
