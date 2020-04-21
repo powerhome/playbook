@@ -17,14 +17,11 @@ export default class PbTooltip extends PbEnhancedElement {
         },
         arrow: {
           element: `#${this.tooltipId}-arrow`,
-          options: {
-            padding: 5, // 5px from the edges of the popper
-          },
         },
       },
     })
 
-    this.triggerElement.addEventListener('click', () => {
+    this.triggerElement.addEventListener('mouseover', () => {
       event.preventDefault()
       event.stopPropagation()
 
@@ -32,6 +29,30 @@ export default class PbTooltip extends PbEnhancedElement {
         this.popper.scheduleUpdate()
         this.toggleTooltip()
       }, 0)
+
+      // if(target.closest(`#${this.tooltipId}`) == document.querySelector(`${this.tooltipId}`)) {
+      //   console.log("mouseout target is:" + target);
+      // } else {
+      //   setTimeout(() => {
+      //     this.popper.scheduleUpdate()
+      //     this.hideTooltip()
+      //   }, 0)
+      // }
+    })
+
+    this.triggerElement.addEventListener('mouseout', ({ target }) => {
+      event.preventDefault()
+      event.stopPropagation()
+      // console.log("mouseout target is:" + target);
+      if (target.closest(`#${this.tooltipId}`) == document.querySelector(`#${this.tooltipId}`)) {
+        // console.log("mouseout target is:" + target);
+        this.popper.scheduleUpdate()
+      } else {
+        setTimeout(() => {
+          this.popper.scheduleUpdate()
+          this.hideTooltip()
+        }, 0)
+      }
     })
   }
 
@@ -62,4 +83,16 @@ export default class PbTooltip extends PbEnhancedElement {
   get tooltipId() {
     return this.element.dataset.pbTooltipTooltipId
   }
+
+  // checkHover() {
+  //   this.triggerElement.addEventListener('mouseenter', () => {
+  //     this.toggleTooltip()
+  //   })
+
+  //   this.triggerElement.addEventListener('mouseout', () => {
+  //     this.hideTooltip()
+  //   })
+  // }
+
+  // checkHover()
 }

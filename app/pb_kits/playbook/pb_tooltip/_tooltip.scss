@@ -3,6 +3,9 @@
 [class^="pb_tooltip_kit"] {
   .tooltip_tooltip {
     display: none;
+    opacity:0; 
+    filter:alpha(opacity=0);
+    
     .arrow {
       content: " ";
       position: absolute;
@@ -15,6 +18,8 @@
       margin-left: -10px;
     }
     &.show {
+      opacity: 1;
+      filter:alpha(opacity=1);
       display: block;
       z-index: $z_9;
       margin-bottom: $space_sm;
