@@ -1,17 +1,23 @@
 @import "../tokens/shadows";
 @import "../tokens/border_radius";
-@import "../tokens/shadows";
+@import "../tokens/spacing";
 @import "../tokens/colors";
 @import "../tokens/transition";
 @import "../tokens/animation-curves";
-@import "child_kits/card_body";
-@import "child_kits/card_header";
 
 $pb_card_border_width: 1px;
 $pb_card_border_radius: $border_rad_heavier;
 $pb_card_highlight_colors: map-merge($status_colors, $product_colors);
 $pb_card_highlight_size: 4px;
 $pb_card_header_colors: $category_colors;
+$pb_card_padding:(
+  none: 0,
+  xs: $space_xs,
+  sm: $space_sm,
+  md: $space_md,
+  lg: $space_lg,
+  xl: $space_xl,
+);
 
 @mixin pb_card_selected($border_color: $primary) {
   border-color: $border_color;
@@ -60,9 +66,10 @@ $pb_card_header_colors: $category_colors;
   z-index: 10;
 }
 
-@mixin pb_card_header($category_color) {
+@mixin pb_card_header_color($category_color) {
   background: $category_color;
 }
+
 
 [class^=pb_card_kit] {
   @include pb_card;
@@ -70,22 +77,47 @@ $pb_card_header_colors: $category_colors;
   &[class*=_selected] {
     @include pb_card_selected;
   }
+
   &[class*=_dark] {
     @include pb_card_dark;
-        
+
     &[class*=_selected] {
       @include pb_card_selected_dark;
     }
   }
 
   [class^=pb_card_header_kit] {
+    flex-grow: 0;
+    flex-shrink: 0;
+    flex-basis: auto;
+    min-height: 1px;
+    border: 0;
+    border-radius: $pb_card_border_radius $pb_card_border_radius 0px 0px;  
     @each $color_name, $color_value in $category_colors {
       &[class*=_#{$color_name}] {
-        @include pb_card_header($color_value);
+        @include pb_card_header_color($color_value);
+      }
+    }
+    @each $padding_name, $padding_value in $pb_card_padding {
+      &[class*=_#{$padding_name}] {
+          padding: $padding_value;
       }
     }
   }
 
+  [class^=pb_card_body_kit] {
+    flex-grow: 0;
+    flex-shrink: 0;
+    flex-basis: auto;
+    min-height: 1px;
+    border: 0;
+    @each $name, $padding_size in $pb_card_padding {
+      &[class*=_#{$name}] {
+        padding: $padding_size;
+      }
+    }
+  }
+  
   @each $name, $shadow in $box_shadows {
     &[class*=_#{$name}] {
       box-shadow: $shadow;

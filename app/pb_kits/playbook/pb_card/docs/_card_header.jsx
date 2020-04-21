@@ -5,6 +5,12 @@ const CardHeader = () => {
   return (
     <div>
       <Card padding="none">
+        <Card.Header>
+          <Body
+              dark
+              text="Header"
+          />
+        </Card.Header>
         <Card.Body>
           <Body text="Body" />
         </Card.Body>
@@ -28,14 +34,6 @@ const CardHeader = () => {
           <Body text="Body" />
         </Card.Body>
       </Card>
-      <br />
-
-      <Card
-          highlight={{ position: 'side', color: 'windows' }}
-      >
-        {'Text'}
-      </Card>
-
     </div>
   )
 }
