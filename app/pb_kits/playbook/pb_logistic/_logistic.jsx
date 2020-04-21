@@ -6,7 +6,7 @@ import DateTime from '../pb_kit/dateTime.js'
 import { Body, Caption, Icon, Title } from '../'
 
 const dateString = (value: DateTime) => {
-  const month = value.toMonthNumber()
+  const month = value.toMonthNum()
   const day = value.toDay()
 
   return ` · ${month}/${day}`
