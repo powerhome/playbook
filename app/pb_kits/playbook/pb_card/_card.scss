@@ -10,6 +10,7 @@ $pb_card_border_radius: $border_rad_heavier;
 $pb_card_highlight_colors: map-merge($status_colors, $product_colors);
 $pb_card_highlight_size: 4px;
 $pb_card_header_colors: $category_colors;
+$pb_card_header_border_radius: $border_rad_heavy;
 $pb_card_padding:(
   none: 0,
   xs: $space_xs,
@@ -92,7 +93,7 @@ $pb_card_padding:(
     flex-basis: auto;
     min-height: 1px;
     border: 0;
-    border-radius: $pb_card_border_radius $pb_card_border_radius 0px 0px;  
+    border-radius: $pb_card_header_border_radius $pb_card_header_border_radius 0px 0px;  
     @each $color_name, $color_value in $category_colors {
       &[class*=_#{$color_name}] {
         @include pb_card_header_color($color_value);

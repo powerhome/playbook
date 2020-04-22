@@ -13,7 +13,7 @@ type CardPropTypes = {
   },
   padding?: 'none' | 'xs' | 'sm' | 'md' | 'lg' | 'xl',
   selected?: Boolean,
-  shadow?: 'none' | 'shallow' | 'default' | 'deep' | 'deeper' | 'deepest',
+  shadow?: 'none' | 'deep' | 'deeper' | 'deepest',
   dark?: Boolean,
 }
 
