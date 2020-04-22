@@ -1,0 +1,1 @@
+Card highlight can pass status, product, and category colors. List of all colors can be viewed <a href="https://playbook.powerapp.cloud/utilities" target="_blank">here</a>.

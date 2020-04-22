@@ -20,7 +20,7 @@ const CardHeader = () => {
 
       <Card padding="none">
         <Card.Header
-            color="category_2"
+            categoryColor={2}
             padding="md"
         >
           <Body

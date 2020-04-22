@@ -35,6 +35,8 @@ RSpec.describe Playbook::PbCard::Card do
       expect(subject.new(highlight: {position: "side"}).classname).to eq "pb_card_kit_deselected_highlight_side"
       expect(subject.new(highlight: {color: "windows"}).classname).to eq "pb_card_kit_deselected_highlight_windows"
       expect(subject.new(highlight: {color: "error"}).classname).to eq "pb_card_kit_deselected_highlight_error"
+      expect(subject.new(highlight: {color: "category_2"}).classname).to eq "pb_card_kit_deselected_highlight_category_2"
+
     end
   end
 end

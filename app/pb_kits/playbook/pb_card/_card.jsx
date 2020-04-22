@@ -21,9 +21,7 @@ type CardHeaderProps = {
   children: Array<React.ReactNode> | React.ReactNode,
   className?: String,
   padding?: 'none' | 'xs' | 'sm' | 'md' | 'lg' | 'xl',
-  color?: 'category_1' | 'category_2' | 'category_3' | 'category_4' | 'category_5' | 'category_6' | 'category_7' | 'category_8' |
-          'category_9' | 'category_10' | 'category_11' | 'category_12' | 'category_13' | 'category_14' | 'category_15' | 'category_16' |
-          'category_17' | 'category_18' | 'category_19' | 'category_20' | 'category_21',
+  categoryColor?: Number,
 }
 
 type CardBodyProps = {
@@ -37,9 +35,9 @@ const Header = ({
   children,
   className,
   padding = 'sm',
-  color = 'category_1',
+  categoryColor = 1,
 }: CardHeaderProps) => {
-  const headerCSS = buildCss('pb_card_header_kit', padding, color)
+  const headerCSS = buildCss('pb_card_header_kit', padding, `category_${categoryColor}`)
   return (
     <div className={classnames(headerCSS, className)}>
       {children}
