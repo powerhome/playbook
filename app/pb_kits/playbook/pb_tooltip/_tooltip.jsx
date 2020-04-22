@@ -1,7 +1,8 @@
 // @flow
 
-import React from 'react'
+import React, { useState } from 'react'
 import ReactDOM from 'react-dom'
+import classnames from 'classnames'
 
 import {
   Popper,
@@ -11,159 +12,123 @@ import {
 } from 'react-popper'
 
 import {
+  buildAriaProps,
   buildCss,
   noop,
 } from '../utilities/props'
 
 type PbTooltipProps = {
   className?: String,
-  closeOnClick?: 'outside' | 'inside',
   dark: Boolean,
-  offset?: Boolean,
-  reference: PopperReference,
   show?: Boolean,
-  shouldClosePopover?: () => Boolean,
+  text: String,
 } & PopperProps
 
-const POPOVER_OFFSET_Y = {
-  offset: {
-    offset: '0, 8',
-  },
-}
+const TOOLTIP_TIMEOUT = 250
+let mouseenterTimeout
 
-const popoverModifiers = ({ modifiers, offset }) => {
-  return offset ? { ...modifiers, ...POPOVER_OFFSET_Y } : modifiers
-}
+const Tooltip = ({
+  dark=false,
+  reference,
+  text,
+  usePortal=false,
+}: PbTooltipProps) => {
+  const [show, setShow] = useState(false)
+  const [flipped, setFlipped] = useState(false)
 
-const Popover = ({
-  children,
-  className,
-  dark = false,
-  modifiers,
-  offset,
-  placement,
-  referenceElement,
-  show,
-}: PbTooltipProps) => (
-  <Popper
-      modifiers={popoverModifiers({ modifiers, offset })}
-      placement={placement}
-      referenceElement={referenceElement}
-  >
-    {({ placement, ref, scheduleUpdate, style }) => {
-      scheduleUpdate()
-      return (
-        <div
-            className={buildCss('pb_tooltip_kit' + (dark === true ? '_dark ' : ' ') + className)}
-            data-placement={placement}
-            ref={ref}
-            style={style}
+  const ariaProps = buildAriaProps({role: 'tooltip'})
+  const darkClass = dark ? 'dark' : ''
+  const showClass = show ? 'show' : ''
+  const flippedClass = flipped ? 'flipped' : ''
 
-        >
-          <div className={(`tooltip_tooltip ${show ? 'show' : ''}`)}>
-            { children }
-          </div>
-        </div>
-        )
+  const handleOnUpdate = ({flipped}) => {
+    console.log(flipped)
+  }
+
+  const modifiers = {
+    // Sadly, there is not an onUpdate in this version of react-popper so we must go it alone
+    // https://github.com/popperjs/react-popper/issues/223#issuecomment-427856223
+    onUpdate: {
+      enabled: true,
+      order: 1000,
+      fn: (data) => {
+        setFlipped(data.flipped)
       }
     }
-  </Popper>
-)
-
-export default class Tooltip extends React.Component<PbTooltipProps> {
-  static defaultProps = {
-    modifiers: {},
-    offset: false,
-    placement: 'top',
-    portal: 'body',
-    show: false,
-    shouldClosePopover: noop,
-    usePortal: false,
   }
 
-  componentDidMount() {
-    const { closeOnClick, shouldClosePopover } = this.props
-
-    if (!closeOnClick) return
-
-    document.body.addEventListener('click', ({ target }) => {
-      const targetIsPopover = target.closest('[class^=tooltip_tooltip]') !== null
-      const targetIsReference = target.closest('.pb_tooltip_reference_wrapper') !== null
-
-      if (targetIsReference) return
-
-      switch (closeOnClick) {
-      case 'outside':
-        if (!targetIsPopover) {
-          shouldClosePopover(true)
-        }
-        break
-      case 'inside':
-        if (targetIsPopover) {
-          shouldClosePopover(true)
-        }
-        break
-      case 'any':
-        shouldClosePopover(true)
-        break
-      }
-    })
-  }
-
-  props: PbTooltipProps
-
-  render() {
-    const {
-      className,
-      children,
-      modifiers,
-      offset,
-      placement,
-      portal,
-      reference,
-      referenceElement,
-      show,
-      usePortal,
-    } = this.props
-
-    const popoverComponent = (
-      <Popover
-          className={className}
-          modifiers={modifiers}
-          offset={offset}
-          placement={placement}
-          referenceElement={referenceElement}
-          show={show}
-      >
-        {children}
-      </Popover>
-    )
-
-    return (
-      <PopperManager>
-        <If condition={reference && !referenceElement}>
-          <PopperReference>
-            {({ ref }) => (
-              <span
-                  className="pb_tooltip_reference_wrapper"
-                  ref={ref}
-              >
-                <reference.type
-                    {...reference.props}
+  const tooltipComponent = (
+    <Popper
+      modifiers={modifiers}
+      placement='top'
+    >
+      {({ placement, ref, scheduleUpdate, style, arrowProps }) => {
+        scheduleUpdate()
+        return (
+            <div
+              className={buildCss('pb_tooltip_kit', darkClass)}
+              data-placement={placement}
+              ref={ref}
+              style={style}
+            >
+              <div className={classnames('tooltip_tooltip react', showClass, flippedClass)}>
+                {text}
+                <div
+                  className="arrow"
+                  ref={arrowProps.ref}
+                  style={arrowProps.style}
                 />
-              </span>
-            )}
-          </PopperReference>
-        </If>
-        <If condition={usePortal}>
-          {ReactDOM.createPortal(
-            popoverComponent,
-            document.querySelector(portal)
-          )}
-          <Else />
-          {popoverComponent}
-        </If>
-      </PopperManager>
-    )
+              </div>
+            </div>
+          )
+        }
+      }
+    </Popper>
+  )
+
+  if(!reference) {
+    console.error('No reference element supplied. See docs for implementation details.')
+    return null
   }
+
+  const handleMouseEnter = (event) => {
+    mouseenterTimeout = setTimeout(() => {
+      setShow(true)
+    }, TOOLTIP_TIMEOUT)
+  }
+
+  const handleMouseLeave = (event) => {
+    clearTimeout(mouseenterTimeout)
+    setTimeout(() => {
+      setShow(false)
+    }, TOOLTIP_TIMEOUT)
+  }
+
+  return (
+    <PopperManager>
+      <PopperReference>
+        {({ ref }) => (
+          <span
+            className="pb_tooltip_reference_wrapper"
+            ref={ref}
+          >
+            <reference.type
+              onMouseEnter={handleMouseEnter}
+              {...reference.props}
+            />
+          </span>
+        )}
+      </PopperReference>
+      <If condition={usePortal}>
+        {ReactDOM.createPortal(
+          tooltipComponent,
+          document.querySelector(portal)
+        )}
+        <Else />
+        {tooltipComponent}
+      </If>
+    </PopperManager>
+  )
 }
+
+export default Tooltip
