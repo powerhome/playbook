@@ -13,6 +13,8 @@ kits:
     - legend
     - line_graph
     - distribution_bar
+    - donut_chart
+
   - filter
   - fixed_confirmation_toast
   - flex

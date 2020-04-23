@@ -1,0 +1,8 @@
+examples:
+
+  rails:
+  - donut_chart_default: Default
+
+
+  react:
+  - donut_chart_default: Default
