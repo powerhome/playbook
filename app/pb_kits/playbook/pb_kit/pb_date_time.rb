@@ -67,6 +67,10 @@ module Playbook
         @value.strftime("%l")
       end
 
+      def to_full_hour
+        @value.strftime("%I")
+      end
+
       def to_minutes
         @value.strftime("%M")
       end

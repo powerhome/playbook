@@ -1,0 +1,20 @@
+@import "../pb_title/title";
+@import "../pb_caption/caption";
+@import "../tokens/colors";
+
+
+[class^=pb_time_stacked_kit]{
+  &[class*=_dark] {
+    & > * [class^=pb_title_kit] {
+      color: $text_dk_default;
+    }
+    & > * [class^=pb_caption_kit] {
+      color: $text_dk_light;
+    }
+  }
+}
+
+[class*=pb_time_stacked_kit_caption] {
+  padding-bottom: 2px;
+  text-transform: lowercase;
+}
