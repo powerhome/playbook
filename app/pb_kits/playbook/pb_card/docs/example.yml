@@ -3,6 +3,7 @@ examples:
   - card_light: Default
   - card_dark: Dark Cards
   - card_highlight: Highlight Cards
+  - card_header: Header Cards
   - card_selected: Selected
   - card_padding: Padding Size
   - card_shadow: Shadow Size
@@ -12,6 +13,7 @@ examples:
   - card_light: Default
   - card_dark: Dark Cards
   - card_highlight: Highlight Cards
+  - card_header: Header Cards
   - card_selected: Selected
   - card_padding: Padding Size
   - card_shadow: Shadow Size

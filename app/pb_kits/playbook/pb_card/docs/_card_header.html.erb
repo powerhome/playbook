@@ -1,0 +1,19 @@
+<%= pb_rails("card", props: { padding: "none", header: true}) do %>
+  <%= pb_rails("card/card_header", props: { padding: "sm" }) do %>
+      <%= pb_rails("body", props: { text: "Header", dark: true }) %>
+  <% end %>
+  <%= pb_rails("card/card_body", props: { padding: "sm" }) do %>
+    Body
+  <% end %>
+<% end %>
+
+<br />
+
+<%= pb_rails("card", props: { padding: "none", header: true}) do %>
+  <%= pb_rails("card/card_header", props: { padding: "md", category_color: 2 }) do %>
+    <%= pb_rails("body", props: { text: "Header", dark: true }) %>
+  <% end %>
+  <%= pb_rails("card/card_body", props: { padding: "lg" }) do %>
+    Body
+  <% end %>
+<% end %>
