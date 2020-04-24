@@ -41,7 +41,7 @@ RSpec.describe Playbook::PbTimeStacked::TimeStacked do
 
   describe "#tag_classnames" do
     it "returns class name with tag", :aggregate_failures do
-      date = DateTime.new(2020, 04, 06).in_time_zone("America/New_York")
+      date = Date.new(2020, 04, 06)
 
       expect(subject.new(date: date).tag_classnames).to eq "pb_time_stacked_kit_body"
       expect(subject.new(date: date, tag: "caption").tag_classnames).to eq "pb_time_stacked_kit_caption"
@@ -50,7 +50,7 @@ RSpec.describe Playbook::PbTimeStacked::TimeStacked do
 
   describe "#format_time_string" do
     it "returns a formatted string" do
-      time = "10:00am".to_datetime
+      time = Date.new(2020, 04, 06)
       result = "#{time.strftime("%I:%M")}#{time.strftime("%P")[0, 1]}"
 
       expect(subject.new(date: time).format_time_string).to eq result
