@@ -5,10 +5,17 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+
 ## Unreleased
 
+
+## [4.12.0] 2020-4-24
 ### Added
 - Added card header prop to Card Kit and added category colors ([#746](https://github.com/powerhome/playbook/pull/746)@christinaatai)
+
+### Fixed
+- Limit webpacker CPU & memory on local dev ([#749](https://github.com/powerhome/playbook/pull/749) @thestephenmarshall)
+
 
 ## [4.12.0] 2020-4-17
 - New Kit - File Upload Kit ([#730](https://github.com/powerhome/playbook/pull/730) @thestephenmarshall)

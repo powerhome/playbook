@@ -18,6 +18,14 @@ services:
       context: .
       args:
         precompileassets: "disable"
+    deploy:
+      resources:
+        limits:
+          cpus: '4.0'
+          memory: 8G
+        reservations:
+          cpus: '2.0'
+          memory: 2G
     env_file:
       - '.env.docker'
     command: bash -c "rm -rf /app/public/packs; rm -rf /home/app/src/spec/dummy/tmp/pids/server.pid; ./bin/webpack-dev-server"
