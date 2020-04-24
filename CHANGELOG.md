@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [4.12.0] 2020-4-24
 ### Added
 - Added card header prop to Card Kit and added category colors ([#746](https://github.com/powerhome/playbook/pull/746)@christinaatai)
+- New Kits - Time Stacked & Date Time Stacked ([#745](https://github.com/powerhome/playbook/pull/745) @haydenrou)
 
 ### Fixed
 - Limit webpacker CPU & memory on local dev ([#749](https://github.com/powerhome/playbook/pull/749) @thestephenmarshall)

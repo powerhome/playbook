@@ -8,7 +8,7 @@
         <%= pb_rails("date_stacked", props: { align: "right", date: object.date, reverse: true, size: "sm", dark: object.dark }) %>
       <% end %>
       <%= pb_rails("flex/flex_item") do %>
-        <%= pb_rails("time_stacked", props: { classname: "pb_date_time_stacked_kit", date: object.date }) %>
+        <%= pb_rails("time_stacked", props: { classname: "pb_date_time_stacked_kit", date: object.date, tag: "caption" }) %>
       <% end %>
     <% end %>
 

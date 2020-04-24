@@ -2,10 +2,12 @@ examples:
 
   rails:
   - time_stacked_default: Default
+  - time_stacked_caption: With Caption
   - time_stacked_dark: Dark
 
 
   react:
   - time_stacked_default: Default
+  - time_stacked_caption: With Caption
   - time_stacked_dark: Dark
 

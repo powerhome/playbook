@@ -15,6 +15,8 @@ RSpec.describe Playbook::PbTimeStacked::TimeStacked do
   it { is_expected.to define_prop(:classnames)
                       .of_type(Playbook::Props::String)
                       .with_default(nil) }
+  it { is_expected.to define_enum_prop(:tag)
+                      .with_values("body", "caption") }
 
   describe "#month" do
     it "returns the date prop's month and month as a string" do
@@ -34,7 +36,15 @@ RSpec.describe Playbook::PbTimeStacked::TimeStacked do
 
       expect(subject.new(date: date).classname).to eq "pb_time_stacked_kit"
       expect(subject.new(date: date, dark: true).classname).to include "_dark"
+    end
+  end
 
+  describe "#tag_classnames" do
+    it "returns class name with tag", :aggregate_failures do
+      date = DateTime.new(2020, 04, 06).in_time_zone("America/New_York")
+
+      expect(subject.new(date: date).tag_classnames).to eq "pb_time_stacked_kit_body"
+      expect(subject.new(date: date, tag: "caption").tag_classnames).to eq "pb_time_stacked_kit_caption"
     end
   end
 
