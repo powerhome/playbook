@@ -6,7 +6,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## Unreleased
-- Added table row side highlight variant ([#753](https://github.com/powerhome/playbook/pull/753) @christinaatai)
+- Added table row side highlight prop ([#753](https://github.com/powerhome/playbook/pull/753) @christinaatai)
 
 ## [4.12.0] 2020-4-24
 ### Added
