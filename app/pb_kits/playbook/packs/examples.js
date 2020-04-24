@@ -29,6 +29,7 @@ import * as Date from 'pb_date/docs'
 import * as DateRangeInline from 'pb_date_range_inline/docs'
 import * as DateRangeStacked from 'pb_date_range_stacked/docs'
 import * as DateStacked from 'pb_date_stacked/docs'
+import * as DateTimeStacked from 'pb_date_time_stacked/docs'
 import * as DateYearStacked from 'pb_date_year_stacked/docs'
 import * as DistributionBar from 'pb_distribution_bar/docs'
 import * as FileUpload from 'pb_file_upload/docs'
@@ -74,6 +75,7 @@ import * as Table from 'pb_table/docs'
 import * as Textarea from 'pb_textarea/docs'
 import * as TextInput from 'pb_text_input/docs'
 import * as Time from 'pb_time/docs'
+import * as TimeStacked from 'pb_time_stacked/docs'
 import * as Timestamp from 'pb_timestamp/docs'
 import * as TimeRangeInline from 'pb_time_range_inline/docs'
 import * as Title from 'pb_title/docs'
@@ -101,6 +103,7 @@ WebpackerReact.setup({
   ...DateRangeInline,
   ...DateRangeStacked,
   ...DateStacked,
+  ...DateTimeStacked,
   ...DateYearStacked,
   ...DistributionBar,
   ...FileUpload,
@@ -146,6 +149,7 @@ WebpackerReact.setup({
   ...Textarea,
   ...TextInput,
   ...Time,
+  ...TimeStacked,
   ...Timestamp,
   ...TimeRangeInline,
   ...Title,

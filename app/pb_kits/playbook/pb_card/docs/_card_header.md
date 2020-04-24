@@ -1,0 +1,1 @@
+Card headers passes category colors only. List of all category colors can be viewed <a href="https://playbook.powerapp.cloud/utilities" target="_blank">here</a>.

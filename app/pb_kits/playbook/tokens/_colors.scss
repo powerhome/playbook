@@ -191,6 +191,52 @@ $product_colors: (
   insulation:         $insulation
 );
 
+// Category colors ---------------------
+$category_1:   $royal;
+$category_2:   #0CD2E5;
+$category_3:   $yellow;
+$category_4:   #14D595;
+$category_5:   #A057FF;
+$category_6:   #FF7034;
+$category_7:   #97DA22;
+$category_8:   #EA599F;
+$category_9:   #0091FF;
+$category_10:  #5027E4;
+$category_11:  $red;
+$category_12:  #109922;
+$category_13:  #058F9D;
+$category_14:  #A33E6F;
+$category_15:  #B2171C;
+$category_16:  #0A5C49;
+$category_17:  #325B91;
+$category_18:  #BE4714;
+$category_19:  #000080;
+$category_20:  #5C0E0A;
+$category_21:  #040830;
+$category_colors: (
+  category_1:   $category_1,
+  category_2:   $category_2,
+  category_3:   $category_3,
+  category_4:   $category_4,
+  category_5:   $category_5,
+  category_6:   $category_6,
+  category_7:   $category_7,
+  category_8:   $category_8,
+  category_9:   $category_9,
+  category_10:  $category_10,
+  category_11:  $category_11,
+  category_12:  $category_12,
+  category_13:  $category_13,
+  category_14:  $category_14,
+  category_15:  $category_15,
+  category_16:  $category_16,
+  category_17:  $category_17,
+  category_18:  $category_18,
+  category_19:  $category_19,
+  category_20:  $category_20,
+  category_21:  $category_21
+);
+
 $transparent: transparent;
 
 @mixin gradient($start: $gradient_start, $end: $gradient_end) {
@@ -222,6 +268,7 @@ $transparent: transparent;
   @include export-colors($hover_colors);
   @include export-colors($border_colors);
   @include export-colors($text_colors);
+  @include export-colors($category_colors);
   gradient_start: $gradient_start;
   gradient_end: $gradient_end;
 }

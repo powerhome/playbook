@@ -72,4 +72,16 @@ export default class DateTime {
   toIso() {
     return this.value.toISOString()
   }
+
+  toTime() {
+    return this.value.strftime('%I:%M')
+  }
+
+  toTimezone() {
+    return this.value.strftime('%Z')
+  }
+
+  toTimeWithMeridian() {
+    return this.toTime() + this.toMeridian()
+  }
 }

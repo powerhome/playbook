@@ -62,6 +62,7 @@ kits:
     - date_range_inline
     - date_range_stacked
     - date_stacked
+    - date_time_stacked
     - date_year_stacked
     - home_address_street
     - label_pill
@@ -71,6 +72,7 @@ kits:
     - person_contact
     - stat_value
     - time
+    - time_stacked
     - timestamp
     - time_range_inline
     - title_count
@@ -78,4 +80,3 @@ kits:
     - weekday_stacked
   - user
   - user_badge
-
