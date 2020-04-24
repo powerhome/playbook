@@ -3,6 +3,7 @@ examples:
     - table_sm: Small
     - table_md: Medium
     - table_lg: Large
+    - table_side_highlight: Side Highlight
     - table_container: Table Container Off
     - table_disable_hover: Disable Hover
     - table_multiline: Multi-line
@@ -15,6 +16,7 @@ examples:
     - table_sm: Small
     - table_md: Medium
     - table_lg: Large
+    - table_side_highlight: Side Highlight
     - table_container: Table Container Off
     - table_disable_hover: Disable Hover
     - table_multiline: Multi-line

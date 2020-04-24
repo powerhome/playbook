@@ -1,0 +1,85 @@
+<%= pb_rails("table", props: { size: "md" }) do %>
+  <thead>
+    <tr>
+      <th>Product Colors</th>
+      <th>Column 2</th>
+      <th>Column 3</th>
+      <th>Column 4</th>
+      <th>Column 5</th>
+    </tr>
+  </thead>
+  <tbody>
+    <%= pb_rails("table/table_row", props: { side_highlight_color: "windows" }) do %>
+			<td>Windows</td>
+			<td>Value 2</td>
+			<td>Value 3</td>
+			<td>Value 4</td>
+			<td>Value 5</td>
+    <% end %>
+		<%= pb_rails("table/table_row", props: { side_highlight_color: "siding" }) do %>
+			<td>Siding</td>
+			<td>Value 2</td>
+			<td>Value 3</td>
+			<td>Value 4</td>
+			<td>Value 5</td>
+    <% end %>
+    <%= pb_rails("table/table_row", props: { side_highlight_color: "doors" }) do %>
+			<td>Doors</td>
+			<td>Value 2</td>
+			<td>Value 3</td>
+			<td>Value 4</td>
+			<td>Value 5</td>
+    <% end %>
+    <%= pb_rails("table/table_row", props: { side_highlight_color: "none" }) do %>
+			<td>None</td>
+			<td>Value 2</td>
+			<td>Value 3</td>
+			<td>Value 4</td>
+			<td>Value 5</td>
+    <% end %>
+  </tbody>
+<% end %>
+
+<br/>
+
+<%= pb_rails("table", props: { size: "md" }) do %>
+  <thead>
+    <tr>
+      <th>Status Colors</th>
+      <th>Column 2</th>
+      <th>Column 3</th>
+      <th>Column 4</th>
+      <th>Column 5</th>
+    </tr>
+  </thead>
+  <tbody>
+    <%= pb_rails("table/table_row", props: { side_highlight_color: "success" }) do %>
+			<td>Success</td>
+			<td>Value 2</td>
+			<td>Value 3</td>
+			<td>Value 4</td>
+			<td>Value 5</td>
+    <% end %>
+		<%= pb_rails("table/table_row", props: { side_highlight_color: "warning" }) do %>
+			<td>Warning</td>
+			<td>Value 2</td>
+			<td>Value 3</td>
+			<td>Value 4</td>
+			<td>Value 5</td>
+    <% end %>
+    <%= pb_rails("table/table_row", props: { side_highlight_color: "error" }) do %>
+			<td>Error</td>
+			<td>Value 2</td>
+			<td>Value 3</td>
+			<td>Value 4</td>
+			<td>Value 5</td>
+    <% end %>
+    <%= pb_rails("table/table_row", props: { side_highlight_color: "none" }) do %>
+			<td>None</td>
+			<td>Value 2</td>
+			<td>Value 3</td>
+			<td>Value 4</td>
+			<td>Value 5</td>
+    <% end %>
+  </tbody>
+<% end %>

@@ -1,6 +1,7 @@
 export { default as TableSm } from './_table_sm.jsx'
 export { default as TableMd } from './_table_md.jsx'
 export { default as TableLg } from './_table_lg.jsx'
+export { default as TableSideHighlight } from './_table_side_highlight.jsx'
 export { default as TableContainer } from './_table_container.jsx'
 export { default as TableDataTable } from './_table_data_table.jsx'
 export { default as TableResponsiveTable } from './_table_responsive_table.jsx'
