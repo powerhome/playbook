@@ -1,1 +1,26 @@
 @import "styles/all";
+@import "../tokens/colors";
+
+$pb_table_row_kit_side_highlight_colors: map-merge($status_colors, $product_colors);
+
+@mixin pb_table_row_kit_side_highlight($background) {
+    border-left: 4px solid $background !important;
+    border-top: 0px;
+}
+
+[class^=pb_table] {
+    tbody {
+        [class^=pb_table_row_kit] {
+            @each $color_name, $color_value in $pb_table_row_kit_side_highlight_colors {
+                &[class*=_side_highlight_#{$color_name}] {
+                    // border-left: 10px solid red;             // not sure why this isn't showing
+                    td {
+                        &:first-child {
+                            @include pb_table_row_kit_side_highlight($color_value);
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
