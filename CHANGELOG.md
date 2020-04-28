@@ -8,6 +8,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+## [4.13.1] 2020-4-28
+
+### Fixed
+- Added weekday_stacked scss import back in playbook.scss
+
 ## [4.13.0] 2020-4-24
 
 ### Added
