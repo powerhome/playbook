@@ -1,17 +1,40 @@
 #!/bin/bash
-
 set -o pipefail
 
-sops --decrypt $(pwd)/config/deploy/${environment}/secrets.yaml > $(pwd)/config/deploy/${environment}/secrets.dec.yaml
+work_dir=$(pwd)
+
+environmentValuesFile=""
+if [ -e ${work_dir}/config/deploy/$environment/values.yaml ]; then
+    environmentValuesFile="@${work_dir}/config/deploy/$environment/values.yaml"
+else
+    environmentValuesFile="@${work_dir}/config/deploy/prs/values.yaml"
+fi
+
+environmentSecretsFile=""
+if [ -e ${work_dir}/config/deploy/$environment/secrets.yaml ]; then
+    sops --decrypt ${work_dir}/config/deploy/${environment}/secrets.yaml > ${work_dir}/config/deploy/${environment}/secrets.dec.yaml
+    environmentSecretsFile="@${work_dir}/config/deploy/$environment/secrets.dec.yaml"
+else
+    sops --decrypt ${work_dir}/config/deploy/prs/secrets.yaml > ${work_dir}/config/deploy/prs/secrets.dec.yaml
+    environmentSecretsFile="@${work_dir}/config/deploy/prs/secrets.dec.yaml"
+fi
+
+bindings=""
+if [ -e /app/config/deploy/$environment/values.yaml ]; then
+    bindings="@${work_dir}/config/deploy/values.yaml" "@${work_dir}/config/deploy/${environment}/values.yaml" "@${work_dir}/config/deploy/${environment}/secrets.dec.yaml" "image_tag=${tag}" "environment=${environment}"
+else
+    bindings="{\"ingress\":{\"hosts\":[\"${deploy_url}\"]}}"
+fi
+
 krane render \
-    --filenames=$(pwd)/config/deploy/templates \
-    --bindings="@$(pwd)/config/deploy/values.yaml" "@$(pwd)/config/deploy/${environment}/values.yaml" "@$(pwd)/config/deploy/${environment}/secrets.dec.yaml" "image_tag=${tag}" "environment=${environment}" \
+    --filenames=${work_dir}/config/deploy/templates \
+    --bindings="@${work_dir}/config/deploy/values.yaml" "@${work_dir}/config/deploy/${environment}/values.yaml" "@${work_dir}/config/deploy/${environment}/secrets.dec.yaml" "image_tag=${tag}" "environment=${environment}" \
     --current-sha=${tag} | krane deploy playbook-${environment} ${cluster} \
     --selector='app=playbook' \
     --verbose-log-prefix \
     --stdin
 
 deploy_exit=$?
-rm $(pwd)/config/deploy/${environment}/secrets.dec.yaml
+rm ${work_dir}/config/deploy/${environment}/secrets.dec.yaml
 
 exit $deploy_exit

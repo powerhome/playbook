@@ -1,3 +1,4 @@
+<% urls = ingress["hosts"].map { |host| URI.parse(host) } %>
 apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
 metadata:
@@ -9,22 +10,20 @@ metadata:
     certmanager.k8s.io/cluster-issuer: production-certs
     certmanager.k8s.io/acme-challenge-type: dns01
     certmanager.k8s.io/acme-dns01-provider: route53-powerapp-cloud
-    <% if environment == 'production' %>
     nginx.ingress.kubernetes.io/whitelist-source-range: '0.0.0.0/0'
-    <% end %>
 spec:
   tls:
   - hosts:
-      <% ingress["hosts"].each do |host| %>
-      - <%= host %>
+      <% urls.each do |url| %>
+      - <%= url.host %>
       <% end %>
     secretName: playbook-tls
   rules:
-    <% ingress["hosts"].each do |host| %>
-    - host: <%= host %>
+    <% urls.each do |url| %>
+    - host: <%= url.host %>
       http:
         paths:
-          - path: /
+          - path: <%= url.path %>
             backend:
               serviceName: playbook
               servicePort: 80
