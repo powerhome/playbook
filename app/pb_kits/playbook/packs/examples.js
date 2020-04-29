@@ -156,4 +156,3 @@ WebpackerReact.setup({
   ...UserBadge,
   ...WeekdayStacked,
 })
-WebpackerReact.setup(Donut)

@@ -1,32 +1,29 @@
 <% data = [{
       name: 'Waiting for Calls',
       y: 48.8,
-    
+      z: 30
     },
     {
       name: 'On Call',
       y: 46.8,
-  
+      z: 25
     }, 
     {
       name: 'After call',
       y: 4.6,
- 
+      z: 20
     }
   ] %>
 
 
 <%= pb_rails("donut_chart", props: {
-    style: "pie",
+    style: "variablepie",
     title: "AVERAGE DAILY BREAKDOWN",
     chart_data: data,
-    id: "default-test",
+    id: "starburst-test",
     min_point_size: 2,
     max_point_size: 200,
-    inner_size: 'md',
+    inner_size: 'lg',
     z_min: 0,
     start_angle: 0,
-    header_format: '',
-    useHTML: true,
-    point_format: '<b><span style="font-weight: bold; color:{point.color};">●</span> {point.name}: ' + '{point.y}%</b>'
 }) %>

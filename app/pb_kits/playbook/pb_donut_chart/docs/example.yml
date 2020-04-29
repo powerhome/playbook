@@ -1,7 +1,9 @@
 examples:
 
   rails:
-  - donut_chart_default: Default
+  - donut_chart_default: Default Style
+  - donut_chart_starburst: Starburst Style
+  - donut_chart_inner_sizes: Inner Circle Size Options
 
 
   react:
