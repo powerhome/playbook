@@ -10,7 +10,9 @@ metadata:
     certmanager.k8s.io/cluster-issuer: production-certs
     certmanager.k8s.io/acme-challenge-type: dns01
     certmanager.k8s.io/acme-dns01-provider: route53-powerapp-cloud
+    <% if environment == 'production' %>
     nginx.ingress.kubernetes.io/whitelist-source-range: '0.0.0.0/0'
+    <% end %>
 spec:
   tls:
   - hosts:
