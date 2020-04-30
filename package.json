@@ -26,8 +26,8 @@
   },
   "homepage": "https://github.com/powerhome/playbook#readme",
   "devDependencies": {
-    "@babel/preset-env": "7.5.5",
-    "babel-eslint": "10.0.3",
+    "@babel/preset-env": "7.9.6",
+    "babel-eslint": "10.1.0",
     "babel-preset-flow": "6.23.0",
     "clean-webpack-plugin": "2.0.2",
     "eslint": "6.6.0",
@@ -41,7 +41,7 @@
     "webpack-dev-server": "3.7.2"
   },
   "dependencies": {
-    "@babel/cli": "7.2.3",
+    "@babel/cli": "7.8.4",
     "@babel/core": "^7.3.4",
     "@babel/plugin-proposal-class-properties": "^7.5.5",
     "@babel/plugin-proposal-export-default-from": "^7.7.4",
