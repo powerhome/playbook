@@ -23,13 +23,13 @@ extraBindings="{\"ingress\":{\"hosts\":[\"${deploy_url}\"]}}"
 
 krane render \
     --filenames=${workDir}/config/deploy/templates \
-    --bindings="@${workDir}/config/deploy/values.yaml" "@${workDir}/config/deploy/${environment}/values.yaml" "@${workDir}/config/deploy/${environment}/secrets.dec.yaml" "image_tag=${tag}" "environment=${environment}" $extraBindings \
+    --bindings="@${workDir}/config/deploy/values.yaml" $environmentValuesFile $environmentSecretsFile "image_tag=${tag}" "environment=${environment}" $extraBindings \
     --current-sha=${tag} | krane deploy playbook-${environment} ${cluster} \
     --selector='app=playbook' \
     --verbose-log-prefix \
     --stdin
 
 deploy_exit=$?
-rm ${workDir}/config/deploy/${environment}/secrets.dec.yaml
+rm ${workDir}/config/deploy/**/*.dec.yaml
 
 exit $deploy_exit
