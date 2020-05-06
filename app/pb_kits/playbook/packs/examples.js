@@ -63,6 +63,7 @@ import * as PersonContact from 'pb_person_contact/docs'
 import * as Pill from 'pb_pill/docs'
 import * as ProgressPills from 'pb_progress_pills/docs'
 import * as ProgressSimple from 'pb_progress_simple/docs'
+import * as ProgressStepper from 'pb_progress_stepper/docs'
 import * as Radio from 'pb_radio/docs'
 import * as SectionSeparator from 'pb_section_separator/docs'
 import * as Select from 'pb_select/docs'
@@ -137,6 +138,7 @@ WebpackerReact.setup({
   ...Pill,
   ...ProgressPills,
   ...ProgressSimple,
+  ...ProgressStepper,
   ...Radio,
   ...SectionSeparator,
   ...Select,
