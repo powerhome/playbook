@@ -1,0 +1,11 @@
+<%= pb_rails("progress_stepper", props: {orientation: "horizontal"}) do %>
+  <%= pb_rails("progress_stepper/progress_item", props: {status: "complete"}) do %>
+      <%= pb_rails("body", props: {text: "Complete"}) %>
+  <% end %>
+  <%= pb_rails("progress_stepper/progress_item", props: {status: "active"}) do %>
+      <%= pb_rails("body", props: {text: "Active"}) %>
+  <% end %>
+  <%= pb_rails("progress_stepper/progress_item", props: {status: "inactive"}) do %>
+      <%= pb_rails("body", props: {text: "Inactive"}) %>
+  <% end %>
+<% end %>

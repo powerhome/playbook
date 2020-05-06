@@ -1,0 +1,222 @@
+@import "../tokens/colors";
+
+$pb_progress_stepper_circle_size: 22px;
+$pb_progress_stepper_circle_border: 2px;
+
+
+[class^=pb_progress_stepper_kit] {
+    &[class*=_horizontal] {
+        display: flex;
+        flex-direction: horizontal;
+
+        // counter-reset: step;
+        // li {
+        //     list-style-type: none;
+        //     width: 25%;
+        //     float: left;
+        //     font-size: 12px;
+        //     position: relative;
+        //     text-align: center;
+        //     text-transform: uppercase;
+        //     color: #7d7d7d;
+        // }
+        // li:before {
+        //     width: 30px;
+        //     height: 30px;
+        //     content: counter(step);
+        //     counter-increment: step;
+        //     line-height: 30px;
+        //     border: 2px solid #7d7d7d;
+        //     display: block;
+        //     text-align: center;
+        //     margin: 0 auto 10px auto;
+        //     border-radius: 50%;
+        //     background-color: white;
+        //     z-index: auto;
+        // }
+        // li:after {
+        //     width: 100%;
+        //     height: 2px;
+        //     content: '';
+        //     position: absolute;
+        //     background-color: #7d7d7d;
+        //     top: 15px;
+        //     left: -50%;
+        //     z-index: 0;
+        // }
+        // li:first-child:after {
+        //     content: none;
+        // }
+
+        // li 
+        // li.active {
+        //     color: green;
+        // }
+        // li.active:before {
+        //     background-color: $primary;
+        //     z-index: 2;
+        //     height: 22px;
+        //     width: 22px;
+        //     border-radius: 11px;
+        //     border-color: $white;
+        //     border-width: 2px;
+
+        // }
+        // li.active + li:after {
+        //     background-color: #55b776;
+        // }
+      
+        [class*=pb_progress_stepper_item_kit] {
+
+            list-style-type: none;
+            width: 25%;
+            float: left;
+            font-size: 12px;
+            position: relative;
+            text-align: center;
+            text-transform: uppercase;
+            color: $red;
+            //background-color: $border_light;
+
+            &:before {
+                width: 30px;
+                height: 30px;
+                content: '';
+                line-height: 30px;
+                border: 2px solid $border_light;
+                display: block;
+                text-align: center;
+                margin: 0 auto 10px auto;
+                border-radius: 50%;
+                background-color: white;
+            }
+
+            &:after {
+                width: 100%;
+                height: 4px;
+                content: '';
+                position: absolute;
+                background-color: $border_light;
+                top: 9px;
+                left: -50%;
+                // z-index: -1;
+            }
+
+            &:first-child:after {
+                content: none;
+            }
+
+            &[class*=_complete] {
+
+                &:before {
+                    height: 22px;
+                    width: 22px;
+                    border-radius: 11px;
+                    border-color: $white;
+                    border-width: 2px;
+                    background-color: $primary;
+                }
+            }
+
+            &[class*=_active] {
+            
+                &:before {
+                    height: 20px;
+                    width: 20px;
+                    border-radius: 11px;
+                    border-color: $primary;
+                    border-width: 2px;
+                    background-color: $white;
+                }
+
+                &:after {
+                    background-color: $primary;
+                    z-index: 1;
+                }
+            }
+
+            &[class*=_inactive] {
+
+                &:before {
+                    height: 22px;
+                    width: 22px;
+                    border-radius: 11px;
+                    border-color: $white;
+                    border-width: 2px;
+                    background-color: $border_light;
+                }
+            }
+        }
+    }
+    &[class*=_vertical] {
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        
+        *, *:before, *:after {
+        box-sizing: border-box;
+        }
+        
+        width: 650px;
+        margin: 40px auto;
+        list-style: none;
+        
+        [class^=pb_progress_stepper_item_kit] {
+            display: flex;
+
+            &:last-child {
+                border: 0;
+            }
+
+            p {
+                display: block;
+                padding: 20px;
+                line-height: 1.4;
+
+                &:nth-child(1) {
+                    position: relative;
+                    padding-right: 25px;
+                    font-size: 14px;
+                    line-height: 2.5;
+                    color: #aaa;
+                }
+
+                &:nth-child(1):after {
+                    content: '';
+                    position: absolute;
+                    top: 28px;
+                    right: -12px;
+                    display: block;
+                    width: $pb_progress_stepper_circle_size;
+                    height: $pb_progress_stepper_circle_size;
+                    border: 5px solid #999;
+                    border-width: $pb_progress_stepper_circle_border;
+                    border-style: solid;
+                    border-color: $white;
+                    border-radius: 50%;
+                    background: $border_light;
+                }
+
+                &:nth-child(2) {
+                    flex: 1;
+                    font-size: 24px;
+                    border-left: 4px solid $border_light;
+                }
+            }
+
+            &:first-child p:nth-child(1):after {
+                background: $primary_action;
+            }
+
+            p span {
+                display: block;
+                margin: 5px 0 0;
+                font-size: 12px;
+                font-style: italic;
+                color: #aaa;
+            }
+        }
+    }
+
+}
