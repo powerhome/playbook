@@ -23,7 +23,7 @@ module Playbook
       prop :header_format
       prop :point_format
       prop :use_html, type: Playbook::Props::Boolean, default: false
-      prop :title
+      prop :text
 
       def chart_type
         style == "variablepie" ? "variablepie" : "pie"
@@ -46,7 +46,7 @@ module Playbook
       def chart_options
         {
           id: id,
-          title: title,
+          text: text,
           chartData: chart_data,
           type: chart_type,
           headerFormat: header_format,
@@ -66,7 +66,3 @@ module Playbook
     end
   end
 end
-
-
-
-

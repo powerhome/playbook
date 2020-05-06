@@ -3,6 +3,7 @@
     id: object.id,
     data: object.data,
     class: object.classname) %>
+    <span><%= pb_rails("caption", props: { text: object.text }) %></span>
 <% content_for :pb_js do %>
   <%= javascript_tag do %>
     window.addEventListener('DOMContentLoaded', function() {

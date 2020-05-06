@@ -1,24 +1,24 @@
 <% data = [{
       name: 'Waiting for Calls',
       y: 48.8,
-    
+
     },
     {
       name: 'On Call',
       y: 46.8,
-  
-    }, 
+
+    },
     {
       name: 'After call',
       y: 4.6,
- 
+
     }
   ] %>
 
 
 <%= pb_rails("donut_chart", props: {
     style: "pie",
-    title: "AVERAGE DAILY BREAKDOWN",
+    text: "Average Daily Breakdown",
     chart_data: data,
     id: "default-test",
     min_point_size: 2,
