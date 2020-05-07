@@ -1,21 +1,21 @@
 <% data = [{
       name: 'Waiting for Calls',
       y: 48.8,
-    
+
     },
     {
       name: 'On Call',
       y: 46.8,
-  
-    }, 
+
+    },
     {
       name: 'After call',
       y: 4.6,
- 
+
     }
   ] %>
 
-<%= pb_rails("flex",  props: {horizontal: "center"}) do %>
+
     <%= pb_rails("donut_chart", props: {
         style: "pie",
         title: "sm",
@@ -74,5 +74,3 @@
         useHTML: true,
         point_format: '<b><span style="font-weight: bold; color:{point.color};">●</span> {point.name}: ' + '{point.y}%</b>'
     }) %>
- 
-<% end %>

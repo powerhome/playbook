@@ -46,6 +46,13 @@ class pbChart {
       chart: {
         type: this.defaults.type,
       },
+      plotOptions: {
+        pie: {
+          dataLabels: {
+            enabled: true,
+          },
+        },
+      },
       tooltip: {
         headerFormat: this.defaults.headerFormat,
         pointFormat: this.defaults.pointFormat,
@@ -59,6 +66,7 @@ class pbChart {
         zMin: this.defaults.zMin,
         startAngle: this.defaults.startAngle,
       }],
+      credits: false,
     })
   }
 
@@ -88,6 +96,9 @@ class pbChart {
       plotOptions: {
         series: {
           pointStart: this.defaults.pointStart,
+          dataLabels: {
+            enabled: false,
+          },
         },
       },
       series: this.defaults.chartData,
