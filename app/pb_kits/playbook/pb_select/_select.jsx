@@ -67,6 +67,7 @@ const Select = ({
   options = [],
   required = false,
   value,
+  ...props
 }: SelectProps) => {
   const errorClass = error ? ' error' : ''
   const css = buildCss('pb_select', { dark }) + errorClass
@@ -99,6 +100,7 @@ const Select = ({
           {children}
           <Else />
           <select
+              {...props}
               disabled={disabled}
               id={name}
               multiple={multiple}

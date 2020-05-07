@@ -50,13 +50,13 @@ const TextInput = ({
           {children}
           <Else />
           <input
+              {...props}
               className="text_input"
               name={name}
               onChange={onChange}
               placeholder={placeholder}
               type={type}
               value={value}
-              {...props}
           />
           <If condition={error}>
             <Body

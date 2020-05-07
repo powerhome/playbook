@@ -33,6 +33,7 @@ const Radio = (props: RadioProps) => {
     value,
     text,
     onChange = () => {},
+    ...extraProps
   } = props
 
   const errorClass = error ? 'error' : ''
@@ -46,6 +47,7 @@ const Radio = (props: RadioProps) => {
         {children}
         <Else />
         <input
+            {...extraProps}
             checked={checked}
             data={data}
             name={name}
