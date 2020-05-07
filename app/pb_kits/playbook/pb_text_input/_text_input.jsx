@@ -30,6 +30,7 @@ const TextInput = ({
   type = 'text',
   value,
   children = null,
+  ...props
 }: TextInputProps) => {
   const css = classnames([
     `pb_text_input_kit${dark === true ? '_dark' : ''}`,
@@ -55,6 +56,7 @@ const TextInput = ({
               placeholder={placeholder}
               type={type}
               value={value}
+              {...props}
           />
           <If condition={error}>
             <Body
