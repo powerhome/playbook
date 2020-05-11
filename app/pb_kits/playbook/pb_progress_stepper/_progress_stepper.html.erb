@@ -1,6 +1,10 @@
-<%= content_tag(:ul,
+<%= content_tag(:div,
     id: object.id,
     data: object.data,
     class: object.classname) do %>
+    
     <%= capture(&object.children) %>
+
+
+
 <% end %>

@@ -1,222 +1,236 @@
 @import "../tokens/colors";
+@import "../tokens/spacing";
 
-$pb_progress_stepper_circle_size: 22px;
-$pb_progress_stepper_circle_border: 2px;
+$pb_progress_stepper_circle_size: 14px;
+$pb_progress_stepper_connector_width: 3px;
+$pb_progress_stepper_connector_height_from_top: $pb_progress_stepper_circle_size/2 - $pb_progress_stepper_connector_width/2;
+
+
+@mixin pb_progress_stepper_circle($background_color, $border_color, $icon_color) {
+    display: flex;
+    flex-shrink: 0;
+    justify-content: center;
+    align-items: center;
+    padding-right: 0;
+    overflow: hidden;
+    height: $pb_progress_stepper_circle_size;
+    width: $pb_progress_stepper_circle_size;
+    background-color: $background_color;
+    color: $icon_color;
+    border-radius: $pb_progress_stepper_circle_size/2;
+    border: 2px solid $border_color;
+}
+
+@mixin pb_progress_stepper_line_wrapper {
+    top: $pb_progress_stepper_connector_height_from_top;
+    left: calc(-50% + 10px);
+    right: calc(50% + 10px);
+    position: absolute;
+    flex: 1 1 auto;
+}
+
+@mixin pb_progress_stepper_horizontal_line($line_color){
+    display: block;
+    border-color: $line_color;
+    border-top-width: $pb_progress_stepper_connector_width;
+    border-top-style: solid;
+    margin-bottom: 4px;
+}
+
+@mixin pb_progress_stepper_item {
+    flex: 1;
+    position: relative;
+    padding-left: 8px;
+    padding-right: 8px;
+}
+
+@mixin pb_progress_stepper_column_center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+@mixin pb_progress_stepper_vertical {
+    display: flex;
+    flex-direction: row;
+    flex: 1;
+    position: relative;
+    padding-left: 8px;
+    padding-right: 8px;
+}
+
+@mixin pb_progress_stepper_vertical_line($border_color) {
+    display: block;
+    height: 100%;
+    border-left-style: solid;
+    border-left-width: $pb_progress_stepper_connector_width;
+    border-color: $border_color;
+    margin-top: 4px;
+    margin-bottom: 4px;
+}
 
 
 [class^=pb_progress_stepper_kit] {
     &[class*=_horizontal] {
         display: flex;
-        flex-direction: horizontal;
+        > div:first-child {
+            [class=line_wrapper] {
+                display: none ;
+            }
+        }
 
-        // counter-reset: step;
-        // li {
-        //     list-style-type: none;
-        //     width: 25%;
-        //     float: left;
-        //     font-size: 12px;
-        //     position: relative;
-        //     text-align: center;
-        //     text-transform: uppercase;
-        //     color: #7d7d7d;
-        // }
-        // li:before {
-        //     width: 30px;
-        //     height: 30px;
-        //     content: counter(step);
-        //     counter-increment: step;
-        //     line-height: 30px;
-        //     border: 2px solid #7d7d7d;
-        //     display: block;
-        //     text-align: center;
-        //     margin: 0 auto 10px auto;
-        //     border-radius: 50%;
-        //     background-color: white;
-        //     z-index: auto;
-        // }
-        // li:after {
-        //     width: 100%;
-        //     height: 2px;
-        //     content: '';
-        //     position: absolute;
-        //     background-color: #7d7d7d;
-        //     top: 15px;
-        //     left: -50%;
-        //     z-index: 0;
-        // }
-        // li:first-child:after {
-        //     content: none;
-        // }
+        &[class*=_icon] {
+            [class*=pb_progress_stepper_item_kit] {
+                &[class*=_complete] {
+                    [class=step_wrapper] {
+                        @include pb_progress_stepper_column_center;
+                        [class=circle] {
+                            @include pb_progress_stepper_circle($primary, $primary, $white);
+                        }
+                    }
+                }
+            }
+        }
 
-        // li 
-        // li.active {
-        //     color: green;
-        // }
-        // li.active:before {
-        //     background-color: $primary;
-        //     z-index: 2;
-        //     height: 22px;
-        //     width: 22px;
-        //     border-radius: 11px;
-        //     border-color: $white;
-        //     border-width: 2px;
-
-        // }
-        // li.active + li:after {
-        //     background-color: #55b776;
-        // }
-      
         [class*=pb_progress_stepper_item_kit] {
-
-            list-style-type: none;
-            width: 25%;
-            float: left;
-            font-size: 12px;
-            position: relative;
-            text-align: center;
-            text-transform: uppercase;
-            color: $red;
-            //background-color: $border_light;
-
-            &:before {
-                width: 30px;
-                height: 30px;
-                content: '';
-                line-height: 30px;
-                border: 2px solid $border_light;
-                display: block;
-                text-align: center;
-                margin: 0 auto 10px auto;
-                border-radius: 50%;
-                background-color: white;
-            }
-
-            &:after {
-                width: 100%;
-                height: 4px;
-                content: '';
-                position: absolute;
-                background-color: $border_light;
-                top: 9px;
-                left: -50%;
-                // z-index: -1;
-            }
-
-            &:first-child:after {
-                content: none;
-            }
-
             &[class*=_complete] {
-
-                &:before {
-                    height: 22px;
-                    width: 22px;
-                    border-radius: 11px;
-                    border-color: $white;
-                    border-width: 2px;
-                    background-color: $primary;
+                @include pb_progress_stepper_item;
+                [class=line_wrapper] {
+                    @include pb_progress_stepper_line_wrapper;
+                    [class=line] {
+                        @include pb_progress_stepper_horizontal_line($primary);
+                    }
+                }
+                [class=step_wrapper] {
+                    @include pb_progress_stepper_column_center;
+                    [class=circle] {
+                        @include pb_progress_stepper_circle($primary, $primary, $primary);
+                    }
                 }
             }
 
             &[class*=_active] {
-            
-                &:before {
-                    height: 20px;
-                    width: 20px;
-                    border-radius: 11px;
-                    border-color: $primary;
-                    border-width: 2px;
-                    background-color: $white;
+                @include pb_progress_stepper_item;
+                [class=line_wrapper] {
+                    @include pb_progress_stepper_line_wrapper;
+                    [class=line] {
+                        @include pb_progress_stepper_horizontal_line($primary);
+                    }
+                }
+                [class=step_wrapper] {
+                    @include pb_progress_stepper_column_center;
+                    [class=circle] {
+                        @include pb_progress_stepper_circle($white, $primary, $white);
+                    }
                 }
 
-                &:after {
-                    background-color: $primary;
-                    z-index: 1;
-                }
             }
 
             &[class*=_inactive] {
-
-                &:before {
-                    height: 22px;
-                    width: 22px;
-                    border-radius: 11px;
-                    border-color: $white;
-                    border-width: 2px;
-                    background-color: $border_light;
+                @include pb_progress_stepper_item;
+                [class=line_wrapper] {
+                    @include pb_progress_stepper_line_wrapper;
+                    [class=line] {
+                        @include pb_progress_stepper_horizontal_line($border_light);
+                    }
+                }
+                [class=step_wrapper] {
+                    @include pb_progress_stepper_column_center;
+                    [class=circle] {
+                        @include pb_progress_stepper_circle($border_light, $border_light, $border_light);
+                    }
                 }
             }
         }
     }
+
     &[class*=_vertical] {
-        * {
-            margin: 0;
-            padding: 0;
+        > div:last-child {
+            [class=circle_and_line] {
+                [class=line] {
+                    display: none !important;
+                }
+            }
         }
-        
-        *, *:before, *:after {
-        box-sizing: border-box;
+
+        &[class*=_icon] {
+            [class*=pb_progress_stepper_item_kit] {
+                &[class*=_complete] {
+                    [class=circle_and_line] {
+                        @include pb_progress_stepper_column_center;
+                        margin-right: $space_xs;
+                        [class=circle] {
+                            @include pb_progress_stepper_circle($primary, $primary, $white);
+                        }
+                    }
+                }
+            }
         }
-        
-        width: 650px;
-        margin: 40px auto;
-        list-style: none;
-        
+                
         [class^=pb_progress_stepper_item_kit] {
             display: flex;
+            flex-direction: row;
 
-            &:last-child {
-                border: 0;
-            }
+            &[class*=_complete] {
+                @include pb_progress_stepper_vertical;
 
-            p {
-                display: block;
-                padding: 20px;
-                line-height: 1.4;
-
-                &:nth-child(1) {
-                    position: relative;
-                    padding-right: 25px;
-                    font-size: 14px;
-                    line-height: 2.5;
-                    color: #aaa;
+                [class=circle_and_line] {
+                    @include pb_progress_stepper_column_center;   
+                    margin-right: $space_xs; 
+                    [class=circle] {
+                        @include pb_progress_stepper_circle($primary, $primary, $primary);
+                    }
+    
+                    [class=line] {
+                        @include pb_progress_stepper_vertical_line($primary);
+                    }
                 }
 
-                &:nth-child(1):after {
-                    content: '';
-                    position: absolute;
-                    top: 28px;
-                    right: -12px;
-                    display: block;
-                    width: $pb_progress_stepper_circle_size;
-                    height: $pb_progress_stepper_circle_size;
-                    border: 5px solid #999;
-                    border-width: $pb_progress_stepper_circle_border;
-                    border-style: solid;
-                    border-color: $white;
-                    border-radius: 50%;
-                    background: $border_light;
-                }
-
-                &:nth-child(2) {
-                    flex: 1;
-                    font-size: 24px;
-                    border-left: 4px solid $border_light;
+                [class=step_child] {
+                    margin-bottom: $space_sm;
                 }
             }
 
-            &:first-child p:nth-child(1):after {
-                background: $primary_action;
+            &[class*=_active] {
+                @include pb_progress_stepper_vertical;
+
+                [class=circle_and_line] {
+                    @include pb_progress_stepper_column_center;
+                    margin-right: $space_xs;
+                    [class=circle] {
+                        @include pb_progress_stepper_circle($white, $primary, $white);
+                    }
+    
+                    [class=line] {
+                        @include pb_progress_stepper_vertical_line($border_light);
+                    }
+                }
+
+                [class=step_child] {
+                    margin-bottom: $space_sm;
+                }
+
             }
 
-            p span {
-                display: block;
-                margin: 5px 0 0;
-                font-size: 12px;
-                font-style: italic;
-                color: #aaa;
+            &[class*=_inactive] {
+                @include pb_progress_stepper_vertical;
+
+                [class=circle_and_line] {
+                    @include pb_progress_stepper_column_center; 
+                    margin-right: $space_xs;
+                    [class=circle] {
+                        @include pb_progress_stepper_circle($border_light, $border_light, $border_light);
+                    }
+    
+                    [class=line] {
+                        @include pb_progress_stepper_vertical_line($border_light);
+                    }
+                }
+
+                [class=step_child] {
+                    margin-bottom: $space_sm;
+                }
             }
         }
     }
-
 }

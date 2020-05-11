@@ -1,10 +1,50 @@
-<%= pb_rails("progress_stepper", props: {orientation: "vertical"}) do %>
-  <%= pb_rails("progress_stepper/progress_item") do %>
-    <p></p>
-    <p>Item 1</p>
+<%= pb_rails("progress_stepper", props: {orientation: "vertical", icon: true}) do %>
+  <%= pb_rails("progress_stepper/progress_item_vertical", props: {status: "complete"}) do %>
+    <%= pb_rails("title", props: { text: "Complete", tag: "h4", size: 4 }) %>
+    <p>Complete</p>
+    <p>Complete</p>
+    <p>Complete</p>
   <% end %>
-  <%= pb_rails("progress_stepper/progress_item") do %>
-    <p></p>
-    <p>Item 1</p>
+  <%= pb_rails("progress_stepper/progress_item_vertical", props: {status: "active"}) do %>
+    <%= pb_rails("title", props: { text: "Active", tag: "h4", size: 4 }) %>
+    <p>Active</p>
+    <p>Active</p>
+  <% end %>
+  <%= pb_rails("progress_stepper/progress_item_vertical", props: {status: "inactive"}) do %>
+    <%= pb_rails("title", props: { text: "Inactive", tag: "h4", size: 4 }) %>
+    <p>Inactive</p>
+    <p>Inactive</p>
+    <p>Inactive</p>
+    <p>Inactive</p>
+  <% end %>
+<% end %>
+
+<br /><br />
+
+<%= pb_rails("progress_stepper", props: {orientation: "vertical"}) do %>
+  <%= pb_rails("progress_stepper/progress_item_vertical", props: {status: "complete"}) do %>
+    <%= pb_rails("title", props: { text: "Complete", tag: "h4", size: 4 }) %>
+    <p>Complete</p>
+    <p>Complete</p>
+    <p>Complete</p>
+  <% end %>
+  <%= pb_rails("progress_stepper/progress_item_vertical", props: {status: "active"}) do %>
+    <%= pb_rails("title", props: { text: "Active", tag: "h4", size: 4 }) %>
+    <p>Active</p>
+    <p>Active</p>
+  <% end %>
+  <%= pb_rails("progress_stepper/progress_item_vertical", props: {status: "inactive"}) do %>
+    <%= pb_rails("title", props: { text: "Inactive", tag: "h4", size: 4 }) %>
+    <p>Inactive</p>
+    <p>Inactive</p>
+    <p>Inactive</p>
+    <p>Inactive</p>
+  <% end %>
+  <%= pb_rails("progress_stepper/progress_item_vertical", props: {status: "inactive"}) do %>
+    <%= pb_rails("title", props: { text: "Inactive", tag: "h4", size: 4 }) %>
+    <p>Inactive</p>
+    <p>Inactive</p>
+    <p>Inactive</p>
+    <p>Inactive</p>
   <% end %>
 <% end %>
