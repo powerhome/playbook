@@ -12,7 +12,7 @@ module Playbook
             default: "inactive"
   
         def classname
-          generate_classname("pb_progress_stepper_item_kit", status)
+          generate_classname("pb_progress_step_item_kit", status)
         end
       end
     end

@@ -1,235 +1,359 @@
 @import "../tokens/colors";
 @import "../tokens/spacing";
+@import "../tokens/opacity";
 
-$pb_progress_stepper_circle_size: 14px;
-$pb_progress_stepper_connector_width: 3px;
-$pb_progress_stepper_connector_height_from_top: $pb_progress_stepper_circle_size/2 - $pb_progress_stepper_connector_width/2;
+$pb_progress_step_circle_size: 14px;
+$pb_progress_step_connector_width: 3px;
+$pb_progress_step_connector_height_from_top: $pb_progress_step_circle_size/2 - $pb_progress_step_connector_width/2 + 2;
 
-
-@mixin pb_progress_stepper_circle($background_color, $border_color, $icon_color) {
+@mixin pb_progress_step_circle($background_color, $border_color, $icon_color) {
     display: flex;
     flex-shrink: 0;
     justify-content: center;
     align-items: center;
     padding-right: 0;
     overflow: hidden;
-    height: $pb_progress_stepper_circle_size;
-    width: $pb_progress_stepper_circle_size;
+    height: $pb_progress_step_circle_size;
+    width: $pb_progress_step_circle_size;
     background-color: $background_color;
     color: $icon_color;
-    border-radius: $pb_progress_stepper_circle_size/2;
+    border-radius: $pb_progress_step_circle_size/2;
     border: 2px solid $border_color;
+    margin: 2px;
 }
 
-@mixin pb_progress_stepper_line_wrapper {
-    top: $pb_progress_stepper_connector_height_from_top;
-    left: calc(-50% + 10px);
-    right: calc(50% + 10px);
-    position: absolute;
-    flex: 1 1 auto;
-}
-
-@mixin pb_progress_stepper_horizontal_line($line_color){
-    display: block;
-    border-color: $line_color;
-    border-top-width: $pb_progress_stepper_connector_width;
-    border-top-style: solid;
-    margin-bottom: 4px;
-}
-
-@mixin pb_progress_stepper_item {
+@mixin pb_progress_step_item {
     flex: 1;
     position: relative;
-    padding-left: 8px;
-    padding-right: 8px;
+    padding-left: $space_sm;
+    padding-right: $space_sm;
 }
 
-@mixin pb_progress_stepper_column_center {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+@mixin pb_progress_step_line($width, $height, $color, $margin) {
+    width: $width;
+    height: $height;
+    background-color: $color;
+    margin: $margin;
+    flex-grow: 1;
 }
 
-@mixin pb_progress_stepper_vertical {
-    display: flex;
-    flex-direction: row;
-    flex: 1;
-    position: relative;
-    padding-left: 8px;
-    padding-right: 8px;
-}
-
-@mixin pb_progress_stepper_vertical_line($border_color) {
-    display: block;
-    height: 100%;
-    border-left-style: solid;
-    border-left-width: $pb_progress_stepper_connector_width;
-    border-color: $border_color;
-    margin-top: 4px;
-    margin-bottom: 4px;
-}
-
-
-[class^=pb_progress_stepper_kit] {
+[class^=pb_progress_step_kit] {
     &[class*=_horizontal] {
         display: flex;
+        width: 100%;
+
         > div:first-child {
-            [class=line_wrapper] {
-                display: none ;
+            [class=pb_progress_step_item_wrapper] {
+                [class^=pb_progress_step_item] {
+                    &[class*=_connector_first] {
+                        opacity: 0;
+                    }
+                    &[class*=_step_connector_first] {
+                        opacity: 0;
+                    }
+                }
+            }
+        }
+
+        >div:last-child {
+            [class=pb_progress_step_item_wrapper] {
+                [class^=pb_progress_step_item] {
+                    &[class*=_connector_second] {
+                        opacity: 0;
+                    }
+                    &[class*=_step_connector_second] {
+                        opacity: 0;
+                    }
+                }
             }
         }
 
         &[class*=_icon] {
-            [class*=pb_progress_stepper_item_kit] {
+            [class^=pb_progress_step_item_kit] {
                 &[class*=_complete] {
-                    [class=step_wrapper] {
-                        @include pb_progress_stepper_column_center;
-                        [class=circle] {
-                            @include pb_progress_stepper_circle($primary, $primary, $white);
+                    [class=pb_progress_step_item_wrapper] {
+                        [class=pb_progress_step_item_step_wrapper]{
+                            [class=pb_progress_step_item_step] {
+                                [class=pb_progress_step_item_step_circle] {
+                                    @include pb_progress_step_circle(white, $white, $white);
+                                }
+                            }
+                            
+                        }
+                    }
+                }  
+            }
+        }
+        
+        [class*=pb_progress_step_item_kit] {
+            &[class*=_complete] {
+                flex-basis: 100%;
+                [class=pb_progress_step_item_wrapper] {
+                    display: flex;
+                    flex-direction: row;
+                    [class^=pb_progress_step_item] {
+                        &[class*=_connector_first] {
+                            @include pb_progress_step_line(10px, 3px, $primary, 7.5px 0 0 0);
+                        }
+                        &[class*=_connector_second] {
+                            @include pb_progress_step_line(10px, 3px, $primary, 7.5px 0 0 0);
+                        }
+                    }
+                    [class=pb_progress_step_item_step_wrapper] {
+                        display: flex;
+                        flex-direction: column;
+                        align-items: center;
+                        [class=pb_progress_step_item_step] {
+                            display: flex;
+                            flex-direction: row;
+                            width: 100%;
+                            [class^=pb_progress_step_item] {
+                                &[class*=_step_connector_first] {
+                                    @include pb_progress_step_line(10px, 3px, $primary, 7.5px 0 0 0);
+                                }
+                                &[class*=_step_circle] {
+                                    @include pb_progress_step_circle($primary, $primary, $primary);
+                                }
+                                &[class*=_step_connector_second] {
+                                    @include pb_progress_step_line(10px, 3px, $primary, 7.5px 0 0 0);
+                                }
+                            }
                         }
                     }
                 }
+                
             }
-        }
-
-        [class*=pb_progress_stepper_item_kit] {
-            &[class*=_complete] {
-                @include pb_progress_stepper_item;
-                [class=line_wrapper] {
-                    @include pb_progress_stepper_line_wrapper;
-                    [class=line] {
-                        @include pb_progress_stepper_horizontal_line($primary);
-                    }
-                }
-                [class=step_wrapper] {
-                    @include pb_progress_stepper_column_center;
-                    [class=circle] {
-                        @include pb_progress_stepper_circle($primary, $primary, $primary);
-                    }
-                }
-            }
-
             &[class*=_active] {
-                @include pb_progress_stepper_item;
-                [class=line_wrapper] {
-                    @include pb_progress_stepper_line_wrapper;
-                    [class=line] {
-                        @include pb_progress_stepper_horizontal_line($primary);
+                flex-basis: 100%;
+                [class=pb_progress_step_item_wrapper] {
+                    display: flex;
+                    flex-direction: row;
+                    [class^=pb_progress_step_item] {
+                        &[class*=_connector_first] {
+                            @include pb_progress_step_line(10px, 3px, $primary, 7.5px 0 0 0);
+                        }
+                        &[class*=_connector_second] {
+                            @include pb_progress_step_line(10px, 3px, $border_light, 7.5px 0 0 0);
+                        }
                     }
-                }
-                [class=step_wrapper] {
-                    @include pb_progress_stepper_column_center;
-                    [class=circle] {
-                        @include pb_progress_stepper_circle($white, $primary, $white);
+                    [class=pb_progress_step_item_step_wrapper] {
+                        display: flex;
+                        flex-direction: column;
+                        align-items: center;
+                        [class=pb_progress_step_item_step] {
+                            display: flex;
+                            flex-direction: row;
+                            width: 100%;
+                            [class^=pb_progress_step_item] {
+                                &[class*=_step_connector_first] {
+                                    @include pb_progress_step_line(10px, 3px, $primary, 7.5px 0 0 0);
+                                }
+                                &[class*=_step_circle] {
+                                    @include pb_progress_step_circle($white, $primary, $white);
+                                }
+                                &[class*=_step_connector_second] {
+                                    @include pb_progress_step_line(10px, 3px, $border_light, 7.5px 0 0 0);
+                                }
+                            }
+                        }
                     }
-                }
-
+                } 
             }
-
             &[class*=_inactive] {
-                @include pb_progress_stepper_item;
-                [class=line_wrapper] {
-                    @include pb_progress_stepper_line_wrapper;
-                    [class=line] {
-                        @include pb_progress_stepper_horizontal_line($border_light);
+                flex-basis: 100%;
+                [class=pb_progress_step_item_wrapper] {
+                    display: flex;
+                    flex-direction: row;
+                    [class^=pb_progress_step_item] {
+                        &[class*=_connector_first] {
+                            @include pb_progress_step_line(10px, 3px, $border_light, 7.5px 0 0 0);
+                        }
+                        &[class*=_connector_second] {
+                            @include pb_progress_step_line(10px, 3px, $border_light, 7.5px 0 0 0);
+                        }
                     }
-                }
-                [class=step_wrapper] {
-                    @include pb_progress_stepper_column_center;
-                    [class=circle] {
-                        @include pb_progress_stepper_circle($border_light, $border_light, $border_light);
+                    [class=pb_progress_step_item_step_wrapper] {
+                        display: flex;
+                        flex-direction: column;
+                        align-items: center;
+                        [class=pb_progress_step_item_step] {
+                            display: flex;
+                            flex-direction: row;
+                            width: 100%;
+                            [class^=pb_progress_step_item] {
+                                &[class*=_step_connector_first] {
+                                    @include pb_progress_step_line(10px, 3px, $border_light, 7.5px 0 0 0);
+                                }
+                                &[class*=_step_circle] {
+                                    @include pb_progress_step_circle($border_light, $border_light, $border_light);
+                                }
+                                &[class*=_step_connector_second] {
+                                    @include pb_progress_step_line(10px, 3px, $border_light, 7.5px 0 0 0);
+                                }
+                            }
+                        }
                     }
-                }
+                }  
             }
         }
     }
 
     &[class*=_vertical] {
-        > div:last-child {
-            [class=circle_and_line] {
-                [class=line] {
-                    display: none !important;
-                }
-            }
-        }
+        display: flex;
+        flex-direction: column;
 
-        &[class*=_icon] {
-            [class*=pb_progress_stepper_item_kit] {
-                &[class*=_complete] {
-                    [class=circle_and_line] {
-                        @include pb_progress_stepper_column_center;
-                        margin-right: $space_xs;
-                        [class=circle] {
-                            @include pb_progress_stepper_circle($primary, $primary, $white);
+        > div:first-child {
+            [class=pb_progress_step_item_wrapper] {
+                [class=pb_progress]
+                [class=pb_progress_step_item_connector_first] {
+                    opacity: 0;
+                    margin: 0 0 0 5.5px;
+                }
+                [class=pb_progress_step_item_step_wrapper] {
+                    [class=pb_progress_step_item_step] {
+                        > div:first-child {
+                            opacity: 0;
                         }
                     }
                 }
             }
         }
-                
-        [class^=pb_progress_stepper_item_kit] {
-            display: flex;
-            flex-direction: row;
 
+        >div:last-child {
+            [class=pb_progress_step_item_wrapper] {
+                [class=pb_progress_step_item_connector_second] {
+                    opacity: 0;
+                }
+                [class=pb_progress_step_item_step_wrapper] {
+                    [class=pb_progress_step_item_step] {
+                        > div:last-child {
+                            opacity: 0;
+                        }
+                    }
+                }
+            }
+        }
+        
+        &[class*=_icon] {
+            [class^=pb_progress_step_item_kit] {
+                &[class*=_complete] {
+                    [class=pb_progress_step_item_wrapper] {
+                        [class=pb_progress_step_item_step_wrapper]{
+                            [class=pb_progress_step_item_step] {
+                                [class=pb_progress_step_item_step_circle] {
+                                    @include pb_progress_step_circle($primary, $primary, $white);
+                                }
+                            }
+                            
+                        }
+                    }
+                }  
+            }
+        }
+        
+        [class*=pb_progress_step_item_kit] {
             &[class*=_complete] {
-                @include pb_progress_stepper_vertical;
-
-                [class=circle_and_line] {
-                    @include pb_progress_stepper_column_center;   
-                    margin-right: $space_xs; 
-                    [class=circle] {
-                        @include pb_progress_stepper_circle($primary, $primary, $primary);
+                flex-basis: 100%;
+                [class=pb_progress_step_item_wrapper] {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: baseline;
+                    [class=pb_progress_step_item_connector_second] {
+                        @include pb_progress_step_line(3px, 20px, $primary, 0 0 0 7.5px);
                     }
-    
-                    [class=line] {
-                        @include pb_progress_stepper_vertical_line($primary);
+                    [class=pb_progress_step_item_step_wrapper] {
+                        display: flex;
+                        flex-direction: row;
+                        align-items: flex-start;
+                        [class=pb_progress_step_item_step] {
+                            display: flex;
+                            flex-direction: column;
+                            align-items: center;
+                            align-self: stretch;
+                            margin-right: 4px;
+                            [class^=pb_progress_step_item] {
+                                &[class*=_step_connector_first] {
+                                    display: none;
+                                }
+                                &[class*=_step_circle] {
+                                    @include pb_progress_step_circle($primary, $primary, $white);
+                                }
+                                &[class*=_step_connector_second] {
+                                    @include pb_progress_step_line(3px, 100%, $primary, 0);
+                                }
+                            }
+                        }
                     }
                 }
-
-                [class=step_child] {
-                    margin-bottom: $space_sm;
-                }
+                
             }
-
             &[class*=_active] {
-                @include pb_progress_stepper_vertical;
-
-                [class=circle_and_line] {
-                    @include pb_progress_stepper_column_center;
-                    margin-right: $space_xs;
-                    [class=circle] {
-                        @include pb_progress_stepper_circle($white, $primary, $white);
+                flex-basis: 100%;
+                [class=pb_progress_step_item_wrapper] {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: baseline;
+                    [class=pb_progress_step_item_connector_second] {
+                        @include pb_progress_step_line(3px, 20px, $border_light, 0 0 0 7.5px);
                     }
-    
-                    [class=line] {
-                        @include pb_progress_stepper_vertical_line($border_light);
+                    [class=pb_progress_step_item_step_wrapper] {
+                        display: flex;
+                        flex-direction: row;
+                        align-items: flex-start;
+                        [class=pb_progress_step_item_step] {
+                            display: flex;
+                            flex-direction: column;
+                            align-items: center;
+                            align-self: stretch;
+                            margin-right: 4px;
+                            [class^=pb_progress_step_item] {
+                                &[class*=_step_connector_first] {
+                                    display: none;
+                                }
+                                &[class*=_step_circle] {
+                                    @include pb_progress_step_circle($white, $primary, $white);
+                                }
+                                &[class*=_step_connector_second] {
+                                    @include pb_progress_step_line(3px, 100%, $border_light, 0);
+                                }
+                            }
+                        }
                     }
-                }
-
-                [class=step_child] {
-                    margin-bottom: $space_sm;
-                }
-
+                } 
             }
-
             &[class*=_inactive] {
-                @include pb_progress_stepper_vertical;
-
-                [class=circle_and_line] {
-                    @include pb_progress_stepper_column_center; 
-                    margin-right: $space_xs;
-                    [class=circle] {
-                        @include pb_progress_stepper_circle($border_light, $border_light, $border_light);
+                flex-basis: 100%;
+                [class=pb_progress_step_item_wrapper] {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: baseline;
+                    [class=pb_progress_step_item_connector_second] {
+                        @include pb_progress_step_line(3px, 20px, $border_light, 0 0 0 7.5px);
                     }
-    
-                    [class=line] {
-                        @include pb_progress_stepper_vertical_line($border_light);
+                    [class=pb_progress_step_item_step_wrapper] {
+                        display: flex;
+                        flex-direction: row;
+                        align-items: flex-start;
+                        [class=pb_progress_step_item_step] {
+                            display: flex;
+                            flex-direction: column;
+                            align-items: center;
+                            align-self: stretch;
+                            margin-right: 4px;
+                            [class^=pb_progress_step_item] {
+                                &[class*=_step_connector_first] {
+                                    display: none;
+                                }
+                                &[class*=_step_circle] {
+                                    @include pb_progress_step_circle($border_light, $border_light, $border_light);
+                                }
+                                &[class*=_step_connector_second] {
+                                    @include pb_progress_step_line(3px, 100%, $border_light, 0);
+                                }
+                            }
+                        }
                     }
-                }
-
-                [class=step_child] {
-                    margin-bottom: $space_sm;
-                }
+                }  
             }
         }
     }
