@@ -1,12 +1,34 @@
 @import "../tokens/positioning";
 @import "../tokens/colors";
 
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+  }
+}
+
 [class^="pb_tooltip_kit"] {
   .tooltip_tooltip {
     display: none;
-    opacity:0;
-    filter:alpha(opacity=0);
+    opacity: 0;
     left: 0;
+    animation-name: fadeIn;
+    animation-duration: 150ms;
+    animation-timing-function: linear;
+    animation-fill-mode: forwards;
 
     &.flipped {
       margin-top: 15px;
@@ -45,37 +67,37 @@
       z-index: $z_9;
       margin-bottom: $space_sm;
       background-color: white;
-      padding: $space_sm;
+      padding: $space_xs $space_sm $space_xs $space_sm;
       box-shadow: $shadow_deeper;
       border-radius: 3px;
+      &.fade_out {
+        animation-name: fadeOut;
+        animation-duration: 150ms;
+        animation-timing-function: linear;
+        animation-fill-mode: forwards;
+      }
     }
   }
   &[class*=_dark]{
     .tooltip_tooltip{
-      $tooltip_dark_bg: lighten($bg_dark, 10%);
+      color: $white;
 
-      &.show{
+      &.show {
         opacity: 85%;
-        background-color: $tooltip_dark_bg;
+        background-color: black;
       }
       .arrow {
-        border-color: $tooltip_dark_bg transparent transparent transparent;
+        border-color: black transparent transparent transparent;
       }
       &.flipped {
         .arrow {
-          border-color: transparent transparent $tooltip_dark_bg transparent;
+          border-color: transparent transparent black transparent;
         }
       }
     }
   }
-
 }
 
 .tooltip_tooltip.top {
   padding: 5px 0;
 }
-
-// .pb_tooltip_reference_wrapper {
-//   display: inline-block;
-
-// }

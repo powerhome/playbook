@@ -27,7 +27,7 @@ body {
   &--content {
     min-height: calc(100vh - 89px);
     @include break_at(breakpoint("lg")) {
-      grid-template-columns: auto auto !important;
+      display: block !important;
     }
     &--main {
       flex-grow: 1;
