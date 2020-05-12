@@ -1,19 +1,29 @@
 @import "../tokens/colors";
 
 [class^=pb_selectable_card_icon_kit] {
-    .checked {
+
+    // .checked {
+    //     color: $primary;
+    // }
+    // .unchecked {
+    //     color: gray;
+    // }
+
+    input[type="checkbox"]:checked ~ label {
         color: $primary;
     }
-    .unchecked {
-        color: gray;
+
+    input[type="checkbox"] ~ label {
+        color: lightgray;
     }
-    display: block;
-    width: 150px;
-    text-align: center;
-    align-items: center;
-    justify-content: center;
-    
-    .testStyle{
-        height: 200px;
+
+    label {
+        display: flex !important;
+        flex-direction: column !important;
+        align-content: center;
     }
 }
+
+// [class^=pb_selectable_card_kit] input[type="checkbox"]:checked ~ label, [class^=pb_selectable_card_kit] input[type="radio"]:checked ~ label {
+//         color: $primary;
+// }

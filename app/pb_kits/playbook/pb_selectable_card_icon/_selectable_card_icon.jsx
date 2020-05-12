@@ -38,12 +38,10 @@ const SelectableCardIcon = ({
     // 'unchecked': !checked,
   })
 
-  // console.log(checked)
-
   return (
     <div className={classnames(css, className)}>
       <SelectableCard
-          className="testStyle"
+          className=""
           checked={checked}
           dark={dark}
           icon={false}
@@ -56,7 +54,6 @@ const SelectableCardIcon = ({
           <>
             <span>
               <Icon
-                  className={checked ? 'checked' : 'unchecked'}
                   icon={icon}
                   size="2x"
               />
