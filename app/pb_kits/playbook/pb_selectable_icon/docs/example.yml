@@ -1,0 +1,10 @@
+examples:
+  
+  rails:
+  - selectable_icon_default: Default
+  - selectable_icon_single_select: Single Select
+  - selectable_icon_dark: Dark
+  
+  react:
+  - selectable_icon_default: Default
+  

@@ -1,0 +1,52 @@
+[class^=pb_selectable_icon] {
+      
+    input[type="checkbox"],
+    input[type="radio"] {
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        display: none;
+        appearance: none;
+
+        
+        &:not(:checked) ~ label {
+            color: $slate;
+
+        }
+        
+
+        &:checked ~ label {
+            color: $primary;
+
+            h4 {
+                color: $primary;
+            }
+        }
+    }
+
+
+    &[class*=_dark] {
+
+        input[type="checkbox"],
+        input[type="radio"] {
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            display: none;
+            appearance: none;
+    
+            
+            &:not(:checked) ~ label {
+                
+                color: $text_dk_default;
+
+                h4 {
+                    color: $text_dk_default !important;
+                }
+    
+            }
+        
+        }
+
+    }
+}
+
+// $slate;
