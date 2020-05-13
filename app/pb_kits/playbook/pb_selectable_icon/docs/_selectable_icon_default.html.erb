@@ -1,7 +1,23 @@
 <div class="pb--doc-demo-row">
 
-    <%= pb_rails("selectable_icon", props: {icon: "album-collection", input_id: 1, text: "Title" }) %>
-    <%= pb_rails("selectable_icon", props: {icon: "waveform", input_id: 2, text: "Title" }) %>
-    <%= pb_rails("selectable_icon", props: {icon: "amp-guitar", input_id: 3, text: "Title" }) %>
+    <%= pb_rails("selectable_icon", props: {
+        icon: "album-collection", 
+        input_id: 1, 
+        checked: true, 
+        text: "Selected" 
+    }) %>
+    
+    <%= pb_rails("selectable_icon", props: {
+        icon: "waveform", 
+        input_id: 2, 
+        text: "Unselected" 
+    }) %>
+    
+    <%= pb_rails("selectable_icon", props: {
+        icon: "amp-guitar", 
+        input_id: 3, 
+        disabled: true, 
+        text: "Disabled" 
+    }) %>
 
 </div>

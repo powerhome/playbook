@@ -1,4 +1,10 @@
 [class^=pb_selectable_icon] {
+
+    text-align: center;
+
+    h4 {
+        margin-top: $space_xs !important;
+    }
       
     input[type="checkbox"],
     input[type="radio"] {
@@ -10,7 +16,6 @@
         
         &:not(:checked) ~ label {
             color: $slate;
-
         }
         
 

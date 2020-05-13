@@ -27,13 +27,25 @@ module Playbook
       prop :value
 
       def classname
-        generate_classname("pb_selectable_icon_kit", dark_class)
+        generate_classname("pb_selectable_icon_kit", checked_class, dark_class, enabled_disabled_class)
+      end
+
+      def input_id_present
+        input_id.present? ? input_id : name
       end
 
     private
 
+      def checked_class
+        checked ? "checked" : nil
+      end
+
       def dark_class
         dark ? "dark" : nil
+      end
+
+      def enabled_disabled_class
+        disabled ? "disabled" : "enabled"
       end
     end
   end
