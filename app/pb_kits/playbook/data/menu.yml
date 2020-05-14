@@ -1,6 +1,10 @@
 samples:
   - dashboards
+<<<<<<< HEAD
   - something
+=======
+  - test
+>>>>>>> WIP, rough draft
 kits:
   - avatar
   - avatar_action_button

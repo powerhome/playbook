@@ -1,0 +1,283 @@
+<%= pb_rails("layout", props: {position: "left", size: "lg", collapse: "sm"}) do %>
+  <%= pb_rails("layout/sidebar") do %>
+    <%= pb_rails("title", props: { text: "Design Expo", tag: "h2", size: 3 }) %>
+    <%= pb_rails("body", props: {
+        text: "Annual Conference*",
+        color: "light"
+    }) %>
+
+    <%= pb_rails("section_separator") %>
+
+    <%= pb_rails("title", props: { text: "Regions", tag: "h4", size: 4 }) %>
+    <%= pb_rails("flex", props: {orientation: "column"}) do %>
+        <%= pb_rails("body", props: {classname: "flex-item"}) do %>
+            <%= pb_rails("checkbox" , props: {
+                text: "North America",
+                value: "checkbox-value",
+                checked: true,
+                name: "checkbox-name"
+            }) %>
+        <% end %>
+        <%= pb_rails("body", props: {classname: "flex-item"}) do %>
+            <%= pb_rails("checkbox" , props: {
+                text: "Europe",
+                value: "checkbox-value",
+                checked: true,
+                name: "checkbox-name"
+            }) %>
+        <% end %>
+    <% end %>
+    
+    
+    <%= pb_rails("title", props: { text: "Total Registered", tag: "h4", size: 4 }) %>
+
+    <%= pb_rails("table", props: { size: "sm" }) do %>
+        <thead>
+            <tr>
+            <th>Conference</th>
+            <th>Total #</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>2020 | SF</td>
+                <td>2,391</td>
+            </tr>
+            <tr>
+                <td>2020 | TOR</td>
+                <td>3,829</td>
+            </tr>
+            <tr>
+                <td>2019 | AMS</td>
+                <td>2,047</td>
+            </tr>
+            <tr>
+                <td>2018 | SF</td>
+                <td>1,824</td>
+            </tr>
+            <tr>
+                <td>2017 | LA</td>
+                <td>719</td>
+            </tr>
+            <tr>
+                <td>2017 | LDN</td>
+                <td>491</td>
+            </tr>
+        </tbody>
+    <% end %>
+    <%= pb_rails("caption", props: { text: "*This dashboard includes the last six conferences", size: 'xs' }) %>
+
+  <% end %>
+
+
+
+  <%= pb_rails("layout/body") do %>
+
+    <%= pb_rails("title", props: { text: "Registration Dashboard", tag: "h1", size: 3 }) %>
+
+  
+    <%= pb_rails("flex") do %>
+        <%= pb_rails("flex/flex_item", props: {fixed_size: "60%"}) do %>
+            <%= pb_rails("card") do %>
+                <%= pb_rails("flex", props: {classname: "flex-container", vertical: "stretch", spacing: "around"}) do %>
+                    <%= pb_rails("flex/flex_item", props: {fixed_size: "15%"}) do %>
+                        <%= pb_rails("flex", props: {orientation: "column", horizontal: "center"}) do %>
+                            <%= pb_rails("flex/flex_item") do %>
+                                <%= pb_rails("caption", props: { text: "2020 | SF", size: "xs" }) %>
+                            <% end %>
+                            <%= pb_rails("flex/flex_item") do %>
+                                <%= pb_rails("caption", props: { text: "Total" }) %>
+                            <% end %>
+                            <%= pb_rails("flex/flex_item") do %>
+                                <%= pb_rails("title", props: { text: "2,391", tag: "h3", size: 2 }) %>
+                            <% end %>
+                        <% end %>
+                    <% end %>
+                    <%= pb_rails("section_separator", props: { orientation: "vertical" }) %>
+                    <%= pb_rails("flex/flex_item") do %>
+                        <%= pb_rails("flex", props: {orientation: "column", horizontal: "center"}) do %>
+                            <%= pb_rails("flex/flex_item") do %>
+                                <%= pb_rails("caption", props: { text: "Graphic" }) %>
+                            <% end %>
+                            <%= pb_rails("flex/flex_item") do %>
+                                <%= pb_rails("title", props: { text: "353", tag: "h3", size: 3 }) %>
+                            <% end %>
+                        <% end %>           
+                    <% end %>
+                    <%= pb_rails("flex/flex_item") do %>
+                        <%= pb_rails("flex", props: {orientation: "column", horizontal: "center"}) do %>
+                            <%= pb_rails("flex/flex_item") do %>
+                                <%= pb_rails("caption", props: { text: "UX/UI" }) %>
+                            <% end %>
+                            <%= pb_rails("flex/flex_item") do %>
+                                <%= pb_rails("title", props: { text: "254", tag: "h3", size: 3 }) %>
+                            <% end %>
+                        <% end %>
+                    <% end %>
+                    <%= pb_rails("flex/flex_item") do %>
+                        <%= pb_rails("flex", props: {orientation: "column", horizontal: "center"}) do %>
+                            <%= pb_rails("flex/flex_item") do %>
+                                <%= pb_rails("caption", props: { text: "Product" }) %>
+                            <% end %>
+                            <%= pb_rails("flex/flex_item") do %>
+                                <%= pb_rails("title", props: { text: "194", tag: "h3", size: 3 }) %>
+                            <% end %>
+                        <% end %>
+                    <% end %>
+                <% end %>
+                <%= pb_rails("section_separator") %>
+                <%= pb_rails("flex", props: {classname: "flex-container", vertical: "stretch", spacing: "around"}) do %>
+                    <%= pb_rails("flex/flex_item", props: {fixed_size: "15%"}) do %>
+                        <%= pb_rails("flex", props: {orientation: "column", horizontal: "center"}) do %>
+                            <%= pb_rails("flex/flex_item") do %>
+                                <%= pb_rails("caption", props: { text: "Caption", size: "xs" }) %>
+                            <% end %>
+                            <%= pb_rails("flex/flex_item") do %>
+                                <%= pb_rails("caption", props: { text: "Total" }) %>
+                            <% end %>
+                            <%= pb_rails("flex/flex_item") do %>
+                                <%= pb_rails("title", props: { text: "3,829", tag: "h3", size: 2 }) %>
+                            <% end %>
+                        <% end %>
+                    <% end %>
+                    <%= pb_rails("section_separator", props: { orientation: "vertical" }) %>
+                    <%= pb_rails("flex/flex_item") do %>
+                        <%= pb_rails("flex", props: {orientation: "column", horizontal: "center"}) do %>
+                            <%= pb_rails("flex/flex_item") do %>
+                                <%= pb_rails("caption", props: { text: "Graphic" }) %>
+                            <% end %>
+                            <%= pb_rails("flex/flex_item") do %>
+                                <%= pb_rails("title", props: { text: "937", tag: "h3", size: 3 }) %>
+                            <% end %>
+                        <% end %>        
+                    <% end %>
+                    <%= pb_rails("flex/flex_item") do %>
+                        <%= pb_rails("flex", props: {orientation: "column", horizontal: "center"}) do %>
+                            <%= pb_rails("flex/flex_item") do %>
+                                <%= pb_rails("caption", props: { text: "UX/UI" }) %>
+                            <% end %>
+                            <%= pb_rails("flex/flex_item") do %>
+                                <%= pb_rails("title", props: { text: "721", tag: "h3", size: 3 }) %>
+                            <% end %>
+                        <% end %>        
+                    <% end %>
+                    <%= pb_rails("flex/flex_item") do %>
+                        <%= pb_rails("flex", props: {orientation: "column", horizontal: "center"}) do %>
+                            <%= pb_rails("flex/flex_item") do %>
+                                <%= pb_rails("caption", props: { text: "Product" }) %>
+                            <% end %>
+                            <%= pb_rails("flex/flex_item") do %>
+                                <%= pb_rails("title", props: { text: "628", tag: "h3", size: 3 }) %>
+                            <% end %>
+                        <% end %>   
+                    <% end %>
+                <% end %>
+            <% end %>
+            
+            <%= pb_rails("flex", props: {orientation: "column", horizontal: "right"}) do %>
+                <%= pb_rails("flex/flex_item") do %>
+                    <%= pb_rails("button", props: { text: "View full breakdown", variant: "link" }) %>
+                <% end %>
+            <% end %>
+
+            <%= pb_rails("card") do %>
+                <% data = [{
+                    name: '2020 | SF',
+                    data: [43934, 52503, 57177, 69658, 97031, 119931, 137133, 154175]
+                }, {
+                    name: '2020 | TOR',
+                    data: [24916, 24064, 29742, 29851, 32490, 30282, 38121, 40434]
+                }, {
+                    name: '2019 | AMS',
+                    data: [11744, 17722, 16005, 19771, 20185, 24377, 32147, 39387]
+                }, {
+                    name: '2018 | SF',
+                    data: [nil, nil, 7988, 12169, 15112, 22452, 34400, 34227]
+                }, {
+                    name: '2017 | LA',
+                    data: [12908, 5948, 8105, 11248, 8989, 11816, 18274, 18111]
+                }] %>
+
+                <%= pb_rails("line_graph", props: { 
+                    id: "line-registration", 
+                    gradient: false, 
+                    chart_data: data, 
+                    x_axis_categories:['7','6','5','4','3','2','1','0'],
+                    title: 'Running Total', 
+                    axis_title: 'Total Registration' 
+                }) %>
+            <% end %>
+        <% end %>
+
+        
+
+        <%= pb_rails("flex/flex_item", props: {fixed_size: "40%"}) do %>
+            <%= pb_rails("card") do %>
+                <% total = [{
+                    name: 'Installation',
+                    data: [1475,0,0,0,0]
+                }, {
+                    name: 'Manufacturing',
+                    data: [0,524,0,0,0]
+                }, {
+                    name: 'Sales & Distribution',
+                    data: [0,0,1344,0,0,]
+                }, {
+                    name: 'Project Development',
+                    data: [0,0,0,780,0]
+                }, {
+                    name: 'Other',
+                    data: 200
+                }] %>
+
+                <%= pb_rails("bar_graph", props: {
+                    axis_title: 'Total',
+                    chart_data: total,
+                    id: "bar-test",
+                    y_axis_min: 0,
+                    x_axis_categories:['\'17\' LA','\'18\' SF','\'19\' AMS','\'20\' TOR','\'20\' SF'],
+                }) %>
+
+                <% new_attendees = [{
+                    name: 'Installation',
+                    data: [1475,524,1344]
+                }] %>
+
+                <%= pb_rails("bar_graph", props: {
+                    axis_title: 'New Attendees',
+                    chart_data: new_attendees,
+                    id: "new-attendees",
+                    y_axis_min: 0,
+                    x_axis_categories:['\'17 LA','\'18 SF','\'19 AMS','\'20 TOR','\'20 SF'],
+                }) %>
+
+                <% repeating_attendees = [{
+                    name: 'Installation',
+                    data: [1475,0,0,0,0]
+                }, {
+                    name: 'Manufacturing',
+                    data: [0,524,0,0,0]
+                }, {
+                    name: 'Sales & Distribution',
+                    data: [0,0,1344,0,0,]
+                }, {
+                    name: 'Project Development',
+                    data: [0,0,0,780,0]
+                }, {
+                    name: 'Other',
+                    data: [0,0,0,0,200]
+                }] %>
+
+                <%= pb_rails("bar_graph", props: {
+                    axis_title: 'Repeating Attendees',
+                    chart_data: repeating_attendees,
+                    id: "repeating-attendees",
+                    y_axis_min: 0,
+                    x_axis_categories:['\'17\' LA','\'18\' SF','\'19\' AMS','\'20\' TOR','\'20\' SF'],
+                }) %>
+                
+            <% end %>
+        <% end %>
+    <% end %>
+  <% end %>
+<% end %>
