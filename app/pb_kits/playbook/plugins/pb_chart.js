@@ -2,6 +2,8 @@ import Highcharts from 'highcharts'
 
 import { highchartsTheme } from '../pb_dashboard/pbChartsLightTheme.js'
 
+require('highcharts/modules/variable-pie')(Highcharts)
+
 class pbChart {
   defaults = {
     callbackInitializeBefore: () => {},
@@ -26,7 +28,50 @@ class pbChart {
     this.element = element
     this.options = options
     this.settings = this.extendDefaults(this.defaults, options)
-    this.setupChart()
+
+    if (this.options.type == 'variablepie' || this.options.type ==  'pie'){
+      this.setupPieChart()
+    } else {
+      this.setupChart()
+    }
+  }
+
+  setupPieChart() {
+    Highcharts.setOptions(highchartsTheme)
+
+    Highcharts.chart(this.defaults.id, {
+      title: {
+        text: this.defaults.title,
+      },
+      chart: {
+        type: this.defaults.type,
+      },
+      plotOptions: {
+        pie: {
+          dataLabels: {
+            enabled: this.defaults.dataLabels,
+            connectorShape: 'straight',
+            connectorWidth: 3,
+            format: this.defaults.dataLabelHtml,
+          },
+          showInLegend: this.defaults.showInLegend,
+        },
+      },
+      tooltip: {
+        headerFormat: this.defaults.headerFormat,
+        pointFormat: this.defaults.tooltipHtml,
+        useHTML: this.defaults.useHTML,
+      },
+      series: [{
+        minPointSize: this.defaults.minPointSize,
+        maxPointSize: this.defaults.maxPointSize,
+        innerSize: this.defaults.innerSize,
+        data: this.defaults.chartData,
+        zMin: this.defaults.zMin,
+        startAngle: this.defaults.startAngle,
+      }],
+      credits: false,
+    })
   }
 
   setupChart() {
@@ -55,6 +100,9 @@ class pbChart {
       plotOptions: {
         series: {
           pointStart: this.defaults.pointStart,
+          dataLabels: {
+            enabled: false,
+          },
         },
       },
       series: this.defaults.chartData,

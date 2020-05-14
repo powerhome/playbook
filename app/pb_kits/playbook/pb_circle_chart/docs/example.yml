@@ -1,0 +1,9 @@
+examples:
+
+  rails:
+  - circle_chart_default: Default Style
+  - circle_chart_with_labels: Data Labels
+  - circle_chart_with_legend_kit: Legend
+  - circle_chart_with_title: Title
+  - circle_chart_inner_sizes: Inner Circle Size Options
+
