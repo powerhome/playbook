@@ -26,14 +26,22 @@ type PbPopoverProps = {
   shouldClosePopover?: () => Boolean,
 } & PopperProps
 
-const POPOVER_OFFSET_Y = {
-  offset: {
-    offset: '0, 8',
+// Prop enabled default modifiers here
+// https://popper.js.org/docs/v2/modifiers
+
+const POPOVER_MODIFIERS = {
+  offset: { //https://popper.js.org/docs/v2/modifiers/offset/
+    enabled: true,
+    name: 'offset',
+    options: {
+      offset: [0, 8],
+    },
+    phase: 'main',
   },
 }
 
 const popoverModifiers = ({ modifiers, offset }) => {
-  return offset ? { ...modifiers, ...POPOVER_OFFSET_Y } : modifiers
+  return offset ? modifiers.concat([POPOVER_MODIFIERS.offset]) : modifiers
 }
 
 const Popover = ({
@@ -43,15 +51,13 @@ const Popover = ({
   offset,
   placement,
   referenceElement,
-  show,
 }: PbPopoverProps) => (
   <Popper
       modifiers={popoverModifiers({ modifiers, offset })}
       placement={placement}
       referenceElement={referenceElement}
   >
-    {({ placement, ref, scheduleUpdate, style }) => {
-      scheduleUpdate()
+    {({ placement, ref, style }) => {
       return (
         <div
             className={buildCss('pb_popover_kit', className)}
@@ -59,7 +65,7 @@ const Popover = ({
             ref={ref}
             style={style}
         >
-          <div className={buildCss('popover_tooltip', show ? 'show' : '')}>
+          <div className={buildCss('popover_tooltip', 'show')}>
             <Card shadow="deeper">
               { children }
             </Card>
@@ -73,13 +79,13 @@ const Popover = ({
 
 export default class PbReactPopover extends React.Component<PbPopoverProps> {
   static defaultProps = {
-    modifiers: {},
+    modifiers: [],
     offset: false,
     placement: 'left',
     portal: 'body',
     show: false,
     shouldClosePopover: noop,
-    usePortal: false,
+    usePortal: true,
   }
 
   componentDidMount() {
@@ -134,7 +140,6 @@ export default class PbReactPopover extends React.Component<PbPopoverProps> {
           offset={offset}
           placement={placement}
           referenceElement={referenceElement}
-          show={show}
       >
         {children}
       </Popover>
@@ -156,13 +161,15 @@ export default class PbReactPopover extends React.Component<PbPopoverProps> {
             )}
           </PopperReference>
         </If>
-        <If condition={usePortal}>
-          {ReactDOM.createPortal(
-            popoverComponent,
-            document.querySelector(portal)
-          )}
-          <Else />
-          {popoverComponent}
+        <If condition={show}>
+          <If condition={usePortal}>
+            {ReactDOM.createPortal(
+              popoverComponent,
+              document.querySelector(portal)
+            )}
+            <Else />
+            {popoverComponent}
+          </If>
         </If>
       </PopperManager>
     )

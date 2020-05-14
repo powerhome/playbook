@@ -1,3 +1,4 @@
+<% urls = ingress["hosts"].map { |host| URI.parse(host) } %>
 apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
 metadata:
@@ -15,16 +16,16 @@ metadata:
 spec:
   tls:
   - hosts:
-      <% ingress["hosts"].each do |host| %>
-      - <%= host %>
+      <% urls.each do |url| %>
+      - <%= url.host %>
       <% end %>
     secretName: playbook-tls
   rules:
-    <% ingress["hosts"].each do |host| %>
-    - host: <%= host %>
+    <% urls.each do |url| %>
+    - host: <%= url.host %>
       http:
         paths:
-          - path: /
+          - path: <%= url.path %>
             backend:
               serviceName: playbook
               servicePort: 80

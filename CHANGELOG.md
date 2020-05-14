@@ -5,8 +5,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-
 ## Unreleased
+
+
+## [4.14.0] 2020-5-14
+- Upgrade react-popper lib to latest ([#778](https://github.com/powerhome/playbook/pull/778) @thestephenmarshall)
+- Update React version to 16.8.6 ([#777](https://github.com/powerhome/playbook/pull/777) @thestephenmarshall)
+- Added Circle Chart for Rails ([#771](https://github.com/powerhome/playbook/pull/771) @jasperfurniss)
+- Spread props over inputs ([#772](https://github.com/powerhome/playbook/pull/772) @gmfvpereira)
 
 ## [4.13.1] 2020-4-28
 

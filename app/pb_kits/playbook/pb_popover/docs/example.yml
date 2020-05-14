@@ -11,7 +11,6 @@ examples:
     - popover_default: Default
     - popover_with_button: With Button
     - popover_list: With any children
-    - popover_portal: Use with `portal` option
     - popover_click_outside: Close on click outside
     - popover_click_inside: Close on click inside
     - popover_click_any: Close on click anywhere

@@ -35,6 +35,7 @@ const Textarea = ({
   placeholder,
   rows = 4,
   value,
+  ...props
 }: TextareaProps) => {
   const textareaClass = `pb_textarea_kit${dark ? '_dark' : ''}`
   const errorClass = error ? 'error' : null
@@ -50,6 +51,7 @@ const Textarea = ({
         {children}
         <Else />
         <textarea
+            {...props}
             className={textareaClass}
             name={name}
             onChange={onChange}

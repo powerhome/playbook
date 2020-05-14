@@ -1,0 +1,19 @@
+<% data = [{
+    name: 'Waiting for Calls',
+    value: 41,
+  },
+  {
+    name: 'On Call',
+    value: 49,
+  },
+  {
+    name: 'After call',
+    value: 10,
+  }
+] %>
+
+
+<%= pb_rails("circle_chart", props: {
+    chart_data: data,
+    id: "default-test"
+}) %>

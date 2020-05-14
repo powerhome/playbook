@@ -19,22 +19,21 @@ type RadioProps = {
   onChange: (Boolean)=>void,
 }
 
-const Radio = (props: RadioProps) => {
-  const {
-    checked = false,
-    children,
-    className = '',
-    dark = false,
-    data,
-    error = false,
-    id,
-    label,
-    name,
-    value,
-    text,
-    onChange = () => {},
-  } = props
-
+const Radio = ({
+  checked = false,
+  children,
+  className = '',
+  dark = false,
+  data,
+  error = false,
+  id,
+  label,
+  name,
+  value,
+  text,
+  onChange = () => {},
+  ...props
+}: RadioProps) => {
   const errorClass = error ? 'error' : ''
 
   return (
@@ -46,6 +45,7 @@ const Radio = (props: RadioProps) => {
         {children}
         <Else />
         <input
+            {...props}
             checked={checked}
             data={data}
             name={name}
