@@ -81,7 +81,7 @@
   &[class*=_dark]{
     .tooltip_tooltip{
       color: $white;
-      background-color: rgba(#000, $opacity_9);
+      background-color: rgba($black, $opacity_9);
 
 
       &.show {
