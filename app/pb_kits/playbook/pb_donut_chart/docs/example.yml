@@ -2,7 +2,9 @@ examples:
 
   rails:
   - donut_chart_default: Default Style
-  - donut_chart_starburst: Starburst Style
+  - donut_chart_with_labels: Data Labels
+  - donut_chart_with_legend_kit: Legend
+  - donut_chart_with_title: Title
   - donut_chart_inner_sizes: Inner Circle Size Options
 
 

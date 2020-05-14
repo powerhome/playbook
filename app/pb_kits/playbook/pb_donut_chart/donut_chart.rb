@@ -10,9 +10,10 @@ module Playbook
       prop :chart_data, type: Playbook::Props::Array,
                         default: []
       prop :style, type: Playbook::Props::Enum,
-                         values: %w[variablepie pie],
-                         default: "variablepie"
+                         values: %w[pie],
+                         default: "pie"
 
+      prop :data_labels, type: Playbook::Props::Boolean, default: false
       prop :min_point_size, type: Playbook::Props::Numeric
       prop :max_point_size, type: Playbook::Props::Numeric
       prop :inner_size, type: Playbook::Props::Enum,
@@ -21,12 +22,21 @@ module Playbook
       prop :z_min, type: Playbook::Props::Numeric
       prop :start_angle, type: Playbook::Props::Numeric
       prop :header_format
-      prop :point_format
+      prop :data_label_html, default: '<div>{point.name}</div>'
+      prop :tooltip_html, default: '<span style="font-weight: bold; color:{point.color};">●</span> 
+                                      {point.name}: ' + '<b>{point.y}
+                                    </b>'
       prop :use_html, type: Playbook::Props::Boolean, default: false
-      prop :text
+      prop :legend, type: Playbook::Props::Boolean, default: false
+      prop :title, default: ''
 
       def chart_type
         style == "variablepie" ? "variablepie" : "pie"
+      end
+
+      def chart_data_formatted
+        chart_data.map{ |hash| hash[:y] = hash.delete :value}
+        return chart_data
       end
 
       def inner_size_format
@@ -46,11 +56,14 @@ module Playbook
       def chart_options
         {
           id: id,
-          text: text,
-          chartData: chart_data,
+          chartData: chart_data_formatted,
+          title: title,
           type: chart_type,
+          showInLegend: legend,
+          dataLabelHtml: data_label_html,
+          dataLabels: data_labels,
           headerFormat: header_format,
-          pointFormat: point_format,
+          tooltipHtml: tooltip_html,
           useHTML: use_html,
           minPointSize: min_point_size,
           maxPointSize: max_point_size,

@@ -1,0 +1,23 @@
+<% data_1 = [{
+      name: 'Bugs',
+      value: 8,
+
+    },
+    {
+      name: 'Chores',
+      value: 1,
+
+    },
+    {
+      name: 'Stories',
+      value: 12,
+
+    }
+  ] %>
+
+<%= pb_rails("donut_chart", props: {
+    style: "pie",
+    chart_data: data_1,
+    show_legend: true,
+    id: "with-legend-example",
+}) %>

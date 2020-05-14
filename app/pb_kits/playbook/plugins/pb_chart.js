@@ -49,13 +49,17 @@ class pbChart {
       plotOptions: {
         pie: {
           dataLabels: {
-            enabled: true,
+            enabled: this.defaults.dataLabels,
+            connectorShape: 'straight',
+            connectorWidth: 3,
+            format: this.defaults.dataLabelHtml,
           },
+          showInLegend: this.defaults.showInLegend,
         },
       },
       tooltip: {
         headerFormat: this.defaults.headerFormat,
-        pointFormat: this.defaults.pointFormat,
+        pointFormat: this.defaults.tooltipHtml,
         useHTML: this.defaults.useHTML,
       },
       series: [{
