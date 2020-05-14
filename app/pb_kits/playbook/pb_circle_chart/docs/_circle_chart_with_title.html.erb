@@ -1,4 +1,4 @@
- <% data = [{
+ <% data_5 = [{
       name: 'Facebook',
       value: 2498,
     },
@@ -29,9 +29,10 @@
     },
   ] %>
 
-<%= pb_rails("donut_chart", props: {
+
+<%= pb_rails("circle_chart", props: {
     style: "pie",
-    chart_data: data,
-    id: "with-labels-example",
-    data_labels: true
+    title: "Active Users on Social Media",
+    chart_data: data_5,
+    id: "with-caption-example",
 }) %>

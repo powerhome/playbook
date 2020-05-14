@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
 module Playbook
-  module PbDonutChart
-    class DonutChart
+  module PbCircleChart
+    class CircleChart
       include Playbook::Props
 
-      partial "pb_donut_chart/donut_chart"
+      partial "pb_circle_chart/circle_chart"
 
       prop :chart_data, type: Playbook::Props::Array,
                         default: []
@@ -69,12 +69,12 @@ module Playbook
           maxPointSize: max_point_size,
           innerSize: inner_size_format,
           zMin: z_min,
-          startAngle: start_angle
+          startAngle: start_angle,
         }.to_json.html_safe
       end
 
       def classname
-        generate_classname("pb_donut_chart")
+        generate_classname("pb_circle_chart")
       end
     end
   end

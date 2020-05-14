@@ -11,13 +11,12 @@
     {
       name: 'Stories',
       value: 12,
-
     }
   ] %>
 
-<%= pb_rails("donut_chart", props: {
+<%= pb_rails("circle_chart", props: {
     style: "pie",
     chart_data: data_1,
-    show_legend: true,
+    legend: true,
     id: "with-legend-example",
 }) %>
