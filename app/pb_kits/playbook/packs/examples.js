@@ -102,7 +102,6 @@ WebpackerReact.setup({
   ...DateStacked,
   ...DateYearStacked,
   ...DistributionBar,
-  ...CircleChart,
   ...Filter,
   ...FixedConfirmationToast,
   ...Flex,
