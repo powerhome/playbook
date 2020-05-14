@@ -4,25 +4,51 @@
 
     text-align: center;
 
-    input[type="checkbox"]:checked ~ label {
-        color: $primary;
-        
-        h4 {
+    input[type="checkbox"],
+    input[type="radio"] {
+
+        &:checked ~ label {
             color: $primary;
+            transition-duration: $transition_short;
+            transition-timing-function: $easeIn;
+        
+            h4 {
+                color: $primary;
+                transition-duration: $transition_short;
+                transition-timing-function: $easeIn;
+            }
+        }
+        
+        &:not(:checked) ~ label {
+            color: $slate;
+            transition-duration: $transition_short;
+            transition-timing-function: $easeOut;
         }
     }
 
-    input[type="checkbox"] ~ label {
-        color: $slate;
-    }
+    &[class*=_dark] {
 
-    label {
-        display: flex !important;
-        flex-direction: column !important;
-        align-content: center;
+        input[type="checkbox"],
+        input[type="radio"] {      
+            
+            // &:checked ~ label * {
+            //     color: #0082ff;
+            //     transition-duration: $transition_short;
+            //     transition-timing-function: $easeIn;
+            // }            
+
+            &:not(:checked) ~ label {
+                
+                color: $text_dk_default;
+                transition-duration: $transition_short;
+                transition-timing-function: $easeOut;
+
+                h4, .pb_title_kit_4 {
+                    color: $text_dk_default !important;
+                    transition-duration: $transition_short;
+                    transition-timing-function: $easeOut;
+                }
+            }
+        }
     }
 }
-
-// [class^=pb_selectable_card_kit] input[type="checkbox"]:checked ~ label, [class^=pb_selectable_card_kit] input[type="radio"]:checked ~ label {
-//         color: $primary;
-// }

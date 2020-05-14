@@ -4,7 +4,7 @@ import { SelectableCardIcon } from '../../'
 const SelectableCardIconDefault = () => {
   const [selectedIcon, setSelectedIcon] = useState(true)
   const [selectedWithoutIcon, setSelectedWithoutIcon] = useState(true)
-  const [unselected, setUnselected] = useState(true)
+  const [unselected, setUnselected] = useState(false)
 
   return (
     <div className="pb--doc-demo-row">
