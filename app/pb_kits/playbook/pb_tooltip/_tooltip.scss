@@ -34,7 +34,7 @@
       margin-top: 15px;
       .arrow {
         top: -35%;
-        border-color: transparent transparent white transparent;
+        border-color: transparent transparent $white transparent;
       }
     }
 
@@ -54,7 +54,7 @@
       position: absolute;
       top: 100%;
       left: 50%;
-      border-color: white transparent transparent transparent;
+      border-color: $white transparent transparent transparent;
       border-style: solid;
       border-width: 10px;
       margin-bottom: 50px;
@@ -62,14 +62,14 @@
     }
     &.show {
       opacity: 1;
-      filter:alpha(opacity=1);
       display: block;
       z-index: $z_9;
       margin-bottom: $space_sm;
-      background-color: white;
+      background-color: $white;
       padding: $space_xs $space_sm $space_xs $space_sm;
       box-shadow: $shadow_deeper;
-      border-radius: 3px;
+      border-radius: $border_rad_light;
+
       &.fade_out {
         animation-name: fadeOut;
         animation-duration: 150ms;
@@ -81,17 +81,19 @@
   &[class*=_dark]{
     .tooltip_tooltip{
       color: $white;
+      background-color: rgba(#000, $opacity_9);
+
 
       &.show {
-        opacity: 85%;
-        background-color: black;
       }
       .arrow {
-        border-color: black transparent transparent transparent;
+        border-color: $black transparent transparent transparent;
+        opacity: $opacity_9;
       }
       &.flipped {
         .arrow {
-          border-color: transparent transparent black transparent;
+          border-color: transparent transparent $black transparent;
+          opacity: $opacity_9;
         }
       }
     }
@@ -99,5 +101,5 @@
 }
 
 .tooltip_tooltip.top {
-  padding: 5px 0;
+  padding: ($space_xs - 3px) 0;
 }
