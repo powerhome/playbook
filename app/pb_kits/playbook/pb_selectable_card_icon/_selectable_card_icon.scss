@@ -2,15 +2,14 @@
 
 [class^=pb_selectable_card_icon_kit] {
 
-    // .checked {
-    //     color: $primary;
-    // }
-    // .unchecked {
-    //     color: gray;
-    // }
+    text-align: center;
 
     input[type="checkbox"]:checked ~ label {
         color: $primary;
+        
+        h4 {
+            color: $primary;
+        }
     }
 
     input[type="checkbox"] ~ label {

@@ -19,6 +19,7 @@ type SelectableIconProps = {
   data?: Object,
   icon: String,
   inputId: String,
+  inputless?: Boolean,
   multi?: Boolean,
   name: String,
   text: String,
@@ -34,6 +35,7 @@ const SelectableIcon = ({
   disabled = false,
   icon,
   inputId,
+  inputless = false,
   multi = true,
   name,
   text,
@@ -61,26 +63,43 @@ const SelectableIcon = ({
         {...dataProps}
         className={classnames(css, className)}
     >
-      <input
-          {...props}
-          checked={checked}
-          disabled={disabled}
-          id={inputIdPresent}
-          name={name}
-          type={inputType}
-          value={value}
-      />
-      <label htmlFor={inputIdPresent}>
-        <Icon
-            icon={icon}
-            size="2x"
-        />
-        <Title
-            size={4}
-            tag="h4"
-            text={text}
-        />
-      </label>
+      { inputless ? (
+        <>
+          <Icon
+              icon={icon}
+              size="2x"
+          />
+          <Title
+              size={4}
+              tag="h4"
+              text={text}
+          />
+        </>
+      ) : (
+        <>
+          <input
+              {...props}
+              checked={checked}
+              disabled={disabled}
+              id={inputIdPresent}
+              name={name}
+              type={inputType}
+              value={value}
+          />
+          <label htmlFor={inputIdPresent}>
+            <Icon
+                icon={icon}
+                size="2x"
+            />
+            <Title
+                size={4}
+                tag="h4"
+                text={text}
+            />
+          </label>
+        </>
+        )
+      }
     </div>
   )
 }

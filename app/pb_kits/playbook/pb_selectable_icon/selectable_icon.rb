@@ -17,7 +17,7 @@ module Playbook
 
       # Form Props
       prop :input_id, type: Playbook::Props::String
-      prop :name
+      prop :name, type: Playbook::Props::String
       prop :multi, type: Playbook::Props::Boolean,
                    default: true
       prop :checked, type: Playbook::Props::Boolean,
@@ -25,6 +25,11 @@ module Playbook
       prop :disabled, type: Playbook::Props::Boolean,
                       default: false
       prop :value
+      prop :classname, type: Playbook::Props::String
+
+      # Conditional rendering for input field
+      prop :inputless, type: Playbook::Props::Boolean,
+                       default: false
 
       def classname
         generate_classname("pb_selectable_icon_kit", checked_class, dark_class, enabled_disabled_class)

@@ -1,9 +1,27 @@
 [class^=pb_selectable_icon] {
 
     text-align: center;
+    cursor: pointer;
+
+    :hover * {
+        filter: drop-shadow(0 0 8px rgba($shadow, 0.25))
+    }
+
+    * {
+        cursor: pointer;
+    }
 
     h4 {
         margin-top: $space_xs !important;
+        user-select: none;
+    }
+
+    &[class*=_disabled] {
+        opacity: 0.5;
+        cursor: not-allowed;
+        * {
+            cursor: not-allowed;
+        }
     }
       
     input[type="checkbox"],
@@ -16,15 +34,15 @@
         
         &:not(:checked) ~ label {
             color: $slate;
+            transition-duration: $transition_short;
+            transition-timing-function: $easeOut;
         }
         
 
-        &:checked ~ label {
+        &:checked ~ label * {
             color: $primary;
-
-            h4 {
-                color: $primary;
-            }
+            transition-duration: $transition_short;
+            transition-timing-function: $easeIn;
         }
     }
 
@@ -46,11 +64,8 @@
                 h4 {
                     color: $text_dk_default !important;
                 }
-    
             }
-        
         }
-
     }
 }
 

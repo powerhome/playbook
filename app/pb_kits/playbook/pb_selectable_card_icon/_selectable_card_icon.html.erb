@@ -1,19 +1,31 @@
 <%= content_tag(:div,
-    id: object.id,
     data: object.data,
     class: object.classname) do %>
   
   <%= pb_rails("selectable_card", props: {
-    input_id: "selected_without_icon",
-    name: "selected_without_icon",
-    value: "selected_without_icon",
-    checked: true,
+    input_id: object.input_id,
+    name: object.name,
+    value: object.value,
+    checked: object.checked,
+    disabled: object.disabled,
+    icon: object.card_icon,
+    multi: object.multi,
+    dark: object.dark
   }) do %>
-    <%= pb_rails("selectable_icon", props: {icon: "album-collection", input_id: 600, text: "Title" }) %>
-    <%= pb_rails("body", props: {
-      text: object.text,
-      color: "light"
+
+    <%= pb_rails("selectable_icon", props: {
+      icon: object.icon,
+      inputless: true,
+      text: object.title_text,
+      dark: object.dark
     }) %>
+
+    <%= pb_rails("body", props: {
+      text: object.body_text,
+      color: "light",
+      dark: object.dark
+    }) %>
+
   <% end %>
 <% end %>
 
