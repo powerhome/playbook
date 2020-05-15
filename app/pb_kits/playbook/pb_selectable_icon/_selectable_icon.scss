@@ -53,13 +53,6 @@
             -moz-appearance: none;
             display: none;
             appearance: none;
-
-            // &:checked ~ label {
-            //     color: #0082ff;
-            //     transition-duration: $transition_short;
-            //     transition-timing-function: $easeIn; 
-            // }
-    
             
             &:not(:checked) ~ label {
                 

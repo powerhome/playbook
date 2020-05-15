@@ -12,7 +12,7 @@ const SelectableCardIconDefault = () => {
           bodyText="Selected, with icon"
           cardIcon
           checked={selectedIcon}
-          icon="calendar"
+          icon="cog"
           inputId={1}
           onChange={() => setSelectedIcon(!selectedIcon)}
           titleText="Title"
@@ -28,7 +28,7 @@ const SelectableCardIconDefault = () => {
       <SelectableCardIcon
           bodyText="Unselected"
           checked={unselected}
-          icon="calendar"
+          icon="inbox"
           inputId={3}
           onChange={() => setUnselected(!unselected)}
           titleText="Title"
@@ -36,7 +36,7 @@ const SelectableCardIconDefault = () => {
       <SelectableCardIcon
           bodyText="Disabled"
           disabled
-          icon="calendar"
+          icon="cog"
           inputId={4}
           titleText="Title"
       />

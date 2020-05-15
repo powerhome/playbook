@@ -3,6 +3,7 @@
 [class^=pb_selectable_card_icon_kit] {
 
     text-align: center;
+    user-select: none;
 
     input[type="checkbox"],
     input[type="radio"] {
@@ -26,16 +27,18 @@
         }
     }
 
+    &[class*=_disabled] {
+        opacity: 0.55;
+        cursor: not-allowed;
+        * {
+            cursor: not-allowed;
+        }
+    }
+
     &[class*=_dark] {
 
         input[type="checkbox"],
-        input[type="radio"] {      
-            
-            // &:checked ~ label * {
-            //     color: #0082ff;
-            //     transition-duration: $transition_short;
-            //     transition-timing-function: $easeIn;
-            // }            
+        input[type="radio"] {                 
 
             &:not(:checked) ~ label {
                 
@@ -50,5 +53,13 @@
                 }
             }
         }
+    }
+
+    [class^=pb_selectable_icon_kit] {
+        margin-bottom: $space_xs;
+    }
+
+    [class^=pb_selectable_card_kit] {
+        margin-bottom: 0px !important;
     }
 }

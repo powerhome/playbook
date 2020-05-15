@@ -13,7 +13,7 @@ const SelectableCardIconDark = () => {
           cardIcon
           checked={selectedIcon}
           dark
-          icon="calendar"
+          icon="cog"
           inputId={8}
           onChange={() => setSelectedIcon(!selectedIcon)}
           titleText="Title"
@@ -31,7 +31,7 @@ const SelectableCardIconDark = () => {
           bodyText="Unselected"
           checked={unselected}
           dark
-          icon="calendar"
+          icon="inbox"
           inputId={10}
           onChange={() => setUnselected(!unselected)}
           titleText="Title"
@@ -40,7 +40,7 @@ const SelectableCardIconDark = () => {
           bodyText="Disabled"
           dark
           disabled
-          icon="calendar"
+          icon="cog"
           inputId={11}
           titleText="Title"
       />
