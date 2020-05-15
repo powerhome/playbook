@@ -27,7 +27,7 @@ const SelectableCardIconSingleSelect = () => {
       <SelectableCardIcon
           bodyText="Vinyl"
           checked={selectedFormat === 'Vinyl'}
-          icon="record-vinyl"
+          icon="album-collection"
           inputId={7}
           onChange={() => toggleFormat('Vinyl')}
           titleText="Title"

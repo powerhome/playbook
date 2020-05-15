@@ -31,7 +31,7 @@ const SelectableIconSingleSelect = () => {
 
       <SelectableIcon
           checked={selectedFormat === 'Vinyl'}
-          icon="record-vinyl"
+          icon="album-collection"
           inputId={15}
           multi={false}
           name="music-format"
