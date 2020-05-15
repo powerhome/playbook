@@ -223,4 +223,4 @@ DEPENDENCIES
   web-console (= 3.7.0)
 
 BUNDLED WITH
-   1.17.3
+   2.0.2
