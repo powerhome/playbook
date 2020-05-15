@@ -83,7 +83,7 @@ GEM
       childprocess (>= 0.6.3, < 2.0)
       iniparse (~> 1.4)
     parallel (1.19.1)
-    parser (2.7.1.0)
+    parser (2.7.1.2)
       ast (~> 2.4.0)
     rack (2.2.2)
     rack-proxy (0.6.5)
@@ -104,7 +104,7 @@ GEM
     rainbow (2.2.2)
       rake
     rake (12.3.3)
-    rb-fsevent (0.10.3)
+    rb-fsevent (0.10.4)
     rb-inotify (0.10.1)
       ffi (~> 1.0)
     react-rails (2.6.0)
@@ -160,7 +160,7 @@ GEM
     simple_form (5.0.2)
       actionpack (>= 5.0)
       activemodel (>= 5.0)
-    slim (4.0.1)
+    slim (4.1.0)
       temple (>= 0.7.6, < 0.9)
       tilt (>= 2.0.6, < 2.1)
     slim-rails (3.2.0)
@@ -223,4 +223,4 @@ DEPENDENCIES
   web-console (= 3.7.0)
 
 BUNDLED WITH
-   1.17.3
+   2.0.2
