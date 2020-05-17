@@ -1,7 +1,7 @@
 examples:
-  
+
   rails:
   - timestamp_default: Default
-  
-  
+
   react:
+  - timestamp_default: Default
