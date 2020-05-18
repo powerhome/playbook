@@ -8,8 +8,7 @@ module Playbook
       partial "pb_selectable_icon/selectable_icon"
 
       # Icon props
-      prop :icon, type: Playbook::Props::String,
-                  default: "user"
+      prop :icon, type: Playbook::Props::String
       prop :dark, type: Playbook::Props::Boolean,
                   default: false
       # Title text
@@ -25,7 +24,6 @@ module Playbook
       prop :disabled, type: Playbook::Props::Boolean,
                       default: false
       prop :value
-      prop :classname, type: Playbook::Props::String
 
       # Conditional rendering for input field
       prop :inputless, type: Playbook::Props::Boolean,
