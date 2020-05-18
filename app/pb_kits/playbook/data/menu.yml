@@ -1,6 +1,7 @@
 samples:
   - dashboards
   - something
+  - filter_table
 kits:
   - avatar
   - avatar_action_button
@@ -87,4 +88,3 @@ kits:
     - title_detail
     - weekday_stacked
   - user
-  - user_badge
