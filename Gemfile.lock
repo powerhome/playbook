@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    playbook_ui (4.13.1)
+    playbook_ui (4.14.0)
       actionpack (>= 5.1.6, < 6.0)
       actionview (>= 5.1.6, < 7.0)
       activesupport (>= 5.1.6, < 6.0)
@@ -160,7 +160,7 @@ GEM
     simple_form (5.0.2)
       actionpack (>= 5.0)
       activemodel (>= 5.0)
-    slim (4.0.1)
+    slim (4.1.0)
       temple (>= 0.7.6, < 0.9)
       tilt (>= 2.0.6, < 2.1)
     slim-rails (3.2.0)
