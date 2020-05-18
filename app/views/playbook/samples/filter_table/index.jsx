@@ -4,7 +4,7 @@ import NavItem from '../../../../pb_kits/playbook/pb_nav/_item.jsx'
 
 const FilterTable = () => (
   <div>
-    hello world
+    {'hello world'}
   </div>
 )
 
