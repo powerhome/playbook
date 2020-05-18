@@ -1,21 +1,38 @@
+/* @flow */
+
 import React from 'react'
-import PropTypes from 'prop-types'
+import classnames from 'classnames'
 
-const propTypes = {
-  className: PropTypes.string,
-  id: PropTypes.string,
+import {
+  buildDataProps,
+} from '../utilities/props'
+
+type OnlineStatusProps = {
+  id?: String,
+  data?: object,
+  className?: String,
+  status: "online" | "offline" | "away",
 }
 
-class OnlineStatus extends React.Component {
-  render() {
-    return (
-      <div className="pb_online_status">
-        <span>{'ONLINE STATUS CONTENT'}</span>
-      </div>
-    )
-  }
-}
+const OnlineStatus = ({
+  id,
+  data = {},
+  className,
+  status = 'offline',
+}: OnlineStatusProps) => {
+  const dataProps = buildDataProps(data)
+  const css = classnames([
+    `pb_online_status_kit_${status}`,
+    className,
+  ])
 
-OnlineStatus.propTypes = propTypes
+  return (
+    <div
+        {...dataProps}
+        className={css}
+        id={id}
+    />
+  )
+}
 
 export default OnlineStatus
