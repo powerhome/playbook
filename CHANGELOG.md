@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### Added
+- Added Progress Step Kit([#776](https://github.com/powerhome/playbook/pull/776) @christinaatai)
 
 ## [4.14.0] 2020-5-14
 - Upgrade react-popper lib to latest ([#778](https://github.com/powerhome/playbook/pull/778) @thestephenmarshall)
