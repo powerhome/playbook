@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
 module Playbook
-  module PbProgressStepper
-    class ProgressStepper
+  module PbProgressStep
+    class ProgressStep
       include Playbook::Props
 
-      partial "pb_progress_stepper/progress_stepper"
+      partial "pb_progress_step/progress_step"
 
       prop :orientation, type: Playbook::Props::Enum,
                          values: %w[vertical horizontal],
@@ -20,7 +20,7 @@ module Playbook
     private
 
       def icon_class
-        icon === true ? "icon" : nil 
+        icon === true ? "icon" : nil
       end
     end
   end

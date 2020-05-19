@@ -42,6 +42,20 @@ $pb_progress_step_connector_height_from_top: $pb_progress_step_circle_size/2 - $
         display: flex;
         width: 100%;
 
+        &[class*=_icon] {
+            [class^=pb_progress_step_item_kit_complete] {
+                [class=pb_progress_step_item_wrapper] {
+                    [class=pb_progress_step_item_step_wrapper]{
+                        [class=pb_progress_step_item_step] {
+                            [class=pb_progress_step_item_step_circle] {
+                                color: $white !important;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
         > div:first-child {
             [class=pb_progress_step_item_wrapper] {
                 [class^=pb_progress_step_item] {
@@ -68,22 +82,7 @@ $pb_progress_step_connector_height_from_top: $pb_progress_step_circle_size/2 - $
             }
         }
 
-        &[class*=_icon] {
-            [class^=pb_progress_step_item_kit] {
-                &[class*=_complete] {
-                    [class=pb_progress_step_item_wrapper] {
-                        [class=pb_progress_step_item_step_wrapper]{
-                            [class=pb_progress_step_item_step] {
-                                [class=pb_progress_step_item_step_circle] {
-                                    @include pb_progress_step_circle(white, $white, $white);
-                                }
-                            }
-                            
-                        }
-                    }
-                }  
-            }
-        }
+        
         
         [class*=pb_progress_step_item_kit] {
             &[class*=_complete] {
@@ -241,7 +240,7 @@ $pb_progress_step_connector_height_from_top: $pb_progress_step_circle_size/2 - $
                         [class=pb_progress_step_item_step_wrapper]{
                             [class=pb_progress_step_item_step] {
                                 [class=pb_progress_step_item_step_circle] {
-                                    @include pb_progress_step_circle($primary, $primary, $white);
+                                    color: $white !important;
                                 }
                             }
                             
@@ -276,7 +275,7 @@ $pb_progress_step_connector_height_from_top: $pb_progress_step_circle_size/2 - $
                                     display: none;
                                 }
                                 &[class*=_step_circle] {
-                                    @include pb_progress_step_circle($primary, $primary, $white);
+                                    @include pb_progress_step_circle($primary, $primary, $primary);
                                 }
                                 &[class*=_step_connector_second] {
                                     @include pb_progress_step_line(3px, 100%, $primary, 0);

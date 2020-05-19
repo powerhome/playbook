@@ -48,7 +48,7 @@ kits:
   - popover
   - progress_pills
   - progress_simple
-  - progress_stepper
+  - progress_step
   - section_separator
   - source
   - star_rating
