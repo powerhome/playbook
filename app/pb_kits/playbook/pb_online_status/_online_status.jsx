@@ -8,10 +8,10 @@ import {
 } from '../utilities/props'
 
 type OnlineStatusProps = {
-  id?: String,
-  data?: object,
   className?: String,
-  status: "online" | "offline" | "away",
+  data?: object,
+  id?: String,
+  status?: "online" | "offline" | "away",
 }
 
 const OnlineStatus = ({
