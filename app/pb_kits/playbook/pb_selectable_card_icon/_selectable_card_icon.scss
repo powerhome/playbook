@@ -2,64 +2,63 @@
 
 [class^=pb_selectable_card_icon_kit] {
 
-    text-align: center;
-    user-select: none;
+	text-align: center;
+	user-select: none;
 
-    input[type="checkbox"],
-    input[type="radio"] {
+	input[type="checkbox"],
+	input[type="radio"] {
 
-        &:checked ~ label {
-            color: $primary;
-            transition-duration: $transition_short;
-            transition-timing-function: $easeIn;
+		&:checked ~ label {
+			color: $primary;
+			transition-duration: $transition_short;
+			transition-timing-function: $easeIn;
+		
+				h4 {
+					color: $primary;
+					transition-duration: $transition_short;
+					transition-timing-function: $easeIn;
+				}
+			}
         
-            h4 {
-                color: $primary;
-                transition-duration: $transition_short;
-                transition-timing-function: $easeIn;
-            }
-        }
-        
-        &:not(:checked) ~ label {
-            color: $slate;
-            transition-duration: $transition_short;
-            transition-timing-function: $easeOut;
-        }
+    &:not(:checked) ~ label {
+        color: $slate;
+        transition-duration: $transition_short;
+        transition-timing-function: $easeOut;
+      }
     }
 
     &[class*=_disabled] {
-        opacity: 0.55;
-        cursor: not-allowed;
+      opacity: 0.55;
+      cursor: not-allowed;
         * {
             cursor: not-allowed;
         }
     }
 
-    &[class*=_dark] {
+  &[class*=_dark] {
 
-        input[type="checkbox"],
-        input[type="radio"] {                 
+    input[type="checkbox"],
+    input[type="radio"] {                 
 
-            &:not(:checked) ~ label {
-                
-                color: $text_dk_default;
-                transition-duration: $transition_short;
-                transition-timing-function: $easeOut;
+      &:not(:checked) ~ label {
+        color: $text_dk_default;
+        transition-duration: $transition_short;
+        transition-timing-function: $easeOut;
 
-                h4, .pb_title_kit_4 {
-                    color: $text_dk_default !important;
-                    transition-duration: $transition_short;
-                    transition-timing-function: $easeOut;
-                }
-            }
+        h4, .pb_title_kit_4 {
+          color: $text_dk_default !important;
+          transition-duration: $transition_short;
+          transition-timing-function: $easeOut;
         }
+      }
     }
+  }
 
-    [class^=pb_selectable_icon_kit] {
-        margin-bottom: $space_xs;
-    }
+  [class^=pb_selectable_icon_kit] {
+      margin-bottom: $space_xs;
+  }
 
-    [class^=pb_selectable_card_kit] {
-        margin-bottom: 0px !important;
-    }
+  [class^=pb_selectable_card_kit] {
+      margin-bottom: 0px !important;
+  }
 }
