@@ -65,7 +65,7 @@ const Popover = ({
             ref={ref}
             style={style}
         >
-          <div className={buildCss('popover_tooltip', 'show')}>
+          <div className={`${buildCss('popover_tooltip')} show`}>
             <Card shadow="deeper">
               { children }
             </Card>
