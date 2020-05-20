@@ -2,19 +2,21 @@
 <br>
 <%end%>
 
-<%= pb_rails("filter", props: {
-  id: "1",
-  filters: [
-    {name: "name", value: "John Wick"}
+<%=
+  pb_rails("filter", props: {
+    id: "1",
+    filters: [
+      { name: "name", value: "John Wick" }
     ],
-  sort_menu: [
-    {item:"Popularity", link:"#", active: true, direction:"desc"},
-    {item:"Title", link:"#", active: false},
-    {item:"Name", link:"#", active: false},
-  ],
-  template:"default",
-  results: 546,
-  }) do%>
+    sort_menu: [
+      { item: "Popularity", link: "?q[sorts]=managers_popularity+asc", active: true, direction: "desc" },
+      { item: "Mananger's Title", link: "?q[sorts]=managers_title+asc", active: false },
+      { item: "Manager's Name", link: "?q[sorts]=managers_name+asc", active: false },
+    ],
+    template: "default",
+    results: 546,
+  }) do
+%>
 <%
   example_collection = [
     OpenStruct.new(name: "Alabama", value: 1),
