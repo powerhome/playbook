@@ -14,7 +14,7 @@ const SelectableIconDefault = () => {
           icon="cog"
           inputId={10}
           onChange={() => toggleSelected(!checkSelected)}
-          text="Selected"
+          text="Settings"
       />
 
       <SelectableIcon
@@ -22,7 +22,7 @@ const SelectableIconDefault = () => {
           icon="calendar"
           inputId={11}
           onChange={() => toggleUnselected(!checkUnselected)}
-          text="Unselected"
+          text="Calendar"
       />
 
       <SelectableIcon
@@ -31,7 +31,7 @@ const SelectableIconDefault = () => {
           icon="inbox"
           inputId={12}
           onChange={() => toggleDisabled(!checkDisabled)}
-          text="Disabled"
+          text="Inbox"
       />
     </div>
   )

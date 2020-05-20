@@ -21,6 +21,7 @@
   &[class*=_disabled] {
 		opacity: 0.5;
 		cursor: not-allowed;
+
 		* {
 				cursor: not-allowed;
 		}
@@ -55,17 +56,24 @@
 			-moz-appearance: none;
 			display: none;
 			appearance: none;
+
+			&:checked ~ label * {
+				color: $text_dk_default;
+				transition-duration: $transition_short;
+				transition-timing-function: $easeIn;
+
+				// h4 {
+				// 	color: $text_dk_default !important;
+				// }
+			}
 				
 			&:not(:checked) ~ label {
-					
-				color: $text_dk_default;
+				color: $slate;
 				transition-duration: $transition_short;
 				transition-timing-function: $easeOut;
 
 				h4 {
 					color: $text_dk_default !important;
-					transition-duration: $transition_short;
-					transition-timing-function: $easeOut;
 				}
 			}
 		}
