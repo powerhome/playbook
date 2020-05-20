@@ -28,7 +28,7 @@
     }
 
     &[class*=_disabled] {
-      opacity: 0.55;
+      opacity: $opacity_5;
       cursor: not-allowed;
         * {
             cursor: not-allowed;
