@@ -2,6 +2,7 @@ examples:
   
   rails:
   - selectable_card_icon_default: Default
+  - selectable_card_icon_vertex_badge: Vertex Badge
   - selectable_card_icon_single_select: Single Select
   - selectable_card_icon_dark: Dark
   

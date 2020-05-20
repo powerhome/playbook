@@ -1,39 +1,29 @@
-<div class="pb--doc-demo-row">
-
+<div class="pb--doc-demo-row">    
+  
   <%= pb_rails("selectable_card_icon", props: {
     icon: "cog", 
     title_text: "Title", 
     body_text: "Selected, with icon",
-    input_id: 10,
+    input_id: 4,
     checked: true,
-    card_icon: true,
-    dark: true
-  }) %>
-
-  <%= pb_rails("selectable_card_icon", props: {
-    icon: "calendar", 
-    title_text: "Title", 
-    body_text: "Selected, without icon",
-    input_id: 11,
-    checked: true,
-    dark: true
+    card_icon: true
   }) %>
 
   <%= pb_rails("selectable_card_icon", props: {
     icon: "inbox", 
     title_text: "Title", 
     body_text: "Unselected",
-    input_id: 12,
-    dark: true
+    input_id: 5,
+    card_icon: true
   }) %>
-  
+
   <%= pb_rails("selectable_card_icon", props: {
     icon: "cog", 
     title_text: "Title", 
     body_text: "Disabled",
-    input_id: 13,
+    input_id: 6,
     disabled: true,
-    dark: true
+    card_icon: true
   }) %>
 
 </div>

@@ -61,10 +61,6 @@
 				color: $text_dk_default;
 				transition-duration: $transition_short;
 				transition-timing-function: $easeIn;
-
-				// h4 {
-				// 	color: $text_dk_default !important;
-				// }
 			}
 				
 			&:not(:checked) ~ label {
