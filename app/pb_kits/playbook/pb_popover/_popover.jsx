@@ -60,7 +60,7 @@ const Popover = ({
     {({ placement, ref, style }) => {
       return (
         <div
-            className={buildCss('pb_popover_kit', className)}
+            className={`${buildCss('pb_popover_kit')} ${className}`}
             data-placement={placement}
             ref={ref}
             style={style}
