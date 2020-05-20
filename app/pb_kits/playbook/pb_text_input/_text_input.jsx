@@ -6,10 +6,18 @@ import {
   Caption,
 } from '../'
 
+import {
+  buildAriaProps,
+  buildDataProps,
+} from '../utilities/props'
+
 type TextInputProps = {
+  aria?: object,
   className: String,
   dark: boolean,
+  data?: object,
   error?: String,
+  id?: String,
   name: String,
   label: String,
   onChange: (String) => void,
@@ -20,9 +28,12 @@ type TextInputProps = {
 }
 
 const TextInput = ({
+  aria = {},
   className,
   dark = false,
+  data = {},
   error,
+  id,
   name,
   label,
   onChange = () => {},
@@ -32,6 +43,8 @@ const TextInput = ({
   children = null,
   ...props
 }: TextInputProps) => {
+  const ariaProps = buildAriaProps(aria)
+  const dataProps = buildDataProps(data)
   const css = classnames([
     `pb_text_input_kit${dark === true ? '_dark' : ''}`,
     className,
@@ -39,7 +52,12 @@ const TextInput = ({
   ])
 
   return (
-    <div className={css}>
+    <div
+        {...ariaProps}
+        {...dataProps}
+        className={css}
+        id={id}
+    >
       <Caption
           className="pb_text_input_kit_label"
           dark={dark}
