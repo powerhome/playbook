@@ -11,7 +11,7 @@ import WebpackerReact from 'webpacker-react'
 // Generated file from kit generator.
 
 import Dashboards from '../../../views/playbook/samples/dashboards/index.jsx'
-import Test from '../../../views/playbook/samples/test/index.jsx'
+import Registration from '../../../views/playbook/samples/registration/index.jsx'
 
 WebpackerReact.setup({ Dashboards })
-WebpackerReact.setup({ Test })
+WebpackerReact.setup({ Registration })
