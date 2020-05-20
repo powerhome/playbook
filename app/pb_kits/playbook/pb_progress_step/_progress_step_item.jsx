@@ -27,7 +27,6 @@ const ProgressStepItem = ({
             <div className="pb_progress_step_item_step_connector_first" />
             <div className="pb_progress_step_item_step_circle">
               <Icon
-                  fixedWidth
                   icon="check"
               />
             </div>

@@ -12,15 +12,21 @@ module Playbook
                          default: "horizontal"
       prop :icon, type: Playbook::Props::Boolean,
                   default: false
+      prop :dark, type: Playbook::Props::Boolean,
+                  default: false
 
       def classname
-        generate_classname("pb_progress_step_kit", orientation, icon_class)
+        generate_classname("pb_progress_step_kit", orientation, icon_class, dark_class)
       end
 
     private
 
       def icon_class
         icon === true ? "icon" : nil
+      end
+
+      def dark_class
+        dark === true ? "dark" : nil
       end
     end
   end

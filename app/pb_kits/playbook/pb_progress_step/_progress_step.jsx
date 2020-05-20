@@ -10,7 +10,8 @@ type ProgressStepProps = {
   id?: String,
   children?: Array<React.ReactChild>,
   orientation?: 'horizontal' | 'vertical',
-  icon?: Boolean
+  icon?: Boolean,
+  dark?: Boolean,
 }
 
 const ProgressStep = ({
@@ -18,12 +19,14 @@ const ProgressStep = ({
   children,
   orientation = 'horizontal',
   icon = false,
+  dark = false,
 }: ProgressStepProps) => {
   const iconStyle = icon === true ? 'icon' : ''
-  const ProgressStepCss = buildCss('pb_progress_step_kit', orientation, iconStyle)
+  const darkStyle = dark === true ? 'dark' : ''
+  const progressStepCss = buildCss('pb_progress_step_kit', orientation, iconStyle, darkStyle)
 
   return (
-    <div className={classnames(ProgressStepCss, className)}>
+    <div className={classnames(progressStepCss, className)}>
       {children}
     </div>
   )
