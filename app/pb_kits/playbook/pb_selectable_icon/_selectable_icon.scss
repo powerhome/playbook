@@ -4,7 +4,9 @@
   cursor: pointer;
 
   :hover * {
-    filter: drop-shadow(0 0 8px rgba($shadow, 0.25))
+		filter: drop-shadow(0 0 8px rgba($shadow, 0.25));
+		transition-duration: $transition_short;
+		transition-timing-function: $easeIn;
   }
 
   * {
@@ -19,9 +21,9 @@
   &[class*=_disabled] {
 		opacity: 0.5;
 		cursor: not-allowed;
-			* {
-					cursor: not-allowed;
-			}
+		* {
+				cursor: not-allowed;
+		}
 	}
 	
   input[type="checkbox"],
