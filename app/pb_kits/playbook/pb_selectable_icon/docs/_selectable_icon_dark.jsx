@@ -12,29 +12,29 @@ const SelectableIconDark = () => {
       <SelectableIcon
           checked={checkSelected}
           dark
-          icon="cog"
+          icon="file-word"
           inputId={16}
           onChange={() => toggleSelected(!checkSelected)}
-          text="Settings"
+          text="Doc"
       />
 
       <SelectableIcon
           checked={checkUnselected}
           dark
-          icon="calendar"
+          icon="file-pdf"
           inputId={17}
           onChange={() => toggleUnselected(!checkUnselected)}
-          text="Calendar"
+          text="PDF"
       />
 
       <SelectableIcon
           checked={checkDisabled}
           dark
           disabled
-          icon="inbox"
+          icon="file-image"
           inputId={18}
           onChange={() => toggleDisabled(!checkDisabled)}
-          text="Inbox"
+          text="PNG"
       />
     </div>
   )

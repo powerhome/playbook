@@ -9,30 +9,30 @@ const SelectableCardIconCheckmark = () => {
     <div className="pb--doc-demo-row">
 
       <SelectableCardIcon
-          bodyText="Selected, without icon"
+          bodyText="Howdy Partner."
           checked={selected}
           checkmark
-          icon="calendar"
+          icon="hat-cowboy"
           inputId={4}
           onChange={() => setSelected(!selected)}
-          titleText="Title"
+          titleText="Cowboy"
       />
       <SelectableCardIcon
-          bodyText="Unselected"
+          bodyText="Poof, you're a sandwich."
           checked={unselected}
           checkmark
-          icon="inbox"
+          icon="hat-wizard"
           inputId={5}
           onChange={() => setUnselected(!unselected)}
-          titleText="Title"
+          titleText="Wizard"
       />
       <SelectableCardIcon
-          bodyText="Disabled"
+          bodyText="Where is the lamb sauce?"
           checkmark
           disabled
-          icon="cog"
+          icon="hat-chef"
           inputId={6}
-          titleText="Title"
+          titleText="Chef"
       />
     </div>
   )

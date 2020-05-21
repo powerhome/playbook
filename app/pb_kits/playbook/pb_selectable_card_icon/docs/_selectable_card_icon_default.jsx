@@ -8,27 +8,27 @@ const SelectableCardIconDefault = () => {
   return (
     <div className="pb--doc-demo-row">
       <SelectableCardIcon
-          bodyText="Selected, with icon"
+          bodyText="Export"
           checked={selected}
-          icon="cog"
+          icon="chart-line"
           inputId={1}
           onChange={() => setSelected(!selected)}
-          titleText="Title"
+          titleText="Quarterly Report"
       />
       <SelectableCardIcon
-          bodyText="Unselected"
+          bodyText="Export"
           checked={unselected}
-          icon="inbox"
+          icon="chart-pie"
           inputId={2}
           onChange={() => setUnselected(!unselected)}
-          titleText="Title"
+          titleText="Market Share"
       />
       <SelectableCardIcon
-          bodyText="Disabled"
+          bodyText="Export"
           disabled
-          icon="cog"
+          icon="analytics"
           inputId={3}
-          titleText="Title"
+          titleText="Comprehensive"
       />
     </div>
   )

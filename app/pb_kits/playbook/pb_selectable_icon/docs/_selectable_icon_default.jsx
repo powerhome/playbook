@@ -11,27 +11,27 @@ const SelectableIconDefault = () => {
     <div className="pb--doc-demo-row">
       <SelectableIcon
           checked={checkSelected}
-          icon="cog"
+          icon="dollar-sign"
           inputId={10}
           onChange={() => toggleSelected(!checkSelected)}
-          text="Settings"
+          text="US Dollar"
       />
 
       <SelectableIcon
           checked={checkUnselected}
-          icon="calendar"
+          icon="euro-sign"
           inputId={11}
           onChange={() => toggleUnselected(!checkUnselected)}
-          text="Calendar"
+          text="Euro"
       />
 
       <SelectableIcon
           checked={checkDisabled}
           disabled
-          icon="inbox"
+          icon="yen-sign"
           inputId={12}
           onChange={() => toggleDisabled(!checkDisabled)}
-          text="Inbox"
+          text="Yen"
       />
     </div>
   )

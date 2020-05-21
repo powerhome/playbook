@@ -8,30 +8,30 @@ const SelectableCardIconDark = () => {
   return (
     <div className="pb--doc-demo-row">
       <SelectableCardIcon
-          bodyText="Selected, with icon"
+          bodyText="Silent Mode"
           checked={selected}
           dark
-          icon="cog"
+          icon="volume"
           inputId={10}
           onChange={() => setSelected(!selected)}
-          titleText="Title"
+          titleText="Sound"
       />
       <SelectableCardIcon
-          bodyText="Unselected"
+          bodyText="Allow location data"
           checked={unselected}
           dark
-          icon="inbox"
+          icon="location"
           inputId={11}
           onChange={() => setUnselected(!unselected)}
-          titleText="Title"
+          titleText="Location"
       />
       <SelectableCardIcon
           bodyText="Disabled"
           dark
           disabled
-          icon="cog"
+          icon="wifi"
           inputId={12}
-          titleText="Title"
+          titleText="WiFi"
       />
     </div>
   )

@@ -27,19 +27,21 @@
     &[class*=_disabled] {
       opacity: $opacity_6;
       cursor: not-allowed;
-        * {
-            cursor: not-allowed;
-        }
+      
+      * {
+          cursor: not-allowed;
+      }
     }
 
   &[class*=_dark] {
 
     input[type="checkbox"],
     input[type="radio"] {       
+      
+      transition-duration: $transition_short;
+      transition-timing-function: $easeIn;
 
       &:checked ~ label {
-        transition-duration: $transition_short;
-        transition-timing-function: $easeIn;
 
         svg {
           color: $active_dark;
@@ -52,8 +54,6 @@
       }
 
       &:not(:checked) ~ label {
-        transition-duration: $transition_short;
-        transition-timing-function: $easeIn;
         
         svg {
           color: $slate;

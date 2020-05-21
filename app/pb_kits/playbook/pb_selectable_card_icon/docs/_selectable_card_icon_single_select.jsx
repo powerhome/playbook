@@ -7,28 +7,31 @@ const SelectableCardIconSingleSelect = () => {
   return (
     <div className="pb--doc-demo-row">
       <SelectableCardIcon
-          checked={selectedFormat === 'Cassette'}
-          icon="cassette-tape"
+          checked={selectedFormat === 'car'}
+          icon="car"
           inputId={7}
-          onChange={() => toggleFormat('Cassette')}
-          titleText="Cassette"
-          value="Cassette"
+          name="select"
+          onChange={() => toggleFormat('car')}
+          titleText="Car"
+          value="car"
       />
       <SelectableCardIcon
-          checked={selectedFormat === 'CD'}
-          icon="compact-disc"
+          checked={selectedFormat === 'bus'}
+          icon="bus"
           inputId={8}
-          onChange={() => toggleFormat('CD')}
-          titleText="CD"
-          value="CD"
+          name="select"
+          onChange={() => toggleFormat('bus')}
+          titleText="Bus"
+          value="bus"
       />
       <SelectableCardIcon
-          checked={selectedFormat === 'Vinyl'}
-          icon="album-collection"
+          checked={selectedFormat === 'subway'}
+          icon="subway"
           inputId={9}
-          onChange={() => toggleFormat('Vinyl')}
-          titleText="Vinyl"
-          value="Vinyl"
+          name="select"
+          onChange={() => toggleFormat('subway')}
+          titleText="Subway"
+          value="subway"
       />
     </div>
   )
