@@ -11,16 +11,20 @@ const FilterDefault = () => {
   ]
   return (
     <Filter
-        filters={[
-        { name: 'Full Name', value: 'John Wick' },
-        { name: 'Territory', value: 'San Francisco' },
-      ]}
+        double
+        filters={{
+          'Full Name': 'John Wick',
+          'Territory': 'San Francisco',
+        }}
         results={256}
-        sortMenu={[
-      { item: 'Popularity', link: '#', active: true, direction: 'desc' },
-      { item: 'Title', link: '#', active: false },
-      { item: 'Name', link: '#', active: false },
-    ]}
+        sortOptions={{
+          popularity: 'Popularity',
+          // eslint-disable-next-line
+          manager_title: 'Manager\'s Title',
+          // eslint-disable-next-line
+          manager_name: 'Manager\'s Name',
+        }}
+        sortValue={[{ name: 'popularity', dir: 'asc' }]}
     >
       <TextInput
           label="Full Name"
