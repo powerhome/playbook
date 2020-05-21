@@ -12,8 +12,8 @@ import {
 
 type SelectableCardIconProps = {
   aria?: Object,
-  cardIcon: Boolean,
   checked?: Boolean,
+  checkmark: Boolean,
   className?: String,
   dark?: Boolean,
   data?: Object,
@@ -30,7 +30,7 @@ type SelectableCardIconProps = {
 
 const SelectableCardIcon = ({
   aria = {},
-  cardIcon = false,
+  checkmark = false,
   checked = false,
   className,
   dark = false,
@@ -66,7 +66,7 @@ const SelectableCardIcon = ({
           checked={checked}
           dark={dark}
           disabled={disabled}
-          icon={cardIcon}
+          icon={checkmark}
           inputId={inputId}
           multi={multi}
           name={name}

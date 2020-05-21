@@ -2,29 +2,18 @@ import React, { useState } from 'react'
 import { SelectableCardIcon } from '../../'
 
 const SelectableCardIconDark = () => {
-  const [selectedIcon, setSelectedIcon] = useState(true)
-  const [selectedWithoutIcon, setSelectedWithoutIcon] = useState(true)
+  const [selected, setSelected] = useState(true)
   const [unselected, setUnselected] = useState(false)
 
   return (
     <div className="pb--doc-demo-row">
       <SelectableCardIcon
           bodyText="Selected, with icon"
-          cardIcon
-          checked={selectedIcon}
+          checked={selected}
           dark
           icon="cog"
-          inputId={8}
-          onChange={() => setSelectedIcon(!selectedIcon)}
-          titleText="Title"
-      />
-      <SelectableCardIcon
-          bodyText="Selected, without icon"
-          checked={selectedWithoutIcon}
-          dark
-          icon="calendar"
-          inputId={9}
-          onChange={() => setSelectedWithoutIcon(!selectedWithoutIcon)}
+          inputId={10}
+          onChange={() => setSelected(!selected)}
           titleText="Title"
       />
       <SelectableCardIcon
@@ -32,7 +21,7 @@ const SelectableCardIconDark = () => {
           checked={unselected}
           dark
           icon="inbox"
-          inputId={10}
+          inputId={11}
           onChange={() => setUnselected(!unselected)}
           titleText="Title"
       />
@@ -41,7 +30,7 @@ const SelectableCardIconDark = () => {
           dark
           disabled
           icon="cog"
-          inputId={11}
+          inputId={12}
           titleText="Title"
       />
     </div>

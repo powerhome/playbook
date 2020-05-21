@@ -10,7 +10,7 @@ const SelectableCardIconSingleSelect = () => {
           bodyText="Cassette"
           checked={selectedFormat === 'Cassette'}
           icon="cassette-tape"
-          inputId={5}
+          inputId={7}
           onChange={() => toggleFormat('Cassette')}
           titleText="Title"
           value="Cassette"
@@ -19,7 +19,7 @@ const SelectableCardIconSingleSelect = () => {
           bodyText="CD"
           checked={selectedFormat === 'CD'}
           icon="compact-disc"
-          inputId={6}
+          inputId={8}
           onChange={() => toggleFormat('CD')}
           titleText="Title"
           value="CD"
@@ -28,7 +28,7 @@ const SelectableCardIconSingleSelect = () => {
           bodyText="Vinyl"
           checked={selectedFormat === 'Vinyl'}
           icon="album-collection"
-          inputId={7}
+          inputId={9}
           onChange={() => toggleFormat('Vinyl')}
           titleText="Title"
           value="Vinyl"

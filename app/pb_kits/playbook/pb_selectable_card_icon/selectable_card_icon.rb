@@ -21,7 +21,7 @@ module Playbook
                      default: false
       prop :disabled, type: Playbook::Props::Boolean,
                       default: false
-      prop :card_icon, type: Playbook::Props::Boolean,
+      prop :checkmark, type: Playbook::Props::Boolean,
                        default: false
       prop :value
 

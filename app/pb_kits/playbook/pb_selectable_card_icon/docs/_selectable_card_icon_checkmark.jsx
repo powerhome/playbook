@@ -1,37 +1,41 @@
 import React, { useState } from 'react'
 import { SelectableCardIcon } from '../../'
 
-const SelectableCardIconDefault = () => {
+const SelectableCardIconCheckmark = () => {
   const [selected, setSelected] = useState(true)
   const [unselected, setUnselected] = useState(false)
 
   return (
     <div className="pb--doc-demo-row">
+
       <SelectableCardIcon
-          bodyText="Selected, with icon"
+          bodyText="Selected, without icon"
           checked={selected}
-          icon="cog"
-          inputId={1}
+          checkmark
+          icon="calendar"
+          inputId={4}
           onChange={() => setSelected(!selected)}
           titleText="Title"
       />
       <SelectableCardIcon
           bodyText="Unselected"
           checked={unselected}
+          checkmark
           icon="inbox"
-          inputId={2}
+          inputId={5}
           onChange={() => setUnselected(!unselected)}
           titleText="Title"
       />
       <SelectableCardIcon
           bodyText="Disabled"
+          checkmark
           disabled
           icon="cog"
-          inputId={3}
+          inputId={6}
           titleText="Title"
       />
     </div>
   )
 }
 
-export default SelectableCardIconDefault
+export default SelectableCardIconCheckmark

@@ -43,7 +43,7 @@
 		&:not(:checked) ~ label {
 			color: $slate;
 			transition-duration: $transition_short;
-			transition-timing-function: $easeOut;
+			transition-timing-function: $easeIn;
 		}
 	}
 
@@ -66,10 +66,12 @@
 			&:not(:checked) ~ label {
 				color: $slate;
 				transition-duration: $transition_short;
-				transition-timing-function: $easeOut;
+				transition-timing-function: $easeIn;
 
 				h4 {
 					color: $text_dk_default !important;
+					transition-duration: $transition_short;
+					transition-timing-function: $easeIn;
 				}
 			}
 		}
