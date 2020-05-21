@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### Changed
+- Updated React version of Layout Kit to use sub-components ([#801](https://github.com/powerhome/playbook/pull/801)@christinaatai)
+
 ## [4.14.0] 2020-5-14
 - Upgrade react-popper lib to latest ([#778](https://github.com/powerhome/playbook/pull/778) @thestephenmarshall)
 - Update React version to 16.8.6 ([#777](https://github.com/powerhome/playbook/pull/777) @thestephenmarshall)
