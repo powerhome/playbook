@@ -7,23 +7,20 @@
 
 	input[type="checkbox"],
 	input[type="radio"] {
+    
+    transition-duration: $transition_short;
+    transition-timing-function: $easeIn;
 
 		&:checked ~ label {
 			color: $primary;
-			transition-duration: $transition_short;
-			transition-timing-function: $easeIn;
 		
 				h4 {
 					color: $primary;
-					transition-duration: $transition_short;
-					transition-timing-function: $easeIn;
 				}
 			}
         
     &:not(:checked) ~ label {
         color: $slate;
-        transition-duration: $transition_short;
-        transition-timing-function: $easeOut;
       }
     }
 
@@ -38,27 +35,46 @@
   &[class*=_dark] {
 
     input[type="checkbox"],
-    input[type="radio"] {                 
+    input[type="radio"] {       
+
+      &:checked ~ label {
+        transition-duration: $transition_short;
+        transition-timing-function: $easeIn;
+
+        svg {
+          color: $active_dark;
+        }
+
+        h4 {
+          color: $active_dark !important;
+        }
+
+      }
 
       &:not(:checked) ~ label {
-        color: $text_dk_default;
         transition-duration: $transition_short;
-        transition-timing-function: $easeOut;
+        transition-timing-function: $easeIn;
+        
+        svg {
+          color: $slate;
+        }
 
-        h4, .pb_title_kit_4 {
+        h4 {
           color: $text_dk_default !important;
-          transition-duration: $transition_short;
-          transition-timing-function: $easeOut;
         }
       }
     }
   }
 
   [class^=pb_selectable_icon_kit] {
-      margin-bottom: $space_xs;
+    margin-bottom: 0px;
+  }
+
+  [class^=pb_body_kit_light] {
+    margin-top: $space_xs;
   }
 
   [class^=pb_selectable_card_kit] {
-      margin-bottom: 0px !important;
+    margin-bottom: 0px !important;
   }
 }

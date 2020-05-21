@@ -2,8 +2,8 @@
 
   <%= pb_rails("selectable_card_icon", props: {
     icon: "cog", 
-    title_text: "Title", 
-    body_text: "Selected, with icon",
+    title_text: "Settings", 
+    body_text: "Enable user preferences",
     input_id: 10,
     checked: true,
     card_icon: true,
@@ -11,25 +11,16 @@
   }) %>
 
   <%= pb_rails("selectable_card_icon", props: {
-    icon: "calendar", 
-    title_text: "Title", 
-    body_text: "Selected, without icon",
-    input_id: 11,
-    checked: true,
-    dark: true
-  }) %>
-
-  <%= pb_rails("selectable_card_icon", props: {
     icon: "inbox", 
-    title_text: "Title", 
-    body_text: "Unselected",
+    title_text: "Mark Unread", 
+    body_text: "Select All",
     input_id: 12,
     dark: true
   }) %>
   
   <%= pb_rails("selectable_card_icon", props: {
-    icon: "cog", 
-    title_text: "Title", 
+    icon: "calendar", 
+    title_text: "", 
     body_text: "Disabled",
     input_id: 13,
     disabled: true,

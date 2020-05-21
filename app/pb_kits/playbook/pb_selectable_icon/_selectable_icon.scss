@@ -34,16 +34,20 @@
 		display: none;
 		appearance: none;
 
+		transition-property: color;
+		transition-duration: $transition_short;
+		transition-timing-function: $easeIn;
+
 		&:checked ~ label * {
 			color: $primary;
-			transition-duration: $transition_short;
-			transition-timing-function: $easeIn;
 		}
 		
 		&:not(:checked) ~ label {
 			color: $slate;
-			transition-duration: $transition_short;
-			transition-timing-function: $easeIn;
+
+			h4 {
+				transition-delay: .15s;
+			}
 		}
 	}
 
@@ -57,21 +61,23 @@
 			display: none;
 			appearance: none;
 
+			transition-property: color;
+			transition-duration: $transition_short;
+			transition-timing-function: $easeIn;
+
 			&:checked ~ label * {
-				color: $active_dark;
-				transition-duration: $transition_short;
-				transition-timing-function: $easeIn;
+				color: $active_dark !important;
 			}
 				
 			&:not(:checked) ~ label {
-				color: $slate;
-				transition-duration: $transition_short;
-				transition-timing-function: $easeIn;
+				
+				svg {
+					color: $slate;
+				}
 
 				h4 {
-					color: $text_dk_default !important;
-					transition-duration: $transition_short;
-					transition-timing-function: $easeIn;
+					transition-delay: .15s;
+					color: $text_dk_default;
 				}
 			}
 		}
