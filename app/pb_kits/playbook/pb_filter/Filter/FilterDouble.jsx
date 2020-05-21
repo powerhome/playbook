@@ -36,7 +36,10 @@ const FilterDouble = ({ onSortChange, sortOptions, sortValue, filters, results, 
         spacing="between"
         vertical="center"
     >
-      <ResultsCount results={results} />
+      <ResultsCount
+          results={results}
+          title
+      />
       <Flex
           orientation="row"
           vertical="center"
