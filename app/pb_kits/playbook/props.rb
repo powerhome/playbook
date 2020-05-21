@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require "active_support/concern"
 
 # Base must be defined first as other prop types inherit from it
@@ -31,38 +32,22 @@ module Playbook
     def prop(name)
       self.class.props[name].value values[name]
     end
-   
+
     def spacing_props
-      ## SEEING WHAT IS GOING ON
-      puts "SPACING OPTIONS: #{spacing_options}"
-      puts "-----------------------------------------------------------------"
-      puts "SELF.CLASS.PROPS: #{self.class.props}"
-      puts "-----------------------------------------------------------------"
+      selected_props = spacing_options.keys.select { |sk| try(sk) }
+      return nil unless selected_props.present?
 
-      puts "SPACING OPTION KEYS: "
-      puts "-----------------------------------------------------------------"
-      puts spacing_options.keys.inspect
-
-      puts "SELECTED OPTIONS: "
-      puts "-----------------------------------------------------------------"
-      the_opts = self.class.props.select {|p| spacing_options.keys.include? p}
-
-      puts the_opts.value.inspect
-      
-      # spacing_options.each { |n| puts "Current option value is: #{n}" }
-
-      # return nil unless self.class.props.include? spacing_options
-      #self.class.props.select {|p| spacing_options.keys.include? p}.each do |the_prop|
-      #  return ("mr_" + prop(the_prop).to_s) unless prop(the_prop).nil?
-      #end
-
-      "nothing"
+      selected_props.map do |k|
+        spacing_value = send(k)
+        "#{spacing_options[k]}_#{spacing_value}" if spacing_values.include? spacing_value
+      end.compact.join(" ")
     end
 
     def generate_classname(*name_parts, separator: "_")
       [
         name_parts.compact.join(separator),
-        [prop(:classname), spacing_props],
+        prop(:classname),
+        spacing_props,
       ].compact.join(" ")
     end
 
@@ -75,23 +60,24 @@ module Playbook
       prop :classname
       prop :aria, type: Playbook::Props::Hash, default: {}
       prop :children, type: Playbook::Props::Proc
+      prop :margin_left
       prop :margin_right
     end
 
     def spacing_options
       {
-        :margin => 'mr',
-        :margin_bottom => 'mb',
-        :margin_left => 'ml',
-        :margin_right => 'mr',
-        :margin_top => 'mt',
-        :margin_x => 'mx',
-        :margin_y => 'my',
+        margin: "mr",
+        margin_bottom: "mb",
+        margin_left: "ml",
+        margin_right: "mr",
+        margin_top: "mt",
+        margin_x: "mx",
+        margin_y: "my",
       }
     end
 
     def spacing_values
-      ['none', 'xs', 'sm', 'md', 'lg', 'xl']
+      %w[none xs sm md lg xl]
     end
 
     class_methods do
