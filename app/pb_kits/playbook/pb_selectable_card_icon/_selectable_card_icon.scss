@@ -9,9 +9,9 @@
 	input[type="radio"] {
     
     transition-duration: $transition_short;
-    transition-timing-function: $easeIn;
-
+    
 		&:checked ~ label {
+      transition-timing-function: $easeIn;
 			color: $primary;
 		
 				h4 {
@@ -20,6 +20,7 @@
 			}
         
     &:not(:checked) ~ label {
+      transition-timing-function: $easeOut;
         color: $slate;
       }
     }
@@ -39,13 +40,10 @@
     input[type="radio"] {       
       
       transition-duration: $transition_short;
-      transition-timing-function: $easeIn;
-
+      
       &:checked ~ label {
-
-        svg {
-          color: $active_dark;
-        }
+        transition-timing-function: $easeIn;
+        color: $active_dark;
 
         h4 {
           color: $active_dark !important;
@@ -54,10 +52,8 @@
       }
 
       &:not(:checked) ~ label {
-        
-        svg {
-          color: $slate;
-        }
+        transition-timing-function: $easeOut;
+        color: $text_dk_lighter;
 
         h4 {
           color: $text_dk_default !important;

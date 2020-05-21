@@ -36,13 +36,14 @@
 
 		transition-property: color;
 		transition-duration: $transition_short;
-		transition-timing-function: $easeIn;
 
 		&:checked ~ label * {
+			transition-timing-function: $easeIn;
 			color: $primary;
 		}
 		
 		&:not(:checked) ~ label {
+			transition-timing-function: $easeOut;
 			color: $slate;
 
 			h4 {
@@ -63,17 +64,16 @@
 
 			transition-property: color;
 			transition-duration: $transition_short;
-			transition-timing-function: $easeIn;
+
 
 			&:checked ~ label * {
+				transition-timing-function: $easeIn;
 				color: $active_dark !important;
 			}
 				
 			&:not(:checked) ~ label {
-				
-				svg {
-					color: $slate;
-				}
+				transition-timing-function: $easeOut;
+				color: $text_dk_lighter;
 
 				h4 {
 					transition-delay: .15s;
