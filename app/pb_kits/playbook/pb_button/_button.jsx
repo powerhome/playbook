@@ -83,7 +83,9 @@ const Button = (props: ButtonPropTypes) => {
   const buttonAria = buttonAriaProps(props)
   const css = classnames(buttonClassName(props), className)
   const loadingIcon = (
-    <i className="pb_icon_kit far fa-spinner fa-fw fa-pulse loading-icon" />
+    <div className="loading-icon">
+      <i className="pb_icon_kit far fa-spinner fa-fw fa-pulse" />
+    </div>
   )
 
   const content = (
