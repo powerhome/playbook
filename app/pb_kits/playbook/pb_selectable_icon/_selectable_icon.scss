@@ -19,7 +19,7 @@
   }
 
   &[class*=_disabled] {
-		opacity: 0.5;
+		opacity: $opacity_6;
 		cursor: not-allowed;
 
 		* {
@@ -58,7 +58,7 @@
 			appearance: none;
 
 			&:checked ~ label * {
-				color: $text_dk_default;
+				color: $active_dark;
 				transition-duration: $transition_short;
 				transition-timing-function: $easeIn;
 			}
