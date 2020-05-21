@@ -81,6 +81,28 @@
 
 @import './tokens/spacing';
 
+
+// Margin
+.m_xs {
+    margin: $space_xs;
+}
+.m_sm {
+    margin: $space_sm;
+}
+.m_md {
+    margin: $space_md;
+}
+.m_lg {
+    margin: $space_lg;
+}
+.m_xl {
+    margin: $space_xl;
+}
+.m_none {
+    margin: 0 !important;
+}
+
+// Margin Right
 .mr_xs {
     margin-right: $space_xs;
 }
@@ -91,5 +113,237 @@
     margin-right: $space_md;
 }
 .mr_lg {
+    margin-right: $space_lg;
+}
+.mr_xl {
+    margin-right: $space_xl;
+}
+
+// Margin Left
+.ml_xs {
+    margin-left: $space_xs;
+}
+.ml_sm {
+    margin-left: $space_sm;
+}
+.ml_md {
+    margin-left: $space_md;
+}
+.ml_lg {
     margin-left: $space_lg;
 }
+.ml_xl {
+    margin-left: $space_xl;
+}
+
+// Margin Bottom
+.mb_xs {
+    margin-bottom: $space_xs;
+}
+.mb_sm {
+    margin-bottom: $space_sm;
+}
+.mb_md {
+    margin-bottom: $space_md;
+}
+.mb_lg {
+    margin-bottom: $space_lg;
+}
+.mb_xl {
+    margin-bottom: $space_xl;
+}
+
+// Margin Top
+.mt_xs {
+    margin-top: $space_xs;
+}
+.mt_sm {
+    margin-top: $space_sm;
+}
+.mt_md {
+    margin-top: $space_md;
+}
+.mt_lg {
+    margin-top: $space_lg;
+}
+.mt_xl {
+    margin-top: $space_xl;
+}
+
+// Margin Top & Bottom
+.my_xs {
+    margin-top: $space_xs;
+    margin-bottom: $space_xs;
+}
+.my_sm {
+    margin-top: $space_sm;
+    margin-bottom: $space_sm;
+}
+.my_md {
+    margin-top: $space_md;
+    margin-bottom: $space_md;
+}
+.my_lg {
+    margin-top: $space_lg;
+    margin-bottom: $space_lg;
+}
+.my_xl {
+    margin-top: $space_xl;
+    margin-bottom: $space_xl;
+}
+
+// Margin Left & Right
+.mx_xs {
+    margin-left: $space_xs;
+    margin-right: $space_xs;
+}
+.mx_sm {
+    margin-left: $space_sm;
+    margin-right: $space_sm;
+}
+.mx_md {
+    margin-left: $space_md;
+    margin-right: $space_md;
+}
+.mx_lg {
+    margin-left: $space_lg;
+    margin-right: $space_lg;
+}
+.mx_xl {
+    margin-left: $space_xl;
+    margin-right: $space_xl;
+}
+
+
+// Padding
+.p_xs {
+    padding: $space_xs;
+}
+.p_sm {
+    padding: $space_sm;
+}
+.p_md {
+    padding: $space_md;
+}
+.p_lg {
+    padding: $space_lg;
+}
+.p_xl {
+    padding: $space_xl;
+}
+.p_none {
+    padding: 0 !important;
+}
+
+// Padding Right
+.pr_xs {
+    padding-right: $space_xs;
+}
+.pr_sm {
+    padding-right: $space_sm;
+}
+.pr_md {
+    padding-right: $space_md;
+}
+.pr_lg {
+    padding-right: $space_lg;
+}
+.pr_xl {
+    padding-right: $space_xl;
+}
+
+// Padding Left
+.pl_xs {
+    padding-left: $space_xs;
+}
+.pl_sm {
+    padding-left: $space_sm;
+}
+.pl_md {
+    padding-left: $space_md;
+}
+.pl_lg {
+    padding-left: $space_lg;
+}
+.pl_xl {
+    padding-left: $space_xl;
+}
+
+// Padding Bottom
+.pb_xs {
+    padding-bottom: $space_xs;
+}
+.pb_sm {
+    padding-bottom: $space_sm;
+}
+.pb_md {
+    padding-bottom: $space_md;
+}
+.pb_lg {
+    padding-bottom: $space_lg;
+}
+.pb_xl {
+    padding-bottom: $space_xl;
+}
+
+// Padding Top
+.pt_xs {
+    padding-top: $space_xs;
+}
+.pt_sm {
+    padding-top: $space_sm;
+}
+.pt_md {
+    padding-top: $space_md;
+}
+.pt_lg {
+    padding-top: $space_lg;
+}
+.pt_xl {
+    padding-top: $space_xl;
+}
+
+// Padding Top & Bottom
+.py_xs {
+    padding-top: $space_xs;
+    padding-bottom: $space_xs;
+}
+.py_sm {
+    padding-top: $space_sm;
+    padding-bottom: $space_sm;
+}
+.py_md {
+    padding-top: $space_md;
+    padding-bottom: $space_md;
+}
+.py_lg {
+    padding-top: $space_lg;
+    padding-bottom: $space_lg;
+}
+.py_xl {
+    padding-top: $space_xl;
+    padding-bottom: $space_xl;
+}
+
+// Padding Left & Right
+.px_xs {
+    padding-left: $space_xs;
+    padding-right: $space_xs;
+}
+.px_sm {
+    padding-left: $space_sm;
+    padding-right: $space_sm;
+}
+.px_md {
+    padding-left: $space_md;
+    padding-right: $space_md;
+}
+.px_lg {
+    padding-left: $space_lg;
+    padding-right: $space_lg;
+}
+.px_xl {
+    padding-left: $space_xl;
+    padding-right: $space_xl;
+}
+

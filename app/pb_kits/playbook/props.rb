@@ -60,19 +60,38 @@ module Playbook
       prop :classname
       prop :aria, type: Playbook::Props::Hash, default: {}
       prop :children, type: Playbook::Props::Proc
+      prop :margin
+      prop :margin_bottom
       prop :margin_left
       prop :margin_right
+      prop :margin_top
+      prop :margin_x
+      prop :margin_y
+      prop :padding
+      prop :padding_bottom
+      prop :padding_left
+      prop :padding_right
+      prop :padding_top
+      prop :padding_x
+      prop :padding_y
     end
 
     def spacing_options
       {
-        margin: "mr",
+        margin: "m",
         margin_bottom: "mb",
         margin_left: "ml",
         margin_right: "mr",
         margin_top: "mt",
         margin_x: "mx",
         margin_y: "my",
+        padding: "p",
+        padding_bottom: "pb",
+        padding_left: "pl",
+        padding_right: "pr",
+        padding_top: "pt",
+        padding_x: "px",
+        padding_y: "py",
       }
     end
 
