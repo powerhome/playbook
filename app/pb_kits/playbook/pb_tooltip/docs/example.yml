@@ -1,0 +1,5 @@
+examples:
+
+  rails:
+  - tooltip_default: Default
+  - tooltip_white: White
