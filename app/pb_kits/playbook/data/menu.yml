@@ -54,6 +54,7 @@ kits:
   - star_rating
   - stat_change
   - table
+  - tooltip
   - typography:
     - body
     - caption
