@@ -10,7 +10,7 @@ module Playbook
       prop :change, type: Playbook::Props::Enum,
                     values: %w[neutral increase decrease],
                     default: "neutral"
-      prop :value, type: Playbook::Props::Percentage
+      prop :value, type: Playbook::Props::Numeric
 
       def status
         case change
