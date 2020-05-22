@@ -1,7 +1,7 @@
 import React from 'react'
 import { Source } from '../../'
 
-const SourceTypes = () => {
+const SourceTypes = () => (
   <>
     <Source
         source="BJ's Johnston-208"
@@ -80,6 +80,6 @@ const SourceTypes = () => {
             }
     />
   </>
-}
+)
 
 export default SourceTypes

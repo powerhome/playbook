@@ -1,7 +1,7 @@
 import React from 'react'
 import { Source } from '../../'
 
-const SourceNoicon = () => {
+const SourceNoicon = () => (
   <>
     <Source
         source="BJ's Johnston-208"
@@ -35,6 +35,6 @@ const SourceNoicon = () => {
               }
     />
   </>
-}
+)
 
 export default SourceNoicon
