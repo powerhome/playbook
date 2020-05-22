@@ -66,9 +66,6 @@ const Source = ({
     case 'events':
       return 'calendar-alt'
       break
-      // case "inbound"
-      //   return "sign-in"
-      //   break;
     case 'outbound':
       return 'sign-out'
       break
