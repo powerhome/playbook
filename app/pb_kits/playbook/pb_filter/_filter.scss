@@ -1,20 +1,9 @@
 @import "../tokens/spacing";
 @import "../tokens/colors";
 
-[class^=pb_filter_kit] {
-  [class^=pb_circle_icon_button_kit]{
-    padding-left: $space_sm !important;
-    padding-top: $space_sm !important;
-    padding-bottom: $space_sm !important;
-  }
-  [class^=pb_card_body_kit][class*=_md]{
-    padding: 0 !important;
-  }
-  [class^=pb_list_kit] li{
+.pb_filter_sort_menu {
+  li {
     padding: 0 $space_sm !important;
-  }
-  [class^=pb-form]{
-    padding: $space_sm ;
   }
   [class^=pb_button_kit][class*=_link]{
     flex-shrink:0;
@@ -22,6 +11,20 @@
     [id^="sort"]{
       margin-left: $space_xs !important;
     }
+  }
+  [class^=pb_card_body_kit][class*=_md]{
+    padding: 0 !important;
+  }
+}
+
+[class^=pb_filter_kit] {
+  [class^=pb_circle_icon_button_kit]{
+    padding-left: $space_sm !important;
+    padding-top: $space_sm !important;
+    padding-bottom: $space_sm !important;
+  }
+  [class^=pb-form]{
+    padding: $space_sm ;
   }
    .sort-by{
     flex-shrink:0;
