@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## Unreleased
 
 ### Changed
+- Update filter kit (React) ([#796](https://github.com/powerhome/playbook/pull/796) @thestephenmarshall)
 - Updated React version of Layout Kit to use sub-components ([#801](https://github.com/powerhome/playbook/pull/801)@christinaatai)
 
 ### Fixed
