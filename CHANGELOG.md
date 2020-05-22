@@ -23,7 +23,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Created Online Status React Playbook Kit ([#788](https://github.com/powerhome/playbook/pull/788) @kellyeryan)
 - Added Work-Cell type to contact kit ([#799](https://github.com/powerhome/playbook/pull/799) @kre8sions)
 
-## Unreleased
+## [4.14.0] 2020-5-14
+- Upgrade react-popper lib to latest ([#778](https://github.com/powerhome/playbook/pull/778) @thestephenmarshall)
+- Update React version to 16.8.6 ([#777](https://github.com/powerhome/playbook/pull/777) @thestephenmarshall)
+- Added Circle Chart for Rails ([#771](https://github.com/powerhome/playbook/pull/771) @jasperfurniss)
+- Spread props over inputs ([#772](https://github.com/powerhome/playbook/pull/772) @gmfvpereira)
 
 ## [4.13.1] 2020-4-28
 

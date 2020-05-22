@@ -1,3 +1,1 @@
-ingress:
-  hosts:
-    - staging.playbook.powerapp.cloud
+{}

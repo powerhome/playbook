@@ -1,5 +1,6 @@
 samples:
   - dashboards
+  - something
 kits:
   - avatar
   - badge
@@ -13,6 +14,8 @@ kits:
     - legend
     - line_graph
     - distribution_bar
+    - circle_chart
+
   - filter
   - fixed_confirmation_toast
   - flex
