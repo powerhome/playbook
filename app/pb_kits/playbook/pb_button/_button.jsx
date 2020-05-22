@@ -3,6 +3,8 @@
 import React from 'react'
 import classnames from 'classnames'
 
+import Icon from '../pb_icon/_icon.jsx'
+
 type EventHandler = (SyntheticInputEvent<HTMLInputElement>) => void
 type ButtonPropTypes = {
   aria?: {
@@ -83,7 +85,13 @@ const Button = (props: ButtonPropTypes) => {
   const buttonAria = buttonAriaProps(props)
   const css = classnames(buttonClassName(props), className)
   const loadingIcon = (
-    <i className="pb_icon_kit far fa-spinner fa-fw fa-pulse loading-icon" />
+    <div className="loading-icon">
+      <Icon
+          fixedWidth
+          icon="spinner"
+          pulse
+      />
+    </div>
   )
 
   const content = (
