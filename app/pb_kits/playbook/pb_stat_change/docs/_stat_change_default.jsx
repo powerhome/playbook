@@ -20,7 +20,7 @@ const StatChangeDefault = () => {
 
       <StatChange
           change="neutral"
-          value={98}
+          value={102}
       />
     </div>
   )

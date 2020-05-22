@@ -18,6 +18,11 @@ const ContactDefault = () => {
           contactType="work"
           contactValue="3245627482"
       />
+      <Contact
+          contactDetail="Work-Cell"
+          contactType="work-cell"
+          contactValue="3245627482"
+      />
     </div>
   )
 }

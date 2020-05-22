@@ -1,18 +1,12 @@
-<% 5.times do%>
-<br>
-<%end%>
-
-<%= pb_rails("filter", props: {
-  id: "so",
-  sort_menu: [
-    {item:"Popularity", link:"#", active: true, direction:"desc"},
-    {item:"Title", link:"#", active: false},
-    {item:"Name", link:"#", active: false},
-  ],
-  template:"sort_only",
-  background: false,
-  }) do%>
-<% end %>
-<% 5.times do%>
-<br>
-<%end%>
+<%=
+  pb_rails("filter", props: {
+    id: "so",
+    sort_menu: [
+      { item: "Popularity", link: "?q[sorts]=managers_popularity+asc", active: true, direction: "desc" },
+      { item: "Mananger's Title", link: "?q[sorts]=managers_title+asc", active: false },
+      { item: "Manager's Name", link: "?q[sorts]=managers_name+asc", active: false },
+    ],
+    template:"sort_only",
+    background: false,
+  })
+%>

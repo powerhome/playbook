@@ -8,7 +8,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## Unreleased
 
 ### Fixed
+- Fix stat change to take numbers outside of 0-100 ([#795](https://github.com/powerhome/playbook/pull/795) @kellyeryan)
 - Don't break button when changing loading from true to false ([#800](https://github.com/powerhome/playbook/pull/800)@gmfvpereira)
+
+### Added
+- Added Progress Step Kit([#776](https://github.com/powerhome/playbook/pull/776) @christinaatai)
+- Created Online Status React Playbook Kit ([#788](https://github.com/powerhome/playbook/pull/788) @kellyeryan)
+- Added Work-Cell type to contact kit ([#799](https://github.com/powerhome/playbook/pull/799) @kre8sions)
 
 ## [4.14.0] 2020-5-14
 - Upgrade react-popper lib to latest ([#778](https://github.com/powerhome/playbook/pull/778) @thestephenmarshall)
