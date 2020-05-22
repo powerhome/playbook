@@ -1,46 +1,39 @@
-<% 5.times do%>
-<br>
-<%end%>
-
-<%= pb_rails("filter", props: {
-  id: "1",
-  filters: [
-    {name: "name", value: "John Wick"}
+<%=
+  pb_rails("filter", props: {
+    id: "1",
+    filters: [
+      { name: "name", value: "John Wick" }
     ],
-  sort_menu: [
-    {item:"Popularity", link:"#", active: true, direction:"desc"},
-    {item:"Title", link:"#", active: false},
-    {item:"Name", link:"#", active: false},
-  ],
-  template:"default",
-  results: 546,
-  }) do%>
-<%
-  example_collection = [
-    OpenStruct.new(name: "Alabama", value: 1),
-    OpenStruct.new(name: "Alaska", value: 2),
-    OpenStruct.new(name: "Arizona", value: 3),
-    OpenStruct.new(name: "Arkansas", value: 4),
-    OpenStruct.new(name: "California", value: 5),
-    OpenStruct.new(name: "Colorado", value: 6),
-    OpenStruct.new(name: "Connecticut", value: 7),
-    OpenStruct.new(name: "Delaware", value: 8),
-    OpenStruct.new(name: "Florida", value: 9),
-    OpenStruct.new(name: "Georgia", value: 10),
-  ]
+    sort_menu: [
+      { item: "Popularity", link: "?q[sorts]=managers_popularity+asc", active: true, direction: "desc" },
+      { item: "Mananger's Title", link: "?q[sorts]=managers_title+asc", active: false },
+      { item: "Manager's Name", link: "?q[sorts]=managers_name+asc", active: false },
+    ],
+    template: "default",
+    results: 546,
+  }) do
 %>
+  <%
+    example_collection = [
+      OpenStruct.new(name: "Alabama", value: 1),
+      OpenStruct.new(name: "Alaska", value: 2),
+      OpenStruct.new(name: "Arizona", value: 3),
+      OpenStruct.new(name: "Arkansas", value: 4),
+      OpenStruct.new(name: "California", value: 5),
+      OpenStruct.new(name: "Colorado", value: 6),
+      OpenStruct.new(name: "Connecticut", value: 7),
+      OpenStruct.new(name: "Delaware", value: 8),
+      OpenStruct.new(name: "Florida", value: 9),
+      OpenStruct.new(name: "Georgia", value: 10),
+    ]
+  %>
+  <%= pb_rails("form", props: { form_system_options: { scope: :example, method: :get } }) do |form| %>
+    <%= form.text_field :example_text_field, props: { label: true } %>
+    <%= form.collection_select :example_collection_select, example_collection, :value, :name, props: { label: true } %>
 
-<%= pb_rails("form", props: { form_system_options: { scope: :example, method: :get } }) do |form| %>
-  <%= form.text_field :example_text_field, props: { label: true } %>
-  <%= form.collection_select :example_collection_select, example_collection, :value, :name, props: { label: true } %>
-
-  <%= form.actions do |action| %>
-    <%= action.submit props: { text: "Apply", data: { disable_with: "<i class='far fa-spinner fa-spin mr-3'></i>Searching...".html_safe },}%>
-    <%= action.button props: { type: "reset", text: "Clear", variant: "secondary" } %>
+    <%= form.actions do |action| %>
+      <%= action.submit props: { text: "Apply", data: { disable_with: "<i class='far fa-spinner fa-spin mr-3'></i>Searching...".html_safe },}%>
+      <%= action.button props: { type: "reset", text: "Clear", variant: "secondary" } %>
+    <% end %>
   <% end %>
 <% end %>
-
-<% end %>
-<% 5.times do%>
-<br>
-<%end%>
