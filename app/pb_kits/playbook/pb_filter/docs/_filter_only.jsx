@@ -12,12 +12,11 @@ const FilterOnly = () => {
   return (
     <Filter
         background={false}
-        filters={[
-        { name: 'Full Name', value: 'John Wick' },
-        { name: 'Territory', value: 'San Francisco' },
-      ]}
-        results={1}
-        template="filter_only"
+        filters={{
+          'Full Name': 'John Wick',
+          'Territory': 'San Francisco',
+        }}
+        results={256}
     >
       <TextInput
           label="Full Name"
