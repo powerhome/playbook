@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Updated React version of Layout Kit to use sub-components ([#801](https://github.com/powerhome/playbook/pull/801)@christinaatai)
 
 ### Fixed
+- Sync Ruby and React default 'align' values in DateYearStacked ([#794](https://github.com/powerhome/playbook/pull/794) @kellyeryan)
 - Fix stat change to take numbers outside of 0-100 ([#795](https://github.com/powerhome/playbook/pull/795) @kellyeryan)
 - Don't break button when changing loading from true to false ([#800](https://github.com/powerhome/playbook/pull/800)@gmfvpereira)
 
