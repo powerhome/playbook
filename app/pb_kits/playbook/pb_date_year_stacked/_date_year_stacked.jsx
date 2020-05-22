@@ -12,7 +12,7 @@ import {
 } from '../'
 
 type DateYearStackedProps = {
-  align?: 'center' | 'right',
+  align?: 'left' | 'center' | 'right',
   className?: String | Array<String>,
   dark?: Boolean,
   data?: String,
@@ -21,7 +21,7 @@ type DateYearStackedProps = {
 }
 
 const DateYearStacked = ({
-  align,
+  align = 'left',
   className,
   dark = false,
   date,

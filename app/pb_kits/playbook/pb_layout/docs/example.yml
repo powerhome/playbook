@@ -5,4 +5,7 @@ examples:
   - layout_sizes: Sizes
   - layout_sizes_dark: Sizes Dark
   react:
-  - layout_default: Default
+  - layout_colors: Colors
+  - layout_transparent: Transparent
+  - layout_sizes: Sizes
+  - layout_sizes_dark: Sizes Dark
