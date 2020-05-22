@@ -1,0 +1,23 @@
+<%= content_tag(:div,
+  id: object.id,
+  data: object.data,
+  class: object.classname) do %>
+  
+  <div class="pb_progress_step_item_wrapper">
+    <div class="pb_progress_step_item_connector_first"></div>
+    <div class="pb_progress_step_item_step_wrapper">
+      <div class="pb_progress_step_item_step">
+        <div class="pb_progress_step_item_step_connector_first"></div>
+        <div class="pb_progress_step_item_step_circle">
+          <%= pb_rails("icon", props: { icon: "check", size: "xs" }) %>
+        </div>
+        <div class="pb_progress_step_item_step_connector_second"></div>
+      </div>
+      <div>
+        <%= capture(&object.children) %>
+      </div>
+    </div>
+    <div class="pb_progress_step_item_connector_second"></div>
+  </div>
+
+<% end %>
