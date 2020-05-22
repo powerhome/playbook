@@ -1,21 +1,46 @@
+/* @flow */
+
 import React from 'react'
-import PropTypes from 'prop-types'
+import classnames from 'classnames'
 
-const propTypes = {
-  className: PropTypes.string,
-  id: PropTypes.string,
+import {
+  Caption,
+} from '../'
+
+import {
+  buildCss,
+  buildDataProps,
+} from '../utilities/props'
+
+type TimestampProps = {
+  id?: String,
+  data?: object,
+  className?: String,
+  text?: String,
 }
 
-class Timestamp extends React.Component {
-  render() {
-    return (
-      <div className="pb_timestamp">
-        <span>{'TIMESTAMP CONTENT'}</span>
-      </div>
-    )
-  }
-}
+const Timestamp = ({
+  id,
+  className,
+  data = {},
+  text,
+}: TimestampProps) => {
+  const dataProps = buildDataProps(data)
+  const pbCss = buildCss('pb_timestamp_kit')
 
-Timestamp.propTypes = propTypes
+  return (
+    <div
+        {...dataProps}
+        className={classnames(className, pbCss)}
+        id={id}
+    >
+      <Caption
+          size="xs"
+          tag="span"
+          text={text}
+      />
+    </div>
+  )
+}
 
 export default Timestamp
