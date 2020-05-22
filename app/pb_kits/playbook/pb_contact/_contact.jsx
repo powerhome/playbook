@@ -9,6 +9,7 @@ const contactTypeMap = {
   'cell': 'mobile',
   'home': 'phone',
   'work': 'phone-office',
+  'work-cell': 'phone-laptop',
   'email': 'envelope',
   'wrong number': 'slash-phone',
 }
