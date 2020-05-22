@@ -1,0 +1,8 @@
+<%= pb_rails("progress_step", props: {orientation: "horizontal", icon: true, dark: true}) do %>
+  <%= pb_rails("progress_step/progress_step_item", props: {status: "complete"}) do %>
+  <% end %>
+  <%= pb_rails("progress_step/progress_step_item", props: {status: "active"}) do %>
+  <% end %>
+  <%= pb_rails("progress_step/progress_step_item", props: {status: "inactive"}) do %>
+  <% end %>
+<% end %>
