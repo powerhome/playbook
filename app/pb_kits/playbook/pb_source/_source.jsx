@@ -47,7 +47,7 @@ const Source = ({
     if ((type === 'user' || type === 'referral') && user.name !== undefined) {
       const avatarProps = Object.assign({}, user)
       avatarProps['size'] = 'sm'
-      delete avatarProps.user_id
+      delete avatarProps.userId
       return avatarProps
     }
   }
@@ -72,12 +72,12 @@ const Source = ({
       return 'handshake'
     case 'retail':
       return 'shopping-bag'
-    default:
+    case 'inbound':
       return 'sign-in'
     }
   }
 
-  const showIcon = () => avatar === undefined
+  const showIcon = () => type !== 'user' && (avatar() === undefined)
 
   return (
     <div
@@ -88,14 +88,14 @@ const Source = ({
 
       <div className="pb__source_layout">
         <If condition={hideIcon === false}>
-          <If condition={showIcon === true}>
+          <If condition={showIcon()}>
             <IconCircle
                 icon={typeIconName()}
                 size="sm"
             />
             <Else />
             <Avatar
-                props={avatar()}
+                {...avatar()}
             />
           </If>
         </If>
