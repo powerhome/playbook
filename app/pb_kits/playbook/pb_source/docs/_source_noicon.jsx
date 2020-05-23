@@ -4,27 +4,27 @@ import { Source } from '../../'
 const SourceNoicon = () => (
   <>
     <Source
+        hideIcon
         source="BJ's Johnston-208"
         type="retail"
-        hideIcon
     />
 
     <br />
     <br />
 
     <Source
+        hideIcon
         source="Referral-phrg"
         type="inbound"
-        hideIcon
     />
 
     <br />
     <br />
 
     <Source
+        hideIcon
         source="BJ's Future CB"
         type="user"
-        hideIcon
         user={
               { name: 'Anna Black',
                 image: {

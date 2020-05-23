@@ -7,7 +7,7 @@ import {
   buildDataProps,
 } from '../utilities/props'
 import {
-  titleize
+  titleize,
 } from '../utilities/text'
 import {
   Avatar,
@@ -61,31 +61,23 @@ const Source = ({
   }
 
   const typeIconName = () => {
-    const option = type
-    switch (option) {
+    switch (type) {
     case 'events':
       return 'calendar-alt'
-      break
     case 'outbound':
       return 'sign-out'
-      break
     case 'prospecting':
       return 'binoculars'
-      break
     case 'referral':
       return 'handshake'
-      break
     case 'retail':
       return 'shopping-bag'
-      break
     default:
       return 'sign-in'
     }
   }
 
-  const showIcon = () => {
-    (typeIconName !== undefined && avatar === undefined) ? true : false
-  }
+  const showIcon = () => avatar === undefined
 
   return (
     <div
@@ -95,6 +87,18 @@ const Source = ({
     >
 
       <div className="pb__source_layout">
+        <If condition={hideIcon === false}>
+          <If condition={showIcon === true}>
+            <IconCircle
+                icon={typeIconName()}
+                size="sm"
+            />
+            <Else />
+            <Avatar
+                props={avatar()}
+            />
+          </If>
+        </If>
 
         <div className="pb__source_content">
           <Title
