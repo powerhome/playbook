@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### Added
+-Create Source React Playbook Kit ([#810](https://github.com/powerhome/playbook/pull/810) @kellyeryan)
+
 ## [4.15.0] 2020-5-22
 
 ### Changed
