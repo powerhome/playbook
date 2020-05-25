@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### Added
+- Add React to LabelPill kit ([#813](https://github.com/powerhome/playbook/pull/813) @kellyeryan)
+
+### Fixed
+- Add aria to Ruby LabelPill kit ([#813](https://github.com/powerhome/playbook/pull/813) @kellyeryan)
+
 ## [4.15.0] 2020-5-22
 
 ### Changed
