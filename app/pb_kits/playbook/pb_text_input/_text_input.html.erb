@@ -1,8 +1,7 @@
 <%= content_tag(:div,
     aria: object.aria,
     class: object.classname,
-    data: object.data,
-    id: object.id) do %>
+    data: object.data) do %>
   <% if object.label.present? %>
     <%= pb_rails("caption", props: { text: object.label, dark: object.dark, classname: "pb_text_input_kit_label" }) %>
   <% end %>
@@ -17,6 +16,7 @@
       <%= tag(:input,
           class: "text_input",
           data: object.validation_data,
+          id: object.id,
           name: object.name,
           pattern: object.validation_pattern,
           placeholder: object.placeholder,

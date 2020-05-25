@@ -56,7 +56,6 @@ const TextInput = ({
         {...ariaProps}
         {...dataProps}
         className={css}
-        id={id}
     >
       <Caption
           className="pb_text_input_kit_label"
@@ -70,6 +69,7 @@ const TextInput = ({
           <input
               {...props}
               className="text_input"
+              id={id}
               name={name}
               onChange={onChange}
               placeholder={placeholder}
