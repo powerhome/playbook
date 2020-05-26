@@ -76,7 +76,7 @@ $action_colors: (
 
 // Active colors ----------------------
 $active_light:        lighten(#E5F2FF, 3.5%);
-$active_dark:         #0082ff;
+$active_dark:         #0082ff; 
 $active_colors: (
   active_light:       $active_light,
   active_dark:        $active_dark
@@ -92,7 +92,7 @@ $hover_colors: (
 
 // Focus colors -----------------------
 $focus_input_light:   rgba($active_light, $opacity_5);
-$focus_input_dark:    rgba($active_dark, $opacity_5);
+$focus_input_dark:    rgba(#144075, $opacity_5);
 $focus_input_colors: (
   focus_input_light:        $focus_input_light,
   focus_input_dark:         $focus_input_dark
@@ -134,7 +134,7 @@ $data_2:              $yellow;
 $data_3:              $purple;
 $data_4:              $green;
 $data_5:              $orange;
-$data_6:              $active_dark;
+$data_6:              #144075;
 $data_7:              $teal;
 $data_8:              $red;
 $data_colors: (
