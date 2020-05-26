@@ -45,8 +45,8 @@ const Source = ({
 
   const avatar = () => {
     if ((type === 'user' || type === 'referral') && user.name !== undefined) {
-      const avatarProps = Object.assign({}, user)
-      avatarProps['size'] = 'sm'
+      const avatarProps = { ...user }
+      avatarProps.size = 'sm'
       delete avatarProps.userId
       return avatarProps
     }
@@ -60,21 +60,13 @@ const Source = ({
     }
   }
 
-  const typeIconName = () => {
-    switch (type) {
-    case 'events':
-      return 'calendar-alt'
-    case 'outbound':
-      return 'sign-out'
-    case 'prospecting':
-      return 'binoculars'
-    case 'referral':
-      return 'handshake'
-    case 'retail':
-      return 'shopping-bag'
-    case 'inbound':
-      return 'sign-in'
-    }
+  const typeIconNames = {
+    events: 'calendar-alt',
+    outbound: 'sign-out',
+    prospecting: 'binoculars',
+    referral: 'handshake',
+    retail: 'shopping-bag',
+    inbound: 'sign-in',
   }
 
   const showIcon = () => type !== 'user' && (avatar() === undefined)
@@ -90,7 +82,7 @@ const Source = ({
         <If condition={hideIcon === false}>
           <If condition={showIcon()}>
             <IconCircle
-                icon={typeIconName()}
+                icon={typeIconNames[type]}
                 size="sm"
             />
             <Else />
