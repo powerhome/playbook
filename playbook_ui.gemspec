@@ -16,7 +16,7 @@ Gem::Specification.new do |s|
 
   s.files = Dir["{app,fonts,lib,stories}/**/*"] + ["Rakefile", "README.md"]
 
-  s.add_dependency "actionpack", ">= 5.1.6", "< 6.0"
+  s.add_dependency "actionpack", ">= 5.1.6", "< 7.0"
   s.add_dependency "actionview", ">= 5.1.6", "< 7.0"
   s.add_dependency "activesupport", ">= 5.1.6", "< 6.0"
   s.add_dependency "react-rails", "2.6.0"
