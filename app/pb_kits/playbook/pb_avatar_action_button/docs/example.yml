@@ -1,0 +1,9 @@
+examples:
+  
+  rails:
+  - avatar_action_button_default: Default
+  
+  
+  react:
+  - avatar_action_button_default: Default
+  
