@@ -3,14 +3,34 @@
     data: object.data,
     class: object.classname) do %>
       
-      <%= pb_rails("avatar", props: {
-        name: object.name,
-        size: object.size,
-        image_url: object.image_url,
-      }) %>
-      <div class="icon-circle">
-        <%= pb_rails("icon", props: { 
-          icon: object.icon
-        }) %>
-      </div>
+
+    <% if object.tooltip_text.present? %>
+        <%= pb_rails("tooltip", props: {
+          trigger_element_id: object.tooltip_id,
+          tooltip_id: "tooltip-2",
+          position: 'top',
+          dark: true,
+        }) do %>
+          <%= object.tooltip_text %>
+        <% end %>
+      <% end %>
+
+        <%= link_to object.link_url, 
+                    title: "link_to title", 
+                    onclick: object.onclick,
+                    id: object.tooltip_id,
+                    class: object.placement do %>
+
+          <%= pb_rails("avatar", props: {
+            name: object.name,
+            size: object.size,
+            image_url: object.image_url,
+            class: "avatar_action"
+          }) %>
+          <div class="icon">
+            <%= pb_rails("icon", props: { 
+              icon: object.icon
+            }) %>
+          </div>
+        <% end %>
 <% end %>
