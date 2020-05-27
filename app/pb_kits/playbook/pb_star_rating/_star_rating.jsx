@@ -17,6 +17,7 @@ type StarRatingProps = {
   className?: String,
   data?: object,
   fixedWidth?: Boolean,
+  hideRating: Boolean,
   icon?: String,
   id?: String,
   rating: Numeric,
@@ -26,6 +27,7 @@ const StarRating = ({
   aria = {},
   className,
   data = {},
+  hideRating = false,
   id,
   rating = 0,
 }: StarRatingProps) => {
@@ -51,7 +53,9 @@ const StarRating = ({
         id={id}
     >
       <div className="pb_star_rating_number">
-        {rating}
+        <If condition={!hideRating}>
+          {rating}
+        </If>
       </div>
 
       <div className="pb_star_rating_wrapper">
