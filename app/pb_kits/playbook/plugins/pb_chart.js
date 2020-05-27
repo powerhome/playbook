@@ -97,6 +97,9 @@ class pbChart {
       xAxis: {
         categories: this.defaults.xAxisCategories,
       },
+      legend: {
+        enabled: this.defaults.legend,
+      },
       plotOptions: {
         series: {
           pointStart: this.defaults.pointStart,
