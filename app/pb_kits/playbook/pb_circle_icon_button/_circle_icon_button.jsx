@@ -15,7 +15,9 @@ type CircleIconButtonProps = {
   disabled?: Boolean,
   icon: String,
   id?: String,
+  link?: String,
   onClick?: Callback,
+  newWindow?: Boolean,
   type?: 'button' | 'submit' | 'reset',
   variant?: 'primary' | 'secondary' | 'link',
 }
@@ -27,6 +29,8 @@ const CircleIconButton = (props: CircleIconButtonProps) => {
     icon,
     onClick = noop,
     type,
+    link,
+    newWindow,
     variant,
   } = props
 
@@ -35,6 +39,8 @@ const CircleIconButton = (props: CircleIconButtonProps) => {
       <Button
           dark={dark}
           disabled={disabled}
+          link={link}
+          newWindow={newWindow}
           onClick={onClick}
           text={null}
           type={type}
