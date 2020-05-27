@@ -1,7 +1,8 @@
 examples:
-  
+
   rails:
   - label_pill_default: Default
-  
-  
+
+
   react:
+  - label_pill_default: Default
