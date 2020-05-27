@@ -23,10 +23,10 @@ const BarGraphDefault = () => (
     <BarGraph
         axisTitle="Number of Employees"
         chartData={chartData}
-        id="bar-test"
+        id="bar-test-1"
         subTitle="Source: thesolarfoundation.com"
         title="Solar Employment Growth by Sector, 2010-2016"
-        xAxisCategories={['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']}
+        xAxisCategories={['Jan', 'Feb', 'Mar', 'Apr', 'May']}
         yAxisMin={0}
     />
   </div>

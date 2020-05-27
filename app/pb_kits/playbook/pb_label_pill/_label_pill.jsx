@@ -1,21 +1,66 @@
+/* @flow */
+
 import React from 'react'
-import PropTypes from 'prop-types'
+import classnames from 'classnames'
 
-const propTypes = {
-  className: PropTypes.string,
-  id: PropTypes.string,
+import {
+  buildAriaProps,
+  buildDataProps,
+} from '../utilities/props'
+
+import {
+  Caption,
+  Pill,
+} from '../'
+
+type LabelPillProps = {
+  aria?: object,
+  className?: String,
+  data?: object,
+  id?: String,
+  label?: String,
+  pillValue?: String,
+  variant: 'error' | 'info' | 'neutral' | 'primary' | 'success' | 'warning',
 }
 
-class LabelPill extends React.Component {
-  render() {
-    return (
-      <div className="pb_label_pill">
-        <span>{'LABEL PILL CONTENT'}</span>
-      </div>
-    )
-  }
-}
+const LabelPill = ({
+  aria = {},
+  className,
+  data = {},
+  id,
+  label,
+  pillValue,
+  variant = 'neutral',
+}: LabelPillProps) => {
+  const ariaProps = buildAriaProps(aria)
+  const dataProps = buildDataProps(data)
+  const css = classnames([
+    'pb_label_pill_kit',
+    className,
+  ])
 
-LabelPill.propTypes = propTypes
+  return (
+
+    <div
+        {...ariaProps}
+        {...dataProps}
+        className={css}
+        id={id}
+    >
+
+      <Caption
+          className="pb_label_pill_label"
+          text={label}
+      />
+
+      <Pill
+          className="pb_label_pill_pill"
+          text={pillValue}
+          variant={variant}
+      />
+
+    </div>
+  )
+}
 
 export default LabelPill

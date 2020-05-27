@@ -19,6 +19,7 @@ type BarGraphProps = {
   subTitle?: String,
   title: String,
   type?: String,
+  legend?: Boolean,
 }
 
 export default class BarGraph extends React.Component<BarGraphProps> {
@@ -40,6 +41,7 @@ export default class BarGraph extends React.Component<BarGraphProps> {
       subTitle,
       title,
       type,
+      legend,
     } = this.props
 
     new pbChart(`.${className}`, {
@@ -53,6 +55,7 @@ export default class BarGraph extends React.Component<BarGraphProps> {
       xAxisCategories: xAxisCategories,
       yAxisMin: yAxisMin,
       yAxisMax: yAxisMax,
+      legend: legend,
     })
   }
 
