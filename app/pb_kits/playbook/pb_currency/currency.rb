@@ -35,41 +35,36 @@ module Playbook
         generate_classname("pb_currency_kit", align, size, dark_class)
       end
 
-      def currency_symbol_element
-        pb_dollar_sign = Playbook::PbBody::Body.new(
+      def currency_wrapper_props
+        {
           classname: "dollar_sign",
           color: "light",
-          dark: dark
-        ) { symbol }
-
-        ApplicationController.renderer.render(
-          partial: pb_dollar_sign,
-          as: :object
-        )
+          dark: dark,
+        }
       end
 
-      def label_element
-        pb_label = Playbook::PbCaption::Caption.new(text: label)
-
-        ApplicationController.renderer.render(
-          partial: pb_label,
-          as: :object
-        )
-      end
-
-      def amount_element
-        whole_part = amount.split(".")
-        pb_title = Playbook::PbTitle::Title.new(
+      def title_props
+        {
           size: size_value,
-          text: whole_part.first.to_s,
+          text: whole_value,
           classname: "pb_currency_value",
-          dark: dark
-        )
+          dark: dark,
+        }
+      end
 
-        ApplicationController.renderer.render(
-          partial: pb_title,
-          as: :object
-        )
+      def body_props
+        {
+          text: units_element,
+          color: "light",
+          classname: "unit",
+          dark: dark,
+        }
+      end
+
+    private
+
+      def whole_value
+        amount.split(".").first.to_s
       end
 
       def units_element
@@ -80,8 +75,6 @@ module Playbook
           unit
         end
       end
-
-    private
 
       def size_value
         case size

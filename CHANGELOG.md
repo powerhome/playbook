@@ -15,6 +15,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 - Added aria, data, id props to Text Input kit on both React and Ruby sides.([#812](https://github.com/powerhome/playbook/pull/812)@kellyeryan)
 - Add aria to Ruby LabelPill kit ([#813](https://github.com/powerhome/playbook/pull/813) @kellyeryan)
+- Fix Currency kit performance issues (Rails) ([#820](https://github.com/powerhome/playbook/pull/820) @thestephenmarshall)
+
 
 ## [4.15.0] 2020-5-22
 
