@@ -34,7 +34,7 @@ module Playbook
         validation[:pattern] || nil
       end
 
-      def data
+      def validation_data
         fields = {}
         fields[:message] = validation_message unless validation_message.blank?
         fields
