@@ -17,7 +17,6 @@ type StarRatingProps = {
   className?: String,
   data?: object,
   fixedWidth?: Boolean,
-  hideIcon: Boolean,
   icon?: String,
   id?: String,
   rating: Numeric,
@@ -27,43 +26,22 @@ const StarRating = ({
   aria = {},
   className,
   data = {},
-  fixedWidth,
-  hideIcon = false,
-  icon,
   id,
   rating = 0,
 }: StarRatingProps) => {
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
   const css = classnames([
-    'pb_star_rating_kit',
+    'pb_star_rating_kit', className,
   ])
 
-  const starCount = () => {
-    const intRating = parseInt(rating)
+  const starCount = () => (
+    [...Array(parseInt(rating))]
+  )
 
-    if (intRating === 1) {
-      return [1]
-    }
-    if (intRating === 2) {
-      return [1, 2]
-    }
-    if (intRating === 3) {
-      return [1, 2, 3]
-    }
-    if (intRating === 4) {
-      return [1, 2, 3, 4]
-    }
-    if (intRating === 5) {
-      return [1, 2, 3, 4, 5]
-    }
-  }
-
-  const isStarFull = () => {
-    if ((parseFloat(rating) % 1) === 0) {
-      return true
-    }
-  }
+  const hasHalfStar = () => (
+    parseFloat(rating) % 1 !== 0
+  )
 
   return (
     <div
@@ -72,62 +50,51 @@ const StarRating = ({
         className={css}
         id={id}
     >
-      <div
-          className="pb_star_rating_number"
-          rating={rating}
-      >
+      <div className="pb_star_rating_number">
+        {rating}
+      </div>
 
-        // <div className="pb_star_rating_wrapper">
-        //   <div className="pb_star_rating_highlight">
+      <div className="pb_star_rating_wrapper">
+        <div className="pb_star_rating_highlight">
+          {starCount().map((_, index) => (
+            <Icon
+                fixedWidth
+                icon="star"
+                key={index}
+            />
+          ))}
 
-        //     <If condition={isStarFull() === true}>
+          <If condition={hasHalfStar()}>
+            <Icon
+                fixedWidth
+                icon="star-half"
+            />
+          </If>
+        </div>
 
-        //       <Icon
-        //           fixedWidth
-        //           icon="star-half"
-        //       />
-        //       <Else />
-
-        //       {starCount().map((rating, index) => (
-        //         <Icon
-        //             fixedWidth
-        //             icon="star"
-        //             key={index}
-        //         />
-        //       ))}
-
-        //     </If>
-
-            <div className="pb_star_rating_base">
-
-              <Icon
-                  fixedWidth
-                  icon="star"
-              />
-
-              <Icon
-                  fixedWidth
-                  icon="star"
-              />
-
-              <Icon
-                  fixedWidth
-                  icon="star"
-              />
-
-              <Icon
-                  fixedWidth
-                  icon="star"
-              />
-
-              <Icon
-                  fixedWidth
-                  icon="star"
-              />
-            </div>
-          </div>
-        // </div>
-      // </div>
+        <div className="pb_star_rating_base">
+          <Icon
+              fixedWidth
+              icon="star"
+          />
+          <Icon
+              fixedWidth
+              icon="star"
+          />
+          <Icon
+              fixedWidth
+              icon="star"
+          />
+          <Icon
+              fixedWidth
+              icon="star"
+          />
+          <Icon
+              fixedWidth
+              icon="star"
+          />
+        </div>
+      </div>
     </div>
   )
 }

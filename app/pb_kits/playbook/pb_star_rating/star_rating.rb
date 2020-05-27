@@ -7,13 +7,11 @@ module Playbook
 
       partial "pb_star_rating/star_rating"
 
-      prop :hide_rating, type: Playbook::Props::Boolean,
-                         default: false
       prop :rating, type: Playbook::Props::Numeric,
                     default: 0
 
       def star_count
-        [*1..rating.to_f]
+        rating.floor
       end
 
       def star_full
