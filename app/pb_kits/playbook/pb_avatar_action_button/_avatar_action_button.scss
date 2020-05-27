@@ -4,6 +4,10 @@
   $border_size: 2.5px;
   position: relative;
 
+  // Create width here to accomodate margin right
+  // Find out how to get avatar width
+  // Programatize Placement
+
   @mixin icon-base {
     width: $icon_size;
     height: $icon_size;
