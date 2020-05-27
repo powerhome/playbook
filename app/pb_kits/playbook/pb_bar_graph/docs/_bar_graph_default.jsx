@@ -23,7 +23,7 @@ const BarGraphDefault = () => (
     <BarGraph
         axisTitle="Number of Employees"
         chartData={chartData}
-        id="bar-test-1"
+        id="bar-default"
         subTitle="Source: thesolarfoundation.com"
         title="Solar Employment Growth by Sector, 2010-2016"
         xAxisCategories={['Jan', 'Feb', 'Mar', 'Apr', 'May']}

@@ -82,6 +82,7 @@ class pbChart {
         text: this.defaults.title,
       },
       chart: {
+        height: this.defaults.height,
         type: this.defaults.type,
       },
       subtitle: {

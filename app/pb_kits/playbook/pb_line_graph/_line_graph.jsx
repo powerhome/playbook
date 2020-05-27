@@ -21,6 +21,7 @@ type LineGraphProps = {
   title: String,
   type?: String,
   legend?: Boolean,
+  height?: String,
 }
 
 export default class LineGraph extends React.Component<LineGraphProps> {
@@ -44,6 +45,7 @@ export default class LineGraph extends React.Component<LineGraphProps> {
       title,
       type,
       legend,
+      height,
     } = this.props
 
     new pbChart(`.${className}`, {
@@ -58,6 +60,7 @@ export default class LineGraph extends React.Component<LineGraphProps> {
       yAxisMin: yAxisMin,
       yAxisMax: yAxisMax,
       legend: legend,
+      height: height,
     })
   }
 
