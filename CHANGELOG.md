@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## Unreleased
 
 ### Added
+- Added legend prop to Bar Graph Kit and Line Graph Kit ([#818](https://github.com/powerhome/playbook/pull/818)@christinaatai)
 - Add React to LabelPill kit ([#813](https://github.com/powerhome/playbook/pull/813) @kellyeryan)
 
 ### Fixed

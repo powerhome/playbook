@@ -19,6 +19,8 @@ module Playbook
                                 default:[]
       prop :y_axis_min, type: Playbook::Props::Numeric
       prop :y_axis_max, type: Playbook::Props::Numeric
+      prop :legend, type: Playbook::Props::Boolean,
+                    default: false
 
 
       def chart_type
@@ -37,6 +39,7 @@ module Playbook
           xAxisCategories: x_axis_categories,
           yAxisMin: y_axis_min,
           yAxisMax: y_axis_max,
+          legend: legend,
         }.to_json.html_safe
       end
 
