@@ -7,6 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### Added
+
+- Add React Star Rating kit ([#822](https://github.com/powerhome/playbook/pull/822) @kellyeryan)
+
+
+### Fixed
+- Fix Rails hide_rating feature so that it hides the rating ([#822](https://github.com/powerhome/playbook/pull/822) @kellyeryan)
+
+
 ## [4.15.0] 2020-5-22
 
 ### Changed
