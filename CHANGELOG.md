@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### Fixed
+- Fix Currency kit performance issues (Rails) ([#820](https://github.com/powerhome/playbook/pull/820) @thestephenmarshall)
+
 ## [4.15.0] 2020-5-22
 
 ### Changed
