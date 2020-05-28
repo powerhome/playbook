@@ -1,12 +1,17 @@
 [class^=pb_avatar_action_button_kit] {
   
-  $icon_size: 30px;
-  $border_size: 2.5px;
-  position: relative;
+  $avatar_size: map-get($avatar-sizes, "md");
+  $icon_size: $avatar_size / 2;
+  $border_size: $icon_size / 10;
 
-  // Create width here to accomodate margin right
-  // Find out how to get avatar width
-  // Programatize Placement
+  position: relative;
+  width: $avatar_size * 1.25;
+  height: $avatar_size * 1.1;
+  display: flex;
+
+  [class^=pb_tooltip_kit] {
+    justify-self: center;
+  }
 
   @mixin icon-base {
     width: $icon_size;
@@ -23,30 +28,25 @@
   }
 
   .bottom_left {
-    // avatar padding
     [class^=pb_avatar_kit] {
-      padding-left: ($icon_size / 2);
+      padding-left: $icon_size / 2;
     }
 
     .icon {
       // icon mixin
       @include icon-base;
       // placement specific
-      bottom: -$icon_size * 0.27;
+      top: $icon_size * 1.27;
     }
   }
 
   .bottom_right {
-    avatar padding
-    [class^=pb_avatar_kit] {
-      margin-right: ($icon_size / 2);
-    }
-    
+
     .icon {
       // icon mixin
       @include icon-base;
       // placement specific
-      bottom: -$icon_size * 0.27;
+      top: $icon_size * 1.27;
       left: $icon_size * 1.5;
     }
   }
@@ -54,7 +54,7 @@
   .top_left {
     // avatar padding
     [class^=pb_avatar_kit] {
-      padding-left: ($icon_size / 2);
+      padding-left: $icon_size / 2;
     }
     
     .icon {
@@ -66,10 +66,6 @@
   }
 
   .top_right {
-    // avatar padding
-    [class^=pb_avatar_kit] {
-     margin-right: ($icon_size / 2);
-    }
     
     .icon {
       // icon mixin
