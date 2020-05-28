@@ -20,6 +20,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Add aria to Ruby LabelPill kit ([#813](https://github.com/powerhome/playbook/pull/813) @kellyeryan)
 - Fix Currency kit performance issues (Rails) ([#820](https://github.com/powerhome/playbook/pull/820) @thestephenmarshall)
 
+### Added
+-Create Source React Playbook Kit ([#810](https://github.com/powerhome/playbook/pull/810) @kellyeryan)
+
 ## [4.15.0] 2020-5-22
 
 ### Changed
