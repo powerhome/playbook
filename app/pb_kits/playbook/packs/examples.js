@@ -68,6 +68,8 @@ import * as Radio from 'pb_radio/docs'
 import * as SectionSeparator from 'pb_section_separator/docs'
 import * as Select from 'pb_select/docs'
 import * as SelectableCard from 'pb_selectable_card/docs'
+import * as SelectableCardIcon from 'pb_selectable_card_icon/docs'
+import * as SelectableIcon from 'pb_selectable_icon/docs'
 import * as Source from 'pb_source/docs'
 import * as StarRating from 'pb_star_rating/docs'
 import * as StatChange from 'pb_stat_change/docs'
@@ -143,6 +145,8 @@ WebpackerReact.setup({
   ...SectionSeparator,
   ...Select,
   ...SelectableCard,
+  ...SelectableIcon,
+  ...SelectableCardIcon,
   ...Source,
   ...StarRating,
   ...StatChange,

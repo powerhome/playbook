@@ -6,6 +6,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## Unreleased
+- Add Selectable Icon and Selectable Card Icon kits ([#782](https://github.com/powerhome/playbook/pull/782))
 
 ### Added
 - Add React Star Rating kit ([#822](https://github.com/powerhome/playbook/pull/822) @kellyeryan)

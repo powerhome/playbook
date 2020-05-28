@@ -1,0 +1,26 @@
+<div class="pb--doc-demo-row">
+
+  <%= pb_rails("selectable_card_icon", props: {
+    icon: "chart-line", 
+    title_text: "Quarterly Report", 
+    body_text: "Export",
+    input_id: 1,
+    checked: true,
+  }) %>
+
+  <%= pb_rails("selectable_card_icon", props: {
+    icon: "chart-pie", 
+    title_text: "Market Share", 
+    body_text: "Export",
+    input_id: 2,
+  }) %>
+
+  <%= pb_rails("selectable_card_icon", props: {
+    icon: "analytics", 
+    title_text: "Comprehensive", 
+    body_text: "Export",
+    input_id: 3,
+    disabled: true
+  }) %>
+
+</div>
