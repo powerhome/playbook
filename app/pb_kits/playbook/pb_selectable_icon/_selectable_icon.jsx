@@ -19,7 +19,7 @@ type SelectableIconProps = {
   data?: Object,
   icon: String,
   inputId: String,
-  inputless?: Boolean,
+  inputs: String,
   multi?: Boolean,
   name: String,
   text: String,
@@ -35,7 +35,7 @@ const SelectableIcon = ({
   disabled = false,
   icon,
   inputId,
-  inputless = false,
+  inputs = 'enabled',
   multi = true,
   name,
   text,
@@ -63,7 +63,7 @@ const SelectableIcon = ({
         {...dataProps}
         className={classnames(css, className)}
     >
-      { inputless ? (
+      { inputs === 'disabled' ? (
         <>
           <Icon
               icon={icon}

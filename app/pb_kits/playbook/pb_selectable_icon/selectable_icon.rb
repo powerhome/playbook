@@ -26,8 +26,8 @@ module Playbook
       prop :value
 
       # Conditional rendering for input field
-      prop :inputless, type: Playbook::Props::Boolean,
-                       default: false
+      prop :inputs, type: Playbook::Props::String,
+                    default: "enabled"
 
       def classname
         generate_classname("pb_selectable_icon_kit", checked_class, dark_class, enabled_disabled_class)

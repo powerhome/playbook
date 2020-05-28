@@ -3,7 +3,7 @@
     data: object.data,
     class: object.classname) do %>
 
-    <% if object.inputless %>
+    <% if object.inputs == "disabled" %>
     
       <%= pb_rails("icon", props: { icon: object.icon, size: "2x" }) %>
       <%= pb_rails("title", props: { text: object.text, tag: "h4", size: 4 }) %>

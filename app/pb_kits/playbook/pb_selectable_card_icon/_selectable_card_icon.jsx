@@ -78,7 +78,7 @@ const SelectableCardIcon = ({
             <SelectableIcon
                 dark={dark}
                 icon={icon}
-                inputless
+                inputs="disabled"
                 size="2x"
                 text={titleText}
             />
