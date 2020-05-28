@@ -1,20 +1,35 @@
 @import "../tokens/spacing";
 
-$space_classes: ( xs: $space_xs, sm: $space_sm, md: $space_md, lg: $space_lg, xl: $space_xl, none: 0);
-$positions: ( m: "margin", mr: "margin-right", ml: "margin-left", mt: "margin-top", mb: "margin-bottom", mx: ("margin-left", "margin-right"), my: ("margin-top", "margin-bottom"));
-@each $position_name,
-$position in $positions {
-    @each $space_name,
-    $space in $space_classes {
-        .#{$position_name}_#{$space_name} {
-            @if type-of($position)=="list" {
-                @each $coordinate in $position {
-                    #{$coordinate}: #{$space} !important;
-                }
-            }
-            @else {
-                #{$position}: #{$space} !important;
-            }
-        }
-    }
+$space_classes: ( 
+	xs: $space_xs, 
+	sm: $space_sm, 
+	md: $space_md, 
+	lg: $space_lg, 
+	xl: $space_xl, 
+	none: 0
+);
+
+$positions: ( 
+	m: "margin", 
+	mr: "margin-right", 
+	ml: "margin-left", 
+	mt: "margin-top", 
+	mb: "margin-bottom", 
+	mx: ("margin-left", "margin-right"), 
+	my: ("margin-top", "margin-bottom")
+);
+
+@each $position_name, $position in $positions {
+	@each $space_name, $space in $space_classes {
+		.#{$position_name}_#{$space_name} {
+			@if type-of($position)=="list" {
+				@each $coordinate in $position {
+					#{$coordinate}: #{$space} !important;
+				}
+			}
+			@else {
+				#{$position}: #{$space} !important;
+			}
+		}
+	}
 }
