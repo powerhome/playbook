@@ -1,7 +1,6 @@
 /* @flow */
 
 import React from 'react'
-
 import { Avatar, Body, Caption } from '../'
 
 type MessageProps = {

@@ -3,6 +3,8 @@
 import React from 'react'
 import Body from '../pb_body/_body.jsx'
 import Icon from '../pb_icon/_icon.jsx'
+import classnames from 'classnames'
+import { spacing } from '../utilities/spacing.js'
 
 type CheckboxProps = {
   checked?: Boolean,
@@ -15,27 +17,24 @@ type CheckboxProps = {
   onChange: (Boolean) => void,
 }
 
-const Checkbox = ({
-  checked = false,
-  dark = false,
-  error = false,
-  name = '',
-  text = '',
-  value = '',
-  children = null,
-  onChange = () => {},
-
-}: CheckboxProps) => {
-  const bodyClassName = {
-    'pb_checkbox_label': true,
-  }
+const Checkbox = (props: CheckboxProps) => {
+  const {
+    checked = false,
+    dark = false,
+    error = false,
+    name = '',
+    text = '',
+    value = '',
+    children = null,
+    onChange = () => {},
+  } = props
 
   return (
     <label
-        className={
-        'pb_checkbox_kit' +
+        className={classnames('pb_checkbox_kit' +
         (dark === true ? '_dark' : '') +
-        (error === true ? ' error' : '')
+        (error === true ? ' error' : ''), spacing(props))
+
       }
     >
       <If condition={children}>
@@ -58,7 +57,7 @@ const Checkbox = ({
         />
       </span>
       <Body
-          className={bodyClassName}
+          className="pb_checkbox_label"
           dark={dark}
           status={error ? 'negative' : null}
       >

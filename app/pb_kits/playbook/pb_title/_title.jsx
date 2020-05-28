@@ -2,6 +2,7 @@
 
 import React from 'react'
 import classnames from 'classnames'
+import { spacing } from '../utilities/spacing.js'
 
 type TitleProps = {
   className?: String,
@@ -9,13 +10,10 @@ type TitleProps = {
   dark?: Boolean,
   size?: 1 | 2 | 3 | 4,
   text?: String,
-  tag?: 'h1' | 'h2' | 'h3',
+  tag?: "h1" | "h2" | "h3",
 }
 
-const tagCSS = ({
-  dark = false,
-  size = 3,
-}) => {
+const tagCSS = ({ dark = false, size = 3 }) => {
   let css = ''
 
   css += `_${size}`
@@ -25,18 +23,19 @@ const tagCSS = ({
 }
 
 const Title = (props: TitleProps) => {
-  const {
-    className,
-    children,
-    text,
-    tag = 'h3',
-  } = props
+  const { children, className, tag = 'h3', text } = props
 
   const Tag = `${tag}`
 
   return (
-    <Tag className={classnames(`pb_title_kit${tagCSS(props)}`, className)}>
-      { text || children }
+    <Tag
+        className={classnames(
+        `pb_title_kit${tagCSS(props)}`,
+        className,
+        spacing(props),
+      )}
+    >
+      {text || children}
     </Tag>
   )
 }
