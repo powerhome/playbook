@@ -82,6 +82,7 @@ class pbChart {
         text: this.defaults.title,
       },
       chart: {
+        height: this.defaults.height,
         type: this.defaults.type,
       },
       subtitle: {
@@ -96,6 +97,9 @@ class pbChart {
       },
       xAxis: {
         categories: this.defaults.xAxisCategories,
+      },
+      legend: {
+        enabled: this.defaults.legend,
       },
       plotOptions: {
         series: {
