@@ -63,7 +63,7 @@ const SelectableIcon = ({
         {...dataProps}
         className={classnames(css, className)}
     >
-      { inputs === 'disabled' ? (
+      <If condition={inputs === 'disabled'}>
         <>
           <Icon
               icon={icon}
@@ -75,7 +75,8 @@ const SelectableIcon = ({
               text={text}
           />
         </>
-      ) : (
+      </If>
+      <If condition={inputs === 'enabled'}>
         <>
           <input
               {...props}
@@ -98,8 +99,7 @@ const SelectableIcon = ({
             />
           </label>
         </>
-        )
-      }
+      </If>
     </div>
   )
 }
