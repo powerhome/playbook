@@ -16,7 +16,14 @@ $positions: (
 	mt: "margin-top", 
 	mb: "margin-bottom", 
 	mx: ("margin-left", "margin-right"), 
-	my: ("margin-top", "margin-bottom")
+	my: ("margin-top", "margin-bottom"),
+	p: "padding", 
+	pr: "padding-right", 
+	pl: "padding-left", 
+	pt: "padding-top", 
+	pb: "padding-bottom", 
+	px: ("padding-left", "padding-right"), 
+	py: ("padding-top", "padding-bottom")
 );
 
 @each $position_name, $position in $positions {
