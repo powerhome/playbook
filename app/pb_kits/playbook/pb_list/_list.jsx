@@ -1,7 +1,6 @@
 /* @flow */
 
 import React, { type Node } from 'react'
-
 import { buildCss } from '../utilities/props'
 
 type ListProps = {

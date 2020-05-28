@@ -1,7 +1,6 @@
 /* @flow */
 
 import React from 'react'
-
 type DistributionBarProps = {
   className?: String,
   data?: String,

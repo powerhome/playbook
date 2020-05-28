@@ -1,8 +1,9 @@
 /* @flow */
 
 import React from 'react'
-
+import classnames from 'classnames'
 import { pbChart } from '../'
+import { spacing } from '../utilities/spacing.js'
 
 type BarGraphProps = {
   axisTitle: String,
@@ -63,7 +64,7 @@ export default class BarGraph extends React.Component<BarGraphProps> {
 
     return (
       <div
-          className={className}
+          className={classnames(className, spacing(this.props))}
           id={id}
       />
     )

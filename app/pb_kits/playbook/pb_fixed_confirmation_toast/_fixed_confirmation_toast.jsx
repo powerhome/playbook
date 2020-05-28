@@ -2,7 +2,6 @@
 
 import React from 'react'
 import classnames from 'classnames'
-
 import { Icon, Title } from '../'
 
 const iconMap = {

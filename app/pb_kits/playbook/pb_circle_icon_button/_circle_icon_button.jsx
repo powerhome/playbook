@@ -1,6 +1,7 @@
 /* @flow */
 
 import React from 'react'
+import classnames from 'classnames'
 import { Button, Icon } from '../'
 
 import type { Callback } from '../types'
@@ -8,6 +9,8 @@ import type { Callback } from '../types'
 import {
   noop,
 } from '../utilities/props'
+
+import { spacing } from '../utilities/spacing.js'
 
 type CircleIconButtonProps = {
   className?: String,
@@ -31,7 +34,7 @@ const CircleIconButton = (props: CircleIconButtonProps) => {
   } = props
 
   return (
-    <div className="pb_circle_icon_button_kit">
+    <div className={classnames('pb_circle_icon_button_kit', spacing(props))}>
       <Button
           dark={dark}
           disabled={disabled}

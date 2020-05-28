@@ -2,7 +2,6 @@
 
 import React from 'react'
 import classnames from 'classnames'
-
 import DateTime from '../pb_kit/dateTime.js'
 import { buildCss } from '../utilities/props'
 import { Caption, Title } from '../'

@@ -15,7 +15,10 @@ const TableSideHighlight = () => {
           </tr>
         </thead>
         <tbody>
-          <TableRow sideHighlightColor="windows">
+          <TableRow
+              marginLeft="xl"
+              sideHighlightColor="windows"
+          >
             <td>{'Windows'}</td>
             <td>{'Value 2'}</td>
             <td>{'Value 3'}</td>
