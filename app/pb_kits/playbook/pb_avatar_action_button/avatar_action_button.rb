@@ -18,12 +18,12 @@ module Playbook
       prop :icon, type: Playbook::Props::String,
                   default: "user"
       prop :placement, type: Playbook::Props::String,
-                       default: "bottom-left"
+                       default: "bottom_left"
 
       partial "pb_avatar_action_button/avatar_action_button"
 
       def classname
-        generate_classname("pb_avatar_action_button_kit")
+        generate_classname("pb_avatar_action_button_kit", size, placement)
       end
     end
   end

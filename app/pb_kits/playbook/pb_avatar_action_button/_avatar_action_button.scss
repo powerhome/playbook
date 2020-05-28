@@ -1,18 +1,8 @@
 [class^=pb_avatar_action_button_kit] {
+
+  $icon_size: 0px;
+  $border_size: 0px;
   
-  $avatar_size: map-get($avatar-sizes, "md");
-  $icon_size: $avatar_size / 2;
-  $border_size: $icon_size / 10;
-
-  position: relative;
-  width: $avatar_size * 1.25;
-  height: $avatar_size * 1.1;
-  display: flex;
-
-  [class^=pb_tooltip_kit] {
-    justify-self: center;
-  }
-
   @mixin icon-base {
     width: $icon_size;
     height: $icon_size;
@@ -27,52 +17,85 @@
     z-index: 1;
   }
 
-  .bottom_left {
-    [class^=pb_avatar_kit] {
-      padding-left: $icon_size / 2;
-    }
-
-    .icon {
-      // icon mixin
-      @include icon-base;
-      // placement specific
-      top: $icon_size * 1.27;
-    }
-  }
-
-  .bottom_right {
-
-    .icon {
-      // icon mixin
-      @include icon-base;
-      // placement specific
-      top: $icon_size * 1.27;
-      left: $icon_size * 1.5;
-    }
-  }
-
-  .top_left {
-    // avatar padding
-    [class^=pb_avatar_kit] {
-      padding-left: $icon_size / 2;
-    }
+  @each $name, $size in $avatar-sizes {
     
-    .icon {
-      // icon mixin
-      @include icon-base;
-      // placement specific
-      bottom: $icon_size * 1.27;
-    }
-  }
+    &[class*=_#{$name}] {
+      
+      $avatar_size: map-get($avatar-sizes, $name);
+      $icon_size: $avatar_size / 2;
+      $border_size: $icon_size / 10;
 
-  .top_right {
+      position: relative;
+      width: $avatar_size * 1.25;
+      height: $avatar_size * 1.1;
+      display: flex;
     
-    .icon {
-      // icon mixin
-      @include icon-base;
-      // placement specific
-      bottom: $icon_size * 1.27;
-      left: $icon_size * 1.5;
+      [class^=pb_tooltip_kit] {
+        justify-self: center;
+      }
+    
+      &[class*=_bottom] {
+        .icon {
+          @include icon-base;
+          top: $icon_size * 1.27;
+        }
+      }
+      &[class*=_top] {
+        .icon {
+          @include icon-base;
+          bottom: $icon_size * 1.27;
+        }
+      }
+      &[class*=_right] {
+        .icon {
+          left: $icon_size * 1.5;
+        }
+      }
+      &[class*=_left] {
+        [class^=pb_avatar_kit] {
+          padding-left: $icon_size / 2;
+        }
+      }
+    
+      // .bottom_left {
+      //   [class^=pb_avatar_kit] {
+      //     padding-left: $icon_size / 2;
+      //   }
+    
+      //   .icon {
+      //     @include icon-base;
+      //     top: $icon_size * 1.27;
+      //   }
+      // }
+    
+      // .bottom_right {
+    
+      //   .icon {
+      //     @include icon-base;
+      //     top: $icon_size * 1.27;
+      //     left: $icon_size * 1.5;
+      //   }
+      // }
+    
+      // .top_left {
+      //   [class^=pb_avatar_kit] {
+      //     padding-left: $icon_size / 2;
+      //   }
+        
+      //   .icon {
+      //     @include icon-base;
+      //     bottom: $icon_size * 1.27;
+      //   }
+      // }
+    
+      // .top_right {
+        
+      //   .icon {
+      //     @include icon-base;
+      //     bottom: $icon_size * 1.27;
+      //     left: $icon_size * 1.5;
+      //   }
+      // }
     }
   }
 }
