@@ -11,7 +11,6 @@ Playbook is the first design system built for both Rails & React interfaces. Ins
 
 1. Run `yarn && bundle`
 1. Run `make start`
-1. Bootstrap the database: `docker-compose run web bin/rails db:setup`
 1. Install overcommit hooks `bin/overcommit`
 1. open [http://localhost:8080](http://localhost:8080)
 
