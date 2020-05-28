@@ -16,7 +16,6 @@ const TableSideHighlight = () => {
         </thead>
         <tbody>
           <TableRow
-              marginLeft="xl"
               sideHighlightColor="windows"
           >
             <td>{'Windows'}</td>
