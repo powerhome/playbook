@@ -5,9 +5,9 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-
 ## Unreleased
 - Add Selectable Icon and Selectable Card Icon kits ([#782](https://github.com/powerhome/playbook/pull/782))
+
 
 ### Added
 - Added Spacing Helpers for All Rails and Many React Kits ([#802](https://github.com/powerhome/playbook/pull/802) @jasperfurniss)
@@ -16,7 +16,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Add React to LabelPill kit ([#813](https://github.com/powerhome/playbook/pull/813) @kellyeryan)
 - Updated Bar Graph Kit and Line Graph Kit with height prop ([#819](https://github.com/powerhome/playbook/pull/819)@christinaatai)
 - Added link & new_window props to circle_icon_button rails/react ([#823](https://github.com/powerhome/playbook/pull/823)@kre8sions)
-
 ### Fixed
 - Fix Rails hide_rating feature so that it hides the rating ([#822](https://github.com/powerhome/playbook/pull/822) @kellyeryan)
 - Added aria, data, id props to Text Input kit on both React and Ruby sides.([#812](https://github.com/powerhome/playbook/pull/812)@kellyeryan)
