@@ -16,6 +16,7 @@
 @import 'pb_date_range_inline/date_range_inline';
 @import 'pb_date_range_stacked/date_range_stacked';
 @import 'pb_date_stacked/date_stacked';
+@import 'pb_date_time_stacked/date_time_stacked';
 @import 'pb_date_year_stacked/date_year_stacked';
 @import 'pb_distribution_bar/distribution_bar';
 @import 'pb_file_upload/file_upload';
@@ -55,6 +56,8 @@
 @import 'pb_section_separator/section_separator';
 @import 'pb_select/select';
 @import 'pb_selectable_card/selectable_card';
+@import 'pb_selectable_card_icon/selectable_card_icon';
+@import 'pb_selectable_icon/selectable_icon';
 @import 'pb_source/source';
 @import 'pb_star_rating/star_rating';
 @import 'pb_stat_change/stat_change';
@@ -72,6 +75,5 @@
 @import 'pb_typeahead/typeahead';
 @import 'pb_user/user';
 @import 'pb_user_badge/user_badge';
-@import 'pb_date_time_stacked/date_time_stacked';
 @import 'pb_time_stacked/time_stacked';
 @import 'pb_weekday_stacked/weekday_stacked';

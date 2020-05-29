@@ -13,7 +13,8 @@ RSpec.describe Playbook::PbCircleIconButton::CircleIconButton do
   it { is_expected.to define_boolean_prop(:dark).with_default(false) }
   it { is_expected.to define_boolean_prop(:disabled).with_default(false) }
   it { is_expected.to define_prop(:icon).that_is_required }
-
+  it { is_expected.to define_boolean_prop(:new_window).with_default(false) }
+  it { is_expected.to define_prop(:link) }
   describe "#classname" do
     it "returns namespaced class name", :aggregate_failures do
       icon = "user"
