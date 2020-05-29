@@ -1,41 +1,73 @@
 /* @flow */
 
 import React from 'react'
+import classnames from 'classnames'
+import { Avatar, Icon } from '../'
+
+import {
+  buildAriaProps,
+  buildCss,
+  buildDataProps,
+} from '../utilities/props'
 
 type AvatarActionButtonProps = {
+  action?: String,
+  aria: Object,
   className?: String,
-  data?: String,
-  icon?: String,
-  id?: String,
+  data?: Object,
   imageUrl?: String,
+  linkUrl?: String,
   name?: String,
+  onClick?: String,
   placement?: String,
   size?: String,
-  tooltipText?: String,
 }
 
 const AvatarActionButton = ({
+  action = 'plus',
+  aria = {},
   className,
-  data,
-  icon,
-  id,
+  data = {},
   imageUrl,
+  linkUrl,
   name,
-  placement,
-  size,
-  tooltipText,
-}: AvatarActionButtonProps) => (
-  <div>
-    <p>{`className: ${className}`}</p>
-    <p>{`data: ${data}`}</p>
-    <p>{`icon: ${icon}`}</p>
-    <p>{`id: ${id}`}</p>
-    <p>{`imageUrl: ${imageUrl}`}</p>
-    <p>{`name: ${name}`}</p>
-    <p>{`placement: ${placement}`}</p>
-    <p>{`size: ${size}`}</p>
-    <p>{`tooltipText: ${tooltipText}`}</p>
-  </div>
-)
+  onClick,
+  placement = 'bottom_left',
+  size = 'md',
+}: AvatarActionButtonProps) => {
+  const ariaProps = buildAriaProps(aria)
+  const dataProps = buildDataProps(data)
+
+  const css = buildCss({
+    'pb_avatar_action_button_kit': true,
+    [action]: true,
+    [placement]: true,
+    [size]: true,
+  })
+
+  return (
+    <div
+        {...ariaProps}
+        {...dataProps}
+        className={classnames(css, className)}
+    >
+      <a
+          href={linkUrl}
+          onClick={onClick}
+      >
+        <Avatar
+            imageUrl={imageUrl}
+            name={name}
+            size={size}
+        />
+        <div className="icon">
+          <Icon
+              icon={`${action}-circle`}
+          />
+        </div>
+      </a>
+    </div>
+  )
+}
 
 export default AvatarActionButton

@@ -2,13 +2,29 @@
 
   $icon_size: 0px;
   $border_size: 0px;
+
+  $action-colors: (
+    "plus": $primary,
+    "times": rgb(184, 49, 8),
+    "minus": rgb(8, 151, 151),
+    "info": rgb(21, 80, 7),
+    "question": rgb(197, 87, 14),
+    "exclamation": rgb(114, 12, 114),
+    "heart": rgb(207, 84, 105),
+    "sort": rgb(15, 14, 105),
+  );
+
+  @each $key, $value in $action-colors {
+    &[class*=_#{$key}] a {
+      color: $value;
+    }
+  }
   
   @mixin icon-base {
     width: $icon_size;
     height: $icon_size;
     position: absolute;
     background-color: $white;
-    color: $primary;
     border-radius: $icon_size;
     font-size: ($icon_size - $border_size * 2);
     display: flex;
@@ -56,46 +72,6 @@
           padding-left: $icon_size / 2;
         }
       }
-    
-      // .bottom_left {
-      //   [class^=pb_avatar_kit] {
-      //     padding-left: $icon_size / 2;
-      //   }
-    
-      //   .icon {
-      //     @include icon-base;
-      //     top: $icon_size * 1.27;
-      //   }
-      // }
-    
-      // .bottom_right {
-    
-      //   .icon {
-      //     @include icon-base;
-      //     top: $icon_size * 1.27;
-      //     left: $icon_size * 1.5;
-      //   }
-      // }
-    
-      // .top_left {
-      //   [class^=pb_avatar_kit] {
-      //     padding-left: $icon_size / 2;
-      //   }
-        
-      //   .icon {
-      //     @include icon-base;
-      //     bottom: $icon_size * 1.27;
-      //   }
-      // }
-    
-      // .top_right {
-        
-      //   .icon {
-      //     @include icon-base;
-      //     bottom: $icon_size * 1.27;
-      //     left: $icon_size * 1.5;
-      //   }
-      // }
     }
   }
 }

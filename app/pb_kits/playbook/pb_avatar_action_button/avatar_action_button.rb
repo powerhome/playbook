@@ -5,6 +5,8 @@ module Playbook
     class AvatarActionButton
       include Playbook::Props
 
+      prop :action, type: Playbook::Props::String,
+                    default: "plus"
       prop :image_url, type: Playbook::Props::String
       prop :link_url, type: Playbook::Props::String
       prop :tooltip_text, type: Playbook::Props::String
@@ -15,15 +17,13 @@ module Playbook
       prop :size, type: Playbook::Props::Enum,
                   values: %w[xs sm md base lg xl],
                   default: "md"
-      prop :icon, type: Playbook::Props::String,
-                  default: "user"
       prop :placement, type: Playbook::Props::String,
                        default: "bottom_left"
 
       partial "pb_avatar_action_button/avatar_action_button"
 
       def classname
-        generate_classname("pb_avatar_action_button_kit", size, placement)
+        generate_classname("pb_avatar_action_button_kit", action, size, placement)
       end
     end
   end
