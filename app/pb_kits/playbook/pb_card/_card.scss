@@ -99,11 +99,11 @@ $pb_card_padding:(
         @include pb_card_header_color($color_value);
       }
     }
-    @each $padding_name, $padding_value in $pb_card_padding {
-      &[class*=_#{$padding_name}] {
-          padding: $padding_value;
-      }
-    }
+    // @each $padding_name, $padding_value in $pb_card_padding {
+    //   &[class*=_#{$padding_name}] {
+    //       padding: $padding_value;
+    //   }
+    // }
   }
 
   [class^=pb_card_body_kit] {
@@ -112,11 +112,11 @@ $pb_card_padding:(
     flex-basis: auto;
     min-height: 1px;
     border: 0;
-    @each $name, $padding_size in $pb_card_padding {
-      &[class*=_#{$name}] {
-        padding: $padding_size;
-      }
-    }
+    // @each $name, $padding_size in $pb_card_padding {
+    //   &[class*=_#{$name}] {
+    //     padding: $padding_size;
+    //   }
+    // }
   }
   
   @each $name, $shadow in $box_shadows {

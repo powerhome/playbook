@@ -1,11 +1,14 @@
 /* @flow */
 
 import React from 'react'
+import classnames from 'classnames'
+import { spacing } from '../utilities/spacing.js'
+
 type DistributionBarProps = {
   className?: String,
   data?: String,
   id?: String,
-  size?: 'lg' | 'sm',
+  size?: "lg" | "sm",
   widths?: Array<Number>,
 }
 
@@ -16,27 +19,25 @@ const normalizeCharacters = (widths) => {
 }
 
 const barValues = (normalizedValues) => {
-  const arrSum = (value) => value.reduce((a, b) => (a + b), 0)
+  const arrSum = (value) => value.reduce((a, b) => a + b, 0)
   const widthSum = arrSum(normalizedValues)
   return normalizedValues.map((value, i) => {
     return (
       <div
           className="pb_distribution_width"
           key={i}
-          style={{ width: `${value * 100 / widthSum}%` }}
+          style={{ width: `${(value * 100) / widthSum}%` }}
       />
     )
   })
 }
 
-const DistributionBar = ({
-  size = 'lg',
-  widths = [1],
-}: DistributionBarProps) => {
+const DistributionBar = (props: DistributionBarProps) => {
+  const { size = 'lg', widths = [1] } = props
   const normalizedValues = normalizeCharacters(widths)
 
   return (
-    <div className={`pb_distribution_bar_${size}`}>
+    <div className={classnames(`pb_distribution_bar_${size}`, spacing(props))}>
       {barValues(normalizedValues)}
     </div>
   )

@@ -1,21 +1,21 @@
+/* @flow */
+/*eslint-disable react/no-multi-comp, flowtype/space-before-type-colon */
+
 import React from 'react'
-import PropTypes from 'prop-types'
+import classnames from 'classnames'
+import { spacing } from '../utilities/spacing.js'
 
-const propTypes = {
-  className: PropTypes.string,
-  id: PropTypes.string,
+type LabelPillProps = {
+  className?: String,
+  id?: String,
 }
 
-class LabelPill extends React.Component {
-  render() {
-    return (
-      <div className="pb_label_pill">
-        <span>{'LABEL PILL CONTENT'}</span>
-      </div>
-    )
-  }
+const LabelPill = (props: LabelPillProps) => {
+  return (
+    <div className={classnames('pb_label_pill', spacing(props))}>
+      <span>{'LABEL PILL CONTENT'}</span>
+    </div>
+  )
 }
-
-LabelPill.propTypes = propTypes
 
 export default LabelPill
