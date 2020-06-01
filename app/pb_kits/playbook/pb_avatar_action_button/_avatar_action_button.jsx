@@ -47,12 +47,13 @@ const AvatarActionButton = ({
 
   const icons = {
     add: 'plus-circle',
-    remove: 'times-circle',
-    minus: 'minus-circle',
-    info: 'info-circle',
-    question: 'question-circle',
+    edit: 'edit',
     exclamation: 'exclamation-circle',
     heart: 'heart-circle',
+    info: 'info-circle',
+    minus: 'minus-circle',
+    question: 'question-circle',
+    remove: 'times-circle',
     sort: 'sort-circle',
   }
 

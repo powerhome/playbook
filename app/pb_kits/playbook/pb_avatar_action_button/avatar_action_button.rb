@@ -29,12 +29,13 @@ module Playbook
       def action_icons
         icon_hash = {
           add: "plus-circle",
-          remove: "times-circle",
-          minus: "minus-circle",
-          info: "info-circle",
-          question: "question-circle",
+          edit: "pencil-circle",
           exclamation: "exclamation-circle",
           heart: "heart-circle",
+          info: "info-circle",
+          minus: "minus-circle",
+          question: "question-circle",
+          remove: "times-circle",
           sort: "sort-circle",
         }
 
