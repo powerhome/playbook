@@ -11,4 +11,7 @@ examples:
   
   react:
   - avatar_action_button_default: Default
+  - avatar_action_button_placement: Placement
+  - avatar_action_button_actions: Actions
+  - avatar_action_button_on_click: On Click
   

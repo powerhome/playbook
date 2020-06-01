@@ -24,7 +24,7 @@ type AvatarActionButtonProps = {
 }
 
 const AvatarActionButton = ({
-  action = 'plus',
+  action = 'add',
   aria = {},
   className,
   data = {},
@@ -32,7 +32,7 @@ const AvatarActionButton = ({
   linkUrl,
   name,
   onClick,
-  placement = 'bottom_left',
+  placement = 'bottom left',
   size = 'md',
 }: AvatarActionButtonProps) => {
   const ariaProps = buildAriaProps(aria)
@@ -44,6 +44,17 @@ const AvatarActionButton = ({
     [placement]: true,
     [size]: true,
   })
+
+  const icons = {
+    add: 'plus-circle',
+    remove: 'times-circle',
+    minus: 'minus-circle',
+    info: 'info-circle',
+    question: 'question-circle',
+    exclamation: 'exclamation-circle',
+    heart: 'heart-circle',
+    sort: 'sort-circle',
+  }
 
   return (
     <div
@@ -62,7 +73,7 @@ const AvatarActionButton = ({
         />
         <div className="icon">
           <Icon
-              icon={`${action}-circle`}
+              icon={icons[action]}
           />
         </div>
       </a>
