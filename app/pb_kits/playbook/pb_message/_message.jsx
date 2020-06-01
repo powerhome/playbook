@@ -2,6 +2,8 @@
 
 import React from 'react'
 import { Avatar, Body, Caption } from '../'
+import classnames from 'classnames'
+import { spacing } from '../utilities/spacing.js'
 
 type MessageProps = {
   avatarName?: String,
@@ -12,19 +14,22 @@ type MessageProps = {
   timestamp?: String,
 }
 
-const Message = ({
-  avatarName = '',
-  avatarUrl = '',
-  label = '',
-  message = '',
-  timestamp = '',
-  avatarStatus = null,
-}: MessageProps) => {
+const Message = (props: MessageProps) => {
+  const {
+    avatarName = '',
+    avatarUrl = '',
+    label = '',
+    message = '',
+    timestamp = '',
+    avatarStatus = null,
+  } = props
   const shouldDisplayAvatar = avatarUrl || avatarName
-  const classes = shouldDisplayAvatar ? 'pb_message_kit_avatar' : 'pb_message_kit'
+  const classes = shouldDisplayAvatar
+    ? 'pb_message_kit_avatar'
+    : 'pb_message_kit'
 
   return (
-    <div className={classes}>
+    <div className={classnames(classes, spacing(props))}>
       <If condition={shouldDisplayAvatar}>
         <Avatar
             imageUrl={avatarUrl}

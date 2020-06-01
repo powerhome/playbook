@@ -3,28 +3,30 @@
 import React from 'react'
 import classnames from 'classnames'
 import { Icon, Title } from '../'
+import { spacing } from '../utilities/spacing.js'
 
 const iconMap = {
-  'success': 'check',
-  'error': 'exclamation-triangle',
-  'neutral': 'info-circle',
-  'tip': 'info-circle',
+  success: 'check',
+  error: 'exclamation-triangle',
+  neutral: 'info-circle',
+  tip: 'info-circle',
 }
 
 type FixedConfirmationToastProps = {
   className?: String,
   data?: String,
   id?: String,
-  status?: 'success' | 'error' | 'neutral' | 'tip',
+  status?: "success" | "error" | "neutral" | "tip",
   text: String,
 }
 
-const FixedConfirmationToast = ({
-  className,
-  status = 'neutral',
-  text,
-}: FixedConfirmationToastProps) => {
-  const css = classnames(className, `pb_fixed_confirmation_toast_kit_${status}`)
+const FixedConfirmationToast = (props: FixedConfirmationToastProps) => {
+  const { className, status = 'neutral', text } = props
+  const css = classnames(
+    className,
+    `pb_fixed_confirmation_toast_kit_${status}`,
+    spacing(props)
+  )
   const icon = iconMap[status]
 
   return (
