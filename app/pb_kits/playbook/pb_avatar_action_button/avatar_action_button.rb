@@ -6,7 +6,7 @@ module Playbook
       include Playbook::Props
 
       prop :action, type: Playbook::Props::String,
-                    default: "plus"
+                    default: "add"
       prop :image_url, type: Playbook::Props::String
       prop :link_url, type: Playbook::Props::String
       prop :tooltip_text, type: Playbook::Props::String
@@ -24,6 +24,21 @@ module Playbook
 
       def classname
         generate_classname("pb_avatar_action_button_kit", action, size, placement)
+      end
+
+      def action_icons
+        icon_hash = {
+          add: "plus-circle",
+          remove: "times-circle",
+          minus: "minus-circle",
+          info: "info-circle",
+          question: "question-circle",
+          exclamation: "exclamation-circle",
+          heart: "heart-circle",
+          sort: "sort-circle",
+        }
+
+        icon_hash[action.to_sym]
       end
     end
   end

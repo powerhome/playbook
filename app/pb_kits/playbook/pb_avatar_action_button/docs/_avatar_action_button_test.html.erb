@@ -1,32 +1,43 @@
 <div class="test" style="display:flex;">
+
   <%= pb_rails("avatar_action_button", props: {
       name: "Danny Devito",
-      onclick: "alert('click!')",
-      link_url: "http://www.google.com",
       image_url: "https://upload.wikimedia.org/wikipedia/commons/8/88/Danny_DeVito_cropped_and_edited_for_brightness.jpg",
-      placement: "bottom_right"
+      action: "minus",
   }) %>
-    <%= pb_rails("avatar_action_button", props: {
+
+  <%= pb_rails("avatar_action_button", props: {
       name: "Danny Devito",
-      onclick: "alert('click!')",
-      link_url: "http://www.google.com",
       image_url: "https://upload.wikimedia.org/wikipedia/commons/8/88/Danny_DeVito_cropped_and_edited_for_brightness.jpg",
-      placement: "bottom_left"
+      action: "info",
   }) %>
-    <%= pb_rails("avatar_action_button", props: {
+
+  <%= pb_rails("avatar_action_button", props: {
       name: "Danny Devito",
-      onclick: "alert('click!')",
-      link_url: "http://www.google.com",
       image_url: "https://upload.wikimedia.org/wikipedia/commons/8/88/Danny_DeVito_cropped_and_edited_for_brightness.jpg",
-      placement: "top_right"
+      action: "question",
   }) %>
-    <%= pb_rails("avatar_action_button", props: {
+
+  <%= pb_rails("avatar_action_button", props: {
       name: "Danny Devito",
-      onclick: "alert('click!')",
-      link_url: "http://www.google.com",
       image_url: "https://upload.wikimedia.org/wikipedia/commons/8/88/Danny_DeVito_cropped_and_edited_for_brightness.jpg",
-      tooltip_text: "Tooltip",
-      tooltip_id: "avatar_20",
-      placement: "top_left"
+      action: "exclamation",
   }) %>
+
+  <%= pb_rails("avatar_action_button", props: {
+      name: "Danny Devito",
+      image_url: "https://upload.wikimedia.org/wikipedia/commons/8/88/Danny_DeVito_cropped_and_edited_for_brightness.jpg",
+      action: "heart",
+  }) %>
+
+  <%= pb_rails("avatar_action_button", props: {
+      name: "Danny Devito",
+      image_url: "https://upload.wikimedia.org/wikipedia/commons/8/88/Danny_DeVito_cropped_and_edited_for_brightness.jpg",
+      action: "sort",
+  }) %>
+
+  <span class="fa-stack fa-2x">
+    <%= pb_rails("icon", props: { class: "fa-stack-2x", icon: "circle" }) %>
+    <%= pb_rails("icon", props: { class: "fa-stack-1x", icon: "user" }) %>
+  </span>
 </div>

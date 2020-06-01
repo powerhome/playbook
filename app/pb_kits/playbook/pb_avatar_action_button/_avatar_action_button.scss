@@ -4,8 +4,8 @@
   $border_size: 0px;
 
   $action-colors: (
-    "plus": $primary,
-    "times": rgb(184, 49, 8),
+    "add": $primary,
+    "remove": $error,
     "minus": rgb(8, 151, 151),
     "info": rgb(21, 80, 7),
     "question": rgb(197, 87, 14),
