@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### Added
+- Added list kit layout docs ([#828](https://github.com/powerhome/playbook/pull/828) @kre8sions)
+
 ## [4.16.0] 2020-5-29
 
 ### Added
