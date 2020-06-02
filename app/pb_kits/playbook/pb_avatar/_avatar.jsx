@@ -4,34 +4,51 @@ import React from 'react'
 import classnames from 'classnames'
 import { map } from 'lodash'
 
+import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
+
 import { Image } from '../'
 
 type AvatarProps = {
+  aria?: object,
   className?: String,
-  name: String,
+  data?: object,
+  id?: String,
   imageUrl: String,
-  size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl',
-  status: 'online' | 'away',
-}
+  name: String,
+  size?: "md" | "lg" | "sm" | "xl" | "xs",
+  status: "away" | "offline" | "online",
+};
 
-const firstTwoInitials = (name) => (
+const firstTwoInitials = (name) =>
   map(name.split(/\s/), (name) => name[0])
     .join('')
     .substring(0, 2)
-)
+    .toLowerCase()
 
 const Avatar = ({
+  aria = {},
   className,
+  data = {},
   name = null,
   imageUrl,
+  id = id,
   size = 'md',
   status = null,
 }: AvatarProps) => {
-  const classes = classnames(['pb_avatar_kit', `avatar_${size}`, className])
+  const dataProps = buildDataProps(data)
+  const ariaProps = buildAriaProps(aria)
+
+  const classes = classnames(buildCss('pb_avatar_kit', size), className)
   const initials = name && firstTwoInitials(name)
+  dataProps['data-initials'] = initials
 
   return (
-    <div className={classes}>
+    <div
+        {...ariaProps}
+        {...dataProps}
+        className={classes}
+        id={id}
+    >
       <div
           className="avatar_wrapper"
           data-initials={initials}
