@@ -6,12 +6,6 @@
   $action-colors: (
     "add": $primary,
     "remove": $error,
-    "minus": rgb(8, 151, 151),
-    "info": rgb(21, 80, 7),
-    "question": rgb(197, 87, 14),
-    "exclamation": rgb(114, 12, 114),
-    "heart": rgb(207, 84, 105),
-    "sort": rgb(15, 14, 105),
   );
 
   @each $key, $value in $action-colors {
@@ -50,22 +44,16 @@
         justify-self: center;
       }
     
-      &[class*=_bottom] {
-        .icon {
+      &[class*=_bottom] .icon {
           @include icon-base;
           top: $icon_size * 1.27;
-        }
       }
-      &[class*=_top] {
-        .icon {
+      &[class*=_top] .icon {
           @include icon-base;
           bottom: $icon_size * 1.27;
-        }
       }
-      &[class*=_right] {
-        .icon {
+      &[class*=_right] .icon {
           left: $icon_size * 1.5;
-        }
       }
       &[class*=_left] {
         [class^=pb_avatar_kit] {

@@ -28,17 +28,15 @@ module Playbook
       def action_icons
         icon_hash = {
           add: "plus-circle",
-          edit: "pencil-circle",
-          exclamation: "exclamation-circle",
-          heart: "heart-circle",
-          info: "info-circle",
-          minus: "minus-circle",
-          question: "question-circle",
           remove: "times-circle",
-          sort: "sort-circle",
         }
+        # if an 'action' prop is passed that isn't
+        # in the icon_hash an empty string is returned
+        # instead of a null value, which would break the page
 
-        icon_hash[action.to_sym]
+        # double pipe ruby syntax below is essentially a reduced if-else statement
+        # if icon_hash[action.to_sym] returns a falsey value, return "" instead
+        icon_hash[action.to_sym] ||= ""
       end
     end
   end
