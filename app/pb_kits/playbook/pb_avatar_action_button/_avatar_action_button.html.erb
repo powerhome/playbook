@@ -15,9 +15,7 @@
         <% end %>
       <% end %>
 
-        <%= link_to object.link_url,
-                    onclick: object.onclick,
-                    id: object.tooltip_id do %>
+        <%= link_to object.link_url, id: object.tooltip_id do %>
 
           <%= pb_rails("avatar", props: {
             name: object.name,

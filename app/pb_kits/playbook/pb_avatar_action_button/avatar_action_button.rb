@@ -11,7 +11,6 @@ module Playbook
       prop :link_url, type: Playbook::Props::String
       prop :tooltip_text, type: Playbook::Props::String
       prop :tooltip_id, type: Playbook::Props::String
-      prop :onclick, type: Playbook::Props::String
       prop :name, type: Playbook::Props::String,
                   default: ""
       prop :size, type: Playbook::Props::Enum,
