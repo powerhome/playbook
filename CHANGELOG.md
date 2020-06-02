@@ -10,7 +10,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 - Updated index.js to include ProgressStepItem ([#831](https://github.com/powerhome/playbook/pull/831)@christinaatai)
 
-## [4.16.0] 2020-5-28
+### Added
+- Added category colors to table side highlight kit ([#829](https://github.com/powerhome/playbook/pull/829)@christinaatai)
+
+## [4.16.0] 2020-5-29
 
 ### Added
 - Add React Star Rating kit ([#822](https://github.com/powerhome/playbook/pull/822) @kellyeryan)
