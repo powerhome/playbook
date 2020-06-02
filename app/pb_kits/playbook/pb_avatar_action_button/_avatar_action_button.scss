@@ -45,20 +45,18 @@
       }
     
       &[class*=_bottom] .icon {
-          @include icon-base;
-          top: $icon_size * 1.27;
+        @include icon-base;
+        top: $icon_size * 1.27;
       }
       &[class*=_top] .icon {
-          @include icon-base;
-          bottom: $icon_size * 1.27;
+        @include icon-base;
+        bottom: $icon_size * 1.27;
       }
       &[class*=_right] .icon {
-          left: $icon_size * 1.5;
+        left: $icon_size * 1.5;
       }
-      &[class*=_left] {
-        [class^=pb_avatar_kit] {
-          padding-left: $icon_size / 2;
-        }
+      &[class*=_left] [class^=pb_avatar_kit] {
+        padding-left: $icon_size / 2;
       }
     }
   }
