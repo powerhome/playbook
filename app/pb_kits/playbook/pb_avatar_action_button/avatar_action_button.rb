@@ -14,7 +14,7 @@ module Playbook
       prop :name, type: Playbook::Props::String,
                   default: ""
       prop :size, type: Playbook::Props::Enum,
-                  values: %w[xs sm md base lg xl],
+                  values: %w[xs sm md lg xl],
                   default: "md"
       prop :placement, type: Playbook::Props::String,
                        default: "bottom_left"
