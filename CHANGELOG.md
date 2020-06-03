@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### Added
+- Add aria, data, id props to React Contact kit, add aria to Rails Contact kit [#835](https://github.com/powerhome/playbook/pull/835) @kellyeryan)
+
 ## [4.16.0] 2020-5-29
 
 ### Added
@@ -302,7 +305,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [3.2.0] 2019-12-19
 
 ### Added
-
 - Extend Form Kit to use Select Kit for select form fields ([#511][] @web-kat)
 - Text Input padding override was removed for input child ([#526][] @megantrimble)
 - Added exports for border-radius, line-height, opacity, z-index, breakpoints, shadows, and spacing  + updated the correct gradient colors ([#527][] @jasoncypret)
@@ -330,7 +332,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [#517]: https://github.com/powerhome/playbook/pull/517
 
 ### Fixed
-
 - JS kit `MultipleUsers` docs: displays avatar image by renaming `image_url` to `imageUrl` ([#518][] @rafbgarcia)
 - JS kit `User`: displays avatar image by renaming `image_url` to `imageUrl` ([#518][] @rafbgarcia)
 - JS kit `Avatar`: fixed OR condition in `if (avatar == true | avatarUrl != null)` ([#518][] @rafbgarcia)
@@ -345,7 +346,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [#518]: https://github.com/powerhome/playbook/pull/518
 
 ### Deprecated
-
 - JS kit `Table`: deprecate props `disable_hover` and `single_line`, please use their camelcase versions ([#518][] @rafbgarcia)
 
 [#518]: https://github.com/powerhome/playbook/pull/518
@@ -353,7 +353,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [3.1.0] 2019-12-12
 
 ### Added
-
 - Introduce CHANGELOG file ([#498][] @rafbgarcia)
 - Include Card Separator example in Card kit docs ([#439][] @rruiz85)
 - Text Input Dark mode added, Text Input updated to use Textarea mixins and Textarea mixin fix to remove number field arrows ([#494][] @megantrimble)
@@ -369,7 +368,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [#513]: https://github.com/powerhome/playbook/pull/513
 
 ### Changed
-
 - Added an OnChange event handler for the TextArea React Kit ([#505][] @jasperfurniss)
 - Update `pb_release:version` task to include confirmation and versioning info
 
@@ -377,7 +375,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [#509]: https://github.com/powerhome/playbook/pull/509
 
 ### Fixed
-
 - Fixes master branch (regression introduced by myself on #498) ([#500][] @rafbgarcia)
 - Display wrong numbers in Person Contact Kit. The Kit will now display a caption "wrong number" and have the wrong numbers listed beneath the caption ([#499][] @KFad11)
 - Bug Fix - Null class concatenation on Card Kit ([#497][] @jasperfurniss)
@@ -396,7 +393,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [3.0.1] - 2019-12-06
 
 ### Fixed
-
 - Move `eslint` to devDependencies ([#489][] @gmfvpereira)
 
 [#489]: https://github.com/powerhome/playbook/pull/489
@@ -404,7 +400,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [3.0.0] - 2019-12-05
 
 ### Added
-
 - New Form Kit - Select Kit ([#478][] @jasoncypret)
 - New Form Kit - Selectable Card Kit ([#474][] @christinaatai)
 - New React Kit - Section Separator Kit: Added variant & react version ([#480][] @kre8sions)
@@ -429,7 +424,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [#456]: https://github.com/powerhome/playbook/pull/456
 
 ### Changed
-
 - Dark mode for User Kit ([#436][] @evalouderback)
 - Use number with delimiter for stat_value.value ([#479][] @thestephenmarshall)
 - Text Input: Added classname support ([#476][] @kre8sions)
@@ -453,12 +447,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [#462]: https://github.com/powerhome/playbook/pull/462
 
 ### Fixed
-
 - Bug Fix - Form kit dependencies ([#481][] @terryfinn)
 
 [#481]: https://github.com/powerhome/playbook/pull/481
 
 ### Removed (breaking changes)
-
 - React PbLayout prop `children` dropped support for single Node (https://github.com/powerhome/playbook/commit/b16da50914e110c75c6d96c985fa02781c9e2040#diff-c3ce2c91288ca3e730d3c56e7f73475cL11-L14)
 - Rails PbLayout prop `dark` dropped (https://github.com/powerhome/playbook/commit/b16da50914e110c75c6d96c985fa02781c9e2040#diff-377fda563d148f7b3ad33f904b7b0cdbL13)
