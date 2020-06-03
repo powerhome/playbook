@@ -14,11 +14,6 @@ RSpec.describe Playbook::PbCard::Card do
                       .with_default({}) }
 
   it do
-    is_expected.to define_enum_prop(:padding)
-                   .with_default("md")
-                   .with_values("none", "xs", "sm", "md", "lg", "xl")
-  end
-  it do
     is_expected.to define_enum_prop(:shadow)
                    .with_default("none")
                    .with_values("none", "deep", "deeper", "deepest")
@@ -35,7 +30,6 @@ RSpec.describe Playbook::PbCard::Card do
       expect(subject.new(highlight: {position: "side"}).classname).to eq "pb_card_kit_deselected_highlight_side"
       expect(subject.new(highlight: {color: "windows"}).classname).to eq "pb_card_kit_deselected_highlight_windows"
       expect(subject.new(highlight: {color: "error"}).classname).to eq "pb_card_kit_deselected_highlight_error"
-      expect(subject.new(highlight: {color: "error"}, padding: "md").classname).to eq "pb_card_kit_deselected_highlight_error p_md"
       expect(subject.new(highlight: {color: "category_2"}).classname).to eq "pb_card_kit_deselected_highlight_category_2"
 
     end
