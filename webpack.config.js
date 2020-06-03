@@ -4,8 +4,9 @@ const path = require('path')
 module.exports = (env) => {
   return {
     mode: env.development ? 'development' : 'production',
-    entry: ['./app/pb_kits/playbook/index.js', './app/pb_kits/playbook/_playbook.scss'],
+    entry: './app/pb_kits/playbook/index.js',
     output: {
+      libraryTarget: 'commonjs2',
       filename: env.development ? 'playbook.js' : 'playbook.min.js',
       path: path.resolve(__dirname, 'dist'),
     },
@@ -31,7 +32,6 @@ module.exports = (env) => {
         {
           test: /\.scss$/i,
           use: [
-            MiniCssExtractPlugin.loader,
             { loader: 'css-loader' },
             { loader: 'sass-loader' },
           ],
