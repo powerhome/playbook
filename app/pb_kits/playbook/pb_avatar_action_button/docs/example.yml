@@ -6,7 +6,6 @@ examples:
   - avatar_action_button_actions: Actions
   - avatar_action_button_tooltip: Tooltip
   - avatar_action_button_onclick: On Click
-  - avatar_action_button_test: Test Zone
   
   
   react:
