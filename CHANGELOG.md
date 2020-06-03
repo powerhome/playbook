@@ -8,13 +8,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## Unreleased
 
 ### Added
-
 - Added React Avatar Status file; Added id, aria, data props to React Avatar kit ([#830](https://github.com/powerhome/playbook/pull/830) @kellyeryan)
 
 ## [4.16.0] 2020-5-29
 
 ### Added
-
 - Add React Star Rating kit ([#822](https://github.com/powerhome/playbook/pull/822) @kellyeryan)
 - Added legend prop to Bar Graph Kit and Line Graph Kit ([#818](https://github.com/powerhome/playbook/pull/818)@christinaatai)
 - Add React to LabelPill kit ([#813](https://github.com/powerhome/playbook/pull/813) @kellyeryan)
@@ -24,7 +22,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Create Source React Playbook Kit ([#810](https://github.com/powerhome/playbook/pull/810) @kellyeryan)
 
 ### Fixed
-
 - Fix Rails hide_rating feature so that it hides the rating ([#822](https://github.com/powerhome/playbook/pull/822) @kellyeryan)
 - Added aria, data, id props to Text Input kit on both React and Ruby sides.([#812](https://github.com/powerhome/playbook/pull/812)@kellyeryan)
 - Add aria to Ruby LabelPill kit ([#813](https://github.com/powerhome/playbook/pull/813) @kellyeryan)
@@ -33,18 +30,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [4.15.0] 2020-5-22
 
 ### Changed
-
 - Update filter kit (React) ([#796](https://github.com/powerhome/playbook/pull/796) @thestephenmarshall)
 - Updated React version of Layout Kit to use sub-components ([#801](https://github.com/powerhome/playbook/pull/801)@christinaatai)
 
 ### Fixed
-
 - Sync Ruby and React default 'align' values in DateYearStacked ([#794](https://github.com/powerhome/playbook/pull/794) @kellyeryan)
 - Fix stat change to take numbers outside of 0-100 ([#795](https://github.com/powerhome/playbook/pull/795) @kellyeryan)
 - Don't break button when changing loading from true to false ([#800](https://github.com/powerhome/playbook/pull/800)@gmfvpereira)
 
 ### Added
-
 - Added Progress Step Kit([#776](https://github.com/powerhome/playbook/pull/776) @christinaatai)
 - Created TitleDetail React Playbook Kit ([#783](https://github.com/powerhome/playbook/pull/783) @kellyeryan)
 - Created Timestamp React Playbook Kit ([#786](https://github.com/powerhome/playbook/pull/786) @kellyeryan)
@@ -52,7 +46,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Added Work-Cell type to contact kit ([#799](https://github.com/powerhome/playbook/pull/799) @kre8sions)
 
 ## [4.14.0] 2020-5-14
-
 - Upgrade react-popper lib to latest ([#778](https://github.com/powerhome/playbook/pull/778) @thestephenmarshall)
 - Update React version to 16.8.6 ([#777](https://github.com/powerhome/playbook/pull/777) @thestephenmarshall)
 - Added Circle Chart for Rails ([#771](https://github.com/powerhome/playbook/pull/771) @jasperfurniss)
@@ -61,24 +54,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [4.13.1] 2020-4-28
 
 ### Fixed
-
 - Added weekday_stacked scss import back in playbook.scss
 
 ## [4.13.0] 2020-4-24
 
 ### Added
-
 - Added card header prop to Card Kit and added category colors ([#746](https://github.com/powerhome/playbook/pull/746)@christinaatai)
 - New Kits - Time Stacked & Date Time Stacked ([#745](https://github.com/powerhome/playbook/pull/745) @haydenrou)
 - Added table row side highlight prop ([#753](https://github.com/powerhome/playbook/pull/753) @christinaatai)
 
 ### Fixed
-
 - Limit webpacker CPU & memory on local dev ([#749](https://github.com/powerhome/playbook/pull/749) @thestephenmarshall)
 - Milano branded deployment config ([#748](https://github.com/powerhome/playbook/pull/748) @benlangfeld)
 
 ## [4.12.0] 2020-4-17
-
 - New Kit - File Upload Kit ([#730](https://github.com/powerhome/playbook/pull/730) @thestephenmarshall)
   - Make doc tabs intelligently sense whether an example is available for either Rails or React versions of a kit and show accordingly
 - Added vertical section separator variants & dark version ([#729](https://github.com/powerhome/playbook/pull/729)@christinaatai)
@@ -87,7 +76,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Pinned dependencies ([#697](https://github.com/powerhome/playbook/pull/697) @thestephenmarshall)
 
 ## [4.11.0] 2020-4-10
-
 - Added Filter only & Sort only templates to filter kit + React Version ([#702](https://github.com/powerhome/playbook/pull/702)@kre8sions)
 - Add onClick prop to kits in need ([#694](https://github.com/powerhome/playbook/pull/694) @thestephenmarshall)
 - Add Renovate bot ([#492](https://github.com/powerhome/playbook/pull/492) @viniciusgama)
@@ -99,29 +87,24 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Deploy staging/production via Milano rather than Jenkins ([#731](https://github.com/powerhome/playbook/pull/731) @benlangfeld)
 
 ## [4.10.0] 2020-4-2
-
 - Added react and dark version for Label Value Kit ([#688](https://github.com/powerhome/playbook/pull/688) @christinaatai)
 
 ## [4.9.0] 2020-3-27
-
 - Update webpacker to version 4.2.2 ([#679](https://github.com/powerhome/playbook/pull/679) @viniciusgama)
 - Prevent empty pattern attribute on Text Input kit ([#681](https://github.com/powerhome/playbook/pull/681) @thestephenmarshall)
 - Rename roofs to roofing ([#685](https://github.com/powerhome/playbook/pull/685) @stephenagreer)
 - Fixed mobile scaling in PB UI + Table responsive setting improvements + Avatar cropping issues ([686](https://github.com/powerhome/playbook/pull/686) @jasoncypret)
 
 ## [4.8.2] 2020-3-24
-
 - Table js responsive helpers + Added responsive menu + slim cleanup ([#682](https://github.com/powerhome/playbook/pull/682) @jasoncypret)
 - Prevent empty pattern attribute on Text Input kit ([#681](https://github.com/powerhome/playbook/pull/681) @thestephenmarshall)
 
 ### Added
-
 - Added Project kit ([#667](https://github.com/powerhome/playbook/pull/667) @KatherineMuedas)
 
 ## [4.8.0] 2020-3-19
 
 ### Added
-
 - New props for bar & line graph ([#669](https://github.com/powerhome/playbook/pull/669) @kre8sions)
 - Table header alignment changed to left align ([#670](https://github.com/powerhome/playbook/pull/670) @megantrimble)
 - Created ProgressSimple React Playbook Kit ([#665](https://github.com/powerhome/playbook/pull/665) @jasperfurniss)
@@ -130,7 +113,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Added resize option to textarea ([#674](https://github.com/powerhome/playbook/pull/674) @jasoncypret)
 
 ### Fixed
-
 - Allow form field placeholder + select field id ([👹 #666 🤘🐐](https://github.com/powerhome/playbook/pull/666) @thestephenmarshall)
 - Fix line height on currency large ([#668](https://github.com/powerhome/playbook/pull/668) @jasoncypret)
 - Run CI Builds on any available cluster ([#671](https://github.com/powerhome/playbook/pull/671) @benlangfeld)
@@ -138,32 +120,26 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [4.7.0] 2020-3-12
 
 ### Added
-
 - Created Form Pills for rails and react [#625](https://github.com/powerhome/playbook/pull/625)
 
 ### Changed
-
 - Enable popover close on click outside/inside ([#666 👹](https://nitro.powerhrg.com/runway/backlog_items/NUX-666) @thestephenmarshall)
 
 ## [4.6.1] 2020-3-09
 
 ### Fixed
-
 - Fix Filter variants to look for link prop in sort_menu ([#656](https://github.com/powerhome/playbook/pull/656) @kre8sions)
 
 ## [4.6.0] 2020-3-05
 
 ### Added
-
 - Added Filter Rails Kit / Add TitleCount JS ([#638](https://github.com/powerhome/playbook/pull/638) @kre8sions)
 
 ### Changed
-
 - Move popover and typeahead initialize to vendor.js ([#651](https://github.com/powerhome/playbook/pull/651) @thestephenmarshall)
 - Updated FontAwesome to 5.12.1 ([#654](https://github.com/powerhome/playbook/pull/654) @kre8sions)
 
 ### Fixed
-
 - Fix Full Page Samples code display ([#650](https://github.com/powerhome/playbook/pull/650) @jasperfurniss)
 - Update Kit Generator ([#652](https://github.com/powerhome/playbook/pull/652) @thestephenmarshall)
 - Removed Stale Editor Kit ([#646](https://github.com/powerhome/playbook/pull/646) @jasperfurniss)
@@ -172,19 +148,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [4.5.2] 2020-3-03
 
 ### Changed
-
 - Fix Layout Kit SCSS ([#648](https://github.com/powerhome/playbook/pull/648) @thestephenmarshall)
 
 ## [4.5.1] 2020-2-28
 
 ### Changed
-
 - Add PbPopover init back to vendor.js ([#641](https://github.com/powerhome/playbook/pull/641) @thestephenmarshall)
 
 ## [4.5.0] 2020-2-27
 
 ### Changed
-
 - Added loading indicator to Typeahead kit ([#635](https://github.com/powerhome/playbook/pull/635) @web-kat)
 - Add React support to User Badge kit ([#632](https://github.com/powerhome/playbook/pull/632) @eabousaif)
 - Bump nokogiri from 1.10.7 to 1.10.8 ([#636](https://github.com/powerhome/playbook/pull/636) @dependabot)
@@ -192,21 +165,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [4.4.1] 2020-2-21
 
 ### Fixed
-
 - Fixed the `pb_kits` call to always remove code from view (@jasoncypret)
 
 ## [4.4.0] 2020-2-20
 
 ### Added
-
 - Date range stacked Kit [#559](https://github.com/powerhome/playbook/pull/559)
 
 ### Changed
-
 - Adds ability to give context to the Typeahead kit ([#621](https://github.com/powerhome/playbook/pull/621) @terryfinn @web-kat)
 
 ### Fixed
-
 - Correct Popover offset docs [#611](https://github.com/powerhome/playbook/pull/611)
 - Fixed typo of stat change kit in yml file [#629](https://github.com/powerhome/playbook/pull/629)
 
@@ -215,11 +184,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [4.3.0] 2020-2-14
 
 ### Fixed
-
 - Fixed timezone issue on DateStacked ([#592][] @gmfvpereira)
 
 ### Added
-
 - Highlight Kit ([#586](https://github.com/powerhome/playbook/pull/586) @kre8sions)
 - Full Page Examples V1 ([#609](https://github.com/powerhome/playbook/pull/609) @jasperfurniss)
 - Add Appointment type to Hashtag kit ([#599](https://github.com/powerhome/nitro-web/pull/14015) @garettarrowood)
@@ -227,20 +194,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Dev Docs Reformatting ([#605](https://github.com/powerhome/playbook/pull/605) @kre8sions)
 
 ### Changed
-
 - Update rouge gem to latest for JSX support [#602](https://github.com/powerhome/playbook/pull/602)
 - Renamed vanilla JS version of `Popover` to `PbPopover` to help prevent collision [#607](https://github.com/powerhome/playbook/pull/607)
 
 ## [4.2.0] 2020-2-6
 
 ### Added
-
 - Flex Kit ([#493][] @markiearnold @kre8sions)
 
 [#493]: https://github.com/powerhome/playbook/pull/493
 
 ### Changed
-
 - Undo Revert for DevDoc Fix [#588](https://github.com/powerhome/playbook/pull/588)
 - Removed popover from examples.js and used MENU constant in doc helper [#591](https://github.com/powerhome/playbook/pull/591)
 - Fix Form kit data prop merge [#587](https://github.com/powerhome/playbook/pull/587)
@@ -252,32 +216,27 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [4.1.2] 2020-1-30
 
 ### Changed
-
 - Call update method on Popover library to allow block show/hide [577](https://github.com/powerhome/playbook/pull/577/files?file-filters%5B%5D=.erb&file-filters%5B%5D=.js&file-filters%5B%5D=.scss)
 
 ## [4.1.1] 2020-1-29
 
 ### Changed
-
 - Add value prop to Typeahead kit
 
 ## [4.1.0] 2020-1-29
 
 ### Changed
-
 - Update Form kit to allow Typeahead kit with label and name [#574](https://github.com/powerhome/playbook/pull/574)
 
 ## [4.0.1] 2020-1-28
 
 ### Changed
-
 - Remove JSX Popover references [#571](https://github.com/powerhome/playbook/pull/571)
 - Add using prop to be optional in the Currency kit [#572](https://github.com/powerhome/playbook/pull/572) @jasoncypret
 
 ## [4.0.0] 2020-1-25
 
 ### Changed
-
 - Modernize and update API of the Currency kit [#565](https://github.com/powerhome/playbook/pull/565) @drborges
 - Shadow Shallow, Default and Dark Deprecated, shadow_light changed to shadow, all affected files updated. [#568](https://github.com/powerhome/playbook/pull/568) @megantrimble
 - Renamed `pb_chart_plugin.js` to `pb_chart.js`
@@ -285,34 +244,28 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Added `validation` prop and enabled `required` attribute for Text Input kit
 
 ### Added
-
 - Form kit field constraint validation [#567](https://github.com/powerhome/playbook/pull/567) @thestephenmarshall
 - Popover Kit (New Kit - Rails only) [#569](https://github.com/powerhome/playbook/pull/569) @jasperfurniss
 
 ## [3.5.0] 2020-1-16
 
 ### Changed
-
 - Added error state to Text Input, Textarea, Select, Radio & Checkbox kits [#554](https://github.com/powerhome/playbook/pull/554)
 
 ### Added
-
 - Rails/JS kit `HomeAddressStreet`: added home_url prop. Defaults to `"#"` ([#557][https://github.com/powerhome/playbook/pull/557] @stephenagreer)
 - Typeahead kit - new kit added [#547](https://github.com/powerhome/playbook/pull/547)
 
 ## [3.4.0] 2020-1-9
 
 ### Added
-
 - Legend Kit (Complete) [#549](https://github.com/powerhome/playbook/pull/549)
 
 ### Fixed
-
 - Rails/JS Kit `Select`: fixed caret to trigger select menu removed black border on select options ([#548][] @kre8sions)
 - Fixed radio bug in docs ([#546][] @kre8sions)
 
 ### Changed
-
 - Shadow colors and sizes updated. Deprecation notice added. ([#551][] @megantrimble)
 
 [#546]: https://github.com/powerhome/playbook/pull/546
@@ -322,19 +275,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [3.3.0] 2020-1-2
 
 ### Added
-
 - Radio Button Kit ([#516][] @evalouderback)
 - Add className support to React version of icon circle kit ([#537][] @drborges)
 - Rails/JS kit `Checkbox` : can take optional block ([#538][] @kre8sions)
 - Rails/JS kit `TextInput`: added optional blocks to accept custom inputs ([#539][] @kre8sions)
 
 ### Fixed
-
 - JS kit `Caption`: swapped the position of classname in classnames to stop style bleed in other components ([#539][] @kre8sions)
 - Fixed broken eslint ref + removed unused file ([#540][] @jasoncypret)
 
 ### Changed
-
 - Swap implementation of highlight position values for Card Kit ([#536][] @drborges)
 
 [#516]: https://github.com/powerhome/playbook/pull/516
@@ -347,7 +297,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [3.2.0] 2019-12-19
 
 ### Added
-
 - Extend Form Kit to use Select Kit for select form fields ([#511][] @web-kat)
 - Text Input padding override was removed for input child ([#526][] @megantrimble)
 - Added exports for border-radius, line-height, opacity, z-index, breakpoints, shadows, and spacing + updated the correct gradient colors ([#527][] @jasoncypret)
@@ -375,7 +324,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [#517]: https://github.com/powerhome/playbook/pull/517
 
 ### Fixed
-
 - JS kit `MultipleUsers` docs: displays avatar image by renaming `image_url` to `imageUrl` ([#518][] @rafbgarcia)
 - JS kit `User`: displays avatar image by renaming `image_url` to `imageUrl` ([#518][] @rafbgarcia)
 - JS kit `Avatar`: fixed OR condition in `if (avatar == true | avatarUrl != null)` ([#518][] @rafbgarcia)
@@ -390,7 +338,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [#518]: https://github.com/powerhome/playbook/pull/518
 
 ### Deprecated
-
 - JS kit `Table`: deprecate props `disable_hover` and `single_line`, please use their camelcase versions ([#518][] @rafbgarcia)
 
 [#518]: https://github.com/powerhome/playbook/pull/518
@@ -398,7 +345,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [3.1.0] 2019-12-12
 
 ### Added
-
 - Introduce CHANGELOG file ([#498][] @rafbgarcia)
 - Include Card Separator example in Card kit docs ([#439][] @rruiz85)
 - Text Input Dark mode added, Text Input updated to use Textarea mixins and Textarea mixin fix to remove number field arrows ([#494][] @megantrimble)
@@ -414,7 +360,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [#513]: https://github.com/powerhome/playbook/pull/513
 
 ### Changed
-
 - Added an OnChange event handler for the TextArea React Kit ([#505][] @jasperfurniss)
 - Update `pb_release:version` task to include confirmation and versioning info
 
@@ -422,7 +367,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [#509]: https://github.com/powerhome/playbook/pull/509
 
 ### Fixed
-
 - Fixes master branch (regression introduced by myself on #498) ([#500][] @rafbgarcia)
 - Display wrong numbers in Person Contact Kit. The Kit will now display a caption "wrong number" and have the wrong numbers listed beneath the caption ([#499][] @KFad11)
 - Bug Fix - Null class concatenation on Card Kit ([#497][] @jasperfurniss)
@@ -440,7 +384,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [3.0.1] - 2019-12-06
 
 ### Fixed
-
 - Move `eslint` to devDependencies ([#489][] @gmfvpereira)
 
 [#489]: https://github.com/powerhome/playbook/pull/489
@@ -448,7 +391,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [3.0.0] - 2019-12-05
 
 ### Added
-
 - New Form Kit - Select Kit ([#478][] @jasoncypret)
 - New Form Kit - Selectable Card Kit ([#474][] @christinaatai)
 - New React Kit - Section Separator Kit: Added variant & react version ([#480][] @kre8sions)
@@ -473,7 +415,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [#456]: https://github.com/powerhome/playbook/pull/456
 
 ### Changed
-
 - Dark mode for User Kit ([#436][] @evalouderback)
 - Use number with delimiter for stat_value.value ([#479][] @thestephenmarshall)
 - Text Input: Added classname support ([#476][] @kre8sions)
@@ -497,12 +438,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [#462]: https://github.com/powerhome/playbook/pull/462
 
 ### Fixed
-
 - Bug Fix - Form kit dependencies ([#481][] @terryfinn)
 
 [#481]: https://github.com/powerhome/playbook/pull/481
 
 ### Removed (breaking changes)
-
 - React PbLayout prop `children` dropped support for single Node (https://github.com/powerhome/playbook/commit/b16da50914e110c75c6d96c985fa02781c9e2040#diff-c3ce2c91288ca3e730d3c56e7f73475cL11-L14)
 - Rails PbLayout prop `dark` dropped (https://github.com/powerhome/playbook/commit/b16da50914e110c75c6d96c985fa02781c9e2040#diff-377fda563d148f7b3ad33f904b7b0cdbL13)
