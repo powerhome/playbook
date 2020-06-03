@@ -1,6 +1,7 @@
 /* @flow */
 
 import React from 'react'
+import { get } from 'lodash'
 import classnames from 'classnames'
 import { buildCss } from '../utilities/props'
 
@@ -81,14 +82,14 @@ const Card = ({
   const cardChildren = typeof(children) === 'object' && children.length ? children : [children]
 
   const subComponentTags = (tagName) => {
-    return cardChildren.filter((c) => {
-      return c.type && c.type.displayName === tagName
-    }).map((child, i) => {
+    return cardChildren.filter((c) => (
+      get(c, 'type.displayName') === tagName
+    )).map((child, i) => {
       return React.cloneElement(child, { key: `${tagName.toLowerCase()}-${i}` })
     })
   }
 
-  const nonHeaderChildren = cardChildren.filter((child) => !child.type || child.type.displayName !== 'Header')
+  const nonHeaderChildren = cardChildren.filter((child) => (get(child, 'type.displayName') !== 'Header'))
 
   return (
     <div className={classnames(cardCss, className)}>
