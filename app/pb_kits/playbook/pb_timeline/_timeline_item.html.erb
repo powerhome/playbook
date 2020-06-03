@@ -1,0 +1,27 @@
+<%= content_tag(:div,
+  id: object.id,
+  data: object.data,
+  class: object.classname) do %>
+  
+  <div class="pb_timeline_item_wrapper">
+    <div class="pb_timeline_item_connector_first"></div>
+    <div class="pb_timeline_item_step_wrapper">
+      <div class="pb_timeline_item_step">
+        <div class="pb_timeline_item_step_connector_first"></div>
+        <div class="pb_timeline_item_step_circle">
+          <%= pb_rails("icon_circle", props: {
+            icon: object.icon,
+            variant: "royal",
+            size: "sm"
+          }) %>
+        </div>
+        <div class="pb_timeline_item_step_connector_second"></div>
+      </div>
+      <div>
+        <%= capture(&object.children) %>
+      </div>
+    </div>
+    <div class="pb_timeline_item_connector_second"></div>
+  </div>
+
+<% end %>
