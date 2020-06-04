@@ -8,9 +8,6 @@ module Playbook
       partial "pb_card/card"
 
       prop :selected, type: Playbook::Props::Boolean, default: false
-      # prop :padding, type: Playbook::Props::Enum,
-      #                values: %w[none xs sm md lg xl],
-      #                default: "none"
       prop :shadow, type: Playbook::Props::Enum,
                     values: %w[none deep deeper deepest],
                     default: "none"

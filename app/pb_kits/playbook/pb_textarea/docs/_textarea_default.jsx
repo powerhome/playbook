@@ -6,7 +6,6 @@ const TextareaDefault = () => {
     <div>
       <Textarea
           label="Label"
-          padding="xl"
           rows={4}
       />
 
