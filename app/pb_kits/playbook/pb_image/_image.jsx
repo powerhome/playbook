@@ -14,7 +14,7 @@ const Image = ({
   <img
       alt={alt}
       className="pb_image lazyload blur_up"
-      src={url}
+      data-src={url}
   />
 )
 
