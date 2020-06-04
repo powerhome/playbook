@@ -17,8 +17,9 @@ RSpec.describe Playbook::PbAvatarActionButton::AvatarActionButton do
   it { is_expected.to define_enum_prop(:size)
                   .with_default("md")
                   .with_values("xs", "sm", "md", "lg", "xl") }
-  it { is_expected.to define_prop(:placement)
-                  .with_default("bottom_left") }
+  it { is_expected.to define_enum_prop(:placement)
+                  .with_default("bottom_left")
+                  .with_values("bottom_left", "bottom_right", "top_left", "top_right") }
   describe "#classname" do
     it "returns namespaced class name", :aggregate_failures do
       expect(subject.new({}).classname).to eq "pb_avatar_action_button_kit_add_md_bottom_left"

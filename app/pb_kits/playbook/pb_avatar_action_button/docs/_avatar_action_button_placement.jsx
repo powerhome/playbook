@@ -6,22 +6,22 @@ const AvatarActionButtonPlacement = () => (
     <AvatarActionButton
         imageUrl="https://upload.wikimedia.org/wikipedia/commons/8/88/Danny_DeVito_cropped_and_edited_for_brightness.jpg"
         name="Danny Devito"
-        placement="bottom left"
+        placement="bottom_left"
     />
     <AvatarActionButton
         imageUrl="https://upload.wikimedia.org/wikipedia/commons/8/88/Danny_DeVito_cropped_and_edited_for_brightness.jpg"
         name="Danny Devito"
-        placement="bottom right"
+        placement="bottom_right"
     />
     <AvatarActionButton
         imageUrl="https://upload.wikimedia.org/wikipedia/commons/8/88/Danny_DeVito_cropped_and_edited_for_brightness.jpg"
         name="Danny Devito"
-        placement="top left"
+        placement="top_left"
     />
     <AvatarActionButton
         imageUrl="https://upload.wikimedia.org/wikipedia/commons/8/88/Danny_DeVito_cropped_and_edited_for_brightness.jpg"
         name="Danny Devito"
-        placement="top right"
+        placement="top_right"
     />
   </div>
 )

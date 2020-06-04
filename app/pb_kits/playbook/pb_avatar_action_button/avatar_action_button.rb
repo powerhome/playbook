@@ -16,7 +16,8 @@ module Playbook
       prop :size, type: Playbook::Props::Enum,
                   values: %w[xs sm md lg xl],
                   default: "md"
-      prop :placement, type: Playbook::Props::String,
+      prop :placement, type: Playbook::Props::Enum,
+                       values: %w[bottom_left bottom_right top_left top_right],
                        default: "bottom_left"
 
       partial "pb_avatar_action_button/avatar_action_button"
