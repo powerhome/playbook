@@ -10,6 +10,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - Added list kit layout docs ([#828](https://github.com/powerhome/playbook/pull/828) @kre8sions)
 
+### Fixed
+- Updated index.js to include ProgressStepItem ([#831](https://github.com/powerhome/playbook/pull/831)@christinaatai)
+
 ## [4.16.0] 2020-5-29
 
 ### Added
