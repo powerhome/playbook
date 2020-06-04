@@ -1,4 +1,5 @@
 import './_playbook.scss'
+import 'lazysizes'
 
 // React Component JSX Imports from the React Kits
 export Avatar from './pb_avatar/_avatar.jsx'
