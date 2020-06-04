@@ -59,6 +59,8 @@ namespace :pb_release do
     `rm -rf playbook_ui-#{version}.gem`
 
     # NPM
+    puts "\nCreating 'dist/' folder with release files..."
+    `yarn release`
     puts "\nPushing to NPM..."
     `npm publish`
 
