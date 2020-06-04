@@ -10,7 +10,7 @@ RSpec.describe Playbook::PbCard::CardBody do
 
   describe "#classname" do
     it "returns namespaced class name", :aggregate_failures do
-      expect(subject.new({}).classname).to eq "pb_card_body_kit_md"
+      expect(subject.new({}).classname).to eq "pb_card_body_kit p_md"
       expect(subject.new(classname: "additional_class").classname).to eq "pb_card_body_kit_md additional_class"
     end
   end

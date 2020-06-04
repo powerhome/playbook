@@ -45,7 +45,7 @@ const Header = (props: CardHeaderProps) => {
 const Body = (props: CardBodyProps) => {
   const { children, className } = props
   const bodyCSS = buildCss('pb_card_body_kit')
-  const bodySpacing = spacing(props) ? spacing(props) : 'p_sm'
+  const bodySpacing = spacing(props) ? spacing(props) : 'p_md'
   return (
     <div className={classnames(bodyCSS, className, bodySpacing)}>
       {children}
@@ -93,9 +93,11 @@ const Card = (props: CardPropTypes) => {
   )
 
   return (
-    <div className={classnames(cardCss, className, cardSpacing)}>
+    <div className={classnames(cardCss, className)}>
       {subComponentTags('Header')}
-      <div className={bodyCSS}>{nonHeaderChildren}</div>
+      <div className={classnames(bodyCSS, cardSpacing)}>
+        {nonHeaderChildren}
+      </div>
     </div>
   )
 }
