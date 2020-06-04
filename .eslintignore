@@ -1,3 +1,5 @@
 node_modules/**
 fonts/**
 public
+dist
+app/pb_kits/playbook/packs
