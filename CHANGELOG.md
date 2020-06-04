@@ -10,7 +10,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - Add aria, id, data props to React Currency kit, add aria props to Rails Currency kit ([#838](https://github.com/powerhome/playbook/pull/838) @kellyeryan)
 
-## [4.16.0] 2020-5-29
+### Fixed
+- Updated index.js to include ProgressStepItem ([#831](https://github.com/powerhome/playbook/pull/831)@christinaatai)
+
+## [4.16.0] 2020-5-28
 
 ### Added
 - Add React Star Rating kit ([#822](https://github.com/powerhome/playbook/pull/822) @kellyeryan)
