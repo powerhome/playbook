@@ -10,18 +10,6 @@ module.exports = (env) => {
       filename: env.development ? 'playbook.js' : 'playbook.min.js',
       path: path.resolve(__dirname, 'dist'),
     },
-    optimization: {
-      splitChunks: {
-        cacheGroups: {
-          styles: {
-            name: 'styles',
-            test: /\.css$/,
-            chunks: 'all',
-            enforce: true,
-          },
-        },
-      },
-    },
     plugins: [
       new MiniCssExtractPlugin({
         filename: env.development ? 'playbook.css' : 'playbook.min.css',
@@ -32,13 +20,10 @@ module.exports = (env) => {
         {
           test: /\.scss$/i,
           use: [
+            MiniCssExtractPlugin.loader,
             { loader: 'css-loader' },
             { loader: 'sass-loader' },
           ],
-        },
-        {
-          test: /\.css$/,
-          use: [MiniCssExtractPlugin.loader, 'css-loader'],
         },
         {
           test: /\.(js|jsx|mjs)$/,
