@@ -1,19 +1,23 @@
 /* @flow */
 
 import React from 'react'
+import classnames from 'classnames'
 
 import { Body, Caption, Title } from '../'
-import { buildCss } from '../utilities/props'
+import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
 
 type CurrencyProps = {
-  align?: 'left' | 'center' | 'right',
-  amount: string,
-  unit: string,
-  className?: string,
-  label?: string,
+  align?: 'center' | 'left' | 'right',
+  amount: String,
+  aria?: object,
+  className?: String,
+  dark?: Boolean,
+  data?: object,
+  id?: String,
+  label?: String,
   size?: 'sm' | 'md' | 'lg',
-  symbol?: string,
-  dark?: boolean,
+  symbol?: String,
+  unit?: String,
 }
 
 const sizes = {
@@ -25,17 +29,28 @@ const sizes = {
 const Currency = ({
   align = 'left',
   amount,
-  unit,
+  aria = {},
   className,
-  label = '',
-  size = 'sm',
-  symbol = '$',
   dark = false,
+  data = {},
+  id,
+  label = '',
+  size = 'md',
+  symbol = '$',
+  unit,
 }: CurrencyProps) => {
   const [whole, decimal = '00'] = amount.split('.')
+  const ariaProps = buildAriaProps(aria)
+  const dataProps = buildDataProps(data)
+  const classes = classnames(buildCss('pb_currency_kit', align, size, { dark: dark }), className)
 
   return (
-    <div className={buildCss('pb_currency_kit', align, className, { dark: dark }, size)}>
+    <div
+        {...ariaProps}
+        {...dataProps}
+        className={classes}
+        id={id}
+    >
       <Caption>{label}</Caption>
 
       <div className="pb_currency_wrapper">
