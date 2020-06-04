@@ -4,9 +4,9 @@ import { AvatarActionButton } from '../../'
 const AvatarActionButtonOnClick = () => (
   <div className="pb--doc-demo-row">
     <AvatarActionButton
-        imageUrl="https://upload.wikimedia.org/wikipedia/commons/8/88/Danny_DeVito_cropped_and_edited_for_brightness.jpg"
+        imageUrl="https://randomuser.me/api/portraits/women/8.jpg"
         linkUrl="https://www.google.com"
-        name="Danny Devito"
+        name="Sophia Carden"
         onClick={() => alert('clicked!')}
     />
   </div>
