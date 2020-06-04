@@ -2,7 +2,7 @@
   "name": "playbook-ui",
   "version": "5.1.0",
   "description": "Nitro's Design System",
-  "main": "./app/pb_kits/playbook/index.js",
+  "main": "./dist/playbook.js",
   "scripts": {
     "build": "./bin/webpack --profile --progress --max_old_space_size=8192",
     "flow": "flow",
@@ -96,5 +96,6 @@
     "hooks": {
       "pre-commit": "lint-staged"
     }
-  }
+  },
+  "files": ["dist/*"]
 }
