@@ -39,6 +39,9 @@ namespace :pb_release do
       puts "Updated Gemfile.lock"
       puts "\n\n"
 
+      puts "\nCreating dist files"
+      `yarn release`
+
       puts "Commit your changes and create a PR to merge to master"
     end
   end
@@ -59,8 +62,6 @@ namespace :pb_release do
     `rm -rf playbook_ui-#{version}.gem`
 
     # NPM
-    puts "\nCreating 'dist/' folder with release files..."
-    `yarn release`
     puts "\nPushing to NPM..."
     `npm publish`
 
