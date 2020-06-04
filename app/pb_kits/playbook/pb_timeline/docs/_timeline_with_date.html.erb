@@ -1,0 +1,44 @@
+<%= pb_rails("timeline", props: {orientation: "horizontal"}) do %>
+    <%= pb_rails("timeline/timeline_item", props: {icon: "user", icon_color: "royal", line_style: "solid", date: Date.new(2018, 03, 20) }) do %>
+        <%= pb_rails("title_detail", props: {
+            title: "Jackson Heights",
+            detail: "37-27 74th Street"
+        }) %>
+    <% end %>
+    <%= pb_rails("timeline/timeline_item", props: {icon: "check", icon_color: "teal", date: Date.new(2018, 03, 21), line_style: "dotted" }) do %>
+        <%= pb_rails("title_detail", props: {
+            title: "Greenpoint",
+            detail: "81 Gate St Brooklyn"
+        }) %>
+    <% end %>
+    <%= pb_rails("timeline/timeline_item", props: {icon: "map-marker-alt", icon_color: "purple", date: Date.new(2018, 03, 22) }) do %>
+        <%= pb_rails("title_detail", props: {
+            title: "Society Hill",
+            detail: "72 E St Astoria"
+        }) %>
+    <% end %>
+<% end %>
+
+<br /><br /><br />
+
+<%= pb_rails("timeline", props: {orientation: "vertical"}) do %>
+    <%= pb_rails("timeline/timeline_item", props: {icon: "user", icon_color: "royal", line_style: "solid", date: Date.new(2018, 03, 20) }) do %>
+        <%= pb_rails("title_detail", props: {
+            title: "Jackson Heights",
+            detail: "37-27 74th Street"
+        }) %>
+    <% end %>
+    <%= pb_rails("timeline/timeline_item", props: {icon: "check", icon_color: "teal", date: Date.new(2018, 03, 21), line_style: "dotted" }) do %>
+        <%= pb_rails("title_detail", props: {
+            title: "Greenpoint",
+            detail: "81 Gate St Brooklyn"
+        }) %>
+    <% end %>
+    <%= pb_rails("timeline/timeline_item", props: {icon: "map-marker-alt", icon_color: "purple", date: Date.new(2018, 03, 22) }) do %>
+        <%= pb_rails("title_detail", props: {
+            title: "Society Hill",
+            detail: "72 E St Astoria"
+        }) %>
+    <% end %>
+<% end %>
+

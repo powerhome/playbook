@@ -1,27 +1,45 @@
 import React from 'react'
 import Timeline from '../_timeline.jsx'
 import TimelineItem from '../_timeline_item.jsx'
-import { TitleDetail } from '../../'
+import { Body, TitleDetail } from '../../'
 
-const TimelineDefault = () => (
+const TimelineVertical = () => (
   <div>
-    <Timeline>
+    <Timeline orientation="vertical">
       <TimelineItem
           icon="user"
           iconColor="royal"
       >
-        <TitleDetail
-            detail="37-27 74th Street"
-            title="Jackson heights"
+        <Body
+            color="light"
+            text="Conversation started"
         />
       </TimelineItem>
       <TimelineItem
           icon="check"
           iconColor="teal"
       >
-        <TitleDetail
-            detail="81 Gate St Brooklyn"
-            title="Greenpoint"
+        <Body
+            color="light"
+            text="Trip #12422"
+        />
+      </TimelineItem>
+      <TimelineItem
+          icon="credit-card"
+          iconColor="red"
+      >
+        <Body
+            color="light"
+            text="Refund issue #12422"
+        />
+      </TimelineItem>
+      <TimelineItem
+          icon="smile"
+          iconColor="green"
+      >
+        <Body
+            color="light"
+            text="Conversation resolved"
         />
       </TimelineItem>
     </Timeline>
@@ -29,7 +47,7 @@ const TimelineDefault = () => (
     <br />
     <br />
 
-    <Timeline>
+    <Timeline orientation="vertical">
       <TimelineItem
           icon="user"
           iconColor="royal"
@@ -53,4 +71,4 @@ const TimelineDefault = () => (
   </div>
 )
 
-export default TimelineDefault
+export default TimelineVertical

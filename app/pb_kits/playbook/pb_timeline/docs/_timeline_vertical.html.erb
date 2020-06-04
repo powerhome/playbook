@@ -1,0 +1,43 @@
+<%= pb_rails("timeline", props: {orientation: "vertical"}) do %>
+    <%= pb_rails("timeline/timeline_item", props: {icon: "user", icon_color: "royal"}) do %>
+        <%= pb_rails("body", props: {
+            text: "Conversation started",
+            color: "light"
+        }) %>
+    <% end %>
+    <%= pb_rails("timeline/timeline_item", props: {icon: "check", icon_color: "teal"}) do %>
+        <%= pb_rails("body", props: {
+            text: "Trip #12422",
+            color: "light"
+        }) %>
+    <% end %>
+    <%= pb_rails("timeline/timeline_item", props: {icon: "credit-card", icon_color: "red"}) do %>
+        <%= pb_rails("body", props: {
+            text: "Refund issue #12422",
+            color: "light"
+        }) %>
+    <% end %>
+    <%= pb_rails("timeline/timeline_item", props: {icon: "smile", icon_color: "green"}) do %>
+        <%= pb_rails("body", props: {
+            text: "Conversation resolved",
+            color: "light"
+    }) %>
+    <% end %>
+<% end %>
+
+<br /><br />
+
+<%= pb_rails("timeline", props: {orientation: "vertical"}) do %>
+    <%= pb_rails("timeline/timeline_item", props: {icon: "user", icon_color: "royal", line_style: "dotted"}) do %>
+        <%= pb_rails("title_detail", props: {
+            title: "Jackson Heights",
+            detail: "37-27 74th Street"
+        }) %>
+    <% end %>
+    <%= pb_rails("timeline/timeline_item", props: {icon: "check", icon_color: "teal" }) do %>
+        <%= pb_rails("title_detail", props: {
+            title: "Greenpoint",
+            detail: "81 Gate St Brooklyn"
+        }) %>
+    <% end %>
+<% end %>

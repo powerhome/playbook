@@ -3,25 +3,27 @@
   data: object.data,
   class: object.classname) do %>
   
-  <div class="pb_timeline_item_wrapper">
-    <div class="pb_timeline_item_connector_first"></div>
-    <div class="pb_timeline_item_step_wrapper">
-      <div class="pb_timeline_item_step">
-        <div class="pb_timeline_item_step_connector_first"></div>
-        <div class="pb_timeline_item_step_circle">
-          <%= pb_rails("icon_circle", props: {
-            icon: object.icon,
-            variant: "royal",
-            size: "sm"
-          }) %>
-        </div>
-        <div class="pb_timeline_item_step_connector_second"></div>
-      </div>
-      <div>
-        <%= capture(&object.children) %>
-      </div>
+
+  <% if object.date.present? %>
+    <div class="pb_timeline_item_left_block">
+      <%= pb_rails("date_stacked", props: { 
+        date: object.date, 
+        size: "sm",
+        align: "left"
+      }) %>
     </div>
-    <div class="pb_timeline_item_connector_second"></div>
+  <% end %>
+
+  <div class="pb_timeline_item_step">
+    <%= pb_rails("icon_circle", props: {
+    icon: object.icon,
+    variant: object.icon_color,
+    size: "xs"
+  }) %> 
+    <div class="pb_timeline_item_connector"></div>
+  </div>
+  <div class="pb_timeline_item_right_block">
+    <%= capture(&object.children) %>
   </div>
 
 <% end %>

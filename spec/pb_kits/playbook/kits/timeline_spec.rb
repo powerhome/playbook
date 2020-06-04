@@ -6,6 +6,16 @@ RSpec.describe Playbook::PbTimeline::Timeline do
   subject { Playbook::PbTimeline::Timeline }
 
   it { is_expected.to define_partial }
+  it { is_expected.to define_enum_prop(:orientation)
+                      .with_default("horizontal")
+                      .with_values("vertical", "horizontal") }
 
-  # Do not leave this file blank. Use other spec files for example tests.
+  describe "#classname" do
+    it "returns namespaced class name", :aggregate_failures do
+      expect(subject.new({}).classname).to eq "pb_timeline_kit_horizontal"
+      expect(subject.new(orientation: "horizontal").classname).to eq "pb_timeline_kit_horizontal"
+      expect(subject.new(orientation: "vertical").classname).to eq "pb_timeline_kit_vertical"
+
+    end
+  end
 end

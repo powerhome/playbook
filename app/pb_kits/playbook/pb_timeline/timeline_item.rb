@@ -2,21 +2,23 @@
 
 module Playbook
   module PbTimeline
-    class Timeline
+    class TimelineItem
       include Playbook::Props
 
-      partial "pb_timeline/timeline"
+      partial "pb_timeline/timeline_item"
 
-      prop :status, type: Playbook::Props::Enum,
-                    values: %w[complete active inactive],
-                    default: "inactive"
+      prop :date
       prop :icon, required: true
       prop :icon_color, type: Playbook::Props::Enum,
                         values: %w[default royal blue purple teal red yellow green],
                         default: "default"
+      prop :line_style, type: Playbook::Props::Enum,
+                        values: %w[solid dotted],
+                        default: "solid"
 
       def classname
-        generate_classname("pb_progress_step_kit", orientation, dark_class)
+        generate_classname("pb_timeline_item_kit", line_style)
       end
+    end
   end
 end

@@ -1,1 +1,31 @@
-<%= pb_rails("timeline") %>
+<%= pb_rails("timeline", props: {orientation: "horizontal"}) do %>
+    <%= pb_rails("timeline/timeline_item", props: {icon: "user", icon_color: "royal", line_style: "solid" }) do %>
+        <%= pb_rails("title_detail", props: {
+            title: "Jackson Heights",
+            detail: "37-27 74th Street"
+        }) %>
+    <% end %>
+    <%= pb_rails("timeline/timeline_item", props: {icon: "check", icon_color: "teal", line_style: "solid" }) do %>
+        <%= pb_rails("title_detail", props: {
+            title: "Greenpoint",
+            detail: "81 Gate St Brooklyn"
+        }) %>
+    <% end %>
+<% end %>
+
+<br /><br />
+
+<%= pb_rails("timeline", props: {orientation: "horizontal"}) do %>
+    <%= pb_rails("timeline/timeline_item", props: {icon: "user", icon_color: "royal", line_style: "dotted"  }) do %>
+        <%= pb_rails("title_detail", props: {
+            title: "Jackson Heights",
+            detail: "37-27 74th Street"
+        }) %>
+    <% end %>
+    <%= pb_rails("timeline/timeline_item", props: {icon: "check", icon_color: "teal" }) do %>
+        <%= pb_rails("title_detail", props: {
+            title: "Greenpoint",
+            detail: "81 Gate St Brooklyn"
+        }) %>
+    <% end %>
+<% end %>
