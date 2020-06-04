@@ -9,6 +9,12 @@ Playbook is the first design system built for both Rails & React interfaces. Ins
 
 ## Getting started
 
+1. `$ npm install playbook-ui`
+1. Import styles `@import '~playbook-ui/dist/playbook.css';`
+
+
+## Contribute
+
 1. Run `yarn && bundle`
 1. Run `make start`
 1. Install overcommit hooks `bin/overcommit`
