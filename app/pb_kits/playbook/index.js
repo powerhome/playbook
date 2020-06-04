@@ -1,4 +1,5 @@
 import './_playbook.scss'
+import 'lazysizes/plugins/attrchange/ls.attrchange'
 import 'lazysizes'
 
 // React Component JSX Imports from the React Kits
