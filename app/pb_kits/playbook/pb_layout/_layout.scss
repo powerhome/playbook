@@ -4,80 +4,91 @@
 @import "./layout_mixin";
 
 [class^=pb_layout_kit] {
-  $layout_sizes: (
-    "xs":   64px,
-    "sm":   200px,
-    "md":   250px,
-    "lg":   300px,
-    "xl":   365px,
-  );
-  $positions: (
-    "left",
-    "right",
-  );
-  $colors: (
-    "light",
-    "dark",
-    "gradient",
-    "transparent",
-  );
-
-  // Sections
-  &[class*=_section] {
-    padding: $space_sm $space_xl;
-    &[class*=_border] {
-      padding: $space_sm $space_xl;
-      border-bottom: 1px solid $border_light;
-      &[class*=_margin] {
-        margin: $space_sm $space_xl;
-        border-bottom: 1px solid $border_light;
-      }
+  
+  &[class*=_collection]{
+    div.layout_body{
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-template-rows: 1fr;
+      grid-column-gap: $space_sm;
+      grid-row-gap: $space_sm;
     }
   }
+  &[class*=_sidebar]{
+    $layout_sizes: (
+      "xs":   64px,
+      "sm":   200px,
+      "md":   250px,
+      "lg":   300px,
+      "xl":   365px,
+    );
+    $positions: (
+      "left",
+      "right",
+    );
+    $colors: (
+      "light",
+      "dark",
+      "gradient",
+      "transparent",
+    );
 
-  // sidebar and Body
-  @each $name, $size in $layout_sizes {
-    &[class*=_size_#{$name}] {
-      @each $position in $positions {
-        &[class*=_#{$position}] {
-          @each $color in $colors {
-            &[class*=_#{$color}] {
-              @include layout_settings($size, $position, $color, "#{&}");
+    // Sections
+    &[class*=_section] {
+      padding: $space_sm $space_xl;
+      &[class*=_border] {
+        padding: $space_sm $space_xl;
+        border-bottom: 1px solid $border_light;
+        &[class*=_margin] {
+          margin: $space_sm $space_xl;
+          border-bottom: 1px solid $border_light;
+        }
+      }
+    }
+
+    // sidebar and Body
+    @each $name, $size in $layout_sizes {
+      &[class*=_size_#{$name}] {
+        @each $position in $positions {
+          &[class*=_#{$position}] {
+            @each $color in $colors {
+              &[class*=_#{$color}] {
+                @include layout_settings($size, $position, $color, "#{&}");
+              }
+            }
+          }
+        }
+      }
+    }
+
+
+    // Collapse Settings
+    @each $position in $positions {
+      @each $breakpoint_name, $breakpoint in $breakpoints {
+        &_#{$position}_collapse_#{$breakpoint_name} {
+          @include break_at($breakpoint) {
+            @if $position == 'left' {
+              grid-template-areas: "layout_collapsed_#{$breakpoint_name}_sidebar" "layout_collapsed_#{$breakpoint_name}_body";
+              grid-template-rows: auto 1fr;
+
+            } @else {
+              grid-template-areas: "layout_collapsed_#{$breakpoint_name}_body" "layout_collapsed_#{$breakpoint_name}_sidebar";
+              grid-template-rows: 1fr auto;
+            }
+            grid-template-columns: 1fr;
+            &.full {
+              min-height: auto !important;
+            }
+            .layout_sidebar {
+              grid-area: "layout_collapsed_#{$breakpoint_name}_sidebar";
+              border-width: 0 0 1px 0;
+            }
+            .layout_body {
+              grid-area: "layout_collapsed_#{$breakpoint_name}_body";
             }
           }
         }
       }
     }
   }
-
-
-  // Collapse Settings
-  @each $position in $positions {
-    @each $breakpoint_name, $breakpoint in $breakpoints {
-      &_#{$position}_collapse_#{$breakpoint_name} {
-        @include break_at($breakpoint) {
-          @if $position == 'left' {
-            grid-template-areas: "layout_collapsed_#{$breakpoint_name}_sidebar" "layout_collapsed_#{$breakpoint_name}_body";
-            grid-template-rows: auto 1fr;
-
-          } @else {
-            grid-template-areas: "layout_collapsed_#{$breakpoint_name}_body" "layout_collapsed_#{$breakpoint_name}_sidebar";
-            grid-template-rows: 1fr auto;
-          }
-          grid-template-columns: 1fr;
-          &.full {
-            min-height: auto !important;
-          }
-          .layout_sidebar {
-            grid-area: "layout_collapsed_#{$breakpoint_name}_sidebar";
-            border-width: 0 0 1px 0;
-          }
-          .layout_body {
-            grid-area: "layout_collapsed_#{$breakpoint_name}_body";
-          }
-        }
-      }
-    }
-  }
-
 }
