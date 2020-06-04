@@ -19,7 +19,8 @@ type LayoutPropTypes = {
   position?: 'left' | 'right',
   size?: 'xs' | 'sm' | 'md' | 'base' | 'lg' | 'xl',
   variant?: 'light' | 'dark' | 'gradient',
-  transparent?: Boolean
+  transparent?: Boolean,
+  layout?: 'sidebar' | 'collection',
 }
 
 type LayoutSideProps = {
@@ -67,12 +68,13 @@ const Layout = ({
   full = false,
   position = 'left',
   size = 'md',
+  layout = 'sidebar',
   variant = 'light',
   transparent = false,
 }: LayoutPropTypes) => {
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
-  const layoutCss = buildCss('pb_layout_kit', `size_${size}`, position, variant, {
+  const layoutCss = buildCss(`pb_layout_kit_${layout}`, `size_${size}`, position, variant, {
     'dark': dark,
     'transparent': transparent,
     'full': full,

@@ -4,15 +4,23 @@
 @import "./layout_mixin";
 
 [class^=pb_layout_kit] {
-  
+
   &[class*=_collection]{
     div.layout_body{
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
       grid-template-rows: 1fr;
       grid-column-gap: $space_sm;
       grid-row-gap: $space_sm;
+      grid-template-columns: repeat(4, 1fr);
+      
+      @media screen and (max-width: $screen-md-min) {
+        grid-template-columns: repeat(2, 1fr);
+      }
+       @media screen and (max-width: $screen-xs-min) {
+        grid-template-columns: repeat(1, 1fr);
+      }
     }
+  
   }
   &[class*=_sidebar]{
     $layout_sizes: (
