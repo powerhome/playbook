@@ -33,10 +33,21 @@ module Playbook
       self.class.props[name].value values[name]
     end
 
+    def spacing_props
+      selected_props = spacing_options.keys.select { |sk| try(sk) }
+      return nil unless selected_props.present?
+
+      selected_props.map do |k|
+        spacing_value = send(k)
+        "#{spacing_options[k]}_#{spacing_value}" if spacing_values.include? spacing_value
+      end.compact.join(" ")
+    end
+
     def generate_classname(*name_parts, separator: "_")
       [
         name_parts.compact.join(separator),
         prop(:classname),
+        spacing_props,
       ].compact.join(" ")
     end
 
@@ -49,6 +60,43 @@ module Playbook
       prop :classname
       prop :aria, type: Playbook::Props::Hash, default: {}
       prop :children, type: Playbook::Props::Proc
+      prop :margin
+      prop :margin_bottom
+      prop :margin_left
+      prop :margin_right
+      prop :margin_top
+      prop :margin_x
+      prop :margin_y
+      prop :padding
+      prop :padding_bottom
+      prop :padding_left
+      prop :padding_right
+      prop :padding_top
+      prop :padding_x
+      prop :padding_y
+    end
+
+    def spacing_options
+      {
+        margin: "m",
+        margin_bottom: "mb",
+        margin_left: "ml",
+        margin_right: "mr",
+        margin_top: "mt",
+        margin_x: "mx",
+        margin_y: "my",
+        padding: "p",
+        padding_bottom: "pb",
+        padding_left: "pl",
+        padding_right: "pr",
+        padding_top: "pt",
+        padding_x: "px",
+        padding_y: "py",
+      }
+    end
+
+    def spacing_values
+      %w[none xs sm md lg xl]
     end
 
     class_methods do

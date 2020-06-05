@@ -1,10 +1,8 @@
 /* @flow */
 import React from 'react'
 import classnames from 'classnames'
-import {
-  Body,
-  Caption,
-} from '../'
+import { Body, Caption } from '../'
+import { spacing } from '../utilities/spacing.js'
 
 import {
   buildAriaProps,
@@ -62,7 +60,7 @@ const TextInput = ({
           dark={dark}
           text={label}
       />
-      <div className="text_input_wrapper">
+      <div className={classnames('text_input_wrapper', spacing(props))}>
         <If condition={children}>
           {children}
           <Else />

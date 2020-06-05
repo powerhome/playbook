@@ -2,6 +2,7 @@
 
 import React from 'react'
 import classnames from 'classnames'
+import { spacing } from '../utilities/spacing.js'
 
 import { Contact, Person } from '../'
 
@@ -19,26 +20,25 @@ type PersonContactProps = {
   contacts?: Array<ContactItem>,
 }
 
-const PersonContact = ({
-  className,
-  firstName,
-  lastName,
-  contacts,
-}: PersonContactProps) => (
-  <div className={classnames('pb_person_contact_kit', className)}>
-    <Person
-        firstName={firstName}
-        lastName={lastName}
-    />
-    {contacts.map((contactObject, index) => (
-      <Contact
-          contactDetail={contactObject.contactDetail}
-          contactType={contactObject.contactType}
-          contactValue={contactObject.contactValue}
-          key={index}
+const PersonContact = (props: PersonContactProps) => {
+  const { className, firstName, lastName, contacts } = props
+
+  return (
+    <div className={classnames('pb_person_contact_kit', className, spacing(props))}>
+      <Person
+          firstName={firstName}
+          lastName={lastName}
       />
-    ))}
-  </div>
-)
+      {contacts.map((contactObject, index) => (
+        <Contact
+            contactDetail={contactObject.contactDetail}
+            contactType={contactObject.contactType}
+            contactValue={contactObject.contactValue}
+            key={index}
+        />
+      ))}
+    </div>
+  )
+}
 
 export default PersonContact

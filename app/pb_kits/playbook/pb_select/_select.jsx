@@ -1,7 +1,7 @@
 /* @flow */
 
 import React from 'react'
-
+import classnames from 'classnames'
 import {
   Body,
   Caption,
@@ -13,6 +13,8 @@ import {
   buildCss,
   buildDataProps,
 } from '../utilities/props'
+
+import { spacing } from '../utilities/spacing.js'
 
 import type { InputCallback } from '../types'
 
@@ -70,7 +72,7 @@ const Select = ({
   ...props
 }: SelectProps) => {
   const errorClass = error ? ' error' : ''
-  const css = buildCss('pb_select', { dark }) + errorClass
+  const css = classnames(buildCss('pb_select', { dark }) + errorClass, spacing(props))
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
   const optionsList = createOptions(options)

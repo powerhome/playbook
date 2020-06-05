@@ -2,6 +2,8 @@
 /* eslint-disable react/no-multi-comp, flowtype/space-before-type-colon */
 import Highlighter from 'react-highlight-words'
 import React from 'react'
+import classnames from 'classnames'
+import { spacing } from '../utilities/spacing.js'
 
 type HighlightProps = {
   className?: String,
@@ -9,29 +11,28 @@ type HighlightProps = {
   id?: String,
   children?: React.Node,
   text?: String,
-  highlightedText?: Array<String>
+  highlightedText?: Array<String>,
 }
 
-const Highlight = ({
-  className = 'pb_highlight_kit',
-  children,
-  data,
-  id,
-  text,
-  highlightedText = ['highlight'],
-}: HighlightProps) => {
+const Highlight = (props: HighlightProps) => {
+  const {
+    className = 'pb_highlight_kit',
+    children,
+    data,
+    id,
+    text,
+    highlightedText = ['highlight'],
+  } = props
   return (
-
     <Highlighter
         autoEscape
         data={data}
-        highlightClassName={className}
+        highlightClassName={classnames(className, spacing(props))}
         highlightTag="span"
         id={id}
         searchWords={highlightedText}
         textToHighlight={text || children}
     />
-
   )
 }
 

@@ -5,9 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## Unreleased
+## [4.17.0] 2020-6-5
 
 ### Added
+- Added list kit layout docs ([#828](https://github.com/powerhome/playbook/pull/828) @kre8sions)
+- Added category colors to table side highlight kit ([#829](https://github.com/powerhome/playbook/pull/829)@christinaatai)
+- Add new layout prop Collection to layout kit([#840](https://github.com/powerhome/playbook/pull/822) @kre8sions)
+- Added Avatar Action Button kit ([#837](https://github.com/powerhome/playbook/pull/837)@bh247484)
 - Added React Avatar Status file; Added id, aria, data props to React Avatar kit ([#830](https://github.com/powerhome/playbook/pull/830) @kellyeryan)
 
 ### Fixed
@@ -29,6 +33,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Added aria, data, id props to Text Input kit on both React and Ruby sides.([#812](https://github.com/powerhome/playbook/pull/812)@kellyeryan)
 - Add aria to Ruby LabelPill kit ([#813](https://github.com/powerhome/playbook/pull/813) @kellyeryan)
 - Fix Currency kit performance issues (Rails) ([#820](https://github.com/powerhome/playbook/pull/820) @thestephenmarshall)
+
 
 ## [4.15.0] 2020-5-22
 
@@ -448,3 +453,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Removed (breaking changes)
 - React PbLayout prop `children` dropped support for single Node (https://github.com/powerhome/playbook/commit/b16da50914e110c75c6d96c985fa02781c9e2040#diff-c3ce2c91288ca3e730d3c56e7f73475cL11-L14)
 - Rails PbLayout prop `dark` dropped (https://github.com/powerhome/playbook/commit/b16da50914e110c75c6d96c985fa02781c9e2040#diff-377fda563d148f7b3ad33f904b7b0cdbL13)
+

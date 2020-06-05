@@ -23,6 +23,10 @@ const BodyLight = () => {
           status="positive"
           text="I am a body kit (Status: positive)"
       />
+      <Body
+          status="positive"
+          text="I am a body kit (Status: positive)"
+      />
     </div>
   )
 }
