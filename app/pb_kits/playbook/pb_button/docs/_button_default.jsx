@@ -22,7 +22,13 @@ const ButtonDefault = () => (
         onClick={() => alert('button clicked!')}
         text="Button Disabled"
     />
+    <Button
+        disabled
+        onClick={() => alert('button clicked!')}
+        text="Button Disabled"
+    />
   </div>
+
 )
 
 export default ButtonDefault

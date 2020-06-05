@@ -1,17 +1,18 @@
 /* @flow */
 
 import React from 'react'
-
+import classnames from 'classnames'
+import { spacing } from '../utilities/spacing.js'
 import { Body, Caption, Title } from '../'
 import { buildCss } from '../utilities/props'
 
 type CurrencyProps = {
-  align?: 'left' | 'center' | 'right',
+  align?: "left" | "center" | "right",
   amount: string,
   unit: string,
   className?: string,
   label?: string,
-  size?: 'sm' | 'md' | 'lg',
+  size?: "sm" | "md" | "lg",
   symbol?: string,
   dark?: boolean,
 }
@@ -22,20 +23,26 @@ const sizes = {
   sm: 4,
 }
 
-const Currency = ({
-  align = 'left',
-  amount,
-  unit,
-  className,
-  label = '',
-  size = 'sm',
-  symbol = '$',
-  dark = false,
-}: CurrencyProps) => {
+const Currency = (props: CurrencyProps) => {
+  const {
+    align = 'left',
+    amount,
+    unit,
+    className,
+    label = '',
+    size = 'sm',
+    symbol = '$',
+    dark = false,
+  } = props
   const [whole, decimal = '00'] = amount.split('.')
 
   return (
-    <div className={buildCss('pb_currency_kit', align, className, { dark: dark }, size)}>
+    <div
+        className={classnames(
+        buildCss('pb_currency_kit', align, className, { dark: dark }, size),
+        spacing(props)
+      )}
+    >
       <Caption>{label}</Caption>
 
       <div className="pb_currency_wrapper">
@@ -43,7 +50,6 @@ const Currency = ({
             className="dollar_sign"
             color="light"
             dark={dark}
-
         >
           {symbol}
         </Body>
@@ -60,7 +66,6 @@ const Currency = ({
             className="unit"
             color="light"
             dark={dark}
-
         >
           <If condition={unit}>
             {unit}
