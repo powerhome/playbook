@@ -7,9 +7,6 @@ module Playbook
   
         partial "pb_card/child_kits/card_header"
   
-        prop :padding, type: Playbook::Props::Enum,
-                       values: %w[none xs sm md lg xl],
-                       default: "none"
         prop :category_color, type: Playbook::Props::Numeric,
                               default: 1
 

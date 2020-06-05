@@ -3,11 +3,10 @@ import { Currency } from '../../'
 
 const CurrencyDark = () => {
   return (
-    <div>
+    <>
       <Currency
           amount="2,000.50"
           dark
-          label="Caption"
           size="lg"
       />
       <Currency
@@ -26,7 +25,7 @@ const CurrencyDark = () => {
           size="sm"
           unit="/mo"
       />
-    </div>
+    </>
   )
 }
 

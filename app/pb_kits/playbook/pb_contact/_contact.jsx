@@ -2,7 +2,7 @@
 
 import React from 'react'
 import classnames from 'classnames'
-
+import { spacing } from '../utilities/spacing.js'
 import { Body, Caption, Icon } from '../'
 
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
@@ -24,7 +24,15 @@ const formatContact = (contactString, contactType) => {
   const phoneNumber = cleaned.match(/^(1|)?(\d{3})(\d{3})(\d{4})$/)
   if (phoneNumber) {
     const intlCode = phoneNumber[1] ? '+1 ' : ''
-    return [intlCode, '(', phoneNumber[2], ') ', phoneNumber[3], '-', phoneNumber[4]].join('')
+    return [
+      intlCode,
+      '(',
+      phoneNumber[2],
+      ') ',
+      phoneNumber[3],
+      '-',
+      phoneNumber[4],
+    ].join('')
   }
   return null
 }
@@ -39,6 +47,7 @@ type ContactProps = {
   id?: String,
 }
 
+
 const Contact = ({
   aria = {},
   className,
@@ -50,7 +59,7 @@ const Contact = ({
 }: ContactProps) => {
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
-  const classes = classnames(buildCss('pb_contact_kit'), className)
+  const classes = classnames(buildCss('pb_contact_kit'), className, spacing(props))
 
   return (
     <div
