@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### Added 
+- Add aria, data, id props to React Label Value kit, add aria props to Ruby Label Value kit([#842](https://github.com/powerhome/playbook/pull/842) @kellyeryan)
+
 ## [4.16.0] 2020-5-29
 
 ### Added
