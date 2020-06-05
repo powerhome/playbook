@@ -1,42 +1,63 @@
 /* @flow */
+
 import React from 'react'
+import classnames from 'classnames'
+
+import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
+
 import { Body, Title } from '../'
 import classnames from 'classnames'
 import { spacing } from '../utilities/spacing.js'
 
 type TitleCountProps = {
+  align: "center" | "left" | "right",
+  aria?: object,
   className?: String,
-  data?: String,
+  count?: Numeric,
+  data?: object,
   id?: String,
   title?: String,
-  count?: Number,
-  size?: String,
-}
+  size?: "lg" | "sm",
+};
 
-const TitleCount = (props: TitleCountProps) => {
-  const {
-    className = 'pb_title_count_kit',
-    data,
-    count,
-    id,
-    title,
-    size,
-  } = props
+const TitleCount = ({
+  align = 'left',
+  aria = {},
+  className,
+  data = {},
+  count,
+  id,
+  title,
+  size = 'sm',
+}: TitleCountProps) => {
+  const ariaProps = buildAriaProps(aria)
+  const dataProps = buildDataProps(data)
+
+  const css = classnames(
+    className,
+    buildCss('pb_title_count_kit', align, size),
+    spacing(props)
+  )
+
+  const formatCount = count.toLocaleString()
+
   return (
     <div
-        className={classnames(className, spacing(props))}
-        data={data}
+        {...ariaProps}
+        {...dataProps}
+        className={css}
         id={id}
     >
       <Title
-          className="pb_title_count_text"
-          size={size == 'lg' ? 3 : 4}
+          className={title !== undefined ? 'pb_title_count_text' : ''}
+          size={size === 'lg' ? 3 : 4}
           text={title}
       />
-      <Body
-          color="light"
-          text={`${count}`}
-      />
+
+      <Body color="light">
+        <If condition={count}>{formatCount}</If>
+      </Body>
+
     </div>
   )
 }
