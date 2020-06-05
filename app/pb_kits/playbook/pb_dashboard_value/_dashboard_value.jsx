@@ -2,7 +2,7 @@
 
 import React from 'react'
 import classnames from 'classnames'
-
+import { spacing } from '../utilities/spacing.js'
 import {
   Body,
   StatChange,
@@ -44,7 +44,7 @@ const DashboardValue = (props: DashboardValueProps) => {
 
   return (
     <div
-        className={classnames(dashboardValueCSS(props), className)}
+        className={classnames(dashboardValueCSS(props), className, spacing(props))}
         id={id}
     >
       <If condition={statLabel}>

@@ -13,6 +13,8 @@ import {
   noop,
 } from '../utilities/props'
 
+import { spacing } from '../utilities/spacing.js'
+
 type Props = {
   aria: Object,
   checked: Boolean,
@@ -28,7 +30,7 @@ type Props = {
   name?: String,
   onChange: InputCallback<HTMLInputElement>,
   text?: String,
-  value?: String
+  value?: String,
 }
 
 const SelectableCard = ({
@@ -53,10 +55,10 @@ const SelectableCard = ({
 
   const css = buildCss({
     'pb_selectable_card_kit': true,
-    'checked': checked,
-    'dark': dark,
-    'disabled': disabled,
-    'enabled': !disabled,
+    checked: checked,
+    dark: dark,
+    disabled: disabled,
+    enabled: !disabled,
   })
 
   const displayIcon = () => {
@@ -92,8 +94,11 @@ const SelectableCard = ({
           type={inputType}
           value={value}
       />
-      <label htmlFor={inputIdPresent}>
-        { text || children }
+      <label
+          className={spacing(props)}
+          htmlFor={inputIdPresent}
+      >
+        {text || children}
         {displayIcon()}
       </label>
     </div>

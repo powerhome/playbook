@@ -2,6 +2,7 @@
 
 import React from 'react'
 import classnames from 'classnames'
+import { spacing } from '../utilities/spacing.js'
 
 import Icon from '../pb_icon/_icon.jsx'
 
@@ -83,7 +84,7 @@ const Button = (props: ButtonPropTypes) => {
   } = props
 
   const buttonAria = buttonAriaProps(props)
-  const css = classnames(buttonClassName(props), className)
+  const css = classnames(buttonClassName(props), className, spacing(props))
   const loadingIcon = (
     <div className="loading-icon">
       <Icon

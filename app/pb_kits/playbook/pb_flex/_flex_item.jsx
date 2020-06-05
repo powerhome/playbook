@@ -2,7 +2,7 @@
 import React from 'react'
 import classnames from 'classnames'
 import { buildCss } from '../utilities/props'
-
+import { spacing } from '../utilities/spacing.js'
 type FlexItemPropTypes = {
   children: Array<React.ReactNode> | React.ReactNode,
   fixedSize: String,
@@ -10,18 +10,15 @@ type FlexItemPropTypes = {
   className: String,
 }
 
-const FlexItem = ({
-  children,
-  className,
-  fixedSize,
-  grow,
-}: FlexItemPropTypes) => {
+const FlexItem = (props: FlexItemPropTypes) => {
+  const { children, className, fixedSize, grow } = props
   const growClass = grow === true ? 'grow' : ''
-  const fixedStyle = fixedSize !== undefined ? { flexBasis: `${fixedSize}` } : null
+  const fixedStyle =
+    fixedSize !== undefined ? { flexBasis: `${fixedSize}` } : null
 
   return (
     <div
-        className={classnames(buildCss('pb_flex_item_kit', growClass), className)}
+        className={classnames(buildCss('pb_flex_item_kit', growClass), className, spacing(props))}
         style={fixedStyle}
     >
       {children}

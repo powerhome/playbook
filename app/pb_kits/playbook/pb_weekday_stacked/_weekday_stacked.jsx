@@ -2,24 +2,19 @@
 
 import React from 'react'
 import classnames from 'classnames'
+import { spacing } from '../utilities/spacing.js'
+import { buildCss } from '../utilities/props'
 
-import {
-  buildCss,
-} from '../utilities/props'
-
-import {
-  Caption,
-  Title,
-} from '../'
+import { Caption, Title } from '../'
 
 import DateTime from '../pb_kit/dateTime.js'
 
 type WeekdayStackedProps = {
-  align?: 'left' | 'center' | 'right',
+  align?: "left" | "center" | "right",
   className?: String,
   dark?: Boolean,
   date: Date,
-  variant?: 'day_only' | 'month_day' | 'expanded',
+  variant?: "day_only" | "month_day" | "expanded",
   compact?: Boolean,
   id?: String,
 }
@@ -43,25 +38,32 @@ const getFormattedDate = (date, variant) => {
   }
 }
 
-const WeekdayStacked = ({
-  align = 'left',
-  className,
-  dark = false,
-  date = new Date(),
-  variant = 'month_day',
-  compact = false,
-}: WeekdayStackedProps) => (
-  <div
-      className={classnames(buildCss('pb_weekday_stacked_kit', align), className)}
-  >
-    <Caption dark={dark}>{getDayOfWeek(date, compact)}</Caption>
-    <Title
-        dark={dark}
-        size={4}
-        tag="span"
-        text={getFormattedDate(date, variant)}
-    />
-  </div>
-)
+const WeekdayStacked = (props: WeekdayStackedProps) => {
+  const {
+    align = 'left',
+    className,
+    dark = false,
+    date = new Date(),
+    variant = 'month_day',
+    compact = false,
+  } = props
+  return (
+    <div
+        className={classnames(
+        buildCss('pb_weekday_stacked_kit', align),
+        className,
+        spacing(props)
+      )}
+    >
+      <Caption dark={dark}>{getDayOfWeek(date, compact)}</Caption>
+      <Title
+          dark={dark}
+          size={4}
+          tag="span"
+          text={getFormattedDate(date, variant)}
+      />
+    </div>
+  )
+}
 
 export default WeekdayStacked
