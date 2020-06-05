@@ -3,31 +3,25 @@
 import React from 'react'
 import classnames from 'classnames'
 import { map } from 'lodash'
-
+import { spacing } from '../utilities/spacing.js'
 import { Image } from '../'
 
 type AvatarProps = {
   className?: String,
   name: String,
   imageUrl: String,
-  size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl',
-  status: 'online' | 'away',
+  size?: "xs" | "sm" | "md" | "lg" | "xl",
+  status: "online" | "away",
 }
 
-const firstTwoInitials = (name) => (
+const firstTwoInitials = (name) =>
   map(name.split(/\s/), (name) => name[0])
     .join('')
     .substring(0, 2)
-)
 
-const Avatar = ({
-  className,
-  name = null,
-  imageUrl,
-  size = 'md',
-  status = null,
-}: AvatarProps) => {
-  const classes = classnames(['pb_avatar_kit', `avatar_${size}`, className])
+const Avatar = (props: AvatarProps) => {
+  const { className, name = null, imageUrl, size = 'md', status = null } = props
+  const classes = classnames('pb_avatar_kit', `avatar_${size}`, className, spacing(props))
   const initials = name && firstTwoInitials(name)
 
   return (

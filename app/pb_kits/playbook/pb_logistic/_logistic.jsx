@@ -4,6 +4,7 @@ import React from 'react'
 import classnames from 'classnames'
 import DateTime from '../pb_kit/dateTime.js'
 import { Body, Caption, Icon, Title } from '../'
+import { spacing } from '../utilities/spacing.js'
 
 const dateString = (value: DateTime) => {
   const month = value.toMonthNum()
@@ -20,19 +21,12 @@ type LogisticProps = {
   projectNumber: Number,
 }
 
-const Logistic = ({
-  dark = false,
-  date,
-  link,
-  projectName,
-  projectNumber,
-}: LogisticProps) => {
+const Logistic = (props: LogisticProps) => {
+  const { dark = false, date, link, projectName, projectNumber } = props
   const formattedDate = new DateTime({ value: date })
 
   return (
-    <div
-        className={classnames('pb_logistic_kit')}
-    >
+    <div className={classnames('pb_logistic_kit', spacing(props))}>
       <Body color="light">
         <Caption text="Project" />
         <Icon
@@ -85,7 +79,6 @@ const Logistic = ({
                 />
               </Otherwise>
             </Choose>
-
           </Otherwise>
         </Choose>
       </Body>

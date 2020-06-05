@@ -14,11 +14,6 @@ RSpec.describe Playbook::PbCard::Card do
                       .with_default({}) }
 
   it do
-    is_expected.to define_enum_prop(:padding)
-                   .with_default("md")
-                   .with_values("none", "xs", "sm", "md", "lg", "xl")
-  end
-  it do
     is_expected.to define_enum_prop(:shadow)
                    .with_default("none")
                    .with_values("none", "deep", "deeper", "deepest")

@@ -2,16 +2,10 @@
 
 import React from 'react'
 import classnames from 'classnames'
-
 import { buildCss } from '../utilities/props'
+import { spacing } from '../utilities/spacing.js'
 
-import {
-  Body,
-  DateYearStacked,
-  Flex,
-  FlexItem,
-  Icon,
-} from '../'
+import { Body, DateYearStacked, Flex, FlexItem, Icon } from '../'
 
 type DateRangeStackedProps = {
   className?: String | Array<String>,
@@ -19,16 +13,12 @@ type DateRangeStackedProps = {
   dark?: Boolean,
   endDate: String,
   id?: String,
-  startDate: String
+  startDate: String,
 }
 
-const DateRangeStacked = ({
-  className,
-  dark = false,
-  endDate,
-  startDate,
-}: DateRangeStackedProps) => {
-  const css = classnames(className, buildCss('pb_date_range_stacked'))
+const DateRangeStacked = (props: DateRangeStackedProps) => {
+  const { className, dark = false, endDate, startDate } = props
+  const css = classnames(className, buildCss('pb_date_range_stacked'), spacing(props))
 
   return (
     <div className={css}>

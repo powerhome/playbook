@@ -2,17 +2,15 @@
 
 import React from 'react'
 import classnames from 'classnames'
-import {
-  buildAriaProps,
-  buildCss,
-  buildDataProps,
-} from '../utilities/props'
+import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
+
+import { spacing } from '../utilities/spacing.js'
 
 type LayoutPropTypes = {
   aria?: object,
   children?: Array<React.ReactNode> | React.ReactNode,
   className?: String,
-  collapse?: 'xs' | 'sm' | 'md' | 'lg' | 'xl',
+  collapse?: "xs" | "sm" | "md" | "lg" | "xl",
   dark?: Boolean,
   data?: object,
   full?: Boolean,
@@ -21,6 +19,7 @@ type LayoutPropTypes = {
   variant?: 'light' | 'dark' | 'gradient',
   transparent?: Boolean,
   layout?: 'sidebar' | 'collection',
+
 }
 
 type LayoutSideProps = {
@@ -34,30 +33,19 @@ type LayoutBodyProps = {
 }
 
 // Side component
-const Side = ({
-  children,
-  className,
-}: LayoutSideProps) => {
+const Side = ({ children, className }: LayoutSideProps) => {
   return (
-    <div className={classnames('layout_sidebar', className)}>
-      {children}
-    </div>
+    <div className={classnames('layout_sidebar', className)}>{children}</div>
   )
 }
 
 // Body component
-const Body = ({
-  children,
-  className,
-}: LayoutBodyProps) => {
-  return (
-    <div className={classnames('layout_body', className)}>
-      {children}
-    </div>
-  )
+const Body = ({ children, className }: LayoutBodyProps) => {
+  return <div className={classnames('layout_body', className)}>{children}</div>
 }
 
 // Main componenet
+
 const Layout = ({
   aria = {},
   children,
@@ -79,25 +67,38 @@ const Layout = ({
     'transparent': transparent,
     'full': full,
   })
+
   const layoutCollapseCss = buildCss('layout', position, 'collapse', collapse)
 
-  const layoutChildren = typeof(children) === 'object' && children.length ? children : [children]
+  const layoutChildren =
+    typeof children === 'object' && children.length ? children : [children]
 
   const subComponentTags = (tagName) => {
-    return layoutChildren.filter((c) => {
-      return c.type && c.type.displayName === tagName
-    }).map((child, i) => {
-      return React.cloneElement(child, { key: `${tagName.toLowerCase()}-${i}` })
-    })
+    return layoutChildren
+      .filter((c) => {
+        return c.type && c.type.displayName === tagName
+      })
+      .map((child, i) => {
+        return React.cloneElement(child, {
+          key: `${tagName.toLowerCase()}-${i}`,
+        })
+      })
   }
 
-  const nonSideChildren = layoutChildren.filter((child) => !child.type || child.type.displayName !== 'Side')
+  const nonSideChildren = layoutChildren.filter(
+    (child) => !child.type || child.type.displayName !== 'Side'
+  )
 
   return (
     <div
         {...ariaProps}
         {...dataProps}
-        className={classnames(layoutCss, layoutCollapseCss, className)}
+        className={classnames(
+        layoutCss,
+        layoutCollapseCss,
+        className,
+        spacing(props)
+      )}
     >
       {subComponentTags('Side')}
       {nonSideChildren}
