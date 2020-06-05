@@ -78,7 +78,6 @@ const Card = (props: CardPropTypes) => {
     typeof children === 'object' && children.length ? children : [children]
 
   const subComponentTags = (tagName) => {
-
     return cardChildren.filter((c) => (
       get(c, 'type.displayName') === tagName
     )).map((child, i) => {
@@ -87,7 +86,6 @@ const Card = (props: CardPropTypes) => {
   }
 
   const nonHeaderChildren = cardChildren.filter((child) => (get(child, 'type.displayName') !== 'Header'))
-
 
   return (
     <div className={classnames(cardCss, className)}>

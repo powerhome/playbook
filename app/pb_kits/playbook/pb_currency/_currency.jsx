@@ -27,7 +27,6 @@ const sizes = {
   sm: 4,
 }
 
-
 const Currency = (props: CurrencyProps) => {
   const {
     align = 'left',
