@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### Added
+
+- Add aria, className, data, id props to React Logistic kit and aria props to Rails Logistic kit ([#843](https://github.com/powerhome/playbook/pull/843) @kellyeryan)
+
 ## [4.16.0] 2020-5-29
 
 ### Added
