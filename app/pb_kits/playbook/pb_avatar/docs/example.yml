@@ -1,8 +1,9 @@
 examples:
   rails:
-  - avatar_default: Default
-  - avatar_monogram: Monogram
-  - avatar_status: Status
+    - avatar_default: Default
+    - avatar_monogram: Monogram
+    - avatar_status: Status
   react:
-  - avatar_default: Default
-  - avatar_monogram: Monogram
+    - avatar_default: Default
+    - avatar_monogram: Monogram
+    - avatar_status: Status

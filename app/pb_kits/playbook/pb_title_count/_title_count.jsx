@@ -6,6 +6,8 @@ import classnames from 'classnames'
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
 
 import { Body, Title } from '../'
+import classnames from 'classnames'
+import { spacing } from '../utilities/spacing.js'
 
 type TitleCountProps = {
   align: "center" | "left" | "right",
@@ -33,7 +35,8 @@ const TitleCount = ({
 
   const css = classnames(
     className,
-    buildCss('pb_title_count_kit', align, size)
+    buildCss('pb_title_count_kit', align, size),
+    spacing(props)
   )
 
   const formatCount = count.toLocaleString()
@@ -54,6 +57,7 @@ const TitleCount = ({
       <Body color="light">
         <If condition={count}>{formatCount}</If>
       </Body>
+
     </div>
   )
 }
