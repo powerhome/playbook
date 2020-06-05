@@ -2,19 +2,23 @@
 
 import React from 'react'
 import classnames from 'classnames'
+
 import { spacing } from '../utilities/spacing.js'
 import { Body, Caption, Title } from '../'
-import { buildCss } from '../utilities/props'
+import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
 
 type CurrencyProps = {
-  align?: "left" | "center" | "right",
-  amount: string,
-  unit: string,
-  className?: string,
-  label?: string,
-  size?: "sm" | "md" | "lg",
-  symbol?: string,
-  dark?: boolean,
+  align?: 'center' | 'left' | 'right',
+  amount: String,
+  aria?: object,
+  className?: String,
+  dark?: Boolean,
+  data?: object,
+  id?: String,
+  label?: String,
+  size?: 'sm' | 'md' | 'lg',
+  symbol?: String,
+  unit?: String,
 }
 
 const sizes = {
@@ -23,10 +27,14 @@ const sizes = {
   sm: 4,
 }
 
+
 const Currency = (props: CurrencyProps) => {
   const {
     align = 'left',
+    aria = {},
     amount,
+    data = {},
+    id,
     unit,
     className,
     label = '',
@@ -34,14 +42,18 @@ const Currency = (props: CurrencyProps) => {
     symbol = '$',
     dark = false,
   } = props
+
   const [whole, decimal = '00'] = amount.split('.')
+  const ariaProps = buildAriaProps(aria)
+  const dataProps = buildDataProps(data)
+  const classes = classnames(buildCss('pb_currency_kit', align, size, { dark: dark }), className, spacing(props))
 
   return (
     <div
-        className={classnames(
-        buildCss('pb_currency_kit', align, className, { dark: dark }, size),
-        spacing(props)
-      )}
+        {...ariaProps}
+        {...dataProps}
+        className={classes}
+        id={id}
     >
       <Caption>{label}</Caption>
 

@@ -14,6 +14,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Added Avatar Action Button kit ([#837](https://github.com/powerhome/playbook/pull/837)@bh247484)
 - Added React Avatar Status file; Added id, aria, data props to React Avatar kit ([#830](https://github.com/powerhome/playbook/pull/830) @kellyeryan)
 
+### Added
+- Add aria, id, data props to React Currency kit, add aria props to Rails Currency kit ([#838](https://github.com/powerhome/playbook/pull/838) @kellyeryan)
+
 ### Fixed
 - Updated index.js to include ProgressStepItem ([#831](https://github.com/powerhome/playbook/pull/831)@christinaatai)
 
