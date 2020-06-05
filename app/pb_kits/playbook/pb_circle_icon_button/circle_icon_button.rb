@@ -16,7 +16,9 @@ module Playbook
       prop :icon, required: true
       prop :dark, type: Playbook::Props::Boolean,
                      default: false
-
+      prop :link
+      prop :new_window, type: Playbook::Props::Boolean,
+                     default: false
       def classname
         generate_classname("pb_circle_icon_button_kit")
       end

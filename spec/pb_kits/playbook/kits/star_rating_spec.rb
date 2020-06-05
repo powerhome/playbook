@@ -9,6 +9,7 @@ RSpec.describe Playbook::PbStarRating::StarRating do
 
   it { is_expected.to define_prop(:rating)
                   .of_type(Playbook::Props::Numeric) }
+
   it { is_expected.to define_prop(:hide_rating)
                   .of_type(Playbook::Props::Boolean) }
 

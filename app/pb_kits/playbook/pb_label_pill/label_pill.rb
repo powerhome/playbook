@@ -14,7 +14,7 @@ module Playbook
       prop :pill_value
 
       def classname
-        generate_classname("pb_label_pill_kit", variant)
+        generate_classname("pb_label_pill_kit")
       end
     end
   end

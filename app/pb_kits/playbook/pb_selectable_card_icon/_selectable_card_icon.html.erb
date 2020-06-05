@@ -1,0 +1,30 @@
+<%= content_tag(:div,
+    data: object.data,
+    class: object.classname) do %>
+  
+  <%= pb_rails("selectable_card", props: {
+    input_id: object.input_id,
+    name: object.name,
+    value: object.value,
+    checked: object.checked,
+    disabled: object.disabled,
+    icon: object.checkmark,
+    multi: object.multi,
+    dark: object.dark
+  }) do %>
+
+    <%= pb_rails("selectable_icon", props: {
+      icon: object.icon,
+      inputs: "disabled",
+      text: object.title_text,
+      dark: object.dark
+    }) %>
+
+    <%= pb_rails("body", props: {
+      text: object.body_text,
+      color: "light",
+      dark: object.dark
+    }) %>
+
+  <% end %>
+<% end %>

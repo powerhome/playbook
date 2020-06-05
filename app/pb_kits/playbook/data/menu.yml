@@ -26,6 +26,8 @@ kits:
     - radio
     - select
     - selectable_card
+    - selectable_card_icon
+    - selectable_icon
     - text_input
     - textarea
     - typeahead
