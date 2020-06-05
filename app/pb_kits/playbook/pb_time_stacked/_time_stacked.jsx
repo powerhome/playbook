@@ -6,6 +6,7 @@ import classnames from 'classnames'
 import DateTime from '../pb_kit/dateTime.js'
 import { buildCss } from '../utilities/props'
 import { Body, Caption } from '../'
+import { spacing } from '../utilities/spacing.js'
 
 const Components = {
   body: Body,
@@ -18,19 +19,19 @@ type TimeStackedProps = {
   data?: String,
   date: String,
   id?: String,
-  align?: 'left' | 'center' | 'right',
-  tag?: 'body' | 'caption',
+  align?: "left" | "center" | "right",
+  tag?: "body" | "caption",
 }
 
-const TimeStacked = ({
-  className,
-  dark = false,
-  date,
-  tag = 'body',
-}: TimeStackedProps) => {
-  const classes = classnames(className, buildCss('pb_time_stacked_kit', {
-    'dark': dark,
-  }))
+const TimeStacked = (props: TimeStackedProps) => {
+  const { className, dark = false, date, tag = 'body' } = props
+  const classes = classnames(
+    className,
+    buildCss('pb_time_stacked_kit', {
+      dark: dark,
+    }),
+    spacing(props)
+  )
 
   const tagClasses = classnames(buildCss('pb_time_stacked_kit', tag))
 

@@ -2,19 +2,14 @@
 
 import React from 'react'
 import classnames from 'classnames'
-import {
-  Body,
-  Icon,
-} from '../'
+import { Body, Icon } from '../'
 
-import {
-  buildAriaProps,
-  buildCss,
-  buildDataProps,
-} from '../utilities/props'
+import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
+
+import { spacing } from '../utilities/spacing.js'
 
 type IconValueProps = {
-  align?: 'left' | 'center' | 'right',
+  align?: "left" | "center" | "right",
   aria?: object,
   className?: string,
   data?: object,
@@ -23,15 +18,16 @@ type IconValueProps = {
   text: string,
 }
 
-const IconValue = ({
-  align = 'left',
-  aria = {},
-  className,
-  data = {},
-  icon,
-  id,
-  text,
-}: IconValueProps) => {
+const IconValue = (props: IconValueProps) => {
+  const {
+    align = 'left',
+    aria = {},
+    className,
+    data = {},
+    icon,
+    id,
+    text,
+  } = props
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
   const pbCss = buildCss('pb_icon_value_kit', align)
@@ -40,7 +36,7 @@ const IconValue = ({
     <div
         {...ariaProps}
         {...dataProps}
-        className={classnames(className, pbCss)}
+        className={classnames(className, pbCss, spacing(props))}
         id={id}
     >
       <Body color="light">

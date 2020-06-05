@@ -4,6 +4,7 @@ import React from 'react'
 import classnames from 'classnames'
 import { Body, Caption } from '../'
 import type { InputCallback } from '../types.js'
+import { spacing } from '../utilities/spacing.js'
 
 type TextareaProps = {
   className?: String,
@@ -42,7 +43,7 @@ const Textarea = ({
   const resizeClass = ` resize_${resize}`
 
   return (
-    <div className={classnames(textareaClass, className, errorClass, resizeClass)}>
+    <div className={classnames(textareaClass, className, errorClass, resizeClass, spacing(props))}>
       <Caption
           dark={dark}
           text={label}

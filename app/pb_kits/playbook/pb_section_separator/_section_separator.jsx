@@ -2,26 +2,32 @@
 import React from 'react'
 import classnames from 'classnames'
 import Caption from '../pb_caption/_caption.jsx'
+import { spacing } from '../utilities/spacing.js'
 
 type SectionSeparatorProps = {
   className: String,
   text: String,
-  orientation?: 'horizontal' | 'vertical',
-  variant?: 'card' | 'background',
-  dark?: Boolean
+  orientation?: "horizontal" | "vertical",
+  variant?: "card" | "background",
+  dark?: Boolean,
 }
 
-const SectionSeparator = ({
-  className,
-  text,
-  orientation = 'horizontal',
-  variant = 'card',
-  dark = false,
-}: SectionSeparatorProps) => {
+const SectionSeparator = (props: SectionSeparatorProps) => {
+  const {
+    className,
+    text,
+    orientation = 'horizontal',
+    variant = 'card',
+    dark = false,
+  } = props
   const themeStyle = dark === true ? '_dark' : ''
-  const css = classnames([
-    `pb_section_separator_kit_${variant}_${orientation}` + themeStyle,
-    className])
+  const css = classnames(
+    [
+      `pb_section_separator_kit_${variant}_${orientation}` + themeStyle,
+      className,
+    ],
+    spacing(props)
+  )
 
   return (
     <div className={css}>

@@ -5,37 +5,38 @@ import classnames from 'classnames'
 
 import { buildCss } from '../utilities/props'
 import { Body, Icon } from '../'
+import { spacing } from '../utilities/spacing.js'
 
 const statusMap = {
-  'increase': 'positive',
-  'decrease': 'negative',
+  increase: 'positive',
+  decrease: 'negative',
 }
 
 const iconMap = {
-  'increase': 'arrow-up',
-  'decrease': 'arrow-down',
+  increase: 'arrow-up',
+  decrease: 'arrow-down',
 }
 
 type StatChangeProps = {
-  change?: 'increase' | 'decrease' | 'neutral',
+  change?: "increase" | "decrease" | "neutral",
   className?: String,
   id?: String,
-  value?: String | Number
+  value?: String | Number,
 }
 
-const StatChange = ({
-  change = 'neutral',
-  className,
-  id,
-  value,
-}: StatChangeProps) => {
+const StatChange = (props: StatChangeProps) => {
+  const { change = 'neutral', className, id, value } = props
   const status = statusMap[change] || 'neutral'
   const icon = iconMap[change]
 
   return (
     <If condition={value}>
       <div
-          className={classnames(className, buildCss('pb_stat_change_kit', status))}
+          className={classnames(
+          className,
+          buildCss('pb_stat_change_kit', status),
+          spacing(props)
+        )}
           id={id}
       >
         <Body status={status}>

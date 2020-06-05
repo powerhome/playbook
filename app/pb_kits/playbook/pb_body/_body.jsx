@@ -3,6 +3,7 @@
 import React from 'react'
 import classnames from 'classnames'
 import { Highlight } from '../'
+import { spacing } from '../utilities/spacing.js'
 
 type BodyProps = {
   className?: String,
@@ -44,7 +45,7 @@ const Body = (props: BodyProps) => {
   const Tag = `${tag}`
 
   return (
-    <Tag className={classnames(bodyCSS(props), className)}>
+    <Tag className={classnames(bodyCSS(props), className, spacing(props))}>
       <If condition={highlighting}>
         <Highlight highlightedText={highlightedText}>{text || children}</Highlight>
         <Else />

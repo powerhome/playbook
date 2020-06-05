@@ -10,16 +10,16 @@ import {
   Reference as PopperReference,
 } from 'react-popper'
 
-import {
-  buildCss,
-  noop,
-} from '../utilities/props'
+import { buildCss, noop } from '../utilities/props'
+
+import classnames from 'classnames'
+import { spacing } from '../utilities/spacing.js'
 
 import { Card } from '../'
 
 type PbPopoverProps = {
   className?: String,
-  closeOnClick?: 'outside' | 'inside',
+  closeOnClick?: "outside" | "inside",
   offset?: Boolean,
   reference: PopperReference,
   show?: Boolean,
@@ -30,7 +30,8 @@ type PbPopoverProps = {
 // https://popper.js.org/docs/v2/modifiers
 
 const POPOVER_MODIFIERS = {
-  offset: { //https://popper.js.org/docs/v2/modifiers/offset/
+  offset: {
+    //https://popper.js.org/docs/v2/modifiers/offset/
     enabled: true,
     name: 'offset',
     options: {
@@ -44,38 +45,47 @@ const popoverModifiers = ({ modifiers, offset }) => {
   return offset ? modifiers.concat([POPOVER_MODIFIERS.offset]) : modifiers
 }
 
-const Popover = ({
-  children,
-  className,
-  modifiers,
-  offset,
-  placement,
-  referenceElement,
-}: PbPopoverProps) => (
-  <Popper
-      modifiers={popoverModifiers({ modifiers, offset })}
-      placement={placement}
-      referenceElement={referenceElement}
-  >
-    {({ placement, ref, style }) => {
-      return (
-        <div
-            className={`${buildCss('pb_popover_kit')} ${className}`}
-            data-placement={placement}
-            ref={ref}
-            style={style}
-        >
-          <div className={`${buildCss('popover_tooltip')} show`}>
-            <Card shadow="deeper">
-              { children }
-            </Card>
+const Popover = (props: PbPopoverProps) => {
+  const {
+    children,
+    className,
+    modifiers,
+    offset,
+    placement,
+    referenceElement,
+  } = props
+  return (
+    <Popper
+        modifiers={popoverModifiers({ modifiers, offset })}
+        placement={placement}
+        referenceElement={referenceElement}
+    >
+      {({ placement, ref, style }) => {
+        return (
+          <div
+              className={`${buildCss('pb_popover_kit')} ${className}`}
+              data-placement={placement}
+              ref={ref}
+              style={style}
+          >
+            <div
+                className={classnames(
+                `${buildCss('popover_tooltip')} show`
+              )}
+            >
+              <Card
+                  className={spacing(props)}
+                  shadow="deeper"
+              >
+                {children}
+              </Card>
+            </div>
           </div>
-        </div>
         )
-      }
-    }
-  </Popper>
-)
+      }}
+    </Popper>
+  )
+}
 
 export default class PbReactPopover extends React.Component<PbPopoverProps> {
   static defaultProps = {
@@ -94,8 +104,10 @@ export default class PbReactPopover extends React.Component<PbPopoverProps> {
     if (!closeOnClick) return
 
     document.body.addEventListener('click', ({ target }) => {
-      const targetIsPopover = target.closest('[class^=popover_tooltip]') !== null
-      const targetIsReference = target.closest('.pb_popover_reference_wrapper') !== null
+      const targetIsPopover =
+        target.closest('[class^=popover_tooltip]') !== null
+      const targetIsReference =
+        target.closest('.pb_popover_reference_wrapper') !== null
 
       if (targetIsReference) return
 
@@ -135,6 +147,7 @@ export default class PbReactPopover extends React.Component<PbPopoverProps> {
 
     const popoverComponent = (
       <Popover
+          {...this.props}
           className={className}
           modifiers={modifiers}
           offset={offset}
@@ -154,9 +167,7 @@ export default class PbReactPopover extends React.Component<PbPopoverProps> {
                   className="pb_popover_reference_wrapper"
                   ref={ref}
               >
-                <reference.type
-                    {...reference.props}
-                />
+                <reference.type {...reference.props} />
               </span>
             )}
           </PopperReference>
