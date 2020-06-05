@@ -5,6 +5,12 @@ import classnames from 'classnames'
 import DateTime from '../pb_kit/dateTime.js'
 import { Body, Caption, Icon, Title } from '../'
 
+import {
+  buildAriaProps,
+  buildCss,
+  buildDataProps,
+} from '../utilities/props'
+
 const dateString = (value: DateTime) => {
   const month = value.toMonthNum()
   const day = value.toDay()
@@ -13,25 +19,39 @@ const dateString = (value: DateTime) => {
 }
 
 type LogisticProps = {
+  aria?: object,
+  className?: String,
   dark?: Boolean,
+  data?: object,
   date: String,
+  id?: String,
   link?: String,
   projectName: String,
   projectNumber: Number,
 }
 
 const Logistic = ({
+  aria = {},
+  className,
   dark = false,
+  data = {},
   date,
+  id,
   link,
   projectName,
   projectNumber,
 }: LogisticProps) => {
+  const ariaProps = buildAriaProps(aria)
+  const dataProps = buildDataProps(data)
+  const classes = classnames(className, buildCss('pb_logistic_kit', { 'dark': dark }))
   const formattedDate = new DateTime({ value: date })
 
   return (
     <div
-        className={classnames('pb_logistic_kit')}
+        {...ariaProps}
+        {...dataProps}
+        className={classes}
+        id={id}
     >
       <Body color="light">
         <Caption text="Project" />
