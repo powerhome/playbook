@@ -14,6 +14,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - Add new layout prop Collection to layout kit([#840](https://github.com/powerhome/playbook/pull/822) @kre8sions)
 
+### Added
+- Added Avatar Action Button kit ([#837](https://github.com/powerhome/playbook/pull/837)@bh247484)
+
 ### Fixed
 - Updated index.js to include ProgressStepItem ([#831](https://github.com/powerhome/playbook/pull/831)@christinaatai)
 

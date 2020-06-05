@@ -14,6 +14,7 @@ import WebpackerReact from 'webpacker-react'
 
 import '../pb_form/pb_form_validation'
 import * as Avatar from 'pb_avatar/docs'
+import * as AvatarActionButton from 'pb_avatar_action_button/docs'
 import * as Badge from 'pb_badge/docs'
 import * as BarGraph from 'pb_bar_graph/docs'
 import * as Body from 'pb_body/docs'
@@ -91,6 +92,7 @@ import * as WeekdayStacked from 'pb_weekday_stacked/docs'
 
 WebpackerReact.setup({
   ...Avatar,
+  ...AvatarActionButton,
   ...Badge,
   ...BarGraph,
   ...Body,
