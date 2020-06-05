@@ -14,10 +14,12 @@ type LayoutPropTypes = {
   dark?: Boolean,
   data?: object,
   full?: Boolean,
-  position?: "left" | "right",
-  size?: "xs" | "sm" | "md" | "base" | "lg" | "xl",
-  variant?: "light" | "dark" | "gradient",
+  position?: 'left' | 'right',
+  size?: 'xs' | 'sm' | 'md' | 'base' | 'lg' | 'xl',
+  variant?: 'light' | 'dark' | 'gradient',
   transparent?: Boolean,
+  layout?: 'sidebar' | 'collection',
+
 }
 
 type LayoutSideProps = {
@@ -43,33 +45,29 @@ const Body = ({ children, className }: LayoutBodyProps) => {
 }
 
 // Main componenet
-const Layout = (props: LayoutPropTypes) => {
-  const {
-    aria = {},
-    children,
-    className,
-    collapse = 'md',
-    dark = false,
-    data = {},
-    full = false,
-    position = 'left',
-    size = 'md',
-    variant = 'light',
-    transparent = false,
-  } = props
+
+const Layout = ({
+  aria = {},
+  children,
+  className,
+  collapse = 'md',
+  dark = false,
+  data = {},
+  full = false,
+  position = 'left',
+  size = 'md',
+  layout = 'sidebar',
+  variant = 'light',
+  transparent = false,
+}: LayoutPropTypes) => {
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
-  const layoutCss = buildCss(
-    'pb_layout_kit',
-    `size_${size}`,
-    position,
-    variant,
-    {
-      dark: dark,
-      transparent: transparent,
-      full: full,
-    }
-  )
+  const layoutCss = buildCss(`pb_layout_kit_${layout}`, `size_${size}`, position, variant, {
+    'dark': dark,
+    'transparent': transparent,
+    'full': full,
+  })
+
   const layoutCollapseCss = buildCss('layout', position, 'collapse', collapse)
 
   const layoutChildren =

@@ -11,6 +11,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Added list kit layout docs ([#828](https://github.com/powerhome/playbook/pull/828) @kre8sions)
 - Added category colors to table side highlight kit ([#829](https://github.com/powerhome/playbook/pull/829)@christinaatai)
 
+### Added
+- Add new layout prop Collection to layout kit([#840](https://github.com/powerhome/playbook/pull/822) @kre8sions)
+
 ### Fixed
 - Updated index.js to include ProgressStepItem ([#831](https://github.com/powerhome/playbook/pull/831)@christinaatai)
 
