@@ -20,6 +20,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 - Updated index.js to include ProgressStepItem ([#831](https://github.com/powerhome/playbook/pull/831)@christinaatai)
 
+### Added
+- Add aria, data, id props to React Contact kit, add aria to Rails Contact kit [#835](https://github.com/powerhome/playbook/pull/835) @kellyeryan)
+
 ## [4.16.0] 2020-5-29
 
 ### Added

@@ -5,13 +5,15 @@ import classnames from 'classnames'
 import { spacing } from '../utilities/spacing.js'
 import { Body, Caption, Icon } from '../'
 
+import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
+
 const contactTypeMap = {
   'cell': 'mobile',
+  'email': 'envelope',
   'home': 'phone',
   'work': 'phone-office',
   'work-cell': 'phone-laptop',
-  'email': 'envelope',
-  'wrong number': 'slash-phone',
+  'wrong-phone': 'phone-slash',
 }
 
 const formatContact = (contactString, contactType) => {
@@ -36,28 +38,39 @@ const formatContact = (contactString, contactType) => {
 }
 
 type ContactProps = {
-  contactType?: "cell" | "home" | "work" | "email" | "wrong number",
+  aria?: object,
   className?: String | Array<String>,
-  dark?: Boolean,
-  contactValue: String,
   contactDetail?: String,
+  contactType?: String,
+  contactValue: String,
+  data?: object,
+  id?: String,
 }
 
-const Contact = (props: ContactProps) => {
-  const {
-    contactType,
-    className,
-    dark = false,
-    contactValue,
-    contactDetail = '',
-  } = props
+
+const Contact = ({
+  aria = {},
+  className,
+  contactDetail,
+  contactType,
+  contactValue,
+  data = {},
+  id,
+}: ContactProps) => {
+  const ariaProps = buildAriaProps(aria)
+  const dataProps = buildDataProps(data)
+  const classes = classnames(buildCss('pb_contact_kit'), className, spacing(props))
 
   return (
-    <div className={classnames('pb_contact_kit', className, spacing(props))}>
+    <div
+        {...ariaProps}
+        {...dataProps}
+        className={classes}
+        id={id}
+    >
       <Body
           className="pb_contact_kit"
           color="light"
-          dark={dark}
           tag="span"
       >
         <Icon
