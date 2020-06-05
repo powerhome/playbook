@@ -4,8 +4,10 @@ examples:
   - layout_transparent: Transparent
   - layout_sizes: Sizes
   - layout_sizes_dark: Sizes Dark
+  - layout_collection: Collection Layout
   react:
   - layout_colors: Colors
   - layout_transparent: Transparent
   - layout_sizes: Sizes
   - layout_sizes_dark: Sizes Dark
+  - layout_collection: Collection Layout

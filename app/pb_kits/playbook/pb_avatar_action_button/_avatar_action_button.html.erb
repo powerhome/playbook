@@ -1,0 +1,32 @@
+<%= content_tag(:div,
+    id: object.id,
+    data: object.data,
+    class: object.classname) do %>
+      
+
+    <% if object.tooltip_text.present? %>
+        <%= pb_rails("tooltip", props: {
+          trigger_element_id: object.tooltip_id,
+          tooltip_id: "tooltip-2",
+          position: 'top',
+          dark: true,
+        }) do %>
+          <%= object.tooltip_text %>
+        <% end %>
+    <% end %>
+
+    <%= link_to object.link_url, id: object.tooltip_id do %>
+
+      <%= pb_rails("avatar", props: {
+        name: object.name,
+        size: object.size,
+        image_url: object.image_url,
+        class: "avatar_action"
+      }) %>
+        <div class="icon">
+            <%= pb_rails("icon", props: {
+              icon: object.action_icons
+            }) %>
+        </div>
+    <% end %>
+<% end %>

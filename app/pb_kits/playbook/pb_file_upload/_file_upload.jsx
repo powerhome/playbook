@@ -2,18 +2,13 @@
 
 import React, { useCallback } from 'react'
 import { useDropzone } from 'react-dropzone'
-
-import {
-  buildCss,
-  noop,
-} from '../utilities/props'
+import { buildCss, noop } from '../utilities/props'
+import classnames from 'classnames'
+import { spacing } from '../utilities/spacing.js'
 
 import type { Callback } from '../types.js'
 
-import {
-  Body,
-  Card,
-} from '..'
+import { Body, Card } from '..'
 
 type FileUploadProps = {
   accept?: Array<String>,
@@ -21,34 +16,29 @@ type FileUploadProps = {
   onFilesAccepted: Callback,
 }
 
-const FileUpload = ({
-  accept = ['image/png', 'image/jpg', 'image/jpeg', 'image/svg+xml'],
-  className,
-  onFilesAccepted = noop,
-}: FileUploadProps) => {
+const FileUpload = (props: FileUploadProps) => {
+  const {
+    accept = ['image/png', 'image/jpg', 'image/jpeg', 'image/svg+xml'],
+    className,
+    onFilesAccepted = noop,
+  } = props
   const onDrop = useCallback((files) => {
     onFilesAccepted(files)
   })
 
-  const {
-    getRootProps,
-    getInputProps,
-    isDragActive,
-  } = useDropzone({
+  const { getRootProps, getInputProps, isDragActive } = useDropzone({
     accept,
     onDrop,
   })
 
   return (
     <div
-        className={buildCss('pb_file_upload_kit', className)}
+        className={classnames(buildCss('pb_file_upload_kit', className), spacing(props))}
         {...getRootProps()}
     >
       <Card>
         <input {...getInputProps()} />
-        <Body
-            color="light"
-        >
+        <Body color="light">
           <If condition={isDragActive}>
             <p>{'Drop the files here ...'}</p>
             <Else />

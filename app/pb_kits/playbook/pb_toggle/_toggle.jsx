@@ -1,10 +1,8 @@
 // @flow
 
 import React from 'react'
-
-import type {
-  InputCallback,
-} from '../types'
+import classnames from 'classnames'
+import type { InputCallback } from '../types'
 
 import {
   buildAriaProps,
@@ -13,6 +11,8 @@ import {
   noop,
 } from '../utilities/props'
 
+import { spacing } from '../utilities/spacing.js'
+
 type Props = {
   aria: object,
   checked: boolean,
@@ -20,7 +20,7 @@ type Props = {
   onChange: InputCallback<HTMLInputElement>,
   onCheck: InputCallback<HTMLInputElement>,
   onUncheck: InputCallback<HTMLInputElement>,
-  size: 'sm' | 'md',
+  size: "sm" | "md",
 }
 
 const Toggle = ({
@@ -37,23 +37,21 @@ const Toggle = ({
   const dataProps = buildDataProps(data)
   const handleChange = (event) => {
     onChange(event)
-    event.target.checked ?
-      onCheck(event) :
-      onUncheck(event)
+    event.target.checked ? onCheck(event) : onUncheck(event)
   }
 
   const css = buildCss({
     'pb_toggle_kit': true,
     [size]: true,
-    'on': checked,
-    'off': !checked,
+    on: checked,
+    off: !checked,
   })
 
   return (
     <div
         {...ariaProps}
         {...dataProps}
-        className={css}
+        className={classnames(css, spacing(props))}
     >
       <label className="pb_toggle_wrapper">
         <input

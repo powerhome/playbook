@@ -5,6 +5,8 @@ examples:
   - list_ordered: Ordered
   - list_borderless: Borderless
   - list_xpadding: Horizontal Padding
+  - list_layout_left: Layout Left
+  - list_layout_right: Layout Right
   - list_dark: Dark Default
   - list_dark_lg: Dark Large
   - list_dark_ordered: Dark Ordered

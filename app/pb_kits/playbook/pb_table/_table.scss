@@ -1,7 +1,7 @@
 @import "styles/all";
 @import "../tokens/colors";
 
-$pb_table_row_kit_side_highlight_colors: map-merge($status_colors, $product_colors);
+$pb_table_row_kit_side_highlight_colors: map-merge(map-merge($status_colors, $product_colors), $category_colors);
 
 @mixin pb_table_row_kit_side_highlight($background) {
     box-shadow: inset 4px 0 0 0 $background;

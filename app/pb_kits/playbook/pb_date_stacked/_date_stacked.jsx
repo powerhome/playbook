@@ -2,18 +2,18 @@
 
 import React from 'react'
 import classnames from 'classnames'
-
 import DateTime from '../pb_kit/dateTime.js'
 import { buildCss } from '../utilities/props'
 import { Caption, Title } from '../'
+import { spacing } from '../utilities/spacing.js'
 
 type DateStackedProps = {
-  align?: 'left' | 'center' | 'right',
+  align?: "left" | "center" | "right",
   className?: String | Array<String>,
   dark?: Boolean,
   data?: String,
   date: String,
-  size?: 'sm' | 'md',
+  size?: "sm" | "md",
   id?: String,
   reverse?: Boolean,
 }
@@ -23,18 +23,23 @@ const sizes = {
   md: 3,
 }
 
-const DateStacked = ({
-  align = 'left',
-  reverse = false,
-  className,
-  dark = false,
-  date,
-  size = 'sm',
-}: DateStackedProps) => {
-  const classes = classnames(className, buildCss('pb_date_stacked_kit', align, size, {
-    'dark': dark,
-    'reverse': reverse,
-  }))
+const DateStacked = (props: DateStackedProps) => {
+  const {
+    align = 'left',
+    reverse = false,
+    className,
+    dark = false,
+    date,
+    size = 'sm',
+  } = props
+  const classes = classnames(
+    className,
+    buildCss('pb_date_stacked_kit', align, size, {
+      dark: dark,
+      reverse: reverse,
+    }),
+    spacing(props)
+  )
 
   const currentYear = new Date().getFullYear().toString()
   const dateTimestamp = new DateTime({ value: date })
@@ -43,9 +48,7 @@ const DateStacked = ({
   return (
     <div className={classes}>
       <div className="pb_date_stacked_day_month">
-        <Caption
-            text={dateTimestamp.toMonth().toUpperCase()}
-        />
+        <Caption text={dateTimestamp.toMonth().toUpperCase()} />
         <Title
             dark={dark}
             size={sizes[size]}

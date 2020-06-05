@@ -1,0 +1,8 @@
+<%= pb_rails("list", props: {ordered: false, dark: false, borderless: false,layout: "left"}) do %>
+    <% 5.times do%>
+        <%= pb_rails("list/item") do %>
+            <%= pb_rails("title", props:{text: "Label", size:4})%>
+            <%= pb_rails("currency", props: { label: "Caption",amount: "2,000.50",size: "sm",}) %>
+        <% end %>
+    <%end%>
+<% end %>

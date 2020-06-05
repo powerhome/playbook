@@ -2,16 +2,18 @@
 
 import React from 'react'
 import classnames from 'classnames'
-
+import { spacing } from '../utilities/spacing.js'
 import { Body, Caption, Icon } from '../'
+
+import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
 
 const contactTypeMap = {
   'cell': 'mobile',
+  'email': 'envelope',
   'home': 'phone',
   'work': 'phone-office',
   'work-cell': 'phone-laptop',
-  'email': 'envelope',
-  'wrong number': 'slash-phone',
+  'wrong-phone': 'phone-slash',
 }
 
 const formatContact = (contactString, contactType) => {
@@ -22,47 +24,69 @@ const formatContact = (contactString, contactType) => {
   const phoneNumber = cleaned.match(/^(1|)?(\d{3})(\d{3})(\d{4})$/)
   if (phoneNumber) {
     const intlCode = phoneNumber[1] ? '+1 ' : ''
-    return [intlCode, '(', phoneNumber[2], ') ', phoneNumber[3], '-', phoneNumber[4]].join('')
+    return [
+      intlCode,
+      '(',
+      phoneNumber[2],
+      ') ',
+      phoneNumber[3],
+      '-',
+      phoneNumber[4],
+    ].join('')
   }
   return null
 }
 
 type ContactProps = {
-  contactType?: 'cell' | 'home' | 'work' | 'email' | 'wrong number',
+  aria?: object,
   className?: String | Array<String>,
-  dark?: Boolean,
-  contactValue: String,
   contactDetail?: String,
+  contactType?: String,
+  contactValue: String,
+  data?: object,
+  id?: String,
 }
 
-const Contact = ({
-  contactType,
-  className,
-  dark = false,
-  contactValue,
-  contactDetail = '',
-}: ContactProps) => (
-  <div className={classnames('pb_contact_kit', className)}>
-    <Body
-        className="pb_contact_kit"
-        color="light"
-        dark={dark}
-        tag="span"
+const Contact = (props: ContactProps) => {
+  const {
+    aria = {},
+    className,
+    contactDetail,
+    contactType,
+    contactValue,
+    data = {},
+    id } = props
+  const ariaProps = buildAriaProps(aria)
+  const dataProps = buildDataProps(data)
+  const classes = classnames(buildCss('pb_contact_kit'), className, spacing(props))
+
+  return (
+    <div
+        {...ariaProps}
+        {...dataProps}
+        className={classes}
+        id={id}
     >
-      <Icon
-          fixedWidth
-          icon={contactTypeMap[contactType] || 'phone'}
-      />
-      {` ${formatContact(contactValue, contactType)} `}
-      <If condition={contactDetail}>
-        <Caption
-            size="xs"
-            tag="span"
-            text={contactDetail}
+      <Body
+          className="pb_contact_kit"
+          color="light"
+          tag="span"
+      >
+        <Icon
+            fixedWidth
+            icon={contactTypeMap[contactType] || 'phone'}
         />
-      </If>
-    </Body>
-  </div>
-)
+        {` ${formatContact(contactValue, contactType)} `}
+        <If condition={contactDetail}>
+          <Caption
+              size="xs"
+              tag="span"
+              text={contactDetail}
+          />
+        </If>
+      </Body>
+    </div>
+  )
+}
 
 export default Contact

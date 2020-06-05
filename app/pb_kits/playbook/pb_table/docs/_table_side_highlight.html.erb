@@ -1,4 +1,4 @@
-<%= pb_rails("table", props: { size: "md" }) do %>
+<%= pb_rails("table", props: { size: "sm" }) do %>
   <thead>
     <tr>
       <th>Product Colors</th>
@@ -9,22 +9,22 @@
     </tr>
   </thead>
   <tbody>
-    <%= pb_rails("table/table_row", props: { side_highlight_color: "windows" }) do %>
-			<td>Windows</td>
+    <%= pb_rails("table/table_row", props: { side_highlight_color: "solar" }) do %>
+			<td>Solar</td>
 			<td>Value 2</td>
 			<td>Value 3</td>
 			<td>Value 4</td>
 			<td>Value 5</td>
     <% end %>
-		<%= pb_rails("table/table_row", props: { side_highlight_color: "siding" }) do %>
-			<td>Siding</td>
+		<%= pb_rails("table/table_row", props: { side_highlight_color: "roofing" }) do %>
+			<td>Roofing</td>
 			<td>Value 2</td>
 			<td>Value 3</td>
 			<td>Value 4</td>
 			<td>Value 5</td>
     <% end %>
-    <%= pb_rails("table/table_row", props: { side_highlight_color: "doors" }) do %>
-			<td>Doors</td>
+    <%= pb_rails("table/table_row", props: { side_highlight_color: "gutters" }) do %>
+			<td>Gutters</td>
 			<td>Value 2</td>
 			<td>Value 3</td>
 			<td>Value 4</td>
@@ -42,7 +42,7 @@
 
 <br/>
 
-<%= pb_rails("table", props: { size: "md" }) do %>
+<%= pb_rails("table", props: { size: "sm" }) do %>
   <thead>
     <tr>
       <th>Status Colors</th>
@@ -69,6 +69,50 @@
     <% end %>
     <%= pb_rails("table/table_row", props: { side_highlight_color: "error" }) do %>
 			<td>Error</td>
+			<td>Value 2</td>
+			<td>Value 3</td>
+			<td>Value 4</td>
+			<td>Value 5</td>
+    <% end %>
+    <%= pb_rails("table/table_row", props: { side_highlight_color: "none" }) do %>
+			<td>None</td>
+			<td>Value 2</td>
+			<td>Value 3</td>
+			<td>Value 4</td>
+			<td>Value 5</td>
+    <% end %>
+  </tbody>
+<% end %>
+
+<br/>
+
+<%= pb_rails("table", props: { size: "sm" }) do %>
+  <thead>
+    <tr>
+      <th>Cateogry Colors</th>
+      <th>Column 2</th>
+      <th>Column 3</th>
+      <th>Column 4</th>
+      <th>Column 5</th>
+    </tr>
+  </thead>
+  <tbody>
+    <%= pb_rails("table/table_row", props: { side_highlight_color: "category_1" }) do %>
+			<td>Category Color 1</td>
+			<td>Value 2</td>
+			<td>Value 3</td>
+			<td>Value 4</td>
+			<td>Value 5</td>
+    <% end %>
+		<%= pb_rails("table/table_row", props: { side_highlight_color: "category_2" }) do %>
+			<td>Category Color 2</td>
+			<td>Value 2</td>
+			<td>Value 3</td>
+			<td>Value 4</td>
+			<td>Value 5</td>
+    <% end %>
+    <%= pb_rails("table/table_row", props: { side_highlight_color: "category_3" }) do %>
+			<td>Category Color 3</td>
 			<td>Value 2</td>
 			<td>Value 3</td>
 			<td>Value 4</td>
