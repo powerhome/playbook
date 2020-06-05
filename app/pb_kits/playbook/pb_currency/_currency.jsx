@@ -3,6 +3,7 @@
 import React from 'react'
 import classnames from 'classnames'
 
+import { spacing } from '../utilities/spacing.js'
 import { Body, Caption, Title } from '../'
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
 
@@ -26,23 +27,26 @@ const sizes = {
   sm: 4,
 }
 
-const Currency = ({
-  align = 'left',
-  amount,
-  aria = {},
-  className,
-  dark = false,
-  data = {},
-  id,
-  label = '',
-  size = 'md',
-  symbol = '$',
-  unit,
-}: CurrencyProps) => {
+
+const Currency = (props: CurrencyProps) => {
+  const {
+    align = 'left',
+    aria = {},
+    amount,
+    data = {},
+    id,
+    unit,
+    className,
+    label = '',
+    size = 'sm',
+    symbol = '$',
+    dark = false,
+  } = props
+
   const [whole, decimal = '00'] = amount.split('.')
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
-  const classes = classnames(buildCss('pb_currency_kit', align, size, { dark: dark }), className)
+  const classes = classnames(buildCss('pb_currency_kit', align, size, { dark: dark }), className, spacing(props))
 
   return (
     <div
@@ -58,7 +62,6 @@ const Currency = ({
             className="dollar_sign"
             color="light"
             dark={dark}
-
         >
           {symbol}
         </Body>
@@ -75,7 +78,6 @@ const Currency = ({
             className="unit"
             color="light"
             dark={dark}
-
         >
           <If condition={unit}>
             {unit}

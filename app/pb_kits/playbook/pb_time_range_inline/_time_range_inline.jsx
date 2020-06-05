@@ -4,18 +4,19 @@ import React from 'react'
 import classnames from 'classnames'
 import { Body, Caption, Icon } from '../'
 import DateTime from '../pb_kit/dateTime.js'
+import { spacing } from '../utilities/spacing.js'
 
 type TimeRangeInlineProps = {
   className?: String,
   id?: String,
   data?: String,
-  alignment?: 'left' | 'center' | 'vertical',
-  size?: 'sm' | 'xs',
+  alignment?: "left" | "center" | "vertical",
+  size?: "sm" | "xs",
   dark?: Boolean,
   icon?: Boolean,
   timezone?: Boolean,
   startTime: String,
-  endTime: String
+  endTime: String,
 }
 
 const timezoneString = (dateValue) => {
@@ -33,16 +34,17 @@ const dateTimeIso = (dateValue) => {
   return date.toIso()
 }
 
-const TimeRangeInline = ({
-  className,
-  alignment = 'left',
-  size = 'sm',
-  dark = false,
-  icon = false,
-  timezone = false,
-  startTime,
-  endTime,
-}: TimeRangeInlineProps) => {
+const TimeRangeInline = (props: TimeRangeInlineProps) => {
+  const {
+    className,
+    alignment = 'left',
+    size = 'sm',
+    dark = false,
+    icon = false,
+    timezone = false,
+    startTime,
+    endTime,
+  } = props
   const separator = `${'—'}`
 
   const iconContent = () => {
@@ -61,7 +63,9 @@ const TimeRangeInline = ({
   }
 
   return (
-    <div className={classnames('pb_time_range_inline_kit_' + alignment, className)}>
+    <div
+        className={classnames('pb_time_range_inline_kit_' + alignment, className, spacing(props))}
+    >
       <div className="pb_time_range_inline_wrapper">
         <If condition={size == 'xs'}>
           <Caption
@@ -69,7 +73,11 @@ const TimeRangeInline = ({
               tag="span"
           >
             {iconContent()}
-            <time dateTime={dateTimeIso(startTime)}>{` ${dateTimestamp(startTime)} `}</time>
+            <time dateTime={dateTimeIso(startTime)}>
+              {` ${dateTimestamp(
+              startTime
+            )} `}
+            </time>
           </Caption>
           <Caption
               className="pb_time_range_inline_dash"
@@ -82,7 +90,11 @@ const TimeRangeInline = ({
               dark={dark}
               tag="span"
           >
-            <time dateTime={dateTimeIso(endTime)}>{` ${dateTimestamp(endTime)} `}</time>
+            <time dateTime={dateTimeIso(endTime)}>
+              {` ${dateTimestamp(
+              endTime
+            )} `}
+            </time>
           </Caption>
           <If condition={timezone}>
             <Caption
@@ -100,7 +112,11 @@ const TimeRangeInline = ({
               tag="span"
           >
             {iconContent()}
-            <time dateTime={dateTimeIso(startTime)}>{` ${dateTimestamp(startTime)} `}</time>
+            <time dateTime={dateTimeIso(startTime)}>
+              {` ${dateTimestamp(
+              startTime
+            )} `}
+            </time>
           </Body>
           <Body
               className="pb_time_range_inline_dash"
@@ -113,7 +129,11 @@ const TimeRangeInline = ({
               dark={dark}
               tag="span"
           >
-            <time dateTime={dateTimeIso(endTime)}>{` ${dateTimestamp(endTime)} `}</time>
+            <time dateTime={dateTimeIso(endTime)}>
+              {` ${dateTimestamp(
+              endTime
+            )} `}
+            </time>
           </Body>
           <If condition={timezone}>
             <Body

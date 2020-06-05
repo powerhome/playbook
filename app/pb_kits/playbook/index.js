@@ -1,5 +1,6 @@
 // React Component JSX Imports from the React Kits
 export Avatar from './pb_avatar/_avatar.jsx'
+export AvatarActionButton from './pb_avatar_action_button/_avatar_action_button.jsx'
 export Badge from './pb_badge/_badge.jsx'
 export BarGraph from './pb_bar_graph/_bar_graph.jsx'
 export Body from './pb_body/_body.jsx'

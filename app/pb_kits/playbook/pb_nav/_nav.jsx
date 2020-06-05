@@ -1,34 +1,37 @@
 /* @flow */
 
 import React from 'react'
+import classnames from 'classnames'
 import { Caption } from '../'
 import { buildCss } from '../utilities/props'
+import { spacing } from '../utilities/spacing.js'
 
 type NavProps = {
   title: String,
-  orientation?: 'vertical' | 'horizontal',
+  orientation?: "vertical" | "horizontal",
   link: String,
   children?: React.Node,
   className?: String | Array<String>,
   highlight?: Boolean,
-  variant?: 'normal' | 'subtle',
+  variant?: "normal" | "subtle",
   onClick?: EventHandler,
 }
-const Nav = ({
-  title = '',
-  orientation = 'vertical',
-  link = '',
-  children,
-  className,
-  highlight = true,
-  variant = 'normal',
-  onClick = () => {},
-}: NavProps) => {
+const Nav = (props: NavProps) => {
+  const {
+    title = '',
+    orientation = 'vertical',
+    link = '',
+    children,
+    className,
+    highlight = true,
+    variant = 'normal',
+    onClick = () => {},
+  } = props
   const cardCss = buildCss('pb_nav_list', variant, orientation, className, {
-    'highlight': highlight,
+    highlight: highlight,
   })
   return (
-    <div className={cardCss}>
+    <div className={classnames(cardCss, spacing(props))}>
       <If condition={title}>
         <div className="pb_nav_list_title">
           <a

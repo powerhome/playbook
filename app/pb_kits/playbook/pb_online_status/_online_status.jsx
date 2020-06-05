@@ -2,10 +2,9 @@
 
 import React from 'react'
 import classnames from 'classnames'
+import { spacing } from '../utilities/spacing.js'
 
-import {
-  buildDataProps,
-} from '../utilities/props'
+import { buildDataProps } from '../utilities/props'
 
 type OnlineStatusProps = {
   className?: String,
@@ -14,17 +13,10 @@ type OnlineStatusProps = {
   status?: "online" | "offline" | "away",
 }
 
-const OnlineStatus = ({
-  id,
-  data = {},
-  className,
-  status = 'offline',
-}: OnlineStatusProps) => {
+const OnlineStatus = (props: OnlineStatusProps) => {
+  const { id, data = {}, className, status = 'offline' } = props
   const dataProps = buildDataProps(data)
-  const css = classnames([
-    `pb_online_status_kit_${status}`,
-    className,
-  ])
+  const css = classnames([`pb_online_status_kit_${status}`, className], spacing(props))
 
   return (
     <div

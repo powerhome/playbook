@@ -3,6 +3,7 @@ samples:
   - something
 kits:
   - avatar
+  - avatar_action_button
   - badge
   - buttons:
     - button

@@ -21,10 +21,18 @@ module Playbook
       prop :variant, type: Playbook::Props::Enum,
                   values: %w[light dark gradient],
                   default: "light"
+      prop :layout, type: Playbook::Props::Enum,
+            values: %w[sidebar collection],
+            default: "sidebar"
 
       def classname
-        first_class = generate_classname("pb_layout_kit", "size_#{size}", position, variant, transparent_class)
-        [first_class, full_class, collapse_class].reject(&:empty?).join(" ")
+        case layout
+	        when "collection"
+	          generate_classname("pb_layout_kit", layout)
+	        else
+	          first_class = generate_classname("pb_layout_kit_sidebar","size_#{size}", position, variant, transparent_class)
+	          [first_class, full_class, collapse_class].reject(&:empty?).join(" ")
+        end
       end
 
     private
