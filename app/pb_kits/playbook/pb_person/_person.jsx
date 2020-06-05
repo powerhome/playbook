@@ -2,11 +2,9 @@
 
 import React from 'react'
 import classnames from 'classnames'
+import { spacing } from '../utilities/spacing.js'
 
-import {
-  Body,
-  Title,
-} from '../'
+import { Body, Title } from '../'
 
 type PersonProps = {
   className?: String | Array<String>,
@@ -15,14 +13,10 @@ type PersonProps = {
   lastName: String,
 }
 
-const Person = ({
-  className,
-  dark = false,
-  firstName,
-  lastName,
-}: PersonProps) => {
+const Person = (props: PersonProps) => {
+  const { className, dark = false, firstName, lastName } = props
   return (
-    <div className={classnames('pb_person_kit', className)}>
+    <div className={classnames('pb_person_kit', className, spacing(props))}>
       <Body
           className="pb_person_first"
           dark={dark}

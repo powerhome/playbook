@@ -5,8 +5,8 @@ const DateRangeInlineDefault = () => {
   return (
     <div>
       <DateRangeInline
-          endDate={new Date('20 Mar 2020')}
-          startDate={new Date('18 Jun 2019')}
+          endDate={new Date('20 Mar 2015')}
+          startDate={new Date('18 Jun 2013')}
       />
     </div>
   )

@@ -3,17 +3,10 @@
 
 import React from 'react'
 import classnames from 'classnames'
+import { spacing } from '../utilities/spacing.js'
+import { Avatar, Badge } from '../'
 
-import {
-  Avatar,
-  Badge,
-} from '../'
-
-import {
-  buildAriaProps,
-  buildCss,
-  buildDataProps,
-} from '../utilities/props'
+import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
 
 type MultipleUsersStackedProps = {
   className?: String,
@@ -23,13 +16,8 @@ type MultipleUsersStackedProps = {
   users: Array<Object>,
 }
 
-const MultipleUsersStacked = ({
-  className,
-  id,
-  aria = {},
-  data = {},
-  users,
-}: MultipleUsersStackedProps) => {
+const MultipleUsersStacked = (props: MultipleUsersStackedProps) => {
+  const { className, id, aria = {}, data = {}, users } = props
   const moreThanTwo = users.length > 2
   const onlyOne = users.length == 1
   const displayCount = () => {
@@ -39,7 +27,7 @@ const MultipleUsersStacked = ({
   const dataProps = buildDataProps(data)
   const css = buildCss({
     'pb_multiple_users_stacked_kit': true,
-    'single': onlyOne,
+    single: onlyOne,
   })
 
   const firstUser = () => {
@@ -87,7 +75,7 @@ const MultipleUsersStacked = ({
     <div
         {...ariaProps}
         {...dataProps}
-        className={classnames(css, className)}
+        className={classnames(css, className, spacing(props))}
         id={id}
     >
       {firstUser()}

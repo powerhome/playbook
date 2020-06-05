@@ -11,7 +11,9 @@ const DateDefault = () => {
 
       <br />
 
-      <Date value="17 Mar 69" />
+      <Date
+          value="17 Mar 69"
+      />
 
       <br />
 

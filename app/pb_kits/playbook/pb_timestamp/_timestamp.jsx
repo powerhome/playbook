@@ -3,14 +3,11 @@
 import React from 'react'
 import classnames from 'classnames'
 
-import {
-  Caption,
-} from '../'
+import { Caption } from '../'
 
-import {
-  buildCss,
-  buildDataProps,
-} from '../utilities/props'
+import { buildCss, buildDataProps } from '../utilities/props'
+
+import { spacing } from '../utilities/spacing.js'
 
 type TimestampProps = {
   id?: String,
@@ -19,19 +16,15 @@ type TimestampProps = {
   text?: String,
 }
 
-const Timestamp = ({
-  id,
-  className,
-  data = {},
-  text,
-}: TimestampProps) => {
+const Timestamp = (props: TimestampProps) => {
+  const { id, className, data = {}, text } = props
   const dataProps = buildDataProps(data)
   const pbCss = buildCss('pb_timestamp_kit')
 
   return (
     <div
         {...dataProps}
-        className={classnames(className, pbCss)}
+        className={classnames(className, pbCss, spacing(props))}
         id={id}
     >
       <Caption

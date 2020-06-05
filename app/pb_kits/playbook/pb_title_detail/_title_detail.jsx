@@ -2,19 +2,14 @@
 
 import React from 'react'
 import classnames from 'classnames'
+import { spacing } from '../utilities/spacing.js'
 
-import {
-  Body,
-  Title,
-} from '../'
+import { Body, Title } from '../'
 
-import {
-  buildCss,
-  buildDataProps,
-} from '../utilities/props'
+import { buildCss, buildDataProps } from '../utilities/props'
 
 type TitleDetailProps = {
-  align?: 'left' | 'center' | 'right',
+  align?: "left" | "center" | "right",
   className?: String,
   data?: object,
   detail: String,
@@ -22,21 +17,15 @@ type TitleDetailProps = {
   title: String,
 }
 
-const TitleDetail = ({
-  align = 'left',
-  className,
-  data = {},
-  detail,
-  id,
-  title,
-}: TitleDetailProps) => {
+const TitleDetail = (props: TitleDetailProps) => {
+  const { align = 'left', className, data = {}, detail, id, title } = props
   const dataProps = buildDataProps(data)
   const pbCss = buildCss('pb_title_detail_kit', align)
 
   return (
     <div
         {...dataProps}
-        className={classnames(className, pbCss)}
+        className={classnames(className, pbCss, spacing(props))}
         id={id}
     >
       <Title

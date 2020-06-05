@@ -18,6 +18,9 @@ RSpec.describe Playbook::PbTable::TableRow do
       expect(subject.new({side_highlight_color: "success"}).classname).to eq "pb_table_row_kit_side_highlight_success"
       expect(subject.new({side_highlight_color: "warning"}).classname).to eq "pb_table_row_kit_side_highlight_warning"
       expect(subject.new({side_highlight_color: "error"}).classname).to eq "pb_table_row_kit_side_highlight_error"
+      expect(subject.new({side_highlight_color: "category_1"}).classname).to eq "pb_table_row_kit_side_highlight_category_1"
+      expect(subject.new({side_highlight_color: "category_2"}).classname).to eq "pb_table_row_kit_side_highlight_category_2"
+      expect(subject.new({side_highlight_color: "category_3"}).classname).to eq "pb_table_row_kit_side_highlight_category_3"
     end
   end
 end
