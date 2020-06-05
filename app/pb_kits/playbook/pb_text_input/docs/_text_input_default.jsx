@@ -20,7 +20,7 @@ class TextInputDefault extends React.Component {
     return (
       <div>
         <TextInput
-            aria={{ something: 'hello' }}
+            aria={{ label: 'hello' }}
             data={{ say: 'hi', yell: 'go' }}
             id="unique-id"
             label="First Name"

@@ -6,7 +6,6 @@ import classnames from 'classnames'
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
 
 import { Body, Title } from '../'
-import classnames from 'classnames'
 import { spacing } from '../utilities/spacing.js'
 
 type TitleCountProps = {
@@ -20,24 +19,20 @@ type TitleCountProps = {
   size?: "lg" | "sm",
 };
 
-const TitleCount = ({
-  align = 'left',
-  aria = {},
-  className,
-  data = {},
-  count,
-  id,
-  title,
-  size = 'sm',
-}: TitleCountProps) => {
+const TitleCount = (props: TitleCountProps) => {
+  const {
+    align = 'left',
+    aria = {},
+    className,
+    data = {},
+    count,
+    id,
+    title,
+    size = 'sm' } = props
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
 
-  const css = classnames(
-    className,
-    buildCss('pb_title_count_kit', align, size),
-    spacing(props)
-  )
+  const css = classnames(buildCss('pb_title_count_kit', align, size), className, spacing(props))
 
   const formatCount = count.toLocaleString()
 

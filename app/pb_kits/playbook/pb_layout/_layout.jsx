@@ -46,20 +46,21 @@ const Body = ({ children, className }: LayoutBodyProps) => {
 
 // Main componenet
 
-const Layout = ({
-  aria = {},
-  children,
-  className,
-  collapse = 'md',
-  dark = false,
-  data = {},
-  full = false,
-  position = 'left',
-  size = 'md',
-  layout = 'sidebar',
-  variant = 'light',
-  transparent = false,
-}: LayoutPropTypes) => {
+const Layout = (props: LayoutPropTypes) => {
+  const {
+    aria = {},
+    children,
+    className,
+    collapse = 'md',
+    dark = false,
+    data = {},
+    full = false,
+    position = 'left',
+    size = 'md',
+    layout = 'sidebar',
+    variant = 'light',
+    transparent = false,
+  } = props
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
   const layoutCss = buildCss(`pb_layout_kit_${layout}`, `size_${size}`, position, variant, {

@@ -15,6 +15,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Added React Avatar Status file; Added id, aria, data props to React Avatar kit ([#830](https://github.com/powerhome/playbook/pull/830) @kellyeryan)
 - Add aria, data, id props to React Contact kit, add aria to Rails Contact kit [#835](https://github.com/powerhome/playbook/pull/835) @kellyeryan)
 - Add aria, id, data props to React Currency kit, add aria props to Rails Currency kit ([#838](https://github.com/powerhome/playbook/pull/838) @kellyeryan)
+- Adds spacing props (margin/padding) for every rails & react kit. 🎉 🙌 ([#802](https://github.com/powerhome/playbook/pull/802) @jasperfurniss)
+- Allow null child element on Card kit([#836](https://github.com/powerhome/playbook/pull/836) @xjunior)
+- Added Title Count React Kit ([#825](https://github.com/powerhome/playbook/pull/825) @kellyeryan)
 
 ### Fixed
 - Updated index.js to include ProgressStepItem ([#831](https://github.com/powerhome/playbook/pull/831)@christinaatai)
@@ -506,4 +509,3 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Removed (breaking changes)
 - React PbLayout prop `children` dropped support for single Node (https://github.com/powerhome/playbook/commit/b16da50914e110c75c6d96c985fa02781c9e2040#diff-c3ce2c91288ca3e730d3c56e7f73475cL11-L14)
 - Rails PbLayout prop `dark` dropped (https://github.com/powerhome/playbook/commit/b16da50914e110c75c6d96c985fa02781c9e2040#diff-377fda563d148f7b3ad33f904b7b0cdbL13)
-

@@ -47,16 +47,15 @@ type ContactProps = {
   id?: String,
 }
 
-
-const Contact = ({
-  aria = {},
-  className,
-  contactDetail,
-  contactType,
-  contactValue,
-  data = {},
-  id,
-}: ContactProps) => {
+const Contact = (props: ContactProps) => {
+  const {
+    aria = {},
+    className,
+    contactDetail,
+    contactType,
+    contactValue,
+    data = {},
+    id } = props
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
   const classes = classnames(buildCss('pb_contact_kit'), className, spacing(props))
