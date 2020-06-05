@@ -5,16 +5,15 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## Unreleased
+## [4.17.0] 2020-6-5
 
-### Added 
-- Spacing Props for All Rails & React Kits ([#831](https://github.com/powerhome/playbook/pull/802)@jasperfurniss)
+### Added
+- Added list kit layout docs ([#828](https://github.com/powerhome/playbook/pull/828) @kre8sions)
+- Added category colors to table side highlight kit ([#829](https://github.com/powerhome/playbook/pull/829)@christinaatai)
 
 ### Fixed
 - Updated index.js to include ProgressStepItem ([#831](https://github.com/powerhome/playbook/pull/831)@christinaatai)
 
-### Added
-- Added category colors to table side highlight kit ([#829](https://github.com/powerhome/playbook/pull/829)@christinaatai)
 
 ## [4.16.0] 2020-5-29
 
