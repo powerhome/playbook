@@ -1,5 +1,5 @@
 <!-- START TOP AREA -->
-<%= pb_rails("flex", props: {classname: "flex-container", spacing: "between"}) do %>
+<%= pb_rails("flex", props: {classname: "flex-container", spacing: "between", margin_top: "md", margin_x: "md" }) do %>
     <%= pb_rails("flex/flex_item") do %>
       <%= pb_rails("title", props: { text: "Prospective Clients", tag: "h3", size: 3 }) %>
     <% end %>
@@ -21,7 +21,9 @@
     {item:"Name", link:"#", active: false},
   ],
   results: 546,
-  template: "single"
+  template: "single",
+  margin_y: "md",
+  margin_x: "md"
   }) do%>
 <%
   example_collection = [
@@ -52,7 +54,7 @@
 <!-- END FILTER -->
 
 <!-- START TABlE -->
-<%= pb_rails("table", props: { size: "sm" }) do %>
+<%= pb_rails("table", props: { size: "sm", margin_x: "md" }) do %>
   <thead>
     <tr>
       <th>Contact</th>
