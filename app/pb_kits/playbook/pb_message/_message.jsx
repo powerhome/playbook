@@ -3,12 +3,17 @@
 import React from 'react'
 import { Avatar, Body, Caption } from '../'
 import classnames from 'classnames'
+import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
 import { spacing } from '../utilities/spacing.js'
 
 type MessageProps = {
+  aria: object,
   avatarName?: String,
   avatarStatus?: String,
   avatarUrl?: String,
+  className?: String,
+  data?: object,
+  id?: String,
   label?: String,
   message: String,
   timestamp?: String,
@@ -16,20 +21,33 @@ type MessageProps = {
 
 const Message = (props: MessageProps) => {
   const {
-    avatarName = '',
-    avatarUrl = '',
-    label = '',
-    message = '',
-    timestamp = '',
+    aria = {},
+    avatarName,
     avatarStatus = null,
+    avatarUrl,
+    className,
+    data = {},
+    id,
+    label,
+    message,
+    timestamp,
   } = props
+  const ariaProps = buildAriaProps(aria)
+  const dataProps = buildDataProps(data)
   const shouldDisplayAvatar = avatarUrl || avatarName
-  const classes = shouldDisplayAvatar
+  const baseClassName = shouldDisplayAvatar
     ? 'pb_message_kit_avatar'
     : 'pb_message_kit'
 
+  const classes = classnames(buildCss(baseClassName), className, spacing(props))
+
   return (
-    <div className={classnames(classes, spacing(props))}>
+    <div
+        {...ariaProps}
+        {...dataProps}
+        className={classes}
+        id={id}
+    >
       <If condition={shouldDisplayAvatar}>
         <Avatar
             imageUrl={avatarUrl}
