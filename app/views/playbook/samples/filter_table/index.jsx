@@ -24,7 +24,7 @@ const FilterTable = () => (
       </FlexItem>
     </Flex>
     <Filter
-        filters={{ 'Start Date': 'Mar 01, 2020', 'End Date': 'Mar 31, 2020' }}
+        filters={{ 'Start Date': 'Apr 19, 2020', 'End Date': 'Apr 20, 2020' }}
         marginTop="md"
         marginX="md"
         results={0}
@@ -49,7 +49,7 @@ const FilterTable = () => (
             label="Start Date"
             paddingRight="md"
             placeholder="Enter first name"
-            value="Mar 01, 2020"
+            value="Apr 19, 2020"
         />
         <TextInput
             aria={{ label: 'hello' }}
@@ -57,7 +57,7 @@ const FilterTable = () => (
             id="unique-id"
             label="End Date"
             placeholder="Enter first name"
-            value="Mar 31, 2020"
+            value="Apr 20, 2020"
         />
       </Flex>
 

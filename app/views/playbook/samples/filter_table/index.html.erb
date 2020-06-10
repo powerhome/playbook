@@ -13,8 +13,8 @@
 <%= pb_rails("filter", props: {
   id:"2",
   filters: [
-    {name: "start date", value: "Apr 01, 2020"},
-    {name: "end date", value: "Apr 03, 2020"}
+    {name: "start date", value: "Aug 01, 2020"},
+    {name: "end date", value: "Aug 03, 2020"}
 
     ],
   sort_menu: [
@@ -48,10 +48,10 @@
 
   <%= pb_rails("flex") do %>
     <%= pb_rails("body", props: {classname: "flex-item"}) do %>
-      <%= pb_rails("text_input", props: { label: "Start Date", value: "Apr 01, 2020", margin_right: "sm" }) %>
+      <%= pb_rails("text_input", props: { label: "Start Date", value: "Aug 01, 2020", margin_right: "sm" }) %>
     <% end %>
     <%= pb_rails("body", props: {classname: "flex-item"}) do %>
-      <%= pb_rails("text_input", props: { label: "End Date",  value: "Apr 3, 2020" }) %>
+      <%= pb_rails("text_input", props: { label: "End Date",  value: "Aug 3, 2020" }) %>
     <% end %>
   <% end %>
 
