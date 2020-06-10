@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### Added
+- Added to React PersonContact kit data, aria, id props as well as `_person_contact_with_wrong_numbers.jsx` file. Added aria props to Rails PersonContact kit. ([#849](https://github.com/powerhome/playbook/pull/849) @kellyeryan)
+
 ## [4.17.0] 2020-6-5
 
 ### Added
