@@ -7,7 +7,8 @@ RSpec.describe Playbook::PbTimeline::Item do
 
   it { is_expected.to define_partial }
   it { is_expected.to define_prop(:date) }
-  it { is_expected.to define_prop(:icon) }
+  it { is_expected.to define_prop(:icon)
+                      .with_default("user") }
   it { is_expected.to define_enum_prop(:icon_color)
                       .with_default("default")
                       .with_values("default", "royal", "blue", "purple", "teal", "red", "yellow", "green") }

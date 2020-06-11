@@ -6,12 +6,12 @@ import { buildCss } from '../utilities/props'
 import { DateStacked, IconCircle } from '..'
 
 type ItemProps = {
-  className?: String,
-  children?: Array<React.ReactChild>,
+  className?: string,
+  children?: Array<React.Node>,
   date?: Date,
-  icon?: String,
-  iconColor?: String,
-  lineStyle?: String,
+  icon?: string,
+  iconColor?: 'default' | 'royal' | 'blue' | 'purple' | 'teal' | 'red' | 'yellow' | 'green',
+  lineStyle?: 'solid' | 'dotted',
 }
 
 const TimelineItem = ({
