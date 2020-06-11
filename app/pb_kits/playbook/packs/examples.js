@@ -45,6 +45,7 @@ import * as Icon from 'pb_icon/docs'
 import * as IconCircle from 'pb_icon_circle/docs'
 import * as IconValue from 'pb_icon_value/docs'
 import * as Image from 'pb_image/docs'
+import * as Installer from 'pb_installer/docs'
 import * as LabelPill from 'pb_label_pill/docs'
 import * as LabelValue from 'pb_label_value/docs'
 import * as Layout from 'pb_layout/docs'
@@ -123,6 +124,7 @@ WebpackerReact.setup({
   ...IconCircle,
   ...IconValue,
   ...Image,
+  ...Installer,
   ...LabelPill,
   ...LabelValue,
   ...Layout,
