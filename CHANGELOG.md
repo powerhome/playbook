@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### Added
+- Added Timeline Kit ([#839](https://github.com/powerhome/playbook/pull/839)@christinaatai)
+
 ## [4.17.0] 2020-6-5
 
 ### Added
