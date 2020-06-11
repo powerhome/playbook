@@ -33,15 +33,17 @@ type LayoutBodyProps = {
 }
 
 // Side component
-const Side = ({ children, className }: LayoutSideProps) => {
+const Side = (props: LayoutSideProps) => {
+  const { children, className } = props
   return (
-    <div className={classnames('layout_sidebar', className)}>{children}</div>
+    <div className={classnames('layout_sidebar', className, spacing(props))}>{children}</div>
   )
 }
 
 // Body component
-const Body = ({ children, className }: LayoutBodyProps) => {
-  return <div className={classnames('layout_body', className)}>{children}</div>
+const Body = (props: LayoutBodyProps) => {
+  const { children, className } = props
+  return <div className={classnames('layout_body', className, spacing(props))}>{children}</div>
 }
 
 // Main componenet

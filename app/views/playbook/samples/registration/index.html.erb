@@ -1,85 +1,99 @@
 <%= pb_rails("layout", props: {position: "left", size: "lg", collapse: "sm"}) do %>
   <%= pb_rails("layout/sidebar") do %>
-    <%= pb_rails("title", props: { text: "Design Expo", tag: "h2", size: 3 }) %>
-    <%= pb_rails("body", props: {
-        text: "Annual Conference*",
-        color: "light"
-    }) %>
+    <%= pb_rails("flex", props: {orientation: "column", horizontal: "center", padding: "md"}) do %>
+        <%= pb_rails("flex/flex_item") do %>
+            <%= pb_rails("title", props: { text: "Design Expo", tag: "h2", size: 3 }) %>
+        <% end %>
+        <%= pb_rails("flex/flex_item") do %>
+            <%= pb_rails("body", props: {
+                text: "Annual Conference*",
+                color: "light"
+            }) %>
+        <% end %>
+    <% end %>
 
     <%= pb_rails("section_separator") %>
+    <%= pb_rails("flex", props: {orientation: "column", padding: "md"}) do %>
+        <%= pb_rails("flex/flex_item") do %>
+            <%= pb_rails("title", props: { text: "Regions", tag: "h4", size: 4, padding_bottom: "sm" }) %>
+        <% end %>
 
-    <%= pb_rails("title", props: { text: "Regions", tag: "h4", size: 4 }) %>
-    <%= pb_rails("flex", props: {orientation: "column"}) do %>
-        <%= pb_rails("body", props: {classname: "flex-item"}) do %>
-            <%= pb_rails("checkbox" , props: {
-                text: "North America",
-                value: "checkbox-value",
-                checked: true,
-                name: "checkbox-name"
-            }) %>
+        <%= pb_rails("flex", props: {orientation: "column"}) do %>
+            <%= pb_rails("body", props: {classname: "flex-item"}) do %>
+                <%= pb_rails("checkbox" , props: {
+                    text: "North America",
+                    value: "checkbox-value",
+                    checked: true,
+                    name: "checkbox-name",
+                    padding_left: "sm",
+                    padding_bottom: "sm"
+                }) %>
+            <% end %>
+            <%= pb_rails("body", props: {classname: "flex-item"}) do %>
+                <%= pb_rails("checkbox" , props: {
+                    text: "Europe",
+                    value: "checkbox-value",
+                    checked: true,
+                    name: "checkbox-name",
+                    padding_left: "sm",
+                    padding_bottom: "sm"
+                }) %>
+            <% end %>
         <% end %>
-        <%= pb_rails("body", props: {classname: "flex-item"}) do %>
-            <%= pb_rails("checkbox" , props: {
-                text: "Europe",
-                value: "checkbox-value",
-                checked: true,
-                name: "checkbox-name"
-            }) %>
-        <% end %>
-    <% end %>
     
     
-    <%= pb_rails("title", props: { text: "Total Registered", tag: "h4", size: 4 }) %>
+        <%= pb_rails("title", props: { text: "Total Registered", tag: "h4", size: 4, padding_y: "sm" }) %>
 
-    <%= pb_rails("table", props: { size: "sm" }) do %>
-        <thead>
-            <tr>
-            <th>Conference</th>
-            <th>Total #</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>2020 | SF</td>
-                <td>2,391</td>
-            </tr>
-            <tr>
-                <td>2020 | TOR</td>
-                <td>3,829</td>
-            </tr>
-            <tr>
-                <td>2019 | AMS</td>
-                <td>2,047</td>
-            </tr>
-            <tr>
-                <td>2018 | SF</td>
-                <td>1,824</td>
-            </tr>
-            <tr>
-                <td>2017 | LA</td>
-                <td>719</td>
-            </tr>
-            <tr>
-                <td>2017 | LDN</td>
-                <td>491</td>
-            </tr>
-        </tbody>
+        <%= pb_rails("table", props: { size: "sm", disable_hover: true, padding_bottom: "xs" }) do %>
+            <thead>
+                <tr>
+                <th>Conference</th>
+                <th>Total #</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>2020 | SF</td>
+                    <td>2,391</td>
+                </tr>
+                <tr>
+                    <td>2020 | TOR</td>
+                    <td>3,829</td>
+                </tr>
+                <tr>
+                    <td>2019 | AMS</td>
+                    <td>2,047</td>
+                </tr>
+                <tr>
+                    <td>2018 | SF</td>
+                    <td>1,824</td>
+                </tr>
+                <tr>
+                    <td>2017 | LA</td>
+                    <td>719</td>
+                </tr>
+                <tr>
+                    <td>2017 | LDN</td>
+                    <td>491</td>
+                </tr>
+            </tbody>
+        <% end %>
+        <%= pb_rails("caption", props: { text: "*This dashboard includes the last six conferences", size: 'xs' }) %>
     <% end %>
-    <%= pb_rails("caption", props: { text: "*This dashboard includes the last six conferences", size: 'xs' }) %>
 
   <% end %>
 
 
 
-  <%= pb_rails("layout/body") do %>
+  <%= pb_rails("layout/body", props: { padding: "xl" }) do %>
 
-    <%= pb_rails("title", props: { text: "Registration Dashboard", tag: "h1", size: 3 }) %>
+    <%= pb_rails("title", props: { text: "Registration Dashboard", tag: "h1", size: 3, padding_bottom: "lg" }) %>
 
   
     <%= pb_rails("flex") do %>
-        <%= pb_rails("flex/flex_item", props: {fixed_size: "60%"}) do %>
+        <%= pb_rails("flex/flex_item", props: {fixed_size: "60%", padding_right: "lg"}) do %>
             <%= pb_rails("card") do %>
-                <%= pb_rails("flex", props: {vertical: "stretch", spacing: "around"}) do %>
+                <%= pb_rails("flex", props: {vertical: "bottom", spacing: "around", padding_bottom: "md"}) do %>
                     <%= pb_rails("flex/flex_item") do %>
                         <%= pb_rails("flex", props: {orientation: "column", horizontal: "center"}) do %>
                             <%= pb_rails("flex/flex_item") do %>
@@ -126,7 +140,7 @@
                     <% end %>
                 <% end %>
                 <%= pb_rails("section_separator") %>
-                <%= pb_rails("flex", props: {vertical: "stretch", spacing: "around"}) do %>
+                <%= pb_rails("flex", props: {vertical: "bottom", spacing: "around", padding_top: "sm"}) do %>
                     <%= pb_rails("flex/flex_item") do %>
                         <%= pb_rails("flex", props: {orientation: "column", horizontal: "center"}) do %>
                             <%= pb_rails("flex/flex_item") do %>
@@ -140,7 +154,9 @@
                             <% end %>
                         <% end %>
                     <% end %>
-                    <%= pb_rails("section_separator", props: { orientation: "vertical" }) %>
+                    <%= pb_rails("flex/flex_item") do %>
+                        <%= pb_rails("section_separator", props: { orientation: "vertical" }) %>
+                    <% end %>
                     <%= pb_rails("flex/flex_item") do %>
                         <%= pb_rails("flex", props: {orientation: "column", horizontal: "center"}) do %>
                             <%= pb_rails("flex/flex_item") do %>
@@ -174,7 +190,7 @@
                 <% end %>
             <% end %>
             
-            <%= pb_rails("flex", props: {orientation: "column", horizontal: "right"}) do %>
+            <%= pb_rails("flex", props: {orientation: "column", horizontal: "right", padding_bottom: "md"}) do %>
                 <%= pb_rails("flex/flex_item") do %>
                     <%= pb_rails("button", props: { text: "View full breakdown", variant: "link" }) %>
                 <% end %>
@@ -202,9 +218,11 @@
                     id: "line-registration", 
                     gradient: false, 
                     chart_data: data, 
-                    x_axis_categories:['7','6','5','4','3','2','1','0'],
+                    x_axis_categories:['7 wks away','6 wks away','5 wks away','4 wks away','3 wks away','2 wks away','1 wk away','Start of event'],
                     title: 'Running Total', 
-                    axis_title: 'Total Registration' 
+                    axis_title: 'Total Registration',
+                    legend: true,
+                    height: '80%'
                 }) %>
             <% end %>
         <% end %>
@@ -218,11 +236,12 @@
                     data: [1475, 524, 1344, 780, 200, 900]
                 }] %>
                 <%= pb_rails("bar_graph", props: {
-                    axis_title: 'Total',
+                    axis_title: 'Total Registered',
                     chart_data: total,
                     id: "total-attendees",
                     y_axis_min: 0,
                     x_axis_categories:['\'17 LDN', '\'17 LA', '\'18 SF', '\'19 AMS', '\'20 TOR', '\'20 SF'],
+                    height: '30%'
                 }) %>
 
                 <% new_attendees = [{
@@ -235,6 +254,7 @@
                     id: "new-attendees",
                     y_axis_min: 0,
                     x_axis_categories:['\'17 LDN', '\'17 LA', '\'18 SF', '\'19 AMS', '\'20 TOR', '\'20 SF'],
+                    height: '30%'
                 }) %>
 
                 <% repeating_attendees = [{
@@ -247,6 +267,7 @@
                     id: "repeating-attendees",
                     y_axis_min: 0,
                     x_axis_categories:['\'17 LDN', '\'17 LA', '\'18 SF', '\'19 AMS', '\'20 TOR', '\'20 SF'],
+                    height: '30%'
                 }) %>
 
                 <% graphic_designers = [{
@@ -259,6 +280,7 @@
                     id: "graphic-designers",
                     y_axis_min: 0,
                     x_axis_categories:['\'17 LDN', '\'17 LA', '\'18 SF', '\'19 AMS', '\'20 TOR', '\'20 SF'],
+                    height: '30%'
                 }) %>
 
                 <% ux_ui = [{
@@ -271,6 +293,7 @@
                     id: "ux-ui",
                     y_axis_min: 0,
                     x_axis_categories:['\'17 LDN', '\'17 LA', '\'18 SF', '\'19 AMS', '\'20 TOR', '\'20 SF'],
+                    height: '30%'
                 }) %>
 
                 <% product_designers = [{
@@ -283,6 +306,7 @@
                     id: "product-designers",
                     y_axis_min: 0,
                     x_axis_categories:['\'17 LDN', '\'17 LA', '\'18 SF', '\'19 AMS', '\'20 TOR', '\'20 SF'],
+                    height: '30%'
                 }) %>
                 
             <% end %>

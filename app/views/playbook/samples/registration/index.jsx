@@ -1,5 +1,5 @@
 import React from 'react'
-import { BarGraph, Body, Button, Caption, Card, Checkbox, Flex, LineGraph, SectionSeparator, Table, Title } from '../../../../pb_kits/playbook'
+import { BarGraph, Body, Button, Caption, Card, Checkbox, Flex, Layout, LineGraph, SectionSeparator, Table, Title } from '../../../../pb_kits/playbook'
 import FlexItem from '../../../../pb_kits/playbook/pb_flex/_flex_item.jsx'
 
 const data = [{
@@ -46,87 +46,120 @@ const productDesigners = [{
 
 const Registration = () => (
   <div>
-    <div className="pb_layout_kit_size_lg_left_light full layout_left_collapse_md">
-      <div className="layout_sidebar">
-        <Title
-            size={3}
-            tag="h3"
-            text="Design Expo"
-        />
-        <Body
-            color="light"
-            text="Annual Conference*"
-        />
-        <SectionSeparator />
-        <Title
-            size={4}
-            tag="h4"
-            text="Regions"
-        />
+    <Layout
+        collapse="xs"
+        position="left"
+        size="lg"
+    >
+      <Layout.Side>
         <Flex
-            inline
             orientation="column"
+            padding="md"
+            vertical="center"
         >
-          <Checkbox
-              checked
-              name="NorthAmerica"
-              text="North America"
-              value="NorthAmerica"
+          <FlexItem>
+            <Title
+                size={3}
+                tag="h3"
+                text="Design Expo"
+            />
+          </FlexItem>
+          <FlexItem>
+            <Body
+                color="light"
+                text="Annual Conference*"
+            />
+          </FlexItem>
+        </Flex>
+        <SectionSeparator />
+        <Flex
+            orientation="column"
+            padding="md"
+        >
+          <FlexItem>
+            <Title
+                paddingBottom="sm"
+                size={4}
+                tag="h4"
+                text="Regions"
+            />
+          </FlexItem>
+          <Flex
+              inline
+              orientation="column"
+          >
+            <Checkbox
+                checked
+                name="NorthAmerica"
+                paddingBottom="sm"
+                paddingLeft="sm"
+                text="North America"
+                value="NorthAmerica"
+            />
+            <Checkbox
+                checked
+                name="Europe"
+                paddingBottom="sm"
+                paddingLeft="sm"
+                text="Europe"
+                value="Europe"
+            />
+          </Flex>
+          <Title
+              paddingY="sm"
+              size={4}
+              tag="h4"
+              text="Total Registered"
           />
-          <Checkbox
-              checked
-              name="Europe"
-              text="Europe"
-              value="Europe"
+          <Table
+              paddingBottom="xs"
+              size="sm"
+          >
+            <thead>
+              <tr>
+                <th>{'Conference'}</th>
+                <th>{'Total #'}</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>{'2020 | SF'}</td>
+                <td>{'2,391'}</td>
+              </tr>
+              <tr>
+                <td>{'2020 | TOR'}</td>
+                <td>{'3,829'}</td>
+              </tr>
+              <tr>
+                <td>{'2019 | AMS'}</td>
+                <td>{'2,047'}</td>
+              </tr>
+              <tr>
+                <td>{'2018 | SF'}</td>
+                <td>{'1,824'}</td>
+              </tr>
+              <tr>
+                <td>{'2017 | LA'}</td>
+                <td>{'719'}</td>
+              </tr>
+              <tr>
+                <td>{'2017 | LDN'}</td>
+                <td>{'491'}</td>
+              </tr>
+            </tbody>
+          </Table>
+          <Caption
+              size="xs"
+              text="*This dashboard includes the last six conferences"
           />
         </Flex>
-        <Title
-            size={4}
-            tag="h4"
-            text="Total Registered"
-        />
-        <Table size="sm">
-          <thead>
-            <tr>
-              <th>{'Conference'}</th>
-              <th>{'Total #'}</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>{'2020 | SF'}</td>
-              <td>{'2,391'}</td>
-            </tr>
-            <tr>
-              <td>{'2020 | TOR'}</td>
-              <td>{'3,829'}</td>
-            </tr>
-            <tr>
-              <td>{'2019 | AMS'}</td>
-              <td>{'2,047'}</td>
-            </tr>
-            <tr>
-              <td>{'2018 | SF'}</td>
-              <td>{'1,824'}</td>
-            </tr>
-            <tr>
-              <td>{'2017 | LA'}</td>
-              <td>{'719'}</td>
-            </tr>
-            <tr>
-              <td>{'2017 | LDN'}</td>
-              <td>{'491'}</td>
-            </tr>
-          </tbody>
-        </Table>
-        <Caption
-            size="xs"
-            text="*This dashboard includes the last six conferences"
-        />
-      </div>
+      </Layout.Side>
 
-      <div className="layout_body">
+      <Layout.Body
+          padding="xl"
+      >
         <Title
+            paddingBottom="lg"
             size={3}
             tag="h3"
             text="Registration Dashboard"
@@ -135,12 +168,16 @@ const Registration = () => (
             className="bg_light"
             wrap
         >
-          <FlexItem fixedSize="60%">
+          <FlexItem
+              fixedSize="60%"
+              paddingRight="lg"
+          >
             <Card>
 
               <Flex
+                  paddingBottom="md"
                   spacing="around"
-                  vertical="stretch"
+                  vertical="bottom"
               >
                 {/****** first number ******/}
                 <FlexItem>
@@ -176,6 +213,7 @@ const Registration = () => (
                 <FlexItem>
                   <Flex
                       orientation="column"
+                      paddingTop="sm"
                       vertical="center"
                   >
                     <FlexItem>
@@ -241,8 +279,9 @@ const Registration = () => (
               <SectionSeparator />
 
               <Flex
+                  paddingTop="sm"
                   spacing="around"
-                  vertical="stretch"
+                  vertical="bottom"
               >
                 {/****** first number ******/}
                 <FlexItem>
@@ -343,6 +382,7 @@ const Registration = () => (
 
             <Flex
                 orientation="column"
+                paddingBottom="md"
                 vertical="right"
             >
               <FlexItem>
@@ -358,39 +398,37 @@ const Registration = () => (
               <LineGraph
                   axisTitle="Total Registration"
                   chartData={data}
+                  height="80%"
                   id="line-registration"
+                  legend
                   title="Running Total"
-                  xAxisCategories={['7', '6', '5', '4', '3', '2', '1', '0']}
+                  xAxisCategories={['7 wks away', '6 wks away', '5 wks away', '4 wks away', '3 wks away', '2 wks away', '1 wk away', 'Start of Event']}
                   yAxisMin={0}
               />
             </Card>
           </FlexItem>
           <FlexItem fixedSize="40%">
             <Card>
-              <div className="chart-container" style={{height:"123px",width:"100%"}}>
-                <BarGraph
-                    axisTitle="Total"
-                    chartData={totalRegistered}
-                    id="total-attendees"
-                    xAxisCategories={['\'17 LDN', '\'17 LA', '\'18 SF', '\'19 AMS', '\'20 TOR', '\'20 SF']}
-                    yAxisMin={0}
-                />
-              </div>
-
-              {/* <hr style="height:1px;border:none;color:#e4e8f0;background-color:#e4e8f0;margin: 15px;" /> */}
-
-              {/* <div className="chart-container" style={{height:"250px"}}>
-                <BarGraph
-                    axisTitle="New Attendees"
-                    chartData={newAttendees}
-                    id="new-attendees"
-                    xAxisCategories={['\'17 LDN', '\'17 LA', '\'18 SF', '\'19 AMS', '\'20 TOR', '\'20 SF']}
-                    yAxisMin={0}
-                />
-              </div>
+              <BarGraph
+                  axisTitle="Total Registered"
+                  chartData={totalRegistered}
+                  height="30%"
+                  id="total-attendees"
+                  xAxisCategories={['\'17 LDN', '\'17 LA', '\'18 SF', '\'19 AMS', '\'20 TOR', '\'20 SF']}
+                  yAxisMin={0}
+              />
               <BarGraph
                   axisTitle="New Attendees"
                   chartData={newAttendees}
+                  height="30%"
+                  id="new-attendees"
+                  xAxisCategories={['\'17 LDN', '\'17 LA', '\'18 SF', '\'19 AMS', '\'20 TOR', '\'20 SF']}
+                  yAxisMin={0}
+              />
+              <BarGraph
+                  axisTitle="New Attendees"
+                  chartData={newAttendees}
+                  height="30%"
                   id="new-attendees"
                   xAxisCategories={['\'17 LDN', '\'17 LA', '\'18 SF', '\'19 AMS', '\'20 TOR', '\'20 SF']}
                   yAxisMin={0}
@@ -398,6 +436,7 @@ const Registration = () => (
               <BarGraph
                   axisTitle="Repeating Attendees"
                   chartData={repeatingAttendees}
+                  height="30%"
                   id="repeating-attendees"
                   xAxisCategories={['\'17 LDN', '\'17 LA', '\'18 SF', '\'19 AMS', '\'20 TOR', '\'20 SF']}
                   yAxisMin={0}
@@ -405,6 +444,7 @@ const Registration = () => (
               <BarGraph
                   axisTitle="Graphic Designers"
                   chartData={graphicDesigners}
+                  height="30%"
                   id="graphic-designers"
                   xAxisCategories={['\'17 LDN', '\'17 LA', '\'18 SF', '\'19 AMS', '\'20 TOR', '\'20 SF']}
                   yAxisMin={0}
@@ -412,6 +452,7 @@ const Registration = () => (
               <BarGraph
                   axisTitle="UX/UI"
                   chartData={uxUi}
+                  height="30%"
                   id="ux-ui"
                   xAxisCategories={['\'17 LDN', '\'17 LA', '\'18 SF', '\'19 AMS', '\'20 TOR', '\'20 SF']}
                   yAxisMin={0}
@@ -419,15 +460,16 @@ const Registration = () => (
               <BarGraph
                   axisTitle="Product Designers"
                   chartData={productDesigners}
+                  height="30%"
                   id="product-designers"
                   xAxisCategories={['\'17 LDN', '\'17 LA', '\'18 SF', '\'19 AMS', '\'20 TOR', '\'20 SF']}
                   yAxisMin={0}
-              /> */}
+              />
             </Card>
           </FlexItem>
         </Flex>
-      </div>
-    </div>
+      </Layout.Body>
+    </Layout>
   </div>
 )
 

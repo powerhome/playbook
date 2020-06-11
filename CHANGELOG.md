@@ -13,7 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Added list kit layout docs ([#828](https://github.com/powerhome/playbook/pull/828) @kre8sions)
 - Added category colors to table side highlight kit ([#829](https://github.com/powerhome/playbook/pull/829)@christinaatai)
 - Add new layout prop Collection to layout kit([#840](https://github.com/powerhome/playbook/pull/822) @kre8sions)
-- Added Avatar Action Button kit ([#837](https://github.com/powerhome/playbook/pull/837)@bh247484)
+- Added Avatar Action Button kit ([#837](https://github.gcom/powerhome/playbook/pull/837)@bh247484)
 - Added React Avatar Status file; Added id, aria, data props to React Avatar kit ([#830](https://github.com/powerhome/playbook/pull/830) @kellyeryan)
 - Add aria, data, id props to React Contact kit, add aria to Rails Contact kit [#835](https://github.com/powerhome/playbook/pull/835) @kellyeryan)
 - Add aria, id, data props to React Currency kit, add aria props to Rails Currency kit ([#838](https://github.com/powerhome/playbook/pull/838) @kellyeryan)
