@@ -1,12 +1,11 @@
 import React from 'react'
 import Timeline from '../_timeline.jsx'
-import TimelineItem from '../_timeline_item.jsx'
 import { Body, TitleDetail } from '../../'
 
 const TimelineVertical = () => (
   <div>
     <Timeline orientation="vertical">
-      <TimelineItem
+      <Timeline.Item
           icon="user"
           iconColor="royal"
       >
@@ -14,8 +13,8 @@ const TimelineVertical = () => (
             color="light"
             text="Conversation started"
         />
-      </TimelineItem>
-      <TimelineItem
+      </Timeline.Item>
+      <Timeline.Item
           icon="check"
           iconColor="teal"
       >
@@ -23,8 +22,8 @@ const TimelineVertical = () => (
             color="light"
             text="Trip #12422"
         />
-      </TimelineItem>
-      <TimelineItem
+      </Timeline.Item>
+      <Timeline.Item
           icon="credit-card"
           iconColor="red"
       >
@@ -32,8 +31,8 @@ const TimelineVertical = () => (
             color="light"
             text="Refund issue #12422"
         />
-      </TimelineItem>
-      <TimelineItem
+      </Timeline.Item>
+      <Timeline.Item
           icon="smile"
           iconColor="green"
       >
@@ -41,14 +40,14 @@ const TimelineVertical = () => (
             color="light"
             text="Conversation resolved"
         />
-      </TimelineItem>
+      </Timeline.Item>
     </Timeline>
 
     <br />
     <br />
 
     <Timeline orientation="vertical">
-      <TimelineItem
+      <Timeline.Item
           icon="user"
           iconColor="royal"
           lineStyle="dotted"
@@ -57,8 +56,8 @@ const TimelineVertical = () => (
             detail="37-27 74th Street"
             title="Jackson heights"
         />
-      </TimelineItem>
-      <TimelineItem
+      </Timeline.Item>
+      <Timeline.Item
           icon="check"
           iconColor="teal"
       >
@@ -66,7 +65,7 @@ const TimelineVertical = () => (
             detail="81 Gate St Brooklyn"
             title="Greenpoint"
         />
-      </TimelineItem>
+      </Timeline.Item>
     </Timeline>
   </div>
 )

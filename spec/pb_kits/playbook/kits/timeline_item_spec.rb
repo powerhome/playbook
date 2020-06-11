@@ -1,12 +1,11 @@
 # frozen_string_literal: true
 
-require_relative "../../../../app/pb_kits/playbook/pb_timeline/timeline_item"
+require_relative "../../../../app/pb_kits/playbook/pb_timeline/item"
 
-RSpec.describe Playbook::PbTimeline::TimelineItem do
-  subject { Playbook::PbTimeline::TimelineItem }
+RSpec.describe Playbook::PbTimeline::Item do
+  subject { Playbook::PbTimeline::Item }
 
   it { is_expected.to define_partial }
-  
   it { is_expected.to define_prop(:date) }
   it { is_expected.to define_prop(:icon) }
   it { is_expected.to define_enum_prop(:icon_color)

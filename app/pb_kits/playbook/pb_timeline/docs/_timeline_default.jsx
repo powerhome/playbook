@@ -1,36 +1,53 @@
 import React from 'react'
 import Timeline from '../_timeline.jsx'
-import TimelineItem from '../_timeline_item.jsx'
-import { TitleDetail } from '../../'
+import { Body, TitleDetail } from '../../'
 
 const TimelineDefault = () => (
   <div>
     <Timeline>
-      <TimelineItem
+      <Timeline.Item
           icon="user"
           iconColor="royal"
       >
-        <TitleDetail
-            detail="37-27 74th Street"
-            title="Jackson heights"
+        <Body
+            color="light"
+            text="Conversation started"
         />
-      </TimelineItem>
-      <TimelineItem
+      </Timeline.Item>
+      <Timeline.Item
           icon="check"
           iconColor="teal"
       >
-        <TitleDetail
-            detail="81 Gate St Brooklyn"
-            title="Greenpoint"
+        <Body
+            color="light"
+            text="Trip #12422"
         />
-      </TimelineItem>
+      </Timeline.Item>
+      <Timeline.Item
+          icon="credit-card"
+          iconColor="red"
+      >
+        <Body
+            color="light"
+            text="Refund issue #12422"
+        />
+      </Timeline.Item>
+      <Timeline.Item
+          icon="smile"
+          iconColor="green"
+      >
+        <Body
+            color="light"
+            text="Conversation resolved"
+        />
+      </Timeline.Item>
     </Timeline>
 
     <br />
     <br />
 
     <Timeline>
-      <TimelineItem
+      <Timeline.Item
           icon="user"
           iconColor="royal"
           lineStyle="dotted"
@@ -39,8 +56,8 @@ const TimelineDefault = () => (
             detail="37-27 74th Street"
             title="Jackson heights"
         />
-      </TimelineItem>
-      <TimelineItem
+      </Timeline.Item>
+      <Timeline.Item
           icon="check"
           iconColor="teal"
       >
@@ -48,7 +65,7 @@ const TimelineDefault = () => (
             detail="81 Gate St Brooklyn"
             title="Greenpoint"
         />
-      </TimelineItem>
+      </Timeline.Item>
     </Timeline>
   </div>
 )

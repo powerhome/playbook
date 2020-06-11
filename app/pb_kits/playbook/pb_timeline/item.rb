@@ -2,10 +2,10 @@
 
 module Playbook
   module PbTimeline
-    class TimelineItem
+    class Item
       include Playbook::Props
 
-      partial "pb_timeline/timeline_item"
+      partial "pb_timeline/item"
 
       prop :date
       prop :icon, required: true

@@ -5,7 +5,7 @@ import classnames from 'classnames'
 import { buildCss } from '../utilities/props'
 import { DateStacked, IconCircle } from '..'
 
-type TimelineItemProps = {
+type ItemProps = {
   className?: String,
   children?: Array<React.ReactChild>,
   date?: Date,
@@ -22,18 +22,20 @@ const TimelineItem = ({
   iconColor = 'default',
   lineStyle = 'solid',
 
-}: TimelineItemProps) => {
+}: ItemProps) => {
   const timelineItemCss = buildCss('pb_timeline_item_kit', lineStyle)
 
   return (
     <div className={classnames(timelineItemCss, className)}>
-      <If condition={date}>
-        <DateStacked
-            align="left"
-            date={date}
-            size="sm"
-        />
-      </If>
+      <div className="pb_timeline_item_left_block">
+        <If condition={date}>
+          <DateStacked
+              align="center"
+              date={date}
+              size="sm"
+          />
+        </If>
+      </div>
       <div className="pb_timeline_item_step">
         <IconCircle
             icon={icon}

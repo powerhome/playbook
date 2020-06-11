@@ -1,13 +1,15 @@
 import React from 'react'
 import Timeline from '../_timeline.jsx'
-import TimelineItem from '../_timeline_item.jsx'
 import { TitleDetail } from '../../'
 
 const TimelineWithDate = () => (
   <div>
-    <Timeline orientation="horizontal">
-      <TimelineItem
-          date={new Date('20 Mar 2018')}
+    <Timeline
+        orientation="horizontal"
+        showDate
+    >
+      <Timeline.Item
+          date={new Date()}
           icon="user"
           iconColor="royal"
       >
@@ -15,9 +17,8 @@ const TimelineWithDate = () => (
             detail="37-27 74th Street"
             title="Jackson heights"
         />
-      </TimelineItem>
-      <TimelineItem
-          date={new Date('21 Mar 2018')}
+      </Timeline.Item>
+      <Timeline.Item
           icon="check"
           iconColor="teal"
           lineStyle="dotted"
@@ -26,9 +27,9 @@ const TimelineWithDate = () => (
             detail="81 Gate St Brooklyn"
             title="Greenpoint"
         />
-      </TimelineItem>
-      <TimelineItem
-          date={new Date('22 Mar 2018')}
+      </Timeline.Item>
+      <Timeline.Item
+          date={new Date().setDate(new Date().getDate() + 1)}
           icon="map-marker-alt"
           iconColor="purple"
       >
@@ -36,16 +37,19 @@ const TimelineWithDate = () => (
             detail="72 E St Astoria"
             title="Society Hill"
         />
-      </TimelineItem>
+      </Timeline.Item>
     </Timeline>
 
     <br />
     <br />
     <br />
 
-    <Timeline orientation="vertical">
-      <TimelineItem
-          date={new Date('20 Mar 2018')}
+    <Timeline
+        orientation="vertical"
+        showDate
+    >
+      <Timeline.Item
+          date={new Date()}
           icon="user"
           iconColor="royal"
       >
@@ -53,9 +57,8 @@ const TimelineWithDate = () => (
             detail="37-27 74th Street"
             title="Jackson heights"
         />
-      </TimelineItem>
-      <TimelineItem
-          date={new Date('21 Mar 2018')}
+      </Timeline.Item>
+      <Timeline.Item
           icon="check"
           iconColor="teal"
           lineStyle="dotted"
@@ -64,9 +67,9 @@ const TimelineWithDate = () => (
             detail="81 Gate St Brooklyn"
             title="Greenpoint"
         />
-      </TimelineItem>
-      <TimelineItem
-          date={new Date('22 Mar 2018')}
+      </Timeline.Item>
+      <Timeline.Item
+          date={new Date().setDate(new Date().getDate() + 1)}
           icon="map-marker-alt"
           iconColor="purple"
       >
@@ -74,7 +77,7 @@ const TimelineWithDate = () => (
             detail="72 E St Astoria"
             title="Society Hill"
         />
-      </TimelineItem>
+      </Timeline.Item>
     </Timeline>
   </div>
 )
