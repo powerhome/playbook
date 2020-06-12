@@ -20,6 +20,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Added id, aria, data props to React Section Separator kit. Added aria props to Rails Section Separator kit. ([#852](https://github.com/powerhome/playbook/pull/852) @kellyeryan)
 - Added spacing props to Layout subcomponents ([#854](https://github.com/powerhome/playbook/pull/854)@christinaatai)\
 - Added full page example of a registration dashboard ([#854](https://github.com/powerhome/playbook/pull/854)@christinaatai)
+- Added id props to React Avatar Action Button kit; Added aria props to Rails Avatar Action Button kit ([#857](https://github.com/powerhome/playbook/pull/857) @kellyeryan)
 
 ## [4.17.0] 2020-6-5
 
