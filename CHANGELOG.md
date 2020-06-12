@@ -5,12 +5,9 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-### Added
--Added aria, data, id props to React Label Value kit, added aria props to Rails Label Value kit ([#845](https://github.com/powerhome/playbook/pull/845) @kellyeryan)
+## [4.18.0] 2020-6-12
 
-## Unreleased
-
-### Added
+### Added/Updated
 - Added Timeline Kit ([#839](https://github.com/powerhome/playbook/pull/839)@christinaatai)
 - Added aria, data, id, className props to React Logistic kit and aria to Rails Logistic kit.([#846](https://github.com/powerhome/playbook/pull/846)@kellyeryan)
 - Added aria, data, id, className props to React Message kit; added aria props to Rails Message kit ([#847](https://github.com/powerhome/playbook/pull/847) @kellyeryan)
