@@ -3,6 +3,7 @@
 import React from 'react'
 import classnames from 'classnames'
 import DateTime from '../pb_kit/dateTime.js'
+import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
 import { Body, Caption, Icon, Title } from '../'
 import { spacing } from '../utilities/spacing.js'
 
@@ -14,19 +15,40 @@ const dateString = (value: DateTime) => {
 }
 
 type LogisticProps = {
+  aria?: object,
+  className?: String,
   dark?: Boolean,
+  data?: object,
   date: String,
+  id?: String,
   link?: String,
-  projectName: String,
-  projectNumber: Number,
+  projectName?: String,
+  projectNumber?: Number,
 }
 
 const Logistic = (props: LogisticProps) => {
-  const { dark = false, date, link, projectName, projectNumber } = props
+  const { aria = {},
+    className,
+    dark = false,
+    data = {},
+    date,
+    id,
+    link,
+    projectName,
+    projectNumber } = props
+
+  const ariaProps = buildAriaProps(aria)
+  const dataProps = buildDataProps(data)
   const formattedDate = new DateTime({ value: date })
+  const classes = classnames(buildCss('pb_logistic_kit', { dark: dark }), className, spacing(props))
 
   return (
-    <div className={classnames('pb_logistic_kit', spacing(props))}>
+    <div
+        {...ariaProps}
+        {...dataProps}
+        className={classes}
+        id={id}
+    >
       <Body color="light">
         <Caption text="Project" />
         <Icon

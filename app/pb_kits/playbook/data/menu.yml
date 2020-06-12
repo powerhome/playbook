@@ -1,6 +1,6 @@
 samples:
   - dashboards
-  - something
+  - registration
 kits:
   - avatar
   - avatar_action_button

@@ -25,7 +25,7 @@ module Playbook
     private
 
       def avatar_class
-        avatar_name ? "avatar" : nil
+        valid? ? "avatar" : nil
       end
     end
   end

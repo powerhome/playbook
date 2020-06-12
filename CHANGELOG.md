@@ -5,10 +5,21 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+### Added
+-Added aria, data, id props to React Label Value kit, added aria props to Rails Label Value kit ([#845](https://github.com/powerhome/playbook/pull/845) @kellyeryan)
+
 ## Unreleased
 
 ### Added
 - Added Timeline Kit ([#839](https://github.com/powerhome/playbook/pull/839)@christinaatai)
+- Added aria, data, id, className props to React Logistic kit and aria to Rails Logistic kit.([#846](https://github.com/powerhome/playbook/pull/846)@kellyeryan)
+- Added aria, data, id, className props to React Message kit; added aria props to Rails Message kit ([#847](https://github.com/powerhome/playbook/pull/847) @kellyeryan)
+- Add aria, data, id props to React Person kit; added aria props to Rails Person kit. ([#848](https://github.com/powerhome/playbook/pull/848) @kellyeryan)
+- Added to React PersonContact kit data, aria, id props as well as `_person_contact_with_wrong_numbers.jsx` file. Added aria props to Rails PersonContact kit. ([#849](https://github.com/powerhome/playbook/pull/849) @kellyeryan)
+- Added aria, className, data, id props to React Progress Pills kit, add aria to Rails Progress Pills kit ([#850](https://github.com/powerhome/playbook/pull/850) @kellyeryan)
+- Added id, aria, data props to React Section Separator kit. Added aria props to Rails Section Separator kit. ([#852](https://github.com/powerhome/playbook/pull/852) @kellyeryan)
+- Added spacing props to Layout subcomponents ([#854](https://github.com/powerhome/playbook/pull/854)@christinaatai)\
+- Added full page example of a registration dashboard ([#854](https://github.com/powerhome/playbook/pull/854)@christinaatai)
 
 ## [4.17.0] 2020-6-5
 
