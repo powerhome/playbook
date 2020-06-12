@@ -1,0 +1,271 @@
+@import "../tokens/colors";
+@import "../tokens/spacing";
+@import "../tokens/opacity";
+@import "../tokens/typography";
+
+$connector_width: 2px;
+$icon_margin: $space_xs/2;
+$icon_height: 28px;
+$height_from_top: $icon_height/2 - $connector_width/2;
+
+@mixin pb_timeline_line_solid($width, $height, $margin) {
+    width: $width;
+    height: $height;
+    background-color: $border_light;
+    margin: $margin;
+    flex-grow: 1;
+}
+
+@mixin pb_timeline_line_dotted_horizontal($width, $height, $margin) {
+    width: $width;
+    height: $height;
+    background: repeating-linear-gradient(to right, $border_light 0px ,$border_light 2px, transparent 3px, transparent 10px);
+    margin: $margin;
+    flex-grow: 1;
+}
+
+@mixin pb_timeline_line_dotted_vertical($width, $height, $margin) {
+    width: $width;
+    height: $height;
+    background: repeating-linear-gradient(0deg, $border_light 0px ,$border_light 2px, transparent 3px, transparent 10px);
+    margin: $margin;
+    flex-grow: 1;
+}
+
+@mixin flex_wrapper($flex_direction) {
+    display: flex;
+    flex-direction: $flex_direction;
+}
+
+[class^=pb_timeline_kit] {
+    &[class*=_horizontal] {
+        @include flex_wrapper(row);
+        width: 100%;
+        >div {
+            &:last-child {
+                flex-basis: auto !important;
+                [class=pb_timeline_item_step] {
+                    [class=pb_timeline_item_connector] {
+                        opacity: 0;
+                    }
+                }
+                [class=pb_timeline_item_right_block] {
+                    display: block;
+                    width: 100%;
+                    overflow: hidden;
+                    white-space: nowrap;
+                }
+            }
+        }
+        [class*=pb_timeline_item_kit] {
+            &[class*=_solid] {
+                flex-basis: 100%;
+                [class=pb_timeline_item_left_block] {
+                    height: 0px;
+                }
+                [class=pb_timeline_item_step] {
+                    @include flex_wrapper(row);
+                    margin-top: $space_xs;
+                    margin-bottom: $space_xs;
+                    [class=pb_timeline_item_connector] {
+                        @include pb_timeline_line_solid($connector_width, $connector_width, $height_from_top $icon_margin 0 $icon_margin );
+                    }
+                }
+            }
+            &[class*=_dotted] {
+                flex-basis: 100%;
+                [class=pb_timeline_item_left_block] {
+                    height: 0;
+                }
+                [class=pb_timeline_item_step] {
+                    @include flex_wrapper(row);
+                    margin-top: $space_xs;
+                    margin-bottom: $space_xs;
+                    [class=pb_timeline_item_connector] {
+                        @include pb_timeline_line_dotted_horizontal($connector_width, $connector_width, $height_from_top $icon_margin 0 $icon_margin );
+                    }
+                }
+            }
+        }
+        &[class*=_with_date] {
+            @include flex_wrapper(row);
+            width: 100%;
+            >div {
+                &:last-child {
+                    flex-basis: auto !important;
+                    [class=pb_timeline_item_step] {
+                        [class=pb_timeline_item_connector] {
+                            opacity: 0;
+                        }
+                    }
+                    [class=pb_timeline_item_right_block] {
+                        display: block;
+                        width: 100%;
+                        overflow: hidden;
+                        white-space: nowrap;
+                    }
+                }
+            }
+            [class*=pb_timeline_item_kit] {
+                &[class*=_solid] {
+                    flex-basis: 100%;
+                    [class=pb_timeline_item_left_block] {
+                        @include flex_wrapper(column);
+                        height: 55px;
+                        justify-content: flex-end;
+                        [class=pb_date_stacked_kit_center_sm] {
+                            [class=pb_date_stacked_day_month] {
+                                [class=pb_caption_kit_md] {
+                                    text-align: left;
+                                }
+                                [class=pb_title_kit_4] {
+                                    text-align: left;
+                                }
+                            }
+                        }
+                    }
+                    [class=pb_timeline_item_step] {
+                        @include flex_wrapper(row);
+                        margin-top: $space_xs;
+                        margin-bottom: $space_xs;
+                        [class=pb_timeline_item_connector] {
+                            @include pb_timeline_line_solid($connector_width, $connector_width, $height_from_top $icon_margin 0 $icon_margin );
+                        }
+                    }
+                }
+                &[class*=_dotted] {
+                    flex-basis: 100%;
+                    [class=pb_timeline_item_left_block] {
+                        height: 55px;
+                        [class=pb_date_stacked_kit_center_sm] {
+                            [class=pb_date_stacked_day_month] {
+                                [class=pb_caption_kit_md] {
+                                    text-align: left;
+                                }
+                                [class=pb_title_kit_4] {
+                                    text-align: left;
+                                }
+                            }
+                        }
+                    }
+                    [class=pb_timeline_item_step] {
+                        @include flex_wrapper(row);
+                        margin-top: $space_xs;
+                        margin-bottom: $space_xs;
+                        [class=pb_timeline_item_connector] {
+                            @include pb_timeline_line_dotted_horizontal($connector_width, $connector_width, $height_from_top $icon_margin 0 $icon_margin );
+                        }
+                    }
+                }
+            } 
+        }
+    }
+    &[class*=_vertical] {
+        @include flex_wrapper(column);
+        align-items: flex-start;
+        align-self: auto;
+        >div:last-child {
+            [class=pb_timeline_item_step] {
+                [class=pb_timeline_item_connector] {
+                    opacity: 0;
+                }
+            }
+        }
+        [class*=pb_timeline_item_kit] {
+            @include flex_wrapper(row);
+            &[class*=_solid] {
+                flex-basis: 100%;
+                [class=pb_timeline_item_step] {
+                    @include flex_wrapper(column);
+                    align-content: flex-start;
+                    margin-right: $space_sm;
+                    margin-left: $space_sm;
+                    [class=pb_timeline_item_connector] {
+                        @include pb_timeline_line_solid($connector_width, $connector_width, $icon_margin 0 $icon_margin $height_from_top);
+                    }
+                }
+                [class=pb_timeline_item_left_block] {
+                    margin-bottom: $space_lg;
+                    width: 0px;
+                }
+                [class=pb_timeline_item_right_block] {
+                    @include flex_wrapper(column);
+                    margin-bottom: $space_lg;
+                }
+            }
+            &[class*=_dotted] {
+                flex-basis: 100%;
+                [class=pb_timeline_item_step] {
+                    @include flex_wrapper(column);
+                    margin-right: $space_sm;
+                    margin-left: $space_sm;
+                    [class=pb_timeline_item_connector] {
+                        @include pb_timeline_line_dotted_vertical($connector_width, $connector_width, $icon_margin 0 $icon_margin $height_from_top);
+                    }
+                }
+                [class=pb_timeline_item_left_block] {
+                    margin-bottom: $space_lg;
+                    width: 0px;
+                }
+                [class=pb_timeline_item_right_block] {
+                    @include flex_wrapper(column);
+                    margin-bottom: $space_lg;
+                }
+            }
+        }
+        &[class*=_with_date] {
+            @include flex_wrapper(column);
+            align-items: flex-start;
+            align-self: auto;
+            >div:last-child {
+                [class=pb_timeline_item_step] {
+                    [class=pb_timeline_item_connector] {
+                        opacity: 0;
+                    }
+                }
+            }
+            [class*=pb_timeline_item_kit] {
+                @include flex_wrapper(row);
+                &[class*=_solid] {
+                    flex-basis: 100%;
+                    [class=pb_timeline_item_step] {
+                        @include flex_wrapper(column);
+                        align-content: flex-start;
+                        margin-right: $space_sm;
+                        margin-left: $space_sm;
+                        [class=pb_timeline_item_connector] {
+                            @include pb_timeline_line_solid($connector_width, $connector_width, $icon_margin 0 $icon_margin $height_from_top);
+                        }
+                    }
+                    [class=pb_timeline_item_left_block] {
+                        margin-bottom: $space_lg;
+                        width: $space_lg;
+                    }
+                    [class=pb_timeline_item_right_block] {
+                        @include flex_wrapper(column);
+                        margin-bottom: $space_lg;
+                    }
+                }
+                &[class*=_dotted] {
+                    flex-basis: 100%;
+                    [class=pb_timeline_item_step] {
+                        @include flex_wrapper(column);
+                        margin-right: $space_sm;
+                        margin-left: $space_sm;
+                        [class=pb_timeline_item_connector] {
+                            @include pb_timeline_line_dotted_vertical($connector_width, $connector_width, $icon_margin 0 $icon_margin $height_from_top);
+                        }
+                    }
+                    [class=pb_timeline_item_left_block] {
+                        margin-bottom: $space_lg;
+                        width: $space_lg;
+                    }
+                    [class=pb_timeline_item_right_block] {
+                        @include flex_wrapper(column);
+                        margin-bottom: $space_lg;
+                    }
+                }
+            }
+        }
+    }
+}
