@@ -49,7 +49,7 @@ module Playbook
       if type == "rails"
         render template: "playbook/samples/#{sample}/index.html.erb"
       elsif type == "react"
-        react_component(sample.titleize.delete(" ").to_s)
+        react_component(sample.titleize.to_s)
       end
     end
   end
