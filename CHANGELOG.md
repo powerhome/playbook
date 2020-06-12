@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### Added
+-Added aria, className, data, id props to React Progress Pills kit, add aria to Rails Progress Pills kit ([#850](https://github.com/powerhome/playbook/pull/850) @kellyeryan)
+
 ## [4.17.0] 2020-6-5
 
 ### Added
