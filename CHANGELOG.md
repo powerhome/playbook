@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### Added
+-Added id props to React Avatar Action Button kit; Added aria props to Rails Avatar Action Button kit ([#857](https://github.com/powerhome/playbook/pull/857) @kellyeryan)
+
 ## [4.17.0] 2020-6-5
 
 ### Added
