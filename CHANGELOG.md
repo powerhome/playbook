@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## Unreleased
 
 ### Added
+- Added Timeline Kit ([#839](https://github.com/powerhome/playbook/pull/839)@christinaatai)
 - Added aria, data, id, className props to React Logistic kit and aria to Rails Logistic kit.([#846](https://github.com/powerhome/playbook/pull/846)@kellyeryan)
 - Added aria, data, id, className props to React Message kit; added aria props to Rails Message kit ([#847](https://github.com/powerhome/playbook/pull/847) @kellyeryan)
 - Add aria, data, id props to React Person kit; added aria props to Rails Person kit. ([#848](https://github.com/powerhome/playbook/pull/848) @kellyeryan)
