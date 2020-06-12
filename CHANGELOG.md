@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## Unreleased
 
 ### Added
+-Added aria, data, id, className props to React Logistic kit and aria to Rails Logistic kit.([#846](https://github.com/powerhome/playbook/pull/846)@kellyeryan)
 - Added id, aria, data props to React Section Separator kit. Added aria props to Rails Section Separator kit. ([#852](https://github.com/powerhome/playbook/pull/852) @kellyeryan)
 - Added aria, className, data, id props to React Progress Pills kit, add aria to Rails Progress Pills kit ([#850](https://github.com/powerhome/playbook/pull/850) @kellyeryan)
 
