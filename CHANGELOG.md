@@ -17,6 +17,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Added to React PersonContact kit data, aria, id props as well as `_person_contact_with_wrong_numbers.jsx` file. Added aria props to Rails PersonContact kit. ([#849](https://github.com/powerhome/playbook/pull/849) @kellyeryan)
 - Added aria, className, data, id props to React Progress Pills kit, add aria to Rails Progress Pills kit ([#850](https://github.com/powerhome/playbook/pull/850) @kellyeryan)
 - Added id, aria, data props to React Section Separator kit. Added aria props to Rails Section Separator kit. ([#852](https://github.com/powerhome/playbook/pull/852) @kellyeryan)
+- Added spacing props to Layout subcomponents ([#854](https://github.com/powerhome/playbook/pull/854)@christinaatai)\
+- Added full page example of a registration dashboard ([#854](https://github.com/powerhome/playbook/pull/854)@christinaatai)
 
 ## [4.17.0] 2020-6-5
 
