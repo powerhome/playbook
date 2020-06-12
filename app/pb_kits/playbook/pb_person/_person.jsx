@@ -4,32 +4,56 @@ import React from 'react'
 import classnames from 'classnames'
 import { spacing } from '../utilities/spacing.js'
 
+import {
+  buildAriaProps,
+  buildCss,
+  buildDataProps,
+} from '../utilities/props'
+
 import { Body, Title } from '../'
 
 type PersonProps = {
+  aria?: object,
   className?: String | Array<String>,
-  dark?: Boolean,
+  data?: object,
   firstName: String,
+  id?: String,
   lastName: String,
 }
 
 const Person = (props: PersonProps) => {
-  const { className, dark = false, firstName, lastName } = props
+  const {
+    aria = {},
+    className,
+    data = {},
+    firstName,
+    id,
+    lastName } = props
+
+  const ariaProps = buildAriaProps(aria)
+  const dataProps = buildDataProps(data)
+  const classes = classnames(buildCss('pb_person_kit'), className, spacing(props))
+
   return (
-    <div className={classnames('pb_person_kit', className, spacing(props))}>
+    <div
+        {...ariaProps}
+        {...dataProps}
+        className={classes}
+        id={id}
+    >
       <Body
           className="pb_person_first"
-          dark={dark}
           tag="span"
       >
         {firstName}
       </Body>
-      <Title
-          className="pb_person_first"
-          dark={dark}
-          size={4}
-          text={` ${lastName}`}
-      />
+      <If condition={lastName}>
+        <Title
+            className="pb_person_first"
+            size={4}
+            text={` ${lastName}`}
+        />
+      </If>
     </div>
   )
 }

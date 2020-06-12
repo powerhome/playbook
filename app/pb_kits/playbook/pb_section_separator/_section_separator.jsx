@@ -1,36 +1,45 @@
 /* @flow */
 import React from 'react'
 import classnames from 'classnames'
-import Caption from '../pb_caption/_caption.jsx'
+import { Caption } from '../'
+import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
 import { spacing } from '../utilities/spacing.js'
 
 type SectionSeparatorProps = {
+  aria: object,
   className: String,
-  text: String,
-  orientation?: "horizontal" | "vertical",
-  variant?: "card" | "background",
   dark?: Boolean,
+  data: object,
+  id: String,
+  orientation?: "horizontal" | "vertical",
+  text: String,
+  variant?: "card" | "background",
 }
 
 const SectionSeparator = (props: SectionSeparatorProps) => {
   const {
+    aria = {},
     className,
-    text,
-    orientation = 'horizontal',
-    variant = 'card',
     dark = false,
+    data = {},
+    id,
+    orientation = 'horizontal',
+    text,
+    variant = 'card',
   } = props
   const themeStyle = dark === true ? '_dark' : ''
-  const css = classnames(
-    [
-      `pb_section_separator_kit_${variant}_${orientation}` + themeStyle,
-      className,
-    ],
-    spacing(props)
-  )
+  const ariaProps = buildAriaProps(aria)
+  const dataProps = buildDataProps(data)
+  const classes = classnames(buildCss('pb_section_separator_kit', variant, orientation, themeStyle), className, spacing(props))
 
   return (
-    <div className={css}>
+
+    <div
+        {...ariaProps}
+        {...dataProps}
+        className={classes}
+        id={id}
+    >
       <span>
         <Caption text={text} />
       </span>

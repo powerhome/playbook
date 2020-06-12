@@ -3,7 +3,9 @@ import { SectionSeparator } from '../../'
 
 const SectionSeparatorText = () => {
   return (
-    <SectionSeparator text="Title Separator" />
+    <SectionSeparator
+        text="Title Separator"
+    />
   )
 }
 
