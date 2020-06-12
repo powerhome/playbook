@@ -3,10 +3,21 @@
 import React from 'react'
 import { Body, Title } from '../'
 import classnames from 'classnames'
+
+import {
+  buildAriaProps,
+  buildCss,
+  buildDataProps,
+} from '../utilities/props'
+
 import { spacing } from '../utilities/spacing.js'
 
 type ProgressPillsProps = {
   active?: Number,
+  aria?: object,
+  className?: String,
+  data?: object,
+  id?: String,
   steps?: Number,
   title?: String,
   value?: String,
@@ -26,7 +37,7 @@ const showSteps = (steps, active, dark) => {
 const ProgressPill = ({ active, dark, step }: ProgressPillProps) => (
   <div
       className={`pb_progress_pill${step <= active ? '_active' : '_inactive'}${
-      dark ? '_dark' : null
+      dark ? '_dark' : ''
     }`}
       key={step}
   />
@@ -35,15 +46,29 @@ const ProgressPill = ({ active, dark, step }: ProgressPillProps) => (
 const ProgressPills = (props: ProgressPillsProps) => {
   const {
     active = 0,
+    aria = {},
+    className,
+    data = {},
+    id,
     steps = 3,
-    title = null,
-    value = null,
+    title,
+    value,
     dark = false,
   } = props
   const darkClass = dark ? '_dark' : ''
 
+  const ariaProps = buildAriaProps(aria)
+  const dataProps = buildDataProps(data)
+  const classes = classnames(buildCss('pb_progress_pills_kit', darkClass), className, spacing(props))
+
   return (
-    <div className={classnames(`pb_progress_pills_kit${darkClass}`, spacing(props))}>
+    <div
+        {...ariaProps}
+        {...dataProps}
+        className={classes}
+        id={id}
+    >
+
       <If condition={title}>
         <div className="progress_pills_status">
           <Title
@@ -59,7 +84,6 @@ const ProgressPills = (props: ProgressPillsProps) => {
           />
         </div>
       </If>
-
       <div className="progress_pills">{showSteps(steps, active, dark)}</div>
     </div>
   )
