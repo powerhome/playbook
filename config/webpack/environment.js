@@ -24,4 +24,6 @@ fileLoader.exclude = /\.(svg)$/i
 // Add .erb loader
 environment.loaders.prepend('erb', erb)
 
+environment.splitChunks()
+
 module.exports = environment
