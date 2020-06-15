@@ -13,7 +13,7 @@ type TitleProps = {
   data?: object,
   id?: String,
   size?: 1 | 2 | 3 | 4,
-  tag?: "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "p" | "div" | "span",
+  tag?: "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "div",
   text?: String,
 }
 
