@@ -9,8 +9,13 @@ environment.loaders.insert('react-svg', svg, { before: 'file' })
 
 environment.loaders.insert('javascript', {
   test: /\.(js|jsx|mjs)$/,
-  use: 'babel-loader',
-  exclude: /node_modules(?!\/playbook-ui)/,
+  use: {
+    loader: 'babel-loader',
+    options: {
+      cacheDirectory: true,
+    }
+  },
+  exclude: /(node_modules)/,
 })
 
 const fileLoader = environment.loaders.get('file')
