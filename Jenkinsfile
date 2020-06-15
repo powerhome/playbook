@@ -9,9 +9,9 @@ library identifier: 'ci-kubed@v4.0.0', retriever: modernSCM([
 app.build(
   resources: [
     requestCpu: '2',
-    limitCpu: '3',
-    requestMemory: '4Gi',
-    limitMemory: '8Gi',
+    limitCpu: '2',
+    requestMemory: '2Gi',
+    limitMemory: '6Gi',
   ]
 ) {
   def scmVars
