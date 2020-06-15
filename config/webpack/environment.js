@@ -13,7 +13,7 @@ environment.loaders.insert('javascript', {
     loader: 'babel-loader',
     options: {
       cacheDirectory: true,
-    }
+    },
   },
   exclude: /(node_modules)/,
 })
