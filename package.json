@@ -37,7 +37,6 @@
     "flow-bin": "0.127.0",
     "husky": "3.1.0",
     "lint-staged": "10.2.9",
-    "terser-webpack-plugin": "^3.0.5",
     "webpack-dev-server": "3.7.2"
   },
   "dependencies": {
@@ -82,6 +81,7 @@
     "react-highlight-words": "^0.16.0",
     "react-popper": "^2.1.0",
     "svg-url-loader": "^4.0.0",
+    "terser-webpack-plugin": "^3.0.5",
     "webpacker-react": "^0.3.2"
   },
   "resolutions": {
