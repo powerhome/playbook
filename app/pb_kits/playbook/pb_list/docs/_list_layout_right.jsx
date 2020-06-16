@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { List, ListItem } from '../../'
+import { Currency, List, ListItem, Title } from '../../'
 
 const ListLayoutRight = () => {
   return (
@@ -8,11 +8,65 @@ const ListLayoutRight = () => {
       <List
           layout="right"
       >
-        <ListItem>{'Item 1'}</ListItem>
-        <ListItem>{'Item 2'}</ListItem>
-        <ListItem>{'Item 3'}</ListItem>
-        <ListItem>{'Item 4'}</ListItem>
-        <ListItem>{'Item 5'}</ListItem>
+        <ListItem>
+          <Title
+              size={4}
+              text="Label"
+          />
+          <Currency
+              amount="2,000.50"
+              label="Caption"
+              size="sm"
+          />
+        </ListItem>
+
+        <ListItem>
+          <Title
+              size={4}
+              text="Label"
+          />
+          <Currency
+              amount="2,000.50"
+              label="Caption"
+              size="sm"
+          />
+        </ListItem>
+
+        <ListItem>
+          <Title
+              size={4}
+              text="Label"
+          />
+          <Currency
+              amount="2,000.50"
+              label="Caption"
+              size="sm"
+          />
+        </ListItem>
+
+        <ListItem>
+          <Title
+              size={4}
+              text="Label"
+          />
+          <Currency
+              amount="2,000.50"
+              label="Caption"
+              size="sm"
+          />
+        </ListItem>
+
+        <ListItem>
+          <Title
+              size={4}
+              text="Label"
+          />
+          <Currency
+              amount="2,000.50"
+              label="Caption"
+              size="sm"
+          />
+        </ListItem>
       </List>
     </>
   )
