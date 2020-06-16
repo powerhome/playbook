@@ -77,7 +77,7 @@ class pbChart {
   setupChart() {
     Highcharts.setOptions(highchartsTheme)
 
-    let configOptions = {
+    const configOptions = {
       title: {
         text: this.defaults.title,
       },

@@ -12,8 +12,8 @@ const LineGraphLegendNonclickable = () => (
         axisTitle="Number of Employees"
         chartData={data}
         id="line-test-3"
-        legendClick={false}
         legend
+        legendClick={false}
         title="Line Graph with Legend Non Clickable"
         xAxisCategories={['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug']}
     />
