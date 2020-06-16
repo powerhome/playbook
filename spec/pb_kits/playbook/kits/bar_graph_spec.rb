@@ -10,6 +10,8 @@ RSpec.describe Playbook::PbBarGraph::BarGraph do
   it { is_expected.to define_prop(:axis_title) }
   it { is_expected.to define_prop(:point_start).of_type(Playbook::Props::Numeric) }
   it { is_expected.to define_prop(:subtitle) }
+  it { is_expected.to define_prop(:legend).of_type(Playbook::Props::Boolean).with_default(false) }
+  it { is_expected.to define_prop(:legend_click).of_type(Playbook::Props::Boolean).with_default(true) }
   it { is_expected.to define_prop(:title) }
   it { is_expected.to define_enum_prop(:orientation)
                       .with_default("vertical")

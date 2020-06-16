@@ -77,7 +77,7 @@ class pbChart {
   setupChart() {
     Highcharts.setOptions(highchartsTheme)
 
-    Highcharts.chart(this.defaults.id, {
+    let configOptions = {
       title: {
         text: this.defaults.title,
       },
@@ -111,7 +111,13 @@ class pbChart {
       },
       series: this.defaults.chartData,
       credits: false,
-    })
+    }
+
+    if (!this.defaults.legendClick) {
+      configOptions.plotOptions.series.events = { legendItemClick: () => false }
+    }
+
+    Highcharts.chart(this.defaults.id, configOptions)
   }
 
   refresh(silent = false) {

@@ -12,6 +12,8 @@ RSpec.describe Playbook::PbLineGraph::LineGraph do
   it { is_expected.to define_string_prop(:title) }
   it { is_expected.to define_prop(:chart_data).of_type(Playbook::Props::Array).with_default([]) }
   it { is_expected.to define_prop(:gradient).of_type(Playbook::Props::Boolean).with_default(false) }
+  it { is_expected.to define_prop(:legend).of_type(Playbook::Props::Boolean).with_default(false) }
+  it { is_expected.to define_prop(:legend_click).of_type(Playbook::Props::Boolean).with_default(true) }
 
   describe "#classname" do
     it "returns namespaced class name", :aggregate_failures do
