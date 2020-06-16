@@ -28,10 +28,16 @@ module Playbook
       def classname
         case layout
 	        when "collection"
-	          generate_classname("pb_layout_kit", layout)
+            generate_classname("pb_layout_kit", layout)
+          when "kanban"
+            generate_classname("pb_layout_kit", layout)
 	        else
 	          first_class = generate_classname("pb_layout_kit_sidebar","size_#{size}", position, variant, transparent_class)
 	          [first_class, full_class, collapse_class].reject(&:empty?).join(" ")
+      prop :type, type: Playbook::Props::Enum,
+            values: %w[sidebar collection kanban],
+            default: "sidebar"
+
         end
       end
 
