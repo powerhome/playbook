@@ -90,8 +90,8 @@ const Popover = (props: PbPopoverProps) => {
             >
               <div
                   className={classnames(
-                'popover_body',
-                popoverSpacing
+                  'popover_body',
+                  popoverSpacing
                 )}
                   style={Object.assign(
                   {},

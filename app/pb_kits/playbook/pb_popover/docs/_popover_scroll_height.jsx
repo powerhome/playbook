@@ -29,7 +29,7 @@ const PopoverScrollHeight = () => {
     <PbReactPopover
         closeOnClick="any"
         maxHeight="150px"
-        maxWidth="200px"
+        maxWidth="240px"
         offset
         placement="top"
         reference={popoverTrigger}

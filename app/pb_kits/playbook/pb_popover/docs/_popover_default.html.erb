@@ -1,8 +1,19 @@
-<span id='regular-popover-1'>Click Me.</span>
-<%= pb_rails("popover", props: {trigger_element_id: "regular-popover-1", tooltip_id: "tooltip-1", position: 'right', offset: false }) do %>
-    Whoa. I'm a popover.
+<%= pb_rails("flex", props: {
+    orientation: "row",
+    vertical: "center"
+    }) do %>
+    <%= pb_rails("body", props: { text: "Click info for more details" }) %>
+    &nbsp;
+    <%= pb_rails("circle_icon_button", props: {
+        variant: "secondary",
+        icon: "info",
+        id: "regular-popover-1"
+    }) %>
+    <%= pb_rails("popover", props: {
+        trigger_element_id: "regular-popover-1",
+        tooltip_id: "tooltip-1",
+        offset: true
+    }) do %>
+        I'm a popover. I can show content of any size.
+    <% end %>
 <% end %>
-
-
-
-

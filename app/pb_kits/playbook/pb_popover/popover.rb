@@ -6,9 +6,12 @@ module Playbook
       include Playbook::Props
       partial "pb_popover/popover"
 
-      prop :position
+      prop :position, type: Playbook::Props::Enum,
+                      values: %w[top bottom left right],
+                      default: "left"
       prop :trigger_element_id
       prop :tooltip_id
+      prop :z_index, type: Playbook::Props::String
       prop :offset, type: Playbook::Props::Boolean, default: false
       prop :close_on_click, type: Playbook::Props::Enum,
                             values: %w[none outside inside any],

@@ -26,8 +26,8 @@ const PopoverZIndex = () => {
 
   return (
     <>
-      <div style={{ position: 'relative', zIndex: 15 }}>
-        <Body text="I've got a z-index of 15" />
+      <div style={{ position: 'relative', zIndex: 2 }}>
+        <Body text="I've got a z-index of 2" />
       </div>
       <br />
       <PbReactPopover
@@ -37,9 +37,9 @@ const PopoverZIndex = () => {
           reference={popoverTrigger}
           shouldClosePopover={handleShouldClosePopover}
           show={showPopover}
-          zIndex={16}
+          zIndex={3}
       >
-        {'I have a custom z-index of 16'}
+        {'I have a custom z-index of 3'}
       </PbReactPopover>
     </>
   )

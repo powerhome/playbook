@@ -1,7 +1,7 @@
 import PbEnhancedElement from '../pb_enhanced_element'
 import Popper from 'popper.js'
 
-const POPOVER_OFFSET_Y = '0,8'
+const POPOVER_OFFSET_Y = '0,20'
 
 export default class PbPopover extends PbEnhancedElement {
   static get selector() {
