@@ -113,7 +113,7 @@ class pbChart {
       credits: false,
     }
 
-    if (!this.defaults.legendClick) {
+    if (!this.defaults.toggleLegendClick) {
       configOptions.plotOptions.series.events = { legendItemClick: () => false }
     }
 

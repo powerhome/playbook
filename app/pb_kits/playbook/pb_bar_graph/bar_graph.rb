@@ -21,8 +21,8 @@ module Playbook
       prop :y_axis_max, type: Playbook::Props::Numeric
       prop :legend, type: Playbook::Props::Boolean,
                     default: false
-      prop :legend_click, type: Playbook::Props::Boolean,
-                          default: true
+      prop :toggle_legend_click, type: Playbook::Props::Boolean,
+                                 default: true
       prop :height
 
       def chart_type
@@ -42,7 +42,7 @@ module Playbook
           yAxisMin: y_axis_min,
           yAxisMax: y_axis_max,
           legend: legend,
-          legendClick: legend_click,
+          toggleLegendClick: toggle_legend_click,
           height: height,
         }.to_json.html_safe
       end

@@ -22,7 +22,7 @@ type LineGraphProps = {
   title: String,
   type?: String,
   legend?: Boolean,
-  legendClick?: Boolean,
+  toggleLegendClick?: Boolean,
   height?: String,
 }
 
@@ -32,7 +32,7 @@ export default class LineGraph extends React.Component<LineGraphProps> {
     gradient: false,
     type: 'line',
     legend: false,
-    legendClick: true,
+    toggleLegendClick: true,
   }
 
   componentDidMount() {
@@ -49,7 +49,7 @@ export default class LineGraph extends React.Component<LineGraphProps> {
       title,
       type,
       legend,
-      legendClick,
+      toggleLegendClick,
       height,
     } = this.props
 
@@ -65,7 +65,7 @@ export default class LineGraph extends React.Component<LineGraphProps> {
       yAxisMin: yAxisMin,
       yAxisMax: yAxisMax,
       legend: legend,
-      legendClick: legendClick,
+      toggleLegendClick: toggleLegendClick,
       height: height,
     })
   }

@@ -21,7 +21,7 @@ type BarGraphProps = {
   title: String,
   type?: String,
   legend?: Boolean,
-  legendClick?: Boolean,
+  toggleLegendClick?: Boolean,
   height?: String,
 }
 
@@ -30,7 +30,7 @@ export default class BarGraph extends React.Component<BarGraphProps> {
     className: 'pb_bar_graph',
     type: 'column',
     legend: false,
-    legendClick: true,
+    toggleLegendClick: true,
   }
 
   componentDidMount() {
@@ -48,7 +48,7 @@ export default class BarGraph extends React.Component<BarGraphProps> {
       type,
       legend,
       height,
-      legendClick,
+      toggleLegendClick,
     } = this.props
 
     new pbChart(`.${className}`, {
@@ -63,7 +63,7 @@ export default class BarGraph extends React.Component<BarGraphProps> {
       yAxisMin: yAxisMin,
       yAxisMax: yAxisMax,
       legend: legend,
-      legendClick: legendClick,
+      toggleLegendClick: toggleLegendClick,
       height: height,
     })
   }
