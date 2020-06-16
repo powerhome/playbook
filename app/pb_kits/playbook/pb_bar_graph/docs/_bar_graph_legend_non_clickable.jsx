@@ -13,8 +13,8 @@ const BarGraphLegendNonClickable = () => (
         chartData={chartData}
         id="bar-test-3"
         legend
-        toggleLegendClick={false}
         title="Bar Graph with Legend Non Clickable"
+        toggleLegendClick={false}
         xAxisCategories={['Jan', 'Feb', 'Mar', 'Apr', 'May']}
         yAxisMin={0}
     />
