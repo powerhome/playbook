@@ -1,54 +1,35 @@
-<%= pb_rails("layout", props: {type: "kanban"}) do %>
+<%= pb_rails("layout", props: {layout: "kanban"}) do %>
   <%= pb_rails("layout/body") do %>
-    <%= pb_rails("card" ) do %>
-      Card content 
+    <%= pb_rails("card", props: {highlight: {position: "top", color:"warning"}}) do %>
+      Runway Ticket #1
     <% end %>
-    <%= pb_rails("card") do %>
-      <%= pb_rails("title", props: { text: "Title 4", tag: "h4", size: 4 }) %>
-      <%= pb_rails("title", props: { text: "Title 3", tag: "h3", size: 3 }) %>
+    <%= pb_rails("card", props: {highlight: {position: "top", color:"warning"}}) do %>
+      Runway Ticket #2
     <% end %>
-    <%= pb_rails("card" ) do %>
-    <%= pb_rails("user", props: {
-      name: "Anna Black",
-      title: "Remodeling Consultant",
-      orientation: "vertical",
-      align: "center",
-      size: "lg",
-      avatar_url: "https://randomuser.me/api/portraits/women/44.jpg"
-      }) %>
+    <%= pb_rails("card", props: {highlight: {position: "top", color:"warning"}}) do %>
+      Runway Ticket #3
+    <% end %
+  <% end %>
+  <%= pb_rails("layout/body") do %>
+    <%= pb_rails("card", props: {highlight: {position: "top", color:"warning"}}) do %>
+      Runway Ticket #4
     <% end %>
-        <%= pb_rails("card" ) do %>
-
-            <%= pb_rails("title", props: { text: "Title 4", tag: "h4", size: 4 }) %>
-
-            <%= pb_rails("title", props: { text: "Title 2", tag: "h2", size: 2 }) %>
-            <%= pb_rails("title", props: { text: "Title 1", tag: "h1", size: 1 }) %>
+    <%= pb_rails("card", props: {highlight: {position: "top", color:"warning"}}) do %>
+      Runway Ticket #5
     <% end %>
-     <%= pb_rails("card" ) do %>
-      Card content 
+    <%= pb_rails("card", props: {highlight: {position: "top", color:"warning"}}) do %>
+      Runway Ticket #6
+    <% end %
+  <% end %>
+  <%= pb_rails("layout/body") do %>
+    <%= pb_rails("card", props: {highlight: {position: "top", color:"warning"}}) do %>
+      Runway Ticket #7
     <% end %>
-     <%= pb_rails("card") do %>
-      Card content 
+    <%= pb_rails("card", props: {highlight: {position: "top", color:"warning"}}) do %>
+      Runway Ticket 8
     <% end %>
-      <%= pb_rails("user", props: {
-      name: "Anna Black",
-      title: "Remodeling Consultant",
-      orientation: "vertical",
-      align: "center",
-      size: "lg",
-      avatar_url: "https://randomuser.me/api/portraits/women/44.jpg"
-      }) %>
-     <%= pb_rails("card" ) do %>
-      Card content 
-    <% end %>
-    <div>
-     <%= pb_rails("card" ) do %>
-
-     <%= pb_rails("title", props: { text: "Title 4", tag: "h4", size: 4 }) %>
-      <%= pb_rails("title", props: { text: "Title 3", tag: "h3", size: 3 }) %>
-      <%= pb_rails("title", props: { text: "Title 2", tag: "h2", size: 2 }) %>
-      <%= pb_rails("title", props: { text: "Title 1", tag: "h1", size: 1 }) %>
-    <% end %>
-    </div>
+    <%= pb_rails("card", props: {highlight: {position: "top", color:"warning"}}) do %>
+      Runway Ticket #9
+    <% end %
   <% end %>
 <% end %>
