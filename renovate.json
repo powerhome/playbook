@@ -1,5 +1,22 @@
 {
   "extends": [
     "config:base"
+  ],
+  "major": {
+    "enabled": false
+  },
+  "packageRules": [
+    {
+      "packageNames": [
+        "@rails/webpacker",
+        "node-sass",
+        "react",
+        "react-dom"
+      ],
+      "packagePatterns": [
+        "^(babel|webpacker)"
+      ],
+      "enabled": false
+    }
   ]
 }
