@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### Updated
+
+- Update dev startup ([#873](https://github.com/powerhome/playbook/pull/873) @thestephenmarshall)
+
 ## [4.18.1] 2020-6-15
 
 ### Updated
