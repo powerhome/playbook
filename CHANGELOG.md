@@ -10,6 +10,30 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - Added Installer kit ([#851](https://github.com/powerhome/playbook/pull/851) @stevelandwehr)
 
+### Updated
+
+- Update dev startup ([#873](https://github.com/powerhome/playbook/pull/873) @thestephenmarshall)
+- Renovate config updates ([#872](https://github.com/powerhome/playbook/pull/872) @thestephenmarshall)
+
+## [4.18.1] 2020-6-15
+
+### Updated
+- Increase Playbook Compilation Performance ([#866](https://github.com/powerhome/playbook/pull/866) @thestephenmarshall)
+
+## [4.18.0] 2020-6-12
+
+### Added/Updated
+- Added Timeline Kit ([#839](https://github.com/powerhome/playbook/pull/839)@christinaatai)
+- Added aria, data, id, className props to React Logistic kit and aria to Rails Logistic kit.([#846](https://github.com/powerhome/playbook/pull/846)@kellyeryan)
+- Added aria, data, id, className props to React Message kit; added aria props to Rails Message kit ([#847](https://github.com/powerhome/playbook/pull/847) @kellyeryan)
+- Add aria, data, id props to React Person kit; added aria props to Rails Person kit. ([#848](https://github.com/powerhome/playbook/pull/848) @kellyeryan)
+- Added to React PersonContact kit data, aria, id props as well as `_person_contact_with_wrong_numbers.jsx` file. Added aria props to Rails PersonContact kit. ([#849](https://github.com/powerhome/playbook/pull/849) @kellyeryan)
+- Added aria, className, data, id props to React Progress Pills kit, add aria to Rails Progress Pills kit ([#850](https://github.com/powerhome/playbook/pull/850) @kellyeryan)
+- Added id, aria, data props to React Section Separator kit. Added aria props to Rails Section Separator kit. ([#852](https://github.com/powerhome/playbook/pull/852) @kellyeryan)
+- Added spacing props to Layout subcomponents ([#854](https://github.com/powerhome/playbook/pull/854)@christinaatai)\
+- Added full page example of a registration dashboard ([#854](https://github.com/powerhome/playbook/pull/854)@christinaatai)
+- Added id props to React Avatar Action Button kit; Added aria props to Rails Avatar Action Button kit ([#857](https://github.com/powerhome/playbook/pull/857) @kellyeryan)
+
 ## [4.17.0] 2020-6-5
 
 ### Added

@@ -1,6 +1,6 @@
 samples:
   - dashboards
-  - something
+  - registration
 kits:
   - avatar
   - avatar_action_button
@@ -58,6 +58,7 @@ kits:
   - star_rating
   - stat_change
   - table
+  - timeline
   - tooltip
   - typography:
     - body

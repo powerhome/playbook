@@ -10,8 +10,8 @@ app.build(
   resources: [
     requestCpu: '1',
     limitCpu: '2',
-    requestMemory: '6Gi',
-    limitMemory: '16Gi',
+    requestMemory: '2Gi',
+    limitMemory: '4Gi',
   ]
 ) {
   def scmVars

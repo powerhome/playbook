@@ -80,6 +80,7 @@ import * as Table from 'pb_table/docs'
 import * as Textarea from 'pb_textarea/docs'
 import * as TextInput from 'pb_text_input/docs'
 import * as Time from 'pb_time/docs'
+import * as Timeline from 'pb_timeline/docs'
 import * as TimeStacked from 'pb_time_stacked/docs'
 import * as Timestamp from 'pb_timestamp/docs'
 import * as TimeRangeInline from 'pb_time_range_inline/docs'
@@ -159,6 +160,7 @@ WebpackerReact.setup({
   ...Textarea,
   ...TextInput,
   ...Time,
+  ...Timeline,
   ...TimeStacked,
   ...Timestamp,
   ...TimeRangeInline,
