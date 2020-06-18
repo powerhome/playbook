@@ -2,9 +2,9 @@ examples:
   rails:
     - popover_default: Default
     - popover_list: Example as dropdown
-    - popover_click_outside: Close on click outside
-    - popover_click_inside: Close on click inside
-    - popover_click_any: Close on click anywhere
+    - popover_close: Close Options
+    - popover_z_index: Set Z-Index
+    - popover_scroll_height: Scroll and Height Settings
 
   react:
     - popover_default: Default

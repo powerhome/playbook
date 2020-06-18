@@ -27,9 +27,11 @@ const PopoverZIndex = () => {
   return (
     <>
       <div style={{ position: 'relative', zIndex: 2 }}>
-        <Body text="I've got a z-index of 2" />
+        <Body
+            marginBottom="md"
+            text="I've got a z-index of 2"
+        />
       </div>
-      <br />
       <PbReactPopover
           closeOnClick="outside"
           offset

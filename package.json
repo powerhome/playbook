@@ -49,7 +49,7 @@
     "@babel/preset-env": "^7.5.5",
     "@babel/preset-flow": "^7.0.0",
     "@babel/preset-react": "^7.0.0",
-    "@popperjs/core": "^2.0.0",
+    "@popperjs/core": "^2.4.2",
     "@rails/webpacker": "^4.2.2",
     "babel-loader": "^8.0.5",
     "babel-plugin-flow-runtime": "0.11.1",

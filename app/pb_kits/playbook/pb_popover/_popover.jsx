@@ -60,10 +60,15 @@ const Popover = (props: PbPopoverProps) => {
 
   const popoverSpacing = spacing(props) ? spacing(props) : 'p_sm'
   const zIndexStyle = zIndex ? { zIndex: zIndex } : {}
-  const maxHeightStyle = maxHeight ? { maxHeight: maxHeight } : {}
-  const maxWidthStyle = maxWidth ? { maxWidth: maxWidth } : {}
-  const minHeightStyle = minHeight ? { minHeight: minHeight } : {}
-  const minWidthStyle = minWidth ? { minWidth: minWidth } : {}
+  const widthHeightStyles = () => {
+    return Object.assign(
+      {},
+      maxHeight ? { maxHeight: maxHeight } : {},
+      maxWidth ? { maxWidth: maxWidth } : {},
+      minHeight ? { minHeight: minHeight } : {},
+      minWidth ? { minWidth: minWidth } : {}
+    )
+  }
 
   return (
     <Popper
@@ -93,13 +98,7 @@ const Popover = (props: PbPopoverProps) => {
                   'popover_body',
                   popoverSpacing
                 )}
-                  style={Object.assign(
-                  {},
-                  maxHeightStyle,
-                  maxWidthStyle,
-                  minHeightStyle,
-                  minWidthStyle
-                )}
+                  style={widthHeightStyles()}
               >
                 {children}
               </div>

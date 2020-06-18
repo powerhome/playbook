@@ -29,6 +29,7 @@ const PopoverDefault = () => {
       &nbsp;
       <PbReactPopover
           offset
+          placement="top"
           reference={popoverReference}
           show={showPopover}
       >

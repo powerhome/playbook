@@ -23,13 +23,21 @@
 
 [class^="pb_popover_kit"] {
   .popover_tooltip {
-    display: none;
-    animation-name: fadeIn;
+    opacity: 0;
+    animation-name: fadeOut;
     animation-duration: 150ms;
     animation-timing-function: linear;
     animation-fill-mode: forwards;
+    visibility: hidden;
+    pointer-events: none;
     &.show {
-      display: block;
+      animation-name: fadeIn;
+      animation-duration: 150ms;
+      animation-timing-function: linear;
+      animation-fill-mode: forwards;
+      visibility: visible;
+      pointer-events: initial;
+      z-index: $z_9;
     }
   }
   .popover_body {

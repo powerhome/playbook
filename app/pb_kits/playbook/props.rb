@@ -51,6 +51,13 @@ module Playbook
       ].compact.join(" ")
     end
 
+    def generate_classname_without_spacing(*name_parts, separator: "_")
+      [
+        name_parts.compact.join(separator),
+        prop(:classname),
+      ].compact.join(" ")
+    end
+
     attr_accessor :values
     private :values, :values=
 

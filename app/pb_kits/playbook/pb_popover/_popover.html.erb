@@ -2,11 +2,9 @@
   id: object.id,
   data: object.data,
   class: object.classname) do %>
-    <div class="popover_tooltip" id="<%= object.tooltip_id %>" role="tooltip" >
-      <div class="popover_body">
-      <%= capture(&object.children) %>
+    <div class="popover_tooltip" id="<%= object.tooltip_id %>" role="tooltip" style="<%= object.z_index_helper %>">
+      <div class="popover_body <%= object.popover_spacing_helper %>" style="<%= object.width_height_helper %>">
+        <%= capture(&object.children) %>
       </div>
     </div>
 <% end %>
-
-
