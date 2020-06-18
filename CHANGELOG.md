@@ -8,6 +8,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## Unreleased
 
 ### Updated
+- Renovate config updates ([#872](https://github.com/powerhome/playbook/pull/872) @thestephenmarshall)
+- Fixed popover z-index issues plus added z-index, width, and height options ([#869](https://github.com/powerhome/playbook/pull/869/) @jasoncypret)
+
+## [4.18.1] 2020-6-15
+
+### Updated
 - Increase Playbook Compilation Performance ([#866](https://github.com/powerhome/playbook/pull/866) @thestephenmarshall)
 
 ## [4.18.0] 2020-6-12
