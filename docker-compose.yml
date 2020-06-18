@@ -12,7 +12,7 @@ services:
       - .:/home/app/src
       - bundle:/usr/local/bundle
     ports:
-      - "8080:3000"
+      - "8089:3000"
   webpacker:
     build:
       context: .
@@ -32,4 +32,4 @@ services:
     volumes:
       - .:/home/app/src
     ports:
-      - '3035:3035'
+      - '3040:3040'

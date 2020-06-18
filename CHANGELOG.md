@@ -5,6 +5,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## Unreleased
+
+### Updated
+
+- Update dev startup ([#873](https://github.com/powerhome/playbook/pull/873) @thestephenmarshall)
+- Renovate config updates ([#872](https://github.com/powerhome/playbook/pull/872) @thestephenmarshall)
+
+## [4.18.1] 2020-6-15
+
+### Updated
+- Increase Playbook Compilation Performance ([#866](https://github.com/powerhome/playbook/pull/866) @thestephenmarshall)
+
 ## [4.18.0] 2020-6-12
 
 ### Added/Updated
