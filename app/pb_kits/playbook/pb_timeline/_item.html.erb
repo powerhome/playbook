@@ -1,0 +1,28 @@
+<%= content_tag(:div,
+  id: object.id,
+  data: object.data,
+  class: object.classname) do %>
+  
+  <div class="pb_timeline_item_left_block">
+    <% if object.date.present? %>
+      <%= pb_rails("date_stacked", props: { 
+        date: object.date, 
+        size: "sm",
+        align: "center"
+      }) %>
+    <% end %>
+  </div>
+
+  <div class="pb_timeline_item_step">
+    <%= pb_rails("icon_circle", props: {
+      icon: object.icon,
+      variant: object.icon_color,
+      size: "xs"
+    }) %> 
+    <div class="pb_timeline_item_connector"></div>
+  </div>
+  <div class="pb_timeline_item_right_block">
+    <%= capture(&object.children) %>
+  </div>
+
+<% end %>

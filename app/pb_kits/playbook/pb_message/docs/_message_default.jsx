@@ -4,7 +4,6 @@ import { Message } from '../../'
 const MessageDefault = () => {
   return (
     <div>
-
       <Message
           avatarName="Mike Bishop"
           avatarStatus="online"
@@ -31,7 +30,7 @@ const MessageDefault = () => {
       <Message
           avatarName="Lisa Thompson"
           avatarUrl="https://randomuser.me/api/portraits/women/39.jpg"
-          message="To processs your order, I will need your full name."
+          message="To process your order, I will need your full name."
           timestamp="4 hours ago"
       />
 

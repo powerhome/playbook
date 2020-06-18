@@ -15,6 +15,7 @@ type AvatarActionButtonProps = {
   aria: Object,
   className?: String,
   data?: Object,
+  id?: String,
   imageUrl?: String,
   linkUrl?: String,
   name?: String,
@@ -28,6 +29,7 @@ const AvatarActionButton = ({
   aria = {},
   className,
   data = {},
+  id,
   imageUrl,
   linkUrl,
   name,
@@ -55,6 +57,7 @@ const AvatarActionButton = ({
         {...ariaProps}
         {...dataProps}
         className={classnames(css, className)}
+        id={id}
     >
       <a
           href={linkUrl}

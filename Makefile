@@ -18,6 +18,12 @@ build:
 bundle:
 	docker-compose run web bundle
 
+yarn:
+	docker-compose run web yarn
+
+install:
+	docker-compose run web yarn && bundle
+
 test:
 	docker-compose run web rake
 
