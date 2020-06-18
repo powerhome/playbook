@@ -21,7 +21,6 @@ const FiltersPopover = ({ children }: FiltersPopoverProps) => {
   return (
     <PbReactPopover
         closeOnClick="outside"
-        offset
         placement="bottom"
         reference={filterButton}
         shouldClosePopover={updateHide}

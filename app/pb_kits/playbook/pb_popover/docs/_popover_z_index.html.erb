@@ -1,0 +1,14 @@
+<div style="position: relative; z-index: 2">
+    <%= pb_rails("body", props: {text: "I've got a z-index of 2", margin_bottom: "md"}) %>
+</div>
+<%= pb_rails("button", props: { variant: "secondary", id: 'tooltip-z-index-1', text: "Click Me", }) %>
+<%= pb_rails("popover", props: {
+    trigger_element_id: "tooltip-z-index-1",
+    tooltip_id: "tooltip-z-index",
+    position: 'top',
+    z_index: "3",
+    offset: true
+}) do %>
+    I've got a z-index of 3
+<% end %>
+

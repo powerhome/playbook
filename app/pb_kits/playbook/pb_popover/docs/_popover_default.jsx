@@ -1,5 +1,8 @@
 import React, { useState } from 'react'
 import {
+  Body,
+  CircleIconButton,
+  Flex,
   PbReactPopover,
 } from '../..'
 
@@ -10,16 +13,29 @@ const PopoverDefault = () => {
     setShowPopover(!showPopover)
   }
   const popoverReference = (
-    <span onClick={handleTogglePopover}>{'Click me.'}</span>
+    <CircleIconButton
+        icon="info"
+        onClick={handleTogglePopover}
+        variant="secondary"
+    />
   )
 
   return (
-    <PbReactPopover
-        reference={popoverReference}
-        show={showPopover}
+    <Flex
+        orientation="row"
+        vertical="center"
     >
-      {'Whoa. I\'m a popover.'}
-    </PbReactPopover>
+      <Body text="Click info for more details" />
+      &nbsp;
+      <PbReactPopover
+          offset
+          placement="top"
+          reference={popoverReference}
+          show={showPopover}
+      >
+        {'I\'m a popover. I can show content of any size.'}
+      </PbReactPopover>
+    </Flex>
   )
 }
 

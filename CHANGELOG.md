@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Update dev startup ([#873](https://github.com/powerhome/playbook/pull/873) @thestephenmarshall)
 - Renovate config updates ([#872](https://github.com/powerhome/playbook/pull/872) @thestephenmarshall)
+- Fixed popover z-index issues plus added z-index, width, and height options ([#869](https://github.com/powerhome/playbook/pull/869/) @jasoncypret)
 
 ## [4.18.1] 2020-6-15
 - Add toggling for legend click on bar and line graph
