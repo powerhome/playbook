@@ -4,7 +4,7 @@ html
     title Playbook Design System
     = csrf_meta_tags
     = csp_meta_tag
-    = stylesheet_pack_tag 'main'
+    = stylesheet_packs_with_chunks_tag 'main'
     meta content="user-scalable=0, initial-scale=1.0, minimum-scale=1" name="viewport"
 
   body
@@ -18,6 +18,5 @@ html
           = yield
 
   = javascript_include_tag "https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"
-  = javascript_pack_tag 'application'
-  = javascript_pack_tag 'examples'
+  = javascript_packs_with_chunks_tag 'application', 'examples'
 = yield :pb_js

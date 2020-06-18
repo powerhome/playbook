@@ -15,8 +15,6 @@ import { buildCss, noop } from '../utilities/props'
 import classnames from 'classnames'
 import { spacing } from '../utilities/spacing.js'
 
-import { Card } from '../'
-
 type PbPopoverProps = {
   className?: String,
   closeOnClick?: "outside" | "inside",
@@ -35,7 +33,7 @@ const POPOVER_MODIFIERS = {
     enabled: true,
     name: 'offset',
     options: {
-      offset: [0, 8],
+      offset: [0, 20],
     },
     phase: 'main',
   },
@@ -53,7 +51,25 @@ const Popover = (props: PbPopoverProps) => {
     offset,
     placement,
     referenceElement,
+    zIndex,
+    maxHeight,
+    maxWidth,
+    minHeight,
+    minWidth,
   } = props
+
+  const popoverSpacing = spacing(props) ? spacing(props) : 'p_sm'
+  const zIndexStyle = zIndex ? { zIndex: zIndex } : {}
+  const widthHeightStyles = () => {
+    return Object.assign(
+      {},
+      maxHeight ? { maxHeight: maxHeight } : {},
+      maxWidth ? { maxWidth: maxWidth } : {},
+      minHeight ? { minHeight: minHeight } : {},
+      minWidth ? { minWidth: minWidth } : {}
+    )
+  }
+
   return (
     <Popper
         modifiers={popoverModifiers({ modifiers, offset })}
@@ -66,19 +82,26 @@ const Popover = (props: PbPopoverProps) => {
               className={`${buildCss('pb_popover_kit')} ${className}`}
               data-placement={placement}
               ref={ref}
-              style={style}
+              style={Object.assign(
+                {},
+                style,
+                zIndexStyle
+              )}
           >
             <div
                 className={classnames(
                 `${buildCss('popover_tooltip')} show`
               )}
             >
-              <Card
-                  className={spacing(props)}
-                  shadow="deeper"
+              <div
+                  className={classnames(
+                  'popover_body',
+                  popoverSpacing
+                )}
+                  style={widthHeightStyles()}
               >
                 {children}
-              </Card>
+              </div>
             </div>
           </div>
         )
@@ -143,16 +166,26 @@ export default class PbReactPopover extends React.Component<PbPopoverProps> {
       referenceElement,
       show,
       usePortal,
+      zIndex,
+      maxHeight,
+      maxWidth,
+      minHeight,
+      minWidth,
     } = this.props
 
     const popoverComponent = (
       <Popover
           {...this.props}
           className={className}
+          maxHeight={maxHeight}
+          maxWidth={maxWidth}
+          minHeight={minHeight}
+          minWidth={minWidth}
           modifiers={modifiers}
           offset={offset}
           placement={placement}
           referenceElement={referenceElement}
+          zIndex={zIndex}
       >
         {children}
       </Popover>

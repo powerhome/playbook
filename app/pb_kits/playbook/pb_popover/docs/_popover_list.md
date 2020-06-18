@@ -1,0 +1,1 @@
+Notice `offset` is not set so the popover is flush with the content.

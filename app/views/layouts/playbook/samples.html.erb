@@ -4,7 +4,7 @@
         <title>Full Screen Examples</title>
         <%= csrf_meta_tags %>
         <%= csp_meta_tag %>
-        <%= stylesheet_pack_tag 'main' %>
+        <%= stylesheet_packs_with_chunks_tag 'main' %>
     </head>
     <body>
         <div class="sample-layout">
@@ -13,7 +13,6 @@
     </body>
 
     <%= javascript_include_tag "https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js" %>
-    <%= javascript_pack_tag 'application' %>
-    <%= javascript_pack_tag 'samples' %>
+    <%= javascript_packs_with_chunks_tag 'application', 'examples', 'samples' %>
     <%= yield :pb_js %>
 </html>
