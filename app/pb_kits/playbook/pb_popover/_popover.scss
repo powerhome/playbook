@@ -1,14 +1,53 @@
 @import "../tokens/positioning";
+@import "../pb_card/card_mixin";
+@import "../tokens/shadows";
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+  }
+}
 
 [class^="pb_popover_kit"] {
   .popover_tooltip {
-    display: none;
+    opacity: 0;
+    animation-name: fadeOut;
+    animation-duration: 150ms;
+    animation-timing-function: linear;
+    animation-fill-mode: forwards;
+    visibility: hidden;
+    pointer-events: none;
     &.show {
-      display: block;
+      animation-name: fadeIn;
+      animation-duration: 150ms;
+      animation-timing-function: linear;
+      animation-fill-mode: forwards;
+      visibility: visible;
+      pointer-events: initial;
       z-index: $z_9;
     }
   }
+  .popover_body {
+    @include pb_card;
+    border: 0;
+    box-shadow: $shadow_deeper;
+    overflow: auto;
+  }
 }
+
 
 .pb_popover_reference_wrapper {
   display: inline-block;

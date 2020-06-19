@@ -1,0 +1,24 @@
+<%= pb_rails("button", props: { variant: "secondary", id: 'scroll-height', text: "Click Me" }) %>
+<%= pb_rails("popover", props: {
+    trigger_element_id: "scroll-height",
+    tooltip_id: "scroll-height-1",
+    position: 'top',
+    close_on_click: "any",
+    max_height: "150px",
+    max_width: "240px",
+    offset: true
+    }) do %>
+    <%= pb_rails("body", props: {
+        margin_bottom: "sm",
+        text: "So many people live within unhappy circumstances and yet will
+          not take the initiative to change their situation because they are
+          conditioned to a life of security, conformity, and conservation, all of
+          which may appear to give one peace of mind, but in reality, nothing is
+          more damaging to the adventurous spirit."
+    }) %>
+    <%= pb_rails("title", props: {
+        size: 4,
+        text: "- Christopher McCandless"
+    }) %>
+<% end %>
+      

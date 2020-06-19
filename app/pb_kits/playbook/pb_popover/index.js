@@ -1,7 +1,7 @@
 import PbEnhancedElement from '../pb_enhanced_element'
-import Popper from 'popper.js'
+import { createPopper } from '@popperjs/core'
 
-const POPOVER_OFFSET_Y = '0,8'
+const POPOVER_OFFSET_Y = [0, 20]
 
 export default class PbPopover extends PbEnhancedElement {
   static get selector() {
@@ -9,13 +9,17 @@ export default class PbPopover extends PbEnhancedElement {
   }
 
   connect() {
-    this.popper = new Popper(this.triggerElement, this.tooltip, {
+    this.popper = createPopper(this.triggerElement, this.tooltip, {
       placement: this.position,
-      modifiers: {
-        offset: {
-          offset: this.offset,
+      strategy: 'fixed',
+      modifiers: [
+        {
+          name: 'offset',
+          options: {
+            offset: this.offset,
+          },
         },
-      },
+      ],
     })
 
     this.triggerElement.addEventListener('click', (event) => {
@@ -27,7 +31,7 @@ export default class PbPopover extends PbEnhancedElement {
       }
 
       setTimeout(() => {
-        this.popper.scheduleUpdate()
+        // this.popper.scheduleUpdate()
         this.tooltip.classList.toggle('show')
       }, 0)
     })
@@ -89,7 +93,7 @@ export default class PbPopover extends PbEnhancedElement {
   }
 
   get offset() {
-    return this.element.dataset.pbPopoverOffset === 'true' ? POPOVER_OFFSET_Y : '0,0'
+    return this.element.dataset.pbPopoverOffset === 'true' ? POPOVER_OFFSET_Y : [0, 0]
   }
 
   get closeOnClick() {

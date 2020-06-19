@@ -9,10 +9,10 @@ Playbook is the first design system built for both Rails & React interfaces. Ins
 
 ## Getting started
 
-1. Run `yarn && bundle`
+1. Run `make install`
 1. Run `make start`
 1. Install overcommit hooks `bin/overcommit`
-1. open [http://localhost:8080](http://localhost:8080)
+1. open [http://localhost:8089](http://localhost:8089)
 
 To clean up this project from your local machine, run `make stop`, which will drop all containers and networks associated with this project. To purge all resources, do `make clean`, which also removes images and volumes for a blank slate.
 

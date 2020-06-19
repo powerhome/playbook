@@ -1,0 +1,9 @@
+examples:
+  
+  rails:
+  - installer_default: Default
+  
+  
+  react:
+  - installer_default: Default
+  

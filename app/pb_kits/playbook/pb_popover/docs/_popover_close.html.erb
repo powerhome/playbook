@@ -1,0 +1,42 @@
+<%= pb_rails("flex", props: {classname: "flex-container", spacing: "between"}) do %>
+  <span>
+    <%= pb_rails("button", props: { text: "Click Inside", variant: "secondary", id: 'inside-popover-1' }) %>
+    <%= pb_rails("popover", props: {
+      close_on_click: "inside",
+      trigger_element_id: "inside-popover-1",
+      tooltip_id: "inside-tooltip-1",
+      position: 'bottom',
+      offset: true
+    }) do %>
+      Click on me!
+    <% end %>
+  </span>
+  <span>
+    <%= pb_rails("button", props: { text: "Click Outside", variant: "secondary", id: 'outside-popover-1' }) %>
+    <%= pb_rails("popover", props: {
+      close_on_click: "outside",
+      trigger_element_id: "outside-popover-1",
+      tooltip_id: "outside-tooltip-1",
+      position: 'left',
+      offset: true
+    }) do %>
+        Click anywhere but me!
+      <% end %>
+  </span>
+  <span>
+    <%= pb_rails("button", props: {
+      text: "Click Anywhere",
+      variant: "secondary",
+      id: 'any-popover-1'
+    }) %>
+    <%= pb_rails("popover", props: {
+      close_on_click: "any",
+      trigger_element_id: "any-popover-1",
+      tooltip_id: "any-tooltip-1",
+      position: 'top',
+      offset: true
+    }) do %>
+      Click anything!
+    <% end %>
+  </span>
+<% end %>
