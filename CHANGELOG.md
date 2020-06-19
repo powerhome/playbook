@@ -10,6 +10,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [5.0.0] 2020-6-19
 
 ### Added
+- Increase Playbook Compilation Performance([#866](https://github.com/powerhome/playbook/pull/866) @thestephenmarshall)
+- Add ability to toggle if the legend is clickable([#870](https://github.com/powerhome/playbook/pull/870) @haydenrou)
+- Add documentation and props to React List Playbook kit([#867](https://github.com/powerhome/playbook/pull/867) @kellyeryan)
+- Add aria, data, id props to React Title kit and aria to Rails Title kit([#853](https://github.com/powerhome/playbook/pull/853) @kellyeryan)
 - Added New Layout Kit (Kanban) for Rails and React ([#874](https://github.com/powerhome/playbook/pull/874) @jasperfurniss)
 - Added rails/react full page example for filter and table ([#862](https://github.com/powerhome/playbook/pull/862) @evalouderback)
 - Added id, aria, data props to React Caption kit ([#860](https://github.com/powerhome/playbook/pull/860) @kellyeryan)
