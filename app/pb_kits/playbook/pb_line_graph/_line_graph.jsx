@@ -22,6 +22,7 @@ type LineGraphProps = {
   title: String,
   type?: String,
   legend?: Boolean,
+  toggleLegendClick?: Boolean,
   height?: String,
 }
 
@@ -30,6 +31,8 @@ export default class LineGraph extends React.Component<LineGraphProps> {
     className: 'pb_bar_graph',
     gradient: false,
     type: 'line',
+    legend: false,
+    toggleLegendClick: true,
   }
 
   componentDidMount() {
@@ -46,6 +49,7 @@ export default class LineGraph extends React.Component<LineGraphProps> {
       title,
       type,
       legend,
+      toggleLegendClick,
       height,
     } = this.props
 
@@ -61,6 +65,7 @@ export default class LineGraph extends React.Component<LineGraphProps> {
       yAxisMin: yAxisMin,
       yAxisMax: yAxisMax,
       legend: legend,
+      toggleLegendClick: toggleLegendClick,
       height: height,
     })
   }

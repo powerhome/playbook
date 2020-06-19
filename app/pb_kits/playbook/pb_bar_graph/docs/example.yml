@@ -1,13 +1,15 @@
 examples:
-  
+
   rails:
   - bar_graph_default: Default
   - bar_graph_legend: Legend
+  - bar_graph_legend_non_clickable: Legend Non Clickable
   - bar_graph_height: Height
-  
-  
+
+
   react:
   - bar_graph_default: Default
   - bar_graph_legend: Legend
+  - bar_graph_legend_non_clickable: Legend Non Clickable
   - bar_graph_height: Height
-  
+

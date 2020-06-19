@@ -5,22 +5,32 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+### Added
+- Added rails/react full page example for filter and table ([#862](https://github.com/powerhome/playbook/pull/862) @evalouderback)
+
 ## Unreleased
 
 #### Added 
 - Added id, aria, data props to React Caption kit ([#860](https://github.com/powerhome/playbook/pull/860) @kellyeryan)
+- Added Installer kit ([#851](https://github.com/powerhome/playbook/pull/851) @stevelandwehr)
 
 ### Updated
 
 - Update dev startup ([#873](https://github.com/powerhome/playbook/pull/873) @thestephenmarshall)
 - Renovate config updates ([#872](https://github.com/powerhome/playbook/pull/872) @thestephenmarshall)
+- Fixed popover z-index issues plus added z-index, width, and height options ([#869](https://github.com/powerhome/playbook/pull/869/) @jasoncypret)
 
 ## [4.18.1] 2020-6-15
+- Add toggling for legend click on bar and line graph
 
 ### Updated
 - Increase Playbook Compilation Performance ([#866](https://github.com/powerhome/playbook/pull/866) @thestephenmarshall)
 
 ## [4.18.0] 2020-6-12
+
+### Added
+
+- Added aria, data, id props to React List kit, added documentation files to React List kit([#867](https://github.com/powerhome/playbook/pull/867)@kellyeryan)
 
 ### Added/Updated
 - Added Timeline Kit ([#839](https://github.com/powerhome/playbook/pull/839)@christinaatai)
@@ -33,6 +43,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Added spacing props to Layout subcomponents ([#854](https://github.com/powerhome/playbook/pull/854)@christinaatai)\
 - Added full page example of a registration dashboard ([#854](https://github.com/powerhome/playbook/pull/854)@christinaatai)
 - Added id props to React Avatar Action Button kit; Added aria props to Rails Avatar Action Button kit ([#857](https://github.com/powerhome/playbook/pull/857) @kellyeryan)
+
+### Added
+
+- Added id, aria, data props to React Title kit, added aria props to Rails Title kit ([#853](https://github.com/powerhome/playbook/pull/853) @kellyeryan)
 
 ## [4.17.0] 2020-6-5
 

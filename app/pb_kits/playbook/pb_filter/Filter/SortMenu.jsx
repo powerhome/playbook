@@ -69,7 +69,7 @@ const SortMenu = ({ options, value, onChange }: SortMenuProps) => {
     <PbReactPopover
         className="pb_filter_sort_menu"
         closeOnClick="outside"
-        offset
+        padding="none"
         placement="bottom"
         reference={sortButton}
         shouldClosePopover={updateHide}
