@@ -10,7 +10,7 @@ RSpec.describe Playbook::PbTitle::Title do
     .with_default(false) }
   it { is_expected.to define_prop(:size).of_type(Playbook::Props::Enum).with_default(3) }
   it { is_expected.to define_enum_prop(:tag)
-    .with_values("h1", "h2", "h3", "h4", "h5", "h6", "div")
+    .with_values("h1", "h2", "h3", "h4", "h5", "h6", "p", "div", "span")
     .with_default("h3")
      }
 
