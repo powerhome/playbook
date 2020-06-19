@@ -25,12 +25,14 @@ module Playbook
             values: %w[sidebar collection kanban],
             default: "sidebar"
 
+      prop :responsive, type: Playbook::Props::Boolean, default: false
+
       def classname
         case layout
 	        when "collection" 
             generate_classname("pb_layout_kit", layout)
           when "kanban"
-            generate_classname("pb_layout_kit", layout)
+            generate_classname("pb_layout_kit", layout, responsive_class)
 	        else
 	          first_class = generate_classname("pb_layout_kit_sidebar","size_#{size}", position, variant, transparent_class)
 	          [first_class, full_class, collapse_class].reject(&:empty?).join(" ")
@@ -38,6 +40,10 @@ module Playbook
       end
 
     private
+
+      def responsive_class
+        responsive ? "responsive" : ""
+      end
 
       def full_class
         full ? "full" : ""

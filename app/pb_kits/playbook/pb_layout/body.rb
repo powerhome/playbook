@@ -7,6 +7,10 @@ module Playbook
 
       partial "pb_layout/body"
 
+      prop :tag, type: Playbook::Props::Enum,
+                 values: %w[ul li span div],
+                 default: "div"
+
       def classname
         generate_classname("layout_body")
       end

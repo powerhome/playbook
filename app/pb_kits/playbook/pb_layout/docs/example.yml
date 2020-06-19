@@ -13,3 +13,4 @@ examples:
   - layout_sizes: Sizes
   - layout_sizes_dark: Sizes Dark
   - layout_collection: Collection Layout
+  - layout_kanban: Kanban Layout

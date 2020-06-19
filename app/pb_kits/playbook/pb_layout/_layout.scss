@@ -3,6 +3,15 @@
 @import "../tokens/screen_sizes";
 @import "./layout_mixin";
 
+$list-width: 300px;
+$gap: $space_sm;
+$scrollbar-thickness: $space_md;
+$list-header-height: $space_lg;
+$list-footer-height: $space_lg;
+$list-border-radius: $border_rad_lighter;
+$card-border-radius: $border_rad_lightest;
+
+
 [class^=pb_layout_kit] {
 
   &[class*=_collection]{
@@ -24,26 +33,48 @@
   }
 
   &[class*=_kanban]{
-    div.layout_body{
-
-      background-color: rgb(235, 236, 240);
     display: flex;
-    flex-direction: column;
-    width: 275px;
-    margin-right: 10px;
-    max-height: 100%;
-    padding-right: 10px;
-    padding-left: 10px;
-    border-radius: 3px;
-      // display: grid;
-      // height: 100vh;
-      // grid-template-rows: 40px 50px 1fr;
-      // //grid-template-columns: 100%;
-      // grid-template-rows: 1fr;
-      // grid-column-gap: $space_sm;
-      // grid-row-gap: $space_sm;
+    overflow-x: auto;
+
+    > * {
+      flex: 0 0 auto;
+      margin-left: $gap;
+    }
+    &::after {
+      content: '';
+      flex: 0 0 $gap;
+    }
+    
+    div.layout_body{
+      width: $list-width;
+      height: 100vh;
+      list-style: none;
+      margin: 0;
+      overflow-y: auto;
+
+      & > * {
+        margin: $space_xs $space_xs $space_xs;
+        &:not(:last-child) {
+          margin-bottom: 0;
+        }
+      }
     }
   }
+
+  // For future release as of 6/18/2020
+  &[class*=_kanban_responsive] {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: minmax(0, 1fr);
+    &::after {
+      flex: none;
+      content: none;
+    }
+    div.layout_body{
+      width: 100%;
+    }
+  }
+  
 
   &[class*=_sidebar]{
     $layout_sizes: (
