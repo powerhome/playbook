@@ -7,7 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
-## [5.0.0] 2020-6-19
+## [5.0.1] 2020-6-19
 
 ### Added
 - Increase Playbook Compilation Performance([#866](https://github.com/powerhome/playbook/pull/866) @thestephenmarshall)
