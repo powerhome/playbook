@@ -10,7 +10,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
-### Added
+#### Added 
+- Added id, aria, data props to React Caption kit ([#860](https://github.com/powerhome/playbook/pull/860) @kellyeryan)
 - Added Installer kit ([#851](https://github.com/powerhome/playbook/pull/851) @stevelandwehr)
 
 ### Updated
