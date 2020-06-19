@@ -43,6 +43,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Added full page example of a registration dashboard ([#854](https://github.com/powerhome/playbook/pull/854)@christinaatai)
 - Added id props to React Avatar Action Button kit; Added aria props to Rails Avatar Action Button kit ([#857](https://github.com/powerhome/playbook/pull/857) @kellyeryan)
 
+### Added
+
+- Added id, aria, data props to React Title kit, added aria props to Rails Title kit ([#853](https://github.com/powerhome/playbook/pull/853) @kellyeryan)
+
 ## [4.17.0] 2020-6-5
 
 ### Added
