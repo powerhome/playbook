@@ -10,6 +10,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### Added
+- Added Installer kit ([#851](https://github.com/powerhome/playbook/pull/851) @stevelandwehr)
+
 ### Updated
 
 - Update dev startup ([#873](https://github.com/powerhome/playbook/pull/873) @thestephenmarshall)

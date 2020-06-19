@@ -41,6 +41,7 @@ kits:
   - icon_circle
   - icon_value
   - image
+  - installer
   - layout
   - list
   - loading_inline
