@@ -5,12 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-### Added
-- Added rails/react full page example for filter and table ([#862](https://github.com/powerhome/playbook/pull/862) @evalouderback)
-
 ## Unreleased
 
-#### Added 
+## [5.0.0] 2020-6-19
+
+### Added
+- Added New Layout Kit (Kanban) for Rails and React ([#874](https://github.com/powerhome/playbook/pull/874) @jasperfurniss)
+- Added rails/react full page example for filter and table ([#862](https://github.com/powerhome/playbook/pull/862) @evalouderback)
 - Added id, aria, data props to React Caption kit ([#860](https://github.com/powerhome/playbook/pull/860) @kellyeryan)
 - Added Installer kit ([#851](https://github.com/powerhome/playbook/pull/851) @stevelandwehr)
 
