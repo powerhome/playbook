@@ -1,0 +1,348 @@
+<!-- START TOP AREA -->
+<%= pb_rails("flex", props: {classname: "flex-container", spacing: "between", margin_top: "md", margin_x: "md" }) do %>
+    <%= pb_rails("flex/flex_item") do %>
+      <%= pb_rails("title", props: { text: "Prospective Clients", tag: "h3", size: 3 }) %>
+    <% end %>
+    <%= pb_rails("flex/flex_item") do %>
+      <%= pb_rails("button", props: { text: "Add Client" }) %>
+    <% end %>
+<% end %>
+<!-- END TOP AREA -->
+
+<!-- START FILTER -->
+<%= pb_rails("filter", props: {
+  id:"2",
+  filters: [
+    {name: "start date", value: "Aug 01, 2020"},
+    {name: "end date", value: "Aug 03, 2020"}
+
+    ],
+  sort_menu: [
+    {item:"Date Created", link:"#", active: true, direction:"desc"},
+    {item:"Assignee", link:"#", active: false},
+    {item:"Contact", link:"#", active: false},
+    {item:"Inquiry Source", link:"#", active: false},
+
+  ],
+  results: 546,
+  template: "single",
+  margin_y: "md",
+  margin_x: "md"
+  }) do%>
+<%
+  example_collection = [
+    OpenStruct.new(name: "Alabama", value: 1),
+    OpenStruct.new(name: "Alaska", value: 2),
+    OpenStruct.new(name: "Arizona", value: 3),
+    OpenStruct.new(name: "Arkansas", value: 4),
+    OpenStruct.new(name: "California", value: 5),
+    OpenStruct.new(name: "Colorado", value: 6),
+    OpenStruct.new(name: "Connecticut", value: 7),
+    OpenStruct.new(name: "Delaware", value: 8),
+    OpenStruct.new(name: "Florida", value: 9),
+    OpenStruct.new(name: "Georgia", value: 10),
+  ]
+%>
+
+<%= pb_rails("form", props: { form_system_options: { scope: :example, method: :get } }) do |form| %>
+
+  <%= pb_rails("flex") do %>
+    <%= pb_rails("body", props: {classname: "flex-item"}) do %>
+      <%= pb_rails("text_input", props: { label: "Start Date", value: "Aug 01, 2020", margin_right: "sm" }) %>
+    <% end %>
+    <%= pb_rails("body", props: {classname: "flex-item"}) do %>
+      <%= pb_rails("text_input", props: { label: "End Date",  value: "Aug 3, 2020" }) %>
+    <% end %>
+  <% end %>
+
+  <%= form.actions do |action| %>
+
+  <%= pb_rails("flex", props: {classname: "flex-container", spacing: "between"}) do %>
+    <%= pb_rails("flex/flex_item") do %>
+        <%= action.submit props: { text: "Apply", data: { disable_with: "<i class='far fa-spinner fa-spin mr-3'></i>Searching...".html_safe },}%>
+    <% end %>
+    <%= pb_rails("flex/flex_item") do %>
+        <%= action.button props: { type: "reset", text: "Clear", variant: "secondary" } %>
+    <% end %>
+  <% end %>
+
+
+  <% end %>
+<% end %>
+
+<% end %>
+<!-- END FILTER -->
+
+<!-- START TABlE -->
+
+  <%= pb_rails("flex", props: {orientation: "column", horizontal: "stretch", margin_x: "md"}) do %>
+      <%= pb_rails("table", props: { size: "sm" }) do %>
+        <thead>
+          <tr>
+            <th>Contact</th>
+            <th>Date Created</th>
+            <th>Inquiry Source</th>
+            <th>Lead Status</th>
+            <th>Quote</th>
+            <th>Assignee</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <%= pb_rails("person_contact", props: {
+                first_name: "Jesse",
+                last_name: "Cortez",
+                contacts: [
+                  {
+                    contact_type: "cell",
+                    contact_value: "3832919348"
+                  },
+                  {
+                    contact_type: "email",
+                    contact_value: "jesse.cortez@gmail.com"
+                  }
+                ]
+              }) %>
+            </td>
+            <td>
+              <%= pb_rails("date", props: { date: "2012-08-02T15:49:29Z", size: "xs" }) %>
+            </td>
+            <td>
+              <%= pb_rails("body", props: { text: "Email" }) %>
+              <%= pb_rails("caption", props: { text: "hello@companyname.com", size: 'xs' }) %>
+            </td>
+            <td>
+              <%= pb_rails("progress_pills", props: { steps: 4, active: 0, title:"Status:", value:"Not Started" }) %>
+            </td>
+            <td>
+              <%= pb_rails("currency", props: { amount: "729.63", size: "sm" }) %>
+            </td>
+            <td>
+              <%= pb_rails("body", props: { text: "Unassigned" }) %>
+            </td>
+            <td>
+              <%= pb_rails("circle_icon_button", props: { variant: "secondary", icon: "ellipsis-h" }) %>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <%= pb_rails("person_contact", props: {
+                first_name: "Bill",
+                last_name: "Buchanan",
+                contacts: [
+                  {
+                    contact_type: "cell",
+                    contact_value: "8313455824"
+                  },
+                  {
+                    contact_type: "email",
+                    contact_value: "billbuch@yahoo.com"
+                  }
+                ]
+              }) %>
+            </td>
+            <td>
+              <%= pb_rails("date", props: { date: "2012-08-02T15:49:29Z", size: "xs" }) %>
+            </td>
+            <td>
+              <%= pb_rails("body", props: { text: "Social Media" }) %>
+              <%= pb_rails("caption", props: { text: "Facebook", size: 'xs' }) %>
+            </td>
+            <td>
+              <%= pb_rails("progress_pills", props: { steps: 4, active: 3, title:"Status:", value:"Negotiation" }) %>
+            </td>
+            <td>
+              <%= pb_rails("currency", props: { amount: "534.40", size: "sm" }) %>
+            </td>
+            <td>
+              <%= pb_rails("user", props: {
+                name: "Anna Black",
+                title: "Project Coordinator",
+                orientation: "horizontal",
+                align: "left",
+                avatar_url: "https://randomuser.me/api/portraits/women/44.jpg"
+                }) %>
+            </td>
+            <td>
+              <%= pb_rails("circle_icon_button", props: { variant: "secondary", icon: "ellipsis-h" }) %>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <%= pb_rails("person_contact", props: {
+                first_name: "Effie",
+                last_name: "Guzman",
+                contacts: [
+                  {
+                    contact_type: "cell",
+                    contact_value: "1582430782"
+                  },
+                  {
+                    contact_type: "email",
+                    contact_value: "effieguzman@comcast.net"
+                  }
+                ]
+              }) %>
+            </td>
+            <td>
+              <%= pb_rails("date", props: { date: "2012-08-02T15:49:29Z", size: "xs" }) %>
+            </td>
+            <td>
+              <%= pb_rails("body", props: { text: "Online Quote" }) %>
+              <%= pb_rails("caption", props: { text: "Landing Page", size: 'xs' }) %>
+            </td>
+            <td>
+              <%= pb_rails("progress_pills", props: { steps: 4, active: 4, title:"Status:", value:"Contract" }) %>
+            </td>
+            <td>
+              <%= pb_rails("currency", props: { amount: "392.26", size: "sm" }) %>
+            </td>
+            <td>
+              <%= pb_rails("user", props: {
+                name: "Anna Black",
+                title: "Project Coordinator",
+                orientation: "horizontal",
+                align: "left",
+                avatar_url: "https://randomuser.me/api/portraits/women/44.jpg"
+                }) %>
+            </td>
+            <td>
+              <%= pb_rails("circle_icon_button", props: { variant: "secondary", icon: "ellipsis-h" }) %>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <%= pb_rails("person_contact", props: {
+                first_name: "Rodney",
+                last_name: "Boone",
+                contacts: [
+                  {
+                    contact_type: "cell",
+                    contact_value: "3859275970"
+                  },
+                  {
+                    contact_type: "email",
+                    contact_value: "rodneyboone@gmail.com"
+                  }
+                ]
+              }) %>
+            </td>
+            <td>
+              <%= pb_rails("date", props: { date: "2012-08-02T15:49:29Z", size: "xs" }) %>
+            </td>
+            <td>
+              <%= pb_rails("body", props: { text: "Internal" }) %>
+              <%= pb_rails("caption", props: { text: "Referral", size: 'xs' }) %>
+            </td>
+            <td>
+              <%= pb_rails("progress_pills", props: { steps: 4, active: 4, title:"Status:", value:"Contract" }) %>
+            </td>
+            <td>
+              <%= pb_rails("currency", props: { amount: "342.86", size: "sm" }) %>
+            </td>
+            <td>
+              <%= pb_rails("user", props: {
+                name: "Anna Black",
+                title: "Project Coordinator",
+                orientation: "horizontal",
+                align: "left",
+                avatar_url: "https://randomuser.me/api/portraits/women/44.jpg"
+                }) %>
+            </td>
+            <td>
+              <%= pb_rails("circle_icon_button", props: { variant: "secondary", icon: "ellipsis-h" }) %>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <%= pb_rails("person_contact", props: {
+                first_name: "Barbara",
+                last_name: "Maxwell",
+                contacts: [
+                  {
+                    contact_type: "cell",
+                    contact_value: "2849186943"
+                  },
+                  {
+                    contact_type: "email",
+                    contact_value: "barbaramaxwell4@yahoo.com"
+                  }
+                ]
+              }) %>
+            </td>
+            <td>
+              <%= pb_rails("date", props: { date: "2012-08-02T15:49:29Z", size: "xs" }) %>
+            </td>
+            <td>
+              <%= pb_rails("body", props: { text: "Online Quote" }) %>
+              <%= pb_rails("caption", props: { text: "Main Website", size: 'xs' }) %>
+            </td>
+            <td>
+              <%= pb_rails("progress_pills", props: { steps: 4, active: 3, title:"Status:", value:"Negotiation" }) %>
+            </td>
+            <td>
+              <%= pb_rails("currency", props: { amount: "145.01", size: "sm" }) %>
+            </td>
+            <td>
+              <%= pb_rails("user", props: {
+                name: "Anna Black",
+                title: "Project Coordinator",
+                orientation: "horizontal",
+                align: "left",
+                avatar_url: "https://randomuser.me/api/portraits/women/44.jpg"
+                }) %>
+            </td>
+            <td>
+              <%= pb_rails("circle_icon_button", props: { variant: "secondary", icon: "ellipsis-h" }) %>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <%= pb_rails("person_contact", props: {
+                first_name: "Ellen",
+                last_name: "Thornton",
+                contacts: [
+                  {
+                    contact_type: "cell",
+                    contact_value: "6884927492"
+                  },
+                  {
+                    contact_type: "email",
+                    contact_value: "ellen.thornton@gmail.com"
+                  }
+                ]
+              }) %>
+            </td>
+            <td>
+              <%= pb_rails("date", props: { date: "2012-08-02T15:49:29Z", size: "xs" }) %>
+            </td>
+            <td>
+              <%= pb_rails("body", props: { text: "Social Media" }) %>
+              <%= pb_rails("caption", props: { text: "Instagram", size: 'xs' }) %>
+            </td>
+            <td>
+              <%= pb_rails("progress_pills", props: { steps: 4, active: 3, title:"Status:", value:"Negotiation" }) %>
+            </td>
+            <td>
+              <%= pb_rails("currency", props: { amount: "25.27", size: "sm" }) %>
+            </td>
+            <td>
+              <%= pb_rails("user", props: {
+                name: "Anna Black",
+                title: "Project Coordinator",
+                orientation: "horizontal",
+                align: "left",
+                avatar_url: "https://randomuser.me/api/portraits/women/44.jpg"
+                }) %>
+            </td>
+            <td>
+              <%= pb_rails("circle_icon_button", props: { variant: "secondary", icon: "ellipsis-h" }) %>
+            </td>
+          </tr>
+        </tbody>
+      <% end %>
+  <% end %>
+
+<!-- END TABLE -->
