@@ -27,6 +27,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [4.18.0] 2020-6-12
 
+### Added
+
+- Added aria, data, id props to React List kit, added documentation files to React List kit([#867](https://github.com/powerhome/playbook/pull/867)@kellyeryan)
+
 ### Added/Updated
 - Added Timeline Kit ([#839](https://github.com/powerhome/playbook/pull/839)@christinaatai)
 - Added aria, data, id, className props to React Logistic kit and aria to Rails Logistic kit.([#846](https://github.com/powerhome/playbook/pull/846)@kellyeryan)

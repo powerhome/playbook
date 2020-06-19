@@ -2,18 +2,20 @@ import React from 'react'
 
 import { List, ListItem } from '../../'
 
-const ListDark = () => {
+const ListOrdered = () => {
   return (
     <>
       <List
-          dark
+          ordered
       >
         <ListItem>{'Item 1'}</ListItem>
         <ListItem>{'Item 2'}</ListItem>
         <ListItem>{'Item 3'}</ListItem>
+        <ListItem>{'Item 4'}</ListItem>
+        <ListItem>{'Item 5'}</ListItem>
       </List>
     </>
   )
 }
 
-export default ListDark
+export default ListOrdered
