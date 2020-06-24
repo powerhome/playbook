@@ -29,7 +29,7 @@
   },
   "files": [
     "dist/*",
-    "fonts"
+    "fonts/*"
   ],
   "bugs": {
     "url": "https://github.com/powerhome/playbook/issues"
@@ -103,6 +103,5 @@
     "hooks": {
       "pre-commit": "lint-staged"
     }
-  },
-  "files": ["dist/*"]
+  }
 }
