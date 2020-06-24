@@ -1,10 +1,14 @@
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const CopyPlugin = require('copy-webpack-plugin')
+
 const path = require('path')
 
 module.exports = (env) => {
   return {
     mode: env.development ? 'development' : 'production',
-    entry: './app/pb_kits/playbook/index.js',
+    entry: {
+      playbook: './app/pb_kits/playbook/index.js',
+    },
     output: {
       libraryTarget: 'commonjs2',
       filename: env.development ? 'playbook.js' : 'playbook.min.js',
@@ -13,6 +17,20 @@ module.exports = (env) => {
     plugins: [
       new MiniCssExtractPlugin({
         filename: env.development ? 'playbook.css' : 'playbook.min.css',
+      }),
+      new CopyPlugin({
+        patterns: [
+          {
+            from: path.resolve(__dirname, 'app/pb_kits/playbook/tokens'),
+            to: path.resolve(__dirname, 'dist/tokens'),
+            transformPath(targetPath, absolutePath) {
+              return targetPath.replace(/^tokens\/\_/, 'tokens/')
+            },
+          },
+        ],
+        options: {
+          concurrency: 100,
+        },
       }),
     ],
     module: {

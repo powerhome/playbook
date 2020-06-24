@@ -26,7 +26,7 @@
   },
   "files": [
     "dist/*",
-    "fonts/*"
+    "fonts"
   ],
   "bugs": {
     "url": "https://github.com/powerhome/playbook/issues"
@@ -36,6 +36,7 @@
     "babel-eslint": "10.1.0",
     "babel-preset-flow": "6.23.0",
     "clean-webpack-plugin": "2.0.2",
+    "copy-webpack-plugin": "^6.0.2",
     "eslint": "6.6.0",
     "eslint-plugin-flowtype": "4.4.1",
     "eslint-plugin-jsx-control-statements": "2.2.1",
