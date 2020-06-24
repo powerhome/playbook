@@ -7,7 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
-<<<<<<< HEAD
+### Added
+- Added description to filter kit([#881](https://github.com/powerhome/playbook/pull/881) @kre8sions) 
+
+
+
 ## [5.0.1] 2020-6-19
 
 ### Added
@@ -28,9 +32,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [4.18.1] 2020-6-15
 - Add toggling for legend click on bar and line graph
-=======
-## [4.18.1] 2020-6-15
->>>>>>> origin/master
 
 ### Updated
 - Increase Playbook Compilation Performance ([#866](https://github.com/powerhome/playbook/pull/866) @thestephenmarshall)
