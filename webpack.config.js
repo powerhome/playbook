@@ -23,7 +23,7 @@ module.exports = (env) => {
           {
             from: path.resolve(__dirname, 'app/pb_kits/playbook/tokens'),
             to: path.resolve(__dirname, 'dist/tokens'),
-            transformPath(targetPath, absolutePath) {
+            transformPath(targetPath) {
               return targetPath.replace(/^tokens\/\_/, 'tokens/')
             },
           },
