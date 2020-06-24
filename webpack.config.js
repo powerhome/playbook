@@ -3,7 +3,7 @@ const CopyPlugin = require('copy-webpack-plugin')
 
 const path = require('path')
 
-module.exports = (env) => {
+const mainConfig = (env) => {
   return {
     mode: env.development ? 'development' : 'production',
     entry: {
@@ -46,7 +46,7 @@ module.exports = (env) => {
         {
           test: /\.(js|jsx|mjs)$/,
           use: 'babel-loader',
-          exclude: /node_modules(?!\/playbook-ui)/,
+          exclude: /node_modules/,
         },
         {
           test: /\.svg$/,
@@ -67,3 +67,38 @@ module.exports = (env) => {
     },
   }
 }
+
+const vendorConfig = (env) => {
+  return {
+    mode: env.development ? 'development' : 'production',
+    entry: {
+      playbook: './app/pb_kits/playbook/vendor.js',
+    },
+    output: {
+      libraryTarget: 'commonjs2',
+      filename: env.development ? 'vendor.js' : 'vendor.min.js',
+      path: path.resolve(__dirname, 'dist'),
+    },
+    module: {
+      rules: [
+        {
+          test: /\.scss$/i,
+          use: [
+            { loader: 'css-loader' },
+            { loader: 'sass-loader' },
+          ],
+        },
+        {
+          test: /\.(js|jsx|mjs)$/,
+          use: 'babel-loader',
+          exclude: /node_modules/,
+        }
+      ],
+    },
+    resolve: {
+      extensions: ['.js', '.jsx'],
+    },
+  }
+}
+
+module.exports = [mainConfig, vendorConfig]
