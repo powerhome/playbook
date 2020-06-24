@@ -14,7 +14,13 @@ Gem::Specification.new do |s|
   s.description = "Playbook Design System. Built for Nitro, but powering all."
   s.license     = "MIT"
 
-  s.files = Dir["{app,fonts,lib,stories}/**/*"] + ["Rakefile", "README.md"]
+  s.files = Dir[
+    "app/pb_kits/playbook/pb_*/**/*",
+    "app/pb_kits/playbook/{plugins,props,tokens,utilities}/**/*",
+    "app/pb_kits/playbook/*.{scss,js,rb}",
+    "app/helpers/**/*",
+    "{fonts,lib}/**/*"
+  ] + ["Rakefile", "README.md"]
 
   s.add_dependency "actionpack", ">= 5.1.6", "< 6.0"
   s.add_dependency "actionview", ">= 5.1.6", "< 7.0"
