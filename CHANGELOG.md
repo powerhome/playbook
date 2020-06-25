@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### Added
+- Added description to filter kit([#881](https://github.com/powerhome/playbook/pull/881) @kre8sions) 
+
 ### Fixed
 - Made radio buttons a fixed width ([#833](https://github.com/powerhome/playbook/pull/833) @christinaatai)
 
