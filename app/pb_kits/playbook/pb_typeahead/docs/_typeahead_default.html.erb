@@ -46,6 +46,6 @@
     if (!event.target.dataset.typeaheadExample) return;
 
     document.querySelector("[data-typeahead-example-selected-option] [data-selected-option]").innerHTML = ""
-    document.querySelector("[data-typeahead-example-selected-option] [data-selected-option]").appendChild(event.detail.selected)
+    document.querySelector("[data-typeahead-example-selected-option] [data-selected-option]").innerHTML = event.detail.selected.innerHTML
   })
 <% end %>
