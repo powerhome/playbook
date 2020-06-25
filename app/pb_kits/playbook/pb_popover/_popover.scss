@@ -37,7 +37,7 @@
       animation-fill-mode: forwards;
       visibility: visible;
       pointer-events: initial;
-      z-index: $z_9;
+      z-index: 1001;
     }
   }
   .popover_body {
