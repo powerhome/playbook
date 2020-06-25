@@ -8,7 +8,12 @@ export default class PbPopover extends PbEnhancedElement {
     return '[data-pb-popover-kit]'
   }
 
+  moveTooltip() {
+    document.querySelector('body').appendChild(this.tooltip)
+  }
+
   connect() {
+    this.moveTooltip()
     this.popper = createPopper(this.triggerElement, this.tooltip, {
       placement: this.position,
       strategy: 'fixed',
