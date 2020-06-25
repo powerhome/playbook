@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 - Made radio buttons a fixed width ([#833](https://github.com/powerhome/playbook/pull/833) @christinaatai)
+- Fix bug displaying user kit in "typeahead" kit docs ([#875](https://github.com/powerhome/playbook/pull/875) @bkrigel)
 
 ### Changed
 - Updated radio border dark color ([#833](https://github.com/powerhome/playbook/pull/833) @christinaatai)
