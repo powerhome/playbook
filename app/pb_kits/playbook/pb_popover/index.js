@@ -31,7 +31,7 @@ export default class PbPopover extends PbEnhancedElement {
       }
 
       setTimeout(() => {
-        // this.popper.scheduleUpdate()
+        this.popper.update()
         this.tooltip.classList.toggle('show')
       }, 0)
     })
