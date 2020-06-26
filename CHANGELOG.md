@@ -17,6 +17,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - Updated radio border dark color ([#833](https://github.com/powerhome/playbook/pull/833) @christinaatai)
 
+## [5.0.3] 2020-6-26
+- Popover z-index fixes
+
 ## [5.0.1] 2020-6-19
 
 ### Added
