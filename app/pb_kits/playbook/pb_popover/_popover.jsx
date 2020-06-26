@@ -90,12 +90,12 @@ const Popover = (props: PbPopoverProps) => {
           >
             <div
                 className={classnames(
-                `${buildCss('popover_tooltip')} show`
+                `${buildCss('pb_popover_tooltip')} show`
               )}
             >
               <div
                   className={classnames(
-                  'popover_body',
+                  'pb_popover_body',
                   popoverSpacing
                 )}
                   style={widthHeightStyles()}
@@ -128,7 +128,7 @@ export default class PbReactPopover extends React.Component<PbPopoverProps> {
 
     document.body.addEventListener('click', ({ target }) => {
       const targetIsPopover =
-        target.closest('[class^=popover_tooltip]') !== null
+        target.closest('[class^=pb_popover_tooltip]') !== null
       const targetIsReference =
         target.closest('.pb_popover_reference_wrapper') !== null
 
