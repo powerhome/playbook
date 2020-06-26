@@ -21,31 +21,29 @@
   }
 }
 
-[class^="pb_popover_kit"] {
-  .popover_tooltip {
-    opacity: 0;
-    animation-name: fadeOut;
+.pb_popover_tooltip {
+  opacity: 0;
+  animation-name: fadeOut;
+  animation-duration: 150ms;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
+  visibility: hidden;
+  pointer-events: none;
+  &.show {
+    animation-name: fadeIn;
     animation-duration: 150ms;
     animation-timing-function: linear;
     animation-fill-mode: forwards;
-    visibility: hidden;
-    pointer-events: none;
-    &.show {
-      animation-name: fadeIn;
-      animation-duration: 150ms;
-      animation-timing-function: linear;
-      animation-fill-mode: forwards;
-      visibility: visible;
-      pointer-events: initial;
-      z-index: $z_9;
-    }
+    visibility: visible;
+    pointer-events: initial;
+    z-index: $z_9;
   }
-  .popover_body {
-    @include pb_card;
-    border: 0;
-    box-shadow: $shadow_deeper;
-    overflow: auto;
-  }
+}
+.pb_popover_body {
+  @include pb_card;
+  border: 0;
+  box-shadow: $shadow_deeper;
+  overflow: auto;
 }
 
 
