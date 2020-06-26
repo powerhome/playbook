@@ -7,7 +7,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
-<<<<<<< HEAD
 ## [5.0.1] 2020-6-19
 
 ### Added
@@ -20,6 +19,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Added id, aria, data props to React Caption kit ([#860](https://github.com/powerhome/playbook/pull/860) @kellyeryan)
 - Added Installer kit ([#851](https://github.com/powerhome/playbook/pull/851) @stevelandwehr)
 
+
 ### Updated
 
 - Update dev startup ([#873](https://github.com/powerhome/playbook/pull/873) @thestephenmarshall)
@@ -28,9 +28,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [4.18.1] 2020-6-15
 - Add toggling for legend click on bar and line graph
-=======
-## [4.18.1] 2020-6-15
->>>>>>> origin/master
 
 ### Updated
 - Increase Playbook Compilation Performance ([#866](https://github.com/powerhome/playbook/pull/866) @thestephenmarshall)
