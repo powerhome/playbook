@@ -14,12 +14,12 @@ type LayoutPropTypes = {
   dark?: Boolean,
   data?: object,
   full?: Boolean,
-  position?: 'left' | 'right',
-  size?: 'xs' | 'sm' | 'md' | 'base' | 'lg' | 'xl',
-  variant?: 'light' | 'dark' | 'gradient',
+  position?: "left" | "right",
+  responsive?: Boolean,
+  size?: "xs" | "sm" | "md" | "base" | "lg" | "xl",
+  variant?: "light" | "dark" | "gradient",
   transparent?: Boolean,
-  layout?: 'sidebar' | 'collection',
-
+  layout?: "sidebar" | "collection" | "kanban",
 }
 
 type LayoutSideProps = {
@@ -36,14 +36,20 @@ type LayoutBodyProps = {
 const Side = (props: LayoutSideProps) => {
   const { children, className } = props
   return (
-    <div className={classnames('layout_sidebar', className, spacing(props))}>{children}</div>
+    <div className={classnames('layout_sidebar', className, spacing(props))}>
+      {children}
+    </div>
   )
 }
 
 // Body component
 const Body = (props: LayoutBodyProps) => {
   const { children, className } = props
-  return <div className={classnames('layout_body', className, spacing(props))}>{children}</div>
+  return (
+    <div className={classnames('layout_body', className, spacing(props))}>
+      {children}
+    </div>
+  )
 }
 
 // Main componenet
@@ -58,20 +64,32 @@ const Layout = (props: LayoutPropTypes) => {
     data = {},
     full = false,
     position = 'left',
+    responsive = false,
     size = 'md',
     layout = 'sidebar',
     variant = 'light',
     transparent = false,
   } = props
+  const responsiveClass = responsive ? '_responsive' : ''
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
-  const layoutCss = buildCss(`pb_layout_kit_${layout}`, `size_${size}`, position, variant, {
-    'dark': dark,
-    'transparent': transparent,
-    'full': full,
-  })
+  const layoutCss =
+    layout == 'collection'
+      ? `pb_layout_kit_${layout}`
+      : layout == 'kanban'
+        ? `pb_layout_kit_${layout}${responsiveClass}`
+        : buildCss(`pb_layout_kit_${layout}`, `size_${size}`, position, variant, {
+          dark: dark,
+          transparent: transparent,
+          full: full,
+        })
 
-  const layoutCollapseCss = buildCss('layout', position, 'collapse', collapse)
+  const layoutCollapseCss =
+    layout == 'collection'
+      ? ''
+      : layout == 'kanban'
+        ? ''
+        : buildCss('layout', position, 'collapse', collapse)
 
   const layoutChildren =
     typeof children === 'object' && children.length ? children : [children]

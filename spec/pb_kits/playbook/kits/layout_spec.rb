@@ -22,7 +22,7 @@ RSpec.describe Playbook::PbLayout::Layout do
                       .with_values("light", "dark", "gradient")
                       .with_default("light") }
   it { is_expected.to define_enum_prop(:layout)
-                      .with_values("sidebar", "collection")
+                      .with_values("sidebar", "collection", "kanban")
                       .with_default("sidebar") }
 
   describe "#classname" do

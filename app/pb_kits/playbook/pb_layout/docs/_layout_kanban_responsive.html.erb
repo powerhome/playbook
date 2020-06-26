@@ -1,0 +1,57 @@
+<%= pb_rails("layout", props: {layout: "kanban", responsive: true}) do %>
+  <%= pb_rails("layout/body") do %>
+    <%= pb_rails("caption", props: {text: 'Queued'}) %>
+    <%= pb_rails("card") do %>
+      Runway Ticket #1
+    <% end %>
+  <% end %>
+  <%= pb_rails("layout/body") do %>
+    <%= pb_rails("caption", props: {text: 'In Progress'}) %>
+    <%= pb_rails("card") do %>
+      Runway Ticket #4
+    <% end %>
+    <%= pb_rails("card") do %>
+      Runway Ticket #5
+    <% end %>
+    <%= pb_rails("card") do %>
+      Runway Ticket #6
+    <% end %>
+  <% end %>
+  <%= pb_rails("layout/body") do %>
+    <%= pb_rails("caption", props: {text: 'Validation'}) %>
+    <%= pb_rails("card") do %>
+      Runway Ticket #7
+    <% end %>
+    <%= pb_rails("card") do %>
+      Runway Ticket 8
+    <% end %>
+    <%= pb_rails("card") do %>
+      Runway Ticket #9
+    <% end %>
+  <% end %>
+  <%= pb_rails("layout/body") do %>
+    <%= pb_rails("caption", props: {text: 'Done'}) %>
+    <%= pb_rails("card") do %>
+      More
+    <% end %>
+    <%= pb_rails("card") do %>
+      Stuff
+    <% end %>
+    <%= pb_rails("card") do %>
+      Here
+    <% end %>
+  <% end %>
+  <%= pb_rails("layout/body") do %>
+    <%= pb_rails("caption", props: {text: 'Backlog'}) %>
+    <%= pb_rails("card") do %>
+      Lots 
+    <% end %>
+    <%= pb_rails("card") do %>
+      of
+    <% end %>
+    <%= pb_rails("card") do %>
+      Stuff
+    <% end %>
+  <% end %>
+
+<% end %>
