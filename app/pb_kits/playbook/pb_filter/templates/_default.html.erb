@@ -7,7 +7,7 @@
 <% end %>
 
 <% if object.template != "sort_only"%>
-  <%= pb_rails("popover", props: {close_on_click: "outside", trigger_element_id: "filter#{object.id}", tooltip_id: "filter-form#{object.id}", position: 'bottom', padding: 'none'}) do %>
+  <%= pb_rails("popover", props: {close_on_click: "outside", trigger_element_id: "filter#{object.id}", tooltip_id: "filter-form#{object.id}", position: 'bottom'}) do %>
     <%= capture(&object.children) %>
   <% end %>
 <%end%>
