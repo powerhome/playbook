@@ -3,6 +3,10 @@ import Highcharts from 'highcharts'
 import { highchartsTheme } from '../pb_dashboard/pbChartsLightTheme.js'
 
 require('highcharts/modules/variable-pie')(Highcharts)
+// require('highcharts/modules/solid-gauge')(Highcharts)
+// require('highcharts/modules/highcharts-more')(Highcharts)
+import highchartsMore from 'highcharts/highcharts-more.js'
+import solidGauge from 'highcharts/modules/solid-gauge.js'
 
 class pbChart {
   defaults = {
@@ -31,9 +35,109 @@ class pbChart {
 
     if (this.options.type == 'variablepie' || this.options.type ==  'pie'){
       this.setupPieChart()
+    } else if (this.options.type == 'gauge') {
+      this.setupGauge()
     } else {
       this.setupChart()
     }
+  }
+
+  setupGauge() {
+    // Highcharts.setOptions(highchartsTheme)
+
+    highchartsMore(Highcharts)
+    solidGauge(Highcharts)
+
+    var gaugeOptions = {
+      chart: {
+        type: 'solidgauge',
+      },
+
+      title: null,
+
+      pane: {
+        center: ['50%', '85%'],
+        size: '70%',
+        startAngle: -90,
+        endAngle: 90,
+        background: {
+          backgroundColor:
+            Highcharts.defaultOptions.legend.backgroundColor || '#f7d5e4',
+          innerRadius: '60%',
+          outerRadius: '100%',
+          shape: 'arc',
+        },
+      },
+
+      exporting: {
+        enabled: false,
+      },
+
+      tooltip: {
+        enabled: false,
+      },
+
+      // the value axis
+      yAxis: {
+        stops: [
+          [0.1, '#cf9db3'], // green
+          [0.5, '#d16495'], // yellow
+          [0.9, '#c71062'], // red
+        ],
+        lineWidth: 0,
+        tickWidth: 0,
+        minorTickInterval: null,
+        tickAmount: 2,
+        title: {
+          y: -70,
+        },
+        labels: {
+          y: 16,
+        },
+      },
+
+      plotOptions: {
+        solidgauge: {
+          dataLabels: {
+            y: 5,
+            borderWidth: 0,
+            useHTML: true,
+          },
+        },
+      },
+    }
+    // console.log(this.defaults.id)
+    Highcharts.chart(this.defaults.id, Highcharts.merge(gaugeOptions, {
+      yAxis: {
+        min: 0,
+        max: 100,
+        title: {
+          text: 'Speed',
+          color: '#ffffff',
+        },
+      },
+
+      credits: {
+        enabled: false,
+      },
+
+      series: [
+        {
+          name: 'Speed',
+          data: [75],
+          dataLabels: {
+            format:
+              '<div style="text-align:center">' +
+              '<span style="font-size:25px">{y}</span><br/>' +
+              '<span style="font-size:12px;opacity:0.4">km/h</span>' +
+              '</div>',
+          },
+          tooltip: {
+            valueSuffix: ' km/h',
+          },
+        },
+      ],
+    }))
   }
 
   setupPieChart() {
