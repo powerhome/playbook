@@ -1,0 +1,9 @@
+examples:
+  
+  rails:
+  - gauge_default: Default
+  
+  
+  react:
+  - gauge_default: Default
+  

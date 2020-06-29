@@ -19,6 +19,7 @@ kits:
     - line_graph
     - distribution_bar
     - circle_chart
+    - gauge
 
   - filter
   - fixed_confirmation_toast
