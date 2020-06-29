@@ -7,9 +7,19 @@ module Playbook
 
       partial "pb_gauge/gauge"
 
+      prop :chart_data, type: Playbook::Props::Array,
+                        default: []
+      prop :style, type: Playbook::Props::Enum,
+                   values: %w[solidgauge],
+                   default: "solidgauge"
+      prop :title, type: Playbook::Props::String, default: ""
+
       def chart_options
         {
           id: id,
+          data: chart_data,
+          title: title,
+          style: style,
           type: "gauge",
         }.to_json.html_safe
       end

@@ -48,16 +48,64 @@ class pbChart {
     highchartsMore(Highcharts)
     solidGauge(Highcharts)
 
-    var gaugeOptions = {
+    Highcharts.chart(this.defaults.id, {
+
       chart: {
-        type: 'solidgauge',
+        type: this.defaults.style,
       },
 
-      title: null,
+      title: {
+        text: this.defaults.title,
+      },
+
+      yAxis: {
+        min: 0,
+        max: 100,
+        title: {
+          text: this.defaults.title,
+          color: '#ffffff',
+          y: -100,
+        },
+        stops: [
+          [0.1, '#cf9db3'], // green
+          [0.5, '#d16495'], // yellow
+          [0.9, '#c71062'], // red
+        ],
+        lineWidth: 0,
+        tickWidth: 0,
+        minorTickInterval: null,
+        tickAmount: 2,
+        labels: {
+          y: 16,
+        },
+      },
+
+      credits: false,
+
+      label: {
+        enabled: true,
+      },
+
+      series: [
+        {
+          name: 'Speed',
+          data: this.defaults.data,
+          dataLabels: {
+            format:
+              '<div style="text-align:center">' +
+              '<span style="font-size:25px">{y}</span><br/>' +
+              '<span style="font-size:12px;opacity:0.4">km/h</span>' +
+              '</div>',
+          },
+          tooltip: {
+            valueSuffix: ' km/h',
+          },
+        },
+      ],
 
       pane: {
         center: ['50%', '85%'],
-        size: '70%',
+        size: '100%',
         startAngle: -90,
         endAngle: 90,
         background: {
@@ -77,25 +125,6 @@ class pbChart {
         enabled: false,
       },
 
-      // the value axis
-      yAxis: {
-        stops: [
-          [0.1, '#cf9db3'], // green
-          [0.5, '#d16495'], // yellow
-          [0.9, '#c71062'], // red
-        ],
-        lineWidth: 0,
-        tickWidth: 0,
-        minorTickInterval: null,
-        tickAmount: 2,
-        title: {
-          y: -70,
-        },
-        labels: {
-          y: 16,
-        },
-      },
-
       plotOptions: {
         solidgauge: {
           dataLabels: {
@@ -105,39 +134,7 @@ class pbChart {
           },
         },
       },
-    }
-    // console.log(this.defaults.id)
-    Highcharts.chart(this.defaults.id, Highcharts.merge(gaugeOptions, {
-      yAxis: {
-        min: 0,
-        max: 100,
-        title: {
-          text: 'Speed',
-          color: '#ffffff',
-        },
-      },
-
-      credits: {
-        enabled: false,
-      },
-
-      series: [
-        {
-          name: 'Speed',
-          data: [75],
-          dataLabels: {
-            format:
-              '<div style="text-align:center">' +
-              '<span style="font-size:25px">{y}</span><br/>' +
-              '<span style="font-size:12px;opacity:0.4">km/h</span>' +
-              '</div>',
-          },
-          tooltip: {
-            valueSuffix: ' km/h',
-          },
-        },
-      ],
-    }))
+    })
   }
 
   setupPieChart() {
