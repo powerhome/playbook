@@ -8,6 +8,7 @@
 
   .pb_radio_button {
     width: 22px;
+    min-width: 22px;
     height: 22px;
     border-radius: 1000px;
     border: 2px solid $border_light;
@@ -29,6 +30,9 @@
     }
   }
   &[class*=_dark] {
+    .pb_radio_button {
+      border-color: $border_dark;
+    }
     input:checked ~ .pb_radio_button {
       border: 6px solid $primary;
     }

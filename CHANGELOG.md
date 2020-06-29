@@ -7,7 +7,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
-## [5.0.3] 2020-6-19
+## [v5.1.0] 2020-6-26
+
+### Added
+- Added description to filter kit([#881](https://github.com/powerhome/playbook/pull/881) @kre8sions) 
+
+### Fixed
+- Made radio buttons a fixed width ([#833](https://github.com/powerhome/playbook/pull/833) @christinaatai)
+- Fix bug displaying user kit in "typeahead" kit docs ([#875](https://github.com/powerhome/playbook/pull/875) @bkrigel)
+
+### Changed
+- Updated radio border dark color ([#833](https://github.com/powerhome/playbook/pull/833) @christinaatai)
+
+## [5.0.3] 2020-6-26
 - Popover z-index fixes
 
 ## [5.0.1] 2020-6-19
