@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### Fixed
+- Added User Badge Kit back to menu.yml ([#890](https://github.com/powerhome/playbook/pull/890) @christinaatai)
+
 ## [v5.1.0] 2020-6-26
 
 ### Added
