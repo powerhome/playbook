@@ -43,7 +43,7 @@ class pbChart {
   }
 
   setupGauge() {
-    // Highcharts.setOptions(highchartsTheme)
+    Highcharts.setOptions(highchartsTheme)
 
     highchartsMore(Highcharts)
     solidGauge(Highcharts)
@@ -62,15 +62,15 @@ class pbChart {
         min: 0,
         max: 100,
         title: {
-          text: this.defaults.title,
+          text: 'yAxis Title',
           color: '#ffffff',
           y: -100,
         },
-        stops: [
-          [0.1, '#cf9db3'], // green
-          [0.5, '#d16495'], // yellow
-          [0.9, '#c71062'], // red
-        ],
+        // stops: [
+        //   [0.1, '#cf9db3'], // green
+        //   [0.5, '#d16495'], // yellow
+        //   [0.9, '#c71062'], // red
+        // ],
         lineWidth: 0,
         tickWidth: 0,
         minorTickInterval: null,
@@ -88,18 +88,16 @@ class pbChart {
 
       series: [
         {
-          name: 'Speed',
-          data: this.defaults.data,
-          dataLabels: {
-            format:
-              '<div style="text-align:center">' +
-              '<span style="font-size:25px">{y}</span><br/>' +
-              '<span style="font-size:12px;opacity:0.4">km/h</span>' +
-              '</div>',
-          },
-          tooltip: {
-            valueSuffix: ' km/h',
-          },
+          data: this.defaults.chartData,
+          // dataLabels: {
+          //   format:
+          //     '<div style="text-align:center">' +
+          //     '<span style="font-size:25px">{y}</span><br/>' +
+          //     '</div>',
+          // },
+          // tooltip: {
+          //   // valueSuffix: ' km/h',
+          // },
         },
       ],
 
@@ -109,8 +107,8 @@ class pbChart {
         startAngle: -90,
         endAngle: 90,
         background: {
-          backgroundColor:
-            Highcharts.defaultOptions.legend.backgroundColor || '#f7d5e4',
+          // backgroundColor:
+          //   Highcharts.defaultOptions.legend.backgroundColor || '#f7d5e4',
           innerRadius: '60%',
           outerRadius: '100%',
           shape: 'arc',
@@ -122,18 +120,20 @@ class pbChart {
       },
 
       tooltip: {
-        enabled: false,
+        headerFormat: '',
+        pointFormat: this.defaults.tooltipHtml,
+        followPointer: true,
       },
 
-      plotOptions: {
-        solidgauge: {
-          dataLabels: {
-            y: 5,
-            borderWidth: 0,
-            useHTML: true,
-          },
-        },
-      },
+      // plotOptions: {
+      //   solidgauge: {
+      //     // dataLabels: {
+      //     //   y: 5,
+      //     //   borderWidth: 0,
+      //     //   useHTML: true,
+      //     // },
+      //   },
+      // },
     })
   }
 

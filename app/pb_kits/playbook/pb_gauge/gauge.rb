@@ -13,13 +13,22 @@ module Playbook
                    values: %w[solidgauge],
                    default: "solidgauge"
       prop :title, type: Playbook::Props::String, default: ""
+      prop :tooltip_html, default: '<span style="font-weight: bold; color:{point.color};">●</span>
+                                      {point.name}: ' + '<b>{point.y}
+                                    </b>'
+
+      def chart_data_formatted
+        chart_data.map { |hash| hash[:y] = hash.delete :value }
+        chart_data
+      end
 
       def chart_options
         {
           id: id,
-          data: chart_data,
+          chartData: chart_data_formatted,
           title: title,
           style: style,
+          tooltipHtml: tooltip_html,
           type: "gauge",
         }.to_json.html_safe
       end
