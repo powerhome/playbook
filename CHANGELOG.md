@@ -9,7 +9,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 - Added Collection Detail to Layout Kit([#893](https://github.com/powerhome/playbook/pull/893) @evalouderback)
-
 ## [v5.1.0] 2020-6-26
 
 ### Added
