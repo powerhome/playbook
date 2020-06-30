@@ -22,7 +22,7 @@ module Playbook
                   values: %w[light dark gradient],
                   default: "light"
       prop :layout, type: Playbook::Props::Enum,
-            values: %w[sidebar collection kanban],
+            values: %w[sidebar collection collection_detail kanban],
             default: "sidebar"
 
       prop :responsive, type: Playbook::Props::Boolean, default: false
@@ -33,6 +33,8 @@ module Playbook
             generate_classname("pb_layout_kit", layout)
           when "kanban"
             generate_classname("pb_layout_kit", layout, responsive_class)
+          when "collection_detail"
+            generate_classname("pb_layout_kit", layout )
 	        else
 	          first_class = generate_classname("pb_layout_kit_sidebar","size_#{size}", position, variant, transparent_class)
 	          [first_class, full_class, collapse_class].reject(&:empty?).join(" ")
