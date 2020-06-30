@@ -1,20 +1,20 @@
 examples:
   rails:
-  - layout_collection_detail: Collection Detail Layout
   - layout_colors: Colors
   - layout_transparent: Transparent
   - layout_sizes: Sizes
   - layout_sizes_dark: Sizes Dark
   - layout_collection: Collection Layout
+  - layout_collection_detail: Collection Detail Layout
   - layout_kanban: Kanban Layout
 
 
   react:
-  - layout_collection_detail: Collection Detail Layout
   - layout_colors: Colors
   - layout_transparent: Transparent
   - layout_sizes: Sizes
   - layout_sizes_dark: Sizes Dark
   - layout_collection: Collection Layout
+  - layout_collection_detail: Collection Detail Layout
   - layout_kanban: Kanban Layout
 
