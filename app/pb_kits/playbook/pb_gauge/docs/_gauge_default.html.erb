@@ -1,5 +1,40 @@
+<% data_1 = [
+  {
+    name: 'Point1',
+    value: 95,
+  },
+  {
+    name: 'Point2',
+    value: 76,
+  },
+  {
+    name: 'Point3',
+    value: 45,
+  },
+  {
+    name: 'Point4',
+    value: 16,
+  },
+]%>
+<% data_2 = [
+  {
+    name: 'Point1',
+    value: 45,
+  },
+  {
+    name: 'Point2',
+    value: 16,
+  },
+]%>
+
 <%= pb_rails("gauge", props: {
   id: "container-gauge",
-  chart_data: [95, 76, 45, 16],
+  chart_data: data_1,
   title: "Test Title"
+}) %>
+
+<%= pb_rails("gauge", props: {
+  id: "container-gauge2",
+  chart_data: data_2,
+  title: "Title2"
 }) %>
