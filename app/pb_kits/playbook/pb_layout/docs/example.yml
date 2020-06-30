@@ -1,6 +1,5 @@
 examples:
   rails:
-  - layout_collection_detail: Collection Detail Layout
   - layout_colors: Colors
   - layout_transparent: Transparent
   - layout_sizes: Sizes
@@ -11,7 +10,6 @@ examples:
 
 
   react:
-  - layout_collection_detail: Collection Detail Layout
   - layout_colors: Colors
   - layout_transparent: Transparent
   - layout_sizes: Sizes
