@@ -16,6 +16,7 @@ module Playbook
       prop :tooltip_html, default: '<span style="font-weight: bold; color:{point.color};">●</span>
                                       {point.name}: ' + '<b>{point.y}
                                     </b>'
+      prop :full_circle, type: Playbook::Props::Boolean, default: false
 
       def chart_data_formatted
         chart_data.map { |hash| hash[:y] = hash.delete :value }
@@ -26,6 +27,7 @@ module Playbook
         {
           id: id,
           chartData: chart_data_formatted,
+          circumference: full_circle ? [0, 360] : [-100, 100],
           title: title,
           style: style,
           tooltipHtml: tooltip_html,
