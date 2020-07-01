@@ -66,17 +66,14 @@ class pbChart {
           color: '#ffffff',
           y: -100,
         },
-        // stops: [
-        //   [0.1, '#cf9db3'], // green
-        //   [0.5, '#d16495'], // yellow
-        //   [0.9, '#c71062'], // red
-        // ],
         lineWidth: 0,
         tickWidth: 0,
         minorTickInterval: null,
         tickAmount: 2,
         labels: {
-          y: 16,
+          y: 25,
+          // style: {
+          // },
         },
       },
 
@@ -89,29 +86,22 @@ class pbChart {
       series: [
         {
           data: this.defaults.chartData,
-          // dataLabels: {
-          //   format:
-          //     '<div style="text-align:center">' +
-          //     '<span style="font-size:25px">{y}</span><br/>' +
-          //     '</div>',
-          // },
-          // tooltip: {
-          //   // valueSuffix: ' km/h',
-          // },
         },
       ],
 
       pane: {
-        center: ['50%', '85%'],
-        size: '100%',
-        startAngle: -90,
-        endAngle: 90,
+        center: ['50%', '50%'],
+        size: '90%',
+        startAngle: this.defaults.circumference[0],
+        endAngle: this.defaults.circumference[1],
         background: {
+          borderWidth: 20,
           // backgroundColor:
           //   Highcharts.defaultOptions.legend.backgroundColor || '#f7d5e4',
-          innerRadius: '60%',
-          outerRadius: '100%',
+          innerRadius: '90%',
+          outerRadius: '90%',
           shape: 'arc',
+          className: 'gauge-pane',
         },
       },
 
@@ -125,16 +115,26 @@ class pbChart {
         followPointer: true,
       },
 
-      // plotOptions: {
-      //   solidgauge: {
-      //     // dataLabels: {
-      //     //   y: 5,
-      //     //   borderWidth: 0,
-      //     //   useHTML: true,
-      //     // },
-      //   },
-      // },
+      plotOptions: {
+        solidgauge: {
+          borderColor: 'blue',
+          borderWidth: 20,
+          radius: 90,
+          innerRadius: '90%',
+          dataLabels: {
+            borderWidth: 0,
+            color: 'black',
+            enabled: true,
+            format: '{y} units',
+            style: {
+              fontSize: '16px',
+              fontFamily: 'sans-serif',
+            },
+          },
+        },
+      },
     })
+    document.querySelectorAll('.gauge-pane').forEach((pane) => pane.setAttribute('stroke-linejoin', 'round'))
   }
 
   setupPieChart() {
