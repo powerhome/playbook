@@ -60,4 +60,7 @@ Step 1:  Inside of your Playbook repository, run `yarn link`.
 Step 2:  Inside of the directory you want to test with playbook, run `yarn link playbook-ui`.
 Step 3:  Run `yarn hmr` in your directory you want to test with playbook, and hard refresh (command + shift + R) your browser.
 Step 4:  Test all the things!
+Step 5:  When finished, inside of the directory you want to test with playbook, run `yarn unlink playbook-ui`.
+Step 6:  Inside of your Playbook repository, run `yarn unlink`. 
 
+Keep in mind: Styles are brought in from playbook through the rails gem, so you will not be able to test scss updates with yarn linking.
