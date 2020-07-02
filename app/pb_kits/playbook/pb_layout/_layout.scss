@@ -77,6 +77,35 @@ $card-border-radius: $border_rad_lightest;
     }
   }
 
+  &[class*=_content]{
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: .5fr repeat(3, 1fr) .5fr;
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
+    grid-template-areas:
+    "h h h h h"
+    "s b b b b"
+    "s b b b b"
+    "s b b b b"
+    "s f f f f";
+    div.layout_header{
+      grid-area: h;
+      padding-bottom: $space_sm;
+    }
+    div.layout_sidebar{
+      grid-area: s;
+      padding-right: $space_sm;
+    }
+    div.layout_body{
+      grid-area: b;
+    }
+    div.layout_footer{
+      grid-area: f;
+      padding-top: $space_sm;
+    }
+  }
+
   // For future release as of 6/18/2020
   &[class*=_kanban_responsive] {
     display: grid;

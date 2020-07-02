@@ -7,6 +7,7 @@ examples:
   - layout_collection: Collection Layout
   - layout_collection_detail: Collection Detail Layout
   - layout_kanban: Kanban Layout
+  - layout_content: Content Layout
 
 
   react:
@@ -17,4 +18,5 @@ examples:
   - layout_collection: Collection Layout
   - layout_collection_detail: Collection Detail Layout
   - layout_kanban: Kanban Layout
+  - layout_content: Content Layout
 
