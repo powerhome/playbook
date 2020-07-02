@@ -22,7 +22,7 @@ RSpec.describe Playbook::PbLayout::Layout do
                       .with_values("light", "dark", "gradient")
                       .with_default("light") }
   it { is_expected.to define_enum_prop(:layout)
-                      .with_values("sidebar", "collection", "kanban")
+                      .with_values("sidebar", "collection", "kanban", "content")
                       .with_default("sidebar") }
 
   describe "#classname" do
@@ -31,6 +31,7 @@ RSpec.describe Playbook::PbLayout::Layout do
       expect(subject.new({}).classname).to eq "pb_layout_kit_sidebar_size_md_left_light layout_left_collapse_xs"
       expect(subject.new(full: true).classname).to eq "pb_layout_kit_sidebar_size_md_left_light full layout_left_collapse_xs"
       expect(subject.new(layout: "collection").classname).to eq "pb_layout_kit_collection"
+      expect(subject.new(layout: "content").classname).to eq "pb_layout_kit_content"
       expect(subject.new(variant: "dark", transparent: true, full: true).classname).to eq "pb_layout_kit_sidebar_size_md_left_dark_transparent full layout_left_collapse_xs"
       expect(subject.new(variant: "dark", position: "right", size: "sm").classname).to eq "pb_layout_kit_sidebar_size_sm_right_dark layout_right_collapse_xs"
     end
