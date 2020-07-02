@@ -1,4 +1,8 @@
 import Highcharts from 'highcharts'
+import colors from '../tokens/_colors.scss'
+// console.log(colors)
+import typography from '../tokens/_typography.scss'
+// console.log(typography)
 
 import { highchartsTheme } from '../pb_dashboard/pbChartsLightTheme.js'
 
@@ -59,12 +63,11 @@ class pbChart {
       },
 
       yAxis: {
-        min: 0,
-        max: 100,
+        min: this.defaults.bounds[0],
+        max: this.defaults.bounds[1],
         title: {
-          text: 'yAxis Title',
-          color: '#ffffff',
-          y: -100,
+          text: this.defaults.caption,
+          y: -96,
         },
         lineWidth: 0,
         tickWidth: 0,
@@ -123,12 +126,13 @@ class pbChart {
           innerRadius: '90%',
           dataLabels: {
             borderWidth: 0,
-            color: 'black',
+            color: colors.text_lt_default,
             enabled: true,
-            format: '{y} units',
+            format: `{y}${this.defaults.units}`,
             style: {
-              fontSize: '16px',
-              fontFamily: 'sans-serif',
+              fontFamily: typography.font_family_base,
+              fontWeight: typography.bold,
+              fontSize: typography.heading_4,
             },
           },
         },

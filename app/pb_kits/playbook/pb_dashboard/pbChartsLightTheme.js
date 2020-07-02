@@ -145,18 +145,18 @@ const highchartsTheme = {
     },
 
     // GAUGE STYLES
-    solidgauge: {
-      // linecap: 'round',
-      // lineWidth: 1,
-      // dataLabels: {
-      //   style: {
-      //     fontFamily: typography.font_family_base,
-      //     fontSize: typography.text_smaller,
-      //     color: colors.text_lt_light,
-      //     fontWeight: typography.regular,
-      //   },
-      // },
-    },
+    // solidgauge: {
+    //   dataLabels: {
+    //     // borderWidth: 0,
+    //     color: colors.text_lt_default,
+    //     // enabled: true,
+    //     style: {
+    //       fontFamily: typography.font_family_base,
+    //       fontWeight: typography.bold,
+    //       fontSize: typography.heading_4,
+    //     },
+    //   },
+    // },
 
     // PIE STYLES
     pie: {

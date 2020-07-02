@@ -13,6 +13,9 @@ module Playbook
                    values: %w[solidgauge],
                    default: "solidgauge"
       prop :title, type: Playbook::Props::String, default: ""
+      prop :caption, type: Playbook::Props::String, default: ""
+      prop :units, type: Playbook::Props::String, default: ""
+      prop :bounds, type: Playbook::Props::Array, default: [0, 100]
       prop :tooltip_html, default: '<span style="font-weight: bold; color:{point.color};">●</span>
                                       {point.name}: ' + '<b>{point.y}
                                     </b>'
@@ -26,9 +29,12 @@ module Playbook
       def chart_options
         {
           id: id,
+          bounds: bounds,
           chartData: chart_data_formatted,
           circumference: full_circle ? [0, 360] : [-100, 100],
           title: title,
+          caption: caption,
+          units: units,
           style: style,
           tooltipHtml: tooltip_html,
           type: "gauge",
