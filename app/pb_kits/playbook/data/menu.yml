@@ -91,3 +91,4 @@ kits:
     - title_detail
     - weekday_stacked
   - user
+  - user_badge

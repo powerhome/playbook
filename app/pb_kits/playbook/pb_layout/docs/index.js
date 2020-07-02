@@ -5,3 +5,6 @@ export { default as LayoutSizesDark } from './_layout_sizes_dark.jsx'
 export { default as LayoutCollection } from './_layout_collection.jsx'
 export { default as LayoutKanban } from './_layout_kanban.jsx'
 export { default as LayoutKanbanResponsive } from './_layout_kanban_responsive.jsx'
+export { default as LayoutCollectionDetail } from './_layout_collection_detail.jsx'
+export { default as LayoutContent } from './_layout_content.jsx'
+

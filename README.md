@@ -52,3 +52,15 @@ See [docs/upgrade-guide](./docs/upgrade-guide)
 * [Using a Kit within a Kit](https://github.com/powerhome/playbook/wiki/Using-a-Kit-within-a-Kit)
 * [Understanding Rails Kit HTML Wrapper](https://github.com/powerhome/playbook/wiki/Understanding-Rails-Kit-HTML-Wrapper)
 * [Kit Stylesheet](https://github.com/powerhome/playbook/wiki/Kit-Stylesheet)
+
+### Testing Playbook Kits Locally
+
+#### Testing React Kits locally
+1.  Inside of your Playbook repository, run `yarn link`. 
+2.  Inside of the directory you want to test with playbook, run `yarn link playbook-ui`.
+3.  Run `yarn hmr` in your directory you want to test with playbook, and hard refresh (command + shift + R) your browser.
+4.  Test all the things!
+5.  When finished, inside of the directory you want to test with playbook, run `yarn unlink playbook-ui`.
+6.  Inside of your Playbook repository, run `yarn unlink`. 
+
+Keep in mind: Styles are brought in from playbook through the rails gem, so you will not be able to test scss updates with yarn linking.
