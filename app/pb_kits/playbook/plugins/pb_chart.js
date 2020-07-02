@@ -56,6 +56,7 @@ class pbChart {
 
       chart: {
         type: this.defaults.style,
+        // height: '120%',
       },
 
       title: {
@@ -75,8 +76,6 @@ class pbChart {
         tickAmount: 2,
         labels: {
           y: 25,
-          // style: {
-          // },
         },
       },
 
