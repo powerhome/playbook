@@ -105,6 +105,8 @@
 - Gauge Kit ([#910](https://github.com/powerhome/playbook/pull/910) @bh247484)
 - Added border prop ([#900](https://github.com/powerhome/playbook/pull/900) @christinaatai))
 
+## Unreleased
+
 ## [v5.2.0] 2020-7-2
 
 ### Added
