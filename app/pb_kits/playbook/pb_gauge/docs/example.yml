@@ -3,6 +3,9 @@ examples:
   rails:
   - gauge_default: Default
   - gauge_full_circle: Full Circle
+  - gauge_units: Units
+  - gauge_bounds: Bounds
+  - gauge_title: Title 
   - gauge_sizing: Sizing
   
   

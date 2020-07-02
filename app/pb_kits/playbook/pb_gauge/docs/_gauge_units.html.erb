@@ -1,12 +1,12 @@
 <% data = [
   {
-    name: 'Point1',
-    value: 75,
+    name: 'Percentage',
+    value: 32,
   }
 ]%>
 
 <%= pb_rails("gauge", props: {
-  id: "full-circle",
+  id: "gauge-units",
   chart_data: data,
-  full_circle: true,
+  units: "%"
 }) %>
