@@ -6,6 +6,7 @@ examples:
   - layout_sizes_dark: Sizes Dark
   - layout_collection: Collection Layout
   - layout_kanban: Kanban Layout
+  - layout_content: Content Layout
 
   react:
   - layout_colors: Colors
@@ -14,3 +15,4 @@ examples:
   - layout_sizes_dark: Sizes Dark
   - layout_collection: Collection Layout
   - layout_kanban: Kanban Layout
+  - layout_content: Content Layout

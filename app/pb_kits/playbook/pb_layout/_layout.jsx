@@ -19,7 +19,7 @@ type LayoutPropTypes = {
   size?: "xs" | "sm" | "md" | "base" | "lg" | "xl",
   variant?: "light" | "dark" | "gradient",
   transparent?: Boolean,
-  layout?: "sidebar" | "collection" | "kanban",
+  layout?: "sidebar" | "collection" | "kanban" | "content",
 }
 
 type LayoutSideProps = {
@@ -28,6 +28,16 @@ type LayoutSideProps = {
 }
 
 type LayoutBodyProps = {
+  children: Array<React.ReactNode> | React.ReactNode,
+  className?: String,
+}
+
+type LayoutHeaderProps = {
+  children: Array<React.ReactNode> | React.ReactNode,
+  className?: String,
+}
+
+type LayoutFooterProps = {
   children: Array<React.ReactNode> | React.ReactNode,
   className?: String,
 }
@@ -47,6 +57,26 @@ const Body = (props: LayoutBodyProps) => {
   const { children, className } = props
   return (
     <div className={classnames('layout_body', className, spacing(props))}>
+      {children}
+    </div>
+  )
+}
+
+// Header component
+const Header = (props: LayoutHeaderProps) => {
+  const { children, className } = props
+  return (
+    <div className={classnames('layout_header', className, spacing(props))}>
+      {children}
+    </div>
+  )
+}
+
+// Footer component
+const Footer = (props: LayoutFooterProps) => {
+  const { children, className } = props
+  return (
+    <div className={classnames('layout_footer', className, spacing(props))}>
       {children}
     </div>
   )
@@ -129,5 +159,7 @@ const Layout = (props: LayoutPropTypes) => {
 
 Layout.Side = Side
 Layout.Body = Body
+Layout.Header = Header
+Layout.Footer = Footer
 
 export default Layout
