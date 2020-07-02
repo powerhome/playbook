@@ -17,7 +17,7 @@ $card-border-radius: $border_rad_lightest;
   &[class*=_collection]{
     div.layout_body{
       display: grid;
-      grid-template-rows: 1fr;
+      grid-auto-rows: max-content;
       grid-column-gap: $space_sm;
       grid-row-gap: $space_sm;
       grid-template-columns: repeat(4, 1fr);
@@ -28,8 +28,24 @@ $card-border-radius: $border_rad_lightest;
        @media screen and (max-width: $screen-xs-min) {
         grid-template-columns: repeat(1, 1fr);
       }
-    }
-  
+    } 
+  }
+
+  &[class*=_collection_detail]{
+      display: grid;
+      width: 100%;
+      height: 100%;
+      grid-template-areas: 
+      "side-bar collection";
+      grid-template-columns: .25fr 1fr;
+      grid-column-gap: $space_sm;
+
+      @media screen and (max-width: $screen-md-min) {
+        grid-template-areas: "side-bar"
+        "collection";
+        grid-template-columns: 1fr;
+        grid-row-gap: $space_sm;
+      }
   }
 
   &[class*=_kanban]{
@@ -58,6 +74,35 @@ $card-border-radius: $border_rad_lightest;
           margin-bottom: 0;
         }
       }
+    }
+  }
+
+  &[class*=_content]{
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: .5fr repeat(3, 1fr) .5fr;
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
+    grid-template-areas:
+    "h h h h h"
+    "s b b b b"
+    "s b b b b"
+    "s b b b b"
+    "s f f f f";
+    div.layout_header{
+      grid-area: h;
+      padding-bottom: $space_sm;
+    }
+    div.layout_sidebar{
+      grid-area: s;
+      padding-right: $space_sm;
+    }
+    div.layout_body{
+      grid-area: b;
+    }
+    div.layout_footer{
+      grid-area: f;
+      padding-top: $space_sm;
     }
   }
 

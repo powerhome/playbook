@@ -1,0 +1,19 @@
+<%= pb_rails("layout", props: {position: "left", size: "sm", collapse: "md", layout: "collection_detail" }) do %>
+  <%= pb_rails("layout/sidebar") do %>
+    <%= pb_rails("card", props: { margin_right: "md", padding: "none" }) do %>
+        <%= pb_rails("nav", props: {title: "Menu", link: "#", padding_top:"md" }) do %>
+            <%= pb_rails("nav/item", props: { text: "Photos", link: "#" }) %>
+            <%= pb_rails("nav/item", props: { text: "Music", link: "#" }) %>
+            <%= pb_rails("nav/item", props: { text: "Video", link: "#", active: true }) %>
+            <%= pb_rails("nav/item", props: { text: "Files", link: "#" }) %>
+        <% end %>    
+    <% end %>  
+    <% end %>
+
+    <%= pb_rails("layout/body") do %> 
+        <% 25.times do %>
+            <%= pb_rails("card")  do %> Card content <% end %>
+        <% end %>
+   
+    <% end %>
+<% end %>

@@ -10,6 +10,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 - Added User Badge Kit back to menu.yml ([#890](https://github.com/powerhome/playbook/pull/890) @christinaatai)
 
+### Added
+- Added Collection Detail to Layout Kit([#893](https://github.com/powerhome/playbook/pull/893) @evalouderback)
+- Added New Layout Kit (Content) for Rails and React ([#894](https://github.com/powerhome/playbook/pull/894) @megantrimble)
+
+
 ## [v5.1.0] 2020-6-26
 
 ### Added
