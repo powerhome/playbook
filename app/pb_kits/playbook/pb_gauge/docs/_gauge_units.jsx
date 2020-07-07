@@ -2,16 +2,17 @@ import React from 'react'
 import { Gauge } from '../../'
 
 const chartData = [
-  { name: 'Point1', value: 45 },
+  { name: 'Sales', value: 32 },
 ]
 
-const GaugeDefault = () => (
+const GaugeUnits = () => (
   <div>
     <Gauge
         chartData={chartData}
-        id="gauge-default"
+        id="gauge-units"
+        units="%"
     />
   </div>
 )
 
-export default GaugeDefault
+export default GaugeUnits

@@ -1,13 +1,15 @@
 <% data = [
   {
     name: 'Point1',
-    value: 74,
+    value: 780,
   }
 ]%>
 
 <%= pb_rails("gauge", props: {
   id: "gauge-title",
   chart_data: data,
-  title: "Title",
-  caption: "Caption",
+  min: 300,
+  max: 850,
+  subtitle: "John Doe",
+  title: "Credit Score",
 }) %>

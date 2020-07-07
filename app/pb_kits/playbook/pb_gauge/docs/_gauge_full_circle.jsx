@@ -5,13 +5,14 @@ const chartData = [
   { name: 'Point1', value: 45 },
 ]
 
-const GaugeDefault = () => (
+const GaugeFullCircle = () => (
   <div>
     <Gauge
         chartData={chartData}
-        id="gauge-default"
+        fullCircle
+        id="gauge-full-circle"
     />
   </div>
 )
 
-export default GaugeDefault
+export default GaugeFullCircle

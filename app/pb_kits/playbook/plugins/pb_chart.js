@@ -89,10 +89,9 @@ class pbChart {
     solidGauge(Highcharts)
 
     Highcharts.chart(this.defaults.id, {
-
       chart: {
         type: this.defaults.style,
-        // height: '120%',
+        height: this.defaults.height,
       },
 
       title: {
@@ -100,11 +99,17 @@ class pbChart {
       },
 
       yAxis: {
-        min: this.defaults.bounds[0],
-        max: this.defaults.bounds[1],
+        min: this.defaults.min,
+        max: this.defaults.max,
         title: {
-          text: this.defaults.caption,
+          text: this.defaults.subtitle,
           y: -96,
+          style: {
+            fontFamily: typography.font_family_base,
+            color: colors.text_lt_light,
+            fontWeight: typography.regular,
+            fontSize: typography.text_base,
+          },
         },
         lineWidth: 0,
         tickWidth: 0,
@@ -112,6 +117,7 @@ class pbChart {
         tickAmount: 2,
         labels: {
           y: 25,
+          enabled: this.defaults.showLabels,
         },
       },
 
@@ -155,7 +161,7 @@ class pbChart {
 
       plotOptions: {
         solidgauge: {
-          borderColor: 'blue',
+          borderColor: colors.primary,
           borderWidth: 20,
           radius: 90,
           innerRadius: '90%',
@@ -167,8 +173,9 @@ class pbChart {
             style: {
               fontFamily: typography.font_family_base,
               fontWeight: typography.bold,
-              fontSize: typography.heading_4,
+              fontSize: typography.heading_2,
             },
+            y: -25,
           },
         },
       },

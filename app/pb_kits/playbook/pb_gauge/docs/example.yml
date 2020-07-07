@@ -4,11 +4,18 @@ examples:
   - gauge_default: Default
   - gauge_full_circle: Full Circle
   - gauge_units: Units
-  - gauge_bounds: Bounds
+  - gauge_min_max: Min Max Labels
   - gauge_title: Title 
   - gauge_sizing: Sizing
+  - gauge_height: Height
   
   
   react:
   - gauge_default: Default
+  - gauge_full_circle: Full Circle
+  - gauge_units: Units
+  - gauge_min_max: Min Max Labels
+  - gauge_title: Title 
+  - gauge_sizing: Sizing
+  - gauge_height: Height
   

@@ -1,0 +1,15 @@
+<%= pb_rails("gauge", props: {
+  id: "gauge-height-px",
+  chart_data: [{ name: "Name", value: 400 }],
+  height: '400',
+  title: "Fixed Height in Pixels",
+  units: "px"
+}) %>
+
+<%= pb_rails("gauge", props: {
+  id: "gauge-height-percent",
+  chart_data: [{ name: "Name", value: 45 }],
+  height: '45%',
+  title: "Height as Percentage of Width",
+  units: "%"
+}) %>

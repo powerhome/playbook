@@ -2,30 +2,30 @@
   text: "Gauge resizes dynamically to fit whatever element it's placed within."
 }) %>
 
-<div style="max-width:125px; max-height:230px;">
-  <%= pb_rails("gauge", props: {
-    id: "gauge-sizing1",
-    chart_data: [{ name: "Name", value: 25 }],
-  }) %>
-</div>
 
-<div style="max-width:200px; max-height:240px;">
-  <%= pb_rails("gauge", props: {
-    id: "gauge-sizing2",
-    chart_data: [{ name: "Name", value: 50 }],
-  }) %>
-</div>
-
-<div style="max-width:300px; max-height:250px;">
-  <%= pb_rails("gauge", props: {
-    id: "gauge-sizing3",
-    chart_data: [{ name: "Name", value: 75 }],
-  }) %>
-</div>
-
-<div style="max-width:400px; max-height:260px;">
-  <%= pb_rails("gauge", props: {
-    id: "gauge-sizing4",
-    chart_data: [{ name: "Name", value: 100 }],
-  }) %>
-</div>
+<%= pb_rails("flex", props: {wrap: true}) do %>
+  <%= pb_rails("flex/flex_item", props: {fixed_size: "400px"}) do %>
+      <%= pb_rails("gauge", props: {
+        id: "gauge-sizing4",
+        chart_data: [{ name: "Name", value: 100 }],
+      }) %>
+  <% end %>
+  <%= pb_rails("flex/flex_item", props: {fixed_size: "300px"}) do %>
+      <%= pb_rails("gauge", props: {
+        id: "gauge-sizing3",
+        chart_data: [{ name: "Name", value: 75 }],
+      }) %>
+  <% end %>
+  <%= pb_rails("flex/flex_item", props: {fixed_size: "200px"}) do %>
+      <%= pb_rails("gauge", props: {
+        id: "gauge-sizing2",
+        chart_data: [{ name: "Name", value: 50 }],
+      }) %>
+  <% end %>
+  <%= pb_rails("flex/flex_item", props: {fixed_size: "125px"}) do %>
+      <%= pb_rails("gauge", props: {
+        id: "gauge-sizing1",
+        chart_data: [{ name: "Name", value: 25 }],
+      }) %>
+  <% end %>
+<% end %>
