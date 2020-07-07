@@ -1,1 +1,7 @@
 export { default as GaugeDefault } from './_gauge_default.jsx'
+export { default as GaugeFullCircle } from './_gauge_full_circle.jsx'
+export { default as GaugeHeight } from './_gauge_height.jsx'
+export { default as GaugeMinMax } from './_gauge_min_max.jsx'
+export { default as GaugeSizing } from './_gauge_sizing.jsx'
+export { default as GaugeTitle } from './_gauge_title.jsx'
+export { default as GaugeUnits } from './_gauge_units.jsx'

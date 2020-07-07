@@ -1,6 +1,6 @@
 <% data = [
   {
-    name: 'Percentage',
+    name: 'Sales',
     value: 32,
   }
 ]%>
@@ -8,5 +8,6 @@
 <%= pb_rails("gauge", props: {
   id: "gauge-units",
   chart_data: data,
-  units: "%"
+  title: "Data Usage",
+  units: "GB"
 }) %>
