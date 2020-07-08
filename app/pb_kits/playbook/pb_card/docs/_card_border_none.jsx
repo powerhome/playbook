@@ -5,7 +5,7 @@ const CardBorderNone = () => {
   return (
     <div className="bg-light-doc-example">
 
-      <Card border_none>{'Card content'}</Card>
+      <Card borderNone>{'Card content'}</Card>
 
     </div>
   )
