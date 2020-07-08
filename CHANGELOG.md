@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### Added
+- Added border prop ([#900](https://github.com/powerhome/playbook/pull/900) @christinaatai))
+
 ## [v5.2.0] 2020-7-2
 
 ### Fixed
