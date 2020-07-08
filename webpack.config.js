@@ -68,6 +68,39 @@ const mainConfig = (env) => {
   }
 }
 
+const docsConfig = (env) => {
+  return {
+    mode: env.development ? 'development' : 'production',
+    entry: {
+      playbook: './app/pb_kits/playbook/packs/examples.js',
+    },
+    output: {
+      libraryTarget: 'commonjs2',
+      filename: 'docs.js',
+      path: path.resolve(__dirname, 'dist'),
+    },
+    module: {
+      rules: [
+        {
+          test: /\.scss$/i,
+          use: [
+            { loader: 'css-loader' },
+            { loader: 'sass-loader' },
+          ],
+        },
+        {
+          test: /\.(js|jsx|mjs)$/,
+          use: 'babel-loader',
+          exclude: /node_modules/,
+        }
+      ],
+    },
+    resolve: {
+      extensions: ['.js', '.jsx'],
+    },
+  }
+}
+
 const vendorConfig = (env) => {
   return {
     mode: env.development ? 'development' : 'production',
@@ -101,4 +134,4 @@ const vendorConfig = (env) => {
   }
 }
 
-module.exports = [mainConfig, vendorConfig]
+module.exports = [mainConfig, docsConfig, vendorConfig]
