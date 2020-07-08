@@ -16,6 +16,7 @@ type CardPropTypes = {
   selected?: Boolean,
   shadow?: "none" | "deep" | "deeper" | "deepest",
   dark?: Boolean,
+  borderNone?: Boolean,
 }
 
 type CardHeaderProps = {
@@ -62,9 +63,11 @@ const Card = (props: CardPropTypes) => {
     highlight = {},
     selected = false,
     shadow = 'none',
+    borderNone = false,
   } = props
   const bodyCSS = buildCss('pb_card_body_kit')
-  const cardCss = buildCss('pb_card_kit', `shadow_${shadow}`, {
+  const borderCSS = borderNone == true ? 'border_none' : ''
+  const cardCss = buildCss('pb_card_kit', `shadow_${shadow}`, `${borderCSS}`, {
     dark: dark,
     selected,
     deselected: !selected,

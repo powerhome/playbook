@@ -16,6 +16,10 @@
     }
   }
 
+  &[class*=_border_none] {
+    border-width: 0px;
+  }
+
   [class^=pb_card_header_kit] {
     flex-grow: 0;
     flex-shrink: 0;

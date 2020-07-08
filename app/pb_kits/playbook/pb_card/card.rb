@@ -15,6 +15,8 @@ module Playbook
                        default: {}
       prop :dark, type: Playbook::Props::Boolean,
                  default: false
+      prop :border, type: Playbook::Props::Boolean,
+                    default: true
 
       def classname
         generate_classname("pb_card_kit",
@@ -22,7 +24,8 @@ module Playbook
                            shadow_class,
                            highlight_position_class,
                            highlight_color_class,
-                           dark_class)
+                           dark_class,
+                           border_class)
       end
 
       def body_padding
@@ -54,6 +57,10 @@ module Playbook
 
       def dark_class
         dark ? "dark" : nil
+      end
+
+      def border_class
+        border == false ? "border_none" : nil
       end
     end
   end
