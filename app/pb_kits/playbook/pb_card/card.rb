@@ -15,8 +15,8 @@ module Playbook
                        default: {}
       prop :dark, type: Playbook::Props::Boolean,
                  default: false
-      prop :border, type: Playbook::Props::Boolean,
-                    default: true
+      prop :border_none, type: Playbook::Props::Boolean,
+                         default: false
 
       def classname
         generate_classname("pb_card_kit",
@@ -60,7 +60,7 @@ module Playbook
       end
 
       def border_class
-        border == false ? "border_none" : nil
+        border_none == true ? "border_none" : nil
       end
     end
   end
