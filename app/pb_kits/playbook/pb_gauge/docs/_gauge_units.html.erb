@@ -1,13 +1,41 @@
-<% data = [
+<% data1 = [
   {
-    name: 'Sales',
+    name: 'Data Used',
     value: 32,
   }
 ]%>
 
 <%= pb_rails("gauge", props: {
-  id: "gauge-units",
-  chart_data: data,
+  id: "gauge-units1",
+  chart_data: data1,
   title: "Data Usage",
-  units: "GB"
+  units: "{y}GB"
+}) %>
+
+<% data2 = [
+  {
+    name: 'Sales to Date',
+    value: 65,
+  }
+]%>
+
+<%= pb_rails("gauge", props: {
+  id: "gauge-units2",
+  chart_data: data2,
+  title: "Sales Goal",
+  units: "${y}k"
+}) %>
+
+<% data3 = [
+  {
+    name: 'Sales to Date',
+    value: 65000,
+  }
+]%>
+
+<%= pb_rails("gauge", props: {
+  id: "gauge-units3",
+  chart_data: data3,
+  title: "Thousands Separator",
+  units: "${y:,f}"
 }) %>

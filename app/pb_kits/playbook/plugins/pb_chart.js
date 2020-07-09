@@ -52,7 +52,9 @@ class pbChart {
     highchartsMore(Highcharts)
     solidGauge(Highcharts)
 
-    Highcharts.chart(this.defaults.id, {
+    // this[`chart_${this.defaults.id}`]
+
+    window[this.defaults.id] = Highcharts.chart(this.defaults.id, {
       chart: {
         type: this.defaults.style,
         height: this.defaults.height,
@@ -79,8 +81,9 @@ class pbChart {
         tickWidth: 0,
         minorTickInterval: null,
         tickAmount: 2,
+        tickPositions: [this.defaults.min, this.defaults.max],
         labels: {
-          y: 25,
+          y: 26,
           enabled: this.defaults.showLabels,
         },
       },
@@ -93,6 +96,7 @@ class pbChart {
 
       series: [
         {
+          // animation: false,
           data: this.defaults.chartData,
         },
       ],
@@ -104,8 +108,7 @@ class pbChart {
         endAngle: this.defaults.circumference[1],
         background: {
           borderWidth: 20,
-          // backgroundColor:
-          //   Highcharts.defaultOptions.legend.backgroundColor || '#f7d5e4',
+          borderColor: colors.border_light,
           innerRadius: '90%',
           outerRadius: '90%',
           shape: 'arc',
@@ -133,13 +136,13 @@ class pbChart {
             borderWidth: 0,
             color: colors.text_lt_default,
             enabled: true,
-            format: `{y}${this.defaults.units}`,
+            format: this.defaults.units ? this.defaults.units : '{y}',
             style: {
               fontFamily: typography.font_family_base,
               fontWeight: typography.bold,
               fontSize: typography.heading_2,
             },
-            y: -25,
+            y: -26,
           },
         },
       },
