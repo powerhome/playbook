@@ -3,6 +3,8 @@
 import React, { useEffect } from 'react'
 import { pbChart } from '../'
 
+// import Highcharts from 'highcharts'
+
 type GaugeProps = {
   className?: String,
   chartData?: Array,
@@ -34,6 +36,11 @@ const Gauge = ({
   tooltipHtml = '<span style="font-weight: bold; color:{point.color};">●</span>{point.name}: ' + '<b>{point.y}</b>',
   units = '',
 }: GaugeProps) => {
+
+  // const createChart = () => {
+
+  // }
+
   useEffect(() => {
     chartData.forEach((obj) => {
       obj.y = obj.value
@@ -55,6 +62,27 @@ const Gauge = ({
       tooltipHtml: tooltipHtml,
       type: 'gauge',
     })
+    // if (Highcharts.Chart(id)) {
+    //   debugger
+    // } else {
+    //   createChart() // instantiate chart
+    // }
+
+    // const charts = Highcharts.charts
+    // charts.forEach((chart) => {
+    //   if (chart.renderTo.id === id) {
+    //     const foundChart = chart
+    //     console.log(foundChart.series[0].points[0].y)
+    //   }
+    // })
+    //const chart = window[id]
+    //const gaugePoint = chart.series[0].points[0]
+    //let gaugeVal = gaugePoint.y
+
+    // setTimeout(() => {
+    //   gaugePoint.update(gaugeVal += 5)
+    //   console.log(gaugeVal)
+    // }, 5000)
   })
 
   return (

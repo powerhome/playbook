@@ -2,7 +2,7 @@ import React from 'react'
 import { Gauge } from '../../'
 
 const chartData = [
-  { name: 'Point1', value: 45 },
+  { name: 'Capacity', value: 75 },
 ]
 
 const GaugeFullCircle = () => (
@@ -11,6 +11,8 @@ const GaugeFullCircle = () => (
         chartData={chartData}
         fullCircle
         id="gauge-full-circle"
+        title="Seating Capacity"
+        units="{y}%"
     />
   </div>
 )
