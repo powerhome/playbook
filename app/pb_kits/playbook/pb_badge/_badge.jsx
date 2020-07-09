@@ -2,26 +2,37 @@
 
 import React from 'react'
 import classnames from 'classnames'
-import { buildCss } from '../utilities/props'
 import { spacing } from '../utilities/spacing.js'
 
+import {
+  buildAriaProps,
+  buildCss,
+  buildDataProps,
+} from '../utilities/props'
+
 type BadgeProps = {
+  aria?: object,
   className?: String,
   dark?: Boolean,
+  data?: object,
   id?: String,
-  text?: String,
-  variant?: "success" | "warning" | "error" | "info" | "neutral",
   rounded?: Boolean,
+  text?: String,
+  variant?: "error" | "info" | "neutral" | "primary" | "success" | "warning",
 }
 const Badge = (props: BadgeProps) => {
   const {
+    aria = {},
     className,
     dark = false,
+    data = {},
     id,
+    rounded = false,
     text,
     variant = 'neutral',
-    rounded = false,
   } = props
+  const ariaProps = buildAriaProps(aria)
+  const dataProps = buildDataProps(data)
   const css = classnames(
     className,
     buildCss('pb_badge_kit', variant, {
@@ -33,6 +44,8 @@ const Badge = (props: BadgeProps) => {
 
   return (
     <div
+        {...ariaProps}
+        {...dataProps}
         className={css}
         id={id}
     >
