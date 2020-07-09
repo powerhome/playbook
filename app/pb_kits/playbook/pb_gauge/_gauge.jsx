@@ -61,7 +61,7 @@ const Gauge = ({
       style: style,
       tooltipHtml: tooltipHtml,
       type: 'gauge',
-    })
+    },)
     // if (Highcharts.Chart(id)) {
     //   debugger
     // } else {
@@ -83,7 +83,7 @@ const Gauge = ({
     //   gaugePoint.update(gaugeVal += 5)
     //   console.log(gaugeVal)
     // }, 5000)
-  })
+  }, [])
 
   return (
     <div
