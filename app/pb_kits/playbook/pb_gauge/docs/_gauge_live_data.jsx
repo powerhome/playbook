@@ -35,7 +35,7 @@ const GaugeLiveData = () => {
   const mutateWithState = () => {
     setValue(Math.floor(Math.random() * 100))
     // window['gauge-live-data'].series[0].points[0].update(value)
-    window['gauge-live-data'].series[0].setData([value], false)
+    // window['gauge-live-data'].series[0].setData([value], false)
     // console.log(Highcharts.charts)
   }
 
@@ -64,7 +64,7 @@ const GaugeLiveData = () => {
           text="Change Ref"
       />
       <Gauge
-          chartData={[{ name: 'Name', value: 10 }]}
+          chartData={[{ name: 'Name', value: refVal.current }]}
           id="gauge-live-data"
       />
       {/* {testMemo} */}
