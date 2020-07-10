@@ -55,6 +55,10 @@ module Playbook
       def border_class
         border_none == true ? "border_none" : nil
       end
+
+      def border_class
+        border_none == true ? "border_none" : nil
+      end
     end
   end
 end
