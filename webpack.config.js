@@ -2,6 +2,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const CopyPlugin = require('copy-webpack-plugin')
 
 const path = require('path')
+const svgUrlLoader = require('./config/webpack/loaders/svg.js')
 
 const mainConfig = (env) => {
   return {
@@ -48,22 +49,11 @@ const mainConfig = (env) => {
           use: 'babel-loader',
           exclude: /node_modules/,
         },
-        {
-          test: /\.svg$/,
-          exclude: /node_modules/,
-          use: [
-            {
-              loader: 'svg-url-loader',
-              options: {
-                limit: 10000,
-              },
-            },
-          ],
-        },
+        svgUrlLoader
       ],
     },
     resolve: {
-      extensions: ['.js', '.jsx'],
+      extensions: ['.js', '.jsx', '.svg'],
     },
   }
 }
@@ -92,11 +82,12 @@ const docsConfig = (env) => {
           test: /\.(js|jsx|mjs)$/,
           use: 'babel-loader',
           exclude: /node_modules/,
-        }
+        },
+        svgUrlLoader
       ],
     },
     resolve: {
-      extensions: ['.js', '.jsx'],
+      extensions: ['.js', '.jsx', '.svg'],
     },
   }
 }
