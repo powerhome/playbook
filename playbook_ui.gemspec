@@ -15,8 +15,9 @@ Gem::Specification.new do |s|
   s.license     = "MIT"
 
   s.files = Dir[
+    "app/controllers/playbook/application_controller.rb",
     "app/pb_kits/playbook/pb_*/**/*",
-    "app/pb_kits/playbook/{plugins,props,tokens,utilities}/**/*",
+    "app/pb_kits/playbook/{config,plugins,props,tokens,utilities}/**/*",
     "app/pb_kits/playbook/data/menu.yml",
     "app/pb_kits/playbook/*.{scss,js,rb}",
     "app/helpers/**/*",
