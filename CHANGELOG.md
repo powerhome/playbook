@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### Added
+  - Added aria, data, id props to React Body kit; added aria props to Rails Body kit([#904](https://github.com/powerhome/playbook/pull/904) @kellyeryan)
+
 ## [v5.2.0] 2020-7-2
 
 ### Fixed
