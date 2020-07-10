@@ -9,6 +9,7 @@ examples:
   - card_shadow: Shadow Size
   - card_content: Content Size
   - card_separator: Separator Card
+  - card_border_none: No Border
   react:
   - card_light: Default
   - card_dark: Dark Cards
@@ -19,3 +20,4 @@ examples:
   - card_shadow: Shadow Size
   - card_content: Content Size
   - card_separator: Separator Card
+  - card_border_none: No Border
