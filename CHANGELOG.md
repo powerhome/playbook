@@ -61,6 +61,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Added aria, data, className, id props to React Checkbox kit; added aria prop to Rails Checkbox kit. Added example doc 'Checked Checkbox.'([#905](https://github.com/powerhome/playbook/pull/905) @kellyeryan)
 - Added aria, data, id props to React Body kit; added aria props to Rails Body kit([#904](https://github.com/powerhome/playbook/pull/904) @kellyeryan)
 - Added aria, data props to Circle Icon Button React kit; added aria props to Circle Icon Button Rails kit.([#907](https://github.com/powerhome/playbook/pull/907) @kellyeryan)
+### Added
+- Added border prop ([#900](https://github.com/powerhome/playbook/pull/900) @christinaatai))
 
 ## [v5.2.0] 2020-7-2
 
