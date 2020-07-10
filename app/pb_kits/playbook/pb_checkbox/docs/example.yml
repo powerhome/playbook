@@ -9,6 +9,7 @@ examples:
 
   react:
   - checkbox_default: Default
+  - checkbox_checked: Load as checked
   - checkbox_dark: Dark
   - checkbox_custom: Custom Checkbox
   - checkbox_error: Default w/ Error

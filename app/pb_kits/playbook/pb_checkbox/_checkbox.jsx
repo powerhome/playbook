@@ -3,13 +3,18 @@
 import React from 'react'
 import Body from '../pb_body/_body.jsx'
 import Icon from '../pb_icon/_icon.jsx'
+import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
 import classnames from 'classnames'
 import { spacing } from '../utilities/spacing.js'
 
 type CheckboxProps = {
+  aria?: object,
   checked?: Boolean,
+  className?: String,
   dark?: Boolean,
+  data?: object,
   error?: Boolean,
+  id?: String,
   name: String,
   text: String,
   value: String,
@@ -19,9 +24,13 @@ type CheckboxProps = {
 
 const Checkbox = (props: CheckboxProps) => {
   const {
+    aria = {},
     checked = false,
+    className,
     dark = false,
+    data = {},
     error = false,
+    id,
     name = '',
     text = '',
     value = '',
@@ -29,13 +38,17 @@ const Checkbox = (props: CheckboxProps) => {
     onChange = () => {},
   } = props
 
+  const dataProps = buildDataProps(data)
+  const ariaProps = buildAriaProps(aria)
+  const classes = classnames(buildCss('pb_checkbox_kit',
+    { dark: dark, checked: checked, error: error }), className, spacing(props))
+
   return (
     <label
-        className={classnames('pb_checkbox_kit' +
-        (dark === true ? '_dark' : '') +
-        (error === true ? ' error' : ''), spacing(props))
-
-      }
+        {...ariaProps}
+        {...dataProps}
+        className={classes}
+        id={id}
     >
       <If condition={children}>
         {children}
