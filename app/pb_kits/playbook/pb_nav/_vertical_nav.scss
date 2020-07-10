@@ -32,6 +32,7 @@ $selector: ".pb_nav_list";
           }
           [class*=_item_text] {
             color: $primary;
+            font-weight: $bold;
           }
         }
       }
@@ -90,6 +91,7 @@ $selector: ".pb_nav_list";
         text-decoration: none;
         display: flex;
         align-items: center;
+        border: none;
         padding: $space_xs ($space_sm - 2px);
         transition-property: color, background-color;
         transition-duration: 0.15s;
@@ -106,6 +108,7 @@ $selector: ".pb_nav_list";
         }
         [class*=_text] {
           flex: 1;
+          font-weight: $regular;
         }
         &:hover {
           background-color: rgba($primary, 0.03);
