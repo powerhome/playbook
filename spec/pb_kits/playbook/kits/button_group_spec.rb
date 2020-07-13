@@ -5,7 +5,8 @@ require_relative "../../../../app/pb_kits/playbook/pb_button_group/button_group"
 RSpec.describe Playbook::PbButtonGroup::ButtonGroup do
   subject { Playbook::PbButtonGroup::ButtonGroup }
 
-  it { is_expected.to define_partial }it { is_expected.to define_enum_prop(:values)
+  it { is_expected.to define_partial }
+  it { is_expected.to define_enum_prop(:values)
                   .with_default("horizontal")
                   .with_values("horizontal", "vertical")
   it { is_expected.to define_boolean_prop(:connected).with_default(false) }
