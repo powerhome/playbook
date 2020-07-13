@@ -8,7 +8,7 @@ RSpec.describe Playbook::PbButtonGroup::ButtonGroup do
   it { is_expected.to define_partial }
   it { is_expected.to define_enum_prop(:values)
                   .with_default("horizontal")
-                  .with_values("horizontal", "vertical")
+                  .with_values("horizontal", "vertical") }
   it { is_expected.to define_boolean_prop(:connected).with_default(false) }
   it { is_expected.to define_prop(:text) }
 
