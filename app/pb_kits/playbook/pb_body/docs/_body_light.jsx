@@ -5,7 +5,7 @@ const BodyLight = () => {
   return (
     <div>
       <Body
-          text="I am a body kit (Default)" 
+          text="I am a body kit (Default)"
       />
       <Body
           color="light"
