@@ -3,7 +3,7 @@
   chart_data: [{ name: "Pixel Height", value: 400 }],
   height: '400',
   title: "Fixed Height in Pixels",
-  units: "{y}px"
+  suffix: "px"
 }) %>
 
 <%= pb_rails("gauge", props: {
@@ -11,5 +11,5 @@
   chart_data: [{ name: "Percentage Height", value: 45 }],
   height: '45%',
   title: "Height as Percentage of Width",
-  units: "{y}%"
+  suffix: "%"
 }) %>

@@ -11,8 +11,8 @@ const GaugeFullCircle = () => (
         chartData={chartData}
         fullCircle
         id="gauge-full-circle"
+        suffix="%"
         title="Seating Capacity"
-        units="{y}%"
     />
   </div>
 )
