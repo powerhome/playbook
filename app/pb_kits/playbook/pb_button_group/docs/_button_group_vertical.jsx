@@ -4,10 +4,10 @@ import { Button, ButtonGroup } from '../..'
 const ButtonGroupVertical = () => (
   <div>
     <ButtonGroup
-        onClick={() => alert('Click!')}
         orientation="vertical"
     >
       <Button
+          onClick={() => alert('Click!')}
           text="Button Primary"
       />
       <Button
@@ -25,7 +25,6 @@ const ButtonGroupVertical = () => (
 
     <ButtonGroup
         connected
-        onClick={() => alert('Click!')}
         orientation="vertical"
     >
       <Button

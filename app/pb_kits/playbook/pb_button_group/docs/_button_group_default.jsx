@@ -5,10 +5,10 @@ import { Button, ButtonGroup } from '../..'
 const ButtonGroupDefault = () => (
   <div>
     <ButtonGroup
-        onClick={() => alert('Click!')}
         orientation="horizontal"
     >
       <Button
+          onClick={() => alert('Click!')}
           text="Button Primary"
       />
       <Button
@@ -26,7 +26,6 @@ const ButtonGroupDefault = () => (
 
     <ButtonGroup
         connected
-        onClick={() => alert('Click!')}
         orientation="horizontal"
     >
       <Button
