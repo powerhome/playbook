@@ -1,7 +1,7 @@
 <%= content_tag(:div,
     aria: object.aria,
-    id: object.id,
+    class: object.classname,
     data: object.data,
-    class: object.classname) do %>
+    id: object.id) do %>
       <%= !object.children.nil? ? capture(&object.children) : object.text %>
 <% end %>

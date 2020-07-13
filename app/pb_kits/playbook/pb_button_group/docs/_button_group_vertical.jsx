@@ -1,27 +1,24 @@
 import React from 'react'
-import { ButtonGroup } from '../..'
+import { Button, ButtonGroup } from '../..'
 
 const ButtonGroupVertical = () => (
   <div>
     <ButtonGroup
         onClick={() => alert('Click!')}
         orientation="vertical"
-        text="Button Primary"
-    />
-
-    <ButtonGroup
-        onClick={() => alert('Click!')}
-        orientation="vertical"
-        text="Button Secondary"
-        variant="secondary"
-    />
-
-    <ButtonGroup
-        onClick={() => alert('Click!')}
-        orientation="vertical"
-        text="Button Secondary"
-        variant="secondary"
-    />
+    >
+      <Button
+          text="Button Primary"
+      />
+      <Button
+          text="Button Secondary"
+          variant="secondary"
+      />
+      <Button
+          text="Button Secondary"
+          variant="secondary"
+      />
+    </ButtonGroup>
 
     <br />
     <br />
@@ -30,24 +27,19 @@ const ButtonGroupVertical = () => (
         connected
         onClick={() => alert('Click!')}
         orientation="vertical"
-        text="Button Primary"
-    />
-
-    <ButtonGroup
-        connected
-        onClick={() => alert('Click!')}
-        orientation="vertical"
-        text="Button Secondary"
-        variant="secondary"
-    />
-
-    <ButtonGroup
-        connected
-        onClick={() => alert('Click!')}
-        orientation="vertical"
-        text="Button Secondary"
-        variant="secondary"
-    />
+    >
+      <Button
+          text="Button Primary"
+      />
+      <Button
+          text="Button Secondary"
+          variant="secondary"
+      />
+      <Button
+          text="Button Secondary"
+          variant="secondary"
+      />
+    </ButtonGroup>
   </div>
 )
 

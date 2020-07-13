@@ -19,6 +19,7 @@ import * as Badge from 'pb_badge/docs'
 import * as BarGraph from 'pb_bar_graph/docs'
 import * as Body from 'pb_body/docs'
 import * as Button from 'pb_button/docs'
+import * as ButtonGroup from 'pb_button_group/docs'
 import * as Caption from 'pb_caption/docs'
 import * as Card from 'pb_card/docs'
 import * as Checkbox from 'pb_checkbox/docs'
@@ -97,6 +98,7 @@ WebpackerReact.setup({
   ...BarGraph,
   ...Body,
   ...Button,
+  ...ButtonGroup,
   ...Caption,
   ...Card,
   ...Checkbox,
@@ -168,5 +170,4 @@ WebpackerReact.setup({
   ...UserBadge,
   ...WeekdayStacked,
 })
-import * as ButtonGroup from 'pb_button_group/docs'
-WebpackerReact.setup(ButtonGroup)
+

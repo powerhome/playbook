@@ -1,27 +1,25 @@
 import React from 'react'
-import { ButtonGroup } from '../..'
+import { Button, ButtonGroup } from '../..'
+// import button
 
 const ButtonGroupDefault = () => (
   <div>
     <ButtonGroup
         onClick={() => alert('Click!')}
         orientation="horizontal"
-        text="Button Primary"
-    />
-
-    <ButtonGroup
-        onClick={() => alert('Click!')}
-        orientation="horizontal"
-        text="Button Secondary"
-        variant="secondary"
-    />
-
-    <ButtonGroup
-        onClick={() => alert('Click!')}
-        orientation="horizontal"
-        text="Button Secondary"
-        variant="secondary"
-    />
+    >
+      <Button
+          text="Button Primary"
+      />
+      <Button
+          text="Button Secondary"
+          variant="secondary"
+      />
+      <Button
+          text="Button Secondary"
+          variant="secondary"
+      />
+    </ButtonGroup>
 
     <br />
     <br />
@@ -30,24 +28,19 @@ const ButtonGroupDefault = () => (
         connected
         onClick={() => alert('Click!')}
         orientation="horizontal"
-        text="Button Primary"
-    />
-
-    <ButtonGroup
-        connected
-        onClick={() => alert('Click!')}
-        orientation="horizontal"
-        text="Button Secondary"
-        variant="secondary"
-    />
-
-    <ButtonGroup
-        connected
-        onClick={() => alert('Click!')}
-        orientation="horizontal"
-        text="Button Secondary"
-        variant="secondary"
-    />
+    >
+      <Button
+          text="Button Primary"
+      />
+      <Button
+          text="Button Secondary"
+          variant="secondary"
+      />
+      <Button
+          text="Button Secondary"
+          variant="secondary"
+      />
+    </ButtonGroup>
   </div>
 )
 

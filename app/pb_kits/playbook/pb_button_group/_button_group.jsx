@@ -5,7 +5,6 @@ import classnames from 'classnames'
 
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
 
-import { Button } from '..'
 import { spacing } from '../utilities/spacing.js'
 
 type ButtonGroupProps = {
@@ -29,10 +28,8 @@ const ButtonGroup  = (props: ButtonGroupProps) => {
     connected = false,
     data = {},
     id,
-    onClick = () => {},
     orientation = 'horizontal',
     text,
-    variant = 'primary',
   } = props
 
   const ariaProps = buildAriaProps(aria)
@@ -47,12 +44,7 @@ const ButtonGroup  = (props: ButtonGroupProps) => {
         className={classes}
         id={id}
     >
-      <Button
-          onClick={onClick}
-          variant={variant}
-      >
-        {text || children}
-      </Button>
+      {children || text}
     </div>
   )
 }
