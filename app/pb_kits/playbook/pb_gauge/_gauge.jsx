@@ -2,13 +2,20 @@
 
 import React, { useEffect, useRef } from 'react'
 import { pbChart } from '../'
+import classnames from 'classnames'
 import Highcharts from 'highcharts'
 
-// import Highcharts from 'highcharts'
+import {
+  buildAriaProps,
+  buildCss,
+  buildDataProps,
+} from '../utilities/props'
 
 type GaugeProps = {
+  aria: Object,
   className?: String,
   chartData?: Array,
+  data?: Object,
   fullCircle: Boolean,
   height: String,
   id?: String,
@@ -25,8 +32,10 @@ type GaugeProps = {
 }
 
 const Gauge = ({
+  aria = {},
   className,
   chartData,
+  data = {},
   fullCircle = false,
   height = null,
   id,
@@ -41,6 +50,12 @@ const Gauge = ({
   tooltipHtml = '<span style="font-weight: bold; color:{point.color};">●</span>{point.name}: ' + '<b>{point.y}</b>',
   // units = '',
 }: GaugeProps) => {
+  const ariaProps = buildAriaProps(aria)
+  const dataProps = buildDataProps(data)
+
+  const css = buildCss({
+    'pb_gauge_kit': true,
+  })
   // Runs first time component Renders
   useEffect(() => {
     chartData.forEach((obj) => {
@@ -80,12 +95,12 @@ const Gauge = ({
       componentDidMount.current = true
     }
   })
-  // Will this only run when state of parent component changes?
-  // i.e. unneccessary/inefficient rerenders?
 
   return (
     <div
-        className={className}
+        {...ariaProps}
+        {...dataProps}
+        className={classnames(css, className)}
         id={id}
     />
   )
