@@ -168,3 +168,5 @@ WebpackerReact.setup({
   ...UserBadge,
   ...WeekdayStacked,
 })
+import * as ButtonGroup from 'pb_button_group/docs'
+WebpackerReact.setup(ButtonGroup)
