@@ -136,7 +136,8 @@ class pbChart {
             borderWidth: 0,
             color: colors.text_lt_default,
             enabled: true,
-            format: this.defaults.units ? this.defaults.units : '{y}',
+            // format: this.defaults.units ? this.defaults.units : '{y}',
+            format: `<span class="prefix">${this.defaults.prefix}</span><span>{y:,f}</span><span class="suffix">${this.defaults.suffix}</span>`,
             style: {
               fontFamily: typography.font_family_base,
               fontWeight: typography.bold,

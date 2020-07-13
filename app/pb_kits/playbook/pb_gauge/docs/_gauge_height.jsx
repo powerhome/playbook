@@ -7,15 +7,15 @@ const GaugeHeight = () => (
         chartData={[ { name: 'Name', value: 400 } ]}
         height="400"
         id="gauge-height-px"
+        suffix="px"
         title="Fixed Height in Pixels"
-        units="{y}px"
     />
     <Gauge
         chartData={[ { name: 'Name', value: 45 } ]}
         height="45%"
         id="gauge-height-percent"
+        suffix="%"
         title="Height as Percentage of Width"
-        units="{y}%"
     />
   </div>
 )

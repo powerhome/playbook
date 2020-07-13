@@ -14,7 +14,9 @@ module Playbook
                    default: "solidgauge"
       prop :title, type: Playbook::Props::String, default: ""
       prop :subtitle, type: Playbook::Props::String, default: ""
-      prop :units, type: Playbook::Props::String, default: ""
+      # prop :units, type: Playbook::Props::String, default: ""
+      prop :prefix, type: Playbook::Props::String, default: ""
+      prop :suffix, type: Playbook::Props::String, default: ""
       prop :height, type: Playbook::Props::String, default: nil
       prop :tooltip_html, default: '<span style="font-weight: bold; color:{point.color};">●</span>
                                       {point.name}: ' + '<b>{point.y}
@@ -39,7 +41,9 @@ module Playbook
           max: max,
           title: title,
           subtitle: subtitle,
-          units: units,
+          suffix: suffix,
+          prefix: prefix,
+          # units: units,
           showLabels: show_labels,
           style: style,
           tooltipHtml: tooltip_html,

@@ -13,14 +13,15 @@ const GaugeUnits = () => (
     <Gauge
         chartData={chartData1}
         id="gauge-units1"
+        suffix="GB"
         title="Data Usage"
-        units="{y}GB"
     />
     <Gauge
         chartData={chartData2}
         id="gauge-units2"
+        prefix="$"
+        suffix="k"
         title="Sales Goal"
-        units="${y}k"
     />
   </div>
 )

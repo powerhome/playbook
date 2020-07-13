@@ -1,7 +1,8 @@
 /* @flow */
 
-import React, { useEffect } from 'react'
+import React, { useEffect, useRef } from 'react'
 import { pbChart } from '../'
+import Highcharts from 'highcharts'
 
 // import Highcharts from 'highcharts'
 
@@ -13,12 +14,14 @@ type GaugeProps = {
   id?: String,
   max: Number,
   min: Number,
+  prefix: String,
   showLabels: Boolean,
   style: String,
   subtitle: String,
+  suffix: String,
   title: String,
   tooltipHtml: String,
-  units: String,
+  // units: String,
 }
 
 const Gauge = ({
@@ -29,18 +32,16 @@ const Gauge = ({
   id,
   max = 100,
   min = 0,
+  prefix = '',
   showLabels = false,
   style = 'solidgauge',
   subtitle = '',
+  suffix = '',
   title = '',
   tooltipHtml = '<span style="font-weight: bold; color:{point.color};">●</span>{point.name}: ' + '<b>{point.y}</b>',
-  units = '',
+  // units = '',
 }: GaugeProps) => {
-
-  // const createChart = () => {
-
-  // }
-
+  // Runs first time component Renders
   useEffect(() => {
     chartData.forEach((obj) => {
       obj.y = obj.value
@@ -54,36 +55,33 @@ const Gauge = ({
       height: height,
       min: min,
       max: max,
+      prefix: prefix,
       title: title,
       subtitle: subtitle,
-      units: units,
+      // units: units,
+      suffix: suffix,
       showLabels: showLabels,
       style: style,
       tooltipHtml: tooltipHtml,
       type: 'gauge',
-    },)
-    // if (Highcharts.Chart(id)) {
-    //   debugger
-    // } else {
-    //   createChart() // instantiate chart
-    // }
-
-    // const charts = Highcharts.charts
-    // charts.forEach((chart) => {
-    //   if (chart.renderTo.id === id) {
-    //     const foundChart = chart
-    //     console.log(foundChart.series[0].points[0].y)
-    //   }
-    // })
-    //const chart = window[id]
-    //const gaugePoint = chart.series[0].points[0]
-    //let gaugeVal = gaugePoint.y
-
-    // setTimeout(() => {
-    //   gaugePoint.update(gaugeVal += 5)
-    //   console.log(gaugeVal)
-    // }, 5000)
+    })
   }, [])
+
+  const componentDidMount = useRef(false)
+  // Doesn't run the first time but runs every subsequent render
+  useEffect(() => {
+    if (componentDidMount.current) {
+      Highcharts.charts.forEach((chart) => {
+        if (chart.renderTo.id === id) {
+          chart.series[0].setData([chartData[0].value])
+        }
+      })
+    } else {
+      componentDidMount.current = true
+    }
+  })
+  // Will this only run when state of parent component changes?
+  // i.e. unneccessary/inefficient rerenders?
 
   return (
     <div
