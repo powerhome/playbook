@@ -28,7 +28,6 @@ type GaugeProps = {
   suffix: String,
   title: String,
   tooltipHtml: String,
-  // units: String,
 }
 
 const Gauge = ({
@@ -48,7 +47,6 @@ const Gauge = ({
   suffix = '',
   title = '',
   tooltipHtml = '<span style="font-weight: bold; color:{point.color};">●</span>{point.name}: ' + '<b>{point.y}</b>',
-  // units = '',
 }: GaugeProps) => {
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
@@ -73,7 +71,6 @@ const Gauge = ({
       prefix: prefix,
       title: title,
       subtitle: subtitle,
-      // units: units,
       suffix: suffix,
       showLabels: showLabels,
       style: style,

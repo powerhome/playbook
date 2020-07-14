@@ -2,7 +2,7 @@ import React from 'react'
 import { Gauge } from '../../'
 
 const chartData = [{
-  name: 'Rating', value: 8.5,
+  name: 'Rating', value: 4.5,
 }]
 
 const GaugeMinMax = () => (
@@ -10,7 +10,9 @@ const GaugeMinMax = () => (
     <Gauge
         chartData={chartData}
         id="gauge-min-max"
-        max={10}
+        // max defaults to 100
+        max={5}
+        // min defaults to 0
         min={0}
         showLabels
         title="Product Rating"

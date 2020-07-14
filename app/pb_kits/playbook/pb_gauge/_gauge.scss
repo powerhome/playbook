@@ -1,11 +1,12 @@
 [class^=pb_gauge_kit] {
 
-  .suffix, .prefix {
+  .suffix {
     fill: $text_lt_light;
-    font: $regular $font_larger $font_family_base
+    font: $regular $font_larger $font_family_base;
   }
-  // .prefix {
-  //   fill: $text_lt_light;
-  //   font: $regular $font_larger $font_family_base
-  // }
+  .prefix {
+    fill: $text_lt_light;
+    font: $regular $font_base $font_family_base;
+    transform: translateY(100px)
+  }
 }

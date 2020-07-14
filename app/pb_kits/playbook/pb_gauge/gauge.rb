@@ -14,7 +14,6 @@ module Playbook
                    default: "solidgauge"
       prop :title, type: Playbook::Props::String, default: ""
       prop :subtitle, type: Playbook::Props::String, default: ""
-      # prop :units, type: Playbook::Props::String, default: ""
       prop :prefix, type: Playbook::Props::String, default: ""
       prop :suffix, type: Playbook::Props::String, default: ""
       prop :height, type: Playbook::Props::String, default: nil
@@ -43,7 +42,6 @@ module Playbook
           subtitle: subtitle,
           suffix: suffix,
           prefix: prefix,
-          # units: units,
           showLabels: show_labels,
           style: style,
           tooltipHtml: tooltip_html,
@@ -52,7 +50,7 @@ module Playbook
       end
 
       def classname
-        generate_classname("pb_circle_chart")
+        generate_classname("pb_gauge_kit")
       end
     end
   end
