@@ -27,17 +27,3 @@
   suffix: "k",
 
 }) %>
-
-<% data3 = [
-  {
-    name: 'Sales to Date',
-    value: 65000,
-  }
-]%>
-
-<%= pb_rails("gauge", props: {
-  id: "gauge-units3",
-  chart_data: data3,
-  title: "Thousands Separator",
-  prefix: "$"
-}) %>

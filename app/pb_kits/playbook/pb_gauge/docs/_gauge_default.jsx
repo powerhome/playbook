@@ -1,14 +1,14 @@
 import React from 'react'
 import { Gauge } from '../../'
 
-const chartData = [
+const data = [
   { name: 'Point1', value: 45 },
 ]
 
 const GaugeDefault = () => (
   <div>
     <Gauge
-        chartData={chartData}
+        chartData={data}
         id="gauge-default"
     />
   </div>
