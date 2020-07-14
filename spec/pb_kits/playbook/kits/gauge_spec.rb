@@ -8,15 +8,14 @@ RSpec.describe Playbook::PbGauge::Gauge do
   it { is_expected.to define_partial }
 
   it { is_expected.to define_prop(:chart_data).of_type(Playbook::Props::Array).with_default([{ name: "Name", value: 0 }]) }
-  it { is_expected.to define_prop(:style).of_type(Playbook::Props::Enum).with_default("solidgauge") }
+  it { is_expected.to define_enum_prop(:style).with_default("solidgauge") }
   it { is_expected.to define_prop(:title).of_type(Playbook::Props::String).with_default("") }
   it { is_expected.to define_prop(:subtitle).of_type(Playbook::Props::String).with_default("") }
   it { is_expected.to define_prop(:prefix).of_type(Playbook::Props::String).with_default("") }
   it { is_expected.to define_prop(:suffix).of_type(Playbook::Props::String).with_default("") }
   it { is_expected.to define_prop(:height).of_type(Playbook::Props::String).with_default(nil) }
-  it { is_expected.to define_prop(:tooltip_html)
-  it { is_expected.to define_prop(:full_circle).of_type(Playbook::Props::Boolean).with_default(false) }
-  it { is_expected.to define_prop(:show_labels).of_type(Playbook::Props::Boolean).with_default(false) }
+  it { is_expected.to define_boolean_prop(:full_circle).with_default(false) }
+  it { is_expected.to define_boolean_prop(:show_labels).with_default(false) }
   it { is_expected.to define_prop(:min).of_type(Playbook::Props::Numeric).with_default(0) }
   it { is_expected.to define_prop(:max).of_type(Playbook::Props::Numeric).with_default(100) }
 
