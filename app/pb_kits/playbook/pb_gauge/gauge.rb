@@ -8,7 +8,7 @@ module Playbook
       partial "pb_gauge/gauge"
 
       prop :chart_data, type: Playbook::Props::Array,
-                        default: []
+                        default: [{ name: "Name", value: 0 }]
       prop :style, type: Playbook::Props::Enum,
                    values: %w[solidgauge],
                    default: "solidgauge"

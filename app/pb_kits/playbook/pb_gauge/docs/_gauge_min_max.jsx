@@ -1,14 +1,14 @@
 import React from 'react'
 import { Gauge } from '../../'
 
-const chartData = [{
+const data = [{
   name: 'Rating', value: 4.5,
 }]
 
 const GaugeMinMax = () => (
   <div>
     <Gauge
-        chartData={chartData}
+        chartData={data}
         id="gauge-min-max"
         // max defaults to 100
         max={5}

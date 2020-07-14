@@ -1,14 +1,14 @@
 import React from 'react'
 import { Gauge } from '../../'
 
-const chartData = [
+const data = [
   { name: 'Capacity', value: 75 },
 ]
 
 const GaugeFullCircle = () => (
   <div>
     <Gauge
-        chartData={chartData}
+        chartData={data}
         fullCircle
         id="gauge-full-circle"
         suffix="%"

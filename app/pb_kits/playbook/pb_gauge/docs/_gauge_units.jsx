@@ -1,23 +1,23 @@
 import React from 'react'
 import { Gauge } from '../../'
 
-const chartData1 = [
+const data1 = [
   { name: 'Data Used', value: 32 },
 ]
-const chartData2 = [
+const data2 = [
   { name: 'Sales to Date', value: 65 },
 ]
 
 const GaugeUnits = () => (
   <div>
     <Gauge
-        chartData={chartData1}
+        chartData={data1}
         id="gauge-units1"
         suffix="GB"
         title="Data Usage"
     />
     <Gauge
-        chartData={chartData2}
+        chartData={data2}
         id="gauge-units2"
         prefix="$"
         suffix="k"

@@ -1,14 +1,10 @@
 import Highcharts from 'highcharts'
 import colors from '../tokens/_colors.scss'
-// console.log(colors)
 import typography from '../tokens/_typography.scss'
-// console.log(typography)
 
 import { highchartsTheme } from '../pb_dashboard/pbChartsLightTheme.js'
 
 require('highcharts/modules/variable-pie')(Highcharts)
-// require('highcharts/modules/solid-gauge')(Highcharts)
-// require('highcharts/modules/highcharts-more')(Highcharts)
 import highchartsMore from 'highcharts/highcharts-more.js'
 import solidGauge from 'highcharts/modules/solid-gauge.js'
 
@@ -52,8 +48,6 @@ class pbChart {
     highchartsMore(Highcharts)
     solidGauge(Highcharts)
 
-    // this[`chart_${this.defaults.id}`]
-
     window[this.defaults.id] = Highcharts.chart(this.defaults.id, {
       chart: {
         type: this.defaults.style,
@@ -96,7 +90,6 @@ class pbChart {
 
       series: [
         {
-          // animation: false,
           data: this.defaults.chartData,
         },
       ],

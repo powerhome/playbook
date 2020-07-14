@@ -33,7 +33,7 @@ type GaugeProps = {
 const Gauge = ({
   aria = {},
   className,
-  chartData,
+  chartData = [{ name: 'Name', value: 0 }],
   data = {},
   fullCircle = false,
   height = null,
