@@ -1,7 +1,9 @@
 <%= pb_rails("gauge", props: {
   id: "gauge-min-max",
   chart_data: [{ name: "Rating", value: 4.5 }],
+  # min defaults to 0
   min: 0,
+  # max defaults to 100
   max: 5,
   show_labels: true,
   title: "Product Rating"

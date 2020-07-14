@@ -172,11 +172,10 @@ class pbChart {
             borderWidth: 0,
             color: colors.text_lt_default,
             enabled: true,
-            // format: this.defaults.units ? this.defaults.units : '{y}',
-            format: `<span class="prefix">${this.defaults.prefix}</span><span>{y:,f}</span><span class="suffix">${this.defaults.suffix}</span>`,
+            format: `<span class="prefix">${this.defaults.prefix}</span><span class="fix">{y:,f}</span><span class="suffix">${this.defaults.suffix}</span>`,
             style: {
               fontFamily: typography.font_family_base,
-              fontWeight: typography.bold,
+              fontWeight: typography.regular,
               fontSize: typography.heading_2,
             },
             y: -26,
@@ -185,6 +184,10 @@ class pbChart {
       },
     })
     document.querySelectorAll('.gauge-pane').forEach((pane) => pane.setAttribute('stroke-linejoin', 'round'))
+    if (document.querySelector('.prefix')) {
+      document.querySelectorAll('.prefix').forEach((prefix) => prefix.setAttribute('y', '28'))
+      document.querySelectorAll('.fix').forEach((fix) => fix.setAttribute('y', '38'))
+    }
   }
 
   setupPieChart() {
