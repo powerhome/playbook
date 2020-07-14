@@ -7,7 +7,7 @@ import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
 
 import { spacing } from '../utilities/spacing.js'
 
-type ButtonGroupProps = {
+type ButtonToolbarProps = {
   aria?: object,
   children?: Array<React.ReactChild>,
   className?: String,
@@ -20,7 +20,7 @@ type ButtonGroupProps = {
   variant?: String,
 }
 
-const ButtonGroup  = (props: ButtonGroupProps) => {
+const ButtonToolbar  = (props: ButtonToolbarProps) => {
   const {
     aria = {},
     children,
@@ -35,7 +35,7 @@ const ButtonGroup  = (props: ButtonGroupProps) => {
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
 
-  const classes = classnames(buildCss('pb_button_group_kit', orientation, { connected: connected }), className, spacing(props))
+  const classes = classnames(buildCss('pb_button_toolbar_kit', orientation, { connected: connected }), className, spacing(props))
 
   return (
     <div
@@ -49,4 +49,4 @@ const ButtonGroup  = (props: ButtonGroupProps) => {
   )
 }
 
-export default ButtonGroup
+export default ButtonToolbar

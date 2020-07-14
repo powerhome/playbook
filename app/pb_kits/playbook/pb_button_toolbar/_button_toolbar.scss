@@ -1,7 +1,7 @@
 @import "../pb_button/button";
 @import "../pb_button/button_mixins";
 
-[class^=pb_button_group]{
+[class^=pb_button_toolbar]{
     // Orientation =========
     &[class*=_horizontal]  {
       display: inline-flex;
@@ -49,26 +49,34 @@
             border-bottom-right-radius: 0;
             border-top-right-radius: 0;
             border-right-width: 0;
+            border: 1px solid #e1e4e8
           }
           &:not(:first-child){
             border-bottom-left-radius: 0;
             border-top-left-radius: 0;
             border-left-width: 0;
+            border: 1px solid #e1e4e8
           }
         }
       }
   
       &[class*=_vertical] {
         & > [class^=pb_button]  {
+          &:hover{
+            background-color: $silver;
+            color: white;
+          }
           &:not(:last-child){
             border-bottom-right-radius: 0;
             border-bottom-left-radius: 0;
             border-bottom-width: 0;
+            border: 1px solid #e1e4e8
           }
           &:not(:first-child){
             border-top-right-radius: 0;
             border-top-left-radius: 0;
             border-top-width: 0;
+            border: 1px solid #e1e4e8
           }
         }
       }

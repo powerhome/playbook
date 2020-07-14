@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
 module Playbook
-  module PbButtonGroup
-    class ButtonGroup
+  module PbButtonToolbar
+    class ButtonToolbar
       include Playbook::Props
 
-      partial "pb_button_group/button_group"
+      partial "pb_button_toolbar/button_toolbar"
 
       prop :connected, type: Playbook::Props::Boolean, default: false
 
@@ -16,7 +16,7 @@ module Playbook
       prop :text 
 
       def classname
-        generate_classname("pb_button_group_kit", orientation, connected_class)
+        generate_classname("pb_button_toolbar_kit", orientation, connected_class)
       end
 
     private

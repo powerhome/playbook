@@ -1,2 +1,2 @@
-export { default as ButtonGroupDefault } from './_button_group_default.jsx'
-export { default as ButtonGroupVertical } from './_button_group_vertical.jsx'
+export { default as ButtonToolbarDefault } from './_button_toolbar_default.jsx.js'
+export { default as ButtonToolbarVertical } from './_button_toolbar_vertical.jsx.js'
