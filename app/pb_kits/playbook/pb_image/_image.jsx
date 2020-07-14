@@ -14,7 +14,7 @@ const Image = (props: ImageProps) => {
   return (
     <img
         alt={alt}
-        className={classnames('pb_image lazyload blur_up', spacing(props))}
+        className={classnames('pb_image_kit lazyload blur_up', spacing(props))}
         data-src={url}
     />
   )
