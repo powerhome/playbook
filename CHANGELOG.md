@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### Fixed
+- Don't break page when changing icon with condition in with icon nav ([#912](https://github.com/powerhome/playbook/pull/912) @KatherineMuedas)
+
 ### Added
 - Added border prop ([#900](https://github.com/powerhome/playbook/pull/900) @christinaatai))
 
@@ -27,7 +30,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [v5.1.0] 2020-6-26
 
 ### Added
-- Added description to filter kit([#881](https://github.com/powerhome/playbook/pull/881) @kre8sions) 
+- Added description to filter kit([#881](https://github.com/powerhome/playbook/pull/881) @kre8sions)
 
 ### Fixed
 - Made radio buttons a fixed width ([#833](https://github.com/powerhome/playbook/pull/833) @christinaatai)
