@@ -32,7 +32,10 @@ const NavItem = ({
           onClick={onClick}
       >
         <If condition={iconLeft}>
-          <div className="icon-section">
+          <div
+              className="pb_nav_list_item_icon_section"
+              key={iconLeft}
+          >
             <Icon
                 className="pb_nav_list_item_icon_left"
                 fixedWidth
@@ -44,7 +47,10 @@ const NavItem = ({
           {text || children}
         </span>
         <If condition={iconRight}>
-          <div className="icon-section">
+          <div
+              className="pb_nav_list_item_icon_section"
+              key={iconRight}
+          >
             <Icon
                 className="pb_nav_list_item_icon_right"
                 fixedWidth
