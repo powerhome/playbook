@@ -1,8 +1,14 @@
 import React from 'react'
-import { Flex, FlexItem, Gauge } from '../../'
+import { Flex, FlexItem, Gauge, Title } from '../../'
 
 const GaugeSizing = () => (
   <div>
+
+    <Title
+        size={3}
+        tag="h3"
+        text="Gauge resizes dynamically to fit whatever element it's placed within."
+    />
     <Flex
         wrap
     >

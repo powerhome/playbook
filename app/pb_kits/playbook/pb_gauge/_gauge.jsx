@@ -31,24 +31,26 @@ type GaugeProps = {
   tooltipHtml: String,
 }
 
-const Gauge = ({
-  aria = {},
-  className,
-  chartData = [{ name: 'Name', value: 0 }],
-  data = {},
-  fullCircle = false,
-  height = null,
-  id,
-  max = 100,
-  min = 0,
-  prefix = '',
-  showLabels = false,
-  style = 'solidgauge',
-  subtitle = '',
-  suffix = '',
-  title = '',
-  tooltipHtml = '<span style="font-weight: bold; color:{point.color};">●</span>{point.name}: ' + '<b>{point.y}</b>',
-}: GaugeProps) => {
+const Gauge = (props: GaugeProps) => {
+  const {
+    aria = {},
+    className,
+    chartData = [{ name: 'Name', value: 0 }],
+    data = {},
+    fullCircle = false,
+    height = null,
+    id,
+    max = 100,
+    min = 0,
+    prefix = '',
+    showLabels = false,
+    style = 'solidgauge',
+    subtitle = '',
+    suffix = '',
+    title = '',
+    tooltipHtml = '<span style="font-weight: bold; color:{point.color};">●</span>{point.name}: ' + '<b>{point.y}</b>',
+  } = props
+
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
 
@@ -97,7 +99,7 @@ const Gauge = ({
     <div
         {...ariaProps}
         {...dataProps}
-        className={classnames(css, className, spacing(this.props))}
+        className={classnames(css, className, spacing(props))}
         id={id}
     />
   )
