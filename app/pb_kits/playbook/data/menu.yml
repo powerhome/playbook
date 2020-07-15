@@ -15,11 +15,11 @@ kits:
   - checkbox
   - charts_and_graphs:
     - bar_graph
+    - circle_chart
+    - distribution_bar
+    - gauge
     - legend
     - line_graph
-    - distribution_bar
-    - circle_chart
-    - gauge
 
   - filter
   - fixed_confirmation_toast

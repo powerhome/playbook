@@ -92,7 +92,6 @@ const Gauge = ({
       componentDidMount.current = true
     }
   })
-
   return (
     <div
         {...ariaProps}
