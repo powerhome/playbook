@@ -8,13 +8,19 @@ const ButtonToolbarDefault = () => (
         orientation="horizontal"
     >
       <Button
-          text="Personal Info"
+          text="Field"
       />
       <Button
-          text="Relevant Employment Experience"
+          text="Retail"
       />
       <Button
-          text="Resume Submission"
+          text="Event"
+      />
+      <Button
+          text="Training"
+      />
+      <Button
+          text="Not Working"
       />
     </ButtonToolbar>
   </div>
