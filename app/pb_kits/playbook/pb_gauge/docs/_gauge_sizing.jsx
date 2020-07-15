@@ -3,7 +3,6 @@ import { Flex, FlexItem, Gauge, Title } from '../../'
 
 const GaugeSizing = () => (
   <div>
-
     <Title
         size={3}
         tag="h3"
