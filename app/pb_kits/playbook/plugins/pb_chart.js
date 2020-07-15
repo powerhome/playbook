@@ -1,6 +1,4 @@
 import Highcharts from 'highcharts'
-import colors from '../tokens/_colors.scss'
-import typography from '../tokens/_typography.scss'
 
 import { highchartsTheme } from '../pb_dashboard/pbChartsLightTheme.js'
 import colors from '../tokens/_colors.scss'
@@ -79,33 +77,30 @@ class pbChart {
   }
 
   setupGauge() {
-    Highcharts.setOptions(highchartsTheme)
-
     highchartsMore(Highcharts)
     solidGauge(Highcharts)
+    Highcharts.setOptions(highchartsTheme)
 
-    window[this.defaults.id] = Highcharts.chart(this.defaults.id, {
+    Highcharts.chart(this.defaults.id, {
       chart: {
         type: this.defaults.style,
         height: this.defaults.height,
       },
-
       title: {
         text: this.defaults.title,
       },
-
       yAxis: {
         min: this.defaults.min,
         max: this.defaults.max,
         title: {
           text: this.defaults.subtitle,
           y: -96,
-          style: {
-            fontFamily: typography.font_family_base,
-            color: colors.text_lt_light,
-            fontWeight: typography.regular,
-            fontSize: typography.text_base,
-          },
+          // style: {
+          //   fontFamily: typography.font_family_base,
+          //   color: colors.text_lt_light,
+          //   fontWeight: typography.regular,
+          //   fontSize: typography.text_base,
+          // },
         },
         lineWidth: 0,
         tickWidth: 0,
@@ -117,19 +112,12 @@ class pbChart {
           enabled: this.defaults.showLabels,
         },
       },
-
       credits: false,
-
-      label: {
-        enabled: true,
-      },
-
       series: [
         {
           data: this.defaults.chartData,
         },
       ],
-
       pane: {
         center: ['50%', '50%'],
         size: '90%',
@@ -137,41 +125,23 @@ class pbChart {
         endAngle: this.defaults.circumference[1],
         background: {
           borderWidth: 20,
-          borderColor: colors.border_light,
           innerRadius: '90%',
           outerRadius: '90%',
           shape: 'arc',
           className: 'gauge-pane',
         },
       },
-
-      exporting: {
-        enabled: false,
-      },
-
       tooltip: {
         headerFormat: '',
         pointFormat: this.defaults.tooltipHtml,
         followPointer: true,
       },
-
       plotOptions: {
         solidgauge: {
-          borderColor: colors.primary,
-          borderWidth: 20,
-          radius: 90,
-          innerRadius: '90%',
           dataLabels: {
-            borderWidth: 0,
-            color: colors.text_lt_default,
-            enabled: true,
-            format: `<span class="prefix">${this.defaults.prefix}</span><span class="fix">{y:,f}</span><span class="suffix">${this.defaults.suffix}</span>`,
-            style: {
-              fontFamily: typography.font_family_base,
-              fontWeight: typography.regular,
-              fontSize: typography.heading_2,
-            },
-            y: -26,
+            format: `<span class="prefix">${this.defaults.prefix}</span>` +
+            '<span class="fix">{y:,f}</span>' +
+            `<span class="suffix">${this.defaults.suffix}</span>`,
           },
         },
       },
