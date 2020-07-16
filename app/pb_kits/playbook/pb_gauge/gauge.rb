@@ -13,7 +13,6 @@ module Playbook
                    values: %w[solidgauge],
                    default: "solidgauge"
       prop :title, type: Playbook::Props::String, default: ""
-      prop :subtitle, type: Playbook::Props::String, default: ""
       prop :prefix, type: Playbook::Props::String, default: ""
       prop :suffix, type: Playbook::Props::String, default: ""
       prop :height, type: Playbook::Props::String, default: nil
@@ -39,7 +38,6 @@ module Playbook
           min: min,
           max: max,
           title: title,
-          subtitle: subtitle,
           suffix: suffix,
           prefix: prefix,
           showLabels: show_labels,

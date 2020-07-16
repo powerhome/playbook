@@ -12,7 +12,6 @@ const GaugeTitle = () => (
         id="gauge-title"
         max={850}
         min={300}
-        subtitle="Experian"
         title="Credit Score"
     />
   </div>
