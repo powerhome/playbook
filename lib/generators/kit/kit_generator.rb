@@ -78,7 +78,7 @@ class KitGenerator < Rails::Generators::NamedBase
           "import * as #{@kit_name_pascal} from 'pb_#{@kit_name_underscore}/docs'\nWebpackerReact.setup(#{@kit_name_pascal})\n"
         end
         append_to_file("app/pb_kits/playbook/index.js") do
-          "export #{@kit_name_pascal} from 'pb_#{@kit_name_underscore}/#{@kit_name_underscore}.jsx'"
+          "\nexport #{@kit_name_pascal} from 'pb_#{@kit_name_underscore}/#{@kit_name_underscore}.jsx'"
         end
 
         say_status  "complete",
