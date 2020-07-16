@@ -27,12 +27,11 @@ props_names = @kit_props.keys.map do |key|
                   when "data"
                     "data = {}"
                   else 
-                    "id"
+                    key
                   end
               end
 
-props_and_values = props_names.map { |prop| "<p>{`#{prop}: ${#{prop}}`}</p>" }
--%>
+%>
 
 /* @flow */
 
@@ -47,22 +46,23 @@ type <%= type_name %> = {
 
 const <%= @kit_name_pascal %> = (props: <%= type_name %>) => {
   const {
-      <%= break_lines.call(props_names) %>
+    <%= break_lines.call(props_names) %>
   } = props
 
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
   const classes = classnames(buildCss('pb_<%= @kit_name_underscore %>'), className, spacing(props))
 
-return (
-  <div 
-      {...ariaProps}
-      {...dataProps}
-      className={classes}
-      id={id}
-  >
-    <%= @kit_name_uppercase %> CONTENT
-  </div>
-)
+  return (
+    <div
+        {...ariaProps}
+        {...dataProps}
+        className={classes}
+        id={id}
+    >
+      {className}
+    </div>
+  )
+}
 
 export default <%= @kit_name_pascal %>
