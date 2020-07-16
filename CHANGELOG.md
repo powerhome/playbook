@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### Changed
+  - Updated kit generator to include data, aria props ([#916](https://github.com/powerhome/playbook/pull/916) @kellyeryan)
+
 ### Added
 - Added border prop ([#900](https://github.com/powerhome/playbook/pull/900) @christinaatai))
 
