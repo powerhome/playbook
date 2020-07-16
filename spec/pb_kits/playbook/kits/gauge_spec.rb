@@ -10,7 +10,6 @@ RSpec.describe Playbook::PbGauge::Gauge do
   it { is_expected.to define_prop(:chart_data).of_type(Playbook::Props::Array).with_default([{ name: "Name", value: 0 }]) }
   it { is_expected.to define_enum_prop(:style).with_default("solidgauge") }
   it { is_expected.to define_prop(:title).of_type(Playbook::Props::String).with_default("") }
-  it { is_expected.to define_prop(:subtitle).of_type(Playbook::Props::String).with_default("") }
   it { is_expected.to define_prop(:prefix).of_type(Playbook::Props::String).with_default("") }
   it { is_expected.to define_prop(:suffix).of_type(Playbook::Props::String).with_default("") }
   it { is_expected.to define_prop(:height).of_type(Playbook::Props::String).with_default(nil) }
