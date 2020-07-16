@@ -86,14 +86,16 @@
     "popper.js": "^1.14.4",
     "prop-types": "^15.6.2",
     "rails-erb-loader": "^5.5.1",
-    "react": "16.8.6",
-    "react-dom": "16.8.6",
     "react-dropzone": "^10.2.2",
     "react-highlight-words": "^0.16.0",
     "react-popper": "^2.1.0",
     "svg-url-loader": "^4.0.0",
     "terser-webpack-plugin": "^3.0.5",
     "webpacker-react": "^0.3.2"
+  },
+  "peerDependencies": {
+    "react": "16.8.6",
+    "react-dom": "16.8.6"
   },
   "resolutions": {
     "lodash": "^4.17.13",
