@@ -56,16 +56,6 @@ class pbChart {
       yAxis: {
         min: this.defaults.min,
         max: this.defaults.max,
-        title: {
-          text: this.defaults.subtitle,
-          y: -96,
-          // style: {
-          //   fontFamily: typography.font_family_base,
-          //   color: colors.text_lt_light,
-          //   fontWeight: typography.regular,
-          //   fontSize: typography.text_base,
-          // },
-        },
         lineWidth: 0,
         tickWidth: 0,
         minorTickInterval: null,
