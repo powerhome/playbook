@@ -34,7 +34,7 @@ const NavItem = ({
         <If condition={iconLeft}>
           <div
               className="pb_nav_list_item_icon_section"
-              key={iconLeft}
+              key={`L-${iconLeft}`}
           >
             <Icon
                 className="pb_nav_list_item_icon_left"
@@ -49,7 +49,7 @@ const NavItem = ({
         <If condition={iconRight}>
           <div
               className="pb_nav_list_item_icon_section"
-              key={iconRight}
+              key={`R-${iconRight}`}
           >
             <Icon
                 className="pb_nav_list_item_icon_right"
