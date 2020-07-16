@@ -107,6 +107,9 @@
 
 ## Unreleased
 
+### Fixed
+- Don't break page when changing icon with condition in with icon nav ([#913](https://github.com/powerhome/playbook/pull/913) @KatherineMuedas)
+
 ### Changed
   - Updated kit generator to include data, aria props ([#916](https://github.com/powerhome/playbook/pull/916) @kellyeryan)
 
