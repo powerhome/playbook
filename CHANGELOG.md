@@ -21,14 +21,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Added aria, data, id props to React Body kit; added aria props to Rails Body kit([#904](https://github.com/powerhome/playbook/pull/904) @kellyeryan)
 - Added aria, data props to Circle Icon Button React kit; added aria props to Circle Icon Button Rails kit.([#907](https://github.com/powerhome/playbook/pull/907) @kellyeryan)
 
+
 ## [v5.2.0] 2020-7-2
 
 ### Fixed
 - Added User Badge Kit back to menu.yml ([#890](https://github.com/powerhome/playbook/pull/890) @christinaatai)
 
 ### Added
-- Added aria, data props to Badge React kit; added aria props to Badge Rails kit ([#901](https://github.com/powerhome/playbook/pull/901) @kellyeryan)
 - Added border prop ([#900](https://github.com/powerhome/playbook/pull/900) @christinaatai))
+- Added aria, data props to Badge React kit; added aria props to Badge Rails kit ([#901](https://github.com/powerhome/playbook/pull/901) @kellyeryan)
 - Added Collection Detail to Layout Kit([#893](https://github.com/powerhome/playbook/pull/893) @evalouderback)
 - Added New Layout Kit (Content) for Rails and React ([#894](https://github.com/powerhome/playbook/pull/894) @megantrimble)
 - Added Yarn Link Intructions ([#891](https://github.com/powerhome/playbook/pull/893) @jasperfurniss)
