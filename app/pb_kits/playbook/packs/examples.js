@@ -172,3 +172,9 @@ WebpackerReact.setup({
   ...UserBadge,
   ...WeekdayStacked,
 })
+import * as TestKit from 'pb_test_kit/docs'
+WebpackerReact.setup(TestKit)
+import * as TestKit2 from 'pb_test_kit_2/docs'
+WebpackerReact.setup(TestKit2)
+import * as TestKit3 from 'pb_test_kit_3/docs'
+WebpackerReact.setup(TestKit3)

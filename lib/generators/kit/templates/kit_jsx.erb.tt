@@ -10,6 +10,7 @@ props_types = @kit_props.map do |key, val|
   prop_type = case val
               when "enum", "one_of" then "'option_1' | 'option_2'"
               when "boolean", "bool" then "Boolean"
+              when "object", "obj" then "Object"
               else "String"
               end
 

@@ -1,0 +1,1 @@
+Button Toolbars group frequently used buttons on a single unbroken line.

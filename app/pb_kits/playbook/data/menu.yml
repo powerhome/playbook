@@ -92,3 +92,6 @@ kits:
     - weekday_stacked
   - user
   - user_badge
+  - test_kit
+  - test_kit_2
+  - test_kit_3

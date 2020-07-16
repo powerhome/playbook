@@ -1,0 +1,9 @@
+examples:
+  
+  rails:
+  - test_kit_3_default: Default
+  
+  
+  react:
+  - test_kit_3_default: Default
+  

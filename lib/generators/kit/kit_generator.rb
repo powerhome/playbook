@@ -13,10 +13,10 @@ class KitGenerator < Rails::Generators::NamedBase
     @kit_name_underscore = kit_name.parameterize.underscore
     @kit_name_pascal = kit_name.titleize.gsub(/\s+/, "")
 
-    kit_props = options[:props].concat(%w[id:string classname:string data:object])
+    kit_props = options[:props].concat(%w[id:string classname:string data:object aria:object])
     @kit_props = kit_props.map { |hash| [hash.partition(":").first, hash.partition(":").last] }.to_h
     @kit_props = @kit_props.sort.to_h
-    @unique_props = @kit_props.symbolize_keys.without(:id, :classname, :data)
+    @unique_props = @kit_props.symbolize_keys.without(:id, :classname, :data, :aria)
 
     @kit_class_init = []
     @kit_props.each do |key, _val|
@@ -76,6 +76,9 @@ class KitGenerator < Rails::Generators::NamedBase
         # Import kit examples  ===========================
         append_to_file("app/pb_kits/playbook/packs/examples.js") do
           "import * as #{@kit_name_pascal} from 'pb_#{@kit_name_underscore}/docs'\nWebpackerReact.setup(#{@kit_name_pascal})\n"
+        end
+        append_to_file("app/pb_kits/playbook/index.js") do
+          "export #{@kit_name_pascal} from 'pb_#{@kit_name_underscore}/#{@kit_name_underscore}.jsx'"
         end
 
         say_status  "complete",
