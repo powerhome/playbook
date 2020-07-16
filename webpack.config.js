@@ -7,6 +7,10 @@ const svgUrlLoader = require('./config/webpack/loaders/svg.js')
 const mainConfig = (env) => {
   return {
     mode: env.development ? 'development' : 'production',
+    externals: {
+      react: 'commonjs react',
+      'react-dom': 'commonjs react-dom',
+    },
     entry: {
       playbook: './app/pb_kits/playbook/index.js',
     },
@@ -61,6 +65,10 @@ const mainConfig = (env) => {
 const docsConfig = (env) => {
   return {
     mode: env.development ? 'development' : 'production',
+    externals: {
+      react: 'commonjs react',
+      'react-dom': 'commonjs react-dom',
+    },
     entry: {
       playbook: './app/pb_kits/playbook/packs/examples.js',
     },
@@ -95,6 +103,10 @@ const docsConfig = (env) => {
 const vendorConfig = (env) => {
   return {
     mode: env.development ? 'development' : 'production',
+    externals: {
+      react: 'commonjs react',
+      'react-dom': 'commonjs react-dom',
+    },
     entry: {
       playbook: './app/pb_kits/playbook/vendor.js',
     },
