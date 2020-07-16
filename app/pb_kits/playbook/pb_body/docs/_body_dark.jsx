@@ -18,8 +18,6 @@ const BodyDark = () => {
           dark
           text="I am a body kit (Lighter)"
       />
-      <br />
-      <br />
       <Body
           dark
           status="negative"

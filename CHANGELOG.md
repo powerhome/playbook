@@ -7,18 +7,29 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+
+## [v5.3.0] 2020-7-9
+
+### Fixed
+- Don't break page when changing icon with condition in with icon nav ([#913](https://github.com/powerhome/playbook/pull/913) @KatherineMuedas)
+
+### Changed
+- Updated kit generator to include data, aria props ([#916](https://github.com/powerhome/playbook/pull/916) @kellyeryan)
+
 ### Added
-- Added border prop ([#900](https://github.com/powerhome/playbook/pull/900) @christinaatai))
+- Added aria, data, className, id props to React Checkbox kit; added aria prop to Rails Checkbox kit. Added example doc 'Checked Checkbox.'([#905](https://github.com/powerhome/playbook/pull/905) @kellyeryan)
+- Added aria, data, id props to React Body kit; added aria props to Rails Body kit([#904](https://github.com/powerhome/playbook/pull/904) @kellyeryan)
+- Added aria, data props to Circle Icon Button React kit; added aria props to Circle Icon Button Rails kit.([#907](https://github.com/powerhome/playbook/pull/907) @kellyeryan)
+
 
 ## [v5.2.0] 2020-7-2
-
-### Added
-- Added aria, data props to Badge React kit; added aria props to Badge Rails kit ([#901](https://github.com/powerhome/playbook/pull/901) @kellyeryan)
 
 ### Fixed
 - Added User Badge Kit back to menu.yml ([#890](https://github.com/powerhome/playbook/pull/890) @christinaatai)
 
 ### Added
+- Added border prop ([#900](https://github.com/powerhome/playbook/pull/900) @christinaatai))
+- Added aria, data props to Badge React kit; added aria props to Badge Rails kit ([#901](https://github.com/powerhome/playbook/pull/901) @kellyeryan)
 - Added Collection Detail to Layout Kit([#893](https://github.com/powerhome/playbook/pull/893) @evalouderback)
 - Added New Layout Kit (Content) for Rails and React ([#894](https://github.com/powerhome/playbook/pull/894) @megantrimble)
 - Added Yarn Link Intructions ([#891](https://github.com/powerhome/playbook/pull/893) @jasperfurniss)
@@ -27,7 +38,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [v5.1.0] 2020-6-26
 
 ### Added
-- Added description to filter kit([#881](https://github.com/powerhome/playbook/pull/881) @kre8sions) 
+- Added description to filter kit([#881](https://github.com/powerhome/playbook/pull/881) @kre8sions)
 
 ### Fixed
 - Made radio buttons a fixed width ([#833](https://github.com/powerhome/playbook/pull/833) @christinaatai)
