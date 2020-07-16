@@ -107,8 +107,10 @@ const CollectionDetail = () => (
             <Flex
                 orientation="row"
                 paddingBottom="sm"
+                paddingX="sm"
+                wrap
             >
-              <FlexItem paddingX="sm">
+              <FlexItem paddingRight="sm">
                 { <IconValue
                     icon="share-alt"
                     text="391"
@@ -151,8 +153,10 @@ const CollectionDetail = () => (
             <Flex
                 orientation="row"
                 paddingBottom="sm"
+                paddingX="sm"
+                wrap
             >
-              <FlexItem paddingX="sm">
+              <FlexItem paddingRight="sm">
                 { <IconValue
                     icon="share-alt"
                     text="304"
@@ -195,8 +199,10 @@ const CollectionDetail = () => (
             <Flex
                 orientation="row"
                 paddingBottom="sm"
+                paddingX="sm"
+                wrap
             >
-              <FlexItem paddingX="sm">
+              <FlexItem paddingRight="sm">
                 { <IconValue
                     icon="share-alt"
                     text="201"
@@ -239,8 +245,10 @@ const CollectionDetail = () => (
             <Flex
                 orientation="row"
                 paddingBottom="sm"
+                paddingX="sm"
+                wrap
             >
-              <FlexItem paddingX="sm">
+              <FlexItem paddingRight="sm">
                 { <IconValue
                     icon="share-alt"
                     text="245"
@@ -283,8 +291,10 @@ const CollectionDetail = () => (
             <Flex
                 orientation="row"
                 paddingBottom="sm"
+                paddingX="sm"
+                wrap
             >
-              <FlexItem paddingX="sm">
+              <FlexItem paddingRight="sm">
                 { <IconValue
                     icon="share-alt"
                     text="84"
@@ -327,8 +337,10 @@ const CollectionDetail = () => (
             <Flex
                 orientation="row"
                 paddingBottom="sm"
+                paddingX="sm"
+                wrap
             >
-              <FlexItem paddingX="sm">
+              <FlexItem paddingRight="sm">
                 { <IconValue
                     icon="share-alt"
                     text="54"
