@@ -2,6 +2,7 @@
 
 import React from 'react'
 import classnames from 'classnames'
+import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
 import { Button, Icon } from '../'
 
 import type { Callback } from '../types'
@@ -13,8 +14,10 @@ import {
 import { spacing } from '../utilities/spacing.js'
 
 type CircleIconButtonProps = {
+  aria?: object,
   className?: String,
   dark?: Boolean,
+  data?: object,
   disabled?: Boolean,
   icon: String,
   id?: String,
@@ -27,9 +30,13 @@ type CircleIconButtonProps = {
 
 const CircleIconButton = (props: CircleIconButtonProps) => {
   const {
+    aria = {},
+    className,
     dark,
+    data = {},
     disabled,
     icon,
+    id,
     onClick = noop,
     type,
     link,
@@ -37,8 +44,17 @@ const CircleIconButton = (props: CircleIconButtonProps) => {
     variant,
   } = props
 
+  const ariaProps = buildAriaProps(aria)
+  const dataProps = buildDataProps(data)
+  const classes = classnames(buildCss('pb_circle_icon_button_kit'), className, spacing(props))
+
   return (
-    <div className={classnames('pb_circle_icon_button_kit', spacing(props))}>
+    <div
+        {...ariaProps}
+        {...dataProps}
+        className={classes}
+        id={id}
+    >
       <Button
           dark={dark}
           disabled={disabled}
