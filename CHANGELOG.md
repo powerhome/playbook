@@ -107,13 +107,15 @@
 
 ## Unreleased
 
+
 ### Fixed
 - Don't break page when changing icon with condition in with icon nav ([#913](https://github.com/powerhome/playbook/pull/913) @KatherineMuedas)
 
 ### Changed
-  - Updated kit generator to include data, aria props ([#916](https://github.com/powerhome/playbook/pull/916) @kellyeryan)
+- Updated kit generator to include data, aria props ([#916](https://github.com/powerhome/playbook/pull/916) @kellyeryan)
 
 ### Added
+- Added aria, data, className, id props to React Checkbox kit; added aria prop to Rails Checkbox kit. Added example doc 'Checked Checkbox.'([#905](https://github.com/powerhome/playbook/pull/905) @kellyeryan)
 - Added aria, data, id props to React Body kit; added aria props to Rails Body kit([#904](https://github.com/powerhome/playbook/pull/904) @kellyeryan)
 - Added aria, data props to Circle Icon Button React kit; added aria props to Circle Icon Button Rails kit.([#907](https://github.com/powerhome/playbook/pull/907) @kellyeryan)
 - Added border prop ([#900](https://github.com/powerhome/playbook/pull/900) @christinaatai))
