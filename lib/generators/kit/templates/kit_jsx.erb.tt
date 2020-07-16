@@ -10,6 +10,7 @@ props_types = @kit_props.map do |key, val|
   prop_type = case val
               when "enum", "one_of" then "'option_1' | 'option_2'"
               when "boolean", "bool" then "Boolean"
+              when "object", "obj" then "object"
               else "String"
               end
 
@@ -17,24 +18,51 @@ props_types = @kit_props.map do |key, val|
 end
 puts props_types.inspect
 
-props_names = @kit_props.map { |key,| key == "classname" ? "className" : key.camelize(:lower) }
+props_names = @kit_props.keys.map do |key|
+                  case key
+                  when "classname" || "className"
+                    "className" 
+                  when "aria"
+                    "aria = {}"
+                  when "data"
+                    "data = {}"
+                  else 
+                    key
+                  end
+              end
 
-props_and_values = props_names.map { |prop| "<p>{`#{prop}: ${#{prop}}`}</p>" }
--%>
+%>
+
 /* @flow */
 
 import React from 'react'
+import classnames from 'classnames'
+import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
+import { spacing } from '../utilities/spacing.js'
 
 type <%= type_name %> = {
   <%= break_lines.call(props_types) %>
 }
 
-const <%= @kit_name_pascal %> = ({
-  <%= break_lines.call(props_names) %>
-}: <%= type_name %>) => (
-  <div>
-    <%= break_lines.call(props_and_values, 4, "") %>
-  </div>
-)
+const <%= @kit_name_pascal %> = (props: <%= type_name %>) => {
+  const {
+    <%= break_lines.call(props_names) %>
+  } = props
+
+  const ariaProps = buildAriaProps(aria)
+  const dataProps = buildDataProps(data)
+  const classes = classnames(buildCss('pb_<%= @kit_name_underscore %>'), className, spacing(props))
+
+  return (
+    <div
+        {...ariaProps}
+        {...dataProps}
+        className={classes}
+        id={id}
+    >
+      {className}
+    </div>
+  )
+}
 
 export default <%= @kit_name_pascal %>
