@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## Unreleased
 
 ### Added
+- Added aria, data, id props to React Body kit; added aria props to Rails Body kit([#904](https://github.com/powerhome/playbook/pull/904) @kellyeryan)
 - Added aria, data props to Circle Icon Button React kit; added aria props to Circle Icon Button Rails kit.([#907](https://github.com/powerhome/playbook/pull/907) @kellyeryan)
 - Added border prop ([#900](https://github.com/powerhome/playbook/pull/900) @christinaatai))
 
