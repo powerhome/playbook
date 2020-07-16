@@ -48,7 +48,7 @@ class KitGenerator < Rails::Generators::NamedBase
       # Generate SCSS files ==============================
       template "kit_scss.erb", "#{full_kit_directory}/_#{@kit_name_underscore}.scss"
       open("app/pb_kits/playbook/_playbook.scss", "a") do |f|
-        f.puts "@" + "import " + "\'" + "pb_#{@kit_name_underscore}/#{@kit_name_underscore}" + "\';"
+        f.puts "\n@" + "import " + "\'" + "pb_#{@kit_name_underscore}/#{@kit_name_underscore}" + "\';"
       end
       say_status  "complete",
                   "#{@kit_name_capitalize} kit stylesheet successfully created and imported.",
@@ -78,7 +78,7 @@ class KitGenerator < Rails::Generators::NamedBase
           "import * as #{@kit_name_pascal} from 'pb_#{@kit_name_underscore}/docs'\nWebpackerReact.setup(#{@kit_name_pascal})\n"
         end
         append_to_file("app/pb_kits/playbook/index.js") do
-          "\nexport #{@kit_name_pascal} from 'pb_#{@kit_name_underscore}/#{@kit_name_underscore}.jsx'"
+          "\nexport #{@kit_name_pascal} from 'pb_#{@kit_name_underscore}/_#{@kit_name_underscore}.jsx'"
         end
 
         say_status  "complete",
