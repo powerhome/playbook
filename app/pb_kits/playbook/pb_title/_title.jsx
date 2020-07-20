@@ -15,7 +15,7 @@ type TitleProps = {
   size?: 1 | 2 | 3 | 4,
   tag?: "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "div",
   text?: String,
-  variant?: Boolean,
+  variant?: "" | "primary",
 }
 
 const Title = (props: TitleProps) => {
@@ -29,14 +29,13 @@ const Title = (props: TitleProps) => {
     size = 3,
     tag = 'h3',
     text,
-    variant = false,
+    variant = '',
   } = props
 
   const themeStyle = dark === true ? 'dark' : ''
-  const variantStyle = variant === true ? 'primary' : ''
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
-  const classes = classnames(buildCss('pb_title_kit', size, themeStyle, variantStyle), className, spacing(props))
+  const classes = classnames(buildCss('pb_title_kit', size, themeStyle, variant), className, spacing(props))
   const Tag = `${tag}`
 
   return (
