@@ -13,6 +13,8 @@ RSpec.describe Playbook::PbTitle::Title do
     .with_values("h1", "h2", "h3", "h4", "h5", "h6", "p", "div", "span")
     .with_default("h3")
      }
+  it { is_expected.to define_boolean_prop(:variant)
+     .with_default(false) }
 
   describe "#classname" do
     it "returns namespaced class name", :aggregate_failures do
@@ -23,6 +25,7 @@ RSpec.describe Playbook::PbTitle::Title do
       expect(subject.new(size: nil).classname).to eq "pb_title_kit_3"
       expect(subject.new(size: 4).classname).to eq "pb_title_kit_4"
       expect(subject.new(tag: "h3").classname).to eq "pb_title_kit_3"
+      expect(subject.new(tag: "h4", variant: true).classname).to eq "pb_title_kit_4_variant"
     end
   end
 end
