@@ -16,15 +16,21 @@ module Playbook
                  values: %w[h1 h2 h3 h4 h5 h6 p div span],
                  default: "h3"
       prop :text
+      prop :variant, type: Playbook::Props::Boolean,
+                  default: false
 
       def classname
-        generate_classname("pb_title_kit", size, dark_class)
+        generate_classname("pb_title_kit", size, dark_class, variant_class)
       end
 
     private
 
       def dark_class
         dark ? "dark" : nil
+      end
+
+      def variant_class
+        variant ? "primary" : nil
       end
     end
   end
