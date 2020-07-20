@@ -6,7 +6,7 @@
 
 [class^=pb_date_picker] {
   // input styles
-  .pb_text_input_kit_label {
+  [class^=pb_caption_kit] {
     margin-bottom: $space_xs;
     display: block;
   }

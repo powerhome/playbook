@@ -44,7 +44,6 @@ const DatePicker = (props: DatePickerProps) => {
     >
       {className}
       <Caption
-          className="pb_text_input_kit_label"
           text="Date Picker"
       />
       <div className="input_wrapper">

@@ -3,5 +3,19 @@
     class: object.classname,
     data: object.data,
     id: object.id) do %>
-  <span>DATE PICKER CONTENT</span>
+    <%= pb_rails("caption", props: { text: "Date Picker" }) %>
+      <div class="input_wrapper">
+        <input
+            id="flatpickr"
+        />
+      </div>
+
+      <%= javascript_tag do %>
+      document.addEventListener("DOMContentLoaded", () => {
+          flatpickr('#flatpickr', {
+            dateFormat: 'm/d/Y',
+            defaultDate: Date.now(),
+          })
+      })
+      <% end %>
 <% end %>
