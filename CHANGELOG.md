@@ -7,8 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+<<<<<<< HEAD
 ## Added
 - Variant prop added to allow typography kit text to change to primary color ([#921](https://github.com/powerhome/playbook/pull/921)  @kellyeryan)
+=======
+### Fixed
+- Limited Popover overflow property to popovers with max width or height ([#922](https://github.com/powerhome/playbook/pull/922) @bh247484)
+
+>>>>>>> 2f4c898... CHANGELOG update
 
 ## [v5.3.0] 2020-7-9
 
