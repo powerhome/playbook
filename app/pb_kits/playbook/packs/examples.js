@@ -28,6 +28,7 @@ import * as Contact from 'pb_contact/docs'
 import * as Currency from 'pb_currency/docs'
 import * as DashboardValue from 'pb_dashboard_value/docs'
 import * as Date from 'pb_date/docs'
+import * as DatePicker from 'pb_date_picker/docs'
 import * as DateRangeInline from 'pb_date_range_inline/docs'
 import * as DateRangeStacked from 'pb_date_range_stacked/docs'
 import * as DateStacked from 'pb_date_stacked/docs'
@@ -108,6 +109,7 @@ WebpackerReact.setup({
   ...Currency,
   ...DashboardValue,
   ...Date,
+  ...DatePicker,
   ...DateRangeInline,
   ...DateRangeStacked,
   ...DateStacked,
