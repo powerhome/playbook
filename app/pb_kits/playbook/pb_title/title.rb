@@ -17,8 +17,8 @@ module Playbook
                  default: "h3"
       prop :text
       prop :variant, type: Playbook::Props::Enum,
-                    values: ["", "primary"],
-                    default: ""
+                    values: [nil, "primary"],
+                    default: nil
 
       def classname
         generate_classname("pb_title_kit", size, dark_class, variant)

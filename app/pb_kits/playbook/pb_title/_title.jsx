@@ -15,7 +15,7 @@ type TitleProps = {
   size?: 1 | 2 | 3 | 4,
   tag?: "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "div",
   text?: String,
-  variant?: "" | "primary",
+  variant?: null | "primary",
 }
 
 const Title = (props: TitleProps) => {
@@ -29,7 +29,7 @@ const Title = (props: TitleProps) => {
     size = 3,
     tag = 'h3',
     text,
-    variant = '',
+    variant = null,
   } = props
 
   const themeStyle = dark === true ? 'dark' : ''
