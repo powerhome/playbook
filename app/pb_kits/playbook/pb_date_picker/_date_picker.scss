@@ -10,7 +10,7 @@
     margin-bottom: $space_xs;
     display: block;
   }
-  .input_wrapper {
+  .input_wrapper, .flatpickr-wrapper {
     margin-bottom: $space_sm;
     display: block;
 
@@ -39,4 +39,8 @@ div.flatpickr-weekdays {
 }
 span.flatpickr-weekday {
   @include caption;
+}
+
+.pb_popover_body {
+  overflow: visible !important;
 }

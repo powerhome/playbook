@@ -12,9 +12,14 @@
 
       <%= javascript_tag do %>
       document.addEventListener("DOMContentLoaded", () => {
-          flatpickr('#flatpickr', {
+          let picker = flatpickr('#flatpickr', {
             dateFormat: 'm/d/Y',
             defaultDate: Date.now(),
+            static: true,
+          })
+          window.addEventListener("scroll", () => {
+            picker._positionCalendar();
+            console.log("scroll scroll")
           })
       })
       <% end %>
