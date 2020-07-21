@@ -44,9 +44,6 @@ kits:
   - layout
   - list
   - loading_inline
-  - logistics:
-    - logistic
-    - installer
   - multiple_users
   - multiple_users_stacked
   - nav

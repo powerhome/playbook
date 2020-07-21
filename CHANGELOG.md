@@ -7,6 +7,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### Changed
+- Deleted Installation Kit and Logistic Kit and moved it to be a part of Label Value Kit ([#915](https://github.com/powerhome/playbook/pull/915)  @christinaatai)
+
+## Added
+- Variant prop added to allow typography kit text to change to primary color ([#921](https://github.com/powerhome/playbook/pull/921)  @kellyeryan)
+
+## [v5.3.0] 2020-7-9
+
+### Fixed
+- Don't break page when changing icon with condition in with icon nav ([#913](https://github.com/powerhome/playbook/pull/913) @KatherineMuedas)
+
+### Changed
+- Updated kit generator to include data, aria props ([#916](https://github.com/powerhome/playbook/pull/916) @kellyeryan)
+
 ### Added
 - Added border prop ([#900](https://github.com/powerhome/playbook/pull/900) @christinaatai))
 
