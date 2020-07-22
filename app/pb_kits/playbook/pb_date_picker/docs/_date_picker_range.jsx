@@ -4,8 +4,8 @@ import { DatePicker } from '../../'
 const DatePickerRange = () => (
   <div>
     <DatePicker
-        id="date-picker-range"
         mode="range"
+        pickerId="date-picker-range"
     />
   </div>
 )

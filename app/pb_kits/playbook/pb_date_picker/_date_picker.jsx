@@ -13,6 +13,7 @@ type DatePickerProps = {
   data?: object,
   id?: String,
   mode?: String,
+  pickerId?: String,
 }
 
 const DatePicker = (props: DatePickerProps) => {
@@ -22,6 +23,7 @@ const DatePicker = (props: DatePickerProps) => {
     data = {},
     id,
     mode = 'single',
+    pickerId,
   } = props
 
   const ariaProps = buildAriaProps(aria)
@@ -29,14 +31,15 @@ const DatePicker = (props: DatePickerProps) => {
   const classes = classnames(buildCss('pb_date_picker'), className, spacing(props))
 
   // document.addEventListener('DOMContentLoaded', () => {
-  //   flatpickr(`#${id}`, {
+  //   flatpickr(`#${pickerId}`, {
   //     allowInput: true,
   //     dateFormat: 'm/d/Y',
   //     defaultDate: Date.now(),
   //     mode: mode,
   //   })
-  //   const picker = document.querySelector(`#${id}`)._flatpickr
-  //   debugger
+  //   // debugger
+  //   const picker = document.querySelector(`#${pickerId}`)._flatpickr
+
   //   picker.input.addEventListener('input', (e) => {
   //     picker.input.setAttribute('value', e.target.value)
   //     const variant = picker.config.mode
@@ -49,13 +52,26 @@ const DatePicker = (props: DatePickerProps) => {
   // })
 
   useEffect(() => {
-    flatpickr(`#${id}`, {
+    const defaultDateGetter = () => {
+      if (mode === 'single') {
+        return new Date()
+      } else if (mode === 'range') {
+        const today = new Date()
+        const tomorrow = new Date(today)
+        tomorrow.setDate(tomorrow.getDate() + 1)
+        return [today, tomorrow]
+      }
+    }
+
+    flatpickr(`#${pickerId}`, {
       allowInput: true,
       dateFormat: 'm/d/Y',
-      defaultDate: Date.now(),
+      defaultDate: defaultDateGetter(),
       mode: mode,
     })
-    const picker = document.querySelector(`#${id}`)._flatpickr
+    // debugger
+    const picker = document.querySelector(`#${pickerId}`)._flatpickr
+
     picker.input.addEventListener('input', (e) => {
       picker.input.setAttribute('value', e.target.value)
       const variant = picker.config.mode
@@ -65,7 +81,7 @@ const DatePicker = (props: DatePickerProps) => {
         picker.setDate(e.target.value)
       }
     })
-  })
+  }, [])
 
   return (
     <div
@@ -80,7 +96,8 @@ const DatePicker = (props: DatePickerProps) => {
       />
       <div className="input_wrapper">
         <input
-            id={id}
+            autoComplete="off"
+            id={pickerId}
         />
       </div>
     </div>
