@@ -57,14 +57,15 @@ const Gauge = (props: GaugeProps) => {
   })
   // Runs first time component Renders
   useEffect(() => {
-    chartData.forEach((obj) => {
+    const formattedChartData = chartData.map((obj) => {
       obj.y = obj.value
       delete obj.value
+      return obj
     })
 
     new pbChart('.selector', {
       id: id,
-      chartData: chartData,
+      chartData: formattedChartData,
       circumference: fullCircle ? [0, 360] : [-100, 100],
       height: height,
       min: min,
