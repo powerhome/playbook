@@ -12,6 +12,7 @@ type DatePickerProps = {
   className?: String,
   data?: object,
   id?: String,
+  mode?: String,
 }
 
 const DatePicker = (props: DatePickerProps) => {
@@ -20,18 +21,49 @@ const DatePicker = (props: DatePickerProps) => {
     className,
     data = {},
     id,
+    mode = 'single',
   } = props
 
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
   const classes = classnames(buildCss('pb_date_picker'), className, spacing(props))
 
+  // document.addEventListener('DOMContentLoaded', () => {
+  //   flatpickr(`#${id}`, {
+  //     allowInput: true,
+  //     dateFormat: 'm/d/Y',
+  //     defaultDate: Date.now(),
+  //     mode: mode,
+  //   })
+  //   const picker = document.querySelector(`#${id}`)._flatpickr
+  //   debugger
+  //   picker.input.addEventListener('input', (e) => {
+  //     picker.input.setAttribute('value', e.target.value)
+  //     const variant = picker.config.mode
+  //     if (variant === 'single' && e.target.value.split('').length === 10) {
+  //       picker.setDate(e.target.value)
+  //     } else if (variant === 'range' && e.target.value.split('').length === 24) {
+  //       picker.setDate(e.target.value)
+  //     }
+  //   })
+  // })
+
   useEffect(() => {
-    flatpickr('#flatpickr', {
+    flatpickr(`#${id}`, {
+      allowInput: true,
       dateFormat: 'm/d/Y',
       defaultDate: Date.now(),
-      // prevArrow: '<i class="fa-arrow-circle-left"></i>',
-      // nextArrow: '<i class="fa-arrow-right"></i>',
+      mode: mode,
+    })
+    const picker = document.querySelector(`#${id}`)._flatpickr
+    picker.input.addEventListener('input', (e) => {
+      picker.input.setAttribute('value', e.target.value)
+      const variant = picker.config.mode
+      if (variant === 'single' && e.target.value.split('').length === 10) {
+        picker.setDate(e.target.value)
+      } else if (variant === 'range' && e.target.value.split('').length === 24) {
+        picker.setDate(e.target.value)
+      }
     })
   })
 
@@ -48,7 +80,7 @@ const DatePicker = (props: DatePickerProps) => {
       />
       <div className="input_wrapper">
         <input
-            id="flatpickr"
+            id={id}
         />
       </div>
     </div>

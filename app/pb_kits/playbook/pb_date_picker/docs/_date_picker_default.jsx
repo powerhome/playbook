@@ -3,7 +3,9 @@ import { DatePicker } from '../../'
 
 const DatePickerDefault = () => (
   <div>
-    <DatePicker />
+    <DatePicker
+        id="date-picker-default"
+    />
   </div>
 )
 

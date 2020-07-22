@@ -6,4 +6,5 @@ examples:
   
   react:
   - date_picker_default: Default
+  - date_picker_range: Range
   
