@@ -8,7 +8,10 @@ const LegendDefault = () => (
     {
       products.map((product, i) => (
         <Legend
+            aria={{ 'piratesOf': 'theCaribbean' }}
             color={`data_${i + 1}`}
+            data={{ 'golden': 'apple' }}
+            id="uniqueNewYork"
             key={`legend_${i + 1}`}
             text={product}
         />
