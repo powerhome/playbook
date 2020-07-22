@@ -6,10 +6,9 @@ const LabelValueDetailsDark = () => {
     <div>
       <LabelValue
           dark
-          description="33-12345"
-          icon="home"
-          label="Project"
-          title="Jefferson-Smith"
+          icon="truck"
+          label="Installer"
+          title="JD Installations LLC"
           variant="details"
       />
 
@@ -20,7 +19,6 @@ const LabelValueDetailsDark = () => {
           description="33-12345"
           icon="home"
           label="Project"
-          link="#"
           title="Jefferson-Smith"
           variant="details"
       />
@@ -40,36 +38,13 @@ const LabelValueDetailsDark = () => {
       <br />
 
       <LabelValue
+          active
           dark
           date={new Date('18 Nov 2019')}
           description="33-12345"
           icon="home"
           label="Project"
-          link="#"
           title="Jefferson-Smith"
-          variant="details"
-      />
-
-      <br />
-      <br />
-      <br />
-
-      <LabelValue
-          dark
-          icon="truck"
-          label="Installer"
-          title="JD Installations LLC"
-          variant="details"
-      />
-
-      <br />
-
-      <LabelValue
-          dark
-          icon="truck"
-          label="Installer"
-          link="#"
-          title="JD Installations LLC"
           variant="details"
       />
     </div>

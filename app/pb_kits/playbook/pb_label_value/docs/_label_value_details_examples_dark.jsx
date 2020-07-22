@@ -65,31 +65,31 @@ const LabelValueDetailsExamplesDark = () => {
       />
 
       <LabelValue
+          active
           dark
           description="6 sets • 8 reps • 40-100 kg"
           icon="dumbbell"
           label="Chest"
-          link="#"
           paddingBottom="sm"
           title="Bench Press"
           variant="details"
       />
       <LabelValue
+          active
           dark
           description="5 sets • 12 reps • 20-40 kg"
           icon="dumbbell"
           label="Biceps"
-          link="#"
           paddingBottom="sm"
           title="Barbell Curl"
           variant="details"
       />
       <LabelValue
+          active
           dark
           description="8 sets • 8 reps • 40-120 kg"
           icon="dumbbell"
           label="Back"
-          link="#"
           paddingBottom="sm"
           title="Back Squat"
           variant="details"

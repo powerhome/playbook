@@ -5,10 +5,9 @@ const LabelValueDetails = () => {
   return (
     <div>
       <LabelValue
-          description="33-12345"
-          icon="home"
-          label="Project"
-          title="Jefferson-Smith"
+          icon="truck"
+          label="Installer"
+          title="JD Installations LLC"
           variant="details"
       />
 
@@ -18,7 +17,6 @@ const LabelValueDetails = () => {
           description="33-12345"
           icon="home"
           label="Project"
-          link="#"
           title="Jefferson-Smith"
           variant="details"
       />
@@ -37,33 +35,12 @@ const LabelValueDetails = () => {
       <br />
 
       <LabelValue
+          active
           date={new Date('18 Nov 2019')}
           description="33-12345"
           icon="home"
           label="Project"
-          link="#"
           title="Jefferson-Smith"
-          variant="details"
-      />
-
-      <br />
-      <br />
-      <br />
-
-      <LabelValue
-          icon="truck"
-          label="Installer"
-          title="JD Installations LLC"
-          variant="details"
-      />
-
-      <br />
-
-      <LabelValue
-          icon="truck"
-          label="Installer"
-          link="#"
-          title="JD Installations LLC"
           variant="details"
       />
     </div>

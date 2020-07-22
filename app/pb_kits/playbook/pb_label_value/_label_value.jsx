@@ -20,7 +20,7 @@ type LabelValueProps = {
   description?: String,
   title?: String,
   date?: Date,
-  link?: String
+  active?: Boolean
 }
 
 const dateString = (value: DateTime) => {
@@ -32,6 +32,7 @@ const dateString = (value: DateTime) => {
 
 const LabelValue = (props: LabelValueProps) => {
   const {
+    active = false,
     aria = {},
     className,
     dark = false,
@@ -41,7 +42,6 @@ const LabelValue = (props: LabelValueProps) => {
     icon,
     id,
     label,
-    link,
     title,
     value,
     variant = 'default',
@@ -98,31 +98,29 @@ const LabelValue = (props: LabelValueProps) => {
             />
           </If>
           <Choose>
-            <When condition={link}>
-              <a href={link}>
-                <Flex
-                    inline
-                    vertical="center"
-                >
-                  <If condition={title}>
-                    <Title
-                        dark={dark}
-                        size={4}
-                        text={title}
-                        variant="primary"
-                    />
-                  </If>
-                  <If condition={date}>
-                    <Title
-                        dark={dark}
-                        marginLeft="xs"
-                        size={4}
-                        text={' ' + dateString(formattedDate)}
-                        variant="primary"
-                    />
-                  </If>
-                </Flex>
-              </a>
+            <When condition={active === true}>
+              <Flex
+                  inline
+                  vertical="center"
+              >
+                <If condition={title}>
+                  <Title
+                      dark={dark}
+                      size={4}
+                      text={title}
+                      variant="primary"
+                  />
+                </If>
+                <If condition={date}>
+                  <Title
+                      dark={dark}
+                      marginLeft="xs"
+                      size={4}
+                      text={' ' + dateString(formattedDate)}
+                      variant="primary"
+                  />
+                </If>
+              </Flex>
             </When>
             <Otherwise>
               <If condition={title}>

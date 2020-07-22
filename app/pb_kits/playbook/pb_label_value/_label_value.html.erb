@@ -6,16 +6,14 @@
     <%= pb_rails("caption", props: { text: object.label, dark: object.dark }) %>
     <% if object.variant == "details" %>
         <%= pb_rails("flex", props: {inline: true, vertical: "center"}) do %>
-            <%= pb_rails("body", props: { color: "light", margin_right: "xs", dark: object.dark }) do %>
-                <%= pb_rails("icon", props: { icon: object.icon, fixed_width: true }) if object.icon.present? %>
+            <%= pb_rails("body", props: { color: "light", dark: object.dark }) do %>
+                <%= pb_rails("icon", props: { icon: object.icon, fixed_width: true, margin_right: "xs", }) if object.icon.present? %>
             <% end %>
             <%= pb_rails("body", props: { text: object.description, color: "light", margin_right: "xs", dark: object.dark }) if object.description.present? %>
-            <% if object.link%>
-                <%= link_to object.link do %>
-                    <%= pb_rails("flex", props: {inline: true, vertical: "center"}) do %>
-                        <%= pb_rails("title", props: { text: object.title, tag: "h4", size: 4, variant: "primary", dark: object.dark }) if object.title.present? %> 
-                        <%= pb_rails("title", props: { text: object.date_element, tag: "span", size: 4, margin_left: "xs", variant: "primary", dark: object.dark }) if object.date.present? %>
-                    <% end %>
+            <% if object.active %>
+                <%= pb_rails("flex", props: {inline: true, vertical: "center"}) do %>
+                    <%= pb_rails("title", props: { text: object.title, tag: "h4", size: 4, variant: "primary", dark: object.dark }) if object.title.present? %> 
+                    <%= pb_rails("title", props: { text: object.date_element, tag: "span", size: 4, margin_left: "xs", variant: "primary", dark: object.dark }) if object.date.present? %>
                 <% end %>
             <% else %>
                 <%= pb_rails("title", props: { text: object.title, tag: "h4", size: 4, dark: object.dark }) if object.title.present? %> 

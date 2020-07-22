@@ -17,7 +17,7 @@ module Playbook
       prop :description
       prop :title
       prop :date
-      prop :link
+      prop :active, type: Playbook::Props::Boolean, default: false
 
 
       def classname
