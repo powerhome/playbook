@@ -3,19 +3,34 @@ import { Button, Gauge } from '../../'
 
 const GaugeLiveData = () => {
   const [value, setValue] = useState(50)
+  const [name, setName] = useState('Name')
 
-  const updateState = () => {
+  const updateValue = () => {
     setValue(Math.floor(Math.random() * 100))
   }
+  const updateName = () => {
+    let index = namesArray.indexOf(name)
+    if (namesArray.indexOf(name) == 5) {
+      index = 0
+    } else {
+      index += 1
+    }
+    setName(namesArray[index])
+  }
+  const namesArray = ['Name', 'Apples', 'Oranges', 'Bananas', 'Tangerines', 'Pineapples']
 
   return (
     <div>
       <Button
-          onClick={updateState}
-          text="Update State"
+          onClick={updateValue}
+          text="Update Value"
+      />
+      <Button
+          onClick={updateName}
+          text="Update Name"
       />
       <Gauge
-          chartData={[{ name: 'Name', value: value }]}
+          chartData={[{ name: name, value: value }]}
           id="gauge-live-data"
       />
     </div>

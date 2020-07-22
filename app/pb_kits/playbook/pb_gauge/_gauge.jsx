@@ -87,12 +87,14 @@ const Gauge = (props: GaugeProps) => {
       Highcharts.charts.forEach((chart) => {
         if (chart.renderTo.id === id) {
           chart.series[0].setData([chartData[0].value])
+          chart.series[0].data[0].name = chartData[0].name
+          // debugger
         }
       })
     } else {
       componentDidMount.current = true
     }
-  })
+  }, [chartData])
   return (
     <div
         {...ariaProps}
