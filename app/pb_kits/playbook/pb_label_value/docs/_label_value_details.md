@@ -1,1 +1,1 @@
-Variant `details` can pass icon, description, title, date, and link props.
+Variant `details` can pass icon, description, title, date, and active props.
