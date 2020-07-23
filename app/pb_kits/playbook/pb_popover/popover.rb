@@ -42,6 +42,10 @@ module Playbook
         out
       end
 
+      def width_height_class_helper
+        "overflow_handling" if max_height || max_width
+      end
+
       def data
         Hash(values[:data]).merge(
           pb_popover_kit: true,

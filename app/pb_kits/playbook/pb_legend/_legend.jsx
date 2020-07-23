@@ -2,12 +2,14 @@
 
 import React from 'react'
 import classnames from 'classnames'
-import { buildCss } from '../utilities/props'
+import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
 import { spacing } from '../utilities/spacing.js'
 
 import { Body, Title } from '../'
 
 type LegendProps = {
+  aria?: object,
+  className?: String,
   color?: | "data_1"
     | "data_2"
     | "data_3"
@@ -16,20 +18,39 @@ type LegendProps = {
     | "data_6"
     | "data_7",
   dark?: Boolean,
+  data?: object,
+  id?: String,
   prefixText?: String,
   text: String,
 }
 
 const Legend = (props: LegendProps) => {
-  const { color = 'data_1', dark = false, prefixText, text } = props
+  const {
+    aria = {},
+    className,
+    color = 'data_1',
+    dark = false,
+    data = {},
+    id,
+    prefixText,
+    text,
+  } = props
+
+  const ariaProps = buildAriaProps(aria)
+  const dataProps = buildDataProps(data)
   const darkClass = dark ? 'dark' : 'light'
   const bodyCSS = classnames(
-    buildCss('pb_legend_kit', color, darkClass),
+    buildCss('pb_legend_kit', color, darkClass), className,
     spacing(props)
   )
 
   return (
-    <div className={bodyCSS}>
+    <div
+        {...ariaProps}
+        {...dataProps}
+        className={bodyCSS}
+        id={id}
+    >
       <Body color={dark ? 'lighter' : 'light'}>
         <span className="pb_legend_indicator_circle" />
         <If condition={prefixText}>
