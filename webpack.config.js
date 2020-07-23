@@ -44,7 +44,15 @@ const mainConfig = (env) => {
           test: /\.scss$/i,
           use: [
             MiniCssExtractPlugin.loader,
-            { loader: 'css-loader' },
+            { 
+              loader: 'css-loader',
+              options: {
+                modules: {
+                  localIdentName: '[name]__[local]___[hash:base64:5]'
+                },
+                sourceMap: true,
+              }
+            },
             { loader: 'sass-loader' },
           ],
         },
@@ -82,7 +90,15 @@ const docsConfig = (env) => {
         {
           test: /\.scss$/i,
           use: [
-            { loader: 'css-loader' },
+            { 
+              loader: 'css-loader',
+              options: {
+                modules: {
+                  localIdentName: '[name]__[local]___[hash:base64:5]'
+                },
+                sourceMap: true,
+              }
+            },
             { loader: 'sass-loader' },
           ],
         },
@@ -120,7 +136,15 @@ const vendorConfig = (env) => {
         {
           test: /\.scss$/i,
           use: [
-            { loader: 'css-loader' },
+            { 
+              loader: 'css-loader',
+              options: {
+                modules: {
+                  localIdentName: '[name]__[local]___[hash:base64:5]'
+                },
+                sourceMap: true,
+              }
+            },
             { loader: 'sass-loader' },
           ],
         },

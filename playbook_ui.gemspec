@@ -21,6 +21,7 @@ Gem::Specification.new do |s|
     "app/pb_kits/playbook/data/menu.yml",
     "app/pb_kits/playbook/*.{scss,js,rb}",
     "app/helpers/**/*",
+    "app/assets/images/*",
     "{fonts,lib}/**/*"
   ] + ["Rakefile", "README.md"]
 
