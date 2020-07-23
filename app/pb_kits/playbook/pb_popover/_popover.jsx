@@ -59,6 +59,7 @@ const Popover = (props: PbPopoverProps) => {
   } = props
 
   const popoverSpacing = spacing(props) ? spacing(props) : 'p_sm'
+  const overflowHandling = maxHeight || maxWidth ? 'overflow_handling' : ''
   const zIndexStyle = zIndex ? { zIndex: zIndex } : {}
   const widthHeightStyles = () => {
     return Object.assign(
@@ -96,7 +97,8 @@ const Popover = (props: PbPopoverProps) => {
               <div
                   className={classnames(
                   'pb_popover_body',
-                  popoverSpacing
+                  popoverSpacing,
+                  overflowHandling
                 )}
                   style={widthHeightStyles()}
               >

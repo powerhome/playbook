@@ -2,6 +2,7 @@
 
 import React from 'react'
 import classnames from 'classnames'
+import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
 import { spacing } from '../utilities/spacing.js'
 import {
   Body,
@@ -11,7 +12,9 @@ import {
 
 type DashboardValueProps = {
   align?: 'left' | 'center' | 'right',
+  aria?: object,
   className?: String,
+  data?: object,
   id?: String,
   statChange?: {
     change?: String,
@@ -24,27 +27,27 @@ type DashboardValueProps = {
   }
 }
 
-const dashboardValueCSS = ({
-  align = 'left',
-
-}: DashboardValueProps) => {
-  const alignStyle = align !== '' ? `_${align}` : ''
-
-  return 'pb_dashboard_value_kit' + alignStyle
-}
-
 const DashboardValue = (props: DashboardValueProps) => {
   const {
+    align = 'left',
+    aria = {},
     className,
+    data = {},
     id,
-    statChange,
+    statChange = {},
     statLabel,
-    statValue,
+    statValue = {},
   } = props
+
+  const ariaProps = buildAriaProps(aria)
+  const dataProps = buildDataProps(data)
+  const classes = classnames(buildCss('pb_dashboard_value_kit', align), className, spacing(props))
 
   return (
     <div
-        className={classnames(dashboardValueCSS(props), className, spacing(props))}
+        {...ariaProps}
+        {...dataProps}
+        className={classes}
         id={id}
     >
       <If condition={statLabel}>

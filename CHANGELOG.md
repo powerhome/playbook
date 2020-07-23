@@ -5,8 +5,34 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## Unreleased
+## [v5.5.0] 2020-7-23
 
+### Added
+- Added className prop as well as aria, data, id props to React Legend kit. Added aria props to Rails Legend kit. ([#924](https://github.com/powerhome/playbook/pull/924)  @kellyeryan)
+- Variant prop added to allow typography kit text to change to primary color ([#921](https://github.com/powerhome/playbook/pull/921)  @kellyeryan)
+- Added aria, data props to React Dashboard Value kit; added aria props to Rails kit. ([#909](https://github.com/powerhome/playbook/pull/909) @kellyeryan)
+- Added Collection Detail Full Page Example ([#902](https://github.com/powerhome/playbook/pull/902) @evalouderback)
+
+### Fixed
+- Fixed spacing conflicts with Caption sizing props ([#925](https://github.com/powerhome/playbook/pull/925) @jasperfurniss)
+- Limited Popover overflow property to popovers with max width or height ([#922](https://github.com/powerhome/playbook/pull/922) @bh247484)
+
+
+
+## [v5.3.0] 2020-7-9
+
+### Fixed
+- Don't break page when changing icon with condition in with icon nav ([#913](https://github.com/powerhome/playbook/pull/913) @KatherineMuedas)
+
+### Changed
+- Updated kit generator to include data, aria props ([#916](https://github.com/powerhome/playbook/pull/916) @kellyeryan)
+
+### Added
+- Added aria, data props to Badge React kit; added aria props to Badge Rails kit ([#901](https://github.com/powerhome/playbook/pull/901) @kellyeryan)
+- Added aria, data, className, id props to React Checkbox kit; added aria prop to Rails Checkbox kit. Added example doc 'Checked Checkbox.'([#905](https://github.com/powerhome/playbook/pull/905) @kellyeryan)
+- Added aria, data, id props to React Body kit; added aria props to Rails Body kit([#904](https://github.com/powerhome/playbook/pull/904) @kellyeryan)
+- Added aria, data props to Circle Icon Button React kit; added aria props to Circle Icon Button Rails kit.([#907](https://github.com/powerhome/playbook/pull/907) @kellyeryan)
+- Added border prop ([#900](https://github.com/powerhome/playbook/pull/900) @christinaatai))
 
 ## [v5.3.0] 2020-7-9
 

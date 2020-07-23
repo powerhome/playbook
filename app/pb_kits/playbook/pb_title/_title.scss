@@ -1,4 +1,5 @@
 @import "title_mixin";
+@import "../tokens/colors";
 
 [class^=pb_title_kit]{
   &[class*=_1] {
@@ -19,5 +20,11 @@
 
   &[class*=_dark] {
     @include pb_title_dark;
+  }
+
+  @each $color_name, $color_value in $status_colors {
+    &[class*=_#{$color_name}]  {
+      color: map-get($status_color_text, $color_name);
+    }
   }
 }
