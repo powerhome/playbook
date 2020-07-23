@@ -8,6 +8,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## Unreleased
 
 ## Added
+- Added className prop as well as aria, data, id props to React Legend kit. Added aria props to Rails Legend kit. ([#924](https://github.com/powerhome/playbook/pull/924)  @kellyeryan)
+
+## Added
 - Variant prop added to allow typography kit text to change to primary color ([#921](https://github.com/powerhome/playbook/pull/921)  @kellyeryan)
 
 ## [v5.3.0] 2020-7-9
