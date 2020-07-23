@@ -1,6 +1,7 @@
 <%= tag(:img,
-    id: object.id,
-    data: object.data.merge(src: object.url),
-    class: object.classname,
+    alt: object.alt,
     aria: object.aria,
-    alt: object.alt) %>
+    class: object.classname,
+    data: object.data.merge(src: object.img_data_src),
+    src: object.img_src,
+    id: object.id) %>
