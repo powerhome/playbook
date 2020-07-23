@@ -11,6 +11,10 @@ type DatePickerProps = {
   aria?: object,
   className?: String,
   data?: object,
+  disableDate?: Array,
+  disableRange?: Array,
+  disableWeekdays?: Array,
+  format?: String,
   id?: String,
   mode?: String,
   pickerId?: String,
@@ -21,6 +25,10 @@ const DatePicker = (props: DatePickerProps) => {
     aria = {},
     className,
     data = {},
+    disableDate = null,
+    disableRange = null,
+    disableWeekdays = null,
+    format = 'm/d/Y',
     id,
     mode = 'single',
     pickerId,
@@ -62,12 +70,36 @@ const DatePicker = (props: DatePickerProps) => {
         return [today, tomorrow]
       }
     }
+    const diasabledDates = (date) => {
+      if (disableDate) {
+        return disableDate
+      } else if (disableRange) {
+        return disableRange
+      } else if (disableWeekdays) {
+        const weekdayObj = {
+          Sunday: 0,
+          Monday: 1,
+          Tuesday: 2,
+          Wednesday: 3,
+          Thursday: 4,
+          Friday: 5,
+          Saturday: 6,
+        }
+        disableWeekdays.forEach((weekday) => {
+          return (date.getDay() === weekdayObj[weekday])
+        })
+      } else {
+        return []
+      }
+    }
 
     flatpickr(`#${pickerId}`, {
       allowInput: true,
-      dateFormat: 'm/d/Y',
+      dateFormat: format,
       defaultDate: defaultDateGetter(),
+      disable: diasabledDates(),
       mode: mode,
+      static: true,
     })
     // debugger
     const picker = document.querySelector(`#${pickerId}`)._flatpickr

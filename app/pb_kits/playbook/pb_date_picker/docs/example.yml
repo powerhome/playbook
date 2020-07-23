@@ -7,4 +7,7 @@ examples:
   react:
   - date_picker_default: Default
   - date_picker_range: Range
+  - date_picker_format: Format
+  - date_picker_disabled: Disabled
+  - date_picker_min_max: Min Max
   
