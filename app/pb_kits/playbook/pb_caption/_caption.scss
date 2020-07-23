@@ -3,15 +3,15 @@
 [class^=pb_caption_kit] {
   @include caption;
 
-  &[class^=pb_caption_kit_lg] {
-    @include caption_lg;
-  }
-
-  &[class^=pb_caption_kit_xs] {
-    @include caption_xs;
-  }
-
   &[class*=_dark] {
     @include caption_dark;
   }
+}
+
+[class^=pb_caption_kit_lg] {
+  @include caption_lg;
+}
+
+[class^=pb_caption_kit_xs] {
+  @include caption_xs;
 }

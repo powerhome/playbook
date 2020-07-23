@@ -16,6 +16,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 - Fixed spacing conflicts with Caption sizing props ([#925](https://github.com/powerhome/playbook/pull/925) @jasperfurniss)
 - Limited Popover overflow property to popovers with max width or height ([#922](https://github.com/powerhome/playbook/pull/922) @bh247484)
+- Fixed matching for spacing and sizing on caption ([#930](https://github.com/powerhome/playbook/pull/930) @jasoncypret)
 
 
 
