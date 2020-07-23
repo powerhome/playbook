@@ -108,7 +108,7 @@ const LabelValue = (props: LabelValueProps) => {
                       dark={dark}
                       size={4}
                       text={title}
-                      variant="primary"
+                      variant="link"
                   />
                 </If>
                 <If condition={date}>
@@ -117,7 +117,7 @@ const LabelValue = (props: LabelValueProps) => {
                       marginLeft="xs"
                       size={4}
                       text={' ' + dateString(formattedDate)}
-                      variant="primary"
+                      variant="link"
                   />
                 </If>
               </Flex>
