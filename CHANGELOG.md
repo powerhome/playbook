@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 - Don't break page when changing icon with condition in with icon nav ([#913](https://github.com/powerhome/playbook/pull/913) @KatherineMuedas)
+- Fixed spacing conflicts with Caption sizing props ([#925](https://github.com/powerhome/playbook/pull/925) @jasperfurniss)
 
 ### Changed
 - Updated kit generator to include data, aria props ([#916](https://github.com/powerhome/playbook/pull/916) @kellyeryan)
