@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 - Added className prop as well as aria, data, id props to React Legend kit. Added aria props to Rails Legend kit. ([#924](https://github.com/powerhome/playbook/pull/924)  @kellyeryan)
+## Added
+- Added className, id, data, aria props to React Image kit, added aria props to Rails Image kit. Added lazy prop to both kits to mark whether an image is being lazyloaded or not. ([#927](https://github.com/powerhome/playbook/pull/927)  @kellyeryan)
+
+## Added
 - Variant prop added to allow typography kit text to change to primary color ([#921](https://github.com/powerhome/playbook/pull/921)  @kellyeryan)
 - Added aria, data props to React Dashboard Value kit; added aria props to Rails kit. ([#909](https://github.com/powerhome/playbook/pull/909) @kellyeryan)
 - Added Collection Detail Full Page Example ([#902](https://github.com/powerhome/playbook/pull/902) @evalouderback)
