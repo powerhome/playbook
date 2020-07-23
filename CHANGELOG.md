@@ -12,8 +12,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Added
 - Variant prop added to allow typography kit text to change to primary color ([#921](https://github.com/powerhome/playbook/pull/921)  @kellyeryan)
+- Added aria, data props to React Dashboard Value kit; added aria props to Rails kit. ([#909](https://github.com/powerhome/playbook/pull/909) @kellyeryan)
+
 ### Fixed
 - Limited Popover overflow property to popovers with max width or height ([#922](https://github.com/powerhome/playbook/pull/922) @bh247484)
+
 
 
 ## [v5.3.0] 2020-7-9
