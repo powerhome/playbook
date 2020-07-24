@@ -40,11 +40,11 @@ const Body = (props: BodyProps) => {
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
   const classes = classnames(
-    className,
     buildCss('pb_body_kit', color, status, {
       dark: dark,
     }),
-    spacing(props)
+    spacing(props),
+    className
   )
   const Tag = `${tag}`
 
