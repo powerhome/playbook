@@ -46,6 +46,7 @@ const Image = (props: ImageProps) => {
   const dataProps = buildDataProps(data)
 
   return (
+<<<<<<< HEAD
     <If condition={lazy}>
       <img
           {...ariaProps}
@@ -66,6 +67,29 @@ const Image = (props: ImageProps) => {
       />
     </If>
 >>>>>>> Add props to image
+=======
+    <>
+      <If condition={lazy}>
+        <img
+            {...ariaProps}
+            {...dataProps}
+            alt={alt}
+            className={classes}
+            data-src={url}
+            id={id}
+        />
+        <Else />
+        <img
+            {...ariaProps}
+            {...dataProps}
+            alt={alt}
+            className={classes}
+            id={id}
+            src={url}
+        />
+      </If>
+    </>
+>>>>>>> Add fragment to jsx files
   )
 }
 
