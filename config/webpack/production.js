@@ -8,4 +8,6 @@ environment.optimization = {
   minimizer: [new TerserPlugin({ cache: true })],
 }
 
+environment.splitChunks()
+
 module.exports = environment.toWebpackConfig()

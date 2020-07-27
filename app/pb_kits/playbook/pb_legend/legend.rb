@@ -25,6 +25,13 @@ module Playbook
       def classname
         generate_classname("pb_legend_kit", color, dark ? "dark" : "light")
       end
+
+      def chart_options
+        {
+          color: color,
+          text: text,
+        }
+      end
     end
   end
 end

@@ -11,7 +11,6 @@ import WebpackerReact from 'webpacker-react'
 // ===========================================
 // Generated file from kit generator.
 // KIT EXAMPLES
-
 import '../pb_form/pb_form_validation'
 import * as Avatar from 'pb_avatar/docs'
 import * as AvatarActionButton from 'pb_avatar_action_button/docs'

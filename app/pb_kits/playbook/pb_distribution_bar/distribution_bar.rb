@@ -13,14 +13,11 @@ module Playbook
       prop :widths, type: Playbook::Props::NumberArray,
                     default: [1]
 
-      def classname
-        generate_classname("pb_distribution_bar", size)
-      end
-
-      def widths_to_percentages
-        widths.map do |width|
-          (width.to_f * 100 / widths.sum).round(2)
-        end
+      def chart_options
+        {
+          size: size,
+          widths: widths,
+        }
       end
     end
   end

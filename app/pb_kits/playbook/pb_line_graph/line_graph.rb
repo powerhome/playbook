@@ -44,7 +44,7 @@ module Playbook
           legend: legend,
           toggleLegendClick: toggle_legend_click,
           height: height,
-        }.to_json.html_safe
+        }
       end
 
       def classname

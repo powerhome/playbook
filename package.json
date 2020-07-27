@@ -1,10 +1,11 @@
 {
   "name": "playbook-ui",
-  "version": "6.1.0",
+  "version": "5.2.0-alpha15",
   "description": "Nitro's Design System",
-  "main": "./dist/playbook.min.js",
+  "main": "./dist/playbook.js",
   "scripts": {
-    "build": "./bin/webpack --profile --progress --max_old_space_size=8192",
+    "build": "./bin/webpack --profile --progress --max_old_space_size=8192 --env.development",
+    "build-dist": "RAILS_ENV=dist NODE_ENV=dist ./bin/webpack --profile --progress --max_old_space_size=8192",
     "flow": "flow",
     "lint": "./node_modules/eslint/bin/eslint.js . --ext .js,.jsx",
     "lint-fix": "./node_modules/eslint/bin/eslint.js . --ext .js,.jsx --fix",
@@ -71,7 +72,9 @@
     "babel-plugin-transform-decorators-legacy": "1.3.4",
     "babel-plugin-transform-flow-strip-types": "6.22.0",
     "babel-plugin-transform-react-remove-prop-types": "^0.4.23",
+    "circular-dependency-plugin": "^5.2.0",
     "classnames": "^2.2.6",
+    "css-loader": "3.6.0",
     "css-modules-flow-types-loader": "0.3.1",
     "es5-shim": "4.5.9",
     "fast-sass-loader": "^1.5.0",
@@ -93,11 +96,13 @@
     "react-popper": "^2.1.0",
     "svg-url-loader": "^4.0.0",
     "terser-webpack-plugin": "^3.0.5",
+    "webpack-cli": "^3.3.12",
     "webpacker-react": "^0.3.2"
   },
   "peerDependencies": {
     "react": "16.8.6",
-    "react-dom": "16.8.6"
+    "react-dom": "16.8.6",
+    "webpacker-react": "^0.3.2"
   },
   "resolutions": {
     "lodash": "^4.17.13",

@@ -15,6 +15,7 @@ module Playbook
       self.prefix_partial_path_with_controller_namespace = previous
     end
 
+    # deprecated
     def pb_react(kit, props: {}, options: {})
       ::Webpacker::React::Component.new(kit.camelize).render(props, options)
     end

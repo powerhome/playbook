@@ -1,10 +1,10 @@
 @import "./opacity";
 
-//=====================================
-// Base colors should not be documented.
-// Only document color use.
+/*=====================================
+Base colors should not be documented.
+Only document color use.
 
-// Colors -----------------------------
+Colors -----------------------------*/
 $royal:               #0056CF;
 $purple:              #9E64E9;
 $teal:                #00C4D7;
@@ -22,11 +22,11 @@ $colors: (
   orange:             $orange
 );
 
-// Specialty Gradient -----------------
+/* Specialty Gradient -----------------*/
 $gradient_start:      #1C75F2;
 $gradient_end:        $royal;
 
-// Interface colors -------------------
+/* Interface colors -------------------*/
 $white:               #FFFFFF;
 $silver:              #F3F7FB;
 $slate:               #C1CDD6;
@@ -42,7 +42,7 @@ $interface_colors: (
 
 );
 
-// Main colors ------------------------
+/* Main colors ------------------------*/
 $primary:             $royal;
 $secondary:           $yellow;
 $tertiary:            $purple;
@@ -51,9 +51,9 @@ $main_colors: (
   secondary:          $secondary,
   tertiary:           $tertiary
 );
-//=====================================
+/*=====================================
 
-// Background colors ------------------
+Background colors ------------------*/
 $bg_light:            $silver;
 $bg_dark:             #172257;
 $background_colors: (
@@ -61,7 +61,7 @@ $background_colors: (
   bg_dark:            $bg_dark
 );
 
-// Card colors ------------------
+/* Card colors ------------------*/
 $card_light:          $white;
 $card_dark:           rgba($white, $opacity_1);
 $card_colors: (
@@ -74,15 +74,15 @@ $action_colors: (
   primary_action:            $primary-action
 );
 
-// Active colors ----------------------
+/* Active colors ----------------------*/
 $active_light:        lighten(#E5F2FF, 3.5%);
-$active_dark:         #0082ff; 
+$active_dark:         #0082ff;
 $active_colors: (
   active_light:       $active_light,
   active_dark:        $active_dark
 );
 
-// Hover colors -----------------------
+/* Hover colors -----------------------*/
 $hover_light:         darken($silver, 5%);
 $hover_dark:          rgba($white, $opacity_2);
 $hover_colors: (
@@ -90,7 +90,7 @@ $hover_colors: (
   hover_dark:         $hover_dark
 );
 
-// Focus colors -----------------------
+/* Focus colors -----------------------*/
 $focus_input_light:   rgba($active_light, $opacity_5);
 $focus_input_dark:    rgba(#144075, $opacity_5);
 $focus_input_colors: (
@@ -98,7 +98,7 @@ $focus_input_colors: (
   focus_input_dark:         $focus_input_dark
 );
 
-// Border colors ----------------------
+/* Border colors ----------------------*/
 $border_light:        #E4E8F0;
 $border_dark:         rgba($white, $opacity_1);
 $border_colors: (
@@ -106,13 +106,13 @@ $border_colors: (
   border_dark:        $border_dark
 );
 
-// Shadow colors ----------------------
+/* Shadow colors ----------------------*/
 $shadow:        rgba(#3C6AAC, $opacity_2);
 $shadow_colors: (
   shadow:       $shadow,
 );
 
-// Text colors ------------------------
+/* Text colors ------------------------*/
 $text_lt_default:     $charcoal;
 $text_lt_light:       #919EAB;
 $text_lt_lighter:     $slate;
@@ -128,7 +128,7 @@ $text_colors: (
   text_dk_lighter:    $text_dk_lighter
 );
 
-// Data colors ------------------------
+/* Data colors ------------------------*/
 $data_1:              $royal;
 $data_2:              $yellow;
 $data_3:              $purple;
@@ -148,7 +148,7 @@ $data_colors: (
   data_8:             $data_8
 );
 
-// Status colors ----------------------
+/* Status colors ----------------------*/
 $success:             $green;
 $warning:             $yellow;
 $error:               $red;
@@ -174,10 +174,10 @@ $status_color_text: (
   primary:            $primary
 );
 
-// Link colors ------------------------
+/* Link colors ------------------------*/
 $primary_action:      $primary;
 
-// Product colors ---------------------
+/* Product colors ---------------------*/
 $windows:             $royal;
 $siding:              $yellow;
 $doors:               $teal;
@@ -195,7 +195,7 @@ $product_colors: (
   insulation:         $insulation
 );
 
-// Category colors ---------------------
+/* Category colors ---------------------*/
 $category_1:   $royal;
 $category_2:   #0CD2E5;
 $category_3:   $yellow;
@@ -252,7 +252,6 @@ $transparent: transparent;
 }
 
 :export {
-
   @mixin export-colors($colors-list) {
     @each $name, $color in $colors-list {
       #{$name}: $color;
