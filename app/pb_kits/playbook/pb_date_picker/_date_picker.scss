@@ -10,24 +10,37 @@
     margin-bottom: $space_xs;
     display: block;
   }
-  .input_wrapper, .flatpickr-wrapper {
+  .input_wrapper {
     margin-bottom: $space_sm;
-    display: block;
-
-    input::placeholder {
-      @include pb_body_light;
+    
+    .flatpickr-wrapper {
+      display: block;
+      input::placeholder {
+        @include pb_body_light;
+      }
+  
+      > input:first-child {
+        @include pb_textarea_light;
+        @include pb_title_4;
+        overflow: hidden;
+      }
+  
+      input:focus, input:-webkit-autofill:focus {
+        @include pb_textarea_focus;
+        -webkit-box-shadow: 0 0 0px 1000px $focus_input_light inset;
+        transition: background-color 5000s ease-in-out 0s;
+      }
     }
+  }
 
-    > input:first-child {
-      @include pb_textarea_light;
-      @include pb_title_4;
-      overflow: hidden;
+  &.error {
+    [class^=pb_body_kit] {
+      margin-top: $space_xs / 2;
     }
-
-    input:focus, input:-webkit-autofill:focus {
-      @include pb_textarea_focus;
-      -webkit-box-shadow: 0 0 0px 1000px $focus_input_light inset;
-      transition: background-color 5000s ease-in-out 0s;
+    .flatpickr-wrapper {
+      > input:first-child {
+        border-color: $error;
+      }
     }
   }
 }

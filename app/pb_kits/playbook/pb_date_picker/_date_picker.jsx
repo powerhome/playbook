@@ -5,7 +5,7 @@ import classnames from 'classnames'
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
 import { spacing } from '../utilities/spacing.js'
 import flatpickr from 'flatpickr'
-import { Caption } from '../'
+import { Body, Caption } from '../'
 
 type DatePickerProps = {
   aria?: object,
@@ -14,8 +14,11 @@ type DatePickerProps = {
   disableDate?: Array,
   disableRange?: Array,
   disableWeekdays?: Array,
+  error?: String,
   format?: String,
   id?: String,
+  maxDate: String,
+  minDate: String,
   mode?: String,
   pickerId?: String,
 }
@@ -28,15 +31,23 @@ const DatePicker = (props: DatePickerProps) => {
     disableDate = null,
     disableRange = null,
     disableWeekdays = null,
+    error,
     format = 'm/d/Y',
     id,
+    maxDate,
+    minDate,
     mode = 'single',
     pickerId,
   } = props
 
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
-  const classes = classnames(buildCss('pb_date_picker'), className, spacing(props))
+  const classes = classnames(
+    buildCss('pb_date_picker'),
+    className,
+    spacing(props),
+    error ? 'error' : null,
+  )
 
   // document.addEventListener('DOMContentLoaded', () => {
   //   flatpickr(`#${pickerId}`, {
@@ -70,24 +81,11 @@ const DatePicker = (props: DatePickerProps) => {
         return [today, tomorrow]
       }
     }
-    const diasabledDates = (date) => {
+    const disabledParser = () => {
       if (disableDate) {
         return disableDate
       } else if (disableRange) {
         return disableRange
-      } else if (disableWeekdays) {
-        const weekdayObj = {
-          Sunday: 0,
-          Monday: 1,
-          Tuesday: 2,
-          Wednesday: 3,
-          Thursday: 4,
-          Friday: 5,
-          Saturday: 6,
-        }
-        disableWeekdays.forEach((weekday) => {
-          return (date.getDay() === weekdayObj[weekday])
-        })
       } else {
         return []
       }
@@ -97,7 +95,32 @@ const DatePicker = (props: DatePickerProps) => {
       allowInput: true,
       dateFormat: format,
       defaultDate: defaultDateGetter(),
-      disable: diasabledDates(),
+      // disable: [disabledDates()],
+      disable: disableWeekdays ? [
+        (date) => {
+          const weekdayObj = {
+            Sunday: 0,
+            Monday: 1,
+            Tuesday: 2,
+            Wednesday: 3,
+            Thursday: 4,
+            Friday: 5,
+            Saturday: 6,
+          }
+          return (
+            // try to refactor with for loop
+            date.getDay() === weekdayObj[disableWeekdays[0]] ||
+            date.getDay() === weekdayObj[disableWeekdays[1]] ||
+            date.getDay() === weekdayObj[disableWeekdays[2]] ||
+            date.getDay() === weekdayObj[disableWeekdays[3]] ||
+            date.getDay() === weekdayObj[disableWeekdays[4]] ||
+            date.getDay() === weekdayObj[disableWeekdays[5]] ||
+            date.getDay() === weekdayObj[disableWeekdays[6]]
+          )
+        },
+      ] : disabledParser(),
+      maxDate: maxDate,
+      minDate: minDate,
       mode: mode,
       static: true,
     })
@@ -131,6 +154,12 @@ const DatePicker = (props: DatePickerProps) => {
             autoComplete="off"
             id={pickerId}
         />
+        <If condition={error}>
+          <Body
+              status="negative"
+              text={error}
+          />
+        </If>
       </div>
     </div>
   )

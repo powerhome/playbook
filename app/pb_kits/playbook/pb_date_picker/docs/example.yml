@@ -10,4 +10,5 @@ examples:
   - date_picker_format: Format
   - date_picker_disabled: Disabled
   - date_picker_min_max: Min Max
+  - date_picker_error: Error
   
