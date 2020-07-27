@@ -20,10 +20,8 @@
     rounded: true,
     inner_size: "md"
 }) do %> 
-    <div>
-        <%= pb_rails('title', props: {text: "83", size: 2}) %>
-        <%= pb_rails('caption', props: {text: "Resulted"}) %>
-    </div>
+    <%= pb_rails('title', props: {text: "83", size: 2, tag: 'div'}) %>
+    <%= pb_rails('caption', props: {text: "Resulted"}) %>
 <% end %>
 
 

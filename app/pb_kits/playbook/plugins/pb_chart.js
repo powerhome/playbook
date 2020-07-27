@@ -48,21 +48,21 @@ class pbChart {
         events: {
           render: function(event) {
             const itemToMove = document.querySelector(`#wrapper-circle-chart-${event.target.renderTo.id} .pb_circle_chart_block`)
-            const thing = document.querySelector(`#${event.target.renderTo.id}`)
+            const chartContainer = document.querySelector(`#${event.target.renderTo.id}`)
             if (itemToMove !== null) {
               itemToMove.style.height = `${event.target.chartHeight}px`
               itemToMove.style.width = `${event.target.chartWidth}px`;
-              (thing.firstChild).before(itemToMove)
+              (chartContainer.firstChild).before(itemToMove)
             }
           },
 
           redraw: function(event){
             const itemToMove = document.querySelector(`#wrapper-circle-chart-${event.target.renderTo.id} .pb_circle_chart_block`)
-            const thing = document.querySelector(`#${event.target.renderTo.id}`)
+            const chartContainer = document.querySelector(`#${event.target.renderTo.id}`)
             if (itemToMove !== null) {
               itemToMove.style.height = `${event.target.chartHeight}px`
               itemToMove.style.width = `${event.target.chartWidth}px`;
-              (thing.firstChild).before(itemToMove)
+              (chartContainer.firstChild).before(itemToMove)
             }
           },
         },
