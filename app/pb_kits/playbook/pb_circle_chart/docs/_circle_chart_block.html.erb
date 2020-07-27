@@ -1,0 +1,30 @@
+<% data_51 = [{
+    name: 'Waiting for Calls',
+    value: 41,
+  },
+  {
+    name: 'On Call',
+    value: 49,
+  },
+  {
+    name: 'After call',
+    value: 10,
+  }
+] %>
+
+<br><br>
+
+<%= pb_rails("circle_chart", props: {
+    chart_data: data_51,
+    id: "with-a-block-2",
+    rounded: true,
+    inner_size: "md"
+}) do %> 
+    <div>
+        <%= pb_rails('title', props: {text: "83", size: 2}) %>
+        <%= pb_rails('caption', props: {text: "Resulted"}) %>
+    </div>
+<% end %>
+
+
+

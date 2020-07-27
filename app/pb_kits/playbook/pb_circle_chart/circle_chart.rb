@@ -29,6 +29,7 @@ module Playbook
       prop :use_html, type: Playbook::Props::Boolean, default: false
       prop :legend, type: Playbook::Props::Boolean, default: false
       prop :title, default: ''
+      prop :rounded, type: Playbook::Props::Boolean, default: false
 
       def chart_type
         style == "variablepie" ? "variablepie" : "pie"
@@ -50,12 +51,22 @@ module Playbook
         when "md"
           "50%"
         end
-
       end
+
+      def rounded_border_width
+        rounded ? 20 : nil
+      end
+
+      def rounded_border_color
+        rounded == true ? 'null' : nil
+      end
+
 
       def chart_options
         {
           id: id,
+          borderColor: rounded_border_color,
+          borderWidth: rounded_border_width,
           chartData: chart_data_formatted,
           title: title,
           type: chart_type,
