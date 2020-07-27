@@ -38,7 +38,6 @@ class pbChart {
 
   setupPieChart(options) {
     Highcharts.setOptions(highchartsTheme)
-
     Highcharts.chart(this.defaults.id, {
       title: {
         text: this.defaults.title,
@@ -70,6 +69,7 @@ class pbChart {
 
       plotOptions: {
         pie: {
+          colors: options.colors.length > 0 ? this.defaults.colors : highchartsTheme.colors,
           dataLabels: {
             enabled: this.defaults.dataLabels,
             connectorShape: 'straight',
