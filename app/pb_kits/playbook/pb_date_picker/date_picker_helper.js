@@ -23,9 +23,9 @@ const datePickerHelper = (config) => {
     }
   }
   const disabledParser = () => {
-    if (disableDate) {
+    if (disableDate && disableDate.length > 0) {
       return disableDate
-    } else if (disableRange) {
+    } else if (disableRange && disableRange.length > 0) {
       return disableRange
     } else {
       return []
@@ -36,7 +36,7 @@ const datePickerHelper = (config) => {
     allowInput: true,
     dateFormat: format,
     defaultDate: defaultDateGetter(),
-    disable: disableWeekdays ? [
+    disable: disableWeekdays && disableWeekdays.length > 0 ? [
       (date) => {
         const weekdayObj = {
           Sunday: 0,
@@ -65,9 +65,11 @@ const datePickerHelper = (config) => {
     static: true,
   })
 
-  const picker = document.querySelector(`#${pickerId}`)._flatpickr
-
-  picker.input.addEventListener('input', (e) => {
+  // const picker = document.querySelector(`#${pickerId}`)._flatpickr
+  // debugger
+  // picker.input.addEventListener('input', (e) => {
+  document.querySelector(`#${pickerId}`).addEventListener('input', (e) => {
+    const picker = document.querySelector(`#${pickerId}`)._flatpickr
     picker.input.setAttribute('value', e.target.value)
     const variant = picker.config.mode
     if (variant === 'single' && e.target.value.split('').length === 10) {

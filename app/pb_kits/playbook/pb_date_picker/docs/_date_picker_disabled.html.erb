@@ -1,0 +1,43 @@
+<%= pb_rails("date_picker", props: {
+  disable_date: ["07/28/2020"],
+  label: "Disable Single Date",
+  picker_id: "single-disabled-date"
+}) %>
+
+<%= pb_rails("date_picker", props: {
+  disable_date: ['07/28/2020', '07/31/2020'],
+  label: "Disable Multiple Dates",
+  picker_id: "multiple-disabled-dates"
+}) %>
+
+<%= pb_rails("date_picker", props: {
+  disable_range: [
+          {
+            from: '07/25/2020',
+            to: '07/28/2020',
+          },
+        ],
+  label: "Disable Single Range",
+  picker_id: "single-date-range"
+}) %>
+
+<%= pb_rails("date_picker", props: {
+  disable_range: [
+          {
+            from: '07/25/2020',
+            to: '07/28/2020',
+          },
+          {
+            from: '07/31/2020',
+            to: '08/08/2020',
+          },
+        ],
+  label: "Disable Multiple Ranges",
+  picker_id: "multiple-date-ranges"
+}) %>
+
+<%= pb_rails("date_picker", props: {
+  disable_weekdays: ['Sunday', 'Saturday'],
+  label: "Disable Weekdays",
+  picker_id: "disabled-weekdays"
+}) %>

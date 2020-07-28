@@ -20,9 +20,9 @@
       <%= javascript_tag do %>
       document.addEventListener("DOMContentLoaded", () => {
           datePickerHelper({
-            disableDate: <%= object.disable_date %>,
-            disableRange: <%= object.disable_range %>,
-            disableWeekdays: <%= object.disable_weekdays %>,
+            disableDate: <%=raw object.disable_date %>,
+            disableRange: <%=raw object.disable_range.to_json %>,
+            disableWeekdays: <%=raw object.disable_weekdays %>,
             format: "<%= object.format %>",
             maxDate: "<%= object.max_date %>",
             minDate: "<%= object.min_date %>",
