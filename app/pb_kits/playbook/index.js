@@ -92,6 +92,7 @@ export dashboardValueSettings from './pb_dashboard_value/dashboardValueSettings'
 
 // Other JS/Plugins
 export pbChart from './plugins/pb_chart.js'
+export datePickerHelper from './pb_date_picker/date_picker_helper.js'
 export PbTypeahead from './pb_typeahead'
 export PbPopover from './pb_popover'
 export PbTable from './pb_table'

@@ -1,25 +1,33 @@
 <%= content_tag(:div,
     aria: object.aria,
-    class: object.classname,
+    class: object.classname + " " + object.error_class,
     data: object.data,
     id: object.id) do %>
-    <%= pb_rails("caption", props: { text: "Date Picker" }) %>
+    <%= pb_rails("caption", props: { text: object.label }) %>
       <div class="input_wrapper">
         <input
-            id="flatpickr"
+            autocomplete="off"
+            id="<%= object.picker_id %>"
         />
+        <% if object.error %>
+          <%= pb_rails("body", props: { 
+            status: "negative",
+            text: object.error
+          }) %>
+        <% end %>
       </div>
 
       <%= javascript_tag do %>
       document.addEventListener("DOMContentLoaded", () => {
-          let picker = flatpickr('#flatpickr', {
-            dateFormat: 'm/d/Y',
-            defaultDate: Date.now(),
-            static: true,
-          })
-          window.addEventListener("scroll", () => {
-            picker._positionCalendar();
-            console.log("scroll scroll")
+          datePickerHelper({
+            disableDate: <%= object.disable_date %>,
+            disableRange: <%= object.disable_range %>,
+            disableWeekdays: <%= object.disable_weekdays %>,
+            format: "<%= object.format %>",
+            maxDate: "<%= object.max_date %>",
+            minDate: "<%= object.min_date %>",
+            mode: "<%= object.mode %>",
+            pickerId: "<%= object.picker_id %>",
           })
       })
       <% end %>

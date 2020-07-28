@@ -1,4 +1,5 @@
 export { default as DatePickerDefault } from './_date_picker_default.jsx'
+export { default as DatePickerLabel } from './_date_picker_label.jsx'
 export { default as DatePickerRange } from './_date_picker_range.jsx'
 export { default as DatePickerFormat } from './_date_picker_format.jsx'
 export { default as DatePickerDisabled } from './_date_picker_disabled.jsx'

@@ -5,10 +5,12 @@ const DatePickerDisabled = () => (
   <div>
     <DatePicker
         disableDate={['07/28/2020']}
+        label="Disable Single Date"
         pickerId="single-disabled-date"
     />
     <DatePicker
-        disableDate={['07/28/2020']}
+        disableDate={['07/28/2020', '07/31/2020']}
+        label="Disable Multiple Dates"
         pickerId="multiple-disabled-dates"
     />
     <DatePicker
@@ -18,6 +20,7 @@ const DatePickerDisabled = () => (
             to: '07/28/2020',
           },
         ]}
+        label="Disable Single Range"
         pickerId="single-date-range"
     />
     <DatePicker
@@ -31,10 +34,12 @@ const DatePickerDisabled = () => (
             to: '08/08/2020',
           },
         ]}
+        label="Disable Multiple Dates"
         pickerId="multiple-date-ranges"
     />
     <DatePicker
-        disableWeekdays={['Monday', 'Wednesday']}
+        disableWeekdays={['Sunday', 'Saturday']}
+        label="Disable Weekdays"
         pickerId="disabled-weekdays"
     />
   </div>
