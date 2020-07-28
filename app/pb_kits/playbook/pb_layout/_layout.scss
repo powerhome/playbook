@@ -35,10 +35,25 @@ $card-border-radius: $border_rad_lightest;
       display: grid;
       width: 100%;
       height: 100%;
+      padding: $space_lg;
       grid-template-areas: 
       "side-bar collection";
       grid-template-columns: .25fr 1fr;
       grid-column-gap: $space_sm;
+      div.layout_body{
+        @media screen and (min-width: $screen-md-min) {
+        margin-left: $space_md;        
+        }
+        @media screen and (max-width: $screen-lg-min) {
+          grid-template-columns: repeat(3, 1fr);
+        }
+        @media screen and (max-width: $screen-md-min) {
+          grid-template-columns: repeat(2, 1fr) !important;
+        }
+         @media screen and (max-width: $screen-xs-min) {
+          grid-template-columns: repeat(1, 1fr) !important;
+        }
+      }
 
       @media screen and (max-width: $screen-md-min) {
         grid-template-areas: "side-bar"
@@ -46,6 +61,7 @@ $card-border-radius: $border_rad_lightest;
         grid-template-columns: 1fr;
         grid-row-gap: $space_sm;
       }
+      
   }
 
   &[class*=_kanban]{

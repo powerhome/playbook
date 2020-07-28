@@ -16,9 +16,12 @@ module Playbook
                  values: %w[h1 h2 h3 h4 h5 h6 p div span],
                  default: "h3"
       prop :text
+      prop :variant, type: Playbook::Props::Enum,
+                    values: [nil, "primary"],
+                    default: nil
 
       def classname
-        generate_classname("pb_title_kit", size, dark_class)
+        generate_classname("pb_title_kit", size, dark_class, variant)
       end
 
     private

@@ -3,7 +3,7 @@
   data: object.data,
   class: object.classname) do %>
     <div class="pb_popover_tooltip" id="<%= object.tooltip_id %>" role="tooltip" style="<%= object.z_index_helper %>">
-      <div class="pb_popover_body <%= object.popover_spacing_helper %>" style="<%= object.width_height_helper %>">
+      <div class="pb_popover_body <%= object.width_height_class_helper %> <%= object.popover_spacing_helper %>" style="<%= object.width_height_helper %>">
         <%= capture(&object.children) %>
       </div>
     </div>
