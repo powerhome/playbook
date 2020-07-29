@@ -5,6 +5,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+### Changed
+- Updated Time Range Inline to arrow and deemphasized icons. ([#933](https://github.com/powerhome/playbook/pull/933)  @megantrimble)
+
 ### Fixed
 - Added disabled attribute to button. ([#934](https://github.com/powerhome/playbook/pull/934)  @KatherineMuedas)
 
