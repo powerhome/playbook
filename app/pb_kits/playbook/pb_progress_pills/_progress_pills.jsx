@@ -10,7 +10,7 @@ import {
   buildDataProps,
 } from '../utilities/props'
 
-import { spacing } from '../utilities/spacing.js'
+import { systemProps } from '../utilities/systemProps.js'
 
 type ProgressPillsProps = {
   active?: Number,
@@ -59,7 +59,7 @@ const ProgressPills = (props: ProgressPillsProps) => {
 
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
-  const classes = classnames(buildCss('pb_progress_pills_kit', darkClass), className, spacing(props))
+  const classes = classnames(buildCss('pb_progress_pills_kit', darkClass), className, systemProps(props))
 
   return (
     <div

@@ -2,7 +2,7 @@
 import React from 'react'
 import classnames from 'classnames'
 import { Body, Caption } from '../'
-import { spacing } from '../utilities/spacing.js'
+import { systemProps } from '../utilities/systemProps.js'
 
 import {
   buildAriaProps,
@@ -60,7 +60,7 @@ const TextInput = ({
           dark={dark}
           text={label}
       />
-      <div className={classnames('text_input_wrapper', spacing(props))}>
+      <div className={classnames('text_input_wrapper', systemProps(props))}>
         <If condition={children}>
           {children}
           <Else />

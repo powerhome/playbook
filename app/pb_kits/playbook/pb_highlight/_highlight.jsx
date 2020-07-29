@@ -3,7 +3,7 @@
 import Highlighter from 'react-highlight-words'
 import React from 'react'
 import classnames from 'classnames'
-import { spacing } from '../utilities/spacing.js'
+import { systemProps } from '../utilities/systemProps.js'
 
 type HighlightProps = {
   className?: String,
@@ -27,7 +27,7 @@ const Highlight = (props: HighlightProps) => {
     <Highlighter
         autoEscape
         data={data}
-        highlightClassName={classnames(className, spacing(props))}
+        highlightClassName={classnames(className, systemProps(props))}
         highlightTag="span"
         id={id}
         searchWords={highlightedText}

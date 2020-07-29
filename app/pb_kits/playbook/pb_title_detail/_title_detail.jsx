@@ -2,7 +2,7 @@
 
 import React from 'react'
 import classnames from 'classnames'
-import { spacing } from '../utilities/spacing.js'
+import { systemProps } from '../utilities/systemProps.js'
 
 import { Body, Title } from '../'
 
@@ -25,7 +25,7 @@ const TitleDetail = (props: TitleDetailProps) => {
   return (
     <div
         {...dataProps}
-        className={classnames(className, pbCss, spacing(props))}
+        className={classnames(className, pbCss, systemProps(props))}
         id={id}
     >
       <Title

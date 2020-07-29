@@ -3,7 +3,7 @@
 import React from 'react'
 import classnames from 'classnames'
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
-import { spacing } from '../utilities/spacing.js'
+import { systemProps } from '../utilities/systemProps.js'
 
 import { Body, Title } from '../'
 
@@ -41,7 +41,7 @@ const Legend = (props: LegendProps) => {
   const darkClass = dark ? 'dark' : 'light'
   const bodyCSS = classnames(
     buildCss('pb_legend_kit', color, darkClass), className,
-    spacing(props)
+    systemProps(props)
   )
 
   return (

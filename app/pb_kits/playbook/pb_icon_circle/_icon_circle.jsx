@@ -6,7 +6,7 @@ import classnames from 'classnames'
 
 import { Icon } from '../'
 import { buildCss } from '../utilities/props'
-import { spacing } from '../utilities/spacing.js'
+import { systemProps } from '../utilities/systemProps.js'
 
 type IconCircleProps = {
   className?: string,
@@ -27,7 +27,7 @@ const IconCircle = (props: IconCircleProps) => {
   const css = buildCss('pb_icon_circle_kit', size, variant)
 
   return (
-    <div className={classnames(className, css, spacing(props))}>
+    <div className={classnames(className, css, systemProps(props))}>
       <Icon icon={icon} />
     </div>
   )

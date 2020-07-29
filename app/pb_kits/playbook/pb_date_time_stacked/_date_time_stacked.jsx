@@ -2,7 +2,7 @@
 
 import React from 'react'
 import { DateStacked, Flex, FlexItem, TimeStacked } from '../'
-import { spacing } from '../utilities/spacing.js'
+import { systemProps } from '../utilities/systemProps.js'
 
 type DateTimeStackedProps = {
   data?: String,
@@ -15,7 +15,7 @@ const DateTimeStacked = (props: DateTimeStackedProps) => {
   const { date, dark } = props
   return (
     <Flex
-        className={spacing(props)}
+        className={systemProps(props)}
         orientation="row"
         vertical="center"
     >

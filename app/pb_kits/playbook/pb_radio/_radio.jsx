@@ -4,7 +4,7 @@
 import React from 'react'
 import Body from '../pb_body/_body.jsx'
 import classnames from 'classnames'
-import { spacing } from '../utilities/spacing.js'
+import { systemProps } from '../utilities/systemProps.js'
 
 type RadioProps = {
   className?: String,
@@ -40,7 +40,7 @@ const Radio = ({
 
   return (
     <label
-        className={classnames('pb_radio_kit' + (dark === true ? '_dark ' : ' ') + errorClass + ' ' + className, spacing(props))}
+        className={classnames('pb_radio_kit' + (dark === true ? '_dark ' : ' ') + errorClass + ' ' + className, systemProps(props))}
         htmlFor={id}
     >
       <If condition={children}>

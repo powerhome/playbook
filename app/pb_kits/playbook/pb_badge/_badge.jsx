@@ -2,7 +2,7 @@
 
 import React from 'react'
 import classnames from 'classnames'
-import { spacing } from '../utilities/spacing.js'
+import { systemProps } from '../utilities/systemProps.js'
 
 import {
   buildAriaProps,
@@ -39,7 +39,7 @@ const Badge = (props: BadgeProps) => {
       rounded: rounded,
       dark: dark,
     }),
-    spacing(props)
+    systemProps(props)
   )
 
   return (

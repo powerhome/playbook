@@ -7,7 +7,7 @@ import { Caption } from '../'
 
 import { buildCss, buildDataProps } from '../utilities/props'
 
-import { spacing } from '../utilities/spacing.js'
+import { systemProps } from '../utilities/systemProps.js'
 
 type TimestampProps = {
   id?: String,
@@ -24,7 +24,7 @@ const Timestamp = (props: TimestampProps) => {
   return (
     <div
         {...dataProps}
-        className={classnames(className, pbCss, spacing(props))}
+        className={classnames(className, pbCss, systemProps(props))}
         id={id}
     >
       <Caption

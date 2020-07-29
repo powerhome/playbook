@@ -2,7 +2,7 @@
 
 import React from 'react'
 import classnames from 'classnames'
-import { spacing } from '../utilities/spacing.js'
+import { systemProps } from '../utilities/systemProps.js'
 import { pbChart } from '../'
 
 type LineGraphProps = {
@@ -77,7 +77,7 @@ export default class LineGraph extends React.Component<LineGraphProps> {
 
     return (
       <div
-          className={classnames(className, spacing(this.props))}
+          className={classnames(className, systemProps(this.props))}
           id={id}
       />
     )

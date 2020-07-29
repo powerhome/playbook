@@ -3,7 +3,7 @@
 import React from 'react'
 import classnames from 'classnames'
 
-import { spacing } from '../utilities/spacing.js'
+import { systemProps } from '../utilities/systemProps.js'
 import { Body, Caption, Title } from '../'
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
 
@@ -45,7 +45,7 @@ const Currency = (props: CurrencyProps) => {
   const [whole, decimal = '00'] = amount.split('.')
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
-  const classes = classnames(buildCss('pb_currency_kit', align, size, { dark: dark }), className, spacing(props))
+  const classes = classnames(buildCss('pb_currency_kit', align, size, { dark: dark }), className, systemProps(props))
 
   return (
     <div

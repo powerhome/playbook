@@ -2,8 +2,7 @@
 
 import React from 'react'
 import classnames from 'classnames'
-import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
-import { spacing } from '../utilities/spacing.js'
+import { systemProps } from '../utilities/systemProps.js'
 
 type ImageProps = {
   alt?: String,
@@ -29,17 +28,11 @@ const Image = (props: ImageProps) => {
   const dataProps = buildDataProps(data)
 
   return (
-    <div>
-      <img
-          {...ariaProps}
-          {...dataProps}
-          alt={alt}
-          className={classes}
-          data-src={url}
-          id={id}
-          src={url}
-      />
-    </div>
+    <img
+        alt={alt}
+        className={classnames('pb_image_kit lazyload blur_up', systemProps(props))}
+        data-src={url}
+    />
   )
 }
 

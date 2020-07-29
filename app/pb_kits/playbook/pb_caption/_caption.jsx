@@ -3,7 +3,7 @@
 import React from 'react'
 import classnames from 'classnames'
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
-import { spacing } from '../utilities/spacing.js'
+import { systemProps } from '../utilities/systemProps.js'
 
 type CaptionProps = {
   aria?: object,
@@ -38,7 +38,7 @@ const Caption = (props: CaptionProps) => {
       dark: dark,
     }),
     className,
-    spacing(props)
+    systemProps(props)
   )
 
   return (

@@ -4,6 +4,8 @@ import { Button } from '../../'
 const ButtonDefault = () => (
   <div>
     <Button
+        dark
+        marginRight="xl"
         onClick={() => alert('button clicked!')}
         text="Button Primary"
     />

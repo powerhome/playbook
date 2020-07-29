@@ -3,7 +3,7 @@
 import React, { Node } from 'react'
 import { Card } from '../../'
 import classnames from 'classnames'
-import { spacing } from '../../utilities/spacing.js'
+import { systemProps } from '../../utilities/systemProps.js'
 
 type FilterBackgroundProps = {
   background: boolean,
@@ -14,7 +14,7 @@ const FilterBackground = (props: FilterBackgroundProps) => {
   const { background = true, className, children } = props
 
   return (
-    <div className={classnames(`pb_filter_kit ${className}`, spacing(props))}>
+    <div className={classnames(`pb_filter_kit ${className}`, systemProps(props))}>
       <Choose>
         <When condition={background}>
           <Card padding="none">{children}</Card>
