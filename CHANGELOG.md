@@ -5,13 +5,15 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+### Added
+
+- Added className, id, data, aria props to React Image kit, added aria props to Rails Image kit. ([#927](https://github.com/powerhome/playbook/pull/927)  @kellyeryan)
+
 ## [v5.5.1] 2020-7-24
 
 ### Added
-- Added className, id, data, aria props to React Image kit, added aria props to Rails Image kit. ([#927](https://github.com/powerhome/playbook/pull/927)  @kellyeryan)
-
-### Added
 - Added flexible classes to body typography kit. ([#929](https://github.com/powerhome/playbook/pull/929)  @jasoncypret)
+
 
 ## [v5.5.0] 2020-7-23
 
@@ -24,6 +26,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 - Fixed spacing conflicts with Caption sizing props ([#925](https://github.com/powerhome/playbook/pull/925) @jasperfurniss)
 - Limited Popover overflow property to popovers with max width or height ([#922](https://github.com/powerhome/playbook/pull/922) @bh247484)
+
 
 ## [v5.3.0] 2020-7-9
 
