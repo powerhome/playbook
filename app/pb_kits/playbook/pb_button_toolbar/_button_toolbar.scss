@@ -1,5 +1,6 @@
 @import "../pb_button/button";
 @import "../pb_button/button_mixins";
+@import "../tokens/colors";
 
 [class^=pb_button_toolbar]{
     // Orientation =========
@@ -11,6 +12,10 @@
   
       & > [class^=pb_button]  {
         margin-right: $space-xs;
+
+        &:hover {
+          background-color:darken($royal, 20%);
+        }
   
         &:last-child {
           margin-right: 0;
