@@ -6,7 +6,7 @@ import { Body, Icon } from '../'
 
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
 
-import { spacing } from '../utilities/spacing.js'
+import { systemProps } from '../utilities/systemProps.js'
 
 type IconValueProps = {
   align?: "left" | "center" | "right",
@@ -36,7 +36,7 @@ const IconValue = (props: IconValueProps) => {
     <div
         {...ariaProps}
         {...dataProps}
-        className={classnames(className, pbCss, spacing(props))}
+        className={classnames(className, pbCss, systemProps(props))}
         id={id}
     >
       <Body color="light">

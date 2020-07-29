@@ -4,7 +4,7 @@ import React from 'react'
 import classnames from 'classnames'
 import { Body, Caption, Icon } from '../'
 import DateTime from '../pb_kit/dateTime.js'
-import { spacing } from '../utilities/spacing.js'
+import { systemProps } from '../utilities/systemProps.js'
 
 type TimeRangeInlineProps = {
   className?: String,
@@ -64,7 +64,7 @@ const TimeRangeInline = (props: TimeRangeInlineProps) => {
 
   return (
     <div
-        className={classnames('pb_time_range_inline_kit_' + alignment, className, spacing(props))}
+        className={classnames('pb_time_range_inline_kit_' + alignment, className, systemProps(props))}
     >
       <div className="pb_time_range_inline_wrapper">
         <If condition={size == 'xs'}>

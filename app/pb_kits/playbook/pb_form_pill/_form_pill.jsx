@@ -4,7 +4,7 @@ import classnames from 'classnames'
 import Title from '../pb_title/_title.jsx'
 import Icon from '../pb_icon/_icon.jsx'
 import Avatar from '../pb_avatar/_avatar.jsx'
-import { spacing } from '../utilities/spacing.js'
+import { systemProps } from '../utilities/systemProps.js'
 
 type FormPillProps = {
   className?: String,
@@ -19,7 +19,7 @@ const FormPill = (props: FormPillProps) => {
   const { className, text, name, onClick = () => {}, avatarUrl } = props
   const css = classnames(
     [`pb_form_pill_kit_${'primary'}`, className],
-    spacing(props)
+    systemProps(props)
   )
   return (
     <div className={css}>

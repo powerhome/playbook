@@ -4,7 +4,7 @@ import React from 'react'
 import DateTime from '../pb_kit/dateTime.js'
 import { Body, Icon } from '../'
 import classnames from 'classnames'
-import { spacing } from '../utilities/spacing.js'
+import { systemProps } from '../utilities/systemProps.js'
 
 type DateRangeInlineProps = {
   className?: String,
@@ -27,7 +27,7 @@ const dateTimeIso = (dateValue) => {
 const DateRangeInline = (props: DateRangeInlineProps) => {
   const { endDate, startDate } = props
   return (
-    <div className={classnames('pb_date_range_inline', spacing(props))}>
+    <div className={classnames('pb_date_range_inline', systemProps(props))}>
       <Body
           color="light"
           tag="span"

@@ -3,7 +3,7 @@
 import React, { type Node } from 'react'
 import classnames from 'classnames'
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
-import { spacing } from '../utilities/spacing.js'
+import { systemProps } from '../utilities/systemProps.js'
 
 type ListProps = {
   aria?: object,
@@ -53,7 +53,7 @@ const List = (props: ListProps) => {
       ordered: ordered,
       xpadding: xpadding,
     }), className,
-    spacing(props)
+    systemProps(props)
   )
 
   return (

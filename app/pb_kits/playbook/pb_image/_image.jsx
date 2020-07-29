@@ -2,7 +2,7 @@
 
 import React from 'react'
 import classnames from 'classnames'
-import { spacing } from '../utilities/spacing.js'
+import { systemProps } from '../utilities/systemProps.js'
 
 type ImageProps = {
   url: string,
@@ -14,7 +14,7 @@ const Image = (props: ImageProps) => {
   return (
     <img
         alt={alt}
-        className={classnames('pb_image_kit lazyload blur_up', spacing(props))}
+        className={classnames('pb_image_kit lazyload blur_up', systemProps(props))}
         data-src={url}
     />
   )

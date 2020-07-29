@@ -5,7 +5,7 @@ import classnames from 'classnames'
 
 import { buildCss } from '../utilities/props'
 import { Body, Icon } from '../'
-import { spacing } from '../utilities/spacing.js'
+import { systemProps } from '../utilities/systemProps.js'
 
 const statusMap = {
   increase: 'positive',
@@ -35,7 +35,7 @@ const StatChange = (props: StatChangeProps) => {
           className={classnames(
           className,
           buildCss('pb_stat_change_kit', status),
-          spacing(props)
+          systemProps(props)
         )}
           id={id}
       >

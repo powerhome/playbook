@@ -2,7 +2,7 @@
 
 import React, { type Node } from 'react'
 import classnames from 'classnames'
-import { spacing } from '../utilities/spacing.js'
+import { systemProps } from '../utilities/systemProps.js'
 
 type TableProps = {
   children: Array<Node> | Node,
@@ -43,7 +43,7 @@ const Table = (props: TableProps) => {
           'single-line': singleLine,
           'no-hover': disableHover,
         },
-        spacing(props)
+        systemProps(props)
       )}
     >
       {children}

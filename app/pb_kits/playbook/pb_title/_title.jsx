@@ -3,7 +3,7 @@
 import React from 'react'
 import classnames from 'classnames'
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
-import { spacing } from '../utilities/spacing.js'
+import { systemProps } from '../utilities/systemProps.js'
 
 type TitleProps = {
   aria?: object,
@@ -35,7 +35,7 @@ const Title = (props: TitleProps) => {
   const themeStyle = dark === true ? 'dark' : ''
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
-  const classes = classnames(buildCss('pb_title_kit', size, themeStyle, variant), className, spacing(props))
+  const classes = classnames(buildCss('pb_title_kit', size, themeStyle, variant), className, systemProps(props))
   const Tag = `${tag}`
 
   return (

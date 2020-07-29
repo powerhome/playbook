@@ -3,7 +3,7 @@
 import React from 'react'
 import classnames from 'classnames'
 import { Title } from '../'
-import { spacing } from '../utilities/spacing.js'
+import { systemProps } from '../utilities/systemProps.js'
 
 type StatValueProps = {
   className?: String,
@@ -44,7 +44,7 @@ const StatValue = (props: StatValueProps) => {
 
   return (
     <div
-        className={classnames('pb_stat_value_kit', className, spacing(props))}
+        className={classnames('pb_stat_value_kit', className, systemProps(props))}
         id={id}
     >
       <div className="pb_stat_value_wrapper">

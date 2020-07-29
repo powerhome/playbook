@@ -3,7 +3,7 @@
 import React from 'react'
 import classnames from 'classnames'
 import { Icon, Title } from '../'
-import { spacing } from '../utilities/spacing.js'
+import { systemProps } from '../utilities/systemProps.js'
 
 const iconMap = {
   success: 'check',
@@ -25,7 +25,7 @@ const FixedConfirmationToast = (props: FixedConfirmationToastProps) => {
   const css = classnames(
     className,
     `pb_fixed_confirmation_toast_kit_${status}`,
-    spacing(props)
+    systemProps(props)
   )
   const icon = iconMap[status]
 

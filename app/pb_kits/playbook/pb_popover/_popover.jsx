@@ -13,7 +13,7 @@ import {
 import { buildCss, noop } from '../utilities/props'
 
 import classnames from 'classnames'
-import { spacing } from '../utilities/spacing.js'
+import { systemProps } from '../utilities/systemProps.js'
 
 type PbPopoverProps = {
   className?: String,
@@ -58,7 +58,7 @@ const Popover = (props: PbPopoverProps) => {
     minWidth,
   } = props
 
-  const popoverSpacing = spacing(props) ? spacing(props) : 'p_sm'
+  const popoverSpacing = systemProps(props) ? systemProps(props) : 'p_sm'
   const overflowHandling = maxHeight || maxWidth ? 'overflow_handling' : ''
   const zIndexStyle = zIndex ? { zIndex: zIndex } : {}
   const widthHeightStyles = () => {
