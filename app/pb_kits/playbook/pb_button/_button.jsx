@@ -72,6 +72,7 @@ const Button = (props: ButtonPropTypes) => {
   const {
     children,
     className,
+    disabled,
     icon = null,
     id,
     loading = false,
@@ -120,6 +121,7 @@ const Button = (props: ButtonPropTypes) => {
       <button
           {...buttonAria}
           className={css}
+          disabled={disabled}
           id={id}
           onClick={onClick}
           type={htmlType}
