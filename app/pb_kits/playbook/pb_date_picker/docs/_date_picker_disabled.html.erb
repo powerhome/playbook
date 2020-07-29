@@ -1,11 +1,11 @@
 <%= pb_rails("date_picker", props: {
-  disable_date: ["07/28/2020"],
+  disable_date: [(Date.today + 1).httpdate],
   label: "Disable Single Date",
   picker_id: "single-disabled-date"
 }) %>
 
 <%= pb_rails("date_picker", props: {
-  disable_date: ['07/28/2020', '07/31/2020'],
+  disable_date: [(Date.today + 1).httpdate, (Date.today + 3).httpdate],
   label: "Disable Multiple Dates",
   picker_id: "multiple-disabled-dates"
 }) %>
@@ -13,8 +13,8 @@
 <%= pb_rails("date_picker", props: {
   disable_range: [
           {
-            from: '07/25/2020',
-            to: '07/28/2020',
+            from: (Date.today + 1).httpdate,
+            to: (Date.today + 7).httpdate,
           },
         ],
   label: "Disable Single Range",
@@ -24,12 +24,12 @@
 <%= pb_rails("date_picker", props: {
   disable_range: [
           {
-            from: '07/25/2020',
-            to: '07/28/2020',
+            from: (Date.today + 1).httpdate,
+            to: (Date.today + 3).httpdate,
           },
           {
-            from: '07/31/2020',
-            to: '08/08/2020',
+            from: (Date.today + 7).httpdate,
+            to: (Date.today + 14).httpdate,
           },
         ],
   label: "Disable Multiple Ranges",

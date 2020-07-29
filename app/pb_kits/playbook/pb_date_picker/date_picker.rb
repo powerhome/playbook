@@ -7,6 +7,8 @@ module Playbook
 
       partial "pb_date_picker/date_picker"
 
+      prop :default_date, type: Playbook::Props::String,
+                          default: ""
       prop :disable_date, type: Playbook::Props::Array,
                           default: []
       prop :disable_range, type: Playbook::Props::Array,

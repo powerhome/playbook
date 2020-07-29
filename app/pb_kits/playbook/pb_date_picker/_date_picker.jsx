@@ -12,6 +12,7 @@ type DatePickerProps = {
   aria?: object,
   className?: String,
   data?: object,
+  defaultDate?: String,
   disableDate?: Array,
   disableRange?: Array,
   disableWeekdays?: Array,
@@ -29,6 +30,7 @@ const DatePicker = (props: DatePickerProps) => {
     aria = {},
     className,
     data = {},
+    defaultDate = '',
     disableDate = null,
     disableRange = null,
     disableWeekdays = null,
@@ -74,6 +76,7 @@ const DatePicker = (props: DatePickerProps) => {
 
   useEffect(() => {
     datePickerHelper({
+      defaultDate: defaultDate,
       disableDate: disableDate,
       disableRange: disableRange,
       disableWeekdays: disableWeekdays,
@@ -82,6 +85,7 @@ const DatePicker = (props: DatePickerProps) => {
       minDate: minDate,
       mode: mode,
       pickerId: pickerId,
+      propModel: 'React',
     })
     // const defaultDateGetter = () => {
     //   if (mode === 'single') {

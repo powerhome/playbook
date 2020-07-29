@@ -2,6 +2,7 @@ import flatpickr from 'flatpickr'
 
 const datePickerHelper = (config) => {
   const {
+    defaultDate,
     disableDate,
     disableRange,
     disableWeekdays,
@@ -10,12 +11,20 @@ const datePickerHelper = (config) => {
     minDate,
     mode,
     pickerId,
+    propModel,
   } = config
 
   const defaultDateGetter = () => {
-    if (mode === 'single') {
+    if (defaultDate !== '') {
+      if (propModel === 'rails' && defaultDate.includes('[') == true) {
+        return JSON.parse(defaultDate.replace(/&quot;/g, '"'))
+      } else {
+        return defaultDate
+      }
+    }
+    if (mode === 'single' && defaultDate === '') {
       return new Date()
-    } else if (mode === 'range') {
+    } else if (mode === 'range' && defaultDate === '') {
       const today = new Date()
       const tomorrow = new Date(today)
       tomorrow.setDate(tomorrow.getDate() + 1)
@@ -65,9 +74,6 @@ const datePickerHelper = (config) => {
     static: true,
   })
 
-  // const picker = document.querySelector(`#${pickerId}`)._flatpickr
-  // debugger
-  // picker.input.addEventListener('input', (e) => {
   document.querySelector(`#${pickerId}`).addEventListener('input', (e) => {
     const picker = document.querySelector(`#${pickerId}`)._flatpickr
     picker.input.setAttribute('value', e.target.value)

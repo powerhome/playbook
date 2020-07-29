@@ -2,12 +2,18 @@ examples:
   
   rails:
   - date_picker_default: Default
+  - date_picker_default_date: Default Date
+  - date_picker_label: Label
+  - date_picker_range: Range
+  - date_picker_format: Format
   - date_picker_disabled: Disabled Dates
+  - date_picker_min_max: Min Max
   - date_picker_error: Error
   
   
   react:
   - date_picker_default: Default
+  - date_picker_default_date: Default Date
   - date_picker_label: Label
   - date_picker_range: Range
   - date_picker_format: Format
