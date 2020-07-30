@@ -18,18 +18,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Updated Label Value Kit to inlcude Installation Kit and Logistic Kit variations ([#915](https://github.com/powerhome/playbook/pull/915) @christinaatai)
 - Updated Time Range Inline to arrow and deemphasized icons. ([#933](https://github.com/powerhome/playbook/pull/933)  @megantrimble)
 
-### Changed
-- Updated Label Value Kit to inlcude Installation Kit and Logistic Kit variations ([#915](https://github.com/powerhome/playbook/pull/915) @christinaatai)
-- Updated Time Range Inline to arrow and deemphasized icons. ([#933](https://github.com/powerhome/playbook/pull/933)  @megantrimble)
-
 ### Added
 - Added colors (green and red) to Progress Simple Kit ([#935](https://github.com/powerhome/playbook/pull/935) @christinaatai)
 - Added className, id, data, aria props to React Image kit, added aria props to Rails Image kit. ([#927](https://github.com/powerhome/playbook/pull/927)  @kellyeryan)
 - Variant prop added to allow typography kit text to change to primary color ([#921](https://github.com/powerhome/playbook/pull/921)  @kellyeryan)
-<<<<<<< HEAD
 - Circle Chart Additions ([#932](https://github.com/powerhome/playbook/pull/932)  @jasperfurniss)
-=======
->>>>>>> Moved Installation Kit and Logistic Kit so that they're part of Label Value Kit (#915)
 
 ### Removed
 - Deleted Installation Kit and Logistic Kit ([#915](https://github.com/powerhome/playbook/pull/915) @christinaatai)
