@@ -1,7 +1,6 @@
 import Highcharts from 'highcharts'
 
 import { highchartsTheme } from '../pb_dashboard/pbChartsLightTheme.js'
-
 import colors from '../tokens/_colors.scss'
 
 require('highcharts/modules/variable-pie')(Highcharts)
