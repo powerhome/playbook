@@ -29,6 +29,17 @@ const mapColors = (array) => {
   return newArray
 }
 
+// Adjust Circle Chart Block Kit Dimensions to Match the Chart for Centering
+const alignBlockElement = (event) => {
+  const itemToMove = document.querySelector(`#wrapper-circle-chart-${event.target.renderTo.id} .pb_circle_chart_block`)
+  const chartContainer = document.querySelector(`#${event.target.renderTo.id}`)
+  if (itemToMove !== null) {
+    itemToMove.style.height = `${event.target.chartHeight}px`
+    itemToMove.style.width = `${event.target.chartWidth}px`;
+    (chartContainer.firstChild).before(itemToMove)
+  }
+}
+
 class pbChart {
   defaults = {
     callbackInitializeBefore: () => {},
@@ -70,25 +81,8 @@ class pbChart {
       chart: {
         type: this.defaults.type,
         events: {
-          render: function(event) {
-            const itemToMove = document.querySelector(`#wrapper-circle-chart-${event.target.renderTo.id} .pb_circle_chart_block`)
-            const chartContainer = document.querySelector(`#${event.target.renderTo.id}`)
-            if (itemToMove !== null) {
-              itemToMove.style.height = `${event.target.chartHeight}px`
-              itemToMove.style.width = `${event.target.chartWidth}px`;
-              (chartContainer.firstChild).before(itemToMove)
-            }
-          },
-
-          redraw: function(event){
-            const itemToMove = document.querySelector(`#wrapper-circle-chart-${event.target.renderTo.id} .pb_circle_chart_block`)
-            const chartContainer = document.querySelector(`#${event.target.renderTo.id}`)
-            if (itemToMove !== null) {
-              itemToMove.style.height = `${event.target.chartHeight}px`
-              itemToMove.style.width = `${event.target.chartWidth}px`;
-              (chartContainer.firstChild).before(itemToMove)
-            }
-          },
+          render: (event) => alignBlockElement(event),
+          redraw: (event) => alignBlockElement(event),
         },
       },
 
