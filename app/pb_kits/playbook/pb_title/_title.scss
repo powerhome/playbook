@@ -22,7 +22,9 @@
     @include pb_title_dark;
   }
 
-  &[class*=_link] {
-    color: $primary_action;
+  @each $color_name, $color_value in $status_colors {
+    &[class*=_#{$color_name}]  {
+      color: map-get($status_color_text, $color_name);
+    }
   }
 }

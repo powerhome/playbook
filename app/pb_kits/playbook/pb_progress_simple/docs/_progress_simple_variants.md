@@ -1,0 +1,1 @@
+Progress Simple can pass colors - primary, green and red. Variants names are `default`, `positive`, and `negative` respectively.

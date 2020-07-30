@@ -9,12 +9,38 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 - Updated Label Value Kit to inlcude Installation Kit and Logistic Kit variations ([#915](https://github.com/powerhome/playbook/pull/915) @christinaatai)
+- Updated Time Range Inline to arrow and deemphasized icons. ([#933](https://github.com/powerhome/playbook/pull/933)  @megantrimble)
 
-## Added
+### Added
+- Added colors (green and red) to Progress Simple Kit ([#935](https://github.com/powerhome/playbook/pull/935) @christinaatai)
+- Added className, id, data, aria props to React Image kit, added aria props to Rails Image kit. ([#927](https://github.com/powerhome/playbook/pull/927)  @kellyeryan)
 - Variant prop added to allow typography kit text to change to primary color ([#921](https://github.com/powerhome/playbook/pull/921)  @kellyeryan)
 
 ### Removed
 - Deleted Installation Kit and Logistic Kit ([#915](https://github.com/powerhome/playbook/pull/915) @christinaatai)
+
+### Fixed
+- Added disabled attribute to button. ([#934](https://github.com/powerhome/playbook/pull/934)  @KatherineMuedas)
+
+
+## [v5.5.1] 2020-7-24
+
+### Added
+- Added flexible classes to body typography kit. ([#929](https://github.com/powerhome/playbook/pull/929)  @jasoncypret)
+
+
+## [v5.5.0] 2020-7-23
+
+### Added
+- Added className prop as well as aria, data, id props to React Legend kit. Added aria props to Rails Legend kit. ([#924](https://github.com/powerhome/playbook/pull/924)  @kellyeryan)
+- Variant prop added to allow typography kit text to change to primary color ([#921](https://github.com/powerhome/playbook/pull/921)  @kellyeryan)
+- Added aria, data props to React Dashboard Value kit; added aria props to Rails kit. ([#909](https://github.com/powerhome/playbook/pull/909) @kellyeryan)
+- Added Collection Detail Full Page Example ([#902](https://github.com/powerhome/playbook/pull/902) @evalouderback)
+
+### Fixed
+- Fixed spacing conflicts with Caption sizing props ([#925](https://github.com/powerhome/playbook/pull/925) @jasperfurniss)
+- Limited Popover overflow property to popovers with max width or height ([#922](https://github.com/powerhome/playbook/pull/922) @bh247484)
+
 
 ## [v5.3.0] 2020-7-9
 

@@ -17,7 +17,7 @@ module Playbook
                  default: "h3"
       prop :text
       prop :variant, type: Playbook::Props::Enum,
-                     values: [nil, "link"],
+                     values: [nil, "primary"],
                      default: nil
 
       def classname

@@ -3,9 +3,9 @@ import { Image } from '../../'
 
 const DefaultImage = () => {
   return (
-    <div>
-      <Image url="https://unsplash.it/500/400/?image=634" />
-    </div>
+    <Image
+        url="https://unsplash.it/500/400/?image=634"
+    />
   )
 }
 
