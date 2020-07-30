@@ -17,7 +17,11 @@ module Playbook
                  default: "h3"
       prop :text
       prop :variant, type: Playbook::Props::Enum,
+<<<<<<< HEAD
                      values: [nil, "link"],
+=======
+                     values: [nil, "primary"],
+>>>>>>> Moved Installation Kit and Logistic Kit so that they're part of Label Value Kit (#915)
                      default: nil
 
       def classname
