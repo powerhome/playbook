@@ -56,29 +56,6 @@ module Playbook
         end
       end
 
-      def color_variables
-        colors.collect! do |color|
-          case color
-          when "data-1"
-            "#0056cf"
-          when "data-2"
-            "#f9bb00"
-          when "data-3"
-            "#9e64e9"
-          when "data-4"
-            "#00ca74"
-          when "data-5"
-            "#fd804c"
-          when "data-6"
-            "#144075"
-          when "data-7"
-            "#00c4d7"
-          when "data-8"
-            "#ff2229"
-          end
-        end
-      end
-
       def rounded_border_width
         rounded ? 20 : nil
       end
@@ -87,11 +64,10 @@ module Playbook
         rounded == true ? 'null' : nil
       end
 
-
       def chart_options
         {
           id: id,
-          colors: color_variables,
+          colors: colors,
           borderColor: rounded_border_color,
           borderWidth: rounded_border_width,
           chartData: chart_data_formatted,

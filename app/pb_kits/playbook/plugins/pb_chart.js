@@ -2,7 +2,25 @@ import Highcharts from 'highcharts'
 
 import { highchartsTheme } from '../pb_dashboard/pbChartsLightTheme.js'
 
+import colors from '../tokens/_colors.scss'
+
 require('highcharts/modules/variable-pie')(Highcharts)
+
+// Map Data Color String Props to our SCSS Variables
+const mapColors = (array) => {
+  const newArray = array.map((item) => {
+    return item == 'data-1' ? `${colors.data_1}`
+      : item == 'data-2' ? `${colors.data_2}`
+        : item == 'data-3' ? `${colors.data_3}`
+          : item == 'data-4' ? `${colors.data_4}`
+            : item == 'data-5' ? `${colors.data_5}`
+              : item == 'data-6' ? `${colors.data_6}`
+                : item == 'data-7' ? `${colors.data_7}`
+                  : item == 'data-8' ? `${colors.data_8}`
+                    : ''
+  })
+  return newArray
+}
 
 class pbChart {
   defaults = {
@@ -69,7 +87,7 @@ class pbChart {
 
       plotOptions: {
         pie: {
-          colors: options.colors.length > 0 ? this.defaults.colors : highchartsTheme.colors,
+          colors: options.colors.length > 0 ? mapColors(options.colors) : highchartsTheme.colors,
           dataLabels: {
             enabled: this.defaults.dataLabels,
             connectorShape: 'straight',
