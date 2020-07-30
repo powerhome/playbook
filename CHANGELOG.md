@@ -20,7 +20,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 - Updated failing spec test after update ([#940](https://github.com/powerhome/playbook/pull/940) @jasoncypret)
 
-
 ## [v6.0.0] 2020-7-30
 
 ### Changed
