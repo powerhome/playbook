@@ -4,10 +4,10 @@
     class: object.classname) do %>
       <div class="pb_time_range_inline_wrapper">
         <% if object.icon == true %>
-          <%= pb_rails(object.text_kit, props: { tag: "span", dark: object.dark, text: pb_rails("icon", props: { icon: "clock", dark: object.dark, classname:"pb_time_range_inline_icon", fixed_width: true, size: object.size }) }) %>
+          <%= pb_rails(object.text_kit, props: { tag: "span", dark: object.dark, color: object.icon_color, text: pb_rails("icon", props: { icon: "clock", dark: object.dark, classname:"pb_time_range_inline_icon", fixed_width: true, size: object.size }) }) %>
         <% end %>
         <%= pb_rails(object.text_kit, props: { tag: "span", dark: object.dark, text: object.format_start_time_string }) %>
-        <%= pb_rails(object.text_kit, props: { tag: "span", dark: object.dark, classname:"pb_time_range_inline_dash", text: "—" }) %>
+        <%= pb_rails(object.text_kit, props: { tag: "span", dark: object.dark, color: object.icon_color, classname:"pb_time_range_inline_arrow", text: pb_rails("icon", props: { icon: "long-arrow-right", fixed_width: true, classname:"pb_time_range_inline_arrow"}) }) %>
         <%= pb_rails(object.text_kit, props: { tag: "span", dark: object.dark, text: object.format_end_time_string }) %>
         <% if object.timezone == true %>
           <%= pb_rails(object.text_kit, props: { tag: "span", color: object.text_timezone_color, classname:"pb_time_range_inline_timezone", text: object.pb_date_end_time.to_timezone.upcase }) %>

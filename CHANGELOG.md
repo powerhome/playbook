@@ -5,9 +5,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-### Added
+## Unreleased
 
+### Added
+- Added colors (green and red) to Progress Simple Kit ([#935](https://github.com/powerhome/playbook/pull/935) @christinaatai)
 - Added className, id, data, aria props to React Image kit, added aria props to Rails Image kit. ([#927](https://github.com/powerhome/playbook/pull/927)  @kellyeryan)
+
+### Changed
+- Updated Time Range Inline to arrow and deemphasized icons. ([#933](https://github.com/powerhome/playbook/pull/933)  @megantrimble)
+
+### Fixed
+- Added disabled attribute to button. ([#934](https://github.com/powerhome/playbook/pull/934)  @KatherineMuedas)
+
 
 ## [v5.5.1] 2020-7-24
 
