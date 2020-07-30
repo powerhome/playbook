@@ -15,6 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Added colors (green and red) to Progress Simple Kit ([#935](https://github.com/powerhome/playbook/pull/935) @christinaatai)
 - Added className, id, data, aria props to React Image kit, added aria props to Rails Image kit. ([#927](https://github.com/powerhome/playbook/pull/927)  @kellyeryan)
 - Variant prop added to allow typography kit text to change to primary color ([#921](https://github.com/powerhome/playbook/pull/921)  @kellyeryan)
+- Circle Chart Additions ([#932](https://github.com/powerhome/playbook/pull/932)  @jasperfurniss)
 
 ### Removed
 - Deleted Installation Kit and Logistic Kit ([#915](https://github.com/powerhome/playbook/pull/915) @christinaatai)
@@ -22,16 +23,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 - Added disabled attribute to button. ([#934](https://github.com/powerhome/playbook/pull/934)  @KatherineMuedas)
 
-
 ## [v5.5.1] 2020-7-24
 
 ### Added
-- Circle Chart Additions ([#932](https://github.com/powerhome/playbook/pull/932)  @jasperfurniss)
-
-## [v5.5.1] 2020-7-24
-
-### Added
-
 - Added flexible classes to body typography kit. ([#929](https://github.com/powerhome/playbook/pull/929)  @jasoncypret)
 
 
