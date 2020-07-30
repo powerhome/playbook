@@ -14,7 +14,7 @@ RSpec.describe Playbook::PbTitle::Title do
     .with_default("h3")
      }
   it { is_expected.to define_enum_prop(:variant)
-     .with_values(nil, "primary")
+     .with_values(nil, "link")
      .with_default(nil)
       }
 
@@ -27,7 +27,7 @@ RSpec.describe Playbook::PbTitle::Title do
       expect(subject.new(size: nil).classname).to eq "pb_title_kit_3"
       expect(subject.new(size: 4).classname).to eq "pb_title_kit_4"
       expect(subject.new(tag: "h3").classname).to eq "pb_title_kit_3"
-      expect(subject.new(size: 4, variant: "primary").classname).to eq "pb_title_kit_4_primary"
+      expect(subject.new(size: 4, variant: "link").classname).to eq "pb_title_kit_4_link"
     end
   end
 end
