@@ -1,30 +1,30 @@
-import Highcharts from 'highcharts'
+import Highcharts from "highcharts"
 
-import { highchartsTheme } from '../pb_dashboard/pbChartsLightTheme.js'
-import colors from '../tokens/_colors.scss'
+import { highchartsTheme } from "../pb_dashboard/pbChartsLightTheme.js"
+import colors from "../tokens/_colors.scss"
 
-require('highcharts/modules/variable-pie')(Highcharts)
+require("highcharts/modules/variable-pie")(Highcharts)
 
 // Map Data Color String Props to our SCSS Variables
 const mapColors = (array) => {
   const newArray = array.map((item) => {
-    return item == 'data-1'
+    return item == "data-1"
       ? `${colors.data_1}`
-      : item == 'data-2'
-        ? `${colors.data_2}`
-        : item == 'data-3'
-          ? `${colors.data_3}`
-          : item == 'data-4'
-            ? `${colors.data_4}`
-            : item == 'data-5'
-              ? `${colors.data_5}`
-              : item == 'data-6'
-                ? `${colors.data_6}`
-                : item == 'data-7'
-                  ? `${colors.data_7}`
-                  : item == 'data-8'
-                    ? `${colors.data_8}`
-                    : ''
+      : item == "data-2"
+      ? `${colors.data_2}`
+      : item == "data-3"
+      ? `${colors.data_3}`
+      : item == "data-4"
+      ? `${colors.data_4}`
+      : item == "data-5"
+      ? `${colors.data_5}`
+      : item == "data-6"
+      ? `${colors.data_6}`
+      : item == "data-7"
+      ? `${colors.data_7}`
+      : item == "data-8"
+      ? `${colors.data_8}`
+      : ""
   })
   return newArray
 }
@@ -37,7 +37,7 @@ class pbChart {
     callbackRefreshAfter: () => {},
     callbackDestroyBefore: () => {},
     callbackDestroyAfter: () => {},
-    property: 'Value',
+    property: "Value",
   }
 
   extendDefaults(defaults, options) {
@@ -54,7 +54,7 @@ class pbChart {
     this.options = options
     this.settings = this.extendDefaults(this.defaults, options)
 
-    if (this.options.type == 'variablepie' || this.options.type == 'pie') {
+    if (this.options.type == "variablepie" || this.options.type == "pie") {
       this.setupPieChart(options)
     } else {
       this.setupChart()
@@ -108,7 +108,7 @@ class pbChart {
               : highchartsTheme.colors,
           dataLabels: {
             enabled: this.defaults.dataLabels,
-            connectorShape: 'straight',
+            connectorShape: "straight",
             connectorWidth: 3,
             format: this.defaults.dataLabelHtml,
           },
@@ -126,7 +126,7 @@ class pbChart {
           minPointSize: this.defaults.minPointSize,
           maxPointSize: this.defaults.maxPointSize,
           innerSize:
-            options.borderWidth == 20 ? '100%' : this.defaults.innerSize,
+            options.borderWidth == 20 ? "100%" : this.defaults.innerSize,
           data: this.defaults.chartData,
           zMin: this.defaults.zMin,
           startAngle: this.defaults.startAngle,
