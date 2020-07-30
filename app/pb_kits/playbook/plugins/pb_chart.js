@@ -1,9 +1,10 @@
-import Highcharts from "highcharts"
+import Highcharts from 'highcharts'
 
-import { highchartsTheme } from "../pb_dashboard/pbChartsLightTheme.js"
-import colors from "../tokens/_colors.scss"
+import { highchartsTheme } from '../pb_dashboard/pbChartsLightTheme.js'
+import colors from '../tokens/_colors.scss'
 
-require("highcharts/modules/variable-pie")(Highcharts)
+require('highcharts/modules/variable-pie')(Highcharts)
+
 
 // Map Data Color String Props to our SCSS Variables
 const mapColors = (array) => {
@@ -37,7 +38,7 @@ class pbChart {
     callbackRefreshAfter: () => {},
     callbackDestroyBefore: () => {},
     callbackDestroyAfter: () => {},
-    property: "Value",
+    property: 'Value',
   }
 
   extendDefaults(defaults, options) {
@@ -54,7 +55,7 @@ class pbChart {
     this.options = options
     this.settings = this.extendDefaults(this.defaults, options)
 
-    if (this.options.type == "variablepie" || this.options.type == "pie") {
+    if (this.options.type == 'variablepie' || this.options.type ==  'pie'){
       this.setupPieChart(options)
     } else {
       this.setupChart()
@@ -70,31 +71,23 @@ class pbChart {
       chart: {
         type: this.defaults.type,
         events: {
-          render: function (event) {
-            const itemToMove = document.querySelector(
-              `#wrapper-circle-chart-${event.target.renderTo.id} .pb_circle_chart_block`
-            )
-            const chartContainer = document.querySelector(
-              `#${event.target.renderTo.id}`
-            )
+          render: function(event) {
+            const itemToMove = document.querySelector(`#wrapper-circle-chart-${event.target.renderTo.id} .pb_circle_chart_block`)
+            const chartContainer = document.querySelector(`#${event.target.renderTo.id}`)
             if (itemToMove !== null) {
               itemToMove.style.height = `${event.target.chartHeight}px`
-              itemToMove.style.width = `${event.target.chartWidth}px`
-              chartContainer.firstChild.before(itemToMove)
+              itemToMove.style.width = `${event.target.chartWidth}px`;
+              (chartContainer.firstChild).before(itemToMove)
             }
           },
 
-          redraw: function (event) {
-            const itemToMove = document.querySelector(
-              `#wrapper-circle-chart-${event.target.renderTo.id} .pb_circle_chart_block`
-            )
-            const chartContainer = document.querySelector(
-              `#${event.target.renderTo.id}`
-            )
+          redraw: function(event){
+            const itemToMove = document.querySelector(`#wrapper-circle-chart-${event.target.renderTo.id} .pb_circle_chart_block`)
+            const chartContainer = document.querySelector(`#${event.target.renderTo.id}`)
             if (itemToMove !== null) {
               itemToMove.style.height = `${event.target.chartHeight}px`
-              itemToMove.style.width = `${event.target.chartWidth}px`
-              chartContainer.firstChild.before(itemToMove)
+              itemToMove.style.width = `${event.target.chartWidth}px`;
+              (chartContainer.firstChild).before(itemToMove)
             }
           },
         },
@@ -102,17 +95,15 @@ class pbChart {
 
       plotOptions: {
         pie: {
-          colors:
-            options.colors.length > 0
-              ? mapColors(options.colors)
-              : highchartsTheme.colors,
+          colors: options.colors.length > 0 ? mapColors(options.colors) : highchartsTheme.colors,
           dataLabels: {
             enabled: this.defaults.dataLabels,
-            connectorShape: "straight",
+            connectorShape: 'straight',
             connectorWidth: 3,
             format: this.defaults.dataLabelHtml,
           },
           showInLegend: this.defaults.showInLegend,
+
         },
       },
 
@@ -121,20 +112,16 @@ class pbChart {
         pointFormat: this.defaults.tooltipHtml,
         useHTML: this.defaults.useHTML,
       },
-      series: [
-        {
-          minPointSize: this.defaults.minPointSize,
-          maxPointSize: this.defaults.maxPointSize,
-          innerSize:
-            options.borderWidth == 20 ? "100%" : this.defaults.innerSize,
-          data: this.defaults.chartData,
-          zMin: this.defaults.zMin,
-          startAngle: this.defaults.startAngle,
-          borderWidth: this.defaults.borderWidth,
-          borderColor:
-            options.borderWidth == 20 ? null : this.defaults.innerSize,
-        },
-      ],
+      series: [{
+        minPointSize: this.defaults.minPointSize,
+        maxPointSize: this.defaults.maxPointSize,
+        innerSize: options.borderWidth == 20 ? '100%' : this.defaults.innerSize,
+        data: this.defaults.chartData,
+        zMin: this.defaults.zMin,
+        startAngle: this.defaults.startAngle,
+        borderWidth: this.defaults.borderWidth,
+        borderColor: options.borderWidth == 20 ? null : this.defaults.innerSize,
+      }],
       credits: false,
     })
   }
