@@ -23,6 +23,8 @@
     @include pb_card;
     border: 0;
     box-shadow: $shadow_deeper;
+  }
+  .overflow_handling {
     overflow: auto;
   }
 }
@@ -49,6 +51,8 @@
   @include pb_card;
   border: 0;
   box-shadow: $shadow_deeper;
+}
+.overflow_handling {
   overflow: auto;
 }
 

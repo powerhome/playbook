@@ -7,14 +7,15 @@ import { spacing } from '../utilities/spacing.js'
 
 type TitleProps = {
   aria?: object,
-  className?: String,
   children?: Array<React.ReactNode> | React.ReactNode,
+  className?: String,
   dark?: Boolean,
   data?: object,
   id?: String,
   size?: 1 | 2 | 3 | 4,
   tag?: "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "div",
   text?: String,
+  variant?: null | "primary",
 }
 
 const Title = (props: TitleProps) => {
@@ -27,12 +28,14 @@ const Title = (props: TitleProps) => {
     id,
     size = 3,
     tag = 'h3',
-    text } = props
+    text,
+    variant = null,
+  } = props
 
-  const themeStyle = dark === true ? '_dark' : ''
+  const themeStyle = dark === true ? 'dark' : ''
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
-  const classes = classnames(buildCss('pb_title_kit', size, themeStyle), className, spacing(props))
+  const classes = classnames(buildCss('pb_title_kit', size, themeStyle, variant), className, spacing(props))
   const Tag = `${tag}`
 
   return (
