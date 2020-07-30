@@ -9,6 +9,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 - Added colors (green and red) to Progress Simple Kit ([#935](https://github.com/powerhome/playbook/pull/935) @christinaatai)
+## [v5.5.1] 2020-7-24
+
+### Added
+- Added flexible classes to body typography kit. ([#929](https://github.com/powerhome/playbook/pull/929)  @jasoncypret)
+
 
 ## [v5.5.0] 2020-7-23
 
