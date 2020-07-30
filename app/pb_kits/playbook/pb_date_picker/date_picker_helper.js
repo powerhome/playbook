@@ -18,6 +18,8 @@ const datePickerHelper = (config) => {
     if (defaultDate !== '') {
       if (propModel === 'rails' && defaultDate.includes('[') == true) {
         return JSON.parse(defaultDate.replace(/&quot;/g, '"'))
+      } else if (defaultDate === 'blank') {
+        return ''
       } else {
         return defaultDate
       }

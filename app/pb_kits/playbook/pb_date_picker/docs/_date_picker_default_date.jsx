@@ -19,6 +19,11 @@ const DatePickerDefaultDate = () => (
         mode="range"
         pickerId="date-picker-default-date3"
     />
+    <DatePicker
+        defaultDate="blank"
+        label="Blank"
+        pickerId="date-picker-default-date4"
+    />
   </div>
 )
 
