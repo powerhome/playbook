@@ -53,6 +53,12 @@ module Playbook
         nil
       end
 
+      def icon_color
+        return "light" if size == "sm"
+
+        nil
+      end
+
       def text_kit
         case size
         when "xs"

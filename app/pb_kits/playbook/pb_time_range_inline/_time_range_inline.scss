@@ -1,3 +1,4 @@
+
 [class^=pb_time_range_inline_kit] {
   &[class*=_center]  {
     & > [class^=pb_caption],
@@ -19,7 +20,8 @@
   }
   [class^=pb_time_range_inline_wrapper] {
     display: flex;
-    [class*=pb_time_range_inline_dash] {
+    align-items: center;
+    [class*=pb_time_range_inline_arrow] {
       margin-left: 4px;
       margin-right: 4px;
     }

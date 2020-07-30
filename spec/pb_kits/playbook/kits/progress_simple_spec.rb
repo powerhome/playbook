@@ -15,6 +15,9 @@ RSpec.describe Playbook::PbProgressSimple::ProgressSimple do
     .with_default(false) }
   it { is_expected.to define_prop(:percent).of_type(Playbook::Props::Percentage) }
   it { is_expected.to define_prop(:width) }
+  it { is_expected.to define_enum_prop(:variant)
+    .with_values("default", "positive", "negative")
+    .with_default("default") }
 
   describe "#classname" do
     it "returns namespaced class name", :aggregate_failures do
@@ -22,6 +25,9 @@ RSpec.describe Playbook::PbProgressSimple::ProgressSimple do
       expect(subject.new(align: "center").classname).to eq "pb_progress_simple_kit_center"
       expect(subject.new(muted: true).classname).to eq "pb_progress_simple_kit_muted_left"
       expect(subject.new(classname: "additional_class").classname).to eq "pb_progress_simple_kit_left additional_class"
+      expect(subject.new(variant: "default").classname).to eq "pb_progress_simple_kit_left"
+      expect(subject.new(variant: "positive").classname).to eq "pb_progress_simple_kit_positive_left"
+      expect(subject.new(variant: "negative").classname).to eq "pb_progress_simple_kit_negative_left"
     end
   end
 

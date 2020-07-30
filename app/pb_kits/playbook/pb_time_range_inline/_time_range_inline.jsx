@@ -45,19 +45,33 @@ const TimeRangeInline = (props: TimeRangeInlineProps) => {
     startTime,
     endTime,
   } = props
-  const separator = `${'—'}`
+  const separator = (
+    <Body color="light">
+      <Icon
+          className="pb_time_range_inline_arrow"
+          dark={dark}
+          fixedWidth
+          icon="long-arrow-right"
+      />
+    </Body>
+  )
 
   const iconContent = () => {
     return (
       <If condition={icon}>
-        <Icon
-            className="pb_time_range_inline_icon"
-            dark={dark}
-            fixedWidth
-            icon="clock"
-            size={size}
+        <Body
+            color="light"
             tag="span"
-        />
+        >
+          <Icon
+              className="pb_time_range_inline_icon"
+              dark={dark}
+              fixedWidth
+              icon="clock"
+              size={size}
+              tag="span"
+          />
+        </Body>
       </If>
     )
   }
@@ -80,7 +94,7 @@ const TimeRangeInline = (props: TimeRangeInlineProps) => {
             </time>
           </Caption>
           <Caption
-              className="pb_time_range_inline_dash"
+              className="pb_time_range_inline_arrow"
               dark={dark}
               tag="span"
           >
@@ -119,7 +133,7 @@ const TimeRangeInline = (props: TimeRangeInlineProps) => {
             </time>
           </Body>
           <Body
-              className="pb_time_range_inline_dash"
+              className="pb_time_range_inline_arrow"
               dark={dark}
               tag="span"
           >
