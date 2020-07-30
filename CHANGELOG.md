@@ -21,6 +21,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [v5.5.1] 2020-7-24
 
 ### Added
+- Circle Chart Additions ([#932](https://github.com/powerhome/playbook/pull/932)  @jasperfurniss)
 - Added flexible classes to body typography kit. ([#929](https://github.com/powerhome/playbook/pull/929)  @jasoncypret)
 
 
