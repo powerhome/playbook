@@ -21,6 +21,9 @@ module Playbook
       # Should we be allowing the user to pass this value at all?
       # could this possibly be [sm, md, lg]?
       prop :width, default: "100%"
+      prop :variant, type: Playbook::Props::Enum,
+                     values: %w[default positive negative],
+                     default: "default"
 
       def number_value
         validate_required_progress_props
@@ -53,13 +56,17 @@ module Playbook
       end
 
       def classname
-        generate_classname("pb_progress_simple_kit", muted_class, align)
+        generate_classname("pb_progress_simple_kit", muted_class, variant_class, align)
       end
 
     private
 
       def muted_class
         muted ? "muted" : nil
+      end
+
+      def variant_class
+        variant == "default" ? nil : variant
       end
 
       def validate_required_progress_props
