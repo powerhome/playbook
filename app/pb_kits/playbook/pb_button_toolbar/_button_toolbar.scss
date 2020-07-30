@@ -16,6 +16,12 @@
         &:hover {
           background-color:darken($royal, 20%);
         }
+
+        &[class*=secondary] {
+          &:hover {
+            background-color: lighten($royal, 40%)
+          }
+        }
   
         &:last-child {
           margin-right: 0;
@@ -35,6 +41,16 @@
         flex-basis: auto;
         width: 100%;
         margin-bottom: $space-xs;
+
+        &:hover {
+          background-color:darken($royal, 20%);
+        }
+
+        &[class*=secondary] {
+          &:hover {
+            background-color:lighten($royal, 30%)
+          }
+        }
   
         &:last-child {
           margin-bottom: 0;
