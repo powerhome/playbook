@@ -5,6 +5,20 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+<<<<<<< HEAD
+=======
+## Unreleased
+
+### Added
+- Added colors (green and red) to Progress Simple Kit ([#935](https://github.com/powerhome/playbook/pull/935) @christinaatai)
+
+## [v5.5.1] 2020-7-24
+
+### Added
+- Added flexible classes to body typography kit. ([#929](https://github.com/powerhome/playbook/pull/929)  @jasoncypret)
+
+
+>>>>>>> 966e385d... Updated changelog and spec
 ## [v5.5.0] 2020-7-23
 
 ### Added
