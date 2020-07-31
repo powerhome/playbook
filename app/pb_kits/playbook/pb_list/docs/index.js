@@ -10,4 +10,5 @@ export { default as ListLayoutLeft } from './_list_layout_left.jsx'
 export { default as ListLg } from './_list_lg.jsx'
 export { default as ListOrdered } from './_list_ordered.jsx'
 export { default as ListBorderless } from './_list_borderless.jsx'
-
+export { default as ListCheckbox } from './_list_checkbox.jsx'
+export { default as ListCheckboxDark } from './_list_checkbox_dark.jsx'
