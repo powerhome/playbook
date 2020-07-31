@@ -19,7 +19,7 @@
 
         &[class*=secondary] {
           &:hover {
-            background-color: lighten($royal, 40%)
+            background-color:rgba($primary_action, $opacity_3)
           }
         }
   
@@ -48,7 +48,7 @@
 
         &[class*=secondary] {
           &:hover {
-            background-color:lighten($royal, 30%)
+            background-color:rgba($primary_action, $opacity_3)
           }
         }
   
