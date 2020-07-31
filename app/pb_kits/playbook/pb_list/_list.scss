@@ -29,3 +29,11 @@
     @include pb_list_layout_right;
   }
 }
+
+[class*=pb_list_kit] li {
+  display: block;
+}
+
+[class^="pb_checkbox_kit"] {
+  display: flex;
+}

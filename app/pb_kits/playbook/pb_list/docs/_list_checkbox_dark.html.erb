@@ -1,6 +1,7 @@
 <%= pb_rails("list", props: {ordered: false, dark: true, borderless: false}) do %>
     <%= pb_rails("list/item") do %>
     	<%= pb_rails("checkbox", props: {
+            dark: true,
             text: "Unselected",
             value: "checkbox-value",
             name: "checkbox-name"
@@ -8,6 +9,7 @@
     <% end %>
     <%= pb_rails("list/item") do %>
         <%= pb_rails("checkbox", props: {
+            dark: true,
             text: "Hover",
             value: "checkbox-value",
             name: "checkbox-name"
@@ -15,6 +17,7 @@
     <% end %>
     <%= pb_rails("list/item") do %>
         <%= pb_rails("checkbox", props: {
+            dark: true,
             text: "Selected",
             value: "checkbox-value",
             checked: true,
@@ -23,6 +26,7 @@
     <% end %>
     <%= pb_rails("list/item") do %>
         <%= pb_rails("checkbox", props: {
+            dark: true,
             text: "Unselected Last",
             value: "checkbox-value",
             name: "checkbox-name"
