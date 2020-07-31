@@ -21,6 +21,8 @@ module Playbook
                       default: false
       prop :role
       prop :tabindex
+      prop :is_checkbox, type: Playbook::Props::Boolean,
+                         default: false
 
       def list_classname
         [
@@ -30,6 +32,7 @@ module Playbook
           dark_class,
           size_class,
           layout_class,
+          checkbox_class,
         ].compact.join("_")
       end
 
@@ -63,6 +66,10 @@ module Playbook
 
       def xpadding_class
         xpadding ? "xpadding" : nil
+      end
+
+      def checkbox_class
+        is_checkbox ? "checkbox_list" : nil
       end
     end
   end

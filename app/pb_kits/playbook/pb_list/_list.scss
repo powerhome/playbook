@@ -30,10 +30,14 @@
   }
 }
 
-[class*=pb_list_kit] li {
-  display: block;
+[class*=_checkbox_list] {
+  li {
+    display: block;
+  }
+
+  [class^="pb_checkbox_kit"] {
+    display: flex;
+  }
 }
 
-[class^="pb_checkbox_kit"] {
-  display: flex;
-}
+

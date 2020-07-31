@@ -4,7 +4,9 @@ import { Checkbox, List, ListItem } from '../../'
 const ListDefault = () => {
   return (
     <>
-      <List>
+      <List
+          checkbox_list
+      >
         <ListItem>
             <Checkbox
                 name="default name"

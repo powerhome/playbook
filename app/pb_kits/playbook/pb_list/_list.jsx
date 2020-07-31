@@ -19,6 +19,7 @@ type ListProps = {
   tabIndex?: String,
   size?: String,
   xpadding: Boolean,
+  checkbox_list: Boolean,
 }
 
 const List = (props: ListProps) => {
@@ -36,6 +37,7 @@ const List = (props: ListProps) => {
     size = '',
     tabIndex,
     xpadding = false,
+    checkbox_list = false,
   } = props
 
   const layoutClass = {
@@ -52,6 +54,7 @@ const List = (props: ListProps) => {
       borderless: borderless,
       ordered: ordered,
       xpadding: xpadding,
+      checkbox_list: checkbox_list,
     }), className,
     spacing(props)
   )
