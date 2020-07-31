@@ -2,21 +2,44 @@
 
 import React from 'react'
 import classnames from 'classnames'
+import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
 import { spacing } from '../utilities/spacing.js'
 
 type ImageProps = {
-  url: string,
-  alt?: string,
+  alt?: String,
+  aria?: object,
+  className?: String,
+  data?: object,
+  id?: String,
+  url: String,
 }
 
 const Image = (props: ImageProps) => {
-  const { alt = '', url = '' } = props
+  const {
+    alt = '',
+    aria = {},
+    className,
+    data = {},
+    id,
+    url = '',
+  } = props
+
+  const ariaProps = buildAriaProps(aria)
+  const classes = classnames(buildCss('pb_image lazyload blur_up'), className, spacing(props))
+  const dataProps = buildDataProps(data)
+
   return (
-    <img
-        alt={alt}
-        className={classnames('pb_image_kit lazyload blur_up', spacing(props))}
-        data-src={url}
-    />
+    <div>
+      <img
+          {...ariaProps}
+          {...dataProps}
+          alt={alt}
+          className={classes}
+          data-src={url}
+          id={id}
+          src={url}
+      />
+    </div>
   )
 }
 
