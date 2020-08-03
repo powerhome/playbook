@@ -68,7 +68,7 @@ class pbChart {
     this.settings = this.extendDefaults(this.defaults, options)
 
     if (this.options.type == 'variablepie' || this.options.type ==  'pie'){
-      this.setupPieChart()
+      this.setupPieChart(options)
     } else if (this.options.type == 'gauge') {
       this.setupGauge()
     } else {
@@ -146,7 +146,7 @@ class pbChart {
     }
   }
 
-  setupPieChart() {
+  setupPieChart(options) {
     Highcharts.setOptions(highchartsTheme)
     Highcharts.chart(this.defaults.id, {
       title: {
