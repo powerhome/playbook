@@ -1,21 +1,46 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+/* @flow */
 
-const propTypes = {
-  className: PropTypes.string,
-  id: PropTypes.string,
+import React from "react";
+import classnames from 'classnames'
+
+import DateTime from '../pb_kit/dateTime.js'
+import { buildCss } from '../utilities/props'
+import { spacing } from '../utilities/spacing.js'
+
+import { Title } from "../";
+
+type TimeStackedProps = {
+  className?: String | Array<String>,
+  dark?: Boolean,
+  data?: String,
+  date: String,
+  id?: String,
+  align?: "left" | "center" | "right",
+  // tag?: "body" | "caption",
 }
 
-class Time extends React.Component {
-  render() {
+const Time = (props: TimeStackedProps) => {
+  
+  
+    const { className, dark = false, date, tag = "body" } = props;
+    const classes = classnames(
+      className,
+      buildCss("pb_time_stacked_kit", {
+        dark: dark,
+      }),
+      spacing(props)
+    );
+
+    const dateTimestamp = new DateTime({ value: date });
+    
     return (
-      <div className="pb_time">
-        <span>{'TIME CONTENT'}</span>
+      <div className={classes}>
+        <div className="pb_time">
+          <Title tag="span" size={3} text={dateTimestamp.toTimeWithMeridian()} color="light" />
+          <span className="pb_time_timezone">{dateTimestamp.toTimezone()}</span>
+        </div>
       </div>
-    )
-  }
+    );
 }
 
-Time.propTypes = propTypes
-
-export default Time
+export default Time;
