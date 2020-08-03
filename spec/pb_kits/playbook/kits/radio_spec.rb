@@ -20,7 +20,7 @@ RSpec.describe Playbook::PbRadio::Radio do
         expect(subject.new(checked: true).classname).to eq "pb_radio_kit"
         expect(subject.new(dark: true, checked: true).classname).to eq "pb_radio_kit_dark dark"
         expect(subject.new(checked: false, error: true).classname).to eq "pb_radio_kit error"
-        expect(subject.new(checked: false, dark: true, error: true).classname).to eq "pb_radio_kit_dark error"
+        expect(subject.new(checked: false, dark: true, error: true).classname).to eq "pb_radio_kit_dark dark error"
     end
   end
 end
