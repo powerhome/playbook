@@ -14,6 +14,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [v6.0.0] 2020-7-30
 
+### Added
+
+- Added Button Toolbar kit ([#908](https://github.com/powerhome/playbook/pull/908)  @kellyeryan)
+
 ### Changed
 - Updated Label Value Kit to inlcude Installation Kit and Logistic Kit variations ([#915](https://github.com/powerhome/playbook/pull/915) @christinaatai)
 - Updated Time Range Inline to arrow and deemphasized icons. ([#933](https://github.com/powerhome/playbook/pull/933)  @megantrimble)
