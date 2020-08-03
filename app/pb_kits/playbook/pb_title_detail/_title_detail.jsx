@@ -2,7 +2,7 @@
 
 import React from 'react'
 import classnames from 'classnames'
-import { systemProps } from '../utilities/systemProps.js'
+import { globalProps } from '../utilities/globalProps.js'
 
 import { Body, Title } from '../'
 
@@ -25,7 +25,7 @@ const TitleDetail = (props: TitleDetailProps) => {
   return (
     <div
         {...dataProps}
-        className={classnames(className, pbCss, systemProps(props))}
+        className={classnames(className, pbCss, globalProps(props))}
         id={id}
     >
       <Title

@@ -7,7 +7,7 @@ import { Caption } from '../'
 
 import { buildCss, buildDataProps } from '../utilities/props'
 
-import { systemProps } from '../utilities/systemProps.js'
+import { globalProps } from '../utilities/globalProps.js'
 
 type TimestampProps = {
   id?: String,
@@ -24,7 +24,7 @@ const Timestamp = (props: TimestampProps) => {
   return (
     <div
         {...dataProps}
-        className={classnames(className, pbCss, systemProps(props))}
+        className={classnames(className, pbCss, globalProps(props))}
         id={id}
     >
       <Caption

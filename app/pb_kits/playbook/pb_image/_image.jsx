@@ -2,7 +2,7 @@
 
 import React from 'react'
 import classnames from 'classnames'
-import { systemProps } from '../utilities/systemProps.js'
+import { globalProps } from '../utilities/globalProps.js'
 
 type ImageProps = {
   alt?: String,
@@ -30,7 +30,7 @@ const Image = (props: ImageProps) => {
   return (
     <img
         alt={alt}
-        className={classnames('pb_image_kit lazyload blur_up', systemProps(props))}
+        className={classnames('pb_image_kit lazyload blur_up', globalProps(props))}
         data-src={url}
     />
   )

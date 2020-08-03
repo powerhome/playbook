@@ -6,7 +6,7 @@ import classnames from 'classnames'
 
 import { Icon } from '../'
 import { buildCss } from '../utilities/props'
-import { systemProps } from '../utilities/systemProps.js'
+import { globalProps } from '../utilities/globalProps.js'
 
 type IconCircleProps = {
   className?: string,
@@ -27,7 +27,7 @@ const IconCircle = (props: IconCircleProps) => {
   const css = buildCss('pb_icon_circle_kit', size, variant)
 
   return (
-    <div className={classnames(className, css, systemProps(props))}>
+    <div className={classnames(className, css, globalProps(props))}>
       <Icon icon={icon} />
     </div>
   )

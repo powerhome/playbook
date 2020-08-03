@@ -3,7 +3,7 @@
 import React, { type Node } from 'react'
 import classnames from 'classnames'
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
-import { systemProps } from '../utilities/systemProps.js'
+import { globalProps } from '../utilities/globalProps.js'
 
 type ListItemProps = {
   aria?: object,
@@ -28,7 +28,7 @@ const ListItem = (props: ListItemProps) => {
   const dataProps = buildDataProps(data)
   const classes = classnames(
     buildCss('pb_item_kit'), className,
-    systemProps(props)
+    globalProps(props)
   )
 
   return (

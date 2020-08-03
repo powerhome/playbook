@@ -4,7 +4,7 @@ import React from 'react'
 import classnames from 'classnames'
 import { Caption } from '../'
 import { buildCss } from '../utilities/props'
-import { systemProps } from '../utilities/systemProps.js'
+import { globalProps } from '../utilities/globalProps.js'
 
 type NavProps = {
   title: String,
@@ -31,7 +31,7 @@ const Nav = (props: NavProps) => {
     highlight: highlight,
   })
   return (
-    <div className={classnames(cardCss, systemProps(props))}>
+    <div className={classnames(cardCss, globalProps(props))}>
       <If condition={title}>
         <div className="pb_nav_list_title">
           <a

@@ -3,7 +3,7 @@ import React from 'react'
 import classnames from 'classnames'
 import { Caption } from '../'
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
-import { systemProps } from '../utilities/systemProps.js'
+import { globalProps } from '../utilities/globalProps.js'
 
 type SectionSeparatorProps = {
   aria: object,
@@ -30,7 +30,7 @@ const SectionSeparator = (props: SectionSeparatorProps) => {
   const themeStyle = dark === true ? '_dark' : ''
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
-  const classes = classnames(buildCss('pb_section_separator_kit', variant, orientation, themeStyle), className, systemProps(props))
+  const classes = classnames(buildCss('pb_section_separator_kit', variant, orientation, themeStyle), className, globalProps(props))
 
   return (
 

@@ -3,7 +3,7 @@
 import React from 'react'
 import classnames from 'classnames'
 import { buildCss } from '../utilities/props'
-import { systemProps } from '../utilities/systemProps.js'
+import { globalProps } from '../utilities/globalProps.js'
 type FlexProps = {
   children: Array<React.ReactNode> | React.ReactNode,
   className?: String,
@@ -52,7 +52,7 @@ const Flex = (props: FlexProps) => {
           wrapClass
         ),
         className,
-        systemProps(props)
+        globalProps(props)
       )}
     >
       {children}

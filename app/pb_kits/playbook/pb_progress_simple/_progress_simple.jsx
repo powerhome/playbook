@@ -2,7 +2,7 @@
 import React from 'react'
 import classnames from 'classnames'
 import { buildCss } from '../utilities/props'
-import { systemProps } from '../utilities/systemProps.js'
+import { globalProps } from '../utilities/globalProps.js'
 
 type ProgressSimpleProps = {
   align?: "left" | "center" | "right",
@@ -43,7 +43,7 @@ const ProgressSimple = (props: ProgressSimpleProps) => {
   const wrapperClass = classnames(
     className,
     buildCss('pb_progress_simple_wrapper', align, { dark: dark }),
-    systemProps(props)
+    globalProps(props)
   )
 
   const kitClass = classnames(

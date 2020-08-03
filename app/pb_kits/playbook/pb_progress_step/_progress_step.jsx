@@ -3,7 +3,7 @@
 import React from 'react'
 import classnames from 'classnames'
 import { buildCss } from '../utilities/props'
-import { systemProps } from '../utilities/systemProps.js'
+import { globalProps } from '../utilities/globalProps.js'
 
 type ProgressStepProps = {
   className?: String,
@@ -33,7 +33,7 @@ const ProgressStep = (props: ProgressStepProps) => {
   )
 
   return (
-    <div className={classnames(progressStepCss, className, systemProps(props))}>
+    <div className={classnames(progressStepCss, className, globalProps(props))}>
       {children}
     </div>
   )

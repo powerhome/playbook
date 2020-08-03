@@ -3,7 +3,7 @@
 import React from 'react'
 import classnames from 'classnames'
 import { pbChart } from '../'
-import { systemProps } from '../utilities/systemProps.js'
+import { globalProps } from '../utilities/globalProps.js'
 
 type BarGraphProps = {
   axisTitle: String,
@@ -75,7 +75,7 @@ export default class BarGraph extends React.Component<BarGraphProps> {
 
     return (
       <div
-          className={classnames(className, systemProps(this.props))}
+          className={classnames(className, globalProps(this.props))}
           id={id}
       />
     )

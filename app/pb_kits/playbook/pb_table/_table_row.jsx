@@ -2,7 +2,7 @@
 import React from 'react'
 import classnames from 'classnames'
 import { buildCss } from '../utilities/props'
-import { systemProps } from '../utilities/systemProps.js'
+import { globalProps } from '../utilities/globalProps.js'
 
 type TableRowPropTypes = {
   children: Array<React.ReactNode> | React.ReactNode,
@@ -17,7 +17,7 @@ const TableRow = (props: TableRowPropTypes) => {
   const tableRowCss = buildCss('pb_table_row_kit', sideHighlightClass)
 
   return (
-    <tr className={classnames(tableRowCss, className, systemProps(props))}>
+    <tr className={classnames(tableRowCss, className, globalProps(props))}>
       {children}
     </tr>
   )

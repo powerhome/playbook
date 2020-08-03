@@ -2,7 +2,7 @@
 
 import React from 'react'
 import classnames from 'classnames'
-import { systemProps } from '../utilities/systemProps.js'
+import { globalProps } from '../utilities/globalProps.js'
 
 import Icon from '../pb_icon/_icon.jsx'
 
@@ -85,7 +85,7 @@ const Button = (props: ButtonPropTypes) => {
   } = props
 
   const buttonAria = buttonAriaProps(props)
-  const css = classnames(buttonClassName(props), className, systemProps(props))
+  const css = classnames(buttonClassName(props), className, globalProps(props))
   const loadingIcon = (
     <div className="loading-icon">
       <Icon
