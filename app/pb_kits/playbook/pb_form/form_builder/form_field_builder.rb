@@ -12,6 +12,7 @@ module Playbook
             options[:skip_default_ids] = false unless options.key?(:skip_default_ids)
             options[:required] = true if props[:required]
             options[:placeholder] = props[:placeholder] || ""
+            options[:value] = props[:value]
 
             if props.key?(:validation)
               validation = props[:validation]
