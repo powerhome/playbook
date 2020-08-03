@@ -127,6 +127,9 @@ class pbChart {
         followPointer: true,
       },
       plotOptions: {
+        series: {
+          animation: !this.defaults.disableAnimation,
+        },
         solidgauge: {
           dataLabels: {
             format: `<span class="prefix">${this.defaults.prefix}</span>` +

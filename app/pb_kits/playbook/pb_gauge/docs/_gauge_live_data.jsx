@@ -17,7 +17,7 @@ const GaugeLiveData = () => {
     }
     setName(namesArray[index])
   }
-  const namesArray = ['Name', 'Apples', 'Oranges', 'Bananas', 'Tangerines', 'Pineapples']
+  const namesArray = ['Name', 'Windows', 'Doors', 'Roofing', 'Siding', 'Gutters']
 
   return (
     <div>

@@ -2,6 +2,7 @@ examples:
   
   rails:
   - gauge_default: Default
+  - gauge_disable_animation: Disable Animation
   - gauge_title: Title
   - gauge_units: Units
   - gauge_full_circle: Full Circle
@@ -12,6 +13,7 @@ examples:
   
   react:
   - gauge_default: Default
+  - gauge_disable_animation: Disable Animation
   - gauge_title: Title 
   - gauge_units: Units
   - gauge_full_circle: Full Circle

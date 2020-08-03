@@ -21,6 +21,7 @@ module Playbook
                                     </b>'
       prop :full_circle, type: Playbook::Props::Boolean, default: false
       prop :show_labels, type: Playbook::Props::Boolean, default: false
+      prop :disable_animation, type: Playbook::Props::Boolean, default: false
       prop :min, type: Playbook::Props::Numeric, default: 0
       prop :max, type: Playbook::Props::Numeric, default: 100
 
@@ -34,6 +35,7 @@ module Playbook
           id: id,
           chartData: chart_data_formatted,
           circumference: full_circle ? [0, 360] : [-100, 100],
+          disableAnimation: disable_animation,
           height: height,
           min: min,
           max: max,
