@@ -14,6 +14,7 @@ type ProgressSimpleProps = {
   muted: Boolean,
   percent: String,
   value: Number,
+  variant?: "default" | "positive" | "negative",
   width: String,
 }
 
@@ -26,11 +27,14 @@ const ProgressSimple = (props: ProgressSimpleProps) => {
     muted = false,
     percent = '',
     value,
+    variant = 'default',
     width = '100%',
   } = props
   const styles = {
     width: width,
   }
+
+  const variantStyle = variant == 'default' ? '' : variant
 
   const valueStyles = {
     width: percent ? `${percent}%` : `${(value * 100) / max}%`,
@@ -44,7 +48,7 @@ const ProgressSimple = (props: ProgressSimpleProps) => {
 
   const kitClass = classnames(
     className,
-    buildCss('pb_progress_simple_kit', align, { muted: muted })
+    buildCss('pb_progress_simple_kit', { muted: muted }, variantStyle, align)
   )
 
   return (

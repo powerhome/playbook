@@ -1,12 +1,22 @@
-<%= content_tag(:div, "",
-    aria: object.aria,
-    id: object.id,
-    data: object.data,
-    class: object.classname) %>
-<% content_for :pb_js do %>
-  <%= javascript_tag do %>
-    window.addEventListener('DOMContentLoaded', function() {
-      new pbChart('.selector', <%= object.chart_options %>)
-    })
+<div id="wrapper-circle-chart-<%= object.id %>">
+  <%= content_tag(:div, "",
+      aria: object.aria,
+      id: object.id,
+      data: object.data,
+      class: object.classname) do %>
+    <% content_for :pb_js do %>
+      <%= javascript_tag do %>
+        window.addEventListener('DOMContentLoaded', function() {
+          new pbChart('.selector', <%= object.chart_options %>)
+      
+        });
+      <% end %>
+    <% end %>
   <% end %>
-<% end %>
+
+  <% if object.children %>
+    <div class="pb_circle_chart_block">
+      <%= capture(&object.children) %>
+    </div>
+  <% end %>
+</div>

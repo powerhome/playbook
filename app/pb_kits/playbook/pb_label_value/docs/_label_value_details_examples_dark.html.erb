@@ -1,0 +1,80 @@
+<%= pb_rails("title", props: { text: "Patient Profile", tag: "h4", size: 4, margin_bottom: "sm", dark: true }) %> 
+
+<%= pb_rails("flex") do %>
+  <%= pb_rails("flex", props: {orientation: "column", margin_right: "lg" }) do %>
+
+    <%= pb_rails("label_value", props: {
+      variant: "details",
+      label: "Age",
+      icon: "user",
+      title: "24 yrs old",
+      padding_bottom: "sm",
+      dark: true
+    }) %>
+    <%= pb_rails("label_value", props: {
+      variant: "details",
+      label: "Weight",
+      icon: "weight",
+      title: "91 kg",
+      dark: true
+    }) %>
+
+  <% end %>
+  <%= pb_rails("flex", props: {orientation: "column"}) do %>
+
+    <%= pb_rails("label_value", props: {
+      variant: "details",
+      label: "Blood",
+      icon: "tint",
+      title: "A +",
+      padding_bottom: "sm",
+      dark: true
+    }) %>
+    <%= pb_rails("label_value", props: {
+      variant: "details",
+      label: "Height",
+      icon: "arrows-v",
+      title: "187 cm",
+      dark: true
+    }) %>
+
+  <% end %>
+<% end %>
+
+
+<br><br><br>
+
+<%= pb_rails("title", props: { text: "Workout Schedule", tag: "h4", size: 4, margin_bottom: "sm", dark: true }) %> 
+
+<%= pb_rails("label_value", props: {
+  variant: "details",
+  label: "Chest",
+  icon: "dumbbell",
+  description: "6 sets • 8 reps • 40-100 kg",
+  title: "Bench Press",
+  padding_bottom: "sm",
+  dark: true,
+  active: true
+}) %>
+
+<%= pb_rails("label_value", props: {
+  variant: "details",
+  label: "Biceps",
+  icon: "dumbbell",
+  description: "5 sets • 12 reps • 20-40 kg",
+  title: "Barbell Curl",
+  padding_bottom: "sm",
+  dark: true,
+  active: true
+}) %>
+
+<%= pb_rails("label_value", props: {
+  variant: "details",
+  label: "Back",
+  icon: "dumbbell",
+  description: "8 sets • 8 reps • 40-120 kg",
+  title: "Back Squat",
+  padding_bottom: "sm",
+  dark: true,
+  active: true
+}) %>

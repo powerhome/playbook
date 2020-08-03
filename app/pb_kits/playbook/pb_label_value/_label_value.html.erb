@@ -3,6 +3,24 @@
     id: object.id,
     data: object.data,
     class: object.classname) do %>
-  <%= pb_rails("caption", props: { text: object.label }) %>
-  <%= pb_rails("body", props: { text: object.value }) %>
+    <%= pb_rails("caption", props: { text: object.label, dark: object.dark }) %>
+    <% if object.variant == "details" %>
+        <%= pb_rails("flex", props: {inline: true, vertical: "center"}) do %>
+            <%= pb_rails("body", props: { color: "light", dark: object.dark }) do %>
+                <%= pb_rails("icon", props: { icon: object.icon, fixed_width: true, margin_right: "xs", }) if object.icon.present? %>
+            <% end %>
+            <%= pb_rails("body", props: { text: object.description, color: "light", margin_right: "xs", dark: object.dark }) if object.description.present? %>
+            <% if object.active %>
+                <%= pb_rails("flex", props: {inline: true, vertical: "center"}) do %>
+                    <%= pb_rails("title", props: { text: object.title, tag: "h4", size: 4, variant: "link", dark: object.dark }) if object.title.present? %> 
+                    <%= pb_rails("title", props: { text: object.date_element, tag: "span", size: 4, margin_left: "xs", variant: "link", dark: object.dark }) if object.date.present? %>
+                <% end %>
+            <% else %>
+                <%= pb_rails("title", props: { text: object.title, tag: "h4", size: 4, dark: object.dark }) if object.title.present? %> 
+                <%= pb_rails("title", props: { text: object.date_element, tag: "span", size: 4, margin_left: "xs", dark: object.dark }) if object.date.present? %>
+            <% end %>
+        <% end %>
+    <% else %>
+        <%= pb_rails("body", props: { text: object.value, dark: object.dark }) if object.value.present? %>
+    <% end %>
 <% end %>
