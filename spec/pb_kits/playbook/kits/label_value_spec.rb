@@ -20,8 +20,8 @@ RSpec.describe Playbook::PbLabelValue::LabelValue do
       expect(subject.new(label: label, value: value).classname).to eq "pb_label_value_kit"
       expect(subject.new(label: label, variant: "default").classname).to eq "pb_label_value_kit"
       expect(subject.new(label: label, variant: "details").classname).to eq "pb_label_value_kit_details"
-      expect(subject.new(label: label, variant: "details", dark: true).classname).to eq "pb_label_value_kit_details_dark"
-      expect(subject.new(label: label, value: value, dark: true).classname).to eq "pb_label_value_kit_dark"
+      expect(subject.new(label: label, variant: "details", dark: true).classname).to eq "pb_label_value_kit_details_dark dark"
+      expect(subject.new(label: label, value: value, dark: true).classname).to eq "pb_label_value_kit_dark dark"
       expect(subject.new(label: label, value: value, classname: "additional_class").classname).to eq "pb_label_value_kit additional_class"
       expect(subject.new(label: label, value: value, classname: "additional_class", dark: true).classname).to eq "pb_label_value_kit_dark additional_class"
     end

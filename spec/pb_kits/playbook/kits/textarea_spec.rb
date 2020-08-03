@@ -22,9 +22,9 @@ RSpec.describe Playbook::PbTextarea::Textarea do
   describe "#classname" do
     it "returns namespaced class name", :aggregate_failures do
       expect(subject.new({}).classname).to eq "pb_textarea_kit resize_none"
-      expect(subject.new({dark: true}).classname).to eq "pb_textarea_kit_dark resize_none"
+      expect(subject.new({dark: true}).classname).to eq "pb_textarea_kit_dark resize_none dark"
       expect(subject.new({error: "Something is wrong"}).classname).to eq "pb_textarea_kit error resize_none"
-      expect(subject.new({dark: true, error: "Something is wrong"}).classname).to eq "pb_textarea_kit_dark error resize_none"
+      expect(subject.new({dark: true, error: "Something is wrong"}).classname).to eq "pb_textarea_kit_dark error resize_none dark"
     end
   end
 
