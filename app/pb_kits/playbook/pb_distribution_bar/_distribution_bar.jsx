@@ -2,7 +2,7 @@
 
 import React from 'react'
 import classnames from 'classnames'
-import { systemProps } from '../utilities/systemProps.js'
+import { globalProps } from '../utilities/globalProps.js'
 
 type DistributionBarProps = {
   className?: String,
@@ -37,7 +37,7 @@ const DistributionBar = (props: DistributionBarProps) => {
   const normalizedValues = normalizeCharacters(widths)
 
   return (
-    <div className={classnames(`pb_distribution_bar_${size}`, systemProps(props))}>
+    <div className={classnames(`pb_distribution_bar_${size}`, globalProps(props))}>
       {barValues(normalizedValues)}
     </div>
   )

@@ -5,7 +5,7 @@ import classnames from 'classnames'
 import DateTime from '../pb_kit/dateTime.js'
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
 import { Body, Caption, Icon, Title } from '../'
-import { systemProps } from '../utilities/systemProps.js'
+import { globalProps } from '../utilities/globalProps.js'
 
 const dateString = (value: DateTime) => {
   const month = value.toMonthNum()
@@ -40,7 +40,7 @@ const Logistic = (props: LogisticProps) => {
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
   const formattedDate = new DateTime({ value: date })
-  const classes = classnames(buildCss('pb_logistic_kit', { dark: dark }), className, systemProps(props))
+  const classes = classnames(buildCss('pb_logistic_kit', { dark: dark }), className, globalProps(props))
 
   return (
     <div

@@ -3,7 +3,7 @@
 
 import React from 'react'
 import classnames from 'classnames'
-import { systemProps } from '../utilities/systemProps.js'
+import { globalProps } from '../utilities/globalProps.js'
 import { Avatar, Badge } from '../'
 
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
@@ -75,7 +75,7 @@ const MultipleUsersStacked = (props: MultipleUsersStackedProps) => {
     <div
         {...ariaProps}
         {...dataProps}
-        className={classnames(css, className, systemProps(props))}
+        className={classnames(css, className, globalProps(props))}
         id={id}
     >
       {firstUser()}

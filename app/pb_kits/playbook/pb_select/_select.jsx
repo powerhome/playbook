@@ -14,7 +14,7 @@ import {
   buildDataProps,
 } from '../utilities/props'
 
-import { systemProps } from '../utilities/systemProps.js'
+import { globalProps } from '../utilities/globalProps.js'
 
 import type { InputCallback } from '../types'
 
@@ -72,7 +72,7 @@ const Select = ({
   ...props
 }: SelectProps) => {
   const errorClass = error ? ' error' : ''
-  const css = classnames(buildCss('pb_select', { dark }) + errorClass, systemProps(props))
+  const css = classnames(buildCss('pb_select', { dark }) + errorClass, globalProps(props))
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
   const optionsList = createOptions(options)

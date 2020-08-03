@@ -3,7 +3,7 @@
 import React from 'react'
 import classnames from 'classnames'
 import { Avatar, Body, Title } from '../'
-import { systemProps } from '../utilities/systemProps.js'
+import { globalProps } from '../utilities/globalProps.js'
 
 type UserProps = {
   className?: String,
@@ -30,7 +30,7 @@ const User = (props: UserProps) => {
     avatarUrl,
   } = props
   return (
-    <div className={classnames(`pb_user_kit_${align}_${orientation}_${size}`, systemProps(props))}>
+    <div className={classnames(`pb_user_kit_${align}_${orientation}_${size}`, globalProps(props))}>
       <If condition={avatar || avatarUrl}>
         <Avatar
             imageUrl={avatarUrl}

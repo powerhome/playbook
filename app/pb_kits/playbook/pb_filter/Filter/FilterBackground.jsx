@@ -3,7 +3,7 @@
 import React, { Node } from 'react'
 import { Card } from '../../'
 import classnames from 'classnames'
-import { systemProps } from '../../utilities/systemProps.js'
+import { globalProps } from '../../utilities/globalProps.js'
 
 type FilterBackgroundProps = {
   background: boolean,
@@ -14,7 +14,7 @@ const FilterBackground = (props: FilterBackgroundProps) => {
   const { background = true, className, children } = props
 
   return (
-    <div className={classnames(`pb_filter_kit ${className}`, systemProps(props))}>
+    <div className={classnames(`pb_filter_kit ${className}`, globalProps(props))}>
       <Choose>
         <When condition={background}>
           <Card padding="none">{children}</Card>

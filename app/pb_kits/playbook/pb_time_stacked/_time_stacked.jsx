@@ -6,7 +6,7 @@ import classnames from 'classnames'
 import DateTime from '../pb_kit/dateTime.js'
 import { buildCss } from '../utilities/props'
 import { Body, Caption } from '../'
-import { systemProps } from '../utilities/systemProps.js'
+import { globalProps } from '../utilities/globalProps.js'
 
 const Components = {
   body: Body,
@@ -30,7 +30,7 @@ const TimeStacked = (props: TimeStackedProps) => {
     buildCss('pb_time_stacked_kit', {
       dark: dark,
     }),
-    systemProps(props)
+    globalProps(props)
   )
 
   const tagClasses = classnames(buildCss('pb_time_stacked_kit', tag))

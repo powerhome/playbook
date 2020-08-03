@@ -4,7 +4,7 @@ import React from 'react'
 
 import classnames from 'classnames'
 import Title from '../pb_title/_title.jsx'
-import { systemProps } from '../utilities/systemProps.js'
+import { globalProps } from '../utilities/globalProps.js'
 
 type PillProps = {
   className?: String,
@@ -15,7 +15,7 @@ type PillProps = {
 
 const Pill = (props: PillProps) => {
   const { className, text, variant = 'neutral' } = props
-  const css = classnames([`pb_pill_kit_${variant}`, className], systemProps(props))
+  const css = classnames([`pb_pill_kit_${variant}`, className], globalProps(props))
 
   return (
     <div className={css}>

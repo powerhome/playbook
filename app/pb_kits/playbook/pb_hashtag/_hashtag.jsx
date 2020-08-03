@@ -6,7 +6,7 @@ import classnames from 'classnames'
 
 import { Badge } from '../'
 import { buildCss } from '../utilities/props'
-import { systemProps } from '../utilities/systemProps.js'
+import { globalProps } from '../utilities/globalProps.js'
 
 type HashtagProps = {
   className?: String,
@@ -32,7 +32,7 @@ const Hashtag = (props: HashtagProps) => {
         className={classnames(
         className,
         buildCss('pb_hashtag_kit', { dark: dark }),
-        systemProps(props)
+        globalProps(props)
       )}
     >
       <a href={url}>

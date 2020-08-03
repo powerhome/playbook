@@ -40,6 +40,6 @@ const darkProps = ({ dark }) => {
 }
 
 // All Exported as a single function
-export const systemProps = ({ ...props }) => {
+export const globalProps = ({ ...props }) => {
   return spacingProps(props) + darkProps(props)
 }

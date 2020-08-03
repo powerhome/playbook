@@ -2,7 +2,7 @@
 
 import React from 'react'
 import classnames from 'classnames'
-import { systemProps } from '../utilities/systemProps.js'
+import { globalProps } from '../utilities/globalProps.js'
 import { Body, Caption, Icon } from '../'
 
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
@@ -58,7 +58,7 @@ const Contact = (props: ContactProps) => {
     id } = props
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
-  const classes = classnames(buildCss('pb_contact_kit'), className, systemProps(props))
+  const classes = classnames(buildCss('pb_contact_kit'), className, globalProps(props))
 
   return (
     <div

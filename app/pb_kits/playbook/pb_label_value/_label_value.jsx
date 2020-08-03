@@ -4,7 +4,7 @@ import React from 'react'
 import classnames from 'classnames'
 import { buildAriaProps, buildDataProps } from '../utilities/props'
 import { Body, Caption } from '../'
-import { systemProps } from '../utilities/systemProps.js'
+import { globalProps } from '../utilities/globalProps.js'
 
 type LabelValueProps = {
   aria?: object,
@@ -31,7 +31,7 @@ const LabelValue = (props: LabelValueProps) => {
   const themeStyle = dark === true ? '_dark' : ''
   const css = classnames(
     ['pb_label_value_kit' + themeStyle, className],
-    systemProps(props)
+    globalProps(props)
   )
 
   return (
