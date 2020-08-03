@@ -6,7 +6,7 @@ RSpec.describe Playbook::PbButtonToolbar::ButtonToolbar do
   subject { Playbook::PbButtonToolbar::ButtonToolbar }
 
   it { is_expected.to define_partial }
-  it { is_expected.to define_enum_prop(:values)
+  it { is_expected.to define_enum_prop(:orientation)
                   .with_default("horizontal")
                   .with_values("horizontal", "vertical") }
   it { is_expected.to define_boolean_prop(:connected).with_default(false) }
