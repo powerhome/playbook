@@ -15,6 +15,7 @@ RSpec.describe Playbook::PbGauge::Gauge do
   it { is_expected.to define_prop(:height).of_type(Playbook::Props::String).with_default(nil) }
   it { is_expected.to define_boolean_prop(:full_circle).with_default(false) }
   it { is_expected.to define_boolean_prop(:show_labels).with_default(false) }
+  it { is_expected.to define_boolean_prop(:disable_animation).with_default(false) }
   it { is_expected.to define_prop(:min).of_type(Playbook::Props::Numeric).with_default(0) }
   it { is_expected.to define_prop(:max).of_type(Playbook::Props::Numeric).with_default(100) }
 
