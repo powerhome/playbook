@@ -1,9 +1,9 @@
 // @flow
 
 import React, { useState } from 'react'
-import { Toggle } from '../../'
+import { Toggle } from '../..'
 
-const Example = () => {
+const ToggleSize = () => {
   const [toggle1, setToggle1] = useState(false)
   const [toggle2, setToggle2] = useState(false)
 
@@ -15,6 +15,7 @@ const Example = () => {
           onChange={(event) => setToggle1(event.target.value)}
           onCheck={(event) => alert(`${event.target.name} checked!`)}
           onUncheck={(event) => alert(`${event.target.name} unchecked!`)}
+          size="sm"
       />
 
       <br />
@@ -25,9 +26,10 @@ const Example = () => {
           onChange={(event) => setToggle2(event.target.value)}
           onCheck={(event) => alert(`${event.target.name} checked!`)}
           onUncheck={(event) => alert(`${event.target.name} unchecked!`)}
+          size="md"
       />
     </>
   )
 }
 
-export default Example
+export default ToggleSize

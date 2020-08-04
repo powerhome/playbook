@@ -1,4 +1,3 @@
-export { default as ToggleDefault } from './_toggle_default'
-export { default as ToggleAccessibility } from './_toggle_accessibility'
-export { default as ToggleData } from './_toggle_data'
+export { default as ToggleSize} from './_toggle_size'
+export { default as ToggleCustom } from './_toggle_custom'
 export { default as ToggleCustomRadio } from './_toggle_custom_radio'

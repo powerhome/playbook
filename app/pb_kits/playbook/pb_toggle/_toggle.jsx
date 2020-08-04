@@ -14,15 +14,16 @@ import {
 import { spacing } from '../utilities/spacing.js'
 
 type Props = {
-  aria: object,
+  aria?: object,
   checked?: Boolean,
+  children?: React.Node,
   className?: String,
   data?: object,
   id?: String,
   name?: String,
-  onChange: InputCallback<HTMLInputElement>,
-  onCheck: InputCallback<HTMLInputElement>,
-  onUncheck: InputCallback<HTMLInputElement>,
+  onChange?: InputCallback<HTMLInputElement>,
+  onCheck?: InputCallback<HTMLInputElement>,
+  onUncheck?: InputCallback<HTMLInputElement>,
   size?: "sm" | "md",
   value?: String,
 }
@@ -30,6 +31,7 @@ type Props = {
 const Toggle = ({
   aria = {},
   checked = false,
+  children,
   className,
   data = {},
   id,
@@ -66,15 +68,18 @@ const Toggle = ({
         id={id}
     >
       <label className="pb_toggle_wrapper">
-        <input
-            {...props}
-            checked={checked}
-            name={name}
-            onChange={handleChange}
-            type="radio"
-            value={value}
-        />
-
+        <If condition={children}>
+          {children}
+          <Else />
+          <input
+              {...props}
+              checked={checked}
+              name={name}
+              onChange={handleChange}
+              type="checkbox"
+              value={value}
+          />
+        </If>
         <div className="pb_toggle_control" />
       </label>
     </div>

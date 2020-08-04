@@ -4,7 +4,7 @@ import React, { useState } from 'react'
 import { Caption, Title, Toggle } from '../..'
 
 const ToggleCustomRadio = () => {
-  const [choice, setChoice] = useState('power')
+  const [choice, setChoice] = useState('walk')
 
   const handleOnChange = ({ target }) => {
     setChoice(target.value)
@@ -25,11 +25,14 @@ const ToggleCustomRadio = () => {
       <Toggle
           checked={choice === 'walk'}
           size="sm"
-          name="modes of transportation"
-          onChange={handleOnChange}
-          type="radio"
-          value="walk"
-      />
+      >
+        <input
+            name="modes of transportation"
+            onChange={handleOnChange}
+            type="radio"
+            value="walk"
+        />
+      </Toggle>
 
       <br />
 
