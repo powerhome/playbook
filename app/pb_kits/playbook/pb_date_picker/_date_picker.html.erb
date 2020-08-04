@@ -8,6 +8,8 @@
         <input
             autocomplete="off"
             id="<%= object.picker_id %>"
+            name="<%= object.name %>"
+            <%= object.required ? required="required" : ''%>
         />
         <% if object.error %>
           <%= pb_rails("body", props: { 

@@ -22,12 +22,15 @@ module Playbook
                    default: "Date Picker"
       prop :max_date, type: Playbook::Props::String
       prop :min_date, type: Playbook::Props::String
+      prop :name, type: Playbook::Props::String
       prop :mode, type: Playbook::Props::String,
                   default: "single"
       prop :picker_id, type: Playbook::Props::String
+      prop :required, type: Playbook::Props::Boolean,
+                      default: false
 
       def classname
-        generate_classname("pb_date_picker")
+        generate_classname("pb_date_picker_kit")
       end
 
       def error_class

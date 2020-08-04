@@ -4,7 +4,7 @@
 @import "../tokens/colors";
 @import "../pb_caption/caption_mixin";
 
-[class^=pb_date_picker] {
+[class^=pb_date_picker_kit] {
   // input styles
   [class^=pb_caption_kit] {
     margin-bottom: $space_xs;

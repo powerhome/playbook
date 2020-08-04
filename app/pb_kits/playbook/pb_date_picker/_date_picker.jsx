@@ -23,6 +23,7 @@ type DatePickerProps = {
   maxDate: String,
   minDate: String,
   mode?: String,
+  name: String,
   pickerId?: String,
 }
 const DatePicker = (props: DatePickerProps) => {
@@ -41,13 +42,14 @@ const DatePicker = (props: DatePickerProps) => {
     maxDate,
     minDate,
     mode = 'single',
+    name,
     pickerId,
   } = props
 
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
   const classes = classnames(
-    buildCss('pb_date_picker'),
+    buildCss('pb_date_picker_kit'),
     className,
     spacing(props),
     error ? 'error' : null,
@@ -83,6 +85,7 @@ const DatePicker = (props: DatePickerProps) => {
         <input
             autoComplete="off"
             id={pickerId}
+            name={name}
         />
         <If condition={error}>
           <Body
