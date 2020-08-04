@@ -9,6 +9,7 @@ examples:
 
   react:
   - toggle_size: Sizes
+  - toggle_name: Name and Value
   - toggle_custom: Custom checkbox input
   - toggle_custom_radio: Custom radio inputs
 
