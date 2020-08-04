@@ -5,4 +5,7 @@ examples:
   - time_timestamp: Timestamp Values
 
   react:
-  - time_default: Default
+  - time_default: Sizes
+  - time_timestamp: Timestamp Values
+  - time_align: Alignment
+  - time_dark: Dark

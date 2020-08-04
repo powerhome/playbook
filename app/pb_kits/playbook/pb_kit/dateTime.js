@@ -74,7 +74,9 @@ export default class DateTime {
   }
 
   toTime() {
-    return this.value.strftime('%I:%M')
+    const time = this.value.strftime('%I:%M')
+
+    return time.charAt() === '0' ? time.slice(1) : time
   }
 
   toTimezone() {
