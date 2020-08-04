@@ -2,7 +2,7 @@ import React from 'react'
 import { Gauge } from '../../'
 
 const data = [
-  { name: 'Point1', value: 45 },
+  { name: 'Participants', value: 84 },
 ]
 
 const GaugeDisableAnimation = () => (
