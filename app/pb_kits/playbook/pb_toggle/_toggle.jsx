@@ -15,22 +15,30 @@ import { spacing } from '../utilities/spacing.js'
 
 type Props = {
   aria: object,
-  checked: boolean,
-  data: object,
+  checked?: Boolean,
+  className?: String,
+  data?: object,
+  id?: String,
+  name?: String,
   onChange: InputCallback<HTMLInputElement>,
   onCheck: InputCallback<HTMLInputElement>,
   onUncheck: InputCallback<HTMLInputElement>,
-  size: "sm" | "md",
+  size?: "sm" | "md",
+  value?: String,
 }
 
 const Toggle = ({
   aria = {},
   checked = false,
+  className,
   data = {},
+  id,
+  name,
   onChange = noop,
   onCheck = noop,
   onUncheck = noop,
   size = 'md',
+  value,
   ...props
 }: Props) => {
   const ariaProps = buildAriaProps(aria)
@@ -40,25 +48,31 @@ const Toggle = ({
     event.target.checked ? onCheck(event) : onUncheck(event)
   }
 
-  const css = buildCss({
-    'pb_toggle_kit': true,
-    [size]: true,
-    on: checked,
-    off: !checked,
-  })
+  const css = classnames(
+    buildCss('pb_toggle_kit',
+      size,
+      {
+        on: checked,
+        off: !checked,
+      }
+    ), className,
+    spacing(props))
 
   return (
     <div
         {...ariaProps}
         {...dataProps}
-        className={classnames(css, spacing(props))}
+        className={css}
+        id={id}
     >
       <label className="pb_toggle_wrapper">
         <input
             {...props}
             checked={checked}
+            name={name}
             onChange={handleChange}
-            type="checkbox"
+            type="radio"
+            value={value}
         />
 
         <div className="pb_toggle_control" />

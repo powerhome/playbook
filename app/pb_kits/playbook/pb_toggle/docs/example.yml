@@ -11,3 +11,5 @@ examples:
   - toggle_default: Default
   - toggle_accessibility: Toggle Accessibility
   - toggle_data: Toggle Data Props
+  - toggle_custom_radio: Custom radio inputs
+
