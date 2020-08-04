@@ -4,7 +4,7 @@ import React, { useEffect } from 'react'
 import classnames from 'classnames'
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
 import { spacing } from '../utilities/spacing.js'
-import flatpickr from 'flatpickr'
+// import flatpickr from 'flatpickr'
 import { Body, Caption } from '../'
 import datePickerHelper from './date_picker_helper.js'
 

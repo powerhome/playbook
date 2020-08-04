@@ -2,8 +2,8 @@
 
 require_relative "../../../../app/pb_kits/playbook/pb_date_picker/date_picker"
 
-RSpec.describe Playbook::PbDate picker::Date picker do
-  subject { Playbook::PbDate picker::Date picker }
+RSpec.describe Playbook::PbDatePicker::DatePicker do
+  subject { Playbook::PbDatePicker::DatePicker }
 
   it { is_expected.to define_partial }
 
