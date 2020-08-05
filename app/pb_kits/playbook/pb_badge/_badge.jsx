@@ -37,7 +37,6 @@ const Badge = (props: BadgeProps) => {
     className,
     buildCss('pb_badge_kit', variant, {
       rounded: rounded,
-      dark: dark,
     }),
     globalProps(props)
   )
