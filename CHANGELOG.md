@@ -7,16 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### Added
+
+- Added Button Toolbar kit ([#908](https://github.com/powerhome/playbook/pull/908)  @kellyeryan)
+
 ## [v6.0.1] 2020-7-30
 
 ### Fixed
 - Updated failing spec test after update ([#940](https://github.com/powerhome/playbook/pull/940) @jasoncypret)
 
 ## [v6.0.0] 2020-7-30
-
-### Added
-
-- Added Button Toolbar kit ([#908](https://github.com/powerhome/playbook/pull/908)  @kellyeryan)
 
 ### Changed
 - Updated Label Value Kit to inlcude Installation Kit and Logistic Kit variations ([#915](https://github.com/powerhome/playbook/pull/915) @christinaatai)
@@ -37,7 +37,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [v5.5.1] 2020-7-24
 
 ### Added
-- Circle Chart Additions ([#932](https://github.com/powerhome/playbook/pull/932)  @jasperfurniss)
 - Added flexible classes to body typography kit. ([#929](https://github.com/powerhome/playbook/pull/929)  @jasoncypret)
 
 
@@ -66,13 +65,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Added aria, data, className, id props to React Checkbox kit; added aria prop to Rails Checkbox kit. Added example doc 'Checked Checkbox.'([#905](https://github.com/powerhome/playbook/pull/905) @kellyeryan)
 - Added aria, data, id props to React Body kit; added aria props to Rails Body kit([#904](https://github.com/powerhome/playbook/pull/904) @kellyeryan)
 - Added aria, data props to Circle Icon Button React kit; added aria props to Circle Icon Button Rails kit.([#907](https://github.com/powerhome/playbook/pull/907) @kellyeryan)
-### Added
-- Added border prop ([#900](https://github.com/powerhome/playbook/pull/900) @christinaatai))
+
 
 ## [v5.2.0] 2020-7-2
-
-### Added
-- Added aria, data props to Badge React kit; added aria props to Badge Rails kit ([#901](https://github.com/powerhome/playbook/pull/901) @kellyeryan)
 
 ### Fixed
 - Added User Badge Kit back to menu.yml ([#890](https://github.com/powerhome/playbook/pull/890) @christinaatai)
