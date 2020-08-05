@@ -48,7 +48,6 @@ const buttonClassName = (props: ButtonPropTypes) => {
   className += `${variant !== null ? `_${variant}` : ''}`
   className += `${type !== null ? `_${type}` : ''}`
   className += `${size !== null ? `_${size}` : ''}`
-  className += `${dark === true ? '_dark' : ''}`
   className += `${fullWidth ? '_block' : ''}`
   className += disabled ? '_disabled' : '_enabled'
   className += loading ? '_loading' : ''
