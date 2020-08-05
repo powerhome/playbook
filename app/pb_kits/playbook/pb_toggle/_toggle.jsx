@@ -8,7 +8,6 @@ import {
   buildAriaProps,
   buildCss,
   buildDataProps,
-  noop,
 } from '../utilities/props'
 
 import { spacing } from '../utilities/spacing.js'
@@ -22,8 +21,6 @@ type Props = {
   id?: String,
   name?: String,
   onChange?: InputCallback<HTMLInputElement>,
-  onCheck?: InputCallback<HTMLInputElement>,
-  onUncheck?: InputCallback<HTMLInputElement>,
   size?: "sm" | "md",
   value?: String,
 }
@@ -36,20 +33,13 @@ const Toggle = ({
   data = {},
   id,
   name,
-  onChange = noop,
-  onCheck = noop,
-  onUncheck = noop,
+  onChange = () => {},
   size = 'md',
   value,
   ...props
 }: Props) => {
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
-  const handleChange = (event) => {
-    onChange(event)
-    event.target.checked ? onCheck(event) : onUncheck(event)
-  }
-
   const css = classnames(
     buildCss('pb_toggle_kit',
       size,
@@ -73,9 +63,9 @@ const Toggle = ({
           <Else />
           <input
               {...props}
-              checked={checked}
+              defaultChecked={checked}
               name={name}
-              onChange={handleChange}
+              onChange={onChange}
               type="checkbox"
               value={value}
           />

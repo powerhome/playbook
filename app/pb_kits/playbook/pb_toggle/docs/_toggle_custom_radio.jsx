@@ -23,7 +23,7 @@ const ToggleCustomRadio = () => {
           text="Walk"
       />
       <Toggle
-          checked={choice === 'walk'}
+          checked={choice}
           size="sm"
       >
         <input

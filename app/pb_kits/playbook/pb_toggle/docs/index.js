@@ -1,3 +1,4 @@
+export { default as ToggleDefault } from './_toggle_default'
 export { default as ToggleSize } from './_toggle_size'
 export { default as ToggleCustom } from './_toggle_custom'
 export { default as ToggleName } from './_toggle_name'

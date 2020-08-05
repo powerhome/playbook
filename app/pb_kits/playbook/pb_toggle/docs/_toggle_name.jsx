@@ -4,11 +4,10 @@ import React, { useState } from 'react'
 import { Caption, Title, Toggle } from '../..'
 
 const ToggleName = () => {
-  const [choice1, setChoice1] = useState(false)
-  const [choice2, setChoice2] = useState(false)
+  const [choice, setChoice] = useState(false)
 
   const handleOnChange = ({ target }) => {
-    setChoice(target.value)
+    setChoice(target.value = !choice)
   }
 
   return (
@@ -30,27 +29,27 @@ const ToggleName = () => {
         <input
             name="vehicle"
             onChange={handleOnChange}
-            type="radio"
+            type="checkbox"
             value="car"
         />
       </Toggle>
 
       <br />
-
       <Caption
           text="Bike"
       />
       <Toggle
+          checked={choice}
           size="sm"
       >
         <input
-            clicked={choice}
             name="vehicle"
             onChange={handleOnChange}
-            type="radio"
+            type="checkbox"
             value="bike"
         />
       </Toggle>
+
     </>
   )
 }

@@ -7,19 +7,20 @@ const ToggleCustom = () => {
   const [choice, setChoice] = useState(false)
 
   const handleOnChange = ({ target }) => {
-    setChoice(target.value)
+    setChoice(target.value = !choice)
   }
 
   return (
     <>
       <Toggle
-          checked={choice === 'walk'}
+          checked={choice}
           size="sm"
       >
         <input
-            name="my custom checkbox"
+            className="my custom checkbox"
+            name="custom checkbox"
             onChange={handleOnChange}
-            type="radio"
+            type="checkbox"
             value="ABC"
         />
       </Toggle>
