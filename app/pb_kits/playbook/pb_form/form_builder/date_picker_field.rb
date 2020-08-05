@@ -25,8 +25,13 @@ module Playbook
 
         #   @template.pb_rails("date_picker", props: props)
         # end
-        def date_picker(_name, options = {}, props: {})
-          puts options[:scope]
+        def date_picker(name, props: {})
+          prefix = @object_name
+          html_attribute_name = "#{prefix}[#{name}]"
+          html_id = "#{prefix}_#{name}"
+
+          props[:name] = html_attribute_name
+          props[:picker_id] = html_id
 
           @template.pb_rails("date_picker", props: props)
         end
