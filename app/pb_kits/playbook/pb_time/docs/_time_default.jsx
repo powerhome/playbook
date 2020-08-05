@@ -12,7 +12,6 @@ const TimeDefault = () => {
       <br />
       <Time
           date={new Date().getTime()}
-          showIcon
           showTimezone
           size="sm"
       />

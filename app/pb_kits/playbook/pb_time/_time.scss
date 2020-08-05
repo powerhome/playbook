@@ -17,6 +17,10 @@
     font-weight: $bold !important;
   }
 
+  [class*=pb_icon_kit] {
+    margin-right: 4px;
+  }
+
   [class^=pb_time_timezone] {
     font-size: $font-small;
     font-weight: $regular;

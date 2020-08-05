@@ -16,13 +16,12 @@ type TimeProps = {
   data?: String,
   date: String,
   id?: String,
-  showIcon?: Boolean,
   showTimezone?: Boolean,
   size?: 'lg' | 'sm' | 'xs',
 }
 
 const Time = (props: TimeProps) => {
-  const { align, className, dark = false, date, showIcon, showTimezone, size } = props
+  const { align, className, dark = false, date, showTimezone, size } = props
   const classes = classnames(
     className,
     buildCss('pb_time_kit', align, size, {
@@ -35,31 +34,34 @@ const Time = (props: TimeProps) => {
 
   return (
     <div className={classes}>
-      <div className="pb_time">
-        { showIcon && <Icon
-            fixedWidth
-            icon="clock"
-                      /> }
-
+      <span className="pb_body_kit">
+        <If condition={size === 'sm'}>
+          <Icon
+              fixedWidth
+              icon="clock"
+          />
+        </If>
         <time dateTime={date}>
-          <If condition={size !== 'lg'}>
-            <Body
-                size={3}
-                tag="span"
-                text={dateTimestamp.toTimeWithMeridian()}
-            />
-          </If>
-          <If condition={size === 'lg'}>
-            <Title
-                color="light"
-                size={3}
-                tag="span"
-                text={dateTimestamp.toTimeWithMeridian()}
-            />
-          </If>
+          <span>
+            <If condition={size !== 'lg'}>
+              <Body
+                  color={dark ? 'light' : ''}
+                  tag="span"
+                  text={dateTimestamp.toTimeWithMeridian()}
+              />
+            </If>
+            <If condition={size === 'lg'}>
+              <Title
+                  color="light"
+                  size={3}
+                  tag="span"
+                  text={dateTimestamp.toTimeWithMeridian()}
+              />
+            </If>
+            { showTimezone && <span className="pb_time_timezone">{dateTimestamp.toTimezone()}</span> }
+          </span>
         </time>
-        { showTimezone && <span className="pb_time_timezone">{dateTimestamp.toTimezone()}</span> }
-      </div>
+      </span>
     </div>
   )
 }

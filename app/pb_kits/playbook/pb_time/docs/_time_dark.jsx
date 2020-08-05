@@ -18,7 +18,6 @@ const TimeDark = () => {
       <Time
           dark
           date={new Date()}
-          showIcon
           showTimezone
       />
     </div>
