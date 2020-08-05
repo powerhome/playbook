@@ -25,7 +25,9 @@ module Playbook
 
         #   @template.pb_rails("date_picker", props: props)
         # end
-        def date_picker(_name, props: {})
+        def date_picker(_name, options = {}, props: {})
+          puts options[:scope]
+
           @template.pb_rails("date_picker", props: props)
         end
       end
