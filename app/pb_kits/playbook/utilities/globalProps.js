@@ -40,6 +40,7 @@ const darkProps = ({ dark }) => {
 }
 
 // All Exported as a single function
-export const globalProps = ({ ...props }) => {
-  return spacingProps(props) + darkProps(props)
+export const globalProps = (props, defaultProps = {}) => {
+  const allProps = { ...props, ...defaultProps }
+  return spacingProps(allProps) + darkProps(allProps)
 }
