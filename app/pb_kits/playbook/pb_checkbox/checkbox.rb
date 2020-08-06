@@ -7,11 +7,8 @@ module Playbook
       include ActionView::Helpers::FormTagHelper
       include ActionView::Context
 
-
-
       partial "pb_checkbox/checkbox"
 
-      prop :dark, type: Playbook::Props::Boolean, default: false
       prop :error, type: Playbook::Props::Boolean, default: false
       prop :checked, type: Playbook::Props::Boolean, default: false
       prop :text
@@ -23,7 +20,7 @@ module Playbook
       end
 
       def classname
-        generate_classname("pb_checkbox_kit", dark_class, checked_class) + error_class
+        generate_classname("pb_checkbox_kit", checked_class) + error_class
       end
 
       def input
@@ -42,10 +39,6 @@ module Playbook
 
       def checked_class
         checked ? "on" : "off"
-      end
-
-      def dark_class
-        dark ? "dark" : nil
       end
     end
   end

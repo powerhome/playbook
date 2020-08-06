@@ -3,17 +3,16 @@
 import React from 'react'
 import classnames from 'classnames'
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
-import { spacing } from '../utilities/spacing.js'
+import { globalProps } from '../utilities/globalProps.js'
 
 type TitleProps = {
   aria?: object,
   children?: Array<React.ReactNode> | React.ReactNode,
   className?: String,
-  dark?: Boolean,
   data?: object,
   id?: String,
   size?: 1 | 2 | 3 | 4,
-  tag?: "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "div",
+  tag?: "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "div" | "span",
   text?: String,
   variant?: null | "primary",
 }
@@ -23,7 +22,6 @@ const Title = (props: TitleProps) => {
     aria = {},
     children,
     className,
-    dark = false,
     data = {},
     id,
     size = 3,
@@ -32,10 +30,9 @@ const Title = (props: TitleProps) => {
     variant = null,
   } = props
 
-  const themeStyle = dark === true ? 'dark' : ''
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
-  const classes = classnames(buildCss('pb_title_kit', size, themeStyle, variant), className, spacing(props))
+  const classes = classnames(buildCss('pb_title_kit', size, variant), className, globalProps(props))
   const Tag = `${tag}`
 
   return (

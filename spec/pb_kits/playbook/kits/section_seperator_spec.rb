@@ -21,9 +21,9 @@ RSpec.describe Playbook::PbSectionSeparator::SectionSeparator do
     it "returns namespaced class name", :aggregate_failures do
       expect(subject.new({}).classname).to eq "pb_section_separator_kit_card_horizontal"
       expect(subject.new(classname: "additional_class").classname).to eq "pb_section_separator_kit_card_horizontal additional_class"
-      expect(subject.new(variant: "background", classname: "additional_class", dark: true).classname).to eq "pb_section_separator_kit_background_horizontal_dark additional_class"
-      expect(subject.new(orientation: "vertical", classname: "additional_class", dark: true).classname).to eq "pb_section_separator_kit_card_vertical_dark additional_class"
-      expect(subject.new(classname: "additional_class", dark: true).classname).to eq "pb_section_separator_kit_card_horizontal_dark additional_class"
+      expect(subject.new(variant: "background", classname: "additional_class", dark: true).classname).to eq "pb_section_separator_kit_background_horizontal_dark additional_class dark"
+      expect(subject.new(orientation: "vertical", classname: "additional_class", dark: true).classname).to eq "pb_section_separator_kit_card_vertical_dark additional_class dark"
+      expect(subject.new(classname: "additional_class", dark: true).classname).to eq "pb_section_separator_kit_card_horizontal_dark additional_class dark"
 
     end
   end

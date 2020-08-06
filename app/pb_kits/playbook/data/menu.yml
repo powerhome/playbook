@@ -10,15 +10,17 @@ kits:
   - badge
   - buttons:
     - button
+    - button_toolbar
     - circle_icon_button
   - card
   - checkbox
   - charts_and_graphs:
     - bar_graph
+    - circle_chart
+    - distribution_bar
+    - gauge
     - legend
     - line_graph
-    - distribution_bar
-    - circle_chart
 
   - filter
   - fixed_confirmation_toast

@@ -17,7 +17,7 @@ RSpec.describe Playbook::PbHashtag::Hashtag do
   describe "#classname" do
     it "returns namespaced class name", :aggregate_failures do
       expect(subject.new({}).classname).to eq "pb_hastag_kit"
-      expect(subject.new(dark: true).classname).to eq "pb_hastag_kit_dark"
+      expect(subject.new(dark: true).classname).to eq "pb_hastag_kit_dark dark"
       expect(subject.new(classname: "additional_class").classname).to eq "pb_hastag_kit additional_class"
     end
   end

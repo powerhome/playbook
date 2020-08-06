@@ -4,7 +4,7 @@ import React from 'react'
 import { Avatar, Body, Caption } from '../'
 import classnames from 'classnames'
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
-import { spacing } from '../utilities/spacing.js'
+import { globalProps } from '../utilities/globalProps.js'
 
 type MessageProps = {
   aria: object,
@@ -39,7 +39,7 @@ const Message = (props: MessageProps) => {
     ? 'pb_message_kit_avatar'
     : 'pb_message_kit'
 
-  const classes = classnames(buildCss(baseClassName), className, spacing(props))
+  const classes = classnames(buildCss(baseClassName), className, globalProps(props))
 
   return (
     <div

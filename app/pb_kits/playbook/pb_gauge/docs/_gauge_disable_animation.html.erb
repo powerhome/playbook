@@ -1,0 +1,12 @@
+<% data = [
+  {
+    name: 'Participants',
+    value: 84,
+  }
+]%>
+
+<%= pb_rails("gauge", props: {
+  id: "gauge-disable-animation",
+  chart_data: data,
+  disable_animation: true,
+}) %>

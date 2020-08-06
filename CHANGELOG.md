@@ -5,7 +5,31 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [v6.1.0] 2020-8-6
+
+### Fixed
+- Updated and added to PB Toggle kit ([#946](https://github.com/powerhome/playbook/pull/946)  @kellyeryan)
+- Dark mode update to Selectable Card Icon ([#956](https://github.com/powerhome/playbook/pull/956)  @kellyeryan)
+- Dark mode update for Selectable Card kit ([#957](https://github.com/powerhome/playbook/pull/957)  @kellyeryan)
+- Fixed missing spacing under textarea label ([#943](https://github.com/powerhome/playbook/pull/943) @christinaatai)
+- Dark Mode update to Selectable Icon kit ([#955](https://github.com/powerhome/playbook/pull/955)  @kellyeryan)
+- Dark Mode Update Badge, Button, Circle Icon Button, Card, Checkbox and Body Kits ([#948](https://github.com/powerhome/playbook/pull/948)  @thestephenmarshall)
+- Cleanup #948 ([#952](https://github.com/powerhome/playbook/pull/952) @thestephenmarshall)
+
+### Updated
+- Dark Mode Update for Title kit. ([#951](https://github.com/powerhome/playbook/pull/951)  @kellyeryan)
+
+### Fixed
+
+- Fixed Caption kit to implement dark mode correctly in html ([#950](https://github.com/powerhome/playbook/pull/950)  @kellyeryan)
+
+### Added
 - Added Changelog Generator ([#959](https://github.com/powerhome/playbook/pull/959)  @jasperfurniss)
+- Added Button Toolbar kit ([#908](https://github.com/powerhome/playbook/pull/908)  @kellyeryan)
+- Global Prop Additions & Dark Mode Enabled ([#942](https://github.com/powerhome/playbook/pull/942)  @jasperfurniss)
+- Gauge Kit ([#910](https://github.com/powerhome/playbook/pull/910) @bh247484)
+- Added React version of Time Kit ([#947](https://github.com/powerhome/playbook/pull/947) @coleerikson)
+
 
 ## [v6.0.1] 2020-7-30
 
@@ -29,6 +53,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 - Added disabled attribute to button. ([#934](https://github.com/powerhome/playbook/pull/934)  @KatherineMuedas)
+
 
 ## [v5.5.1] 2020-7-24
 
@@ -63,7 +88,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Added aria, data props to Circle Icon Button React kit; added aria props to Circle Icon Button Rails kit.([#907](https://github.com/powerhome/playbook/pull/907) @kellyeryan)
 
 
+### Added
+- Gauge Kit ([#910](https://github.com/powerhome/playbook/pull/910) @bh247484)
+- Added border prop ([#900](https://github.com/powerhome/playbook/pull/900) @christinaatai))
+
 ## [v5.2.0] 2020-7-2
+
+### Added
+- Added aria, data props to Badge React kit; added aria props to Badge Rails kit ([#901](https://github.com/powerhome/playbook/pull/901) @kellyeryan)
 
 ### Fixed
 - Added User Badge Kit back to menu.yml ([#890](https://github.com/powerhome/playbook/pull/890) @christinaatai)
