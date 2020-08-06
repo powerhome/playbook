@@ -8,7 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## Unreleased
 
 ### Fixed
-
+- Updated and added to PB Toggle kit ([#946](https://github.com/powerhome/playbook/pull/946)  @kellyeryan)
 - Dark mode update to Selectable Card Icon ([#956](https://github.com/powerhome/playbook/pull/956)  @kellyeryan)
 - Dark mode update for Selectable Card kit ([#957](https://github.com/powerhome/playbook/pull/957)  @kellyeryan)
 - Fixed missing spacing under textarea label ([#943](https://github.com/powerhome/playbook/pull/943) @christinaatai)
