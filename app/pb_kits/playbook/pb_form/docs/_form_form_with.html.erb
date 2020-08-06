@@ -24,7 +24,7 @@
   <%= form.text_area :example_text_area, props: { label: true } %>
   <%= form.select :example_select, [ ["Yes", 1], ["No", 2] ], props: { label: true } %>
   <%= form.collection_select :example_collection_select, example_collection, :value, :name, props: { label: true } %>
-  <%= form.check_box :example_checkbox, props: { text: "Example blah balhasdf Checkbox", value: "test-val" } %>
+  <%= form.check_box :example_checkbox, props: { text: "Example Checkbox", label: true, value: "test-val" } %>
 
   <%= form.actions do |action| %>
     <%= action.submit %>
