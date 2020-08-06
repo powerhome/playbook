@@ -2,7 +2,7 @@
 
 import React, { useEffect, useRef } from 'react'
 import { pbChart } from '../'
-import { spacing } from '../utilities/spacing.js'
+import globalProps from '../utilities/globalProps'
 import classnames from 'classnames'
 import Highcharts from 'highcharts'
 
@@ -101,7 +101,7 @@ const Gauge = (props: GaugeProps) => {
     <div
         {...ariaProps}
         {...dataProps}
-        className={classnames(css, className, spacing(props))}
+        className={classnames(css, className, globalProps(props))}
         id={id}
     />
   )
