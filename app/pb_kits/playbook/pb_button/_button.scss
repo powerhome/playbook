@@ -28,7 +28,7 @@
     @include pb_button_loading(true);
   }
   // Dark Variants =============
-  &[class*=_dark]  {
+  &.dark  {
     &[class*=_primary]  {
       @include pb_button_primary_dark;
     }

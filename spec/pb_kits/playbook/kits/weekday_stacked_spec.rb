@@ -21,7 +21,7 @@ RSpec.describe Playbook::PbWeekdayStacked::WeekdayStacked do
       expect(subject.new({}).classname).to eq "pb_weekday_stacked_kit_left"
       expect(subject.new({align: "center"}).classname).to eq "pb_weekday_stacked_kit_center"
       expect(subject.new({align: "right"}).classname).to eq "pb_weekday_stacked_kit_right"
-      expect(subject.new({dark: true}).classname).to eq "pb_weekday_stacked_kit_left"
+      expect(subject.new({dark: true}).classname).to eq "pb_weekday_stacked_kit_left dark"
     end
   end
 

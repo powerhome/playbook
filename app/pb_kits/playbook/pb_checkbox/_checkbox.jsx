@@ -5,7 +5,7 @@ import Body from '../pb_body/_body.jsx'
 import Icon from '../pb_icon/_icon.jsx'
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
 import classnames from 'classnames'
-import { spacing } from '../utilities/spacing.js'
+import { globalProps } from '../utilities/globalProps.js'
 
 type CheckboxProps = {
   aria?: object,
@@ -41,7 +41,7 @@ const Checkbox = (props: CheckboxProps) => {
   const dataProps = buildDataProps(data)
   const ariaProps = buildAriaProps(aria)
   const classes = classnames(buildCss('pb_checkbox_kit',
-    { dark: dark, checked: checked, error: error }), className, spacing(props))
+    { checked: checked, error: error }), className, globalProps(props))
 
   return (
     <label

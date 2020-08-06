@@ -5,7 +5,7 @@ import classnames from 'classnames'
 import { map } from 'lodash'
 
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
-import { spacing } from '../utilities/spacing.js'
+import { globalProps } from '../utilities/globalProps.js'
 
 import { Image } from '../'
 
@@ -29,7 +29,7 @@ const Avatar = (props: AvatarProps) => {
   const { aria = {}, className, data = {}, name = null, id = id, imageUrl, size = 'md', status = null } = props
   const dataProps = buildDataProps(data)
   const ariaProps = buildAriaProps(aria)
-  const classes = classnames(buildCss('pb_avatar_kit', size), className, spacing(props))
+  const classes = classnames(buildCss('pb_avatar_kit', size), className, globalProps(props))
 
   const initials = name && firstTwoInitials(name)
   dataProps['data-initials'] = initials

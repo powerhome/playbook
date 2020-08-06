@@ -2,7 +2,7 @@
 
 import React from 'react'
 import classnames from 'classnames'
-import { spacing } from '../utilities/spacing.js'
+import { globalProps } from '../utilities/globalProps.js'
 
 import {
   buildAriaProps,
@@ -13,7 +13,6 @@ import {
 type BadgeProps = {
   aria?: object,
   className?: String,
-  dark?: Boolean,
   data?: object,
   id?: String,
   rounded?: Boolean,
@@ -24,7 +23,6 @@ const Badge = (props: BadgeProps) => {
   const {
     aria = {},
     className,
-    dark = false,
     data = {},
     id,
     rounded = false,
@@ -37,9 +35,8 @@ const Badge = (props: BadgeProps) => {
     className,
     buildCss('pb_badge_kit', variant, {
       rounded: rounded,
-      dark: dark,
     }),
-    spacing(props)
+    globalProps(props)
   )
 
   return (

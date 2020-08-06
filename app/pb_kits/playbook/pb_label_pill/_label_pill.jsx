@@ -2,7 +2,7 @@
 
 import React from 'react'
 import classnames from 'classnames'
-import { spacing } from '../utilities/spacing.js'
+import { globalProps } from '../utilities/globalProps.js'
 
 import { buildAriaProps, buildDataProps } from '../utilities/props'
 
@@ -30,7 +30,7 @@ const LabelPill = (props: LabelPillProps) => {
   } = props
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
-  const css = classnames(['pb_label_pill_kit', className], spacing(props))
+  const css = classnames(['pb_label_pill_kit', className], globalProps(props))
 
   return (
     <div

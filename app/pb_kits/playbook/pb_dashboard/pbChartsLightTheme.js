@@ -124,6 +124,13 @@ const highchartsTheme = {
       fontSize: typography.text_smaller,
     },
   },
+  // specific to gauge
+  // unfilled gauge color
+  pane: {
+    background: {
+      borderColor: colors.border_light,
+    },
+  },
 
   plotOptions: {
     series: {
@@ -142,6 +149,25 @@ const highchartsTheme = {
         ],
       },
       threshold: null,
+    },
+
+    // GAUGE STYLES
+    solidgauge: {
+      borderColor: colors.primary,
+      borderWidth: 20,
+      radius: 90,
+      innerRadius: '90%',
+      dataLabels: {
+        borderWidth: 0,
+        color: colors.text_lt_default,
+        enabled: true,
+        style: {
+          fontFamily: typography.font_family_base,
+          fontWeight: typography.regular,
+          fontSize: typography.heading_2,
+        },
+        y: -26,
+      },
     },
 
     // PIE STYLES
