@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### Fixed
+
+- Fixed Caption kit to implement dark mode correctly in html ([#950](https://github.com/powerhome/playbook/pull/950)  @kellyeryan)
+
 ### Added
 - Global Prop Additions & Dark Mode Enabled ([#942](https://github.com/powerhome/playbook/pull/942)  @jasperfurniss)
 
