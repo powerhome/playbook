@@ -35,11 +35,11 @@ const PopoverWithButton = () => {
         show={showPopover}
     >
       <List xpadding>
-        <ListItem>{'Popularity'}</ListItem>
-        <ListItem>{'Title'}</ListItem>
-        <ListItem>{'Duration'}</ListItem>
-        <ListItem>{'Date Started'}</ListItem>
-        <ListItem>{'Date Ended'}</ListItem>
+        <ListItem><a>{'Popularity'}</a></ListItem>
+        <ListItem><a>{'Title'}</a></ListItem>
+        <ListItem><a>{'Duration'}</a></ListItem>
+        <ListItem><a>{'Date Started'}</a></ListItem>
+        <ListItem><a>{'Date Ended'}</a></ListItem>
       </List>
     </PbReactPopover>
   )
