@@ -43,11 +43,16 @@ module Playbook
       end.compact.join(" ")
     end
 
+    def dark_props
+      dark ? "dark" : nil
+    end
+
     def generate_classname(*name_parts, separator: "_")
       [
         name_parts.compact.join(separator),
         prop(:classname),
         spacing_props,
+        dark_props
       ].compact.join(" ")
     end
 
@@ -81,6 +86,7 @@ module Playbook
       prop :padding_top
       prop :padding_x
       prop :padding_y
+      prop :dark, type: Playbook::Props::Boolean, default: false
     end
 
     def spacing_options

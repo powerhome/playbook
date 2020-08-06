@@ -26,6 +26,7 @@ export FixedConfirmationToast from './pb_fixed_confirmation_toast/_fixed_confirm
 export Flex from './pb_flex/_flex.jsx'
 export FlexItem from './pb_flex/_flex_item.jsx'
 export FormPill from './pb_form_pill/_form_pill.jsx'
+export Gauge from './pb_gauge/_gauge.jsx'
 export Hashtag from './pb_hashtag/_hashtag.jsx'
 export Highlight from './pb_highlight/_highlight.jsx'
 export HomeAddressStreet from './pb_home_address_street/_home_address_street.jsx'

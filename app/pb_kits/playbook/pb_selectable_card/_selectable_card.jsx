@@ -13,7 +13,7 @@ import {
   noop,
 } from '../utilities/props'
 
-import { spacing } from '../utilities/spacing.js'
+import { globalProps } from '../utilities/globalProps.js'
 
 type Props = {
   aria: Object,
@@ -95,7 +95,7 @@ const SelectableCard = ({
           value={value}
       />
       <label
-          className={spacing(props)}
+          className={globalProps(props)}
           htmlFor={inputIdPresent}
       >
         {text || children}

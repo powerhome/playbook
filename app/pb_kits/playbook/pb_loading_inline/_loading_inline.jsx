@@ -4,7 +4,7 @@ import React from 'react'
 import classnames from 'classnames'
 import { Body, Icon } from '../'
 
-import { spacing } from '../utilities/spacing.js'
+import { globalProps } from '../utilities/globalProps.js'
 
 type LoadingInlineProps = {
   align?: "left" | "center" | "right",
@@ -18,7 +18,7 @@ const LoadingInline = (props: LoadingInlineProps) => {
   const { align = 'left' } = props
   return (
     <div
-        className={classnames(`pb_loading_inline_kit_${align}`, spacing(props))}
+        className={classnames(`pb_loading_inline_kit_${align}`, globalProps(props))}
     >
       <Body color="light">
         <Icon
