@@ -13,7 +13,6 @@ import {
 type BadgeProps = {
   aria?: object,
   className?: String,
-  dark?: Boolean,
   data?: object,
   id?: String,
   rounded?: Boolean,

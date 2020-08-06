@@ -13,7 +13,6 @@ type ButtonPropTypes = {
   },
   children?: Array<React.ReactChild>,
   className?: String | Array<String>,
-  dark: Boolean,
   disabled?: Boolean,
   fixedWidth?: Boolean,
   fullWidth?: Boolean,

@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Updated
 - Dark Mode Update Badge, Button, Circle Icon Button, Card, Checkbox and Body Kits ([#948](https://github.com/powerhome/playbook/pull/948)  @thestephenmarshall)
+- Cleanup #948 ([#952](https://github.com/powerhome/playbook/pull/952) @thestephenmarshall)
 
 ## [v6.0.1] 2020-7-30
 
