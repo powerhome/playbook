@@ -1,0 +1,4 @@
+project=playbook
+user=powerhome
+include-labels=cleanup,enhancement,new kit,bug
+issues=false
