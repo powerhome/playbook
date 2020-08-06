@@ -2,7 +2,7 @@
 
 import React, { useEffect, useRef } from 'react'
 import { pbChart } from '../'
-import globalProps from '../utilities/globalProps'
+import { globalProps } from '../utilities/globalProps'
 import classnames from 'classnames'
 import Highcharts from 'highcharts'
 
