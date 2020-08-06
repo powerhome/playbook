@@ -4,9 +4,9 @@ module Playbook
   module PbForm
     module FormBuilder
       module CheckboxField
-        def check_box(name, props: {})
+        def check_box(name, data: {}, props: {})
           value = props[:value] ||= 1
-          input = super(name, { required: props[:required] }, value)
+          input = super(name, { required: props[:required], data: data }, value)
           label_text = name.to_s.gsub("_", " ")
 
           if props[:label]
