@@ -4,7 +4,7 @@ import React, { useCallback } from 'react'
 import { useDropzone } from 'react-dropzone'
 import { buildCss, noop } from '../utilities/props'
 import classnames from 'classnames'
-import { spacing } from '../utilities/spacing.js'
+import { globalProps } from '../utilities/globalProps.js'
 
 import type { Callback } from '../types.js'
 
@@ -33,7 +33,7 @@ const FileUpload = (props: FileUploadProps) => {
 
   return (
     <div
-        className={classnames(buildCss('pb_file_upload_kit', className), spacing(props))}
+        className={classnames(buildCss('pb_file_upload_kit', className), globalProps(props))}
         {...getRootProps()}
     >
       <Card>

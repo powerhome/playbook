@@ -1,0 +1,14 @@
+<% data = [
+  {
+    name: 'Capacity',
+    value: 75,
+  }
+]%>
+
+<%= pb_rails("gauge", props: {
+  id: "full-circle",
+  chart_data: data,
+  full_circle: true,
+  title: "Seating Capacity",
+  suffix: "%"
+}) %>

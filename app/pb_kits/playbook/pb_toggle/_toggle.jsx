@@ -10,7 +10,7 @@ import {
   buildDataProps,
 } from '../utilities/props'
 
-import { spacing } from '../utilities/spacing.js'
+import { globalProps } from '../utilities/globalProps.js'
 
 type Props = {
   aria?: object,
@@ -54,8 +54,8 @@ const Toggle = ({
     <div
         {...ariaProps}
         {...dataProps}
-        className={css}
         id={id}
+        className={classnames(css, globalProps(props))}
     >
       <label className="pb_toggle_wrapper">
         <If condition={children}>

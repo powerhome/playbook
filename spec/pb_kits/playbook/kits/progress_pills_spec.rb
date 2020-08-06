@@ -25,7 +25,7 @@ RSpec.describe Playbook::PbProgressPills::ProgressPills do
   describe "#classname" do
     it "returns namespaced class name", :aggregate_failures do
       expect(subject.new({}).classname).to eq "pb_progress_pills_kit"
-      expect(subject.new({dark:true}).classname).to eq "pb_progress_pills_kit_dark"
+      expect(subject.new({dark:true}).classname).to eq "pb_progress_pills_kit_dark dark"
     end
   end
 

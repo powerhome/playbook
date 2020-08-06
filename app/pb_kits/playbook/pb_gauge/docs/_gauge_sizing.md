@@ -1,0 +1,1 @@
+### Gauge resizes dynamically to fit whatever element it's placed within.
