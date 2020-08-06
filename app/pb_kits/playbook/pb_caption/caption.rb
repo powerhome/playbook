@@ -7,7 +7,6 @@ module Playbook
 
       partial "pb_caption/caption"
 
-      prop :dark, type: Playbook::Props::Boolean, default: false
       prop :size, type: Playbook::Props::Enum,
                   values: %w[xs sm md base lg xl],
                   default: "md"
@@ -17,13 +16,7 @@ module Playbook
       prop :text
 
       def classname
-        generate_classname("pb_caption_kit", size, dark_class)
-      end
-
-    private
-
-      def dark_class
-        dark ? "dark" : nil
+        generate_classname("pb_caption_kit", size)
       end
     end
   end

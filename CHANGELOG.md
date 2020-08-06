@@ -19,6 +19,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Updated
 - Dark Mode Update for Title kit. ([#951](https://github.com/powerhome/playbook/pull/951)  @kellyeryan)
 
+### Fixed
+
+- Fixed Caption kit to implement dark mode correctly in html ([#950](https://github.com/powerhome/playbook/pull/950)  @kellyeryan)
+
 ### Added
 - Added Button Toolbar kit ([#908](https://github.com/powerhome/playbook/pull/908)  @kellyeryan)
 - Global Prop Additions & Dark Mode Enabled ([#942](https://github.com/powerhome/playbook/pull/942)  @jasperfurniss)
