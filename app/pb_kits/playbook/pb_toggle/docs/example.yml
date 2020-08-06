@@ -1,13 +1,16 @@
 examples:
 
   rails:
-  - toggle_default: Sizes
-  - toggle_checked: Default State
+  - toggle_default: Default State
+  - toggle_size: Sizes
   - toggle_name: Name and Value
   - toggle_custom: Custom checkbox input
   - toggle_custom_radio: Custom radio inputs
 
   react:
-  - toggle_default: Default
-  - toggle_accessibility: Toggle Accessibility
-  - toggle_data: Toggle Data Props
+  - toggle_default: Default State
+  - toggle_size: Sizes
+  - toggle_name: Name and Value
+  - toggle_custom: Custom checkbox input
+  - toggle_custom_radio: Custom radio inputs
+

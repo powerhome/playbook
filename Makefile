@@ -25,7 +25,7 @@ install:
 	docker-compose run web yarn && bundle
 
 test:
-	docker-compose run web rake
+	docker-compose run web bin/rspec
 
 shell:
 	docker-compose run web /bin/bash --login

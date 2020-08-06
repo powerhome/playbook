@@ -18,7 +18,7 @@
     @include pb_title_4;
   }
 
-  &[class*=_dark] {
+  &.dark {
     @include pb_title_dark;
   }
 

@@ -25,21 +25,14 @@ module Playbook
                        default: false
       prop :value
 
-      prop :dark, type: Playbook::Props::Boolean,
-                  default: false
-
       def classname
-        generate_classname("pb_selectable_card_icon_kit", checked_class, dark_class, enabled_disabled_class)
+        generate_classname("pb_selectable_card_icon_kit", checked_class, enabled_disabled_class)
       end
 
     private
 
       def checked_class
         checked ? "checked" : nil
-      end
-
-      def dark_class
-        dark ? "dark" : nil
       end
 
       def enabled_disabled_class

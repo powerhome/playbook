@@ -35,7 +35,7 @@ const PopoverWithButton = () => {
         show={showPopover}
     >
       <List xpadding>
-        <ListItem><a><a>{'Popularity'}</a></a></ListItem>
+        <ListItem><a>{'Popularity'}</a></ListItem>
         <ListItem><a>{'Title'}</a></ListItem>
         <ListItem><a>{'Duration'}</a></ListItem>
         <ListItem><a>{'Date Started'}</a></ListItem>

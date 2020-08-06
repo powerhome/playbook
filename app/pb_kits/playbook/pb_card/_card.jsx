@@ -7,35 +7,38 @@ import { buildCss } from '../utilities/props'
 import { globalProps } from '../utilities/globalProps.js'
 
 type CardPropTypes = {
+  borderNone?: Boolean,
   children: Array<React.ReactNode> | React.ReactNode,
   className?: String,
   highlight?: {
     position?: "side" | "top",
     color?: String,
   },
+  padding?: String,
   selected?: Boolean,
   shadow?: "none" | "deep" | "deeper" | "deepest",
-  dark?: Boolean,
-  borderNone?: Boolean,
 }
 
 type CardHeaderProps = {
+  categoryColor?: Number,
   children: Array<React.ReactNode> | React.ReactNode,
   className?: String,
-  categoryColor?: Number,
+  padding?: String,
 }
 
 type CardBodyProps = {
   children: Array<React.ReactNode> | React.ReactNode | String,
   className?: String,
+  padding?: String,
 }
 
 // Header component
 const Header = (props: CardHeaderProps) => {
-  const { children, className, categoryColor = 1 } = props
+  const { children, className, categoryColor = 1, padding = 'sm' } = props
   const headerCSS = buildCss('pb_card_header_kit', `category_${categoryColor}`)
 
-  const headerSpacing = globalProps(props) ? globalProps(props) : 'p_sm'
+  const headerSpacing = globalProps(props, { padding })
+
   return (
     <div className={classnames(headerCSS, className, headerSpacing)}>
       {children}
@@ -45,9 +48,11 @@ const Header = (props: CardHeaderProps) => {
 
 // Body component
 const Body = (props: CardBodyProps) => {
-  const { children, className } = props
+  const { children, className, padding = 'md' } = props
   const bodyCSS = buildCss('pb_card_body_kit')
-  const bodySpacing = globalProps(props) ? globalProps(props) : 'p_md'
+
+  const bodySpacing = globalProps(props, { padding })
+
   return (
     <div className={classnames(bodyCSS, className, bodySpacing)}>
       {children}
@@ -57,24 +62,22 @@ const Body = (props: CardBodyProps) => {
 
 const Card = (props: CardPropTypes) => {
   const {
+    borderNone = false,
     children,
     className,
-    dark = false,
     highlight = {},
     selected = false,
     shadow = 'none',
-    borderNone = false,
+    padding = 'md',
   } = props
   const bodyCSS = buildCss('pb_card_body_kit')
   const borderCSS = borderNone == true ? 'border_none' : ''
   const cardCss = buildCss('pb_card_kit', `shadow_${shadow}`, `${borderCSS}`, {
-    dark: dark,
     selected,
     deselected: !selected,
     [`highlight_${highlight.position}`]: highlight.position,
     [`highlight_${highlight.color}`]: highlight.color,
   })
-  const cardSpacing = globalProps(props) ? globalProps(props) : 'p_md'
 
   // coerce to array
   const cardChildren =
@@ -91,9 +94,9 @@ const Card = (props: CardPropTypes) => {
   const nonHeaderChildren = cardChildren.filter((child) => (get(child, 'type.displayName') !== 'Header'))
 
   return (
-    <div className={classnames(cardCss, className)}>
+    <div className={classnames(cardCss, globalProps(props), className)}>
       {subComponentTags('Header')}
-      <div className={classnames(bodyCSS, cardSpacing)}>
+      <div className={classnames(bodyCSS, globalProps({ padding }))}>
         {nonHeaderChildren}
       </div>
     </div>
