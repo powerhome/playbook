@@ -29,7 +29,7 @@ type SelectableCardIconProps = {
   onChange?: (e) => void,
 }
 
-const SelectableCardIcon =(props: SelectableIconProps) => {
+const SelectableCardIcon = (props: SelectableCardIconProps) => {
   const {
     aria = {},
     checkmark = false,
