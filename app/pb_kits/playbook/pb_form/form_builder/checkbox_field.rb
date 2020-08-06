@@ -9,6 +9,9 @@ module Playbook
           input = super(name, { required: props[:required], data: data }, value)
           label_text = name.to_s.gsub("_", " ")
 
+          props[:margin_bottom] = "sm"
+          props[:form_spacing] = true
+
           if props[:label]
             @template.pb_rails("caption", props: { text: label_text, margin_bottom: "xs" }) +
               @template.pb_rails("checkbox", props: props) do
