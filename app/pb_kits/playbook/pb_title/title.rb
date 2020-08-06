@@ -7,8 +7,6 @@ module Playbook
 
       partial "pb_title/title"
 
-      prop :dark, type: Playbook::Props::Boolean,
-                  default: false
       prop :size, type: Playbook::Props::Enum,
                   values: [1, 2, 3, 4],
                   default: 3
@@ -21,13 +19,7 @@ module Playbook
                      default: nil
 
       def classname
-        generate_classname("pb_title_kit", size, dark_class, variant)
-      end
-
-    private
-
-      def dark_class
-        dark ? "dark" : nil
+        generate_classname("pb_title_kit", size, variant)
       end
     end
   end

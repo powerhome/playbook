@@ -16,6 +16,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Dark Mode Update Badge, Button, Circle Icon Button, Card, Checkbox and Body Kits ([#948](https://github.com/powerhome/playbook/pull/948)  @thestephenmarshall)
 - Cleanup #948 ([#952](https://github.com/powerhome/playbook/pull/952) @thestephenmarshall)
 
+### Updated
+- Dark Mode Update for Title kit. ([#951](https://github.com/powerhome/playbook/pull/951)  @kellyeryan)
+
 ### Added
 - Added Button Toolbar kit ([#908](https://github.com/powerhome/playbook/pull/908)  @kellyeryan)
 - Global Prop Additions & Dark Mode Enabled ([#942](https://github.com/powerhome/playbook/pull/942)  @jasperfurniss)
