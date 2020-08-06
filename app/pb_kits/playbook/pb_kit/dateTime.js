@@ -74,7 +74,11 @@ export default class DateTime {
   }
 
   toTime() {
-    return this.value.strftime('%I:%M')
+    const time = this.value.strftime('%I:%M')
+
+    // strftime adds a leading 0 on single hour times. ie 08:31.
+    // this removes that 0 to match the rails kit.
+    return time.charAt() === '0' ? time.slice(1) : time
   }
 
   toTimezone() {
