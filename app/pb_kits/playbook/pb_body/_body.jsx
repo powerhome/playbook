@@ -4,7 +4,7 @@ import React from 'react'
 import classnames from 'classnames'
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
 import { Highlight } from '../'
-import { spacing } from '../utilities/spacing.js'
+import { globalProps } from '../utilities/globalProps.js'
 
 type BodyProps = {
   aria?: object,
@@ -43,7 +43,7 @@ const Body = (props: BodyProps) => {
     buildCss('pb_body_kit', color, status, {
       dark: dark,
     }),
-    spacing(props),
+    globalProps(props),
     className
   )
   const Tag = `${tag}`

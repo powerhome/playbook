@@ -17,12 +17,12 @@ RSpec.describe Playbook::PbCheckbox::Checkbox do
   describe "#classname" do
     it "returns namespaced class name", :aggregate_failures do
       expect(subject.new({}).classname).to eq "pb_checkbox_kit_off"
-      expect(subject.new(dark: true).classname).to eq "pb_checkbox_kit_dark_off"
+      expect(subject.new(dark: true).classname).to eq "pb_checkbox_kit_dark_off dark"
       expect(subject.new(checked: true).classname).to eq "pb_checkbox_kit_on"
-      expect(subject.new(dark: true, checked: true).classname).to eq "pb_checkbox_kit_dark_on"
+      expect(subject.new(dark: true, checked: true).classname).to eq "pb_checkbox_kit_dark_on dark"
       expect(subject.new(classname: "additional_class").classname).to eq "pb_checkbox_kit_off additional_class"
       expect(subject.new(error: true).classname).to eq "pb_checkbox_kit_off error"
-      expect(subject.new(dark: true, error: true).classname).to eq "pb_checkbox_kit_dark_off error"
+      expect(subject.new(dark: true, error: true).classname).to eq "pb_checkbox_kit_dark_off dark error"
     end
   end
 end

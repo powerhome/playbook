@@ -11,7 +11,7 @@ import {
   noop,
 } from '../utilities/props'
 
-import { spacing } from '../utilities/spacing.js'
+import { globalProps } from '../utilities/globalProps.js'
 
 type Props = {
   aria: object,
@@ -51,7 +51,7 @@ const Toggle = ({
     <div
         {...ariaProps}
         {...dataProps}
-        className={classnames(css, spacing(props))}
+        className={classnames(css, globalProps(props))}
     >
       <label className="pb_toggle_wrapper">
         <input

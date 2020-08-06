@@ -2,7 +2,7 @@
 
 import React from 'react'
 import classnames from 'classnames'
-import { spacing } from '../utilities/spacing.js'
+import { globalProps } from '../utilities/globalProps.js'
 
 type IconProps = {
   aria?: Object,
@@ -72,7 +72,7 @@ const Icon = (props: IconProps) => {
       [`fa-pull-${pull}`]: pull,
       [`fa-rotate-${rotation}`]: rotation,
     },
-    spacing(props)
+    globalProps(props)
   )
 
   return (

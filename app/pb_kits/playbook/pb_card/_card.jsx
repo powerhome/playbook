@@ -4,7 +4,7 @@ import React from 'react'
 import { get } from 'lodash'
 import classnames from 'classnames'
 import { buildCss } from '../utilities/props'
-import { spacing } from '../utilities/spacing.js'
+import { globalProps } from '../utilities/globalProps.js'
 
 type CardPropTypes = {
   children: Array<React.ReactNode> | React.ReactNode,
@@ -35,7 +35,7 @@ const Header = (props: CardHeaderProps) => {
   const { children, className, categoryColor = 1 } = props
   const headerCSS = buildCss('pb_card_header_kit', `category_${categoryColor}`)
 
-  const headerSpacing = spacing(props) ? spacing(props) : 'p_sm'
+  const headerSpacing = globalProps(props) ? globalProps(props) : 'p_sm'
   return (
     <div className={classnames(headerCSS, className, headerSpacing)}>
       {children}
@@ -47,7 +47,7 @@ const Header = (props: CardHeaderProps) => {
 const Body = (props: CardBodyProps) => {
   const { children, className } = props
   const bodyCSS = buildCss('pb_card_body_kit')
-  const bodySpacing = spacing(props) ? spacing(props) : 'p_md'
+  const bodySpacing = globalProps(props) ? globalProps(props) : 'p_md'
   return (
     <div className={classnames(bodyCSS, className, bodySpacing)}>
       {children}
@@ -74,7 +74,7 @@ const Card = (props: CardPropTypes) => {
     [`highlight_${highlight.position}`]: highlight.position,
     [`highlight_${highlight.color}`]: highlight.color,
   })
-  const cardSpacing = spacing(props) ? spacing(props) : 'p_md'
+  const cardSpacing = globalProps(props) ? globalProps(props) : 'p_md'
 
   // coerce to array
   const cardChildren =

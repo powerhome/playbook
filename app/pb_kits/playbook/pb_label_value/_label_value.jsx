@@ -4,8 +4,8 @@ import React from 'react'
 import classnames from 'classnames'
 import DateTime from '../pb_kit/dateTime.js'
 import { buildAriaProps, buildDataProps } from '../utilities/props'
+import { globalProps } from '../utilities/globalProps.js'
 import { Body, Caption, Flex, Icon, Title } from '../'
-import { spacing } from '../utilities/spacing.js'
 
 type LabelValueProps = {
   aria?: object,
@@ -53,7 +53,7 @@ const LabelValue = (props: LabelValueProps) => {
   const themeStyle = dark === true ? '_dark' : ''
   const css = classnames(
     ['pb_label_value_kit' + themeStyle, className],
-    spacing(props)
+    globalProps(props)
   )
 
   return (
