@@ -5,14 +5,13 @@ import classnames from 'classnames'
 
 import DateTime from '../pb_kit/dateTime.js'
 import { buildCss } from '../utilities/props'
-import { spacing } from '../utilities/spacing.js'
+import { globalProps } from '../utilities/globalProps.js'
 
 import { Body, Icon, Title  } from '../'
 
 type TimeProps = {
   align?: 'left" | "center' | 'right',
   className?: String | Array<String>,
-  dark?: Boolean,
   data?: String,
   date: String,
   id?: String,
@@ -21,13 +20,11 @@ type TimeProps = {
 }
 
 const Time = (props: TimeProps) => {
-  const { align, className, dark = false, date, showTimezone, size } = props
+  const { align, className, date, showTimezone, size } = props
   const classes = classnames(
     className,
-    buildCss('pb_time_kit', align, size, {
-      dark: dark,
-    }),
-    spacing(props)
+    buildCss('pb_time_kit', align, size),
+    globalProps(props)
   )
 
   const dateTimestamp = new DateTime({ value: date })
@@ -40,19 +37,17 @@ const Time = (props: TimeProps) => {
               fixedWidth
               icon="clock"
           />
+          {' '}
         </If>
         <time dateTime={date}>
           <span>
             <If condition={size !== 'lg'}>
               <Body
-                  color={dark ? 'light' : ''}
                   tag="span"
                   text={dateTimestamp.toTimeWithMeridian()}
               />
-            </If>
-            <If condition={size === 'lg'}>
+              <Else />
               <Title
-                  color="light"
                   size={3}
                   tag="span"
                   text={dateTimestamp.toTimeWithMeridian()}

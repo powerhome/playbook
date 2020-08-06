@@ -13,6 +13,7 @@ const TimeDark = () => {
           dark
           date={new Date()}
           showTimezone
+          size="lg"
       />
       <br />
       <Time
