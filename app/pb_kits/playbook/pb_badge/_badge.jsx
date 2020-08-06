@@ -24,7 +24,6 @@ const Badge = (props: BadgeProps) => {
   const {
     aria = {},
     className,
-    dark = false,
     data = {},
     id,
     rounded = false,
@@ -37,7 +36,6 @@ const Badge = (props: BadgeProps) => {
     className,
     buildCss('pb_badge_kit', variant, {
       rounded: rounded,
-      dark: dark,
     }),
     globalProps(props)
   )
