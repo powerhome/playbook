@@ -14,7 +14,7 @@
 %>
 
 <%= pb_rails("form", props: {
-    form_system_options: { scope: :example, method: :get },
+    form_system_options: { scope: :scope, method: :get },
     validate: true
   }) do |form| %>
   <%= form.text_field :example_text_field, props: { label: true, required: true } %>
@@ -27,7 +27,7 @@
   <%= form.text_area :example_text_area, props: { label: true, required: true } %>
   <%= form.select :example_select, [ ["Yes", 1], ["No", 2] ], props: { label: true, blank_selection: "Select One...", required: true } %>
   <%= form.collection_select :example_collection_select, example_collection, :value, :name, props: { label: true, blank_selection: "Select One...", required: true } %>
-  <%# <%= form.date_picker :example_date_picker, props: { default_date: 'blank', name: "example[example_date_picker]", picker_id: "example_example_date_picker2", required: true } %> %>
+  <%= form.date_picker :example_date_picker2, props: { default_date: 'blank' } %>
 
   <%= form.actions do |action| %>
     <%= action.submit %>
