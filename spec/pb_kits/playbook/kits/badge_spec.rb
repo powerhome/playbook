@@ -19,7 +19,7 @@ RSpec.describe Playbook::PbBadge::Badge do
       expect(subject.new({}).classname).to eq "pb_badge_kit_neutral"
       expect(subject.new(variant: "warning").classname).to eq "pb_badge_kit_warning"
       expect(subject.new(rounded: true).classname).to eq "pb_badge_kit_neutral_rounded"
-      expect(subject.new(dark: true).classname).to eq "pb_badge_kit_neutral_dark dark"
+      expect(subject.new(dark: true).classname).to eq "pb_badge_kit_neutral dark"
       expect(subject.new(variant: "error", rounded: true).classname).to eq "pb_badge_kit_error_rounded"
       expect(subject.new(classname: "additional_class").classname).to eq "pb_badge_kit_neutral additional_class"
     end

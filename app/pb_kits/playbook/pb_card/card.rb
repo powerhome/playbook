@@ -13,8 +13,6 @@ module Playbook
                     default: "none"
       prop :highlight, type: Playbook::Props::Hash,
                        default: {}
-      prop :dark, type: Playbook::Props::Boolean,
-                 default: false
       prop :border_none, type: Playbook::Props::Boolean,
                          default: false
 
@@ -52,10 +50,6 @@ module Playbook
 
       def highlight_color_class
         highlight[:color].present? ? "highlight_#{highlight[:color]}" : nil
-      end
-
-      def dark_class
-        dark ? "dark" : nil
       end
 
       def border_class

@@ -11,8 +11,6 @@ module Playbook
       prop :color, type: Playbook::Props::Enum,
                    values: %w[default light lighter dark light_dark lighter_dark],
                    default: "default"
-      prop :dark, type: Playbook::Props::Boolean,
-                  default: false
       prop :status, type: Playbook::Props::Enum,
                     values: %w[neutral negative positive],
                     default: "neutral"
@@ -44,10 +42,6 @@ module Playbook
 
       def color_class
         color != "default" ? color : nil
-      end
-
-      def dark_class
-        dark ? " dark" : ""
       end
 
       def status_class
