@@ -27,7 +27,6 @@ const Body = (props: BodyProps) => {
     className,
     children,
     color = '',
-    dark = false,
     data = {},
     highlightedText = [],
     highlighting = false,
@@ -40,9 +39,7 @@ const Body = (props: BodyProps) => {
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
   const classes = classnames(
-    buildCss('pb_body_kit', color, status, {
-      dark: dark,
-    }),
+    buildCss('pb_body_kit', color, status),
     globalProps(props),
     className
   )

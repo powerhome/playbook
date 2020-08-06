@@ -24,14 +24,13 @@ module Playbook
                            shadow_class,
                            highlight_position_class,
                            highlight_color_class,
-                           dark_class,
                            border_class)
       end
 
       def body_padding
-        if padding.present? 
+        if padding.present?
            ""
-        else 
+        else
           "p_md"
         end
       end
