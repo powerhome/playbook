@@ -3,6 +3,7 @@
 import React from 'react'
 import classnames from 'classnames'
 import { globalProps } from '../utilities/globalProps.js'
+import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
 
 type ImageProps = {
   alt?: String,
@@ -24,15 +25,21 @@ const Image = (props: ImageProps) => {
   } = props
 
   const ariaProps = buildAriaProps(aria)
-  const classes = classnames(buildCss('pb_image lazyload blur_up'), className, spacing(props))
+  const classes = classnames(buildCss('pb_image lazyload blur_up'), className, globalProps(props))
   const dataProps = buildDataProps(data)
 
   return (
-    <img
-        alt={alt}
-        className={classnames('pb_image_kit lazyload blur_up', globalProps(props))}
-        data-src={url}
-    />
+    <div>
+      <img
+          {...ariaProps}
+          {...dataProps}
+          alt={alt}
+          className={classes}
+          data-src={url}
+          id={id}
+          src={url}
+      />
+    </div>
   )
 }
 
