@@ -34,7 +34,6 @@ type ButtonPropTypes = {
 
 const buttonClassName = (props: ButtonPropTypes) => {
   const {
-    dark = false,
     disabled = false,
     fullWidth = false,
     loading = false,

@@ -24,7 +24,6 @@ const Badge = (props: BadgeProps) => {
   const {
     aria = {},
     className,
-    dark = false,
     data = {},
     id,
     rounded = false,
