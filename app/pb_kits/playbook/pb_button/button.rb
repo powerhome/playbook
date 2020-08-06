@@ -51,7 +51,7 @@ module Playbook
     private
 
       def classname
-        generate_classname("pb_button_kit", variant, full_width_class, disabled_class, loading_class, dark_class)
+        generate_classname("pb_button_kit", variant, full_width_class, disabled_class, loading_class)
       end
 
       def dark_class

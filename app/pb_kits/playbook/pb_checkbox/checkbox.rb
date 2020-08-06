@@ -23,7 +23,7 @@ module Playbook
       end
 
       def classname
-        generate_classname("pb_checkbox_kit", dark_class, checked_class) + error_class
+        generate_classname("pb_checkbox_kit", checked_class) + error_class
       end
 
       def input

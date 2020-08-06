@@ -4,8 +4,8 @@ import React from 'react'
 import classnames from 'classnames'
 import DateTime from '../pb_kit/dateTime.js'
 import { buildAriaProps, buildDataProps } from '../utilities/props'
-import { Body, Caption } from '../'
 import { globalProps } from '../utilities/globalProps.js'
+import { Body, Caption, Flex, Icon, Title } from '../'
 
 type LabelValueProps = {
   aria?: object,
