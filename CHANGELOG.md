@@ -8,6 +8,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## Unreleased
 
 ### Fixed
+
+- Dark mode update for Selectable Card kit ([#957](https://github.com/powerhome/playbook/pull/957)  @kellyeryan)
 - Fixed missing spacing under textarea label ([#943](https://github.com/powerhome/playbook/pull/943) @christinaatai)
 
 ### Added
