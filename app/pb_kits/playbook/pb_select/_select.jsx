@@ -58,6 +58,7 @@ const Select = ({
   aria = {},
   blankSelection,
   children,
+  className,
   dark = false,
   data = {},
   disabled = false,
@@ -71,8 +72,8 @@ const Select = ({
   value,
   ...props
 }: SelectProps) => {
-  const errorClass = error ? ' error' : ''
-  const css = classnames(buildCss('pb_select', { dark }) + errorClass, globalProps(props))
+  const classes = classnames(buildCss('pb_select'), className, { dark }, globalProps(props))
+  const selectWrapperClass = classnames(buildCss('pb_select_kit_wrapper'), { error }, className)
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
   const optionsList = createOptions(options)
@@ -81,7 +82,7 @@ const Select = ({
     <div
         {...ariaProps}
         {...dataProps}
-        className={css}
+        className={classes}
     >
       <If condition={label}>
         <label
@@ -95,7 +96,7 @@ const Select = ({
         </label>
       </If>
       <label
-          className="pb_select_kit_wrapper"
+          className={selectWrapperClass}
           htmlFor={name}
       >
         <If condition={children}>
@@ -103,6 +104,7 @@ const Select = ({
           <Else />
           <select
               {...props}
+              dark={dark}
               disabled={disabled}
               id={name}
               multiple={multiple}
