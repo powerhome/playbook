@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - Global Prop Additions & Dark Mode Enabled ([#942](https://github.com/powerhome/playbook/pull/942)  @jasperfurniss)
 - Gauge Kit ([#910](https://github.com/powerhome/playbook/pull/910) @bh247484)
+- Added React version of Time Kit ([#947](https://github.com/powerhome/playbook/pull/947) @coleerikson)
 
 ### Updated
 - Dark Mode Update Badge, Button, Circle Icon Button, Card, Checkbox and Body Kits ([#948](https://github.com/powerhome/playbook/pull/948)  @thestephenmarshall)
@@ -19,7 +20,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 - Updated failing spec test after update ([#940](https://github.com/powerhome/playbook/pull/940) @jasoncypret)
-
 
 ## [v6.0.0] 2020-7-30
 
