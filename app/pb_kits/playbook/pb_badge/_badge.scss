@@ -37,7 +37,7 @@
     border-radius: $pb_badge_height / 2;
   }
 
-  &[class*=_dark] {
+  &.dark {
     border-width: 0;
 
     @each $color_name, $color_value in $status_colors {

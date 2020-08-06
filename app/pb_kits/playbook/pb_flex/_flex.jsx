@@ -3,7 +3,7 @@
 import React from 'react'
 import classnames from 'classnames'
 import { buildCss } from '../utilities/props'
-import { spacing as spacingFunc } from '../utilities/spacing.js'
+import { globalProps } from '../utilities/globalProps.js'
 type FlexProps = {
   children: Array<React.ReactNode> | React.ReactNode,
   className?: String,
@@ -52,7 +52,7 @@ const Flex = (props: FlexProps) => {
           wrapClass
         ),
         className,
-        spacingFunc(props)
+        globalProps(props)
       )}
     >
       {children}

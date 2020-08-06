@@ -13,8 +13,6 @@ module Playbook
                     default: "none"
       prop :highlight, type: Playbook::Props::Hash,
                        default: {}
-      prop :dark, type: Playbook::Props::Boolean,
-                 default: false
       prop :border_none, type: Playbook::Props::Boolean,
                          default: false
 
@@ -24,14 +22,13 @@ module Playbook
                            shadow_class,
                            highlight_position_class,
                            highlight_color_class,
-                           dark_class,
                            border_class)
       end
 
       def body_padding
-        if padding.present? 
+        if padding.present?
            ""
-        else 
+        else
           "p_md"
         end
       end
@@ -53,10 +50,6 @@ module Playbook
 
       def highlight_color_class
         highlight[:color].present? ? "highlight_#{highlight[:color]}" : nil
-      end
-
-      def dark_class
-        dark ? "dark" : nil
       end
 
       def border_class

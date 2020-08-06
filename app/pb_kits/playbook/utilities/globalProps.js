@@ -1,4 +1,5 @@
-export const spacing = ({
+// Prop categories
+const spacingProps = ({
   marginRight,
   marginLeft,
   marginTop,
@@ -30,4 +31,16 @@ export const spacing = ({
   css += paddingY ? `py_${paddingY} ` : ''
   css += padding ? `p_${padding} ` : ''
   return css
+}
+
+const darkProps = ({ dark }) => {
+  let css = ''
+  css += dark ? 'dark' : ''
+  return css
+}
+
+// All Exported as a single function
+export const globalProps = (props, defaultProps = {}) => {
+  const allProps = { ...props, ...defaultProps }
+  return spacingProps(allProps) + darkProps(allProps)
 }
