@@ -10,6 +10,7 @@ type CardPropTypes = {
   borderNone?: Boolean,
   children: Array<React.ReactNode> | React.ReactNode,
   className?: String,
+  dark?: Boolean,
   highlight?: {
     position?: "side" | "top",
     color?: String,
