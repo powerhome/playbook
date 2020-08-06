@@ -1,0 +1,12 @@
+<%= content_tag(:div, "",
+    id: object.id,
+    data: object.data,
+    class: object.classname) %>
+<% content_for :pb_js do %>
+  <%= javascript_tag do %>
+    window.addEventListener('DOMContentLoaded', function() {
+      new pbChart('.selector', <%= object.chart_options %>)
+    })
+  <% end %>
+<% end %>
+

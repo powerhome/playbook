@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 - Global Prop Additions & Dark Mode Enabled ([#942](https://github.com/powerhome/playbook/pull/942)  @jasperfurniss)
+- Gauge Kit ([#910](https://github.com/powerhome/playbook/pull/910) @bh247484)
 
 ### Updated
 - Dark Mode Update Badge, Button, Circle Icon Button, Card, Checkbox and Body Kits ([#948](https://github.com/powerhome/playbook/pull/948)  @thestephenmarshall)
@@ -17,6 +18,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 - Updated failing spec test after update ([#940](https://github.com/powerhome/playbook/pull/940) @jasoncypret)
+
 
 ## [v6.0.0] 2020-7-30
 
@@ -35,6 +37,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 - Added disabled attribute to button. ([#934](https://github.com/powerhome/playbook/pull/934)  @KatherineMuedas)
+
 
 ## [v5.5.1] 2020-7-24
 
@@ -69,7 +72,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Added aria, data props to Circle Icon Button React kit; added aria props to Circle Icon Button Rails kit.([#907](https://github.com/powerhome/playbook/pull/907) @kellyeryan)
 
 
+### Added
+- Gauge Kit ([#910](https://github.com/powerhome/playbook/pull/910) @bh247484)
+- Added border prop ([#900](https://github.com/powerhome/playbook/pull/900) @christinaatai))
+
 ## [v5.2.0] 2020-7-2
+
+### Added
+- Added aria, data props to Badge React kit; added aria props to Badge Rails kit ([#901](https://github.com/powerhome/playbook/pull/901) @kellyeryan)
 
 ### Fixed
 - Added User Badge Kit back to menu.yml ([#890](https://github.com/powerhome/playbook/pull/890) @christinaatai)
