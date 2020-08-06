@@ -10,6 +10,7 @@ kits:
   - badge
   - buttons:
     - button
+    - button_toolbar
     - circle_icon_button
   - card
   - checkbox
