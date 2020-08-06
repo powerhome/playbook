@@ -2,9 +2,4 @@ project=playbook
 user=powerhome
 include-labels=cleanup,enhancement,new kit,bug
 issues=false
-add-sections={
-    "Fixed":{
-        "prefix":"**Fixed:**",
-        "labels":["bug"]
-    }
-}
+add-sections={"documentation":{"prefix":"**Documentation updates:**","labels":["bug", "enhancement", "cleanup"]}}
