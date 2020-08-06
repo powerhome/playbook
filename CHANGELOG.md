@@ -10,6 +10,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - Global Prop Additions & Dark Mode Enabled ([#942](https://github.com/powerhome/playbook/pull/942)  @jasperfurniss)
 
+### Fixed
+- Make Popover List Example Consistent ([#949](https://github.com/powerhome/playbook/pull/949) @thestephenmarshall)
+
 ## [v6.0.1] 2020-7-30
 
 ### Fixed
