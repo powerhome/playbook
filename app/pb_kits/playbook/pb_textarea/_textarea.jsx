@@ -19,7 +19,6 @@ type TextareaProps = {
   value?: string,
   name?: string,
   rows?: number,
-  dark?: boolean,
   resize: 'none' | 'both' | 'horizontal' | 'vertical',
   onChange?: InputCallback<HTMLTextAreaElement>,
 }
@@ -27,7 +26,6 @@ type TextareaProps = {
 const Textarea = ({
   className,
   children,
-  dark = false,
   resize = 'none',
   error,
   label,
@@ -38,14 +36,13 @@ const Textarea = ({
   value,
   ...props
 }: TextareaProps) => {
-  const textareaClass = `pb_textarea_kit${dark ? '_dark' : ''}`
   const errorClass = error ? 'error' : null
-  const resizeClass = ` resize_${resize}`
+  const resizeClass = `resize_${resize}`
+  const classes = classnames('pb_textarea_kit', className, errorClass, resizeClass, globalProps(props))
 
   return (
-    <div className={classnames(textareaClass, className, errorClass, resizeClass, globalProps(props))}>
+    <div className={classes}>
       <Caption
-          dark={dark}
           text={label}
       />
       <If condition={children}>
@@ -53,7 +50,7 @@ const Textarea = ({
         <Else />
         <textarea
             {...props}
-            className={textareaClass}
+            className="pb_textarea_kit"
             name={name}
             onChange={onChange}
             placeholder={placeholder}
@@ -62,7 +59,6 @@ const Textarea = ({
         />
         <If condition={error}>
           <Body
-              dark={dark}
               status="negative"
               text={error}
           />

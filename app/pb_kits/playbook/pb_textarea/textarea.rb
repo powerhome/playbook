@@ -7,8 +7,6 @@ module Playbook
 
       partial "pb_textarea/textarea"
 
-      prop :dark, type: Playbook::Props::Boolean,
-                  default: false
       prop :error
       prop :object
       prop :label
@@ -23,14 +21,10 @@ module Playbook
       prop :value
 
       def classname
-        generate_classname("pb_textarea_kit", dark_class) + error_class + resize_class
+        generate_classname("pb_textarea_kit") + error_class + resize_class
       end
 
     private
-
-      def dark_class
-        dark ? "dark" : nil
-      end
 
       def error_class
         error ? " error" : ""
