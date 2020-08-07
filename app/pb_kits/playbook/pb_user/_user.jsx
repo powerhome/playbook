@@ -14,7 +14,7 @@ type UserProps = {
   className?: String,
   data?: object,
   id?: String,
-  name: String,
+  name?: String,
   orientation?: "horiztonal" | "vertical",
   size?: "sm" | "md" | "lg",
   territory?: String,
