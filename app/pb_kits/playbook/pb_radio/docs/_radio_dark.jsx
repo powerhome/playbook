@@ -5,7 +5,7 @@ const RadioDark = () => {
   return (
     <>
       <Radio
-          dark="true"
+          dark
           label="Power"
           name="Group1"
           value="Power"
@@ -13,14 +13,14 @@ const RadioDark = () => {
       <br />
       <Radio
           checked
-          dark="true"
+          dark
           label="Nitro"
           name="Group1"
           value="Nitro"
       />
       <br />
       <Radio
-          dark="true"
+          dark
           label="Google"
           name="Group1"
           value="Google"
