@@ -40,7 +40,6 @@ const Radio = ({
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
   const classes = classnames(buildCss('pb_radio_kit'), { error }, className, globalProps(props))
-  const classHelper = classnames(buildCss(), className, globalProps(props))
 
   return (
     <label
@@ -64,7 +63,6 @@ const Radio = ({
       </If>
       <span className="pb_radio_button" />
       <Body
-          className={classHelper}
           status={error ? 'negative' : null}
           text={label}
       />

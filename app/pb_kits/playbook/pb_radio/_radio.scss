@@ -45,6 +45,9 @@
         border-color: $error_dark;
       }
     }
+    .pb_body_kit {
+      @include pb_body_dark;
+    }
   }
   &.error {
     > .pb_radio_button {
