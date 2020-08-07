@@ -15,6 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Dark Mode update to Selectable Icon kit ([#955](https://github.com/powerhome/playbook/pull/955)  @kellyeryan)
 - Dark Mode Update Badge, Button, Circle Icon Button, Card, Checkbox and Body Kits ([#948](https://github.com/powerhome/playbook/pull/948)  @thestephenmarshall)
 - Cleanup #1284 ([#952](https://github.com/powerhome/playbook/pull/952) @thestephenmarshall)
+- Make Popover List Example Consistent ([#949](https://github.com/powerhome/playbook/pull/949) @thestephenmarshall)
 - Dark Mode Update for Title kit. ([#951](https://github.com/powerhome/playbook/pull/951)  @kellyeryan)
 - Fixed Caption kit to implement dark mode correctly in html ([#950](https://github.com/powerhome/playbook/pull/950)  @kellyeryan)
 - Dark Mode Update Badge, Button, Circle Icon Button, Card, Checkbox and Body Kits ([#948](https://github.com/powerhome/playbook/pull/948)  @thestephenmarshall)
