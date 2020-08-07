@@ -5,7 +5,7 @@ import classnames from 'classnames'
 
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
 
-import { spacing } from '../utilities/spacing.js'
+import { globalProps } from '../utilities/globalProps.js'
 
 type ButtonToolbarProps = {
   aria?: object,
@@ -35,7 +35,7 @@ const ButtonToolbar  = (props: ButtonToolbarProps) => {
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
 
-  const classes = classnames(buildCss('pb_button_toolbar_kit', orientation, { connected: connected }), className, spacing(props))
+  const classes = classnames(buildCss('pb_button_toolbar_kit', orientation, { connected: connected }), className, globalProps(props))
 
   return (
     <div
