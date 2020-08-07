@@ -15,11 +15,32 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Dark Mode Update Badge, Button, Circle Icon Button, Card, Checkbox and Body Kits ([#948](https://github.com/powerhome/playbook/pull/948)  @thestephenmarshall)
 - Cleanup #948 ([#952](https://github.com/powerhome/playbook/pull/952) @thestephenmarshall)
 
+## [v6.1.0] 2020-8-6
+
+### Fixed
+- Updated and added to PB Toggle kit ([#946](https://github.com/powerhome/playbook/pull/946)  @kellyeryan)
+- Dark mode update to Selectable Card Icon ([#956](https://github.com/powerhome/playbook/pull/956)  @kellyeryan)
+- Dark mode update for Selectable Card kit ([#957](https://github.com/powerhome/playbook/pull/957)  @kellyeryan)
+- Fixed missing spacing under textarea label ([#943](https://github.com/powerhome/playbook/pull/943) @christinaatai)
+- Dark Mode update to Selectable Icon kit ([#955](https://github.com/powerhome/playbook/pull/955)  @kellyeryan)
+- Dark Mode Update Badge, Button, Circle Icon Button, Card, Checkbox and Body Kits ([#948](https://github.com/powerhome/playbook/pull/948)  @thestephenmarshall)
+- Cleanup #1284 ([#952](https://github.com/powerhome/playbook/pull/952) @thestephenmarshall)
+- Make Popover List Example Consistent ([#949](https://github.com/powerhome/playbook/pull/949) @thestephenmarshall)
+- Dark Mode Update for Title kit. ([#951](https://github.com/powerhome/playbook/pull/951)  @kellyeryan)
+- Fixed Caption kit to implement dark mode correctly in html ([#950](https://github.com/powerhome/playbook/pull/950)  @kellyeryan)
+- Dark Mode Update Badge, Button, Circle Icon Button, Card, Checkbox and Body Kits ([#948](https://github.com/powerhome/playbook/pull/948)  @thestephenmarshall)
+- Added React version of Time Kit ([#947](https://github.com/powerhome/playbook/pull/947) @coleerikson)
+
+### Added
+- Added Button Toolbar kit ([#908](https://github.com/powerhome/playbook/pull/908)  @kellyeryan)
+- Global Prop Additions & Dark Mode Enabled ([#942](https://github.com/powerhome/playbook/pull/942)  @jasperfurniss)
+- Gauge Kit ([#910](https://github.com/powerhome/playbook/pull/910) @bh247484)
+- Added span tag option to react version of Title kit ([#944](https://github.com/powerhome/playbook/pull/944) @coleerikson)
+
 ## [v6.0.1] 2020-7-30
 
 ### Fixed
 - Updated failing spec test after update ([#940](https://github.com/powerhome/playbook/pull/940) @jasoncypret)
-
 
 ## [v6.0.0] 2020-7-30
 

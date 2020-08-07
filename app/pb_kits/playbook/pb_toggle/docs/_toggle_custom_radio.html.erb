@@ -2,21 +2,21 @@
 
 <br>
 
-<%= pb_rails("caption", props: { text: "Male" }) %>
+<%= pb_rails("caption", props: { text: "Walk" }) %>
 <%= pb_rails("toggle", props: { size: "sm" }) do %>
-  <input type="radio" name="gender" value="male">
+  <input type="radio" name="modes of transportation" value="walk">
 <% end %>
 
 <br/>
 
-<%= pb_rails("caption", props: { text: "Female" }) %>
+<%= pb_rails("caption", props: { text: "Bike" }) %>
 <%= pb_rails("toggle", props: { size: "sm" }) do %>
-  <input type="radio" name="gender" value="female">
+  <input type="radio" name="modes of transportation" value="bike">
 <% end %>
 
 <br/>
 
-<%= pb_rails("caption", props: { text: "Other" }) %>
+<%= pb_rails("caption", props: { text: "Ride" }) %>
 <%= pb_rails("toggle", props: { size: "sm" }) do %>
-  <input type="radio" name="gender" value="other">
+  <input type="radio" name="modes of transportation" value="ride">
 <% end %>

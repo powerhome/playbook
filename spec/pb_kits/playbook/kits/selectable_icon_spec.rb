@@ -22,7 +22,7 @@ RSpec.describe Playbook::PbSelectableIcon::SelectableIcon do
     it "returns namespaced class name", :aggregate_failures do
       expect(subject.new({}).classname).to eq "pb_selectable_icon_kit_enabled"
       expect(subject.new(classname: "additional_class").classname).to eq "pb_selectable_icon_kit_enabled additional_class"
-      expect(subject.new(dark: true).classname).to eq "pb_selectable_icon_kit_dark_enabled dark"
+      expect(subject.new(dark: true).classname).to eq "pb_selectable_icon_kit_enabled dark"
       expect(subject.new(disabled: true).classname).to eq "pb_selectable_icon_kit_disabled"
     end
   end

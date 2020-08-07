@@ -20,7 +20,7 @@ RSpec.describe Playbook::PbSelect::Select do
   describe "#classname" do
     it "returns namespaced class name", :aggregate_failures do
       expect(subject.new({}).classname).to eq "pb_select"
-      expect(subject.new({dark: true}).classname).to eq "pb_select dark"
+      expect(subject.new({dark: true}).classname).to eq "pb_select_dark dark"
     end
   end
 end
