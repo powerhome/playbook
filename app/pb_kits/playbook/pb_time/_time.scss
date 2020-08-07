@@ -5,6 +5,14 @@
 @import "../pb_title/title";
 
 [class^=pb_time_kit] {
+  &[class*=_center]  {
+    text-align: center;
+  }
+
+  &[class*=_right]  {
+    text-align: right;
+  }
+
   [class^=pb_body] {
     font-weight: $bold !important;
   }
@@ -23,6 +31,15 @@
     [class^=pb_time_timezone] {
       font-size: $font-large !important;
       color: $text-lt-light;
+    }
+  }
+
+  &.dark {
+    & > * [class^=pb_title_kit] {
+      color: $text_dk_default;
+    }
+    & > * [class^=pb_body_kit] {
+      color: $text_dk_light;
     }
   }
 }

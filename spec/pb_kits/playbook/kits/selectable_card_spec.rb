@@ -20,7 +20,7 @@ RSpec.describe Playbook::PbSelectableCard::SelectableCard do
     it "returns namespaced class name", :aggregate_failures do
       expect(subject.new({}).classname).to eq "pb_selectable_card_kit_enabled"
       expect(subject.new(classname: "additional_class").classname).to eq "pb_selectable_card_kit_enabled additional_class"
-      expect(subject.new(dark: true).classname).to eq "pb_selectable_card_kit_dark_enabled dark"
+      expect(subject.new(dark: true).classname).to eq "pb_selectable_card_kit_enabled dark"
       expect(subject.new(disabled: true).classname).to eq "pb_selectable_card_kit_disabled"
     end
   end
