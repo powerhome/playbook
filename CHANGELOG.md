@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### Changed
+- Dark mode update to Selectable Card Icon ([#958](https://github.com/powerhome/playbook/pull/958)  @kellyeryan)
+
 ### Added
 - Global Prop Additions & Dark Mode Enabled ([#942](https://github.com/powerhome/playbook/pull/942)  @jasperfurniss)
 - Gauge Kit ([#910](https://github.com/powerhome/playbook/pull/910) @bh247484)
