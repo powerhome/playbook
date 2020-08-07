@@ -9,6 +9,15 @@
   align-items: flex-start;
   flex-direction: row;
 
+  &.dark {
+    .pb_title_kit_3 {
+      @include pb_title_dark;
+    }
+    .pb_title_kit_4 {
+      @include pb_title_dark;
+    }
+  }
+
   // Orientation =============
   &[class*=_vertical]  {
     flex-direction: column;
