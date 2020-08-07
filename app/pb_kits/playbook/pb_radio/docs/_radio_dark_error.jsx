@@ -5,7 +5,7 @@ const RadioDarkError = () => {
   return (
     <div>
       <Radio
-          dark
+          dark="true"
           error
           label="Power"
           name="Group2"

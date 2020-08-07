@@ -3,9 +3,9 @@ import { Radio } from '../../'
 
 const RadioDark = () => {
   return (
-    <div>
+    <>
       <Radio
-          dark
+          dark="true"
           label="Power"
           name="Group1"
           value="Power"
@@ -13,19 +13,19 @@ const RadioDark = () => {
       <br />
       <Radio
           checked
-          dark
+          dark="true"
           label="Nitro"
           name="Group1"
           value="Nitro"
       />
       <br />
       <Radio
-          dark
+          dark="true"
           label="Google"
           name="Group1"
           value="Google"
       />
-    </div>
+    </>
   )
 }
 export default RadioDark

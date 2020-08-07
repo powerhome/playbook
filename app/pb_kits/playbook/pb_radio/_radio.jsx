@@ -4,43 +4,50 @@
 import React from 'react'
 import Body from '../pb_body/_body.jsx'
 import classnames from 'classnames'
+import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
 import { globalProps } from '../utilities/globalProps.js'
 
 type RadioProps = {
+  aria?: object,
+  checked?: Boolean,
+  children?: Node,
   className?: String,
-  data?: String,
+  data?: object,
   error?: Boolean,
   id?: String,
   label: String,
   name: String,
   value: String,
-  checked?: Boolean,
-  dark?: Boolean,
   text: String,
-  children?: Node,
   onChange: (Boolean)=>void,
 }
 
 const Radio = ({
+  aria = {},
   checked = false,
   children,
-  className = '',
-  dark = false,
-  data,
+  className,
+  data = {},
   error = false,
   id,
   label,
-  name,
-  value,
-  text,
+  name = 'radio_name',
+  text = 'Radio Text',
+  value = 'radio_text',
   onChange = () => {},
   ...props
 }: RadioProps) => {
-  const errorClass = error ? 'error' : ''
+
+  const ariaProps = buildAriaProps(aria)
+  const dataProps = buildDataProps(data)
+  const classes = classnames(buildCss('pb_radio_kit'), { error }, className, globalProps(props))
+  const buttonClass = classnames(buildCss('pb_radio_button'), { checked }, className, globalProps(props))
 
   return (
     <label
-        className={classnames('pb_radio_kit' + (dark === true ? '_dark ' : ' ') + errorClass + ' ' + className, globalProps(props))}
+        {...ariaProps}
+        {...dataProps}
+        className={classes}
         htmlFor={id}
     >
       <If condition={children}>
@@ -48,8 +55,7 @@ const Radio = ({
         <Else />
         <input
             {...props}
-            checked={checked}
-            data={data}
+            defaultChecked={checked}
             name={name}
             onChange={onChange}
             text={text}
@@ -57,9 +63,8 @@ const Radio = ({
             value={value}
         />
       </If>
-      <span className="pb_radio_button" />
+      <span className={buttonClass} />
       <Body
-          dark={dark}
           status={error ? 'negative' : null}
           text={label}
       />
