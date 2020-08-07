@@ -3,7 +3,7 @@
 import React, { useEffect } from 'react'
 import classnames from 'classnames'
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
-import { spacing } from '../utilities/spacing.js'
+import { globalProps } from '../utilities/globalProps.js'
 // import flatpickr from 'flatpickr'
 import { Body, Caption } from '../'
 import datePickerHelper from './date_picker_helper.js'
@@ -51,7 +51,7 @@ const DatePicker = (props: DatePickerProps) => {
   const classes = classnames(
     buildCss('pb_date_picker_kit'),
     className,
-    spacing(props),
+    globalProps(props),
     error ? 'error' : null,
   )
 
