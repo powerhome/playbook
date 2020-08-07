@@ -9,8 +9,6 @@ module Playbook
 
       # Icon props
       prop :icon, type: Playbook::Props::String
-      prop :dark, type: Playbook::Props::Boolean,
-                  default: false
       # Title text
       prop :text, type: Playbook::Props::String
 
@@ -30,7 +28,7 @@ module Playbook
                     default: "enabled"
 
       def classname
-        generate_classname("pb_selectable_icon_kit", checked_class, dark_class, enabled_disabled_class)
+        generate_classname("pb_selectable_icon_kit", checked_class, enabled_disabled_class)
       end
 
       def input_id_present
@@ -41,10 +39,6 @@ module Playbook
 
       def checked_class
         checked ? "checked" : nil
-      end
-
-      def dark_class
-        dark ? "dark" : nil
       end
 
       def enabled_disabled_class

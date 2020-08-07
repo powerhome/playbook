@@ -3,7 +3,7 @@
 import React from 'react'
 import classnames from 'classnames'
 import { buildCss } from '../utilities/props'
-import { spacing } from '../utilities/spacing.js'
+import { globalProps } from '../utilities/globalProps.js'
 
 import { Body, DateYearStacked, Flex, FlexItem, Icon } from '../'
 
@@ -18,7 +18,7 @@ type DateRangeStackedProps = {
 
 const DateRangeStacked = (props: DateRangeStackedProps) => {
   const { className, dark = false, endDate, startDate } = props
-  const css = classnames(className, buildCss('pb_date_range_stacked'), spacing(props))
+  const css = classnames(className, buildCss('pb_date_range_stacked'), globalProps(props))
 
   return (
     <div className={css}>

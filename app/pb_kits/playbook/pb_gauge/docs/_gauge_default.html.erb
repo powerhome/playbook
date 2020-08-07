@@ -1,0 +1,11 @@
+<% data = [
+  {
+    name: 'Name',
+    value: 45,
+  }
+]%>
+
+<%= pb_rails("gauge", props: {
+  id: "gauge-default",
+  chart_data: data,
+}) %>

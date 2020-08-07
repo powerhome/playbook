@@ -2,7 +2,7 @@
 
 import React from 'react'
 import classnames from 'classnames'
-import { spacing } from '../utilities/spacing.js'
+import { globalProps } from '../utilities/globalProps.js'
 
 import {
   buildAriaProps,
@@ -32,7 +32,7 @@ const Person = (props: PersonProps) => {
 
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
-  const classes = classnames(buildCss('pb_person_kit'), className, spacing(props))
+  const classes = classnames(buildCss('pb_person_kit'), className, globalProps(props))
 
   return (
     <div

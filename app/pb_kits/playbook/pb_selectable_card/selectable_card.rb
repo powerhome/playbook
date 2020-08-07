@@ -9,8 +9,6 @@ module Playbook
 
       prop :checked, type: Playbook::Props::Boolean,
                   default: false
-      prop :dark, type: Playbook::Props::Boolean,
-                  default: false
       prop :disabled, type: Playbook::Props::Boolean,
                   default: false
       prop :icon, type: Playbook::Props::Boolean,
@@ -26,7 +24,7 @@ module Playbook
       
 
       def classname
-        generate_classname("pb_selectable_card_kit", checked_class, dark_class, enable_disabled_class)
+        generate_classname("pb_selectable_card_kit", checked_class, enable_disabled_class)
       end
 
       def input_id_present
@@ -37,10 +35,6 @@ module Playbook
       
       def checked_class
         checked ? "checked" : nil 
-      end
-
-      def dark_class
-        dark ? "dark" : nil
       end
 
       def enable_disabled_class

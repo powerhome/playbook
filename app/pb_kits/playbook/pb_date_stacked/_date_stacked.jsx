@@ -5,7 +5,7 @@ import classnames from 'classnames'
 import DateTime from '../pb_kit/dateTime.js'
 import { buildCss } from '../utilities/props'
 import { Caption, Title } from '../'
-import { spacing } from '../utilities/spacing.js'
+import { globalProps } from '../utilities/globalProps.js'
 
 type DateStackedProps = {
   align?: "left" | "center" | "right",
@@ -38,7 +38,7 @@ const DateStacked = (props: DateStackedProps) => {
       dark: dark,
       reverse: reverse,
     }),
-    spacing(props)
+    globalProps(props)
   )
 
   const currentYear = new Date().getFullYear().toString()
