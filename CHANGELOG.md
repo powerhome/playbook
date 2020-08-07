@@ -5,6 +5,7 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+
 ## [v6.1.0] 2020-8-6
 
 ### Fixed
@@ -14,22 +15,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Fixed missing spacing under textarea label ([#943](https://github.com/powerhome/playbook/pull/943) @christinaatai)
 - Dark Mode update to Selectable Icon kit ([#955](https://github.com/powerhome/playbook/pull/955)  @kellyeryan)
 - Dark Mode Update Badge, Button, Circle Icon Button, Card, Checkbox and Body Kits ([#948](https://github.com/powerhome/playbook/pull/948)  @thestephenmarshall)
-- Cleanup #948 ([#952](https://github.com/powerhome/playbook/pull/952) @thestephenmarshall)
-
-### Updated
+- Cleanup #1284 ([#952](https://github.com/powerhome/playbook/pull/952) @thestephenmarshall)
+- Make Popover List Example Consistent ([#949](https://github.com/powerhome/playbook/pull/949) @thestephenmarshall)
 - Dark Mode Update for Title kit. ([#951](https://github.com/powerhome/playbook/pull/951)  @kellyeryan)
-
-### Fixed
-
 - Fixed Caption kit to implement dark mode correctly in html ([#950](https://github.com/powerhome/playbook/pull/950)  @kellyeryan)
+- Dark Mode Update Badge, Button, Circle Icon Button, Card, Checkbox and Body Kits ([#948](https://github.com/powerhome/playbook/pull/948)  @thestephenmarshall)
+- Added React version of Time Kit ([#947](https://github.com/powerhome/playbook/pull/947) @coleerikson)
 
 ### Added
-- Added Changelog Generator ([#959](https://github.com/powerhome/playbook/pull/959)  @jasperfurniss)
 - Added Button Toolbar kit ([#908](https://github.com/powerhome/playbook/pull/908)  @kellyeryan)
 - Global Prop Additions & Dark Mode Enabled ([#942](https://github.com/powerhome/playbook/pull/942)  @jasperfurniss)
 - Gauge Kit ([#910](https://github.com/powerhome/playbook/pull/910) @bh247484)
-- Added React version of Time Kit ([#947](https://github.com/powerhome/playbook/pull/947) @coleerikson)
-
+- Added span tag option to react version of Title kit ([#944](https://github.com/powerhome/playbook/pull/944) @coleerikson)
 
 ## [v6.0.1] 2020-7-30
 
