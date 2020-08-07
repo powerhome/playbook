@@ -29,7 +29,6 @@ type SelectProps = {
   blankSelection?: string,
   children?: React.Node,
   className?: string,
-  dark?: boolean,
   data?: object,
   disabled?: boolean,
   error?: string,
@@ -58,7 +57,7 @@ const Select = ({
   aria = {},
   blankSelection,
   children,
-  dark = false,
+  className,
   data = {},
   disabled = false,
   error,
@@ -71,17 +70,18 @@ const Select = ({
   value,
   ...props
 }: SelectProps) => {
-  const errorClass = error ? ' error' : ''
-  const css = classnames(buildCss('pb_select', { dark }) + errorClass, globalProps(props))
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
   const optionsList = createOptions(options)
+
+  const classes = classnames(buildCss('pb_select'), className, globalProps(props))
+  const selectWrapperClass = classnames(buildCss('pb_select_kit_wrapper'), { error }, className)
 
   return (
     <div
         {...ariaProps}
         {...dataProps}
-        className={css}
+        className={classes}
     >
       <If condition={label}>
         <label
@@ -89,13 +89,12 @@ const Select = ({
             htmlFor={name}
         >
           <Caption
-              dark={dark}
               text={label}
           />
         </label>
       </If>
       <label
-          className="pb_select_kit_wrapper"
+          className={selectWrapperClass}
           htmlFor={name}
       >
         <If condition={children}>
@@ -119,7 +118,6 @@ const Select = ({
         </If>
         <If condition={error}>
           <Body
-              dark={dark}
               status="negative"
               text={error}
           />
