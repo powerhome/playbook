@@ -5,10 +5,12 @@ examples:
   - text_input_error: With Error
   - text_input_dark_error: Dark With Error
   - text_input_custom: Custom
+  - text_input_disabled: Disabled
   react:
   - text_input_default: Default
   - text_input_dark: Dark
   - text_input_error: With Error
   - text_input_dark_error: Dark With Error
   - text_input_custom: Custom
+  - text_input_disabled: Disabled
 
