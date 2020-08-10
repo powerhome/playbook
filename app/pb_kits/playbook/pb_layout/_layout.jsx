@@ -8,7 +8,7 @@ import { globalProps } from '../utilities/globalProps.js'
 
 type LayoutPropTypes = {
   aria?: object,
-  children?: Array<React.ReactNode> | React.ReactNode,
+  children?: array<React.ReactNode> | React.ReactNode,
   className?: String,
   collapse?: "xs" | "sm" | "md" | "lg" | "xl",
   dark?: Boolean,
@@ -23,22 +23,22 @@ type LayoutPropTypes = {
 }
 
 type LayoutSideProps = {
-  children: Array<React.ReactNode> | React.ReactNode,
+  children: array<React.ReactNode> | React.ReactNode,
   className?: String,
 }
 
 type LayoutBodyProps = {
-  children: Array<React.ReactNode> | React.ReactNode,
+  children: array<React.ReactNode> | React.ReactNode,
   className?: String,
 }
 
 type LayoutHeaderProps = {
-  children: Array<React.ReactNode> | React.ReactNode,
+  children: array<React.ReactNode> | React.ReactNode,
   className?: String,
 }
 
 type LayoutFooterProps = {
-  children: Array<React.ReactNode> | React.ReactNode,
+  children: array<React.ReactNode> | React.ReactNode,
   className?: String,
 }
 

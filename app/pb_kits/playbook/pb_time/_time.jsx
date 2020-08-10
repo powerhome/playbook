@@ -11,7 +11,7 @@ import { Body, Icon, Title  } from '../'
 
 type TimeProps = {
   align?: 'left" | "center' | 'right',
-  className?: String | Array<String>,
+  className?: String | array<String>,
   data?: String,
   date: String,
   id?: String,

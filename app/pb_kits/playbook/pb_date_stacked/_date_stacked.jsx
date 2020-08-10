@@ -9,7 +9,7 @@ import { globalProps } from '../utilities/globalProps.js'
 
 type DateStackedProps = {
   align?: "left" | "center" | "right",
-  className?: String | Array<String>,
+  className?: String | array<String>,
   dark?: Boolean,
   data?: String,
   date: String,

@@ -7,12 +7,12 @@ import { globalProps } from '../utilities/globalProps.js'
 
 type BarGraphProps = {
   axisTitle: String,
-  xAxisCategories: Array,
+  xAxisCategories: array,
   yAxisMin: Number,
   yAxisMax: Number,
-  chartData: Array<{
+  chartData: array<{
     name: String,
-    data: Array<Number>,
+    data: array<Number>,
   }>,
   className?: String,
   id: Number,

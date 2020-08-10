@@ -8,7 +8,7 @@ import { globalProps } from '../utilities/globalProps.js'
 import { Body, DateYearStacked, Flex, FlexItem, Icon } from '../'
 
 type DateRangeStackedProps = {
-  className?: String | Array<String>,
+  className?: String | array<String>,
   data?: String,
   dark?: Boolean,
   endDate: String,

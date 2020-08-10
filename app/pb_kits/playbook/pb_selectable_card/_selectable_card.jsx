@@ -18,7 +18,7 @@ import { globalProps } from '../utilities/globalProps.js'
 type SelectableCardProps = {
   aria?: object,
   checked: Boolean,
-  children?: Array<React.ReactChild>,
+  children?: array<React.ReactChild>,
   className?: String,
   data: object,
   disabled?: Boolean,

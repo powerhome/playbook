@@ -13,7 +13,7 @@ type MultipleUsersStackedProps = {
   id?: String,
   data?: object,
   aria?: object,
-  users: Array<Object>,
+  users: array<Object>,
 }
 
 const MultipleUsersStacked = (props: MultipleUsersStackedProps) => {

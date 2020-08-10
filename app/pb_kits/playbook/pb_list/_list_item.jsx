@@ -7,7 +7,7 @@ import { globalProps } from '../utilities/globalProps.js'
 
 type ListItemProps = {
   aria?: object,
-  children: Array<Node> | Node,
+  children: array<Node> | Node,
   className?: String,
   data?: object,
   id?: String,

@@ -5,7 +5,7 @@ import classnames from 'classnames'
 import { buildCss } from '../utilities/props'
 import { globalProps } from '../utilities/globalProps.js'
 type FlexProps = {
-  children: Array<React.ReactNode> | React.ReactNode,
+  children: array<React.ReactNode> | React.ReactNode,
   className?: String,
   horizontal?: "left" | "center" | "right" | "stretch",
   id?: String,

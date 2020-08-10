@@ -11,8 +11,8 @@ type ButtonPropTypes = {
   aria?: {
     label: String,
   },
-  children?: Array<React.ReactChild>,
-  className?: String | Array<String>,
+  children?: array<React.ReactChild>,
+  className?: String | array<String>,
   disabled?: Boolean,
   fixedWidth?: Boolean,
   fullWidth?: Boolean,

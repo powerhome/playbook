@@ -8,7 +8,7 @@ import { globalProps } from '../utilities/globalProps.js'
 type CaptionProps = {
   aria?: object,
   className?: String,
-  children: Array<React.ReactNode> | React.ReactNode,
+  children: array<React.ReactNode> | React.ReactNode,
   data?: object,
   id?: String,
   size?: "xs" | "sm" | "md" | "lg" | "xl",

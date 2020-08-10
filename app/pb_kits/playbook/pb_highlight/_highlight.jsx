@@ -11,7 +11,7 @@ type HighlightProps = {
   id?: String,
   children?: React.Node,
   text?: String,
-  highlightedText?: Array<String>,
+  highlightedText?: array<String>,
 }
 
 const Highlight = (props: HighlightProps) => {

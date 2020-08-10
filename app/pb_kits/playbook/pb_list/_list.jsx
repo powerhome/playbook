@@ -9,7 +9,7 @@ type ListProps = {
   aria?: object,
   borderless: Boolean,
   className?: String,
-  children: Array<Node> | Node,
+  children: array<Node> | Node,
   dark: Boolean,
   data?: object,
   id?: String,

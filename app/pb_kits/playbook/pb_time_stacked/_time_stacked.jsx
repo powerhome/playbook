@@ -14,7 +14,7 @@ const Components = {
 }
 
 type TimeStackedProps = {
-  className?: String | Array<String>,
+  className?: String | array<String>,
   dark?: Boolean,
   data?: String,
   date: String,

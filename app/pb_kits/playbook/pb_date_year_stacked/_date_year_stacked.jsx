@@ -10,7 +10,7 @@ import { Body, Title } from '../'
 
 type DateYearStackedProps = {
   align?: "left" | "center" | "right",
-  className?: String | Array<String>,
+  className?: String | array<String>,
   dark?: Boolean,
   data?: String,
   date: String,

@@ -7,7 +7,7 @@ import { DateStacked, IconCircle } from '..'
 
 type ItemProps = {
   className?: string,
-  children?: Array<React.Node>,
+  children?: array<React.Node>,
   date?: Date,
   icon?: string,
   iconColor?: 'default' | 'royal' | 'blue' | 'purple' | 'teal' | 'red' | 'yellow' | 'green',

@@ -8,7 +8,7 @@ import { globalProps } from '../utilities/globalProps.js'
 
 type TextareaProps = {
   className?: String,
-  children?: Array<React.ReactChild>,
+  children?: array<React.ReactChild>,
   data?: String,
   error?: String,
   id?: String,

@@ -15,7 +15,7 @@ import {
 type GaugeProps = {
   aria: Object,
   className?: String,
-  chartData?: Array,
+  chartData?: array,
   data?: Object,
   disableAnimation: Boolean,
   fullCircle: Boolean,

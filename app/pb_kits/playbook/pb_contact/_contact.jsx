@@ -39,7 +39,7 @@ const formatContact = (contactString, contactType) => {
 
 type ContactProps = {
   aria?: object,
-  className?: String | Array<String>,
+  className?: String | array<String>,
   contactDetail?: String,
   contactType?: String,
   contactValue: String,

@@ -11,7 +11,7 @@ type NavProps = {
   orientation?: "vertical" | "horizontal",
   link: String,
   children?: React.Node,
-  className?: String | Array<String>,
+  className?: String | array<String>,
   highlight?: Boolean,
   variant?: "normal" | "subtle",
   onClick?: EventHandler,

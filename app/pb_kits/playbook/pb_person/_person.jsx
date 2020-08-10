@@ -14,7 +14,7 @@ import { Body, Title } from '../'
 
 type PersonProps = {
   aria?: object,
-  className?: String | Array<String>,
+  className?: String | array<String>,
   data?: object,
   firstName: String,
   id?: String,

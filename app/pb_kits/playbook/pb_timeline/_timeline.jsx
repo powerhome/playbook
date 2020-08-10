@@ -7,7 +7,7 @@ import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
 
 type TimelineProps = {
   aria?: object,
-  children?: Array<React.ReactChild>,
+  children?: array<React.ReactChild>,
   className?: String,
   data?: String,
   id?: String,

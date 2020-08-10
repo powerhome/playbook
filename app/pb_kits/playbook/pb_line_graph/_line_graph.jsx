@@ -7,13 +7,13 @@ import { pbChart } from '../'
 
 type LineGraphProps = {
   axisTitle?: String,
-  xAxisCategories: Array,
+  xAxisCategories: array,
   yAxisMin: Number,
   yAxisMax: Number,
   className?: String,
-  chartData: Array<{
+  chartData: array<{
       name: String,
-      data: Array<Number>,
+      data: array<Number>,
   }>,
   gradient?: Boolean,
   id: String,

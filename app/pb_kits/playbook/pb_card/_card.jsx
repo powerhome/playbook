@@ -8,7 +8,7 @@ import { globalProps } from '../utilities/globalProps.js'
 
 type CardPropTypes = {
   borderNone?: Boolean,
-  children: Array<React.ReactNode> | React.ReactNode,
+  children: array<React.ReactNode> | React.ReactNode,
   className?: String,
   highlight?: {
     position?: "side" | "top",
@@ -21,13 +21,13 @@ type CardPropTypes = {
 
 type CardHeaderProps = {
   categoryColor?: Number,
-  children: Array<React.ReactNode> | React.ReactNode,
+  children: array<React.ReactNode> | React.ReactNode,
   className?: String,
   padding?: String,
 }
 
 type CardBodyProps = {
-  children: Array<React.ReactNode> | React.ReactNode | String,
+  children: array<React.ReactNode> | React.ReactNode | String,
   className?: String,
   padding?: String,
 }

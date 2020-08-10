@@ -9,7 +9,7 @@ import { globalProps } from '../utilities/globalProps.js'
 
 type ButtonToolbarProps = {
   aria?: object,
-  children?: Array<React.ReactChild>,
+  children?: array<React.ReactChild>,
   className?: String,
   connected?: Boolean,
   data?: object,

@@ -9,11 +9,11 @@ import { globalProps } from '../utilities/globalProps.js'
 type BodyProps = {
   aria?: object,
   className?: String,
-  children?: Array<React.ReactChild>,
+  children?: array<React.ReactChild>,
   color: 'dark' | 'default' | 'light' | 'lighter' | 'light_dark' | 'lighter_dark',
   dark?: Boolean,
   data?: object,
-  highlightedText?: Array<String>,
+  highlightedText?: array<String>,
   highlighting?: Boolean,
   id?: String,
   status?: 'negative' | 'neutral' | 'positive',

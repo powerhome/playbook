@@ -6,7 +6,7 @@ import { globalProps } from '../utilities/globalProps.js'
 
 type ProgressSimpleProps = {
   align?: "left" | "center" | "right",
-  className?: String | Array<String>,
+  className?: String | array<String>,
   dark?: Boolean,
   data?: String,
   id?: String,

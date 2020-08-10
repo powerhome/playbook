@@ -21,13 +21,13 @@ type ContactItem = {
 
 type PersonContactProps = {
   aria?: object,
-  className?: String | Array<String>,
+  className?: String | array<String>,
   dark?: Boolean,
   data?: object,
   firstName: String,
   id?: String,
   lastName: String,
-  contacts?: Array<ContactItem>,
+  contacts?: array<ContactItem>,
 }
 
 const PersonContact = (props: PersonContactProps) => {

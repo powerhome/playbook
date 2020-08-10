@@ -7,7 +7,7 @@ import { globalProps } from '../utilities/globalProps.js'
 
 type TitleProps = {
   aria?: object,
-  children?: Array<React.ReactNode> | React.ReactNode,
+  children?: array<React.ReactNode> | React.ReactNode,
   className?: String,
   data?: object,
   id?: String,

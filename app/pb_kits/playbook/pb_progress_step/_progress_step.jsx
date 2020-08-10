@@ -9,7 +9,7 @@ type ProgressStepProps = {
   className?: String,
   data?: String,
   id?: String,
-  children?: Array<React.ReactChild>,
+  children?: array<React.ReactChild>,
   orientation?: "horizontal" | "vertical",
   icon?: Boolean,
   dark?: Boolean,
