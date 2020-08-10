@@ -5,13 +5,13 @@ import React from 'react'
 import classnames from 'classnames'
 
 import { Badge } from '../'
-import { buildCss } from '../utilities/props'
+import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
 import { globalProps } from '../utilities/globalProps.js'
 
 type HashtagProps = {
+  aria?: object,
   className?: String,
   data?: String,
-  dark?: Boolean,
   id?: String,
   text?: String,
   type: "default" | "home" | "project" | "appointment",
@@ -26,18 +26,29 @@ const typeMap = {
 }
 
 const Hashtag = (props: HashtagProps) => {
-  const { className, dark = false, text, type, url } = props
+  const {
+    aria = {},
+    className,
+    data = {},
+    id,
+    text,
+    type = 'default',
+    url,
+  } = props
+
+  const ariaProps = buildAriaProps(aria)
+  const dataProps = buildDataProps(data)
+  const classes = classnames(buildCss('pb_hashtag_kit'), className, globalProps(props))
+
   return (
     <span
-        className={classnames(
-        className,
-        buildCss('pb_hashtag_kit', { dark: dark }),
-        globalProps(props)
-      )}
+        {...ariaProps}
+        {...dataProps}
+        className={classes}
+        id={id}
     >
       <a href={url}>
         <Badge
-            dark={dark}
             text={typeMap[type] + text}
             variant="primary"
         />
