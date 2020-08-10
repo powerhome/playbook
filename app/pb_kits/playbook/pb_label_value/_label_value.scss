@@ -4,4 +4,12 @@
   [class^=pb_caption_kit]  {
     margin-bottom: $space-xs/1.5;
   }
+  &.dark {
+    .pb_body_kit {
+      @include pb_body_dark
+    }
+    .pb_title_kit_4 {
+      @include pb_title_dark;
+    }
+  }
 }

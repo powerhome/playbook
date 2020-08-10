@@ -3,10 +3,10 @@
     id: object.id,
     data: object.data,
     class: object.classname) do %>
-    <%= pb_rails("caption", props: { text: object.label, dark: object.dark }) %>
+    <%= pb_rails("caption", props: { text: object.label }) %>
     <% if object.variant == "details" %>
         <%= pb_rails("flex", props: {inline: true, vertical: "center"}) do %>
-            <%= pb_rails("body", props: { color: "light", dark: object.dark }) do %>
+            <%= pb_rails("body", props: { color: "light" }) do %>
                 <%= pb_rails("icon", props: { icon: object.icon, fixed_width: true, margin_right: "xs", }) if object.icon.present? %>
             <% end %>
             <%= pb_rails("body", props: { text: object.description, color: "light", margin_right: "xs", dark: object.dark }) if object.description.present? %>
@@ -21,6 +21,6 @@
             <% end %>
         <% end %>
     <% else %>
-        <%= pb_rails("body", props: { text: object.value, dark: object.dark }) if object.value.present? %>
+        <%= pb_rails("body", props: { text: object.value }) if object.value.present? %>
     <% end %>
 <% end %>
