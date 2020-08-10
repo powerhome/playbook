@@ -8,38 +8,38 @@ import { globalProps } from '../utilities/globalProps.js'
 
 type LayoutPropTypes = {
   aria?: object,
-  children?: Array<React.ReactNode> | React.ReactNode,
-  className?: String,
+  children?: array<React.ReactNode> | React.ReactNode,
+  className?: string,
   collapse?: "xs" | "sm" | "md" | "lg" | "xl",
-  dark?: Boolean,
+  dark?: boolean,
   data?: object,
-  full?: Boolean,
+  full?: boolean,
   position?: "left" | "right",
-  responsive?: Boolean,
+  responsive?: boolean,
   size?: "xs" | "sm" | "md" | "base" | "lg" | "xl",
   variant?: "light" | "dark" | "gradient",
-  transparent?: Boolean,
+  transparent?: boolean,
   layout?: "sidebar" | "collection" | "kanban" | "content",
 }
 
 type LayoutSideProps = {
-  children: Array<React.ReactNode> | React.ReactNode,
-  className?: String,
+  children: array<React.ReactNode> | React.ReactNode,
+  className?: string,
 }
 
 type LayoutBodyProps = {
-  children: Array<React.ReactNode> | React.ReactNode,
-  className?: String,
+  children: array<React.ReactNode> | React.ReactNode,
+  className?: string,
 }
 
 type LayoutHeaderProps = {
-  children: Array<React.ReactNode> | React.ReactNode,
-  className?: String,
+  children: array<React.ReactNode> | React.ReactNode,
+  className?: string,
 }
 
 type LayoutFooterProps = {
-  children: Array<React.ReactNode> | React.ReactNode,
-  className?: String,
+  children: array<React.ReactNode> | React.ReactNode,
+  className?: string,
 }
 
 // Side component

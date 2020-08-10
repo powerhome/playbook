@@ -7,13 +7,13 @@ import { globalProps } from '../utilities/globalProps.js'
 
 type CaptionProps = {
   aria?: object,
-  className?: String,
-  children: Array<React.ReactNode> | React.ReactNode,
+  className?: string,
+  children: array<React.ReactNode> | React.ReactNode,
   data?: object,
-  id?: String,
+  id?: string,
   size?: "xs" | "sm" | "md" | "lg" | "xl",
   tag?: "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "p" | "span" | "div",
-  text?: String,
+  text?: string,
 }
 
 const Caption = (props: CaptionProps) => {

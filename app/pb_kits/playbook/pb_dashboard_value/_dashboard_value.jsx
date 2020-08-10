@@ -13,17 +13,17 @@ import {
 type DashboardValueProps = {
   align?: 'left' | 'center' | 'right',
   aria?: object,
-  className?: String,
+  className?: string,
   data?: object,
-  id?: String,
+  id?: string,
   statChange?: {
-    change?: String,
-    value?: String | Number
+    change?: string,
+    value?: string | Number
   },
-  statLabel?: String,
+  statLabel?: string,
   statValue?: {
-    unit?: String,
-    value?: String | Number
+    unit?: string,
+    value?: string | Number
   }
 }
 

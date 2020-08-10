@@ -9,13 +9,13 @@ import { buildCss } from '../utilities/props'
 import { globalProps } from '../utilities/globalProps.js'
 
 type HashtagProps = {
-  className?: String,
-  data?: String,
-  dark?: Boolean,
-  id?: String,
-  text?: String,
+  className?: string,
+  data?: string,
+  dark?: boolean,
+  id?: string,
+  text?: string,
   type: "default" | "home" | "project" | "appointment",
-  url?: String,
+  url?: string,
 }
 
 const typeMap = {

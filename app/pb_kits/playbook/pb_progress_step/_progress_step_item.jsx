@@ -6,7 +6,7 @@ import { buildCss } from '../utilities/props'
 import { Icon } from '..'
 
 type ProgressStepItemProps = {
-  className?: String,
+  className?: string,
   status?: 'complete' | 'active' | 'inactive',
   children?: React.Node,
 }

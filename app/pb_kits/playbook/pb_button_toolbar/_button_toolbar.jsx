@@ -9,15 +9,15 @@ import { globalProps } from '../utilities/globalProps.js'
 
 type ButtonToolbarProps = {
   aria?: object,
-  children?: Array<React.ReactChild>,
-  className?: String,
-  connected?: Boolean,
+  children?: array<React.ReactChild>,
+  className?: string,
+  connected?: boolean,
   data?: object,
-  id?: String,
+  id?: string,
   onClick?: EventHandler,
   orientation?: "horizontal" | "vertical",
-  text?: String,
-  variant?: String,
+  text?: string,
+  variant?: string,
 }
 
 const ButtonToolbar  = (props: ButtonToolbarProps) => {

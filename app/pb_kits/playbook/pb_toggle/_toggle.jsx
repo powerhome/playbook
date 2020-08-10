@@ -14,15 +14,15 @@ import { globalProps } from '../utilities/globalProps.js'
 
 type Props = {
   aria?: object,
-  checked?: Boolean,
+  checked?: boolean,
   children?: React.Node,
-  className?: String,
+  className?: string,
   data?: object,
-  id?: String,
-  name?: String,
+  id?: string,
+  name?: string,
   onChange?: InputCallback<HTMLInputElement>,
   size?: "sm" | "md",
-  value?: String,
+  value?: string,
 }
 
 const Toggle = ({

@@ -7,11 +7,11 @@ import classnames from 'classnames'
 import { globalProps } from '../utilities/globalProps.js'
 
 type DateRangeInlineProps = {
-  className?: String,
-  data?: String,
-  endDate?: Date,
-  id?: String,
-  startDate?: Date,
+  className?: string,
+  data?: string,
+  endDate?: date,
+  id?: string,
+  startDate?: date,
 }
 
 const dateTimestamp = (dateValue) => {
