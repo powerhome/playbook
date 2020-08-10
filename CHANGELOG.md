@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### Added
+- Dark mode added to Icon Circle ([#973](https://github.com/powerhome/playbook/pull/973)  @kellyeryan)
+
 ### Fixed
 - Update flow types to use literal vs class wrapper ([#969](https://github.com/powerhome/playbook/pull/969) @thestephenmarshall)
 
