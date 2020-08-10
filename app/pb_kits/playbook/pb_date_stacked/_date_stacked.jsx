@@ -9,12 +9,12 @@ import { globalProps } from '../utilities/globalProps.js'
 
 type DateStackedProps = {
   align?: "left" | "center" | "right",
-  className?: String | array<String>,
-  dark?: Boolean,
-  data?: String,
-  date: String,
+  className?: string | array<string>,
+  dark?: boolean,
+  data?: string,
+  date: string,
   size?: "sm" | "md",
-  id?: String,
+  id?: string,
   reverse?: Boolean,
 }
 

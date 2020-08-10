@@ -9,7 +9,7 @@ import { globalProps } from '../utilities/globalProps.js'
 type LayoutPropTypes = {
   aria?: object,
   children?: array<React.ReactNode> | React.ReactNode,
-  className?: String,
+  className?: string,
   collapse?: "xs" | "sm" | "md" | "lg" | "xl",
   dark?: Boolean,
   data?: object,
@@ -24,22 +24,22 @@ type LayoutPropTypes = {
 
 type LayoutSideProps = {
   children: array<React.ReactNode> | React.ReactNode,
-  className?: String,
+  className?: string,
 }
 
 type LayoutBodyProps = {
   children: array<React.ReactNode> | React.ReactNode,
-  className?: String,
+  className?: string,
 }
 
 type LayoutHeaderProps = {
   children: array<React.ReactNode> | React.ReactNode,
-  className?: String,
+  className?: string,
 }
 
 type LayoutFooterProps = {
   children: array<React.ReactNode> | React.ReactNode,
-  className?: String,
+  className?: string,
 }
 
 // Side component

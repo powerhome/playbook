@@ -6,8 +6,8 @@ import { globalProps } from '../utilities/globalProps.js'
 
 type TableRowPropTypes = {
   children: array<React.ReactNode> | React.ReactNode,
-  className: String,
-  sideHighlightColor: String,
+  className: string,
+  sideHighlightColor: string,
 }
 
 const TableRow = (props: TableRowPropTypes) => {

@@ -7,9 +7,9 @@ import Title from '../pb_title/_title.jsx'
 import { globalProps } from '../utilities/globalProps.js'
 
 type PillProps = {
-  className?: String,
-  id?: String,
-  text: String,
+  className?: string,
+  id?: string,
+  text: string,
   variant?: "success" | "warning" | "error" | "info" | "neutral",
 }
 

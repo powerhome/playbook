@@ -6,16 +6,16 @@ import { Avatar, Body, Title } from '../'
 import { globalProps } from '../utilities/globalProps.js'
 
 type UserProps = {
-  className?: String,
-  id?: String,
-  name: String,
-  territory?: String,
-  title?: String,
+  className?: string,
+  id?: string,
+  name: string,
+  territory?: string,
+  title?: string,
   size?: "sm" | "md" | "lg",
   align?: "left" | "center" | "right",
   orientation?: "horiztonal" | "vertical",
   avatar?: Boolean,
-  avatarUrl?: String,
+  avatarUrl?: string,
 }
 
 const User = (props: UserProps) => {

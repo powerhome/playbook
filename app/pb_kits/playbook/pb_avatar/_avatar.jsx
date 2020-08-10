@@ -11,11 +11,11 @@ import { Image } from '../'
 
 type AvatarProps = {
   aria?: object,
-  className?: String,
+  className?: string,
   data?: object,
-  id?: String,
-  imageUrl: String,
-  name: String,
+  id?: string,
+  imageUrl: string,
+  name: string,
   size?: "md" | "lg" | "sm" | "xl" | "xs",
   status: "away" | "offline" | "online",
 }

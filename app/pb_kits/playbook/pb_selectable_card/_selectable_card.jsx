@@ -19,17 +19,17 @@ type SelectableCardProps = {
   aria?: object,
   checked: Boolean,
   children?: array<React.ReactChild>,
-  className?: String,
+  className?: string,
   data: object,
   disabled?: Boolean,
   icon?: Boolean,
-  id?: String,
-  inputId?: String,
+  id?: string,
+  inputId?: string,
   multi?: Boolean,
-  name?: String,
+  name?: string,
   onChange: InputCallback<HTMLInputElement>,
-  text?: String,
-  value?: String,
+  text?: string,
+  value?: string,
 }
 
 const SelectableCard = ({

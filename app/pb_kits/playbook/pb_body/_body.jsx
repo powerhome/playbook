@@ -8,17 +8,17 @@ import { globalProps } from '../utilities/globalProps.js'
 
 type BodyProps = {
   aria?: object,
-  className?: String,
+  className?: string,
   children?: array<React.ReactChild>,
   color: 'dark' | 'default' | 'light' | 'lighter' | 'light_dark' | 'lighter_dark',
   dark?: Boolean,
   data?: object,
-  highlightedText?: array<String>,
-  highlighting?: Boolean,
-  id?: String,
+  highlightedText?: array<string>,
+  highlighting?: boolean,
+  id?: string,
   status?: 'negative' | 'neutral' | 'positive',
   tag?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p' | 'span' | 'div',
-  text?: String,
+  text?: string,
 }
 
 const Body = (props: BodyProps) => {

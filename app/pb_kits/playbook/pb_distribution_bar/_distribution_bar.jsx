@@ -5,9 +5,9 @@ import classnames from 'classnames'
 import { globalProps } from '../utilities/globalProps.js'
 
 type DistributionBarProps = {
-  className?: String,
-  data?: String,
-  id?: String,
+  className?: string,
+  data?: string,
+  id?: string,
   size?: "lg" | "sm",
   widths?: array<Number>,
 }

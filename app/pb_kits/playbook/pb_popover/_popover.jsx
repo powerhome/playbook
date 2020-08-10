@@ -16,7 +16,7 @@ import classnames from 'classnames'
 import { globalProps } from '../utilities/globalProps.js'
 
 type PbPopoverProps = {
-  className?: String,
+  className?: string,
   closeOnClick?: "outside" | "inside",
   offset?: Boolean,
   reference: PopperReference,

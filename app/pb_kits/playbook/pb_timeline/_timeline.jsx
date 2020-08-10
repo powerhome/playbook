@@ -8,10 +8,10 @@ import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
 type TimelineProps = {
   aria?: object,
   children?: array<React.ReactChild>,
-  className?: String,
-  data?: String,
-  id?: String,
-  orientation?: String,
+  className?: string,
+  data?: string,
+  id?: string,
+  orientation?: string,
   showDate?: Boolean,
 }
 

@@ -15,12 +15,12 @@ import { globalProps } from '../utilities/globalProps.js'
 type ProgressPillsProps = {
   active?: Number,
   aria?: object,
-  className?: String,
+  className?: string,
   data?: object,
-  id?: String,
+  id?: string,
   steps?: Number,
-  title?: String,
-  value?: String,
+  title?: string,
+  value?: string,
   dark?: Boolean,
 }
 

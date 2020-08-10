@@ -14,21 +14,21 @@ import {
 
 type GaugeProps = {
   aria: Object,
-  className?: String,
+  className?: string,
   chartData?: array,
   data?: Object,
   disableAnimation: Boolean,
   fullCircle: Boolean,
-  height: String,
-  id?: String,
+  height: string,
+  id?: string,
   max: Number,
   min: Number,
-  prefix: String,
+  prefix: string,
   showLabels: Boolean,
-  style: String,
-  suffix: String,
-  title: String,
-  tooltipHtml: String,
+  style: string,
+  suffix: string,
+  title: string,
+  tooltipHtml: string,
 }
 
 const Gauge = (props: GaugeProps) => {

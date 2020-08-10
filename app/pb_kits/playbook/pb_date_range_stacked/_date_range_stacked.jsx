@@ -8,12 +8,12 @@ import { globalProps } from '../utilities/globalProps.js'
 import { Body, DateYearStacked, Flex, FlexItem, Icon } from '../'
 
 type DateRangeStackedProps = {
-  className?: String | array<String>,
-  data?: String,
+  className?: string | array<string>,
+  data?: string,
   dark?: Boolean,
-  endDate: String,
-  id?: String,
-  startDate: String,
+  endDate: string,
+  id?: string,
+  startDate: string,
 }
 
 const DateRangeStacked = (props: DateRangeStackedProps) => {

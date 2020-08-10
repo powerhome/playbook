@@ -8,16 +8,16 @@ import { globalProps } from '../utilities/globalProps.js'
 type ListProps = {
   aria?: object,
   borderless: Boolean,
-  className?: String,
+  className?: string,
   children: array<Node> | Node,
   dark: Boolean,
   data?: object,
-  id?: String,
+  id?: string,
   layout: "" | "left" | "right",
   ordered: Boolean,
-  role?: String,
-  tabIndex?: String,
-  size?: String,
+  role?: string,
+  tabIndex?: string,
+  size?: string,
   xpadding: Boolean,
 }
 

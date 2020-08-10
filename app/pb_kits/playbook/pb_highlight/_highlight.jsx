@@ -6,12 +6,12 @@ import classnames from 'classnames'
 import { globalProps } from '../utilities/globalProps.js'
 
 type HighlightProps = {
-  className?: String,
-  data?: String,
-  id?: String,
+  className?: string,
+  data?: string,
+  id?: string,
   children?: React.Node,
-  text?: String,
-  highlightedText?: array<String>,
+  text?: string,
+  highlightedText?: array<string>,
 }
 
 const Highlight = (props: HighlightProps) => {

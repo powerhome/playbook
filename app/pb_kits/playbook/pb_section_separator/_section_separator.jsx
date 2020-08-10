@@ -7,12 +7,12 @@ import { globalProps } from '../utilities/globalProps.js'
 
 type SectionSeparatorProps = {
   aria: object,
-  className: String,
+  className: string,
   dark?: Boolean,
   data: object,
-  id: String,
+  id: string,
   orientation?: "horizontal" | "vertical",
-  text: String,
+  text: string,
   variant?: "card" | "background",
 }
 

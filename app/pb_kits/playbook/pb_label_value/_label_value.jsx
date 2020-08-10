@@ -9,16 +9,16 @@ import { Body, Caption, Flex, Icon, Title } from '../'
 
 type LabelValueProps = {
   aria?: object,
-  className?: String,
+  className?: string,
   dark?: Boolean,
   data?: object,
-  id?: String,
-  label: String,
-  value?: String,
+  id?: string,
+  label: string,
+  value?: string,
   variant?: "default" | "details",
-  icon?: String,
-  description?: String,
-  title?: String,
+  icon?: string,
+  description?: string,
+  title?: string,
   date?: Date,
   active?: Boolean
 }

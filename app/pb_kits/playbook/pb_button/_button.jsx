@@ -9,26 +9,26 @@ import Icon from '../pb_icon/_icon.jsx'
 type EventHandler = (SyntheticInputEvent<HTMLInputElement>) => void
 type ButtonPropTypes = {
   aria?: {
-    label: String,
+    label: string,
   },
   children?: array<React.ReactChild>,
-  className?: String | array<String>,
-  disabled?: Boolean,
-  fixedWidth?: Boolean,
-  fullWidth?: Boolean,
-  icon?: String,
-  id?: String,
-  link?: String,
+  className?: string | array<string>,
+  disabled?: boolean,
+  fixedWidth?: boolean,
+  fullWidth?: boolean,
+  icon?: string,
+  id?: string,
+  link?: string,
   loading?: Boolean,
   newWindow?: Boolean,
   onClick?: EventHandler,
   size: 'large' | 'medium' | 'small',
-  text?: String,
+  text?: string,
   type: 'inline' | null,
-  htmlType: String | 'button',
-  value?: String | null,
+  htmlType: string | 'button',
+  value?: string | null,
   variant: 'primary' | 'secondary' | 'link',
-  wrapperClass: String,
+  wrapperClass: string,
 }
 
 const buttonClassName = (props: ButtonPropTypes) => {

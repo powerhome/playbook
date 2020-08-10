@@ -10,14 +10,14 @@ import { globalProps } from '../utilities/globalProps.js'
 type ButtonToolbarProps = {
   aria?: object,
   children?: array<React.ReactChild>,
-  className?: String,
+  className?: string,
   connected?: Boolean,
   data?: object,
-  id?: String,
+  id?: string,
   onClick?: EventHandler,
   orientation?: "horizontal" | "vertical",
-  text?: String,
-  variant?: String,
+  text?: string,
+  variant?: string,
 }
 
 const ButtonToolbar  = (props: ButtonToolbarProps) => {

@@ -9,7 +9,7 @@ import { Body, Title } from '../'
 
 type LegendProps = {
   aria?: object,
-  className?: String,
+  className?: string,
   color?: | "data_1"
     | "data_2"
     | "data_3"
@@ -19,9 +19,9 @@ type LegendProps = {
     | "data_7",
   dark?: Boolean,
   data?: object,
-  id?: String,
-  prefixText?: String,
-  text: String,
+  id?: string,
+  prefixText?: string,
+  text: string,
 }
 
 const Legend = (props: LegendProps) => {

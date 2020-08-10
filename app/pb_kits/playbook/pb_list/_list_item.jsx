@@ -8,10 +8,10 @@ import { globalProps } from '../utilities/globalProps.js'
 type ListItemProps = {
   aria?: object,
   children: array<Node> | Node,
-  className?: String,
+  className?: string,
   data?: object,
-  id?: String,
-  tabIndex?: String,
+  id?: string,
+  tabIndex?: string,
 }
 
 const ListItem = (props: ListItemProps) => {

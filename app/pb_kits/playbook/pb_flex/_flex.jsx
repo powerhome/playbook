@@ -6,9 +6,9 @@ import { buildCss } from '../utilities/props'
 import { globalProps } from '../utilities/globalProps.js'
 type FlexProps = {
   children: array<React.ReactNode> | React.ReactNode,
-  className?: String,
+  className?: string,
   horizontal?: "left" | "center" | "right" | "stretch",
-  id?: String,
+  id?: string,
   inline?: Boolean,
   orientation?: "row" | "column",
   spacing?: "around" | "between" | "evenly" | "none",

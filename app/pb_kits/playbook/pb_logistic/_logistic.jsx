@@ -16,13 +16,13 @@ const dateString = (value: DateTime) => {
 
 type LogisticProps = {
   aria?: object,
-  className?: String,
+  className?: string,
   dark?: Boolean,
   data?: object,
-  date: String,
-  id?: String,
-  link?: String,
-  projectName?: String,
+  date: string,
+  id?: string,
+  link?: string,
+  projectName?: string,
   projectNumber?: Number,
 }
 

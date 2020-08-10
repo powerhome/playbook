@@ -5,8 +5,8 @@ import { DateStacked, Flex, FlexItem, TimeStacked } from '../'
 import { globalProps } from '../utilities/globalProps.js'
 
 type DateTimeStackedProps = {
-  data?: String,
-  id?: String,
+  data?: string,
+  id?: string,
   date: Date,
   dark: Boolean,
 }

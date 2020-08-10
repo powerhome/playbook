@@ -11,17 +11,17 @@ import {
 } from '../utilities/props'
 
 type AvatarActionButtonProps = {
-  action?: String,
+  action?: string,
   aria: Object,
-  className?: String,
+  className?: string,
   data?: Object,
-  id?: String,
-  imageUrl?: String,
-  linkUrl?: String,
-  name?: String,
-  onClick?: String,
-  placement?: String,
-  size?: String,
+  id?: string,
+  imageUrl?: string,
+  linkUrl?: string,
+  name?: string,
+  onClick?: string,
+  placement?: string,
+  size?: string,
 }
 
 const AvatarActionButton = ({

@@ -5,9 +5,9 @@ import { buildCss } from '../utilities/props'
 import { globalProps } from '../utilities/globalProps.js'
 type FlexItemPropTypes = {
   children: array<React.ReactNode> | React.ReactNode,
-  fixedSize: String,
+  fixedSize: string,
   grow: Boolean,
-  className: String,
+  className: string,
 }
 
 const FlexItem = (props: FlexItemPropTypes) => {

@@ -6,9 +6,9 @@ import { buildCss } from '../utilities/props'
 import { globalProps } from '../utilities/globalProps.js'
 
 type ProgressStepProps = {
-  className?: String,
-  data?: String,
-  id?: String,
+  className?: string,
+  data?: string,
+  id?: string,
   children?: array<React.ReactChild>,
   orientation?: "horizontal" | "vertical",
   icon?: Boolean,

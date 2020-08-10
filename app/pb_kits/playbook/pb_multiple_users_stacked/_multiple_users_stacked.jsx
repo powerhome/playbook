@@ -9,8 +9,8 @@ import { Avatar, Badge } from '../'
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
 
 type MultipleUsersStackedProps = {
-  className?: String,
-  id?: String,
+  className?: string,
+  id?: string,
   data?: object,
   aria?: object,
   users: array<Object>,

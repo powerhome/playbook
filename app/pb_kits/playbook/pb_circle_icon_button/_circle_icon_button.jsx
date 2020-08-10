@@ -15,13 +15,13 @@ import { globalProps } from '../utilities/globalProps.js'
 
 type CircleIconButtonProps = {
   aria?: object,
-  className?: String,
+  className?: string,
   dark?: Boolean,
   data?: object,
   disabled?: Boolean,
-  icon: String,
-  id?: String,
-  link?: String,
+  icon: string,
+  id?: string,
+  link?: string,
   onClick?: Callback,
   newWindow?: Boolean,
   type?: 'button' | 'submit' | 'reset',

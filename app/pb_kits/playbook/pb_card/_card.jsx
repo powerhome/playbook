@@ -9,12 +9,12 @@ import { globalProps } from '../utilities/globalProps.js'
 type CardPropTypes = {
   borderNone?: Boolean,
   children: array<React.ReactNode> | React.ReactNode,
-  className?: String,
+  className?: string,
   highlight?: {
     position?: "side" | "top",
-    color?: String,
+    color?: string,
   },
-  padding?: String,
+  padding?: string,
   selected?: Boolean,
   shadow?: "none" | "deep" | "deeper" | "deepest",
 }
@@ -22,14 +22,14 @@ type CardPropTypes = {
 type CardHeaderProps = {
   categoryColor?: Number,
   children: array<React.ReactNode> | React.ReactNode,
-  className?: String,
-  padding?: String,
+  className?: string,
+  padding?: string,
 }
 
 type CardBodyProps = {
-  children: array<React.ReactNode> | React.ReactNode | String,
-  className?: String,
-  padding?: String,
+  children: array<React.ReactNode> | React.ReactNode | string,
+  className?: string,
+  padding?: string,
 }
 
 // Header component

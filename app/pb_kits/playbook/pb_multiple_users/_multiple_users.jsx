@@ -7,8 +7,8 @@ import { Avatar } from '../'
 import { globalProps } from '../utilities/globalProps.js'
 
 type MultipleUsersProps = {
-  className?: String,
-  id?: String,
+  className?: string,
+  id?: string,
   maxDisplayedUsers?: Number,
   reverse?: Boolean,
   users: array<Object>,
