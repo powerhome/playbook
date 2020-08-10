@@ -3,3 +3,6 @@ user=powerhome
 include-labels=cleanup,enhancement,newkit,bug,testing
 issues=false
 add-sections={"documentation":{"prefix":"**Documentation updates:**","labels":["bug", "enhancement", "cleanup"]}}
+bug-labels=Fixed
+max-issues=60
+future-release=6.2.0
