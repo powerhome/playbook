@@ -30,13 +30,13 @@ const IconValue = (props: IconValueProps) => {
   } = props
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
-  const pbCss = buildCss('pb_icon_value_kit', align)
+  const classes = classnames(buildCss('pb_icon_value_kit', align), className, globalProps(props))
 
   return (
     <div
         {...ariaProps}
         {...dataProps}
-        className={classnames(className, pbCss, globalProps(props))}
+        className={classes}
         id={id}
     >
       <Body color="light">
