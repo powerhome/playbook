@@ -10,6 +10,7 @@ type TextareaProps = {
   className?: string,
   children?: array<React.ReactChild>,
   data?: string,
+  disabled?: boolean,
   error?: string,
   id?: string,
   object?: string,
@@ -18,6 +19,7 @@ type TextareaProps = {
   placeholder?: string,
   value?: string,
   name?: string,
+  required?: boolean,
   rows?: number,
   resize: 'none' | 'both' | 'horizontal' | 'vertical',
   onChange?: InputCallback<HTMLTextAreaElement>,
@@ -26,12 +28,14 @@ type TextareaProps = {
 const Textarea = ({
   className,
   children,
+  disabled,
   resize = 'none',
   error,
   label,
   name,
   onChange = () => {},
   placeholder,
+  required,
   rows = 4,
   value,
   ...props
@@ -51,9 +55,11 @@ const Textarea = ({
         <textarea
             {...props}
             className="pb_textarea_kit"
+            disabled={disabled}
             name={name}
             onChange={onChange}
             placeholder={placeholder}
+            required={required}
             rows={rows}
             value={value}
         />
