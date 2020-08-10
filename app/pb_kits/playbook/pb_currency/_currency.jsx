@@ -9,16 +9,16 @@ import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
 
 type CurrencyProps = {
   align?: 'center' | 'left' | 'right',
-  amount: String,
+  amount: string,
   aria?: object,
-  className?: String,
-  dark?: Boolean,
+  className?: string,
+  dark?: boolean,
   data?: object,
-  id?: String,
-  label?: String,
+  id?: string,
+  label?: string,
   size?: 'sm' | 'md' | 'lg',
-  symbol?: String,
-  unit?: String,
+  symbol?: string,
+  unit?: string,
 }
 
 const sizes = {
