@@ -17,4 +17,13 @@
   &[class*=_right] {
     justify-content: flex-end;
   }
+
+  &.dark {
+    .pb_title_kit_3 {
+      @include pb_title_dark;
+    }
+    .pb_title_kit_4 {
+      @include pb_title_dark;
+    }
+  }
 }
