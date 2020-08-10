@@ -20,7 +20,7 @@ type CardPropTypes = {
 }
 
 type CardHeaderProps = {
-  categoryColor?: Number,
+  categoryColor?: number,
   children: array<React.ReactNode> | React.ReactNode,
   className?: string,
   padding?: string,

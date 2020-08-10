@@ -9,7 +9,7 @@ import { globalProps } from '../utilities/globalProps.js'
 type MultipleUsersProps = {
   className?: string,
   id?: string,
-  maxDisplayedUsers?: Number,
+  maxDisplayedUsers?: number,
   reverse?: Boolean,
   users: array<Object>,
 }

@@ -9,7 +9,7 @@ type DistributionBarProps = {
   data?: string,
   id?: string,
   size?: "lg" | "sm",
-  widths?: array<Number>,
+  widths?: array<number>,
 }
 
 const normalizeCharacters = (widths) => {

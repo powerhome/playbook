@@ -18,7 +18,7 @@ type TextareaProps = {
   placeholder?: string,
   value?: string,
   name?: string,
-  rows?: Number,
+  rows?: number,
   dark?: Boolean,
   resize: 'none' | 'both' | 'horizontal' | 'vertical',
   onChange?: InputCallback<HTMLTextAreaElement>,

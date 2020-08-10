@@ -14,7 +14,7 @@ type HomeAddressStreetProps = {
   className?: string,
   dark?: Boolean,
   emphasis: "street" | "city",
-  homeId: Number,
+  homeId: number,
   houseStyle: string,
   homeUrl: string,
   state: string,

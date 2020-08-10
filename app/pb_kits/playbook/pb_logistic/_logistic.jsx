@@ -23,7 +23,7 @@ type LogisticProps = {
   id?: string,
   link?: string,
   projectName?: string,
-  projectNumber?: Number,
+  projectNumber?: number,
 }
 
 const Logistic = (props: LogisticProps) => {
