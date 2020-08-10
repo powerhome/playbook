@@ -1,6 +1,6 @@
 export { default as IconCircleColor } from './_icon_circle_color.jsx'
 export { default as IconCircleDefault } from './_icon_circle_default.jsx'
-export { default as IconCircleSize } from './_icon_circle_sizes.jsx'
+export { default as IconCircleSizes } from './_icon_circle_sizes.jsx'
 export { default as IconCircleDark } from './_icon_circle_dark.jsx'
 export { default as IconCircleColorDark } from './_icon_circle_color_dark.jsx'
 export { default as IconCircleSizesDark } from './_icon_circle_sizes_dark.jsx'
