@@ -7,8 +7,8 @@ import { globalProps } from '../utilities/globalProps.js'
 type DateTimeStackedProps = {
   data?: string,
   id?: string,
-  date: Date,
-  dark: Boolean,
+  date: date,
+  dark: boolean,
 }
 
 const DateTimeStacked = (props: DateTimeStackedProps) => {

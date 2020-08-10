@@ -9,9 +9,9 @@ import { globalProps } from '../utilities/globalProps.js'
 type DateRangeInlineProps = {
   className?: string,
   data?: string,
-  endDate?: Date,
+  endDate?: date,
   id?: string,
-  startDate?: Date,
+  startDate?: date,
 }
 
 const dateTimestamp = (dateValue) => {

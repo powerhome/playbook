@@ -19,8 +19,8 @@ type LabelValueProps = {
   icon?: string,
   description?: string,
   title?: string,
-  date?: Date,
-  active?: Boolean
+  date?: date,
+  active?: boolean
 }
 
 const dateString = (value: DateTime) => {
