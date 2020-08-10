@@ -12,7 +12,7 @@ type TimelineProps = {
   data?: string,
   id?: string,
   orientation?: string,
-  showDate?: Boolean,
+  showDate?: boolean,
 }
 
 const Timeline = ({

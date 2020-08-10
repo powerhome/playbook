@@ -15,7 +15,7 @@ type BadgeProps = {
   className?: string,
   data?: object,
   id?: string,
-  rounded?: Boolean,
+  rounded?: boolean,
   text?: string,
   variant?: "error" | "info" | "neutral" | "primary" | "success" | "warning",
 }

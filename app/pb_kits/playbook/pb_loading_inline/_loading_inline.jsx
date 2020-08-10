@@ -9,7 +9,7 @@ import { globalProps } from '../utilities/globalProps.js'
 type LoadingInlineProps = {
   align?: "left" | "center" | "right",
   className?: string,
-  dark?: Boolean,
+  dark?: boolean,
   data?: string,
   id?: string,
 }

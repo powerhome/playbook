@@ -12,7 +12,7 @@ type CurrencyProps = {
   amount: string,
   aria?: object,
   className?: string,
-  dark?: Boolean,
+  dark?: boolean,
   data?: object,
   id?: string,
   label?: string,

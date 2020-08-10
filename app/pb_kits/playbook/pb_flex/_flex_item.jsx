@@ -6,7 +6,7 @@ import { globalProps } from '../utilities/globalProps.js'
 type FlexItemPropTypes = {
   children: array<React.ReactNode> | React.ReactNode,
   fixedSize: string,
-  grow: Boolean,
+  grow: boolean,
   className: string,
 }
 

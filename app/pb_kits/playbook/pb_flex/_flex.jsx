@@ -9,12 +9,12 @@ type FlexProps = {
   className?: string,
   horizontal?: "left" | "center" | "right" | "stretch",
   id?: string,
-  inline?: Boolean,
+  inline?: boolean,
   orientation?: "row" | "column",
   spacing?: "around" | "between" | "evenly" | "none",
-  reverse?: Boolean,
+  reverse?: boolean,
   vertical?: "top" | "center" | "bottom" | "stretch",
-  wrap?: Boolean,
+  wrap?: boolean,
 }
 
 const Flex = (props: FlexProps) => {

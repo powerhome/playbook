@@ -6,16 +6,16 @@ import { globalProps } from '../utilities/globalProps.js'
 
 type IconProps = {
   aria?: Object,
-  border?: Boolean,
+  border?: boolean,
   className?: string,
-  fixedWidth?: Boolean,
+  fixedWidth?: boolean,
   flip?: "horizontal" | "vertical" | "both" | "none",
   icon: string,
   id?: string,
-  inverse?: Boolean,
-  listItem?: Boolean,
+  inverse?: boolean,
+  listItem?: boolean,
   pull?: "left" | "right" | "none",
-  pulse?: Boolean,
+  pulse?: boolean,
   rotation?: 90 | 180 | 270,
   size?: | "lg"
     | "xs"
@@ -30,7 +30,7 @@ type IconProps = {
     | "8x"
     | "9x"
     | "10x",
-  spin?: Boolean,
+  spin?: boolean,
 }
 
 const flipMap = {

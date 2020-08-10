@@ -14,7 +14,7 @@ import { globalProps } from '../utilities/globalProps.js'
 
 type Props = {
   aria?: object,
-  checked?: Boolean,
+  checked?: boolean,
   children?: React.Node,
   className?: string,
   data?: object,

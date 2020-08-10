@@ -11,7 +11,7 @@ type BodyProps = {
   className?: string,
   children?: array<React.ReactChild>,
   color: 'dark' | 'default' | 'light' | 'lighter' | 'light_dark' | 'lighter_dark',
-  dark?: Boolean,
+  dark?: boolean,
   data?: object,
   highlightedText?: array<string>,
   highlighting?: boolean,

@@ -11,7 +11,7 @@ import { globalProps } from '../utilities/globalProps.js'
 type HashtagProps = {
   className?: string,
   data?: string,
-  dark?: Boolean,
+  dark?: boolean,
   id?: string,
   text?: string,
   type: "default" | "home" | "project" | "appointment",

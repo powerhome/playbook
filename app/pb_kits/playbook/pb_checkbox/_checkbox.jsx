@@ -9,17 +9,17 @@ import { globalProps } from '../utilities/globalProps.js'
 
 type CheckboxProps = {
   aria?: object,
-  checked?: Boolean,
+  checked?: boolean,
   className?: string,
-  dark?: Boolean,
+  dark?: boolean,
   data?: object,
-  error?: Boolean,
+  error?: boolean,
   id?: string,
   name: string,
   text: string,
   value: string,
   children: Node,
-  onChange: (Boolean) => void,
+  onChange: (boolean) => void,
 }
 
 const Checkbox = (props: CheckboxProps) => {

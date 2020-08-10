@@ -15,7 +15,7 @@ type DateStackedProps = {
   date: string,
   size?: "sm" | "md",
   id?: string,
-  reverse?: Boolean,
+  reverse?: boolean,
 }
 
 const sizes = {

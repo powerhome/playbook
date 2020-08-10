@@ -15,7 +15,7 @@ type WeekdayStackedProps = {
   dark?: boolean,
   date: date,
   variant?: "day_only" | "month_day" | "expanded",
-  compact?: Boolean,
+  compact?: boolean,
   id?: string,
 }
 

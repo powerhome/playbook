@@ -9,16 +9,16 @@ import { globalProps } from '../utilities/globalProps.js'
 type RadioProps = {
   className?: string,
   data?: string,
-  error?: Boolean,
+  error?: boolean,
   id?: string,
   label: string,
   name: string,
   value: string,
-  checked?: Boolean,
-  dark?: Boolean,
+  checked?: boolean,
+  dark?: boolean,
   text: string,
   children?: Node,
-  onChange: (Boolean)=>void,
+  onChange: (boolean)=>void,
 }
 
 const Radio = ({

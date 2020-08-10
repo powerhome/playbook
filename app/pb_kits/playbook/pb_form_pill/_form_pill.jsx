@@ -12,7 +12,7 @@ type FormPillProps = {
   text: string,
   name: string,
   onClick?: EventHandler,
-  avatar?: Boolean,
+  avatar?: boolean,
   avatarUrl?: string,
 }
 const FormPill = (props: FormPillProps) => {

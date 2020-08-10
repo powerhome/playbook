@@ -15,7 +15,7 @@ type TimeProps = {
   data?: string,
   date: string,
   id?: string,
-  showTimezone?: Boolean,
+  showTimezone?: boolean,
   size?: 'lg' | 'sm' | 'xs',
 }
 

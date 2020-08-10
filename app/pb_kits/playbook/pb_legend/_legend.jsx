@@ -17,7 +17,7 @@ type LegendProps = {
     | "data_5"
     | "data_6"
     | "data_7",
-  dark?: Boolean,
+  dark?: boolean,
   data?: object,
   id?: string,
   prefixText?: string,

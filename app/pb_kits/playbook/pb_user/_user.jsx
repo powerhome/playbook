@@ -14,7 +14,7 @@ type UserProps = {
   size?: "sm" | "md" | "lg",
   align?: "left" | "center" | "right",
   orientation?: "horiztonal" | "vertical",
-  avatar?: Boolean,
+  avatar?: boolean,
   avatarUrl?: string,
 }
 

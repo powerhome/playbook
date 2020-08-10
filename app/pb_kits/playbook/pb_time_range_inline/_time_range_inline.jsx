@@ -12,9 +12,9 @@ type TimeRangeInlineProps = {
   data?: string,
   alignment?: "left" | "center" | "vertical",
   size?: "sm" | "xs",
-  dark?: Boolean,
-  icon?: Boolean,
-  timezone?: Boolean,
+  dark?: boolean,
+  icon?: boolean,
+  timezone?: boolean,
   startTime: string,
   endTime: string,
 }

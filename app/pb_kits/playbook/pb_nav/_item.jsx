@@ -8,7 +8,7 @@ type NavItemProps = {
   link: string,
   iconLeft: string,
   iconRight: string,
-  active?: Boolean,
+  active?: boolean,
   children: React.Node,
   onClick?: EventHandler,
 }

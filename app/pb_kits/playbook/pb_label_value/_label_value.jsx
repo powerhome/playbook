@@ -10,7 +10,7 @@ import { Body, Caption, Flex, Icon, Title } from '../'
 type LabelValueProps = {
   aria?: object,
   className?: string,
-  dark?: Boolean,
+  dark?: boolean,
   data?: object,
   id?: string,
   label: string,

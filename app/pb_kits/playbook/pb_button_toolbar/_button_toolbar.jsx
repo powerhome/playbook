@@ -11,7 +11,7 @@ type ButtonToolbarProps = {
   aria?: object,
   children?: array<React.ReactChild>,
   className?: string,
-  connected?: Boolean,
+  connected?: boolean,
   data?: object,
   id?: string,
   onClick?: EventHandler,

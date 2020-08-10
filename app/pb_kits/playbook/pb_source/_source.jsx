@@ -20,7 +20,7 @@ import {
 type SourceProps = {
   className?: string,
   data?: object,
-  hideIcon: Boolean,
+  hideIcon: boolean,
   id?: string,
   source?: string,
   type: "events" | "inbound" | "outbound" | "prospecting" | "referral" | "retail" | "user",

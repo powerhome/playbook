@@ -15,14 +15,14 @@ type LineGraphProps = {
       name: string,
       data: array<number>,
   }>,
-  gradient?: Boolean,
+  gradient?: boolean,
   id: string,
   pointStart: number,
   subTitle?: string,
   title: string,
   type?: string,
-  legend?: Boolean,
-  toggleLegendClick?: Boolean,
+  legend?: boolean,
+  toggleLegendClick?: boolean,
   height?: string,
 }
 

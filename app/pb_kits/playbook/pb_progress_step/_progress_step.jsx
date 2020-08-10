@@ -11,8 +11,8 @@ type ProgressStepProps = {
   id?: string,
   children?: array<React.ReactChild>,
   orientation?: "horizontal" | "vertical",
-  icon?: Boolean,
-  dark?: Boolean,
+  icon?: boolean,
+  dark?: boolean,
 }
 
 const ProgressStep = (props: ProgressStepProps) => {

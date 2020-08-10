@@ -17,7 +17,7 @@ const dateString = (value: DateTime) => {
 type LogisticProps = {
   aria?: object,
   className?: string,
-  dark?: Boolean,
+  dark?: boolean,
   data?: object,
   date: string,
   id?: string,

@@ -10,7 +10,7 @@ type MultipleUsersProps = {
   className?: string,
   id?: string,
   maxDisplayedUsers?: number,
-  reverse?: Boolean,
+  reverse?: boolean,
   users: array<Object>,
 }
 

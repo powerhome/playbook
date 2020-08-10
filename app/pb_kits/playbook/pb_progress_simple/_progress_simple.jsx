@@ -11,7 +11,7 @@ type ProgressSimpleProps = {
   data?: string,
   id?: string,
   max?: string,
-  muted: Boolean,
+  muted: boolean,
   percent: string,
   value: number,
   variant?: "default" | "positive" | "negative",

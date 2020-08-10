@@ -18,10 +18,10 @@ import { globalProps } from '../utilities/globalProps.js'
 type PbPopoverProps = {
   className?: string,
   closeOnClick?: "outside" | "inside",
-  offset?: Boolean,
+  offset?: boolean,
   reference: PopperReference,
-  show?: Boolean,
-  shouldClosePopover?: () => Boolean,
+  show?: boolean,
+  shouldClosePopover?: () => boolean,
 } & PopperProps
 
 // Prop enabled default modifiers here

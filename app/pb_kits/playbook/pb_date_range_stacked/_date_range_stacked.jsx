@@ -10,7 +10,7 @@ import { Body, DateYearStacked, Flex, FlexItem, Icon } from '../'
 type DateRangeStackedProps = {
   className?: string | array<string>,
   data?: string,
-  dark?: Boolean,
+  dark?: boolean,
   endDate: string,
   id?: string,
   startDate: string,

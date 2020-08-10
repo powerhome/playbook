@@ -20,8 +20,8 @@ type BarGraphProps = {
   subTitle?: string,
   title: string,
   type?: string,
-  legend?: Boolean,
-  toggleLegendClick?: Boolean,
+  legend?: boolean,
+  toggleLegendClick?: boolean,
   height?: string,
 }
 

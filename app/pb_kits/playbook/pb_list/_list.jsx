@@ -7,18 +7,18 @@ import { globalProps } from '../utilities/globalProps.js'
 
 type ListProps = {
   aria?: object,
-  borderless: Boolean,
+  borderless: boolean,
   className?: string,
   children: array<Node> | Node,
-  dark: Boolean,
+  dark: boolean,
   data?: object,
   id?: string,
   layout: "" | "left" | "right",
-  ordered: Boolean,
+  ordered: boolean,
   role?: string,
   tabIndex?: string,
   size?: string,
-  xpadding: Boolean,
+  xpadding: boolean,
 }
 
 const List = (props: ListProps) => {

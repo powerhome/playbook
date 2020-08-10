@@ -11,14 +11,14 @@ type LayoutPropTypes = {
   children?: array<React.ReactNode> | React.ReactNode,
   className?: string,
   collapse?: "xs" | "sm" | "md" | "lg" | "xl",
-  dark?: Boolean,
+  dark?: boolean,
   data?: object,
-  full?: Boolean,
+  full?: boolean,
   position?: "left" | "right",
-  responsive?: Boolean,
+  responsive?: boolean,
   size?: "xs" | "sm" | "md" | "base" | "lg" | "xl",
   variant?: "light" | "dark" | "gradient",
-  transparent?: Boolean,
+  transparent?: boolean,
   layout?: "sidebar" | "collection" | "kanban" | "content",
 }
 

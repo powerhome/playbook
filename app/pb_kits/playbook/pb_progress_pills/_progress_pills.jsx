@@ -21,7 +21,7 @@ type ProgressPillsProps = {
   steps?: number,
   title?: string,
   value?: string,
-  dark?: Boolean,
+  dark?: boolean,
 }
 
 const showSteps = (steps, active, dark) => {

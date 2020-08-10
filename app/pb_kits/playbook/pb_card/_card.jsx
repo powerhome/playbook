@@ -7,7 +7,7 @@ import { buildCss } from '../utilities/props'
 import { globalProps } from '../utilities/globalProps.js'
 
 type CardPropTypes = {
-  borderNone?: Boolean,
+  borderNone?: boolean,
   children: array<React.ReactNode> | React.ReactNode,
   className?: string,
   highlight?: {
@@ -15,7 +15,7 @@ type CardPropTypes = {
     color?: string,
   },
   padding?: string,
-  selected?: Boolean,
+  selected?: boolean,
   shadow?: "none" | "deep" | "deeper" | "deepest",
 }
 

@@ -19,7 +19,7 @@ type TextareaProps = {
   value?: string,
   name?: string,
   rows?: number,
-  dark?: Boolean,
+  dark?: boolean,
   resize: 'none' | 'both' | 'horizontal' | 'vertical',
   onChange?: InputCallback<HTMLTextAreaElement>,
 }
