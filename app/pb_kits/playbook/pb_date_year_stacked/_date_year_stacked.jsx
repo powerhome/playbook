@@ -10,11 +10,11 @@ import { Body, Title } from '../'
 
 type DateYearStackedProps = {
   align?: "left" | "center" | "right",
-  className?: String | Array<String>,
-  dark?: Boolean,
-  data?: String,
-  date: String,
-  id?: String,
+  className?: string | array<string>,
+  dark?: boolean,
+  data?: string,
+  date: string,
+  id?: string,
 }
 
 const DateYearStacked = (props: DateYearStackedProps) => {

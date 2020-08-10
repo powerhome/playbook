@@ -7,9 +7,9 @@ import { globalProps } from '../utilities/globalProps.js'
 import { buildDataProps } from '../utilities/props'
 
 type OnlineStatusProps = {
-  className?: String,
+  className?: string,
   data?: object,
-  id?: String,
+  id?: string,
   status?: "online" | "offline" | "away",
 }
 

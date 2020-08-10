@@ -14,13 +14,13 @@ import {
 
 type StarRatingProps = {
   aria?: object,
-  className?: String,
+  className?: string,
   data?: object,
-  fixedWidth?: Boolean,
-  hideRating: Boolean,
-  icon?: String,
-  id?: String,
-  rating: Numeric,
+  fixedWidth?: boolean,
+  hideRating: boolean,
+  icon?: string,
+  id?: string,
+  rating: number,
 }
 
 const StarRating = ({

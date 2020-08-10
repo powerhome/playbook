@@ -4,11 +4,11 @@ import React from 'react'
 import { Icon } from '../'
 
 type NavItemProps = {
-  text: String,
-  link: String,
-  iconLeft: String,
-  iconRight: String,
-  active?: Boolean,
+  text: string,
+  link: string,
+  iconLeft: string,
+  iconRight: string,
+  active?: boolean,
   children: React.Node,
   onClick?: EventHandler,
 }
