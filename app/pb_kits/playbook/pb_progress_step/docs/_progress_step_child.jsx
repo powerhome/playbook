@@ -4,7 +4,9 @@ import ProgressStepItem from '../_progress_step_item.jsx'
 
 const ProgressStepChild = () => (
   <div>
-    <ProgressStep>
+    <ProgressStep
+        orientation="child"
+    >
       <ProgressStepItem status="complete">
         {'Child'}
       </ProgressStepItem>
