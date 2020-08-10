@@ -20,7 +20,7 @@ type StarRatingProps = {
   hideRating: boolean,
   icon?: string,
   id?: string,
-  rating: Numeric,
+  rating: number,
 }
 
 const StarRating = ({

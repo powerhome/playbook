@@ -11,7 +11,7 @@ type MultipleUsersProps = {
   id?: string,
   maxDisplayedUsers?: number,
   reverse?: boolean,
-  users: array<Object>,
+  users: array<object>,
 }
 
 const MultipleUsers = (props: MultipleUsersProps) => {

@@ -9,7 +9,7 @@ type StatValueProps = {
   className?: string,
   id?: string,
   unit?: string,
-  value: string | Number
+  value: string | number
 }
 
 const StatValue = (props: StatValueProps) => {

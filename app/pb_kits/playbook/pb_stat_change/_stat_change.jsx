@@ -21,7 +21,7 @@ type StatChangeProps = {
   change?: "increase" | "decrease" | "neutral",
   className?: string,
   id?: string,
-  value?: string | Number,
+  value?: string | number,
 }
 
 const StatChange = (props: StatChangeProps) => {
