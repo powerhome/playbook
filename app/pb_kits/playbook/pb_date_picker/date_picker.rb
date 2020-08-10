@@ -18,6 +18,8 @@ module Playbook
       prop :error, type: Playbook::Props::String
       prop :format, type: Playbook::Props::String,
                     default: "m/d/Y"
+      prop :hide_label, type: Playbook::Props::Boolean,
+                        default: false
       prop :label, type: Playbook::Props::String,
                    default: "Date Picker"
       prop :max_date, type: Playbook::Props::String

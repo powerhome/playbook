@@ -7,6 +7,10 @@ const DatePickerLabel = () => (
         label="Your Label Here"
         pickerId="date-picker-label"
     />
+    <DatePicker
+        hideLabel
+        pickerId="date-picker-hide-label"
+    />
   </div>
 )
 

@@ -18,6 +18,7 @@ type DatePickerProps = {
   disableWeekdays?: Array,
   error?: String,
   format?: String,
+  hideLabel?: Boolean,
   id?: String,
   label?: String,
   maxDate: String,
@@ -37,6 +38,7 @@ const DatePicker = (props: DatePickerProps) => {
     disableWeekdays = null,
     error,
     format = 'm/d/Y',
+    hideLabel = false,
     id,
     label = 'Date Picker',
     maxDate,
@@ -78,9 +80,11 @@ const DatePicker = (props: DatePickerProps) => {
         id={id}
     >
       {className}
-      <Caption
-          text={label}
-      />
+      <If condition={!hideLabel}>
+        <Caption
+            text={label}
+        />
+      </If>
       <div className="input_wrapper">
         <input
             autoComplete="off"
