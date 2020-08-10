@@ -12,6 +12,7 @@ module Playbook
           props[:margin_bottom] = "sm"
           props[:form_spacing] = true
 
+          # Refactor and dry up, solve adding nil error
           if props[:label]
             @template.pb_rails("caption", props: { text: label_text, margin_bottom: "xs" }) +
               @template.pb_rails("checkbox", props: props) do
