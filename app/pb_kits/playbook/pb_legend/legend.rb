@@ -10,12 +10,7 @@ module Playbook
       prop :color, type: Playbook::Props::Enum,
                    values: (1..7).map { |n| "data_#{n}" },
                    default: "data_1"
-
-      prop :dark, type: Playbook::Props::Boolean,
-                  default: false
-
       prop :prefix_text
-
       prop :text, required: true
 
       def body_color
@@ -23,7 +18,7 @@ module Playbook
       end
 
       def classname
-        generate_classname("pb_legend_kit", color, dark ? "dark" : "light")
+        generate_classname("pb_legend_kit", color)
       end
     end
   end
