@@ -10,14 +10,12 @@ module Playbook
       prop :active, type: Playbook::Props::Number,
                     default: 0
       prop :value
-      prop :dark, type: Playbook::Props::Boolean,
-                  default: false
       prop :steps, type: Playbook::Props::Number,
                    default: 3
       prop :title
 
       def classname
-        generate_classname("pb_progress_pills_kit", dark_class)
+        generate_classname("pb_progress_pills_kit")
       end
 
 
@@ -33,17 +31,6 @@ module Playbook
       def active_step(step)
          step <= active ? "_active" : "_inactive"
       end
-
-      def dark_pill
-          dark ? "_dark" : nil
-      end
-
-      private
-      
-      def dark_class
-        dark ? "dark" : nil
-      end
-
     end
   end
 end

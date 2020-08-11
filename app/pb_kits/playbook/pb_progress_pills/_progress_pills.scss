@@ -24,6 +24,11 @@
     }
   }
 
+  &.dark {
+    .pb_title_kit_4 {
+      @include pb_title_dark;
+    }
+  }
 
   [class*=pb_progress_pill] {
     @include pb_progress_pill;
