@@ -1,0 +1,73 @@
+<%= pb_rails("table", props: { size: "lg", disable_hover: true }) do %>
+  <thead>
+    <tr>
+      <th>Column 1</th>
+      <th>Column 2</th>
+      <th>Column 3</th>
+      <th>Column 4</th>
+      <th>Column 5</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Value 1</td>
+      <td>Value 2</td>
+      <td>Value 3</td>
+      <td><%= pb_rails("circle_icon_button", props: {
+            variant: "secondary",
+            icon: "heart",
+            id: "regular-tooltip-5"}) %>
+        <%= pb_rails("tooltip", props: {
+            trigger_element_id: "regular-tooltip-5",
+            tooltip_id: "tooltip-5",
+            position: 'top',
+            }) do %>
+            Whoa. I'm a tooltip.on a table
+            <% end %></td>
+      <td>
+        <%= pb_rails("circle_icon_button", props: {
+            variant: "secondary",
+            icon: "info",
+            id: "regular-tooltip-3"
+        }) %>
+        <%= pb_rails("tooltip", props: {
+            trigger_element_id: "regular-tooltip-3",
+            tooltip_id: "tooltip-3",
+            position: 'top',
+            }) do %>
+            Whoa. I'm a tooltip.on a table
+            <% end %>
+        </td>
+    </tr>
+    <tr>
+      <td>Value 1</td>
+      <td>Value 2</td>
+      <td>Value 3</td>
+      <td>Value 4</td>
+      <td>
+        <%= pb_rails("circle_icon_button", props: {
+            variant: "secondary",
+            icon: "rocket",
+            id: "regular-tooltip-4"
+        }) %>
+        <%= pb_rails("tooltip", props: {
+            trigger_element_id: "regular-tooltip-4",
+            tooltip_id: "tooltip-4",
+            position: 'top',
+        }) do %>
+            Whoa. I'm a tooltip.on a table
+        <% end %></td>
+    </tr>
+    <tr>
+      <td>Value 1</td>
+      <td>Value 2</td>
+      <td>Value 3</td>
+      <td>Value 4</td>
+      <td>Value 5</td>
+    </tr>
+  </tbody>
+<% end %>
+
+
+
+
