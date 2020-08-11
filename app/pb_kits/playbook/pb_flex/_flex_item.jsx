@@ -4,10 +4,10 @@ import classnames from 'classnames'
 import { buildCss } from '../utilities/props'
 import { globalProps } from '../utilities/globalProps.js'
 type FlexItemPropTypes = {
-  children: Array<React.ReactNode> | React.ReactNode,
-  fixedSize: String,
-  grow: Boolean,
-  className: String,
+  children: array<React.ReactNode> | React.ReactNode,
+  fixedSize: string,
+  grow: boolean,
+  className: string,
 }
 
 const FlexItem = (props: FlexItemPropTypes) => {

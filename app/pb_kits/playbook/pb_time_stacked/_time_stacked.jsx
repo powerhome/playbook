@@ -14,11 +14,11 @@ const Components = {
 }
 
 type TimeStackedProps = {
-  className?: String | Array<String>,
-  dark?: Boolean,
-  data?: String,
-  date: String,
-  id?: String,
+  className?: string | array<string>,
+  dark?: boolean,
+  data?: string,
+  date: string,
+  id?: string,
   align?: "left" | "center" | "right",
   tag?: "body" | "caption",
 }
