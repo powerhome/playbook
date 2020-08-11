@@ -14,7 +14,6 @@ module Playbook
         prepend(FormFieldBuilder.new(:password_field, kit_name: "text_input"))
         prepend(FormFieldBuilder.new(:url_field, kit_name: "text_input"))
         prepend(FormFieldBuilder.new(:text_area, kit_name: "textarea"))
-        # prepend(FormFieldBuilder.new(:check_box, kit_name: "checkbox"))
         prepend(TypeaheadField)
         prepend(SelectField)
         prepend(CollectionSelectField)
