@@ -1,0 +1,15 @@
+<div class="pb--doc-demo-row">
+  
+  <%= pb_rails("avatar_action_button", props: {
+      dark: true,
+      name: "Sophia Carden",
+      id: "clickable",
+      link_url: "http://www.google.com",
+      image_url: "https://randomuser.me/api/portraits/women/8.jpg",
+  }) %>
+
+  <%= javascript_tag do %>
+    document.querySelector('#clickable').addEventListener('click', () => alert('clickable clicked!'))
+  <% end %>
+
+</div>
