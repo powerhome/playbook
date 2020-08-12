@@ -25,20 +25,13 @@ jobs:
         options: --token ${{ secrets.GITHUB_TOKEN }} --user=powerhome --project=playbook --max-issues=10 --since-tag=6.1.0 issues=false add-sections={"newkits":{"prefix":"**New Kits:**","labels":["New Kit"]}} include-labels=cleanup,enhancement,newkit,bug,testing
       
     - name: Commit files
-      env:
-        CI_USER: ${{ secrets.GITHUB_USER }}
-        CI_EMAIL: ${{ secrets.GITHUB_EMAIL }}
       run: |
-        git config --local user.email "$CI_EMAIL"
-        git config --local user.name "$CI_USER"
-        git add CHANGELOG.md && git commit -m 'Updated CHANGELOG.md' && echo ::set-env name=push::1 || echo "No changes to CHANGELOG.md"
-
+        git config --local user.email "jasperfurniss@github.com"
+        git config --local user.name "GitHub Action"
+        git commit -m "Updated Changelog" -a
     - name: Push changes
-      if: env.push == 1
-      env:
-        CI_USER: ${{ secrets.GITHUB_USER }}
-        CI_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      run: |
-        git push "https://$CI_USER:$CI_TOKEN@github.com/$GITHUB_REPOSITORY.git" HEAD:master
+      uses: ad-m/github-push-action@master
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
 
-    
+  
