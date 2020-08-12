@@ -2,12 +2,14 @@
 
 import React from 'react'
 import classnames from 'classnames'
-import { buildCss } from '../utilities/props'
+import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
 import { Avatar } from '../'
 import { globalProps } from '../utilities/globalProps.js'
 
 type MultipleUsersProps = {
+  aria?: object,
   className?: string,
+  data?: object,
   id?: string,
   maxDisplayedUsers?: number,
   reverse?: boolean,
@@ -15,18 +17,31 @@ type MultipleUsersProps = {
 }
 
 const MultipleUsers = (props: MultipleUsersProps) => {
-  const { className, id, maxDisplayedUsers = 4, reverse = false, users } = props
+  const {
+    aria = {},
+    className,
+    data = {},
+    id,
+    maxDisplayedUsers = 4,
+    reverse = false,
+    users,
+  } = props
+
   const displayCount =
     users.length > maxDisplayedUsers ? maxDisplayedUsers - 1 : users.length
   const usersToDisplay = users.slice(0, displayCount)
 
+  const reverseClass = reverse === true ? 'reverse' : ''
+  const ariaProps = buildAriaProps(aria)
+  const dataProps = buildDataProps(data)
+  const classes = classnames(buildCss('pb_multiple_users_kit', reverseClass),
+    className, globalProps(props))
+
   return (
     <div
-        className={classnames(
-        className,
-        buildCss('pb_multiple_users_kit', reverse && 'reverse'),
-        globalProps(props)
-      )}
+        {...ariaProps}
+        {...dataProps}
+        className={classes}
         id={id}
     >
       {usersToDisplay.map((avatarData, index) => (
