@@ -14,17 +14,17 @@ import { globalProps } from '../utilities/globalProps.js'
 
 type SelectableIconProps = {
   aria?: Object,
-  checked?: Boolean,
-  className?: String,
-  disabled?: Boolean,
+  checked?: boolean,
+  className?: string,
+  disabled?: boolean,
   data?: Object,
-  icon: String,
-  inputId: String,
-  inputs: String,
-  multi?: Boolean,
-  name: String,
-  text: String,
-  value?: String
+  icon: string,
+  inputId: string,
+  inputs: string,
+  multi?: boolean,
+  name: string,
+  text: string,
+  value?: string
 }
 
 const SelectableIcon = ({

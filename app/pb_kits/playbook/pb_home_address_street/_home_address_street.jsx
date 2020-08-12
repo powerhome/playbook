@@ -8,18 +8,18 @@ import { Body, Hashtag, Title } from '../'
 import { globalProps } from '../utilities/globalProps.js'
 
 type HomeAddressStreetProps = {
-  address: String,
-  addressCont: String,
-  city: String,
-  className?: String,
-  dark?: Boolean,
+  address: string,
+  addressCont: string,
+  city: string,
+  className?: string,
+  dark?: boolean,
   emphasis: "street" | "city",
-  homeId: Number,
-  houseStyle: String,
-  homeUrl: String,
-  state: String,
-  zipcode: String,
-  territory: String,
+  homeId: number,
+  houseStyle: string,
+  homeUrl: string,
+  state: string,
+  zipcode: string,
+  territory: string,
 }
 
 const HomeAddressStreet = (props: HomeAddressStreetProps) => {

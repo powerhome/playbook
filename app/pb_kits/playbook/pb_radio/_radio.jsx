@@ -7,18 +7,18 @@ import classnames from 'classnames'
 import { globalProps } from '../utilities/globalProps.js'
 
 type RadioProps = {
-  className?: String,
-  data?: String,
-  error?: Boolean,
-  id?: String,
-  label: String,
-  name: String,
-  value: String,
-  checked?: Boolean,
-  dark?: Boolean,
-  text: String,
+  className?: string,
+  data?: string,
+  error?: boolean,
+  id?: string,
+  label: string,
+  name: string,
+  value: string,
+  checked?: boolean,
+  dark?: boolean,
+  text: string,
   children?: Node,
-  onChange: (Boolean)=>void,
+  onChange: (boolean)=>void,
 }
 
 const Radio = ({

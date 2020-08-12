@@ -17,19 +17,19 @@ import { globalProps } from '../utilities/globalProps.js'
 
 type SelectableCardProps = {
   aria?: object,
-  checked: Boolean,
-  children?: Array<React.ReactChild>,
-  className?: String,
+  checked: boolean,
+  children?: array<React.ReactChild>,
+  className?: string,
   data: object,
-  disabled?: Boolean,
-  icon?: Boolean,
-  id?: String,
-  inputId?: String,
-  multi?: Boolean,
-  name?: String,
+  disabled?: boolean,
+  icon?: boolean,
+  id?: string,
+  inputId?: string,
+  multi?: boolean,
+  name?: string,
   onChange: InputCallback<HTMLInputElement>,
-  text?: String,
-  value?: String,
+  text?: string,
+  value?: string,
 }
 
 const SelectableCard = ({

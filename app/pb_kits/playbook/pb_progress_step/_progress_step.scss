@@ -39,6 +39,12 @@ $pb_progress_step_connector_height_from_left: $pb_progress_step_circle_size/2 - 
     width: 100%;
 }
 
+@mixin pb_progress_step_item_wrapper_child {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+
 @mixin pb_progress_step_item_wrapper_flex($flex_direction, $align_items, $align_self) {
     display: flex;
     flex-direction: $flex_direction;
@@ -65,6 +71,15 @@ $pb_progress_step_connector_height_from_left: $pb_progress_step_circle_size/2 - 
                 [class^=pb_progress_step_item] {
                     &[class*=_connector_first], &[class*=_step_connector_first] {
                         opacity: 0;
+                        display: none;
+                    }
+                }
+            }
+            &:first-child {
+                [class^=pb_progress_step_item] {
+                    &[class*=_connector_first], &[class*=_step_connector_first] {
+                        opacity: 0;
+                        display: none;
                     }
                 }
             }
@@ -72,6 +87,7 @@ $pb_progress_step_connector_height_from_left: $pb_progress_step_circle_size/2 - 
                 [class^=pb_progress_step_item] {
                     &[class*=_connector_second], &[class*=_step_connector_second] {
                         opacity: 0;
+                        display: none;
                     }
                 }
             }
@@ -149,6 +165,167 @@ $pb_progress_step_connector_height_from_left: $pb_progress_step_circle_size/2 - 
                         @include pb_progress_step_item_wrapper_flex(column, center, auto);
                         [class=pb_progress_step_item_step] {
                             @include pb_progress_step_item_wrapper_horizontal;
+                            [class^=pb_progress_step_item] {
+                                &[class*=_step_connector_first], &[class*=_step_connector_second] {
+                                    @include pb_progress_step_line($space_sm, $pb_progress_step_connector_width, $border_light, $pb_progress_step_connector_height_from_top 0 0 0);
+                                }
+                                &[class*=_step_circle] {
+                                    @include pb_progress_step_circle($border_light, $border_light, 2px, $border_light);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        &[class*=_dark] {
+            [class*=pb_progress_step_item_kit] {
+                &[class*=_active] {
+                    [class^=pb_progress_step_item] {
+                        &[class*=_connector_first] {
+                            @include pb_progress_step_line($space_sm, $pb_progress_step_connector_width, $primary, $pb_progress_step_connector_height_from_top 0 0 0);
+                        }
+                        &[class*=_connector_second] {
+                            @include pb_progress_step_line($space_sm, $pb_progress_step_connector_width, $border_dark, $pb_progress_step_connector_height_from_top 0 0 0);
+                        }
+                    }
+                    [class=pb_progress_step_item_step_wrapper] {
+                        [class=pb_progress_step_item_step] {
+                            [class^=pb_progress_step_item] {
+                                &[class*=_step_connector_first] {
+                                    @include pb_progress_step_line($space_sm, $pb_progress_step_connector_width, $primary, $pb_progress_step_connector_height_from_top 0 0 0);
+                                }
+                                &[class*=_step_circle] {
+                                    @include pb_progress_step_circle($bg_dark, $primary, 2px, $bg_dark);
+                                    svg {
+                                        display: none;
+                                    }
+                                }
+                                &[class*=_step_connector_second] {
+                                    @include pb_progress_step_line($space_sm, $pb_progress_step_connector_width, $border_dark, $pb_progress_step_connector_height_from_top 0 0 0);
+                                }
+                            }
+                        }
+                    }
+                }
+                &[class*=_inactive] {
+                    [class=pb_progress_step_item_wrapper] {
+                        [class^=pb_progress_step_item] {
+                            &[class*=_connector_first], &[class*=_connector_second] {
+                                @include pb_progress_step_line($space_sm, $pb_progress_step_connector_width, $border_dark, $pb_progress_step_connector_height_from_top 0 0 0);
+                            }
+                        }
+                        [class=pb_progress_step_item_step_wrapper] {
+                            [class=pb_progress_step_item_step] {
+                                [class^=pb_progress_step_item] {
+                                    &[class*=_step_connector_first], &[class*=_step_connector_second] {
+                                        @include pb_progress_step_line($space_sm, $pb_progress_step_connector_width, $border_dark, $pb_progress_step_connector_height_from_top 0 0 0);
+                                    }
+                                    &[class*=_step_circle] {
+                                        @include pb_progress_step_circle($border_dark, $border_dark, 0px, $border_dark);
+                                        svg {
+                                            display: none;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    &[class*=_child] {
+        @include pb_progress_step_item_wrapper_child;
+        >div {
+            &:first-child {
+                [class^=pb_progress_step_item] {
+                    &[class*=_connector_first], &[class*=_step_connector_first] {
+                        opacity: 0;
+                    }
+                }
+            }
+            &:last-child {
+                [class^=pb_progress_step_item] {
+                    &[class*=_connector_second], &[class*=_step_connector_second] {
+                        opacity: 0;
+                    }
+                }
+            }
+        }
+        [class*=pb_progress_step_item_kit] {
+            &[class*=_complete] {
+                flex-basis: 100%;
+                [class=pb_progress_step_item_wrapper] {
+                    @include pb_progress_step_item_wrapper_child;
+                    [class^=pb_progress_step_item] {
+                        &[class*=_connector_first], &[class*=_connector_second] {
+                            @include pb_progress_step_line($space_sm, $pb_progress_step_connector_width, $primary, $pb_progress_step_connector_height_from_top 0 0 0);
+                        }
+                    }
+                    [class=pb_progress_step_item_step_wrapper] {
+                        @include pb_progress_step_item_wrapper_flex(column, center, auto);
+                        [class=pb_progress_step_item_step] {
+                            @include pb_progress_step_item_wrapper_child;
+                            [class^=pb_progress_step_item] {
+                                &[class*=_step_connector_first], &[class*=_step_connector_second] {
+                                    @include pb_progress_step_line($space_sm, $pb_progress_step_connector_width, $primary, $pb_progress_step_connector_height_from_top 0 0 0);
+                                }
+                                &[class*=_step_circle] {
+                                    @include pb_progress_step_circle($primary, $primary, 2px, $primary);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            &[class*=_active] {
+                flex-basis: 100%;
+                [class=pb_progress_step_item_wrapper] {
+                    @include pb_progress_step_item_wrapper_child;
+                    [class^=pb_progress_step_item] {
+                        &[class*=_connector_first] {
+                            @include pb_progress_step_line($space_sm, $pb_progress_step_connector_width, $primary, $pb_progress_step_connector_height_from_top 0 0 0);
+                        }
+                        &[class*=_connector_second] {
+                            @include pb_progress_step_line($space_sm, $pb_progress_step_connector_width, $border_light, $pb_progress_step_connector_height_from_top 0 0 0);
+                        }
+                    }
+                    [class=pb_progress_step_item_step_wrapper] {
+                        @include pb_progress_step_item_wrapper_flex(column, center, auto);
+                        [class=pb_progress_step_item_step] {
+                            @include pb_progress_step_item_wrapper_child;
+                            [class^=pb_progress_step_item] {
+                                &[class*=_step_connector_first] {
+                                    @include pb_progress_step_line($space_sm, $pb_progress_step_connector_width, $primary, $pb_progress_step_connector_height_from_top 0 0 0);
+                                }
+                                &[class*=_step_circle] {
+                                    @include pb_progress_step_circle($white, $primary, 2px, $white);
+                                    svg {
+                                        display: none;
+                                    }
+                                }
+                                &[class*=_step_connector_second] {
+                                    @include pb_progress_step_line($space_sm, $pb_progress_step_connector_width, $border_light, $pb_progress_step_connector_height_from_top 0 0 0);
+                                }
+                            }
+                        }
+                    }
+                } 
+            }
+            &[class*=_inactive] {
+                flex-basis: 100%;
+                [class=pb_progress_step_item_wrapper] {
+                    @include pb_progress_step_item_wrapper_child;
+                    [class^=pb_progress_step_item] {
+                        &[class*=_connector_first], &[class*=_connector_second] {
+                            @include pb_progress_step_line($space_sm, $pb_progress_step_connector_width, $border_light, $pb_progress_step_connector_height_from_top 0 0 0);
+                        }
+                    }
+                    [class=pb_progress_step_item_step_wrapper] {
+                        @include pb_progress_step_item_wrapper_flex(column, center, auto);
+                        [class=pb_progress_step_item_step] {
+                            @include pb_progress_step_item_wrapper_child;
                             [class^=pb_progress_step_item] {
                                 &[class*=_step_connector_first], &[class*=_step_connector_second] {
                                     @include pb_progress_step_line($space_sm, $pb_progress_step_connector_width, $border_light, $pb_progress_step_connector_height_from_top 0 0 0);

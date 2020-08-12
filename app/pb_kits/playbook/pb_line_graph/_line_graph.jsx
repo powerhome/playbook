@@ -6,24 +6,24 @@ import { globalProps } from '../utilities/globalProps.js'
 import { pbChart } from '../'
 
 type LineGraphProps = {
-  axisTitle?: String,
-  xAxisCategories: Array,
-  yAxisMin: Number,
-  yAxisMax: Number,
-  className?: String,
-  chartData: Array<{
-      name: String,
-      data: Array<Number>,
+  axisTitle?: string,
+  xAxisCategories: array,
+  yAxisMin: number,
+  yAxisMax: number,
+  className?: string,
+  chartData: array<{
+      name: string,
+      data: array<number>,
   }>,
-  gradient?: Boolean,
-  id: String,
-  pointStart: Number,
-  subTitle?: String,
-  title: String,
-  type?: String,
-  legend?: Boolean,
-  toggleLegendClick?: Boolean,
-  height?: String,
+  gradient?: boolean,
+  id: string,
+  pointStart: number,
+  subTitle?: string,
+  title: string,
+  type?: string,
+  legend?: boolean,
+  toggleLegendClick?: boolean,
+  height?: string,
 }
 
 export default class LineGraph extends React.Component<LineGraphProps> {

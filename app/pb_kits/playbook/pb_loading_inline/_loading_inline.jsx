@@ -8,10 +8,10 @@ import { globalProps } from '../utilities/globalProps.js'
 
 type LoadingInlineProps = {
   align?: "left" | "center" | "right",
-  className?: String,
-  dark?: Boolean,
-  data?: String,
-  id?: String,
+  className?: string,
+  dark?: boolean,
+  data?: string,
+  id?: string,
 }
 
 const LoadingInline = (props: LoadingInlineProps) => {

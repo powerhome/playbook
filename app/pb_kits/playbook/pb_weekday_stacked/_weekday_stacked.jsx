@@ -11,12 +11,12 @@ import DateTime from '../pb_kit/dateTime.js'
 
 type WeekdayStackedProps = {
   align?: "left" | "center" | "right",
-  className?: String,
-  dark?: Boolean,
-  date: Date,
+  className?: string,
+  dark?: boolean,
+  date: date,
   variant?: "day_only" | "month_day" | "expanded",
-  compact?: Boolean,
-  id?: String,
+  compact?: boolean,
+  id?: string,
 }
 
 const getDayOfWeek = (date, compact) => {

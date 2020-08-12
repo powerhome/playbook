@@ -5,9 +5,9 @@ import { buildCss } from '../utilities/props'
 import { globalProps } from '../utilities/globalProps.js'
 
 type TableRowPropTypes = {
-  children: Array<React.ReactNode> | React.ReactNode,
-  className: String,
-  sideHighlightColor: String,
+  children: array<React.ReactNode> | React.ReactNode,
+  className: string,
+  sideHighlightColor: string,
 }
 
 const TableRow = (props: TableRowPropTypes) => {
