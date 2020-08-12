@@ -6,12 +6,12 @@ import { globalProps } from '../utilities/globalProps.js'
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
 
 type ImageProps = {
-  alt?: String,
+  alt?: string,
   aria?: object,
-  className?: String,
+  className?: string,
   data?: object,
-  id?: String,
-  url: String,
+  id?: string,
+  url: string,
 }
 
 const Image = (props: ImageProps) => {

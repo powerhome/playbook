@@ -7,13 +7,13 @@ import Avatar from '../pb_avatar/_avatar.jsx'
 import { globalProps } from '../utilities/globalProps.js'
 
 type FormPillProps = {
-  className?: String,
-  id?: String,
-  text: String,
-  name: String,
+  className?: string,
+  id?: string,
+  text: string,
+  name: string,
   onClick?: EventHandler,
-  avatar?: Boolean,
-  avatarUrl?: String,
+  avatar?: boolean,
+  avatarUrl?: string,
 }
 const FormPill = (props: FormPillProps) => {
   const { className, text, name, onClick = () => {}, avatarUrl } = props

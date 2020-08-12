@@ -7,12 +7,12 @@ import { buildCss } from '../utilities/props'
 import { globalProps } from '../utilities/globalProps.js'
 
 type NavProps = {
-  title: String,
+  title: string,
   orientation?: "vertical" | "horizontal",
-  link: String,
+  link: string,
   children?: React.Node,
-  className?: String | Array<String>,
-  highlight?: Boolean,
+  className?: string | array<string>,
+  highlight?: boolean,
   variant?: "normal" | "subtle",
   onClick?: EventHandler,
 }
