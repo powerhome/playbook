@@ -12,6 +12,7 @@ type IconValueProps = {
   align?: "left" | "center" | "right",
   aria?: object,
   className?: string,
+  dark?: boolean,
   data?: object,
   icon: string,
   id?: number,
@@ -23,6 +24,7 @@ const IconValue = (props: IconValueProps) => {
     align = 'left',
     aria = {},
     className,
+    dark = false,
     data = {},
     icon,
     id,
@@ -39,8 +41,12 @@ const IconValue = (props: IconValueProps) => {
         className={classes}
         id={id}
     >
-      <Body color="light">
+      <Body
+          color="light"
+          dark={dark}
+      >
         <Icon
+            dark={dark}
             fixedWidth
             icon={icon}
         />
