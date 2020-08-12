@@ -1,7 +1,8 @@
 <%= content_tag(:div,
-  id: object.id,
+  aria: object.aria,
+  class: object.classname,
   data: object.data,
-  class: object.classname) do %>
+  id: object.id) do %>
   <%= pb_rails("avatar", props: object.users[0].merge({size: "xs", classname: "pb_multiple_users_stacked_item"}) ) %>
 
   <% unless object.only_one %>
