@@ -19,6 +19,7 @@ RSpec.describe Playbook::PbTitleDetail::TitleDetail do
       expect(subject.new(title: title, detail: detail).classname).to eq "pb_title_detail_kit_left"
       expect(subject.new(title: title, detail: detail, classname: "additional_class").classname).to eq "pb_title_detail_kit_left additional_class"
       expect(subject.new(title: title, detail: detail, align: "center").classname).to eq "pb_title_detail_kit_center"
+      expect(subject.new(title: title, detail: detail, align: "center", dark: true).classname).to eq "pb_title_detail_kit_center dark"
     end
   end
 end

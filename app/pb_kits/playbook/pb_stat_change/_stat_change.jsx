@@ -19,9 +19,9 @@ const iconMap = {
 
 type StatChangeProps = {
   change?: "increase" | "decrease" | "neutral",
-  className?: String,
-  id?: String,
-  value?: String | Number,
+  className?: string,
+  id?: string,
+  value?: string | number,
 }
 
 const StatChange = (props: StatChangeProps) => {

@@ -5,16 +5,16 @@ import classnames from 'classnames'
 import { buildCss } from '../utilities/props'
 import { globalProps } from '../utilities/globalProps.js'
 type FlexProps = {
-  children: Array<React.ReactNode> | React.ReactNode,
-  className?: String,
+  children: array<React.ReactNode> | React.ReactNode,
+  className?: string,
   horizontal?: "left" | "center" | "right" | "stretch",
-  id?: String,
-  inline?: Boolean,
+  id?: string,
+  inline?: boolean,
   orientation?: "row" | "column",
   spacing?: "around" | "between" | "evenly" | "none",
-  reverse?: Boolean,
+  reverse?: boolean,
   vertical?: "top" | "center" | "bottom" | "stretch",
-  wrap?: Boolean,
+  wrap?: boolean,
 }
 
 const Flex = (props: FlexProps) => {

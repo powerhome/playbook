@@ -12,11 +12,11 @@ import {
 
 type BadgeProps = {
   aria?: object,
-  className?: String,
+  className?: string,
   data?: object,
-  id?: String,
-  rounded?: Boolean,
-  text?: String,
+  id?: string,
+  rounded?: boolean,
+  text?: string,
   variant?: "error" | "info" | "neutral" | "primary" | "success" | "warning",
 }
 const Badge = (props: BadgeProps) => {

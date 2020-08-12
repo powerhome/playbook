@@ -18,11 +18,11 @@ import {
 } from '../'
 
 type SourceProps = {
-  className?: String,
+  className?: string,
   data?: object,
-  hideIcon: Boolean,
-  id?: String,
-  source?: String,
+  hideIcon: boolean,
+  id?: string,
+  source?: string,
   type: "events" | "inbound" | "outbound" | "prospecting" | "referral" | "retail" | "user",
   user: object,
 }

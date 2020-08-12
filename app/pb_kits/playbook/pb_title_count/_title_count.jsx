@@ -11,11 +11,11 @@ import { globalProps } from '../utilities/globalProps.js'
 type TitleCountProps = {
   align: "center" | "left" | "right",
   aria?: object,
-  className?: String,
+  className?: string,
   count?: Numeric,
   data?: object,
-  id?: String,
-  title?: String,
+  id?: string,
+  title?: string,
   size?: "lg" | "sm",
 };
 
