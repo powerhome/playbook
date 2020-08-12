@@ -1,0 +1,6 @@
+<%= pb_rails("nav", props: {title: "Menu", link: "#"}) do %>
+  <%= pb_rails("nav/item", props: { dark: true, text: "Photos", link: "#" }) %>
+  <%= pb_rails("nav/item", props: { dark: true, text: "Music", link: "#" }) %>
+  <%= pb_rails("nav/item", props: { dark: true, text: "Video", link: "#", active: true }) %>
+  <%= pb_rails("nav/item", props: { dark: true, text: "Files", link: "#" }) %>
+<% end %>

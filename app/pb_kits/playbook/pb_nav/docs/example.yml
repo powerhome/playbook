@@ -9,6 +9,7 @@ examples:
   - horizontal_nav: Horizontal Nav
   - block_nav: Block
   - block_no_title_nav: Without Title
+  - nav_default_dark: Default Nav Dark
   react:
   - default_nav: Default
   - with_icons_nav: With Icons
@@ -19,3 +20,4 @@ examples:
   - horizontal_nav: Horizontal Nav
   - block_nav: Block
   - block_no_title_nav: Without Title
+  - nav_default_dark: Default Nav Dark
