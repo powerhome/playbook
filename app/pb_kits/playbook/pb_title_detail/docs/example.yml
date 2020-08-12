@@ -2,6 +2,8 @@ examples:
 
   rails:
   - title_detail_default: Default
+  - title_detail_dark: Dark
 
   react:
   - title_detail_default: Default
+  - title_detail_dark: Dark
