@@ -5,13 +5,17 @@ import React from 'react'
 import classnames from 'classnames'
 
 import { Icon } from '../'
-import { buildCss } from '../utilities/props'
+import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
 import { globalProps } from '../utilities/globalProps.js'
 
 type IconCircleProps = {
+  aria?: object,
   className?: string,
+  dark?: boolean,
+  data?: object,
   icon: string,
-  size?: "xs" | "sm" | "md" | "lg" | "xl",
+  id?: string,
+  size?: "base" | "xs" | "sm" | "md" | "lg" | "xl",
   variant?: | "default"
     | "royal"
     | "blue"
@@ -23,12 +27,23 @@ type IconCircleProps = {
 }
 
 const IconCircle = (props: IconCircleProps) => {
-  const { className, icon, size = 'md', variant = 'default' } = props
-  const css = buildCss('pb_icon_circle_kit', size, variant)
+  const { aria = {}, className, dark = false, data = {}, icon, id, size = 'md', variant = 'default' } = props
+
+  const ariaProps = buildAriaProps(aria)
+  const dataProps = buildDataProps(data)
+  const classes = classnames(buildCss('pb_icon_circle_kit', size, variant), className, globalProps(props))
 
   return (
-    <div className={classnames(className, css, globalProps(props))}>
-      <Icon icon={icon} />
+    <div
+        {...ariaProps}
+        {...dataProps}
+        className={classes}
+        id={id}
+    >
+      <Icon
+          dark={dark}
+          icon={icon}
+      />
     </div>
   )
 }
