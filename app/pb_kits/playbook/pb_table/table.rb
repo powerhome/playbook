@@ -25,7 +25,7 @@ module Playbook
 
       def classname
         generate_classname(
-          "pb_table", "table-#{size}", single_line_class,
+          "pb_table", "table-#{size}", single_line_class, 
           disable_hover_class, container_class, data_table_class,
           "table-responsive-#{responsive}", separator: " "
         )
