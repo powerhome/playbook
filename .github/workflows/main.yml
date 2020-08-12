@@ -26,4 +26,4 @@ jobs:
       uses: faberNovel/github-changelog-generator-action@v1.0.0-alpha02
       with:
         # You can pass any parameters from https://github.com/github-changelog-generator/github-changelog-generator/wiki/Advanced-change-log-generation-examples#additional-options
-        options: --token ${{ secrets.GITHUB_TOKEN }} --user=powerhome --project=playbook --max-issues=10 --since-tag=6.1.0 
+        options: --token ${{ secrets.GITHUB_TOKEN }} --user=powerhome --project=playbook --max-issues=10 --since-tag=6.1.0 issues=false add-sections={"newkits":{"prefix":"**New Kits:**","labels":["New Kit"]}} include-labels=cleanup,enhancement,newkit,bug,testing
