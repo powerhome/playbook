@@ -9,20 +9,12 @@ import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
 import { globalProps } from '../utilities/globalProps.js'
 
 type HashtagProps = {
-<<<<<<< HEAD
   aria?: object,
   className?: String,
   dark?: boolean,
   data?: String,
   id?: String,
   text?: String,
-=======
-  className?: string,
-  data?: string,
-  dark?: boolean,
-  id?: string,
-  text?: string,
->>>>>>> origin/v6.2.0
   type: "default" | "home" | "project" | "appointment",
   url?: string,
 }
