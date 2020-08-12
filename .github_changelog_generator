@@ -1,7 +1,0 @@
-project=playbook
-user=powerhome
-include-labels=cleanup,enhancement,New Kit,bug,testing
-issues=false
-add-sections={"newkit":{"prefix":"**New Kits:**","labels":["New Kit"]}}
-enhancement-label=Enhancements
-bug-labels=Fixed
