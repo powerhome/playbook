@@ -1,13 +1,40 @@
-on: push
+# This is a basic workflow to help you get started with Actions
+
+name: Changelog
+
+# Controls when the action will run. Triggers the workflow on push or pull request
+# events but only for the v6.2.0 branch
+on:
+  push:
+    branches: [ v6.2.0 ]
+  pull_request:
+    branches: [ v6.2.0 ]
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  build:
+  # This workflow contains a single job called "build"jobs:
+  generate_changelog:
     runs-on: ubuntu-latest
+    name: Generate changelog 
+    steps:    
+    - name: Generate changelog
+      uses: faberNovel/github-changelog-generator-action@v1.0.0-alpha02
+      with:
+        # You can pass any parameters from https://github.com/github-changelog-generator/github-changelog-generator/wiki/Advanced-change-log-generation-examples#additional-options
+        options: --token ${{ secrets.GITHUB_TOKEN }} --user=powerhome --project=playbook --max-issues=10 --since-tag=6.1.0 issues=false add-sections={"newkits":{"prefix":"**New Kits:**","labels":["New Kit"]}} include-labels=cleanup,enhancement,newkit,bug,testing
+    
+  push_changelog:
+    runs-on: ubuntu-latest
+    name: Pushes changelog 
     steps:
-      - uses: actions/checkout@v2
-      - run: |
-          date > generated.txt
-          git config user.name github-actions
-          git config user.email github-actions@github.com
-          git add .
-          git commit -m "generated"
-          git push
+    - name: Push that changelog up to github
+      uses: actions/checkout@v2
+      run: |
+        date > generated.txt
+        git config user.name github-actions
+        git config user.email github-actions@github.com
+        git add .
+        git commit -m "generated"
+        git push
+
+  
