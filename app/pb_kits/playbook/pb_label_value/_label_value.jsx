@@ -8,18 +8,19 @@ import { globalProps } from '../utilities/globalProps.js'
 import { Body, Caption, Flex, Icon, Title } from '../'
 
 type LabelValueProps = {
-  active?: Boolean,
+  active?: boolean,
   aria?: object,
-  className?: String,
+  className?: string,
+  dark?: boolean,
   data?: object,
-  date?: Date,
-  description?: String,
-  icon?: String,
-  id?: String,
-  label: String,
-  title?: String,
-  value?: String,
+  date?: date,
+  id?: string,
+  label: string,
+  value?: string,
   variant?: "default" | "details",
+  icon?: string,
+  description?: string,
+  title?: string,
 }
 
 const dateString = (value: DateTime) => {
@@ -34,6 +35,7 @@ const LabelValue = (props: LabelValueProps) => {
     active = false,
     aria = {},
     className,
+    dark = false,
     data = {},
     date,
     description,
@@ -63,6 +65,7 @@ const LabelValue = (props: LabelValueProps) => {
         title={title}
     >
       <Caption
+          dark={dark}
           text={label}
       />
       <If condition={variant === 'details'}>
@@ -73,9 +76,11 @@ const LabelValue = (props: LabelValueProps) => {
           <If condition={icon}>
             <Body
                 color="light"
+                dark={dark}
                 marginRight="xs"
             >
               <Icon
+                  dark={dark}
                   fixedWidth
                   icon={icon}
               />
@@ -84,6 +89,7 @@ const LabelValue = (props: LabelValueProps) => {
           <If condition={description}>
             <Body
                 color="light"
+                dark={dark}
                 marginRight="xs"
                 text={description}
             />
@@ -96,6 +102,7 @@ const LabelValue = (props: LabelValueProps) => {
               >
                 <If condition={title}>
                   <Title
+                      dark={dark}
                       size={4}
                       text={title}
                       variant="link"
@@ -103,6 +110,7 @@ const LabelValue = (props: LabelValueProps) => {
                 </If>
                 <If condition={date}>
                   <Title
+                      dark={dark}
                       marginLeft="xs"
                       size={4}
                       text={' ' + dateString(formattedDate)}
@@ -114,12 +122,14 @@ const LabelValue = (props: LabelValueProps) => {
             <Otherwise>
               <If condition={title}>
                 <Title
+                    dark={dark}
                     size={4}
                     text={title}
                 />
               </If>
               <If condition={date}>
                 <Title
+                    dark={dark}
                     marginLeft="xs"
                     size={4}
                     text={' ' + dateString(formattedDate)}
@@ -130,6 +140,7 @@ const LabelValue = (props: LabelValueProps) => {
         </Flex>
         <Else />
         <Body
+            dark={dark}
             text={value}
         />
       </If>
