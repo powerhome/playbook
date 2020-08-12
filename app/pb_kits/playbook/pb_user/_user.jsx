@@ -12,6 +12,7 @@ type UserProps = {
   avatar?: Boolean,
   avatarUrl?: String,
   className?: String,
+  dark?: boolean,
   data?: object,
   id?: String,
   name?: String,
@@ -34,6 +35,7 @@ const User = (props: UserProps) => {
     avatar = false,
     avatarUrl,
     className,
+    dark = false,
     data = {},
     id,
     name = '',
@@ -69,6 +71,7 @@ const User = (props: UserProps) => {
 
       <div className="content_wrapper">
         <Title
+            dark={dark}
             size={size == 'lg' ? 3 : 4}
             text={name}
         />
