@@ -22,12 +22,6 @@ type UserProps = {
   title?: String,
 }
 
-const avatarSizeMap = {
-  lg: 'xl',
-  md: 'md',
-  sm: 'sm',
-}
-
 const User = (props: UserProps) => {
   const {
     align = 'left',
@@ -38,12 +32,18 @@ const User = (props: UserProps) => {
     dark = false,
     data = {},
     id,
-    name = '',
+    name,
     orientation = 'horizontal',
     size = 'sm',
     territory = '',
     title = '',
   } = props
+
+  const avatarSizeMap = {
+    lg: 'xl',
+    md: 'md',
+    sm: 'sm',
+  }
 
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
@@ -76,7 +76,7 @@ const User = (props: UserProps) => {
             text={name}
         />
         <Body color="light">
-          {territory === '' ? title : `${territory} • ${title}`}
+          {territory === '' ? `${title}` : `${territory} • ${title}`}
         </Body>
       </div>
     </div>
