@@ -6,10 +6,11 @@ import { globalProps } from '../utilities/globalProps.js'
 
 import { Body, Title } from '../'
 
-import { buildCss, buildDataProps } from '../utilities/props'
+import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
 
 type TitleDetailProps = {
   align?: "left" | "center" | "right",
+  aria?: object,
   className?: string,
   data?: object,
   detail: string,
@@ -18,14 +19,16 @@ type TitleDetailProps = {
 }
 
 const TitleDetail = (props: TitleDetailProps) => {
-  const { align = 'left', className, data = {}, detail, id, title } = props
+  const { aria = {}, align = 'left', className, data = {}, detail, id, title } = props
+  const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
-  const pbCss = buildCss('pb_title_detail_kit', align)
+  const classes = classnames(buildCss('pb_title_detail_kit', align), globalProps(props), className)
 
   return (
     <div
+        {...ariaProps}
         {...dataProps}
-        className={classnames(className, pbCss, globalProps(props))}
+        className={classes}
         id={id}
     >
       <Title
