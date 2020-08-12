@@ -17,6 +17,7 @@ type LegendProps = {
     | "data_5"
     | "data_6"
     | "data_7",
+  dark?: boolean,
   data?: object,
   id?: String,
   prefixText?: String,
@@ -28,6 +29,7 @@ const Legend = (props: LegendProps) => {
     aria = {},
     className,
     color = 'data_1',
+    dark = false,
     data = {},
     id,
     prefixText,
@@ -40,7 +42,6 @@ const Legend = (props: LegendProps) => {
     buildCss('pb_legend_kit', color), className,
     globalProps(props)
   )
-  const bodyColor = bodyCss.includes('dark') ? 'lighter' : 'light'
 
   return (
     <div
@@ -49,10 +50,11 @@ const Legend = (props: LegendProps) => {
         className={bodyCss}
         id={id}
     >
-      <Body color={bodyColor}>
+      <Body color={dark ? 'lighter' : 'light'}>
         <span className="pb_legend_indicator_circle" />
         <If condition={prefixText}>
           <Title
+              dark={dark}
               size={4}
               tag="span"
               text={` ${prefixText} `}

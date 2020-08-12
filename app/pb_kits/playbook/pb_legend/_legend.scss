@@ -20,11 +20,5 @@
 }
 
 [class^=pb_legend_kit] {
-  &.dark {
-    .pb_title_kit_4 {
-      @include pb_title_dark;
-    }
-  }
-  @include indicator-colors($data_colors) 
-
+  @include indicator-colors($data_colors)
 }
