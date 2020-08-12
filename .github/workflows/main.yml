@@ -23,6 +23,7 @@ jobs:
         options: --token ${{ secrets.GITHUB_TOKEN }} --user=powerhome --project=playbook --max-issues=10 --since-tag=6.1.0 issues=false add-sections={"newkits":{"prefix":"**New Kits:**","labels":["New Kit"]}} include-labels=cleanup,enhancement,newkit,bug,testing
     
   push_changelog:
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
       - run: |
