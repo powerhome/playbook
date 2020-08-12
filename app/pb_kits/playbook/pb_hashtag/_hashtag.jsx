@@ -11,6 +11,7 @@ import { globalProps } from '../utilities/globalProps.js'
 type HashtagProps = {
   aria?: object,
   className?: String,
+  dark?: boolean,
   data?: String,
   id?: String,
   text?: String,
@@ -29,6 +30,7 @@ const Hashtag = (props: HashtagProps) => {
   const {
     aria = {},
     className,
+    dark = false,
     data = {},
     id,
     text,
@@ -49,6 +51,7 @@ const Hashtag = (props: HashtagProps) => {
     >
       <a href={url}>
         <Badge
+            dark={dark}
             text={typeMap[type] + text}
             variant="primary"
         />
