@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## Unreleased
 
 ### Added
+- Add dark mode to Title Detail kit ([#972](https://github.com/powerhome/playbook/pull/972)  @kellyeryan)
 - Updated Progress Step kit to have optional spacing ([#954](https://github.com/powerhome/playbook/pull/954) @evalouderback)
 
 ### Fixed
