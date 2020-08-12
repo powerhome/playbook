@@ -23,7 +23,7 @@ jobs:
 
 
     - name: Generate changelog
-      uses: fabernovel/github-changelog-generator-action@v1
+      uses: faberNovel/github-changelog-generator-action@v1.0.0-alpha02
       with:
         # You can pass any parameters from https://github.com/github-changelog-generator/github-changelog-generator/wiki/Advanced-change-log-generation-examples#additional-options
         options: --token ${{ secrets.GITHUB_TOKEN }} --user powerhome --project playbook --max-issues 100 --since-tag=6.1.0 
