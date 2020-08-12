@@ -6,17 +6,6 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## Unreleased
-<<<<<<< HEAD
-=======
-
-### Added
-- Add dark mode to Title Detail kit ([#972](https://github.com/powerhome/playbook/pull/972)  @kellyeryan)
-- Updated Progress Step kit to have optional spacing ([#954](https://github.com/powerhome/playbook/pull/954) @evalouderback)
-
-### Fixed
-- Update flow types to use literal vs class wrapper ([#969](https://github.com/powerhome/playbook/pull/969) @thestephenmarshall)
-
->>>>>>> origin/v6.2.0
 
 ## [v6.1.0] 2020-8-6
 
