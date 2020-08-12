@@ -4,8 +4,8 @@ import classnames from 'classnames'
 import { globalProps } from '../utilities/globalProps.js'
 
 type UserBadgeProps = {
-  className?: String,
-  id?: String,
+  className?: string,
+  id?: string,
   badge?: "million-dollar" | "veteran",
   size?: "sm" | "md" | "lg",
 }

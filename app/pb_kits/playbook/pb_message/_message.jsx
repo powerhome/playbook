@@ -8,15 +8,15 @@ import { globalProps } from '../utilities/globalProps.js'
 
 type MessageProps = {
   aria: object,
-  avatarName?: String,
-  avatarStatus?: String,
-  avatarUrl?: String,
-  className?: String,
+  avatarName?: string,
+  avatarStatus?: string,
+  avatarUrl?: string,
+  className?: string,
   data?: object,
-  id?: String,
-  label?: String,
-  message: String,
-  timestamp?: String,
+  id?: string,
+  label?: string,
+  message: string,
+  timestamp?: string,
 }
 
 const Message = (props: MessageProps) => {

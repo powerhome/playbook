@@ -14,11 +14,11 @@ import { Body, Title } from '../'
 
 type PersonProps = {
   aria?: object,
-  className?: String | Array<String>,
+  className?: string | array<string>,
   data?: object,
-  firstName: String,
-  id?: String,
-  lastName: String,
+  firstName: string,
+  id?: string,
+  lastName: string,
 }
 
 const Person = (props: PersonProps) => {

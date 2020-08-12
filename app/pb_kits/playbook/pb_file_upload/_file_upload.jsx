@@ -11,8 +11,8 @@ import type { Callback } from '../types.js'
 import { Body, Card } from '..'
 
 type FileUploadProps = {
-  accept?: Array<String>,
-  className?: String,
+  accept?: array<string>,
+  className?: string,
   onFilesAccepted: Callback,
 }
 

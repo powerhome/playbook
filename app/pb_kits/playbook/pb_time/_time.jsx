@@ -11,11 +11,11 @@ import { Body, Icon, Title  } from '../'
 
 type TimeProps = {
   align?: 'left" | "center' | 'right',
-  className?: String | Array<String>,
-  data?: String,
-  date: String,
-  id?: String,
-  showTimezone?: Boolean,
+  className?: string | array<string>,
+  data?: string,
+  date: string,
+  id?: string,
+  showTimezone?: boolean,
   size?: 'lg' | 'sm' | 'xs',
 }
 
