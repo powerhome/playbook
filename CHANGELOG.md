@@ -7,10 +7,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
-### Fixed
-
-- Dark mode update to Hashtag kit ([#967](https://github.com/powerhome/playbook/pull/967)  @kellyeryan)
-
 ## [v6.1.0] 2020-8-6
 
 ### Fixed
