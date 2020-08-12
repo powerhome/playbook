@@ -10,10 +10,10 @@ import { buildCss, buildDataProps } from '../utilities/props'
 import { globalProps } from '../utilities/globalProps.js'
 
 type TimestampProps = {
-  id?: String,
+  id?: string,
   data?: object,
-  className?: String,
-  text?: String,
+  className?: string,
+  text?: string,
 }
 
 const Timestamp = (props: TimestampProps) => {
