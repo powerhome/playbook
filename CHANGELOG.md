@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - Add dark mode to Title Detail kit ([#972](https://github.com/powerhome/playbook/pull/972)  @kellyeryan)
 - Updated Progress Step kit to have optional spacing ([#954](https://github.com/powerhome/playbook/pull/954) @evalouderback)
+- Add checkbox list to docs ([#941](https://github.com/powerhome/playbook/pull/941) @michellemhey)
 
 ### Fixed
 - Update flow types to use literal vs class wrapper ([#969](https://github.com/powerhome/playbook/pull/969) @thestephenmarshall)
