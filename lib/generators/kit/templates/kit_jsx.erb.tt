@@ -9,9 +9,9 @@ props_types = @kit_props.map do |key, val|
   prop_name = key == "classname" ? "className" : key.camelize(:lower)
   prop_type = case val
               when "enum", "one_of" then "'option_1' | 'option_2'"
-              when "boolean", "bool" then "Boolean"
+              when "boolean", "bool" then "boolean"
               when "object", "obj" then "object"
-              else "String"
+              else "string"
               end
 
   "#{prop_name}?: #{prop_type}"

@@ -7,29 +7,29 @@ import { buildCss } from '../utilities/props'
 import { globalProps } from '../utilities/globalProps.js'
 
 type CardPropTypes = {
-  borderNone?: Boolean,
-  children: Array<React.ReactNode> | React.ReactNode,
-  className?: String,
+  borderNone?: boolean,
+  children: array<React.ReactNode> | React.ReactNode,
+  className?: string,
   highlight?: {
     position?: "side" | "top",
-    color?: String,
+    color?: string,
   },
-  padding?: String,
-  selected?: Boolean,
+  padding?: string,
+  selected?: boolean,
   shadow?: "none" | "deep" | "deeper" | "deepest",
 }
 
 type CardHeaderProps = {
-  categoryColor?: Number,
-  children: Array<React.ReactNode> | React.ReactNode,
-  className?: String,
-  padding?: String,
+  categoryColor?: number,
+  children: array<React.ReactNode> | React.ReactNode,
+  className?: string,
+  padding?: string,
 }
 
 type CardBodyProps = {
-  children: Array<React.ReactNode> | React.ReactNode | String,
-  className?: String,
-  padding?: String,
+  children: array<React.ReactNode> | React.ReactNode | string,
+  className?: string,
+  padding?: string,
 }
 
 // Header component

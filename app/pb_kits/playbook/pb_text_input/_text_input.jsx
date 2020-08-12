@@ -11,17 +11,17 @@ import {
 
 type TextInputProps = {
   aria?: object,
-  className: String,
+  className: string,
   dark: boolean,
   data?: object,
-  error?: String,
-  id?: String,
-  name: String,
-  label: String,
+  error?: string,
+  id?: string,
+  name: string,
+  label: string,
   onChange: (String) => void,
-  placeholder: String,
-  type: String,
-  value: String | number,
+  placeholder: string,
+  type: string,
+  value: string | number,
   children: Node,
 }
 

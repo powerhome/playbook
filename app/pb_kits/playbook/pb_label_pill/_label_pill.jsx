@@ -10,11 +10,11 @@ import { Caption, Pill } from '../'
 
 type LabelPillProps = {
   aria?: object,
-  className?: String,
+  className?: string,
   data?: object,
-  id?: String,
-  label?: String,
-  pillValue?: String,
+  id?: string,
+  label?: string,
+  pillValue?: string,
   variant: "error" | "info" | "neutral" | "primary" | "success" | "warning",
 }
 
