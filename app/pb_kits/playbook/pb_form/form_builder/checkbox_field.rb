@@ -12,7 +12,7 @@ module Playbook
           options[:value] = props[:value] ||= 1
           puts options
 
-          input = super(name, props: {}, **options, &block)
+          input = super(name, **options, &block)
           puts input
 
           props[:margin_bottom] = "sm"
