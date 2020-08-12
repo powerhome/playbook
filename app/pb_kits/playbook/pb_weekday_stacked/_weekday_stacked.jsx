@@ -2,7 +2,7 @@
 
 import React from 'react'
 import classnames from 'classnames'
-import { spacing } from '../utilities/spacing.js'
+import { globalProps } from '../utilities/globalProps.js'
 import { buildCss } from '../utilities/props'
 
 import { Caption, Title } from '../'
@@ -11,12 +11,12 @@ import DateTime from '../pb_kit/dateTime.js'
 
 type WeekdayStackedProps = {
   align?: "left" | "center" | "right",
-  className?: String,
-  dark?: Boolean,
-  date: Date,
+  className?: string,
+  dark?: boolean,
+  date: date,
   variant?: "day_only" | "month_day" | "expanded",
-  compact?: Boolean,
-  id?: String,
+  compact?: boolean,
+  id?: string,
 }
 
 const getDayOfWeek = (date, compact) => {
@@ -52,7 +52,7 @@ const WeekdayStacked = (props: WeekdayStackedProps) => {
         className={classnames(
         buildCss('pb_weekday_stacked_kit', align),
         className,
-        spacing(props)
+        globalProps(props)
       )}
     >
       <Caption dark={dark}>{getDayOfWeek(date, compact)}</Caption>

@@ -2,20 +2,20 @@
 
 import React from 'react'
 import classnames from 'classnames'
-import { spacing } from '../utilities/spacing.js'
+import { globalProps } from '../utilities/globalProps.js'
 
 type IconProps = {
   aria?: Object,
-  border?: Boolean,
-  className?: String,
-  fixedWidth?: Boolean,
+  border?: boolean,
+  className?: string,
+  fixedWidth?: boolean,
   flip?: "horizontal" | "vertical" | "both" | "none",
-  icon: String,
-  id?: String,
-  inverse?: Boolean,
-  listItem?: Boolean,
+  icon: string,
+  id?: string,
+  inverse?: boolean,
+  listItem?: boolean,
   pull?: "left" | "right" | "none",
-  pulse?: Boolean,
+  pulse?: boolean,
   rotation?: 90 | 180 | 270,
   size?: | "lg"
     | "xs"
@@ -30,7 +30,7 @@ type IconProps = {
     | "8x"
     | "9x"
     | "10x",
-  spin?: Boolean,
+  spin?: boolean,
 }
 
 const flipMap = {
@@ -72,7 +72,7 @@ const Icon = (props: IconProps) => {
       [`fa-pull-${pull}`]: pull,
       [`fa-rotate-${rotation}`]: rotation,
     },
-    spacing(props)
+    globalProps(props)
   )
 
   return (

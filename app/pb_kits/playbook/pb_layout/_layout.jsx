@@ -4,49 +4,49 @@ import React from 'react'
 import classnames from 'classnames'
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
 
-import { spacing } from '../utilities/spacing.js'
+import { globalProps } from '../utilities/globalProps.js'
 
 type LayoutPropTypes = {
   aria?: object,
-  children?: Array<React.ReactNode> | React.ReactNode,
-  className?: String,
+  children?: array<React.ReactNode> | React.ReactNode,
+  className?: string,
   collapse?: "xs" | "sm" | "md" | "lg" | "xl",
-  dark?: Boolean,
+  dark?: boolean,
   data?: object,
-  full?: Boolean,
+  full?: boolean,
   position?: "left" | "right",
-  responsive?: Boolean,
+  responsive?: boolean,
   size?: "xs" | "sm" | "md" | "base" | "lg" | "xl",
   variant?: "light" | "dark" | "gradient",
-  transparent?: Boolean,
+  transparent?: boolean,
   layout?: "sidebar" | "collection" | "kanban" | "content",
 }
 
 type LayoutSideProps = {
-  children: Array<React.ReactNode> | React.ReactNode,
-  className?: String,
+  children: array<React.ReactNode> | React.ReactNode,
+  className?: string,
 }
 
 type LayoutBodyProps = {
-  children: Array<React.ReactNode> | React.ReactNode,
-  className?: String,
+  children: array<React.ReactNode> | React.ReactNode,
+  className?: string,
 }
 
 type LayoutHeaderProps = {
-  children: Array<React.ReactNode> | React.ReactNode,
-  className?: String,
+  children: array<React.ReactNode> | React.ReactNode,
+  className?: string,
 }
 
 type LayoutFooterProps = {
-  children: Array<React.ReactNode> | React.ReactNode,
-  className?: String,
+  children: array<React.ReactNode> | React.ReactNode,
+  className?: string,
 }
 
 // Side component
 const Side = (props: LayoutSideProps) => {
   const { children, className } = props
   return (
-    <div className={classnames('layout_sidebar', className, spacing(props))}>
+    <div className={classnames('layout_sidebar', className, globalProps(props))}>
       {children}
     </div>
   )
@@ -56,7 +56,7 @@ const Side = (props: LayoutSideProps) => {
 const Body = (props: LayoutBodyProps) => {
   const { children, className } = props
   return (
-    <div className={classnames('layout_body', className, spacing(props))}>
+    <div className={classnames('layout_body', className, globalProps(props))}>
       {children}
     </div>
   )
@@ -66,7 +66,7 @@ const Body = (props: LayoutBodyProps) => {
 const Header = (props: LayoutHeaderProps) => {
   const { children, className } = props
   return (
-    <div className={classnames('layout_header', className, spacing(props))}>
+    <div className={classnames('layout_header', className, globalProps(props))}>
       {children}
     </div>
   )
@@ -76,7 +76,7 @@ const Header = (props: LayoutHeaderProps) => {
 const Footer = (props: LayoutFooterProps) => {
   const { children, className } = props
   return (
-    <div className={classnames('layout_footer', className, spacing(props))}>
+    <div className={classnames('layout_footer', className, globalProps(props))}>
       {children}
     </div>
   )
@@ -148,7 +148,7 @@ const Layout = (props: LayoutPropTypes) => {
         layoutCss,
         layoutCollapseCss,
         className,
-        spacing(props)
+        globalProps(props)
       )}
     >
       {subComponentTags('Side')}

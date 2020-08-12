@@ -2,7 +2,7 @@
 
 import React from 'react'
 import classnames from 'classnames'
-import { spacing } from '../utilities/spacing.js'
+import { globalProps } from '../utilities/globalProps.js'
 import { Body, Caption, Icon } from '../'
 
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
@@ -39,12 +39,12 @@ const formatContact = (contactString, contactType) => {
 
 type ContactProps = {
   aria?: object,
-  className?: String | Array<String>,
-  contactDetail?: String,
-  contactType?: String,
-  contactValue: String,
+  className?: string | array<string>,
+  contactDetail?: string,
+  contactType?: string,
+  contactValue: string,
   data?: object,
-  id?: String,
+  id?: string,
 }
 
 const Contact = (props: ContactProps) => {
@@ -58,7 +58,7 @@ const Contact = (props: ContactProps) => {
     id } = props
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
-  const classes = classnames(buildCss('pb_contact_kit'), className, spacing(props))
+  const classes = classnames(buildCss('pb_contact_kit'), className, globalProps(props))
 
   return (
     <div

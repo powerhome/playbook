@@ -3,7 +3,7 @@
 import React from 'react'
 import classnames from 'classnames'
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
-import { spacing } from '../utilities/spacing.js'
+import { globalProps } from '../utilities/globalProps.js'
 import {
   Body,
   StatChange,
@@ -13,17 +13,17 @@ import {
 type DashboardValueProps = {
   align?: 'left' | 'center' | 'right',
   aria?: object,
-  className?: String,
+  className?: string,
   data?: object,
-  id?: String,
+  id?: string,
   statChange?: {
-    change?: String,
-    value?: String | Number
+    change?: string,
+    value?: string | Number
   },
-  statLabel?: String,
+  statLabel?: string,
   statValue?: {
-    unit?: String,
-    value?: String | Number
+    unit?: string,
+    value?: string | Number
   }
 }
 
@@ -41,7 +41,7 @@ const DashboardValue = (props: DashboardValueProps) => {
 
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
-  const classes = classnames(buildCss('pb_dashboard_value_kit', align), className, spacing(props))
+  const classes = classnames(buildCss('pb_dashboard_value_kit', align), className, globalProps(props))
 
   return (
     <div

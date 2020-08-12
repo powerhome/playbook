@@ -6,16 +6,16 @@ import classnames from 'classnames'
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
 
 import { Body, Title } from '../'
-import { spacing } from '../utilities/spacing.js'
+import { globalProps } from '../utilities/globalProps.js'
 
 type TitleCountProps = {
   align: "center" | "left" | "right",
   aria?: object,
-  className?: String,
+  className?: string,
   count?: Numeric,
   data?: object,
-  id?: String,
-  title?: String,
+  id?: string,
+  title?: string,
   size?: "lg" | "sm",
 };
 
@@ -32,7 +32,7 @@ const TitleCount = (props: TitleCountProps) => {
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
 
-  const css = classnames(buildCss('pb_title_count_kit', align, size), className, spacing(props))
+  const css = classnames(buildCss('pb_title_count_kit', align, size), className, globalProps(props))
 
   const formatCount = count.toLocaleString()
 

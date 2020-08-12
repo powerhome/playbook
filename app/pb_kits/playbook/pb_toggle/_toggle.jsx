@@ -8,59 +8,67 @@ import {
   buildAriaProps,
   buildCss,
   buildDataProps,
-  noop,
 } from '../utilities/props'
 
-import { spacing } from '../utilities/spacing.js'
+import { globalProps } from '../utilities/globalProps.js'
 
 type Props = {
-  aria: object,
-  checked: boolean,
-  data: object,
-  onChange: InputCallback<HTMLInputElement>,
-  onCheck: InputCallback<HTMLInputElement>,
-  onUncheck: InputCallback<HTMLInputElement>,
-  size: "sm" | "md",
+  aria?: object,
+  checked?: boolean,
+  children?: React.Node,
+  className?: string,
+  data?: object,
+  id?: string,
+  name?: string,
+  onChange?: InputCallback<HTMLInputElement>,
+  size?: "sm" | "md",
+  value?: string,
 }
 
 const Toggle = ({
   aria = {},
   checked = false,
+  children,
+  className,
   data = {},
-  onChange = noop,
-  onCheck = noop,
-  onUncheck = noop,
+  id,
+  name,
+  onChange = () => {},
   size = 'md',
+  value,
   ...props
 }: Props) => {
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
-  const handleChange = (event) => {
-    onChange(event)
-    event.target.checked ? onCheck(event) : onUncheck(event)
-  }
-
-  const css = buildCss({
-    'pb_toggle_kit': true,
-    [size]: true,
-    on: checked,
-    off: !checked,
-  })
+  const css = classnames(
+    buildCss('pb_toggle_kit',
+      size,
+      {
+        on: checked,
+        off: !checked,
+      }
+    ), className)
 
   return (
     <div
         {...ariaProps}
         {...dataProps}
-        className={classnames(css, spacing(props))}
+        className={classnames(css, globalProps(props))}
+        id={id}
     >
       <label className="pb_toggle_wrapper">
-        <input
-            {...props}
-            checked={checked}
-            onChange={handleChange}
-            type="checkbox"
-        />
-
+        <If condition={children}>
+          {children}
+          <Else />
+          <input
+              {...props}
+              defaultChecked={checked}
+              name={name}
+              onChange={onChange}
+              type="checkbox"
+              value={value}
+          />
+        </If>
         <div className="pb_toggle_control" />
       </label>
     </div>

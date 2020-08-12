@@ -1,11 +1,11 @@
 /* @flow */
 import React from 'react'
 import classnames from 'classnames'
-import { spacing } from '../utilities/spacing.js'
+import { globalProps } from '../utilities/globalProps.js'
 
 type UserBadgeProps = {
-  className?: String,
-  id?: String,
+  className?: string,
+  id?: string,
   badge?: "million-dollar" | "veteran",
   size?: "sm" | "md" | "lg",
 }
@@ -15,7 +15,7 @@ const UserBadge = (props: UserBadgeProps) => {
   const image = require(`./badges/_${badge}.svg`)
 
   return (
-    <div className={classnames(`pb_user_badge_kit_${size}`, spacing(props))}>
+    <div className={classnames(`pb_user_badge_kit_${size}`, globalProps(props))}>
       <div className="pb_user_badge_wrapper">
         <img src={image} />
       </div>

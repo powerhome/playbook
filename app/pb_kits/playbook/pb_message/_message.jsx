@@ -4,19 +4,19 @@ import React from 'react'
 import { Avatar, Body, Caption } from '../'
 import classnames from 'classnames'
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
-import { spacing } from '../utilities/spacing.js'
+import { globalProps } from '../utilities/globalProps.js'
 
 type MessageProps = {
   aria: object,
-  avatarName?: String,
-  avatarStatus?: String,
-  avatarUrl?: String,
-  className?: String,
+  avatarName?: string,
+  avatarStatus?: string,
+  avatarUrl?: string,
+  className?: string,
   data?: object,
-  id?: String,
-  label?: String,
-  message: String,
-  timestamp?: String,
+  id?: string,
+  label?: string,
+  message: string,
+  timestamp?: string,
 }
 
 const Message = (props: MessageProps) => {
@@ -39,7 +39,7 @@ const Message = (props: MessageProps) => {
     ? 'pb_message_kit_avatar'
     : 'pb_message_kit'
 
-  const classes = classnames(buildCss(baseClassName), className, spacing(props))
+  const classes = classnames(buildCss(baseClassName), className, globalProps(props))
 
   return (
     <div

@@ -65,7 +65,7 @@ $pb_selectable_card_border: 2px;
     }
   }
 
-  &[class*=_dark] {
+  &.dark {
     label {
       @include pb_card_dark;
       background: transparent;

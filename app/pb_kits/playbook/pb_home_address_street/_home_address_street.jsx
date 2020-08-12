@@ -5,21 +5,21 @@ import classnames from 'classnames'
 
 import { joinPresent, titleize } from '../utilities/text'
 import { Body, Hashtag, Title } from '../'
-import { spacing } from '../utilities/spacing.js'
+import { globalProps } from '../utilities/globalProps.js'
 
 type HomeAddressStreetProps = {
-  address: String,
-  addressCont: String,
-  city: String,
-  className?: String,
-  dark?: Boolean,
+  address: string,
+  addressCont: string,
+  city: string,
+  className?: string,
+  dark?: boolean,
   emphasis: "street" | "city",
-  homeId: Number,
-  houseStyle: String,
-  homeUrl: String,
-  state: String,
-  zipcode: String,
-  territory: String,
+  homeId: number,
+  houseStyle: string,
+  homeUrl: string,
+  state: string,
+  zipcode: string,
+  territory: string,
 }
 
 const HomeAddressStreet = (props: HomeAddressStreetProps) => {
@@ -45,7 +45,7 @@ const HomeAddressStreet = (props: HomeAddressStreetProps) => {
         'pb_home_address_street': !dark,
         'pb_home_address_street_dark': dark,
       },
-      spacing(props)
+      globalProps(props)
     )
   return (
     <div className={classes(className, dark)}>

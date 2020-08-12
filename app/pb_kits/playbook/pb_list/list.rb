@@ -69,7 +69,7 @@ module Playbook
       end
 
       def checkbox_class
-        is_checkbox ? "checkbox_list" : nil
+        is_checkbox ? "checkboxList" : nil
       end
     end
   end

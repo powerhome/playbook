@@ -19,6 +19,7 @@ import * as Badge from 'pb_badge/docs'
 import * as BarGraph from 'pb_bar_graph/docs'
 import * as Body from 'pb_body/docs'
 import * as Button from 'pb_button/docs'
+import * as ButtonToolbar from 'pb_button_toolbar/docs'
 import * as Caption from 'pb_caption/docs'
 import * as Card from 'pb_card/docs'
 import * as Checkbox from 'pb_checkbox/docs'
@@ -38,6 +39,7 @@ import * as Filter from 'pb_filter/docs'
 import * as FixedConfirmationToast from 'pb_fixed_confirmation_toast/docs'
 import * as Flex from 'pb_flex/docs'
 import * as FormPill from 'pb_form_pill/docs'
+import * as Gauge from 'pb_gauge/docs'
 import * as Hashtag from 'pb_hashtag/docs'
 import * as Highlight from 'pb_highlight/docs'
 import * as HomeAddressStreet from 'pb_home_address_street/docs'
@@ -97,6 +99,7 @@ WebpackerReact.setup({
   ...BarGraph,
   ...Body,
   ...Button,
+  ...ButtonToolbar,
   ...Caption,
   ...Card,
   ...Checkbox,
@@ -116,6 +119,7 @@ WebpackerReact.setup({
   ...FixedConfirmationToast,
   ...Flex,
   ...FormPill,
+  ...Gauge,
   ...Hashtag,
   ...Highlight,
   ...HomeAddressStreet,
@@ -168,3 +172,4 @@ WebpackerReact.setup({
   ...UserBadge,
   ...WeekdayStacked,
 })
+

@@ -4,7 +4,7 @@ import React from 'react'
 import DateTime from '../pb_kit/dateTime.js'
 import { Icon } from '../'
 import classnames from 'classnames'
-import { spacing } from '../utilities/spacing.js'
+import { globalProps } from '../utilities/globalProps.js'
 
 const defaultDateString = (value: DateTime) => {
   const weekday = value.toWeekday().toUpperCase()
@@ -26,13 +26,13 @@ type DateSubcomponent = {
 }
 
 const ExtraSmallDate = ({ value, ...props }: DateSubcomponent) => (
-  <h3 className={classnames('pb_title_kit_4', spacing(props))}>
+  <h3 className={classnames('pb_title_kit_4', globalProps(props))}>
     {defaultDateString(value)}
   </h3>
 )
 
 const SmallDate = ({ value, ...props }: DateSubcomponent) => (
-  <h3 className={classnames('pb_title_kit_4', spacing(props))}>
+  <h3 className={classnames('pb_title_kit_4', globalProps(props))}>
     <Icon
         fixedWidth
         icon="calendar"
@@ -42,15 +42,15 @@ const SmallDate = ({ value, ...props }: DateSubcomponent) => (
 )
 
 const LargeDate = ({ value, ...props }: DateSubcomponent) => (
-  <h3 className={classnames('pb_title_kit_3', spacing(props))}>
+  <h3 className={classnames('pb_title_kit_3', globalProps(props))}>
     {largeDateString(value)}
   </h3>
 )
 
 type PbDateProps = {
   size?: "xs" | "sm" | "lg",
-  value?: String,
-  className?: String
+  value?: string,
+  className?: string
 }
 
 const PbDate = ({ size, value, className, ...props }: PbDateProps) => {

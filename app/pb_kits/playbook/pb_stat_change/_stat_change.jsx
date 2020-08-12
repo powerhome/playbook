@@ -5,7 +5,7 @@ import classnames from 'classnames'
 
 import { buildCss } from '../utilities/props'
 import { Body, Icon } from '../'
-import { spacing } from '../utilities/spacing.js'
+import { globalProps } from '../utilities/globalProps.js'
 
 const statusMap = {
   increase: 'positive',
@@ -19,9 +19,9 @@ const iconMap = {
 
 type StatChangeProps = {
   change?: "increase" | "decrease" | "neutral",
-  className?: String,
-  id?: String,
-  value?: String | Number,
+  className?: string,
+  id?: string,
+  value?: string | number,
 }
 
 const StatChange = (props: StatChangeProps) => {
@@ -35,7 +35,7 @@ const StatChange = (props: StatChangeProps) => {
           className={classnames(
           className,
           buildCss('pb_stat_change_kit', status),
-          spacing(props)
+          globalProps(props)
         )}
           id={id}
       >

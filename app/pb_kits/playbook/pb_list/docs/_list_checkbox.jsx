@@ -5,7 +5,7 @@ const ListDefault = () => {
   return (
     <>
       <List
-          checkbox_list
+          checkboxList
       >
         <ListItem>
             <Checkbox

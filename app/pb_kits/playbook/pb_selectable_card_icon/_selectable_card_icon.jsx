@@ -3,6 +3,7 @@
 import React from 'react'
 import classnames from 'classnames'
 import { Body, SelectableCard, SelectableIcon } from '../'
+import { globalProps } from '../utilities/globalProps.js'
 
 import {
   buildAriaProps,
@@ -12,55 +13,55 @@ import {
 
 type SelectableCardIconProps = {
   aria?: Object,
-  checked?: Boolean,
-  checkmark: Boolean,
-  className?: String,
-  dark?: Boolean,
+  checked?: boolean,
+  checkmark: boolean,
+  className?: string,
+  dark?: boolean,
   data?: Object,
-  disabled?: Boolean,
-  icon?: String,
-  inputId?: String,
-  multi?: Boolean,
-  name?: String,
-  titleText?: String,
-  bodyText?: String,
-  value?: String,
+  disabled?: boolean,
+  icon?: string,
+  inputId?: string,
+  multi?: boolean,
+  name?: string,
+  titleText?: string,
+  bodyText?: string,
+  value?: string,
   onChange?: (e) => void,
 }
 
-const SelectableCardIcon = ({
-  aria = {},
-  checkmark = false,
-  checked = false,
-  className,
-  dark = false,
-  data = {},
-  disabled = false,
-  icon,
-  inputId,
-  multi = true,
-  name,
-  titleText,
-  bodyText,
-  value,
-  onChange,
-}: SelectableCardIconProps) => {
+const SelectableCardIcon = (props: SelectableCardIconProps) => {
+  const {
+    aria = {},
+    checkmark = false,
+    checked = false,
+    className,
+    dark = false,
+    data = {},
+    disabled = false,
+    icon,
+    inputId,
+    multi = true,
+    name,
+    titleText,
+    bodyText,
+    value,
+    onChange,
+  } = props
+
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
 
-  const css = buildCss({
-    'pb_selectable_card_icon_kit': true,
-    'checked': checked,
-    'dark': dark,
-    'disabled': disabled,
-    'enabled': !disabled,
-  })
+  const classes = classnames(buildCss('pb_selectable_card_icon_kit',
+    { 'checked': checked,
+      'disabled': disabled,
+      'enabled': !disabled },
+    className), globalProps(props))
 
   return (
     <div
         {...ariaProps}
         {...dataProps}
-        className={classnames(css, className)}
+        className={classes}
     >
       <SelectableCard
           checked={checked}
@@ -76,7 +77,6 @@ const SelectableCardIcon = ({
         {
           <>
             <SelectableIcon
-                dark={dark}
                 icon={icon}
                 inputs="disabled"
                 size="2x"

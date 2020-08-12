@@ -3,16 +3,16 @@ import React from 'react'
 import classnames from 'classnames'
 import { Caption } from '../'
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
-import { spacing } from '../utilities/spacing.js'
+import { globalProps } from '../utilities/globalProps.js'
 
 type SectionSeparatorProps = {
   aria: object,
-  className: String,
-  dark?: Boolean,
+  className: string,
+  dark?: boolean,
   data: object,
-  id: String,
+  id: string,
   orientation?: "horizontal" | "vertical",
-  text: String,
+  text: string,
   variant?: "card" | "background",
 }
 
@@ -30,7 +30,7 @@ const SectionSeparator = (props: SectionSeparatorProps) => {
   const themeStyle = dark === true ? '_dark' : ''
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
-  const classes = classnames(buildCss('pb_section_separator_kit', variant, orientation, themeStyle), className, spacing(props))
+  const classes = classnames(buildCss('pb_section_separator_kit', variant, orientation, themeStyle), className, globalProps(props))
 
   return (
 

@@ -11,19 +11,19 @@ import {
   noop,
 } from '../utilities/props'
 
-import { spacing } from '../utilities/spacing.js'
+import { globalProps } from '../utilities/globalProps.js'
 
 type CircleIconButtonProps = {
   aria?: object,
-  className?: String,
-  dark?: Boolean,
+  className?: string,
+  dark?: boolean,
   data?: object,
-  disabled?: Boolean,
-  icon: String,
-  id?: String,
-  link?: String,
+  disabled?: boolean,
+  icon: string,
+  id?: string,
+  link?: string,
   onClick?: Callback,
-  newWindow?: Boolean,
+  newWindow?: boolean,
   type?: 'button' | 'submit' | 'reset',
   variant?: 'primary' | 'secondary' | 'link',
 }
@@ -46,7 +46,7 @@ const CircleIconButton = (props: CircleIconButtonProps) => {
 
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
-  const classes = classnames(buildCss('pb_circle_icon_button_kit'), className, spacing(props))
+  const classes = classnames(buildCss('pb_circle_icon_button_kit'), className, globalProps(props))
 
   return (
     <div

@@ -6,7 +6,7 @@ const ListDefault = () => {
     <>
       <List
           dark
-          checkbox_list
+          checkboxList
       >
         <ListItem>
             <Checkbox

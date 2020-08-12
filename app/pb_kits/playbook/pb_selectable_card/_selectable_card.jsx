@@ -13,24 +13,23 @@ import {
   noop,
 } from '../utilities/props'
 
-import { spacing } from '../utilities/spacing.js'
+import { globalProps } from '../utilities/globalProps.js'
 
-type Props = {
-  aria: Object,
-  checked: Boolean,
-  children?: Array<React.ReactChild>,
-  className?: String,
-  dark?: Boolean,
-  data: Object,
-  disabled?: Boolean,
-  icon?: Boolean,
-  id?: String,
-  inputId?: String,
-  multi?: Boolean,
-  name?: String,
+type SelectableCardProps = {
+  aria?: object,
+  checked: boolean,
+  children?: array<React.ReactChild>,
+  className?: string,
+  data: object,
+  disabled?: boolean,
+  icon?: boolean,
+  id?: string,
+  inputId?: string,
+  multi?: boolean,
+  name?: string,
   onChange: InputCallback<HTMLInputElement>,
-  text?: String,
-  value?: String,
+  text?: string,
+  value?: string,
 }
 
 const SelectableCard = ({
@@ -38,7 +37,6 @@ const SelectableCard = ({
   checked = false,
   children,
   className,
-  dark = false,
   data = {},
   disabled = false,
   icon = false,
@@ -49,17 +47,15 @@ const SelectableCard = ({
   text,
   value,
   ...props
-}: Props) => {
+}: SelectableCardProps) => {
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
 
-  const css = buildCss({
-    'pb_selectable_card_kit': true,
-    checked: checked,
-    dark: dark,
-    disabled: disabled,
-    enabled: !disabled,
-  })
+  const classes = classnames(buildCss('pb_selectable_card_kit',
+    { 'checked': checked,
+      'disabled': disabled,
+      'enabled': !disabled },
+    className), globalProps(props))
 
   const displayIcon = () => {
     if (icon === true) {
@@ -82,7 +78,7 @@ const SelectableCard = ({
     <div
         {...ariaProps}
         {...dataProps}
-        className={classnames(css, className)}
+        className={classes}
     >
       <input
           {...props}
@@ -95,7 +91,7 @@ const SelectableCard = ({
           value={value}
       />
       <label
-          className={spacing(props)}
+          className={globalProps(props)}
           htmlFor={inputIdPresent}
       >
         {text || children}

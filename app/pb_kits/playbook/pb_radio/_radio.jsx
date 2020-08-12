@@ -4,21 +4,21 @@
 import React from 'react'
 import Body from '../pb_body/_body.jsx'
 import classnames from 'classnames'
-import { spacing } from '../utilities/spacing.js'
+import { globalProps } from '../utilities/globalProps.js'
 
 type RadioProps = {
-  className?: String,
-  data?: String,
-  error?: Boolean,
-  id?: String,
-  label: String,
-  name: String,
-  value: String,
-  checked?: Boolean,
-  dark?: Boolean,
-  text: String,
+  className?: string,
+  data?: string,
+  error?: boolean,
+  id?: string,
+  label: string,
+  name: string,
+  value: string,
+  checked?: boolean,
+  dark?: boolean,
+  text: string,
   children?: Node,
-  onChange: (Boolean)=>void,
+  onChange: (boolean)=>void,
 }
 
 const Radio = ({
@@ -40,7 +40,7 @@ const Radio = ({
 
   return (
     <label
-        className={classnames('pb_radio_kit' + (dark === true ? '_dark ' : ' ') + errorClass + ' ' + className, spacing(props))}
+        className={classnames('pb_radio_kit' + (dark === true ? '_dark ' : ' ') + errorClass + ' ' + className, globalProps(props))}
         htmlFor={id}
     >
       <If condition={children}>

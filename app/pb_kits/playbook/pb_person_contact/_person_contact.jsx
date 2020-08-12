@@ -9,25 +9,25 @@ import {
   buildDataProps,
 } from '../utilities/props'
 
-import { spacing } from '../utilities/spacing.js'
+import { globalProps } from '../utilities/globalProps.js'
 
 import { Caption, Contact, Person } from '../'
 
 type ContactItem = {
-  contactType: String,
-  contactValue: String,
-  contactDetail: String,
+  contactType: string,
+  contactValue: string,
+  contactDetail: string,
 }
 
 type PersonContactProps = {
   aria?: object,
-  className?: String | Array<String>,
-  dark?: Boolean,
+  className?: string | array<string>,
+  dark?: boolean,
   data?: object,
-  firstName: String,
-  id?: String,
-  lastName: String,
-  contacts?: Array<ContactItem>,
+  firstName: string,
+  id?: string,
+  lastName: string,
+  contacts?: array<ContactItem>,
 }
 
 const PersonContact = (props: PersonContactProps) => {
@@ -43,7 +43,7 @@ const PersonContact = (props: PersonContactProps) => {
 
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
-  const classes = classnames(buildCss('pb_person_contact_kit'), className, spacing(props))
+  const classes = classnames(buildCss('pb_person_contact_kit'), className, globalProps(props))
 
   const wrongContacts = () => (
     contacts.filter((contactObject) => (

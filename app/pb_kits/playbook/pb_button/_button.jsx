@@ -2,39 +2,37 @@
 
 import React from 'react'
 import classnames from 'classnames'
-import { spacing } from '../utilities/spacing.js'
+import { globalProps } from '../utilities/globalProps.js'
 
 import Icon from '../pb_icon/_icon.jsx'
 
 type EventHandler = (SyntheticInputEvent<HTMLInputElement>) => void
 type ButtonPropTypes = {
   aria?: {
-    label: String,
+    label: string,
   },
-  children?: Array<React.ReactChild>,
-  className?: String | Array<String>,
-  dark: Boolean,
-  disabled?: Boolean,
-  fixedWidth?: Boolean,
-  fullWidth?: Boolean,
-  icon?: String,
-  id?: String,
-  link?: String,
-  loading?: Boolean,
-  newWindow?: Boolean,
+  children?: array<React.ReactChild>,
+  className?: string | array<string>,
+  disabled?: boolean,
+  fixedWidth?: boolean,
+  fullWidth?: boolean,
+  icon?: string,
+  id?: string,
+  link?: string,
+  loading?: boolean,
+  newWindow?: boolean,
   onClick?: EventHandler,
   size: 'large' | 'medium' | 'small',
-  text?: String,
+  text?: string,
   type: 'inline' | null,
-  htmlType: String | 'button',
-  value?: String | null,
+  htmlType: string | 'button',
+  value?: string | null,
   variant: 'primary' | 'secondary' | 'link',
-  wrapperClass: String,
+  wrapperClass: string,
 }
 
 const buttonClassName = (props: ButtonPropTypes) => {
   const {
-    dark = false,
     disabled = false,
     fullWidth = false,
     loading = false,
@@ -48,7 +46,6 @@ const buttonClassName = (props: ButtonPropTypes) => {
   className += `${variant !== null ? `_${variant}` : ''}`
   className += `${type !== null ? `_${type}` : ''}`
   className += `${size !== null ? `_${size}` : ''}`
-  className += `${dark === true ? '_dark' : ''}`
   className += `${fullWidth ? '_block' : ''}`
   className += disabled ? '_disabled' : '_enabled'
   className += loading ? '_loading' : ''
@@ -85,7 +82,7 @@ const Button = (props: ButtonPropTypes) => {
   } = props
 
   const buttonAria = buttonAriaProps(props)
-  const css = classnames(buttonClassName(props), className, spacing(props))
+  const css = classnames(buttonClassName(props), className, globalProps(props))
   const loadingIcon = (
     <div className="loading-icon">
       <Icon

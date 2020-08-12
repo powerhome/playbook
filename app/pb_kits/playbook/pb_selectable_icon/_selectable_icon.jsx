@@ -10,27 +10,27 @@ import {
   buildDataProps,
 } from '../utilities/props'
 
+import { globalProps } from '../utilities/globalProps.js'
+
 type SelectableIconProps = {
   aria?: Object,
-  checked?: Boolean,
-  className?: String,
-  disabled?: Boolean,
-  dark?: Boolean,
+  checked?: boolean,
+  className?: string,
+  disabled?: boolean,
   data?: Object,
-  icon: String,
-  inputId: String,
-  inputs: String,
-  multi?: Boolean,
-  name: String,
-  text: String,
-  value?: String
+  icon: string,
+  inputId: string,
+  inputs: string,
+  multi?: boolean,
+  name: string,
+  text: string,
+  value?: string
 }
 
 const SelectableIcon = ({
   aria = {},
   className,
   checked = false,
-  dark = false,
   data = {},
   disabled = false,
   icon,
@@ -45,13 +45,11 @@ const SelectableIcon = ({
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
 
-  const css = buildCss({
-    'pb_selectable_icon_kit': true,
-    'checked': checked,
-    'dark': dark,
-    'disabled': disabled,
-    'enabled': !disabled,
-  })
+  const classes = classnames(buildCss('pb_selectable_icon_kit',
+    { 'checked': checked,
+      'disabled': disabled,
+      'enabled': !disabled },
+    className), globalProps(props))
 
   const inputType = multi === false ? 'radio' : 'checkbox'
 
@@ -61,7 +59,7 @@ const SelectableIcon = ({
     <div
         {...ariaProps}
         {...dataProps}
-        className={classnames(css, className)}
+        className={classes}
     >
       <If condition={inputs === 'disabled'}>
         <>

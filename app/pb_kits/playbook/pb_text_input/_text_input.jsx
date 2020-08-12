@@ -2,7 +2,7 @@
 import React from 'react'
 import classnames from 'classnames'
 import { Body, Caption } from '../'
-import { spacing } from '../utilities/spacing.js'
+import { globalProps } from '../utilities/globalProps.js'
 
 import {
   buildAriaProps,
@@ -11,17 +11,17 @@ import {
 
 type TextInputProps = {
   aria?: object,
-  className: String,
+  className: string,
   dark: boolean,
   data?: object,
-  error?: String,
-  id?: String,
-  name: String,
-  label: String,
+  error?: string,
+  id?: string,
+  name: string,
+  label: string,
   onChange: (String) => void,
-  placeholder: String,
-  type: String,
-  value: String | number,
+  placeholder: string,
+  type: string,
+  value: string | number,
   children: Node,
 }
 
@@ -60,7 +60,7 @@ const TextInput = ({
           dark={dark}
           text={label}
       />
-      <div className={classnames('text_input_wrapper', spacing(props))}>
+      <div className={classnames('text_input_wrapper', globalProps(props))}>
         <If condition={children}>
           {children}
           <Else />

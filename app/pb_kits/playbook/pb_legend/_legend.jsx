@@ -3,13 +3,13 @@
 import React from 'react'
 import classnames from 'classnames'
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
-import { spacing } from '../utilities/spacing.js'
+import { globalProps } from '../utilities/globalProps.js'
 
 import { Body, Title } from '../'
 
 type LegendProps = {
   aria?: object,
-  className?: String,
+  className?: string,
   color?: | "data_1"
     | "data_2"
     | "data_3"
@@ -17,11 +17,11 @@ type LegendProps = {
     | "data_5"
     | "data_6"
     | "data_7",
-  dark?: Boolean,
+  dark?: boolean,
   data?: object,
-  id?: String,
-  prefixText?: String,
-  text: String,
+  id?: string,
+  prefixText?: string,
+  text: string,
 }
 
 const Legend = (props: LegendProps) => {
@@ -41,7 +41,7 @@ const Legend = (props: LegendProps) => {
   const darkClass = dark ? 'dark' : 'light'
   const bodyCSS = classnames(
     buildCss('pb_legend_kit', color, darkClass), className,
-    spacing(props)
+    globalProps(props)
   )
 
   return (

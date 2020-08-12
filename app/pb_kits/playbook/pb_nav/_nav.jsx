@@ -4,15 +4,15 @@ import React from 'react'
 import classnames from 'classnames'
 import { Caption } from '../'
 import { buildCss } from '../utilities/props'
-import { spacing } from '../utilities/spacing.js'
+import { globalProps } from '../utilities/globalProps.js'
 
 type NavProps = {
-  title: String,
+  title: string,
   orientation?: "vertical" | "horizontal",
-  link: String,
+  link: string,
   children?: React.Node,
-  className?: String | Array<String>,
-  highlight?: Boolean,
+  className?: string | array<string>,
+  highlight?: boolean,
   variant?: "normal" | "subtle",
   onClick?: EventHandler,
 }
@@ -31,7 +31,7 @@ const Nav = (props: NavProps) => {
     highlight: highlight,
   })
   return (
-    <div className={classnames(cardCss, spacing(props))}>
+    <div className={classnames(cardCss, globalProps(props))}>
       <If condition={title}>
         <div className="pb_nav_list_title">
           <a

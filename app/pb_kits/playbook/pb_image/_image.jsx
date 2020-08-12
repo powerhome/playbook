@@ -2,16 +2,16 @@
 
 import React from 'react'
 import classnames from 'classnames'
+import { globalProps } from '../utilities/globalProps.js'
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
-import { spacing } from '../utilities/spacing.js'
 
 type ImageProps = {
-  alt?: String,
+  alt?: string,
   aria?: object,
-  className?: String,
+  className?: string,
   data?: object,
-  id?: String,
-  url: String,
+  id?: string,
+  url: string,
 }
 
 const Image = (props: ImageProps) => {
@@ -25,7 +25,7 @@ const Image = (props: ImageProps) => {
   } = props
 
   const ariaProps = buildAriaProps(aria)
-  const classes = classnames(buildCss('pb_image lazyload blur_up'), className, spacing(props))
+  const classes = classnames(buildCss('pb_image lazyload blur_up'), className, globalProps(props))
   const dataProps = buildDataProps(data)
 
   return (

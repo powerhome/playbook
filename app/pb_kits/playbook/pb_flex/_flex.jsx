@@ -3,18 +3,18 @@
 import React from 'react'
 import classnames from 'classnames'
 import { buildCss } from '../utilities/props'
-import { spacing as spacingFunc } from '../utilities/spacing.js'
+import { globalProps } from '../utilities/globalProps.js'
 type FlexProps = {
-  children: Array<React.ReactNode> | React.ReactNode,
-  className?: String,
+  children: array<React.ReactNode> | React.ReactNode,
+  className?: string,
   horizontal?: "left" | "center" | "right" | "stretch",
-  id?: String,
-  inline?: Boolean,
+  id?: string,
+  inline?: boolean,
   orientation?: "row" | "column",
   spacing?: "around" | "between" | "evenly" | "none",
-  reverse?: Boolean,
+  reverse?: boolean,
   vertical?: "top" | "center" | "bottom" | "stretch",
-  wrap?: Boolean,
+  wrap?: boolean,
 }
 
 const Flex = (props: FlexProps) => {
@@ -52,7 +52,7 @@ const Flex = (props: FlexProps) => {
           wrapClass
         ),
         className,
-        spacingFunc(props)
+        globalProps(props)
       )}
     >
       {children}

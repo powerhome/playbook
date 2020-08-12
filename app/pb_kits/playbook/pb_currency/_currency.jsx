@@ -3,22 +3,22 @@
 import React from 'react'
 import classnames from 'classnames'
 
-import { spacing } from '../utilities/spacing.js'
+import { globalProps } from '../utilities/globalProps.js'
 import { Body, Caption, Title } from '../'
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
 
 type CurrencyProps = {
   align?: 'center' | 'left' | 'right',
-  amount: String,
+  amount: string,
   aria?: object,
-  className?: String,
-  dark?: Boolean,
+  className?: string,
+  dark?: boolean,
   data?: object,
-  id?: String,
-  label?: String,
+  id?: string,
+  label?: string,
   size?: 'sm' | 'md' | 'lg',
-  symbol?: String,
-  unit?: String,
+  symbol?: string,
+  unit?: string,
 }
 
 const sizes = {
@@ -45,7 +45,7 @@ const Currency = (props: CurrencyProps) => {
   const [whole, decimal = '00'] = amount.split('.')
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
-  const classes = classnames(buildCss('pb_currency_kit', align, size, { dark: dark }), className, spacing(props))
+  const classes = classnames(buildCss('pb_currency_kit', align, size, { dark: dark }), className, globalProps(props))
 
   return (
     <div

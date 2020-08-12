@@ -4,21 +4,21 @@ import React from 'react'
 import classnames from 'classnames'
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
 import { Highlight } from '../'
-import { spacing } from '../utilities/spacing.js'
+import { globalProps } from '../utilities/globalProps.js'
 
 type BodyProps = {
   aria?: object,
-  className?: String,
-  children?: Array<React.ReactChild>,
+  className?: string,
+  children?: array<React.ReactChild>,
   color: 'dark' | 'default' | 'light' | 'lighter' | 'light_dark' | 'lighter_dark',
-  dark?: Boolean,
+  dark?: boolean,
   data?: object,
-  highlightedText?: Array<String>,
-  highlighting?: Boolean,
-  id?: String,
+  highlightedText?: array<string>,
+  highlighting?: boolean,
+  id?: string,
   status?: 'negative' | 'neutral' | 'positive',
   tag?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p' | 'span' | 'div',
-  text?: String,
+  text?: string,
 }
 
 const Body = (props: BodyProps) => {
@@ -27,7 +27,6 @@ const Body = (props: BodyProps) => {
     className,
     children,
     color = '',
-    dark = false,
     data = {},
     highlightedText = [],
     highlighting = false,
@@ -40,10 +39,8 @@ const Body = (props: BodyProps) => {
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
   const classes = classnames(
-    buildCss('pb_body_kit', color, status, {
-      dark: dark,
-    }),
-    spacing(props),
+    buildCss('pb_body_kit', color, status),
+    globalProps(props),
     className
   )
   const Tag = `${tag}`

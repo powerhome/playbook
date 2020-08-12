@@ -6,16 +6,16 @@ import classnames from 'classnames'
 
 import { Badge } from '../'
 import { buildCss } from '../utilities/props'
-import { spacing } from '../utilities/spacing.js'
+import { globalProps } from '../utilities/globalProps.js'
 
 type HashtagProps = {
-  className?: String,
-  data?: String,
-  dark?: Boolean,
-  id?: String,
-  text?: String,
+  className?: string,
+  data?: string,
+  dark?: boolean,
+  id?: string,
+  text?: string,
   type: "default" | "home" | "project" | "appointment",
-  url?: String,
+  url?: string,
 }
 
 const typeMap = {
@@ -32,7 +32,7 @@ const Hashtag = (props: HashtagProps) => {
         className={classnames(
         className,
         buildCss('pb_hashtag_kit', { dark: dark }),
-        spacing(props)
+        globalProps(props)
       )}
     >
       <a href={url}>

@@ -2,12 +2,12 @@
 import React from 'react'
 import classnames from 'classnames'
 import { buildCss } from '../utilities/props'
-import { spacing } from '../utilities/spacing.js'
+import { globalProps } from '../utilities/globalProps.js'
 
 type TableRowPropTypes = {
-  children: Array<React.ReactNode> | React.ReactNode,
-  className: String,
-  sideHighlightColor: String,
+  children: array<React.ReactNode> | React.ReactNode,
+  className: string,
+  sideHighlightColor: string,
 }
 
 const TableRow = (props: TableRowPropTypes) => {
@@ -17,7 +17,7 @@ const TableRow = (props: TableRowPropTypes) => {
   const tableRowCss = buildCss('pb_table_row_kit', sideHighlightClass)
 
   return (
-    <tr className={classnames(tableRowCss, className, spacing(props))}>
+    <tr className={classnames(tableRowCss, className, globalProps(props))}>
       {children}
     </tr>
   )

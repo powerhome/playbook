@@ -2,14 +2,14 @@
 
 import React from 'react'
 import classnames from 'classnames'
-import { spacing } from '../utilities/spacing.js'
+import { globalProps } from '../utilities/globalProps.js'
 
 type DistributionBarProps = {
-  className?: String,
-  data?: String,
-  id?: String,
+  className?: string,
+  data?: string,
+  id?: string,
   size?: "lg" | "sm",
-  widths?: Array<Number>,
+  widths?: array<number>,
 }
 
 const normalizeCharacters = (widths) => {
@@ -37,7 +37,7 @@ const DistributionBar = (props: DistributionBarProps) => {
   const normalizedValues = normalizeCharacters(widths)
 
   return (
-    <div className={classnames(`pb_distribution_bar_${size}`, spacing(props))}>
+    <div className={classnames(`pb_distribution_bar_${size}`, globalProps(props))}>
       {barValues(normalizedValues)}
     </div>
   )

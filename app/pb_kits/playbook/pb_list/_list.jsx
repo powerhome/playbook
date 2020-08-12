@@ -3,23 +3,28 @@
 import React, { type Node } from 'react'
 import classnames from 'classnames'
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
-import { spacing } from '../utilities/spacing.js'
+import { globalProps } from '../utilities/globalProps.js'
 
 type ListProps = {
   aria?: object,
-  borderless: Boolean,
-  className?: String,
-  children: Array<Node> | Node,
-  dark: Boolean,
+  borderless: boolean,
+  className?: string,
+  children: array<Node> | Node,
+  dark: boolean,
   data?: object,
-  id?: String,
+  id?: string,
   layout: "" | "left" | "right",
   ordered: Boolean,
   role?: String,
   tabIndex?: String,
   size?: String,
   xpadding: Boolean,
-  checkbox_list: Boolean,
+  checkboxList: Boolean,
+  ordered: boolean,
+  role?: string,
+  tabIndex?: string,
+  size?: string,
+  xpadding: boolean,
 }
 
 const List = (props: ListProps) => {
@@ -37,7 +42,7 @@ const List = (props: ListProps) => {
     size = '',
     tabIndex,
     xpadding = false,
-    checkbox_list = false,
+    checkboxList = false,
   } = props
 
   const layoutClass = {
@@ -54,9 +59,9 @@ const List = (props: ListProps) => {
       borderless: borderless,
       ordered: ordered,
       xpadding: xpadding,
-      checkbox_list: checkbox_list,
+      checkboxList: checkboxList,
     }), className,
-    spacing(props)
+    globalProps(props)
   )
 
   return (

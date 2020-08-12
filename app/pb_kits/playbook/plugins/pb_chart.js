@@ -4,6 +4,8 @@ import { highchartsTheme } from '../pb_dashboard/pbChartsLightTheme.js'
 import colors from '../tokens/_colors.scss'
 
 require('highcharts/modules/variable-pie')(Highcharts)
+import highchartsMore from 'highcharts/highcharts-more.js'
+import solidGauge from 'highcharts/modules/solid-gauge.js'
 
 // Map Data Color String Props to our SCSS Variables
 const mapColors = (array) => {
@@ -67,8 +69,80 @@ class pbChart {
 
     if (this.options.type == 'variablepie' || this.options.type ==  'pie'){
       this.setupPieChart(options)
+    } else if (this.options.type == 'gauge') {
+      this.setupGauge()
     } else {
       this.setupChart()
+    }
+  }
+
+  setupGauge() {
+    highchartsMore(Highcharts)
+    solidGauge(Highcharts)
+    Highcharts.setOptions(highchartsTheme)
+
+    Highcharts.chart(this.defaults.id, {
+      chart: {
+        type: this.defaults.style,
+        height: this.defaults.height,
+      },
+      title: {
+        text: this.defaults.title,
+      },
+      yAxis: {
+        min: this.defaults.min,
+        max: this.defaults.max,
+        lineWidth: 0,
+        tickWidth: 0,
+        minorTickInterval: null,
+        tickAmount: 2,
+        tickPositions: [this.defaults.min, this.defaults.max],
+        labels: {
+          y: 26,
+          enabled: this.defaults.showLabels,
+        },
+      },
+      credits: false,
+      series: [
+        {
+          data: this.defaults.chartData,
+        },
+      ],
+      pane: {
+        center: ['50%', '50%'],
+        size: '90%',
+        startAngle: this.defaults.circumference[0],
+        endAngle: this.defaults.circumference[1],
+        background: {
+          borderWidth: 20,
+          innerRadius: '90%',
+          outerRadius: '90%',
+          shape: 'arc',
+          className: 'gauge-pane',
+        },
+      },
+      tooltip: {
+        headerFormat: '',
+        pointFormat: this.defaults.tooltipHtml,
+        followPointer: true,
+      },
+      plotOptions: {
+        series: {
+          animation: !this.defaults.disableAnimation,
+        },
+        solidgauge: {
+          dataLabels: {
+            format: `<span class="prefix">${this.defaults.prefix}</span>` +
+            '<span class="fix">{y:,f}</span>' +
+            `<span class="suffix">${this.defaults.suffix}</span>`,
+          },
+        },
+      },
+    })
+    document.querySelectorAll('.gauge-pane').forEach((pane) => pane.setAttribute('stroke-linejoin', 'round'))
+    if (document.querySelector('.prefix')) {
+      document.querySelectorAll('.prefix').forEach((prefix) => prefix.setAttribute('y', '28'))
+      document.querySelectorAll('.fix').forEach((fix) => fix.setAttribute('y', '38'))
     }
   }
 

@@ -13,15 +13,15 @@ import {
 import { buildCss, noop } from '../utilities/props'
 
 import classnames from 'classnames'
-import { spacing } from '../utilities/spacing.js'
+import { globalProps } from '../utilities/globalProps.js'
 
 type PbPopoverProps = {
-  className?: String,
+  className?: string,
   closeOnClick?: "outside" | "inside",
-  offset?: Boolean,
+  offset?: boolean,
   reference: PopperReference,
-  show?: Boolean,
-  shouldClosePopover?: () => Boolean,
+  show?: boolean,
+  shouldClosePopover?: () => boolean,
 } & PopperProps
 
 // Prop enabled default modifiers here
@@ -58,7 +58,7 @@ const Popover = (props: PbPopoverProps) => {
     minWidth,
   } = props
 
-  const popoverSpacing = spacing(props) ? spacing(props) : 'p_sm'
+  const popoverSpacing = globalProps(props) ? globalProps(props) : 'p_sm'
   const overflowHandling = maxHeight || maxWidth ? 'overflow_handling' : ''
   const zIndexStyle = zIndex ? { zIndex: zIndex } : {}
   const widthHeightStyles = () => {

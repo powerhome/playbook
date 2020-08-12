@@ -2,21 +2,21 @@
 
 import React from 'react'
 import classnames from 'classnames'
-import { spacing } from '../utilities/spacing.js'
+import { globalProps } from '../utilities/globalProps.js'
 
 import { buildDataProps } from '../utilities/props'
 
 type OnlineStatusProps = {
-  className?: String,
+  className?: string,
   data?: object,
-  id?: String,
+  id?: string,
   status?: "online" | "offline" | "away",
 }
 
 const OnlineStatus = (props: OnlineStatusProps) => {
   const { id, data = {}, className, status = 'offline' } = props
   const dataProps = buildDataProps(data)
-  const css = classnames([`pb_online_status_kit_${status}`, className], spacing(props))
+  const css = classnames([`pb_online_status_kit_${status}`, className], globalProps(props))
 
   return (
     <div

@@ -3,17 +3,17 @@
 
 import React from 'react'
 import classnames from 'classnames'
-import { spacing } from '../utilities/spacing.js'
+import { globalProps } from '../utilities/globalProps.js'
 import { Avatar, Badge } from '../'
 
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
 
 type MultipleUsersStackedProps = {
-  className?: String,
-  id?: String,
+  className?: string,
+  id?: string,
   data?: object,
   aria?: object,
-  users: Array<Object>,
+  users: array<object>,
 }
 
 const MultipleUsersStacked = (props: MultipleUsersStackedProps) => {
@@ -75,7 +75,7 @@ const MultipleUsersStacked = (props: MultipleUsersStackedProps) => {
     <div
         {...ariaProps}
         {...dataProps}
-        className={classnames(css, className, spacing(props))}
+        className={classnames(css, className, globalProps(props))}
         id={id}
     >
       {firstUser()}

@@ -3,18 +3,17 @@
 import React from 'react'
 import classnames from 'classnames'
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
-import { spacing } from '../utilities/spacing.js'
+import { globalProps } from '../utilities/globalProps.js'
 
 type CaptionProps = {
   aria?: object,
-  className?: String,
-  children: Array<React.ReactNode> | React.ReactNode,
-  dark?: Boolean,
+  className?: string,
+  children: array<React.ReactNode> | React.ReactNode,
   data?: object,
-  id?: String,
+  id?: string,
   size?: "xs" | "sm" | "md" | "lg" | "xl",
   tag?: "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "p" | "span" | "div",
-  text?: String,
+  text?: string,
 }
 
 const Caption = (props: CaptionProps) => {
@@ -22,7 +21,6 @@ const Caption = (props: CaptionProps) => {
     aria = {},
     className,
     children,
-    dark = false,
     data = {},
     id,
     size = 'md',
@@ -34,11 +32,9 @@ const Caption = (props: CaptionProps) => {
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
   const css = classnames(
-    buildCss('pb_caption_kit', size, {
-      dark: dark,
-    }),
+    buildCss('pb_caption_kit', size),
     className,
-    spacing(props)
+    globalProps(props)
   )
 
   return (

@@ -2,20 +2,20 @@
 import React from 'react'
 import classnames from 'classnames'
 import { buildCss } from '../utilities/props'
-import { spacing } from '../utilities/spacing.js'
+import { globalProps } from '../utilities/globalProps.js'
 
 type ProgressSimpleProps = {
   align?: "left" | "center" | "right",
-  className?: String | Array<String>,
-  dark?: Boolean,
-  data?: String,
-  id?: String,
-  max?: String,
-  muted: Boolean,
-  percent: String,
-  value: Number,
+  className?: string | array<string>,
+  dark?: boolean,
+  data?: string,
+  id?: string,
+  max?: string,
+  muted: boolean,
+  percent: string,
+  value: number,
   variant?: "default" | "positive" | "negative",
-  width: String,
+  width: string,
 }
 
 const ProgressSimple = (props: ProgressSimpleProps) => {
@@ -43,7 +43,7 @@ const ProgressSimple = (props: ProgressSimpleProps) => {
   const wrapperClass = classnames(
     className,
     buildCss('pb_progress_simple_wrapper', align, { dark: dark }),
-    spacing(props)
+    globalProps(props)
   )
 
   const kitClass = classnames(

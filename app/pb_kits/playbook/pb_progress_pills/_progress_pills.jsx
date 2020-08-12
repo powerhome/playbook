@@ -10,18 +10,18 @@ import {
   buildDataProps,
 } from '../utilities/props'
 
-import { spacing } from '../utilities/spacing.js'
+import { globalProps } from '../utilities/globalProps.js'
 
 type ProgressPillsProps = {
-  active?: Number,
+  active?: number,
   aria?: object,
-  className?: String,
+  className?: string,
   data?: object,
-  id?: String,
-  steps?: Number,
-  title?: String,
-  value?: String,
-  dark?: Boolean,
+  id?: string,
+  steps?: number,
+  title?: string,
+  value?: string,
+  dark?: boolean,
 }
 
 const showSteps = (steps, active, dark) => {
@@ -59,7 +59,7 @@ const ProgressPills = (props: ProgressPillsProps) => {
 
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
-  const classes = classnames(buildCss('pb_progress_pills_kit', darkClass), className, spacing(props))
+  const classes = classnames(buildCss('pb_progress_pills_kit', darkClass), className, globalProps(props))
 
   return (
     <div

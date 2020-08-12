@@ -4,19 +4,19 @@ import React from 'react'
 import classnames from 'classnames'
 import { Body, Caption, Icon } from '../'
 import DateTime from '../pb_kit/dateTime.js'
-import { spacing } from '../utilities/spacing.js'
+import { globalProps } from '../utilities/globalProps.js'
 
 type TimeRangeInlineProps = {
-  className?: String,
-  id?: String,
-  data?: String,
+  className?: string,
+  id?: string,
+  data?: string,
   alignment?: "left" | "center" | "vertical",
   size?: "sm" | "xs",
-  dark?: Boolean,
-  icon?: Boolean,
-  timezone?: Boolean,
-  startTime: String,
-  endTime: String,
+  dark?: boolean,
+  icon?: boolean,
+  timezone?: boolean,
+  startTime: string,
+  endTime: string,
 }
 
 const timezoneString = (dateValue) => {
@@ -78,7 +78,7 @@ const TimeRangeInline = (props: TimeRangeInlineProps) => {
 
   return (
     <div
-        className={classnames('pb_time_range_inline_kit_' + alignment, className, spacing(props))}
+        className={classnames('pb_time_range_inline_kit_' + alignment, className, globalProps(props))}
     >
       <div className="pb_time_range_inline_wrapper">
         <If condition={size == 'xs'}>

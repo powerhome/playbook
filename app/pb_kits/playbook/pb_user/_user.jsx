@@ -3,19 +3,19 @@
 import React from 'react'
 import classnames from 'classnames'
 import { Avatar, Body, Title } from '../'
-import { spacing } from '../utilities/spacing.js'
+import { globalProps } from '../utilities/globalProps.js'
 
 type UserProps = {
-  className?: String,
-  id?: String,
-  name: String,
-  territory?: String,
-  title?: String,
+  className?: string,
+  id?: string,
+  name: string,
+  territory?: string,
+  title?: string,
   size?: "sm" | "md" | "lg",
   align?: "left" | "center" | "right",
   orientation?: "horiztonal" | "vertical",
-  avatar?: Boolean,
-  avatarUrl?: String,
+  avatar?: boolean,
+  avatarUrl?: string,
 }
 
 const User = (props: UserProps) => {
@@ -30,7 +30,7 @@ const User = (props: UserProps) => {
     avatarUrl,
   } = props
   return (
-    <div className={classnames(`pb_user_kit_${align}_${orientation}_${size}`, spacing(props))}>
+    <div className={classnames(`pb_user_kit_${align}_${orientation}_${size}`, globalProps(props))}>
       <If condition={avatar || avatarUrl}>
         <Avatar
             imageUrl={avatarUrl}

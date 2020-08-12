@@ -4,14 +4,14 @@ import React from 'react'
 import classnames from 'classnames'
 import { buildCss } from '../utilities/props'
 import { Avatar } from '../'
-import { spacing } from '../utilities/spacing.js'
+import { globalProps } from '../utilities/globalProps.js'
 
 type MultipleUsersProps = {
-  className?: String,
-  id?: String,
-  maxDisplayedUsers?: Number,
-  reverse?: Boolean,
-  users: Array<Object>,
+  className?: string,
+  id?: string,
+  maxDisplayedUsers?: number,
+  reverse?: boolean,
+  users: array<object>,
 }
 
 const MultipleUsers = (props: MultipleUsersProps) => {
@@ -25,7 +25,7 @@ const MultipleUsers = (props: MultipleUsersProps) => {
         className={classnames(
         className,
         buildCss('pb_multiple_users_kit', reverse && 'reverse'),
-        spacing(props)
+        globalProps(props)
       )}
         id={id}
     >

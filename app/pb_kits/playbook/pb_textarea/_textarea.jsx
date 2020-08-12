@@ -4,22 +4,22 @@ import React from 'react'
 import classnames from 'classnames'
 import { Body, Caption } from '../'
 import type { InputCallback } from '../types.js'
-import { spacing } from '../utilities/spacing.js'
+import { globalProps } from '../utilities/globalProps.js'
 
 type TextareaProps = {
-  className?: String,
-  children?: Array<React.ReactChild>,
-  data?: String,
-  error?: String,
-  id?: String,
-  object?: String,
-  method?: String,
-  label?: String,
-  placeholder?: String,
-  value?: String,
-  name?: String,
-  rows?: Number,
-  dark?: Boolean,
+  className?: string,
+  children?: array<React.ReactChild>,
+  data?: string,
+  error?: string,
+  id?: string,
+  object?: string,
+  method?: string,
+  label?: string,
+  placeholder?: string,
+  value?: string,
+  name?: string,
+  rows?: number,
+  dark?: boolean,
   resize: 'none' | 'both' | 'horizontal' | 'vertical',
   onChange?: InputCallback<HTMLTextAreaElement>,
 }
@@ -43,7 +43,7 @@ const Textarea = ({
   const resizeClass = ` resize_${resize}`
 
   return (
-    <div className={classnames(textareaClass, className, errorClass, resizeClass, spacing(props))}>
+    <div className={classnames(textareaClass, className, errorClass, resizeClass, globalProps(props))}>
       <Caption
           dark={dark}
           text={label}
