@@ -2,7 +2,7 @@
 
 import React, { type Node } from 'react'
 import classnames from 'classnames'
-import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
+import { buildAriaProps, buildDataProps } from '../utilities/props'
 import { globalProps } from '../utilities/globalProps.js'
 
 type TableProps = {
@@ -41,7 +41,6 @@ const Table = (props: TableProps) => {
     <table
         {...ariaProps}
         {...dataProps}
-        id={id}
         className={classnames(
         className,
         'pb_table',
@@ -55,6 +54,7 @@ const Table = (props: TableProps) => {
         },
         globalProps(props)
       )}
+        id={id}
     >
       {children}
     </table>
