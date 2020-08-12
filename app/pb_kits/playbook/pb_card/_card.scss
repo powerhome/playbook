@@ -27,7 +27,7 @@
     min-height: 1px;
     border: 0;
     border-radius: $pb_card_header_border_radius $pb_card_header_border_radius 0px 0px;  
-    @each $color_name, $color_value in $category_colors {
+    @each $color_name, $color_value in $pb_card_header_colors {
       &[class*=_#{$color_name}] {
         @include pb_card_header_color($color_value);
       }

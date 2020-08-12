@@ -9,7 +9,7 @@ $pb_card_border_width: 1px;
 $pb_card_border_radius: $border_rad_heavier;
 $pb_card_highlight_colors: map-merge(map-merge($status_colors, $product_colors), $category_colors);
 $pb_card_highlight_size: 4px;
-$pb_card_header_colors: $category_colors;
+$pb_card_header_colors: map-merge($category_colors, $product_colors);
 $pb_card_header_border_radius: $border_rad_heavy;
 $pb_card_padding:(
   none: 0,
@@ -67,6 +67,6 @@ $pb_card_padding:(
   z-index: 10;
 }
 
-@mixin pb_card_header_color($category_color) {
-  background: $category_color;
+@mixin pb_card_header_color($header_color) {
+  background: $header_color;
 }
