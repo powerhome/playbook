@@ -12,7 +12,6 @@ on:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "build"jobs:
   generate_changelog:
     runs-on: ubuntu-latest
     name: Generate changelog 
@@ -26,6 +25,7 @@ jobs:
   push_changelog:
     steps:
     - name: Push that changelog up to github
+      uses: actions/checkout@v2
       run: |
         date > generated.txt
         git config user.name github-actions
