@@ -18,8 +18,6 @@ module Playbook
         generate_classname("pb_progress_pills_kit")
       end
 
-
-
       def with_status
         yield title if title.present?
       end
@@ -30,6 +28,10 @@ module Playbook
 
       def active_step(step)
          step <= active ? "_active" : "_inactive"
+      end
+
+      def dark_pill
+        dark ? " dark" : nil
       end
     end
   end

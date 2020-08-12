@@ -21,22 +21,24 @@ type ProgressPillsProps = {
   steps?: number,
   title?: string,
   value?: string,
+  dark?: boolean,
 }
 
-const showSteps = (steps, active) => {
+const showSteps = (steps, active, dark) => {
   const items = []
 
   for (let step = 1; step <= steps; step++) {
-    items.push(ProgressPill({ step, active }))
+    items.push(ProgressPill({ step, active, dark }))
   }
 
   return items
 }
 
-
-const ProgressPill = ({ active, step }: ProgressPillProps) => (
+const ProgressPill = ({ active, dark, step }: ProgressPillProps) => (
   <div
-      className={`pb_progress_pill${step <= active ? '_active' : '_inactive'}` }
+      className={`pb_progress_pill${step <= active ? '_active' : '_inactive'}${
+      dark ? ' dark' : ''
+    }`}
       key={step}
   />
 )
@@ -51,12 +53,12 @@ const ProgressPills = (props: ProgressPillsProps) => {
     steps = 3,
     title,
     value,
+    dark = false,
   } = props
 
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
   const classes = classnames(buildCss('pb_progress_pills_kit'), className, globalProps(props))
-  const darkPill = classes.includes('dark') ? '_dark' : ''
 
   return (
     <div
@@ -69,17 +71,19 @@ const ProgressPills = (props: ProgressPillsProps) => {
       <If condition={title}>
         <div className="progress_pills_status">
           <Title
+              dark={dark}
               size={4}
               tag="h4"
               text={title}
           />
           <Body
               color="light"
+              dark={dark}
               text={value}
           />
         </div>
       </If>
-      <div className="progress_pills">{showSteps(steps, active, darkPill) }</div>
+      <div className="progress_pills">{showSteps(steps, active, dark)}</div>
     </div>
   )
 }
