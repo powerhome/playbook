@@ -13,7 +13,10 @@ type LabelValueProps = {
   className?: string,
   dark?: boolean,
   data?: object,
+<<<<<<< HEAD
   date?: date,
+=======
+>>>>>>> origin/v6.2.0
   id?: string,
   label: string,
   value?: string,
@@ -21,6 +24,11 @@ type LabelValueProps = {
   icon?: string,
   description?: string,
   title?: string,
+<<<<<<< HEAD
+=======
+  date?: date,
+  active?: boolean
+>>>>>>> origin/v6.2.0
 }
 
 const dateString = (value: DateTime) => {

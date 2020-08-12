@@ -14,20 +14,20 @@ import { globalProps } from '../utilities/globalProps.js'
 import { Caption, Contact, Person } from '../'
 
 type ContactItem = {
-  contactType: String,
-  contactValue: String,
-  contactDetail: String,
+  contactType: string,
+  contactValue: string,
+  contactDetail: string,
 }
 
 type PersonContactProps = {
   aria?: object,
-  className?: String | Array<String>,
-  dark?: Boolean,
+  className?: string | array<string>,
+  dark?: boolean,
   data?: object,
-  firstName: String,
-  id?: String,
-  lastName: String,
-  contacts?: Array<ContactItem>,
+  firstName: string,
+  id?: string,
+  lastName: string,
+  contacts?: array<ContactItem>,
 }
 
 const PersonContact = (props: PersonContactProps) => {

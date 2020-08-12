@@ -6,13 +6,13 @@ import { buildCss } from '../utilities/props'
 import { globalProps } from '../utilities/globalProps.js'
 
 type ProgressStepProps = {
-  className?: String,
-  data?: String,
-  id?: String,
-  children?: Array<React.ReactChild>,
+  className?: string,
+  data?: string,
+  id?: string,
+  children?: array<React.ReactChild>,
   orientation?: "horizontal" | "vertical",
-  icon?: Boolean,
-  dark?: Boolean,
+  icon?: boolean,
+  dark?: boolean,
 }
 
 const ProgressStep = (props: ProgressStepProps) => {
