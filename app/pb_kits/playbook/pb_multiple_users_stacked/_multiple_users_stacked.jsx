@@ -9,15 +9,22 @@ import { Avatar, Badge } from '../'
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
 
 type MultipleUsersStackedProps = {
-  className?: string,
-  id?: string,
-  data?: object,
   aria?: object,
+  className?: string,
+  data?: object,
+  id?: string,
   users: array<object>,
 }
 
 const MultipleUsersStacked = (props: MultipleUsersStackedProps) => {
-  const { className, id, aria = {}, data = {}, users } = props
+  const {
+    aria = {},
+    className,
+    data = {},
+    id,
+    users,
+  } = props
+
   const moreThanTwo = users.length > 2
   const onlyOne = users.length == 1
   const displayCount = () => {
@@ -25,10 +32,9 @@ const MultipleUsersStacked = (props: MultipleUsersStackedProps) => {
   }
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
-  const css = buildCss({
-    'pb_multiple_users_stacked_kit': true,
-    single: onlyOne,
-  })
+  const classes = classnames(buildCss(
+    'pb_multiple_users_stacked_kit',
+    { single: onlyOne }), className, globalProps(props))
 
   const firstUser = () => {
     return users.slice(0, 1).map((userObject, index) => {
@@ -75,7 +81,7 @@ const MultipleUsersStacked = (props: MultipleUsersStackedProps) => {
     <div
         {...ariaProps}
         {...dataProps}
-        className={classnames(css, className, globalProps(props))}
+        className={classes}
         id={id}
     >
       {firstUser()}
