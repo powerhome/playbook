@@ -14,14 +14,9 @@ on:
 jobs:
   # This workflow contains a single job called "build"
   build:
-    # The type of runner that the job will run on
-    runs-on: ubuntu-latest
-
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:    
     # Runs the Github Changelog Generator to give us our changelog
-
-
     - name: Generate changelog
       uses: faberNovel/github-changelog-generator-action@v1.0.0-alpha02
       with:
