@@ -28,7 +28,7 @@ jobs:
         # Name of project on GitHub (default: extracted from $GITHUB_REPOSITORY)
         project: playbook
         # Limit pull requests to the release branch, such as master or release (required, default: master)
-        release_branch: 6.2.0
+        since_tag: 6.1.0
         # Put the unreleased changes in the specified release number.
         future_release: 6.2.0
         token: ${{ secrets.GITHUB_TOKEN }}
