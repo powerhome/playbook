@@ -20,15 +20,10 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:    
     # Runs the Github Changelog Generator to give us our changelog
-    - name: Automatic Changelog Generator
-      uses: CharMixer/auto-changelog-action@v1.1
+
+
+    - name: Generate changelog
+      uses: fabernovel/github-changelog-generator-action@v1
       with:
-        # Username of the owner of target GitHub repo (default: extracted from $GITHUB_REPOSITORY)
-        user: powerhome
-        # Name of project on GitHub (default: extracted from $GITHUB_REPOSITORY)
-        project: playbook
-        # Limit pull requests to the release branch, such as master or release (required, default: master)
-        since_tag: 6.1.0
-        # Put the unreleased changes in the specified release number.
-        future_release: 6.2.0
-        token: ${{ secrets.GITHUB_TOKEN }}
+        # You can pass any parameters from https://github.com/github-changelog-generator/github-changelog-generator/wiki/Advanced-change-log-generation-examples#additional-options
+        options: --token ${{ secrets.GITHUB_TOKEN }} --user powerhome --project playbook --max-issues 100 --since-tag=6.1.0 
