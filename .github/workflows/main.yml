@@ -44,3 +44,4 @@ jobs:
         release_branch: 6.2.0
         # Put the unreleased changes in the specified release number.
         future_release: 6.2.0
+        token: ${{ secrets.GITHUB_TOKEN }}
