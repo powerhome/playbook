@@ -11,6 +11,7 @@ import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
 type MultipleUsersStackedProps = {
   aria?: object,
   className?: string,
+  dark?: boolean,
   data?: object,
   id?: string,
   users: array<object>,
@@ -20,6 +21,7 @@ const MultipleUsersStacked = (props: MultipleUsersStackedProps) => {
   const {
     aria = {},
     className,
+    dark = false,
     data = {},
     id,
     users,
@@ -42,6 +44,7 @@ const MultipleUsersStacked = (props: MultipleUsersStackedProps) => {
         <Avatar
             {...userObject}
             className="pb_multiple_users_stacked_item"
+            dark={dark}
             key={index}
             size="xs"
         />
@@ -56,6 +59,7 @@ const MultipleUsersStacked = (props: MultipleUsersStackedProps) => {
           <Avatar
               {...userObject}
               className="pb_multiple_users_stacked_item second_item"
+              dark={dark}
               key={index}
               size="xs"
           />
@@ -69,6 +73,7 @@ const MultipleUsersStacked = (props: MultipleUsersStackedProps) => {
       return (
         <Badge
             className="pb_multiple_users_stacked_item second_item"
+            dark={dark}
             rounded
             text={`+${users.length - displayCount()}`}
             variant="primary"

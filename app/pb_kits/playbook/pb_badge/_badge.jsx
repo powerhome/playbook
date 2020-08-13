@@ -32,12 +32,8 @@ const Badge = (props: BadgeProps) => {
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
   const css = classnames(
-    className,
-    buildCss('pb_badge_kit', variant, {
-      rounded: rounded,
-    }),
-    globalProps(props)
-  )
+    buildCss('pb_badge_kit', variant, {rounded: rounded}), className,
+    globalProps(props))
 
   return (
     <div
