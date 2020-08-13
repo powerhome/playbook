@@ -15,4 +15,3 @@ _Please reflect if your changes may break in some way (changes like removing/ren
 - [ ] **DEPLOY** Please add the `Milano` label when you are ready for a review
 - [ ] **SCREENSHOT** Please add a screen shot or two
 - [ ] **SPECS** Please cover your changes with specs
-- [ ] **CHANGELOG** Please add an entry on `[Unreleased]` section to every functionality `ADDED`/`CHANGED`/`DEPRECATED`/`REMOVED`/`FIXED`
