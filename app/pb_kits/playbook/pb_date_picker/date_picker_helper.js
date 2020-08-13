@@ -74,17 +74,49 @@ const datePickerHelper = (config) => {
     minDate: minDate,
     mode: mode,
     onChange: onChange || [],
+    onYearChange: [],
     static: true,
   })
+  // Dynamically sourced flatpickr instance
+  const picker = document.querySelector(`#${pickerId}`)._flatpickr
 
+  // replace year selector with dropdown
+  picker.yearElements[0].parentElement.innerHTML = `<select class="numInput cur-year" type="number" tabIndex="-1" aria-label="Year" id="year-${pickerId}"></select>`
+
+  // create html option tags for desired years
+  let years = ''
+  for (let year = 2099; year >= 1900; year--) {
+    years += `<option value="${year}">${year}</option>`
+  }
+
+  // variablize each dropdown selecttor
+  const dropdown = document.querySelector(`#year-${pickerId}`)
+
+  // inject year options into dropdown and assign it the flatpickr's current year value
+  dropdown.innerHTML = years
+  dropdown.value = picker.currentYear
+
+  // whenever a new year is selected from dropdown update flatpickr's current year value
+  dropdown.addEventListener('input', (e) => {
+    picker.changeYear(Number(e.target.value))
+  })
+
+  // two way binding
+  const yearChangeHook = () => {
+    dropdown.value = picker.currentYear
+  }
+  picker.config.onYearChange.push(yearChangeHook)
+
+  // logic for updating value when typing
   document.querySelector(`#${pickerId}`).addEventListener('input', (e) => {
-    const picker = document.querySelector(`#${pickerId}`)._flatpickr
     picker.input.setAttribute('value', e.target.value)
     const variant = picker.config.mode
     if (variant === 'single' && e.target.value.split('').length === 10) {
       picker.setDate(e.target.value)
+      dropdown.value = picker.currentYear
     } else if (variant === 'range' && e.target.value.split('').length === 24) {
       picker.setDate(e.target.value)
+      dropdown.value = picker.currentYear
     }
   })
 }
