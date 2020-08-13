@@ -12,6 +12,7 @@ const datePickerHelper = (config) => {
     mode,
     onChange,
     pickerId,
+    readOnly,
   } = config
 
   const defaultDateGetter = () => {
@@ -42,7 +43,7 @@ const datePickerHelper = (config) => {
   }
 
   flatpickr(`#${pickerId}`, {
-    allowInput: true,
+    allowInput: !readOnly,
     dateFormat: format,
     defaultDate: defaultDateGetter(),
     disable: disableWeekdays && disableWeekdays.length > 0 ? [

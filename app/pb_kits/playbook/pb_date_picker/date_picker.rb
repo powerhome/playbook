@@ -28,6 +28,8 @@ module Playbook
       prop :mode, type: Playbook::Props::String,
                   default: "single"
       prop :picker_id, type: Playbook::Props::String
+      prop :read_only, type: Playbook::Props::Boolean,
+                       default: false
       prop :required, type: Playbook::Props::Boolean,
                       default: false
 
@@ -46,6 +48,7 @@ module Playbook
           minDate: min_date,
           mode: mode,
           pickerId: picker_id,
+          readOnly: read_only,
         }.to_json.html_safe
       end
 

@@ -27,6 +27,7 @@ type DatePickerProps = {
   name: String,
   onChange: (e) => void,
   pickerId?: String,
+  readOnly?: Boolean,
 }
 const DatePicker = (props: DatePickerProps) => {
   const {
@@ -48,6 +49,7 @@ const DatePicker = (props: DatePickerProps) => {
     name,
     onChange,
     pickerId,
+    readOnly = false,
   } = props
 
   const ariaProps = buildAriaProps(aria)
@@ -72,6 +74,7 @@ const DatePicker = (props: DatePickerProps) => {
       onChange: onChange,
       pickerId: pickerId,
       propModel: 'React',
+      readOnly: readOnly,
     })
   }, [])
 
