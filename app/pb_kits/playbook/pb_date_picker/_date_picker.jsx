@@ -25,6 +25,7 @@ type DatePickerProps = {
   minDate: String,
   mode?: String,
   name: String,
+  onChange: (e) => void,
   pickerId?: String,
 }
 const DatePicker = (props: DatePickerProps) => {
@@ -45,6 +46,7 @@ const DatePicker = (props: DatePickerProps) => {
     minDate,
     mode = 'single',
     name,
+    onChange,
     pickerId,
   } = props
 
@@ -67,6 +69,7 @@ const DatePicker = (props: DatePickerProps) => {
       maxDate: maxDate,
       minDate: minDate,
       mode: mode,
+      onChange: onChange,
       pickerId: pickerId,
       propModel: 'React',
     })

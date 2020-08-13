@@ -10,6 +10,7 @@ const datePickerHelper = (config) => {
     maxDate,
     minDate,
     mode,
+    onChange,
     pickerId,
     propModel,
   } = config
@@ -73,6 +74,7 @@ const datePickerHelper = (config) => {
     maxDate: maxDate,
     minDate: minDate,
     mode: mode,
+    onChange: onChange || [],
     static: true,
   })
 

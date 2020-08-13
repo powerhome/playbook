@@ -9,6 +9,7 @@ examples:
   - date_picker_disabled: Disabled Dates
   - date_picker_min_max: Min Max
   - date_picker_error: Error
+  - date_picker_hooks: Hooks
   
   
   react:
@@ -20,4 +21,5 @@ examples:
   - date_picker_disabled: Disabled Dates
   - date_picker_min_max: Min Max
   - date_picker_error: Error
+  - date_picker_hooks: Hooks
   
