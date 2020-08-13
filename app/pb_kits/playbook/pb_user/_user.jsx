@@ -76,7 +76,7 @@ const User = (props: UserProps) => {
             text={name}
         />
         <Body color="light">
-          {territory === '' ? `${title}` : `${territory} • ${title}`}
+          {territory === '' ? title : `${territory} • ${title}`}
         </Body>
       </div>
     </div>
