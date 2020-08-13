@@ -12,14 +12,11 @@ const datePickerHelper = (config) => {
     mode,
     onChange,
     pickerId,
-    propModel,
   } = config
 
   const defaultDateGetter = () => {
     if (defaultDate !== '') {
-      if (propModel === 'rails' && defaultDate.includes('[') == true) {
-        return JSON.parse(defaultDate.replace(/&quot;/g, '"'))
-      } else if (defaultDate === 'blank') {
+      if (defaultDate === 'blank') {
         return ''
       } else {
         return defaultDate

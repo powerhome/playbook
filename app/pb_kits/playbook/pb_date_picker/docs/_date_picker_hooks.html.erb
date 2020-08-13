@@ -1,17 +1,19 @@
 <%= pb_rails("date_picker", props: {
   label: "onChange",
-  # on_change: "() => alert('changed')",
   picker_id: "date-picker-hooks"
 }) %>
 
 <%= javascript_tag do %>
   window.addEventListener("DOMContentLoaded", () => {
-    <%# Access flatpickr instance %>
+    <%# Assign flatpickr instance to variable %>
     const fp = document.querySelector("#date-picker-hooks")._flatpickr
+
+    <%# Define Hook %>
     const alertHook = () => {
       alert('changed')
     }
-    console.log(fp)
+
+    <%# Push one or many hooks to onChange config array %>
     fp.config.onChange.push(alertHook)
   })
 <% end %>

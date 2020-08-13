@@ -23,18 +23,19 @@
 
       <%= javascript_tag do %>
       window.addEventListener("DOMContentLoaded", () => {
-          datePickerHelper({
-            defaultDate: "<%= object.default_date %>",
-            disableDate: <%=raw object.disable_date %>,
-            disableRange: <%=raw object.disable_range.to_json %>,
-            disableWeekdays: <%=raw object.disable_weekdays %>,
-            format: "<%= object.format %>",
-            maxDate: "<%= object.max_date %>",
-            minDate: "<%= object.min_date %>",
-            mode: "<%= object.mode %>",
-            pickerId: "<%= object.picker_id %>",
-            propModel: "rails"
-          })
+          <%# datePickerHelper({ %>
+            <%# defaultDate: "<%= object.default_date %>
+            <%# disableDate: <%=raw object.disable_date %>
+            <%# disableRange: <%=raw object.disable_range.to_json %>
+            <%# disableWeekdays: <%=raw object.disable_weekdays %>
+            <%# format: "<%= object.format %>
+            <%# maxDate: "<%= object.max_date %>
+            <%# minDate: "<%= object.min_date %>
+            <%# mode: "<%= object.mode %>
+            <%# pickerId: "<%= object.picker_id %>
+            <%# propModel: "rails" %>
+          <%# }) %>
+          datePickerHelper(<%= object.date_picker_config %>)
       })
       <% end %>
 <% end %>

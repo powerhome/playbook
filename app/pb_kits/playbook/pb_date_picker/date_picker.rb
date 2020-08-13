@@ -35,6 +35,20 @@ module Playbook
         generate_classname("pb_date_picker_kit")
       end
 
+      def date_picker_config
+        {
+          defaultDate: default_date,
+          disableDate: disable_date,
+          disableRange: disable_range,
+          disableWeekdays: disable_weekdays,
+          format: format,
+          maxDate: max_date,
+          minDate: min_date,
+          mode: mode,
+          pickerId: picker_id,
+        }.to_json.html_safe
+      end
+
       def error_class
         error ? "error" : ""
       end
