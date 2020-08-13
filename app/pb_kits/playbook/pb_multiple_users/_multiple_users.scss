@@ -28,6 +28,12 @@ $pb_multiple_users_size: map-get($avatar-sizes, "xs");
     margin-left: $pb_multiple_users_overlap;
     margin-right: 0;
 
+    &.dark {
+      .avatar_wrapper {
+        border: $pb_multiple_users_border_size solid $bg_dark;
+      }
+    }
+
     .avatar_wrapper {
       border: $pb_multiple_users_border_size solid $white;
     }

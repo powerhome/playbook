@@ -4,7 +4,7 @@
     data: object.data,
     id: object.id) do %>
     <% object.users.take(object.display_count).each do |user| %>
-      <%= pb_rails("avatar", props: user.merge({size: "xs", classname: "pb_multiple_users_item"}) ) %>
+      <%= pb_rails("avatar", props: user.merge({size: "xs", classname: "pb_multiple_users_item", dark: object.dark}) ) %>
     <% end %>
 
     <% if object.more_than_four %>

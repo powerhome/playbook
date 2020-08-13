@@ -9,6 +9,7 @@ import { globalProps } from '../utilities/globalProps.js'
 type MultipleUsersProps = {
   aria?: object,
   className?: string,
+  dark?: boolean,
   data?: object,
   id?: string,
   maxDisplayedUsers?: number,
@@ -20,6 +21,7 @@ const MultipleUsers = (props: MultipleUsersProps) => {
   const {
     aria = {},
     className,
+    dark = false,
     data = {},
     id,
     maxDisplayedUsers = 4,
@@ -48,6 +50,7 @@ const MultipleUsers = (props: MultipleUsersProps) => {
         <Avatar
             {...avatarData}
             className="pb_multiple_users_item"
+            dark={dark}
             key={index}
             size="xs"
         />
