@@ -9,14 +9,17 @@ $pb_online_status_statuses: (
   offline: $neutral,
 );
 
-@mixin pb_online_status($background: $neutral, $bordercolor: $white) {
+@mixin pb_online_status($background: $neutral) {
+  &.dark {
+    border-color: $bg_dark;
+  }
   width: $pb_online_status_size;
   height: $pb_online_status_size;
   flex-basis: $pb_online_status_size;
   flex-grow: 0;
   flex-shrink: 0;
   border-width: $pb_online_status_border;
-  border-color: $bordercolor;
+  border-color: $white;
   border-style: solid;
   border-radius: 50%;
   background: $background;
