@@ -43,6 +43,7 @@ const datePickerHelper = (config) => {
   }
 
   flatpickr(`#${pickerId}`, {
+    disableMobile: true,
     allowInput: !readOnly,
     dateFormat: format,
     defaultDate: defaultDateGetter(),
