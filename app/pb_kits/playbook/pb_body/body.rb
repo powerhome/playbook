@@ -41,11 +41,11 @@ module Playbook
       end
 
       def color_class
-        color != "default" ? color : nil
+        color
       end
 
       def status_class
-        status != "neutral" ? status : nil
+        status
       end
     end
   end

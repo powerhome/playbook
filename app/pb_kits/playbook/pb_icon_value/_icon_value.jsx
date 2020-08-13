@@ -24,7 +24,7 @@ const IconValue = (props: IconValueProps) => {
     align = 'left',
     aria = {},
     className,
-    dark = false,
+    dark,
     data = {},
     icon,
     id,
