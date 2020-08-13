@@ -4,9 +4,10 @@ import React from 'react'
 import classnames from 'classnames'
 import { globalProps } from '../utilities/globalProps.js'
 
-import { buildDataProps } from '../utilities/props'
+import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
 
 type OnlineStatusProps = {
+  aria?: object,
   className?: string,
   data?: object,
   id?: string,
@@ -14,14 +15,23 @@ type OnlineStatusProps = {
 }
 
 const OnlineStatus = (props: OnlineStatusProps) => {
-  const { id, data = {}, className, status = 'offline' } = props
+  const {
+    aria = {},
+    className,
+    data = {},
+    id,
+    status = 'offline',
+  } = props
+
+  const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
-  const css = classnames([`pb_online_status_kit_${status}`, className], globalProps(props))
+  const classes = classnames(buildCss('pb_online_status_kit', status), className, globalProps(props))
 
   return (
     <div
+        {...ariaProps}
         {...dataProps}
-        className={css}
+        className={classes}
         id={id}
     />
   )
