@@ -8,3 +8,4 @@ examples:
   react:
   - pill_default: Default
   - pill_dark: Dark
+  
