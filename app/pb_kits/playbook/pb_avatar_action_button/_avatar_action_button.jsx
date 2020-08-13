@@ -16,6 +16,7 @@ type AvatarActionButtonProps = {
   action?: string,
   aria: Object,
   className?: string,
+  dark?: boolean,
   data?: Object,
   id?: string,
   imageUrl?: string,
@@ -31,6 +32,7 @@ const AvatarActionButton = (props: AvatarActionButtonProps) => {
     action = 'add',
     aria = {},
     className,
+    dark = false,
     data = {},
     id,
     imageUrl,
@@ -73,11 +75,11 @@ const AvatarActionButton = (props: AvatarActionButtonProps) => {
             name={name}
             size={size}
         />
-        <div className="icon">
-          <Icon
-              icon={icons[action]}
-          />
-        </div>
+        <Icon
+            className="icon"
+            dark={dark}
+            icon={icons[action]}
+        />
       </a>
     </div>
   )
