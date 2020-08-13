@@ -8,33 +8,33 @@ const ListDefault = () => {
           checkboxList
       >
         <ListItem>
-            <Checkbox
-                name="default name"
-                text="Unselected"
-                value="default value"
-            />
+          <Checkbox
+              name="default name"
+              text="Unselected"
+              value="default value"
+          />
         </ListItem>
         <ListItem>
-            <Checkbox
-                name="default name"
-                text="Hover"
-                value="default value"
-            />
+          <Checkbox
+              name="default name"
+              text="Hover"
+              value="default value"
+          />
         </ListItem>
         <ListItem>
-            <Checkbox
-                checked
-                name="checkbox-name"
-                text="Selected"
-                value="check-box value"
-            />
+          <Checkbox
+              checked
+              name="checkbox-name"
+              text="Selected"
+              value="check-box value"
+          />
         </ListItem>
         <ListItem>
-            <Checkbox
-                name="default name"
-                text="Unselected Last"
-                value="default value"
-            />
+          <Checkbox
+              name="default name"
+              text="Unselected Last"
+              value="default value"
+          />
         </ListItem>
       </List>
     </>
