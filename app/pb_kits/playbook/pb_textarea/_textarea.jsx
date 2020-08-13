@@ -10,6 +10,7 @@ type TextareaProps = {
   className?: string,
   children?: array<React.ReactChild>,
   data?: string,
+  disabled?: boolean,
   error?: string,
   id?: string,
   object?: string,
@@ -18,8 +19,8 @@ type TextareaProps = {
   placeholder?: string,
   value?: string,
   name?: string,
+  required?: boolean,
   rows?: number,
-  dark?: boolean,
   resize: 'none' | 'both' | 'horizontal' | 'vertical',
   onChange?: InputCallback<HTMLTextAreaElement>,
 }
@@ -27,25 +28,25 @@ type TextareaProps = {
 const Textarea = ({
   className,
   children,
-  dark = false,
+  disabled,
   resize = 'none',
   error,
   label,
   name,
   onChange = () => {},
   placeholder,
+  required,
   rows = 4,
   value,
   ...props
 }: TextareaProps) => {
-  const textareaClass = `pb_textarea_kit${dark ? '_dark' : ''}`
   const errorClass = error ? 'error' : null
-  const resizeClass = ` resize_${resize}`
+  const resizeClass = `resize_${resize}`
+  const classes = classnames('pb_textarea_kit', className, errorClass, resizeClass, globalProps(props))
 
   return (
-    <div className={classnames(textareaClass, className, errorClass, resizeClass, globalProps(props))}>
+    <div className={classes}>
       <Caption
-          dark={dark}
           text={label}
       />
       <If condition={children}>
@@ -53,16 +54,17 @@ const Textarea = ({
         <Else />
         <textarea
             {...props}
-            className={textareaClass}
+            className="pb_textarea_kit"
+            disabled={disabled}
             name={name}
             onChange={onChange}
             placeholder={placeholder}
+            required={required}
             rows={rows}
             value={value}
         />
         <If condition={error}>
           <Body
-              dark={dark}
               status="negative"
               text={error}
           />
