@@ -1,10 +1,5 @@
 # Changelog
 
-## [Unreleased]
-
-### Added
-- Date Picker
-
 ## [[v6.2.0] 2020-8-13](https://github.com/powerhome/playbook/tree/HEAD)
 
 [Full Changelog](https://github.com/powerhome/playbook/compare/6.1.0...HEAD)
