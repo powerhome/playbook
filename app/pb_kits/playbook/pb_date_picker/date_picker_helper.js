@@ -41,6 +41,18 @@ const datePickerHelper = (config) => {
       return []
     }
   }
+  const calendarResizer = () => {
+    const cal = document.querySelector(`#cal-${pickerId}.open`)
+    const parentInput = cal.parentElement
+    if (cal.getBoundingClientRect().right > window.innerWidth) {
+      parentInput.style.display = 'flex'
+      parentInput.style.justifyContent = 'center'
+    }
+    if (cal.offsetWidth <= parentInput.offsetWidth) {
+      parentInput.style.display = ''
+      parentInput.style.justifyContent = ''
+    }
+  }
 
   flatpickr(`#${pickerId}`, {
     disableMobile: true,
@@ -74,11 +86,20 @@ const datePickerHelper = (config) => {
     minDate: minDate,
     mode: mode,
     onChange: onChange || [],
+    onOpen: [() => {
+      calendarResizer()
+      window.addEventListener('resize', calendarResizer)
+    }],
+    onClose: [() => {
+      window.removeEventListener('resize', calendarResizer)
+    }],
     onYearChange: [],
     static: true,
   })
   // Dynamically sourced flatpickr instance
   const picker = document.querySelector(`#${pickerId}`)._flatpickr
+
+  picker.innerContainer.parentElement.id = `cal-${pickerId}`
 
   // replace year selector with dropdown
   picker.yearElements[0].parentElement.innerHTML = `<select class="numInput cur-year" type="number" tabIndex="-1" aria-label="Year" id="year-${pickerId}"></select>`
