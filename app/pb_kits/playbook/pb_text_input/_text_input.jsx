@@ -11,31 +11,33 @@ import {
 
 type TextInputProps = {
   aria?: object,
-  className: String,
-  dark: boolean,
+  className: string,
   data?: object,
-  error?: String,
-  id?: String,
-  name: String,
-  label: String,
+  disabled?: boolean,
+  error?: string,
+  id?: string,
+  name: string,
+  label: string,
   onChange: (String) => void,
-  placeholder: String,
-  type: String,
-  value: String | number,
+  placeholder: string,
+  required?: boolean,
+  type: string,
+  value: string | number,
   children: Node,
 }
 
 const TextInput = ({
   aria = {},
   className,
-  dark = false,
   data = {},
+  disabled,
   error,
   id,
   name,
   label,
   onChange = () => {},
   placeholder,
+  required,
   type = 'text',
   value,
   children = null,
@@ -44,9 +46,10 @@ const TextInput = ({
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
   const css = classnames([
-    `pb_text_input_kit${dark === true ? '_dark' : ''}`,
+    'pb_text_input_kit',
     className,
     error ? 'error' : null,
+    globalProps(props),
   ])
 
   return (
@@ -57,26 +60,26 @@ const TextInput = ({
     >
       <Caption
           className="pb_text_input_kit_label"
-          dark={dark}
           text={label}
       />
-      <div className={classnames('text_input_wrapper', globalProps(props))}>
+      <div className="text_input_wrapper">
         <If condition={children}>
           {children}
           <Else />
           <input
               {...props}
               className="text_input"
+              disabled={disabled}
               id={id}
               name={name}
               onChange={onChange}
               placeholder={placeholder}
+              required={required}
               type={type}
               value={value}
           />
           <If condition={error}>
             <Body
-                dark={dark}
                 status="negative"
                 text={error}
             />

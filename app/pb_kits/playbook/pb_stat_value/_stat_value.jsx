@@ -6,10 +6,10 @@ import { Title } from '../'
 import { globalProps } from '../utilities/globalProps.js'
 
 type StatValueProps = {
-  className?: String,
-  id?: String,
-  unit?: String,
-  value: String | Number
+  className?: string,
+  id?: string,
+  unit?: string,
+  value: string | number
 }
 
 const StatValue = (props: StatValueProps) => {

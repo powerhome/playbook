@@ -13,11 +13,11 @@ const iconMap = {
 }
 
 type FixedConfirmationToastProps = {
-  className?: String,
-  data?: String,
-  id?: String,
+  className?: string,
+  data?: string,
+  id?: string,
   status?: "success" | "error" | "neutral" | "tip",
-  text: String,
+  text: string,
 }
 
 const FixedConfirmationToast = (props: FixedConfirmationToastProps) => {

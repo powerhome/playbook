@@ -6,23 +6,23 @@ import { pbChart } from '../'
 import { globalProps } from '../utilities/globalProps.js'
 
 type BarGraphProps = {
-  axisTitle: String,
-  xAxisCategories: Array,
-  yAxisMin: Number,
-  yAxisMax: Number,
-  chartData: Array<{
-    name: String,
-    data: Array<Number>,
+  axisTitle: string,
+  xAxisCategories: array,
+  yAxisMin: number,
+  yAxisMax: number,
+  chartData: array<{
+    name: string,
+    data: array<number>,
   }>,
-  className?: String,
-  id: Number,
-  pointStart: Number,
-  subTitle?: String,
-  title: String,
-  type?: String,
-  legend?: Boolean,
-  toggleLegendClick?: Boolean,
-  height?: String,
+  className?: string,
+  id: number,
+  pointStart: number,
+  subTitle?: string,
+  title: string,
+  type?: string,
+  legend?: boolean,
+  toggleLegendClick?: boolean,
+  height?: string,
 }
 
 export default class BarGraph extends React.Component<BarGraphProps> {

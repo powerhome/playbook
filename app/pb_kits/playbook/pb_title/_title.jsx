@@ -7,13 +7,13 @@ import { globalProps } from '../utilities/globalProps.js'
 
 type TitleProps = {
   aria?: object,
-  children?: Array<React.ReactNode> | React.ReactNode,
-  className?: String,
+  children?: array<React.ReactNode> | React.ReactNode,
+  className?: string,
   data?: object,
-  id?: String,
+  id?: string,
   size?: 1 | 2 | 3 | 4,
   tag?: "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "div" | "span",
-  text?: String,
+  text?: string,
   variant?: null | "primary",
 }
 
