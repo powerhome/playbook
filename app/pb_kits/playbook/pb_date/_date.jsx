@@ -49,8 +49,8 @@ const LargeDate = ({ value, ...props }: DateSubcomponent) => (
 
 type PbDateProps = {
   size?: "xs" | "sm" | "lg",
-  value?: String,
-  className?: String
+  value?: string,
+  className?: string
 }
 
 const PbDate = ({ size, value, className, ...props }: PbDateProps) => {

@@ -7,35 +7,35 @@ import { buildCss } from '../utilities/props'
 import { globalProps } from '../utilities/globalProps.js'
 
 type CardPropTypes = {
-  borderNone?: Boolean,
-  children: Array<React.ReactNode> | React.ReactNode,
-  className?: String,
+  borderNone?: boolean,
+  children: array<React.ReactNode> | React.ReactNode,
+  className?: string,
   highlight?: {
     position?: "side" | "top",
-    color?: String,
+    color?: string,
   },
-  padding?: String,
-  selected?: Boolean,
+  padding?: string,
+  selected?: boolean,
   shadow?: "none" | "deep" | "deeper" | "deepest",
 }
 
 type CardHeaderProps = {
-  categoryColor?: Number,
-  children: Array<React.ReactNode> | React.ReactNode,
-  className?: String,
-  padding?: String,
+  headerColor?: string,
+  children: array<React.ReactNode> | React.ReactNode,
+  className?: string,
+  padding?: string,
 }
 
 type CardBodyProps = {
-  children: Array<React.ReactNode> | React.ReactNode | String,
-  className?: String,
-  padding?: String,
+  children: array<React.ReactNode> | React.ReactNode | string,
+  className?: string,
+  padding?: string,
 }
 
 // Header component
 const Header = (props: CardHeaderProps) => {
-  const { children, className, categoryColor = 1, padding = 'sm' } = props
-  const headerCSS = buildCss('pb_card_header_kit', `category_${categoryColor}`)
+  const { children, className, headerColor = 'category_1', padding = 'sm' } = props
+  const headerCSS = buildCss('pb_card_header_kit', `${headerColor}`)
 
   const headerSpacing = globalProps(props, { padding })
 
@@ -50,7 +50,6 @@ const Header = (props: CardHeaderProps) => {
 const Body = (props: CardBodyProps) => {
   const { children, className, padding = 'md' } = props
   const bodyCSS = buildCss('pb_card_body_kit')
-
   const bodySpacing = globalProps(props, { padding })
 
   return (

@@ -5,7 +5,7 @@ import classnames from 'classnames'
 import { globalProps } from '../utilities/globalProps.js'
 
 type TableProps = {
-  children: Array<Node> | Node,
+  children: array<Node> | Node,
   className: string,
   container: boolean,
   dark: boolean,

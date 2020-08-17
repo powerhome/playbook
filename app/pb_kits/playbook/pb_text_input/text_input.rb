@@ -7,8 +7,6 @@ module Playbook
 
       partial "pb_text_input/text_input"
 
-      prop :dark, type: Playbook::Props::Boolean,
-                  default: false
       prop :disabled, type: Playbook::Props::Boolean,
                       default: false
       prop :error
@@ -23,7 +21,7 @@ module Playbook
       prop :value
 
       def classname
-        generate_classname("pb_text_input_kit", dark_class) + error_class
+        generate_classname("pb_text_input_kit") + error_class
       end
 
       def validation_message
@@ -44,10 +42,6 @@ module Playbook
 
       def error_class
         error ? " error" : ""
-      end
-
-      def dark_class
-        dark ? "dark" : nil
       end
     end
   end

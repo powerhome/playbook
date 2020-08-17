@@ -30,7 +30,7 @@
     }
   }
 
-  &[class*=_dark] {
+  &.dark {
     .text_input_wrapper {
       margin-bottom: 1rem;
 

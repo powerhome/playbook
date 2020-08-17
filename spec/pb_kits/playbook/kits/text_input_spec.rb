@@ -7,6 +7,7 @@ RSpec.describe Playbook::PbTextInput::TextInput do
 
   it { is_expected.to define_partial }
 
+  it { is_expected.to define_prop(:disabled) }
   it { is_expected.to define_prop(:dark).with_default(false) }
   it { is_expected.to define_prop(:error) }
   it { is_expected.to define_prop(:label) }
@@ -19,9 +20,9 @@ RSpec.describe Playbook::PbTextInput::TextInput do
     it "returns namespaced class name", :aggregate_failures do
       expect(subject.new({}).classname).to eq "pb_text_input_kit"
       expect(subject.new(classname: "additional_class").classname).to eq "pb_text_input_kit additional_class"
-      expect(subject.new({dark:true}).classname).to eq "pb_text_input_kit_dark dark"
+      expect(subject.new({dark:true}).classname).to eq "pb_text_input_kit dark"
       expect(subject.new({error: "Please enter a valid email"}).classname).to eq "pb_text_input_kit error"
-      expect(subject.new({dark: true, error: "Please enter a valid email"}).classname).to eq "pb_text_input_kit_dark dark error"
+      expect(subject.new({dark: true, error: "Please enter a valid email"}).classname).to eq "pb_text_input_kit dark error"
     end
   end
 end

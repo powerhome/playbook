@@ -13,15 +13,15 @@ import {
 import { globalProps } from '../utilities/globalProps.js'
 
 type ProgressPillsProps = {
-  active?: Number,
+  active?: number,
   aria?: object,
-  className?: String,
+  className?: string,
   data?: object,
-  id?: String,
-  steps?: Number,
-  title?: String,
-  value?: String,
-  dark?: Boolean,
+  id?: string,
+  steps?: number,
+  title?: string,
+  value?: string,
+  dark?: boolean,
 }
 
 const showSteps = (steps, active, dark) => {
