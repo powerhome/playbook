@@ -12,6 +12,7 @@ type RadioProps = {
   checked?: Boolean,
   children?: Node,
   className?: String,
+  dark?: boolean,
   data?: object,
   error?: Boolean,
   id?: String,
@@ -27,6 +28,7 @@ const Radio = ({
   checked = false,
   children,
   className,
+  dark = false,
   data = {},
   error = false,
   id,
@@ -39,7 +41,7 @@ const Radio = ({
 }: RadioProps) => {
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
-  const classes = classnames(buildCss('pb_radio_kit'), { error }, className, globalProps(props))
+  const classes = classnames(buildCss('pb_radio_kit'), { error }, { dark }, className, globalProps(props))
 
   return (
     <label
@@ -54,6 +56,7 @@ const Radio = ({
         <input
             {...props}
             defaultChecked={checked}
+            id={id}
             name={name}
             onChange={onChange}
             text={text}
@@ -63,6 +66,7 @@ const Radio = ({
       </If>
       <span className="pb_radio_button" />
       <Body
+          dark={dark}
           status={error ? 'negative' : null}
           text={label}
       />
