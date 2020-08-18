@@ -16,9 +16,6 @@ $pb_pill_height: 22px;
   @each $color_name, $color_value in $status_color_text {
     &[class*=_#{$color_name}]  {
         background: rgba($color_value, $opacity-1);
-        &.dark {
-          background: rgba(mix($bg_dark, $color_value, 10%), $opacity_5);
-        }
 
       .pb_pill_text {
         color: $color_value !important;
