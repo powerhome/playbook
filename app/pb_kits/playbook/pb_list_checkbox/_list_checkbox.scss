@@ -1,10 +1,12 @@
-.pb_list_checkbox {
-
-}
+@import "../tokens/colors";
 
 // Primary ======================
-@mixin pb_checkbox_item_kit {
+.pb_checkbox_item_kit{
   &:hover {
-    @include pb_button_hover;
+    background-color: $silver;
   }
+}
+
+.checked {
+  background-color: $slate !important;
 }

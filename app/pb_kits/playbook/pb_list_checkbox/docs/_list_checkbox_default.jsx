@@ -6,7 +6,7 @@ const ListCheckboxDefault = () => (
     <ListCheckbox>
       <ListCheckboxItem text="Unchecked"/>
       <ListCheckboxItem text="Hover"/>
-      <ListCheckboxItem text="Selected" value="hi"/>
+      <ListCheckboxItem text="Selected" checked/>
       <ListCheckboxItem text="Last"/>
     </ListCheckbox>
   </div>
