@@ -20,13 +20,10 @@ type CheckboxCardProps = {
 const CheckboxCard = (props: CheckboxCardProps) => {
   const {
     aria = {},
-    children,
     className,
     data = {},
-    dark = false,
     id,
     checked = false,
-    text = '',
   } = props
 
   const [isChecked, setIsChecked] = useState(checked)
@@ -46,9 +43,8 @@ const CheckboxCard = (props: CheckboxCardProps) => {
         className={classes}
         id={id}
     >
-      <Card dark selected={isChecked}>
+      <Card {...props} selected={isChecked}>
         <Checkbox {...props} checked={isChecked} onChange={checkboxChanged}/>
-        {/* {children || text} */}
       </Card>
     </div>
   )
