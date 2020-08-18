@@ -1,0 +1,16 @@
+<%= content_tag(:div,
+    id: object.id,
+    data: object.data,
+    class: object.classname) do %>
+  <div class="pb_icon_stat_value_wrapper">
+    <%= pb_rails "title", props: {
+      classname: "pb_icon_stat_value_kit",
+      size: 1,
+      text: object.formatted_value } %>
+      &nbsp;
+      <%= pb_rails "title", props: {
+      classname: "pb_icon_stat_value_kit",
+      size: 3,
+      text: object.unit } %>
+  </div>
+<% end %>

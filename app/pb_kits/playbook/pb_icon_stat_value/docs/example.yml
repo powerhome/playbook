@@ -1,0 +1,9 @@
+examples:
+  
+  rails:
+  - icon_stat_value_default: Default
+  
+  
+  react:
+  - icon_stat_value_default: Default
+  

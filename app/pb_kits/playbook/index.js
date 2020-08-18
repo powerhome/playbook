@@ -33,6 +33,7 @@ export HomeAddressStreet from './pb_home_address_street/_home_address_street.jsx
 export Icon from './pb_icon/_icon.jsx'
 export IconCircle from './pb_icon_circle/_icon_circle.jsx'
 export IconValue from './pb_icon_value/_icon_value.jsx'
+export IconStatValue from 'pb_icon_stat_value/_icon_stat_value.jsx'
 export Image from './pb_image/_image.jsx'
 export LabelPill from './pb_label_pill/_label_pill.jsx'
 export LabelValue from './pb_label_value/_label_value.jsx'
@@ -95,3 +96,4 @@ export PbTypeahead from './pb_typeahead'
 export PbPopover from './pb_popover'
 export PbTable from './pb_table'
 export PbTooltip from './pb_tooltip'
+
