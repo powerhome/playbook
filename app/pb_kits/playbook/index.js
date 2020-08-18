@@ -1,3 +1,5 @@
+import ListRadioItem from './pb_list_radios/_list_radio_item'
+
 // React Component JSX Imports from the React Kits
 export Avatar from './pb_avatar/_avatar.jsx'
 export AvatarActionButton from './pb_avatar_action_button/_avatar_action_button.jsx'
@@ -95,3 +97,6 @@ export PbTypeahead from './pb_typeahead'
 export PbPopover from './pb_popover'
 export PbTable from './pb_table'
 export PbTooltip from './pb_tooltip'
+
+export ListRadios from 'pb_list_radios/_list_radios.jsx'
+export ListRadioItem from 'pb_list_radios/_list_radio_item.jsx'
