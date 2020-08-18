@@ -1,9 +1,10 @@
 examples:
-  
+
   rails:
   - checkbox_card_default: Default
-  
-  
+  - checkbox_card_dark: Dark
+
+
   react:
   - checkbox_card_default: Default
-  
+  - checkbox_card_dark: Dark
