@@ -1,3 +1,10 @@
 .pb_list_checkbox {
 
 }
+
+// Primary ======================
+@mixin pb_checkbox_item_kit {
+  &:hover {
+    @include pb_button_hover;
+  }
+}
