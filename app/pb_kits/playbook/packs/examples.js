@@ -23,6 +23,7 @@ import * as ButtonToolbar from 'pb_button_toolbar/docs'
 import * as Caption from 'pb_caption/docs'
 import * as Card from 'pb_card/docs'
 import * as Checkbox from 'pb_checkbox/docs'
+import * as CheckboxCard from 'pb_checkbox_card/docs'
 import * as CircleIconButton from 'pb_circle_icon_button/docs'
 import * as Contact from 'pb_contact/docs'
 import * as Currency from 'pb_currency/docs'
@@ -103,6 +104,7 @@ WebpackerReact.setup({
   ...Caption,
   ...Card,
   ...Checkbox,
+  ...CheckboxCard,
   ...CircleIconButton,
   ...Contact,
   ...Currency,
@@ -172,6 +174,3 @@ WebpackerReact.setup({
   ...UserBadge,
   ...WeekdayStacked,
 })
-
-import * as CheckboxCard from 'pb_checkbox_card/docs'
-WebpackerReact.setup(CheckboxCard)

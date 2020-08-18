@@ -14,6 +14,7 @@ kits:
     - circle_icon_button
   - card
   - checkbox
+  - checkbox_card
   - charts_and_graphs:
     - bar_graph
     - circle_chart
@@ -93,4 +94,3 @@ kits:
     - weekday_stacked
   - user
   - user_badge
-  - checkbox_card

@@ -6,6 +6,7 @@ import React from 'react'
 import classnames from 'classnames'
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
 import { globalProps } from '../utilities/globalProps.js'
+import { Card, Checkbox } from '../'
 
 type CheckboxCardProps = {
   aria?: object,
@@ -16,7 +17,8 @@ type CheckboxCardProps = {
 
 const CheckboxCard = (props: CheckboxCardProps) => {
   const {
-    aria = {},
+  aria = {},
+  children,
   className,
   data = {},
   id,
@@ -33,7 +35,11 @@ const CheckboxCard = (props: CheckboxCardProps) => {
         className={classes}
         id={id}
     >
-      {className}
+      <Card>
+        <Checkbox>
+          {children}
+        </Checkbox>
+      </Card>
     </div>
   )
 }
