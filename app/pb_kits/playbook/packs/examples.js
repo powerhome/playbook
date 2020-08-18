@@ -173,3 +173,5 @@ WebpackerReact.setup({
   ...WeekdayStacked,
 })
 
+import * as CheckboxCard from 'pb_checkbox_card/docs'
+WebpackerReact.setup(CheckboxCard)

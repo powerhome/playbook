@@ -95,3 +95,5 @@ export PbTypeahead from './pb_typeahead'
 export PbPopover from './pb_popover'
 export PbTable from './pb_table'
 export PbTooltip from './pb_tooltip'
+
+export CheckboxCard from 'pb_checkbox_card/_checkbox_card.jsx'

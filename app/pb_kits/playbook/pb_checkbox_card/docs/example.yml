@@ -1,0 +1,9 @@
+examples:
+  
+  rails:
+  - checkbox_card_default: Default
+  
+  
+  react:
+  - checkbox_card_default: Default
+  
