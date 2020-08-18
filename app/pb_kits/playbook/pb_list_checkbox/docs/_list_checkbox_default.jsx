@@ -1,13 +1,12 @@
 import React from 'react'
-import { ListCheckbox } from '../../'
-import ListCheckboxItem from '../_list_checkbox_item'
+import { ListCheckbox, ListCheckboxItem } from '../../'
 
 const ListCheckboxDefault = () => (
   <div>
     <ListCheckbox>
       <ListCheckboxItem text="Unchecked"/>
       <ListCheckboxItem text="Hover"/>
-      <ListCheckboxItem text="Selected"/>
+      <ListCheckboxItem text="Selected" value="hi"/>
       <ListCheckboxItem text="Last"/>
     </ListCheckbox>
   </div>
