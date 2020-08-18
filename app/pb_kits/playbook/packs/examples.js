@@ -173,3 +173,5 @@ WebpackerReact.setup({
   ...WeekdayStacked,
 })
 
+import * as ListCheckbox from 'pb_list_checkbox/docs'
+WebpackerReact.setup(ListCheckbox)

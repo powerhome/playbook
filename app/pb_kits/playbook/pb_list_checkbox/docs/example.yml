@@ -1,0 +1,9 @@
+examples:
+  
+  rails:
+  - list_checkbox_default: Default
+  
+  
+  react:
+  - list_checkbox_default: Default
+  
