@@ -47,8 +47,8 @@ const CheckboxCard = (props: CheckboxCardProps) => {
         id={id}
     >
       <Card dark selected={isChecked}>
-        <Checkbox dark checked={isChecked} onChange={checkboxChanged}/>
-        {children || text}
+        <Checkbox {...props} checked={isChecked} onChange={checkboxChanged}/>
+        {/* {children || text} */}
       </Card>
     </div>
   )
