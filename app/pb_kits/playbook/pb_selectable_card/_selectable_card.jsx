@@ -54,8 +54,8 @@ const SelectableCard = ({
   const classes = classnames(buildCss('pb_selectable_card_kit',
     { 'checked': checked,
       'disabled': disabled,
-      'enabled': !disabled },
-    className), globalProps(props))
+      'enabled': !disabled }),
+  globalProps(props), className)
 
   const displayIcon = () => {
     if (icon === true) {
