@@ -79,7 +79,7 @@
     }
   }
 
-  &[class*=_dark] {
+  .dark {
     .pb_typeahead_wrapper .pb_typeahead_loading_indicator {
       color: $text_dk_light;
     }

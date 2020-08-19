@@ -1,8 +1,7 @@
 <%= content_tag(:div,
-    aria: object.aria,
-    class: object.classname,
+    id: object.id,
     data: object.data,
-    id: object.id) do %>
+    class: object.classname) do %>
   <%= pb_rails("title", props: { text: object.title, size: 4 }) %>
   <%= pb_rails("body", props: { text: object.detail, color: "light" }) %>
 <% end %>

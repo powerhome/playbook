@@ -1,0 +1,8 @@
+project=playbook
+user=powerhome
+include-labels=cleanup,enhancement,bug,testing,New Kit
+issues=false
+add-sections={"documentation":{"prefix":"**New Kits:**","labels":["New Kit"]}}
+max-issues=75
+since-tag=6.1.0
+unreleased-label=[v6.2.0] 2020-8-13
