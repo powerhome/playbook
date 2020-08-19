@@ -137,9 +137,9 @@
     }
     .flatpickr-day.today {
       font-weight: 600;
-      color: #242B42;
+      color: $charcoal;
       &.selected {
-        color: white;
+        color: $text_dk_default;
       }
     }
     .flatpickr-day.selected, .flatpickr-day.startRange, .flatpickr-day.endRange {
@@ -148,6 +148,8 @@
       box-shadow: $shadow_deep;
       font-weight: 600;
     }
+    // had to use flat hex colors without alpha channels
+    // the shadows were overlapping and opacities were adding together in spots
     .flatpickr-day.inRange {
       background-color: #E5EEFA;
       border: 2px;
