@@ -85,6 +85,7 @@ const datePickerHelper = (config) => {
     maxDate: maxDate,
     minDate: minDate,
     mode: mode,
+    nextArrow: '<i class="far fa-angle-right"></i>',
     onChange: onChange || [],
     onOpen: [() => {
       calendarResizer()
@@ -94,6 +95,7 @@ const datePickerHelper = (config) => {
       window.removeEventListener('resize', calendarResizer)
     }],
     onYearChange: [],
+    prevArrow: '<i class="far fa-angle-left"></i>',
     static: true,
   })
   // Dynamically sourced flatpickr instance

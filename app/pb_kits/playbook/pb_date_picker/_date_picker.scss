@@ -31,6 +31,110 @@
         transition: background-color 5000s ease-in-out 0s;
       }
     }
+
+    // date-picker styles
+
+    // Header Styles
+
+    .flatpickr-months {
+      // padding: 5px;
+      // padding-bottom: 5px;
+      border-bottom: solid 1px $border_light;
+    }
+    .flatpickr-current-month {
+      left: 10px;
+      display: flex;
+      justify-content: flex-start;
+      padding-top: 0px;
+    }
+    .flatpickr-monthDropdown-months {
+      padding-left: 0px;
+      margin-left: 15px;
+      margin-right: 5px;
+    }
+    .numInputWrapper {
+      display: contents;
+      .numInput {
+        border-left: solid 1px $border_light;
+        margin-left: 8px;
+        padding-left: 27px;
+        &:focus {
+          outline: none;
+        }
+        &:hover {
+          cursor: pointer;
+        }
+      }
+    }
+
+    .flatpickr-prev-month {
+      left: 255px !important;
+      padding-right: 0px;
+      padding-top: 6px;
+      border-left: solid 1px $border_light;
+      // svg path {
+      //   fill: $neutral;
+      // }
+    }
+    .flatpickr-next-month {
+      padding-left: 0px;
+      padding-top: 6px;
+      // svg path {
+      //   fill: $neutral;
+      // }
+    }
+
+    div.flatpickr-weekdays {
+      margin-top: 8px;
+    }
+    span.flatpickr-weekday {
+      @include caption;
+    }
+    // Month-Year Select Styles
+    select.flatpickr-monthDropdown-months {
+      font-size: 16px;
+      font-weight: 600;
+      color: #242B42;
+    }
+
+    select.numInput {
+      font-size: 16px;
+      font-weight: 600;
+      color: #242B42;
+      border: 0px;
+      font-family: inherit;
+      // margin-left: 15px;
+    }
+
+    // Shadow
+    .flatpickr-calendar {
+      box-shadow: $shadow_deeper;
+    }
+
+    // Day and Range Styles
+    .flatpickr-day:hover {
+      background-color: rbga($neutral, 0.4);
+      border-color: rbga($neutral, 0.4);
+      box-shadow: $shadow_deep;
+    }
+    .flatpickr-day.today {
+      font-weight: 600;
+      color: #242B42;
+      &.selected {
+        color: white;
+      }
+    }
+    .flatpickr-day.selected, .flatpickr-day.startRange, .flatpickr-day.endRange {
+      background-color: $primary;
+      border-color: $primary;
+      box-shadow: $shadow_deep;
+      font-weight: 600;
+    }
+    .flatpickr-day.inRange {
+      background-color: #E5EEFA;
+      border: 2px;
+      box-shadow: -5px 0 0 #E5EEFA, 5px 0 0 #E5EEFA;
+    }
   }
 
   &.error {
@@ -45,43 +149,9 @@
   }
 }
 
-// date-picker styles
-
-div.flatpickr-weekdays {
-  margin-top: 5px;
-}
-span.flatpickr-weekday {
-  @include caption;
-}
-
 .pb_popover_body {
   overflow: visible !important;
 }
-
-.numInput {
-  font-size: 18px;
-  border: 0px;
-  font-family: inherit;
-  margin-left: 15px;
-}
-
-// select styling
-// select {
-//   @include pb_textarea_light;
-//   @include pb_title_4;
-//   appearance: none;
-//   cursor: pointer;
-//   box-shadow: inset 0 -11px 20px rgba($primary, 0.05);
-//   padding-right: $space_lg;
-//   &:hover, &:active, &:focus {
-//     background-color: $focus_input_light;
-//   }
-//   &:disabled ~ .pb_select_kit_caret {
-//     opacity: 0.5;
-//   }
-//   color: transparent !important;
-//   text-shadow: 0 0 0 $text_lt_default;
-// }
 
 // manual import of flatpickr styles
 
