@@ -178,3 +178,6 @@ WebpackerReact.setup({
   ...UserBadge,
   ...WeekdayStacked,
 })
+
+import * as Background from 'pb_background/docs'
+WebpackerReact.setup(Background)
