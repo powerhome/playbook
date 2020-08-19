@@ -1,0 +1,50 @@
+<div class="pb--doc-demo-row">
+<div>
+  <%= pb_rails("date", props: {
+    date: DateTime.now,
+  }) %>
+
+  <br><br>
+
+  <%= pb_rails("date", props: {
+    date: DateTime.now,
+    icon: true
+  }) %>
+
+  <br><br>
+
+  <%= pb_rails("date", props: {
+    date: DateTime.now,
+    day_of_week: true
+  }) %>
+
+  <br><br>
+
+  <%= pb_rails("date", props: {
+    date: DateTime.now,
+    icon: true,
+    day_of_week: true
+  }) %>
+  
+
+</div>
+
+
+<div>
+  <%= pb_rails("date", props: {
+  date: Date.today,
+  size: "lg"
+}) %>
+
+<br><br>
+
+<%= pb_rails("date", props: {
+  date: Date.today,
+  size: "lg",
+  day_of_week: true
+}) %>
+</div>
+
+
+
+</div>

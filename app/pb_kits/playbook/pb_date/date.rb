@@ -11,23 +11,34 @@ module Playbook
 
       prop :date, required: true
       prop :size, type: Playbook::Props::Enum,
-                  values: %w[lg sm xs],
+                  values: %w[lg sm],
                   default: "sm"
+      prop :alignment, type: Playbook::Props::Enum,
+                       values: %w[left center right],
+                       default: "left"
+      prop :icon, type: Playbook::Props::Boolean,
+                  default: false
+      prop :day_of_week, type: Playbook::Props::Boolean,
+                         default: false
 
       def classname
-        generate_classname("pb_date_kit")
+        generate_classname("pb_date_kit", alignment)
       end
 
-      def xs_date
-        "#{pb_date_time.to_day_of_week.upcase} &middot; #{pb_date_time.to_month.upcase} #{pb_date_time.to_day}".html_safe
+      def date_day_of_week
+        pb_date_time.to_day_of_week
       end
 
-      def lg_date
-        "#{pb_date_time.to_month.upcase} #{pb_date_time.to_day}"
+      def day
+        pb_date_time.to_day
       end
 
-      def sm_date
-        "#{pb_date_time.to_day_of_week.upcase} &middot; #{pb_date_time.to_month.upcase} #{pb_date_time.to_day}".html_safe
+      def month
+        pb_date_time.to_month.camelcase
+      end
+
+      def year
+        pb_date_time.to_year
       end
 
     private

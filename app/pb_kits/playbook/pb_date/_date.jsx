@@ -2,82 +2,122 @@
 
 import React from 'react'
 import DateTime from '../pb_kit/dateTime.js'
-import { Icon } from '../'
+import { Body, Icon, Title } from '../'
 import classnames from 'classnames'
 import { globalProps } from '../utilities/globalProps.js'
-
-const defaultDateString = (value: DateTime) => {
-  const weekday = value.toWeekday().toUpperCase()
-  const month = value.toMonth().toUpperCase()
-  const day = value.toDay()
-
-  return `${weekday} · ${month} ${day}`
-}
-
-const largeDateString = (value: DateTime) => {
-  const month = value.toMonth().toUpperCase()
-  const day = value.toDay()
-
-  return `${month} ${day}`
-}
-
-type DateSubcomponent = {
-  value: DateTime,
-}
-
-const ExtraSmallDate = ({ value, ...props }: DateSubcomponent) => (
-  <h3 className={classnames('pb_title_kit_4', globalProps(props))}>
-    {defaultDateString(value)}
-  </h3>
-)
-
-const SmallDate = ({ value, ...props }: DateSubcomponent) => (
-  <h3 className={classnames('pb_title_kit_4', globalProps(props))}>
-    <Icon
-        fixedWidth
-        icon="calendar"
-    />
-    {defaultDateString(value)}
-  </h3>
-)
-
-const LargeDate = ({ value, ...props }: DateSubcomponent) => (
-  <h3 className={classnames('pb_title_kit_3', globalProps(props))}>
-    {largeDateString(value)}
-  </h3>
-)
+import { buildCss } from '../utilities/props'
 
 type PbDateProps = {
-  size?: "xs" | "sm" | "lg",
-  value?: string,
-  className?: string
+  size?: "sm" | "lg",
+  date: string | date,
+  className?: string,
+  icon?: boolean,
+  dayOfWeek?: boolean,
+  alignment?: "left" | "center" | "right"
 }
 
-const PbDate = ({ size, value, className, ...props }: PbDateProps) => {
-  const date = new DateTime({ value: value })
+const PbDate = (props: PbDateProps) => {
+  const {
+    size = 'sm',
+    date,
+    className,
+    icon = false,
+    dayOfWeek = false,
+    alignment = 'left',
+  } = props
 
-  if (size == 'xs')
-    return (
-      <ExtraSmallDate
-          {...props}
-          className={className}
-          value={date}
-      />
-    )
+  const dateBreakdown = new DateTime({ value: date })
+  const weekday = dateBreakdown.toWeekday()
+  const month = dateBreakdown.toMonth()
+  const day = dateBreakdown.toDay()
+  const year = dateBreakdown.toYear()
+  const currentYear = new Date().getFullYear().toString()
+
+  const classes = classnames(
+    className,
+    buildCss('pb_date_kit', alignment),
+    globalProps(props)
+  )
+
   if (size == 'lg')
     return (
-      <LargeDate
-          {...props}
-          className={className}
-          value={date}
-      />
+      <div className={classes}>
+        <If condition={dayOfWeek}>
+          <Title
+              tag="div"
+              text={weekday}
+          />
+          <Body
+              color="light"
+              text="•"
+          />
+        </If>
+        <If condition={currentYear != year}>
+          <Title
+              tag="div"
+          >
+            {`
+              ${month}
+              ${day}
+              ,
+              ${year}
+            `}
+          </Title>
+          <Else />
+
+          <Title
+              tag="div"
+          >
+            {month}
+            {day}
+          </Title>
+        </If>
+      </div>
     )
   return (
-    <SmallDate
-        {...props}
-        className={className}
-        value={date}
-    />
+    <div className={classes}>
+      <If condition={icon}>
+        <Body color="light">
+          <Icon
+              fixedWidth
+              icon="calendar-alt"
+          />
+        </Body>
+      </If>
+      <If condition={dayOfWeek}>
+        <Title
+            size={4}
+            tag="div"
+        >
+          {weekday}
+        </Title>
+        <Body
+            color="light"
+            text="•"
+        />
+      </If>
+      <If condition={currentYear != year}>
+        <Title
+            size={4}
+            tag="div"
+        >
+          {`
+            ${month}
+            ${day}
+            ,
+            ${year}
+          `}
+        </Title>
+        <Else />
+        <Title
+            size={4}
+            tag="div"
+        >
+          {month}
+          {day}
+        </Title>
+      </If>
+    </div>
   )
 }
 

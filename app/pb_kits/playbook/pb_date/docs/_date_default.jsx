@@ -5,21 +5,14 @@ const DateDefault = () => {
   return (
     <div>
       <Date
+          date="2012-12-25"
+      />
+
+      <br />
+
+      <Date
+          date="2012-12-25"
           size="lg"
-          value="1995-12-25"
-      />
-
-      <br />
-
-      <Date
-          value="17 Mar 69"
-      />
-
-      <br />
-
-      <Date
-          size="xs"
-          value="2020-04-20T04:20:00.000Z"
       />
     </div>
   )
