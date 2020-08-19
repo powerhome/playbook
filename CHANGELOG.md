@@ -44,10 +44,6 @@
 - Gauge Kit ([#910](https://github.com/powerhome/playbook/pull/910) @bh247484)
 - Added span tag option to react version of Title kit ([#944](https://github.com/powerhome/playbook/pull/944) @coleerikson)
 
-### Updated
-- Dark Mode Update Badge, Button, Circle Icon Button, Card, Checkbox and Body Kits ([#948](https://github.com/powerhome/playbook/pull/948)  @thestephenmarshall)
-- Cleanup #948 ([#952](https://github.com/powerhome/playbook/pull/952) @thestephenmarshall)
-
 ## [v6.0.1] 2020-7-30
 
 ### Fixed
@@ -70,6 +66,7 @@
 
 ### Fixed
 - Added disabled attribute to button. ([#934](https://github.com/powerhome/playbook/pull/934)  @KatherineMuedas)
+
 
 ## [v5.5.1] 2020-7-24
 
@@ -104,7 +101,14 @@
 - Added aria, data props to Circle Icon Button React kit; added aria props to Circle Icon Button Rails kit.([#907](https://github.com/powerhome/playbook/pull/907) @kellyeryan)
 
 
+### Added
+- Gauge Kit ([#910](https://github.com/powerhome/playbook/pull/910) @bh247484)
+- Added border prop ([#900](https://github.com/powerhome/playbook/pull/900) @christinaatai))
+
 ## [v5.2.0] 2020-7-2
+
+### Added
+- Added aria, data props to Badge React kit; added aria props to Badge Rails kit ([#901](https://github.com/powerhome/playbook/pull/901) @kellyeryan)
 
 ### Fixed
 - Added User Badge Kit back to menu.yml ([#890](https://github.com/powerhome/playbook/pull/890) @christinaatai)
