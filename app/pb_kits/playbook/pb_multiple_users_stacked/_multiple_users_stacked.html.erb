@@ -8,7 +8,7 @@
   <% unless object.only_one %>
     <% if object.more_than_two %>
       <%= pb_rails("badge", props: {
-        dark: true,
+        dark: object.dark,
         text: "+#{object.users.count - object.display_count}",
         variant: "primary",
         rounded: true,
