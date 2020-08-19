@@ -173,3 +173,5 @@ WebpackerReact.setup({
   ...WeekdayStacked,
 })
 
+import * as Background from 'pb_background/docs'
+WebpackerReact.setup(Background)

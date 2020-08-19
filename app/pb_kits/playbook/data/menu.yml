@@ -7,6 +7,8 @@ samples:
 kits:
   - avatar
   - avatar_action_button
+  - background
+  - badge
   - buttons:
     - button
     - button_toolbar
