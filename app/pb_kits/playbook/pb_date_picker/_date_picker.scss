@@ -12,6 +12,7 @@
   }
   .input_wrapper {
     margin-bottom: $space_sm;
+    position: relative;
     
     .flatpickr-wrapper {
       display: block;
@@ -29,6 +30,23 @@
         @include pb_textarea_focus;
         -webkit-box-shadow: 0 0 0px 1000px $focus_input_light inset;
         transition: background-color 5000s ease-in-out 0s;
+      }
+    }
+
+    .cal_icon_wrapper {
+      position: absolute;
+      top: 1px;
+      right: 0px;
+      border-left: 1px solid $border_light;
+      width: 45px;
+      height: 43.2px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding-left: 11px;
+      color: $text_lt_light;
+      :hover {
+        cursor: pointer;
       }
     }
 
@@ -106,15 +124,15 @@
       // margin-left: 15px;
     }
 
-    // Shadow
+    // Calendar Shadow
     .flatpickr-calendar {
       box-shadow: $shadow_deeper;
     }
 
     // Day and Range Styles
     .flatpickr-day:hover {
-      background-color: rbga($neutral, 0.4);
-      border-color: rbga($neutral, 0.4);
+      background-color: rgba($color: $neutral, $alpha: 0.2);
+      border-color: rgba($color: $neutral, $alpha: 0.2);
       box-shadow: $shadow_deep;
     }
     .flatpickr-day.today {
@@ -153,7 +171,7 @@
   overflow: visible !important;
 }
 
-// manual import of flatpickr styles
+// manual import -- flatpickr styles
 
 .flatpickr-calendar {
   background: transparent;

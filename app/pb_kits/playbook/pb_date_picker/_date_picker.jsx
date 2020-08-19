@@ -5,7 +5,7 @@ import classnames from 'classnames'
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
 import { globalProps } from '../utilities/globalProps.js'
 // import flatpickr from 'flatpickr'
-import { Body, Caption } from '../'
+import { Body, Caption, Icon } from '../'
 import datePickerHelper from './date_picker_helper.js'
 
 type DatePickerProps = {
@@ -97,6 +97,15 @@ const DatePicker = (props: DatePickerProps) => {
             id={pickerId}
             name={name}
         />
+        <div
+            className="cal_icon_wrapper"
+            id={`cal-icon-${pickerId}`}
+        >
+          <Icon
+              className="cal_icon"
+              icon="calendar-alt"
+          />
+        </div>
         <If condition={error}>
           <Body
               status="negative"

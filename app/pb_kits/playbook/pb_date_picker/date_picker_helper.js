@@ -130,6 +130,11 @@ const datePickerHelper = (config) => {
   }
   picker.config.onYearChange.push(yearChangeHook)
 
+  // click handling for Calendar Icon
+  document.querySelector(`#cal-icon-${pickerId}`).addEventListener('click', () => {
+    picker.open()
+  })
+
   // logic for updating value when typing
   document.querySelector(`#${pickerId}`).addEventListener('input', (e) => {
     picker.input.setAttribute('value', e.target.value)
