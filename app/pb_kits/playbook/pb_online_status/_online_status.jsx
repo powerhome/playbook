@@ -25,7 +25,7 @@ const OnlineStatus = (props: OnlineStatusProps) => {
 
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
-  const classes = classnames(buildCss('pb_online_status_kit', status), className, globalProps(props))
+  const classes = classnames(buildCss('pb_online_status_kit', status),globalProps(props), className)
 
   return (
     <div
