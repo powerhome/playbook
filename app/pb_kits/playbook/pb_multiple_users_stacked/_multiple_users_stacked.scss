@@ -19,15 +19,20 @@
   .pb_multiple_users_stacked_item {
     height: $stacked_size;
     width: $stacked_size;
-    .avatar_wrapper {
-      border: $border_size solid $white;
-      height: $stacked_size;
-      width: $stacked_size;
-      img {
-        z-index: 0;
+      &.dark {
+        .avatar_wrapper {
+          border: $pb_multiple_users_border_size solid $bg_dark;
+        }
+      }
+      .avatar_wrapper {
+        border: $border_size solid $white;
+        height: $stacked_size;
+        width: $stacked_size;
+        img {
+          z-index: 0;
+        }
       }
     }
-  }
   &[class*=_single] .pb_multiple_users_stacked_item {
     width: $container_size;
     height: $container_size;
