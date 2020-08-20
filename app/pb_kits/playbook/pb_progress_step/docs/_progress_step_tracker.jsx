@@ -1,23 +1,23 @@
 import React from 'react'
 import ProgressStep from '../_progress_step.jsx'
 import ProgressStepItem from '../_progress_step_item.jsx'
-
-const ProgressStepChild = () => (
+import { Caption } from '../../'
+const ProgressStepTracker = () => (
   <div>
     <ProgressStep
-        orientation="child"
+        variant="tracker"
     >
       <ProgressStepItem status="complete">
-        {'Child'}
+        <Caption>{'Ordered'}</Caption>
       </ProgressStepItem>
       <ProgressStepItem status="active">
-        {'Child'}
+        <Caption>{'Shipped'}</Caption>
       </ProgressStepItem>
       <ProgressStepItem status="inactive">
-        {'Child'}
+        <Caption>{'Delivered'}</Caption>
       </ProgressStepItem>
     </ProgressStep>
   </div>
 )
 
-export default ProgressStepChild
+export default ProgressStepTracker

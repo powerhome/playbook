@@ -16,29 +16,19 @@ const ProgressStepItem = ({
   status = 'inactive',
   children,
 }: ProgressStepItemProps) => {
-  const progressStepItem = buildCss('pb_progress_step_item_kit', status)
+  const progressStepItem = buildCss('pb_progress_step_item', status)
 
   return (
-    <div className={classnames(progressStepItem, className)}>
-      <div className="pb_progress_step_item_wrapper">
-        <div className="pb_progress_step_item_connector_first" />
-        <div className="pb_progress_step_item_step_wrapper">
-          <div className="pb_progress_step_item_step">
-            <div className="pb_progress_step_item_step_connector_first" />
-            <div className="pb_progress_step_item_step_circle">
-              <Icon
-                  icon="check"
-              />
-            </div>
-            <div className="pb_progress_step_item_step_connector_second" />
-          </div>
-          <div>
-            {children}
-          </div>
-        </div>
-        <div className="pb_progress_step_item_connector_second" />
+    <li className={classnames(progressStepItem, className)}>
+      <div className="circle">
+        <Icon
+            icon="check"
+        />
       </div>
-    </div>
+      <div>
+        {children}
+      </div>
+    </li>
   )
 }
 export default ProgressStepItem
