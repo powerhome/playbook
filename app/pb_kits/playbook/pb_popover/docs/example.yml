@@ -5,6 +5,11 @@ examples:
     - popover_close: Close Options
     - popover_z_index: Set Z-Index
     - popover_scroll_height: Scroll and Height Settings
+    - popover_dark: Dark
+    - popover_list_dark: List Dark
+    - popover_close_dark: Close Dark
+    - popover_z_index_dark: Z-Index Dark
+    - popover_scroll_height_dark: Scroll and Height Settings Dark
 
   react:
     - popover_default: Default
@@ -12,6 +17,11 @@ examples:
     - popover_close: Close Options
     - popover_z_index: Set Z-Index
     - popover_scroll_height: Scroll and Height Settings
+    - popover_dark: Dark
+    - popover_list_dark: List Dark
+    - popover_close_dark: Close Dark
+    - popover_z_index_dark: Z-Index Dark
+    - popover_scroll_height_dark: Scroll and Height Settings Dark
   
 
 
