@@ -38,7 +38,6 @@ kits:
     - typeahead
     - toggle
   - highlight
-  - hashtag
   - icon
   - icon_circle
   - icon_value
@@ -50,8 +49,9 @@ kits:
   - multiple_users_stacked
   - nav
   - online_status
-  - pill:
+  - tags:
     - badge
+    - hashtag
     - pill
   - popover
   - progress_pills

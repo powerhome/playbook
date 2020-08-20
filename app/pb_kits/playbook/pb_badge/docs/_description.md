@@ -1,1 +1,1 @@
-Badges can be used for, but are to limited to,  notification, tags, and status indicators.
+Badges can be used for notification, tags, and status. They are used for count and numbers.
