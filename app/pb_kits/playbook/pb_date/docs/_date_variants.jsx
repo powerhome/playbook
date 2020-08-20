@@ -3,53 +3,35 @@ import { Date } from '../..'
 
 const DateVariants = () => {
   return (
-    <div className="pb--doc-demo-row">
-      <div>
-        <Date
-            date="1995-12-25"
-        />
+    <div>
+      <Date
+          date="1995-12-25"
+      />
 
-        <br />
-        <br />
+      <br />
+      <br />
 
-        <Date
-            date="1995-12-25"
-            icon
-        />
+      <Date
+          date="1995-12-25"
+          showIcon
+      />
 
-        <br />
-        <br />
+      <br />
+      <br />
 
-        <Date
-            date="1995-12-25"
-            dayOfWeek
-        />
+      <Date
+          date="1995-12-25"
+          showDayOfWeek
+      />
 
-        <br />
-        <br />
+      <br />
+      <br />
 
-        <Date
-            date="1995-12-25"
-            dayOfWeek
-            icon
-        />
-      </div>
-
-      <div>
-        <Date
-            date="1995-12-25"
-            size="lg"
-        />
-
-        <br />
-        <br />
-
-        <Date
-            date="1995-12-25"
-            dayOfWeek
-            size="lg"
-        />
-      </div>
+      <Date
+          date="1995-12-25"
+          showDayOfWeek
+          showIcon
+      />
     </div>
   )
 }

@@ -8,21 +8,19 @@ import { globalProps } from '../utilities/globalProps.js'
 import { buildCss } from '../utilities/props'
 
 type PbDateProps = {
-  size?: "sm" | "lg",
   date: string | date,
   className?: string,
-  icon?: boolean,
-  dayOfWeek?: boolean,
+  showIcon?: boolean,
+  showDayOfWeek?: boolean,
   alignment?: "left" | "center" | "right"
 }
 
 const PbDate = (props: PbDateProps) => {
   const {
-    size = 'sm',
     date,
     className,
-    icon = false,
-    dayOfWeek = false,
+    showIcon = false,
+    showDayOfWeek = false,
     alignment = 'left',
   } = props
 
@@ -39,44 +37,9 @@ const PbDate = (props: PbDateProps) => {
     globalProps(props)
   )
 
-  if (size == 'lg')
-    return (
-      <div className={classes}>
-        <If condition={dayOfWeek}>
-          <Title
-              tag="div"
-              text={weekday}
-          />
-          <Body
-              color="light"
-              text="•"
-          />
-        </If>
-        <If condition={currentYear != year}>
-          <Title
-              tag="div"
-          >
-            {`
-              ${month}
-              ${day}
-              ,
-              ${year}
-            `}
-          </Title>
-          <Else />
-
-          <Title
-              tag="div"
-          >
-            {month}
-            {day}
-          </Title>
-        </If>
-      </div>
-    )
   return (
     <div className={classes}>
-      <If condition={icon}>
+      <If condition={showIcon}>
         <Body color="light">
           <Icon
               fixedWidth
@@ -84,7 +47,7 @@ const PbDate = (props: PbDateProps) => {
           />
         </Body>
       </If>
-      <If condition={dayOfWeek}>
+      <If condition={showDayOfWeek}>
         <Title
             size={4}
             tag="div"

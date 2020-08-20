@@ -7,13 +7,6 @@ const DateDefault = () => {
       <Date
           date="2012-12-25"
       />
-
-      <br />
-
-      <Date
-          date="2012-12-25"
-          size="lg"
-      />
     </div>
   )
 }

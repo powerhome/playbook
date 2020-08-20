@@ -10,15 +10,12 @@ module Playbook
       partial "pb_date/date"
 
       prop :date, required: true
-      prop :size, type: Playbook::Props::Enum,
-                  values: %w[lg sm],
-                  default: "sm"
       prop :alignment, type: Playbook::Props::Enum,
                        values: %w[left center right],
                        default: "left"
-      prop :icon, type: Playbook::Props::Boolean,
+      prop :show_icon, type: Playbook::Props::Boolean,
                   default: false
-      prop :day_of_week, type: Playbook::Props::Boolean,
+      prop :show_day_of_week, type: Playbook::Props::Boolean,
                          default: false
 
       def classname

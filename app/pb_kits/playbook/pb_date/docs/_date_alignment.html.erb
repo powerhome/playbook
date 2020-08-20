@@ -1,16 +1,16 @@
 
   <%= pb_rails("date", props: {
     date: DateTime.now,
-    icon: true,
-    day_of_week: true
+    show_icon: true,
+    show_day_of_week: true
   }) %>
 
   <br><br>
 
   <%= pb_rails("date", props: {
     date: DateTime.now,
-    icon: true,
-    day_of_week: true,
+    show_icon: true,
+    show_day_of_week: true,
     alignment: "center"
   }) %>
 
@@ -18,32 +18,7 @@
 
   <%= pb_rails("date", props: {
     date: DateTime.now,
-    icon: true,
-    day_of_week: true,
+    show_icon: true,
+    show_day_of_week: true,
     alignment: "right"
   }) %>
-  
-<br><br>
-
-  <%= pb_rails("date", props: {
-  date: Date.today,
-  size: "lg",
-  day_of_week: true
-}) %>
-
-<%= pb_rails("date", props: {
-  date: Date.today,
-  size: "lg",
-  day_of_week: true,
-  alignment: "center"
-}) %>
-
-<%= pb_rails("date", props: {
-  date: Date.today,
-  size: "lg",
-  day_of_week: true,
-  alignment: "right"
-}) %>
-
-
-
