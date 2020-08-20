@@ -31,7 +31,7 @@ const IconCircle = (props: IconCircleProps) => {
 
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
-  const classes = classnames(buildCss('pb_icon_circle_kit', size, variant), className, globalProps(props))
+  const classes = classnames(buildCss('pb_icon_circle_kit', size, variant), globalProps(props), className)
 
   return (
     <div
