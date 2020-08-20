@@ -36,7 +36,7 @@ const MultipleUsersStacked = (props: MultipleUsersStackedProps) => {
   const dataProps = buildDataProps(data)
   const classes = classnames(buildCss(
     'pb_multiple_users_stacked_kit',
-    { single: onlyOne }), className, globalProps(props))
+    { single: onlyOne }), globalProps(props), className)
 
   const firstUser = () => {
     return users.slice(0, 1).map((userObject, index) => {
