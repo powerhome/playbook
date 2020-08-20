@@ -27,7 +27,7 @@ const TableRow = (props: TableRowPropTypes) => {
   const dataProps = buildDataProps(data)
   const sideHighlightClass =
     sideHighlightColor != '' ? `side_highlight_${sideHighlightColor}` : null
-  const classes = classnames(buildCss('pb_table_row_kit', sideHighlightClass), className, globalProps(props))
+  const classes = classnames(buildCss('pb_table_row_kit', sideHighlightClass), globalProps(props), className)
 
   return (
     <tr
