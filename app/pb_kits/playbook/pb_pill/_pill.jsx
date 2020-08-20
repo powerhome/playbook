@@ -28,7 +28,7 @@ const Pill = (props: PillProps) => {
 
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
-  const classes = classnames(buildCss('pb_pill_kit', variant), className, globalProps(props))
+  const classes = classnames(buildCss('pb_pill_kit', variant), globalProps(props), className)
 
   return (
     <div
