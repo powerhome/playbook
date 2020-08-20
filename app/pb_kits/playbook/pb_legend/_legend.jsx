@@ -39,8 +39,9 @@ const Legend = (props: LegendProps) => {
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
   const bodyCss = classnames(
-    buildCss('pb_legend_kit', color), className,
-    globalProps(props)
+    buildCss('pb_legend_kit', color),
+    globalProps(props),
+    className
   )
 
   return (
