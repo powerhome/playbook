@@ -41,7 +41,7 @@ const Radio = ({
 }: RadioProps) => {
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
-  const classes = classnames(buildCss('pb_radio_kit'), { error }, { dark }, className, globalProps(props))
+  const classes = classnames(buildCss('pb_radio_kit'), { error }, { dark }, globalProps(props), className)
 
   return (
     <label
