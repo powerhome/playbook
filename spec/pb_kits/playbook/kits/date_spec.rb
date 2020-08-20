@@ -22,8 +22,8 @@ RSpec.describe Playbook::PbDate::Date do
       required_props = { date: Date.today }
 
       expect(subject.new(required_props).classname).to eq "pb_date_kit_left"
-      expect(subject.new(alignment: "center").classname).to eq "pb_date_kit_center"
-      expect(subject.new(alignment: "right").classname).to eq "pb_date_kit_right"
+      expect(subject.new(required_props.merge(alignment: "center")).classname).to eq "pb_date_kit_center"
+      expect(subject.new(required_props.merge(alignment: "right")).classname).to eq "pb_date_kit_right"
       expect(subject.new(required_props.merge(classname: "additional_class")).classname).to eq "pb_date_kit_left additional_class"
     end
   end
