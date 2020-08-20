@@ -3,18 +3,22 @@
     orientation: "row",
     vertical: "center"
     }) do %>
-    <%= pb_rails("body", props: { text: "Click info for more details" }) %>
+    <%= pb_rails("body", props: { 
+        dark: true, 
+        text: "Click info for more details" 
+    }) %>
     &nbsp;
     <%= pb_rails("circle_icon_button", props: {
+        dark: true,
         variant: "secondary",
         icon: "info",
-        id: "regular-popover-1"
+        id: "regular-popover-5"
     }) %>
     <%= pb_rails("popover", props: {
-        trigger_element_id: "regular-popover-1",
-        tooltip_id: "tooltip-1",
+        trigger_element_id: "regular-popover-5",
+        tooltip_id: "tooltip-5",
         offset: true,
-        position: "top"
+        position: "top",
     }) do %>
         I'm a popover. I can show content of any size.
     <% end %>
