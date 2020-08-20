@@ -8,7 +8,7 @@ RSpec.describe Playbook::PbBody::Body do
   it { is_expected.to define_partial }
   it { is_expected.to define_enum_prop(:color)
     .with_default("default")
-    .with_values("default", "light", "lighter", "dark", "light_dark", "lighter_dark") }
+    .with_values("default", "light", "lighter") }
   it { is_expected.to define_boolean_prop(:dark).with_default(false) }
   it { is_expected.to define_enum_prop(:status)
     .with_default("neutral")
