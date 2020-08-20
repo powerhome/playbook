@@ -7,6 +7,7 @@ samples:
 kits:
   - avatar
   - avatar_action_button
+  - badge
   - buttons:
     - button
     - button_toolbar
@@ -50,9 +51,7 @@ kits:
   - multiple_users_stacked
   - nav
   - online_status
-  - pill:
-    - badge
-    - pill
+  - pill
   - popover
   - progress_pills
   - progress_simple

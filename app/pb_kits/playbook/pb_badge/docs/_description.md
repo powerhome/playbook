@@ -1,1 +1,0 @@
-Badges can be used for, but not limited to, notification and tags.
