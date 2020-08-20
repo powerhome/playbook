@@ -1,0 +1,1 @@
+Badges can be used for, but are to limited to,  notification, tags, and status indicators.
