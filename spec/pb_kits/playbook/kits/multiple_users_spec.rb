@@ -17,6 +17,7 @@ RSpec.describe Playbook::PbMultipleUsers::MultipleUsers do
       expect(subject.new(users: []).classname).to eq "pb_multiple_users_kit"
       expect(subject.new(users: [], classname: "additional_class").classname).to eq "pb_multiple_users_kit additional_class"
       expect(subject.new(users: [], reverse: true).classname).to eq "pb_multiple_users_kit_reverse"
+      expect(subject.new(users: [], reverse: true, dark: true).classname).to eq "pb_multiple_users_kit_reverse dark"
     end
   end
 
