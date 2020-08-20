@@ -5,11 +5,14 @@ import DateTime from '../pb_kit/dateTime.js'
 import { Body, Icon, Title } from '../'
 import classnames from 'classnames'
 import { globalProps } from '../utilities/globalProps.js'
-import { buildCss } from '../utilities/props'
+import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
 
 type PbDateProps = {
+  aria: Object,
   date: string | date,
   className?: string,
+  data?: Object,
+  id?: string,
   showIcon?: boolean,
   showDayOfWeek?: boolean,
   alignment?: "left" | "center" | "right"
@@ -17,69 +20,72 @@ type PbDateProps = {
 
 const PbDate = (props: PbDateProps) => {
   const {
-    date,
-    className,
-    showIcon = false,
-    showDayOfWeek = false,
+    aria = {},
     alignment = 'left',
+    className,
+    date,
+    data = {},
+    id,
+    showDayOfWeek = false,
+    showIcon = false,
   } = props
 
-  const dateBreakdown = new DateTime({ value: date })
-  const weekday = dateBreakdown.toWeekday()
-  const month = dateBreakdown.toMonth()
-  const day = dateBreakdown.toDay()
-  const year = dateBreakdown.toYear()
+  const dateTimestamp = new DateTime({ value: date })
+  const weekday = dateTimestamp.toWeekday()
+  const month = dateTimestamp.toMonth()
+  const day = dateTimestamp.toDay()
+  const year = dateTimestamp.toYear()
   const currentYear = new Date().getFullYear().toString()
+
+  const ariaProps = buildAriaProps(aria)
+  const dataProps = buildDataProps(data)
 
   const classes = classnames(
     className,
     buildCss('pb_date_kit', alignment),
     globalProps(props)
   )
-
   return (
-    <div className={classes}>
-      <If condition={showIcon}>
-        <Body color="light">
-          <Icon
-              fixedWidth
-              icon="calendar-alt"
-          />
-        </Body>
-      </If>
-      <If condition={showDayOfWeek}>
-        <Title
-            size={4}
-            tag="div"
-        >
+    <div
+        {...ariaProps}
+        {...dataProps}
+        className={classes}
+        id={id}
+    >
+      <Title
+          size={4}
+          tag="h4"
+      >
+        <If condition={showIcon}>
+          <Body
+              color="light"
+              tag="span"
+          >
+            <Icon
+                fixedWidth
+                icon="calendar-alt"
+            />
+          </Body>
+        </If>
+        <If condition={showDayOfWeek}>
           {weekday}
-        </Title>
-        <Body
-            color="light"
-            text="•"
-        />
-      </If>
-      <If condition={currentYear != year}>
-        <Title
-            size={4}
-            tag="div"
-        >
-          {`
-            ${month}
-            ${day}
-            ,
-            ${year}
-          `}
-        </Title>
-        <Else />
-        <Title
-            size={4}
-            tag="div"
-        >
+          <Body
+              color="light"
+              tag="span"
+              text=" • "
+          />
+        </If>
+        <span>
           {month}
+          {' '}
           {day}
-        </Title>
-      </If>
+        </span>
+        <If condition={currentYear != year}>
+          <span>
+            {` , ${year}`}
+          </span>
+        </If>
+      </Title>
     </div>
   )
 }
