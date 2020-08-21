@@ -6,14 +6,15 @@ const RadioDark = () => {
     <>
       <Radio
           dark
+          defaultChecked
           label="Power"
           name="Group1"
           value="Power"
       />
       <br />
       <Radio
-          checked
           dark
+          defaultChecked={false}
           label="Nitro"
           name="Group1"
           value="Nitro"
@@ -21,6 +22,7 @@ const RadioDark = () => {
       <br />
       <Radio
           dark
+          defaultChecked={false}
           label="Google"
           name="Group1"
           value="Google"

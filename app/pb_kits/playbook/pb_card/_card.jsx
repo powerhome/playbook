@@ -92,7 +92,7 @@ const Card = (props: CardPropTypes) => {
   const nonHeaderChildren = cardChildren.filter((child) => (get(child, 'type.displayName') !== 'Header'))
 
   return (
-    <div className={classnames(cardCss, globalProps({ padding }), className)}>
+    <div className={classnames(cardCss, globalProps(props, { padding }), className)}>
       {subComponentTags('Header')}
       {nonHeaderChildren}
     </div>
