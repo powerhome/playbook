@@ -5,11 +5,10 @@
     &[class*=_#{$color_name}] {
       @include pb_body($color_value);
     }
-  }
-
-  @each $status_name, $status_value in $pb_body_status {
-    &[class*=_#{$status_name}] {
-      @include pb_body($status_value);
+    @each $status_name, $status_value in $pb_body_status {
+      &[class*=_default_#{$status_name}] {
+        @include pb_body($status_value);
+      }
     }
   }
 
@@ -19,4 +18,9 @@
     }
   }
   
+  @each $status_name, $status_value in $pb_body_status {
+    &[class*=_default_#{$status_name}][class*=dark] {
+      @include pb_body($status_value);
+    }
+  }
 }
