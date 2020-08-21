@@ -25,7 +25,6 @@ type RadioProps = {
 
 const Radio = ({
   aria = {},
-  checked = false,
   children,
   className,
   dark = false,
