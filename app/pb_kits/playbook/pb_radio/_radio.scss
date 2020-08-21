@@ -29,7 +29,7 @@
       border: 6px solid $primary;
     }
   }
-  &[class*=_dark] {
+  &.dark {
     .pb_radio_button {
       border-color: $border_dark;
     }

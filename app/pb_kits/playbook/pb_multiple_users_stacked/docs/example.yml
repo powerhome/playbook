@@ -2,6 +2,8 @@ examples:
 
   rails:
   - multiple_users_stacked_default: Default
+  - multiple_users_stacked_dark: Dark
 
   react:
   - multiple_users_stacked_default: Default
+  - multiple_users_stacked_dark: Dark

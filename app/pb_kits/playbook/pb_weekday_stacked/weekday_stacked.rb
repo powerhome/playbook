@@ -13,9 +13,6 @@ module Playbook
                    values: %w[left center right],
                    default: "left"
 
-      prop :dark, type: Playbook::Props::Boolean,
-                  default: false
-
       prop :date, type: Playbook::Props::Date,
                   default: ::Date.current
                   

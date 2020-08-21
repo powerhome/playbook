@@ -10,4 +10,7 @@
   &[class^=pb_caption_kit_xs] {
     @include caption_xs;
   }
+  &[class*=dark]{
+    @include caption_dark
+  }
 }

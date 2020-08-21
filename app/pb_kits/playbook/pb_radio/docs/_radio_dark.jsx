@@ -3,7 +3,7 @@ import { Radio } from '../../'
 
 const RadioDark = () => {
   return (
-    <div>
+    <>
       <Radio
           dark
           label="Power"
@@ -25,7 +25,7 @@ const RadioDark = () => {
           name="Group1"
           value="Google"
       />
-    </div>
+    </>
   )
 }
 export default RadioDark

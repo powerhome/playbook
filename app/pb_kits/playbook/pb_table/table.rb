@@ -12,8 +12,6 @@ module Playbook
                   default: "md"
       prop :single_line, type: Playbook::Props::Boolean,
                          default: false
-      prop :dark, type: Playbook::Props::Boolean,
-                  default: false
       prop :disable_hover, type: Playbook::Props::Boolean,
                            default: false
       prop :data_table, type: Playbook::Props::Boolean,
@@ -27,17 +25,13 @@ module Playbook
 
       def classname
         generate_classname(
-          "pb_table", "table-#{size}", single_line_class, dark_class,
+          "pb_table", "table-#{size}", single_line_class, 
           disable_hover_class, container_class, data_table_class,
           "table-responsive-#{responsive}", separator: " "
         )
       end
 
     private
-
-      def dark_class
-        dark ? "dark" : nil
-      end
 
       def data_table_class
         data_table ? "data_table" : nil

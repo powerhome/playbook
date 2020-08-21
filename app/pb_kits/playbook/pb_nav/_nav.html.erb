@@ -1,7 +1,8 @@
 <%= content_tag(:div,
-    id: object.id,
+    aria: object.aria,
+    class: object.classname,
     data: object.data,
-    class: object.classname) do %>
+    id: object.id) do %>
   <% if object.title %>
     <%= content_tag(:div, class: "pb_nav_list_title") do %>
       <%= content_tag(:a, class: "pb_nav_list_item_link_text", href: object.link) do %>

@@ -4,13 +4,20 @@ examples:
   - avatar_action_button_default: Default
   - avatar_action_button_placement: Placement
   - avatar_action_button_actions: Actions
-  - avatar_action_button_tooltip: Tooltip
   - avatar_action_button_onclick: On Click
-  
+  - avatar_action_button_tooltip: Tooltip
+  - avatar_action_button_dark: Dark
+  - avatar_action_button_placement_dark: Placement Dark
+  - avatar_action_button_actions_dark: Actions Dark
+  - avatar_action_button_on_click_dark: On Click Dark
+  - avatar_action_button_tooltip_dark: Tooltip Dark
   
   react:
   - avatar_action_button_default: Default
   - avatar_action_button_placement: Placement
   - avatar_action_button_actions: Actions
   - avatar_action_button_on_click: On Click
-  
+  - avatar_action_button_dark: Dark
+  - avatar_action_button_placement_dark: Placement Dark
+  - avatar_action_button_actions_dark: Actions Dark
+  - avatar_action_button_on_click_dark: On Click Dark
