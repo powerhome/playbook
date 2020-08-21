@@ -74,7 +74,7 @@ const Select = ({
   const dataProps = buildDataProps(data)
   const optionsList = createOptions(options)
 
-  const classes = classnames(buildCss('pb_select'), className, globalProps(props))
+  const classes = classnames(buildCss('pb_select'), globalProps(props), className)
   const selectWrapperClass = classnames(buildCss('pb_select_kit_wrapper'), { error }, className)
 
   return (
