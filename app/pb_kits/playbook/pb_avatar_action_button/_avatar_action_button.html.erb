@@ -25,7 +25,7 @@
         image_url: object.image_url,
         class: "avatar_action"
       }) %>
-        <div class="icon">
+        <div class="icon <%= object.dark ? 'dark' : '' %> ">
           <%= pb_rails("icon", props: {
             dark: object.dark,
             icon: object.action_icons

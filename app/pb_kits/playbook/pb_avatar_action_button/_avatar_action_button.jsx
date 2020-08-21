@@ -75,7 +75,7 @@ const AvatarActionButton = (props: AvatarActionButtonProps) => {
             name={name}
             size={size}
         />
-        <div className="icon">
+        <div className={`icon ${dark ? 'dark' : ''}`}>
           <Icon
               dark={dark}
               icon={icons[action]}
