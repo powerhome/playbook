@@ -4,9 +4,11 @@ examples:
   - progress_pills_default: Default
   - progress_pills_status: Status
   - progress_pills_dark: Dark
+  - progress_pills_status_dark: Status Dark
 
 
   react:
   - progress_pills_default: Default
   - progress_pills_status: Status
   - progress_pills_dark: Dark
+  - progress_pills_status_dark: Status Dark
