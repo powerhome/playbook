@@ -10,11 +10,11 @@ import { globalProps } from '../utilities/globalProps.js'
 
 type HashtagProps = {
   aria?: object,
-  className?: String,
+  className?: string,
   dark?: boolean,
-  data?: String,
-  id?: String,
-  text?: String,
+  data?: string,
+  id?: string,
+  text?: string,
   type: "default" | "home" | "project" | "appointment",
   url?: string,
 }
