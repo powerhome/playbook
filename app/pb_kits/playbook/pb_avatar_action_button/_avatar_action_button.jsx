@@ -51,8 +51,8 @@ const AvatarActionButton = (props: AvatarActionButtonProps) => {
     [action],
     [placement],
     [size]),
-  className,
-  globalProps(props))
+  globalProps(props),
+  className)
 
   const icons = {
     add: 'plus-circle',
@@ -75,11 +75,12 @@ const AvatarActionButton = (props: AvatarActionButtonProps) => {
             name={name}
             size={size}
         />
-        <Icon
-            className="icon"
-            dark={dark}
-            icon={icons[action]}
-        />
+        <div className="icon">
+          <Icon
+              dark={dark}
+              icon={icons[action]}
+          />
+        </div>
       </a>
     </div>
   )
