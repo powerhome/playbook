@@ -55,7 +55,6 @@ const Radio = ({
         <Else />
         <input
             {...props}
-            defaultChecked={checked}
             id={id}
             name={name}
             onChange={onChange}
