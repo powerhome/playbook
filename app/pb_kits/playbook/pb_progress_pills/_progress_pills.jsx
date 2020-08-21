@@ -58,7 +58,7 @@ const ProgressPills = (props: ProgressPillsProps) => {
 
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
-  const classes = classnames(buildCss('pb_progress_pills_kit'), className, globalProps(props))
+  const classes = classnames(buildCss('pb_progress_pills_kit'), globalProps(props), className)
 
   return (
     <div
