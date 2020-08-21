@@ -3,7 +3,7 @@
 import React from 'react'
 import classnames from 'classnames'
 import { globalProps } from '../utilities/globalProps.js'
-import { buildCss } from '../utilities/props'
+import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
 
 import { Caption, Title } from '../'
 
@@ -11,9 +11,12 @@ import DateTime from '../pb_kit/dateTime.js'
 
 type WeekdayStackedProps = {
   align?: "left" | "center" | "right",
+  aria?: object,
   className?: string,
   dark?: boolean,
+  data?: object,
   date: date,
+  id?: string,
   variant?: "day_only" | "month_day" | "expanded",
   compact?: boolean,
   id?: string,
@@ -41,19 +44,30 @@ const getFormattedDate = (date, variant) => {
 const WeekdayStacked = (props: WeekdayStackedProps) => {
   const {
     align = 'left',
+    aria = {},
     className,
     dark = false,
+    data = {},
     date = new Date(),
+    id,
     variant = 'month_day',
     compact = false,
   } = props
+
+  const ariaProps = buildAriaProps(aria)
+  const dataProps = buildDataProps(data)
+  const classes = classnames(
+    buildCss('pb_weekday_stacked_kit', align),
+    globalProps(props),
+    className
+  )
+
   return (
     <div
-        className={classnames(
-        buildCss('pb_weekday_stacked_kit', align),
-        className,
-        globalProps(props)
-      )}
+        {...ariaProps}
+        {...dataProps}
+        className={classes}
+        id={id}
     >
       <Caption dark={dark}>{getDayOfWeek(date, compact)}</Caption>
       <Title
