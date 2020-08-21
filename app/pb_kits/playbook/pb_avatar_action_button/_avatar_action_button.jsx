@@ -10,10 +10,13 @@ import {
   buildDataProps,
 } from '../utilities/props'
 
+import { globalProps } from '../utilities/globalProps.js'
+
 type AvatarActionButtonProps = {
   action?: string,
   aria: Object,
   className?: string,
+  dark?: boolean,
   data?: Object,
   id?: string,
   imageUrl?: string,
@@ -24,28 +27,32 @@ type AvatarActionButtonProps = {
   size?: string,
 }
 
-const AvatarActionButton = ({
-  action = 'add',
-  aria = {},
-  className,
-  data = {},
-  id,
-  imageUrl,
-  linkUrl,
-  name,
-  onClick,
-  placement = 'bottom left',
-  size = 'md',
-}: AvatarActionButtonProps) => {
+const AvatarActionButton = (props: AvatarActionButtonProps) => {
+  const {
+    action = 'add',
+    aria = {},
+    className,
+    dark = false,
+    data = {},
+    id,
+    imageUrl,
+    linkUrl,
+    name,
+    onClick,
+    placement = 'bottom left',
+    size = 'md',
+  } = props
+
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
 
-  const css = buildCss({
-    'pb_avatar_action_button_kit': true,
-    [action]: true,
-    [placement]: true,
-    [size]: true,
-  })
+  const classes = classnames(buildCss(
+    'pb_avatar_action_button_kit',
+    [action],
+    [placement],
+    [size]),
+  globalProps(props),
+  className)
 
   const icons = {
     add: 'plus-circle',
@@ -56,7 +63,7 @@ const AvatarActionButton = ({
     <div
         {...ariaProps}
         {...dataProps}
-        className={classnames(css, className)}
+        className={classes}
         id={id}
     >
       <a
@@ -70,6 +77,7 @@ const AvatarActionButton = ({
         />
         <div className="icon">
           <Icon
+              dark={dark}
               icon={icons[action]}
           />
         </div>
