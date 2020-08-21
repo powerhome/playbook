@@ -10,6 +10,12 @@ const TitleLight = () => {
           size={4}
           tag="h4"
           text="Title 4"
+          variant="link"
+      />
+      <Title
+          size={4}
+          tag="h4"
+          text="Title 4"
       />
       <Title
           size={3}
