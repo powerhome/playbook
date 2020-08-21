@@ -75,7 +75,10 @@ const User = (props: UserProps) => {
             size={size == 'lg' ? 3 : 4}
             text={name}
         />
-        <Body color="light" dark={dark}>
+        <Body
+            color="light"
+            dark={dark}
+        >
           {territory === '' ? title : `${territory} • ${title}`}
         </Body>
       </div>
