@@ -49,8 +49,7 @@ const LabelValue = (props: LabelValueProps) => {
   const dataProps = buildDataProps(data)
   const formattedDate = new DateTime({ value: date })
   const variantClass = variant === 'details' ? 'details' : ''
-  const classes = classnames(buildCss('pb_label_value_kit', variantClass), className,
-    globalProps(props))
+  const classes = classnames(buildCss('pb_label_value_kit', variantClass), globalProps(props), className)
 
   return (
     <div
