@@ -2,6 +2,21 @@
     aria: object.aria,
     class: object.classname,
     data: object.data,
-    id: object.id) do %>
-  <span>CHECKBOX CARD CONTENT</span>
+      id: object.id) do %>
+
+
+
+  <%= pb_rails("selectable_card", props: {
+    input_id: object.name,
+    name: object.name,
+    value:  object.value || object.name,
+    checked: object.checked,
+    dark: object.dark
+  }) do %>
+      <span class="pb_checkbox_checkmark">
+        <%= pb_rails("icon", props: { icon: "check", id: "check_icon", classname: "check_icon", fixed_width: true}) %>
+      </span>
+      <%= pb_rails("body", props: {  text: object.text, dark: object.dark }) %>
+  <% end %>
+
 <% end %>
