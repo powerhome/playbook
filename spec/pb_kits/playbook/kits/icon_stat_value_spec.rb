@@ -7,5 +7,6 @@ RSpec.describe Playbook::PbIcon stat value::Icon stat value do
 
   it { is_expected.to define_partial }
 
+
   # Do not leave this file blank. Use other spec files for example tests.
 end
