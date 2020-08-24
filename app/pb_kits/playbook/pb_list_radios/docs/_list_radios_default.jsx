@@ -11,7 +11,6 @@ return (
         <ListRadioItem
           defaultChecked={false}
           name="custom1"
-          value="Unselected"
           label="Unselected"
         />
         </ListItem>
