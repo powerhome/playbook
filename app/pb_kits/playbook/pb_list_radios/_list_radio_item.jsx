@@ -1,6 +1,6 @@
 /* @flow */
 
-import React, { type Node } from 'react'
+import React, { Node } from 'react'
 import classnames from 'classnames'
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
 import { globalProps } from '../utilities/globalProps.js'
@@ -21,29 +21,44 @@ type ListRadioItemProps = {
   onChange: (boolean)=>void,
 }
 
-const ListRadioItem = (props: ListRadioItemProps) => {
-  const {
-    aria = {},
+const ListRadioItem = ({
+  aria = {},
     checked = false,
     className,
+    children,
+    data = {},
+    id,
     text = '',
     name = '',
     value = '',
     tabIndex,
     onChange = () => {},
-  } = props
+  ...props
+}: ListRadioItemProps) => {
+  const ariaProps = buildAriaProps(aria)
+  const dataProps = buildDataProps(data)
+  const classes = classnames(buildCss('pb_list_radios_kit'), globalProps(props), className)
 
   return (
-    <div>
-        <ListItem>
-          <Radio
-            {...props}
-            checked={checked}
-            onChange={onChange}
-            />
-        </ListItem>
+    <div
+      {...ariaProps}
+      {...dataProps}
+      className={classes}
+      htmlFor={id}
+    >
+        <Radio
+          {...props}
+          name={name}
+          text={text}
+          onChange={onChange}
+          value={value}
+          id={id}
+          type="radio"
+        />
+        {children}
     </div>
   )
+
 }
 
 export default ListRadioItem

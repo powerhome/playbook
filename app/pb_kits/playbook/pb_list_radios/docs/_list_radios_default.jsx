@@ -1,24 +1,41 @@
 import React, {useState} from 'react'
-import { ListRadios, ListRadioItem } from '../../'
+import { ListRadios, ListRadioItem, ListItem } from '../../'
 
 
 const ListRadiosDefault = () => {
 
-  const [choice, setChoice] = useState('unselected')
-
-  const handleOnChange = ({ target }) => {
-    setChoice(target.value)
-  }
-
 return (
     <div>
       <ListRadios >
-        <ListRadioItem checked={choice === 'unselected'} onChange={handleOnChange} name="custom1">
-          Unselected
-        </ListRadioItem>
-        <ListRadioItem>Selected</ListRadioItem>
-        <ListRadioItem>Hover</ListRadioItem>
-        <ListRadioItem>Unselected Last</ListRadioItem>
+        <ListItem>
+        <ListRadioItem
+          defaultChecked={false}
+          name="custom1"
+          value="Unselected"
+          label="Unselected"
+        />
+        </ListItem>
+        <ListItem>
+        <ListRadioItem
+          defaultChecked
+          name="custom1"
+          label="Selected"
+        />
+        </ListItem>
+        <ListItem>
+        <ListRadioItem
+          defaultChecked={false}
+          name="custom1"
+          label="Hover"
+        />
+        </ListItem>
+        <ListItem>
+        <ListRadioItem
+          defaultChecked={false}
+          name="custom1"
+          label="Unselected Last"
+        />
+        </ListItem>
       </ListRadios>
     </div>
   )
