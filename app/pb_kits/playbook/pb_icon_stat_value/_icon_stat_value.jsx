@@ -2,7 +2,7 @@
 
 import React from 'react'
 import classnames from 'classnames'
-import { Title, IconCircle, Caption } from '../'
+import { Caption, IconCircle, Title } from '../'
 import { globalProps } from '../utilities/globalProps.js'
 
 type IconStatValueProps = {
@@ -11,6 +11,7 @@ type IconStatValueProps = {
   unit?: string,
   value: string | number,
   icon: string,
+  text: string,
   size?: "xs" | "sm" | "md" | "lg" | "xl",
   variant?: | "default"
     | "royal"
@@ -30,7 +31,7 @@ const IconStatValue = (props: IconStatValueProps) => {
     value = 0,
     icon,
     text,
-    variant
+    variant,
   } = props
 
   const displayValue = function(value) {
@@ -45,13 +46,16 @@ const IconStatValue = (props: IconStatValueProps) => {
   }
 
   const displayIcon = () => {
-    return(
-      <IconCircle icon={icon} variant={value} />
+    return (
+      <IconCircle
+          icon={icon}
+          variant={value}
+      />
     )
   }
 
   const statCaption = () => {
-    return(
+    return (
       <Caption text={text} />
     )
   }
@@ -62,9 +66,9 @@ const IconStatValue = (props: IconStatValueProps) => {
         id={id}
     >
       <div className="">
-      {displayIcon(icon, variant)}
-      {displayValue(value, unit)}
-      {statCaption(text)}
+        {displayIcon(icon, variant)}
+        {displayValue(value, unit)}
+        {statCaption(text)}
       </div>
     </div>
   )

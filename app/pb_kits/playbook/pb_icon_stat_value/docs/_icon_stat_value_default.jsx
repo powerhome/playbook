@@ -4,14 +4,35 @@ import { IconStatValue } from '../../'
 const IconStatValueDefault = () => {
   return (
     <div>
-       <IconStatValue value={64.18} unit={"%"} text="ELECTRIC" icon="user" variant="teal" />
-        <br></br>
-       <IconStatValue value={158.3} text="DISTANCE DRIVEN" icon="lightbulb-on" variant="teal" />
-       <br></br>
-       <br></br>
-       <IconStatValue value={158.3} text="DISTANCE DRIVEN" icon="user" variant="teal" />
-       <br></br>
-       <IconStatValue value={158.3} text="DISTANCE DRIVEN" icon="lightbulb-on" variant="teal" />
+      <IconStatValue
+          icon="user"
+          text="ELECTRIC"
+          unit="%"
+          value={64.18}
+          variant="teal"
+      />
+      <br />
+      <IconStatValue
+          icon="lightbulb-on"
+          text="DISTANCE DRIVEN"
+          value={158.3}
+          variant="teal"
+      />
+      <br />
+      <br />
+      <IconStatValue
+          icon="user"
+          text="DISTANCE DRIVEN"
+          value={158.3}
+          variant="teal"
+      />
+      <br />
+      <IconStatValue
+          icon="lightbulb-on"
+          text="DISTANCE DRIVEN"
+          value={158.3}
+          variant="teal"
+      />
     </div>
 
   )
