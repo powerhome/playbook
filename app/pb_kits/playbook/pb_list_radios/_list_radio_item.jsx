@@ -46,16 +46,16 @@ const ListRadioItem = ({
       className={classes}
       htmlFor={id}
     >
-        <Radio
-          {...props}
-          name={name}
-          text={text}
-          onChange={onChange}
-          value={value}
-          id={id}
-          type="radio"
-        />
-        {children}
+      <Radio
+        {...props}
+        name={name}
+        text={text}
+        onChange={onChange}
+        value={value}
+        id={id}
+        type="radio"
+      />
+      {children}
     </div>
   )
 

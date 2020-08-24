@@ -1,9 +1,10 @@
 examples:
-  
+
   rails:
   - list_radios_default: Default
-  
-  
+
+
   react:
   - list_radios_default: Default
-  
+  - list_radios_dark: Dark Default
+

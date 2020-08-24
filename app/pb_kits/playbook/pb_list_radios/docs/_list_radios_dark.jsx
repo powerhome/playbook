@@ -6,7 +6,9 @@ const ListRadiosDefault = () => {
 
 return (
     <div>
-      <ListRadios >
+      <ListRadios
+        dark
+      >
         <ListItem>
         <ListRadioItem
           defaultChecked={false}
