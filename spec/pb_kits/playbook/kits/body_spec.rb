@@ -20,11 +20,11 @@ RSpec.describe Playbook::PbBody::Body do
 
   describe "#classname" do
     it "returns namespaced class name", :aggregate_failures do
-      expect(subject.new({}).classname).to eq "pb_body_kit"
-      expect(subject.new(classname: "additional_class").classname).to eq "pb_body_kit additional_class"
-      expect(subject.new(dark: true).classname).to eq "pb_body_kit dark"
+      expect(subject.new({}).classname).to eq "pb_body_kit_default"
+      expect(subject.new(classname: "additional_class").classname).to eq "pb_body_kit_default additional_class"
+      expect(subject.new(dark: true).classname).to eq "pb_body_kit_default dark"
       expect(subject.new(dark: true, color: "light").classname).to eq "pb_body_kit_light dark"
-      expect(subject.new(status: "negative").classname).to eq "pb_body_kit_negative"
+      expect(subject.new(status: "negative").classname).to eq "pb_body_kit_default_negative"
     end
   end
 end

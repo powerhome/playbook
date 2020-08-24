@@ -8,7 +8,7 @@ module Playbook
       partial "pb_progress_step/progress_step"
 
       prop :orientation, type: Playbook::Props::Enum,
-                         values: %w[vertical horizontal child],
+                         values: %w[vertical horizontal],
                          default: "horizontal"
       prop :icon, type: Playbook::Props::Boolean,
                   default: false
