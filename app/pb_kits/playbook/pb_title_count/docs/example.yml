@@ -2,7 +2,11 @@ examples:
   rails:
     - title_count_default: Default
     - title_count_align: Align
+    - title_count_dark: Dark
+    - title_count_align_dark: Dark
 
   react:
     - title_count_default: Default
     - title_count_align: Align
+    - title_count_dark: Dark
+    - title_count_align_dark: Dark

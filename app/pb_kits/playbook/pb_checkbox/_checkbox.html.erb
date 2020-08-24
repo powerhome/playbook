@@ -11,6 +11,6 @@
       <%= pb_rails("icon", props: { icon: "check", id: "check_icon", classname: "check_icon", fixed_width: true}) %>
     </span>
     <span class="pb_checkbox_label">
-      <%= pb_rails("body", props: { status: object.checkbox_label_status, text: object.text, dark: object.dark }) %>
+      <%= pb_rails("body", props: { status: object.checkbox_label_status, text: object.text, dark: object.dark, margin_right: object.form_spacing ? "xs" : "" }) %>
     </span>
 <% end %>

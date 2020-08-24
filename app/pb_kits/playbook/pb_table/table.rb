@@ -12,8 +12,6 @@ module Playbook
                   default: "md"
       prop :single_line, type: Playbook::Props::Boolean,
                          default: false
-      prop :dark, type: Playbook::Props::Boolean,
-                  default: false
       prop :disable_hover, type: Playbook::Props::Boolean,
                            default: false
       prop :data_table, type: Playbook::Props::Boolean,
@@ -35,9 +33,9 @@ module Playbook
 
     private
 
-      def dark_class
-        dark ? "dark" : nil
-      end
+      def dark_class	
+        dark ? "table-dark" : nil	
+      end	
 
       def data_table_class
         data_table ? "data_table" : nil

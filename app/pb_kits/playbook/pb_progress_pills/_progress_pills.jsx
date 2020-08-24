@@ -37,7 +37,7 @@ const showSteps = (steps, active, dark) => {
 const ProgressPill = ({ active, dark, step }: ProgressPillProps) => (
   <div
       className={`pb_progress_pill${step <= active ? '_active' : '_inactive'}${
-      dark ? '_dark' : ''
+      dark ? ' dark' : ''
     }`}
       key={step}
   />
@@ -55,11 +55,10 @@ const ProgressPills = (props: ProgressPillsProps) => {
     value,
     dark = false,
   } = props
-  const darkClass = dark ? '_dark' : ''
 
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
-  const classes = classnames(buildCss('pb_progress_pills_kit', darkClass), className, globalProps(props))
+  const classes = classnames(buildCss('pb_progress_pills_kit'), globalProps(props), className)
 
   return (
     <div

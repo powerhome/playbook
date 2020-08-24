@@ -18,6 +18,7 @@ RSpec.describe Playbook::PbUserBadge::UserBadge do
     it "returns namespaced class name", :aggregate_failures do
       expect(subject.new({}).classname).to eq "pb_user_badge_kit_md"
       expect(subject.new(size: "lg").classname).to eq "pb_user_badge_kit_lg"
+      expect(subject.new(size: "lg", dark: true).classname).to eq "pb_user_badge_kit_lg dark"
     end
   end
 end
