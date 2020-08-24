@@ -1,0 +1,15 @@
+<%= pb_rails("card", props: {selected: true}) do %>
+  <%= pb_rails("radio", props: {
+    text: "",
+    checked: true
+  }) %>
+<% end %>
+
+<br>
+
+<%= pb_rails("card", props: {selected: false}) do %>
+  <%= pb_rails("radio", props: {
+    text: "",
+    checked: false
+  }) %>
+<% end %>

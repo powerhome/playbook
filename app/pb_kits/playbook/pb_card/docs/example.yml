@@ -10,6 +10,7 @@ examples:
   - card_content: Content Size
   - card_separator: Separator Card
   - card_border_none: No Border
+  - card_radio: Radio Cards
   react:
   - card_light: Default
   - card_dark: Dark Cards
@@ -21,3 +22,4 @@ examples:
   - card_content: Content Size
   - card_separator: Separator Card
   - card_border_none: No Border
+  - card_radio: Radio Cards
