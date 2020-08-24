@@ -24,7 +24,7 @@ const Background = (props: BackgroundProps) => {
     className,
     data = {},
     id,
-    image_url = '',
+    image_url = 'test',
     tag = "div",
     children,
     color
@@ -36,6 +36,7 @@ const Background = (props: BackgroundProps) => {
   const Tag = `${tag}`
 
   return (
+
     <Tag
         {...ariaProps}
         {...dataProps}
@@ -43,10 +44,10 @@ const Background = (props: BackgroundProps) => {
         className={classes + ' ' + `pb--color_${color}`}
         data-src={image_url}
         id={id}
-        src={image_url}
     >
-      {children}
+      {children || <Image url={image_url}>{children}</Image>}
     </Tag>
+
   )
 }
 
