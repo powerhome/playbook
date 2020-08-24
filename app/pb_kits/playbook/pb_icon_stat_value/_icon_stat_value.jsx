@@ -31,7 +31,7 @@ const IconStatValue = (props: IconStatValueProps) => {
     value = 0,
     icon,
     text,
-    variant,
+    variant
   } = props
 
   const displayValue = function(value) {
@@ -49,7 +49,7 @@ const IconStatValue = (props: IconStatValueProps) => {
     return (
       <IconCircle
           icon={icon}
-          variant={value}
+          variant={variant}
       />
     )
   }

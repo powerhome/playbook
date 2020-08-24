@@ -9,7 +9,7 @@ const IconStatValueDefault = () => {
           text="ELECTRIC"
           unit="%"
           value={64.18}
-          variant="teal"
+          variant="yellow"
       />
       <br />
       <IconStatValue
@@ -24,14 +24,14 @@ const IconStatValueDefault = () => {
           icon="user"
           text="DISTANCE DRIVEN"
           value={158.3}
-          variant="teal"
+          variant="purple"
       />
       <br />
       <IconStatValue
           icon="lightbulb-on"
           text="DISTANCE DRIVEN"
           value={158.3}
-          variant="teal"
+          variant="royal"
       />
     </div>
 
