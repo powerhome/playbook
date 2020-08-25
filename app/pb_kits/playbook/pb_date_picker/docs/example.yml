@@ -11,6 +11,7 @@ examples:
   - date_picker_error: Error
   - date_picker_hooks: Hooks
   - date_picker_read_only: Read Only
+  - date_picker_year_range: Year Range
   
   
   react:
@@ -24,4 +25,5 @@ examples:
   - date_picker_error: Error
   - date_picker_hooks: Hooks
   - date_picker_read_only: Read Only
+  - date_picker_year_range: Year Range
   

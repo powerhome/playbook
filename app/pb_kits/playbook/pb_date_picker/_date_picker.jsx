@@ -25,9 +25,9 @@ type DatePickerProps = {
   minDate: String,
   mode?: String,
   name: String,
-  onChange: (e) => void,
   pickerId?: String,
   readOnly?: Boolean,
+  yearRange?: Array,
 }
 const DatePicker = (props: DatePickerProps) => {
   const {
@@ -47,9 +47,9 @@ const DatePicker = (props: DatePickerProps) => {
     minDate,
     mode = 'single',
     name,
-    onChange,
     pickerId,
     readOnly = false,
+    yearRange = [ 1900, 2100 ],
   } = props
 
   const ariaProps = buildAriaProps(aria)
@@ -71,10 +71,10 @@ const DatePicker = (props: DatePickerProps) => {
       maxDate: maxDate,
       minDate: minDate,
       mode: mode,
-      onChange: onChange,
       pickerId: pickerId,
       propModel: 'React',
       readOnly: readOnly,
+      yearRange: yearRange,
     })
   }, [])
 

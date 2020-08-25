@@ -10,9 +10,9 @@ const datePickerHelper = (config) => {
     maxDate,
     minDate,
     mode,
-    onChange,
     pickerId,
     readOnly,
+    yearRange,
   } = config
 
   const defaultDateGetter = () => {
@@ -86,7 +86,6 @@ const datePickerHelper = (config) => {
     minDate: minDate,
     mode: mode,
     nextArrow: '<i class="far fa-angle-right"></i>',
-    onChange: onChange || [],
     onOpen: [() => {
       calendarResizer()
       window.addEventListener('resize', calendarResizer)
@@ -108,7 +107,7 @@ const datePickerHelper = (config) => {
 
   // create html option tags for desired years
   let years = ''
-  for (let year = 2099; year >= 1900; year--) {
+  for (let year = yearRange[1]; year >= yearRange[0]; year--) {
     years += `<option value="${year}">${year}</option>`
   }
 
@@ -147,6 +146,9 @@ const datePickerHelper = (config) => {
       dropdown.value = picker.currentYear
     }
   })
+
+  picker.monthElements[0].insertAdjacentHTML('afterend', '<i class="far fa-angle-down month-dropdown-icon"></i>')
+  dropdown.insertAdjacentHTML('afterend', '<i class="far fa-angle-down year-dropdown-icon" id="test-id"></i>')
 }
 
 export default datePickerHelper

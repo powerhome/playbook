@@ -32,6 +32,8 @@ module Playbook
                        default: false
       prop :required, type: Playbook::Props::Boolean,
                       default: false
+      prop :year_range, type: Playbook::Props::Array,
+                        default: [1900, 2100]
 
       def classname
         generate_classname("pb_date_picker_kit")
@@ -49,6 +51,7 @@ module Playbook
           mode: mode,
           pickerId: picker_id,
           readOnly: read_only,
+          yearRange: year_range,
         }.to_json.html_safe
       end
 

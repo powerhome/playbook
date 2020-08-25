@@ -16,9 +16,14 @@
     
     .flatpickr-wrapper {
       display: block;
+      input {
+        text-overflow: ellipsis;
+        padding-right: 45px !important;
+      }
       input::placeholder {
         @include pb_body_light;
       }
+      
   
       > input:first-child {
         @include pb_textarea_light;
@@ -32,7 +37,24 @@
         transition: background-color 5000s ease-in-out 0s;
       }
     }
-
+    // Icon for select tags
+    .month-dropdown-icon {
+      align-self: center;
+      margin-top: 5px;
+      width: 10px;
+      position: relative;
+      right: 10px;
+      pointer-events: none;
+    }
+    .year-dropdown-icon {
+      align-self: center;
+      margin-top: 5px;
+      width: 10px;
+      position: relative;
+      right: 12px;
+      pointer-events: none;
+    }
+    // calendar icon styles
     .cal_icon_wrapper {
       position: absolute;
       top: 1px;
@@ -45,37 +67,51 @@
       justify-content: center;
       padding-left: 11px;
       color: $text_lt_light;
-      :hover {
+      &:hover {
         cursor: pointer;
       }
     }
-
-    // date-picker styles
+    .cal_icon {
+      width: 20px;
+    }
 
     // Header Styles
+    $header_height: 40px;
 
     .flatpickr-months {
       // padding: 5px;
       // padding-bottom: 5px;
       border-bottom: solid 1px $border_light;
     }
+    .flatpickr-month {
+      height: $header_height;
+    }
     .flatpickr-current-month {
       left: 10px;
       display: flex;
-      justify-content: flex-start;
+      // justify-content: flex-start;
       padding-top: 0px;
     }
     .flatpickr-monthDropdown-months {
+      appearance: none;
       padding-left: 0px;
+      padding-right: 14px;
       margin-left: 15px;
-      margin-right: 5px;
+      height: $header_height;
+      // min-width: 101px;
+      &:hover {
+        background-color: white;
+      }
     }
     .numInputWrapper {
       display: contents;
       .numInput {
+        appearance: none;
         border-left: solid 1px $border_light;
-        margin-left: 8px;
-        padding-left: 27px;
+        padding-left: 22.5px;
+        padding-right: 14px;
+        margin-left: 10px;
+        height: $header_height;
         &:focus {
           outline: none;
         }
@@ -86,20 +122,36 @@
     }
 
     .flatpickr-prev-month {
-      left: 255px !important;
-      padding-right: 0px;
-      padding-top: 6px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      left: 234px !important;
+      padding-right: 10px;
       border-left: solid 1px $border_light;
+      height: $header_height;
       // svg path {
       //   fill: $neutral;
       // }
+      &:hover{
+        svg {
+          fill: inherit;
+        }
+      }
     }
     .flatpickr-next-month {
-      padding-left: 0px;
-      padding-top: 6px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding-left: 10px;
+      height: $header_height;
       // svg path {
       //   fill: $neutral;
       // }
+      &:hover{
+        svg {
+          fill: inherit;
+        }
+      }
     }
 
     div.flatpickr-weekdays {
@@ -107,12 +159,15 @@
     }
     span.flatpickr-weekday {
       @include caption;
+      user-select: none;
     }
     // Month-Year Select Styles
     select.flatpickr-monthDropdown-months {
       font-size: 16px;
       font-weight: 600;
       color: #242B42;
+      margin-top: 0px;
+      margin-bottom: 0px;
     }
 
     select.numInput {
@@ -121,7 +176,7 @@
       color: #242B42;
       border: 0px;
       font-family: inherit;
-      // margin-left: 15px;
+      // width: 77px;
     }
 
     // Calendar Shadow
@@ -130,11 +185,15 @@
     }
 
     // Day and Range Styles
-    .flatpickr-day:hover {
-      background-color: rgba($color: $neutral, $alpha: 0.2);
-      border-color: rgba($color: $neutral, $alpha: 0.2);
-      box-shadow: $shadow_deep;
+    .flatpickr-day {
+      user-select: none;
+      &:hover {
+        background-color: rgba($color: $neutral, $alpha: 0.2);
+        border-color: rgba($color: $neutral, $alpha: 0.2);
+        box-shadow: $shadow_deep;
+      }
     }
+    
     .flatpickr-day.today {
       font-weight: 600;
       color: $charcoal;

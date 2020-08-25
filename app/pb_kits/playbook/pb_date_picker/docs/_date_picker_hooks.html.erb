@@ -1,19 +1,37 @@
 <%= pb_rails("date_picker", props: {
   label: "onChange",
-  picker_id: "date-picker-hooks"
+  picker_id: "date-picker-hooks-onchange"
 }) %>
 
 <%= javascript_tag do %>
   window.addEventListener("DOMContentLoaded", () => {
     <%# Assign flatpickr instance to variable %>
-    const fp = document.querySelector("#date-picker-hooks")._flatpickr
+    const fp = document.querySelector("#date-picker-hooks-onchange")._flatpickr
 
     <%# Define Hook %>
-    const alertHook = () => {
-      alert('changed')
+    const changeHook = () => {
+      alert('date changed')
     }
+    <%# Push one or more hooks to onChange config array %>
+    fp.config.onChange.push(changeHook)
+  })
+<% end %>
 
-    <%# Push one or many hooks to onChange config array %>
-    fp.config.onChange.push(alertHook)
+<%= pb_rails("date_picker", props: {
+  label: "onOpen",
+  picker_id: "date-picker-hooks-onopen"
+}) %>
+
+<%= javascript_tag do %>
+  window.addEventListener("DOMContentLoaded", () => {
+    <%# Assign flatpickr instance to variable %>
+    const fp = document.querySelector("#date-picker-hooks-onopen")._flatpickr
+
+    <%# Define Hook %>
+    const openHook = () => {
+      alert('calendar opened')
+    }
+    <%# Push one or more hooks to onOpen config array %>
+    fp.config.onOpen.push(openHook)
   })
 <% end %>
