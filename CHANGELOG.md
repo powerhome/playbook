@@ -1,8 +1,70 @@
 # Changelog
 
+
+## [6.3.0](https://github.com/powerhome/playbook/tree/6.3.0) (2020-08-24)
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/6.2.1...6.3.0)
+
+**Implemented enhancements:**
+
+- Fix caption dark [\#1015](https://github.com/powerhome/playbook/pull/1015) ([kre8sions](https://github.com/kre8sions))
+- Grouping Badge, Hashtag, and Pill kits [\#1011](https://github.com/powerhome/playbook/pull/1011) ([christinaatai](https://github.com/christinaatai))
+- Online status [\#1010](https://github.com/powerhome/playbook/pull/1010) ([jasperfurniss](https://github.com/jasperfurniss))
+- Refactor Progress Step & added Tracker variant [\#1007](https://github.com/powerhome/playbook/pull/1007) ([kre8sions](https://github.com/kre8sions))
+- Add spacing docs [\#1005](https://github.com/powerhome/playbook/pull/1005) ([jasperfurniss](https://github.com/jasperfurniss))
+- Create popover dark mode [\#993](https://github.com/powerhome/playbook/pull/993) ([kellyeryan](https://github.com/kellyeryan))
+- Create Pill dark mode [\#992](https://github.com/powerhome/playbook/pull/992) ([kellyeryan](https://github.com/kellyeryan))
+- Create online status dark mode [\#991](https://github.com/powerhome/playbook/pull/991) ([kellyeryan](https://github.com/kellyeryan))
+- Add props to Nav [\#989](https://github.com/powerhome/playbook/pull/989) ([kellyeryan](https://github.com/kellyeryan))
+- Multiple users stacked dark mode [\#988](https://github.com/powerhome/playbook/pull/988) ([kellyeryan](https://github.com/kellyeryan))
+- Add dark mode to Multiple Users [\#987](https://github.com/powerhome/playbook/pull/987) ([kellyeryan](https://github.com/kellyeryan))
+- Table dark mode [\#986](https://github.com/powerhome/playbook/pull/986) ([kellyeryan](https://github.com/kellyeryan))
+- Update Weekday Stacked dark mode and add props [\#985](https://github.com/powerhome/playbook/pull/985) ([kellyeryan](https://github.com/kellyeryan))
+- Add User Badge dark mode [\#984](https://github.com/powerhome/playbook/pull/984) ([kellyeryan](https://github.com/kellyeryan))
+- Progress Pill kit dark mode update [\#982](https://github.com/powerhome/playbook/pull/982) ([kellyeryan](https://github.com/kellyeryan))
+- Add dark mode to Fixed Confirmation Toast [\#981](https://github.com/powerhome/playbook/pull/981) ([kellyeryan](https://github.com/kellyeryan))
+- Add dark mode to Avatar Action Button kit [\#980](https://github.com/powerhome/playbook/pull/980) ([kellyeryan](https://github.com/kellyeryan))
+- Add dark mode to Icon Value [\#974](https://github.com/powerhome/playbook/pull/974) ([kellyeryan](https://github.com/kellyeryan))
+- Add Dark Mode to the Icon Circle [\#973](https://github.com/powerhome/playbook/pull/973) ([kellyeryan](https://github.com/kellyeryan))
+- Create dark mode for Title Count [\#971](https://github.com/powerhome/playbook/pull/971) ([kellyeryan](https://github.com/kellyeryan))
+- Legend kit dark mode [\#970](https://github.com/powerhome/playbook/pull/970) ([kellyeryan](https://github.com/kellyeryan))
+- Update label value dark mode [\#968](https://github.com/powerhome/playbook/pull/968) ([kellyeryan](https://github.com/kellyeryan))
+- Update dark mode for Hashtag kit [\#967](https://github.com/powerhome/playbook/pull/967) ([kellyeryan](https://github.com/kellyeryan))
+- Update dark mode in User kit [\#965](https://github.com/powerhome/playbook/pull/965) ([kellyeryan](https://github.com/kellyeryan))
+- Radio dark mode [\#962](https://github.com/powerhome/playbook/pull/962) ([kellyeryan](https://github.com/kellyeryan))
+- Update select dark mode [\#961](https://github.com/powerhome/playbook/pull/961) ([kellyeryan](https://github.com/kellyeryan))
+- Add checkbox to form helper [\#953](https://github.com/powerhome/playbook/pull/953) ([bh247484](https://github.com/bh247484))
+
+**Fixed bugs:**
+
+- Fix tooltip bug [\#978](https://github.com/powerhome/playbook/pull/978) ([kellyeryan](https://github.com/kellyeryan))
+
+## [6.2.1](https://github.com/powerhome/playbook/tree/6.2.1) (2020-08-19)
+
+- Hot fixes [\#1016](https://github.com/powerhome/playbook/pull/1016) ([jasperfurniss](https://github.com/jasperfurniss))
+
+
 ## [[v6.2.0] 2020-8-13](https://github.com/powerhome/playbook/tree/HEAD)
 
 [Full Changelog](https://github.com/powerhome/playbook/compare/6.1.0...HEAD)
+
+**Implemented enhancements:**
+
+- Remove Changelog Checklist [\#990](https://github.com/powerhome/playbook/pull/990) ([jasperfurniss](https://github.com/jasperfurniss))
+- Update card header kit so that it passes product colors [\#983](https://github.com/powerhome/playbook/pull/983) ([christinaatai](https://github.com/christinaatai))
+- NUX-1286 - Update dark props for Textarea kit [\#966](https://github.com/powerhome/playbook/pull/966) ([coleerikson](https://github.com/coleerikson))
+- NUX-1286 - Refactor dark props for text input [\#964](https://github.com/powerhome/playbook/pull/964) ([coleerikson](https://github.com/coleerikson))
+- NUX-1286 - Global Props for Dark on typeahead [\#963](https://github.com/powerhome/playbook/pull/963) ([coleerikson](https://github.com/coleerikson))
+- Automated changelog [\#959](https://github.com/powerhome/playbook/pull/959) ([jasperfurniss](https://github.com/jasperfurniss))
+- Update progress step [\#954](https://github.com/powerhome/playbook/pull/954) ([evalouderback](https://github.com/evalouderback))
+
+**Fixed bugs:**
+
+- Update flow types to use literal vs class wrapper [\#969](https://github.com/powerhome/playbook/pull/969) ([thestephenmarshall](https://github.com/thestephenmarshall))
+
+**Merged pull requests:**
+
+- ~~Add Title Detail Dark Mode [\#972](https://github.com/powerhome/playbook/pull/972) ([kellyeryan](https://github.com/kellyeryan))~~ (reverted)
 
 **Implemented enhancements:**
 

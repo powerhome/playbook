@@ -20,6 +20,7 @@ RSpec.describe Playbook::PbIconCircle::IconCircle do
       icon = "user"
       expect(subject.new(icon: icon, variant: "royal").classname).to eq "pb_icon_circle_kit_md_royal"
       expect(subject.new(icon: icon, size: "sm").classname).to eq "pb_icon_circle_kit_sm_default"
+      expect(subject.new(icon: icon, size: "sm", dark: true).classname).to eq "pb_icon_circle_kit_sm_default dark"
       expect(subject.new(icon: icon, variant: "purple", size: "lg").classname).to eq "pb_icon_circle_kit_lg_purple"
       expect(subject.new(icon: icon, classname: "additional_class").classname).to eq "pb_icon_circle_kit_md_default additional_class"
     end

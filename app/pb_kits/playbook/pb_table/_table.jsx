@@ -10,6 +10,7 @@ type TableProps = {
   children: array<Node> | Node,
   className: string,
   container: boolean,
+  dark?: boolean,
   data?: object,
   dataTable: boolean,
   disableHover: boolean,
@@ -25,6 +26,7 @@ const Table = (props: TableProps) => {
     children,
     className,
     container = true,
+    dark,
     data = {},
     dataTable = false,
     disableHover = false,
@@ -48,6 +50,7 @@ const Table = (props: TableProps) => {
         `table-responsive-${responsive}`,
         {
           'table-card': container,
+          'table-dark': dark,
           'data_table': dataTable,
           'single-line': singleLine,
           'no-hover': disableHover,

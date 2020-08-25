@@ -9,7 +9,6 @@ module Playbook
 
       prop :label, required: true
       prop :value
-      prop :dark, type: Playbook::Props::Boolean, default: false
       prop :variant, type: Playbook::Props::Enum,
                      values: %w[default details],
                      default: "default"
@@ -21,7 +20,7 @@ module Playbook
 
 
       def classname
-        generate_classname("pb_label_value_kit", variant_class, dark_class)
+        generate_classname("pb_label_value_kit", variant_class)
       end
 
       def date_element
@@ -29,10 +28,6 @@ module Playbook
       end
 
     private
-
-      def dark_class
-        dark ? "dark" : nil
-      end
 
       def variant_class
         variant == "details" ? "details" : nil
