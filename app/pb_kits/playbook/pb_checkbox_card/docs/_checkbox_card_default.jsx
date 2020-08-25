@@ -9,6 +9,7 @@ const CheckboxCardDefault = () => (
     <CheckboxCard checked text="Selected"/>
     <CheckboxCard  error text="Error Checkbox"/>
     <CheckboxCard highlight={{ position: 'top', color: 'doors' }} text="With Card Highlighting" />
+    <CheckboxCard text="Disabled" disabled />
   </div>
 
 )

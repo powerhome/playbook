@@ -24,12 +24,15 @@ const CheckboxCard = (props: CheckboxCardProps) => {
     data = {},
     id,
     checked = false,
+    disabled = false
   } = props
 
   const [isChecked, setIsChecked] = useState(checked)
   const checkboxChanged = e => {
-    e.persist()
-    setIsChecked(e.target.checked)
+    if (!disabled) {
+      e.persist()
+      setIsChecked(e.target.checked)
+    }
   }
 
   const ariaProps = buildAriaProps(aria)
