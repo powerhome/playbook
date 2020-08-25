@@ -1,7 +1,8 @@
 <%= content_tag(:li,
-  id: object.id,
+  aria: object.aria,
+  class: object.classname,
   data: object.data,
-  class: object.classname) do %>
+  id: object.id) do %>
   <%= content_tag(object.tag,
     object.link ? object.link_options : object.options) do %>
     <% if object.icon_left %>

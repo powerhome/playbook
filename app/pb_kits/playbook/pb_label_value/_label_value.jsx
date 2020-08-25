@@ -3,15 +3,17 @@
 import React from 'react'
 import classnames from 'classnames'
 import DateTime from '../pb_kit/dateTime.js'
-import { buildAriaProps, buildDataProps } from '../utilities/props'
+import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
 import { globalProps } from '../utilities/globalProps.js'
 import { Body, Caption, Flex, Icon, Title } from '../'
 
 type LabelValueProps = {
+  active?: boolean,
   aria?: object,
   className?: string,
   dark?: boolean,
   data?: object,
+  date?: date,
   id?: string,
   label: string,
   value?: string,
@@ -19,8 +21,6 @@ type LabelValueProps = {
   icon?: string,
   description?: string,
   title?: string,
-  date?: date,
-  active?: boolean
 }
 
 const dateString = (value: DateTime) => {
@@ -50,18 +50,14 @@ const LabelValue = (props: LabelValueProps) => {
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
   const formattedDate = new DateTime({ value: date })
-  const themeStyle = dark === true ? '_dark' : ''
-  const css = classnames(
-    ['pb_label_value_kit' + themeStyle, className],
-    globalProps(props)
-  )
+  const variantClass = variant === 'details' ? 'details' : ''
+  const classes = classnames(buildCss('pb_label_value_kit', variantClass), globalProps(props), className)
 
   return (
     <div
         {...ariaProps}
         {...dataProps}
-        className={css}
-        dark={dark}
+        className={classes}
         description={description}
         icon={icon}
         id={id}

@@ -14,6 +14,7 @@
     :example_text_area,
     :example_select_field,
     :example_collection_select_field,
+    :example_checkbox_field
     :example_date_picker_field
 
 
@@ -50,6 +51,7 @@
   <%= form.input :example_text_area, {as: :text, input_html: {props: {required: true}}} %>
   <%= form.select :example_select_field, [["Yes", 1], ["No", 2]], props: { required: true, blank_selection: "Select One...", label: true } %>
   <%= form.collection_select :example_collection_select_field, example_collection, :value, :name, props: { required: true, blank_selection: "Select One...", label: true } %>
+  <%= form.check_box :example_checkbox_field, props: { text: "Example Checkbox", label: true, required: true } %>
   <%= form.date_picker :example_date_picker_field, props: { default_date: 'blank', required: true } %>
 
   <%= form.actions do |action| %>

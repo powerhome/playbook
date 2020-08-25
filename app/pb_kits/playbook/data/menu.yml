@@ -7,7 +7,6 @@ samples:
 kits:
   - avatar
   - avatar_action_button
-  - badge
   - buttons:
     - button
     - button_toolbar
@@ -40,7 +39,6 @@ kits:
     - typeahead
     - toggle
   - highlight
-  - hashtag
   - icon
   - icon_circle
   - icon_value
@@ -52,7 +50,10 @@ kits:
   - multiple_users_stacked
   - nav
   - online_status
-  - pill
+  - tags:
+    - badge
+    - hashtag
+    - pill
   - popover
   - progress_pills
   - progress_simple

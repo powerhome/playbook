@@ -15,6 +15,9 @@
   }
   
   @mixin icon-base {
+    &.dark{
+        background-color: $bg_dark
+    }
     width: $icon_size;
     height: $icon_size;
     position: absolute;
