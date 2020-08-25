@@ -1,7 +1,7 @@
 /* @flow */
 /*eslint-disable react/no-multi-comp, flowtype/space-before-type-colon */
 
-import React from 'react'
+import React, { forwardRef } from 'react'
 import Body from '../pb_body/_body.jsx'
 import classnames from 'classnames'
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
@@ -23,7 +23,7 @@ type RadioProps = {
   onChange: (Boolean)=>void,
 }
 
-const Radio = ({
+const Radio = forwardRef(({
   aria = {},
   children,
   className,
@@ -37,7 +37,7 @@ const Radio = ({
   value = 'radio_text',
   onChange = () => {},
   ...props
-}: RadioProps) => {
+}: RadioProps, ref) => {
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
   const classes = classnames(buildCss('pb_radio_kit'), { error }, { dark }, globalProps(props), className)
@@ -57,6 +57,7 @@ const Radio = ({
             id={id}
             name={name}
             onChange={onChange}
+            ref={ref}
             text={text}
             type="radio"
             value={value}
@@ -70,6 +71,6 @@ const Radio = ({
       />
     </label>
   )
-}
+})
 
 export default Radio
