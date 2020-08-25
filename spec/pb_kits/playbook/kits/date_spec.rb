@@ -8,6 +8,7 @@ RSpec.describe Playbook::PbDate::Date do
   it { is_expected.to define_partial }
 
   it { is_expected.to define_prop(:date) }
+  it { is_expected.to define_prop(:timezone) }
   it do
     is_expected.to define_enum_prop(:size)
                    .with_default("sm")

@@ -13,6 +13,7 @@ module Playbook
       prop :size, type: Playbook::Props::Enum,
                   values: %w[lg sm xs],
                   default: "sm"
+      prop :timezone, default: "America/New_York"
 
       def classname
         generate_classname("pb_date_kit")
@@ -33,7 +34,7 @@ module Playbook
     private
 
       def pb_date_time
-        Playbook::PbKit::PbDateTime.new(date)
+        Playbook::PbKit::PbDateTime.new(date, timezone)
       end
     end
   end
