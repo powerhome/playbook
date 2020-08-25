@@ -37,7 +37,7 @@ const Nav = (props: NavProps) => {
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
   const cardCss = classnames(buildCss('pb_nav_list', variant, orientation, {
-    highlight: highlight }, className, globalProps(props)))
+    highlight: highlight }), globalProps(props), className)
 
   return (
     <div
