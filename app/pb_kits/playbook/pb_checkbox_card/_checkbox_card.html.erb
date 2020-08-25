@@ -13,10 +13,12 @@
     checked: object.checked,
     dark: object.dark
   }) do %>
-      <span class="pb_checkbox_checkmark">
+    <div>
+      <span class="pb_checkbox_checkmark mr_xs">
         <%= pb_rails("icon", props: { icon: "check", id: "check_icon", classname: "check_icon", fixed_width: true}) %>
       </span>
       <%= pb_rails("body", props: {  text: object.text, dark: object.dark }) %>
+    </div>
   <% end %>
 
 <% end %>
