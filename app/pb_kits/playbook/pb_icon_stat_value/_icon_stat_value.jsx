@@ -4,6 +4,7 @@ import React from 'react'
 import classnames from 'classnames'
 import { Caption, IconCircle, Title } from '../'
 import { globalProps } from '../utilities/globalProps.js'
+import { size } from 'lodash'
 
 type IconStatValueProps = {
   className?: string,
@@ -26,8 +27,9 @@ type IconStatValueProps = {
 const IconStatValue = (props: IconStatValueProps) => {
   const {
     className,
+    size,
     id,
-    unit,
+    unit = "",
     value = 0,
     icon,
     text,
@@ -39,7 +41,7 @@ const IconStatValue = (props: IconStatValueProps) => {
       return (
         <Title
             className="mr-1"
-            text={value}
+            text={value + unit}
         />
       )
     }
@@ -50,6 +52,7 @@ const IconStatValue = (props: IconStatValueProps) => {
       <IconCircle
           icon={icon}
           variant={variant}
+          size={size}
       />
     )
   }
@@ -65,10 +68,10 @@ const IconStatValue = (props: IconStatValueProps) => {
         className={classnames('pb_icon_stat_value_kit', className, globalProps(props))}
         id={id}
     >
-      <div className="">
+      <div>
         {displayIcon(icon, variant)}
-        {displayValue(value, unit)}
-        {statCaption(text)}
+        {displayValue(value, unit, size)}
+        {statCaption(text, size)}
       </div>
     </div>
   )

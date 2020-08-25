@@ -1,12 +1,12 @@
 # frozen_string_literal: true
 
 module Playbook
-  module PbStatValue
+  module PbIconStatValue
     class IconStatValue
       include Playbook::Props
       include ActionView::Helpers::NumberHelper
 
-      partial "pb_icon_stat_value/stat_value"
+      partial "pb_icon_stat_value/icon_stat_value"
 
       prop :unit
       prop :value, type: Playbook::Props::Number

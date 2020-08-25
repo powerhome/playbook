@@ -7,8 +7,8 @@ const IconStatValueDefault = () => {
       <IconStatValue
           icon="user"
           text="ELECTRIC"
-          unit="%"
           value={64.18}
+          unit="%"
           variant="yellow"
       />
       <br />
@@ -16,7 +16,9 @@ const IconStatValueDefault = () => {
           icon="lightbulb-on"
           text="DISTANCE DRIVEN"
           value={158.3}
+          unit="mi"
           variant="teal"
+          size="lg"
       />
       <br />
       <br />
@@ -24,14 +26,18 @@ const IconStatValueDefault = () => {
           icon="user"
           text="DISTANCE DRIVEN"
           value={158.3}
+          unit="mi"
           variant="purple"
+          size="sm"
       />
       <br />
       <IconStatValue
           icon="lightbulb-on"
           text="DISTANCE DRIVEN"
           value={158.3}
+          unit="mi"
           variant="royal"
+          size="lg"
       />
     </div>
 
