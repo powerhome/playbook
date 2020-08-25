@@ -1,3 +1,6 @@
-<%= pb_rails("checkbox_card", props: { dark: true, text: "test" }) do %>
+<%= pb_rails("checkbox_card", props: {name: "dark-example", dark: true, text: "test" }) do %>
+TEST
+<% end %>
+<%= pb_rails("checkbox_card", props: {name: "dark-example-checked", dark: true, checked: true, text: "test" }) do %>
 TEST
 <% end %>
