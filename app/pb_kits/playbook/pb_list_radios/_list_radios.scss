@@ -7,3 +7,10 @@
   }
 }
 
+.pb_list_radios {
+   &.dark {
+    .pb_radios_kit.input {
+      text-decoration: white;
+    }
+  }
+}

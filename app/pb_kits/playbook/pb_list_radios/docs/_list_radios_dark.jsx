@@ -10,32 +10,37 @@ return (
         dark
       >
         <ListItem>
-        <ListRadioItem
-          defaultChecked={false}
-          name="custom1"
-          label="Unselected"
-        />
+          <ListRadioItem
+            defaultChecked={false}
+            name="custom1"
+          >
+            Unselected
+          </ListRadioItem>
         </ListItem>
         <ListItem>
-        <ListRadioItem
-          defaultChecked
-          name="custom1"
-          label="Selected"
-        />
+          <ListRadioItem
+            defaultChecked
+            name="custom1"
+          >
+            Selected
+          </ListRadioItem>
         </ListItem>
         <ListItem>
-        <ListRadioItem
-          defaultChecked={false}
-          name="custom1"
-          label="Hover"
-        />
+          <ListRadioItem
+            defaultChecked={false}
+            name="custom1"
+            value="Hover"
+          >
+            Hover
+          </ListRadioItem>
         </ListItem>
         <ListItem>
-        <ListRadioItem
-          defaultChecked={false}
-          name="custom1"
-          label="Unselected Last"
-        />
+          <ListRadioItem
+            defaultChecked={false}
+            name="custom1"
+          >
+            Unselected Last
+          </ListRadioItem>
         </ListItem>
       </ListRadios>
     </div>
