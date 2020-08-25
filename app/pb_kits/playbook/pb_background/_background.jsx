@@ -45,7 +45,8 @@ const Background = (props: BackgroundProps) => {
         data-src={image_url}
         id={id}
     >
-      {children || <Image url={image_url}>{children}</Image>}
+      {children}
+      <Image url={image_url}></Image>`
     </Tag>
 
   )
