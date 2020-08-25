@@ -14,6 +14,7 @@ kits:
     - circle_icon_button
   - card
   - checkbox
+  - collapsible
   - charts_and_graphs:
     - bar_graph
     - circle_chart

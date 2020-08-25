@@ -173,3 +173,5 @@ WebpackerReact.setup({
   ...WeekdayStacked,
 })
 
+import * as Collapsible from 'pb_collapsible/docs'
+WebpackerReact.setup(Collapsible)
