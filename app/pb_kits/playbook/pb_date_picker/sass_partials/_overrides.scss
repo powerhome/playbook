@@ -1,0 +1,40 @@
+// media query non mobile styles
+@media (min-width: 500px) {
+  .flatpickr-calendar {
+    padding: 8px;
+    width: 323.88px
+  }
+  .dayContainer {
+    width: 315.88px
+  }
+  .flatpickr-months {
+    margin-left: -8px;
+    margin-top: -8px;
+    width: 323.88px;
+  }
+}
+  
+// Firefox Header Adjustments
+@supports (-moz-appearance:none) { 
+  select.flatpickr-monthDropdown-months {
+      width: 97px !important;
+      margin-left: 11px;
+  }
+  select.numInput {
+    padding-left: 17.5px !important;
+    margin-left: 11px !important;
+  }
+}
+
+// direct overrides
+.flatpickr-months .flatpickr-prev-month.flatpickr-disabled,
+.flatpickr-months .flatpickr-next-month.flatpickr-disabled {
+  cursor: not-allowed;
+}
+
+.flatpickr-day.selected.startRange + .endRange:not(:nth-child(7n+1)),
+.flatpickr-day.startRange.startRange + .endRange:not(:nth-child(7n+1)),
+.flatpickr-day.endRange.startRange + .endRange:not(:nth-child(7n+1)) {
+  -webkit-box-shadow: none;
+          box-shadow: none;
+}

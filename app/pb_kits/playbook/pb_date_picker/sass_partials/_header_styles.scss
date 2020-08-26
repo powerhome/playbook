@@ -1,0 +1,101 @@
+@import "../../pb_title/title_mixin";
+// Header Styles
+$header_height: 40px;
+
+.flatpickr-months {
+  border-bottom: solid 1px $border_light;
+}
+.flatpickr-month {
+  height: $header_height;
+}
+.flatpickr-current-month {
+  left: 10px;
+  display: flex;
+  padding-top: 0px;
+}
+.flatpickr-monthDropdown-months {
+  appearance: none;
+  @include pb_title_4;
+  height: $header_height;
+  width: 93px;
+  padding-left: 0px;
+  padding-right: 10px;
+  margin-left: 15px;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  &:hover {
+    background-color: $white;
+  }
+}
+.numInputWrapper {
+  display: contents;
+  .numInput {
+    @include pb_title_4;
+    border: 0px;
+    appearance: none;
+    border-left: solid 1px $border_light;
+    padding-left: 22.5px;
+    padding-right: 14px;
+    margin-left: 10px;
+    height: $header_height;
+    &:focus {
+      outline: none;
+    }
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}
+// Icon for select tags
+.month-dropdown-icon {
+  align-self: center;
+  margin-top: 5px;
+  width: 10px;
+  position: relative;
+  right: 10px;
+  pointer-events: none;
+  color: $text_lt_light;
+}
+.year-dropdown-icon {
+  align-self: center;
+  margin-top: 5px;
+  width: 10px;
+  position: relative;
+  right: 12px;
+  pointer-events: none;
+  color: $text_lt_light;
+}
+
+// Left - Right Arrow Styling
+.flatpickr-prev-month {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  left: 234px !important;
+  padding-right: 10px;
+  border-left: solid 1px $border_light;
+  height: $header_height;
+  svg path {
+    fill: $text_lt_light;
+  }
+  &:hover{
+    svg {
+      fill: inherit;
+    }
+  }
+}
+.flatpickr-next-month {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-left: 10px;
+  height: $header_height;
+  svg path {
+    fill: $text_lt_light;
+  }
+  &:hover{
+    svg {
+      fill: inherit;
+    }
+  }
+}

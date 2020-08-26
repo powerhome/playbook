@@ -23,7 +23,8 @@
           }) %>
         </div>
         <% if object.error %>
-          <%= pb_rails("body", props: { 
+          <%= pb_rails("body", props: {
+            classname: "error-body-kit",
             status: "negative",
             text: object.error
           }) %>
