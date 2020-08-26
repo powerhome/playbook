@@ -1,12 +1,14 @@
 // Day and Range Styles
 .flatpickr-day {
   user-select: none;
-  &:hover {
-    transition-duration: $transition_short;
-    transition-timing-function: $easeIn;    
-    background-color: #F6FAFF;
-    border: none;
-    box-shadow: $shadow_deep;
+  @media (hover: hover) {
+    &:hover {
+      transition-duration: $transition_short;
+      transition-timing-function: $easeIn;    
+      background-color: #F6FAFF;
+      border: none;
+      box-shadow: $shadow_deep;
+    }
   }
 }
 

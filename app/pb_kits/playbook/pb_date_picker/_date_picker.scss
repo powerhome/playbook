@@ -13,10 +13,10 @@
   .input_wrapper {
     margin-bottom: $space_sm;
     position: relative;
-    @import "./sass_partials/header_styles";
-    @import "./sass_partials/overrides";
     @import "./sass_partials/calendar_input_icon";
     @import "./sass_partials/day_styles";
+    @import "./sass_partials/header_styles";
+    @import "./sass_partials/overrides";
 
     .flatpickr-wrapper {
       display: block;

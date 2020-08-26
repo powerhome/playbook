@@ -23,8 +23,10 @@ $header_height: 40px;
   margin-left: 15px;
   margin-top: 0px;
   margin-bottom: 0px;
-  &:hover {
-    background-color: $white;
+  @media (hover: hover) {
+    &:hover {
+      background-color: transparent;
+    }
   }
 }
 .numInputWrapper {
@@ -33,6 +35,7 @@ $header_height: 40px;
     @include pb_title_4;
     border: 0px;
     appearance: none;
+    background-color: transparent;
     border-left: solid 1px $border_light;
     padding-left: 22.5px;
     padding-right: 14px;
@@ -41,8 +44,10 @@ $header_height: 40px;
     &:focus {
       outline: none;
     }
-    &:hover {
-      cursor: pointer;
+    @media (hover: hover) {
+      &:hover {
+        cursor: pointer;
+      }
     }
   }
 }
@@ -78,9 +83,11 @@ $header_height: 40px;
   svg path {
     fill: $text_lt_light;
   }
-  &:hover{
-    svg {
-      fill: inherit;
+  @media (hover: hover) {
+    &:hover {
+      svg {
+        fill: inherit;
+      }
     }
   }
 }
@@ -93,9 +100,11 @@ $header_height: 40px;
   svg path {
     fill: $text_lt_light;
   }
-  &:hover{
-    svg {
-      fill: inherit;
+  @media (hover: hover) {
+    &:hover{
+      svg {
+        fill: inherit;
+      }
     }
   }
 }

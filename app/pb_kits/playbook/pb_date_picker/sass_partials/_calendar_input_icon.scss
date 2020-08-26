@@ -11,8 +11,10 @@
   justify-content: center;
   padding-left: 11px;
   color: $text_lt_light;
-  &:hover {
-    cursor: pointer;
+  @media (hover: hover) {
+    &:hover {
+      cursor: pointer;
+    }
   }
 }
 .cal_icon {
