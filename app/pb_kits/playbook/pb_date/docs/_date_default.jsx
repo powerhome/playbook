@@ -1,11 +1,15 @@
 import React from 'react'
-import { Date } from '../../'
+import { Date as FormattedDate } from '../../'
 
 const DateDefault = () => {
   return (
     <div>
-      <Date
+      <FormattedDate
           date="2012-12-25"
+      />
+
+      <FormattedDate
+          date={new Date()}
       />
     </div>
   )

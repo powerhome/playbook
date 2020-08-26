@@ -1,10 +1,10 @@
 import React from 'react'
-import { Date } from '../..'
+import { Date as FormattedDate } from '../..'
 
 const DateAlignment = () => {
   return (
     <div>
-      <Date
+      <FormattedDate
           date="1995-12-25"
           dayOfWeek
           icon
@@ -12,7 +12,7 @@ const DateAlignment = () => {
 
       <br />
 
-      <Date
+      <FormattedDate
           alignment="center"
           date="2020-12-25"
           dayOfWeek
@@ -21,9 +21,9 @@ const DateAlignment = () => {
 
       <br />
 
-      <Date
+      <FormattedDate
           alignment="right"
-          date="17 Mar 69"
+          date={new Date()}
       />
     </div>
   )

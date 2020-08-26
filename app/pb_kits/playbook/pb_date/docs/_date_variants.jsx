@@ -1,17 +1,17 @@
 import React from 'react'
-import { Date } from '../..'
+import { Date as FormattedDate } from '../..'
 
 const DateVariants = () => {
   return (
     <div>
-      <Date
+      <FormattedDate
           date="1995-12-25"
       />
 
       <br />
       <br />
 
-      <Date
+      <FormattedDate
           date="1995-12-25"
           showIcon
       />
@@ -19,7 +19,7 @@ const DateVariants = () => {
       <br />
       <br />
 
-      <Date
+      <FormattedDate
           date="1995-12-25"
           showDayOfWeek
       />
@@ -27,7 +27,7 @@ const DateVariants = () => {
       <br />
       <br />
 
-      <Date
+      <FormattedDate
           date="1995-12-25"
           showDayOfWeek
           showIcon
