@@ -1,0 +1,24 @@
+
+  <%= pb_rails("date", props: {
+    date: DateTime.now,
+    show_icon: true,
+    show_day_of_week: true
+  }) %>
+
+  <br><br>
+
+  <%= pb_rails("date", props: {
+    date: DateTime.now,
+    show_icon: true,
+    show_day_of_week: true,
+    alignment: "center"
+  }) %>
+
+  <br><br>
+
+  <%= pb_rails("date", props: {
+    date: DateTime.now,
+    show_icon: true,
+    show_day_of_week: true,
+    alignment: "right"
+  }) %>

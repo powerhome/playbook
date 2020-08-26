@@ -36,7 +36,7 @@ module Playbook
       end
 
       def to_month
-        @value.strftime("%^b")
+        @value.strftime("%b")
       end
 
       def to_month_number
