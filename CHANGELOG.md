@@ -66,23 +66,6 @@
 
 - ~~Add Title Detail Dark Mode [\#972](https://github.com/powerhome/playbook/pull/972) ([kellyeryan](https://github.com/kellyeryan))~~ (reverted)
 
-**Implemented enhancements:**
-
-- Remove Changelog Checklist [\#990](https://github.com/powerhome/playbook/pull/990) ([jasperfurniss](https://github.com/jasperfurniss))
-- Update card header kit so that it passes product colors [\#983](https://github.com/powerhome/playbook/pull/983) ([christinaatai](https://github.com/christinaatai))
-- NUX-1286 - Update dark props for Textarea kit [\#966](https://github.com/powerhome/playbook/pull/966) ([coleerikson](https://github.com/coleerikson))
-- NUX-1286 - Refactor dark props for text input [\#964](https://github.com/powerhome/playbook/pull/964) ([coleerikson](https://github.com/coleerikson))
-- NUX-1286 - Global Props for Dark on typeahead [\#963](https://github.com/powerhome/playbook/pull/963) ([coleerikson](https://github.com/coleerikson))
-- Automated changelog [\#959](https://github.com/powerhome/playbook/pull/959) ([jasperfurniss](https://github.com/jasperfurniss))
-- Update progress step [\#954](https://github.com/powerhome/playbook/pull/954) ([evalouderback](https://github.com/evalouderback))
-
-**Fixed bugs:**
-
-- Update flow types to use literal vs class wrapper [\#969](https://github.com/powerhome/playbook/pull/969) ([thestephenmarshall](https://github.com/thestephenmarshall))
-
-**Merged pull requests:**
-
-- ~~Add Title Detail Dark Mode [\#972](https://github.com/powerhome/playbook/pull/972) ([kellyeryan](https://github.com/kellyeryan))~~ (reverted)
 
 ## [v6.1.0] 2020-8-6
 

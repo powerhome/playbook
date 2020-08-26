@@ -25,7 +25,7 @@ module Playbook
 
       def classname
         generate_classname(
-          "pb_table", "table-#{size}", single_line_class, 
+          "pb_table", "table-#{size}", single_line_class, dark_class,
           disable_hover_class, container_class, data_table_class,
           "table-responsive-#{responsive}", separator: " "
         )
@@ -33,9 +33,9 @@ module Playbook
 
     private
 
-      def dark_class
-        dark ? "table-dark" : nil
-      end
+      def dark_class	
+        dark ? "table-dark" : nil	
+      end	
 
       def data_table_class
         data_table ? "data_table" : nil

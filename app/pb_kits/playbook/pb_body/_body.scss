@@ -23,11 +23,4 @@
       @include pb_body($status_value);
     }
   }
-
-  @each $dark_color_name, $dark_color_value in $pb_dark_body_colors{
-    &[class*=_#{$dark_color_name}][class*=dark]{
-      @include pb_body($dark_color_value); 
-    }
-  }
-  
 }

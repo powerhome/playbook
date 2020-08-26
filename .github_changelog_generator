@@ -1,4 +1,4 @@
-git addproject=playbook
+project=playbook
 user=powerhome
 include-labels=cleanup,enhancement,bug,testing,New Kit
 issues=false
