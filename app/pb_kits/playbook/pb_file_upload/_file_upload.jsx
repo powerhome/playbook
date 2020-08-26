@@ -33,7 +33,7 @@ const FileUpload = (props: FileUploadProps) => {
 
   return (
     <div
-        className={classnames(buildCss('pb_file_upload_kit', className), globalProps(props))}
+        className={classnames(buildCss('pb_file_upload_kit'), globalProps(props), className)}
         {...getRootProps()}
     >
       <Card>

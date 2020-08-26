@@ -45,11 +45,15 @@ const SelectableIcon = ({
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
 
-  const classes = classnames(buildCss('pb_selectable_icon_kit',
-    { 'checked': checked,
-      'disabled': disabled,
-      'enabled': !disabled },
-    className), globalProps(props))
+  const classes = classnames(
+    buildCss('pb_selectable_icon_kit', {
+      checked: checked,
+      disabled: disabled,
+      enabled: !disabled,
+    }),
+    globalProps(props),
+    className
+  )
 
   const inputType = multi === false ? 'radio' : 'checkbox'
 
