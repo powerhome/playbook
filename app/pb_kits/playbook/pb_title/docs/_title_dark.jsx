@@ -9,13 +9,6 @@ const TitleDark = () => {
           size={4}
           tag="h4"
           text="Title 4"
-          variant="link"
-      />
-      <Title
-          dark
-          size={4}
-          tag="h3"
-          text="Title 3"
       />
       <Title
           dark
