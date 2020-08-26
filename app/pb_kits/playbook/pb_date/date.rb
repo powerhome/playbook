@@ -32,7 +32,7 @@ module Playbook
       end
 
       def month
-        pb_date_time.to_month.camelcase
+        pb_date_time.to_month.capitalize
       end
 
       def year
