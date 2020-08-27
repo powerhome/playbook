@@ -9,6 +9,9 @@
 
   &[class^=pb_caption_kit_xs] {
     @include caption_xs;
+    &[class*=_link]  {
+      color: $primary;
+    }
   }
   &[class*=dark]{
     @include caption_dark
