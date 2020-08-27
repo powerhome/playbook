@@ -6,19 +6,17 @@ const TimeDefault = () => {
     <div>
       <Time
           date={new Date()}
-          showTimezone
           size="lg"
+          timeZone="America/New_York"
       />
       <br />
       <Time
           date={new Date().getTime()}
-          showTimezone
           size="sm"
       />
       <br />
       <Time
           date="2012-08-02T09:49:29Z"
-          showTimezone
           size="xs"
       />
     </div>
