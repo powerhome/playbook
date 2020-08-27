@@ -11,13 +11,11 @@ module Playbook
       prop :placeholder
       prop :search_term_minimum_length, default: 3
       prop :search_debounce_timeout, default: 250
-      prop :dark, type: Playbook::Props::Boolean,
-                  default: false
 
       partial "pb_typeahead/typeahead"
 
       def classname
-        generate_classname("pb_typeahead_kit", dark_class)
+        generate_classname("pb_typeahead_kit")
       end
 
       def data
@@ -26,12 +24,6 @@ module Playbook
           pb_typeahead_kit_search_term_minimum_length: search_term_minimum_length,
           pb_typeahead_kit_search_debounce_timeout: search_debounce_timeout
         )
-      end
-
-    private
-
-      def dark_class
-        dark ? "dark" : nil
       end
     end
   end

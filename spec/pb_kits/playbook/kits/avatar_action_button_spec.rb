@@ -27,6 +27,7 @@ RSpec.describe Playbook::PbAvatarActionButton::AvatarActionButton do
       expect(subject.new(size: "lg").classname).to eq "pb_avatar_action_button_kit_add_lg_bottom_left"
       expect(subject.new(placement: "top_right").classname).to eq "pb_avatar_action_button_kit_add_md_top_right"
       expect(subject.new(action: "remove").classname).to eq "pb_avatar_action_button_kit_remove_md_bottom_left"
+      expect(subject.new(action: "remove", dark: true).classname).to eq "pb_avatar_action_button_kit_remove_md_bottom_left dark"
     end
   end
 end

@@ -17,7 +17,7 @@
       @include pb_body_light;
     }
 
-    > input:first-child {
+    input {
       @include pb_textarea_light;
       @include pb_title_4;
       overflow: hidden;
@@ -30,7 +30,7 @@
     }
   }
 
-  &[class*=_dark] {
+  &.dark {
     .text_input_wrapper {
       margin-bottom: 1rem;
 
@@ -38,7 +38,7 @@
         @include pb_body_light_dark;
       }
 
-      > input:first-child {
+      input {
         @include pb_textarea_dark;
         @include pb_title_4;
         @include pb_title_dark;
@@ -54,7 +54,7 @@
 
     &.error {
       .text_input_wrapper {
-        > input:first-child {
+        input {
           border-color: $error_dark;
         }
       }
@@ -66,7 +66,7 @@
       [class*=pb_body_kit] {
         margin-top: $space_xs / 2;
       }
-      > input:first-child {
+      input {
         border-color: $error;
       }
     }

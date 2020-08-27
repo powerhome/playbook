@@ -40,9 +40,7 @@
     overflow: auto;
   }
 
-
-
-  &[class*=_dark] {
+  &.dark {
     textarea::placeholder {
       @include pb_body_light_dark;
     }

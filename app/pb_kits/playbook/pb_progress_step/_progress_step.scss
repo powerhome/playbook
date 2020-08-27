@@ -1,388 +1,151 @@
 @import "../tokens/colors";
+@import "../utilities/colors";
 @import "../tokens/spacing";
 @import "../tokens/opacity";
 @import "../tokens/typography";
 
-$pb_progress_step_circle_size: 14px;
-$pb_progress_step_connector_width: 3px;
-$pb_progress_step_connector_height_from_top: $pb_progress_step_circle_size/2 - $pb_progress_step_connector_width/2 + 2;
-$pb_progress_step_connector_height_from_left: $pb_progress_step_circle_size/2 - $pb_progress_step_connector_width/2;
-
-@mixin pb_progress_step_circle($background_color, $border_color, $border_width, $icon_color) {
+[class^=pb_progress_step_kit]{
+    list-style:none;
     display: flex;
-    flex-shrink: 0;
-    justify-content: center;
+
+  [class*=pb_progress_step_item] {
+    display:flex;
+    flex-basis:100%;
+    flex-direction:column;
+    justify-content:space-between;
+    position: relative;
     align-items: center;
-    padding-right: 0;
-    overflow: hidden;
-    height: $pb_progress_step_circle_size;
-    width: $pb_progress_step_circle_size;
-    background-color: $background_color;
-    color: $icon_color;
-    font-size: $font_smallest;
-    border-radius: $pb_progress_step_circle_size/2;
-    border: $border_width solid $border_color;
-    margin: 2px;
-}
+    
+    .circle {
+        height:14px;
+        width:14px;
+        border-radius:100%;  
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 3;
+        box-shadow: 0 0 0 2px $white;
 
-@mixin pb_progress_step_line($width, $height, $color, $margin) {
-    width: $width;
-    height: $height;
-    background-color: $color;
-    margin: $margin;
-    flex-grow: 1;
-}
+        svg {
+            width:10px;
+            height:10px;
+            opacity: 0;
+            color: $white;
+        }
+    }
 
-@mixin pb_progress_step_item_wrapper_horizontal {
-    display: flex;
+    &::before{
+        content: '';
+        height: 4px;
+        position: absolute;
+        top: 5px;
+        left: -50%;
+        width:100%;
+        background-color:$border_light;
+    }
+
+    &:last-child::after, &:first-child::before {
+        display:none;
+    }
+
+    &[class*=_inactive]{
+        .circle{
+            background-color: $border_light;
+            color: $border_light;
+        }
+    }
+    &[class*=_active]{
+        .circle{
+            background-color: $white;
+            border: solid 2px $primary;
+            color: rgba($color: $primary, $alpha: 0)
+        }
+        &::before{
+            background-color: $primary;
+        }
+    }
+    &[class*=_complete]{
+        .circle{
+            background-color: $primary;
+            color:$white;
+        }
+        &::before{
+            background-color: $primary;
+        }
+    }
+  }
+
+  &[class*=horizontal]{
     flex-direction: row;
-    width: 100%;
-}
+  }
 
-@mixin pb_progress_step_item_wrapper_flex($flex_direction, $align_items, $align_self) {
-    display: flex;
-    flex-direction: $flex_direction;
-    align-items: $align_items;
-    align-self: $align_self;
-}
+  &[class*=vertical]{
+    flex-direction: column; 
+    [class*=pb_progress_step_item]{
+        flex-direction: row;
+        align-items: flex-start;
+        justify-content: flex-start;
+        margin: 8px;
+        &::before {
+            display: flex;
+            flex-direction: column;
+            content: '';
+            height: 100%;
+            position: absolute;
+            top:14px;
+            left: 13px;
+            width:4px;
+            background-color:$border_light;
+        }
+        &:last-child::before{
+            display:none;
+        }
+        .circle{
+            margin: 0 8px;
+        }
+    }
+  }
 
-[class^=pb_progress_step_kit] {
-    &[class*=_icon] {
-        [class^=pb_progress_step_item_kit_complete] {
-            [class=pb_progress_step_item_step_circle] {
-                svg {
-                    width: $pb_progress_step_circle_size;
-                    height: $pb_progress_step_circle_size - 2;
-                    color: $white;
-                }
-            }
+  &[class*=icon] [class*=_complete] svg{
+    opacity: 1;
+  }
+
+  &[class*=dark] {
+    .circle{
+        box-shadow: 0 0 0 2px $bg_dark;
+    }
+    [class*=active]{
+        .circle{
+            background-color: $bg_dark;
         }
     }
-    &[class*=_horizontal] {
-        @include pb_progress_step_item_wrapper_horizontal;
-        >div {
-            &:first-child {
-                [class^=pb_progress_step_item] {
-                    &[class*=_connector_first], &[class*=_step_connector_first] {
-                        opacity: 0;
-                    }
-                }
-            }
-            &:last-child {
-                [class^=pb_progress_step_item] {
-                    &[class*=_connector_second], &[class*=_step_connector_second] {
-                        opacity: 0;
-                    }
-                }
-            }
-        }
-        [class*=pb_progress_step_item_kit] {
-            &[class*=_complete] {
-                flex-basis: 100%;
-                [class=pb_progress_step_item_wrapper] {
-                    @include pb_progress_step_item_wrapper_horizontal;
-                    [class^=pb_progress_step_item] {
-                        &[class*=_connector_first], &[class*=_connector_second] {
-                            @include pb_progress_step_line($space_sm, $pb_progress_step_connector_width, $primary, $pb_progress_step_connector_height_from_top 0 0 0);
-                        }
-                    }
-                    [class=pb_progress_step_item_step_wrapper] {
-                        @include pb_progress_step_item_wrapper_flex(column, center, auto);
-                        [class=pb_progress_step_item_step] {
-                            @include pb_progress_step_item_wrapper_horizontal;
-                            [class^=pb_progress_step_item] {
-                                &[class*=_step_connector_first], &[class*=_step_connector_second] {
-                                    @include pb_progress_step_line($space_sm, $pb_progress_step_connector_width, $primary, $pb_progress_step_connector_height_from_top 0 0 0);
-                                }
-                                &[class*=_step_circle] {
-                                    @include pb_progress_step_circle($primary, $primary, 2px, $primary);
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-            &[class*=_active] {
-                flex-basis: 100%;
-                [class=pb_progress_step_item_wrapper] {
-                    @include pb_progress_step_item_wrapper_horizontal;
-                    [class^=pb_progress_step_item] {
-                        &[class*=_connector_first] {
-                            @include pb_progress_step_line($space_sm, $pb_progress_step_connector_width, $primary, $pb_progress_step_connector_height_from_top 0 0 0);
-                        }
-                        &[class*=_connector_second] {
-                            @include pb_progress_step_line($space_sm, $pb_progress_step_connector_width, $border_light, $pb_progress_step_connector_height_from_top 0 0 0);
-                        }
-                    }
-                    [class=pb_progress_step_item_step_wrapper] {
-                        @include pb_progress_step_item_wrapper_flex(column, center, auto);
-                        [class=pb_progress_step_item_step] {
-                            @include pb_progress_step_item_wrapper_horizontal;
-                            [class^=pb_progress_step_item] {
-                                &[class*=_step_connector_first] {
-                                    @include pb_progress_step_line($space_sm, $pb_progress_step_connector_width, $primary, $pb_progress_step_connector_height_from_top 0 0 0);
-                                }
-                                &[class*=_step_circle] {
-                                    @include pb_progress_step_circle($white, $primary, 2px, $white);
-                                    svg {
-                                        display: none;
-                                    }
-                                }
-                                &[class*=_step_connector_second] {
-                                    @include pb_progress_step_line($space_sm, $pb_progress_step_connector_width, $border_light, $pb_progress_step_connector_height_from_top 0 0 0);
-                                }
-                            }
-                        }
-                    }
-                } 
-            }
-            &[class*=_inactive] {
-                flex-basis: 100%;
-                [class=pb_progress_step_item_wrapper] {
-                    @include pb_progress_step_item_wrapper_horizontal;
-                    [class^=pb_progress_step_item] {
-                        &[class*=_connector_first], &[class*=_connector_second] {
-                            @include pb_progress_step_line($space_sm, $pb_progress_step_connector_width, $border_light, $pb_progress_step_connector_height_from_top 0 0 0);
-                        }
-                    }
-                    [class=pb_progress_step_item_step_wrapper] {
-                        @include pb_progress_step_item_wrapper_flex(column, center, auto);
-                        [class=pb_progress_step_item_step] {
-                            @include pb_progress_step_item_wrapper_horizontal;
-                            [class^=pb_progress_step_item] {
-                                &[class*=_step_connector_first], &[class*=_step_connector_second] {
-                                    @include pb_progress_step_line($space_sm, $pb_progress_step_connector_width, $border_light, $pb_progress_step_connector_height_from_top 0 0 0);
-                                }
-                                &[class*=_step_circle] {
-                                    @include pb_progress_step_circle($border_light, $border_light, 2px, $border_light);
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-        &[class*=_dark] {
-            [class*=pb_progress_step_item_kit] {
-                &[class*=_active] {
-                    [class^=pb_progress_step_item] {
-                        &[class*=_connector_first] {
-                            @include pb_progress_step_line($space_sm, $pb_progress_step_connector_width, $primary, $pb_progress_step_connector_height_from_top 0 0 0);
-                        }
-                        &[class*=_connector_second] {
-                            @include pb_progress_step_line($space_sm, $pb_progress_step_connector_width, $border_dark, $pb_progress_step_connector_height_from_top 0 0 0);
-                        }
-                    }
-                    [class=pb_progress_step_item_step_wrapper] {
-                        [class=pb_progress_step_item_step] {
-                            [class^=pb_progress_step_item] {
-                                &[class*=_step_connector_first] {
-                                    @include pb_progress_step_line($space_sm, $pb_progress_step_connector_width, $primary, $pb_progress_step_connector_height_from_top 0 0 0);
-                                }
-                                &[class*=_step_circle] {
-                                    @include pb_progress_step_circle($bg_dark, $primary, 2px, $bg_dark);
-                                    svg {
-                                        display: none;
-                                    }
-                                }
-                                &[class*=_step_connector_second] {
-                                    @include pb_progress_step_line($space_sm, $pb_progress_step_connector_width, $border_dark, $pb_progress_step_connector_height_from_top 0 0 0);
-                                }
-                            }
-                        }
-                    }
-                }
-                &[class*=_inactive] {
-                    [class=pb_progress_step_item_wrapper] {
-                        [class^=pb_progress_step_item] {
-                            &[class*=_connector_first], &[class*=_connector_second] {
-                                @include pb_progress_step_line($space_sm, $pb_progress_step_connector_width, $border_dark, $pb_progress_step_connector_height_from_top 0 0 0);
-                            }
-                        }
-                        [class=pb_progress_step_item_step_wrapper] {
-                            [class=pb_progress_step_item_step] {
-                                [class^=pb_progress_step_item] {
-                                    &[class*=_step_connector_first], &[class*=_step_connector_second] {
-                                        @include pb_progress_step_line($space_sm, $pb_progress_step_connector_width, $border_dark, $pb_progress_step_connector_height_from_top 0 0 0);
-                                    }
-                                    &[class*=_step_circle] {
-                                        @include pb_progress_step_circle($border_dark, $border_dark, 0px, $border_dark);
-                                        svg {
-                                            display: none;
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
+    [class*=inactive]{
+        .circle, &::before{
+           background-color: tint($bg_dark,10%);
         }
     }
-    &[class*=_vertical] {
-        @include pb_progress_step_item_wrapper_flex(column, flex-start, auto);
-        > div:first-child {
-            [class=pb_progress_step_item_wrapper] {
-                [class=pb_progress_step_item_connector_first] {
-                    opacity: 0;
-                    margin: 0 0 0 $pb_progress_step_connector_height_from_left;
-                }
-                [class=pb_progress_step_item_step_wrapper] {
-                    [class=pb_progress_step_item_step] {
-                        > div:first-child {
-                            opacity: 0;
-                        }
-                    }
-                }
-            }
-        }
-        >div:last-child {
-            [class=pb_progress_step_item_wrapper] {
-                [class=pb_progress_step_item_connector_second] {
-                    opacity: 0;
-                }
-                [class=pb_progress_step_item_step_wrapper] {
-                    [class=pb_progress_step_item_step] {
-                        > div:last-child {
-                            opacity: 0;
-                        }
-                    }
-                }
-            }
-        }
-        [class*=pb_progress_step_item_kit] {
-            &[class*=_complete] {
-                flex-basis: 100%;
-                [class=pb_progress_step_item_wrapper] {
-                    @include pb_progress_step_item_wrapper_flex(column, baseline, auto);
-                    [class=pb_progress_step_item_connector_second] {
-                        @include pb_progress_step_line($pb_progress_step_connector_width, $space_md, $primary, 0 0 0 $pb_progress_step_connector_height_from_top);
-                    }
-                    [class=pb_progress_step_item_step_wrapper] {
-                        @include pb_progress_step_item_wrapper_flex(row, flex-start, auto);
-                        [class=pb_progress_step_item_step] {
-                            @include pb_progress_step_item_wrapper_flex(column, center, stretch);
-                            margin-right: 4px;
-                            [class^=pb_progress_step_item] {
-                                &[class*=_step_connector_first] {
-                                    display: none;
-                                }
-                                &[class*=_step_circle] {
-                                    @include pb_progress_step_circle($primary, $primary, 2px, $primary);
-                                }
-                                &[class*=_step_connector_second] {
-                                    @include pb_progress_step_line($pb_progress_step_connector_width, 100%, $primary, 0);
-                                }
-                            }
-                        }
-                    }
-                } 
-            }
-            &[class*=_active] {
-                flex-basis: 100%;
-                [class=pb_progress_step_item_wrapper] {
-                    @include pb_progress_step_item_wrapper_flex(column, baseline, auto);
-                    [class=pb_progress_step_item_connector_second] {
-                        @include pb_progress_step_line($pb_progress_step_connector_width, $space_md, $border_light, 0 0 0 $pb_progress_step_connector_height_from_top);
-                    }
-                    [class=pb_progress_step_item_step_wrapper] {
-                        @include pb_progress_step_item_wrapper_flex(row, flex-start, auto);
-                        [class=pb_progress_step_item_step] {
-                            @include pb_progress_step_item_wrapper_flex(column, center, stretch);
-                            margin-right: 4px;
-                            [class^=pb_progress_step_item] {
-                                &[class*=_step_connector_first] {
-                                    display: none;
-                                }
-                                &[class*=_step_circle] {
-                                    @include pb_progress_step_circle($white, $primary, 2px, $white);
-                                    svg {
-                                        display: none;
-                                    }
-                                }
-                                &[class*=_step_connector_second] {
-                                    @include pb_progress_step_line($pb_progress_step_connector_width, 100%, $border_light, 0);
-                                }
-                            }
-                        }
-                    }
-                } 
-            }
-            &[class*=_inactive] {
-                flex-basis: 100%;
-                [class=pb_progress_step_item_wrapper] {
-                    @include pb_progress_step_item_wrapper_flex(column, baseline, auto);
-                    [class=pb_progress_step_item_connector_second] {
-                        @include pb_progress_step_line($pb_progress_step_connector_width, $space_md, $border_light, 0 0 0 $pb_progress_step_connector_height_from_top);
-                    }
-                    [class=pb_progress_step_item_step_wrapper] {
-                        @include pb_progress_step_item_wrapper_flex(row, flex-start, auto);
-                        [class=pb_progress_step_item_step] {
-                            @include pb_progress_step_item_wrapper_flex(column, center, stretch);
-                            margin-right: 4px;
-                            [class^=pb_progress_step_item] {
-                                &[class*=_step_connector_first] {
-                                    display: none;
-                                }
-                                &[class*=_step_circle] {
-                                    @include pb_progress_step_circle($border_light, $border_light, 2px, $border_light);
-                                }
-                                &[class*=_step_connector_second] {
-                                    @include pb_progress_step_line($pb_progress_step_connector_width, 100%, $border_light, 0);
-                                }
-                            }
-                        }
-                    }
-                }  
-            }
-        }
-        &[class*=_dark] {
-            [class^=pb_progress_step_item_kit] {
-                &[class*=_active] {
-                    [class=pb_progress_step_item_wrapper] {
-                        [class=pb_progress_step_item_connector_second] {
-                            @include pb_progress_step_line($pb_progress_step_connector_width, $space_md, $border_dark, 0 0 0 $pb_progress_step_connector_height_from_top);
-                        }
-                        [class=pb_progress_step_item_step_wrapper] {
-                            [class=pb_progress_step_item_step] {
-                                [class^=pb_progress_step_item] {
-                                    &[class*=_step_circle] {
-                                        @include pb_progress_step_circle(transparent, $primary, 2px, $bg_dark);
-                                        svg {
-                                            display: none;
-                                        }
-                                    }
-                                    &[class*=_step_connector_second] {
-                                        @include pb_progress_step_line($pb_progress_step_connector_width, 100%, $border_dark, 0);
-                                    }
-                                }
-                            }
-                        }
-                    } 
-                }
-                &[class*=_inactive] {
-                    [class=pb_progress_step_item_wrapper] {
-                        [class=pb_progress_step_item_connector_second] {
-                            @include pb_progress_step_line($pb_progress_step_connector_width, $space_md, $border_dark, 0 0 0 $pb_progress_step_connector_height_from_top);
-                        }
-                        [class=pb_progress_step_item_step_wrapper] {
-                            [class=pb_progress_step_item_step] {
-                                [class^=pb_progress_step_item] {
-                                    &[class*=_step_circle] {
-                                        @include pb_progress_step_circle($border_dark, $border_dark, 0px, $border_dark);
-                                        svg {
-                                            display: none;
-                                        }
-                                    }
-                                    &[class*=_step_connector_second] {
-                                        @include pb_progress_step_line($pb_progress_step_connector_width, 100%, $border_dark, 0);
-                                    }
-                                }
-                            }
-                        }
-                    }  
-                }
-            }
+  }
+  &[class*=tracker] {
+    .circle{
+        box-shadow: none;
+    }
+    li[class*=pb_progress_step_item]{
+        flex-direction: column-reverse;
+        &::before{
+            background-color: $border_light;
+            top:auto;
+            bottom: 5px;
         }
     }
+    li[class*=active] .circle,li[class*=inactive] .circle{
+        background-color: $border_light;
+        border:none;
+    }
+    li[class*=complete]{
+        .circle, &::before {
+            background-color: $teal;
+        }
+    }
+  }
+
 }

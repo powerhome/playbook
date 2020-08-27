@@ -47,3 +47,6 @@ deploy:
 
 secrets:
 	${RUN_DEPLOYER} bash --login
+
+changelog:
+	docker-compose run web bundle exec github_changelog_generator

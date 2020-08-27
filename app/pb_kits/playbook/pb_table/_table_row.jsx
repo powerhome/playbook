@@ -1,23 +1,41 @@
 /* @flow */
 import React from 'react'
 import classnames from 'classnames'
-import { buildCss } from '../utilities/props'
+import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
 import { globalProps } from '../utilities/globalProps.js'
 
 type TableRowPropTypes = {
+  aria?: object,
   children: array<React.ReactNode> | React.ReactNode,
   className: string,
+  data?: object,
+  id?: string,
   sideHighlightColor: string,
 }
 
 const TableRow = (props: TableRowPropTypes) => {
-  const { children, className, sideHighlightColor = 'windows' } = props
+  const {
+    aria = {},
+    children,
+    className,
+    data = {},
+    id,
+    sideHighlightColor = 'windows',
+  } = props
+
+  const ariaProps = buildAriaProps(aria)
+  const dataProps = buildDataProps(data)
   const sideHighlightClass =
     sideHighlightColor != '' ? `side_highlight_${sideHighlightColor}` : null
-  const tableRowCss = buildCss('pb_table_row_kit', sideHighlightClass)
+  const classes = classnames(buildCss('pb_table_row_kit', sideHighlightClass), globalProps(props), className)
 
   return (
-    <tr className={classnames(tableRowCss, className, globalProps(props))}>
+    <tr
+        {...ariaProps}
+        {...dataProps}
+        className={classes}
+        id={id}
+    >
       {children}
     </tr>
   )

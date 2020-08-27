@@ -1,12 +1,13 @@
 examples:
-  
   rails:
   - progress_step_default: Default
   - progress_step_vertical: Vertical
   - progress_step_dark: Dark
+  - progress_step_tracker: Tracker
   
   
   react:
   - progress_step_default: Default
   - progress_step_vertical: Vertical
   - progress_step_dark: Dark
+  - progress_step_tracker: Tracker

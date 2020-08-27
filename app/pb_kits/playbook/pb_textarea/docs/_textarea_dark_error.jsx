@@ -12,7 +12,6 @@ const TextareaDarkError = () => {
           placeholder="Placeholder text"
           value="Default value text"
       />
-
     </div>
   )
 }

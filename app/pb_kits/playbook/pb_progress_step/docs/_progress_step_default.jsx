@@ -14,25 +14,13 @@ const ProgressStepDefault = () => (
     <br />
 
     <ProgressStep>
-      <ProgressStepItem status="complete" />
-      <ProgressStepItem status="active" />
-      <ProgressStepItem status="inactive" />
+      <ProgressStepItem status="complete">{'Step 1'}</ProgressStepItem>
+      <ProgressStepItem status="active">{'Step 2'}</ProgressStepItem>
+      <ProgressStepItem status="inactive">{'Step 3'}</ProgressStepItem>
     </ProgressStep>
 
     <br />
     <br />
-
-    <ProgressStep>
-      <ProgressStepItem status="complete">
-        {'Child'}
-      </ProgressStepItem>
-      <ProgressStepItem status="active">
-        {'Child'}
-      </ProgressStepItem>
-      <ProgressStepItem status="inactive">
-        {'Child'}
-      </ProgressStepItem>
-    </ProgressStep>
   </div>
 )
 

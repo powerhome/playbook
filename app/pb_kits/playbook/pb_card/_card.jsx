@@ -20,7 +20,7 @@ type CardPropTypes = {
 }
 
 type CardHeaderProps = {
-  categoryColor?: number,
+  headerColor?: string,
   children: array<React.ReactNode> | React.ReactNode,
   className?: string,
   padding?: string,
@@ -34,13 +34,13 @@ type CardBodyProps = {
 
 // Header component
 const Header = (props: CardHeaderProps) => {
-  const { children, className, categoryColor = 1, padding = 'sm' } = props
-  const headerCSS = buildCss('pb_card_header_kit', `category_${categoryColor}`)
+  const { children, className, headerColor = 'category_1', padding = 'sm' } = props
+  const headerCSS = buildCss('pb_card_header_kit', `${headerColor}`)
 
   const headerSpacing = globalProps(props, { padding })
 
   return (
-    <div className={classnames(headerCSS, className, headerSpacing)}>
+    <div className={classnames(headerCSS, headerSpacing, className)}>
       {children}
     </div>
   )
@@ -48,13 +48,12 @@ const Header = (props: CardHeaderProps) => {
 
 // Body component
 const Body = (props: CardBodyProps) => {
-  const { children, className, padding = 'md' } = props
+  const { children, padding = 'md', className } = props
   const bodyCSS = buildCss('pb_card_body_kit')
-
   const bodySpacing = globalProps(props, { padding })
 
   return (
-    <div className={classnames(bodyCSS, className, bodySpacing)}>
+    <div className={classnames(bodyCSS, bodySpacing, className)}>
       {children}
     </div>
   )
@@ -70,7 +69,6 @@ const Card = (props: CardPropTypes) => {
     shadow = 'none',
     padding = 'md',
   } = props
-  const bodyCSS = buildCss('pb_card_body_kit')
   const borderCSS = borderNone == true ? 'border_none' : ''
   const cardCss = buildCss('pb_card_kit', `shadow_${shadow}`, `${borderCSS}`, {
     selected,
@@ -94,11 +92,9 @@ const Card = (props: CardPropTypes) => {
   const nonHeaderChildren = cardChildren.filter((child) => (get(child, 'type.displayName') !== 'Header'))
 
   return (
-    <div className={classnames(cardCss, globalProps(props), className)}>
+    <div className={classnames(cardCss, globalProps(props, { padding }), className)}>
       {subComponentTags('Header')}
-      <div className={classnames(bodyCSS, globalProps({ padding }))}>
-        {nonHeaderChildren}
-      </div>
+      {nonHeaderChildren}
     </div>
   )
 }
