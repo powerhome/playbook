@@ -7,5 +7,6 @@ examples:
   react:
   - time_default: Sizes
   - time_timestamp: Timestamp Values
+  - time_timezone: Handling Timezones
   - time_align: Alignment
   - time_dark: Dark
