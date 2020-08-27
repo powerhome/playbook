@@ -3,12 +3,11 @@ examples:
   rails:
   - date_default: Default
   - date_timezone: Timezones
-  
   - date_variants: Variants
   - date_alignment: Alignment
   
   react:
-  - date_default: Default
+  - date_default_react: Default
   - date_variants: Variants
   - date_alignment: Alignment
   
