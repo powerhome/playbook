@@ -6,7 +6,6 @@ RSpec.describe Playbook::PbDate::Date do
   subject { Playbook::PbDate::Date }
 
   it { is_expected.to define_partial }
-
   it { is_expected.to define_prop(:date)
                       .that_is_required }
   it { is_expected.to define_boolean_prop(:show_icon)
