@@ -26,7 +26,7 @@ const Body = (props: BodyProps) => {
     aria = {},
     className,
     children,
-    color = '',
+    color = 'default',
     data = {},
     highlightedText = [],
     highlighting = false,
