@@ -136,7 +136,7 @@ $pb_button_border_width: 1px;
 
 // Dark Link =============
 @mixin pb_button_link_dark {
-  @include pb_button($transparent, $primary_action);
+  @include pb_button($transparent, $white);
 
   &:hover {
     @include pb_button_hover($transparent);
