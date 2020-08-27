@@ -6,6 +6,7 @@ const TimeStamp = () => {
     <div>
       <Time
           date={new Date()}
+          showTimezone
           size="sm"
       />
 
@@ -13,6 +14,7 @@ const TimeStamp = () => {
 
       <Time
           date={new Date().getTime()}
+          showTimezone
           size="sm"
       />
 
@@ -20,6 +22,7 @@ const TimeStamp = () => {
 
       <Time
           date="2012-08-02T15:49:29Z"
+          showTimezone
           size="sm"
       />
     </div>

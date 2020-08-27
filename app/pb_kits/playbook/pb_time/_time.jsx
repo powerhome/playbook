@@ -10,24 +10,24 @@ import { globalProps } from '../utilities/globalProps.js'
 import { Body, Icon, Title  } from '../'
 
 type TimeProps = {
-  align?: 'left' | 'center' | 'right',
+  align?: 'left" | "center' | 'right',
   className?: string | array<string>,
   data?: string,
   date: string,
   id?: string,
+  showTimezone?: boolean,
   size?: 'lg' | 'sm' | 'xs',
-  timeZone?: string,
 }
 
 const Time = (props: TimeProps) => {
-  const { align, className, date, size, timeZone } = props
+  const { align, className, date, showTimezone, size } = props
   const classes = classnames(
     className,
     buildCss('pb_time_kit', align, size),
     globalProps(props)
   )
 
-  const dateTimestamp = new DateTime({ value: date, zone: timeZone })
+  const dateTimestamp = new DateTime({ value: date })
 
   return (
     <div className={classes}>
@@ -53,9 +53,7 @@ const Time = (props: TimeProps) => {
                   text={dateTimestamp.toTimeWithMeridian()}
               />
             </If>
-            <If condition={timeZone !== undefined}>
-              <span className="pb_time_timezone">{dateTimestamp.toTimezone()}</span>
-            </If>
+            { showTimezone && <span className="pb_time_timezone">{dateTimestamp.toTimezone()}</span> }
           </span>
         </time>
       </span>

@@ -12,12 +12,14 @@ const TimeDark = () => {
       <Time
           dark
           date={new Date()}
+          showTimezone
           size="lg"
       />
       <br />
       <Time
           dark
           date={new Date()}
+          showTimezone
       />
     </div>
   )
