@@ -18,9 +18,11 @@ $pb_selectable_card_border: 2px;
     padding: $space_sm + 1;
     cursor: pointer;
 
-    &:hover {
-      box-shadow: $shadow-deep;
-      border-color: $slate;
+    @media (hover:hover) {
+      &:hover {
+        box-shadow: $shadow-deep;
+        border-color: $slate;
+      }
     }
 
     .pb_selectable_card_circle {
@@ -66,6 +68,7 @@ $pb_selectable_card_border: 2px;
   }
 
   &.dark {
+    color: $white;
     label {
       @include pb_card_dark;
       background: transparent;
