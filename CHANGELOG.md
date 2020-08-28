@@ -6,7 +6,7 @@
 
 **Implemented enhancements:**
 
-- \[NUX-1351\] - Update react timezone implementation and examples [\#1042](https://github.com/powerhome/playbook/pull/1042) ([bh247484](https://github.com/bh247484))
+- \[NUX-1351\] - Update react timezone implementation and examples [\#1042](https://github.com/powerhome/playbook/pull/1042) ([coleerikson](https://github.com/bh247484))
 - \[NUX-638\] - Updated Date Kit with new styles and props [\#1036](https://github.com/powerhome/playbook/pull/1036) ([coleerikson](https://github.com/coleerikson))
 - Link variant for Title 4 and Caption xs [\#1014](https://github.com/powerhome/playbook/pull/1014) ([christinaatai](https://github.com/christinaatai))
 
