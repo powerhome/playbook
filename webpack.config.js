@@ -52,6 +52,10 @@ const config = {
               return targetPath.replace(/^tokens\/\_/, 'tokens/')
             },
           },
+          {
+            from: path.resolve(__dirname, 'fonts'),
+            to: path.resolve(__dirname, 'dist/fonts'),
+          },
         ],
         options: {
           concurrency: 100,
