@@ -1,6 +1,6 @@
 {
   "name": "playbook-ui",
-  "version": "7.0.0-alpha5",
+  "version": "7.0.0-alpha6",
   "description": "Nitro's Design System",
   "main": "./dist/playbook.js",
   "scripts": {
