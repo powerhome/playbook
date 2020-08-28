@@ -69,7 +69,10 @@ const config = {
             loader: 'css-loader',
             options: {
               modules: {
-                localIdentName: '[name]'
+                localIdentName: '[name]',
+                getLocalIdent: (context, localIdentName, localName, options) => {
+                  return localName;
+                }
               },
               sourceMap: true,
             }
