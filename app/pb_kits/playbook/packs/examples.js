@@ -173,3 +173,5 @@ WebpackerReact.setup({
   ...WeekdayStacked,
 })
 
+import * as Pagination from 'pb_pagination/docs'
+WebpackerReact.setup(Pagination)

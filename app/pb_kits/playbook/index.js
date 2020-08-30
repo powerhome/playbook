@@ -95,3 +95,5 @@ export PbTypeahead from './pb_typeahead'
 export PbPopover from './pb_popover'
 export PbTable from './pb_table'
 export PbTooltip from './pb_tooltip'
+
+export Pagination from 'pb_pagination/_pagination.jsx'
