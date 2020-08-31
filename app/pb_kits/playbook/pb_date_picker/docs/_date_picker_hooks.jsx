@@ -10,7 +10,7 @@ const DatePickerHooks = () => {
     alert('calendar opened')
   }
 
-  // Access flatpickr instances through ids and assign them variables
+  // Access flatpickr instances with picker ids and assign them variables
   window.addEventListener('DOMContentLoaded', () => {
     const fpChange = document.querySelector('#date-picker-hooks-onchange')._flatpickr
     const fpOpen = document.querySelector('#date-picker-hooks-onopen')._flatpickr

@@ -13,7 +13,6 @@
     width: 323.88px;
   }
 }
-  
 // Firefox Header Adjustments
 @supports (-moz-appearance:none) { 
   select.flatpickr-monthDropdown-months {
@@ -25,13 +24,11 @@
     margin-left: 11px !important;
   }
 }
-
 // direct overrides
 .flatpickr-months .flatpickr-prev-month.flatpickr-disabled,
 .flatpickr-months .flatpickr-next-month.flatpickr-disabled {
   cursor: not-allowed;
 }
-
 .flatpickr-day.selected.startRange + .endRange:not(:nth-child(7n+1)),
 .flatpickr-day.startRange.startRange + .endRange:not(:nth-child(7n+1)),
 .flatpickr-day.endRange.startRange + .endRange:not(:nth-child(7n+1)) {

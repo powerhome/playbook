@@ -15,6 +15,10 @@ const datePickerHelper = (config) => {
     yearRange,
   } = config
 
+  // ===========================================================
+  // |                   Hook Definitions                      |
+  // ===========================================================
+
   const defaultDateGetter = () => {
     if (defaultDate !== '') {
       if (defaultDate === 'blank') {
@@ -54,6 +58,10 @@ const datePickerHelper = (config) => {
     }
   }
 
+  // ===========================================================
+  // |             Flatpickr initializer w/ config             |
+  // ===========================================================
+
   flatpickr(`#${pickerId}`, {
     disableMobile: true,
     allowInput: !readOnly,
@@ -71,7 +79,6 @@ const datePickerHelper = (config) => {
           Saturday: 6,
         }
         return (
-          // try to refactor with for loop
           date.getDay() === weekdayObj[disableWeekdays[0]] ||
           date.getDay() === weekdayObj[disableWeekdays[1]] ||
           date.getDay() === weekdayObj[disableWeekdays[2]] ||
@@ -97,9 +104,13 @@ const datePickerHelper = (config) => {
     prevArrow: '<i class="far fa-angle-left"></i>',
     static: true,
   })
-  // Dynamically sourced flatpickr instance
-  const picker = document.querySelector(`#${pickerId}`)._flatpickr
 
+  // ===========================================================
+  //                 Additional JS Functionality
+  // ===========================================================
+
+  // Assign dynamically sourced flatpickr instance to variable
+  const picker = document.querySelector(`#${pickerId}`)._flatpickr
   picker.innerContainer.parentElement.id = `cal-${pickerId}`
 
   // replace year selector with dropdown
@@ -134,6 +145,10 @@ const datePickerHelper = (config) => {
     picker.toggle()
   })
 
+  // Adding dropdown icons to year and month selects
+  picker.monthElements[0].insertAdjacentHTML('afterend', '<i class="far fa-angle-down month-dropdown-icon"></i>')
+  dropdown.insertAdjacentHTML('afterend', '<i class="far fa-angle-down year-dropdown-icon" id="test-id"></i>')
+
   // logic for updating value when typing
   document.querySelector(`#${pickerId}`).addEventListener('input', (e) => {
     picker.input.setAttribute('value', e.target.value)
@@ -146,9 +161,6 @@ const datePickerHelper = (config) => {
       dropdown.value = picker.currentYear
     }
   })
-
-  picker.monthElements[0].insertAdjacentHTML('afterend', '<i class="far fa-angle-down month-dropdown-icon"></i>')
-  dropdown.insertAdjacentHTML('afterend', '<i class="far fa-angle-down year-dropdown-icon" id="test-id"></i>')
 }
 
 export default datePickerHelper

@@ -11,7 +11,6 @@
     }
   }
 }
-
 .flatpickr-day.today {
   border: none;
   font-weight: $bold;
@@ -39,4 +38,10 @@
   background-color: #F7FBFF;
   border: 2px;
   box-shadow: -4px 0 0 #F7FBFF, 5px 0 0 #F7FBFF;
+}
+.flatpickr-innerContainer {
+  overflow: visible;
+}
+.flatpickr-days {
+  overflow: visible;
 }

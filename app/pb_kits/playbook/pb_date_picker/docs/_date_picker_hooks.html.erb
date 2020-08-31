@@ -5,7 +5,7 @@
 
 <%= javascript_tag do %>
   window.addEventListener("DOMContentLoaded", () => {
-    <%# Assign flatpickr instance to variable %>
+    <%# Access flatpickr instance with picker id and assign it a variable %>
     const fp = document.querySelector("#date-picker-hooks-onchange")._flatpickr
 
     <%# Define Hook %>
@@ -24,7 +24,7 @@
 
 <%= javascript_tag do %>
   window.addEventListener("DOMContentLoaded", () => {
-    <%# Assign flatpickr instance to variable %>
+    <%# Access flatpickr instance with picker id and assign it a variable %>
     const fp = document.querySelector("#date-picker-hooks-onopen")._flatpickr
 
     <%# Define Hook %>
