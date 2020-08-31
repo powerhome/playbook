@@ -1,5 +1,34 @@
 # Changelog
 
+## [6.4.0] (2020-8-28)
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/6.3.1...HEAD)
+
+**Implemented enhancements:**
+
+- \[NUX-1351\] - Update react timezone implementation and examples [\#1042](https://github.com/powerhome/playbook/pull/1042) ([coleerikson](https://github.com/bh247484))
+- \[NUX-638\] - Updated Date Kit with new styles and props [\#1036](https://github.com/powerhome/playbook/pull/1036) ([coleerikson](https://github.com/coleerikson))
+- Link variant for Title 4 and Caption xs [\#1014](https://github.com/powerhome/playbook/pull/1014) ([christinaatai](https://github.com/christinaatai))
+
+**Fixed bugs:**
+
+- Disable hovers for mobile [\#1044](https://github.com/powerhome/playbook/pull/1044) ([jasoncypret](https://github.com/jasoncypret))
+- \[NUX-1347\] - Reduce input css specificity [\#1038](https://github.com/powerhome/playbook/pull/1038) ([coleerikson](https://github.com/coleerikson))
+- \[NUX-1370\] - Date Kit Timezone Props [\#1034](https://github.com/powerhome/playbook/pull/1034) ([coleerikson](https://github.com/coleerikson))
+
+**Merged pull requests:**
+
+- Update dependency highcharts to v7.2.2 \[SECURITY\] [\#1028](https://github.com/powerhome/playbook/pull/1028) ([renovate[bot]](https://github.com/apps/renovate))
+- Update dependency lint-staged to v10.2.13 [\#1024](https://github.com/powerhome/playbook/pull/1024) ([renovate[bot]](https://github.com/apps/renovate))
+- Update dependency flow-bin to v0.132.0 [\#1013](https://github.com/powerhome/playbook/pull/1013) ([renovate[bot]](https://github.com/apps/renovate))
+
+## [6.3.1](https://github.com/powerhome/playbook/tree/6.3.1) (2020-08-27)
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/6.3.0...6.3.1)
+
+**Merged pull requests:**
+
+- V6.3.1 [\#1045](https://github.com/powerhome/playbook/pull/1045) ([jasperfurniss](https://github.com/jasperfurniss))
 
 ## [6.3.0](https://github.com/powerhome/playbook/tree/6.3.0) (2020-08-24)
 
@@ -70,6 +99,7 @@
 
 ### Fixed
 - Update flow types to use literal vs class wrapper ([#969](https://github.com/powerhome/playbook/pull/969) @thestephenmarshall)
+
 
 
 ## [v6.1.0] 2020-8-6

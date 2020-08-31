@@ -51,11 +51,15 @@ const SelectableCardIcon = (props: SelectableCardIconProps) => {
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
 
-  const classes = classnames(buildCss('pb_selectable_card_icon_kit',
-    { 'checked': checked,
-      'disabled': disabled,
-      'enabled': !disabled },
-    className), globalProps(props))
+  const classes = classnames(
+    buildCss('pb_selectable_card_icon_kit', {
+      checked: checked,
+      disabled: disabled,
+      enabled: !disabled,
+    }),
+    globalProps(props),
+    className
+  )
 
   return (
     <div

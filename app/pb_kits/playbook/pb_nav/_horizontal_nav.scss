@@ -45,11 +45,13 @@ $selector: ".pb_nav_list";
         color: $text_lt_default;
       }
 
-      &:hover {
-        color: $primary;
-        #{$selector}_item_icon,
-        #{$selector}_item_text {
+      @media (hover:hover) {
+        &:hover {
           color: $primary;
+          #{$selector}_item_icon,
+          #{$selector}_item_text {
+            color: $primary;
+          }
         }
       }
     }

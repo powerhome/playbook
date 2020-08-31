@@ -1,7 +1,7 @@
 import React from 'react'
 import { Date as FormattedDate } from '../..'
 
-const DateDefault = () => {
+const DateDefaultReact = () => {
   return (
     <div>
       <FormattedDate
@@ -17,4 +17,4 @@ const DateDefault = () => {
   )
 }
 
-export default DateDefault
+export default DateDefaultReact

@@ -8,6 +8,8 @@ RSpec.describe Playbook::PbDate::Date do
   it { is_expected.to define_partial }
   it { is_expected.to define_prop(:date)
                       .that_is_required }
+  it { is_expected.to define_prop(:timezone) 
+                      .with_default("America/New_York") }
   it { is_expected.to define_boolean_prop(:show_icon)
                       .with_default(false) }
   it { is_expected.to define_boolean_prop(:show_day_of_week)
