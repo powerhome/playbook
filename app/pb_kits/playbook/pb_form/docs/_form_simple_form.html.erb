@@ -15,7 +15,7 @@
     :example_select_field,
     :example_collection_select_field,
     :example_checkbox_field
-    :example_date_picker_field
+    :example_date_picker_field1
 
 
     def self.model_name
@@ -52,7 +52,7 @@
   <%= form.select :example_select_field, [["Yes", 1], ["No", 2]], props: { label: true } %>
   <%= form.collection_select :example_collection_select_field, example_collection, :value, :name, props: { label: true } %>
   <%= form.check_box :example_checkbox_field, props: { text: "Example Checkbox", label: true } %>
-  <%= form.date_picker :example_date_picker_field, props: { default_date: 'blank', } %>
+  <%= form.date_picker :example_date_picker_field1, props: { default_date: 'blank' } %>
 
   <%= form.actions do |action| %>
     <%= action.submit %>

@@ -27,54 +27,50 @@
       input::placeholder {
         @include pb_body_light;
       }
-      
-    
-      > input:first-child {
+      input {
         @include pb_textarea_light;
         @include pb_title_4;
         overflow: hidden;
       }
-    
       input:focus, input:-webkit-autofill:focus {
         @include pb_textarea_focus;
         -webkit-box-shadow: 0 0 0px 1000px $focus_input_light inset;
         transition: background-color 5000s ease-in-out 0s;
       }
-    }
-    &.error {
-      .error-body-kit {
-        margin-top: $space_xs / 2;
+      // Calendar Shadow and Border
+      .flatpickr-calendar {
+        box-shadow: $shadow_deeper;
+        border: 1px solid $border_light;
       }
-      .flatpickr-wrapper {
-        > input:first-child {
-          border-color: $error;
-        }
+      // Weekday styling
+      div.flatpickr-weekdays {
+        margin-top: 8px;
+      }
+      span.flatpickr-weekday {
+        @include caption;
+        user-select: none;
+      }
+      
+      // Hide Caret
+      .flatpickr-calendar:before {
+        background-color: transparent;
+        border-color: transparent;
       }
     }
-
-    // Calendar Shadow and Border
-    .flatpickr-calendar {
-      box-shadow: $shadow_deeper;
-      border: 1px solid $border_light;
+  }
+  &.error {
+    .pb_body_kit_negative {
+      margin-top: $space_xs / 2;
     }
-    // Weekday styling
-    div.flatpickr-weekdays {
-      margin-top: 8px;
-    }
-    span.flatpickr-weekday {
-      @include caption;
-      user-select: none;
-    }
-    
-    // Hide Caret
-    .flatpickr-calendar:before {
-      background-color: transparent;
-      border-color: transparent;
+    .flatpickr-wrapper {
+      input {
+        border-color: $error;
+      }
     }
   }
 }
 
+// So that picker remains visible inside filter kit
 .pb_popover_body {
   overflow: visible !important;
 }
-

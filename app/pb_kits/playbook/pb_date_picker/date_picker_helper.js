@@ -131,7 +131,7 @@ const datePickerHelper = (config) => {
 
   // click handling for Calendar Icon
   document.querySelector(`#cal-icon-${pickerId}`).addEventListener('click', () => {
-    picker.open()
+    picker.toggle()
   })
 
   // logic for updating value when typing

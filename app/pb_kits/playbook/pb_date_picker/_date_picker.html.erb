@@ -1,6 +1,6 @@
 <%= content_tag(:div,
     aria: object.aria,
-    class: object.classname + " " + object.error_class,
+    class: object.classname + object.error_class,
     data: object.data,
     id: object.id) do %>
     <% if !object.hide_label %>

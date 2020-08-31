@@ -27,7 +27,8 @@ module Playbook
       prop :name, type: Playbook::Props::String
       prop :mode, type: Playbook::Props::String,
                   default: "single"
-      prop :picker_id, type: Playbook::Props::String
+      prop :picker_id, type: Playbook::Props::String,
+                       required: true
       prop :read_only, type: Playbook::Props::Boolean,
                        default: false
       prop :required, type: Playbook::Props::Boolean,
@@ -56,7 +57,7 @@ module Playbook
       end
 
       def error_class
-        error ? "error" : ""
+        error ? " error" : ""
       end
     end
   end
