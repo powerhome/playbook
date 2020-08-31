@@ -66,7 +66,7 @@
     "highcharts": "^7.2.0",
     "jsx-control-statements": "^3.2.8",
     "lazysizes": "^4.1.6",
-    "lodash": "4.17.15",
+    "lodash": "4.17.20",
     "moment": "^2.24.0",
     "moment-strftime": "^0.5.0",
     "moment-timezone": "^0.5.26",
@@ -85,7 +85,7 @@
     "webpacker-react": "^0.3.2"
   },
   "resolutions": {
-    "lodash": "^4.17.13",
+    "lodash": "4.17.20",
     "set-value": "^2.0.1"
   },
   "husky": {
