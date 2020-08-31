@@ -23,7 +23,11 @@ body {
         display: flex;
       }
     }
+    &.dark{
+    background: #172257;
+    }
   }
+
   &--content {
     min-height: calc(100vh - 89px);
     @include break_at(breakpoint("lg")) {
@@ -36,6 +40,9 @@ body {
       overflow: auto;
       @include break_at(breakpoint("lg")) {
         padding: $space-lg $space-xl;
+      }
+      &.dark{
+        background: #0a0527;
       }
     }
   }

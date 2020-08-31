@@ -1,6 +1,6 @@
 <% if defined?(@kit_api) && @kit_api.present? %>
   <div data-action="toggle" data-togglable="prop_example" class="pb--propsTable">
-    <table class="pb--propsTable--table">
+    <table class="pb--propsTable--table <%= cookies[:dark_mode] == "true" ? 'dark' : '' %>">
       <thead>
         <tr>
           <th>Available Props</th>
