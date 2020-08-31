@@ -5,7 +5,6 @@ const PersonContactWithWrongNumbers = () => {
   return (
     <>
       <PersonContact
-          key="person-contact-1"
           contacts={[
             {
               contactType: 'email',
@@ -24,6 +23,7 @@ const PersonContactWithWrongNumbers = () => {
             },
           ]}
           firstName="Pauline"
+          key="person-contact-1"
           lastName="Smith"
       />
     </>
