@@ -5,6 +5,7 @@
 
 [class^=pb_radio_kit] {
   display: inline-flex;
+  cursor: pointer;
 
   .pb_radio_button {
     width: 22px;
@@ -18,8 +19,10 @@
     transition-timing-function: $easeIn;
   }
 
-  &:hover .pb_radio_button {
-    border-color: $primary_action;
+  @media (hover:hover) {
+    &:hover .pb_radio_button {
+      border-color: $primary_action;
+    }
   }
 
   input {
@@ -37,8 +40,10 @@
       border: 6px solid $primary;
     }
 
-    &:hover .pb_radio_button {
-      border-color: $primary_action;
+    @media (hover:hover) {
+      &:hover .pb_radio_button {
+        border-color: $primary_action;
+      }
     }
     &.error {
       > .pb_radio_button {

@@ -53,6 +53,7 @@ $pb_card_padding:(
 }
 
 @mixin pb_card_dark {
+  color: $white;
   @include pb_card($card_dark, $border_dark);
 }
 
