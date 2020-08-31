@@ -2,6 +2,10 @@
 @import "../../../tokens/spacing";
 
 .markdown {
+  &.dark{
+    color: #fff;
+
+  }
   h1 {
     @include pb_title_1;
     margin: 1rem 0;

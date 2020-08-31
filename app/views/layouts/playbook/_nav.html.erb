@@ -1,13 +1,51 @@
-<div class="pb--page--topNav">
-  <h1>
-    <%= link_to root_url do %>
-      <%= image_tag("pb.logo.svg") %>
+<div class="pb--page--topNav <%= cookies[:dark_mode] == "true" ? 'dark' : '' %>">
+  <%= pb_rails("flex", props:{spacing:"between",vertical: "center"}) do%>
+     <%= pb_rails("flex", props:{spacing:"between",vertical: "center"}) do%>
+      <%= link_to root_url do %>
+        <%= image_tag("pb.logo.svg") %>
+      <% end %>
+      <%= pb_rails("caption", props: { tag: "span", text: Playbook::VERSION }) %>
+      <% end %>
+    <%= pb_rails("flex") do%>
+      <%= pb_rails("circle_icon_button", props: {
+        margin_right:"sm",
+        variant: "secondary",
+        icon: "moon",
+        tag:"a",
+        link: enable_dark_mode_path
+      }) %>
+      <%= pb_rails("circle_icon_button", props: {
+        variant: "secondary",
+        icon: "sun",
+        tag:"a",
+        link: disable_dark_mode_path
+      }) %>
     <% end %>
-    &nbsp;
-    <%= pb_rails("caption", props: { tag: "span", text: Playbook::VERSION }) %>
-  </h1>
+  <% end %>
 </div>
 <% flash.each do |name, msg| %>
   <% name = "success" if name == "notice" %>
   <%= pb_rails("fixed_confirmation_toast", props: { text: msg, status: name }) %>
 <% end %>
+
+<script>
+// document.cookie = "dark_mode=false"
+// const darkToggle = document.querySelector('#dark-toggle')
+// document.onreadystatechange = function () {
+//   if (document.readyState === 'complete') {
+
+//   }
+// }
+
+// function checkDarkMode(){
+//   if(darkToggle.checked){
+//     console.log('checked')
+//     document.cookie = "dark_mode=true; path=/"
+    
+//   }
+//   else{
+//     console.log('unchecked')
+//     document.cookie = "dark_mode=false; path=/"
+//   }
+// }
+</script>

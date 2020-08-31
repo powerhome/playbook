@@ -34,6 +34,8 @@ const spacingProps = ({
 }
 
 const darkProps = ({ dark }) => {
+  const cookie = document.cookie
+  dark = cookie == 'dark_mode=true' ? true : false
   let css = ''
   css += dark ? 'dark' : ''
   return css

@@ -13,6 +13,7 @@
   <% if type == "rails" %>
     <%= render partial: "pb_#{@kit_examples[:kit]}/docs/#{key}" %>
   <% elsif type == "react" %>
+    <% puts ">>>>>>>>>>>>>>>>>>>>> #{key}"%>
     <%= pb_react(key.camelize) %>
   <% end %>
   <br>

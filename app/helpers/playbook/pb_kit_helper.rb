@@ -6,10 +6,11 @@ require "webpacker/react/component"
 
 module Playbook
   module PbKitHelper
+
     def pb_rails(kit, props: {}, &block)
       previous = prefix_partial_path_with_controller_namespace
       self.prefix_partial_path_with_controller_namespace = false
-      kit = build_view_model(kit.to_s, props, &block)
+      kit = build_view_model(kit.to_s, props.merge(dark: dark_mode), &block)
       render(partial: kit, as: :object)
     ensure
       self.prefix_partial_path_with_controller_namespace = previous
@@ -20,6 +21,13 @@ module Playbook
     end
 
   private
+    def dark_mode
+      if cookies[:dark_mode] == "true"
+        true
+      else
+        false
+      end
+    end
 
     def is_subkit?(kit)
       kit.match(%r{[/\\]})

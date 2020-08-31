@@ -143,10 +143,17 @@
   padding: 10px 30px 10px 30px;
   border: 1px solid $border-light;
 
+  &.dark {
+      background: #0a0527;
+      color: white;
+    }
+
   &--table {
     width: 100%;
     border-collapse: collapse;
     margin-bottom: 10px;
+
+
 
     tr {
       padding: 10px;
