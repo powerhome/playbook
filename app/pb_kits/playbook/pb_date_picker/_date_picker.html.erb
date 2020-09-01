@@ -13,15 +13,17 @@
             name="<%= object.name %>"
             <%= object.required ? required="required" : ''%>
         />
-        <div
-            class="cal_icon_wrapper"
-            id="cal-icon-<%= object.picker_id %>"
-        >
-          <%= pb_rails("icon", props: { 
-            classname: "cal_icon",
-            icon: "calendar-alt"
-          }) %>
-        </div>
+        <% if !object.hide_icon %>
+          <div
+              class="cal_icon_wrapper"
+              id="cal-icon-<%= object.picker_id %>"
+          >
+            <%= pb_rails("icon", props: { 
+              classname: "cal_icon",
+              icon: "calendar-alt"
+            }) %>
+          </div>
+        <% end %>
         <% if object.error %>
           <%= pb_rails("body", props: {
             classname: "error-body-kit",

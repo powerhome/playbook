@@ -42,19 +42,10 @@
         box-shadow: $shadow_deeper;
         border: 1px solid $border_light;
       }
-      // Weekday styling
-      div.flatpickr-weekdays {
-        margin-top: 8px;
-      }
-      span.flatpickr-weekday {
-        @include caption;
-        user-select: none;
-      }
-      
       // Hide Caret
-      .flatpickr-calendar:before {
-        background-color: transparent;
-        border-color: transparent;
+      .flatpickr-calendar:before,
+      .flatpickr-calendar:after {
+        content: none;
       }
     }
   }

@@ -45,3 +45,11 @@
 .flatpickr-days {
   overflow: visible;
 }
+// Weekday styling
+div.flatpickr-weekdays {
+  margin-top: 8px;
+}
+span.flatpickr-weekday {
+  @include caption;
+  user-select: none;
+}

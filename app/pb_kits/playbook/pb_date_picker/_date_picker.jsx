@@ -18,6 +18,7 @@ type DatePickerProps = {
   disableWeekdays?: Array,
   error?: String,
   format?: String,
+  hideIcon?: Boolean,
   hideLabel?: Boolean,
   id?: String,
   label?: String,
@@ -40,6 +41,7 @@ const DatePicker = (props: DatePickerProps) => {
     disableWeekdays = null,
     error,
     format = 'm/d/Y',
+    hideIcon = false,
     hideLabel = false,
     id,
     label = 'Date Picker',
@@ -68,6 +70,7 @@ const DatePicker = (props: DatePickerProps) => {
       disableRange: disableRange,
       disableWeekdays: disableWeekdays,
       format: format,
+      hideIcon: hideIcon,
       maxDate: maxDate,
       minDate: minDate,
       mode: mode,
@@ -97,15 +100,17 @@ const DatePicker = (props: DatePickerProps) => {
             id={pickerId}
             name={name}
         />
-        <div
-            className="cal_icon_wrapper"
-            id={`cal-icon-${pickerId}`}
-        >
-          <Icon
-              className="cal_icon"
-              icon="calendar-alt"
-          />
-        </div>
+        <If condition={!hideIcon}>
+          <div
+              className="cal_icon_wrapper"
+              id={`cal-icon-${pickerId}`}
+          >
+            <Icon
+                className="cal_icon"
+                icon="calendar-alt"
+            />
+          </div>
+        </If>
         <If condition={error}>
           <Body
               className="error-body-kit"

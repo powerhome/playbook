@@ -7,6 +7,7 @@ const datePickerHelper = (config) => {
     disableRange,
     disableWeekdays,
     format,
+    hideIcon,
     maxDate,
     minDate,
     mode,
@@ -141,9 +142,11 @@ const datePickerHelper = (config) => {
   picker.config.onYearChange.push(yearChangeHook)
 
   // click handling for Calendar Icon
-  document.querySelector(`#cal-icon-${pickerId}`).addEventListener('click', () => {
-    picker.toggle()
-  })
+  if (!hideIcon){
+    document.querySelector(`#cal-icon-${pickerId}`).addEventListener('click', () => {
+      picker.toggle()
+    })
+  }
 
   // Adding dropdown icons to year and month selects
   picker.monthElements[0].insertAdjacentHTML('afterend', '<i class="far fa-angle-down month-dropdown-icon"></i>')

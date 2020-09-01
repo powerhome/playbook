@@ -18,6 +18,8 @@ module Playbook
       prop :error, type: Playbook::Props::String
       prop :format, type: Playbook::Props::String,
                     default: "m/d/Y"
+      prop :hide_icon, type: Playbook::Props::Boolean,
+                       default: false
       prop :hide_label, type: Playbook::Props::Boolean,
                         default: false
       prop :label, type: Playbook::Props::String,
@@ -47,6 +49,7 @@ module Playbook
           disableRange: disable_range,
           disableWeekdays: disable_weekdays,
           format: format,
+          hideIcon: hide_icon,
           maxDate: max_date,
           minDate: min_date,
           mode: mode,
