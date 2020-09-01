@@ -1,0 +1,1 @@
+A full list of formatting tokens can be found [here](https://flatpickr.js.org/formatting/).
