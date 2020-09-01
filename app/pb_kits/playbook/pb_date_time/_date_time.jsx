@@ -32,7 +32,7 @@ const DateTime = (props: DateTimeProps) => {
     id,
     showIcon = false,
     size = 'sm',
-    timeZone,
+    timeZone = 'America/New_York',
   } = props
 
   const ariaProps = buildAriaProps(aria)
