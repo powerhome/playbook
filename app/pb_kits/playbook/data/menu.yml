@@ -5,6 +5,7 @@ samples:
   - collection_detail
 
 kits:
+  - date_time
   - avatar
   - avatar_action_button
   - buttons:

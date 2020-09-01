@@ -1,0 +1,22 @@
+// [class^=pb_time_kit][class*=_center]
+
+[class^=pb_date_time] {
+  &[class*=_center] {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+  }
+  &[class*=_right]  {
+    display: flex;
+    justify-content: flex-end;
+    text-align: right;
+  }
+  // &[class*=_dark] {
+  //   & > * [class^=pb_title_kit] {
+  //     color: $text_dk_default;
+  //   }
+  //   & > * [class^=pb_caption_kit] {
+  //     color: $text_dk_light;
+  //   }
+  // }
+}

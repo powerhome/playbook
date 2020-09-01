@@ -15,7 +15,8 @@ type PbDateProps = {
   id?: string,
   showIcon?: boolean,
   showDayOfWeek?: boolean,
-  alignment?: "left" | "center" | "right"
+  alignment?: "left" | "center" | "right",
+  timeZone?: string,
 }
 
 const PbDate = (props: PbDateProps) => {
@@ -28,9 +29,10 @@ const PbDate = (props: PbDateProps) => {
     id,
     showDayOfWeek = false,
     showIcon = false,
+    timeZone,
   } = props
 
-  const dateTimestamp = new DateTime({ value: date })
+  const dateTimestamp = new DateTime({ value: date, zone: timeZone })
   const weekday = dateTimestamp.toWeekday()
   const month = dateTimestamp.toMonth()
   const day = dateTimestamp.toDay()
@@ -82,7 +84,7 @@ const PbDate = (props: PbDateProps) => {
         </span>
         <If condition={currentYear != year}>
           <span>
-            {` , ${year}`}
+            {`, ${year}`}
           </span>
         </If>
       </Title>
