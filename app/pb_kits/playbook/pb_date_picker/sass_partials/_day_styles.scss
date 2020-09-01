@@ -30,7 +30,7 @@
   box-shadow: 17px 0 0 #F7FBFF
 }
 .flatpickr-day.endRange {
-  box-shadow: -16px 0 0 #F7FBFF
+  box-shadow: -$space_sm 0 0 #F7FBFF
 }
 // had to use flat hex colors without alpha channels
 // the shadows were overlapping and opacities were adding together in spots
@@ -47,7 +47,7 @@
 }
 // Weekday styling
 div.flatpickr-weekdays {
-  margin-top: 8px;
+  margin-top: $space_xs;
 }
 span.flatpickr-weekday {
   @include caption;
