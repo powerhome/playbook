@@ -69,4 +69,28 @@ $selector: ".pb_nav_list";
       }
     }
   }
+  &[class*=dark]{
+    [class*=pb_nav_list_kit_item]{
+      [class*=_link]{
+        border-color: rgba($white, $opacity_3);
+      }
+      &[class*=_active] [class*=_link]{
+        border-color: $white;
+        [class*=_text],[class*=_icon]{
+          color: $text_dk_default;
+        }
+      }
+      [class*=_link] {
+        [class*=_text],[class*=_icon]{
+          color: $text_dk_lighter;
+        }
+        &:hover{
+          background-color: rgba($white, $opacity_1);
+          [class*=_icon],[class*=_text] {
+            color: $white;
+          }
+        }
+      }
+    }
+  }
 }

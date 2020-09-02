@@ -1,10 +1,10 @@
 import React from 'react'
 import { Body } from '../../'
 
-const BodyBlock = () => {
+const BodyBlock = (props) => {
   return (
     <div>
-      <Body>
+      <Body {...props}>
         {'I am a body kit'}
       </Body>
     </div>

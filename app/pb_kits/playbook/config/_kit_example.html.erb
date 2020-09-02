@@ -1,9 +1,9 @@
 <%if !@kit_examples[:examples].nil? %>
   <% @kit_examples[:examples].each do |kit_example| %>
     <% kit_example.each do |key, item| %>
-      <div class="pb--doc <%= @dark == "true" ? 'dark_ui' : 'light_ui'%>">
+    <%=pb_rails("card", props:{classname: "pb--doc", padding:"none"})do%>
         <%= render partial: "config/kit_ui", locals: { key: key, type: @type, item: item, show_code: @show_code } %>
-      </div>
+      <% end %>
     <% end %>
   <% end %>
 <% end %>

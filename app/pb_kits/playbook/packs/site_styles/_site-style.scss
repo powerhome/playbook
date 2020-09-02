@@ -13,7 +13,6 @@ body {
 .pb--page {
   &--topNav {
     flex: 0 0;
-    border-bottom: 1px solid $border_light;
     padding: 20px 30px;
     background: $white;
     h1 {
@@ -24,14 +23,14 @@ body {
       }
     }
     &.dark{
-    background: #172257;
+    background: tint(#0a0527, 10);
     }
   }
 
   &--content {
     min-height: calc(100vh - 89px);
     @include break_at(breakpoint("lg")) {
-      grid-template-columns: auto auto !important;
+      grid-template-columns: auto !important;
     }
     &--main {
       flex-grow: 1;
@@ -73,7 +72,6 @@ body {
         top: 100px;
         right: 0;
         width: auto !important;
-        padding: $space-xl;
         z-index: 1000;
       }
     }
@@ -96,9 +94,15 @@ body {
         padding-left: $space_md;
       }
     }
+    &[class*=dark]{
+      border-color:$border_dark;
+    }
   }
 }
-
+#toggle-modes{
+    display: flex;
+    margin-right: 80px;
+}
 // Nav Tabs switch between Rails and React
 .pb--kit-type-nav {
   margin: 20px 0 30px;
