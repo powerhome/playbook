@@ -3,6 +3,7 @@ examples:
   rails:
   - date_picker_default: Default
   - date_picker_hide_icon: Hide Input Icon
+  - date_picker_input: Input Field
   - date_picker_default_date: Default Date
   - date_picker_label: Label
   - date_picker_range: Range
@@ -18,6 +19,7 @@ examples:
   react:
   - date_picker_default: Default
   - date_picker_hide_icon: Hide Input Icon
+  - date_picker_input: Input Field
   - date_picker_default_date: Default Date
   - date_picker_label: Label
   - date_picker_range: Range

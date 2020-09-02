@@ -152,6 +152,8 @@ const datePickerHelper = (config) => {
   picker.monthElements[0].insertAdjacentHTML('afterend', '<i class="far fa-angle-down month-dropdown-icon"></i>')
   dropdown.insertAdjacentHTML('afterend', '<i class="far fa-angle-down year-dropdown-icon" id="test-id"></i>')
 
+  // Set input value attribute on page load
+  picker.input.setAttribute('value', picker.input.value)
   // logic for updating value when typing
   document.querySelector(`#${pickerId}`).addEventListener('input', (e) => {
     picker.input.setAttribute('value', e.target.value)

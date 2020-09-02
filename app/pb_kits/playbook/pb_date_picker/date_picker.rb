@@ -11,6 +11,8 @@ module Playbook
                           default: ""
       prop :disable_date, type: Playbook::Props::Array,
                           default: []
+      prop :disable_input, type: Playbook::Props::Boolean,
+                           default: false
       prop :disable_range, type: Playbook::Props::Array,
                            default: []
       prop :disable_weekdays, type: Playbook::Props::Array,
@@ -24,6 +26,12 @@ module Playbook
                         default: false
       prop :label, type: Playbook::Props::String,
                    default: "Date Picker"
+      prop :input_aria, type: Playbook::Props::Hash,
+                        default: {}
+      prop :input_dark, type: Playbook::Props::Boolean,
+                        default: false
+      prop :input_data, type: Playbook::Props::Hash,
+                        default: {}
       prop :max_date, type: Playbook::Props::String
       prop :min_date, type: Playbook::Props::String
       prop :name, type: Playbook::Props::String
@@ -31,10 +39,12 @@ module Playbook
                   default: "single"
       prop :picker_id, type: Playbook::Props::String,
                        required: true
+      prop :placeholder, type: Playbook::Props::String
       prop :read_only, type: Playbook::Props::Boolean,
                        default: false
       prop :required, type: Playbook::Props::Boolean,
                       default: false
+      prop :type, type: Playbook::Props::String
       prop :year_range, type: Playbook::Props::Array,
                         default: [1900, 2100]
 
@@ -61,6 +71,13 @@ module Playbook
 
       def error_class
         error ? " error" : ""
+      end
+
+      def icon_wrapper_class
+        base = "cal_icon_wrapper"
+        base += " dark" if input_dark
+        base += " no_label_shift" if hide_label
+        base
       end
     end
   end

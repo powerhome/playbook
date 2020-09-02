@@ -5,7 +5,7 @@ import classnames from 'classnames'
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
 import { globalProps } from '../utilities/globalProps.js'
 // import flatpickr from 'flatpickr'
-import { Icon, TextInput } from '../'
+import { Body, Caption, Icon } from '../'
 import datePickerHelper from './date_picker_helper.js'
 
 type DatePickerProps = {
@@ -14,7 +14,6 @@ type DatePickerProps = {
   data?: object,
   defaultDate?: String,
   disableDate?: Array,
-  disableInput?: Boolean,
   disableRange?: Array,
   disableWeekdays?: Array,
   error?: String,
@@ -22,18 +21,13 @@ type DatePickerProps = {
   hideIcon?: Boolean,
   hideLabel?: Boolean,
   id?: String,
-  inputAria?: object,
-  inputDark?: Boolean,
-  inputData?: object,
   label?: String,
   maxDate: String,
   minDate: String,
   mode?: String,
   name: String,
   pickerId?: String,
-  placeholder?: String,
   readOnly?: Boolean,
-  type?: String,
   yearRange?: Array,
 }
 const DatePicker = (props: DatePickerProps) => {
@@ -43,7 +37,6 @@ const DatePicker = (props: DatePickerProps) => {
     data = {},
     defaultDate = '',
     disableDate = null,
-    disableInput,
     disableRange = null,
     disableWeekdays = null,
     error,
@@ -51,18 +44,13 @@ const DatePicker = (props: DatePickerProps) => {
     hideIcon = false,
     hideLabel = false,
     id,
-    inputAria,
-    inputDark = false,
-    inputData,
     label = 'Date Picker',
     maxDate,
     minDate,
     mode = 'single',
     name,
     pickerId,
-    placeholder,
     readOnly = false,
-    type,
     yearRange = [ 1900, 2100 ],
   } = props
 
@@ -93,17 +81,6 @@ const DatePicker = (props: DatePickerProps) => {
     })
   }, [])
 
-  const iconWrapperClass = () => {
-    let base = 'cal_icon_wrapper'
-    if (inputDark){
-      base += ' dark'
-    }
-    if (hideLabel){
-      base += ' no_label_shift'
-    }
-    return base
-  }
-
   return (
     <div
         {...ariaProps}
@@ -112,23 +89,21 @@ const DatePicker = (props: DatePickerProps) => {
         id={id}
     >
       {className}
+      <If condition={!hideLabel}>
+        <Caption
+            className="caption_selector"
+            text={label}
+        />
+      </If>
       <div className="input_wrapper">
-        <TextInput
-            aria={inputAria}
+        <input
             autoComplete="off"
-            dark={inputDark}
-            data={inputData}
-            disabled={disableInput}
-            error={error}
             id={pickerId}
-            label={hideLabel ? null : label}
             name={name}
-            placeholder={placeholder}
-            type={type}
         />
         <If condition={!hideIcon}>
           <div
-              className={iconWrapperClass()}
+              className="cal_icon_wrapper"
               id={`cal-icon-${pickerId}`}
           >
             <Icon
@@ -137,13 +112,13 @@ const DatePicker = (props: DatePickerProps) => {
             />
           </div>
         </If>
-        {/* <If condition={error}>
+        <If condition={error}>
           <Body
               className="error-body-kit"
               status="negative"
               text={error}
           />
-        </If> */}
+        </If>
       </div>
     </div>
   )

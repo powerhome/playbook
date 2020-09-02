@@ -1,5 +1,6 @@
 export { default as DatePickerDefault } from './_date_picker_default.jsx'
 export { default as DatePickerHideIcon } from './_date_picker_hide_icon.jsx'
+export { default as DatePickerInput } from './_date_picker_input.jsx'
 export { default as DatePickerDefaultDate } from './_date_picker_default_date.jsx'
 export { default as DatePickerLabel } from './_date_picker_label.jsx'
 export { default as DatePickerRange } from './_date_picker_range.jsx'

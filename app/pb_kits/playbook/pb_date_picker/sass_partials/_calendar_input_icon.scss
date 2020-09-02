@@ -1,11 +1,11 @@
 // calendar icon styles
 .cal_icon_wrapper {
   position: absolute;
-  top: 0;
+  top: $space_md;
   right: 0;
   border-left: 1px solid $border_light;
   width: $space_xl + $space_xs;
-  height: $space_xl + 4.2;
+  height: $space_xl + 5;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -15,6 +15,12 @@
     &:hover {
       cursor: pointer;
     }
+  }
+  &.dark {
+    color: $white;
+  }
+  &.no_label_shift {
+    top: 0;
   }
 }
 .cal_icon {

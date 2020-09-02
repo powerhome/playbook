@@ -20,23 +20,15 @@
 
     .flatpickr-wrapper {
       display: block;
-      input {
+      .text_input.flatpickr-input {
         text-overflow: ellipsis;
-        padding-right: 45px !important;
+        padding-right: $space_xl + 10 !important;
       }
-      input::placeholder {
-        @include pb_body_light;
-      }
-      input {
-        @include pb_textarea_light;
-        @include pb_title_4;
-        overflow: hidden;
-      }
-      input:focus, input:-webkit-autofill:focus {
-        @include pb_textarea_focus;
-        -webkit-box-shadow: 0 0 0px 1000px $focus_input_light inset;
-        transition: background-color 5000s ease-in-out 0s;
-      }
+      // input:focus, input:-webkit-autofill:focus {
+      //   @include pb_textarea_focus;
+      //   -webkit-box-shadow: 0 0 0px 1000px $focus_input_light inset;
+      //   transition: background-color 5000s ease-in-out 0s;
+      // }
       // Calendar Shadow and Border
       .flatpickr-calendar {
         box-shadow: $shadow_deeper;

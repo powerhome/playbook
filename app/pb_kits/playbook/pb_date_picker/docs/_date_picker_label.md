@@ -1,0 +1,1 @@
+Default label prop is `"Date Picker"`.
