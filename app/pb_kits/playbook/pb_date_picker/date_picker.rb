@@ -74,10 +74,10 @@ module Playbook
       end
 
       def icon_wrapper_class
-        base = "cal_icon_wrapper"
-        base += " dark" if input_dark
-        base += " no_label_shift" if hide_label
-        base
+        class_string = "cal_icon_wrapper"
+        class_string += " dark" if input_dark
+        class_string += " no_label_shift" if hide_label
+        class_string
       end
     end
   end

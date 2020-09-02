@@ -6,7 +6,7 @@
       <div class="input_wrapper">
         <%= pb_rails("text_input", props: {
           aria: object.input_aria,
-          autocomplete: "off",
+          autocomplete: false,
           dark: object.input_dark,
           data: object.input_data,
           disabled: object.disable_input,
@@ -15,7 +15,7 @@
           label: object.hide_label ? nil : object.label,
           name: object.name,
           placeholder: object.placeholder,
-          required: object.required ? "required" : nil,
+          required: object.required,
           type: object.type
         }) %>
         <% if !object.hide_icon %>
