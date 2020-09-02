@@ -6,7 +6,7 @@
       transition-duration: $transition_short;
       transition-timing-function: $easeIn;    
       background-color: #F6FAFF;
-      border: none;
+      border-color: #F6FAFF;
       box-shadow: $shadow_deep;
     }
   }
@@ -20,14 +20,14 @@
   }
 }
 .flatpickr-day.selected, .flatpickr-day.startRange, .flatpickr-day.endRange {
-  border-radius: 50px;
+  border-radius: $space_xl + 10;
   background-color: $primary;
   border-color: $primary;
   box-shadow: $shadow_deep;
   font-weight: $bold; 
 }
 .flatpickr-day.startRange {
-  box-shadow: 17px 0 0 #F7FBFF
+  box-shadow: $space_sm + 1 0 0 #F7FBFF
 }
 .flatpickr-day.endRange {
   box-shadow: -$space_sm 0 0 #F7FBFF
@@ -37,7 +37,7 @@
 .flatpickr-day.inRange {
   background-color: #F7FBFF;
   border: 2px;
-  box-shadow: -4px 0 0 #F7FBFF, 5px 0 0 #F7FBFF;
+  box-shadow: -$space_xs + 4 0 0 #F7FBFF, $space_xs - 3 0 0 #F7FBFF;
 }
 .flatpickr-innerContainer {
   overflow: visible;

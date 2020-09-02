@@ -4,7 +4,7 @@
     data: object.data,
     id: object.id) do %>
     <% if !object.hide_label %>
-      <%= pb_rails("caption", props: { text: object.label }) %>
+      <%= pb_rails("caption", props: { classname: "caption_selector", text: object.label }) %>
     <% end %>
       <div class="input_wrapper">
         <input

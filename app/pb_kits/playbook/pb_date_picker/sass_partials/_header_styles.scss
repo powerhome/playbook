@@ -1,28 +1,27 @@
 @import "../../pb_title/title_mixin";
 // Header Styles
-$header_height: 40px;
 
 .flatpickr-months {
   border-bottom: solid 1px $border_light;
 }
 .flatpickr-month {
-  height: $header_height;
+  height: $space_xl;
 }
 .flatpickr-current-month {
-  left: 10px;
+  left: $space_xs;
   display: flex;
-  padding-top: 0px;
+  padding-top: 0;
 }
 .flatpickr-monthDropdown-months {
   appearance: none;
   @include pb_title_4;
-  height: $header_height;
-  width: 93px;
-  padding-left: 0px;
-  padding-right: 10px;
-  margin-left: 15px;
-  margin-top: 0px;
-  margin-bottom: 0px;
+  height: $space_xl;
+  width: $space_xs * 12;
+  padding-left: 0;
+  padding-right: $space_xs;
+  margin-left: $space_sm;
+  margin-top: 0;
+  margin-bottom: 0;
   @media (hover: hover) {
     &:hover {
       background-color: transparent;
@@ -33,14 +32,14 @@ $header_height: 40px;
   display: contents;
   .numInput {
     @include pb_title_4;
-    border: 0px;
+    border: 0;
     appearance: none;
     background-color: transparent;
     border-left: solid 1px $border_light;
-    padding-left: 22.5px;
-    padding-right: 14px;
-    margin-left: 10px;
-    height: $header_height;
+    padding-left: $space_md - 1.5;
+    padding-right: $space_sm;
+    margin-left: $space_xs;
+    height: $space_xl;
     &:focus {
       outline: none;
     }
@@ -54,19 +53,19 @@ $header_height: 40px;
 // Icon for select tags
 .month-dropdown-icon {
   align-self: center;
-  margin-top: 5px;
-  width: 10px;
+  margin-top: $space_xs - 3;
+  width: $space_xs + 2;
   position: relative;
-  right: 10px;
+  right: $space_xs + 2;
   pointer-events: none;
   color: $text_lt_light;
 }
 .year-dropdown-icon {
   align-self: center;
-  margin-top: 5px;
-  width: 10px;
+  margin-top: $space_xs - 3;
+  width: $space_xs + 2;
   position: relative;
-  right: 12px;
+  right: $space_xs + 4;
   pointer-events: none;
   color: $text_lt_light;
 }
@@ -76,10 +75,10 @@ $header_height: 40px;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  left: 234px !important;
-  padding-right: 10px;
+  left: $space_xs * 29.25 !important;
+  padding-right: $space_sm;
   border-left: solid 1px $border_light;
-  height: $header_height;
+  height: $space_xl;
   svg path {
     fill: $text_lt_light;
   }
@@ -95,8 +94,8 @@ $header_height: 40px;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding-left: 10px;
-  height: $header_height;
+  padding-left: $space_sm;
+  height: $space_xl;
   svg path {
     fill: $text_lt_light;
   }

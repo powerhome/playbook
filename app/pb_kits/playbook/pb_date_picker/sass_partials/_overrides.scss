@@ -13,15 +13,23 @@
     width: 323.88px;
   }
 }
+@media (max-width: 499px) {
+  .numInput.cur-year {
+    padding-left: $space_sm;
+  }
+  .flatpickr-prev-month {
+    left: $space_xs * 27.5 !important;
+  }
+}
 // Firefox Header Adjustments
 @supports (-moz-appearance:none) { 
   select.flatpickr-monthDropdown-months {
       width: 97px !important;
-      margin-left: 11px;
+      margin-left: $space_xs + 3;
   }
   select.numInput {
-    padding-left: 17.5px !important;
-    margin-left: 11px !important;
+    padding-left: $space_sm + 1.5 !important;
+    margin-left: $space_xs !important;
   }
 }
 // direct overrides

@@ -91,6 +91,7 @@ const DatePicker = (props: DatePickerProps) => {
       {className}
       <If condition={!hideLabel}>
         <Caption
+            className="caption_selector"
             text={label}
         />
       </If>
