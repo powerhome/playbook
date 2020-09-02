@@ -1,9 +1,17 @@
 @import "../tokens/colors";
 $transition: $transition_cubic;
 
+
+
 [class^=pb_checkbox_card_kit] {
   [class^=pb_selectable_card_kit] label > div {
     display: inline-flex;
+
+
+  }
+
+  label label {
+    display: none
   }
 
   .pb_checkbox_label {

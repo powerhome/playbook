@@ -1,20 +1,24 @@
 
-
 /* @flow */
 
-import React, { useState } from 'react'
+import React from 'react'
 import classnames from 'classnames'
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
 import { globalProps } from '../utilities/globalProps.js'
-import { Card, Checkbox } from '../'
+import { Checkbox, SelectableCard } from '../'
+import { noop } from '../utilities/props'
 
 type CheckboxCardProps = {
   aria?: object,
   children?: array<React.ReactNode> | React.ReactNode,
   className?: string,
+  disabled?: Boolean,
   data?: object,
   id?: string,
   text?: string,
+  checked?: boolean,
+  children?: array<React.ReactChild>,
+  onChange: InputCallback<HTMLInputElement>
 }
 
 const CheckboxCard = (props: CheckboxCardProps) => {
@@ -24,21 +28,17 @@ const CheckboxCard = (props: CheckboxCardProps) => {
     data = {},
     id,
     checked = false,
-    disabled = false
+    disabled = false,
+    children = [],
+    onChange = noop,
+    text = '',
   } = props
-
-  const [isChecked, setIsChecked] = useState(checked)
-  const checkboxChanged = e => {
-    if (!disabled) {
-      e.persist()
-      setIsChecked(e.target.checked)
-    }
-  }
 
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
   const classes = classnames(buildCss('pb_checkbox_card'), className, globalProps(props))
 
+  // console.log(children)
   return (
     <div
         {...ariaProps}
@@ -46,10 +46,33 @@ const CheckboxCard = (props: CheckboxCardProps) => {
         className={classes}
         id={id}
     >
-      <Card {...props} selected={isChecked}>
-        <Checkbox {...props} checked={isChecked} onChange={checkboxChanged}/>
-      </Card>
+      <SelectableCard
+          disabled={disabled}
+          onChange={onChange}
+          selected={checked}
+      >
+        <Checkbox
+            checked={checked}
+            disabled={disabled}
+            onChange={onChange}
+            text={text}
+        />
+
+        { children}
+
+      </SelectableCard>
     </div>
+
+  // <div
+  //     {...ariaProps}
+  //     {...dataProps}
+  //     className={classes}
+  //     id={id}
+  // >
+  //   <Card {...props} selected={isChecked}>
+  //     <Checkbox {...props} checked={isChecked} onChange={checkboxChanged}/>
+  //   </Card>
+  // </div>
   )
 }
 
