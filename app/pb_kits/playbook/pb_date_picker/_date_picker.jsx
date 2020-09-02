@@ -137,13 +137,6 @@ const DatePicker = (props: DatePickerProps) => {
             />
           </div>
         </If>
-        {/* <If condition={error}>
-          <Body
-              className="error-body-kit"
-              status="negative"
-              text={error}
-          />
-        </If> */}
       </div>
     </div>
   )

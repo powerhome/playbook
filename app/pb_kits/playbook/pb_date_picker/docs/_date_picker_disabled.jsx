@@ -39,7 +39,7 @@ const DatePickerDisabled = () => (
     />
     <DatePicker
         disableWeekdays={['Sunday', 'Saturday']}
-        label="Disable Weekdays"
+        label="Disable Specific Weekdays"
         pickerId="disabled-weekdays"
     />
   </div>

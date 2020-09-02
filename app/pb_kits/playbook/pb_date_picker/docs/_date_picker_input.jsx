@@ -25,11 +25,6 @@ const DatePickerInput = () => (
         pickerId="date-picker-input4"
         placeholder="Disabled Input"
     />
-    <DatePicker
-        hideLabel
-        inputDark
-        pickerId="date-picker-input5"
-    />
   </div>
 )
 
