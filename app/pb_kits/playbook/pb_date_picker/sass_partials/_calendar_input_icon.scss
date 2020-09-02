@@ -23,6 +23,9 @@
   &.no_label_shift {
     top: 0;
   }
+  &.error {
+    border-left-color: $error;
+  }
 }
 .cal_icon {
   width: $space_sm;

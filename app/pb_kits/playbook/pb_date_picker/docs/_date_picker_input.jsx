@@ -16,14 +16,15 @@ const DatePickerInput = () => (
         placeholder="Select Date"
     />
     <DatePicker
-        inputDark
-        pickerId="date-picker-input3"
-    />
-    <DatePicker
         defaultDate="blank"
         disableInput
-        pickerId="date-picker-input4"
+        pickerId="date-picker-input3"
         placeholder="Disabled Input"
+    />
+    <DatePicker
+        dark
+        hideLabel
+        pickerId="date-picker-input4"
     />
   </div>
 )

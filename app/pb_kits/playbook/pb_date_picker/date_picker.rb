@@ -7,6 +7,8 @@ module Playbook
 
       partial "pb_date_picker/date_picker"
 
+      prop :dark, type: Playbook::Props::Boolean,
+                  default: false
       prop :default_date, type: Playbook::Props::String,
                           default: ""
       prop :disable_date, type: Playbook::Props::Array,
@@ -28,8 +30,6 @@ module Playbook
                    default: "Date Picker"
       prop :input_aria, type: Playbook::Props::Hash,
                         default: {}
-      prop :input_dark, type: Playbook::Props::Boolean,
-                        default: false
       prop :input_data, type: Playbook::Props::Hash,
                         default: {}
       prop :max_date, type: Playbook::Props::String
@@ -75,8 +75,9 @@ module Playbook
 
       def icon_wrapper_class
         class_string = "cal_icon_wrapper"
-        class_string += " dark" if input_dark
+        class_string += " dark" if dark
         class_string += " no_label_shift" if hide_label
+        class_string += error_class
         class_string
       end
     end

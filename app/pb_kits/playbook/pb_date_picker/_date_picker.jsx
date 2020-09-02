@@ -11,6 +11,7 @@ import datePickerHelper from './date_picker_helper.js'
 type DatePickerProps = {
   aria?: object,
   className?: String,
+  dark?: Boolean,
   data?: object,
   defaultDate?: String,
   disableDate?: Array,
@@ -23,7 +24,6 @@ type DatePickerProps = {
   hideLabel?: Boolean,
   id?: String,
   inputAria?: object,
-  inputDark?: Boolean,
   inputData?: object,
   label?: String,
   maxDate: String,
@@ -40,6 +40,7 @@ const DatePicker = (props: DatePickerProps) => {
   const {
     aria = {},
     className,
+    dark = false,
     data = {},
     defaultDate = '',
     disableDate = null,
@@ -52,7 +53,6 @@ const DatePicker = (props: DatePickerProps) => {
     hideLabel = false,
     id,
     inputAria,
-    inputDark = false,
     inputData,
     label = 'Date Picker',
     maxDate,
@@ -95,11 +95,14 @@ const DatePicker = (props: DatePickerProps) => {
 
   const iconWrapperClass = () => {
     let base = 'cal_icon_wrapper'
-    if (inputDark){
+    if (dark){
       base += ' dark'
     }
     if (hideLabel){
       base += ' no_label_shift'
+    }
+    if (error){
+      base += ' error'
     }
     return base
   }
@@ -116,7 +119,7 @@ const DatePicker = (props: DatePickerProps) => {
         <TextInput
             aria={inputAria}
             autoComplete="off"
-            dark={inputDark}
+            dark={dark}
             data={inputData}
             disabled={disableInput}
             error={error}

@@ -13,6 +13,7 @@ type TextInputProps = {
   aria?: object,
   className: string,
   data?: object,
+  dark?: boolean,
   disabled?: boolean,
   error?: string,
   id?: string,
@@ -60,6 +61,7 @@ const TextInput = ({
     >
       <Caption
           className="pb_text_input_kit_label"
+          dark={props.dark}
           text={label}
       />
       <div className="text_input_wrapper">

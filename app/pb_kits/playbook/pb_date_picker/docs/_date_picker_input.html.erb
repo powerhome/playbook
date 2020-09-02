@@ -13,13 +13,14 @@
 }) %>
 
 <%= pb_rails("date_picker", props: {
-  input_dark: true,
-  picker_id: "date-picker-input3"
+  default_date: "blank",
+  disable_input: true,
+  picker_id: "date-picker-input3",
+  placeholder: "Disabled Input"
 }) %>
 
 <%= pb_rails("date_picker", props: {
-  default_date: "blank",
-  disable_input: true,
-  picker_id: "date-picker-input4",
-  placeholder: "Disabled Input"
+  dark: true,
+  hide_label: true,
+  picker_id: "date-picker-input4"
 }) %>
