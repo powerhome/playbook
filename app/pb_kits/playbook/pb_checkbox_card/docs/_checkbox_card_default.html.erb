@@ -1,16 +1,18 @@
-<%= pb_rails("checkbox_card", props: { name: "default-example", text: "TEST text"}) %>
-<%= pb_rails("checkbox_card", props: { name: "checked-example", text: "checked to start", checked: true}) %>
+<%= pb_rails("checkbox_card", props: { name: "default-example", text: "Default"}) %>
+<%= pb_rails("checkbox_card", props: { name: "checked-example", text: "Checked", checked: true}) %>
 <%= pb_rails("checkbox_card", props: { name: "block example", checked: true}) do %>
   <div>
     <span>This is a block</span>
     <strong>This is text inside the block</strong><br>
     <span> This is more text inside a block</span>
+    <span>This is how it looks when you don't pass a text prop</span>
   </div>
 <% end %>
 
-<%= pb_rails("checkbox_card", props: { name: "block-and-text", checked: true, text: "this is from the text prop"}) do %>
-  This is text in the block
+<%= pb_rails("checkbox_card", props: { name: "block-and-text", checked: true, text: "This is from the text prop"}) do %>
+  This is text in a block
+  The alignment ends up being different
 <% end %>
 
 <%= pb_rails("checkbox_card", props: { name: "checked-disabled", disabled: true, text: "Disabled and checked", checked: true}) %>
-<%= pb_rails("checkbox_card", props: { name: "unchecked-disabled", disabled: true, text: "Disabled not checked",}) %>
+<%= pb_rails("checkbox_card", props: { name: "unchecked-disabled", disabled: true, text: "Disabled not checked"}) %>
