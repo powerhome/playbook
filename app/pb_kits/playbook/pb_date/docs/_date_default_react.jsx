@@ -5,14 +5,15 @@ const DateDefaultReact = () => {
   return (
     <div>
       <FormattedDate
-          date="2012-12-25"
+          date={new Date()}
       />
 
       <br />
 
       <FormattedDate
-          date={new Date()}
+          date={new Date('2012-08-03')}
       />
+
     </div>
   )
 }

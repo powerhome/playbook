@@ -9,19 +9,12 @@
         <%= object.pb_date_time.to_timezone.upcase %>
       <% end %>
     <% end %>
-  <% elsif object.size == "sm" %>
-    <%= pb_rails("body", props: { tag: "span", text: object.format_time_string }) do %>
-      <%= pb_rails("icon", props: { icon: "clock", fixed_width: true }) %>
-      <%= content_tag(:time, datetime: object.pb_date_time.to_iso) do %>
-        <%= content_tag(:span) do %>
-          <%= object.format_time_string %>
-          <%= content_tag(:span, class: "pb_time_timezone") do %>
-            <%= object.pb_date_time.to_timezone.upcase %>
-          <% end %>
-        <% end %>
+  <% else %>
+    <% if object.show_icon %>
+      <%= pb_rails("body", props: { color: "light", tag: "span"}) do %>
+        <%= pb_rails("icon", props: { icon: "clock", fixed_width: true }) %>
       <% end %>
     <% end %>
-  <% else %>
     <%= pb_rails("body", props: { tag: "span", text: object.format_time_string }) do %>
       <%= content_tag(:time, datetime: object.pb_date_time.to_iso) do %>
         <%= content_tag(:span) do %>
