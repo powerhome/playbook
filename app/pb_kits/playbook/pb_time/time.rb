@@ -9,9 +9,10 @@ module Playbook
 
       prop :time, required: true
       prop :size, type: Playbook::Props::Enum,
-                  values: %w[lg sm xs],
+                  values: %w[lg sm],
                   default: "sm"
       prop :timezone, default: "America/New_York"
+      prop :show_icon, type: Playbook::Props::Boolean, default: false
 
       def classname
         generate_classname("pb_time_kit", size)
