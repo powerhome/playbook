@@ -1,4 +1,3 @@
-// media query non mobile styles
 @media (min-width: 500px) {
   .flatpickr-calendar {
     padding: $space_xs;
@@ -32,7 +31,7 @@
     margin-left: $space_xs !important;
   }
 }
-// direct overrides
+// Direct Overrides
 .flatpickr-months .flatpickr-prev-month.flatpickr-disabled,
 .flatpickr-months .flatpickr-next-month.flatpickr-disabled {
   cursor: not-allowed;

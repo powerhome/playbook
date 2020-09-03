@@ -1,11 +1,9 @@
-// @import "~flatpickr/dist/flatpickr.css";
 @import "../pb_caption/caption_mixin";
 @import "../pb_textarea/textarea_mixin";
 @import "../tokens/colors";
 @import "./sass_partials/flatpickr_styles";
 
 [class^=pb_date_picker_kit] {
-  // input styles
   .input_wrapper {
     margin-bottom: $space_sm;
     position: relative;
@@ -20,11 +18,6 @@
         text-overflow: ellipsis;
         padding-right: $space_xl + 10 !important;
       }
-      // input:focus, input:-webkit-autofill:focus {
-      //   @include pb_textarea_focus;
-      //   -webkit-box-shadow: 0 0 0px 1000px $focus_input_light inset;
-      //   transition: background-color 5000s ease-in-out 0s;
-      // }
       // Calendar Shadow and Border
       .flatpickr-calendar {
         box-shadow: $shadow_deeper;
@@ -38,8 +31,7 @@
     }
   }
 }
-
-// So that picker remains visible inside filter kit
+// Ensures picker remains visible inside filter kit
 .pb_popover_body {
   overflow: visible !important;
 }

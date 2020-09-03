@@ -107,7 +107,7 @@ const datePickerHelper = (config) => {
   })
 
   // ===========================================================
-  //                 Additional JS Functionality
+  //                 Additional JS Functionality               |
   // ===========================================================
 
   // Assign dynamically sourced flatpickr instance to variable

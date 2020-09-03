@@ -1,6 +1,5 @@
 @import "../../pb_title/title_mixin";
 // Header Styles
-
 .flatpickr-months {
   border-bottom: solid 1px $border_light;
 }
@@ -50,7 +49,7 @@
     }
   }
 }
-// Icon for select tags
+// Icon for Select Tags
 .month-dropdown-icon {
   align-self: center;
   margin-top: $space_xs - 3;

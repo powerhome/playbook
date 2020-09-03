@@ -4,7 +4,6 @@ import React, { useEffect } from 'react'
 import classnames from 'classnames'
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
 import { globalProps } from '../utilities/globalProps.js'
-// import flatpickr from 'flatpickr'
 import { Icon, TextInput } from '../'
 import datePickerHelper from './date_picker_helper.js'
 

@@ -32,8 +32,6 @@
 .flatpickr-day.endRange {
   box-shadow: -$space_sm 0 0 #F7FBFF
 }
-// had to use flat hex colors without alpha channels
-// the shadows were overlapping and opacities were adding together in spots
 .flatpickr-day.inRange {
   background-color: #F7FBFF;
   border: 2px;
@@ -45,7 +43,7 @@
 .flatpickr-days {
   overflow: visible;
 }
-// Weekday styling
+// Weekday Styling
 div.flatpickr-weekdays {
   margin-top: $space_xs;
 }
