@@ -53,6 +53,7 @@ import * as Layout from 'pb_layout/docs'
 import * as Legend from 'pb_legend/docs'
 import * as LineGraph from 'pb_line_graph/docs'
 import * as List from 'pb_list/docs'
+import * as Loading from 'pb_loading/docs'
 import * as LoadingInline from 'pb_loading_inline/docs'
 import * as Message from 'pb_message/docs'
 import * as MultipleUsers from 'pb_multiple_users/docs'
@@ -133,6 +134,7 @@ WebpackerReact.setup({
   ...Legend,
   ...LineGraph,
   ...List,
+  ...Loading,
   ...LoadingInline,
   ...Message,
   ...MultipleUsers,

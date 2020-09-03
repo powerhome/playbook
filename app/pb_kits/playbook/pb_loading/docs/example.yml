@@ -1,0 +1,13 @@
+examples:
+  
+  rails:
+  - loading_default: Default
+  - loading_align: Align
+  - loading_size: Size
+  
+  
+  react:
+  - loading_default: Default
+  - loading_align: Align
+  - loading_size: Size
+  

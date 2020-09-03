@@ -1,0 +1,41 @@
+.loading-container {
+    background: #F3F7FB;
+    border-radius: 6px;
+    margin: 4px 0;
+    padding: 1rem 2rem;
+}
+
+[class^=pb_loading_kit] {
+    &[class*=_sm] .loading-circle {
+        height: 20px;
+        width: 25px;
+    }
+    &[class*=_md] .loading-circle {
+        height: 40px;
+        width: 45px;
+    }
+    &[class*=_lg] .loading-circle {
+        height: 60px;
+        width: 65px;
+    }
+    .loading-circle {
+        animation: circle 1.2s infinite;
+        background: #0056CF;
+        clip-path: circle(85%);
+        &:nth-child(1) {
+            animation-delay: 100ms;
+        }
+        &:nth-child(2) {
+            animation-delay: 200ms;
+        }
+        &:nth-child(3) {
+            animation-delay: 300ms;
+        }
+    }
+}
+
+@keyframes circle {
+    0% { clip-path: circle(33%); }
+    50% { clip-path: circle(25%); }
+    100% { clip-path: circle(33%); }
+}

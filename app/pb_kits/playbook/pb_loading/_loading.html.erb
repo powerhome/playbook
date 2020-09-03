@@ -1,0 +1,11 @@
+<%= content_tag(:div,
+    aria: object.aria,
+    class: object.classname,
+    data: object.data,
+    id: object.id) do %>
+    <%= pb_rails("flex", props: {horizontal: object.align}) do %>
+      <div class="loading-circle"></div>
+      <div class="loading-circle"></div>
+      <div class="loading-circle"></div>
+    <% end %>
+<% end %>
