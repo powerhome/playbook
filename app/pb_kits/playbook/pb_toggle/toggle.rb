@@ -14,10 +14,13 @@ module Playbook
       prop :checked, type: Playbook::Props::Boolean,
                      default: false
       prop :name
+      prop :size, type: Playbook::Props::Enum,
+                  values: %w[sm md],
+                  default: "md"
       prop :value
 
       def classname
-        generate_classname("pb_toggle_kit", checked_class)
+        generate_classname("pb_toggle_kit", size, checked_class)
       end
 
       def input
