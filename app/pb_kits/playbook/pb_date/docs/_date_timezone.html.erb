@@ -1,0 +1,51 @@
+<%= pb_rails("caption", props: { text: "East Coast (Default)"}) %>
+<%= pb_rails("date", props: {
+  date: DateTime.now,
+  timezone: "America/New_York"
+}) %>
+
+<br>
+
+<%= pb_rails("caption", props: { text: "West Coast"}) %>
+<%= pb_rails("date", props: {
+  date: DateTime.now,
+  timezone: "America/Los_Angeles"
+}) %>
+
+<br>
+
+<%= pb_rails("caption", props: { text: "Toyko, Japan"}) %>
+<%= pb_rails("date", props: {
+  date: DateTime.now,
+  timezone: "Asia/Tokyo"
+}) %>
+
+<br>
+
+<%= pb_rails("caption", props: { text: "Anti-pattern example"}) %>
+
+<%= pb_rails("date", props: {
+  date: Date.today,
+  timezone: "Australia/Sydney"
+}) %>
+<%= pb_rails("body", props: { text: "Date.today ignores Timezone"}) %>
+
+<br>
+
+<%= pb_rails("caption", props: { text: "DateTime respects Timezone"}) %>
+
+<%= pb_rails("date", props: {
+  date: DateTime.now,
+  timezone: "Australia/Sydney"
+}) %>
+
+<%= pb_rails("body", props: { text: "'.now' in Australia is tomorrow (if you're EST after 10am)"}) %>
+
+<br>
+
+<%= pb_rails("caption", props: { text: "String Dates"}) %>
+<%= pb_rails("date", props: {
+  date: "2012-08-02T00:49:29Z",
+}) %>
+
+<%= pb_rails("body", props: { text: "Defaults to UTC, then changes due to EST Timezone."}) %>

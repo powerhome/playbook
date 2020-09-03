@@ -42,10 +42,12 @@ $table-dark-card-bg: $bg_dark;
       &:not(.no-hover) {
         tbody {
           tr {
-            &:hover {
-              td {
-                border-color: $border_dark !important;
-                background: $bg_dark;
+            @media (hover:hover) {
+              &:hover {
+                td {
+                  border-color: $border_dark !important;
+                  background: $bg_dark;
+                }
               }
             }
           }

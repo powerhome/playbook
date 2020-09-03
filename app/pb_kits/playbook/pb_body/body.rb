@@ -41,7 +41,7 @@ module Playbook
       end
 
       def color_class
-        color
+        color == "default" ? nil : color
       end
 
       def status_class

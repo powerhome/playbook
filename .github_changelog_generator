@@ -4,4 +4,4 @@ include-labels=cleanup,enhancement,bug,testing,New Kit
 issues=false
 add-sections={"documentation":{"prefix":"**New Kits:**","labels":["New Kit"]}}
 max-issues=75
-since-tag=6.2.0
+since-tag=6.3.0
