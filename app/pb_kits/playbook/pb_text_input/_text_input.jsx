@@ -27,23 +27,25 @@ type TextInputProps = {
   children: Node,
 }
 
-const TextInput = ({
-  aria = {},
-  className,
-  data = {},
-  disabled,
-  error,
-  id,
-  name,
-  label,
-  onChange = () => {},
-  placeholder,
-  required,
-  type = 'text',
-  value,
-  children = null,
-  ...props
-}: TextInputProps) => {
+const TextInput = (props: TextInputProps) => {
+  const {
+    aria = {},
+    className,
+    data = {},
+    dark = false,
+    disabled,
+    error,
+    id,
+    name,
+    label,
+    onChange = () => {},
+    placeholder,
+    required,
+    type = 'text',
+    value,
+    children = null,
+  } = props
+
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
   const css = classnames([
@@ -61,7 +63,7 @@ const TextInput = ({
     >
       <Caption
           className="pb_text_input_kit_label"
-          dark={props.dark}
+          dark={dark}
           text={label}
       />
       <div className="text_input_wrapper">

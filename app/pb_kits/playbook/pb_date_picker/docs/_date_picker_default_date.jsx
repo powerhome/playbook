@@ -14,7 +14,7 @@ const DatePickerDefaultDate = () => (
         pickerId="date-picker-default-date2"
     />
     <DatePicker
-        defaultDate={[new Date().fp_incr(1), new Date().fp_incr(3)]}
+        defaultDate={[new Date(), new Date().fp_incr(6)]}
         label="Default Date Range"
         mode="range"
         pickerId="date-picker-default-date3"
