@@ -7,11 +7,13 @@ const ButtonLoading = () => (
         loading
         text="Button Primary"
     />
+    {' '}
     <Button
         loading
         text="Button Secondary"
         variant="secondary"
     />
+    {' '}
     <Button
         loading
         text="A Tag Button Disabled"

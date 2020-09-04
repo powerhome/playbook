@@ -7,11 +7,13 @@ const ButtonLink = () => (
         link="https://google.com"
         text="A Tag Button"
     />
+    {' '}
     <Button
         link="https://google.com"
         newWindow
         text="Open in New Window"
     />
+    {' '}
     <Button
         disabled
         link="https://google.com"
