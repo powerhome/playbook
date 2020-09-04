@@ -1,5 +1,4 @@
 
-
 /* @flow */
 
 import React from 'react'
@@ -17,9 +16,9 @@ type PaginationProps = {
 const Pagination = (props: PaginationProps) => {
   const {
     aria = {},
-  className,
-  data = {},
-  id,
+    className,
+    data = {},
+    id,
   } = props
 
   const ariaProps = buildAriaProps(aria)

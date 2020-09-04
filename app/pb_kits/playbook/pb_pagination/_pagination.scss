@@ -1,3 +1,33 @@
-.pb_pagination {
+@import "../tokens/border_radius";
+@import "../tokens/spacing";
+@import "../tokens/colors";
 
+.pb_pagination {
+}
+
+.pb_pagination_kit {
+  width: max-content;
+  width: -moz-fit-content;
+  border: $border_rad_lightest solid $neutral;
+  border-radius: $border_rad_heavier;
+  padding: 6px;
+}
+
+.paginate-body {
+  padding: 0px 10px;
+}
+
+.paginate-left,
+.paginate-right {
+  padding: 0px 10px;
+  font-size: 12px;
+  font-weight: bolder;
+  color: $neutral;
+  cursor: pointer;
+}
+.paginate-left {
+  border-right: 1px solid $neutral;
+}
+.paginate-right {
+  border-left: 1px solid $neutral;
 }

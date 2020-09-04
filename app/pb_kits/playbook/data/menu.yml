@@ -82,6 +82,7 @@ kits:
     - label_pill
     - label_value
     - message
+    - pagination
     - person
     - person_contact
     - stat_value
@@ -94,4 +95,4 @@ kits:
     - weekday_stacked
   - user
   - user_badge
-  - pagination
+

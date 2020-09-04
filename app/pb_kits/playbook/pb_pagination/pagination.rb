@@ -6,6 +6,10 @@ module Playbook
       include Playbook::Props
 
       partial "pb_pagination/pagination"
+
+      def classname
+        generate_classname("pb_pagination_kit")
+      end
     end
   end
 end
