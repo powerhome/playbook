@@ -19,7 +19,7 @@
 </div>
 
   <% if @show_code%>
-    <div class="markdown pb--kit-example-markdown <%=cookies[:dark_mode] == "true" ? "dark" : "" %>">
+    <div class="markdown pb--kit-example-markdown <%=ENV["dark_mode"] == "true" ? "dark" : "" %>">
       <%= markdown(get_per_sample_descriptions(@kit_examples[:kit], key)) %>
     </div>
     <div class="pb--codeControls">

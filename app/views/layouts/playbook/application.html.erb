@@ -9,13 +9,13 @@
   </head>
   <body>
     <%= render 'layouts/playbook/nav'%>
-    <%= pb_rails("layout", props: {classname: "pb--page--content",variant: cookies[:dark_mode] == "true" ? 'dark' : 'light' }) do%>
+    <%= pb_rails("layout", props: {classname: "pb--page--content",variant: ENV["dark_mode"] == "true" ? 'dark' : 'light' }) do%>
       <%= render 'layouts/playbook/mobile_hamburger'%>
       <%= pb_rails("layout/sidebar", props: { classname: "pb--page--sideNav"}) do%>
         <%= render 'layouts/playbook/sidebar'%>
       <% end%>
       <%= pb_rails("layout/body") do%>
-        <div class="pb--page--content--main <%= cookies[:dark_mode] == "true" ? 'dark' : '' %>">
+        <div class="pb--page--content--main <%= ENV["dark_mode"] == "true" ? 'dark' : '' %>">
           <%= yield %>
         </div>
       <% end %>

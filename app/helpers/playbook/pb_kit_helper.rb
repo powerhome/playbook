@@ -21,24 +21,7 @@ module Playbook
     end
 
   private
-    def dark_mode
-      if cookies[:dark_mode] == "true"
-        true
-      else
-        false
-      end
-    end
-
-    def dark_mode_props(props)
-      if cookies[:dark_mode] == "true"
-        props.merge(dark: dark_mode)
-      elsif cookies[:dark_mode] == "false"
-        props.merge(dark: dark_mode)
-      else
-        props
-      end
-    end
-
+  
     def is_subkit?(kit)
       kit.match(%r{[/\\]})
     end

@@ -45,7 +45,7 @@ module Playbook
     end
 
     def pb_kit(kit: "", type: "rails", show_code: true)
-      @dark = cookies[:dark_mode]
+      # @dark = ENV["dark_mode"]
       @type = type
       @kit_examples = get_kit_examples(kit, type)
       @show_code = show_code
