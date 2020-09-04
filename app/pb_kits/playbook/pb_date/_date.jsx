@@ -2,91 +2,82 @@
 
 import React from 'react'
 import DateTime from '../pb_kit/dateTime.js'
-import { Body, Icon, Title } from '../'
+import { Icon } from '../'
 import classnames from 'classnames'
 import { globalProps } from '../utilities/globalProps.js'
-import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
 
-type PbDateProps = {
-  aria: Object,
-  date: string | date,
-  className?: string,
-  data?: Object,
-  id?: string,
-  showIcon?: boolean,
-  showDayOfWeek?: boolean,
-  alignment?: "left" | "center" | "right"
+const defaultDateString = (value: DateTime) => {
+  const weekday = value.toWeekday().toUpperCase()
+  const month = value.toMonth().toUpperCase()
+  const day = value.toDay()
+
+  return `${weekday} · ${month} ${day}`
 }
 
-const PbDate = (props: PbDateProps) => {
-  const {
-    aria = {},
-    alignment = 'left',
-    className,
-    date,
-    data = {},
-    id,
-    showDayOfWeek = false,
-    showIcon = false,
-  } = props
+const largeDateString = (value: DateTime) => {
+  const month = value.toMonth().toUpperCase()
+  const day = value.toDay()
 
-  const dateTimestamp = new DateTime({ value: date })
-  const weekday = dateTimestamp.toWeekday()
-  const month = dateTimestamp.toMonth()
-  const day = dateTimestamp.toDay()
-  const year = dateTimestamp.toYear()
-  const currentYear = new Date().getFullYear().toString()
+  return `${month} ${day}`
+}
 
-  const ariaProps = buildAriaProps(aria)
-  const dataProps = buildDataProps(data)
+type DateSubcomponent = {
+  value: DateTime,
+}
 
-  const classes = classnames(
-    className,
-    buildCss('pb_date_kit', alignment),
-    globalProps(props)
-  )
+const ExtraSmallDate = ({ value, ...props }: DateSubcomponent) => (
+  <h3 className={classnames('pb_title_kit_4', globalProps(props))}>
+    {defaultDateString(value)}
+  </h3>
+)
+
+const SmallDate = ({ value, ...props }: DateSubcomponent) => (
+  <h3 className={classnames('pb_title_kit_4', globalProps(props))}>
+    <Icon
+        fixedWidth
+        icon="calendar"
+    />
+    {defaultDateString(value)}
+  </h3>
+)
+
+const LargeDate = ({ value, ...props }: DateSubcomponent) => (
+  <h3 className={classnames('pb_title_kit_3', globalProps(props))}>
+    {largeDateString(value)}
+  </h3>
+)
+
+type PbDateProps = {
+  size?: "xs" | "sm" | "lg",
+  value?: string,
+  className?: string
+}
+
+const PbDate = ({ size, value, className, ...props }: PbDateProps) => {
+  const date = new DateTime({ value: value })
+
+  if (size == 'xs')
+    return (
+      <ExtraSmallDate
+          {...props}
+          className={className}
+          value={date}
+      />
+    )
+  if (size == 'lg')
+    return (
+      <LargeDate
+          {...props}
+          className={className}
+          value={date}
+      />
+    )
   return (
-    <div
-        {...ariaProps}
-        {...dataProps}
-        className={classes}
-        id={id}
-    >
-      <Title
-          size={4}
-          tag="h4"
-      >
-        <If condition={showIcon}>
-          <Body
-              color="light"
-              tag="span"
-          >
-            <Icon
-                fixedWidth
-                icon="calendar-alt"
-            />
-          </Body>
-        </If>
-        <If condition={showDayOfWeek}>
-          {weekday}
-          <Body
-              color="light"
-              tag="span"
-              text=" • "
-          />
-        </If>
-        <span>
-          {month}
-          {' '}
-          {day}
-        </span>
-        <If condition={currentYear != year}>
-          <span>
-            {` , ${year}`}
-          </span>
-        </If>
-      </Title>
-    </div>
+    <SmallDate
+        {...props}
+        className={className}
+        value={date}
+    />
   )
 }
 
