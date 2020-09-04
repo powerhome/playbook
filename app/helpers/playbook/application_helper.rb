@@ -13,5 +13,24 @@ module Playbook
     def current_webpacker_instance
       Playbook.webpacker
     end
+
+    def dark_mode
+      if ENV["dark_mode"] == "true"
+        true
+      else
+        false
+      end
+    end
+
+    def dark_mode_props(props)
+      if ENV["dark_mode"] == "true"
+        props.merge(dark: dark_mode)
+      elsif ENV["dark_mode"] == "false"
+        props.merge(dark: dark_mode)
+      else
+        props
+      end
+    end
+
   end
 end

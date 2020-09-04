@@ -10,4 +10,6 @@ module Playbook
     helper Playbook::PbSampleHelper
     append_view_path Playbook::Engine.root + "app/pb_kits"
   end
+
+  ENV["dark_mode"] = "false"
 end

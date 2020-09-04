@@ -9,23 +9,13 @@ module Playbook
     before_action :ensure_kit_type_exists, only: %i[kit_show_rails kit_show_react]
     before_action :set_category, only: %i[kit_category_show_rails kit_category_show_react]
 
-
-
     def enable_dark_mode
-      cookies[:dark_mode] = {
-        value: "true",
-        path: "/",
-      }
-      @dark_mode = true
+      ENV["dark_mode"] = "true"
       redirect_back(fallback_location: root_path)
     end
 
     def disable_dark_mode
-      cookies[:dark_mode] = {
-        value: "false",
-        path: "/",
-      }
-      @dark_mode = false
+      ENV["dark_mode"] = "false"
       redirect_back(fallback_location: root_path)
     end
 
@@ -37,7 +27,6 @@ module Playbook
     def tokens; end
 
     def kits
-      @dark = dark_mode
       params[:type] ||= "react"
       @type = params[:type]
     end
@@ -49,7 +38,6 @@ module Playbook
     end
 
     def kit_show_rails
-      @dark = cookies[:dark_mode]
       render "playbook/pages/kit_show"
     end
 
@@ -68,13 +56,6 @@ module Playbook
     end
 
   private
-    def dark_mode
-      if @dark_mode == "true"
-        true
-      else
-        false
-      end
-    end
 
     def set_category
       categories = MENU["kits"].map { |link| link.first.first if link.is_a?(Hash) }.compact
