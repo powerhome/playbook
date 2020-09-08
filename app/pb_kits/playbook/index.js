@@ -48,6 +48,7 @@ export MultipleUsersStacked from './pb_multiple_users_stacked/_multiple_users_st
 export Nav from './pb_nav/_nav.jsx'
 export NavItem from './pb_nav/_item.jsx'
 export OnlineStatus from './pb_online_status/_online_status.jsx'
+export Pagination from 'pb_pagination/_pagination.jsx'
 export PbReactPopover from './pb_popover/_popover.jsx'
 export Person from './pb_person/_person.jsx'
 export PersonContact from './pb_person_contact/_person_contact.jsx'
@@ -96,4 +97,3 @@ export PbPopover from './pb_popover'
 export PbTable from './pb_table'
 export PbTooltip from './pb_tooltip'
 
-export Pagination from 'pb_pagination/_pagination.jsx'

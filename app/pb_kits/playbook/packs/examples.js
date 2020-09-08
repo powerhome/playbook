@@ -59,6 +59,7 @@ import * as MultipleUsers from 'pb_multiple_users/docs'
 import * as MultipleUsersStacked from 'pb_multiple_users_stacked/docs'
 import * as Nav from 'pb_nav/docs'
 import * as OnlineStatus from 'pb_online_status/docs'
+import * as Pagination from 'pb_pagination/docs'
 import * as PbReactPopover from 'pb_popover/docs'
 import * as Person from 'pb_person/docs'
 import * as PersonContact from 'pb_person_contact/docs'
@@ -173,5 +174,4 @@ WebpackerReact.setup({
   ...WeekdayStacked,
 })
 
-import * as Pagination from 'pb_pagination/docs'
 WebpackerReact.setup(Pagination)
