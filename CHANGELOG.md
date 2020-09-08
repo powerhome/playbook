@@ -1,5 +1,21 @@
 # Changelog
 
+All notable changes to this project will be documented in this file.
+
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
+and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+
+## [6.5.0] (2020-9-8)
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/7.0.1-alpha2...HEAD)
+
+**Implemented enhancements:**
+
+- Date-Picker Kit [\#975](https://github.com/powerhome/playbook/pull/975) ([bh247484](https://github.com/bh247484))
+- Button & Circle Icon Button Cleanup [\#1074](https://github.com/powerhome/playbook/pull/1074) ([jasoncypret](https://github.com/jasoncypret))
+- Update dependency flow-bin to v0.133.0 [\#1072](https://github.com/powerhome/playbook/pull/1072) ([jasoncypret](https://github.com/jasoncypret))
+- Decrease prs resource allocation [\#1049](https://github.com/powerhome/playbook/pull/1049) ([iblackman](https://github.com/iblackman))
+
 ## [6.4.2] (2020-9-3)
 
 [Full Changelog](https://github.com/powerhome/playbook/compare/7.0.1-alpha1...HEAD)
@@ -13,25 +29,6 @@
 - Revert "Revert "Decrease prs resource allocation"" [\#1067](https://github.com/powerhome/playbook/pull/1067) ([indiebrain](https://github.com/indiebrain))
 - Revert "Decrease prs resource allocation" [\#1060](https://github.com/powerhome/playbook/pull/1060) ([indiebrain](https://github.com/indiebrain))
 - Decrease prs resource allocation [\#1049](https://github.com/powerhome/playbook/pull/1049) ([iblackman](https://github.com/iblackman))
-
-## [7.0.1-alpha1](https://github.com/powerhome/playbook/tree/7.0.1-alpha1) (2020-09-03)
-
-[Full Changelog](https://github.com/powerhome/playbook/compare/8.0.0-alpha2...7.0.1-alpha1)
-
-## [8.0.0-alpha2](https://github.com/powerhome/playbook/tree/8.0.0-alpha2) (2020-09-02)
-
-[Full Changelog](https://github.com/powerhome/playbook/compare/8.0.0-alpha1...8.0.0-alpha2)
-
-## [8.0.0-alpha1](https://github.com/powerhome/playbook/tree/8.0.0-alpha1) (2020-09-02)
-
-[Full Changelog](https://github.com/powerhome/playbook/compare/6.4.1...8.0.0-alpha1)
-
-# Changelog
-
-All notable changes to this project will be documented in this file.
-
-The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
-and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [6.4.0] (2020-8-28)
 
@@ -127,6 +124,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 **Merged pull requests:**
 
 - ~~Add Title Detail Dark Mode [\#972](https://github.com/powerhome/playbook/pull/972) ([kellyeryan](https://github.com/kellyeryan))~~ (reverted)
+
 
 ## [v6.1.0] 2020-8-6
 
