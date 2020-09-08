@@ -6,14 +6,15 @@
       <% end %>
       <%= pb_rails("caption", props: { tag: "span", text: Playbook::VERSION }) %>
       <% end %>
-    <%= pb_rails("flex") do%>
+    <div id="toggle-modes">
+    <% if cookies[:dark_mode] == "false"%>
       <%= pb_rails("circle_icon_button", props: {
-        margin_right:"sm",
         variant: "secondary",
         icon: "moon",
         tag:"a",
         link: enable_dark_mode_path
       }) %>
+      <% else %>
       <%= pb_rails("circle_icon_button", props: {
         variant: "secondary",
         icon: "sun",
@@ -21,31 +22,12 @@
         link: disable_dark_mode_path
       }) %>
     <% end %>
-  <% end %>
+    <% end %>
+  </div>
+  
 </div>
+<%= pb_rails("section_separator")%>
 <% flash.each do |name, msg| %>
   <% name = "success" if name == "notice" %>
   <%= pb_rails("fixed_confirmation_toast", props: { text: msg, status: name }) %>
 <% end %>
-
-<script>
-// document.cookie = "dark_mode=false"
-// const darkToggle = document.querySelector('#dark-toggle')
-// document.onreadystatechange = function () {
-//   if (document.readyState === 'complete') {
-
-//   }
-// }
-
-// function checkDarkMode(){
-//   if(darkToggle.checked){
-//     console.log('checked')
-//     document.cookie = "dark_mode=true; path=/"
-    
-//   }
-//   else{
-//     console.log('unchecked')
-//     document.cookie = "dark_mode=false; path=/"
-//   }
-// }
-</script>

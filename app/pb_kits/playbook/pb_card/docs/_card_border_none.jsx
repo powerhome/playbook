@@ -1,13 +1,16 @@
 import React from 'react'
 import Card from '../_card.jsx'
 
-const CardBorderNone = () => {
+const CardBorderNone = (props) => {
   return (
-    <div className="bg-light-doc-example">
 
-      <Card borderNone>{'Card content'}</Card>
+    <Card
+        {...props}
+        borderNone
+    >
+      {'Card content'}
+    </Card>
 
-    </div>
   )
 }
 

@@ -10,13 +10,13 @@ module Playbook
     def pb_rails(kit, props: {}, &block)
       previous = prefix_partial_path_with_controller_namespace
       self.prefix_partial_path_with_controller_namespace = false
-      kit = build_view_model(kit.to_s, props.merge(dark: dark_mode), &block)
+      kit = build_view_model(kit.to_s, dark_mode_props(props), &block)
       render(partial: kit, as: :object)
     ensure
       self.prefix_partial_path_with_controller_namespace = previous
     end
 
-    def pb_react(kit, props: {}, options: {})
+    def pb_react(kit, props:{dark: dark_mode}, options: {})
       ::Webpacker::React::Component.new(kit.camelize).render(props, options)
     end
 
@@ -26,6 +26,16 @@ module Playbook
         true
       else
         false
+      end
+    end
+
+    def dark_mode_props(props)
+      if cookies[:dark_mode] == "true"
+        props.merge(dark: dark_mode)
+      elsif cookies[:dark_mode] == "false"
+        props.merge(dark: dark_mode)
+      else
+        props
       end
     end
 
