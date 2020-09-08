@@ -1,23 +1,29 @@
 @import "../tokens/border_radius";
 @import "../tokens/spacing";
-@import "../tokens/colors";
+@import "../tokens/shadows";
 
-.pb_pagination {
-}
-
-.pb_pagination_kit {
-  width: max-content;
+.pb_pagination_kit {;
   width: -moz-fit-content;
   border: $border_rad_lightest solid $neutral;
   border-radius: $border_rad_heavier;
   padding: 6px;
+  box-shadow: $shadow_deep;
 }
 
 .paginate-body {
   padding: 0px 10px;
+  border-right: 1px solid $neutral;
+  border-left: 1px solid $neutral;
 }
 
-.paginate-left,
+.paginate-left {
+  padding: 0px 10px;
+  font-size: 12px;
+  font-weight: bolder;
+  color: $neutral;
+  cursor: pointer;
+}
+
 .paginate-right {
   padding: 0px 10px;
   font-size: 12px;
@@ -25,9 +31,44 @@
   color: $neutral;
   cursor: pointer;
 }
-.paginate-left {
-  border-right: 1px solid $neutral;
+
+.paginate-left:before {
+  content: "\25C0";
 }
-.paginate-right {
-  border-left: 1px solid $neutral;
+
+.paginate-right:before {
+  content: "\25B6";
 }
+
+.paginate-body {
+  .controls {
+    -webkit-transform: rotate(90deg);
+    display: inline-block;
+  }
+
+  .range {
+    .range-item {
+      padding: 5px 10px;
+      border-radius: $border_rad_heavy;
+    }
+    .range-item.active {
+      background-color: $royal;
+      color: $white;
+    }
+  }
+}
+
+.paginate-up:before {
+  content: "\25C0";
+  font-size: 8px;
+  color: $neutral;
+  cursor: pointer;
+}
+
+.paginate-down:before {
+  content: "\25B6";
+  font-size: 8px;
+  color: $neutral;
+  cursor: pointer;
+}
+

@@ -1,9 +1,64 @@
+<!-- Pagination - No Body -->
 <%= content_tag(:div,
     aria: object.aria,
     class: object.classname,
     data: object.data,
     id: object.id) do %>
-    <span class="paginate-left">&#x25C0;</span>
-      <span class="paginate-body">2 of 10</span>
-    <span class="paginate-right">&#x25BA;</span>
+    <span class="paginate-left"></span>
+    <span class="paginate-right"></span>
 <% end %>
+<br>
+
+<!-- Pagination - Horizontal  -->
+<%= content_tag(:div,
+    aria: object.aria,
+    class: object.classname,
+    data: object.data,
+    id: object.id) do %>
+    <span class="paginate-left"></span>
+      <span class="paginate-body">
+        <span class="count">2</span>
+        <span class="controls">
+            <span class='paginate-up'></span>
+            <span class='paginate-down'></span>
+        </span>
+      </span>
+    <span class="paginate-right"></span>
+<% end %>
+<br>
+
+<!-- Pagination - Vertical  -->
+<%= content_tag(:div,
+    aria: object.aria,
+    class: object.classname,
+    data: object.data,
+    id: object.id) do %>
+    <span class="paginate-left"></span>
+        <span class="paginate-body">
+            <span class="count">2 of 10</span>
+        </span>
+    <span class="paginate-right"></span>
+<% end %>
+
+<br>
+
+<!-- Pagination - FullBar  -->
+<%= content_tag(:div,
+    aria: object.aria,
+    class: object.classname,
+    data: object.data,
+    id: object.id) do %>
+    <span class="paginate-left"></span>
+        <span class="paginate-body">
+            <span class="range">
+                <span class="range-item">3</span>
+                <span class="range-item">4</span>
+                <span class="range-item active">5</span>
+                <span class="range-item">6</span>
+                <span class="range-item">7</span>
+            </span>
+        </span>
+    <span class="paginate-right"></span>
+<% end %>
+
+

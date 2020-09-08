@@ -7,6 +7,9 @@ module Playbook
 
       partial "pb_pagination/pagination"
 
+      prop :page_number, type: Playbook::Props::Array, default: []
+      prop :active, type: Playbook::Props::Boolean, default: false
+
       def classname
         generate_classname("pb_pagination_kit")
       end
