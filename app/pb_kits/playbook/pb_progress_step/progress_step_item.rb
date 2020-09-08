@@ -14,7 +14,6 @@ module Playbook
       def classname
         generate_classname("pb_progress_step_item", status)
       end
-
     end
   end
 end

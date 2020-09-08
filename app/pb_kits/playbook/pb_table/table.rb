@@ -33,9 +33,9 @@ module Playbook
 
     private
 
-      def dark_class	
-        dark ? "table-dark" : nil	
-      end	
+      def dark_class
+        dark ? "table-dark" : nil
+      end
 
       def data_table_class
         data_table ? "data_table" : nil

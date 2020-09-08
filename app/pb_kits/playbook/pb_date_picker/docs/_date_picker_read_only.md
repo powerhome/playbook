@@ -1,0 +1,1 @@
+Read only inputs do not accept keyboard input.  The only way to change the date value is by picking a date on the calendar.  Especially useful on mobile as it prevents the keyboard from popping up and obscuring the date picker.

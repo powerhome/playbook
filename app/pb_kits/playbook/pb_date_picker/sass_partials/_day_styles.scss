@@ -1,0 +1,53 @@
+// Day and Range Styles
+.flatpickr-day {
+  user-select: none;
+  @media (hover: hover) {
+    &:hover {
+      transition-duration: $transition_short;
+      transition-timing-function: $easeIn;    
+      background-color: #F6FAFF;
+      border-color: #F6FAFF;
+      box-shadow: $shadow_deep;
+    }
+  }
+}
+.flatpickr-day.today {
+  border: none;
+  font-weight: $bold;
+  color: $charcoal;
+  &.selected {
+    color: $text_dk_default;
+  }
+}
+.flatpickr-day.selected, .flatpickr-day.startRange, .flatpickr-day.endRange {
+  border-radius: $space_xl + 10;
+  background-color: $primary;
+  border-color: $primary;
+  box-shadow: $shadow_deep;
+  font-weight: $bold; 
+}
+.flatpickr-day.startRange {
+  box-shadow: $space_sm + 1 0 0 #F7FBFF
+}
+.flatpickr-day.endRange {
+  box-shadow: -$space_sm 0 0 #F7FBFF
+}
+.flatpickr-day.inRange {
+  background-color: #F7FBFF;
+  border: 2px;
+  box-shadow: -$space_xs + 4 0 0 #F7FBFF, $space_xs - 3 0 0 #F7FBFF;
+}
+.flatpickr-innerContainer {
+  overflow: visible;
+}
+.flatpickr-days {
+  overflow: visible;
+}
+// Weekday Styling
+div.flatpickr-weekdays {
+  margin-top: $space_xs;
+}
+span.flatpickr-weekday {
+  @include caption;
+  user-select: none;
+}
