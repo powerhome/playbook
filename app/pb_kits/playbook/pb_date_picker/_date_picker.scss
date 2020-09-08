@@ -1,0 +1,37 @@
+@import "../pb_caption/caption_mixin";
+@import "../pb_textarea/textarea_mixin";
+@import "../tokens/colors";
+@import "./sass_partials/flatpickr_styles";
+
+[class^=pb_date_picker_kit] {
+  .input_wrapper {
+    margin-bottom: $space_sm;
+    position: relative;
+    @import "./sass_partials/calendar_input_icon";
+    @import "./sass_partials/day_styles";
+    @import "./sass_partials/header_styles";
+    @import "./sass_partials/overrides";
+
+    .flatpickr-wrapper {
+      display: block;
+      .text_input.flatpickr-input {
+        text-overflow: ellipsis;
+        padding-right: $space_xl + 10 !important;
+      }
+      // Calendar Shadow and Border
+      .flatpickr-calendar {
+        box-shadow: $shadow_deeper;
+        border: 1px solid $border_light;
+      }
+      // Hide Caret
+      .flatpickr-calendar:before,
+      .flatpickr-calendar:after {
+        content: none;
+      }
+    }
+  }
+}
+// Ensures picker remains visible inside filter kit
+.pb_popover_body {
+  overflow: visible !important;
+}

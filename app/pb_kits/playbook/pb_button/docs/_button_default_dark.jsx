@@ -7,16 +7,19 @@ const ButtonDefaultDark = () => (
         dark
         text="Button Primary"
     />
+    {' '}
     <Button
         dark
         text="Button Secondary"
         variant="secondary"
     />
+    {' '}
     <Button
         dark
         text="Button Link"
         variant="link"
     />
+    {' '}
     <Button
         dark
         disabled
