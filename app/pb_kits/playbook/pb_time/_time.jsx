@@ -15,13 +15,12 @@ type TimeProps = {
   data?: string,
   date: string,
   id?: string,
-  size?: 'lg' | 'sm',
-  showIcon?: boolean,
+  size?: 'lg' | 'sm' | 'xs',
   timeZone?: string,
 }
 
 const Time = (props: TimeProps) => {
-  const { align, className, date, showIcon, size, timeZone } = props
+  const { align, className, date, size, timeZone } = props
   const classes = classnames(
     className,
     buildCss('pb_time_kit', align, size),
@@ -33,16 +32,11 @@ const Time = (props: TimeProps) => {
   return (
     <div className={classes}>
       <span className="pb_body_kit">
-        <If condition={showIcon}>
-          <Body
-              color="light"
-              tag="span"
-          >
-            <Icon
-                fixedWidth
-                icon="clock"
-            />
-          </Body>
+        <If condition={size === 'sm'}>
+          <Icon
+              fixedWidth
+              icon="clock"
+          />
           {' '}
         </If>
         <time dateTime={date}>

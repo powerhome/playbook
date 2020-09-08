@@ -17,7 +17,7 @@ const TimeDefault = () => {
       <br />
       <Time
           date="2012-08-02T09:49:29Z"
-          showIcon
+          size="xs"
       />
     </div>
   )
