@@ -4,7 +4,7 @@ import React, { Node } from 'react'
 import classnames from 'classnames'
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
 import { globalProps } from '../utilities/globalProps.js'
-import { ListItem, Radio } from '../'
+import { Radio } from '../'
 
 type ListRadioItemProps = {
   aria?: object,
@@ -17,13 +17,11 @@ type ListRadioItemProps = {
   name?: string,
   text?: string,
   value?: string,
-  tabIndex?: string,
   onChange: (boolean)=>void,
 }
 
 const ListRadioItem = ({
   aria = {},
-  checked = false,
   className,
   children,
   data = {},
@@ -31,7 +29,6 @@ const ListRadioItem = ({
   text = '',
   name = '',
   value = '',
-  tabIndex,
   onChange = () => {},
   ...props
 }: ListRadioItemProps) => {
