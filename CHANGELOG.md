@@ -5,6 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [6.5.1] (2020-9-9)
+
+**Fixed bugs:**
+
+- removed global popover visibility styling [\#1083](https://github.com/powerhome/playbook/pull/1083) ([bh247484](https://github.com/bh247484))
+
+
 ## [6.5.0] (2020-9-8)
 
 [Full Changelog](https://github.com/powerhome/playbook/compare/7.0.1-alpha2...HEAD)
