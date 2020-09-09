@@ -3,15 +3,20 @@
     id: object.id,
     data: object.data,
     class: object.classname) do %>
-  <div class="pb_icon_stat_value_wrapper">
-    <%= pb_rails "title", props: {
-      classname: "pb_icon_stat_value_kit",
-      size: 1,
-      text: object.formatted_value } %>
-      &nbsp;
-      <%= pb_rails "title", props: {
-      classname: "pb_icon_stat_value_kit",
-      size: 3,
-      text: object.unit } %>
-  </div>
+
+    <%= pb_rails "icon_circle", props: {
+      icon: object.icon,
+      size: object.size,
+      variant: object.variant } %>
+
+      <div>
+        <%= pb_rails "title", props: {
+            text: object.value_unit} %>
+
+        <%= pb_rails "caption", props: {
+            text: object.text } %>
+
+      </div>
+
+
 <% end %>

@@ -8,15 +8,29 @@ module Playbook
 
       partial "pb_icon_stat_value/icon_stat_value"
 
-      prop :unit
-      prop :value, type: Playbook::Props::Number
+      prop :icon
 
-      def formatted_value
-        number_with_delimiter(value, delimiter: ",")
-      end
+      prop :size, type: Playbook::Props::Enum,
+                  values: %w[xs sm md base lg xl],
+                  default: "md"
+      prop :variant, type: Playbook::Props::Enum,
+                     values: %w[default royal blue purple teal red yellow green],
+                     default: "default"
+
+      prop :orientation, type: Playbook::Props::Enum,
+                         values: %w[vertical horizontal],
+                         default: "horizontal"
+      prop :unit
+      prop :text
+      prop :value
+
 
       def classname
-        generate_classname("pb_icon_stat_value_kit")
+        generate_classname("pb_icon_stat_value_kit", orientation)
+      end
+
+      def value_unit
+        value.to_s + unit
       end
     end
   end

@@ -17,8 +17,7 @@ type IconStatValueProps = {
   text: string,
   unit?: string,
   value: string | number,
-  variant?:
-     "default"
+  variant?: "default"
     | "royal"
     | "blue"
     | "purple"
@@ -35,17 +34,17 @@ const IconStatValue = (props: IconStatValueProps) => {
     data = {},
     icon,
     id,
-    orientation = "horizontal",
+    orientation = 'horizontal',
     size = 'md',
     text,
-    unit = "",
+    unit = '',
     value = 0,
-    variant = "default",
+    variant = 'default',
   } = props
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
   const classes = classnames(
-    buildCss('pb_icon_stat_value_kit', orientation),globalProps(props),
+    buildCss('pb_icon_stat_value_kit', orientation), globalProps(props),
     className
   )
 
@@ -57,9 +56,9 @@ const IconStatValue = (props: IconStatValueProps) => {
         id={id}
     >
       <IconCircle
-        icon={icon}
-        variant={variant}
-        size={size}
+          icon={icon}
+          size={size}
+          variant={variant}
       />
 
       <div>
@@ -69,7 +68,6 @@ const IconStatValue = (props: IconStatValueProps) => {
 
         <Caption text={text} />
       </div>
-
 
     </div>
   )
