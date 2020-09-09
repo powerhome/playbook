@@ -64,7 +64,7 @@
     "flatpickr": "^4.6.3",
     "flow-bin": "0.133.0",
     "flow-runtime": "0.14.0",
-    "highcharts": "^7.2.0",
+    "highcharts": "7.2.2",
     "jsx-control-statements": "^3.2.8",
     "lazysizes": "^4.1.6",
     "lodash": "4.17.15",
