@@ -2,19 +2,23 @@
 
 import React from 'react'
 import classnames from 'classnames'
+import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
 import { Caption, IconCircle, Title } from '../'
 import { globalProps } from '../utilities/globalProps.js'
-import { size } from 'lodash'
 
 type IconStatValueProps = {
+  aria?: object,
   className?: string,
+  data?: object,
+  icon: string,
   id?: string,
+  orientation?: "vertical" | "horizontal",
+  size?: "xs" | "sm" | "md" | "lg" | "xl",
+  text: string,
   unit?: string,
   value: string | number,
-  icon: string,
-  text: string,
-  size?: "xs" | "sm" | "md" | "lg" | "xl",
-  variant?: | "default"
+  variant?:
+     "default"
     | "royal"
     | "blue"
     | "purple"
@@ -26,53 +30,47 @@ type IconStatValueProps = {
 
 const IconStatValue = (props: IconStatValueProps) => {
   const {
+    aria = {},
     className,
-    size,
+    data = {},
+    icon,
     id,
+    orientation = "horizontal",
+    size = 'md',
+    text,
     unit = "",
     value = 0,
-    icon,
-    text,
-    variant
+    variant = "default",
   } = props
-
-  const displayValue = function(value) {
-    if (value) {
-      return (
-        <Title
-            className="mr-1"
-            text={value + unit}
-        />
-      )
-    }
-  }
-
-  const displayIcon = () => {
-    return (
-      <IconCircle
-          icon={icon}
-          variant={variant}
-          size={size}
-      />
-    )
-  }
-
-  const statCaption = () => {
-    return (
-      <Caption text={text} />
-    )
-  }
+  const ariaProps = buildAriaProps(aria)
+  const dataProps = buildDataProps(data)
+  const classes = classnames(
+    buildCss('pb_icon_stat_value_kit', orientation),globalProps(props),
+    className
+  )
 
   return (
     <div
-        className={classnames('pb_icon_stat_value_kit', className, globalProps(props))}
+        {...ariaProps}
+        {...dataProps}
+        className={classes}
         id={id}
     >
+      <IconCircle
+        icon={icon}
+        variant={variant}
+        size={size}
+      />
+
       <div>
-        {displayIcon(icon, variant)}
-        {displayValue(value, unit, size)}
-        {statCaption(text, size)}
+        <Title
+            text={value + unit}
+        />
+
+        <Caption text={text} />
       </div>
+
+
     </div>
   )
 }

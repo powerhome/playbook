@@ -6,11 +6,12 @@ const IconStatValueDefault = () => {
     <div>
       <IconStatValue
           icon="user"
-          text="ELECTRIC"
           value={64.18}
           unit="%"
           variant="yellow"
-      />
+          text = "Electric"
+      >
+      </IconStatValue>
       <br />
       <IconStatValue
           icon="lightbulb-on"
@@ -29,6 +30,7 @@ const IconStatValueDefault = () => {
           unit="mi"
           variant="purple"
           size="sm"
+          orientation="vertical"
       />
       <br />
       <IconStatValue
@@ -38,6 +40,7 @@ const IconStatValueDefault = () => {
           unit="mi"
           variant="royal"
           size="lg"
+          orientation="vertical"
       />
     </div>
 

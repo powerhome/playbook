@@ -1,9 +1,57 @@
 @import "../pb_title/title";
+@import "../pb_caption/caption";
+@import "../tokens/spacing";
+@import "../pb_icon_circle/icon_circle";
+
+
+
 
 [class^=pb_icon_stat_value_kit]{
-  [class^=pb_icon_stat_value_wrapper] {
-    display: flex;
-    justify-content: flex-start;
-    align-items: baseline;
+  display: flex;
+
+
+  &[class*=_vertical]  {
+    flex-direction: column;
+
+    &[class*=_center]  {
+      align-items: center;
+
+      [class^=pb_title],
+      [class^=pb_caption] {
+        text-align: center;
+      }
+    }
+
+    &[class*=_right]  {
+      align-items: flex-end;
+
+      [class^=pb_title],
+      [class^=pb_caption] {
+        text-align: right;
+      }
+    }
+
+    [class^=pb_icon_circle] {
+      margin-bottom: $space-xs;
+    }
   }
+
+  &[class*=_horizontal]  {
+    align-items: center;
+
+    &[class*=_center]  {
+      justify-content: center;
+    }
+
+    &[class*=_right]  {
+      justify-content: flex-end;
+    }
+
+    [class^=pb_icon_circle] {
+      margin-right: $space-sm;
+    }
+  }
+
+
+
 }
