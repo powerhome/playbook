@@ -41,24 +41,23 @@ const ListRadioItem = ({
 
   return (
     <div
-      {...ariaProps}
-      {...dataProps}
-      className={classes}
-      htmlFor={id}
+        {...ariaProps}
+        {...dataProps}
+        className={classes}
+        htmlFor={id}
     >
       <Radio
-        {...props}
-        name={name}
-        text={text}
-        onChange={onChange}
-        value={value}
-        id={id}
-        type="radio"
+          {...props}
+          id={id}
+          name={name}
+          onChange={onChange}
+          text={text}
+          type="radio"
+          value={value}
       />
       {children}
     </div>
   )
-
 }
 
 export default ListRadioItem

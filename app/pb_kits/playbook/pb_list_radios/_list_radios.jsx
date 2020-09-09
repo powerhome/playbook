@@ -7,7 +7,7 @@ import { List } from  '../'
 
 type ListRadiosProps = {
   aria?: object,
-  children?:Node,
+  children?: Node,
   className?: string,
   data?: object,
   id?: string,
@@ -28,10 +28,10 @@ const ListRadios = (props: ListRadiosProps) => {
 
   return (
     <div
-      {...ariaProps}
-      {...dataProps}
-      className={classes}
-      id={id}
+        {...ariaProps}
+        {...dataProps}
+        className={classes}
+        id={id}
     >
       <List>
         {children}

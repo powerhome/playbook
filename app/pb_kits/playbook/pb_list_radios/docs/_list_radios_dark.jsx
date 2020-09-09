@@ -1,45 +1,44 @@
 import React from 'react'
-import { ListRadios, ListRadioItem, ListItem } from '../../'
+import { ListItem, ListRadioItem, ListRadios } from '../../'
 
 const ListRadiosDefault = () => {
-
-return (
+  return (
 
     <div>
       <ListRadios
-        dark
+          dark
       >
         <ListItem>
           <ListRadioItem
-            defaultChecked={false}
-            name="custom2"
+              defaultChecked={false}
+              name="custom2"
           >
-            Unselected
+            {'Unselected'}
           </ListRadioItem>
         </ListItem>
         <ListItem>
           <ListRadioItem
-            defaultChecked
-            name="custom2"
+              defaultChecked
+              name="custom2"
           >
-            Selected
+            {'Selected'}
           </ListRadioItem>
         </ListItem>
         <ListItem>
           <ListRadioItem
-            defaultChecked={false}
-            name="custom2"
-            value="Hover"
+              defaultChecked={false}
+              name="custom2"
+              value="Hover"
           >
-            Hover
+            {'Hover'}
           </ListRadioItem>
         </ListItem>
         <ListItem>
           <ListRadioItem
-            defaultChecked={false}
-            name="custom2"
+              defaultChecked={false}
+              name="custom2"
           >
-            Unselected Last
+            {'Unselected Last'}
           </ListRadioItem>
         </ListItem>
       </ListRadios>
