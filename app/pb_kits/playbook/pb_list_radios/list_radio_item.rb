@@ -17,6 +17,10 @@ module Playbook
 
       partial "pb_list_radios/list_radio_item"
 
+      def classname
+        generate_classname("pb_item_kit")
+      end
+
     end
   end
 end

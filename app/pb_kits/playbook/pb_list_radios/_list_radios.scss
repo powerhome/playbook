@@ -4,15 +4,17 @@
   &:hover {
     background-color: $silver;
   }
-
-}
-
-[class^=pb_item_kit] {
   &:checked {
-    background-color: blue;
+    background-color:pink;
   }
 }
 
-.checked {
-  background-color: $slate !important;
-}
+// .pb_item_kit label + input[type="radio"]:checked {
+//   background-color:pink;
+// }
+
+// input {
+//   &:checked {
+//     background-color:pink;
+//   }
+// }
