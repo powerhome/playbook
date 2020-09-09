@@ -3,7 +3,7 @@
 module Playbook
   class ApplicationController < ActionController::Base
     protect_from_forgery with: :exception
-
+ 
     helper Webpacker::Helper
     helper Playbook::PbKitHelper
     helper Playbook::PbDocHelper
@@ -11,5 +11,5 @@ module Playbook
     append_view_path Playbook::Engine.root + "app/pb_kits"
   end
 
-  ENV["dark_mode"] = "false"
+  
 end

@@ -1,6 +1,8 @@
-<div class="pb--page--topNav <%= ENV["dark_mode"] == "true" ? 'dark' : '' %>">
-  <% if ENV["dark_mode"] == "true"%>
-    <%end%>
+
+<div class="pb--page--topNav <%= cookies[:dark_mode] == "true" ? 'dark' : '' %>">
+<% if @playbook.nil?%>
+  <p>playbok is nil</p>
+<% end %>
   <%= pb_rails("flex", props:{spacing:"between",vertical: "center"}) do%>
      <%= pb_rails("flex", props:{spacing:"between",vertical: "center"}) do%>
       <%= link_to root_url do %>
@@ -9,7 +11,7 @@
       <%= pb_rails("caption", props: { tag: "span", text: Playbook::VERSION }) %>
       <% end %>
     <div id="toggle-modes">
-    <% if ENV["dark_mode"] == "false"%>
+    <% if cookies[:dark_mode] == "false" || cookies[:dark_mode] == nil%>
       <%= pb_rails("circle_icon_button", props: {
         variant: "secondary",
         icon: "moon",

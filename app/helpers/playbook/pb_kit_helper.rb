@@ -22,7 +22,7 @@ module Playbook
 
   private
     def rails_props(props)
-      if ENV["dark_mode"].nil?
+      if @playbook.nil?
         props
       else
         dark_mode_props(props)
@@ -30,7 +30,7 @@ module Playbook
     end  
 
     def react_props
-      if ENV["dark_mode"].nil?
+      if @playbook.nil?
         false
       else
         dark_mode

@@ -15,7 +15,7 @@ module Playbook
     end
 
     def dark_mode
-      if ENV["dark_mode"] == "true"
+      if cookies[:dark_mode] == "true"
         true
       else
         false
@@ -23,9 +23,9 @@ module Playbook
     end
 
     def dark_mode_props(props)
-      if ENV["dark_mode"] == "true"
+      if cookies[:dark_mode] == "true"
         props.merge(dark: dark_mode)
-      elsif ENV["dark_mode"] == "false"
+      elsif cookies[:dark_mode] == "false"
         props.merge(dark: dark_mode)
       else
         props
