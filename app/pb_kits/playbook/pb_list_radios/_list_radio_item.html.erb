@@ -1,0 +1,10 @@
+<%= content_tag(:li,
+    aria: object.aria,
+    class: object.classname,
+    data: object.data,
+    id: object.id) do %>
+  <%= pb_rails("radio", props: {text: object.text} ) %>
+  <% if object.children.present? %>
+    <%= capture(&object.children) %>
+  <% end %>
+<% end %>

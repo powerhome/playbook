@@ -3,5 +3,9 @@
     class: object.classname,
     data: object.data,
     id: object.id) do %>
-  <span>LIST RADIOS CONTENT</span>
+      <%= pb_rails("list") do %>
+        <%= capture(&object.children) %>
+      <% end %>
 <% end %>
+
+

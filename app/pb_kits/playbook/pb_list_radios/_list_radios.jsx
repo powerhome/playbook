@@ -1,44 +1,41 @@
-
-
 /* @flow */
-
 import React from 'react'
 import classnames from 'classnames'
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
 import { globalProps } from '../utilities/globalProps.js'
-import {List, Radio} from  '../'
+import { List } from  '../'
 
 type ListRadiosProps = {
   aria?: object,
+  children?:Node,
   className?: string,
   data?: object,
   id?: string,
-  children?:Node,
 }
 
 const ListRadios = (props: ListRadiosProps) => {
   const {
-  aria = {},
-  className,
-  data = {},
-  id,
-  children,
+    aria = {},
+    children,
+    className,
+    data = {},
+    id,
   } = props
 
   const ariaProps = buildAriaProps(aria)
-  const dataProps = buildDataProps(data)
   const classes = classnames(buildCss('pb_list_radios'), className, globalProps(props))
+  const dataProps = buildDataProps(data)
 
   return (
     <div
-        {...ariaProps}
-        {...dataProps}
-        className={classes}
-        id={id}
+      {...ariaProps}
+      {...dataProps}
+      className={classes}
+      id={id}
     >
-    <List>
-      {children}
-    </List>
+      <List>
+        {children}
+      </List>
     </div>
   )
 }

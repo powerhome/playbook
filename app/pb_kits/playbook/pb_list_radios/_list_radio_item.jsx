@@ -39,6 +39,10 @@ const ListRadioItem = ({
   const dataProps = buildDataProps(data)
   const classes = classnames(buildCss('pb_list_radios_kit'), globalProps(props), className)
 
+  if(props.checked){
+    className += ' checked'
+  }
+
   return (
     <div
       {...ariaProps}

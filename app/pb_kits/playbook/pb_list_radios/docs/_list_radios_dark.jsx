@@ -1,10 +1,10 @@
 import React from 'react'
 import { ListRadios, ListRadioItem, ListItem } from '../../'
 
-
 const ListRadiosDefault = () => {
 
 return (
+
     <div>
       <ListRadios
         dark
@@ -12,7 +12,7 @@ return (
         <ListItem>
           <ListRadioItem
             defaultChecked={false}
-            name="custom1"
+            name="custom2"
           >
             Unselected
           </ListRadioItem>
@@ -20,7 +20,7 @@ return (
         <ListItem>
           <ListRadioItem
             defaultChecked
-            name="custom1"
+            name="custom2"
           >
             Selected
           </ListRadioItem>
@@ -28,7 +28,7 @@ return (
         <ListItem>
           <ListRadioItem
             defaultChecked={false}
-            name="custom1"
+            name="custom2"
             value="Hover"
           >
             Hover
@@ -37,13 +37,14 @@ return (
         <ListItem>
           <ListRadioItem
             defaultChecked={false}
-            name="custom1"
+            name="custom2"
           >
             Unselected Last
           </ListRadioItem>
         </ListItem>
       </ListRadios>
     </div>
+
   )
 }
 

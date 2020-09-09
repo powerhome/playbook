@@ -1,16 +1,18 @@
 @import "../tokens/colors";
 
-
 .pb_item_kit {
   &:hover {
     background-color: $silver;
   }
+
 }
 
-.pb_list_radios {
-   &.dark {
-    .pb_radios_kit.input {
-      text-decoration: white;
-    }
+[class^=pb_item_kit] {
+  &:checked {
+    background-color: blue;
   }
+}
+
+.checked {
+  background-color: $slate !important;
 }
