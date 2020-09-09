@@ -16,7 +16,7 @@ const IconStatValueDefault = () => {
           icon="lightbulb-on"
           size="lg"
           text="DISTANCE DRIVEN"
-          unit="mi"
+          unit=" mi"
           value={158.3}
           variant="teal"
       />
@@ -27,7 +27,7 @@ const IconStatValueDefault = () => {
           orientation="vertical"
           size="sm"
           text="DISTANCE DRIVEN"
-          unit="mi"
+          unit=" mi"
           value={158.3}
           variant="purple"
       />
@@ -37,7 +37,7 @@ const IconStatValueDefault = () => {
           orientation="vertical"
           size="lg"
           text="DISTANCE DRIVEN"
-          unit="mi"
+          unit=" mi"
           value={158.3}
           variant="royal"
       />

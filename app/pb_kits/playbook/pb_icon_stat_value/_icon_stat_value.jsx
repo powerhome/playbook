@@ -13,7 +13,7 @@ type IconStatValueProps = {
   icon: string,
   id?: string,
   orientation?: "vertical" | "horizontal",
-  size?: "xs" | "sm" | "md" | "lg" | "xl",
+  size?: "sm" | "lg",
   text: string,
   unit?: string,
   value: string | number,
@@ -35,7 +35,7 @@ const IconStatValue = (props: IconStatValueProps) => {
     icon,
     id,
     orientation = 'horizontal',
-    size = 'md',
+    size = 'sm',
     text,
     unit = '',
     value = 0,
@@ -44,7 +44,7 @@ const IconStatValue = (props: IconStatValueProps) => {
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
   const classes = classnames(
-    buildCss('pb_icon_stat_value_kit', orientation), globalProps(props),
+    buildCss('pb_icon_stat_value_kit', orientation, size, variant), globalProps(props),
     className
   )
 
@@ -63,7 +63,8 @@ const IconStatValue = (props: IconStatValueProps) => {
 
       <div>
         <Title
-            text={value + unit}
+            size={size == 'lg' ? 1 : 3}
+            text={value  + unit}
         />
 
         <Caption text={text} />

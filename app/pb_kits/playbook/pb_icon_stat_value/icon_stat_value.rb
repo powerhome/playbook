@@ -11,8 +11,8 @@ module Playbook
       prop :icon
 
       prop :size, type: Playbook::Props::Enum,
-                  values: %w[xs sm md base lg xl],
-                  default: "md"
+                  values: %w[sm lg],
+                  default: "sm"
       prop :variant, type: Playbook::Props::Enum,
                      values: %w[default royal blue purple teal red yellow green],
                      default: "default"
@@ -26,11 +26,15 @@ module Playbook
 
 
       def classname
-        generate_classname("pb_icon_stat_value_kit", orientation)
+        generate_classname("pb_icon_stat_value_kit", orientation, size, variant)
       end
 
       def value_unit
         value.to_s + unit
+      end
+
+      def title_size
+        size == "lg" ? 1 : 3
       end
     end
   end
