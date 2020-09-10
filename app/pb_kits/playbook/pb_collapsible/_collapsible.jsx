@@ -3,6 +3,7 @@
 import classnames from 'classnames'
 import { get } from 'lodash'
 import React from 'react'
+import AnimateHeight from 'react-animate-height'
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
 import { globalProps } from '../utilities/globalProps.js'
 
@@ -84,6 +85,12 @@ const Collapsible = (props: CollapsibleProps) => {
         id={id}
     >
       {subComponentTags('Main')}
+      <AnimateHeight
+          height="auto"
+          id="bottom-section"
+      >
+        <p>{'hello'}</p>
+      </AnimateHeight>
       {nonMainChildren}
     </div>
   )

@@ -5,8 +5,11 @@ const CollapsibleDefault = () => (
   <div>
     <Collapsible>
       <Collapsible.Main>
-        {'Hello'}
+        {'Main Section'}
       </Collapsible.Main>
+      <Collapsible.Content>
+        {'Content Section'}
+      </Collapsible.Content>
     </Collapsible>
   </div>
 )
