@@ -9,12 +9,19 @@ module Playbook
 
       prop :time, required: true
       prop :size, type: Playbook::Props::Enum,
-                  values: %w[lg sm xs],
+                  values: %w[lg sm],
                   default: "sm"
+      prop :align, type: Playbook::Props::Enum,
+                   values: %w[left center right],
+                   default: "left"
       prop :timezone, default: "America/New_York"
+      prop :show_icon, type: Playbook::Props::Boolean,
+                       default: false
+      prop :show_timezone, type: Playbook::Props::Boolean,
+                           default: false
 
       def classname
-        generate_classname("pb_time_kit", size)
+        generate_classname("pb_time_kit", align, size)
       end
 
       def format_time_string

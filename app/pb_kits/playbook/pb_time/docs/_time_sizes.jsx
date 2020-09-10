@@ -1,16 +1,14 @@
 import React from 'react'
 import Time from '../_time.jsx'
 
-const TimeDark = () => {
+const TimeSizes = () => {
   return (
     <div>
       <Time
-          dark
           date={new Date()}
       />
       <br />
       <Time
-          dark
           date={new Date()}
           size="lg"
       />
@@ -18,4 +16,4 @@ const TimeDark = () => {
   )
 }
 
-export default TimeDark
+export default TimeSizes

@@ -15,13 +15,6 @@ const TimeStamp = () => {
           date={new Date().getTime()}
           size="sm"
       />
-
-      <br />
-
-      <Time
-          date="2012-08-02T15:49:29Z"
-          size="sm"
-      />
     </div>
   )
 }
