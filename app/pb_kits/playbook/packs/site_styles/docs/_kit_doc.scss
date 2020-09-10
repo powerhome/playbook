@@ -52,6 +52,12 @@
       top: 0;
       left: 0;
     }
+
+    code {
+      background-color: rgba($text_lt_lighter, 0.35);
+      border-radius: 5px;
+      padding: 2px;
+    }
   }
 
   .pb--codeControls {
