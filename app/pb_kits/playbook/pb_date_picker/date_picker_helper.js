@@ -2,6 +2,7 @@ import flatpickr from 'flatpickr'
 
 const datePickerHelper = (config) => {
   const {
+    allowInput,
     defaultDate,
     disableDate,
     disableRange,
@@ -12,7 +13,6 @@ const datePickerHelper = (config) => {
     minDate,
     mode,
     pickerId,
-    readOnly,
     yearRange,
   } = config
 
@@ -65,7 +65,6 @@ const datePickerHelper = (config) => {
 
   flatpickr(`#${pickerId}`, {
     disableMobile: true,
-    allowInput: !readOnly,
     dateFormat: format,
     defaultDate: defaultDateGetter(),
     disable: disableWeekdays && disableWeekdays.length > 0 ? [
@@ -166,6 +165,9 @@ const datePickerHelper = (config) => {
       dropdown.value = picker.currentYear
     }
   })
+  if (allowInput){
+    picker.input.removeAttribute('readonly')
+  }
 }
 
 export default datePickerHelper
