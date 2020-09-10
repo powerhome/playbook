@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
-require_relative "../../../../app/pb_kits/playbook/pb_collapsible_card/collapsible_card"
+require_relative "../../../../app/pb_kits/playbook/pb_collapsible/collapsible"
 
-RSpec.describe Playbook::PbCollapsibleCard::CollapsibleCard do
-  subject { Playbook::PbCollapsibleCard::CollapsibleCard }
+RSpec.describe Playbook::PbCollapsible::Collapsible do
+  subject { Playbook::PbCollapsible::Collapsible }
 
   it { is_expected.to define_partial }
 
