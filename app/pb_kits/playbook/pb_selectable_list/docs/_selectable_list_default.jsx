@@ -1,43 +1,43 @@
 import React from 'react'
-import { ListItem, ListRadioItem, ListRadios } from '../../'
+import { ListItem, SelectableListItem, SelectableList } from '../..'
 
-const ListRadiosDefault = () => {
+const SelectableListDefault = () => {
   return (
 
     <div>
-      <ListRadios>
+      <SelectableList>
         <ListItem>
-          <ListRadioItem
+          <SelectableListItem
               defaultChecked={false}
               label="Unselected"
               name="custom1"
           />
         </ListItem>
         <ListItem>
-          <ListRadioItem
+          <SelectableListItem
               defaultChecked
               label="Selected"
               name="custom1"
           />
         </ListItem>
         <ListItem>
-          <ListRadioItem
+          <SelectableListItem
               defaultChecked={false}
               label="Hover"
               name="custom1"
           />
         </ListItem>
         <ListItem>
-          <ListRadioItem
+          <SelectableListItem
               defaultChecked={false}
               label="Unselected Last"
               name="custom1"
           />
         </ListItem>
-      </ListRadios>
+      </SelectableList>
     </div>
 
   )
 }
 
-export default ListRadiosDefault
+export default SelectableListDefault

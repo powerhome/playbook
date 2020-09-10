@@ -4,23 +4,22 @@ import React, { Node } from 'react'
 import classnames from 'classnames'
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
 import { globalProps } from '../utilities/globalProps.js'
-import { Radio } from '../'
+import { Radio } from '..'
 
-type ListRadioItemProps = {
+type SelectableListItemProps = {
   aria?: object,
   children: array<Node> | Node,
   checked?: boolean,
   className?: string,
   data?: object,
   id?: string,
-  tabIndex?: string,
   name?: string,
   text?: string,
   value?: string,
   onChange: (boolean)=>void,
 }
 
-const ListRadioItem = ({
+const SelectableListItem = ({
   aria = {},
   className,
   children,
@@ -31,10 +30,10 @@ const ListRadioItem = ({
   value = '',
   onChange = () => {},
   ...props
-}: ListRadioItemProps) => {
+}: SelectableListItemProps) => {
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
-  const classes = classnames(buildCss('pb_list_radios_kit'), globalProps(props), className)
+  const classes = classnames(buildCss('pb_selectable_list_item_kit'), globalProps(props), className)
 
   return (
     <div
@@ -57,4 +56,4 @@ const ListRadioItem = ({
   )
 }
 
-export default ListRadioItem
+export default SelectableListItem

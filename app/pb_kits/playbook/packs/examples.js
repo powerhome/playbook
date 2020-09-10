@@ -173,5 +173,5 @@ WebpackerReact.setup({
   ...WeekdayStacked,
 })
 
-import * as ListRadios from 'pb_list_radios/docs'
-WebpackerReact.setup(ListRadios)
+import * as SelectableList from 'pb_selectable_list/docs'
+WebpackerReact.setup(SelectableList)

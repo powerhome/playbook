@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 module Playbook
-  module PbListRadios
-    class ListRadioItem
+  module PbSelectableList
+    class SelectableListItem
       include Playbook::Props
 
       prop :tabindex
@@ -15,8 +15,9 @@ module Playbook
       prop :value, type: Playbook::Props::String,
                    default: "radio_text"
 
-      partial "pb_list_radios/list_radio_item"
+      partial "pb_selectable_list/selectable_list_item"
 
+      ##todo check this after done everything else
       def classname
         generate_classname("pb_item_kit")
       end

@@ -3,9 +3,9 @@ import React from 'react'
 import classnames from 'classnames'
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
 import { globalProps } from '../utilities/globalProps.js'
-import { List } from  '../'
+import { List } from  '..'
 
-type ListRadiosProps = {
+type SelectableListProps = {
   aria?: object,
   children?: Node,
   className?: string,
@@ -13,7 +13,7 @@ type ListRadiosProps = {
   id?: string,
 }
 
-const ListRadios = (props: ListRadiosProps) => {
+const SelectableList = (props: SelectableListProps) => {
   const {
     aria = {},
     children,
@@ -23,7 +23,7 @@ const ListRadios = (props: ListRadiosProps) => {
   } = props
 
   const ariaProps = buildAriaProps(aria)
-  const classes = classnames(buildCss('pb_list_radios'), className, globalProps(props))
+  const classes = classnames(buildCss('pb_selectable_list'), className, globalProps(props))
   const dataProps = buildDataProps(data)
 
   return (
@@ -40,4 +40,4 @@ const ListRadios = (props: ListRadiosProps) => {
   )
 }
 
-export default ListRadios
+export default SelectableList

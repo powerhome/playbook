@@ -97,5 +97,5 @@ export PbPopover from './pb_popover'
 export PbTable from './pb_table'
 export PbTooltip from './pb_tooltip'
 
-export ListRadios from 'pb_list_radios/_list_radios.jsx'
-export ListRadioItem from 'pb_list_radios/_list_radio_item.jsx'
+export SelectableList from './pb_selectable_list/_selectable_list.jsx'
+export SelectableListItem from './pb_selectable_list/_selectable_list_item.jsx'

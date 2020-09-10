@@ -1,0 +1,10 @@
+examples:
+
+  rails:
+  - selectable_list_default: Default
+
+
+  react:
+  - selectable_list_default: Default
+
+
