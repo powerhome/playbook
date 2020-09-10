@@ -18,7 +18,7 @@ RSpec.describe Playbook::PbTime::Time do
   it do
     is_expected.to define_enum_prop(:size)
       .with_default("sm")
-      .with_values("lg", "sm")
+      .with_values("md", "sm")
   end
 
   describe "#classname" do
@@ -26,9 +26,9 @@ RSpec.describe Playbook::PbTime::Time do
       required_props = { time: Time.now }
 
       expect(subject.new(required_props).classname).to eq "pb_time_kit_left_sm"
-      expect(subject.new(required_props.merge(size: "lg")).classname).to eq "pb_time_kit_left_lg"
+      expect(subject.new(required_props.merge(size: "md")).classname).to eq "pb_time_kit_left_md"
       expect(subject.new(required_props.merge(align: "center")).classname).to eq "pb_time_kit_center_sm"
-      expect(subject.new(required_props.merge(size: "lg", align: "right")).classname).to eq "pb_time_kit_right_lg"
+      expect(subject.new(required_props.merge(size: "md", align: "right")).classname).to eq "pb_time_kit_right_md"
       expect(subject.new(required_props.merge(dark: true)).classname).to eq "pb_time_kit_left_sm dark"
     end
   end

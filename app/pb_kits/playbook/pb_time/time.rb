@@ -9,7 +9,7 @@ module Playbook
 
       prop :time, required: true
       prop :size, type: Playbook::Props::Enum,
-                  values: %w[lg sm],
+                  values: %w[md sm],
                   default: "sm"
       prop :align, type: Playbook::Props::Enum,
                    values: %w[left center right],

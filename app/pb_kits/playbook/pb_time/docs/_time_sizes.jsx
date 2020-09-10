@@ -10,7 +10,7 @@ const TimeSizes = () => {
       <br />
       <Time
           date={new Date()}
-          size="lg"
+          size="md"
       />
     </div>
   )

@@ -27,25 +27,25 @@ const TimeDefault = () => {
       <br />
       <Time
           date={new Date()}
-          size="lg"
+          size="md"
       />
       <br />
       <Time
           date={new Date()}
-          size="lg"
+          size="md"
           timeZone="America/New_York"
       />
       <br />
       <Time
           date={new Date()}
           showIcon
-          size="lg"
+          size="md"
       />
       <br />
       <Time
           date={new Date()}
           showIcon
-          size="lg"
+          size="md"
           timeZone="America/New_York"
       />
     </div>

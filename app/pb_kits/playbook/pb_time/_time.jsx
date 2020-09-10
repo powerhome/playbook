@@ -17,7 +17,7 @@ type TimeProps = {
   dark?: boolean,
   id?: string,
   showIcon?: boolean,
-  size?: 'lg' | 'sm',
+  size?: 'md' | 'sm',
   timeZone?: string,
 }
 
@@ -42,14 +42,14 @@ const Time = (props: TimeProps) => {
             <Icon
                 fixedWidth
                 icon="clock"
-                size={size === 'lg' ? 'lg' : 'sm'}
+                size={size === 'md' ? 'lg' : 'sm'}
             />
           </Body>
           {' '}
         </If>
         <time dateTime={date}>
           <span>
-            <If condition={size !== 'lg'}>
+            <If condition={size !== 'md'}>
               <Body
                   color="light"
                   tag="span"

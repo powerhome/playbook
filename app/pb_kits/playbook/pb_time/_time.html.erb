@@ -2,7 +2,7 @@
     id: object.id,
     data: object.data,
     class: object.classname) do %>
-  <% if object.size == "lg" %>
+  <% if object.size == "md" %>
     <% if object.show_icon %>
       <%= pb_rails("body", props: { color: "light", tag: "span"}) do %>
         <%= pb_rails("icon", props: { icon: "clock", fixed_width: true, size: "lg" }) %>

@@ -14,7 +14,7 @@ const TimeTimeZone = () => {
       <h4>{'East Coast'}</h4>
       <Time
           date={new Date()}
-          size="lg"
+          size="md"
           timeZone={zones.east}
       />
 
