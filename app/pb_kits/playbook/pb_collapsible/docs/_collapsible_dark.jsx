@@ -3,7 +3,6 @@ import { Collapsible } from '../..'
 
 const CollapsibleDark = () => (
   <div>
-    <Collapsible dark />
   </div>
 )
 

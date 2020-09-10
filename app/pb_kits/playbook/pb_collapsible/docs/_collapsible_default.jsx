@@ -3,7 +3,11 @@ import { Collapsible } from '../..'
 
 const CollapsibleDefault = () => (
   <div>
-    <Collapsible />
+    <Collapsible>
+      <Collapsible.Main>
+        {'Hello'}
+      </Collapsible.Main>
+    </Collapsible>
   </div>
 )
 

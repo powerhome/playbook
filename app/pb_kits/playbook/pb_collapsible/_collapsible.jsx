@@ -2,6 +2,7 @@
 
 import classnames from 'classnames'
 import { get } from 'lodash'
+import React from 'react'
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
 import { globalProps } from '../utilities/globalProps.js'
 
@@ -53,7 +54,7 @@ const Collapsible = (props: CollapsibleProps) => {
   const {
     aria = {},
     className,
-    children = null,
+    children = [],
     data = {},
     id,
   } = props
