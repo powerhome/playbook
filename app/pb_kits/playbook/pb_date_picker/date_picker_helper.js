@@ -140,13 +140,6 @@ const datePickerHelper = (config) => {
   }
   picker.config.onYearChange.push(yearChangeHook)
 
-  // click handling for Calendar Icon
-  if (!hideIcon){
-    document.querySelector(`#cal-icon-${pickerId}`).addEventListener('click', () => {
-      picker.toggle()
-    })
-  }
-
   // Adding dropdown icons to year and month selects
   picker.monthElements[0].insertAdjacentHTML('afterend', '<i class="far fa-angle-down month-dropdown-icon"></i>')
   dropdown.insertAdjacentHTML('afterend', '<i class="far fa-angle-down year-dropdown-icon" id="test-id"></i>')
