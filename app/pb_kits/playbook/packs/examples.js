@@ -24,6 +24,7 @@ import * as Caption from 'pb_caption/docs'
 import * as Card from 'pb_card/docs'
 import * as Checkbox from 'pb_checkbox/docs'
 import * as CircleIconButton from 'pb_circle_icon_button/docs'
+import * as CollapsibleCard from 'pb_collapsible_card/docs'
 import * as Contact from 'pb_contact/docs'
 import * as Currency from 'pb_currency/docs'
 import * as DashboardValue from 'pb_dashboard_value/docs'
@@ -104,6 +105,7 @@ WebpackerReact.setup({
   ...Card,
   ...Checkbox,
   ...CircleIconButton,
+  ...CollapsibleCard,
   ...Contact,
   ...Currency,
   ...DashboardValue,
@@ -172,6 +174,3 @@ WebpackerReact.setup({
   ...UserBadge,
   ...WeekdayStacked,
 })
-
-import * as Collapsible from 'pb_collapsible/docs'
-WebpackerReact.setup(Collapsible)

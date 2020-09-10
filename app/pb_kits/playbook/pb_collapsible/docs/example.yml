@@ -1,9 +1,0 @@
-examples:
-
-  rails:
-  - collapsible_default: Light
-  - collapsible_dark: Dark
-
-  react:
-  - collapsible_default: Light
-  - collapsible_dark: Dark

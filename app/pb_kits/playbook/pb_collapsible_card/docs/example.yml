@@ -1,0 +1,9 @@
+examples:
+
+  rails:
+  - collapsible_card_default: Light
+  - collapsible_card_dark: Dark
+
+  react:
+  - collapsible_card_default: Light
+  - collapsible_card_dark: Dark
