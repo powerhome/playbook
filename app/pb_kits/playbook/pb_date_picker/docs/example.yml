@@ -12,7 +12,7 @@ examples:
   - date_picker_min_max: Min Max
   - date_picker_error: Error
   - date_picker_hooks: Hooks
-  - date_picker_allow_input: Allow Input
+  # - date_picker_allow_input: Allow Input
   - date_picker_year_range: Year Range
   - date_picker_dark: Dark
   
@@ -29,7 +29,7 @@ examples:
   - date_picker_min_max: Min Max
   - date_picker_error: Error
   - date_picker_hooks: Hooks
-  - date_picker_allow_input: Allow Input
+  # - date_picker_allow_input: Allow Input
   - date_picker_year_range: Year Range
   - date_picker_dark: Dark
   
