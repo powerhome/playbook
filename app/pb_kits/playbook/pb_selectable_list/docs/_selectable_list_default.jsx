@@ -5,23 +5,23 @@ const SelectableListDefault = () => {
   return (
 
     <div>
-      <SelectableList variant="checkbox">
-        <SelectableList.Item
+      <SelectableList variant="radio">
+        <SelectableListItem
             defaultChecked={false}
             label="Unselected"
             name="custom1"
         />
-        <SelectableList.Item
+        <SelectableListItem
             defaultChecked
             label="Selected"
             name="custom1"
         />
-        <SelectableList.Item
+        <SelectableListItem
             defaultChecked={false}
             label="Hover"
             name="custom1"
         />
-        <SelectableList.Item
+        <SelectableListItem
             defaultChecked={false}
             label="Unselected Last"
             name="custom1"

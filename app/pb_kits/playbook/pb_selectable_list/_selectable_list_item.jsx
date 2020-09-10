@@ -13,8 +13,8 @@ type SelectableListItemProps = {
   className?: string,
   data?: object,
   id?: string,
+  label?: string,
   name?: string,
-  text?: string,
   value?: string,
   variant?: string,
   onChange: (boolean)=>void,
@@ -26,7 +26,7 @@ const SelectableListItem = ({
   children,
   data = {},
   id,
-  text = '',
+  label,
   name = '',
   value = '',
   variant,
@@ -39,24 +39,41 @@ const SelectableListItem = ({
 
   return (
 
-    <ListItem variant={variant}>
-      <div></div>
+    <ListItem {...props}>
       <div
           {...ariaProps}
           {...dataProps}
           className={classes}
           htmlFor={id}
       >
-        <Radio
-            {...props}
-            id={id}
-            name={name}
-            onChange={onChange}
-            text={text}
-            type="radio"
-            value={value}
-        />
-        {children}
+        <Choose>
+          <When condition={variant == 'checkbox'}>
+            <Checkbox
+                id={id}
+                label={label}
+                name={name}
+                onChange={onChange}
+                type="checkbox"
+                value={value}
+                {...props}
+            />
+            {children}
+          </When>
+          <When condition={variant == 'radio'}>
+            <Radio
+                id={id}
+                label={label}
+                name={name}
+                onChange={onChange}
+                type="radio"
+                value={value}
+                {...props}
+            />
+            {children}
+          </When>
+          <Otherwise>{children}</Otherwise>
+        </Choose>
+
       </div>
     </ListItem>
   )

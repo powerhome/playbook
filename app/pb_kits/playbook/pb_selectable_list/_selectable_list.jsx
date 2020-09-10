@@ -4,7 +4,6 @@ import classnames from 'classnames'
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
 import { globalProps } from '../utilities/globalProps.js'
 import { List } from  '..'
-import SelectableListItem from './_selectable_list_item'
 
 type SelectableListProps = {
   aria?: object,
@@ -22,7 +21,6 @@ const SelectableList = (props: SelectableListProps) => {
     className,
     data = {},
     id,
-    variant = 'radio',
   } = props
 
   const ariaProps = buildAriaProps(aria)
@@ -36,13 +34,11 @@ const SelectableList = (props: SelectableListProps) => {
         className={classes}
         id={id}
     >
-      <List variant={variant} >
+      <List {...props}>
         {children}
       </List>
     </div>
   )
 }
-
-SelectableList.Item = SelectableListItem
 
 export default SelectableList

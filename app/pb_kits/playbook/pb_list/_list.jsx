@@ -17,7 +17,9 @@ type ListProps = {
   ordered: boolean,
   role?: string,
   tabIndex?: string,
+  text?: string,
   size?: string,
+  variant?: string,
   xpadding: boolean,
 }
 
@@ -36,6 +38,8 @@ const List = (props: ListProps) => {
     size = '',
     tabIndex,
     xpadding = false,
+    variant,
+    text,
   } = props
 
   const layoutClass = {
@@ -44,6 +48,9 @@ const List = (props: ListProps) => {
     default: '',
   }
 
+  const childrenWithProps = React.Children.map(children, (child) => {
+    return React.cloneElement(child, { text, variant })
+  })
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
   const classes = classnames(
@@ -69,7 +76,7 @@ const List = (props: ListProps) => {
             role={role}
             tabIndex={tabIndex}
         >
-          {children}
+          {childrenWithProps}
         </ol>
         <Else />
         <ul
@@ -80,7 +87,7 @@ const List = (props: ListProps) => {
             role={role}
             tabIndex={tabIndex}
         >
-          {children}
+          {childrenWithProps}
         </ul>
       </If>
     </div>
