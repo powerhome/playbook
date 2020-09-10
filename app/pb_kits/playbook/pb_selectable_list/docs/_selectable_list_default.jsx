@@ -1,39 +1,31 @@
 import React from 'react'
-import { ListItem, SelectableListItem, SelectableList } from '../..'
+import { SelectableList, SelectableListItem } from '../..'
 
 const SelectableListDefault = () => {
   return (
 
     <div>
-      <SelectableList>
-        <ListItem>
-          <SelectableListItem
-              defaultChecked={false}
-              label="Unselected"
-              name="custom1"
-          />
-        </ListItem>
-        <ListItem>
-          <SelectableListItem
-              defaultChecked
-              label="Selected"
-              name="custom1"
-          />
-        </ListItem>
-        <ListItem>
-          <SelectableListItem
-              defaultChecked={false}
-              label="Hover"
-              name="custom1"
-          />
-        </ListItem>
-        <ListItem>
-          <SelectableListItem
-              defaultChecked={false}
-              label="Unselected Last"
-              name="custom1"
-          />
-        </ListItem>
+      <SelectableList variant="checkbox">
+        <SelectableList.Item
+            defaultChecked={false}
+            label="Unselected"
+            name="custom1"
+        />
+        <SelectableList.Item
+            defaultChecked
+            label="Selected"
+            name="custom1"
+        />
+        <SelectableList.Item
+            defaultChecked={false}
+            label="Hover"
+            name="custom1"
+        />
+        <SelectableList.Item
+            defaultChecked={false}
+            label="Unselected Last"
+            name="custom1"
+        />
       </SelectableList>
     </div>
 

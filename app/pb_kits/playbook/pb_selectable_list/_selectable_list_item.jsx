@@ -4,7 +4,7 @@ import React, { Node } from 'react'
 import classnames from 'classnames'
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
 import { globalProps } from '../utilities/globalProps.js'
-import { Radio } from '..'
+import { Checkbox, ListItem, Radio } from '..'
 
 type SelectableListItemProps = {
   aria?: object,
@@ -16,6 +16,7 @@ type SelectableListItemProps = {
   name?: string,
   text?: string,
   value?: string,
+  variant?: string,
   onChange: (boolean)=>void,
 }
 
@@ -28,6 +29,7 @@ const SelectableListItem = ({
   text = '',
   name = '',
   value = '',
+  variant,
   onChange = () => {},
   ...props
 }: SelectableListItemProps) => {
@@ -36,23 +38,27 @@ const SelectableListItem = ({
   const classes = classnames(buildCss('pb_selectable_list_item_kit'), globalProps(props), className)
 
   return (
-    <div
-        {...ariaProps}
-        {...dataProps}
-        className={classes}
-        htmlFor={id}
-    >
-      <Radio
-          {...props}
-          id={id}
-          name={name}
-          onChange={onChange}
-          text={text}
-          type="radio"
-          value={value}
-      />
-      {children}
-    </div>
+
+    <ListItem variant={variant}>
+      <div></div>
+      <div
+          {...ariaProps}
+          {...dataProps}
+          className={classes}
+          htmlFor={id}
+      >
+        <Radio
+            {...props}
+            id={id}
+            name={name}
+            onChange={onChange}
+            text={text}
+            type="radio"
+            value={value}
+        />
+        {children}
+      </div>
+    </ListItem>
   )
 }
 
