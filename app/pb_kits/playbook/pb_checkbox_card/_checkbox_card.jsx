@@ -5,7 +5,7 @@ import React from 'react'
 import classnames from 'classnames'
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
 import { globalProps } from '../utilities/globalProps.js'
-import { Checkbox, SelectableCard } from '../'
+import { Body, Icon, SelectableCard } from '../'
 import { noop } from '../utilities/props'
 
 type CheckboxCardProps = {
@@ -17,8 +17,9 @@ type CheckboxCardProps = {
   id?: string,
   text?: string,
   checked?: boolean,
-  children?: array<React.ReactChild>,
-  onChange: InputCallback<HTMLInputElement>
+  onChange: InputCallback<HTMLInputElement>,
+  name?: string,
+  inputId: string
 }
 
 const CheckboxCard = (props: CheckboxCardProps) => {
@@ -32,13 +33,16 @@ const CheckboxCard = (props: CheckboxCardProps) => {
     children = [],
     onChange = noop,
     text = '',
+    name = '',
+    inputId = null,
   } = props
 
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
-  const classes = classnames(buildCss('pb_checkbox_card'), className, globalProps(props))
+  const classes = classnames(buildCss('pb_checkbox_card_kit'), className, globalProps(props))
 
-  // console.log(children)
+  const inputIdPresent = inputId !== null ? inputId : name
+
   return (
     <div
         {...ariaProps}
@@ -48,31 +52,30 @@ const CheckboxCard = (props: CheckboxCardProps) => {
     >
       <SelectableCard
           disabled={disabled}
+          inputId={inputIdPresent}
+          name={name}
           onChange={onChange}
           selected={checked}
       >
-        <Checkbox
-            checked={checked}
-            disabled={disabled}
-            onChange={onChange}
-            text={text}
-        />
+        <div>
+          <span className="pb_checkbox_checkmark mr_xs">
+            <Icon
+                className="check_icon"
+                fixedWith
+                icon="check"
+            />
+          </span>
+          <Body text={text} />
 
-        { children}
-
+          <If condition={!text}>
+            {children}
+          </If>
+        </div>
+        <If condition={text}>
+          <div>{children}</div>
+        </If>
       </SelectableCard>
     </div>
-
-  // <div
-  //     {...ariaProps}
-  //     {...dataProps}
-  //     className={classes}
-  //     id={id}
-  // >
-  //   <Card {...props} selected={isChecked}>
-  //     <Checkbox {...props} checked={isChecked} onChange={checkboxChanged}/>
-  //   </Card>
-  // </div>
   )
 }
 
