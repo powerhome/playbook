@@ -2,6 +2,7 @@
 
 import classnames from 'classnames'
 import { get } from 'lodash'
+import { Flex, FlexItem } from '../'
 import React, { useState } from 'react'
 import AnimateHeight from 'react-animate-height'
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
@@ -80,13 +81,34 @@ const Collapsible = (props: CollapsibleProps) => {
     })
   }
 
+  const renderChevron = (height) => {
+    const direction = height === 0 ? 'down' : 'up'
+
+    return (
+      <div
+          key={direction}
+          style={{ verticalAlign: 'middle' }}
+      >
+        <i  className={`far fa-2x fa-chevron-${direction} fa-fw`} />
+      </div>
+    )
+  }
+
   const renderMain = () => {
     const mainTags = subComponentTags('Main')
 
     return (
       <div onClick={toggleExpand}>
-        {mainTags}
+        <Flex
+            inline
+            spacing="between"
+            vertical="center"
+        >
+          <FlexItem>{mainTags}</FlexItem>
+          <FlexItem>{renderChevron(height)}</FlexItem>
+        </Flex>
       </div>
+
     )
   }
 
