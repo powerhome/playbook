@@ -2,6 +2,11 @@
     id: object.id,
     data: object.data,
     class: object.classname) do %>
+    <%
+      # convert deprecated prop values
+      object.size = "sm" if object.size == "xs"
+      object.size = "md" if object.size == "lg"
+    %>
   <% if object.size == "md" %>
     <% if object.show_icon %>
       <%= pb_rails("body", props: { color: "light", tag: "span"}) do %>
