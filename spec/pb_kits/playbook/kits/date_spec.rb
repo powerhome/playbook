@@ -42,6 +42,31 @@ RSpec.describe Playbook::PbDate::Date do
     end
   end
 
+  describe "#timezones" do
+    it "displays the date respecting EST timezone" do
+      expect(subject.new(
+        date: DateTime.new(2019, 10, 19),
+        size: "lg",
+      ).lg_date).to include "OCT 18"
+    end
+
+    it "displays the date respecting Syndey Australia TZ" do
+      expect(subject.new(
+        date: DateTime.new(2019, 10, 19),
+        size: "lg",
+        timezone: "Australia/Sydney"
+      ).lg_date).to include "OCT 19"
+    end
+
+    it "displays the date respecting Syndey Australia TZ with Time" do
+      expect(subject.new(
+        date: DateTime.new(2019, 10, 19, 14, 4, 4),
+        size: "lg",
+        timezone: "Australia/Sydney"
+      ).lg_date).to include "OCT 20"
+    end
+  end
+
   describe "#classname" do
     it "returns namespaced class name", :aggregate_failures do
       required_props = { date: Date.today }
