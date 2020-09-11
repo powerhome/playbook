@@ -15,6 +15,7 @@ type SelectableListItemProps = {
   id?: string,
   label?: string,
   name?: string,
+  text?: string,
   value?: string,
   variant?: string,
   onChange: (boolean)=>void,
@@ -28,6 +29,7 @@ const SelectableListItem = ({
   id,
   label,
   name = '',
+  text,
   value = '',
   variant,
   onChange = () => {},
@@ -50,9 +52,9 @@ const SelectableListItem = ({
           <When condition={variant == 'checkbox'}>
             <Checkbox
                 id={id}
-                label={label}
                 name={name}
                 onChange={onChange}
+                text={label}
                 type="checkbox"
                 value={value}
                 {...props}

@@ -1,2 +1,2 @@
-export { default as SelectableListDefault } from './_selectable_list_default.jsx'
-
+export { default as SelectableListCheckbox } from './_selectable_list_checkbox.jsx'
+export { default as SelectableListRadio } from './_selectable_list_radio.jsx'
