@@ -100,7 +100,6 @@ const Collapsible = (props: CollapsibleProps) => {
     return (
       <div onClick={toggleExpand}>
         <Flex
-            inline
             spacing="between"
             vertical="center"
         >
