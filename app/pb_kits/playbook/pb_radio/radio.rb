@@ -17,6 +17,8 @@ module Playbook
                   default: false
       prop :error, type: Playbook::Props::Boolean,
                    default: false
+      prop :input_options, type: Playbook::Props::Hash,
+                           default: {}
       prop :name, type: Playbook::Props::String,
                   default: "radio_name"
       prop :text, type: Playbook::Props::String,
@@ -24,8 +26,7 @@ module Playbook
       prop :value, type: Playbook::Props::String,
                    default: "radio_text"
       prop :object
-      prop :input_options, type: Playbook::Props::Hash,
-                     default: {}
+
 
       def classname
         generate_classname("pb_radio_kit", dark_class) + error_class
