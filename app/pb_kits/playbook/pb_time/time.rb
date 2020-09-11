@@ -9,7 +9,7 @@ module Playbook
 
       prop :time, required: true
       prop :size, type: Playbook::Props::Enum,
-                  values: %w[md sm],
+                  values: %w[lg md sm xs],
                   default: "sm"
       prop :align, type: Playbook::Props::Enum,
                    values: %w[left center right],
@@ -21,7 +21,12 @@ module Playbook
                            default: false
 
       def classname
-        generate_classname("pb_time_kit", align, size)
+        # convert deprecated prop values
+        mutated_size = size
+        mutated_size = "sm" if mutated_size == "xs"
+        mutated_size = "md" if mutated_size == "lg"
+        # end
+        generate_classname("pb_time_kit", align, mutated_size)
       end
 
       def format_time_string
