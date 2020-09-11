@@ -44,6 +44,7 @@ kits:
   - image
   - layout
   - list
+  - selectable_list
   - loading_inline
   - multiple_users
   - multiple_users_stacked
@@ -94,4 +95,3 @@ kits:
     - weekday_stacked
   - user
   - user_badge
-  - selectable_list
