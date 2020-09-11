@@ -11,7 +11,10 @@ module Playbook
                      values: %w[radio checkbox],
                      default: "radio"
 
-      prop :text
+      prop :text, type: Playbook::Props::String
+
+      prop :items, type: Playbook::Props::Array,
+                   default: []
 
       def classname
         generate_classname("pb_selectable_list_kit")

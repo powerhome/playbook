@@ -4,9 +4,9 @@
     data: object.data,
     id: object.id) do %>
       <%= pb_rails("list") do %>
-        <%# object.children.each { |child| child.props[:variant] = object.variant }%>
-        <% binding.pry %>
-        <%= capture(object.variant, &object.children) %>
+        <% object.items.each do |item| %>
+          <%= pb_rails("selectable_list/selectable_list_item", props: item.merge(variant: object.variant) )%>
+        <% end %>
       <% end %>
 <% end %>
 

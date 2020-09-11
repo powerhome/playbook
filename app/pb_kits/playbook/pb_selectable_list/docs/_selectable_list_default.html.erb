@@ -1,6 +1,12 @@
-<%= pb_rails("selectable_list", props: { variant: "checkbox" }) do %>
-  <%= pb_rails("selectable_list/selectable_list_item", props: { text: "Unselected", name: "custum1" }) %>
-  <%#= pb_rails("selectable_list/selectable_list_item", props: {text: "Selected", name: "custum1"}) %>
-  <%#= pb_rails("selectable_list/selectable_list_item", props: {text: "Hover", name: "custum1"}) %>
-  <%#= pb_rails("selectable_list/selectable_list_item", props: {text: "Unslected Last", name: "custum1"}) %>
-<% end %>
+<%= pb_rails("selectable_list",
+        props: {
+          variant: "radio",
+          items: [
+            { text: "one", name: "custum1" },
+            { text: "two", name: "custum2" },
+            { text: "three", name: "custum3" },
+            { text: "fourth", name: "custum4" },
+          ]
+        }
+    )
+%>
