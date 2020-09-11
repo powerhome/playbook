@@ -4,7 +4,9 @@
     data: object.data,
     id: object.id) do %>
       <%= pb_rails("list") do %>
-        <%= capture(&object.children) %>
+        <%# object.children.each { |child| child.props[:variant] = object.variant }%>
+        <% binding.pry %>
+        <%= capture(object.variant, &object.children) %>
       <% end %>
 <% end %>
 

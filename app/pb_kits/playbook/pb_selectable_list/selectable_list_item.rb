@@ -15,6 +15,10 @@ module Playbook
       prop :value, type: Playbook::Props::String,
                    default: "radio_text"
 
+      prop :variant, type: Playbook::Props::Enum,
+                     values: %w[radio checkbox],
+                     default: "radio"
+
       partial "pb_selectable_list/selectable_list_item"
 
       ##todo check this after done everything else

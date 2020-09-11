@@ -3,8 +3,18 @@
     class: object.classname,
     data: object.data,
     id: object.id) do %>
-  <%= pb_rails("radio", props: {text: object.text} ) %>
-  <% if object.children.present? %>
-    <%= capture(&object.children) %>
+    <% puts object.variant %>
+  <% if object.variant == "radio"%>
+    <%= pb_rails("radio", props: {text: object.text} ) %>
+    <% if object.children.present? %>
+      <%= capture(&object.children) %>
+    <% end %>
+  <% elsif object.variant == "checkbox" %>
+    <%= pb_rails("checkbox", props: {text: object.text} ) %>
+    <% if object.children.present? %>
+      <%= capture(&object.children) %>
+    <% end %>
+  <% else %>
+    <h1>BAD</h1>
   <% end %>
 <% end %>
