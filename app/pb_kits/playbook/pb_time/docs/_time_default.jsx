@@ -5,19 +5,48 @@ const TimeDefault = () => {
   return (
     <div>
       <Time
+          date={new Date().getTime()}
+      />
+      <br />
+      <Time
           date={new Date()}
-          size="lg"
           timeZone="America/New_York"
       />
       <br />
       <Time
           date={new Date().getTime()}
-          size="sm"
+          showIcon
       />
       <br />
       <Time
-          date="2012-08-02T09:49:29Z"
-          size="xs"
+          date={new Date()}
+          showIcon
+          timeZone="America/New_York"
+      />
+      <br />
+      <br />
+      <Time
+          date={new Date()}
+          size="md"
+      />
+      <br />
+      <Time
+          date={new Date()}
+          size="md"
+          timeZone="America/New_York"
+      />
+      <br />
+      <Time
+          date={new Date()}
+          showIcon
+          size="md"
+      />
+      <br />
+      <Time
+          date={new Date()}
+          showIcon
+          size="md"
+          timeZone="America/New_York"
       />
     </div>
   )
