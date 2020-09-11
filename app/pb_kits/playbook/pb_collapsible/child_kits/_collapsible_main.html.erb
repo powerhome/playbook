@@ -3,12 +3,14 @@
     data: object.data,
     class: object.classname,
     aria: object.aria) do %>
+
   <%= pb_rails("flex", props: {vertical: "center", spacing: "between"}) do %>
     <%= pb_rails("flex/flex_item") do %>
       <%= capture(&object.children) %>
     <% end %>
     <%= pb_rails("flex/flex_item") do %>
-      <i class="far fa-chevron-up"></i>
+      <i class="far fa-chevron-down"></i>
     <% end %>
   <% end %>
+  <%= javascript_include_tag "./collapsible.js" %>
 <% end %>
