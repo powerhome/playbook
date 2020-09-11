@@ -3,5 +3,12 @@
     data: object.data,
     class: object.classname,
     aria: object.aria) do %>
-  <%= capture(&object.children) %>
+  <%= pb_rails("flex", props: {vertical: "center", spacing: "between"}) do %>
+    <%= pb_rails("flex/flex_item") do %>
+      <%= capture(&object.children) %>
+    <% end %>
+    <%= pb_rails("flex/flex_item") do %>
+      <i class="far fa-chevron-up"></i>
+    <% end %>
+  <% end %>
 <% end %>
