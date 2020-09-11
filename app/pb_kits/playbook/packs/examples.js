@@ -88,6 +88,7 @@ import * as TimeRangeInline from 'pb_time_range_inline/docs'
 import * as Title from 'pb_title/docs'
 import * as TitleCount from 'pb_title_count/docs'
 import * as TitleDetail from 'pb_title_detail/docs'
+import * as Typeahead from 'pb_typeahead/docs'
 import * as Toggle from 'pb_toggle/docs'
 import * as User from 'pb_user/docs'
 import * as UserBadge from 'pb_user_badge/docs'
@@ -169,6 +170,7 @@ WebpackerReact.setup({
   ...Title,
   ...TitleCount,
   ...TitleDetail,
+  ...Typeahead,
   ...Toggle,
   ...User,
   ...UserBadge,
