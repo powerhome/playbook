@@ -7,6 +7,8 @@ module Playbook
 
       partial "pb_date_picker/date_picker"
 
+      prop :allow_input, type: Playbook::Props::Boolean,
+                         default: false
       prop :dark, type: Playbook::Props::Boolean,
                   default: false
       prop :default_date, type: Playbook::Props::String,
@@ -40,8 +42,6 @@ module Playbook
       prop :picker_id, type: Playbook::Props::String,
                        required: true
       prop :placeholder, type: Playbook::Props::String
-      prop :read_only, type: Playbook::Props::Boolean,
-                       default: false
       prop :required, type: Playbook::Props::Boolean,
                       default: false
       prop :type, type: Playbook::Props::String
@@ -54,6 +54,7 @@ module Playbook
 
       def date_picker_config
         {
+          allowInput: allow_input,
           defaultDate: default_date,
           disableDate: disable_date,
           disableRange: disable_range,
@@ -64,7 +65,6 @@ module Playbook
           minDate: min_date,
           mode: mode,
           pickerId: picker_id,
-          readOnly: read_only,
           yearRange: year_range,
         }.to_json.html_safe
       end
