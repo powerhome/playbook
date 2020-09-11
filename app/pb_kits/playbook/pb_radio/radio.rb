@@ -24,12 +24,15 @@ module Playbook
       prop :value, type: Playbook::Props::String,
                    default: "radio_text"
       prop :object
+      prop :options, type: Playbook::Props::Hash,
+                    default: {}
+
       def classname
         generate_classname("pb_radio_kit", dark_class) + error_class
       end
 
       def input
-        check_box_tag(name, value, checked)
+        check_box_tag(name, value, checked, options)
       end
 
       def selected
