@@ -8,7 +8,7 @@
     <% if object.children %>
       <%= capture(&object.children) %>
     <% else %>
-      <%= radio_button_tag object.name, object.value, object.selected %>
+      <%= radio_button_tag object.name, object.value, object.selected, object.input_options %>
     <% end %>
 
     <span class="pb_radio_button"></span>
