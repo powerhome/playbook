@@ -2,7 +2,7 @@
 
 import classnames from 'classnames'
 import { get } from 'lodash'
-import React from 'react'
+import React, { useState } from 'react'
 import AnimateHeight from 'react-animate-height'
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
 import { globalProps } from '../utilities/globalProps.js'
@@ -64,6 +64,11 @@ const Collapsible = (props: CollapsibleProps) => {
   const dataProps = buildDataProps(data)
   const classes = classnames(buildCss('pb_collapsible'), className, globalProps(props))
 
+  const [height, setHeight] = useState(0)
+  const toggleExpand = () => {
+    setHeight(height === 0 ? 'auto' : 0)
+  }
+
   const collapsibleChildren =
     typeof children === 'object' && children.length ? children : [children]
 
@@ -77,7 +82,12 @@ const Collapsible = (props: CollapsibleProps) => {
 
   const renderMain = () => {
     const mainTags = subComponentTags('Main')
-    return mainTags
+
+    return (
+      <div onClick={toggleExpand}>
+        {mainTags}
+      </div>
+    )
   }
 
   const renderContent = () => {
@@ -85,7 +95,7 @@ const Collapsible = (props: CollapsibleProps) => {
     return (
       <AnimateHeight
           duration={500}
-          height="auto"
+          height={height}
           id="bottom-section"
       >
         {nonMainChildren}
