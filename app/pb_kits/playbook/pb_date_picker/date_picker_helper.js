@@ -8,7 +8,6 @@ const datePickerHelper = (config) => {
     disableRange,
     disableWeekdays,
     format,
-    hideIcon,
     maxDate,
     minDate,
     mode,
