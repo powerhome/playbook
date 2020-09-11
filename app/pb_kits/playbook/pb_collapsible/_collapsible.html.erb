@@ -3,5 +3,7 @@
     class: object.classname,
     data: object.data,
     id: object.id) do %>
-  <span>COLLAPSIBLE CONTENT</span>
+    <% if object.children %>
+    <%= pb_rails("collapsible/collapsible_content", props: { padding: object.body_padding, children: object.children }) %>
+  <% end %>
 <% end %>
