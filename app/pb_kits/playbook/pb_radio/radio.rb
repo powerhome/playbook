@@ -25,7 +25,7 @@ module Playbook
                    default: "radio_text"
       prop :object
       prop :options, type: Playbook::Props::Hash,
-                    default: {}
+                     default: {}
 
       def classname
         generate_classname("pb_radio_kit", dark_class) + error_class
