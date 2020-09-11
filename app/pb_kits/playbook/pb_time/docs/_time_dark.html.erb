@@ -1,0 +1,70 @@
+<%= pb_rails("time", props: {
+  dark: true,
+  time: Time.now
+}) %>
+
+<br>
+
+<%= pb_rails("time", props: {
+  dark: true,
+  show_timezone: true,
+  time: DateTime.now,
+  timezone: "America/Chicago",
+}) %>
+
+<br>
+
+<%= pb_rails("time", props: {
+  dark: true,
+  time: "2012-08-02T15:49:29Z",
+  show_icon: true,
+}) %>
+
+<br>
+
+<%= pb_rails("time", props: {
+  dark: true,
+  show_timezone: true,
+  time: "2012-08-02T15:49:29Z",
+  show_icon: true,
+  timezone: "America/Chicago",
+}) %>
+
+ <br>
+ <br>
+
+ <%= pb_rails("time", props: {
+  dark: true,
+  time: Time.now,
+  size: "md",
+}) %>
+
+<br>
+
+<%= pb_rails("time", props: {
+  dark: true,
+  show_timezone: true,
+  time: DateTime.now,
+  timezone: "America/New_York",
+  size: "md",
+}) %>
+
+<br>
+
+<%= pb_rails("time", props: {
+  dark: true,
+  show_timezone: true,
+  time: "2012-08-02T15:49:29Z",
+  show_icon: true,
+  size: "md",
+}) %>
+
+<br>
+
+<%= pb_rails("time", props: {
+  dark: true,
+  time: "2012-08-02T15:49:29Z",
+  show_icon: true,
+  size: "md",
+  timezone: "America/New_York",
+}) %>

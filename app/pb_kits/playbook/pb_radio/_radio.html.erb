@@ -1,9 +1,10 @@
 <%= content_tag(:label,
-    id: object.id,
-    data: object.data,
-    value: object.value,
+    aria: object.aria,
     checked: object.checked,
-    class: object.classname) do %>
+    class: object.classname,
+    data: object.data,
+    id: object.id,
+    value: object.value) do %>
 
     <% if object.children %>
       <%= capture(&object.children) %>
@@ -12,5 +13,5 @@
     <% end %>
 
     <span class="pb_radio_button"></span>
-    <%= pb_rails("body", props: { status: object.body_status, text: object.text, dark: object.dark}) %>
+    <%= pb_rails("body", props: { status: object.body_status, text: object.text, dark: object.dark }) %>
 <% end %>

@@ -10,17 +10,20 @@ const HashtagDefault = () => {
           url="https://google.com"
       />
       <br />
+      <br />
       <Hashtag
           text="123456"
           type="home"
           url="https://google.com"
       />
       <br />
+      <br />
       <Hashtag
           text="456789"
           type="appointment"
           url="https://google.com"
       />
+      <br />
       <br />
       <Hashtag
           text="654321"

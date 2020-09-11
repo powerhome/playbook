@@ -15,3 +15,47 @@ ul.pb--tokens-spacing
     li class=(item[:dark] == true ? "dark" : "") data-name="#{item[:name]}" data-variable="#{variable}"
       div
         div class="pb--spacing_#{item[:class]}"
+
+= pb_rails("title", props: { text: "Spacing Props in Kits", tag: "h4", size: 4, padding_top: "sm" })
+br
+ul.pb_card_kit_shadow_deep_deselected.p_md
+  markdown: 
+    Rails kits the following spacing props:<br/>
+    `margin`<br/>
+    `margin_bottom`<br/>
+    `margin_left`<br/>
+    `margin_right`<br/>
+    `margin_top`<br/>
+    `margin_x`<br/>
+    `margin_y`<br/>
+    `padding`<br/>
+    `padding_bottom`<br/>
+    `padding_left`<br/>
+    `padding_right`<br/>
+    `padding_top`<br/>
+    `padding_x`<br/>
+    `padding_y`<br/>
+
+
+    <br/>
+    React kits have the following spacing props:<br/>
+    `margin`<br/>
+    `marginBottom`<br/>
+    `marginLeft`<br/>
+    `marginRight`<br/>
+    `marginTop`<br/>
+    `marginX`<br/>
+    `marginY`<br/>
+    `padding`<br/>
+    `paddingBottom`<br/>
+    `paddingLeft`<br/>
+    `paddingRight`<br/>
+    `paddingTop`<br/>
+    `paddingX`<br/>
+    `paddingY`<br/>
+    
+    <br/>
+
+    The values possible are: `"none", "xs", "sm", "md", "lg", "xl"`
+
+

@@ -24,13 +24,12 @@
     }
   }
 
-
   [class*=pb_progress_pill] {
     @include pb_progress_pill;
 
     &[class*=_inactive] {
       background-color: $border_light;
-      &[class*=_dark]{
+      &.dark {
       background-color: $border_dark;
       }
     }

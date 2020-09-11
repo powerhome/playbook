@@ -14,6 +14,7 @@ RSpec.describe Playbook::PbMultipleUsersStacked::MultipleUsersStacked do
     it "returns namespaced class name", :aggregate_failures do
       expect(subject.new(users: []).classname).to eq "pb_multiple_users_stacked_kit"
       expect(subject.new(users: [], classname: "additional_class").classname).to eq "pb_multiple_users_stacked_kit additional_class"
+      expect(subject.new(users: [], dark: true).classname).to eq "pb_multiple_users_stacked_kit dark"
     end
   end
 

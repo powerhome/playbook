@@ -97,6 +97,7 @@ const Button = (props: ButtonPropTypes) => {
     <span className="pb_button_content">
       <If condition={icon !== null}>
         <i className={`pb_icon_kit far fa-${icon} fa-fw`} />
+        {' '}
       </If>
       <span>{text || children}</span>
     </span>

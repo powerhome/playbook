@@ -8,14 +8,13 @@ module Playbook
       partial "pb_hashtag/hashtag"
 
       prop :text
-      prop :dark, type: Playbook::Props::Boolean, default: false
       prop :type, type: Playbook::Props::Enum,
                   values: %w[default project home appointment],
                   default: "default"
       prop :url
 
       def classname
-        generate_classname("pb_hastag_kit", dark_class)
+        generate_classname("pb_hastag_kit")
       end
 
       def hashtag_text
@@ -23,10 +22,6 @@ module Playbook
       end
 
     private
-
-      def dark_class
-        dark ? "dark" : nil
-      end
 
       def type_text
         if type === "home"

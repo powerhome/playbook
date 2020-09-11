@@ -12,7 +12,6 @@ module Playbook
       partial "pb_select/select"
 
       prop :blank_selection
-      prop :dark, type: Playbook::Props::Boolean, default: false
       prop :disabled, type: Playbook::Props::Boolean, default: false
       prop :error
       prop :include_blank
@@ -24,7 +23,7 @@ module Playbook
       prop :required, type: Playbook::Props::Boolean, default: false
 
       def classname
-        generate_classname("pb_select", dark_class)
+        generate_classname("pb_select")
       end
 
       def select_wrapper_class
@@ -57,10 +56,6 @@ module Playbook
 
       def error_class
         error ? " error" : ""
-      end
-
-      def dark_class
-        dark ? "dark" : nil
       end
     end
   end

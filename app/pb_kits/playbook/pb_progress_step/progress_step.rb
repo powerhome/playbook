@@ -8,15 +8,15 @@ module Playbook
       partial "pb_progress_step/progress_step"
 
       prop :orientation, type: Playbook::Props::Enum,
-                         values: %w[vertical horizontal child],
+                         values: %w[vertical horizontal],
                          default: "horizontal"
       prop :icon, type: Playbook::Props::Boolean,
                   default: false
-      prop :dark, type: Playbook::Props::Boolean,
-                  default: false
-
+      prop :variant, type: Playbook::Props::Enum,
+                     values: %w[default tracker],
+                     default: "default"
       def classname
-        generate_classname("pb_progress_step_kit", orientation, icon_class, dark_class)
+        generate_classname("pb_progress_step_kit", orientation, icon_class, variant_class)
       end
 
     private
@@ -25,8 +25,11 @@ module Playbook
         icon === true ? "icon" : nil
       end
 
-      def dark_class
-        dark === true ? "dark" : nil
+      def variant_class
+        case variant
+        when "tracker"
+          "tracker"
+        end
       end
     end
   end

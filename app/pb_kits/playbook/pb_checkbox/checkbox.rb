@@ -15,6 +15,11 @@ module Playbook
       prop :value
       prop :name
 
+      prop :required, type: Playbook::Props::Boolean,
+                      default: false
+      prop :form_spacing, type: Playbook::Props::Boolean,
+                          default: false
+
       def checked_html
         checked ? "checked='true'" : nil
       end

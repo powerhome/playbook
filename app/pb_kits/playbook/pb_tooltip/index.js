@@ -37,7 +37,7 @@ export default class PbTooltip extends PbEnhancedElement {
 
       this.triggerElement.addEventListener('mouseleave', (event) => {
         clearTimeout(this.mouseenterTimeout)
-        if (event.toElement.closest(`#${this.tooltipId}`) !== this.tooltip) {
+        if (event.target.closest(`#${this.tooltipId}`) !== this.tooltip) {
           setTimeout(() => {
             this.hideTooltip()
           }, 0)

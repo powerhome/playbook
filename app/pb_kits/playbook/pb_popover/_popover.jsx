@@ -10,14 +10,17 @@ import {
   Reference as PopperReference,
 } from 'react-popper'
 
-import { buildCss, noop } from '../utilities/props'
+import { buildAriaProps, buildCss, buildDataProps, noop } from '../utilities/props'
 
 import classnames from 'classnames'
 import { globalProps } from '../utilities/globalProps.js'
 
 type PbPopoverProps = {
+  aria?: object,
   className?: string,
   closeOnClick?: "outside" | "inside",
+  data?: object,
+  id?: String,
   offset?: boolean,
   reference: PopperReference,
   show?: boolean,
@@ -45,8 +48,11 @@ const popoverModifiers = ({ modifiers, offset }) => {
 
 const Popover = (props: PbPopoverProps) => {
   const {
-    children,
+    aria = {},
     className,
+    children,
+    data = {},
+    id,
     modifiers,
     offset,
     placement,
@@ -58,7 +64,7 @@ const Popover = (props: PbPopoverProps) => {
     minWidth,
   } = props
 
-  const popoverSpacing = globalProps(props) ? globalProps(props) : 'p_sm'
+  const popoverSpacing = globalProps(props).includes('dark') || !globalProps(props) ? 'p_sm' : globalProps(props)
   const overflowHandling = maxHeight || maxWidth ? 'overflow_handling' : ''
   const zIndexStyle = zIndex ? { zIndex: zIndex } : {}
   const widthHeightStyles = () => {
@@ -70,6 +76,9 @@ const Popover = (props: PbPopoverProps) => {
       minWidth ? { minWidth: minWidth } : {}
     )
   }
+  const ariaProps = buildAriaProps(aria)
+  const dataProps = buildDataProps(data)
+  const classes = classnames(buildCss('pb_popover_kit'), className, globalProps(props))
 
   return (
     <Popper
@@ -80,8 +89,11 @@ const Popover = (props: PbPopoverProps) => {
       {({ placement, ref, style }) => {
         return (
           <div
-              className={`${buildCss('pb_popover_kit')} ${className}`}
+              {...ariaProps}
+              {...dataProps}
+              className={classes}
               data-placement={placement}
+              id={id}
               ref={ref}
               style={Object.assign(
                 {},

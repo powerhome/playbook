@@ -13,23 +13,20 @@ module Playbook
 
       prop :checked, type: Playbook::Props::Boolean,
                      default: false
-      prop :dark, type: Playbook::Props::Boolean,
-                  default: false
       prop :error, type: Playbook::Props::Boolean,
                    default: false
       prop :input_options, type: Playbook::Props::Hash,
                            default: {}
       prop :name, type: Playbook::Props::String,
                   default: "radio_name"
+      prop :object
       prop :text, type: Playbook::Props::String,
                   default: "Radio Text"
       prop :value, type: Playbook::Props::String,
                    default: "radio_text"
-      prop :object
-
 
       def classname
-        generate_classname("pb_radio_kit", dark_class) + error_class
+        generate_classname("pb_radio_kit") + error_class
       end
 
       def selected
@@ -44,10 +41,6 @@ module Playbook
 
       def error_class
         error ? " error" : ""
-      end
-
-      def dark_class
-        dark ? "dark" : nil
       end
     end
   end

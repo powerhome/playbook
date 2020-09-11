@@ -10,7 +10,7 @@ type BodyProps = {
   aria?: object,
   className?: string,
   children?: array<React.ReactChild>,
-  color: 'dark' | 'default' | 'light' | 'lighter' | 'light_dark' | 'lighter_dark',
+  color?: 'default' | 'light' | 'lighter',
   dark?: boolean,
   data?: object,
   highlightedText?: array<string>,
@@ -31,7 +31,7 @@ const Body = (props: BodyProps) => {
     highlightedText = [],
     highlighting = false,
     id,
-    status = '',
+    status,
     tag = 'div',
     text,
   } = props

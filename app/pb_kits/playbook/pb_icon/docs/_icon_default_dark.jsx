@@ -1,13 +1,15 @@
 import React from 'react'
-import { Icon } from '../../'
+import { Body, Icon } from '../../'
 
 const IconDefaultDark = () => {
   return (
     <div>
-      <Icon
-          fixedWidth
-          icon="user"
-      />
+      <Body dark>
+        <Icon
+            fixedWidth
+            icon="user"
+        />
+      </Body>
     </div>
   )
 }

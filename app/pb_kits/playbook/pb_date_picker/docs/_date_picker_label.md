@@ -1,0 +1,1 @@
+Default label prop is `"Date Picker"`.  To remove the label set the `hideLabel` prop in React or the `hide_label` prop in Rails to `true`.
