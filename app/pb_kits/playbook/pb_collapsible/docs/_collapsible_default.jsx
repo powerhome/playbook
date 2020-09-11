@@ -5,10 +5,10 @@ const CollapsibleDefault = () => (
   <div>
     <Collapsible>
       <Collapsible.Main>
-        {'Main Section'}
+        <div>{'Main Section TEST'}</div>
       </Collapsible.Main>
       <Collapsible.Content>
-        {'Content Section'}
+        <div>{'Content Section'}</div>
       </Collapsible.Content>
     </Collapsible>
   </div>

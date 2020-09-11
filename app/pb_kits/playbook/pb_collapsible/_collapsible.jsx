@@ -69,13 +69,29 @@ const Collapsible = (props: CollapsibleProps) => {
 
   const subComponentTags = (tagName) => {
     return collapsibleChildren.filter((c) => (
-      get(c, 'type.displayName') === tagName
+      get(c, 'type.name') === tagName
     )).map((child, i) => {
       return React.cloneElement(child, { key: `${tagName.toLowerCase()}-${i}` })
     })
   }
 
-  const nonMainChildren = collapsibleChildren.filter((child) => (get(child, 'type.displayName') !== 'Main'))
+  const renderMain = () => {
+    const mainTags = subComponentTags('Main')
+    return mainTags
+  }
+
+  const renderContent = () => {
+    const nonMainChildren = collapsibleChildren.filter((child) => (get(child, 'type.name') !== 'Main'))
+    return (
+      <AnimateHeight
+          duration={500}
+          height="auto"
+          id="bottom-section"
+      >
+        {nonMainChildren}
+      </AnimateHeight>
+    )
+  }
 
   return (
     <div
@@ -84,14 +100,8 @@ const Collapsible = (props: CollapsibleProps) => {
         className={classes}
         id={id}
     >
-      {subComponentTags('Main')}
-      <AnimateHeight
-          height="auto"
-          id="bottom-section"
-      >
-        <p>{'hello'}</p>
-      </AnimateHeight>
-      {nonMainChildren}
+      {renderMain()}
+      {renderContent()}
     </div>
   )
 }
