@@ -9,7 +9,7 @@ module Playbook
 
       prop :time, required: true
       prop :size, type: Playbook::Props::Enum,
-                  values: %w[lg md sm xs],
+                  values: %w[xs sm md lg],
                   default: "sm"
       prop :align, type: Playbook::Props::Enum,
                    values: %w[left center right],
@@ -25,7 +25,7 @@ module Playbook
         mutated_size = size
         mutated_size = "sm" if mutated_size == "xs"
         mutated_size = "md" if mutated_size == "lg"
-        # end
+
         generate_classname("pb_time_kit", align, mutated_size)
       end
 

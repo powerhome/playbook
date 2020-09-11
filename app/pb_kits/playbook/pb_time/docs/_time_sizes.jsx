@@ -1,9 +1,9 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 import Time from '../_time.jsx'
 
 const TimeSizes = () => {
   return (
-    <div>
+    <Fragment>
       <Time
           date={new Date()}
       />
@@ -12,7 +12,7 @@ const TimeSizes = () => {
           date={new Date()}
           size="md"
       />
-    </div>
+    </Fragment>
   )
 }
 

@@ -18,7 +18,7 @@ RSpec.describe Playbook::PbTime::Time do
   it do
     is_expected.to define_enum_prop(:size)
       .with_default("sm")
-      .with_values("md", "sm")
+      .with_values("lg","md", "sm", "xs")
   end
 
   describe "#classname" do
