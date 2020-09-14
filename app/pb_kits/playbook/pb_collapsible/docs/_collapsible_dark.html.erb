@@ -1,5 +1,5 @@
 <%= pb_rails("collapsible", props: { dark: true }) do %>
-  <%= pb_rails("collapsible/collapsible_main", props: { padding: "sm" }) do %>
+  <%= pb_rails("collapsible/collapsible_main", props: { padding: "sm", name: "dark-example" }) do %>
       <%= pb_rails("body", props: { text: "Main Section", dark: true}) %>
   <% end %>
   <%= pb_rails("collapsible/collapsible_content", props: { padding: "md" }) do %>

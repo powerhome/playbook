@@ -1,4 +1,4 @@
-<%= check_box_tag object.name, 1, false, class: "collapsible-checkbox" %>
+<%= check_box_tag object.name, 1, true, class: "collapsible-checkbox" %>
 <%= content_tag(:label,
     id: object.id,
     data: object.data,
@@ -11,8 +11,8 @@
         <%= capture(&object.children) %>
       <% end %>
       <%= pb_rails("flex/flex_item") do %>
-        <i class="far fa-chevron-down"></i>
-        <i class="far fa-chevron-up"></i>
+        <i class="far fa-chevron-down fa-2x"></i>
+        <i class="far fa-chevron-up fa-2x"></i>
       <% end %>
     <% end %>
 <% end %>
