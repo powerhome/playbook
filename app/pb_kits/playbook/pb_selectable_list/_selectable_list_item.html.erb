@@ -9,12 +9,10 @@
     <% if object.children.present? %>
       <%= capture(&object.children) %>
     <% end %>
-  <% elsif object.variant == "checkbox" %>
+  <% else %>
     <%= pb_rails("checkbox", props: {text: object.text} ) %>
     <% if object.children.present? %>
       <%= capture(&object.children) %>
     <% end %>
-  <% else %>
-    <h1>BAD</h1>
   <% end %>
 <% end %>
