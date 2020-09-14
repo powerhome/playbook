@@ -1,0 +1,1 @@
+By default the date picker input can only be modified by picking a date on the calendar.  This prop allows your users to manually type in the date.

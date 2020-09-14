@@ -13,13 +13,17 @@
       & > [class^=pb_button]  {
         margin-right: $space-xs;
 
-        &:hover {
-          background-color:darken($royal, 20%);
+        @media (hover:hover) {
+          &:hover {
+            background-color:darken($royal, 20%);
+          }
         }
 
         &[class*=secondary] {
-          &:hover {
-            background-color:rgba($primary_action, $opacity_3)
+          @media (hover:hover) {
+            &:hover {
+              background-color:rgba($primary_action, $opacity_3)
+            }
           }
         }
   
@@ -42,13 +46,17 @@
         width: 100%;
         margin-bottom: $space-xs;
 
-        &:hover {
-          background-color:darken($royal, 20%);
+        @media (hover:hover) {
+          &:hover {
+            background-color:darken($royal, 20%);
+          }
         }
 
         &[class*=secondary] {
-          &:hover {
-            background-color:rgba($primary_action, $opacity_3)
+          @media (hover:hover) {
+            &:hover {
+              background-color:rgba($primary_action, $opacity_3)
+            }
           }
         }
   

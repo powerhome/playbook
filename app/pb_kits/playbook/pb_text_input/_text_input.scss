@@ -13,17 +13,22 @@
     margin-bottom: $space_sm;
     display: block;
 
-    input::placeholder {
+    input::placeholder,
+    .text_input .placeholder {
       @include pb_body_light;
     }
 
-    > input:first-child {
+    input,
+    .text_input {
       @include pb_textarea_light;
       @include pb_title_4;
       overflow: hidden;
     }
 
-    input:focus, input:-webkit-autofill:focus {
+    input:focus,
+    .text_input:focus,
+    input:-webkit-autofill:focus,
+    .text_input:-webkit-autofill:focus {
       @include pb_textarea_focus;
       -webkit-box-shadow: 0 0 0px 1000px $focus_input_light inset;
       transition: background-color 5000s ease-in-out 0s;
@@ -34,18 +39,22 @@
     .text_input_wrapper {
       margin-bottom: 1rem;
 
-      input::placeholder {
+      input::placeholder,
+      .text_input .placeholder {
         @include pb_body_light_dark;
       }
 
-      > input:first-child {
+      input, .text_input {
         @include pb_textarea_dark;
         @include pb_title_4;
         @include pb_title_dark;
         overflow: hidden;
       }
 
-      input:focus, input:-webkit-autofill:focus {
+      input:focus,
+      .text_input:focus,
+      input:-webkit-autofill:focus,
+      .text_input:-webkit-autofill:focus {
         @include pb_textarea_focus_dark;
         -webkit-box-shadow: 0 0 0px 1000px $focus_input_dark inset;
         transition: background-color 5000s ease-in-out 0s;
@@ -54,7 +63,7 @@
 
     &.error {
       .text_input_wrapper {
-        > input:first-child {
+        input, .text_input {
           border-color: $error_dark;
         }
       }
@@ -66,7 +75,7 @@
       [class*=pb_body_kit] {
         margin-top: $space_xs / 2;
       }
-      > input:first-child {
+      input, .text_input {
         border-color: $error;
       }
     }

@@ -2,6 +2,7 @@ examples:
   
   rails:
   - date_default: Default
+  - date_timezone: Timezones
   
   
   react:

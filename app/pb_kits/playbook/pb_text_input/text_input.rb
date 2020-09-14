@@ -7,6 +7,8 @@ module Playbook
 
       partial "pb_text_input/text_input"
 
+      prop :autocomplete, type: Playbook::Props::Boolean,
+                          default: true
       prop :disabled, type: Playbook::Props::Boolean,
                       default: false
       prop :error

@@ -16,14 +16,14 @@
 
   &[class*=_4] {
     @include pb_title_4;
+
+    &[class*=_link]  {
+      color: $primary;
+    }
+
   }
 
   &.dark {
     @include pb_title_dark;
   }
-
-  &[class*=_link]  {
-    color: $primary;
-  }
-
 }

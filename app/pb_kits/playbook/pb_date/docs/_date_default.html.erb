@@ -12,6 +12,13 @@
 <br>
 
 <%= pb_rails("date", props: {
-  date: "2012-08-02T15:49:29Z",
+  date: DateTime.now,
+  timezone: "Asia/Tokyo"
+}) %>
+
+<br>
+
+<%= pb_rails("date", props: {
+  date: Date.new(2010, 11, 12),
   size: "xs"
 }) %>

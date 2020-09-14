@@ -1,5 +1,99 @@
 # Changelog
 
+## [6.6.0](2020-9-11)
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/6.5.2...HEAD)
+
+**Breaking changes:**
+
+- Update timezone props and example [\#1081](https://github.com/powerhome/playbook/pull/1081) ([jasoncypret](https://github.com/jasoncypret))
+- Add timezone prop to date, expand docs [\#1080](https://github.com/powerhome/playbook/pull/1080) ([jasoncypret](https://github.com/jasoncypret))
+
+**Implemented enhancements:**
+
+- \[NUX-639\] - Time Kit Redesign / Update [\#1084](https://github.com/powerhome/playbook/pull/1084) ([coleerikson](https://github.com/coleerikson))
+- Renovate/npm highcharts vulnerability [\#1082](https://github.com/powerhome/playbook/pull/1082) ([jasoncypret](https://github.com/jasoncypret))
+- Bump lazysizes from 4.1.8 to 5.2.1 [\#1065](https://github.com/powerhome/playbook/pull/1065) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Typeahead w/ Pills \(React\) [\#1054](https://github.com/powerhome/playbook/pull/1054) ([thestephenmarshall](https://github.com/thestephenmarshall))
+
+**Merged pull requests:**
+
+- removed global popover visibility styling \(\#1083\) [\#1085](https://github.com/powerhome/playbook/pull/1085) ([jasoncypret](https://github.com/jasoncypret))
+
+# Changelog
+
+All notable changes to this project will be documented in this file.
+
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
+and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+
+## [6.5.1] (2020-9-10)
+
+**Fixed bugs:**
+
+- Date Picker - remove add direct input [\#1086](https://github.com/powerhome/playbook/pull/1086) ([bh247484](https://github.com/bh247484))
+
+## [6.5.1] (2020-9-9)
+
+**Fixed bugs:**
+
+- removed global popover visibility styling [\#1083](https://github.com/powerhome/playbook/pull/1083) ([bh247484](https://github.com/bh247484))
+
+
+## [6.5.0] (2020-9-8)
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/7.0.1-alpha2...HEAD)
+
+**Implemented enhancements:**
+
+- Date-Picker Kit [\#975](https://github.com/powerhome/playbook/pull/975) ([bh247484](https://github.com/bh247484))
+- Button & Circle Icon Button Cleanup [\#1074](https://github.com/powerhome/playbook/pull/1074) ([jasoncypret](https://github.com/jasoncypret))
+- Update dependency flow-bin to v0.133.0 [\#1072](https://github.com/powerhome/playbook/pull/1072) ([jasoncypret](https://github.com/jasoncypret))
+- Decrease prs resource allocation [\#1049](https://github.com/powerhome/playbook/pull/1049) ([iblackman](https://github.com/iblackman))
+
+## [6.4.2] (2020-9-3)
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/7.0.1-alpha1...HEAD)
+
+**Implemented enhancements:**
+
+- Button & Circle Icon Button Cleanup [\#1043](https://github.com/powerhome/playbook/pull/1043) ([megantrimble](https://github.com/megantrimble))
+
+**Merged pull requests:**
+
+- Revert "Revert "Decrease prs resource allocation"" [\#1067](https://github.com/powerhome/playbook/pull/1067) ([indiebrain](https://github.com/indiebrain))
+- Revert "Decrease prs resource allocation" [\#1060](https://github.com/powerhome/playbook/pull/1060) ([indiebrain](https://github.com/indiebrain))
+- Decrease prs resource allocation [\#1049](https://github.com/powerhome/playbook/pull/1049) ([iblackman](https://github.com/iblackman))
+
+## [6.4.0] (2020-8-28)
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/6.3.1...HEAD)
+
+**Implemented enhancements:**
+
+- \[NUX-1351\] - Update react timezone implementation and examples [\#1042](https://github.com/powerhome/playbook/pull/1042) ([coleerikson](https://github.com/bh247484))
+- \[NUX-638\] - Updated Date Kit with new styles and props [\#1036](https://github.com/powerhome/playbook/pull/1036) ([coleerikson](https://github.com/coleerikson))
+- Link variant for Title 4 and Caption xs [\#1014](https://github.com/powerhome/playbook/pull/1014) ([christinaatai](https://github.com/christinaatai))
+
+**Fixed bugs:**
+
+- Disable hovers for mobile [\#1044](https://github.com/powerhome/playbook/pull/1044) ([jasoncypret](https://github.com/jasoncypret))
+- \[NUX-1347\] - Reduce input css specificity [\#1038](https://github.com/powerhome/playbook/pull/1038) ([coleerikson](https://github.com/coleerikson))
+- \[NUX-1370\] - Date Kit Timezone Props [\#1034](https://github.com/powerhome/playbook/pull/1034) ([coleerikson](https://github.com/coleerikson))
+
+**Merged pull requests:**
+
+- Update dependency highcharts to v7.2.2 \[SECURITY\] [\#1028](https://github.com/powerhome/playbook/pull/1028) ([renovate[bot]](https://github.com/apps/renovate))
+- Update dependency lint-staged to v10.2.13 [\#1024](https://github.com/powerhome/playbook/pull/1024) ([renovate[bot]](https://github.com/apps/renovate))
+- Update dependency flow-bin to v0.132.0 [\#1013](https://github.com/powerhome/playbook/pull/1013) ([renovate[bot]](https://github.com/apps/renovate))
+
+## [6.3.1](https://github.com/powerhome/playbook/tree/6.3.1) (2020-08-27)
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/6.3.0...6.3.1)
+
+**Merged pull requests:**
+
+- V6.3.1 [\#1045](https://github.com/powerhome/playbook/pull/1045) ([jasperfurniss](https://github.com/jasperfurniss))
 
 ## [6.3.0](https://github.com/powerhome/playbook/tree/6.3.0) (2020-08-24)
 
@@ -732,5 +826,8 @@
 ### Removed (breaking changes)
 - React PbLayout prop `children` dropped support for single Node (https://github.com/powerhome/playbook/commit/b16da50914e110c75c6d96c985fa02781c9e2040#diff-c3ce2c91288ca3e730d3c56e7f73475cL11-L14)
 - Rails PbLayout prop `dark` dropped (https://github.com/powerhome/playbook/commit/b16da50914e110c75c6d96c985fa02781c9e2040#diff-377fda563d148f7b3ad33f904b7b0cdbL13)
+
+\* *This Changelog was automatically generated by [github_changelog_generator](https://github.com/github-changelog-generator/github-changelog-generator)*
+
 
 \* *This Changelog was automatically generated by [github_changelog_generator](https://github.com/github-changelog-generator/github-changelog-generator)*

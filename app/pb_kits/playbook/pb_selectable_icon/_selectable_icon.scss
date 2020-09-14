@@ -1,82 +1,80 @@
+@import "../tokens/transition";
+
 [class^=pb_selectable_icon] {
 
-  text-align: center;
-  cursor: pointer;
+	text-align: center;
+	cursor: pointer;
+	transition: all $transition_short ease;
+	@media (hover:hover) {
+		&:hover * {
+			transition: all $transition_short ease;
+			transform: translateY(-2px);
+		}
+	}
 
-  :hover * {
-		filter: drop-shadow(0 0 8px rgba($shadow, 0.25));
-		transition-duration: $transition_short;
-		transition-timing-function: $easeIn;
-  }
+	* {
+		cursor: pointer;
+	}
 
-  * {
-    cursor: pointer;
-  }
+	h4 {
+		margin-top: $space_xs !important;
+		user-select: none;
+		transition: color $transition_short ease;
+	}
 
-  h4 {
-    margin-top: $space_xs !important;
-    user-select: none;
-  }
+	label {
+		transition: color $transition_short ease;
+	}
 
-  &[class*=_disabled] {
+	&[class*=_disabled] {
 		opacity: $opacity_6;
 		cursor: not-allowed;
-
 		* {
-				cursor: not-allowed;
+			cursor: not-allowed;
 		}
 	}
 	
-  input[type="checkbox"],
-  input[type="radio"] {
+	input[type="checkbox"],
+	input[type="radio"] {
 		-webkit-appearance: none;
 		-moz-appearance: none;
 		display: none;
 		appearance: none;
-
-		transition-property: color;
-		transition-duration: $transition_short;
+		transition: color $transition_short ease;
 
 		&:checked ~ label * {
-			transition-timing-function: $easeIn;
+			transition: color $transition_short ease;
 			color: $primary;
 		}
 		
 		&:not(:checked) ~ label {
-			transition-timing-function: $easeOut;
+			transition: color $transition_short ease;
 			color: $slate;
 
-			h4 {
-				transition-delay: .15s;
-			}
 		}
 	}
 
 
-  &.dark {
-
+	&.dark {
 		input[type="checkbox"],
 		input[type="radio"] {
 			-webkit-appearance: none;
 			-moz-appearance: none;
 			display: none;
 			appearance: none;
-
-			transition-property: color;
-			transition-duration: $transition_short;
-
-
+			transition: color $transition_short ease;
+			
 			&:checked ~ label * {
-				transition-timing-function: $easeIn;
+				transition: color $transition_short ease;
 				color: $active_dark !important;
 			}
 				
 			&:not(:checked) ~ label {
-				transition-timing-function: $easeOut;
+				transition: color $transition_short ease;
 				color: $text_dk_lighter;
 
 				h4 {
-					transition-delay: .15s;
+					transition: color $transition_short ease;
 					color: $text_dk_default;
 				}
 			}
