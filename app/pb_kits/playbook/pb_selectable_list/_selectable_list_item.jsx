@@ -1,6 +1,5 @@
 /* @flow */
-
-import React, { Node, useState } from 'react'
+import React, { Node } from 'react'
 import classnames from 'classnames'
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
 import { globalProps } from '../utilities/globalProps.js'
@@ -15,8 +14,8 @@ type SelectableListItemProps = {
   defaultChecked?: boolean,
   id?: string,
   label?: string,
-  name?: string,
   text?: string,
+  name?: string,
   value?: string,
   variant?: string,
   onChange: (boolean)=>void,
@@ -31,15 +30,13 @@ const SelectableListItem = ({
   defaultChecked,
   id,
   label,
-  name = '',
   text,
+  name = '',
   value = '',
   variant,
   onChange = () => {},
   ...props
 }: SelectableListItemProps) => {
-  const [checkboxHighlight, setCheckboxHighlight] = useState(checked ? 'checked' : 'unchecked')
-
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
   const classes = classnames(
@@ -48,17 +45,8 @@ const SelectableListItem = ({
     className
   )
 
-  const handleChange = (event) => {
-    setCheckboxHighlight(checkboxHighlight === 'checked' ? 'unchecked' : 'checked')
-    event.ugh = 'fixme'
-    return onChange
-  }
-
   return (
-    <ListItem
-        {...props}
-        className={checkboxHighlight}
-    >
+    <ListItem {...props}>
       <div
           {...ariaProps}
           {...dataProps}
@@ -71,8 +59,9 @@ const SelectableListItem = ({
                 checked={checked}
                 id={id}
                 name={name}
-                onChange={handleChange}
-                text={label || text}
+                onChange={onChange}
+                // eslint suppressor, text is needed to display on screen
+                text={label || (text && false)}
                 type="checkbox"
                 value={value}
                 {...props}

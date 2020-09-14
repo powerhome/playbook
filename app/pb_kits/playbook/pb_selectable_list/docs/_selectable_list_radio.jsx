@@ -8,22 +8,22 @@ const SelectableListDefault = () => {
       <SelectableList variant="radio">
         <SelectableListItem
             defaultChecked={false}
-            label="Unselected"
+            label="one"
             name="custom1"
         />
         <SelectableListItem
             defaultChecked
-            label="Selected"
+            label="two"
             name="custom1"
         />
         <SelectableListItem
             defaultChecked={false}
-            label="Hover"
+            label="three"
             name="custom1"
         />
         <SelectableListItem
             defaultChecked={false}
-            label="Unselected Last"
+            label="four"
             name="custom1"
         />
       </SelectableList>

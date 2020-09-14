@@ -6,6 +6,11 @@ RSpec.describe Playbook::PbSelectableList::SelectableList do
   subject { Playbook::PbSelectableList::SelectableList }
 
   it { is_expected.to define_partial }
+  it { is_expected.to define_prop(:text) }
+  it { is_expected.to define_enum_prop(:variant)
+                      .with_default("radio")
+                      .with_values("radio", "checkbox")
+  }
 
   describe "#classname" do
     it "returns namespaced class name", :aggregate_failures do

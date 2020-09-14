@@ -6,11 +6,4 @@
       background-color: rgb(249,251,255);
     }
   }
-
-  .checked {
-    background-color: rgb(233,242,253);
-    &:hover {
-      pointer-events: none;
-    }
-  }
 }
