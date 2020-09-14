@@ -1,3 +1,49 @@
-.pb_collapsible {
 
+[class^=pb_collapsible_kit] {
+  & .collapsible-checkbox + label {
+    & > div > div + div  {
+      /* selects the up chevron */
+      & > svg:first-child {
+        display: none;
+        }
+
+      & > svg:last-child {
+        display: inline-block;
+      }
+    }
+    & + div {
+      outline: 5px solid red;
+      height: 0;
+      padding: 0 !important;
+      margin: 0 !important;
+      // max-height: 0 !important;
+      overflow: hidden;
+    }
+  }
+
+  & .collapsible-checkbox:checked + label {
+    & > div > div + div  {
+      /* selects the up chevron */
+      & > svg:first-child {
+          display: inline-block;
+
+        }
+
+      & > svg:last-child {
+          display: none;
+      }
+    }
+
+    & + div {
+      outline: 5px solid blue !important;
+      height: auto;
+      // max-height: 1000px;
+      overflow: auto;
+      transition: height 0.5s;
+    }
+  }
+}
+
+.collapsible-checkbox {
+  display: none;
 }

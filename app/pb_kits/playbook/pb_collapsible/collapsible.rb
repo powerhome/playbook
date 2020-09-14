@@ -7,6 +7,12 @@ module Playbook
 
       partial "pb_collapsible/collapsible"
 
+      prop :name
+
+      def classname
+        generate_classname("pb_collapsible_kit")
+      end
+
       def body_padding
         if padding.present?
           ""

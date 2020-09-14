@@ -4,6 +4,6 @@
     data: object.data,
     id: object.id) do %>
     <% if object.children %>
-    <%= pb_rails("collapsible/collapsible_content", props: { padding: object.body_padding, children: object.children }) %>
+      <%= pb_rails("collapsible/collapsible_content", props: { children: object.children }) %>
   <% end %>
 <% end %>
