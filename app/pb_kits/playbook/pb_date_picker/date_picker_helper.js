@@ -11,6 +11,7 @@ const datePickerHelper = (config) => {
     maxDate,
     minDate,
     mode,
+    onChange,
     pickerId,
     yearRange,
   } = config
@@ -99,6 +100,12 @@ const datePickerHelper = (config) => {
     onClose: [() => {
       window.removeEventListener('resize', calendarResizer)
     }],
+    onChange: [(selectedDates, dateStr) => {
+      onChange(dateStr, selectedDates)
+    }],
+    // onValueUpdate: [(selectedDates, dateStr) => {
+    //   onChange(dateStr, selectedDates)
+    // }],
     onYearChange: [],
     prevArrow: '<i class="far fa-angle-left"></i>',
     static: true,
