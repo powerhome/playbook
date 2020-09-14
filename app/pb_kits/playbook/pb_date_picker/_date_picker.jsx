@@ -8,6 +8,7 @@ import { Icon, TextInput } from '../'
 import datePickerHelper from './date_picker_helper.js'
 
 type DatePickerProps = {
+  allowInput?: Boolean,
   aria?: object,
   className?: String,
   dark?: Boolean,
@@ -29,14 +30,15 @@ type DatePickerProps = {
   minDate: String,
   mode?: String,
   name: String,
+  onChange: (String) => void,
   pickerId?: String,
   placeholder?: String,
-  readOnly?: Boolean,
   type?: String,
   yearRange?: Array,
 }
 const DatePicker = (props: DatePickerProps) => {
   const {
+    allowInput = false,
     aria = {},
     className,
     dark = false,
@@ -58,9 +60,9 @@ const DatePicker = (props: DatePickerProps) => {
     minDate,
     mode = 'single',
     name,
+    onChange = () => {},
     pickerId,
     placeholder,
-    readOnly = false,
     type,
     yearRange = [ 1900, 2100 ],
   } = props
@@ -76,6 +78,7 @@ const DatePicker = (props: DatePickerProps) => {
 
   useEffect(() => {
     datePickerHelper({
+      allowInput: allowInput,
       defaultDate: defaultDate,
       disableDate: disableDate,
       disableRange: disableRange,
@@ -86,7 +89,6 @@ const DatePicker = (props: DatePickerProps) => {
       minDate: minDate,
       mode: mode,
       pickerId: pickerId,
-      readOnly: readOnly,
       yearRange: yearRange,
     })
   }, [])
@@ -124,6 +126,7 @@ const DatePicker = (props: DatePickerProps) => {
             id={pickerId}
             label={hideLabel ? null : label}
             name={name}
+            onChange={onChange}
             placeholder={placeholder}
             type={type}
         />

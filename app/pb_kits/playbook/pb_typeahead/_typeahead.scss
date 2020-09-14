@@ -1,5 +1,7 @@
 @import "../tokens/colors";
 @import "../tokens/border_radius";
+@import "../tokens/spacing";
+@import "../tokens/shadows";
 
 [class^=pb_typeahead_kit] {
   .pb_typeahead_wrapper {
@@ -17,8 +19,10 @@
   }
 
   [class^=pb_text_input_kit] {
-    .text_input_wrapper > input:first-child {
-      padding-right: $space_xl;
+    .text_input_wrapper {
+      & > input:first-child {
+        padding-right: $space_xl;
+      }
     }
   }
 
@@ -31,7 +35,7 @@
       }
     }
   }
-  
+
   [class^=pb_list_kit] {
     max-height: 18em;
     overflow-y: auto;
@@ -84,6 +88,19 @@
   .dark {
     .pb_typeahead_wrapper .pb_typeahead_loading_indicator {
       color: $text_dk_light;
+    }
+  }
+
+  &.react-select {
+    .text_input {
+      display: inherit;
+      padding: 3px 4px;
+      &_indicators {
+        max-width: 70px;
+      }
+      &_value_container {
+        flex-grow: 1;
+      }
     }
   }
 }
