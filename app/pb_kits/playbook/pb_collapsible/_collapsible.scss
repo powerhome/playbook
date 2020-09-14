@@ -4,19 +4,15 @@
     & > div > div + div  {
       /* selects the up chevron */
       & > svg:first-child {
-        display: none;
+        display: inline-block;
         }
 
       & > svg:last-child {
-        display: inline-block;
+        display: none;
       }
     }
     & + div {
-      outline: 5px solid red;
       height: 0;
-      padding: 0 !important;
-      margin: 0 !important;
-      // max-height: 0 !important;
       overflow: hidden;
     }
   }
@@ -25,19 +21,17 @@
     & > div > div + div  {
       /* selects the up chevron */
       & > svg:first-child {
-          display: inline-block;
+          display: none;
 
         }
 
       & > svg:last-child {
-          display: none;
+          display: inline-block;
       }
     }
 
     & + div {
-      outline: 5px solid blue !important;
       height: auto;
-      // max-height: 1000px;
       overflow: auto;
       transition: height 0.5s;
     }
