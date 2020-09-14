@@ -12,5 +12,16 @@
       <i class="far fa-chevron-down"></i>
     <% end %>
   <% end %>
-  <%= javascript_include_tag "./collapsible.js" %>
+<% end %>
+<%= javascript_tag do %>
+  window.addEventListener('DOMContentLoaded', function() {
+    document.querySelector(".pb_collapsible_main_kit").addEventListener("click", (event) => {
+      console.log(event.currentTarget.classList)
+      toggleContent(event)
+    })
+
+    function toggleContent(event) {
+      event.currentTarget.classList.toggle("closed")
+    }
+  })
 <% end %>
