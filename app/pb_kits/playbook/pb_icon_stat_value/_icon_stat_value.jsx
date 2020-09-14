@@ -14,9 +14,9 @@ type IconStatValueProps = {
   id?: string,
   orientation?: "vertical" | "horizontal",
   size?: "sm" | "lg",
-  text: string,
+  text?: string,
   unit?: string,
-  value: string | number,
+  value?: string | number,
   variant?: "default"
     | "royal"
     | "blue"

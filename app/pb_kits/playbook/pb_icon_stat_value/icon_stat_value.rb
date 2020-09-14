@@ -8,7 +8,7 @@ module Playbook
 
       partial "pb_icon_stat_value/icon_stat_value"
 
-      prop :icon
+      prop :icon, required: true
 
       prop :size, type: Playbook::Props::Enum,
                   values: %w[sm lg],
