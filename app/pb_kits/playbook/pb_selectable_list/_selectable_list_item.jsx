@@ -38,9 +38,8 @@ const SelectableListItem = ({
   onChange = () => {},
   ...props
 }: SelectableListItemProps) => {
-  // state
   const [checkboxHighlight, setCheckboxHighlight] = useState(checked ? 'checked' : 'unchecked')
-  const [radioHighlight, setRadioHighlight] = useState(defaultChecked ? 'checked' : 'unchecked')
+
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
   const classes = classnames(
@@ -51,7 +50,6 @@ const SelectableListItem = ({
 
   const handleChange = (event) => {
     setCheckboxHighlight(checkboxHighlight === 'checked' ? 'unchecked' : 'checked')
-    setRadioHighlight(radioHighlight === 'checked' ? 'unchecked' : 'checked')
     event.ugh = 'fixme'
     return onChange
   }
@@ -59,7 +57,7 @@ const SelectableListItem = ({
   return (
     <ListItem
         {...props}
-        className={variant == 'checkbox' ? checkboxHighlight : radioHighlight}
+        className={checkboxHighlight}
     >
       <div
           {...ariaProps}
@@ -87,7 +85,7 @@ const SelectableListItem = ({
                 id={id}
                 label={label}
                 name={name}
-                onChange={handleChange}
+                onChange={onChange}
                 type="radio"
                 value={value}
                 {...props}

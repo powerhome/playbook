@@ -35,7 +35,12 @@ const SelectableList = (props: SelectableListProps) => {
         id={id}
     >
       <List {...props}>
+        {/* <If condition={props.variant === 'checkbox'}> */}
         {children}
+        {/* <Else /> */}
+        {/* add in state logic to manage highlight here */}
+        {/* {children} */}
+        {/* </If> */}
       </List>
     </div>
   )

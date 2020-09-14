@@ -26,11 +26,6 @@ const SelectableListDefault = () => {
             label="Unselected Last"
             name="custom1"
         />
-        <SelectableListItem
-            defaultChecked={false}
-            label="Unselected Last but like this one is the last one"
-            name="custom1"
-        />
       </SelectableList>
     </div>
 
