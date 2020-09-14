@@ -19,14 +19,16 @@ $transition-speed: 0.2s;
             transition: all $transition-speed ease;
           }
 
-          &:hover {
-            box-shadow: 0 2px 10px 0 rgba($slate, $opacity-6);
+          @media (hover:hover) {
+            &:hover {
+              box-shadow: 0 2px 10px 0 rgba($slate, $opacity-6);
 
-            td {
-              background: $white;
-              border-color: darken($border_light, 10%);
-              border-top-width: 1px;
-              border-top-color: transparent;
+              td {
+                background: $white;
+                border-color: darken($border_light, 10%);
+                border-top-width: 1px;
+                border-top-color: transparent;
+              }
             }
           }
         }
@@ -38,11 +40,12 @@ $transition-speed: 0.2s;
               border-top-color: $border_light;
               border-top-width: 1px;
             }
-
-            &:hover {
-              td {
-                border-top-width: 1px;
-                border-top-color: $border_light;
+            @media (hover:hover) {
+              &:hover {
+                td {
+                  border-top-width: 1px;
+                  border-top-color: $border_light;
+                }
               }
             }
           }

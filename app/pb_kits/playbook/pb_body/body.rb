@@ -5,7 +5,7 @@ module Playbook
     class Body
       include Playbook::Props
       include ActionView::Helpers
-      
+
       partial "pb_body/body"
 
       prop :color, type: Playbook::Props::Enum,
@@ -41,7 +41,7 @@ module Playbook
       end
 
       def color_class
-        color
+        color == "default" ? nil : color
       end
 
       def status_class

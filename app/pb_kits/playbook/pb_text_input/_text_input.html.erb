@@ -14,6 +14,7 @@
       <% end %>
     <% else %>
       <%= tag(:input,
+          autocomplete: object.autocomplete ? nil : "off",
           class: "text_input",
           data: object.validation_data,
           disabled: object.disabled,

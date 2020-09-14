@@ -18,6 +18,10 @@ module Playbook
         prepend(SelectField)
         prepend(CollectionSelectField)
         prepend(CheckboxField)
+<<<<<<< HEAD
+=======
+        prepend(DatePickerField)
+>>>>>>> master
 
         def actions(&block)
           ActionArea.new(self).wrapper(&block)
