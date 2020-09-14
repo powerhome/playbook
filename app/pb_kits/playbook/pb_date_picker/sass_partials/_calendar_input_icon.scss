@@ -1,5 +1,6 @@
 // Calendar Icon Styles
 .cal_icon_wrapper {
+  pointer-events: none;
   position: absolute;
   top: $space_md + 2;
   right: 0;

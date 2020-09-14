@@ -1,21 +1,19 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 import Time from '../_time.jsx'
 
-const TimeDark = () => {
+const TimeSizes = () => {
   return (
-    <div>
+    <Fragment>
       <Time
-          dark
           date={new Date()}
       />
       <br />
       <Time
-          dark
           date={new Date()}
           size="md"
       />
-    </div>
+    </Fragment>
   )
 }
 
-export default TimeDark
+export default TimeSizes

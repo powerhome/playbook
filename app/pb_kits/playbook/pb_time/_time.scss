@@ -2,9 +2,11 @@
 @import "../tokens/typography";
 @import "../pb_icon/icon";
 @import "../pb_body/body";
-@import "../pb_title/title";
+@import "../pb_caption/caption";
 
 [class^=pb_time_kit] {
+  letter-spacing: $lspace_looser;
+  text-transform: uppercase;
   &[class*=_center]  {
     text-align: center;
   }
@@ -18,27 +20,33 @@
   }
 
   [class^=pb_time_timezone] {
-    font-size: $font-small;
-    font-weight: $regular;
-    color: $text-lt-light;
+    color: $text_lt_light;
+    font-weight: $bold;
 
     &::before {
       content: " ";
     }
   }
 
-  &[class*=_lg] {
+  &[class*=_md] {
+    [class^=pb_caption_kit] {
+      color: $text_lt_default;
+      letter-spacing: $lspace_tight;
+      text-transform: capitalize;
+    }
     [class^=pb_time_timezone] {
+      color: $text_lt_light;
       font-size: $font-large !important;
-      color: $text-lt-light;
+      font-weight: $regular;
+      letter-spacing: $lspace_tight;
     }
   }
 
   &.dark {
-    & > * [class^=pb_title_kit] {
+    [class^=pb_caption_kit] {
       color: $text_dk_default;
     }
-    & > * [class^=pb_body_kit] {
+    [class^=pb_body_kit] {
       color: $text_dk_light;
     }
   }

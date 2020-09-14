@@ -2,17 +2,16 @@ import flatpickr from 'flatpickr'
 
 const datePickerHelper = (config) => {
   const {
+    allowInput,
     defaultDate,
     disableDate,
     disableRange,
     disableWeekdays,
     format,
-    hideIcon,
     maxDate,
     minDate,
     mode,
     pickerId,
-    readOnly,
     yearRange,
   } = config
 
@@ -65,7 +64,6 @@ const datePickerHelper = (config) => {
 
   flatpickr(`#${pickerId}`, {
     disableMobile: true,
-    allowInput: !readOnly,
     dateFormat: format,
     defaultDate: defaultDateGetter(),
     disable: disableWeekdays && disableWeekdays.length > 0 ? [
@@ -141,13 +139,6 @@ const datePickerHelper = (config) => {
   }
   picker.config.onYearChange.push(yearChangeHook)
 
-  // click handling for Calendar Icon
-  if (!hideIcon){
-    document.querySelector(`#cal-icon-${pickerId}`).addEventListener('click', () => {
-      picker.toggle()
-    })
-  }
-
   // Adding dropdown icons to year and month selects
   picker.monthElements[0].insertAdjacentHTML('afterend', '<i class="far fa-angle-down month-dropdown-icon"></i>')
   dropdown.insertAdjacentHTML('afterend', '<i class="far fa-angle-down year-dropdown-icon" id="test-id"></i>')
@@ -166,6 +157,9 @@ const datePickerHelper = (config) => {
       dropdown.value = picker.currentYear
     }
   })
+  if (allowInput){
+    picker.input.removeAttribute('readonly')
+  }
 }
 
 export default datePickerHelper
