@@ -1,6 +1,6 @@
 /* @flow */
 
-import React, { Node } from 'react'
+import React, { Node, useState } from 'react'
 import classnames from 'classnames'
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
 import { globalProps } from '../utilities/globalProps.js'
@@ -12,6 +12,7 @@ type SelectableListItemProps = {
   checked?: boolean,
   className?: string,
   data?: object,
+  defaultChecked?: boolean,
   id?: string,
   label?: string,
   name?: string,
@@ -23,9 +24,11 @@ type SelectableListItemProps = {
 
 const SelectableListItem = ({
   aria = {},
-  className,
+  checked = false,
   children,
+  className,
   data = {},
+  defaultChecked,
   id,
   label,
   name = '',
@@ -35,13 +38,29 @@ const SelectableListItem = ({
   onChange = () => {},
   ...props
 }: SelectableListItemProps) => {
+  // state
+  const [checkboxHighlight, setCheckboxHighlight] = useState(checked ? 'checked' : 'unchecked')
+  const [radioHighlight, setRadioHighlight] = useState(defaultChecked ? 'checked' : 'unchecked')
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
-  const classes = classnames(buildCss('pb_selectable_list_item_kit'), globalProps(props), className)
+  const classes = classnames(
+    buildCss('pb_selectable_list_item_kit'),
+    globalProps(props),
+    className
+  )
+
+  const handleChange = (event) => {
+    setCheckboxHighlight(checkboxHighlight === 'checked' ? 'unchecked' : 'checked')
+    setRadioHighlight(radioHighlight === 'checked' ? 'unchecked' : 'checked')
+    event.ugh = 'fixme'
+    return onChange
+  }
 
   return (
-
-    <ListItem {...props}>
+    <ListItem
+        {...props}
+        className={variant == 'checkbox' ? checkboxHighlight : radioHighlight}
+    >
       <div
           {...ariaProps}
           {...dataProps}
@@ -51,10 +70,11 @@ const SelectableListItem = ({
         <Choose>
           <When condition={variant == 'checkbox'}>
             <Checkbox
+                checked={checked}
                 id={id}
                 name={name}
-                onChange={onChange}
-                text={label}
+                onChange={handleChange}
+                text={label || text}
                 type="checkbox"
                 value={value}
                 {...props}
@@ -63,10 +83,11 @@ const SelectableListItem = ({
           </When>
           <When condition={variant == 'radio'}>
             <Radio
+                defaultChecked={defaultChecked}
                 id={id}
                 label={label}
                 name={name}
-                onChange={onChange}
+                onChange={handleChange}
                 type="radio"
                 value={value}
                 {...props}

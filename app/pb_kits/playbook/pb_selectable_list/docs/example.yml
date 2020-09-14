@@ -1,7 +1,8 @@
 examples:
 
   rails:
-  - selectable_list_default: Default
+  - selectable_list_checkbox: Selectable List Checkbox
+  - selectable_list_radio: Selectable List Radio
 
 
   react:

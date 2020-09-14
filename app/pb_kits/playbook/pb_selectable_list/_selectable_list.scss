@@ -1,20 +1,16 @@
 @import "../tokens/colors";
 
-.pb_item_kit {
-  &:hover {
-    background-color: $silver;
+[class^=pb_selectable_list]{
+  .pb_item_kit {
+    &:hover {
+      background-color: rgb(249,251,255);
+    }
   }
-  &:checked {
-    background-color:pink;
+
+  .checked {
+    background-color: rgb(233,242,253);
+    &:hover {
+      pointer-events: none;
+    }
   }
 }
-
-// .pb_item_kit label + input[type="radio"]:checked {
-//   background-color:pink;
-// }
-
-// input {
-//   &:checked {
-//     background-color:pink;
-//   }
-// }
