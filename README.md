@@ -35,10 +35,9 @@ To run the tests, do `bin/test`. To launch a shell in the container run `make sh
 
 See [docs/upgrade-guide](./docs/upgrade-guide)
 
-### Nitro & Releases
+### Releases
 
-* [Integrating Playbook Kits into Nitro Components](https://github.com/powerhome/playbook/wiki/Integrating-Playbook-Kits-into-Nitro-Components)
-* [Creating Releases](https://github.com/powerhome/playbook/wiki/Releasing-a-New-Version)
+* [Playbook Releases](https://github.com/powerhome/playbook/wiki/Playbook-Releases)
 
 ### Development Environment
 

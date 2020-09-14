@@ -38,10 +38,10 @@ $heading_4: $font_base;
 
 
 
-/* Letter Spacing */
-$lspace_tightest:         _.1em;
-$lspace_tighter:          _.07em;
-$lspace_tight:            _.03em;
+// Letter Spacing
+$lspace_tightest:         -.1em;
+$lspace_tighter:          -.07em;
+$lspace_tight:            -.03em;
 $lspace_normal:           0;
 $lspace_loose:            .03em;
 $lspace_looser:           .07em;

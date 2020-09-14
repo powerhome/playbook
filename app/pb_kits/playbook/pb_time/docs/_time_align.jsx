@@ -6,19 +6,19 @@ const TimeAlign = () => {
     <div>
       <Time
           date={new Date()}
-          size="lg"
+          size="md"
       />
       <br />
       <Time
           align="center"
           date={new Date()}
-          size="lg"
+          size="md"
       />
       <br />
       <Time
           align="right"
           date={new Date()}
-          size="lg"
+          size="md"
       />
     </div>
   )

@@ -5,6 +5,10 @@ window.pbChart = pbChart
 // Forms
 import './pb_form/pb_form_validation'
 
+// Date Picker
+import datePickerHelper from './pb_date_picker/date_picker_helper.js'
+window.datePickerHelper = datePickerHelper
+
 // Lazy image loading
 import 'lazysizes'
 
@@ -19,6 +23,8 @@ PbTypeahead.start()
 
 import PbTable from './pb_table'
 PbTable.start()
+
+import 'flatpickr'
 
 // React-Rendered Rails Kits =====
 import WebpackerReact from 'webpacker-react'

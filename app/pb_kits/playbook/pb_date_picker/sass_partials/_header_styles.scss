@@ -1,0 +1,108 @@
+@import "../../pb_title/title_mixin";
+// Header Styles
+.flatpickr-months {
+  border-bottom: solid 1px $border_light;
+}
+.flatpickr-month {
+  height: $space_xl;
+}
+.flatpickr-current-month {
+  left: $space_xs;
+  display: flex;
+  padding-top: 0;
+}
+.flatpickr-monthDropdown-months {
+  appearance: none;
+  @include pb_title_4;
+  height: $space_xl;
+  width: $space_xs * 12;
+  padding-left: 0;
+  padding-right: $space_xs;
+  margin-left: $space_sm;
+  margin-top: 0;
+  margin-bottom: 0;
+  @media (hover: hover) {
+    &:hover {
+      background-color: transparent;
+    }
+  }
+}
+.numInputWrapper {
+  display: contents;
+  .numInput {
+    @include pb_title_4;
+    border: 0;
+    appearance: none;
+    background-color: transparent;
+    border-left: solid 1px $border_light;
+    padding-left: $space_md - 1.5;
+    padding-right: $space_sm;
+    margin-left: $space_xs;
+    height: $space_xl;
+    &:focus {
+      outline: none;
+    }
+    @media (hover: hover) {
+      &:hover {
+        cursor: pointer;
+      }
+    }
+  }
+}
+// Icon for Select Tags
+.month-dropdown-icon {
+  align-self: center;
+  margin-top: $space_xs - 3;
+  width: $space_xs + 2;
+  position: relative;
+  right: $space_xs + 2;
+  pointer-events: none;
+  color: $text_lt_light;
+}
+.year-dropdown-icon {
+  align-self: center;
+  margin-top: $space_xs - 3;
+  width: $space_xs + 2;
+  position: relative;
+  right: $space_xs + 4;
+  pointer-events: none;
+  color: $text_lt_light;
+}
+
+// Left - Right Arrow Styling
+.flatpickr-prev-month {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  left: $space_xs * 29.25 !important;
+  padding-right: $space_sm;
+  border-left: solid 1px $border_light;
+  height: $space_xl;
+  svg path {
+    fill: $text_lt_light;
+  }
+  @media (hover: hover) {
+    &:hover {
+      svg {
+        fill: inherit;
+      }
+    }
+  }
+}
+.flatpickr-next-month {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-left: $space_sm;
+  height: $space_xl;
+  svg path {
+    fill: $text_lt_light;
+  }
+  @media (hover: hover) {
+    &:hover{
+      svg {
+        fill: inherit;
+      }
+    }
+  }
+}
