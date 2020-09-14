@@ -3,12 +3,8 @@
 @import "../tokens/spacing";
 @import "../pb_icon_circle/icon_circle";
 
-
-
-
 [class^=pb_icon_stat_value_kit]{
   display: flex;
-
 
   &[class*=_vertical]  {
     flex-direction: column;
@@ -51,7 +47,4 @@
       margin-right: $space-sm;
     }
   }
-
-
-
 }

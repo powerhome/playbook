@@ -42,8 +42,8 @@ kits:
   - hashtag
   - icon
   - icon_circle
-  - icon_value
   - icon_stat_value
+  - icon_value
   - image
   - layout
   - list
@@ -94,5 +94,3 @@ kits:
     - weekday_stacked
   - user
   - user_badge
-
-
