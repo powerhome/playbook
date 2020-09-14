@@ -3,7 +3,6 @@ import { SelectableList, SelectableListItem } from '../..'
 
 const SelectableListDefault = () => {
   return (
-
     <div>
       <SelectableList variant="radio">
         <SelectableListItem
@@ -28,7 +27,6 @@ const SelectableListDefault = () => {
         />
       </SelectableList>
     </div>
-
   )
 }
 

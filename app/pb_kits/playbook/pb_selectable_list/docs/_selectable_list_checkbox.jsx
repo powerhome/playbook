@@ -3,7 +3,6 @@ import { SelectableList, SelectableListItem } from '../..'
 
 const SelectableListDefault = () => {
   return (
-
     <div>
       <SelectableList variant="checkbox">
         <SelectableListItem
@@ -25,7 +24,6 @@ const SelectableListDefault = () => {
         />
       </SelectableList>
     </div>
-
   )
 }
 

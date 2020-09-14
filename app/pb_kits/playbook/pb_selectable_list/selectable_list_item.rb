@@ -21,11 +21,9 @@ module Playbook
 
       partial "pb_selectable_list/selectable_list_item"
 
-      ##todo check this after done everything else
       def classname
         generate_classname("pb_item_kit")
       end
-
     end
   end
 end
