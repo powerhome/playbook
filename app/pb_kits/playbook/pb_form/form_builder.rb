@@ -17,6 +17,8 @@ module Playbook
         prepend(TypeaheadField)
         prepend(SelectField)
         prepend(CollectionSelectField)
+        prepend(CheckboxField)
+        prepend(DatePickerField)
 
         def actions(&block)
           ActionArea.new(self).wrapper(&block)

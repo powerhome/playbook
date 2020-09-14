@@ -3,9 +3,12 @@ examples:
   rails:
   - fixed_confirmation_toast_default: Default
   - fixed_confirmation_toast_multi_line: Multi Line
-  
+  - fixed_confirmation_toast_dark: Dark
+  - fixed_confirmation_toast_multi_line_dark: Multi Line Dark
   
   react:
   - fixed_confirmation_toast_default: Default
   - fixed_confirmation_toast_multi_line: Multi Line
+  - fixed_confirmation_toast_dark: Dark
+  - fixed_confirmation_toast_multi_line_dark: Multi Line Dark
   

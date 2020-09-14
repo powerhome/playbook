@@ -11,9 +11,6 @@ RSpec.describe Playbook::PbLegend::Legend do
                       .with_default("data_1")
                       .with_values("data_1", "data_2", "data_3", "data_4", "data_5", "data_6", "data_7") }
 
-  it { is_expected.to define_boolean_prop(:dark)
-                      .with_default(false) }
-
   it { is_expected.to define_string_prop(:prefix_text) }
   it { is_expected.to define_string_prop(:text) }
 
@@ -27,8 +24,7 @@ RSpec.describe Playbook::PbLegend::Legend do
   describe "#classname" do
     it "returns namespaced class name", :aggregate_failures do
       color = "data_1"
-      expect(subject.new(color: color, text: "Text").classname).to eq "pb_legend_kit_data_1_light"
-      expect(subject.new(color: color, dark: true, text: "Text").classname).to eq "pb_legend_kit_data_1_dark dark"
+      expect(subject.new(color: color, dark: true, text: "Text").classname).to eq "pb_legend_kit_data_1 dark"
     end
   end
 end

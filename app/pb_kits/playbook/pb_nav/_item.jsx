@@ -1,31 +1,53 @@
 /* @flow */
 
 import React from 'react'
+import classnames from 'classnames'
 import { Icon } from '../'
+import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
+import { globalProps } from '../utilities/globalProps.js'
 
 type NavItemProps = {
-  text: string,
-  link: string,
+  active?: boolean,
+  aria?: object,
+  children: React.Node,
+  className?: string,
+  data?: object,
   iconLeft: string,
   iconRight: string,
-  active?: boolean,
-  children: React.Node,
+  id?: string,
+  link: string,
   onClick?: EventHandler,
+  text: string,
 }
 
-const NavItem = ({
-  text = '',
-  link,
-  active = false,
-  iconLeft,
-  iconRight,
-  children,
-  onClick = () => {},
-}: NavItemProps) => {
+const NavItem = (props: NavItemProps) => {
+  const {
+    active = false,
+    aria = {},
+    children,
+    className,
+    data = {},
+    iconLeft,
+    iconRight,
+    id,
+    link,
+    onClick = () => {},
+    text = '',
+  } = props
   const Tag = link ? 'a' : 'div'
 
+  const activeClass = active === true ? 'active' : ''
+  const ariaProps = buildAriaProps(aria)
+  const dataProps = buildDataProps(data)
+  const classes = classnames(buildCss('pb_nav_list_kit_item', activeClass), globalProps(props), className)
+
   return (
-    <li className={`pb_nav_list_kit_item${active ? '_active' : ''}`}>
+    <li
+        {...ariaProps}
+        {...dataProps}
+        className={classes}
+        id={id}
+    >
       <Tag
           className="pb_nav_list_item_link"
           href={link}

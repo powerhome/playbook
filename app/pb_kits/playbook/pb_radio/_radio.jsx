@@ -4,43 +4,49 @@
 import React from 'react'
 import Body from '../pb_body/_body.jsx'
 import classnames from 'classnames'
+import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
 import { globalProps } from '../utilities/globalProps.js'
 
 type RadioProps = {
-  className?: string,
-  data?: string,
-  error?: boolean,
-  id?: string,
-  label: string,
-  name: string,
-  value: string,
-  checked?: boolean,
-  dark?: boolean,
-  text: string,
+  aria?: object,
+  checked?: Boolean,
   children?: Node,
-  onChange: (boolean)=>void,
+  className?: String,
+  dark?: boolean,
+  data?: object,
+  error?: Boolean,
+  id?: String,
+  label: String,
+  name: String,
+  value: String,
+  text: String,
+  onChange: (Boolean)=>void,
 }
 
 const Radio = ({
-  checked = false,
+  aria = {},
   children,
-  className = '',
+  className,
   dark = false,
-  data,
+  data = {},
   error = false,
   id,
   label,
-  name,
-  value,
-  text,
+  name = 'radio_name',
+  text = 'Radio Text',
+  value = 'radio_text',
   onChange = () => {},
   ...props
 }: RadioProps) => {
-  const errorClass = error ? 'error' : ''
+  const ariaProps = buildAriaProps(aria)
+  const dataProps = buildDataProps(data)
+  const classes = classnames(buildCss('pb_radio_kit'), { error }, { dark }, globalProps(props), className)
 
   return (
     <label
-        className={classnames('pb_radio_kit' + (dark === true ? '_dark ' : ' ') + errorClass + ' ' + className, globalProps(props))}
+        {...ariaProps}
+        {...dataProps}
+        className={classes}
         htmlFor={id}
     >
       <If condition={children}>
@@ -48,8 +54,7 @@ const Radio = ({
         <Else />
         <input
             {...props}
-            checked={checked}
-            data={data}
+            id={id}
             name={name}
             onChange={onChange}
             text={text}

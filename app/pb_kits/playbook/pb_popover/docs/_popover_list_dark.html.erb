@@ -1,0 +1,13 @@
+<%= pb_rails("button", props: { dark: true, variant: "primary", id: 'list-5' }) do %>
+    Filter By
+    <%= pb_rails("icon", props: { dark: true, icon: "angle-down"}) %>
+<% end %>
+<%= pb_rails("popover", props: {trigger_element_id: "list-5", tooltip_id: "list-tooltip-5", position: 'bottom', padding: "none"}) do %>
+    <%= pb_rails("list", props: {ordered: false, dark: true, borderless: false, xpadding: true}) do %>
+        <%= pb_rails("list/item") do %><a>Popularity</a><% end %>
+        <%= pb_rails("list/item") do %><a>Title</a><% end %>
+        <%= pb_rails("list/item") do %><a>Duration</a><% end %>
+        <%= pb_rails("list/item") do %><a>Date Started</a><% end %>
+        <%= pb_rails("list/item") do %><a>Date Ended </a><% end %>
+    <% end %>
+<% end %>

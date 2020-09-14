@@ -9,7 +9,7 @@ module Playbook
       partial "pb_body/body"
 
       prop :color, type: Playbook::Props::Enum,
-                   values: %w[default light lighter dark light_dark lighter_dark],
+                   values: %w[default light lighter],
                    default: "default"
       prop :status, type: Playbook::Props::Enum,
                     values: %w[neutral negative positive],
@@ -41,11 +41,11 @@ module Playbook
       end
 
       def color_class
-        color != "default" ? color : nil
+        color == "default" ? nil : color
       end
 
       def status_class
-        status != "neutral" ? status : nil
+        status == "neutral" ? nil : status
       end
     end
   end

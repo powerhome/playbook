@@ -18,6 +18,9 @@
       margin-right: $space-xs !important;
       flex-shrink: 0;
     }
+    &.dark {
+      
+    }
   }
 
   &[class*=_left] {

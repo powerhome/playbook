@@ -5,7 +5,7 @@ const DateTimeStackedDark = () => (
   <div>
     <DateTimeStacked
         dark
-        date={new Date}
+        date={new Date()}
     />
   </div>
 )
