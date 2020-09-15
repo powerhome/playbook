@@ -7,8 +7,6 @@ module Playbook
 
       partial "pb_collapsible/child_kits/collapsible_main"
 
-      prop :name
-
       def data
         Hash(values[:data]).merge(
           collapsible_main: true

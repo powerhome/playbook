@@ -2,6 +2,8 @@ import PbEnhancedElement from '../pb_enhanced_element'
 
 const MAIN_SELECTOR = '[data-collapsible-main]'
 const CONTENT_SELECTOR = '[data-collapsible-content]'
+const DOWN_ARROW_SELECTOR = '.fa-chevron-down'
+const UP_ARROW_SELECTOR = '.fa-chevron-up'
 
 export default class PbCollapsible extends PbEnhancedElement {
   static get selector() {
@@ -12,6 +14,7 @@ export default class PbCollapsible extends PbEnhancedElement {
     this.element.addEventListener('click', () => {
       this.toggle(this.target)
     })
+    this.displayDownArrow()
   }
 
   get target() {
@@ -59,9 +62,21 @@ export default class PbCollapsible extends PbEnhancedElement {
     // If the element is visible, hide it
     if (elem.classList.contains('is-visible')) {
       this.hide(elem)
+      this.displayDownArrow()
       return
     }
     // Otherwise, show it
     this.show(elem)
+    this.displayUpArrow()
+  }
+
+  displayDownArrow() {
+    this.element.querySelector(DOWN_ARROW_SELECTOR).style.display = 'inline-block'
+    this.element.querySelector(UP_ARROW_SELECTOR).style.display = 'none'
+  }
+
+  displayUpArrow() {
+    this.element.querySelector(UP_ARROW_SELECTOR).style.display = 'inline-block'
+    this.element.querySelector(DOWN_ARROW_SELECTOR).style.display = 'none'
   }
 }
