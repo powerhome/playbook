@@ -8,6 +8,9 @@ import './pb_form/pb_form_validation'
 // Lazy image loading
 import 'lazysizes'
 
+import PbCollapsible from './pb_collapsible'
+PbCollapsible.start()
+
 import PbPopover from './pb_popover'
 PbPopover.start()
 
