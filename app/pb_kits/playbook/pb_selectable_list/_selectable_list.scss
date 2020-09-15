@@ -6,4 +6,11 @@
       background-color: $bg_light;
     }
   }
+  .pb_selectable_list_item_kit {
+    margin-left: 5px;
+  }
+}
+
+[class^=pb_select] {
+  margin-bottom: 0px;
 }

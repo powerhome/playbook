@@ -5,12 +5,12 @@
     id: object.id) do %>
     <% puts object.variant %>
   <% if object.variant == "radio"%>
-    <%= pb_rails("radio", props: { text: object.text, padding_bottom: "md" } ) %>
+    <%= pb_rails("radio", props: { text: object.text } ) %>
     <% if object.children.present? %>
       <%= capture(&object.children) %>
     <% end %>
   <% else %>
-    <%= pb_rails("checkbox", props: { text: object.text, padding_bottom: "md" } ) %>
+    <%= pb_rails("checkbox", props: { text: object.text } ) %>
     <% if object.children.present? %>
       <%= capture(&object.children) %>
     <% end %>
