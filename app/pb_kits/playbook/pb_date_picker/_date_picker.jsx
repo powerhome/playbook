@@ -127,7 +127,6 @@ const DatePicker = (props: DatePickerProps) => {
             id={pickerId}
             label={hideLabel ? null : label}
             name={name}
-            onChange={onChange}
             placeholder={placeholder}
             type={type}
         />
