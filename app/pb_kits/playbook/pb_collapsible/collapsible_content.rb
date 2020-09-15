@@ -7,8 +7,14 @@ module Playbook
 
       partial "pb_collapsible/child_kits/collapsible_content"
 
+      def data
+        Hash(values[:data]).merge(
+          collapsible_content: true
+        )
+      end
+
       def classname
-        generate_classname("pb_collapsible_content_kit", padding, separator: " ")
+        generate_classname("pb_collapsible_content_kit", "toggle-content", padding, separator: " ")
       end
     end
   end

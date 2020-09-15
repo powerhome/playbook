@@ -4,8 +4,10 @@
   .toggle-content {
     display: none;
     height: 0;
+    padding-bottom: 0 !important;
+    padding-top: 0 !important;
     overflow: hidden;
-    transition: height 350ms ease-in-out;
+    transition: height 500ms, padding 500ms ease-in-out;
   }
 
   .toggle-content.is-visible {

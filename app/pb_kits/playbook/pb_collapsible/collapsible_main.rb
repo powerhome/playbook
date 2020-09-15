@@ -9,8 +9,14 @@ module Playbook
 
       prop :name
 
+      def data
+        Hash(values[:data]).merge(
+          collapsible_main: true
+        )
+      end
+
       def classname
-        generate_classname("pb_collapsible_main_kit", "toggle", padding, separator: " ")
+        generate_classname("pb_collapsible_main_kit", padding, separator: " ")
       end
 
 
