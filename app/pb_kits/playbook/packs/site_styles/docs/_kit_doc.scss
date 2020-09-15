@@ -48,15 +48,20 @@
   .pb--kit-example {
     position: relative;
 
-    &::after {
-      content: '';
-      width: 100%;
-      height: 4px;
-      background: $border-light;
-      position: absolute;
-      top: 0;
-      left: 0;
-    }
+    // &::after {
+    //   content: '';
+    //   width: 100%;
+    //   height: 4px;
+    //   background: $border-light;
+    //   position: absolute;
+    //   top: 0;
+    //   left: 0;
+    // }
+    // &.dark{
+    //   &::after {
+    //     display: none;
+    //   }
+    // }
 
     code {
       background-color: rgba($text_lt_lighter, 0.35);
@@ -117,17 +122,12 @@
     display: none;
     overflow-x: auto;
     border-radius: 0 0 6px 6px;
+    background:tint($bg_dark,10);
   }
 
   &.dark_ui {
     background: none;
 
-    .pb--kit-example {
-
-      &::after {
-        background: $border-dark;
-      }
-    }
     .pb--codeCopy {
       border-color: $border-dark;
     }
