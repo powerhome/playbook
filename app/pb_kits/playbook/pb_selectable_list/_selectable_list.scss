@@ -3,7 +3,7 @@
 [class^=pb_selectable_list]{
   .pb_item_kit {
     &:hover {
-      background-color: rgb(249,251,255);
+      background-color: $bg_light;
     }
   }
 }

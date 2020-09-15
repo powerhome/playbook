@@ -24,7 +24,7 @@ const SelectableList = (props: SelectableListProps) => {
   } = props
 
   const ariaProps = buildAriaProps(aria)
-  const classes = classnames(buildCss('pb_selectable_list_kit'), className, globalProps(props))
+  const classes = classnames(buildCss('pb_selectable_list_kit'), globalProps(props), className)
   const dataProps = buildDataProps(data)
 
   return (
