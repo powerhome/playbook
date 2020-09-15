@@ -103,9 +103,6 @@ const datePickerHelper = (config) => {
     onChange: [(selectedDates, dateStr) => {
       onChange(dateStr, selectedDates)
     }],
-    // onValueUpdate: [(selectedDates, dateStr) => {
-    //   onChange(dateStr, selectedDates)
-    // }],
     onYearChange: [],
     prevArrow: '<i class="far fa-angle-left"></i>',
     static: true,
