@@ -45,7 +45,11 @@ const Currency = (props: CurrencyProps) => {
   const [whole, decimal = '00'] = amount.split('.')
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
-  const classes = classnames(buildCss('pb_currency_kit', align, size, { dark: dark }), className, globalProps(props))
+  const classes = classnames(
+    buildCss('pb_currency_kit', align, size, { dark: dark }),
+    globalProps(props),
+    className
+  )
 
   return (
     <div

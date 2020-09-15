@@ -41,14 +41,14 @@ const ProgressSimple = (props: ProgressSimpleProps) => {
   }
 
   const wrapperClass = classnames(
-    className,
     buildCss('pb_progress_simple_wrapper', align, { dark: dark }),
-    globalProps(props)
+    globalProps(props),
+    className
   )
 
   const kitClass = classnames(
-    className,
-    buildCss('pb_progress_simple_kit', { muted: muted }, variantStyle, align)
+    buildCss('pb_progress_simple_kit', { muted: muted }, variantStyle, align),
+    className
   )
 
   return (

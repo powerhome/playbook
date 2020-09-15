@@ -44,7 +44,7 @@ const StatValue = (props: StatValueProps) => {
 
   return (
     <div
-        className={classnames('pb_stat_value_kit', className, globalProps(props))}
+        className={classnames('pb_stat_value_kit', globalProps(props), className)}
         id={id}
     >
       <div className="pb_stat_value_wrapper">

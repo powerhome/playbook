@@ -47,13 +47,13 @@ const Toggle = ({
         on: checked,
         off: !checked,
       }
-    ), className)
+    ))
 
   return (
     <div
         {...ariaProps}
         {...dataProps}
-        className={classnames(css, globalProps(props))}
+        className={classnames(css, globalProps(props), className)}
         id={id}
     >
       <label className="pb_toggle_wrapper">

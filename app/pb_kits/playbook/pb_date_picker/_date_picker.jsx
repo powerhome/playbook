@@ -71,9 +71,9 @@ const DatePicker = (props: DatePickerProps) => {
   const dataProps = buildDataProps(data)
   const classes = classnames(
     buildCss('pb_date_picker_kit'),
-    className,
     globalProps(props),
     error ? 'error' : null,
+    className
   )
 
   useEffect(() => {
