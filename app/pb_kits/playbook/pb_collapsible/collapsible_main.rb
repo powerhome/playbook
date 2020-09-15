@@ -10,7 +10,7 @@ module Playbook
       prop :name
 
       def classname
-        generate_classname("pb_collapsible_main_kit", padding, separator: " ")
+        generate_classname("pb_collapsible_main_kit", "toggle", padding, separator: " ")
       end
 
 

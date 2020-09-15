@@ -1,29 +1,61 @@
-// window.addEventListener.onload = () => {
-//   document.getElementById("pb_collapsible_main_kit sm p_sm").style.display === 'none'
-// }
+// Listen for click events
+document.addEventListener('click', (event) => {
+  // Make sure clicked element is our toggle
+  if (!event.target.classList.contains('toggle')) return
 
-// const mainSection = document.querySelector(".pb_collapsible_main_kit")
-// console.log(5)
+  // Prevent default link behavior
+  event.preventDefault()
 
-// mainSection.addEventListener("click", (event) => {
-//   console.log(event)
-//   event.preventDefault()
-//   toggleContent()
-// })
+  // Get the content
+  const content = document.querySelector(event.target.hash)
+  if (!content) return
 
-// function toggleContent() {
-//   const contentSection = document.querySelector('.pb_collapsible_content_kit')
-//   if (contentSection.style.display === "none") {
-//     contentSection.style.display = "block";
-//   } else {
-//     contentSection.style.display = "none";
-//   }
-// }
+  // Toggle the content
+  toggle(content)
+}, false)
 
-//  if chevron is up
-//    return height === 0
-//  if chevron is down
-//    return height === auto
-// const renderChevron(height) => {}
-//  const direction = height === 0 ? 'down' : 'up'
-// <i className={`far fa-2x fa-chevron-${direction} fa-fw`} />
+// Show an element
+const show = (elem) => {
+// Get the natural height of the element
+  const getHeight = () => {
+    elem.style.display = 'block' // Make it visible
+    const height = elem.scrollHeight + 'px' // Get it's height
+    elem.style.display = '' //  Hide it again
+    return height
+  }
+
+  const height = getHeight() // Get the natural height
+  elem.classList.add('is-visible') // Make the element visible
+  elem.style.height = height // Update the max-height
+
+  // Once the transition is complete, remove the inline max-height so the content can scale responsively
+  window.setTimeout(() => {
+    elem.style.height = ''
+  }, 350)
+}
+
+// Hide an element
+const hide = (elem) => {
+// Give the element a height to change from
+  elem.style.height = elem.scrollHeight + 'px'
+  // Set the height back to 0
+  window.setTimeout(() => {
+    elem.style.height = '0'
+  }, 1)
+
+  // When the transition is complete, hide it
+  window.setTimeout(() => {
+    elem.classList.remove('is-visible')
+  }, 350)
+}
+
+// Toggle element visibility
+const toggle = (elem) => {
+// If the element is visible, hide it
+  if (elem.classList.contains('is-visible')) {
+    hide(elem)
+    return
+  }
+  // Otherwise, show it
+  show(elem)
+}

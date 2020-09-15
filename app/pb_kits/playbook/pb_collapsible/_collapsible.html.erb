@@ -6,4 +6,5 @@
     <% if object.children %>
       <%= pb_rails("collapsible/collapsible_content", props: { children: object.children }) %>
   <% end %>
+  <% javascript_include_tag "/child_kits/collapsible_main.js"%>
 <% end %>

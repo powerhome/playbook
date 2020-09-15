@@ -1,45 +1,15 @@
 
 [class^=pb_collapsible_kit] {
-  & .collapsible-checkbox + label {
-    & > div > div + div  {
-      /* selects the up chevron */
-      & > svg:first-child {
-        display: none;
-        }
 
-      & > svg:last-child {
-        display: inline-block;
-      }
-    }
-    & + div {
-      height: 200px;
-      transition: height 0.5s, padding 0.5s;
-      transition-timing-function: ease-in-out;
-      overflow: hidden;
-    }
+  .toggle-content {
+    display: none;
+    height: 0;
+    overflow: hidden;
+    transition: height 350ms ease-in-out;
   }
 
-  & .collapsible-checkbox:checked + label {
-    & > div > div + div  {
-      /* selects the up chevron */
-      & > svg:first-child {
-          display: inline-block;
-
-        }
-
-      & > svg:last-child {
-          display: none;
-      }
-    }
-
-    & + div {
-      height: 0;
-      padding-top: 0px !important;
-      padding-bottom: 0px !important;
-    }
+  .toggle-content.is-visible {
+    display: block;
+    height: auto;
   }
-}
-
-.collapsible-checkbox {
-  display: none;
 }
