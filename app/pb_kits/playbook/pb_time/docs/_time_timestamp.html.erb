@@ -1,17 +1,18 @@
 <%= pb_rails("time", props: {
+  show_timezone: false,
   time: "2012-08-02T15:49:29Z"
 }) %>
 
 <br>
 
 <%= pb_rails("time", props: {
+  show_timezone: false,
   time: DateTime.now
 }) %>
 
 <br>
 
 <%= pb_rails("time", props: {
-  show_timezone: true,
   time: DateTime.now,
   timezone: "America/Chicago",
 }) %>
