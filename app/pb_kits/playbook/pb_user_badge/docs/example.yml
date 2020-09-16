@@ -3,12 +3,7 @@ examples:
   rails:
   - user_badge_default: Default
   - user_badge_size: Sizes
-  - user_badge_dark: Dark
-  - user_badge_size_dark: Sizes Dark
-
 
   react:
   - user_badge_default: Default
   - user_badge_size: Sizes
-  - user_badge_dark: Dark
-  - user_badge_size_dark: Sizes Dark

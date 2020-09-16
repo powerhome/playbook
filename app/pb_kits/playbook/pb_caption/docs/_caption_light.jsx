@@ -1,15 +1,20 @@
 import React from 'react'
 import { Caption } from '../../'
 
-const CaptionLight = () => {
+const CaptionLight = (props) => {
   return (
     <div>
-      <Caption text="Caption" />
       <Caption
+          {...props}
+          text="Caption"
+      />
+      <Caption
+          {...props}
           size="lg"
           text="Caption Large"
       />
       <Caption
+          {...props}
           size="xs"
           text="Subcaption"
       />

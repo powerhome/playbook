@@ -1,5 +1,7 @@
 @import "../../../pb_title/title_mixin";
 @import "../../../tokens/spacing";
+@import "../../../tokens/colors";
+
 
 .markdown {
   h1 {
@@ -77,6 +79,10 @@
       // padding-bottom: 0;
     }
   }
-
-
+  &.dark {
+    color: $text_dk_light ;
+    h1,h2,h3,h4,h5,h6 {
+     color: $text_dk_light; 
+    }
+  }
 }

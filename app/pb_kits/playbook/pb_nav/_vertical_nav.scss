@@ -136,7 +136,35 @@ $selector: ".pb_nav_list";
     [class*=_active] {
       background-color: $active_light;
     }
+    &[class*=dark]{
+      [class*=_active] {
+      background-color: rgba($white, $opacity_1);
+    }
+    }
   }
 
+  &[class*=dark]{
+    background: tint($bg_dark,10%);
+    [class*=pb_nav_list_kit_item]{
+      border-color: rgba($white, $opacity_1);
+      &[class*=_active] [class*=_link]{
+        border-color: $white;
+        [class*=_text],[class*=_icon]{
+          color: $text_dk_default;
+        }
+      }
+      [class*=_link] {
+        [class*=_text],[class*=_icon]{
+          color: $text_dk_lighter;
+        }
+        &:hover{
+          background-color: rgba($white, $opacity_1);
+          [class*=_icon],[class*=_text] {
+            color: $white;
+          }
+        }
+      }
+    }
+  }
 
 }

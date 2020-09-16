@@ -2,10 +2,7 @@ examples:
   
   rails:
   - time_range_inline_default: Default
-  - time_range_inline_dark: Dark
   
   
   react:
   - time_range_inline_default: Default
-  - time_range_inline_dark: Dark
-  
