@@ -12,6 +12,10 @@ module Playbook
       prop :search_term_minimum_length, default: 3
       prop :search_debounce_timeout, default: 250
 
+      # prop :multivalue_variant, type: Playbook::Props::Enum,
+      #                           values: %w[text, image_with_text],
+      #                           default: "text"
+
       partial "pb_typeahead/typeahead"
 
       def classname

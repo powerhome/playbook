@@ -22,4 +22,12 @@
       <button type="button" data-result-option-item><%= tag(:slot, name: :content) %></button>
     <% end %>
   </template>
+
+  <template data-pb-typeahead-kit-multivalue>
+    <%= pb_rails("form_pill", props: {
+      name: "",
+      text: "",
+      avatar_url: ""
+    }) %>
+  </template>
 <% end %>

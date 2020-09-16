@@ -70,7 +70,9 @@ export default class PbTypeahead extends PbEnhancedElement {
       this.resultsElement.appendChild(this.newResultOption(result.cloneNode(true)))
     }
     for (const result of this.resultsElement.querySelectorAll('[data-result-option-item]')) {
-      result.addEventListener('mousedown', (event) => this.optionSelected(event))
+      result.addEventListener('mousedown', (event) => {
+        this.optionSelected(event)
+      })
     }
   }
 
@@ -82,11 +84,28 @@ export default class PbTypeahead extends PbEnhancedElement {
     this.searchInputClear()
     this.clearResults()
 
-    this.element.dispatchEvent(new CustomEvent('pb-typeahead-kit-result-option-selected', { bubbles: true, detail: { selected: resultOption, typeahead: this } }))
+    this.element.dispatchEvent(new CustomEvent('pb-typeahead-kit-result-option-selected', {
+      bubbles: true,
+      detail: {
+        selected: resultOption,
+        typeahead: this,
+      },
+    }))
   }
 
   clearResults() {
     this.resultsElement.innerHTML = ''
+  }
+
+  newMultiValue(label, imageUrl) {
+    const multiValue = this.multiValueTemplate.content.cloneNode(true)
+    multiValue.querySelector('.pb_form_pill_text').replaceWith(label)
+    if (imageUrl) {
+      multiValue.querySelector('.pb_image_kit').replaceWith(imageUrl)
+    } else {
+      multiValue.querySelector('^.pb_avatar_kit').remove()
+    }
+    return multiValue
   }
 
   newResultOption(content) {
@@ -169,6 +188,13 @@ export default class PbTypeahead extends PbEnhancedElement {
 
   get resultsElement() {
     return this._resultsElement = (this._resultsElement || this.element.querySelector('[data-pb-typeahead-kit-results]'))
+  }
+
+  get multiValueTemplate() {
+    return this._multiValueTemplate = (
+      this._multiValueTemplate ||
+      this.element.querySelector('template[data-pb-typeahead-kit-multivalue]')
+    )
   }
 
   get resultOptionTemplate() {
