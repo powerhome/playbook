@@ -6,6 +6,7 @@ examples:
   - radio_custom: Custom
   - radio_error: With Error
   - radio_dark_error: With Error
+  - radio_options: With Options
 
   react:
   - radio_default: Default
