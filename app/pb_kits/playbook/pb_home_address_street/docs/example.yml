@@ -4,12 +4,10 @@ examples:
   - home_address_street_default: Default
   - home_address_street_emphasis: Emphasis
   - home_address_street_modified: Modified
-  - home_address_street_dark: Dark
+
 
 
   react:
   - home_address_street_default: Default
   - home_address_street_emphasis: Emphasis
   - home_address_street_modified: Modified
-  - home_address_street_dark: Dark
-

@@ -2,8 +2,7 @@ examples:
 
   rails:
   - online_status_default: Default
-  - online_status_dark: Dark
+
 
   react:
   - online_status_default: Default
-  - online_status_dark: Dark
