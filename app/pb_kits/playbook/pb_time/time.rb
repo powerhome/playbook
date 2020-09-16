@@ -18,7 +18,7 @@ module Playbook
       prop :show_icon, type: Playbook::Props::Boolean,
                        default: false
       prop :show_timezone, type: Playbook::Props::Boolean,
-                           default: false
+                           default: true
 
       def classname
         # convert deprecated prop values
