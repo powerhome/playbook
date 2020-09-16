@@ -1,17 +1,26 @@
 import React from 'react'
 import { OnlineStatus } from '../../'
 
-const OnlineStatusDefault = () => (
+const OnlineStatusDefault = (props) => (
   <>
-    <OnlineStatus status="offline" />
+    <OnlineStatus
+        status="offline"
+        {...props}
+    />
 
     <br />
 
-    <OnlineStatus status="online" />
+    <OnlineStatus
+        status="online"
+        {...props}
+    />
 
     <br />
 
-    <OnlineStatus status="away" />
+    <OnlineStatus
+        status="away"
+        {...props}
+    />
 
   </>
 )

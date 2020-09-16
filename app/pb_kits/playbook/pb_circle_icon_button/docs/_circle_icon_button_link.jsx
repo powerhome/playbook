@@ -1,9 +1,10 @@
 import React from 'react'
 import { CircleIconButton } from '../../'
 
-const CircleIconButtonLink = () => (
+const CircleIconButtonLink = (props) => (
   <div>
     <CircleIconButton
+        {...props}
         icon="search"
         link="https://google.com"
         variant="primary"
@@ -13,6 +14,7 @@ const CircleIconButtonLink = () => (
     <br />
 
     <CircleIconButton
+        {...props}
         icon="window"
         link="https://google.com"
         newWindow

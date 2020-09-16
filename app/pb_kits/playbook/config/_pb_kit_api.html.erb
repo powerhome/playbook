@@ -1,18 +1,16 @@
 <% if defined?(@kit_api) && @kit_api.present? %>
+
   <div data-action="toggle" data-togglable="prop_example" class="pb--propsTable">
-    <table class="pb--propsTable--table">
-      <thead>
-        <tr>
-          <th>Available Props</th>
-        </tr>
-      </thead>
-      <tbody>
+  <%= pb_rails("title", props:{text: "Available Props", size:3, margin_bottom:"sm"}) %>
+    <%= pb_rails("card",props:{padding:"none"})do%>
+      <%= pb_rails("list",props: {xpadding:true})do%>
         <% @kit_api.each_with_index do |(key,value),index| %>
-          <tr>
-            <td><%= key %></td>
-          </tr>
+            <%= pb_rails("list/item") do %>
+              <%= key %>
+            <% end %>
         <% end %>
-      </tbody>
-    </table>
+      <% end %>
+    <% end %>
   </div>
+  
 <% end %>
