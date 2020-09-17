@@ -47,7 +47,7 @@ const ProgressSimple = (props: ProgressSimpleProps) => {
   )
 
   const kitClass = classnames(
-    buildCss('pb_progress_simple_kit', { muted: muted }, variantStyle, align),
+    buildCss('pb_progress_simple_kit', { muted }, variantStyle, align),
     className
   )
 
