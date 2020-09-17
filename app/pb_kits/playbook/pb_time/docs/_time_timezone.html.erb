@@ -23,7 +23,8 @@
 <br>
 
 <h4>West Coast</h4>
- <%= pb_rails("time", props: {
+<%= pb_rails("time", props: {
+  show_timezone: true,
   time: Time.now,
   timezone: "America/Los_Angeles"
 }) %>
