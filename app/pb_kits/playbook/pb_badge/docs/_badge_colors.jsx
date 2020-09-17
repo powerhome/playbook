@@ -1,11 +1,12 @@
 import React from 'react'
 import Badge from '../_badge.jsx'
 
-const BadgeColors = () => {
+const BadgeColors = (props) => {
   return (
     <div>
       <div>
         <Badge
+            {...props}
             rounded
             text="+1"
             variant="primary"
@@ -14,6 +15,7 @@ const BadgeColors = () => {
         &nbsp;
 
         <Badge
+            {...props}
             text="+4"
             variant="primary"
         />
@@ -21,6 +23,7 @@ const BadgeColors = () => {
         &nbsp;
 
         <Badge
+            {...props}
             text="+1000"
             variant="primary"
         />
@@ -28,6 +31,7 @@ const BadgeColors = () => {
 
       <div>
         <Badge
+            {...props}
             rounded
             text="+1"
             variant="success"
@@ -36,6 +40,7 @@ const BadgeColors = () => {
         &nbsp;
 
         <Badge
+            {...props}
             text="+4"
             variant="success"
         />
@@ -43,6 +48,7 @@ const BadgeColors = () => {
         &nbsp;
 
         <Badge
+            {...props}
             text="+1000"
             variant="success"
         />
@@ -50,6 +56,7 @@ const BadgeColors = () => {
 
       <div>
         <Badge
+            {...props}
             rounded
             text="+1"
             variant="warning"
@@ -58,6 +65,7 @@ const BadgeColors = () => {
         &nbsp;
 
         <Badge
+            {...props}
             text="+4"
             variant="warning"
         />
@@ -65,6 +73,7 @@ const BadgeColors = () => {
         &nbsp;
 
         <Badge
+            {...props}
             text="+1000"
             variant="warning"
         />
@@ -72,6 +81,7 @@ const BadgeColors = () => {
 
       <div>
         <Badge
+            {...props}
             rounded
             text="+1"
             variant="error"
@@ -80,6 +90,7 @@ const BadgeColors = () => {
         &nbsp;
 
         <Badge
+            {...props}
             text="+4"
             variant="error"
         />
@@ -87,6 +98,7 @@ const BadgeColors = () => {
         &nbsp;
 
         <Badge
+            {...props}
             text="+1000"
             variant="error"
         />
@@ -94,6 +106,7 @@ const BadgeColors = () => {
 
       <div>
         <Badge
+            {...props}
             rounded
             text="+1"
             variant="info"
@@ -102,6 +115,7 @@ const BadgeColors = () => {
         &nbsp;
 
         <Badge
+            {...props}
             text="+4"
             variant="info"
         />
@@ -109,6 +123,7 @@ const BadgeColors = () => {
         &nbsp;
 
         <Badge
+            {...props}
             text="+1000"
             variant="info"
         />
@@ -116,6 +131,7 @@ const BadgeColors = () => {
 
       <div>
         <Badge
+            {...props}
             rounded
             text="+1"
             variant="neutral"
@@ -124,6 +140,7 @@ const BadgeColors = () => {
         &nbsp;
 
         <Badge
+            {...props}
             text="+4"
             variant="neutral"
         />
@@ -131,6 +148,7 @@ const BadgeColors = () => {
         &nbsp;
 
         <Badge
+            {...props}
             text="+1000"
             variant="neutral"
         />

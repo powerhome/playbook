@@ -4,16 +4,10 @@ examples:
   - label_value_default: Default
   - label_value_details: Details
   - label_value_details_examples: Other Examples
-  - label_value_dark: Dark
-  - label_value_details_dark: Details Dark
-  - label_value_details_examples_dark: Other Examples Dark
+
   
   
   react:
   - label_value_default: Default
   - label_value_details: Details
   - label_value_details_examples: Other Examples
-  - label_value_dark: Dark
-  - label_value_details_dark: Details Dark
-  - label_value_details_examples_dark: Other Examples Dark
-

@@ -1,7 +1,7 @@
 import React from 'react'
 import { HomeAddressStreet } from '../../'
 
-const HomeAddressStreetModified = () => {
+const HomeAddressStreetModified = (props) => {
   return (
     <HomeAddressStreet
         address="70 Prospect Ave"
@@ -9,6 +9,7 @@ const HomeAddressStreetModified = () => {
         state="PA"
         territory="PHL"
         zipcode="19382"
+        {...props}
     />
   )
 }

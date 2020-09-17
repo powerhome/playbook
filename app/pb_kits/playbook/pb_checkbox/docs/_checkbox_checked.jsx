@@ -1,10 +1,11 @@
 import React from 'react'
 import { Checkbox } from '../../'
 
-const CheckboxChecked = () => {
+const CheckboxChecked = (props) => {
   return (
     <div>
       <Checkbox
+          {...props}
           checked
           name="checkbox-name"
           text="Checked Checkbox"
