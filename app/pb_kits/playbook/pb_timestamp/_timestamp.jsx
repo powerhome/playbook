@@ -24,7 +24,7 @@ const Timestamp = (props: TimestampProps) => {
   return (
     <div
         {...dataProps}
-        className={classnames(className, pbCss, globalProps(props))}
+        className={classnames(pbCss, globalProps(props), className)}
         id={id}
     >
       <Caption

@@ -26,8 +26,11 @@ const UserBadge = (props: UserBadgeProps) => {
   const image = require(`./badges/_${badge}.svg`)
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
-  const classes = classnames(buildCss('pb_user_badge_kit', size), globalProps(props),
-    className)
+  const classes = classnames(
+    buildCss('pb_user_badge_kit', size),
+    globalProps(props),
+    className
+  )
 
   return (
     <div

@@ -1,8 +1,9 @@
-<br>
+
 <%= pb_rails("nav", props: {
   title: "Kits",
   link: all_link(@type),
-  variant: "subtle"
+  variant: "subtle",
+  padding_y: "sm"
 }) do %>
   <% pb_rails("nav/item", props: {
     text: "All",
@@ -39,14 +40,12 @@
     <% end %>
   <% end %>
 <% end %>
-<br>
+
 <%= pb_rails("section_separator") %>
-<br>
-<%= pb_rails("nav", props: {title: "Tokens", link: utilities_path}) do %>
+
+<%= pb_rails("nav", props: {title: "Tokens", link: utilities_path, padding_y:"sm", variant:"subtle"}) do %>
   <% color_active = (controller_name == 'pages' && action_name == 'utilities') ? true : false %>
   <%= pb_rails("nav/item", props: { text: "Colors", link: utilities_path, active: color_active }) %>
   <% spacing_active = (controller_name == 'pages' && action_name == 'tokens') ? true : false %>
   <%= pb_rails("nav/item", props: { text: "Spacing", link: tokens_path, active: spacing_active }) %>
 <% end %>
-<br>
-<br>

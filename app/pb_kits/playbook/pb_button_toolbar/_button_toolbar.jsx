@@ -35,7 +35,11 @@ const ButtonToolbar  = (props: ButtonToolbarProps) => {
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
 
-  const classes = classnames(buildCss('pb_button_toolbar_kit', orientation, { connected: connected }), className, globalProps(props))
+  const classes = classnames(
+    buildCss('pb_button_toolbar_kit', orientation, { connected }),
+    globalProps(props),
+    className
+  )
 
   return (
     <div

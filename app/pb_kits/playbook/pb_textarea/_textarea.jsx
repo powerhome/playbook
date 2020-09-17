@@ -42,7 +42,7 @@ const Textarea = ({
 }: TextareaProps) => {
   const errorClass = error ? 'error' : null
   const resizeClass = `resize_${resize}`
-  const classes = classnames('pb_textarea_kit', className, errorClass, resizeClass, globalProps(props))
+  const classes = classnames('pb_textarea_kit', errorClass, resizeClass, globalProps(props), className)
 
   return (
     <div className={classes}>

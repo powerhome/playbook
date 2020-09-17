@@ -25,7 +25,11 @@ const Image = (props: ImageProps) => {
   } = props
 
   const ariaProps = buildAriaProps(aria)
-  const classes = classnames(buildCss('pb_image lazyload blur_up'), className, globalProps(props))
+  const classes = classnames(
+    buildCss('pb_image lazyload blur_up'),
+    globalProps(props),
+    className
+  )
   const dataProps = buildDataProps(data)
 
   return (

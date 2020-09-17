@@ -40,9 +40,6 @@
     flex-basis: auto;
     min-height: 1px;
     border: 0;
-    &.dark {
-      @include pb_card_dark;
-    }
   }
   
   @each $name, $shadow in $box_shadows {

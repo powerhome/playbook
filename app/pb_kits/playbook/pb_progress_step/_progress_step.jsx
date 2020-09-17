@@ -32,7 +32,7 @@ const ProgressStep = (props: ProgressStepProps) => {
   )
 
   return (
-    <ul className={classnames(progressStepCss, className, globalProps(props))}>
+    <ul className={classnames(progressStepCss, globalProps(props), className)}>
       {children}
     </ul>
   )
