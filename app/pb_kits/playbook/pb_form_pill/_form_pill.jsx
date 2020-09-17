@@ -18,7 +18,7 @@ type FormPillProps = {
 const FormPill = (props: FormPillProps) => {
   const { className, text, name, onClick = () => {}, avatarUrl } = props
   const css = classnames(
-    [`pb_form_pill_kit_${'primary'}`],
+    `pb_form_pill_kit_${'primary'}`,
     globalProps(props),
     className
   )
