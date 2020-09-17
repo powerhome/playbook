@@ -1,10 +1,11 @@
 import React from 'react'
 import { Body, Card, Title } from '../../'
 
-const CardHeader = () => {
+const CardHeader = (props) => {
   return (
     <div>
       <Title
+          {...props}
           size={4}
           tag="h4"
           text="Category Colors"
@@ -12,39 +13,52 @@ const CardHeader = () => {
 
       <br />
 
-      <Card padding="none">
+      <Card
+          {...props}
+          padding="none"
+      >
         <Card.Header>
           <Body
-              dark
+              {...props}
               text="category_1"
           />
         </Card.Header>
         <Card.Body>
-          <Body text="Body" />
+          <Body
+              {...props}
+              text="Body"
+          />
         </Card.Body>
       </Card>
 
       <br />
 
-      <Card padding="none">
+      <Card
+          {...props}
+          padding="none"
+      >
         <Card.Header
             headerColor="category_2"
         >
           <Body
-              dark
+              {...props}
               text="category_2"
           />
         </Card.Header>
         <Card.Body
             padding="md"
         >
-          <Body text="Body" />
+          <Body
+              {...props}
+              text="Body"
+          />
         </Card.Body>
       </Card>
 
       <br />
 
       <Title
+          {...props}
           size={4}
           tag="h4"
           text="Product Colors"
@@ -52,33 +66,45 @@ const CardHeader = () => {
 
       <br />
 
-      <Card padding="none">
+      <Card
+          {...props}
+          padding="none"
+      >
         <Card.Header
             headerColor="siding"
         >
           <Body
-              dark
+              {...props}
               text="Siding"
           />
         </Card.Header>
         <Card.Body>
-          <Body text="Body" />
+          <Body
+              {...props}
+              text="Body"
+          />
         </Card.Body>
       </Card>
 
       <br />
 
-      <Card padding="none">
+      <Card
+          {...props}
+          padding="none"
+      >
         <Card.Header
             headerColor="gutters"
         >
           <Body
-              dark
+              {...props}
               text="Gutters"
           />
         </Card.Header>
         <Card.Body>
-          <Body text="Body" />
+          <Body
+              {...props}
+              text="Body"
+          />
         </Card.Body>
       </Card>
 

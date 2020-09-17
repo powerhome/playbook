@@ -1,13 +1,14 @@
 import React from 'react'
 import { Hashtag } from '../../'
 
-const HashtagDefault = () => {
+const HashtagDefault = (props) => {
   return (
     <div>
       <Hashtag
           text="470297"
           type="project"
           url="https://google.com"
+          {...props}
       />
       <br />
       <br />
@@ -15,6 +16,7 @@ const HashtagDefault = () => {
           text="123456"
           type="home"
           url="https://google.com"
+          {...props}
       />
       <br />
       <br />
@@ -22,6 +24,7 @@ const HashtagDefault = () => {
           text="456789"
           type="appointment"
           url="https://google.com"
+          {...props}
       />
       <br />
       <br />
@@ -29,6 +32,7 @@ const HashtagDefault = () => {
           text="654321"
           type="default"
           url="https://google.com"
+          {...props}
       />
     </div>
   )
