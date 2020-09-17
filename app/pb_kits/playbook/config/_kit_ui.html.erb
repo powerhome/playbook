@@ -19,7 +19,7 @@
 </div>
 
   <% if @show_code%>
-    <div class="markdown pb--kit-example-markdown">
+    <div class="markdown pb--kit-example-markdown <%= cookies[:dark_mode] == "true" ? "dark" : "" %>">
       <%= markdown(get_per_sample_descriptions(@kit_examples[:kit], key)) %>
     </div>
     <div class="pb--codeControls">
@@ -30,6 +30,7 @@
       </ul>
     </div>
     <div class="pb--codeCopy" data-action="toggle" data-togglable="code_example" style="display: none" >
+      <%= pb_rails("section_separator")%>
       <a href="#" data-toggle="false" class="pb--close-toggle">Close</a>
       <% if type == "rails" %>
         <pre class="highlight"><%= raw rouge(contents, "erb") %></pre>

@@ -1,13 +1,14 @@
 import React from 'react'
 import { Avatar } from '../../'
 
-const AvatarStatus = () => {
+const AvatarStatus = (props) => {
   return (
     <>
       <Avatar
           imageUrl="https://randomuser.me/api/portraits/men/44.jpg"
           name="Terry Johnson"
           size="sm"
+          {...props}
       />
 
       <br />
@@ -17,6 +18,7 @@ const AvatarStatus = () => {
           name="Terry Johnson"
           size="sm"
           status="online"
+          {...props}
       />
 
       <br />
@@ -26,6 +28,7 @@ const AvatarStatus = () => {
           name="Terry Johnson"
           size="sm"
           status="away"
+          {...props}
       />
 
       <br />
@@ -35,6 +38,7 @@ const AvatarStatus = () => {
           name="Terry Johnson"
           size="sm"
           status="offline"
+          {...props}
       />
 
       <br />

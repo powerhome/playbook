@@ -26,4 +26,7 @@ Playbook::Engine.routes.draw do
   get 'samples/:name/rails', to: "samples#sample_show_rails", as: 'sample_show_rails'
   get 'samples/:name/react', to: "samples#sample_show_react", as: 'sample_show_reacts'
 
+  #dark mode
+  get '/enable_dark_mode', to: 'pages#enable_dark_mode', as: 'enable_dark_mode'
+  get '/disable_dark_mode', to: 'pages#disable_dark_mode', as: 'disable_dark_mode'
 end

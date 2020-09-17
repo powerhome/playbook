@@ -2,10 +2,8 @@ examples:
   
   rails:
   - pill_default: Default
-  - pill_dark: Dark
+ 
   
   
   react:
   - pill_default: Default
-  - pill_dark: Dark
-  
