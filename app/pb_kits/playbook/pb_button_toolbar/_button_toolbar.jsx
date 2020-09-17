@@ -36,7 +36,7 @@ const ButtonToolbar  = (props: ButtonToolbarProps) => {
   const dataProps = buildDataProps(data)
 
   const classes = classnames(
-    buildCss('pb_button_toolbar_kit', orientation, { connected: connected }),
+    buildCss('pb_button_toolbar_kit', orientation, { connected }),
     globalProps(props),
     className
   )
