@@ -60,22 +60,8 @@ const CircleChart = (props: CircleChartProps) => {
 
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
-
-  const innerSizeFormat = (size) => {
-    if (size == 'sm') {
-      return '35%'
-    }
-    if (size == 'md') {
-      return '50%'
-    }
-    if (size == 'lg') {
-      return '85%'
-    }
-    if (size == 'none') {
-      return '0%'
-    }
-  }
-
+  const innerSizes = { sm: '35%', md: '50%', lg: '85%', none: '0%' }
+  const innerSizeFormat = (size) => innerSizes[size]
   const roundedBorderWidth = rounded ? 20 : null
   const roundedBorderColor = rounded ? null : ''
 
@@ -88,24 +74,24 @@ const CircleChart = (props: CircleChartProps) => {
     })
 
     new pbChart('.selector', {
-      id: id,
-      colors: colors,
+      id,
+      colors,
       borderColor: roundedBorderColor,
       borderWidth: roundedBorderWidth,
       chartData: formattedChartData,
-      title: title,
+      title,
       type: style,
       showInLegend: legend,
-      dataLabelHtml: dataLabelHtml,
-      dataLabels: dataLabels,
-      headerFormat: headerFormat,
-      tooltipHtml: tooltipHtml,
+      dataLabelHtml,
+      dataLabels,
+      headerFormat,
+      tooltipHtml,
       useHTML: useHtml,
-      minPointSize: minPointSize,
-      maxPointSize: maxPointSize,
+      minPointSize,
+      maxPointSize,
       innerSize: innerSizeFormat(innerSize),
-      zMin: zMin,
-      startAngle: startAngle,
+      zMin,
+      startAngle,
     })
   }, [])
 
