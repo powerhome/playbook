@@ -27,7 +27,7 @@ const TimeStacked = (props: TimeStackedProps) => {
   const { className, dark = false, date, tag = 'body' } = props
   const classes = classnames(
     buildCss('pb_time_stacked_kit', {
-      dark: dark,
+      dark,
     }),
     globalProps(props),
     className
