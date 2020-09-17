@@ -46,7 +46,7 @@ const Currency = (props: CurrencyProps) => {
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
   const classes = classnames(
-    buildCss('pb_currency_kit', align, size, { dark: dark }),
+    buildCss('pb_currency_kit', align, size, { dark }),
     globalProps(props),
     className
   )
