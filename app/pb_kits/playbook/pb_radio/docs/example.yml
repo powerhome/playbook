@@ -4,11 +4,7 @@ examples:
   - radio_default: Default
   - radio_custom: Custom
   - radio_error: With Error
-<<<<<<< HEAD
-  - radio_dark_error: With Error
   - radio_options: With Options
-=======
->>>>>>> v6.8.0
 
   react:
   - radio_default: Default
