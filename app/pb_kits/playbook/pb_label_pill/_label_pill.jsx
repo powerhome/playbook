@@ -31,7 +31,7 @@ const LabelPill = (props: LabelPillProps) => {
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
   const css = classnames(
-    ['pb_label_pill_kit'],
+    'pb_label_pill_kit',
     globalProps(props),
     className
   )
