@@ -21,11 +21,11 @@ const StatValue = (props: StatValueProps) => {
   } = props
 
   const displayValue = function(value) {
-    if (value) {
+    if (value || value === 0) {
       return (
         <Title
             size={1}
-            text={value}
+            text={`${value}`}
         />
       )
     }
