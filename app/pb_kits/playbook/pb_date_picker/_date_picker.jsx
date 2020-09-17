@@ -88,6 +88,7 @@ const DatePicker = (props: DatePickerProps) => {
       maxDate: maxDate,
       minDate: minDate,
       mode: mode,
+      onChange: onChange,
       pickerId: pickerId,
       yearRange: yearRange,
     })
@@ -126,7 +127,6 @@ const DatePicker = (props: DatePickerProps) => {
             id={pickerId}
             label={hideLabel ? null : label}
             name={name}
-            onChange={onChange}
             placeholder={placeholder}
             type={type}
         />
