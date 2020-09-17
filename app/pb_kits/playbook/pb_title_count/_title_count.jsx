@@ -34,7 +34,11 @@ const TitleCount = (props: TitleCountProps) => {
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
 
-  const css = classnames(buildCss('pb_title_count_kit', align, size), className, globalProps(props))
+  const css = classnames(
+    buildCss('pb_title_count_kit', align, size),
+    globalProps(props),
+    className
+  )
 
   const formatCount = count.toLocaleString()
 

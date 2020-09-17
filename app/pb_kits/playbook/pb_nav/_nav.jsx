@@ -40,8 +40,8 @@ const Nav = (props: NavProps) => {
     buildCss('pb_nav_list', variant, orientation, {
       highlight: highlight,
     }),
-    className,
-    globalProps(props)
+    globalProps(props),
+    className
   )
 
   return (

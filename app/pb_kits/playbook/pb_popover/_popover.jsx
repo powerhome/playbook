@@ -78,7 +78,11 @@ const Popover = (props: PbPopoverProps) => {
   }
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
-  const classes = classnames(buildCss('pb_popover_kit'), className, globalProps(props))
+  const classes = classnames(
+    buildCss('pb_popover_kit'),
+    globalProps(props),
+    className
+  )
 
   return (
     <Popper

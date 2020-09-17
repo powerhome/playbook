@@ -30,7 +30,7 @@ const SectionSeparator = (props: SectionSeparatorProps) => {
   const themeStyle = dark === true ? '_dark' : ''
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
-  const classes = classnames(buildCss('pb_section_separator_kit', variant, orientation, themeStyle), className, globalProps(props))
+  const classes = classnames(buildCss('pb_section_separator_kit', variant, orientation, themeStyle), globalProps(props), className)
 
   return (
 

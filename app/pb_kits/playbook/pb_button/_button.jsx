@@ -82,7 +82,11 @@ const Button = (props: ButtonPropTypes) => {
   } = props
 
   const buttonAria = buttonAriaProps(props)
-  const css = classnames(buttonClassName(props), className, globalProps(props))
+  const css = classnames(
+    buttonClassName(props),
+    globalProps(props),
+    className
+  )
   const loadingIcon = (
     <div className="loading-icon">
       <Icon
