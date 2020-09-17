@@ -1,8 +1,7 @@
 @import "../../../tokens/colors";
-
+@import "../../../tokens/spacing";
 .pb--doc {
   margin-bottom: 20px;
-  border: 1px solid $border-light;
   border-radius: 6px;
   box-shadow: 0 4px 10px $shadow;
   background: $white;
@@ -37,20 +36,37 @@
   }
 
   .pb--kit-example, .pb--kit-example-markdown {
+    &.dark {
+      color: $text_dk_light;
+      a {
+        color: $teal;
+      }
+    }
     padding: calc(2rem + 4px) 2rem 1rem;
   }
 
   .pb--kit-example {
     position: relative;
 
-    &::after {
-      content: '';
-      width: 100%;
-      height: 4px;
-      background: $border-light;
-      position: absolute;
-      top: 0;
-      left: 0;
+    // &::after {
+    //   content: '';
+    //   width: 100%;
+    //   height: 4px;
+    //   background: $border-light;
+    //   position: absolute;
+    //   top: 0;
+    //   left: 0;
+    // }
+    // &.dark{
+    //   &::after {
+    //     display: none;
+    //   }
+    // }
+
+    code {
+      background-color: rgba($text_lt_lighter, 0.35);
+      border-radius: 5px;
+      padding: 2px;
     }
   }
 
@@ -101,25 +117,17 @@
   }
 
   .pb--codeCopy {
-    padding: 20px 40px;
-    background: $bg_dark;
+    background: none;
     position: relative;
-    border-top: 1px solid $border-light;
     display: none;
     overflow-x: auto;
     border-radius: 0 0 6px 6px;
+    background:tint($bg_dark,10);
   }
 
   &.dark_ui {
-    background: $bg_dark;
+    background: none;
 
-    .pb--kit-example {
-      color: $white;
-
-      &::after {
-        background: $border-dark;
-      }
-    }
     .pb--codeCopy {
       border-color: $border-dark;
     }
@@ -135,56 +143,6 @@
   }
 }
 
-.pb--propsTable {
-  position: relative;
-  margin: 40px 0 0;
-  background: $card_light;
-  color: #faf6e4;
-  padding: 10px 30px 10px 30px;
-  border: 1px solid $border-light;
-
-  &--table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-bottom: 10px;
-
-    tr {
-      padding: 10px;
-
-      th {
-        text-align: left;
-        padding: 10px 10px 5px 10px;
-        color: $text_lt_light;
-        opacity: 0.7;
-        font-size: 12px;
-        text-transform: uppercase;
-      }
-
-      td {
-        border-bottom: 1px solid $border-light;
-        padding: 5px 10px;
-        font-size: 14px;
-        color: $text_lt_light;
-        font-weight: 600;
-      }
-
-      &:last-child {
-        td {
-          border-bottom-width: 0;
-        }
-      }
-    }
-
-    &--notset {
-      font-size: 12px;
-      opacity: 0.4;
-      font-style: italic;
-      position: relative;
-      font-weight: 400;
-
-      &:after {
-        content: "not set";
-      }
-    }
-  }
+pre.highlight {
+  padding: $space_xl;
 }

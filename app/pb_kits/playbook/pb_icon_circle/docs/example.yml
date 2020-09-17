@@ -4,8 +4,15 @@ examples:
   - icon_circle_default: Default
   - icon_circle_sizes: Size
   - icon_circle_color: Color
+  - icon_circle_dark: Dark
+  - icon_circle_sizes_dark: Dark Size
+  - icon_circle_color_dark: Dark Color
+  
 
   react:
   - icon_circle_default: Default
-  - icon_circle_size: Size
+  - icon_circle_sizes: Size
   - icon_circle_color: Color
+  - icon_circle_dark: Dark
+  - icon_circle_sizes_dark: Dark Size
+  - icon_circle_color_dark: Dark Color

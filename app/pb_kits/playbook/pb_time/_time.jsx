@@ -7,53 +7,64 @@ import DateTime from '../pb_kit/dateTime.js'
 import { buildCss } from '../utilities/props'
 import { globalProps } from '../utilities/globalProps.js'
 
-import { Body, Icon, Title  } from '../'
+import { Body, Caption, Icon } from '../'
 
 type TimeProps = {
-  align?: 'left" | "center' | 'right',
+  align?: 'left' | 'center' | 'right',
   className?: string | array<string>,
   data?: string,
   date: string,
+  dark?: boolean,
   id?: string,
-  showTimezone?: boolean,
-  size?: 'lg' | 'sm' | 'xs',
+  showIcon?: boolean,
+  size?: 'md' | 'sm',
+  timeZone?: string,
 }
 
 const Time = (props: TimeProps) => {
-  const { align, className, date, showTimezone, size } = props
+  const { align, className, date, showIcon, size, timeZone } = props
   const classes = classnames(
     className,
     buildCss('pb_time_kit', align, size),
     globalProps(props)
   )
 
-  const dateTimestamp = new DateTime({ value: date })
+  const dateTimestamp = new DateTime({ value: date, zone: timeZone })
 
   return (
     <div className={classes}>
       <span className="pb_body_kit">
-        <If condition={size === 'sm'}>
-          <Icon
-              fixedWidth
-              icon="clock"
-          />
+        <If condition={showIcon}>
+          <Body
+              color="light"
+              tag="span"
+          >
+            <Icon
+                fixedWidth
+                icon="clock"
+                size={size === 'md' ? 'lg' : 'sm'}
+            />
+          </Body>
           {' '}
         </If>
         <time dateTime={date}>
           <span>
-            <If condition={size !== 'lg'}>
+            <If condition={size !== 'md'}>
               <Body
+                  color="light"
                   tag="span"
                   text={dateTimestamp.toTimeWithMeridian()}
               />
               <Else />
-              <Title
-                  size={3}
+              <Caption
+                  size="lg"
                   tag="span"
                   text={dateTimestamp.toTimeWithMeridian()}
               />
             </If>
-            { showTimezone && <span className="pb_time_timezone">{dateTimestamp.toTimezone()}</span> }
+            <If condition={timeZone !== undefined}>
+              <span className="pb_time_timezone">{dateTimestamp.toTimezone()}</span>
+            </If>
           </span>
         </time>
       </span>

@@ -3,10 +3,9 @@ examples:
   - badge_default: Rectangle
   - badge_rounded: Rounded
   - badge_colors: Colors
-  - badge_dark: Dark
+ 
 
   react:
   - badge_default: Rectangle
   - badge_rounded: Rounded
   - badge_colors: Colors
-  - badge_dark: Dark

@@ -24,6 +24,9 @@ yarn:
 install:
 	docker-compose run web yarn && bundle
 
+it:
+	make install && make start
+
 test:
 	docker-compose run web bin/rspec
 

@@ -8,7 +8,6 @@ RSpec.describe Playbook::PbSelect::Select do
   it { is_expected.to define_partial }
 
   it { is_expected.to define_string_prop(:blank_selection) }
-  it { is_expected.to define_boolean_prop(:dark).with_default(false) }
   it { is_expected.to define_boolean_prop(:disabled).with_default(false) }
   it { is_expected.to define_string_prop(:include_blank) }
   it { is_expected.to define_string_prop(:label) }
@@ -20,7 +19,7 @@ RSpec.describe Playbook::PbSelect::Select do
   describe "#classname" do
     it "returns namespaced class name", :aggregate_failures do
       expect(subject.new({}).classname).to eq "pb_select"
-      expect(subject.new({dark: true}).classname).to eq "pb_select_dark dark"
+      expect(subject.new({dark: true}).classname).to eq "pb_select dark"
     end
   end
 end

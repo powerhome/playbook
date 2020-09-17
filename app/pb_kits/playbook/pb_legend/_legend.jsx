@@ -38,17 +38,17 @@ const Legend = (props: LegendProps) => {
 
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
-  const darkClass = dark ? 'dark' : 'light'
-  const bodyCSS = classnames(
-    buildCss('pb_legend_kit', color, darkClass), className,
-    globalProps(props)
+  const bodyCss = classnames(
+    buildCss('pb_legend_kit', color),
+    globalProps(props),
+    className
   )
 
   return (
     <div
         {...ariaProps}
         {...dataProps}
-        className={bodyCSS}
+        className={bodyCss}
         id={id}
     >
       <Body color={dark ? 'lighter' : 'light'}>

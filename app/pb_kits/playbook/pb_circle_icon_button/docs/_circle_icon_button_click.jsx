@@ -1,9 +1,10 @@
 import React from 'react'
 import { CircleIconButton } from '../..'
 
-const CircleIconButtonClick = () => (
+const CircleIconButtonClick = (props) => (
   <div>
     <CircleIconButton
+        {...props}
         icon="plus"
         onClick={() => alert('Click!')}
         variant="primary"

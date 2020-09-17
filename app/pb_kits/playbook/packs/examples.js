@@ -23,12 +23,14 @@ import * as ButtonToolbar from 'pb_button_toolbar/docs'
 import * as Caption from 'pb_caption/docs'
 import * as Card from 'pb_card/docs'
 import * as Checkbox from 'pb_checkbox/docs'
+import * as CircleChart from 'pb_circle_chart/docs'
 import * as CircleIconButton from 'pb_circle_icon_button/docs'
 import * as Collapsible from 'pb_collapsible/docs'
 import * as Contact from 'pb_contact/docs'
 import * as Currency from 'pb_currency/docs'
 import * as DashboardValue from 'pb_dashboard_value/docs'
 import * as Date from 'pb_date/docs'
+import * as DatePicker from 'pb_date_picker/docs'
 import * as DateRangeInline from 'pb_date_range_inline/docs'
 import * as DateRangeStacked from 'pb_date_range_stacked/docs'
 import * as DateStacked from 'pb_date_stacked/docs'
@@ -88,6 +90,7 @@ import * as TimeRangeInline from 'pb_time_range_inline/docs'
 import * as Title from 'pb_title/docs'
 import * as TitleCount from 'pb_title_count/docs'
 import * as TitleDetail from 'pb_title_detail/docs'
+import * as Typeahead from 'pb_typeahead/docs'
 import * as Toggle from 'pb_toggle/docs'
 import * as User from 'pb_user/docs'
 import * as UserBadge from 'pb_user_badge/docs'
@@ -104,12 +107,14 @@ WebpackerReact.setup({
   ...Caption,
   ...Card,
   ...Checkbox,
+  ...CircleChart,
   ...CircleIconButton,
   ...Collapsible,
   ...Contact,
   ...Currency,
   ...DashboardValue,
   ...Date,
+  ...DatePicker,
   ...DateRangeInline,
   ...DateRangeStacked,
   ...DateStacked,
@@ -169,6 +174,7 @@ WebpackerReact.setup({
   ...Title,
   ...TitleCount,
   ...TitleDetail,
+  ...Typeahead,
   ...Toggle,
   ...User,
   ...UserBadge,

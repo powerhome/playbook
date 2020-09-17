@@ -9,6 +9,8 @@ RSpec.describe Playbook::PbCheckbox::Checkbox do
 
   it { is_expected.to define_boolean_prop(:dark).with_default(false) }
   it { is_expected.to define_boolean_prop(:error).with_default(false) }
+  it { is_expected.to define_boolean_prop(:required).with_default(false) }
+  it { is_expected.to define_boolean_prop(:form_spacing).with_default(false) }
   it { is_expected.to define_prop(:text) }
   it { is_expected.to define_prop(:value) }
   it { is_expected.to define_prop(:name) }

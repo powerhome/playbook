@@ -19,6 +19,7 @@ RSpec.describe Playbook::PbIconValue::IconValue do
 
       expect(subject.new(required_props).classname).to eq "pb_icon_value_kit_left"
       expect(subject.new(required_props.merge(align: "center")).classname).to eq "pb_icon_value_kit_center"
+      expect(subject.new(required_props.merge(align: "center", dark: true)).classname).to eq "pb_icon_value_kit_center dark"
       expect(subject.new(required_props.merge(classname: "additional_class")).classname).to eq "pb_icon_value_kit_left additional_class"
     end
 

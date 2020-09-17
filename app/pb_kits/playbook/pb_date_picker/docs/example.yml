@@ -1,0 +1,35 @@
+examples:
+  
+  rails:
+  - date_picker_default: Default
+  - date_picker_hide_icon: Hide Input Icon
+  - date_picker_default_date: Default Date
+  - date_picker_input: Input Field
+  - date_picker_label: Label
+  - date_picker_range: Range
+  - date_picker_format: Format
+  - date_picker_disabled: Disabled Dates
+  - date_picker_min_max: Min Max
+  - date_picker_error: Error
+  - date_picker_hooks: Hooks
+  # - date_picker_allow_input: Allow Input
+  - date_picker_year_range: Year Range
+  - date_picker_dark: Dark
+  
+  
+  react:
+  - date_picker_default: Default
+  - date_picker_hide_icon: Hide Input Icon
+  - date_picker_default_date: Default Date
+  - date_picker_input: Input Field
+  - date_picker_label: Label
+  - date_picker_range: Range
+  - date_picker_format: Format
+  - date_picker_disabled: Disabled Dates
+  - date_picker_min_max: Min Max
+  - date_picker_error: Error
+  - date_picker_hooks: Hooks
+  # - date_picker_allow_input: Allow Input
+  - date_picker_year_range: Year Range
+  - date_picker_dark: Dark
+  

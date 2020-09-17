@@ -25,7 +25,13 @@
     Child
   <% end %>
   <%= pb_rails("progress_step/progress_step_item", props: {status: "active"}) do %>
-    Child
+    <%= pb_rails("card", props: {highlight: {position: "side", color:"windows"}}) do %>
+  Card content
+<% end %>
+<br>
+<%= pb_rails("card", props: {highlight: {position: "side", color:"windows"}}) do %>
+  Card content
+<% end %>
   <% end %>
   <%= pb_rails("progress_step/progress_step_item", props: {status: "inactive"}) do %>
     Child

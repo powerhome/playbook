@@ -13,6 +13,7 @@ type TitleCountProps = {
   aria?: object,
   className?: string,
   count?: Numeric,
+  dark?: boolean,
   data?: object,
   id?: string,
   title?: string,
@@ -24,6 +25,7 @@ const TitleCount = (props: TitleCountProps) => {
     align = 'left',
     aria = {},
     className,
+    dark = false,
     data = {},
     count,
     id,
@@ -45,11 +47,15 @@ const TitleCount = (props: TitleCountProps) => {
     >
       <Title
           className={title !== undefined ? 'pb_title_count_text' : ''}
+          dark={dark}
           size={size === 'lg' ? 3 : 4}
           text={title}
       />
 
-      <Body color="light">
+      <Body
+          color="light"
+          dark={dark}
+      >
         <If condition={count}>{formatCount}</If>
       </Body>
 

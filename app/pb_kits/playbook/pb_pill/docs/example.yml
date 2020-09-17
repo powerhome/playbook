@@ -2,8 +2,8 @@ examples:
   
   rails:
   - pill_default: Default
+ 
   
   
   react:
   - pill_default: Default
-  

@@ -10,7 +10,8 @@ $pb_button_size: 40px;
 $pb_button_v_padding: 7px;
 $pb_button_h_padding: 34px;
 $pb_button_hover_darken: 4%;
-$pb_button_border_width: 1px;
+$pb_button_border_width: 0px;
+
 
 @mixin pb_button($bg: $primary_action, $color: $text_dk_default, $border: transparent) {
   text-rendering: optimizeLegibility;
@@ -47,16 +48,17 @@ $pb_button_border_width: 1px;
     visibility: visible;
   }
 
-  &:hover {
+  &:hover, &:focus {
     outline: none;
+    
   }
 
-  &:active,
-  &:focus {
+  &:active {
     outline: none;
     border-width: $pb_button_border_width;
     border-color: darken($bg, $pb_button_hover_darken);
   }
+  
 };
 
 @mixin pb_button_hover($bg: darken($primary_action, $pb_button_hover_darken)){
@@ -67,8 +69,10 @@ $pb_button_border_width: 1px;
 @mixin pb_button_primary {
   @include pb_button;
 
-  &:hover {
-    @include pb_button_hover;
+  @media (hover:hover) {
+    &:hover {
+      @include pb_button_hover;
+    }
   }
 }
 
@@ -76,17 +80,21 @@ $pb_button_border_width: 1px;
 @mixin pb_button_secondary {
   @include pb_button(rgba($primary_action, 0.05), $primary_action);
 
-  &:hover {
-    @include pb_button_hover(rgba($primary_action, $opacity_3));
-  }
+  @media (hover:hover) {
+    &:hover {
+      @include pb_button_hover(rgba($primary_action, $opacity_3));
+    }
+  } 
 }
 
 // Link =========================
 @mixin pb_button_link {
   @include pb_button($transparent, $primary_action);
 
-  &:hover {
-    @include pb_button_hover($transparent);
+  @media (hover:hover) {
+    &:hover {
+      @include pb_button_hover($transparent);
+    }
   }
 }
 
@@ -120,8 +128,10 @@ $pb_button_border_width: 1px;
 @mixin pb_button_primary_dark{
   @include pb_button($primary_action);
 
-  &:hover {
-    @include pb_button_hover($bg: darken($primary_action, $pb_button_hover_darken));
+  @media (hover:hover) {
+    &:hover {
+      @include pb_button_hover($bg: darken($primary_action, $pb_button_hover_darken));
+    }
   }
 }
 
@@ -129,17 +139,21 @@ $pb_button_border_width: 1px;
 @mixin pb_button_secondary_dark{
   @include pb_button(rgba($white, 0.2), $white);
 
-  &:hover {
-    @include pb_button_hover(rgba($primary_action, $opacity_2));
+  @media (hover:hover) {
+    &:hover {
+      @include pb_button_hover(rgba($primary_action, $opacity_2));
+    }
   }
 }
 
 // Dark Link =============
 @mixin pb_button_link_dark {
-  @include pb_button($transparent, $primary_action);
+  @include pb_button($transparent, $white);
 
-  &:hover {
-    @include pb_button_hover($transparent);
+  @media (hover:hover) {
+    &:hover {
+      @include pb_button_hover($transparent);
+    }
   }
 }
 

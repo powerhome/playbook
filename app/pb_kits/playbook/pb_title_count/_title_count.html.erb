@@ -1,10 +1,12 @@
 <%= content_tag(:div,
-    id: object.id,
+    aria: object.aria,
+    class: object.classname,
     data: object.data,
-    class: object.classname) do %>
+    id: object.id) do %>
   <%= pb_rails("title", props: {
+    dark: object.dark,
     size: object.title_size,
     text: object.title,
     classname: "pb_title_count_text" }) if object.title %>
-  <%= pb_rails("body", props: { color: "light" }) { object.format_count } if object.count %>
+  <%= pb_rails("body", props: { color: "light", dark: object.dark }) { object.format_count } if object.count %>
 <% end %>

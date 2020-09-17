@@ -1,0 +1,14 @@
+<%= pb_rails("date_picker", props: {
+  label: "Dynamic dates",
+  max_date: (Date.today + 3).httpdate,
+  min_date: (Date.today - 3).httpdate,
+  picker_id: "date-picker-min-max1"
+}) %>
+
+<%= pb_rails("date_picker", props: {
+  format: "m/d/Y",
+  label: "Absolute formatted dates",
+  max_date: "10/20/2020",
+  min_date: "10/10/2020",
+  picker_id: "date-picker-min-max2"
+}) %>
