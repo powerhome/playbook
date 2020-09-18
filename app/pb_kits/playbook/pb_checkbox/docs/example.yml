@@ -4,6 +4,7 @@ examples:
     - checkbox_checked: Load as checked
     - checkbox_custom: Custom Checkbox
     - checkbox_error: Default w/ Error
+    - checkbox_options: Checkbox w/ Options
 
   react:
   - checkbox_default: Default
