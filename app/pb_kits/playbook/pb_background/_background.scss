@@ -1,3 +1,26 @@
-.pb_background {
-  max-width: 50%;
+@import "../tokens/spacing";
+@import "../tokens/colors";
+
+// .pb_background_kit {
+//   display: flex;
+//   height: 100%;
+//   width: 50%;
+//   justify-content: center;
+//   align-items: center;
+//   flex-direction: column
+// }
+
+// $pb_card_padding:(
+//   none: 0,
+//   xs: $space_xs,
+//   sm: $space_sm,
+//   md: $space_md,
+//   lg: $space_lg,
+//   xl: $space_xl,
+// );
+
+.pb_image_lazyload_blur_up {
+  width: 100%;
+  height: 100%;
+  z-index: 100
 }
