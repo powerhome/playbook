@@ -94,9 +94,6 @@ import * as User from 'pb_user/docs'
 import * as UserBadge from 'pb_user_badge/docs'
 import * as WeekdayStacked from 'pb_weekday_stacked/docs'
 
-// React-Rendered Rails Kits =====
-import * as ReactRailsPBKits from '../react_rails_kits.js'
-
 WebpackerReact.setup({
   ...Avatar,
   ...AvatarActionButton,
@@ -179,5 +176,4 @@ WebpackerReact.setup({
   ...User,
   ...UserBadge,
   ...WeekdayStacked,
-  ...ReactRailsPBKits,
 })

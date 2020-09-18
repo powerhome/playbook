@@ -124,7 +124,7 @@ const docsConfig = (env) => {
     optimization: config.optimization,
     externals: config.externals,
     entry: {
-      docs: './app/pb_kits/playbook/packs/examples.js',
+      docs: './app/pb_kits/playbook/packs/react-examples.js',
     },
     output: {
       libraryTarget: 'amd',
