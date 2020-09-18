@@ -4,16 +4,16 @@ import React from 'react'
 import classnames from 'classnames'
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
 import { globalProps } from '../utilities/globalProps.js'
-import { Image } from '../'
+import { Image, Title } from '../'
 
 type BackgroundProps = {
   aria?: object,
   className?: string,
+  backgroundColor?: "gradient" | "dark" | "light",
   data?: object,
   id?: string,
   tag?: string,
-  color?: "bg_gradient" | "bg_dark" | "bg_light",
-  image_url?: string,
+  imageUrl?: string,
   children?: array<React.ReactNode> | React.ReactNode,
 }
 
@@ -24,30 +24,30 @@ const Background = (props: BackgroundProps) => {
     className,
     data = {},
     id,
-    image_url = 'test',
+    imageUrl = '',
     tag = "div",
     children,
-    color
+    backgroundColor,
   } = props
 
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
-  const classes = classnames(buildCss('pb_background'), className, globalProps(props))
+  const classes = classnames(buildCss('pb_background'), `pb--color_bg_${backgroundColor}`, className, globalProps(props))
   const Tag = `${tag}`
 
   return (
 
-    <Tag
+    <div
         {...ariaProps}
         {...dataProps}
         alt={alt}
-        className={classes + ' ' + `pb--color_${color}`}
-        data-src={image_url}
+        className={classes}
+        data-src={imageUrl}
         id={id}
     >
       {children}
-      <Image url={image_url}></Image>`
-    </Tag>
+      {/* <Image url={imageUrl}></Image>` */}
+    </div>
 
   )
 }
