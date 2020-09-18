@@ -25,7 +25,7 @@ const TitleDetail = (props: TitleDetailProps) => {
   return (
     <div
         {...dataProps}
-        className={classnames(className, pbCss, globalProps(props))}
+        className={classnames(pbCss, globalProps(props), className)}
         id={id}
     >
       <Title

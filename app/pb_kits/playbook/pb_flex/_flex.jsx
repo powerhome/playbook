@@ -51,8 +51,8 @@ const Flex = (props: FlexProps) => {
           reverseClass,
           wrapClass
         ),
-        className,
-        globalProps(props)
+        globalProps(props),
+        className
       )}
     >
       {children}

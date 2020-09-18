@@ -50,9 +50,9 @@ const TextInput = (props: TextInputProps) => {
   const dataProps = buildDataProps(data)
   const css = classnames([
     'pb_text_input_kit',
-    className,
     error ? 'error' : null,
     globalProps(props),
+    className,
   ])
 
   return (

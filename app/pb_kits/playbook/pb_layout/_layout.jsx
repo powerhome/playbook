@@ -46,7 +46,7 @@ type LayoutFooterProps = {
 const Side = (props: LayoutSideProps) => {
   const { children, className } = props
   return (
-    <div className={classnames('layout_sidebar', className, globalProps(props))}>
+    <div className={classnames('layout_sidebar', globalProps(props), className)}>
       {children}
     </div>
   )
@@ -56,7 +56,7 @@ const Side = (props: LayoutSideProps) => {
 const Body = (props: LayoutBodyProps) => {
   const { children, className } = props
   return (
-    <div className={classnames('layout_body', className, globalProps(props))}>
+    <div className={classnames('layout_body', globalProps(props), className)}>
       {children}
     </div>
   )
@@ -66,7 +66,7 @@ const Body = (props: LayoutBodyProps) => {
 const Header = (props: LayoutHeaderProps) => {
   const { children, className } = props
   return (
-    <div className={classnames('layout_header', className, globalProps(props))}>
+    <div className={classnames('layout_header', globalProps(props), className)}>
       {children}
     </div>
   )
@@ -76,7 +76,7 @@ const Header = (props: LayoutHeaderProps) => {
 const Footer = (props: LayoutFooterProps) => {
   const { children, className } = props
   return (
-    <div className={classnames('layout_footer', className, globalProps(props))}>
+    <div className={classnames('layout_footer', globalProps(props), className)}>
       {children}
     </div>
   )

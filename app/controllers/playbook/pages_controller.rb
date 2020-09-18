@@ -8,6 +8,26 @@ module Playbook
     before_action :set_kit, only: %i[kit_show_rails kit_show_react]
     before_action :ensure_kit_type_exists, only: %i[kit_show_rails kit_show_react]
     before_action :set_category, only: %i[kit_category_show_rails kit_category_show_react]
+    before_action :set_playbook
+    
+    def set_playbook
+      @playbook = true
+    end  
+
+    def enable_dark_mode
+      cookies[:dark_mode] = {
+        value: "true"
+      }
+      redirect_back(fallback_location: root_path)
+    end
+
+    def disable_dark_mode
+       cookies[:dark_mode] = {
+        value: "false"
+      }
+      redirect_back(fallback_location: root_path)
+    end
+
 
     def home; end
 
@@ -27,7 +47,7 @@ module Playbook
     end
 
     def kit_show_rails
-      render template: "playbook/pages/kit_show"
+      render "playbook/pages/kit_show"
     end
 
     def kit_show_react

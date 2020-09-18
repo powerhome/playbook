@@ -1,10 +1,11 @@
 import React from 'react'
 import { Checkbox } from '../../'
 
-const CheckboxDefault = () => {
+const CheckboxDefault = (props) => {
   return (
     <div>
       <Checkbox
+          {...props}
           name="default name"
           text="Checkbox label"
           value="default value"

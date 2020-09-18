@@ -78,7 +78,7 @@ const TimeRangeInline = (props: TimeRangeInlineProps) => {
 
   return (
     <div
-        className={classnames('pb_time_range_inline_kit_' + alignment, className, globalProps(props))}
+        className={classnames('pb_time_range_inline_kit_' + alignment, globalProps(props), className)}
     >
       <div className="pb_time_range_inline_wrapper">
         <If condition={size == 'xs'}>
