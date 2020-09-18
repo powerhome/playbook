@@ -34,7 +34,7 @@ const Toggle = ({
   id,
   name,
   onChange = () => {},
-  size = 'md',
+  size = 'sm',
   value,
   ...props
 }: Props) => {

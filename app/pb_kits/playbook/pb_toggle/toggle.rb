@@ -16,7 +16,7 @@ module Playbook
       prop :name
       prop :size, type: Playbook::Props::Enum,
                   values: %w[sm md],
-                  default: "md"
+                  default: "sm"
       prop :value
 
       def classname
