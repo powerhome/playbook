@@ -5,7 +5,7 @@ import { Body, Flex, FlexItem, Title } from '../../'
 const BackgroundDefault = () => (
   <div>
     <Background
-        backgroundColor="gradient"
+        backgroundColor="bg_gradient"
         padding="xl"
     >
       <Flex
@@ -23,7 +23,7 @@ const BackgroundDefault = () => (
     </Background>
 
     <Background
-        backgroundColor="dark"
+        backgroundColor="bg_dark"
         padding="xl"
     >
       <Title
@@ -33,12 +33,12 @@ const BackgroundDefault = () => (
       />
     </Background>
 
-    <Background backgroundColor="light">
+    <Background backgroundColor="bg_light">
       <Body text="Background Kit" />
     </Background>
 
     <Background
-        backgroundColor=""
+        backgroundColor="white"
         padding="lg"
     >
       <Body text="Background Kit" />

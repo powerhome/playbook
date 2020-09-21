@@ -11,7 +11,7 @@ type BackgroundProps = {
   aria?: object,
   borderNone?: boolean,
   className?: string,
-  backgroundColor?: "gradient" | "dark" | "light",
+  backgroundColor?: "bg_gradient" | "bg_dark" | "bg_light" | "white",
   data?: object,
   id?: string,
   tag?: string,
@@ -24,7 +24,7 @@ type BackgroundProps = {
 const Background = (props: BackgroundProps) => {
   const {
     aria = {},
-    backgroundColor,
+    backgroundColor = 'bg_light',
     borderNone = false,
     children,
     className,
@@ -61,7 +61,7 @@ const Background = (props: BackgroundProps) => {
           </div>
         </div>
         <Else />
-        <div className={classes + `pb--color_bg_${backgroundColor}`}>
+        <div className={classes + backgroundColor}>
           { text || children }
         </div>
       </If>
