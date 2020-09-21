@@ -7,6 +7,7 @@ samples:
 kits:
   - avatar
   - avatar_action_button
+  - background
   - badge
   - buttons:
     - button
@@ -96,4 +97,3 @@ kits:
     - weekday_stacked
   - user
   - user_badge
-  - background
