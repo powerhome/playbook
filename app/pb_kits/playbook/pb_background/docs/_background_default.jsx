@@ -45,11 +45,19 @@ const BackgroundDefault = () => (
     </Background>
 
     <Background imageUrl="https://www.proflowers.com/blog/wp-content/uploads/2016/04/hero-blue-flowers.jpg">
-      <Title
-          dark
-          size={1}
-          text="Background 4 Kit"
-      />
+    <Flex
+          horizontal="center"
+          orientation="row"
+      >
+        <FlexItem>
+          <Title
+              dark
+              size={1}
+              text="Background Kit"
+              padding="lg"
+          />
+        </FlexItem>
+      </Flex>
     </Background>
 
   </div>

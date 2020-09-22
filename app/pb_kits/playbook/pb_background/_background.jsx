@@ -47,15 +47,8 @@ const Background = (props: BackgroundProps) => {
         id={id}
     >
       <If condition={imageUrl}>
-        <div className="container">
-          <Image
-              alt={name}
-              className={classes}
-              url={imageUrl}
-          />
-          <div className="content">
+        <div style={{ backgroundImage: `url(${imageUrl})` }}>
             { text || children }
-          </div>
         </div>
         <Else />
         <div className={classes + backgroundColor}>
