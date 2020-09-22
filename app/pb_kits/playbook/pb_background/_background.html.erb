@@ -1,15 +1,15 @@
 <%= content_tag(:div,
     aria: object.aria,
-    class: object.classname,
     data: object.data,
     id: object.id) do %>
-  <% if object.image_url.present? %>
-    <%= pb_rails( "image", props: { image_url: object.image_url }) %>
-    <span> <%= capture(&object.children) %> </span>
-  <% else %>
-  <%= content_tag(:div,
-    class: object.classname_without_image) do %>
-    <span> <%= capture(&object.children) %> </span>
+    <% if object.image_url.present? %>
+      <%= pb_rails( "image", props: { url: object.image_url, classname: object.classname }) %>
+    <% else %>
+    <%= tag(:div,
+      class: object.classname_without_image) %>
+    <% end %>
+    <% if object.children.present? %>
+      <%= capture(&object.children) %>
     <% end %>
   <% end %>
-<% end %>
+

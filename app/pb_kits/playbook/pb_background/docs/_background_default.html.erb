@@ -1,5 +1,15 @@
-<%= pb_rails("background", props: { background_color: "bg_gradient" }) %>
-<%= pb_rails("background", props: { background_color:"bg_dark" }) %>
-<%= pb_rails("background", props: { background_color:"bg_light" }) %>
-<%= pb_rails("background", props: { background_color:"white"}) %>
-<%= pb_rails("background", props: { image_url:"https://www.proflowers.com/blog/wp-content/uploads/2016/04/hero-blue-flowers.jpg"}) %>
+<%= pb_rails("background", props: { background_color: "bg_gradient" }) do %>
+  <%= pb_rails("body", props: { dark: true, text: "background 1" })%>
+  <% end %>
+<%= pb_rails("background", props: { background_color:"bg_dark" }) do %>
+  <%= pb_rails("body", props: { dark: true, text: "background 2" })%>
+    <% end %>
+<%= pb_rails("background", props: { background_color:"bg_light" }) do %>
+  <%= pb_rails("body", props: { text: "background 3" })%>
+  <% end %>
+<%= pb_rails("background", props: { background_color:"white" }) do %>
+ <%= pb_rails("body", props: { text: "background 4" })%>
+  <% end %>
+<%= pb_rails("background", props: { image_url:"https://www.proflowers.com/blog/wp-content/uploads/2016/04/hero-blue-flowers.jpg"}) do %>
+  <%= pb_rails("body", props: { text: "background 5" })%>
+  <% end %>
