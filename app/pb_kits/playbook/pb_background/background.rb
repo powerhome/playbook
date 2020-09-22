@@ -22,7 +22,7 @@ module Playbook
       end
 
       def classname_without_image
-        generate_classname("pb_background_kit" + " " + padding + " " + background_color)
+        generate_classname("pb_background_kit" + " " + padding + " " + background_color )
       end
 
     end

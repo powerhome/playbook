@@ -3,13 +3,14 @@
     data: object.data,
     id: object.id) do %>
     <% if object.image_url.present? %>
-      <%= pb_rails( "image", props: { url: object.image_url, classname: object.classname }) %>
+      <div class="<%=object.classname%>" style="background-image: url(<%=object.image_url%>)">
+        <%= capture(&object.children) %>
+      </div>
     <% else %>
-    <%= tag(:div,
-      class: object.classname_without_image) %>
-    <% end %>
-    <% if object.children.present? %>
-      <%= capture(&object.children) %>
-    <% end %>
+    <div class="<%=object.classname_without_image%>">
+        <%= capture(&object.children) %>
+    </div>
+
   <% end %>
+<% end %>
 
