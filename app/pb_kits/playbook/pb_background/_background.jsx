@@ -7,13 +7,13 @@ import { globalProps } from '../utilities/globalProps.js'
 
 type BackgroundProps = {
   aria?: object,
-  backgroundColor?: "bg_gradient" | "bg_dark" | "bg_light" | "white",
+  backgroundColor?: 'bg_gradient' | 'bg_dark' | 'bg_light' | 'white',
   children?: array<React.ReactNode> | React.ReactNode,
   className?: string,
   data?: object,
   id?: string,
   imageUrl?: string,
-  padding?: "none" | "xs" | "sm" | "md" | "lg" | "xl",
+  padding?: 'none' | 'xs' | 'sm' | 'md' | 'lg' | 'xl',
   tag?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p' | 'span' | 'div',
 }
 
