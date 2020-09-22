@@ -21,7 +21,6 @@ module Playbook
       def classname
         generate_classname("pb_background_kit", padding, background_color, separator: " ")
       end
-
     end
   end
 end

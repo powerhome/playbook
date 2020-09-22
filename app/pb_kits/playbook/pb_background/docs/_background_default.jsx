@@ -9,7 +9,6 @@ const BackgroundDefault = () => (
     >
       {'Background Kit Gradient Color'}
     </Background>
-
     <Background
         backgroundColor="bg_dark"
     >
@@ -26,7 +25,6 @@ const BackgroundDefault = () => (
         </FlexItem>
       </Flex>
     </Background>
-
     <Background
         backgroundColor="bg_light"
         padding="xl"
@@ -42,7 +40,6 @@ const BackgroundDefault = () => (
         </FlexItem>
       </Flex>
     </Background>
-
     <Background
         backgroundColor="white"
         padding="lg"
@@ -52,7 +49,6 @@ const BackgroundDefault = () => (
           text="Background Kit White"
       />
     </Background>
-
     <Background imageUrl="https://www.proflowers.com/blog/wp-content/uploads/2016/04/hero-blue-flowers.jpg">
       <Flex
           orientation="column"
@@ -73,7 +69,6 @@ const BackgroundDefault = () => (
         </FlexItem>
       </Flex>
     </Background>
-
   </div>
 )
 

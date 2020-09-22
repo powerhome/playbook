@@ -8,7 +8,6 @@ kits:
   - avatar
   - avatar_action_button
   - background
-  - badge
   - buttons:
     - button
     - button_toolbar
@@ -22,7 +21,6 @@ kits:
     - gauge
     - legend
     - line_graph
-
   - filter
   - fixed_confirmation_toast
   - flex
