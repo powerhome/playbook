@@ -6,27 +6,15 @@ const BackgroundDefault = () => (
   <div>
     <Background
         backgroundColor="bg_gradient"
-        padding="md"
     >
-      <Flex
-          horizontal="center"
-          orientation="row"
-      >
-        <FlexItem>
-          <Title
-              dark
-              size={1}
-              text="Background Kit Gradient"
-          />
-        </FlexItem>
-      </Flex>
+      {'Background Kit Gradient Color'}
     </Background>
 
     <Background
         backgroundColor="bg_dark"
     >
       <Flex
-          horizontal="left"
+          horizontal="center"
           orientation="row"
       >
         <FlexItem>

@@ -1,19 +1,40 @@
 <%= pb_rails("background", props: { background_color: "bg_gradient" }) do %>
-  <%= pb_rails("body", props: { dark: true, text: "background 1" })%>
+  Background Kit Gradient Color
 <% end %>
 
 <%= pb_rails("background", props: { background_color:"bg_dark" }) do %>
-  <%= pb_rails("body", props: { dark: true, text: "background 2" })%>
+  <%= pb_rails("flex", props: { horizontal: "center"}) do %>
+    <%= pb_rails("flex/flex_item") do %>
+      <%= pb_rails("title", props: { dark: true, size: 2, text: "Background Kit Dark" })%>
+    <% end %>
+  <% end %>
 <% end %>
 
-<%= pb_rails("background", props: { background_color:"bg_light" }) do %>
-  <%= pb_rails("body", props: { text: "background 3" })%>
+<%= pb_rails("background", props: { background_color: "bg_light", padding: "xl" }) do %>
+  <%= pb_rails("flex", props: { horizontal: "right"}) do %>
+    <%= pb_rails("flex/flex_item") do %>
+      <%= pb_rails("body", props: { text: "Background Kit Light" })%>
+    <% end %>
+  <% end %>
 <% end %>
 
-<%= pb_rails("background", props: {padding: "lg", background_color:"white" }) do %>
- <%= pb_rails("body", props: { text: "background 4" })%>
+<%= pb_rails("background", props: { background_color:"white", padding: "lg" }) do %>
+  <%= pb_rails("flex") do %>
+    <%= pb_rails("flex/flex_item") do %>
+      <%= pb_rails("title", props: { size: 3, text: "Background Kit White" })%>
+    <% end %>
+  <% end %>
 <% end %>
 
 <%= pb_rails("background", props: { image_url:"https://www.proflowers.com/blog/wp-content/uploads/2016/04/hero-blue-flowers.jpg", padding: "lg" }) do %>
-  <%= pb_rails("body", props: { text: "background 5" }) %>
+  <%= pb_rails("flex", props: { horizontal: "center", orientation: "column" }) do %>
+    <%= pb_rails("flex/flex_item") do %>
+      <%= pb_rails("title", props: { dark: true, size: 1, text: "Background Kit Image" })%>
+    <% end %>
+    <%= pb_rails("flex/flex_item", props: { padding: "lg"}) do %>
+      <%= pb_rails("card") do %>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec iaculis, risus a fringilla luctus, sapien eros sodales ex, quis molestie est nulla non turpis. Vestibulum aliquet at ipsum eget posuere. Morbi sed laoreet erat. Sed commodo posuere lectus, at porta nulla ornare a. Suspendisse quam est, sollicitudin ut enim sit amet, commodo placerat enim. Donec laoreet metus ac mauris pellentesque mattis. Pellentesque luctus vel mauris non aliquam. Mauris hendrerit mattis porttitor. Curabitur vehicula justo non ex consectetur commodo. Quisque posuere aliquet quam. Maecenas malesuada magna mauris, ac tempor metus euismod at."
+      <% end %>
+    <% end %>
+  <% end %>
 <% end %>
