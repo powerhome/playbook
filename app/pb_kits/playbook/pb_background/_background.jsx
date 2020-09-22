@@ -9,7 +9,6 @@ import { Image } from '../'
 type BackgroundProps = {
 
   aria?: object,
-  borderNone?: boolean,
   className?: string,
   backgroundColor?: "bg_gradient" | "bg_dark" | "bg_light" | "white",
   data?: object,
@@ -25,7 +24,6 @@ const Background = (props: BackgroundProps) => {
   const {
     aria = {},
     backgroundColor = 'bg_light',
-    borderNone = false,
     children,
     className,
     data = {},
@@ -36,10 +34,9 @@ const Background = (props: BackgroundProps) => {
     padding = 'md',
   } = props
 
-  const borderCSS = borderNone == true ? 'border_none' : ''
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
-  const classes = classnames(buildCss('pb_background_kit'), className, borderCSS, text, globalProps(props, { padding }))
+  const classes = classnames(buildCss('pb_background_kit'), className, text, globalProps(props, { padding }))
   const Tag = `${tag}`
 
   return (
