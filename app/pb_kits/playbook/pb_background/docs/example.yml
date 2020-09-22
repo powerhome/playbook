@@ -3,8 +3,6 @@ examples:
   rails:
   - background_default: Default
 
-
   react:
   - background_default: Default
-  # - background_dark: Dark
 

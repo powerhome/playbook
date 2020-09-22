@@ -1,4 +1,4 @@
-<%= content_tag(:div,
+<%= content_tag(:tag,
     aria: object.aria,
     data: object.data,
     id: object.id) do %>
@@ -7,10 +7,9 @@
         <%= capture(&object.children) %>
       </div>
     <% else %>
-    <div class="<%=object.classname_without_image%>">
+      <div class="<%=object.classname_without_image%>">
         <%= capture(&object.children) %>
-    </div>
-
+      </div>
   <% end %>
 <% end %>
 
