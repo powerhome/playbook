@@ -6,7 +6,6 @@ import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
 import { globalProps } from '../utilities/globalProps.js'
 
 type BackgroundProps = {
-
   aria?: object,
   backgroundColor?: "bg_gradient" | "bg_dark" | "bg_light" | "white",
   children?: array<React.ReactNode> | React.ReactNode,
@@ -16,7 +15,6 @@ type BackgroundProps = {
   imageUrl?: string,
   padding?: "none" | "xs" | "sm" | "md" | "lg" | "xl",
   tag?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p' | 'span' | 'div',
-  text?: string,
 }
 
 const Background = (props: BackgroundProps) => {
@@ -30,7 +28,6 @@ const Background = (props: BackgroundProps) => {
     imageUrl = '',
     padding = 'md',
     tag = 'div',
-    text = '',
   } = props
 
   const ariaProps = buildAriaProps(aria)
@@ -49,11 +46,11 @@ const Background = (props: BackgroundProps) => {
             className={classes}
             style={{ backgroundImage: `url(${imageUrl})` }}
         >
-          { text || children }
+          { children }
         </div>
         <Else />
         <div className={classes + backgroundColor}>
-          { text || children }
+          { children }
         </div>
       </If>
     </Tag>

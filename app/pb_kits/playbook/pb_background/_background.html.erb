@@ -3,11 +3,11 @@
     data: object.data,
     id: object.id) do %>
     <% if object.image_url.present? %>
-      <div class="<%=object.classname%>" style="background-image: url(<%=object.image_url%>)">
+      <div class="<%= object.classname %>" style="background-image: url(<%= object.image_url %>)">
         <%= capture(&object.children) %>
       </div>
     <% else %>
-      <div class="<%=object.classname_without_image%>">
+      <div class="<%= object.classname_without_image %>">
         <%= capture(&object.children) %>
       </div>
   <% end %>
