@@ -25,6 +25,8 @@ module Playbook
                        default: false
       prop :value
 
+      #prop :additional_card_options, Hash...
+
       def classname
         generate_classname("pb_selectable_card_icon_kit", checked_class, enabled_disabled_class)
       end
