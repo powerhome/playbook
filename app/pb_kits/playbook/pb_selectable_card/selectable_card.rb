@@ -41,7 +41,7 @@ module Playbook
     private
 
       def checked_class
-        checked ? "on" : "off"
+        checked ? "checked" : nil
       end
 
       def enable_disabled_class
