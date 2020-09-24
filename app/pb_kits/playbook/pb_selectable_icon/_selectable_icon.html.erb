@@ -4,15 +4,15 @@
     class: object.classname) do %>
 
     <% if object.inputs == "disabled" %>
-    
+
       <%= pb_rails("icon", props: { icon: object.icon, size: "2x" }) %>
       <%= pb_rails("title", props: { text: object.text, tag: "h4", size: 4 }) %>
 
     <% else %>
       <% if object.multi %>
-        <%= check_box_tag object.name, object.value, object.checked, id: object.input_id, disabled: object.disabled %>
+        <%= check_box_tag(object.name, object.value, object.checked, object.input_options) %>
       <% else %>
-        <%= radio_button_tag object.name, object.value, object.checked, id: object.input_id, disabled: object.disabled %>
+        <%= radio_button_tag(object.name, object.value, object.checked, object.input_options) %>
       <% end %>
 
       <label for="<%= object.input_id_present %>">
