@@ -43,7 +43,11 @@ const PersonContact = (props: PersonContactProps) => {
 
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
-  const classes = classnames(buildCss('pb_person_contact_kit'), className, globalProps(props))
+  const classes = classnames(
+    buildCss('pb_person_contact_kit'),
+    globalProps(props),
+    className
+  )
 
   const wrongContacts = () => (
     contacts.filter((contactObject) => (

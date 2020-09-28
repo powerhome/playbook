@@ -40,8 +40,11 @@ const Checkbox = (props: CheckboxProps) => {
 
   const dataProps = buildDataProps(data)
   const ariaProps = buildAriaProps(aria)
-  const classes = classnames(buildCss('pb_checkbox_kit',
-    { checked: checked, error: error }), className, globalProps(props))
+  const classes = classnames(
+    buildCss('pb_checkbox_kit', { checked, error }),
+    globalProps(props),
+    className
+  )
 
   return (
     <label

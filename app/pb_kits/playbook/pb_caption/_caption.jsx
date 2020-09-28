@@ -35,8 +35,8 @@ const Caption = (props: CaptionProps) => {
   const dataProps = buildDataProps(data)
   const css = classnames(
     buildCss('pb_caption_kit', size, variant),
-    className,
-    globalProps(props)
+    globalProps(props),
+    className
   )
 
   return (

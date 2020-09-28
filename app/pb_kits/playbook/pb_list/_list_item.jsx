@@ -27,8 +27,9 @@ const ListItem = (props: ListItemProps) => {
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
   const classes = classnames(
-    buildCss('pb_item_kit'), className,
-    globalProps(props)
+    buildCss('pb_item_kit'),
+    globalProps(props),
+    className
   )
 
   return (

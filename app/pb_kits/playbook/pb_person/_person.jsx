@@ -32,7 +32,11 @@ const Person = (props: PersonProps) => {
 
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
-  const classes = classnames(buildCss('pb_person_kit'), className, globalProps(props))
+  const classes = classnames(
+    buildCss('pb_person_kit'),
+    globalProps(props),
+    className
+  )
 
   return (
     <div

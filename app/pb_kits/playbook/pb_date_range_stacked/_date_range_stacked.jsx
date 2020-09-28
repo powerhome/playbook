@@ -18,7 +18,11 @@ type DateRangeStackedProps = {
 
 const DateRangeStacked = (props: DateRangeStackedProps) => {
   const { className, dark = false, endDate, startDate } = props
-  const css = classnames(className, buildCss('pb_date_range_stacked'), globalProps(props))
+  const css = classnames(
+    buildCss('pb_date_range_stacked'),
+    globalProps(props),
+    className
+  )
 
   return (
     <div className={css}>

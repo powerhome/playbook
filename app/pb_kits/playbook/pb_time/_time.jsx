@@ -24,9 +24,9 @@ type TimeProps = {
 const Time = (props: TimeProps) => {
   const { align, className, date, showIcon, size, timeZone } = props
   const classes = classnames(
-    className,
     buildCss('pb_time_kit', align, size),
-    globalProps(props)
+    globalProps(props),
+    className
   )
 
   const dateTimestamp = new DateTime({ value: date, zone: timeZone })

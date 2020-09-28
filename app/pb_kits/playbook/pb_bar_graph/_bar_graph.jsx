@@ -75,7 +75,7 @@ export default class BarGraph extends React.Component<BarGraphProps> {
 
     return (
       <div
-          className={classnames(className, globalProps(this.props))}
+          className={classnames(globalProps(this.props), className)}
           id={id}
       />
     )

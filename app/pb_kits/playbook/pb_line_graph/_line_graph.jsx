@@ -77,7 +77,7 @@ export default class LineGraph extends React.Component<LineGraphProps> {
 
     return (
       <div
-          className={classnames(className, globalProps(this.props))}
+          className={classnames(globalProps(this.props), className)}
           id={id}
       />
     )

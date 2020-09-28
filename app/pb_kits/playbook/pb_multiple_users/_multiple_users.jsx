@@ -36,8 +36,11 @@ const MultipleUsers = (props: MultipleUsersProps) => {
   const reverseClass = reverse === true ? 'reverse' : ''
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
-  const classes = classnames(buildCss('pb_multiple_users_kit', reverseClass),
-    className, globalProps(props))
+  const classes = classnames(
+    buildCss('pb_multiple_users_kit', reverseClass),
+    globalProps(props),
+    className
+  )
 
   return (
     <div
