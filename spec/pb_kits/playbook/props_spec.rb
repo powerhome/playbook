@@ -12,6 +12,21 @@ RSpec.describe Playbook::Props do
     it { is_expected.to define_hash_prop(:data).with_default({}) }
     it { is_expected.to define_prop(:classname) }
     it { is_expected.to define_hash_prop(:aria).with_default({}) }
+    it { is_expected.to define_prop(:margin) }
+    it { is_expected.to define_prop(:margin_bottom) }
+    it { is_expected.to define_prop(:margin_left) }
+    it { is_expected.to define_prop(:margin_right) }
+    it { is_expected.to define_prop(:margin_top) }
+    it { is_expected.to define_prop(:margin_x) }
+    it { is_expected.to define_prop(:margin_y) }
+    it { is_expected.to define_prop(:padding) }
+    it { is_expected.to define_prop(:padding_bottom) }
+    it { is_expected.to define_prop(:padding_left) }
+    it { is_expected.to define_prop(:padding_right) }
+    it { is_expected.to define_prop(:padding_top) }
+    it { is_expected.to define_prop(:padding_x) }
+    it { is_expected.to define_prop(:padding_y) }
+    it { is_expected.to define_boolean_prop(:dark).with_default(false) }
 
     describe "can be overwritten with custom values" do
       it "#id" do
@@ -34,6 +49,11 @@ RSpec.describe Playbook::Props do
         expect(instance.aria).to eq(bar: :baz)
       end
 
+      it "#dark" do
+        instance = subject.new(dark: true)
+        expect(instance.dark).to eq(true)
+      end
+
       describe "#children" do
         it "allows to be passed as prop" do
           block = -> { 42 }
@@ -53,7 +73,14 @@ RSpec.describe Playbook::Props do
 
     describe ".props" do
       it "returns collection of available properties" do
-        expect(subject.props).to include(:id, :data, :classname, :aria)
+        expect(subject.props).to include(
+          :id, :data, :classname, :aria, :children,
+          :margin, :margin_bottom, :margin_left,
+          :margin_right, :margin_top, :margin_x, :margin_y,
+          :padding, :padding_bottom, :padding_left,
+          :padding_right, :padding_top, :padding_x, :padding_y,
+          :dark
+        )
       end
     end
 
