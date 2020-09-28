@@ -124,7 +124,7 @@ module Playbook
 
       def prop(name, type: Playbook::Props::String, **options)
         @props ||= {}
-        @props[name] = type.new(**options)
+        @props[name] = type.new(options.merge(name: name))
 
         define_method(name) { prop(name) }
       end

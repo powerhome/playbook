@@ -3,7 +3,7 @@
 RSpec.describe Playbook::Props::Enum do
   describe "#validate" do
     it "returns true given value supplied upon initialization", :aggregate_failures do
-      enum = Playbook::Props::Enum.new(values: [1, "two", :three])
+      enum = Playbook::Props::Enum.new(values: [1, "two", :three], name: :enum_prop)
 
       expect(enum.validate(1)).to eq true
       expect(enum.validate("two")).to eq true
@@ -11,7 +11,7 @@ RSpec.describe Playbook::Props::Enum do
     end
 
     it "returns false given anything else", :aggregate_failures do
-      enum = Playbook::Props::Enum.new(values: [])
+      enum = Playbook::Props::Enum.new(values: [], name: :enum_prop)
 
       expect(enum.validate(true)).to eq false
       expect(enum.validate(:foo)).to eq false
