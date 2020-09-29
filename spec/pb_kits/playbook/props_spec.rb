@@ -166,11 +166,11 @@ RSpec.describe Playbook::Props do
 
   describe "required props" do
     subject do
-      Class.new do
+      Object.const_set("TestClassForRequiredProps", Class.new do
         include Playbook::Props
 
         prop :required_prop, required: true
-      end
+      end)
     end
 
     it { is_expected.to define_string_prop(:required_prop).that_is_required }
@@ -178,7 +178,7 @@ RSpec.describe Playbook::Props do
     it "raises error when not given a value" do
       expect { subject.new({}) }.to raise_error(
         Playbook::Props::Error,
-        /Prop 'required_prop' of type String is required and needs to be provided a value/
+        /TestClassForRequiredProps prop 'required_prop' of type String is required and needs a value/
       )
     end
 
