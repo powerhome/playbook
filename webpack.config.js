@@ -80,7 +80,7 @@ const config = {
   },
   plugins: () => {
     let pluginList = []
-    pluginList.push(new MiniCssExtractPlugin({ filename: 'playbook.css' }))
+    pluginList.push(new MiniCssExtractPlugin({ filename: '[name].css' }))
     pluginList.push(COPY_PLUGIN_CONFIG)
     return pluginList
   },
@@ -115,7 +115,7 @@ const config = {
   }
 }
 
-const reactConfig = (env) => {
+const mainConfig = (env) => {
   return {
     mode: 'production',
     resolve: config.resolve,
@@ -124,6 +124,7 @@ const reactConfig = (env) => {
     externals: config.externals,
     entry: {
       'playbook-react': './app/pb_kits/playbook/index.js',
+      'playbook-rails': './app/pb_kits/playbook/vendor.js',
     },
     output: {
       libraryTarget: config.output.libraryTarget,
@@ -132,29 +133,6 @@ const reactConfig = (env) => {
     },
     plugins: config.plugins(),
     module: config.module.main,
-    resolve: config.resolve
-  }
-}
-
-const railsConfig = (env) => {
-  return {
-    mode: 'production',
-    resolve: config.resolve,
-    resolveLoader: config.resolveLoader,
-    optimization: config.optimization(env),
-    externals: config.externals,
-    entry: {
-      'playbook-rails': './app/pb_kits/playbook/vendor.js',
-    },
-    output: {
-      libraryTarget: config.output.libraryTarget,
-      filename: '[name].js',
-      path: config.output.path,
-    },
-    plugins: [
-      new webpack.IgnorePlugin({resourceRegExp: /\.scss$/i})
-    ],
-    module: config.module.js,
     resolve: config.resolve
   }
 }
@@ -174,12 +152,10 @@ const docsConfig = (env) => {
       filename: '[name].js',
       path: config.output.path,
     },
-    plugins: [
-      new webpack.IgnorePlugin({resourceRegExp: /\.scss$/i})
-    ],
+    plugins: config.plugins(),
     module: config.module.js,
     resolve: config.resolve
   }
 }
 
-module.exports = [reactConfig, railsConfig, docsConfig]
+module.exports = [mainConfig, docsConfig]

@@ -64,6 +64,8 @@ namespace :pb_release do
     # NPM
     puts "\nGenerating distribution files"
     `docker-compose run web yarn release`
+    puts "\nOrganizing distribution files"
+    `rm dist/playbook-rails.css && mv dist/playbook-react.css dist/playbook.css`
     puts "\nCreating NPM package..."
     `npm pack`
     puts "\nPublishing to NPM..."
