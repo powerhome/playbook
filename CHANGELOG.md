@@ -39,6 +39,16 @@
 - Playbook Distribution Release [\#834](https://github.com/powerhome/playbook/pull/834) ([thestephenmarshall](https://github.com/thestephenmarshall))
 
 
+## [7.0.0](https://github.com/powerhome/playbook/tree/7.0.0) (2020-09-29)
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/6.8.1...7.0.0)
+
+**Breaking changes:**
+
+- Playbook Distribution Release [\#834](https://github.com/powerhome/playbook/pull/834) ([thestephenmarshall](https://github.com/thestephenmarshall))
+
+# Changelog
+
 ## [6.8.1](https://github.com/powerhome/playbook/tree/6.8.1) (2020-09-28)
 
 [Full Changelog](https://github.com/powerhome/playbook/compare/6.8.0...6.8.1)
@@ -244,11 +254,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - ~~Add Title Detail Dark Mode [\#972](https://github.com/powerhome/playbook/pull/972) ([kellyeryan](https://github.com/kellyeryan))~~ (reverted)
 
-## Unreleased
-
-### Fixed
-- Update flow types to use literal vs class wrapper ([#969](https://github.com/powerhome/playbook/pull/969) @thestephenmarshall)
-
 
 ## [v6.1.0] 2020-8-6
 
@@ -379,7 +384,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Updated
 
-- Generate distribution files ([#834](https://github.com/powerhome/playbook/pull/834) @rafbgarcia @thestephenmarshall)
 - Update dev startup ([#873](https://github.com/powerhome/playbook/pull/873) @thestephenmarshall)
 - Renovate config updates ([#872](https://github.com/powerhome/playbook/pull/872) @thestephenmarshall)
 - Fixed popover z-index issues plus added z-index, width, and height options ([#869](https://github.com/powerhome/playbook/pull/869/) @jasoncypret)
