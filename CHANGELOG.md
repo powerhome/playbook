@@ -1,5 +1,14 @@
 # Changelog
 
+## [6.8.1](https://github.com/powerhome/playbook/tree/6.8.1) (2020-09-28)
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/6.8.0...6.8.1)
+
+**Implemented enhancements:**
+
+- \[NUXE-144\] Added user value handling to checkbox form helper [\#1107](https://github.com/powerhome/playbook/pull/1107) ([bh247484](https://github.com/bh247484))
+
+
 ## [6.8.0](https://github.com/powerhome/playbook/tree/6.8.0) (2020-09-18)
 
 [Full Changelog](https://github.com/powerhome/playbook/compare/6.7.0...6.8.0)
