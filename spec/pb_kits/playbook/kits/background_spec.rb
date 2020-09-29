@@ -14,13 +14,13 @@ RSpec.describe Playbook::PbBackground::Background do
                       .with_default("div")
                       .with_values("h1", "h2", "h3", "h4", "h5", "h6", "p", "span", "div") }
   it { is_expected.to define_enum_prop(:background_color)
-                      .with_default("bg_light")
-                      .with_values("bg_gradient", "bg_dark", "bg_light", "white") }
+                      .with_default("light")
+                      .with_values("gradient", "dark", "light", "white") }
   describe "#classname" do
     it "returns namespaced class name", :aggregate_failures do
-      expect(subject.new({}).classname).to eq "pb_background_kit md bg_light p_md"
-      expect(subject.new(background_color: "bg_gradient").classname).to eq "pb_background_kit md bg_gradient p_md"
-      expect(subject.new(padding: "xl").classname).to eq "pb_background_kit xl bg_light p_xl"
+      expect(subject.new({}).classname).to eq "pb_background_kit lazyload blur_up md bg_light p_md"
+      expect(subject.new(background_color: "gradient").classname).to eq "pb_background_kit lazyload blur_up md bg_gradient p_md"
+      expect(subject.new(padding: "xl").classname).to eq "pb_background_kit lazyload blur_up xl bg_light p_xl"
     end
   end
 end
