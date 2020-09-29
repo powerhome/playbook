@@ -59,11 +59,17 @@ namespace :pb_release do
     puts "\nPushing to RubyGems..."
     `gem push playbook_ui-#{version}.gem`
     puts "\nPushed to RubyGems. Now lets clean up..."
-    `rm -rf playbook_ui-#{version}.gem`
+    `rm -rf playbook_ui-*.gem`
 
     # NPM
-    puts "\nPushing to NPM..."
-    `npm publish`
+    puts "\nGenerating distribution files"
+    `docker-compose run web yarn release`
+    puts "\nCreating NPM package..."
+    `npm pack`
+    puts "\nPublishing to NPM..."
+    `npm publish playbook-ui-#{version}.tgz`
+    puts "\nPublished to NPM. Now lets clean up..."
+    `rm -rf playbook-ui-*.tgz`
 
     # Tags
     puts "\nPushed to NPM. Now lets create a tag..."
