@@ -23,7 +23,7 @@ module Playbook
                       default: false
       prop :value
 
-      prop :additional_input_options, type: Playbook::Props::Hash,
+      prop :input_options, type: Playbook::Props::Hash,
                                       default: {}
 
       # Conditional rendering for input field
@@ -38,8 +38,8 @@ module Playbook
         input_id.present? ? input_id : name
       end
 
-      def input_options
-        additional_input_options.merge(
+      def additional_input_options
+        input_options.merge(
           id: input_id_present,
           disabled: disabled
         )

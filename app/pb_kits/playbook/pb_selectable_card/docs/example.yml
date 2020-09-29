@@ -4,7 +4,7 @@ examples:
   - selectable_card_default: Default
   - selectable_card_single_select: Single Select
   - selectable_card_block: Block
-  - selectable_card_options: Options
+  - selectable_card_options: With Options
 
 
   react:

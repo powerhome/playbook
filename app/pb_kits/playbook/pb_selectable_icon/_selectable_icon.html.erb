@@ -10,9 +10,9 @@
 
     <% else %>
       <% if object.multi %>
-        <%= check_box_tag(object.name, object.value, object.checked, object.input_options) %>
+        <%= check_box_tag(object.name, object.value, object.checked, object.additional_input_options) %>
       <% else %>
-        <%= radio_button_tag(object.name, object.value, object.checked, object.input_options) %>
+        <%= radio_button_tag(object.name, object.value, object.checked, object.additional_input_options) %>
       <% end %>
 
       <label for="<%= object.input_id_present %>">

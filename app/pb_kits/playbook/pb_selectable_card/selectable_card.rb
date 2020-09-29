@@ -17,7 +17,7 @@ module Playbook
                    default: true
       prop :input_id, type: Playbook::Props::String
 
-      prop :additional_input_options, type: Playbook::Props::Hash,
+      prop :input_options, type: Playbook::Props::Hash,
                                       default: {}
       prop :name
       prop :text
@@ -31,8 +31,8 @@ module Playbook
         input_id.present? ? input_id : name
       end
 
-      def input_options
-        additional_input_options.merge(
+      def additional_input_options
+        input_options.merge(
           id: input_id_present,
           disabled: disabled
         )
