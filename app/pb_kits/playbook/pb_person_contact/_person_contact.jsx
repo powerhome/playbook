@@ -77,22 +77,23 @@ const PersonContact = (props: PersonContactProps) => {
             contactDetail={contactObject.contactDetail}
             contactType={contactObject.contactType}
             contactValue={contactObject.contactValue}
-            key={index}
+            key={`valid-contact-${index}`}
         />
-            ))}
+      ))}
       {wrongContacts().map((contactObject, index) => (
-        <>
+        <div key={`wrong-contact-caption-wrapper-${index}`}>
           <Caption
               className="wrong_numbers"
+              key={`wrong-contact-caption-${index}`}
               text="wrong number"
           />
           <Contact
               contactType={contactObject.contactType}
               contactValue={contactObject.contactValue}
-              key={index}
+              key={`wrong-contact-${index}`}
           />
-        </>
-          ))}
+        </div>
+      ))}
     </div>
   )
 }

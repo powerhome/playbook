@@ -39,6 +39,9 @@ namespace :pb_release do
       puts "Updated Gemfile.lock"
       puts "\n\n"
 
+      puts "\nCreating dist files"
+      `yarn release`
+
       puts "Commit your changes and create a PR to merge to master"
     end
   end
@@ -56,11 +59,19 @@ namespace :pb_release do
     puts "\nPushing to RubyGems..."
     `gem push playbook_ui-#{version}.gem`
     puts "\nPushed to RubyGems. Now lets clean up..."
-    `rm -rf playbook_ui-#{version}.gem`
+    `rm -rf playbook_ui-*.gem`
 
     # NPM
-    puts "\nPushing to NPM..."
-    `npm publish`
+    puts "\nGenerating distribution files"
+    `docker-compose run web yarn release`
+    puts "\nOrganizing distribution files"
+    `rm dist/playbook-rails.css && mv dist/playbook-react.css dist/playbook.css`
+    puts "\nCreating NPM package..."
+    `npm pack`
+    puts "\nPublishing to NPM..."
+    `npm publish playbook-ui-#{version}.tgz`
+    puts "\nPublished to NPM. Now lets clean up..."
+    `rm -rf playbook-ui-*.tgz`
 
     # Tags
     puts "\nPushed to NPM. Now lets create a tag..."
