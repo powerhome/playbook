@@ -2,8 +2,6 @@
 
 module Playbook
   class ApplicationController < ActionController::Base
-    protect_from_forgery with: :exception
- 
     helper Webpacker::Helper
     helper Playbook::PbKitHelper
     helper Playbook::PbDocHelper

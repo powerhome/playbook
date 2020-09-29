@@ -11,12 +11,11 @@ import WebpackerReact from 'webpacker-react'
 // ===========================================
 // Generated file from kit generator.
 // KIT EXAMPLES
-
 import '../pb_form/pb_form_validation'
 import * as Avatar from 'pb_avatar/docs'
 import * as AvatarActionButton from 'pb_avatar_action_button/docs'
 import * as Badge from 'pb_badge/docs'
-import * as BarGraph from 'pb_bar_graph/docs'
+import * as BarGraphDocs from 'pb_bar_graph/docs'
 import * as Body from 'pb_body/docs'
 import * as Button from 'pb_button/docs'
 import * as ButtonToolbar from 'pb_button_toolbar/docs'
@@ -35,7 +34,7 @@ import * as DateRangeStacked from 'pb_date_range_stacked/docs'
 import * as DateStacked from 'pb_date_stacked/docs'
 import * as DateTimeStacked from 'pb_date_time_stacked/docs'
 import * as DateYearStacked from 'pb_date_year_stacked/docs'
-import * as DistributionBar from 'pb_distribution_bar/docs'
+import * as DistributionBarDocs from 'pb_distribution_bar/docs'
 import * as FileUpload from 'pb_file_upload/docs'
 import * as Filter from 'pb_filter/docs'
 import * as FixedConfirmationToast from 'pb_fixed_confirmation_toast/docs'
@@ -52,8 +51,8 @@ import * as Image from 'pb_image/docs'
 import * as LabelPill from 'pb_label_pill/docs'
 import * as LabelValue from 'pb_label_value/docs'
 import * as Layout from 'pb_layout/docs'
-import * as Legend from 'pb_legend/docs'
-import * as LineGraph from 'pb_line_graph/docs'
+import * as LegendDocs from 'pb_legend/docs'
+import * as LineGraphDocs from 'pb_line_graph/docs'
 import * as List from 'pb_list/docs'
 import * as LoadingInline from 'pb_loading_inline/docs'
 import * as Message from 'pb_message/docs'
@@ -99,7 +98,7 @@ WebpackerReact.setup({
   ...Avatar,
   ...AvatarActionButton,
   ...Badge,
-  ...BarGraph,
+  ...BarGraphDocs,
   ...Body,
   ...Button,
   ...ButtonToolbar,
@@ -118,7 +117,7 @@ WebpackerReact.setup({
   ...DateStacked,
   ...DateTimeStacked,
   ...DateYearStacked,
-  ...DistributionBar,
+  ...DistributionBarDocs,
   ...FileUpload,
   ...Filter,
   ...FixedConfirmationToast,
@@ -135,8 +134,8 @@ WebpackerReact.setup({
   ...LabelPill,
   ...LabelValue,
   ...Layout,
-  ...Legend,
-  ...LineGraph,
+  ...LegendDocs,
+  ...LineGraphDocs,
   ...List,
   ...LoadingInline,
   ...Message,

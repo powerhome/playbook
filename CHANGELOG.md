@@ -1,5 +1,15 @@
 # Changelog
 
+## [7.0.0](https://github.com/powerhome/playbook/tree/7.0.0) (2020-09-29)
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/6.8.1...7.0.0)
+
+**Breaking changes:**
+
+- Playbook Distribution Release [\#834](https://github.com/powerhome/playbook/pull/834) ([thestephenmarshall](https://github.com/thestephenmarshall))
+
+# Changelog
+
 ## [6.8.1](https://github.com/powerhome/playbook/tree/6.8.1) (2020-09-28)
 
 [Full Changelog](https://github.com/powerhome/playbook/compare/6.8.0...6.8.1)
