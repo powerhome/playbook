@@ -15,7 +15,7 @@ RSpec.describe Playbook::PbSelectableCard::SelectableCard do
   it { is_expected.to define_prop(:name) }
   it { is_expected.to define_prop(:text) }
   it { is_expected.to define_prop(:value) }
-  it { is_expected.to define_hash_prop(:additional_input_options).with_default({}) }
+  it { is_expected.to define_hash_prop(:input_options).with_default({}) }
 
   describe "#classname" do
     it "returns namespaced class name", :aggregate_failures do
