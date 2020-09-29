@@ -2,7 +2,7 @@
   "name": "playbook-ui",
   "version": "7.0.0",
   "description": "Nitro's Design System",
-  "main": "./dist/playbook.js",
+  "main": "./dist/playbook-react.js",
   "scripts": {
     "build": "./bin/webpack --profile --progress --max_old_space_size=8192 --env.development",
     "build-dist": "RAILS_ENV=dist NODE_ENV=dist ./bin/webpack --profile --progress --max_old_space_size=8192",
@@ -10,9 +10,7 @@
     "lint": "./node_modules/eslint/bin/eslint.js . --ext .js,.jsx",
     "lint-fix": "./node_modules/eslint/bin/eslint.js . --ext .js,.jsx --fix",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "release": "yarn release:dev && yarn release:prod",
-    "release:prod": "webpack --env.production",
-    "release:dev": "webpack --env.development"
+    "release": "webpack --env.production"
   },
   "repository": {
     "type": "git",
