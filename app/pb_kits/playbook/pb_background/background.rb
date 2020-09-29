@@ -8,8 +8,8 @@ module Playbook
       partial "pb_background/background"
 
       prop :background_color, type: Playbook::Props::Enum,
-                              values: %w[bg_gradient bg_dark bg_light white],
-                              default: "bg_light"
+                              values: %w[gradient dark light white],
+                              default: "light"
       prop :image_url
       prop :padding, type: Playbook::Props::Enum,
                      values: %w[none xs sm md lg xl],
@@ -19,8 +19,9 @@ module Playbook
                  default: "div"
 
       def classname
-        generate_classname("pb_background_kit", padding, background_color, separator: " ")
+        generate_classname("pb_background_kit lazyload blur_up", padding, "bg_#{background_color}", separator: " ")
       end
+
     end
   end
 end

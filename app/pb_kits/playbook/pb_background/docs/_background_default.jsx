@@ -5,12 +5,12 @@ import { Body, Card, Flex, FlexItem, Title } from '../../'
 const BackgroundDefault = () => (
   <div>
     <Background
-        backgroundColor="bg_gradient"
+        backgroundColor="gradient"
     >
       {'Background Kit Gradient Color'}
     </Background>
     <Background
-        backgroundColor="bg_dark"
+        backgroundColor="dark"
     >
       <Flex
           horizontal="center"
@@ -26,7 +26,7 @@ const BackgroundDefault = () => (
       </Flex>
     </Background>
     <Background
-        backgroundColor="bg_light"
+        backgroundColor="light"
         padding="xl"
     >
       <Flex
@@ -49,7 +49,7 @@ const BackgroundDefault = () => (
           text="Background Kit White"
       />
     </Background>
-    <Background imageUrl="https://www.proflowers.com/blog/wp-content/uploads/2016/04/hero-blue-flowers.jpg">
+    <Background imageUrl="https://images.unsplash.com/photo-1528459801416-a9e53bbf4e17?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1000&q=80">
       <Flex
           orientation="column"
           vertical="center"
@@ -63,8 +63,8 @@ const BackgroundDefault = () => (
           />
         </FlexItem>
         <FlexItem padding="lg">
-          <Card>
-            {'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec iaculis, risus a fringilla luctus, sapien eros sodales ex, quis molestie est nulla non turpis. Vestibulum aliquet at ipsum eget posuere. Morbi sed laoreet erat. Sed commodo posuere lectus, at porta nulla ornare a. Suspendisse quam est, sollicitudin ut enim sit amet, commodo placerat enim. Donec laoreet metus ac mauris pellentesque mattis. Pellentesque luctus vel mauris non aliquam. Mauris hendrerit mattis porttitor. Curabitur vehicula justo non ex consectetur commodo. Quisque posuere aliquet quam. Maecenas malesuada magna mauris, ac tempor metus euismod at.'}
+          <Card shadow="deepest">
+            {'We cannot seek achievement for ourselves and forget about progress and prosperity for our community... Our ambitions must be broad enough to include the aspirations and needs of others, for their sakes and for our own. - Cesar Chavez'}
           </Card>
         </FlexItem>
       </Flex>

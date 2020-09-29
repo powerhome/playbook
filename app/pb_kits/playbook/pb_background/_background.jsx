@@ -7,7 +7,7 @@ import { globalProps } from '../utilities/globalProps.js'
 
 type BackgroundProps = {
   aria?: object,
-  backgroundColor?: 'bg_gradient' | 'bg_dark' | 'bg_light' | 'white',
+  backgroundColor?: 'gradient' | 'dark' | 'light' | 'white',
   children?: array<React.ReactNode> | React.ReactNode,
   className?: string,
   data?: object,
@@ -20,7 +20,7 @@ type BackgroundProps = {
 const Background = (props: BackgroundProps) => {
   const {
     aria = {},
-    backgroundColor = 'bg_light',
+    backgroundColor = 'light',
     children,
     className,
     data = {},
@@ -43,13 +43,13 @@ const Background = (props: BackgroundProps) => {
     >
       <If condition={imageUrl}>
         <div
-            className={classes}
+            className={classes + 'lazyload blur_up'}
             style={{ backgroundImage: `url(${imageUrl})` }}
         >
           { children }
         </div>
         <Else />
-        <div className={classes + backgroundColor}>
+        <div className={classes + `bg_${backgroundColor}`}>
           { children }
         </div>
       </If>
