@@ -14,7 +14,7 @@ const iconMap = {
 
 type FixedConfirmationToastProps = {
   className?: string,
-  closeable?: false,
+  closeable?: boolean,
   data?: string,
   id?: string,
   status?: "success" | "error" | "neutral" | "tip",
@@ -23,7 +23,7 @@ type FixedConfirmationToastProps = {
 
 const FixedConfirmationToast = (props: FixedConfirmationToastProps) => {
   const [showToast, hideToast] = useState(true)
-  const { className, closeable, status = 'neutral', text } = props
+  const { className, closeable = false, status = 'neutral', text } = props
   const css = classnames(
     `pb_fixed_confirmation_toast_kit_${status}`,
     globalProps(props),
