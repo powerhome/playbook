@@ -65,6 +65,7 @@ module Playbook
           minDate: min_date,
           mode: mode,
           pickerId: picker_id,
+          required: required,
           yearRange: year_range,
         }.to_json.html_safe
       end

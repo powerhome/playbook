@@ -13,6 +13,7 @@ const datePickerHelper = (config) => {
     mode,
     onChange = () => {},
     pickerId,
+    required,
     yearRange,
   } = config
   // ===========================================================
@@ -160,6 +161,12 @@ const datePickerHelper = (config) => {
   })
   if (allowInput){
     picker.input.removeAttribute('readonly')
+  }
+  if (required){
+    picker.input.removeAttribute('readonly')
+    picker.input.addEventListener('keydown', (e) => e.preventDefault())
+    picker.input.style.caretColor = 'transparent'
+    picker.input.style.cursor = 'pointer'
   }
 }
 
