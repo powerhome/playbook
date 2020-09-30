@@ -36,7 +36,7 @@ const Background = (props: BackgroundProps) => {
   const Tag = `${tag}`
   const backgroundStyle = {
     backgroundImage: `url(${imageUrl})`,
-    backgroundSize: "cover",
+    backgroundSize: 'cover',
   }
 
   return (
