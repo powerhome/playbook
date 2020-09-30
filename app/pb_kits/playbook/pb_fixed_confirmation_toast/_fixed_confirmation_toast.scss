@@ -20,7 +20,7 @@ $confirmation_toast_colors: (
   border-radius: $border_rad_mega;
   box-shadow: $shadow_deeper;
 
-  &.close_toast {
+  &.remove_toast {
     cursor: pointer;
     .fa-times {
       opacity: 0.5;
