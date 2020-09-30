@@ -12,6 +12,8 @@ module Playbook
           props[:name] = html_attribute_name
           props[:picker_id] = html_id
 
+          props[:allow_input] = true if props[:required]
+
           @template.pb_rails("date_picker", props: props)
         end
       end

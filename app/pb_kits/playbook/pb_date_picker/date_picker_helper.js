@@ -11,11 +11,10 @@ const datePickerHelper = (config) => {
     maxDate,
     minDate,
     mode,
-    onChange,
+    onChange = () => {},
     pickerId,
     yearRange,
   } = config
-
   // ===========================================================
   // |                   Hook Definitions                      |
   // ===========================================================
@@ -58,7 +57,6 @@ const datePickerHelper = (config) => {
       parentInput.style.justifyContent = ''
     }
   }
-
   // ===========================================================
   // |             Flatpickr initializer w/ config             |
   // ===========================================================
@@ -107,7 +105,6 @@ const datePickerHelper = (config) => {
     prevArrow: '<i class="far fa-angle-left"></i>',
     static: true,
   })
-
   // ===========================================================
   //                 Additional JS Functionality               |
   // ===========================================================
