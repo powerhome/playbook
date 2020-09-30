@@ -25,6 +25,6 @@
   <% if @type == 'react' %>
     <%= javascript_packs_with_chunks_tag 'application', 'react-examples', 'site' %>
   <% else %>
-    <%= javascript_packs_with_chunks_tag 'application', 'react-examples', 'site' %>
+    <%= javascript_packs_with_chunks_tag 'application', 'rails-examples', 'site' %>
     <%= yield :pb_js %>
   <% end %>
