@@ -19,9 +19,18 @@ module Playbook
                  default: "div"
 
       def classname
-        generate_classname("pb_background_kit lazyload blur_up", padding, "bg_#{background_color}", separator: " ")
+        generate_classname("pb_background_kit", image_classname, background_color_classname, padding, separator: " ")
       end
 
+    private
+
+      def image_classname
+        image_url.present? ? "lazyload blur_up" : ""
+      end
+
+      def background_color_classname
+        !image_url.present? ? "bg_#{background_color}" : ""
+      end
     end
   end
 end

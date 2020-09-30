@@ -34,6 +34,10 @@ const Background = (props: BackgroundProps) => {
   const dataProps = buildDataProps(data)
   const classes = classnames(buildCss('pb_background_kit'), className, globalProps(props, { padding }))
   const Tag = `${tag}`
+  const backgroundStyle = {
+    backgroundImage: `url(${imageUrl})`,
+    backgroundSize: "cover",
+  }
 
   return (
     <Tag
@@ -44,7 +48,7 @@ const Background = (props: BackgroundProps) => {
       <If condition={imageUrl}>
         <div
             className={classes + 'lazyload blur_up'}
-            style={{ backgroundImage: `url(${imageUrl})` }}
+            style={backgroundStyle}
         >
           { children }
         </div>

@@ -18,9 +18,9 @@ RSpec.describe Playbook::PbBackground::Background do
                       .with_values("gradient", "dark", "light", "white") }
   describe "#classname" do
     it "returns namespaced class name", :aggregate_failures do
-      expect(subject.new({}).classname).to eq "pb_background_kit lazyload blur_up md bg_light p_md"
-      expect(subject.new(background_color: "gradient").classname).to eq "pb_background_kit lazyload blur_up md bg_gradient p_md"
-      expect(subject.new(padding: "xl").classname).to eq "pb_background_kit lazyload blur_up xl bg_light p_xl"
+      expect(subject.new({}).classname).to eq "pb_background_kit  bg_light md p_md"
+      expect(subject.new(background_color: "gradient").classname).to eq "pb_background_kit  bg_gradient md p_md"
+      expect(subject.new(padding: "xl").classname).to eq "pb_background_kit  bg_light xl p_xl"
     end
   end
 end
