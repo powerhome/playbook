@@ -1,6 +1,6 @@
 /* @flow */
 
-import React from 'react'
+import React, { useState } from 'react'
 import classnames from 'classnames'
 import { Icon, Title } from '../'
 import { globalProps } from '../utilities/globalProps.js'
@@ -14,6 +14,7 @@ const iconMap = {
 
 type FixedConfirmationToastProps = {
   className?: string,
+  closeable?: false,
   data?: string,
   id?: string,
   status?: "success" | "error" | "neutral" | "tip",
@@ -21,7 +22,8 @@ type FixedConfirmationToastProps = {
 }
 
 const FixedConfirmationToast = (props: FixedConfirmationToastProps) => {
-  const { className, status = 'neutral', text } = props
+  const [showToast, hideToast] = useState(true)
+  const { className, closeable, status = 'neutral', text } = props
   const css = classnames(
     `pb_fixed_confirmation_toast_kit_${status}`,
     globalProps(props),
@@ -30,20 +32,32 @@ const FixedConfirmationToast = (props: FixedConfirmationToastProps) => {
   const icon = iconMap[status]
 
   return (
-    <div className={css}>
-      <If condition={icon}>
-        <Icon
-            className="pb_icon"
-            fixed_width
-            icon={icon}
+    <If condition={showToast}>
+      <div
+          className={css}
+          onClick={closeable ? () => hideToast(false) : null}
+      >
+        <If condition={icon}>
+          <Icon
+              className="pb_icon"
+              fixed_width
+              icon={icon}
+          />
+        </If>
+        <Title
+            className="pb_fixed_confirmation_toast_text"
+            size={4}
+            text={text}
         />
-      </If>
-      <Title
-          className="pb_fixed_confirmation_toast_text"
-          size={4}
-          text={text}
-      />
-    </div>
+        <If condition={closeable}>
+          <Icon
+              className="pb_icon"
+              fixed_width
+              icon="times"
+          />
+        </If>
+      </div>
+    </If>
   )
 }
 
