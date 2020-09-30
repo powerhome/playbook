@@ -1,1 +1,13 @@
-<%= pb_rails("timestamp", props: { text: "20 seconds ago" }) %>
+<%= pb_rails("timestamp", props: {
+  timestamp: DateTime.now,
+  show_date: true,
+  align: "left"
+}) %>
+
+<br>
+
+<%= pb_rails("timestamp", props: {
+  timestamp: DateTime.now + 4.years,
+  show_date: true,
+  align: "left"
+}) %>
