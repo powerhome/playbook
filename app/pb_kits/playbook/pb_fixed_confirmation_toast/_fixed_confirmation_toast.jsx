@@ -22,7 +22,7 @@ type FixedConfirmationToastProps = {
 }
 
 const FixedConfirmationToast = (props: FixedConfirmationToastProps) => {
-  const [showToast, hideToast] = useState(true)
+  const [showToast, toggleToast] = useState(true)
   const { className, closeable = false, status = 'neutral', text } = props
   const css = classnames(
     `pb_fixed_confirmation_toast_kit_${status}`,
@@ -35,7 +35,7 @@ const FixedConfirmationToast = (props: FixedConfirmationToastProps) => {
     <If condition={showToast}>
       <div
           className={css}
-          onClick={closeable ? () => hideToast(false) : null}
+          onClick={closeable ? () => toggleToast(false) : null}
       >
         <If condition={icon}>
           <Icon
