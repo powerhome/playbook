@@ -11,23 +11,54 @@ module Playbook
 
       prop :end_date, type: Playbook::Props::Date, required: true
       prop :start_date, type: Playbook::Props::Date, required: true
+      prop :icon, required: false
+      prop :dark, type: Playbook::Props::Boolean,
+                  default: false
+      prop :size, type: Playbook::Props::Enum,
+                  values: %w[xs sm],
+                  default: "sm"
+      prop :align, type: Playbook::Props::Enum,
+                   values: %w[left center right],
+                   default: "left"
 
       def classname
-        generate_classname("pb_date_range_inline_kit")
+        generate_classname("pb_date_range_inline_kit", align, size)
+      end
+
+      def text_kit
+        case size
+        when "xs"
+          "caption"
+        when "sm"
+          "body"
+        end
+      end
+
+      def icon_color
+        size == "sm" ? "light" : nil
+      end
+
+      def dates_in_current_year?
+        current_year = Time.current.year
+        start_date.year == current_year && end_date.year == current_year
+      end
+
+      def time_display(time)
+        content_tag(:time, datetime: time.to_iso) do
+          if dates_in_current_year?
+            "#{time.to_day} #{time.to_month_downcase}"
+          else
+            "#{time.to_day} #{time.to_month_downcase} #{time.to_year}"
+          end
+        end
       end
 
       def end_date_display
-        date_time = Playbook::PbKit::PbDateTime.new(end_date)
-        content_tag(:time, datetime: date_time.to_iso) do
-          "#{date_time.to_day} #{date_time.to_month_downcase} #{date_time.to_year}"
-        end
+        time_display(Playbook::PbKit::PbDateTime.new(end_date))
       end
 
       def start_date_display
-        date_time = Playbook::PbKit::PbDateTime.new(start_date)
-        content_tag(:time, datetime: date_time.to_iso) do
-          "#{date_time.to_day} #{date_time.to_month_downcase} #{date_time.to_year}"
-        end
+        time_display(Playbook::PbKit::PbDateTime.new(start_date))
       end
     end
   end
