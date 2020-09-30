@@ -8,6 +8,7 @@ import { Icon, TextInput } from '../'
 import datePickerHelper from './date_picker_helper.js'
 
 type DatePickerProps = {
+  allowInput?: Boolean,
   aria?: object,
   className?: String,
   dark?: Boolean,
@@ -29,14 +30,15 @@ type DatePickerProps = {
   minDate: String,
   mode?: String,
   name: String,
+  onChange: (String) => void,
   pickerId?: String,
   placeholder?: String,
-  readOnly?: Boolean,
   type?: String,
   yearRange?: Array,
 }
 const DatePicker = (props: DatePickerProps) => {
   const {
+    allowInput = false,
     aria = {},
     className,
     dark = false,
@@ -58,9 +60,9 @@ const DatePicker = (props: DatePickerProps) => {
     minDate,
     mode = 'single',
     name,
+    onChange = () => {},
     pickerId,
     placeholder,
-    readOnly = false,
     type,
     yearRange = [ 1900, 2100 ],
   } = props
@@ -69,13 +71,14 @@ const DatePicker = (props: DatePickerProps) => {
   const dataProps = buildDataProps(data)
   const classes = classnames(
     buildCss('pb_date_picker_kit'),
-    className,
     globalProps(props),
     error ? 'error' : null,
+    className
   )
 
   useEffect(() => {
     datePickerHelper({
+      allowInput: allowInput,
       defaultDate: defaultDate,
       disableDate: disableDate,
       disableRange: disableRange,
@@ -85,8 +88,8 @@ const DatePicker = (props: DatePickerProps) => {
       maxDate: maxDate,
       minDate: minDate,
       mode: mode,
+      onChange: onChange,
       pickerId: pickerId,
-      readOnly: readOnly,
       yearRange: yearRange,
     })
   }, [])

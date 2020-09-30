@@ -21,6 +21,7 @@ module Playbook
     initializer "playbook_ui.add_view_paths", after: :add_view_paths do |_app|
       ActiveSupport.on_load(:action_controller) do
         append_view_path "#{Gem.loaded_specs['playbook_ui'].full_gem_path}/app/pb_kits/playbook"
+        append_view_path "#{Gem.loaded_specs['playbook_ui'].full_gem_path}/app/pb_kits/playbook/config"
       end
     end
 

@@ -8,6 +8,7 @@ RSpec.describe Playbook::PbDate::Date do
   it { is_expected.to define_partial }
 
   it { is_expected.to define_prop(:date) }
+  it { is_expected.to define_prop(:timezone) }
   it do
     is_expected.to define_enum_prop(:size)
                    .with_default("sm")
@@ -38,6 +39,31 @@ RSpec.describe Playbook::PbDate::Date do
         date: Date.new(2019, 10, 19),
         size: "lg"
       ).lg_date).to include "OCT 19"
+    end
+  end
+
+  describe "#timezones" do
+    it "displays the date respecting EST timezone" do
+      expect(subject.new(
+        date: DateTime.new(2019, 10, 19),
+        size: "lg",
+      ).lg_date).to include "OCT 18"
+    end
+
+    it "displays the date respecting Syndey Australia TZ" do
+      expect(subject.new(
+        date: DateTime.new(2019, 10, 19),
+        size: "lg",
+        timezone: "Australia/Sydney"
+      ).lg_date).to include "OCT 19"
+    end
+
+    it "displays the date respecting Syndey Australia TZ with Time" do
+      expect(subject.new(
+        date: DateTime.new(2019, 10, 19, 14, 4, 4),
+        size: "lg",
+        timezone: "Australia/Sydney"
+      ).lg_date).to include "OCT 20"
     end
   end
 

@@ -2,32 +2,38 @@
     id: object.id,
     data: object.data,
     class: object.classname) do %>
-  <% if object.size == "lg" %>
-    <%= pb_rails("title", props: { tag: "span", text: object.format_time_string, size: 3 }) %>
-    <%= content_tag(:span) do %>
+    <%
+      # convert deprecated prop values
+      size = object.size
+      size = "sm" if object.size == "xs"
+      size = "md" if object.size == "lg"
+    %>
+  <% if size == "md" %>
+    <% if object.show_icon %>
+      <%= pb_rails("body", props: { color: "light", tag: "span"}) do %>
+        <%= pb_rails("icon", props: { icon: "clock", fixed_width: true, size: "lg" }) %>
+      <% end %>
+    <% end %>
+    <%= pb_rails("caption", props: { tag: "span", text: object.format_time_string, size: "lg" }) %>
+    <% if object.show_timezone %>
       <%= content_tag(:span, class: "pb_time_timezone") do %>
         <%= object.pb_date_time.to_timezone.upcase %>
       <% end %>
     <% end %>
-  <% elsif object.size == "sm" %>
-    <%= pb_rails("body", props: { tag: "span", text: object.format_time_string }) do %>
-      <%= pb_rails("icon", props: { icon: "clock", fixed_width: true }) %>
-      <%= content_tag(:time, datetime: object.pb_date_time.to_iso) do %>
-        <%= content_tag(:span) do %>
-          <%= object.format_time_string %>
-          <%= content_tag(:span, class: "pb_time_timezone") do %>
-            <%= object.pb_date_time.to_timezone.upcase %>
-          <% end %>
-        <% end %>
+  <% else %>
+    <% if object.show_icon %>
+      <%= pb_rails("body", props: { color: "light", tag: "span"}) do %>
+        <%= pb_rails("icon", props: { icon: "clock", fixed_width: true }) %>
       <% end %>
     <% end %>
-  <% else %>
-    <%= pb_rails("body", props: { tag: "span", text: object.format_time_string }) do %>
+    <%= pb_rails("body", props: { color: "light", tag: "span", text: object.format_time_string }) do %>
       <%= content_tag(:time, datetime: object.pb_date_time.to_iso) do %>
         <%= content_tag(:span) do %>
           <%= object.format_time_string %>
-          <%= content_tag(:span, class: "pb_time_timezone") do %>
-            <%= object.pb_date_time.to_timezone.upcase %>
+          <% if object.show_timezone %>
+            <%= content_tag(:span, class: "pb_time_timezone") do %>
+              <%= object.pb_date_time.to_timezone.upcase %>
+            <% end %>
           <% end %>
         <% end %>
       <% end %>

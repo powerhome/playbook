@@ -23,9 +23,9 @@ type FixedConfirmationToastProps = {
 const FixedConfirmationToast = (props: FixedConfirmationToastProps) => {
   const { className, status = 'neutral', text } = props
   const css = classnames(
-    className,
     `pb_fixed_confirmation_toast_kit_${status}`,
-    globalProps(props)
+    globalProps(props),
+    className
   )
   const icon = iconMap[status]
 

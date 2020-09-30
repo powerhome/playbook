@@ -13,42 +13,40 @@ const TimeTimeZone = () => {
     <div>
       <h4>{'East Coast'}</h4>
       <Time
-          date={new Date().toLocaleString('en-US', { timeZone: zones.east })}
-          size="lg"
+          date={new Date()}
+          size="md"
           timeZone={zones.east}
       />
+
       <br />
-      <br />
+
       <h4>{'Central'}</h4>
       <Time
-          date={new Date().toLocaleString('en-US', { timeZone: zones.central })}
-          size="sm"
+          date={new Date()}
           timeZone={zones.central}
       />
+
       <br />
-      <br />
+
       <h4>{'Mountain'}</h4>
       <Time
-          date={new Date().toLocaleString('en-US', { timeZone: zones.mountain })}
-          size="sm"
+          date={new Date()}
           timeZone={zones.mountain}
       />
 
       <br />
-      <br />
+
       <h4>{'West Coast'}</h4>
       <Time
-          date={new Date().toLocaleString('en-US', { timeZone: zones.west })}
-          size="sm"
+          date={new Date()}
           timeZone={zones.west}
       />
 
       <br />
-      <br />
+
       <h4>{'Tokyo, Japan'}</h4>
       <Time
-          date={new Date('2012-08-02T09:49:29Z').toLocaleString('en-US', { timeZone: zones.asia })}
-          size="sm"
+          date={new Date()}
           timeZone={zones.asia}
       />
 

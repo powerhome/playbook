@@ -1,9 +1,211 @@
 # Changelog
 
+## [6.8.1](https://github.com/powerhome/playbook/tree/6.8.1) (2020-09-28)
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/6.8.0...6.8.1)
+
+**Implemented enhancements:**
+
+- \[NUXE-144\] Added user value handling to checkbox form helper [\#1107](https://github.com/powerhome/playbook/pull/1107) ([bh247484](https://github.com/bh247484))
+
+
+## [6.8.0](https://github.com/powerhome/playbook/tree/6.8.0) (2020-09-18)
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/6.7.0...6.8.0)
+
+**Implemented enhancements:**
+
+- React Circle Chart [\#1106](https://github.com/powerhome/playbook/pull/1106) ([jasperfurniss](https://github.com/jasperfurniss))
+- \[CMPN-17\] Add input options to Radio Kit [\#1099](https://github.com/powerhome/playbook/pull/1099) ([ljtinney](https://github.com/ljtinney))
+- \[NUXE-66\] - Added Date Picker React onChange Prop [\#1096](https://github.com/powerhome/playbook/pull/1096) ([bh247484](https://github.com/bh247484))
+- Make it [\#1088](https://github.com/powerhome/playbook/pull/1088) ([thestephenmarshall](https://github.com/thestephenmarshall))
+- \[CMPN-16\] Allow all HTML options on input in PbCheckbox Rails kit [\#1087](https://github.com/powerhome/playbook/pull/1087) ([stephenmckeon](https://github.com/stephenmckeon))
+- Updated Styling for Toggle [\#1064](https://github.com/powerhome/playbook/pull/1064) ([jasoncypret](https://github.com/jasoncypret))
+
+**Fixed bugs:**
+
+- Fix for incorrect order of classNames fixes \#1058 [\#1094](https://github.com/powerhome/playbook/pull/1094) ([jasoncypret](https://github.com/jasoncypret))
+- Display numeric zero in StatsValue Kit [\#1092](https://github.com/powerhome/playbook/pull/1092) ([casadei](https://github.com/casadei))
+
+# Changelog
+
+## [6.7.0](2020-9-16)
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/6.6.1...HEAD)
+
+**Implemented enhancements:**
+
+- Dark Mode Toggle [\#1051](https://github.com/powerhome/playbook/pull/1051) ([kre8sions](https://github.com/kre8sions))
+
+# Changelog
+
+## [6.6.1](2020-9-16)
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/6.6.0...HEAD)
+
+**Merged pull requests:**
+
+- Swap timezone to be default [\#1095](https://github.com/powerhome/playbook/pull/1095) ([coleerikson](https://github.com/coleerikson))
+
+## [6.6.0](2020-9-11)
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/6.5.2...HEAD)
+
+**Breaking changes:**
+
+- Update timezone props and example [\#1081](https://github.com/powerhome/playbook/pull/1081) ([jasoncypret](https://github.com/jasoncypret))
+- Add timezone prop to date, expand docs [\#1080](https://github.com/powerhome/playbook/pull/1080) ([jasoncypret](https://github.com/jasoncypret))
+
+**Implemented enhancements:**
+
+- \[NUX-639\] - Time Kit Redesign / Update [\#1084](https://github.com/powerhome/playbook/pull/1084) ([coleerikson](https://github.com/coleerikson))
+- Renovate/npm highcharts vulnerability [\#1082](https://github.com/powerhome/playbook/pull/1082) ([jasoncypret](https://github.com/jasoncypret))
+- Bump lazysizes from 4.1.8 to 5.2.1 [\#1065](https://github.com/powerhome/playbook/pull/1065) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Typeahead w/ Pills \(React\) [\#1054](https://github.com/powerhome/playbook/pull/1054) ([thestephenmarshall](https://github.com/thestephenmarshall))
+
+**Merged pull requests:**
+
+- removed global popover visibility styling \(\#1083\) [\#1085](https://github.com/powerhome/playbook/pull/1085) ([jasoncypret](https://github.com/jasoncypret))
+
+# Changelog
+
 All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+
+## [6.5.1] (2020-9-10)
+
+**Fixed bugs:**
+
+- Date Picker - remove add direct input [\#1086](https://github.com/powerhome/playbook/pull/1086) ([bh247484](https://github.com/bh247484))
+
+## [6.5.1] (2020-9-9)
+
+**Fixed bugs:**
+
+- removed global popover visibility styling [\#1083](https://github.com/powerhome/playbook/pull/1083) ([bh247484](https://github.com/bh247484))
+
+
+## [6.5.0] (2020-9-8)
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/7.0.1-alpha2...HEAD)
+
+**Implemented enhancements:**
+
+- Date-Picker Kit [\#975](https://github.com/powerhome/playbook/pull/975) ([bh247484](https://github.com/bh247484))
+- Button & Circle Icon Button Cleanup [\#1074](https://github.com/powerhome/playbook/pull/1074) ([jasoncypret](https://github.com/jasoncypret))
+- Update dependency flow-bin to v0.133.0 [\#1072](https://github.com/powerhome/playbook/pull/1072) ([jasoncypret](https://github.com/jasoncypret))
+- Decrease prs resource allocation [\#1049](https://github.com/powerhome/playbook/pull/1049) ([iblackman](https://github.com/iblackman))
+
+## [6.4.2] (2020-9-3)
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/7.0.1-alpha1...HEAD)
+
+**Implemented enhancements:**
+
+- Button & Circle Icon Button Cleanup [\#1043](https://github.com/powerhome/playbook/pull/1043) ([megantrimble](https://github.com/megantrimble))
+
+**Merged pull requests:**
+
+- Revert "Revert "Decrease prs resource allocation"" [\#1067](https://github.com/powerhome/playbook/pull/1067) ([indiebrain](https://github.com/indiebrain))
+- Revert "Decrease prs resource allocation" [\#1060](https://github.com/powerhome/playbook/pull/1060) ([indiebrain](https://github.com/indiebrain))
+- Decrease prs resource allocation [\#1049](https://github.com/powerhome/playbook/pull/1049) ([iblackman](https://github.com/iblackman))
+
+## [6.4.0] (2020-8-28)
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/6.3.1...HEAD)
+
+**Implemented enhancements:**
+
+- \[NUX-1351\] - Update react timezone implementation and examples [\#1042](https://github.com/powerhome/playbook/pull/1042) ([coleerikson](https://github.com/bh247484))
+- \[NUX-638\] - Updated Date Kit with new styles and props [\#1036](https://github.com/powerhome/playbook/pull/1036) ([coleerikson](https://github.com/coleerikson))
+- Link variant for Title 4 and Caption xs [\#1014](https://github.com/powerhome/playbook/pull/1014) ([christinaatai](https://github.com/christinaatai))
+
+**Fixed bugs:**
+
+- Disable hovers for mobile [\#1044](https://github.com/powerhome/playbook/pull/1044) ([jasoncypret](https://github.com/jasoncypret))
+- \[NUX-1347\] - Reduce input css specificity [\#1038](https://github.com/powerhome/playbook/pull/1038) ([coleerikson](https://github.com/coleerikson))
+- \[NUX-1370\] - Date Kit Timezone Props [\#1034](https://github.com/powerhome/playbook/pull/1034) ([coleerikson](https://github.com/coleerikson))
+
+**Merged pull requests:**
+
+- Update dependency highcharts to v7.2.2 \[SECURITY\] [\#1028](https://github.com/powerhome/playbook/pull/1028) ([renovate[bot]](https://github.com/apps/renovate))
+- Update dependency lint-staged to v10.2.13 [\#1024](https://github.com/powerhome/playbook/pull/1024) ([renovate[bot]](https://github.com/apps/renovate))
+- Update dependency flow-bin to v0.132.0 [\#1013](https://github.com/powerhome/playbook/pull/1013) ([renovate[bot]](https://github.com/apps/renovate))
+
+## [6.3.1](https://github.com/powerhome/playbook/tree/6.3.1) (2020-08-27)
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/6.3.0...6.3.1)
+
+**Merged pull requests:**
+
+- V6.3.1 [\#1045](https://github.com/powerhome/playbook/pull/1045) ([jasperfurniss](https://github.com/jasperfurniss))
+
+## [6.3.0](https://github.com/powerhome/playbook/tree/6.3.0) (2020-08-24)
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/6.2.1...6.3.0)
+
+**Implemented enhancements:**
+
+- Fix caption dark [\#1015](https://github.com/powerhome/playbook/pull/1015) ([kre8sions](https://github.com/kre8sions))
+- Grouping Badge, Hashtag, and Pill kits [\#1011](https://github.com/powerhome/playbook/pull/1011) ([christinaatai](https://github.com/christinaatai))
+- Online status [\#1010](https://github.com/powerhome/playbook/pull/1010) ([jasperfurniss](https://github.com/jasperfurniss))
+- Refactor Progress Step & added Tracker variant [\#1007](https://github.com/powerhome/playbook/pull/1007) ([kre8sions](https://github.com/kre8sions))
+- Add spacing docs [\#1005](https://github.com/powerhome/playbook/pull/1005) ([jasperfurniss](https://github.com/jasperfurniss))
+- Create popover dark mode [\#993](https://github.com/powerhome/playbook/pull/993) ([kellyeryan](https://github.com/kellyeryan))
+- Create Pill dark mode [\#992](https://github.com/powerhome/playbook/pull/992) ([kellyeryan](https://github.com/kellyeryan))
+- Create online status dark mode [\#991](https://github.com/powerhome/playbook/pull/991) ([kellyeryan](https://github.com/kellyeryan))
+- Add props to Nav [\#989](https://github.com/powerhome/playbook/pull/989) ([kellyeryan](https://github.com/kellyeryan))
+- Multiple users stacked dark mode [\#988](https://github.com/powerhome/playbook/pull/988) ([kellyeryan](https://github.com/kellyeryan))
+- Add dark mode to Multiple Users [\#987](https://github.com/powerhome/playbook/pull/987) ([kellyeryan](https://github.com/kellyeryan))
+- Table dark mode [\#986](https://github.com/powerhome/playbook/pull/986) ([kellyeryan](https://github.com/kellyeryan))
+- Update Weekday Stacked dark mode and add props [\#985](https://github.com/powerhome/playbook/pull/985) ([kellyeryan](https://github.com/kellyeryan))
+- Add User Badge dark mode [\#984](https://github.com/powerhome/playbook/pull/984) ([kellyeryan](https://github.com/kellyeryan))
+- Progress Pill kit dark mode update [\#982](https://github.com/powerhome/playbook/pull/982) ([kellyeryan](https://github.com/kellyeryan))
+- Add dark mode to Fixed Confirmation Toast [\#981](https://github.com/powerhome/playbook/pull/981) ([kellyeryan](https://github.com/kellyeryan))
+- Add dark mode to Avatar Action Button kit [\#980](https://github.com/powerhome/playbook/pull/980) ([kellyeryan](https://github.com/kellyeryan))
+- Add dark mode to Icon Value [\#974](https://github.com/powerhome/playbook/pull/974) ([kellyeryan](https://github.com/kellyeryan))
+- Add Dark Mode to the Icon Circle [\#973](https://github.com/powerhome/playbook/pull/973) ([kellyeryan](https://github.com/kellyeryan))
+- Create dark mode for Title Count [\#971](https://github.com/powerhome/playbook/pull/971) ([kellyeryan](https://github.com/kellyeryan))
+- Legend kit dark mode [\#970](https://github.com/powerhome/playbook/pull/970) ([kellyeryan](https://github.com/kellyeryan))
+- Update label value dark mode [\#968](https://github.com/powerhome/playbook/pull/968) ([kellyeryan](https://github.com/kellyeryan))
+- Update dark mode for Hashtag kit [\#967](https://github.com/powerhome/playbook/pull/967) ([kellyeryan](https://github.com/kellyeryan))
+- Update dark mode in User kit [\#965](https://github.com/powerhome/playbook/pull/965) ([kellyeryan](https://github.com/kellyeryan))
+- Radio dark mode [\#962](https://github.com/powerhome/playbook/pull/962) ([kellyeryan](https://github.com/kellyeryan))
+- Update select dark mode [\#961](https://github.com/powerhome/playbook/pull/961) ([kellyeryan](https://github.com/kellyeryan))
+- Add checkbox to form helper [\#953](https://github.com/powerhome/playbook/pull/953) ([bh247484](https://github.com/bh247484))
+
+**Fixed bugs:**
+
+- Fix tooltip bug [\#978](https://github.com/powerhome/playbook/pull/978) ([kellyeryan](https://github.com/kellyeryan))
+
+## [6.2.1](https://github.com/powerhome/playbook/tree/6.2.1) (2020-08-19)
+
+- Hot fixes [\#1016](https://github.com/powerhome/playbook/pull/1016) ([jasperfurniss](https://github.com/jasperfurniss))
+
+
+## [[v6.2.0] 2020-8-13](https://github.com/powerhome/playbook/tree/HEAD)
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/6.1.0...HEAD)
+
+**Implemented enhancements:**
+
+- Remove Changelog Checklist [\#990](https://github.com/powerhome/playbook/pull/990) ([jasperfurniss](https://github.com/jasperfurniss))
+- Update card header kit so that it passes product colors [\#983](https://github.com/powerhome/playbook/pull/983) ([christinaatai](https://github.com/christinaatai))
+- NUX-1286 - Update dark props for Textarea kit [\#966](https://github.com/powerhome/playbook/pull/966) ([coleerikson](https://github.com/coleerikson))
+- NUX-1286 - Refactor dark props for text input [\#964](https://github.com/powerhome/playbook/pull/964) ([coleerikson](https://github.com/coleerikson))
+- NUX-1286 - Global Props for Dark on typeahead [\#963](https://github.com/powerhome/playbook/pull/963) ([coleerikson](https://github.com/coleerikson))
+- Automated changelog [\#959](https://github.com/powerhome/playbook/pull/959) ([jasperfurniss](https://github.com/jasperfurniss))
+- Update progress step [\#954](https://github.com/powerhome/playbook/pull/954) ([evalouderback](https://github.com/evalouderback))
+
+**Fixed bugs:**
+
+- Update flow types to use literal vs class wrapper [\#969](https://github.com/powerhome/playbook/pull/969) ([thestephenmarshall](https://github.com/thestephenmarshall))
+
+**Merged pull requests:**
+
+- ~~Add Title Detail Dark Mode [\#972](https://github.com/powerhome/playbook/pull/972) ([kellyeryan](https://github.com/kellyeryan))~~ (reverted)
 
 
 ## [v6.1.0] 2020-8-6
@@ -671,3 +873,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Removed (breaking changes)
 - React PbLayout prop `children` dropped support for single Node (https://github.com/powerhome/playbook/commit/b16da50914e110c75c6d96c985fa02781c9e2040#diff-c3ce2c91288ca3e730d3c56e7f73475cL11-L14)
 - Rails PbLayout prop `dark` dropped (https://github.com/powerhome/playbook/commit/b16da50914e110c75c6d96c985fa02781c9e2040#diff-377fda563d148f7b3ad33f904b7b0cdbL13)
+
+\* *This Changelog was automatically generated by [github_changelog_generator](https://github.com/github-changelog-generator/github-changelog-generator)*
+
+
+\* *This Changelog was automatically generated by [github_changelog_generator](https://github.com/github-changelog-generator/github-changelog-generator)*
+
+
+\* *This Changelog was automatically generated by [github_changelog_generator](https://github.com/github-changelog-generator/github-changelog-generator)*

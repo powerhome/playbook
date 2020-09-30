@@ -43,7 +43,11 @@ const PersonContact = (props: PersonContactProps) => {
 
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
-  const classes = classnames(buildCss('pb_person_contact_kit'), className, globalProps(props))
+  const classes = classnames(
+    buildCss('pb_person_contact_kit'),
+    globalProps(props),
+    className
+  )
 
   const wrongContacts = () => (
     contacts.filter((contactObject) => (
@@ -73,22 +77,23 @@ const PersonContact = (props: PersonContactProps) => {
             contactDetail={contactObject.contactDetail}
             contactType={contactObject.contactType}
             contactValue={contactObject.contactValue}
-            key={index}
+            key={`valid-contact-${index}`}
         />
-            ))}
+      ))}
       {wrongContacts().map((contactObject, index) => (
-        <>
+        <div key={`wrong-contact-caption-wrapper-${index}`}>
           <Caption
               className="wrong_numbers"
+              key={`wrong-contact-caption-${index}`}
               text="wrong number"
           />
           <Contact
               contactType={contactObject.contactType}
               contactValue={contactObject.contactValue}
-              key={index}
+              key={`wrong-contact-${index}`}
           />
-        </>
-          ))}
+        </div>
+      ))}
     </div>
   )
 }

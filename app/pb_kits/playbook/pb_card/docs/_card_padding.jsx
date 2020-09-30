@@ -1,20 +1,50 @@
 import React from 'react'
 import { Card } from '../../'
 
-const CardPadding = () => {
+const CardPadding = (props) => {
   return (
     <div>
-      <Card padding="none">{'Card content'}</Card>
+      <Card
+          {...props}
+          padding="none"
+      >
+        {'Card content'}
+      </Card>
       <br />
-      <Card padding="xs">{'Card content'}</Card>
+      <Card
+          {...props}
+          padding="xs"
+      >
+        {'Card content'}
+      </Card>
       <br />
-      <Card padding="sm">{'Card content'}</Card>
+      <Card
+          {...props}
+          padding="sm"
+      >
+        {'Card content'}
+      </Card>
       <br />
-      <Card padding="md">{'Card content'}</Card>
+      <Card
+          {...props}
+          padding="md"
+      >
+        {'Card content'}
+      </Card>
       <br />
-      <Card padding="lg">{'Card content'}</Card>
+      <Card
+          {...props}
+          padding="lg"
+      >
+        {'Card content'}
+      </Card>
       <br />
-      <Card padding="xl">{'Card content'}</Card>
+      <Card
+          {...props}
+          padding="xl"
+      >
+        {'Card content'}
+      </Card>
       <br />
     </div>
   )

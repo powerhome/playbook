@@ -40,12 +40,12 @@ const HomeAddressStreet = (props: HomeAddressStreetProps) => {
 
   const classes = (className, dark) =>
     classnames(
-      className,
       {
         'pb_home_address_street': !dark,
         'pb_home_address_street_dark': dark,
       },
-      globalProps(props)
+      globalProps(props),
+      className
     )
   return (
     <div className={classes(className, dark)}>

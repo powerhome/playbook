@@ -33,7 +33,7 @@ const mapColors = (array) => {
 
 // Adjust Circle Chart Block Kit Dimensions to Match the Chart for Centering
 const alignBlockElement = (event) => {
-  const itemToMove = document.querySelector(`#wrapper-circle-chart-${event.target.renderTo.id} .pb_circle_chart_block`)
+  const itemToMove = document.querySelector(`#wrapper-circle-chart-${event.target.renderTo.id} .pb-circle-chart-block`)
   const chartContainer = document.querySelector(`#${event.target.renderTo.id}`)
   if (itemToMove !== null) {
     itemToMove.style.height = `${event.target.chartHeight}px`

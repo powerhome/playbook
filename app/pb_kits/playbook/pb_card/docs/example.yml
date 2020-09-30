@@ -1,7 +1,6 @@
 examples:
   rails:
   - card_light: Default
-  - card_dark: Dark Cards
   - card_highlight: Highlight Cards
   - card_header: Header Cards
   - card_selected: Selected
@@ -12,7 +11,6 @@ examples:
   - card_border_none: No Border
   react:
   - card_light: Default
-  - card_dark: Dark Cards
   - card_highlight: Highlight Cards
   - card_header: Header Cards
   - card_selected: Selected

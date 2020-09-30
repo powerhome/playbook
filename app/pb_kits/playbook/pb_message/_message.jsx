@@ -39,7 +39,11 @@ const Message = (props: MessageProps) => {
     ? 'pb_message_kit_avatar'
     : 'pb_message_kit'
 
-  const classes = classnames(buildCss(baseClassName), className, globalProps(props))
+  const classes = classnames(
+    buildCss(baseClassName),
+    globalProps(props),
+    className
+  )
 
   return (
     <div

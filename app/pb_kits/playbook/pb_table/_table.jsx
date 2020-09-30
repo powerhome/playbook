@@ -44,7 +44,6 @@ const Table = (props: TableProps) => {
         {...ariaProps}
         {...dataProps}
         className={classnames(
-        className,
         'pb_table',
         `table-${size}`,
         `table-responsive-${responsive}`,
@@ -55,7 +54,8 @@ const Table = (props: TableProps) => {
           'single-line': singleLine,
           'no-hover': disableHover,
         },
-        globalProps(props)
+        globalProps(props),
+        className
       )}
         id={id}
     >

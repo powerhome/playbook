@@ -1,0 +1,38 @@
+<h4>East Coast</h4>
+<%= pb_rails("time", props: {
+  time: Time.now,
+  timezone: "America/New_York"
+}) %>
+
+<br>
+
+<h4>Central</h4>
+<%= pb_rails("time", props: {
+  time: Time.now,
+  timezone: "America/Chicago"
+}) %>
+
+<br>
+
+<h4>Mountain</h4>
+<%= pb_rails("time", props: {
+  time: Time.now,
+  timezone: "America/Denver"
+}) %>
+
+<br>
+
+<h4>West Coast</h4>
+<%= pb_rails("time", props: {
+  show_timezone: true,
+  time: Time.now,
+  timezone: "America/Los_Angeles"
+}) %>
+
+<br>
+
+<h4>Toyko, Japan</h4>
+<%= pb_rails("time", props: {
+  time: Time.now,
+  timezone: "Asia/Tokyo",
+}) %>

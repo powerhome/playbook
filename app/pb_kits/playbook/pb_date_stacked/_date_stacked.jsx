@@ -33,12 +33,12 @@ const DateStacked = (props: DateStackedProps) => {
     size = 'sm',
   } = props
   const classes = classnames(
-    className,
     buildCss('pb_date_stacked_kit', align, size, {
       dark: dark,
       reverse: reverse,
     }),
-    globalProps(props)
+    globalProps(props),
+    className
   )
 
   const currentYear = new Date().getFullYear().toString()
