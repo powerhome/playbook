@@ -20,13 +20,15 @@ const ProgressStepItem = ({
 
   return (
     <li className={classnames(progressStepItem, className)}>
-      <div className="circle">
-        <Icon
-            icon="check"
-        />
-      </div>
-      <div>
-        {children}
+      <div className="box">
+        <div className="circle">
+          <Icon
+              icon="check"
+          />
+        </div>
+        <div className="content">
+          {children}
+        </div>
       </div>
     </li>
   )
