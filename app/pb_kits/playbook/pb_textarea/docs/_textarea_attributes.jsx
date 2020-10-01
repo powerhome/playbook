@@ -15,7 +15,7 @@ const TextareaAttributes = () => {
           label="Min & Max Character Length"
           maxLength={10}
           minLength={5}
-          value="This has a minlength of 5 and a maxlength of 10 characters."
+          placeholder="This has a minlength of 5 and a maxlength of 10 characters."
       />
 
       <br />
@@ -23,9 +23,8 @@ const TextareaAttributes = () => {
       <Textarea
           label="Required"
           name="required"
-          placeholder="Placeholder text"
+          placeholder="This textarea is required."
           required
-          value="This textarea is required."
       />
 
     </div>
