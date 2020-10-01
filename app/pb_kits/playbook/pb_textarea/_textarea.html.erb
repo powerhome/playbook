@@ -15,10 +15,14 @@
         :object,
         :method,
         :class => "#{object.classname}",
+        :disabled => object.disabled,
         :name => object.name,
+        :minlength => object.minlength,
+        :maxlength => object.maxlength,
+        :required => object.required,
         :placeholder => object.placeholder,
         :rows => object.rows,
-        :value => object.value )%>
+        :value => object.value) %>
     <% if object.error %>
       <%= pb_rails("body", props: {dark: object.dark, status: "negative", text: object.error}) %>
     <% end %>

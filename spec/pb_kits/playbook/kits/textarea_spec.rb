@@ -15,6 +15,14 @@ RSpec.describe Playbook::PbTextarea::Textarea do
   it { is_expected.to define_string_prop(:value) }
   it { is_expected.to define_boolean_prop(:dark)
                       .with_default(false) }
+  it { is_expected.to define_boolean_prop(:required)
+                      .with_default(false) }
+  it { is_expected.to define_boolean_prop(:disabled)
+                      .with_default(false) }
+  it { is_expected.to define_prop(:minlength)
+                      .of_type(Playbook::Props::Number) }
+  it { is_expected.to define_prop(:maxlength)
+                      .of_type(Playbook::Props::Number) }
   it { is_expected.to define_prop(:rows)
                       .of_type(Playbook::Props::Number)
                       .with_default(4) }

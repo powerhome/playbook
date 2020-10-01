@@ -7,17 +7,23 @@ module Playbook
 
       partial "pb_textarea/textarea"
 
+      prop :disabled, type: Playbook::Props::Boolean,
+                      default: false
       prop :error
       prop :object
       prop :label
       prop :method
+      prop :minlength, type: Playbook::Props::Number
+      prop :maxlength, type: Playbook::Props::Number
       prop :name
       prop :placeholder
+      prop :required, type: Playbook::Props::Boolean,
+                      default: false
       prop :resize, type: Playbook::Props::Enum,
-            values: %w[none both horizontal vertical],
-            default: "none"
+                    values: %w[none both horizontal vertical],
+                    default: "none"
       prop :rows, type: Playbook::Props::Number,
-            default: 4
+                  default: 4
       prop :value
 
       def classname
@@ -33,7 +39,6 @@ module Playbook
       def resize_class
         " resize_#{resize}"
       end
-
     end
   end
 end

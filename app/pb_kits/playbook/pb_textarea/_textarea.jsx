@@ -7,22 +7,24 @@ import type { InputCallback } from '../types.js'
 import { globalProps } from '../utilities/globalProps.js'
 
 type TextareaProps = {
-  className?: string,
   children?: array<React.ReactChild>,
+  className?: string,
   data?: string,
   disabled?: boolean,
   error?: string,
   id?: string,
-  object?: string,
-  method?: string,
   label?: string,
-  placeholder?: string,
-  value?: string,
+  method?: string,
+  minLength?: number,
+  maxLength?: number,
   name?: string,
-  required?: boolean,
-  rows?: number,
-  resize: 'none' | 'both' | 'horizontal' | 'vertical',
+  object?: string,
   onChange?: InputCallback<HTMLTextAreaElement>,
+  placeholder?: string,
+  required?: boolean,
+  resize: 'none' | 'both' | 'horizontal' | 'vertical',
+  rows?: number,
+  value?: string,
 }
 
 const Textarea = ({
@@ -32,6 +34,8 @@ const Textarea = ({
   resize = 'none',
   error,
   label,
+  minLength,
+  maxLength,
   name,
   onChange = () => {},
   placeholder,
@@ -56,6 +60,8 @@ const Textarea = ({
             {...props}
             className="pb_textarea_kit"
             disabled={disabled}
+            maxLength={maxLength}
+            minLength={minLength}
             name={name}
             onChange={onChange}
             placeholder={placeholder}

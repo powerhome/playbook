@@ -1,0 +1,30 @@
+<%= pb_rails("textarea",
+    props: {
+        disabled: true,
+        label: "Disabled",
+        name: "disabled",
+    }
+) %>
+
+<br>
+
+<%= pb_rails("textarea",
+    props: {
+        label: "Min & Max Character Length",
+        name: "minmax",
+        value: "This has a minlength of 5 and a maxlength of 10 characters.",
+        minlength: 5,
+        maxlength: 10
+    }
+) %>
+
+<br>
+
+<%= pb_rails("textarea",
+    props: {
+        label: "Required",
+        name: "required",
+        value: "This textarea is required.",
+        required: true
+    }
+) %>

@@ -5,12 +5,11 @@ examples:
   - textarea_custom: Custom Textarea Input
   - textarea_resize: Resize
   - textarea_error: Textarea w/ Error
-
-
-
+  - textarea_attributes: Textarea Attributes
 
   react:
   - textarea_default: Default
   - textarea_custom: Custom Textarea Input
   - textarea_resize: Resize
   - textarea_error: Textarea w/ Error
+  - textarea_attributes: Textarea Attributes
