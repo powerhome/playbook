@@ -11,12 +11,28 @@ module Playbook
 
           props[:name] = html_attribute_name
           props[:picker_id] = html_id
+          props[:label] = @template.label(@object_name, name) if props[:label] && !props[:label].is_a?(String)
 
-          # puts text_field_tag("test-name", value = nil, options = { id: html_id })
-          # puts text_field_tag(:name)
-          puts text_field(name)
+          input = text_field(
+            name,
+            props: {
+              aria: props[:input_aria],
+              autocomplete: false,
+              # dark: props[:dark],
+              data: props[:input_data],
+              disabled: props[:disable_input],
+              error: props[:error],
+              # id: object.picker_id,
+              label: props[:label],
+              placeholder: props[:placeholder],
+              required: props[:required],
+              type: props[:required],
+            }
+          )
+          puts input
 
           @template.pb_rails("date_picker", props: props) do
+            input
           end
         end
       end

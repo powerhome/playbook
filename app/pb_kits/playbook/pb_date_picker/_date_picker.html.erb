@@ -3,21 +3,26 @@
     class: object.classname + object.error_class,
     data: object.data,
     id: object.id) do %>
-      <div class="input_wrapper">
-        <%= pb_rails("text_input", props: {
-          aria: object.input_aria,
-          autocomplete: false,
-          dark: object.dark,
-          data: object.input_data,
-          disabled: object.disable_input,
-          error: object.error,
-          id: object.picker_id,
-          label: object.hide_label ? nil : object.label,
-          name: object.name,
-          placeholder: object.placeholder,
-          required: object.required,
-          type: object.type
-        }) %>
+      <% if object.children %>
+        <div class="input_wrapper">
+          <%= capture(&object.children) %>
+      <% else %>
+        <div class="input_wrapper">
+          <%= pb_rails("text_input", props: {
+            aria: object.input_aria,
+            autocomplete: false,
+            dark: object.dark,
+            data: object.input_data,
+            disabled: object.disable_input,
+            error: object.error,
+            id: object.picker_id,
+            label: object.hide_label ? nil : object.label,
+            name: object.name,
+            placeholder: object.placeholder,
+            required: object.required,
+            type: object.type
+          }) %>
+        <% end %>
         <% if !object.hide_icon %>
           <div
               class="<%= object.icon_wrapper_class %>"
