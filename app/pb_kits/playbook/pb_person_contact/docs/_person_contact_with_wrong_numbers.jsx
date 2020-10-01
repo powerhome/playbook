@@ -23,6 +23,7 @@ const PersonContactWithWrongNumbers = () => {
             },
           ]}
           firstName="Pauline"
+          key="person-contact-1"
           lastName="Smith"
       />
     </>

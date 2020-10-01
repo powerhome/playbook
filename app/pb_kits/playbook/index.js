@@ -1,3 +1,7 @@
+import './_playbook.scss'
+import 'lazysizes/plugins/attrchange/ls.attrchange'
+import 'lazysizes'
+
 // React Component JSX Imports from the React Kits
 export Avatar from './pb_avatar/_avatar.jsx'
 export AvatarActionButton from './pb_avatar_action_button/_avatar_action_button.jsx'
@@ -9,6 +13,7 @@ export ButtonToolbar from './pb_button_toolbar/_button_toolbar.jsx'
 export Caption from './pb_caption/_caption.jsx'
 export Card from './pb_card/_card.jsx'
 export Checkbox from './pb_checkbox/_checkbox.jsx'
+export CircleChart from './pb_circle_chart/_circle_chart.jsx'
 export CircleIconButton from './pb_circle_icon_button/_circle_icon_button.jsx'
 export Contact from './pb_contact/_contact.jsx'
 export Currency from './pb_currency/_currency.jsx'

@@ -74,7 +74,7 @@ class KitGenerator < Rails::Generators::NamedBase
         template "kit_js.erb", "#{full_kit_directory}/docs/index.js"
 
         # Import kit examples  ===========================
-        append_to_file("app/pb_kits/playbook/packs/examples.js") do
+        append_to_file("app/pb_kits/playbook/packs/react-examples.js") do
           "import * as #{@kit_name_pascal} from 'pb_#{@kit_name_underscore}/docs'\nWebpackerReact.setup(#{@kit_name_pascal})\n"
         end
         append_to_file("app/pb_kits/playbook/index.js") do

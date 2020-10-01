@@ -101,7 +101,7 @@ const Gauge = (props: GaugeProps) => {
     <div
         {...ariaProps}
         {...dataProps}
-        className={classnames(css, className, globalProps(props))}
+        className={classnames(css, globalProps(props), className)}
         id={id}
     />
   )

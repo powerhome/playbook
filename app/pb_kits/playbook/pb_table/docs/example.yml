@@ -10,8 +10,7 @@ examples:
     - table_single_line: Force Single Line
     - table_data_table: Data Table
     - table_responsive_table: Responsive Tables
-    - table_dark: Table Dark
-    - table_container_dark: Table Container Off Dark
+ 
   react:
     - table_sm: Small
     - table_md: Medium
@@ -23,5 +22,3 @@ examples:
     - table_single_line: Force Single Line
     - table_data_table: Data Table
     - table_responsive_table: Responsive Tables
-    - table_dark: Table Dark
-    - table_container_dark: Table Container Off Dark

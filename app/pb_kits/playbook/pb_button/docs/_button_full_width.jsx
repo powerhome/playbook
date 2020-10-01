@@ -1,9 +1,10 @@
 import React from 'react'
 import { Button } from '../../'
 
-const ButtonFullWidth = () => (
+const ButtonFullWidth = (props) => (
   <div>
     <Button
+        {...props}
         fullWidth
         text="Button Full Width"
     />

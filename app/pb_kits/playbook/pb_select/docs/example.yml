@@ -8,9 +8,8 @@ examples:
   - select_required: Required Select Field
   - select_value_text_same: Equal option value and value text
   - select_custom_select: Custom Select
-  - select_dark: Dark Select
   - select_error: Select w/ Error
-  - select_dark_error: Select Dark w/ Error
+
 
 
   react:
@@ -21,6 +20,4 @@ examples:
   - select_required: Required Select Field
   - select_value_text_same: Equal option value and value text
   - select_custom_select: Custom Select
-  - select_dark: Dark Select
   - select_error: Select w/ Error
-  - select_dark_error: Select Dark w/ Error

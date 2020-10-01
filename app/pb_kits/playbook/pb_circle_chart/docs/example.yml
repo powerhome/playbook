@@ -10,4 +10,15 @@ examples:
   - circle_chart_with_title: Title
   - circle_chart_inner_sizes: Inner Circle Size Options  
 
+  react:
+  - circle_chart_default: Default Style
+  - circle_chart_live_data: Live Data
+  - circle_chart_rounded: Rounded Corners
+  - circle_chart_block: Accepts Any Block
+  - circle_chart_colors: Color Overrides
+  - circle_chart_with_labels: Data Labels
+  - circle_chart_with_legend_kit: Legend
+  - circle_chart_with_title: Title
+  - circle_chart_inner_sizes: Inner Circle Size Options  
+
 

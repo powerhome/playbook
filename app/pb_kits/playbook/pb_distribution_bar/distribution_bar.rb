@@ -22,6 +22,13 @@ module Playbook
           (width.to_f * 100 / widths.sum).round(2)
         end
       end
+
+      def chart_options
+        {
+          size: size,
+          widths: widths,
+        }
+      end
     end
   end
 end

@@ -18,7 +18,7 @@ const FlexItem = (props: FlexItemPropTypes) => {
 
   return (
     <div
-        className={classnames(buildCss('pb_flex_item_kit', growClass), className, globalProps(props))}
+        className={classnames(buildCss('pb_flex_item_kit', growClass), globalProps(props), className)}
         style={fixedStyle}
     >
       {children}

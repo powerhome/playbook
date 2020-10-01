@@ -2,7 +2,7 @@
 $font_family_base: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif;
 
 
-// CLEAN UP AND REMOVE
+/* CLEAN UP AND REMOVE */
 $font_jumbo:        36px;
 $font_largest:      32px;
 $font_larger:       28px;
@@ -29,7 +29,7 @@ $text_smaller:      $font_smaller;
 $text_smallest:     $font_smallest;
 
 
-// Headings
+/* Headings */
 $heading_1: 48px;
 $heading_2: 34px;
 $heading_3: $font_larger;
@@ -52,11 +52,11 @@ $lspace_super_loosest:    .2em;
 
 
 
-// Standard Font Weights
+/* Standard Font Weights */
 $bold:          600;
 $regular:       400;
 
-// Non_Standard Font Weights
+/* Non_Standard Font Weights */
 $extrabold:     900;
 $boldest:       800;
 $bolder:        700;

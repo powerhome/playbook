@@ -7,12 +7,13 @@ import { map } from 'lodash'
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
 import { globalProps } from '../utilities/globalProps.js'
 
-import { Image } from '../'
+import { Image, OnlineStatus } from '../'
 
 type AvatarProps = {
   aria?: object,
   className?: string,
   data?: object,
+  dark?: boolean,
   id?: string,
   imageUrl: string,
   name: string,
@@ -26,10 +27,14 @@ const firstTwoInitials = (name) =>
     .substring(0, 2)
 
 const Avatar = (props: AvatarProps) => {
-  const { aria = {}, className, data = {}, name = null, id = id, imageUrl, size = 'md', status = null } = props
+  const { aria = {}, className, data = {}, name = null, id = id, imageUrl, size = 'md', status = null, dark = false } = props
   const dataProps = buildDataProps(data)
   const ariaProps = buildAriaProps(aria)
-  const classes = classnames(buildCss('pb_avatar_kit', size), className, globalProps(props))
+  const classes = classnames(
+    buildCss('pb_avatar_kit', size),
+    globalProps(props),
+    className
+  )
 
   const initials = name && firstTwoInitials(name)
   dataProps['data-initials'] = initials
@@ -53,7 +58,11 @@ const Avatar = (props: AvatarProps) => {
         </If>
       </div>
       <If condition={status}>
-        <div className={`pb_online_status_kit_${status} size_${size}`} />
+        <OnlineStatus
+            className={`size_${size}`}
+            dark={dark}
+            status={status}
+        />
       </If>
     </div>
   )

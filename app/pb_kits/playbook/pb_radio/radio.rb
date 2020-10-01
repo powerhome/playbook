@@ -15,6 +15,8 @@ module Playbook
                      default: false
       prop :error, type: Playbook::Props::Boolean,
                    default: false
+      prop :input_options, type: Playbook::Props::Hash,
+                           default: {}
       prop :name, type: Playbook::Props::String,
                   default: "radio_name"
       prop :text, type: Playbook::Props::String,
@@ -24,10 +26,6 @@ module Playbook
 
       def classname
         generate_classname("pb_radio_kit") + error_class
-      end
-
-      def input
-        check_box_tag(name, value, checked)
       end
 
       def selected

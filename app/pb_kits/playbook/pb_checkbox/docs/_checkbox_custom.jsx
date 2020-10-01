@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Checkbox } from '../../'
 
-const CheckboxCustom = () => {
+const CheckboxCustom = (props) => {
   const [checked, setChecked] = useState(false)
 
   const handleOnChange = () => {
@@ -14,7 +14,10 @@ const CheckboxCustom = () => {
       <br />
       <br />
       <div>
-        <Checkbox text="Toggle Me">
+        <Checkbox
+            {...props}
+            text="Toggle Me"
+        >
           <input
               checked={checked}
               name="custom-name"
