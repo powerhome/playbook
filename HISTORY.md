@@ -1,44 +1,5 @@
 # Changelog
 
-## [6.8.1](https://github.com/powerhome/playbook/tree/6.8.1) (2020-09-28)
-
-[Full Changelog](https://github.com/powerhome/playbook/compare/6.8.0...6.8.1)
-
-**Implemented enhancements:**
-
-- \[NUXE-144\] Added user value handling to checkbox form helper [\#1107](https://github.com/powerhome/playbook/pull/1107) ([bh247484](https://github.com/bh247484))
-
-
-## [6.8.0](https://github.com/powerhome/playbook/tree/6.8.0) (2020-09-18)
-
-[Full Changelog](https://github.com/powerhome/playbook/compare/6.7.0...6.8.0)
-
-**Implemented enhancements:**
-
-- React Circle Chart [\#1106](https://github.com/powerhome/playbook/pull/1106) ([jasperfurniss](https://github.com/jasperfurniss))
-- \[CMPN-17\] Add input options to Radio Kit [\#1099](https://github.com/powerhome/playbook/pull/1099) ([ljtinney](https://github.com/ljtinney))
-- \[NUXE-66\] - Added Date Picker React onChange Prop [\#1096](https://github.com/powerhome/playbook/pull/1096) ([bh247484](https://github.com/bh247484))
-- Make it [\#1088](https://github.com/powerhome/playbook/pull/1088) ([thestephenmarshall](https://github.com/thestephenmarshall))
-- \[CMPN-16\] Allow all HTML options on input in PbCheckbox Rails kit [\#1087](https://github.com/powerhome/playbook/pull/1087) ([stephenmckeon](https://github.com/stephenmckeon))
-- Updated Styling for Toggle [\#1064](https://github.com/powerhome/playbook/pull/1064) ([jasoncypret](https://github.com/jasoncypret))
-
-**Fixed bugs:**
-
-- Fix for incorrect order of classNames fixes \#1058 [\#1094](https://github.com/powerhome/playbook/pull/1094) ([jasoncypret](https://github.com/jasoncypret))
-- Display numeric zero in StatsValue Kit [\#1092](https://github.com/powerhome/playbook/pull/1092) ([casadei](https://github.com/casadei))
-
-# Changelog
-
-## [6.7.0](2020-9-16)
-
-[Full Changelog](https://github.com/powerhome/playbook/compare/6.6.1...HEAD)
-
-**Implemented enhancements:**
-
-- Dark Mode Toggle [\#1051](https://github.com/powerhome/playbook/pull/1051) ([kre8sions](https://github.com/kre8sions))
-
-# Changelog
-
 ## [6.6.1](2020-9-16)
 
 [Full Changelog](https://github.com/powerhome/playbook/compare/6.6.0...HEAD)

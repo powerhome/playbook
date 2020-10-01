@@ -22,9 +22,5 @@
     <%end%>
   </body>
   <%= javascript_include_tag "https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js" %>
-  <% if @type == 'react' %>
-    <%= javascript_packs_with_chunks_tag 'application', 'react-examples', 'site' %>
-  <% else %>
-    <%= javascript_packs_with_chunks_tag 'application', 'rails-examples', 'site' %>
-    <%= yield :pb_js %>
-  <% end %>
+  <%= javascript_packs_with_chunks_tag 'application', 'examples' %>
+  <%= yield :pb_js %>
