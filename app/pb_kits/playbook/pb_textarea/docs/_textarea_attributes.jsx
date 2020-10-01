@@ -1,7 +1,7 @@
 import React from 'react'
 import { Textarea } from '../..'
 
-const TextareaDefault = () => {
+const TextareaAttributes = () => {
   return (
     <div>
       <Textarea
@@ -32,5 +32,5 @@ const TextareaDefault = () => {
   )
 }
 
-export default TextareaDefault
+export default TextareaAttributes
 
