@@ -12,11 +12,13 @@ module Playbook
       prop :orientation, type: Playbook::Props::Enum,
                          values: %w[horizontal vertical],
                          default: "horizontal"
-
+      prop :variant, type: Playbook::Props::Enum,
+                     values: %w[primary secondary],
+                     default: "primary"
       prop :text
 
       def classname
-        generate_classname("pb_button_toolbar_kit", orientation, connected_class)
+        generate_classname("pb_button_toolbar_kit", orientation, variant, connected_class)
       end
 
     private

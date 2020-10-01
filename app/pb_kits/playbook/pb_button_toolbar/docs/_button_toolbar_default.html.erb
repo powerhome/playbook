@@ -1,7 +1,19 @@
-<%= pb_rails("button_toolbar", props: { orientation: "horizontal", connected: true }) do %>
-  <%= pb_rails("button", props: { text: "Field" }) %>
-  <%= pb_rails("button", props: { text: "Retail"}) %>
-  <%= pb_rails("button", props: { text: "Event"}) %>
-  <%= pb_rails("button", props: { text: "Training"}) %>
-  <%= pb_rails("button", props: { text: "Not Working"}) %>
-<% end %>
+<div class="pb--doc-demo-row">
+
+  <%= pb_rails("button_toolbar", props: { orientation: "vertical", connected: true }) do %>
+    <%= pb_rails("button", props: { text: "Field" }) %>
+    <%= pb_rails("button", props: { text: "Retail"}) %>
+    <%= pb_rails("button", props: { text: "Event"}) %>
+    <%= pb_rails("button", props: { text: "Training"}) %>
+    <%= pb_rails("button", props: { text: "Not Working"}) %>
+  <% end %>
+
+  <%= pb_rails("button_toolbar", props: { orientation: "horizontal", connected: true }) do %>
+    <%= pb_rails("button", props: { text: "Field" }) %>
+    <%= pb_rails("button", props: { text: "Retail" }) %>
+    <%= pb_rails("button", props: { text: "Event" }) %>
+    <%= pb_rails("button", props: { text: "Training" }) %>
+    <%= pb_rails("button", props: { text: "Not Working" }) %>
+  <% end %>
+
+</div>

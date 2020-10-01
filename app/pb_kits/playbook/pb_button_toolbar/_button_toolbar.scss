@@ -2,6 +2,48 @@
 @import "../pb_button/button_mixins";
 @import "../tokens/colors";
 
+
+@mixin horizontal_border($opacity: false, $dark: false) {
+  $border_color: $white;
+  @if $dark == true {
+    $border_color: $bg_dark;
+  }
+  @if $opacity == true {
+    background-color:rgba($border_color, $opacity_1);
+  } @else {
+    background-color: $border_color;
+  }
+  content: '';
+  position: relative;
+  width: calc(100% + 24px + 24px);
+  height: 2px;
+  top: 9px;
+  bottom: 0;
+  left: -24px;
+  display: block;
+}
+
+@mixin vertical_border($opacity: false, $dark: false) {
+  $border_color: $white;
+  @if $dark == true {
+    $border_color: $bg_dark;
+  }
+  @if $opacity == true {
+    background-color:rgba($border_color, $opacity_1);
+  } @else {
+    background-color: $border_color;
+  }
+  content: '';
+  position: relative;
+  width: 2px;
+  height: 24px;
+  top: 0;
+  bottom: 0;
+  left: 35px;
+}
+
+
+
 [class^=pb_button_toolbar]{
     // Orientation =========
     &[class*=_horizontal]  {
@@ -26,9 +68,12 @@
             }
           }
         }
-  
+
         &:last-child {
           margin-right: 0;
+          &::after {
+            display: none;
+          }
         }
       }
     }
@@ -73,37 +118,112 @@
       }
   
       &[class*=_horizontal] {
-        & > [class^=pb_button]  {
-          &:not(:last-child){
-            border-bottom-right-radius: 0;
-            border-top-right-radius: 0;
-            border-right-width: 0;
-            border: 1px solid #e1e4e8;
+        &[class*=_primary] {
+          & > [class^=pb_button]::after {
+            @include vertical_border($opacity: true, $dark: false)
           }
-          &:not(:first-child){
-            border-bottom-left-radius: 0;
-            border-top-left-radius: 0;
-            border-left-width: 0;
-            border: 1px solid #e1e4e8;
+          & > [class^=pb_button]  {
+            &:not(:last-child){
+              border-bottom-right-radius: 0;
+              border-top-right-radius: 0;
+              border-right-width: 0;
+            }
+            &:not(:first-child){
+              border-bottom-left-radius: 0;
+              border-top-left-radius: 0;
+              border-left-width: 0;
+            }
+          }
+        }
+        &[class*=_secondary] {
+          & > [class^=pb_button]::after {
+            @include vertical_border($opacity: false, $dark: false)
+          }
+          & > [class^=pb_button]  {
+            &:not(:last-child){
+              border-bottom-right-radius: 0;
+              border-top-right-radius: 0;
+              border-right-width: 0;
+            }
+            &:not(:first-child){
+              border-bottom-left-radius: 0;
+              border-top-left-radius: 0;
+              border-left-width: 0;
+            }
           }
         }
       }
   
       &[class*=_vertical] {
-        & > [class^=pb_button]  {
-          &:not(:last-child){
-            border-bottom-right-radius: 0;
-            border-bottom-left-radius: 0;
-            border-bottom-width: 0;
-            border: 1px solid #e1e4e8;
+        &[class*=_primary] {
+          & > [class^=pb_button]::after {
+            @include horizontal_border($opacity: true, $dark: false)
           }
-          &:not(:first-child){
-            border-top-right-radius: 0;
-            border-top-left-radius: 0;
-            border-top-width: 0;
-            border: 1px solid #e1e4e8;
+          & > [class^=pb_button]  {
+            &:not(:last-child){
+              border-bottom-right-radius: 0;
+              border-bottom-left-radius: 0;
+              border-bottom-width: 0;
+            }
+            &:not(:first-child){
+              border-top-right-radius: 0;
+              border-top-left-radius: 0;
+              border-top-width: 0;
+            }
+          }
+        }
+        &[class*=_secondary] {
+          & > [class^=pb_button]:not(:last-child)::after {
+            @include horizontal_border($opacity: false, $dark: false)
+          }
+          & > [class^=pb_button]  {
+            &:not(:last-child){
+              border-bottom-right-radius: 0;
+              border-bottom-left-radius: 0;
+              border-bottom-width: 0;
+            }
+            &:not(:first-child){
+              border-top-right-radius: 0;
+              border-top-left-radius: 0;
+              border-top-width: 0;
+            }
           }
         }
       }
     }
   }
+
+// Dark =============
+[class^=pb_button_toolbar]{
+  &[class*=_connected] {
+    &[class*=_vertical] {
+      &[class*=_primary].dark {
+        & > [class^=pb_button]::after {
+          @include horizontal_border($opacity: true, $dark: true)
+        }
+      }
+      &[class*=_secondary].dark {
+        & > [class^=pb_button]:not(:last-child)::after {
+          @include horizontal_border($opacity: true, $dark: false)
+        }
+      }
+    }
+  }
+}
+
+[class^=pb_button_toolbar]{
+  &[class*=_connected] {
+    &[class*=_horizontal] {
+      &[class*=_primary].dark {
+        & > [class^=pb_button]::after {
+          @include vertical_border($opacity: true, $dark: true)
+        }
+      }
+      &[class*=_secondary].dark {
+        & > [class^=pb_button]::after {
+          @include vertical_border($opacity: true, $dark: false)
+        }
+      }
+    }
+  }
+}
