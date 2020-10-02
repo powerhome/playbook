@@ -1,9 +1,69 @@
-<%= pb_rails("timestamp", props: { timestamp: DateTime.now }) %>
+<%= pb_rails("timestamp", props: {
+  timestamp: DateTime.now,
+  show_date: false,
+  align: "left"
+}) %>
 
 <br>
 
-<%= pb_rails("timestamp", props: { timestamp: DateTime.now, align: "center" }) %>
+<%= pb_rails("timestamp", props: {
+  timestamp: DateTime.now,
+  show_date: true,
+  align: "left"
+}) %>
 
 <br>
 
-<%= pb_rails("timestamp", props: { timestamp: DateTime.now, align: "right" }) %>
+<%= pb_rails("timestamp", props: {
+  timestamp: DateTime.now + 4.years,
+  show_date: true,
+  align: "left"
+}) %>
+
+<br><br>
+
+<%= pb_rails("timestamp", props: {
+  timestamp: DateTime.now,
+  show_date: false,
+  align: "center"
+}) %>
+
+<br>
+
+<%= pb_rails("timestamp", props: {
+  timestamp: DateTime.now,
+  show_date: true,
+  align: "center"
+}) %>
+
+<br>
+
+<%= pb_rails("timestamp", props: {
+  timestamp: DateTime.now + 4.years,
+  show_date: true,
+  align: "center"
+}) %>
+
+<br><br>
+
+<%= pb_rails("timestamp", props: {
+  timestamp: DateTime.now,
+  show_date: false,
+  align: "right"
+}) %>
+
+<br>
+
+<%= pb_rails("timestamp", props: {
+  timestamp: DateTime.now,
+  show_date: true,
+  align: "right"
+}) %>
+
+<br>
+
+<%= pb_rails("timestamp", props: {
+  timestamp: DateTime.now + 4.years,
+  show_date: true,
+  align: "right"
+}) %>

@@ -1,5 +1,13 @@
 <%= pb_rails("timestamp", props: {
   timestamp: DateTime.now,
+  show_date: false,
+  align: "left"
+}) %>
+
+<br>
+
+<%= pb_rails("timestamp", props: {
+  timestamp: DateTime.now,
   show_date: true,
   align: "left"
 }) %>
