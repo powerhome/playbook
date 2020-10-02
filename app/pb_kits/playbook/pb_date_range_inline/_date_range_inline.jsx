@@ -5,6 +5,7 @@ import DateTime from '../pb_kit/dateTime.js'
 import { Body, Caption, Icon } from '../'
 import classnames from 'classnames'
 import { globalProps } from '../utilities/globalProps.js'
+import { buildCss } from '../utilities/props'
 
 type DateRangeInlineProps = {
   className?: string,
@@ -40,6 +41,7 @@ const DateRangeInline = (props: DateRangeInlineProps) => {
     align = 'left',
     startDate,
     endDate,
+    className,
   } = props
 
   const iconContent = () => {
@@ -67,6 +69,8 @@ const DateRangeInline = (props: DateRangeInlineProps) => {
     return startDate.getFullYear() == endDate.getFullYear() && startDate.getFullYear() == currentDate.getFullYear()
   }
 
+  const dateRangeClasses =  buildCss('pb_date_range_inline_kit', align, className)
+
   const renderTime = (date) => {
     return (
       <time dateTime={dateTimeIso(date)}>
@@ -83,7 +87,7 @@ const DateRangeInline = (props: DateRangeInlineProps) => {
   }
 
   return (
-    <div className={classnames('pb_date_range_inline_kit_' + align, globalProps(props))}>
+    <div className={classnames(dateRangeClasses, globalProps(props))}>
       <div className="pb_date_range_inline_wrapper">
         <If condition={size == 'xs'}>
           {iconContent()}
