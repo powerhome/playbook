@@ -10,7 +10,7 @@ type DateRangeInlineProps = {
   className?: string,
   id?: string,
   data?: string,
-  alignment?: "left" | "center" | "vertical",
+  align?: "left" | "center" | "vertical",
   size?: "sm" | "xs",
   dark?: boolean,
   icon?: boolean,
@@ -34,7 +34,7 @@ const DateRangeInline = (props: DateRangeInlineProps) => {
     icon = false,
     dark = false,
     size = 'sm',
-    alignment = 'left',
+    align = 'left',
     startDate,
     endDate,
   } = props
@@ -79,58 +79,60 @@ const DateRangeInline = (props: DateRangeInlineProps) => {
   }
 
   return (
-    <div className={classnames('pb_date_range_inline_kit_' + alignment, globalProps(props))}>
-      <If condition={size == 'xs'}>
-        {iconContent()}
-        <Caption
-            dark={dark}
-            tag="span"
-        >
-          {renderTime(startDate)}
-        </Caption>
-        <Caption
-            dark={dark}
-            tag="span"
-        >
-          <Icon
-              fixedWidth
-              icon="long-arrow-right"
-          />
-        </Caption>
-        <Caption
-            dark={dark}
-            tag="span"
-        >
-          {renderTime(endDate)}
-        </Caption>
-      </If>
-
-      <If condition={size == 'sm'}>
-        {iconContent()}
-        <Body
-            dark={dark}
-            tag="span"
-        >
-          {renderTime(startDate)}
-        </Body>
-        <Body
-            color="light"
-            dark={dark}
-            tag="span"
-        >
-          <Icon
+    <div className={classnames('pb_date_range_inline_kit_' + align, globalProps(props))}>
+      <div className="pb_date_range_inline_wrapper">
+        <If condition={size == 'xs'}>
+          {iconContent()}
+          <Caption
               dark={dark}
-              fixedWidth
-              icon="long-arrow-right"
-          />
-        </Body>
-        <Body
-            dark={dark}
-            tag="span"
-        >
-          {renderTime(endDate)}
-        </Body>
-      </If>
+              tag="span"
+          >
+            {renderTime(startDate)}
+          </Caption>
+          <Caption
+              dark={dark}
+              tag="span"
+          >
+            <Icon
+                fixedWidth
+                icon="long-arrow-right"
+            />
+          </Caption>
+          <Caption
+              dark={dark}
+              tag="span"
+          >
+            {renderTime(endDate)}
+          </Caption>
+        </If>
+
+        <If condition={size == 'sm'}>
+          {iconContent()}
+          <Body
+              dark={dark}
+              tag="span"
+          >
+            {renderTime(startDate)}
+          </Body>
+          <Body
+              color="light"
+              dark={dark}
+              tag="span"
+          >
+            <Icon
+                dark={dark}
+                fixedWidth
+                icon="long-arrow-right"
+            />
+          </Body>
+          <Body
+              dark={dark}
+              tag="span"
+          >
+            {renderTime(endDate)}
+          </Body>
+        </If>
+      </div>
     </div>
   )
 }

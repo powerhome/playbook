@@ -2,14 +2,15 @@
     id: object.id,
     data: object.data,
     class: object.classname) do %>
+    <div class="pb_date_range_inline_wrapper">
+      <% if object.icon == true %>
+        <%= pb_rails(object.text_kit, props: { tag: "span", dark: object.dark, color: object.icon_color, text: pb_rails("icon", props: { icon: "calendar-alt", fixed_width: true, size: object.size }) }) %>
+      <% end %>
 
-    <% if object.icon == true %>
-      <%= pb_rails(object.text_kit, props: { tag: "span", dark: object.dark, color: object.icon_color, text: pb_rails("icon", props: { icon: "calendar-alt", fixed_width: true, size: object.size }) }) %>
-    <% end %>
+      <%= pb_rails(object.text_kit, props: { tag: "span", dark: object.dark, text: object.start_date_display }) %>
 
-    <%= pb_rails(object.text_kit, props: { tag: "span", dark: object.dark, text: object.start_date_display }) %>
+      <%= pb_rails(object.text_kit, props: { tag: "span", dark: object.dark, color: object.icon_color, text: pb_rails("icon", props: { icon: "long-arrow-right", fixed_width: true, size: object.size }) }) %>
 
-    <%= pb_rails(object.text_kit, props: { tag: "span", dark: object.dark, color: object.icon_color, text: pb_rails("icon", props: { icon: "long-arrow-right", fixed_width: true, size: object.size }) }) %>
-
-    <%= pb_rails(object.text_kit, props: { tag: "span", dark: object.dark, text: object.end_date_display }) %>
+      <%= pb_rails(object.text_kit, props: { tag: "span", dark: object.dark, text: object.end_date_display }) %>
+    </div>
 <% end %>

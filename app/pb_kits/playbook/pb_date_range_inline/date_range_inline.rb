@@ -22,7 +22,7 @@ module Playbook
                    default: "left"
 
       def classname
-        generate_classname("pb_date_range_inline_kit", align, size)
+        generate_classname("pb_date_range_inline_kit", dark_class, align)
       end
 
       def text_kit
@@ -59,6 +59,10 @@ module Playbook
 
       def start_date_display
         time_display(Playbook::PbKit::PbDateTime.new(start_date))
+      end
+
+      def dark_class
+        dark ? "dark" : nil
       end
     end
   end

@@ -1,7 +1,14 @@
 <div>
   <%= pb_rails("date_range_inline", props: { start_date: Date.new(2019, 06, 18), end_date: Date.new(2020, 03, 20), size: "xs" }) %>
-  <%= pb_rails("date_range_inline", props: { margin_top: "xs",start_date: Date.new(2019, 06, 18), end_date: Date.new(2020, 03, 20) }) %>
+  <%= pb_rails("date_range_inline", props: { start_date: Date.new(2019, 06, 18), end_date: Date.new(2020, 03, 20) }) %>
+  <br>
+  <br>
 
-  <%= pb_rails("date_range_inline", props: { margin_top: "md", start_date: Date.new(Date.current.year, 01, 15), end_date: Date.new(Date.current.year, 8, 15), size: "xs", icon: true }) %>
-  <%= pb_rails("date_range_inline", props: { margin_top: "xs",start_date: Date.new(Date.current.year, 01, 15), end_date: Date.new(Date.current.year, 8, 15), icon: true }) %>
+  <%= pb_rails("date_range_inline", props: { start_date: Date.new(Date.current.year, 01, 15), end_date: Date.new(Date.current.year, 8, 15), size: "xs", icon: true, align: 'center' }) %>
+  <%= pb_rails("date_range_inline", props: { start_date: Date.new(Date.current.year, 01, 15), end_date: Date.new(Date.current.year, 8, 15), icon: true, align: 'center' }) %>
+  <br>
+  <br>
+
+  <%= pb_rails("date_range_inline", props: { start_date: Date.new(Date.current.year, 01, 15), end_date: Date.new(Date.current.year, 8, 15), size: "xs", icon: true, align: 'right' }) %>
+  <%= pb_rails("date_range_inline", props: { start_date: Date.new(Date.current.year, 01, 15), end_date: Date.new(Date.current.year, 8, 15), icon: true, align: 'right' }) %>
 </div>

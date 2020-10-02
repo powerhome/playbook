@@ -13,23 +13,42 @@ const DateRangeInlineDefault = (props) => {
       <DateRangeInline
           {...props}
           endDate={new Date('20 Mar 2015')}
-          marginTop="xs"
           size="sm"
           startDate={new Date('18 Jun 2013')}
       />
+      <br />
+      <br />
       <DateRangeInline
           {...props}
+          align="center"
           endDate={new Date(`15 Aug ${new Date().getFullYear()}`)}
           icon
-          marginTop="md"
           size="xs"
           startDate={new Date(`15 Jan ${new Date().getFullYear()}`)}
       />
       <DateRangeInline
           {...props}
+          align="center"
           endDate={new Date(`15 Aug ${new Date().getFullYear()}`)}
           icon
-          marginTop="xs"
+          size="sm"
+          startDate={new Date(`15 Jan ${new Date().getFullYear()}`)}
+      />
+      <br />
+      <br />
+      <DateRangeInline
+          {...props}
+          align="right"
+          endDate={new Date(`15 Aug ${new Date().getFullYear()}`)}
+          icon
+          size="xs"
+          startDate={new Date(`15 Jan ${new Date().getFullYear()}`)}
+      />
+      <DateRangeInline
+          {...props}
+          align="right"
+          endDate={new Date(`15 Aug ${new Date().getFullYear()}`)}
+          icon
           size="sm"
           startDate={new Date(`15 Jan ${new Date().getFullYear()}`)}
       />
