@@ -18,7 +18,7 @@ module Playbook
       prop :text
 
       def classname
-        generate_classname("pb_button_toolbar_kit", orientation, variant, connected_class)
+        generate_classname("pb_button_toolbar_kit", orientation, variant)
       end
 
     private

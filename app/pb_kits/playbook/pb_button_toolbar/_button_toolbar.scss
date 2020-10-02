@@ -1,227 +1,99 @@
 @import "../pb_button/button";
 @import "../pb_button/button_mixins";
+@import "./button_toolbar_mixins";
+@import "./button_toolbar_dark";
 @import "../tokens/colors";
-
-
-@mixin horizontal_border($opacity: false, $dark: false) {
-  $border_color: $white;
-  @if $dark == true {
-    $border_color: $bg_dark;
-  }
-  @if $opacity == true {
-    background-color:rgba($border_color, $opacity_1);
-  } @else {
-    background-color: $border_color;
-  }
-  content: '';
-  position: relative;
-  width: calc(100% + 24px + 24px);
-  height: 2px;
-  top: 9px;
-  bottom: 0;
-  left: -24px;
-  display: block;
-}
-
-@mixin vertical_border($opacity: false, $dark: false) {
-  $border_color: $white;
-  @if $dark == true {
-    $border_color: $bg_dark;
-  }
-  @if $opacity == true {
-    background-color:rgba($border_color, $opacity_1);
-  } @else {
-    background-color: $border_color;
-  }
-  content: '';
-  position: relative;
-  width: 2px;
-  height: 24px;
-  top: 0;
-  bottom: 0;
-  left: 35px;
-}
-
-
+@import "../tokens/opacity";
 
 [class^=pb_button_toolbar]{
-    // Orientation =========
-    &[class*=_horizontal]  {
-      display: inline-flex;
-      flex-direction: row;
-      align-items: center;
-      justify-content: flex-start;
-  
-      & > [class^=pb_button]  {
-        margin-right: $space-xs;
 
-        @media (hover:hover) {
-          &:hover {
-            background-color:darken($royal, 20%);
-          }
-        }
+  // Horizontal =============
 
-        &[class*=secondary] {
-          @media (hover:hover) {
-            &:hover {
-              background-color:rgba($primary_action, $opacity_3)
-            }
-          }
-        }
-
-        &:last-child {
-          margin-right: 0;
-          &::after {
-            display: none;
-          }
-        }
+  &[class*=_horizontal] {
+    display: inline-flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    & > [class^=pb_button]  {
+      &:not(:last-child){
+        border-bottom-right-radius: 0;
+        border-top-right-radius: 0;
+        border-right-width: 0;
+      }
+      &:not(:first-child){
+        border-bottom-left-radius: 0;
+        border-top-left-radius: 0;
+        border-left-width: 0;
       }
     }
-    &[class*=_vertical]  {
-      display: inline-flex;
-      flex-direction: column;
-      align-items: flex-start;
-      justify-content: center;
-  
-      & > [class^=pb_button]  {
-        display: block;
-        flex-grow: 1;
-        flex-shrink: 1;
-        flex-basis: auto;
-        width: 100%;
-        margin-bottom: $space-xs;
-
-        @media (hover:hover) {
-          &:hover {
-            background-color:darken($royal, 20%);
-          }
-        }
-
-        &[class*=secondary] {
-          @media (hover:hover) {
-            &:hover {
-              background-color:rgba($primary_action, $opacity_3)
-            }
-          }
-        }
-  
-        &:last-child {
-          margin-bottom: 0;
-        }
+    &[class*=_primary] {
+      & > [class^=pb_button]:not(:first-child)::before {
+        @include toolbar_border(false, $primary_border)
+      }  
+    }
+    &[class*=_secondary] {
+      & > [class^=pb_button]:not(:first-child)::before {
+        @include toolbar_border(false, $secondary_border)
       }
     }
+    & > [class^=pb_button]:not(:first-child):hover::before,
+      [class^=pb_button]:hover + [class^=pb_button]::before {
+        opacity: 0
+      }
+  }
 
-    // Connect =============
-    &[class*=_connected]  {
-      & > [class^=pb_button]  {
-        margin: 0;
+  // Vertical =============
+
+  &[class*=_vertical] {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    & > [class^=pb_button]  {
+      display: block;
+      flex-grow: 1;
+      flex-shrink: 1;
+      flex-basis: auto;
+      width: 100%;
+      &:not(:last-child){
+        border-bottom-right-radius: 0;
+        border-bottom-left-radius: 0;
+        border-bottom-width: 0;
       }
-  
-      &[class*=_horizontal] {
-        &[class*=_primary] {
-          & > [class^=pb_button]::after {
-            @include vertical_border($opacity: true, $dark: false)
-          }
-          & > [class^=pb_button]  {
-            &:not(:last-child){
-              border-bottom-right-radius: 0;
-              border-top-right-radius: 0;
-              border-right-width: 0;
-            }
-            &:not(:first-child){
-              border-bottom-left-radius: 0;
-              border-top-left-radius: 0;
-              border-left-width: 0;
-            }
-          }
-        }
-        &[class*=_secondary] {
-          & > [class^=pb_button]::after {
-            @include vertical_border($opacity: false, $dark: false)
-          }
-          & > [class^=pb_button]  {
-            &:not(:last-child){
-              border-bottom-right-radius: 0;
-              border-top-right-radius: 0;
-              border-right-width: 0;
-            }
-            &:not(:first-child){
-              border-bottom-left-radius: 0;
-              border-top-left-radius: 0;
-              border-left-width: 0;
-            }
-          }
-        }
+      &:not(:first-child){
+        border-top-right-radius: 0;
+        border-top-left-radius: 0;
+        border-top-width: 0;
       }
-  
-      &[class*=_vertical] {
-        &[class*=_primary] {
-          & > [class^=pb_button]::after {
-            @include horizontal_border($opacity: true, $dark: false)
-          }
-          & > [class^=pb_button]  {
-            &:not(:last-child){
-              border-bottom-right-radius: 0;
-              border-bottom-left-radius: 0;
-              border-bottom-width: 0;
-            }
-            &:not(:first-child){
-              border-top-right-radius: 0;
-              border-top-left-radius: 0;
-              border-top-width: 0;
-            }
-          }
-        }
-        &[class*=_secondary] {
-          & > [class^=pb_button]:not(:last-child)::after {
-            @include horizontal_border($opacity: false, $dark: false)
-          }
-          & > [class^=pb_button]  {
-            &:not(:last-child){
-              border-bottom-right-radius: 0;
-              border-bottom-left-radius: 0;
-              border-bottom-width: 0;
-            }
-            &:not(:first-child){
-              border-top-right-radius: 0;
-              border-top-left-radius: 0;
-              border-top-width: 0;
-            }
-          }
-        }
+    }
+    &[class*=_primary] {
+      & > [class^=pb_button]:not(:first-child)::before {
+        @include toolbar_border(true, $primary_border)
       }
+    }
+    &[class*=_secondary] {
+      & > [class^=pb_button]:not(:first-child)::before {
+        @include toolbar_border(true, $secondary_border)
+      }
+    }
+    & > [class^=pb_button]:not(:first-child):hover::before,
+    [class^=pb_button]:hover + [class^=pb_button]::before {
+      opacity: 0
     }
   }
 
-// Dark =============
-[class^=pb_button_toolbar]{
-  &[class*=_connected] {
-    &[class*=_vertical] {
-      &[class*=_primary].dark {
-        & > [class^=pb_button]::after {
-          @include horizontal_border($opacity: true, $dark: true)
-        }
-      }
-      &[class*=_secondary].dark {
-        & > [class^=pb_button]:not(:last-child)::after {
-          @include horizontal_border($opacity: true, $dark: false)
-        }
+  // Hover =============
+  
+  & > [class^=pb_button]  {
+    @media (hover:hover) {
+      &:hover {
+        background-color:darken($royal, 20%);
       }
     }
-  }
-}
-
-[class^=pb_button_toolbar]{
-  &[class*=_connected] {
-    &[class*=_horizontal] {
-      &[class*=_primary].dark {
-        & > [class^=pb_button]::after {
-          @include vertical_border($opacity: true, $dark: true)
-        }
-      }
-      &[class*=_secondary].dark {
-        & > [class^=pb_button]::after {
-          @include vertical_border($opacity: true, $dark: false)
+    &[class*=secondary] {
+      @media (hover:hover) {
+        &:hover {
+          background-color:rgba($primary_action, $opacity_3)
         }
       }
     }
