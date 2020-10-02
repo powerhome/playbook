@@ -46,9 +46,9 @@ module Playbook
       def time_display(time)
         content_tag(:time, datetime: time.to_iso) do
           if dates_in_current_year?
-            "#{time.to_day} #{time.to_month_downcase}"
+            "#{time.to_month_downcase} #{time.to_day}"
           else
-            "#{time.to_day} #{time.to_month_downcase} #{time.to_year}"
+            "#{time.to_month_downcase} #{time.to_day}, #{time.to_year}"
           end
         end
       end

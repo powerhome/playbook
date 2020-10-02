@@ -20,8 +20,11 @@ type DateRangeInlineProps = {
 
 const dateTimestamp = (dateValue, includeYear) => {
   const date = new DateTime({ value: dateValue })
-  const year = includeYear ? date.toYear() : ''
-  return `${date.toDay()} ${date.toMonth()} ${year}`
+  if (includeYear) {
+    return `${date.toMonth()} ${date.toDay()}, ${date.toYear()}`
+  } else {
+    return `${date.toMonth()} ${date.toDay()}`
+  }
 }
 
 const dateTimeIso = (dateValue) => {
