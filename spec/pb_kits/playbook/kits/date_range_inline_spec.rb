@@ -30,8 +30,8 @@ RSpec.describe Playbook::PbDateRangeInline::DateRangeInline do
   describe "#classname" do
     it "returns namespaced class name", :aggregate_failures do
       required_props = { start_date: Date.today, end_date: Date.tomorrow }
-      expect(subject.new(required_props).classname).to eq "pb_date_range_inline_kit_left_sm"
-      expect(subject.new(required_props.merge(classname: "additional_class")).classname).to eq "pb_date_range_inline_kit_left_sm additional_class"
+      expect(subject.new(required_props).classname).to eq "pb_date_range_inline_kit_left"
+      expect(subject.new(required_props.merge(classname: "additional_class")).classname).to eq "pb_date_range_inline_kit_left additional_class"
     end
   end
 end
