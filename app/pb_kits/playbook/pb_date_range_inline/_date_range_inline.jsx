@@ -50,6 +50,7 @@ const DateRangeInline = (props: DateRangeInlineProps) => {
             tag="span"
         >
           <Icon
+              className="pb_date_range_inline_icon"
               dark={dark}
               fixedWidth
               icon="calendar-alt"
@@ -97,6 +98,7 @@ const DateRangeInline = (props: DateRangeInlineProps) => {
               tag="span"
           >
             <Icon
+                className="pb_date_range_inline_arrow"
                 fixedWidth
                 icon="long-arrow-right"
             />
@@ -123,6 +125,7 @@ const DateRangeInline = (props: DateRangeInlineProps) => {
               tag="span"
           >
             <Icon
+                className="pb_date_range_inline_arrow"
                 dark={dark}
                 fixedWidth
                 icon="long-arrow-right"
