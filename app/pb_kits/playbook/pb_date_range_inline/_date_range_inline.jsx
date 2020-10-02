@@ -69,7 +69,7 @@ const DateRangeInline = (props: DateRangeInlineProps) => {
     return startDate.getFullYear() == endDate.getFullYear() && startDate.getFullYear() == currentDate.getFullYear()
   }
 
-  const dateRangeClasses =  buildCss('pb_date_range_inline_kit', align, className)
+  const dateRangeClasses =  buildCss('pb_date_range_inline_kit', align)
 
   const renderTime = (date) => {
     return (
@@ -87,7 +87,7 @@ const DateRangeInline = (props: DateRangeInlineProps) => {
   }
 
   return (
-    <div className={classnames(dateRangeClasses, globalProps(props))}>
+    <div className={classnames(dateRangeClasses, globalProps(props), className)}>
       <div className="pb_date_range_inline_wrapper">
         <If condition={size == 'xs'}>
           {iconContent()}
