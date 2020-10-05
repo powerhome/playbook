@@ -5,16 +5,19 @@ module Playbook
     class Typeahead
       include Playbook::Props
 
+      prop :async, type: Playbook::Props::Boolean,
+                    default: false
+      prop :async_url
       prop :label
       prop :name
-      prop :value
+      prop :options, type: Playbook::Props::HashArray, default: []
+      prop :pills, type: Playbook::Props::Boolean,
+                    default: false
+
       prop :placeholder
       prop :search_term_minimum_length, default: 3
       prop :search_debounce_timeout, default: 250
-
-      # prop :multivalue_variant, type: Playbook::Props::Enum,
-      #                           values: %w[text, image_with_text],
-      #                           default: "text"
+      prop :value
 
       partial "pb_typeahead/typeahead"
 
@@ -28,6 +31,22 @@ module Playbook
           pb_typeahead_kit_search_term_minimum_length: search_term_minimum_length,
           pb_typeahead_kit_search_debounce_timeout: search_debounce_timeout
         )
+      end
+
+      def typeahead_with_pills_options
+        base_options = {
+          isMulti: true,
+          label: label,
+          options: options,
+          placeholder: placeholder
+        }
+
+        base_options.merge!({
+          async: true,
+          asyncUrl: async_url
+        }) if async
+
+        base_options
       end
     end
   end

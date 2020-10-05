@@ -22,6 +22,8 @@ import ValueContainer from './components/ValueContainer'
 type Props = {
   async?: boolean,
   label?: string,
+  name?: string,
+  onMultiValueClick?: EventHandler,
 }
 
 /**
@@ -45,14 +47,25 @@ const Typeahead = (props: Props) => {
     },
     isClearable: true,
     isSearchable: true,
+    name,
     ...props,
   }
 
   const Tag = props.async ? AsyncSelect : Select
 
+  const handleOnChange = (data, { action }) => {
+    if (action === 'clear') {
+      const multiValueClearEvent = new CustomEvent('pb-typeahead-kit-result-clear')
+      document.dispatchEvent(multiValueClearEvent)
+    }
+  }
+
   return (
     <div className="pb_typeahead_kit react-select">
-      <Tag {...selectProps} />
+      <Tag
+          onChange={handleOnChange}
+          {...selectProps}
+      />
     </div>
   )
 }

@@ -2,6 +2,7 @@ examples:
   rails:
     - typeahead_default: Default
     - typeahead_with_context_dark: With Context
+    - typeahead_with_pills: With Pills
 
   react:
     - typeahead_default: Default

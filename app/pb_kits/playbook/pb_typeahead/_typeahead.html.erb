@@ -1,33 +1,29 @@
-<%= content_tag(:div,
+<% if object.pills %>
+  <%= react_component('Typeahead', object.typeahead_with_pills_options) %>
+<% else %>
+  <%= content_tag(:div,
                 id: object.id,
                 data: object.data,
                 class: object.classname) do %>
-  <div class="pb_typeahead_wrapper">
-    <div class="pb_typeahead_loading_indicator" data-pb-typeahead-kit-loading-indicator>
-      <i class="far fa-spinner fa-spin"></i>
+    <div class="pb_typeahead_wrapper">
+      <div class="pb_typeahead_loading_indicator" data-pb-typeahead-kit-loading-indicator>
+        <i class="far fa-spinner fa-spin"></i>
+      </div>
+      <%= pb_rails("text_input", props: {
+        type: "search",
+        label: object.label,
+        name: object.name,
+        value: object.value,
+        placeholder: object.placeholder
+      }) %>
+      <%= pb_rails("list", props: { ordered: false, borderless: false, xpadding: true, role: "status", aria: { live: "polite" }, data: { pb_typeahead_kit_results: true } }) do %>
+      <% end %>
     </div>
-    <%= pb_rails("text_input", props: {
-      type: "search",
-      label: object.label,
-      name: object.name,
-      value: object.value,
-      placeholder: object.placeholder
-    }) %>
-    <%= pb_rails("list", props: { ordered: false, borderless: false, xpadding: true, role: "status", aria: { live: "polite" }, data: { pb_typeahead_kit_results: true } }) do %>
-    <% end %>
-  </div>
 
-  <template data-pb-typeahead-kit-result-option>
-    <%= pb_rails("list/item") do %>
-      <button type="button" data-result-option-item><%= tag(:slot, name: :content) %></button>
-    <% end %>
-  </template>
-
-  <template data-pb-typeahead-kit-multivalue>
-    <%= pb_rails("form_pill", props: {
-      name: "",
-      text: "",
-      avatar_url: ""
-    }) %>
-  </template>
+    <template data-pb-typeahead-kit-result-option>
+      <%= pb_rails("list/item") do %>
+        <button type="button" data-result-option-item><%= tag(:slot, name: :content) %></button>
+      <% end %>
+    </template>
+  <% end %>
 <% end %>
