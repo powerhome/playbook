@@ -11,22 +11,21 @@ module Playbook
 
           props[:name] = html_attribute_name
           props[:picker_id] = html_id
-          props[:label] = @template.label(@object_name, name) if props[:label] && !props[:label].is_a?(String)
+          props[:label] = @template.label(@object_name, name) if props[:label] == true
+
+          puts @object.to_json
 
           input = text_field(
             name,
+            autocomplete: "off",
+            disabled: props[:disable_input],
+            data: props[:input_data],
+            aria: props[:input_aria],
             props: {
-              aria: props[:input_aria],
-              autocomplete: false,
-              # dark: props[:dark],
-              data: props[:input_data],
-              disabled: props[:disable_input],
               error: props[:error],
-              # id: object.picker_id,
               label: props[:label],
               placeholder: props[:placeholder],
               required: props[:required],
-              type: props[:required],
             }
           )
           puts input
@@ -48,3 +47,5 @@ end
 
 # pass that input as a block to @template.pb_rails("date_picker")
 # let rails do the magic
+
+# null value handling
