@@ -108,10 +108,15 @@ const datePickerHelper = (config) => {
     onChange: [(selectedDates, dateStr) => {
       onChange(dateStr, selectedDates)
     },
-    (selectedDates, dateStr) => {
-      updateValueOnChange(dateStr)
-    },
+    // (selectedDates, dateStr) => {
+    //   updateValueOnChange(dateStr)
+    // },
     ],
+    // onValueUpdate: [
+    //   (selectedDates, dateStr) => {
+    //     updateValueOnChange(dateStr)
+    //   },
+    // ],
     onYearChange: [],
     prevArrow: '<i class="far fa-angle-left"></i>',
     static: true,
@@ -157,19 +162,19 @@ const datePickerHelper = (config) => {
   dropdown.insertAdjacentHTML('afterend', '<i class="far fa-angle-down year-dropdown-icon" id="test-id"></i>')
 
   // Set input value attribute on page load
-  picker.input.setAttribute('value', picker.input.value)
+  // picker.input.setAttribute('value', picker.input.value)
   // logic for updating value when typing
-  document.querySelector(`#${pickerId}`).addEventListener('input', (e) => {
-    picker.input.setAttribute('value', e.target.value)
-    const variant = picker.config.mode
-    if (variant === 'single' && e.target.value.split('').length === 10) {
-      picker.setDate(e.target.value)
-      dropdown.value = picker.currentYear
-    } else if (variant === 'range' && e.target.value.split('').length === 24) {
-      picker.setDate(e.target.value)
-      dropdown.value = picker.currentYear
-    }
-  })
+  // document.querySelector(`#${pickerId}`).addEventListener('input', (e) => {
+  //   picker.input.setAttribute('value', e.target.value)
+  //   const variant = picker.config.mode
+  //   if (variant === 'single' && e.target.value.split('').length === 10) {
+  //     picker.setDate(e.target.value)
+  //     dropdown.value = picker.currentYear
+  //   } else if (variant === 'range' && e.target.value.split('').length === 24) {
+  //     picker.setDate(e.target.value)
+  //     dropdown.value = picker.currentYear
+  //   }
+  // })
   // Update input value attribute on Change
   const updateValueOnChange = (pickerValue) => {
     picker.input.setAttribute('value', pickerValue)
