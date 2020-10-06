@@ -11,7 +11,7 @@ const datePickerHelper = (config) => {
     maxDate,
     minDate,
     mode,
-    onChange,
+    onChange = () => {},
     pickerId,
     yearRange,
   } = config
@@ -21,20 +21,25 @@ const datePickerHelper = (config) => {
   // ===========================================================
 
   const defaultDateGetter = () => {
-    if (defaultDate !== '') {
-      if (defaultDate === 'blank') {
-        return ''
-      } else {
-        return defaultDate
-      }
-    }
-    if (mode === 'single' && defaultDate === '') {
-      return new Date()
-    } else if (mode === 'range' && defaultDate === '') {
-      const today = new Date()
-      const tomorrow = new Date(today)
-      tomorrow.setDate(tomorrow.getDate() + 1)
-      return [today, tomorrow]
+  //   if (defaultDate !== '') {
+  //     if (defaultDate === 'blank') {
+  //       return ''
+  //     } else {
+  //       return defaultDate
+  //     }
+  //   }
+  //   if (mode === 'single' && defaultDate === '') {
+  //     return new Date()
+  //   } else if (mode === 'range' && defaultDate === '') {
+  //     const today = new Date()
+  //     const tomorrow = new Date(today)
+  //     tomorrow.setDate(tomorrow.getDate() + 1)
+  //     return [today, tomorrow]
+  //   }
+    if (defaultDate === '') {
+      return null
+    } else {
+      return defaultDate
     }
   }
   const disabledParser = () => {
@@ -102,7 +107,11 @@ const datePickerHelper = (config) => {
     }],
     onChange: [(selectedDates, dateStr) => {
       onChange(dateStr, selectedDates)
-    }],
+    },
+    (selectedDates, dateStr) => {
+      updateValueOnChange(dateStr)
+    },
+    ],
     onYearChange: [],
     prevArrow: '<i class="far fa-angle-left"></i>',
     static: true,
@@ -161,6 +170,10 @@ const datePickerHelper = (config) => {
       dropdown.value = picker.currentYear
     }
   })
+  // Update input value attribute on Change
+  const updateValueOnChange = (pickerValue) => {
+    picker.input.setAttribute('value', pickerValue)
+  }
   if (allowInput){
     picker.input.removeAttribute('readonly')
   }

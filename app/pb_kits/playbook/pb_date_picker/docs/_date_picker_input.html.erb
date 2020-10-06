@@ -1,26 +1,26 @@
 <%= pb_rails("date_picker", props: {
   input_aria: { label: "input-field" },
   input_data: { key: "value", key2: "value2" },
+  label: "Aria, Name, and Data Attributes",
   name: "date-field",
   picker_id: "date-picker-input1",
-  type: "date"
 }) %>
 
 <%= pb_rails("date_picker", props: {
-  default_date: "blank",
+  label: "Custom Placeholder",
   picker_id: "date-picker-input2",
-  placeholder: "Select Date",
+  placeholder: "custom-placeholder",
 }) %>
 
 <%= pb_rails("date_picker", props: {
-  default_date: "blank",
-  disable_input: true,
+  label: "Blank Placeholder",
   picker_id: "date-picker-input3",
-  placeholder: "Disabled Input"
+  placeholder: "",
 }) %>
 
 <%= pb_rails("date_picker", props: {
-  dark: true,
-  hide_label: true,
-  picker_id: "date-picker-input4"
+  disable_input: true,
+  label: "Disable Input",
+  picker_id: "date-picker-input4",
+  placeholder: "Disabled Input"
 }) %>
