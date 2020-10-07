@@ -21,21 +21,6 @@ const datePickerHelper = (config) => {
   // ===========================================================
 
   const defaultDateGetter = () => {
-  //   if (defaultDate !== '') {
-  //     if (defaultDate === 'blank') {
-  //       return ''
-  //     } else {
-  //       return defaultDate
-  //     }
-  //   }
-  //   if (mode === 'single' && defaultDate === '') {
-  //     return new Date()
-  //   } else if (mode === 'range' && defaultDate === '') {
-  //     const today = new Date()
-  //     const tomorrow = new Date(today)
-  //     tomorrow.setDate(tomorrow.getDate() + 1)
-  //     return [today, tomorrow]
-  //   }
     if (defaultDate === '') {
       return null
     } else {
@@ -71,7 +56,6 @@ const datePickerHelper = (config) => {
     disableMobile: true,
     dateFormat: format,
     defaultDate: defaultDateGetter(),
-    // defaultDate: defaultDate,
     disable: disableWeekdays && disableWeekdays.length > 0 ? [
       (date) => {
         const weekdayObj = {
@@ -107,20 +91,10 @@ const datePickerHelper = (config) => {
     }],
     onChange: [(selectedDates, dateStr) => {
       onChange(dateStr, selectedDates)
-    },
-    (selectedDates, dateStr) => {
-      updateValueAttribute(dateStr)
-    },
-    ],
-    // onReady: [(selectedDates, dateStr) => {
-    //   updateValueAttribute(dateStr)
-    // }],
+    }],
     onYearChange: [() => {
       yearChangeHook()
     }],
-    // onValueUpdate: [
-    //   () => console.log('valuupdate'),
-    // ],
     prevArrow: '<i class="far fa-angle-left"></i>',
     static: true,
   })
@@ -153,6 +127,7 @@ const datePickerHelper = (config) => {
     picker.changeYear(Number(e.target.value))
   })
 
+  // Allow the date picker form resetting
   if (picker.input.form) {
     picker.input.form.addEventListener('reset', (e) => {
       e.preventDefault()
@@ -165,14 +140,15 @@ const datePickerHelper = (config) => {
 
       const fields = e.target.querySelectorAll('select, input, textarea')
 
+      // Prevent year and month dropdowns from being reset
       fields.forEach((field) => {
         if (field == picker.monthsDropdownContainer || field == dropdown || field == picker.input){
           // console.log(field)
+          return
         } else {
           field.value = field.defaultValue
         }
       })
-
       // setTimeout(() => {
       //   dropdown.value = picker.currentYear
       //   picker.monthsDropdownContainer.value = picker.currentMonth
@@ -190,24 +166,6 @@ const datePickerHelper = (config) => {
   picker.monthElements[0].insertAdjacentHTML('afterend', '<i class="far fa-angle-down month-dropdown-icon"></i>')
   dropdown.insertAdjacentHTML('afterend', '<i class="far fa-angle-down year-dropdown-icon" id="test-id"></i>')
 
-  // Set input value attribute on page load
-  // picker.input.setAttribute('value', picker.input.value)
-  // logic for updating value when typing
-  // document.querySelector(`#${pickerId}`).addEventListener('input', (e) => {
-  //   picker.input.setAttribute('value', e.target.value)
-  //   const variant = picker.config.mode
-  //   if (variant === 'single' && e.target.value.split('').length === 10) {
-  //     picker.setDate(e.target.value)
-  //     dropdown.value = picker.currentYear
-  //   } else if (variant === 'range' && e.target.value.split('').length === 24) {
-  //     picker.setDate(e.target.value)
-  //     dropdown.value = picker.currentYear
-  //   }
-  // })
-  // Update input value attribute on Change
-  const updateValueAttribute = (pickerValue) => {
-    picker.input.setAttribute('value', pickerValue)
-  }
   // Remove readonly attribute for validation and or text input
   if (allowInput){
     picker.input.removeAttribute('readonly')
