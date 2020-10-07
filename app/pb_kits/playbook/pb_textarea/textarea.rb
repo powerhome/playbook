@@ -7,11 +7,11 @@ module Playbook
 
       partial "pb_textarea/textarea"
 
-      prop :error
+      prop :error, type: Playbook::Props::Boolean,
+                   default: false
       prop :input_id
       prop :label
       prop :name
-      prop :object
       prop :value
       prop :resize, type: Playbook::Props::Enum,
                     values: %w[none both horizontal vertical],
@@ -22,16 +22,15 @@ module Playbook
                            default: {}
 
       def classname
-        generate_classname("pb_textarea_kit") + error_class + resize_class
+        generate_classname("pb_textarea_kit", error_class, resize_class, separator: " ")
       end
 
       def input_id_present
-        input_id.present? ? input_id : "pb_textarea_kit"
+        input_id.present? ? input_id : "pb_textarea_id"
       end
 
       def additional_input_options
         input_options.merge(
-          class: classname,
           rows: rows
         )
       end
@@ -39,11 +38,11 @@ module Playbook
     private
 
       def error_class
-        error ? " error" : ""
+        error ? "error" : nil
       end
 
       def resize_class
-        " resize_#{resize}"
+        "resize_#{resize}"
       end
     end
   end

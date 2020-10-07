@@ -7,9 +7,8 @@ RSpec.describe Playbook::PbTextarea::Textarea do
 
   it { is_expected.to define_partial }
 
-  it { is_expected.to define_string_prop(:error) }
+  it { is_expected.to define_boolean_prop(:error) }
   it { is_expected.to define_string_prop(:label) }
-  it { is_expected.to define_string_prop(:object) }
   it { is_expected.to define_string_prop(:value) }
   it { is_expected.to define_boolean_prop(:dark).with_default(false) }
   it { is_expected.to define_hash_prop(:input_options).with_default({}) }
@@ -17,9 +16,9 @@ RSpec.describe Playbook::PbTextarea::Textarea do
   describe "#classname" do
     it "returns namespaced class name", :aggregate_failures do
       expect(subject.new({}).classname).to eq "pb_textarea_kit resize_none"
-      expect(subject.new({dark: true}).classname).to eq "pb_textarea_kit dark resize_none"
-      expect(subject.new({error: "Something is wrong"}).classname).to eq "pb_textarea_kit error resize_none"
-      expect(subject.new({dark: true, error: "Something is wrong"}).classname).to eq "pb_textarea_kit dark error resize_none"
+      expect(subject.new({dark: true}).classname).to eq "pb_textarea_kit resize_none dark"
+      expect(subject.new({error: true}).classname).to eq "pb_textarea_kit error resize_none"
+      expect(subject.new({dark: true, error: true}).classname).to eq "pb_textarea_kit error resize_none dark"
     end
   end
 
