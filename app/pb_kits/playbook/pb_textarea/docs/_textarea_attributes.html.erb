@@ -1,8 +1,24 @@
 <%= pb_rails("textarea",
     props: {
-        disabled: true,
+        input_id: "few_rows",
+        label: "Rows",
+        rows: 1,
+        input_options: {
+            placeholder: "1 Row",
+        }
+    }
+) %>
+
+<br>
+
+<%= pb_rails("textarea",
+    props: {
         label: "Disabled",
-        name: "disabled",
+        input_options: {
+            disabled: true,
+            name: "disabled",
+            value: "overwriting-value",
+        }
     }
 ) %>
 
@@ -11,10 +27,12 @@
 <%= pb_rails("textarea",
     props: {
         label: "Min & Max Character Length",
-        maxlength: 10,
-        minlength: 5,
-        name: "minmax",
-        placeholder: "This has a min-length of 5 and a max-length of 10 characters.",
+        input_options: {
+            maxlength: 10,
+            minlength: 5,
+            name: "minmax",
+            placeholder: "This has a min-length of 5 and a max-length of 10 characters.",
+        }
     }
 ) %>
 
@@ -22,9 +40,13 @@
 
 <%= pb_rails("textarea",
     props: {
+        id: "required",
+        input_id: "required-text",
         label: "Required",
-        name: "required",
-        placeholder: "This textarea is required.",
-        required: true
+        input_options: {
+            name: "required",
+            placeholder: "This textarea is required.",
+            required: true
+        }
     }
 ) %>

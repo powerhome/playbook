@@ -11,18 +11,7 @@
       <%= pb_rails("body", props: {dark: object.dark, status: "negative", text: object.error}) %>
     <% end %>
   <% else %>
-    <%= text_area(
-        :object,
-        :method,
-        :class => "#{object.classname}",
-        :disabled => object.disabled,
-        :name => object.name,
-        :minlength => object.minlength,
-        :maxlength => object.maxlength,
-        :required => object.required,
-        :placeholder => object.placeholder,
-        :rows => object.rows,
-        :value => object.value) %>
+    <%= text_area_tag object.input_id_present, object.value, object.additional_input_options %>
     <% if object.error %>
       <%= pb_rails("body", props: {dark: object.dark, status: "negative", text: object.error}) %>
     <% end %>

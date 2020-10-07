@@ -10,22 +10,9 @@ RSpec.describe Playbook::PbTextarea::Textarea do
   it { is_expected.to define_string_prop(:error) }
   it { is_expected.to define_string_prop(:label) }
   it { is_expected.to define_string_prop(:object) }
-  it { is_expected.to define_string_prop(:method) }
-  it { is_expected.to define_string_prop(:placeholder) }
   it { is_expected.to define_string_prop(:value) }
-  it { is_expected.to define_boolean_prop(:dark)
-                      .with_default(false) }
-  it { is_expected.to define_boolean_prop(:required)
-                      .with_default(false) }
-  it { is_expected.to define_boolean_prop(:disabled)
-                      .with_default(false) }
-  it { is_expected.to define_prop(:minlength)
-                      .of_type(Playbook::Props::Number) }
-  it { is_expected.to define_prop(:maxlength)
-                      .of_type(Playbook::Props::Number) }
-  it { is_expected.to define_prop(:rows)
-                      .of_type(Playbook::Props::Number)
-                      .with_default(4) }
+  it { is_expected.to define_boolean_prop(:dark).with_default(false) }
+  it { is_expected.to define_hash_prop(:input_options).with_default({}) }
 
   describe "#classname" do
     it "returns namespaced class name", :aggregate_failures do

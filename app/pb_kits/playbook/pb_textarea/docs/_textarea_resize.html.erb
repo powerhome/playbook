@@ -1,13 +1,33 @@
+<%= pb_rails("textarea",
+    props: {
+        label: "vertical",
+        input_options: {
+            placeholder: "Resize Vertical",
+            resize: "vertical"
+        }
+    }
+) %>
 
+<br>
 
+<%= pb_rails("textarea",
+    props: {
+        label: "both",
+        input_options: {
+            placeholder: "Resize Both",
+            resize: "both"
+        }
+    }
+) %>
 
+<br>
 
-<%= pb_rails("textarea", props: { label: "vertical", placeholder: "Resize Vertical", resize: "vertical" }) %>
-
-<br/>
-
-<%= pb_rails("textarea", props: { label: "both", placeholder: "Resize Both", resize: "both" }) %>
-
-<br/>
-
-<%= pb_rails("textarea", props: { label: "horizontal", placeholder: "Resize Horizontal", resize: "horizontal" }) %>
+<%= pb_rails("textarea",
+    props: {
+        label: "horizontal",
+        input_options: {
+            placeholder: "Resize Horizontal",
+            resize: "horizontal"
+        }
+    }
+) %>
