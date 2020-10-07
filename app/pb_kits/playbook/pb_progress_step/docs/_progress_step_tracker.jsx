@@ -29,7 +29,7 @@ const ProgressStepTracker = (props) => (
     >
       <ProgressStepItem status="complete" />
       <ProgressStepItem status="complete" />
-      <ProgressStepItem status="complete" />
+      <ProgressStepItem status="hidden" />
       <ProgressStepItem status="active" />
       <ProgressStepItem status="inactive" />
     </ProgressStep>

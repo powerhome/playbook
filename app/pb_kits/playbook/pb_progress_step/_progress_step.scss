@@ -177,6 +177,17 @@
                 background-color: darken($primary,25%);
             }
         }
+        li[class*=_hidden]{
+            &::before, .circle {
+                display: none;
+            }
+        }
+        li[class*=_hidden] ~ li[class*=_active],
+        li[class*=_hidden] ~ li[class*=_complete] {
+            &::before {
+                width: calc(200% + 1.5em);
+            }
+        }
         &[class*=dark]{
             background-color: tint($bg_dark,20%);
             [class*=_inactive]{

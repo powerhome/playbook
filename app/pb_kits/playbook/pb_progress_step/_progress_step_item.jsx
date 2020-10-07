@@ -7,7 +7,7 @@ import { Icon } from '..'
 
 type ProgressStepItemProps = {
   className?: string,
-  status?: 'complete' | 'active' | 'inactive',
+  status?: 'complete' | 'active' | 'inactive' | 'hidden',
   children?: React.Node,
 }
 
