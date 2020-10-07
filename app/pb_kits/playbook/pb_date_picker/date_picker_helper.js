@@ -21,20 +21,25 @@ const datePickerHelper = (config) => {
   // ===========================================================
 
   const defaultDateGetter = () => {
-    if (defaultDate !== '') {
-      if (defaultDate === 'blank') {
-        return ''
-      } else {
-        return defaultDate
-      }
-    }
-    if (mode === 'single' && defaultDate === '') {
-      return new Date()
-    } else if (mode === 'range' && defaultDate === '') {
-      const today = new Date()
-      const tomorrow = new Date(today)
-      tomorrow.setDate(tomorrow.getDate() + 1)
-      return [today, tomorrow]
+  //   if (defaultDate !== '') {
+  //     if (defaultDate === 'blank') {
+  //       return ''
+  //     } else {
+  //       return defaultDate
+  //     }
+  //   }
+  //   if (mode === 'single' && defaultDate === '') {
+  //     return new Date()
+  //   } else if (mode === 'range' && defaultDate === '') {
+  //     const today = new Date()
+  //     const tomorrow = new Date(today)
+  //     tomorrow.setDate(tomorrow.getDate() + 1)
+  //     return [today, tomorrow]
+  //   }
+    if (defaultDate === '') {
+      return null
+    } else {
+      return defaultDate
     }
   }
   const disabledParser = () => {
@@ -66,6 +71,7 @@ const datePickerHelper = (config) => {
     disableMobile: true,
     dateFormat: format,
     defaultDate: defaultDateGetter(),
+    // defaultDate: defaultDate,
     disable: disableWeekdays && disableWeekdays.length > 0 ? [
       (date) => {
         const weekdayObj = {
@@ -101,8 +107,20 @@ const datePickerHelper = (config) => {
     }],
     onChange: [(selectedDates, dateStr) => {
       onChange(dateStr, selectedDates)
+    },
+    // (selectedDates, dateStr) => {
+    //   updateValueAttribute(dateStr)
+    // }
+    ],
+    // onReady: [(selectedDates, dateStr) => {
+    //   updateValueAttribute(dateStr)
+    // }],
+    onYearChange: [() => {
+      yearChangeHook()
     }],
-    onYearChange: [],
+    // onValueUpdate: [
+    //   () => console.log('valuupdate'),
+    // ],
     prevArrow: '<i class="far fa-angle-left"></i>',
     static: true,
   })
@@ -135,30 +153,62 @@ const datePickerHelper = (config) => {
     picker.changeYear(Number(e.target.value))
   })
 
+  if (picker.input.form) {
+    picker.input.form.addEventListener('reset', (e) => {
+      e.preventDefault()
+      if (defaultDate){
+        picker.setDate(defaultDate)
+        yearChangeHook()
+      } else {
+        picker.clear()
+      }
+
+      const fields = e.target.querySelectorAll('select, input, textarea')
+
+      fields.forEach((field) => {
+        if (field == picker.monthsDropdownContainer || field == dropdown || field == picker.input){
+          // console.log(field)
+        } else {
+          field.value = field.defaultValue
+        }
+      })
+
+      // setTimeout(() => {
+      //   dropdown.value = picker.currentYear
+      //   picker.monthsDropdownContainer.value = picker.currentMonth
+      //   console.log(picker)
+      // }, 10)
+    })
+  }
+
   // two way binding
   const yearChangeHook = () => {
     dropdown.value = picker.currentYear
   }
-  picker.config.onYearChange.push(yearChangeHook)
 
   // Adding dropdown icons to year and month selects
   picker.monthElements[0].insertAdjacentHTML('afterend', '<i class="far fa-angle-down month-dropdown-icon"></i>')
   dropdown.insertAdjacentHTML('afterend', '<i class="far fa-angle-down year-dropdown-icon" id="test-id"></i>')
 
   // Set input value attribute on page load
-  picker.input.setAttribute('value', picker.input.value)
+  // picker.input.setAttribute('value', picker.input.value)
   // logic for updating value when typing
-  document.querySelector(`#${pickerId}`).addEventListener('input', (e) => {
-    picker.input.setAttribute('value', e.target.value)
-    const variant = picker.config.mode
-    if (variant === 'single' && e.target.value.split('').length === 10) {
-      picker.setDate(e.target.value)
-      dropdown.value = picker.currentYear
-    } else if (variant === 'range' && e.target.value.split('').length === 24) {
-      picker.setDate(e.target.value)
-      dropdown.value = picker.currentYear
-    }
-  })
+  // document.querySelector(`#${pickerId}`).addEventListener('input', (e) => {
+  //   picker.input.setAttribute('value', e.target.value)
+  //   const variant = picker.config.mode
+  //   if (variant === 'single' && e.target.value.split('').length === 10) {
+  //     picker.setDate(e.target.value)
+  //     dropdown.value = picker.currentYear
+  //   } else if (variant === 'range' && e.target.value.split('').length === 24) {
+  //     picker.setDate(e.target.value)
+  //     dropdown.value = picker.currentYear
+  //   }
+  // })
+  // Update input value attribute on Change
+  // const updateValueAttribute = (pickerValue) => {
+  //   picker.input.setAttribute('value', pickerValue)
+  // }
+  // Remove readonly attribute for validation and or text input
   if (allowInput){
     picker.input.removeAttribute('readonly')
   }
