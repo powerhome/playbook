@@ -1,7 +1,0 @@
-project=playbook
-user=powerhome
-include-labels=cleanup,enhancement,bug,testing,New Kit,breaking
-issues=false
-add-sections={"documentation":{"prefix":"**New Kits:**","labels":["New Kit"]}}
-max-issues=75
-since-tag=6.3.0
