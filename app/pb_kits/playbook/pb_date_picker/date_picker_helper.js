@@ -108,9 +108,9 @@ const datePickerHelper = (config) => {
     onChange: [(selectedDates, dateStr) => {
       onChange(dateStr, selectedDates)
     },
-    // (selectedDates, dateStr) => {
-    //   updateValueAttribute(dateStr)
-    // }
+    (selectedDates, dateStr) => {
+      updateValueAttribute(dateStr)
+    },
     ],
     // onReady: [(selectedDates, dateStr) => {
     //   updateValueAttribute(dateStr)
@@ -205,9 +205,9 @@ const datePickerHelper = (config) => {
   //   }
   // })
   // Update input value attribute on Change
-  // const updateValueAttribute = (pickerValue) => {
-  //   picker.input.setAttribute('value', pickerValue)
-  // }
+  const updateValueAttribute = (pickerValue) => {
+    picker.input.setAttribute('value', pickerValue)
+  }
   // Remove readonly attribute for validation and or text input
   if (allowInput){
     picker.input.removeAttribute('readonly')
