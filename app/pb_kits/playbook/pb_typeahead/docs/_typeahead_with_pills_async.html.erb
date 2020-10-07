@@ -1,0 +1,24 @@
+<%= pb_rails("typeahead", props: { async: true, load_options: 'asyncPillsPromiseOptions', label: "Github Users", name: :foo, pills: true, placeholder: "type the name of a Github user" }) %>
+
+<%= javascript_tag defer: "defer" do %>
+  const filterResults = function(results) {
+    return results.items.map(function(result) {
+      return {
+        label: result.login,
+        value: result.id,
+      }
+    })
+  }
+
+  window.asyncPillsPromiseOptions = function(inputValue) {
+    return new Promise(function(resolve) {
+      if (inputValue) {
+        fetch(`https://api.github.com/search/users?q=${inputValue}`)
+          .then(function(response) { return response.json() })
+          .then(function(results) { resolve(filterResults(results))})
+      } else {
+        resolve([])
+      }
+    })
+  }
+<% end %>

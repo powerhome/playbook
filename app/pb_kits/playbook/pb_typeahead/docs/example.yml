@@ -3,6 +3,8 @@ examples:
     - typeahead_default: Default
     - typeahead_with_context_dark: With Context
     - typeahead_with_pills: With Pills
+    - typeahead_with_pills_async: With Pills (Async Data)
+    - typeahead_with_pills_async_users: With Pills (Async Data w/ Users)
 
   react:
     - typeahead_default: Default

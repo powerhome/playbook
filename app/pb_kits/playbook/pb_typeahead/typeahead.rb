@@ -7,8 +7,8 @@ module Playbook
 
       prop :async, type: Playbook::Props::Boolean,
                     default: false
-      prop :async_url
       prop :label
+      prop :load_options
       prop :name
       prop :options, type: Playbook::Props::HashArray, default: []
       prop :pills, type: Playbook::Props::Boolean,
@@ -43,7 +43,7 @@ module Playbook
 
         base_options.merge!({
           async: true,
-          asyncUrl: async_url
+          loadOptions: load_options,
         }) if async
 
         base_options
