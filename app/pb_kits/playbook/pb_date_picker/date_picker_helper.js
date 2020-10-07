@@ -129,32 +129,102 @@ const datePickerHelper = (config) => {
 
   // Allow the date picker form resetting
   if (picker.input.form) {
+    // let adaptive = false
+    // const adaptedReset = (e) => {
+    //   picker.input.form.removeEventListener('reset', namedFunc)
+    //   debugger
+    //   e.target.reset()
+    //   picker.input.form.addEventListener('reset', namedFunc)
+    //   picker.monthsDropdownContainer.value = picker.currentMonth
+    //   dropdown.value = picker.currentYear
+    // }
+
+    // const namedFunc = (e) => {
+    //   e.preventDefault()
+    //   debugger
+    //   adaptedReset(e)
+    // }
+
+    // picker.input.form.addEventListener('reset', namedFunc)
+
+    // const myAsync = async() => {
+    //   console.log('reset')
+    //   return 'arb'
+    // }
+
+    // const promise = new Promise((resolve) => {
+    //   picker.input.form.addEventListener('reset', () => console.log('reset'))
+    //   resolve('chyeah')
+    // })
+
+    // promise.then((val) => {
+    //   console.log('select cleanup', val)
+    //   picker.monthsDropdownContainer.value = picker.currentMonth
+    //   dropdown.value = picker.currentYear
+    // })
+
     picker.input.form.addEventListener('reset', (e) => {
-      e.preventDefault()
-      if (defaultDate){
-        picker.setDate(defaultDate)
-        yearChangeHook()
-      } else {
-        picker.clear()
-      }
+      setTimeout(() => {
+        dropdown.value = picker.currentYear
+        picker.monthsDropdownContainer.value = picker.currentMonth
 
-      const fields = e.target.querySelectorAll('select, input, textarea')
-
-      // Prevent year and month dropdowns from being reset
-      fields.forEach((field) => {
-        if (field == picker.monthsDropdownContainer || field == dropdown || field == picker.input){
-          // console.log(field)
-          return
-        } else {
-          field.value = field.defaultValue
+        /* Include Logic to Reset dp to default value??  */
+        if (defaultDate){
+          picker.setDate(defaultDate)
+          yearChangeHook()
         }
-      })
-      // setTimeout(() => {
-      //   dropdown.value = picker.currentYear
-      //   picker.monthsDropdownContainer.value = picker.currentMonth
-      //   console.log(picker)
-      // }, 10)
+      }, 0)
     })
+
+    //   picker.input.form.addEventListener('reset', (e) => {
+    //     // debugger
+    //     // adaptedReset(e.target)
+    //     // e.preventDefault()
+    //     // debugger
+    //     // e.target.reset()
+    //     // debugger
+
+    //     // const manualReset = async() => {
+    //     //   e.target.reset()
+    //     //   debugger
+    //     //   return 'test-val'
+    //     // }
+
+    //     // const resetSelects = async() => {
+    //     //   const arb = await manualReset()
+    //     //   console.log(arb)
+    //     //   debugger
+    //     //   picker.monthsDropdownContainer.value = picker.currentMonth
+    //     //   dropdown.value = picker.currentYear
+    //     // }
+
+    //     // e.preventDefault()
+    //     // if (defaultDate){
+    //     //   picker.setDate(defaultDate)
+    //     //   yearChangeHook()
+    //     // } else {
+    //     //   picker.clear()
+    //     // }
+
+    //     // const fields = e.target.querySelectorAll('select, input, textarea')
+
+  //     // // Prevent year and month dropdowns from being reset
+    // fields.forEach((field) => {
+    //   if (field == picker.monthsDropdownContainer || field == dropdown || field == picker.input){
+    //     // console.log(field)
+    //     return
+    //   } else {
+    //     field.value = field.defaultValue
+    //   }
+    // })
+  //     // debugger
+  //     // setTimeout(() => {
+  //     //   dropdown.value = picker.currentYear
+  //     //   picker.monthsDropdownContainer.value = picker.currentMonth
+  //     //   console.log(picker)
+  //     //   debugger
+  //     // }, 10)
+  //   })
   }
 
   // two way binding
