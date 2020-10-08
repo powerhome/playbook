@@ -27,8 +27,7 @@ const FixedConfirmationToast = (props: FixedConfirmationToastProps) => {
   const css = classnames(
     `pb_fixed_confirmation_toast_kit_${status}`,
     globalProps(props),
-    className,
-    { 'remove_toast': closeable }
+    className
   )
   const icon = iconMap[status]
 

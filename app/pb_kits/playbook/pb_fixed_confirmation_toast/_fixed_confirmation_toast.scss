@@ -20,16 +20,14 @@ $confirmation_toast_colors: (
   border-radius: $border_rad_mega;
   box-shadow: $shadow_deeper;
 
-  &.remove_toast {
+  .fa-times {
     cursor: pointer;
-    .fa-times {
-      opacity: 0.5;
-      position: relative;
-      right: -8px;
-    }
-    &:hover .fa-times {
-      opacity: 1;
-    }
+    opacity: 0.5;
+    position: relative;
+    right: -8px;
+  }
+  &:hover .fa-times {
+    opacity: 1;
   }
 
   @each $color_name, $color_value in $confirmation_toast_colors {
