@@ -10,3 +10,6 @@ examples:
 
   react:
   - timestamp_default: Default
+  - timestamp_align: Alignments
+  - timestamp_updated: Last Updated by
+  - timestamp_updated_align: Last Updated by - Alignments
