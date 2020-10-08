@@ -27,7 +27,8 @@ const FixedConfirmationToast = (props: FixedConfirmationToastProps) => {
   const css = classnames(
     `pb_fixed_confirmation_toast_kit_${status}`,
     globalProps(props),
-    className
+    className,
+    closeable && 'remove_toast'
   )
   const icon = iconMap[status]
 
@@ -40,7 +41,7 @@ const FixedConfirmationToast = (props: FixedConfirmationToastProps) => {
         <If condition={icon}>
           <Icon
               className="pb_icon"
-              fixed_width
+              fixedWidth
               icon={icon}
           />
         </If>
@@ -52,7 +53,7 @@ const FixedConfirmationToast = (props: FixedConfirmationToastProps) => {
         <If condition={closeable}>
           <Icon
               className="pb_icon"
-              fixed_width
+              fixedWidth={false}
               icon="times"
           />
         </If>

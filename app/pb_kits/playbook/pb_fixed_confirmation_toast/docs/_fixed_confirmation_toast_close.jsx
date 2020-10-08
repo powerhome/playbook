@@ -13,7 +13,6 @@ const FixedConfirmationToastClose = () => {
       </div>
 
       <br />
-      <br />
 
       <div>
         <FixedConfirmationToast
@@ -23,7 +22,6 @@ const FixedConfirmationToastClose = () => {
         />
       </div>
 
-      <br />
       <br />
 
       <div>
