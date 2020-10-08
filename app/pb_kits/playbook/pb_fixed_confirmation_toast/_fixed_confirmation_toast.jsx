@@ -35,7 +35,7 @@ const FixedConfirmationToast = (props: FixedConfirmationToastProps) => {
     <If condition={showToast}>
       <div
           className={css}
-          onClick={closeable ? () => toggleToast(false) : null}
+          onClick={closeable && (() => toggleToast(false))}
       >
         <If condition={icon}>
           <Icon
