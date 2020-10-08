@@ -25,7 +25,6 @@ const ButtonToolbar  = (props: ButtonToolbarProps) => {
     aria = {},
     children,
     className,
-    connected = false,
     data = {},
     id,
     orientation = 'horizontal',
