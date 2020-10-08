@@ -41,10 +41,10 @@ module Playbook
                   default: "single"
       prop :picker_id, type: Playbook::Props::String,
                        required: true
-      prop :placeholder, type: Playbook::Props::String
+      prop :placeholder, type: Playbook::Props::String,
+                         default: "Select Date"
       prop :required, type: Playbook::Props::Boolean,
                       default: false
-      prop :type, type: Playbook::Props::String
       prop :year_range, type: Playbook::Props::Array,
                         default: [1900, 2100]
 
@@ -65,6 +65,7 @@ module Playbook
           minDate: min_date,
           mode: mode,
           pickerId: picker_id,
+          required: required,
           yearRange: year_range,
         }.to_json.html_safe
       end
