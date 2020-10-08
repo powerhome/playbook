@@ -21,14 +21,14 @@
     display: flex;
     align-items: center;
     [class*=pb_date_range_inline_arrow] {
-      margin-left: 4px;
-      margin-right: 4px;
+      margin-left: $space_xs/2;
+      margin-right: $space_xs/2;
     }
     [class*=pb_date_range_inline_timezone] {
-      margin-left: 4px;
+      margin-left: $space_xs/2;
     }
     [class*=pb_date_range_inline_icon] {
-      margin-right: 4px;
+      margin-right: $space_xs/2;
     }
   }
 }
