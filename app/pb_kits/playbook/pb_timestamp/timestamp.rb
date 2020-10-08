@@ -23,7 +23,7 @@ module Playbook
                      default: "default"
 
       def classname
-        generate_classname("pb_timestamp_kit", variant_class, dark_class, align)
+        generate_classname("pb_timestamp_kit", variant_class, align)
       end
 
       def format_year_string
@@ -69,6 +69,8 @@ module Playbook
         case variant
         when "updated"
           "updated"
+        when "elapsed"
+          "elapsed"
         end
       end
     end
