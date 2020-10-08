@@ -2,9 +2,12 @@ import React from 'react'
 import ProgressStep from '../_progress_step.jsx'
 import ProgressStepItem from '../_progress_step_item.jsx'
 
-const ProgressStepDefault = () => (
+const ProgressStepDefault = (props) => (
   <div>
-    <ProgressStep icon>
+    <ProgressStep
+        icon
+        {...props}
+    >
       <ProgressStepItem status="complete" />
       <ProgressStepItem status="active" />
       <ProgressStepItem status="inactive" />
@@ -13,7 +16,7 @@ const ProgressStepDefault = () => (
     <br />
     <br />
 
-    <ProgressStep>
+    <ProgressStep {...props}>
       <ProgressStepItem status="complete">{'Step 1'}</ProgressStepItem>
       <ProgressStepItem status="active">{'Step 2'}</ProgressStepItem>
       <ProgressStepItem status="inactive">{'Step 3'}</ProgressStepItem>
