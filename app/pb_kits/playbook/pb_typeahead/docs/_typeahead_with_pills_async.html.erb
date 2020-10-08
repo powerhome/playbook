@@ -1,6 +1,9 @@
 <%= pb_rails("typeahead", props: { async: true, load_options: 'asyncPillsPromiseOptions', label: "Github Users", name: :foo, pills: true, placeholder: "type the name of a Github user" }) %>
 
+<!-- This section is an example of how to provide load_options prop for using dynamic options -->
 <%= javascript_tag defer: "defer" do %>
+  // Simple filter function, providing a list of results in the expected data format
+
   const filterResults = function(results) {
     return results.items.map(function(result) {
       return {
@@ -9,6 +12,9 @@
       }
     })
   }
+
+  /* Note: Make sure you assign this to window or a namespace within window
+  or it will not be accessible to the kit! */
 
   window.asyncPillsPromiseOptions = function(inputValue) {
     return new Promise(function(resolve) {

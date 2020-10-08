@@ -9,6 +9,7 @@
 
 <%= pb_rails("typeahead", props: { options: options, label: "Colors", name: :foo, pills: true }) %>
 
+<!-- This section is an example of the available JavaScript event hooks -->
 <%= javascript_tag defer: "defer" do %>
   document.addEventListener("pb-typeahead-kit-result-option-select", function(event) {
     console.log('Option selected')
