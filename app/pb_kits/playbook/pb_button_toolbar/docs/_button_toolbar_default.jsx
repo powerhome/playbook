@@ -5,55 +5,45 @@ const ButtonToolbarDefault = (props) => (
   <div className="pb--doc-demo-row">
     <ButtonToolbar
         {...props}
-        connected
         orientation="vertical"
     >
       <Button
           {...props}
-          text="Field"
+          text="Create"
       />
       <Button
           {...props}
-          text="Retail"
+          text="Edit"
       />
       <Button
           {...props}
-          text="Event"
+          text="Copy"
       />
       <Button
           {...props}
-          text="Training"
-      />
-      <Button
-          {...props}
-          text="Not Working"
+          text="Cut"
       />
     </ButtonToolbar>
 
     <ButtonToolbar
         {...props}
-        connected
         orientation="horizontal"
     >
       <Button
           {...props}
-          text="Field"
+          text="Create"
       />
       <Button
           {...props}
-          text="Retail"
+          text="Edit"
       />
       <Button
           {...props}
-          text="Event"
+          text="Copy"
       />
       <Button
           {...props}
-          text="Training"
-      />
-      <Button
-          {...props}
-          text="Not Working"
+          text="Cut"
       />
     </ButtonToolbar>
   </div>

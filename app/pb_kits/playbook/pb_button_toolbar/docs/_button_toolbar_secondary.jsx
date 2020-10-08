@@ -5,66 +5,54 @@ const ButtonToolbarSecondary = (props) => (
   <div className="pb--doc-demo-row">
     <ButtonToolbar
         {...props}
-        connected
         orientation="vertical"
         variant="secondary"
     >
       <Button
           {...props}
-          text="Field"
+          text="Create"
           variant="secondary"
       />
       <Button
           {...props}
-          text="Retail"
+          text="Edit"
           variant="secondary"
       />
       <Button
           {...props}
-          text="Event"
+          text="Copy"
           variant="secondary"
       />
       <Button
           {...props}
-          text="Training"
-          variant="secondary"
-      />
-      <Button
-          {...props}
-          text="Not Working"
+          text="Cut"
           variant="secondary"
       />
     </ButtonToolbar>
 
     <ButtonToolbar
         {...props}
-        connected
         orientation="horizontal"
         variant="secondary"
     >
       <Button
           {...props}
-          text="Field"
+          text="Create"
           variant="secondary"
       />
       <Button
           {...props}
-          text="Retail"
+          text="Edit"
           variant="secondary"
       />
       <Button
           {...props}
-          text="Event"
+          text="Copy"
           variant="secondary"
       />
       <Button
           {...props}
-          text="Training"
-          variant="secondary"
-      />
-      <Button
-          {...props}
-          text="Not Working"
+          text="Cut"
           variant="secondary"
       />
     </ButtonToolbar>

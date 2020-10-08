@@ -18,13 +18,11 @@ RSpec.describe Playbook::PbButtonToolbar::ButtonToolbar do
   describe "#classname" do
     it "returns namespaced class name", :aggregate_failures do
       expect(subject.new({}).classname).to eq "pb_button_toolbar_kit_horizontal_primary"
-      expect(subject.new(connected: true).classname).to eq "pb_button_toolbar_kit_horizontal_primary_connected"
       expect(subject.new(variant: "primary").classname).to eq "pb_button_toolbar_kit_horizontal_primary"
       expect(subject.new(variant: "secondary").classname).to eq "pb_button_toolbar_kit_horizontal_secondary"
       expect(subject.new(orientation: "vertical").classname).to eq "pb_button_toolbar_kit_vertical_primary"
       expect(subject.new(orientation: "vertical", variant: "primary").classname).to eq "pb_button_toolbar_kit_vertical_primary"
       expect(subject.new(orientation: "vertical", variant: "secondary").classname).to eq "pb_button_toolbar_kit_vertical_secondary"
-      expect(subject.new(orientation: "vertical", connected: true).classname).to eq "pb_button_toolbar_kit_vertical_primary_connected"
     end
   end
 end
