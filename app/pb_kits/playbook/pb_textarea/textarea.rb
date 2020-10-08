@@ -9,6 +9,8 @@ module Playbook
 
       prop :error, type: Playbook::Props::Boolean,
                    default: false
+      prop :error_message, type: Playbook::Props::String,
+                           default: "This field has an error."
       prop :input_id
       prop :label
       prop :name

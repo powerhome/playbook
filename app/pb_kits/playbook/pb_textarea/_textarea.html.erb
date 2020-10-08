@@ -12,6 +12,6 @@
     <%= text_area_tag object.input_id_present, object.value, object.additional_input_options %>
   <% end %>
   <% if object.error %>
-    <%= pb_rails("body", props: {status: "negative", text: object.error}) %>
+    <%= pb_rails("body", props: {status: "negative", text: object.error_message}) %>
   <% end %>
 <% end %>

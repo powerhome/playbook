@@ -8,6 +8,7 @@ RSpec.describe Playbook::PbTextarea::Textarea do
   it { is_expected.to define_partial }
 
   it { is_expected.to define_boolean_prop(:error) }
+  it { is_expected.to define_string_prop(:error_message) }
   it { is_expected.to define_string_prop(:label) }
   it { is_expected.to define_string_prop(:value) }
   it { is_expected.to define_boolean_prop(:dark).with_default(false) }

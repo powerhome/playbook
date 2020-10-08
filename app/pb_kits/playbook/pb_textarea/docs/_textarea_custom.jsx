@@ -1,10 +1,13 @@
 import React from 'react'
 import { Textarea } from '../../'
 
-const TextareaCustom = () => {
+const TextareaCustom = (props) => {
   return (
     <div>
-      <Textarea label="Label">
+      <Textarea
+          label="Label"
+          {...props}
+      >
         <textarea
             className="my_custom_class"
             name="custom_textarea"

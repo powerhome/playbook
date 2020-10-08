@@ -1,13 +1,14 @@
 import React from 'react'
 import { Textarea } from '../../'
 
-const TextareaResize = () => {
+const TextareaResize = (props) => {
   return (
     <div>
       <Textarea
           label="vertical"
           placeholder="Resize Vertical"
           resize="vertical"
+          {...props}
       />
 
       <br />
@@ -16,6 +17,7 @@ const TextareaResize = () => {
           label="both"
           placeholder="Resize Both"
           resize="both"
+          {...props}
       />
 
       <br />
@@ -24,8 +26,8 @@ const TextareaResize = () => {
           label="horizontal"
           placeholder="Resize Horizontal"
           resize="horizontal"
+          {...props}
       />
-
     </div>
   )
 }

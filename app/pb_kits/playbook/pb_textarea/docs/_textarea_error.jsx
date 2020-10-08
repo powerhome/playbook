@@ -1,7 +1,7 @@
 import React from 'react'
 import { Textarea } from '../..'
 
-const TextareaError = () => {
+const TextareaError = (props) => {
   return (
     <div>
       <Textarea
@@ -10,6 +10,7 @@ const TextareaError = () => {
           name="comment"
           placeholder="Placeholder text"
           value="Default value text"
+          {...props}
       />
 
     </div>

@@ -1,6 +1,19 @@
 <%= pb_rails("textarea",
     props: {
-        error: "This field has an error!",
+        error: true,
+        label: "Label",
+        rows: 4,
+        input_options: {
+            placeholder: "Default error message."
+        }
+    }) %>
+
+<br>
+
+<%= pb_rails("textarea",
+    props: {
+        error: true,
+        error_message: "Customized error message.",
         label: "Label",
         rows: 4
     }) %>
