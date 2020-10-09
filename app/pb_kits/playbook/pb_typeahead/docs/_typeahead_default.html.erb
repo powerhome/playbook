@@ -26,7 +26,7 @@
 
 <%= javascript_tag defer: "defer" do %>
   document.addEventListener("pb-typeahead-kit-search", function(event) {
-    if (!event.target.dataset.typeaheadExample) return;
+    if (!event.target.dataset || !event.target.dataset.typeaheadExample) return;
 
     fetch(`https://api.github.com/search/users?q=${encodeURIComponent(event.detail.searchingFor)}`)
       .then(response => response.json())

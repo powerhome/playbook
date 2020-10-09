@@ -6,12 +6,12 @@ const FixedConfirmationToastDefault = () => {
     <div>
       <div>
         <FixedConfirmationToast
+            closeable
             status="error"
             text="Error Message"
         />
       </div>
 
-      <br />
       <br />
 
       <div>
@@ -21,7 +21,6 @@ const FixedConfirmationToastDefault = () => {
         />
       </div>
 
-      <br />
       <br />
 
       <div>
