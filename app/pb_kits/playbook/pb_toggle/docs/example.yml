@@ -5,6 +5,7 @@ examples:
   - toggle_name: Name and Value
   - toggle_custom: Custom checkbox input
   - toggle_custom_radio: Custom radio inputs
+  - toggle_options: Toggle w/ Options
 
   react:
   - toggle_default: Default State
