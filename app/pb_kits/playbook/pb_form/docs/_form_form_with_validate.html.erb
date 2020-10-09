@@ -28,7 +28,7 @@
   <%= form.select :example_select, [ ["Yes", 1], ["No", 2] ], props: { label: true, blank_selection: "Select One...", required: true } %>
   <%= form.collection_select :example_collection_select, example_collection, :value, :name, props: { label: true, blank_selection: "Select One...", required: true } %>
   <%= form.check_box :example_checkbox, props: { text: "Example Checkbox", label: true, required: true } %>
-  <%= form.date_picker :example_date_picker2, props: { default_date: 'blank', required: true, label: "hello-label" } %>
+  <%= form.date_picker :example_date_picker_2, props: { default_date: 'blank', label: true, required: true } %>
 
   <%= form.actions do |action| %>
     <%= action.submit %>

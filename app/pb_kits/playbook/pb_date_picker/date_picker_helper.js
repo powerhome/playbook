@@ -13,6 +13,7 @@ const datePickerHelper = (config) => {
     mode,
     onChange = () => {},
     pickerId,
+    required,
     yearRange,
   } = config
 
@@ -21,21 +22,6 @@ const datePickerHelper = (config) => {
   // ===========================================================
 
   const defaultDateGetter = () => {
-  //   if (defaultDate !== '') {
-  //     if (defaultDate === 'blank') {
-  //       return ''
-  //     } else {
-  //       return defaultDate
-  //     }
-  //   }
-  //   if (mode === 'single' && defaultDate === '') {
-  //     return new Date()
-  //   } else if (mode === 'range' && defaultDate === '') {
-  //     const today = new Date()
-  //     const tomorrow = new Date(today)
-  //     tomorrow.setDate(tomorrow.getDate() + 1)
-  //     return [today, tomorrow]
-  //   }
     if (defaultDate === '') {
       return null
     } else {
@@ -107,17 +93,10 @@ const datePickerHelper = (config) => {
     }],
     onChange: [(selectedDates, dateStr) => {
       onChange(dateStr, selectedDates)
-    },
-    // (selectedDates, dateStr) => {
-    //   updateValueOnChange(dateStr)
-    // },
-    ],
-    // onValueUpdate: [
-    //   (selectedDates, dateStr) => {
-    //     updateValueOnChange(dateStr)
-    //   },
-    // ],
-    onYearChange: [],
+    }],
+    onYearChange: [() => {
+      yearChangeHook()
+    }],
     prevArrow: '<i class="far fa-angle-left"></i>',
     static: true,
   })
@@ -139,7 +118,7 @@ const datePickerHelper = (config) => {
     years += `<option value="${year}">${year}</option>`
   }
 
-  // variablize each dropdown selecttor
+  // variablize each dropdown selector
   const dropdown = document.querySelector(`#year-${pickerId}`)
 
   // inject year options into dropdown and assign it the flatpickr's current year value
@@ -151,36 +130,41 @@ const datePickerHelper = (config) => {
     picker.changeYear(Number(e.target.value))
   })
 
+  // Reverse month and year dropdown reset on form.reset()
+  if (picker.input.form) {
+    picker.input.form.addEventListener('reset', () => {
+      // Code block triggers after form.reset() is called and executed
+      setTimeout(() => {
+        dropdown.value = picker.currentYear
+        picker.monthsDropdownContainer.value = picker.currentMonth
+
+        /* Reset date picker to default value on form.reset() */
+        if (defaultDate){
+          picker.setDate(defaultDate)
+          yearChangeHook()
+        }
+      }, 0)
+    })
+  }
+
   // two way binding
   const yearChangeHook = () => {
     dropdown.value = picker.currentYear
   }
-  picker.config.onYearChange.push(yearChangeHook)
 
   // Adding dropdown icons to year and month selects
   picker.monthElements[0].insertAdjacentHTML('afterend', '<i class="far fa-angle-down month-dropdown-icon"></i>')
   dropdown.insertAdjacentHTML('afterend', '<i class="far fa-angle-down year-dropdown-icon" id="test-id"></i>')
 
-  // Set input value attribute on page load
-  // picker.input.setAttribute('value', picker.input.value)
-  // logic for updating value when typing
-  // document.querySelector(`#${pickerId}`).addEventListener('input', (e) => {
-  //   picker.input.setAttribute('value', e.target.value)
-  //   const variant = picker.config.mode
-  //   if (variant === 'single' && e.target.value.split('').length === 10) {
-  //     picker.setDate(e.target.value)
-  //     dropdown.value = picker.currentYear
-  //   } else if (variant === 'range' && e.target.value.split('').length === 24) {
-  //     picker.setDate(e.target.value)
-  //     dropdown.value = picker.currentYear
-  //   }
-  // })
-  // Update input value attribute on Change
-  const updateValueOnChange = (pickerValue) => {
-    picker.input.setAttribute('value', pickerValue)
-  }
+  // Remove readonly attribute for validation and or text input
   if (allowInput){
     picker.input.removeAttribute('readonly')
+  }
+  if (required){
+    picker.input.removeAttribute('readonly')
+    picker.input.addEventListener('keydown', (e) => e.preventDefault())
+    picker.input.style.caretColor = 'transparent'
+    picker.input.style.cursor = 'pointer'
   }
 }
 
