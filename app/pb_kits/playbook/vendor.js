@@ -18,6 +18,9 @@ PbPopover.start()
 import PbTooltip from './pb_tooltip'
 PbTooltip.start()
 
+import PbFixedConfirmationToast from './pb_fixed_confirmation_toast'
+PbFixedConfirmationToast.start()
+
 import PbTypeahead from './pb_typeahead'
 PbTypeahead.start()
 
