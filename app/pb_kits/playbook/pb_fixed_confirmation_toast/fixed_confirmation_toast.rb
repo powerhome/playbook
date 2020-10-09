@@ -11,15 +11,9 @@ module Playbook
                     values: %w[success error neutral tip],
                     default: "neutral"
       prop :text, type: Playbook::Props::String
-      prop :closeable, type: Playbook::Props::Boolean,
-                       default: false
 
       def show_text?
         text.present?
-      end
-
-      def close_class
-        closeable.present? ? " remove_toast" : ""
       end
 
       def icon_value
@@ -36,7 +30,7 @@ module Playbook
       end
 
       def classname
-        generate_classname("pb_fixed_confirmation_toast_kit", status) + close_class
+        generate_classname("pb_fixed_confirmation_toast_kit", status)
       end
     end
   end
