@@ -3,6 +3,7 @@ examples:
   - default_nav: Default
   - with_icons_nav: With Icons
   - no_highlight_nav: No Highlight
+  - borderless_nav: No Borders
   - subtle_nav: Subtle Variant
   - subtle_with_icons_nav: Subtle With Icons
   - subtle_no_highlight_nav: Subtle No Highlight
@@ -14,6 +15,7 @@ examples:
   - default_nav: Default
   - with_icons_nav: With Icons
   - no_highlight_nav: No Highlight
+  - borderless_nav: No Borders
   - subtle_nav: Subtle Variant
   - subtle_with_icons_nav: Subtle With Icons
   - subtle_no_highlight_nav: Subtle No Highlight
