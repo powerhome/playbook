@@ -10,5 +10,5 @@ GitHubChangelogGenerator::RakeTask.new :changelog do |config|
   config.enhancement_prefix = '**Kit Enhancements:**'
   config.bug_prefix = '**Fixed Bugs:**'
   config.max_issues = 75
-  config.configure_sections = {"New Kits":{"prefix":"**New Kits:**","labels":["new kit"]},"Improvements": {"prefix":"**Improvements:**","labels":["improvement"]},"Breaking": {"prefix":"**Breaking Changes:**","labels":["breaking"]}}
+  config.add_sections = {"New Kits":{"prefix":"**New Kits:**","labels":["new kit"]},"Improvements": {"prefix":"**Improvements:**","labels":["improvement"]},"Breaking": {"prefix":"**Breaking Changes:**","labels":["breaking"]}}
 end
