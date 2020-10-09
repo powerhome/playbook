@@ -11,6 +11,9 @@ module Playbook
 
       partial "pb_toggle/toggle"
 
+      prop :input_options, type: Playbook::Props::Hash,
+                           default: {}
+
       prop :checked, type: Playbook::Props::Boolean,
                      default: false
       prop :name
@@ -24,7 +27,7 @@ module Playbook
       end
 
       def input
-        check_box_tag(name, value, checked)
+        check_box_tag(name, value, checked, input_options)
       end
 
     private
