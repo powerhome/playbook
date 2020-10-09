@@ -1,7 +1,7 @@
 import React from 'react'
 import { FixedConfirmationToast } from '../../'
 
-const FixedConfirmationToastDefault = () => {
+const FixedConfirmationToastClose = () => {
   return (
     <div>
       <div>
@@ -16,6 +16,7 @@ const FixedConfirmationToastDefault = () => {
 
       <div>
         <FixedConfirmationToast
+            closeable
             status="success"
             text="Items Successfully Moved"
         />
@@ -25,6 +26,7 @@ const FixedConfirmationToastDefault = () => {
 
       <div>
         <FixedConfirmationToast
+            closeable
             status="neutral"
             text="Scan to Assign Selected Items"
         />
@@ -33,4 +35,4 @@ const FixedConfirmationToastDefault = () => {
   )
 }
 
-export default FixedConfirmationToastDefault
+export default FixedConfirmationToastClose
