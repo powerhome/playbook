@@ -1,10 +1,18 @@
 @import "../tokens/colors";
 @import "../tokens/spacing";
 @import "../pb_caption/caption";
+@import "../pb_card/card";
+@import "./section_separator_mixin";
 
-$section_colors: (
+$section_colors_light: (
   background:   $bg_light,
-  card:   $card_light,
+  card:         $card_light,
+);
+
+$section_colors_dark: (
+  background:   $bg_dark,
+  card:         $card_dark,
+//  card:         #282342,
 );
 
 [class^=pb_section_separator_kit] {
@@ -13,7 +21,7 @@ $section_colors: (
   align-items: center;
   position: relative;
 
-  @each $color_name, $color_value in $section_colors {
+  @each $color_name, $color_value in $section_colors_light {
     &[class*=_#{$color_name}] {
       span {
         display: inline-block;
@@ -26,14 +34,7 @@ $section_colors: (
   }
  
   &::after {
-    content: "";
-    height: 1px;
-    width: 100%;
-    background: $border_light;
-    position: absolute;
-    top: 50%;
-    left: 0;
-    z-index: 0;
+    @include section_separator_horizontal(false);
   }
 
   &[class*=_horizontal] {
@@ -41,47 +42,31 @@ $section_colors: (
   }
   &[class*=_vertical] {
     &::after {
-      content: "";
-      height: 100%;
-      width: 1px;
-      margin-left: $space_xs;
-      margin-right: $space_xs;
-      background: $border_light;
-      position: initial;
-      z-index: 0;
+      @include section_separator_vertical(false);
     }
   }
   
-  &[class*=_dark] {
+  // Dark =========================
+  
+  &.dark {
     &::after {
-      content: "";
-      height: 1px;
-      width: 100%;
-      background: $border_dark;
-      position: absolute;
-      top: 50%;
-      left: 0;
-      z-index: 0;
+      @include section_separator_horizontal(true);
     }
-    &[class*=_background] {
-      span {
-        display: inline-block;
-        padding: 0 $space_xs;
-        background: $bg_dark;
-        position: relative;
-        z-index: 1;
+
+    @each $color_name, $color_value in $section_colors_dark {
+      &[class*=_#{$color_name}] {
+        span {
+          display: inline-block;
+          padding: 0 $space_xs;
+          background: #{$color_value};
+          position: relative;
+          z-index: 1;
+        }
       }
     }
     &[class*=_vertical] {
       &::after {
-        content: "";
-        height: 100%;
-        width: 1px;
-        margin-left: $space_xs;
-        margin-right: $space_xs;
-        background: $border_dark;
-        position: initial;
-        z-index: 0;
+        @include section_separator_vertical(true);
       }
     }
   }
