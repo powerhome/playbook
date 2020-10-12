@@ -24,7 +24,7 @@ module Playbook
       prop :toggle_legend_click, type: Playbook::Props::Boolean,
                                  default: true
       prop :height
-
+ß
       def chart_type
         gradient ? "area" : "line"
       end
@@ -32,6 +32,7 @@ module Playbook
       def chart_options
         {
           id: id,
+          className: classname,
           chartData: chart_data,
           type: chart_type,
           title: title,
