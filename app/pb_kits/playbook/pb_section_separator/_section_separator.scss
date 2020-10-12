@@ -1,7 +1,6 @@
 @import "../tokens/colors";
 @import "../tokens/spacing";
-@import "../pb_caption/caption";
-@import "../pb_card/card";
+@import "../tokens/opacity";
 @import "./section_separator_mixin";
 
 $section_colors_light: (
@@ -11,8 +10,7 @@ $section_colors_light: (
 
 $section_colors_dark: (
   background:   $bg_dark,
-  card:         $card_dark,
-//  card:         #282342,
+  card:         tint($bg_dark,10),
 );
 
 [class^=pb_section_separator_kit] {
@@ -20,7 +18,6 @@ $section_colors_dark: (
   justify-content: center;
   align-items: center;
   position: relative;
-
   @each $color_name, $color_value in $section_colors_light {
     &[class*=_#{$color_name}] {
       span {
@@ -32,11 +29,9 @@ $section_colors_dark: (
       }
     }
   }
- 
   &::after {
     @include section_separator_horizontal(false);
   }
-
   &[class*=_horizontal] {
     justify-content: center;
   }
@@ -52,7 +47,6 @@ $section_colors_dark: (
     &::after {
       @include section_separator_horizontal(true);
     }
-
     @each $color_name, $color_value in $section_colors_dark {
       &[class*=_#{$color_name}] {
         span {
