@@ -8,6 +8,8 @@ import {
   User,
 } from '../..'
 
+import TypeaheadWithPillsAsyncSummary from './_typeahead_with_pills_async_summary'
+
 /**
  *
  * @const filterResults
@@ -63,6 +65,7 @@ const TypeaheadWithPillsAsyncUsers = () => {
 
   return (
     <>
+      <TypeaheadWithPillsAsyncSummary />
       <If condition={users && users.length > 0}>
         <Caption
             marginBottom="xs"

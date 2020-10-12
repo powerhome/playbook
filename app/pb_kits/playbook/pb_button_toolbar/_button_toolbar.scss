@@ -1,101 +1,109 @@
 @import "../pb_button/button";
 @import "../pb_button/button_mixins";
-@import "./button_toolbar_mixins";
-@import "./button_toolbar_dark";
 @import "../tokens/colors";
-@import "../tokens/opacity";
 
 [class^=pb_button_toolbar]{
-
-  // Horizontal =============
-
-  &[class*=_horizontal] {
-    display: inline-flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: flex-start;
-    & > [class^=pb_button]  {
-      &:not(:last-child){
-        border-bottom-right-radius: 0;
-        border-top-right-radius: 0;
-        border-right-width: 0;
-      }
-      &:not(:first-child){
-        border-bottom-left-radius: 0;
-        border-top-left-radius: 0;
-        border-left-width: 0;
-      }
-    }
-    &[class*=_primary] {
-      & > [class^=pb_button]:not(:first-child)::before {
-        @include toolbar_border(false, $primary_border)
-      }  
-    }
-    &[class*=_secondary] {
-      & > [class^=pb_button]:not(:first-child)::before {
-        @include toolbar_border(false, $secondary_border)
-      }
-    }
-    & > [class^=pb_button]:not(:first-child):hover::before,
-      [class^=pb_button]:hover + [class^=pb_button]::before {
-        opacity: 0
-      }
-  }
-
-  // Vertical =============
-
-  &[class*=_vertical] {
-    display: inline-flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: center;
-    & > [class^=pb_button]  {
-      display: block;
-      flex-grow: 1;
-      flex-shrink: 1;
-      flex-basis: auto;
-      width: 100%;
-      &:not(:last-child){
-        border-bottom-right-radius: 0;
-        border-bottom-left-radius: 0;
-        border-bottom-width: 0;
-      }
-      &:not(:first-child){
-        border-top-right-radius: 0;
-        border-top-left-radius: 0;
-        border-top-width: 0;
-      }
-    }
-    &[class*=_primary] {
-      & > [class^=pb_button]:not(:first-child)::before {
-        @include toolbar_border(true, $primary_border)
-      }
-    }
-    &[class*=_secondary] {
-      & > [class^=pb_button]:not(:first-child)::before {
-        @include toolbar_border(true, $secondary_border)
-      }
-    }
-    & > [class^=pb_button]:not(:first-child):hover::before,
-    [class^=pb_button]:hover + [class^=pb_button]::before {
-      opacity: 0
-    }
-  }
-
-  // Hover =============
+    // Orientation =========
+    &[class*=_horizontal]  {
+      display: inline-flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: flex-start;
   
-  & > [class^=pb_button]  {
-    @media (hover:hover) {
-      &:hover {
-        background-color:darken($royal, 20%);
+      & > [class^=pb_button]  {
+        margin-right: $space-xs;
+
+        @media (hover:hover) {
+          &:hover {
+            background-color:darken($royal, 20%);
+          }
+        }
+
+        &[class*=secondary] {
+          @media (hover:hover) {
+            &:hover {
+              background-color:rgba($primary_action, $opacity_3)
+            }
+          }
+        }
+  
+        &:last-child {
+          margin-right: 0;
+        }
       }
     }
-    &[class*=secondary] {
-      @media (hover:hover) {
-        &:hover {
-          background-color:rgba($primary_action, $opacity_3)
+    &[class*=_vertical]  {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: center;
+  
+      & > [class^=pb_button]  {
+        display: block;
+        flex-grow: 1;
+        flex-shrink: 1;
+        flex-basis: auto;
+        width: 100%;
+        margin-bottom: $space-xs;
+
+        @media (hover:hover) {
+          &:hover {
+            background-color:darken($royal, 20%);
+          }
+        }
+
+        &[class*=secondary] {
+          @media (hover:hover) {
+            &:hover {
+              background-color:rgba($primary_action, $opacity_3)
+            }
+          }
+        }
+  
+        &:last-child {
+          margin-bottom: 0;
+        }
+      }
+    }
+
+    // Connect =============
+    &[class*=_connected]  {
+      & > [class^=pb_button]  {
+        margin: 0;
+      }
+  
+      &[class*=_horizontal] {
+        & > [class^=pb_button]  {
+          &:not(:last-child){
+            border-bottom-right-radius: 0;
+            border-top-right-radius: 0;
+            border-right-width: 0;
+            border: 1px solid #e1e4e8;
+          }
+          &:not(:first-child){
+            border-bottom-left-radius: 0;
+            border-top-left-radius: 0;
+            border-left-width: 0;
+            border: 1px solid #e1e4e8;
+          }
+        }
+      }
+  
+      &[class*=_vertical] {
+        & > [class^=pb_button]  {
+          &:not(:last-child){
+            border-bottom-right-radius: 0;
+            border-bottom-left-radius: 0;
+            border-bottom-width: 0;
+            border: 1px solid #e1e4e8;
+          }
+          &:not(:first-child){
+            border-top-right-radius: 0;
+            border-top-left-radius: 0;
+            border-top-width: 0;
+            border: 1px solid #e1e4e8;
+          }
         }
       }
     }
   }
-}

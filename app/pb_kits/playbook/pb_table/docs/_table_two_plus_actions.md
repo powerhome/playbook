@@ -1,1 +1,0 @@
-If there are more than two actions on each row, then they should be contained in secondary circle icon button with the `ellipsis-h` icon (horizontal ellipsis) at the end of the row

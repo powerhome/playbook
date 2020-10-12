@@ -15,11 +15,8 @@ module Playbook
       prop :variant, type: Playbook::Props::Enum,
                      values: %w[default tracker],
                      default: "default"
-      prop :color, type: Playbook::Props::Enum,
-                     values: %w[primary info],
-                     default: "primary"
       def classname
-        generate_classname("pb_progress_step_kit", orientation, icon_class, variant_class, color_class)
+        generate_classname("pb_progress_step_kit", orientation, icon_class, variant_class)
       end
 
     private
@@ -32,13 +29,6 @@ module Playbook
         case variant
         when "tracker"
           "tracker"
-        end
-      end
-
-      def color_class
-        case color
-        when "info"
-          "info"
         end
       end
     end

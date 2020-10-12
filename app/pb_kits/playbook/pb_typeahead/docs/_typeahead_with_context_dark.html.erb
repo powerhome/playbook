@@ -18,7 +18,7 @@
 
 <%= javascript_tag defer: "defer" do %>
   document.addEventListener("pb-typeahead-kit-search", function(event) {
-    if (!event.target.dataset || !event.target.dataset.typeaheadExample2) return;
+    if (!event.target.dataset.typeaheadExample2) return;
 
     const fuzzyMatch = function(string, term) {
       const ratio = 0.5;

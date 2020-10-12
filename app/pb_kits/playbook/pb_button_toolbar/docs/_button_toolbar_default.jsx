@@ -1,49 +1,26 @@
 import React from 'react'
 import { Button, ButtonToolbar } from '../..'
 
-const ButtonToolbarDefault = (props) => (
-  <div className="pb--doc-demo-row">
+const ButtonToolbarDefault = () => (
+  <div>
     <ButtonToolbar
-        {...props}
-        orientation="vertical"
-    >
-      <Button
-          {...props}
-          text="Create"
-      />
-      <Button
-          {...props}
-          text="Edit"
-      />
-      <Button
-          {...props}
-          text="Copy"
-      />
-      <Button
-          {...props}
-          text="Cut"
-      />
-    </ButtonToolbar>
-
-    <ButtonToolbar
-        {...props}
+        connected
         orientation="horizontal"
     >
       <Button
-          {...props}
-          text="Create"
+          text="Field"
       />
       <Button
-          {...props}
-          text="Edit"
+          text="Retail"
       />
       <Button
-          {...props}
-          text="Copy"
+          text="Event"
       />
       <Button
-          {...props}
-          text="Cut"
+          text="Training"
+      />
+      <Button
+          text="Not Working"
       />
     </ButtonToolbar>
   </div>

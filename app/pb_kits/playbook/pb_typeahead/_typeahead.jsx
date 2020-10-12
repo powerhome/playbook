@@ -3,7 +3,6 @@
 import React from 'react'
 import Select from 'react-select'
 import AsyncSelect from 'react-select/async'
-import { get } from 'lodash'
 
 import Control from './components/Control'
 import IndicatorsContainer from './components/IndicatorsContainer'
@@ -12,8 +11,6 @@ import MultiValue from './components/MultiValue'
 import Option from './components/Option'
 import Placeholder from './components/Placeholder'
 import ValueContainer from './components/ValueContainer'
-
-import { noop } from '../utilities/props'
 
 /**
  * @typedef {object} Props
@@ -25,8 +22,6 @@ import { noop } from '../utilities/props'
 type Props = {
   async?: boolean,
   label?: string,
-  loadOptions?: noop | string,
-  name?: string,
 }
 
 /**
@@ -50,27 +45,14 @@ const Typeahead = (props: Props) => {
     },
     isClearable: true,
     isSearchable: true,
-    name,
     ...props,
   }
 
-  if (typeof(props.loadOptions) === 'string') selectProps.loadOptions = get(window, props.loadOptions)
-
   const Tag = props.async ? AsyncSelect : Select
-
-  const handleOnChange = (data, { action }) => {
-    if (action === 'clear') {
-      const multiValueClearEvent = new CustomEvent('pb-typeahead-kit-result-clear')
-      document.dispatchEvent(multiValueClearEvent)
-    }
-  }
 
   return (
     <div className="pb_typeahead_kit react-select">
-      <Tag
-          onChange={handleOnChange}
-          {...selectProps}
-      />
+      <Tag {...selectProps} />
     </div>
   )
 }

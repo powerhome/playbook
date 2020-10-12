@@ -6,25 +6,25 @@ const DatePickerInput = () => (
     <DatePicker
         inputAria={{ label: 'input-field' }}
         inputData={{ key: 'value', key2: 'value2' }}
-        label="Aria, Name, and Data Attributes"
         name="date-field"
         pickerId="date-picker-input1"
+        type="date"
     />
     <DatePicker
-        label="Custom Placeholder"
+        defaultDate="blank"
         pickerId="date-picker-input2"
-        placeholder="custom-placeholder"
+        placeholder="Select Date"
     />
     <DatePicker
-        label="Blank Placeholder"
-        pickerId="date-picker-input3"
-        placeholder=""
-    />
-    <DatePicker
+        defaultDate="blank"
         disableInput
-        label="Disable Input"
-        pickerId="date-picker-input4"
+        pickerId="date-picker-input3"
         placeholder="Disabled Input"
+    />
+    <DatePicker
+        dark
+        hideLabel
+        pickerId="date-picker-input4"
     />
   </div>
 )

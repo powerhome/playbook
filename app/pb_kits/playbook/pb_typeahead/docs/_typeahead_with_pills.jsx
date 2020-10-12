@@ -10,9 +10,12 @@ const options = [
   { label: 'Roofs', value: '#0000FF' },
 ]
 
+import TypeaheadWithPillsSummary from './_typeahead_with_pills_summary'
+
 const TypeaheadWithPills = () => {
   return (
     <>
+      <TypeaheadWithPillsSummary />
       <Typeahead
           isMulti
           label="Colors"
