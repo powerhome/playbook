@@ -17,7 +17,7 @@ type ButtonToolbarProps = {
   onClick?: EventHandler,
   orientation?: "horizontal" | "vertical",
   text?: string,
- variant?: "primary" | "secondary",
+  variant?: string,
 }
 
 const ButtonToolbar  = (props: ButtonToolbarProps) => {
@@ -25,18 +25,18 @@ const ButtonToolbar  = (props: ButtonToolbarProps) => {
     aria = {},
     children,
     className,
+    connected = false,
     data = {},
     id,
     orientation = 'horizontal',
     text,
-    variant = 'primary',
   } = props
 
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
 
   const classes = classnames(
-    buildCss('pb_button_toolbar_kit', orientation, variant),
+    buildCss('pb_button_toolbar_kit', orientation, { connected }),
     globalProps(props),
     className
   )

@@ -37,7 +37,7 @@ export default class PbPopover extends PbEnhancedElement {
 
       setTimeout(() => {
         this.popper.update()
-        this.toggleTooltip()
+        this.tooltip.classList.toggle('show')
       }, 0)
     })
   }
@@ -71,12 +71,10 @@ export default class PbPopover extends PbEnhancedElement {
 
   hideTooltip() {
     this.tooltip.classList.remove('show')
-    this.tooltip.classList.add('hide')
   }
 
   toggleTooltip() {
     this.tooltip.classList.toggle('show')
-    this.tooltip.classList.toggle('hide')
   }
 
   get triggerElement() {

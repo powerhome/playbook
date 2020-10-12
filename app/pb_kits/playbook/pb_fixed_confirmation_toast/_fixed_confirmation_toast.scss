@@ -20,16 +20,6 @@ $confirmation_toast_colors: (
   border-radius: $border_rad_mega;
   box-shadow: $shadow_deeper;
 
-  .fa-times {
-    cursor: pointer;
-    opacity: 0.5;
-    position: relative;
-    right: -8px;
-  }
-  &:hover .fa-times {
-    opacity: 1;
-  }
-
   @each $color_name, $color_value in $confirmation_toast_colors {
     &[class*=_#{$color_name}]  {
       background: $color_value;

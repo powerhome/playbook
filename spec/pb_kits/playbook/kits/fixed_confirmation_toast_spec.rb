@@ -20,13 +20,6 @@ RSpec.describe Playbook::PbFixedConfirmationToast::FixedConfirmationToast do
     end
   end
 
-  describe "#closeable?" do
-    it "returns true if closeable is present", :aggregate_failures do
-      expect(subject.new({}).closeable).to eq false
-      expect(subject.new(closeable: true).closeable).to eq true
-    end
-  end
-
   describe "#icon_value" do
     it "returns correct icon name", :aggregate_failures do
       expect(subject.new(status: "success").icon_value).to eq "check"
@@ -45,7 +38,6 @@ RSpec.describe Playbook::PbFixedConfirmationToast::FixedConfirmationToast do
       expect(subject.new(text: text, status: "neutral").classname).to eq "pb_fixed_confirmation_toast_kit_neutral"
       expect(subject.new(text: text, status: "tip").classname).to eq "pb_fixed_confirmation_toast_kit_tip"
       expect(subject.new(text: text, status: "tip", dark: true).classname).to eq "pb_fixed_confirmation_toast_kit_tip dark"
-      expect(subject.new(text: text, status: "tip", closeable: true).classname).to eq "pb_fixed_confirmation_toast_kit_tip remove_toast"
     end
   end
 end

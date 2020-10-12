@@ -62,7 +62,8 @@ const DatePicker = (props: DatePickerProps) => {
     name,
     onChange = () => {},
     pickerId,
-    placeholder = 'Select Date',
+    placeholder,
+    type,
     yearRange = [ 1900, 2100 ],
   } = props
 
@@ -127,6 +128,7 @@ const DatePicker = (props: DatePickerProps) => {
             label={hideLabel ? null : label}
             name={name}
             placeholder={placeholder}
+            type={type}
         />
         <If condition={!hideIcon}>
           <div

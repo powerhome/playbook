@@ -2,30 +2,21 @@
 
 import React from 'react'
 import DateTime from '../pb_kit/dateTime.js'
-import { Body, Caption, Icon } from '../'
+import { Body, Icon } from '../'
 import classnames from 'classnames'
 import { globalProps } from '../utilities/globalProps.js'
-import { buildCss } from '../utilities/props'
 
 type DateRangeInlineProps = {
   className?: string,
-  id?: string,
   data?: string,
-  align?: "left" | "center" | "vertical",
-  size?: "sm" | "xs",
-  dark?: boolean,
-  icon?: boolean,
+  endDate?: date,
+  id?: string,
   startDate?: date,
-  endDate?: date
 }
 
-const dateTimestamp = (dateValue, includeYear) => {
+const dateTimestamp = (dateValue) => {
   const date = new DateTime({ value: dateValue })
-  if (includeYear) {
-    return `${date.toMonth()} ${date.toDay()}, ${date.toYear()}`
-  } else {
-    return `${date.toMonth()} ${date.toDay()}`
-  }
+  return `${date.toDay()} ${date.toMonth()} ${date.toYear()}`
 }
 
 const dateTimeIso = (dateValue) => {
@@ -34,115 +25,41 @@ const dateTimeIso = (dateValue) => {
 }
 
 const DateRangeInline = (props: DateRangeInlineProps) => {
-  const {
-    icon = false,
-    dark = false,
-    size = 'sm',
-    align = 'left',
-    startDate,
-    endDate,
-    className,
-  } = props
-
-  const iconContent = () => {
-    return (
-      <If condition={icon}>
-        <Body
-            color="light"
-            tag="span"
-        >
-          <Icon
-              className="pb_date_range_inline_icon"
-              dark={dark}
-              fixedWidth
-              icon="calendar-alt"
-              size={size}
-              tag="span"
-          />
-        </Body>
-      </If>
-    )
-  }
-
-  const dateInCurrentYear = () => {
-    const currentDate = new Date()
-    return startDate.getFullYear() == endDate.getFullYear() && startDate.getFullYear() == currentDate.getFullYear()
-  }
-
-  const dateRangeClasses =  buildCss('pb_date_range_inline_kit', align)
-
-  const renderTime = (date) => {
-    return (
-      <time dateTime={dateTimeIso(date)}>
-        <Choose>
-          <When condition={dateInCurrentYear()}>
-            {` ${dateTimestamp(date, false)} `}
-          </When>
-          <Otherwise>
-            {` ${dateTimestamp(date, true)} `}
-          </Otherwise>
-        </Choose>
-      </time>
-    )
-  }
-
+  const { endDate, startDate } = props
   return (
-    <div className={classnames(dateRangeClasses, globalProps(props), className)}>
-      <div className="pb_date_range_inline_wrapper">
-        <If condition={size == 'xs'}>
-          {iconContent()}
-          <Caption
-              dark={dark}
-              tag="span"
-          >
-            {renderTime(startDate)}
-          </Caption>
-          <Caption
-              dark={dark}
-              tag="span"
-          >
-            <Icon
-                className="pb_date_range_inline_arrow"
-                fixedWidth
-                icon="long-arrow-right"
-            />
-          </Caption>
-          <Caption
-              dark={dark}
-              tag="span"
-          >
-            {renderTime(endDate)}
-          </Caption>
-        </If>
-
-        <If condition={size == 'sm'}>
-          {iconContent()}
-          <Body
-              dark={dark}
-              tag="span"
-          >
-            {renderTime(startDate)}
-          </Body>
-          <Body
-              color="light"
-              dark={dark}
-              tag="span"
-          >
-            <Icon
-                className="pb_date_range_inline_arrow"
-                dark={dark}
-                fixedWidth
-                icon="long-arrow-right"
-            />
-          </Body>
-          <Body
-              dark={dark}
-              tag="span"
-          >
-            {renderTime(endDate)}
-          </Body>
-        </If>
-      </div>
+    <div className={classnames('pb_date_range_inline', globalProps(props))}>
+      <Body
+          color="light"
+          tag="span"
+      >
+        <Icon
+            fixedWidth
+            icon="calendar-alt"
+        />
+      </Body>
+      <Body tag="span">
+        <time dateTime={dateTimeIso(startDate)}>
+          {` ${dateTimestamp(
+          startDate
+        )} `}
+        </time>
+      </Body>
+      <Body
+          color="light"
+          tag="span"
+      >
+        <Icon
+            fixedWidth
+            icon="long-arrow-right"
+        />
+      </Body>
+      <Body tag="span">
+        <time dateTime={dateTimeIso(endDate)}>
+          {` ${dateTimestamp(
+          endDate
+        )} `}
+        </time>
+      </Body>
     </div>
   )
 }

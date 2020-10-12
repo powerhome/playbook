@@ -31,14 +31,12 @@
 
 .pb_popover_tooltip {
   opacity: 0;
+  animation-name: fadeOut;
+  animation-duration: 150ms;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
   visibility: hidden;
   pointer-events: none;
-  &.hide {
-    animation-name: fadeOut;
-    animation-duration: 150ms;
-    animation-timing-function: linear;
-    animation-fill-mode: forwards;
-  }
   &.show {
     animation-name: fadeIn;
     animation-duration: 150ms;
