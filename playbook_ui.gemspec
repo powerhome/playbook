@@ -22,7 +22,9 @@ Gem::Specification.new do |s|
     "app/pb_kits/playbook/*.{scss,js,rb}",
     "app/helpers/**/*",
     "app/assets/images/*",
-    "{fonts,lib}/**/*"
+    "fonts/**/*",
+    "lib/*.rb",
+    "lib/playbook/**/*"
   ] + ["Rakefile", "README.md"]
 
   s.add_dependency "actionpack", ">= 5.1.6", "< 6.0"
