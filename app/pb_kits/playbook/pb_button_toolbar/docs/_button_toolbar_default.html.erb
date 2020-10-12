@@ -1,17 +1,7 @@
-<div class="pb--doc-demo-row">
-
-  <%= pb_rails("button_toolbar", props: { orientation: "vertical" }) do %>
-    <%= pb_rails("button", props: { text: "Create" }) %>
-    <%= pb_rails("button", props: { text: "Edit"}) %>
-    <%= pb_rails("button", props: { text: "Copy"}) %>
-    <%= pb_rails("button", props: { text: "Cut"}) %>
-  <% end %>
-
-  <%= pb_rails("button_toolbar", props: { orientation: "horizontal" }) do %>
-    <%= pb_rails("button", props: { text: "Create" }) %>
-    <%= pb_rails("button", props: { text: "Edit" }) %>
-    <%= pb_rails("button", props: { text: "Copy" }) %>
-    <%= pb_rails("button", props: { text: "Cut" }) %>
-  <% end %>
-
-</div>
+<%= pb_rails("button_toolbar", props: { orientation: "horizontal", connected: true }) do %>
+  <%= pb_rails("button", props: { text: "Field" }) %>
+  <%= pb_rails("button", props: { text: "Retail"}) %>
+  <%= pb_rails("button", props: { text: "Event"}) %>
+  <%= pb_rails("button", props: { text: "Training"}) %>
+  <%= pb_rails("button", props: { text: "Not Working"}) %>
+<% end %>

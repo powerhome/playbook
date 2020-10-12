@@ -1,5 +1,3 @@
 The date picker is built with the text input kit.  Text input props you pass to the date picker kit will be forwarded to the input, with a few exceptions.  The `value` attribute is automatically handled and bound to whatever date string is contained by the input field.  You cannot pass a custom value prop.  `id` props passed to the date picker kit will be assigned to it's parent/wrapper div.  The `pickerId` prop is passed directly to the input and is required to instatiate the date picker.
 
 You must use `inputAria` or `input_aria` and `inputData` or `input_data` props if you wish to pass data or aria attributes to the text input kit.  If you use `data` or `aria` props they will be passed to the date picker kit itself instead.  Also be aware the default behavior of text input aria and data props is to pass those props to attributes on the wrapping div not on the input itself.
-
-The placeholder prop has a default string value: "Select Date".  You can replace this with your own string or an empty string if you'd prefer it blank.

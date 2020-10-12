@@ -7,7 +7,7 @@ import { Icon } from '..'
 
 type ProgressStepItemProps = {
   className?: string,
-  status?: 'complete' | 'active' | 'inactive' | 'hidden',
+  status?: 'complete' | 'active' | 'inactive',
   children?: React.Node,
 }
 
@@ -20,15 +20,13 @@ const ProgressStepItem = ({
 
   return (
     <li className={classnames(progressStepItem, className)}>
-      <div className="box">
-        <div className="circle">
-          <Icon
-              icon="check"
-          />
-        </div>
-        <div className="content">
-          {children}
-        </div>
+      <div className="circle">
+        <Icon
+            icon="check"
+        />
+      </div>
+      <div>
+        {children}
       </div>
     </li>
   )

@@ -13,14 +13,12 @@ type ProgressStepProps = {
   orientation?: "horizontal" | "vertical",
   icon?: boolean,
   variant?: string,
-  color?: string,
 }
 
 const ProgressStep = (props: ProgressStepProps) => {
   const {
     className,
     children,
-    color,
     orientation = 'horizontal',
     icon = false,
     variant,
@@ -31,7 +29,6 @@ const ProgressStep = (props: ProgressStepProps) => {
     orientation,
     iconStyle,
     variant,
-    color,
   )
 
   return (

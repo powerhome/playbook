@@ -19,18 +19,11 @@ const MultiValue = (props: Props) => {
     selectProps,
   } = props
 
-  const { imageUrl, label } = data
-
-  const handleOnMultiValueRemove = () => {
-    const multiValueRemoveEvent = new CustomEvent('pb-typeahead-kit-result-option-remove', { detail: data })
-    document.dispatchEvent(multiValueRemoveEvent)
-  }
-
   const handleOnClick = () => {
     if (selectProps.onMultiValueClick) selectProps.onMultiValueClick(data)
-    handleOnMultiValueRemove()
     removeProps.onClick()
   }
+  const { imageUrl, label } = data
 
   return (
     <components.MultiValueContainer

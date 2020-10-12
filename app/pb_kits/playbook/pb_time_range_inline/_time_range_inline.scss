@@ -22,14 +22,14 @@
     display: flex;
     align-items: center;
     [class*=pb_time_range_inline_arrow] {
-      margin-left: $space_xs/2;
-      margin-right: $space_xs/2;
+      margin-left: 4px;
+      margin-right: 4px;
     }
     [class*=pb_time_range_inline_timezone] {
-      margin-left: $space_xs/2;
+      margin-left: 4px;
     }
     [class*=pb_time_range_inline_icon] {
-      margin-right: $space_xs/2;
+      margin-right: 4px;
     }
   }
 }

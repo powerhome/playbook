@@ -1,1 +1,0 @@
-If there are two actions on each of the row, one should ideally one should use the `secondary` variant and the other use the `link` variant. The button using the `secondary` variant should be placed at the end.
