@@ -82,7 +82,7 @@
     "highcharts": "7.2.2",
     "jsx-control-statements": "^3.2.8",
     "lazysizes": "^5.2.1",
-    "lodash": "4.17.15",
+    "lodash": "^4.17.19",
     "moment": "^2.24.0",
     "moment-strftime": "^0.5.0",
     "moment-timezone": "^0.5.26",
@@ -107,8 +107,10 @@
     "webpacker-react": "^0.3.2"
   },
   "resolutions": {
-    "lodash": "^4.17.13",
-    "set-value": "^2.0.1"
+    "lodash": "^4.17.19",
+    "selfsigned": "^1.10.8",
+    "set-value": "^2.0.1",
+    "yargs-parser": "^13.1.2"
   },
   "husky": {
     "hooks": {
