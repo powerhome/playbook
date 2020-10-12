@@ -28,8 +28,9 @@ module Playbook
       redirect_back(fallback_location: root_path)
     end
 
-
-    def home; end
+    def home
+      render layout: "layouts/playbook/landing_page"
+    end
 
     def utilities; end
 

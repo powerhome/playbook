@@ -1,5 +1,5 @@
 Playbook::Engine.routes.draw do
-  root              to: "pages#kits"
+  root              to: "pages#home"
   get 'home',       to: "pages#home"
   get 'principles', to: "pages#principles"
   get 'grid',       to: "pages#grid"

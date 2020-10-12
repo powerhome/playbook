@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title> Playbook Design System </title>
+    <%= csrf_meta_tags%>
+    <%= csp_meta_tag%>
+    <%= stylesheet_packs_with_chunks_tag 'main' %>
+    <meta content="user-scalable=0, initial-scale=1.0, minimum-scale=1" name="viewport"></meta>
+  </head>
+  <body>
+    <div class="pb--page--topNav">
+    <%= pb_rails("flex", props: {classname: "flex-container", spacing: "between"}) do %>
+      <%= pb_rails("flex/flex_item") do %>
+        <%= pb_rails("flex") do %>
+          <%= image_tag("pb-landing.logo.svg", class: "mr_lg") %>
+          <%= pb_rails("body", props: { classname: "flex-item", margin_right: "lg"  }) do %>Introduction<% end %>
+          <%= pb_rails("body", props: { classname: "flex-item", margin_right: "lg"  }) do %>Visual Guidelines<% end %>
+          <a href="/kits">
+            <%= pb_rails("body", props: {classname: "flex-item"}) do %>Design Components<% end %>
+          </a>
+        <% end %>
+      <% end %>
+        <%= pb_rails("flex/flex_item") do %>
+          <%= pb_rails("body", props: { classname: "flex-item" }) do %>Signout<% end %>
+        <% end %>
+      <% end %>
+  
+    </div>
+    <div class="pb--page--content--main landing-page <%= cookies[:dark_mode] == "true" ? 'dark' : '' %>">
+      <%= yield %>
+    </div>
+  </body>
+</html>
