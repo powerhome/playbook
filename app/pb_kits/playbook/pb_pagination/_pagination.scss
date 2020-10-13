@@ -26,28 +26,23 @@
     content: "\25B6";
   }
 
-  &[class*=_collapsed]  {
-    .paginate-body {
-      padding: 0px 10px;
+  &[class*=_basic]  {
+    /* Variant specific CSS goes here */
+    .vertical-separator {
       border-right: 1px solid $neutral;
-      border-left: 1px solid $neutral;
     }
+  }
+
+  &[class*=_collapsed]  {
+    /* Variant specific CSS goes here */
   }
 
   &[class*=_expanded]  {
-    .paginate-body {
-      padding: 0px 10px;
-      border-right: 1px solid $neutral;
-      border-left: 1px solid $neutral;
-    }
+    /* Variant specific CSS goes here */
   }
 
   &[class*=_scroll]  {
-    .paginate-body {
-      padding: 0px 10px;
-      border-right: 1px solid $neutral;
-      border-left: 1px solid $neutral;
-    }
+    /* Variant specific CSS goes here */
   }
 }
 
@@ -63,6 +58,9 @@
 }
 
 .paginate-body {
+  padding: 0px 10px;
+  border-right: 1px solid $neutral;
+  border-left: 1px solid $neutral;
   .range {
     .range-item {
       padding: 5px 10px;

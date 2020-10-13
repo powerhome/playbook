@@ -1,9 +1,12 @@
+<!--
+  Any instance variables (@page, @total_items, @per_page) should be set in the controller by
+  will_paginate or another pagination gem and are only used here for demo purposes.
+-->
+
 <% @page = request.params[:page].to_i.nonzero? || 1 %>
 
-<%= pb_rails("pagination", props:
-  {
+<%= pb_rails("pagination",
+  props: {
     variant: "collapsed",
-    target_page: @page,
-    next_page: @page + 1 ,
-    previous_page: @page - 1,
+    target_page: @page
   })%>

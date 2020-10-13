@@ -1,6 +1,8 @@
-<!-- These instance variables (@page, @total_items, @per_page) are set in the controller for the page
-    and are used here to make the example function
- -->
+<!--
+  Any instance variables (@page, @total_items, @per_page) should be set in the controller by
+  will_paginate or another pagination gem and are only used here for demo purposes.
+-->
+
 <% @page = request.params[:page].to_i.nonzero? || 1 %>
 <% @total_items = 769 %>
 <% @per_page = 25 %>
@@ -11,5 +13,4 @@
     target_page: @page,
     total_items: @total_items,
     per_page: @per_page,
-  }
-)%>
+  })%>

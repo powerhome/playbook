@@ -1,61 +1,76 @@
-<!-- Pagination - No Body -->
+<!-- Pagination -->
 <%= content_tag(:div,
-    aria: object.aria,
-    class: object.classname,
-    data: object.data,
-    id: object.id) do %>
+  aria: object.aria,
+  class: object.classname,
+  data: object.data,
+  id: object.id) do %>
 
-    <!-- Basic -->
-    <% if object.classname.include? "_basic" %>
-        <span class="paginate-backward" data-paginate="backward"></span>
-            <span class="paginate-body"></span>
-        <span class="paginate-forward" data-paginate="forward"></span>
+  <!-- Basic -->
+  <% if object.classname.include? "_basic" %>
+    <span class="paginate-backward" data-paginate="backward"></span>
+      <span class="vertical-separator"></span>
+    <span class="paginate-forward" data-paginate="forward"></span>
 
-    <!-- Collapsed -->
-    <% elsif object.classname.include? "_collapsed" %>
-        <span class="paginate-backward" data-paginate="backward"></span>
-            <span class="paginate-body">
-                <%= object.target_page %>
+  <!-- Collapsed -->
+  <% elsif object.classname.include? "_collapsed" %>
+    <span class="paginate-backward" data-paginate="backward"></span>
+      <span class="paginate-body">
+        <%= object.target_page %>
+      </span>
+    <span class="paginate-forward" data-paginate="forward"></span>
+
+  <!-- Scroll -->
+  <% elsif object.classname.include? "_scroll" %>
+    <span class="paginate-backward" data-paginate="backward"></span>
+      <span class="paginate-body">
+        <%= object.number_of_pages object.target_page, @per_page, @total_items %>
+      </span>
+    <span class="paginate-forward" data-paginate="forward"></span>
+
+  <!-- Expanded -->
+  <% elsif object.classname.include? "_expanded" %>
+    <span class="paginate-backward" data-paginate="backward"></span>
+      <span class="paginate-body">
+        <span class="range">
+          <% object.calculate_page_range.each do |page| %>
+            <span class="range-item <%= object.target_page == page ? 'active': '' %>">
+              <%= page %>
             </span>
-        <span class="paginate-forward" data-paginate="forward"></span>
-
-    <!-- Scroll -->
-    <% elsif object.classname.include? "_scroll" %>
-        <span class="paginate-backward" data-paginate="backward"></span>
-            <span class="paginate-body">
-                <%= object.number_of_pages object.target_page, @per_page, @total_items %>
-            </span>
-        <span class="paginate-forward" data-paginate="forward"></span>
-
-    <!-- Expanded -->
-    <% elsif object.classname.include? "_expanded" %>
-        <span class="paginate-backward" data-paginate="backward"></span>
-            <span class="paginate-body">
-                <span class="range">
-                    <% object.calculate_page_range.each do |page| %>
-                        <span class="range-item <%= object.target_page == page ? 'active': '' %>">
-                            <%= page %>
-                        </span>
-                    <% end %>
-                </span>
-            </span>
-        <span class="paginate-forward" data-paginate="forward"></span>
+          <% end %>
+        </span>
+    </span>
+    <span class="paginate-forward" data-paginate="forward"></span>
     <% end %>
 <% end %>
 
 <script>
-    paginateRight = document.querySelector('.paginate-forward');
-    paginateLeft = document.querySelector('.paginate-backward');
+  paginateRight = document.querySelector('.paginate-forward');
+  paginateLeft = document.querySelector('.paginate-backward');
 
-    function triggerPagination() {
-      let direction = event.target.dataset.paginate;
-      let urlParams = new URLSearchParams(location.search);
-      let currentPageNumber = parseInt(urlParams.get('page'));
-      let newPageNumber = (direction == "forward" ? currentPageNumber + 1 : currentPageNumber - 1);
+  function triggerPagination() {
+    let newPageNumber;
+    let direction = event.target.dataset.paginate;
+    let urlParams = new URLSearchParams(location.search);
+    let currentPageNumber = parseInt(urlParams.get('page'));
 
+    if (isNaN(currentPageNumber)) {
+      newPageNumber = 1;
       window.location.href = `${location.origin + location.pathname}?page=${newPageNumber}`;
+
+      return;
     }
 
-    paginateRight.addEventListener('click', triggerPagination);
-    paginateLeft.addEventListener('click', triggerPagination);
+    if (direction == "forward") {
+      newPageNumber = currentPageNumber + 1
+    } else if (currentPageNumber == 1) {
+      newPageNumber = currentPageNumber
+    } else {
+      newPageNumber = currentPageNumber - 1
+    }
+
+    window.location.href = `${location.origin + location.pathname}?page=${newPageNumber}`;
+  }
+
+  paginateRight.addEventListener('click', triggerPagination);
+  paginateLeft.addEventListener('click', triggerPagination);
 </script>

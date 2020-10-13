@@ -10,11 +10,7 @@ module Playbook
       prop :variant, type: Playbook::Props::Enum,
                      values: %w[basic collapsed expanded scroll],
                      default: "basic"
-      prop :pages, type: Playbook::Props::Array, default: []
       prop :target_page, type: Playbook::Props::Number, default: 1
-
-      prop :page_range, type: Playbook::Props::Array, default: []
-      prop :active_page, type: Playbook::Props::Boolean, default: false
 
       PAGINATE_RANGE = 2
 
@@ -27,8 +23,13 @@ module Playbook
       end
 
       def number_of_pages target_page, per_pages, total_items
-        return if (target_page > total_page_count(per_pages, total_items))
-        "#{target_page} of #{ total_page_count(per_pages, total_items) }"
+        max_page_count = total_page_count(per_pages, total_items)
+
+        if target_page <= max_page_count
+          "#{target_page} of #{ max_page_count }"
+        else
+          "#{max_page_count} of #{ max_page_count}"
+        end
       end
 
       def calc_next_pages page, next_nums
@@ -62,6 +63,7 @@ module Playbook
 
         range = prev_pages | next_pages
       end
+
     end
   end
 end
