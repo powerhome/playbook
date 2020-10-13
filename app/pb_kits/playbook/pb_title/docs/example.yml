@@ -1,7 +1,8 @@
 examples:
   rails:
   - title_light: Light UI
-  - title_dark: Dark UI
+  - title_variants: Variants
+
   react:
   - title_light: Light UI
-  - title_dark: Dark UI
+  - title_variants: Variants

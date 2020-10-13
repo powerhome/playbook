@@ -1,9 +1,12 @@
 examples:
-  
+
   rails:
   - pagination_default: Default
-  
-  
+  - pagination_collapsed: Collapsed
+  - pagination_scroll: Scroll
+  - pagination_expanded: Expanded
+
+
   react:
   - pagination_default: Default
-  
+

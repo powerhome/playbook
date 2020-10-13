@@ -25,6 +25,7 @@ kits:
   - fixed_confirmation_toast
   - flex
   - forms:
+    - date_picker
     - file_upload
     - form
     - form_pill

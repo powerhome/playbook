@@ -2,12 +2,40 @@
 @import "../tokens/spacing";
 @import "../tokens/shadows";
 
-.pb_pagination_kit {;
+[class^=pb_pagination_kit] {
   width: -moz-fit-content;
   border: $border_rad_lightest solid $neutral;
   border-radius: $border_rad_heavier;
   padding: 6px;
   box-shadow: $shadow_deep;
+
+  .paginate-right {
+    padding: 0px 10px;
+    font-size: 12px;
+    font-weight: bolder;
+    color: $neutral;
+    cursor: pointer;
+  }
+
+  .paginate-left:before {
+    content: "\25C0";
+  }
+
+  .paginate-right:before {
+    content: "\25B6";
+  }
+
+  &[class*=_collapsed]  {
+    border: 1px solid red;
+  }
+
+  &[class*=_expanded]  {
+    border: 1px solid green;
+  }
+
+  &[class*=_scroll]  {
+    border: 1px solid orange;
+  }
 }
 
 .paginate-body {
@@ -16,29 +44,19 @@
   border-left: 1px solid $neutral;
 }
 
+
 .paginate-left {
   padding: 0px 10px;
   font-size: 12px;
   font-weight: bolder;
   color: $neutral;
   cursor: pointer;
+  .paginate-left:before {
+    content: "\25C0";
+  }
 }
 
-.paginate-right {
-  padding: 0px 10px;
-  font-size: 12px;
-  font-weight: bolder;
-  color: $neutral;
-  cursor: pointer;
-}
 
-.paginate-left:before {
-  content: "\25C0";
-}
-
-.paginate-right:before {
-  content: "\25B6";
-}
 
 .paginate-body {
   .controls {
@@ -71,4 +89,3 @@
   color: $neutral;
   cursor: pointer;
 }
-

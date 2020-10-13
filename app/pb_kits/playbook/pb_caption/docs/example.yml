@@ -1,7 +1,5 @@
 examples:
   rails:
-  - caption_light: Light UI
-  - caption_dark: Dark UI
+  - caption_light: Default
   react:
-  - caption_light: Light UI
-  - caption_dark: Dark UI
+  - caption_light: Default

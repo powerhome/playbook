@@ -2,14 +2,11 @@ examples:
 
   rails:
   - radio_default: Default
-  - radio_dark: Dark
   - radio_custom: Custom
   - radio_error: With Error
-  - radio_dark_error: With Error
+  - radio_options: With Options
 
   react:
   - radio_default: Default
-  - radio_dark: Dark
   - radio_custom: Custom
   - radio_error: With Error
-  - radio_dark_error: Dark With Error

@@ -3,7 +3,7 @@ import { DateTimeStacked } from '../../'
 
 const DateTimeStackedDefault = () => (
   <div>
-    <DateTimeStacked date={new Date} />
+    <DateTimeStacked date={new Date()} />
   </div>
 )
 

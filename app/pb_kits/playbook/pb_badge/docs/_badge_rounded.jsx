@@ -1,10 +1,11 @@
 import React from 'react'
 import Badge from '../_badge.jsx'
 
-const BadgeRounded = () => {
+const BadgeRounded = (props) => {
   return (
     <div>
       <Badge
+          {...props}
           rounded
           text="+1"
           variant="primary"
@@ -13,6 +14,7 @@ const BadgeRounded = () => {
       &nbsp;
 
       <Badge
+          {...props}
           rounded
           text="+4"
           variant="primary"
@@ -21,6 +23,7 @@ const BadgeRounded = () => {
       &nbsp;
 
       <Badge
+          {...props}
           rounded
           text="+1000"
           variant="primary"

@@ -14,9 +14,12 @@ module Playbook
                  values: %w[h1 h2 h3 h4 h5 h6 p span div],
                  default: "div"
       prop :text
+      prop :variant, type: Playbook::Props::Enum,
+                     values: [nil, "link"],
+                     default: nil
 
       def classname
-        generate_classname("pb_caption_kit", size)
+        generate_classname("pb_caption_kit", size, variant)
       end
     end
   end

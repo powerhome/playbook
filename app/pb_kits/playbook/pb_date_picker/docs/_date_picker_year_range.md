@@ -1,0 +1,1 @@
+Defaults to `[1900, 2100]`.  Combine with min-max prop for best results.

@@ -56,7 +56,6 @@ const Icon = (props: IconProps) => {
     spin = false,
   } = props
   const classes = classnames(
-    className,
     flipMap[flip],
     'pb_icon_kit',
     'far',
@@ -72,7 +71,8 @@ const Icon = (props: IconProps) => {
       [`fa-pull-${pull}`]: pull,
       [`fa-rotate-${rotation}`]: rotation,
     },
-    globalProps(props)
+    globalProps(props),
+    className
   )
 
   return (

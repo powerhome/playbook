@@ -2,15 +2,12 @@ examples:
   rails:
     - checkbox_default: Default
     - checkbox_checked: Load as checked
-    - checkbox_dark: Dark
     - checkbox_custom: Custom Checkbox
     - checkbox_error: Default w/ Error
-    - checkbox_dark_error: Dark w/ Error
+    - checkbox_options: Checkbox w/ Options
 
   react:
   - checkbox_default: Default
   - checkbox_checked: Load as checked
-  - checkbox_dark: Dark
   - checkbox_custom: Custom Checkbox
   - checkbox_error: Default w/ Error
-  - checkbox_dark_error: Dark w/ Error

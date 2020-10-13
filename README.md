@@ -9,8 +9,7 @@ Playbook is the first design system built for both Rails & React interfaces. Ins
 
 ## Getting started
 
-1. Run `make install`
-1. Run `make start`
+1. Run `make it`
 1. Install overcommit hooks `bin/overcommit`
 1. open [http://localhost:8089](http://localhost:8089)
 
@@ -35,10 +34,9 @@ To run the tests, do `bin/test`. To launch a shell in the container run `make sh
 
 See [docs/upgrade-guide](./docs/upgrade-guide)
 
-### Nitro & Releases
+### Releases
 
-* [Integrating Playbook Kits into Nitro Components](https://github.com/powerhome/playbook/wiki/Integrating-Playbook-Kits-into-Nitro-Components)
-* [Creating Releases](https://github.com/powerhome/playbook/wiki/Releasing-a-New-Version)
+* [Playbook Releases](https://github.com/powerhome/playbook/wiki/Playbook-Releases)
 
 ### Development Environment
 

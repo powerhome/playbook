@@ -46,13 +46,15 @@ $selector: ".pb_nav_list";
         transition-property: color, border-color, background-color;
         transition-duration: 0.15s;
         transition-timing-function: $bezier;
-        &:hover {
-          background-color: rgba($primary, 0.03);
-          [class*=_icon] {
-            color: $primary;
-          }
-          [class*=_text] {
-            color: $primary;
+        @media (hover:hover) {
+          &:hover {
+            background-color: rgba($primary, 0.03);
+            [class*=_icon] {
+              color: $primary;
+            }
+            [class*=_text] {
+              color: $primary;
+            }
           }
         }
         [class*=_icon_left] {
@@ -110,13 +112,15 @@ $selector: ".pb_nav_list";
           flex: 1;
           font-weight: $regular;
         }
-        &:hover {
-          background-color: rgba($primary, 0.03);
-          [class*=_icon] {
-            color: $primary;
-          }
-          [class*=_text] {
-            color: $primary;
+        @media (hover:hover) {
+          &:hover {
+            background-color: rgba($primary, 0.03);
+            [class*=_icon] {
+              color: $primary;
+            }
+            [class*=_text] {
+              color: $primary;
+            }
           }
         }
       }
@@ -132,7 +136,35 @@ $selector: ".pb_nav_list";
     [class*=_active] {
       background-color: $active_light;
     }
+    &[class*=dark]{
+      [class*=_active] {
+      background-color: rgba($white, $opacity_1);
+    }
+    }
   }
 
+  &[class*=dark]{
+    background: tint($bg_dark,10%);
+    [class*=pb_nav_list_kit_item]{
+      border-color: rgba($white, $opacity_1);
+      &[class*=_active] [class*=_link]{
+        border-color: $white;
+        [class*=_text],[class*=_icon]{
+          color: $text_dk_default;
+        }
+      }
+      [class*=_link] {
+        [class*=_text],[class*=_icon]{
+          color: $text_dk_lighter;
+        }
+        &:hover{
+          background-color: rgba($white, $opacity_1);
+          [class*=_icon],[class*=_text] {
+            color: $white;
+          }
+        }
+      }
+    }
+  }
 
 }

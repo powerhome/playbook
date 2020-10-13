@@ -1,0 +1,44 @@
+@media (min-width: 500px) {
+  .flatpickr-calendar {
+    padding: $space_xs;
+    width: 323.88px
+  }
+  .dayContainer {
+    width: 315.88px
+  }
+  .flatpickr-months {
+    margin-left: -$space_xs;
+    margin-top: -$space_xs;
+    width: 323.88px;
+  }
+}
+@media (max-width: 499px) {
+  .numInput.cur-year {
+    padding-left: $space_sm;
+  }
+  .flatpickr-prev-month {
+    left: $space_xs * 27.5 !important;
+  }
+}
+// Firefox Header Adjustments
+@supports (-moz-appearance:none) { 
+  select.flatpickr-monthDropdown-months {
+      width: 97px !important;
+      margin-left: $space_xs + 3;
+  }
+  select.numInput {
+    padding-left: $space_sm + 1.5 !important;
+    margin-left: $space_xs !important;
+  }
+}
+// Direct Overrides
+.flatpickr-months .flatpickr-prev-month.flatpickr-disabled,
+.flatpickr-months .flatpickr-next-month.flatpickr-disabled {
+  cursor: not-allowed;
+}
+.flatpickr-day.selected.startRange + .endRange:not(:nth-child(7n+1)),
+.flatpickr-day.startRange.startRange + .endRange:not(:nth-child(7n+1)),
+.flatpickr-day.endRange.startRange + .endRange:not(:nth-child(7n+1)) {
+  -webkit-box-shadow: none;
+          box-shadow: none;
+}

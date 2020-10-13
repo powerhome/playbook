@@ -33,9 +33,9 @@ const StatChange = (props: StatChangeProps) => {
     <If condition={value}>
       <div
           className={classnames(
-          className,
           buildCss('pb_stat_change_kit', status),
-          globalProps(props)
+          globalProps(props),
+          className
         )}
           id={id}
       >

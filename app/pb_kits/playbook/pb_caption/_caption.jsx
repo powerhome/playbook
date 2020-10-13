@@ -14,6 +14,7 @@ type CaptionProps = {
   size?: "xs" | "sm" | "md" | "lg" | "xl",
   tag?: "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "p" | "span" | "div",
   text?: string,
+  variant?: null | "link",
 }
 
 const Caption = (props: CaptionProps) => {
@@ -26,15 +27,16 @@ const Caption = (props: CaptionProps) => {
     size = 'md',
     tag = 'div',
     text,
+    variant = null,
   } = props
   const Tag = `${tag}`
 
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
   const css = classnames(
-    buildCss('pb_caption_kit', size),
-    className,
-    globalProps(props)
+    buildCss('pb_caption_kit', size, variant),
+    globalProps(props),
+    className
   )
 
   return (

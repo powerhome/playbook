@@ -40,7 +40,11 @@ const Logistic = (props: LogisticProps) => {
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
   const formattedDate = new DateTime({ value: date })
-  const classes = classnames(buildCss('pb_logistic_kit', { dark: dark }), className, globalProps(props))
+  const classes = classnames(
+    buildCss('pb_logistic_kit', { dark }),
+    globalProps(props),
+    className
+  )
 
   return (
     <div

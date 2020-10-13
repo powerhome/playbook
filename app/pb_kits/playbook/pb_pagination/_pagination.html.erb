@@ -4,61 +4,44 @@
     class: object.classname,
     data: object.data,
     id: object.id) do %>
-    <span class="paginate-left"></span>
-    <span class="paginate-right"></span>
-<% end %>
-<br>
 
-<!-- Pagination - Horizontal  -->
-<%= content_tag(:div,
-    aria: object.aria,
-    class: object.classname,
-    data: object.data,
-    id: object.id) do %>
-    <span class="paginate-left"></span>
-      <span class="paginate-body">
-        <span class="count">2</span>
-        <span class="controls">
-            <span class='paginate-up'></span>
-            <span class='paginate-down'></span>
-        </span>
-      </span>
-    <span class="paginate-right"></span>
-<% end %>
-<br>
+    <!-- Basic -->
+    <% if object.classname == "pb_pagination_kit_basic" %>
+        <span class="paginate-left"></span>
+        <span class="paginate-right"></span>
 
-<!-- Pagination - Vertical  -->
-<%= content_tag(:div,
-    aria: object.aria,
-    class: object.classname,
-    data: object.data,
-    id: object.id) do %>
-    <span class="paginate-left"></span>
-        <span class="paginate-body">
-            <span class="count">2 of 10</span>
-        </span>
-    <span class="paginate-right"></span>
-<% end %>
-
-<br>
-
-<!-- Pagination - FullBar  -->
-<%= content_tag(:div,
-    aria: object.aria,
-    class: object.classname,
-    data: object.data,
-    id: object.id) do %>
-    <span class="paginate-left"></span>
-        <span class="paginate-body">
-            <span class="range">
-                <span class="range-item">3</span>
-                <span class="range-item">4</span>
-                <span class="range-item active">5</span>
-                <span class="range-item">6</span>
-                <span class="range-item">7</span>
+    <!-- Collapsed -->
+    <% elsif object.classname == "pb_pagination_kit_collapsed" %>
+        <span class="paginate-left"></span>
+          <span class="paginate-body">
+            <span class="count">2</span>
+            <span class="controls">
+                <span class='paginate-up'></span>
+                <span class='paginate-down'></span>
             </span>
-        </span>
-    <span class="paginate-right"></span>
+          </span>
+        <span class="paginate-right"></span>
+
+    <!-- Scroll -->
+    <% elsif object.classname == "pb_pagination_kit_scroll" %>
+        <span class="paginate-left"></span>
+            <span class="paginate-body">
+                <span class="count">2 of 10</span>
+            </span>
+        <span class="paginate-right"></span>
+
+    <!-- Expanded -->
+    <% elsif object.classname == "pb_pagination_kit_expanded" %>
+        <span class="paginate-left"></span>
+            <span class="paginate-body">
+                <span class="range">
+                    <span class="range-item">3</span>
+                    <span class="range-item">4</span>
+                    <span class="range-item active">5</span>
+                    <span class="range-item">6</span>
+                    <span class="range-item">7</span>
+                </span>
+            </span>
+        <span class="paginate-right"></span>
+    <% end %>
 <% end %>
-
-

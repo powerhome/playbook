@@ -46,7 +46,11 @@ const CircleIconButton = (props: CircleIconButtonProps) => {
 
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
-  const classes = classnames(buildCss('pb_circle_icon_button_kit'), className, globalProps(props))
+  const classes = classnames(
+    buildCss('pb_circle_icon_button_kit'),
+    globalProps(props),
+    className
+  )
 
   return (
     <div

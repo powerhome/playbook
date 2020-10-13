@@ -13,6 +13,7 @@ type TextInputProps = {
   aria?: object,
   className: string,
   data?: object,
+  dark?: boolean,
   disabled?: boolean,
   error?: string,
   id?: string,
@@ -26,30 +27,32 @@ type TextInputProps = {
   children: Node,
 }
 
-const TextInput = ({
-  aria = {},
-  className,
-  data = {},
-  disabled,
-  error,
-  id,
-  name,
-  label,
-  onChange = () => {},
-  placeholder,
-  required,
-  type = 'text',
-  value,
-  children = null,
-  ...props
-}: TextInputProps) => {
+const TextInput = (props: TextInputProps) => {
+  const {
+    aria = {},
+    className,
+    data = {},
+    dark = false,
+    disabled,
+    error,
+    id,
+    name,
+    label,
+    onChange = () => {},
+    placeholder,
+    required,
+    type = 'text',
+    value,
+    children = null,
+  } = props
+
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
   const css = classnames([
     'pb_text_input_kit',
-    className,
     error ? 'error' : null,
     globalProps(props),
+    className,
   ])
 
   return (
@@ -60,6 +63,7 @@ const TextInput = ({
     >
       <Caption
           className="pb_text_input_kit_label"
+          dark={dark}
           text={label}
       />
       <div className="text_input_wrapper">
