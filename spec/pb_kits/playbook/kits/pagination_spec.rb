@@ -32,7 +32,7 @@ RSpec.describe Playbook::PbPagination::Pagination do
     end
   end
 
-  describe ".total_page_count" do
+  describe ".number_of_pages" do
     it "is not a nil value" do
       expect(subject.new({}).number_of_pages(5, 10, 100)).not_to be_nil
     end
