@@ -171,11 +171,19 @@ $selector: ".pb_nav_list";
     }
   }
 
+  //Borderless
   &[class*=_borderless] {
     [class*=pb_nav_list_kit_item] {
       list-style: none;
       border-bottom: 0;
     }
   }
+  
+}
 
+//Image Wrapper
+.pb_nav_img_wrapper {
+  width: 24px;
+  height: 24px;
+  margin-right: $space_xs;
 }
