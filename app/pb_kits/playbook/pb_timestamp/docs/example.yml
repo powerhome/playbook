@@ -13,3 +13,5 @@ examples:
   - timestamp_align: Alignments
   - timestamp_updated: Last Updated by
   - timestamp_updated_align: Last Updated by - Alignments
+  - timestamp_elapsed: Time Ago
+  - timestamp_elapsed_align: Time Ago - Alignments

@@ -53,8 +53,9 @@ const Timestamp = (props: TimestampProps) => {
     return fullDisplay + ' ' + timeDisplay
   }
 
-  var fullElapsedDisplay = function fullElapsedDisplay(){
-    return 'Elapsed Display'
+  var fullElapsedDisplay = function fullElapsedDisplay(showUser, name, dateTimestamp){
+    var userDisplay = (showUser == 'true' && name.length > 0) ? ' by ' + name : ''
+    return 'Last updated' + userDisplay + ' ' + dateTimestamp.value.fromNow()
   }
 
   var fullUpdatedDisplay = function fullUpdatedDisplay(showUser, name, timeDisplay){
@@ -74,7 +75,7 @@ const Timestamp = (props: TimestampProps) => {
         <If condition={variant == 'elapsed'}>
           <Caption
               size="xs"
-              text={fullElapsedDisplay()}
+              text={fullElapsedDisplay(showUser, name, dateTimestamp)}
           />
         </If>
         <If condition={variant == 'default'}>
