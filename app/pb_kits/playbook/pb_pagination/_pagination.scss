@@ -8,8 +8,9 @@
   border-radius: $border_rad_heavier;
   padding: 6px;
   box-shadow: $shadow_deep;
+  width: fit-content;
 
-  .paginate-right {
+  .paginate-forward {
     padding: 0px 10px;
     font-size: 12px;
     font-weight: bolder;
@@ -17,53 +18,51 @@
     cursor: pointer;
   }
 
-  .paginate-left:before {
+  .paginate-backward:before {
     content: "\25C0";
   }
 
-  .paginate-right:before {
+  .paginate-forward:before {
     content: "\25B6";
   }
 
   &[class*=_collapsed]  {
-    border: 1px solid red;
+    .paginate-body {
+      padding: 0px 10px;
+      border-right: 1px solid $neutral;
+      border-left: 1px solid $neutral;
+    }
   }
 
   &[class*=_expanded]  {
-    border: 1px solid green;
+    .paginate-body {
+      padding: 0px 10px;
+      border-right: 1px solid $neutral;
+      border-left: 1px solid $neutral;
+    }
   }
 
   &[class*=_scroll]  {
-    border: 1px solid orange;
+    .paginate-body {
+      padding: 0px 10px;
+      border-right: 1px solid $neutral;
+      border-left: 1px solid $neutral;
+    }
   }
 }
 
-.paginate-body {
-  padding: 0px 10px;
-  border-right: 1px solid $neutral;
-  border-left: 1px solid $neutral;
-}
-
-
-.paginate-left {
+.paginate-backward {
   padding: 0px 10px;
   font-size: 12px;
   font-weight: bolder;
   color: $neutral;
   cursor: pointer;
-  .paginate-left:before {
+  .paginate-backward:before {
     content: "\25C0";
   }
 }
 
-
-
 .paginate-body {
-  .controls {
-    -webkit-transform: rotate(90deg);
-    display: inline-block;
-  }
-
   .range {
     .range-item {
       padding: 5px 10px;

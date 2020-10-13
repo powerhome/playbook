@@ -1,1 +1,15 @@
-<%= pb_rails("pagination", props: { variant: "expanded" }) %>
+<!-- These instance variables (@page, @total_items, @per_page) are set in the controller for the page
+    and are used here to make the example function
+ -->
+<% @page = request.params[:page].to_i.nonzero? || 1 %>
+<% @total_items = 769 %>
+<% @per_page = 25 %>
+
+<%= pb_rails("pagination",
+  props: {
+    variant: "expanded",
+    target_page: @page,
+    total_items: @total_items,
+    per_page: @per_page,
+  }
+)%>

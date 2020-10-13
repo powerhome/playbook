@@ -1,1 +1,9 @@
-<%= pb_rails("pagination", props: { variant: "collapsed" }) %>
+<% @page = request.params[:page].to_i.nonzero? || 1 %>
+
+<%= pb_rails("pagination", props:
+  {
+    variant: "collapsed",
+    target_page: @page,
+    next_page: @page + 1 ,
+    previous_page: @page - 1,
+  })%>

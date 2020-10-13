@@ -6,42 +6,56 @@
     id: object.id) do %>
 
     <!-- Basic -->
-    <% if object.classname == "pb_pagination_kit_basic" %>
-        <span class="paginate-left"></span>
-        <span class="paginate-right"></span>
+    <% if object.classname.include? "_basic" %>
+        <span class="paginate-backward" data-paginate="backward"></span>
+            <span class="paginate-body"></span>
+        <span class="paginate-forward" data-paginate="forward"></span>
 
     <!-- Collapsed -->
-    <% elsif object.classname == "pb_pagination_kit_collapsed" %>
-        <span class="paginate-left"></span>
-          <span class="paginate-body">
-            <span class="count">2</span>
-            <span class="controls">
-                <span class='paginate-up'></span>
-                <span class='paginate-down'></span>
+    <% elsif object.classname.include? "_collapsed" %>
+        <span class="paginate-backward" data-paginate="backward"></span>
+            <span class="paginate-body">
+                <%= object.target_page %>
             </span>
-          </span>
-        <span class="paginate-right"></span>
+        <span class="paginate-forward" data-paginate="forward"></span>
 
     <!-- Scroll -->
-    <% elsif object.classname == "pb_pagination_kit_scroll" %>
-        <span class="paginate-left"></span>
+    <% elsif object.classname.include? "_scroll" %>
+        <span class="paginate-backward" data-paginate="backward"></span>
             <span class="paginate-body">
-                <span class="count">2 of 10</span>
+                <%= object.number_of_pages object.target_page, @per_page, @total_items %>
             </span>
-        <span class="paginate-right"></span>
+        <span class="paginate-forward" data-paginate="forward"></span>
 
     <!-- Expanded -->
-    <% elsif object.classname == "pb_pagination_kit_expanded" %>
-        <span class="paginate-left"></span>
+    <% elsif object.classname.include? "_expanded" %>
+        <span class="paginate-backward" data-paginate="backward"></span>
             <span class="paginate-body">
                 <span class="range">
-                    <span class="range-item">3</span>
-                    <span class="range-item">4</span>
-                    <span class="range-item active">5</span>
-                    <span class="range-item">6</span>
-                    <span class="range-item">7</span>
+                    <% object.calculate_page_range.each do |page| %>
+                        <span class="range-item <%= object.target_page == page ? 'active': '' %>">
+                            <%= page %>
+                        </span>
+                    <% end %>
                 </span>
             </span>
-        <span class="paginate-right"></span>
+        <span class="paginate-forward" data-paginate="forward"></span>
     <% end %>
 <% end %>
+
+<script>
+    paginateRight = document.querySelector('.paginate-forward');
+    paginateLeft = document.querySelector('.paginate-backward');
+
+    function triggerPagination() {
+      let direction = event.target.dataset.paginate;
+      let urlParams = new URLSearchParams(location.search);
+      let currentPageNumber = parseInt(urlParams.get('page'));
+      let newPageNumber = (direction == "forward" ? currentPageNumber + 1 : currentPageNumber - 1);
+
+      window.location.href = `${location.origin + location.pathname}?page=${newPageNumber}`;
+    }
+
+    paginateRight.addEventListener('click', triggerPagination);
+    paginateLeft.addEventListener('click', triggerPagination);
+</script>
