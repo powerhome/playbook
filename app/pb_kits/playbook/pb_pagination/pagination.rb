@@ -8,7 +8,7 @@ module Playbook
       partial "pb_pagination/pagination"
 
       prop :variant, type: Playbook::Props::Enum,
-                     values: %w[basic collapsed expanded scroll],
+                     values: %w[basic collapsed scroll expanded],
                      default: "basic"
       prop :target_page, type: Playbook::Props::Number, default: 1
 
