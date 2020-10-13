@@ -20,7 +20,9 @@ spec/dummy/log/
 tmp/
 .vscode
 *.gem
+*.tgz
 yarn-error.log
 .byebug_history
 spec_results/
 spec/examples.txt
+/dist

@@ -36,8 +36,9 @@ RSpec.describe Playbook::PbBarGraph::BarGraph do
 
   describe "#chart_options" do
     it "returns the correct options in a json object", :aggregate_failures do
-      expect(subject.new({title: "New Chart"}).chart_options).to include "\"type\":\"column\",\"title\":\"New Chart\""
-      expect(subject.new({point_start: 4}).chart_options).to include "\"pointStart\":4"
+      expect(subject.new({title: "New Chart"}).chart_options[:type]).to eq "column"
+      expect(subject.new({title: "New Chart"}).chart_options[:title]).to eq "New Chart"
+      expect(subject.new({point_start: 4}).chart_options[:pointStart]).to eq 4
     end
   end
 end
