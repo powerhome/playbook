@@ -101,7 +101,9 @@ const CircleChart = (props: CircleChartProps) => {
   useEffect(() => {
     if (componentDidMount.current) {
       Highcharts.charts.forEach((chart) => {
-        if (chart.renderTo.id === id) {
+        if (chart === undefined){
+          return
+        } else if (chart.renderTo.id === id) {
           const updatedValueArray = chartData.map((obj) => {
             return obj.value
           })
