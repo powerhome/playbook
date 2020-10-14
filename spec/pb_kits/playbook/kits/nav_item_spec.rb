@@ -9,9 +9,9 @@ RSpec.describe Playbook::PbNav::Item do
 
   it { is_expected.to define_boolean_prop(:active) }
   it { is_expected.to define_prop(:link) }
-  it { is_expected.to define_prop(:link) }
   it { is_expected.to define_prop(:icon_left) }
   it { is_expected.to define_prop(:icon_right) }
+  it { is_expected.to define_prop(:image_url) }
 
   describe "#classname" do
     it "returns namespaced class name", :aggregate_failures do
