@@ -1,0 +1,27 @@
+<div>
+  <%= pb_rails("date", props: {
+    date: DateTime.now,
+  }) %>
+
+  <br><br>
+
+  <%= pb_rails("date", props: {
+    date: DateTime.now,
+    show_icon: true
+  }) %>
+
+  <br><br>
+
+  <%= pb_rails("date", props: {
+    date: DateTime.now,
+    show_day_of_week: true
+  }) %>
+
+  <br><br>
+
+  <%= pb_rails("date", props: {
+    date: DateTime.now,
+    show_icon: true,
+    show_day_of_week: true
+  }) %>
+</div>
