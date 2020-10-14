@@ -1,5 +1,7 @@
-<%= content_tag(object.tag, object.text,
-    id: object.id,
-    data: object.data,
-    class: object.classname,
-    aria: object.aria) %>
+<%= content_tag(object.tag,
+  aria: object.aria,
+  id: object.id,
+  data: object.data,
+  class: object.classname) do %>
+  <%= object.children.present? ? capture(&object.children) : object.text %>
+<% end %>
