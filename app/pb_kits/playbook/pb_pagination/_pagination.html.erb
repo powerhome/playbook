@@ -4,45 +4,52 @@
   class: object.classname,
   data: object.data,
   id: object.id) do %>
-
-  <!-- Basic -->
-  <% if object.classname.include? "_basic" %>
-    <span class="paginate-backward" data-paginate="backward"></span>
-      <span class="vertical-separator"></span>
-    <span class="paginate-forward" data-paginate="forward"></span>
-
-  <!-- Collapsed -->
-  <% elsif object.classname.include? "_collapsed" %>
-    <span class="paginate-backward" data-paginate="backward"></span>
+  
+  <%= pb_rails("card",props:{padding:"none"}) do %>
+    <%= pb_rails("flex",props:{vertical:"center"}) do %>
+     <%= pb_rails("circle_icon_button", props: { variant:"link", icon: "angle-left", size:"md", classname:"paginate-backward", data:{paginate:"backward"}}) %>
+    <!-- Basic -->
+    <% if object.classname.include? "_basic" %>
+      <div class="line"></div>
+      
+    <!-- Collapsed -->
+    <% elsif object.classname.include? "_collapsed" %>
+      <div class="line"></div>
       <span class="paginate-body">
         <%= object.target_page %>
       </span>
-    <span class="paginate-forward" data-paginate="forward"></span>
+      <div class="line"></div>
 
-  <!-- Scroll -->
-  <% elsif object.classname.include? "_scroll" %>
-    <span class="paginate-backward" data-paginate="backward"></span>
-      <span class="paginate-body">
-        <%= object.number_of_pages object.target_page, @per_page, @total_items %>
-      </span>
-    <span class="paginate-forward" data-paginate="forward"></span>
-
-  <!-- Expanded -->
-  <% elsif object.classname.include? "_expanded" %>
-    <span class="paginate-backward" data-paginate="backward"></span>
-      <span class="paginate-body">
-        <span class="range">
-          <% object.calculate_page_range.each do |page| %>
-            <span class="range-item <%= object.target_page == page ? 'active': '' %>">
-              <%= page %>
-            </span>
-          <% end %>
+    <!-- Scroll -->
+    <% elsif object.classname.include? "_scroll" %>
+      <div class="line"></div>
+        <span class="paginate-body">
+          <%= object.number_of_pages object.target_page, @per_page, @total_items %>
         </span>
-    </span>
-    <span class="paginate-forward" data-paginate="forward"></span>
-    <% end %>
-<% end %>
+      <div class="line"></div>
 
+
+
+    <!-- Expanded -->
+      <% elsif object.classname.include? "_expanded" %>
+        <div class="line"></div>
+            <span class="paginate-body">
+              <span class="range">
+                <% object.calculate_page_range.each do |page| %>
+                  <span class="range-item <%= object.target_page == page ? 'active': '' %>">
+                    <%= page %>
+                  </span>
+                <% end %>
+              </span>
+            </span>
+        <div class="line"></div>  
+      <% end %>
+    
+
+      <%= pb_rails("circle_icon_button", props: { variant:"link", icon: "angle-right", size:"lg", classname:"paginate-forward", data:{paginate:"forward"}}) %>
+    <% end %>
+  <% end %>
+<% end %>
 <script>
   paginateRight = document.querySelector('.paginate-forward');
   paginateLeft = document.querySelector('.paginate-backward');

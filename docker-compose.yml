@@ -24,7 +24,7 @@ services:
           cpus: '4.0'
           memory: 8G
         reservations:
-          cpus: 2.0
+          cpus: '2.0'
           memory: 2G
     env_file:
       - '.env.docker'
