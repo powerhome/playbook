@@ -52,8 +52,9 @@ const List = (props: ListProps) => {
       borderless: borderless,
       ordered: ordered,
       xpadding: xpadding,
-    }), className,
-    globalProps(props)
+    }),
+    globalProps(props),
+    className
   )
 
   return (

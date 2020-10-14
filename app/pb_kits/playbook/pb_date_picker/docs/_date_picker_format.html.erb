@@ -1,19 +1,23 @@
 <%= pb_rails("date_picker", props: {
+  default_date: (Date.today).httpdate,
   format: "m-d-Y",
   picker_id: "date-picker-format1"
 }) %>
 
 <%= pb_rails("date_picker", props: {
+  default_date: (Date.today).httpdate,
   format: "m/d/y",
   picker_id: "date-picker-format2"
 }) %>
 
 <%= pb_rails("date_picker", props: {
+  default_date: (Date.today).httpdate,
   format: "n-j-y",
   picker_id: "date-picker-format3"
 }) %>
 
 <%= pb_rails("date_picker", props: {
+  default_date: (Date.today).httpdate,
   format: "Y-d-m",
   picker_id: "date-picker-format4"
 }) %>

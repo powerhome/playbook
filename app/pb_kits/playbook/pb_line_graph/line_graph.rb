@@ -32,6 +32,7 @@ module Playbook
       def chart_options
         {
           id: id,
+          className: classname,
           chartData: chart_data,
           type: chart_type,
           title: title,
@@ -44,7 +45,7 @@ module Playbook
           legend: legend,
           toggleLegendClick: toggle_legend_click,
           height: height,
-        }.to_json.html_safe
+        }
       end
 
       def classname

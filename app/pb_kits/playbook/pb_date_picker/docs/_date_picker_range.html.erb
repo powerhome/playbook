@@ -1,4 +1,5 @@
 <%= pb_rails("date_picker", props: {
+  default_date: [(Date.today).httpdate, (Date.today + 7).httpdate],
   mode: "range",
   picker_id: "date-picker-range"
 }) %>

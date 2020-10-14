@@ -2,10 +2,12 @@
   id: object.id,
   data: object.data,
   class: object.classname) do %>
+    <div class="box">
       <div class="circle">
         <%= pb_rails("icon", props: { icon: "check", size: "xs" }) %>
       </div>
-      <div>
+      <div class="content">
         <%= capture(&object.children) %>
       <div>
+    </div>
 <% end %>

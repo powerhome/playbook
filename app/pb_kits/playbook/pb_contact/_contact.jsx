@@ -58,7 +58,11 @@ const Contact = (props: ContactProps) => {
     id } = props
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
-  const classes = classnames(buildCss('pb_contact_kit'), className, globalProps(props))
+  const classes = classnames(
+    buildCss('pb_contact_kit'),
+    globalProps(props),
+    className
+  )
 
   return (
     <div

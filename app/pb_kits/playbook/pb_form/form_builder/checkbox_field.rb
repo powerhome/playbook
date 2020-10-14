@@ -4,13 +4,18 @@ module Playbook
   module PbForm
     module FormBuilder
       module CheckboxField
-        def check_box(name, props: {}, **options, &block)
+        def check_box(name, props: {}, **options)
           label_text = @template.label(@object_name, name) if props[:label] == true
           options[:required] = true if props[:required]
           props[:margin_bottom] = "sm"
           props[:form_spacing] = true
 
-          input = super(name, **options, &block)
+          checked_value = options[:checked_value]
+          unchecked_value = options[:unchecked_value]
+          options.delete(:checked_value)
+          options.delete(:unchecked_value)
+
+          input = super(name, options, checked_value, unchecked_value)
 
           if props[:label]
             @template.pb_rails("caption", props: { text: label_text, margin_bottom: "xs" }) +
