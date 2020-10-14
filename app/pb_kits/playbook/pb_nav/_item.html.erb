@@ -5,6 +5,9 @@
   id: object.id) do %>
   <%= content_tag(object.tag,
     object.link ? object.link_options : object.options) do %>
+    <% if object.image_url %>
+      <%= pb_rails("image", props: { url: object.image_url, classname: "pb_nav_img_wrapper" }) %>
+    <% end %>
     <% if object.icon_left %>
       <%= pb_rails("icon", props: { icon: object.icon_left, classname: "pb_nav_list_item_icon_left", fixed_width: true}) %>
     <% end %>
