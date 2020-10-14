@@ -1,4 +1,69 @@
-<%= image_tag("background1.png") %>
-<div class="test-image"></div>
+<div class="hero">
+  <%= pb_rails("flex", props: { classname: "flex-container", spacing: "between", wrap: true } ) do %>
+    <%= pb_rails("flex/flex_item", props: { fixed_size: "500px", margin_top: "xl" }) do %>
+      <%= pb_rails("title", props: { margin_bottom: "md", text: "Playbook 2.0", tag: "h2", size: 2 }) %>
+      <%= pb_rails("body", props: {
+        text: "Introducing Playbook 2.0. Nitro components are at your fingertips and now easier to find. You’re always up to date when using Playbook components so you can now focus on what matters most — your work."
+      }) %>
+    <% end %>
+    <div class="flex-item">
+      <%= pb_rails("image", props: { url: "https://unsplash.it/500/400/?image=634" }) %>
+    </div>
+  <% end %>
+</div>
 
+<div class="content">
+  <%= pb_rails("flex", props: { classname: "flex-container", spacing: "between", wrap: true }) do %>
+    <%= pb_rails("flex/flex_item", props: { fixed_size: "500px" }) do %>
+      <%= pb_rails("title", props: { margin_bottom: "sm", text: "React & Rails", tag: "h2", size: 2 }) %>
+      <%= pb_rails("body", props: {
+        text: "Playbook is now a React & Rails engine! Components are more easily accessible."
+      }) %>
+      <%= pb_rails("button", props: { text: "Read More" }) %>
+    <% end %>
+    <%= pb_rails("flex/flex_item", props: { fixed_size: "500px" }) do %>
+      <%= pb_rails("image", props: { url: "https://unsplash.it/500/400/?image=634" }) %>
+    <% end %>
+    <%= pb_rails("flex/flex_item", props: { fixed_size: "500px" }) do %>
+      <%= pb_rails("title", props: { margin_bottom: "sm", text: "Find Live Examples of Components", tag: "h3", size: 3 }) %>
+      <%= pb_rails("body", props: {
+        text: "Second guessing whether a component is the right fit shouldn’t slow down your progress, a link to live examples of components in Nitro is provided to keep your progress moving along."
+      }) %>
+      <%= pb_rails("button", props: { text: "Find what you're looking for", variant: "link" }) %>
+    <% end %>
+    <%= pb_rails("flex/flex_item", props: { fixed_size: "500px" }) do %>
+      <%= pb_rails("title", props: { margin_bottom: "sm", text: "What's New", tag: "h3", size: 3 }) %>
+      <%= pb_rails("body", props: {
+        text: "A new and improved version of Playbook React and Rails component library. Explore new possibilities for your apps and projects."
+      }) %>
+      <%= pb_rails("button", props: { text: "View all Playbook updates", variant: "link" }) %>
+    <% end %> 
+  <% end %>
+</div>
+
+<div class="hero">
+  <%= pb_rails("flex", props: { classname: "text-blob", horizontal: "right" } ) do %>
+    <%= pb_rails("flex/flex_item", props: { fixed_size: "500px", margin_top: "xl" }) do %>
+      <%= pb_rails("title", props: { margin_bottom: "md", text: "Designed & Built for Power’s Designers and Developers:", tag: "h2", size: 2 }) %>
+      <%= pb_rails("body", props: {
+        text: "With an extensive library of React and Rails components, our teams now have access to their favorite components faster and easier than before."
+      }) %>
+    <% end %>
+  <% end %>
+</div>
+
+<div class="content">
+  <%= pb_rails("flex", props: { classname: "flex-container", spacing: "between", wrap: true }) do %>
+    <%= pb_rails("flex/flex_item", props: { fixed_size: "500px" }) do %>
+      <%= pb_rails("title", props: { margin_bottom: "sm", text: "Prebuilt Layouts", tag: "h2", size: 2 }) %>
+      <%= pb_rails("body", props: {
+        text: "Playbook will remove Devs from most UX FAQ’s with prebuilt layouts for some popular reusable complex component. Prebuilts will keep certainty that your project is up to date with our latest page layouts."
+      }) %>
+      <%= pb_rails("button", props: { text: "Explore" }) %>
+    <% end %>
+    <%= pb_rails("flex/flex_item", props: { fixed_size: "500px" }) do %>
+      <%= pb_rails("image", props: { url: "https://unsplash.it/500/400/?image=634" }) %>
+    <% end %>
+  <% end %>
+</div>
 

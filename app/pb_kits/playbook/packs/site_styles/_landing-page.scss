@@ -1,6 +1,25 @@
 .landing-page {
-  .test-image {
-    background-image: url("/assets/background1.png");
-    height: 600px;
+  .text-blob {
+    height: 400px;
   }
+  .hero {
+    background-color: rgb(59, 59, 59);
+    .pb_title_kit_2, .pb_body_kit {
+      color: white;
+    }
+    padding: $space_xl;
+    // h2 {
+    //   margin-top: $space_xl;
+    // }
+  }
+  .content{
+    background-color: rgb(211, 211, 211);
+    padding: $space_xl;
+  }
+  // .hero-two{
+  //   background-color: rgb(59, 59, 59);
+  // }
+  // .content-two{
+
+  // }
 }
