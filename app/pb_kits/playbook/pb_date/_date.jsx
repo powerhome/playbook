@@ -55,7 +55,7 @@ const PbDate = (props: PbDateProps) => {
         className={classes}
         id={id}
     >
-      <If condition={size == 'md'}>
+      <If condition={size == 'md' || size == 'lg'}>
 
         <Title
             size={4}
