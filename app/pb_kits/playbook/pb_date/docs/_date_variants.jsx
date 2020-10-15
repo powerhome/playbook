@@ -1,11 +1,12 @@
 import React from 'react'
 import { Date as FormattedDate } from '../..'
 
-const DateVariants = () => {
+const DateVariants = (props) => {
   return (
     <div>
       <FormattedDate
           value="1995-12-25"
+          {...props}
       />
 
       <br />
@@ -14,6 +15,7 @@ const DateVariants = () => {
       <FormattedDate
           showIcon
           value="1995-12-25"
+          {...props}
       />
 
       <br />
@@ -22,6 +24,7 @@ const DateVariants = () => {
       <FormattedDate
           showDayOfWeek
           value="1995-12-25"
+          {...props}
       />
 
       <br />
@@ -31,6 +34,7 @@ const DateVariants = () => {
           showDayOfWeek
           showIcon
           value="1995-12-25"
+          {...props}
       />
     </div>
   )

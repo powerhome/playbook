@@ -19,8 +19,8 @@ module Playbook
                               default: false
       # Size to be deprecated.
       prop :size, type: Playbook::Props::Enum,
-                  values: %w[lg sm xs],
-                  default: "sm"
+                  values: %w[lg md sm xs],
+                  default: "md"
       prop :timezone, default: "America/New_York"
 
       def classname
