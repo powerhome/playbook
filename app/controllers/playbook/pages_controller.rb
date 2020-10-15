@@ -9,25 +9,24 @@ module Playbook
     before_action :ensure_kit_type_exists, only: %i[kit_show_rails kit_show_react]
     before_action :set_category, only: %i[kit_category_show_rails kit_category_show_react]
     before_action :set_playbook
-    
+
     def set_playbook
       @playbook = true
-    end  
+    end
 
     def enable_dark_mode
       cookies[:dark_mode] = {
-        value: "true"
+        value: "true",
       }
       redirect_back(fallback_location: root_path)
     end
 
     def disable_dark_mode
-       cookies[:dark_mode] = {
-        value: "false"
+      cookies[:dark_mode] = {
+        value: "false",
       }
       redirect_back(fallback_location: root_path)
     end
-
 
     def home; end
 
@@ -91,7 +90,7 @@ module Playbook
       is_rails_kit = action_name == "kit_show_rails"
       files = is_rails_kit ? File.join("**", "*.erb") : File.join("**", "*.jsx")
       kit_files = Dir.glob(files, base: "#{Playbook::Engine.root}/app/pb_kits/playbook/pb_#{@kit}/docs").present?
-      if !kit_files.present?
+      unless kit_files.present?
         redirect_to action: is_rails_kit ? "kit_show_react" : "kit_show_rails"
       end
     end

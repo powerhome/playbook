@@ -11,10 +11,10 @@ if defined?(SimpleForm)
             super(
               attribute_name,
               options.deep_merge(label: false, input_html: {
-                              props: {
-                                label: true,
-                              },
-                            }),
+                                   props: {
+                                     label: true,
+                                   },
+                                 }),
               &block
             )
           end

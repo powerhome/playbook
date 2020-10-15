@@ -16,7 +16,7 @@
 
 #### Checklist:
 
-- [ ] **LABELS** Add a label: `enhancement`, `bug`, `improvement`, `new kit`, `depreciation`, or `breaking`. See [Changelog & Labels](https://github.com/powerhome/playbook/wiki/Changelog-&-Labels) for details.
+- [ ] **LABELS** Add a label: `enhancement`, `bug`, `improvement`, `new kit`, `deprecated`, or `breaking`. See [Changelog & Labels](https://github.com/powerhome/playbook/wiki/Changelog-&-Labels) for details.
 - [ ] **URGENCY** Please select a release milestone
 - [ ] **DEPLOY** Please add the `Milano` label when you are ready for a review.
 - [ ] **SCREENSHOT** Please add a screen shot or two.

@@ -7,7 +7,7 @@ const FixedConfirmationToastMultiLineDark = () => {
       <FixedConfirmationToast
           dark
           status="tip"
-          text={'Scan to Assign Selected Items.\n Click X to close at any time'}
+          text={'Scan to Assign Selected Items.\n Click here to generate report'}
       />
     </div>
   )

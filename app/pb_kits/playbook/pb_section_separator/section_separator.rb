@@ -18,7 +18,7 @@ module Playbook
                   default: false
 
       def classname
-        generate_classname("pb_section_separator_kit", variant, orientation, dark_class)
+        generate_classname("pb_section_separator_kit", variant, orientation)
       end
 
     private

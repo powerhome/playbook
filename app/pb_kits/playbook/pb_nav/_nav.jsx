@@ -8,6 +8,7 @@ import { globalProps } from '../utilities/globalProps.js'
 
 type NavProps = {
   aria?: object,
+  borderless?: boolean,
   children?: React.Node,
   className?: string | array<string>,
   data?: object,
@@ -22,6 +23,7 @@ type NavProps = {
 const Nav = (props: NavProps) => {
   const {
     aria = {},
+    borderless = false,
     children,
     className,
     data = {},
@@ -39,6 +41,7 @@ const Nav = (props: NavProps) => {
   const cardCss = classnames(
     buildCss('pb_nav_list', variant, orientation, {
       highlight: highlight,
+      borderless: borderless,
     }),
     globalProps(props),
     className

@@ -52,7 +52,7 @@ module Playbook
         name_parts.compact.join(separator),
         prop(:classname),
         spacing_props,
-        dark_props
+        dark_props,
       ].compact.join(" ")
     end
 
@@ -124,7 +124,7 @@ module Playbook
 
       def prop(name, type: Playbook::Props::String, **options)
         @props ||= {}
-        @props[name] = type.new(**options)
+        @props[name] = type.new(options.merge(name: name, kit: self))
 
         define_method(name) { prop(name) }
       end

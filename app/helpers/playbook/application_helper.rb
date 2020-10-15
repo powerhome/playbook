@@ -15,11 +15,7 @@ module Playbook
     end
 
     def dark_mode
-      if cookies[:dark_mode] == "true"
-        true
-      else
-        false
-      end
+      cookies[:dark_mode] == "true"
     end
 
     def dark_mode_props(props)
@@ -31,6 +27,5 @@ module Playbook
         props
       end
     end
-
   end
 end

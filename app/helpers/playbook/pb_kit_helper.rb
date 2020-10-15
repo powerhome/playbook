@@ -6,7 +6,6 @@ require "webpacker/react/component"
 
 module Playbook
   module PbKitHelper
-
     def pb_rails(kit, props: {}, &block)
       previous = prefix_partial_path_with_controller_namespace
       self.prefix_partial_path_with_controller_namespace = false
@@ -16,18 +15,19 @@ module Playbook
       self.prefix_partial_path_with_controller_namespace = previous
     end
 
-    def pb_react(kit, props:{dark: react_props}, options: {})
+    def pb_react(kit, props: { dark: react_props }, options: {})
       ::Webpacker::React::Component.new(kit.camelize).render(props, options)
     end
 
   private
+
     def rails_props(props)
       if @playbook.nil?
         props
       else
         dark_mode_props(props)
       end
-    end  
+    end
 
     def react_props
       if @playbook.nil?
@@ -35,7 +35,7 @@ module Playbook
       else
         dark_mode
       end
-    end 
+    end
 
     def is_subkit?(kit)
       kit.match(%r{[/\\]})
