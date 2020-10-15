@@ -15,8 +15,8 @@ RSpec.describe Playbook::PbDate::Date do
       .with_default(false) }
   it do
     is_expected.to define_enum_prop(:size)
-      .with_default("sm")
-      .with_values("lg", "sm", "xs")
+      .with_default("md")
+      .with_values("lg", "md", "sm", "xs")
   end
   it { is_expected.to define_boolean_prop(:show_day_of_week)
       .with_default(false) }
