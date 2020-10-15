@@ -2,7 +2,7 @@
 
 import React from 'react'
 import DateTime from '../pb_kit/dateTime.js'
-import { Body, Icon, Title } from '../'
+import { Body, Caption, Icon, Title } from '../'
 import classnames from 'classnames'
 import { globalProps } from '../utilities/globalProps.js'
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
@@ -15,6 +15,7 @@ type PbDateProps = {
   id?: string,
   showDayOfWeek?: boolean,
   showIcon?: boolean,
+  size?: string,
   value: string | date,
 }
 
@@ -27,6 +28,7 @@ const PbDate = (props: PbDateProps) => {
     id,
     showDayOfWeek = false,
     showIcon = false,
+    size = 'md',
     value,
   } = props
 
@@ -53,41 +55,77 @@ const PbDate = (props: PbDateProps) => {
         className={classes}
         id={id}
     >
-      <Title
-          size={4}
-          tag="h4"
-      >
-        <If condition={showIcon}>
-          <Body
-              className="pb_icon_kit_container"
-              color="light"
-              tag="span"
-          >
-            <Icon
-                fixedWidth
-                icon="calendar-alt"
+      <If condition={size == 'md'}>
+
+        <Title
+            size={4}
+            tag="h4"
+        >
+          <If condition={showIcon}>
+            <Body
+                className="pb_icon_kit_container"
+                color="light"
+                tag="span"
+            >
+              <Icon
+                  fixedWidth
+                  icon="calendar-alt"
+              />
+            </Body>
+          </If>
+          <If condition={showDayOfWeek}>
+            {weekday}
+            <Body
+                color="light"
+                tag="span"
+                text=" • "
             />
-          </Body>
-        </If>
-        <If condition={showDayOfWeek}>
-          {weekday}
-          <Body
-              color="light"
-              tag="span"
-              text=" • "
-          />
-        </If>
-        <span>
-          {month}
-          {' '}
-          {day}
-        </span>
-        <If condition={currentYear != year}>
+          </If>
           <span>
-            {`, ${year}`}
+            {month}
+            {' '}
+            {day}
           </span>
-        </If>
-      </Title>
+          <If condition={currentYear != year}>
+            <span>
+              {`, ${year}`}
+            </span>
+          </If>
+        </Title>
+        <Else />
+        <>
+          <If condition={showIcon}>
+            <Body
+                className="pb_icon_kit_container"
+                color="light"
+                tag="span"
+            >
+              <Icon
+                  fixedWidth
+                  icon="calendar-alt"
+              />
+            </Body>
+          </If>
+          <If condition={showDayOfWeek}>
+            <Caption tag="div">
+              {weekday}
+            </Caption>
+            <Caption
+                color="light"
+                tag="div"
+                text=" • "
+            />
+          </If>
+          <Caption tag="span">
+            {month}
+            {' '}
+            {day}
+            <If condition={currentYear != year}>
+              {`, ${year}`}
+            </If>
+          </Caption>
+        </>
+      </If>
     </div>
   )
 }

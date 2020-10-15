@@ -1,17 +1,45 @@
 import React from 'react'
 import { Date as FormattedDate } from '../../'
 
-const DateDefault = () => {
+const DateDefault = (props) => {
   return (
-    <div>
+    <>
+      <FormattedDate
+          size="sm"
+          value={new Date()}
+          {...props}
+      />
+
+      <br />
+
+      <FormattedDate
+          size="sm"
+          value="2012-08-03"
+          {...props}
+      />
+
+      <br />
+
+      <FormattedDate
+          showDayOfWeek
+          size="sm"
+          value="2017-12-03"
+          {...props}
+      />
+
+      <br />
+      <br />
+
       <FormattedDate
           value={new Date()}
+          {...props}
       />
 
       <br />
 
       <FormattedDate
           value="2012-08-03"
+          {...props}
       />
 
       <br />
@@ -19,8 +47,9 @@ const DateDefault = () => {
       <FormattedDate
           showDayOfWeek
           value="2017-12-03"
+          {...props}
       />
-    </div>
+    </>
   )
 }
 
