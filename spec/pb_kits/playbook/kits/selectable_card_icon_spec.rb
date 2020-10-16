@@ -18,6 +18,7 @@ RSpec.describe Playbook::PbSelectableCardIcon::SelectableCardIcon do
   it { is_expected.to define_prop(:body_text) }
   it { is_expected.to define_prop(:value) }
   it { is_expected.to define_prop(:input_id) }
+  it { is_expected.to define_hash_prop(:input_options).with_default({}) }
 
   describe "#classname" do
     it "returns namespaced class name", :aggregate_failures do

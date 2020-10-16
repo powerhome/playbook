@@ -1,5 +1,7 @@
 examples:
   rails:
   - caption_light: Default
+  - caption_block: Block
   react:
   - caption_light: Default
+  - caption_block: Block
