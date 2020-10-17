@@ -1,10 +1,12 @@
 dependencies:
   override: []
 
+machine:
+  directory: playbook/
+
 deploy:
   max_commits: # Automatically deploy all commits, no matter how many.
   override:
-    - pushd playbook
     - ./bin/deployer bash -lc "cluster=${CLUSTER} environment=${ENVIRONMENT} tag=${REVISION} deploy_url=${DEPLOY_URL} bin/deploy"
 
 links:
