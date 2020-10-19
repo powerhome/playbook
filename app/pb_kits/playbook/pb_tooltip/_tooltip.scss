@@ -38,17 +38,6 @@
       }
     }
 
-    &.react {
-      .arrow {
-        top: 78%;
-      }
-      &.flipped {
-        .arrow {
-          top: -8%;
-        }
-      }
-    }
-
     .arrow {
       content: " ";
       position: absolute;
@@ -82,10 +71,6 @@
     .tooltip_tooltip{
       color: $white;
       background-color: rgba($black, $opacity_9);
-
-
-      &.show {
-      }
       .arrow {
         border-color: $black transparent transparent transparent;
         opacity: $opacity_9;
@@ -100,6 +85,75 @@
   }
 }
 
-.tooltip_tooltip.top {
-  padding: ($space_xs - 3px) 0;
+// Right
+[class^="pb_tooltip_kit"] .tooltip_tooltip[x-placement="right"] {
+  box-shadow: -8px 0 28px 0 rgba(60, 106, 172, 0.18);
+  margin: 0 0 0 16px;
+  .arrow {
+    left: -8px;
+    margin-bottom: 0;
+    transform: rotate(90deg);
+  }
+  &.flipped {
+    box-shadow: -8px 0 28px 0 rgba(60, 106, 172, 0.18);
+    margin: 0 0 0 16px;
+    .arrow {
+      transform: rotate(270deg);
+    }
+  }
+}
+
+// Left
+[class^="pb_tooltip_kit"] .tooltip_tooltip[x-placement="left"] {
+  box-shadow: -8px 0 28px 0 rgba(60, 106, 172, 0.18);
+  margin: 0 0 0 16px;
+  .arrow {
+    left: -8px;
+    margin-bottom: 0;
+    transform: rotate(90deg);
+  }
+  &.flipped {
+    box-shadow: -8px 0 28px 0 rgba(60, 106, 172, 0.18);
+    margin: 0 0 0 16px;
+    .arrow {
+      transform: rotate(270deg);
+    }
+  }
+}
+
+// Bottom
+[class^="pb_tooltip_kit"] .tooltip_tooltip[x-placement="bottom"] {
+  box-shadow: 0 0 28px 0 rgba(60, 106, 172, 0.18);
+  margin: 16px 0 0 0;
+  .arrow {
+    top: -18px;
+    margin-bottom: 0;
+    transform: rotate(180deg);
+  }
+  &.flipped{
+    box-shadow: 0 0 28px 0 rgba(60, 106, 172, 0.18);
+    margin: 16px 0 0 0;
+    .arrow {
+      transform: rotate(0deg);
+    }
+  }
+}
+
+// Left
+[class^="pb_tooltip_kit"] .tooltip_tooltip[x-placement="left"] {
+  box-shadow: 8px 0 28px 0 rgba(60, 106, 172, 0.18);
+  margin: 0 16px 0 0;
+  .arrow {
+    margin-bottom: 0;
+    right: -18px;
+    left: auto;
+    transform: rotate(270deg);
+  }
+  &.flipped {
+    box-shadow: 8px 0 28px 0 rgba(60, 106, 172, 0.18);
+    margin: 0 16px 0 0;
+    .arrow {
+      transform: rotate(90deg);
+    }
+  }
 }
