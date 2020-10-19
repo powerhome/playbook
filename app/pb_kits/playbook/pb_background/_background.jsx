@@ -26,13 +26,12 @@ const Background = (props: BackgroundProps) => {
     data = {},
     id,
     imageUrl = '',
-    padding = 'md',
     tag = 'div',
   } = props
 
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
-  const classes = classnames(buildCss('pb_background_kit'), className, globalProps(props, { padding }))
+  const classes = classnames(buildCss('pb_background_kit'), globalProps(props), `pb_background_color_${backgroundColor}`, className)
   const Tag = `${tag}`
   const backgroundStyle = {
     backgroundImage: `url(${imageUrl})`,
@@ -53,7 +52,7 @@ const Background = (props: BackgroundProps) => {
           { children }
         </div>
         <Else />
-        <div className={classes + `pb_background_color_${backgroundColor}`}>
+        <div className={classes}>
           { children }
         </div>
       </If>

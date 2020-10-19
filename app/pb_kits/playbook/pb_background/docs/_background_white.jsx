@@ -5,9 +5,10 @@ const BackgroundWhite = () => (
   <div>
     <Background
         backgroundColor="white"
-        padding="xl"
+        className="blah"
     />
   </div>
+
 )
 
 export default BackgroundWhite
