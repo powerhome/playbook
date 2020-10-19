@@ -7,14 +7,16 @@
     .pb_title_kit_2, .pb_body_kit {
       color: white;
     }
-    padding: $space_xl;
+    // padding: $space_xl;
+    padding: 40px;
     // h2 {
     //   margin-top: $space_xl;
     // }
   }
   .content{
     background-color: rgb(211, 211, 211);
-    padding: $space_xl;
+    // padding: $space_xl;
+    padding: 40px;
   }
   // .hero-two{
   //   background-color: rgb(59, 59, 59);
@@ -22,4 +24,7 @@
   // .content-two{
 
   // }
+  .user-card {
+    width: 200px;
+  }
 }

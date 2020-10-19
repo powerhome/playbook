@@ -10,6 +10,9 @@
       <% end %>
       <%= pb_rails("caption", props: { tag: "span", text: Playbook::VERSION }) %>
       <% end %>
+      <%= pb_rails("nav", props: { orientation: "horizontal"}) do %>
+        <%= pb_rails("nav/item", props: { text: "Design Components", link: "/kits" }) %>
+      <% end %>
     <div id="toggle-modes">
     <% if cookies[:dark_mode] == "false" || cookies[:dark_mode] == nil%>
       <%= pb_rails("circle_icon_button", props: {

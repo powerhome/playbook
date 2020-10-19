@@ -13,7 +13,7 @@
       <%= render 'layouts/playbook/mobile_hamburger'%>
       <%= pb_rails("layout/sidebar", props: { classname: "pb--page--sideNav"}) do%>
         <%= render 'layouts/playbook/sidebar'%>
-      <% end%>
+      <% end %>
       <%= pb_rails("layout/body") do%>
         <div class="pb--page--content--main <%= cookies[:dark_mode] == "true" ? 'dark' : '' %>">
           <%= yield %>
