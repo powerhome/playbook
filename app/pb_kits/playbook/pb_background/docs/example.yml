@@ -1,8 +1,15 @@
 examples:
 
   rails:
-  - background_default: Default
+  - background_light: Light
+  - background_white: White
+  - background_dark: Dark
+  - background_gradient: Gradient
+  - background_image: Image
 
   react:
-  - background_default: Default
-
+  - background_light: Light
+  - background_white: White
+  - background_dark: Dark
+  - background_gradient: Gradient
+  - background_image: Image

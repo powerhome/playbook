@@ -29,7 +29,7 @@ module Playbook
       end
 
       def background_color_classname
-        !image_url.present? ? "bg_#{background_color}" : ""
+        !image_url.present? ? "pb_background_color_#{background_color}" : ""
       end
     end
   end

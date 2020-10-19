@@ -53,7 +53,7 @@ const Background = (props: BackgroundProps) => {
           { children }
         </div>
         <Else />
-        <div className={classes + `bg_${backgroundColor}`}>
+        <div className={classes + `pb_background_color_${backgroundColor}`}>
           { children }
         </div>
       </If>
