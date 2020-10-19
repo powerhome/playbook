@@ -17,13 +17,18 @@ module Playbook
                      values: %w[normal subtle],
                      default: "normal"
       prop :highlight, type: Playbook::Props::Boolean, default: true
+      prop :borderless, type: Playbook::Props::Boolean, default: false
 
       def classname
-        generate_classname("pb_nav_list", variant, orientation, highlight_class)
+        generate_classname("pb_nav_list", variant, orientation, highlight_class, borderless_class)
       end
 
       def highlight_class
         highlight ? "highlight" : nil
+      end
+
+      def borderless_class
+        borderless ? "borderless" : nil
       end
     end
   end

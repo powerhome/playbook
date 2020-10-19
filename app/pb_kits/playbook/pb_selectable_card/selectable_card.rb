@@ -8,20 +8,20 @@ module Playbook
       partial "pb_selectable_card/selectable_card"
 
       prop :checked, type: Playbook::Props::Boolean,
-                  default: false
+                     default: false
       prop :disabled, type: Playbook::Props::Boolean,
-                  default: false
+                      default: false
       prop :icon, type: Playbook::Props::Boolean,
                   default: false
       prop :multi, type: Playbook::Props::Boolean,
-                  default: true
+                   default: true
       prop :input_id, type: Playbook::Props::String
+
+      prop :input_options, type: Playbook::Props::Hash,
+                                      default: {}
       prop :name
       prop :text
       prop :value
-
-      
-      
 
       def classname
         generate_classname("pb_selectable_card_kit", checked_class, enable_disabled_class)
@@ -31,10 +31,17 @@ module Playbook
         input_id.present? ? input_id : name
       end
 
+      def additional_input_options
+        input_options.merge(
+          id: input_id_present,
+          disabled: disabled
+        )
+      end
+
     private
-      
+
       def checked_class
-        checked ? "checked" : nil 
+        checked ? "checked" : nil
       end
 
       def enable_disabled_class
