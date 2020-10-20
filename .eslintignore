@@ -3,4 +3,3 @@ fonts/**
 public
 dist
 app/pb_kits/playbook/packs
-webpack.config.js
