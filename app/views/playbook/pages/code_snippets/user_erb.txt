@@ -1,0 +1,8 @@
+<%= pb_rails("user", props: {
+  name: "Anna Black",
+  title: "Remodeling Consultant",
+  orientation: "vertical",
+  align: "center",
+  size: "lg",
+  avatar_url: "https://randomuser.me/api/portraits/women/44.jpg"
+}) %>

@@ -1,13 +1,14 @@
 Playbook::Engine.routes.draw do
-  root              to: "pages#home"
-  get 'home',       to: "pages#home"
-  get 'principles', to: "pages#principles"
-  get 'grid',       to: "pages#grid"
-  get 'tokens',     to: "pages#tokens"
-  get 'kits',       to: "pages#kits"
-  get 'examples',   to: "pages#examples"
-  get 'utilities',  to: "pages#utilities"
-  get 'resources',  to: "pages#resources"
+  root                   to: "pages#home"
+  get 'home',            to: "pages#home"
+  get 'principles',      to: "pages#principles"
+  get 'getting_started', to: "pages#getting_started"
+  get 'grid',            to: "pages#grid"
+  get 'tokens',          to: "pages#tokens"
+  get 'kits',            to: "pages#kits"
+  get 'examples',        to: "pages#examples"
+  get 'utilities',       to: "pages#utilities"
+  get 'resources',       to: "pages#resources"
 
   get 'kits/:name',       to: "pages#kit_show_rails", as: 'kit_show'
   get 'kits/:name/rails', to: "pages#kit_show_rails", as: 'kit_show_rails'

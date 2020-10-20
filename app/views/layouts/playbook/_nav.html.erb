@@ -11,6 +11,7 @@
       <%= pb_rails("caption", props: { tag: "span", text: Playbook::VERSION }) %>
       <% end %>
       <%= pb_rails("nav", props: { orientation: "horizontal"}) do %>
+        <%= pb_rails("nav/item", props: { text: "Getting Started", link: "/getting_started" }) %>
         <%= pb_rails("nav/item", props: { text: "Design Components", link: "/kits" }) %>
       <% end %>
     <div id="toggle-modes">

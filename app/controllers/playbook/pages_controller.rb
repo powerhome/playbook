@@ -29,7 +29,7 @@ module Playbook
     end
 
     def home
-      render layout: "layouts/playbook/landing_page"
+      # render layout: "layouts/playbook/landing_page"
     end
 
     def utilities; end
@@ -39,30 +39,33 @@ module Playbook
     def kits
       params[:type] ||= "react"
       @type = params[:type]
+      render layout: "layouts/playbook/kits"
     end
 
     def principles; end
+
+    def getting_started; end
 
     def grid
       render layout: "layouts/playbook/grid"
     end
 
     def kit_show_rails
-      render "playbook/pages/kit_show"
+      render "playbook/pages/kit_show", layout: "layouts/playbook/kits"
     end
 
     def kit_show_react
-      render template: "playbook/pages/kit_show"
+      render template: "playbook/pages/kit_show", layout: "layouts/playbook/kits"
     end
 
     def kit_category_show_rails
       params[:type] ||= "rails"
       @type = params[:type]
-      render template: "playbook/pages/kit_category_show"
+      render template: "playbook/pages/kit_category_show", layout: "layouts/playbook/kits"
     end
 
     def kit_category_show_react
-      render template: "playbook/pages/kit_category_show"
+      render template: "playbook/pages/kit_category_show", layout: "layouts/playbook/kits"
     end
 
   private
