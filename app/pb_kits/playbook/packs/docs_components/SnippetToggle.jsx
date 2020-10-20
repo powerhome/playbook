@@ -3,7 +3,7 @@ import { useState } from 'react'
 import { Nav } from '../../'
 import NavItem from '../../pb_nav/_item.jsx'
 
-const TestComp = (props) => {
+const SnippetToggle = (props) => {
   const [codeSnippet, toggleCodeSnippet] = useState('rails')
 
   const toggleHook = (snippetLang) => {
@@ -46,4 +46,4 @@ const TestComp = (props) => {
   )
 }
 
-export default TestComp
+export default SnippetToggle

@@ -20,7 +20,7 @@
 
         <%= pb_rails("title", props: { margin_bottom: "sm", text: "We Call Our Components... Kits", tag: "h2", size: 2 }) %>
 
-        <%= pb_rails("flex", props: {horizontal: "center"}) do %>
+        <%= pb_rails("flex", props: { horizontal: "center" }) do %>
           <%= pb_rails("flex/flex_item", props: {fixed_size: "200px"}) do %>
             <%= pb_rails("card", props: { classname: "user-card" }) do %>
               <%= pb_rails("user", props: {
@@ -42,7 +42,7 @@
           <% end %>
         <% end %>
 
-        <%= react_component('TestComp', { test: 'test' }) %>
+        <%= react_component('SnippetToggle', { test: 'test' }) %>
         
         <div class="pb--codeCopy code-snippets">
           <pre class="highlight"><%= raw rouge(rails_contents, "erb") %></pre>
@@ -51,13 +51,20 @@
   </div>
 
   <div class="hero">
-    <%= pb_rails("flex", props: { classname: "text-blob", horizontal: "right" } ) do %>
+    <%= pb_rails("flex", props: { classname: "text-blob", spacing: "between", wrap: true } ) do %>
       <%= pb_rails("flex/flex_item", props: { fixed_size: "500px", margin_top: "xl" }) do %>
         <%= pb_rails("title", props: { margin_bottom: "md", text: "Getting Started", tag: "h2", size: 2 }) %>
         <%= pb_rails("body", props: {
           text: "Follow our simple setup guide to add Playbook to your Rails or React project."
         }) %>
         <%= pb_rails("button", props: { text: "Get Started", link: "/getting_started" }) %>
+      <% end %>
+      <%= pb_rails("flex/flex_item", props: { fixed_size: "500px", margin_top: "xl" }) do %>
+        <%= pb_rails("title", props: { margin_bottom: "md", text: "What's New?", tag: "h2", size: 2 }) %>
+        <%= pb_rails("body", props: {
+          text: "We follow a weekly release cycle.  A new RubyGem and NPM package are published each Thursday."
+        }) %>
+        <%= pb_rails("button", props: { text: "View Our Changelog", link: "https://github.com/powerhome/playbook/blob/master/CHANGELOG.md" }) %>
       <% end %>
     <% end %>
   </div>
