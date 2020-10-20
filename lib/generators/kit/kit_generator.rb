@@ -35,7 +35,7 @@ class KitGenerator < Rails::Generators::NamedBase
       say_status  "#{@kit_name_capitalize} kit already exists.",
                   "Please choose another name or manually make changes to the existing kit.",
                   :red
-      nil
+      return
     else
       # Add kit to Playbook menu ==========================
       open("app/pb_kits/playbook/data/menu.yml", "a") do |f|

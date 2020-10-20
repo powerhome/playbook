@@ -15,10 +15,10 @@
 
   @each $dark_color_name, $dark_color_value in $pb_dark_body_colors{
     &[class*=_#{$dark_color_name}][class*=dark]{
-      @include pb_body($dark_color_value);
+      @include pb_body($dark_color_value); 
     }
   }
-
+  
   @each $status_name, $status_value in $pb_body_status {
     &[class*=#{$status_name}] {
       @include pb_body($status_value);
@@ -29,7 +29,7 @@
     @include pb_body_dark();
     @each $dark_color_name, $dark_color_value in $pb_dark_body_colors{
       &[class*=_#{$dark_color_name}][class*=dark]{
-        @include pb_body($dark_color_value);
+        @include pb_body($dark_color_value); 
       }
     }
     @each $status_name, $status_value in $pb_body_status {
@@ -38,5 +38,5 @@
       }
     }
   }
-
+ 
 }

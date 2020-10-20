@@ -18,7 +18,7 @@ module Playbook
       prop :input_id, type: Playbook::Props::String
 
       prop :input_options, type: Playbook::Props::Hash,
-                           default: {}
+                                      default: {}
       prop :name
       prop :text
       prop :value

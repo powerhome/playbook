@@ -27,13 +27,14 @@ module Playbook
 
       def body_padding
         if padding.present?
-          ""
+           ""
         else
           "p_md"
         end
       end
 
     private
+
 
       def selected_class
         selected ? "selected" : "deselected"

@@ -16,8 +16,8 @@ module Playbook
                      values: %w[default tracker],
                      default: "default"
       prop :color, type: Playbook::Props::Enum,
-                   values: %w[primary info],
-                   default: "primary"
+                     values: %w[primary info],
+                     default: "primary"
       def classname
         generate_classname("pb_progress_step_kit", orientation, icon_class, variant_class, color_class)
       end

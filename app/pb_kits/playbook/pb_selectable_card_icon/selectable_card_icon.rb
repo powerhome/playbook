@@ -26,7 +26,7 @@ module Playbook
       prop :value
 
       prop :input_options, type: Playbook::Props::Hash,
-                           default: {}
+                                      default: {}
 
       def classname
         generate_classname("pb_selectable_card_icon_kit", checked_class, enabled_disabled_class)

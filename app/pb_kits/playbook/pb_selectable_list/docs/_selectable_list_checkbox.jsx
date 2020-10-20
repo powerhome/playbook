@@ -1,26 +1,30 @@
 import React from 'react'
-import { SelectableList, SelectableListItem } from '../..'
+import { SelectableList } from '../..'
 
 const SelectableListDefault = () => {
   return (
     <div>
       <SelectableList variant="checkbox">
-        <SelectableListItem
-            label="one"
+        <SelectableList.Item
+            label="Monday"
             name="custom1"
         />
-        <SelectableListItem
+        <SelectableList.Item
             checked
-            label="two"
+            label="Tuesday"
             name="custom2"
         />
-        <SelectableListItem
-            label="three"
+        <SelectableList.Item
+            label="Wednesday"
             name="custom3"
         />
-        <SelectableListItem
-            label="four"
+        <SelectableList.Item
+            label="Thursday"
             name="custom4"
+        />
+        <SelectableList.Item
+            label="Friday"
+            name="custom5"
         />
       </SelectableList>
     </div>

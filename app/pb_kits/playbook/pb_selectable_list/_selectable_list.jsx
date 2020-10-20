@@ -4,6 +4,7 @@ import classnames from 'classnames'
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
 import { globalProps } from '../utilities/globalProps.js'
 import { List } from  '..'
+import SelectableListItem from './_item.jsx'
 
 type SelectableListProps = {
   aria?: object,
@@ -40,5 +41,7 @@ const SelectableList = (props: SelectableListProps) => {
     </div>
   )
 }
+
+SelectableList.Item = SelectableListItem
 
 export default SelectableList

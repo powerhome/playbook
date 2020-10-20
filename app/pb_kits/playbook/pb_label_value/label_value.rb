@@ -18,6 +18,7 @@ module Playbook
       prop :date
       prop :active, type: Playbook::Props::Boolean, default: false
 
+
       def classname
         generate_classname("pb_label_value_kit", variant_class)
       end

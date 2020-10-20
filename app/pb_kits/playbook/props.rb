@@ -52,7 +52,7 @@ module Playbook
         name_parts.compact.join(separator),
         prop(:classname),
         spacing_props,
-        dark_props,
+        dark_props
       ].compact.join(" ")
     end
 

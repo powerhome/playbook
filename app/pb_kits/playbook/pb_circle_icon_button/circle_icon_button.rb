@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 module Playbook
   module PbCircleIconButton
     class CircleIconButton
@@ -14,11 +12,11 @@ module Playbook
                      values: %w[primary secondary link],
                      default: "primary"
       prop :disabled, type: Playbook::Props::Boolean,
-                      default: false
+                     default: false
       prop :icon, required: true
       prop :link
       prop :new_window, type: Playbook::Props::Boolean,
-                        default: false
+                     default: false
       def classname
         generate_classname("pb_circle_icon_button_kit")
       end

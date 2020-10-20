@@ -34,6 +34,7 @@ kits:
     - selectable_card
     - selectable_card_icon
     - selectable_icon
+    - selectable_list
     - text_input
     - textarea
     - typeahead
@@ -45,7 +46,6 @@ kits:
   - image
   - layout
   - list
-  - selectable_list
   - loading_inline
   - multiple_users
   - multiple_users_stacked

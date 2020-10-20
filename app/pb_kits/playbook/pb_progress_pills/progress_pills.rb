@@ -27,7 +27,7 @@ module Playbook
       end
 
       def active_step(step)
-        step <= active ? "_active" : "_inactive"
+         step <= active ? "_active" : "_inactive"
       end
 
       def dark_pill

@@ -15,7 +15,7 @@ module Playbook
 
       prop :date, type: Playbook::Props::Date,
                   default: ::Date.current
-
+                  
       prop :compact, type: Playbook::Props::Boolean,
                      default: false
 

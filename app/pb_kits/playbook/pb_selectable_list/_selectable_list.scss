@@ -1,24 +1,17 @@
 @import "../tokens/colors";
+@import "../tokens/spacing";
 
 [class^=pb_selectable_list]{
-  .pb_item_kit {
+  margin-bottom: 0px;
+  [class^=pb_item_kit] {
     &:hover {
       background-color: $bg_light;
     }
   }
-  .pb_selectable_list_item_kit {
-    margin-left: 5px;
+  [class^=pb_radio_kit] {
+    margin-left: $space_xs;
   }
-}
-
-[class^=pb_select] {
-  margin-bottom: 0px;
-}
-
-[class^=pb_radio_kit] {
-  margin-left: 5px;
-}
-
-[class^=pb_checkbox_kit] {
-  margin-left: 5px;
+  [class^=pb_checkbox_kit] {
+    margin-left: $space_xs;
+  }
 }

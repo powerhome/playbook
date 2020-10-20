@@ -22,7 +22,7 @@ module Playbook
       partial "pb_selectable_list/selectable_list_item"
 
       def classname
-        generate_classname("pb_item_kit")
+        generate_classname("pb_selectable_list_item_kit")
       end
     end
   end
