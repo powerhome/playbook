@@ -1,0 +1,32 @@
+@import "../tokens/colors";
+@import "../tokens/spacing";
+
+@mixin section_separator_vertical($dark: false) {
+    @if $dark == false {
+        background: $border_light;
+    } @else {
+        background: $border_dark;
+    }
+    content: "";
+    height: 100%;
+    width: 1px;
+    margin-left: $space_xs;
+    margin-right: $space_xs;
+    position: initial;
+    z-index: 0;
+}
+
+@mixin section_separator_horizontal($dark: false) {
+    @if $dark == false {
+        background: $border_light;
+    } @else {
+        background: $border_dark;
+    }
+    content: "";
+    height: 1px;
+    width: 100%;
+    position: absolute;
+    top: 50%;
+    left: 0;
+    z-index: 0;
+}

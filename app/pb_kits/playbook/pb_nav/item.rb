@@ -12,6 +12,7 @@ module Playbook
       prop :text
       prop :icon_left
       prop :icon_right
+      prop :image_url
 
       def classname
         generate_classname("pb_nav_list_kit_item", active_class)

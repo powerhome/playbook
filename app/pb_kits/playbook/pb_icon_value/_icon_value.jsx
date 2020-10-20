@@ -32,7 +32,11 @@ const IconValue = (props: IconValueProps) => {
   } = props
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
-  const classes = classnames(buildCss('pb_icon_value_kit', align), className, globalProps(props))
+  const classes = classnames(
+    buildCss('pb_icon_value_kit', align),
+    globalProps(props),
+    className
+  )
 
   return (
     <div

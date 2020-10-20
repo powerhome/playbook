@@ -14,7 +14,9 @@ RSpec.describe Playbook::PbProgressStep::ProgressStep do
                       .with_values("default", "tracker") }
   it { is_expected.to define_boolean_prop(:icon)
                       .with_default(false) }             
-
+  it { is_expected.to define_enum_prop(:color)
+                      .with_default("primary")
+                      .with_values("primary", "info") }
   describe "#classname" do
     it "returns namespaced class name", :aggregate_failures do
       expect(subject.new({}).classname).to eq "pb_progress_step_kit_horizontal"
@@ -22,6 +24,7 @@ RSpec.describe Playbook::PbProgressStep::ProgressStep do
       
       expect(subject.new(orientation: "horizontal", icon: true).classname).to eq "pb_progress_step_kit_horizontal_icon"
       expect(subject.new(variant: "tracker").classname).to eq "pb_progress_step_kit_horizontal_tracker"
+      expect(subject.new(variant: "tracker",color: "info").classname).to eq "pb_progress_step_kit_horizontal_tracker_info"
       expect(subject.new(orientation: "vertical", icon: true).classname).to eq "pb_progress_step_kit_vertical_icon"
   
       expect(subject.new(dark: true).classname).to eq "pb_progress_step_kit_horizontal dark"

@@ -10,6 +10,12 @@ examples:
     - table_single_line: Force Single Line
     - table_data_table: Data Table
     - table_responsive_table: Responsive Tables
+    - table_one_action: Table with 1 Action
+    - table_two_actions: Table with 2 Actions
+    - table_two_plus_actions: Table with 2+ Actions
+    - table_action_middle: Table with Actions in the Middle
+    - table_icon_buttons: Table with Icon Buttons
+
  
   react:
     - table_sm: Small
@@ -22,3 +28,9 @@ examples:
     - table_single_line: Force Single Line
     - table_data_table: Data Table
     - table_responsive_table: Responsive Tables
+    - table_one_action: Table with 1 Action
+    - table_two_actions: Table with 2 Actions
+    - table_two_plus_actions: Table with 2+ Actions
+    - table_action_middle: Table with Actions in the Middle
+    - table_icon_buttons: Table with Icon Buttons
+

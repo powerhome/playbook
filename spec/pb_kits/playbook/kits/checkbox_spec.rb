@@ -15,6 +15,7 @@ RSpec.describe Playbook::PbCheckbox::Checkbox do
   it { is_expected.to define_prop(:value) }
   it { is_expected.to define_prop(:name) }
   it { is_expected.to define_boolean_prop(:checked).with_default(false) }
+  it { is_expected.to define_hash_prop(:input_options).with_default({}) }
 
   describe "#classname" do
     it "returns namespaced class name", :aggregate_failures do

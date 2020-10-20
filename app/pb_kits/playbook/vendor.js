@@ -21,6 +21,9 @@ PbPopover.start()
 import PbTooltip from './pb_tooltip'
 PbTooltip.start()
 
+import PbFixedConfirmationToast from './pb_fixed_confirmation_toast'
+PbFixedConfirmationToast.start()
+
 import PbTypeahead from './pb_typeahead'
 PbTypeahead.start()
 
@@ -28,3 +31,8 @@ import PbTable from './pb_table'
 PbTable.start()
 
 import 'flatpickr'
+
+// React-Rendered Rails Kits =====
+import WebpackerReact from 'webpacker-react'
+import * as ReactRailsPBKits from './react_rails_kits.js'
+WebpackerReact.setup({ ...ReactRailsPBKits })

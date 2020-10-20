@@ -20,8 +20,7 @@ const DatePickerDefaultDate = () => (
         pickerId="date-picker-default-date3"
     />
     <DatePicker
-        defaultDate="blank"
-        label="Blank"
+        label="Default Behavior"
         pickerId="date-picker-default-date4"
     />
   </div>

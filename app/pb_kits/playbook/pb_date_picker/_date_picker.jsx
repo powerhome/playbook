@@ -62,8 +62,7 @@ const DatePicker = (props: DatePickerProps) => {
     name,
     onChange = () => {},
     pickerId,
-    placeholder,
-    type,
+    placeholder = 'Select Date',
     yearRange = [ 1900, 2100 ],
   } = props
 
@@ -71,9 +70,9 @@ const DatePicker = (props: DatePickerProps) => {
   const dataProps = buildDataProps(data)
   const classes = classnames(
     buildCss('pb_date_picker_kit'),
-    className,
     globalProps(props),
     error ? 'error' : null,
+    className
   )
 
   useEffect(() => {
@@ -88,6 +87,7 @@ const DatePicker = (props: DatePickerProps) => {
       maxDate: maxDate,
       minDate: minDate,
       mode: mode,
+      onChange: onChange,
       pickerId: pickerId,
       yearRange: yearRange,
     })
@@ -126,9 +126,7 @@ const DatePicker = (props: DatePickerProps) => {
             id={pickerId}
             label={hideLabel ? null : label}
             name={name}
-            onChange={onChange}
             placeholder={placeholder}
-            type={type}
         />
         <If condition={!hideIcon}>
           <div

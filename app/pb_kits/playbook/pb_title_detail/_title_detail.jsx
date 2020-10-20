@@ -10,11 +10,11 @@ import { buildCss, buildDataProps } from '../utilities/props'
 
 type TitleDetailProps = {
   align?: "left" | "center" | "right",
-  className?: String,
+  className?: string,
   data?: object,
-  detail: String,
-  id?: String,
-  title: String,
+  detail: string,
+  id?: string,
+  title: string,
 }
 
 const TitleDetail = (props: TitleDetailProps) => {
@@ -25,7 +25,7 @@ const TitleDetail = (props: TitleDetailProps) => {
   return (
     <div
         {...dataProps}
-        className={classnames(className, pbCss, globalProps(props))}
+        className={classnames(pbCss, globalProps(props), className)}
         id={id}
     >
       <Title

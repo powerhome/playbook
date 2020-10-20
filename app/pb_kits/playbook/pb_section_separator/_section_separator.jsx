@@ -20,17 +20,15 @@ const SectionSeparator = (props: SectionSeparatorProps) => {
   const {
     aria = {},
     className,
-    dark = false,
     data = {},
     id,
     orientation = 'horizontal',
     text,
     variant = 'card',
   } = props
-  const themeStyle = dark === true ? '_dark' : ''
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
-  const classes = classnames(buildCss('pb_section_separator_kit', variant, orientation, themeStyle), className, globalProps(props))
+  const classes = classnames(buildCss('pb_section_separator_kit', variant, orientation), globalProps(props), className)
 
   return (
 
