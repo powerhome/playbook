@@ -1,12 +1,13 @@
 examples:
-  
+
   rails:
   - selectable_card_icon_default: Default
   - selectable_card_icon_checkmark: Checkmark
   - selectable_card_icon_single_select: Single Select
+  - selectable_card_icon_options: With Options
 
-  
-  
+
+
   react:
   - selectable_card_icon_default: Default
   - selectable_card_icon_checkmark: Checkmark

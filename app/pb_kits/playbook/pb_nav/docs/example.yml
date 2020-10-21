@@ -2,7 +2,9 @@ examples:
   rails:
   - default_nav: Default
   - with_icons_nav: With Icons
+  - with_img_nav: With Custom Icon
   - no_highlight_nav: No Highlight
+  - borderless_nav: No Borders
   - subtle_nav: Subtle Variant
   - subtle_with_icons_nav: Subtle With Icons
   - subtle_no_highlight_nav: Subtle No Highlight
@@ -13,10 +15,13 @@ examples:
   react:
   - default_nav: Default
   - with_icons_nav: With Icons
+  - with_img_nav: With Custom Icon
   - no_highlight_nav: No Highlight
+  - borderless_nav: No Borders
   - subtle_nav: Subtle Variant
   - subtle_with_icons_nav: Subtle With Icons
   - subtle_no_highlight_nav: Subtle No Highlight
   - horizontal_nav: Horizontal Nav
   - block_nav: Block
   - block_no_title_nav: Without Title
+
