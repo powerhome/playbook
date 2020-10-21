@@ -14,6 +14,7 @@
 %>
 
 <%= pb_rails("form", props: { form_system_options: { scope: :example, method: :get } }) do |form| %>
+  <%= form.typeahead :example_user, props: { data: { typeahead_example1: true, user: {} }, placeholder: "Search for a user" } %>
   <%= form.text_field :example_text_field, props: { label: true } %>
   <%= form.telephone_field :example_phone_field, props: { label: true } %>
   <%= form.email_field :example_email_field, props: { label: true } %>
@@ -39,4 +40,54 @@
     <%= action.submit %>
     <%= action.button props: { type: "reset", text: "Cancel", variant: "secondary" } %>
   <% end %>
+<% end %>
+
+<!-- form.typeahead user results example template -->
+<template data-typeahead-example-result-option>
+  <%= pb_rails("user", props: {
+    name: tag(:slot, name: "name"),
+    orientation: "horizontal",
+    align: "left",
+    avatar_url: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR4nGP6zwAAAgcBApocMXEAAAAASUVORK5CYII=",
+    avatar: true
+    }) %>
+</template>
+
+<!-- form.typeahead JS example implementation -->
+<%= javascript_tag defer: "defer" do %>
+  document.addEventListener("pb-typeahead-kit-search", function(event) {
+    if (!event.target.dataset || !event.target.dataset.typeaheadExample1) return;
+
+    fetch(`https://api.github.com/search/users?q=${encodeURIComponent(event.detail.searchingFor)}`)
+      .then(response => response.json())
+      .then((result) => {
+        const resultOptionTemplate = document.querySelector("[data-typeahead-example-result-option]")
+
+        event.detail.setResults((result.items || []).map((user) => {
+          const wrapper = resultOptionTemplate.content.cloneNode(true)
+          wrapper.children[0].dataset.user = JSON.stringify(user)
+          wrapper.querySelector('slot[name="name"]').replaceWith(user.login)
+          wrapper.querySelector('img').dataset.src = user.avatar_url
+          return wrapper
+        }))
+      })
+  })
+
+
+  document.addEventListener("pb-typeahead-kit-result-option-selected", function(event) {
+    if (!event.target.dataset.typeaheadExample1) return;
+
+    const selectedUserJSON = event.detail.selected.firstElementChild.dataset.user
+    const selectedUserData = JSON.parse(selectedUserJSON)
+
+    // set the input field's value
+    event.target.querySelector('input[name=example_user]').value = selectedUserData.login
+
+    // log the selected option's dataset
+    console.log('The selected user data:')
+    console.dir(selectedUserData)
+
+    // do even more with the data later - TBD
+    event.target.dataset.user = selectedUserJSON
+  })
 <% end %>
