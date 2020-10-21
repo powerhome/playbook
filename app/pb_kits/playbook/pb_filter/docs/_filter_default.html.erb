@@ -30,7 +30,6 @@
   <%= pb_rails("form", props: { form_system_options: { scope: :example, method: :get } }) do |form| %>
     <%= form.text_field :example_text_field, props: { label: true } %>
     <%= form.collection_select :example_collection_select, example_collection, :value, :name, props: { label: true } %>
-    <%= form.date_picker :test_picker, props: {label: true}%>
 
     <%= form.actions do |action| %>
       <%= action.submit props: { text: "Apply", data: { disable_with: "<i class='far fa-spinner fa-spin mr-3'></i>Searching...".html_safe },}%>

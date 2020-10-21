@@ -15,23 +15,12 @@
     :example_select_field,
     :example_collection_select_field,
     :example_checkbox_field,
-    :example_checkbox_field_2,
-    :example_date_picker_field_1,
-    :example_date_picker_field_3
-
-    # for local testing only
-    # will be removed before merging
-    def initialize
-      # @example_number_field = 123
-      @example_date_picker_field_1 = "10/02/1993"
-      @example_date_picker_field_3 = Date.today.httpdate
-    end
+    :example_date_picker_field_1
 
 
     def self.model_name
       ActiveModel::Name.new(self, nil, "ExampleFormModel")
     end
-
   end
 %>
 
@@ -52,7 +41,6 @@
 
 
 <%= pb_rails("form", props: { form_system: "simple_form", form_system_options: [example_form_model.new, url: "", method: :get] }) do |form| %>
-
   <%= form.input :example_text_field, as: :string %>
   <%= form.input :example_phone_field, as: :tel %>
   <%= form.input :example_email_field, as: :email %>
@@ -64,9 +52,7 @@
   <%= form.select :example_select_field, [["Yes", 1], ["No", 2]], props: { label: true } %>
   <%= form.collection_select :example_collection_select_field, example_collection, :value, :name, props: { label: true } %>
   <%= form.check_box :example_checkbox_field, props: { text: "Example Checkbox", label: true } %>
-  <%= form.check_box :example_checkbox_field_2, props: { text: "Example Checkbox", label: true } %>
-  <%= form.date_picker :example_date_picker_field_1, props: { default_date: 'blank', label: true } %>
-  <%= form.date_picker :example_date_picker_field_3, props: { default_date: 'blank', label: true } %>
+  <%= form.date_picker :example_date_picker_field_1, props: { label: true } %>
 
   <%= form.actions do |action| %>
     <%= action.submit %>

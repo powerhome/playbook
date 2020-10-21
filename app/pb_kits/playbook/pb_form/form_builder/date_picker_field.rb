@@ -12,9 +12,6 @@ module Playbook
 
           props[:name] = html_attribute_name
           props[:picker_id] = html_id
-          props[:label] = @template.label(@object_name, name) if props[:label] == true
-
-          puts @object.to_json
 
           input = text_field(
             name,
@@ -29,7 +26,6 @@ module Playbook
               required: props[:required],
             }
           )
-          puts input
 
           @template.pb_rails("date_picker", props: props) do
             input
@@ -39,14 +35,3 @@ module Playbook
     end
   end
 end
-
-# Create text input with rails form helper
-# pass options to text input
-
-# add hidden, implicit prop identifying it as form helper
-# inside dp erb, create conditional if check to leave out text_input kit
-
-# pass that input as a block to @template.pb_rails("date_picker")
-# let rails do the magic
-
-# null value handling
