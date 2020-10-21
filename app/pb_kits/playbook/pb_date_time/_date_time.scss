@@ -1,0 +1,15 @@
+[class^=pb_date_time] {
+  [class*=pb_date_kit] > div:last-child {
+    margin-right: 0 !important;
+  }
+  &[class*=_center] {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+  }
+  &[class*=_right]  {
+    display: flex;
+    justify-content: flex-end;
+    text-align: right;
+  }
+}
