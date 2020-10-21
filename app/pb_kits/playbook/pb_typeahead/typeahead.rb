@@ -6,13 +6,13 @@ module Playbook
       include Playbook::Props
 
       prop :async, type: Playbook::Props::Boolean,
-                   default: false
+                    default: false
       prop :label
       prop :load_options
       prop :name
       prop :options, type: Playbook::Props::HashArray, default: []
       prop :pills, type: Playbook::Props::Boolean,
-                   default: false
+                    default: false
 
       prop :placeholder
       prop :search_term_minimum_length, default: 3
@@ -38,17 +38,13 @@ module Playbook
           isMulti: true,
           label: label,
           options: options,
-          placeholder: placeholder,
+          placeholder: placeholder
         }
 
-        if async
-          base_options.merge!(
-            {
-              async: true,
-              loadOptions: load_options,
-            }
-          )
-        end
+        base_options.merge!({
+          async: true,
+          loadOptions: load_options,
+        }) if async
 
         base_options
       end
