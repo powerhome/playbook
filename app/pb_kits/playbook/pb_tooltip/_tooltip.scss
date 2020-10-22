@@ -1,6 +1,8 @@
 @import "../tokens/positioning";
 @import "../tokens/colors";
 
+$tooltip_shadow: rgba(60, 106, 172, 0.18);
+
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -86,55 +88,44 @@
 }
 
 // Right
-[class^="pb_tooltip_kit"] .tooltip_tooltip[x-placement="right"] {
-  box-shadow: -8px 0 28px 0 rgba(60, 106, 172, 0.18);
-  margin: 0 0 0 16px;
-  .arrow {
-    left: -8px;
-    margin-bottom: 0;
-    transform: rotate(90deg);
-  }
-  &.flipped {
-    box-shadow: -8px 0 28px 0 rgba(60, 106, 172, 0.18);
+[class^="pb_tooltip_kit"] .tooltip_tooltip {
+
+  &[x-placement="right"] {
+    box-shadow: -8px 0 28px 0 $tooltip_shadow;
     margin: 0 0 0 16px;
     .arrow {
-      transform: rotate(270deg);
+      left: -8px;
+      margin-bottom: 0;
+      transform: rotate(90deg);
+    }
+    &.flipped .arrow {
+        transform: rotate(270deg);
     }
   }
-}
 
-// Bottom
-[class^="pb_tooltip_kit"] .tooltip_tooltip[x-placement="bottom"] {
-  box-shadow: 0 0 28px 0 rgba(60, 106, 172, 0.18);
-  margin: 16px 0 0 0;
-  .arrow {
-    top: -18px;
-    margin-bottom: 0;
-    transform: rotate(180deg);
-  }
-  &.flipped{
-    box-shadow: 0 0 28px 0 rgba(60, 106, 172, 0.18);
+  &[x-placement="bottom"] {
+    box-shadow: 0 0 28px 0 $tooltip_shadow;
     margin: 16px 0 0 0;
     .arrow {
+      top: -18px;
+      margin-bottom: 0;
+      transform: rotate(180deg);
+    }
+    &.flipped .arrow {
       transform: rotate(0deg);
     }
   }
-}
 
-// Left
-[class^="pb_tooltip_kit"] .tooltip_tooltip[x-placement="left"] {
-  box-shadow: 8px 0 28px 0 rgba(60, 106, 172, 0.18);
-  margin: 0 16px 0 0;
-  .arrow {
-    margin-bottom: 0;
-    right: -18px;
-    left: auto;
-    transform: rotate(270deg);
-  }
-  &.flipped {
-    box-shadow: 8px 0 28px 0 rgba(60, 106, 172, 0.18);
+  &[x-placement="left"] {
+    box-shadow: 8px 0 28px 0 $tooltip_shadow;
     margin: 0 16px 0 0;
     .arrow {
+      margin-bottom: 0;
+      right: -18px;
+      left: auto;
+      transform: rotate(270deg);
+    }
+    &.flipped .arrow {
       transform: rotate(90deg);
     }
   }
