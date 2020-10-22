@@ -1,12 +1,13 @@
 import React from 'react'
 import DateTime from '../_date_time.jsx'
 
-const DateTimeAlign = () => (
+const DateTimeAlign = (props) => (
   <div>
     <DateTime
         datetime={new Date()}
         dayOfWeek
         icon
+        {...props}
     />
 
     <br />
@@ -16,6 +17,7 @@ const DateTimeAlign = () => (
         datetime={new Date()}
         dayOfWeek
         icon
+        {...props}
     />
 
     <br />
@@ -25,6 +27,7 @@ const DateTimeAlign = () => (
         datetime={new Date()}
         dayOfWeek
         icon
+        {...props}
     />
   </div>
 )

@@ -10,7 +10,6 @@ type DateTimeProps = {
   align?: "left" | "center" | "right",
   aria?: object,
   className?: string,
-  dark?: boolean,
   data?: object,
   datetime: string,
   id?: string,
@@ -26,7 +25,6 @@ const DateTime = (props: DateTimeProps) => {
     aria = {},
     className,
     data = {},
-    dark = false,
     showDayOfWeek = false,
     datetime,
     id,
@@ -38,9 +36,7 @@ const DateTime = (props: DateTimeProps) => {
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
   const classes = classnames(
-    buildCss('pb_date_time', size, {
-      dark: dark,
-    }),
+    buildCss('pb_date_time', size),
     globalProps(props),
     className
   )

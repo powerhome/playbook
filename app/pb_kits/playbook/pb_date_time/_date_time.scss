@@ -12,4 +12,15 @@
     justify-content: flex-end;
     text-align: right;
   }
+  &[class*=dark] {
+    [class^=pb_title_kit] {
+        color: $text_dk_default !important;
+    }
+    & * {
+      @include caption_dark;
+    }
+    .pb_time {
+      color: $text_dk_default;
+    }
+  }
 }

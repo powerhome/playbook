@@ -1,12 +1,13 @@
 import React from 'react'
 import DateTime from '../_date_time.jsx'
 
-const DateTimeDefault = () => (
+const DateTimeDefault = (props) => (
   <div>
     <DateTime
         datetime={new Date()}
         showDayOfWeek
         showIcon
+        {...props}
     />
 
     <br />
@@ -14,6 +15,7 @@ const DateTimeDefault = () => (
     <DateTime
         datetime={new Date()}
         showDayOfWeek
+        {...props}
     />
 
     <br />
@@ -21,12 +23,14 @@ const DateTimeDefault = () => (
     <DateTime
         datetime={new Date()}
         showIcon
+        {...props}
     />
 
     <br />
 
     <DateTime
         datetime={new Date()}
+        {...props}
     />
   </div>
 )
