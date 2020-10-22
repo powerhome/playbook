@@ -71,6 +71,10 @@
     align-items: stretch;
   }
 
+  &[class*=align_items_baseline] {
+    align-items: baseline;
+  }
+
   // Spacing
   &[class*=spacing_around] {
     justify-content: space-around;
