@@ -1,0 +1,35 @@
+@import "../tokens/colors";
+
+$background_colors: (
+  "gradient": linear-gradient(135deg, $gradient_start 0%, $gradient_end 100%),
+  "dark": $bg_dark,
+  "light": $bg_light,
+  "white": $white,
+);
+
+
+[class^=pb_background_kit] {
+  max-width: 100%;
+  max-height: 100%;
+  background-size: cover;
+
+  @each $name, $color in $background_colors {
+    &.pb_background_color_#{$name} {
+      background: $color;
+    }
+  };
+
+  .blur_up {
+    -webkit-filter: blur(6px);
+    filter: blur(6px);
+    transition: filter 550ms, -webkit-filter 550ms;
+  }
+
+  .blur_up.lazyloaded {
+    -webkit-filter: blur(0);
+    filter: blur(0);
+  }
+
+
+
+}

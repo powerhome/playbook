@@ -1,2 +1,32 @@
 @import "../pb_icon/icon";
 @import "../pb_title/title";
+
+[class^=pb_date_kit] {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    > div, .pb_icon_kit_container {
+        margin-right: 4px !important;
+    }
+
+    &[class*=_center] {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        margin-right: 4px !important;
+    }
+
+    &[class*=_right] {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: flex-end;
+        margin-left: 4px !important;
+    }
+    &.dark {
+        [class^=pb_title_kit] {
+            color: $text_dk_default !important;
+        }
+    }
+}
