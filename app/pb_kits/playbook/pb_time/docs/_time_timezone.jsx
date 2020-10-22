@@ -1,7 +1,7 @@
 import React from 'react'
 import Time from '../_time.jsx'
 
-const TimeTimeZone = () => {
+const TimeTimezone = (props) => {
   const zones = {
     east: 'America/New_York',
     central: 'America/Chicago',
@@ -16,6 +16,7 @@ const TimeTimeZone = () => {
           date={new Date()}
           size="md"
           timeZone={zones.east}
+          {...props}
       />
 
       <br />
@@ -24,6 +25,7 @@ const TimeTimeZone = () => {
       <Time
           date={new Date()}
           timeZone={zones.central}
+          {...props}
       />
 
       <br />
@@ -32,6 +34,7 @@ const TimeTimeZone = () => {
       <Time
           date={new Date()}
           timeZone={zones.mountain}
+          {...props}
       />
 
       <br />
@@ -40,6 +43,7 @@ const TimeTimeZone = () => {
       <Time
           date={new Date()}
           timeZone={zones.west}
+          {...props}
       />
 
       <br />
@@ -48,10 +52,11 @@ const TimeTimeZone = () => {
       <Time
           date={new Date()}
           timeZone={zones.asia}
+          {...props}
       />
 
     </div>
   )
 }
 
-export default TimeTimeZone
+export default TimeTimezone

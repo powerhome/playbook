@@ -22,6 +22,12 @@ RSpec.describe Playbook::PbCaption::Caption do
                       .with_values(nil, "link")
                       .with_default(nil)}
 
+  describe "#caption output" do
+    it "returns text output", :aggregate_failures do
+      expect(subject.new(text: "Caption Text").text).to eq "Caption Text"
+    end
+  end
+
   describe "#classname" do
     it "returns namespaced class name", :aggregate_failures do
       expect(subject.new({}).classname).to eq "pb_caption_kit_md"

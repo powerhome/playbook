@@ -1,7 +1,7 @@
 import React from 'react'
 import { Flex, FlexItem, SectionSeparator } from '../../'
 
-const SectionSeparatorVertical = () => {
+const SectionSeparatorVertical = (props) => {
   return (
     <Flex
         inline="flex-container"
@@ -10,11 +10,17 @@ const SectionSeparatorVertical = () => {
       <FlexItem>
         {'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua'}
       </FlexItem>
-      <SectionSeparator orientation="vertical" />
+      <SectionSeparator
+          {...props}
+          orientation="vertical"
+      />
       <FlexItem>
         {'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua'}
       </FlexItem>
-      <SectionSeparator orientation="vertical" />
+      <SectionSeparator
+          {...props}
+          orientation="vertical"
+      />
       <FlexItem>
         {'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua'}
       </FlexItem>

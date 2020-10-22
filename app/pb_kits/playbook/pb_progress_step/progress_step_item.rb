@@ -8,7 +8,7 @@ module Playbook
       partial "pb_progress_step/progress_step_item"
 
       prop :status, type: Playbook::Props::Enum,
-                    values: %w[complete active inactive],
+                    values: %w[complete active inactive hidden],
                     default: "inactive"
 
       def classname

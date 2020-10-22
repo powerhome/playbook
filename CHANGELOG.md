@@ -1,4 +1,89 @@
-# Changelog
+
+
+## [7.2.0](https://github.com/powerhome/playbook/tree/7.2.0)
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/7.1.2...HEAD)
+
+**Kit Enhancements:**
+
+- Nav Kit Update [\#1152](https://github.com/powerhome/playbook/pull/1152) ([megantrimble](https://github.com/megantrimble))
+- \[NUXE-158\] Section separator dark mode [\#1146](https://github.com/powerhome/playbook/pull/1146) ([christinaatai](https://github.com/christinaatai))
+- Better error messages, and more test coverage [\#1115](https://github.com/powerhome/playbook/pull/1115) ([garettarrowood](https://github.com/garettarrowood))
+- \[CMPN-22\] Allow all HTML options on input in PbSelectableIcon, PbSelectableCard and PbSelectableCardIcon Rails kits [\#1113](https://github.com/powerhome/playbook/pull/1113) ([josephinef9](https://github.com/josephinef9))
+- \[NUX-639\] - Caption Kits to support block / Time Kit style updates [\#1100](https://github.com/powerhome/playbook/pull/1100) ([coleerikson](https://github.com/coleerikson))
+
+**Fixed Bugs:**
+
+- Downgrade react-select lib [\#1155](https://github.com/powerhome/playbook/pull/1155) ([thestephenmarshall](https://github.com/thestephenmarshall))
+- Highcharts React null value bug fix [\#1154](https://github.com/powerhome/playbook/pull/1154) ([bh247484](https://github.com/bh247484))
+- Pill Kit double line fix [\#1153](https://github.com/powerhome/playbook/pull/1153) ([megantrimble](https://github.com/megantrimble))
+- Fixes Typeahead \(Rails\) setting wrong image attribute in examples [\#1151](https://github.com/powerhome/playbook/pull/1151) ([thestephenmarshall](https://github.com/thestephenmarshall))
+
+**Merged pull requests:**
+
+- \[CMPN-166\] Security Updates [\#1145](https://github.com/powerhome/playbook/pull/1145) ([andrew-k9](https://github.com/andrew-k9))
+
+## [7.1.2](https://github.com/powerhome/playbook/tree/7.1.2) (2020-10-15)
+
+- Solar Patch [\#1149](https://github.com/powerhome/playbook/pull/1149) ([jasperfurniss](https://github.com/jasperfurniss))
+
+
+## [7.1.1](https://github.com/powerhome/playbook/tree/7.1.1) (2020-10-15)
+
+- Patch for rake dist [\#1147](https://github.com/powerhome/playbook/pull/1147) ([jasperfurniss](https://github.com/jasperfurniss))
+
+
+## [7.1.0](https://github.com/powerhome/playbook/tree/7.1.0) (2020-10-09)
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/7.0.1-alpha14...HEAD)
+
+**Kit Enhancements:**
+
+- \[NUXE-80\] - Add 'close' option to kit, with examples [\#1142](https://github.com/powerhome/playbook/pull/1142) ([coleerikson](https://github.com/coleerikson))
+- \[NUXE-55\] Updated styles to button toolbar kit [\#1129](https://github.com/powerhome/playbook/pull/1129) ([christinaatai](https://github.com/christinaatai))
+- Update Progress Step [\#1128](https://github.com/powerhome/playbook/pull/1128) ([kre8sions](https://github.com/kre8sions))
+- Make updates to the inline date range kit [\#1126](https://github.com/powerhome/playbook/pull/1126) ([MatthewRDodds](https://github.com/MatthewRDodds))
+- \[CMPN-18\] Allow all HTML options on input in PbToggle Rails kit. [\#1112](https://github.com/powerhome/playbook/pull/1112) ([idanzonshein](https://github.com/idanzonshein))
+- Typeahead with Pills \(Rails\) [\#1104](https://github.com/powerhome/playbook/pull/1104) ([thestephenmarshall](https://github.com/thestephenmarshall))
+
+**Fixed Bugs:**
+
+- Fixing Flash on Popover Initial Page Load [\#1135](https://github.com/powerhome/playbook/pull/1135) ([jasperfurniss](https://github.com/jasperfurniss))
+- \[NUXE-155\] Date Picker Patch 3 [\#1125](https://github.com/powerhome/playbook/pull/1125) ([bh247484](https://github.com/bh247484))
+- Code Example Toggle Fix [\#1124](https://github.com/powerhome/playbook/pull/1124) ([bh247484](https://github.com/bh247484))
+
+**Improvements:**
+
+- Update dependency mini-css-extract-plugin to v0.12.0 [\#1140](https://github.com/powerhome/playbook/pull/1140) ([renovate[bot]](https://github.com/apps/renovate))
+- Update dependency copy-webpack-plugin to v6.2.0 [\#1139](https://github.com/powerhome/playbook/pull/1139) ([renovate[bot]](https://github.com/apps/renovate))
+- Pin dependencies [\#1138](https://github.com/powerhome/playbook/pull/1138) ([renovate[bot]](https://github.com/apps/renovate))
+- Changelog Generator 2.0 [\#1136](https://github.com/powerhome/playbook/pull/1136) ([jasperfurniss](https://github.com/jasperfurniss))
+- Updated Table Documentation with Examples of How to Use Buttons [\#1123](https://github.com/powerhome/playbook/pull/1123) ([evalouderback](https://github.com/evalouderback))
+- Bump actionview from 5.2.4.3 to 5.2.4.4 [\#1103](https://github.com/powerhome/playbook/pull/1103) ([dependabot[bot]](https://github.com/apps/dependabot))
+
+
+## [7.0.1](https://github.com/powerhome/playbook/tree/7.0.1) (2020-10-12)
+
+- Solar Patch [\#1149](https://github.com/powerhome/playbook/pull/1149) ([jasperfurniss](https://github.com/jasperfurniss))
+
+
+## [7.0.0](https://github.com/powerhome/playbook/tree/7.0.0) (2020-09-29)
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/6.8.1...7.0.0)
+
+**Breaking changes:**
+
+- Playbook Distribution Release [\#834](https://github.com/powerhome/playbook/pull/834) ([thestephenmarshall](https://github.com/thestephenmarshall))
+
+
+## [6.8.1](https://github.com/powerhome/playbook/tree/6.8.1) (2020-09-28)
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/6.8.0...6.8.1)
+
+**Implemented enhancements:**
+
+- \[NUXE-144\] Added user value handling to checkbox form helper [\#1107](https://github.com/powerhome/playbook/pull/1107) ([bh247484](https://github.com/bh247484))
+
 
 ## [6.8.0](https://github.com/powerhome/playbook/tree/6.8.0) (2020-09-18)
 
@@ -28,7 +113,6 @@
 
 - Dark Mode Toggle [\#1051](https://github.com/powerhome/playbook/pull/1051) ([kre8sions](https://github.com/kre8sions))
 
-# Changelog
 
 ## [6.6.1](2020-9-16)
 
@@ -58,7 +142,6 @@
 
 - removed global popover visibility styling \(\#1083\) [\#1085](https://github.com/powerhome/playbook/pull/1085) ([jasoncypret](https://github.com/jasoncypret))
 
-# Changelog
 
 All notable changes to this project will be documented in this file.
 
@@ -864,14 +947,3 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Removed (breaking changes)
 - React PbLayout prop `children` dropped support for single Node (https://github.com/powerhome/playbook/commit/b16da50914e110c75c6d96c985fa02781c9e2040#diff-c3ce2c91288ca3e730d3c56e7f73475cL11-L14)
 - Rails PbLayout prop `dark` dropped (https://github.com/powerhome/playbook/commit/b16da50914e110c75c6d96c985fa02781c9e2040#diff-377fda563d148f7b3ad33f904b7b0cdbL13)
-
-\* *This Changelog was automatically generated by [github_changelog_generator](https://github.com/github-changelog-generator/github-changelog-generator)*
-
-
-\* *This Changelog was automatically generated by [github_changelog_generator](https://github.com/github-changelog-generator/github-changelog-generator)*
-
-
-\* *This Changelog was automatically generated by [github_changelog_generator](https://github.com/github-changelog-generator/github-changelog-generator)*
-
-
-\* *This Changelog was automatically generated by [github_changelog_generator](https://github.com/github-changelog-generator/github-changelog-generator)*

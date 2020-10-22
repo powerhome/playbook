@@ -18,11 +18,12 @@ type TimeProps = {
   id?: string,
   showIcon?: boolean,
   size?: 'md' | 'sm',
+  showTimezone?: boolean,
   timeZone?: string,
 }
 
 const Time = (props: TimeProps) => {
-  const { align, className, date, showIcon, size, timeZone } = props
+  const { align, className, date, showIcon, size, timeZone, showTimezone = true } = props
   const classes = classnames(
     buildCss('pb_time_kit', align, size),
     globalProps(props),
@@ -33,41 +34,53 @@ const Time = (props: TimeProps) => {
 
   return (
     <div className={classes}>
-      <span className="pb_body_kit">
-        <If condition={showIcon}>
-          <Body
-              color="light"
-              tag="span"
-          >
-            <Icon
-                fixedWidth
-                icon="clock"
-                size={size === 'md' ? 'lg' : 'sm'}
+      <If condition={showIcon}>
+        <Body
+            color="light"
+            tag="span"
+        >
+          <Icon
+              fixedWidth
+              icon="clock"
+              size={size === 'md' ? '' : 'sm'}
+          />
+        </Body>
+        {' '}
+      </If>
+
+      <time dateTime={date}>
+        <span>
+          <If condition={size === 'md'}>
+            <Body
+                className="pb_time"
+                tag="span"
+                text={dateTimestamp.toTimeWithMeridian()}
             />
-          </Body>
-          {' '}
-        </If>
-        <time dateTime={date}>
-          <span>
-            <If condition={size !== 'md'}>
+            {' '}
+            <If condition={showTimezone}>
               <Body
                   color="light"
                   tag="span"
-                  text={dateTimestamp.toTimeWithMeridian()}
+                  text={dateTimestamp.toTimezone()}
               />
-              <Else />
+            </If>
+            <Else />
+            <Caption
+                color="light"
+                tag="span"
+                text={dateTimestamp.toTimeWithMeridian()}
+            />
+            {' '}
+            <If condition={showTimezone}>
               <Caption
-                  size="lg"
+                  color="light"
                   tag="span"
-                  text={dateTimestamp.toTimeWithMeridian()}
+                  text={dateTimestamp.toTimezone()}
               />
             </If>
-            <If condition={timeZone !== undefined}>
-              <span className="pb_time_timezone">{dateTimestamp.toTimezone()}</span>
-            </If>
-          </span>
-        </time>
-      </span>
+          </If>
+        </span>
+      </time>
     </div>
   )
 }

@@ -1,10 +1,11 @@
 examples:
-  
+
   rails:
   - selectable_icon_default: Default
   - selectable_icon_single_select: Single Select
+  - selectable_icon_options: With Options
 
-  
+
   react:
   - selectable_icon_default: Default
   - selectable_icon_single_select: Single Select
