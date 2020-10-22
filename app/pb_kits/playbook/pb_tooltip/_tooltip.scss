@@ -57,7 +57,7 @@ $tooltip_shadow: rgba(60, 106, 172, 0.18);
       z-index: $z_9;
       margin-bottom: $space_sm;
       background-color: $white;
-      padding: $space_xs $space_sm $space_xs $space_sm;
+      padding: $space_xs $space_sm;
       box-shadow: $shadow_deeper;
       border-radius: $border_rad_light;
 
@@ -92,9 +92,9 @@ $tooltip_shadow: rgba(60, 106, 172, 0.18);
 
   &[x-placement="right"] {
     box-shadow: -8px 0 28px 0 $tooltip_shadow;
-    margin: 0 0 0 16px;
+    margin: 0 0 0 $space_sm;
     .arrow {
-      left: -8px;
+      left: -#{$space_xs};
       margin-bottom: 0;
       transform: rotate(90deg);
     }
@@ -104,8 +104,8 @@ $tooltip_shadow: rgba(60, 106, 172, 0.18);
   }
 
   &[x-placement="bottom"] {
-    box-shadow: 0 0 28px 0 $tooltip_shadow;
-    margin: 16px 0 0 0;
+    box-shadow: 0 -12px 28px 0 $tooltip_shadow;
+    margin: $space_sm 0 0 0;
     .arrow {
       top: -18px;
       margin-bottom: 0;
@@ -118,7 +118,7 @@ $tooltip_shadow: rgba(60, 106, 172, 0.18);
 
   &[x-placement="left"] {
     box-shadow: 8px 0 28px 0 $tooltip_shadow;
-    margin: 0 16px 0 0;
+    margin: 0 $space_sm 0 0;
     .arrow {
       margin-bottom: 0;
       right: -18px;
