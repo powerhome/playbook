@@ -4,13 +4,13 @@
   <p>playbok is nil</p>
 <% end %>
   <%= pb_rails("flex", props:{spacing:"between",vertical: "center"}) do%>
-     <%= pb_rails("flex", props:{spacing:"between",vertical: "center"}) do%>
+     <%= pb_rails("flex", props:{margin_bottom: "sm",spacing:"between",vertical: "center"}) do%>
       <%= link_to root_url do %>
         <%= image_tag("pb.logo.svg") %>
       <% end %>
       <%= pb_rails("caption", props: { tag: "span", text: Playbook::VERSION }) %>
       <% end %>
-      <%= pb_rails("nav", props: { orientation: "horizontal"}) do %>
+      <%= pb_rails("nav", props: {margin_top: "sm",orientation: "horizontal"}) do %>
         <%= pb_rails("nav/item", props: { text: "Getting Started", link: "/getting_started" }) %>
         <%= pb_rails("nav/item", props: { text: "Design Components", link: "/kits" }) %>
       <% end %>
@@ -20,14 +20,16 @@
         variant: "secondary",
         icon: "moon",
         tag:"a",
-        link: enable_dark_mode_path
+        link: enable_dark_mode_path,
+        margin_bottom: "sm"
       }) %>
       <% else %>
       <%= pb_rails("circle_icon_button", props: {
         variant: "secondary",
         icon: "sun",
         tag:"a",
-        link: disable_dark_mode_path
+        link: disable_dark_mode_path,
+        margin_bottom: "sm"
       }) %>
     <% end %>
     <% end %>
