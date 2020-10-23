@@ -88,7 +88,7 @@ const Gauge = (props: GaugeProps) => {
   useEffect(() => {
     if (componentDidMount.current) {
       Highcharts.charts.forEach((chart) => {
-        if (chart.renderTo.id === id) {
+        if (chart && chart.renderTo.id === id) {
           chart.series[0].setData([chartData[0].value])
           chart.series[0].data[0].name = chartData[0].name
         }

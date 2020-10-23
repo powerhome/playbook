@@ -2,7 +2,7 @@
 
 import React from 'react'
 import classnames from 'classnames'
-import { Icon } from '../'
+import { Icon, Image } from '../'
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
 import { globalProps } from '../utilities/globalProps.js'
 
@@ -15,6 +15,7 @@ type NavItemProps = {
   iconLeft: string,
   iconRight: string,
   id?: string,
+  imageUrl: String,
   link: string,
   onClick?: EventHandler,
   text: string,
@@ -30,6 +31,7 @@ const NavItem = (props: NavItemProps) => {
     iconLeft,
     iconRight,
     id,
+    imageUrl,
     link,
     onClick = () => {},
     text = '',
@@ -53,6 +55,17 @@ const NavItem = (props: NavItemProps) => {
           href={link}
           onClick={onClick}
       >
+        <If condition={imageUrl}>
+          <div
+              className="pb_nav_list_item_icon_section"
+              key={imageUrl}
+          >
+            <Image
+                className="pb_nav_img_wrapper"
+                url={imageUrl}
+            />
+          </div>
+        </If>
         <If condition={iconLeft}>
           <div
               className="pb_nav_list_item_icon_section"

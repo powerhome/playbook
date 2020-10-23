@@ -1,0 +1,31 @@
+<%= content_tag(:div,
+    aria: object.aria,
+    id: object.id,
+    data: object.data,
+    class: object.classname) do %>
+
+    <%= pb_rails("flex", props: { 
+      orientation: "row", 
+      horizontal: object.align, 
+      vertical: "baseline" }) do %>
+
+      <%= pb_rails("date", props: {
+        dark: object.dark,
+        date: object.date,
+        show_day_of_week: object.show_day_of_week,
+        size: object.size,
+        timezone: object.timezone,
+      }) %>
+
+      <%= pb_rails("time", props: {
+        margin_left: "sm",
+        show_icon: object.show_icon,
+        size: object.size,
+        tag: "caption",
+        time: object.date,
+        timezone: object.timezone,
+      }) %>
+
+    <% end %>
+
+<% end %>

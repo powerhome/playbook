@@ -1,9 +1,13 @@
 import React from 'react'
 import { SectionSeparator } from '../../'
 
-const SectionSeparatorLine = () => {
+const SectionSeparatorLine = (props) => {
   return (
-    <SectionSeparator />
+    <div>
+      <SectionSeparator
+          {...props}
+      />
+    </div>
   )
 }
 

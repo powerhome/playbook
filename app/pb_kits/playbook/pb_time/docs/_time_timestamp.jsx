@@ -1,12 +1,13 @@
 import React from 'react'
 import Time from '../_time.jsx'
 
-const TimeStamp = () => {
+const TimeStamp = (props) => {
   return (
     <div>
       <Time
           date={new Date()}
           size="sm"
+          {...props}
       />
 
       <br />
@@ -14,6 +15,7 @@ const TimeStamp = () => {
       <Time
           date={new Date().getTime()}
           size="sm"
+          {...props}
       />
     </div>
   )

@@ -1,5 +1,60 @@
 
 
+## [7.3.0](https://github.com/powerhome/playbook/tree/7.3.0)
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/7.3.0...HEAD)
+
+**Kit Enhancements:**
+
+- Add solid example of Typeahead \(default\) Rails kit to Form kit [\#1158](https://github.com/powerhome/playbook/pull/1158) ([thestephenmarshall](https://github.com/thestephenmarshall))
+- Create Background kit [\#1110](https://github.com/powerhome/playbook/pull/1110) ([maddiemc01](https://github.com/maddiemc01))
+- \[NUX-640\] - New Date Time Kit [\#1071](https://github.com/powerhome/playbook/pull/1071) ([jasoncypret](https://github.com/jasoncypret))
+- \[NUX-638\] - Date Kit Refactor/Design [\#1108](https://github.com/powerhome/playbook/pull/1108) ([coleerikson](https://github.com/coleerikson))
+
+**Fixed Bugs:**
+
+- \[NUXE-23\] - Fix tooltip with CSS [\#1165](https://github.com/powerhome/playbook/pull/1165) ([coleerikson](https://github.com/coleerikson))
+- \[BOP-726\] Add safe navigator to address home's without addresses [\#1161](https://github.com/powerhome/playbook/pull/1161) ([web-kat](https://github.com/web-kat))
+- \[NUXE-156\] Refactor date picker form helper to use text field helper [\#1131](https://github.com/powerhome/playbook/pull/1131) ([bh247484](https://github.com/bh247484))
+
+**Improvements:**
+
+- Adding Google Analytics [\#1166](https://github.com/powerhome/playbook/pull/1166) ([jasoncypret](https://github.com/jasoncypret))
+
+
+## [7.2.0](https://github.com/powerhome/playbook/tree/7.2.0)
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/7.1.2...HEAD)
+
+**Kit Enhancements:**
+
+- Nav Kit Update [\#1152](https://github.com/powerhome/playbook/pull/1152) ([megantrimble](https://github.com/megantrimble))
+- \[NUXE-158\] Section separator dark mode [\#1146](https://github.com/powerhome/playbook/pull/1146) ([christinaatai](https://github.com/christinaatai))
+- Better error messages, and more test coverage [\#1115](https://github.com/powerhome/playbook/pull/1115) ([garettarrowood](https://github.com/garettarrowood))
+- \[CMPN-22\] Allow all HTML options on input in PbSelectableIcon, PbSelectableCard and PbSelectableCardIcon Rails kits [\#1113](https://github.com/powerhome/playbook/pull/1113) ([josephinef9](https://github.com/josephinef9))
+- \[NUX-639\] - Caption Kits to support block / Time Kit style updates [\#1100](https://github.com/powerhome/playbook/pull/1100) ([coleerikson](https://github.com/coleerikson))
+
+**Fixed Bugs:**
+
+- Downgrade react-select lib [\#1155](https://github.com/powerhome/playbook/pull/1155) ([thestephenmarshall](https://github.com/thestephenmarshall))
+- Highcharts React null value bug fix [\#1154](https://github.com/powerhome/playbook/pull/1154) ([bh247484](https://github.com/bh247484))
+- Pill Kit double line fix [\#1153](https://github.com/powerhome/playbook/pull/1153) ([megantrimble](https://github.com/megantrimble))
+- Fixes Typeahead \(Rails\) setting wrong image attribute in examples [\#1151](https://github.com/powerhome/playbook/pull/1151) ([thestephenmarshall](https://github.com/thestephenmarshall))
+
+**Merged pull requests:**
+
+- \[CMPN-166\] Security Updates [\#1145](https://github.com/powerhome/playbook/pull/1145) ([andrew-k9](https://github.com/andrew-k9))
+
+## [7.1.2](https://github.com/powerhome/playbook/tree/7.1.2) (2020-10-15)
+
+- Solar Patch [\#1149](https://github.com/powerhome/playbook/pull/1149) ([jasperfurniss](https://github.com/jasperfurniss))
+
+
+## [7.1.1](https://github.com/powerhome/playbook/tree/7.1.1) (2020-10-15)
+
+- Patch for rake dist [\#1147](https://github.com/powerhome/playbook/pull/1147) ([jasperfurniss](https://github.com/jasperfurniss))
+
+
 ## [7.1.0](https://github.com/powerhome/playbook/tree/7.1.0) (2020-10-09)
 
 [Full Changelog](https://github.com/powerhome/playbook/compare/7.0.1-alpha14...HEAD)
@@ -28,6 +83,10 @@
 - Updated Table Documentation with Examples of How to Use Buttons [\#1123](https://github.com/powerhome/playbook/pull/1123) ([evalouderback](https://github.com/evalouderback))
 - Bump actionview from 5.2.4.3 to 5.2.4.4 [\#1103](https://github.com/powerhome/playbook/pull/1103) ([dependabot[bot]](https://github.com/apps/dependabot))
 
+
+## [7.0.1](https://github.com/powerhome/playbook/tree/7.0.1) (2020-10-12)
+
+- Solar Patch [\#1149](https://github.com/powerhome/playbook/pull/1149) ([jasperfurniss](https://github.com/jasperfurniss))
 
 
 ## [7.0.0](https://github.com/powerhome/playbook/tree/7.0.0) (2020-09-29)
@@ -884,7 +943,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Use number with delimiter for stat_value.value ([#479][] @thestephenmarshall)
 - Text Input: Added classname support ([#476][] @kre8sions)
 - Layout sidebar colors ([#454][] @markiearnold)
-- Add formatted_stat_value ([#477][] @thestephenmarshall)
+  - Add formatted_stat_value ([#477][] @thestephenmarshall)
 - Add onChange prop to TextInput jsx ([#464][] @thestephenmarshall)
 - User kit, Territory Prop Added ([#463][] @christinaatai)
 - Sets image build status for Milano compatibility ([#472][] @viniciusgama)
@@ -910,20 +969,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Removed (breaking changes)
 - React PbLayout prop `children` dropped support for single Node (https://github.com/powerhome/playbook/commit/b16da50914e110c75c6d96c985fa02781c9e2040#diff-c3ce2c91288ca3e730d3c56e7f73475cL11-L14)
 - Rails PbLayout prop `dark` dropped (https://github.com/powerhome/playbook/commit/b16da50914e110c75c6d96c985fa02781c9e2040#diff-377fda563d148f7b3ad33f904b7b0cdbL13)
-
-\* *This Changelog was automatically generated by [github_changelog_generator](https://github.com/github-changelog-generator/github-changelog-generator)*
-
-
-\* *This Changelog was automatically generated by [github_changelog_generator](https://github.com/github-changelog-generator/github-changelog-generator)*
-
-
-\* *This Changelog was automatically generated by [github_changelog_generator](https://github.com/github-changelog-generator/github-changelog-generator)*
-
-
-\* *This Changelog was automatically generated by [github_changelog_generator](https://github.com/github-changelog-generator/github-changelog-generator)*
-
-
-\* *This Changelog was automatically generated by [github_changelog_generator](https://github.com/github-changelog-generator/github-changelog-generator)*
 
 
 \* *This Changelog was automatically generated by [github_changelog_generator](https://github.com/github-changelog-generator/github-changelog-generator)*

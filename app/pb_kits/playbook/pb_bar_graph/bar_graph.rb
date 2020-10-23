@@ -16,7 +16,7 @@ module Playbook
       prop :subtitle
       prop :title
       prop :x_axis_categories, type: Playbook::Props::Array,
-                                default:[]
+                               default: []
       prop :y_axis_min, type: Playbook::Props::Numeric
       prop :y_axis_max, type: Playbook::Props::Numeric
       prop :legend, type: Playbook::Props::Boolean,
@@ -32,6 +32,7 @@ module Playbook
       def chart_options
         {
           id: id,
+          className: classname,
           chartData: chart_data,
           type: chart_type,
           title: title,
