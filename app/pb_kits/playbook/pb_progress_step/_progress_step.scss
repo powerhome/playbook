@@ -151,8 +151,11 @@
             .circle{
                 height: 24px;
                 width: 24px;
-                border: $primary solid 6px;
+                border: $primary solid 4px;
                 background-color: rgba($white, $opacity_8);
+                svg {
+                    color: darken($primary,25%);
+                }
             }
             &::before {
                 background-color: $primary;
@@ -249,10 +252,16 @@
     }
   }
 //End of Vertical
+  &[class*=icon]{
+    [class*=progress_step_item][class*=_complete],
+    [class*=progress_step_item][class*=_active] {
+        [class*=box] .circle svg {
+            opacity: 1;
+            
+        }
+    }
+    }
 
-  &[class*=icon] [class*=_complete] svg{
-    opacity: 1;
-  }
 
   &[class*=dark] {
     [class*=progress_step_item]{

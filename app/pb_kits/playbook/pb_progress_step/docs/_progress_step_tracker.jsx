@@ -10,13 +10,19 @@ const ProgressStepTracker = (props) => (
         variant="tracker"
         {...props}
     >
-      <ProgressStepItem status="complete">
+      <ProgressStepItem
+          icon="exclamation-triangle"
+          status="complete"
+      >
         <Caption>{'Ordered'}</Caption>
       </ProgressStepItem>
-      <ProgressStepItem status="active">
+      <ProgressStepItem
+          icon="exclamation-triangle"
+          status="active"
+      >
         <Caption>{'Shipped'}</Caption>
       </ProgressStepItem>
-      <ProgressStepItem status="inactive">
+      <ProgressStepItem icon="exclamation-triangle">
         <Caption>{'Delivered'}</Caption>
       </ProgressStepItem>
     </ProgressStep>

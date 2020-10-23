@@ -9,3 +9,4 @@ examples:
   - progress_step_default: Default
   - progress_step_vertical: Vertical
   - progress_step_tracker: Tracker
+  - progress_step_tracker_click_events: Using State
