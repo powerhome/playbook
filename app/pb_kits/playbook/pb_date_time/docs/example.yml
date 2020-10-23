@@ -1,0 +1,11 @@
+examples:
+  
+  rails:
+  - date_time_default: Default
+  - date_time_align: Alignment
+  - date_time_size: Size
+
+  react:
+  - date_time_default: Default
+  - date_time_align: Alignment
+  - date_time_size: Size

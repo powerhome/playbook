@@ -14,6 +14,7 @@ import WebpackerReact from 'webpacker-react'
 import '../pb_form/pb_form_validation'
 import * as Avatar from 'pb_avatar/docs'
 import * as AvatarActionButton from 'pb_avatar_action_button/docs'
+import * as Background from 'pb_background/docs'
 import * as Badge from 'pb_badge/docs'
 import * as BarGraphDocs from 'pb_bar_graph/docs'
 import * as Body from 'pb_body/docs'
@@ -32,9 +33,10 @@ import * as DatePicker from 'pb_date_picker/docs'
 import * as DateRangeInline from 'pb_date_range_inline/docs'
 import * as DateRangeStacked from 'pb_date_range_stacked/docs'
 import * as DateStacked from 'pb_date_stacked/docs'
-import * as DateTimeStacked from 'pb_date_time_stacked/docs'
 import * as DateYearStacked from 'pb_date_year_stacked/docs'
 import * as DistributionBarDocs from 'pb_distribution_bar/docs'
+import * as DateTime from 'pb_date_time/docs'
+import * as DateTimeStacked from 'pb_date_time_stacked/docs'
 import * as FileUpload from 'pb_file_upload/docs'
 import * as Filter from 'pb_filter/docs'
 import * as FixedConfirmationToast from 'pb_fixed_confirmation_toast/docs'
@@ -97,6 +99,7 @@ import * as WeekdayStacked from 'pb_weekday_stacked/docs'
 WebpackerReact.setup({
   ...Avatar,
   ...AvatarActionButton,
+  ...Background,
   ...Badge,
   ...BarGraphDocs,
   ...Body,
@@ -115,9 +118,10 @@ WebpackerReact.setup({
   ...DateRangeInline,
   ...DateRangeStacked,
   ...DateStacked,
-  ...DateTimeStacked,
   ...DateYearStacked,
   ...DistributionBarDocs,
+  ...DateTime,
+  ...DateTimeStacked,
   ...FileUpload,
   ...Filter,
   ...FixedConfirmationToast,

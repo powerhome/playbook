@@ -1,0 +1,1 @@
+The background kit is used for adding a background to a page or to any container. Instead of adding a custom class to give something a background, you can now wrap the elements in the background kit and use the `background_color` prop to assign its color. The colors that you can choose from for the `background_color` prop are: gradient, dark, light, and white.
