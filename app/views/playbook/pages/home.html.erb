@@ -1,9 +1,10 @@
 <div class="landing-page">
-  <div class="hero">
+  <%= pb_rails("background", props: { background_color: "dark", padding: "xl" }) do %> 
     <%= pb_rails("flex", props: { classname: "flex-container", spacing: "between", wrap: true } ) do %>
       <%= pb_rails("flex/flex_item", props: { fixed_size: "500px", margin_top: "xl" }) do %>
-        <%= pb_rails("title", props: { margin_bottom: "md", text: "Playbook Design System", tag: "h2", size: 2 }) %>
+        <%= pb_rails("title", props: { classname: "dark", margin_bottom: "md", text: "Playbook Design System", tag: "h2", size: 2 }) %>
         <%= pb_rails("body", props: {
+          classname: "dark",
           text: "Playbook is the first design system built for both Rails & React interfaces. Playbook takes a modern design approach, and applies it in a way that makes it easy to support bleeding edge, or legacy systems. Playbook is built & maintained by the User Experience & Development teams at Power Home Remodeling, the largest home remodeler in the US."
         }) %>
       <% end %>
@@ -11,9 +12,9 @@
         <%= pb_rails("image", props: { url: "https://unsplash.it/500/400/?image=634" }) %>
       </div>
     <% end %>
-  </div>
+  <% end %>
 
-  <div class="content">
+  <%= pb_rails("background", props: { background_color: "white", padding: "xl" }) do %>
 
     <% react_contents = File.read("#{Playbook::Engine.root}/app/views/playbook/pages/code_snippets/user_jsx.txt") %>
     <% rails_contents = File.read("#{Playbook::Engine.root}/app/views/playbook/pages/code_snippets/user_erb.txt") %>
@@ -48,26 +49,28 @@
           <pre class="highlight"><%= raw rouge(rails_contents, "erb") %></pre>
           <pre class="highlight" style="display:none"><%= raw rouge(react_contents, "jsx") %></pre>
         </div>
-  </div>
+  <% end %>
 
-  <div class="hero">
+  <%= pb_rails("background", props: { background_color: "dark", padding: "xl" }) do %>
     <%= pb_rails("flex", props: { classname: "text-blob", spacing: "between", wrap: true } ) do %>
       <%= pb_rails("flex/flex_item", props: { fixed_size: "500px", margin_top: "xl" }) do %>
-        <%= pb_rails("title", props: { margin_bottom: "md", text: "Getting Started", tag: "h2", size: 2 }) %>
+        <%= pb_rails("title", props: { classname: "dark", margin_bottom: "md", text: "Getting Started", tag: "h2", size: 2 }) %>
         <%= pb_rails("body", props: {
+          classname: "dark",
           text: "Follow our simple setup guide to add Playbook to your Rails or React project."
         }) %>
         <%= pb_rails("button", props: { text: "Get Started", link: "/getting_started" }) %>
       <% end %>
       <%= pb_rails("flex/flex_item", props: { fixed_size: "500px", margin_top: "xl" }) do %>
-        <%= pb_rails("title", props: { margin_bottom: "md", text: "What's New?", tag: "h2", size: 2 }) %>
+        <%= pb_rails("title", props: { classname: "dark", margin_bottom: "md", text: "What's New?", tag: "h2", size: 2 }) %>
         <%= pb_rails("body", props: {
+          classname: "dark",
           text: "We follow a weekly release cycle.  A new RubyGem and NPM package are published each Thursday."
         }) %>
         <%= pb_rails("button", props: { text: "View Our Changelog", link: "https://github.com/powerhome/playbook/blob/master/CHANGELOG.md" }) %>
       <% end %>
     <% end %>
-  </div>
+  <% end %>
 </div>
 
 <%= javascript_packs_with_chunks_tag 'landing-page' %>
