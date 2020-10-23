@@ -12,9 +12,9 @@ type TimestampProps = {
   className?: string | array<string>,
   dark?: boolean,
   data?: string,
+  text: string,
   timestamp: string,
   id?: string,
-  name?: string,
   showDate?: boolean,
   showUser?: boolean,
   variant?: "default" | "elapsed" | "updated"
@@ -25,8 +25,8 @@ const Timestamp = (props: TimestampProps) => {
     align = 'left',
     className,
     dark = false,
+    text,
     timestamp,
-    name,
     showDate = true,
     showUser = false,
     variant = 'default',
@@ -53,13 +53,13 @@ const Timestamp = (props: TimestampProps) => {
     return fullDisplay + ' ' + timeDisplay
   }
 
-  var fullElapsedDisplay = function fullElapsedDisplay(showUser, name, dateTimestamp){
-    var userDisplay = (showUser == 'true' && name.length > 0) ? ' by ' + name : ''
+  var fullElapsedDisplay = function fullElapsedDisplay(showUser, text, dateTimestamp){
+    var userDisplay = (showUser == 'true' && text.length > 0) ? ' by ' + text : ''
     return 'Last updated' + userDisplay + ' ' + dateTimestamp.value.fromNow()
   }
 
-  var fullUpdatedDisplay = function fullUpdatedDisplay(showUser, name, timeDisplay){
-    var userDisplay = (showUser == 'true' && name.length > 0) ? ' by ' + name : ''
+  var fullUpdatedDisplay = function fullUpdatedDisplay(showUser, text, timeDisplay){
+    var userDisplay = (showUser == 'true' && text.length > 0) ? ' by ' + text : ''
     return 'Last updated' + userDisplay + ' at ' + timeDisplay
   }
 
@@ -69,13 +69,13 @@ const Timestamp = (props: TimestampProps) => {
         <If condition={variant == 'updated'}>
           <Caption
               size="xs"
-              text={fullUpdatedDisplay(showUser, name, timeDisplay)}
+              text={fullUpdatedDisplay(showUser, text, timeDisplay)}
           />
         </If>
         <If condition={variant == 'elapsed'}>
           <Caption
               size="xs"
-              text={fullElapsedDisplay(showUser, name, dateTimestamp)}
+              text={fullElapsedDisplay(showUser, text, dateTimestamp)}
           />
         </If>
         <If condition={variant == 'default'}>

@@ -6,8 +6,8 @@ const TimestampUpdatedAlign = () => {
     <div>
       <Timestamp
           align="left"
-          name="Maricris Nonato"
           showUser="true"
+          text="Maricris Nonato"
           timestamp={new Date().getTime()}
           variant="updated"
       />
@@ -26,8 +26,8 @@ const TimestampUpdatedAlign = () => {
 
       <Timestamp
           align="center"
-          name="Maricris Nonato"
           showUser="true"
+          text="Maricris Nonato"
           timestamp={new Date().getTime()}
           variant="updated"
       />
@@ -46,8 +46,8 @@ const TimestampUpdatedAlign = () => {
 
       <Timestamp
           align="right"
-          name="Maricris Nonato"
           showUser="true"
+          text="Maricris Nonato"
           timestamp={new Date().getTime()}
           variant="updated"
       />

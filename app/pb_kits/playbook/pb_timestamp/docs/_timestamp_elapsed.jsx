@@ -5,8 +5,8 @@ const TimestampElapsed = () => {
   return (
     <div>
       <Timestamp
-          name="Maricris Nonato"
           showUser="true"
+          text="Maricris Nonato"
           timestamp={new Date().getTime()}
           variant="elapsed"
       />

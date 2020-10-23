@@ -8,6 +8,7 @@ module Playbook
 
       partial "pb_timestamp/timestamp"
 
+      prop :text
       prop :timestamp, required: true
 
       prop :dark, type: Playbook::Props::Boolean,
@@ -15,7 +16,6 @@ module Playbook
       prop :align,  type: Playbook::Props::Enum,
                     values: %w[left center right],
                     default: "left"
-      prop :name
       prop :show_date, type: Playbook::Props::Boolean, default: true
       prop :show_user, type: Playbook::Props::Boolean, default: false
       prop :variant, type: Playbook::Props::Enum,
@@ -43,7 +43,7 @@ module Playbook
       end
 
       def format_updated_string
-        user_string = show_user ? " by #{name}" : ""
+        user_string = show_user ? " by #{text}" : ""
 
         case variant
         when "updated"
