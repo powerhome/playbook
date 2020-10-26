@@ -1,0 +1,18 @@
+@import "../../tokens/colors";
+@import "../../tokens/spacing";
+
+.getting_started {
+  display: flex;
+  justify-content: center;
+  .markdown {
+    code {
+      // override
+      background: none;
+      @at-root pre {
+        // background: #122b3b;
+        background: $bg_dark;
+        padding: $space_sm;
+      }
+    }
+  }
+}

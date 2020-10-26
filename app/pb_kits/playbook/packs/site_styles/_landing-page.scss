@@ -1,24 +1,22 @@
+@import "../../tokens/colors";
+@import "../../tokens/spacing";
+
 .landing-page {
   .text-blob {
     height: 400px;
   }
   .hero {
-    // background-color: $bg_dark;
-    background-color: #0a0527;
+    background-color: $bg_dark;
     .pb_title_kit_2, .pb_body_kit {
-      color: white;
+      color: $white;
     }
-    // padding: $space_xl;
-    padding: 40px;
+    padding: $space_xl;
   }
   .content{
-    // background-color: $white;
-    background-color: #FFFFFF;
-    // padding: $space_xl;
-    padding: 40px;
+    background-color: $white;
+    padding: $space_xl;
   }
   .code-snippets {
-    // background-color: $bg_dark;
-    background-color: #0a0527;
+    background-color: $bg_dark;
   }
 }

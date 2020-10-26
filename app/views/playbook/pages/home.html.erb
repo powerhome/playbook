@@ -21,7 +21,7 @@
 
         <%= pb_rails("title", props: { margin_bottom: "sm", text: "We Call Our Components... Kits", tag: "h2", size: 2 }) %>
 
-        <%= pb_rails("flex", props: { horizontal: "center" }) do %>
+        <%= pb_rails("flex", props: { horizontal: "center", spacing: "evenly", wrap: true }) do %>
           <%= pb_rails("flex/flex_item", props: {fixed_size: "200px"}) do %>
             <%= pb_rails("card", props: { classname: "user-card" }) do %>
               <%= pb_rails("user", props: {
