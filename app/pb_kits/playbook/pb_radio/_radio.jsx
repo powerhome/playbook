@@ -19,7 +19,6 @@ type RadioProps = {
   label: String,
   name: String,
   value: String,
-  text: String,
   onChange: (Boolean)=>void,
 }
 
@@ -33,7 +32,6 @@ const Radio = ({
   id,
   label,
   name = 'radio_name',
-  text = 'Radio Text',
   value = 'radio_text',
   onChange = () => {},
   ...props
