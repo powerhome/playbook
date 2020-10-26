@@ -2,11 +2,42 @@
         props: {
           variant: "checkbox",
           items: [
-            { text: "Monday", name: "custum1" },
-            { text: "Tuesday", name: "custum2", checked: true },
-            { text: "Wednesday", name: "custum3" },
-            { text: "Thursday", name: "custum4" },
-            { text: "Friday", name: "custum5" },
+            { text: "Monday",
+              input_options: {
+                value: "1",
+                name: "checkbox-name-1",
+                id: "checkbox-id-1",
+              }
+            },
+            { text: "Tuesday",
+              checked: true,
+              input_options: {
+                value: "2",
+                name: "checkbox-name-2",
+                id: "checkbox-id-2",
+              }
+            },
+            { text: "Wednesday",
+              input_options: {
+                value: "3",
+                name: "checkbox-name-3",
+                id: "checkbox-id-3",
+              }
+            },
+            { text: "Thursday",
+              input_options: {
+                value: "4",
+                name: "checkbox-name-4",
+                id: "checkbox-id-4",
+              }
+            },
+            { text: "Friday",
+              input_options: {
+                value: "5",
+                name: "checkbox-name-5",
+                id: "checkbox-id-5",
+              }
+            }
           ]
         }
     )

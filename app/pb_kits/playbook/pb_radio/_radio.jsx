@@ -57,7 +57,6 @@ const Radio = ({
             id={id}
             name={name}
             onChange={onChange}
-            text={text}
             type="radio"
             value={value}
         />

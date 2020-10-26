@@ -9,15 +9,14 @@ module Playbook
 
       prop :checked, type: Playbook::Props::Boolean,
                      default: false
-      prop :name, type: Playbook::Props::String,
-                  default: "radio_name"
+      prop :name, type: Playbook::Props::String
       prop :text, type: Playbook::Props::String
-      prop :value, type: Playbook::Props::String,
-                   default: "radio_text"
-
+      prop :value, type: Playbook::Props::String
       prop :variant, type: Playbook::Props::Enum,
                      values: %w[radio checkbox],
                      default: "radio"
+      prop :input_options, type: Playbook::Props::Hash,
+                           default: {}
 
       partial "pb_selectable_list/selectable_list_item"
 

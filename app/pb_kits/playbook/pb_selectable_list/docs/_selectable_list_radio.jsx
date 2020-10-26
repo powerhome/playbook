@@ -6,29 +6,35 @@ const SelectableListDefault = () => {
     <div>
       <SelectableList variant="radio">
         <SelectableList.Item
-            defaultChecked={false}
+            id="radio-id-1"
             label="Monday"
-            name="custom1"
+            name="radio"
+            value="1"
         />
         <SelectableList.Item
             defaultChecked
+            id="radio-id-2"
             label="Tuesday"
-            name="custom1"
+            name="radio"
+            value="2"
         />
         <SelectableList.Item
-            defaultChecked={false}
+            id="radio-id-3"
             label="Wednesday"
-            name="custom1"
+            name="radio"
+            value="3"
         />
         <SelectableList.Item
-            defaultChecked={false}
+            id="radio-id-4"
             label="Thursday"
-            name="custom1"
+            name="radio"
+            value="4"
         />
         <SelectableList.Item
-            defaultChecked={false}
+            id="radio-id-5"
             label="Friday"
-            name="custom1"
+            name="radio"
+            value="5"
         />
       </SelectableList>
     </div>

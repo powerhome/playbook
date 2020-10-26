@@ -30,7 +30,7 @@ const SelectableListItem = ({
   defaultChecked,
   id,
   label,
-  text,
+  text = '',
   name = '',
   value = '',
   variant,
@@ -51,7 +51,6 @@ const SelectableListItem = ({
           {...ariaProps}
           {...dataProps}
           className={classes}
-          htmlFor={id}
       >
         <Choose>
           <When condition={variant == 'checkbox'}>
@@ -83,7 +82,6 @@ const SelectableListItem = ({
           </When>
           <Otherwise>{children}</Otherwise>
         </Choose>
-
       </div>
     </ListItem>
   )

@@ -2,11 +2,42 @@
         props: {
           variant: "radio",
           items: [
-            { text: "Monday", name: "custum1" },
-            { text: "Tuesday", name: "custum2", checked: true },
-            { text: "Wednesday", name: "custum3" },
-            { text: "Thursday", name: "custum4" },
-            { text: "Friday", name: "custum5" },
+            { text: "Monday",
+              input_options: {
+                value: "1",
+                name: "radio-name",
+                id: "radio-id-1",
+              }
+            },
+            { text: "Tuesday",
+              checked: true,
+              input_options: {
+                value: "2",
+                name: "radio-name",
+                id: "radio-id-2",
+              }
+            },
+            { text: "Wednesday",
+              input_options: {
+                value: "3",
+                name: "radio-name",
+                id: "radio-id-3",
+              }
+            },
+            { text: "Thursday",
+              input_options: {
+                value: "4",
+                name: "radio-name",
+                id: "radio-id-4",
+              }
+            },
+            { text: "Friday",
+              input_options: {
+                value: "5",
+                name: "radio-name",
+                id: "radio-id-5",
+              }
+            }
           ]
         }
     )
