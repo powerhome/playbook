@@ -10,6 +10,7 @@ module Playbook
       partial "pb_checkbox/checkbox"
 
       prop :error, type: Playbook::Props::Boolean, default: false
+      prop :error_message, type: Playbook::Props::String
       prop :checked, type: Playbook::Props::Boolean, default: false
       prop :text
       prop :value

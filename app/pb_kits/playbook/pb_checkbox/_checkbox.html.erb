@@ -1,10 +1,10 @@
 <%= content_tag(:label, aria: object.aria,
                         id: object.id,
                         data: object.data,
-                        class: object.classname) do %>  
+                        class: object.classname) do %>
   <% if object.children %>
     <%= capture(&object.children) %>
-   <% else %>             
+   <% else %>
     <%= object.input %>
   <% end %>
     <span class="pb_checkbox_checkmark">
@@ -13,4 +13,9 @@
     <span class="pb_checkbox_label">
       <%= pb_rails("body", props: { status: object.checkbox_label_status, text: object.text, dark: object.dark, margin_right: object.form_spacing ? "xs" : "" }) %>
     </span>
+<% end %>
+<% if object.error %>
+  <%=content_tag(:div) do %>
+    <%= pb_rails("body", props: {status: "negative", text: object.error_message})%>
+  <%end%>
 <% end %>
