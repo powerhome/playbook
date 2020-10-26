@@ -6,7 +6,8 @@ import {
 const TextInputError = () => (
   <div>
     <TextInput
-        error="Please enter a valid email address"
+        error
+        errorMessage="Please enter a valid email address"
         label="Email Address"
         placeholder="Enter email address"
         type="email"

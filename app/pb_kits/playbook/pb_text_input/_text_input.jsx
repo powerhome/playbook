@@ -15,7 +15,8 @@ type TextInputProps = {
   data?: object,
   dark?: boolean,
   disabled?: boolean,
-  error?: string,
+  error?: boolean,
+  errorMessage?: string,
   id?: string,
   name: string,
   label: string,
@@ -35,6 +36,7 @@ const TextInput = (props: TextInputProps) => {
     dark = false,
     disabled,
     error,
+    errorMessage,
     id,
     name,
     label,
@@ -85,7 +87,7 @@ const TextInput = (props: TextInputProps) => {
           <If condition={error}>
             <Body
                 status="negative"
-                text={error}
+                text={errorMessage}
             />
           </If>
         </If>

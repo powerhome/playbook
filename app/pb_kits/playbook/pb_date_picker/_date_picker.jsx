@@ -4,7 +4,7 @@ import React, { useEffect } from 'react'
 import classnames from 'classnames'
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
 import { globalProps } from '../utilities/globalProps.js'
-import { Body, Icon, TextInput } from '../'
+import { Icon, TextInput } from '../'
 import datePickerHelper from './date_picker_helper.js'
 
 type DatePickerProps = {
@@ -126,6 +126,7 @@ const DatePicker = (props: DatePickerProps) => {
               data={inputData}
               disabled={disableInput}
               error={error}
+              errorMessage={errorMessage}
               id={pickerId}
               label={hideLabel ? null : label}
               name={name}
@@ -144,13 +145,6 @@ const DatePicker = (props: DatePickerProps) => {
           </If>
         </div>
       </div>
-      <If condition={error}>
-        <Body
-            status="negative"
-        >
-          {errorMessage}
-        </Body>
-      </If>
     </>
   )
 }
