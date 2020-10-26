@@ -21,7 +21,9 @@ module Playbook
                            default: []
       prop :disable_weekdays, type: Playbook::Props::Array,
                               default: []
-      prop :error, type: Playbook::Props::String
+      prop :error, type: Playbook::Props::Boolean,
+                   default: false
+      prop :error_message, type: Playbook::Props::String
       prop :format, type: Playbook::Props::String,
                     default: "m/d/Y"
       prop :hide_icon, type: Playbook::Props::Boolean,
