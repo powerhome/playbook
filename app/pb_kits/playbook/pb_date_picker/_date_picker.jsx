@@ -4,7 +4,7 @@ import React, { useEffect } from 'react'
 import classnames from 'classnames'
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
 import { globalProps } from '../utilities/globalProps.js'
-import { Icon, TextInput } from '../'
+import { Body, Icon, TextInput } from '../'
 import datePickerHelper from './date_picker_helper.js'
 
 type DatePickerProps = {
@@ -18,7 +18,8 @@ type DatePickerProps = {
   disableInput?: Boolean,
   disableRange?: Array,
   disableWeekdays?: Array,
-  error?: String,
+  error?: Boolean,
+  errorMessage?: String,
   format?: String,
   hideIcon?: Boolean,
   hideLabel?: Boolean,
@@ -48,7 +49,8 @@ const DatePicker = (props: DatePickerProps) => {
     disableInput,
     disableRange = null,
     disableWeekdays = null,
-    error,
+    error = false,
+    errorMessage,
     format = 'm/d/Y',
     hideIcon = false,
     hideLabel = false,
@@ -108,39 +110,48 @@ const DatePicker = (props: DatePickerProps) => {
   }
 
   return (
-    <div
-        {...ariaProps}
-        {...dataProps}
-        className={classes}
-        id={id}
-    >
-      {className}
-      <div className="input_wrapper">
-        <TextInput
-            aria={inputAria}
-            autoComplete="off"
-            dark={dark}
-            data={inputData}
-            disabled={disableInput}
-            error={error}
-            id={pickerId}
-            label={hideLabel ? null : label}
-            name={name}
-            placeholder={placeholder}
-        />
-        <If condition={!hideIcon}>
-          <div
-              className={iconWrapperClass()}
-              id={`cal-icon-${pickerId}`}
-          >
-            <Icon
-                className="cal_icon"
-                icon="calendar-alt"
-            />
-          </div>
-        </If>
+    <>
+      <div
+          {...ariaProps}
+          {...dataProps}
+          className={classes}
+          id={id}
+      >
+        {className}
+        <div className="input_wrapper">
+          <TextInput
+              aria={inputAria}
+              autoComplete="off"
+              dark={dark}
+              data={inputData}
+              disabled={disableInput}
+              error={error}
+              id={pickerId}
+              label={hideLabel ? null : label}
+              name={name}
+              placeholder={placeholder}
+          />
+          <If condition={!hideIcon}>
+            <div
+                className={iconWrapperClass()}
+                id={`cal-icon-${pickerId}`}
+            >
+              <Icon
+                  className="cal_icon"
+                  icon="calendar-alt"
+              />
+            </div>
+          </If>
+        </div>
       </div>
-    </div>
+      <If condition={error}>
+        <Body
+            status="negative"
+        >
+          {errorMessage}
+        </Body>
+      </If>
+    </>
   )
 }
 
