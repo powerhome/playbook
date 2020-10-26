@@ -11,7 +11,9 @@ module Playbook
                           default: true
       prop :disabled, type: Playbook::Props::Boolean,
                       default: false
-      prop :error
+      prop :error, type: Playbook::Props::Boolean,
+                   default: false
+      prop :error_message, type: Playbook::Props::String
       prop :label
       prop :name
       prop :placeholder
