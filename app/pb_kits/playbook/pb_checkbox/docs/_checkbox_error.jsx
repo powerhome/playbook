@@ -7,6 +7,7 @@ const CheckboxError = (props) => {
       <Checkbox
           {...props}
           error
+          errorMessage="Error, must checkbox"
           name="default name"
           text="Checkbox label"
           value="default value"

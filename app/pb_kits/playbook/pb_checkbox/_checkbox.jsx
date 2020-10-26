@@ -14,6 +14,7 @@ type CheckboxProps = {
   dark?: boolean,
   data?: object,
   error?: boolean,
+  errorMessage?: string,
   id?: string,
   name: string,
   text: string,
@@ -30,6 +31,7 @@ const Checkbox = (props: CheckboxProps) => {
     dark = false,
     data = {},
     error = false,
+    errorMessage,
     id,
     name = '',
     text = '',
@@ -41,45 +43,53 @@ const Checkbox = (props: CheckboxProps) => {
   const dataProps = buildDataProps(data)
   const ariaProps = buildAriaProps(aria)
   const classes = classnames(
-    buildCss('pb_checkbox_kit', { checked, error }),
+    buildCss('pb_checkbox_kit', { checked, error, errorMessage }),
     globalProps(props),
     className
   )
 
   return (
-    <label
-        {...ariaProps}
-        {...dataProps}
-        className={classes}
-        id={id}
-    >
-      <If condition={children}>
-        {children}
-        <Else />
-        <input
-            defaultChecked={checked}
-            name={name}
-            onChange={onChange}
-            type="checkbox"
-            value={value}
-        />
-      </If>
-
-      <span className="pb_checkbox_checkmark">
-        <Icon
-            className="check_icon"
-            fixedWidth
-            icon="check"
-        />
-      </span>
-      <Body
-          className="pb_checkbox_label"
-          dark={dark}
-          status={error ? 'negative' : null}
+    <>
+      <label
+          {...ariaProps}
+          {...dataProps}
+          className={classes}
+          id={id}
       >
-        {text}
-      </Body>
-    </label>
+        <If condition={children}>
+          {children}
+          <Else />
+          <input
+              defaultChecked={checked}
+              name={name}
+              onChange={onChange}
+              type="checkbox"
+              value={value}
+          />
+        </If>
+        <span className="pb_checkbox_checkmark">
+          <Icon
+              className="check_icon"
+              fixedWidth
+              icon="check"
+          />
+        </span>
+        <Body
+            className="pb_checkbox_label"
+            dark={dark}
+            status={error ? 'negative' : null}
+        >
+          {text}
+        </Body>
+      </label>
+      <If condition={error}>
+        <Body
+            status="negative"
+        >
+          {errorMessage}
+        </Body>
+      </If>
+    </>
   )
 }
 
