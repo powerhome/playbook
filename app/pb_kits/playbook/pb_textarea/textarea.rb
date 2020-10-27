@@ -7,7 +7,9 @@ module Playbook
 
       partial "pb_textarea/textarea"
 
-      prop :error
+      prop :error, type: Playbook::Props::Boolean,
+                   default: false
+      prop :error_message, type: Playbook::Props::String
       prop :object
       prop :label
       prop :method

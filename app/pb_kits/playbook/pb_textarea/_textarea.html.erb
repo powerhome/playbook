@@ -20,7 +20,7 @@
         :rows => object.rows,
         :value => object.value )%>
     <% if object.error %>
-      <%= pb_rails("body", props: {dark: object.dark, status: "negative", text: object.error}) %>
+      <%= pb_rails("body", props: {dark: object.dark, status: "negative", text: object.error_message}) %>
     <% end %>
   <% end %>
 <% end %>

@@ -11,7 +11,8 @@ type TextareaProps = {
   children?: array<React.ReactChild>,
   data?: string,
   disabled?: boolean,
-  error?: string,
+  error?: boolean,
+  errorMessage?: string,
   id?: string,
   object?: string,
   method?: string,
@@ -30,7 +31,8 @@ const Textarea = ({
   children,
   disabled,
   resize = 'none',
-  error,
+  error = false,
+  errorMessage,
   label,
   name,
   onChange = () => {},
@@ -66,7 +68,7 @@ const Textarea = ({
         <If condition={error}>
           <Body
               status="negative"
-              text={error}
+              text={errorMessage}
           />
         </If>
       </If>

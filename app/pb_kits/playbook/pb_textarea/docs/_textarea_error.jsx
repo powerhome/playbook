@@ -5,7 +5,8 @@ const TextareaError = () => {
   return (
     <div>
       <Textarea
-          error="This field has an error!"
+          error
+          errorMessage="This field has an error!"
           label="Label"
           name="comment"
           placeholder="Placeholder text"
