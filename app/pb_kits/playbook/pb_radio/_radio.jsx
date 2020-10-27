@@ -9,18 +9,18 @@ import { globalProps } from '../utilities/globalProps.js'
 
 type RadioProps = {
   aria?: object,
-  checked?: Boolean,
+  checked?: boolean,
   children?: Node,
-  className?: String,
+  className?: string,
   dark?: boolean,
   data?: object,
-  error?: Boolean,
-  errorMessage?: String,
-  id?: String,
-  label: String,
-  name: String,
-  value: String,
-  text: String,
+  error?: boolean,
+  errorMessage?: string,
+  id?: string,
+  label: string,
+  name: string,
+  value: string,
+  text: string,
   onChange: (Boolean)=>void,
 }
 

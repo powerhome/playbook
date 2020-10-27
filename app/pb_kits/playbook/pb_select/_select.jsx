@@ -32,7 +32,7 @@ type SelectProps = {
   data?: object,
   disabled?: boolean,
   error?: boolean,
-  errorMessage?: String,
+  errorMessage?: string,
   onChange: InputCallback<HTMLSelectElement>,
   options: SelectOption[],
   id?: string,
