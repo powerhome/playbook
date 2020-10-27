@@ -9,6 +9,7 @@ RSpec.describe Playbook::PbTime::Time do
   it { is_expected.to define_prop(:show_timezone).with_default(false) }
   it { is_expected.to define_prop(:dark).with_default(false) }
   it { is_expected.to define_prop(:time) }
+  it { is_expected.to define_prop(:show_icon).with_default(false) }
   it { is_expected.to define_prop(:timezone).with_default("America/New_York") }
   it do
     is_expected.to define_enum_prop(:align)

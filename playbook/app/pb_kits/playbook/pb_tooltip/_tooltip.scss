@@ -1,6 +1,8 @@
 @import "../tokens/positioning";
 @import "../tokens/colors";
 
+$tooltip_shadow: rgba(60, 106, 172, 0.18);
+
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -33,19 +35,8 @@
     &.flipped {
       margin-top: 15px;
       .arrow {
-        top: -35%;
         border-color: transparent transparent $white transparent;
-      }
-    }
-
-    &.react {
-      .arrow {
-        top: 78%;
-      }
-      &.flipped {
-        .arrow {
-          top: -8%;
-        }
+        transform: rotate(180deg);
       }
     }
 
@@ -66,7 +57,7 @@
       z-index: $z_9;
       margin-bottom: $space_sm;
       background-color: $white;
-      padding: $space_xs $space_sm $space_xs $space_sm;
+      padding: $space_xs $space_sm;
       box-shadow: $shadow_deeper;
       border-radius: $border_rad_light;
 
@@ -82,10 +73,6 @@
     .tooltip_tooltip{
       color: $white;
       background-color: rgba($black, $opacity_9);
-
-
-      &.show {
-      }
       .arrow {
         border-color: $black transparent transparent transparent;
         opacity: $opacity_9;
@@ -100,6 +87,46 @@
   }
 }
 
-.tooltip_tooltip.top {
-  padding: ($space_xs - 3px) 0;
+// Right
+[class^="pb_tooltip_kit"] .tooltip_tooltip {
+
+  &[x-placement="right"] {
+    box-shadow: -8px 0 28px 0 $tooltip_shadow;
+    margin: 0 0 0 $space_sm;
+    .arrow {
+      left: -#{$space_xs};
+      margin-bottom: 0;
+      transform: rotate(90deg);
+    }
+    &.flipped .arrow {
+        transform: rotate(270deg);
+    }
+  }
+
+  &[x-placement="bottom"] {
+    box-shadow: 0 -12px 28px 0 $tooltip_shadow;
+    margin: $space_sm 0 0 0;
+    .arrow {
+      top: -18px;
+      margin-bottom: 0;
+      transform: rotate(180deg);
+    }
+    &.flipped .arrow {
+      transform: rotate(0deg);
+    }
+  }
+
+  &[x-placement="left"] {
+    box-shadow: 8px 0 28px 0 $tooltip_shadow;
+    margin: 0 $space_sm 0 0;
+    .arrow {
+      margin-bottom: 0;
+      right: -18px;
+      left: auto;
+      transform: rotate(270deg);
+    }
+    &.flipped .arrow {
+      transform: rotate(90deg);
+    }
+  }
 }
