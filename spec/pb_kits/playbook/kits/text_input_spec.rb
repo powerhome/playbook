@@ -9,7 +9,7 @@ RSpec.describe Playbook::PbTextInput::TextInput do
 
   it { is_expected.to define_prop(:disabled) }
   it { is_expected.to define_prop(:dark).with_default(false) }
-  it { is_expected.to define_prop(:error) }
+  it { is_expected.to define_prop(:error).with_default(false) }
   it { is_expected.to define_prop(:label) }
   it { is_expected.to define_prop(:name) }
   it { is_expected.to define_prop(:placeholder) }
