@@ -8,6 +8,7 @@ RSpec.describe Playbook::PbRadio::Radio do
   it { is_expected.to define_partial }
   it { is_expected.to define_boolean_prop(:checked).with_default(false) }
   it { is_expected.to define_boolean_prop(:error).with_default(false) }
+  it { is_expected.to define_string_prop(:error_message) }
   it { is_expected.to define_prop(:name) }
   it { is_expected.to define_prop(:value) }
   it { is_expected.to define_hash_prop(:input_options).with_default({}) }
