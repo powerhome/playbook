@@ -9,9 +9,13 @@
   </head>
   <body>
     <%= render 'layouts/playbook/nav'%>
+        <% if !current_page?('/') %>
         <div class="pb--page--content--main <%= cookies[:dark_mode] == "true" ? 'dark' : '' %>">
           <%= yield %>
         </div>
+        <% else %>
+          <%= yield %>
+        <% end %>
   </body>
   <%= javascript_include_tag "https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js" %>
   <% if @type == 'react' %>

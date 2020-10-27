@@ -1,22 +1,61 @@
 @import "../../tokens/colors";
 @import "../../tokens/spacing";
+@import "../../tokens/screen_sizes";
+@import "../../tokens/border_radius";
+@import "../../tokens/shadows";
 
 .landing-page {
-  .text-blob {
-    height: 400px;
-  }
   .hero {
     background-color: $bg_dark;
     .pb_title_kit_2, .pb_body_kit {
       color: $white;
     }
-    padding: $space_xl;
   }
   .content{
     background-color: $white;
-    padding: $space_xl;
   }
   .code-snippets {
     background-color: $bg_dark;
+    border-radius: $border_rad_heaviest;
+    box-shadow: $shadow_deepest;
+  }
+  .pb-hero-image {
+    padding-right: $space_lg;
+  }
+  .text-block-width-1 {
+    max-width: 500px;
+  }
+  .react-rails-text {
+    max-width: 450px;
+    margin-right: $space_xl;
+  }
+  .kit-example {
+    max-width: 800px;
+    position: relative;
+    padding-right: $space_xl;
+  }
+  .user-card {
+    width: 275px;
+    position: absolute;
+    left: 505px;
+    box-shadow: $shadow_deeper;
+  }
+  @include break_at(breakpoint("lg")) {
+    .hero-inner-wrapper {
+      justify-content: center !important;
+      img {
+        max-width: 100%;
+        padding-right: 0;
+      }
+    }
+    .react-rails-text {
+      max-width: 500px;
+      margin-right: 0;
+    }
+  }
+  @include break_at(866px) {
+    .kit-example {
+      display: none;
+    }
   }
 }

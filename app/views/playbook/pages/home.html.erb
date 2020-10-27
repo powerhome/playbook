@@ -1,49 +1,52 @@
 <div class="landing-page">
   <%= pb_rails("background", props: { image_url: "/assets/Artboard.svg", padding: "xl" }) do %>
-    <%= pb_rails("flex", props: { classname: "flex-container", spacing: "between", wrap: true } ) do %>
-      <%= pb_rails("flex/flex_item", props: { fixed_size: "500px", margin_top: "xl" }) do %>
+    <%= pb_rails("flex", props: { classname: "flex-container hero-inner-wrapper", horizontal: "center", wrap: true } ) do %>
+      <div class="flex-item">
+        <img src="/assets/landing-image.svg" class="pb-hero-image">
+      </div>
+      <%= pb_rails("flex/flex_item", props: { classname: "text-block-width-1", margin_top: "xl" }) do %>
         <%= pb_rails("title", props: { classname: "dark", margin_bottom: "md", text: "Playbook Design System", tag: "h2", size: 2 }) %>
         <%= pb_rails("body", props: {
           classname: "dark",
           text: "Playbook is the first design system built for both Rails & React interfaces. Playbook takes a modern design approach, and applies it in a way that makes it easy to support bleeding edge, or legacy systems. Playbook is built & maintained by the User Experience & Development teams at Power Home Remodeling, the largest home remodeler in the US."
         }) %>
       <% end %>
-      <div class="flex-item">
-        <%# <%= pb_rails("image", props: { url: image_path("landing-image.svg") }) %>
-        <img src="/assets/landing-image.svg">
-      </div>
     <% end %>
   <% end %>
 
   <%= pb_rails("background", props: { background_color: "white", padding: "xl" }) do %>
 
+    <%= pb_rails("flex", props: { horizontal: "center", spacing: "evenly", wrap: true }) do %>
+      <%= pb_rails("flex/flex_item", props: { classname: "react-rails-text"}) do %>
+        <%= pb_rails("title", props: { margin_bottom: "sm", text: 'React & Rails Components packaged in a single "Kit"', tag: "h2", size: 2 }) %>
+          <%= pb_rails("body", props: {
+            text: "Consistency in design is one of the most important tools we can use to build great user experiences. 
+            The “kits” in Playbook are identical no matter if they are built for Rails UI or React front ends. Whether 
+            your system is legacy or bleeding edge, consistency across interfaces is a very important advantage when 
+            working with large codebases."
+          }) %>
+          <br/>
+          <%= pb_rails("body", props: {
+            text: "The kits are also built to work with any industry. If it's a product then we have battle-tested kits 
+            ready to suit your needs. Get started by adding Playbook to your application in 5 min, or start 
+            browsing our library to spark inspiration."
+          }) %>
+        <%= pb_rails("button", props: { text: "Browse All Kits", link: "/kits", margin_top: "sm" }) %>
+      <% end %>
 
-        <%= pb_rails("title", props: { margin_bottom: "sm", text: "We Call Our Components... Kits", tag: "h2", size: 2 }) %>
-
-        <%= pb_rails("flex", props: { horizontal: "center", spacing: "evenly", wrap: true }) do %>
-          <%= pb_rails("flex/flex_item", props: {fixed_size: "200px"}) do %>
-            <%= pb_rails("card", props: { classname: "user-card" }) do %>
-              <%= pb_rails("user", props: {
-                name: "Anna Black",
-                title: "Remodeling Consultant",
-                orientation: "vertical",
-                align: "center",
-                size: "lg",
-                avatar_url: "https://randomuser.me/api/portraits/women/44.jpg"
-              }) %>
-            <% end %>
-          <% end %>
-
-          <%= pb_rails("flex/flex_item", props: {fixed_size: "200px"}) do %>
-            <%= pb_rails("body", props: {
-              text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris vitae gravida nibh. Integer nec lorem vitae purus vehicula gravida sed at nibh. Cras suscipit nibh sed sem rhoncus accumsan."
-            }) %>
-            <%= pb_rails("button", props: { text: "Browse All Kits", link: "/kits", margin_top: "sm" }) %>
-          <% end %>
+      <%= pb_rails("flex/flex_item", props: { classname: "kit-example" }) do %>
+        <%= pb_rails("card", props: { classname: "user-card" }) do %>
+          <%= pb_rails("user", props: {
+            name: "Anna Black",
+            title: "Sales Representative",
+            orientation: "vertical",
+            align: "center",
+            size: "lg",
+            avatar_url: "https://randomuser.me/api/portraits/women/44.jpg"
+          }) %>
         <% end %>
-        
-        <%= react_component('SnippetToggle', { test: 'test' }) %>
 
+        <%= react_component('SnippetToggle', { test: 'test' }) %>
         <% react_contents = File.read("#{Playbook::Engine.root}/app/views/playbook/pages/code_snippets/user_jsx.txt") %>
         <% rails_contents = File.read("#{Playbook::Engine.root}/app/views/playbook/pages/code_snippets/user_erb.txt") %>
         
@@ -51,11 +54,13 @@
           <pre class="highlight"><%= raw rouge(rails_contents, "erb") %></pre>
           <pre class="highlight" style="display:none"><%= raw rouge(react_contents, "jsx") %></pre>
         </div>
+      <% end %>
+    <% end %>
   <% end %>
 
   <%= pb_rails("background", props: { background_color: "dark", padding: "xl" }) do %>
     <%= pb_rails("flex", props: { classname: "text-blob", spacing: "between", wrap: true } ) do %>
-      <%= pb_rails("flex/flex_item", props: { fixed_size: "500px", margin_top: "xl" }) do %>
+      <%= pb_rails("flex/flex_item", props: { margin_top: "xl" }) do %>
         <%= pb_rails("title", props: { classname: "dark", margin_bottom: "md", text: "Getting Started", tag: "h2", size: 2 }) %>
         <%= pb_rails("body", props: {
           classname: "dark",
@@ -63,7 +68,7 @@
         }) %>
         <%= pb_rails("button", props: { text: "Get Started", link: "/getting_started", margin_top: "sm" }) %>
       <% end %>
-      <%= pb_rails("flex/flex_item", props: { fixed_size: "500px", margin_top: "xl" }) do %>
+      <%= pb_rails("flex/flex_item", props: { margin_top: "xl" }) do %>
         <%= pb_rails("title", props: { classname: "dark", margin_bottom: "md", text: "What's New?", tag: "h2", size: 2 }) %>
         <%= pb_rails("body", props: {
           classname: "dark",
