@@ -38,7 +38,7 @@ export default class PbCollapsible extends PbEnhancedElement {
     // Once the transition is complete, remove the inline max-height so the content can scale responsively
     window.setTimeout(() => {
       elem.style.height = ''
-    }, 500)
+    }, 300)
   }
   // Hide an element
   hide(elem) {
@@ -54,7 +54,7 @@ export default class PbCollapsible extends PbEnhancedElement {
     // When the transition is complete, hide it
     window.setTimeout(() => {
       elem.classList.remove('is-visible')
-    }, 500)
+    }, 300)
   }
 
   // Toggle element visibility

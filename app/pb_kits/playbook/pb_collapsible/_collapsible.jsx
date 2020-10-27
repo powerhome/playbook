@@ -32,7 +32,7 @@ const Collapsible = ({
   aria = {},
   className,
   children = [],
-  collapsed = false,
+  collapsed = true,
   data = {},
   id,
   padding = 'md',
