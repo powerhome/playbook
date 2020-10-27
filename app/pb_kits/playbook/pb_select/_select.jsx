@@ -31,7 +31,8 @@ type SelectProps = {
   className?: string,
   data?: object,
   disabled?: boolean,
-  error?: string,
+  error?: boolean,
+  errorMessage?: String,
   onChange: InputCallback<HTMLSelectElement>,
   options: SelectOption[],
   id?: string,
@@ -60,7 +61,8 @@ const Select = ({
   className,
   data = {},
   disabled = false,
-  error,
+  error = false,
+  errorMessage,
   label,
   multiple = false,
   name,
@@ -119,7 +121,7 @@ const Select = ({
         <If condition={error}>
           <Body
               status="negative"
-              text={error}
+              text={errorMessage}
           />
         </If>
         <Icon

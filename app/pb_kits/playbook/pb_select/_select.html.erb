@@ -28,8 +28,12 @@
         include_blank: object.include_blank,
       )
       %>
-      <%= pb_rails("body", props: { status: "negative", text: object.error }) %>
     <% end %>
     <%= pb_rails("icon", props: { icon: "angle-down", fixed_width: true, classname: "pb_select_kit_caret"}) %>
   </label>
+<% end %>
+<% if object.error %>
+  <%=content_tag(:div) do %>
+    <%= pb_rails("body", props: {status: "negative", text: object.error_message})%>
+  <%end%>
 <% end %>

@@ -20,7 +20,8 @@ const SelectError = () => {
   return (
     <div>
       <Select
-          error="Please make a valid selection"
+          error
+          errorMessage="Please make a valid selection"
           label="Favorite Food"
           name="food"
           options={options}

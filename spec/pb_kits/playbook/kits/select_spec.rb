@@ -9,6 +9,8 @@ RSpec.describe Playbook::PbSelect::Select do
 
   it { is_expected.to define_string_prop(:blank_selection) }
   it { is_expected.to define_boolean_prop(:disabled).with_default(false) }
+  it { is_expected.to define_boolean_prop(:error).with_default(false) }
+  it { is_expected.to define_string_prop(:error_message) }
   it { is_expected.to define_string_prop(:include_blank) }
   it { is_expected.to define_string_prop(:label) }
   it { is_expected.to define_boolean_prop(:multiple).with_default(false) }

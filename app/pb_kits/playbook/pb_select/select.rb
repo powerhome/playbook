@@ -13,7 +13,8 @@ module Playbook
 
       prop :blank_selection
       prop :disabled, type: Playbook::Props::Boolean, default: false
-      prop :error
+      prop :error, type: Playbook::Props::Boolean, default: false
+      prop :error_message, type: Playbook::Props::String
       prop :include_blank
       prop :label
       prop :multiple, type: Playbook::Props::Boolean, default: false
