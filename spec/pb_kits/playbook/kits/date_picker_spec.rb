@@ -14,8 +14,8 @@ RSpec.describe Playbook::PbDatePicker::DatePicker do
   it { is_expected.to define_boolean_prop(:disable_input).with_default(false) }
   it { is_expected.to define_prop(:disable_range).of_type(Playbook::Props::Array).with_default([]) }
   it { is_expected.to define_prop(:disable_weekdays).of_type(Playbook::Props::Array).with_default([]) }
-  it { is_expected.to define_prop(:error).of_type(Playbook::Props::Boolean) }
-  it { is_expected.to define_prop(:error_message).of_type(Playbook::Props::String) }
+  it { is_expected.to define_boolean_prop(:error).with_default(false) }
+  it { is_expected.to define_string_prop(:error_message) }
   it { is_expected.to define_prop(:format).of_type(Playbook::Props::String).with_default("m/d/Y") }
   it { is_expected.to define_boolean_prop(:hide_icon).with_default(false) }
   it { is_expected.to define_boolean_prop(:hide_label).with_default(false) }
