@@ -15,3 +15,8 @@
     <span class="pb_radio_button"></span>
     <%= pb_rails("body", props: { status: object.body_status, text: object.text, dark: object.dark }) %>
 <% end %>
+<% if object.error %>
+  <%=content_tag(:div) do %>
+    <%= pb_rails("body", props: {status: "negative", text: object.error_message})%>
+  <%end%>
+<% end %>

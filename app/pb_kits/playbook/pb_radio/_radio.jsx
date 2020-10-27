@@ -15,6 +15,7 @@ type RadioProps = {
   dark?: boolean,
   data?: object,
   error?: Boolean,
+  errorMessage?: String,
   id?: String,
   label: String,
   name: String,
@@ -30,6 +31,7 @@ const Radio = ({
   dark = false,
   data = {},
   error = false,
+  errorMessage,
   id,
   label,
   name = 'radio_name',
@@ -40,35 +42,44 @@ const Radio = ({
 }: RadioProps) => {
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
-  const classes = classnames(buildCss('pb_radio_kit'), { error }, { dark }, globalProps(props), className)
+  const classes = classnames(buildCss('pb_radio_kit'), error ? 'error' : null, { dark }, globalProps(props), className)
 
   return (
-    <label
-        {...ariaProps}
-        {...dataProps}
-        className={classes}
-        htmlFor={id}
-    >
-      <If condition={children}>
-        {children}
-        <Else />
-        <input
-            {...props}
-            id={id}
-            name={name}
-            onChange={onChange}
-            text={text}
-            type="radio"
-            value={value}
+    <>
+      <label
+          {...ariaProps}
+          {...dataProps}
+          className={classes}
+          htmlFor={id}
+      >
+        <If condition={children}>
+          {children}
+          <Else />
+          <input
+              {...props}
+              id={id}
+              name={name}
+              onChange={onChange}
+              text={text}
+              type="radio"
+              value={value}
+          />
+        </If>
+        <span className="pb_radio_button" />
+        <Body
+            dark={dark}
+            status={error ? 'negative' : null}
+            text={label}
         />
+      </label>
+      <If condition={error}>
+        <Body
+            status="negative"
+        >
+          {errorMessage}
+        </Body>
       </If>
-      <span className="pb_radio_button" />
-      <Body
-          dark={dark}
-          status={error ? 'negative' : null}
-          text={label}
-      />
-    </label>
+    </>
   )
 }
 

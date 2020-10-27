@@ -6,6 +6,7 @@ const RadioError = () => {
     <div>
       <Radio
           error
+          errorMessage="Please make a selection"
           label="Power"
           name="Group2"
           value="Power"

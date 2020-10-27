@@ -15,6 +15,7 @@ module Playbook
                      default: false
       prop :error, type: Playbook::Props::Boolean,
                    default: false
+      prop :error_message, type: Playbook::Props::String
       prop :input_options, type: Playbook::Props::Hash,
                            default: {}
       prop :name, type: Playbook::Props::String,
