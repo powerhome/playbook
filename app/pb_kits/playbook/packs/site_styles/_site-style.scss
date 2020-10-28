@@ -98,7 +98,7 @@ body {
     }
   }
 
-  &--sideNav, .non-kit {
+  &--sideNav.non-kit {
     background-color: $white;
     display: none;
     height: auto !important;
