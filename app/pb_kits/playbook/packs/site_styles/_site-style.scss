@@ -98,6 +98,15 @@ body {
     }
   }
 
+  &--sideNav, .non-kit {
+    background-color: $white;
+    display: none;
+    height: auto !important;
+    @include break_at(breakpoint("lg")) {
+      display: block;
+    }
+  }
+
   &--sideNav {
     height: calc(100vh - 89px);
     overflow: auto;

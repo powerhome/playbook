@@ -7,44 +7,46 @@
   <%= pb_rails("section_separator") %>
 </div>
 
-<%= pb_rails("nav", props: {
-  title: "Kits",
-  link: all_link(@type),
-  variant: "subtle",
-  padding_y: "sm"
-}) do %>
-  <% pb_rails("nav/item", props: {
-    text: "All",
+<% if action_name.include?('kit') %>
+  <%= pb_rails("nav", props: {
+    title: "Kits",
     link: all_link(@type),
-    active: all_active(controller_name, action_name)
-  }) %>
-  <% MENU["kits"].each do |link| %>
-    <% if link.is_a?(Hash) %>
-      <div class="category_section">
-        <%= pb_rails("nav/item", props: {
-          active: category_active(@category, link),
-          classname: "category",
-          icon_right: "angle-down",
-          link: category_link(@type, link)
-        }) do %>
-          <%= pb_kit_title(nav_hash_category(link)) %>
-        <% end %>
-        <%= pb_rails("nav", props: { variant: "subtle", classname: "sub_category"}) do %>
-          <% nav_hash_array(link).each do |sub_link| %>
-            <%= pb_rails("nav/item", props: {
-              text: pb_kit_title(sub_link),
-              link: sub_category_link(@type, sub_link),
-              active: sub_category_active(@kit, sub_link)
-            }) %>
+    variant: "subtle",
+    padding_y: "sm"
+  }) do %>
+    <% pb_rails("nav/item", props: {
+      text: "All",
+      link: all_link(@type),
+      active: all_active(controller_name, action_name)
+    }) %>
+    <% MENU["kits"].each do |link| %>
+      <% if link.is_a?(Hash) %>
+        <div class="category_section">
+          <%= pb_rails("nav/item", props: {
+            active: category_active(@category, link),
+            classname: "category",
+            icon_right: "angle-down",
+            link: category_link(@type, link)
+          }) do %>
+            <%= pb_kit_title(nav_hash_category(link)) %>
           <% end %>
-        <% end %>
-      </div>
-    <% else %>
-      <%= pb_rails("nav/item", props: {
-        text: pb_kit_title(link),
-        link: kit_link(@type, link),
-        active: kit_active(@kit, link)
-      }) %>
+          <%= pb_rails("nav", props: { variant: "subtle", classname: "sub_category"}) do %>
+            <% nav_hash_array(link).each do |sub_link| %>
+              <%= pb_rails("nav/item", props: {
+                text: pb_kit_title(sub_link),
+                link: sub_category_link(@type, sub_link),
+                active: sub_category_active(@kit, sub_link)
+              }) %>
+            <% end %>
+          <% end %>
+        </div>
+      <% else %>
+        <%= pb_rails("nav/item", props: {
+          text: pb_kit_title(link),
+          link: kit_link(@type, link),
+          active: kit_active(@kit, link)
+        }) %>
+      <% end %>
     <% end %>
   <% end %>
 <% end %>

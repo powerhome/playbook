@@ -9,6 +9,10 @@
   </head>
   <body>
     <%= render 'layouts/playbook/nav'%>
+        <%= render 'layouts/playbook/mobile_hamburger'%>
+        <%= pb_rails("layout/sidebar", props: { classname: "pb--page--sideNav non-kit"}) do%>
+          <%= render 'layouts/playbook/sidebar'%>
+        <% end %>
         <% if current_page?('/') %>
           <%= yield %>
         <% else %>

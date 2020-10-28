@@ -48,30 +48,13 @@
           <div class="pb_circle_icon_button_kit mb_xs">
             <a class="pb_button_kit_secondary_inline_enabled" type="button" href="https://github.com/powerhome/playbook" target="_self">
             <span class="pb_button_content">
-              <img class="mt_sm" style="height:28px;width:28px" src="/assets/github-brands.svg">
+              <%= image_tag("github-brands.svg", class: "mt_sm", style: "height:28px;width:28px") %>
             </span>
             </a>
           </div>
         <% end %>
       </div>
     <% end %>
-
-      <% if !action_name.include?('kit') %>
-        <div class="mobile-popover-nav">
-          <%= pb_rails("flex/flex_item", props: {}) do %>
-            <%= pb_rails("button", props: { variant: "secondary", id: 'mobile-nav' }) do %>
-              Pages
-              <%= pb_rails("icon", props: { icon: "angle-down"}) %>
-            <% end %>
-            <%= pb_rails("popover", props: { trigger_element_id: "mobile-nav", tooltip_id: "mobile-nav-tooltip", position: 'bottom', padding: "none" }) do %>
-              <%= pb_rails("nav", props: { variant: "subtle" }) do %>
-                <%= pb_rails("nav/item", props: { active: current_page?("/getting_started"), text: "Getting Started", link: "/getting_started" }) %>
-                <%= pb_rails("nav/item", props: { active: current_page?("/kits"), text: "Design Components", link: "/kits" }) %>
-              <% end %>
-            <% end %>
-          <% end %>
-        </div>
-      <% end %>
 
   <% end %>
 </div>

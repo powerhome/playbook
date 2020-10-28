@@ -1,8 +1,8 @@
 <div class="landing-page">
-  <%= pb_rails("background", props: { image_url: "/assets/landing-background.svg", padding: "xl" }) do %>
+  <%= pb_rails("background", props: { image_url: image_url("landing-background.svg"), padding: "xl" }) do %>
     <%= pb_rails("flex", props: { classname: "flex-container hero-inner-wrapper", horizontal: "center", wrap: true } ) do %>
       <div class="flex-item">
-        <img src="/assets/landing-image.svg" class="pb-hero-image">
+        <%= image_tag("landing-image.svg", class: "pb-hero-image") %>
       </div>
       <%= pb_rails("flex/flex_item", props: { classname: "hero-text-width", margin_top: "xl" }) do %>
         <%= pb_rails("title", props: { classname: "dark", margin_bottom: "md", text: "Playbook Design System", tag: "h2", size: 2 }) %>
@@ -68,7 +68,7 @@
   <div class="landing-footer">
     <%= pb_rails("flex", props: { horizontal: "center", spacing: "around", wrap: true }) do %>
       <%= pb_rails("flex/flex_item", props: { classname: "footer-logo-block" }) do %>
-        <img src="/assets/white-logo.svg">
+        <%= image_tag("white-logo.svg") %>
         <%= pb_rails("body", props: { text: "Made with love", color: "lighter", margin_top: "xs" }) %>
       <% end %>
       <%= pb_rails("flex/flex_item", props: {}) do %>
@@ -106,33 +106,6 @@
       <%= pb_rails("body", props: { text: "© Power Home Remodeling", color: "lighter" }) %>
     </div>
   </div>
-
-
-  <%if false%><!--
-  
-  <%= pb_rails("background", props: { background_color: "dark", padding: "xl" }) do %>
-    <%= pb_rails("flex", props: { classname: "text-blob", spacing: "between", wrap: true } ) do %>
-      <%= pb_rails("flex/flex_item", props: { margin_top: "xl" }) do %>
-        <%= pb_rails("title", props: { classname: "dark", margin_bottom: "md", text: "Getting Started", tag: "h2", size: 2 }) %>
-        <%= pb_rails("body", props: {
-          classname: "dark",
-          text: "Follow our simple setup guide to add Playbook to your Rails or React project."
-        }) %>
-        <%= pb_rails("button", props: { text: "Get Started", link: "/getting_started", margin_top: "sm" }) %>
-      <% end %>
-      <%= pb_rails("flex/flex_item", props: { margin_top: "xl" }) do %>
-        <%= pb_rails("title", props: { classname: "dark", margin_bottom: "md", text: "What's New?", tag: "h2", size: 2 }) %>
-        <%= pb_rails("body", props: {
-          classname: "dark",
-          text: "We follow a weekly release cycle.  A new RubyGem and NPM package are published each Thursday."
-        }) %>
-        <%= pb_rails("button", props: { text: "View Our Changelog", link: "https://github.com/powerhome/playbook/blob/master/CHANGELOG.md", margin_top: "sm" }) %>
-      <% end %>
-    <% end %>
-  <% end %>
-
-  --><% end%>
-
 </div>
 
 <%= javascript_packs_with_chunks_tag 'landing-page' %>

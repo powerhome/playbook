@@ -9,6 +9,7 @@ module Playbook
     before_action :ensure_kit_type_exists, only: %i[kit_show_rails kit_show_react]
     before_action :set_category, only: %i[kit_category_show_rails kit_category_show_react]
     before_action :set_playbook
+    before_action :delete_dark_mode_cookie, only: %i[home getting_started]
 
     def set_playbook
       @playbook = true
@@ -26,6 +27,10 @@ module Playbook
         value: "false",
       }
       redirect_back(fallback_location: root_path)
+    end
+
+    def delete_dark_mode_cookie
+      cookies.delete :dark_mode
     end
 
     def home; end
