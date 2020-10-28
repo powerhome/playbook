@@ -12,3 +12,6 @@ You can also pass `default_options` which will populate the initial pill selecti
 `pb-typeahead-kit-result-option-select` event to perform custom work when an option is clicked.
 `pb-typeahead-kit-result-option-remove` event to perform custom work when a pill is clicked.
 `pb-typeahead-kit-result-option-clear` event to perform custom work when all pills are removed upon clicking the X.
+
+#### Rails: Publishing JS Events
+`pb-typeahead-kit:clear` event to clear all options.

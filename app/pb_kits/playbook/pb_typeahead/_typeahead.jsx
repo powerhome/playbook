@@ -6,6 +6,7 @@ import AsyncSelect from 'react-select/async'
 import { get } from 'lodash'
 
 import Control from './components/Control'
+import ClearIndicator from './components/ClearIndicator'
 import IndicatorsContainer from './components/IndicatorsContainer'
 import MenuList from './components/MenuList'
 import MultiValue from './components/MultiValue'
@@ -40,6 +41,7 @@ const Typeahead = (props: Props) => {
     defaultOptions: true,
     components: {
       Control,
+      ClearIndicator,
       IndicatorsContainer,
       IndicatorSeparator: null,
       MenuList,
