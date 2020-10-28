@@ -14,9 +14,11 @@ type TimestampProps = {
   data?: string,
   text: string,
   timestamp: string,
+  timezone: string,
   id?: string,
   showDate?: boolean,
   showUser?: boolean,
+  showTimezone?: boolean,
   variant?: "default" | "elapsed" | "updated"
 }
 
@@ -27,8 +29,10 @@ const Timestamp = (props: TimestampProps) => {
     dark = false,
     text,
     timestamp,
+    timezone,
     showDate = true,
     showUser = false,
+    showTimezone = false,
     variant = 'default',
   } = props
   const classes = classnames(
@@ -41,16 +45,23 @@ const Timestamp = (props: TimestampProps) => {
   )
 
   const currentYear = new Date().getFullYear().toString()
-  const dateTimestamp = new DateTime({ value: timestamp })
-  const timeDisplay = dateTimestamp.toHour() + ':' + dateTimestamp.toMinute() + dateTimestamp.toMeridian()
+  const dateTimestamp = new DateTime({ value: timestamp, zone: timezone })
   const dateDisplay = dateTimestamp.toMonth() + ' ' + dateTimestamp.toDay()
+  const timeDisplay = dateTimestamp.toHour() + ':' + dateTimestamp.toMinute() + dateTimestamp.toMeridian()
 
-  var fullDateDisplay = function fullDateDisplay(dateTimestamp, currentYear, dateDisplay, timeDisplay) {
-    var fullDisplay = dateDisplay
+  var fullTimeDisplay = function fullTimeDisplay(dateTimestamp, timeDisplay, timezone, showTimezone) {
+    if (showTimezone == 'true' && timezone.length > 0) {
+      timeDisplay = timeDisplay + ' ' + dateTimestamp.toTimezone()
+    }
+    return timeDisplay
+  }
+
+  var fullDateDisplay = function fullDateDisplay(dateTimestamp, currentYear, dateDisplay, timezone, showTimezone) {
+    var fullDisplay = dateTimestamp.toMonth() + ' ' + dateTimestamp.toDay()
     if (dateTimestamp.toYear() > currentYear) {
       fullDisplay = fullDisplay + ', ' + dateTimestamp.toYear().toString()
     }
-    return fullDisplay + ' ' + timeDisplay
+    return fullDisplay + ' ' + fullTimeDisplay(dateTimestamp, timeDisplay, timezone, showTimezone)
   }
 
   var fullElapsedDisplay = function fullElapsedDisplay(showUser, text, dateTimestamp){
@@ -58,9 +69,9 @@ const Timestamp = (props: TimestampProps) => {
     return 'Last updated' + userDisplay + ' ' + dateTimestamp.value.fromNow()
   }
 
-  var fullUpdatedDisplay = function fullUpdatedDisplay(showUser, text, timeDisplay){
+  var fullUpdatedDisplay = function fullUpdatedDisplay(showUser, text, timeDisplay, timezone, showTimezone){
     var userDisplay = (showUser == 'true' && text.length > 0) ? ' by ' + text : ''
-    return 'Last updated' + userDisplay + ' at ' + timeDisplay
+    return 'Last updated' + userDisplay + ' at ' + fullTimeDisplay(dateTimestamp, timeDisplay, timezone, showTimezone)
   }
 
   return (
@@ -69,7 +80,7 @@ const Timestamp = (props: TimestampProps) => {
         <If condition={variant == 'updated'}>
           <Caption
               size="xs"
-              text={fullUpdatedDisplay(showUser, text, timeDisplay)}
+              text={fullUpdatedDisplay(showUser, text, timeDisplay, timezone, showTimezone)}
           />
         </If>
         <If condition={variant == 'elapsed'}>
@@ -82,7 +93,7 @@ const Timestamp = (props: TimestampProps) => {
           <If condition={showDate == 'true'}>
             <Caption
                 size="xs"
-                text={fullDateDisplay(dateTimestamp, currentYear, dateDisplay, timeDisplay)}
+                text={fullDateDisplay(dateTimestamp, currentYear, dateDisplay, timezone, showTimezone)}
             />
           </If>
           <If condition={showDate == 'false'}>

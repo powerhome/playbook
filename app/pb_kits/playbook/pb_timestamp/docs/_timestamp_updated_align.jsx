@@ -22,6 +22,27 @@ const TimestampUpdatedAlign = () => {
       />
 
       <br />
+
+      <Timestamp
+          showTimezone="true"
+          showUser="true"
+          text="Maricris Nonato"
+          timestamp={new Date().getTime()}
+          timezone="America/New_York"
+          variant="updated"
+      />
+
+      <br />
+
+      <Timestamp
+          showTimezone="true"
+          showUser="false"
+          timestamp={new Date().getTime()}
+          timezone="America/New_York"
+          variant="updated"
+      />
+
+      <br />
       <br />
 
       <Timestamp
@@ -42,6 +63,29 @@ const TimestampUpdatedAlign = () => {
       />
 
       <br />
+
+      <Timestamp
+          align="center"
+          showTimezone="true"
+          showUser="true"
+          text="Maricris Nonato"
+          timestamp={new Date().getTime()}
+          timezone="America/New_York"
+          variant="updated"
+      />
+
+      <br />
+
+      <Timestamp
+          align="center"
+          showTimezone="true"
+          showUser="false"
+          timestamp={new Date().getTime()}
+          timezone="America/New_York"
+          variant="updated"
+      />
+
+      <br />
       <br />
 
       <Timestamp
@@ -58,6 +102,29 @@ const TimestampUpdatedAlign = () => {
           align="right"
           showUser="false"
           timestamp={new Date().getTime()}
+          variant="updated"
+      />
+
+      <br />
+
+      <Timestamp
+          align="right"
+          showTimezone="true"
+          showUser="true"
+          text="Maricris Nonato"
+          timestamp={new Date().getTime()}
+          timezone="America/New_York"
+          variant="updated"
+      />
+
+      <br />
+
+      <Timestamp
+          align="right"
+          showTimezone="true"
+          showUser="false"
+          timestamp={new Date().getTime()}
+          timezone="America/New_York"
           variant="updated"
       />
     </div>

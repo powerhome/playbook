@@ -18,6 +18,28 @@ const TimestampUpdated = () => {
           timestamp={new Date().getTime()}
           variant="updated"
       />
+
+      <br />
+      <br />
+
+      <Timestamp
+          showTimezone="true"
+          showUser="true"
+          text="Maricris Nonato"
+          timestamp={new Date().getTime()}
+          timezone="America/New_York"
+          variant="updated"
+      />
+
+      <br />
+
+      <Timestamp
+          showTimezone="true"
+          showUser="false"
+          timestamp={new Date().getTime()}
+          timezone="America/New_York"
+          variant="updated"
+      />
     </div>
   )
 }
