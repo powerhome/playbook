@@ -1,5 +1,5 @@
 <div class="landing-page">
-  <%= pb_rails("background", props: { image_url: "/assets/Artboard.svg", padding: "xl" }) do %>
+  <%= pb_rails("background", props: { image_url: "/assets/landing-background.svg", padding: "xl" }) do %>
     <%= pb_rails("flex", props: { classname: "flex-container hero-inner-wrapper", horizontal: "center", wrap: true } ) do %>
       <div class="flex-item">
         <img src="/assets/landing-image.svg" class="pb-hero-image">
@@ -31,7 +31,14 @@
             ready to suit your needs. Get started by adding Playbook to your application in 5 min, or start 
             browsing our library to spark inspiration."
           }) %>
-        <%= pb_rails("button", props: { text: "Browse All Kits", link: "/kits", margin_top: "sm" }) %>
+          <%= pb_rails("flex", props: { classname: "button-flexbox", margin_top: "md", wrap: true }) do %>
+            <%= pb_rails("flex/flex_item", props: {}) do %>
+              <%= pb_rails("button", props: { text: "Getting Started", link: "/getting_started" }) %>
+            <% end %>
+            <%= pb_rails("flex/flex_item", props: {}) do %>
+              <%= pb_rails("button", props: { text: "Browse All Kits", link: "/kits", margin_left: "md", variant: "secondary" }) %>
+            <% end %>
+          <% end %>
       <% end %>
 
       <%= pb_rails("flex/flex_item", props: { classname: "kit-example" }) do %>
@@ -58,6 +65,51 @@
     <% end %>
   <% end %>
 
+  <div class="landing-footer">
+    <%= pb_rails("flex", props: { horizontal: "center", spacing: "around", wrap: true }) do %>
+      <%= pb_rails("flex/flex_item", props: { classname: "footer-logo-block" }) do %>
+        <img src="/assets/white-logo.svg">
+        <%= pb_rails("body", props: { text: "Made with love", color: "lighter", margin_top: "xs" }) %>
+      <% end %>
+      <%= pb_rails("flex/flex_item", props: {}) do %>
+        <%= pb_rails("caption", props: { text: "Playbook", margin_bottom: "xs" }) %>
+        <a href="/">
+          <%= pb_rails("body", props: { classname: "dark", text: "Introduction" }) %>
+        </a>
+        <a href="/getting_started">
+          <%= pb_rails("body", props: { classname: "dark", text: "Getting Started" }) %>
+        </a>
+        <a href="/kits">
+          <%= pb_rails("body", props: { classname: "dark", text: "Browse Kits" }) %>
+        </a>
+        <a href="https://github.com/powerhome/playbook/blob/master/CHANGELOG.md">
+          <%= pb_rails("body", props: { classname: "dark", text: "View Changelog" }) %>
+        </a>
+      <% end %>
+      <%= pb_rails("flex/flex_item", props: {}) do %>
+        <%= pb_rails("caption", props: { text: "Additional Links", margin_bottom: "xs" }) %>
+        <a href="https://github.com/powerhome/playbook">
+          <%= pb_rails("body", props: { classname: "dark", text: "Playbook Github" }) %>
+        </a>
+        <a href="https://www.techatpower.com/jobs">
+          <%= pb_rails("body", props: { classname: "dark", text: "Open Positions" }) %>
+        </a>
+        <a href="https://www.techatpower.com/">
+          <%= pb_rails("body", props: { classname: "dark", text: "Tech at Power" }) %>
+        </a>
+        <a href="https://powerhrg.com/">
+          <%= pb_rails("body", props: { classname: "dark", text: "Power Website" }) %>
+        </a>
+      <% end %>
+    <% end %>
+    <div class="copyright-tag">
+      <%= pb_rails("body", props: { text: "© Power Home Remodeling", color: "lighter" }) %>
+    </div>
+  </div>
+
+
+  <%if false%><!--
+  
   <%= pb_rails("background", props: { background_color: "dark", padding: "xl" }) do %>
     <%= pb_rails("flex", props: { classname: "text-blob", spacing: "between", wrap: true } ) do %>
       <%= pb_rails("flex/flex_item", props: { margin_top: "xl" }) do %>
@@ -78,6 +130,9 @@
       <% end %>
     <% end %>
   <% end %>
+
+  --><% end%>
+
 </div>
 
 <%= javascript_packs_with_chunks_tag 'landing-page' %>

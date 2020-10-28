@@ -19,6 +19,17 @@
     border-radius: $border_rad_heaviest;
     box-shadow: $shadow_deepest;
   }
+  .landing-footer {
+    background-color: $royal;
+    padding: $space_lg * 2 $space_lg * 3 $space_lg * 2 $space_lg * 3;
+    .footer-logo-block {
+      text-align: center;
+    }
+    .copyright-tag {
+      text-align: center;
+      margin-top: $space_xl * 3;
+    }
+  }
   .pb-hero-image {
     padding-right: $space_lg;
   }
@@ -53,9 +64,39 @@
       margin-right: 0;
     }
   }
+
+  // Hide Code/Kit Example
   @include break_at(866px) {
     .kit-example {
       display: none;
+    }
+  }
+}
+
+@include break_at(650px){
+  .landing-footer {
+    [class^=pb_flex_kit] {
+      flex-direction: column !important;
+      align-content: center;
+    }
+    // [class^=pb_flex_kit][class*=align_items_left], [class^=pb_flex_kit][class*=align_items_top]{
+    // }
+    text-align: center;
+    [class^="pb_caption_kit"] {
+      margin-top: $space_lg;
+    }
+  }
+}
+
+// rearrange buttons and footer links
+@include break_at(443px){
+  .button-flexbox {
+    flex-direction: column !important;
+    align-content: center;
+    // justify-content: center !important;
+    [class^=pb_button_kit_secondary] {
+      margin-left: 0 !important;
+      margin-top: $space_md;
     }
   }
 }
