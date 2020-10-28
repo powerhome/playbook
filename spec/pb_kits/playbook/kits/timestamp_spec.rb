@@ -16,9 +16,12 @@ RSpec.describe Playbook::PbTimestamp::Timestamp do
                       .of_type(Playbook::Props::Boolean) }
   it { is_expected.to define_prop(:show_date)
                       .of_type(Playbook::Props::Boolean) }
+  it { is_expected.to define_prop(:show_timezone)
+                      .of_type(Playbook::Props::Boolean) }
   it { is_expected.to define_prop(:show_user)
                       .of_type(Playbook::Props::Boolean) }
   it { is_expected.to define_string_prop(:text) }
+  it { is_expected.to define_string_prop(:timezone) }
   it { is_expected.to define_prop(:timestamp)
                       .that_is_required }
   it { is_expected.to define_enum_prop(:variant)
@@ -52,7 +55,19 @@ RSpec.describe Playbook::PbTimestamp::Timestamp do
   describe "#format_time_string" do
     it "returns HH:MM with meridian" do
       timestamp = DateTime.new(2020, 10, 10, 20, 30, 00).in_time_zone("America/New_York").freeze
-      expect(subject.new(timestamp: timestamp).format_time_string).to eq(" 4:30p")
+      expect(subject.new(timestamp: timestamp).format_time_string).to eq("4:30p")
+    end
+
+    context "timezone" do
+      it "returns timezone if present && show_timezone" do
+        timestamp = DateTime.new(2020, 10, 10, 20, 30, 00).in_time_zone("America/New_York").freeze
+        expect(subject.new(timestamp: timestamp, timezone: "America/New_York", show_timezone: true).format_time_string).to eq("4:30p EDT")
+      end
+
+      it "doesn't returns timezone if present && show_timezone is false" do
+        timestamp = DateTime.new(2020, 10, 10, 20, 30, 00).in_time_zone("America/New_York").freeze
+        expect(subject.new(timestamp: timestamp, timezone: "America/New_York", show_timezone: false).format_time_string).to eq("4:30p")
+      end
     end
   end
 
@@ -68,11 +83,11 @@ RSpec.describe Playbook::PbTimestamp::Timestamp do
 
   describe "#format_datetime_string" do
     it "returns date with time separated by middot" do
-      expect(subject.new(timestamp: timestamp).format_datetime_string).to eq("Oct 10 &middot;  4:30p")
+      expect(subject.new(timestamp: timestamp).format_datetime_string).to eq("Oct 10 &middot; 4:30p")
     end
 
     it "returns full date and time separated by middot" do
-      expect(subject.new(timestamp: future_timestamp).format_datetime_string).to eq("Oct 10, 2024 &middot;  4:30p")
+      expect(subject.new(timestamp: future_timestamp).format_datetime_string).to eq("Oct 10, 2024 &middot; 4:30p")
     end
   end
 
@@ -89,7 +104,7 @@ RSpec.describe Playbook::PbTimestamp::Timestamp do
           date = "Oct 10"
           time = " 4:30p"
 
-          expect(subject.new(timestamp: timestamp, variant: variant, show_user: show_user, text: name).format_updated_string).to eq("Last updated by #{name} on #{date} at #{time}")
+          expect(subject.new(timestamp: timestamp, variant: variant, show_user: show_user, text: name).format_updated_string).to eq("Last updated by #{name} on #{date} at#{time}")
         end
 
         it "returns last updated with year including user's name" do
@@ -97,7 +112,7 @@ RSpec.describe Playbook::PbTimestamp::Timestamp do
           date = "Oct 10, 2024"
           time = " 4:30p"
 
-          expect(subject.new(timestamp: timestamp, variant: variant, show_user: show_user, text: name).format_updated_string).to eq("Last updated by #{name} on #{date} at #{time}")
+          expect(subject.new(timestamp: timestamp, variant: variant, show_user: show_user, text: name).format_updated_string).to eq("Last updated by #{name} on #{date} at#{time}")
         end
       end
 
@@ -108,7 +123,7 @@ RSpec.describe Playbook::PbTimestamp::Timestamp do
           date = "Oct 10"
           time = " 4:30p"
 
-          expect(subject.new(timestamp: timestamp, variant: variant, show_user: show_user).format_updated_string).to eq("Last updated on #{date} at #{time}")
+          expect(subject.new(timestamp: timestamp, variant: variant, show_user: show_user).format_updated_string).to eq("Last updated on #{date} at#{time}")
         end
 
         it "returns last updated with year without user's name" do
@@ -116,7 +131,7 @@ RSpec.describe Playbook::PbTimestamp::Timestamp do
           date = "Oct 10, 2024"
           time = " 4:30p"
 
-          expect(subject.new(timestamp: timestamp, variant: variant, show_user: show_user).format_updated_string).to eq("Last updated on #{date} at #{time}")
+          expect(subject.new(timestamp: timestamp, variant: variant, show_user: show_user).format_updated_string).to eq("Last updated on #{date} at#{time}")
         end
       end
     end

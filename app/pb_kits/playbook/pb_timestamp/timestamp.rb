@@ -16,8 +16,13 @@ module Playbook
       prop :align,  type: Playbook::Props::Enum,
                     values: %w[left center right],
                     default: "left"
-      prop :show_date, type: Playbook::Props::Boolean, default: true
-      prop :show_user, type: Playbook::Props::Boolean, default: false
+      prop :show_date, type: Playbook::Props::Boolean,
+                       default: true
+      prop :show_timezone, type: Playbook::Props::Boolean,
+                           default: false
+      prop :show_user, type: Playbook::Props::Boolean,
+                       default: false
+      prop :timezone, default: "America/New_York"
       prop :variant, type: Playbook::Props::Enum,
                      values: %w[default elapsed updated],
                      default: "default"
@@ -31,7 +36,11 @@ module Playbook
       end
 
       def format_time_string
-        "#{pb_date_time.to_hour}:#{pb_date_time.to_minutes}#{pb_date_time.to_meridian}"
+        "#{pb_date_time.to_hour}:#{pb_date_time.to_minutes}#{pb_date_time.to_meridian} #{format_timezone_string}".strip
+      end
+
+      def format_timezone_string
+        timezone && show_timezone ? pb_date_time.to_timezone.to_s : ""
       end
 
       def format_date_string
@@ -58,7 +67,7 @@ module Playbook
     private
 
       def pb_date_time
-        Playbook::PbKit::PbDateTime.new(timestamp)
+        Playbook::PbKit::PbDateTime.new(timestamp, timezone)
       end
 
       def dark_class
