@@ -7,6 +7,7 @@ module Playbook
 
       prop :async, type: Playbook::Props::Boolean,
                     default: false
+      prop :default_options, type: Playbook::Props::HashArray, default: []
       prop :label
       prop :load_options
       prop :name
@@ -35,6 +36,7 @@ module Playbook
 
       def typeahead_with_pills_options
         base_options = {
+          defaultValue: default_options,
           isMulti: true,
           label: label,
           options: options,

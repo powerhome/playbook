@@ -1,6 +1,12 @@
 Typeahead kit is data-driven. The minimum default fields are `label` and `value`.
 
-`{ label: "Foo", value: "bar" }`
+This is an example of an option: `{ label: 'Windows', value: '#FFA500' }`
+
+#### Rails: Default Options
+
+You can also pass `default_options` which will populate the initial pill selections:
+
+`default_options: [{ label: 'Windows', value: '#FFA500' }]`
 
 #### Rails: Subscribing to JS Events
 `pb-typeahead-kit-result-option-select` event to perform custom work when an option is clicked.
