@@ -5,23 +5,22 @@
 @import "../../tokens/shadows";
 
 .landing-page {
-  .hero {
-    background-color: $bg_dark;
-    .pb_title_kit_2, .pb_body_kit {
-      color: $white;
-    }
-  }
-  .content{
-    background-color: $white;
-  }
   .code-snippets {
     background-color: $bg_dark;
     border-radius: $border_rad_heaviest;
     box-shadow: $shadow_deepest;
   }
+  .hero-text-width {
+    max-width: 500px;
+  }
+  .kit-example {
+    max-width: 800px;
+    position: relative;
+    padding-right: $space_xl;
+  }
   .landing-footer {
     background-color: $royal;
-    padding: $space_lg * 2 $space_lg * 3 $space_lg * 2 $space_lg * 3;
+    padding: $space_lg * 2 $space_lg * 3;
     .footer-logo-block {
       text-align: center;
     }
@@ -33,24 +32,16 @@
   .pb-hero-image {
     padding-right: $space_lg;
   }
-  .text-block-width-1 {
-    max-width: 500px;
-  }
   .react-rails-text {
     max-width: 450px;
     margin-right: $space_xl;
-  }
-  .kit-example {
-    max-width: 800px;
-    position: relative;
-    padding-right: $space_xl;
   }
   .user-card {
     width: 275px;
     position: absolute;
     left: 505px;
-    box-shadow: $shadow_deeper;
   }
+  // Mobile overrides
   @include break_at(breakpoint("lg")) {
     .hero-inner-wrapper {
       justify-content: center !important;
@@ -64,39 +55,34 @@
       margin-right: 0;
     }
   }
-
   // Hide Code/Kit Example
   @include break_at(866px) {
     .kit-example {
       display: none;
     }
   }
-}
-
-@include break_at(650px){
-  .landing-footer {
-    [class^=pb_flex_kit] {
-      flex-direction: column !important;
-      align-content: center;
-    }
-    // [class^=pb_flex_kit][class*=align_items_left], [class^=pb_flex_kit][class*=align_items_top]{
-    // }
-    text-align: center;
-    [class^="pb_caption_kit"] {
-      margin-top: $space_lg;
+  // reformat footer links on smaller screens
+  @include break_at(650px){
+    .landing-footer {
+      [class^=pb_flex_kit] {
+        flex-direction: column !important;
+        align-content: center;
+      }
+      text-align: center;
+      [class^="pb_caption_kit"] {
+        margin-top: $space_lg;
+      }
     }
   }
-}
-
-// rearrange buttons and footer links
-@include break_at(443px){
-  .button-flexbox {
-    flex-direction: column !important;
-    align-content: center;
-    // justify-content: center !important;
-    [class^=pb_button_kit_secondary] {
-      margin-left: 0 !important;
-      margin-top: $space_md;
+  // rearrange buttons on smaller screens
+  @include break_at(443px){
+    .button-flexbox {
+      flex-direction: column !important;
+      align-content: center;
+      [class^=pb_button_kit_secondary] {
+        margin-left: 0 !important;
+        margin-top: $space_md;
+      }
     }
   }
 }

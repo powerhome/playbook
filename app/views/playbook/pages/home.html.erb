@@ -4,7 +4,7 @@
       <div class="flex-item">
         <img src="/assets/landing-image.svg" class="pb-hero-image">
       </div>
-      <%= pb_rails("flex/flex_item", props: { classname: "text-block-width-1", margin_top: "xl" }) do %>
+      <%= pb_rails("flex/flex_item", props: { classname: "hero-text-width", margin_top: "xl" }) do %>
         <%= pb_rails("title", props: { classname: "dark", margin_bottom: "md", text: "Playbook Design System", tag: "h2", size: 2 }) %>
         <%= pb_rails("body", props: {
           classname: "dark",
@@ -42,7 +42,7 @@
       <% end %>
 
       <%= pb_rails("flex/flex_item", props: { classname: "kit-example" }) do %>
-        <%= pb_rails("card", props: { classname: "user-card" }) do %>
+        <%= pb_rails("card", props: { classname: "user-card", shadow: "deeper" }) do %>
           <%= pb_rails("user", props: {
             name: "Anna Black",
             title: "Sales Representative",

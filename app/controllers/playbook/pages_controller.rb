@@ -9,28 +9,26 @@ module Playbook
     before_action :ensure_kit_type_exists, only: %i[kit_show_rails kit_show_react]
     before_action :set_category, only: %i[kit_category_show_rails kit_category_show_react]
     before_action :set_playbook
-    
+
     def set_playbook
       @playbook = true
-    end  
+    end
 
     def enable_dark_mode
       cookies[:dark_mode] = {
-        value: "true"
+        value: "true",
       }
       redirect_back(fallback_location: root_path)
     end
 
     def disable_dark_mode
-       cookies[:dark_mode] = {
-        value: "false"
+      cookies[:dark_mode] = {
+        value: "false",
       }
       redirect_back(fallback_location: root_path)
     end
 
-    def home
-      # render layout: "layouts/playbook/landing_page"
-    end
+    def home; end
 
     def utilities; end
 
