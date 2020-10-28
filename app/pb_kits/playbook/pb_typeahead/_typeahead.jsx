@@ -60,7 +60,16 @@ const Typeahead = (props: Props) => {
 
   const Tag = props.async ? AsyncSelect : Select
 
-  const handleOnChange = (data, { action }) => {
+  const handleOnChange = (data, { action, option, removedValue }) => {
+    if (action === 'select-option') {
+      if (selectProps.onMultiValueClick) selectProps.onMultiValueClick(option)
+      const multiValueClearEvent = new CustomEvent('pb-typeahead-kit-result-option-select', { detail: option })
+      document.dispatchEvent(multiValueClearEvent)
+    }
+    if (action === 'remove-value' || action === 'pop-value') {
+      const multiValueRemoveEvent = new CustomEvent('pb-typeahead-kit-result-option-remove', { detail: removedValue })
+      document.dispatchEvent(multiValueRemoveEvent)
+    }
     if (action === 'clear') {
       const multiValueClearEvent = new CustomEvent('pb-typeahead-kit-result-clear')
       document.dispatchEvent(multiValueClearEvent)

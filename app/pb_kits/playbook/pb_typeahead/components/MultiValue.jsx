@@ -13,24 +13,17 @@ type Props = {
 }
 
 const MultiValue = (props: Props) => {
-  const {
-    data,
-    removeProps,
-    selectProps,
-  } = props
+  const { removeProps } = props
+  const { imageUrl, label } = props.data
 
-  const { imageUrl, label } = data
-
-  const handleOnMultiValueRemove = () => {
-    const multiValueRemoveEvent = new CustomEvent('pb-typeahead-kit-result-option-remove', { detail: data })
-    document.dispatchEvent(multiValueRemoveEvent)
+  const formPillProps = {
+    marginRight: 'xs',
+    name: label,
   }
 
-  const handleOnClick = () => {
-    if (selectProps.onMultiValueClick) selectProps.onMultiValueClick(data)
-    handleOnMultiValueRemove()
-    removeProps.onClick()
-  }
+  if (typeof imageUrl === 'string') formPillProps.avatarUrl = imageUrl
+
+  const handleOnClick = removeProps.onClick
 
   return (
     <components.MultiValueContainer
