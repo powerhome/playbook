@@ -18,19 +18,19 @@ const SnippetToggle = (props) => {
   }
 
   return (
-    <div style={{cursor: "pointer"}}>
+    <div style={{cursor: "pointer", maxWidth: "170px"}}>
       <Nav
         orientation="horizontal"
       >
         <NavItem
             active={codeSnippet === 'rails'}
-            text="Rails"
             onClick={() => toggleHook('rails')}
+            text="Rails"
         />
         <NavItem
             active={codeSnippet === 'react'}
-            text="React"
             onClick={() => toggleHook('react')}
+            text="React"
         />
       </Nav>
     </div>
