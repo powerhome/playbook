@@ -25,6 +25,22 @@ body {
     &.dark{
     background: tint(#0a0527, 10);
     }
+    .mobile-popover-nav {
+      display: none;
+    }
+    @include break_at(breakpoint("lg")) {
+      .full-size-nav {
+        display: none;
+      }
+      padding: 20px 30px;
+      .margin-toggle {
+        margin-bottom: 0 !important;
+        margin-top: $space_xs - 3;
+      }
+      .mobile-popover-nav {
+        display: block;
+      }
+    }
   }
 
   &--content {
@@ -96,6 +112,14 @@ body {
     }
     &[class*=dark]{
       border-color:$border_dark;
+    }
+    .mobile-sidebar-pages {
+      display: none;
+    }
+    @include break_at(breakpoint("lg")) {
+      .mobile-sidebar-pages {
+        display: block;
+      }
     }
   }
 }

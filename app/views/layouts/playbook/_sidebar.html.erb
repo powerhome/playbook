@@ -1,3 +1,11 @@
+<div class="mobile-sidebar-pages">
+  <%= pb_rails("nav", props: { title: "Pages", link: "/", padding_y: "sm", variant: "subtle" }) do %>
+    <%= pb_rails("nav/item", props: { active: current_page?("/getting_started"), text: "Getting Started", link: "/getting_started" }) %>
+    <%= pb_rails("nav/item", props: { active: current_page?("/kits"), text: "Design Components", link: "/kits" }) %>
+  <% end %>
+
+  <%= pb_rails("section_separator") %>
+</div>
 
 <%= pb_rails("nav", props: {
   title: "Kits",

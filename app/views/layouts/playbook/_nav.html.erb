@@ -3,49 +3,76 @@
   <% if @playbook.nil?%>
     <p>playbok is nil</p>
   <% end %>
-  <%= pb_rails("flex", props:{spacing:"between",vertical: "center"}) do %>
+  <%= pb_rails("flex", props:{ spacing:"between", vertical: "center" }) do %>
 
-    <%= pb_rails("flex", props:{margin_bottom: "xs",spacing:"between",vertical: "center"}) do %>
-    <%= link_to root_url do %>
-      <%= image_tag("pb.logo.svg") %>
-    <% end %>
-    <%= pb_rails("caption", props: { tag: "span", text: Playbook::VERSION }) %>
-    <% end %>
-    <%= pb_rails("nav", props: {margin_top: "sm",orientation: "horizontal"}) do %>
-      <%= pb_rails("nav/item", props: { active: current_page?('/getting_started'), text: "Getting Started", link: "/getting_started" }) %>
-      <%= pb_rails("nav/item", props: { active: current_page?('/kits'), text: "Design Components", link: "/kits" }) %>
-    <% end %>
-      
-    <div id="toggle-modes">
-      <% if action_name.include?('kit') %>
-        <% if cookies[:dark_mode] == "false" || cookies[:dark_mode] == nil%>
-          <%= pb_rails("circle_icon_button", props: {
-            variant: "secondary",
-            icon: "moon",
-            tag:"a",
-            link: enable_dark_mode_path,
-            margin_bottom: "xs"
-          }) %>
-        <% else %>
-          <%= pb_rails("circle_icon_button", props: {
-            variant: "secondary",
-            icon: "sun",
-            tag:"a",
-            link: disable_dark_mode_path,
-            margin_bottom: "xs"
-          }) %>
+    <%= pb_rails("flex/flex_item", props: {}) do %>
+      <%= pb_rails("flex", props:{ classname: "margin-toggle", margin_bottom: "xs", spacing:"between", vertical: "center" }) do %>
+        <%= link_to root_url do %>
+          <%= image_tag("pb.logo.svg") %>
         <% end %>
-      <% else %>
-        <%# Re-engineered circle icon button for github logo %>
-        <div class="pb_circle_icon_button_kit mb_xs">
-          <a class="pb_button_kit_secondary_inline_enabled" type="button" href="https://github.com/powerhome/playbook" target="_self">
-          <span class="pb_button_content">
-            <img class="mt_sm" style="height:28px;width:28px" src="/assets/github-brands.svg">
-          </span>
-          </a>
-        </div>
+        <%= pb_rails("caption", props: { tag: "span", text: Playbook::VERSION }) %>
+      <% end %>
+    <% end %>
+
+    <div class="full-size-nav">
+      <%= pb_rails("flex/flex_item", props: {}) do %>
+        <%= pb_rails("nav", props: {margin_top: "sm",orientation: "horizontal"}) do %>
+          <%= pb_rails("nav/item", props: { active: current_page?('/getting_started'), text: "Getting Started", link: "/getting_started" }) %>
+          <%= pb_rails("nav/item", props: { active: current_page?('/kits'), text: "Design Components", link: "/kits" }) %>
+        <% end %>
       <% end %>
     </div>
+      
+    <%= pb_rails("flex/flex_item", props: {}) do %>
+      <div id="toggle-modes">
+        <% if action_name.include?('kit') %>
+          <% if cookies[:dark_mode] == "false" || cookies[:dark_mode] == nil%>
+            <%= pb_rails("circle_icon_button", props: {
+              variant: "secondary",
+              icon: "moon",
+              tag:"a",
+              link: enable_dark_mode_path,
+              margin_bottom: "xs"
+            }) %>
+          <% else %>
+            <%= pb_rails("circle_icon_button", props: {
+              variant: "secondary",
+              icon: "sun",
+              tag:"a",
+              link: disable_dark_mode_path,
+              margin_bottom: "xs"
+            }) %>
+          <% end %>
+        <% else %>
+          <%# Re-engineered circle icon button for github logo %>
+          <div class="pb_circle_icon_button_kit mb_xs">
+            <a class="pb_button_kit_secondary_inline_enabled" type="button" href="https://github.com/powerhome/playbook" target="_self">
+            <span class="pb_button_content">
+              <img class="mt_sm" style="height:28px;width:28px" src="/assets/github-brands.svg">
+            </span>
+            </a>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+
+      <% if !action_name.include?('kit') %>
+        <div class="mobile-popover-nav">
+          <%= pb_rails("flex/flex_item", props: {}) do %>
+            <%= pb_rails("button", props: { variant: "secondary", id: 'mobile-nav' }) do %>
+              Pages
+              <%= pb_rails("icon", props: { icon: "angle-down"}) %>
+            <% end %>
+            <%= pb_rails("popover", props: { trigger_element_id: "mobile-nav", tooltip_id: "mobile-nav-tooltip", position: 'bottom', padding: "none" }) do %>
+              <%= pb_rails("nav", props: { variant: "subtle" }) do %>
+                <%= pb_rails("nav/item", props: { active: current_page?("/getting_started"), text: "Getting Started", link: "/getting_started" }) %>
+                <%= pb_rails("nav/item", props: { active: current_page?("/kits"), text: "Design Components", link: "/kits" }) %>
+              <% end %>
+            <% end %>
+          <% end %>
+        </div>
+      <% end %>
+
   <% end %>
 </div>
 
