@@ -1,7 +1,7 @@
 import React from 'react'
 import Timestamp from '../_timestamp.jsx'
 
-const TimestampUpdatedAlign = () => {
+const TimestampUpdatedAlign = (props) => {
   return (
     <div>
       <Timestamp
@@ -10,6 +10,7 @@ const TimestampUpdatedAlign = () => {
           text="Maricris Nonato"
           timestamp={new Date().getTime()}
           variant="updated"
+          {...props}
       />
 
       <br />
@@ -19,6 +20,7 @@ const TimestampUpdatedAlign = () => {
           showUser="false"
           timestamp={new Date().getTime()}
           variant="updated"
+          {...props}
       />
 
       <br />
@@ -30,6 +32,7 @@ const TimestampUpdatedAlign = () => {
           timestamp={new Date().getTime()}
           timezone="America/New_York"
           variant="updated"
+          {...props}
       />
 
       <br />
@@ -40,6 +43,7 @@ const TimestampUpdatedAlign = () => {
           timestamp={new Date().getTime()}
           timezone="America/New_York"
           variant="updated"
+          {...props}
       />
 
       <br />
@@ -51,6 +55,7 @@ const TimestampUpdatedAlign = () => {
           text="Maricris Nonato"
           timestamp={new Date().getTime()}
           variant="updated"
+          {...props}
       />
 
       <br />
@@ -60,6 +65,7 @@ const TimestampUpdatedAlign = () => {
           showUser="false"
           timestamp={new Date().getTime()}
           variant="updated"
+          {...props}
       />
 
       <br />
@@ -72,6 +78,7 @@ const TimestampUpdatedAlign = () => {
           timestamp={new Date().getTime()}
           timezone="America/New_York"
           variant="updated"
+          {...props}
       />
 
       <br />
@@ -83,6 +90,7 @@ const TimestampUpdatedAlign = () => {
           timestamp={new Date().getTime()}
           timezone="America/New_York"
           variant="updated"
+          {...props}
       />
 
       <br />
@@ -94,6 +102,7 @@ const TimestampUpdatedAlign = () => {
           text="Maricris Nonato"
           timestamp={new Date().getTime()}
           variant="updated"
+          {...props}
       />
 
       <br />
@@ -103,6 +112,7 @@ const TimestampUpdatedAlign = () => {
           showUser="false"
           timestamp={new Date().getTime()}
           variant="updated"
+          {...props}
       />
 
       <br />
@@ -115,6 +125,7 @@ const TimestampUpdatedAlign = () => {
           timestamp={new Date().getTime()}
           timezone="America/New_York"
           variant="updated"
+          {...props}
       />
 
       <br />
@@ -126,6 +137,7 @@ const TimestampUpdatedAlign = () => {
           timestamp={new Date().getTime()}
           timezone="America/New_York"
           variant="updated"
+          {...props}
       />
     </div>
   )

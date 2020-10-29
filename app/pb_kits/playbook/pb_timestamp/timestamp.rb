@@ -70,10 +70,6 @@ module Playbook
         Playbook::PbKit::PbDateTime.new(timestamp, timezone)
       end
 
-      def dark_class
-        dark ? "dark" : nil
-      end
-
       def variant_class
         case variant
         when "updated"

@@ -1,7 +1,7 @@
 import React from 'react'
 import Timestamp from '../_timestamp.jsx'
 
-const TimestampUpdatedAlign = () => {
+const TimestampUpdatedAlign = (props) => {
   return (
     <div>
       <Timestamp
@@ -10,6 +10,7 @@ const TimestampUpdatedAlign = () => {
           text="Maricris Nonato"
           timestamp={new Date().getTime()}
           variant="elapsed"
+          {...props}
       />
 
       <br />
@@ -19,6 +20,7 @@ const TimestampUpdatedAlign = () => {
           showUser="false"
           timestamp={new Date((new Date()).getFullYear(), new Date().getMonth(), new Date().getDate()).getTime()}
           variant="elapsed"
+          {...props}
       />
 
       <br />
@@ -30,6 +32,7 @@ const TimestampUpdatedAlign = () => {
           text="Maricris Nonato"
           timestamp={new Date().getTime()}
           variant="elapsed"
+          {...props}
       />
 
       <br />
@@ -39,6 +42,7 @@ const TimestampUpdatedAlign = () => {
           showUser="false"
           timestamp={new Date((new Date()).getFullYear(), new Date().getMonth(), new Date().getDate()).getTime()}
           variant="elapsed"
+          {...props}
       />
 
       <br />
@@ -50,6 +54,7 @@ const TimestampUpdatedAlign = () => {
           text="Maricris Nonato"
           timestamp={new Date().getTime()}
           variant="elapsed"
+          {...props}
       />
 
       <br />
@@ -59,6 +64,7 @@ const TimestampUpdatedAlign = () => {
           showUser="false"
           timestamp={new Date((new Date()).getFullYear(), new Date().getMonth(), new Date().getDate()).getTime()}
           variant="elapsed"
+          {...props}
       />
     </div>
   )

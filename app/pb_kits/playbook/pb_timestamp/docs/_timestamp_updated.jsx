@@ -1,7 +1,7 @@
 import React from 'react'
 import Timestamp from '../_timestamp.jsx'
 
-const TimestampUpdated = () => {
+const TimestampUpdated = (props) => {
   return (
     <div>
       <Timestamp
@@ -9,6 +9,7 @@ const TimestampUpdated = () => {
           text="Maricris Nonato"
           timestamp={new Date().getTime()}
           variant="updated"
+          {...props}
       />
 
       <br />
@@ -17,6 +18,7 @@ const TimestampUpdated = () => {
           showUser="false"
           timestamp={new Date().getTime()}
           variant="updated"
+          {...props}
       />
 
       <br />
@@ -29,6 +31,7 @@ const TimestampUpdated = () => {
           timestamp={new Date().getTime()}
           timezone="America/New_York"
           variant="updated"
+          {...props}
       />
 
       <br />
@@ -39,6 +42,7 @@ const TimestampUpdated = () => {
           timestamp={new Date().getTime()}
           timezone="America/New_York"
           variant="updated"
+          {...props}
       />
     </div>
   )

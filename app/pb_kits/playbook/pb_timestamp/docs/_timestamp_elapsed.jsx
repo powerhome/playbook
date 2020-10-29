@@ -1,7 +1,7 @@
 import React from 'react'
 import Timestamp from '../_timestamp.jsx'
 
-const TimestampElapsed = () => {
+const TimestampElapsed = (props) => {
   return (
     <div>
       <Timestamp
@@ -9,6 +9,7 @@ const TimestampElapsed = () => {
           text="Maricris Nonato"
           timestamp={new Date().getTime()}
           variant="elapsed"
+          {...props}
       />
 
       <br />
@@ -17,6 +18,7 @@ const TimestampElapsed = () => {
           showUser="false"
           timestamp={new Date((new Date()).getFullYear(), new Date().getMonth(), new Date().getDate()).getTime()}
           variant="elapsed"
+          {...props}
       />
     </div>
   )

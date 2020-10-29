@@ -1,13 +1,14 @@
 import React from 'react'
 import Timestamp from '../_timestamp.jsx'
 
-const TimestampAlign = () => {
+const TimestampAlign = (props) => {
   return (
     <div>
       <Timestamp
           align="left"
           showDate="false"
           timestamp={new Date().getTime()}
+          {...props}
       />
 
       <br />
@@ -16,6 +17,7 @@ const TimestampAlign = () => {
           align="left"
           showDate="true"
           timestamp={new Date().getTime()}
+          {...props}
       />
 
       <br />
@@ -24,6 +26,7 @@ const TimestampAlign = () => {
           align="left"
           showDate="true"
           timestamp={new Date((new Date()).getFullYear() + 4, (new Date().getMonth()), (new Date().getDate() + 1)).getTime()}
+          {...props}
       />
 
       <br />
@@ -33,6 +36,7 @@ const TimestampAlign = () => {
           align="center"
           showDate="false"
           timestamp={new Date().getTime()}
+          {...props}
       />
 
       <br />
@@ -41,6 +45,7 @@ const TimestampAlign = () => {
           align="center"
           showDate="true"
           timestamp={new Date().getTime()}
+          {...props}
       />
 
       <br />
@@ -49,6 +54,7 @@ const TimestampAlign = () => {
           align="center"
           showDate="true"
           timestamp={new Date((new Date()).getFullYear() + 4, (new Date().getMonth()), (new Date().getDate() + 1)).getTime()}
+          {...props}
       />
 
       <br />
@@ -58,6 +64,7 @@ const TimestampAlign = () => {
           align="right"
           showDate="false"
           timestamp={new Date().getTime()}
+          {...props}
       />
 
       <br />
@@ -66,6 +73,7 @@ const TimestampAlign = () => {
           align="right"
           showDate="true"
           timestamp={new Date().getTime()}
+          {...props}
       />
 
       <br />
@@ -74,6 +82,7 @@ const TimestampAlign = () => {
           align="right"
           showDate="true"
           timestamp={new Date((new Date()).getFullYear() + 4, (new Date().getMonth()), (new Date().getDate() + 1)).getTime()}
+          {...props}
       />
     </div>
   )

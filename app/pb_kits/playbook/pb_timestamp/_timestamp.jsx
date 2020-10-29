@@ -61,7 +61,7 @@ const Timestamp = (props: TimestampProps) => {
     if (dateTimestamp.toYear() > currentYear) {
       fullDisplay = fullDisplay + ', ' + dateTimestamp.toYear().toString()
     }
-    return fullDisplay + ' ' + fullTimeDisplay(dateTimestamp, timeDisplay, timezone, showTimezone)
+    return fullDisplay + ' \u00b7 ' + fullTimeDisplay(dateTimestamp, timeDisplay, timezone, showTimezone)
   }
 
   var fullElapsedDisplay = function fullElapsedDisplay(showUser, text, dateTimestamp){
@@ -79,12 +79,14 @@ const Timestamp = (props: TimestampProps) => {
       <div className="pb_timestamp_kit">
         <If condition={variant == 'updated'}>
           <Caption
+              dark={dark}
               size="xs"
               text={fullUpdatedDisplay(showUser, text, timeDisplay, timezone, showTimezone)}
           />
         </If>
         <If condition={variant == 'elapsed'}>
           <Caption
+              dark={dark}
               size="xs"
               text={fullElapsedDisplay(showUser, text, dateTimestamp)}
           />
@@ -92,12 +94,14 @@ const Timestamp = (props: TimestampProps) => {
         <If condition={variant == 'default'}>
           <If condition={showDate == 'true'}>
             <Caption
+                dark={dark}
                 size="xs"
                 text={fullDateDisplay(dateTimestamp, currentYear, dateDisplay, timezone, showTimezone)}
             />
           </If>
           <If condition={showDate == 'false'}>
             <Caption
+                dark={dark}
                 size="xs"
                 text={timeDisplay}
             />
