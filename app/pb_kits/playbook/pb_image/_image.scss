@@ -1,15 +1,61 @@
-.pb_image_kit {
-	max-width: 100%;
-	max-height: 100%;
+@import "../tokens/border_radius";
+@import "../tokens/colors";
+@import "../pb_image/image";
 
-	.blur_up {
-		-webkit-filter: blur(6px);
-		filter: blur(6px);
-		transition: filter 550ms, -webkit-filter 550ms;
-	}
+$image-sizes: (
+  "xs": 60px,
+  "sm": 80px,
+  "md": 100px,
+  "lg": 120px,
+  "xl": 140px,
+);
 
-	.blur_up.lazyloaded {
-		-webkit-filter: blur(0);
-		filter: blur(0);
-	}
+[class^=pb_image_kit] {
+  position: relative;
+
+  @each $name, $size in $image-sizes {
+    width: $size;
+    height: $size;
+    object-fit: cover;
+    position: relative;
+    flex-shrink: 0;
+    flex-grow: 0;
+    flex-basis: $size;
+
+    .image-#{$name} {
+      width: $size;
+      height: $size;
+      object-fit: cover;
+      border-radius: $border-rad-heaviest;
+      background: $slate;
+      overflow: hidden;
+      position: relative;
+      flex-shrink: 0;
+      flex-grow: 0;
+      flex-basis: $size;
+    }
+
+    img {
+      width: $size;
+      height: $size;
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 1;
+      border-radius: $border_rad_heaviest;
+      object-fit: cover;
+      display: block;
+    }
+
+    .blur_up {
+      -webkit-filter: blur(6px);
+      filter: blur(6px);
+      transition: filter 550ms, -webkit-filter 550ms;
+    }
+
+    .blur_up.lazyloaded {
+      -webkit-filter: blur(0);
+      filter: blur(0);
+    }
+  }
 }
