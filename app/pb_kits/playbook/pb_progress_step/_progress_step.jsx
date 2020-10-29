@@ -12,6 +12,7 @@ type ProgressStepProps = {
   children?: array<React.ReactChild>,
   orientation?: "horizontal" | "vertical",
   icon?: boolean,
+  showIcon?: boolean,
   variant?: string,
   color?: string,
 }
@@ -23,9 +24,10 @@ const ProgressStep = (props: ProgressStepProps) => {
     color,
     orientation = 'horizontal',
     icon = false,
+    showIcon = false,
     variant,
   } = props
-  const iconStyle = icon === true ? 'icon' : ''
+  const iconStyle = icon === true || showIcon === true ? 'icon' : ''
   const progressStepCss = buildCss(
     'pb_progress_step_kit',
     orientation,
