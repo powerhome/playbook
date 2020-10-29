@@ -50,6 +50,7 @@ const Typeahead = (props: Props) => {
       Placeholder,
       ValueContainer,
     },
+    id: 'react-select-input',
     isClearable: true,
     isSearchable: true,
     name,
@@ -63,15 +64,15 @@ const Typeahead = (props: Props) => {
   const handleOnChange = (data, { action, option, removedValue }) => {
     if (action === 'select-option') {
       if (selectProps.onMultiValueClick) selectProps.onMultiValueClick(option)
-      const multiValueClearEvent = new CustomEvent('pb-typeahead-kit-result-option-select', { detail: option })
+      const multiValueClearEvent = new CustomEvent(`pb-typeahead-kit-${selectProps.id}-result-option-select`, { detail: option })
       document.dispatchEvent(multiValueClearEvent)
     }
     if (action === 'remove-value' || action === 'pop-value') {
-      const multiValueRemoveEvent = new CustomEvent('pb-typeahead-kit-result-option-remove', { detail: removedValue })
+      const multiValueRemoveEvent = new CustomEvent(`pb-typeahead-kit-${selectProps.id}-result-option-remove`, { detail: removedValue })
       document.dispatchEvent(multiValueRemoveEvent)
     }
     if (action === 'clear') {
-      const multiValueClearEvent = new CustomEvent('pb-typeahead-kit-result-clear')
+      const multiValueClearEvent = new CustomEvent(`pb-typeahead-kit-${selectProps.id}-result-clear`)
       document.dispatchEvent(multiValueClearEvent)
     }
   }
