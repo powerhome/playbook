@@ -18,6 +18,10 @@
     position: relative;
     padding-right: $space_xl;
   }
+  .middle-white-background {
+    display: flex;
+    justify-content: center;
+  }
   .pb-hero-image {
     padding-right: $space_lg;
   }

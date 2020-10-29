@@ -104,6 +104,10 @@ body {
   &--footer {
     background-color: $royal;
     padding: $space_lg * 2 $space_lg * 3;
+    .inner-footer-wrapper {
+      max-width: 1700px;
+      margin: 0 auto;
+    }
     .footer-logo-block {
       text-align: center;
     }

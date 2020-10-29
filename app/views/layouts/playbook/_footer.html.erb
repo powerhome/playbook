@@ -1,11 +1,12 @@
 <div class="pb--page--footer">
+  <div class="inner-footer-wrapper">
     <%= pb_rails("flex", props: { horizontal: "center", spacing: "around", wrap: true }) do %>
       <%= pb_rails("flex/flex_item", props: { classname: "footer-logo-block" }) do %>
         <%= image_tag("pb-white-logo.svg") %>
         <%= pb_rails("body", props: { text: "Made with love", color: "lighter", margin_top: "xs" }) %>
       <% end %>
       <%= pb_rails("flex/flex_item", props: {}) do %>
-        <%= pb_rails("caption", props: { text: "Playbook", margin_bottom: "xs" }) %>
+        <%= pb_rails("caption", props: { classname: "dark", text: "Playbook", margin_bottom: "xs" }) %>
         <a href="/">
           <%= pb_rails("body", props: { classname: "dark", text: "Introduction" }) %>
         </a>
@@ -20,7 +21,7 @@
         </a>
       <% end %>
       <%= pb_rails("flex/flex_item", props: {}) do %>
-        <%= pb_rails("caption", props: { text: "Additional Links", margin_bottom: "xs" }) %>
+        <%= pb_rails("caption", props: { classname: "dark", text: "Additional Links", margin_bottom: "xs" }) %>
         <a href="https://github.com/powerhome/playbook">
           <%= pb_rails("body", props: { classname: "dark", text: "Playbook Github" }) %>
         </a>
@@ -38,4 +39,5 @@
     <div class="copyright-tag">
       <%= pb_rails("body", props: { text: "© Power Home Remodeling", color: "lighter" }) %>
     </div>
+  </div>
 </div>
