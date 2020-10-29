@@ -26,7 +26,7 @@ module Playbook
                      default: false
 
       prop :vertical, type: Playbook::Props::Enum,
-                      values: %w[top center bottom stretch],
+                      values: %w[top center bottom stretch baseline],
                       default: "top"
 
       prop :wrap, type: Playbook::Props::Boolean,

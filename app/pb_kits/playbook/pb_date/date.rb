@@ -17,7 +17,6 @@ module Playbook
                        default: false
       prop :show_day_of_week, type: Playbook::Props::Boolean,
                               default: false
-      # Size to be deprecated.
       prop :size, type: Playbook::Props::Enum,
                   values: %w[lg md sm xs],
                   default: "md"
