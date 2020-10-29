@@ -1,5 +1,7 @@
 examples:
   rails:
   - default_image: Default
+  - rounded_image: Rounded
   react:
   - default_image: Default
+  - rounded_image: Rounded
