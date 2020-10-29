@@ -32,7 +32,7 @@ body {
       .full-size-nav {
         display: none;
       }
-      padding: 20px 30px;
+      padding: $space_md - 4 $space_lg - 2;
       .margin-toggle {
         margin-bottom: 0 !important;
         margin-top: $space_xs - 3;
