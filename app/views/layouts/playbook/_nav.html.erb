@@ -24,7 +24,7 @@
       
     <%= pb_rails("flex/flex_item", props: {}) do %>
       <div id="toggle-modes">
-        <% if action_name.include?('kit') %>
+        <% if action_name.include?('kit') || current_page?('/tokens') || current_page?('/utilities')  %>
           <% if cookies[:dark_mode] == "false" || cookies[:dark_mode] == nil%>
             <%= pb_rails("circle_icon_button", props: {
               variant: "secondary",
