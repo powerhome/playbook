@@ -9,10 +9,14 @@ RSpec.describe Playbook::PbImage::Image do
 
   it { is_expected.to define_prop(:alt) }
   it { is_expected.to define_prop(:url) }
+  it { is_expected.to define_prop(:size) }
+  it { is_expected.to define_boolean_prop(:rounded).with_default(false) }
 
   describe "#classname" do
     it "returns namespaced class name", :aggregate_failures do
-      expect(subject.new({}).classname).to eq "pb_image_kit lazyload blur_up"
+      expect(subject.new({}).classname).to eq "pb_image_kit lazyload blur_up_md"
+      expect(subject.new({size:"xs"}).classname).to eq "pb_image_kit lazyload blur_up_xs"
+      expect(subject.new({rounded:true}).classname).to eq "pb_image_kit lazyload blur_up_md rounded"
     end
   end
 end
