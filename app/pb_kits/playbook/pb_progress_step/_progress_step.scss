@@ -151,7 +151,7 @@
             .circle{
                 height: 24px;
                 width: 24px;
-                border: $primary solid 4px;
+                border: $primary solid $border_rad_light;
                 background-color: rgba($white, $opacity_8);
                 svg {
                     color: darken($primary,25%);
