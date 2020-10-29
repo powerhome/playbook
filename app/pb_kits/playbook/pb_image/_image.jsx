@@ -30,7 +30,8 @@ const Image = (props: ImageProps) => {
 
   const ariaProps = buildAriaProps(aria)
   const classes = classnames(
-    buildCss('pb_image_kit lazyload blur_up', size), { rounded },
+    buildCss('pb_image_kit lazyload blur_up', size),
+    { rounded },
     globalProps(props),
     className
   )
@@ -45,7 +46,7 @@ const Image = (props: ImageProps) => {
           className={classes}
           data-src={url}
           id={id}
-          rounded
+          rounded={rounded}
           src={url}
       />
     </div>
