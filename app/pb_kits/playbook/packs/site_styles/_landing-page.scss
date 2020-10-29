@@ -18,17 +18,6 @@
     position: relative;
     padding-right: $space_xl;
   }
-  .landing-footer {
-    background-color: $royal;
-    padding: $space_lg * 2 $space_lg * 3;
-    .footer-logo-block {
-      text-align: center;
-    }
-    .copyright-tag {
-      text-align: center;
-      margin-top: $space_xl * 3;
-    }
-  }
   .pb-hero-image {
     padding-right: $space_lg;
   }
@@ -36,10 +25,22 @@
     max-width: 450px;
     margin-right: $space_xl;
   }
+  .second-section-inner-wrapper {
+    max-width: 1700px;
+  }
   .user-card {
     width: 275px;
     position: absolute;
     left: 505px;
+  }
+  @include break_at(1319px){
+    .kit-example {
+      margin-top: $space_xl * 2;
+    }
+    .react-rails-text {
+      max-width: 625px;
+      margin-right: 0;
+    }
   }
   // Mobile overrides
   @include break_at(breakpoint("lg")) {
@@ -61,21 +62,10 @@
       display: none;
     }
   }
-  // reformat footer links on smaller screens
-  @include break_at(650px){
-    .landing-footer {
-      [class^=pb_flex_kit] {
-        flex-direction: column !important;
-        align-content: center;
-      }
-      text-align: center;
-      [class^="pb_caption_kit"] {
-        margin-top: $space_lg;
-      }
-    }
-  }
   // rearrange buttons on smaller screens
+  // and realign text to center
   @include break_at(443px){
+    text-align: center;
     .button-flexbox {
       flex-direction: column !important;
       align-content: center;

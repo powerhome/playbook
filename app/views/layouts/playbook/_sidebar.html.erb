@@ -7,7 +7,7 @@
   <%= pb_rails("section_separator") %>
 </div>
 
-<% if action_name.include?('kit') %>
+<% if action_name.include?('kit') || current_page?('/tokens') || current_page?('/utilities') %>
   <%= pb_rails("nav", props: {
     title: "Kits",
     link: all_link(@type),

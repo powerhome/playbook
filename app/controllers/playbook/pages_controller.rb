@@ -35,9 +35,13 @@ module Playbook
 
     def home; end
 
-    def utilities; end
+    def utilities
+      render layout: "layouts/playbook/kits"
+    end
 
-    def tokens; end
+    def tokens
+      render layout: "layouts/playbook/kits"
+    end
 
     def kits
       params[:type] ||= "react"

@@ -59,6 +59,9 @@ body {
       &.dark{
         background: #0a0527;
       }
+      &.height-override {
+        height: auto;
+      }
     }
   }
   &--hamburger, &--checkbox {
@@ -94,6 +97,29 @@ body {
     &:checked ~ #{$selector}--sideNav {
       @include break_at(breakpoint("lg")) {
         transform: translate(-10%, 0);
+      }
+    }
+  }
+
+  &--footer {
+    background-color: $royal;
+    padding: $space_lg * 2 $space_lg * 3;
+    .footer-logo-block {
+      text-align: center;
+    }
+    .copyright-tag {
+      text-align: center;
+      margin-top: $space_xl * 3;
+    }
+    // reformat footer links on smaller screens
+    @include break_at(650px){
+      [class^=pb_flex_kit] {
+        flex-direction: column !important;
+        align-content: center;
+      }
+      text-align: center;
+      [class^="pb_caption_kit"] {
+        margin-top: $space_lg;
       }
     }
   }
