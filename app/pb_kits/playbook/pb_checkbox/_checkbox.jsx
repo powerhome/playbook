@@ -51,13 +51,14 @@ const Checkbox = (props: CheckboxProps) => {
         {...ariaProps}
         {...dataProps}
         className={classes}
-        id={id}
+        htmlFor={id}
     >
       <If condition={children}>
         {children}
         <Else />
         <input
             defaultChecked={checked}
+            id={id}
             name={name}
             onChange={onChange}
             type="checkbox"

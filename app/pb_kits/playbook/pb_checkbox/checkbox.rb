@@ -14,7 +14,6 @@ module Playbook
       prop :text
       prop :value
       prop :name
-
       prop :input_options, type: Playbook::Props::Hash,
                            default: {}
       prop :required, type: Playbook::Props::Boolean,
@@ -32,6 +31,10 @@ module Playbook
 
       def input
         check_box_tag(name, value, checked, input_options)
+      end
+
+      def for_attribute
+        input_options[:id]
       end
 
       def checkbox_label_status

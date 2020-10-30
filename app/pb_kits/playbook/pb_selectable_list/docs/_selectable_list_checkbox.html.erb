@@ -1,0 +1,30 @@
+<%= pb_rails("selectable_list",
+        props: {
+          variant: "checkbox",
+          items: [
+            { text: "Mild",
+              input_options: {
+                value: "1",
+                name: "checkbox-name-1",
+                id: "checkbox-id-1",
+              }
+            },
+            { text: "Medium",
+              checked: true,
+              input_options: {
+                value: "2",
+                name: "checkbox-name-2",
+                id: "checkbox-id-2",
+              }
+            },
+            { text: "Hot",
+              input_options: {
+                value: "3",
+                name: "checkbox-name-3",
+                id: "checkbox-id-3",
+              }
+            }
+          ]
+        }
+    )
+%>
