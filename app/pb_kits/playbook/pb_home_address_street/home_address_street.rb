@@ -38,7 +38,7 @@ module Playbook
       end
 
       def address_house_style
-        "#{address.titleize} #{separator} #{house_style}"
+        "#{address&.titleize} #{separator} #{house_style}"
       end
 
       def address_house_style2

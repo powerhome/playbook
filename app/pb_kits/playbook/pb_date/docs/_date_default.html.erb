@@ -1,24 +1,39 @@
 <%= pb_rails("date", props: {
   date: Date.today,
-  size: "lg"
+  size: "sm"
 }) %>
 
 <br>
 
 <%= pb_rails("date", props: {
-  date: DateTime.now
+  date: "2012-08-02T15:49:29Z",
+  size: "sm"
 }) %>
 
 <br>
 
 <%= pb_rails("date", props: {
-  date: DateTime.now,
-  timezone: "Asia/Tokyo"
+  date: "2017-12-02T15:49:29Z",
+  show_day_of_week: true,
+  size: "sm"
+}) %>
+
+<br>
+<br>
+
+<%= pb_rails("date", props: {
+  date: Date.today,
 }) %>
 
 <br>
 
 <%= pb_rails("date", props: {
-  date: Date.new(2010, 11, 12),
-  size: "xs"
+  date: "2012-08-02T15:49:29Z",
+}) %>
+
+<br>
+
+<%= pb_rails("date", props: {
+  date: "2017-12-02T15:49:29Z",
+  show_day_of_week: true
 }) %>

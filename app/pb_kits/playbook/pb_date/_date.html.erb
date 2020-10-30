@@ -1,14 +1,70 @@
 <%= content_tag(:div,
     id: object.id,
     data: object.data,
-    class: object.classname) do %>
-    <% if object.size == "lg" %>
-      <%= pb_rails("title", props: { text: object.lg_date, size: 3 }) %>
-    <% elsif object.size == "sm" %>
-      <%= pb_rails("icon", props: { icon: "calendar", fixed_width: true }) %>
-      <%= pb_rails("title", props: { tag: "span", text: object.sm_date, size: 4 }) %>
+    class: object.classname,
+    aria: object.aria) do %>
+
+  <% if object.size == "md" %>
+    <!-- icon -->
+    <% if object.show_icon %>
+      <%= pb_rails("body", props: {
+        color: "light",
+        tag: "div",
+      }) do %>
+        <%= pb_rails("icon", props: { icon: "calendar-alt", fixed_width: true }) %>
+      <% end %>
+    <% end %>
+
+    <!-- day_of_week -->
+    <% if object.show_day_of_week %>
+      <%= pb_rails("title", props: { tag: "div", text: object.day_of_week, size: 4 }) %>
+      <%= pb_rails("body", props: {
+        text: "•",
+        color: "light",
+        tag: "div",
+      }) %>
+    <% end %>
+
+    <!-- month day, year -->
+
+    <%# if not current year %>
+    <% if object.year.to_s == DateTime.now.year.to_s %>
+      <%= pb_rails("title", props: { tag: "div", text: "#{object.month} #{object.day}", size: 4 }) %>
+    <%# if is current year %>
     <% else %>
-      <%= pb_rails("title", props: { text: object.xs_date, size: 4 }) %>
+      <%= pb_rails("title", props: { tag: "div", text: "#{object.month} #{object.day}, #{object.year}", size: 4 }) %>
+    <% end %>
+
+  <% else %>
+
+    <!-- icon -->
+    <% if object.show_icon %>
+      <%= pb_rails("body", props: {
+        color: "light",
+        tag: "div",
+      }) do %>
+        <%= pb_rails("icon", props: { icon: "calendar-alt", fixed_width: true }) %>
+      <% end %>
+    <% end %>
+
+    <!-- day_of_week -->
+    <% if object.show_day_of_week %>
+      <%= pb_rails("caption", props: { tag: "div", text: object.day_of_week }) %>
+      <%= pb_rails("caption", props: {
+        text: "•",
+        color: "light",
+        tag: "div",
+      }) %>
+    <% end %>
+
+    <!-- month day, year -->
+
+    <%# if not current year %>
+    <% if object.year.to_s == DateTime.now.year.to_s %>
+      <%= pb_rails("caption", props: { tag: "span", text: "#{object.month} #{object.day}" }) %>
+    <%# if is current year %>
+    <% else %>
+      <%= pb_rails("caption", props: { tag: "span", text: "#{object.month} #{object.day}, #{object.year}" }) %>
+    <% end %>
   <% end %>
 <% end %>
-

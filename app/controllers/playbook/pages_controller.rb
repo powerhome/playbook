@@ -9,59 +9,70 @@ module Playbook
     before_action :ensure_kit_type_exists, only: %i[kit_show_rails kit_show_react]
     before_action :set_category, only: %i[kit_category_show_rails kit_category_show_react]
     before_action :set_playbook
-    
+    before_action :delete_dark_mode_cookie, only: %i[home getting_started]
+
     def set_playbook
       @playbook = true
-    end  
+    end
 
     def enable_dark_mode
       cookies[:dark_mode] = {
-        value: "true"
+        value: "true",
       }
       redirect_back(fallback_location: root_path)
     end
 
     def disable_dark_mode
-       cookies[:dark_mode] = {
-        value: "false"
+      cookies[:dark_mode] = {
+        value: "false",
       }
       redirect_back(fallback_location: root_path)
     end
 
+    def delete_dark_mode_cookie
+      cookies.delete :dark_mode
+    end
 
     def home; end
 
-    def utilities; end
+    def utilities
+      render layout: "layouts/playbook/kits"
+    end
 
-    def tokens; end
+    def tokens
+      render layout: "layouts/playbook/kits"
+    end
 
     def kits
       params[:type] ||= "react"
       @type = params[:type]
+      render layout: "layouts/playbook/kits"
     end
 
     def principles; end
+
+    def getting_started; end
 
     def grid
       render layout: "layouts/playbook/grid"
     end
 
     def kit_show_rails
-      render "playbook/pages/kit_show"
+      render "playbook/pages/kit_show", layout: "layouts/playbook/kits"
     end
 
     def kit_show_react
-      render template: "playbook/pages/kit_show"
+      render template: "playbook/pages/kit_show", layout: "layouts/playbook/kits"
     end
 
     def kit_category_show_rails
       params[:type] ||= "rails"
       @type = params[:type]
-      render template: "playbook/pages/kit_category_show"
+      render template: "playbook/pages/kit_category_show", layout: "layouts/playbook/kits"
     end
 
     def kit_category_show_react
-      render template: "playbook/pages/kit_category_show"
+      render template: "playbook/pages/kit_category_show", layout: "layouts/playbook/kits"
     end
 
   private

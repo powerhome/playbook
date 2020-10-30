@@ -52,7 +52,7 @@
   <%= form.select :example_select_field, [["Yes", 1], ["No", 2]], props: { required: true, blank_selection: "Select One...", label: true } %>
   <%= form.collection_select :example_collection_select_field, example_collection, :value, :name, props: { required: true, blank_selection: "Select One...", label: true } %>
   <%= form.check_box :example_checkbox_field, props: { text: "Example Checkbox", label: true, required: true } %>
-  <%= form.date_picker :example_date_picker_field_2, props: { default_date: 'blank', label: true, required: true } %>
+  <%= form.date_picker :example_date_picker_field_2, props: { label: true, required: true } %>
 
   <%= form.actions do |action| %>
     <%= action.submit %>

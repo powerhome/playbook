@@ -1,0 +1,13 @@
+<%= pb_rails("background", props: { image_url: "https://images.unsplash.com/photo-1528459801416-a9e53bbf4e17?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1000&q=80", padding: "lg" }) do %>
+  <%= pb_rails("flex", props: { horizontal: "center", orientation: "column" }) do %>
+    <%= pb_rails("flex/flex_item") do %>
+      <%= pb_rails("title", props: { dark: true, size: 1, text: "Background Kit Image" })%>
+    <% end %>
+    <%= pb_rails("flex/flex_item", props: { padding: "lg" }) do %>
+      <%= pb_rails("card", props: { shadow: "deepest" }) do %>
+        We cannot seek achievement for ourselves and forget about progress and prosperity for our community... Our ambitions must be broad enough to include the aspirations and needs of others, for their sakes and for our own.
+        -Cesar Chavez
+      <% end %>
+    <% end %>
+  <% end %>
+<% end %>

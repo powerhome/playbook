@@ -4,7 +4,7 @@ dependencies:
 deploy:
   max_commits: # Automatically deploy all commits, no matter how many.
   override:
-    - ./bin/deployer bash -lc "cluster=app-beta-hq environment=${ENVIRONMENT} tag=${REVISION} deploy_url=${DEPLOY_URL} bin/deploy"
+    - ./bin/deployer bash -lc "cluster=app-prod-hq environment=${ENVIRONMENT} tag=${REVISION} deploy_url=${DEPLOY_URL} bin/deploy"
 
 links:
   logs: "https://logging-hq.powerapp.cloud/app/kibana#/discover?_g=(refreshInterval:(pause:!f,value:5000),time:(from:now-15m,mode:quick,to:now))&_a=(columns:!(_source),filters:!((meta:(alias:!n,disabled:!f,index:c42b1680-dbc1-11e9-a5cd-5d6d0e6547e8,key:kubernetes.namespace,negate:!f,params:(query:playbook-$ENVIRONMENT,type:phrase),type:phrase,value:playbook-$ENVIRONMENT),query:(match:(kubernetes.namespace:(query:playbook-$ENVIRONMENT,type:phrase))))),index:c42b1680-dbc1-11e9-a5cd-5d6d0e6547e8,interval:auto,query:(language:lucene,query:''),sort:!('@timestamp',desc))"

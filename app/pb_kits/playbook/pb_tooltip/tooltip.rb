@@ -10,7 +10,7 @@ module Playbook
       prop :trigger_element_id
       prop :tooltip_id
       prop :dark, type: Playbook::Props::Boolean,
-                          default: false
+                  default: false
 
       def classname
         generate_classname("pb_tooltip_kit", dark_class)
@@ -25,7 +25,8 @@ module Playbook
         )
       end
 
-      private
+    private
+
       def dark_class
         dark ? "dark" : nil
       end

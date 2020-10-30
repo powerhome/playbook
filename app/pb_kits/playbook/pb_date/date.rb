@@ -10,25 +10,36 @@ module Playbook
       partial "pb_date/date"
 
       prop :date, required: true
+      prop :alignment, type: Playbook::Props::Enum,
+                       values: %w[left center right],
+                       default: "left"
+      prop :show_icon, type: Playbook::Props::Boolean,
+                       default: false
+      prop :show_day_of_week, type: Playbook::Props::Boolean,
+                              default: false
       prop :size, type: Playbook::Props::Enum,
-                  values: %w[lg sm xs],
-                  default: "sm"
+                  values: %w[lg md sm xs],
+                  default: "md"
       prop :timezone, default: "America/New_York"
 
       def classname
-        generate_classname("pb_date_kit")
+        generate_classname("pb_date_kit", alignment)
       end
 
-      def xs_date
-        "#{pb_date_time.to_day_of_week.upcase} &middot; #{pb_date_time.to_month.upcase} #{pb_date_time.to_day}".html_safe
+      def day_of_week
+        pb_date_time.to_day_of_week
       end
 
-      def lg_date
-        "#{pb_date_time.to_month.upcase} #{pb_date_time.to_day}"
+      def day
+        pb_date_time.to_day
       end
 
-      def sm_date
-        "#{pb_date_time.to_day_of_week.upcase} &middot; #{pb_date_time.to_month.upcase} #{pb_date_time.to_day}".html_safe
+      def month
+        pb_date_time.to_month.capitalize
+      end
+
+      def year
+        pb_date_time.to_year
       end
 
     private

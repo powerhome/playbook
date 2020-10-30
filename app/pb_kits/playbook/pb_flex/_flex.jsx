@@ -13,7 +13,7 @@ type FlexProps = {
   orientation?: "row" | "column",
   spacing?: "around" | "between" | "evenly" | "none",
   reverse?: boolean,
-  vertical?: "top" | "center" | "bottom" | "stretch",
+  vertical?: "top" | "center" | "bottom" | "stretch" | "baseline",
   wrap?: boolean,
 }
 
