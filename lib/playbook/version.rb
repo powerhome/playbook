@@ -1,5 +1,5 @@
 # frozen_string_literal: true
 
 module Playbook
-  VERSION = "7.3.0.pre.alpha12"
+  VERSION = "7.4.0.pre.alpha5"
 end
