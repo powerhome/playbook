@@ -13,14 +13,9 @@ const Option = (props: any) => {
     label,
   } = props.data
 
-  const handleOptionClicked = () => {
-    const resultSelectedEvent = new CustomEvent('pb-typeahead-kit-result-option-select', { detail: props.data })
-    document.dispatchEvent(resultSelectedEvent)
-  }
-
   return (
     <components.Option {...props}>
-      <div onClick={handleOptionClicked}>
+      <div>
         <Choose>
           <When condition={imageUrl}>
             <User
