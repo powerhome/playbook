@@ -9,7 +9,7 @@ RSpec.describe Playbook::PbSelectableList::SelectableList do
 
   it { is_expected.to define_prop(:text) }
   it { is_expected.to define_enum_prop(:variant)
-                      .with_default("radio")
+                      .with_default("checkbox")
                       .with_values("radio", "checkbox")
   }
   it { is_expected.to define_prop(:items)
