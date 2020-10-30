@@ -12,7 +12,7 @@ module Playbook
                      default: false
       prop :size, type: Playbook::Props::Enum,
                   values: %w[xs sm md lg xl],
-                  default: "md"
+                  default: "xl"
       prop :url
 
       def classname

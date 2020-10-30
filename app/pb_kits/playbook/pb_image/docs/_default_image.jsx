@@ -5,9 +5,6 @@ const DefaultImage = () => {
   return (
     <>
       <Image
-          url="https://unsplash.it/500/400/?image=634"
-      />
-      <Image
           size="xs"
           url="https://unsplash.it/500/400/?image=634"
       />
@@ -25,6 +22,9 @@ const DefaultImage = () => {
       />
       <Image
           size="xl"
+          url="https://unsplash.it/500/400/?image=634"
+      />
+      <Image
           url="https://unsplash.it/500/400/?image=634"
       />
     </>
