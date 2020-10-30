@@ -11,8 +11,8 @@ module Playbook
       prop :rounded, type: Playbook::Props::Boolean,
                      default: false
       prop :size, type: Playbook::Props::Enum,
-                  values: %w[xs sm md lg xl],
-                  default: "xl"
+                  values: %w[xs sm md lg xl none],
+                  default: "none"
       prop :url
 
       def classname
