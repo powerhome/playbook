@@ -33,7 +33,7 @@ const SelectableListItem = ({
   text = '',
   name = '',
   value = '',
-  variant,
+  variant = 'checkbox',
   onChange = () => {},
   ...props
 }: SelectableListItemProps) => {

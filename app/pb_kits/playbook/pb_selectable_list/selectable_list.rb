@@ -9,7 +9,7 @@ module Playbook
 
       prop :variant, type: Playbook::Props::Enum,
                      values: %w[radio checkbox],
-                     default: "radio"
+                     default: "checkbox"
 
       prop :text, type: Playbook::Props::String
 
