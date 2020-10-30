@@ -12,6 +12,8 @@ module Playbook
                          default: "horizontal"
       prop :icon, type: Playbook::Props::Boolean,
                   default: false
+      prop :show_icon, type: Playbook::Props::Boolean,
+                  default: false
       prop :variant, type: Playbook::Props::Enum,
                      values: %w[default tracker],
                      default: "default"
@@ -25,7 +27,7 @@ module Playbook
     private
 
       def icon_class
-        icon === true ? "icon" : nil
+        icon === true || show_icon === true ? "icon" : nil
       end
 
       def variant_class

@@ -2,5 +2,17 @@
     id: object.id,
     data: object.data,
     class: object.classname) do %>
-  <%= pb_rails("caption", props: { text: object.text, tag: 'span', size: 'xs' }) %>
+
+    <% case object.variant
+        when "updated" %>
+        <%= pb_rails("caption", props: { text: object.format_updated_string, size: 'xs', dark: object.dark }) %>
+    <% when "elapsed" %>
+      <%= pb_rails("caption", props: { text: object.format_updated_string, size: 'xs', dark: object.dark }) %>
+    <% else %>
+      <% if object.show_date %>
+        <%= pb_rails("caption", props: { text: object.format_datetime_string, size: 'xs', dark: object.dark }) %>
+      <% else %>
+        <%= pb_rails("caption", props: { text: object.format_time_string, size: 'xs', dark: object.dark }) %>
+      <% end %>
+    <% end %>
 <% end %>
