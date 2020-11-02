@@ -38,7 +38,7 @@ RSpec.describe Playbook::PbTime::Time do
 
   describe "#format_timezone" do
     it "returns the default formatted timezone" do
-      expect(subject.new(time: DateTime.current).format_timezone_string).to eq "EDT"
+      expect(['EDT', 'EST']).to include(subject.new(time: DateTime.current).format_timezone_string)
     end
 
     it "returns a unique formatted timezone" do
