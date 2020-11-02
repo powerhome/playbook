@@ -1,16 +1,5 @@
 @import "timestamp-mixins";
-@import "../tokens/colors";
 
-[class^=pb_timestamp_kit]{
+[class^=pb_timestamp_kit] {
   @include pb_timestamp;
-
-  &[class*=_center]  {
-    text-align: center;
-  }
-  &[class*=_right]  {
-    text-align: right;
-  }
-  &[class*=_dark] {
-    color: $text_dk_default;
-  }
 }
