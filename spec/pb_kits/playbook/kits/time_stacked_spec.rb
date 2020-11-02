@@ -59,7 +59,7 @@ RSpec.describe Playbook::PbTimeStacked::TimeStacked do
 
   describe "#format_timezone" do
     it "returns a formatted timezone" do
-      expect(subject.new(date: DateTime.current).format_timezone).to eq "EDT"
+      expect(['EDT', 'EST']).to include(subject.new(date: DateTime.current).format_timezone)
     end
   end
 end
