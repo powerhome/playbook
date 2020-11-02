@@ -1,8 +1,8 @@
 import React from 'react'
 import {
   Body,
-  SelectableCard,
   Image,
+  SelectableCard,
 } from '../../'
 
 class SelectableCardImage extends React.Component {
@@ -30,8 +30,8 @@ class SelectableCardImage extends React.Component {
             value="selectableImage"
         >
           <Image
-            rounded
-            url="https://unsplash.it/500/400/?image=634"
+              rounded
+              url="https://unsplash.it/500/400/?image=634"
           />
 
           <Body>{'Add text here'}</Body>
@@ -46,9 +46,9 @@ class SelectableCardImage extends React.Component {
             value="unselectedImage"
         >
           <Image
-            rounded
-            size="xl"
-            url="https://unsplash.it/500/400/?image=634"
+              rounded
+              size="xl"
+              url="https://unsplash.it/500/400/?image=634"
           />
         </SelectableCard>
 
