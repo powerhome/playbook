@@ -28,6 +28,7 @@ kits:
     - date_picker
     - file_upload
     - form
+    - form_group
     - form_pill
     - radio
     - select
