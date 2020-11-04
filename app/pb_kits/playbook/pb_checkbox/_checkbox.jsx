@@ -5,7 +5,7 @@ import Body from '../pb_body/_body.jsx'
 import Icon from '../pb_icon/_icon.jsx'
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
 import classnames from 'classnames'
-import { globalProps } from '../utilities/globalProps.js'
+import { deprecatedProps, globalProps } from '../utilities/globalProps.js'
 
 type CheckboxProps = {
   aria?: object,
@@ -20,7 +20,13 @@ type CheckboxProps = {
   value: string,
   children: Node,
   onChange: (boolean) => void,
+  required?: boolean,
 }
+
+// Mark props as deprecated
+deprecatedProps('Checkbox', [
+  'required',
+])
 
 const Checkbox = (props: CheckboxProps) => {
   const {
@@ -36,6 +42,7 @@ const Checkbox = (props: CheckboxProps) => {
     value = '',
     children = null,
     onChange = () => {},
+    required = false,
   } = props
 
   const dataProps = buildDataProps(data)

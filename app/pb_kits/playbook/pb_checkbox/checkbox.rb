@@ -18,6 +18,7 @@ module Playbook
       prop :input_options, type: Playbook::Props::Hash,
                            default: {}
       prop :required, type: Playbook::Props::Boolean,
+                      deprecated: true,
                       default: false
       prop :form_spacing, type: Playbook::Props::Boolean,
                           default: false

@@ -44,3 +44,9 @@ export const globalProps = (props, defaultProps = {}) => {
   const allProps = { ...props, ...defaultProps }
   return spacingProps(allProps) + darkProps(allProps)
 }
+
+export const deprecatedProps = (kit, props = {}) => {
+  if (process.env.NODE_ENV === 'development') {
+    props.forEach((propName) => console.log(`${kit} Kit: The prop '${propName}' is deprecated and will be removed a future release!`))
+  }
+}
