@@ -1,3 +1,19 @@
-.pb_form_group {
 
+.pb_form_group {
+    display: inline-flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    & > [class^=pb_text_input_kit ] {
+      &:not(:last-child){
+        border-bottom-right-radius: 0;
+        border-top-right-radius: 0;
+        border-right-width: 0;
+      }
+      &:not(:first-child){
+        border-bottom-left-radius: 0;
+        border-top-left-radius: 0;
+        border-left-width: 0;
+      }
+    }
 }
