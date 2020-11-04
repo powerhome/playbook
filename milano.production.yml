@@ -7,8 +7,8 @@ deploy:
     - ./bin/deployer bash -lc "cluster=app-prod-hq environment=${ENVIRONMENT} tag=${REVISION} deploy_url=${DEPLOY_URL} bin/deploy"
 
 links:
-  logs: "https://logging-hq.powerapp.cloud/app/kibana#/discover?_g=(refreshInterval:(pause:!f,value:5000),time:(from:now-15m,mode:quick,to:now))&_a=(columns:!(_source),filters:!((meta:(alias:!n,disabled:!f,index:c42b1680-dbc1-11e9-a5cd-5d6d0e6547e8,key:kubernetes.namespace,negate:!f,params:(query:playbook-$ENVIRONMENT,type:phrase),type:phrase,value:playbook-$ENVIRONMENT),query:(match:(kubernetes.namespace:(query:playbook-$ENVIRONMENT,type:phrase))))),index:c42b1680-dbc1-11e9-a5cd-5d6d0e6547e8,interval:auto,query:(language:lucene,query:''),sort:!('@timestamp',desc))"
-  metrics: "https://grafana-hq.powerapp.cloud/d/hYTBQhQiz/pod-resource-usage?orgId=1&refresh=10s&var-namespace=playbook-$ENVIRONMENT&var-filter=.%2B&var-pod=All"
+  logs: "https://logging.prod.hq.powerapp.cloud/app/kibana#/discover?_g=(refreshInterval:(pause:!f,value:5000),time:(from:now-15m,mode:quick,to:now))&_a=(columns:!(log),filters:!(('$state':(store:appState),meta:(alias:!n,disabled:!f,index:ae758a80-1475-11eb-a138-277caf074f3e,key:kubernetes.namespace_name,negate:!f,params:(query:playbook-production,type:phrase),type:phrase,value:playbook-production),query:(match:(kubernetes.namespace_name:(query:playbook-production,type:phrase))))),index:ae758a80-1475-11eb-a138-277caf074f3e,interval:auto,query:(language:lucene,query:''),sort:!('@timestamp',desc))"
+  metrics: "https://metrics.prod.hq.powerapp.cloud/d/hYTBQhQiz/pod-resource-usage?orgId=1&refresh=10s&var-datasource=prometheus-app-prod-hq&var-namespace=playbook-production&var-filter=.%2B&var-pod=All"
 
 ci:
   require:
