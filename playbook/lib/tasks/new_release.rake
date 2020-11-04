@@ -175,7 +175,7 @@ task :new_release, [:var] => [:environment] do |_task, args|
     puts "\nNPM Alpha Package Published!"
     # `npm publish playbook-ui-#{npm_alpha}.tgz --tag alpha`
   else
-    puts "\nNPM Package Published!"
+    puts "\nNPM Package Published!... (not yet implemented)"
     # `npm publish playbook-ui-#{new_version}.tgz`
   end
 end
