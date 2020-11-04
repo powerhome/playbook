@@ -22,7 +22,17 @@ app.build(
     appImage = "quay.io/powerhome/playbook:${git.triggeringCommit(scmVars)}"
   }
 
-  app.dockerStage('Container Build') {
+  app.dockerStage('Build Doc App') {
+    buildDocApp(scmVars, appImage)
+  }
+
+  app.dockerStage('Test') {
+    testDocApp(appImage)
+  }
+}
+
+def buildDocApp(scmVars, appImage) {
+  dir("playbook") {
     try {
       github.setImageBuildState(scmVars, 'PENDING')
       sh "docker build -t ${appImage} ."
@@ -33,8 +43,10 @@ app.build(
       throw e
     }
   }
+}
 
-  app.dockerStage('Test') {
+def testDocApp(appImage) {
+  dir("playbook") {
     sh "docker run --tty --rm ${appImage} bin/test"
   }
 }
