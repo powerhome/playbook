@@ -1,8 +1,7 @@
 <%= content_tag(:label, aria: object.aria,
                         id: object.id,
                         data: object.data,
-                        class: object.classname,
-                        for: object.for_attribute ) do %>  
+                        class: object.classname) do %>  
   <% if object.children %>
     <%= capture(&object.children) %>
    <% else %>            
