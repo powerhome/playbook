@@ -1,9 +1,11 @@
 examples:
-  
+
   rails:
   - form_group_default: Default
-  
-  
+
+
   react:
   - form_group_default: Default
-  
+  - form_group_button: Button
+  - form_group_date_picker: Date Picker
+
