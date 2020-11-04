@@ -36,7 +36,7 @@ def confirmation_loop(version, npm_alpha, rake_arg)
     if rake_arg == "alpha"
       STDOUT.puts "\nNew alpha versions will be #{version} and #{npm_alpha} continue?  (y/n)"
     else
-      STDOUT.puts "\nNew version will be #{version}, continue?  (y/n)"
+      STDOUT.puts "\nNew version will be #{version}, continue?  Type 'n' to enter your version manually. (y/n)"
     end
 
     response = STDIN.gets.chomp.downcase
