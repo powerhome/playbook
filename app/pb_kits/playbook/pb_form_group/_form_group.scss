@@ -4,7 +4,7 @@
     flex-direction: row;
     align-items: center;
     justify-content: flex-start;
-    & > [class^=pb_text_input_kit ] {
+    & > [class*=pb_text_input_kit ] {
       &:not(:last-child){
         border-bottom-right-radius: 0;
         border-top-right-radius: 0;

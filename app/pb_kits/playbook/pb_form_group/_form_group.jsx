@@ -7,9 +7,10 @@ import { globalProps } from '../utilities/globalProps.js'
 
 type FormGroupProps = {
   aria?: object,
+  children?: Node,
   className?: string,
   data?: object,
-  id?: string,
+  id?: string
 }
 
 const FormGroup = (props: FormGroupProps) => {
@@ -18,6 +19,7 @@ const FormGroup = (props: FormGroupProps) => {
     className,
     data = {},
     id,
+    children,
   } = props
 
   const ariaProps = buildAriaProps(aria)
@@ -31,7 +33,7 @@ const FormGroup = (props: FormGroupProps) => {
         className={classes}
         id={id}
     >
-      {className}
+      {children}
     </div>
   )
 }
