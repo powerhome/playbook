@@ -3,5 +3,5 @@
     class: object.classname,
     data: object.data,
     id: object.id) do %>
-  <span>FORM GROUP CONTENT</span>
+    <%= capture(&object.children) %>
 <% end %>

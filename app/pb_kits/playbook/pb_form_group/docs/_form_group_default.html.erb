@@ -1,1 +1,7 @@
-<%= pb_rails("form_group") %>
+<div>
+  <%= pb_rails("form_group") do %>
+    <%= pb_rails("text_input", props: { label: "First Name", placeholder: "Enter First Name" }) %>
+    <%= pb_rails("text_input", props: { label: "Middle Intial", placeholder: "Enter Middle Initial" }) %>
+    <%= pb_rails("text_input", props: { label: "Last Name", placeholder: "Enter Last Name" }) %>
+  <% end %>
+</div>

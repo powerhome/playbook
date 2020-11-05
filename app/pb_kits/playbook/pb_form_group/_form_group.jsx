@@ -24,7 +24,7 @@ const FormGroup = (props: FormGroupProps) => {
 
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
-  const classes = classnames(buildCss('pb_form_group'), globalProps(props), className)
+  const classes = classnames(buildCss('pb_form_group_kit'), globalProps(props), className)
 
   return (
     <div
