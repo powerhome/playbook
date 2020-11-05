@@ -4,16 +4,16 @@
     flex-direction: row;
     align-items: center;
     justify-content: flex-start;
-    & > [class*=pb_text_input_kit ] {
-      &:not(:last-child){
+}
+    [class^=pb_text_input_kit] .text_input_wrapper input, [class^=pb_text_input_kit] .text_input_wrapper .text_input {
+      // &:not(:last-child){
         border-bottom-right-radius: 0;
         border-top-right-radius: 0;
         border-right-width: 0;
-      }
-      &:not(:first-child){
-        border-bottom-left-radius: 0;
-        border-top-left-radius: 0;
-        border-left-width: 0;
-      }
+      // }
+      // &:not(:first-child){
+        // border-bottom-left-radius: 0;
+        // border-top-left-radius: 0;
+        // border-left-width: 0;
+      // }
     }
-}
