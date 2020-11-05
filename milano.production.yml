@@ -1,6 +1,9 @@
 dependencies:
   override: []
 
+machine:
+  directory: playbook/
+
 deploy:
   max_commits: # Automatically deploy all commits, no matter how many.
   override:
