@@ -89,6 +89,22 @@
   & > [class^=pb_selectable_card_icon_kit]:not(:last-child) {
     [class^=pb_selectable_card_kit] input[type="checkbox"]:not(:checked) ~ label, [class^=pb_selectable_card_kit] input[type="radio"]:not(:checked)~ label {
       border-right-width: 0;
-      }
     }
+  }
+
+  & > [class^=pb_typeahead_kit]:not(:last-child) {
+    [class^=pb_text_input_kit] .text_input_wrapper input, [class^=pb_text_input_kit] .text_input_wrapper .text_input {
+      border-bottom-right-radius: 0;
+      border-top-right-radius: 0;
+      border-right-width: 0;
+      min-height: 26px;
+    }
+  }
+
+  & > [class^=pb_typeahead_kit]:not(:first-child) {
+    [class^=pb_text_input_kit] .text_input_wrapper input, [class^=pb_text_input_kit] .text_input_wrapper .text_input {
+      border-bottom-left-radius: 0;
+      border-top-left-radius: 0;
+    }
+  }
 }
