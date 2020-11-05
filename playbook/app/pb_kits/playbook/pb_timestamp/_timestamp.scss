@@ -1,0 +1,5 @@
+@import "timestamp-mixins";
+
+[class^=pb_timestamp_kit] {
+  @include pb_timestamp;
+}

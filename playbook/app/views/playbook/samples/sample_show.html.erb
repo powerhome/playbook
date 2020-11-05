@@ -1,0 +1,36 @@
+<div class="pb--kit-show sample-nav">
+  <div class="sample-actions">
+    <div class="items">
+      <a href="/samples">
+        <%= pb_rails("circle_icon_button", props: {variant: "primary", icon: "angle-left", dark: true}) %>
+      </a>
+    </div>
+  </div>
+  <div class="pb--kit-type-nav sample">
+    <%= pb_rails("nav", props: { orientation: "horizontal", classname: "code-controls"}) do %>
+      <%= pb_rails("nav/item", props: { text: "Rails", link: "#{sample_show_rails_path(@sample)}", active: action_name == 'sample_show_rails' }) %>
+      <%= pb_rails("nav/item", props: { text: "React", link: "#{sample_show_reacts_path(@sample)}", active: action_name == 'sample_show_react' }) %>
+    <% end %>
+  </div>
+  <div class="sample-actions-right">
+    <div class="items">
+      <%= pb_rails("circle_icon_button", props: { classname:"toggle-button", variant: "secondary", icon: "code", dark: true}) %>
+    </div>
+    <div class="items">
+      <%= pb_rails("circle_icon_button", props:{ classname: "expand", variant: "secondary", icon: "expand", dark: true}) %>
+    </div>
+  </div>
+</div>
+<%= pb_rails("circle_icon_button", props:{ classname: "compress", variant: "link", icon: "compress"}) %>
+
+<%= render_sample_ui(@sample, @type) %>
+
+<div class="pb--kit-show">
+    <div class="pb--doc light_ui">
+        <div class="pb--codeCopy close" >
+            <a class="pb--close-toggle copy-clipboard" href="#">Copy to Clipboard</a>
+            <div class="hiddenCodeforCopy"><%= get_raw_code(@sample, @type) %></div>
+            <pre class="highlight"><%= get_sample_code_content(@sample, @type) %></pre>
+        </div>
+    </div>
+</div>

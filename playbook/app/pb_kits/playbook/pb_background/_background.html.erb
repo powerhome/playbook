@@ -1,0 +1,20 @@
+<% if object.image_url.present? %>
+  <%= content_tag(object.tag,
+      aria: object.aria,
+      data: object.data,
+      id: object.id,
+      class: object.classname,
+      style: `background-image: url(#{object.image_url});`
+  ) do %>
+    <%= capture(&object.children) %>
+  <% end %>
+<% else %>
+  <%= content_tag(object.tag,
+      aria: object.aria,
+      data: object.data,
+      id: object.id,
+      class: object.classname
+  ) do %>
+    <%= capture(&object.children) %>
+  <% end %>
+<% end %>
