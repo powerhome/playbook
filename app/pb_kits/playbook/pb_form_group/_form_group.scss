@@ -47,18 +47,26 @@
       border-top-left-radius: 0;
     }
   }
+
+  & > [class^=pb_select]:not(:last-child) {
+    margin-bottom: 0px;
+    .pb_select_kit_wrapper select {
+      border-bottom-right-radius: 0;
+      border-top-right-radius: 0;
+      border-right-width: 0;
+    }
+  }
+
+  & > [class^=pb_select]:not(:first-child) {
+    margin-bottom: 0px;
+    .pb_select_kit_wrapper select {
+      border-bottom-left-radius: 0;
+      border-top-left-radius: 0;
+    }
+  }
+
+
+
+
+
 }
-
-// & > [class^=pb_text_input_kit](:first-child) {
-//   .text_input_wrapper input, [class^=pb_text_input_kit] .text_input_wrapper .text_input {
-// 0 radius right
-
-// & > [class^=pb_text_input_kit](:last-child) {
-//   .text_input_wrapper input, [class^=pb_text_input_kit] .text_input_wrapper .text_input {
-// no border left
-// 0 radius left
-
-// & > [class^=pb_text_input_kit]:not(:first-child):not(:last-child) {
-//   .text_input_wrapper input, [class^=pb_text_input_kit] .text_input_wrapper .text_input {
-// no border left
-// 0 radius

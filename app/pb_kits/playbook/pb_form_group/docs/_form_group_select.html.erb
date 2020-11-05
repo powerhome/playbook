@@ -1,0 +1,27 @@
+<div>
+  <%= pb_rails("form_group") do %>
+    <%= pb_rails("text_input", props: { label: "Zip Code", placeholder: "Enter Zip Code" }) %>
+    <%= pb_rails("select", props: {
+      label: "Territory",
+      blank_selection: "Select One",
+      options: [
+        { value: "PHL" },
+        { value: "NJ" },
+        { value: "MD" },
+        { value: "LI" },
+        { value: "BOS" },
+        { value: "ATL" },
+        { value: "CT" },
+        { value: "CHI" },
+        { value: "DET" },
+        { value: "HOU" },
+        { value: "AUS" },
+        { value: "DAL" },
+        { value: "TPA" },
+        { value: "DEN" },
+        { value: "CLT" },
+        { value: "NSH" },
+      ]
+    }) %>
+  <% end %>
+</div>
