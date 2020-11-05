@@ -12,25 +12,25 @@ const FormGroupSelectableCard = () => {
     <div>
       <FormGroup>
         <SelectableCard
-            checked={value === 'male'}
-            inputId="male1"
+            checked={value === 'cat'}
+            inputId="cat1"
             multi={false}
-            name="gender"
+            name="animal"
             onChange={handleSelect}
-            value="male"
+            value="cat"
         >
-          {'Male'}
+          {'Cat'}
         </SelectableCard>
 
         <SelectableCard
-            checked={value === 'female'}
-            inputId="female1"
+            checked={value === 'dog'}
+            inputId="dog1"
             multi={false}
-            name="gender"
+            name="animal"
             onChange={handleSelect}
-            value="female"
+            value="dog"
         >
-          {'Female'}
+          {'Dog'}
         </SelectableCard>
       </FormGroup>
     </div>

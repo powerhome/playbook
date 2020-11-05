@@ -65,11 +65,30 @@
     }
   }
 
-  & > [class^=pb_selectable_card_kit]:not(:last-child) {
-    input[type="checkbox"]:checked ~ label, [class^=pb_selectable_card_kit] input[type="radio"]:checked ~ label {
-      border-bottom-left-radius: 0;
-      border-top-left-radius: 0;
-    }
-  } 
+  & > [class^=pb_selectable_card_kit]:not(:last-child) label {
+    border-bottom-right-radius: 0;
+    border-top-right-radius: 0;
+    border-right-width: 0;
+  }
 
+  & > [class^=pb_selectable_card_kit]:not(:first-child) label {
+    border-bottom-left-radius: 0;
+    border-top-left-radius: 0;
+  }
+
+  & > [class^=pb_selectable_card_icon_kit]:not(:last-child) [class^=pb_selectable_card_kit] label {
+      border-bottom-right-radius: 0;
+      border-top-right-radius: 0;
+  }
+
+  & > [class^=pb_selectable_card_icon_kit]:not(:first-child) [class^=pb_selectable_card_kit] label {
+    border-bottom-left-radius: 0;
+    border-top-left-radius: 0;
+  }
+
+  & > [class^=pb_selectable_card_icon_kit]:not(:last-child) {
+    [class^=pb_selectable_card_kit] input[type="checkbox"]:not(:checked) ~ label, [class^=pb_selectable_card_kit] input[type="radio"]:not(:checked)~ label {
+      border-right-width: 0;
+      }
+    }
 }
