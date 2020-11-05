@@ -1,9 +1,3 @@
-samples:
-  - dashboards
-  - registration
-  - filter_table
-  - collection_detail
-
 kits:
   - avatar
   - avatar_action_button
