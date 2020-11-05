@@ -1,19 +1,64 @@
-
-.pb_form_group_kit {
-    display: inline-flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: flex-start;
-    & > [class*=pb_text_input_kit ] {
-      &:not(:last-child){
-        border-bottom-right-radius: 0;
-        border-top-right-radius: 0;
-        border-right-width: 0;
-      }
-      &:not(:first-child){
-        border-bottom-left-radius: 0;
-        border-top-left-radius: 0;
-        border-left-width: 0;
-      }
+[class^=pb_form_group_kit] {
+  display: inline-flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  & > [class^=pb_text_input_kit]:not(:last-child) {
+    .text_input_wrapper input, [class^=pb_text_input_kit] .text_input_wrapper .text_input {
+      border-bottom-right-radius: 0;
+      border-top-right-radius: 0;
+      border-right-width: 0;
     }
+  }
+
+  & > [class^=pb_text_input_kit]:not(:first-child) {
+    .text_input_wrapper input, [class^=pb_text_input_kit] .text_input_wrapper .text_input {
+      border-bottom-left-radius: 0;
+      border-top-left-radius: 0;
+    }
+  }
+
+  & > [class^=pb_button_kit]:not(:last-child) {
+    border-bottom-right-radius: 0;
+    border-top-right-radius: 0;
+    min-height: 46px;
+    margin-top: 10px;
+  }
+
+  & > [class^=pb_button_kit]:not(:first-child) {
+    border-bottom-left-radius: 0;
+    border-top-left-radius: 0;
+    border-left-width: 0;
+    min-height: 46px;
+    margin-top: 10px;
+  }
+
+  & > [class^=pb_date_picker_kit]:not(:last-child) {
+    .text_input_wrapper input, [class^=pb_text_input_kit] .text_input_wrapper .flatpickr-wrapper {
+      border-bottom-right-radius: 0;
+      border-top-right-radius: 0;
+      border-right-width: 0;
+    }
+  }
+
+  & > [class^=pb_date_picker_kit]:not(:first-child) {
+    .text_input_wrapper input, [class^=pb_text_input_kit] .text_input_wrapper .flatpickr-wrapper {
+      border-bottom-left-radius: 0;
+      border-top-left-radius: 0;
+    }
+  }
 }
+
+// & > [class^=pb_text_input_kit](:first-child) {
+//   .text_input_wrapper input, [class^=pb_text_input_kit] .text_input_wrapper .text_input {
+// 0 radius right
+
+// & > [class^=pb_text_input_kit](:last-child) {
+//   .text_input_wrapper input, [class^=pb_text_input_kit] .text_input_wrapper .text_input {
+// no border left
+// 0 radius left
+
+// & > [class^=pb_text_input_kit]:not(:first-child):not(:last-child) {
+//   .text_input_wrapper input, [class^=pb_text_input_kit] .text_input_wrapper .text_input {
+// no border left
+// 0 radius
