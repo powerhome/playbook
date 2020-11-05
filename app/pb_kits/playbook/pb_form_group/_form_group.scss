@@ -65,8 +65,11 @@
     }
   }
 
-
-
-
+  & > [class^=pb_selectable_card_kit]:not(:last-child) {
+    input[type="checkbox"]:checked ~ label, [class^=pb_selectable_card_kit] input[type="radio"]:checked ~ label {
+      border-bottom-left-radius: 0;
+      border-top-left-radius: 0;
+    }
+  } 
 
 }
