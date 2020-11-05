@@ -1,0 +1,5 @@
+Description:
+    Create a new Full Page Sample
+
+Example:
+    rails g sample "dashboards"
