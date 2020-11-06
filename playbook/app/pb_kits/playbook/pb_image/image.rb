@@ -16,13 +16,17 @@ module Playbook
       prop :url
 
       def classname
-        generate_classname("pb_image_kit lazyload blur_up", size) + rounded_class
+        generate_classname("pb_image_kit lazyload blur_up", size_class) + rounded_class
       end
 
     private
 
       def rounded_class
         rounded ? " rounded" : ""
+      end
+
+      def size_class
+        size == "none" ? nil : size
       end
     end
   end
