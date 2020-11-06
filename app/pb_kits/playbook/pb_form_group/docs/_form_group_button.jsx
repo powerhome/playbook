@@ -20,7 +20,6 @@ const FormGroupButton = (props) => (
     <div>
       <FormGroup>
         <TextInput
-            label=""
             placeholder="Enter Text"
         />
         <Button
