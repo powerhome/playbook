@@ -1,0 +1,12 @@
+examples:
+
+  rails:
+  - selectable_list_checkbox: Default
+  - selectable_list_radio: Radio variant
+
+
+  react:
+  - selectable_list_checkbox: Default
+  - selectable_list_radio: Radio variant
+
+
