@@ -3,18 +3,34 @@ import { Button, FormGroup, TextInput } from '../../'
 
 const FormGroupButton = (props) => (
   <div>
-    <FormGroup>
-      <TextInput
-          label="Text"
-          placeholder="Enter Text"
-      />
-      <Button
-          onClick={() => alert('Button Clicked!')}
-          text="Submit"
-          variant="secondary"
-          {...props}
-      />
-    </FormGroup>
+    <div>
+      <FormGroup>
+        <TextInput
+            label="Text"
+            placeholder="Enter Text"
+        />
+        <Button
+            onClick={() => alert('Button Clicked!')}
+            text="Submit"
+            variant="secondary"
+            {...props}
+        />
+      </FormGroup>
+    </div>
+    <div>
+      <FormGroup>
+        <TextInput
+            label=""
+            placeholder="Enter Text"
+        />
+        <Button
+            onClick={() => alert('Button Clicked!')}
+            text="Submit"
+            variant="secondary"
+            {...props}
+        />
+      </FormGroup>
+    </div>
   </div>
 )
 

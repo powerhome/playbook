@@ -3,6 +3,13 @@
   flex-direction: row;
   align-items: center;
   justify-content: flex-start;
+
+
+  // if text-input-wrapper has sibling, then set text-input-wrapper margin-bottom to 0
+  & > [class^=pb_text_input_kit] .pb_text_input_kit_label + & > [class^=pb_text_input_kit] .text_input_wrapper {
+    margin-bottom: 0 !important;
+  }
+
   & > [class^=pb_text_input_kit]:not(:last-child) {
     .text_input_wrapper input, [class^=pb_text_input_kit] .text_input_wrapper .text_input {
       border-bottom-right-radius: 0;
@@ -21,7 +28,7 @@
   & > [class^=pb_button_kit]:not(:last-child) {
     border-bottom-right-radius: 0;
     border-top-right-radius: 0;
-    min-height: 46px;
+    min-height: 45px;
     margin-top: 10px;
   }
 
@@ -29,7 +36,7 @@
     border-bottom-left-radius: 0;
     border-top-left-radius: 0;
     border-left-width: 0;
-    min-height: 46px;
+    min-height: 45px;
     margin-top: 10px;
   }
 
