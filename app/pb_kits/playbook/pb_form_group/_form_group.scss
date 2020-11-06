@@ -4,7 +4,15 @@
   align-items: flex-end;
   justify-content: flex-start;
 
-  & > [class^=pb_text_input_kit] .text_input_wrapper {
+  & [class^=pb_text_input_kit] .text_input_wrapper {
+    margin-bottom: 0;
+  }
+
+  & [class^=pb_date_picker_kit] .input_wrapper {
+    margin-bottom: 0;
+  }
+
+  & [class^=pb_select] {
     margin-bottom: 0;
   }
 
