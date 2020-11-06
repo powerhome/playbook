@@ -24,7 +24,7 @@ const Image = (props: ImageProps) => {
     data = {},
     id,
     rounded = false,
-    size = 'md',
+    size = '',
     url = '',
   } = props
 

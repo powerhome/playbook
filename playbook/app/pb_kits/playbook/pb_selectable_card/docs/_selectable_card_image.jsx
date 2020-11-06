@@ -31,6 +31,7 @@ class SelectableCardImage extends React.Component {
         >
           <Image
               rounded
+              size="xl"
               url="https://unsplash.it/500/400/?image=634"
           />
 
