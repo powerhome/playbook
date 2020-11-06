@@ -28,6 +28,7 @@ kits:
     - selectable_card
     - selectable_card_icon
     - selectable_icon
+    - selectable_list
     - text_input
     - textarea
     - typeahead
