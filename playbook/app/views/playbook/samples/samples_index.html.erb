@@ -1,0 +1,39 @@
+<div class="samples_index">
+  <%= pb_rails("background", props: { background_color: "light", padding: "xl" }) do %>
+    <%= pb_rails("flex", props: { classname: "header-text", orientation: "column", horizontal: "center"}) do %>
+        <div>
+          <%= pb_rails("title", props: { margin_bottom: "lg", text: "Samples You'll Actually Use", tag: "h1", size: 1 }) %>
+          <%= pb_rails("body", props: {
+            text: "We created a collection of professionally designed, pre-built, fully responsive samples you can drop 
+            into your projects effortlessly.  These samples showcase Playbook Design System's versatility and the power 
+            of its kits.  Use these samples for inspiration, or as the foundation for that great app idea."
+          }) %>
+        </div>
+    <% end %>
+  <% end %>
+
+
+  <%= pb_rails("background", props: { background_color: "white", padding: "xl" }) do %>
+    <%= pb_rails("flex", props: { classname: "full_page_samples_flex_wrapper", horizontal: "center", wrap: true }) do %>
+
+        <%= pb_rails("flex/flex_item", props: { classname: "preview" }) do %>
+          <%= pb_rails("title", props: { margin_bottom: "sm", text: "Full Page Samples", tag: "h4", size: 4 }) %>
+          <%= image_tag("sample_screenshot.svg", class: "sample_screenshot") %>
+          <%= pb_rails("icon_value", props: {
+            icon: "palette",
+            margin_top: "xs",
+            text: "#{@sample_yaml["samples"].size} Designs"
+          }) %>
+        <% end %>
+        
+        <%= pb_rails("flex/flex_item", props: { classname: "list" }) do %>
+          <%= pb_rails("nav", props: {}) do %>
+            <% @sample_yaml["samples"].each do |link| %>
+              <%= pb_rails("nav/item", props: { icon_right: "angle-right", text: link.titleize, link: "/samples/#{link}" }) %>
+            <% end %>
+          <% end %>
+        <% end %>
+
+    <% end %>
+  <% end %>
+</div>

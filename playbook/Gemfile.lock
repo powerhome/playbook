@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    playbook_ui (7.5.1)
+    playbook_ui (7.6.0)
       actionpack (>= 5.1.6, < 6.0)
       actionview (>= 5.1.6, < 7.0)
       activesupport (>= 5.1.6, < 7.0)
@@ -97,7 +97,7 @@ GEM
     multipart-post (2.1.1)
     nokogiri (1.10.10)
       mini_portile2 (~> 2.4.0)
-    octokit (4.18.0)
+    octokit (4.19.0)
       faraday (>= 0.9)
       sawyer (~> 0.8.0, >= 0.5.3)
     overcommit (0.49.0)

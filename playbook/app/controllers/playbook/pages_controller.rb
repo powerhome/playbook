@@ -15,11 +15,8 @@ module Playbook
       @playbook = true
     end
 
-    def enable_dark_mode
-      cookies[:dark_mode] = {
-        value: "true",
-      }
-      redirect_back(fallback_location: root_path)
+    def delete_dark_mode_cookie
+      cookies.delete :dark_mode
     end
 
     def disable_dark_mode
@@ -29,27 +26,12 @@ module Playbook
       redirect_back(fallback_location: root_path)
     end
 
-    def delete_dark_mode_cookie
-      cookies.delete :dark_mode
+    def enable_dark_mode
+      cookies[:dark_mode] = {
+        value: "true",
+      }
+      redirect_back(fallback_location: root_path)
     end
-
-    def home; end
-
-    def utilities
-      render layout: "layouts/playbook/kits"
-    end
-
-    def tokens
-      render layout: "layouts/playbook/kits"
-    end
-
-    def kits
-      params[:type] ||= "react"
-      @type = params[:type]
-      render layout: "layouts/playbook/kits"
-    end
-
-    def principles; end
 
     def getting_started; end
 
@@ -57,12 +39,12 @@ module Playbook
       render layout: "layouts/playbook/grid"
     end
 
-    def kit_show_rails
-      render "playbook/pages/kit_show", layout: "layouts/playbook/kits"
-    end
+    def home; end
 
-    def kit_show_react
-      render template: "playbook/pages/kit_show", layout: "layouts/playbook/kits"
+    def kits
+      params[:type] ||= "react"
+      @type = params[:type]
+      render layout: "layouts/playbook/kits"
     end
 
     def kit_category_show_rails
@@ -73,6 +55,24 @@ module Playbook
 
     def kit_category_show_react
       render template: "playbook/pages/kit_category_show", layout: "layouts/playbook/kits"
+    end
+
+    def kit_show_rails
+      render "playbook/pages/kit_show", layout: "layouts/playbook/kits"
+    end
+
+    def kit_show_react
+      render template: "playbook/pages/kit_show", layout: "layouts/playbook/kits"
+    end
+
+    def principles; end
+
+    def tokens
+      render layout: "layouts/playbook/kits"
+    end
+
+    def utilities
+      render layout: "layouts/playbook/kits"
     end
 
   private

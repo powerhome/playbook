@@ -4,7 +4,7 @@
                         class: object.classname) do %>  
   <% if object.children %>
     <%= capture(&object.children) %>
-   <% else %>             
+   <% else %>            
     <%= object.input %>
   <% end %>
     <span class="pb_checkbox_checkmark">
