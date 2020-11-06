@@ -1,13 +1,11 @@
 [class^=pb_form_group_kit] {
   display: inline-flex;
   flex-direction: row;
-  align-items: center;
+  align-items: flex-end;
   justify-content: flex-start;
 
-
-  // if text-input-wrapper has sibling, then set text-input-wrapper margin-bottom to 0
-  & > [class^=pb_text_input_kit] .pb_text_input_kit_label + & > [class^=pb_text_input_kit] .text_input_wrapper {
-    margin-bottom: 0 !important;
+  & > [class^=pb_text_input_kit] .text_input_wrapper {
+    margin-bottom: 0;
   }
 
   & > [class^=pb_text_input_kit]:not(:last-child) {
@@ -29,7 +27,6 @@
     border-bottom-right-radius: 0;
     border-top-right-radius: 0;
     min-height: 45px;
-    margin-top: 10px;
   }
 
   & > [class^=pb_button_kit]:not(:first-child) {
@@ -37,7 +34,6 @@
     border-top-left-radius: 0;
     border-left-width: 0;
     min-height: 45px;
-    margin-top: 10px;
   }
 
   & > [class^=pb_date_picker_kit]:not(:last-child) {
