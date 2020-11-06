@@ -29,10 +29,6 @@ const RoundedImage = () => {
           size="xl"
           url="https://unsplash.it/500/400/?image=634"
       />
-      <Image
-          rounded
-          url="https://unsplash.it/500/400/?image=634"
-      />
     </>
   )
 }
