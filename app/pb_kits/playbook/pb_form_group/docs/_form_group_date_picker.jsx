@@ -5,8 +5,8 @@ const FormGroupDatePicker = () => (
   <div>
     <FormGroup>
       <TextInput
-          label="hello"
-          placeholder="heelo world"
+          label="Text"
+          placeholder="Enter Text"
       />
       <DatePicker
           pickerId="date-picker-default"

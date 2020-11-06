@@ -5,16 +5,16 @@ const FormGroupDefault = () => (
   <div>
     <FormGroup>
       <TextInput
-          label="hello"
-          placeholder="heelo world"
+          label="First Name"
+          placeholder="Enter First Name"
       />
       <TextInput
-          label="hello1"
-          placeholder="heelo world1"
+          label="Middle Intial"
+          placeholder="Enter Middle Initial"
       />
       <TextInput
-          label="hello2"
-          placeholder="heelo world2"
+          label="Last Name"
+          placeholder="Enter Last Name"
       />
     </FormGroup>
   </div>

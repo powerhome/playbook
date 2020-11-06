@@ -1,0 +1,14 @@
+<div>
+  <%= pb_rails("form_group") do %>
+    <%= pb_rails("typeahead", props: {
+      label: "Products",
+      options: [
+        { label: 'Windows', value: 'windows' },
+        { label: 'Roof', value: 'roof' },
+        { label: 'Siding', value: 'siding' },
+        { label: 'Doors', value: 'doors' },
+      ]
+    }) %>
+    <%= pb_rails("button", props: { text: "Choose", variant: "secondary" }) %>
+  <% end %>
+</div>

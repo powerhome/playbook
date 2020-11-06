@@ -5,12 +5,12 @@ const FormGroupButton = (props) => (
   <div>
     <FormGroup>
       <TextInput
-          label="hello"
-          placeholder="heelo world"
+          label="Text"
+          placeholder="Enter Text"
       />
       <Button
-          onClick={() => alert('button clicked!')}
-          text="Button Secondary"
+          onClick={() => alert('Button Clicked!')}
+          text="Submit"
           variant="secondary"
           {...props}
       />
