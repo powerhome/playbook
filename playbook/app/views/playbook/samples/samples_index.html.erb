@@ -29,7 +29,11 @@
         <%= pb_rails("flex/flex_item", props: { classname: "list" }) do %>
           <%= pb_rails("nav", props: {}) do %>
             <% @sample_yaml["samples"].each do |link| %>
-              <%= pb_rails("nav/item", props: { icon_right: "angle-right", text: link.titleize, link: "/samples/#{link}" }) %>
+              <%= pb_rails("nav/item", props: { 
+                icon_right: "angle-right",
+                text: link == "crm_client_list" ? "CRM Client List" : link.titleize,
+                link: "/samples/#{link}" 
+              }) %>
             <% end %>
           <% end %>
         <% end %>

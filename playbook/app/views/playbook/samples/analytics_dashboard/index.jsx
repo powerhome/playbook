@@ -48,7 +48,7 @@ const chartData2 = [
   },
 ]
 
-const Dashboards = () => (
+const AnalyticsDashboard = () => (
   <div>
     <div className="pb_layout_kit_size_xl_left_light full layout_left_collapse_md">
       <div className="layout_sidebar">
@@ -127,4 +127,4 @@ const Dashboards = () => (
   </div>
 )
 
-export default Dashboards
+export default AnalyticsDashboard
