@@ -6,7 +6,7 @@
 yarn add playbook-ui
 ```
 
-#### Ensure your project's versions of React and ReactDOM match Playbook's versions
+#### Match your project's versions of React and ReactDOM with Playbook's versions
 
 ```json
 "react": "16.8.6",
