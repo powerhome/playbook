@@ -5,7 +5,7 @@ const BackgroundWhite = () => (
   <div>
     <Background
         backgroundColor="white"
-        className="blah"
+        padding="xl"
     />
   </div>
 

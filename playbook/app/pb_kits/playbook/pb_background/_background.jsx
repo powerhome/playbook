@@ -39,24 +39,28 @@ const Background = (props: BackgroundProps) => {
   }
 
   return (
-    <Tag
-        {...ariaProps}
-        {...dataProps}
-        id={id}
-    >
+    <>
       <If condition={imageUrl}>
-        <div
+        <Tag
             className={classes + 'lazyload blur_up'}
             style={backgroundStyle}
+            {...ariaProps}
+            {...dataProps}
+            id={id}
         >
           { children }
-        </div>
+        </Tag>
         <Else />
-        <div className={classes}>
+        <Tag
+            className={classes}
+            {...ariaProps}
+            {...dataProps}
+            id={id}
+        >
           { children }
-        </div>
+        </Tag>
       </If>
-    </Tag>
+    </>
   )
 }
 

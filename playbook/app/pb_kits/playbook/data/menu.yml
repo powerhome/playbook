@@ -1,9 +1,3 @@
-samples:
-  - dashboards
-  - registration
-  - filter_table
-  - collection_detail
-
 kits:
   - avatar
   - avatar_action_button
@@ -34,6 +28,7 @@ kits:
     - selectable_card
     - selectable_card_icon
     - selectable_icon
+    - selectable_list
     - text_input
     - textarea
     - typeahead
