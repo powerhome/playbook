@@ -48,6 +48,6 @@ export const globalProps = (props, defaultProps = {}) => {
 export const deprecatedProps = (kit, props = {}) => {
   if (process.env.NODE_ENV === 'development') {
     /* eslint no-console: ["error", { allow: ["warn", "error"] }] */
-    props.forEach((propName) => console.warn(`${kit} Kit: The prop '${propName}' is deprecated and will be removed a future release!`))
+    props.forEach((propName) => console.warn(`${kit} Kit: The prop '${propName}' is deprecated and will be removed in a future release!`))
   }
 }
