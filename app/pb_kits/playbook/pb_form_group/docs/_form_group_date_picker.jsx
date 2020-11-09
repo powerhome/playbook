@@ -5,10 +5,11 @@ const FormGroupDatePicker = () => (
   <div>
     <FormGroup>
       <TextInput
-          label="Text"
-          placeholder="Enter Text"
+          label="Event"
+          placeholder="Event Name"
       />
       <DatePicker
+          label="event date"
           pickerId="date-picker-default"
       />
     </FormGroup>

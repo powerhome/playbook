@@ -3,34 +3,26 @@ import { FormGroup, Select, TextInput } from '../../'
 
 const FormGroupSelect = () => {
   const options = [
-    { value: 'PHL' },
-    { value: 'NJ' },
-    { value: 'MD' },
-    { value: 'LI' },
-    { value: 'BOS' },
-    { value: 'ATL' },
-    { value: 'CT' },
-    { value: 'CHI' },
-    { value: 'DET' },
-    { value: 'HOU' },
-    { value: 'AUS' },
-    { value: 'DAL' },
-    { value: 'TPA' },
-    { value: 'DEN' },
-    { value: 'CLT' },
-    { value: 'NSH' },
+    { value: 'Country' },
+    { value: 'Pop' },
+    { value: 'Rock' },
+    { value: 'Hip-Hop/Rap' },
+    { value: 'Classical' },
+    { value: 'Gospel' },
+    { value: 'Alternative' },
+    { value: 'Indie' },
+    { value: 'Other' },
   ]
 
   return (
     <div>
       <FormGroup>
         <TextInput
-            label="Zip Code"
-            placeholder="Enter Zip Code"
+            label="Artist"
+            placeholder="Enter Artist Name"
         />
         <Select
-            blankSelection="Select One"
-            label="Territory"
+            blankSelection="Select Genre"
             options={options}
         />
       </FormGroup>

@@ -18,7 +18,7 @@ const FormGroupTypeahead = (props) => {
         />
         <Button
             onClick={() => alert('Button Clicked!')}
-            text="Choose"
+            text="Add"
             variant="secondary"
             {...props}
         />
