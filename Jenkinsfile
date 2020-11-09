@@ -1,6 +1,6 @@
 #!/usr/bin/env groovy
 
-library identifier: 'ci-kubed@v4.0.0', retriever: modernSCM([
+library identifier: 'ci-kubed@v4.0.1', retriever: modernSCM([
   $class: 'GitSCMSource',
   remote: 'git@github.com:powerhome/ci-kubed.git',
   credentialsId: 'powerci-github-ssh-key'
@@ -10,8 +10,8 @@ app.build(
   resources: [
     requestCpu: '1',
     limitCpu: '2',
-    requestMemory: '2Gi',
-    limitMemory: '4Gi',
+    requestMemory: '5Gi',
+    limitMemory: '8Gi',
   ]
 ) {
   def scmVars
@@ -22,7 +22,17 @@ app.build(
     appImage = "quay.io/powerhome/playbook:${git.triggeringCommit(scmVars)}"
   }
 
-  app.dockerStage('Container Build') {
+  app.dockerStage('Build Doc App') {
+    buildDocApp(scmVars, appImage)
+  }
+
+  app.dockerStage('Test') {
+    testDocApp(appImage)
+  }
+}
+
+def buildDocApp(scmVars, appImage) {
+  dir("playbook") {
     try {
       github.setImageBuildState(scmVars, 'PENDING')
       sh "docker build -t ${appImage} ."
@@ -33,8 +43,10 @@ app.build(
       throw e
     }
   }
+}
 
-  app.dockerStage('Test') {
+def testDocApp(appImage) {
+  dir("playbook") {
     sh "docker run --tty --rm ${appImage} bin/test"
   }
 }
