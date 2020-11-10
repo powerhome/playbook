@@ -15,12 +15,11 @@ module Playbook
                   default: false
       prop :classnames, type: Playbook::Props::String,
                         default: nil
-      prop :tag, type: Playbook::Props::Enum,
-                 values: %w[body caption],
-                 default: "body"
-
+      prop :align, type: Playbook::Props::Enum,
+                   values: %w[left center right],
+                   default: "left"
       def classname
-        generate_classname("pb_time_stacked_kit", dark_class, classnames)
+        generate_classname("pb_time_stacked_kit", dark_class)
       end
 
       def day
@@ -43,10 +42,6 @@ module Playbook
 
       def format_timezone
         pb_date_time.to_timezone
-      end
-
-      def tag_classnames
-        "pb_time_stacked_kit_#{tag}"
       end
 
     private
