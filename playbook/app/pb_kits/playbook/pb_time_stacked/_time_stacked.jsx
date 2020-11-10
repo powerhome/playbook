@@ -15,7 +15,6 @@ type TimeStackedProps = {
   date: string,
   id?: string,
   align?: "left" | "center" | "right",
-  tag?: "body" | "caption",
 }
 
 const TimeStacked = (props: TimeStackedProps) => {
