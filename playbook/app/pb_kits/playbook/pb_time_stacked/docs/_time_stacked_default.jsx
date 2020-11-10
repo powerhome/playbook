@@ -7,6 +7,14 @@ const TimeStackedDefault = () => {
       <TimeStacked
           date={new Date()}
       />
+      <TimeStacked
+          align="center"
+          date={new Date()}
+      />
+      <TimeStacked
+          align="right"
+          date={new Date()}
+      />
     </div>
   )
 }

@@ -8,11 +8,6 @@ import { buildCss } from '../utilities/props'
 import { Body, Caption } from '../'
 import { globalProps } from '../utilities/globalProps.js'
 
-const Components = {
-  body: Body,
-  caption: Caption,
-}
-
 type TimeStackedProps = {
   className?: string | array<string>,
   dark?: boolean,
@@ -24,30 +19,27 @@ type TimeStackedProps = {
 }
 
 const TimeStacked = (props: TimeStackedProps) => {
-  const { className, dark = false, date, tag = 'body' } = props
+  const { align, className, dark, date } = props
   const classes = classnames(
-    buildCss('pb_time_stacked_kit', {
-      dark,
-    }),
+    buildCss('pb_time_stacked_kit', align),
     globalProps(props),
-    className
+    className,
   )
-
-  const tagClasses = classnames(buildCss('pb_time_stacked_kit', tag))
 
   const dateTimestamp = new DateTime({ value: date })
 
-  const Tag = Components[tag]
-
   return (
     <div className={classes}>
-      <div className="pb_time_stacked_day_month">
-        <Tag
-            className={tagClasses}
+      <div
+          align={align}
+          className="pb_time_stacked_day_month"
+          dark={dark}
+      >
+        <Body
             color="light"
             text={dateTimestamp.toTimeWithMeridian()}
         />
-        <Tag
+        <Caption
             color="light"
             text={dateTimestamp.toTimezone()}
         />
