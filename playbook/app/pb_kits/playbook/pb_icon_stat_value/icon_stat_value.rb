@@ -11,7 +11,7 @@ module Playbook
       prop :icon, required: true
 
       prop :size, type: Playbook::Props::Enum,
-                  values: %w[sm lg],
+                  values: %w[sm md lg],
                   default: "sm"
       prop :variant, type: Playbook::Props::Enum,
                      values: %w[default royal blue purple teal red yellow green],
@@ -20,9 +20,15 @@ module Playbook
       prop :orientation, type: Playbook::Props::Enum,
                          values: %w[vertical horizontal],
                          default: "horizontal"
-      prop :unit
-      prop :text
-      prop :value
+
+      prop :unit, type: Playbook::Props::String,
+                  default: ""
+
+      prop :text, type: Playbook::Props::String,
+                  default: ""
+
+      prop :value, type: Playbook::Props::Numeric,
+                   required: true
 
 
       def classname
@@ -30,11 +36,17 @@ module Playbook
       end
 
       def value_unit
-        value.to_s + unit
+        [value.to_s, unit].join('')
       end
 
       def title_size
-        size == "lg" ? 1 : 3
+        if size == "lg"
+          1
+        elsif size == "md"
+          2
+        else
+          3
+        end
       end
     end
   end
