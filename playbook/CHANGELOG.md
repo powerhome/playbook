@@ -59,12 +59,6 @@
 
 - Revert “Timestamp Kit Formatted Date Additions” [#1150](https://github.com/powerhome/playbook/pull/1150)  [#1180](https://github.com/powerhome/playbook/pull/1180) 
 
-## 7.4.1
-
-**Fixed Bugs:**
-
-- Revert “Timestamp Kit Formatted Date Additions” [#1150](https://github.com/powerhome/playbook/pull/1150)  [#1180](https://github.com/powerhome/playbook/pull/1180) 
-
 ## [7.4.0](https://github.com/powerhome/playbook/tree/7.4.0)
 
 [Full Changelog](https://github.com/powerhome/playbook/compare/7.4.0...HEAD)
