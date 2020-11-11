@@ -8,7 +8,8 @@ const TrendingRepositories = () => (
     <div className="nav-bar-header">
       <Background
           backgroundColor="white"
-          padding="sm"
+          paddingBottom="none"
+          paddingTop="md"
       >
         <Flex
             paddingLeft="xl"

@@ -1,6 +1,6 @@
 <div class="nav-bar-header">
-  <%= pb_rails("background", props: { background_color: "white", padding: "sm" }) do %>
-    <%= pb_rails("flex", props: {classname: "flex-container", spacing: "between", padding_left:"md", padding_right:"md" }) do %>
+  <%= pb_rails("background", props: { background_color: "white", padding_bottom: "none", padding_top: "md" }) do %>
+    <%= pb_rails("flex", props: {classname: "flex-container", spacing: "between", padding_left:"md", padding_right:"md", wrap: true }) do %>
       <%= pb_rails("nav", props: { margin_left: "sm" ,orientation: "horizontal",}) do %>
         <%= pb_rails("nav/item", props: { text: "Explore", link: "#" }) %>
         <%= pb_rails("nav/item", props: { text: "Topics", link: "#" }) %>
