@@ -67,7 +67,6 @@
 }
 .maskContainer::after {
     content: " ";
-    background-image: linear-gradient(to right, rgba($card_light,.3) , rgba($card_light,1));
     height: 48px;
     padding-left: $space_xl;
     margin-left: -$space_lg;
@@ -75,7 +74,6 @@
 }
 .maskContainer::before {
     content: " ";
-    background-image: linear-gradient(to left, rgba($card_light,.3) , rgba($card_light,1));
     height: 48px;
     padding-right: $space_sm;
     margin-right: -$space_xs;
