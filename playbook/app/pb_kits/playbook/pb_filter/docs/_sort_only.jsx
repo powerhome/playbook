@@ -1,8 +1,9 @@
 import React from 'react'
 import { Filter } from '../../'
 
-const SortOnly = () => (
+const SortOnly = (props) => (
   <Filter
+      {...props}
       background={false}
       sortOptions={{
         popularity: 'Popularity',

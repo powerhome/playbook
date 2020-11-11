@@ -1,7 +1,7 @@
 import React from 'react'
 import { Button, Filter, Flex, Select, TextInput } from '../../'
 
-const FilterNoBackground = () => {
+const FilterNoBackground = (props) => {
   const options = [
     { value: 'USA' },
     { value: 'Canada' },
@@ -11,6 +11,7 @@ const FilterNoBackground = () => {
   ]
   return (
     <Filter
+        {...props}
         background={false}
         filters={{
           'Full Name': 'John Wick',
