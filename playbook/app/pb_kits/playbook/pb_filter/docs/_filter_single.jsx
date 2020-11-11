@@ -15,6 +15,7 @@ const FilterSingle = (props) => {
         filters={{
           'Full Name': 'John Wick',
         }}
+        results={546}
         sortOptions={{
           popularity: 'Popularity',
           // eslint-disable-next-line
@@ -22,7 +23,7 @@ const FilterSingle = (props) => {
           // eslint-disable-next-line
           manager_name: 'Manager\'s Name',
         }}
-        sortValue={[{ name: 'popularity', dir: 'asc' }]}
+        sortValue={[{ name: 'popularity', dir: 'desc' }]}
     >
       <TextInput
           label="Full Name"

@@ -12,12 +12,7 @@ const FilterOnly = (props) => {
   return (
     <Filter
         {...props}
-        background={false}
-        filters={{
-          'Full Name': 'John Wick',
-          'Territory': 'San Francisco',
-        }}
-        results={256}
+        filters={{ 'Full Name': 'John Wick' }}
     >
       <TextInput
           label="Full Name"
