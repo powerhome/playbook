@@ -42,7 +42,7 @@ export type SortMenuProps = {
   options: SortOptions,
   onChange: SortingChangeCallback,
 }
-const SortMenu = ({ options, value, onChange }: SortMenuProps) => {
+const SortMenu = ({ dark, options, value, onChange }: SortMenuProps) => {
   const [hide, updateHide] = useState(true)
   const toggle = () => updateHide(!hide)
   const handleChange = (value: SortValue) => {
@@ -52,6 +52,7 @@ const SortMenu = ({ options, value, onChange }: SortMenuProps) => {
 
   const sortButton = (
     <Button
+        dark={dark}
         id="sort-button"
         onClick={toggle}
         variant="link"

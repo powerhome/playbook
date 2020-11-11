@@ -14,7 +14,6 @@ const FilterSingle = (props) => {
         {...props}
         filters={{
           'Full Name': 'John Wick',
-          'Territory': 'San Francisco',
         }}
         sortOptions={{
           popularity: 'Popularity',

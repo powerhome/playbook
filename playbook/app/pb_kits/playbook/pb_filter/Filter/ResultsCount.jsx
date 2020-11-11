@@ -9,10 +9,11 @@ type ResultsCountProps = {
   results?: ?number,
   title?: boolean,
 }
-const ResultsCount = ({ results, title }: ResultsCountProps) => (
+const ResultsCount = ({ dark, results, title }: ResultsCountProps) => (
   <Choose>
     <When condition={results && title}>
       <TitleCount
+          dark={dark}
           align="center"
           count={results}
           title={`${resultsText(results)}:`}
@@ -20,6 +21,7 @@ const ResultsCount = ({ results, title }: ResultsCountProps) => (
     </When>
     <When condition={results}>
       <Caption
+          dark={dark}
           className="filter-results"
           size="xs"
           text={`${results} ${resultsText(results)}`}

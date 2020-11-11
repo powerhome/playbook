@@ -14,7 +14,7 @@ export type CurrentFiltersProps = {
 
 const hiddenFilters = (value) => isEmpty(value) && value !== true
 
-const CurrentFilters = ({ filters }: CurrentFiltersProps) => {
+const CurrentFilters = ({ dark, filters }: CurrentFiltersProps) => {
   const displayableFilters = omitBy(filters, hiddenFilters)
 
   return (
@@ -30,14 +30,19 @@ const CurrentFilters = ({ filters }: CurrentFiltersProps) => {
               <Choose>
                 <When condition={value === true}>
                   <Title
+                      dark={dark}
                       size={4}
                       tag="h4"
                       text={name}
                   />
                 </When>
                 <Otherwise>
-                  <Caption text={name} />
+                  <Caption
+                      text={name}
+                      dark={dark}
+                  />
                   <Title
+                      dark={dark}
                       size={4}
                       tag="h4"
                       text={value}
