@@ -97,12 +97,16 @@
     }
   }
 
+  & > [class^=pb_typeahead_kit] {
+    min-width: 200px;
+  }
+
   & > [class^=pb_typeahead_kit]:not(:last-child) {
     [class^=pb_text_input_kit] .text_input_wrapper input, [class^=pb_text_input_kit] .text_input_wrapper .text_input {
       border-bottom-right-radius: 0;
       border-top-right-radius: 0;
       border-right-width: 0;
-      min-height: 200px;
+      min-height: 26px;
     }
   }
 
