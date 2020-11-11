@@ -19,7 +19,12 @@ const FilterBackground = (props: FilterBackgroundProps) => {
     <div className={classnames(`pb_filter_kit ${className}`, globalProps(props))}>
       <Choose>
         <When condition={background}>
-          <Card dark={dark} padding="none">{children}</Card>
+          <Card
+              dark={dark}
+              padding="none"
+          >
+            {children}
+          </Card>
         </When>
         <Otherwise>{children}</Otherwise>
       </Choose>

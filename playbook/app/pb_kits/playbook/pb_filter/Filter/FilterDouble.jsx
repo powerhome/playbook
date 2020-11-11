@@ -19,7 +19,10 @@ export type FilterDoubleProps = {
 } & FilterBackgroundProps
 
 const FilterDouble = ({ onSortChange, sortOptions, sortValue, filters, results, children, dark, ...bgProps }: FilterDoubleProps) => (
-  <FilterBackground dark={dark} {...bgProps}>
+  <FilterBackground
+      dark={dark}
+      {...bgProps}
+  >
     <Flex
         orientation="row"
         vertical="center"
@@ -27,7 +30,10 @@ const FilterDouble = ({ onSortChange, sortOptions, sortValue, filters, results, 
       <FiltersPopover dark={dark}>
         {children}
       </FiltersPopover>
-      <CurrentFilters dark={dark} filters={filters} />
+      <CurrentFilters
+          dark={dark}
+          filters={filters}
+      />
     </Flex>
     <SectionSeparator />
     <Flex

@@ -9,6 +9,7 @@ export type FilterDescription = {
 }
 
 export type CurrentFiltersProps = {
+  dark: boolean,
   filters: FilterDescription,
 }
 
@@ -38,8 +39,8 @@ const CurrentFilters = ({ dark, filters }: CurrentFiltersProps) => {
                 </When>
                 <Otherwise>
                   <Caption
-                      text={name}
                       dark={dark}
+                      text={name}
                   />
                   <Title
                       dark={dark}

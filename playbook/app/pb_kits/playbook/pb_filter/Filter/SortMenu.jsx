@@ -38,9 +38,10 @@ const renderOptions = (options: SortOptions, value: SortValue[], handleChange: (
 )
 
 export type SortMenuProps = {
-  value?: SortValue[],
-  options: SortOptions,
+  dark?: boolean,
   onChange: SortingChangeCallback,
+  options: SortOptions,
+  value?: SortValue[],
 }
 const SortMenu = ({ dark, options, value, onChange }: SortMenuProps) => {
   const [hide, updateHide] = useState(true)

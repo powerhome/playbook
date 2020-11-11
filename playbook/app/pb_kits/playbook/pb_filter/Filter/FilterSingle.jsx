@@ -20,7 +20,10 @@ export type FilterSingleProps = {
 } & FilterBackgroundProps
 
 const FilterSingle = ({ onSortChange, sortOptions, sortValue, filters, results, children, dark, ...bgProps }: FilterSingleProps) => (
-  <FilterBackground dark={dark} {...bgProps}>
+  <FilterBackground
+      dark={dark}
+      {...bgProps}
+  >
     <Flex
         orientation="row"
         vertical="center"
@@ -29,12 +32,18 @@ const FilterSingle = ({ onSortChange, sortOptions, sortValue, filters, results, 
         <FiltersPopover dark={dark}>
           {children}
         </FiltersPopover>
-        <CurrentFilters dark={dark} filters={filters} />
+        <CurrentFilters
+            dark={dark}
+            filters={filters}
+        />
       </If>
-      <ResultsCount dark={dark} results={results} />
+      <ResultsCount
+          dark={dark}
+          results={results}
+      />
       <If condition={!isEmpty(sortOptions)}>
         <SortMenu
-            dark={dark} 
+            dark={dark}
             onChange={onSortChange}
             options={sortOptions}
             value={sortValue}
