@@ -1,9 +1,0 @@
-examples:
-
-  rails:
-  - hashtag_default: Hashtag Types
-  - hashtag_dark: Dark
-
-  react:
-  - hashtag_default: Hashtag Types
-  - hashtag_dark: Dark

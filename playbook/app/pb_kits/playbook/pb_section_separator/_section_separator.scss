@@ -1,0 +1,67 @@
+@import "../tokens/colors";
+@import "../tokens/spacing";
+@import "../tokens/opacity";
+@import "./section_separator_mixin";
+
+$section_colors_light: (
+  background:   $bg_light,
+  card:         $card_light,
+);
+
+$section_colors_dark: (
+  background:   $bg_dark,
+  card:         tint($bg_dark,10),
+);
+
+[class^=pb_section_separator_kit] {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  @each $color_name, $color_value in $section_colors_light {
+    &[class*=_#{$color_name}] {
+      span {
+        display: inline-block;
+        padding: 0 $space_xs;
+        background: #{$color_value};
+        position: relative;
+        z-index: 1;
+      }
+    }
+  }
+  &::after {
+    @include section_separator_horizontal(false);
+  }
+  &[class*=_horizontal] {
+    justify-content: center;
+  }
+  &[class*=_vertical] {
+    &::after {
+      @include section_separator_vertical(false);
+    }
+  }
+  
+  // Dark =========================
+  
+  &.dark {
+    &::after {
+      @include section_separator_horizontal(true);
+    }
+    @each $color_name, $color_value in $section_colors_dark {
+      &[class*=_#{$color_name}] {
+        span {
+          display: inline-block;
+          padding: 0 $space_xs;
+          background: #{$color_value};
+          position: relative;
+          z-index: 1;
+        }
+      }
+    }
+    &[class*=_vertical] {
+      &::after {
+        @include section_separator_vertical(true);
+      }
+    }
+  }
+}

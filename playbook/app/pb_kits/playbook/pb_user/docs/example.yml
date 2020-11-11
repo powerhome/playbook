@@ -1,0 +1,18 @@
+examples:
+
+  rails:
+  - user_default: Default
+  - user_with_territory: With Territory
+  - user_text_only: Text Only
+  - user_size: Horizontal Size
+  - user_vertical_size: Vertical Size
+
+
+
+
+  react:
+  - user_default: Default
+  - user_with_territory: With Territory
+  - user_text_only: Text Only
+  - user_size: Horizontal Size
+  - user_vertical_size: Vertical Size

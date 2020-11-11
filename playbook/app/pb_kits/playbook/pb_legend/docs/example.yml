@@ -1,0 +1,11 @@
+examples:
+  
+  rails:
+  - legend_default: Default
+  - legend_prefix: With Prefix Text
+ 
+  
+  
+  react:
+  - legend_default: Default
+  - legend_prefix: With Prefix Text

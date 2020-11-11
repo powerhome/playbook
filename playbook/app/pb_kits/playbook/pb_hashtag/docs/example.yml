@@ -1,0 +1,7 @@
+examples:
+
+  rails:
+  - hashtag_default: Hashtag Types
+
+  react:
+  - hashtag_default: Hashtag Types

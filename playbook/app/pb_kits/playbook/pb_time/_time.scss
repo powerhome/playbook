@@ -1,0 +1,33 @@
+@import "../tokens/colors";
+@import "../tokens/typography";
+@import "../pb_icon/icon";
+@import "../pb_body/body";
+@import "../pb_caption/caption";
+
+[class^=pb_time_kit] {
+  &[class*=_center]  {
+    text-align: center;
+  }
+
+  &[class*=_right]  {
+    text-align: right;
+  }
+
+  [class^=pb_time_timezone] {
+    color: $text_lt_light;
+    font-weight: $bold;
+
+    &::before {
+      content: " ";
+    }
+  }
+
+  &[class*=dark] {
+    & * {
+      @include caption_dark;
+    }
+    .pb_time {
+      color: $text_dk_default;
+    }
+  }
+}

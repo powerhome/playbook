@@ -1,0 +1,7 @@
+examples:
+  rails:
+  - body_light: Default
+  - body_block: Block
+  react:
+  - body_light: Default
+  - body_block: Block

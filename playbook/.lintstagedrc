@@ -1,0 +1,3 @@
+{
+  "app/pb_kits/playbook/**/*.{js,jsx}": "yarn lint --fix"
+}

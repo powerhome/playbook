@@ -1,0 +1,13 @@
+examples:
+  
+  rails:
+  - label_value_default: Default
+  - label_value_details: Details
+  - label_value_details_examples: Other Examples
+
+  
+  
+  react:
+  - label_value_default: Default
+  - label_value_details: Details
+  - label_value_details_examples: Other Examples

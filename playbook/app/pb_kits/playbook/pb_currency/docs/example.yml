@@ -1,0 +1,11 @@
+examples:
+
+  rails:
+  - currency_small: Small
+  - currency_medium: Medium
+  - currency_large: Large
+
+  react:
+  - currency_small: Small
+  - currency_medium: Medium
+  - currency_large: Large

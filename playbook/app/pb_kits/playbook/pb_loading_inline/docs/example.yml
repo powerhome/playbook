@@ -1,0 +1,9 @@
+examples:
+  
+  rails:
+  - loading_inline_light: Light
+
+  
+  
+  react:
+  - loading_inline_light: Default

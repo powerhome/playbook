@@ -1,0 +1,14 @@
+examples:
+
+  rails:
+  - section_separator_text: Text Separator
+  - section_separator_line: Line Separator
+  - section_separator_text_background: Background Variant
+  - section_separator_vertical: Vertical
+
+
+  react:
+  - section_separator_text: Text Separator
+  - section_separator_line: Line Separator
+  - section_separator_text_background: Background Variant
+  - section_separator_vertical: Vertical

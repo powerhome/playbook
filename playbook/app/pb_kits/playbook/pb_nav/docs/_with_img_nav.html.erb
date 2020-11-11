@@ -1,0 +1,7 @@
+<%= pb_rails("nav", props: {title: "Browse", link: "#"}) do %>
+  <%= pb_rails("nav/item", props: { image_url: "https://upload.wikimedia.org/wikipedia/commons/0/00/Apple_News_icon_%28macOS%29.png", text: "News Feed"  }) %>
+  <%= pb_rails("nav/item", props: { image_url: "https://p7.hiclipart.com/preview/928/339/723/messages-iphone-apple-imessage-iphone-thumbnail.jpg", link: "#", text: "Messages", active: true }) %>
+  <%= pb_rails("nav/item", props: { image_url: "https://www.clipartmax.com/png/middle/103-1038653_circle-icons-calendar-svg-event-icon.png", icon_right: "angle-down", link: "#", text: "Events" }) %>
+  <%= pb_rails("nav/item", props: { image_url: "https://www.pngitem.com/pimgs/m/228-2289227_find-friends-icon-png-image-iphone-find-my.png", link: "#", text: "Friends" }) %>
+  <%= pb_rails("nav/item", props: { image_url: "https://img.favpng.com/18/5/20/blue-human-behavior-silhouette-area-communication-png-favpng-wLT3QYknSwc68uu9GAUHGS5FY_t.jpg", icon_right: "angle-down", link: "#", text: "Groups" }) %>
+<% end %>
