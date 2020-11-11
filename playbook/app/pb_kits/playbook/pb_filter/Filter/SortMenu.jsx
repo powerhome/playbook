@@ -60,7 +60,10 @@ const SortMenu = ({ dark, options, value, onChange }: SortMenuProps) => {
     >
       {map(value, ({ dir, name }) => (
         <span key={`current-sort-${name}-${dir}`}>
-          <Icon icon={directionIcon(dir)} />
+          <Icon
+              dark={dark}
+              icon={directionIcon(dir)}
+          />
           {` ${options[name]}`}
         </span>
       ))}

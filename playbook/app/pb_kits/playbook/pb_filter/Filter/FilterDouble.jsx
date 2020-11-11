@@ -35,7 +35,7 @@ const FilterDouble = ({ onSortChange, sortOptions, sortValue, filters, results, 
           filters={filters}
       />
     </Flex>
-    <SectionSeparator />
+    <SectionSeparator dark={dark}/>
     <Flex
         className="filter-bottom"
         orientation="row"
@@ -51,7 +51,7 @@ const FilterDouble = ({ onSortChange, sortOptions, sortValue, filters, results, 
           orientation="row"
           vertical="center"
       >
-        <Caption text="sort by:" />
+        <Caption text="sort by:" dark={dark}/>
         <SortMenu
             dark={dark}
             onChange={onSortChange}
