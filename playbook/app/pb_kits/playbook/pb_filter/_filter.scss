@@ -5,46 +5,54 @@
   li {
     padding: 0 $space_sm !important;
   }
-  [class^=pb_button_kit][class*=_link]{
+
+  [class^=pb_button_kit][class*=_link] {
     flex-shrink:0;
     padding: 0 $space_xs !important;
-    [id^="sort"]{
+    [id^="sort"] {
       margin-left: $space_xs !important;
     }
   }
-  [class^=pb_card_body_kit][class*=_md]{
+
+  [class^=pb_card_body_kit][class*=_md] {
     padding: 0 !important;
   }
 }
 
 [class^=pb_filter_kit] {
-  [class^=pb_circle_icon_button_kit]{
+  [class^=pb_circle_icon_button_kit] {
     padding-left: $space_sm !important;
     padding-top: $space_sm !important;
     padding-bottom: $space_sm !important;
   }
-  [class^=pb-form]{
+
+  [class^=pb-form] {
     padding: $space_sm ;
   }
-   .sort-by{
+
+  .sort-by {
     flex-shrink:0;
     margin-left: $space_xs !important;
   }
-  .filter-results{
+
+  .filter-results {
     margin-left: $space_xs !important;
     margin-right: $space_xs !important;
     flex-shrink:0 !important;
   }
-  .filter-bottom{
+
+  .filter-bottom {
     padding-left: $space_sm !important;
     padding-right: $space_sm !important;
   }
-  .maskContainer{
-      display: flex;
-      overflow-x: hidden;
-      align-items: center;
-      flex-grow: 1;
+
+  .maskContainer {
+    display: flex;
+    overflow-x: hidden;
+    align-items: center;
+    flex-grow: 1;
   }
+
   .filters {
     display: flex;
     flex-shrink: 1;
@@ -54,30 +62,45 @@
     padding-top: $space_md;
     padding-bottom: $space_md;
 
-   &::-webkit-scrollbar{
-       display: none;
-   }
+    &::-webkit-scrollbar {
+      display: none;
+    }
+
     .filter {
       flex: 0 0 auto;
       padding-left: $space_xs;
       padding-right: $space_xs;
       border-right: 1px solid $border_light !important;
     }
+  }
 
-}
-.maskContainer::after {
+  .maskContainer::after {
+    background-image: linear-gradient(to right, rgba($card_light,.3) , rgba($card_light,1));
     content: " ";
     height: 48px;
     padding-left: $space_xl;
     margin-left: -$space_lg;
     z-index: 1;
-}
-.maskContainer::before {
+  }
+
+  .maskContainer::before {
+    background-image: linear-gradient(to right, rgba($card_light,.3) , rgba($card_light,1));
     content: " ";
     height: 48px;
     padding-right: $space_sm;
     margin-right: -$space_xs;
     z-index: 1;
-}
+  }
 
+  &[class*=dark] {
+    .filters .filter {
+    border-right: 1px solid $border_dark !important;
+    }
+    .maskContainer::before {
+      opacity:0;
+    }
+    .maskContainer::after {
+      opacity:0;
+    }
+  }
 }
