@@ -6,54 +6,60 @@ const TableAlignmentShiftData = () => {
     <Table>
       <thead>
         <tr>
-          <th>{'Column 1'}</th>
-          <th>
-            {'Column 2'}
-            <br />
-            {'with a very long name'}
-            <br />
-            {'that just keeps going and going'}
-          </th>
-          <th shift="up">{'Column 3'}</th>
-          <th shift="down">{'Column 4'}</th>
+          <th>{'Carrier'}</th>
+          <th>&nbsp;</th>
+          <th>{'Phones'}</th>
+          <th>&nbsp;</th>
         </tr>
       </thead>
       <tbody>
         <tr>
+          <td>{'AB&B'}</td>
+          <td shift="down">{'Total'}</td>
           <td>
-            {'Value 1a'}
+            {'35,035'}
             <br />
-            {'Value 1a'}
+            {'25,363'}
             <br />
-            {'Value 1a'}
+            {'55,398'}
           </td>
-          <td>{'Value 2a'}</td>
-          <td shift="up">{'Value 3a'}</td>
-          <td shift="down">{'Value 4a'}</td>
+          <td shift="up">
+            {'iPhone'}
+            <br />
+            {'Android'}
+          </td>
         </tr>
         <tr>
+          <td>{'Horizon'}</td>
+          <td shift="down">{'Total'}</td>
           <td>
-            {'Value 1b'}
+            {'79,346'}
             <br />
-            {'Value 1b'}
+            {'93,859'}
             <br />
-            {'Value 1b'}
+            {'173,205'}
           </td>
-          <td>{'Value 2b'}</td>
-          <td shift="up">{'Value 3b'}</td>
-          <td shift="down">{'Value 4b'}</td>
+          <td shift="up">
+            {'iPhone'}
+            <br />
+            {'Android'}
+          </td>
         </tr>
         <tr>
+          <td>{'Runs'}</td>
+          <td shift="down">{'Total'}</td>
           <td>
-            {'Value 1c'}
+            {'57,494'}
             <br />
-            {'Value 1c'}
+            {'46,251'}
             <br />
-            {'Value 1c'}
+            {'103,745'}
           </td>
-          <td>{'Value 2c'}</td>
-          <td shift="up">{'Value 3c'}</td>
-          <td shift="down">{'Value 4c'}</td>
+          <td shift="up">
+            {'iPhone'}
+            <br />
+            {'Android'}
+          </td>
         </tr>
       </tbody>
     </Table>
