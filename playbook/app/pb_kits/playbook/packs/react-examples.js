@@ -70,6 +70,7 @@ import * as ProgressPills from 'pb_progress_pills/docs'
 import * as ProgressSimple from 'pb_progress_simple/docs'
 import * as ProgressStep from 'pb_progress_step/docs'
 import * as Radio from 'pb_radio/docs'
+import * as RichTextEditor from 'pb_rich_text_editor/docs'
 import * as SectionSeparator from 'pb_section_separator/docs'
 import * as Select from 'pb_select/docs'
 import * as SelectableCard from 'pb_selectable_card/docs'
@@ -156,6 +157,7 @@ WebpackerReact.setup({
   ...ProgressSimple,
   ...ProgressStep,
   ...Radio,
+  ...RichTextEditor,
   ...SectionSeparator,
   ...Select,
   ...SelectableCard,
