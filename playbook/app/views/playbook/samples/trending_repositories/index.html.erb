@@ -1,7 +1,14 @@
+
+<style type="text/css">
+  p {
+    color: #26b72b;
+  }
+</style>
+
 <div class="nav-bar-header">
   <%= pb_rails("background", props: { background_color: "white", padding_bottom: "none", padding_top: "md" }) do %>
-    <%= pb_rails("flex", props: {classname: "flex-container", spacing: "between", padding_left:"md", padding_right:"md", wrap: true }) do %>
-      <%= pb_rails("nav", props: { margin_left: "sm" ,orientation: "horizontal",}) do %>
+    <%= pb_rails("flex", props: {classname: "flex-container", spacing: "between", padding_left:"lg", padding_right:"lg", wrap: true }) do %>
+      <%= pb_rails("nav", props: { margin_left: "md" ,orientation: "horizontal",}) do %>
         <%= pb_rails("nav/item", props: { text: "Explore", link: "#" }) %>
         <%= pb_rails("nav/item", props: { text: "Topics", link: "#" }) %>
         <%= pb_rails("nav/item", props: { text: "Trending ", link: "#", active: true  }) %>
@@ -9,7 +16,7 @@
         <%= pb_rails("nav/item", props: { text: "Events", link: "#" }) %>
         <%= pb_rails("nav/item", props: { text: "Sponsors", link: "#" }) %>
       <% end %>
-      <%= pb_rails("button", props: { text: "Get email updates" }) %>
+      <%= pb_rails("button", props: { text: "Get email updates", margin_right:"md" }) %>
     <% end %>
   <% end %>
   <%= pb_rails("section_separator") %>
@@ -28,6 +35,7 @@
     <% end %>
   <% end %>
 </div>
+<p style="color: blue">Helloajsdjaskdla</p>
 
 
 <div class="cards-body">
