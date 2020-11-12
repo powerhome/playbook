@@ -1,7 +1,7 @@
 import React from 'react'
 import { Caption, Card, Flex, FlexItem, IconValue, Image, Layout, Nav, NavItem, SectionSeparator, Title } from '../../../../pb_kits/playbook'
 
-const CollectionDetail = () => (
+const NewsMagazine = () => (
   <div>
 
     <Layout
@@ -369,4 +369,4 @@ const CollectionDetail = () => (
 
   </div>
 )
-export default CollectionDetail
+export default NewsMagazine
