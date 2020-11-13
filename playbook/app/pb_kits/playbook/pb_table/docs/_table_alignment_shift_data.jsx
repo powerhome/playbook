@@ -29,7 +29,7 @@ const TableAlignmentShiftData = () => {
       <br />
       <thead>
         <tr>
-          <th>{'Expresso Drinks'}</th>
+          <th>{'Espresso Drinks'}</th>
           <th>{'Ingredients'}</th>
         </tr>
       </thead>
@@ -37,7 +37,7 @@ const TableAlignmentShiftData = () => {
         <tr>
           <td shift="up">{'Cappuccino'}</td>
           <td>
-            {'Expresso'}
+            {'Espresso'}
             <br />
             {'Steamed Milk'}
             <br />
@@ -47,7 +47,7 @@ const TableAlignmentShiftData = () => {
         <tr>
           <td shift="up">{'Macchiato'}</td>
           <td>
-            {'Expresso'}
+            {'Espresso'}
             <br />
             {'Steamed Milk'}
           </td>
@@ -55,7 +55,7 @@ const TableAlignmentShiftData = () => {
         <tr>
           <td shift="up">{'Mocha'}</td>
           <td>
-            {'Expresso'}
+            {'Espresso'}
             <br />
             {'Hot Chocolate'}
             <br />
