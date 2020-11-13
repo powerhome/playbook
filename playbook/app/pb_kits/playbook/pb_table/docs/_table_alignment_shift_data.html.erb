@@ -1,59 +1,62 @@
 <%= pb_rails("table") do %>
   <thead>
     <tr>
-      <th>Carrier</th>
       <th>&nbsp;</th>
-      <th>Phones</th>
-      <th>&nbsp;</th>
+      <th>Price</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>AB&B</td>
       <td shift="down">Total</td>
       <td>
-        35,035
+        $12
         <br/>
-        25,363
+        $46
         <br/>
-        55,398
+        $25
+        <br/>
+        -------
+        <br/>
+        $83
       </td>
-      <td shift="up">
-        iPhone
+    </tr>
+  </tbody>
+<% end %>
+<br/>
+<%= pb_rails("table") do %>
+  <thead>
+    <tr>
+      <th>Expresso Drinks</th>
+      <th>Ingredients</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td shift="up">Cappuccino</td>
+      <td>
+        Expresso
         <br/>
-        Android
+        Steamed Milk
+        <br/>
+        Milk Foam
       </td>
     </tr>
     <tr>
-      <td>Horizon</td>
-      <td shift="down">Total</td>
+      <td shift="up">Macchiato</td>
       <td>
-        79,346
+        Expresso
         <br/>
-        93,859
-        <br/>
-        173,205
-      </td>
-      <td shift="up">
-        iPhone
-        <br/>
-        Android
+        Steamed Milk
       </td>
     </tr>
     <tr>
-      <td>Runs</td>
-      <td shift="down">Total</td>
+      <td shift="up">Mocha</td>
       <td>
-        57,494
+        Expresso
         <br/>
-        46,251
+        Hot Chocolate
         <br/>
-        103,745
-      </td>
-      <td shift="up">
-        iPhone
-        <br/>
-        Android
+        Steamed Milk
       </td>
     </tr>
   </tbody>
