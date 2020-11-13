@@ -1,21 +1,21 @@
 <%= javascript_tag do %>
 
-    let mobile_view
-    let desktop_view
-
-  const view_size = () => {
-    if (window.innerWidth < 415){
-        mobile_view.style.display = "block"
-        desktop_view.style.display = "none"
-        } else {
-        mobile_view.style.display = "none"
-        desktop_view.style.display = "block"
-    }
-  }
 
   window.addEventListener('DOMContentLoaded', (event) => {
-    mobile_view = document.querySelector(".nav-bar-header-mobile")
-    desktop_view = document.querySelector(".nav-bar-header-desktop")
+    let mobile_view = document.querySelector(".nav-bar-header-mobile")
+    let desktop_view = document.querySelector(".nav-bar-header-desktop")
+    let card_body = document.querySelector(".card_body_marg")
+    const view_size = () => {
+      if (window.innerWidth < 415){
+          mobile_view.style.display = "block"
+          desktop_view.style.display = "none"
+          card_body.style.cssText = "margin:8px!important;"
+          } else {
+          mobile_view.style.display = "none"
+          desktop_view.style.display = "block"
+          card_body.style.cssText = "margin:40px!important;"
+      }
+    }
     view_size()
 
   window.addEventListener("resize", () => {
@@ -24,7 +24,7 @@
   })
 <% end %>
 
-<div class="nav-bar-header-desktop">
+<div style="display:none;" class="nav-bar-header-desktop">
   <%= pb_rails("background", props: { background_color: "white", padding_bottom: "none", padding_top: "md" }) do %>
     <%= pb_rails("flex", props: {classname: "flex-container", spacing: "between", padding_left:"lg", padding_right:"lg", wrap: true }) do %>
       <%= pb_rails("nav", props: { margin_left: "md" ,orientation: "horizontal",}) do %>
@@ -40,7 +40,7 @@
   <% end %>
   <%= pb_rails("section_separator") %>
 </div>
-<div class="nav-bar-header-mobile">
+<div style="display:none;" class="nav-bar-header-mobile">
   <%= pb_rails("background", props: { background_color: "white", padding_bottom: "none", padding_top: "md" }) do %>
     <%= pb_rails("flex", props: {classname: "flex-container", spacing: "between", padding_left:"lg", padding_right:"lg", wrap: true }) do %>
       <%= pb_rails("nav", props: { margin_left: "md" ,orientation: "horizontal",}) do %>
@@ -71,7 +71,7 @@
   <%= pb_rails("section_separator") %>
   <%= pb_rails("background", props: { background_color: "white", padding: "sm" }) do %>
    <div class="main-card-desktop">
-    <%= pb_rails("card", props: { padding:"none", margin:"xl" })  do %>
+    <%= pb_rails("card", props: { classname:"card_body_marg", padding:"none", margin:"xl" })  do %>
       <%= pb_rails("background", props: { background_color: "light"}) do %>
         <%= pb_rails("flex", props: { spacing:"between", wrap: true }) do %>
             <%= pb_rails("nav", props: { orientation: "horizontal"}) do %>
