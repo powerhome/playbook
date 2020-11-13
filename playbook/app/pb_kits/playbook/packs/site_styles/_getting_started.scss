@@ -1,5 +1,6 @@
 @import "../../tokens/colors";
 @import "../../tokens/spacing";
+@import "../../tokens/border_radius";
 
 .getting_started {
   display: flex;
@@ -12,6 +13,7 @@
       @at-root pre {
         background: $bg_dark;
         padding: $space_sm;
+        border-radius: $border_rad_heavy;
       }
     }
   }

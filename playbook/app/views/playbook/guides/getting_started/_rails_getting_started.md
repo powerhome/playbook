@@ -1,4 +1,4 @@
-# Getting Started Rails (with Webpacker)
+# Rails Getting Started (with Webpacker)
 
 #### Update your Gemfile
 ```sh
