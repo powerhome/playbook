@@ -22,22 +22,14 @@ $pb_table_row_kit_side_highlight_colors: map-merge(map-merge($status_colors, $pr
       }
     }
   }
-  &.table-sm thead tr[align=center] th,
-  &.table-md thead tr[align=center] th,
-  &.table-lg thead tr[align=center] th,
-  &.table-sm thead tr th[align=center],
-  &.table-md thead tr th[align=center],
-  &.table-lg thead tr th[align=center] {
-    text-align: center;
+  tr[align=center] th,
+  tr th[align=center] {
+    text-align: center !important;
   }
 
-  &.table-sm thead tr[align=right] th,
-  &.table-md thead tr[align=right] th,
-  &.table-lg thead tr[align=right] th,
-  &.table-sm thead tr th[align=right],
-  &.table-md thead tr th[align=right],
-  &.table-lg thead tr th[align=right] {
-    text-align: right;
+  tr[align=right] th,
+  tr th[align=right] {
+    text-align: right !important;
   }
 
   tr[shift=up] {
