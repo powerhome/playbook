@@ -10,6 +10,14 @@
     margin-bottom: 0;
   }
 
+  &[class*=dark] {
+    & [class^=pb_text_input_kit] .text_input_wrapper,
+    & [class^=pb_date_picker_kit] .input_wrapper,
+    & [class^=pb_select] {
+      margin-bottom: 0;
+    }
+  }
+
   & > [class^=pb_text_input_kit]:not(:last-child) {
     .text_input_wrapper input, [class^=pb_text_input_kit] .text_input_wrapper .text_input {
       border-bottom-right-radius: 0;
