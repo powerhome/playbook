@@ -1,7 +1,11 @@
 ---
-  samples:
-  - analytics_dashboard
-  - conference_statistics
-  - crm_client_list
-  - news_magazine
-  
+samples:
+- analytics_dashboard
+- conference_statistics
+- crm_client_list
+- news_magazine
+cards:
+- test_card_one
+- test_card_two
+- test_card_three
+- test_sample

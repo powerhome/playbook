@@ -29,7 +29,7 @@
   }
   // Mobile Styles
   @include break_at(699px){
-    .full_page_samples_flex_wrapper {
+    .samples_flex_wrapper {
       flex-direction: column;
       align-items: center;
     }
