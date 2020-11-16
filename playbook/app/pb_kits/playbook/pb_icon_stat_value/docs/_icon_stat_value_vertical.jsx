@@ -6,8 +6,8 @@ const IconStatValueVertical = () => {
     <div>
       <IconStatValue
           icon="broadcast-tower"
-          text="Radio"
           orientation="vertical"
+          text="Radio"
           unit="wkz"
           value={102.5}
       />
