@@ -3,34 +3,36 @@ import { Background, Body, Button, Card, Flex, FlexItem, Icon, IconValue, Legend
 import NavItem from '../../../../pb_kits/playbook/pb_nav/_item.jsx'
 
 const TrendingRepositories = () => {
-
-  window.addEventListener('DOMContentLoaded', (event) => {
-    let mobile_view = document.querySelector(".nav-bar-header-mobile")
-    let desktop_view = document.querySelector(".nav-bar-header-desktop")
-    let card_body = document.querySelector(".card_body_marg")
-    const view_size = () => {
+  window.addEventListener('DOMContentLoaded', () => {
+    const mobileView = document.querySelector('.nav-bar-header-mobile')
+    const desktopView = document.querySelector('.nav-bar-header-desktop')
+    const cardBody = document.querySelector('.card_body_marg')
+    const viewSize = () => {
       if (window.innerWidth < 415){
-          mobile_view.style.display = "block"
-          desktop_view.style.display = "none"
-          card_body.style.cssText = "margin:8px!important;"
-          } else {
-          mobile_view.style.display = "none"
-          desktop_view.style.display = "block"
-          card_body.style.cssText = "margin:40px!important;"
+        mobileView.style.display = 'block'
+        desktopView.style.display = 'none'
+        cardBody.style.cssText = 'margin:8px!important;'
+      } else {
+        mobileView.style.display = 'none'
+        desktopView.style.display = 'block'
+        cardBody.style.cssText = 'margin:40px!important;'
       }
     }
-    view_size()
+    viewSize()
 
-  window.addEventListener("resize", () => {
-    view_size()
-  })
+    window.addEventListener('resize', () => {
+      viewSize()
+    })
   })
 
   return (
 
     <div>
 
-      <div style={{display: "none"}} className="nav-bar-header-desktop">
+      <div
+          className="nav-bar-header-desktop"
+          style={{ display: 'none' }}
+      >
         <Background
             backgroundColor="white"
             paddingBottom="none"
@@ -44,8 +46,8 @@ const TrendingRepositories = () => {
             <FlexItem>
               <Nav
                   link="#"
-                  orientation="horizontal"
                   marginLeft="sm"
+                  orientation="horizontal"
               >
                 <NavItem
                     link="#"
@@ -76,16 +78,19 @@ const TrendingRepositories = () => {
             </FlexItem>
             <FlexItem>
               <Button
+                  marginRight="lg"
                   onClick={() => alert('button clicked!')}
                   text="Get email updates"
-                  marginRight="lg"
               />
             </FlexItem>
           </Flex>
         </Background>
         <SectionSeparator />
       </div>
-      <div style={{display: "none"}} className="nav-bar-header-mobile">
+      <div
+          className="nav-bar-header-mobile"
+          style={{ display: 'none' }}
+      >
         <Background
             backgroundColor="white"
             paddingBottom="none"
@@ -99,8 +104,8 @@ const TrendingRepositories = () => {
             <FlexItem>
               <Nav
                   link="#"
-                  orientation="horizontal"
                   marginLeft="none"
+                  orientation="horizontal"
               >
                 <NavItem
                     link="#"
@@ -148,9 +153,9 @@ const TrendingRepositories = () => {
             padding="sm"
         >
           <Card
+              className="card_body_marg"
               margin="xl"
               padding="none"
-              className="card_body_marg"
           >
             <Background
                 backgroundColor="light"
@@ -158,7 +163,7 @@ const TrendingRepositories = () => {
 
               <Flex
                   spacing="between"
-                  wrap={true}
+                  wrap
               >
                 <FlexItem>
                   <Nav
@@ -182,7 +187,7 @@ const TrendingRepositories = () => {
                     <Flex
                         horizontal="right"
                         spacing="evenly"
-                        wrap={true}
+                        wrap
                     >
                       <FlexItem
                           paddingRight="lg"
@@ -261,7 +266,7 @@ const TrendingRepositories = () => {
                   <FlexItem>
                     <FlexItem>
                       <Flex
-                          wrap={true}
+                          wrap
                       >
                         <FlexItem>
                           <Legend
@@ -372,7 +377,7 @@ const TrendingRepositories = () => {
                   <FlexItem>
                     <FlexItem>
                       <Flex
-                          wrap={true}
+                          wrap
                       >
                         <FlexItem>
                           <Legend
@@ -483,7 +488,7 @@ const TrendingRepositories = () => {
                   <FlexItem>
                     <FlexItem>
                       <Flex
-                          wrap={true}
+                          wrap
                       >
                         <FlexItem>
                           <Legend
@@ -594,7 +599,7 @@ const TrendingRepositories = () => {
                   <FlexItem>
                     <FlexItem>
                       <Flex
-                          wrap={true}
+                          wrap
                       >
                         <FlexItem>
                           <Legend
