@@ -16,9 +16,9 @@
       <%= pb_rails("flex/flex_item", props: {}) do %>
         <%= pb_rails("nav", props: {margin_top: "sm",orientation: "horizontal"}) do %>
           <%= pb_rails("nav/item", props: { active: current_page?('/getting_started'), text: "Getting Started", link: "/getting_started" }) %>
+          <%= pb_rails("nav/item", props: { active: current_page?('/visual_guidelines'), text: "Visual Guidelines", link: "/visual_guidelines" }) %>
           <%= pb_rails("nav/item", props: { active: action_name.include?('kit'), text: "Design Components", link: "/kits" }) %>
           <%= pb_rails("nav/item", props: { active: current_page?('/samples'), text: "Samples", link: "/samples" }) %>
-          <%= pb_rails("nav/item", props: { active: current_page?('/visual_guidelines'), text: "Visual Guidelines", link: "/visual_guidelines" }) %>
         <% end %>
       <% end %>
     </div>
