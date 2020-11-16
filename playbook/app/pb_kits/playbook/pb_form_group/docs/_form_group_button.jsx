@@ -8,6 +8,7 @@ const FormGroupButton = (props) => (
         <TextInput
             label="With Label"
             placeholder="Search"
+            {...props}
         />
         <Button
             onClick={() => alert('Button Clicked!')}
@@ -22,6 +23,7 @@ const FormGroupButton = (props) => (
       <FormGroup>
         <TextInput
             placeholder="Search"
+            {...props}
         />
         <Button
             onClick={() => alert('Button Clicked!')}

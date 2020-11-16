@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { FormGroup, SelectableCard } from '../../'
 
-const FormGroupSelectableCard = () => {
+const FormGroupSelectableCard = (props) => {
   const [value, setValue] = useState('')
 
   const handleSelect = (event) => {
@@ -18,8 +18,9 @@ const FormGroupSelectableCard = () => {
             name="animal"
             onChange={handleSelect}
             value="cat"
+            {...props}
         >
-          {'Cat'}
+            {'Cat'}
         </SelectableCard>
 
         <SelectableCard
@@ -29,8 +30,9 @@ const FormGroupSelectableCard = () => {
             name="animal"
             onChange={handleSelect}
             value="dog"
-        >
-          {'Dog'}
+            {...props}
+            >
+              {'Dog'}
         </SelectableCard>
       </FormGroup>
     </div>

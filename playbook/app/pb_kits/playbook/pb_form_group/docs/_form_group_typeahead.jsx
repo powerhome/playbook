@@ -15,6 +15,7 @@ const FormGroupTypeahead = (props) => {
         <Typeahead
             label="Products"
             options={options}
+            {...props}
         />
         <Button
             onClick={() => alert('Button Clicked!')}

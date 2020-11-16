@@ -1,7 +1,7 @@
 import React from 'react'
 import { FormGroup, Select, TextInput } from '../../'
 
-const FormGroupSelect = () => {
+const FormGroupSelect = (props) => {
   const options = [
     { value: 'Country' },
     { value: 'Pop' },
@@ -20,10 +20,12 @@ const FormGroupSelect = () => {
         <TextInput
             label="Artist"
             placeholder="Enter Artist Name"
+            {...props}
         />
         <Select
             blankSelection="Select Genre"
             options={options}
+            {...props}
         />
       </FormGroup>
     </div>

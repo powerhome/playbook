@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { FormGroup, SelectableCardIcon } from '../../'
 
-const FormGroupSelectableCardIcon = () => {
+const FormGroupSelectableCardIcon = (props) => {
   const [selectedFormat, toggleFormat] = useState(null)
 
   return (
@@ -15,6 +15,7 @@ const FormGroupSelectableCardIcon = () => {
             onChange={() => toggleFormat('basketball')}
             titleText="Basketball"
             value="basketball"
+            {...props}
         />
         <SelectableCardIcon
             checked={selectedFormat === 'football'}
@@ -24,6 +25,7 @@ const FormGroupSelectableCardIcon = () => {
             onChange={() => toggleFormat('football')}
             titleText="Football"
             value="football"
+            {...props}
         />
       </FormGroup>
     </div>
