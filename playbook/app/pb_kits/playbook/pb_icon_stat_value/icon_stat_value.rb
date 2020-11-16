@@ -27,8 +27,7 @@ module Playbook
       prop :text, type: Playbook::Props::String,
                   default: ""
 
-      prop :value, type: Playbook::Props::Numeric,
-                   required: true
+      prop :value, type: Playbook::Props::Numeric
 
 
       def classname

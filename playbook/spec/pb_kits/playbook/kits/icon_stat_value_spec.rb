@@ -10,7 +10,7 @@ RSpec.describe Playbook::PbIconStatValue::IconStatValue do
   it { is_expected.to define_prop(:icon).that_is_required }
   it { is_expected.to define_enum_prop(:size)
                       .with_default("sm")
-                      .with_values("sm", "lg") }
+                      .with_values("sm", "md", "lg") }
   it { is_expected.to define_enum_prop(:variant)
                       .with_default("default")
                       .with_values("default", "royal", "blue", "purple", "teal", "red", "yellow", "green") }
