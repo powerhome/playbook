@@ -75,6 +75,10 @@ module Playbook
       render layout: "layouts/playbook/kits"
     end
 
+    def visual_guidelines
+
+    end
+
   private
 
     def set_category
