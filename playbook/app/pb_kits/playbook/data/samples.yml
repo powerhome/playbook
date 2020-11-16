@@ -1,7 +1,7 @@
 ---
   samples:
-  - dashboards
-  - registration
-  - filter_table
-  - collection_detail
+  - analytics_dashboard
+  - conference_statistics
+  - crm_client_list
+  - news_magazine
   

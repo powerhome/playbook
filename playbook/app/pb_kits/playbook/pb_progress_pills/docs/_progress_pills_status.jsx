@@ -2,7 +2,7 @@
 import React from 'react'
 import ProgressPills from '../_progress_pills.jsx'
 
-const ProgressPillsStatus = () => {
+const ProgressPillsStatus = (props) => {
   return (
     <div>
       <ProgressPills
@@ -10,8 +10,8 @@ const ProgressPillsStatus = () => {
           steps={3}
           title="Status:"
           value="Orientation"
+          {...props}
       />
-
     </div>
   )
 }

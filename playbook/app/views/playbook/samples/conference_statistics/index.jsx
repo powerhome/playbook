@@ -44,7 +44,7 @@ const productDesigners = [{
   data: [1475, 524, 1344, 780, 200, 900],
 }]
 
-const Registration = () => (
+const ConferenceStatistics = () => (
   <div>
     <Layout
         collapse="xs"
@@ -473,4 +473,4 @@ const Registration = () => (
   </div>
 )
 
-export default Registration
+export default ConferenceStatistics

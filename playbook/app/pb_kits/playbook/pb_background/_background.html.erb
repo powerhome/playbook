@@ -4,7 +4,7 @@
       data: object.data,
       id: object.id,
       class: object.classname,
-      style: `background-image: url(#{object.image_url});`
+      style: "background-image: url('#{object.image_url}');"
   ) do %>
     <%= capture(&object.children) %>
   <% end %>
