@@ -20,7 +20,7 @@ const FormGroupSelectableCard = (props) => {
             value="cat"
             {...props}
         >
-            {'Cat'}
+          {'Cat'}
         </SelectableCard>
 
         <SelectableCard
@@ -31,8 +31,8 @@ const FormGroupSelectableCard = (props) => {
             onChange={handleSelect}
             value="dog"
             {...props}
-            >
-              {'Dog'}
+        >
+          {'Dog'}
         </SelectableCard>
       </FormGroup>
     </div>
