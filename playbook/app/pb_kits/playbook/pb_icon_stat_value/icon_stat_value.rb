@@ -35,8 +35,8 @@ module Playbook
         generate_classname("pb_icon_stat_value_kit", orientation, size, variant)
       end
 
-      def value_unit
-        [value.to_s, unit].join('')
+      def value_string
+        value.to_s
       end
 
       def title_size

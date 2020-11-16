@@ -5,6 +5,7 @@
 
 [class^=pb_icon_stat_value_kit]{
   display: flex;
+  align-items: baseline;
 
   &[class*=_vertical]  {
     flex-direction: column;
@@ -13,6 +14,7 @@
       align-items: center;
 
       [class^=pb_title],
+      [class^=pb_body],
       [class^=pb_caption] {
         text-align: center;
       }
@@ -22,6 +24,7 @@
       align-items: flex-end;
 
       [class^=pb_title],
+      [class^=pb_body],
       [class^=pb_caption] {
         text-align: right;
       }
@@ -46,5 +49,16 @@
     [class^=pb_icon_circle] {
       margin-right: $space-sm;
     }
+  }
+  [class^=pb_title_kit_1] + [class^=pb_body_kit] {
+    font-size: 36px;
+  }
+
+  [class^=pb_title_kit_2] + [class^=pb_body_kit] {
+    font-size: 24px
+  }
+
+  [class^=pb_title_kit_3] + [class^=pb_body_kit] {
+    font-size: 20px;
   }
 }
