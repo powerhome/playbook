@@ -23,7 +23,7 @@ const FormGroupSelect = (props) => {
             {...props}
         />
         <Select
-            blankSelection="Select Genre"
+            blankSelection="Genre"
             options={options}
             {...props}
         />

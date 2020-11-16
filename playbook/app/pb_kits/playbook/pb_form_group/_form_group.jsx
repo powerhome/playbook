@@ -10,7 +10,7 @@ type FormGroupProps = {
   children?: Node,
   className?: string,
   data?: object,
-  id?: string
+  id?: string,
 }
 
 const FormGroup = (props: FormGroupProps) => {
