@@ -95,7 +95,7 @@ const NewsMagazine = () => (
             />
           </Card.Header>
           <Card.Body padding="none">
-            <Image url="https://djenjyj46f9j9.cloudfront.net/items/292f0C2i3f2z2f2A0P0n/Screen%20Shot%202020-07-09%20at%201.23.31%20PM.png?X-CloudApp-Visitor-Id=3399053&v=ed16c3c4" />
+            <Image url="https://images.unsplash.com/photo-1561414927-6d86591d0c4f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1266&q=80" />
             <Title
                 paddingLeft="sm"
                 paddingTop="sm"
@@ -141,7 +141,7 @@ const NewsMagazine = () => (
             />
           </Card.Header>
           <Card.Body padding="none">
-            <Image url="https://djenjyj46f9j9.cloudfront.net/items/0n07340O0c3R0V0L1V0P/Screen%20Shot%202020-07-09%20at%201.41.26%20PM.png?X-CloudApp-Visitor-Id=3399053&v=b532b3f0" />
+            <Image url="https://images.unsplash.com/photo-1500202352583-7b2fc394ed15?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80" />
             <Title
                 paddingLeft="sm"
                 paddingTop="sm"
@@ -187,7 +187,7 @@ const NewsMagazine = () => (
             />
           </Card.Header>
           <Card.Body padding="none">
-            <Image url="https://djenjyj46f9j9.cloudfront.net/items/1j2k1g3f2H2W2f1v3225/Screen%20Shot%202020-07-09%20at%201.42.32%20PM.png?X-CloudApp-Visitor-Id=3399053&v=2ab46cb6" />
+            <Image url="https://images.unsplash.com/photo-1551269901-5c5e14c25df7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80" />
             <Title
                 paddingLeft="sm"
                 paddingTop="sm"
@@ -233,7 +233,7 @@ const NewsMagazine = () => (
             />
           </Card.Header>
           <Card.Body padding="none">
-            <Image url="https://djenjyj46f9j9.cloudfront.net/items/2j0G2k3I0f3W3a2c2q3o/Screen%20Shot%202020-07-09%20at%201.43.40%20PM.png?X-CloudApp-Visitor-Id=3399053&v=d2667a0b" />
+            <Image url="https://images.unsplash.com/photo-1451187580459-43490279c0fa?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1352&q=80" />
             <Title
                 paddingTop="sm"
                 paddingX="sm"
@@ -279,7 +279,7 @@ const NewsMagazine = () => (
             />
           </Card.Header>
           <Card.Body padding="none">
-            <Image url="https://djenjyj46f9j9.cloudfront.net/items/0m353s3A3I3B0w3N3W2U/Screen%20Shot%202020-07-09%20at%201.44.30%20PM.png?X-CloudApp-Visitor-Id=3399053&v=5b24787c" />
+            <Image url="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" />
             <Title
                 paddingLeft="sm"
                 paddingTop="sm"
@@ -325,7 +325,7 @@ const NewsMagazine = () => (
             />
           </Card.Header>
           <Card.Body padding="none">
-            <Image url="https://djenjyj46f9j9.cloudfront.net/items/0n1b1V1F4614343t3547/Screen%20Shot%202020-07-09%20at%201.45.26%20PM.png?X-CloudApp-Visitor-Id=3399053&v=a3cc4d20" />
+            <Image url="https://images.unsplash.com/photo-1558677949-260173506bbf?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1267&q=80" />
             <Title
                 paddingLeft="sm"
                 paddingTop="sm"
