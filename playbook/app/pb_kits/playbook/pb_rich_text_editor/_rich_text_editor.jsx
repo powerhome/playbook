@@ -1,46 +1,87 @@
 /* @flow */
 
-import React from "react"
+import React, { useRef, useEffect } from "react"
 import classnames from "classnames"
 import useFocus from "./useFocus.js"
-import Trix from 'trix'
+import Trix from "trix"
 
 type RichTextEditorProps = {
-  className?: String,
-  dark?: Boolean,
-  focus?: Boolean,
-  simple?: Boolean,
-  content?: String,
-  sticky?: Boolean,
+  className?: string,
+  dark?: boolean,
+  focus?: boolean,
+  id?: string,
+  onChange: (string) => void,
+  placeholder?: string,
+  simple?: boolean,
+  sticky?: boolean,
+  template: string,
+  value?: string,
 }
 
 const RichTextEditor = ({
   className,
   dark = false,
   focus = false,
+  id,
+  onChange,
+  placeholder,
   simple = false,
   sticky = false,
-  content = "",
+  template = "",
+  value = "",
 }: RichTextEditorProps) => {
-  // useFocus Hook to be extracted to separate file.
-  const useFocus = () => {
-    const allTrixEditors = document.querySelectorAll(
-      ".focus-editor-targets trix-editor"
-    )
-    allTrixEditors.forEach((editorElement) => {
-      const toolbarElement = editorElement.toolbarElement
-      if (editorElement == document.activeElement) {
-        editorElement.classList.add("focused-editor")
-        toolbarElement.style.display = "block"
-      } else {
-        // don't hide the toolbar if we've unfocused to focus on the link dialog.
-        if (!toolbarElement.contains(document.activeElement)) {
-          editorElement.classList.remove("focused-editor")
-          toolbarElement.style.display = "none"
-        }
+  const trixRef = useRef()
+
+  useEffect(() => {
+    Trix.config.textAttributes.inlineCode = {
+      tagName: "code",
+      inheritable: true,
+    }
+
+    trixRef.current.addEventListener("trix-initialize", (event) => {
+      const element = event.target
+      const { toolbarElement, editor } = element
+
+      const blockCodeButton = toolbarElement.querySelector(
+        "[data-trix-attribute=code]"
+      )
+      const inlineCodeButton = blockCodeButton.cloneNode(true)
+
+      inlineCodeButton.hidden = true
+      inlineCodeButton.dataset.trixAttribute = "inlineCode"
+      blockCodeButton.insertAdjacentElement("afterend", inlineCodeButton)
+
+      element.addEventListener("trix-selection-change", () => {
+        const type = getCodeFormattingType()
+        blockCodeButton.hidden = type == "inline"
+        inlineCodeButton.hidden = type == "block"
+      })
+
+      function getCodeFormattingType() {
+        if (editor.attributeIsActive("code")) return "block"
+        if (editor.attributeIsActive("inlineCode")) return "inline"
+
+        const range = editor.getSelectedRange()
+        if (range[0] == range[1]) return "block"
+
+        const text = editor.getSelectedDocument().toString().trim()
+        return /\n/.test(text) ? "block" : "inline"
       }
     })
-  }
+
+    trixRef.current.addEventListener("trix-change", (event) => {
+      onChange && onChange(event.target.innerHTML)
+    })
+  }, [trixRef])
+
+  useEffect(() => {
+    let editor = trixRef.current.editorController.editor
+    if (template) {
+      editor.loadHTML("")
+      editor.setSelectedRange([0, 0])
+      editor.insertHTML(template)
+    }
+  }, [template])
 
   focus
     ? (document.addEventListener("trix-focus", useFocus),
@@ -63,8 +104,8 @@ const RichTextEditor = ({
         className
       )}
     >
-      <input id='trix' type='hidden' value={content} />
-      <trix-editor input='trix' placeholder='Empty Placeholder' />
+      <input id={id} type='hidden' value={value} />
+      <trix-editor input={id} placeholder={placeholder} ref={trixRef} />
     </div>
   )
 }
