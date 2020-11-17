@@ -16,7 +16,7 @@ class SampleGenerator < Rails::Generators::NamedBase
   end
 
   def update_yaml
-    category = options[:category]
+    category = options[:category].strip.downcase.underscore
     samples_yaml = YAML.load_file("app/pb_kits/playbook/data/samples.yml")
 
     if samples_yaml[category]
