@@ -3,7 +3,7 @@
 import React from 'react'
 import classnames from 'classnames'
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
-import { Body, Caption, Flex, FlexItem, IconCircle, Title } from '../'
+import { Body, Caption, Flex, IconCircle, Title } from '../'
 import { globalProps } from '../utilities/globalProps.js'
 
 type IconStatValueProps = {
@@ -89,15 +89,11 @@ const IconStatValue = (props: IconStatValueProps) => {
         <Flex
             vertical="bottom"
         >
-          <FlexItem>
-            {titleSize(size)}
-          </FlexItem>
+          {titleSize(size)}
           &nbsp;
-          <FlexItem>
-            <Body
-                text={unit}
-            />
-          </FlexItem>
+          <Body
+              text={unit}
+          />
         </Flex>
         <Caption text={text} />
       </div>

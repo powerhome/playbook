@@ -5,65 +5,58 @@ const IconStatValueColor = () => {
   return (
     <div>
       <IconStatValue
-          icon="car"
-          size="sm"
-          text="distance driven"
-          unit="mi"
-          value={158.3}
+          icon="globe-europe"
+          text="Mercury"
+          unit="AU"
+          value={0.39}
           variant="blue"
       />
       <br />
       <IconStatValue
-          icon="car"
-          size="sm"
-          text="distance driven"
-          unit="mi"
-          value={158.3}
+          icon="planet-ringed"
+          text="Venus"
+          unit="AU"
+          value={0.723}
           variant="royal"
       />
       <br />
       <IconStatValue
-          icon="car"
-          size="sm"
-          text="distance driven"
-          unit="mi"
-          value={158.3}
+          icon="planet-moon"
+          text="Earth"
+          unit="AU"
+          value={1.0}
           variant="purple"
       />
       <br />
       <IconStatValue
-          icon="car"
-          size="sm"
-          text="distance driven"
-          unit="mi"
-          value={158.3}
+          icon="solar-system"
+          text="Mars"
+          unit="AU"
+          value={1.524}
           variant="teal"
       />
       <br />
       <IconStatValue
-          icon="car"
-          size="sm"
-          text="distance driven"
-          unit="mi"
-          value={158.3}
+          icon="globe-americas"
+          text="Jupitar"
+          unit="AU"
+          value={5.203}
           variant="red"
       />
       <br />
       <IconStatValue
-          icon="car"
-          size="sm"
-          text="distance driven"
-          unit="mi"
-          value={158.3}
+          icon="globe-africa"
+          text="Saturn"
+          unit="AU"
+          value={9.539}
           variant="yellow"
       />
       <br />
       <IconStatValue
-          icon="car"
-          size="sm"
-          text="distance driven"
-          unit="mi"
-          value={158.3}
+          icon="globe"
+          text="Uranus"
+          unit="AU"
+          value={19.18}
           variant="green"
       />
     </div>
