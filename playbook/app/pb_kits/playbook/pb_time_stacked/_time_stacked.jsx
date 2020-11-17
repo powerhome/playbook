@@ -19,7 +19,7 @@ type TimeStackedProps = {
 }
 
 const TimeStacked = (props: TimeStackedProps) => {
-  const { align, className, dark, date, tag='body' } = props
+  const { align, className, dark, date } = props
   deprecatedProps('TimeStacked', ['tag'])
   const classes = classnames(
     buildCss('pb_time_stacked_kit', align),
@@ -33,16 +33,16 @@ const TimeStacked = (props: TimeStackedProps) => {
     <div className={classes}>
       <div
           align={align}
-          className='pb_time_stacked_day_month'
+          className="pb_time_stacked_day_month"
       >
         <Body
+            color="light"
             dark={dark}
-            color='light'
             text={dateTimestamp.toTimeWithMeridian()}
         />
         <Caption
+            color="light"
             dark={dark}
-            color='light'
             text={dateTimestamp.toTimezone()}
         />
       </div>
