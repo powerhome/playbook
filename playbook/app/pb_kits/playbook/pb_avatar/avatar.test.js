@@ -1,10 +1,7 @@
-// TODO: abstract away to wrapper
 import React from 'react'
-import { render, screen } from '@testing-library/react'
-import '@testing-library/jest-dom/extend-expect'
-// TODO: abstract away to wrapper
+import { render, screen } from '../utilities/test-utils'
 
-import { Avatar } from '../'
+import Avatar from './_avatar'
 
 const imageUrl = 'https://randomuser.me/api/portraits/men/44.jpg',
   testId = 'tjohnson',

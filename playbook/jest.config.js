@@ -68,7 +68,7 @@ module.exports = {
   // An array of directory names to be searched recursively up from the requiring module's location
   moduleDirectories: [
     'node_modules',
-    'playbook/app/pb_kits/playbook',
+    // 'playbook/app/pb_kits/playbook',
   ],
 
   // An array of file extensions your modules use
