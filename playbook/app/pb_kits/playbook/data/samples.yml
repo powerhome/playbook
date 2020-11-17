@@ -1,10 +1,10 @@
 ---
-samples:
+full_page_samples:
 - analytics_dashboard
 - conference_statistics
 - crm_client_list
 - news_magazine
-cards:
+dashboard_cards:
 - test_card_one
 - test_card_two
 - test_card_three
