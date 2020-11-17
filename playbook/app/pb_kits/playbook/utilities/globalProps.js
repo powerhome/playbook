@@ -48,15 +48,8 @@ export const globalProps = (props, defaultProps = {}) => {
 export const deprecatedProps = (kit, props = []) => {
   if (process.env.NODE_ENV === 'development') {
     /* eslint no-console: ["error", { allow: ["warn", "error"] }] */
-    props.forEach(prop => {
-      console.warn(`${kit} Kit: The prop '${prop}' is deprecated and will be removed in a future release!`);
-    });
+    props.forEach((prop) => {
+      console.warn(`${kit} Kit: The prop '${prop}' is deprecated and will be removed in a future release!`)
+    })
   }
 }
-
-// Object.keys(obj).forEach(key => {
-//   console.log(key, obj[key]);
-// });
-// Object.keys(props).forEach(prop => {
-//   console.warn(`${kit} Kit: The prop '${prop}' is deprecated and will be removed in a future release!`);
-// });
