@@ -11,6 +11,7 @@ $image-sizes: (
 
 [class^=pb_image_kit] {
   position: relative;
+  max-width: -webkit-fill-available;
 
   @each $name, $size in $image-sizes {
     &[class*=_#{$name}] {
@@ -37,5 +38,6 @@ $image-sizes: (
       -webkit-filter: blur(0);
       filter: blur(0);
     }
+
   }
 }
