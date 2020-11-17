@@ -5,7 +5,7 @@ require "yaml"
 class SampleGenerator < Rails::Generators::NamedBase
   desc "This generator creates a new Full Page Sample"
   source_root File.expand_path("templates", __dir__)
-  class_option :category, type: :string, default: 'samples'
+  class_option :category, type: :string, default: "full_page_samples"
 
   def create_indexes
     sample_name = name.strip.downcase
@@ -18,7 +18,13 @@ class SampleGenerator < Rails::Generators::NamedBase
   def update_yaml
     category = options[:category]
     samples_yaml = YAML.load_file("app/pb_kits/playbook/data/samples.yml")
-    samples_yaml[category].push(@sample_name_underscore)
+
+    if samples_yaml[category]
+      samples_yaml[category].push(@sample_name_underscore)
+    else
+      samples_yaml[category] = [@sample_name_underscore]
+    end
+
     File.open("app/pb_kits/playbook/data/samples.yml", "w") { |out| YAML.dump(samples_yaml, out) }
   end
 
