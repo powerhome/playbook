@@ -5,6 +5,7 @@
 @import "../../tokens/shadows";
 
 $selector: ".pb--page";
+$nav_breakpoint: breakpoint("lg") + 4;
 
 body {
   overflow-x: hidden;
@@ -28,7 +29,7 @@ body {
     .mobile-popover-nav {
       display: none;
     }
-    @include break_at(breakpoint("lg")) {
+    @include break_at($nav_breakpoint) {
       .full-size-nav {
         display: none;
       }
@@ -45,7 +46,7 @@ body {
 
   &--content {
     min-height: calc(100vh - 89px);
-    @include break_at(breakpoint("lg")) {
+    @include break_at($nav_breakpoint) {
       grid-template-columns: auto !important;
     }
     &--main {
@@ -53,7 +54,7 @@ body {
       padding: 40px 60px;
       height: calc(100vh - 89px);
       overflow: auto;
-      @include break_at(breakpoint("lg")) {
+      @include break_at($nav_breakpoint) {
         padding: $space-lg $space-xl;
       }
       &.dark{
@@ -74,14 +75,14 @@ body {
     height: 30px;
     color: $primary;
     cursor: pointer;
-    @include break_at(breakpoint("lg")) {
+    @include break_at($nav_breakpoint) {
       display: block;
     }
   }
   &--checkbox {
     opacity: 0;
      ~ #{$selector}--sideNav {
-      @include break_at(breakpoint("lg")) {
+      @include break_at($nav_breakpoint) {
         position: absolute;
         transform-origin: 0% 0%;
         transform: translate(100%, 0);
@@ -95,7 +96,7 @@ body {
       }
     }
     &:checked ~ #{$selector}--sideNav {
-      @include break_at(breakpoint("lg")) {
+      @include break_at($nav_breakpoint) {
         transform: translate(-10%, 0);
       }
     }
@@ -132,7 +133,8 @@ body {
     background-color: $white;
     display: none;
     height: auto !important;
-    @include break_at(breakpoint("lg")) {
+    overflow: hidden;
+    @include break_at($nav_breakpoint) {
       display: block;
     }
   }
@@ -155,7 +157,7 @@ body {
     .mobile-sidebar-pages {
       display: none;
     }
-    @include break_at(breakpoint("lg")) {
+    @include break_at($nav_breakpoint) {
       .mobile-sidebar-pages {
         display: block;
       }
