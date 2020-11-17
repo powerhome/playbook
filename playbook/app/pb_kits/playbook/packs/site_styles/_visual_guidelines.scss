@@ -1,0 +1,16 @@
+.visual_guidelines {
+  .header-text {
+    max-width: 600px;
+    margin: auto;
+  }
+  // Background padding override
+  .pb_background_kit {
+    padding: $space_xl * 1.75 !important;
+  }
+
+  @include break_at(699px){
+    .pb_background_kit {
+      padding: $space_xl !important;
+    }
+  }
+}

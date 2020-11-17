@@ -1,6 +1,21 @@
-<%# <div class="p_xl"> %>
-  <div class="pb--page--content--main height-override">
-    <%= render "playbook/pages/utilities/utilities.html.slim" %>
-    <%= render "playbook/pages/tokens/tokens.html.slim" %>
-  </div>
-<%# </div> %>
+<div class="visual_guidelines">
+  <%= pb_rails("background", props: { background_color: "dark", padding: "xl" }) do %>
+    <%= pb_rails("flex", props: { classname: "header-text", orientation: "column", horizontal: "center"}) do %>
+        <div>
+          <%= pb_rails("title", props: { dark: true, margin_bottom: "lg", text: "Samples You'll Actually Use", tag: "h1", size: 1 }) %>
+          <%= pb_rails("body", props: {
+            dark: true,
+            text: "We created a collection of professionally designed, pre-built, fully responsive samples you can drop 
+            into your projects effortlessly.  These samples showcase Playbook Design System's versatility and the power 
+            of its kits.  Use these samples for inspiration, or as the foundation for that great app idea."
+          }) %>
+        </div>
+    <% end %>
+  <% end %>
+
+  <%= pb_rails("background", props: { background_color: "light", padding: "xl" }) do %>
+      <%= render "playbook/pages/utilities/utilities.html.slim" %>
+      <%= render "playbook/pages/tokens/tokens.html.slim" %>
+  <% end %>
+
+</div>

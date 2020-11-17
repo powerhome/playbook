@@ -67,17 +67,7 @@ module Playbook
 
     def principles; end
 
-    def tokens
-      render layout: "layouts/playbook/kits"
-    end
-
-    def utilities
-      render layout: "layouts/playbook/kits"
-    end
-
-    def visual_guidelines
-
-    end
+    def visual_guidelines; end
 
   private
 

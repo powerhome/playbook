@@ -4,10 +4,8 @@ Playbook::Engine.routes.draw do
   get 'principles',         to: "pages#principles"
   get 'getting_started',    to: "pages#getting_started"
   get 'grid',               to: "pages#grid"
-  get 'tokens',             to: "pages#tokens"
   get 'kits',               to: "pages#kits"
   get 'examples',           to: "pages#examples"
-  get 'utilities',          to: "pages#utilities"
   get 'resources',          to: "pages#resources"
   get 'visual_guidelines',  to: "pages#visual_guidelines"
 
