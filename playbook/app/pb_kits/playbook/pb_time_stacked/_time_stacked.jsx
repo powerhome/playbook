@@ -6,7 +6,7 @@ import classnames from 'classnames'
 import DateTime from '../pb_kit/dateTime.js'
 import { buildCss } from '../utilities/props'
 import { Body, Caption } from '../'
-import { globalProps } from '../utilities/globalProps.js'
+import { deprecatedProps, globalProps } from '../utilities/globalProps.js'
 
 type TimeStackedProps = {
   className?: string | array<string>,
@@ -15,10 +15,12 @@ type TimeStackedProps = {
   date: string,
   id?: string,
   align?: "left" | "center" | "right",
+  tag?: "body" | "caption",
 }
 
 const TimeStacked = (props: TimeStackedProps) => {
-  const { align, className, date } = props
+  const { align, className, dark, date, tag } = props
+  deprecatedProps("TimeStacked", ["tag"])
   const classes = classnames(
     buildCss('pb_time_stacked_kit', align),
     globalProps(props),
@@ -30,18 +32,18 @@ const TimeStacked = (props: TimeStackedProps) => {
   return (
     <div className={classes}>
       <div
-          align={align}
-          className="pb_time_stacked_day_month"
+        align={align}
+        className="pb_time_stacked_day_month"
       >
         <Body
-            {...props}
-            color="light"
-            text={dateTimestamp.toTimeWithMeridian()}
+          dark={dark}
+          color="light"
+          text={dateTimestamp.toTimeWithMeridian()}
         />
         <Caption
-            {...props}
-            color="light"
-            text={dateTimestamp.toTimezone()}
+          dark={dark}
+          color="light"
+          text={dateTimestamp.toTimezone()}
         />
       </div>
     </div>

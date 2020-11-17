@@ -10,14 +10,15 @@ module Playbook
 
       partial "pb_time_stacked/time_stacked"
 
-      prop :date, type: Playbook::Props::Date, required: true
-      prop :dark, type: Playbook::Props::Boolean,
-                  default: false
-      prop :classnames, type: Playbook::Props::String,
-                        default: nil
       prop :align, type: Playbook::Props::Enum,
                    values: %w[left center right],
                    default: "left"
+      prop :classnames, type: Playbook::Props::String,
+                        default: nil
+      prop :dark, type: Playbook::Props::Boolean,
+                  default: false
+      prop :date, type: Playbook::Props::Date, required: true
+
       def classname
         generate_classname("pb_time_stacked_kit", dark_class)
       end
