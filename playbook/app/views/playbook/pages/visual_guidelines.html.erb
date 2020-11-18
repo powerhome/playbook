@@ -5,7 +5,7 @@
           <%= pb_rails("title", props: { dark: true, margin_bottom: "lg", text: "Our Visual Langauge", tag: "h1", size: 1 }) %>
           <%= pb_rails("body", props: {
             dark: true,
-            text: "This page outlines the guiding principles that inform Playbook Design System's past, present and future development.  
+            text: "This page outlines the guiding principles that inform Playbook Design System's past, present, and future development.  
             These core concepts are the basis upon which every higher order design element is built.  Some of these principles have 
             been abstracted into sass variables listed below."
           }) %>
@@ -14,8 +14,8 @@
   <% end %>
 
   <%= pb_rails("background", props: { background_color: "light", padding: "xl" }) do %>
-      <%= render "playbook/pages/utilities/utilities.html.slim" %>
-      <%= render "playbook/pages/tokens/tokens.html.slim" %>
+      <%= render "playbook/pages/visual_guidelines_partials/colors.html.slim" %>
+      <%= render "playbook/pages/visual_guidelines_partials/spacing.html.slim" %>
   <% end %>
 
 </div>
