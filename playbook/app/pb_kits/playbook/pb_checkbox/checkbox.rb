@@ -5,6 +5,7 @@ module Playbook
     class Checkbox < Playbook::KitBase
       prop :error, type: Playbook::Props::Boolean, default: false
       prop :checked, type: Playbook::Props::Boolean, default: false
+      prop :indeterminate, type: Playbook::Props::Boolean, default: false
       prop :text
       prop :value
       prop :name
@@ -40,6 +41,10 @@ module Playbook
 
       def checked_class
         checked ? "on" : "off"
+      end
+
+      def indeterminate_class
+        indeterminate ? "indeterminate" : ""
       end
     end
   end

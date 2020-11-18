@@ -1,0 +1,77 @@
+<%= pb_rails("table", props: { disable_hover: true, size: "md" }) do %>
+  <thead>
+    <tr>
+      <th>
+        <%= pb_rails("checkbox" , props: {
+            text: "Select ",
+            value: "checkbox-value",
+            name: "main",
+            indeterminate: true,
+            id: "test-indeterminate-js"
+        }) %>
+        </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <%= pb_rails("checkbox" , props: {
+          text: "Item 1",
+          value: "checkbox-value",
+          checked: true,
+          name: "checkbox-name",
+          classname: "check-js"
+        }) %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <%= pb_rails("checkbox" , props: {
+          text: "Item 2",
+          value: "checkbox-value",
+          checked: false,
+          name: "checkbox-name",
+          classname: "check-js"
+        }) %>
+      </td>
+    </tr>
+  </tbody>
+<% end %>
+
+
+<script>
+  const indeterminateCheckbox = document.querySelector("#test-indeterminate-js");
+  const checkboxes = document.querySelectorAll(".check-js");
+  const allEqual = arr => arr.every( v => v === arr[0] );
+
+  // Add click handlers
+  checkboxes.forEach((checkBox) => { checkBox.onclick = () => { updateState() } });
+
+  indeterminateCheckbox.onclick = (e) => {
+    checkboxes.forEach((checkBox) => {
+      checkBox.firstElementChild.checked = e.target.checked;
+    });
+  }
+
+  function updateState() {
+    const checkboxStates = [];
+    const indeterminateIcon = indeterminateCheckbox.querySelector("#indeterminate_icon");
+    const checkIcon = indeterminateCheckbox.querySelector("#check_icon");
+    const main = indeterminateCheckbox.querySelector("#main");
+
+    // Check select state
+    checkboxes.forEach((checkBox) => {
+      checkboxStates.push(checkBox.firstElementChild.checked);
+    });
+
+    if (allEqual(checkboxStates)) {
+      main.checked = checkboxStates[0];
+      indeterminateIcon.classList.remove("hidden");
+      checkIcon.classList.add("hidden");
+      } else {
+      main.checked = true;
+      indeterminateIcon.classList.add("hidden");
+      checkIcon.classList.remove("hidden");
+    }
+  }
+</script>
