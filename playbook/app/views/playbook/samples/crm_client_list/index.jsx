@@ -1,7 +1,7 @@
 import React from 'react'
 import { Body, Button, Caption, CircleIconButton, Currency, Date, Filter, Flex, FlexItem, PersonContact, ProgressPills, Table, TextInput, Title, User } from '../../../../pb_kits/playbook'
 
-const CRMClientList = () => (
+const CrmClientList = () => (
   <div>
     <Flex
         className="bg_light"
@@ -430,4 +430,4 @@ const CRMClientList = () => (
   </div>
 )
 
-export default CRMClientList
+export default CrmClientList
