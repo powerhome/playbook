@@ -40,12 +40,9 @@ module Playbook
 
     def set_sample
       sample_yaml = YAML.load_file("#{Playbook::Engine.root}/app/pb_kits/playbook/data/samples.yml")
-      # menu = sample_yaml["samples"].map { |link| link.is_a?(Hash) ? link.first.last : link }
-      # menu = sample_yaml.map { |link| link.is_a?(Hash) ? link.first.last : link }
       if sample_yaml.flatten(2).include?(params[:name])
         @sample = params[:name]
       else
-        # redirect_to root_path, flash: { error: "That kit does not exist" }
         redirect_to "/samples", flash: { error: "That sample does not exist" }
       end
     end

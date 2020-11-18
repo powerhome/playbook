@@ -12,66 +12,6 @@
     <% end %>
   <% end %>
 
-  <% if false %>
-    <%= pb_rails("background", props: { background_color: "white", padding: "xl" }) do %>
-      <%# Full Page Samples %>
-      <%= pb_rails("flex", props: { classname: "full_page samples_flex_wrapper", horizontal: "center", wrap: true }) do %>
-
-          <%= pb_rails("flex/flex_item", props: { classname: "preview" }) do %>
-            <%= pb_rails("title", props: { margin_bottom: "sm", text: "Full Page Samples", tag: "h4", size: 4 }) %>
-            <%= image_tag("sample_screenshot.svg", class: "sample_screenshot") %>
-            <%= pb_rails("icon_value", props: {
-              icon: "palette",
-              margin_top: "xs",
-              text: "#{@sample_yaml["samples"].size} Designs"
-            }) %>
-          <% end %>
-          
-          <%= pb_rails("flex/flex_item", props: { classname: "list" }) do %>
-            <%= pb_rails("nav", props: {}) do %>
-              <% @sample_yaml["samples"].each do |link| %>
-                <%= pb_rails("nav/item", props: { 
-                  icon_right: "angle-right",
-                  text: link == "crm_client_list" ? "CRM Client List" : link.titleize,
-                  link: "/samples/#{link}" 
-                }) %>
-              <% end %>
-            <% end %>
-          <% end %>
-
-      <% end %>
-
-      <% if @sample_yaml["cards"] %>
-        <%# Dashboard Cards %>
-        <%= pb_rails("flex", props: { classname: "cards samples_flex_wrapper", horizontal: "center", margin_top: "xl", wrap: true }) do %>
-
-            <%= pb_rails("flex/flex_item", props: { classname: "preview" }) do %>
-              <%= pb_rails("title", props: { margin_bottom: "sm", text: "Dashboard Card Samples", tag: "h4", size: 4 }) %>
-              <%= image_tag("sample_screenshot.svg", class: "sample_screenshot") %>
-              <%= pb_rails("icon_value", props: {
-                icon: "palette",
-                margin_top: "xs",
-                text: "#{@sample_yaml["cards"].size} Designs"
-              }) %>
-            <% end %>
-            
-            <%= pb_rails("flex/flex_item", props: { classname: "list" }) do %>
-              <%= pb_rails("nav", props: {}) do %>
-                <% @sample_yaml["cards"].each do |link| %>
-                  <%= pb_rails("nav/item", props: { 
-                    icon_right: "angle-right",
-                    text: link.titleize,
-                    link: "/samples/#{link}" 
-                  }) %>
-                <% end %>
-              <% end %>
-            <% end %>
-
-        <% end %>
-      <% end %>
-    <% end %>
-  <% end %>
-
   <%= pb_rails("background", props: { background_color: "white", padding: "xl" }) do %>
 
     <%# Loop through each Sample Category in samples.yml %>
@@ -115,23 +55,4 @@
     <% end %>
 
   <% end %>
-
-  <%= javascript_tag do %>
-    <%# document.addEventListener('DOMContentLoaded', ()=>{
-      let minWidth = 0;
-      let lists = document.querySelectorAll('.list')
-      
-      lists.forEach((list)=>{
-        if(list.offsetWidth > minWidth) {
-          minWidth = list.offsetWidth
-        }
-      })
-      console.log('test')
-      lists.forEach((list)=> {
-        list.style.minWidth = `${minWidth}px`;
-      })
-
-    }) %>
-  <% end %>
-
 </div>
