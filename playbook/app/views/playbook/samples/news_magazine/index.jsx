@@ -141,7 +141,7 @@ const NewsMagazine = () => {
           {/* END PLANET MONEY */}
           {/* START WORLD CARD */}
           <Card padding="none">
-            <Card.Header categoryColor={2}>
+            <Card.Header headerColor="category_2">
               <Caption
                   dark
                   text="World"
@@ -187,7 +187,7 @@ const NewsMagazine = () => {
           {/* END WORLD CARD */}
           {/* START BOOKS CARD */}
           <Card padding="none">
-            <Card.Header categoryColor={3}>
+            <Card.Header headerColor="category_3">
               <Caption
                   dark
                   text="Books"
@@ -233,7 +233,7 @@ const NewsMagazine = () => {
           {/* END BOOKS CARD */}
           {/* START NATIONAL CARD */}
           <Card padding="none">
-            <Card.Header categoryColor={4}>
+            <Card.Header headerColor="category_4">
               <Caption
                   dark
                   text="National"
@@ -279,7 +279,7 @@ const NewsMagazine = () => {
           {/* END NATIONAL CARD */}
           {/* START BOOKS, NEWS, AND FEATURES CARD */}
           <Card padding="none">
-            <Card.Header categoryColor={5}>
+            <Card.Header headerColor="category_5">
               <Caption
                   dark
                   text="Books, News, and Features"
@@ -325,7 +325,7 @@ const NewsMagazine = () => {
           {/* END BOOKS, NEWS, AND FEATURES CARD */}
           {/* START SCIENCE CARD */}
           <Card padding="none">
-            <Card.Header categoryColor={6}>
+            <Card.Header headerColor="category_6">
               <Caption
                   dark
                   text="Science"

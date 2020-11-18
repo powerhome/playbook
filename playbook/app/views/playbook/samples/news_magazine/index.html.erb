@@ -8,7 +8,7 @@
   })
 <% end %>
 
-<%= pb_rails("layout", props: {position: "left", size: "sm", collapse: "md", layout: "collection_detail" }) do %>
+<%= pb_rails("layout", props: { position: "left", size: "sm", collapse: "md", layout: "collection_detail", dark: false }) do %>
   <%= pb_rails("layout/sidebar") do %>
     <%= pb_rails("card", props: { padding: "none" }) do %>
     <%= pb_rails("caption", props: { text: "News Stories", size: 'lg', margin: "md" }) %>
@@ -175,5 +175,3 @@
     <!-- END SCIENCE CARD -->
     <% end %>
 <% end %>
-
-
