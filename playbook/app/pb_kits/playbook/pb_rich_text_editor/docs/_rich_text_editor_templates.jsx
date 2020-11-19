@@ -1,34 +1,37 @@
-import React, { useState } from "react"
-import { RichTextEditor, Select } from "../../"
-import { release, changelog } from "./templates.js"
+import React, { useState } from 'react'
+import { RichTextEditor, Select } from '../../'
+import { changelog, release } from './templates.js'
 
 const RichTextEditorTemplates = () => {
-  const [editorContent, setEditorContent] = useState("")
+  const [editorContent, setEditorContent] = useState('')
 
-  function handleChange(event) {
+  const handleChange = (event) => {
     setEditorContent(event.target.value)
   }
 
   const options = [
     {
       value: release,
-      text: "Playbook Release",
+      text: 'Playbook Release',
     },
     {
       value: changelog,
-      text: "Changelog",
+      text: 'Changelog',
     },
   ]
 
   return (
     <div>
       <Select
-        onChange={handleChange}
-        label='Template'
-        blankSelection='Select a template...'
-        options={options}
+          blankSelection="Select a template..."
+          label="Template"
+          onChange={handleChange}
+          options={options}
       />
-      <RichTextEditor id='template' template={editorContent} />
+      <RichTextEditor
+          id="template"
+          template={editorContent}
+      />
     </div>
   )
 }
