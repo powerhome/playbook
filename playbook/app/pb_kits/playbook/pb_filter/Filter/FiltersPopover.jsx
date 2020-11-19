@@ -4,12 +4,13 @@ import React, { Node, useState } from 'react'
 import { CircleIconButton, PbReactPopover } from '../../'
 
 const FiltersPopoverProps = { children: Node }
-const FiltersPopover = ({ children }: FiltersPopoverProps) => {
+const FiltersPopover = ({ children, dark }: FiltersPopoverProps) => {
   const [hide, updateHide] = useState(true)
   const toggle = () => updateHide(!hide)
 
   const filterButton = (
     <CircleIconButton
+        dark={dark}
         icon="filter"
         id="filter"
         onClick={toggle}

@@ -9,12 +9,13 @@ export type FilterDescription = {
 }
 
 export type CurrentFiltersProps = {
+  dark: boolean,
   filters: FilterDescription,
 }
 
 const hiddenFilters = (value) => isEmpty(value) && value !== true
 
-const CurrentFilters = ({ filters }: CurrentFiltersProps) => {
+const CurrentFilters = ({ dark, filters }: CurrentFiltersProps) => {
   const displayableFilters = omitBy(filters, hiddenFilters)
 
   return (
@@ -30,14 +31,19 @@ const CurrentFilters = ({ filters }: CurrentFiltersProps) => {
               <Choose>
                 <When condition={value === true}>
                   <Title
+                      dark={dark}
                       size={4}
                       tag="h4"
                       text={name}
                   />
                 </When>
                 <Otherwise>
-                  <Caption text={name} />
+                  <Caption
+                      dark={dark}
+                      text={name}
+                  />
                   <Title
+                      dark={dark}
                       size={4}
                       tag="h4"
                       text={value}

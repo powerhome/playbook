@@ -22,6 +22,7 @@ kits:
     - date_picker
     - file_upload
     - form
+    - form_group
     - form_pill
     - radio
     - select
@@ -36,6 +37,7 @@ kits:
   - highlight
   - icon
   - icon_circle
+  - icon_stat_value
   - icon_value
   - image
   - layout
