@@ -56,6 +56,7 @@ kits:
     - progress_pills
     - progress_simple
     - progress_step
+  - rich_text_editor
   - section_separator
   - source
   - star_rating
