@@ -10,7 +10,10 @@
   .pb_background_kit {
     padding: $space_xl * 1.75 !important;
   }
-
+  .token-wrapper {
+    max-width: 1242px;
+    margin: auto;
+  }
   @include break_at(breakpoint("sm")){
     .pb_background_kit {
       padding: $space_xl !important;

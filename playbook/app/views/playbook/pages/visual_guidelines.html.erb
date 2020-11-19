@@ -13,7 +13,7 @@
     <% end %>
   <% end %>
 
-  <%= pb_rails("background", props: { background_color: "light", padding: "xl" }) do %>
+  <%= pb_rails("background", props: { classname: "token-wrapper", background_color: "light", padding: "xl" }) do %>
       <%= render "playbook/pages/visual_guidelines_partials/colors.html.slim" %>
       <%= render "playbook/pages/visual_guidelines_partials/spacing.html.slim" %>
   <% end %>
