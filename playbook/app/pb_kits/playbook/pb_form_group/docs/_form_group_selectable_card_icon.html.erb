@@ -1,0 +1,19 @@
+<div>
+  <%= pb_rails("form_group") do %>
+    <%= pb_rails("selectable_card_icon", props: {
+      icon: "basketball-ball",
+      title_text: "Basketball",
+      input_id: 7,
+      multi: false,
+      name: "select",
+    }) %>
+
+    <%= pb_rails("selectable_card_icon", props: {
+      icon: "football-ball",
+      title_text: "Football",
+      input_id: 8,
+      multi: false,
+      name: "select",
+    }) %>
+  <% end %>
+</div>
