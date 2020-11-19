@@ -55,28 +55,23 @@ ul {
         width: 80px;
         height: 80px;
         border-radius: 40px;
-        margin: 20px 15px 45px;
+        margin: 20px 15px 7px;
         position: relative;
       }
-      &::before {
-        content: attr(data-name);
+
+      p.name {
         width: 100%;
-        position: absolute;
-        top: 105px;
-        left: 0;
         text-align: center;
         font-size: 14px;
         font-weight: 600;
       }
-      &::after {
-        content: attr(data-variable);
+
+      p.var {
         width: 100%;
-        position: absolute;
-        top: 124px;
-        left: 0;
         text-align: center;
         font-size: 12px;
         opacity: 0.7;
+        margin-bottom: 5px;
       }
 
       &.dark {
