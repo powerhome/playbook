@@ -4,7 +4,7 @@ require_relative "../../../../app/pb_kits/playbook/pb_filter/filter"
 
 RSpec.describe Playbook::PbFilter::Filter do
   subject { Playbook::PbFilter::Filter }
-  
+
   it { is_expected.to define_prop(:filters)
                       .of_type(Playbook::Props::HashArray) }
   it { is_expected.to define_prop(:sort_menu)
@@ -20,6 +20,7 @@ RSpec.describe Playbook::PbFilter::Filter do
   describe "#classname" do
     it "returns namespaced class name", :aggregate_failures do
       expect(subject.new({}).classname).to eq "pb_filter_kit"
+      expect(subject.new(dark: true).classname).to eq "pb_filter_kit dark"
     end
   end
 end

@@ -1,7 +1,7 @@
 import React from 'react'
 import { Button, Filter, Flex, Select, TextInput } from '../../'
 
-const FilterSingle = () => {
+const FilterSingle = (props) => {
   const options = [
     { value: 'USA' },
     { value: 'Canada' },
@@ -11,10 +11,11 @@ const FilterSingle = () => {
   ]
   return (
     <Filter
+        {...props}
         filters={{
           'Full Name': 'John Wick',
-          'Territory': 'San Francisco',
         }}
+        results={546}
         sortOptions={{
           popularity: 'Popularity',
           // eslint-disable-next-line
@@ -22,7 +23,7 @@ const FilterSingle = () => {
           // eslint-disable-next-line
           manager_name: 'Manager\'s Name',
         }}
-        sortValue={[{ name: 'popularity', dir: 'asc' }]}
+        sortValue={[{ name: 'popularity', dir: 'desc' }]}
     >
       <TextInput
           label="Full Name"
