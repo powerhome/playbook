@@ -5,7 +5,7 @@
 @import "../../tokens/shadows";
 
 $selector: ".pb--page";
-$nav_breakpoint: breakpoint("lg") + 4;
+$nav_breakpoint: breakpoint("lg");
 
 body {
   overflow-x: hidden;
