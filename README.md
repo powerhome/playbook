@@ -61,4 +61,16 @@ See [docs/upgrade-guide](./docs/upgrade-guide)
 5.  When finished, inside of the directory you want to test with playbook, run `yarn unlink playbook-ui`.
 6.  Inside of your Playbook repository, run `yarn unlink`. 
 
+#### Jest & React-Testing-Library for Writing Tests
+
+We are currently backfilling test cases for React kit test coverage using Jest and React Testing Library. More additions and enhancements
+to the testing libraries are currently in the works. In the meantime, please take a look at these resources:
+
+- https://github.com/testing-library/jest-dom#usage for useage and examples
+- https://jestjs.io/docs/en/using-matchers
+
+When a new kit is generated, a placeholder React kit test will also be created. You can run all the tests with `yarn test`.
+
+### Important Note
+
 Keep in mind: Styles are brought in from playbook through the rails gem, so you will not be able to test scss updates with yarn linking.

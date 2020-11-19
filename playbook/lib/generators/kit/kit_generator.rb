@@ -70,6 +70,7 @@ class KitGenerator < Rails::Generators::NamedBase
       if yes?("Create REACT #{@kit_name_pascal} kit? (y/N)")
         @react_kit = true
         template "kit_jsx.erb", "#{full_kit_directory}/_#{@kit_name_underscore}.jsx"
+        template "kit_jsx_test.erb", "#{full_kit_directory}/#{@kit_name_underscore}.test.jsx"
         template "kit_example_react.erb", "#{full_kit_directory}/docs/_#{@kit_name_underscore}_default.jsx"
         template "kit_js.erb", "#{full_kit_directory}/docs/index.js"
 
@@ -78,7 +79,7 @@ class KitGenerator < Rails::Generators::NamedBase
           "import * as #{@kit_name_pascal} from 'pb_#{@kit_name_underscore}/docs'\nWebpackerReact.setup(#{@kit_name_pascal})\n"
         end
         append_to_file("app/pb_kits/playbook/index.js") do
-          "\nexport #{@kit_name_pascal} from 'pb_#{@kit_name_underscore}/_#{@kit_name_underscore}.jsx'"
+          "\nexport #{@kit_name_pascal} from './pb_#{@kit_name_underscore}/_#{@kit_name_underscore}.jsx'"
         end
 
         say_status  "complete",

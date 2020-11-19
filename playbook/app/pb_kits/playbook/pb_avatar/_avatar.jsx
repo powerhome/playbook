@@ -27,7 +27,7 @@ const firstTwoInitials = (name) =>
     .substring(0, 2)
 
 const Avatar = (props: AvatarProps) => {
-  const { aria = {}, className, data = {}, name = null, id = id, imageUrl, size = 'md', status = null, dark = false } = props
+  const { aria = {}, className, data = {}, name = null, id = '', imageUrl, size = 'md', status = null, dark = false } = props
   const dataProps = buildDataProps(data)
   const ariaProps = buildAriaProps(aria)
   const classes = classnames(
