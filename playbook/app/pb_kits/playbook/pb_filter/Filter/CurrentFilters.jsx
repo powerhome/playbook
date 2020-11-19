@@ -22,10 +22,10 @@ const CurrentFilters = ({ filters }: CurrentFiltersProps) => {
       <If condition={isEmpty(filters)}>
         <div className="filters">
           <Title
+              paddingLeft="xs"
               size={4}
               tag="h4"
               text="No Filter Selected"
-              paddingLeft="xs"
           />
         </div>
       </If>
