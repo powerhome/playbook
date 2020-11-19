@@ -3,6 +3,10 @@ examples:
     - table_sm: Small
     - table_md: Medium
     - table_lg: Large
+    - table_alignment_row: Row Alignment
+    - table_alignment_column: Column Alignment
+    - table_alignment_shift_row: Shift Row
+    - table_alignment_shift_data: Shift Column Data
     - table_side_highlight: Side Highlight
     - table_container: Table Container Off
     - table_disable_hover: Disable Hover
@@ -16,11 +20,15 @@ examples:
     - table_action_middle: Table with Actions in the Middle
     - table_icon_buttons: Table with Icon Buttons
 
- 
+
   react:
     - table_sm: Small
     - table_md: Medium
     - table_lg: Large
+    - table_alignment_row: Row Alignment
+    - table_alignment_column: Column Alignment
+    - table_alignment_shift_row: Shift Row
+    - table_alignment_shift_data: Shift Column Data
     - table_side_highlight: Side Highlight
     - table_container: Table Container Off
     - table_disable_hover: Disable Hover
