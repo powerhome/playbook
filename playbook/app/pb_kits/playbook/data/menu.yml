@@ -37,6 +37,7 @@ kits:
   - highlight
   - icon
   - icon_circle
+  - icon_stat_value
   - icon_value
   - image
   - layout

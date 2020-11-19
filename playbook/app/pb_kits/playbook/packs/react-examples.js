@@ -49,6 +49,7 @@ import * as Highlight from 'pb_highlight/docs'
 import * as HomeAddressStreet from 'pb_home_address_street/docs'
 import * as Icon from 'pb_icon/docs'
 import * as IconCircle from 'pb_icon_circle/docs'
+import * as IconStatValue from 'pb_icon_stat_value/docs'
 import * as IconValue from 'pb_icon_value/docs'
 import * as Image from 'pb_image/docs'
 import * as LabelPill from 'pb_label_pill/docs'
@@ -136,6 +137,7 @@ WebpackerReact.setup({
   ...HomeAddressStreet,
   ...Icon,
   ...IconCircle,
+  ...IconStatValue,
   ...IconValue,
   ...Image,
   ...LabelPill,
