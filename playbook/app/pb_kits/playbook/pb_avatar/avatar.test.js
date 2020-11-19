@@ -20,6 +20,7 @@ test('loads the given image url and name', () => {
   const image    = screen.getByAltText(name)
   const initials = name.split(/\s/)[0].substr(0, 1) + name.split(/\s/)[1].substr(0, 1)
 
+  expect(kit).toHaveClass('pb_avatar_kit_md')
   expect(kit).toHaveAttribute('data-initials', initials)
   expect(image).toHaveAttribute('data-src', imageUrl)
   expect(image).toHaveAttribute('src', imageUrl)
