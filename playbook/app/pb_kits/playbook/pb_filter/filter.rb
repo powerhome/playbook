@@ -7,7 +7,7 @@ module Playbook
 
       partial "pb_filter/filter"
 
-      prop :filters, type: Playbook::Props::HashArray, default: [{name: ''}]
+      prop :filters, type: Playbook::Props::HashArray, default: [{ name: "" }]
       prop :sort_menu, type: Playbook::Props::HashArray, default: [{}]
       prop :results, type: Playbook::Props::Numeric
       prop :template, type: Playbook::Props::Enum,
