@@ -1,5 +1,3 @@
-import React from "react"
-
 const useFocus = () => {
   const allTrixEditors = document.querySelectorAll(
     ".focus-editor-targets trix-editor"

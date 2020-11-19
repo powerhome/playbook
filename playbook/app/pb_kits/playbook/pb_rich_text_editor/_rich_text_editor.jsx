@@ -4,10 +4,10 @@ import React, { useRef, useEffect } from "react"
 import classnames from "classnames"
 import useFocus from "./useFocus.js"
 import Trix from "trix"
+import { globalProps } from "../utilities/globalProps.js"
 
 type RichTextEditorProps = {
   className?: string,
-  dark?: boolean,
   focus?: boolean,
   id?: string,
   onChange: (string) => void,
@@ -18,18 +18,18 @@ type RichTextEditorProps = {
   value?: string,
 }
 
-const RichTextEditor = ({
-  className,
-  dark = false,
-  focus = false,
-  id,
-  onChange,
-  placeholder,
-  simple = false,
-  sticky = false,
-  template = "",
-  value = "",
-}: RichTextEditorProps) => {
+const RichTextEditor = (props: RichTextEditorProps) => {
+  const {
+    className,
+    focus = false,
+    id,
+    onChange,
+    placeholder,
+    simple = false,
+    sticky = false,
+    template = "",
+    value = "",
+  } = props
   const trixRef = useRef()
 
   useEffect(() => {
@@ -40,6 +40,7 @@ const RichTextEditor = ({
 
     trixRef.current.addEventListener("trix-initialize", (event) => {
       const element = event.target
+
       const { toolbarElement, editor } = element
 
       const blockCodeButton = toolbarElement.querySelector(
@@ -89,10 +90,11 @@ const RichTextEditor = ({
       useFocus())
     : null
 
-  const RichTextEditorClass = `pb_rich_text_editor_kit${dark ? "_dark" : ""}`
+  const RichTextEditorClass = "pb_rich_text_editor_kit"
   const SimpleClass = simple ? "simple" : ""
   const FocusClass = focus ? "focus-editor-targets" : ""
   const StickyClass = sticky ? "sticky" : ""
+  const css = classnames(globalProps(props), className)
 
   return (
     <div
@@ -101,7 +103,7 @@ const RichTextEditor = ({
         SimpleClass,
         FocusClass,
         StickyClass,
-        className
+        css
       )}
     >
       <input id={id} type='hidden' value={value} />

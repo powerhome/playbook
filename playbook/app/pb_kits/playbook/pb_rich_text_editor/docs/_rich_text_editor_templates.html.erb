@@ -1,13 +1,22 @@
-export const release = `
+<% changelog = "<div>
+    <strong>Changelog:<br></strong>
+    [INSERT LINK]<br><br>
+    You can test the normal spots of Playbook rails and react on
+    dev docs plus the following:
+  </div>
   <div>
+    <br>
+  </div>" %>
+
+<% release = "<div>
     <div>
       <strong>Story Background</strong>
     </div>
     <div>
-      Follow the{" "}
+      Follow the{' '}
       <a href='https://github.com/powerhome/playbook/wiki/Release-Team-Guide'>
         release process
-      </a>{" "}
+      </a>{' '}
       to create a new version, create a gem, and package. Create a Ninja testing
       plan, then update Nitro with the new version.
     </div>
@@ -59,17 +68,48 @@ export const release = `
       <br />
       Jason, Jon, Stephen, Jasper, Brendan, Cole
     </div>
-  </div>
-`
+  </div>" %>
 
-export const changelog = `
-  <div>
-    <strong>Changelog:<br></strong>
-    [INSERT LINK]<br><br>
-    You can test the normal spots of Playbook rails and react on
-    dev docs plus the following:
-  </div>
-  <div>
-    <br>
-  </div>
-`
+<%= pb_rails("select", props: {
+  id: "rails-select-dropdown",
+  label: "",
+  name: "",
+  blank_selection: "Select a template",
+  options: [
+    {
+      value: release,
+      value_text: "Playbook Release",
+    },
+    {
+      value: changelog,
+      value_text: "Changelog",
+    },
+  ]
+}) %>
+
+
+
+
+
+<%= pb_rails("rich_text_editor", props: {classname: 'template-test', id: "template", template: '' }) %>
+
+
+<script>
+  const updateContent = (template) => {
+    const trix   = document.querySelector('.template-test trix-editor');
+    const editor = trix.editor;
+    console.log(editor)
+    editor.loadHTML("")
+    editor.setSelectedRange([0, 0])
+    editor.insertHTML(template)
+  }
+
+  window.addEventListener('DOMContentLoaded', () => {
+    const editor = document.querySelector("#rails-select-dropdown")
+    editor.addEventListener('change', function() {
+        console.log('You selected: ', this.value);
+        const template = this.value
+        updateContent(template);
+    });
+  });
+</script>
