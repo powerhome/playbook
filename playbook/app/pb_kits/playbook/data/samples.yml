@@ -1,8 +1,8 @@
 ---
-  samples:
-  - analytics_dashboard
-  - conference_statistics
-  - crm_client_list
-  - news_magazine
-  - trending_repositories
-
+full_page_samples:
+- analytics_dashboard
+- conference_statistics
+- crm_client_list
+- news_magazine
+- trending_repositories
+dashboard_cards:
