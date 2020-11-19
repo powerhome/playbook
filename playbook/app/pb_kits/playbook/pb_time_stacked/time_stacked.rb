@@ -10,17 +10,17 @@ module Playbook
 
       partial "pb_time_stacked/time_stacked"
 
-      prop :date, type: Playbook::Props::Date, required: true
-      prop :dark, type: Playbook::Props::Boolean,
-                  default: false
+      prop :align, type: Playbook::Props::Enum,
+                   values: %w[left center right],
+                   default: "left"
       prop :classnames, type: Playbook::Props::String,
                         default: nil
-      prop :tag, type: Playbook::Props::Enum,
-                 values: %w[body caption],
-                 default: "body"
+      prop :dark, type: Playbook::Props::Boolean,
+                  default: false
+      prop :date, type: Playbook::Props::Date, required: true
 
       def classname
-        generate_classname("pb_time_stacked_kit", dark_class, classnames)
+        generate_classname("pb_time_stacked_kit", dark_class)
       end
 
       def day
@@ -43,10 +43,6 @@ module Playbook
 
       def format_timezone
         pb_date_time.to_timezone
-      end
-
-      def tag_classnames
-        "pb_time_stacked_kit_#{tag}"
       end
 
     private
