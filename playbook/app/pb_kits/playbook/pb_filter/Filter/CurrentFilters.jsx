@@ -2,7 +2,7 @@
 
 import React from 'react'
 import { isEmpty, map, omitBy } from 'lodash'
-import { Caption, Title, Body } from '../../'
+import { Body, Caption, Title } from '../../'
 
 export type FilterDescription = {
   [key: string]: ?string | boolean,
@@ -51,9 +51,9 @@ const CurrentFilters = ({ filters }: CurrentFiltersProps) => {
         <Else />
         <div className="filters">
           <Body
+              color="light"
               paddingLeft="xs"
               text="No Filter Selected"
-              color="light"
           />
         </div>
       </If>
