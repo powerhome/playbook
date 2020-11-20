@@ -18,18 +18,24 @@ export type FilterDoubleProps = {
   sortValue?: SortValue,
 } & FilterBackgroundProps
 
-const FilterDouble = ({ onSortChange, sortOptions, sortValue, filters, results, children, ...bgProps }: FilterDoubleProps) => (
-  <FilterBackground {...bgProps}>
+const FilterDouble = ({ onSortChange, sortOptions, sortValue, filters, results, children, dark, ...bgProps }: FilterDoubleProps) => (
+  <FilterBackground
+      dark={dark}
+      {...bgProps}
+  >
     <Flex
         orientation="row"
         vertical="center"
     >
-      <FiltersPopover>
+      <FiltersPopover dark={dark}>
         {children}
       </FiltersPopover>
-      <CurrentFilters filters={filters} />
+      <CurrentFilters
+          dark={dark}
+          filters={filters}
+      />
     </Flex>
-    <SectionSeparator />
+    <SectionSeparator dark={dark} />
     <Flex
         className="filter-bottom"
         orientation="row"
@@ -37,6 +43,7 @@ const FilterDouble = ({ onSortChange, sortOptions, sortValue, filters, results, 
         vertical="center"
     >
       <ResultsCount
+          dark={dark}
           results={results}
           title
       />
@@ -44,8 +51,12 @@ const FilterDouble = ({ onSortChange, sortOptions, sortValue, filters, results, 
           orientation="row"
           vertical="center"
       >
-        <Caption text="sort by:" />
+        <Caption
+            dark={dark}
+            text="sort by:"
+        />
         <SortMenu
+            dark={dark}
             onChange={onSortChange}
             options={sortOptions}
             value={sortValue}

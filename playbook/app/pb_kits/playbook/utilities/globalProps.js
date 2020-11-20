@@ -44,3 +44,12 @@ export const globalProps = (props, defaultProps = {}) => {
   const allProps = { ...props, ...defaultProps }
   return spacingProps(allProps) + darkProps(allProps)
 }
+
+export const deprecatedProps = (kit, props = []) => {
+  if (process.env.NODE_ENV === 'development') {
+    /* eslint no-console: ["error", { allow: ["warn", "error"] }] */
+    props.forEach((prop) => {
+      console.warn(`${kit} Kit: The prop '${prop}' is deprecated and will be removed in a future release!`)
+    })
+  }
+}

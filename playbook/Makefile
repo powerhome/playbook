@@ -28,7 +28,7 @@ it:
 	make install && make start
 
 test:
-	docker-compose run web bin/rspec
+	docker-compose run web bin/test
 
 shell:
 	docker-compose run web /bin/bash --login

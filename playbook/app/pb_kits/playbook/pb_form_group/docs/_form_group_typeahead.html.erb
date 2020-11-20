@@ -1,0 +1,42 @@
+<div>
+  <%= pb_rails("form_group") do %>
+    <%
+      options = [
+        { label: 'Windows', value: 'windows' },
+        { label: 'Roof', value: 'roof' },
+        { label: 'Siding', value: 'siding' },
+        { label: 'Doors', value: 'doors' },
+      ]
+    %>
+    <%= pb_rails("typeahead", props: {
+      default_options: [options.first],
+      id: "form-group-typeahead-example",
+      label: "Products",
+      options: options,
+    }) %>
+    <%= pb_rails("button", props: {
+      id: "form-group-button",
+      text: "Add",
+      variant: "secondary"
+    }) %>
+  <% end %>
+</div>
+
+<!-- This section is an example of the available JavaScript event hooks -->
+<%= javascript_tag defer: "defer" do %>
+  document.addEventListener("pb-form-group-kit-form-group-typeahead-example-result-option-select", function(event) {
+    console.log('Option selected')
+    console.dir(event.detail)
+  })
+  document.addEventListener("pb-form-group-kit-form-group-typeahead-example-result-option-remove", function(event) {
+    console.log('Option removed')
+    console.dir(event.detail)
+  })
+  document.addEventListener("pb-form-group-kit-form-group-typeahead-example-result-option-clear", function() {
+    console.log('All options cleared')
+  })
+
+  document.querySelector('#form-group-button').addEventListener('click', function() {
+    document.dispatchEvent(new CustomEvent('pb-form-group-kit-form-group-typeahead:clear'))
+  })
+<% end %>

@@ -13,4 +13,7 @@ export { default as TableTwoActions } from './_table_two_actions.jsx'
 export { default as TableTwoPlusActions } from './_table_two_plus_actions.jsx'
 export { default as TableActionMiddle } from './_table_action_middle.jsx'
 export { default as TableIconButtons } from './_table_icon_buttons.jsx'
-
+export { default as TableAlignmentColumn } from './_table_alignment_column.jsx'
+export { default as TableAlignmentRow } from './_table_alignment_row.jsx'
+export { default as TableAlignmentShiftRow } from './_table_alignment_shift_row.jsx'
+export { default as TableAlignmentShiftData } from './_table_alignment_shift_data.jsx'

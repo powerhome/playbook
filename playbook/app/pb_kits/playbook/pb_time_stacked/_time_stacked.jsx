@@ -6,49 +6,43 @@ import classnames from 'classnames'
 import DateTime from '../pb_kit/dateTime.js'
 import { buildCss } from '../utilities/props'
 import { Body, Caption } from '../'
-import { globalProps } from '../utilities/globalProps.js'
-
-const Components = {
-  body: Body,
-  caption: Caption,
-}
+import { deprecatedProps, globalProps } from '../utilities/globalProps.js'
 
 type TimeStackedProps = {
+  align?: 'left' | 'center' | 'right',
   className?: string | array<string>,
   dark?: boolean,
   data?: string,
   date: string,
   id?: string,
-  align?: "left" | "center" | "right",
-  tag?: "body" | "caption",
+  tag?: 'body' | 'caption',
 }
 
 const TimeStacked = (props: TimeStackedProps) => {
-  const { className, dark = false, date, tag = 'body' } = props
+  const { align, className, dark, date } = props
+  deprecatedProps('TimeStacked', ['tag'])
   const classes = classnames(
-    buildCss('pb_time_stacked_kit', {
-      dark,
-    }),
+    buildCss('pb_time_stacked_kit', align),
     globalProps(props),
-    className
+    className,
   )
-
-  const tagClasses = classnames(buildCss('pb_time_stacked_kit', tag))
 
   const dateTimestamp = new DateTime({ value: date })
 
-  const Tag = Components[tag]
-
   return (
     <div className={classes}>
-      <div className="pb_time_stacked_day_month">
-        <Tag
-            className={tagClasses}
+      <div
+          align={align}
+          className="pb_time_stacked_day_month"
+      >
+        <Body
             color="light"
+            dark={dark}
             text={dateTimestamp.toTimeWithMeridian()}
         />
-        <Tag
+        <Caption
             color="light"
+            dark={dark}
             text={dateTimestamp.toTimezone()}
         />
       </div>

@@ -44,6 +44,7 @@
     margin-bottom: 0px;
   }
   .pb--codeCopy {
+    display: block;
     border: 0px;
     position: fixed;
     width: 100%;
@@ -51,7 +52,8 @@
     bottom: 0;
     left: 0;
     transition: all .4s;
-    border-radius: 0 0 6px 6px;
+    border-radius: 0;
+    z-index: 99;
   }
 
   .pb--codeCopy.close {

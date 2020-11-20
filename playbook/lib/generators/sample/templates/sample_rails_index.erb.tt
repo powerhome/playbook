@@ -1,0 +1,5 @@
+<%%= pb_rails("title", props: { 
+  margin_top: "xl",
+  text: "Your Sample Page",
+  size: 1
+}) %>

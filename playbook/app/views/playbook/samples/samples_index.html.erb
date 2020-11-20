@@ -12,32 +12,47 @@
     <% end %>
   <% end %>
 
-
   <%= pb_rails("background", props: { background_color: "white", padding: "xl" }) do %>
-    <%= pb_rails("flex", props: { classname: "full_page_samples_flex_wrapper", horizontal: "center", wrap: true }) do %>
 
-        <%= pb_rails("flex/flex_item", props: { classname: "preview" }) do %>
-          <%= pb_rails("title", props: { margin_bottom: "sm", text: "Full Page Samples", tag: "h4", size: 4 }) %>
-          <%= image_tag("sample_screenshot.svg", class: "sample_screenshot") %>
-          <%= pb_rails("icon_value", props: {
-            icon: "palette",
-            margin_top: "xs",
-            text: "#{@sample_yaml["samples"].size} Designs"
-          }) %>
-        <% end %>
-        
-        <%= pb_rails("flex/flex_item", props: { classname: "list" }) do %>
-          <%= pb_rails("nav", props: {}) do %>
-            <% @sample_yaml["samples"].each do |link| %>
-              <%= pb_rails("nav/item", props: { 
-                icon_right: "angle-right",
-                text: link == "crm_client_list" ? "CRM Client List" : link.titleize,
-                link: "/samples/#{link}" 
-              }) %>
+    <%# Loop through each Sample Category in samples.yml %>
+    <% @sample_yaml.each_with_index do |category, i| %>
+
+      <% category_title = category[0] %>
+      <% category_pages = @sample_yaml[category_title] %>
+
+      <% if category_pages %>
+        <%= pb_rails("flex", props: {
+          classname: "full_page samples_flex_wrapper",
+          horizontal: "center",
+          margin_top: i > 0 ? "xl" : "",
+          wrap: true
+        }) do %>
+
+          <%= pb_rails("flex/flex_item", props: { classname: "preview" }) do %>
+            <%= pb_rails("title", props: { margin_bottom: "sm", text: category_title.titleize, tag: "h4", size: 4 }) %>
+            <%= image_tag("#{category_title}.svg", class: "sample_screenshot") %>
+            <%= pb_rails("icon_value", props: {
+              icon: "palette",
+              margin_top: "xs",
+              text: "#{category_pages.size} Designs"
+            }) %>
+          <% end %>
+          
+          <%= pb_rails("flex/flex_item", props: { classname: "list" }) do %>
+            <%= pb_rails("nav", props: {}) do %>
+              <% category_pages.each do |link| %>
+                <%= pb_rails("nav/item", props: { 
+                  icon_right: "angle-right",
+                  text: link == "crm_client_list" ? "CRM Client List" : link.titleize,
+                  link: "/samples/#{link}" 
+                }) %>
+              <% end %>
             <% end %>
           <% end %>
-        <% end %>
 
+        <% end %>
+      <% end %>
     <% end %>
+
   <% end %>
 </div>

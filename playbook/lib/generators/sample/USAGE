@@ -2,4 +2,4 @@ Description:
     Create a new Full Page Sample
 
 Example:
-    rails g sample "dashboards"
+    rails g sample "My Sample" --category my_category
