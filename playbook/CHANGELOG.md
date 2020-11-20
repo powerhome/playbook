@@ -22,6 +22,7 @@
 **New Kits:**
 
 - Rich Text Editor Kit [\#1218](https://github.com/powerhome/playbook/pull/1218) ([jasperfurniss](https://github.com/jasperfurniss))
+- Icon Stat Value Kit [NUXE-269](https://github.com/powerhome/playbook/pull/1022) ([idanzonshein](https://github.com/idanzonshein))
 
 **Improvements:**
 
