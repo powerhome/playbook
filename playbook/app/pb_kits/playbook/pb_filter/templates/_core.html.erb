@@ -9,7 +9,7 @@
         <% object.filters.each do |filter| %>
           <% if filter[:name]== "" %>
               <div class="filter">
-                <%= pb_rails("title", props: { size: 4, tag:"h4", text: "No Filter Selected"}) %>
+                <%= pb_rails("body", props: { color:"light", text: "No Filter Selected"}) %>
               </div>
           <% else %>
               <div class="filter">

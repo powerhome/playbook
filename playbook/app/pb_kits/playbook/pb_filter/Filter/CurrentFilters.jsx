@@ -2,7 +2,7 @@
 
 import React from 'react'
 import { isEmpty, map, omitBy } from 'lodash'
-import { Caption, Title } from '../../'
+import { Caption, Title, Body } from '../../'
 
 export type FilterDescription = {
   [key: string]: ?string | boolean,
@@ -19,16 +19,6 @@ const CurrentFilters = ({ filters }: CurrentFiltersProps) => {
 
   return (
     <div className="maskContainer">
-      <If condition={isEmpty(filters)}>
-        <div className="filters">
-          <Title
-              paddingLeft="xs"
-              size={4}
-              tag="h4"
-              text="No Filter Selected"
-          />
-        </div>
-      </If>
       <If condition={!isEmpty(filters)}>
         <div className="filters">
           <div className="left_gradient" />
@@ -58,7 +48,16 @@ const CurrentFilters = ({ filters }: CurrentFiltersProps) => {
           ))}
           <div className="right_gradient" />
         </div>
+        <Else />
+        <div className="filters">
+          <Body
+              paddingLeft="xs"
+              text="No Filter Selected"
+              color="light"
+          />
+        </div>
       </If>
+
     </div>
   )
 }
