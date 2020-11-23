@@ -25,6 +25,28 @@ module Playbook
       end
     end
 
+    def get_samples(kit)
+      sample_yaml = YAML.load_file("#{Playbook::Engine.root}/app/pb_kits/playbook/data/samples.yml")
+      all_samples = []
+
+      sample_yaml.each do |_category, sample|
+        all_samples.push(sample)
+      end
+
+      output = ""
+      samples_using_kit = []
+      all_samples[0].each do |sample|
+        # greppy = `grep #{kit} #{Playbook::Engine.root}/app/views/playbook/samples/#{sample}/index.html.erb`
+        # samples_using_kit.push(sample) if greppy.match?(/pb_rails\("#{kit}/)
+        # output = `grep -l 'pb_rails(\"#{kit}' #{Playbook::Engine.root}/app/views/playbook/samples/#{sample}/index.html.erb`
+        filepath = "#{Playbook::Engine.root}/app/views/playbook/samples/#{sample}/index.html.erb"
+        output = `grep -l 'pb_rails(\"#{kit}' #{filepath}`
+        samples_using_kit.push(sample) if output.chomp == filepath
+      end
+      puts samples_using_kit
+      samples_using_kit
+    end
+
     def kit_path(kit)
       "#{Playbook::Engine.root}/app/pb_kits/playbook/pb_#{kit}"
     end
@@ -44,9 +66,10 @@ module Playbook
       read_file(filename)
     end
 
-    def pb_kit(kit: "", type: "rails", show_code: true)
+    def pb_kit(kit: "", type: "rails", show_code: true, limit_examples: false)
       @type = type
       @kit_examples = get_kit_examples(kit, type)
+      @limit_examples = limit_examples
       @show_code = show_code
       render partial: "config/kit_example"
     end
@@ -82,7 +105,7 @@ module Playbook
     def render_pb_doc_kit(kit, type, code = true)
       title = render_clickable_title(kit, type)
       ui = raw("<div class='pb--docItem-ui'>
-          #{pb_kit(kit: kit, type: type, show_code: code)}</div>")
+          #{pb_kit(kit: kit, type: type, show_code: code, limit_examples: true)}</div>")
       title + ui
     end
 
