@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require "webpacker/react/component"
-
 module Playbook
   module PbKitHelper
     def pb_rails(kit, props: {}, &block)
@@ -11,10 +9,6 @@ module Playbook
       render(partial: kit, as: :object)
     ensure
       self.prefix_partial_path_with_controller_namespace = previous
-    end
-
-    def pb_react(kit, props: {}, options: {})
-      ::Webpacker::React::Component.new(kit.camelize).render(props, options)
     end
 
   private

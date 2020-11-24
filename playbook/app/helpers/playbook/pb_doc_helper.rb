@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require "webpacker/react/component"
 require "webpacker/react/helpers"
 
 module Playbook
@@ -11,6 +12,10 @@ module Playbook
     # Overrides the original pb_rails helper to include documentation dark mode behavior
     def pb_rails(kit, props: {}, &block)
       super kit, props: rails_props(props), &block
+    end
+
+    def pb_react(kit, props: { dark: react_props }, options: {})
+      ::Webpacker::React::Component.new(kit.camelize).render(props, options)
     end
 
     def pb_kit_title(title)
