@@ -74,16 +74,16 @@ module Playbook
       render partial: "config/kit_example"
     end
 
-    def pb_kits(type: "rails")
+    def pb_kits(type: "rails", limit_examples: false)
       display_kits = []
       kits = get_kits
       kits.each do |kit|
         if kit.is_a?(Hash)
           nav_hash_array(kit).each do |sub_kit|
-            display_kits << render_pb_doc_kit(sub_kit, type, false)
+            display_kits << render_pb_doc_kit(sub_kit, type, false, limit_examples)
           end
         else
-          display_kits << render_pb_doc_kit(kit, type, false)
+          display_kits << render_pb_doc_kit(kit, type, false, limit_examples)
         end
       end
       raw("<div class='pb--docItem'>" + display_kits.join("</div><div class='pb--docItem'>") + "</div>")
@@ -102,10 +102,10 @@ module Playbook
       raw("<div class='pb--docItem'>" + display_kits.join("</div><div class='pb--docItem'>") + "</div>")
     end
 
-    def render_pb_doc_kit(kit, type, code = true)
+    def render_pb_doc_kit(kit, type, code = true, limit_examples)
       title = render_clickable_title(kit, type)
       ui = raw("<div class='pb--docItem-ui'>
-          #{pb_kit(kit: kit, type: type, show_code: code, limit_examples: true)}</div>")
+          #{pb_kit(kit: kit, type: type, show_code: code, limit_examples: limit_examples)}</div>")
       title + ui
     end
 
