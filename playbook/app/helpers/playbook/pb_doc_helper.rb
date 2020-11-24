@@ -22,10 +22,6 @@ module Playbook
       title.remove("pb_").titleize.tr("_", " ")
     end
 
-    def current_webpacker_instance
-      Playbook.webpacker
-    end
-
     def has_kit_type?(kit, type)
       type ||= "rails"
       if type == "rails"
