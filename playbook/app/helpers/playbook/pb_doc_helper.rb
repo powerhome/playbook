@@ -1,8 +1,12 @@
 # frozen_string_literal: true
 
+require "webpacker/react/helpers"
+
 module Playbook
   module PbDocHelper
-    include Playbook::PbKitHelper
+    include ::Webpacker::Helper
+    include ::Webpacker::React::Helpers
+    include ::Playbook::PbKitHelper
 
     # Overrides the original pb_rails helper to include documentation dark mode behavior
     def pb_rails(kit, props: {}, &block)
@@ -11,6 +15,10 @@ module Playbook
 
     def pb_kit_title(title)
       title.remove("pb_").titleize.tr("_", " ")
+    end
+
+    def current_webpacker_instance
+      Playbook.webpacker
     end
 
     def has_kit_type?(kit, type)
