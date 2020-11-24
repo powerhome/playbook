@@ -43,7 +43,6 @@ module Playbook
         output = `grep -l 'pb_rails(\"#{kit}' #{filepath}`
         samples_using_kit.push(sample) if output.chomp == filepath
       end
-      puts samples_using_kit
       samples_using_kit
     end
 
