@@ -2,23 +2,14 @@
 
 module Playbook
   module PbSampleHelper
-    def read_file(filename)
-      if File.file?(filename)
-        File.read(filename)
-      else
-        ""
-      end
-    end
-
     def get_raw_code(sample, type)
       if type == "rails"
         ext = "html.erb"
       elsif type == "react"
         ext = "jsx"
       end
-      filename = "#{Playbook::Engine.root}/app/views/playbook/samples/#{sample}/index.#{ext}"
-      contents = read_file(filename)
-      contents
+
+      read_source_file "app/views/playbook/samples", sample, "index.#{ext}"
     end
 
     def get_sample_code_content(sample, type)

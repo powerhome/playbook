@@ -37,31 +37,20 @@ module Playbook
       end
     end
 
-    def read_file(filename)
-      if File.file?(filename)
-        File.read(filename)
-      else
-        ""
-      end
-    end
-
     def kit_path(kit)
       "#{Playbook::Engine.root}/app/pb_kits/playbook/pb_#{kit}"
     end
 
     def get_kit_description(kit)
-      filename = "#{Playbook::Engine.root}/app/pb_kits/playbook/pb_#{kit}/docs/_description.md"
-      read_file(filename)
+      read_source_file "app/pb_kits/playbook/pb_#{kit}/docs/_description.md"
     end
 
     def get_per_sample_descriptions(kit, key)
-      filename = "#{Playbook::Engine.root}/app/pb_kits/playbook/pb_#{kit}/docs/_#{key}.md"
-      read_file(filename)
+      read_source_file "app/pb_kits/playbook/pb_#{kit}/docs/_#{key}.md"
     end
 
     def get_kit_footer(kit)
-      filename = "#{Playbook::Engine.root}/app/pb_kits/playbook/pb_#{kit}/docs/_footer.md"
-      read_file(filename)
+      read_source_file "app/pb_kits/playbook/pb_#{kit}/docs/_footer.md"
     end
 
     def pb_kit(kit: "", type: "rails", show_code: true)
@@ -166,6 +155,13 @@ module Playbook
 
     def sub_category_active(kit, link)
       (!kit.nil? && @kit == link)
+    end
+
+    def read_source_file(*args)
+      path = Playbook::Engine.root.join(*args)
+      return unless File.file?(filename)
+
+      File.read(filename)
     end
 
   private
