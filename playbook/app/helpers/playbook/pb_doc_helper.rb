@@ -1,8 +1,5 @@
 # frozen_string_literal: true
 
-require "webpacker/react/component"
-require "webpacker/react/helpers"
-
 module Playbook
   module PbDocHelper
     include ::Webpacker::Helper
@@ -14,8 +11,8 @@ module Playbook
       super kit, props: dark_mode_props(props), &block
     end
 
-    def pb_react(kit, props: { dark: dark_mode }, options: {})
-      ::Webpacker::React::Component.new(kit.camelize).render(props, options)
+    def pb_react(kit, props: {}, options: {})
+      react_component kit.camelize, dark_mode_props(props), options
     end
 
     def pb_kit_title(title)
@@ -193,16 +190,10 @@ module Playbook
     end
 
     def dark_mode_props(props)
-      if cookies[:dark_mode] == "true"
-        props.merge(dark: dark_mode)
-      elsif cookies[:dark_mode] == "false"
-        props.merge(dark: dark_mode)
-      else
-        props
-      end
+      (props || {}).merge(dark: dark_mode?)
     end
 
-    def dark_mode
+    def dark_mode?
       cookies[:dark_mode].eql? "true"
     end
   end
