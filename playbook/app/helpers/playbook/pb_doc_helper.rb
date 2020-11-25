@@ -11,10 +11,10 @@ module Playbook
 
     # Overrides the original pb_rails helper to include documentation dark mode behavior
     def pb_rails(kit, props: {}, &block)
-      super kit, props: rails_props(props), &block
+      super kit, props: dark_mode_props(props), &block
     end
 
-    def pb_react(kit, props: { dark: react_props }, options: {})
+    def pb_react(kit, props: { dark: dark_mode }, options: {})
       ::Webpacker::React::Component.new(kit.camelize).render(props, options)
     end
 
@@ -190,22 +190,6 @@ module Playbook
         puts "Kit Path Not Avaliable"
       end
       render inline: "<a href='#{url}'>#{pb_rails(:title, props: { text: pb_kit_title(kit), tag: 'h3', size: 2 })}</a>"
-    end
-
-    def rails_props(props)
-      if @playbook.nil?
-        props
-      else
-        dark_mode_props(props)
-      end
-    end
-
-    def react_props
-      if @playbook.nil?
-        false
-      else
-        dark_mode
-      end
     end
 
     def dark_mode_props(props)

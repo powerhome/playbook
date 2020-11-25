@@ -5,14 +5,9 @@ require "yaml"
 
 module Playbook
   class SamplesController < ApplicationController
-    before_action :set_playbook
     before_action :set_sample, only: %i[sample_show_rails sample_show_react]
 
     layout "playbook/samples"
-
-    def set_playbook
-      @playbook = true
-    end
 
     def samples
       params[:type] ||= "rails"

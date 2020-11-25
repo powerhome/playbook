@@ -1,7 +1,4 @@
 <div class="pb--page--topNav <%= cookies[:dark_mode] == "true" ? 'dark' : '' %>">
-  <% if @playbook.nil?%>
-    <p>playbok is nil</p>
-  <% end %>
   <%= pb_rails("flex", props:{ spacing:"between", vertical: "center" }) do %>
     <%= pb_rails("flex/flex_item", props: {}) do %>
       <%= pb_rails("flex", props:{ classname: "margin-toggle", margin_bottom: "xs", spacing:"between", vertical: "center" }) do %>
