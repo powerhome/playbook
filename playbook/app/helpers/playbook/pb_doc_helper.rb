@@ -155,9 +155,7 @@ module Playbook
 
     def read_source_file(*args)
       path = Playbook::Engine.root.join(*args)
-      return unless File.file?(filename)
-
-      File.read(filename)
+      path.exist? ? path.read : nil
     end
 
   private
