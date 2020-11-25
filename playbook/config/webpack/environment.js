@@ -1,9 +1,12 @@
+const path = require('path')
+
 const { environment } = require('@rails/webpacker')
 const erb = require('./loaders/erb')
 const svg = require('./loaders/svg')
 
-// Swap sass-loader for fast-sass-loader
-require('./loaders/fast-sass-loader').use(environment)
+environment.loaders.get('sass')
+  .use.find((item) => item.loader === 'sass-loader')
+  .options.includePaths = [path.resolve(__dirname, 'node_modules/trix')]
 
 environment.loaders.insert('react-svg', svg, { before: 'file' })
 
