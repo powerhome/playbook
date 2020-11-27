@@ -40,7 +40,6 @@ Gem::Specification.new do |s|
   s.add_dependency "webpacker", "4.2.2"
   s.add_dependency "webpacker-react", "~> 0.3.2"
 
-  s.add_development_dependency "better_errors", "2.5.1"
   s.add_development_dependency "binding_of_caller", "0.8.0"
   s.add_development_dependency "byebug", "11.0.0"
   s.add_development_dependency "overcommit", "0.49.0"

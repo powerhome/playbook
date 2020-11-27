@@ -45,5 +45,3 @@ Rails.application.configure do
 
   config.action_dispatch.default_headers = { 'X-Frame-Options' => 'ALLOWALL' }
 end
-
-BetterErrors::Middleware.allow_ip! "172.0.0.0/8"

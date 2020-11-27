@@ -68,6 +68,10 @@ GEM
     babel-transpiler (0.7.0)
       babel-source (>= 4.0, < 6)
       execjs (~> 2.0)
+    better_errors (2.5.1)
+      coderay (>= 1.0.0)
+      erubi (>= 1.0.0)
+      rack (>= 0.9.0)
     bindex (0.8.1)
     bootsnap (1.5.1)
       msgpack (~> 1.0)
@@ -85,6 +89,7 @@ GEM
     chromedriver-helper (2.1.1)
       archive-zip (~> 0.10)
       nokogiri (~> 1.8)
+    coderay (1.1.3)
     concurrent-ruby (1.1.7)
     connection_pool (2.2.3)
     crass (1.0.6)
@@ -230,6 +235,8 @@ GEM
     tilt (2.0.10)
     tzinfo (1.2.8)
       thread_safe (~> 0.1)
+    tzinfo-data (1.2020.4)
+      tzinfo (>= 1.0.0)
     web-console (3.7.0)
       actionview (>= 5.0)
       activemodel (>= 5.0)
@@ -251,6 +258,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  better_errors (= 2.5.1)
   bootsnap (>= 1.1.0)
   byebug
   capybara (>= 2.15)
