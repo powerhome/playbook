@@ -44,6 +44,10 @@ Rails.application.configure do
   config.web_console.whitelisted_ips = '172.18.0.1'
 
   config.action_dispatch.default_headers = { 'X-Frame-Options' => 'ALLOWALL' }
+
+  ## Speeding up local dev for rails kits
+  config.middleware.insert_after ActionDispatch::Reloader, ViewLookupContextCacheClear
+  config.action_view.cache_template_loading = true
 end
 
 BetterErrors::Middleware.allow_ip! "172.0.0.0/8"
