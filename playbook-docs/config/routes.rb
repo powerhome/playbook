@@ -1,11 +1,24 @@
 Rails.application.routes.draw do
-  root to: "guides#create_kit"
+  # Pages
+  root to: "pages#home"
+  get "home", to: "pages#home"
+  get "getting_started", to: "pages#getting_started"
+  get "kits", to: "pages#kits"
+  get "visual_guidelines", to: "pages#visual_guidelines"
+
+  get "kits/:name", to: "pages#kit_show_rails", as: :kit_show
+  get "kits/:name/rails", to: "pages#kit_show_rails", as: :kit_show_rails
+  get "kits/:name/react", to: "pages#kit_show_react", as: :kit_show_reacts
+
+  get "kit_category/:name", to: "pages#kit_category_show_rails", as: :kit_category_show
+  get "kit_category/:name/rails", to: "pages#kit_category_show_rails", as: :kit_category_show_rails
+  get "kit_category/:name/react", to: "pages#kit_category_show_react", as: :kit_category_show_reacts
+
+  # Dark mode
+  get "/enable_dark_mode", to: "pages#enable_dark_mode", as: :enable_dark_mode
+  get "/disable_dark_mode", to: "pages#disable_dark_mode", as: :disable_dark_mode
+
+  # Guides
   get "guides", to: "guides#create_kit"
   get "guides/use-in-nitro", to: "guides#use_nitro"
-
-  # Stub routes
-  get "guides/use-in-nitro", as: :disable_dark_mode
-  get "guides/use-in-nitro", as: :kits
-  get "guides/use-in-nitro", as: :kit_show
-  get "guides/use-in-nitro", as: :kit_category_show
 end

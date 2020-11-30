@@ -19,15 +19,15 @@
       <%= pb_rails("flex/flex_item", props: { classname: "react-rails-text"}) do %>
         <%= pb_rails("title", props: { margin_bottom: "sm", text: 'React & Rails Components packaged in a single "Kit"', tag: "h2", size: 2 }) %>
           <%= pb_rails("body", props: {
-            text: "Consistency in design is one of the most important tools we can use to build great user experiences. 
-            The “kits” in Playbook are identical no matter if they are built for Rails UI or React front ends. Whether 
-            your system is legacy or bleeding edge, consistency across interfaces is a very important advantage when 
+            text: "Consistency in design is one of the most important tools we can use to build great user experiences.
+            The “kits” in Playbook are identical no matter if they are built for Rails UI or React front ends. Whether
+            your system is legacy or bleeding edge, consistency across interfaces is a very important advantage when
             working with large codebases."
           }) %>
           <br/>
           <%= pb_rails("body", props: {
-            text: "The kits are also built to work with any industry. If it's a product then we have battle-tested kits 
-            ready to suit your needs. Get started by adding Playbook to your application in 5 min, or start 
+            text: "The kits are also built to work with any industry. If it's a product then we have battle-tested kits
+            ready to suit your needs. Get started by adding Playbook to your application in 5 min, or start
             browsing our library to spark inspiration."
           }) %>
           <%= pb_rails("flex", props: { classname: "button-flexbox", margin_top: "md", wrap: true }) do %>
@@ -53,12 +53,9 @@
         <% end %>
 
         <%= react_component('SnippetToggle', { test: 'test' }) %>
-        <% react_contents = File.read("#{Playbook::Engine.root}/app/views/playbook/pages/code_snippets/user_jsx.txt") %>
-        <% rails_contents = File.read("#{Playbook::Engine.root}/app/views/playbook/pages/code_snippets/user_erb.txt") %>
-        
         <div class="pb--codeCopy code-snippets">
-          <pre class="highlight"><%= raw rouge(rails_contents, "erb") %></pre>
-          <pre class="highlight" style="display:none"><%= raw rouge(react_contents, "jsx") %></pre>
+          <pre class="highlight"><%= render "pages/code_snippets/user_jsx", language: :jsx %></pre>
+          <pre class="highlight"><%= render "pages/code_snippets/user_erb", language: :erb %></pre>
         </div>
       <% end %>
     <% end %>

@@ -187,6 +187,10 @@ GEM
     regexp_parser (1.8.2)
     retriable (3.1.2)
     rouge (3.15.0)
+    rouge-rails (0.2.1)
+      actionview
+      railties
+      rouge
     ruby2_keywords (0.0.2)
     ruby_dep (1.5.0)
     rubyzip (2.3.0)
@@ -268,6 +272,7 @@ DEPENDENCIES
   playbook_ui!
   puma (~> 3.11)
   rails (~> 5.2.4, >= 5.2.4.4)
+  rouge-rails
   selenium-webdriver
   spring
   spring-watcher-listen (~> 2.0.0)

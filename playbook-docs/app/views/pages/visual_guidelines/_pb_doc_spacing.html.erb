@@ -1,0 +1,65 @@
+<br />
+<%= pb_rails("title", props: { text: title, tag: "h4", size: 4 }) %>
+
+<%- if defined?(usage) && usage.present? %>
+  <%= pb_rails("body", props: {"tag": "p"}) do %>
+    <%= usage %>
+  <% end %>
+<% end %>
+
+<br />
+<ul class="pb--tokens-spacing">
+  <%- sizes.each do |item| %>
+    <%- variable = (defined?(item[:variable]) && !item[:variable].nil?) ? "$#{item[:variable]}" : "" %>
+    <%- item[:dark] ||= false %>
+    <%- item[:class] ||= item[:variable] %>
+
+    <li class="<%= item[:dark] == true ? "dark" : "" %>" data-name="<%= item[:name] %>" data-variable="<%= variable %>">
+      <div>
+        <div class="pb--spacing_<%= item[:class] %>"></div>
+      </div>
+    </li>
+  <% end %>
+</ul>
+
+<%= pb_rails("title", props: { text: "Spacing Props in Kits", tag: "h4", size: 4, padding_top: "sm" }) %>
+<br />
+<ul class="pb_card_kit_shadow_deep_deselected p_md">
+  Rails kits the following spacing props:<br/>
+  <code>margin</code>
+  <code>margin_bottom</code>
+  <code>margin_left</code>
+  <code>margin_right</code>
+  <code>margin_top</code>
+  <code>margin_x</code>
+  <code>margin_y</code>
+  <code>padding</code>
+  <code>padding_bottom</code>
+  <code>padding_left</code>
+  <code>padding_right</code>
+  <code>padding_top</code>
+  <code>padding_x</code>
+  <code>padding_y</code>
+
+
+  <br/>
+  React kits have the following spacing props:<br/>
+  <code>margin</code>
+  <code>marginBottom</code>
+  <code>marginLeft</code>
+  <code>marginRight</code>
+  <code>marginTop</code>
+  <code>marginX</code>
+  <code>marginY</code>
+  <code>padding</code>
+  <code>paddingBottom</code>
+  <code>paddingLeft</code>
+  <code>paddingRight</code>
+  <code>paddingTop</code>
+  <code>paddingX</code>
+  <code>paddingY</code>
+
+  <br/>
+
+  The values possible are: <code>"none", "xs", "sm", "md", "lg", "xl"</code>
+</ul>

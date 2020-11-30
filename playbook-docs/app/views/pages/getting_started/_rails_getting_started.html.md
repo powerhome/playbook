@@ -23,7 +23,7 @@ bundle
  @import "playbook";
 ```
 
-or be selective 
+or be selective
 
 ```scss
 # app/assets/stylesheets/application.scss

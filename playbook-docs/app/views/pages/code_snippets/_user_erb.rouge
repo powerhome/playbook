@@ -1,4 +1,4 @@
-<%= pb_rails("user", props: {
+<%%= pb_rails("user", props: {
   name: "Anna Black",
   title: "Remodeling Consultant",
   orientation: "vertical",
