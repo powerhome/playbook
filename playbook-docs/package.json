@@ -7,7 +7,8 @@
     "babel-plugin-transform-react-remove-prop-types": "^0.4.24",
     "prop-types": "^15.7.2",
     "react": "^17.0.1",
-    "react-dom": "^17.0.1"
+    "react-dom": "^17.0.1",
+    "playbook-ui": "file:../playbook"
   },
   "devDependencies": {
     "webpack-dev-server": "^3.11.0"
