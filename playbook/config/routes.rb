@@ -13,10 +13,6 @@ Playbook::Engine.routes.draw do
   get 'kit_category/:name/rails', to: "pages#kit_category_show_rails", as: 'kit_category_show_rails'
   get 'kit_category/:name/react', to: "pages#kit_category_show_react", as: 'kit_category_show_reacts'
 
-  get 'guides',     to: "guides#create_kit"
-  get 'guides/use-in-nitro', to: "guides#use_nitro"
-
-
   # Full Page Samples Get Generated Here
   get 'samples/:name', to: "samples#sample_show_rails", as: 'sample_show'
   get 'samples/:name/rails', to: "samples#sample_show_rails", as: 'sample_show_rails'

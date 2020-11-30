@@ -1,3 +1,5 @@
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  root to: "guides#create_kit"
+  get "guides", to: "guides#create_kit"
+  get "guides/use-in-nitro", to: "guides#use_nitro"
 end
