@@ -146,12 +146,12 @@ module ApplicationHelper
     (!kit.nil? && @kit == link)
   end
 
+private
+
   def read_source_file(*args)
     path = Playbook::Engine.root.join(*args)
     path.exist? ? path.read : ""
   end
-
-private
 
   def get_kit_examples(kit, type)
     example_file = File.join(Playbook::Engine.root,
