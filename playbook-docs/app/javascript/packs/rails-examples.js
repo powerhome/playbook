@@ -1,0 +1,1 @@
+import 'playbook-ui/dist/playbook-rails'

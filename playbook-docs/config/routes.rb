@@ -21,4 +21,10 @@ Rails.application.routes.draw do
   # Guides
   get "guides", to: "guides#create_kit"
   get "guides/use-in-nitro", to: "guides#use_nitro"
+
+  # Samples
+  get "samples/:name", to: "samples#sample_show_rails", as: :sample_show
+  get "samples/:name/rails", to: "samples#sample_show_rails", as: :sample_show_rails
+  get "samples/:name/react", to: "samples#sample_show_react", as: :sample_show_reacts
+  get "samples/", to: "samples#samples_index"
 end
