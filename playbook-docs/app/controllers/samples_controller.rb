@@ -7,7 +7,7 @@ class SamplesController < ApplicationController
   before_action :set_sample, only: %i[sample_show_rails sample_show_react]
   helper SamplesHelper
 
-  layout "playbook/samples"
+  layout "layouts/samples"
 
   def samples
     params[:type] ||= "rails"
@@ -16,7 +16,7 @@ class SamplesController < ApplicationController
 
   def samples_index
     @sample_yaml = YAML.load_file(Rails.root.join("config/samples.yml"))
-    render layout: "layouts/playbook/application"
+    render layout: "layouts/application"
   end
 
   def sample_show_rails

@@ -3,8 +3,6 @@
 require_relative "application_controller"
 
 class PagesController < ApplicationController
-  layout "layouts/playbook/application"
-
   before_action :set_kit, only: %i[kit_show_rails kit_show_react]
   before_action :ensure_kit_type_exists, only: %i[kit_show_rails kit_show_react]
   before_action :set_category, only: %i[kit_category_show_rails kit_category_show_react]

@@ -2,20 +2,21 @@
 <html>
   <head>
     <title> Playbook Design System </title>
-    <%= csrf_meta_tags%>
-    <%= csp_meta_tag%>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
     <%= stylesheet_packs_with_chunks_tag 'main' %>
     <meta content="user-scalable=0, initial-scale=1.0, minimum-scale=1" name="viewport"></meta>
   </head>
   <body>
-    <%= render 'layouts/playbook/nav'%>
-      <%= render 'layouts/playbook/mobile_hamburger'%>
+    <%= render 'layouts/nav'%>
+      <%= render 'layouts/mobile_hamburger'%>
       <%= pb_rails("layout/sidebar", props: { classname: "pb--page--sideNav non-kit"}) do %>
-        <%= render 'layouts/playbook/sidebar'%>
+        <%= render 'layouts/sidebar'%>
       <% end %>
         <%= yield %>
-    <%= render 'layouts/playbook/footer'%>
+    <%= render 'layouts/footer'%>
   </body>
   <%= javascript_packs_with_chunks_tag 'application', 'site' %>
   <%= yield :pb_js %>
-  <%= render 'layouts/playbook/ga'%>
+  <%= render 'layouts/ga'%>
+</html>
