@@ -27,26 +27,24 @@ app.build(
   }
 
   app.dockerStage('Test') {
-    testDocApp(appImage)
+    testPlaybook(appImage)
   }
 }
 
 def buildDocApp(scmVars, appImage) {
-  dir("playbook") {
-    try {
-      github.setImageBuildState(scmVars, 'PENDING')
-      sh "docker build -t ${appImage} ."
-      sh "docker push ${appImage}"
-      github.setImageBuildState(scmVars, 'SUCCESS')
-    } catch(e) {
-      github.setImageBuildState(scmVars, 'FAILURE')
-      throw e
-    }
+  try {
+    github.setImageBuildState(scmVars, 'PENDING')
+    sh "docker build -t ${appImage} ."
+    sh "docker push ${appImage}"
+    github.setImageBuildState(scmVars, 'SUCCESS')
+  } catch(e) {
+    github.setImageBuildState(scmVars, 'FAILURE')
+    throw e
   }
 }
 
-def testDocApp(appImage) {
+def testPlaybook(appImage) {
   dir("playbook") {
-    sh "docker run --tty --rm ${appImage} bin/test"
+    sh "docker run --tty --rm ${appImage} -w /home/app/src/playbook bin/test"
   }
 }
