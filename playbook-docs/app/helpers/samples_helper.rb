@@ -1,6 +1,10 @@
 # frozen_string_literal: true
 
 module SamplesHelper
+  def get_raw_code(sample, type)
+    sample_source_path(sample, type).read
+  end
+
   def get_sample_code_content(sample, type)
     file_path = sample_source_path(sample, type)
     render file: file_path, language: File.extname(file_path)[1..-1]
