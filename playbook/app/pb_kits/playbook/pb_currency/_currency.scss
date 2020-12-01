@@ -33,6 +33,20 @@
       font-weight: 400;
     }
 
+    &[class*=_light] [class^=pb_body_kit][class*=_light] {
+      color: $text_lt_light;
+    }
+
+    &[class*=_light] [class^=pb_title_kit][class*=_4] {
+      color: $text_lt_light;
+      font-weight: 400;
+    }
+
+    &[class*=_bold] [class^=pb_body_kit][class*=_light] {
+      color: $text_lt_default;
+      font-weight: 700;
+    }
+
     & > [class*=dollar_sign] {
       display: flex;
       align-items: flex-start;
