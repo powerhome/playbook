@@ -28,6 +28,9 @@ module Playbook
       prop :unit, type: Playbook::Props::String,
                   required: false
 
+      prop :emphasized, type: Playbook::Props::Boolean,
+      default: true
+
       prop :dark, type: Playbook::Props::Boolean,
                   default: false
 
@@ -59,6 +62,10 @@ module Playbook
           classname: "unit",
           dark: dark,
         }
+      end
+
+      def emphasized_class
+        emphasized ? "" : "_deemphasized"
       end
 
     private
