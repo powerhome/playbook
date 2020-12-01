@@ -1,10 +1,9 @@
 import React from 'react'
 import { useState } from 'react'
-import { Nav } from '../../'
-import NavItem from '../../pb_nav/_item.jsx'
+import { Nav, NavItem } from 'playbook-ui'
 
 const SnippetToggle = (props) => {
-  const [codeSnippet, toggleCodeSnippet] = useState('rails')
+  const [ codeSnippet, toggleCodeSnippet ] = useState('rails')
 
   const toggleHook = (snippetLang) => {
     toggleCodeSnippet(snippetLang)

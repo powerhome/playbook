@@ -8,7 +8,8 @@
     "prop-types": "^15.7.2",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
-    "playbook-ui": "file:../playbook"
+    "playbook-ui": "file:../playbook",
+    "webpacker-react": "^0.3.2"
   },
   "devDependencies": {
     "webpack-dev-server": "^3.11.0"
