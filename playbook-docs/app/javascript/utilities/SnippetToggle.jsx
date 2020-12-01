@@ -2,7 +2,7 @@ import React from 'react'
 import { useState } from 'react'
 import { Nav, NavItem } from 'playbook-ui'
 
-const SnippetToggle = (props) => {
+const SnippetToggle = () => {
   const [ codeSnippet, toggleCodeSnippet ] = useState('rails')
 
   const toggleHook = (snippetLang) => {

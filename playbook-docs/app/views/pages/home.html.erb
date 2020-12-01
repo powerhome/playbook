@@ -52,10 +52,10 @@
           }) %>
         <% end %>
 
-        <%= react_component('SnippetToggle', { test: 'test' }) %>
+        <%= react_component('SnippetToggle') %>
         <div class="pb--codeCopy code-snippets">
           <pre class="highlight"><%= render "pages/code_snippets/user_jsx", language: :jsx %></pre>
-          <pre class="highlight"><%= render "pages/code_snippets/user_erb", language: :erb %></pre>
+          <pre class="highlight" style="display: none"><%= render "pages/code_snippets/user_erb", language: :erb %></pre>
         </div>
       <% end %>
     <% end %>
