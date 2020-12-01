@@ -241,6 +241,8 @@ GEM
       thread_safe (~> 0.1)
     tzinfo-data (1.2020.4)
       tzinfo (>= 1.0.0)
+    uglifier (4.1.20)
+      execjs (>= 0.3.0, < 3)
     web-console (3.7.0)
       actionview (>= 5.0)
       activemodel (>= 5.0)
@@ -276,7 +278,9 @@ DEPENDENCIES
   selenium-webdriver
   spring
   spring-watcher-listen (~> 2.0.0)
+  sprockets-rails (= 2.3.3)
   tzinfo-data
+  uglifier (= 4.1.20)
   web-console (>= 3.3.0)
   webpacker
 
