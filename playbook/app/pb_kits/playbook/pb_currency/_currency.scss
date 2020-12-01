@@ -24,6 +24,15 @@
   [class^=pb_currency_wrapper] {
     display: flex;
 
+    &[class*=_deemphasized] [class^=pb_body_kit][class*=_light] {
+      color: $text_lt_default;
+    }
+
+    &[class*=_deemphasized] [class^=pb_title_kit][class*=_4] {
+      color: $text_lt_default;
+      font-weight: 400;
+    }
+
     & > [class*=dollar_sign] {
       display: flex;
       align-items: flex-start;
@@ -45,7 +54,7 @@
     padding-left: $space_xs - 7px;
     padding-right: $space_xs - 7px;
   }
-  
+
   &[class*=_sm] [class^=pb_currency_wrapper] [class*=pb_currency_value] {
     line-height: 1.4;
     padding-left: $space_xs - 7px;
