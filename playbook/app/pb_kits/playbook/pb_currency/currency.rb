@@ -31,6 +31,10 @@ module Playbook
       prop :emphasized, type: Playbook::Props::Boolean,
       default: true
 
+      prop :variant, type: Playbook::Props::Enum,
+                  values: %w[default light bold],
+                  default: "default"
+
       prop :dark, type: Playbook::Props::Boolean,
                   default: false
 
@@ -66,6 +70,16 @@ module Playbook
 
       def emphasized_class
         emphasized ? "" : "_deemphasized"
+      end
+
+      def variant_class
+        return unless size == "sm"
+
+        if variant == "light"
+          "_light"
+        elsif variant == "bold"
+          "_bold"
+        end
       end
 
     private

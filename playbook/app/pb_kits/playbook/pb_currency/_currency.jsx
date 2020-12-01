@@ -57,8 +57,6 @@ const Currency = (props: CurrencyProps) => {
     }
   }
 
-  const variantOrDefaultClass = variantClass ? variantClass : emphasizedClass
-
   const [whole, decimal = '00'] = amount.split('.')
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
@@ -77,7 +75,7 @@ const Currency = (props: CurrencyProps) => {
     >
       <Caption>{label}</Caption>
 
-      <div className={`pb_currency_wrapper${variantOrDefaultClass}`}>
+      <div className={`pb_currency_wrapper${variantClass || emphasizedClass}`}>
         <Body
             className="dollar_sign"
             color="light"
