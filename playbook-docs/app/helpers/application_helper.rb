@@ -91,7 +91,7 @@ module ApplicationHelper
                 else
                   kit_class_obj.props.keys
                 end
-    render partial: "playbook/config/pb_kit_api"
+    render partial: "config/pb_kit_api"
   end
 
   def nav_hash_category(link)
