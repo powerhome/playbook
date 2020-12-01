@@ -20,19 +20,20 @@ RUN curl -o- https://raw.githubusercontent.com/creationix/nvm/$NVM_VERSION/insta
     && nvm use default \
     && npm install -g npm@$NPM_VERSION yarn@$YARN_VERSION
 
-# Playbook internal deps
-ADD playbook /home/app/src/playbook/
-
-# Resolve playbook-docs deps
-ADD playbook-docs/Gemfile* /home/app/src/playbook-docs/
-RUN bundle install --frozen
-
-ADD playbook-docs/package.json playbook-docs/yarn.lock /home/app/src/playbook-docs/
-RUN yarn install
-RUN curl https://github.com/sass/node-sass/releases/download/v4.13.0/linux-x64-64_binding.node -o /home/app/src/playbook-docs/node_modules/node-sass/vendor/linux-x64-64_binding.node
-
+# Startup
 COPY ./startup.sh /
 RUN chmod +x /startup.sh
 RUN mkdir /etc/service/puma && ln -s /home/app/src/services/puma.sh /etc/service/puma/run
+
+# playbook-docs internal deps
+ADD playbook /home/app/src/playbook/
+
+# Build playbook-docs
+ADD playbook-docs /home/app/src/playbook-docs/
+
+# Dependencies
+RUN bundle install --frozen
+RUN yarn install
+RUN curl https://github.com/sass/node-sass/releases/download/v4.13.0/linux-x64-64_binding.node -o /home/app/src/playbook-docs/node_modules/node-sass/vendor/linux-x64-64_binding.node
 
 RUN /startup.sh $precompileassets
