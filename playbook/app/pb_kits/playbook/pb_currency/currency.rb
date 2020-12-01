@@ -29,11 +29,11 @@ module Playbook
                   required: false
 
       prop :emphasized, type: Playbook::Props::Boolean,
-      default: true
+                        default: true
 
       prop :variant, type: Playbook::Props::Enum,
-                  values: %w[default light bold],
-                  default: "default"
+                     values: %w[default light bold],
+                     default: "default"
 
       prop :dark, type: Playbook::Props::Boolean,
                   default: false
