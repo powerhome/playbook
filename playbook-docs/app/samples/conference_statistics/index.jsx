@@ -1,6 +1,5 @@
 import React from 'react'
-import { BarGraph, Body, Button, Caption, Card, Checkbox, Flex, Layout, LineGraph, SectionSeparator, Table, Title } from '../../../../pb_kits/playbook'
-import FlexItem from '../../../../pb_kits/playbook/pb_flex/_flex_item.jsx'
+import { BarGraph, Body, Button, Caption, Card, Checkbox, Flex, FlexItem, Layout, LineGraph, SectionSeparator, Table, Title } from 'playbook-ui'
 
 const data = [{
   name: '2020 | SF',

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Body, Button, Caption, CircleIconButton, Currency, Date, Filter, Flex, FlexItem, PersonContact, ProgressPills, Table, TextInput, Title, User } from '../../../../pb_kits/playbook'
+import { Body, Button, Caption, CircleIconButton, Currency, Date, Filter, Flex, FlexItem, PersonContact, ProgressPills, Table, TextInput, Title, User } from 'playbook-ui'
 
 const CrmClientList = () => (
   <div>

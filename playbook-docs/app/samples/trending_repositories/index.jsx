@@ -1,6 +1,5 @@
 import React from 'react'
-import { Background, Body, Button, Card, Flex, FlexItem, Icon, IconValue, Legend, MultipleUsers, Nav, SectionSeparator, Title } from '../../../../pb_kits/playbook'
-import NavItem from '../../../../pb_kits/playbook/pb_nav/_item.jsx'
+import { Background, Body, Button, Card, Flex, FlexItem, Icon, IconValue, Legend, MultipleUsers, Nav, NavItem, SectionSeparator, Title } from 'playbook-ui'
 
 const TrendingRepositories = () => {
   window.addEventListener('DOMContentLoaded', () => {

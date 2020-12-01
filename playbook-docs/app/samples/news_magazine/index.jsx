@@ -1,5 +1,5 @@
 import React from 'react'
-import { Caption, Card, Flex, FlexItem, IconValue, Image, Layout, Nav, NavItem, SectionSeparator, Title } from '../../../../pb_kits/playbook'
+import { Caption, Card, Flex, FlexItem, IconValue, Image, Layout, Nav, NavItem, SectionSeparator, Title } from 'playbook-ui'
 
 const NewsMagazine = () => {
   window.addEventListener('DOMContentLoaded', () => {
