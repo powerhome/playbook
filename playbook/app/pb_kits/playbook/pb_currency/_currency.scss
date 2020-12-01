@@ -29,8 +29,7 @@
     }
 
     &[class*=_deemphasized] [class^=pb_title_kit][class*=_4] {
-      color: $text_lt_default;
-      font-weight: 400;
+      font-weight: $regular;
     }
 
     &[class*=_light] [class^=pb_body_kit][class*=_light] {
@@ -39,12 +38,12 @@
 
     &[class*=_light] [class^=pb_title_kit][class*=_4] {
       color: $text_lt_light;
-      font-weight: 400;
+      font-weight: $regular;
     }
 
     &[class*=_bold] [class^=pb_body_kit][class*=_light] {
       color: $text_lt_default;
-      font-weight: 700;
+      font-weight: $bolder;
     }
 
     & > [class*=dollar_sign] {
