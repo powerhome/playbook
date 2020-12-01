@@ -27,6 +27,7 @@ RUN mkdir /etc/service/puma && ln -s /home/app/src/services/puma.sh /etc/service
 
 # playbook-docs internal deps
 ADD playbook /home/app/src/playbook/
+RUN cd /home/app/src/playbook/ && yarn && yarn run release
 
 # Build playbook-docs
 ADD playbook-docs /home/app/src/playbook-docs/
