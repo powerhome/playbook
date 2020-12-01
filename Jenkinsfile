@@ -44,7 +44,5 @@ def buildDocApp(scmVars, appImage) {
 }
 
 def testPlaybook(appImage) {
-  dir("playbook") {
-    sh "docker run --tty --rm ${appImage} -w /home/app/src/playbook bin/test"
-  }
+  sh "docker run -w /home/app/src/playbook --tty --rm ${appImage} ./test.sh"
 }

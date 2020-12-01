@@ -2,12 +2,11 @@
 
 set -e
 
-echo ">>> eslint"
-time yarn
-time yarn lint
+echo ">>> Testing"
+echo ">>>> Javascript"
 time yarn test
 
-echo ">>> Testing"
+echo ">>>> Ruby"
 trap "kill -TERM $PID" TERM
 time bin/rspec --format progress --format html --out ./spec_results/playbook/index.html --profile 100 spec &
 PID=$!
