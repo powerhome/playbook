@@ -75,9 +75,10 @@ module Playbook
       def variant_class
         return unless size == "sm"
 
-        if variant == "light"
+        case variant
+        when "light"
           "_light"
-        elsif variant == "bold"
+        when "bold"
           "_bold"
         end
       end
