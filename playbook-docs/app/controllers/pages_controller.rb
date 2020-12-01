@@ -29,7 +29,7 @@ class PagesController < ApplicationController
   def getting_started; end
 
   def grid
-    render layout: "layouts/playbook/grid"
+    render layout: "layouts/grid"
   end
 
   def home; end
@@ -37,25 +37,25 @@ class PagesController < ApplicationController
   def kits
     params[:type] ||= "react"
     @type = params[:type]
-    render layout: "layouts/playbook/kits"
+    render layout: "layouts/kits"
   end
 
   def kit_category_show_rails
     params[:type] ||= "rails"
     @type = params[:type]
-    render template: "playbook/pages/kit_category_show", layout: "layouts/playbook/kits"
+    render template: "pages/kit_category_show", layout: "layouts/kits"
   end
 
   def kit_category_show_react
-    render template: "playbook/pages/kit_category_show", layout: "layouts/playbook/kits"
+    render template: "pages/kit_category_show", layout: "layouts/kits"
   end
 
   def kit_show_rails
-    render "playbook/pages/kit_show", layout: "layouts/playbook/kits"
+    render "pages/kit_show", layout: "layouts/kits"
   end
 
   def kit_show_react
-    render template: "playbook/pages/kit_show", layout: "layouts/playbook/kits"
+    render template: "pages/kit_show", layout: "layouts/kits"
   end
 
   def principles; end
