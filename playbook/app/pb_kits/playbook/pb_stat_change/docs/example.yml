@@ -1,9 +1,9 @@
 examples:
-  
+
   rails:
   - stat_change_default: Default
-  
-  
+  - stat_change_unit: Unit
+
   react:
   - stat_change_default: Default
-  
+  - stat_change_unit: Unit
