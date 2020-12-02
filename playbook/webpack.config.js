@@ -1,6 +1,5 @@
 const path = require('path')
 const webpack = require('webpack')
-const svgUrlLoader = require('./config/webpack/loaders/svg.js')
 
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
@@ -24,6 +23,19 @@ const COPY_PLUGIN_CONFIG = new CopyPlugin({
     concurrency: 100,
   },
 })
+
+const SVG_LOADER = {
+  test: /\.svg$/,
+  exclude: /node_modules/,
+  use: [
+    {
+      loader: 'svg-url-loader',
+      options: {
+        limit: 10000,
+      },
+    },
+  ],
+}
 
 const BABEL_JS_CONFIG = {
   test: /\.(js|jsx|mjs)$/,
@@ -96,7 +108,7 @@ const config = {
           ],
         },
         BABEL_JS_CONFIG,
-        svgUrlLoader
+        SVG_LOADER
       ],
     },
     js: {
@@ -109,7 +121,7 @@ const config = {
           ],
         },
         BABEL_JS_CONFIG,
-        svgUrlLoader
+        SVG_LOADER
       ]
     }
   }
