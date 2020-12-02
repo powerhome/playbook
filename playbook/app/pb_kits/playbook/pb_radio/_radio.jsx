@@ -23,7 +23,7 @@ type RadioProps = {
   onChange: (Boolean)=>void,
 }
 
-const Radio = forwardRef(({
+const Radio = ({
   aria = {},
   children,
   className,
@@ -71,6 +71,6 @@ const Radio = forwardRef(({
       />
     </label>
   )
-})
+}
 
-export default Radio
+export default forwardRef(Radio)
