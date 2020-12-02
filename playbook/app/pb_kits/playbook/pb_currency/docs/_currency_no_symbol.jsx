@@ -5,10 +5,11 @@ const CurrencyNoSymbol = (props) => {
   return (
     <Currency
         {...props}
-        amount="19,950.00"
-        label="Caption"
+        amount="309"
+        label="Sales"
         size="md"
         symbol=""
+        unit="/week"
     />
   )
 }
