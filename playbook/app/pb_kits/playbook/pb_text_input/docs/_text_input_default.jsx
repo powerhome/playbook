@@ -1,75 +1,71 @@
-import React from 'react'
+import React, { useState } from 'react'
 import {
   Caption,
   TextInput,
   Title,
 } from '../../'
 
-class TextInputDefault extends React.Component {
-  state = {
-    firstName: '',
+const TextInputDefault = () => {
+  const handleOnChangeFirstName = ({target}) => {
+    setFirstName(target.value)
   }
+  const ref = React.createRef()
 
-  render() {
-    const handleOnChange = ({ target }) => this.setState({ firstName: target.value })
+  const [firstName, setFirstName] = useState('')
 
-    const {
-      firstName,
-    } = this.state
+  return (
+    <div>
+      <TextInput
+          aria={{ label: 'hello' }}
+          data={{ say: 'hi', yell: 'go' }}
+          id="unique-id"
+          label="First Name"
+          placeholder="Enter first name"
+          value="Tim Wenhold"
+      />
+      <TextInput
+          label="Last Name"
+          placeholder="Enter last name"
+      />
+      <TextInput
+          label="Phone Number"
+          placeholder="Enter phone number"
+          type="phone"
+      />
+      <TextInput
+          label="Email Address"
+          placeholder="Enter email address"
+          type="email"
+      />
+      <TextInput
+          label="Zip Code"
+          placeholder="Enter zip code"
+          type="number"
+      />
 
-    return (
-      <div>
-        <TextInput
-            aria={{ label: 'hello' }}
-            data={{ say: 'hi', yell: 'go' }}
-            id="unique-id"
-            label="First Name"
-            placeholder="Enter first name"
-            value="Timothy Wenhold"
-        />
-        <TextInput
-            label="Last Name"
-            placeholder="Enter last name"
-        />
-        <TextInput
-            label="Phone Number"
-            placeholder="Enter phone number"
-            type="phone"
-        />
-        <TextInput
-            label="Email Address"
-            placeholder="Enter email address"
-            type="email"
-        />
-        <TextInput
-            label="Zip Code"
-            placeholder="Enter zip code"
-            type="number"
-        />
+      <br />
+      <br />
 
-        <br />
-        <br />
+      <Title>{'Event Handler Props'}</Title>
 
-        <Title>{'Event Handler Props'}</Title>
+      <br />
+      <Caption>{'onChange'}</Caption>
 
-        <br />
-        <Caption>{'onChange'}</Caption>
+      <br />
 
-        <br />
+      <TextInput
+          label="First Name"
+          onChange={handleOnChangeFirstName}
+          placeholder="Enter first name"
+          ref={ref}
+          value={firstName}
+      />
 
-        <TextInput
-            label="First Name"
-            onChange={handleOnChange}
-            placeholder="Enter first name"
-            value={firstName}
-        />
-
-        <If condition={firstName !== ''}>
-          {`First name is: ${firstName}`}
-        </If>
-      </div>
-    )
-  }
+      <If condition={firstName !== ''}>
+        {`First name is: ${firstName}`}
+      </If>
+    </div>
+  )
 }
 
 export default TextInputDefault
