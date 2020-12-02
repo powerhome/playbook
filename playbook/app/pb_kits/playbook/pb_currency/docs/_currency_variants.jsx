@@ -9,20 +9,20 @@ const CurrencyVariants = (props) => {
           amount="2,000.50"
           emphasized={false}
           label="Emphasized False"
+          marginBottom="md"
           size="sm"
       />
       <Currency
           {...props}
-          align="center"
           amount="342"
           label="Light"
+          marginBottom="md"
           size="sm"
           symbol="€"
           variant="light"
       />
       <Currency
           {...props}
-          align="right"
           amount="45"
           label="Bold"
           size="sm"
