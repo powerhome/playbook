@@ -15,6 +15,7 @@ gem "webpacker"
 gem "sprockets-rails", "2.3.3"
 
 gem "redcarpet", "3.4.0"
+gem "rouge", "3.15.0"
 gem "rouge-rails"
 
 group :development, :test do
