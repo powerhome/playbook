@@ -7,12 +7,15 @@ gem "playbook_ui", path: "../playbook"
 gem "rails", "~> 5.2.4", ">= 5.2.4.4"
 
 gem "bootsnap", ">= 1.1.0", require: false
+gem "tzinfo-data"
 gem "jbuilder", "~> 2.5"
 gem "puma", "~> 3.11"
-gem "tzinfo-data"
+
 gem "webpacker"
-gem "rouge-rails"
 gem "sprockets-rails", "2.3.3"
+
+gem "redcarpet", "3.4.0"
+gem "rouge-rails"
 
 group :development, :test do
   gem "byebug", platforms: [:mri, :mingw, :x64_mingw]
