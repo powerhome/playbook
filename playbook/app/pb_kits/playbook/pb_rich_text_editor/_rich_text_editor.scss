@@ -1,4 +1,3 @@
-@import "~trix/dist/trix.css";
 @import "../pb_textarea/textarea_mixin";
 @import "../pb_button/_button_mixins";
 @import "../tokens/border_radius";
@@ -7,6 +6,7 @@
 @import "../tokens/opacity";
 @import "../tokens/spacing";
 @import "../pb_icon/icon";
+@import "./trix_styles";
 
 
 .trix-content pre {
