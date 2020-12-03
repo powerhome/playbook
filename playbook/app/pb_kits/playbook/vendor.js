@@ -33,5 +33,10 @@ import 'trix'
 
 // React-Rendered Rails Kits =====
 import WebpackerReact from 'webpacker-react'
-import * as ReactRailsPBKits from './react_rails_kits.js'
-WebpackerReact.setup({ ...ReactRailsPBKits })
+import BarGraph from './pb_bar_graph/_bar_graph.jsx'
+import DistributionBar from './pb_distribution_bar/_distribution_bar.jsx'
+import Legend from './pb_legend/_legend.jsx'
+import LineGraph from './pb_line_graph/_line_graph.jsx'
+import Typeahead from './pb_typeahead/_typeahead.jsx'
+import RichTextEditor from './pb_rich_text_editor/_rich_text_editor.jsx'
+WebpackerReact.setup({ BarGraph, DistributionBar, Legend, LineGraph, Typeahead, RichTextEditor })
