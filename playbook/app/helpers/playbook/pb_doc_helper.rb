@@ -36,9 +36,6 @@ module Playbook
       output = ""
       samples_using_kit = []
       all_samples[0].each do |sample|
-        # greppy = `grep #{kit} #{Playbook::Engine.root}/app/views/playbook/samples/#{sample}/index.html.erb`
-        # samples_using_kit.push(sample) if greppy.match?(/pb_rails\("#{kit}/)
-        # output = `grep -l 'pb_rails(\"#{kit}' #{Playbook::Engine.root}/app/views/playbook/samples/#{sample}/index.html.erb`
         filepath = "#{Playbook::Engine.root}/app/views/playbook/samples/#{sample}/index.html.erb"
         output = `grep -l 'pb_rails(\"#{kit}' #{filepath}`
         samples_using_kit.push(sample) if output.chomp == filepath
