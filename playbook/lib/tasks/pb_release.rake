@@ -2,7 +2,7 @@
 
 namespace :pb_release do
   desc "Update the version number in preparation to release"
-  task version: :environment do
+  task :version do
     puts "\n"
     puts "*" * 20 + " Create New Playbook Release " + "*" * 20
     ack = "\nFirst, before creating a new version please make sure you are familiar with SemVer guidlines: "
@@ -47,7 +47,7 @@ namespace :pb_release do
   end
 
   desc "Publish to RubyGems, NPM, and Create a Tag"
-  task push: :environment do
+  task :push do
     version = Playbook::VERSION
     puts "You about to release version #{version}. Is that correct? (y/N)"
     input = STDIN.gets.chomp
