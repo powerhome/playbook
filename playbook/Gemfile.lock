@@ -42,17 +42,11 @@ GEM
     babel-transpiler (0.7.0)
       babel-source (>= 4.0, < 6)
       execjs (~> 2.0)
-    bindex (0.8.1)
-    binding_of_caller (0.8.0)
-      debug_inspector (>= 0.0.1)
     builder (3.2.4)
     byebug (11.0.0)
-    childprocess (1.0.1)
-      rake (< 13.0)
     concurrent-ruby (1.1.7)
     connection_pool (2.2.3)
     crass (1.0.6)
-    debug_inspector (0.0.3)
     diff-lcs (1.3)
     erubi (1.9.0)
     execjs (2.7.0)
@@ -74,7 +68,6 @@ GEM
       railties (>= 5.0)
     i18n (1.8.5)
       concurrent-ruby (~> 1.0)
-    iniparse (1.5.0)
     jaro_winkler (1.5.4)
     listen (3.2.1)
       rb-fsevent (~> 0.10, >= 0.10.3)
@@ -92,9 +85,6 @@ GEM
     octokit (4.19.0)
       faraday (>= 0.9)
       sawyer (~> 0.8.0, >= 0.5.3)
-    overcommit (0.49.0)
-      childprocess (>= 0.6.3, < 2.0)
-      iniparse (~> 1.4)
     parallel (1.19.1)
     parser (2.7.1.2)
       ast (~> 2.4.0)
@@ -199,11 +189,6 @@ GEM
     uglifier (4.1.20)
       execjs (>= 0.3.0, < 3)
     unicode-display_width (1.7.0)
-    web-console (3.7.0)
-      actionview (>= 5.0)
-      activemodel (>= 5.0)
-      bindex (>= 0.4.0)
-      railties (>= 5.0)
     webpacker (4.2.2)
       activesupport (>= 4.2)
       rack-proxy (>= 0.6.1)
@@ -215,12 +200,9 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  binding_of_caller (= 0.8.0)
   byebug (= 11.0.0)
   health_check
-  overcommit (= 0.49.0)
   playbook_ui!
-  rainbow (= 2.2.2)
   rspec-rails (~> 3.8.0)
   rubocop (= 0.81.0)
   simple_form (>= 5.0.1, < 6.0.0)
@@ -228,7 +210,6 @@ DEPENDENCIES
   spring-watcher-listen (= 2.0.1)
   tzinfo-data (= 1.2018.9)
   uglifier (= 4.1.20)
-  web-console (= 3.7.0)
 
 BUNDLED WITH
    1.17.3
