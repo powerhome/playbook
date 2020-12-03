@@ -1,10 +1,9 @@
-document.addEventListener("DOMContentLoaded", function (event) {
+document.addEventListener("DOMContentLoaded", function () {
   document.querySelector(".compress").style.display = "none"
 
-  document.querySelector(".toggle-button").addEventListener("click", (e) => {
+  document.querySelector(".toggle-button-js").addEventListener("click", (e) => {
     e.preventDefault()
     document.querySelector(".pb--codeCopy").classList.toggle("close")
-
   })
 
   document.querySelector(".expand").addEventListener("click", () => {
@@ -31,6 +30,4 @@ document.addEventListener("DOMContentLoaded", function (event) {
     var copyText = document.querySelector(".hiddenCodeforCopy").textContent
     setClipboard(copyText)
   })
-
-  console.log('here here')
 })

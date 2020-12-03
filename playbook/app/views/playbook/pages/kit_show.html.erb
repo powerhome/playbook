@@ -4,8 +4,30 @@
     <%= markdown(get_kit_description(@kit)) %>
   </div>
 </div>
-<div>
+<div class="kit-show-wrapper">
   <div class="pb--kit-type-nav">
+
+    <% if get_samples(@kit).size > 0 %>
+      <div class="sample-ui-link-wrapper mb_xl">
+      <%= pb_rails("flex", props: { id: 'kits-used' }) do %>
+        <%= pb_rails("title", props: {
+          text: "See this kit in action in our sample UI",
+          size: 4,
+          tag: "h4",
+          variant: "link"
+        }) %>
+        <%= pb_rails("icon", props: { classname: "dropdown-icon", icon: "angle-down", fixed_width: true }) %>
+      <% end %>
+      <%= pb_rails("popover", props: { min_width: "275px", trigger_element_id: "kits-used", tooltip_id: "kits-used-tooltip", position: "bottom", padding: "none" }) do %>
+        <%= pb_rails("nav", props: {}) do %>
+          <% get_samples(@kit).each do |sample| %>
+            <%= pb_rails("nav/item", props: { icon_right: "angle-right", link: "/samples/#{sample}", text: sample.titleize}) %>
+          <% end %>
+        <% end %>
+      <% end %>
+      </div>
+    <% end %>
+
     <%= pb_rails("nav", props: { orientation: "horizontal" }) do %>
       <% if has_kit_type?(@kit, "rails") %>
         <%= pb_rails("nav/item", props: { text: "Rails", link: kit_show_rails_path(@kit), active: action_name == 'kit_show_rails' }) %>
@@ -14,20 +36,65 @@
         <%= pb_rails("nav/item", props: { text: "React", link: kit_show_reacts_path(@kit), active: action_name == 'kit_show_react' }) %>
       <% end %>
     <% end %>
+
     <%= pb_rails("section_separator") %>
   </div>
   <% if (action_name == "kit_show_rails") %>
     <%= pb_kit(kit: @kit) %>
-    <div class="markdown <%= cookies[:dark_mode]== "true" ? 'dark' : '' %>">
-      <br>
-      <%= markdown(get_kit_footer(@kit)) %>
-    </div>
-    <%= pb_kit_api(@kit) %>
   <% else %>
     <%= pb_kit(kit: @kit, type: "react") %>
-    <div class="markdown <%= cookies[:dark_mode] == "true" ? 'dark' : '' %>">
-      <br>
-      <%= markdown(get_kit_footer(@kit)) %>
-    </div>
   <% end %>
+
+  <div class="markdown <%= cookies[:dark_mode] == "true" ? 'dark' : '' %>">
+    <br>
+    <%= markdown(get_kit_footer(@kit)) %>
+  </div>
+
+  <% if get_samples(@kit).size > 0 %>
+    <%= pb_rails("flex", props: { classname: "flex-container", wrap: true }) do %>
+      <%= pb_rails("icon", props: { icon: "palette", margin_right: "sm", size: "2x" }) %> 
+      <%= pb_rails("title", props: {
+        margin_bottom: "xs",
+        text: "UI Samples using #{@kit.titleize} Kit",
+        tag: "h3",
+        size: 3
+      }) %>
+    <% end %>
+    <%= pb_rails("body", props: {
+      margin_bottom: "sm",
+      text: "Get the full picture. See how this kit is used in our samples."
+    }) %>
+
+    <%= pb_rails("layout", props: {layout: "collection"}) do %>
+      <%= pb_rails("layout/body") do %>
+        <% get_samples(@kit).each do |sample| %>
+          <%= pb_rails("card", props: { classname: "ui-sample-card", padding: "md" }) do %>
+            <a href=<%="/samples/#{sample}"%>>
+              <%= pb_rails("flex", props: { classname: "flex-container", spacing: "between", vertical: "center" }) do %>
+                    <%= pb_rails("title", props: {
+                      id: 'kits-used',
+                      text: sample.titleize,
+                      tag: "h4",
+                      size: 4,
+                      variant: "link"
+                    }) %>
+                    <%= pb_rails("icon_circle", props: {
+                      icon: "angle-right",
+                      size: "sm",
+                      variant: "royal"
+                    }) %>
+              <% end %>
+            </a>
+          <% end %>
+        <% end %>
+      <% end %>
+    <% end %>
+
+  <% end %>
+
+  <% if (action_name == "kit_show_rails") %>
+    <br>
+    <%= pb_kit_api(@kit) %>
+  <% end %>
+
 </div>
