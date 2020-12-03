@@ -147,25 +147,4 @@ const mainConfig = (env) => {
   }
 }
 
-const docsConfig = (env) => {
-  return {
-    mode: 'production',
-    resolve: config.resolve,
-    resolveLoader: config.resolveLoader,
-    optimization: config.optimization(env),
-    externals: config.externals,
-    entry: {
-      'playbook-doc': './app/pb_kits/playbook/packs/react-examples.js',
-    },
-    output: {
-      libraryTarget: 'amd',
-      filename: '[name].js',
-      path: config.output.path,
-    },
-    plugins: config.plugins(),
-    module: config.module.js,
-    resolve: config.resolve
-  }
-}
-
-module.exports = [mainConfig, docsConfig]
+module.exports = [mainConfig]
