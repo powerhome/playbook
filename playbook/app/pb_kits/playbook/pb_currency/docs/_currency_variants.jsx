@@ -1,33 +1,36 @@
 import React from 'react'
 import { Currency } from '../../'
 
-const CurrencyMedium = (props) => {
+const CurrencyVariants = (props) => {
   return (
     <>
       <Currency
           {...props}
           amount="2,000.50"
-          label="Caption"
-          size="md"
+          emphasized={false}
+          label="Emphasized False"
+          marginBottom="md"
+          size="sm"
       />
       <Currency
           {...props}
-          align="center"
           amount="342"
-          label="Caption"
-          size="md"
+          label="Light"
+          marginBottom="md"
+          size="sm"
           symbol="€"
+          variant="light"
       />
       <Currency
           {...props}
-          align="right"
           amount="45"
-          label="Caption"
-          size="md"
+          label="Bold"
+          size="sm"
           unit="/mo"
+          variant="bold"
       />
     </>
   )
 }
 
-export default CurrencyMedium
+export default CurrencyVariants
