@@ -3,7 +3,9 @@ examples:
   rails:
   - stat_change_default: Default
   - stat_change_unit: Unit
+  - stat_change_unit_two: Unit
 
   react:
   - stat_change_default: Default
   - stat_change_unit: Unit
+  - stat_change_unit_two: Unit
