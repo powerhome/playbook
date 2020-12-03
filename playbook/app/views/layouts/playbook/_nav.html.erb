@@ -4,12 +4,30 @@
   <% end %>
   <%= pb_rails("flex", props:{ spacing:"between", vertical: "center" }) do %>
     <%= pb_rails("flex/flex_item", props: {}) do %>
+
+    <%
+      kits_var = []
+      MENU["kits"].each do |link|
+        label_value_hash = {
+          label: link.to_s.titleize,
+          value: "/kits/#{link.to_s}",
+        }
+        kits_var.push(label_value_hash)
+      end
+    %>
+
+    <%= react_component("KitSearch", kits: kits_var) %>
+
+
+      <% if false%>
       <%= pb_rails("flex", props:{ classname: "margin-toggle", margin_bottom: "xs", spacing:"between", vertical: "center" }) do %>
         <%= link_to root_url do %>
           <%= image_tag("pb-logo.svg") %>
         <% end %>
         <%= pb_rails("caption", props: { tag: "span", text: Playbook::VERSION }) %>
       <% end %>
+      <% end %>
+
     <% end %>
 
     <div class="full-size-nav">
@@ -63,3 +81,5 @@
   <% name = "success" if name == "notice" %>
   <%= pb_rails("fixed_confirmation_toast", props: { text: msg, status: name }) %>
 <% end %>
+
+<%# <%= javascript_packs_with_chunks_tag 'kit-search'%>
