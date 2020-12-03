@@ -77,12 +77,6 @@ const config = {
       path.resolve(__dirname, 'node_modules'),
     ]
   },
-  resolveLoader: {
-    modules: [
-      'node_modules',
-      path.resolve(__dirname, 'config/webpack/loaders')
-    ],
-  },
   optimization: (env) => {
     return { minimize: env.development ? false : true }
   },
