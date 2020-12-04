@@ -47,6 +47,12 @@ module Playbook
       render layout: "layouts/playbook/kits"
     end
 
+    def all_kit_examples
+      params[:type] ||= "react"
+      @type = params[:type]
+      render layout: "layouts/playbook/kits"
+    end
+
     def kit_category_show_rails
       params[:type] ||= "rails"
       @type = params[:type]
@@ -67,13 +73,7 @@ module Playbook
 
     def principles; end
 
-    def tokens
-      render layout: "layouts/playbook/kits"
-    end
-
-    def utilities
-      render layout: "layouts/playbook/kits"
-    end
+    def visual_guidelines; end
 
   private
 

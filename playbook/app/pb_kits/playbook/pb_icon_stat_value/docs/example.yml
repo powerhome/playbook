@@ -1,0 +1,15 @@
+examples:
+
+  rails:
+  - icon_stat_value_default: Default
+  - icon_stat_value_sizes: Size
+  - icon_stat_value_vertical: Vertical
+  - icon_stat_value_color: Color
+
+
+
+  react:
+  - icon_stat_value_default: Default
+  - icon_stat_value_sizes: Size
+  - icon_stat_value_vertical: Vertical
+  - icon_stat_value_color: Color

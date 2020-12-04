@@ -38,11 +38,12 @@ const renderOptions = (options: SortOptions, value: SortValue[], handleChange: (
 )
 
 export type SortMenuProps = {
-  value?: SortValue[],
-  options: SortOptions,
+  dark?: boolean,
   onChange: SortingChangeCallback,
+  options: SortOptions,
+  value?: SortValue[],
 }
-const SortMenu = ({ options, value, onChange }: SortMenuProps) => {
+const SortMenu = ({ dark, options, value, onChange }: SortMenuProps) => {
   const [hide, updateHide] = useState(true)
   const toggle = () => updateHide(!hide)
   const handleChange = (value: SortValue) => {
@@ -52,13 +53,17 @@ const SortMenu = ({ options, value, onChange }: SortMenuProps) => {
 
   const sortButton = (
     <Button
+        dark={dark}
         id="sort-button"
         onClick={toggle}
         variant="link"
     >
       {map(value, ({ dir, name }) => (
         <span key={`current-sort-${name}-${dir}`}>
-          <Icon icon={directionIcon(dir)} />
+          <Icon
+              dark={dark}
+              icon={directionIcon(dir)}
+          />
           {` ${options[name]}`}
         </span>
       ))}

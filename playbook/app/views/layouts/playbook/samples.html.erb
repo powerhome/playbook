@@ -16,7 +16,7 @@
     <%= javascript_include_tag "https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js" %>
 
     <% if @type == 'react' %>
-      <%= javascript_packs_with_chunks_tag 'application', 'react-examples', 'samples', 'full-page-samples' %>
+      <%= javascript_packs_with_chunks_tag 'application', 'popover_docs', 'samples', 'full-page-samples' %>
     <% else %>
       <%= javascript_packs_with_chunks_tag 'application', 'rails-examples', 'samples', 'full-page-samples' %>
       <%= yield :pb_js %>

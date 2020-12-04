@@ -1,7 +1,6 @@
 /* @flow */
 
 import React from 'react'
-
 import FilterSingle, { FilterSingleProps } from './FilterSingle'
 import FilterDouble, { FilterDoubleProps } from './FilterDouble'
 

@@ -41,6 +41,7 @@ import * as FileUpload from 'pb_file_upload/docs'
 import * as Filter from 'pb_filter/docs'
 import * as FixedConfirmationToast from 'pb_fixed_confirmation_toast/docs'
 import * as Flex from 'pb_flex/docs'
+import * as FormGroup from 'pb_form_group/docs'
 import * as FormPill from 'pb_form_pill/docs'
 import * as Gauge from 'pb_gauge/docs'
 import * as Hashtag from 'pb_hashtag/docs'
@@ -48,6 +49,7 @@ import * as Highlight from 'pb_highlight/docs'
 import * as HomeAddressStreet from 'pb_home_address_street/docs'
 import * as Icon from 'pb_icon/docs'
 import * as IconCircle from 'pb_icon_circle/docs'
+import * as IconStatValue from 'pb_icon_stat_value/docs'
 import * as IconValue from 'pb_icon_value/docs'
 import * as Image from 'pb_image/docs'
 import * as LabelPill from 'pb_label_pill/docs'
@@ -70,6 +72,7 @@ import * as ProgressPills from 'pb_progress_pills/docs'
 import * as ProgressSimple from 'pb_progress_simple/docs'
 import * as ProgressStep from 'pb_progress_step/docs'
 import * as Radio from 'pb_radio/docs'
+import * as RichTextEditor from 'pb_rich_text_editor/docs'
 import * as SectionSeparator from 'pb_section_separator/docs'
 import * as Select from 'pb_select/docs'
 import * as SelectableCard from 'pb_selectable_card/docs'
@@ -127,6 +130,7 @@ WebpackerReact.setup({
   ...Filter,
   ...FixedConfirmationToast,
   ...Flex,
+  ...FormGroup,
   ...FormPill,
   ...Gauge,
   ...Hashtag,
@@ -134,6 +138,7 @@ WebpackerReact.setup({
   ...HomeAddressStreet,
   ...Icon,
   ...IconCircle,
+  ...IconStatValue,
   ...IconValue,
   ...Image,
   ...LabelPill,
@@ -156,6 +161,7 @@ WebpackerReact.setup({
   ...ProgressSimple,
   ...ProgressStep,
   ...Radio,
+  ...RichTextEditor,
   ...SectionSeparator,
   ...Select,
   ...SelectableCard,

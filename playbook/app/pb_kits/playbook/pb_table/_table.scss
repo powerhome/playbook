@@ -4,22 +4,54 @@
 $pb_table_row_kit_side_highlight_colors: map-merge(map-merge($status_colors, $product_colors), $category_colors);
 
 @mixin pb_table_row_kit_side_highlight($background) {
-    box-shadow: inset 4px 0 0 0 $background;
-    border-top: 0px;
+  box-shadow: inset 4px 0 0 0 $background;
+  border-top: 0px;
 }
 
 [class^=pb_table] {
-    tbody {
-        [class^=pb_table_row_kit] {
-            @each $color_name, $color_value in $pb_table_row_kit_side_highlight_colors {
-                &[class*=_side_highlight_#{$color_name}] {
-                    td {
-                        &:first-child {
-                            @include pb_table_row_kit_side_highlight($color_value);
-                        }
-                    }
-                }
+  tbody {
+    [class^=pb_table_row_kit] {
+      @each $color_name, $color_value in $pb_table_row_kit_side_highlight_colors {
+        &[class*=_side_highlight_#{$color_name}] {
+          td {
+            &:first-child {
+              @include pb_table_row_kit_side_highlight($color_value);
             }
+          }
         }
+      }
     }
+  }
+  tr[align=center] th,
+  tr th[align=center] {
+    text-align: center !important;
+  }
+
+  tr[align=right] th,
+  tr th[align=right] {
+    text-align: right !important;
+  }
+
+  tr[shift=up] {
+    vertical-align: top;
+  }
+  tr[shift=down] {
+    vertical-align: bottom;
+  }
+
+  td[shift=up] {
+    vertical-align: top;
+  }
+  td[shift=down] {
+    vertical-align: bottom;
+  }
+
+  th[shift=up] {
+    vertical-align: top;
+  }
+
+  th[shift=down] {
+    vertical-align: bottom;
+  }
 }
+

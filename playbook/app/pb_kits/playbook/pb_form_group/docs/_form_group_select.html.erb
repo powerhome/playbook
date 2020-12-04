@@ -1,0 +1,19 @@
+<div>
+  <%= pb_rails("form_group") do %>
+    <%= pb_rails("text_input", props: { label: "Artist", placeholder: "Enter Artist Name" }) %>
+    <%= pb_rails("select", props: {
+      blank_selection: "Genre",
+      options: [
+        { value: "Country" },
+        { value: "Pop" },
+        { value: "Rock" },
+        { value: "Hip-Hop/Rap" },
+        { value: "Classical" },
+        { value: "Gospel" },
+        { value: "Alternative" },
+        { value: "Indie" },
+        { value: "Other" },
+      ]
+    }) %>
+  <% end %>
+</div>

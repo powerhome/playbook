@@ -1,4 +1,5 @@
 const path = require('path')
+
 const webpack = require('webpack')
 const svgUrlLoader = require('./config/webpack/loaders/svg.js')
 
@@ -44,10 +45,20 @@ const CSS_LOADER_CONFIG = {
   }
 }
 
+const SASS_LOADER_CONFIG = {
+  loader: 'sass-loader',
+  options: {
+    sassOptions: {
+      includePaths: [path.resolve(__dirname, 'node_modules')],
+    }
+  }
+}
+
 const config = {
   externals: {
     react: 'react',
     'react-dom': 'react-dom',
+    trix: 'trix',
     'webpacker-react': 'webpacker-react',
   },
   resolve: {
@@ -92,7 +103,7 @@ const config = {
           use: [
             MiniCssExtractPlugin.loader,
             CSS_LOADER_CONFIG,
-            { loader: 'sass-loader' },
+            SASS_LOADER_CONFIG,
           ],
         },
         BABEL_JS_CONFIG,
@@ -105,7 +116,7 @@ const config = {
           test: /\.scss$/i,
           use: [
             CSS_LOADER_CONFIG,
-            { loader: 'sass-loader' },
+            SASS_LOADER_CONFIG,
           ],
         },
         BABEL_JS_CONFIG,
@@ -114,6 +125,10 @@ const config = {
     }
   }
 }
+
+new webpack.DefinePlugin({
+  'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
+})
 
 const mainConfig = (env) => {
   return {

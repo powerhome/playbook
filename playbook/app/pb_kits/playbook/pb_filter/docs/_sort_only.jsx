@@ -1,9 +1,9 @@
 import React from 'react'
 import { Filter } from '../../'
 
-const SortOnly = () => (
+const SortOnly = (props) => (
   <Filter
-      background={false}
+      {...props}
       sortOptions={{
         popularity: 'Popularity',
         // eslint-disable-next-line
@@ -11,7 +11,7 @@ const SortOnly = () => (
         // eslint-disable-next-line
         manager_name: 'Manager\'s Name',
       }}
-      sortValue={[{ name: 'manager_title', dir: 'desc' }]}
+      sortValue={[{ name: 'popularity', dir: 'desc' }]}
   />
 )
 

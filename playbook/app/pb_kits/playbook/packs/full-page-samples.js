@@ -1,33 +1,33 @@
-window.$(document).ready(() => {
-  $('.compress').hide()
+document.addEventListener("DOMContentLoaded", function () {
+  document.querySelector(".compress").style.display = "none"
 
-  window.$(document).on('click', '.toggle-button', (e) => {
+  document.querySelector(".toggle-button-js").addEventListener("click", (e) => {
     e.preventDefault()
-    $('.pb--codeCopy').toggleClass('close')
+    document.querySelector(".pb--codeCopy").classList.toggle("close")
   })
 
-  $('.expand').click(() => {
-    $('.sample-nav').hide()
-    $('.compress').show()
+  document.querySelector(".expand").addEventListener("click", () => {
+    document.querySelector(".sample-nav").style.display = "none"
+    document.querySelector(".compress").style.display = "inline-block"
   })
 
-  $('.compress').click(() => {
-    $('.sample-nav').show()
-    $('.compress').hide()
+  document.querySelector(".compress").addEventListener("click", () => {
+    document.querySelector(".sample-nav").style.display = "flex"
+    document.querySelector(".compress").style.display = "none"
   })
 
   const setClipboard = (value) => {
-    var tempInput = document.createElement('textarea')
-    tempInput.style = 'position: absolute; left: -1000px; top: -1000px'
+    var tempInput = document.createElement("textarea")
+    tempInput.style = "position: absolute; left: -1000px; top: -1000px"
     tempInput.value = value
     document.body.appendChild(tempInput)
     tempInput.select()
-    document.execCommand('copy')
+    document.execCommand("copy")
     document.body.removeChild(tempInput)
   }
 
-  $('.copy-clipboard').click(() => {
-    var copyText = document.querySelector('.hiddenCodeforCopy').textContent
+  document.querySelector(".copy-clipboard").addEventListener("click", () => {
+    var copyText = document.querySelector(".hiddenCodeforCopy").textContent
     setClipboard(copyText)
   })
 })

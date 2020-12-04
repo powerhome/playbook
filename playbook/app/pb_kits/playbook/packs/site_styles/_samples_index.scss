@@ -13,6 +13,7 @@
     padding-left: $space_lg;
     border-left: $border_light solid 1px;
     margin-top: $space_md;
+    min-width: 300px;
   }
   // Background padding override
   .pb_background_kit {
@@ -28,15 +29,12 @@
     box-shadow: $shadow_deep;
   }
   // Mobile Styles
-  @include break_at(699px){
-    .full_page_samples_flex_wrapper {
-      flex-direction: column;
-      align-items: center;
-    }
+  @include break_at(731px){
     .list {
       padding-left: 0;
       border-left: none;
       margin-top: $space_lg;
+      min-width: auto;
     }
     .pb_background_kit {
       padding: $space_xl !important;
@@ -44,6 +42,10 @@
     .preview {
       margin-right: 0;
       display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .samples_flex_wrapper {
       flex-direction: column;
       align-items: center;
     }
