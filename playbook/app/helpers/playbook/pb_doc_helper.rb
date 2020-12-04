@@ -48,6 +48,24 @@ module Playbook
       samples_using_kit
     end
 
+    def get_samples(kit)
+      sample_yaml = YAML.load_file("#{Playbook::Engine.root}/app/pb_kits/playbook/data/samples.yml")
+      all_samples = []
+
+      sample_yaml.each do |_category, sample|
+        all_samples.push(sample)
+      end
+
+      output = ""
+      samples_using_kit = []
+      all_samples[0].each do |sample|
+        filepath = "#{Playbook::Engine.root}/app/views/playbook/samples/#{sample}/index.html.erb"
+        output = `grep -l 'pb_rails(\"#{kit}' #{filepath}`
+        samples_using_kit.push(sample) if output.chomp == filepath
+      end
+      samples_using_kit
+    end
+
     def kit_path(kit)
       "#{Playbook::Engine.root}/app/pb_kits/playbook/pb_#{kit}"
     end
