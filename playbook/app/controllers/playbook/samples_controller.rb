@@ -5,8 +5,10 @@ require "yaml"
 
 module Playbook
   class SamplesController < ApplicationController
+    include PbDocHelper
     before_action :set_playbook
     before_action :set_sample, only: %i[sample_show_rails sample_show_react]
+    before_action :delete_dark_mode_cookie
 
     layout "playbook/samples"
 

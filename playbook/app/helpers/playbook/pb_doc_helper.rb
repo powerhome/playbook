@@ -25,6 +25,10 @@ module Playbook
       end
     end
 
+    def delete_dark_mode_cookie
+      cookies.delete :dark_mode
+    end
+
     def kit_path(kit)
       "#{Playbook::Engine.root}/app/pb_kits/playbook/pb_#{kit}"
     end
@@ -146,6 +150,28 @@ module Playbook
 
     def sub_category_active(kit, link)
       (!kit.nil? && @kit == link)
+    end
+
+    def format_search_hash(kit)
+      label_value_hash = {
+        label: kit.to_s.titleize,
+        value: @type == "react" ? "/kits/#{kit}/react" : "/kits/#{kit}",
+      }
+      label_value_hash
+    end
+
+    def search_list
+      all_kits = []
+      MENU["kits"].each do |kit|
+        if kit.is_a? Hash
+          kit.values[0].each do |sub_kit|
+            all_kits.push(format_search_hash(sub_kit))
+          end
+        else
+          all_kits.push(format_search_hash(kit))
+        end
+      end
+      all_kits
     end
 
   private

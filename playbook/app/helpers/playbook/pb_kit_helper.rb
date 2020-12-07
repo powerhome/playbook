@@ -18,6 +18,7 @@ module Playbook
 
     def pb_react(kit, props:{dark: react_props}, options: {})
       ::Webpacker::React::Component.new(kit.camelize).render(props, options)
+      # react_component(kit.camelize, props, options)
     end
 
   private
