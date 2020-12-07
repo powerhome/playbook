@@ -4,16 +4,6 @@ module Playbook
   module PbDocHelper
     include ::Webpacker::Helper
     include ::Webpacker::React::Helpers
-    include ::Playbook::PbKitHelper
-
-    # Overrides the original pb_rails helper to include documentation dark mode behavior
-    def pb_rails(kit, props: {}, &block)
-      super kit, props: dark_mode_props(props), &block
-    end
-
-    def pb_react(kit, props: {}, options: {})
-      react_component kit.camelize, dark_mode_props(props), options
-    end
 
     def pb_kit_title(title)
       title.remove("pb_").titleize.tr("_", " ")
@@ -224,14 +214,6 @@ module Playbook
         puts "Kit Path Not Avaliable"
       end
       render inline: "<a href='#{url}'>#{pb_rails(:title, props: { text: pb_kit_title(kit), tag: 'h3', size: 2 })}</a>"
-    end
-
-    def dark_mode_props(props)
-      (props || {}).merge(dark: dark_mode?)
-    end
-
-    def dark_mode?
-      cookies[:dark_mode].eql? "true"
     end
   end
 end
