@@ -99,11 +99,7 @@ module Playbook
 
     def pb_kit_api(kit)
       kit_class_obj = get_class_name(kit.to_s)
-      @kit_api = if kit_class_obj < Playbook::PbKit::Base
-                   kit_class_obj.instance_method(:initialize).parameters.map(&:last)
-                 else
-                   kit_class_obj.props.keys
-                 end
+      @kit_api = kit_class_obj.props.keys
       render partial: "playbook/config/pb_kit_api"
     end
 
