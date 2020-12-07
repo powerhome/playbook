@@ -1,8 +1,3 @@
-// ===========================================
-// Generated file from kit generator.
-//
-// ===========================================
-
 import WebpackerReact from 'webpacker-react'
 
 import AnalyticsDashboard from '../../../views/playbook/samples/analytics_dashboard/index.jsx'

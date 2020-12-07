@@ -16,10 +16,6 @@ module Playbook
       @playbook = true
     end
 
-    # def delete_dark_mode_cookie
-    #   cookies.delete :dark_mode
-    # end
-
     def disable_dark_mode
       cookies[:dark_mode] = {
         value: "false",

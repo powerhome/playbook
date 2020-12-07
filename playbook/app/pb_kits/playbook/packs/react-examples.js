@@ -1,15 +1,5 @@
-// ===========================================
-// Generated file from kit generator.
-//
-// KIT EXAMPLES
-// ===========================================
-
 import WebpackerReact from 'webpacker-react'
 
-//
-// ===========================================
-// ===========================================
-// Generated file from kit generator.
 // KIT EXAMPLES
 import '../pb_form/pb_form_validation'
 import * as Avatar from 'pb_avatar/docs'
@@ -100,6 +90,7 @@ import * as User from 'pb_user/docs'
 import * as UserBadge from 'pb_user_badge/docs'
 import * as WeekdayStacked from 'pb_weekday_stacked/docs'
 
+// REACT COMPONENTS USED ON DOC SITE
 import * as SiteComps from 'docs_components'
 
 WebpackerReact.setup({

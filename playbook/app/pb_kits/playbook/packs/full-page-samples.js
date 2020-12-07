@@ -4,8 +4,6 @@ document.addEventListener("DOMContentLoaded", function (event) {
   document.querySelector(".toggle-button").addEventListener("click", (e) => {
     e.preventDefault()
     document.querySelector(".pb--codeCopy").classList.toggle("close")
-    console.log('toggle-click')
-
   })
 
   document.querySelector(".expand").addEventListener("click", () => {
