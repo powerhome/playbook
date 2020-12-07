@@ -32,6 +32,4 @@ document.addEventListener("DOMContentLoaded", function (event) {
     var copyText = document.querySelector(".hiddenCodeforCopy").textContent
     setClipboard(copyText)
   })
-
-  console.log('here here')
 })
