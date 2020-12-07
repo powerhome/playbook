@@ -23,7 +23,7 @@ module Playbook
       prop :value
 
       def classname
-        generate_classname("pb_text_input_kit") + error_class
+        generate_classname("pb_text_input_kit") + default_mb_sm + error_class
       end
 
       def validation_message
@@ -44,6 +44,11 @@ module Playbook
 
       def error_class
         error ? " error" : ""
+      end
+
+      def default_mb_sm
+        classname = generate_classname("pb_text_input_kit")
+        classname.include?("m_") || classname.include?("mb_") ? "" : " default_mb_sm"
       end
     end
   end

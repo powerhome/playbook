@@ -17,8 +17,10 @@ type TextInputProps = {
   disabled?: boolean,
   error?: string,
   id?: string,
-  name: string,
   label: string,
+  margin: string,
+  marginBottom: string,
+  name: string,
   onChange: (String) => void,
   placeholder: string,
   required?: boolean,
@@ -36,8 +38,8 @@ const TextInput = (props: TextInputProps) => {
     disabled,
     error,
     id,
-    name,
     label,
+    name,
     onChange = () => {},
     placeholder,
     required,
@@ -53,6 +55,7 @@ const TextInput = (props: TextInputProps) => {
     error ? 'error' : null,
     globalProps(props),
     className,
+    props.margin || props.marginBottom ? null : 'default_mb_sm',
   ])
 
   return (
