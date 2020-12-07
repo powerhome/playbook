@@ -1,9 +1,5 @@
 # frozen_string_literal: true
 
-require "sassc-rails"
-require "slim-rails"
-require "webpacker/railtie"
-
 module Playbook
   class Engine < ::Rails::Engine
     isolate_namespace Playbook
