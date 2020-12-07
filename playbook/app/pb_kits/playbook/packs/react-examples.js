@@ -100,9 +100,6 @@ import * as User from 'pb_user/docs'
 import * as UserBadge from 'pb_user_badge/docs'
 import * as WeekdayStacked from 'pb_weekday_stacked/docs'
 
-// REACT COMPONENTS USED BY DOCS SITE
-import * as SiteComps from './docs_components'
-
 WebpackerReact.setup({
   ...Avatar,
   ...AvatarActionButton,
@@ -171,7 +168,6 @@ WebpackerReact.setup({
   ...SelectableCardIcon,
   ...SelectableIcon,
   ...SelectableList,
-  ...SiteComps,
   ...Source,
   ...StarRating,
   ...StatChange,

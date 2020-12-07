@@ -1,7 +1,7 @@
 import React from 'react'
 import { useState } from 'react'
-import { Nav } from '../../'
-import NavItem from '../../pb_nav/_item.jsx'
+import { Nav } from '../'
+import NavItem from '../pb_nav/_item.jsx'
 
 const SnippetToggle = (props) => {
   const [codeSnippet, toggleCodeSnippet] = useState('rails')

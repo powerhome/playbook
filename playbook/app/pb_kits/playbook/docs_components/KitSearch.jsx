@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { Typeahead } from '../../'
+import { Typeahead } from '../'
 
 const KitSearch = (props) => {
 
