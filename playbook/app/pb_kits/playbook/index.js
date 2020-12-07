@@ -111,11 +111,3 @@ export PbTypeahead from './pb_typeahead'
 export PbPopover from './pb_popover'
 export PbTable from './pb_table'
 export PbTooltip from './pb_tooltip'
-
-// REACT COMPONENTS USED BY DOCS SITE
-// export { KitSearch, SnippetToggle } from './docs_components'
-import { KitSearch, SnippetToggle } from './docs_components'
-
-WebpackerReact.setup({ KitSearch, SnippetToggle })
-// export KitSearch from './docs_components/KitSearch.jsx'
-// export { KitSearch } from './docs_components'
