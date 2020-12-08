@@ -1,13 +1,10 @@
 /* @flow */
-import React from 'react'
-import classnames from 'classnames'
-import { Body, Caption } from '../'
-import { globalProps } from '../utilities/globalProps.js'
+import React from "react"
+import classnames from "classnames"
+import { Body, Caption } from "../"
+import { globalProps } from "../utilities/globalProps.js"
 
-import {
-  buildAriaProps,
-  buildDataProps,
-} from '../utilities/props'
+import { buildAriaProps, buildDataProps } from "../utilities/props"
 
 type TextInputProps = {
   aria?: object,
@@ -43,7 +40,7 @@ const TextInput = (props: TextInputProps) => {
     onChange = () => {},
     placeholder,
     required,
-    type = 'text',
+    type = "text",
     value,
     children = null,
   } = props
@@ -51,45 +48,36 @@ const TextInput = (props: TextInputProps) => {
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
   const css = classnames([
-    'pb_text_input_kit',
-    error ? 'error' : null,
-    globalProps(props),
+    "pb_text_input_kit",
+    error ? "error" : null,
+    globalProps({
+      ...props,
+      marginBottom: props.marginBottom || props.margin || "sm",
+    }),
     className,
-    props.margin || props.marginBottom ? null : 'default_mb_sm',
   ])
 
   return (
-    <div
-        {...ariaProps}
-        {...dataProps}
-        className={css}
-    >
-      <Caption
-          className="pb_text_input_kit_label"
-          dark={dark}
-          text={label}
-      />
-      <div className="text_input_wrapper">
+    <div {...ariaProps} {...dataProps} className={css}>
+      <Caption className='pb_text_input_kit_label' dark={dark} text={label} />
+      <div className='text_input_wrapper'>
         <If condition={children}>
           {children}
           <Else />
           <input
-              {...props}
-              className="text_input"
-              disabled={disabled}
-              id={id}
-              name={name}
-              onChange={onChange}
-              placeholder={placeholder}
-              required={required}
-              type={type}
-              value={value}
+            {...props}
+            className='text_input'
+            disabled={disabled}
+            id={id}
+            name={name}
+            onChange={onChange}
+            placeholder={placeholder}
+            required={required}
+            type={type}
+            value={value}
           />
           <If condition={error}>
-            <Body
-                status="negative"
-                text={error}
-            />
+            <Body status='negative' text={error} />
           </If>
         </If>
       </div>
