@@ -63,6 +63,11 @@ const CrowdsourcedPosts = () => {
       element.style.width = '100%'
       element.style.height = '150px'
     })
+    document.querySelectorAll('[class*="post_image"]').forEach((element) => {
+      element.style.width = '75%'
+      element.style.display = 'block'
+      element.style.margin = 'auto'
+    })
   })
 
   return (
@@ -242,6 +247,7 @@ const CrowdsourcedPosts = () => {
                   </FlexItem>
                 </Flex>
               </Card>
+
               <Card
                 marginTop="sm"
                 padding="none"
@@ -323,6 +329,102 @@ const CrowdsourcedPosts = () => {
                   </FlexItem>
                 </Flex>
               </Card>
+
+              <Card
+                marginTop="sm"
+                padding="none"
+              >
+                <Flex>
+                  <FlexItem
+                      marginLeft="sm"
+                      marginTop="sm"
+                  >
+                    <Icon
+                        icon="arrow-alt-up"
+                        marginLeft="none"
+                        size="1x"
+                    />
+                    <Title
+                      margin="xs"
+                      marginLeft="none"
+                      size={4}
+                      text="8297"
+                    />
+                    <Icon
+                        icon="arrow-alt-down"
+                        marginLeft="none"
+                        size="1x"
+                    />
+                  </FlexItem>
+                  <FlexItem
+                      fixedSize="85%"
+                      paddingX="xs"
+                      paddingY="sm"
+                  >
+                    <Flex vertical="center">
+                      <IconCircle
+                          icon="camera"
+                          size="xs"
+                          variant="blue"
+                      />
+                      <Title
+                        marginLeft="xs"
+                        size={4}
+                        text="r/Pics"
+                      />
+                      <Body
+                          color="light"
+                          marginLeft="xs"
+                          text="• Posted by u/stephenmckeon 13 hours ago"
+                      />
+                    </Flex>
+                    <FlexItem>
+                      <Flex
+                          paddingTop="xs"
+                          vertical="center"
+                      >
+                        <FlexItem>
+                          <Body text="Foggy morning."/>
+                        </FlexItem>
+                        <FlexItem>
+                          <Pill
+                              text="OC"
+                              variant="success"
+                          />
+                        </FlexItem>
+                      </Flex>
+                    </FlexItem>
+                    <Flex marginTop="sm">
+                      <Image
+                          className="post_image"
+                          url="https://p-a6fbdk.t4.n0.cdn.getcloudapp.com/items/d5uPEJbY/readit_image_5.png"
+                      />
+                    </Flex>
+                    <Flex paddingTop="sm">
+                      <IconValue
+                          icon="comment-alt"
+                          text="1.4k Comments"
+                      />
+                      <IconValue
+                          marginLeft="sm"
+                          icon="share"
+                          text="Share"
+                      />
+                      <IconValue
+                          marginLeft="sm"
+                          icon="folder-plus"
+                          text="Save"
+                      />
+                      <IconValue
+                          marginLeft="sm"
+                          icon="ellipsis-h"
+                          text=""
+                      />
+                    </Flex>
+                  </FlexItem>
+                </Flex>
+              </Card>
+
             </Layout.Body>
 
             <Background backgroundColor="light">
