@@ -242,6 +242,87 @@ const CrowdsourcedPosts = () => {
                   </FlexItem>
                 </Flex>
               </Card>
+              <Card
+                marginTop="sm"
+                padding="none"
+              >
+                <Flex>
+                  <FlexItem
+                      marginLeft="sm"
+                      marginTop="sm"
+                  >
+                    <Icon
+                        icon="arrow-alt-up"
+                        marginLeft="none"
+                        size="1x"
+                    />
+                    <Title
+                      margin="xs"
+                      marginLeft="none"
+                      size={4}
+                      text="66.2k"
+                    />
+                    <Icon
+                        icon="arrow-alt-down"
+                        marginLeft="none"
+                        size="1x"
+                    />
+                  </FlexItem>
+                  <FlexItem
+                      paddingX="xs"
+                      paddingY="sm"
+                  >
+                    <Flex vertical="center">
+                      <IconCircle
+                          icon="lightbulb-on"
+                          size="xs"
+                          variant="yellow"
+                      />
+                      <Title
+                        marginLeft="xs"
+                        size={4}
+                        text="r/LifeProTips"
+                      />
+                      <Body
+                          color="light"
+                          marginLeft="xs"
+                          text="• Posted by u/xhuljanomuca 1 month ago"
+                      />
+                    </Flex>
+                    <Body
+                        paddingRight="md"
+                        paddingTop="xs"
+                        text="LPT: If you ever need a program you want for free (for example a video/photo editor) don’t search for “free,” search for “open source” to avoid limited trial versions, adverts and malware"
+                    />
+                    <Pill
+                        marginTop="sm"
+                        text="Computers"
+                        variant="primary"
+                    />
+                    <Flex paddingTop="sm">
+                      <IconValue
+                          icon="comment-alt"
+                          text="1.4k Comments"
+                      />
+                      <IconValue
+                          marginLeft="sm"
+                          icon="share"
+                          text="Share"
+                      />
+                      <IconValue
+                          marginLeft="sm"
+                          icon="folder-plus"
+                          text="Save"
+                      />
+                      <IconValue
+                          marginLeft="sm"
+                          icon="ellipsis-h"
+                          text=""
+                      />
+                    </Flex>
+                  </FlexItem>
+                </Flex>
+              </Card>
             </Layout.Body>
 
             <Background backgroundColor="light">
@@ -341,9 +422,6 @@ const CrowdsourcedPosts = () => {
           </Layout>
         </FlexItem>
       </Flex>
-      {trendingCommunities}
-      {IconValue}
-      {Pill}
     </>
   )
 }
