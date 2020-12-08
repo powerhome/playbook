@@ -37,7 +37,7 @@
           {
             header_color: "category_1",
             header_text: "Finance",
-            url: "https://images.unsplash.com/photo-1561414927-6d86591d0c4f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1266&q=80",
+            image_url: "https://p-a6fbdk.t4.n0.cdn.getcloudapp.com/items/jkuYZ6rB/readit_image_1.png",
             card_text: "IRS will allow employers to match their employees' student loan...",
             icon: "dollar-sign",
             variant: "green",
@@ -46,7 +46,7 @@
           {
             header_color: "category_2",
             header_text: "World News",
-            url: "https://images.unsplash.com/photo-1500202352583-7b2fc394ed15?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80",
+            image_url: "https://p-a6fbdk.t4.n0.cdn.getcloudapp.com/items/wbuK75AO/readit_image_2.png",
             card_text: "Hong Kong democrat Ted Hui confirms he will go into exile...",
             icon: "globe",
             variant: "yellow",
@@ -55,7 +55,7 @@
           {
             header_color: "category_3",
             header_text: "Space",
-            url: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1352&q=80",
+            image_url: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1352&q=80",
             card_text: "Relaxing Inside the Space Station's Window to the World...",
             icon: "space-shuttle",
             variant: "blue",
@@ -64,7 +64,7 @@
           {
             header_color: "category_4",
             header_text: "Tech",
-            url: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+            image_url: "https://p-a6fbdk.t4.n0.cdn.getcloudapp.com/items/WnulJpwd/readit_image_4.png",
             card_text: "MIT programmed AI that can design its own robots...",
             icon: "microchip",
             variant: "royal",
@@ -75,12 +75,12 @@
         <% trending_stories.each do |story| %>
           <%= pb_rails("card", props: { padding: "none" }) do %>
             <%= pb_rails("card/card_header", props: { padding: "sm", header_color: story[:header_color] }) do %>
-              <%= pb_rails("caption", props: { text: story[:header_text], dark: true }) %>
+              <%= pb_rails("caption", props: { dark: true, text: story[:header_text] }) %>
             <% end %>
             <%= pb_rails("card/card_body", props: { padding: "none" }) do %>
               <%= pb_rails("image", props: {
-                classname: "image_size",
-                url: story[:url]
+                classname: "trending_image",
+                url: story[:image_url]
               }) %>
               <%= pb_rails("body", props: {
                 padding: "xs",
@@ -89,7 +89,7 @@
               }) %>
               <%= pb_rails("flex", props: { classname: "flex-container", padding: "xs", vertical: "center" }) do %>
                 <%= pb_rails("flex/flex_item") do %>
-                  <%= pb_rails("icon_circle", props: { icon: story[:icon], size: "xs", variant: story[:royal] }) %>
+                  <%= pb_rails("icon_circle", props: { icon: story[:icon], size: "xs", variant: story[:variant] }) %>
                 <% end %>
                 <%= pb_rails("flex/flex_item", props: { margin_left: "xs" }) do %>
                   <%= pb_rails("caption", props: { size: 'xs', text: story[:sub_readit] }) %>
@@ -104,7 +104,6 @@
 
     <%# Start Popular Posts %>
     <%= pb_rails("caption", props: { padding_bottom: "xs", padding_top: "sm", text: "Popular Posts" }) %>
-
     <%= pb_rails("layout", props: { position: "right", size: "xl" }) do %>
       <%# Start nav bar %>
       <%= pb_rails("layout/body") do %>
@@ -113,7 +112,7 @@
             <%= pb_rails("flex/flex_item") do %>
               <%= pb_rails("flex") do %>
                 <%= pb_rails("nav", props: { orientation: "horizontal"}) do %>
-                  <%= pb_rails("nav/item", props: { icon_left: "rocket", text: "Best", link: "#", active: true }) %>
+                  <%= pb_rails("nav/item", props: { active: true, icon_left: "rocket", link: "#", text: "Best" }) %>
                   <%= pb_rails("nav/item", props: { icon_left: "fire", text: "Hot", link: "#", }) %>
                   <%= pb_rails("nav/item", props: { icon_left: "star", text: "New ", link: "#" }) %>
                   <%= pb_rails("nav/item", props: { icon_left: "chart-line", text: "Top", link: "#" }) %>
@@ -189,7 +188,10 @@
                 <% end %>
               <% end %>
               <%= pb_rails("flex", props: { horizontal: "center", margin_top: "xs" }) do %>
-                <%= pb_rails("image", props: { url: "https://unsplash.it/500/400/?image=634" }) %>
+                <%= pb_rails("image", props: {
+                  classname: "post_image",
+                  url: "https://p-a6fbdk.t4.n0.cdn.getcloudapp.com/items/d5uPEJbY/readit_image_5.png"
+                }) %>
               <% end %>
               <%= pb_rails("flex", props: { padding_top: "sm" }) do %>
                 <%= pb_rails("icon_value", props: { icon: "comment-alt", text: "112 Comments" }) %>
@@ -251,7 +253,7 @@
       <%= pb_rails("background", props: { background_color: "light" }) do %>
         <%= pb_rails("layout/sidebar", props: { margin_left: "md",  }) do %>
           <%# Start communities card %>
-          <%= pb_rails("card", props: { padding: "none", header: true, shadow: "deeper" }) do %>
+          <%= pb_rails("card", props: { header: true, padding: "none", shadow: "deeper" }) do %>
             <%= pb_rails("card/card_header", props: { padding: "xs", header_color: "category_1" }) do %>
               <%= pb_rails("flex", props: { vertical: "center" }) do %>
                 <%= pb_rails("body", props: { padding: "xs", padding_right: "sm", dark: true }) do %>
@@ -280,14 +282,14 @@
                   <%= pb_rails("icon_circle", props: { icon: community[:icon], size: "sm", variant: community[:variant] }) %>
                 <% end %>
                 <%= pb_rails("flex/flex_item") do %>
-                  <%= pb_rails("title", props: { margin_left: "xs", size: 4, tag: "h4", text: community[:sub_readit] }) %>
+                  <%= pb_rails("title", props: { margin_left: "xs", size: 4, text: community[:sub_readit] }) %>
                 <% end %>
               <% end %>
               <%= pb_rails("section_separator") unless community == communities.last %>
             <% end %>
 
             <%= pb_rails("layout/body", props: { padding_x: "sm" }) do %>
-              <%= pb_rails("button", props: { margin_top: "xs", text: "VIEW ALL", full_width: true }) %>
+              <%= pb_rails("button", props: { full_width: true, margin_top: "xs", text: "VIEW ALL" }) %>
               <%= pb_rails("flex", props: { padding_y: "sm", spacing: "between" }) do %>
                 <%= pb_rails("badge", props: { text: "Top", variant: "neutral", padding: "xs" }) %>
                 <%= pb_rails("badge", props: { text: "Near You", variant: "neutral", padding: "xs" }) %>
@@ -356,8 +358,12 @@
 <% end %>
 
 <style>
-.image_size {
+.trending_image {
   width: 100%;
   height: 150px;
+  }
+
+.post_image {
+  width: 75%;;
   }
 </style>
