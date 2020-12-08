@@ -1,0 +1,27 @@
+<%= pb_rails("title", props: {
+  margin_top: "xl",
+  text: "Sample",
+  size: 1
+}) %>
+
+ <%= pb_rails("flex", props: {orientation: "row"}) do %>
+  <%= pb_rails("flex/flex_item") do %>
+    <%= pb_rails("flex", props: {orientation: "column"}) do %>
+      <%= pb_rails("flex/flex_item") do %>
+        <% pb_rails("card") do %>
+          INNER
+        <% end %>
+      <% end %>
+      <%= pb_rails("flex/flex_item") do %>
+        <% pb_rails("card") do %>
+          INNER
+        <% end %>
+      <% end %>
+    <% end %>
+  <% end %>
+      <%= pb_rails("flex/flex_item", props: {fixed_size: "300px"}) do %>
+      <% pb_rails("card") do %>
+        OUTTER
+      <% end %>
+    <% end %>
+<% end %>
