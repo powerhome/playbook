@@ -8,8 +8,11 @@
 @import "site_styles/site-style";
 @import "site_styles/docs/all";
 
+// KITS SHOW PAGE STYLES
+@import "site_styles/kits_show";
+
 // FULL PAGE EXAMPLE STYLES
-@import "site_styles/samples";
+@import "site_styles/samples_show";
 
 // FULL PAGE INDEX STYLES (route = '/samples')
 @import "site_styles/samples_index";

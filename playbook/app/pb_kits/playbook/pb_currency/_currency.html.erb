@@ -6,7 +6,7 @@
 
   <%= pb_rails("caption", props: { text: object.label }) %>
 
-  <div class="pb_currency_wrapper">
+  <div class=<%= "pb_currency_wrapper#{object.variant_class || object.emphasized_class}" %>>
     <%= pb_rails("body", props: object.currency_wrapper_props) do %>
       <%= object.symbol %>
     <% end %>
