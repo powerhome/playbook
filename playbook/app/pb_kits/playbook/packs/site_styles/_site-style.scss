@@ -14,7 +14,7 @@ body {
 .pb--page {
   &--topNav {
     flex: 0 0;
-    padding: 14px 30px 0 30px;
+    padding: $space_sm $space_md $space_xs $space_md;
     background: $white;
     h1 {
       display: flex;
@@ -34,13 +34,28 @@ body {
         display: none;
       }
       padding: $space_md - 4 $space_lg - 2;
-      .margin-toggle {
-        margin-bottom: 0 !important;
-        margin-top: $space_xs - 3;
-      }
       .mobile-popover-nav {
         display: block;
       }
+    }
+    .kit-search {
+      [class*=_label] {
+        margin-bottom: 0 !important;
+      }
+      .text_input_wrapper {
+        margin-bottom: 0 !important;
+      }
+    }
+    .nav-links-mg-override {
+      margin: 0 !important;
+    }
+    .pb-version-tag {
+      text-align: right;
+      position: relative;
+      bottom: $space_md - 4;
+    }
+    .separator-explicit-height {
+      height: $space_xl + 5;
     }
   }
 

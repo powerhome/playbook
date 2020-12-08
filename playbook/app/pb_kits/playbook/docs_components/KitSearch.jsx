@@ -22,9 +22,11 @@ const KitSearch = (props) => {
 
   return (
     <div>
+    {/* <div style={{minWidth: "200px"}}> */}
       <Typeahead
+        className="kit-search"
         id="kit-search"
-        label="Kits"
+        placeholder="Search"
         options={kits}
         onChange={handleChange}
       />
