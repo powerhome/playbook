@@ -1,12 +1,7 @@
 # frozen_string_literal: true
 
-require "webpacker/react/railtie" if defined?(Rails)
-require "webpacker/react/helpers"
-require "webpacker/react/component"
-
 module Playbook
   module PbKitHelper
-
     def pb_rails(kit, props: {}, &block)
       previous = prefix_partial_path_with_controller_namespace
       self.prefix_partial_path_with_controller_namespace = false
