@@ -17,49 +17,20 @@ module Playbook
       end
     end
 
-    def read_file(filename)
-      if File.file?(filename)
-        File.read(filename)
-      else
-        ""
-      end
-    end
-
-    def get_samples(kit)
-      sample_yaml = YAML.load_file("#{Playbook::Engine.root}/app/pb_kits/playbook/data/samples.yml")
-      all_samples = []
-
-      sample_yaml.each do |_category, sample|
-        all_samples.push(sample)
-      end
-
-      output = ""
-      samples_using_kit = []
-      all_samples[0].each do |sample|
-        filepath = "#{Playbook::Engine.root}/app/views/playbook/samples/#{sample}/index.html.erb"
-        output = `grep -l 'pb_rails(\"#{kit}' #{filepath}`
-        samples_using_kit.push(sample) if output.chomp == filepath
-      end
-      samples_using_kit
-    end
-
     def kit_path(kit)
       "#{Playbook::Engine.root}/app/pb_kits/playbook/pb_#{kit}"
     end
 
     def get_kit_description(kit)
-      filename = "#{Playbook::Engine.root}/app/pb_kits/playbook/pb_#{kit}/docs/_description.md"
-      read_file(filename)
+      read_source_file "app/pb_kits/playbook/pb_#{kit}/docs/_description.md"
     end
 
     def get_per_sample_descriptions(kit, key)
-      filename = "#{Playbook::Engine.root}/app/pb_kits/playbook/pb_#{kit}/docs/_#{key}.md"
-      read_file(filename)
+      read_source_file "app/pb_kits/playbook/pb_#{kit}/docs/_#{key}.md"
     end
 
     def get_kit_footer(kit)
-      filename = "#{Playbook::Engine.root}/app/pb_kits/playbook/pb_#{kit}/docs/_footer.md"
-      read_file(filename)
+      read_source_file "app/pb_kits/playbook/pb_#{kit}/docs/_footer.md"
     end
 
     def pb_kit(kit: "", type: "rails", show_code: true, limit_examples: false)
@@ -165,6 +136,11 @@ module Playbook
 
     def sub_category_active(kit, link)
       (!kit.nil? && @kit == link)
+    end
+
+    def read_source_file(*args)
+      path = Playbook::Engine.root.join(*args)
+      path.exist? ? path.read : ""
     end
 
   private
