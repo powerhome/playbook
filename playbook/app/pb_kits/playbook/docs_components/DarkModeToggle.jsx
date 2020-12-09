@@ -1,7 +1,7 @@
 /* @flow */
 
 import React from 'react'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { Flex, FlexItem, Icon, Toggle } from '../'
 
 type ToggleProps = {
@@ -9,7 +9,7 @@ type ToggleProps = {
 }
 const DarkModeToggle = (props: ToggleProps) => {
   const { initMode } = props
-  const [darkMode, toggleDarkMode] = useState(false)
+  const [darkMode, toggleDarkMode] = useState(JSON.parse(initMode) || false)
   const [loading, toggleLoading] = useState(false)
 
   const toggleHook = () => {
@@ -17,10 +17,6 @@ const DarkModeToggle = (props: ToggleProps) => {
     toggleDarkMode(!darkMode)
     window.location = !darkMode ? '/enable_dark_mode' : '/disable_dark_mode'
   }
-
-  useEffect(() => {
-    toggleDarkMode(JSON.parse(initMode))
-  }, [])
 
   return (
     <Flex

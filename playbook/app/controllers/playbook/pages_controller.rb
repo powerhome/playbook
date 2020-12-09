@@ -10,7 +10,7 @@ module Playbook
     before_action :ensure_kit_type_exists, only: %i[kit_show_rails kit_show_react]
     before_action :set_category, only: %i[kit_category_show_rails kit_category_show_react]
     before_action :set_playbook
-    before_action :delete_dark_mode_cookie, only: %i[home getting_started]
+    before_action :delete_dark_mode_cookie, only: %i[home getting_started visual_guidelines]
 
     def set_playbook
       @playbook = true
