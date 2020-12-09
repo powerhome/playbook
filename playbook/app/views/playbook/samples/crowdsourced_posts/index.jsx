@@ -62,7 +62,7 @@ const CrowdsourcedPosts = () => {
     const desktopOnly = document.querySelectorAll('.desktop-only')
     const mobileOnly = document.querySelectorAll('.mobile-only')
     const textInput = document.querySelector('.text-input-flex-item')
-    const trendingImages = document.querySelectorAll('.trending_image')
+    const trendingImages = document.querySelectorAll('.trending-image')
     const postImageDesktop = document.querySelector('.post-image-desktop')
     const postImageMobile = document.querySelector('.post-image-mobile')
     const bodyContainer = document.querySelector('.body-container')
@@ -70,24 +70,25 @@ const CrowdsourcedPosts = () => {
     const viewSize = () => {
       if (window.innerWidth < 415 || window.innerHeight < 415){
         desktopOnly.forEach((element) => element.style.display = 'none')
+        mobileOnly.forEach((element) => element.style.display = '')
+        bodyContainer.style.flexBasis = ''
         textInput.style.flexBasis = '60%'
-        trendingImages.forEach((element) => element.style.width = '100%')
         bodyContainer.style.marginRight = '8px'
         bodyContainer.style.marginLeft = '8px'
         postImageMobile.style.width = '100%'
       } else {
         mobileOnly.forEach((element) => element.style.display = 'none')
-        trendingImages.forEach((element) => {
-          element.style.width = '100%'
-          element.style.height = '150px'
-        })
+        desktopOnly.forEach((element) => element.style.display = '')
         bodyContainer.style.flexBasis = '65%'
         postImageDesktop.style.width = '75%'
         postImageDesktop.style.display = 'block'
         postImageDesktop.style.margin = 'auto'
       }
+      trendingImages.forEach((element) => element.style.width = '100%')
     }
     viewSize()
+
+    window.addEventListener('resize', () => viewSize())
   })
 
   return (
@@ -182,7 +183,7 @@ const CrowdsourcedPosts = () => {
                   </Card.Header>
                   <Card.Body padding="none">
                     <Image
-                        className="trending_image"
+                        className="trending-image"
                         url={story.imageUrl}
                     />
                     <Body
