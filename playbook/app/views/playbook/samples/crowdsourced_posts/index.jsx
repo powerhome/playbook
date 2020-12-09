@@ -68,7 +68,7 @@ const CrowdsourcedPosts = () => {
     const bodyContainer = document.querySelector('.body-container')
 
     const viewSize = () => {
-      if (window.innerWidth < 415 || window.innerHeight < 415){
+      if (window.innerWidth < 1385) {
         desktopOnly.forEach((element) => element.style.display = 'none')
         mobileOnly.forEach((element) => element.style.display = '')
         bodyContainer.style.flexBasis = ''

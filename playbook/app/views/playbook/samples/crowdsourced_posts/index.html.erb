@@ -9,7 +9,7 @@
     const bodyContainer = document.querySelector('.body-container')
 
     const viewSize = () => {
-      if (window.innerWidth < 415 || window.innerHeight < 415){
+      if (window.innerWidth < 1385) {
         desktopOnly.forEach((element) => element.style.display = 'none')
         mobileOnly.forEach((element) => element.style.display = '')
         bodyContainer.style.flexBasis = ''
@@ -178,14 +178,14 @@
       <%# Start post 2 %>
       <%= pb_rails("card", props: { margin_top: "sm", padding: "none" }) do %>
         <%= pb_rails("flex") do %>
-          <%= pb_rails("flex/flex_item", props: { padding: "sm" }) do %>
+          <%= pb_rails("flex/flex_item", props: { fixed_size: "100%", padding: "sm" }) do %>
             <%= pb_rails("flex", props: { vertical: "center" }) do %>
               <%= pb_rails("icon_circle", props: { icon: "camera", size: "xs", variant: "blue" }) %>
               <%= pb_rails("title", props: { margin_left: "xs", size: 4, tag: "h4", text: "r/Pics" }) %>
               <%= pb_rails("body", props: { color: "light", margin_left: "xs", text: "• Posted by u/stephenmckeon" }) %>
             <% end %>
             <%= pb_rails("flex/flex_item") do %>
-              <%= pb_rails("flex", props: { padding_top: "xs", vertical: "center" }) do %>
+              <%= pb_rails("flex", props: { margin_bottom: "sm", padding_top: "xs", vertical: "center" }) do %>
                 <%= pb_rails("flex/flex_item") do %>
                   <%= pb_rails("body", props: { text: "Foggy morning." }) %>
                 <% end %>
@@ -194,12 +194,10 @@
                 <% end %>
               <% end %>
             <% end %>
-            <%= pb_rails("flex", props: { horizontal: "center", margin_top: "sm" }) do %>
-              <%= pb_rails("image", props: {
-                classname: "post-image-mobile",
-                url: "https://p-a6fbdk.t4.n0.cdn.getcloudapp.com/items/d5uPEJbY/readit_image_5.png"
-              }) %>
-            <% end %>
+            <%= pb_rails("image", props: {
+              classname: "post-image-mobile",
+              url: "https://p-a6fbdk.t4.n0.cdn.getcloudapp.com/items/d5uPEJbY/readit_image_5.png"
+            }) %>
             <%= pb_rails("flex", props: { padding_top: "sm" }) do %>
               <%= pb_rails("icon_value", props: { icon: "comment-alt", text: "112 Comments" }) %>
               <%= pb_rails("icon_value", props: { icon: "share", margin_left: "sm", text: "Share" }) %>
