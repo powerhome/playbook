@@ -1,5 +1,5 @@
 import React from 'react'
-import { useState, useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { Flex, FlexItem, Icon, Toggle } from '../'
 
 const DarkModeToggle = (props) => {
@@ -10,26 +10,26 @@ const DarkModeToggle = (props) => {
   const toggleHook = () => {
     toggleLoading(true)
     toggleDarkMode(!darkMode)
-    window.location = !darkMode ? "/enable_dark_mode" : "/disable_dark_mode"
+    window.location = !darkMode ? '/enable_dark_mode' : '/disable_dark_mode'
   }
 
-  useEffect(()=> {
+  useEffect(() => {
     toggleDarkMode(JSON.parse(initMode))
   }, [])
 
   return (
     <Flex
-        spacing="between"
-        vertical="center"
+        spacing='between'
+        vertical='center'
     >
       <If condition={loading}>
         <FlexItem>
           <Icon
-              className="toggle-icon"
+              className='toggle-icon'
               fixedWidth
-              icon="spinner"
-              marginRight="xs"
-              marginLeft="sm"
+              icon='spinner'
+              marginLeft='sm'
+              marginRight='xs'
               pulse
           />
         </FlexItem>
@@ -37,22 +37,20 @@ const DarkModeToggle = (props) => {
       <If condition={!loading}>
         <FlexItem>
           <Icon
-              className="toggle-icon"
+              className='toggle-icon'
               fixedWidth
-              icon="moon"
-              marginRight="xs"
-              marginLeft="sm"
+              icon='moon'
+              marginLeft='sm'
+              marginRight='xs'
           />
         </FlexItem>
       </If>
       <FlexItem>
-        <Toggle
-            checked={true}
-        >
+        <Toggle>
           <input
               checked={darkMode}
               onChange={toggleHook}
-              type="checkbox"
+              type='checkbox'
           />
         </Toggle>
       </FlexItem>
