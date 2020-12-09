@@ -20,9 +20,9 @@ const KitSearch = (props) => {
   return (
     <div>
       <Typeahead
-          className='kit-search'
-          id='kit-search'
-          placeholder='Search'
+          className="kit-search"
+          id="kit-search"
+          placeholder="Search"
           onChange={handleChange}
           options={kits}
       />

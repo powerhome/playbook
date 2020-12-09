@@ -5,26 +5,26 @@ import NavItem from '../_item.jsx'
 const SubtleHorizontalNav = () => {
   return (
     <Nav
-        link='#'
-        orientation='horizontal'
-        variant='subtle'
+        link="#"
+        orientation="horizontal"
+        variant="subtle"
     >
       <NavItem
-          link='#'
-          text='About'
+          link="#"
+          text="About"
       />
       <NavItem
           active
-          link='#'
-          text='Case Studies'
+          link="#"
+          text="Case Studies"
       />
       <NavItem
-          link='#'
-          text='Service'
+          link="#"
+          text="Service"
       />
       <NavItem
-          link='#'
-          text='Contacts'
+          link="#"
+          text="Contacts"
       />
     </Nav>
   )

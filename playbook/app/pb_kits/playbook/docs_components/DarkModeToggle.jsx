@@ -19,17 +19,17 @@ const DarkModeToggle = (props) => {
 
   return (
     <Flex
-        spacing='between'
-        vertical='center'
+        spacing="between"
+        vertical="center"
     >
       <If condition={loading}>
         <FlexItem>
           <Icon
-              className='toggle-icon'
+              className="toggle-icon"
               fixedWidth
-              icon='spinner'
-              marginLeft='sm'
-              marginRight='xs'
+              icon="spinner"
+              marginLeft="sm"
+              marginRight="xs"
               pulse
           />
         </FlexItem>
@@ -37,11 +37,11 @@ const DarkModeToggle = (props) => {
       <If condition={!loading}>
         <FlexItem>
           <Icon
-              className='toggle-icon'
+              className="toggle-icon"
               fixedWidth
-              icon='moon'
-              marginLeft='sm'
-              marginRight='xs'
+              icon="moon"
+              marginLeft="sm"
+              marginRight="xs"
           />
         </FlexItem>
       </If>
@@ -50,7 +50,7 @@ const DarkModeToggle = (props) => {
           <input
               checked={darkMode}
               onChange={toggleHook}
-              type='checkbox'
+              type="checkbox"
           />
         </Toggle>
       </FlexItem>
