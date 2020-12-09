@@ -11,6 +11,12 @@ module Playbook
       end
     end
 
+    def kits_used(sample)
+      code = get_raw_code(sample, "rails")
+      kits_array = code.scan(/pb_rails\("(\w+)(?:"|\/)/)
+      kits_array.uniq
+    end
+
     def pb_sample(sample: "", type: "rails")
       @type = type
       @sample = sample

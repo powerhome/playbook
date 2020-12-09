@@ -1,11 +1,13 @@
 examples:
 
   rails:
-  - currency_small: Small
-  - currency_medium: Medium
-  - currency_large: Large
+  - currency_variants: Variants
+  - currency_size: Size
+  - currency_alignment: Alignment
+  - currency_no_symbol: No Symbol
 
   react:
-  - currency_small: Small
-  - currency_medium: Medium
-  - currency_large: Large
+  - currency_variants: Variants
+  - currency_size: Size
+  - currency_alignment: Alignment
+  - currency_no_symbol: No Symbol

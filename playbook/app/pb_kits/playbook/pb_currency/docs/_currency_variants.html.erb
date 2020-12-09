@@ -1,21 +1,24 @@
 <%= pb_rails("currency", props: {
-  label: "Caption",
   amount: "2,000.50",
+  emphasized: false,
+  label: "Emphasized False",
+  margin_bottom: "md",
   size: "sm",
 }) %>
 
 <%= pb_rails("currency", props: {
-  align: "center",
   amount: "342",
-  label: "Caption",
+  label: "Light",
+  margin_bottom: "md",
   size: "sm",
   symbol: "€",
+  variant: "light",
 }) %>
 
 <%= pb_rails("currency", props: {
-  align: "right",
   amount: "45",
-  label: "Caption",
-  unit: "/mo",
+  label: "Bold",
   size: "sm",
+  unit: "/mo",
+  variant: "bold",
 }) %>

@@ -28,6 +28,13 @@ module Playbook
       prop :unit, type: Playbook::Props::String,
                   required: false
 
+      prop :emphasized, type: Playbook::Props::Boolean,
+                        default: true
+
+      prop :variant, type: Playbook::Props::Enum,
+                     values: %w[default light bold],
+                     default: "default"
+
       prop :dark, type: Playbook::Props::Boolean,
                   default: false
 
@@ -59,6 +66,21 @@ module Playbook
           classname: "unit",
           dark: dark,
         }
+      end
+
+      def emphasized_class
+        emphasized ? "" : "_deemphasized"
+      end
+
+      def variant_class
+        return unless size == "sm"
+
+        case variant
+        when "light"
+          "_light"
+        when "bold"
+          "_bold"
+        end
       end
 
     private
