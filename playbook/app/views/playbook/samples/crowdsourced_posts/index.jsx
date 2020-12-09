@@ -69,15 +69,15 @@ const CrowdsourcedPosts = () => {
 
     const viewSize = () => {
       if (window.innerWidth < 415 || window.innerHeight < 415){
-        desktopOnly.forEach(element => element.style.display = 'none')
+        desktopOnly.forEach((element) => element.style.display = 'none')
         textInput.style.flexBasis = '60%'
-        trendingImages.forEach(element => element.style.width = '100%')
+        trendingImages.forEach((element) => element.style.width = '100%')
         bodyContainer.style.marginRight = '8px'
         bodyContainer.style.marginLeft = '8px'
         postImageMobile.style.width = '100%'
       } else {
-        mobileOnly.forEach(element => element.style.display = 'none')
-        trendingImages.forEach(element => {
+        mobileOnly.forEach((element) => element.style.display = 'none')
+        trendingImages.forEach((element) => {
           element.style.width = '100%'
           element.style.height = '150px'
         })
@@ -316,8 +316,8 @@ const CrowdsourcedPosts = () => {
             >
               <Flex>
                 <FlexItem
-                    padding="sm"
                     fixedSize="100%"
+                    padding="sm"
                 >
                   <Flex vertical="center">
                     <IconCircle
@@ -331,10 +331,10 @@ const CrowdsourcedPosts = () => {
                         text="r/Pics"
                     />
                     <Body
-                      color="light"
-                      marginLeft="xs"
-                      text="• Posted by u/stephenmckeon"
-                  />
+                        color="light"
+                        marginLeft="xs"
+                        text="• Posted by u/stephenmckeon"
+                    />
                   </Flex>
                   <FlexItem>
                     <Flex
@@ -353,10 +353,10 @@ const CrowdsourcedPosts = () => {
                       </FlexItem>
                     </Flex>
                   </FlexItem>
-                    <Image
-                        className="post-image-mobile"
-                        url="https://p-a6fbdk.t4.n0.cdn.getcloudapp.com/items/d5uPEJbY/readit_image_5.png"
-                    />
+                  <Image
+                      className="post-image-mobile"
+                      url="https://p-a6fbdk.t4.n0.cdn.getcloudapp.com/items/d5uPEJbY/readit_image_5.png"
+                  />
                   <Flex paddingTop="sm">
                     <IconValue
                         icon="comment-alt"
