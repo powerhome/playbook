@@ -26,9 +26,6 @@ body {
     &.dark{
     background: tint(#0a0527, 10);
     }
-    // .mobile-popover-nav {
-    //   display: none;
-    // }
     .kit-search {
       width: 33vw;
       max-width: 300px;
@@ -60,9 +57,6 @@ body {
       .full-size-nav, .github-nav-icon {
         display: none;
       }
-      // .mobile-popover-nav {
-      //   display: block;
-      // }
       .toggle-wrapper {
         margin-right: 65px;
       }
