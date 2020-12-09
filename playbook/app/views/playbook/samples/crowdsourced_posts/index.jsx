@@ -59,15 +59,37 @@ const trendingCommunities = [
 
 const CrowdsourcedPosts = () => {
   window.addEventListener('DOMContentLoaded', () => {
-    document.querySelectorAll('[class*="trending_image"]').forEach((element) => {
-      element.style.width = '100%'
-      element.style.height = '150px'
-    })
-    document.querySelectorAll('[class*="post_image"]').forEach((element) => {
-      element.style.width = '75%'
-      element.style.display = 'block'
-      element.style.margin = 'auto'
-    })
+    const desktopOnly = document.querySelectorAll('.desktop-only')
+    const mobileOnly = document.querySelectorAll('.mobile-only')
+    const textInput = document.querySelector('.text-input-flex-item')
+    const trendingImages = document.querySelectorAll('.trending_image')
+    const postImage = document.querySelector('.post_image')
+    const bodyContainer = document.querySelector('.body-container')
+
+    const viewSize = () => {
+      if (window.innerWidth < 415 || window.innerHeight < 415){
+        desktopOnly.forEach(element => element.style.display = 'none')
+        textInput.style.flexBasis = '60%'
+        trendingImages.forEach((element) => {
+          element.style.width = '100%'
+        })
+        bodyContainer.style.marginRight = '8px'
+        bodyContainer.style.marginLeft = '8px'
+      } else {
+        mobileOnly.forEach(element => element.style.display = 'none')
+        trendingImages.forEach((element) => {
+          element.style.width = '100%'
+          element.style.height = '150px'
+        })
+        bodyContainer.style.flexBasis = '65%'
+        // mobileView.style.display = 'none'
+        // desktopView.style.display = 'block'
+      }
+      postImage.style.width = '75%'
+      postImage.style.display = 'block'
+      postImage.style.margin = 'auto'
+    }
+    viewSize()
   })
 
   return (
@@ -93,6 +115,7 @@ const CrowdsourcedPosts = () => {
               </FlexItem>
               <FlexItem>
                 <Title
+                    className="desktop-only"
                     marginLeft="xs"
                     size={2}
                     text="readit"
@@ -100,7 +123,10 @@ const CrowdsourcedPosts = () => {
               </FlexItem>
             </Flex>
           </FlexItem>
-          <FlexItem fixedSize="30%">
+          <FlexItem
+              className="text-input-flex-item"
+              fixedSize="30%"
+          >
             <TextInput
                 marginTop="sm"
                 placeholder="Search"
@@ -108,11 +134,13 @@ const CrowdsourcedPosts = () => {
           </FlexItem>
           <FlexItem>
             <Button
+                className="desktop-only"
                 marginRight="sm"
                 text="Log In"
                 variant="secondary"
             />
             <Button
+                className="desktop-only"
                 marginRight="sm"
                 text="Sign Up"
             />
@@ -129,8 +157,7 @@ const CrowdsourcedPosts = () => {
       </Background>
 
       <Flex horizontal="center">
-        <FlexItem fixedSize="65%">
-          {/* Start trending today */}
+        <FlexItem className="body-container">
           <Caption
               paddingBottom="xs"
               paddingTop="sm"
@@ -195,12 +222,47 @@ const CrowdsourcedPosts = () => {
               paddingTop="sm"
               text="Popular Posts"
           />
+          <Card
+              className="mobile-only"
+              padding="none"
+          >
+            <Nav
+                className="mobile-only"
+                orientation="vertical"
+            >
+              <NavItem
+                  active
+                  iconLeft="rocket"
+                  link="#"
+                  text="Best"
+              />
+              <NavItem
+                  iconLeft="fire"
+                  link="#"
+                  text="Hot"
+              />
+              <NavItem
+                  iconLeft="star"
+                  link="#"
+                  text="New"
+              />
+              <NavItem
+                  iconLeft="chart-line"
+                  link="#"
+                  text="Top"
+              />
+            </Nav>
+          </Card>
+
           <Layout
               position="right"
               size="xl"
           >
             <Layout.Body>
-              <Card padding="none">
+              <Card
+                  className="desktop-only"
+                  padding="none"
+              >
                 <Flex spacing="between">
                   <FlexItem>
                     <Flex>
@@ -523,7 +585,10 @@ const CrowdsourcedPosts = () => {
             </Layout.Body>
 
             <Background backgroundColor="light">
-              <Layout.Side marginLeft="md">
+              <Layout.Side
+                  className="desktop-only"
+                  marginLeft="md"
+              >
                 <Card
                     header
                     padding="none"
