@@ -63,7 +63,8 @@ const CrowdsourcedPosts = () => {
     const mobileOnly = document.querySelectorAll('.mobile-only')
     const textInput = document.querySelector('.text-input-flex-item')
     const trendingImages = document.querySelectorAll('.trending_image')
-    const postImage = document.querySelector('.post-image')
+    const postImageDesktop = document.querySelector('.post-image-desktop')
+    const postImageMobile = document.querySelector('.post-image-mobile')
     const bodyContainer = document.querySelector('.body-container')
 
     const viewSize = () => {
@@ -73,7 +74,7 @@ const CrowdsourcedPosts = () => {
         trendingImages.forEach(element => element.style.width = '100%')
         bodyContainer.style.marginRight = '8px'
         bodyContainer.style.marginLeft = '8px'
-        postImage.style.width = '100%'
+        postImageMobile.style.width = '100%'
       } else {
         mobileOnly.forEach(element => element.style.display = 'none')
         trendingImages.forEach(element => {
@@ -81,9 +82,9 @@ const CrowdsourcedPosts = () => {
           element.style.height = '150px'
         })
         bodyContainer.style.flexBasis = '65%'
-        postImage.style.width = '75%'
-        postImage.style.display = 'block'
-        postImage.style.margin = 'auto'
+        postImageDesktop.style.width = '75%'
+        postImageDesktop.style.display = 'block'
+        postImageDesktop.style.margin = 'auto'
       }
     }
     viewSize()
@@ -153,11 +154,8 @@ const CrowdsourcedPosts = () => {
         </Flex>
       </Background>
 
-      <Flex
-          className="body-container"
-          horizontal="center"
-      >
-        <FlexItem>
+      <Flex horizontal="center">
+        <FlexItem className="body-container">
           <Caption
               paddingBottom="xs"
               paddingTop="sm"
@@ -356,7 +354,7 @@ const CrowdsourcedPosts = () => {
                     </Flex>
                   </FlexItem>
                     <Image
-                        className="post-image"
+                        className="post-image-mobile"
                         url="https://p-a6fbdk.t4.n0.cdn.getcloudapp.com/items/d5uPEJbY/readit_image_5.png"
                     />
                   <Flex paddingTop="sm">
@@ -661,7 +659,7 @@ const CrowdsourcedPosts = () => {
                       </FlexItem>
                       <Flex marginTop="sm">
                         <Image
-                            className="post-image"
+                            className="post-image-desktop"
                             url="https://p-a6fbdk.t4.n0.cdn.getcloudapp.com/items/d5uPEJbY/readit_image_5.png"
                         />
                       </Flex>
