@@ -26,19 +26,12 @@ body {
     &.dark{
     background: tint(#0a0527, 10);
     }
-    .mobile-popover-nav {
-      display: none;
-    }
-    @include break_at($nav_breakpoint) {
-      .full-size-nav {
-        display: none;
-      }
-      padding: $space_md - 4 $space_lg - 2;
-      .mobile-popover-nav {
-        display: block;
-      }
-    }
+    // .mobile-popover-nav {
+    //   display: none;
+    // }
     .kit-search {
+      width: 33vw;
+      max-width: 300px;
       [class*=_label] {
         margin-bottom: 0 !important;
       }
@@ -56,10 +49,33 @@ body {
     }
     .separator-explicit-height {
       height: $space_xl + 5;
+      margin-left: $space_xs;
+      margin-right: $space_xs;
     }
     .toggle-icon {
       color: $text_lt_light;
-      // color: $border_light;
+    }
+    // Mobile Overrides
+    @include break_at($nav_breakpoint) {
+      .full-size-nav, .github-nav-icon {
+        display: none;
+      }
+      // .mobile-popover-nav {
+      //   display: block;
+      // }
+      .toggle-wrapper {
+        margin-right: 65px;
+      }
+    }
+    @include break_at(breakpoint("sm")) {
+      .kit-search, .separator-explicit-height {
+        display: none;
+      }
+    }
+    @include break_at(375px) {
+      .toggle-wrapper {
+        display: none;
+      }
     }
   }
 
@@ -83,6 +99,9 @@ body {
         height: auto;
       }
     }
+  }
+  &--hamburger {
+    margin-top: 3px;
   }
   &--hamburger, &--checkbox {
     position: absolute;

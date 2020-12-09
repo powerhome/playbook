@@ -43,17 +43,13 @@
 
         <%= pb_rails("flex/flex_item", props: {}) do %>
           <% if action_name.include?('kit') %>
-            <% toggle = cookies[:dark_mode] == "false" || cookies[:dark_mode] == nil %>
-            <%# <a href=<%= toggle ? enable_dark_mode_path : disable_dark_mode_path %>
-              <%= pb_rails("flex", props: { spacing: "between", vertical: "center" }) do %>
-                <%# <%= pb_rails("icon", props: { icon: "moon", fixed_width: true, margin_left: "sm", margin_right: "xs" }) %>
-                <%# <%= pb_rails("toggle", props: { checked: !toggle }) %>
+            <%# <% toggle = cookies[:dark_mode] == "false" || cookies[:dark_mode] == nil %>
+              <%= pb_rails("flex", props: { classname: "toggle-wrapper", spacing: "between", vertical: "center" }) do %>
                 <%= react_component("DarkModeToggle", initMode: cookies[:dark_mode] )%>
               <% end %>
-            <%# </a> %>
           <% else %>
             <%# Re-engineered circle icon button for github logo %>
-            <div class="pb_circle_icon_button_kit">
+            <div class="pb_circle_icon_button_kit github-nav-icon">
               <a class="pb_button_kit_secondary_inline_enabled" type="button" href="https://github.com/powerhome/playbook" target="_self">
               <span class="pb_button_content">
                 <%= image_tag("github-brands.svg", class: "mt_sm", style: "height:28px;width:28px") %>
