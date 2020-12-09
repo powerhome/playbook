@@ -386,7 +386,7 @@ const CrowdsourcedPosts = () => {
                         <FlexItem>
                           <Body text="Foggy morning."/>
                         </FlexItem>
-                        <FlexItem>
+                        <FlexItem marginLeft="xs">
                           <Pill
                               text="OC"
                               variant="success"
@@ -425,6 +425,102 @@ const CrowdsourcedPosts = () => {
                 </Flex>
               </Card>
 
+              {/* post 3 */}
+              <Card
+                marginTop="sm"
+                padding="none"
+              >
+                <Flex>
+                  <FlexItem
+                      marginLeft="sm"
+                      marginTop="sm"
+                  >
+                    <Icon
+                        icon="arrow-alt-up"
+                        marginLeft="none"
+                        size="1x"
+                    />
+                    <Title
+                      margin="xs"
+                      marginLeft="none"
+                      size={4}
+                      text="467"
+                    />
+                    <Icon
+                        icon="arrow-alt-down"
+                        marginLeft="none"
+                        size="1x"
+                    />
+                  </FlexItem>
+                  <FlexItem
+                      paddingX="xs"
+                      paddingY="sm"
+                  >
+                    <Flex vertical="center">
+                      <IconCircle
+                          icon="browser"
+                          size="xs"
+                          variant="purple"
+                      />
+                      <Title
+                        marginLeft="xs"
+                        size={4}
+                        text="r/WebDesign"
+                      />
+                      <Body
+                          color="light"
+                          marginLeft="xs"
+                          text="• Posted by u/creativebloq 1 week ago"
+                      />
+                    </Flex>
+                    <Title
+                        paddingRight="md"
+                        paddingTop="xs"
+                        size="4"
+                        text="Use white space!"
+                    />
+                    <Body
+                        paddingTop="sm"
+                        text="It seems to be the hardest concept for developers to grasp: the biggest benefit to having the proper amount of white space is giving the user a break. Breaks are important for processing information, especially when there's a fair amount to process. It's why we have paragraphs and sentences instead of just a single, long block of running text."
+                    />
+                    <Body
+                        paddingTop="sm"
+                        text="The key is to ensure that white space has a relationship with other objects on the page, including the other space. If you have a single column of white space, make sure there's another single column of white space around to balance it."
+                    />
+                    <Body
+                        color="light"
+                        paddingTop="sm"
+                        text="For vertical space, just use fractions of the body font size. I tend to keep things simple and use a scale of .25, but there are several other scales that you can use."
+                    />
+                    <Body
+                        color="light"
+                        paddingTop="sm"
+                        text="For example, if the body font size is 16px(1em): 4, 8, 12, 16, 20, 24, 28, 32, 40, 48. This allows for choosing font sizes by simply moving up and down the scale as I want larger or smaller type..."
+                    />
+                    <Flex paddingTop="sm">
+                      <IconValue
+                          icon="comment-alt"
+                          text="1.4k Comments"
+                      />
+                      <IconValue
+                          marginLeft="sm"
+                          icon="share"
+                          text="Share"
+                      />
+                      <IconValue
+                          marginLeft="sm"
+                          icon="folder-plus"
+                          text="Save"
+                      />
+                      <IconValue
+                          marginLeft="sm"
+                          icon="ellipsis-h"
+                          text=""
+                      />
+                    </Flex>
+                  </FlexItem>
+                </Flex>
+              </Card>
             </Layout.Body>
 
             <Background backgroundColor="light">
