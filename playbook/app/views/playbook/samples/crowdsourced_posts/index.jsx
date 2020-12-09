@@ -249,8 +249,8 @@ const CrowdsourcedPosts = () => {
               </Card>
 
               <Card
-                marginTop="sm"
-                padding="none"
+                  marginTop="sm"
+                  padding="none"
               >
                 <Flex>
                   <FlexItem
@@ -263,10 +263,10 @@ const CrowdsourcedPosts = () => {
                         size="1x"
                     />
                     <Title
-                      margin="xs"
-                      marginLeft="none"
-                      size={4}
-                      text="66.2k"
+                        margin="xs"
+                        marginLeft="none"
+                        size={4}
+                        text="66.2k"
                     />
                     <Icon
                         icon="arrow-alt-down"
@@ -285,9 +285,9 @@ const CrowdsourcedPosts = () => {
                           variant="yellow"
                       />
                       <Title
-                        marginLeft="xs"
-                        size={4}
-                        text="r/LifeProTips"
+                          marginLeft="xs"
+                          size={4}
+                          text="r/LifeProTips"
                       />
                       <Body
                           color="light"
@@ -311,18 +311,18 @@ const CrowdsourcedPosts = () => {
                           text="1.4k Comments"
                       />
                       <IconValue
-                          marginLeft="sm"
                           icon="share"
+                          marginLeft="sm"
                           text="Share"
                       />
                       <IconValue
-                          marginLeft="sm"
                           icon="folder-plus"
+                          marginLeft="sm"
                           text="Save"
                       />
                       <IconValue
-                          marginLeft="sm"
                           icon="ellipsis-h"
+                          marginLeft="sm"
                           text=""
                       />
                     </Flex>
@@ -331,8 +331,8 @@ const CrowdsourcedPosts = () => {
               </Card>
 
               <Card
-                marginTop="sm"
-                padding="none"
+                  marginTop="sm"
+                  padding="none"
               >
                 <Flex>
                   <FlexItem
@@ -345,10 +345,10 @@ const CrowdsourcedPosts = () => {
                         size="1x"
                     />
                     <Title
-                      margin="xs"
-                      marginLeft="none"
-                      size={4}
-                      text="8297"
+                        margin="xs"
+                        marginLeft="none"
+                        size={4}
+                        text="8297"
                     />
                     <Icon
                         icon="arrow-alt-down"
@@ -368,9 +368,9 @@ const CrowdsourcedPosts = () => {
                           variant="blue"
                       />
                       <Title
-                        marginLeft="xs"
-                        size={4}
-                        text="r/Pics"
+                          marginLeft="xs"
+                          size={4}
+                          text="r/Pics"
                       />
                       <Body
                           color="light"
@@ -384,7 +384,7 @@ const CrowdsourcedPosts = () => {
                           vertical="center"
                       >
                         <FlexItem>
-                          <Body text="Foggy morning."/>
+                          <Body text="Foggy morning." />
                         </FlexItem>
                         <FlexItem marginLeft="xs">
                           <Pill
@@ -406,18 +406,18 @@ const CrowdsourcedPosts = () => {
                           text="1.4k Comments"
                       />
                       <IconValue
-                          marginLeft="sm"
                           icon="share"
+                          marginLeft="sm"
                           text="Share"
                       />
                       <IconValue
-                          marginLeft="sm"
                           icon="folder-plus"
+                          marginLeft="sm"
                           text="Save"
                       />
                       <IconValue
-                          marginLeft="sm"
                           icon="ellipsis-h"
+                          marginLeft="sm"
                           text=""
                       />
                     </Flex>
@@ -426,8 +426,8 @@ const CrowdsourcedPosts = () => {
               </Card>
 
               <Card
-                marginTop="sm"
-                padding="none"
+                  marginTop="sm"
+                  padding="none"
               >
                 <Flex>
                   <FlexItem
@@ -440,10 +440,10 @@ const CrowdsourcedPosts = () => {
                         size="1x"
                     />
                     <Title
-                      margin="xs"
-                      marginLeft="none"
-                      size={4}
-                      text="467"
+                        margin="xs"
+                        marginLeft="none"
+                        size={4}
+                        text="467"
                     />
                     <Icon
                         icon="arrow-alt-down"
@@ -462,9 +462,9 @@ const CrowdsourcedPosts = () => {
                           variant="purple"
                       />
                       <Title
-                        marginLeft="xs"
-                        size={4}
-                        text="r/WebDesign"
+                          marginLeft="xs"
+                          size={4}
+                          text="r/WebDesign"
                       />
                       <Body
                           color="light"
@@ -502,18 +502,18 @@ const CrowdsourcedPosts = () => {
                           text="1.4k Comments"
                       />
                       <IconValue
-                          marginLeft="sm"
                           icon="share"
+                          marginLeft="sm"
                           text="Share"
                       />
                       <IconValue
-                          marginLeft="sm"
                           icon="folder-plus"
+                          marginLeft="sm"
                           text="Save"
                       />
                       <IconValue
-                          marginLeft="sm"
                           icon="ellipsis-h"
+                          marginLeft="sm"
                           text=""
                       />
                     </Flex>
@@ -663,8 +663,9 @@ const CrowdsourcedPosts = () => {
                       text="Trending Communities"
                   />
 
-                  {trendingCommunities.map(community => (
+                  {trendingCommunities.map((community) => (
                     <Flex
+                        key={community.subReadit}
                         marginY="xs"
                         spacing="between"
                         vertical="center"
@@ -685,17 +686,17 @@ const CrowdsourcedPosts = () => {
                                 text={community.subReadit}
                             />
                             <Body
-                              color="light"
-                              marginLeft="xs"
-                              text={community.members}
+                                color="light"
+                                marginLeft="xs"
+                                text={community.members}
                             />
                           </FlexItem>
                         </Flex>
                       </FlexItem>
                       <FlexItem>
                         <Button
-                          text="Join"
-                          variant="secondary"
+                            text="Join"
+                            variant="secondary"
                         />
                       </FlexItem>
                     </Flex>
