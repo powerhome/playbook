@@ -6,31 +6,6 @@ require "rake"
 #           Helper Functions              #
 # --------------------------------------- #
 
-# def format_query(query)
-#   res = query
-#   res = res.split[1]
-#   res[0] = ""
-#   latest_remote_version = res.chop
-#   latest_remote_version
-# end
-
-# def alpha_reducer(alpha)
-#   count = 0
-#   third_dot_index = 0
-
-#   alpha.split("").each_with_index do |char, i|
-#     count += 1 if char == "."
-
-#     if count == 3
-#       third_dot_index = i
-#       break
-#     end
-#   end
-
-#   alpha_triplet = alpha[0...third_dot_index]
-#   alpha_triplet
-# end
-
 def confirmation_loop(version, npm_alpha, rake_arg)
   while true do
     if rake_arg == "alpha"
@@ -79,13 +54,11 @@ task :new_release, [:var] => [:environment] do |_task, args|
   #             Remote Queries              #
   # --------------------------------------- #
   if args[:var] == "alpha"
-    # Search ruby gems for latest alpha version and format response
-    # latest_remote_alpha = format_query(`gem search playbook_ui --pre`)
+    # Search ruby gems for latest alpha version
     latest_remote_alpha = (`gem search playbook_ui --pre`).match(/(\d.\d.\d.pre.alpha\d)/).to_s
     puts "\nLatest remote alpha version: #{latest_remote_alpha}"
   else
-    # Search ruby gems for latest version and format response
-    # latest_remote_version = format_query(`gem search playbook_ui`)
+    # Search ruby gems for latest version
     latest_remote_version = (`gem search playbook_ui`).match(/(\d.\d.\d)/).to_s
     puts "\nLatest remote version: #{latest_remote_version}"
     # triplet here refers to the maj, min, and patch numbers
@@ -103,24 +76,18 @@ task :new_release, [:var] => [:environment] do |_task, args|
   # Error handling for invalid arguments
   case args[:var]
   when "alpha"
-
-    # alpha_triplet = alpha_reducer(latest_remote_alpha)
     alpha_triplet = latest_remote_alpha.match(/(\d.\d.\d)/).to_s
-    # base here refers to the latest non alpha release
     base_triplet = (`gem search playbook_ui`).match(/(\d.\d.\d)/).to_s
 
     if alpha_triplet != base_triplet
-      # logic used to start newest alpha to new release version
-      # i.e. last alpha 7.2.0-alpha4 but 7.3.0 has since been released
-      # so next alpha should be 7.3.0-alpha1
       new_version = base_triplet + ".pre.alpha1"
     else
       # Increment latest alpha version by 1
       latest_remote_alpha[-1] = (latest_remote_alpha[-1].to_i + 1).to_s
       new_version = latest_remote_alpha
     end
-
     npm_alpha = new_version.gsub(".pre.alpha", "-alpha")
+
   when "major"
     new_version = "#{num_triplet[0].to_i + 1}.0.0"
   when "minor"
@@ -182,36 +149,3 @@ task :new_release, [:var] => [:environment] do |_task, args|
     # `npm publish playbook-ui-#{new_version}.tgz`
   end
 end
-
-# Add colors, improve spacing
-
-# class String
-#   # colorization
-#   def colorize(color_code)
-#     "\e[#{color_code}m#{self}\e[0m"
-#   end
-
-#   def red
-#     colorize(31)
-#   end
-
-#   def green
-#     colorize(32)
-#   end
-
-#   def yellow
-#     colorize(33)
-#   end
-
-#   def blue
-#     colorize(34)
-#   end
-
-#   def pink
-#     colorize(35)
-#   end
-
-#   def light_blue
-#     colorize(36)
-#   end
-# end
