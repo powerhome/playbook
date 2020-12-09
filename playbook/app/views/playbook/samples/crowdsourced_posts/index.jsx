@@ -63,7 +63,7 @@ const CrowdsourcedPosts = () => {
     const mobileOnly = document.querySelectorAll('.mobile-only')
     const textInput = document.querySelector('.text-input-flex-item')
     const trendingImages = document.querySelectorAll('.trending_image')
-    const postImage = document.querySelector('.post_image')
+    const postImage = document.querySelector('.post-image')
     const bodyContainer = document.querySelector('.body-container')
 
     const viewSize = () => {
@@ -73,6 +73,7 @@ const CrowdsourcedPosts = () => {
         trendingImages.forEach(element => element.style.width = '100%')
         bodyContainer.style.marginRight = '8px'
         bodyContainer.style.marginLeft = '8px'
+        postImage.style.width = '100%'
       } else {
         mobileOnly.forEach(element => element.style.display = 'none')
         trendingImages.forEach(element => {
@@ -80,10 +81,10 @@ const CrowdsourcedPosts = () => {
           element.style.height = '150px'
         })
         bodyContainer.style.flexBasis = '65%'
+        postImage.style.width = '75%'
+        postImage.style.display = 'block'
+        postImage.style.margin = 'auto'
       }
-      postImage.style.width = '75%'
-      postImage.style.display = 'block'
-      postImage.style.margin = 'auto'
     }
     viewSize()
   })
@@ -223,306 +224,239 @@ const CrowdsourcedPosts = () => {
           />
 
           <div className="mobile-only">
-            <Layout layout="collection">
-              <Layout.Body>
-                <Card padding="none">
-                  <Nav
-                      className="mobile-only"
-                      orientation="vertical"
-                  >
-                    <NavItem
-                        active
-                        iconLeft="rocket"
-                        link="#"
-                        text="Best"
-                    />
-                    <NavItem
-                        iconLeft="fire"
-                        link="#"
-                        text="Hot"
-                    />
-                    <NavItem
-                        iconLeft="star"
-                        link="#"
-                        text="New"
-                    />
-                    <NavItem
-                        iconLeft="chart-line"
-                        link="#"
-                        text="Top"
-                    />
-                  </Nav>
-                </Card>
+            <Card padding="none">
+              <Nav
+                  className="mobile-only"
+                  orientation="vertical"
+              >
+                <NavItem
+                    active
+                    iconLeft="rocket"
+                    link="#"
+                    text="Best"
+                />
+                <NavItem
+                    iconLeft="fire"
+                    link="#"
+                    text="Hot"
+                />
+                <NavItem
+                    iconLeft="star"
+                    link="#"
+                    text="New"
+                />
+                <NavItem
+                    iconLeft="chart-line"
+                    link="#"
+                    text="Top"
+                />
+              </Nav>
+            </Card>
 
-                <Card
-                    marginTop="sm"
-                    padding="none"
+            <Card
+                marginTop="sm"
+                padding="none"
+            >
+              <Flex>
+                <FlexItem
+                    padding="sm"
                 >
-                  <Flex>
-                    <FlexItem
-                        marginLeft="sm"
-                        marginTop="sm"
-                    >
-                      <Icon
-                          icon="arrow-alt-up"
-                          marginLeft="none"
-                          size="1x"
-                      />
-
-                      <Icon
-                          icon="arrow-alt-down"
-                          marginLeft="none"
-                          size="1x"
-                      />
-                    </FlexItem>
-                    <FlexItem
-                        paddingX="xs"
-                        paddingY="sm"
-                    >
-                      <Flex vertical="center">
-                        <IconCircle
-                            icon="lightbulb-on"
-                            size="xs"
-                            variant="yellow"
-                        />
-                        <Title
-                            marginLeft="xs"
-                            size={4}
-                            text="r/LifeProTips"
-                        />
-                        <Body
-                            color="light"
-                            marginLeft="xs"
-                            text="• Posted by u/xhuljanomuca 1 month ago"
-                        />
-                      </Flex>
-                      <Body
-                          paddingRight="md"
-                          paddingTop="xs"
-                          text="LPT: If you ever need a program you want for free (for example a video/photo editor) don’t search for “free,” search for “open source” to avoid limited trial versions, adverts and malware"
-                      />
-                      <Pill
-                          marginTop="sm"
-                          text="Computers"
-                          variant="primary"
-                      />
-                      <Flex paddingTop="sm">
-                        <IconValue
-                            icon="comment-alt"
-                            text="1.4k Comments"
-                        />
-                        <IconValue
-                            icon="share"
-                            marginLeft="sm"
-                            text="Share"
-                        />
-                        <IconValue
-                            icon="folder-plus"
-                            marginLeft="sm"
-                            text="Save"
-                        />
-                        <IconValue
-                            icon="ellipsis-h"
-                            marginLeft="sm"
-                            text=""
-                        />
-                      </Flex>
-                    </FlexItem>
+                  <Flex vertical="center">
+                    <IconCircle
+                        icon="lightbulb-on"
+                        size="xs"
+                        variant="yellow"
+                    />
+                    <Title
+                        marginLeft="xs"
+                        size={4}
+                        text="r/LifeProTips"
+                    />
+                    <Body
+                        color="light"
+                        marginLeft="xs"
+                        text="• Posted by u/xhuljanomuca"
+                    />
                   </Flex>
-                </Card>
-
-                <Card
-                    marginTop="sm"
-                    padding="none"
-                >
-                  <Flex>
-                    <FlexItem
+                  <Body
+                      paddingTop="xs"
+                      text="LPT: If you ever need a program you want for free (for example a video/photo editor) don’t search for “free,” search for “open source” to avoid limited trial versions, adverts and malware"
+                  />
+                  <Pill
+                      marginTop="sm"
+                      text="Computers"
+                      variant="primary"
+                  />
+                  <Flex paddingTop="sm">
+                    <IconValue
+                        icon="comment-alt"
+                        text="1.4k Comments"
+                    />
+                    <IconValue
+                        icon="share"
                         marginLeft="sm"
-                        marginTop="sm"
+                        text="Share"
+                    />
+                    <IconValue
+                        icon="folder-plus"
+                        marginLeft="sm"
+                        text="Save"
+                    />
+                    <IconValue
+                        icon="ellipsis-h"
+                        marginLeft="sm"
+                        text=""
+                    />
+                  </Flex>
+                </FlexItem>
+              </Flex>
+            </Card>
+
+            <Card
+                marginTop="sm"
+                padding="none"
+            >
+              <Flex>
+                <FlexItem
+                    padding="sm"
+                    fixedSize="100%"
+                >
+                  <Flex vertical="center">
+                    <IconCircle
+                        icon="camera"
+                        size="xs"
+                        variant="blue"
+                    />
+                    <Title
+                        marginLeft="xs"
+                        size={4}
+                        text="r/Pics"
+                    />
+                    <Body
+                      color="light"
+                      marginLeft="xs"
+                      text="• Posted by u/stephenmckeon"
+                  />
+                  </Flex>
+                  <FlexItem>
+                    <Flex
+                        paddingBottom="sm"
+                        paddingTop="xs"
+                        vertical="center"
                     >
-                      <Icon
-                          icon="arrow-alt-up"
-                          marginLeft="none"
-                          size="1x"
-                      />
-                      <Title
-                          margin="xs"
-                          marginLeft="none"
-                          size={4}
-                          text="8297"
-                      />
-                      <Icon
-                          icon="arrow-alt-down"
-                          marginLeft="none"
-                          size="1x"
-                      />
-                    </FlexItem>
-                    <FlexItem
-                        fixedSize="85%"
-                        paddingX="xs"
-                        paddingY="sm"
-                    >
-                      <Flex vertical="center">
-                        <IconCircle
-                            icon="camera"
-                            size="xs"
-                            variant="blue"
-                        />
-                        <Title
-                            marginLeft="xs"
-                            size={4}
-                            text="r/Pics"
-                        />
-                        <Body
-                            color="light"
-                            marginLeft="xs"
-                            text="• Posted by u/stephenmckeon 13 hours ago"
-                        />
-                      </Flex>
                       <FlexItem>
-                        <Flex
-                            paddingTop="xs"
-                            vertical="center"
-                        >
-                          <FlexItem>
-                            <Body text="Foggy morning." />
-                          </FlexItem>
-                          <FlexItem marginLeft="xs">
-                            <Pill
-                                text="OC"
-                                variant="success"
-                            />
-                          </FlexItem>
-                        </Flex>
+                        <Body text="Foggy morning." />
                       </FlexItem>
-                      <Flex marginTop="sm">
-                        <Image
-                            className="post_image"
-                            url="https://p-a6fbdk.t4.n0.cdn.getcloudapp.com/items/d5uPEJbY/readit_image_5.png"
+                      <FlexItem marginLeft="xs">
+                        <Pill
+                            text="OC"
+                            variant="success"
                         />
-                      </Flex>
-                      <Flex paddingTop="sm">
-                        <IconValue
-                            icon="comment-alt"
-                            text="1.4k Comments"
-                        />
-                        <IconValue
-                            icon="share"
-                            marginLeft="sm"
-                            text="Share"
-                        />
-                        <IconValue
-                            icon="folder-plus"
-                            marginLeft="sm"
-                            text="Save"
-                        />
-                        <IconValue
-                            icon="ellipsis-h"
-                            marginLeft="sm"
-                            text=""
-                        />
-                      </Flex>
-                    </FlexItem>
-                  </Flex>
-                </Card>
-
-                <Card
-                    marginTop="sm"
-                    padding="none"
-                >
-                  <Flex>
-                    <FlexItem
+                      </FlexItem>
+                    </Flex>
+                  </FlexItem>
+                    <Image
+                        className="post-image"
+                        url="https://p-a6fbdk.t4.n0.cdn.getcloudapp.com/items/d5uPEJbY/readit_image_5.png"
+                    />
+                  <Flex paddingTop="sm">
+                    <IconValue
+                        icon="comment-alt"
+                        text="1.4k Comments"
+                    />
+                    <IconValue
+                        icon="share"
                         marginLeft="sm"
-                        marginTop="sm"
-                    >
-                      <Icon
-                          icon="arrow-alt-up"
-                          marginLeft="none"
-                          size="1x"
-                      />
-                      <Title
-                          margin="xs"
-                          marginLeft="none"
-                          size={4}
-                          text="467"
-                      />
-                      <Icon
-                          icon="arrow-alt-down"
-                          marginLeft="none"
-                          size="1x"
-                      />
-                    </FlexItem>
-                    <FlexItem
-                        paddingX="xs"
-                        paddingY="sm"
-                    >
-                      <Flex vertical="center">
-                        <IconCircle
-                            icon="browser"
-                            size="xs"
-                            variant="purple"
-                        />
-                        <Title
-                            marginLeft="xs"
-                            size={4}
-                            text="r/WebDesign"
-                        />
-                        <Body
-                            color="light"
-                            marginLeft="xs"
-                            text="• Posted by u/creativebloq 1 week ago"
-                        />
-                      </Flex>
-                      <Title
-                          paddingRight="md"
-                          paddingTop="xs"
-                          size="4"
-                          text="Use white space!"
-                      />
-                      <Body
-                          paddingTop="sm"
-                          text="It seems to be the hardest concept for developers to grasp: the biggest benefit to having the proper amount of white space is giving the user a break. Breaks are important for processing information, especially when there's a fair amount to process. It's why we have paragraphs and sentences instead of just a single, long block of running text."
-                      />
-                      <Body
-                          paddingTop="sm"
-                          text="The key is to ensure that white space has a relationship with other objects on the page, including the other space. If you have a single column of white space, make sure there's another single column of white space around to balance it."
-                      />
-                      <Body
-                          color="light"
-                          paddingTop="sm"
-                          text="For vertical space, just use fractions of the body font size. I tend to keep things simple and use a scale of .25, but there are several other scales that you can use."
-                      />
-                      <Body
-                          color="light"
-                          paddingTop="sm"
-                          text="For example, if the body font size is 16px(1em): 4, 8, 12, 16, 20, 24, 28, 32, 40, 48. This allows for choosing font sizes by simply moving up and down the scale as I want larger or smaller type..."
-                      />
-                      <Flex paddingTop="sm">
-                        <IconValue
-                            icon="comment-alt"
-                            text="1.4k Comments"
-                        />
-                        <IconValue
-                            icon="share"
-                            marginLeft="sm"
-                            text="Share"
-                        />
-                        <IconValue
-                            icon="folder-plus"
-                            marginLeft="sm"
-                            text="Save"
-                        />
-                        <IconValue
-                            icon="ellipsis-h"
-                            marginLeft="sm"
-                            text=""
-                        />
-                      </Flex>
-                    </FlexItem>
+                        text="Share"
+                    />
+                    <IconValue
+                        icon="folder-plus"
+                        marginLeft="sm"
+                        text="Save"
+                    />
+                    <IconValue
+                        icon="ellipsis-h"
+                        marginLeft="sm"
+                        text=""
+                    />
                   </Flex>
-                </Card>
-              </Layout.Body>
-            </Layout>
+                </FlexItem>
+              </Flex>
+            </Card>
+
+            <Card
+                marginTop="sm"
+                padding="none"
+            >
+              <Flex>
+                <FlexItem
+                    padding="sm"
+                >
+                  <Flex vertical="center">
+                    <IconCircle
+                        icon="browser"
+                        size="xs"
+                        variant="purple"
+                    />
+                    <Title
+                        marginLeft="xs"
+                        size={4}
+                        text="r/WebDesign"
+                    />
+                    <Body
+                        color="light"
+                        marginLeft="xs"
+                        text="• Posted by u/creativebloq"
+                    />
+                  </Flex>
+                  <Title
+                      paddingRight="md"
+                      paddingTop="xs"
+                      size="4"
+                      text="Use white space!"
+                  />
+                  <Body
+                      paddingTop="sm"
+                      text="It seems to be the hardest concept for developers to grasp: the biggest benefit to having the proper amount of white space is giving the user a break. Breaks are important for processing information, especially when there's a fair amount to process. It's why we have paragraphs and sentences instead of just a single, long block of running text."
+                  />
+                  <Body
+                      paddingTop="sm"
+                      text="The key is to ensure that white space has a relationship with other objects on the page, including the other space. If you have a single column of white space, make sure there's another single column of white space around to balance it."
+                  />
+                  <Body
+                      color="light"
+                      paddingTop="sm"
+                      text="For vertical space, just use fractions of the body font size. I tend to keep things simple and use a scale of .25, but there are several other scales that you can use."
+                  />
+                  <Body
+                      color="light"
+                      paddingTop="sm"
+                      text="For example, if the body font size is 16px(1em): 4, 8, 12, 16, 20, 24, 28, 32, 40, 48. This allows for choosing font sizes by simply moving up and down the scale as I want larger or smaller type..."
+                  />
+                  <Flex paddingTop="sm">
+                    <IconValue
+                        icon="comment-alt"
+                        text="1.4k Comments"
+                    />
+                    <IconValue
+                        icon="share"
+                        marginLeft="sm"
+                        text="Share"
+                    />
+                    <IconValue
+                        icon="folder-plus"
+                        marginLeft="sm"
+                        text="Save"
+                    />
+                    <IconValue
+                        icon="ellipsis-h"
+                        marginLeft="sm"
+                        text=""
+                    />
+                  </Flex>
+                </FlexItem>
+              </Flex>
+            </Card>
           </div>
 
           <div className="desktop-only">
@@ -584,7 +518,27 @@ const CrowdsourcedPosts = () => {
                     padding="none"
                 >
                   <Flex>
-
+                    <FlexItem
+                        marginLeft="sm"
+                        marginTop="sm"
+                    >
+                      <Icon
+                          icon="arrow-alt-up"
+                          marginLeft="none"
+                          size="1x"
+                      />
+                      <Title
+                          margin="xs"
+                          marginLeft="none"
+                          size={4}
+                          text="66.2k"
+                      />
+                      <Icon
+                          icon="arrow-alt-down"
+                          marginLeft="none"
+                          size="1x"
+                      />
+                    </FlexItem>
                     <FlexItem
                         paddingX="xs"
                         paddingY="sm"
@@ -707,7 +661,7 @@ const CrowdsourcedPosts = () => {
                       </FlexItem>
                       <Flex marginTop="sm">
                         <Image
-                            className="post_image"
+                            className="post-image"
                             url="https://p-a6fbdk.t4.n0.cdn.getcloudapp.com/items/d5uPEJbY/readit_image_5.png"
                         />
                       </Flex>
