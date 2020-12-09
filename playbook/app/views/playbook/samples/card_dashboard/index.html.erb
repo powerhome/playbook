@@ -66,7 +66,8 @@
 
 <%= pb_rails("title", props: { padding: "xl", margin_bottom: "sm", text: "Dashboard Cards",size: 1}) %>
 
-<%= pb_rails("flex", props: { orientation: "column", horizontal: "center", margin: "lg" }) do %>
+<%= pb_rails("flex", props: { horizontal: "center", margin: "lg", wrap: true }) do %>
+
 
   <%# Completion Chart %>
   <%= pb_rails("flex/flex_item", props:{ margin: "xl" }) do %>
@@ -95,8 +96,9 @@
     <% end %>
   <% end %>
 
+
   <%# Four Grid %>
-  <%= pb_rails("flex/flex_item") do %>
+  <%= pb_rails("flex/flex_item", props: { margin: "md" }) do %>
     <% pb_rails("card", props: { margin: "md", border_none: true, shadow: "deeper" }) do %>
       <%= pb_rails("card/card_body") do %>
         <%= pb_rails("flex", props: { orientation: "row" }) do%>
@@ -121,9 +123,8 @@
   <% end %>
 
 
-
   <%# Gauge With Legend %>
-  <%= pb_rails("flex/flex_item") do %>
+  <%= pb_rails("flex/flex_item", props: { margin: "md" }) do %>
     <%= pb_rails("card", props: { padding: "none", margin: "none", border_none: true, shadow: "deeper" }) do %>
 
       <%= pb_rails("card/card_body", props: { padding_y: "sm", margin_y: "none" }) do %>
@@ -175,8 +176,9 @@
     <% end %>
   <% end %>
 
+
   <%# Bar Graph with Legend %>
-  <%= pb_rails("flex/flex_item", props: { padding: "md" }) do %>
+  <%= pb_rails("flex/flex_item", props: { margin: "md" }) do %>
     <%= pb_rails("card", props: { padding: "none", margin: "none", border_none: true, shadow: "deeper" }) do %>
 
       <%= pb_rails("card/card_body", props: { padding_y: "sm", margin_y: "none" }) do %>
@@ -226,9 +228,9 @@
   <% end %>
 
 
-  <%= pb_rails("flex/flex_item") do %>
-    <%# Number Grid %>
-    <% pb_rails("card", props: { border_none: true, shadow: "deeper" }) do %>
+  <%# Number Grid %>
+  <%= pb_rails("flex/flex_item", props: { margin: "md" }) do %>
+    <% pb_rails("card", props: { padding: "md", border_none: true, shadow: "deeper" }) do %>
       <%= pb_rails("flex", props: { horizontal: "center", wrap: true }) do %>
         <% grid_data.each do |data| %>
           <%= pb_rails("flex/flex_item", props: { margin_y: "md", fixed_size: "250px" }) do %>
@@ -252,4 +254,6 @@
       <% end %>
     <% end %>
   <% end %>
+
+
 <% end %>

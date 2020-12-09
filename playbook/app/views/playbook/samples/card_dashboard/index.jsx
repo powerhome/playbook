@@ -251,7 +251,7 @@ const GaugeLegend = ( { title, data, legendData }) => <Card
         <Gauge
           id='full-circle'
           chartData={data}
-          full_circle
+          fullCircle
         />
       </FlexItem>
       <FlexItem>
@@ -379,14 +379,14 @@ const CardDashboard = () => {
         text='Dashboard Cards'
       />
       <Flex
-        orientation='column'
         horizontal='center'
         margin='lg'
+        wrap
       >
         <FlexItem margin='md'>
           <FulfillmentChart {...pipelineData}/>
         </FlexItem>
-        <FlexItem padding='none'>
+        <FlexItem margin='md' padding='none'>
           <FourGrid {...ticketData}/>
         </FlexItem>
         <FlexItem margin='md'>
@@ -395,7 +395,7 @@ const CardDashboard = () => {
         <FlexItem margin='md'>
           <BarGraphLegend {...salesReport}/>
         </FlexItem>
-        <FlexItem>
+        <FlexItem margin='md'>
           <NumberGrid {...clientData}/>
         </FlexItem>
       </Flex>
