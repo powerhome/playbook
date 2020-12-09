@@ -8,6 +8,8 @@ module Playbook
       prop :async, type: Playbook::Props::Boolean,
                     default: false
       prop :default_options, type: Playbook::Props::HashArray, default: []
+      prop :get_option_label
+      prop :get_option_value
       prop :id
       prop :label
       prop :load_options
@@ -44,6 +46,9 @@ module Playbook
           options: options,
           placeholder: placeholder
         }
+
+        base_options.merge!({getOptionLabel: get_option_label}) if get_option_label.present?
+        base_options.merge!({getOptionValue: get_option_value}) if get_option_value.present?
 
         base_options.merge!({
           async: true,
