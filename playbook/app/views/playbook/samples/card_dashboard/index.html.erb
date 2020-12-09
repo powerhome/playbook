@@ -96,6 +96,27 @@
     <% end %>
   <% end %>
 
+  <%= pb_rails("flex/flex_item", props: { margin: "md" }) do %>
+    <% pb_rails("card", props: { margin: "md", border_none: true, shadow: "deeper" }) do %>
+
+
+      <%= pb_rails("layout", props: { transparent: true, size: "xs", collapse: "xs" }) do %>
+        <%= pb_rails("layout/sidebar", props: { margin: "none", padding: "none"}){  } %>
+        <%= pb_rails("layout/body") do %>
+          <%= pb_rails("flex", props: { wrap: true }) do%>
+            <% ticket_data.each_with_index do |ticket, i|%>
+              <% ticket[:margin_x] = "md" %>
+              <%= pb_rails("flex/flex_item", props: { padding: "md", margin: "md", fixed_size: "25%" }) do %>
+                <%= pb_rails("icon_stat_value", props: ticket ) %>
+              <% end %>
+            <% end %>
+          <% end %>
+        <% end %>
+      <% end %>
+
+
+    <% end %>
+  <% end %>
 
   <%# Four Grid %>
   <%= pb_rails("flex/flex_item", props: { margin: "md" }) do %>
