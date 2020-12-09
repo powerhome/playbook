@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 import { Flex, FlexItem, Icon, Toggle } from '../'
 
 const DarkModeToggle = (props) => {
-  const { initMode } = props
+  const initMode = props.initMode
   const [darkMode, toggleDarkMode] = useState(false)
   const [loading, toggleLoading] = useState(false)
 

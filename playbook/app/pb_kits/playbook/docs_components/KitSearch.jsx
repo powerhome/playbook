@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { Typeahead } from '../'
 
 const KitSearch = (props) => {
-  const { kits } = props
+  const kits = props.kits
 
   const handleChange = (selection) => {
     window.location = selection.value
@@ -22,9 +22,9 @@ const KitSearch = (props) => {
       <Typeahead
           className="kit-search"
           id="kit-search"
-          placeholder="Search"
           onChange={handleChange}
           options={kits}
+          placeholder="Search"
       />
     </div>
   )
