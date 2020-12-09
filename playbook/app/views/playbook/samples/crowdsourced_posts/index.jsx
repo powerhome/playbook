@@ -70,20 +70,16 @@ const CrowdsourcedPosts = () => {
       if (window.innerWidth < 415 || window.innerHeight < 415){
         desktopOnly.forEach(element => element.style.display = 'none')
         textInput.style.flexBasis = '60%'
-        trendingImages.forEach((element) => {
-          element.style.width = '100%'
-        })
+        trendingImages.forEach(element => element.style.width = '100%')
         bodyContainer.style.marginRight = '8px'
         bodyContainer.style.marginLeft = '8px'
       } else {
         mobileOnly.forEach(element => element.style.display = 'none')
-        trendingImages.forEach((element) => {
+        trendingImages.forEach(element => {
           element.style.width = '100%'
           element.style.height = '150px'
         })
         bodyContainer.style.flexBasis = '65%'
-        // mobileView.style.display = 'none'
-        // desktopView.style.display = 'block'
       }
       postImage.style.width = '75%'
       postImage.style.display = 'block'
@@ -156,8 +152,11 @@ const CrowdsourcedPosts = () => {
         </Flex>
       </Background>
 
-      <Flex horizontal="center">
-        <FlexItem className="body-container">
+      <Flex
+          className="body-container"
+          horizontal="center"
+      >
+        <FlexItem>
           <Caption
               paddingBottom="xs"
               paddingTop="sm"
@@ -222,521 +221,656 @@ const CrowdsourcedPosts = () => {
               paddingTop="sm"
               text="Popular Posts"
           />
-          <Card
-              className="mobile-only"
-              padding="none"
-          >
-            <Nav
-                className="mobile-only"
-                orientation="vertical"
-            >
-              <NavItem
-                  active
-                  iconLeft="rocket"
-                  link="#"
-                  text="Best"
-              />
-              <NavItem
-                  iconLeft="fire"
-                  link="#"
-                  text="Hot"
-              />
-              <NavItem
-                  iconLeft="star"
-                  link="#"
-                  text="New"
-              />
-              <NavItem
-                  iconLeft="chart-line"
-                  link="#"
-                  text="Top"
-              />
-            </Nav>
-          </Card>
 
-          <Layout
-              position="right"
-              size="xl"
-          >
-            <Layout.Body>
-              <Card
-                  className="desktop-only"
-                  padding="none"
-              >
-                <Flex spacing="between">
-                  <FlexItem>
-                    <Flex>
-                      <Nav orientation="horizontal">
-                        <NavItem
-                            active
-                            iconLeft="rocket"
-                            link="#"
-                            text="Best"
-                        />
-                        <NavItem
-                            iconLeft="fire"
-                            link="#"
-                            text="Hot"
-                        />
-                        <NavItem
-                            iconLeft="star"
-                            link="#"
-                            text="New"
-                        />
-                        <NavItem
-                            iconLeft="chart-line"
-                            link="#"
-                            text="Top"
-                        />
-                      </Nav>
-                      <Button
-                          marginTop="xs"
-                          variant="link"
-                      >
-                        <Icon icon="ellipsis-h" />
-                      </Button>
-                    </Flex>
-                  </FlexItem>
-                  <FlexItem>
-                    <Button
-                        marginTop="xs"
-                        paddingRight="md"
-                        variant="link"
-                    >
-                      <Icon icon="th-large" />
-                      <Icon icon="caret-down" />
-                    </Button>
-                  </FlexItem>
-                </Flex>
-              </Card>
-
-              <Card
-                  marginTop="sm"
-                  padding="none"
-              >
-                <Flex>
-                  <FlexItem
-                      marginLeft="sm"
-                      marginTop="sm"
+          <div className="mobile-only">
+            <Layout layout="collection">
+              <Layout.Body>
+                <Card padding="none">
+                  <Nav
+                      className="mobile-only"
+                      orientation="vertical"
                   >
-                    <Icon
-                        icon="arrow-alt-up"
-                        marginLeft="none"
-                        size="1x"
+                    <NavItem
+                        active
+                        iconLeft="rocket"
+                        link="#"
+                        text="Best"
                     />
-                    <Title
-                        margin="xs"
-                        marginLeft="none"
-                        size={4}
-                        text="66.2k"
+                    <NavItem
+                        iconLeft="fire"
+                        link="#"
+                        text="Hot"
                     />
-                    <Icon
-                        icon="arrow-alt-down"
-                        marginLeft="none"
-                        size="1x"
+                    <NavItem
+                        iconLeft="star"
+                        link="#"
+                        text="New"
                     />
-                  </FlexItem>
-                  <FlexItem
-                      paddingX="xs"
-                      paddingY="sm"
-                  >
-                    <Flex vertical="center">
-                      <IconCircle
-                          icon="lightbulb-on"
-                          size="xs"
-                          variant="yellow"
-                      />
-                      <Title
-                          marginLeft="xs"
-                          size={4}
-                          text="r/LifeProTips"
-                      />
-                      <Body
-                          color="light"
-                          marginLeft="xs"
-                          text="• Posted by u/xhuljanomuca 1 month ago"
-                      />
-                    </Flex>
-                    <Body
-                        paddingRight="md"
-                        paddingTop="xs"
-                        text="LPT: If you ever need a program you want for free (for example a video/photo editor) don’t search for “free,” search for “open source” to avoid limited trial versions, adverts and malware"
+                    <NavItem
+                        iconLeft="chart-line"
+                        link="#"
+                        text="Top"
                     />
-                    <Pill
-                        marginTop="sm"
-                        text="Computers"
-                        variant="primary"
-                    />
-                    <Flex paddingTop="sm">
-                      <IconValue
-                          icon="comment-alt"
-                          text="1.4k Comments"
-                      />
-                      <IconValue
-                          icon="share"
-                          marginLeft="sm"
-                          text="Share"
-                      />
-                      <IconValue
-                          icon="folder-plus"
-                          marginLeft="sm"
-                          text="Save"
-                      />
-                      <IconValue
-                          icon="ellipsis-h"
-                          marginLeft="sm"
-                          text=""
-                      />
-                    </Flex>
-                  </FlexItem>
-                </Flex>
-              </Card>
-
-              <Card
-                  marginTop="sm"
-                  padding="none"
-              >
-                <Flex>
-                  <FlexItem
-                      marginLeft="sm"
-                      marginTop="sm"
-                  >
-                    <Icon
-                        icon="arrow-alt-up"
-                        marginLeft="none"
-                        size="1x"
-                    />
-                    <Title
-                        margin="xs"
-                        marginLeft="none"
-                        size={4}
-                        text="8297"
-                    />
-                    <Icon
-                        icon="arrow-alt-down"
-                        marginLeft="none"
-                        size="1x"
-                    />
-                  </FlexItem>
-                  <FlexItem
-                      fixedSize="85%"
-                      paddingX="xs"
-                      paddingY="sm"
-                  >
-                    <Flex vertical="center">
-                      <IconCircle
-                          icon="camera"
-                          size="xs"
-                          variant="blue"
-                      />
-                      <Title
-                          marginLeft="xs"
-                          size={4}
-                          text="r/Pics"
-                      />
-                      <Body
-                          color="light"
-                          marginLeft="xs"
-                          text="• Posted by u/stephenmckeon 13 hours ago"
-                      />
-                    </Flex>
-                    <FlexItem>
-                      <Flex
-                          paddingTop="xs"
-                          vertical="center"
-                      >
-                        <FlexItem>
-                          <Body text="Foggy morning." />
-                        </FlexItem>
-                        <FlexItem marginLeft="xs">
-                          <Pill
-                              text="OC"
-                              variant="success"
-                          />
-                        </FlexItem>
-                      </Flex>
-                    </FlexItem>
-                    <Flex marginTop="sm">
-                      <Image
-                          className="post_image"
-                          url="https://p-a6fbdk.t4.n0.cdn.getcloudapp.com/items/d5uPEJbY/readit_image_5.png"
-                      />
-                    </Flex>
-                    <Flex paddingTop="sm">
-                      <IconValue
-                          icon="comment-alt"
-                          text="1.4k Comments"
-                      />
-                      <IconValue
-                          icon="share"
-                          marginLeft="sm"
-                          text="Share"
-                      />
-                      <IconValue
-                          icon="folder-plus"
-                          marginLeft="sm"
-                          text="Save"
-                      />
-                      <IconValue
-                          icon="ellipsis-h"
-                          marginLeft="sm"
-                          text=""
-                      />
-                    </Flex>
-                  </FlexItem>
-                </Flex>
-              </Card>
-
-              <Card
-                  marginTop="sm"
-                  padding="none"
-              >
-                <Flex>
-                  <FlexItem
-                      marginLeft="sm"
-                      marginTop="sm"
-                  >
-                    <Icon
-                        icon="arrow-alt-up"
-                        marginLeft="none"
-                        size="1x"
-                    />
-                    <Title
-                        margin="xs"
-                        marginLeft="none"
-                        size={4}
-                        text="467"
-                    />
-                    <Icon
-                        icon="arrow-alt-down"
-                        marginLeft="none"
-                        size="1x"
-                    />
-                  </FlexItem>
-                  <FlexItem
-                      paddingX="xs"
-                      paddingY="sm"
-                  >
-                    <Flex vertical="center">
-                      <IconCircle
-                          icon="browser"
-                          size="xs"
-                          variant="purple"
-                      />
-                      <Title
-                          marginLeft="xs"
-                          size={4}
-                          text="r/WebDesign"
-                      />
-                      <Body
-                          color="light"
-                          marginLeft="xs"
-                          text="• Posted by u/creativebloq 1 week ago"
-                      />
-                    </Flex>
-                    <Title
-                        paddingRight="md"
-                        paddingTop="xs"
-                        size="4"
-                        text="Use white space!"
-                    />
-                    <Body
-                        paddingTop="sm"
-                        text="It seems to be the hardest concept for developers to grasp: the biggest benefit to having the proper amount of white space is giving the user a break. Breaks are important for processing information, especially when there's a fair amount to process. It's why we have paragraphs and sentences instead of just a single, long block of running text."
-                    />
-                    <Body
-                        paddingTop="sm"
-                        text="The key is to ensure that white space has a relationship with other objects on the page, including the other space. If you have a single column of white space, make sure there's another single column of white space around to balance it."
-                    />
-                    <Body
-                        color="light"
-                        paddingTop="sm"
-                        text="For vertical space, just use fractions of the body font size. I tend to keep things simple and use a scale of .25, but there are several other scales that you can use."
-                    />
-                    <Body
-                        color="light"
-                        paddingTop="sm"
-                        text="For example, if the body font size is 16px(1em): 4, 8, 12, 16, 20, 24, 28, 32, 40, 48. This allows for choosing font sizes by simply moving up and down the scale as I want larger or smaller type..."
-                    />
-                    <Flex paddingTop="sm">
-                      <IconValue
-                          icon="comment-alt"
-                          text="1.4k Comments"
-                      />
-                      <IconValue
-                          icon="share"
-                          marginLeft="sm"
-                          text="Share"
-                      />
-                      <IconValue
-                          icon="folder-plus"
-                          marginLeft="sm"
-                          text="Save"
-                      />
-                      <IconValue
-                          icon="ellipsis-h"
-                          marginLeft="sm"
-                          text=""
-                      />
-                    </Flex>
-                  </FlexItem>
-                </Flex>
-              </Card>
-            </Layout.Body>
-
-            <Background backgroundColor="light">
-              <Layout.Side
-                  className="desktop-only"
-                  marginLeft="md"
-              >
-                <Card
-                    header
-                    padding="none"
-                    shadow="deeper"
-                >
-                  <Card.Header
-                      headerColor="category_1"
-                      padding="xs"
-                  >
-                    <Flex vertical="center">
-                      <Body
-                          dark
-                          padding="xs"
-                          paddingRight="sm"
-                      >
-                        <Icon
-                            icon="tree-large"
-                            size="4x"
-                        />
-                      </Body>
-                      <Body
-                          dark
-                          margin="xs"
-                          marginRight="xs"
-                          text="Outdoor communities — they're really out there"
-                      />
-                    </Flex>
-                  </Card.Header>
-
-                  {communities.map((community) => (
-                    <>
-                      <Flex
-                          padding="xs"
-                          paddingLeft="sm"
-                          vertical="center"
-                      >
-                        <FlexItem>
-                          <IconCircle
-                              icon={community.icon}
-                              size="sm"
-                              variant={community.variant}
-                          />
-                        </FlexItem>
-                        <FlexItem>
-                          <Title
-                              marginLeft="xs"
-                              size={4}
-                              text={community.subReadit}
-                          />
-                        </FlexItem>
-                      </Flex>
-                      <If condition={community !== communities[communities.length - 1]}>
-                        <SectionSeparator />
-                      </If>
-                    </>
-                  ))}
-
-                  <Layout.Body paddingX="sm">
-                    <Button
-                        fullWidth
-                        marginTop="xs"
-                        text="VIEW ALL"
-                    />
-                    <Flex
-                        paddingY="sm"
-                        spacing="between"
-                    >
-                      <Badge
-                          padding="xs"
-                          text="Top"
-                          variant="neutral"
-                      />
-                      <Badge
-                          padding="xs"
-                          text="Near You"
-                          variant="neutral"
-                      />
-                      <Badge
-                          padding="xs"
-                          text="Aww"
-                          variant="neutral"
-                      />
-                      <Badge
-                          padding="xs"
-                          text="Fitness"
-                          variant="neutral"
-                      />
-                    </Flex>
-                  </Layout.Body>
+                  </Nav>
                 </Card>
 
                 <Card
                     marginTop="sm"
-                    padding="xs"
-                    shadow="deeper"
+                    padding="none"
                 >
-                  <Flex
-                      margin="xs"
-                      spacing="between"
-                      vertical="center"
-                  >
-                    <FlexItem>
+                  <Flex>
+                    <FlexItem
+                        marginLeft="sm"
+                        marginTop="sm"
+                    >
                       <Icon
-                          icon="shield-alt"
-                          marginRight="sm"
-                          size="2x"
+                          icon="arrow-alt-up"
+                          marginLeft="none"
+                          size="1x"
+                      />
+
+                      <Icon
+                          icon="arrow-alt-down"
+                          marginLeft="none"
+                          size="1x"
                       />
                     </FlexItem>
-                    <FlexItem>
-                      <Title
-                          size={4}
-                          text="Readit Premium"
+                    <FlexItem
+                        paddingX="xs"
+                        paddingY="sm"
+                    >
+                      <Flex vertical="center">
+                        <IconCircle
+                            icon="lightbulb-on"
+                            size="xs"
+                            variant="yellow"
+                        />
+                        <Title
+                            marginLeft="xs"
+                            size={4}
+                            text="r/LifeProTips"
+                        />
+                        <Body
+                            color="light"
+                            marginLeft="xs"
+                            text="• Posted by u/xhuljanomuca 1 month ago"
+                        />
+                      </Flex>
+                      <Body
+                          paddingRight="md"
+                          paddingTop="xs"
+                          text="LPT: If you ever need a program you want for free (for example a video/photo editor) don’t search for “free,” search for “open source” to avoid limited trial versions, adverts and malware"
                       />
-                      <Caption
-                          size="xs"
-                          text="The best Readit experience, with monthly Coins"
+                      <Pill
+                          marginTop="sm"
+                          text="Computers"
+                          variant="primary"
                       />
-                    </FlexItem>
-                    <FlexItem>
-                      <Button
-                          paddingX="sm"
-                          text="TRY NOW"
-                          variant="secondary"
-                      />
+                      <Flex paddingTop="sm">
+                        <IconValue
+                            icon="comment-alt"
+                            text="1.4k Comments"
+                        />
+                        <IconValue
+                            icon="share"
+                            marginLeft="sm"
+                            text="Share"
+                        />
+                        <IconValue
+                            icon="folder-plus"
+                            marginLeft="sm"
+                            text="Save"
+                        />
+                        <IconValue
+                            icon="ellipsis-h"
+                            marginLeft="sm"
+                            text=""
+                        />
+                      </Flex>
                     </FlexItem>
                   </Flex>
                 </Card>
 
                 <Card
                     marginTop="sm"
-                    padding="sm"
-                    shadow="deeper"
+                    padding="none"
                 >
-                  <Title
-                      padding="xs"
-                      size={4}
-                      text="Trending Communities"
-                  />
-
-                  {trendingCommunities.map((community) => (
-                    <Flex
-                        key={community.subReadit}
-                        marginY="xs"
-                        spacing="between"
-                        vertical="center"
+                  <Flex>
+                    <FlexItem
+                        marginLeft="sm"
+                        marginTop="sm"
                     >
+                      <Icon
+                          icon="arrow-alt-up"
+                          marginLeft="none"
+                          size="1x"
+                      />
+                      <Title
+                          margin="xs"
+                          marginLeft="none"
+                          size={4}
+                          text="8297"
+                      />
+                      <Icon
+                          icon="arrow-alt-down"
+                          marginLeft="none"
+                          size="1x"
+                      />
+                    </FlexItem>
+                    <FlexItem
+                        fixedSize="85%"
+                        paddingX="xs"
+                        paddingY="sm"
+                    >
+                      <Flex vertical="center">
+                        <IconCircle
+                            icon="camera"
+                            size="xs"
+                            variant="blue"
+                        />
+                        <Title
+                            marginLeft="xs"
+                            size={4}
+                            text="r/Pics"
+                        />
+                        <Body
+                            color="light"
+                            marginLeft="xs"
+                            text="• Posted by u/stephenmckeon 13 hours ago"
+                        />
+                      </Flex>
                       <FlexItem>
-                        <Flex>
+                        <Flex
+                            paddingTop="xs"
+                            vertical="center"
+                        >
+                          <FlexItem>
+                            <Body text="Foggy morning." />
+                          </FlexItem>
+                          <FlexItem marginLeft="xs">
+                            <Pill
+                                text="OC"
+                                variant="success"
+                            />
+                          </FlexItem>
+                        </Flex>
+                      </FlexItem>
+                      <Flex marginTop="sm">
+                        <Image
+                            className="post_image"
+                            url="https://p-a6fbdk.t4.n0.cdn.getcloudapp.com/items/d5uPEJbY/readit_image_5.png"
+                        />
+                      </Flex>
+                      <Flex paddingTop="sm">
+                        <IconValue
+                            icon="comment-alt"
+                            text="1.4k Comments"
+                        />
+                        <IconValue
+                            icon="share"
+                            marginLeft="sm"
+                            text="Share"
+                        />
+                        <IconValue
+                            icon="folder-plus"
+                            marginLeft="sm"
+                            text="Save"
+                        />
+                        <IconValue
+                            icon="ellipsis-h"
+                            marginLeft="sm"
+                            text=""
+                        />
+                      </Flex>
+                    </FlexItem>
+                  </Flex>
+                </Card>
+
+                <Card
+                    marginTop="sm"
+                    padding="none"
+                >
+                  <Flex>
+                    <FlexItem
+                        marginLeft="sm"
+                        marginTop="sm"
+                    >
+                      <Icon
+                          icon="arrow-alt-up"
+                          marginLeft="none"
+                          size="1x"
+                      />
+                      <Title
+                          margin="xs"
+                          marginLeft="none"
+                          size={4}
+                          text="467"
+                      />
+                      <Icon
+                          icon="arrow-alt-down"
+                          marginLeft="none"
+                          size="1x"
+                      />
+                    </FlexItem>
+                    <FlexItem
+                        paddingX="xs"
+                        paddingY="sm"
+                    >
+                      <Flex vertical="center">
+                        <IconCircle
+                            icon="browser"
+                            size="xs"
+                            variant="purple"
+                        />
+                        <Title
+                            marginLeft="xs"
+                            size={4}
+                            text="r/WebDesign"
+                        />
+                        <Body
+                            color="light"
+                            marginLeft="xs"
+                            text="• Posted by u/creativebloq 1 week ago"
+                        />
+                      </Flex>
+                      <Title
+                          paddingRight="md"
+                          paddingTop="xs"
+                          size="4"
+                          text="Use white space!"
+                      />
+                      <Body
+                          paddingTop="sm"
+                          text="It seems to be the hardest concept for developers to grasp: the biggest benefit to having the proper amount of white space is giving the user a break. Breaks are important for processing information, especially when there's a fair amount to process. It's why we have paragraphs and sentences instead of just a single, long block of running text."
+                      />
+                      <Body
+                          paddingTop="sm"
+                          text="The key is to ensure that white space has a relationship with other objects on the page, including the other space. If you have a single column of white space, make sure there's another single column of white space around to balance it."
+                      />
+                      <Body
+                          color="light"
+                          paddingTop="sm"
+                          text="For vertical space, just use fractions of the body font size. I tend to keep things simple and use a scale of .25, but there are several other scales that you can use."
+                      />
+                      <Body
+                          color="light"
+                          paddingTop="sm"
+                          text="For example, if the body font size is 16px(1em): 4, 8, 12, 16, 20, 24, 28, 32, 40, 48. This allows for choosing font sizes by simply moving up and down the scale as I want larger or smaller type..."
+                      />
+                      <Flex paddingTop="sm">
+                        <IconValue
+                            icon="comment-alt"
+                            text="1.4k Comments"
+                        />
+                        <IconValue
+                            icon="share"
+                            marginLeft="sm"
+                            text="Share"
+                        />
+                        <IconValue
+                            icon="folder-plus"
+                            marginLeft="sm"
+                            text="Save"
+                        />
+                        <IconValue
+                            icon="ellipsis-h"
+                            marginLeft="sm"
+                            text=""
+                        />
+                      </Flex>
+                    </FlexItem>
+                  </Flex>
+                </Card>
+              </Layout.Body>
+            </Layout>
+          </div>
+
+          <div className="desktop-only">
+            <Layout
+                position="right"
+                size="xl"
+            >
+              <Layout.Body>
+                <Card padding="none">
+                  <Flex spacing="between">
+                    <FlexItem>
+                      <Flex>
+                        <Nav orientation="horizontal">
+                          <NavItem
+                              active
+                              iconLeft="rocket"
+                              link="#"
+                              text="Best"
+                          />
+                          <NavItem
+                              iconLeft="fire"
+                              link="#"
+                              text="Hot"
+                          />
+                          <NavItem
+                              iconLeft="star"
+                              link="#"
+                              text="New"
+                          />
+                          <NavItem
+                              iconLeft="chart-line"
+                              link="#"
+                              text="Top"
+                          />
+                        </Nav>
+                        <Button
+                            marginTop="xs"
+                            variant="link"
+                        >
+                          <Icon icon="ellipsis-h" />
+                        </Button>
+                      </Flex>
+                    </FlexItem>
+                    <FlexItem>
+                      <Button
+                          marginTop="xs"
+                          paddingRight="md"
+                          variant="link"
+                      >
+                        <Icon icon="th-large" />
+                        <Icon icon="caret-down" />
+                      </Button>
+                    </FlexItem>
+                  </Flex>
+                </Card>
+
+                <Card
+                    marginTop="sm"
+                    padding="none"
+                >
+                  <Flex>
+
+                    <FlexItem
+                        paddingX="xs"
+                        paddingY="sm"
+                    >
+                      <Flex vertical="center">
+                        <IconCircle
+                            icon="lightbulb-on"
+                            size="xs"
+                            variant="yellow"
+                        />
+                        <Title
+                            marginLeft="xs"
+                            size={4}
+                            text="r/LifeProTips"
+                        />
+                        <Body
+                            color="light"
+                            marginLeft="xs"
+                            text="• Posted by u/xhuljanomuca 1 month ago"
+                        />
+                      </Flex>
+                      <Body
+                          paddingRight="md"
+                          paddingTop="xs"
+                          text="LPT: If you ever need a program you want for free (for example a video/photo editor) don’t search for “free,” search for “open source” to avoid limited trial versions, adverts and malware"
+                      />
+                      <Pill
+                          marginTop="sm"
+                          text="Computers"
+                          variant="primary"
+                      />
+                      <Flex paddingTop="sm">
+                        <IconValue
+                            icon="comment-alt"
+                            text="1.4k Comments"
+                        />
+                        <IconValue
+                            icon="share"
+                            marginLeft="sm"
+                            text="Share"
+                        />
+                        <IconValue
+                            icon="folder-plus"
+                            marginLeft="sm"
+                            text="Save"
+                        />
+                        <IconValue
+                            icon="ellipsis-h"
+                            marginLeft="sm"
+                            text=""
+                        />
+                      </Flex>
+                    </FlexItem>
+                  </Flex>
+                </Card>
+
+                <Card
+                    marginTop="sm"
+                    padding="none"
+                >
+                  <Flex>
+                    <FlexItem
+                        marginLeft="sm"
+                        marginTop="sm"
+                    >
+                      <Icon
+                          icon="arrow-alt-up"
+                          marginLeft="none"
+                          size="1x"
+                      />
+                      <Title
+                          margin="xs"
+                          marginLeft="none"
+                          size={4}
+                          text="8297"
+                      />
+                      <Icon
+                          icon="arrow-alt-down"
+                          marginLeft="none"
+                          size="1x"
+                      />
+                    </FlexItem>
+                    <FlexItem
+                        fixedSize="85%"
+                        paddingX="xs"
+                        paddingY="sm"
+                    >
+                      <Flex vertical="center">
+                        <IconCircle
+                            icon="camera"
+                            size="xs"
+                            variant="blue"
+                        />
+                        <Title
+                            marginLeft="xs"
+                            size={4}
+                            text="r/Pics"
+                        />
+                        <Body
+                            color="light"
+                            marginLeft="xs"
+                            text="• Posted by u/stephenmckeon 13 hours ago"
+                        />
+                      </Flex>
+                      <FlexItem>
+                        <Flex
+                            paddingTop="xs"
+                            vertical="center"
+                        >
+                          <FlexItem>
+                            <Body text="Foggy morning." />
+                          </FlexItem>
+                          <FlexItem marginLeft="xs">
+                            <Pill
+                                text="OC"
+                                variant="success"
+                            />
+                          </FlexItem>
+                        </Flex>
+                      </FlexItem>
+                      <Flex marginTop="sm">
+                        <Image
+                            className="post_image"
+                            url="https://p-a6fbdk.t4.n0.cdn.getcloudapp.com/items/d5uPEJbY/readit_image_5.png"
+                        />
+                      </Flex>
+                      <Flex paddingTop="sm">
+                        <IconValue
+                            icon="comment-alt"
+                            text="1.4k Comments"
+                        />
+                        <IconValue
+                            icon="share"
+                            marginLeft="sm"
+                            text="Share"
+                        />
+                        <IconValue
+                            icon="folder-plus"
+                            marginLeft="sm"
+                            text="Save"
+                        />
+                        <IconValue
+                            icon="ellipsis-h"
+                            marginLeft="sm"
+                            text=""
+                        />
+                      </Flex>
+                    </FlexItem>
+                  </Flex>
+                </Card>
+
+                <Card
+                    marginTop="sm"
+                    padding="none"
+                >
+                  <Flex>
+                    <FlexItem
+                        marginLeft="sm"
+                        marginTop="sm"
+                    >
+                      <Icon
+                          icon="arrow-alt-up"
+                          marginLeft="none"
+                          size="1x"
+                      />
+                      <Title
+                          margin="xs"
+                          marginLeft="none"
+                          size={4}
+                          text="467"
+                      />
+                      <Icon
+                          icon="arrow-alt-down"
+                          marginLeft="none"
+                          size="1x"
+                      />
+                    </FlexItem>
+                    <FlexItem
+                        paddingX="xs"
+                        paddingY="sm"
+                    >
+                      <Flex vertical="center">
+                        <IconCircle
+                            icon="browser"
+                            size="xs"
+                            variant="purple"
+                        />
+                        <Title
+                            marginLeft="xs"
+                            size={4}
+                            text="r/WebDesign"
+                        />
+                        <Body
+                            color="light"
+                            marginLeft="xs"
+                            text="• Posted by u/creativebloq 1 week ago"
+                        />
+                      </Flex>
+                      <Title
+                          paddingRight="md"
+                          paddingTop="xs"
+                          size="4"
+                          text="Use white space!"
+                      />
+                      <Body
+                          paddingTop="sm"
+                          text="It seems to be the hardest concept for developers to grasp: the biggest benefit to having the proper amount of white space is giving the user a break. Breaks are important for processing information, especially when there's a fair amount to process. It's why we have paragraphs and sentences instead of just a single, long block of running text."
+                      />
+                      <Body
+                          paddingTop="sm"
+                          text="The key is to ensure that white space has a relationship with other objects on the page, including the other space. If you have a single column of white space, make sure there's another single column of white space around to balance it."
+                      />
+                      <Body
+                          color="light"
+                          paddingTop="sm"
+                          text="For vertical space, just use fractions of the body font size. I tend to keep things simple and use a scale of .25, but there are several other scales that you can use."
+                      />
+                      <Body
+                          color="light"
+                          paddingTop="sm"
+                          text="For example, if the body font size is 16px(1em): 4, 8, 12, 16, 20, 24, 28, 32, 40, 48. This allows for choosing font sizes by simply moving up and down the scale as I want larger or smaller type..."
+                      />
+                      <Flex paddingTop="sm">
+                        <IconValue
+                            icon="comment-alt"
+                            text="1.4k Comments"
+                        />
+                        <IconValue
+                            icon="share"
+                            marginLeft="sm"
+                            text="Share"
+                        />
+                        <IconValue
+                            icon="folder-plus"
+                            marginLeft="sm"
+                            text="Save"
+                        />
+                        <IconValue
+                            icon="ellipsis-h"
+                            marginLeft="sm"
+                            text=""
+                        />
+                      </Flex>
+                    </FlexItem>
+                  </Flex>
+                </Card>
+              </Layout.Body>
+
+              <Background backgroundColor="light">
+                <Layout.Side marginLeft="md">
+                  <Card
+                      header
+                      padding="none"
+                      shadow="deeper"
+                  >
+                    <Card.Header
+                        headerColor="category_1"
+                        padding="xs"
+                    >
+                      <Flex vertical="center">
+                        <Body
+                            dark
+                            padding="xs"
+                            paddingRight="sm"
+                        >
+                          <Icon
+                              icon="tree-large"
+                              size="4x"
+                          />
+                        </Body>
+                        <Body
+                            dark
+                            margin="xs"
+                            marginRight="xs"
+                            text="Outdoor communities — they're really out there"
+                        />
+                      </Flex>
+                    </Card.Header>
+
+                    {communities.map((community) => (
+                      <>
+                        <Flex
+                            padding="xs"
+                            paddingLeft="sm"
+                            vertical="center"
+                        >
                           <FlexItem>
                             <IconCircle
                                 icon={community.icon}
@@ -750,26 +884,139 @@ const CrowdsourcedPosts = () => {
                                 size={4}
                                 text={community.subReadit}
                             />
-                            <Body
-                                color="light"
-                                marginLeft="xs"
-                                text={community.members}
-                            />
                           </FlexItem>
                         </Flex>
+                        <If condition={community !== communities[communities.length - 1]}>
+                          <SectionSeparator />
+                        </If>
+                      </>
+                    ))}
+
+                    <Layout.Body paddingX="sm">
+                      <Button
+                          fullWidth
+                          marginTop="xs"
+                          text="VIEW ALL"
+                      />
+                      <Flex
+                          paddingY="sm"
+                          spacing="between"
+                      >
+                        <Badge
+                            padding="xs"
+                            text="Top"
+                            variant="neutral"
+                        />
+                        <Badge
+                            padding="xs"
+                            text="Near You"
+                            variant="neutral"
+                        />
+                        <Badge
+                            padding="xs"
+                            text="Aww"
+                            variant="neutral"
+                        />
+                        <Badge
+                            padding="xs"
+                            text="Fitness"
+                            variant="neutral"
+                        />
+                      </Flex>
+                    </Layout.Body>
+                  </Card>
+
+                  <Card
+                      marginTop="sm"
+                      padding="xs"
+                      shadow="deeper"
+                  >
+                    <Flex
+                        margin="xs"
+                        spacing="between"
+                        vertical="center"
+                    >
+                      <FlexItem>
+                        <Icon
+                            icon="shield-alt"
+                            marginRight="sm"
+                            size="2x"
+                        />
+                      </FlexItem>
+                      <FlexItem>
+                        <Title
+                            size={4}
+                            text="Readit Premium"
+                        />
+                        <Caption
+                            size="xs"
+                            text="The best Readit experience, with monthly Coins"
+                        />
                       </FlexItem>
                       <FlexItem>
                         <Button
-                            text="Join"
+                            paddingX="sm"
+                            text="TRY NOW"
                             variant="secondary"
                         />
                       </FlexItem>
                     </Flex>
-                  ))}
-                </Card>
-              </Layout.Side>
-            </Background>
-          </Layout>
+                  </Card>
+
+                  <Card
+                      marginTop="sm"
+                      padding="sm"
+                      shadow="deeper"
+                  >
+                    <Title
+                        padding="xs"
+                        size={4}
+                        text="Trending Communities"
+                    />
+
+                    {trendingCommunities.map((community) => (
+                      <Flex
+                          key={community.subReadit}
+                          marginY="xs"
+                          spacing="between"
+                          vertical="center"
+                      >
+                        <FlexItem>
+                          <Flex>
+                            <FlexItem>
+                              <IconCircle
+                                  icon={community.icon}
+                                  size="sm"
+                                  variant={community.variant}
+                              />
+                            </FlexItem>
+                            <FlexItem>
+                              <Title
+                                  marginLeft="xs"
+                                  size={4}
+                                  text={community.subReadit}
+                              />
+                              <Body
+                                  color="light"
+                                  marginLeft="xs"
+                                  text={community.members}
+                              />
+                            </FlexItem>
+                          </Flex>
+                        </FlexItem>
+                        <FlexItem>
+                          <Button
+                              text="Join"
+                              variant="secondary"
+                          />
+                        </FlexItem>
+                      </Flex>
+                    ))}
+                  </Card>
+                </Layout.Side>
+              </Background>
+            </Layout>
+          </div>
         </FlexItem>
       </Flex>
     </>
