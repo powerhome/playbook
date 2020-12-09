@@ -1,8 +1,11 @@
 import React, { useEffect } from 'react'
 import { Typeahead } from '../'
 
-const KitSearch = (props) => {
-  const kits = props.kits
+type SearchProps = {
+  kits: Array,
+}
+const KitSearch = (props: SearchProps) => {
+  const { kits } = props
 
   const handleChange = (selection) => {
     window.location = selection.value

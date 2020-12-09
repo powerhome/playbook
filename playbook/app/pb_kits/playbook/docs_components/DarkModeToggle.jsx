@@ -2,8 +2,11 @@ import React from 'react'
 import { useEffect, useState } from 'react'
 import { Flex, FlexItem, Icon, Toggle } from '../'
 
-const DarkModeToggle = (props) => {
-  const initMode = props.initMode
+type ToggleProps = {
+  initMode: String,
+}
+const DarkModeToggle = (props: ToggleProps) => {
+  const { initMode } = props
   const [darkMode, toggleDarkMode] = useState(false)
   const [loading, toggleLoading] = useState(false)
 
