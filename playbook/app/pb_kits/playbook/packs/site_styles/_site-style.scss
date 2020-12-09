@@ -36,9 +36,6 @@ body {
         margin-bottom: 0 !important;
       }
     }
-    .nav-links-mg-override {
-      margin: 0 !important;
-    }
     .pb-version-tag {
       text-align: right;
       position: relative;
@@ -49,9 +46,6 @@ body {
       margin-left: $space_xs;
       margin-right: $space_xs;
     }
-    // .toggle-icon {
-    //   color: $text_lt_light;
-    // }
     // Mobile Overrides
     @include break_at($nav_breakpoint) {
       .full-size-nav, .github-nav-icon {

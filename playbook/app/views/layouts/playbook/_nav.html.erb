@@ -27,7 +27,7 @@
 
         <%= pb_rails("flex/flex_item", props: {}) do %>
           <div class="full-size-nav">
-            <%= pb_rails("nav", props: { classname: "nav-links-mg-override", margin_top: "sm", orientation: "horizontal", variant: "subtle"}) do %>
+            <%= pb_rails("nav", props: { margin_right: "sm", orientation: "horizontal", variant: "subtle"}) do %>
               <%= pb_rails("nav/item", props: { active: current_page?('/visual_guidelines'), text: "Design", link: "/visual_guidelines" }) %>
               <%= pb_rails("nav/item", props: { active: action_name.include?('kit'), text: "Components", link: "/kits" }) %>
               <%= pb_rails("nav/item", props: { active: current_page?('/samples'), text: "Samples", link: "/samples" }) %>

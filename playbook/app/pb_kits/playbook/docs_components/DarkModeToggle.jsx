@@ -18,6 +18,10 @@ const DarkModeToggle = (props: ToggleProps) => {
     window.location = !darkMode ? '/enable_dark_mode' : '/disable_dark_mode'
   }
 
+  const iconClickHandler = () => {
+    toggleHook()
+  }
+
   return (
     <Flex
         spacing="between"
@@ -34,7 +38,6 @@ const DarkModeToggle = (props: ToggleProps) => {
                 dark
                 fixedWidth
                 icon="spinner"
-                marginLeft="sm"
                 marginRight="xs"
                 pulse
             />
@@ -42,6 +45,10 @@ const DarkModeToggle = (props: ToggleProps) => {
         </FlexItem>
       </If>
       <If condition={!loading}>
+        <a 
+            onClick={iconClickHandler}
+            style={{ cursor: "pointer" }}
+        >
         <FlexItem>
           <Body
               color={darkMode ? "" : "lighter"}
@@ -52,11 +59,11 @@ const DarkModeToggle = (props: ToggleProps) => {
                 dark
                 fixedWidth
                 icon="moon"
-                marginLeft="sm"
                 marginRight="xs"
             />
           </Body>
         </FlexItem>
+        </a>
       </If>
       <FlexItem>
         <Toggle>
