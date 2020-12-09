@@ -1,6 +1,6 @@
 import React from 'react'
 import { useState, useEffect } from 'react'
-import { Icon, Toggle, Caption, LoadingInline } from '../'
+import { Flex, FlexItem, Icon, Toggle } from '../'
 
 const DarkModeToggle = (props) => {
   const { initMode } = props
@@ -18,17 +18,45 @@ const DarkModeToggle = (props) => {
   }, [])
 
   return (
-    <div style={{cursor: "pointer", maxWidth: "170px"}}>
-      <Toggle
-        checked={true}
-      >
-        <input
-          checked={darkMode}
-          onChange={toggleHook}
-          type="checkbox"
-        />
-      </Toggle>
-    </div>
+    <Flex
+        spacing="between"
+        vertical="center"
+    >
+      <If condition={loading}>
+        <FlexItem>
+          <Icon
+              className="toggle-icon"
+              fixedWidth
+              icon="spinner"
+              marginRight="xs"
+              marginLeft="sm"
+              pulse
+          />
+        </FlexItem>
+      </If>
+      <If condition={!loading}>
+        <FlexItem>
+          <Icon
+              className="toggle-icon"
+              fixedWidth
+              icon="moon"
+              marginRight="xs"
+              marginLeft="sm"
+          />
+        </FlexItem>
+      </If>
+      <FlexItem>
+        <Toggle
+            checked={true}
+        >
+          <input
+              checked={darkMode}
+              onChange={toggleHook}
+              type="checkbox"
+          />
+        </Toggle>
+      </FlexItem>
+    </Flex>
   )
 }
 

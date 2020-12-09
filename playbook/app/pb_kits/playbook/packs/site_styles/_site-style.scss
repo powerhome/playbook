@@ -57,6 +57,10 @@ body {
     .separator-explicit-height {
       height: $space_xl + 5;
     }
+    .toggle-icon {
+      color: $text_lt_light;
+      // color: $border_light;
+    }
   }
 
   &--content {
