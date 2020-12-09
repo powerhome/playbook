@@ -1,3 +1,5 @@
+/* @flow */
+
 import React from 'react'
 import { useEffect, useState } from 'react'
 import { Flex, FlexItem, Icon, Toggle } from '../'

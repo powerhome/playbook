@@ -1,3 +1,5 @@
+/* @flow */
+
 import React, { useEffect } from 'react'
 import { Typeahead } from '../'
 
