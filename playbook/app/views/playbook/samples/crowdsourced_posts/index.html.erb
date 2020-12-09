@@ -303,14 +303,14 @@
           <%# Start readit premium card %>
           <%= pb_rails("card", props: { margin_top: "sm", padding: "xs", shadow: "deeper" }) do %>
             <%= pb_rails("flex", props: { margin: "xs", spacing: "between", vertical: "center" }) do %>
-              <%= pb_rails("flex/flex_item", props: {  }) do %>
+              <%= pb_rails("flex/flex_item") do %>
                 <%= pb_rails("icon", props: { icon: "shield-alt", margin_right: "sm", size: "2x" }) %>
               <% end %>
-              <%= pb_rails("flex/flex_item", props: {  }) do %>
+              <%= pb_rails("flex/flex_item") do %>
                 <%= pb_rails("title", props: { size: 4, text: "Readit Premium" }) %>
                 <%= pb_rails("caption", props: { size: "xs", text: "The best Readit experience, with monthly Coins" }) %>
               <% end %>
-              <%= pb_rails("flex/flex_item", props: {  }) do %>
+              <%= pb_rails("flex/flex_item") do %>
                 <%= pb_rails("button", props: { padding_x: "sm", text: "TRY NOW", variant: "secondary" }) %>
               <% end %>
             <% end %>
@@ -330,14 +330,14 @@
             ] %>
 
             <% trending_communities.each do |community| %>
-              <%= pb_rails("flex", props: { margin_y: "sm", spacing: "between", vertical: "center" }) do %>
+              <%= pb_rails("flex", props: { padding_y: "xs", spacing: "between", vertical: "center" }) do %>
                 <%= pb_rails("flex/flex_item") do %>
                   <%= pb_rails("flex") do %>
                     <%= pb_rails("flex/flex_item") do %>
                       <%= pb_rails("icon_circle", props: { icon: community[:icon], size: "sm", variant: community[:variant] }) %>
                     <% end %>
                     <%= pb_rails("flex/flex_item") do %>
-                      <%= pb_rails("title", props: { margin_left: "xs", size: 4, tag: "h4", text: community[:sub_readit] }) %>
+                      <%= pb_rails("title", props: { margin_left: "xs", size: 4, text: community[:sub_readit] }) %>
                       <%= pb_rails("body", props: { color: "light", margin_left: "xs", text: community[:members] }) %>
                     <% end %>
                   <% end %>

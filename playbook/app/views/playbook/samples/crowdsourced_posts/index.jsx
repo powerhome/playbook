@@ -425,7 +425,6 @@ const CrowdsourcedPosts = () => {
                 </Flex>
               </Card>
 
-              {/* post 3 */}
               <Card
                 marginTop="sm"
                 padding="none"
@@ -614,6 +613,93 @@ const CrowdsourcedPosts = () => {
                       />
                     </Flex>
                   </Layout.Body>
+                </Card>
+
+                <Card
+                    marginTop="sm"
+                    padding="xs"
+                    shadow="deeper"
+                >
+                  <Flex
+                      margin="xs"
+                      spacing="between"
+                      vertical="center"
+                  >
+                    <FlexItem>
+                      <Icon
+                          icon="shield-alt"
+                          marginRight="sm"
+                          size="2x"
+                      />
+                    </FlexItem>
+                    <FlexItem>
+                      <Title
+                          size={4}
+                          text="Readit Premium"
+                      />
+                      <Caption
+                          size="xs"
+                          text="The best Readit experience, with monthly Coins"
+                      />
+                    </FlexItem>
+                    <FlexItem>
+                      <Button
+                          paddingX="sm"
+                          text="TRY NOW"
+                          variant="secondary"
+                      />
+                    </FlexItem>
+                  </Flex>
+                </Card>
+
+                <Card
+                    marginTop="sm"
+                    padding="sm"
+                    shadow="deeper"
+                >
+                  <Title
+                      padding="xs"
+                      size={4}
+                      text="Trending Communities"
+                  />
+
+                  {trendingCommunities.map(community => (
+                    <Flex
+                        marginY="xs"
+                        spacing="between"
+                        vertical="center"
+                    >
+                      <FlexItem>
+                        <Flex>
+                          <FlexItem>
+                            <IconCircle
+                                icon={community.icon}
+                                size="sm"
+                                variant={community.variant}
+                            />
+                          </FlexItem>
+                          <FlexItem>
+                            <Title
+                                marginLeft="xs"
+                                size={4}
+                                text={community.subReadit}
+                            />
+                            <Body
+                              color="light"
+                              marginLeft="xs"
+                              text={community.members}
+                            />
+                          </FlexItem>
+                        </Flex>
+                      </FlexItem>
+                      <FlexItem>
+                        <Button
+                          text="Join"
+                          variant="secondary"
+                        />
+                      </FlexItem>
+                    </Flex>
+                  ))}
                 </Card>
               </Layout.Side>
             </Background>
