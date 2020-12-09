@@ -1,0 +1,17 @@
+@import "../../tokens/colors";
+
+.kit-show-wrapper {
+  .sample-ui-link-wrapper {
+    max-width: 275px;
+    cursor: pointer;
+    .dropdown-icon {
+      color: $primary;
+      margin-left: 3px;
+    }
+  }
+  .ui-sample-card {
+    .title-alignment {
+      align-self: center;
+    }
+  }
+}

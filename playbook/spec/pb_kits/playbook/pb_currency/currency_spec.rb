@@ -9,10 +9,12 @@ RSpec.describe Playbook::PbCurrency::Currency do
 
   it { is_expected.to define_enum_prop(:align).with_default("left").with_values("left", "center", "right") }
   it { is_expected.to define_prop(:amount).of_type(Playbook::Props::String) }
+  it { is_expected.to define_prop(:emphasized).of_type(Playbook::Props::Boolean) }
   it { is_expected.to define_prop(:label).with_default("").of_type(Playbook::Props::String) }
   it { is_expected.to define_prop(:unit).of_type(Playbook::Props::String) }
   it { is_expected.to define_enum_prop(:size).with_default("md").with_values("sm", "md", "lg") }
   it { is_expected.to define_prop(:symbol).with_default("$").of_type(Playbook::Props::String) }
+  it { is_expected.to define_enum_prop(:variant).with_default("default").with_values("default", "light", "bold") }
 
   describe "#classname" do
     it "returns namespaced class name", :aggregate_failures do

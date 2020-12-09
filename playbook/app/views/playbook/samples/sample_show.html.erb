@@ -14,7 +14,25 @@
   </div>
   <div class="sample-actions-right">
     <div class="items">
-      <%= pb_rails("circle_icon_button", props: { classname:"toggle-button", variant: "secondary", icon: "code", dark: true}) %>
+      <%= pb_rails("button", props: { variant: "primary", id: 'kits-used' }) do %>
+          Kits Used
+          <%= pb_rails("icon", props: { icon: "angle-down"}) %>
+      <% end %>
+      <%= pb_rails("popover", props: { max_width: "300px", trigger_element_id: "kits-used", tooltip_id: "kits-used-tooltip", position: 'bottom', padding: "sm" }) do %>
+        <%= pb_rails("flex", props: { spacing: "around", wrap: true }) do %>
+              <% kits_used(@sample).each do |kit| %>
+                <a href=<%="/kits/#{kit[0]}"%>>
+                  <%= pb_rails("pill", props: {
+                    text: kit[0].titleize,
+                    variant: "primary",
+                  }) %>
+                </a>
+              <% end %>
+        <% end %>
+      <% end %>
+    </div>
+    <div class="items">
+      <%= pb_rails("circle_icon_button", props: { classname:"toggle-button-js", variant: "secondary", icon: "code", dark: true}) %>
     </div>
     <div class="items">
       <%= pb_rails("circle_icon_button", props:{ classname: "expand", variant: "secondary", icon: "expand", dark: true}) %>

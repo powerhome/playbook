@@ -1,7 +1,7 @@
-document.addEventListener("DOMContentLoaded", function (event) {
+document.addEventListener("DOMContentLoaded", function () {
   document.querySelector(".compress").style.display = "none"
 
-  document.querySelector(".toggle-button").addEventListener("click", (e) => {
+  document.querySelector(".toggle-button-js").addEventListener("click", (e) => {
     e.preventDefault()
     document.querySelector(".pb--codeCopy").classList.toggle("close")
   })

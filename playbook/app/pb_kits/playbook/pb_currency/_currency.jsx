@@ -14,10 +14,12 @@ type CurrencyProps = {
   className?: string,
   dark?: boolean,
   data?: object,
+  emphasized?: boolean,
   id?: string,
   label?: string,
   size?: 'sm' | 'md' | 'lg',
   symbol?: string,
+  variant?: 'default' | 'light' | 'bold',
   unit?: string,
 }
 
@@ -33,14 +35,27 @@ const Currency = (props: CurrencyProps) => {
     aria = {},
     amount,
     data = {},
+    emphasized = true,
     id,
     unit,
     className,
     label = '',
     size = 'sm',
     symbol = '$',
+    variant = 'default',
     dark = false,
   } = props
+
+  const emphasizedClass = emphasized ? '' : '_deemphasized'
+
+  let variantClass
+  if (size === 'sm') {
+    if (variant === 'light') {
+      variantClass = '_light'
+    } else if (variant === 'bold') {
+      variantClass = '_bold'
+    }
+  }
 
   const [whole, decimal = '00'] = amount.split('.')
   const ariaProps = buildAriaProps(aria)
@@ -60,7 +75,7 @@ const Currency = (props: CurrencyProps) => {
     >
       <Caption>{label}</Caption>
 
-      <div className="pb_currency_wrapper">
+      <div className={`pb_currency_wrapper${variantClass || emphasizedClass}`}>
         <Body
             className="dollar_sign"
             color="light"
