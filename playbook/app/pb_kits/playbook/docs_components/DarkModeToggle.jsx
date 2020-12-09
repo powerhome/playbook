@@ -2,7 +2,7 @@
 
 import React from 'react'
 import { useState } from 'react'
-import { Flex, FlexItem, Icon, Toggle } from '../'
+import { Body, Flex, FlexItem, Icon, Toggle } from '../'
 
 type ToggleProps = {
   initMode: String,
@@ -25,25 +25,37 @@ const DarkModeToggle = (props: ToggleProps) => {
     >
       <If condition={loading}>
         <FlexItem>
-          <Icon
-              className="toggle-icon"
-              fixedWidth
-              icon="spinner"
-              marginLeft="sm"
-              marginRight="xs"
-              pulse
-          />
+          <Body
+              color={darkMode ? "lighter" : ""}
+              dark={!darkMode}
+            >
+            <Icon
+                className="toggle-icon"
+                dark
+                fixedWidth
+                icon="spinner"
+                marginLeft="sm"
+                marginRight="xs"
+                pulse
+            />
+          </Body>
         </FlexItem>
       </If>
       <If condition={!loading}>
         <FlexItem>
-          <Icon
-              className="toggle-icon"
-              fixedWidth
-              icon="moon"
-              marginLeft="sm"
-              marginRight="xs"
-          />
+          <Body
+              color={darkMode ? "" : "lighter"}
+              dark={darkMode}
+          >
+            <Icon
+                className="toggle-icon"
+                dark
+                fixedWidth
+                icon="moon"
+                marginLeft="sm"
+                marginRight="xs"
+            />
+          </Body>
         </FlexItem>
       </If>
       <FlexItem>

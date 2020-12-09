@@ -49,9 +49,9 @@ body {
       margin-left: $space_xs;
       margin-right: $space_xs;
     }
-    .toggle-icon {
-      color: $text_lt_light;
-    }
+    // .toggle-icon {
+    //   color: $text_lt_light;
+    // }
     // Mobile Overrides
     @include break_at($nav_breakpoint) {
       .full-size-nav, .github-nav-icon {
