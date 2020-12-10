@@ -130,6 +130,7 @@ task :new_release, [:var] => [:environment] do |_task, args|
   puts "\nCreating Gem..."
   `gem build playbook_ui.gemspec`
   puts "\nPushing to RubyGems... (not yet implemented)"
+  puts "\nUse gem push to publish manually (see new_release.rake for full command)"
   # `gem push playbook_ui-#{new_version}.gem`
 
   # NPM
@@ -148,4 +149,5 @@ task :new_release, [:var] => [:environment] do |_task, args|
     puts "\nNPM Package Published! (not yet implemented)"
     # `npm publish playbook-ui-#{new_version}.tgz`
   end
+  puts "\nUse npm publish to push manually (see new_release.rake for full command)"
 end
