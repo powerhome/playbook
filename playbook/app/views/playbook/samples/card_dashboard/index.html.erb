@@ -96,53 +96,30 @@
     <% end %>
   <% end %>
 
-  <%= pb_rails("flex/flex_item", props: { margin: "md" }) do %>
+  <%# Grid %>
+  <%= pb_rails("flex/flex_item", props: { margin: "md", fixed_size: "50%" }) do %>
     <% pb_rails("card", props: { margin: "md", border_none: true, shadow: "deeper" }) do %>
+      <% half_ticket_data = ticket_data.length / 2 %>
 
-
-      <%= pb_rails("layout", props: { transparent: true, size: "xs", collapse: "xs" }) do %>
-        <%= pb_rails("layout/sidebar", props: { margin: "none", padding: "none"}){  } %>
-        <%= pb_rails("layout/body") do %>
-          <%= pb_rails("flex", props: { wrap: true }) do%>
-            <% ticket_data.each_with_index do |ticket, i|%>
-              <% ticket[:margin_x] = "md" %>
-              <%= pb_rails("flex/flex_item", props: { padding: "md", margin: "md", fixed_size: "25%" }) do %>
+          <%= pb_rails("flex", props: { horizontal: "center", spacing: "evenly", wrap: true }) do%>
+            <% ticket_data[0..(half_ticket_data - 1)].each do |ticket|%>
+              <%= pb_rails("flex/flex_item", props: {  margin: "xl", fixed_size: "250px" }) do %>
                 <%= pb_rails("icon_stat_value", props: ticket ) %>
               <% end %>
             <% end %>
           <% end %>
-        <% end %>
-      <% end %>
+
+          <%= pb_rails("flex", props: { horizontal: "center", spacing: "evenly", wrap: true  }) do%>
+            <% ticket_data[half_ticket_data..-1].each do |ticket|%>
+              <%= pb_rails("flex/flex_item", props: {  margin: "xl", fixed_size: "250px" }) do %>
+                <%= pb_rails("icon_stat_value", props: ticket ) %>
+              <% end %>
+            <% end %>
+          <% end %>
 
 
     <% end %>
   <% end %>
-
-  <%# Four Grid %>
-  <%= pb_rails("flex/flex_item", props: { margin: "md" }) do %>
-    <% pb_rails("card", props: { margin: "md", border_none: true, shadow: "deeper" }) do %>
-      <%= pb_rails("card/card_body") do %>
-        <%= pb_rails("flex", props: { orientation: "row" }) do%>
-          <% ticket_data[0..1].each_with_index do |ticket, i|%>
-            <%= pb_rails("flex/flex_item", props: { fixed_size: "250px", margin: "xl" }) do %>
-              <%= pb_rails("icon_stat_value", props: ticket ) %>
-            <% end %>
-          <% end %>
-        <% end %>
-      <% end %>
-      <%= pb_rails("section_separator") %>
-      <%= pb_rails("card/card_body") do %>
-        <%= pb_rails("flex", props: { orientation: "row" }) do%>
-          <% ticket_data[2..3].each do |ticket|%>
-            <%= pb_rails("flex/flex_item", props: { fixed_size: "250px", margin: "xl" }) do %>
-              <%= pb_rails("icon_stat_value", props: ticket ) %>
-            <% end %>
-          <% end %>
-        <% end %>
-      <% end %>
-    <% end %>
-  <% end %>
-
 
   <%# Gauge With Legend %>
   <%= pb_rails("flex/flex_item", props: { margin: "md" }) do %>

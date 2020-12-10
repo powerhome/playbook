@@ -151,7 +151,11 @@ const FulfillmentChart = ({ chartData, title }) => (
 );
 
 const GridRowFill = ({ data }) => <Card.Body>
-  <Flex orientation='row'>
+  <Flex
+    horizontal="center"
+    spacing="evenly"
+    wrap
+  >
     {
       data.map( (line, i) =>
         <FlexItem
@@ -166,7 +170,7 @@ const GridRowFill = ({ data }) => <Card.Body>
   </Flex>
 </Card.Body>
 
-const FourGrid = ({ gridData }) =>
+const IconGrid = ({ gridData }) =>
   <Card
     margin='md'
     shadow='deeper'
@@ -387,7 +391,7 @@ const CardDashboard = () => {
           <FulfillmentChart {...pipelineData}/>
         </FlexItem>
         <FlexItem margin='md' padding='none'>
-          <FourGrid {...ticketData}/>
+          <IconGrid {...ticketData}/>
         </FlexItem>
         <FlexItem margin='md'>
           <GaugeLegend {...totalRevenue}/>
