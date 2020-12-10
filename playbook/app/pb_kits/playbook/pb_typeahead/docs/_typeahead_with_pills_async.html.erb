@@ -1,4 +1,13 @@
-<%= pb_rails("typeahead", props: { async: true, load_options: 'asyncPillsPromiseOptions', label: "Github Users", name: :foo, pills: true, placeholder: "type the name of a Github user" }) %>
+<%= pb_rails("typeahead", props: {
+  async: true,
+  get_option_label: 'getOptionLabel',
+  get_option_value: 'getOptionValue',
+  load_options: 'asyncPillsPromiseOptions',
+  label: "Github Users",
+  name: :foo,
+  pills: true,
+  placeholder: "type the name of a Github user"
+}) %>
 
 <!-- This section is an example of how to provide load_options prop for using dynamic options -->
 <%= javascript_tag defer: "defer" do %>
@@ -7,8 +16,8 @@
   const filterResults = function(results) {
     return results.items.map(function(result) {
       return {
-        label: result.login,
-        value: result.id,
+        name: result.login,
+        id: result.id,
       }
     })
   }
@@ -26,5 +35,12 @@
         resolve([])
       }
     })
+  }
+
+  window.getOptionLabel = function(option) {
+    return option.name;
+  }
+  window.getOptionValue = function(option) {
+    return option.id;
   }
 <% end %>
