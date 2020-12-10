@@ -25,6 +25,10 @@ module Playbook
       end
     end
 
+    def delete_dark_mode_cookie
+      cookies.delete :dark_mode
+    end
+
     def get_samples(kit)
       sample_yaml = YAML.load_file("#{Playbook::Engine.root}/app/pb_kits/playbook/data/samples.yml")
       all_samples = []
@@ -165,6 +169,32 @@ module Playbook
 
     def sub_category_active(kit, link)
       (!kit.nil? && @kit == link)
+    end
+
+    def format_search_hash(kit)
+      label_value_hash = {
+        label: kit.to_s.titleize,
+        value: @type == "react" || @type.nil? ? "/kits/#{kit}/react" : "/kits/#{kit}",
+      }
+      label_value_hash
+    end
+
+    def search_list
+      all_kits = []
+      formatted_kits = []
+      MENU["kits"].each do |kit|
+        if kit.is_a? Hash
+          kit.values[0].each do |sub_kit|
+            all_kits.push(sub_kit)
+          end
+        else
+          all_kits.push(kit)
+        end
+      end
+      all_kits.sort!.each do |sorted_kit|
+        formatted_kits.push(format_search_hash(sorted_kit))
+      end
+      formatted_kits
     end
 
   private

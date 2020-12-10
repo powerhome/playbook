@@ -14,7 +14,7 @@ body {
 .pb--page {
   &--topNav {
     flex: 0 0;
-    padding: 14px 30px 0 30px;
+    padding: $space_sm $space_md $space_xs $space_md;
     background: $white;
     h1 {
       display: flex;
@@ -26,20 +26,43 @@ body {
     &.dark{
     background: tint(#0a0527, 10);
     }
-    .mobile-popover-nav {
-      display: none;
+    .kit-search {
+      width: 33vw;
+      max-width: 300px;
+      [class*=_label] {
+        margin-bottom: 0 !important;
+      }
+      .text_input_wrapper {
+        margin-bottom: 0 !important;
+      }
     }
+    .pb-version-tag {
+      text-align: right;
+      position: relative;
+      bottom: $space_md - 4;
+    }
+    .separator-explicit-height {
+      height: $space_xl + 5;
+      margin-left: $space_xs;
+      margin-right: $space_xs;
+    }
+    // Mobile Overrides
     @include break_at($nav_breakpoint) {
-      .full-size-nav {
+      .full-size-nav, .github-nav-icon {
         display: none;
       }
-      padding: $space_md - 4 $space_lg - 2;
-      .margin-toggle {
-        margin-bottom: 0 !important;
-        margin-top: $space_xs - 3;
+      .toggle-wrapper {
+        margin-right: 65px;
       }
-      .mobile-popover-nav {
-        display: block;
+    }
+    @include break_at(breakpoint("sm")) {
+      .kit-search, .separator-explicit-height {
+        display: none;
+      }
+    }
+    @include break_at(375px) {
+      .toggle-wrapper {
+        display: none;
       }
     }
   }
@@ -64,6 +87,9 @@ body {
         height: auto;
       }
     }
+  }
+  &--hamburger {
+    margin-top: 3px;
   }
   &--hamburger, &--checkbox {
     position: absolute;
