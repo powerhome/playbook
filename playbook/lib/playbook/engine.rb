@@ -2,7 +2,6 @@
 
 require "sassc-rails"
 require "slim-rails"
-require "webpacker/railtie"
 
 module Playbook
   class Engine < ::Rails::Engine
