@@ -10,6 +10,7 @@ module Playbook
       prop :change, type: Playbook::Props::Enum,
                     values: %w[neutral increase decrease],
                     default: "neutral"
+      prop :icon, type: Playbook::Props::String
       prop :value, type: Playbook::Props::Numeric
 
       def status
@@ -23,14 +24,18 @@ module Playbook
         end
       end
 
-      def icon
-        case change
-        when "increase"
-          "arrow-up"
-        when "decrease"
-          "arrow-down"
+      def returned_icon
+        if icon
+          icon
         else
-          false
+          case change
+          when "increase"
+            "arrow-up"
+          when "decrease"
+            "arrow-down"
+          else
+            false
+          end
         end
       end
 
