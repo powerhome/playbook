@@ -69,9 +69,11 @@
 
 <div class="cards-body">
   <%= pb_rails("section_separator") %>
+
   <%= pb_rails("background", props: { background_color: "white", padding: "sm" }) do %>
    <div class="main-card-desktop">
     <%= pb_rails("card", props: { classname:"card_body_marg", padding:"none", margin:"xl" })  do %>
+
       <%= pb_rails("background", props: { background_color: "light"}) do %>
         <%= pb_rails("flex", props: { spacing:"between", wrap: true }) do %>
             <%= pb_rails("nav", props: { orientation: "horizontal"}) do %>
@@ -98,7 +100,9 @@
           </div>
         <% end %>
       <% end %>
+
       <%= pb_rails("section_separator") %>
+
       <div class="p_sm">
         <%= pb_rails("flex", props: {orientation: "column", horizontal: "stretch"}) do %>
           <%= pb_rails("flex", props: {classname: "flex-container", spacing: "between"}) do %>
@@ -174,10 +178,11 @@
             <% end %>
           <% end %>
         <% end %>
-        </div>
+      </div>
 
-        <%= pb_rails("section_separator") %>
-        <div class="p_sm">
+      <%= pb_rails("section_separator") %>
+
+      <div class="p_sm">
         <%= pb_rails("flex", props: {orientation: "column", horizontal: "stretch"}) do %>
           <%= pb_rails("flex", props: {classname: "flex-container", spacing: "between"}) do %>
             <%= pb_rails("flex/flex_item") do %>
@@ -253,9 +258,10 @@
           <% end %>
         <% end %>
       </div>
+
       <%= pb_rails("section_separator") %>
 
-        <div class="p_sm">
+      <div class="p_sm">
         <%= pb_rails("flex", props: {orientation: "column", horizontal: "stretch"}) do %>
           <%= pb_rails("flex", props: {classname: "flex-container", spacing: "between"}) do %>
             <%= pb_rails("flex/flex_item") do %>
@@ -330,11 +336,11 @@
             <% end %>
           <% end %>
         <% end %>
-        </div>
+      </div>
 
       <%= pb_rails("section_separator") %>
 
-        <div class="p_sm">
+      <div class="p_sm">
         <%= pb_rails("flex", props: {orientation: "column", horizontal: "stretch"}) do %>
           <%= pb_rails("flex", props: {classname: "flex-container", spacing: "between"}) do %>
             <%= pb_rails("flex/flex_item") do %>
@@ -411,11 +417,5 @@
         <% end %>
         </div>
       <% end %>
-      </div>
-   </div>
   <% end %>
 </div>
-
-
-
-
