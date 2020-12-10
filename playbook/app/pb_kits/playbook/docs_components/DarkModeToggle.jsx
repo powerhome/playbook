@@ -30,9 +30,9 @@ const DarkModeToggle = (props: ToggleProps) => {
       <If condition={loading}>
         <FlexItem>
           <Body
-              color={darkMode ? "lighter" : ""}
+              color={darkMode ? 'lighter' : ''}
               dark={!darkMode}
-            >
+          >
             <Icon
                 className="toggle-icon"
                 dark
@@ -45,24 +45,24 @@ const DarkModeToggle = (props: ToggleProps) => {
         </FlexItem>
       </If>
       <If condition={!loading}>
-        <a 
+        <a
             onClick={iconClickHandler}
-            style={{ cursor: "pointer" }}
+            style={{ cursor: 'pointer' }}
         >
-        <FlexItem>
-          <Body
-              color={darkMode ? "" : "lighter"}
-              dark={darkMode}
-          >
-            <Icon
-                className="toggle-icon"
-                dark
-                fixedWidth
-                icon="moon"
-                marginRight="xs"
-            />
-          </Body>
-        </FlexItem>
+          <FlexItem>
+            <Body
+                color={darkMode ? '' : 'lighter'}
+                dark={darkMode}
+            >
+              <Icon
+                  className="toggle-icon"
+                  dark
+                  fixedWidth
+                  icon="moon"
+                  marginRight="xs"
+              />
+            </Body>
+          </FlexItem>
         </a>
       </If>
       <FlexItem>
