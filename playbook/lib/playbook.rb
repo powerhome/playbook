@@ -2,6 +2,7 @@
 
 require "sassc-rails"
 require "webpacker"
+require "playbook/props"
 require "playbook/engine"
 
 module Playbook
