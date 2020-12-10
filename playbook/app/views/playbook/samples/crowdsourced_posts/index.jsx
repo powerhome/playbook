@@ -17,7 +17,7 @@ import {
   Pill,
   SectionSeparator,
   TextInput,
-  Title
+  Title,
 } from '../../../../pb_kits/playbook'
 
 const trendingStories = [
