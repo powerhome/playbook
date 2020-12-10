@@ -93,6 +93,7 @@ const CrowdsourcedPosts = () => {
 
   return (
     <>
+      {/* Start header bar */}
       <Background
           backgroundColor="white"
           paddingLeft="md"
@@ -154,9 +155,11 @@ const CrowdsourcedPosts = () => {
           </FlexItem>
         </Flex>
       </Background>
+      {/* End header bar */}
 
       <Flex horizontal="center">
         <FlexItem className="body-container">
+          {/* Start trending today */}
           <Caption
               paddingBottom="xs"
               paddingTop="sm"
@@ -215,7 +218,9 @@ const CrowdsourcedPosts = () => {
               ))}
             </Layout.Body>
           </Layout>
+          {/* End trending today */}
 
+          {/* Start popular posts */}
           <Caption
               paddingBottom="xs"
               paddingTop="sm"
@@ -223,6 +228,7 @@ const CrowdsourcedPosts = () => {
           />
 
           <div className="mobile-only">
+            {/* Mobile nav */}
             <Card padding="none">
               <Nav
                   className="mobile-only"
@@ -252,6 +258,7 @@ const CrowdsourcedPosts = () => {
               </Nav>
             </Card>
 
+            {/* Mobile post 1 */}
             <Card
                 marginTop="sm"
                 padding="none"
@@ -311,6 +318,7 @@ const CrowdsourcedPosts = () => {
               </Flex>
             </Card>
 
+            {/* Mobile post 2 */}
             <Card
                 marginTop="sm"
                 padding="none"
@@ -383,6 +391,7 @@ const CrowdsourcedPosts = () => {
               </Flex>
             </Card>
 
+            {/* Mobile post 3 */}
             <Card
                 marginTop="sm"
                 padding="none"
@@ -464,6 +473,7 @@ const CrowdsourcedPosts = () => {
                 size="xl"
             >
               <Layout.Body>
+                {/* Desktop nav bar */}
                 <Card padding="none">
                   <Flex spacing="between">
                     <FlexItem>
@@ -512,6 +522,7 @@ const CrowdsourcedPosts = () => {
                   </Flex>
                 </Card>
 
+                {/* Desktop post 1 */}
                 <Card
                     marginTop="sm"
                     padding="none"
@@ -594,6 +605,7 @@ const CrowdsourcedPosts = () => {
                   </Flex>
                 </Card>
 
+                {/* Desktop post 2 */}
                 <Card
                     marginTop="sm"
                     padding="none"
@@ -689,6 +701,7 @@ const CrowdsourcedPosts = () => {
                   </Flex>
                 </Card>
 
+                {/* Desktop post 3 */}
                 <Card
                     marginTop="sm"
                     padding="none"
@@ -786,8 +799,10 @@ const CrowdsourcedPosts = () => {
                 </Card>
               </Layout.Body>
 
+              {/* Start side bar (desktop only) */}
               <Background backgroundColor="light">
                 <Layout.Side marginLeft="md">
+                  {/* Communities card */}
                   <Card
                       header
                       padding="none"
@@ -879,6 +894,7 @@ const CrowdsourcedPosts = () => {
                     </Layout.Body>
                   </Card>
 
+                  {/* Readit premium card */}
                   <Card
                       marginTop="sm"
                       padding="xs"
@@ -916,6 +932,7 @@ const CrowdsourcedPosts = () => {
                     </Flex>
                   </Card>
 
+                  {/* Trending communities card */}
                   <Card
                       marginTop="sm"
                       padding="sm"
@@ -968,8 +985,10 @@ const CrowdsourcedPosts = () => {
                   </Card>
                 </Layout.Side>
               </Background>
+              {/* End side bar (desktop only) */}
             </Layout>
           </div>
+          {/* End popular posts */}
         </FlexItem>
       </Flex>
     </>

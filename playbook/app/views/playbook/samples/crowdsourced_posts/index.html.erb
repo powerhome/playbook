@@ -139,8 +139,8 @@
 
     <%# Start Popular Posts %>
     <%= pb_rails("caption", props: { padding_bottom: "xs", padding_top: "sm", text: "Popular Posts" }) %>
-
     <div class="mobile-only">
+      <%# Mobile nav %>
       <%= pb_rails("card", props: { padding: "none" }) do %>
         <%= pb_rails("nav", props: { orientation: "vertical"}) do %>
           <%= pb_rails("nav/item", props: { active: true, icon_left: "rocket", link: "#", text: "Best" }) %>
@@ -150,6 +150,7 @@
         <% end %>
       <% end %>
 
+      <%# Mobile post 1 %>
       <%= pb_rails("card", props: { margin_top: "sm", padding: "none" }) do %>
         <%= pb_rails("flex") do %>
           <%= pb_rails("flex/flex_item", props: { padding: "sm" }) do %>
@@ -173,9 +174,8 @@
           <% end %>
         <% end %>
       <% end %>
-      <%# End post 1 %>
 
-      <%# Start post 2 %>
+      <%# Mobile post 2 %>
       <%= pb_rails("card", props: { margin_top: "sm", padding: "none" }) do %>
         <%= pb_rails("flex") do %>
           <%= pb_rails("flex/flex_item", props: { fixed_size: "100%", padding: "sm" }) do %>
@@ -207,9 +207,8 @@
           <% end %>
         <% end %>
       <% end %>
-      <%# End post 2 %>
 
-      <%# Start post 3 %>
+      <%# Mobile post 3 %>
       <%= pb_rails("card", props: { margin_top: "sm", padding: "none" }) do %>
         <%= pb_rails("flex") do %>
           <%= pb_rails("flex/flex_item", props: { padding: "sm" }) do %>
@@ -250,8 +249,8 @@
 
     <div class="desktop-only">
       <%= pb_rails("layout", props: { position: "right", size: "xl" }) do %>
-        <%# Start nav bar %>
         <%= pb_rails("layout/body") do %>
+          <%# Desktop nav bar %>
           <%= pb_rails("card", props: { padding: "none" }) do %>
             <%= pb_rails("flex", props: {  spacing: "between" }) do %>
               <%= pb_rails("flex/flex_item") do %>
@@ -275,9 +274,8 @@
               <% end %>
             <% end %>
           <% end %>
-          <%# End nav bar %>
 
-          <%# Start post 1 %>
+          <%# Desktop post 1 %>
           <%= pb_rails("card", props: { margin_top: "sm", padding: "none" }) do %>
             <%= pb_rails("flex") do %>
               <%= pb_rails("flex/flex_item", props: { margin_left: "sm", margin_top: "sm" }) do %>
@@ -306,9 +304,8 @@
               <% end %>
             <% end %>
           <% end %>
-          <%# End post 1 %>
 
-          <%# Start post 2 %>
+          <%# Desktop post 2 %>
           <%= pb_rails("card", props: { margin_top: "sm", padding: "none" }) do %>
             <%= pb_rails("flex") do %>
               <%= pb_rails("flex/flex_item", props: { margin_left: "sm", margin_top: "sm" }) do %>
@@ -347,9 +344,8 @@
               <% end %>
             <% end %>
           <% end %>
-          <%# End post 2 %>
 
-          <%# Start post 3 %>
+          <%# Desktop post 3 %>
           <%= pb_rails("card", props: { margin_top: "sm", padding: "none" }) do %>
             <%= pb_rails("flex") do %>
               <%= pb_rails("flex/flex_item", props: { margin_left: "sm", margin_top: "sm" }) do %>
@@ -391,13 +387,12 @@
               <% end %>
             <% end %>
           <% end %>
-          <%# End post 3 %>
         <% end %>
 
-        <%# Start side bar %>
+        <%# Start side bar (desktop only) %>
         <%= pb_rails("background", props: { background_color: "light" }) do %>
           <%= pb_rails("layout/sidebar", props: { margin_left: "md" }) do %>
-            <%# Start communities card %>
+            <%# Communities card %>
             <%= pb_rails("card", props: { header: true, padding: "none", shadow: "deeper" }) do %>
               <%= pb_rails("card/card_header", props: { padding: "xs", header_color: "category_1" }) do %>
                 <%= pb_rails("flex", props: { vertical: "center" }) do %>
@@ -443,9 +438,8 @@
                 <% end %>
               <% end %>
             <% end %>
-            <%# End communities card %>
 
-            <%# Start readit premium card %>
+            <%# Readit premium card %>
             <%= pb_rails("card", props: { margin_top: "sm", padding: "xs", shadow: "deeper" }) do %>
               <%= pb_rails("flex", props: { margin: "xs", spacing: "between", vertical: "center" }) do %>
                 <%= pb_rails("flex/flex_item") do %>
@@ -460,9 +454,8 @@
                 <% end %>
               <% end %>
             <% end %>
-            <%# End readit premium card %>
 
-            <%# Start trending communities card %>
+            <%# Trending communities card %>
             <%= pb_rails("card", props: { margin_top: "sm", padding: "sm", shadow: "deeper" }) do %>
               <%= pb_rails("title", props: { padding: "xs", size: 4, text: "Trending Communities" }) %>
 
@@ -493,10 +486,9 @@
                 <% end %>
               <% end %>
             <% end %>
-            <%# End trending communities card %>
           <% end %>
         <% end %>
-        <%# End side bar %>
+        <%# End side bar (desktop only) %>
       <% end %>
     </div>
     <%# End Popular Posts %>
