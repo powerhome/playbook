@@ -18,13 +18,13 @@ RSpec.describe Playbook::PbTextInput::TextInput do
 
   describe "#classname" do
     it "returns namespaced class name", :aggregate_failures do
-      expect(subject.new({}).classname).to eq "pb_text_input_kit default_mb_sm"
-      expect(subject.new(margin_bottom: "lg").classname).to eq "pb_text_input_kit mb_lg"
-      expect(subject.new(margin: "lg").classname).to eq "pb_text_input_kit m_lg"
-      expect(subject.new(classname: "additional_class").classname).to eq "pb_text_input_kit additional_class default_mb_sm"
-      expect(subject.new({dark:true}).classname).to eq "pb_text_input_kit dark default_mb_sm"
-      expect(subject.new({error: "Please enter a valid email"}).classname).to eq "pb_text_input_kit default_mb_sm error"
-      expect(subject.new({dark: true, error: "Please enter a valid email"}).classname).to eq "pb_text_input_kit dark default_mb_sm error"
+      expect(subject.new({}).classname).to eq "pb_text_input_kit mb_sm"
+      expect(subject.new(margin_bottom: "lg").classname).to eq "pb_text_input_kit  mb_lg"
+      expect(subject.new(margin: "lg").classname).to eq "pb_text_input_kit  m_lg"
+      expect(subject.new(classname: "additional_class").classname).to eq "pb_text_input_kit mb_sm additional_class"
+      expect(subject.new({dark:true}).classname).to eq "pb_text_input_kit mb_sm dark"
+      expect(subject.new({error: "Please enter a valid email"}).classname).to eq "pb_text_input_kit mb_sm error"
+      expect(subject.new({dark: true, error: "Please enter a valid email"}).classname).to eq "pb_text_input_kit mb_sm dark error"
     end
   end
 end

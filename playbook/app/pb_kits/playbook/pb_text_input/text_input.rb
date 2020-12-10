@@ -23,7 +23,7 @@ module Playbook
       prop :value
 
       def classname
-        generate_classname("pb_text_input_kit") + error_class
+        generate_classname("pb_text_input_kit", text_input_margin_bottom, separator: " ") + error_class
       end
 
       def validation_message
@@ -38,6 +38,10 @@ module Playbook
         fields = {}
         fields[:message] = validation_message unless validation_message.blank?
         fields
+      end
+
+      def text_input_margin_bottom
+        margin.present? || margin_bottom.present? ? "" : "mb_sm"
       end
 
     private
