@@ -1,6 +1,24 @@
 import React from 'react'
-import { Background, Badge, Body, Button, Caption, Card, Flex, Icon, IconCircle, IconValue, Image, Layout, Nav, NavItem, Pill, SectionSeparator, TextInput, Title } from '../../../../pb_kits/playbook'
 import FlexItem from '../../../../pb_kits/playbook/pb_flex/_flex_item.jsx'
+import {
+  Background,
+  Badge,
+  Body,
+  Button,
+  Caption,
+  Card,
+  Flex, Icon,
+  IconCircle,
+  IconValue,
+  Image,
+  Layout,
+  Nav,
+  NavItem,
+  Pill,
+  SectionSeparator,
+  TextInput,
+  Title
+} from '../../../../pb_kits/playbook'
 
 const trendingStories = [
   {
@@ -286,7 +304,8 @@ const CrowdsourcedPosts = () => {
                   </Flex>
                   <Body
                       paddingTop="xs"
-                      text="LPT: If you ever need a program you want for free (for example a video/photo editor) don’t search for “free,” search for “open source” to avoid limited trial versions, adverts and malware"
+                      text="LPT: If you ever need a program you want for free (for example a video/photo editor) don’t search \
+                            for “free,” search for “open source” to avoid limited trial versions, adverts and malware"
                   />
                   <Pill
                       marginTop="sm"
@@ -425,21 +444,26 @@ const CrowdsourcedPosts = () => {
                   />
                   <Body
                       paddingTop="sm"
-                      text="It seems to be the hardest concept for developers to grasp: the biggest benefit to having the proper amount of white space is giving the user a break. Breaks are important for processing information, especially when there's a fair amount to process. It's why we have paragraphs and sentences instead of just a single, long block of running text."
+                      text="It seems to be the hardest concept for developers to grasp: the biggest benefit to having the proper amount of \
+                            white space is giving the user a break. Breaks are important for processing information, especially when there's \
+                            a fair amount to process. It's why we have paragraphs and sentences instead of just a single, long block of running text."
                   />
                   <Body
                       paddingTop="sm"
-                      text="The key is to ensure that white space has a relationship with other objects on the page, including the other space. If you have a single column of white space, make sure there's another single column of white space around to balance it."
+                      text="The key is to ensure that white space has a relationship with other objects on the page, including the other space. \
+                            If you have a single column of white space, make sure there's another single column of white space around to balance it."
                   />
                   <Body
                       color="light"
                       paddingTop="sm"
-                      text="For vertical space, just use fractions of the body font size. I tend to keep things simple and use a scale of .25, but there are several other scales that you can use."
+                      text="For vertical space, just use fractions of the body font size. I tend to keep things simple and use a scale of .25, \
+                            but there are several other scales that you can use."
                   />
                   <Body
                       color="light"
                       paddingTop="sm"
-                      text="For example, if the body font size is 16px(1em): 4, 8, 12, 16, 20, 24, 28, 32, 40, 48. This allows for choosing font sizes by simply moving up and down the scale as I want larger or smaller type..."
+                      text="For example, if the body font size is 16px(1em): 4, 8, 12, 16, 20, 24, 28, 32, 40, 48. \
+                            This allows for choosing font sizes by simply moving up and down the scale as I want larger or smaller type..."
                   />
                   <Flex paddingTop="sm">
                     <IconValue
@@ -573,7 +597,8 @@ const CrowdsourcedPosts = () => {
                       <Body
                           paddingRight="md"
                           paddingTop="xs"
-                          text="LPT: If you ever need a program you want for free (for example a video/photo editor) don’t search for “free,” search for “open source” to avoid limited trial versions, adverts and malware"
+                          text="LPT: If you ever need a program you want for free (for example a video/photo editor) don’t search \
+                                for “free,” search for “open source” to avoid limited trial versions, adverts and malware"
                       />
                       <Pill
                           marginTop="sm"
@@ -729,7 +754,8 @@ const CrowdsourcedPosts = () => {
                       />
                     </FlexItem>
                     <FlexItem
-                        paddingX="xs"
+                        paddingLeft="xs"
+                        paddingRight="xl"
                         paddingY="sm"
                     >
                       <Flex vertical="center">
@@ -757,21 +783,26 @@ const CrowdsourcedPosts = () => {
                       />
                       <Body
                           paddingTop="sm"
-                          text="It seems to be the hardest concept for developers to grasp: the biggest benefit to having the proper amount of white space is giving the user a break. Breaks are important for processing information, especially when there's a fair amount to process. It's why we have paragraphs and sentences instead of just a single, long block of running text."
+                          text="It seems to be the hardest concept for developers to grasp: the biggest benefit to having the proper amount of \
+                                white space is giving the user a break. Breaks are important for processing information, especially when there's \
+                                a fair amount to process. It's why we have paragraphs and sentences instead of just a single, long block of running text."
                       />
                       <Body
                           paddingTop="sm"
-                          text="The key is to ensure that white space has a relationship with other objects on the page, including the other space. If you have a single column of white space, make sure there's another single column of white space around to balance it."
+                          text="The key is to ensure that white space has a relationship with other objects on the page, including the other space. \
+                                If you have a single column of white space, make sure there's another single column of white space around to balance it."
                       />
                       <Body
                           color="light"
                           paddingTop="sm"
-                          text="For vertical space, just use fractions of the body font size. I tend to keep things simple and use a scale of .25, but there are several other scales that you can use."
+                          text="For vertical space, just use fractions of the body font size. I tend to keep things simple and use a scale of .25, \
+                                but there are several other scales that you can use."
                       />
                       <Body
                           color="light"
                           paddingTop="sm"
-                          text="For example, if the body font size is 16px(1em): 4, 8, 12, 16, 20, 24, 28, 32, 40, 48. This allows for choosing font sizes by simply moving up and down the scale as I want larger or smaller type..."
+                          text="For example, if the body font size is 16px(1em): 4, 8, 12, 16, 20, 24, 28, 32, 40, 48. \
+                                This allows for choosing font sizes by simply moving up and down the scale as I want larger or smaller type..."
                       />
                       <Flex paddingTop="sm">
                         <IconValue
