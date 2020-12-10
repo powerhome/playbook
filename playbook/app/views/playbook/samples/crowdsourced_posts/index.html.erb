@@ -1,0 +1,502 @@
+<%= javascript_tag do %>
+  window.addEventListener('DOMContentLoaded', () => {
+    const desktopOnly = document.querySelectorAll('.desktop-only')
+    const mobileOnly = document.querySelectorAll('.mobile-only')
+    const textInput = document.querySelector('.text-input-flex-item')
+    const trendingImages = document.querySelectorAll('.trending-image')
+    const postImageDesktop = document.querySelector('.post-image-desktop')
+    const postImageMobile = document.querySelector('.post-image-mobile')
+    const bodyContainer = document.querySelector('.body-container')
+
+    const viewSize = () => {
+      if (window.innerWidth < 1385) {
+        desktopOnly.forEach((element) => element.style.display = 'none')
+        mobileOnly.forEach((element) => element.style.display = '')
+        bodyContainer.style.flexBasis = ''
+        textInput.style.flexBasis = '60%'
+        bodyContainer.style.marginRight = '8px'
+        bodyContainer.style.marginLeft = '8px'
+        postImageMobile.style.width = '100%'
+      } else {
+        mobileOnly.forEach((element) => element.style.display = 'none')
+        desktopOnly.forEach((element) => element.style.display = '')
+        bodyContainer.style.flexBasis = '65%'
+        postImageDesktop.style.width = '75%'
+        postImageDesktop.style.display = 'block'
+        postImageDesktop.style.margin = 'auto'
+      }
+      trendingImages.forEach((element) => element.style.width = '100%')
+    }
+    viewSize()
+
+    window.addEventListener('resize', () => viewSize())
+  })
+<% end %>
+
+<% trending_stories = [
+  {
+    header_color: "category_1",
+    header_text: "Finance",
+    image_url: "https://p-a6fbdk.t4.n0.cdn.getcloudapp.com/items/jkuYZ6rB/readit_image_1.png",
+    card_text: "IRS will allow employers to match their employees' student loan...",
+    icon: "dollar-sign",
+    variant: "green",
+    sub_readit: "r/PersonalFinance and more"
+  }, {
+    header_color: "category_2",
+    header_text: "World News",
+    image_url: "https://p-a6fbdk.t4.n0.cdn.getcloudapp.com/items/wbuK75AO/readit_image_2.png",
+    card_text: "Hong Kong democrat Ted Hui confirms he will go into exile...",
+    icon: "globe",
+    variant: "yellow",
+    sub_readit: "r/WorldNews and more"
+  }, {
+    header_color: "category_3",
+    header_text: "Space",
+    image_url: "https://p-a6fbdk.t4.n0.cdn.getcloudapp.com/items/geuooly9/readit_image_3.png",
+    card_text: "Relaxing Inside the Space Station's Window to the World...",
+    icon: "space-shuttle",
+    variant: "blue",
+    sub_readit: "r/Space and more"
+  }, {
+    header_color: "category_4",
+    header_text: "Tech",
+    image_url: "https://p-a6fbdk.t4.n0.cdn.getcloudapp.com/items/WnulJpwd/readit_image_4.png",
+    card_text: "MIT programmed AI that can design its own robots...",
+    icon: "microchip",
+    variant: "royal",
+    sub_readit: "r/Technology and more"
+  }
+] %>
+
+<% communities = [
+  { sub_readit: "r/Fishing", variant: "teal", icon: "fish" },
+  { sub_readit: "r/Outdoors", variant: "green", icon: "trees" },
+  { sub_readit: "r/MostBeautiful", variant: "yellow", icon: "sun" },
+  { sub_readit: "r/Camping", variant: "red", icon: "campfire" },
+  { sub_readit: "r/Homestead", variant: "blue", icon: "farm" },
+] %>
+
+<% trending_communities = [
+  { sub_readit: "r/Food", variant: "blue", icon: "utensils", members: "1,239,257 members" },
+  { sub_readit: "r/Gaming", variant: "red", icon: "gamepad", members: "4,125,270 members" },
+  { sub_readit: "r/aww", variant: "yellow", icon: "paw", members: "2,037,816 members" },
+  { sub_readit: "r/Movies", variant: "royal", icon: "camera-movie", members: "1,392,777 members" },
+  { sub_readit: "r/GraphicDesign", variant: "purple", icon: "pencil-paintbrush", members: "28,270 members" },
+] %>
+
+<%# Start header bar %>
+<%= pb_rails("background", props: { background_color: "white", padding_left: "md", padding_y: "xs" }) do %>
+  <%= pb_rails("flex", props: { classname: "flex-container", spacing: "between", vertical: "center" }) do %>
+    <%= pb_rails("flex/flex_item") do %>
+      <%= pb_rails("flex", props: { vertical: "center" }) do %>
+        <%= pb_rails("flex/flex_item") do %>
+          <%= pb_rails("icon_circle", props: { icon: "robot", variant: "royal", size: "md" }) %>
+        <% end %>
+        <%= pb_rails("flex/flex_item") do %>
+          <%= pb_rails("title", props: { classname: "desktop-only", margin_left: "xs", size: 2, text: "readit" }) %>
+        <% end %>
+      <% end %>
+    <% end %>
+    <%= pb_rails("flex/flex_item", props: { classname: "text-input-flex-item", fixed_size: "30%" }) do %>
+      <%= pb_rails("text_input", props: { margin_top: "sm", placeholder: "Search" }) %>
+    <% end %>
+    <%= pb_rails("flex/flex_item") do %>
+      <%= pb_rails("button", props: { classname: "desktop-only", margin_right: "sm", text: "Log In", variant: "secondary" }) %>
+      <%= pb_rails("button", props: { classname: "desktop-only", margin_right: "sm", text: "Sign Up" }) %>
+      <%= pb_rails("button", props: { margin_right: "md", padding: "none", variant: "link" }) do %>
+        <%= pb_rails("icon", props: { icon: "user" }) %>
+        <%= pb_rails("icon", props: { icon: "caret-down" }) %>
+      <% end %>
+    <% end %>
+  <% end %>
+<% end %>
+<%# End header bar %>
+
+<%= pb_rails("flex", props: { horizontal: "center" }) do %>
+  <%= pb_rails("flex/flex_item", props: { classname: "body-container" }) do %>
+    <%# Start trending today %>
+    <%= pb_rails("caption", props: { padding_bottom: "xs", padding_top: "sm", text: "Trending Today" }) %>
+    <%= pb_rails("layout", props: { layout: "collection", header: true }) do %>
+      <%= pb_rails("layout/body") do %>
+        <% trending_stories.each do |story| %>
+          <%= pb_rails("card", props: { padding: "none" }) do %>
+            <%= pb_rails("card/card_header", props: { padding: "sm", header_color: story[:header_color] }) do %>
+              <%= pb_rails("caption", props: { dark: true, text: story[:header_text] }) %>
+            <% end %>
+            <%= pb_rails("card/card_body", props: { padding: "none" }) do %>
+              <%= pb_rails("image", props: {
+                classname: "trending-image",
+                url: story[:image_url]
+              }) %>
+              <%= pb_rails("body", props: {
+                padding: "xs",
+                padding_y: "none",
+                text: story[:card_text]
+              }) %>
+              <%= pb_rails("flex", props: { classname: "flex-container", padding: "xs", vertical: "center" }) do %>
+                <%= pb_rails("flex/flex_item") do %>
+                  <%= pb_rails("icon_circle", props: { icon: story[:icon], size: "xs", variant: story[:variant] }) %>
+                <% end %>
+                <%= pb_rails("flex/flex_item", props: { margin_left: "xs" }) do %>
+                  <%= pb_rails("caption", props: { size: 'xs', text: story[:sub_readit] }) %>
+                <% end %>
+              <% end %>
+            <% end %>
+          <% end %>
+        <% end %>
+      <% end %>
+    <% end %>
+    <%# End trending today %>
+
+    <%# Start Popular Posts %>
+    <%= pb_rails("caption", props: { padding_bottom: "xs", padding_top: "sm", text: "Popular Posts" }) %>
+    <div class="mobile-only">
+      <%# Mobile nav %>
+      <%= pb_rails("card", props: { padding: "none" }) do %>
+        <%= pb_rails("nav", props: { orientation: "vertical"}) do %>
+          <%= pb_rails("nav/item", props: { active: true, icon_left: "rocket", link: "#", text: "Best" }) %>
+          <%= pb_rails("nav/item", props: { icon_left: "fire", text: "Hot", link: "#", }) %>
+          <%= pb_rails("nav/item", props: { icon_left: "star", text: "New ", link: "#" }) %>
+          <%= pb_rails("nav/item", props: { icon_left: "chart-line", text: "Top", link: "#" }) %>
+        <% end %>
+      <% end %>
+
+      <%# Mobile post 1 %>
+      <%= pb_rails("card", props: { margin_top: "sm", padding: "none" }) do %>
+        <%= pb_rails("flex") do %>
+          <%= pb_rails("flex/flex_item", props: { padding: "sm" }) do %>
+            <%= pb_rails("flex", props: { vertical: "center" }) do %>
+              <%= pb_rails("icon_circle", props: { icon: "lightbulb-on", size: "xs", variant: "yellow" }) %>
+              <%= pb_rails("title", props: { margin_left: "xs", size: 4,  text: "r/LifeProTips" }) %>
+              <%= pb_rails("body", props: { color: "light", margin_left: "xs", text: "• Posted by u/xhuljanomuca" }) %>
+            <% end %>
+            <%= pb_rails("body", props: {
+              padding_right: "md",
+              padding_top: "xs",
+              text: "LPT: If you ever need a program you want for free (for example a video/photo editor) don’t search "\
+                    "for “free,” search for “open source” to avoid limited trial versions, adverts and malware",
+            }) %>
+            <%= pb_rails("pill", props: { margin_top: "sm",text: "Computers", variant: "primary" }) %>
+            <%= pb_rails("flex", props: { padding_top: "sm" }) do %>
+              <%= pb_rails("icon_value", props: { icon: "comment-alt", text: "1.4k Comments" }) %>
+              <%= pb_rails("icon_value", props: { icon: "share", margin_left: "sm", text: "Share" }) %>
+              <%= pb_rails("icon_value", props: { icon: "folder-plus", margin_left: "sm", text: "Save" }) %>
+              <%= pb_rails("icon_value", props: { icon: "ellipsis-h", margin_left: "sm", text: "" }) %>
+            <% end %>
+          <% end %>
+        <% end %>
+      <% end %>
+
+      <%# Mobile post 2 %>
+      <%= pb_rails("card", props: { margin_top: "sm", padding: "none" }) do %>
+        <%= pb_rails("flex") do %>
+          <%= pb_rails("flex/flex_item", props: { fixed_size: "100%", padding: "sm" }) do %>
+            <%= pb_rails("flex", props: { vertical: "center" }) do %>
+              <%= pb_rails("icon_circle", props: { icon: "camera", size: "xs", variant: "blue" }) %>
+              <%= pb_rails("title", props: { margin_left: "xs", size: 4, tag: "h4", text: "r/Pics" }) %>
+              <%= pb_rails("body", props: { color: "light", margin_left: "xs", text: "• Posted by u/stephenmckeon" }) %>
+            <% end %>
+            <%= pb_rails("flex/flex_item") do %>
+              <%= pb_rails("flex", props: { margin_bottom: "sm", padding_top: "xs", vertical: "center" }) do %>
+                <%= pb_rails("flex/flex_item") do %>
+                  <%= pb_rails("body", props: { text: "Foggy morning." }) %>
+                <% end %>
+                <%= pb_rails("flex/flex_item", props: { margin_left: "xs" }) do %>
+                  <%= pb_rails("pill", props: { text: "OC", variant: "success" }) %>
+                <% end %>
+              <% end %>
+            <% end %>
+            <%= pb_rails("image", props: {
+              classname: "post-image-mobile",
+              url: "https://p-a6fbdk.t4.n0.cdn.getcloudapp.com/items/d5uPEJbY/readit_image_5.png"
+            }) %>
+            <%= pb_rails("flex", props: { padding_top: "sm" }) do %>
+              <%= pb_rails("icon_value", props: { icon: "comment-alt", text: "112 Comments" }) %>
+              <%= pb_rails("icon_value", props: { icon: "share", margin_left: "sm", text: "Share" }) %>
+              <%= pb_rails("icon_value", props: { icon: "folder-plus", margin_left: "sm", text: "Save" }) %>
+              <%= pb_rails("icon_value", props: { icon: "ellipsis-h", margin_left: "sm", text: "" }) %>
+            <% end %>
+          <% end %>
+        <% end %>
+      <% end %>
+
+      <%# Mobile post 3 %>
+      <%= pb_rails("card", props: { margin_top: "sm", padding: "none" }) do %>
+        <%= pb_rails("flex") do %>
+          <%= pb_rails("flex/flex_item", props: { padding: "sm" }) do %>
+            <%= pb_rails("flex", props: { vertical: "center" }) do %>
+              <%= pb_rails("icon_circle", props: { icon: "browser", variant: "purple", size: "xs" }) %>
+              <%= pb_rails("title", props: { margin_left: "xs", size: 4, tag: "h4", text: "r/WebDesign" }) %>
+              <%= pb_rails("body", props: { color: "light", margin_left: "xs", text: "• Posted by u/creativebloq" }) %>
+            <% end %>
+            <%= pb_rails("title", props: { padding_right: "md", padding_top: "xs", size: 4,  text: "Use white space!" }) %>
+            <%= pb_rails("body", props: {
+              padding_top: "sm",
+              text: "It seems to be the hardest concept for developers to grasp: the biggest benefit to having the proper amount of "\
+                    "white space is giving the user a break. Breaks are important for processing information, especially when there's "\
+                    "a fair amount to process. It's why we have paragraphs and sentences instead of just a single, long block of running text."
+            }) %>
+            <%= pb_rails("body", props: {
+              padding_top: "sm",
+              text: "The key is to ensure that white space has a relationship with other objects on the page, including the other space. "\
+                    "If you have a single column of white space, make sure there's another single column of white space around to balance it."
+            }) %>
+            <%= pb_rails("body", props: {
+              color: "light",
+              padding_top: "sm",
+              text: "For vertical space, just use fractions of the body font size. I tend to keep things simple and use a scale of .25, "\
+                    "but there are several other scales that you can use."
+            }) %>
+            <%= pb_rails("body", props: {
+              padding_top: "sm",
+              color: "lighter",
+              text: "For example, if the body font size is 16px(1em): 4, 8, 12, 16, 20, 24, 28, 32, 40, 48. "\
+                    "This allows for choosing font sizes by simply moving up and down the scale as I want larger or smaller type..."
+            }) %>
+            <%= pb_rails("flex", props: { padding_top: "sm" }) do %>
+              <%= pb_rails("icon_value", props: { icon: "comment-alt", text: "32 Comments" }) %>
+              <%= pb_rails("icon_value", props: { icon: "share", margin_left: "sm", text: "Share" }) %>
+              <%= pb_rails("icon_value", props: { icon: "folder-plus", margin_left: "sm", text: "Save" }) %>
+              <%= pb_rails("icon_value", props: { icon: "ellipsis-h", margin_left: "sm", text: "" }) %>
+            <% end %>
+          <% end %>
+        <% end %>
+      <% end %>
+    </div>
+
+    <div class="desktop-only">
+      <%= pb_rails("layout", props: { position: "right", size: "xl" }) do %>
+        <%= pb_rails("layout/body") do %>
+          <%# Desktop nav bar %>
+          <%= pb_rails("card", props: { padding: "none" }) do %>
+            <%= pb_rails("flex", props: {  spacing: "between" }) do %>
+              <%= pb_rails("flex/flex_item") do %>
+                <%= pb_rails("flex") do %>
+                  <%= pb_rails("nav", props: { orientation: "horizontal"}) do %>
+                    <%= pb_rails("nav/item", props: { active: true, icon_left: "rocket", link: "#", text: "Best" }) %>
+                    <%= pb_rails("nav/item", props: { icon_left: "fire", text: "Hot", link: "#", }) %>
+                    <%= pb_rails("nav/item", props: { icon_left: "star", text: "New ", link: "#" }) %>
+                    <%= pb_rails("nav/item", props: { icon_left: "chart-line", text: "Top", link: "#" }) %>
+                  <% end %>
+                  <%= pb_rails("button", props: { margin_top: "xs", variant: "link" }) do %>
+                    <%= pb_rails("icon", props: { icon: "ellipsis-h" }) %>
+                  <% end %>
+                <% end %>
+              <% end %>
+              <%= pb_rails("flex/flex_item") do %>
+                <%= pb_rails("button", props: { margin_top: "xs", padding_right: "md", variant: "link" }) do %>
+                  <%= pb_rails("icon", props: { icon: "th-large" }) %>
+                  <%= pb_rails("icon", props: { icon: "caret-down" }) %>
+                <% end %>
+              <% end %>
+            <% end %>
+          <% end %>
+
+          <%# Desktop post 1 %>
+          <%= pb_rails("card", props: { margin_top: "sm", padding: "none" }) do %>
+            <%= pb_rails("flex") do %>
+              <%= pb_rails("flex/flex_item", props: { margin_left: "sm", margin_top: "sm" }) do %>
+                <%= pb_rails("icon", props: { icon: "arrow-alt-up", margin_left: "xs", size: "1x" }) %>
+                <%= pb_rails("title", props: { margin: "xs", margin_left: "none", size: 4, text: "66.2k" }) %>
+                <%= pb_rails("icon", props: { icon: "arrow-alt-down", margin_left: "xs", size: "1x" }) %>
+              <% end %>
+              <%= pb_rails("flex/flex_item", props: { padding_x: "xs", padding_y: "sm" }) do %>
+                <%= pb_rails("flex", props: { vertical: "center" }) do %>
+                  <%= pb_rails("icon_circle", props: { icon: "lightbulb-on", size: "xs", variant: "yellow" }) %>
+                  <%= pb_rails("title", props: { margin_left: "xs", size: 4,  text: "r/LifeProTips" }) %>
+                  <%= pb_rails("body", props: { color: "light", margin_left: "xs", text: "• Posted by u/xhuljanomuca 1 month ago" }) %>
+                <% end %>
+                <%= pb_rails("body", props: {
+                  padding_right: "md",
+                  padding_top: "xs",
+                  text: "LPT: If you ever need a program you want for free (for example a video/photo editor) don’t search "\
+                        "for “free,” search for “open source” to avoid limited trial versions, adverts and malware",
+                }) %>
+                <%= pb_rails("pill", props: { margin_top: "sm",text: "Computers", variant: "primary" }) %>
+                <%= pb_rails("flex", props: { padding_top: "sm" }) do %>
+                  <%= pb_rails("icon_value", props: { icon: "comment-alt", text: "1.4k Comments" }) %>
+                  <%= pb_rails("icon_value", props: { icon: "share", margin_left: "sm", text: "Share" }) %>
+                  <%= pb_rails("icon_value", props: { icon: "folder-plus", margin_left: "sm", text: "Save" }) %>
+                  <%= pb_rails("icon_value", props: { icon: "ellipsis-h", margin_left: "sm", text: "" }) %>
+                <% end %>
+              <% end %>
+            <% end %>
+          <% end %>
+
+          <%# Desktop post 2 %>
+          <%= pb_rails("card", props: { margin_top: "sm", padding: "none" }) do %>
+            <%= pb_rails("flex") do %>
+              <%= pb_rails("flex/flex_item", props: { margin_left: "sm", margin_top: "sm" }) do %>
+                <%= pb_rails("icon", props: { icon: "arrow-alt-up", margin_left: "xs", size: "1x" }) %>
+                <%= pb_rails("title", props: { margin: "xs", margin_left: "none", size: 4, text: "8297" }) %>
+                <%= pb_rails("icon", props: { icon: "arrow-alt-down", margin_left: "xs", size: "1x" }) %>
+              <% end %>
+              <%= pb_rails("flex/flex_item", props: { fixed_size: "85%", padding_x: "xs", padding_y: "sm" }) do %>
+                <%= pb_rails("flex", props: { vertical: "center" }) do %>
+                  <%= pb_rails("icon_circle", props: { icon: "camera", size: "xs", variant: "blue" }) %>
+                  <%= pb_rails("title", props: { margin_left: "xs", size: 4, tag: "h4", text: "r/Pics" }) %>
+                  <%= pb_rails("body", props: { color: "light", margin_left: "xs", text: "• Posted by u/stephenmckeon 13 hours ago" }) %>
+                <% end %>
+                <%= pb_rails("flex/flex_item") do %>
+                  <%= pb_rails("flex", props: { padding_top: "xs", vertical: "center" }) do %>
+                    <%= pb_rails("flex/flex_item") do %>
+                      <%= pb_rails("body", props: { text: "Foggy morning." }) %>
+                    <% end %>
+                    <%= pb_rails("flex/flex_item", props: { margin_left: "xs" }) do %>
+                      <%= pb_rails("pill", props: { text: "OC", variant: "success" }) %>
+                    <% end %>
+                  <% end %>
+                <% end %>
+                <%= pb_rails("flex", props: { horizontal: "center", margin_top: "sm" }) do %>
+                  <%= pb_rails("image", props: {
+                    classname: "post-image-desktop",
+                    url: "https://p-a6fbdk.t4.n0.cdn.getcloudapp.com/items/d5uPEJbY/readit_image_5.png"
+                  }) %>
+                <% end %>
+                <%= pb_rails("flex", props: { padding_top: "sm" }) do %>
+                  <%= pb_rails("icon_value", props: { icon: "comment-alt", text: "112 Comments" }) %>
+                  <%= pb_rails("icon_value", props: { icon: "share", margin_left: "sm", text: "Share" }) %>
+                  <%= pb_rails("icon_value", props: { icon: "folder-plus", margin_left: "sm", text: "Save" }) %>
+                  <%= pb_rails("icon_value", props: { icon: "ellipsis-h", margin_left: "sm", text: "" }) %>
+                <% end %>
+              <% end %>
+            <% end %>
+          <% end %>
+
+          <%# Desktop post 3 %>
+          <%= pb_rails("card", props: { margin_top: "sm", padding: "none" }) do %>
+            <%= pb_rails("flex") do %>
+              <%= pb_rails("flex/flex_item", props: { margin_left: "sm", margin_top: "sm" }) do %>
+                <%= pb_rails("icon", props: { icon: "arrow-alt-up", margin_left: "xs", size: "1x" }) %>
+                <%= pb_rails("title", props: { margin: "xs", margin_left: "none", size: 4, text: "467" }) %>
+                <%= pb_rails("icon", props: { icon: "arrow-alt-down", margin_left: "xs", size: "1x" }) %>
+              <% end %>
+              <%= pb_rails("flex/flex_item", props: { padding_left: "xs", padding_right: "xl", padding_y: "sm" }) do %>
+                <%= pb_rails("flex", props: { vertical: "center" }) do %>
+                  <%= pb_rails("icon_circle", props: { icon: "browser", variant: "purple", size: "xs" }) %>
+                  <%= pb_rails("title", props: { margin_left: "xs", size: 4, tag: "h4", text: "r/WebDesign" }) %>
+                  <%= pb_rails("body", props: { color: "light", margin_left: "xs", text: "• Posted by u/creativebloq 1 week ago" }) %>
+                <% end %>
+                <%= pb_rails("title", props: { padding_right: "md", padding_top: "xs", size: 4,  text: "Use white space!" }) %>
+                <%= pb_rails("body", props: {
+                  padding_top: "sm",
+                  text: "It seems to be the hardest concept for developers to grasp: the biggest benefit to having the proper amount of "\
+                        "white space is giving the user a break. Breaks are important for processing information, especially when there's "\
+                        "a fair amount to process. It's why we have paragraphs and sentences instead of just a single, long block of running text."
+                }) %>
+                <%= pb_rails("body", props: {
+                  padding_top: "sm",
+                  text: "The key is to ensure that white space has a relationship with other objects on the page, including the other space. "\
+                        "If you have a single column of white space, make sure there's another single column of white space around to balance it."
+                }) %>
+                <%= pb_rails("body", props: {
+                  color: "light",
+                  padding_top: "sm",
+                  text: "For vertical space, just use fractions of the body font size. I tend to keep things simple and use a scale of .25, "\
+                        "but there are several other scales that you can use."
+                }) %>
+                <%= pb_rails("body", props: {
+                  padding_top: "sm",
+                  color: "lighter",
+                  text: "For example, if the body font size is 16px(1em): 4, 8, 12, 16, 20, 24, 28, 32, 40, 48. "\
+                        "This allows for choosing font sizes by simply moving up and down the scale as I want larger or smaller type..."
+                }) %>
+                <%= pb_rails("flex", props: { padding_top: "sm" }) do %>
+                  <%= pb_rails("icon_value", props: { icon: "comment-alt", text: "32 Comments" }) %>
+                  <%= pb_rails("icon_value", props: { icon: "share", margin_left: "sm", text: "Share" }) %>
+                  <%= pb_rails("icon_value", props: { icon: "folder-plus", margin_left: "sm", text: "Save" }) %>
+                  <%= pb_rails("icon_value", props: { icon: "ellipsis-h", margin_left: "sm", text: "" }) %>
+                <% end %>
+              <% end %>
+            <% end %>
+          <% end %>
+        <% end %>
+
+        <%# Start side bar (desktop only) %>
+        <%= pb_rails("background", props: { background_color: "light" }) do %>
+          <%= pb_rails("layout/sidebar", props: { margin_left: "md" }) do %>
+            <%# Communities card %>
+            <%= pb_rails("card", props: { header: true, padding: "none", shadow: "deeper" }) do %>
+              <%= pb_rails("card/card_header", props: { padding: "xs", header_color: "category_1" }) do %>
+                <%= pb_rails("flex", props: { vertical: "center" }) do %>
+                  <%= pb_rails("body", props: { padding: "xs", padding_right: "sm", dark: true }) do %>
+                    <%= pb_rails("icon", props: { icon: "tree-large", size: "4x" }) %>
+                  <% end %>
+                  <%= pb_rails("body", props: {
+                    dark: true,
+                    margin: "xs",
+                    margin_right: "sm",
+                    text: "Outdoor communities — they're really out there",
+                  }) %>
+                <% end %>
+              <% end %>
+              <% communities.each do |community| %>
+                <%= pb_rails("flex", props: { padding: "xs", padding_left: "sm", vertical: "center" }) do %>
+                  <%= pb_rails("flex/flex_item") do %>
+                    <%= pb_rails("icon_circle", props: { icon: community[:icon], size: "sm", variant: community[:variant] }) %>
+                  <% end %>
+                  <%= pb_rails("flex/flex_item") do %>
+                    <%= pb_rails("title", props: { margin_left: "xs", size: 4, text: community[:sub_readit] }) %>
+                  <% end %>
+                <% end %>
+                <%= pb_rails("section_separator") unless community == communities.last %>
+              <% end %>
+              <%= pb_rails("layout/body", props: { padding_x: "sm" }) do %>
+                <%= pb_rails("button", props: { full_width: true, margin_top: "xs", text: "VIEW ALL" }) %>
+                <%= pb_rails("flex", props: { padding_y: "sm", spacing: "between" }) do %>
+                  <%= pb_rails("badge", props: { text: "Top", variant: "neutral", padding: "xs" }) %>
+                  <%= pb_rails("badge", props: { text: "Near You", variant: "neutral", padding: "xs" }) %>
+                  <%= pb_rails("badge", props: { text: "Aww", variant: "neutral", padding: "xs" }) %>
+                  <%= pb_rails("badge", props: { text: "Fitness", variant: "neutral", padding: "xs" }) %>
+                <% end %>
+              <% end %>
+            <% end %>
+
+            <%# Readit premium card %>
+            <%= pb_rails("card", props: { margin_top: "sm", padding: "xs", shadow: "deeper" }) do %>
+              <%= pb_rails("flex", props: { margin: "xs", spacing: "between", vertical: "center" }) do %>
+                <%= pb_rails("flex/flex_item") do %>
+                  <%= pb_rails("icon", props: { icon: "shield-alt", margin_right: "sm", size: "2x" }) %>
+                <% end %>
+                <%= pb_rails("flex/flex_item") do %>
+                  <%= pb_rails("title", props: { size: 4, text: "Readit Premium" }) %>
+                  <%= pb_rails("caption", props: { size: "xs", text: "The best Readit experience, with monthly Coins" }) %>
+                <% end %>
+                <%= pb_rails("flex/flex_item") do %>
+                  <%= pb_rails("button", props: { padding_x: "sm", text: "TRY NOW", variant: "secondary" }) %>
+                <% end %>
+              <% end %>
+            <% end %>
+
+            <%# Trending communities card %>
+            <%= pb_rails("card", props: { margin_top: "sm", padding: "sm", shadow: "deeper" }) do %>
+              <%= pb_rails("title", props: { padding: "xs", size: 4, text: "Trending Communities" }) %>
+              <% trending_communities.each do |community| %>
+                <%= pb_rails("flex", props: { padding_y: "xs", spacing: "between", vertical: "center" }) do %>
+                  <%= pb_rails("flex/flex_item") do %>
+                    <%= pb_rails("flex") do %>
+                      <%= pb_rails("flex/flex_item") do %>
+                        <%= pb_rails("icon_circle", props: { icon: community[:icon], size: "sm", variant: community[:variant] }) %>
+                      <% end %>
+                      <%= pb_rails("flex/flex_item") do %>
+                        <%= pb_rails("title", props: { margin_left: "xs", size: 4, text: community[:sub_readit] }) %>
+                        <%= pb_rails("body", props: { color: "light", margin_left: "xs", text: community[:members] }) %>
+                      <% end %>
+                    <% end %>
+                  <% end %>
+                  <%= pb_rails("flex/flex_item") do %>
+                    <%= pb_rails("button", props: { text: "JOIN", variant: "secondary" }) %>
+                  <% end %>
+                <% end %>
+              <% end %>
+            <% end %>
+          <% end %>
+        <% end %>
+        <%# End side bar (desktop only) %>
+      <% end %>
+    </div>
+    <%# End Popular Posts %>
+  <% end %>
+<% end %>
+
