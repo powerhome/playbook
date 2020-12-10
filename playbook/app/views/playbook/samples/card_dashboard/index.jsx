@@ -119,28 +119,28 @@ const FulfillmentChart = ({ chartData, title }) => (
       <tbody>
         { chartData.map( (row, i) =>
           <tr key={`fulfillment-chart-row-${i}`}>
-            <td>
+            <td style={{textAlign: "center"}}>
               <Caption
                 text={row.label}
                 size='xs'
               />
             </td>
-            <td>
+            <td style={{textAlign: "center"}}>
               <ProgressSimple
                 width='100px'
                 percent={row.percent}
               />
             </td>
-            <td>
+            <td style={{textAlign: "center"}}>
               <Caption
                 marginX='md'
                 text={`${row.percent}%`}
                 size='xs'
               />
             </td>
-            <td>
+            <td style={{textAlign: "center"}}>
               <Body
-                text={`${row.value}%`}
+                text={`${row.value}`}
               />
             </td>
           </tr>
@@ -159,9 +159,9 @@ const GridRowFill = ({ data }) => <Card.Body>
     {
       data.map( (line, i) =>
         <FlexItem
-          fixedSize='250px'
           key={`grid-row-item-${line.icon}-${i}`}
           margin='xl'
+          fixedSize='250px'
         >
           <IconStatValue {...line}/>
         </FlexItem>
@@ -177,7 +177,6 @@ const IconGrid = ({ gridData }) =>
     borderNone
   >
     <GridRowFill data={gridData.slice(0,2)}/>
-    <SectionSeparator/>
     <GridRowFill data={gridData.slice(2)}/>
   </Card>
 
@@ -187,11 +186,13 @@ const Legend = ({ name, data }) => {
     <Flex
       className='flex-container'
       spacing='between'
+      horizontal='center'
       margin='xs'
+      wrap
     >
     {
       data.map( (point, i) =>
-        <FlexItem marginX='xl' marginY='none'>
+        <FlexItem marginX='sm' marginY='sm'>
           <Currency
             amount={point.value}
             emphasized
@@ -211,6 +212,7 @@ const Legend = ({ name, data }) => {
 const TitleBar = ({ title }) =>  <Flex
   className='flex-container'
   spacing='between'
+  wrap
 >
   <FlexItem>
     <Title
@@ -221,7 +223,9 @@ const TitleBar = ({ title }) =>  <Flex
       size='4'
     />
   </FlexItem>
-  <FlexItem paddingRight='none'>
+  <FlexItem
+    paddingRight='none'
+  >
     <Button
       variant='link'
       marginRight='none'
@@ -238,7 +242,7 @@ const TitleBar = ({ title }) =>  <Flex
 
 const GaugeLegend = ( { title, data, legendData }) => <Card
   padding='none'
-  margin='none'
+
   shadow='deeper'
   borderNone
 >
@@ -247,21 +251,12 @@ const GaugeLegend = ( { title, data, legendData }) => <Card
   </Card.Body>
   <SectionSeparator/>
   <Card.Body margin_top='sm'>
-    <Flex
-      orientation='column'
-      horizontal='center'
-    >
-      <FlexItem>
-        <Gauge
-          id='full-circle'
-          chartData={data}
-          fullCircle
-        />
-      </FlexItem>
-      <FlexItem>
-        <Caption text='Total Sales made Today'/>
-      </FlexItem>
-    </Flex>
+    <Gauge
+      id='full-circle'
+      chartData={data}
+      fullCircle
+    />
+    <Caption text='Total Sales made Today'/>
   </Card.Body>
   <SectionSeparator marginY='md'/>
   <Card.Body padding='none'>
@@ -305,7 +300,7 @@ const GridBlock = ({ data }) => {
   const status = data.hasOwnProperty('status') ? (data.status === 'positive' ? '+' : '-') : '';
 
   return(
-    <Flex orientation='column'>
+    <Flex orientation='column' wrap>
       <FlexItem
         marginY='md'
       >
@@ -373,17 +368,20 @@ const NumberGrid = ({ title, data }) => {
 //
 ////////////////////////////////////////////////////
 
+// remove flex from here and use the stylesheet
 const CardDashboard = () => {
   return(
-    <div id='main-dashboard-content'>
+    <div id='main-dashboard-content' >
       <Title
         marginBottom='sm'
         padding='xl'
         size='1'
         text='Dashboard Cards'
       />
+
       <Flex
         horizontal='center'
+        spacing='evenly'
         margin='lg'
         wrap
       >
@@ -393,16 +391,16 @@ const CardDashboard = () => {
         <FlexItem margin='md' padding='none'>
           <IconGrid {...ticketData}/>
         </FlexItem>
-        <FlexItem margin='md'>
-          <GaugeLegend {...totalRevenue}/>
-        </FlexItem>
-        <FlexItem margin='md'>
+        <FlexItem margin='lg'>
           <BarGraphLegend {...salesReport}/>
         </FlexItem>
         <FlexItem margin='md'>
           <NumberGrid {...clientData}/>
         </FlexItem>
       </Flex>
+      <div className={'gaugeCard'}>
+        <GaugeLegend {...totalRevenue}/>
+      </div>
     </div>
   );
 }

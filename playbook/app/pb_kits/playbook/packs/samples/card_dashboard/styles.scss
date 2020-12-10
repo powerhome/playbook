@@ -1,0 +1,16 @@
+@import "../../../tokens/screen_sizes";
+
+@include break_at($screen-xs-min){
+  .dashboardCards {
+    max-width: 100% !important;
+  }
+  .hideButton {
+    display: none;
+  }
+}
+
+.gaugeCard {
+  margin: 0 auto;
+  max-width: 35%;
+  text-align: center;
+}

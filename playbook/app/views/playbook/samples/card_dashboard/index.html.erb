@@ -85,10 +85,10 @@
         <tbody>
           <% pipeline_data.each do |info| %>
             <tr>
-              <td><%= pb_rails("caption", props: { text: info[:label], size: 'xs' }) %></td>
-              <td><%= pb_rails("progress_simple", props: { width: "100px", percent: info[:percent] }) %></td>
-              <td><%= pb_rails("caption", props: { margin_x: "md", text: "#{info[:percent]}%", size: 'xs' }) %></td>
-              <td><%= pb_rails("body", props: {text: "#{info[:value]}"}) %></td>
+              <td style="text-align:center"><%= pb_rails("caption", props: { text: info[:label], size: 'xs' }) %></td>
+              <td style="text-align:center"><%= pb_rails("progress_simple", props: { width: "100px", percent: info[:percent] }) %></td>
+              <td style="text-align:center"><%= pb_rails("caption", props: { margin_x: "md", text: "#{info[:percent]}%", size: 'xs' }) %></td>
+              <td style="text-align:center"><%= pb_rails("body", props: {text: "#{info[:value]}"}) %></td>
             </tr>
           <% end %>
         </tbody>
@@ -231,7 +231,7 @@
     <% pb_rails("card", props: { padding: "md", border_none: true, shadow: "deeper" }) do %>
       <%= pb_rails("flex", props: { horizontal: "center", wrap: true }) do %>
         <% grid_data.each do |data| %>
-          <%= pb_rails("flex/flex_item", props: { margin_y: "md", fixed_size: "250px" }) do %>
+          <%= pb_rails("flex/flex_item", props: { margin_y: "none", fixed_size: "250px" }) do %>
               <%= pb_rails("flex", props: { orientation: "column" }) do %>
                 <%= pb_rails("flex/flex_item") do %>
                   <%= pb_rails("body", props: { text: data[:title], color: "light" }) %>
