@@ -150,4 +150,15 @@ task :new_release, [:var] => [:environment] do |_task, args|
     # `npm publish playbook-ui-#{new_version}.tgz`
   end
   puts "\nUse npm publish to push manually (see new_release.rake for full command)"
+
+  # Github tag
+  if args[:var] != "alpha"
+    puts "\nPushed to NPM. Now lets create a tag..."
+    puts "\nWrite a brief tag release description. You can edit this later on GitHub."
+    description = STDIN.gets.chomp
+    puts "\nCreating Tag..."
+    `git tag -a #{new_version} -m "#{description}"`
+    puts "\nPushing Tag to GitHub..."
+    `git push origin #{new_version}`
+  end
 end
