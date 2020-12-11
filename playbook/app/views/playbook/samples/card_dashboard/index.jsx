@@ -89,10 +89,10 @@ const clientData = {
 //
 ////////////////////////////////////////////////////
 
+// List > LIstItem > Flex
 const FulfillmentChart = ({ chartData, title }) => (
   <Card
     padding='none'
-    margin='md'
     shadow='deeper'
     borderNone
   >
@@ -150,7 +150,7 @@ const FulfillmentChart = ({ chartData, title }) => (
   </Card>
 );
 
-const GridRowFill = ({ data }) => <Card.Body>
+const GridRowFill = ({ data }) => <Card.Body padding='none'>
   <Flex
     horizontal="center"
     spacing="evenly"
@@ -160,8 +160,8 @@ const GridRowFill = ({ data }) => <Card.Body>
       data.map( (line, i) =>
         <FlexItem
           key={`grid-row-item-${line.icon}-${i}`}
-          margin='xl'
-          fixedSize='250px'
+          margin='md'
+          fixedSize='215px'
         >
           <IconStatValue {...line}/>
         </FlexItem>
@@ -170,10 +170,11 @@ const GridRowFill = ({ data }) => <Card.Body>
   </Flex>
 </Card.Body>
 
+
 const IconGrid = ({ gridData }) =>
   <Card
-    margin='md'
     shadow='deeper'
+    padding='none'
     borderNone
   >
     <GridRowFill data={gridData.slice(0,2)}/>
@@ -224,6 +225,7 @@ const TitleBar = ({ title }) =>  <Flex
     />
   </FlexItem>
   <FlexItem
+    className='hideButton'
     paddingRight='none'
   >
     <Button
@@ -378,28 +380,22 @@ const CardDashboard = () => {
         size='1'
         text='Dashboard Cards'
       />
-
-      <Flex
-        horizontal='center'
-        spacing='evenly'
-        margin='lg'
-        wrap
-      >
-        <FlexItem margin='md'>
+      <div className='wrapper'>
+        <div className='card'>
           <FulfillmentChart {...pipelineData}/>
-        </FlexItem>
-        <FlexItem margin='md' padding='none'>
+        </div>
+        <div className='card'>
           <IconGrid {...ticketData}/>
-        </FlexItem>
-        <FlexItem margin='lg'>
+        </div>
+        <div className='card'>
           <BarGraphLegend {...salesReport}/>
-        </FlexItem>
-        <FlexItem margin='md'>
+        </div>
+        <div className='card'>
           <NumberGrid {...clientData}/>
-        </FlexItem>
-      </Flex>
-      <div className={'gaugeCard'}>
-        <GaugeLegend {...totalRevenue}/>
+        </div>
+        <div className='card gaugeCard'>
+          <GaugeLegend {...totalRevenue}/>
+        </div>
       </div>
     </div>
   );
