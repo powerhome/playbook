@@ -25,7 +25,6 @@
 }
 
 .card {
-  flex-grow: 1;
   box-sizing: border-box;
   margin: 20px;
 }
@@ -34,4 +33,5 @@
   margin: 20px;
   max-width: 0 auto;
   text-align: center;
+  width: 25% !important;
 }
