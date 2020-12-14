@@ -1,0 +1,24 @@
+
+<%= pb_rails("form_group") do %>
+  <%= pb_rails("date_picker", props: {
+    hide_label: true,
+    picker_id: "fp-methods"
+  }) %>
+  <%= pb_rails("button", props: { id: "close-btn", text: "Close" }) %>
+  <%= pb_rails("button", props: { id: "clear-btn", text: "Clear", variant: "secondary" }) %>
+<% end %>
+
+<%= javascript_tag do %>
+  window.addEventListener("DOMContentLoaded", () => {
+    const fp = document.querySelector("#fp-methods")._flatpickr
+    const closeBtn = document.querySelector("#close-btn")
+    const clearBtn = document.querySelector("#clear-btn")
+
+    closeBtn.addEventListener("click", () => {
+      fp.close()
+    })
+    clearBtn.addEventListener("click", () => {
+      fp.clear()
+    })
+  })
+<% end %>
