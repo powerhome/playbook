@@ -56,6 +56,7 @@ const SortMenu = ({ dark, options, value, onChange }: SortMenuProps) => {
         dark={dark}
         id="sort-button"
         onClick={toggle}
+        paddingRight="none"
         variant="link"
     >
       {map(value, ({ dir, name }) => (
