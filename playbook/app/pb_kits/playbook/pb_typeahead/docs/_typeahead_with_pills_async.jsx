@@ -20,8 +20,8 @@ import {
 const filterResults = (results) =>
   results.items.map((result) => {
     return {
-      label: result.login,
-      value: result.id,
+      name: result.login,
+      id: result.id,
     }
   })
 
@@ -71,6 +71,8 @@ const TypeaheadWithPillsAsync = () => {
       </If>
       <Typeahead
           async
+          getOptionLabel={(option) => option.name}
+          getOptionValue={(option) => option.id}
           isMulti
           label="Github Users"
           loadOptions={promiseOptions}
