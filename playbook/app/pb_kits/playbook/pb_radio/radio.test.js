@@ -24,8 +24,8 @@ test('returns namespaced class name', () => {
 test('returns dark class name', () => {
   render(
     <Radio
-        data={{ testid: testId }}
         dark
+        data={{ testid: testId }}
         defaultChecked
         label="Power"
         name="Group2"

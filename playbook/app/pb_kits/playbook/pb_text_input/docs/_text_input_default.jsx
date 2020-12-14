@@ -6,7 +6,7 @@ import {
 } from '../../'
 
 const TextInputDefault = () => {
-  const handleOnChangeFirstName = ({target}) => {
+  const handleOnChangeFirstName = ({ target }) => {
     setFirstName(target.value)
   }
   const ref = React.createRef()
