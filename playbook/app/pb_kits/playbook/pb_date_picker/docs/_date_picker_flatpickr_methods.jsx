@@ -12,6 +12,9 @@ const DatePickerFlatpickrMethods = () => {
   const clickHandlerClose = () => {
     fpInstance.close()
   }
+  const clickHandlerToday = () => {
+    fpInstance.setDate(new Date(), true)
+  }
 
   return (
     <div>
@@ -28,6 +31,10 @@ const DatePickerFlatpickrMethods = () => {
             onClick={clickHandlerClear}
             text="Clear"
             variant="secondary"
+        />
+        <Button
+            onClick={clickHandlerToday}
+            text="Today"
         />
       </FormGroup>
     </div>
