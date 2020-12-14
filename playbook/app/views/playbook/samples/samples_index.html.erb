@@ -52,6 +52,51 @@
 
         <% end %>
       <% end %>
+
+      <% if category_pages %>
+
+        <div style="max-width:1000px;margin:auto;">
+
+          <%= pb_rails("flex", props: { margin_bottom: "md", vertical: "center" }) do %>
+            <%= pb_rails("title", props: { text: category_title.titleize, tag: "h2", size: 2 }) %>
+            <%= pb_rails("icon_value", props: {
+              icon: "palette",
+              margin_left: "xs",
+              text: "#{category_pages.size} Designs"
+            }) %>
+          <% end %>
+
+              <%= pb_rails("layout", props: { layout: "collection" }) do %>
+                <%= pb_rails("layout/body") do %>
+                  <% category_pages.each do |link| %>
+                    <%= pb_rails("card", props: { classname: "ui-sample-card", padding: "md" }) do %>
+                      <a href=<%="/samples/#{link}"%>>
+                        <%= pb_rails("flex", props: { classname: "flex-container", spacing: "between", vertical: "center" }) do %>
+                              <%= pb_rails("title", props: {
+                                id: 'kits-used',
+                                text: link.titleize,
+                                tag: "h4",
+                                size: 4,
+                                variant: "link"
+                              }) %>
+                              <%= pb_rails("icon_circle", props: {
+                                icon: "angle-right",
+                                size: "sm",
+                                variant: "royal"
+                              }) %>
+                        <% end %>
+                      </a>
+                    <% end %>
+                  <% end %>
+                <% end %>
+              <% end %>
+
+        </div>
+
+      <% end %>
+
+
+
     <% end %>
 
   <% end %>
