@@ -27,7 +27,6 @@ const renderOptions = (options: SortOptions, value: SortValue[], handleChange: (
     return (
       <ListItem key={`option-${next.name}-${next.dir}`}>
         <Button
-            icon={directionIcon(next.dir)}
             onClick={partial(handleChange, next)}
             text={` ${label}`}
             variant="link"
@@ -60,11 +59,11 @@ const SortMenu = ({ dark, options, value, onChange }: SortMenuProps) => {
     >
       {map(value, ({ dir, name }) => (
         <span key={`current-sort-${name}-${dir}`}>
+          {` ${options[name]}`}
           <Icon
               dark={dark}
               icon={directionIcon(dir)}
           />
-          {` ${options[name]}`}
         </span>
       ))}
     </Button>
