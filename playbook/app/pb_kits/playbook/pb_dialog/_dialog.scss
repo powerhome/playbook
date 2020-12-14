@@ -1,0 +1,108 @@
+@import "../tokens/positioning";
+@import "../tokens/colors";
+@import "../pb_card/card_mixin";
+@import "../tokens/shadows";
+
+@keyframes modalFade {
+	from {
+		transform: translate3d(0, -50%, 0);
+		opacity: 0;
+	}
+	to {
+		transform: translate3d(0, 0, 0);
+		opacity: 1;
+	}
+}
+
+@keyframes modalFadeOut {
+	from {
+		transform: translate3d(0, 0, 0);
+		opacity: 1;
+	}
+	to {
+		transform: translate3d(0, -50%, 0);
+		opacity: 0;
+	}
+}
+
+@keyframes overlayFade {
+	from {
+		opacity: 0;
+		transform: translateY(0);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+@keyframes overlayFadeOut {
+	from {
+		opacity: 1;
+	}
+	to {
+		opacity: 0;
+	}
+}
+
+.dialog {
+	@include pb_card;
+	animation-name: modalFade;
+	animation-duration: 0.4s;
+	outline: none;
+	animation-timing-function: cubic-bezier(0.7,0,0.3,1);
+
+	&[class*="_sm"] {
+		width: 300px;
+	}
+
+	&[class*="_md"] {
+		width: 500px;
+	}
+
+	&[class*="_lg"] {
+		width: 800px;
+	}
+
+	&_body_open {
+		overflow: hidden;
+	}
+
+	&_after_open {
+		opacity: 1;
+	}
+
+	&_before_close {
+		animation-name: modalFadeOut;
+		animation-duration: 0.4s;
+		opacity: 0;
+	}
+
+	&_close_icon {
+		cursor: pointer;
+	}
+
+	&_overlay {
+		position: fixed;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		background-color: rgba($bg_dark, $opacity_4);
+		z-index: 100;
+		animation-name: overlayFade;
+		animation-duration: 0.4s;
+
+		&_after_open {
+			opacity: 1;
+		}
+		&_before_close {
+			animation-name: overlayFadeOut;
+			animation-duration: 0.4s;
+			opacity: 0;
+		}
+	}
+}

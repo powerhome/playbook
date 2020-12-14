@@ -110,3 +110,5 @@ export PbTypeahead from './pb_typeahead'
 export PbPopover from './pb_popover'
 export PbTable from './pb_table'
 export PbTooltip from './pb_tooltip'
+
+export Dialog from './pb_dialog/_dialog.jsx'
