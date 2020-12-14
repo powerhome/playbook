@@ -9,7 +9,9 @@ const FilterDefault = (props) => {
     { value: 'Philippines' },
     { value: 'A Galaxy Far Far Away Like Really Far Away' },
   ]
+
   return (
+
     <Filter
         {...props}
         double
@@ -17,6 +19,7 @@ const FilterDefault = (props) => {
           'Full Name': 'John Wick',
           'City': 'San Francisco',
         }}
+        minWidth="600px"
         results={1}
         sortOptions={{
           popularity: 'Popularity',

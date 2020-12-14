@@ -193,7 +193,6 @@ export default class PbReactPopover extends React.Component<PbPopoverProps> {
 
     const popoverComponent = (
       <Popover
-          {...this.props}
           className={className}
           maxHeight={maxHeight}
           maxWidth={maxWidth}
@@ -204,6 +203,7 @@ export default class PbReactPopover extends React.Component<PbPopoverProps> {
           placement={placement}
           referenceElement={referenceElement}
           zIndex={zIndex}
+          {...this.props}
       >
         {children}
       </Popover>

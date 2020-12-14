@@ -3,8 +3,8 @@
 import React, { Node, useState } from 'react'
 import { CircleIconButton, PbReactPopover } from '../../'
 
-const FiltersPopoverProps = { children: Node }
-const FiltersPopover = ({ children, dark }: FiltersPopoverProps) => {
+const FiltersPopoverProps = { children: Node, minWidth: string }
+const FiltersPopover = ({ children, dark, minWidth }: FiltersPopoverProps) => {
   const [hide, updateHide] = useState(true)
   const toggle = () => updateHide(!hide)
 
@@ -22,14 +22,13 @@ const FiltersPopover = ({ children, dark }: FiltersPopoverProps) => {
   return (
     <PbReactPopover
         closeOnClick="outside"
+        minWidth={minWidth}
         placement="bottom"
         reference={filterButton}
         shouldClosePopover={updateHide}
         show={!hide}
     >
-      <div className="pb-form">
-        {children}
-      </div>
+      <div className="pb-form">{children}</div>
     </PbReactPopover>
   )
 }
