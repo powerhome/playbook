@@ -53,6 +53,8 @@ const FilterDefault = (props) => {
         </Flex>
       </Filter>
 
+      <br />
+
       <Filter
           {...props}
 
