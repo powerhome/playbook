@@ -20,6 +20,16 @@ const CurrentFilters = ({ dark, filters }: CurrentFiltersProps) => {
 
   return (
     <div className="maskContainer">
+      <If condition={isEmpty(filters)}>
+        <div className="filters">
+          <Title
+              paddingLeft="xs"
+              size={4}
+              tag="h4"
+              text="No Filter Selected"
+          />
+        </div>
+      </If>
       <If condition={!isEmpty(filters)}>
         <div className="filters">
           <div className="left_gradient" />
