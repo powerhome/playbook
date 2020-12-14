@@ -9,9 +9,7 @@ const FilterDefault = (props) => {
     { value: 'Philippines' },
     { value: 'A Galaxy Far Far Away Like Really Far Away' },
   ]
-
   return (
-
     <Filter
         {...props}
         double
