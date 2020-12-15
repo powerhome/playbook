@@ -1,10 +1,11 @@
 import React from 'react'
 import { Background } from '../..'
 
-const BackgroundLight = () => (
+const BackgroundLight = (props) => (
   <Background
       backgroundColor="light"
       padding="xl"
+      {...props}
   />
 )
 
