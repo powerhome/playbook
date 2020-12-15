@@ -6,7 +6,7 @@ const chartData = [{
   data: [1475, 200, 3000, 654, 656],
 }]
 
-const BarGraphDefault = () => (
+const BarGraphDefault = (props) => (
   <div>
     <BarGraph
         axisTitle="Number of Employees"
@@ -16,6 +16,7 @@ const BarGraphDefault = () => (
         title="Fixed Height (300px)"
         xAxisCategories={['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']}
         yAxisMin={0}
+        {...props}
     />
 
     <br />
