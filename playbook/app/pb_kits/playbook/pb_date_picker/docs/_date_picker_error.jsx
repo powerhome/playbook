@@ -1,9 +1,10 @@
 import React from 'react'
 import { DatePicker } from '../../'
 
-const DatePickerError = () => (
+const DatePickerError = (props) => (
   <div>
     <DatePicker
+        {...props}
         error="Invalid date. Please pick a valid date."
         pickerId="date-picker-error"
     />

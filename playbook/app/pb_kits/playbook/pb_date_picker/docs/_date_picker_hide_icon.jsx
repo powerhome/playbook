@@ -1,9 +1,10 @@
 import React from 'react'
 import { DatePicker } from '../../'
 
-const DatePickerHideIcon = () => (
+const DatePickerHideIcon = (props) => (
   <div>
     <DatePicker
+        {...props}
         hideIcon
         pickerId="date-picker-hide-icon"
     />
