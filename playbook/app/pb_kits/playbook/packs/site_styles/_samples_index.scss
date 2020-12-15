@@ -28,6 +28,9 @@
     border-radius: $border_rad_heaviest;
     box-shadow: $shadow_deep;
   }
+  .sample-card-grid-override {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)) !important;
+  }
   // Mobile Styles
   @include break_at(731px){
     .list {

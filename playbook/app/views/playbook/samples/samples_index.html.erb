@@ -67,7 +67,7 @@
           <% end %>
 
               <%= pb_rails("layout", props: { layout: "collection" }) do %>
-                <%= pb_rails("layout/body") do %>
+                <%= pb_rails("layout/body", props: { classname: "sample-card-grid-override" }) do %>
                   <% category_pages.each do |link| %>
                     <%= pb_rails("card", props: { classname: "ui-sample-card", padding: "md" }) do %>
                       <a href=<%="/samples/#{link}"%>>
