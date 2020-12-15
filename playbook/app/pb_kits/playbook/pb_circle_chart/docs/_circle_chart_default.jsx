@@ -16,9 +16,10 @@ const data = [
   },
 ]
 
-const CircleChartDefault = () => (
+const CircleChartDefault = (props) => (
   <div>
     <CircleChart
+        {...props}
         chartData={data}
         id="circle-chart-default"
     />

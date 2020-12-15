@@ -17,9 +17,10 @@ const dataWithLegend = [{
 },
 ]
 
-const CircleChartWithLegendKit = () => (
+const CircleChartWithLegendKit = (props) => (
   <div>
     <CircleChart
+        {...props}
         chartData={dataWithLegend}
         id="with-legend-example"
         legend

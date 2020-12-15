@@ -16,10 +16,11 @@ const dataWithABlock = [
   },
 ]
 
-const CircleChartBlock = () => (
+const CircleChartBlock = (props) => (
 
   <div>
     <CircleChart
+        {...props}
         chartData={dataWithABlock}
         id="chart-with-a-block"
         innerSize="lg"
@@ -27,6 +28,7 @@ const CircleChartBlock = () => (
         rounded
     >
       <Title
+          {...props}
           size={1}
           tag="div"
       >
