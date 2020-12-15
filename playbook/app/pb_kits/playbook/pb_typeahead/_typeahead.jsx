@@ -27,6 +27,8 @@ type Props = {
   async?: boolean,
   label?: string,
   loadOptions?: noop | string,
+  getOptionLabel?: () => any,
+  getOptionValue?: () => any,
   name?: string,
 }
 
@@ -38,7 +40,6 @@ type Props = {
 const Typeahead = (props: Props) => {
   const selectProps = {
     cacheOptions: true,
-    defaultOptions: true,
     components: {
       Control,
       ClearIndicator,
@@ -50,6 +51,7 @@ const Typeahead = (props: Props) => {
       Placeholder,
       ValueContainer,
     },
+    defaultOptions: true,
     id: 'react-select-input',
     isClearable: true,
     isSearchable: true,
@@ -58,6 +60,8 @@ const Typeahead = (props: Props) => {
   }
 
   if (typeof(props.loadOptions) === 'string') selectProps.loadOptions = get(window, props.loadOptions)
+  if (typeof(props.getOptionLabel) === 'string') selectProps.getOptionLabel = get(window, props.getOptionLabel)
+  if (typeof(props.getOptionValue) === 'string') selectProps.getOptionValue = get(window, props.getOptionValue)
 
   const Tag = props.async ? AsyncSelect : Select
 

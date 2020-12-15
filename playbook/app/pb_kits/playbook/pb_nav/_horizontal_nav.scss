@@ -2,6 +2,7 @@
 @import "../tokens/colors";
 @import "../tokens/animation-curves";
 @import "../tokens/typography";
+@import "./subtle_mixin";
 
 $selector: ".pb_nav_list";
 
@@ -71,6 +72,27 @@ $selector: ".pb_nav_list";
       }
     }
   }
+
+  // Subtle Variant
+  &[class*=_subtle] {
+    @include subtle;
+    // Horizontal Overrides
+    [class*=pb_nav_list_kit_item] {
+      margin: 0;
+    }
+    [class*=_active] {
+      background-color: $active_light;
+      &[class*=dark] {
+        background-color: rgba($white, $opacity_1);
+      }
+      [class*=_item_link] {
+        [class*=_item_text]{
+          color: $primary;
+        }
+      }
+    }
+  }
+  
   &[class*=dark]{
     [class*=pb_nav_list_kit_item]{
       [class*=_link]{

@@ -7,5 +7,9 @@ module Playbook
     helper Playbook::PbDocHelper
     helper Playbook::PbSampleHelper
     append_view_path Playbook::Engine.root + "app/pb_kits"
+
+    def delete_dark_mode_cookie
+      cookies.delete :dark_mode
+    end
   end
 end

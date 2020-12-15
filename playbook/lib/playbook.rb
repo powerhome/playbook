@@ -5,6 +5,7 @@ require "slim-rails"
 require "webpacker"
 require "webpacker/react"
 
+require "playbook/props"
 require "playbook/version"
 require "playbook/engine" if defined?(Rails)
 

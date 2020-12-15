@@ -1,15 +1,15 @@
 import React from 'react'
 import { useState } from 'react'
-import { Nav } from '../../'
-import NavItem from '../../pb_nav/_item.jsx'
+import { Nav } from '../'
+import NavItem from '../pb_nav/_item.jsx'
 
-const SnippetToggle = (props) => {
+const SnippetToggle = () => {
   const [codeSnippet, toggleCodeSnippet] = useState('rails')
 
   const toggleHook = (snippetLang) => {
     toggleCodeSnippet(snippetLang)
     document.querySelectorAll('pre.highlight').forEach((node) => {
-      if(node.style.display === 'none'){
+      if (node.style.display === 'none') {
         node.style.display = 'block'
       } else {
         node.style.display = 'none'
@@ -18,9 +18,9 @@ const SnippetToggle = (props) => {
   }
 
   return (
-    <div style={{cursor: "pointer", maxWidth: "170px"}}>
+    <div style={{ cursor: 'pointer', maxWidth: '170px' }}>
       <Nav
-        orientation="horizontal"
+          orientation="horizontal"
       >
         <NavItem
             active={codeSnippet === 'rails'}

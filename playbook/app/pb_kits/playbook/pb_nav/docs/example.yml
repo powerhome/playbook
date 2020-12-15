@@ -9,6 +9,7 @@ examples:
   - subtle_with_icons_nav: Subtle With Icons
   - subtle_no_highlight_nav: Subtle No Highlight
   - horizontal_nav: Horizontal Nav
+  - subtle_horizontal_nav: Subtle Horizontal Nav
   - block_nav: Block
   - block_no_title_nav: Without Title
 
@@ -22,6 +23,7 @@ examples:
   - subtle_with_icons_nav: Subtle With Icons
   - subtle_no_highlight_nav: Subtle No Highlight
   - horizontal_nav: Horizontal Nav
+  - subtle_horizontal_nav: Subtle Horizontal Nav
   - block_nav: Block
   - block_no_title_nav: Without Title
 
