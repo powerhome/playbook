@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { Button, DatePicker, FormGroup } from '../../'
+import { Button, DatePicker } from '../../'
 
 const DatePickerFlatpickrMethods = () => {
   let fpInstance
@@ -18,25 +18,26 @@ const DatePickerFlatpickrMethods = () => {
 
   return (
     <div>
-      <FormGroup>
-        <DatePicker
-            hideLabel
-            pickerId="fp-methods"
-        />
-        <Button
-            onClick={clickHandlerClose}
-            text="Close"
-        />
-        <Button
-            onClick={clickHandlerClear}
-            text="Clear"
-            variant="secondary"
-        />
-        <Button
-            onClick={clickHandlerToday}
-            text="Today"
-        />
-      </FormGroup>
+      <Button
+          onClick={clickHandlerClose}
+          text="Close"
+      />
+      <Button
+          marginLeft="sm"
+          onClick={clickHandlerClear}
+          text="Clear"
+          variant="secondary"
+      />
+      <Button
+          marginLeft="sm"
+          onClick={clickHandlerToday}
+          text="Today"
+      />
+      <DatePicker
+          hideLabel
+          marginTop="sm"
+          pickerId="fp-methods"
+      />
     </div>
   )
 }
