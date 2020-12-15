@@ -10,7 +10,7 @@ export default class PbTooltip extends PbEnhancedElement {
   }
 
   connect() {
-    this.popper = new Popper(this.triggerElement, this.tooltip, {
+    this.popper = new Popper(this.triggerElements, this.tooltip, {
       placement: this.position,
       modifiers: {
         offset: {
@@ -58,8 +58,16 @@ export default class PbTooltip extends PbEnhancedElement {
     this.tooltip.classList.toggle('show')
   }
 
-  get triggerElement() {
-    return this._triggerElement = (this._triggerElement || document.querySelector(`#${this.triggerElementId}`))
+  get triggerElements() {
+    let triggerEl
+
+    if (this.triggerElementId) {
+      triggerEl = document.querySelector(`#${this.triggerElementId}`)
+    } else if (this.triggerElementsClass) {
+      triggerEl = document.querySelectorAll(`#${this.triggerElementsClass}`)
+    }
+
+    return this._triggerElements = (this._triggerElements || triggerEl)
   }
 
   get tooltip() {
@@ -76,5 +84,9 @@ export default class PbTooltip extends PbEnhancedElement {
 
   get tooltipId() {
     return this.element.dataset.pbTooltipTooltipId
+  }
+
+  get triggerElementsClass() {
+    return this.element.dataset.pbTooltipTriggerClass
   }
 }
