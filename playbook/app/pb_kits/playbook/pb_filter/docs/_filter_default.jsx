@@ -17,7 +17,6 @@ const FilterDefault = (props) => {
           'Full Name': 'John Wick',
           'City': 'San Francisco',
         }}
-        minWidth="600px"
         results={1}
         sortOptions={{
           popularity: 'Popularity',
