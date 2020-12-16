@@ -18,7 +18,7 @@ type NavItemProps = {
   imageUrl: String,
   link: string,
   onClick?: EventHandler,
-  target?: string,
+  target?: '_blank' | '_self' | '_parent' | '_top',
   text: string,
 }
 
@@ -35,7 +35,7 @@ const NavItem = (props: NavItemProps) => {
     imageUrl,
     link,
     onClick = () => {},
-    target,
+    target = '_self',
     text = '',
   } = props
   const Tag = link ? 'a' : 'div'
