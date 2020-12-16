@@ -13,51 +13,20 @@
   <% end %>
 
   <%= pb_rails("background", props: { background_color: "white", padding: "xl" }) do %>
+    <div class="main-content-wrapper">
+      <%# Loop through each Sample Category in samples.yml %>
+      <% @sample_yaml.each_with_index do |category, i| %>
 
-    <%# Loop through each Sample Category in samples.yml %>
-    <% @sample_yaml.each_with_index do |category, i| %>
+        <% category_title = category[0] %>
+        <% category_pages = @sample_yaml[category_title] %>
 
-      <% category_title = category[0] %>
-      <% category_pages = @sample_yaml[category_title] %>
+        <% if category_pages %>
 
-      <% if category_pages %>
-        <%= pb_rails("flex", props: {
-          classname: "full_page samples_flex_wrapper",
-          horizontal: "center",
-          margin_top: i > 0 ? "xl" : "",
-          wrap: true
-        }) do %>
-
-          <%= pb_rails("flex/flex_item", props: { classname: "preview" }) do %>
-            <%= pb_rails("title", props: { margin_bottom: "sm", text: category_title.titleize, tag: "h4", size: 4 }) %>
-            <%= image_tag("#{category_title}.svg", class: "sample_screenshot") %>
-            <%= pb_rails("icon_value", props: {
-              icon: "palette",
-              margin_top: "xs",
-              text: "#{category_pages.size} Designs"
-            }) %>
-          <% end %>
-          
-          <%= pb_rails("flex/flex_item", props: { classname: "list" }) do %>
-            <%= pb_rails("nav", props: {}) do %>
-              <% category_pages.each do |link| %>
-                <%= pb_rails("nav/item", props: { 
-                  icon_right: "angle-right",
-                  text: link == "crm_client_list" ? "CRM Client List" : link.titleize,
-                  link: "/samples/#{link}" 
-                }) %>
-              <% end %>
-            <% end %>
+          <% if i > 0 %>
+            <%= pb_rails("section_separator", props: { margin_top: "xl" }) %>
           <% end %>
 
-        <% end %>
-      <% end %>
-
-      <% if category_pages %>
-
-        <div style="max-width:1000px;margin:auto;">
-
-          <%= pb_rails("flex", props: { margin_bottom: "md", vertical: "center" }) do %>
+          <%= pb_rails("flex", props: { margin_bottom: "md", margin_top: i > 0 ? "xl" : "", vertical: "center" }) do %>
             <%= pb_rails("title", props: { text: category_title.titleize, tag: "h2", size: 2 }) %>
             <%= pb_rails("icon_value", props: {
               icon: "palette",
@@ -66,38 +35,33 @@
             }) %>
           <% end %>
 
-              <%= pb_rails("layout", props: { layout: "collection" }) do %>
-                <%= pb_rails("layout/body", props: { classname: "sample-card-grid-override" }) do %>
-                  <% category_pages.each do |link| %>
-                    <%= pb_rails("card", props: { classname: "ui-sample-card", padding: "md" }) do %>
-                      <a href=<%="/samples/#{link}"%>>
-                        <%= pb_rails("flex", props: { classname: "flex-container", spacing: "between", vertical: "center" }) do %>
-                              <%= pb_rails("title", props: {
-                                id: 'kits-used',
-                                text: link.titleize,
-                                tag: "h4",
-                                size: 4,
-                                variant: "link"
-                              }) %>
-                              <%= pb_rails("icon_circle", props: {
-                                icon: "angle-right",
-                                size: "sm",
-                                variant: "royal"
-                              }) %>
-                        <% end %>
-                      </a>
+          <%= pb_rails("layout", props: { layout: "collection" }) do %>
+            <%= pb_rails("layout/body", props: { classname: "sample-card-grid-override" }) do %>
+              <% category_pages.each do |link| %>
+                <%= pb_rails("card", props: { classname: "ui-sample-card", padding: "md" }) do %>
+                  <a href=<%="/samples/#{link}"%>>
+                    <%= pb_rails("flex", props: { classname: "flex-container", spacing: "between", vertical: "center" }) do %>
+                          <%= pb_rails("title", props: {
+                            id: 'kits-used',
+                            text: link.titleize,
+                            tag: "h4",
+                            size: 4,
+                            variant: "link"
+                          }) %>
+                          <%= pb_rails("icon_circle", props: {
+                            icon: "angle-right",
+                            size: "sm",
+                            variant: "royal"
+                          }) %>
                     <% end %>
-                  <% end %>
+                  </a>
                 <% end %>
               <% end %>
+            <% end %>
+          <% end %>
 
-        </div>
-
+        <% end %>
       <% end %>
-
-
-
-    <% end %>
-
+    </div>
   <% end %>
 </div>
