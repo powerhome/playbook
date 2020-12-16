@@ -26,10 +26,12 @@ const FilterDefault = (props) => {
           manager_name: 'Manager\'s Name',
         }}
         sortValue={[{ name: 'popularity', dir: 'desc' }]}
+        {...props}
     >
       <TextInput
           label="Full Name"
           placeholder="Enter name"
+          {...props}
       />
 
       <Select
@@ -37,16 +39,20 @@ const FilterDefault = (props) => {
           label="Territory"
           name="location"
           options={options}
+          {...props}
       />
       <Flex
           spacing="between"
+          {...props}
       >
         <Button
             text="Apply"
+            {...props}
         />
         <Button
             text="Clear"
             variant="secondary"
+            {...props}
         />
       </Flex>
     </Filter>
