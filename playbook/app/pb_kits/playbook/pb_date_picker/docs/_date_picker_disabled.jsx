@@ -4,19 +4,18 @@ import { DatePicker } from '../../'
 const DatePickerDisabled = (props) => (
   <div>
     <DatePicker
-        {...props}
         disableDate={[new Date().fp_incr(1)]}
         label="Disable Single Date"
         pickerId="single-disabled-date"
+        {...props}
     />
     <DatePicker
-        {...props}
         disableDate={[new Date().fp_incr(1), new Date().fp_incr(3)]}
         label="Disable Multiple Dates"
         pickerId="multiple-disabled-dates"
+        {...props}
     />
     <DatePicker
-        {...props}
         disableRange={[
           {
             from: new Date().fp_incr(1),
@@ -25,9 +24,9 @@ const DatePickerDisabled = (props) => (
         ]}
         label="Disable Single Range"
         pickerId="single-date-range"
+        {...props}
     />
     <DatePicker
-        {...props}
         disableRange={[
           {
             from: new Date().fp_incr(1),
@@ -40,12 +39,13 @@ const DatePickerDisabled = (props) => (
         ]}
         label="Disable Multiple Ranges"
         pickerId="multiple-date-ranges"
+        {...props}
     />
     <DatePicker
-        {...props}
         disableWeekdays={['Sunday', 'Saturday']}
         label="Disable Specific Weekdays"
         pickerId="disabled-weekdays"
+        {...props}
     />
   </div>
 )

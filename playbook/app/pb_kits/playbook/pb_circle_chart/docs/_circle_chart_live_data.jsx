@@ -39,14 +39,14 @@ const CircleChartLiveData = (props) => {
   return (
     <div>
       <Button
-          {...props}
           onClick={updateValue}
           text="Update Value"
+          {...props}
       />
       <CircleChart
-          {...props}
           chartData={data}
           id="circle-chart-live-data"
+          {...props}
       />
     </div>
   )

@@ -4,9 +4,9 @@ import { DatePicker } from '../../'
 const DatePickerHideIcon = (props) => (
   <div>
     <DatePicker
-        {...props}
         hideIcon
         pickerId="date-picker-hide-icon"
+        {...props}
     />
   </div>
 )

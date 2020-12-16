@@ -35,10 +35,10 @@ const dataWithLabels = [
 const CircleChartWithLabels = (props) => (
   <div>
     <CircleChart
-        {...props}
         chartData={dataWithLabels}
         dataLabels
         id="with-labels-example"
+        {...props}
     />
   </div>
 )

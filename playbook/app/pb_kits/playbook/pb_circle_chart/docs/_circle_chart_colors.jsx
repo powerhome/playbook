@@ -19,10 +19,10 @@ const dataWithColors = [
 const CircleChartColors = (props) => (
   <div>
     <CircleChart
-        {...props}
         chartData={dataWithColors}
         colors={['data-6', 'data-4', 'data-2']}
         id="colors-example"
+        {...props}
     />
   </div>
 )

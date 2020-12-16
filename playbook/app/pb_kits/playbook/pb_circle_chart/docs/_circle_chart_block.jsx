@@ -20,17 +20,17 @@ const CircleChartBlock = (props) => (
 
   <div>
     <CircleChart
-        {...props}
         chartData={dataWithABlock}
         id="chart-with-a-block"
         innerSize="lg"
         marginTop="xl"
         rounded
+        {...props}
     >
       <Title
-          {...props}
           size={1}
           tag="div"
+          {...props}
       >
         {'83'}
       </Title>

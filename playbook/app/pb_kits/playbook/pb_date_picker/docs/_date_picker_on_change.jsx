@@ -14,22 +14,22 @@ const DatePickerOnChange = (props) => {
   return (
     <div>
       <DatePicker
-          {...props}
           defaultDate={dateString}
           marginBottom="lg"
           onChange={changeHandler}
           pickerId="date-picker-onchange"
+          {...props}
       />
       <LabelValue
-          {...props}
           label="Date Object"
           marginBottom="lg"
           value={dateObj[0] ? dateObj[0].toString() : ''}
+          {...props}
       />
       <LabelValue
-          {...props}
           label="Date String"
           value={dateString}
+          {...props}
       />
     </div>
   )

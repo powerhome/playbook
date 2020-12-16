@@ -4,8 +4,8 @@ import { DatePicker } from '../../'
 const DatePickerDefault = (props) => (
   <div>
     <DatePicker
-        {...props}
         pickerId="date-picker-default"
+        {...props}
     />
   </div>
 )

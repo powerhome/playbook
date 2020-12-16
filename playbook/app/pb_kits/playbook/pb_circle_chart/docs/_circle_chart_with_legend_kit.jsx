@@ -20,10 +20,10 @@ const dataWithLegend = [{
 const CircleChartWithLegendKit = (props) => (
   <div>
     <CircleChart
-        {...props}
         chartData={dataWithLegend}
         id="with-legend-example"
         legend
+        {...props}
     />
   </div>
 )

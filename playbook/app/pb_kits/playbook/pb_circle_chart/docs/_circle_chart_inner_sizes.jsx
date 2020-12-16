@@ -91,29 +91,29 @@ const dataFourth = [
 const CircleChartInnerSizes = (props) => (
   <div>
     <CircleChart
-        {...props}
         chartData={dataFirst}
         id="with-innersize-sm"
         innerSize="sm"
+        {...props}
     />
     <CircleChart
-        {...props}
         chartData={dataSecond}
         id="with-innersize-md"
         innerSize="md"
+        {...props}
     />
     <CircleChart
-        {...props}
         chartData={dataThird}
         id="with-innersize-lg"
         innerSize="lg"
+        {...props}
     />
     <CircleChart
-        {...props}
         chartData={dataFourth}
         className="poop"
         id="with-innersize-none "
         innerSize="none"
+        {...props}
     />
   </div>
 )

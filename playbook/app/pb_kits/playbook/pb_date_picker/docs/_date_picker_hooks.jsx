@@ -23,14 +23,14 @@ const DatePickerHooks = (props) => {
   return (
     <div>
       <DatePicker
-          {...props}
           label="onChange"
           pickerId="date-picker-hooks-onchange"
+          {...props}
       />
       <DatePicker
-          {...props}
           label="onOpen"
           pickerId="date-picker-hooks-onopen"
+          {...props}
       />
     </div>
   )

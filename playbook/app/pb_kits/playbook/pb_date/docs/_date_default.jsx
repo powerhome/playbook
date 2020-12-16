@@ -5,49 +5,49 @@ const DateDefault = (props) => {
   return (
     <>
       <FormattedDate
-          {...props}
           size="sm"
           value={new Date()}
+          {...props}
       />
 
       <br />
 
       <FormattedDate
-          {...props}
           size="sm"
           value="2012-08-03"
+          {...props}
       />
 
       <br />
 
       <FormattedDate
-          {...props}
           showDayOfWeek
           size="sm"
           value="2017-12-03"
+          {...props}
       />
 
       <br />
       <br />
 
       <FormattedDate
-          {...props}
           value={new Date()}
+          {...props}
       />
 
       <br />
 
       <FormattedDate
-          {...props}
           value="2012-08-03"
+          {...props}
       />
 
       <br />
 
       <FormattedDate
-          {...props}
           showDayOfWeek
           value="2017-12-03"
+          {...props}
       />
     </>
   )

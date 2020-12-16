@@ -19,11 +19,11 @@ const dataRounded = [
 const CircleChartRounded = (props) => (
   <div>
     <CircleChart
-        {...props}
         chartData={dataRounded}
         id="default-test-rounded"
         innerSize="lg"
         rounded
+        {...props}
     />
   </div>
 )

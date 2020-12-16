@@ -4,56 +4,56 @@ import { Button, ButtonToolbar } from '../..'
 const ButtonToolbarSecondary = (props) => (
   <div className="pb--doc-demo-row">
     <ButtonToolbar
-        {...props}
         orientation="vertical"
         variant="secondary"
+        {...props}
     >
       <Button
-          {...props}
           text="Create"
           variant="secondary"
+          {...props}
       />
       <Button
-          {...props}
           text="Edit"
           variant="secondary"
+          {...props}
       />
       <Button
-          {...props}
           text="Copy"
           variant="secondary"
+          {...props}
       />
       <Button
-          {...props}
           text="Cut"
           variant="secondary"
+          {...props}
       />
     </ButtonToolbar>
 
     <ButtonToolbar
-        {...props}
         orientation="horizontal"
         variant="secondary"
+        {...props}
     >
       <Button
-          {...props}
           text="Create"
           variant="secondary"
+          {...props}
       />
       <Button
-          {...props}
           text="Edit"
           variant="secondary"
+          {...props}
       />
       <Button
-          {...props}
           text="Copy"
           variant="secondary"
+          {...props}
       />
       <Button
-          {...props}
           text="Cut"
           variant="secondary"
+          {...props}
       />
     </ButtonToolbar>
   </div>

@@ -35,10 +35,10 @@ const dataWithTitle = [
 const CircleChartWithLegendKit = (props) => (
   <div>
     <CircleChart
-        {...props}
         chartData={dataWithTitle}
         id="with-title-example"
         title="Active Users on Social Media"
+        {...props}
     />
   </div>
 )
