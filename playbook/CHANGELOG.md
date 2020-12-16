@@ -442,7 +442,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Hot fixes [\#1016](https://github.com/powerhome/playbook/pull/1016) ([jasperfurniss](https://github.com/jasperfurniss))
 
 
-## [[v6.2.0] 2020-8-13](https://github.com/powerhome/playbook/tree/HEAD)
+## [v6.2.0] 2020-8-13](https://github.com/powerhome/playbook/tree/HEAD/6.2.0)
 
 [Full Changelog](https://github.com/powerhome/playbook/compare/6.1.0...HEAD)
 
@@ -465,7 +465,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - ~~Add Title Detail Dark Mode [\#972](https://github.com/powerhome/playbook/pull/972) ([kellyeryan](https://github.com/kellyeryan))~~ (reverted)
 
 
-## [v6.1.0] 2020-8-6
+## [v6.1.0](https://github.com/powerhome/playbook/tree/HEAD/6.1.0) 2020-8-6
 
 ### Fixed
 - Updated and added to PB Toggle kit ([#946](https://github.com/powerhome/playbook/pull/946)  @kellyeryan)

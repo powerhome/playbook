@@ -1,10 +1,10 @@
-<%= pb_rails("title", props: { text: "example", size: 1 })%>
+<%= pb_rails("title", props: { text: "Changelog", size: 1, margin: "md" })%>
 <%= pb_rails("flex", props: { orientation: "column", horizontal: "stretch" }) do %>
-  <%= pb_rails("flex/flex_item", props: { margin: "md" }) do%>
-    <%= pb_rails("body", props: { text: "We release a new version every thursday!" }) %>
+  <%= pb_rails("flex/flex_item", props: { margin: "md" }) do %>
+    <%= pb_rails("body", props: { text: "We release a new version every Thursday!" }) %>
   <% end %>
   <% @data.each do |x| %>
-    <%= pb_rails("flex/flex_item", props: { margin: "sm" } ) do %>
+    <%= pb_rails("flex/flex_item", props: { margin: "xl" }) do %>
       <%= pb_rails("card", props: { margin: "sm", padding: "lg" }) do %>
         <%= sanitize x %>
       <% end %>
