@@ -18,6 +18,7 @@ type NavItemProps = {
   imageUrl: String,
   link: string,
   onClick?: EventHandler,
+  target?: '_blank' | '_self' | '_parent' | '_top',
   text: string,
 }
 
@@ -34,6 +35,7 @@ const NavItem = (props: NavItemProps) => {
     imageUrl,
     link,
     onClick = () => {},
+    target = '_self',
     text = '',
   } = props
   const Tag = link ? 'a' : 'div'
@@ -54,6 +56,7 @@ const NavItem = (props: NavItemProps) => {
           className="pb_nav_list_item_link"
           href={link}
           onClick={onClick}
+          target={target}
       >
         <If condition={imageUrl}>
           <div
