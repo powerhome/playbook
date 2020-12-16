@@ -32,6 +32,10 @@ module Playbook
 
     def getting_started; end
 
+    def changelog
+      @data = File.read("../../CHANGELOG.md").to_s
+    end
+
     def grid
       render layout: "layouts/playbook/grid"
     end
