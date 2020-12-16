@@ -1,6 +1,15 @@
-@import "../pb_title/title";
-@import "../pb_body/body";
+[class^=pb_date_time_stacked] {
 
-.pb_date_time_stacked_kit {
-  padding-left: $space-xs;
+  [class^=padding_month] {
+    padding-bottom: 10px !important;
+  }
+
+  [class^=padding_day] {
+    padding-bottom: 10px !important;
+  }
+
+}
+.date-time-padding {
+  padding-right: 3px;
+  padding-left: 3px;
 }

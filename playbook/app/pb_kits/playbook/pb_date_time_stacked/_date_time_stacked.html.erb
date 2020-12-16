@@ -1,15 +1,17 @@
 <%= content_tag(:div,
     id: object.id,
     data: object.data,
-    class: object.classname) do %>
+    class: object.classname,
+    aria: object.aria) do %>
 
-    <%= pb_rails("flex", props: { orientation: "row", vertical: "center" }) do %>
-      <%= pb_rails("flex/flex_item") do %>
-        <%= pb_rails("date_stacked", props: { align: "right", date: object.date, reverse: true, size: "sm", dark: object.dark }) %>
-      <% end %>
-      <%= pb_rails("flex/flex_item") do %>
-        <%= pb_rails("time_stacked", props: { classname: "pb_date_time_stacked_kit", date: object.date, tag: "caption" }) %>
-      <% end %>
+<%= pb_rails("flex", props: {classname: "flex-container", vertical: "stretch"}) do %>
+    <%= pb_rails("body", props: {classname: "flex-item"}) do %>
+      <%= pb_rails("date_stacked", props: { date: object.date, size: "sm", align: "right", bold: true }) %>
     <% end %>
+    <%= pb_rails("section_separator", props: { orientation: "vertical", classname: "date-time-padding" }) %>
+    <%= pb_rails("body", props: {classname: "flex-item"}) do %>
+      <%= pb_rails("time_stacked", props: { date: object.date }) %>
+    <% end %>
+<% end %>
 
 <% end %>

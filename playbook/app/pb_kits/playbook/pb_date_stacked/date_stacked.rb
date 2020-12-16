@@ -20,9 +20,11 @@ module Playbook
                   default: false
       prop :dark, type: Playbook::Props::Boolean,
                   default: false
+      prop :bold, type: Playbook::Props::Boolean,
+                  default: false
 
       def classname
-        generate_classname("pb_date_stacked_kit", align, size, reverse_class, dark_class)
+        generate_classname("pb_date_stacked_kit", align, size, bold, reverse_class, dark_class)
       end
 
       def title_size
@@ -37,10 +39,7 @@ module Playbook
       end
 
       def month
-        month = Playbook::PbKit::PbDateTime.new(date)
-        content_tag(:time, datetime: month.to_iso) do
-          "#{month.to_month}"
-        end
+        pb_date_time.to_month.capitalize
       end
 
       def year
@@ -54,7 +53,15 @@ module Playbook
         end
       end
 
+      def bold_class
+        bold ? "bold" : nil
+      end
+
     private
+
+      def pb_date_time
+        Playbook::PbKit::PbDateTime.new(date)
+      end
 
       def reverse_class
         reverse ? "reverse" : nil

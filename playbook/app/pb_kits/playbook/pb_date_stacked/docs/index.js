@@ -1,3 +1,4 @@
+export { default as DateStackedBold } from './_date_stacked_bold.jsx'
 export { default as DateStackedDefault } from './_date_stacked_default.jsx'
 export { default as DateStackedNotCurrentYear } from './_date_stacked_not_current_year.jsx'
 export { default as DateStackedReverse } from './_date_stacked_reverse.jsx'

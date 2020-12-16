@@ -11,6 +11,7 @@ module Playbook
                   default: ::DateTime.current
       prop :dark, type: Playbook::Props::Boolean,
                   default: false
+
     end
   end
 end
