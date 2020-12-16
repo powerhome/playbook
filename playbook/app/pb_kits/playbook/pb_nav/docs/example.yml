@@ -12,6 +12,7 @@ examples:
   - subtle_horizontal_nav: Subtle Horizontal Nav
   - block_nav: Block
   - block_no_title_nav: Without Title
+  - new_tab: Open in a New Tab
 
   react:
   - default_nav: Default
@@ -26,4 +27,4 @@ examples:
   - subtle_horizontal_nav: Subtle Horizontal Nav
   - block_nav: Block
   - block_no_title_nav: Without Title
-
+  - new_tab: Open in a New Tab
