@@ -17,49 +17,20 @@ module Playbook
       end
     end
 
-    def read_file(filename)
-      if File.file?(filename)
-        File.read(filename)
-      else
-        ""
-      end
-    end
-
-    def get_samples(kit)
-      sample_yaml = YAML.load_file("#{Playbook::Engine.root}/app/pb_kits/playbook/data/samples.yml")
-      all_samples = []
-
-      sample_yaml.each do |_category, sample|
-        all_samples.push(sample)
-      end
-
-      output = ""
-      samples_using_kit = []
-      all_samples[0].each do |sample|
-        filepath = "#{Playbook::Engine.root}/app/views/playbook/samples/#{sample}/index.html.erb"
-        output = `grep -l 'pb_rails(\"#{kit}' #{filepath}`
-        samples_using_kit.push(sample) if output.chomp == filepath
-      end
-      samples_using_kit
-    end
-
     def kit_path(kit)
       "#{Playbook::Engine.root}/app/pb_kits/playbook/pb_#{kit}"
     end
 
     def get_kit_description(kit)
-      filename = "#{Playbook::Engine.root}/app/pb_kits/playbook/pb_#{kit}/docs/_description.md"
-      read_file(filename)
+      read_source_file "app/pb_kits/playbook/pb_#{kit}/docs/_description.md"
     end
 
     def get_per_sample_descriptions(kit, key)
-      filename = "#{Playbook::Engine.root}/app/pb_kits/playbook/pb_#{kit}/docs/_#{key}.md"
-      read_file(filename)
+      read_source_file "app/pb_kits/playbook/pb_#{kit}/docs/_#{key}.md"
     end
 
     def get_kit_footer(kit)
-      filename = "#{Playbook::Engine.root}/app/pb_kits/playbook/pb_#{kit}/docs/_footer.md"
-      read_file(filename)
+      read_source_file "app/pb_kits/playbook/pb_#{kit}/docs/_footer.md"
     end
 
     def pb_kit(kit: "", type: "rails", show_code: true, limit_examples: false)
@@ -165,6 +136,37 @@ module Playbook
 
     def sub_category_active(kit, link)
       (!kit.nil? && @kit == link)
+    end
+
+    def read_source_file(*args)
+      path = Playbook::Engine.root.join(*args)
+      path.exist? ? path.read : ""
+    end
+
+    def format_search_hash(kit)
+      label_value_hash = {
+        label: kit.to_s.titleize,
+        value: @type == "react" || @type.nil? ? "/kits/#{kit}/react" : "/kits/#{kit}",
+      }
+      label_value_hash
+    end
+
+    def search_list
+      all_kits = []
+      formatted_kits = []
+      MENU["kits"].each do |kit|
+        if kit.is_a? Hash
+          kit.values[0].each do |sub_kit|
+            all_kits.push(sub_kit)
+          end
+        else
+          all_kits.push(kit)
+        end
+      end
+      all_kits.sort!.each do |sorted_kit|
+        formatted_kits.push(format_search_hash(sorted_kit))
+      end
+      formatted_kits
     end
 
   private

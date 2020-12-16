@@ -16,6 +16,6 @@
         <%= yield %>
     <%= render 'layouts/playbook/footer'%>
   </body>
-  <%= javascript_packs_with_chunks_tag 'application', 'site' %>
+  <%= javascript_packs_with_chunks_tag 'application', 'rails-examples', 'site' %>
   <%= yield :pb_js %>
   <%= render 'layouts/playbook/ga'%>

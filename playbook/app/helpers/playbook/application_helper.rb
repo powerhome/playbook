@@ -1,32 +1,26 @@
 # frozen_string_literal: true
 
-require "webpacker"
-require "webpacker/react/railtie" if defined?(Rails)
-require "webpacker/react/helpers"
-require "webpacker/react/component"
-
 module Playbook
   module ApplicationHelper
-    include ::Webpacker::Helper
     include ::Webpacker::React::Helpers
+    include ::Playbook::PbKitHelper
 
-    def dark_mode
-      if cookies[:dark_mode] == "true"
-        true
-      else
-        false
-      end
+    def pb_rails(kit, props: {}, &block)
+      super kit, props: dark_mode_props(props), &block
     end
+
+    def pb_react(kit, props: {}, options: {})
+      react_component kit.camelize, dark_mode_props(props), options
+    end
+
+  private
 
     def dark_mode_props(props)
-      if cookies[:dark_mode] == "true"
-        props.merge(dark: dark_mode)
-      elsif cookies[:dark_mode] == "false"
-        props.merge(dark: dark_mode)
-      else
-        props
-      end
+      (props || {}).merge(dark: dark_mode?)
     end
 
+    def dark_mode?
+      cookies[:dark_mode].eql? "true"
+    end
   end
 end

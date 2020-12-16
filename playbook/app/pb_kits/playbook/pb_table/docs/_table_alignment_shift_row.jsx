@@ -27,7 +27,7 @@ const TableAlignmentShiftRow = () => {
           <td>{'Value 4a'}</td>
           <td>{'Value 5a'}</td>
         </tr>
-        <tr shift="up">
+        <tr shift="middle">
           <td>
             {'Value 1b'}
             <br />

@@ -3,7 +3,7 @@
     data: object.data,
     class: object.classname) do %>
       <%= pb_rails("body", props: { status: object.status }) do %>
-        <%= pb_rails("icon", props: { fixed_width: true, icon: object.icon }) if object.icon %>
+        <%= pb_rails("icon", props: { fixed_width: true, icon: object.returned_icon }) if object.returned_icon %>
         <%= "#{object.value}%" if object.value %>
       <% end %>
 <% end %>

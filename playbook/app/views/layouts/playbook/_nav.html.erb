@@ -4,56 +4,54 @@
   <% end %>
   <%= pb_rails("flex", props:{ spacing:"between", vertical: "center" }) do %>
     <%= pb_rails("flex/flex_item", props: {}) do %>
-      <%= pb_rails("flex", props:{ classname: "margin-toggle", margin_bottom: "xs", spacing:"between", vertical: "center" }) do %>
-        <%= link_to root_url do %>
-          <%= image_tag("pb-logo.svg") %>
+      <%= pb_rails("flex", props: { spacing: "between", vertical: "center" }) do %>
+        <%= pb_rails("flex/flex_item", props: {}) do %>
+          <%= link_to root_url do %>
+            <%= image_tag("pb-logo.svg") %>
+          <% end %>
+          <%= pb_rails("caption", props: { classname: "pb-version-tag", text: Playbook::VERSION }) %>
         <% end %>
-        <%= pb_rails("caption", props: { tag: "span", text: Playbook::VERSION }) %>
+
+        <%= pb_rails("flex/flex_item", props: {}) do %>
+          <%= pb_rails("section_separator", props: { classname: "separator-explicit-height", orientation: "vertical" }) %>
+        <% end %>
+
+        <%= pb_rails("flex/flex_item", props: {}) do %>
+          <%= react_component("KitSearch", kits: search_list()) %>
+        <% end %>
       <% end %>
     <% end %>
 
-    <div class="full-size-nav">
-      <%= pb_rails("flex/flex_item", props: {}) do %>
-        <%= pb_rails("nav", props: {margin_top: "sm",orientation: "horizontal"}) do %>
-          <%= pb_rails("nav/item", props: { active: current_page?('/getting_started'), text: "Getting Started", link: "/getting_started" }) %>
-          <%= pb_rails("nav/item", props: { active: current_page?('/visual_guidelines'), text: "Visual Guidelines", link: "/visual_guidelines" }) %>
-          <%= pb_rails("nav/item", props: { active: action_name.include?('kit'), text: "Design Components", link: "/kits" }) %>
-          <%= pb_rails("nav/item", props: { active: current_page?('/samples'), text: "Samples", link: "/samples" }) %>
-        <% end %>
-      <% end %>
-    </div>
-      
     <%= pb_rails("flex/flex_item", props: {}) do %>
-      <div id="toggle-modes">
-        <% if action_name.include?('kit') || current_page?('/tokens') || current_page?('/utilities')  %>
-          <% if cookies[:dark_mode] == "false" || cookies[:dark_mode] == nil%>
-            <%= pb_rails("circle_icon_button", props: {
-              variant: "secondary",
-              icon: "moon",
-              tag:"a",
-              link: enable_dark_mode_path,
-              margin_bottom: "xs"
-            }) %>
-          <% else %>
-            <%= pb_rails("circle_icon_button", props: {
-              variant: "secondary",
-              icon: "sun",
-              tag:"a",
-              link: disable_dark_mode_path,
-              margin_bottom: "xs"
-            }) %>
-          <% end %>
-        <% else %>
-          <%# Re-engineered circle icon button for github logo %>
-          <div class="pb_circle_icon_button_kit mb_xs">
-            <a class="pb_button_kit_secondary_inline_enabled" type="button" href="https://github.com/powerhome/playbook" target="_self">
-            <span class="pb_button_content">
-              <%= image_tag("github-brands.svg", class: "mt_sm", style: "height:28px;width:28px") %>
-            </span>
-            </a>
+      <%= pb_rails("flex", props: { spacing: "between", vertical: "center" }) do %>
+
+        <%= pb_rails("flex/flex_item", props: {}) do %>
+          <div class="full-size-nav">
+            <%= pb_rails("nav", props: { margin_right: "sm", orientation: "horizontal", variant: "subtle"}) do %>
+              <%= pb_rails("nav/item", props: { active: current_page?('/visual_guidelines'), text: "Design", link: "/visual_guidelines" }) %>
+              <%= pb_rails("nav/item", props: { active: action_name.include?('kit'), text: "Components", link: "/kits" }) %>
+              <%= pb_rails("nav/item", props: { active: current_page?('/samples'), text: "Samples", link: "/samples" }) %>
+            <% end %>
           </div>
         <% end %>
-      </div>
+
+        <%= pb_rails("flex/flex_item", props: {}) do %>
+          <% if action_name.include?('kit') %>
+              <%= pb_rails("flex", props: { classname: "toggle-wrapper", spacing: "between", vertical: "center" }) do %>
+                <%= react_component("DarkModeToggle", initMode: cookies[:dark_mode] )%>
+              <% end %>
+          <% else %>
+            <%# Re-engineered circle icon button for github logo %>
+            <div class="pb_circle_icon_button_kit github-nav-icon">
+              <a class="pb_button_kit_secondary_inline_enabled" type="button" href="https://github.com/powerhome/playbook" target="_self">
+              <span class="pb_button_content">
+                <%= image_tag("github-brands.svg", class: "mt_sm", style: "height:28px;width:28px") %>
+              </span>
+              </a>
+            </div>
+          <% end %>
+        <% end %>
+      <% end %>
     <% end %>
   <% end %>
 </div>
