@@ -1,7 +1,7 @@
 <%= pb_rails("date_picker", props: {
   label: "Dynamic dates",
-  max_date: (Date.today + 3).httpdate,
-  min_date: (Date.today - 3).httpdate,
+  max_date: (DateTime.current + 1.day).utc.iso8601,
+  min_date: (DateTime.current - 1.day).utc.iso8601,
   picker_id: "date-picker-min-max1"
 }) %>
 

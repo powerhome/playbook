@@ -3,11 +3,13 @@
 module Playbook
   class ApplicationController < ActionController::Base
     helper Webpacker::Helper
-    helper Playbook::PbKitHelper
+    helper Playbook::ApplicationHelper
     helper Playbook::PbDocHelper
     helper Playbook::PbSampleHelper
     append_view_path Playbook::Engine.root + "app/pb_kits"
-  end
 
-  
+    def delete_dark_mode_cookie
+      cookies.delete :dark_mode
+    end
+  end
 end

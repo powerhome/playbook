@@ -1,6 +1,9 @@
 @import "../../tokens/colors";
 
 .kit-show-wrapper {
+  .sample-card-grid-override {
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)) !important;
+  }
   .sample-ui-link-wrapper {
     max-width: 275px;
     cursor: pointer;

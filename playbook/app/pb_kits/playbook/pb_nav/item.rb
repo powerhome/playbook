@@ -13,7 +13,9 @@ module Playbook
       prop :icon_left
       prop :icon_right
       prop :image_url
-
+      prop :target, type: Playbook::Props::Enum,
+                    values: %w[_blank _self _parent _top],
+                    default: "_self"
       def classname
         generate_classname("pb_nav_list_kit_item", active_class)
       end
@@ -30,7 +32,8 @@ module Playbook
 
       def link_options
         options.merge(
-          href: link
+          href: link,
+          target: target
         )
       end
 

@@ -1,17 +1,17 @@
 <%= pb_rails("date_picker", props: {
-  default_date: "07/31/2020",
+  default_date: "07/25/2020",
   label: "Default Date String",
   picker_id: "date-picker-default-date1"
 }) %>
 
 <%= pb_rails("date_picker", props: {
-  default_date: (Date.today + 2).httpdate,
+  default_date: DateTime.current.utc.iso8601,
   label: "Default Date Dynamic",
   picker_id: "date-picker-default-date2"
 }) %>
 
 <%= pb_rails("date_picker", props: {
-  default_date: [(Date.today).httpdate, (Date.today + 7).httpdate],
+  default_date: [DateTime.current.utc.iso8601, (DateTime.current + 7.day).utc.iso8601],
   label: "Default Date Range",
   mode: "range",
   picker_id: "date-picker-default-date3"
