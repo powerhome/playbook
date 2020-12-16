@@ -14,6 +14,7 @@ examples:
   - date_picker_flatpickr_methods: Flatpickr Methods
   - date_picker_hooks: Hooks
   - date_picker_year_range: Year Range
+  - date_picker_anti_patterns: Anti-Patterns
   
   
   react:
@@ -31,4 +32,3 @@ examples:
   - date_picker_flatpickr_methods: Flatpickr Methods
   - date_picker_hooks: Hooks
   - date_picker_year_range: Year Range
-  
