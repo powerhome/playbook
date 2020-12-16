@@ -23,13 +23,13 @@ const DatePickerFlatpickrMethods = () => {
           text="Close"
       />
       <Button
-          marginLeft="sm"
+          // marginLeft="sm"
           onClick={clickHandlerClear}
           text="Clear"
           variant="secondary"
       />
       <Button
-          marginLeft="sm"
+          // marginLeft="sm"
           onClick={clickHandlerToday}
           text="Today"
       />

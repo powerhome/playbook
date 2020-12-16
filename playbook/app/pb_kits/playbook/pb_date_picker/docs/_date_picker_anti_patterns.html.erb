@@ -17,12 +17,6 @@
 }) %>
 
 <%= pb_rails("date_picker", props: {
-  label: "No ISO Formatting - Works Under Some Circumstances but is Discouraged",
-  default_date: DateTime.current.utc,
-  picker_id: "date-picker-anti-pattern4"
-}) %>
-
-<%= pb_rails("date_picker", props: {
   label: "String Conversion Without ISO Formatting",
   default_date: DateTime.current.utc.to_s,
   picker_id: "date-picker-anti-pattern5"

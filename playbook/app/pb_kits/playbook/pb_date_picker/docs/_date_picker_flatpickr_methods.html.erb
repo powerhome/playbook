@@ -1,14 +1,11 @@
-
-
 <%= pb_rails("button", props: { id: "close-btn", text: "Close" }) %>
-<%= pb_rails("button", props: { id: "clear-btn", margin_left: "sm", text: "Clear", variant: "secondary" }) %>
-<%= pb_rails("button", props: { id: "today-btn", margin_left: "sm", text: "Today" }) %>
+<%= pb_rails("button", props: { id: "clear-btn", text: "Clear", variant: "secondary" }) %>
+<%= pb_rails("button", props: { id: "today-btn", text: "Today" }) %>
 <%= pb_rails("date_picker", props: {
   hide_label: true,
   margin_top: "sm",
   picker_id: "fp-methods"
 }) %>
-
 
 <%= javascript_tag do %>
   window.addEventListener("DOMContentLoaded", () => {
