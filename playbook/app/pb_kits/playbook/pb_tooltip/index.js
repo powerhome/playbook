@@ -7,7 +7,7 @@ import {
   preventOverflow,
 } from '@popperjs/core'
 
-const TOOLTIP_OFFSET = [0, 10]
+const TOOLTIP_OFFSET = [0, 20]
 const TOOLTIP_TIMEOUT = 250
 
 export default class PbTooltip extends PbEnhancedElement {
@@ -20,22 +20,37 @@ export default class PbTooltip extends PbEnhancedElement {
       trigger.addEventListener('mouseenter', () => {
         this.mouseenterTimeout = setTimeout(() => {
           this.showTooltip(trigger)
+          this.checkCloseTooltip(trigger)
         }, TOOLTIP_TIMEOUT)
 
-        trigger.addEventListener('mouseleave', (event) => {
+        trigger.addEventListener('mouseleave', () => {
           clearTimeout(this.mouseenterTimeout)
-          if (event.target.closest(`#${this.tooltipId}`) !== this.tooltip) {
-            setTimeout(() => {
-              this.hideTooltip()
-            }, 0)
-          }
+
+          setTimeout(() => {
+            this.hideTooltip()
+          }, 0)
         }, { once: true })
       })
     })
 
+    this.tooltip.addEventListener('mouseenter', () => {
+      clearTimeout(this.mouseenterTimeout)
+    })
     this.tooltip.addEventListener('mouseleave', () => {
       this.hideTooltip()
     })
+  }
+
+  checkCloseTooltip(trigger) {
+    document.querySelector('body').addEventListener('click', ({ target }) => {
+      const isTooltip = target.closest(`#${this.tooltipId}`) === this.tooltip
+      const isTrigger = target.closest(this.triggerElementSelector) === trigger
+      if (isTrigger || isTooltip) {
+        this.checkCloseTooltip(trigger)
+      } else {
+        this.hideTooltip()
+      }
+    }, { once: true })
   }
 
   showTooltip(trigger) {
