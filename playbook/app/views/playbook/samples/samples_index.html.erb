@@ -38,24 +38,24 @@
           <%= pb_rails("layout", props: { layout: "collection" }) do %>
             <%= pb_rails("layout/body", props: { classname: "sample-card-grid-override" }) do %>
               <% category_pages.each do |link| %>
-                <%= pb_rails("card", props: { classname: "ui-sample-card", padding: "md" }) do %>
-                  <a href=<%="/samples/#{link}"%>>
+                <a href=<%="/samples/#{link}"%>>
+                  <%= pb_rails("card", props: { classname: "ui-sample-card", padding: "md" }) do %>
                     <%= pb_rails("flex", props: { classname: "flex-container", spacing: "between", vertical: "center" }) do %>
-                          <%= pb_rails("title", props: {
-                            id: 'kits-used',
-                            text: link.titleize,
-                            tag: "h4",
-                            size: 4,
-                            variant: "link"
-                          }) %>
-                          <%= pb_rails("icon_circle", props: {
-                            icon: "angle-right",
-                            size: "sm",
-                            variant: "royal"
-                          }) %>
+                      <%= pb_rails("title", props: {
+                        id: 'kits-used',
+                        text: link.titleize,
+                        tag: "h4",
+                        size: 4,
+                        variant: "link"
+                      }) %>
+                      <%= pb_rails("icon_circle", props: {
+                        icon: "angle-right",
+                        size: "sm",
+                        variant: "royal"
+                      }) %>
                     <% end %>
-                  </a>
-                <% end %>
+                  <% end %>
+                </a>
               <% end %>
             <% end %>
           <% end %>
