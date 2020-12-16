@@ -37,7 +37,7 @@ module Playbook
       @data = File
               .read("../../CHANGELOG.md")
               .to_s
-              .split(/##\s\[|\\\*\s/)
+              .split(/##\s\[/)
               .map { |change| markdown_chunk(markdown, change) }[1..-1]
     end
 
@@ -84,7 +84,7 @@ module Playbook
   private
 
     def markdown_chunk(markdown, change)
-      markdown.render("#{change[0] =~ /[0-9]/ ? "##[" : "\*"} #{change}")
+      markdown.render("#{change[0] =~ /[0-9]/ ? '##[' : '\*'}#{change}")
     end
 
     def set_category
