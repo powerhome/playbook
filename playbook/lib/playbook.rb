@@ -1,9 +1,13 @@
 # frozen_string_literal: true
 
 require "sassc-rails"
+require "slim-rails"
 require "webpacker"
+require "webpacker/react"
+
 require "playbook/props"
-require "playbook/engine"
+require "playbook/version"
+require "playbook/engine" if defined?(Rails)
 
 module Playbook
   ROOT_PATH = Pathname.new(File.join(__dir__, ".."))
