@@ -12,6 +12,18 @@ const TextInputDefault = () => {
   const ref = React.createRef()
 
   const [firstName, setFirstName] = useState('')
+  const [formFields, setFormFields] = useState({
+    firstName: 'Jane',
+    lastName: 'Doe',
+    phone: '8888888888',
+    email: 'jane@doe.com',
+    zip: 55555,
+  })
+
+  const handleOnChangeFormField =  ({ target }) => {
+    const { name, value } = target
+    setFormFields({ ...formFields, [name]: value })
+  }
 
   return (
     <div>
@@ -20,27 +32,41 @@ const TextInputDefault = () => {
           data={{ say: 'hi', yell: 'go' }}
           id="unique-id"
           label="First Name"
+          name="firstName"
+          onChange={handleOnChangeFormField}
           placeholder="Enter first name"
-          value="Tim Wenhold"
+          value={formFields.firstName}
       />
       <TextInput
           label="Last Name"
+          name="lastName"
+          onChange={handleOnChangeFormField}
           placeholder="Enter last name"
+          value={formFields.lastName}
       />
       <TextInput
           label="Phone Number"
+          name="phone"
+          onChange={handleOnChangeFormField}
           placeholder="Enter phone number"
           type="phone"
+          value={formFields.phone}
       />
       <TextInput
           label="Email Address"
+          name="email"
+          onChange={handleOnChangeFormField}
           placeholder="Enter email address"
           type="email"
+          value={formFields.email}
       />
       <TextInput
           label="Zip Code"
+          name="zip"
+          onChange={handleOnChangeFormField}
           placeholder="Enter zip code"
           type="number"
+          value={formFields.zip}
       />
 
       <br />
