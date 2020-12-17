@@ -4,6 +4,7 @@ require "sassc-rails"
 require "slim-rails"
 require "webpacker"
 require "webpacker/react"
+require "view_component/engine"
 
 require "playbook/props"
 require "playbook/version"
