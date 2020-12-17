@@ -6,7 +6,7 @@ const TimestampUpdatedAlign = (props) => {
     <div>
       <Timestamp
           align="left"
-          showUser="true"
+          showUser
           text="Maricris Nonato"
           timestamp={new Date().getTime()}
           variant="elapsed"
@@ -17,7 +17,7 @@ const TimestampUpdatedAlign = (props) => {
 
       <Timestamp
           align="left"
-          showUser="false"
+          showUser={false}
           timestamp={new Date((new Date()).getFullYear(), new Date().getMonth(), new Date().getDate()).getTime()}
           variant="elapsed"
           {...props}
@@ -28,7 +28,7 @@ const TimestampUpdatedAlign = (props) => {
 
       <Timestamp
           align="center"
-          showUser="true"
+          showUser
           text="Maricris Nonato"
           timestamp={new Date().getTime()}
           variant="elapsed"
@@ -39,7 +39,7 @@ const TimestampUpdatedAlign = (props) => {
 
       <Timestamp
           align="center"
-          showUser="false"
+          showUser={false}
           timestamp={new Date((new Date()).getFullYear(), new Date().getMonth(), new Date().getDate()).getTime()}
           variant="elapsed"
           {...props}
@@ -50,7 +50,7 @@ const TimestampUpdatedAlign = (props) => {
 
       <Timestamp
           align="right"
-          showUser="true"
+          showUser
           text="Maricris Nonato"
           timestamp={new Date().getTime()}
           variant="elapsed"
@@ -61,7 +61,7 @@ const TimestampUpdatedAlign = (props) => {
 
       <Timestamp
           align="right"
-          showUser="false"
+          showUser={false}
           timestamp={new Date((new Date()).getFullYear(), new Date().getMonth(), new Date().getDate()).getTime()}
           variant="elapsed"
           {...props}

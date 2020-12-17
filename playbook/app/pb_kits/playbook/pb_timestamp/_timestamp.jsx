@@ -50,7 +50,7 @@ const Timestamp = (props: TimestampProps) => {
   const timeDisplay = dateTimestamp.toHour() + ':' + dateTimestamp.toMinute() + dateTimestamp.toMeridian()
 
   var fullTimeDisplay = function fullTimeDisplay(dateTimestamp, timeDisplay, timezone, showTimezone) {
-    if (showTimezone == 'true' && timezone.length > 0) {
+    if (showTimezone == true && timezone.length > 0) {
       timeDisplay = timeDisplay + ' ' + dateTimestamp.toTimezone()
     }
     return timeDisplay
@@ -65,12 +65,12 @@ const Timestamp = (props: TimestampProps) => {
   }
 
   var fullElapsedDisplay = function fullElapsedDisplay(showUser, text, dateTimestamp){
-    var userDisplay = (showUser == 'true' && text.length > 0) ? ' by ' + text : ''
+    var userDisplay = (showUser == true && text.length > 0) ? ' by ' + text : ''
     return 'Last updated' + userDisplay + ' ' + dateTimestamp.value.fromNow()
   }
 
   var fullUpdatedDisplay = function fullUpdatedDisplay(showUser, text, timeDisplay, timezone, showTimezone){
-    var userDisplay = (showUser == 'true' && text.length > 0) ? ' by ' + text : ''
+    var userDisplay = (showUser == true && text.length > 0) ? ' by ' + text : ''
     return 'Last updated' + userDisplay + ' at ' + fullTimeDisplay(dateTimestamp, timeDisplay, timezone, showTimezone)
   }
 
@@ -92,14 +92,14 @@ const Timestamp = (props: TimestampProps) => {
           />
         </If>
         <If condition={variant == 'default'}>
-          <If condition={showDate == 'true'}>
+          <If condition={showDate == true}>
             <Caption
                 dark={dark}
                 size="xs"
-                text={fullDateDisplay(dateTimestamp, currentYear, dateDisplay, timezone, showTimezone)}
+                text={timestamp ? fullDateDisplay(dateTimestamp, currentYear, dateDisplay, timezone, showTimezone) : text}
             />
           </If>
-          <If condition={showDate == 'false'}>
+          <If condition={showDate == false}>
             <Caption
                 dark={dark}
                 size="xs"

@@ -5,7 +5,7 @@ const TimestampUpdated = (props) => {
   return (
     <div>
       <Timestamp
-          showUser="true"
+          showUser
           text="Maricris Nonato"
           timestamp={new Date().getTime()}
           variant="updated"
@@ -15,7 +15,7 @@ const TimestampUpdated = (props) => {
       <br />
 
       <Timestamp
-          showUser="false"
+          showUser={false}
           timestamp={new Date().getTime()}
           variant="updated"
           {...props}
@@ -25,8 +25,8 @@ const TimestampUpdated = (props) => {
       <br />
 
       <Timestamp
-          showTimezone="true"
-          showUser="true"
+          showTimezone
+          showUser
           text="Maricris Nonato"
           timestamp={new Date().getTime()}
           timezone="America/New_York"
@@ -37,8 +37,8 @@ const TimestampUpdated = (props) => {
       <br />
 
       <Timestamp
-          showTimezone="true"
-          showUser="false"
+          showTimezone
+          showUser={false}
           timestamp={new Date().getTime()}
           timezone="America/New_York"
           variant="updated"

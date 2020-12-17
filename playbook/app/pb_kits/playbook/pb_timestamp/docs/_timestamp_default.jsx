@@ -6,7 +6,7 @@ const TimestampDefault = (props) => {
     <div>
       <Timestamp
           align="left"
-          showDate="false"
+          showDate={false}
           timestamp={new Date().getTime()}
           {...props}
       />
@@ -15,7 +15,7 @@ const TimestampDefault = (props) => {
 
       <Timestamp
           align="left"
-          showDate="true"
+          showDate
           timestamp={new Date().getTime()}
           {...props}
       />
@@ -24,7 +24,7 @@ const TimestampDefault = (props) => {
 
       <Timestamp
           align="left"
-          showDate="true"
+          showDate
           timestamp={new Date((new Date()).getFullYear() + 4, (new Date().getMonth()), (new Date().getDate() + 1)).getTime()}
           {...props}
       />

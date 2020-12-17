@@ -9,7 +9,7 @@ module Playbook
       partial "pb_timestamp/timestamp"
 
       prop :text
-      prop :timestamp, required: true
+      prop :timestamp
 
       prop :dark, type: Playbook::Props::Boolean,
                   default: false

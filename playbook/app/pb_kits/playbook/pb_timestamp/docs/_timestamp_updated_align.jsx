@@ -6,7 +6,7 @@ const TimestampUpdatedAlign = (props) => {
     <div>
       <Timestamp
           align="left"
-          showUser="true"
+          showUser
           text="Maricris Nonato"
           timestamp={new Date().getTime()}
           variant="updated"
@@ -17,7 +17,7 @@ const TimestampUpdatedAlign = (props) => {
 
       <Timestamp
           align="left"
-          showUser="false"
+          showUser={false}
           timestamp={new Date().getTime()}
           variant="updated"
           {...props}
@@ -26,8 +26,8 @@ const TimestampUpdatedAlign = (props) => {
       <br />
 
       <Timestamp
-          showTimezone="true"
-          showUser="true"
+          showTimezone
+          showUser
           text="Maricris Nonato"
           timestamp={new Date().getTime()}
           timezone="America/New_York"
@@ -38,8 +38,8 @@ const TimestampUpdatedAlign = (props) => {
       <br />
 
       <Timestamp
-          showTimezone="true"
-          showUser="false"
+          showTimezone
+          showUser={false}
           timestamp={new Date().getTime()}
           timezone="America/New_York"
           variant="updated"
@@ -51,7 +51,7 @@ const TimestampUpdatedAlign = (props) => {
 
       <Timestamp
           align="center"
-          showUser="true"
+          showUser
           text="Maricris Nonato"
           timestamp={new Date().getTime()}
           variant="updated"
@@ -62,7 +62,7 @@ const TimestampUpdatedAlign = (props) => {
 
       <Timestamp
           align="center"
-          showUser="false"
+          showUser={false}
           timestamp={new Date().getTime()}
           variant="updated"
           {...props}
@@ -72,8 +72,8 @@ const TimestampUpdatedAlign = (props) => {
 
       <Timestamp
           align="center"
-          showTimezone="true"
-          showUser="true"
+          showTimezone
+          showUser
           text="Maricris Nonato"
           timestamp={new Date().getTime()}
           timezone="America/New_York"
@@ -85,8 +85,8 @@ const TimestampUpdatedAlign = (props) => {
 
       <Timestamp
           align="center"
-          showTimezone="true"
-          showUser="false"
+          showTimezone
+          showUser={false}
           timestamp={new Date().getTime()}
           timezone="America/New_York"
           variant="updated"
@@ -98,7 +98,7 @@ const TimestampUpdatedAlign = (props) => {
 
       <Timestamp
           align="right"
-          showUser="true"
+          showUser
           text="Maricris Nonato"
           timestamp={new Date().getTime()}
           variant="updated"
@@ -109,7 +109,7 @@ const TimestampUpdatedAlign = (props) => {
 
       <Timestamp
           align="right"
-          showUser="false"
+          showUser={false}
           timestamp={new Date().getTime()}
           variant="updated"
           {...props}
@@ -119,8 +119,8 @@ const TimestampUpdatedAlign = (props) => {
 
       <Timestamp
           align="right"
-          showTimezone="true"
-          showUser="true"
+          showTimezone
+          showUser
           text="Maricris Nonato"
           timestamp={new Date().getTime()}
           timezone="America/New_York"
@@ -132,8 +132,8 @@ const TimestampUpdatedAlign = (props) => {
 
       <Timestamp
           align="right"
-          showTimezone="true"
-          showUser="false"
+          showTimezone
+          showUser={false}
           timestamp={new Date().getTime()}
           timezone="America/New_York"
           variant="updated"

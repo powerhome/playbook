@@ -5,7 +5,7 @@ const TimestampElapsed = (props) => {
   return (
     <div>
       <Timestamp
-          showUser="true"
+          showUser
           text="Maricris Nonato"
           timestamp={new Date().getTime()}
           variant="elapsed"
@@ -15,7 +15,7 @@ const TimestampElapsed = (props) => {
       <br />
 
       <Timestamp
-          showUser="false"
+          showUser={false}
           timestamp={new Date((new Date()).getFullYear(), new Date().getMonth(), new Date().getDate()).getTime()}
           variant="elapsed"
           {...props}

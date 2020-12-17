@@ -3,14 +3,14 @@
     data: object.data,
     class: object.classname) do %>
 
-    <% case object.variant
-        when "updated" %>
-        <%= pb_rails("caption", props: { text: object.format_updated_string, size: 'xs', dark: object.dark }) %>
+    <% case object.variant %>
+    <% when "updated" %>
+       <%= pb_rails("caption", props: { text: object.format_updated_string, size: 'xs', dark: object.dark }) %>
     <% when "elapsed" %>
       <%= pb_rails("caption", props: { text: object.format_updated_string, size: 'xs', dark: object.dark }) %>
     <% else %>
       <% if object.show_date %>
-        <%= pb_rails("caption", props: { text: object.format_datetime_string, size: 'xs', dark: object.dark }) %>
+        <%= pb_rails("caption", props: { text: object.timestamp ? object.format_datetime_string : object.text, size: 'xs', dark: object.dark }) %>
       <% else %>
         <%= pb_rails("caption", props: { text: object.format_time_string, size: 'xs', dark: object.dark }) %>
       <% end %>

@@ -6,8 +6,8 @@ const TimestampTimezonesAlign = (props) => {
     <div>
       <Timestamp
           align="left"
-          showDate="false"
-          showTimezone="true"
+          showDate={false}
+          showTimezone
           timestamp={new Date().getTime()}
           timezone="America/New_York"
           {...props}
@@ -17,8 +17,8 @@ const TimestampTimezonesAlign = (props) => {
 
       <Timestamp
           align="left"
-          showDate="true"
-          showTimezone="true"
+          showDate
+          showTimezone
           timestamp={new Date().getTime()}
           timezone="America/New_York"
           {...props}
@@ -28,8 +28,8 @@ const TimestampTimezonesAlign = (props) => {
 
       <Timestamp
           align="left"
-          showDate="true"
-          showTimezone="true"
+          showDate
+          showTimezone
           timestamp={new Date((new Date()).getFullYear() + 4, (new Date().getMonth()), (new Date().getDate() + 1)).getTime()}
           timezone="America/New_York"
           {...props}
@@ -39,8 +39,8 @@ const TimestampTimezonesAlign = (props) => {
 
       <Timestamp
           align="left"
-          showDate="false"
-          showTimezone="true"
+          showDate={false}
+          showTimezone
           timestamp={new Date().getTime()}
           timezone="Asia/Hong_Kong"
           {...props}
@@ -50,8 +50,8 @@ const TimestampTimezonesAlign = (props) => {
 
       <Timestamp
           align="left"
-          showDate="true"
-          showTimezone="true"
+          showDate
+          showTimezone
           timestamp={new Date().getTime()}
           timezone="Asia/Hong_Kong"
           {...props}
@@ -61,8 +61,8 @@ const TimestampTimezonesAlign = (props) => {
 
       <Timestamp
           align="left"
-          showDate="true"
-          showTimezone="true"
+          showDate
+          showTimezone
           timestamp={new Date((new Date()).getFullYear() + 4, (new Date().getMonth()), (new Date().getDate() + 1)).getTime()}
           timezone="Asia/Hong_Kong"
           {...props}
@@ -73,8 +73,8 @@ const TimestampTimezonesAlign = (props) => {
 
       <Timestamp
           align="center"
-          showDate="false"
-          showTimezone="true"
+          showDate={false}
+          showTimezone
           timestamp={new Date().getTime()}
           timezone="America/New_York"
           {...props}
@@ -84,8 +84,8 @@ const TimestampTimezonesAlign = (props) => {
 
       <Timestamp
           align="center"
-          showDate="true"
-          showTimezone="true"
+          showDate
+          showTimezone
           timestamp={new Date().getTime()}
           timezone="America/New_York"
           {...props}
@@ -95,8 +95,8 @@ const TimestampTimezonesAlign = (props) => {
 
       <Timestamp
           align="center"
-          showDate="true"
-          showTimezone="true"
+          showDate
+          showTimezone
           timestamp={new Date((new Date()).getFullYear() + 4, (new Date().getMonth()), (new Date().getDate() + 1)).getTime()}
           timezone="America/New_York"
           {...props}
@@ -106,8 +106,8 @@ const TimestampTimezonesAlign = (props) => {
 
       <Timestamp
           align="center"
-          showDate="false"
-          showTimezone="true"
+          showDate={false}
+          showTimezone
           timestamp={new Date().getTime()}
           timezone="Asia/Hong_Kong"
           {...props}
@@ -117,8 +117,8 @@ const TimestampTimezonesAlign = (props) => {
 
       <Timestamp
           align="center"
-          showDate="true"
-          showTimezone="true"
+          showDate
+          showTimezone
           timestamp={new Date().getTime()}
           timezone="Asia/Hong_Kong"
           {...props}
@@ -128,8 +128,8 @@ const TimestampTimezonesAlign = (props) => {
 
       <Timestamp
           align="center"
-          showDate="true"
-          showTimezone="true"
+          showDate
+          showTimezone
           timestamp={new Date((new Date()).getFullYear() + 4, (new Date().getMonth()), (new Date().getDate() + 1)).getTime()}
           timezone="Asia/Hong_Kong"
           {...props}
@@ -140,8 +140,8 @@ const TimestampTimezonesAlign = (props) => {
 
       <Timestamp
           align="right"
-          showDate="false"
-          showTimezone="true"
+          showDate={false}
+          showTimezone
           timestamp={new Date().getTime()}
           timezone="America/New_York"
           {...props}
@@ -151,8 +151,8 @@ const TimestampTimezonesAlign = (props) => {
 
       <Timestamp
           align="right"
-          showDate="true"
-          showTimezone="true"
+          showDate
+          showTimezone
           timestamp={new Date().getTime()}
           timezone="America/New_York"
           {...props}
@@ -162,8 +162,8 @@ const TimestampTimezonesAlign = (props) => {
 
       <Timestamp
           align="right"
-          showDate="true"
-          showTimezone="true"
+          showDate
+          showTimezone
           timestamp={new Date((new Date()).getFullYear() + 4, (new Date().getMonth()), (new Date().getDate() + 1)).getTime()}
           timezone="America/New_York"
           {...props}
@@ -173,8 +173,8 @@ const TimestampTimezonesAlign = (props) => {
 
       <Timestamp
           align="right"
-          showDate="false"
-          showTimezone="true"
+          showDate={false}
+          showTimezone
           timestamp={new Date().getTime()}
           timezone="Asia/Hong_Kong"
           {...props}
@@ -184,8 +184,8 @@ const TimestampTimezonesAlign = (props) => {
 
       <Timestamp
           align="right"
-          showDate="true"
-          showTimezone="true"
+          showDate
+          showTimezone
           timestamp={new Date().getTime()}
           timezone="Asia/Hong_Kong"
           {...props}
@@ -195,8 +195,8 @@ const TimestampTimezonesAlign = (props) => {
 
       <Timestamp
           align="right"
-          showDate="true"
-          showTimezone="true"
+          showDate
+          showTimezone
           timestamp={new Date((new Date()).getFullYear() + 4, (new Date().getMonth()), (new Date().getDate() + 1)).getTime()}
           timezone="Asia/Hong_Kong"
           {...props}
