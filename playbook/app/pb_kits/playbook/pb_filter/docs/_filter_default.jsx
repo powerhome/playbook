@@ -11,7 +11,6 @@ const FilterDefault = (props) => {
   ]
   return (
     <Filter
-        {...props}
         double
         filters={{
           'Full Name': 'John Wick',
