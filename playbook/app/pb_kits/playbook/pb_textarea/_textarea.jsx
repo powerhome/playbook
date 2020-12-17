@@ -1,6 +1,6 @@
 /* @flow */
 
-import React from 'react'
+import React, { forwardRef } from 'react'
 import classnames from 'classnames'
 import { Body, Caption } from '../'
 import type { InputCallback } from '../types.js'
@@ -9,7 +9,6 @@ import { globalProps } from '../utilities/globalProps.js'
 type TextareaProps = {
   className?: string,
   children?: array<React.ReactChild>,
-  data?: string,
   disabled?: boolean,
   error?: string,
   id?: string,
@@ -39,7 +38,7 @@ const Textarea = ({
   rows = 4,
   value,
   ...props
-}: TextareaProps) => {
+}: TextareaProps, ref: React.ElementRef<"textarea">) => {
   const errorClass = error ? 'error' : null
   const resizeClass = `resize_${resize}`
   const classes = classnames('pb_textarea_kit', errorClass, resizeClass, globalProps(props), className)
@@ -53,15 +52,16 @@ const Textarea = ({
         {children}
         <Else />
         <textarea
-            {...props}
             className="pb_textarea_kit"
             disabled={disabled}
             name={name}
             onChange={onChange}
             placeholder={placeholder}
+            ref={ref}
             required={required}
             rows={rows}
             value={value}
+            {...props}
         />
         <If condition={error}>
           <Body
@@ -74,4 +74,4 @@ const Textarea = ({
   )
 }
 
-export default Textarea
+export default forwardRef(Textarea)
