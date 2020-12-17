@@ -1,0 +1,23 @@
+<%= pb_rails("date_picker", props: {
+  label: "Unformatted Date Object",
+  default_date: Date.today,
+  picker_id: "date-picker-anti-pattern1"
+}) %>
+
+<%= pb_rails("date_picker", props: {
+  label: "Date Object Without Time - Displays Yesterday's Date",
+  default_date: Date.today.to_datetime.utc.iso8601,
+  picker_id: "date-picker-anti-pattern2"
+}) %>
+
+<%= pb_rails("date_picker", props: {
+  label: "Unformatted DateTime Object",
+  default_date: DateTime.current,
+  picker_id: "date-picker-anti-pattern3"
+}) %>
+
+<%= pb_rails("date_picker", props: {
+  label: "String Conversion Without ISO Formatting",
+  default_date: DateTime.current.utc.to_s,
+  picker_id: "date-picker-anti-pattern5"
+}) %>

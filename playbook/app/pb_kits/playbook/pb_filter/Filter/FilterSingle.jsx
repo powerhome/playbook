@@ -26,6 +26,7 @@ const FilterSingle = ({ onSortChange, sortOptions, sortValue, filters, results, 
   >
     <Flex
         orientation="row"
+        paddingRight="lg"
         vertical="center"
     >
       <If condition={children}>

@@ -4,6 +4,7 @@ examples:
   - filter_default: Default
   - filter_no_background: No Background
   - filter_single: Single
+  - filter_no_sort: No Sort
   - filter_only: Filter Only
   - sort_only: Sort Only
 
@@ -11,5 +12,6 @@ examples:
   - filter_default: Default
   - filter_no_background: No Background
   - filter_single: Single
+  - filter_no_sort: No Sort
   - filter_only: Filter Only
   - sort_only: Sort Only

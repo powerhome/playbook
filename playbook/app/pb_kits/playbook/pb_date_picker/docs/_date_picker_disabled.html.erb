@@ -1,11 +1,11 @@
 <%= pb_rails("date_picker", props: {
-  disable_date: [(Date.today + 1).httpdate],
+  disable_date: [(DateTime.current + 1.day).utc.iso8601],
   label: "Disable Single Date",
   picker_id: "single-disabled-date"
 }) %>
 
 <%= pb_rails("date_picker", props: {
-  disable_date: [(Date.today + 1).httpdate, (Date.today + 3).httpdate],
+  disable_date: [(DateTime.current + 1.day).utc.iso8601, (DateTime.current + 2.day).utc.iso8601],
   label: "Disable Multiple Dates",
   picker_id: "multiple-disabled-dates"
 }) %>
@@ -13,8 +13,8 @@
 <%= pb_rails("date_picker", props: {
   disable_range: [
           {
-            from: (Date.today + 1).httpdate,
-            to: (Date.today + 7).httpdate,
+            from: DateTime.current.utc.iso8601,
+            to: (DateTime.current + 7.day).utc.iso8601,
           },
         ],
   label: "Disable Single Range",
@@ -24,12 +24,12 @@
 <%= pb_rails("date_picker", props: {
   disable_range: [
           {
-            from: (Date.today + 1).httpdate,
-            to: (Date.today + 3).httpdate,
+            from: (DateTime.current + 1.day).utc.iso8601,
+            to: (DateTime.current + 2.day).utc.iso8601,
           },
           {
-            from: (Date.today + 7).httpdate,
-            to: (Date.today + 14).httpdate,
+            from: (DateTime.current + 7.day).utc.iso8601,
+            to: (DateTime.current + 14.day).utc.iso8601,
           },
         ],
   label: "Disable Multiple Ranges",
