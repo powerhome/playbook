@@ -6,7 +6,11 @@ module Playbook
       previous = prefix_partial_path_with_controller_namespace
       self.prefix_partial_path_with_controller_namespace = false
       kit = build_view_model(kit.to_s, props, &block)
-      render(partial: kit, as: :object)
+      if kit.is_a?(Playbook::KitBase)
+        render kit
+      else
+        render(partial: kit, as: :object)
+      end
     ensure
       self.prefix_partial_path_with_controller_namespace = previous
     end

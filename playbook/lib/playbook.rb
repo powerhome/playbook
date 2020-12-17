@@ -8,8 +8,10 @@ require "view_component/engine"
 
 require "playbook/props"
 require "playbook/version"
-require "playbook/engine" if defined?(Rails)
+require "playbook/pb_kit_helper"
+require "playbook/kit_base"
 require "playbook/markdown/template_handler"
+require "playbook/engine" if defined?(Rails)
 
 module Playbook
   ROOT_PATH = Pathname.new(File.join(__dir__, ".."))
