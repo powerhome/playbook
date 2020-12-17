@@ -18,7 +18,7 @@ const data = [{
   data: [12908, 5948, 8105, 11248, 8989, 11816, 18274, 18111],
 }]
 
-const LineGraphDefault = () => (
+const LineGraphDefault = (props) => (
   <div>
     <LineGraph
         axisTitle="Number of Employees"
@@ -28,6 +28,7 @@ const LineGraphDefault = () => (
         title="Solar Employment Growth by Sector, 2010-2016"
         xAxisCategories={['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']}
         yAxisMin={0}
+        {...props}
     />
   </div>
 )
