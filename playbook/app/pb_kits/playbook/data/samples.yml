@@ -6,5 +6,5 @@ full_page_samples:
 - news_magazine
 - trending_repositories
 - crowdsourced_posts
-dashboard_cards:
-- card_dashboard
+card_samples:
+- card_dashboards
