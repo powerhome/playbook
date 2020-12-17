@@ -2,9 +2,21 @@
 
 RSpec.describe Playbook::Props do
   describe "base props" do
-    subject do
+    subject! do
       Class.new do
         include Playbook::Props
+
+        prop :base_prop
+      end
+    end
+    let!(:subclass) do
+      Class.new(subject) do
+        prop :subclass_prop
+      end
+    end
+    let!(:another_subclass) do
+      Class.new(subject) do
+        prop :another_subclass_prop
       end
     end
 
@@ -27,6 +39,20 @@ RSpec.describe Playbook::Props do
     it { is_expected.to define_prop(:padding_x) }
     it { is_expected.to define_prop(:padding_y) }
     it { is_expected.to define_boolean_prop(:dark).with_default(false) }
+
+    it "allows to inherit the parent's props and add to it" do
+      expect(subject).to define_prop(:base_prop)
+      expect(subject).to_not define_prop(:subclass_prop)
+      expect(subject).to_not define_prop(:another_subclass_prop)
+
+      expect(subclass).to define_prop(:base_prop)
+      expect(subclass).to define_prop(:subclass_prop)
+      expect(subclass).to_not define_prop(:another_subclass_prop)
+
+      expect(another_subclass).to define_prop(:base_prop)
+      expect(another_subclass).to_not define_prop(:subclass_prop)
+      expect(another_subclass).to define_prop(:another_subclass_prop)
+    end
 
     describe "can be overwritten with custom values" do
       it "#id" do
