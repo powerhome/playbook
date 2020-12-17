@@ -3,5 +3,5 @@
     data: object.data,
     class: object.classname,
     style: object.style_value) do %>
-  <%= capture(&object.children) %>
+  <%= content.presence %>
 <% end %>

@@ -2,11 +2,7 @@
 
 module Playbook
   module PbFlex
-    class FlexItem
-      include Playbook::Props
-
-      partial "pb_flex/flex_item"
-
+    class FlexItem < Playbook::KitBase
       prop :fixed_size, default: nil
       prop :grow, type: Playbook::Props::Boolean,
                   default: false

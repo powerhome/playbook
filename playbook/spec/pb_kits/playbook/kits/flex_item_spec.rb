@@ -5,8 +5,6 @@ require_relative "../../../../app/pb_kits/playbook/pb_flex/flex_item"
 RSpec.describe Playbook::PbFlex::FlexItem do
   subject { Playbook::PbFlex::FlexItem }
 
-  it { is_expected.to define_partial }
-
   it { is_expected.to define_enum_prop(:flex)
                       .with_default("none")
                       .with_values("0","1","2","3","4","5","6","7","8","9","10","11","12","none") }
