@@ -5,9 +5,6 @@ require_relative "../../../../app/pb_kits/playbook/pb_icon/icon"
 RSpec.describe Playbook::PbIcon::Icon do
   subject { Playbook::PbIcon::Icon }
 
-  it { is_expected.to define_partial }
-
-
   it { is_expected.to define_prop(:border)
                       .of_type(Playbook::Props::Boolean) }
   it { is_expected.to define_prop(:fixed_width)
