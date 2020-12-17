@@ -103,7 +103,7 @@ const Timestamp = (props: TimestampProps) => {
             <Caption
                 dark={dark}
                 size="xs"
-                text={timeDisplay}
+                text={fullTimeDisplay(dateTimestamp, timeDisplay, timezone, showTimezone)}
             />
           </If>
         </If>

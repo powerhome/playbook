@@ -25,7 +25,7 @@ const TimestampAlign = (props) => {
       <Timestamp
           align="left"
           showDate
-          timestamp={new Date((new Date()).getFullYear() + 4, (new Date().getMonth()), (new Date().getDate() + 1)).getTime()}
+          timestamp={new Date((new Date()).getFullYear() + 4, (new Date().getMonth()), (new Date().getDate()), (new Date().getHours()), (new Date().getMinutes()))}
           {...props}
       />
 
@@ -53,7 +53,7 @@ const TimestampAlign = (props) => {
       <Timestamp
           align="center"
           showDate
-          timestamp={new Date((new Date()).getFullYear() + 4, (new Date().getMonth()), (new Date().getDate() + 1)).getTime()}
+          timestamp={new Date((new Date()).getFullYear() + 4, (new Date().getMonth()), (new Date().getDate()), (new Date().getHours()), (new Date().getMinutes()))}
           {...props}
       />
 
@@ -81,7 +81,7 @@ const TimestampAlign = (props) => {
       <Timestamp
           align="right"
           showDate
-          timestamp={new Date((new Date()).getFullYear() + 4, (new Date().getMonth()), (new Date().getDate() + 1)).getTime()}
+          timestamp={new Date((new Date()).getFullYear() + 4, (new Date().getMonth()), (new Date().getDate()), (new Date().getHours()), (new Date().getMinutes()))}
           {...props}
       />
     </div>

@@ -1,35 +1,8 @@
 import React from 'react'
-import Timestamp from '../_timestamp.jsx'
+import { Timestamp } from '../../'
 
-const TimestampDefault = (props) => {
-  return (
-    <div>
-      <Timestamp
-          align="left"
-          showDate={false}
-          timestamp={new Date().getTime()}
-          {...props}
-      />
-
-      <br />
-
-      <Timestamp
-          align="left"
-          showDate
-          timestamp={new Date().getTime()}
-          {...props}
-      />
-
-      <br />
-
-      <Timestamp
-          align="left"
-          showDate
-          timestamp={new Date((new Date()).getFullYear() + 4, (new Date().getMonth()), (new Date().getDate() + 1)).getTime()}
-          {...props}
-      />
-    </div>
-  )
-}
+const TimestampDefault = () => (
+  <Timestamp text="20 seconds ago" />
+)
 
 export default TimestampDefault

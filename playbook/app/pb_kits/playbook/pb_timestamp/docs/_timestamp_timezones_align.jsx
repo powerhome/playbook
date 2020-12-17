@@ -164,7 +164,7 @@ const TimestampTimezonesAlign = (props) => {
           align="right"
           showDate
           showTimezone
-          timestamp={new Date((new Date()).getFullYear() + 4, (new Date().getMonth()), (new Date().getDate() + 1)).getTime()}
+          timestamp={new Date((new Date()).getFullYear() + 4, (new Date().getMonth()), (new Date().getDate()), (new Date().getHours()), (new Date().getMinutes()))}
           timezone="America/New_York"
           {...props}
       />
@@ -197,7 +197,7 @@ const TimestampTimezonesAlign = (props) => {
           align="right"
           showDate
           showTimezone
-          timestamp={new Date((new Date()).getFullYear() + 4, (new Date().getMonth()), (new Date().getDate() + 1)).getTime()}
+          timestamp={new Date((new Date()).getFullYear() + 4, (new Date().getMonth()), (new Date().getDate()), (new Date().getHours()), (new Date().getMinutes()))}
           timezone="Asia/Hong_Kong"
           {...props}
       />
