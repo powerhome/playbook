@@ -33,12 +33,7 @@ module Playbook
     def getting_started; end
 
     def changelog
-      markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML, extensions = {})
-      @data = File
-              .read("../../CHANGELOG.md")
-              .to_s
-              .split(/##\s\[/)
-              .map { |change| markdown_chunk(markdown, change) }[1..-1]
+      @data = File.read("../../CHANGELOG.md")
     end
 
     def grid
@@ -82,10 +77,6 @@ module Playbook
     def visual_guidelines; end
 
   private
-
-    def markdown_chunk(markdown, change)
-      markdown.render("#{change[0] =~ /[0-9]/ ? '##[' : '\*'}#{change}")
-    end
 
     def set_category
       categories = MENU["kits"].map { |link| link.first.first if link.is_a?(Hash) }.compact
