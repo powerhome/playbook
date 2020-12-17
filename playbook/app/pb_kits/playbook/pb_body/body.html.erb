@@ -3,5 +3,5 @@
   id: object.id,
   data: object.data,
   class: object.classname) do %>
-  <%= object.children.present? ? capture(&object.children) : object.content %>
+  <%= object.content %>
 <% end %>
