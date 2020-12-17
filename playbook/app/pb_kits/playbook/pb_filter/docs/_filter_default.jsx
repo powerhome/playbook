@@ -56,8 +56,6 @@ const FilterDefault = (props) => {
       <br />
 
       <Filter
-          {...props}
-
           results={1}
           sortOptions={{
             popularity: 'Popularity',
