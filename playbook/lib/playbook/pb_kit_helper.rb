@@ -7,7 +7,7 @@ module Playbook
       self.prefix_partial_path_with_controller_namespace = false
       kit = build_view_model(kit.to_s, props, &block)
       if kit.is_a?(Playbook::KitBase)
-        render kit, &block
+        render_component kit, &block
       else
         render(partial: kit, as: :object)
       end
