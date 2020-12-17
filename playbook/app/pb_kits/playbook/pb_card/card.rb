@@ -2,11 +2,7 @@
 
 module Playbook
   module PbCard
-    class Card
-      include Playbook::Props
-
-      partial "pb_card/card"
-
+    class Card < Playbook::KitBase
       prop :selected, type: Playbook::Props::Boolean, default: false
       prop :shadow, type: Playbook::Props::Enum,
                     values: %w[none deep deeper deepest],
