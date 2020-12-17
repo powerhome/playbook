@@ -5,64 +5,32 @@ import classnames from 'classnames'
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
 import { globalProps } from '../utilities/globalProps.js'
 import Modal from 'react-modal'
-import { Flex, Icon, SectionSeparator } from '../'
+import { Button, Flex, SectionSeparator } from '../'
+import { DialogHeader } from './_dialog_header'
 
 type DialogProps = {
   aria?: object,
+  cancelButton?: string,
+  children: array<React.ReactNode> | React.ReactNode | string,
   className?: string,
+  closeable: boolean,
+  confirmButton?: string,
   data?: object,
   id?: string,
+  onCancel?: () => void,
+  onChange?: () => void,
+  onClose?: () => void,
+  onConfirm?: () => void,
   opened: boolean,
   size?: "sm" | "md" | "lg" | "content",
-  children: array<React.ReactNode> | React.ReactNode | string,
+  text?: string,
+  title?: string,
 }
 
-// Header component
-const Header = (props: DialogHeaderProps) => {
-  const {
-    children,
-    className,
-    padding = 'sm',
-    spacing = 'between',
-    closeable = true,
-    onClick,
-    separator = true,
-  } = props
-  const headerCSS = buildCss('dialog_header')
-  const headerSpacing = globalProps(props, { padding })
-
-  const CloseIcon = () => (
-    <div
-        className="dialog_close_icon"
-        onClick={onClick}
-    >
-      <Icon
-          fixedWidth
-          icon="times"
-      />
-    </div>
-  )
-
-  return (
-    <>
-      <Flex
-          className={classnames(headerCSS, headerSpacing, className)}
-          spacing={spacing}
-      >
-        {children}
-        <If condition={closeable}>
-          <CloseIcon />
-        </If>
-      </Flex>
-      <If condition={separator}>
-        <SectionSeparator />
-      </If>
-    </>
-  )
-}
+export const DialogContext = React.createContext()
 
 // Body component
-const Body = (props: DialogBodyProps) => {
+const DialogBody = (props: DialogBodyProps) => {
   const { children, padding = 'sm', className } = props
   const bodyCSS = buildCss('dialog_body')
   const bodySpacing = globalProps(props, { padding })
@@ -75,7 +43,7 @@ const Body = (props: DialogBodyProps) => {
 }
 
 // Footer component
-const Footer = (props: DialogFooterProps) => {
+const DialogFooter = (props: DialogFooterProps) => {
   const {
     children,
     padding = 'sm',
@@ -104,12 +72,19 @@ const Footer = (props: DialogFooterProps) => {
 const Dialog = (props: DialogProps) => {
   const {
     aria = {},
+    cancelButton,
+    confirmButton,
     className,
     data = {},
     id,
     size = 'md',
     children,
     opened,
+    onCancel = () => {},
+    onConfirm = () => {},
+    onClose = () => {},
+    text,
+    title,
   } = props
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
@@ -132,29 +107,54 @@ const Dialog = (props: DialogProps) => {
     className
   )
 
+  const api = {
+    onClose,
+  }
+
   return (
-    <div
-        {...ariaProps}
-        {...dataProps}
-        className={classes}
-        id={id}
-    >
-      <Modal
-          ariaHideApp={false}
-          className={dialogClassNames}
-          closeTimeoutMS={400}
-          contentLabel="Minimal Modal Example"
-          isOpen={opened}
-          onRequestClose={close}
-          overlayClassName={overlayClassNames}
+    <DialogContext.Provider value={api}>
+      <div
+          {...ariaProps}
+          {...dataProps}
+          className={classes}
+          id={id}
       >
-        {children}
-      </Modal>
-    </div>
+        <Modal
+            ariaHideApp={false}
+            className={dialogClassNames}
+            closeTimeoutMS={200}
+            contentLabel="Minimal Modal Example"
+            isOpen={opened}
+            onRequestClose={close}
+            overlayClassName={overlayClassNames}
+        >
+          <If condition={title}>
+            <Dialog.Header>{title}</Dialog.Header>
+          </If>
+          <If condition={text}>
+            <Dialog.Body>{text}</Dialog.Body>
+          </If>
+
+          <If condition={cancelButton && confirmButton}>
+            <Dialog.Footer>
+              <Button onClick={onConfirm}>{confirmButton}</Button>
+              <Button
+                  onClick={onCancel}
+                  variant="link"
+              >
+                {cancelButton}
+              </Button>
+            </Dialog.Footer>
+          </If>
+
+          {children}
+        </Modal>
+      </div>
+    </DialogContext.Provider>
   )
 }
-Dialog.Header = Header
-Dialog.Body = Body
-Dialog.Footer = Footer
+Dialog.Header = DialogHeader
+Dialog.Body = DialogBody
+Dialog.Footer = DialogFooter
 
 export default Dialog

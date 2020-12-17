@@ -5,7 +5,9 @@ examples:
   
   
   react:
-  - dialog_default: Default
+  - dialog_default: Simple
+  - dialog_compound_components: Complex
   - dialog_sizes: Sizes
-  - dialog_separators: Separators
+  - dialog_scrollable: Scrollable
+  # - dialog_separators: Separators
   

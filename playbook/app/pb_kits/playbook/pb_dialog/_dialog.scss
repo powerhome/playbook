@@ -3,9 +3,9 @@
 @import "../pb_card/card_mixin";
 @import "../tokens/shadows";
 
-@keyframes modalFade {
+@keyframes modalFadeIn {
 	from {
-		transform: translate3d(0, -50%, 0);
+		transform: translate3d(0, -100%, 0);
 		opacity: 0;
 	}
 	to {
@@ -47,8 +47,11 @@
 
 .dialog {
 	@include pb_card;
-	animation-name: modalFade;
-	animation-duration: 0.4s;
+	max-height: calc(100vh - 64px);
+	max-width: calc(100vw - 64px);
+	overflow: scroll;
+	animation-name: modalFadeIn;
+	animation-duration: 0.2s;
 	outline: none;
 	animation-timing-function: cubic-bezier(0.7,0,0.3,1);
 
@@ -74,7 +77,7 @@
 
 	&_before_close {
 		animation-name: modalFadeOut;
-		animation-duration: 0.4s;
+		animation-duration: 0.2s;
 		opacity: 0;
 	}
 
@@ -94,14 +97,14 @@
 		background-color: rgba($bg_dark, $opacity_4);
 		z-index: 100;
 		animation-name: overlayFade;
-		animation-duration: 0.4s;
+		animation-duration: 0.2s;
 
 		&_after_open {
 			opacity: 1;
 		}
 		&_before_close {
 			animation-name: overlayFadeOut;
-			animation-duration: 0.4s;
+			animation-duration: 0.2s;
 			opacity: 0;
 		}
 	}
