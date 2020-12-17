@@ -2,7 +2,7 @@
 
 import React from 'react'
 import { isEmpty, map, omitBy } from 'lodash'
-import { Caption, Title } from '../../'
+import { Body, Caption, Title } from '../../'
 
 export type FilterDescription = {
   [key: string]: ?string | boolean,
@@ -22,7 +22,7 @@ const CurrentFilters = ({ dark, filters }: CurrentFiltersProps) => {
     <div className="maskContainer">
       <If condition={isEmpty(filters)}>
         <div className="filters">
-          <Title
+          <Body
               paddingLeft="xs"
               size={4}
               tag="h4"
