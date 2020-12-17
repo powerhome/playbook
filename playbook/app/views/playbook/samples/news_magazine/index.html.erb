@@ -1,0 +1,174 @@
+<%= pb_rails("layout", props: { position: "left", size: "sm", collapse: "md", layout: "collection_detail", dark: false }) do %>
+  <%= pb_rails("layout/sidebar") do %>
+    <%= pb_rails("card", props: { padding: "none" }) do %>
+    <%= pb_rails("caption", props: { text: "News Stories", size: 'lg', margin: "md" }) %>
+    <%= pb_rails("section_separator") %>
+        <%= pb_rails("nav", props: {link: "#", padding_top:"sm" }) do %>
+            <%= pb_rails("nav/item", props: { text: "All News", link: "#" }) %>
+            <%= pb_rails("nav/item", props: { text: "Top Stories", link: "#" }) %>
+            <%= pb_rails("nav/item", props: { text: "National", link: "#", active: true }) %>
+                <%= pb_rails("nav", props: {variant: "subtle", highlight: false }) do %>
+                    <%= pb_rails("nav/item", props: { text: "All", link: "#", active: true  }) %>
+                    <%= pb_rails("nav/item", props: { text: "Planet Money", link: "#" }) %>
+                    <%= pb_rails("nav/item", props: { text: "Books", link: "#" }) %>
+                    <%= pb_rails("nav/item", props: { text: "Books, News, and Features", link: "#" }) %>
+                    <%= pb_rails("nav/item", props: { text: "Science", link: "#" }) %>
+                    <%= pb_rails("nav/item", props: { text: "Politics", link: "#" }) %>
+                    <%= pb_rails("nav/item", props: { text: "National Security", link: "#" }) %>
+                    <%= pb_rails("nav/item", props: { text: "Environment", link: "#" }) %>
+                    <%= pb_rails("nav/item", props: { text: "Shots - Health News", link: "#" }) %>
+                    <%= pb_rails("nav/item", props: { text: "Analysis", link: "#" }) %>
+                <% end %>
+            <%= pb_rails("nav/item", props: { text: "World", link: "#" }) %>
+        <% end %>
+    <% end %>
+    <% end %>
+
+    <%= pb_rails("layout/body") do %>
+    <!-- START PLANET MONEY CARD -->
+        <%= pb_rails("card", props: { padding: "none", header: true}) do %>
+            <%= pb_rails("card/card_header", props: { padding: "sm" }) do %>
+                <%= pb_rails("caption", props: { text: "Planet Money", dark: true }) %>
+            <% end %>
+            <%= pb_rails("card/card_body", props: { padding: "none" }) do %>
+                <%= pb_rails("image", props: { classname:"image_size", url: "https://images.unsplash.com/photo-1561414927-6d86591d0c4f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1266&q=80"}) %>
+                <%= pb_rails("title", props: { text: "Where’d the Money Go, and Other Questions", tag: "h4", size: 4, padding: "sm", variant: "link" }) %>
+                <%= pb_rails("section_separator") %>
+                <%= pb_rails("flex", props: { padding: "sm", wrap: true }) do %>
+                    <%= pb_rails("body", props: {classname: "flex-item", margin_right: "md" }) do %>
+                        <%= pb_rails("icon_value", props: { icon: "share-alt", text: "391" }) %>
+                    <% end %>
+                    <%= pb_rails("body", props: {classname: "flex-item", margin_right: "md" }) do %>
+                        <%= pb_rails("icon_value", props: { icon: "eye", text: "2,039" }) %>
+                    <% end %>
+                    <%= pb_rails("body", props: {classname: "flex-item" }) do %>
+                        <%= pb_rails("icon_value", props: { icon: "comments", text: "89" }) %>
+                    <% end %>
+                <% end %>
+            <% end %>
+        <% end %>
+    <!-- END PLANET MONEY CARD -->
+    <!-- START WORLD CARD -->
+        <%= pb_rails("card", props: { padding: "none", header: true}) do %>
+            <%= pb_rails("card/card_header", props: { padding: "sm", header_color: "category_2" }) do %>
+                <%= pb_rails("caption", props: { text: "World", dark: true }) %>
+            <% end %>
+            <%= pb_rails("card/card_body", props: { padding: "none" }) do %>
+                <%= pb_rails("image", props: { classname:"image_size", url: "https://images.unsplash.com/photo-1500202352583-7b2fc394ed15?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80" }) %>
+                <%= pb_rails("title", props: { text: "U.K. Willing To Admit 3 Million If China Adopts Security Law", tag: "h4", size: 4, padding: "sm", variant: "link" }) %>
+                <%= pb_rails("section_separator") %>
+                <%= pb_rails("flex", props: { padding: "sm", wrap: true }) do %>
+                    <%= pb_rails("body", props: {classname: "flex-item", margin_right: "md" }) do %>
+                        <%= pb_rails("icon_value", props: { icon: "share-alt", text: "304" }) %>
+                    <% end %>
+                    <%= pb_rails("body", props: {classname: "flex-item", margin_right: "md" }) do %>
+                        <%= pb_rails("icon_value", props: { icon: "eye", text: "5,032" }) %>
+                    <% end %>
+                    <%= pb_rails("body", props: {classname: "flex-item" }) do %>
+                        <%= pb_rails("icon_value", props: { icon: "comments", text: "102" }) %>
+                    <% end %>
+                <% end %>
+            <% end %>
+        <% end %>
+    <!-- END WORLD CARD -->
+    <!-- START BOOKS CARD -->
+        <%= pb_rails("card", props: { padding: "none", header: true}) do %>
+            <%= pb_rails("card/card_header", props: { padding: "sm", header_color: "category_3" }) do %>
+                <%= pb_rails("caption", props: { text: "Books", dark: true }) %>
+            <% end %>
+            <%= pb_rails("card/card_body", props: { padding: "none" }) do %>
+                <%= pb_rails("image", props: { classname:"image_size", url: "https://images.unsplash.com/photo-1551269901-5c5e14c25df7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80" }) %>
+                <%= pb_rails("title", props: { text: "Opinion: Harry Potter's Magic Fades When His Creator Tweets", tag: "h4", size: 4, padding: "sm", variant: "link" }) %>
+                <%= pb_rails("section_separator") %>
+                <%= pb_rails("flex", props: { padding: "sm", wrap: true }) do %>
+                    <%= pb_rails("body", props: {classname: "flex-item", margin_right: "md" }) do %>
+                        <%= pb_rails("icon_value", props: { icon: "share-alt", text: "201" }) %>
+                    <% end %>
+                    <%= pb_rails("body", props: {classname: "flex-item", margin_right: "md" }) do %>
+                        <%= pb_rails("icon_value", props: { icon: "eye", text: "890" }) %>
+                    <% end %>
+                    <%= pb_rails("body", props: {classname: "flex-item" }) do %>
+                        <%= pb_rails("icon_value", props: { icon: "comments", text: "2" }) %>
+                    <% end %>
+                <% end %>
+            <% end %>
+        <% end %>
+    <!-- END BOOKS CARD -->
+    <!-- START NATIONAL CARD -->
+        <%= pb_rails("card", props: { padding: "none", header: true}) do %>
+            <%= pb_rails("card/card_header", props: { padding: "sm", header_color: "category_4" }) do %>
+                <%= pb_rails("caption", props: { text: "National", dark: true }) %>
+            <% end %>
+            <%= pb_rails("card/card_body", props: { padding: "none" }) do %>
+                <%= pb_rails("image", props: { classname:"image_size", url: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1352&q=80" }) %>
+                <%= pb_rails("title", props: { text: "1st U.S. Woman To Walk In Space Dives To Deepest Point In Ocean", tag: "h4", size: 4, padding: "sm", variant: "link" }) %>
+                <%= pb_rails("section_separator") %>
+                <%= pb_rails("flex", props: { padding: "sm", wrap: true }) do %>
+                    <%= pb_rails("body", props: {classname: "flex-item", margin_right: "md" }) do %>
+                        <%= pb_rails("icon_value", props: { icon: "share-alt", text: "245" }) %>
+                    <% end %>
+                    <%= pb_rails("body", props: {classname: "flex-item", margin_right: "md" }) do %>
+                        <%= pb_rails("icon_value", props: { icon: "eye", text: "10,302" }) %>
+                    <% end %>
+                    <%= pb_rails("body", props: {classname: "flex-item" }) do %>
+                        <%= pb_rails("icon_value", props: { icon: "comments", text: "89" }) %>
+                    <% end %>
+                <% end %>
+            <% end %>
+        <% end %>
+    <!-- END NATIONAL CARD -->
+    <!-- START BOOKS, NEWS, AND FEATURES CARD -->
+        <%= pb_rails("card", props: { padding: "none", header: true}) do %>
+            <%= pb_rails("card/card_header", props: { padding: "sm", header_color: "category_5" }) do %>
+                <%= pb_rails("caption", props: { text: "Books, News, and Features", dark: true }) %>
+            <% end %>
+            <%= pb_rails("card/card_body", props: { padding: "none" }) do %>
+                <%= pb_rails("image", props: { classname:"image_size", url: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" }) %>
+                <%= pb_rails("title", props: { text: "Publishers Sue Internet Archive For Mass Copyright Infringement", tag: "h4", size: 4, padding: "sm", variant: "link" }) %>
+                <%= pb_rails("section_separator") %>
+                <%= pb_rails("flex", props: { padding: "sm", wrap: true }) do %>
+                    <%= pb_rails("body", props: {classname: "flex-item", margin_right: "md" }) do %>
+                        <%= pb_rails("icon_value", props: { icon: "share-alt", text: "84" }) %>
+                    <% end %>
+                    <%= pb_rails("body", props: {classname: "flex-item", margin_right: "md" }) do %>
+                        <%= pb_rails("icon_value", props: { icon: "eye", text: "5,592" }) %>
+                    <% end %>
+                    <%= pb_rails("body", props: {classname: "flex-item" }) do %>
+                        <%= pb_rails("icon_value", props: { icon: "comments", text: "104" }) %>
+                    <% end %>
+                <% end %>
+            <% end %>
+        <% end %>
+    <!-- END BOOKS, NEWS, AND FEATURES CARD -->
+    <!-- START SCIENCE CARD -->
+        <%= pb_rails("card", props: { padding: "none", header: true}) do %>
+            <%= pb_rails("card/card_header", props: { padding: "sm", header_color: "category_6" }) do %>
+                <%= pb_rails("caption", props: { text: "Science", dark: true }) %>
+            <% end %>
+            <%= pb_rails("card/card_body", props: { padding: "none" }) do %>
+                <%= pb_rails("image", props: { classname:"image_size", url: "https://images.unsplash.com/photo-1558677949-260173506bbf?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1267&q=80" }) %>
+                <%= pb_rails("title", props: { text: "New Book Argues Migration Isn’t A Crisis — It’s The Solution", tag: "h4", size: 4, padding: "sm", variant: "link" }) %>
+                <%= pb_rails("section_separator") %>
+                <%= pb_rails("flex", props: { padding: "sm", wrap: true }) do %>
+                    <%= pb_rails("body", props: {classname: "flex-item", margin_right: "md" }) do %>
+                        <%= pb_rails("icon_value", props: { icon: "share-alt", text: "54" }) %>
+                    <% end %>
+                    <%= pb_rails("body", props: {classname: "flex-item", margin_right: "md" }) do %>
+                        <%= pb_rails("icon_value", props: { icon: "eye", text: "3,982" }) %>
+                    <% end %>
+                    <%= pb_rails("body", props: {classname: "flex-item" }) do %>
+                        <%= pb_rails("icon_value", props: { icon: "comments", text: "12" }) %>
+                    <% end %>
+                <% end %>
+            <% end %>
+        <% end %>
+    <!-- END SCIENCE CARD -->
+    <% end %>
+<% end %>
+
+<style>
+.image_size {
+    width:100%;
+    height:200px;
+    }
+</style>

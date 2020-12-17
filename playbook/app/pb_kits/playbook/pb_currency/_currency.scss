@@ -1,0 +1,76 @@
+
+[class^=pb_currency_kit] {
+  &[class*=_center]  {
+    & > [class^=pb_caption],
+    & > [class^=pb_title],
+    & > [class^=pb_body] {
+      text-align: center;
+    }
+    & > [class*=pb_currency_wrapper] {
+      justify-content: center;
+    }
+  }
+
+  &[class*=_right] {
+    & > [class^=pb_caption],
+    & > [class^=pb_title],
+    & > [class^=pb_body] {
+      text-align: right;
+    }
+    & > [class*=pb_currency_wrapper] {
+      justify-content: flex-end;
+    }
+  }
+  [class^=pb_currency_wrapper] {
+    display: flex;
+
+    &[class*=_deemphasized] [class^=pb_body_kit][class*=_light] {
+      color: $text_lt_default;
+    }
+
+    &[class*=_deemphasized] [class^=pb_title_kit][class*=_4] {
+      font-weight: $regular;
+    }
+
+    &[class*=_light] [class^=pb_body_kit][class*=_light] {
+      color: $text_lt_light;
+    }
+
+    &[class*=_light] [class^=pb_title_kit][class*=_4] {
+      color: $text_lt_light;
+      font-weight: $regular;
+    }
+
+    &[class*=_bold] [class^=pb_body_kit][class*=_light] {
+      color: $text_lt_default;
+      font-weight: $bolder;
+    }
+
+    & > [class*=dollar_sign] {
+      display: flex;
+      align-items: flex-start;
+    }
+    & > [class*=unit] {
+      display: flex;
+      align-items: flex-end;
+    }
+  }
+
+  &[class*=_lg] [class^=pb_currency_wrapper] [class*=pb_currency_value] {
+    line-height: .9;
+    padding-left: $space_xs - 7px;
+    padding-right: $space_xs - 7px;
+  }
+
+  &[class*=_md] [class^=pb_currency_wrapper] [class*=pb_currency_value] {
+    line-height: 1.2;
+    padding-left: $space_xs - 7px;
+    padding-right: $space_xs - 7px;
+  }
+
+  &[class*=_sm] [class^=pb_currency_wrapper] [class*=pb_currency_value] {
+    line-height: 1.4;
+    padding-left: $space_xs - 7px;
+    padding-right: $space_xs - 7px;
+  }
+}

@@ -1,0 +1,27 @@
+<%= pb_rails("button", props: { id: "close-btn", margin_right: "sm", text: "Close" }) %>
+<%= pb_rails("button", props: { id: "clear-btn", margin_right: "sm", text: "Clear" }) %>
+<%= pb_rails("button", props: { id: "today-btn", text: "Today" }) %>
+<%= pb_rails("date_picker", props: {
+  hide_label: true,
+  margin_top: "sm",
+  picker_id: "fp-methods"
+}) %>
+
+<%= javascript_tag do %>
+  window.addEventListener("DOMContentLoaded", () => {
+    const fp = document.querySelector("#fp-methods")._flatpickr
+    const closeBtn = document.querySelector("#close-btn")
+    const clearBtn = document.querySelector("#clear-btn")
+    const todayBtn = document.querySelector("#today-btn")
+
+    closeBtn.addEventListener("click", () => {
+      fp.close()
+    })
+    clearBtn.addEventListener("click", () => {
+      fp.clear()
+    })
+    todayBtn.addEventListener("click", () => {
+      fp.setDate(new Date(), true)
+    })
+  })
+<% end %>

@@ -1,0 +1,8 @@
+<%= tag(:img,
+    id: object.id,
+    data: object.data.merge(src: object.url),
+    class: object.classname,
+    aria: object.aria,
+    src: object.url,
+    alt: object.alt)
+%>

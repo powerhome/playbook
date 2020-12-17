@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+set -e
+
+echo ">>> eslint"
+time yarn
+time yarn lint
+time yarn test
+
+echo ">>> Testing"
+trap "kill -TERM $PID" TERM
+time bin/rspec --format progress --format html --out ./spec_results/playbook/index.html --profile 100 spec &
+PID=$!
+wait $PID

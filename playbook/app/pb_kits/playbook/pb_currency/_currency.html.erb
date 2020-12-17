@@ -1,0 +1,16 @@
+<%= content_tag(:div,
+    aria: object.aria,
+    id: object.id,
+    data: object.data,
+    class: object.classname) do %>
+
+  <%= pb_rails("caption", props: { text: object.label }) %>
+
+  <div class=<%= "pb_currency_wrapper#{object.variant_class || object.emphasized_class}" %>>
+    <%= pb_rails("body", props: object.currency_wrapper_props) do %>
+      <%= object.symbol %>
+    <% end %>
+    <%= pb_rails("title", props: object.title_props) %>
+    <%= pb_rails("body", props: object.body_props) %>
+  </div>
+<% end %>

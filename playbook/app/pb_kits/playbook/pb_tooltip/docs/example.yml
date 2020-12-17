@@ -1,0 +1,6 @@
+examples:
+
+  rails:
+  - tooltip_default: Default
+  - tooltip_white: White
+  - tooltip_with_icon_circle: Icon Circle Tooptip

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Full Screen Examples</title>
+        <%= csrf_meta_tags %>
+        <%= csp_meta_tag %>
+        <meta content="user-scalable=0, initial-scale=1.0, minimum-scale=1" name="viewport"/>
+        <%= stylesheet_packs_with_chunks_tag 'main' %>
+    </head>
+    <body>
+        <div class="sample-layout">
+            <%= yield %>
+        </div>
+    </body>
+
+    <%= javascript_include_tag "https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js" %>
+
+    <% if @type == 'react' %>
+      <%= javascript_packs_with_chunks_tag 'application', 'popover_docs', 'samples', 'full-page-samples' %>
+    <% else %>
+      <%= javascript_packs_with_chunks_tag 'application', 'rails-examples', 'samples', 'full-page-samples' %>
+      <%= yield :pb_js %>
+    <% end %>
+</html>

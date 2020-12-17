@@ -1,0 +1,44 @@
+examples:
+  rails:
+    - table_sm: Small
+    - table_md: Medium
+    - table_lg: Large
+    - table_alignment_row: Row Alignment
+    - table_alignment_column: Column Alignment
+    - table_alignment_shift_row: Shift Row
+    - table_alignment_shift_data: Shift Column Data
+    - table_side_highlight: Side Highlight
+    - table_container: Table Container Off
+    - table_disable_hover: Disable Hover
+    - table_multiline: Multi-line
+    - table_single_line: Force Single Line
+    - table_data_table: Data Table
+    - table_responsive_table: Responsive Tables
+    - table_one_action: Table with 1 Action
+    - table_two_actions: Table with 2 Actions
+    - table_two_plus_actions: Table with 2+ Actions
+    - table_action_middle: Table with Actions in the Middle
+    - table_icon_buttons: Table with Icon Buttons
+
+
+  react:
+    - table_sm: Small
+    - table_md: Medium
+    - table_lg: Large
+    - table_alignment_row: Row Alignment
+    - table_alignment_column: Column Alignment
+    - table_alignment_shift_row: Shift Row
+    - table_alignment_shift_data: Shift Column Data
+    - table_side_highlight: Side Highlight
+    - table_container: Table Container Off
+    - table_disable_hover: Disable Hover
+    - table_multiline: Multi-line
+    - table_single_line: Force Single Line
+    - table_data_table: Data Table
+    - table_responsive_table: Responsive Tables
+    - table_one_action: Table with 1 Action
+    - table_two_actions: Table with 2 Actions
+    - table_two_plus_actions: Table with 2+ Actions
+    - table_action_middle: Table with Actions in the Middle
+    - table_icon_buttons: Table with Icon Buttons
+
