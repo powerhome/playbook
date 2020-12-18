@@ -1,0 +1,10 @@
+<%= content_tag(:div,
+    id: object.id,
+    data: object.data,
+    aria: object.aria,
+    class: object.classname) do %>
+  <label class="pb_toggle_wrapper">
+    <%= content.presence || object.input %>
+    <div class="pb_toggle_control"></div>
+  </label>
+<% end %>
