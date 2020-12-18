@@ -2,11 +2,7 @@
 
 module Playbook
   module PbDateYearStacked
-    class DateYearStacked
-      include Playbook::Props
-
-      partial "pb_date_year_stacked/date_year_stacked"
-
+    class DateYearStacked < Playbook::KitBase
       prop :align, type: Playbook::Props::Enum,
                    values: %w[left center right],
                    default: "left"
