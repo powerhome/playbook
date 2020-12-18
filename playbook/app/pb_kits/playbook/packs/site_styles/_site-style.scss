@@ -9,6 +9,7 @@ $nav_breakpoint: breakpoint("lg");
 
 body {
   overflow-x: hidden;
+  position: relative;
 }
 
 .pb--page {
@@ -111,7 +112,7 @@ body {
       @include break_at($nav_breakpoint) {
         position: absolute;
         transform-origin: 0% 0%;
-        transform: translate(100%, 0);
+        transform: translate(110%, 0);
         transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0);
         border-radius: $border_rad_heavier;
         box-shadow: $shadow_deepest;

@@ -41,6 +41,7 @@ const FilterSingle = ({
     >
       <Flex
           orientation="row"
+          paddingRight="lg"
           vertical="center"
       >
         <If condition={children}>
