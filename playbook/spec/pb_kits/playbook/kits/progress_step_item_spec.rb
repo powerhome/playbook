@@ -5,7 +5,6 @@ require_relative "../../../../app/pb_kits/playbook/pb_progress_step/progress_ste
 RSpec.describe Playbook::PbProgressStep::ProgressStepItem do
   subject { Playbook::PbProgressStep::ProgressStepItem }
 
-  it { is_expected.to define_partial }
   it { is_expected.to define_enum_prop(:status)
                       .with_default("inactive")
                       .with_values("complete", "active", "inactive","hidden") }
