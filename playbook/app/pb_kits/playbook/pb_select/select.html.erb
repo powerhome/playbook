@@ -8,8 +8,8 @@
     </label>
   <% end %>
   <label class="<%= object.select_wrapper_class %>" for="<%= object.name %>">
-    <% if object.children %>
-      <%= capture(&object.children) %>
+    <% if content.present? %>
+      <%= content %>
       <%= pb_rails("body", props: { status: "negative", text: object.error }) %>
     <% else %>
       <%= select_tag(
