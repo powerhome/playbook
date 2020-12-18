@@ -5,10 +5,10 @@
   <% if object.label.present? %>
     <%= pb_rails("caption", props: {text: object.label, dark: object.dark}) %>
   <% end %>
-  <% if object.children %>
-    <%= capture(&object.children) %>
+  <% if content.present? %>
+    <%= content %>
     <% if object.error %>
-      <%= pb_rails("body", props: {dark: object.dark, status: "negative", text: object.error}) %>
+      <%= pb_rails("body", props: { dark: object.dark, status: "negative", text: object.error }) %>
     <% end %>
   <% else %>
     <%= text_area(
@@ -20,7 +20,7 @@
         :onkeyup => object.onkeyup,
         :placeholder => object.placeholder,
         :rows => object.rows,
-        :value => object.value )%>
+        :value => object.value) %>
     <% if object.error %>
       <% if object.character_count %>
         <%= pb_rails("flex", props: { spacing: "between", vertical: "center" }) do %>
