@@ -1,0 +1,22 @@
+
+<%= pb_rails("rich_text_editor", props: { id: "content-preview-editor" }) %>
+<div id="card-obfuscation" style="visibility:hidden">
+  <%= pb_rails("card", props: { id: "content-preview" }) %>
+</div>
+<%= pb_rails("button", props: { id: "preview-button", variant: "secondary" }) do %>
+  <span>Preview Output</span>
+<% end %>
+
+<script>
+  // Button event handler
+  const button = document.getElementById('preview-button');
+  button.addEventListener('click', function() {
+    const content = document.getElementById('content-preview-editor');
+    const previewArea = document.getElementById('content-preview');
+    const cardDiv = document.getElementById('card-obfuscation');
+
+    previewArea.innerHTML = content.value;
+    cardDiv.classList.add('my_md');
+    cardDiv.style.visibility = 'visible';
+  });
+</script>
