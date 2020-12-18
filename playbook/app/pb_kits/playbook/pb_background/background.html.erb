@@ -6,7 +6,7 @@
       class: object.classname,
       style: "background-image: url('#{object.image_url}');"
   ) do %>
-    <%= capture(&object.children) %>
+    <%= content.presence %>
   <% end %>
 <% else %>
   <%= content_tag(object.tag,
@@ -15,6 +15,6 @@
       id: object.id,
       class: object.classname
   ) do %>
-    <%= capture(&object.children) %>
+    <%= content.presence %>
   <% end %>
 <% end %>
