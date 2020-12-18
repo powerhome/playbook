@@ -2,11 +2,7 @@
 
 module Playbook
   module PbTimeline
-    class Item
-      include Playbook::Props
-
-      partial "pb_timeline/item"
-
+    class Item < Playbook::KitBase
       prop :date
       prop :icon, type: Playbook::Props::String,
                   default: "user"

@@ -5,7 +5,6 @@ require_relative "../../../../app/pb_kits/playbook/pb_timeline/item"
 RSpec.describe Playbook::PbTimeline::Item do
   subject { Playbook::PbTimeline::Item }
 
-  it { is_expected.to define_partial }
   it { is_expected.to define_prop(:date) }
   it { is_expected.to define_prop(:icon)
                       .with_default("user") }
