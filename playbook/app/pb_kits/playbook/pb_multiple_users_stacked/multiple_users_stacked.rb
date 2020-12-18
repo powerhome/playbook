@@ -2,11 +2,7 @@
 
 module Playbook
   module PbMultipleUsersStacked
-    class MultipleUsersStacked
-      include Playbook::Props
-
-      partial "pb_multiple_users_stacked/multiple_users_stacked"
-
+    class MultipleUsersStacked < Playbook::KitBase
       prop :users, type: Playbook::Props::HashArray, required: true
 
       def more_than_two
