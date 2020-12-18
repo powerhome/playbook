@@ -5,8 +5,6 @@ require_relative "../../../../app/pb_kits/playbook/pb_selectable_icon/selectable
 RSpec.describe Playbook::PbSelectableIcon::SelectableIcon do
   subject { Playbook::PbSelectableIcon::SelectableIcon }
 
-  it { is_expected.to define_partial }
-
   it { is_expected.to define_boolean_prop(:checked).with_default(false) }
   it { is_expected.to define_boolean_prop(:dark).with_default(false) }
   it { is_expected.to define_boolean_prop(:disabled).with_default(false) }
