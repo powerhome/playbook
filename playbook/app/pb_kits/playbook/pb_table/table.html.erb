@@ -4,6 +4,6 @@
       class: object.classname,
       data: object.data,
       id: object.id) do %>
-    <%= capture(&object.children) %>
+    <%= content.presence %>
   <% end %>
 <% end %>
