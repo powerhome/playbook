@@ -3,7 +3,6 @@
     class: object.classname,
     data: object.data,
     id: object.id) do %>
-
   <%= link_to object.url do %>
     <%= pb_rails("badge", props: { dark: object.dark, variant: "primary", text: object.hashtag_text }) %>
   <% end %>
