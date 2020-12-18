@@ -2,11 +2,7 @@
 
 module Playbook
   module PbFixedConfirmationToast
-    class FixedConfirmationToast
-      include Playbook::Props
-
-      partial "pb_fixed_confirmation_toast/fixed_confirmation_toast"
-
+    class FixedConfirmationToast < Playbook::KitBase
       prop :status, type: Playbook::Props::Enum,
                     values: %w[success error neutral tip],
                     default: "neutral"

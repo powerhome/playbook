@@ -5,8 +5,6 @@ require_relative "../../../../app/pb_kits/playbook/pb_fixed_confirmation_toast/f
 RSpec.describe Playbook::PbFixedConfirmationToast::FixedConfirmationToast do
   subject { Playbook::PbFixedConfirmationToast::FixedConfirmationToast }
 
-  it { is_expected.to define_partial }
-
   it { is_expected.to define_prop(:text).of_type(Playbook::Props::String) }
   it { is_expected.to define_enum_prop(:status)
                       .with_default("neutral")
