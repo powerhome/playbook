@@ -2,11 +2,7 @@
 
 module Playbook
   module PbLayout
-    class Layout
-      include Playbook::Props
-
-      partial "pb_layout/layout"
-
+    class Layout < Playbook::KitBase
       prop :collapse, type: Playbook::Props::Enum,
                       values: %w[xs sm md lg xl],
                       default: "xs"
@@ -24,13 +20,11 @@ module Playbook
       prop :layout, type: Playbook::Props::Enum,
             values: %w[sidebar collection collection_detail kanban content],
             default: "sidebar"
-
-
       prop :responsive, type: Playbook::Props::Boolean, default: false
 
       def classname
         case layout
-	        when "collection" 
+	        when "collection"
             generate_classname("pb_layout_kit", layout)
           when "kanban"
             generate_classname("pb_layout_kit", layout, responsive_class)

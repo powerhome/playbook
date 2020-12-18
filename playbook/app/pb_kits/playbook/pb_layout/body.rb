@@ -2,11 +2,7 @@
 
 module Playbook
   module PbLayout
-    class Body
-      include Playbook::Props
-
-      partial "pb_layout/body"
-
+    class Body < Playbook::KitBase
       prop :tag, type: Playbook::Props::Enum,
                  values: %w[ul li span div],
                  default: "div"

@@ -5,8 +5,6 @@ require_relative "../../../../app/pb_kits/playbook/pb_layout/layout.rb"
 RSpec.describe Playbook::PbLayout::Layout do
   subject { Playbook::PbLayout::Layout }
 
-  it { is_expected.to define_partial }
-
   it { is_expected.to define_enum_prop(:collapse)
                       .with_values("xs", "sm", "md", "lg", "xl")
                       .with_default("xs") }
