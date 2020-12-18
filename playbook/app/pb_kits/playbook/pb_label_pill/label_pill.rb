@@ -2,11 +2,7 @@
 
 module Playbook
   module PbLabelPill
-    class LabelPill
-      include Playbook::Props
-
-      partial "pb_label_pill/label_pill"
-
+    class LabelPill < Playbook::KitBase
       prop :variant, type: Playbook::Props::Enum,
                      values: %w[success warning error info neutral primary],
                      default: "neutral"
