@@ -5,7 +5,6 @@ require_relative "../../../../app/pb_kits/playbook/pb_stat_change/stat_change"
 RSpec.describe Playbook::PbStatChange::StatChange do
   subject { Playbook::PbStatChange::StatChange }
 
-  it { is_expected.to define_partial }
   it { is_expected.to define_prop(:value).of_type(Playbook::Props::Numeric) }
   it { is_expected.to define_enum_prop(:change)
                    .with_default("neutral")
