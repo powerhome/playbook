@@ -8,15 +8,15 @@
       <%= javascript_tag do %>
         window.addEventListener('DOMContentLoaded', function() {
           new pbChart('.selector', <%= object.chart_options %>)
-      
+
         });
       <% end %>
     <% end %>
   <% end %>
 
-  <% if object.children %>
+  <% if content.present? %>
     <div class="pb-circle-chart-block">
-      <%= capture(&object.children) %>
+      <%= content %>
     </div>
   <% end %>
 </div>
