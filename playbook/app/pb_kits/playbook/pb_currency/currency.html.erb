@@ -3,7 +3,6 @@
     id: object.id,
     data: object.data,
     class: object.classname) do %>
-
   <%= pb_rails("caption", props: { text: object.label }) %>
 
   <div class=<%= "pb_currency_wrapper#{object.variant_class || object.emphasized_class}" %>>
