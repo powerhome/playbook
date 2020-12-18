@@ -27,6 +27,7 @@ const CurrentFilters = ({ dark, filters }: CurrentFiltersProps) => {
               size={4}
               tag="h4"
               text="No Filter Selected"
+              color="light"
           />
         </div>
       </If>
