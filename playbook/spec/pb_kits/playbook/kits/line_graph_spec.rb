@@ -5,7 +5,6 @@ require_relative "../../../../app/pb_kits/playbook/pb_line_graph/line_graph"
 RSpec.describe Playbook::PbLineGraph::LineGraph do
   subject { Playbook::PbLineGraph::LineGraph }
 
-  it { is_expected.to define_partial }
   it { is_expected.to define_string_prop(:axis_title) }
   it { is_expected.to define_prop(:point_start).of_type(Playbook::Props::Numeric) }
   it { is_expected.to define_string_prop(:subtitle) }
