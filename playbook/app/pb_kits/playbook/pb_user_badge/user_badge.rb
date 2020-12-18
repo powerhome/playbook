@@ -2,11 +2,7 @@
 
 module Playbook
   module PbUserBadge
-    class UserBadge
-      include Playbook::Props
-
-      partial "pb_user_badge/user_badge"
-
+    class UserBadge < Playbook::KitBase
       prop :badge, type: Playbook::Props::Enum,
                    values: %w[million-dollar veteran],
                    default: "million-dollar"
@@ -19,7 +15,14 @@ module Playbook
       end
 
       def display_badge
-        "pb_user_badge/badges/#{badge}.svg"
+        @badge ||= begin
+          badge_path = File.join(
+            File.dirname(self.class.source_location),
+            "badges",
+            "#{badge}.svg"
+          )
+          File.read(badge_path).html_safe
+        end
       end
     end
   end
