@@ -20,30 +20,6 @@ const TimestampUpdated = (props) => {
           variant="updated"
           {...props}
       />
-
-      <br />
-      <br />
-
-      <Timestamp
-          showTimezone
-          showUser
-          text="Maricris Nonato"
-          timestamp={new Date().getTime()}
-          timezone="America/New_York"
-          variant="updated"
-          {...props}
-      />
-
-      <br />
-
-      <Timestamp
-          showTimezone
-          showUser={false}
-          timestamp={new Date().getTime()}
-          timezone="America/New_York"
-          variant="updated"
-          {...props}
-      />
     </div>
   )
 }

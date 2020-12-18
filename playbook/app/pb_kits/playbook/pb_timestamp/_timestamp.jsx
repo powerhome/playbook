@@ -56,7 +56,7 @@ const Timestamp = (props: TimestampProps) => {
     return timeDisplay
   }
 
-  var fullDateDisplay = function fullDateDisplay(dateTimestamp, currentYear, dateDisplay, timezone, showTimezone) {
+  var fullDateDisplay = function fullDateDisplay(dateTimestamp, currentYear, timezone, showTimezone) {
     var fullDisplay = dateTimestamp.toMonth() + ' ' + dateTimestamp.toDay()
     if (dateTimestamp.toYear() > currentYear) {
       fullDisplay = fullDisplay + ', ' + dateTimestamp.toYear().toString()
@@ -65,13 +65,13 @@ const Timestamp = (props: TimestampProps) => {
   }
 
   var fullElapsedDisplay = function fullElapsedDisplay(showUser, text, dateTimestamp){
-    var userDisplay = (showUser == true && text.length > 0) ? ' by ' + text : ''
+    const userDisplay = (showUser == true && text.length > 0) ? ' by ' + text : ''
     return 'Last updated' + userDisplay + ' ' + dateTimestamp.value.fromNow()
   }
 
-  var fullUpdatedDisplay = function fullUpdatedDisplay(showUser, text, timeDisplay, timezone, showTimezone){
-    var userDisplay = (showUser == true && text.length > 0) ? ' by ' + text : ''
-    return 'Last updated' + userDisplay + ' at ' + fullTimeDisplay(dateTimestamp, timeDisplay, timezone, showTimezone)
+  var fullUpdatedDisplay = function fullUpdatedDisplay(showUser, text, timeDisplay){
+    const userDisplay = (showUser == true && text.length > 0) ? ' by ' + text : ''
+    return `Last updated ${userDisplay} on ${dateDisplay} at ${timeDisplay}`
   }
 
   return (
