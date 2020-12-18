@@ -2,11 +2,7 @@
 
 module Playbook
   module PbStarRating
-    class StarRating
-      include Playbook::Props
-
-      partial "pb_star_rating/star_rating"
-
+    class StarRating < Playbook::KitBase
       prop :hide_rating, type: Playbook::Props::Boolean,
                          default: false
 
