@@ -5,8 +5,6 @@ require_relative "../../../../app/pb_kits/playbook/pb_date_stacked/date_stacked"
 RSpec.describe Playbook::PbDateStacked::DateStacked do
   subject { Playbook::PbDateStacked::DateStacked }
 
-  it { is_expected.to define_partial }
-
   it { is_expected.to define_enum_prop(:align)
                       .with_values("left", "center", "right") }
   it { is_expected.to define_enum_prop(:size)
