@@ -25,18 +25,18 @@
           <% end %>
           <div class="separator"></div>
           <%= pb_rails("card/card_body", props: { padding: "sm" }) do %>
-            <% if object.children.nil? %>
+            <% if content.nil? %>
               <%= pb_rails("body", props: { text: object.text }) %>
             <% else %>
-              <%= capture(&object.children) %>
+              <%= content %>
             <% end %>
           <% end %>
         <% end %>
       <% else %>
-        <% if object.children.nil? %>
+        <% if content.nil? %>
           <%= pb_rails("body", props: { text: object.text }) %>
         <% else %>
-          <%= capture(&object.children) %>
+          <%= content %>
         <% end %>
         <% if object.icon %>
           <div class="pb_selectable_card_circle">
