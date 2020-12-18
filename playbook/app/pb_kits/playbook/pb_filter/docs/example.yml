@@ -7,7 +7,7 @@ examples:
   - filter_no_sort: No Sort
   - filter_only: Filter Only
   - sort_only: Sort Only
-  - min_width: Min Width for Popover Inside of Filter
+  - filter_min_width: Min Width for Popover Inside of Filter
 
   react:
   - filter_default: Default
@@ -16,4 +16,4 @@ examples:
   - filter_no_sort: No Sort
   - filter_only: Filter Only
   - sort_only: Sort Only
-  - min_width: Min Width for Popover Inside of Filter
+  - filter_min_width: Min Width for Popover Inside of Filter
