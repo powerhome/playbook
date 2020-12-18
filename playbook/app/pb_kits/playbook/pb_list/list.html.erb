@@ -7,6 +7,6 @@
                   role: object.role,
                   tabindex: object.tabindex
     ) do %>
-      <%= capture(&object.children) %>
+      <%= content.presence %>
   <% end %>
 <% end %>

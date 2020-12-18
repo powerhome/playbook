@@ -5,5 +5,5 @@
                 id: object.id,
                 tabindex: object.tabindex
   ) do %>
-    <%= capture(&object.children) %>
+    <%= content.presence %>
 <% end %>
