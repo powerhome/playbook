@@ -14,7 +14,7 @@ module Playbook
                       values: %w[default single filter_only sort_only],
                       default: "default"
       prop :background, type: Playbook::Props::Boolean, default: true
-      prop :min_width
+      prop :min_width, default: "auto"
 
       def classname
         generate_classname("pb_filter_kit")
