@@ -23,6 +23,7 @@ const CurrentFilters = ({ dark, filters }: CurrentFiltersProps) => {
       <If condition={isEmpty(filters)}>
         <div className="filters">
           <Body
+              color="light"
               paddingLeft="xs"
               size={4}
               tag="h4"
