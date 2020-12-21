@@ -4,7 +4,10 @@ import { CircleIconButton } from '../../'
 
 const TableTwoPlusActions = (props) => {
   return (
-    <Table size="sm">
+    <Table
+        size="sm"
+        {...props}
+    >
       <thead>
         <tr>
           <th>{'Column 1'}</th>

@@ -9,7 +9,9 @@ const TableResponsiveTable = (props) => {
           text="Default"
           {...props}
       />
-      <Table>
+      <Table
+          {...props}
+      >
         <thead>
           <tr>
             <th>{'Column 1'}</th>
@@ -36,7 +38,10 @@ const TableResponsiveTable = (props) => {
           text="Default"
           {...props}
       />
-      <Table responsive="none">
+      <Table
+          responsive="none"
+          {...props}
+      >
         <thead>
           <tr>
             <th>{'Column 1'}</th>

@@ -1,9 +1,11 @@
 import React from 'react'
 import { Table } from '../../'
 
-const TableAlignmentColumn = () => {
+const TableAlignmentColumn = (props) => {
   return (
-    <Table>
+    <Table
+        {...props}
+    >
       <thead>
         <tr>
           <th>{'Column 1'}</th>

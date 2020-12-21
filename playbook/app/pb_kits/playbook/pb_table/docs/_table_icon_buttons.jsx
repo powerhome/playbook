@@ -4,7 +4,10 @@ import { CircleIconButton, Flex, FlexItem } from '../../'
 
 const TableIconButtons = (props) => {
   return (
-    <Table size="sm">
+    <Table
+        size="sm"
+        {...props}
+    >
       <thead>
         <tr>
           <th>{'Column 1'}</th>
