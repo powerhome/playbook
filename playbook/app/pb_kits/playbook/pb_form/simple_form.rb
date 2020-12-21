@@ -24,10 +24,11 @@ module Playbook
       prop :validate, type: Playbook::Props::Boolean, default: false
 
       def options
-        prop(:options).merge(
+        {
           builder: Playbook::PbForm::SimpleForm::FormBuilder,
-          html: html_options
-        )
+          html: html_options,
+          url: "",
+        }.merge(prop(:options))
       end
 
       def model

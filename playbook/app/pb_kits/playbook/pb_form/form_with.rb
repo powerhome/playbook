@@ -17,7 +17,7 @@ module Playbook
       end
 
       def options
-        Hash(prop(:options))
+        { url: "" }.merge(Hash(prop(:options)))
       end
 
       def classname
