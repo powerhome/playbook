@@ -1,12 +1,20 @@
 import React from 'react'
 import { LoadingInline } from '../../'
 
-const LoadingInlineLight = () => {
+const LoadingInlineLight = (props) => {
   return (
     <div>
-      <LoadingInline />
-      <LoadingInline align="center" />
-      <LoadingInline align="right" />
+      <LoadingInline
+          {...props}
+      />
+      <LoadingInline
+          align="center"
+          {...props}
+      />
+      <LoadingInline
+          align="right"
+          {...props}
+      />
     </div>
   )
 }
