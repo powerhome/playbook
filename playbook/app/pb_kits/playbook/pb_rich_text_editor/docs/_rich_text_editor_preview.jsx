@@ -21,8 +21,9 @@ const RichTextEditorPreview = () => {
           onChange={handleChange}
       />
       <If condition={showPreview}>
-        <Card marginY="md">
+        <Card marginTop="md">
           <div
+              className="trix-content"
               // eslint-disable-next-line react/no-danger
               dangerouslySetInnerHTML={{ __html: previewText }}
               id="preview-content"
@@ -33,6 +34,7 @@ const RichTextEditorPreview = () => {
       </If>
       <Button
           id="preview-button"
+          marginTop="md"
           onClick={handleClick}
           text="Preview Output"
           variant="secondary"
