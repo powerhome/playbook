@@ -8,9 +8,15 @@
         <%= stylesheet_packs_with_chunks_tag 'main', 'samples/index' %>
     </head>
     <body>
-        <div class="sample-layout">
-            <%= yield %>
-        </div>
+      <%= render 'layouts/playbook/nav'%>
+      <%= render 'layouts/playbook/mobile_hamburger'%>
+      <%= pb_rails("layout/sidebar", props: { classname: "pb--page--sideNav non-kit"}) do %>
+        <%= render 'layouts/playbook/sidebar'%>
+      <% end %>
+      <div class="sample-layout">
+        <%= yield %>
+      </div>
+      <%= render 'layouts/playbook/footer'%>
     </body>
 
     <%= javascript_include_tag "https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js" %>

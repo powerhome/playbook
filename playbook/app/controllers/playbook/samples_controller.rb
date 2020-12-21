@@ -22,7 +22,6 @@ module Playbook
 
     def samples_index
       @sample_yaml = YAML.load_file("#{Playbook::Engine.root}/app/pb_kits/playbook/data/samples.yml")
-      render layout: "layouts/playbook/application"
     end
 
     def sample_show_rails
