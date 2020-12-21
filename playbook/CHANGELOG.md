@@ -1,5 +1,39 @@
 
 
+## [7.11.0](https://github.com/powerhome/playbook/tree/HEAD)
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/7.11.0...HEAD)
+
+**Kit Enhancements:**
+
+- Improve Rails tooltip kit performance when a lot of tooltip kits are on the page [\#1270](https://github.com/powerhome/playbook/pull/1270) ([thestephenmarshall](https://github.com/thestephenmarshall))
+- Add deprecation back [\#1266](https://github.com/powerhome/playbook/pull/1266) ([thestephenmarshall](https://github.com/thestephenmarshall))
+- Add target blank to Nav Item [\#1265](https://github.com/powerhome/playbook/pull/1265) ([stephenmckeon](https://github.com/stephenmckeon))
+- Update DatePicker docs for best DateTime obj practices [\#1259](https://github.com/powerhome/playbook/pull/1259) ([bh247484](https://github.com/bh247484))
+- Expose popover's minWidth prop for Filter Kit. [\#1257](https://github.com/powerhome/playbook/pull/1257) ([jasperfurniss](https://github.com/jasperfurniss))
+- Forward refs within Text Input, Radio, & Select React kits [\#1253](https://github.com/powerhome/playbook/pull/1253) ([thestephenmarshall](https://github.com/thestephenmarshall))
+- Remove unused methods from Playbook api [\#1247](https://github.com/powerhome/playbook/pull/1247) ([xjunior](https://github.com/xjunior))
+- Dashboard Card Sample Pages [\#1246](https://github.com/powerhome/playbook/pull/1246) ([andrew-k9](https://github.com/andrew-k9))
+- Simplify dark mode [\#1238](https://github.com/powerhome/playbook/pull/1238) ([xjunior](https://github.com/xjunior))
+
+**Fixed Bugs:**
+
+- Tooltip Rails kit: Tooltip arrow is not centered [\#1258](https://github.com/powerhome/playbook/pull/1258) ([stephenmckeon](https://github.com/stephenmckeon))
+
+**Improvements:**
+
+- Added a rich text output preview [\#1275](https://github.com/powerhome/playbook/pull/1275) ([andrew-k9](https://github.com/andrew-k9))
+- Improved home toggle margin & homepage hero background color [\#1274](https://github.com/powerhome/playbook/pull/1274) ([bh247484](https://github.com/bh247484))
+- Fix for homepage toggle page shake [\#1273](https://github.com/powerhome/playbook/pull/1273) ([jasperfurniss](https://github.com/jasperfurniss))
+- Added Changelog Page [\#1269](https://github.com/powerhome/playbook/pull/1269) ([andrew-k9](https://github.com/andrew-k9))
+- Updated sample page design layout to support categories [\#1267](https://github.com/powerhome/playbook/pull/1267) ([bh247484](https://github.com/bh247484))
+- Improve navigation overflow for mobile [\#1260](https://github.com/powerhome/playbook/pull/1260) ([jasoncypret](https://github.com/jasoncypret))
+- Improve consistency of the react filter kit sort icon to match rails [\#1256](https://github.com/powerhome/playbook/pull/1256) ([stephenmckeon](https://github.com/stephenmckeon))
+- Change right side padding to account for no sort on filter kit [\#1255](https://github.com/powerhome/playbook/pull/1255) ([stephenmckeon](https://github.com/stephenmckeon))
+- Bump ini from 1.3.5 to 1.3.8 in /playbook [\#1251](https://github.com/powerhome/playbook/pull/1251) ([dependabot[bot]](https://github.com/apps/dependabot))
+
+
+
 ## [7.10.0](https://github.com/powerhome/playbook/tree/HEAD)
 
 [Full Changelog](https://github.com/powerhome/playbook/compare/7.10.0...HEAD)
