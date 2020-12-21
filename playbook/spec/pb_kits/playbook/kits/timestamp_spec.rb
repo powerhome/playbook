@@ -22,8 +22,7 @@ RSpec.describe Playbook::PbTimestamp::Timestamp do
                       .of_type(Playbook::Props::Boolean) }
   it { is_expected.to define_string_prop(:text) }
   it { is_expected.to define_string_prop(:timezone) }
-  it { is_expected.to define_prop(:timestamp)
-                      .that_is_required }
+  it { is_expected.to define_prop(:timestamp) }
   it { is_expected.to define_enum_prop(:variant)
                       .with_values("default", "elapsed", "updated") }
 
