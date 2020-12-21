@@ -1,19 +1,16 @@
 <%= content_tag(:div,
-    aria: object.aria,
-    id: object.id,
-    data: object.data,
-    class: object.classname) do %>
+  aria: object.aria,
+  id: object.id,
+  data: object.data,
+  class: object.classname) do %>
 
-    <% case object.variant %>
-    <% when "updated" %>
-       <%= pb_rails("caption", props: { text: object.format_updated_string, size: 'xs', dark: object.dark }) %>
-    <% when "elapsed" %>
-      <%= pb_rails("caption", props: { text: object.format_updated_string, size: 'xs', dark: object.dark }) %>
+  <% if object.variant == "updated" || object.variant == "elapsed" %>
+    <%= pb_rails("caption", props: { text: object.format_updated_string, size: 'xs', dark: object.dark }) %>
+  <% else %>
+    <% if object.show_date %>
+      <%= pb_rails("caption", props: { text: object.timestamp ? object.format_datetime_string : object.text, size: 'xs', dark: object.dark }) %>
     <% else %>
-      <% if object.show_date %>
-        <%= pb_rails("caption", props: { text: object.timestamp ? object.format_datetime_string : object.text, size: 'xs', dark: object.dark }) %>
-      <% else %>
-        <%= pb_rails("caption", props: { text: object.format_time_string, size: 'xs', dark: object.dark }) %>
-      <% end %>
+      <%= pb_rails("caption", props: { text: object.format_time_string, size: 'xs', dark: object.dark }) %>
     <% end %>
+  <% end %>
 <% end %>

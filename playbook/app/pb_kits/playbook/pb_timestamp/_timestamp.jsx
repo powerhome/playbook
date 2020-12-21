@@ -97,14 +97,13 @@ const Timestamp = (props: TimestampProps) => {
               text={formattedUpdatedString(showUser, text, dateTimestamp, timeDisplay)}
           />
           <Else />
-          <If condition={showDate == true}>
+          <If condition={showDate}>
             <Caption
                 dark={dark}
                 size="xs"
                 text={timestamp ? fullDateDisplay(dateTimestamp, currentYear, dateDisplay, timezone, showTimezone) : text}
             />
-          </If>
-          <If condition={showDate == false}>
+            <Else />
             <Caption
                 dark={dark}
                 size="xs"
