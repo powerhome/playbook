@@ -53,33 +53,45 @@ const Timestamp = (props: TimestampProps) => {
   const currentYear = new Date().getFullYear().toString()
   const dateTimestamp = new DateTime({ value: timestamp, zone: timezone })
   const dateDisplay = `${dateTimestamp.toMonth()} ${dateTimestamp.toDay()}`
-  const timeDisplay = `${dateTimestamp.toHour()}:${dateTimestamp.toMinute()}${dateTimestamp.toMeridian()}`
+  const shouldShowUser = showUser == true && text.length > 0
+  const shouldShowTimezone = showTimezone == true && timezone.length > 0
+  const userDisplay = shouldShowUser ? ` by ${text}` : ''
 
-  const fullTimeDisplay = (dateTimestamp, timeDisplay, timezone, showTimezone) => {
-    if (showTimezone == true && timezone.length > 0) {
-      timeDisplay = timeDisplay + ' ' + dateTimestamp.toTimezone()
+  let timeDisplay = `${dateTimestamp.toHour()}:${dateTimestamp.toMinute()}${dateTimestamp.toMeridian()}`
+
+  const fullTimeDisplay = () => {
+    if (shouldShowTimezone) {
+      timeDisplay = `${timeDisplay} ${dateTimestamp.toTimezone()}`
     }
     return timeDisplay
   }
 
-  const fullDateDisplay = (dateTimestamp, currentYear, timezone, showTimezone) => {
+  const fullDateDisplay = () => {
     let fullDisplay = `${dateTimestamp.toMonth()} ${dateTimestamp.toDay()}`
     if (dateTimestamp.toYear() > currentYear) {
       fullDisplay = `${fullDisplay}, ${dateTimestamp.toYear()}`
     }
-    return `${fullDisplay} ${' \u00b7 '} ${fullTimeDisplay(dateTimestamp, timeDisplay, timezone, showTimezone)}`
+    return `${fullDisplay} ${' \u00b7 '} ${fullTimeDisplay()}`
   }
 
-  const formattedUpdatedString = (showUser, text, dateTimestamp, timeDisplay) => {
+  const formatUpdatedString = () => {
+    return `Last updated ${userDisplay} on ${dateDisplay} at ${timeDisplay}`
+  }
+
+  const formatElapsedString = () => {
+    return `Last updated ${userDisplay} ${dateTimestamp.value.fromNow()}`
+  }
+
+  const datetimeOrText = timestamp ? fullDateDisplay() : text
+
+  const captionText = () => {
     switch (variant) {
-    case 'elapsed': {
-      const elapsedUserDisplay = (showUser == true && text.length > 0) ? ` by ${text}` : ''
-      return `Last updated ${elapsedUserDisplay} ${dateTimestamp.value.fromNow()}`
-    }
-    case 'updated': {
-      const updatedUserDisplay = (showUser == true && text.length > 0) ? ` by ${text}` : ''
-      return `Last updated ${updatedUserDisplay} on ${dateDisplay} at ${timeDisplay}`
-    }
+    case 'updated':
+      return formatUpdatedString(userDisplay, dateTimestamp)
+    case 'elapsed':
+      return formatElapsedString(userDisplay, timeDisplay)
+    default:
+      return showDate ? datetimeOrText : fullTimeDisplay()
     }
   }
 
@@ -90,27 +102,11 @@ const Timestamp = (props: TimestampProps) => {
         className={classes}
     >
       <div className="pb_timestamp_kit">
-        <If condition={variant == 'updated' || variant == 'elapsed'}>
-          <Caption
-              dark={dark}
-              size="xs"
-              text={formattedUpdatedString(showUser, text, dateTimestamp, timeDisplay)}
-          />
-          <Else />
-          <If condition={showDate}>
-            <Caption
-                dark={dark}
-                size="xs"
-                text={timestamp ? fullDateDisplay(dateTimestamp, currentYear, dateDisplay, timezone, showTimezone) : text}
-            />
-            <Else />
-            <Caption
-                dark={dark}
-                size="xs"
-                text={fullTimeDisplay(dateTimestamp, timeDisplay, timezone, showTimezone)}
-            />
-          </If>
-        </If>
+        <Caption
+            dark={dark}
+            size="xs"
+            text={captionText()}
+        />
       </div>
     </div>
   )

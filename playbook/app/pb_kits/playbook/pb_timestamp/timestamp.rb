@@ -31,6 +31,19 @@ module Playbook
         generate_classname("pb_timestamp_kit", variant_class, align)
       end
 
+      def caption_text
+        case variant
+        when "updated"
+          format_updated_string
+        when "elapsed"
+          format_elapsed_string
+        else
+          show_date ? datetime_or_text : format_time_string
+        end
+      end
+
+    private
+
       def format_year_string
         pb_date_time.to_year != DateTime.now.year.to_s ? ", #{pb_date_time.to_year}" : ""
       end
@@ -53,18 +66,21 @@ module Playbook
 
       def format_updated_string
         user_string = show_user ? " by #{text}" : ""
-
-        case variant
-        when "updated"
-          datetime_string = " on #{format_date_string} at #{format_time_string}"
-        when "elapsed"
-          datetime_string = " #{time_ago_in_words(pb_date_time.convert_to_timestamp)} ago"
-        end
+        datetime_string = " on #{format_date_string} at #{format_time_string}"
 
         "Last updated#{user_string}#{datetime_string}"
       end
 
-    private
+      def format_elapsed_string
+        user_string = show_user ? " by #{text}" : ""
+        datetime_string = " #{time_ago_in_words(pb_date_time.convert_to_timestamp)} ago"
+
+        "Last updated#{user_string}#{datetime_string}"
+      end
+
+      def datetime_or_text
+        timestamp ? format_datetime_string : text
+      end
 
       def pb_date_time
         Playbook::PbKit::PbDateTime.new(timestamp, timezone)
