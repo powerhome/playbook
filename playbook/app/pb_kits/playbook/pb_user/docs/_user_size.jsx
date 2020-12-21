@@ -1,7 +1,7 @@
 import React from 'react'
 import { User } from '../../'
 
-const UserDefault = () => {
+const UserDefault = (props) => {
   return (
     <div className="pb--doc-demo-row">
       <User
@@ -9,6 +9,7 @@ const UserDefault = () => {
           name="Anna Black"
           size="sm"
           title="Remodeling Consultant"
+          {...props}
       />
 
       <User
@@ -16,6 +17,7 @@ const UserDefault = () => {
           name="Anna Black"
           size="md"
           title="Remodeling Consultant"
+          {...props}
       />
 
       <User
@@ -23,6 +25,7 @@ const UserDefault = () => {
           name="Anna Black"
           size="lg"
           title="Remodeling Consultant"
+          {...props}
       />
     </div>
   )
