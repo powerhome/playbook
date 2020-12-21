@@ -22,6 +22,9 @@ module Playbook
   module Props
     extend ActiveSupport::Concern
 
+    attr_accessor :values
+    private :values, :values=
+
     def initialize(prop_values = {}, &block)
       self.values = { children: block }.merge(Hash(prop_values))
       self.class.props.each do |key, definition|
@@ -33,129 +36,11 @@ module Playbook
       self.class.props[name].value values[name]
     end
 
-    def spacing_props
-      selected_props = spacing_options.keys.select { |sk| try(sk) }
-      return nil unless selected_props.present?
-
-      selected_props.map do |k|
-        spacing_value = send(k)
-        "#{spacing_options[k]}_#{spacing_value}" if spacing_values.include? spacing_value
-      end.compact.join(" ")
-    end
-
-    def dark_props
-      dark ? "dark" : nil
-    end
-
-    def max_width_props
-      selected_mw_props = max_width_options.keys.select { |sk| try(sk) }
-      return nil unless selected_mw_props.present?
-
-      selected_mw_props.map do |k|
-        width_value = send(k)
-        "max_width_#{width_value}" if max_width_values.include? width_value
-      end.compact.join(" ")
-    end
-
-    def z_index_props
-      selected_index_props = z_index_options.keys.select { |sk| try(sk) }
-      return nil unless selected_index_props.present?
-
-      selected_index_props.map do |k|
-        index_value = send(k)
-        "z_index_#{index_value}" if z_index_values.include? index_value
-      end.compact.join(" ")
-    end
-
-    def generate_classname(*name_parts, separator: "_")
-      [
-        name_parts.compact.join(separator),
-        prop(:classname),
-        spacing_props,
-        dark_props,
-        max_width_props,
-        z_index_props,
-      ].compact.join(" ")
-    end
-
-    def generate_classname_without_spacing(*name_parts, separator: "_")
-      [
-        name_parts.compact.join(separator),
-        prop(:classname),
-      ].compact.join(" ")
-    end
-
     attr_accessor :values
     private :values, :values=
 
     included do
       class_attribute :props, default: {}
-
-      prop :id
-      prop :data, type: Playbook::Props::Hash, default: {}
-      prop :classname
-      prop :aria, type: Playbook::Props::Hash, default: {}
-      prop :children, type: Playbook::Props::Proc
-      prop :margin
-      prop :margin_bottom
-      prop :margin_left
-      prop :margin_right
-      prop :margin_top
-      prop :margin_x
-      prop :margin_y
-      prop :max_width
-      prop :padding
-      prop :padding_bottom
-      prop :padding_left
-      prop :padding_right
-      prop :padding_top
-      prop :padding_x
-      prop :padding_y
-      prop :dark, type: Playbook::Props::Boolean, default: false
-      prop :z_index
-    end
-
-    def spacing_options
-      {
-        margin: "m",
-        margin_bottom: "mb",
-        margin_left: "ml",
-        margin_right: "mr",
-        margin_top: "mt",
-        margin_x: "mx",
-        margin_y: "my",
-        padding: "p",
-        padding_bottom: "pb",
-        padding_left: "pl",
-        padding_right: "pr",
-        padding_top: "pt",
-        padding_x: "px",
-        padding_y: "py",
-      }
-    end
-
-    def max_width_options
-      {
-        max_width: "mw",
-      }
-    end
-
-    def max_width_values
-      %w[sm md lg xl]
-    end
-
-    def z_index_options
-      {
-        z_index: "z-index",
-      }
-    end
-
-    def z_index_values
-      %w[1 2 3 4 5 6 7 8 9 10]
-    end
-
-    def spacing_values
-      %w[none xs sm md lg xl]
     end
 
     class_methods do
