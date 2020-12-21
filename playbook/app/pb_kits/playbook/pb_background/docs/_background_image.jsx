@@ -7,6 +7,7 @@ const BackgroundImage = (props) => (
     <Flex
         orientation="column"
         vertical="center"
+        {...props}
     >
       <FlexItem>
         <Title
@@ -17,8 +18,14 @@ const BackgroundImage = (props) => (
             {...props}
         />
       </FlexItem>
-      <FlexItem padding="lg">
-        <Card shadow="deepest">
+      <FlexItem
+          padding="lg"
+          {...props}
+      >
+        <Card
+            shadow="deepest"
+            {...props}
+        >
           {'We cannot seek achievement for ourselves and forget about progress and prosperity for our community... Our ambitions must be broad enough to include the aspirations and needs of others, for their sakes and for our own. - Cesar Chavez'}
         </Card>
       </FlexItem>
