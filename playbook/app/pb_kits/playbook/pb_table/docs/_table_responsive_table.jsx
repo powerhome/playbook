@@ -1,12 +1,13 @@
 import React from 'react'
 import { Table, Title } from '../../'
 
-const TableResponsiveTable = () => {
+const TableResponsiveTable = (props) => {
   return (
     <div>
       <Title
           size={4}
           text="Default"
+          {...props}
       />
       <Table>
         <thead>
@@ -33,6 +34,7 @@ const TableResponsiveTable = () => {
       <Title
           size={4}
           text="Default"
+          {...props}
       />
       <Table responsive="none">
         <thead>

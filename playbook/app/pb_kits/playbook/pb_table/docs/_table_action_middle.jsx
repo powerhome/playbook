@@ -2,7 +2,7 @@ import React from 'react'
 import { Table } from '../../'
 import { Button } from '../../'
 
-const TableActionMiddle = () => {
+const TableActionMiddle = (props) => {
   return (
     <Table size="sm">
       <thead>
@@ -25,6 +25,7 @@ const TableActionMiddle = () => {
                 paddingLeft="none"
                 text="Action"
                 variant="link"
+                {...props}
             />
           </td>
           <td>{'Value 4'}</td>
@@ -40,6 +41,7 @@ const TableActionMiddle = () => {
                 paddingLeft="none"
                 text="Action"
                 variant="link"
+                {...props}
             />
           </td>
           <td>{'Value 4'}</td>
@@ -55,6 +57,7 @@ const TableActionMiddle = () => {
                 paddingLeft="none"
                 text="Action"
                 variant="link"
+                {...props}
             />
           </td>
           <td>{'Value 4'}</td>

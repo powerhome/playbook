@@ -2,7 +2,7 @@ import React from 'react'
 import { Table } from '../..'
 import { CircleIconButton } from '../../'
 
-const TableTwoPlusActions = () => {
+const TableTwoPlusActions = (props) => {
   return (
     <Table size="sm">
       <thead>
@@ -25,6 +25,7 @@ const TableTwoPlusActions = () => {
             <CircleIconButton
                 icon="ellipsis-h"
                 variant="secondary"
+                {...props}
             />
           </td>
         </tr>
@@ -38,6 +39,7 @@ const TableTwoPlusActions = () => {
             <CircleIconButton
                 icon="ellipsis-h"
                 variant="secondary"
+                {...props}
             />
           </td>
 
@@ -52,6 +54,7 @@ const TableTwoPlusActions = () => {
             <CircleIconButton
                 icon="ellipsis-h"
                 variant="secondary"
+                {...props}
             />
           </td>
         </tr>

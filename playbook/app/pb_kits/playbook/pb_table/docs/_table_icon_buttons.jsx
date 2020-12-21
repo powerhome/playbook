@@ -2,7 +2,7 @@ import React from 'react'
 import { Table } from '../..'
 import { CircleIconButton, Flex, FlexItem } from '../../'
 
-const TableIconButtons = () => {
+const TableIconButtons = (props) => {
   return (
     <Table size="sm">
       <thead>
@@ -26,12 +26,14 @@ const TableIconButtons = () => {
                 <CircleIconButton
                     icon="trash-alt"
                     variant="link"
+                    {...props}
                 />
               </FlexItem>
               <FlexItem>
                 <CircleIconButton
                     icon="pencil"
                     variant="secondary"
+                    {...props}
                 />
               </FlexItem>
             </Flex>
@@ -48,12 +50,14 @@ const TableIconButtons = () => {
                 <CircleIconButton
                     icon="trash-alt"
                     variant="link"
+                    {...props}
                 />
               </FlexItem>
               <FlexItem>
                 <CircleIconButton
                     icon="pencil"
                     variant="secondary"
+                    {...props}
                 />
               </FlexItem>
             </Flex>
@@ -70,12 +74,14 @@ const TableIconButtons = () => {
                 <CircleIconButton
                     icon="trash-alt"
                     variant="link"
+                    {...props}
                 />
               </FlexItem>
               <FlexItem>
                 <CircleIconButton
                     icon="pencil"
                     variant="secondary"
+                    {...props}
                 />
               </FlexItem>
             </Flex>

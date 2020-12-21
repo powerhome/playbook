@@ -2,7 +2,7 @@ import React from 'react'
 import { Table } from '../..'
 import { Button } from '../../'
 
-const TableOneAction = () => {
+const TableOneAction = (props) => {
   return (
     <Table size="sm">
       <thead>
@@ -26,11 +26,13 @@ const TableOneAction = () => {
                 paddingLeft="none"
                 text="Tetriary Action"
                 variant="link"
+                {...props}
             />
             <Button
                 onClick={() => alert('button clicked!')}
                 text="Secondary Action"
                 variant="secondary"
+                {...props}
             />
           </td>
         </tr>
@@ -45,11 +47,13 @@ const TableOneAction = () => {
                 paddingLeft="none"
                 text="Tetriary Action"
                 variant="link"
+                {...props}
             />
             <Button
                 onClick={() => alert('button clicked!')}
                 text="Secondary Action"
                 variant="secondary"
+                {...props}
             />
           </td>
         </tr>
@@ -64,11 +68,13 @@ const TableOneAction = () => {
                 paddingLeft="none"
                 text="Tetriary Action"
                 variant="link"
+                {...props}
             />
             <Button
                 onClick={() => alert('button clicked!')}
                 text="Secondary Action"
                 variant="secondary"
+                {...props}
             />
           </td>
         </tr>
