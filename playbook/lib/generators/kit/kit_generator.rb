@@ -75,12 +75,25 @@ class KitGenerator < Rails::Generators::NamedBase
         template "kit_js.erb", "#{full_kit_directory}/docs/index.js"
 
         # Import kit examples  ===========================
-        append_to_file("app/pb_kits/playbook/packs/react-examples.js") do
-          "import * as #{@kit_name_pascal} from 'pb_#{@kit_name_underscore}/docs'\nWebpackerReact.setup(#{@kit_name_pascal})\n"
-        end
-        append_to_file("app/pb_kits/playbook/index.js") do
-          "\nexport #{@kit_name_pascal} from './pb_#{@kit_name_underscore}/_#{@kit_name_underscore}.jsx'"
-        end
+        # append_to_file("app/pb_kits/playbook/packs/react-examples.js") do
+        #   "import * as #{@kit_name_pascal} from 'pb_#{@kit_name_underscore}/docs'\nWebpackerReact.setup(#{@kit_name_pascal})\n"
+        # end
+        # append_to_file("app/pb_kits/playbook/index.js") do
+        #   "\nexport #{@kit_name_pascal} from './pb_#{@kit_name_underscore}/_#{@kit_name_underscore}.jsx'"
+        # end
+
+        react_examples = File.open("app/pb_kits/playbook/packs/react-examples.js")
+        re_array = react_examples.read.split("\n")
+        webpack_components = re_array.select { |a| a =~ /\.\.\./ }
+        webpack_components.sort!
+
+        example_components = re_array.select { |a| a =~ /import\s\*\sas/ }
+        example_components << "import * as #{@kit_name_pascal} from 'pb_#{@kit_name_underscore}/docs'\nWebpackerReact.setup(#{@kit_name_pascal})\n"
+        example_components.sort!
+
+        webpack_components = re_array.select { |a| a =~ /\.\.\./ }
+        webpack_components.sort!
+
 
         say_status  "complete",
                     "#{@kit_name_capitalize} react kit successfully created.",
