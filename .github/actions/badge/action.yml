@@ -1,0 +1,10 @@
+name: 'Coverage Badge'
+description: 'Creates a Jest Coverage Badge'
+inputs:
+  coverage-json:
+    description: 'JSON data from coverage output summary'
+    required: true
+    default: '{}'
+runs:
+  using: 'node12'
+  main: 'coverage-badge.js'

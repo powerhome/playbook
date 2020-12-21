@@ -9,7 +9,9 @@
     "flow": "flow",
     "lint": "./node_modules/eslint/bin/eslint.js . --ext .js,.jsx",
     "lint-fix": "./node_modules/eslint/bin/eslint.js . --ext .js,.jsx --fix",
-    "test": "jest --collectCoverage",
+    "test": "jest",
+    "test-coverage": "jest --collectCoverage",
+    "test-coverage-summary": "jest --collectCoverage --coverageReporters=\"json-summary\"",
     "release": "webpack --env.production"
   },
   "repository": {
@@ -58,6 +60,8 @@
     "webpack-dev-server": "3.7.2"
   },
   "dependencies": {
+    "@actions/core": "^1.2.6",
+    "@actions/github": "^4.0.0",
     "@babel/cli": "7.12.1",
     "@babel/core": "^7.12.3",
     "@babel/plugin-proposal-class-properties": "^7.12.1",
