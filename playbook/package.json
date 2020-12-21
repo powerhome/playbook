@@ -9,7 +9,7 @@
     "flow": "flow",
     "lint": "./node_modules/eslint/bin/eslint.js . --ext .js,.jsx",
     "lint-fix": "./node_modules/eslint/bin/eslint.js . --ext .js,.jsx --fix",
-    "test": "jest",
+    "test": "jest --collectCoverage",
     "release": "webpack --env.production"
   },
   "repository": {
