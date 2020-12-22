@@ -82,18 +82,39 @@ class KitGenerator < Rails::Generators::NamedBase
         #   "\nexport #{@kit_name_pascal} from './pb_#{@kit_name_underscore}/_#{@kit_name_underscore}.jsx'"
         # end
 
-        react_examples = File.open("app/pb_kits/playbook/packs/react-examples.js")
-        re_array = react_examples.read.split("\n")
-        webpack_components = re_array.select { |a| a =~ /\.\.\./ }
-        webpack_components.sort!
+        File.open("app/pb_kits/playbook/packs/react-examples.js", "w+") do
+          re_array = f.read.split("\n")
 
-        example_components = re_array.select { |a| a =~ /import\s\*\sas/ }
-        example_components << "import * as #{@kit_name_pascal} from 'pb_#{@kit_name_underscore}/docs'\nWebpackerReact.setup(#{@kit_name_pascal})\n"
-        example_components.sort!
+          example_components = re_array.select { |a| a =~ /import\s\*\sas/ }
+          example_components << "import * as #{@kit_name_pascal} from 'pb_#{@kit_name_underscore}/docs'"
+          example_components.sort! { |a, b| a.split("* as ")[1] <=> b.split("* as ")[1] }
 
-        webpack_components = re_array.select { |a| a =~ /\.\.\./ }
-        webpack_components.sort!
+          webpack_components = re_array.select { |a| a =~ /\.\.\./ }
+          webpack_components << "  ...#{@kit_name_pascal}"
+          webpack_components.sort!
 
+          sorted_file_array = re_array[0..re_array.index_of("// Kit Examples")]
+          sorted_file_array += example_components
+          sorted_file_array << "WebpackerReact.setup({"
+          sorted_file_array += webpack_components
+          sorted_file_array << "})"
+
+          f.truncate(0)
+          sorted_file_array.each { |element| f.puts(element) }
+        end
+
+        File.open("app/pb_kits/playbook/index.js", "w+") do
+          file_array = f.read.split("\n")
+          start = file_array.index_of("// vvv")
+          finish = file_array.index_of("// ^^^")
+          components = file_array[start..finish]
+
+          components.sort!
+          file_array = file_array[0..start] + components + file_array[finish..-1]
+
+          f.truncate(0)
+          file_array.each { |element| f.puts(element) }
+        end
 
         say_status  "complete",
                     "#{@kit_name_capitalize} react kit successfully created.",

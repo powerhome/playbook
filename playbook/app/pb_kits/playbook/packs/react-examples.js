@@ -1,5 +1,10 @@
 import WebpackerReact from 'webpacker-react'
 
+// REACT COMPONENTS USED ON DOC SITE
+import * as SiteComps from 'docs_components'
+
+// ^^^ All non-kit additions add above ^^^
+
 // KIT EXAMPLES
 import '../pb_form/pb_form_validation'
 import * as Avatar from 'pb_avatar/docs'
@@ -89,9 +94,6 @@ import * as Toggle from 'pb_toggle/docs'
 import * as User from 'pb_user/docs'
 import * as UserBadge from 'pb_user_badge/docs'
 import * as WeekdayStacked from 'pb_weekday_stacked/docs'
-
-// REACT COMPONENTS USED ON DOC SITE
-import * as SiteComps from 'docs_components'
 
 WebpackerReact.setup({
   ...Avatar,

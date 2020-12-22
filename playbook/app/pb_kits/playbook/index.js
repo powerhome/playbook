@@ -2,7 +2,7 @@ import './_playbook.scss'
 import 'lazysizes/plugins/attrchange/ls.attrchange'
 import 'lazysizes'
 
-// React Component JSX Imports from the React Kits
+// vvv React Component JSX Imports from the React Kits vvv
 export Avatar from './pb_avatar/_avatar.jsx'
 export AvatarActionButton from './pb_avatar_action_button/_avatar_action_button.jsx'
 export Background from './pb_background/_background.jsx'
@@ -96,6 +96,7 @@ export Typeahead from './pb_typeahead/_typeahead.jsx'
 export User from './pb_user/_user.jsx'
 export UserBadge from './pb_user_badge/_user_badge.jsx'
 export WeekdayStacked from './pb_weekday_stacked/_weekday_stacked.jsx'
+// ^^^ React Component JSX Imports from the React Kits ^^^
 
 // Dashboard Settings
 export { commonSettings, dataColors } from './pb_dashboard/commonSettings'
