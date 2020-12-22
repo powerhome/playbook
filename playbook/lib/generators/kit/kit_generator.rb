@@ -1,4 +1,6 @@
 # frozen_string_literal: true
+require "sassc-rails"
+require "slim-rails"
 
 class KitGenerator < Rails::Generators::NamedBase
   desc "This generator creates a new Playbook Kit"
@@ -82,7 +84,7 @@ class KitGenerator < Rails::Generators::NamedBase
         #   "\nexport #{@kit_name_pascal} from './pb_#{@kit_name_underscore}/_#{@kit_name_underscore}.jsx'"
         # end
 
-        File.open("app/pb_kits/playbook/packs/react-examples.js", "w+") do
+        File.open("app/pb_kits/playbook/packs/react-examples.js", "w+") do |f|
           re_array = f.read.split("\n")
 
           example_components = re_array.select { |a| a =~ /import\s\*\sas/ }
@@ -103,7 +105,7 @@ class KitGenerator < Rails::Generators::NamedBase
           sorted_file_array.each { |element| f.puts(element) }
         end
 
-        File.open("app/pb_kits/playbook/index.js", "w+") do
+        File.open("app/pb_kits/playbook/index.js", "w+") do |f|
           file_array = f.read.split("\n")
           start = file_array.index_of("// vvv")
           finish = file_array.index_of("// ^^^")
