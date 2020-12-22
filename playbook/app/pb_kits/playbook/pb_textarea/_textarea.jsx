@@ -7,6 +7,7 @@ import type { InputCallback } from '../types.js'
 import { globalProps } from '../utilities/globalProps.js'
 
 type TextareaProps = {
+  characterCount?: string,
   className?: string,
   children?: array<React.ReactChild>,
   disabled?: boolean,
@@ -15,6 +16,7 @@ type TextareaProps = {
   object?: string,
   method?: string,
   label?: string,
+  maxCharacters?: string,
   placeholder?: string,
   value?: string,
   name?: string,
@@ -25,12 +27,14 @@ type TextareaProps = {
 }
 
 const Textarea = ({
+  characterCount,
   className,
   children,
   disabled,
   resize = 'none',
   error,
   label,
+  maxCharacters,
   name,
   onChange = () => {},
   placeholder,
@@ -42,6 +46,10 @@ const Textarea = ({
   const errorClass = error ? 'error' : null
   const resizeClass = `resize_${resize}`
   const classes = classnames('pb_textarea_kit', errorClass, resizeClass, globalProps(props), className)
+
+  const characterCounter = () => {
+    return maxCharacters ? `${characterCount} / ${maxCharacters}` : characterCount
+  }
 
   return (
     <div className={classes}>
@@ -69,6 +77,13 @@ const Textarea = ({
               text={error}
           />
         </If>
+
+        {/* Character Count */}
+        <Caption
+            margin="none"
+            size="xs"
+            text={characterCounter()}
+        />
       </If>
     </div>
   )
