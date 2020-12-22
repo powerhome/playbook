@@ -1,6 +1,4 @@
 # frozen_string_literal: true
-require "sassc-rails"
-require "slim-rails"
 
 class KitGenerator < Rails::Generators::NamedBase
   desc "This generator creates a new Playbook Kit"
