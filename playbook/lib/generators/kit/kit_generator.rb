@@ -93,26 +93,24 @@ class KitGenerator < Rails::Generators::NamedBase
           webpack_components << "  ...#{@kit_name_pascal}"
           webpack_components.sort!
 
-          sorted_file_array = re_array[0..re_array.index_of("// Kit Examples")]
+          sorted_file_array = re_array[0..re_array.index("// Kit Examples")]
           sorted_file_array += example_components
           sorted_file_array << "WebpackerReact.setup({"
           sorted_file_array += webpack_components
           sorted_file_array << "})"
 
-          f.truncate(0)
           sorted_file_array.each { |element| f.puts(element) }
         end
 
         File.open("app/pb_kits/playbook/index.js", "w+") do |f|
           file_array = f.read.split("\n")
-          start = file_array.index_of("// vvv")
-          finish = file_array.index_of("// ^^^")
+          start = file_array.index("// vvv")
+          finish = file_array.index("// ^^^")
           components = file_array[start..finish]
 
           components.sort!
           file_array = file_array[0..start] + components + file_array[finish..-1]
 
-          f.truncate(0)
           file_array.each { |element| f.puts(element) }
         end
 
