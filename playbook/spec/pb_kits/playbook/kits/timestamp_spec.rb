@@ -43,50 +43,50 @@ RSpec.describe Playbook::PbTimestamp::Timestamp do
 
   describe "#format_year_string" do
     it "returns the year if timestamp not current year" do
-      expect(subject.new(timestamp: DateTime.current + 4.years).format_year_string).to eq(", #{(DateTime.current + 4.years).year}")
+      expect(subject.new(timestamp: DateTime.current + 4.years).send(:format_year_string)).to eq(", #{(DateTime.current + 4.years).year}")
     end
 
     it "returns nothing if timestamp is in year" do
-      expect(subject.new(timestamp: DateTime.current).format_year_string).to eq("")
+      expect(subject.new(timestamp: DateTime.current).send(:format_year_string)).to eq("")
     end
   end
 
   describe "#format_time_string" do
     it "returns HH:MM with meridian" do
       timestamp = DateTime.new(2020, 10, 10, 20, 30, 00).in_time_zone("America/New_York").freeze
-      expect(subject.new(timestamp: timestamp).format_time_string).to eq("4:30p")
+      expect(subject.new(timestamp: timestamp).send(:format_time_string)).to eq("4:30p")
     end
 
     context "timezone" do
       it "returns timezone if present && show_timezone" do
         timestamp = DateTime.new(2020, 10, 10, 20, 30, 00).in_time_zone("America/New_York").freeze
-        expect(subject.new(timestamp: timestamp, timezone: "America/New_York", show_timezone: true).format_time_string).to eq("4:30p EDT")
+        expect(subject.new(timestamp: timestamp, timezone: "America/New_York", show_timezone: true).send(:format_time_string)).to eq("4:30p EDT")
       end
 
       it "doesn't returns timezone if present && show_timezone is false" do
         timestamp = DateTime.new(2020, 10, 10, 20, 30, 00).in_time_zone("America/New_York").freeze
-        expect(subject.new(timestamp: timestamp, timezone: "America/New_York", show_timezone: false).format_time_string).to eq("4:30p")
+        expect(subject.new(timestamp: timestamp, timezone: "America/New_York", show_timezone: false).send(:format_time_string)).to eq("4:30p")
       end
     end
   end
 
   describe "#format_date_string" do
     it "returns date in specific format without year" do
-      expect(subject.new(timestamp: timestamp).format_date_string).to eq("#{timestamp.strftime('%b %-d')}")
+      expect(subject.new(timestamp: timestamp).send(:format_date_string)).to eq("#{timestamp.strftime('%b %-d')}")
     end
 
     it "returns date in specific format with year" do
-      expect(subject.new(timestamp: future_timestamp).format_date_string).to eq("#{future_timestamp.strftime('%b %-d, %Y')}")
+      expect(subject.new(timestamp: future_timestamp).send(:format_date_string)).to eq("#{future_timestamp.strftime('%b %-d, %Y')}")
     end
   end
 
   describe "#format_datetime_string" do
     it "returns date with time separated by middot" do
-      expect(subject.new(timestamp: timestamp).format_datetime_string).to eq("Oct 10 &middot; 4:30p")
+      expect(subject.new(timestamp: timestamp).send(:format_datetime_string)).to eq("Oct 10 &middot; 4:30p")
     end
 
     it "returns full date and time separated by middot" do
-      expect(subject.new(timestamp: future_timestamp).format_datetime_string).to eq("Oct 10, 2024 &middot; 4:30p")
+      expect(subject.new(timestamp: future_timestamp).send(:format_datetime_string)).to eq("Oct 10, 2024 &middot; 4:30p")
     end
   end
 
@@ -103,7 +103,7 @@ RSpec.describe Playbook::PbTimestamp::Timestamp do
           date = "Oct 10"
           time = " 4:30p"
 
-          expect(subject.new(timestamp: timestamp, variant: variant, show_user: show_user, text: name).format_updated_string).to eq("Last updated by #{name} on #{date} at#{time}")
+          expect(subject.new(timestamp: timestamp, variant: variant, show_user: show_user, text: name).send(:format_updated_string)).to eq("Last updated by #{name} on #{date} at#{time}")
         end
 
         it "returns last updated with year including user's name" do
@@ -111,7 +111,7 @@ RSpec.describe Playbook::PbTimestamp::Timestamp do
           date = "Oct 10, 2024"
           time = " 4:30p"
 
-          expect(subject.new(timestamp: timestamp, variant: variant, show_user: show_user, text: name).format_updated_string).to eq("Last updated by #{name} on #{date} at#{time}")
+          expect(subject.new(timestamp: timestamp, variant: variant, show_user: show_user, text: name).send(:format_updated_string)).to eq("Last updated by #{name} on #{date} at#{time}")
         end
       end
 
@@ -122,7 +122,7 @@ RSpec.describe Playbook::PbTimestamp::Timestamp do
           date = "Oct 10"
           time = " 4:30p"
 
-          expect(subject.new(timestamp: timestamp, variant: variant, show_user: show_user).format_updated_string).to eq("Last updated on #{date} at#{time}")
+          expect(subject.new(timestamp: timestamp, variant: variant, show_user: show_user).send(:format_updated_string)).to eq("Last updated on #{date} at#{time}")
         end
 
         it "returns last updated with year without user's name" do
@@ -130,7 +130,7 @@ RSpec.describe Playbook::PbTimestamp::Timestamp do
           date = "Oct 10, 2024"
           time = " 4:30p"
 
-          expect(subject.new(timestamp: timestamp, variant: variant, show_user: show_user).format_updated_string).to eq("Last updated on #{date} at#{time}")
+          expect(subject.new(timestamp: timestamp, variant: variant, show_user: show_user).send(:format_updated_string)).to eq("Last updated on #{date} at#{time}")
         end
       end
     end
@@ -144,7 +144,7 @@ RSpec.describe Playbook::PbTimestamp::Timestamp do
           date = "Oct 10"
           time = " 4:30p"
 
-          expect(subject.new(timestamp: timestamp, variant: variant, show_user: show_user, text: name).format_updated_string).to eq("Last updated by #{name} #{time_ago_in_words(timestamp)} ago")
+          expect(subject.new(timestamp: timestamp, variant: variant, show_user: show_user, text: name).send(:format_elapsed_string)).to eq("Last updated by #{name} #{time_ago_in_words(timestamp)} ago")
         end
       end
 
@@ -155,7 +155,7 @@ RSpec.describe Playbook::PbTimestamp::Timestamp do
           date = "Oct 10"
           time = " 4:30p"
 
-          expect(subject.new(timestamp: timestamp, variant: variant, show_user: show_user).format_updated_string).to eq("Last updated #{time_ago_in_words(timestamp)} ago")
+          expect(subject.new(timestamp: timestamp, variant: variant, show_user: show_user).send(:format_elapsed_string)).to eq("Last updated #{time_ago_in_words(timestamp)} ago")
         end
       end
     end
