@@ -3,8 +3,6 @@ import WebpackerReact from 'webpacker-react'
 // REACT COMPONENTS USED ON DOC SITE
 import * as SiteComps from 'docs_components'
 
-// ^^^ All non-kit additions add above ^^^
-
 // KIT EXAMPLES
 import '../pb_form/pb_form_validation'
 import * as Avatar from 'pb_avatar/docs'
