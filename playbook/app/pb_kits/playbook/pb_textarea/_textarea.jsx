@@ -2,7 +2,7 @@
 
 import React, { forwardRef } from 'react'
 import classnames from 'classnames'
-import { Body, Caption } from '../'
+import { Body, Caption, Flex, FlexItem } from '../'
 import type { InputCallback } from '../types.js'
 import { globalProps } from '../utilities/globalProps.js'
 
@@ -72,18 +72,39 @@ const Textarea = ({
             {...props}
         />
         <If condition={error}>
-          <Body
-              status="negative"
-              text={error}
+          <If condition={characterCount}>
+            <Flex
+                spacing="between"
+                vertical="center"
+            >
+              <FlexItem>
+                <Body
+                    margin="none"
+                    status="negative"
+                    text={error}
+                />
+              </FlexItem>
+              <FlexItem>
+                <Caption
+                    margin="none"
+                    size="xs"
+                    text={characterCounter()}
+                />
+              </FlexItem>
+            </Flex>
+            <Else />
+            <Body
+                status="negative"
+                text={error}
+            />
+          </If>
+          <Else />
+          <Caption
+              margin="none"
+              size="xs"
+              text={characterCounter()}
           />
         </If>
-
-        {/* Character Count */}
-        <Caption
-            margin="none"
-            size="xs"
-            text={characterCounter()}
-        />
       </If>
     </div>
   )
