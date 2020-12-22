@@ -83,7 +83,8 @@ class KitGenerator < Rails::Generators::NamedBase
         # end
 
         File.open("app/pb_kits/playbook/packs/react-examples.js", "w+") do |f|
-          re_array = f.read.split("\n")
+          re_array = []
+          f.each_line { |line| re_array << line }
 
           example_components = re_array.select { |a| a =~ /import\s\*\sas/ }
           example_components << "import * as #{@kit_name_pascal} from 'pb_#{@kit_name_underscore}/docs'"
@@ -92,6 +93,14 @@ class KitGenerator < Rails::Generators::NamedBase
           webpack_components = re_array.select { |a| a =~ /\.\.\./ }
           webpack_components << "  ...#{@kit_name_pascal}"
           webpack_components.sort!
+
+          p "=============================================================================="
+          p re_array
+          p "=============================================================================="
+          p example_components
+          p "=============================================================================="
+          p webpack_components
+          p "=============================================================================="
 
           sorted_file_array = re_array[0..re_array.index("// KIT EXAMPLES\n")]
           sorted_file_array += example_components
