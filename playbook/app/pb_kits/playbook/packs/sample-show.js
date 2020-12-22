@@ -5,6 +5,14 @@ document.addEventListener("DOMContentLoaded", function () {
     document.querySelector(".pb--codeCopy").classList.toggle("close")
   })
 
+  // document.querySelector("#test-btn").addEventListener("click", () => {
+  //   const charts = window.pbChart.prototype.getCharts()
+  //   charts.forEach((chart) => {
+  //     console.log(chart)
+  //     chart.redraw()
+  //   })
+  // })
+
   document.querySelector("#fullscreen-toggle").addEventListener("click", () => {
     if (document.fullscreenElement){
       document.exitFullscreen()
