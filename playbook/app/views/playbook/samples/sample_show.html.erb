@@ -1,11 +1,27 @@
 <%= pb_rails("background", props: { background_color: "light", padding: "xl" }) do %>
 
-  <%= pb_rails("title", props: { 
-    margin_bottom: "md",
-    text: "Samples  /  #{get_category(@sample).titleize}",
-    tag: "h4",
-    size: 4
-  }) %> 
+  <%= pb_rails("flex", props: { margin_bottom: "md" }) do %>
+    <a href="/samples">
+      <%= pb_rails("title", props: {
+        margin_right: "xs",
+        text: "Samples",
+        tag: "h4",
+        size: 4
+      }) %>
+    </a>
+    <%= pb_rails("title", props: {
+      margin_right: "xs",
+      text: "/",
+      tag: "h4",
+      size: 4
+    }) %>
+    <%= pb_rails("title", props: {
+      text: "#{get_category(@sample).titleize}",
+      tag: "h4",
+      size: 4
+    }) %>
+  <% end %>
+
   <%= pb_rails("title", props: { 
     margin_bottom: "xl",
     text: @sample.titleize,
@@ -14,21 +30,21 @@
   }) %>
 
   <%= pb_rails("card", props: { id: "sample-card", padding: "none", shadow: "deeper" }) do %>
-    <%= pb_rails("card/card_header", props: { padding: "none", header_color: "white" }) do %>
+    <%= pb_rails("card/card_header", props: { padding: "xs", header_color: "white" }) do %>
 
       <%= pb_rails("flex", props: { spacing: "between", vertical: "center" }) do %>
   
         <%= pb_rails("flex/flex_item", props: { margin_left: "sm" }) do %>
-          <%= pb_rails("nav", props: { orientation: "horizontal" }) do %>
+          <%= pb_rails("nav", props: { orientation: "horizontal", variant: "subtle" }) do %>
             <%= pb_rails("nav/item", props: { text: "Rails", link: "#{sample_show_rails_path(@sample)}", active: action_name == 'sample_show_rails' }) %>
             <%= pb_rails("nav/item", props: { text: "React", link: "#{sample_show_reacts_path(@sample)}", active: action_name == 'sample_show_react' }) %>
           <% end %>
         <% end %>
 
         <%= pb_rails("flex/flex_item", props: { margin_right: "sm" }) do %>
-          <%= pb_rails("flex") do %>
+          <%= pb_rails("flex", props: { classname: "header-icons" }) do %>
 
-            <%= pb_rails("body", props: { color: "light", id: 'kits-used' }) do %>
+            <%= pb_rails("body", props: { classname: "font-size-override", color: "light", id: 'kits-used' }) do %>
                 Kits Used
                 <%= pb_rails("icon", props: { icon: "angle-down"}) %>
             <% end %>
@@ -46,25 +62,24 @@
             <% end %>
 
             <%= pb_rails("icon_value", props: {
-              classname: "toggle-button-js",
+              classname: "font-size-override",
+              id: "toggle-button-js",
               icon: "code",
-              margin_left: "sm",
+              margin_left: "md",
               text: "Code"
             }) %>
             <%= pb_rails("icon_value", props: {
+              classname: "font-size-override",
               id: "fullscreen-toggle",
               icon: "expand",
-              margin_left: "sm",
+              margin_left: "md",
               text: "Fullscreen"
             }) %>
           <% end %>
-          <%= pb_rails("circle_icon_button", props:{ classname: "compress", variant: "link", icon: "compress"}) %>
           
           <% end %>
         <% end %>
-      
     <% end %>
-
 
     <%= pb_rails("card/card_body", props: { classname: "bg_light", padding: "none" }) do %>
       <%= render_sample_ui(@sample, @type) %>

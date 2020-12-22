@@ -1,19 +1,8 @@
 document.addEventListener("DOMContentLoaded", function () {
-  document.querySelector(".compress").style.display = "none"
 
-  document.querySelector(".toggle-button-js").addEventListener("click", (e) => {
+  document.querySelector("#toggle-button-js").addEventListener("click", (e) => {
     e.preventDefault()
     document.querySelector(".pb--codeCopy").classList.toggle("close")
-  })
-
-  // document.querySelector(".expand").addEventListener("click", () => {
-  //   document.querySelector(".sample-nav").style.display = "none"
-  //   document.querySelector(".compress").style.display = "inline-block"
-  // })
-
-  document.querySelector(".compress").addEventListener("click", () => {
-    document.querySelector(".sample-nav").style.display = "flex"
-    document.querySelector(".compress").style.display = "none"
   })
 
   document.querySelector("#fullscreen-toggle").addEventListener("click", () => {
