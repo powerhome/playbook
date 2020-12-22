@@ -48,7 +48,11 @@ const Textarea = ({
   const classes = classnames('pb_textarea_kit', errorClass, resizeClass, globalProps(props), className)
 
   const characterCounter = () => {
-    return maxCharacters ? `${characterCount} / ${maxCharacters}` : characterCount
+    return maxCharacters && characterCount ? `${checkIfZero(characterCount)} / ${maxCharacters}` : checkIfZero(characterCount)
+  }
+
+  const checkIfZero = (characterCount) => {
+    return characterCount == 0 ? characterCount.toString() : characterCount
   }
 
   return (

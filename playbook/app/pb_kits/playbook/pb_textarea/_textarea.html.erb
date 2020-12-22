@@ -15,6 +15,7 @@
         :object,
         :method,
         :class => "#{object.classname}",
+        :onkeyup => object.onkeyup,
         :name => object.name,
         :placeholder => object.placeholder,
         :rows => object.rows,
@@ -22,5 +23,11 @@
     <% if object.error %>
       <%= pb_rails("body", props: {dark: object.dark, status: "negative", text: object.error}) %>
     <% end %>
+
+    <%= pb_rails("caption", props: {
+      margin: "None",
+      size: "xs",
+      text: object.character_count,
+    }) %>
   <% end %>
 <% end %>

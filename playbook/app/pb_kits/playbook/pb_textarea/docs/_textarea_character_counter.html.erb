@@ -1,0 +1,15 @@
+<%= pb_rails("textarea", props: {
+  id: "te_1",
+  character_count: "0",
+  label: "Label",
+  rows: 4,
+  onkeyup: "handleChange(event)"
+}) %>
+
+<script type="text/javascript">
+  const characterCount = document.querySelector("#te_1 .pb_caption_kit_xs")
+
+  const handleChange = (event) => {
+    characterCount.innerHTML = event.target.value.length
+  }
+</script>

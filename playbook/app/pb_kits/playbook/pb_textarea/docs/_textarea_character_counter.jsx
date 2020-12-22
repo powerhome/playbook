@@ -2,14 +2,14 @@ import React, { useState } from 'react'
 import { Textarea } from '../../'
 
 const TextareaCharacterCounter = () => {
-  const [count1, setCount1] = useState(0)
-  const [count2, setCount2] = useState(20)
-  const [count3, setCount3] = useState(100)
-  const [count4, setCount4] = useState(94)
   const [value1, setValue1] = useState('Counting characters!')
   const [value2, setValue2] = useState('This counter prevents the user from exceeding the maximum number of allowed characters. Just try it!')
   const [value3, setValue3] = useState('This counter alerts the user that they have exceeded the maximum number of allowed characters.')
   const [error, setError] = useState('Too many characters!')
+  const [count1, setCount1] = useState(0)
+  const [count2, setCount2] = useState(value1.length)
+  const [count3, setCount3] = useState(value2.length)
+  const [count4, setCount4] = useState(value3.length)
 
   const handleMaxCount = (event) => {
     setCount2(event.target.value.length)
@@ -37,7 +37,7 @@ const TextareaCharacterCounter = () => {
   return (
     <>
       <Textarea
-          characterCount={count1.toString()}
+          characterCount={count1}
           label="Count Only"
           onChange={(event) => setCount1(event.target.value.length)}
           rows={4}
@@ -46,7 +46,7 @@ const TextareaCharacterCounter = () => {
       <br />
 
       <Textarea
-          characterCount={count2.toString()}
+          characterCount={count2}
           label="Max Characters"
           maxCharacters="100"
           onChange={() => handleMaxCount(event)}
@@ -57,8 +57,8 @@ const TextareaCharacterCounter = () => {
       <br />
 
       <Textarea
-          characterCount={count3.toString()}
-          label="Max Characters With Blocker"
+          characterCount={count3}
+          label="Max Characters w/ Blocker"
           maxCharacters="100"
           onChange={() => handleMaxCountWithBlocker(event, 100)}
           rows={4}
@@ -68,9 +68,9 @@ const TextareaCharacterCounter = () => {
       <br />
 
       <Textarea
-          characterCount={count4.toString()}
+          characterCount={count4}
           error={error}
-          label="Max Characters with Error"
+          label="Max Characters w/ Error"
           maxCharacters="75"
           onChange={() => handleMaxCountWithError(event, 75)}
           rows={4}

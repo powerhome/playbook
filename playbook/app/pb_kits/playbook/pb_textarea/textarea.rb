@@ -19,6 +19,8 @@ module Playbook
       prop :rows, type: Playbook::Props::Number,
             default: 4
       prop :value
+      prop :character_count
+      prop :onkeyup
 
       def classname
         generate_classname("pb_textarea_kit") + error_class + resize_class
