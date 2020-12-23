@@ -1,7 +1,4 @@
 .sample-layout {
-  #sample-card:fullscreen {
-    overflow-y: scroll;
-  }
   .font-size-override {
     font-size: 14px;
     svg.pb_icon_kit {
@@ -10,6 +7,15 @@
   }
   .header-icons > * {
     cursor: pointer;
+  }
+  // Fullscreen overrides
+  #sample-card:fullscreen {
+    overflow-y: scroll;
+    .header-icons {
+      #kits-used, #toggle-button-js {
+        display: none;
+      }
+    }
   }
   // Code Drawer Styles
   .pb--doc {
