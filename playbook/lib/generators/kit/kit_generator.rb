@@ -5,6 +5,9 @@ class KitGenerator < Rails::Generators::NamedBase
   source_root File.expand_path("templates", __dir__)
   class_option :props, type: :array, default: []
 
+  REACT_EXAMPLES_PATH = "app/pb_kits/playbook/packs/react-examples.js".freeze
+  REACT_INDEX_PATH = "app/pb_kits/playbook/index.js".freeze
+
   def create_templates
     kit_name = name.strip.downcase
     @kit_name_uppercase = kit_name.upcase
@@ -74,35 +77,19 @@ class KitGenerator < Rails::Generators::NamedBase
         template "kit_example_react.erb", "#{full_kit_directory}/docs/_#{@kit_name_underscore}_default.jsx"
         template "kit_js.erb", "#{full_kit_directory}/docs/index.js"
 
-        re_array = File.readlines("app/pb_kits/playbook/packs/react-examples.js")
+        react_imports_page(
+          path: "#{REACT_EXAMPLES_PATH}",
+          import_statement: "import * as #{@kit_name_pascal} from 'pb_#{@kit_name_underscore}/docs'\n",
+          webpack_statement: "  ...#{@kit_name_pascal},\n",
+          import_area_indicator: "// KIT EXAMPLES\n"
+        )
 
-        example_components = re_array.select { |a| a =~ /import\s\*\sas/ }
-        example_components << "import * as #{@kit_name_pascal} from 'pb_#{@kit_name_underscore}/docs'\n"
-        example_components.sort! { |a, b| a.split("* as ")[1] <=> b.split("* as ")[1] }
-
-        webpack_components = re_array.select { |a| a =~ /\.\.\./ }
-        webpack_components << "  ...#{@kit_name_pascal},\n"
-        webpack_components.sort!
-
-        sorted_file_array = re_array[0..(re_array.index("// KIT EXAMPLES\n") + 1)]
-        sorted_file_array += example_components
-        sorted_file_array << "\n"
-        sorted_file_array << "WebpackerReact.setup({\n"
-        sorted_file_array += webpack_components
-        sorted_file_array << "})\n"
-
-        File.open("app/pb_kits/playbook/packs/react-examples.js", "w+") { |f| f.write(sorted_file_array.join) }
-
-        file_array = File.readlines("app/pb_kits/playbook/index.js")
-        start = file_array.index("// vvv React Component JSX Imports from the React Kits vvv\n")
-        finish = file_array.index("// ^^^ React Component JSX Imports from the React Kits ^^^\n")
-        components = file_array[(start + 1)..(finish - 1)]
-
-        components << "export #{@kit_name_pascal} from './pb_#{@kit_name_underscore}/_#{@kit_name_underscore}.jsx'\n"
-        components.sort!
-        file_array = file_array[0..start] + components + file_array[finish..-1]
-
-        File.open("app/pb_kits/playbook/index.js", "w+") { |f| f.write(file_array.join) }
+        react_export_page(
+          path: "#{REACT_INDEX_PATH}",
+          export_statement: "export #{@kit_name_pascal} from './pb_#{@kit_name_underscore}/_#{@kit_name_underscore}.jsx'\n",
+          start_comment: "// vvv React Component JSX Imports from the React Kits vvv\n",
+          end_comment: "// ^^^ React Component JSX Imports from the React Kits ^^^\n"
+        )
 
         say_status  "complete",
                     "#{@kit_name_capitalize} react kit successfully created.",
@@ -114,5 +101,41 @@ class KitGenerator < Rails::Generators::NamedBase
 
       `rubocop --safe-auto-correct #{full_kit_directory}`
     end
+  end
+
+private
+
+  def react_imports_page(:path, :import_statement, :webpack_statement, :import_area_indicator)
+    re_array = File.readlines(path)
+
+    example_components = re_array.select { |a| a =~ /import\s\*\sas/ }
+    example_components << import_statement
+    example_components.sort! { |a, b| a.split("* as ")[1] <=> b.split("* as ")[1] }
+
+    webpack_components = re_array.select { |a| a =~ /\.\.\./ }
+    webpack_components << import_statement
+    webpack_components.sort!
+
+    sorted_file_array = re_array[0..(re_array.index(import_area_indicator) + 1)]
+    sorted_file_array += example_components
+    sorted_file_array << "\n"
+    sorted_file_array << "WebpackerReact.setup({\n"
+    sorted_file_array += webpack_components
+    sorted_file_array << "})\n"
+
+    File.open(path, "w+") { |f| f.write(sorted_file_array.join) }
+  end
+
+  def react_export_page(:path, :export_statement, :start_comment, :end_comment)
+    file_array = File.readlines(path)
+    start = file_array.index(start_comment)
+    finish = file_array.index(end_comment)
+    components = file_array[(start + 1)..(finish - 1)]
+
+    components << export_statement
+    components.sort!
+    file_array = file_array[0..start] + components + file_array[finish..-1]
+
+    File.open(path, "w+") { |f| f.write(file_array.join) }
   end
 end
