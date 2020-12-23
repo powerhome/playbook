@@ -107,15 +107,17 @@
   <%# Grid %>
  
     <%= pb_rails("card", props: { border_none: true, shadow: "deeper",padding:"none", margin: "sm"}) do %>
-      <div class="grid1">
+      <div class="gridone">
         <% ticket_data.each do |ticket|%>
-        <%= pb_rails("background", props: { background_color: "white", padding: "md"}) do %>
-          <%= pb_rails("flex", props: {horizontal: "left", vertical: "center"}) do %>
-            <%= pb_rails("icon_stat_value", props: ticket ) %>
+          <%= pb_rails("background", props: { background_color: "white", padding: "md"}) do %>
+            <%= pb_rails("flex", props: {horizontal: "left", vertical: "center"}) do %>
+              <%= pb_rails("flex/flex_item",props:{fixed_size: "215px"}) do %>
+                <%= pb_rails("icon_stat_value", props: ticket ) %>
+              <% end %>
+            <% end %>
           <% end %>
         <% end %>
-        <% end %>
-        </div>
+      </div>
     <% end %>
 
 
@@ -173,12 +175,12 @@
 
     <%= pb_rails("card", props: { border_none: true, shadow: "deeper", margin:"sm", padding:"none" }) do %>
       
-        <div class="grid2">
+        <div class="gridtwo">
         <% grid_data.each do |data| %>
              <%= pb_rails("background", props: { background_color: "white", padding: "md"}) do %>
               <%= pb_rails("flex", props: { orientation: "column", wrap: true}) do %>
                 <%= pb_rails("flex/flex_item") do %>
-                  <%= pb_rails("body", props: { text: data[:title], color: "light" }) %>
+                  <%= pb_rails("caption", props: { text: data[:title] }) %>
                 <% end %>
                 <%= pb_rails("flex/flex_item") do %>
                   <%= pb_rails("flex") do %>
@@ -242,3 +244,15 @@
       <% end %>
 
     <% end %>
+<style>
+[class^=grid]{
+  display: grid;
+  gap: 1px;
+  background-color: #e4e8f0; /* $border_light */
+  grid-template: auto auto / auto auto;
+}
+.gridtwo{
+  grid-template-rows: repeat(2,auto);
+  grid-template-columns: repeat(4,1fr);
+}
+</style>
