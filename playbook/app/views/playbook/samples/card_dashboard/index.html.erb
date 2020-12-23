@@ -87,12 +87,12 @@
             <%= pb_rails("flex/flex_item", props: {grow:true}) do %>
               <%= pb_rails("flex", props: {vertical: "center", spacing: "around"}) do %>
                 <%= pb_rails("progress_simple", props: { width: "100px",percent: info[:percent] }) %>
-                <%= pb_rails("flex/flex_item", props: {fixed_size: "50px"}) do %>
+                <%= pb_rails("flex/flex_item") do %>
                   <%= pb_rails("caption", props: { margin_left: "xs", text: "#{info[:percent]}%", size: 'xs' }) %>
                 <% end %>
               <% end %>
               <% end %>
-              <%= pb_rails("flex/flex_item", props: {fixed_size: "50px"}) do %>
+              <%= pb_rails("flex/flex_item") do %>
                 <%= pb_rails("body", props: {text: "#{info[:value]}"}) %>
                 <% end %>
             <% end %>
@@ -107,23 +107,15 @@
   <%# Grid %>
  
     <%= pb_rails("card", props: { border_none: true, shadow: "deeper",padding:"none", margin: "sm"}) do %>
-      <% half_ticket_data = ticket_data.length / 2 %>
-
-      <%= pb_rails("flex", props: { horizontal: "center", spacing: "evenly", wrap: true }) do%>
-        <% ticket_data[0..(half_ticket_data - 1)].each do |ticket|%>
-          <%= pb_rails("flex/flex_item", props: {  margin: "md", fixed_size: "215px" }) do %>
+      <div class="grid1">
+        <% ticket_data.each do |ticket|%>
+        <%= pb_rails("background", props: { background_color: "white", padding: "md"}) do %>
+          <%= pb_rails("flex", props: {horizontal: "left", vertical: "center"}) do %>
             <%= pb_rails("icon_stat_value", props: ticket ) %>
           <% end %>
         <% end %>
-      <% end %>
-      <%= pb_rails("section_separator")%>
-      <%= pb_rails("flex", props: { horizontal: "center", spacing: "evenly", wrap: true  }) do%>
-        <% ticket_data[half_ticket_data..-1].each do |ticket|%>
-          <%= pb_rails("flex/flex_item", props: {  margin: "md", fixed_size: "215px" }) do %>
-            <%= pb_rails("icon_stat_value", props: ticket ) %>
-          <% end %>
         <% end %>
-      <% end %>
+        </div>
     <% end %>
 
 
@@ -178,11 +170,12 @@
 
 
   <%# Number Grid %>
-  <div class='card'>
-    <%= pb_rails("card", props: { border_none: true, shadow: "deeper" }) do %>
-      <%= pb_rails("flex", props: { margin_left: "md", horizontal: "center", wrap: true }) do %>
+
+    <%= pb_rails("card", props: { border_none: true, shadow: "deeper", margin:"sm", padding:"none" }) do %>
+      
+        <div class="grid2">
         <% grid_data.each do |data| %>
-          <%= pb_rails("flex/flex_item", props: { margin_y: "md", fixed_size: "250px" }) do %>
+             <%= pb_rails("background", props: { background_color: "white", padding: "md"}) do %>
               <%= pb_rails("flex", props: { orientation: "column", wrap: true}) do %>
                 <%= pb_rails("flex/flex_item") do %>
                   <%= pb_rails("body", props: { text: data[:title], color: "light" }) %>
@@ -198,34 +191,35 @@
                   <% end %>
                 <% end %>
               <% end %>
-          <% end %>
+            <% end %>
         <% end %>
-      <% end %>
+        </div>
+ 
     <% end %>
-  </div>
+
 
   <%# Gauge With Legend %>
-  <div class="gaugeCard card">
-    <%= pb_rails("card", props: { padding: "none", border_none: true, shadow: "deeper" }) do %>
 
-      <%= pb_rails("card/card_body") do %>
-        <%= pb_rails("flex", props: { classname: "flex-container", spacing: "between", wrap: true }) do %>
-          <%= pb_rails("title", props: { text: "Total Revenue", margin_top: "sm", margin_left: "sm", padding: "sm", size: 4 }) %>
-          <%= pb_rails("button", props: { classname: "hideButton", text: "Button Link", variant: "link", padding_top: "md" }) do %>
-            <%= pb_rails("icon", props: { icon: "ellipsis-h", size: "2x", fixed_width: true }) %>
-          <% end %>
-        <% end %>
+    <%= pb_rails("card", props: { padding: "none", border_none: true, shadow: "deeper", margin: "sm" }) do %>
+
+     <%= pb_rails("flex", props: {vertical: "center",spacing: "between"}) do %>
+        <%= pb_rails("title", props: { text: "Total Revenue", tag: "h4", size: 4, padding: "sm" }) %> 
+        <%= pb_rails("circle_icon_button", props: {
+          variant: "link",
+          icon: "ellipsis-h"
+        }) %>
       <% end %>
-
       <%= pb_rails("section_separator") %>
 
       <%= pb_rails("card/card_body", props: {  margin_top: "sm" }) do %>
-        <%= pb_rails("gauge", props: {
-          id: "full-circle",
-          chart_data: total_revenue_green[:data],
-          full_circle: true,
-        }) %>
-        <%= pb_rails("caption", props: { text: "Total sales made today" }) %>
+        <%= pb_rails("flex", props: {orientation: "column", vertical: "center", horizontal: "center"}) do %>
+          <%= pb_rails("gauge", props: {
+            id: "full-circle",
+            chart_data: total_revenue_green[:data],
+            full_circle: true,
+          }) %>
+          <%= pb_rails("caption", props: { text: "Total sales made today" }) %>
+        <% end %>
       <% end %>
 
       <%= pb_rails("section_separator", props: { margin_y: "md" }) %>
@@ -248,4 +242,3 @@
       <% end %>
 
     <% end %>
-  </div>

@@ -1,5 +1,5 @@
 @import "../../../tokens/screen_sizes";
-
+@import "../../../tokens/colors";
 @include break_at($screen-xs-min){
   .card {
     flex-basis: 100%;
@@ -36,14 +36,18 @@
   width: 25% !important;
 }
 
-// .list-row{
-//   display: grid;
-//   grid-template-columns: 1fr 1fr 1fr 1fr;
-//   grid-template-rows: 1fr;
-//   gap: 0px 0px;
-//   grid-template-areas:
-//     ". . . .";
-//   align-items: center;
-//   flex-grow: 1;
-//   text-align: center;
-// }
+.grid1{
+  display: grid;
+  gap: 1px;
+  grid-template: auto auto / auto auto;
+  background-color: $border_light;
+  grid-auto-flow: dense;
+}
+
+.grid2{
+  display: grid;
+  gap: 1px;
+  grid-template-rows: repeat(2,auto);
+  grid-template-columns: repeat(4,1fr);
+  background-color: $border_light;
+}
