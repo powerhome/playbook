@@ -81,7 +81,7 @@ class KitGenerator < Rails::Generators::NamedBase
         example_components.sort! { |a, b| a.split("* as ")[1] <=> b.split("* as ")[1] }
 
         webpack_components = re_array.select { |a| a =~ /\.\.\./ }
-        webpack_components << "  ...Foo\n"
+        webpack_components << "  ...#{@kit_name_pascal},\n"
         webpack_components.sort!
 
         sorted_file_array = re_array[0..(re_array.index("// KIT EXAMPLES\n") + 1)]
@@ -98,7 +98,7 @@ class KitGenerator < Rails::Generators::NamedBase
         finish = file_array.index("// ^^^ React Component JSX Imports from the React Kits ^^^\n")
         components = file_array[(start + 1)..(finish - 1)]
 
-        components << "nexport #{@kit_name_pascal} from './pb_#{@kit_name_underscore}/_#{@kit_name_underscore}.jsx'"
+        components << "export #{@kit_name_pascal} from './pb_#{@kit_name_underscore}/_#{@kit_name_underscore}.jsx'\n"
         components.sort!
         file_array = file_array[0..start] + components + file_array[finish..-1]
 
