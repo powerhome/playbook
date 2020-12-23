@@ -1,15 +1,68 @@
+<% text_area_2_value = "Counting characters!" %>
+<% text_area_3_value = "This counter prevents the user from exceeding the maximum number of allowed characters. Just try it!" %>
+<% text_area_4_value = "This counter alerts the user that they have exceeded the maximum number of allowed characters." %>
+
 <%= pb_rails("textarea", props: {
-  id: "te_1",
-  character_count: "0",
-  label: "Label",
-  rows: 4,
-  onkeyup: "handleChange(event)"
+  character_count: 0,
+  id: "text-area-1",
+  label: "Count Only",
+  onkeyup: "handleChange1(event)",
+}) %>
+
+<%= pb_rails("textarea", props: {
+  character_count: text_area_2_value.length,
+  id: "text-area-2",
+  label: "Max Characters",
+  max_characters: 100,
+  onkeyup: "handleChange2(event, 100)",
+  value: text_area_2_value,
+}) %>
+
+<%= pb_rails("textarea", props: {
+  character_count: text_area_3_value.length,
+  id: "text-area-3",
+  label: "Max Characters w/ Blocker",
+  max_characters: 100,
+  onkeyup: "handleChange3(event, 100)",
+  value: text_area_3_value,
+}) %>
+
+<%= pb_rails("textarea", props: {
+  character_count: text_area_4_value.length,
+  error: "Too many characters!",
+  id: "text-area-4",
+  label: "Max Characters w/ Error",
+  max_characters: 75,
+  onkeyup: "handleChange4(event, 75)",
+  value: text_area_4_value,
 }) %>
 
 <script type="text/javascript">
-  const characterCount = document.querySelector("#te_1 .pb_caption_kit_xs")
+  const characterCount1 = document.querySelector("#text-area-1 .pb_caption_kit_xs")
+  const characterCount2 = document.querySelector("#text-area-2 .pb_caption_kit_xs")
+  const characterCount3 = document.querySelector("#text-area-3 .pb_caption_kit_xs")
+  const characterCount4 = document.querySelector("#text-area-4 .pb_caption_kit_xs")
 
-  const handleChange = (event) => {
-    characterCount.innerHTML = event.target.value.length
+  const textArea3 = document.querySelector("#text-area-3 textarea")
+  const textArea4 = document.querySelector("#text-area-4 textarea")
+
+  const handleChange1 = (event) => {
+    characterCount1.innerHTML = event.target.value.length
+  }
+
+  const handleChange2 = (event, maxCharacters) => {
+    characterCount2.innerHTML = `${event.target.value.length} / ${maxCharacters}`
+  }
+
+  const handleChange3 = (event, maxCharacters) => {
+    if (event.target.value.length > maxCharacters) {
+      textArea3.value = event.target.value.substring(0, maxCharacters)
+    }
+
+    characterCount3.innerHTML = `${textArea3.value.length} / ${maxCharacters}`
+  }
+
+  const handleChange4 = (event, maxCharacters) => {
+    characterCount4.innerHTML = `${textArea4.value.length} / ${maxCharacters}`
   }
 </script>
