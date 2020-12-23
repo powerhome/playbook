@@ -113,7 +113,7 @@ private
     example_components.sort! { |a, b| a.split("* as ")[1] <=> b.split("* as ")[1] }
 
     webpack_components = re_array.select { |a| a =~ /\.\.\./ }
-    webpack_components << import_statement
+    webpack_components << webpack_statement
     webpack_components.sort!
 
     sorted_file_array = re_array[0..(re_array.index(import_area_indicator) + 1)]
