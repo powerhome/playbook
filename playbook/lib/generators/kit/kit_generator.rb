@@ -74,54 +74,35 @@ class KitGenerator < Rails::Generators::NamedBase
         template "kit_example_react.erb", "#{full_kit_directory}/docs/_#{@kit_name_underscore}_default.jsx"
         template "kit_js.erb", "#{full_kit_directory}/docs/index.js"
 
-        # Import kit examples  ===========================
-        # append_to_file("app/pb_kits/playbook/packs/react-examples.js") do
-        #   "import * as #{@kit_name_pascal} from 'pb_#{@kit_name_underscore}/docs'\nWebpackerReact.setup(#{@kit_name_pascal})\n"
-        # end
-        # append_to_file("app/pb_kits/playbook/index.js") do
-        #   "\nexport #{@kit_name_pascal} from './pb_#{@kit_name_underscore}/_#{@kit_name_underscore}.jsx'"
-        # end
+        re_array = File.readlines("app/pb_kits/playbook/packs/react-examples.js")
 
-        File.open("app/pb_kits/playbook/packs/react-examples.js", "w+") do |f|
-          re_array = []
-          f.each_line { |line| re_array << line }
+        example_components = re_array.select { |a| a =~ /import\s\*\sas/ }
+        example_components << "import * as #{@kit_name_pascal} from 'pb_#{@kit_name_underscore}/docs'\n"
+        example_components.sort! { |a, b| a.split("* as ")[1] <=> b.split("* as ")[1] }
 
-          example_components = re_array.select { |a| a =~ /import\s\*\sas/ }
-          example_components << "import * as #{@kit_name_pascal} from 'pb_#{@kit_name_underscore}/docs'"
-          example_components.sort! { |a, b| a.split("* as ")[1] <=> b.split("* as ")[1] }
+        webpack_components = re_array.select { |a| a =~ /\.\.\./ }
+        webpack_components << "  ...Foo\n"
+        webpack_components.sort!
 
-          webpack_components = re_array.select { |a| a =~ /\.\.\./ }
-          webpack_components << "  ...#{@kit_name_pascal}"
-          webpack_components.sort!
+        sorted_file_array = re_array[0..(re_array.index("// KIT EXAMPLES\n") + 1)]
+        sorted_file_array += example_components
+        sorted_file_array << "\n"
+        sorted_file_array << "WebpackerReact.setup({\n"
+        sorted_file_array += webpack_components
+        sorted_file_array << "})\n"
 
-          p "=============================================================================="
-          p re_array
-          p "=============================================================================="
-          p example_components
-          p "=============================================================================="
-          p webpack_components
-          p "=============================================================================="
+        File.open("app/pb_kits/playbook/packs/react-examples.js", "w+") { |f| f.write(sorted_file_array.join) }
 
-          sorted_file_array = re_array[0..re_array.index("// KIT EXAMPLES\n")]
-          sorted_file_array += example_components
-          sorted_file_array << "WebpackerReact.setup({"
-          sorted_file_array += webpack_components
-          sorted_file_array << "})"
+        file_array = File.readlines("app/pb_kits/playbook/index.js")
+        start = file_array.index("// vvv React Component JSX Imports from the React Kits vvv\n")
+        finish = file_array.index("// ^^^ React Component JSX Imports from the React Kits ^^^\n")
+        components = file_array[(start + 1)..(finish - 1)]
 
-          sorted_file_array.each { |element| f.puts(element) }
-        end
+        components << "nexport #{@kit_name_pascal} from './pb_#{@kit_name_underscore}/_#{@kit_name_underscore}.jsx'"
+        components.sort!
+        file_array = file_array[0..start] + components + file_array[finish..-1]
 
-        File.open("app/pb_kits/playbook/index.js", "w+") do |f|
-          file_array = f.read.split("\n")
-          start = file_array.index("// vvv React Component JSX Imports from the React Kits vvv\n")
-          finish = file_array.index("// ^^^ React Component JSX Imports from the React Kits ^^^\n")
-          components = file_array[start..finish]
-
-          components.sort!
-          file_array = file_array[0..start] + components + file_array[finish..-1]
-
-          file_array.each { |element| f.puts(element) }
-        end
+        File.open("app/pb_kits/playbook/index.js", "w+") { |f| f.write(file_array.join) }
 
         say_status  "complete",
                     "#{@kit_name_capitalize} react kit successfully created.",
