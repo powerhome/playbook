@@ -1,13 +1,15 @@
 import React from 'react'
 import Timestamp from '../_timestamp.jsx'
 
+const todaysDate = new Date()
+
 const TimestampUpdated = (props) => {
   return (
     <div>
       <Timestamp
           showUser
           text="Maricris Nonato"
-          timestamp={new Date((new Date()).getFullYear() + 4, (new Date().getMonth()), (new Date().getDate()), (new Date().getHours()), (new Date().getMinutes()))}
+          timestamp={todaysDate}
           variant="updated"
           {...props}
       />
@@ -16,7 +18,7 @@ const TimestampUpdated = (props) => {
 
       <Timestamp
           showUser={false}
-          timestamp={new Date().getTime()}
+          timestamp={todaysDate}
           variant="updated"
           {...props}
       />

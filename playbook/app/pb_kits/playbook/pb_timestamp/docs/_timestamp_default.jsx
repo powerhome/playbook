@@ -1,13 +1,21 @@
 import React from 'react'
 import Timestamp from '../_timestamp.jsx'
 
+const todaysDate = new Date()
+const year = new Date().getFullYear() + 4
+const month = new Date().getMonth()
+const date = new Date().getDate()
+const hours = new Date().getHours()
+const minutes = new Date().getMinutes()
+const customDate = new Date(year, month, date, hours, minutes)
+
 const TimestampDefault = (props) => {
   return (
     <div>
       <Timestamp
           align="left"
           showDate={false}
-          timestamp={new Date().getTime()}
+          timestamp={todaysDate}
           {...props}
       />
 
@@ -16,7 +24,7 @@ const TimestampDefault = (props) => {
       <Timestamp
           align="left"
           showDate
-          timestamp={new Date().getTime()}
+          timestamp={todaysDate}
           {...props}
       />
 
@@ -25,7 +33,7 @@ const TimestampDefault = (props) => {
       <Timestamp
           align="left"
           showDate
-          timestamp={new Date((new Date()).getFullYear() + 4, (new Date().getMonth()), (new Date().getDate()), (new Date().getHours()), (new Date().getMinutes()))}
+          timestamp={customDate}
           {...props}
       />
     </div>
