@@ -105,7 +105,7 @@ class KitGenerator < Rails::Generators::NamedBase
 
 private
 
-  def react_imports_page(:path, :import_statement, :webpack_statement, :import_area_indicator)
+  def react_imports_page(path:, import_statement:, webpack_statement:, import_area_indicator:)
     re_array = File.readlines(path)
 
     example_components = re_array.select { |a| a =~ /import\s\*\sas/ }
@@ -126,7 +126,7 @@ private
     File.open(path, "w+") { |f| f.write(sorted_file_array.join) }
   end
 
-  def react_export_page(:path, :export_statement, :start_comment, :end_comment)
+  def react_export_page(path:, export_statement:, start_comment:, end_comment:)
     file_array = File.readlines(path)
     start = file_array.index(start_comment)
     finish = file_array.index(end_comment)
