@@ -1,0 +1,37 @@
+@import "../../../tokens/screen_sizes";
+
+@include break_at($screen-xs-min){
+  .card {
+    flex-basis: 100%;
+    width: 100%;
+    margin: 20px;
+    max-width: 100% !important;
+  }
+  .gaugeCard {
+    margin: 0 auto;
+    text-align: center;
+  }
+  .hideButton {
+    display: none;
+  }
+}
+
+.wrapper {
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  margin: 20px;
+  padding: 20px;
+}
+
+.card {
+  box-sizing: border-box;
+  margin: 20px;
+}
+
+.gaugeCard {
+  margin: 20px;
+  max-width: 0 auto;
+  text-align: center;
+  width: 25% !important;
+}

@@ -1,11 +1,18 @@
 <%=
   pb_rails("filter", props: {
-    id: "nosort",
+    min_width: "600px",
+    id: "25",
     filters: [
-      { name: "name", value: "John Wick" }
+      { name: "name", value: "John Wick" },
+      { name: "city", value: "San Francisco"}
     ],
-    results: 546,
-    template: "filter_only",
+    sort_menu: [
+      { item: "Popularity", link: "?q[sorts]=managers_popularity+asc", active: true, direction: "desc" },
+      { item: "Mananger's Title", link: "?q[sorts]=managers_title+asc", active: false },
+      { item: "Manager's Name", link: "?q[sorts]=managers_name+asc", active: false },
+    ],
+    template: "default",
+    results: 1,
   }) do
 %>
   <%
@@ -22,7 +29,6 @@
       OpenStruct.new(name: "Georgia", value: 10),
     ]
   %>
-
   <%= pb_rails("form", props: { form_system_options: { scope: :example, method: :get } }) do |form| %>
     <%= form.text_field :example_text_field, props: { label: true } %>
     <%= form.collection_select :example_collection_select, example_collection, :value, :name, props: { label: true } %>

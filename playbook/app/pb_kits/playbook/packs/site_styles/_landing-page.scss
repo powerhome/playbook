@@ -9,9 +9,13 @@
     background-color: $bg_dark;
     border-radius: $border_rad_heaviest;
     box-shadow: $shadow_deepest;
+    min-width: 733px;
   }
   .hero-text-width {
     max-width: 500px;
+  }
+  .homepage-hero {
+    background-color: $bg_dark;
   }
   .kit-example {
     max-width: 800px;
@@ -37,13 +41,9 @@
     position: absolute;
     left: 505px;
   }
-  @include break_at(1319px){
+  @include break_at(1342px){
     .kit-example {
       margin-top: $space_xl * 2;
-    }
-    .react-rails-text {
-      max-width: 625px;
-      margin-right: 0;
     }
   }
   // Mobile overrides

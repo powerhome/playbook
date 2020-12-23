@@ -2,6 +2,7 @@
 
 require_dependency "playbook/application_controller"
 require "yaml"
+require "redcarpet"
 
 module Playbook
   class PagesController < ApplicationController
@@ -30,6 +31,10 @@ module Playbook
     end
 
     def getting_started; end
+
+    def changelog
+      @data = File.read("../../CHANGELOG.md")
+    end
 
     def grid
       render layout: "layouts/playbook/grid"
