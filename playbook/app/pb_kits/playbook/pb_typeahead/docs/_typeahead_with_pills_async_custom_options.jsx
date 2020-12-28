@@ -23,6 +23,8 @@ const filterResults = (results) =>
       imageUrl: result.avatar_url, //add the custom field
       label: result.login,
       value: result.id,
+      territory: "PHL",
+      type: result.type, 
     }
   })
 
@@ -85,9 +87,9 @@ const TypeaheadWithPillsAsyncCustomOptions = () => {
           valueComponent={(props) => (
             <User
               avatarUrl={props.imageUrl}
-              name="Kath"
-              title="test"
-              territory="NY"
+              name={props.label}
+              title={props.type}
+              territory={props.territory}
           />
           )}
       />
