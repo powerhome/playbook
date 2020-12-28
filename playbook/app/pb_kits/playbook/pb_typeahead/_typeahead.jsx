@@ -81,7 +81,6 @@ const Typeahead = (props: Props) => {
     }
   }
 
-  console.log(selectProps)
   return (
     <div className="pb_typeahead_kit react-select">
       <Tag
