@@ -11,12 +11,14 @@ const Option = (props: any) => {
   const {
     imageUrl,
   } = props.data
-
+  const { valueComponent } = props.selectProps
+  console.log("props", props)
+  console.log(valueComponent)
   return (
     <components.Option {...props}>
       <div>
         <Choose>
-          <When condition={imageUrl}>
+          <When condition={false}>
             <User
                 align="left"
                 avatarUrl={imageUrl}
@@ -24,8 +26,11 @@ const Option = (props: any) => {
                 orientation="horizontal"
             />
           </When>
-          <When condition={!imageUrl}>
+          <When condition={false}>
             {props.label}
+          </When>
+          <When condition={true}>
+            { valueComponent(props.data) }
           </When>
         </Choose>
       </div>
