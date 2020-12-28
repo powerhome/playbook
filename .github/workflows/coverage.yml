@@ -26,10 +26,15 @@ jobs:
       - name: Repo Checkout
         uses: actions/checkout@v2
 
-      - name: Install Node.js 12.x
-        uses: actions/setup-node@v1
+      - uses: actions/cache@v2
         with:
-          node-version: '12.x'
+          path: '**/node_modules'
+          key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
+
+      - name: Install Node.js 12.x
+        uses: actions/setup-node@v2
+        with:
+          node-version: '12'
 
       - name: Produce Test Coverage Data
         run: |
@@ -37,24 +42,25 @@ jobs:
           yarn
           yarn run test-coverage-summary
 
-      - name: Gather Test Coverage Summary
-        id: get_coverage_json
+      - name: Install action dependencies
         run: |
-          content=`cat ./playbook/coverage/coverage-summary.json`
-          # required for multi line json
-          content="${content//'%'/'%25'}"
-          content="${content//$'\n'/'%0A'}"
-          content="${content//$'\r'/'%0D'}"
-          # end handling for multi line json
-          echo "::set-output name=coverage-json::$content"
-
-      - name: yarn install
-        run: |
+          cd ./.github/actions/badge
           yarn
-          yarn list @actions/core
 
-      - name: Create Coverage Badge
+      - name: Find Current Pull Request
+        id: findPr
+        uses: jwalton/gh-find-current-pr@v1.0.2
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Create Jest Coverage Summary Badge
+        if: success() && steps.findPr.outputs.number
         uses: './.github/actions/badge'
         with:
-          coverage-json: ${{ steps.get_coverage_json.outputs.coverageJson }}
+          badge-title: 'React Kit Coverage'
+          coverage-summary-file: '../../../playbook/coverage/coverage-summary.json'
+          github-repo: ${{ github.repository }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          minimum-coverage-pct: 90
+          pull-number: ${{ steps.findPr.outputs.number }}
 
