@@ -3,9 +3,9 @@
 import React, { useState } from 'react'
 
 import {
-    Caption,
-    Typeahead,
-    User,
+  Caption,
+  Typeahead,
+  User,
 } from '../..'
 
 /**
@@ -23,8 +23,8 @@ const filterResults = (results) =>
       imageUrl: result.avatar_url, //add the custom field
       label: result.login,
       value: result.id,
-      territory: "PHL",
-      type: result.type, 
+      territory: 'PHL',
+      type: result.type,
     }
   })
 
@@ -38,7 +38,6 @@ const promiseOptions = (inputValue) =>
       resolve([])
     }
   })
-
 
 const TypeaheadWithPillsAsyncCustomOptions = () => {
   const [users, setUsers] = useState([])
@@ -86,11 +85,11 @@ const TypeaheadWithPillsAsyncCustomOptions = () => {
           placeholder="type the name of a Github user"
           valueComponent={(props) => (
             <User
-              avatarUrl={props.imageUrl}
-              name={props.label}
-              title={props.type}
-              territory={props.territory}
-          />
+                avatarUrl={props.imageUrl}
+                name={props.label}
+                territory={props.territory}
+                title={props.type}   
+            />
           )}
       />
     </>

@@ -49,14 +49,13 @@ const TypeaheadWithPillsAsync = () => {
   const [users, setUsers] = useState([])
   const handleOnChange = (value) => setUsers(formatUsers(value))
   const formatValue = (users) => formatUsers(users)
-  
-  const formatUsers = (users) => { 
-    const results = () => ( users.map((user) => {
-      if (Object.keys(user)[0] === "name" || Object.keys(user)[1] === "id" ){
-          return ({label: user.name, value: user.id})
+  const formatUsers = (users) => {
+    const results = () => (users.map((user) => {
+      if (Object.keys(user)[0] === 'name' || Object.keys(user)[1] === 'id'){
+        return ({ label: user.name, value: user.id })
       } else {
-          return user
-      }  
+        return user
+      }
     }))
     return results()
   }
