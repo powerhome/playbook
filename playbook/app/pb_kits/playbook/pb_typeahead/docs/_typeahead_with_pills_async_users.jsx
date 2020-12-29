@@ -74,6 +74,7 @@ const TypeaheadWithPillsAsyncUsers = () => {
         >
           <User
               align="left"
+              avatar
               avatarUrl={user.imageUrl}
               key={user.value}
               marginBottom="md"

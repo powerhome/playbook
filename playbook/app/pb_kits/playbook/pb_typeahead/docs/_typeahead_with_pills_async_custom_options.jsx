@@ -74,6 +74,7 @@ const TypeaheadWithPillsAsyncCustomOptions = () => {
         >
           <User
               align="left"
+              avatar
               avatarUrl={user.imageUrl}
               key={user.value}
               marginBottom="md"
@@ -92,6 +93,7 @@ const TypeaheadWithPillsAsyncCustomOptions = () => {
           placeholder="type the name of a Github user"
           valueComponent={(props: UserProps) => (
             <User
+                avatar
                 avatarUrl={props.imageUrl}
                 name={props.label}
                 territory={props.territory}
