@@ -17,6 +17,13 @@ import {
  * @summary - for doc example purposes only
  */
 
+type UserProps = {
+  imageUrl?: String,
+  label?: String,
+  territory?: String,
+  type?: String,
+}
+
 const filterResults = (results) =>
   results.items.map((result) => {
     return {
@@ -83,12 +90,12 @@ const TypeaheadWithPillsAsyncCustomOptions = () => {
           onChange={handleOnChange}
           onMultiValueClick={handleOnMultiValueClick}
           placeholder="type the name of a Github user"
-          valueComponent={(props) => (
+          valueComponent={(props: UserProps) => (
             <User
                 avatarUrl={props.imageUrl}
                 name={props.label}
                 territory={props.territory}
-                title={props.type}   
+                title={props.type}
             />
           )}
       />
