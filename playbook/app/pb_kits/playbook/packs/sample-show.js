@@ -5,13 +5,13 @@ document.addEventListener("DOMContentLoaded", function () {
     document.querySelector(".pb--codeCopy").classList.toggle("close")
   })
 
-  // document.querySelector("#test-btn").addEventListener("click", () => {
-  //   const charts = window.pbChart.prototype.getCharts()
-  //   charts.forEach((chart) => {
-  //     console.log(chart)
-  //     chart.redraw()
-  //   })
-  // })
+  document.addEventListener("click", (e) => {
+    const openDrawer = document.querySelector(".pb--codeCopy")
+    const codeToggle = document.querySelector("#toggle-button-js")
+    if (!(e.target == openDrawer || openDrawer.contains(e.target) || e.target == codeToggle || codeToggle.contains(e.target))) {
+      openDrawer.classList.add("close")
+    }
+  })
 
   document.querySelector("#fullscreen-toggle").addEventListener("click", () => {
     if (document.fullscreenElement){
