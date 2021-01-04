@@ -27,6 +27,14 @@ module Playbook
         end
       end
 
+      def wrapper(&block)
+        if object.background
+          pb_rails("card", props: { padding: "none" }, &block)
+        else
+          capture(&block)
+        end
+      end
+
       def sort_icon(direction)
         case direction
         when "asc"
