@@ -37,6 +37,9 @@ body {
         margin-bottom: 0 !important;
       }
     }
+    .mobile-kit-search {
+      display: none;
+    }
     .pb-version-tag {
       text-align: right;
       position: relative;
@@ -59,6 +62,9 @@ body {
     @include break_at(breakpoint("sm")) {
       .kit-search, .separator-explicit-height {
         display: none;
+      }
+      .mobile-kit-search {
+        display: block;
       }
     }
     @include break_at(375px) {
