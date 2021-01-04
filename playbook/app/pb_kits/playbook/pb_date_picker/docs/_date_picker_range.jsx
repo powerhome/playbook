@@ -4,7 +4,7 @@ import { DatePicker } from '../../'
 const DatePickerRange = () => (
   <div>
     <DatePicker
-        defaultDate={[new Date(), new Date().fp_incr(6)]}
+        defaultDate={[new Date(), new Date().fp_incr(7)]}
         mode="range"
         pickerId="date-picker-range"
     />

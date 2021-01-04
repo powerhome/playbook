@@ -10,7 +10,6 @@ import {
 const Option = (props: any) => {
   const {
     imageUrl,
-    label,
   } = props.data
 
   return (
@@ -21,12 +20,12 @@ const Option = (props: any) => {
             <User
                 align="left"
                 avatarUrl={imageUrl}
-                name={label}
+                name={props.label}
                 orientation="horizontal"
             />
           </When>
           <When condition={!imageUrl}>
-            {label}
+            {props.label}
           </When>
         </Choose>
       </div>

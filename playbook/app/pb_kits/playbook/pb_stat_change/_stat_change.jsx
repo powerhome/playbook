@@ -20,14 +20,18 @@ const iconMap = {
 type StatChangeProps = {
   change?: "increase" | "decrease" | "neutral",
   className?: string,
+  icon?: string,
   id?: string,
   value?: string | number,
 }
 
 const StatChange = (props: StatChangeProps) => {
-  const { change = 'neutral', className, id, value } = props
+  const { change = 'neutral', className, icon, id, value } = props
   const status = statusMap[change] || 'neutral'
-  const icon = iconMap[change]
+  let returnedIcon = iconMap[change]
+  if (icon) {
+    returnedIcon = icon
+  }
 
   return (
     <If condition={value}>
@@ -40,10 +44,10 @@ const StatChange = (props: StatChangeProps) => {
           id={id}
       >
         <Body status={status}>
-          <If condition={icon}>
+          <If condition={returnedIcon}>
             <Icon
                 fixed_width
-                icon={icon}
+                icon={returnedIcon}
             />
             {' '}
           </If>

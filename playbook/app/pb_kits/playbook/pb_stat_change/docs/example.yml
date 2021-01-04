@@ -1,9 +1,11 @@
 examples:
-  
+
   rails:
   - stat_change_default: Default
-  
-  
+  - stat_change_unit: Icon
+  - stat_change_unit_two: Colors
+
   react:
   - stat_change_default: Default
-  
+  - stat_change_unit: Icon
+  - stat_change_unit_two: Colors

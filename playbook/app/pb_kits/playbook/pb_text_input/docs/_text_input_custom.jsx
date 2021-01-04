@@ -1,7 +1,11 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { TextInput } from '../../'
 
 const TextInputCustom = () => {
+  const [name, setName] = useState('')
+  const handleUpdateName = ({ target }) => {
+    setName(target.value)
+  }
   return (
     <div>
       <TextInput
@@ -9,8 +13,10 @@ const TextInputCustom = () => {
       >
         <input
             name="custom-name"
+            onChange={handleUpdateName}
             placeholder="custom-placeholder"
             type="text"
+            value={name}
         />
       </TextInput>
     </div>

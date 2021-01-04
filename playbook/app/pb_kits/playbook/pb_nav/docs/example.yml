@@ -9,8 +9,10 @@ examples:
   - subtle_with_icons_nav: Subtle With Icons
   - subtle_no_highlight_nav: Subtle No Highlight
   - horizontal_nav: Horizontal Nav
+  - subtle_horizontal_nav: Subtle Horizontal Nav
   - block_nav: Block
   - block_no_title_nav: Without Title
+  - new_tab: Open in a New Tab
 
   react:
   - default_nav: Default
@@ -22,6 +24,7 @@ examples:
   - subtle_with_icons_nav: Subtle With Icons
   - subtle_no_highlight_nav: Subtle No Highlight
   - horizontal_nav: Horizontal Nav
+  - subtle_horizontal_nav: Subtle Horizontal Nav
   - block_nav: Block
   - block_no_title_nav: Without Title
-
+  - new_tab: Open in a New Tab

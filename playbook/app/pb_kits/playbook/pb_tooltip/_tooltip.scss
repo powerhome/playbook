@@ -24,9 +24,11 @@ $tooltip_shadow: rgba(60, 106, 172, 0.18);
 
 [class^="pb_tooltip_kit"] {
   .tooltip_tooltip {
-    display: none;
+    display: block;
     opacity: 0;
-    left: 0;
+    position: absolute;
+    left: -9999px;
+    top: 0;
     animation-name: fadeIn;
     animation-duration: 150ms;
     animation-timing-function: linear;
@@ -49,11 +51,9 @@ $tooltip_shadow: rgba(60, 106, 172, 0.18);
       border-style: solid;
       border-width: 10px;
       margin-bottom: 50px;
-      margin-left: -10px;
     }
     &.show {
       opacity: 1;
-      display: block;
       z-index: $z_9;
       margin-bottom: $space_sm;
       background-color: $white;
@@ -89,12 +89,14 @@ $tooltip_shadow: rgba(60, 106, 172, 0.18);
 
 // Right
 [class^="pb_tooltip_kit"] .tooltip_tooltip {
+  $arrow_vertical_offset: calc(50% - #{$space_xs * 1.2});
 
-  &[x-placement="right"] {
+  &[data-popper-placement="right"] {
     box-shadow: -8px 0 28px 0 $tooltip_shadow;
     margin: 0 0 0 $space_sm;
     .arrow {
       left: -#{$space_xs};
+      top: $arrow_vertical_offset;
       margin-bottom: 0;
       transform: rotate(90deg);
     }
@@ -103,7 +105,7 @@ $tooltip_shadow: rgba(60, 106, 172, 0.18);
     }
   }
 
-  &[x-placement="bottom"] {
+  &[data-popper-placement="bottom"] {
     box-shadow: 0 -12px 28px 0 $tooltip_shadow;
     margin: $space_sm 0 0 0;
     .arrow {
@@ -116,13 +118,14 @@ $tooltip_shadow: rgba(60, 106, 172, 0.18);
     }
   }
 
-  &[x-placement="left"] {
+  &[data-popper-placement="left"] {
     box-shadow: 8px 0 28px 0 $tooltip_shadow;
     margin: 0 $space_sm 0 0;
     .arrow {
       margin-bottom: 0;
       right: -18px;
       left: auto;
+      top: $arrow_vertical_offset;
       transform: rotate(270deg);
     }
     &.flipped .arrow {

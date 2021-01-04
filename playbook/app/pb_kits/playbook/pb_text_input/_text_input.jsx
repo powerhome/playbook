@@ -1,5 +1,5 @@
 /* @flow */
-import React from 'react'
+import React, { forwardRef } from 'react'
 import classnames from 'classnames'
 import { Body, Caption } from '../'
 import { globalProps } from '../utilities/globalProps.js'
@@ -27,7 +27,10 @@ type TextInputProps = {
   children: Node,
 }
 
-const TextInput = (props: TextInputProps) => {
+const TextInput = (
+  props: TextInputProps,
+  ref: React.ElementRef<"input">
+) => {
   const {
     aria = {},
     className,
@@ -42,7 +45,7 @@ const TextInput = (props: TextInputProps) => {
     placeholder,
     required,
     type = 'text',
-    value,
+    value = '',
     children = null,
   } = props
 
@@ -78,6 +81,7 @@ const TextInput = (props: TextInputProps) => {
               name={name}
               onChange={onChange}
               placeholder={placeholder}
+              ref={ref}
               required={required}
               type={type}
               value={value}
@@ -94,4 +98,4 @@ const TextInput = (props: TextInputProps) => {
   )
 }
 
-export default TextInput
+export default forwardRef(TextInput)

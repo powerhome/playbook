@@ -1,5 +1,58 @@
 
 
+## [7.11.0](https://github.com/powerhome/playbook/tree/HEAD)
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/7.11.0...HEAD)
+
+**Kit Enhancements:**
+
+- Improve Rails tooltip kit performance when a lot of tooltip kits are on the page [\#1270](https://github.com/powerhome/playbook/pull/1270) ([thestephenmarshall](https://github.com/thestephenmarshall))
+- Add deprecation back [\#1266](https://github.com/powerhome/playbook/pull/1266) ([thestephenmarshall](https://github.com/thestephenmarshall))
+- Add target blank to Nav Item [\#1265](https://github.com/powerhome/playbook/pull/1265) ([stephenmckeon](https://github.com/stephenmckeon))
+- Update DatePicker docs for best DateTime obj practices [\#1259](https://github.com/powerhome/playbook/pull/1259) ([bh247484](https://github.com/bh247484))
+- Expose popover's minWidth prop for Filter Kit. [\#1257](https://github.com/powerhome/playbook/pull/1257) ([jasperfurniss](https://github.com/jasperfurniss))
+- Forward refs within Text Input, Radio, & Select React kits [\#1253](https://github.com/powerhome/playbook/pull/1253) ([thestephenmarshall](https://github.com/thestephenmarshall))
+- Remove unused methods from Playbook api [\#1247](https://github.com/powerhome/playbook/pull/1247) ([xjunior](https://github.com/xjunior))
+- Dashboard Card Sample Pages [\#1246](https://github.com/powerhome/playbook/pull/1246) ([andrew-k9](https://github.com/andrew-k9))
+- Simplify dark mode [\#1238](https://github.com/powerhome/playbook/pull/1238) ([xjunior](https://github.com/xjunior))
+
+**Fixed Bugs:**
+
+- Tooltip Rails kit: Tooltip arrow is not centered [\#1258](https://github.com/powerhome/playbook/pull/1258) ([stephenmckeon](https://github.com/stephenmckeon))
+
+**Improvements:**
+
+- Added a rich text output preview [\#1275](https://github.com/powerhome/playbook/pull/1275) ([andrew-k9](https://github.com/andrew-k9))
+- Improved home toggle margin & homepage hero background color [\#1274](https://github.com/powerhome/playbook/pull/1274) ([bh247484](https://github.com/bh247484))
+- Fix for homepage toggle page shake [\#1273](https://github.com/powerhome/playbook/pull/1273) ([jasperfurniss](https://github.com/jasperfurniss))
+- Added Changelog Page [\#1269](https://github.com/powerhome/playbook/pull/1269) ([andrew-k9](https://github.com/andrew-k9))
+- Updated sample page design layout to support categories [\#1267](https://github.com/powerhome/playbook/pull/1267) ([bh247484](https://github.com/bh247484))
+- Improve navigation overflow for mobile [\#1260](https://github.com/powerhome/playbook/pull/1260) ([jasoncypret](https://github.com/jasoncypret))
+- Improve consistency of the react filter kit sort icon to match rails [\#1256](https://github.com/powerhome/playbook/pull/1256) ([stephenmckeon](https://github.com/stephenmckeon))
+- Change right side padding to account for no sort on filter kit [\#1255](https://github.com/powerhome/playbook/pull/1255) ([stephenmckeon](https://github.com/stephenmckeon))
+- Bump ini from 1.3.5 to 1.3.8 in /playbook [\#1251](https://github.com/powerhome/playbook/pull/1251) ([dependabot[bot]](https://github.com/apps/dependabot))
+
+
+
+## [7.10.0](https://github.com/powerhome/playbook/tree/HEAD)
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/7.10.0...HEAD)
+
+**Kit Enhancements:**
+
+- Allow getOption\[Label|Value\] props in Typeahead [\#1244](https://github.com/powerhome/playbook/pull/1244) ([thestephenmarshall](https://github.com/thestephenmarshall))
+- \[NUXE-210\] - Update release script \(v2\) [\#1241](https://github.com/powerhome/playbook/pull/1241) ([bh247484](https://github.com/bh247484))
+- Table Reorganization, and change default alignment to top [\#1240](https://github.com/powerhome/playbook/pull/1240) ([jasoncypret](https://github.com/jasoncypret))
+- \[NUXE-331\] Kit search [\#1235](https://github.com/powerhome/playbook/pull/1235) ([bh247484](https://github.com/bh247484))
+- Move Playbook::Props to lib [\#1229](https://github.com/powerhome/playbook/pull/1229) ([xjunior](https://github.com/xjunior))
+- \[NUXE-77\] Add Icon Prop to Stat Change [\#1227](https://github.com/powerhome/playbook/pull/1227) ([ljtinney](https://github.com/ljtinney))
+
+**Improvements:**
+
+- \[NUXE-278\] SAMPLE PAGE - Crowdsourced Posts \(Reddit home page\) [\#1237](https://github.com/powerhome/playbook/pull/1237) ([stephenmckeon](https://github.com/stephenmckeon))
+
+
+
 ## [7.9.0](https://github.com/powerhome/playbook/tree/HEAD)
 
 [Full Changelog](https://github.com/powerhome/playbook/compare/7.9.0...HEAD)
@@ -113,11 +166,11 @@
 
 
 
-## 7.4.2
+## [7.4.2](https://github.com/powerhome/playbook/tree/7.4.2)
 
 **Fixed Bugs:**
 
-- Revert “Timestamp Kit Formatted Date Additions” [#1150](https://github.com/powerhome/playbook/pull/1150)  [#1180](https://github.com/powerhome/playbook/pull/1180) 
+- Revert “Timestamp Kit Formatted Date Additions” [#1150](https://github.com/powerhome/playbook/pull/1150)  [#1180](https://github.com/powerhome/playbook/pull/1180)
 
 ## [7.4.0](https://github.com/powerhome/playbook/tree/7.4.0)
 
@@ -423,7 +476,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Hot fixes [\#1016](https://github.com/powerhome/playbook/pull/1016) ([jasperfurniss](https://github.com/jasperfurniss))
 
 
-## [[v6.2.0] 2020-8-13](https://github.com/powerhome/playbook/tree/HEAD)
+## [v6.2.0] 2020-8-13](https://github.com/powerhome/playbook/tree/HEAD/6.2.0)
 
 [Full Changelog](https://github.com/powerhome/playbook/compare/6.1.0...HEAD)
 
@@ -446,7 +499,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - ~~Add Title Detail Dark Mode [\#972](https://github.com/powerhome/playbook/pull/972) ([kellyeryan](https://github.com/kellyeryan))~~ (reverted)
 
 
-## [v6.1.0] 2020-8-6
+## [v6.1.0](https://github.com/powerhome/playbook/tree/HEAD/6.1.0) 2020-8-6
 
 ### Fixed
 - Updated and added to PB Toggle kit ([#946](https://github.com/powerhome/playbook/pull/946)  @kellyeryan)
@@ -1111,30 +1164,3 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Removed (breaking changes)
 - React PbLayout prop `children` dropped support for single Node (https://github.com/powerhome/playbook/commit/b16da50914e110c75c6d96c985fa02781c9e2040#diff-c3ce2c91288ca3e730d3c56e7f73475cL11-L14)
 - Rails PbLayout prop `dark` dropped (https://github.com/powerhome/playbook/commit/b16da50914e110c75c6d96c985fa02781c9e2040#diff-377fda563d148f7b3ad33f904b7b0cdbL13)
-
-
-\* *This Changelog was automatically generated by [github_changelog_generator](https://github.com/github-changelog-generator/github-changelog-generator)*
-
-
-\* *This Changelog was automatically generated by [github_changelog_generator](https://github.com/github-changelog-generator/github-changelog-generator)*
-
-
-\* *This Changelog was automatically generated by [github_changelog_generator](https://github.com/github-changelog-generator/github-changelog-generator)*
-
-
-\* *This Changelog was automatically generated by [github_changelog_generator](https://github.com/github-changelog-generator/github-changelog-generator)*
-
-
-\* *This Changelog was automatically generated by [github_changelog_generator](https://github.com/github-changelog-generator/github-changelog-generator)*
-
-
-\* *This Changelog was automatically generated by [github_changelog_generator](https://github.com/github-changelog-generator/github-changelog-generator)*
-
-
-\* *This Changelog was automatically generated by [github_changelog_generator](https://github.com/github-changelog-generator/github-changelog-generator)*
-
-
-\* *This Changelog was automatically generated by [github_changelog_generator](https://github.com/github-changelog-generator/github-changelog-generator)*
-
-
-\* *This Changelog was automatically generated by [github_changelog_generator](https://github.com/github-changelog-generator/github-changelog-generator)*

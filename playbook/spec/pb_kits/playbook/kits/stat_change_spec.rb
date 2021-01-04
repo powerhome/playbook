@@ -10,6 +10,7 @@ RSpec.describe Playbook::PbStatChange::StatChange do
   it { is_expected.to define_enum_prop(:change)
                    .with_default("neutral")
                    .with_values("neutral", "increase", "decrease")}
+  it { is_expected.to define_prop(:icon).of_type(Playbook::Props::String) }
 
   describe "#classname" do
     it "returns namespaced class name", :aggregate_failures do

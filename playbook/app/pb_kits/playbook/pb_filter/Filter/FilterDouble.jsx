@@ -7,7 +7,11 @@ import CurrentFilters, { FilterDescription } from './CurrentFilters'
 import FilterBackground, { FilterBackgroundProps } from './FilterBackground'
 import FiltersPopover from './FiltersPopover'
 import ResultsCount from './ResultsCount'
-import SortMenu, { SortingChangeCallback, SortOptions, SortValue } from './SortMenu'
+import SortMenu, {
+  SortingChangeCallback,
+  SortOptions,
+  SortValue,
+} from './SortMenu'
 
 export type FilterDoubleProps = {
   children: Node,
@@ -18,7 +22,17 @@ export type FilterDoubleProps = {
   sortValue?: SortValue,
 } & FilterBackgroundProps
 
-const FilterDouble = ({ onSortChange, sortOptions, sortValue, filters, results, children, dark, ...bgProps }: FilterDoubleProps) => (
+const FilterDouble = ({
+  onSortChange,
+  sortOptions,
+  sortValue,
+  filters,
+  results,
+  children,
+  dark,
+  minWidth,
+  ...bgProps
+}: FilterDoubleProps) => (
   <FilterBackground
       dark={dark}
       {...bgProps}
@@ -27,7 +41,10 @@ const FilterDouble = ({ onSortChange, sortOptions, sortValue, filters, results, 
         orientation="row"
         vertical="center"
     >
-      <FiltersPopover dark={dark}>
+      <FiltersPopover
+          dark={dark}
+          minWidth={minWidth}
+      >
         {children}
       </FiltersPopover>
       <CurrentFilters

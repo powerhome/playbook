@@ -1,6 +1,6 @@
 /* @flow */
 
-import React from 'react'
+import React, { forwardRef } from 'react'
 import classnames from 'classnames'
 import {
   Body,
@@ -69,7 +69,7 @@ const Select = ({
   required = false,
   value,
   ...props
-}: SelectProps) => {
+}: SelectProps, ref: React.ElementRef<"select">) => {
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
   const optionsList = createOptions(options)
@@ -107,6 +107,7 @@ const Select = ({
               multiple={multiple}
               name={name}
               onChange={onChange}
+              ref={ref}
               required={required}
               value={value}
           >
@@ -132,4 +133,4 @@ const Select = ({
   )
 }
 
-export default Select
+export default forwardRef(Select)

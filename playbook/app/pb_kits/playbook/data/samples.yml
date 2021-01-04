@@ -5,4 +5,6 @@ full_page_samples:
 - crm_client_list
 - news_magazine
 - trending_repositories
-dashboard_cards:
+- crowdsourced_posts
+card_samples:
+- card_dashboards

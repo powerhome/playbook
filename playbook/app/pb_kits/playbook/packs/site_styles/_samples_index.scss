@@ -15,6 +15,10 @@
     margin-top: $space_md;
     min-width: 300px;
   }
+  .main-content-wrapper {
+    max-width: 1000px;
+    margin: auto;
+  }
   // Background padding override
   .pb_background_kit {
     padding: $space_xl * 1.75 !important;
@@ -27,6 +31,9 @@
     height: (815px / 4);
     border-radius: $border_rad_heaviest;
     box-shadow: $shadow_deep;
+  }
+  .sample-card-grid-override {
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)) !important;
   }
   // Mobile Styles
   @include break_at(731px){

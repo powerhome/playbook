@@ -1,0 +1,32 @@
+[class^=pb_table] {
+    tr {
+        vertical-align: top;
+    }
+
+    // Text Align
+    tr[align=center] th,
+    tr th[align=center] {
+      text-align: center !important;
+    }
+    tr[align=right] th,
+    tr th[align=right] {
+      text-align: right !important;
+    }
+
+    // Column Align
+    tr[shift=up],
+    td[shift=up],
+    th[shift=up] {
+        vertical-align: top;
+      }
+    tr[shift=middle],
+    td[shift=middle],
+    th[shift=middle] {
+      vertical-align: middle;
+    }
+    tr[shift=down],
+    td[shift=down],
+    th[shift=down] {
+      vertical-align: bottom;
+    }
+}
