@@ -20,9 +20,7 @@ module Playbook
       @type = params[:type]
     end
 
-    def samples_index
-      @sample_yaml = YAML.load_file("#{Playbook::Engine.root}/app/pb_kits/playbook/data/samples.yml")
-    end
+    def samples_index; end
 
     def sample_show_rails
       params[:type] ||= "rails"
@@ -39,8 +37,7 @@ module Playbook
   private
 
     def set_sample
-      sample_yaml = YAML.load_file("#{Playbook::Engine.root}/app/pb_kits/playbook/data/samples.yml")
-      if sample_yaml.flatten(2).include?(params[:name])
+      if SAMPLES.flatten(2).include?(params[:name])
         @sample = params[:name]
       else
         redirect_to "/samples", flash: { error: "That sample does not exist" }
