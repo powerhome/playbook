@@ -10,6 +10,9 @@ $nav_breakpoint: breakpoint("lg");
 body {
   overflow-x: hidden;
   position: relative;
+  &.kits {
+    overflow-y: hidden;
+  }
 }
 
 .pb--page {
@@ -62,9 +65,6 @@ body {
     @include break_at(breakpoint("sm")) {
       .kit-search, .separator-explicit-height {
         display: none;
-      }
-      .mobile-kit-search {
-        display: block;
       }
     }
     @include break_at(375px) {
@@ -124,7 +124,6 @@ body {
         box-shadow: $shadow_deepest;
         top: 100px;
         right: 0;
-        width: auto !important;
         z-index: 1000;
       }
     }
@@ -185,7 +184,15 @@ body {
       }
     }
     &[class*=dark]{
-      border-color:$border_dark;
+      border-color: $border_dark;
+    }
+    .mobile-search-wrapper {
+      border-bottom: $border_light 1px solid;
+      display: none;
+      padding: $space_sm $space_sm $space_xs $space_sm;
+    }
+    .mobile-kit-search {
+      width: 210px;
     }
     .mobile-sidebar-pages {
       display: none;
@@ -195,11 +202,16 @@ body {
         display: block;
       }
     }
+    @include break_at(breakpoint("sm")) {
+      .mobile-search-wrapper {
+        display: block;
+      }
+    }
   }
 }
 #toggle-modes{
-    display: flex;
-    margin-right: 80px;
+  display: flex;
+  margin-right: 80px;
 }
 // Nav Tabs switch between Rails and React
 .pb--kit-type-nav {
