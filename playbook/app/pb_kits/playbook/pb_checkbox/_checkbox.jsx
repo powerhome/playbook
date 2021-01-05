@@ -23,6 +23,8 @@ type CheckboxProps = {
 }
 
 const Checkbox = (props: CheckboxProps) => {
+  console.log(props.checked)
+  console.log("Rendering checkbox")
   const {
     aria = {},
     checked = false,
@@ -58,6 +60,7 @@ const Checkbox = (props: CheckboxProps) => {
         <Else />
         <input
             defaultChecked={checked}
+            checked={checked}
             name={name}
             onChange={onChange}
             type="checkbox"

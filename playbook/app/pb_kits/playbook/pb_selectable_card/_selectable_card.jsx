@@ -1,8 +1,8 @@
 /* @flow */
 
-import React from 'react'
+import React, { useState } from 'react'
 import classnames from 'classnames'
-import { Icon } from '../'
+import { Flex, Icon, Checkbox, SectionSeparator } from '../'
 
 import type { InputCallback } from '../types'
 
@@ -70,9 +70,25 @@ const SelectableCard = ({
     }
   }
 
+  // const displayInput = (checked) => {
+  //   if (true) {
+  //     return (
+
+  //     )
+  //   }
+  // }
+
+
   const inputType = multi === false ? 'radio' : 'checkbox'
 
   const inputIdPresent = inputId !== null ? inputId : name
+
+  const [isChecked, setIsChecked] = useState(checked)
+
+  const handleChange = e => {
+    onChange(e)
+    setIsChecked(e.target.checked)
+  }
 
   return (
     <div
@@ -82,11 +98,11 @@ const SelectableCard = ({
     >
       <input
           {...props}
-          checked={checked}
+          checked={isChecked}
           disabled={disabled}
           id={inputIdPresent}
           name={name}
-          onChange={onChange}
+          onChange={handleChange}
           type={inputType}
           value={value}
       />
@@ -94,8 +110,15 @@ const SelectableCard = ({
           className={globalProps(props)}
           htmlFor={inputIdPresent}
       >
-        {text || children}
-        {displayIcon()}
+        <Flex vertical="stretch">
+          <Checkbox onChange={handleChange} className={"displayInput"} checked={isChecked} />
+          <SectionSeparator
+              orientation="vertical"
+              variant="card"
+          />
+          {text || children}
+          {displayIcon()}
+        </Flex>
       </label>
     </div>
   )
