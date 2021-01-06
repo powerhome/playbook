@@ -74,32 +74,30 @@ const SelectableCard = ({
     }
   }
 
-  const inputType = multi === false ? 'radio' : 'checkbox'
-
-  const inputIdPresent = inputId !== null ? inputId : name
-
-  const handleChange = e => {
-    console.log(e.target)
-    console.log(e.target.checked)
-    e.persist()
-    onChange(e)
+  const inputRef = React.createRef()
+  // Delegate clicks to hidden input from visible one
+  const handleClick = () => {
+    inputRef.current.click()
   }
 
+  const inputType = multi === false ? 'radio' : 'checkbox'
+  const inputIdPresent = inputId !== null ? inputId : name
   const Input = multi ? Checkbox : Radio
 
   if (variant === "displayInput") {
     return (
       <div  className={classes}>
         <input
-          {...props}
-          checked={checked}
-          disabled={disabled}
-          id={inputIdPresent}
-          name={name}
-          onChange={handleChange}
-          type={inputType}
-          value={value}
-      />
+            {...props}
+            checked={checked}
+            disabled={disabled}
+            id={inputIdPresent}
+            name={name}
+            onChange={onChange}
+            type={inputType}
+            ref={inputRef}
+            value={value}
+        />
         <label
             className={globalProps(props) + globalProps({padding: "none"})}
             htmlFor={inputIdPresent}
@@ -109,11 +107,9 @@ const SelectableCard = ({
             <Input>
               <input
                   type={inputType}
-                  onChange={handleChange}
-                  className={"displayInput"}
                   checked={checked}
-                  name={name}
-                  value={value}
+                  disabled={disabled}
+                  onClick={handleClick}
               />
             </Input>
           </Flex>
