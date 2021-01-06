@@ -1,0 +1,277 @@
+@import "./opacity";
+
+/*=====================================
+Base colors should not be documented.
+Only document color use.
+
+Colors -----------------------------*/
+$royal:               #0056CF;
+$purple:              #9E64E9;
+$teal:                #00C4D7;
+$red:                 #FF2229;
+$yellow:              #F9BB00;
+$green:               #00CA74;
+$orange:              #FD804C;
+$colors: (
+  royal:              $royal,
+  purple:             $purple,
+  teal:               $teal,
+  red:                $red,
+  yellow:             $yellow,
+  green:              $green,
+  orange:             $orange
+);
+
+/* Specialty Gradient -----------------*/
+$gradient_start:      #1C75F2;
+$gradient_end:        $royal;
+
+/* Interface colors -------------------*/
+$white:               #FFFFFF;
+$silver:              #F3F7FB;
+$slate:               #C1CDD6;
+$charcoal:            #242B42;
+$black:               #000000;
+
+$interface_colors: (
+  white:              $white,
+  silver:             $silver,
+  slate:              $slate,
+  charcoal:           $charcoal,
+  black:              $black,
+
+);
+
+/* Main colors ------------------------*/
+$primary:             $royal;
+$secondary:           $yellow;
+$tertiary:            $purple;
+$main_colors: (
+  primary:            $primary,
+  secondary:          $secondary,
+  tertiary:           $tertiary
+);
+/*=====================================
+
+Background colors ------------------*/
+$bg_light:            $silver;
+$bg_dark:             #0a0527;
+$background_colors: (
+  bg_light:           $bg_light,
+  bg_dark:            $bg_dark
+);
+
+/* Card colors ------------------*/
+$card_light:          $white;
+$card_dark:           rgba($white, $opacity_1);
+$card_colors: (
+  card_light:         $card_light,
+  card_dark:          $card_dark
+);
+
+$primary-action:      $primary;
+$action_colors: (
+  primary_action:            $primary-action
+);
+
+/* Active colors ----------------------*/
+$active_light:        lighten(#E5F2FF, 3.5%);
+$active_dark:         #0082ff;
+$active_colors: (
+  active_light:       $active_light,
+  active_dark:        $active_dark
+);
+
+/* Hover colors -----------------------*/
+$hover_light:         darken($silver, 5%);
+$hover_dark:          rgba($white, $opacity_2);
+$hover_colors: (
+  hover_light:        $hover_light,
+  hover_dark:         $hover_dark
+);
+
+/* Focus colors -----------------------*/
+$focus_input_light:   rgba($active_light, $opacity_5);
+$focus_input_dark:    rgba(#144075, $opacity_5);
+$focus_input_colors: (
+  focus_input_light:        $focus_input_light,
+  focus_input_dark:         $focus_input_dark
+);
+
+/* Border colors ----------------------*/
+$border_light:        #E4E8F0;
+$border_dark:         rgba($white, $opacity_1);
+$border_colors: (
+  border_light:       $border_light,
+  border_dark:        $border_dark
+);
+
+/* Shadow colors ----------------------*/
+$shadow:        rgba(#3C6AAC, $opacity_2);
+$shadow_colors: (
+  shadow:       $shadow,
+);
+
+/* Text colors ------------------------*/
+$text_lt_default:     $charcoal;
+$text_lt_light:       #919EAB;
+$text_lt_lighter:     $slate;
+$text_dk_default:     $white;
+$text_dk_light:       rgba($white, $opacity_6);
+$text_dk_lighter:     rgba($white, $opacity_4);
+$text_colors: (
+  text_lt_default:    $text_lt_default,
+  text_lt_light:      $text_lt_light,
+  text_lt_lighter:    $text_lt_lighter,
+  text_dk_default:    $text_dk_default,
+  text_dk_light:      $text_dk_light,
+  text_dk_lighter:    $text_dk_lighter
+);
+
+/* Data colors ------------------------*/
+$data_1:              $royal;
+$data_2:              $yellow;
+$data_3:              $purple;
+$data_4:              $green;
+$data_5:              $orange;
+$data_6:              #144075;
+$data_7:              $teal;
+$data_8:              $red;
+$data_colors: (
+  data_1:             $data_1,
+  data_2:             $data_2,
+  data_3:             $data_3,
+  data_4:             $data_4,
+  data_5:             $data_5,
+  data_6:             $data_6,
+  data_7:             $data_7,
+  data_8:             $data_8
+);
+
+/* Status colors ----------------------*/
+$success:             $green;
+$warning:             $yellow;
+$error:               $red;
+$error_dark:          lighten($error, 5%);
+$error_dark_body:     lighten($error_dark, 2%);
+$info:                $teal;
+$neutral:             $slate;
+$status_colors: (
+  success:            $success,
+  warning:            $warning,
+  error:              $error,
+  info:               $info,
+  neutral:            $neutral,
+  primary:            $primary
+);
+
+$status_color_text: (
+  success:            $success,
+  warning:            darken($warning, 10%),
+  error:              $error,
+  info:               $info,
+  neutral:            darken($neutral, 15%),
+  primary:            $primary
+);
+
+/* Link colors ------------------------*/
+$primary_action:      $primary;
+
+/* Product colors ---------------------*/
+$windows:             $royal;
+$siding:              $yellow;
+$doors:               $teal;
+$solar:               $green;
+$roofing:             $slate;
+$gutters:             $purple;
+$insulation:          $red;
+$product_colors: (
+  windows:            $windows,
+  siding:             $siding,
+  doors:              $doors,
+  solar:              $solar,
+  roofing:            $roofing,
+  gutters:            $gutters,
+  insulation:         $insulation
+);
+
+/* Category colors ---------------------*/
+$category_1:   $royal;
+$category_2:   #0CD2E5;
+$category_3:   $yellow;
+$category_4:   #14D595;
+$category_5:   #A057FF;
+$category_6:   #FF7034;
+$category_7:   #97DA22;
+$category_8:   #EA599F;
+$category_9:   #0091FF;
+$category_10:  #5027E4;
+$category_11:  $red;
+$category_12:  #109922;
+$category_13:  #058F9D;
+$category_14:  #A33E6F;
+$category_15:  #B2171C;
+$category_16:  #0A5C49;
+$category_17:  #325B91;
+$category_18:  #BE4714;
+$category_19:  #000080;
+$category_20:  #5C0E0A;
+$category_21:  #040830;
+$category_colors: (
+  category_1:   $category_1,
+  category_2:   $category_2,
+  category_3:   $category_3,
+  category_4:   $category_4,
+  category_5:   $category_5,
+  category_6:   $category_6,
+  category_7:   $category_7,
+  category_8:   $category_8,
+  category_9:   $category_9,
+  category_10:  $category_10,
+  category_11:  $category_11,
+  category_12:  $category_12,
+  category_13:  $category_13,
+  category_14:  $category_14,
+  category_15:  $category_15,
+  category_16:  $category_16,
+  category_17:  $category_17,
+  category_18:  $category_18,
+  category_19:  $category_19,
+  category_20:  $category_20,
+  category_21:  $category_21
+);
+
+$transparent: transparent;
+
+@mixin gradient($start: $gradient_start, $end: $gradient_end) {
+  background: $start;
+  background: -moz-linear-gradient(-45deg,  $start 0%, $end 100%);
+  background: -webkit-linear-gradient(-45deg,  $start 0%, $end 100%);
+  background: linear-gradient(135deg,  $start 0%, $end 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#{$start}', endColorstr='#{$end}', GradientType=1);
+}
+
+:export {
+  @mixin export-colors($colors-list) {
+    @each $name, $color in $colors-list {
+      #{$name}: $color;
+    }
+  }
+  @include export-colors($product_colors);
+  @include export-colors($status_colors);
+  @include export-colors($data_colors);
+  @include export-colors($shadow_colors);
+  @include export-colors($colors);
+  @include export-colors($interface_colors);
+  @include export-colors($main_colors);
+  @include export-colors($background_colors);
+  @include export-colors($card_colors);
+  @include export-colors($active_colors);
+  @include export-colors($action_colors);
+  @include export-colors($hover_colors);
+  @include export-colors($border_colors);
+  @include export-colors($text_colors);
+  @include export-colors($category_colors);
+  gradient_start: $gradient_start;
+  gradient_end: $gradient_end;
+}
