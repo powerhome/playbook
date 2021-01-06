@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react'
 import classnames from 'classnames'
-import { Flex, Icon, Checkbox, SectionSeparator } from '../'
+import { Card, Flex, Icon, Checkbox, Radio, SectionSeparator } from '../'
 
 import type { InputCallback } from '../types'
 
@@ -30,6 +30,7 @@ type SelectableCardProps = {
   onChange: InputCallback<HTMLInputElement>,
   text?: string,
   value?: string,
+  variant?: string,
 }
 
 const SelectableCard = ({
@@ -46,6 +47,7 @@ const SelectableCard = ({
   onChange = noop,
   text,
   value,
+  variant = "default",
   ...props
 }: SelectableCardProps) => {
   const ariaProps = buildAriaProps(aria)
@@ -86,8 +88,66 @@ const SelectableCard = ({
   const [isChecked, setIsChecked] = useState(checked)
 
   const handleChange = e => {
+    console.log(e.target)
+    console.log(e.target.checked)
     onChange(e)
     setIsChecked(e.target.checked)
+  }
+
+  const handleClick = e => {
+    if (multi) {
+      // do nothing for checkboxes
+      return
+    }
+
+    const radios = document.querySelectorAll(`input[type='radio'][name='${name}']`).forEach(radio => {
+      if (radio !== e.target) {
+        console.log(radio)
+        radio.fireEvent("onchange");
+      }
+    })
+  }
+
+  const Input = multi ? Checkbox : Radio
+
+  if (variant === "displayInput") {
+    return (
+      <div  className={classes + globalProps({padding: "none"})}>
+        <input
+          {...props}
+          checked={isChecked}
+          disabled={disabled}
+          id={inputIdPresent}
+          name={name}
+          onChange={handleChange}
+          onClick={handleClick}
+          type={inputType}
+          value={value}
+      />
+        <label
+            padding="none"
+            className={globalProps(props) + globalProps({padding: "none"})}
+            htmlFor={inputIdPresent}
+        >
+        <Flex vertical={"stretch"}>
+          <Card.Body padding="sm" paddingRight="xs">
+            <Input>
+              <input
+                  type={inputType}
+                  onChange={handleChange}
+                  className={"displayInput"}
+                  checked={isChecked}/>
+            </Input>
+          </Card.Body>
+          <div className="separator"/>
+          <Card.Body padding="sm">
+            {text || children}
+          </Card.Body>
+        </Flex>
+      {displayIcon()}
+      </label>
+      </div>
+    )
   }
 
   return (
@@ -98,11 +158,11 @@ const SelectableCard = ({
     >
       <input
           {...props}
-          checked={isChecked}
+          checked={checked}
           disabled={disabled}
           id={inputIdPresent}
           name={name}
-          onChange={handleChange}
+          onChange={onChange}
           type={inputType}
           value={value}
       />
@@ -110,15 +170,8 @@ const SelectableCard = ({
           className={globalProps(props)}
           htmlFor={inputIdPresent}
       >
-        <Flex vertical="stretch">
-          <Checkbox onChange={handleChange} className={"displayInput"} checked={isChecked} />
-          <SectionSeparator
-              orientation="vertical"
-              variant="card"
-          />
           {text || children}
           {displayIcon()}
-        </Flex>
       </label>
     </div>
   )

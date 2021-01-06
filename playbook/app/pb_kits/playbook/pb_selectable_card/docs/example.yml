@@ -13,3 +13,4 @@ examples:
   - selectable_card_single_select: Single Select
   - selectable_card_block: Block
   - selectable_card_image: Image Example
+  - selectable_card_input: Input Variant
