@@ -9,48 +9,47 @@ RSpec.describe Playbook::PbTimeStacked::TimeStacked do
 
   it { is_expected.to define_prop(:dark)
                       .of_type(Playbook::Props::Boolean) }
-  it { is_expected.to define_prop(:date)
-                      .of_type(Playbook::Props::Date)
-                      .that_is_required }
-  it { is_expected.to define_prop(:classnames)
-                      .of_type(Playbook::Props::String)
-                      .with_default(nil) }
+                      it { is_expected.to define_prop(:time) }
+
+  it { is_expected.to define_prop(:time) }
+
   it { is_expected.to define_enum_prop(:align)
                       .with_values("left", "center", "right") }
 
-  describe "#month" do
-    it "returns the date prop's month and month as a string" do
-      expect(subject.new(date: Date.today).month).to include Date.today.month.to_s
-    end
-  end
-
-  describe "#day" do
-    it "returns the date prop's day and month as a string" do
-      expect(subject.new(date: Date.today).day).to include Date.today.day.to_s
-    end
-  end
-
   describe "#classname" do
     it "returns namespaced class name", :aggregate_failures do
-      date = Date.today
+      required_props = { time: Time.now }
 
-      expect(subject.new(date: date).classname).to eq "pb_time_stacked_kit"
-      expect(subject.new(date: date, dark: true).classname).to include "_dark"
+      expect(subject.new(required_props).classname).to eq "pb_time_stacked_kit_left"
+      expect(subject.new(required_props.merge(align: "center")).classname).to eq "pb_time_stacked_kit_center"
+      expect(subject.new(required_props.merge(align: "right")).classname).to eq "pb_time_stacked_kit_right"
+      expect(subject.new(required_props.merge(dark: true)).classname).to eq "pb_time_stacked_kit_left dark"
     end
   end
 
   describe "#format_time_string" do
     it "returns a formatted string" do
-      time = Date.new(2020, 04, 06)
-      result = "#{time.strftime("%I:%M")}#{time.strftime("%P")[0, 1]}"
+      time = Time.new(2002, 04, 06, 9, 1, 1, "-05:00")
+      # -05:00, 5 hrs. behind UTC (East Coast)
+      expect([" 9:01a", " 10:01a"]).to include(subject.new(time: time).format_time_string)
+      # This test accomodates daylight savings
+    end
 
-      expect(subject.new(date: time).format_time_string).to eq result
+    it "returns a formatted string that respects a timezone" do
+      time = Time.new(2002, 04, 06, 9, 1, 1, "-05:00")
+      # -05:00, 5 hrs. behind UTC (East Coast)
+      expect([" 6:01a", " 7:01a"]).to include(subject.new(time: time, timezone: "America/Los_Angeles").format_time_string)
+      # This test accomodates daylight savings
     end
   end
 
   describe "#format_timezone" do
-    it "returns a formatted timezone" do
-      expect(['EDT', 'EST']).to include(subject.new(date: DateTime.current).format_timezone)
+    it "returns the default formatted timezone" do
+      expect(['EDT', 'EST']).to include(subject.new(time: DateTime.current).format_timezone_string)
+    end
+
+    it "returns a unique formatted timezone" do
+      expect(subject.new(time: DateTime.current, timezone: "Asia/Tokyo").format_timezone_string).to eq "JST"
     end
   end
 end

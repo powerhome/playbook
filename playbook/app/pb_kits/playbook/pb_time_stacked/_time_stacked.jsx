@@ -5,8 +5,9 @@ import classnames from 'classnames'
 
 import DateTime from '../pb_kit/dateTime.js'
 import { buildCss } from '../utilities/props'
-import { Body, Caption } from '../'
-import { deprecatedProps, globalProps } from '../utilities/globalProps.js'
+import { globalProps } from '../utilities/globalProps.js'
+
+import { Body, Caption, Flex, FlexItem } from '../'
 
 type TimeStackedProps = {
   align?: 'left' | 'center' | 'right',
@@ -15,39 +16,44 @@ type TimeStackedProps = {
   data?: string,
   date: string,
   id?: string,
-  tag?: 'body' | 'caption',
+  timeZone?: string,
 }
 
-const TimeStacked = (props: TimeStackedProps) => {
-  const { align, className, dark, date } = props
-  deprecatedProps('TimeStacked', ['tag'])
+const TimeStackedDefault = (props: TimeStackedProps) => {
+  const { align, className, date, timeZone } = props
   const classes = classnames(
     buildCss('pb_time_stacked_kit', align),
     globalProps(props),
-    className,
+    className
   )
 
-  const dateTimestamp = new DateTime({ value: date })
+  const dateTimestamp = new DateTime({ value: date, zone: timeZone })
 
   return (
     <div className={classes}>
-      <div
-          align={align}
-          className="pb_time_stacked_day_month"
+      <Flex
+          orientation="column"
+          vertical="left"
       >
-        <Body
-            color="light"
-            dark={dark}
-            text={dateTimestamp.toTimeWithMeridian()}
-        />
-        <Caption
-            color="light"
-            dark={dark}
-            text={dateTimestamp.toTimezone()}
-        />
-      </div>
+        <div align={align}>
+          <FlexItem className="time-spacing">
+            <Body
+                color="light"
+                tag="span"
+                text={dateTimestamp.toTimeWithMeridian()}
+            />
+          </FlexItem>
+          <FlexItem>
+            <Caption
+                color="light"
+                tag="span"
+                text={dateTimestamp.toTimezone()}
+            />
+          </FlexItem>
+        </div>
+      </Flex>
     </div>
   )
 }
 
-export default TimeStacked
+export default TimeStackedDefault
