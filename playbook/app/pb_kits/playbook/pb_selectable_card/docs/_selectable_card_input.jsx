@@ -7,14 +7,16 @@ import {
 
 class SelectableCardInput extends React.Component {
   state = {
-    selectedInput: true,
-    unselectedInput: false,
+    firstCheckbox: true,
+    secondCheckbox: false,
     radioSelected: "radio-1",
   }
 
   handleSelect = (event) => {
+    console.log(event.target.checked)
+    console.log(event.target.name)
     this.setState({
-      [event.target.id]: event.target.checked,
+      [event.target.name]: event.target.checked,
     })
   }
 
@@ -30,22 +32,22 @@ class SelectableCardInput extends React.Component {
       <div className="pb--doc-demo-row">
 
         <SelectableCard
-            checked={this.state.selectableInput}
-            inputId="selectedInput"
-            name="selectedInput"
+            checked={this.state.firstCheckbox}
+            inputId="firstCheckbox"
+            name="firstCheckbox"
             onChange={this.handleSelect}
-            value="selectedInput"
+            value="firstCheckbox"
             variant="displayInput"
         >
           <Body>{'This shows the checkbox'}</Body>
         </SelectableCard>
 
         <SelectableCard
-            checked={this.state.unselectedInput}
-            inputId="unselectedInput"
-            name="unselectedInput"
+            checked={this.state.secondCheckbox}
+            inputId="secondCheckbox"
+            name="secondCheckbox"
             onChange={this.handleSelect}
-            value="unselectedInput"
+            value="secondCheckbox"
             variant="displayInput"
         >
           <Body> Some Text</Body>
@@ -54,10 +56,11 @@ class SelectableCardInput extends React.Component {
       <div className="pb--doc-demo-row">
 
       <SelectableCard
+          checked={this.state.radioSelected === "first"}
           inputId="radio-1"
           multi={false}
           name="radio"
-          onChange={this.handleSelect}
+          onChange={this.handleRadioSelect}
           value="first"
           variant="displayInput"
       >
@@ -65,7 +68,7 @@ class SelectableCardInput extends React.Component {
       </SelectableCard>
 
       <SelectableCard
-          checked={false}
+          checked={this.state.radioSelected === "second"}
           inputId="radio-2"
           multi={false}
           name="radio"
@@ -73,7 +76,11 @@ class SelectableCardInput extends React.Component {
           value="second"
           variant="displayInput"
       >
-        <Body> Some Text</Body>
+        <Body>
+          This has a lot of text to show how it would look.<br/>
+          Just wanted to write a bunch and make it wrap.<br/>
+          and be really long and I don't know how to write something on the spot.
+        </Body>
       </SelectableCard>
     </div>
     </>

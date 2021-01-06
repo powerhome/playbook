@@ -59,6 +59,8 @@ const SelectableCard = ({
       'enabled': !disabled }),
   globalProps(props), className)
 
+  const seperatorClass = "separator " + (checked ? "selected" : "not-selected")
+
   const displayIcon = () => {
     if (icon === true) {
       return (
@@ -72,74 +74,50 @@ const SelectableCard = ({
     }
   }
 
-  // const displayInput = (checked) => {
-  //   if (true) {
-  //     return (
-
-  //     )
-  //   }
-  // }
-
-
   const inputType = multi === false ? 'radio' : 'checkbox'
 
   const inputIdPresent = inputId !== null ? inputId : name
 
-  const [isChecked, setIsChecked] = useState(checked)
-
   const handleChange = e => {
     console.log(e.target)
     console.log(e.target.checked)
+    e.persist()
     onChange(e)
-    setIsChecked(e.target.checked)
-  }
-
-  const handleClick = e => {
-    if (multi) {
-      // do nothing for checkboxes
-      return
-    }
-
-    const radios = document.querySelectorAll(`input[type='radio'][name='${name}']`).forEach(radio => {
-      if (radio !== e.target) {
-        console.log(radio)
-        radio.fireEvent("onchange");
-      }
-    })
   }
 
   const Input = multi ? Checkbox : Radio
 
   if (variant === "displayInput") {
     return (
-      <div  className={classes + globalProps({padding: "none"})}>
+      <div  className={classes}>
         <input
           {...props}
-          checked={isChecked}
+          checked={checked}
           disabled={disabled}
           id={inputIdPresent}
           name={name}
           onChange={handleChange}
-          onClick={handleClick}
           type={inputType}
           value={value}
       />
         <label
-            padding="none"
             className={globalProps(props) + globalProps({padding: "none"})}
             htmlFor={inputIdPresent}
         >
-        <Flex vertical={"stretch"}>
-          <Card.Body padding="sm" paddingRight="xs">
+        <Flex vertical="center">
+          <Flex padding="sm" paddingRight="xs" orientation="column" vertical="center">
             <Input>
               <input
                   type={inputType}
                   onChange={handleChange}
                   className={"displayInput"}
-                  checked={isChecked}/>
+                  checked={checked}
+                  name={name}
+                  value={value}
+              />
             </Input>
-          </Card.Body>
-          <div className="separator"/>
+          </Flex>
+          <div className={seperatorClass}/>
           <Card.Body padding="sm">
             {text || children}
           </Card.Body>
