@@ -17,7 +17,7 @@
         <% end %>
 
         <%= pb_rails("flex/flex_item", props: {}) do %>
-          <%= react_component("KitSearch", kits: search_list()) %>
+          <%= react_component("KitSearch", classname: "desktop-kit-search", id: "desktop-kit-search", kits: search_list()) %>
         <% end %>
       <% end %>
     <% end %>
@@ -54,6 +54,7 @@
       <% end %>
     <% end %>
   <% end %>
+  <%= react_component("KitSearch", classname: "mobile-kit-search", id: "mobile-kit-search", kits: search_list()) %>
 </div>
 
 <%= pb_rails("section_separator")%>

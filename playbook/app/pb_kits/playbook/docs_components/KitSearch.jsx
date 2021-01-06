@@ -10,20 +10,22 @@ type SearchProps = {
 }
 const KitSearch = (props: SearchProps) => {
   const {
-    classname = 'kit-search',
-    id = 'kit-search',
+    classname,
+    id,
     kits,
   } = props
 
   const handleChange = (selection) => {
-    window.location = selection.value
+    if (selection) {
+      window.location = selection.value
+    }
   }
 
-  if (id === 'kit-search') {
+  if (id === 'desktop-kit-search') {
     useEffect(() => {
       window.addEventListener('keydown', (e) => {
         if (e.ctrlKey && e.key === 'k') {
-          const kitSearch = document.querySelector('#kit-search #react-select-2-input')
+          const kitSearch = document.querySelector('#desktop-kit-search #react-select-2-input')
           kitSearch === document.activeElement ? kitSearch.blur() : kitSearch.focus()
         }
       })
@@ -37,7 +39,7 @@ const KitSearch = (props: SearchProps) => {
           id={id}
           onChange={handleChange}
           options={kits}
-          placeholder="Search"
+          placeholder="Search..."
       />
     </div>
   )
