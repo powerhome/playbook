@@ -127,6 +127,7 @@ body {
         box-shadow: $shadow_deepest;
         top: 100px;
         right: 0;
+        min-width: 200px;
         width: auto !important;
         z-index: 1000;
       }
