@@ -96,7 +96,6 @@
                 <%= pb_rails("body", props: {text: "#{info[:value]}"}) %>
                 <% end %>
             <% end %>
-          <%= pb_rails("section_separator") %>
       <% end %>
     <% end %>
 
@@ -252,7 +251,6 @@
   grid-template: auto auto / auto auto;
 }
 .gridtwo{
-  grid-template-rows: repeat(2,auto);
-  grid-template-columns: repeat(4,1fr);
+  grid-template: repeat(2,auto) / repeat(4,1fr);
 }
 </style>

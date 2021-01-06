@@ -8,15 +8,16 @@ import {
   Button,
   Caption,
   Card,
+  CircleIconButton,
   Currency,
   Flex,
   FlexItem,
   Gauge,
   Icon,
   IconStatValue,
+  Layout,
   ProgressSimple,
   SectionSeparator,
-  Table,
   Title,
 } from '../../../../pb_kits/playbook'
 
@@ -60,7 +61,7 @@ const totalRevenue = {
   ],
 }
 
-const salesReport =  {
+const salesReport = {
   title: 'Total Revenue',
   legendData: [
     { value: '1000', label: 'Target' },
@@ -95,61 +96,68 @@ const clientData = {
 const FulfillmentChart = ({ chartData, title }) => (
   <Card
       borderNone
+      margin="sm"
       padding="none"
       shadow="deeper"
   >
-    <Title
-        marginX="md"
-        paddingBottom="none"
-        paddingTop="lg"
-        paddingX="md"
-        size="4"
-        text={title}
-    />
-    <Table
-        container={false}
-        size="md"
+    <Flex
+        spacing="between"
+        vertical="center"
     >
-      <thead>
-        <tr>
-          <th />
-          <th />
-          <th />
-          <th />
-        </tr>
-      </thead>
-      <tbody>
-        { chartData.map((row, i) => (
-          <tr key={`fulfillment-chart-row-${i}`}>
-            <td style={{ textAlign: 'center' }}>
+      <Title
+          padding="sm"
+          size="4"
+          text={title}
+      />
+      <CircleIconButton
+          icon="ellipsis-h"
+          variant="link"
+      />
+    </Flex>
+    <SectionSeparator />
+
+    {chartData.map((row, i) => (
+      <Flex
+          key={i}
+          padding="sm"
+          spacing="between"
+          vertical="center"
+      >
+        <FlexItem fixedSize="100px">
+
+          <Caption
+              size="xs"
+              text={row.label}
+          />
+        </FlexItem>
+        <FlexItem grow>
+          <Flex
+              spacing="around"
+              vertical="center"
+          >
+            <ProgressSimple
+                percent={row.percent}
+                width="100px"
+            />
+            <FlexItem fixedSize="50px">
               <Caption
-                  size="xs"
-                  text={row.label}
-              />
-            </td>
-            <td style={{ textAlign: 'center' }}>
-              <ProgressSimple
-                  percent={row.percent}
-                  width="100px"
-              />
-            </td>
-            <td style={{ textAlign: 'center' }}>
-              <Caption
-                  marginX="md"
+                  marginX="xs"
                   size="xs"
                   text={`${row.percent}%`}
               />
-            </td>
-            <td style={{ textAlign: 'center' }}>
-              <Body
-                  text={`${row.value}`}
-              />
-            </td>
-          </tr>
-        )
-        ) }
-      </tbody>
-    </Table>
+            </FlexItem>
+          </Flex>
+        </FlexItem>
+        <FlexItem>
+          <Flex vertical="right">
+            <Body
+                text={`${row.value}`}
+            />
+          </Flex>
+        </FlexItem>
+      </Flex>
+      ))}
+
   </Card>
 )
 
@@ -161,17 +169,17 @@ const GridRowFill = ({ data }) => (
         wrap
     >
       {
-      data.map((line, i) => (
-        <FlexItem
-            fixedSize="215px"
-            key={`grid-row-item-${line.icon}-${i}`}
-            margin="md"
-        >
-          <IconStatValue {...line} />
-        </FlexItem>
-      )
-      )
-    }
+        data.map((line, i) => (
+          <FlexItem
+              fixedSize="215px"
+              key={`grid-row-item-${line.icon}-${i}`}
+              margin="md"
+          >
+            <IconStatValue {...line} />
+          </FlexItem>
+        )
+        )
+      }
     </Flex>
   </Card.Body>
 )
@@ -179,6 +187,7 @@ const GridRowFill = ({ data }) => (
 const IconGrid = ({ gridData }) => (
   <Card
       borderNone
+      margin="sm"
       padding="none"
       shadow="deeper"
   >
@@ -198,29 +207,29 @@ const Legend = ({ name, data }) => {
         wrap
     >
       {
-      data.map((point, i) => (
-        <FlexItem
-            key={`legend-${name}-${i}`}
-            marginX="sm"
-            marginY="sm"
-        >
-          <Currency
-              amount={point.value}
-              emphasized
-              label={point.label}
-              marginBottom="md"
-              size="md"
-              symbol="$"
-              variant="light"
-          />
-        </FlexItem>
-      )
-      )
-    }
+        data.map((point, i) => (
+          <FlexItem
+              key={`legend-${name}-${i}`}
+              marginX="sm"
+              marginY="sm"
+          >
+            <Currency
+                amount={point.value}
+                emphasized
+                label={point.label}
+                marginBottom="md"
+                size="md"
+                symbol="$"
+                variant="light"
+            />
+          </FlexItem>
+        )
+        )
+      }
     </Flex>
   )
 }
-const TitleBar = ({ title }) =>  (
+const TitleBar = ({ title }) => (
   <Flex
       className="flex-container"
       spacing="between"
@@ -257,23 +266,43 @@ const TitleBar = ({ title }) =>  (
 const GaugeLegend = ({ title, data, legendData }) => (
   <Card
       borderNone
-
+      margin="sm"
       padding="none"
       shadow="deeper"
   >
-    <Card.Body>
-      <TitleBar title="Total Revenue" />
-    </Card.Body>
-    <SectionSeparator />
-    <Card.Body margin_top="sm">
-      <Gauge
-          chartData={data}
-          fullCircle
-          id="full-circle"
+    <Flex
+        spacing="between"
+        vertical="center"
+    >
+      <Title
+          padding="sm"
+          size="4"
+          text={title}
       />
-      <Caption text="Total Sales made Today" />
+      <CircleIconButton
+          icon="ellipsis-h"
+          variant="link"
+      />
+    </Flex>
+
+    <SectionSeparator />
+    <Card.Body>
+      <Flex
+          horizontal="center"
+          vertical="center"
+          orientation="column"
+      >
+        <Gauge
+            chartData={data}
+            fullCircle
+            id="full-circle"
+        />
+        <Caption text="Total Sales made Today" />
+      </Flex>
     </Card.Body>
-    <SectionSeparator marginY="md" />
+
+    <SectionSeparator />
+
     <Card.Body padding="none">
       <Legend
           data={legendData}
@@ -286,15 +315,27 @@ const GaugeLegend = ({ title, data, legendData }) => (
 const BarGraphLegend = ({ title, data, legendData }) => (
   <Card
       borderNone
-      margin="none"
+      margin="sm"
       padding="none"
       shadow="deeper"
   >
-    <Card.Body>
-      <TitleBar title={title} />
-    </Card.Body>
+    <Flex
+        spacing="between"
+        vertical="center"
+    >
+      <Title
+          padding="sm"
+          size="4"
+          text={title}
+      />
+      <CircleIconButton
+          icon="ellipsis-h"
+          variant="link"
+      />
+    </Flex>
+
     <SectionSeparator />
-    <Card.Body margin_top="sm">
+    <Card.Body>
       <BarGraph
           chartData={data}
           height="75%"
@@ -303,13 +344,12 @@ const BarGraphLegend = ({ title, data, legendData }) => (
           yAxisCategories="0"
       />
     </Card.Body>
-    <SectionSeparator marginY="md" />
-    <Card.Body padding="none">
-      <Legend
-          data={legendData}
-          name={title}
-      />
-    </Card.Body>
+    <SectionSeparator />
+    <Legend
+        data={legendData}
+        name={title}
+    />
+
   </Card>
 )
 
@@ -360,27 +400,24 @@ const NumberGrid = ({ title, data }) => {
   return (
     <Card
         borderNone
+        margin="sm"
         shadow="deeper"
     >
-      <Flex
-          horizontal="center"
-          wrap
-      >
-        {
+      <Layout layout="collection">
+        <Layout.Body>
+          {
           data.map((block, i) => (
-            <FlexItem
-                fixedSize="250px"
-                key={`${keyName}-block-${i}`}
-                marginY="none"
-            >
-              <GridBlock
-                  data={block}
-              />
-            </FlexItem>
-)
+
+            <GridBlock
+                data={block}
+                key={i}
+            />
+
+          )
           )
         }
-      </Flex>
+        </Layout.Body>
+      </Layout>
     </Card>
   )
 }
@@ -395,29 +432,17 @@ const NumberGrid = ({ title, data }) => {
 const CardDashboard = () => {
   return (
     <div id="main-dashboard-content">
-      <Title
-          marginBottom="sm"
-          padding="xl"
-          size="1"
-          text="Dashboard Cards"
-      />
-      <div className="wrapper">
-        <div className="card">
-          <FulfillmentChart {...pipelineData} />
-        </div>
-        <div className="card">
-          <IconGrid {...ticketData} />
-        </div>
-        <div className="card">
-          <BarGraphLegend {...salesReport} />
-        </div>
-        <div className="card">
-          <NumberGrid {...clientData} />
-        </div>
-        <div className="card gaugeCard">
-          <GaugeLegend {...totalRevenue} />
-        </div>
-      </div>
+
+      <FulfillmentChart {...pipelineData} />
+
+      <IconGrid {...ticketData} />
+
+      <BarGraphLegend {...salesReport} />
+
+      <NumberGrid {...clientData} />
+
+      <GaugeLegend {...totalRevenue} />
+
     </div>
   )
 }
