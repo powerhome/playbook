@@ -8,7 +8,7 @@
           <div class="left_gradient"></div>
             <% object.filters.each do |filter| %>
               <% if filter[:name]== "" %>
-                  <div class="filter">
+                  <div>
                     <%= pb_rails("body", props: { size: 4, tag:"h4", text: "No Filter Selected"}) %>
                   </div>
               <% else %>
