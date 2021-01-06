@@ -1,3 +1,4 @@
+<%= action_name %>
 <div class="pb--kit-show <%=@kit%>-kit">
   <%= pb_rails("title", props: { text: pb_kit_title(@kit), tag: "h1", size: 1 }) %>
   <div class="markdown <%= cookies[:dark_mode] == "true" ? 'dark' : '' %>">
@@ -21,7 +22,7 @@
       <%= pb_rails("popover", props: { min_width: "275px", trigger_element_id: "kits-used", tooltip_id: "kits-used-tooltip", position: "bottom", padding: "none" }) do %>
         <%= pb_rails("nav", props: {}) do %>
           <% get_samples(@kit).each do |sample| %>
-            <%= pb_rails("nav/item", props: { icon_right: "angle-right", link: "/samples/#{sample}", text: sample.titleize}) %>
+            <%= pb_rails("nav/item", props: { icon_right: "angle-right", link: "/samples/#{sample}/#{@type}", text: sample.titleize}) %>
           <% end %>
         <% end %>
       <% end %>
@@ -68,7 +69,7 @@
     <%= pb_rails("layout", props: {layout: "collection"}) do %>
       <%= pb_rails("layout/body", props: { classname: "sample-card-grid-override" }) do %>
         <% get_samples(@kit).each do |sample| %>
-          <a href=<%="/samples/#{sample}"%>>
+          <a href=<%="/samples/#{sample}/#{@type}"%>>
             <%= pb_rails("card", props: { classname: "ui-sample-card", padding: "md" }) do %>
               <%= pb_rails("flex", props: { classname: "flex-container", spacing: "between", vertical: "center" }) do %>
                 <%= pb_rails("title", props: {
