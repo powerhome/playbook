@@ -11,6 +11,7 @@ examples:
   - card_border_none: No Border
   react:
   - card_light: Default
+  - card_container: Card Container
   - card_highlight: Highlight Cards
   - card_header: Header Cards
   - card_selected: Selected

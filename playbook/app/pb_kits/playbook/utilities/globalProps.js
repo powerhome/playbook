@@ -39,10 +39,16 @@ const darkProps = ({ dark }) => {
   return css
 }
 
+const containerProps = ({ container }) => {
+  let css = ''
+  css += container ? `container_${container} ` : ''
+  return css
+}
+
 // All Exported as a single function
 export const globalProps = (props, defaultProps = {}) => {
   const allProps = { ...props, ...defaultProps }
-  return spacingProps(allProps) + darkProps(allProps)
+  return spacingProps(allProps) + darkProps(allProps) + containerProps(allProps)
 }
 
 export const deprecatedProps = (kit, props = []) => {

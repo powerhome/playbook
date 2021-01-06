@@ -1,4 +1,5 @@
 export { default as CardLight } from './_card_light.jsx'
+export { default as CardContainer } from './_card_container.jsx'
 export { default as CardHighlight } from './_card_highlight.jsx'
 export { default as CardHeader } from './_card_header.jsx'
 export { default as CardSelected } from './_card_selected.jsx'
