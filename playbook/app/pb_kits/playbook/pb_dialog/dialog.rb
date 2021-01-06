@@ -7,33 +7,35 @@ module Playbook
 
       partial "pb_dialog/dialog"
 
-      prop :aria?: object
-      prop :cancelButton?: string
-      prop :children: array<React.ReactNode> | React.ReactNode | string
-      prop :className?: string
-      prop :closeable: boolean
-      prop :confirmButton?: string
-      prop :data?: object
-      prop :id?: string
-      prop :onCancel?: () => void
-      prop :onChange?: () => void
-      prop :onClose?: () => void
-      prop :onConfirm?: () => void
-      prop :opened: boolean
-      prop :size?: "sm" | "md" | "lg" | "content"
-      prop :text?: string
-      prop :title?: string
+      prop :cancel_button
+      prop :closeable, type: Playbook::Props::Boolean, default: true
+      prop :confirm_button
+      prop :oncancel
+      prop :onchange
+      prop :onclose
+      prop :onconfirm
+      prop :opened, type: Playbook::Props::Boolean, default: false
+      prop :size, type: Playbook::Props::Enum,
+                  values: %w[sm md lg content],
+                  default: "md"
+      prop :text
+      prop :title
 
       def dialog_options
         {
           id: id,
           className: classname,
-          focus: focus,
-          simple: simple,
-          sticky: sticky,
-          value: value,
-          template: template,
-          placeholder: placeholder
+          cancelButton: cancel_button,
+          closeable: closeable,
+          confirmButton: confirm_button,
+          onCancel: oncancel,
+          onChange: onchange,
+          onClose: onclose,
+          onConfirm: onconfirm,
+          opened: opened,
+          size: size,
+          text: text,
+          title: title
         }
       end
     end
