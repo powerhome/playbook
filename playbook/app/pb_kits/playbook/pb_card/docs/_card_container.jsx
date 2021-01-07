@@ -6,25 +6,25 @@ const CardLight = (props) => {
     <div>
       <Card
           {...props}
-          container="sm"
+          maxWidth="sm"
       >
         {'Container Small'}
       </Card>
       <Card
           {...props}
-          container="md"
+          maxWidth="md"
       >
         {'Container Medium'}
       </Card>
       <Card
           {...props}
-          container="lg"
+          maxWidth="lg"
       >
         {'Container Large'}
       </Card>
       <Card
           {...props}
-          container="xl"
+          maxWidth="xl"
       >
         {'Container Extra Large'}
       </Card>
