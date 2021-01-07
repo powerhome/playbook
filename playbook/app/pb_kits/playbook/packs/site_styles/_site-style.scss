@@ -10,6 +10,9 @@ $nav_breakpoint: breakpoint("lg");
 body {
   overflow-x: hidden;
   position: relative;
+  &.kits {
+    overflow-y: hidden;
+  }
 }
 
 .pb--page {
@@ -27,7 +30,7 @@ body {
     &.dark{
     background: tint(#0a0527, 10);
     }
-    .kit-search {
+    .desktop-kit-search {
       width: 33vw;
       max-width: 300px;
       [class*=_label] {
@@ -36,6 +39,9 @@ body {
       .text_input_wrapper {
         margin-bottom: 0 !important;
       }
+    }
+    .mobile-kit-search {
+      display: none;
     }
     .pb-version-tag {
       text-align: right;
@@ -57,8 +63,11 @@ body {
       }
     }
     @include break_at(breakpoint("sm")) {
-      .kit-search, .separator-explicit-height {
+      .desktop-kit-search, .separator-explicit-height {
         display: none;
+      }
+      .mobile-kit-search {
+        display: block;
       }
     }
     @include break_at(375px) {
@@ -118,6 +127,7 @@ body {
         box-shadow: $shadow_deepest;
         top: 100px;
         right: 0;
+        min-width: 200px;
         width: auto !important;
         z-index: 1000;
       }
@@ -179,7 +189,7 @@ body {
       }
     }
     &[class*=dark]{
-      border-color:$border_dark;
+      border-color: $border_dark;
     }
     .mobile-sidebar-pages {
       display: none;
@@ -192,8 +202,8 @@ body {
   }
 }
 #toggle-modes{
-    display: flex;
-    margin-right: 80px;
+  display: flex;
+  margin-right: 80px;
 }
 // Nav Tabs switch between Rails and React
 .pb--kit-type-nav {
