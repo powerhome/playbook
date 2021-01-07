@@ -1,0 +1,18 @@
+<%= pb_rails("selectable_card", props: {
+  input_id: "first_checkbox",
+  name: "first_checkbox",
+  value: "first_checkbox",
+  variant: "display_input"
+}) do %>
+  Ruby
+<% end %>
+
+<%= pb_rails("selectable_card", props: {
+  input_id: "first_radio",
+  multi: false,
+  name: "first_radio",
+  value: "first_radio",
+  variant: "display_input"
+}) do %>
+  5
+<% end %>
