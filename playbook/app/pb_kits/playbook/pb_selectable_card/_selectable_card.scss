@@ -70,8 +70,6 @@ $pb_selectable_card_border: 2px;
         background: $royal;
       }
     }
-
-
   }
 
   &.dark {
@@ -102,10 +100,5 @@ $pb_selectable_card_border: 2px;
     transition-timing-function: $easeIn;
     width: 1px;
     background: $border_light;
-
-    &.selected {
-      width: 2px;
-      background: $royal;
-    }
   }
 }

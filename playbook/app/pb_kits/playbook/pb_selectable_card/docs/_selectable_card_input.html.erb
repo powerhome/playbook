@@ -8,6 +8,35 @@
 <% end %>
 
 <%= pb_rails("selectable_card", props: {
+  input_id: "second_checkbox",
+  name: "second_checkbox",
+  value: "second_checkbox",
+  variant: "display_input"
+}) do %>
+  JavaScript
+<% end %>
+
+<%= pb_rails("selectable_card", props: {
+  input_id: "third_checkbox",
+  name: "third_checkbox",
+  value: "third_checkbox",
+  variant: "display_input"
+}) do %>
+  TypeScript
+<% end %>
+
+<%= pb_rails("selectable_card", props: {
+  input_id: "fourth_checkbox",
+  name: "fourth_checkbox",
+  value: "fourth_checkbox",
+  variant: "display_input"
+}) do %>
+  Swift
+<% end %>
+
+<br />
+
+<%= pb_rails("selectable_card", props: {
   input_id: "first_radio",
   multi: false,
   name: "first_radio",

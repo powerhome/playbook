@@ -19,7 +19,7 @@
           vertical: "center",
         }) do %>
           <%= pb_rails(object.input, props: { text: "" }) do %>
-            <input checked="<%=object.checked%>" type="<%= object.input%>" disabled="<%= object.disabled %>">
+            <input id="checkbox-styled" type="<%= object.input %>">
           <% end %>
         <% end %>
         <div class="separator"></div>
@@ -45,5 +45,19 @@
       </div>
     <% end %>
   </label>
-
 <% end %>
+
+<script>
+  let outerCheckbox = document.querySelector("input#<%= object.input_id %>")
+  let innerCheckbox = document.querySelector("#checkbox-styled")
+
+  outerCheckbox.addEventListener("change", function(){
+    outerCheckbox = document.querySelector("input#<%= object.input_id %>")
+    innerCheckbox.checked = outerCheckbox.checked
+  })
+
+  innerCheckbox.addEventListener("change", function(){
+    innerCheckbox = document.querySelector("#checkbox-styled")
+    outerCheckbox.checked = innerCheckbox.checked
+  })
+</script>
