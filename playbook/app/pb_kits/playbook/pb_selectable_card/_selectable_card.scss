@@ -64,7 +64,14 @@ $pb_selectable_card_border: 2px;
       .pb_selectable_card_circle {
         opacity: $opacity_10;
       }
+
+      .separator {
+        width: 2px;
+        background: $royal;
+      }
     }
+
+
   }
 
   &.dark {
@@ -93,15 +100,12 @@ $pb_selectable_card_border: 2px;
     transition-property: all;
     transition-duration: $transition_short;
     transition-timing-function: $easeIn;
+    width: 1px;
+    background: $border_light;
 
     &.selected {
       width: 2px;
       background: $royal;
-    }
-
-    &.not-selected {
-      width: 1px;
-      background: $border_light;
     }
   }
 }

@@ -59,8 +59,6 @@ const SelectableCard = ({
       'enabled': !disabled }),
   globalProps(props), className)
 
-  const separatorClass = 'separator ' + (checked ? 'selected' : 'not-selected')
-
   const displayIcon = () => {
     if (icon === true) {
       return (
@@ -124,7 +122,7 @@ const SelectableCard = ({
                   />
                 </Input>
               </Flex>
-              <div className={separatorClass} />
+              <div className="separator" />
               <Card.Body padding="sm">
                 {text || children}
               </Card.Body>

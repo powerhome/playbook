@@ -22,7 +22,7 @@
             <input checked="<%=object.checked%>" type="<%= object.input%>" disabled="<%= object.disabled %>">
           <% end %>
         <% end %>
-        <div class="separator not-selected"></div>
+        <div class="separator"></div>
         <%= pb_rails("card/card_body", props: { padding: "sm" }) do %>
           <% if object.children.nil? %>
             <%= pb_rails("body", props: { text: object.text }) %>
