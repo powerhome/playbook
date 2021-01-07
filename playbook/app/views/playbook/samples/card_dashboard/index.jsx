@@ -229,39 +229,39 @@ const Legend = ({ name, data }) => {
     </Flex>
   )
 }
-const TitleBar = ({ title }) => (
-  <Flex
-      className="flex-container"
-      spacing="between"
-      wrap
-  >
-    <FlexItem>
-      <Title
-          marginLeft="none"
-          marginTop="sm"
-          padding="sm"
-          size="4"
-          text={title}
-      />
-    </FlexItem>
-    <FlexItem
-        className="hideButton"
-        paddingRight="none"
-    >
-      <Button
-          marginRight="none"
-          paddingTop="md"
-          variant="link"
-      >
-        <Icon
-            fixedWidth
-            icon="ellipsis-h"
-            size="2x"
-        />
-      </Button>
-    </FlexItem>
-  </Flex>
-)
+// const TitleBar = ({ title }) => (
+//   <Flex
+//       className="flex-container"
+//       spacing="between"
+//       wrap
+//   >
+//     <FlexItem>
+//       <Title
+//           marginLeft="none"
+//           marginTop="sm"
+//           padding="sm"
+//           size="4"
+//           text={title}
+//       />
+//     </FlexItem>
+//     <FlexItem
+//         className="hideButton"
+//         paddingRight="none"
+//     >
+//       <Button
+//           marginRight="none"
+//           paddingTop="md"
+//           variant="link"
+//       >
+//         <Icon
+//             fixedWidth
+//             icon="ellipsis-h"
+//             size="2x"
+//         />
+//       </Button>
+//     </FlexItem>
+//   </Flex>
+// )
 
 const GaugeLegend = ({ title, data, legendData }) => (
   <Card
@@ -289,8 +289,8 @@ const GaugeLegend = ({ title, data, legendData }) => (
     <Card.Body>
       <Flex
           horizontal="center"
-          vertical="center"
           orientation="column"
+          vertical="center"
       >
         <Gauge
             chartData={data}
@@ -396,7 +396,7 @@ const GridBlock = ({ data }) => {
 }
 
 const NumberGrid = ({ title, data }) => {
-  const keyName = title.toLowerCase().replace(/\s/g, '-')
+  // const keyName = title.toLowerCase().replace(/\s/g, '-')
   return (
     <Card
         borderNone
