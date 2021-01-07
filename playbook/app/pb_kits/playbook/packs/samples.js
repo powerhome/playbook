@@ -1,5 +1,9 @@
 import WebpackerReact from 'webpacker-react'
 
+// Search Bar Import
+import KitSearch from '../docs_components/KitSearch.jsx'
+
+// Sample Imports - Please rearrange/alphabaetize after Sample Generator appends new imports
 import AnalyticsDashboard from '../../../views/playbook/samples/analytics_dashboard/index.jsx'
 import CrmClientList from '../../../views/playbook/samples/crm_client_list/index.jsx'
 import ConferenceStatistics from '../../../views/playbook/samples/conference_statistics/index.jsx'
@@ -10,10 +14,11 @@ import CardDashboard from '../../../views/playbook/samples/card_dashboard/index.
 
 WebpackerReact.setup({
   AnalyticsDashboard,
-  CrmClientList,
+  CardDashboard,
   ConferenceStatistics,
+  CrmClientList,
+  CrowdsourcedPosts,
+  KitSearch,
   NewsMagazine,
   TrendingRepositories,
-  CrowdsourcedPosts,
-  CardDashboard,
 })

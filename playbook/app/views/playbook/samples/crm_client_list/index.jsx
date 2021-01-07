@@ -5,7 +5,7 @@ const CrmClientList = () => (
   <div>
     <Flex
         className="bg_light"
-        marginTop="md"
+        paddingTop="md"
         paddingX="md"
         spacing="between"
     >
