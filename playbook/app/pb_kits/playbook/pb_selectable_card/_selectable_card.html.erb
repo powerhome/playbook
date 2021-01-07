@@ -9,7 +9,7 @@
     <%= radio_button_tag(object.name, object.value, object.checked, object.additional_input_options) %>
   <% end %>
 
-  <label class=<%= object.label_class %> for="<%= object.input_id_present %>">
+  <label class="<%= object.label_class %>" for="<%= object.input_id_present %>">
     <% if object.variant == "display_input" %>
       <%= pb_rails("flex", props: { vertical: "center" }) do %>
         <%= pb_rails("flex", props: {
