@@ -1,20 +1,20 @@
 import React from 'react'
 import {
   Body,
-  Image,
   SelectableCard,
+  Title,
 } from '../../'
 
 class SelectableCardInput extends React.Component {
   state = {
     firstCheckbox: true,
-    secondCheckbox: false,
-    radioSelected: "radio-1",
+    secondCheckbox: true,
+    thirdCheckbox: false,
+    forthCheckbox: false,
+    radioSelected: 'first',
   }
 
   handleSelect = (event) => {
-    console.log(event.target.checked)
-    console.log(event.target.name)
     this.setState({
       [event.target.name]: event.target.checked,
     })
@@ -29,7 +29,12 @@ class SelectableCardInput extends React.Component {
   render() {
     return (
       <>
-      <div className="pb--doc-demo-row">
+        <Title
+            size={3}
+            text="What programming languages do you know?"
+        />
+
+        <br />
 
         <SelectableCard
             checked={this.state.firstCheckbox}
@@ -39,7 +44,7 @@ class SelectableCardInput extends React.Component {
             value="firstCheckbox"
             variant="displayInput"
         >
-          <Body>{'This shows the checkbox'}</Body>
+          <Body>{'Ruby'}</Body>
         </SelectableCard>
 
         <SelectableCard
@@ -50,40 +55,102 @@ class SelectableCardInput extends React.Component {
             value="secondCheckbox"
             variant="displayInput"
         >
-          <Body> Some Text</Body>
+          <Body>{'JavaScript'}</Body>
         </SelectableCard>
-      </div>
-      <div className="pb--doc-demo-row">
 
-      <SelectableCard
-          checked={this.state.radioSelected === "first"}
-          inputId="radio-1"
-          multi={false}
-          name="radio"
-          onChange={this.handleRadioSelect}
-          value="first"
-          variant="displayInput"
-      >
-        <Body>{'This shows the radio button'}</Body>
-      </SelectableCard>
+        <SelectableCard
+            checked={this.state.thirdCheckbox}
+            inputId="thirdCheckbox"
+            name="thirdCheckbox"
+            onChange={this.handleSelect}
+            value="thirdCheckbox"
+            variant="displayInput"
+        >
+          <Body>{'TypeScript'}</Body>
+        </SelectableCard>
 
-      <SelectableCard
-          checked={this.state.radioSelected === "second"}
-          inputId="radio-2"
-          multi={false}
-          name="radio"
-          onChange={this.handleRadioSelect}
-          value="second"
-          variant="displayInput"
-      >
-        <Body>
-          This has a lot of text to show how it would look.<br/>
-          Just wanted to write a bunch and make it wrap.<br/>
-          and be really long and I don't know how to write something on the spot.
-        </Body>
-      </SelectableCard>
-    </div>
-    </>
+        <SelectableCard
+            checked={this.state.fourthCheckbox}
+            inputId="fourthCheckbox"
+            name="fourthCheckbox"
+            onChange={this.handleSelect}
+            value="fourthCheckbox"
+            variant="displayInput"
+        >
+          <Body>{'Swift'}</Body>
+        </SelectableCard>
+
+        <br />
+
+        <Title
+            size={3}
+            text="How likely are you to recommend Playbook to a friend?"
+        />
+
+        <br />
+
+        <SelectableCard
+            checked={this.state.radioSelected === 'first'}
+            inputId="radio-1"
+            multi={false}
+            name="radio"
+            onChange={this.handleRadioSelect}
+            value="first"
+            variant="displayInput"
+        >
+          <Body>{'5'}</Body>
+        </SelectableCard>
+
+        <SelectableCard
+            checked={this.state.radioSelected === 'second'}
+            inputId="radio-2"
+            multi={false}
+            name="radio"
+            onChange={this.handleRadioSelect}
+            value="second"
+            variant="displayInput"
+        >
+          <Body>
+            {'4'}
+          </Body>
+        </SelectableCard>
+
+        <SelectableCard
+            checked={this.state.radioSelected === 'third'}
+            inputId="radio-3"
+            multi={false}
+            name="radio"
+            onChange={this.handleRadioSelect}
+            value="third"
+            variant="displayInput"
+        >
+          <Body>{'3'}</Body>
+        </SelectableCard>
+
+        <SelectableCard
+            checked={this.state.radioSelected === 'fourth'}
+            inputId="radio-4"
+            multi={false}
+            name="radio"
+            onChange={this.handleRadioSelect}
+            value="fourth"
+            variant="displayInput"
+        >
+          <Body>{'2'}</Body>
+        </SelectableCard>
+
+        <SelectableCard
+            checked={this.state.radioSelected === 'fifth'}
+            inputId="radio-5"
+            multi={false}
+            name="radio"
+            onChange={this.handleRadioSelect}
+            value="fifth"
+            variant="displayInput"
+        >
+          <Body>{'1'}</Body>
+        </SelectableCard>
+      </>
     )
   }
 }

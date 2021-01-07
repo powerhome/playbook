@@ -1,8 +1,8 @@
 /* @flow */
 
-import React, { useState } from 'react'
+import React from 'react'
 import classnames from 'classnames'
-import { Card, Flex, Icon, Checkbox, Radio, SectionSeparator } from '../'
+import { Card, Checkbox, Flex, Icon, Radio } from '../'
 
 import type { InputCallback } from '../types'
 
@@ -47,7 +47,7 @@ const SelectableCard = ({
   onChange = noop,
   text,
   value,
-  variant = "default",
+  variant = 'default',
   ...props
 }: SelectableCardProps) => {
   const ariaProps = buildAriaProps(aria)
@@ -59,7 +59,7 @@ const SelectableCard = ({
       'enabled': !disabled }),
   globalProps(props), className)
 
-  const seperatorClass = "separator " + (checked ? "selected" : "not-selected")
+  const seperatorClass = 'separator ' + (checked ? 'selected' : 'not-selected')
 
   const displayIcon = () => {
     if (icon === true) {
@@ -80,49 +80,10 @@ const SelectableCard = ({
     inputRef.current.click()
   }
 
-  const inputType = multi === false ? 'radio' : 'checkbox'
+  const inputType = multi ? 'checkbox' : 'radio'
   const inputIdPresent = inputId !== null ? inputId : name
   const Input = multi ? Checkbox : Radio
-
-  if (variant === "displayInput") {
-    return (
-      <div  className={classes}>
-        <input
-            {...props}
-            checked={checked}
-            disabled={disabled}
-            id={inputIdPresent}
-            name={name}
-            onChange={onChange}
-            type={inputType}
-            ref={inputRef}
-            value={value}
-        />
-        <label
-            className={globalProps(props) + globalProps({padding: "none"})}
-            htmlFor={inputIdPresent}
-        >
-        <Flex vertical="center">
-          <Flex padding="sm" paddingRight="xs" orientation="column" vertical="center">
-            <Input>
-              <input
-                  type={inputType}
-                  checked={checked}
-                  disabled={disabled}
-                  onClick={handleClick}
-              />
-            </Input>
-          </Flex>
-          <div className={seperatorClass}/>
-          <Card.Body padding="sm">
-            {text || children}
-          </Card.Body>
-        </Flex>
-      {displayIcon()}
-      </label>
-      </div>
-    )
-  }
+  const labelProps = variant === 'displayInput' ? Object.assign(props, { padding: 'none' }) : props
 
   return (
     <div
@@ -137,15 +98,43 @@ const SelectableCard = ({
           id={inputIdPresent}
           name={name}
           onChange={onChange}
+          ref={inputRef}
           type={inputType}
           value={value}
       />
       <label
-          className={globalProps(props)}
+          className={globalProps(labelProps)}
           htmlFor={inputIdPresent}
       >
-          {text || children}
-          {displayIcon()}
+        <Choose>
+          <When condition={variant === 'displayInput'}>
+            <Flex vertical="center">
+              <Flex
+                  orientation="column"
+                  padding="sm"
+                  paddingRight="xs"
+                  vertical="center"
+              >
+                <Input>
+                  <input
+                      checked={checked}
+                      disabled={disabled}
+                      onClick={handleClick}
+                      type={inputType}
+                  />
+                </Input>
+              </Flex>
+              <div className={seperatorClass} />
+              <Card.Body padding="sm">
+                {text || children}
+              </Card.Body>
+            </Flex>
+          </When>
+          <Otherwise>
+            {text || children}
+          </Otherwise>
+        </Choose>
+        {displayIcon()}
       </label>
     </div>
   )
