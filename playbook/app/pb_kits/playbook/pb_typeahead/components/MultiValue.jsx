@@ -34,12 +34,16 @@ const MultiValue = (props: Props) => {
         <FormPill
             avatarUrl={imageUrl}
             marginRight="xs"
+            marginTop="xs"
+            marginBottom="xs"
             name={label}
             onClick={handleOnClick}
         />
         <Else />
         <FormPill
             marginRight="xs"
+            marginTop="xs"
+            marginBottom="xs"
             onClick={handleOnClick}
             text={label}
         />
