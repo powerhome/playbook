@@ -4,23 +4,23 @@ import { Button } from '../../'
 const ButtonLink = (props) => (
   <div>
     <Button
-        {...props}
         link="https://google.com"
         text="A Tag Button"
+        {...props}
     />
     {' '}
     <Button
-        {...props}
         link="https://google.com"
         newWindow
         text="Open in New Window"
+        {...props}
     />
     {' '}
     <Button
-        {...props}
         disabled
         link="https://google.com"
         text="A Tag Button Disabled"
+        {...props}
     />
   </div>
 )

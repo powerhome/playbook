@@ -3,7 +3,10 @@ import { Table } from '../../'
 
 const TableMultiline = () => {
   return (
-    <Table size="sm">
+    <Table
+        size="sm"
+        {...props}
+    >
       <thead>
         <tr>
           <th>{'Column 1'}</th>

@@ -4,10 +4,10 @@ import { Button } from '../../'
 const ButtonDefault = (props) => (
   <div>
     <Button
-        {...props}
         marginRight="xl"
         onClick={() => alert('button clicked!')}
         text="Button Primary"
+        {...props}
     />
     {' '}
     <Button

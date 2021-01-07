@@ -1,12 +1,13 @@
 import React from 'react'
 import { LabelValue } from '../../'
 
-const LabelValueDefault = () => {
+const LabelValueDefault = (props) => {
   return (
     <div>
       <LabelValue
           label="Role"
           value="Administrator, Moderator"
+          {...props}
       />
 
       <br />
@@ -14,6 +15,7 @@ const LabelValueDefault = () => {
       <LabelValue
           label="Email"
           value="anna.black@powerhrg.com"
+          {...props}
       />
 
       <br />
@@ -24,6 +26,7 @@ const LabelValueDefault = () => {
             elementum sit amet tincidunt nec, mattis nec urna. Cras viverra
             lorem odio, id pretium dui interdum ut. Nullam dignissim nisl vitae
             orci vehicula condimentum"
+          {...props}
       />
     </div>
   )

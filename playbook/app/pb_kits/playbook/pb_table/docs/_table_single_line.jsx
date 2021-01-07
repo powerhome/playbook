@@ -1,11 +1,12 @@
 import React from 'react'
 import { Table } from '../../'
 
-const TableSingleLine = () => {
+const TableSingleLine = (props) => {
   return (
     <Table
         singleLine
         size="sm"
+        {...props}
     >
       <thead>
         <tr>

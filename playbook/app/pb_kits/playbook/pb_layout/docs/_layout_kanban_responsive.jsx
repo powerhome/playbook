@@ -1,12 +1,13 @@
 import React from 'react'
 import { Caption, Card, Layout } from '../../'
 
-const LayoutKanbanResponsive = () => {
+const LayoutKanbanResponsive = (props) => {
   return (
     <div>
       <Layout
           layout="kanban"
           responsive
+          {...props}
       >
         <Layout.Body>
           <Caption>{'Queue'}</Caption>

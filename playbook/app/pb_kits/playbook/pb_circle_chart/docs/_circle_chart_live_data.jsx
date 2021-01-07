@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Button, CircleChart } from '../../'
 
-const CircleChartLiveData = () => {
+const CircleChartLiveData = (props) => {
   const [data, setData] = useState([
     {
       name: 'Waiting for Calls',
@@ -41,10 +41,12 @@ const CircleChartLiveData = () => {
       <Button
           onClick={updateValue}
           text="Update Value"
+          {...props}
       />
       <CircleChart
           chartData={data}
           id="circle-chart-live-data"
+          {...props}
       />
     </div>
   )
