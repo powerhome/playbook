@@ -1,7 +1,7 @@
 import React from 'react'
 import DateStacked from '../_date_stacked.jsx'
 
-const DateStackedDefault = () => {
+const DateStackedDefault = (props) => {
   return (
     <div>
 
@@ -9,6 +9,7 @@ const DateStackedDefault = () => {
           align="left"
           date={new Date()}
           size="sm"
+          {...props}
       />
 
       <br />
@@ -16,6 +17,7 @@ const DateStackedDefault = () => {
       <DateStacked
           date={new Date()}
           size="md"
+          {...props}
       />
 
     </div>

@@ -7,7 +7,6 @@ examples:
   - date_stacked_sizes: Sizes
   - date_stacked_align: Alignment
   - date_stacked_bold: Bold
-  - date_stacked_dark: Dark
 
 
 
@@ -18,7 +17,6 @@ examples:
   - date_stacked_sizes: Sizes
   - date_stacked_align: Alignment
   - date_stacked_bold: Bold
-  - date_stacked_dark: Dark
 
 
 

@@ -1,13 +1,14 @@
 import React from 'react'
 import DateStacked from '../_date_stacked.jsx'
 
-const DateStackedBold = () => {
+const DateStackedBold = (props) => {
   return (
     <div>
       <DateStacked
           align="left"
           bold
           date={new Date()}
+          {...props}
       />
 
       <br />
@@ -16,6 +17,7 @@ const DateStackedBold = () => {
           align="center"
           bold
           date={new Date('20 Mar 2018')}
+          {...props}
       />
 
       <br />
@@ -24,6 +26,7 @@ const DateStackedBold = () => {
           align="right"
           bold
           date={new Date()}
+          {...props}
       />
 
       <br />
