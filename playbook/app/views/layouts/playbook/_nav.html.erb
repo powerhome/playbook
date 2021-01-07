@@ -30,7 +30,7 @@
             <%= pb_rails("nav", props: { margin_right: "sm", orientation: "horizontal", variant: "subtle"}) do %>
               <%= pb_rails("nav/item", props: { active: current_page?('/visual_guidelines'), text: "Design", link: "/visual_guidelines" }) %>
               <%= pb_rails("nav/item", props: { active: action_name.include?('kit'), text: "Components", link: "/kits" }) %>
-              <%= pb_rails("nav/item", props: { active: current_page?('/samples'), text: "Samples", link: "/samples" }) %>
+              <%= pb_rails("nav/item", props: { active: action_name.include?('sample'), text: "Samples", link: "/samples" }) %>
             <% end %>
           </div>
         <% end %>
