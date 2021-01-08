@@ -24,7 +24,11 @@ module Playbook
       prop :value
 
       def classname
-        generate_classname("pb_selectable_card_kit", checked_class, enable_disabled_class)
+        generate_classname_without_spacing("pb_selectable_card_kit", checked_class, enable_disabled_class)
+      end
+
+      def spacing_classname
+        generate_classname
       end
 
       def input_id_present

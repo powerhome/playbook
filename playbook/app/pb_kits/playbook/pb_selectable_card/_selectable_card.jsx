@@ -55,7 +55,7 @@ const SelectableCard = ({
     { 'checked': checked,
       'disabled': disabled,
       'enabled': !disabled }),
-  globalProps(props), className)
+  /*globalProps(props),*/ className)
 
   const displayIcon = () => {
     if (icon === true) {

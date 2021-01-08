@@ -9,7 +9,7 @@
     <%= radio_button_tag(object.name, object.value, object.checked, object.additional_input_options) %>
   <% end %>
 
-  <label for="<%= object.input_id_present %>">
+  <label for="<%= object.input_id_present %>" class="<%= object.spacing_classname %>">
     <% if object.children.nil? %>
       <%= pb_rails("body", props: { text: object.text }) %>
     <% else %>
