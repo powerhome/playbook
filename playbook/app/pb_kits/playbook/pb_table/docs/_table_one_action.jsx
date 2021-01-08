@@ -2,9 +2,12 @@ import React from 'react'
 import { Table } from '../..'
 import { Button } from '../../'
 
-const TableOneAction = () => {
+const TableOneAction = (props) => {
   return (
-    <Table size="sm">
+    <Table
+        size="sm"
+        {...props}
+    >
       <thead>
         <tr>
           <th>{'Column 1'}</th>
@@ -26,6 +29,7 @@ const TableOneAction = () => {
                 onClick={() => alert('button clicked!')}
                 text="Action"
                 variant="secondary"
+                {...props}
             />
             {' '}
           </td>
@@ -41,6 +45,7 @@ const TableOneAction = () => {
                 onClick={() => alert('button clicked!')}
                 text="Action"
                 variant="secondary"
+                {...props}
             />
             {' '}
           </td>
@@ -56,6 +61,7 @@ const TableOneAction = () => {
                 onClick={() => alert('button clicked!')}
                 text="Action"
                 variant="secondary"
+                {...props}
             />
             {' '}
           </td>

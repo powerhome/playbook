@@ -166,11 +166,11 @@ const ConferenceStatistics = () => (
         />
         <Flex
             className="bg_light"
+            spacing="between"
             wrap
         >
           <FlexItem
-              fixedSize="60%"
-              paddingRight="lg"
+              fixedSize="50%"
           >
             <Card>
 

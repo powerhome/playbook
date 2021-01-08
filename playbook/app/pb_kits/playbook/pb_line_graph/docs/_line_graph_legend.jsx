@@ -6,7 +6,7 @@ const data = [{
   data: [43934, 52503, 57177, 69658, 97031, 119931, 137133, 154175],
 }]
 
-const LineGraphLegend = () => (
+const LineGraphLegend = (props) => (
   <div>
     <LineGraph
         axisTitle="Number of Employees"
@@ -16,6 +16,7 @@ const LineGraphLegend = () => (
         title="Line Graph with Legend"
         xAxisCategories={['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug']}
         yAxisMin={0}
+        {...props}
     />
   </div>
 )

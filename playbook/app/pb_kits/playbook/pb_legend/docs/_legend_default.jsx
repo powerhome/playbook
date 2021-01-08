@@ -3,7 +3,7 @@ import { Legend } from '../../'
 
 const products = ['Windows', 'Doors', 'Roofing', 'Siding', 'Solar Gutters', 'Insulation', 'Other']
 
-const LegendDefault = () => (
+const LegendDefault = (props) => (
   <div>
     {
       products.map((product, i) => (
@@ -11,6 +11,7 @@ const LegendDefault = () => (
             color={`data_${i + 1}`}
             key={`legend_${i + 1}`}
             text={product}
+            {...props}
         />
       ))
     }

@@ -1,9 +1,12 @@
 import React from 'react'
 import { DateTimeStacked } from '../../'
 
-const DateTimeStackedDefault = () => (
+const DateTimeStackedDefault = (props) => (
   <div>
-    <DateTimeStacked date={new Date()} />
+    <DateTimeStacked
+        date={new Date()}
+        {...props}
+    />
   </div>
 )
 

@@ -1,11 +1,12 @@
 import React from 'react'
 import { Table } from '../../'
 
-const TableContainer = () => {
+const TableContainer = (props) => {
   return (
     <Table
         container={false}
         size="md"
+        {...props}
     >
       <thead>
         <tr>

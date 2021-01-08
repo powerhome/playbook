@@ -1,9 +1,12 @@
 import React from 'react'
 import { Table } from '../../'
 
-const TableMd = () => {
+const TableMd = (props) => {
   return (
-    <Table size="md">
+    <Table
+        size="md"
+        {...props}
+    >
       <thead>
         <tr>
           <th>{'Column 1'}</th>

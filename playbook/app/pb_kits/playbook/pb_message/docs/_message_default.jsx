@@ -1,7 +1,7 @@
 import React from 'react'
 import { Message } from '../../'
 
-const MessageDefault = () => {
+const MessageDefault = (props) => {
   return (
     <div>
       <Message
@@ -11,6 +11,7 @@ const MessageDefault = () => {
           label="Message"
           message="How can we assist you today?"
           timestamp="20 seconds ago"
+          {...props}
       />
 
       <br />
@@ -22,6 +23,7 @@ const MessageDefault = () => {
           label="Support"
           message="We will escalate this issue to a Senior Support agent."
           timestamp="9 minutes ago"
+          {...props}
       />
 
       <br />
@@ -32,6 +34,7 @@ const MessageDefault = () => {
           avatarUrl="https://randomuser.me/api/portraits/women/39.jpg"
           message="To process your order, I will need your full name."
           timestamp="4 hours ago"
+          {...props}
       />
 
       <br />
@@ -43,6 +46,7 @@ const MessageDefault = () => {
           label="Application"
           message="Application for Kate Smith is waiting for your approval"
           timestamp="2 days ago"
+          {...props}
       />
 
       <br />
@@ -53,6 +57,7 @@ const MessageDefault = () => {
           label="Complaint"
           message="We are so sorry you had a bad experience!"
           timestamp="2 days ago"
+          {...props}
       />
 
       <br />
@@ -62,6 +67,7 @@ const MessageDefault = () => {
           label="Support"
           message="Please hold for one moment, I will check with my manager."
           timestamp="2 days ago"
+          {...props}
       />
 
     </div>

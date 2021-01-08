@@ -1,9 +1,12 @@
 import React from 'react'
 import { RichTextEditor } from '../../'
 
-const RichTextEditorSimple = () => (
+const RichTextEditorSimple = (props) => (
   <div>
-    <RichTextEditor simple />
+    <RichTextEditor
+        simple
+        {...props}
+    />
   </div>
 )
 

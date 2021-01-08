@@ -1,7 +1,7 @@
 import React from 'react'
 import { Select } from '../../'
 
-const SelectValueTextSame = () => {
+const SelectValueTextSame = (props) => {
   const options = [
     { value: 'Football' },
     { value: 'Baseball' },
@@ -15,6 +15,7 @@ const SelectValueTextSame = () => {
           label="Favorite Sport"
           name="sports"
           options={options}
+          {...props}
       />
     </div>
   )
