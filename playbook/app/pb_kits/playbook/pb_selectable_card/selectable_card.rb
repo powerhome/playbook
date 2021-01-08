@@ -48,6 +48,14 @@ module Playbook
         variant == "display_input" ? "p_none" : ""
       end
 
+      def is_checked
+        checked ? "checked" : ""
+      end
+
+      def is_disabled
+        disabled ? "disabled" : ""
+      end
+
     private
 
       def checked_class

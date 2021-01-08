@@ -19,7 +19,7 @@
           vertical: "center",
         }) do %>
           <%= pb_rails(object.input, props: { text: "" }) do %>
-            <input <%= object.checked ? "checked" : "" %> <%= object.disabled ? "disabled" : "" %> id="checkbox-styled" name="<%= object.name %>-display" type="<%= object.input %>">
+            <input <%= object.is_checked %> <%= object.is_disabled %> id="checkbox-styled" name="<%= object.name %>-display" type="<%= object.input %>">
           <% end %>
         <% end %>
         <div class="separator"></div>
