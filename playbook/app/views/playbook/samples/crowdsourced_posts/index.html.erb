@@ -420,11 +420,11 @@
             <%= pb_rails("card", props: { header: true, padding: "none", shadow: "deeper" }) do %>
               <%= pb_rails("card/card_header", props: { padding: "xs", header_color: "category_1" }) do %>
                 <%= pb_rails("flex", props: { vertical: "center" }) do %>
-                  <%= pb_rails("body", props: { padding: "xs", padding_right: "sm", dark: true }) do %>
+                  <%= pb_rails("body", props: { padding: "xs", padding_right: "sm", classname: "dark" }) do %>
                     <%= pb_rails("icon", props: { icon: "tree-large", size: "4x" }) %>
                   <% end %>
                   <%= pb_rails("body", props: {
-                    dark: true,
+                    classname: "dark",
                     margin: "xs",
                     margin_right: "sm",
                     text: "Outdoor communities — they're really out there",

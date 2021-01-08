@@ -4,46 +4,46 @@ import { Button, ButtonToolbar } from '../..'
 const ButtonToolbarDefault = (props) => (
   <div className="pb--doc-demo-row">
     <ButtonToolbar
-        {...props}
         orientation="vertical"
+        {...props}
     >
       <Button
-          {...props}
           text="Create"
+          {...props}
       />
       <Button
-          {...props}
           text="Edit"
+          {...props}
       />
       <Button
-          {...props}
           text="Copy"
+          {...props}
       />
       <Button
-          {...props}
           text="Cut"
+          {...props}
       />
     </ButtonToolbar>
 
     <ButtonToolbar
-        {...props}
         orientation="horizontal"
+        {...props}
     >
       <Button
-          {...props}
           text="Create"
+          {...props}
       />
       <Button
-          {...props}
           text="Edit"
+          {...props}
       />
       <Button
-          {...props}
           text="Copy"
+          {...props}
       />
       <Button
-          {...props}
           text="Cut"
+          {...props}
       />
     </ButtonToolbar>
   </div>

@@ -2,11 +2,12 @@ import React from 'react'
 
 import { List, ListItem } from '../../'
 
-const ListBorderless = () => {
+const ListBorderless = (props) => {
   return (
     <>
       <List
           borderless
+          {...props}
       >
         <ListItem>{'Item 1'}</ListItem>
         <ListItem>{'Item 2'}</ListItem>

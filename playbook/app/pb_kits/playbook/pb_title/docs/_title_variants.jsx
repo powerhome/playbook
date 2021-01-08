@@ -1,7 +1,7 @@
 import React from 'react'
 import { Title } from '../../'
 
-const TitleVariants = () => {
+const TitleVariants = (props) => {
   return (
     <div>
       <Title
@@ -9,6 +9,7 @@ const TitleVariants = () => {
           tag="h4"
           text="Title 4 (link)"
           variant="link"
+          {...props}
       />
     </div>
   )

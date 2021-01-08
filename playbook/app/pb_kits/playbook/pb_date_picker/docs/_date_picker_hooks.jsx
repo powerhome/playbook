@@ -1,7 +1,7 @@
 import React from 'react'
 import { DatePicker } from '../../'
 
-const DatePickerHooks = () => {
+const DatePickerHooks = (props) => {
   // Define hooks
   const changeHook = () => {
     alert('date changed')
@@ -25,10 +25,12 @@ const DatePickerHooks = () => {
       <DatePicker
           label="onChange"
           pickerId="date-picker-hooks-onchange"
+          {...props}
       />
       <DatePicker
           label="onOpen"
           pickerId="date-picker-hooks-onopen"
+          {...props}
       />
     </div>
   )

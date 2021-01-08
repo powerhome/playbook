@@ -6,7 +6,7 @@ const data = [{
   data: [43934, 52503, 57177, 69658, 97031, 119931, 137133, 154175],
 }]
 
-const LineGraphDefault = () => (
+const LineGraphDefault = (props) => (
   <div>
     <LineGraph
         axisTitle="Number of Employees"
@@ -15,6 +15,7 @@ const LineGraphDefault = () => (
         title="Fixed Height (300px)"
         xAxisCategories={['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']}
         yAxisMin={0}
+        {...props}
     />
 
     <br />
@@ -28,6 +29,7 @@ const LineGraphDefault = () => (
         title="Percentage Height (50%)"
         xAxisCategories={['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']}
         yAxisMin={0}
+        {...props}
     />
   </div>
 )

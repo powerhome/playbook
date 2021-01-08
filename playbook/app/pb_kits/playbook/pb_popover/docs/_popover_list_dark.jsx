@@ -7,7 +7,7 @@ import {
   PbReactPopover,
 } from '../..'
 
-const PopoverWithButton = () => {
+const PopoverWithButton = (props) => {
   const [showPopover, setShowPopover] = useState(false)
 
   const handleTogglePopover = () => {
@@ -19,12 +19,14 @@ const PopoverWithButton = () => {
         dark
         onClick={handleTogglePopover}
         variant="primary"
+        {...props}
     >
       {'Filter By'}
       <Icon
           dark
           fixedWidth
           icon="angle-down"
+          {...props}
       />
     </Button>
   )
@@ -36,6 +38,7 @@ const PopoverWithButton = () => {
         placement="bottom"
         reference={popoverReference}
         show={showPopover}
+        {...props}
     >
       <List xpadding>
         <ListItem><a>{'Popularity'}</a></ListItem>

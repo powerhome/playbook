@@ -5,7 +5,7 @@ import {
   PbReactPopover,
 } from '../..'
 
-const PopoverZIndexDark = () => {
+const PopoverZIndexDark = (props) => {
   const [showPopover, setShowPopover] = useState(false)
 
   const handleTogglePopover = () => {
@@ -32,6 +32,7 @@ const PopoverZIndexDark = () => {
             dark
             marginBottom="md"
             text="I've got a z-index of 2"
+            {...props}
         />
       </div>
       <PbReactPopover
@@ -42,6 +43,7 @@ const PopoverZIndexDark = () => {
           shouldClosePopover={handleShouldClosePopover}
           show={showPopover}
           zIndex={3}
+          {...props}
       >
         {'I have a custom z-index of 3'}
       </PbReactPopover>

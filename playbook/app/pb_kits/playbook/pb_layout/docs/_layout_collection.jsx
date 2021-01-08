@@ -1,11 +1,12 @@
 import React from 'react'
 import { Card, Layout } from '../../'
 
-const LayoutCollection = () => {
+const LayoutCollection = (props) => {
   return (
     <div>
       <Layout
           layout="collection"
+          {...props}
       >
         <Layout.Body>
           <Card>{'Card content'}</Card>

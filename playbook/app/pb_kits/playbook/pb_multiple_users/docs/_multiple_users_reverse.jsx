@@ -1,7 +1,7 @@
 import React from 'react'
 import { MultipleUsers } from '../../'
 
-const MultipleUsersReverse = () => {
+const MultipleUsersReverse = (props) => {
   return (
     <div>
       <MultipleUsers
@@ -28,6 +28,7 @@ const MultipleUsersReverse = () => {
             imageUrl: 'https://randomuser.me/api/portraits/women/46.jpg',
           },
         ]}
+          {...props}
       />
 
       <br />
@@ -44,6 +45,7 @@ const MultipleUsersReverse = () => {
             name: 'Andrew Murray',
           },
         ]}
+          {...props}
       />
     </div>
   )

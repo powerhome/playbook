@@ -1,12 +1,13 @@
 import React from 'react'
 import { StatChange } from '../../'
 
-const StatChangeUnit = () => {
+const StatChangeUnit = (props) => {
   return (
     <div>
       <StatChange
           icon="chart-line"
           value="28.4"
+          {...props}
       />
 
       <br />
@@ -14,12 +15,14 @@ const StatChangeUnit = () => {
       <StatChange
           icon="chart-line-down"
           value={6.1}
+          {...props}
       />
 
       <br />
 
       <StatChange
           value={102}
+          {...props}
       />
     </div>
   )

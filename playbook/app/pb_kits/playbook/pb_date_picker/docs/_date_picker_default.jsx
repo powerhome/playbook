@@ -1,10 +1,11 @@
 import React from 'react'
 import { DatePicker } from '../../'
 
-const DatePickerDefault = () => (
+const DatePickerDefault = (props) => (
   <div>
     <DatePicker
         pickerId="date-picker-default"
+        {...props}
     />
   </div>
 )

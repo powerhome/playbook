@@ -1,7 +1,7 @@
 import React from 'react'
 import { FixedConfirmationToast } from '../../'
 
-const FixedConfirmationToastClose = () => {
+const FixedConfirmationToastClose = (props) => {
   return (
     <div>
       <div>
@@ -9,6 +9,7 @@ const FixedConfirmationToastClose = () => {
             closeable
             status="error"
             text="Error Message"
+            {...props}
         />
       </div>
 
@@ -19,6 +20,7 @@ const FixedConfirmationToastClose = () => {
             closeable
             status="success"
             text="Items Successfully Moved"
+            {...props}
         />
       </div>
 
@@ -29,6 +31,7 @@ const FixedConfirmationToastClose = () => {
             closeable
             status="neutral"
             text="Scan to Assign Selected Items"
+            {...props}
         />
       </div>
     </div>

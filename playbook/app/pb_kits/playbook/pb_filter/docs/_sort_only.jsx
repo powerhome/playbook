@@ -3,7 +3,6 @@ import { Filter } from '../../'
 
 const SortOnly = (props) => (
   <Filter
-      {...props}
       sortOptions={{
         popularity: 'Popularity',
         // eslint-disable-next-line
@@ -12,6 +11,7 @@ const SortOnly = (props) => (
         manager_name: 'Manager\'s Name',
       }}
       sortValue={[{ name: 'popularity', dir: 'desc' }]}
+      {...props}
   />
 )
 
