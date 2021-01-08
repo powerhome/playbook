@@ -57,7 +57,8 @@ module Playbook
     end
 
     def get_kits
-      MENU["kits"]
+      menu = YAML.load_file("#{Playbook::Engine.root}/app/pb_kits/playbook/data/menu.yml")
+      menu["kits"]
     end
 
     def pb_category_kits(category_kits: [], type: "rails")
