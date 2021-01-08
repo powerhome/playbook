@@ -48,16 +48,18 @@
 <% end %>
 
 <script>
-  let outerCheckbox = document.querySelector("input#<%= object.input_id %>")
-  let innerCheckbox = document.querySelector("#checkbox-styled")
+  var outerCheckbox = document.querySelector("input#<%= object.input_id %>")
+  var innerCheckbox = outerCheckbox.parentElement.querySelector("input#checkbox-styled")
 
-  outerCheckbox.addEventListener("change", function(){
-    outerCheckbox = document.querySelector("input#<%= object.input_id %>")
+  outerCheckbox.addEventListener("change", () => {
+    const outerCheckbox = document.querySelector("input#<%= object.input_id %>")
+    const innerCheckbox = outerCheckbox.parentElement.querySelector("input#checkbox-styled")
     innerCheckbox.checked = outerCheckbox.checked
   })
 
-  innerCheckbox.addEventListener("change", function(){
-    innerCheckbox = document.querySelector("#checkbox-styled")
+  innerCheckbox.addEventListener("change", () => {
+    const outerCheckbox = document.querySelector("input#<%= object.input_id %>")
+    const innerCheckbox = outerCheckbox.parentElement.querySelector("input#checkbox-styled")
     outerCheckbox.checked = innerCheckbox.checked
   })
 </script>
