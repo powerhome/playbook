@@ -38,7 +38,7 @@ const MultiValue = (props: Props) => {
             onClick={handleOnClick}
         />
         <Else />
-        <formPillProps
+        <FormPill
             marginRight="xs"
             onClick={handleOnClick}
             text={label}
