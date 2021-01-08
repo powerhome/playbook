@@ -1,34 +1,43 @@
+<%= pb_rails("title", props: {
+  size: 3,
+  text: "What programming languages do you know?"
+}) %>
+
+<br />
+
 <%= pb_rails("selectable_card", props: {
-  input_id: "first_checkbox",
-  name: "first_checkbox",
-  value: "first_checkbox",
+  checked: true,
+  input_id: "ruby",
+  name: "ruby",
+  value: "ruby",
   variant: "display_input"
 }) do %>
   Ruby
 <% end %>
 
 <%= pb_rails("selectable_card", props: {
-  input_id: "second_checkbox",
-  name: "second_checkbox",
-  value: "second_checkbox",
+  checked: true,
+  input_id: "javascript",
+  name: "javascript",
+  value: "javascript",
   variant: "display_input"
 }) do %>
   JavaScript
 <% end %>
 
 <%= pb_rails("selectable_card", props: {
-  input_id: "third_checkbox",
-  name: "third_checkbox",
-  value: "third_checkbox",
+  input_id: "typescript",
+  name: "typescript",
+  value: "typescript",
   variant: "display_input"
 }) do %>
   TypeScript
 <% end %>
 
 <%= pb_rails("selectable_card", props: {
-  input_id: "fourth_checkbox",
-  name: "fourth_checkbox",
-  value: "fourth_checkbox",
+  input_id: "swift",
+  name: "swift",
+  value: "swift",
   variant: "display_input"
 }) do %>
   Swift
@@ -36,10 +45,18 @@
 
 <br />
 
+<%= pb_rails("title", props: {
+  size: 3,
+  text: "How likely are you to recommend Playbook to a friend?"
+}) %>
+
+<br />
+
 <%= pb_rails("selectable_card", props: {
+  checked: true,
   input_id: "first_radio",
   multi: false,
-  name: "first_radio",
+  name: "radio_group",
   value: "first_radio",
   variant: "display_input"
 }) do %>
@@ -50,7 +67,7 @@
 <%= pb_rails("selectable_card", props: {
   input_id: "second_radio",
   multi: false,
-  name: "second_radio",
+  name: "radio_group",
   value: "second_radio",
   variant: "display_input"
 }) do %>
@@ -60,7 +77,7 @@
 <%= pb_rails("selectable_card", props: {
   input_id: "third_radio",
   multi: false,
-  name: "third_radio",
+  name: "radio_group",
   value: "third_radio",
   variant: "display_input"
 }) do %>
@@ -70,7 +87,7 @@
 <%= pb_rails("selectable_card", props: {
   input_id: "fourth_radio",
   multi: false,
-  name: "fourth_radio",
+  name: "radio_group",
   value: "fourth_radio",
   variant: "display_input"
 }) do %>
@@ -80,7 +97,7 @@
 <%= pb_rails("selectable_card", props: {
   input_id: "fifth_radio",
   multi: false,
-  name: "fifth_radio",
+  name: "radio_group",
   value: "fifth_radio",
   variant: "display_input"
 }) do %>
