@@ -5,7 +5,7 @@ const data = [
   { name: 'Score', value: 780 },
 ]
 
-const GaugeTitle = () => (
+const GaugeTitle = (props) => (
   <div>
     <Gauge
         chartData={data}
@@ -13,6 +13,7 @@ const GaugeTitle = () => (
         max={850}
         min={300}
         title="Credit Score"
+        {...props}
     />
   </div>
 )

@@ -1,7 +1,7 @@
 import React from 'react'
 import { Layout } from '../../'
 
-const LayoutTransparent = () => {
+const LayoutTransparent = (props) => {
   return (
     <div>
       <Layout
@@ -9,6 +9,7 @@ const LayoutTransparent = () => {
           position="left"
           size="xs"
           transparent
+          {...props}
       >
         <Layout.Side>
           {'Side'}

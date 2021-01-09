@@ -1,13 +1,14 @@
 import React from 'react'
 import { Select } from '../../'
 
-const SelectCustomSelect = () => {
+const SelectCustomSelect = (props) => {
   return (
     <div>
       <Select label="Favorite Holiday">
         <select
             id="holiday"
             name="holiday"
+            {...props}
         >
           <option value="1">{'Christmas'}</option>
           <option value="2">{'Thanksgiving'}</option>

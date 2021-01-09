@@ -2,15 +2,17 @@ import React from 'react'
 import { Nav } from '../../'
 import NavItem from '../_item.jsx'
 
-const BlockNav = () => {
+const BlockNav = (props) => {
   return (
     <Nav
         link="#"
         title="Menu"
+        {...props}
     >
       <NavItem
           active
           link="#"
+          {...props}
       >
         {'Photos'}
       </NavItem>

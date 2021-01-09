@@ -1,7 +1,7 @@
 import React from 'react'
 import { MultipleUsers } from '../../'
 
-const MultipleUsersDefault = () => {
+const MultipleUsersDefault = (props) => {
   return (
     <div>
       <MultipleUsers
@@ -27,6 +27,7 @@ const MultipleUsersDefault = () => {
           imageUrl: 'https://randomuser.me/api/portraits/women/46.jpg',
         },
       ]}
+          {...props}
       />
 
       <br />
@@ -42,6 +43,7 @@ const MultipleUsersDefault = () => {
           name: 'Andrew Murray Cooper Craig',
         },
       ]}
+          {...props}
       />
     </div>
   )

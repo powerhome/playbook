@@ -6,7 +6,7 @@ import {
   PbReactPopover,
 } from '../..'
 
-const PopoverDark = () => {
+const PopoverDark = (props) => {
   const [showPopover, setShowPopover] = useState(false)
 
   const handleTogglePopover = () => {
@@ -26,10 +26,12 @@ const PopoverDark = () => {
         dark
         orientation="row"
         vertical="center"
+        {...props}
     >
       <Body
           dark
           text="Click info for more details"
+          {...props}
       />
       &nbsp;
       <PbReactPopover
@@ -38,6 +40,7 @@ const PopoverDark = () => {
           placement="top"
           reference={popoverReference}
           show={showPopover}
+          {...props}
       >
         {'I\'m a popover. I can show content of any size.'}
       </PbReactPopover>

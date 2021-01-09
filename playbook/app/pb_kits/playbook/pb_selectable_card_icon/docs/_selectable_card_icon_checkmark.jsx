@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { SelectableCardIcon } from '../../'
 
-const SelectableCardIconCheckmark = () => {
+const SelectableCardIconCheckmark = (props) => {
   const [selected, setSelected] = useState(true)
   const [unselected, setUnselected] = useState(false)
 
@@ -16,6 +16,7 @@ const SelectableCardIconCheckmark = () => {
           inputId={4}
           onChange={() => setSelected(!selected)}
           titleText="Cowboy"
+          {...props}
       />
       <SelectableCardIcon
           bodyText="Poof, you're a sandwich."
@@ -25,6 +26,7 @@ const SelectableCardIconCheckmark = () => {
           inputId={5}
           onChange={() => setUnselected(!unselected)}
           titleText="Wizard"
+          {...props}
       />
       <SelectableCardIcon
           bodyText="Where is the lamb sauce?"
@@ -33,6 +35,7 @@ const SelectableCardIconCheckmark = () => {
           icon="hat-chef"
           inputId={6}
           titleText="Chef"
+          {...props}
       />
     </div>
   )

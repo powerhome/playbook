@@ -1,7 +1,7 @@
 import React from 'react'
 import { LabelValue } from '../../'
 
-const LabelValueDetails = () => {
+const LabelValueDetails = (props) => {
   return (
     <div>
       <LabelValue
@@ -9,6 +9,7 @@ const LabelValueDetails = () => {
           label="Installer"
           title="JD Installations LLC"
           variant="details"
+          {...props}
       />
 
       <br />
@@ -19,6 +20,7 @@ const LabelValueDetails = () => {
           label="Project"
           title="Jefferson-Smith"
           variant="details"
+          {...props}
       />
 
       <br />
@@ -30,6 +32,7 @@ const LabelValueDetails = () => {
           label="Project"
           title="Jefferson-Smith"
           variant="details"
+          {...props}
       />
 
       <br />
@@ -42,6 +45,7 @@ const LabelValueDetails = () => {
           label="Project"
           title="Jefferson-Smith"
           variant="details"
+          {...props}
       />
     </div>
   )

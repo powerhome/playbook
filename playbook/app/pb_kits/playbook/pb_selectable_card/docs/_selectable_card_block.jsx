@@ -17,7 +17,7 @@ class SelectableCardBlock extends React.Component {
     })
   }
 
-  render() {
+  render(props) {
     return (
       <div className="pb--doc-demo-row">
 
@@ -27,10 +27,12 @@ class SelectableCardBlock extends React.Component {
             name="block"
             onChange={this.handleSelect}
             value="block"
+            {...props}
         >
           <Title
               size={4}
               text="Block"
+              {...props}
           />
           <Body tag="span">{'This uses block'}</Body>
         </SelectableCard>
@@ -42,6 +44,7 @@ class SelectableCardBlock extends React.Component {
             onChange={this.handleSelect}
             text="This passes text through the tag"
             value="tag"
+            {...props}
         />
 
       </div>

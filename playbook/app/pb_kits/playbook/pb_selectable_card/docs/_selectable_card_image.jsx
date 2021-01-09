@@ -17,7 +17,7 @@ class SelectableCardImage extends React.Component {
     })
   }
 
-  render() {
+  render(props) {
     return (
       <div className="pb--doc-demo-row">
 
@@ -28,11 +28,13 @@ class SelectableCardImage extends React.Component {
             name="selectableImage"
             onChange={this.handleSelect}
             value="selectableImage"
+            {...props}
         >
           <Image
               rounded
               size="xl"
               url="https://unsplash.it/500/400/?image=634"
+              {...props}
           />
 
           <Body>{'Add text here'}</Body>
@@ -45,11 +47,13 @@ class SelectableCardImage extends React.Component {
             name="unselectedImage"
             onChange={this.handleSelect}
             value="unselectedImage"
+            {...props}
         >
           <Image
               rounded
               size="xl"
               url="https://unsplash.it/500/400/?image=634"
+              {...props}
           />
         </SelectableCard>
 

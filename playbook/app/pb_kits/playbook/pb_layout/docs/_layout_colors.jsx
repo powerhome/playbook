@@ -1,13 +1,14 @@
 import React from 'react'
 import { Body, Layout } from '../../'
 
-const LayoutColor = () => {
+const LayoutColor = (props) => {
   return (
     <div>
       <Layout
           collapse="md"
           position="left"
           size="sm"
+          {...props}
       >
         <Layout.Side>
           {'Light'}
@@ -25,11 +26,13 @@ const LayoutColor = () => {
           position="left"
           size="sm"
           variant="dark"
+          {...props}
       >
         <Layout.Side>
           <Body
               dark
               text="Dark"
+              {...props}
           />
         </Layout.Side>
         <Layout.Body>
@@ -45,11 +48,13 @@ const LayoutColor = () => {
           position="left"
           size="sm"
           variant="gradient"
+          {...props}
       >
         <Layout.Side>
           <Body
               dark
               text="Gradient"
+              {...props}
           />
         </Layout.Side>
         <Layout.Body>

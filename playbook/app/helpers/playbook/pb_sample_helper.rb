@@ -28,11 +28,18 @@ module Playbook
       raw rouge(code, rouge_type)
     end
 
+    def get_category(sample)
+      cat = ""
+      SAMPLES.each do |category, samples|
+        cat = category if samples.include?(sample)
+      end
+      cat
+    end
+
     def get_samples(kit)
-      sample_yaml = YAML.load_file("#{Playbook::Engine.root}/app/pb_kits/playbook/data/samples.yml")
       all_samples = []
 
-      sample_yaml.each do |_category, sample|
+      SAMPLES.each do |_category, sample|
         all_samples.push(sample)
       end
 

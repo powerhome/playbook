@@ -1,7 +1,7 @@
 import React from 'react'
 import { Icon } from '../../'
 
-const IconAnimate = () => {
+const IconAnimate = (props) => {
   return (
     <div>
       <p>
@@ -10,6 +10,7 @@ const IconAnimate = () => {
             icon="spinner"
             size="2x"
             spin
+            {...props}
         />
         {' '}
         <span>{'Spin'}</span>
@@ -21,6 +22,7 @@ const IconAnimate = () => {
             icon="spinner"
             pulse
             size="2x"
+            {...props}
         />
         {' '}
         <span>{'Pulse'}</span>

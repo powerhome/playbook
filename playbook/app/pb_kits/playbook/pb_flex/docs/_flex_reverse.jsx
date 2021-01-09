@@ -1,13 +1,14 @@
 import React from 'react'
 import { Flex, FlexItem, Title } from  '../..'
 
-const FlexReverse = () => {
+const FlexReverse = (props) => {
   return (
     <>
       <div className="flex-doc-example">
         <Title
             size={4}
             text="Row"
+            {...props}
         />
         <br />
         <Flex
@@ -15,6 +16,7 @@ const FlexReverse = () => {
             horizontal="left"
             orientation="row"
             reverse
+            {...props}
         >
           <FlexItem>
             {'1'}
@@ -34,6 +36,7 @@ const FlexReverse = () => {
         <Title
             size={4}
             text="Column"
+            {...props}
         />
         <br />
         <Flex
@@ -41,6 +44,7 @@ const FlexReverse = () => {
             orientation="column"
             reverse
             vertical="left"
+            {...props}
         >
           <FlexItem>
             {'1'}
