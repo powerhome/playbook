@@ -55,7 +55,7 @@ const SelectableCard = ({
     { 'checked': checked,
       'disabled': disabled,
       'enabled': !disabled }),
-  /*globalProps(props),*/ className)
+  className)
 
   const displayIcon = () => {
     if (icon === true) {
@@ -90,13 +90,15 @@ const SelectableCard = ({
           type={inputType}
           value={value}
       />
-      <label
-          className={globalProps(props)}
-          htmlFor={inputIdPresent}
-      >
-        {text || children}
-        {displayIcon()}
-      </label>
+      <div className="buffer">
+        <label
+            className={globalProps(props)}
+            htmlFor={inputIdPresent}
+        >
+          {text || children}
+          {displayIcon()}
+        </label>
+      </div>
     </div>
   )
 }

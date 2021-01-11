@@ -22,8 +22,10 @@ class SelectableCardDefault extends React.Component {
             checked={this.state.selectedWithIcon}
             icon
             inputId="selectedWithIcon"
+            marginBottom="md"
             name="selectedWithIcon"
             onChange={this.handleSelect}
+            paddingBottom="md"
             value="selectedWithIcon"
             {...props}
         >
