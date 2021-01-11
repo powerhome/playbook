@@ -12,7 +12,7 @@ class SelectableCardSingleSelect extends React.Component {
     })
   }
 
-  render(props) {
+  render() {
     return (
       <div className="pb--doc-demo-row">
 
@@ -23,7 +23,7 @@ class SelectableCardSingleSelect extends React.Component {
             name="gender"
             onChange={this.handleSelect.bind(this)}
             value="male"
-            {...props}
+            {...this.props}
         >
           {'Male'}
         </SelectableCard>
@@ -35,7 +35,7 @@ class SelectableCardSingleSelect extends React.Component {
             name="gender"
             onChange={this.handleSelect.bind(this)}
             value="female"
-            {...props}
+            {...this.props}
         >
           {'Female'}
         </SelectableCard>
@@ -47,7 +47,7 @@ class SelectableCardSingleSelect extends React.Component {
             name="gender"
             onChange={this.handleSelect.bind(this)}
             value="other"
-            {...props}
+            {...this.props}
         >
           {'Other'}
         </SelectableCard>
