@@ -7,6 +7,7 @@ import { globalProps } from '../utilities/globalProps.js'
 import Modal from 'react-modal'
 import { Button, Flex, SectionSeparator } from '../'
 import { DialogHeader } from './_dialog_header'
+import { DialogContext } from './_dialog_context'
 
 type DialogProps = {
   aria?: object,
@@ -26,8 +27,6 @@ type DialogProps = {
   text?: string,
   title?: string,
 }
-
-export const DialogContext = React.createContext()
 
 // Body component
 const DialogBody = (props: DialogBodyProps) => {

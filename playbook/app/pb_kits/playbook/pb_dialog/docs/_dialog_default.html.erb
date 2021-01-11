@@ -1,1 +1,12 @@
-<%= pb_rails("dialog") %>
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) { 
+    document.querySelector("#dialog-trigger").addEventListener("click", function() {
+      alert("Hello World!");
+    });
+  });
+</script>
+
+
+<%= pb_rails("dialog", props: {id: 'testing'}) %>
+<%= pb_rails("button", props: {id: 'dialog-trigger', text: "Open Dialog" }) %>
+

@@ -9,5 +9,4 @@ examples:
   - dialog_compound_components: Complex
   - dialog_sizes: Sizes
   - dialog_scrollable: Scrollable
-  # - dialog_separators: Separators
   

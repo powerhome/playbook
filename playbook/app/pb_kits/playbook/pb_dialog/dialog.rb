@@ -35,7 +35,7 @@ module Playbook
           opened: opened,
           size: size,
           text: text,
-          title: title
+          title: title,
         }
       end
     end
