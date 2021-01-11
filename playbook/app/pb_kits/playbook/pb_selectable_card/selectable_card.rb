@@ -18,13 +18,16 @@ module Playbook
       prop :input_id, type: Playbook::Props::String
 
       prop :input_options, type: Playbook::Props::Hash,
-                                      default: {}
+                           default: {}
       prop :name
       prop :text
       prop :value
 
       def classname
-        generate_classname_without_spacing("pb_selectable_card_kit", checked_class, enable_disabled_class)
+        [
+          generate_classname_without_spacing("pb_selectable_card_kit", checked_class, enable_disabled_class),
+          dark_props,
+        ].compact.join(" ")
       end
 
       def spacing_classname
