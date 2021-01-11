@@ -1,0 +1,17 @@
+@import "../../../tokens/screen_sizes";
+@import "../../../tokens/colors";
+
+.grid1{
+  display: grid;
+  gap: 1px;
+  grid-template: auto auto / auto auto;
+  background-color: $border_light;
+  grid-auto-flow: dense;
+}
+
+.grid2{
+  display: grid;
+  gap: 1px;
+  grid-template: repeat(2,auto) / repeat(4,1fr);
+  background-color: $border_light;
+}

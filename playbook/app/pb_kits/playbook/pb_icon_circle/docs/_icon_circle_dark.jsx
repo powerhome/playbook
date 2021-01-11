@@ -1,13 +1,14 @@
 import React from 'react'
 import { IconCircle } from '../../'
 
-const IconCircleDark = () => {
+const IconCircleDark = (props) => {
   return (
     <div>
       <IconCircle
           dark
           icon="rocket"
           size="md"
+          {...props}
       />
     </div>
   )

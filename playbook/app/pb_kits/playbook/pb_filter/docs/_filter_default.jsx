@@ -32,6 +32,7 @@ const FilterDefault = (props) => {
         <TextInput
             label="Full Name"
             placeholder="Enter name"
+            {...props}
         />
 
         <Select
@@ -39,16 +40,20 @@ const FilterDefault = (props) => {
             label="Territory"
             name="location"
             options={options}
+            {...props}
         />
         <Flex
             spacing="between"
+            {...props}
         >
           <Button
               text="Apply"
+              {...props}
           />
           <Button
               text="Clear"
               variant="secondary"
+              {...props}
           />
         </Flex>
       </Filter>
@@ -71,6 +76,7 @@ const FilterDefault = (props) => {
         <TextInput
             label="Example Text Field"
             placeholder="Enter Text"
+            {...props}
         />
 
         <Select
@@ -78,16 +84,20 @@ const FilterDefault = (props) => {
             label="Example Collection Select"
             name="Collection Select"
             options={options}
+            {...props}
         />
         <Flex
             spacing="between"
+            {...props}
         >
           <Button
               text="Apply"
+              {...props}
           />
           <Button
               text="Clear"
               variant="secondary"
+              {...props}
           />
         </Flex>
       </Filter>

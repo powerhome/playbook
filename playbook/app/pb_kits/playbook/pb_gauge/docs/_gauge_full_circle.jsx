@@ -5,7 +5,7 @@ const data = [
   { name: 'Capacity', value: 75 },
 ]
 
-const GaugeFullCircle = () => (
+const GaugeFullCircle = (props) => (
   <div>
     <Gauge
         chartData={data}
@@ -13,6 +13,7 @@ const GaugeFullCircle = () => (
         id="gauge-full-circle"
         suffix="%"
         title="Seating Capacity"
+        {...props}
     />
   </div>
 )

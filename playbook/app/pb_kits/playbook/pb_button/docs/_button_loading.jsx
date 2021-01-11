@@ -4,23 +4,23 @@ import { Button } from '../../'
 const ButtonLoading = (props) => (
   <div>
     <Button
-        {...props}
         loading
         text="Button Primary"
+        {...props}
     />
     {' '}
     <Button
-        {...props}
         loading
         text="Button Secondary"
         variant="secondary"
+        {...props}
     />
     {' '}
     <Button
-        {...props}
         loading
         text="A Tag Button Disabled"
         variant="link"
+        {...props}
     />
   </div>
 )

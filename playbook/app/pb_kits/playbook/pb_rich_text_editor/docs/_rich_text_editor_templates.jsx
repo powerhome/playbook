@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { RichTextEditor, Select } from '../../'
 import { changelog, release } from './templates.js'
 
-const RichTextEditorTemplates = () => {
+const RichTextEditorTemplates = (props) => {
   const [editorContent, setEditorContent] = useState('')
 
   const handleChange = (event) => {
@@ -27,10 +27,12 @@ const RichTextEditorTemplates = () => {
           label="Template"
           onChange={handleChange}
           options={options}
+          {...props}
       />
       <RichTextEditor
           id="template"
           template={editorContent}
+          {...props}
       />
     </div>
   )

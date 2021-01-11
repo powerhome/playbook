@@ -4,33 +4,33 @@ import { CircleIconButton } from '../../'
 const CircleIconButtonDefault = (props) => (
   <div>
     <CircleIconButton
-        {...props}
         icon="plus"
         variant="primary"
+        {...props}
     />
 
     <br />
 
     <CircleIconButton
-        {...props}
         icon="pen"
         variant="secondary"
+        {...props}
     />
 
     <br />
 
     <CircleIconButton
-        {...props}
         disabled
         icon="times"
+        {...props}
     />
 
     <br />
 
     <CircleIconButton
-        {...props}
         icon="user"
         variant="link"
+        {...props}
     />
   </div>
 )

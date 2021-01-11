@@ -1,7 +1,7 @@
 import React from 'react'
 import { IconStatValue } from '../../'
 
-const IconStatValueSizes = () => {
+const IconStatValueSizes = (props) => {
   return (
     <div>
       <IconStatValue
@@ -10,6 +10,7 @@ const IconStatValueSizes = () => {
           text="distance driven"
           unit="mi"
           value={158.3}
+          {...props}
       />
       <br />
       <IconStatValue
@@ -18,6 +19,7 @@ const IconStatValueSizes = () => {
           text="distance driven"
           unit="mi"
           value={158.3}
+          {...props}
       />
       <br />
       <IconStatValue
@@ -26,6 +28,7 @@ const IconStatValueSizes = () => {
           text="distance driven"
           unit="mi"
           value={158.3}
+          {...props}
       />
     </div>
 

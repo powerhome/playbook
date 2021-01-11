@@ -4,6 +4,7 @@ Playbook::Engine.routes.draw do
   get 'getting_started',    to: "pages#getting_started"
   get 'kits',               to: "pages#kits"
   get 'visual_guidelines',  to: "pages#visual_guidelines"
+  get 'changelog',          to: "pages#changelog"
 
   get 'kits/:name',       to: "pages#kit_show_rails", as: 'kit_show'
   get 'kits/:name/rails', to: "pages#kit_show_rails", as: 'kit_show_rails'

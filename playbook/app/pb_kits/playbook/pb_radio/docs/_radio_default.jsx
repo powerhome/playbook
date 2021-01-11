@@ -2,12 +2,15 @@ import React from 'react'
 import { Radio } from '../../'
 
 const RadioDefault = () => {
+  const ref = React.createRef()
+
   return (
     <div>
       <Radio
           defaultChecked
           label="Power"
           name="Group2"
+          ref={ref}
           value="Power"
       />
       <br />

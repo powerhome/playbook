@@ -1,5 +1,5 @@
 <div class="landing-page">
-  <%= pb_rails("background", props: { image_url: image_url("landing-background.svg"), padding: "xl" }) do %>
+  <%= pb_rails("background", props: { classname: "homepage-hero", image_url: image_url("landing-background.svg"), padding: "xl" }) do %>
     <%= pb_rails("flex", props: { classname: "flex-container hero-inner-wrapper", horizontal: "center", wrap: true } ) do %>
       <div class="flex-item">
         <%= image_tag("landing-image.svg", class: "pb-hero-image") %>

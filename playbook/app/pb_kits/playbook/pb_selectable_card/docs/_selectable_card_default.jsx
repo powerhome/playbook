@@ -14,7 +14,7 @@ class SelectableCardDefault extends React.Component {
     })
   }
 
-  render() {
+  render(props) {
     return (
       <div className="pb--doc-demo-row">
 
@@ -25,6 +25,7 @@ class SelectableCardDefault extends React.Component {
             name="selectedWithIcon"
             onChange={this.handleSelect}
             value="selectedWithIcon"
+            {...props}
         >
           {'Selected, with icon'}
         </SelectableCard>
@@ -36,6 +37,7 @@ class SelectableCardDefault extends React.Component {
             name="selectedWithoutIcon"
             onChange={this.handleSelect}
             value="selectedWithoutIcon"
+            {...props}
         >
           {'Selected, without icon'}
         </SelectableCard>
@@ -46,6 +48,7 @@ class SelectableCardDefault extends React.Component {
             name="unselected"
             onChange={this.handleSelect}
             value="unselected"
+            {...props}
         >
           {'Unselected'}
         </SelectableCard>
@@ -57,6 +60,7 @@ class SelectableCardDefault extends React.Component {
             name="disabled"
             onChange={this.handleSelect}
             value="disabled"
+            {...props}
         >
           {'Disabled'}
         </SelectableCard>

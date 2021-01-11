@@ -1,7 +1,7 @@
 import React from 'react'
 import { IconStatValue } from '../../'
 
-const IconStatValueVertical = () => {
+const IconStatValueVertical = (props) => {
   return (
     <div>
       <IconStatValue
@@ -10,6 +10,7 @@ const IconStatValueVertical = () => {
           text="Radio"
           unit="wkz"
           value={102.5}
+          {...props}
       />
     </div>
 

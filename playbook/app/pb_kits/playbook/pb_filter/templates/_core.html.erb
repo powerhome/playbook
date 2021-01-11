@@ -21,10 +21,12 @@
           <div class="right_gradient"></div>
         </div>
       </div>
+      <% if (object.template != "default") %>
+        <%= pb_rails("caption", props: {text: object.result_text, size:"xs", classname:"filter-results"})%>
+      <% end %>
     <% end %>
 
     <% if (object.template == "single" ) || (object.template == "sort_only") %>
-      <%= pb_rails("caption", props: {text: object.result_text, size:"xs", classname:"filter-results"})%>
       <% unless object.sort_menu == [{}] %>
         <%= pb_rails("button", props: {variant: "link",id: "sort-button#{object.id}",padding_right: "none"}) do %>
           <% object.sort_menu.each do |item| %>

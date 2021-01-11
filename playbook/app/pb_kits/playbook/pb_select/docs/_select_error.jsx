@@ -1,7 +1,7 @@
 import React from 'react'
 import { Body, Select } from '../..'
 
-const SelectError = () => {
+const SelectError = (props) => {
   const options = [
     {
       value: '1',
@@ -25,10 +25,12 @@ const SelectError = () => {
           name="food"
           options={options}
           value="2"
+          {...props}
       />
       <Body
           error="Please make a valid selection"
           status="negative"
+          {...props}
       />
     </div>
   )

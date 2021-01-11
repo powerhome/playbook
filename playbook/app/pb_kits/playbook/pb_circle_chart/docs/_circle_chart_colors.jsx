@@ -16,12 +16,13 @@ const dataWithColors = [
   },
 ]
 
-const CircleChartColors = () => (
+const CircleChartColors = (props) => (
   <div>
     <CircleChart
         chartData={dataWithColors}
         colors={['data-6', 'data-4', 'data-2']}
         id="colors-example"
+        {...props}
     />
   </div>
 )

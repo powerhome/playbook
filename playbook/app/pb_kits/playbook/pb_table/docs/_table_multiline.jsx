@@ -1,9 +1,12 @@
 import React from 'react'
 import { Table } from '../../'
 
-const TableMultiline = () => {
+const TableMultiline = (props) => {
   return (
-    <Table size="sm">
+    <Table
+        size="sm"
+        {...props}
+    >
       <thead>
         <tr>
           <th>{'Column 1'}</th>

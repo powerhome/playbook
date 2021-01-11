@@ -3,11 +3,20 @@ import {
   WeekdayStacked,
 } from '../../'
 
-const WeekdayStackedDefault = () => (
+const WeekdayStackedDefault = (props) => (
   <div>
-    <WeekdayStacked className="test" />
-    <WeekdayStacked align="center" />
-    <WeekdayStacked align="right" />
+    <WeekdayStacked
+        className="test"
+        {...props}
+    />
+    <WeekdayStacked
+        align="center"
+        {...props}
+    />
+    <WeekdayStacked
+        align="right"
+        {...props}
+    />
   </div>
 )
 

@@ -15,7 +15,7 @@ const AcceptedFilesList = ({ files }: FileList) => (
   </List>
 )
 
-const FileUploadDefault = () => {
+const FileUploadDefault = (props) => {
   const [filesToUpload, setFilesToUpload] = useState([])
 
   const handleOnFilesAccepted = (files) => {
@@ -24,9 +24,13 @@ const FileUploadDefault = () => {
 
   return (
     <div>
-      <AcceptedFilesList files={filesToUpload} />
+      <AcceptedFilesList
+          files={filesToUpload}
+          {...props}
+      />
       <FileUpload
           onFilesAccepted={handleOnFilesAccepted}
+          {...props}
       />
     </div>
   )

@@ -1,0 +1,24 @@
+name: 'Coverage Badge'
+description: 'Creates a Jest Coverage Badge'
+inputs:
+  badge-title:
+    description: 'The badge text'
+    required: true
+  coverage-summary-file:
+    description: 'Location of the coverage-summary.json file relative to the script'
+    required: true
+  github-repo:
+    description: 'The repo'
+    required: true
+  github-token:
+    description: 'The repo secret token'
+    required: true
+  minimum-coverage-pct:
+    description: 'The minimum coverage percentage'
+    required: true
+  pull-number:
+    description: 'The PR number'
+    required: true
+runs:
+  using: 'node12'
+  main: 'coverage-badge.js'

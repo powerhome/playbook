@@ -1,13 +1,14 @@
 import React from 'react'
 import { Body, Icon } from '../../'
 
-const IconDefaultDark = () => {
+const IconDefaultDark = (props) => {
   return (
     <div>
       <Body dark>
         <Icon
             fixedWidth
             icon="user"
+            {...props}
         />
       </Body>
     </div>

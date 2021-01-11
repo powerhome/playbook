@@ -1,11 +1,12 @@
 import React from 'react'
 import { Table } from '../../'
 
-const TableDisableHover = () => {
+const TableDisableHover = (props) => {
   return (
     <Table
         disableHover
         size="md"
+        {...props}
     >
       <thead>
         <tr>

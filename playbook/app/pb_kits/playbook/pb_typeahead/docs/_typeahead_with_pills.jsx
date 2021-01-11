@@ -10,7 +10,7 @@ const options = [
   { label: 'Roofs', value: '#0000FF' },
 ]
 
-const TypeaheadWithPills = () => {
+const TypeaheadWithPills = (props) => {
   return (
     <>
       <Typeahead
@@ -18,6 +18,7 @@ const TypeaheadWithPills = () => {
           label="Colors"
           options={options}
           placeholder=""
+          {...props}
       />
     </>
   )

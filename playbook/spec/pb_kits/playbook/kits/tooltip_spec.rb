@@ -9,6 +9,7 @@ RSpec.describe Playbook::PbTooltip::Tooltip do
 
   it { is_expected.to define_prop(:position) }
   it { is_expected.to define_prop(:trigger_element_id) }
+  it { is_expected.to define_prop(:trigger_element_selector) }
   it { is_expected.to define_prop(:tooltip_id) }
   it { is_expected.to define_boolean_prop(:dark).with_default(false) }
 
