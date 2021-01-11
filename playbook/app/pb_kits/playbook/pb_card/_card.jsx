@@ -17,6 +17,7 @@ type CardPropTypes = {
   padding?: string,
   selected?: boolean,
   shadow?: "none" | "deep" | "deeper" | "deepest",
+  squareCorners?: boolean,
 }
 
 type CardHeaderProps = {
@@ -67,10 +68,12 @@ const Card = (props: CardPropTypes) => {
     highlight = {},
     selected = false,
     shadow = 'none',
+    squareCorners = false,
     padding = 'md',
   } = props
   const borderCSS = borderNone == true ? 'border_none' : ''
-  const cardCss = buildCss('pb_card_kit', `shadow_${shadow}`, `${borderCSS}`, {
+  const squareBorderCSS = squareCorners == true ? 'square_corners' : ''
+  const cardCss = buildCss('pb_card_kit', `shadow_${shadow}`, `${borderCSS}`, `${squareBorderCSS}`, {
     selected,
     deselected: !selected,
     [`highlight_${highlight.position}`]: highlight.position,

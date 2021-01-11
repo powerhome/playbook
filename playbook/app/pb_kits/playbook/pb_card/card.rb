@@ -15,6 +15,8 @@ module Playbook
                        default: {}
       prop :border_none, type: Playbook::Props::Boolean,
                          default: false
+      prop :square_corners, type: Playbook::Props::Boolean,
+                            default: false
 
       def classname
         generate_classname("pb_card_kit",
@@ -22,7 +24,8 @@ module Playbook
                            shadow_class,
                            highlight_position_class,
                            highlight_color_class,
-                           border_class)
+                           border_class,
+                           square_border_class)
       end
 
       def body_padding
@@ -54,6 +57,10 @@ module Playbook
 
       def border_class
         border_none == true ? "border_none" : nil
+      end
+
+      def square_border_class
+        square_corners == true ? "square_corners" : nil
       end
     end
   end
