@@ -1,7 +1,7 @@
 import React from 'react'
 import { Button, Filter, Flex, Select, TextInput } from '../../'
 
-const FilterDefault = () => {
+const FilterDefault = (props) => {
   const options = [
     { value: 'USA' },
     { value: 'Canada' },
@@ -13,6 +13,7 @@ const FilterDefault = () => {
 
     <>
       <Filter
+          {...props}
           double
           filters={{
             'Full Name': 'John Wick',
@@ -55,6 +56,7 @@ const FilterDefault = () => {
       <br />
 
       <Filter
+          {...props}
           double
           results={1}
           sortOptions={{
