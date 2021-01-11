@@ -20,6 +20,7 @@ type SelectableCardProps = {
   checked: boolean,
   children?: array<React.ReactChild>,
   className?: string,
+  dark?: boolean,
   data: object,
   disabled?: boolean,
   icon?: boolean,
@@ -37,6 +38,7 @@ const SelectableCard = ({
   checked = false,
   children,
   className,
+  dark = false,
   data = {},
   disabled = false,
   icon = false,
@@ -55,7 +57,9 @@ const SelectableCard = ({
     { 'checked': checked,
       'disabled': disabled,
       'enabled': !disabled }),
-  className)
+  dark && 'dark' || '',
+  className
+  )
 
   const displayIcon = () => {
     if (icon === true) {
@@ -73,7 +77,6 @@ const SelectableCard = ({
   const inputType = multi === false ? 'radio' : 'checkbox'
 
   const inputIdPresent = inputId !== null ? inputId : name
-
   return (
     <div
         {...ariaProps}
