@@ -1,11 +1,12 @@
 import React from 'react'
 import { Source } from '../../'
 
-const SourceDefault = () => (
+const SourceDefault = (props) => (
   <>
     <Source
         source="BJ's Johnston-208"
         type="retail"
+        {...props}
     />
 
     <br />
@@ -14,6 +15,7 @@ const SourceDefault = () => (
     <Source
         source="Referral-phrg"
         type="inbound"
+        {...props}
     />
 
     <br />
@@ -30,6 +32,7 @@ const SourceDefault = () => (
                 userId: '48582',
               }
             }
+        {...props}
     />
   </>
 )

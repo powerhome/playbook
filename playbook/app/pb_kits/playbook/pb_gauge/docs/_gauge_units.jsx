@@ -8,13 +8,14 @@ const data2 = [
   { name: 'Sales to Date', value: 65 },
 ]
 
-const GaugeUnits = () => (
+const GaugeUnits = (props) => (
   <div>
     <Gauge
         chartData={data1}
         id="gauge-units1"
         suffix="GB"
         title="Data Usage"
+        {...props}
     />
     <Gauge
         chartData={data2}
@@ -22,6 +23,7 @@ const GaugeUnits = () => (
         prefix="$"
         suffix="k"
         title="Sales Goal"
+        {...props}
     />
   </div>
 )

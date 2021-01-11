@@ -12,6 +12,7 @@ $pb_selectable_card_border: 2px;
 
 [class^=pb_selectable_card_kit] {
   display: block;
+  margin-bottom: 0;
 
   > label {
     @include pb_card;

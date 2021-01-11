@@ -1,7 +1,7 @@
 import React from 'react'
 import { DatePicker } from '../../'
 
-const DatePickerYearRange = () => (
+const DatePickerYearRange = (props) => (
   <div>
     <DatePicker
         defaultDate="05/05/2015"
@@ -9,6 +9,7 @@ const DatePickerYearRange = () => (
         minDate="01/01/2015"
         pickerId="date-picker-year-range"
         yearRange={[2015, 2018]}
+        {...props}
     />
   </div>
 )

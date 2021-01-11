@@ -32,6 +32,9 @@
         @include pb_card_header_color($color_value);
       }
     }
+    &[class*=_white] {
+      border-bottom: 1px solid $border_light;
+    }
   }
 
   [class^=pb_card_body_kit] {

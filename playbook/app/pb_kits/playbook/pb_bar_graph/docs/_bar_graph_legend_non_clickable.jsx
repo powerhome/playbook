@@ -6,7 +6,7 @@ const chartData = [{
   data: [1475, 200, 3000, 654, 656],
 }]
 
-const BarGraphLegendNonClickable = () => (
+const BarGraphLegendNonClickable = (props) => (
   <div>
     <BarGraph
         axisTitle="Number of Employees"
@@ -17,6 +17,7 @@ const BarGraphLegendNonClickable = () => (
         toggleLegendClick={false}
         xAxisCategories={['Jan', 'Feb', 'Mar', 'Apr', 'May']}
         yAxisMin={0}
+        {...props}
     />
   </div>
 )

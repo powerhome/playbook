@@ -1,7 +1,7 @@
 import React from 'react'
 import { IconStatValue } from '../../'
 
-const IconStatValueDefault = () => {
+const IconStatValueDefault = (props) => {
   return (
     <div>
       <IconStatValue
@@ -9,6 +9,7 @@ const IconStatValueDefault = () => {
           text="Electric"
           unit="kw"
           value={64.18}
+          {...props}
       />
       <br />
       <IconStatValue
@@ -16,6 +17,7 @@ const IconStatValueDefault = () => {
           text="deadline"
           unit="days"
           value={24}
+          {...props}
       />
     </div>
 

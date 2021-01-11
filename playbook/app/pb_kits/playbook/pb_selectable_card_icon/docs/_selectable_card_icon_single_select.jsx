@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { SelectableCardIcon } from '../../'
 
-const SelectableCardIconSingleSelect = () => {
+const SelectableCardIconSingleSelect = (props) => {
   const [selectedFormat, toggleFormat] = useState(null)
 
   return (
@@ -14,6 +14,7 @@ const SelectableCardIconSingleSelect = () => {
           onChange={() => toggleFormat('car')}
           titleText="Car"
           value="car"
+          {...props}
       />
       <SelectableCardIcon
           checked={selectedFormat === 'bus'}
@@ -23,6 +24,7 @@ const SelectableCardIconSingleSelect = () => {
           onChange={() => toggleFormat('bus')}
           titleText="Bus"
           value="bus"
+          {...props}
       />
       <SelectableCardIcon
           checked={selectedFormat === 'subway'}
@@ -32,6 +34,7 @@ const SelectableCardIconSingleSelect = () => {
           onChange={() => toggleFormat('subway')}
           titleText="Subway"
           value="subway"
+          {...props}
       />
     </div>
   )

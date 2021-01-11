@@ -1,7 +1,7 @@
 import React from 'react'
 import { PersonContact } from '../../'
 
-const PersonContactMultiple = () => {
+const PersonContactMultiple = (props) => {
   return (
     <div>
       <PersonContact
@@ -20,6 +20,7 @@ const PersonContactMultiple = () => {
         ]}
           firstName="Harvey"
           lastName="Walters"
+          {...props}
       />
       <PersonContact
           contacts={[
@@ -29,6 +30,7 @@ const PersonContactMultiple = () => {
         ]}
           firstName="Brenda"
           lastName="Walters"
+          {...props}
       />
     </div>
   )

@@ -32,12 +32,13 @@ const dataWithLabels = [
   },
 ]
 
-const CircleChartWithLabels = () => (
+const CircleChartWithLabels = (props) => (
   <div>
     <CircleChart
         chartData={dataWithLabels}
         dataLabels
         id="with-labels-example"
+        {...props}
     />
   </div>
 )

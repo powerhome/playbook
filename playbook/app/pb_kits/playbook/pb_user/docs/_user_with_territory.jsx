@@ -1,7 +1,7 @@
 import React from 'react'
 import { User } from '../../'
 
-const UserWithTerritory = () => {
+const UserWithTerritory = (props) => {
   return (
     <div className="pb--doc-demo-row">
 
@@ -14,6 +14,7 @@ const UserWithTerritory = () => {
             size="lg"
             territory="PHL"
             title="Remodeling Consultant"
+            {...props}
         />
       </div>
 
@@ -25,6 +26,7 @@ const UserWithTerritory = () => {
             orientation="horizontal"
             territory="PHL"
             title="Remodeling Consultant"
+            {...props}
         />
       </div>
 
@@ -36,6 +38,7 @@ const UserWithTerritory = () => {
             size="sm"
             territory="PHL"
             title="Remodeling Consultant"
+            {...props}
         />
 
         <br />
@@ -47,6 +50,7 @@ const UserWithTerritory = () => {
             size="lg"
             territory="PHL"
             title="Remodeling Consultant"
+            {...props}
         />
       </div>
 

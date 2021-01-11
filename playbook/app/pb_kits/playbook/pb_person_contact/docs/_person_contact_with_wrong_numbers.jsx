@@ -1,7 +1,7 @@
 import React from 'react'
 import { PersonContact } from '../../'
 
-const PersonContactWithWrongNumbers = () => {
+const PersonContactWithWrongNumbers = (props) => {
   return (
     <>
       <PersonContact
@@ -25,6 +25,7 @@ const PersonContactWithWrongNumbers = () => {
           firstName="Pauline"
           key="person-contact-1"
           lastName="Smith"
+          {...props}
       />
     </>
   )

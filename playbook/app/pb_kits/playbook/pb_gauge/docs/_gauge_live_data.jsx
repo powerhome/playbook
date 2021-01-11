@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Button, Gauge } from '../../'
 
-const GaugeLiveData = () => {
+const GaugeLiveData = (props) => {
   const [value, setValue] = useState(50)
   const [name, setName] = useState('Name')
 
@@ -24,14 +24,17 @@ const GaugeLiveData = () => {
       <Button
           onClick={updateValue}
           text="Update Value"
+          {...props}
       />
       <Button
           onClick={updateName}
           text="Update Name"
+          {...props}
       />
       <Gauge
           chartData={[{ name: name, value: value }]}
           id="gauge-live-data"
+          {...props}
       />
     </div>
   )
