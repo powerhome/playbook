@@ -13,7 +13,6 @@ const FilterDefault = (props) => {
 
     <>
       <Filter
-          {...props}
           double
           filters={{
             'Full Name': 'John Wick',
@@ -28,6 +27,7 @@ const FilterDefault = (props) => {
             manager_name: 'Manager\'s Name',
           }}
           sortValue={[{ name: 'popularity', dir: 'desc' }]}
+          {...props}
       >
         <TextInput
             label="Full Name"
@@ -61,7 +61,6 @@ const FilterDefault = (props) => {
       <br />
 
       <Filter
-          {...props}
           double
           results={1}
           sortOptions={{
@@ -72,6 +71,7 @@ const FilterDefault = (props) => {
             manager_name: 'Manager\'s Name',
           }}
           sortValue={[{ name: 'popularity', dir: 'desc' }]}
+          {...props}
       >
         <TextInput
             label="Example Text Field"
