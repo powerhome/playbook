@@ -1,60 +1,53 @@
-import React from 'react'
+import React, { useState } from 'react'
 import SelectableCard from '../_selectable_card.jsx'
 
-class SelectableCardSingleSelect extends React.Component {
-  state = {
-    selected: null,
+const SelectableCardSingleSelect = (props) => {
+  const [selected, setSelected] = useState(null)
+  const handleSelect = (event) => {
+    setSelected(event.target.value)
   }
 
-  handleSelect = (event) => {
-    this.setState({
-      selected: event.target.value,
-    })
-  }
+  return (
+    <div className="pb--doc-demo-row">
 
-  render() {
-    return (
-      <div className="pb--doc-demo-row">
+      <SelectableCard
+          checked={selected === 'male'}
+          inputId="male1"
+          multi={false}
+          name="gender"
+          onChange={handleSelect}
+          value="male"
+          {...props}
+      >
+        {'Male'}
+      </SelectableCard>
 
-        <SelectableCard
-            checked={this.state.selected === 'male'}
-            inputId="male1"
-            multi={false}
-            name="gender"
-            onChange={this.handleSelect.bind(this)}
-            value="male"
-            {...this.props}
-        >
-          {'Male'}
-        </SelectableCard>
+      <SelectableCard
+          checked={selected === 'female'}
+          inputId="female1"
+          multi={false}
+          name="gender"
+          onChange={handleSelect}
+          value="female"
+          {...props}
+      >
+        {'Female'}
+      </SelectableCard>
 
-        <SelectableCard
-            checked={this.state.selected === 'female'}
-            inputId="female1"
-            multi={false}
-            name="gender"
-            onChange={this.handleSelect.bind(this)}
-            value="female"
-            {...this.props}
-        >
-          {'Female'}
-        </SelectableCard>
+      <SelectableCard
+          checked={selected === 'other'}
+          inputId="other1"
+          multi={false}
+          name="gender"
+          onChange={handleSelect}
+          value="other"
+          {...props}
+      >
+        {'Other'}
+      </SelectableCard>
 
-        <SelectableCard
-            checked={this.state.selected === 'other'}
-            inputId="other1"
-            multi={false}
-            name="gender"
-            onChange={this.handleSelect.bind(this)}
-            value="other"
-            {...this.props}
-        >
-          {'Other'}
-        </SelectableCard>
-
-      </div>
-    )
-  }
+    </div>
+  )
 }
 
 export default SelectableCardSingleSelect
