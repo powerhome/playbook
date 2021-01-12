@@ -57,7 +57,7 @@ const SelectableCard = ({
     { 'checked': checked,
       'disabled': disabled,
       'enabled': !disabled }),
-  dark && 'dark' || '',
+  dark ? 'dark' : '',
   className
   )
 
