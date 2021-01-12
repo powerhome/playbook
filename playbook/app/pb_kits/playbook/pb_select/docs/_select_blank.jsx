@@ -1,7 +1,7 @@
 import React from 'react'
 import { Select } from '../../'
 
-const SelectBlank = () => {
+const SelectBlank = (props) => {
   const options = [
     { value: 'USA' },
     { value: 'Canada' },
@@ -16,6 +16,7 @@ const SelectBlank = () => {
           label="Where do you live"
           name="location"
           options={options}
+          {...props}
       />
     </div>
   )

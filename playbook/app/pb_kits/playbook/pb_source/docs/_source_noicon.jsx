@@ -1,12 +1,13 @@
 import React from 'react'
 import { Source } from '../../'
 
-const SourceNoicon = () => (
+const SourceNoicon = (props) => (
   <>
     <Source
         hideIcon
         source="BJ's Johnston-208"
         type="retail"
+        {...props}
     />
 
     <br />
@@ -16,6 +17,7 @@ const SourceNoicon = () => (
         hideIcon
         source="Referral-phrg"
         type="inbound"
+        {...props}
     />
 
     <br />
@@ -33,6 +35,7 @@ const SourceNoicon = () => (
                 userId: '48582',
                 }
               }
+        {...props}
     />
   </>
 )

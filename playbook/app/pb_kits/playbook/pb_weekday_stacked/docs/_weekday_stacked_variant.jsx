@@ -3,18 +3,21 @@ import {
   WeekdayStacked,
 } from '../../'
 
-const WeekdayStackedVariant = () => (
+const WeekdayStackedVariant = (props) => (
   <div>
     <WeekdayStacked
         variant="day_only"
+        {...props}
     />
     <WeekdayStacked
         align="center"
         variant="month_day"
+        {...props}
     />
     <WeekdayStacked
         align="right"
         variant="expanded"
+        {...props}
     />
   </div>
 )

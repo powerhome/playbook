@@ -1,12 +1,13 @@
 import React from 'react'
 import { IconValue } from '../../'
 
-const IconValueAlign = () => {
+const IconValueAlign = (props) => {
   return (
     <div>
       <IconValue
           icon="heart"
           text="93"
+          {...props}
       />
 
       <br />
@@ -15,6 +16,7 @@ const IconValueAlign = () => {
           align="center"
           icon="comment"
           text="5"
+          {...props}
       />
 
       <br />
@@ -23,6 +25,7 @@ const IconValueAlign = () => {
           align="right"
           icon="clock"
           text="15min"
+          {...props}
       />
     </div>
   )

@@ -1,7 +1,7 @@
 import React from 'react'
 import { Select } from '../../'
 
-const SelectRequired = () => {
+const SelectRequired = (props) => {
   const options = [
     { value: 'Left' },
     { value: 'Right' },
@@ -16,6 +16,7 @@ const SelectRequired = () => {
           name="shoe"
           options={options}
           required
+          {...props}
       />
     </div>
   )

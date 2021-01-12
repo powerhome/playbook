@@ -1,13 +1,14 @@
 import React from 'react'
 import { Icon } from '../../'
 
-const IconSizes = () => {
+const IconSizes = (props) => {
   return (
     <div>
       <p>
         <Icon
             icon="user"
             size="lg"
+            {...props}
         />
         {' '}
         <span>{'Large'}</span>
@@ -16,6 +17,7 @@ const IconSizes = () => {
         <Icon
             icon="user"
             size="sm"
+            {...props}
         />
         {' '}
         <span>{'Small'}</span>
@@ -24,6 +26,7 @@ const IconSizes = () => {
         <Icon
             icon="user"
             size="xs"
+            {...props}
         />
         {' '}
         <span>{'XSmall'}</span>
@@ -36,6 +39,7 @@ const IconSizes = () => {
         <Icon
             icon="user"
             size="1x"
+            {...props}
         />
         {' '}
         <span>{'1x'}</span>
@@ -44,6 +48,7 @@ const IconSizes = () => {
         <Icon
             icon="user"
             size="2x"
+            {...props}
         />
         {' '}
         <span>{'2x'}</span>
@@ -52,6 +57,7 @@ const IconSizes = () => {
         <Icon
             icon="user"
             size="3x"
+            {...props}
         />
         {' '}
         <span>{'3x'}</span>
@@ -60,6 +66,7 @@ const IconSizes = () => {
         <Icon
             icon="user"
             size="4x"
+            {...props}
         />
         {' '}
         <span>{'4x'}</span>
@@ -68,6 +75,7 @@ const IconSizes = () => {
         <Icon
             icon="user"
             size="5x"
+            {...props}
         />
         {' '}
         <span>{'5x'}</span>
@@ -76,6 +84,7 @@ const IconSizes = () => {
         <Icon
             icon="user"
             size="6x"
+            {...props}
         />
         {' '}
         <span>{'6x'}</span>
@@ -84,6 +93,7 @@ const IconSizes = () => {
         <Icon
             icon="user"
             size="7x"
+            {...props}
         />
         {' '}
         <span>{'7x'}</span>
@@ -92,6 +102,7 @@ const IconSizes = () => {
         <Icon
             icon="user"
             size="8x"
+            {...props}
         />
         {' '}
         <span>{'8x'}</span>
@@ -100,6 +111,7 @@ const IconSizes = () => {
         <Icon
             icon="user"
             size="9x"
+            {...props}
         />
         {' '}
         <span>{'9x'}</span>
@@ -108,6 +120,7 @@ const IconSizes = () => {
         <Icon
             icon="user"
             size="10x"
+            {...props}
         />
         {' '}
         <span>{'10x'}</span>

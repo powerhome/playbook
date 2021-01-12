@@ -1,19 +1,24 @@
 document.addEventListener("DOMContentLoaded", function () {
-  document.querySelector(".compress").style.display = "none"
 
-  document.querySelector(".toggle-button-js").addEventListener("click", (e) => {
+  document.querySelector("#toggle-button-js").addEventListener("click", (e) => {
     e.preventDefault()
     document.querySelector(".pb--codeCopy").classList.toggle("close")
   })
 
-  document.querySelector(".expand").addEventListener("click", () => {
-    document.querySelector(".sample-nav").style.display = "none"
-    document.querySelector(".compress").style.display = "inline-block"
+  document.addEventListener("click", (e) => {
+    const openDrawer = document.querySelector(".pb--codeCopy")
+    const codeToggle = document.querySelector("#toggle-button-js")
+    if (!(e.target == openDrawer || openDrawer.contains(e.target) || e.target == codeToggle || codeToggle.contains(e.target))) {
+      openDrawer.classList.add("close")
+    }
   })
 
-  document.querySelector(".compress").addEventListener("click", () => {
-    document.querySelector(".sample-nav").style.display = "flex"
-    document.querySelector(".compress").style.display = "none"
+  document.querySelector("#fullscreen-toggle").addEventListener("click", () => {
+    if (document.fullscreenElement){
+      document.exitFullscreen()
+    } else {
+      document.querySelector("#sample-card").requestFullscreen()
+    }
   })
 
   const setClipboard = (value) => {

@@ -10,11 +10,12 @@ const options = [
   { label: 'Blue', value: '#0000FF' },
 ]
 
-const TypeaheadDefault = () => {
+const TypeaheadDefault = (props) => {
   return (
     <Typeahead
         label="Colors"
         options={options}
+        {...props}
     />
   )
 }

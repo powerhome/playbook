@@ -1,7 +1,7 @@
 import React from 'react'
 import FormPill from '../_form_pill.jsx'
 
-const FormPillDefault = () => {
+const FormPillDefault = (props) => {
   return (
     <div>
       <FormPill
@@ -9,6 +9,7 @@ const FormPillDefault = () => {
 alert('Click!')
 }}
           text="this is a tag"
+          {...props}
       />
     </div>
   )

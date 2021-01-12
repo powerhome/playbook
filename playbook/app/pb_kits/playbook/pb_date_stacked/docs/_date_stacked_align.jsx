@@ -1,12 +1,13 @@
 import React from 'react'
 import DateStacked from '../_date_stacked.jsx'
 
-const DateStackedAlign = () => {
+const DateStackedAlign = (props) => {
   return (
     <div>
       <DateStacked
           date={new Date()}
           size="sm"
+          {...props}
       />
 
       <br />
@@ -14,6 +15,7 @@ const DateStackedAlign = () => {
       <DateStacked
           align="center"
           date={new Date()}
+          {...props}
       />
 
       <br />
@@ -21,6 +23,7 @@ const DateStackedAlign = () => {
       <DateStacked
           align="right"
           date={new Date()}
+          {...props}
       />
 
       <br />
@@ -28,6 +31,7 @@ const DateStackedAlign = () => {
       <DateStacked
           date={new Date()}
           size="md"
+          {...props}
       />
 
       <br />
@@ -36,6 +40,7 @@ const DateStackedAlign = () => {
           align="center"
           date={new Date()}
           size="md"
+          {...props}
       />
 
       <br />
@@ -44,6 +49,7 @@ const DateStackedAlign = () => {
           align="right"
           date={new Date()}
           size="md"
+          {...props}
       />
 
     </div>

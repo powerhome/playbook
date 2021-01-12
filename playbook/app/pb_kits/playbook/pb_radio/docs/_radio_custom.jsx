@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Radio } from '../../'
 
-const RadioCustom = () => {
+const RadioCustom = (props) => {
   const [choice, setChoice] = useState('power')
 
   const handleOnChange = ({ target }) => {
@@ -18,6 +18,7 @@ const RadioCustom = () => {
       <Radio
           className="my_custom_class"
           label="Custom Power"
+          {...props}
       >
         <input
             checked={choice === 'power'}
@@ -25,12 +26,14 @@ const RadioCustom = () => {
             onChange={handleOnChange}
             type="radio"
             value="power"
+            {...props}
         />
       </Radio>
       <br />
       <Radio
           className="my_custom_class"
           label="Custom Nitro"
+          {...props}
       >
         <input
             checked={choice === 'nitro'}
@@ -38,12 +41,14 @@ const RadioCustom = () => {
             onChange={handleOnChange}
             type="radio"
             value="nitro"
+            {...props}
         />
       </Radio>
       <br />
       <Radio
           className="my_custom_class"
           label="Custom Google"
+          {...props}
       >
         <input
             checked={choice === 'google'}
@@ -51,6 +56,7 @@ const RadioCustom = () => {
             onChange={handleOnChange}
             type="radio"
             value="google"
+            {...props}
         />
       </Radio>
     </div>

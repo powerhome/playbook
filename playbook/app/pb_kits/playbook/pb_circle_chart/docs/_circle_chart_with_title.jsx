@@ -32,12 +32,13 @@ const dataWithTitle = [
   },
 ]
 
-const CircleChartWithLegendKit = () => (
+const CircleChartWithLegendKit = (props) => (
   <div>
     <CircleChart
         chartData={dataWithTitle}
         id="with-title-example"
         title="Active Users on Social Media"
+        {...props}
     />
   </div>
 )

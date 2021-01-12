@@ -1,12 +1,13 @@
 import React from 'react'
 import { TitleCount } from '../../'
 
-const TitleCountAlign = () => {
+const TitleCountAlign = (props) => {
   return (
     <>
       <TitleCount
           count={527}
           title="Remodeling Consultants"
+          {...props}
       />
 
       <br />
@@ -15,6 +16,7 @@ const TitleCountAlign = () => {
           align="center"
           count={527}
           title="Remodeling Consultants"
+          {...props}
       />
 
       <br />
@@ -23,6 +25,7 @@ const TitleCountAlign = () => {
           align="right"
           count={527}
           title="Remodeling Consultants"
+          {...props}
       />
     </>
   )
