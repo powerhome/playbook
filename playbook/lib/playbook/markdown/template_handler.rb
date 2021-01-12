@@ -1,8 +1,12 @@
 require 'redcarpet'
 
-module ActionView
-  module Template::Handlers
-    class Markdown
+module Playbook
+  module Markdown
+    class HTMLWithPants < Redcarpet::Render::HTML
+      include Redcarpet::Render::SmartyPants
+    end
+
+    class TemplateHandler
       class_attribute :default_format
       self.default_format = Mime[:html]
 
@@ -29,7 +33,7 @@ module ActionView
         end
 
         def markdown
-          @markdown ||= Redcarpet::Markdown.new(HTMLWithPants, md_options)
+          @markdown ||= Redcarpet::Markdown.new(::Playbook::Markdown::HTMLWithPants, md_options)
         end
 
         def erb
@@ -39,9 +43,3 @@ module ActionView
     end
   end
 end
-
-class HTMLWithPants < Redcarpet::Render::HTML
-  include Redcarpet::Render::SmartyPants
-end
-
-ActionView::Template.register_template_handler(:md, ActionView::Template::Handlers::Markdown)

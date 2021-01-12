@@ -8,6 +8,7 @@ require "webpacker/react"
 require "playbook/props"
 require "playbook/version"
 require "playbook/engine" if defined?(Rails)
+require "playbook/markdown/template_handler"
 
 module Playbook
   class ConflictingPropsError < StandardError; end
