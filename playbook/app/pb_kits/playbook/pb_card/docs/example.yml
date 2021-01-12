@@ -9,7 +9,7 @@ examples:
   - card_content: Content Size
   - card_separator: Separator Card
   - card_border_none: No Border
-  - card_square_corners: Square Corners
+  - card_border_radius: Border Radius
   react:
   - card_light: Default
   - card_highlight: Highlight Cards
@@ -20,4 +20,4 @@ examples:
   - card_content: Content Size
   - card_separator: Separator Card
   - card_border_none: No Border
-  - card_square_corners: Square Corners
+  - card_border_radius: Border Radius

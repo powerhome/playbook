@@ -8,10 +8,6 @@
     @include pb_card_selected;
   }
 
-  &[class*=_square_corners] {
-    border-radius: 0px;
-  }
-
   &.dark {
     @include pb_card_dark;
 
