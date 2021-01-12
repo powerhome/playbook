@@ -5,10 +5,10 @@ const CheckboxDefault = (props) => {
   return (
     <div>
       <Checkbox
-          {...props}
           name="default name"
           text="Checkbox label"
           value="default value"
+          {...props}
       />
     </div>
   )

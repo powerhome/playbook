@@ -4,10 +4,10 @@ import { CircleIconButton } from '../..'
 const CircleIconButtonClick = (props) => (
   <div>
     <CircleIconButton
-        {...props}
         icon="plus"
         onClick={() => alert('Click!')}
         variant="primary"
+        {...props}
     />
   </div>
 )

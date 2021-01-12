@@ -15,10 +15,10 @@
   <%= pb_rails("background", props: { background_color: "white", padding: "xl" }) do %>
     <div class="main-content-wrapper">
       <%# Loop through each Sample Category in samples.yml %>
-      <% @sample_yaml.each_with_index do |category, i| %>
+      <% SAMPLES.each_with_index do |category, i| %>
 
         <% category_title = category[0] %>
-        <% category_pages = @sample_yaml[category_title] %>
+        <% category_pages = SAMPLES[category_title] %>
 
         <% if category_pages %>
 

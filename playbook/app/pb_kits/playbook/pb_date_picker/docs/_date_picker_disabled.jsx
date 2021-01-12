@@ -1,17 +1,19 @@
 import React from 'react'
 import { DatePicker } from '../../'
 
-const DatePickerDisabled = () => (
+const DatePickerDisabled = (props) => (
   <div>
     <DatePicker
         disableDate={[new Date().fp_incr(1)]}
         label="Disable Single Date"
         pickerId="single-disabled-date"
+        {...props}
     />
     <DatePicker
         disableDate={[new Date().fp_incr(1), new Date().fp_incr(3)]}
         label="Disable Multiple Dates"
         pickerId="multiple-disabled-dates"
+        {...props}
     />
     <DatePicker
         disableRange={[
@@ -22,6 +24,7 @@ const DatePickerDisabled = () => (
         ]}
         label="Disable Single Range"
         pickerId="single-date-range"
+        {...props}
     />
     <DatePicker
         disableRange={[
@@ -36,11 +39,13 @@ const DatePickerDisabled = () => (
         ]}
         label="Disable Multiple Ranges"
         pickerId="multiple-date-ranges"
+        {...props}
     />
     <DatePicker
         disableWeekdays={['Sunday', 'Saturday']}
         label="Disable Specific Weekdays"
         pickerId="disabled-weekdays"
+        {...props}
     />
   </div>
 )

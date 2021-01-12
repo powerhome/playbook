@@ -100,7 +100,16 @@
       }
       &_value_container {
         flex-grow: 1;
+        position: relative;
       }
+    }
+    .placeholder {
+      position: absolute;
+      margin-right: 2px;
+      margin-left: 2px;
+      top: 50%;
+      transform: translateY(-50%);
+      box-sizing: border-box;
     }
   }
 }

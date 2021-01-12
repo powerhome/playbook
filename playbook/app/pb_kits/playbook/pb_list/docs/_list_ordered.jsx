@@ -2,11 +2,12 @@ import React from 'react'
 
 import { List, ListItem } from '../../'
 
-const ListOrdered = () => {
+const ListOrdered = (props) => {
   return (
     <>
       <List
           ordered
+          {...props}
       >
         <ListItem>{'Item 1'}</ListItem>
         <ListItem>{'Item 2'}</ListItem>

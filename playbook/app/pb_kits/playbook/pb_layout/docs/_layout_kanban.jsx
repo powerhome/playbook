@@ -12,7 +12,7 @@ import {
   Title,
 } from '../../'
 
-const LayoutKanban = () => {
+const LayoutKanban = (props) => {
   return (
     <div>
       <Layout layout="kanban">
@@ -21,10 +21,12 @@ const LayoutKanban = () => {
           <Card
               padding="sm"
               shadow="deep"
+              {...props}
           >
             <Flex
                 orientation="row"
                 spacing="between"
+                {...props}
             >
               <FlexItem>
                 <Title size="4">{'Design Homepage'}</Title>
@@ -37,18 +39,21 @@ const LayoutKanban = () => {
                 orientation="row"
                 spacing="between"
                 vertical="bottom"
+                {...props}
             >
               <FlexItem marginTop="xs">
                 <Avatar
                     imageUrl="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=200&fit=max&s=707b9c33066bf8808c934c8ab394dff6"
                     name="Michelle Smith"
                     size="sm"
+                    {...props}
                 />
               </FlexItem>
               <FlexItem>
                 <Flex
                     orientation="row"
                     vertical="center"
+                    {...props}
                 >
                   <Icon icon="clock" />
                   <Timestamp text="00:00:00 h" />
@@ -59,10 +64,12 @@ const LayoutKanban = () => {
           <Card
               padding="sm"
               shadow="deep"
+              {...props}
           >
             <Flex
                 orientation="row"
                 spacing="between"
+                {...props}
             >
               <FlexItem>
                 <Title size="4">{'Change Old App Icon'}</Title>
@@ -75,18 +82,21 @@ const LayoutKanban = () => {
                 orientation="row"
                 spacing="between"
                 vertical="bottom"
+                {...props}
             >
               <FlexItem marginTop="xs">
                 <Avatar
                     imageUrl="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80"
                     name="Roger Donahue"
                     size="sm"
+                    {...props}
                 />
               </FlexItem>
               <FlexItem>
                 <Flex
                     orientation="row"
                     vertical="center"
+                    {...props}
                 >
                   <Icon icon="clock" />
                   <Timestamp text="00:00:00 h" />
@@ -100,10 +110,12 @@ const LayoutKanban = () => {
           <Card
               padding="sm"
               shadow="deep"
+              {...props}
           >
             <Flex
                 orientation="row"
                 spacing="between"
+                {...props}
             >
               <FlexItem>
                 <Title size="4">{'Dashboard Updates'}</Title>
@@ -116,18 +128,21 @@ const LayoutKanban = () => {
                 orientation="row"
                 spacing="between"
                 vertical="bottom"
+                {...props}
             >
               <FlexItem marginTop="xs">
                 <Avatar
                     imageUrl="https://images.unsplash.com/photo-1509868918748-a554ad25f858?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=200&fit=max&s=3159ec467959b2aada4b75d565c270aa"
                     name="Michelle Smith"
                     size="sm"
+                    {...props}
                 />
               </FlexItem>
               <FlexItem>
                 <Flex
                     orientation="row"
                     vertical="center"
+                    {...props}
                 >
                   <Icon icon="clock" />
                   <Timestamp text="00:00:00 h" />
@@ -138,10 +153,12 @@ const LayoutKanban = () => {
           <Card
               padding="sm"
               shadow="deep"
+              {...props}
           >
             <Flex
                 orientation="row"
                 spacing="between"
+                {...props}
             >
               <FlexItem>
                 <Title size="4">{'Usability Testing'}</Title>
@@ -154,6 +171,7 @@ const LayoutKanban = () => {
                 orientation="row"
                 spacing="between"
                 vertical="bottom"
+                {...props}
             >
               <FlexItem marginTop="xs">
                 <MultipleUsers
@@ -176,6 +194,7 @@ const LayoutKanban = () => {
                 <Flex
                     orientation="row"
                     vertical="center"
+                    {...props}
                 >
                   <Icon icon="clock" />
                   <Timestamp text="00:00:00 h" />
@@ -186,10 +205,12 @@ const LayoutKanban = () => {
           <Card
               padding="sm"
               shadow="deep"
+              {...props}
           >
             <Flex
                 orientation="row"
                 spacing="between"
+                {...props}
             >
               <FlexItem>
                 <Title size="4">{'New Icons'}</Title>
@@ -202,18 +223,21 @@ const LayoutKanban = () => {
                 orientation="row"
                 spacing="between"
                 vertical="bottom"
+                {...props}
             >
               <FlexItem marginTop="xs">
                 <Avatar
                     imageUrl="https://images.unsplash.com/photo-1502378735452-bc7d86632805?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=200&fit=max&s=aa3a807e1bbdfd4364d1f449eaa96d82"
                     name="Roger Donahue"
                     size="sm"
+                    {...props}
                 />
               </FlexItem>
               <FlexItem>
                 <Flex
                     orientation="row"
                     vertical="center"
+                    {...props}
                 >
                   <Icon icon="clock" />
                   <Timestamp text="00:00:00 h" />
@@ -227,10 +251,12 @@ const LayoutKanban = () => {
           <Card
               padding="sm"
               shadow="deep"
+              {...props}
           >
             <Flex
                 orientation="row"
                 spacing="between"
+                {...props}
             >
               <FlexItem>
                 <Title size="4">{'Build Full Page Example'}</Title>
@@ -243,18 +269,21 @@ const LayoutKanban = () => {
                 orientation="row"
                 spacing="between"
                 vertical="bottom"
+                {...props}
             >
               <FlexItem marginTop="xs">
                 <Avatar
                     imageUrl="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=200&fit=max&s=707b9c33066bf8808c934c8ab394dff6"
                     name="Michelle Smith"
                     size="sm"
+                    {...props}
                 />
               </FlexItem>
               <FlexItem>
                 <Flex
                     orientation="row"
                     vertical="center"
+                    {...props}
                 >
                   <Icon icon="clock" />
                   <Timestamp text="00:00:00 h" />
@@ -265,10 +294,12 @@ const LayoutKanban = () => {
           <Card
               padding="sm"
               shadow="deep"
+              {...props}
           >
             <Flex
                 orientation="row"
                 spacing="between"
+                {...props}
             >
               <FlexItem>
                 <Title size="4">{'Design System Documentation'}</Title>
@@ -281,18 +312,21 @@ const LayoutKanban = () => {
                 orientation="row"
                 spacing="between"
                 vertical="bottom"
+                {...props}
             >
               <FlexItem marginTop="xs">
                 <Avatar
                     imageUrl="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80"
                     name="Roger Donahue"
                     size="sm"
+                    {...props}
                 />
               </FlexItem>
               <FlexItem>
                 <Flex
                     orientation="row"
                     vertical="center"
+                    {...props}
                 >
                   <Icon icon="clock" />
                   <Timestamp text="00:00:00 h" />
@@ -303,10 +337,12 @@ const LayoutKanban = () => {
           <Card
               padding="sm"
               shadow="deep"
+              {...props}
           >
             <Flex
                 orientation="row"
                 spacing="between"
+                {...props}
             >
               <FlexItem>
                 <Title size="4">{'Prop Bug'}</Title>
@@ -319,18 +355,21 @@ const LayoutKanban = () => {
                 orientation="row"
                 spacing="between"
                 vertical="bottom"
+                {...props}
             >
               <FlexItem marginTop="xs">
                 <Avatar
                     imageUrl="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80"
                     name="Roger Donahue"
                     size="sm"
+                    {...props}
                 />
               </FlexItem>
               <FlexItem>
                 <Flex
                     orientation="row"
                     vertical="center"
+                    {...props}
                 >
                   <Icon icon="clock" />
                   <Timestamp text="00:00:00 h" />
@@ -341,10 +380,12 @@ const LayoutKanban = () => {
           <Card
               padding="sm"
               shadow="deep"
+              {...props}
           >
             <Flex
                 orientation="row"
                 spacing="between"
+                {...props}
             >
               <FlexItem>
                 <Title size="4">{'Discovery Session'}</Title>
@@ -357,18 +398,21 @@ const LayoutKanban = () => {
                 orientation="row"
                 spacing="between"
                 vertical="bottom"
+                {...props}
             >
               <FlexItem marginTop="xs">
                 <Avatar
                     imageUrl="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=200&fit=max&s=707b9c33066bf8808c934c8ab394dff6"
                     name="Michelle Smith"
                     size="sm"
+                    {...props}
                 />
               </FlexItem>
               <FlexItem>
                 <Flex
                     orientation="row"
                     vertical="center"
+                    {...props}
                 >
                   <Icon icon="clock" />
                   <Timestamp text="00:00:00 h" />
@@ -379,10 +423,12 @@ const LayoutKanban = () => {
           <Card
               padding="sm"
               shadow="deep"
+              {...props}
           >
             <Flex
                 orientation="row"
                 spacing="between"
+                {...props}
             >
               <FlexItem>
                 <Title size="4">{'Design Exploration'}</Title>
@@ -395,18 +441,21 @@ const LayoutKanban = () => {
                 orientation="row"
                 spacing="between"
                 vertical="bottom"
+                {...props}
             >
               <FlexItem marginTop="xs">
                 <Avatar
                     imageUrl="https://images.unsplash.com/photo-1513732822839-24f03a92f633?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=200&fit=max&ixid=eyJhcHBfaWQiOjE3Nzg0fQ"
                     name="Roger Donahue"
                     size="sm"
+                    {...props}
                 />
               </FlexItem>
               <FlexItem>
                 <Flex
                     orientation="row"
                     vertical="center"
+                    {...props}
                 >
                   <Icon icon="clock" />
                   <Timestamp text="00:00:00 h" />
@@ -417,10 +466,12 @@ const LayoutKanban = () => {
           <Card
               padding="sm"
               shadow="deep"
+              {...props}
           >
             <Flex
                 orientation="row"
                 spacing="between"
+                {...props}
             >
               <FlexItem>
                 <Title size="4">{'Fix Sketch Bugs'}</Title>
@@ -433,18 +484,21 @@ const LayoutKanban = () => {
                 orientation="row"
                 spacing="between"
                 vertical="bottom"
+                {...props}
             >
               <FlexItem marginTop="xs">
                 <Avatar
                     imageUrl="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80"
                     name="Roger Donahue"
                     size="sm"
+                    {...props}
                 />
               </FlexItem>
               <FlexItem>
                 <Flex
                     orientation="row"
                     vertical="center"
+                    {...props}
                 >
                   <Icon icon="clock" />
                   <Timestamp text="00:00:00 h" />
@@ -455,10 +509,12 @@ const LayoutKanban = () => {
           <Card
               padding="sm"
               shadow="deep"
+              {...props}
           >
             <Flex
                 orientation="row"
                 spacing="between"
+                {...props}
             >
               <FlexItem>
                 <Title size="4">{'Test Out Figma'}</Title>
@@ -471,18 +527,21 @@ const LayoutKanban = () => {
                 orientation="row"
                 spacing="between"
                 vertical="bottom"
+                {...props}
             >
               <FlexItem marginTop="xs">
                 <Avatar
                     imageUrl="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=200&fit=max&s=707b9c33066bf8808c934c8ab394dff6"
                     name="Michelle Smith"
                     size="sm"
+                    {...props}
                 />
               </FlexItem>
               <FlexItem>
                 <Flex
                     orientation="row"
                     vertical="center"
+                    {...props}
                 >
                   <Icon icon="clock" />
                   <Timestamp text="00:00:00 h" />
@@ -493,10 +552,12 @@ const LayoutKanban = () => {
           <Card
               padding="sm"
               shadow="deep"
+              {...props}
           >
             <Flex
                 orientation="row"
                 spacing="between"
+                {...props}
             >
               <FlexItem>
                 <Title size="4">{'Ship New Feature'}</Title>
@@ -509,18 +570,21 @@ const LayoutKanban = () => {
                 orientation="row"
                 spacing="between"
                 vertical="bottom"
+                {...props}
             >
               <FlexItem marginTop="xs">
                 <Avatar
                     imageUrl="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80"
                     name="Roger Donahue"
                     size="sm"
+                    {...props}
                 />
               </FlexItem>
               <FlexItem>
                 <Flex
                     orientation="row"
                     vertical="center"
+                    {...props}
                 >
                   <Icon icon="clock" />
                   <Timestamp text="00:00:00 h" />
@@ -531,10 +595,12 @@ const LayoutKanban = () => {
           <Card
               padding="sm"
               shadow="deep"
+              {...props}
           >
             <Flex
                 orientation="row"
                 spacing="between"
+                {...props}
             >
               <FlexItem>
                 <Title size="4">{'Meet with Client'}</Title>
@@ -547,18 +613,21 @@ const LayoutKanban = () => {
                 orientation="row"
                 spacing="between"
                 vertical="bottom"
+                {...props}
             >
               <FlexItem marginTop="xs">
                 <Avatar
                     imageUrl="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80"
                     name="Roger Donahue"
                     size="sm"
+                    {...props}
                 />
               </FlexItem>
               <FlexItem>
                 <Flex
                     orientation="row"
                     vertical="center"
+                    {...props}
                 >
                   <Icon icon="clock" />
                   <Timestamp text="00:00:00 h" />
@@ -570,10 +639,12 @@ const LayoutKanban = () => {
           <Card
               padding="sm"
               shadow="deep"
+              {...props}
           >
             <Flex
                 orientation="row"
                 spacing="between"
+                {...props}
             >
               <FlexItem>
                 <Title size="4">{'Re-engineer Old Modal'}</Title>
@@ -586,18 +657,21 @@ const LayoutKanban = () => {
                 orientation="row"
                 spacing="between"
                 vertical="bottom"
+                {...props}
             >
               <FlexItem marginTop="xs">
                 <Avatar
                     imageUrl="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=200&fit=max&s=707b9c33066bf8808c934c8ab394dff6"
                     name="Michelle Smith"
                     size="sm"
+                    {...props}
                 />
               </FlexItem>
               <FlexItem>
                 <Flex
                     orientation="row"
                     vertical="center"
+                    {...props}
                 >
                   <Icon icon="clock" />
                   <Timestamp text="00:00:00 h" />
@@ -608,10 +682,12 @@ const LayoutKanban = () => {
           <Card
               padding="sm"
               shadow="deep"
+              {...props}
           >
             <Flex
                 orientation="row"
                 spacing="between"
+                {...props}
             >
               <FlexItem>
                 <Title size="4">{'Setup Permissions'}</Title>
@@ -624,18 +700,21 @@ const LayoutKanban = () => {
                 orientation="row"
                 spacing="between"
                 vertical="bottom"
+                {...props}
             >
               <FlexItem marginTop="xs">
                 <Avatar
                     imageUrl="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80"
                     name="Roger Donahue"
                     size="sm"
+                    {...props}
                 />
               </FlexItem>
               <FlexItem>
                 <Flex
                     orientation="row"
                     vertical="center"
+                    {...props}
                 >
                   <Icon icon="clock" />
                   <Timestamp text="00:00:00 h" />
@@ -646,10 +725,12 @@ const LayoutKanban = () => {
           <Card
               padding="sm"
               shadow="deep"
+              {...props}
           >
             <Flex
                 orientation="row"
                 spacing="between"
+                {...props}
             >
               <FlexItem>
                 <Title size="4">{'Build Prototype'}</Title>
@@ -662,18 +743,21 @@ const LayoutKanban = () => {
                 orientation="row"
                 spacing="between"
                 vertical="bottom"
+                {...props}
             >
               <FlexItem marginTop="xs">
                 <Avatar
                     imageUrl="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80"
                     name="Roger Donahue"
                     size="sm"
+                    {...props}
                 />
               </FlexItem>
               <FlexItem>
                 <Flex
                     orientation="row"
                     vertical="center"
+                    {...props}
                 >
                   <Icon icon="clock" />
                   <Timestamp text="00:00:00 h" />
@@ -684,10 +768,12 @@ const LayoutKanban = () => {
           <Card
               padding="sm"
               shadow="deep"
+              {...props}
           >
             <Flex
                 orientation="row"
                 spacing="between"
+                {...props}
             >
               <FlexItem>
                 <Title size="4">{'Collaborate with Team'}</Title>
@@ -700,18 +786,21 @@ const LayoutKanban = () => {
                 orientation="row"
                 spacing="between"
                 vertical="bottom"
+                {...props}
             >
               <FlexItem marginTop="xs">
                 <Avatar
                     imageUrl="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=200&fit=max&s=707b9c33066bf8808c934c8ab394dff6"
                     name="Michelle Smith"
                     size="sm"
+                    {...props}
                 />
               </FlexItem>
               <FlexItem>
                 <Flex
                     orientation="row"
                     vertical="center"
+                    {...props}
                 >
                   <Icon icon="clock" />
                   <Timestamp text="00:00:00 h" />
@@ -722,10 +811,12 @@ const LayoutKanban = () => {
           <Card
               padding="sm"
               shadow="deep"
+              {...props}
           >
             <Flex
                 orientation="row"
                 spacing="between"
+                {...props}
             >
               <FlexItem>
                 <Title size="4">{'Interview Candidates'}</Title>
@@ -738,18 +829,21 @@ const LayoutKanban = () => {
                 orientation="row"
                 spacing="between"
                 vertical="bottom"
+                {...props}
             >
               <FlexItem marginTop="xs">
                 <Avatar
                     imageUrl="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80"
                     name="Roger Donahue"
                     size="sm"
+                    {...props}
                 />
               </FlexItem>
               <FlexItem>
                 <Flex
                     orientation="row"
                     vertical="center"
+                    {...props}
                 >
                   <Icon icon="clock" />
                   <Timestamp text="00:00:00 h" />
@@ -760,10 +854,12 @@ const LayoutKanban = () => {
           <Card
               padding="sm"
               shadow="deep"
+              {...props}
           >
             <Flex
                 orientation="row"
                 spacing="between"
+                {...props}
             >
               <FlexItem>
                 <Title size="4">{'Run Testing Suite'}</Title>
@@ -776,18 +872,21 @@ const LayoutKanban = () => {
                 orientation="row"
                 spacing="between"
                 vertical="bottom"
+                {...props}
             >
               <FlexItem marginTop="xs">
                 <Avatar
                     imageUrl="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80"
                     name="Roger Donahue"
                     size="sm"
+                    {...props}
                 />
               </FlexItem>
               <FlexItem>
                 <Flex
                     orientation="row"
                     vertical="center"
+                    {...props}
                 >
                   <Icon icon="clock" />
                   <Timestamp text="00:00:00 h" />
@@ -798,10 +897,12 @@ const LayoutKanban = () => {
           <Card
               padding="sm"
               shadow="deep"
+              {...props}
           >
             <Flex
                 orientation="row"
                 spacing="between"
+                {...props}
             >
               <FlexItem>
                 <Title size="4">{'Live Coding Session'}</Title>
@@ -814,18 +915,21 @@ const LayoutKanban = () => {
                 orientation="row"
                 spacing="between"
                 vertical="bottom"
+                {...props}
             >
               <FlexItem marginTop="xs">
                 <Avatar
                     imageUrl="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=200&fit=max&s=707b9c33066bf8808c934c8ab394dff6"
                     name="Michelle Smith"
                     size="sm"
+                    {...props}
                 />
               </FlexItem>
               <FlexItem>
                 <Flex
                     orientation="row"
                     vertical="center"
+                    {...props}
                 >
                   <Icon icon="clock" />
                   <Timestamp text="00:00:00 h" />
@@ -836,10 +940,12 @@ const LayoutKanban = () => {
           <Card
               padding="sm"
               shadow="deep"
+              {...props}
           >
             <Flex
                 orientation="row"
                 spacing="between"
+                {...props}
             >
               <FlexItem>
                 <Title size="4">{'All Hands Meeting'}</Title>
@@ -852,18 +958,21 @@ const LayoutKanban = () => {
                 orientation="row"
                 spacing="between"
                 vertical="bottom"
+                {...props}
             >
               <FlexItem marginTop="xs">
                 <Avatar
                     imageUrl="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80"
                     name="Roger Donahue"
                     size="sm"
+                    {...props}
                 />
               </FlexItem>
               <FlexItem>
                 <Flex
                     orientation="row"
                     vertical="center"
+                    {...props}
                 >
                   <Icon icon="clock" />
                   <Timestamp text="00:00:00 h" />
@@ -874,10 +983,12 @@ const LayoutKanban = () => {
           <Card
               padding="sm"
               shadow="deep"
+              {...props}
           >
             <Flex
                 orientation="row"
                 spacing="between"
+                {...props}
             >
               <FlexItem>
                 <Title size="4">{'Growth Engineering Meeting'}</Title>
@@ -890,18 +1001,21 @@ const LayoutKanban = () => {
                 orientation="row"
                 spacing="between"
                 vertical="bottom"
+                {...props}
             >
               <FlexItem marginTop="xs">
                 <Avatar
                     imageUrl="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80"
                     name="Roger Donahue"
                     size="sm"
+                    {...props}
                 />
               </FlexItem>
               <FlexItem>
                 <Flex
                     orientation="row"
                     vertical="center"
+                    {...props}
                 >
                   <Icon icon="clock" />
                   <Timestamp text="00:00:00 h" />
@@ -915,10 +1029,12 @@ const LayoutKanban = () => {
           <Card
               padding="sm"
               shadow="deep"
+              {...props}
           >
             <Flex
                 orientation="row"
                 spacing="between"
+                {...props}
             >
               <FlexItem>
                 <Title size="4">{'Re-rendering Bug'}</Title>
@@ -931,18 +1047,21 @@ const LayoutKanban = () => {
                 orientation="row"
                 spacing="between"
                 vertical="bottom"
+                {...props}
             >
               <FlexItem marginTop="xs">
                 <Avatar
                     imageUrl="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80"
                     name="Roger Donahue"
                     size="sm"
+                    {...props}
                 />
               </FlexItem>
               <FlexItem>
                 <Flex
                     orientation="row"
                     vertical="center"
+                    {...props}
                 >
                   <Icon icon="clock" />
                   <Timestamp text="00:00:00 h" />
@@ -953,10 +1072,12 @@ const LayoutKanban = () => {
           <Card
               padding="sm"
               shadow="deep"
+              {...props}
           >
             <Flex
                 orientation="row"
                 spacing="between"
+                {...props}
             >
               <FlexItem>
                 <Title size="4">{'Gather Resources'}</Title>
@@ -969,18 +1090,21 @@ const LayoutKanban = () => {
                 orientation="row"
                 spacing="between"
                 vertical="bottom"
+                {...props}
             >
               <FlexItem marginTop="xs">
                 <Avatar
                     imageUrl="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80"
                     name="Roger Donahue"
                     size="sm"
+                    {...props}
                 />
               </FlexItem>
               <FlexItem>
                 <Flex
                     orientation="row"
                     vertical="center"
+                    {...props}
                 >
                   <Icon icon="clock" />
                   <Timestamp text="00:00:00 h" />
@@ -994,10 +1118,12 @@ const LayoutKanban = () => {
           <Card
               padding="sm"
               shadow="deep"
+              {...props}
           >
             <Flex
                 orientation="row"
                 spacing="between"
+                {...props}
             >
               <FlexItem>
                 <Title size="4">{'All Hands Meeting'}</Title>
@@ -1010,18 +1136,21 @@ const LayoutKanban = () => {
                 orientation="row"
                 spacing="between"
                 vertical="bottom"
+                {...props}
             >
               <FlexItem marginTop="xs">
                 <Avatar
                     imageUrl="https://images.unsplash.com/photo-1544817747-b11e3e3b6ac2?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=200&fit=max&ixid=eyJhcHBfaWQiOjE3Nzg0fQ"
                     name="Roger Donahue"
                     size="sm"
+                    {...props}
                 />
               </FlexItem>
               <FlexItem>
                 <Flex
                     orientation="row"
                     vertical="center"
+                    {...props}
                 >
                   <Icon icon="clock" />
                   <Timestamp text="00:00:00 h" />
@@ -1032,10 +1161,12 @@ const LayoutKanban = () => {
           <Card
               padding="sm"
               shadow="deep"
+              {...props}
           >
             <Flex
                 orientation="row"
                 spacing="between"
+                {...props}
             >
               <FlexItem>
                 <Title size="4">{'Growth Engineering Meeting'}</Title>
@@ -1048,18 +1179,21 @@ const LayoutKanban = () => {
                 orientation="row"
                 spacing="between"
                 vertical="bottom"
+                {...props}
             >
               <FlexItem marginTop="xs">
                 <Avatar
                     imageUrl="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80"
                     name="Roger Donahue"
                     size="sm"
+                    {...props}
                 />
               </FlexItem>
               <FlexItem>
                 <Flex
                     orientation="row"
                     vertical="center"
+                    {...props}
                 >
                   <Icon icon="clock" />
                   <Timestamp text="00:00:00 h" />
@@ -1073,10 +1207,12 @@ const LayoutKanban = () => {
           <Card
               padding="sm"
               shadow="deep"
+              {...props}
           >
             <Flex
                 orientation="row"
                 spacing="between"
+                {...props}
             >
               <FlexItem>
                 <Title size="4">{'All Hands Meeting'}</Title>
@@ -1089,18 +1225,21 @@ const LayoutKanban = () => {
                 orientation="row"
                 spacing="between"
                 vertical="bottom"
+                {...props}
             >
               <FlexItem marginTop="xs">
                 <Avatar
                     imageUrl="https://images.unsplash.com/photo-1463453091185-61582044d556?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=200&fit=max&s=73a9df4b7bd1b330db1e903e08575ec1"
                     name="Roger Donahue"
                     size="sm"
+                    {...props}
                 />
               </FlexItem>
               <FlexItem>
                 <Flex
                     orientation="row"
                     vertical="center"
+                    {...props}
                 >
                   <Icon icon="clock" />
                   <Timestamp text="00:00:00 h" />
@@ -1111,10 +1250,12 @@ const LayoutKanban = () => {
           <Card
               padding="sm"
               shadow="deep"
+              {...props}
           >
             <Flex
                 orientation="row"
                 spacing="between"
+                {...props}
             >
               <FlexItem>
                 <Title size="4">{'Pairing'}</Title>
@@ -1127,18 +1268,21 @@ const LayoutKanban = () => {
                 orientation="row"
                 spacing="between"
                 vertical="bottom"
+                {...props}
             >
               <FlexItem marginTop="xs">
                 <Avatar
                     imageUrl="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80"
                     name="Roger Donahue"
                     size="sm"
+                    {...props}
                 />
               </FlexItem>
               <FlexItem>
                 <Flex
                     orientation="row"
                     vertical="center"
+                    {...props}
                 >
                   <Icon icon="clock" />
                   <Timestamp text="00:00:00 h" />
@@ -1152,10 +1296,12 @@ const LayoutKanban = () => {
           <Card
               padding="sm"
               shadow="deep"
+              {...props}
           >
             <Flex
                 orientation="row"
                 spacing="between"
+                {...props}
             >
               <FlexItem>
                 <Title size="4">{'Design Session'}</Title>
@@ -1168,18 +1314,21 @@ const LayoutKanban = () => {
                 orientation="row"
                 spacing="between"
                 vertical="bottom"
+                {...props}
             >
               <FlexItem marginTop="xs">
                 <Avatar
                     imageUrl="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80"
                     name="Roger Donahue"
                     size="sm"
+                    {...props}
                 />
               </FlexItem>
               <FlexItem>
                 <Flex
                     orientation="row"
                     vertical="center"
+                    {...props}
                 >
                   <Icon icon="clock" />
                   <Timestamp text="00:00:00 h" />

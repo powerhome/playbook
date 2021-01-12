@@ -5,26 +5,26 @@ const CurrencyAlignment = (props) => {
   return (
     <>
       <Currency
-          {...props}
           amount="2,000.50"
           label="Left"
           size="sm"
+          {...props}
       />
       <Currency
-          {...props}
           align="center"
           amount="342"
           label="Center"
           size="sm"
           symbol="€"
+          {...props}
       />
       <Currency
-          {...props}
           align="right"
           amount="45"
           label="Right"
           size="sm"
           unit="/mo"
+          {...props}
       />
     </>
   )

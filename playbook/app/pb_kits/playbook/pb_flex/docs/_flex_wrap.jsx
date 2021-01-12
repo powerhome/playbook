@@ -1,21 +1,24 @@
 import React from 'react'
 import { Body, Flex, FlexItem, Title } from  '../..'
 
-const FlexWrap = () => {
+const FlexWrap = (props) => {
   return (
     <>
       <div className="flex-doc-example">
         <Body
             text="Resize your browser"
+            {...props}
         />
         <Title
             size={4}
             text="Wrap"
+            {...props}
         />
         <br />
         <Flex
             className="bg_light"
             wrap
+            {...props}
         >
           <FlexItem fixedSize="300px">
             {'1'}
@@ -53,6 +56,7 @@ const FlexWrap = () => {
         <Title
             size={4}
             text="No Wrap"
+            {...props}
         />
         <br />
         <Flex className="bg_light wide">

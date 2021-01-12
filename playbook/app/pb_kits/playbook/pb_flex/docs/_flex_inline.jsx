@@ -1,18 +1,20 @@
 import React from 'react'
 import { Flex, FlexItem, Title } from  '../..'
 
-const FlexInline = () => {
+const FlexInline = (props) => {
   return (
     <>
       <div className="flex-doc-example">
         <Title
             size={4}
             text="Row"
+            {...props}
         />
         <br />
         <Flex
             className="bg_light"
             inline
+            {...props}
         >
           <FlexItem>
             {'1'}
@@ -32,12 +34,14 @@ const FlexInline = () => {
         <Title
             size={4}
             text="Column"
+            {...props}
         />
         <br />
         <Flex
             className="bg_light"
             inline
             orientation="column"
+            {...props}
         >
           <FlexItem>
             {'1'}

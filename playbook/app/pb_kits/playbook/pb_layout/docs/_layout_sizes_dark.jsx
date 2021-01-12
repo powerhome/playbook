@@ -1,7 +1,7 @@
 import React from 'react'
 import { Layout } from '../../'
 
-const LayoutSizesDark = () => {
+const LayoutSizesDark = (props) => {
   return (
     <div>
       <Layout
@@ -9,6 +9,7 @@ const LayoutSizesDark = () => {
           position="left"
           size="xs"
           variant="dark"
+          {...props}
       >
         <Layout.Side>
           {'Side'}
@@ -26,6 +27,7 @@ const LayoutSizesDark = () => {
           position="left"
           size="sm"
           variant="dark"
+          {...props}
       >
         <Layout.Side>
           {'Side'}
@@ -43,6 +45,7 @@ const LayoutSizesDark = () => {
           position="left"
           size="md"
           variant="dark"
+          {...props}
       >
         <Layout.Side>
           {'Side'}
@@ -60,6 +63,7 @@ const LayoutSizesDark = () => {
           position="left"
           size="lg"
           variant="dark"
+          {...props}
       >
         <Layout.Side>
           {'Side'}
@@ -77,6 +81,7 @@ const LayoutSizesDark = () => {
           position="left"
           size="xl"
           variant="dark"
+          {...props}
       >
         <Layout.Side>
           {'Side'}
