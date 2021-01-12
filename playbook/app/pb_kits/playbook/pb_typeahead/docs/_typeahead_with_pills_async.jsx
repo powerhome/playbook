@@ -91,11 +91,8 @@ const TypeaheadWithPillsAsync = (props) => {
           loadOptions={promiseOptions}
           onChange={handleOnChange}
           placeholder="type the name of a Github user"
-<<<<<<< HEAD
           value={formatValue(users)}
-=======
           {...props}
->>>>>>> master
       />
     </>
   )
