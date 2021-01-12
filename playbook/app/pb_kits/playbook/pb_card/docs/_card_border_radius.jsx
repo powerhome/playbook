@@ -11,7 +11,7 @@ const CardLight = (props) => {
         {'Rounded'}
       </Card>
 
-      <br/>
+      <br />
 
       <Card
           borderRadius="xl"
@@ -20,7 +20,7 @@ const CardLight = (props) => {
         {'Extra large'}
       </Card>
 
-      <br/>
+      <br />
 
       <Card
           borderRadius="lg"
@@ -29,7 +29,7 @@ const CardLight = (props) => {
         {'Large'}
       </Card>
 
-      <br/>
+      <br />
 
       <Card
           borderRadius="md"
@@ -38,7 +38,7 @@ const CardLight = (props) => {
         {'Medium'}
       </Card>
 
-      <br/>
+      <br />
 
       <Card
           borderRadius="sm"
@@ -47,7 +47,7 @@ const CardLight = (props) => {
         {'Small'}
       </Card>
 
-      <br/>
+      <br />
 
       <Card
           borderRadius="xs"
@@ -56,7 +56,7 @@ const CardLight = (props) => {
         {'Extra small'}
       </Card>
 
-      <br/>
+      <br />
 
       <Card
           borderRadius="none"
