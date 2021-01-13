@@ -7,6 +7,7 @@ module Playbook
 
       partial "pb_dialog/dialog"
 
+      prop :ref
       prop :cancel_button
       prop :closeable, type: Playbook::Props::Boolean, default: true
       prop :confirm_button
@@ -20,10 +21,13 @@ module Playbook
                   default: "md"
       prop :text
       prop :title
+      prop :trigger
 
       def dialog_options
         {
           id: id,
+          ref: ref,
+          trigger: trigger,
           className: classname,
           cancelButton: cancel_button,
           closeable: closeable,

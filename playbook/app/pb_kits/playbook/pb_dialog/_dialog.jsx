@@ -1,6 +1,7 @@
 /* @flow */
 
-import React, { forwardRef } from 'react'
+import React, { useState } from 'react'
+
 import classnames from 'classnames'
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
 import { globalProps } from '../utilities/globalProps.js'
@@ -26,6 +27,7 @@ type DialogProps = {
   size?: "sm" | "md" | "lg" | "content",
   text?: string,
   title?: string,
+  trigger?: string
 }
 
 // Body component
@@ -68,7 +70,7 @@ const DialogFooter = (props: DialogFooterProps) => {
   )
 }
 
-const Dialog = (props: DialogProps, ref) => {
+const Dialog = (props: DialogProps) => {
   const {
     aria = {},
     cancelButton,
@@ -84,6 +86,7 @@ const Dialog = (props: DialogProps, ref) => {
     onClose = () => {},
     text,
     title,
+    trigger,
   } = props
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
@@ -107,7 +110,19 @@ const Dialog = (props: DialogProps, ref) => {
   )
 
   const api = {
-    onClose,
+    onClose: trigger ? function(){
+      setTriggerOpened(false)
+    } : onClose,
+  }
+
+  const [triggerOpened, setTriggerOpened] = useState(false),
+    modalIsOpened = trigger ? triggerOpened : opened
+
+  if (trigger) {
+    const modalTrigger = document.querySelector(trigger)
+    modalTrigger.addEventListener('click', () => {
+      setTriggerOpened(true)
+    }, { once: true })
   }
 
   return (
@@ -117,14 +132,13 @@ const Dialog = (props: DialogProps, ref) => {
           {...dataProps}
           className={classes}
           id={id}
-          ref={ref}
       >
         <Modal
             ariaHideApp={false}
             className={dialogClassNames}
             closeTimeoutMS={200}
             contentLabel="Minimal Modal Example"
-            isOpen={opened}
+            isOpen={modalIsOpened}
             onRequestClose={close}
             overlayClassName={overlayClassNames}
         >
@@ -157,4 +171,4 @@ Dialog.Header = DialogHeader
 Dialog.Body = DialogBody
 Dialog.Footer = DialogFooter
 
-export default forwardRef(Dialog)
+export default Dialog
