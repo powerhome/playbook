@@ -1,7 +1,8 @@
 <script>
   document.addEventListener("DOMContentLoaded", function(event) { 
     document.querySelector("#dialog-trigger").addEventListener("click", function() {
-      alert("Hello World!");
+      var test = <%= object.id %>;
+      alert(test);
     });
   });
 </script>
