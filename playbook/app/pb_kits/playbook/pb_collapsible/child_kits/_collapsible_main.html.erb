@@ -1,0 +1,16 @@
+<%= content_tag(:div,
+    id: object.id,
+    data: object.data,
+    class: object.classname,
+    aria: object.aria) do %>
+
+    <%= pb_rails("flex", props: {vertical: "center", spacing: "between"}) do %>
+      <%= pb_rails("flex/flex_item") do %>
+        <%= capture(&object.children) %>
+      <% end %>
+      <%= pb_rails("flex/flex_item") do %>
+        <i class="far fa-chevron-down"></i>
+        <i class="far fa-chevron-up" style="display: none"></i>
+      <% end %>
+    <% end %>
+<% end %>

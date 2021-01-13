@@ -21,7 +21,7 @@
   "author": "powerhome",
   "license": "ISC",
   "engines": {
-    "node": "10.17.0 || 12.20.0",
+    "node": "10.17.0 || 12.20.1",
     "npm": "6.11.3",
     "yarn": "1.13.0 || 1.22.5"
   },
@@ -101,6 +101,7 @@
     "prop-types": "^15.6.2",
     "rails-erb-loader": "^5.5.1",
     "react": "16.8.6",
+    "react-animate-height": "^2.0.23",
     "react-dom": "16.8.6",
     "react-dropzone": "^10.2.2",
     "react-highlight-words": "^0.16.0",
