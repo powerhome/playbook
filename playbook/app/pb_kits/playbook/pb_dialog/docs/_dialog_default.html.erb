@@ -1,13 +1,12 @@
+
+<%= pb_rails("dialog", props: {id: 'testing', ref: 'Dialog => { window.Dialog = Dialog }'}) %>
+<%= pb_rails("button", props: {id: 'dialog-trigger', text: "Open Dialog" }) %>
+
+
 <script>
   document.addEventListener("DOMContentLoaded", function(event) { 
     document.querySelector("#dialog-trigger").addEventListener("click", function() {
-      var test = <%= object.id %>;
-      alert(test);
+        window.Dialog.setState({ isOpen: true })
     });
   });
 </script>
-
-
-<%= pb_rails("dialog", props: {id: 'testing'}) %>
-<%= pb_rails("button", props: {id: 'dialog-trigger', text: "Open Dialog" }) %>
-

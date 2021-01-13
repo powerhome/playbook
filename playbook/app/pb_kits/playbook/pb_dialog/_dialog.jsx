@@ -1,6 +1,6 @@
 /* @flow */
 
-import React from 'react'
+import React, { forwardRef } from 'react'
 import classnames from 'classnames'
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
 import { globalProps } from '../utilities/globalProps.js'
@@ -68,7 +68,7 @@ const DialogFooter = (props: DialogFooterProps) => {
   )
 }
 
-const Dialog = (props: DialogProps) => {
+const Dialog = (props: DialogProps, ref) => {
   const {
     aria = {},
     cancelButton,
@@ -117,6 +117,7 @@ const Dialog = (props: DialogProps) => {
           {...dataProps}
           className={classes}
           id={id}
+          ref={ref}
       >
         <Modal
             ariaHideApp={false}
@@ -156,4 +157,4 @@ Dialog.Header = DialogHeader
 Dialog.Body = DialogBody
 Dialog.Footer = DialogFooter
 
-export default Dialog
+export default forwardRef(Dialog)
