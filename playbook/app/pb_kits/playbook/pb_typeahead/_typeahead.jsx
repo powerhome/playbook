@@ -4,6 +4,7 @@ import React from 'react'
 import Select from 'react-select'
 import AsyncSelect from 'react-select/async'
 import { get } from 'lodash'
+import { globalProps } from '../utilities/globalProps.js'
 
 import Control from './components/Control'
 import ClearIndicator from './components/ClearIndicator'
@@ -25,6 +26,7 @@ import { noop } from '../utilities/props'
 
 type Props = {
   async?: boolean,
+  dark?: boolean,
   label?: string,
   loadOptions?: noop | string,
   getOptionLabel?: () => any,
@@ -81,8 +83,10 @@ const Typeahead = (props: Props) => {
     }
   }
 
+  const classes = `pb_typeahead_kit react-select ${globalProps(props)}`
+
   return (
-    <div className="pb_typeahead_kit react-select">
+    <div className={classes}>
       <Tag
           onChange={handleOnChange}
           {...selectProps}

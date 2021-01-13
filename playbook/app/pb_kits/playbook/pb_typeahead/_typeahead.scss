@@ -85,13 +85,22 @@
     }
   }
 
-  .dark {
-    .pb_typeahead_wrapper .pb_typeahead_loading_indicator {
-      color: $text_dk_light;
+  &[class*=dark] {
+    // .pb_typeahead_wrapper .pb_typeahead_loading_indicator {
+    //   color: $text_dk_light;
+    // }
+    [class^=pb_text_input_kit].dark .text_input_wrapper .text_input {
+      display: inherit !important;
+    }
+    .css-26l3qy-menu {
+      background-color: $bg_dark;
+    }
+    .css-b8ldur-Input {
+      color: white;
     }
   }
 
-  &.react-select {
+  &.react-select, &.react-select .dark {
     .text_input {
       display: inherit;
       padding: 3px 4px;
