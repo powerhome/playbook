@@ -3,43 +3,21 @@
 require "rails_helper"
 
 RSpec.describe Playbook::PbForm::Form do
-  describe "#merged_form_system_options" do
+  describe "#form_system_options" do
     it "adds pb-form to the form_with `class` option" do
-      view_object = described_class.new(form_system_options: { class: "example-class-option" })
+      view_object = Playbook::PbForm::Form.new(form_system_options: { class: "example-class-option" })
 
-      expect(view_object.merged_form_system_options).to include(class: "pb-form example-class-option")
-    end
-
-    it "sets builder to `FormBuilder::FormWithFormBuilder` when `form_system` is `form_with`" do
-      view_object = described_class.new
-
-      expect(view_object.merged_form_system_options).to include(builder: Playbook::PbForm::FormBuilder::FormWithFormBuilder)
+      expect(view_object.form_system_options).to include(class: "example-class-option")
     end
 
     it "adds pb-form to the simple_form `class` option" do
-      load_simple_form
-      view_object = described_class.new(
+      model = double
+      view_object = Playbook::PbForm::Form.new(
         form_system: "simple_form",
-        form_system_options: [nil, { html: { class: "example-class-option" } }]
+        form_system_options: [model, { html: { class: "example-class-option" } }]
       )
 
-      expect(view_object.merged_form_system_options[1]).to include(html: { class: "pb-form example-class-option" })
+      expect(view_object.form_system_options).to include(html: { class: "example-class-option" }, model: model)
     end
-
-    it "sets builder to `FormBuilder::SimpleFormBuilder` when `form_system` is `simple_form`" do
-      load_simple_form
-      view_object = described_class.new(form_system: "simple_form")
-
-      expect(view_object.merged_form_system_options[1]).to include(builder: Playbook::PbForm::FormBuilder::SimpleFormBuilder)
-    end
-  end
-
-  def unload_simple_form
-    hide_const("SimpleForm")
-  end
-
-  def load_simple_form
-    stub_const("SimpleForm", Module.new)
-    stub_const("SimpleForm::FormBuilder", Class.new)
   end
 end
