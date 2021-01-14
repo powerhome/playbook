@@ -26,7 +26,7 @@
     flex-basis: auto;
     min-height: 1px;
     border: 0;
-    border-radius: $pb_card_header_border_radius $pb_card_header_border_radius 0px 0px;  
+    border-radius: $pb_card_header_border_radius $pb_card_header_border_radius 0px 0px;
     @each $color_name, $color_value in $pb_card_header_colors {
       &[class*=_#{$color_name}] {
         @include pb_card_header_color($color_value);
@@ -44,7 +44,7 @@
     min-height: 1px;
     border: 0;
   }
-  
+
   @each $name, $shadow in $box_shadows {
     &[class*=_#{$name}] {
       box-shadow: $shadow;
