@@ -1,7 +1,7 @@
 import React from 'react'
 import { Table } from '../../'
 
-const TableLg = () => {
+const TableLg = (props) => {
   return (
     <Table
         size="lg"

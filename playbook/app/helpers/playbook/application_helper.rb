@@ -5,10 +5,6 @@ module Playbook
     include ::Webpacker::React::Helpers
     include ::Playbook::PbKitHelper
 
-    def current_webpacker_instance
-      Playbook.webpacker
-    end
-
     def pb_rails(kit, props: {}, &block)
       super kit, props: dark_mode_props(props), &block
     end
