@@ -1,7 +1,6 @@
 const path = require('path')
 
 const webpack = require('webpack')
-const svgUrlLoader = require('./config/webpack/loaders/svg.js')
 
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
@@ -25,6 +24,18 @@ const COPY_PLUGIN_CONFIG = new CopyPlugin({
     concurrency: 100,
   },
 })
+const SVG_LOADER_CONFIG = {
+  test: /\.svg$/,
+  exclude: /node_modules/,
+  use: [
+    {
+      loader: 'svg-url-loader',
+      options: {
+        limit: 10000,
+      },
+    },
+  ],
+}
 
 const BABEL_JS_CONFIG = {
   test: /\.(js|jsx|mjs)$/,
@@ -76,12 +87,6 @@ const config = {
       path.resolve(__dirname, 'node_modules'),
     ]
   },
-  resolveLoader: {
-    modules: [
-      'node_modules',
-      path.resolve(__dirname, 'config/webpack/loaders')
-    ],
-  },
   optimization: (env) => {
     return { minimize: env.development ? false : true }
   },
@@ -107,7 +112,7 @@ const config = {
           ],
         },
         BABEL_JS_CONFIG,
-        svgUrlLoader
+        SVG_LOADER_CONFIG
       ],
     },
     js: {
@@ -120,7 +125,7 @@ const config = {
           ],
         },
         BABEL_JS_CONFIG,
-        svgUrlLoader
+        SVG_LOADER_CONFIG
       ]
     }
   }
@@ -134,7 +139,6 @@ const mainConfig = (env) => {
   return {
     mode: 'production',
     resolve: config.resolve,
-    resolveLoader: config.resolveLoader,
     optimization: config.optimization(env),
     externals: config.externals,
     entry: {
@@ -156,7 +160,6 @@ const docsConfig = (env) => {
   return {
     mode: 'production',
     resolve: config.resolve,
-    resolveLoader: config.resolveLoader,
     optimization: config.optimization(env),
     externals: config.externals,
     entry: {
