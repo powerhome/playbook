@@ -3,27 +3,16 @@
 module Playbook
   module PbKitHelper
     def pb_rails(kit, props: {}, &block)
-      previous = prefix_partial_path_with_controller_namespace
-      self.prefix_partial_path_with_controller_namespace = false
       kit = build_view_model(kit.to_s, props, &block)
-      if kit.is_a?(Playbook::KitBase)
-        render_component kit, &block
-      else
-        render(partial: kit, as: :object)
-      end
-    ensure
-      self.prefix_partial_path_with_controller_namespace = previous
+      render_component kit, &block
     end
 
   private
 
-    def is_subkit?(kit)
-      kit.match(%r{[/\\]})
-    end
-
     def build_view_model(kit, props, &block)
-      folder = is_subkit?(kit) ? kit.split("/")[0] : kit
-      item = is_subkit?(kit) ? kit.split("/")[-1] : kit
+      is_subkit = kit.match(%r{[/\\]})
+      folder = is_subkit ? kit.split("/")[0] : kit
+      item = is_subkit ? kit.split("/")[-1] : kit
       class_name = "Playbook::Pb#{folder.camelize}::#{item.camelize}"
       class_name.safe_constantize.new(props, &block)
     end
