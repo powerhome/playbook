@@ -11,6 +11,7 @@
     width: 22px;
     min-width: 22px;
     height: 22px;
+    box-sizing: border-box;
     border-radius: 1000px;
     border: 2px solid $border_light;
     margin-right: $space_xs;
