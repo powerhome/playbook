@@ -1,7 +1,6 @@
 /* @flow */
 
 import React, { useState } from 'react'
-
 import classnames from 'classnames'
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
 import { globalProps } from '../utilities/globalProps.js'
@@ -122,6 +121,9 @@ const Dialog = (props: DialogProps) => {
     const modalTrigger = document.querySelector(trigger)
     modalTrigger.addEventListener('click', () => {
       setTriggerOpened(true)
+      document.querySelector('#cancel-button').addEventListener('click', () => {
+        setTriggerOpened(false)
+      })
     }, { once: true })
   }
 
@@ -153,6 +155,7 @@ const Dialog = (props: DialogProps) => {
             <Dialog.Footer>
               <Button onClick={onConfirm}>{confirmButton}</Button>
               <Button
+                  id="cancel-button"
                   onClick={onCancel}
                   variant="link"
               >

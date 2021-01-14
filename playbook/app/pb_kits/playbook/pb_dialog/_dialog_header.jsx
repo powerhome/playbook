@@ -10,7 +10,6 @@ import { DialogContext } from './_dialog_context'
 
 type DialogHeaderProps = {
   aria?: object,
-  cancelButton?: string,
   children: array<React.ReactNode> | React.ReactNode | string,
   className?: string,
   closeable: boolean,
@@ -23,7 +22,7 @@ type DialogHeaderProps = {
   title?: string,
 }
 
-export const DialogHeader = (props: DialogHeaderProps) => {
+const DialogHeader = (props: DialogHeaderProps) => {
   const {
     aria = {},
     children,
@@ -65,3 +64,5 @@ export const DialogHeader = (props: DialogHeaderProps) => {
     </>
   )
 }
+
+export default DialogHeader

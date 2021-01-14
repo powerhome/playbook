@@ -1,1 +1,10 @@
-<%= react_component('Dialog', object.dialog_options) %>
+<%= content_tag(:div,
+    id: object.id,
+    data: object.data,
+    class: object.classname,
+    aria: object.aria,
+    dark: object.dark) do %>
+  <% if object.children %>
+    <%= pb_rails("dialog/dialog_header", props: { children: object.children }) %>
+  <% end %>
+<% end %>

@@ -1,3 +1,24 @@
 
-<%= pb_rails("dialog", props: {id: 'testing', trigger: '#dialog-trigger', cancel_button: "Cancel", confirm_button: "Okay", size:"sm", text:"Hello Body Text, Nice to meet ya.", title:"Header Title is the Title Prop"}) %>
+<%= pb_rails("dialog", props: {
+    id: 'testing', 
+    trigger: '#dialog-trigger', 
+    cancel_button: "Cancel", 
+    confirm_button: "Okay", 
+    size: "sm", 
+    text: "Hello Body Text, Nice to meet ya.", 
+    title: "Header Title is the Title Prop"
+}) do %>
+ <%= pb_rails("dialog/dialog_header", props: {
+    id: 'testing', 
+    trigger: '#dialog-trigger', 
+    cancel_button: "Cancel", 
+    confirm_button: "Okay", 
+    size: "sm", 
+    text: "Hello Body Text, Nice to meet ya.", 
+    title: "Header Title is the Title Prop"
+  }) do %>
+  <%= pb_rails("body", props: {text: 'What do you need us to take care of?'}) %>
+  <% end %>
+<% end %>
+
 <%= pb_rails("button", props: {id: 'dialog-trigger', text: "Open Dialog" }) %>
