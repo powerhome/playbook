@@ -86,16 +86,26 @@
   }
 
   &[class*=dark] {
-    // .pb_typeahead_wrapper .pb_typeahead_loading_indicator {
-    //   color: $text_dk_light;
-    // }
+    .pb_typeahead_wrapper .pb_typeahead_loading_indicator {
+      color: $text_dk_light;
+    }
     [class^=pb_text_input_kit].dark .text_input_wrapper .text_input {
       display: inherit !important;
     }
     .css-26l3qy-menu {
       background-color: $bg_dark;
+      .pb_item_kit {
+        @media (hover:hover) {
+          &:hover, &:active, &:focus {
+            background-color: tint($focus_input_dark, 5%);
+          }
+        }
+      }
     }
     .css-b8ldur-Input {
+      color: white;
+    }
+    .css-1uccc91-singleValue{
       color: white;
     }
   }
