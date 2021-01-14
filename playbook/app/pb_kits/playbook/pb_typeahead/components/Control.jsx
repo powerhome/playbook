@@ -15,8 +15,8 @@ type Props = {
 const TypeaheadControl = (props: Props) => (
   <div className="pb_typeahead_wrapper">
     <TextInput
-        label={props.selectProps.label}
         dark={props.selectProps.dark}
+        label={props.selectProps.label}
     >
       <Flex>
         <components.Control
