@@ -94,19 +94,15 @@
     }
     .css-26l3qy-menu {
       background-color: $bg_dark;
-      .pb_item_kit {
-        @media (hover:hover) {
-          &:hover, &:active, &:focus {
-            background-color: tint($focus_input_dark, 5%);
-          }
-        }
-      }
     }
     .css-b8ldur-Input {
       color: white;
     }
     .css-1uccc91-singleValue{
       color: white;
+    }
+    .css-1n7v3ny-option {
+      background-color: tint($focus_input_dark, 5%);
     }
   }
 
