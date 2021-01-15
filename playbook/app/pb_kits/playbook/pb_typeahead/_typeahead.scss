@@ -104,6 +104,18 @@
     .css-1n7v3ny-option {
       background-color: tint($focus_input_dark, 5%);
     }
+    [class^=pb_list_kit] {
+      background-color: $bg_dark;
+    }
+    .pb_item_kit {
+      padding: ($space_xs + 2) 0;
+
+      @media (hover:hover) {
+        &:hover {
+          background-color: tint($focus_input_dark, 5%);
+        }
+      }
+    }
   }
 
   &.react-select, &.react-select .dark {
