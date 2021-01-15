@@ -17,23 +17,23 @@ import {
  * @summary - for doc example purposes only
  */
 
+type UserProps = {
+  imageUrl?: String,
+  label?: String,
+  territory?: String,
+  type?: String,
+}
+
 const filterResults = (results) =>
   results.items.map((result) => {
     return {
       imageUrl: result.avatar_url, //add the custom field
       label: result.login,
       value: result.id,
+      territory: 'PHL',
+      type: result.type,
     }
   })
-
-/**
- *
- * @const promiseOptions
- * @ignore
- * @returns {Promise} - fetch API data results from Typeahead input text
- * @see - https://react-select.com/home#async
- * @summary - for doc example purposes only
- */
 
 const promiseOptions = (inputValue) =>
   new Promise((resolve) => {
@@ -46,7 +46,7 @@ const promiseOptions = (inputValue) =>
     }
   })
 
-const TypeaheadWithPillsAsyncUsers = (props) => {
+const TypeaheadWithPillsAsyncCustomOptions = () => {
   const [users, setUsers] = useState([])
   const handleOnChange = (value) => setUsers(value)
 
@@ -67,7 +67,6 @@ const TypeaheadWithPillsAsyncUsers = (props) => {
         <Caption
             marginBottom="xs"
             text="State (Users)"
-            {...props}
         />
         <For
             each="user"
@@ -81,7 +80,6 @@ const TypeaheadWithPillsAsyncUsers = (props) => {
               marginBottom="md"
               name={user.label}
               orientation="horizontal"
-              {...props}
           />
         </For>
       </If>
@@ -93,10 +91,18 @@ const TypeaheadWithPillsAsyncUsers = (props) => {
           onChange={handleOnChange}
           onMultiValueClick={handleOnMultiValueClick}
           placeholder="type the name of a Github user"
-          {...props}
+          valueComponent={(props: UserProps) => (
+            <User
+                avatar
+                avatarUrl={props.imageUrl}
+                name={props.label}
+                territory={props.territory}
+                title={props.type}
+            />
+          )}
       />
     </>
   )
 }
 
-export default TypeaheadWithPillsAsyncUsers
+export default TypeaheadWithPillsAsyncCustomOptions
