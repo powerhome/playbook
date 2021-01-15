@@ -20,6 +20,7 @@ type SelectableCardProps = {
   checked: boolean,
   children?: array<React.ReactChild>,
   className?: string,
+  dark?: boolean,
   data: object,
   disabled?: boolean,
   icon?: boolean,
@@ -38,6 +39,7 @@ const SelectableCard = ({
   checked = false,
   children,
   className,
+  dark = false,
   data = {},
   disabled = false,
   icon = false,
@@ -57,7 +59,9 @@ const SelectableCard = ({
     { 'checked': checked,
       'disabled': disabled,
       'enabled': !disabled }),
-  globalProps(props), className)
+  dark ? 'dark' : '',
+  className
+  )
 
   const displayIcon = () => {
     if (icon === true) {
@@ -100,40 +104,43 @@ const SelectableCard = ({
           type={inputType}
           value={value}
       />
-      <label
-          className={globalProps(labelProps)}
-          htmlFor={inputIdPresent}
-      >
-        <Choose>
-          <When condition={variant === 'displayInput'}>
-            <Flex vertical="center">
-              <Flex
-                  orientation="column"
-                  padding="sm"
-                  paddingRight="xs"
-                  vertical="center"
-              >
-                <Input>
-                  <input
-                      checked={checked}
-                      disabled={disabled}
-                      onClick={handleClick}
-                      type={inputType}
-                  />
-                </Input>
+
+      <div className="buffer">
+        <label
+            className={globalProps(labelProps)}
+            htmlFor={inputIdPresent}
+        >
+          <Choose>
+            <When condition={variant === 'displayInput'}>
+              <Flex vertical="center">
+                <Flex
+                    orientation="column"
+                    padding="sm"
+                    paddingRight="xs"
+                    vertical="center"
+                >
+                  <Input>
+                    <input
+                        checked={checked}
+                        disabled={disabled}
+                        onClick={handleClick}
+                        type={inputType}
+                    />
+                  </Input>
+                </Flex>
+                <div className="separator" />
+                <Card.Body padding="sm">
+                  {text || children}
+                </Card.Body>
               </Flex>
-              <div className="separator" />
-              <Card.Body padding="sm">
-                {text || children}
-              </Card.Body>
-            </Flex>
-          </When>
-          <Otherwise>
-            {text || children}
-          </Otherwise>
-        </Choose>
-        {displayIcon()}
-      </label>
+            </When>
+            <Otherwise>
+              {text || children}
+            </Otherwise>
+          </Choose>
+          {displayIcon()}
+        </label>
+      </div>
     </div>
   )
 }

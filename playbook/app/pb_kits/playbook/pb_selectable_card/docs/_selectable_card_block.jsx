@@ -1,55 +1,52 @@
-import React from 'react'
-import {
-  Body,
-  SelectableCard,
-  Title,
-} from '../../'
+import React, { useState } from 'react'
+import { Body, SelectableCard, Title } from '../../'
 
-class SelectableCardBlock extends React.Component {
-  state = {
-    block: true,
-    tag: false,
+const SelectableCardBlock = (props) => {
+  const [block, setBlock] = useState(true)
+  const [tag, setTag] = useState(false)
+
+  const handleSelect = (event) => {
+    setBlock(event.target.checked)
   }
 
-  handleSelect = (event) => {
-    this.setState({
-      [event.target.id]: event.target.checked,
-    })
+  const handleTag = (event) => {
+    setTag(event.target.checked)
   }
 
-  render(props) {
-    return (
-      <div className="pb--doc-demo-row">
-
-        <SelectableCard
-            checked={this.state.block}
-            inputId="block"
-            name="block"
-            onChange={this.handleSelect}
-            value="block"
-            {...props}
-        >
-          <Title
-              size={4}
-              text="Block"
-              {...props}
-          />
-          <Body tag="span">{'This uses block'}</Body>
-        </SelectableCard>
-
-        <SelectableCard
-            checked={this.state.tag}
-            inputId="tag"
-            name="tag"
-            onChange={this.handleSelect}
-            text="This passes text through the tag"
-            value="tag"
+  return (
+    <div className="pb--doc-demo-row">
+      <SelectableCard
+          checked={block}
+          inputId="block"
+          name="block"
+          onChange={handleSelect}
+          value="block"
+          {...props}
+      >
+        <Title
+            size={4}
+            text="Block"
             {...props}
         />
+        <Body
+            tag="span"
+            {...props}
+        >
+          {'This uses block'}
+        </Body>
+      </SelectableCard>
 
-      </div>
-    )
-  }
+      <SelectableCard
+          checked={tag}
+          inputId="tag"
+          name="tag"
+          onChange={handleTag}
+          text="This passes text through the tag"
+          value="tag"
+          {...props}
+      />
+    </div>
+  )
 }
 
 export default SelectableCardBlock
