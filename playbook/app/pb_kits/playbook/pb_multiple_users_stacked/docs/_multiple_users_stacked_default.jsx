@@ -1,7 +1,7 @@
 import React from 'react'
 import { MultipleUsersStacked } from '../../'
 
-const MultipleUsersStackedDefault = () => {
+const MultipleUsersStackedDefault = (props) => {
   return (
     <div>
       <MultipleUsersStacked
@@ -11,6 +11,7 @@ const MultipleUsersStackedDefault = () => {
           imageUrl: 'https://randomuser.me/api/portraits/men/9.jpg',
         },
       ]}
+          {...props}
       />
       <br />
       <br />
@@ -25,6 +26,7 @@ const MultipleUsersStackedDefault = () => {
           imageUrl: 'https://randomuser.me/api/portraits/women/6.jpg',
         },
       ]}
+          {...props}
       />
       <br />
       <br />
@@ -51,6 +53,7 @@ const MultipleUsersStackedDefault = () => {
           imageUrl: 'https://randomuser.me/api/portraits/women/46.jpg',
         },
       ]}
+          {...props}
       />
     </div>
   )

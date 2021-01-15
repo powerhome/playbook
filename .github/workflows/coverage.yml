@@ -1,0 +1,64 @@
+# This is a basic workflow to help you get started with Actions
+
+name: Jest Code Coverage Report
+
+# Controls when the action will run.
+on:
+  # Triggers the workflow on push or pull request events but only for the master branch
+  pull_request:
+    branches: [ master ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  build:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - name: Repo Checkout
+        uses: actions/checkout@v2
+
+      - uses: actions/cache@v2
+        with:
+          path: '**/node_modules'
+          key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
+
+      - name: Install Node.js 12.x
+        uses: actions/setup-node@v2
+        with:
+          node-version: '12.20.0'
+
+      - name: Produce Test Coverage Data
+        run: |
+          cd ./playbook
+          yarn
+          yarn run test-coverage-summary
+
+      - name: Install action dependencies
+        run: |
+          cd ./.github/actions/badge
+          yarn
+
+      - name: Find Current Pull Request
+        id: findPr
+        uses: jwalton/gh-find-current-pr@v1.0.2
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Create Jest Coverage Summary Badge
+        if: success() && steps.findPr.outputs.number
+        uses: './.github/actions/badge'
+        with:
+          badge-title: 'React Kit Coverage'
+          coverage-summary-file: '../../../playbook/coverage/coverage-summary.json'
+          github-repo: ${{ github.repository }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          minimum-coverage-pct: 90
+          pull-number: ${{ steps.findPr.outputs.number }}
+

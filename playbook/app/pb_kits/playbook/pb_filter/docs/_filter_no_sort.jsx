@@ -11,16 +11,17 @@ const FilterNoSort = (props) => {
   ]
   return (
     <Filter
-        {...props}
         filters={{
           'Full Name': 'John Wick',
         }}
         results={546}
         sortValue={[{ name: 'popularity', dir: 'desc' }]}
+        {...props}
     >
       <TextInput
           label="Full Name"
           placeholder="Enter name"
+          {...props}
       />
 
       <Select
@@ -28,16 +29,20 @@ const FilterNoSort = (props) => {
           label="Territory"
           name="location"
           options={options}
+          {...props}
       />
       <Flex
           spacing="between"
+          {...props}
       >
         <Button
             text="Apply"
+            {...props}
         />
         <Button
             text="Clear"
             variant="secondary"
+            {...props}
         />
       </Flex>
     </Filter>

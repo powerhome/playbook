@@ -5,18 +5,18 @@ const CaptionLight = (props) => {
   return (
     <div>
       <Caption
-          {...props}
           text="Caption"
+          {...props}
       />
       <Caption
-          {...props}
           size="lg"
           text="Caption Large"
+          {...props}
       />
       <Caption
-          {...props}
           size="xs"
           text="Subcaption"
+          {...props}
       />
     </div>
   )

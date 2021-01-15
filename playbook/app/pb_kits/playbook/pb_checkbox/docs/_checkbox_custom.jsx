@@ -15,8 +15,8 @@ const CheckboxCustom = (props) => {
       <br />
       <div>
         <Checkbox
-            {...props}
             text="Toggle Me"
+            {...props}
         >
           <input
               checked={checked}
@@ -24,6 +24,7 @@ const CheckboxCustom = (props) => {
               onChange={handleOnChange}
               type="checkbox"
               value="custom-value"
+              {...props}
           />
         </Checkbox>
       </div>

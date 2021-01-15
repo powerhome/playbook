@@ -1,11 +1,12 @@
 import React from 'react'
 import { Source } from '../../'
 
-const SourceTypes = () => (
+const SourceTypes = (props) => (
   <>
     <Source
         source="BJ's Johnston-208"
         type="retail"
+        {...props}
     />
 
     <br />
@@ -14,6 +15,7 @@ const SourceTypes = () => (
     <Source
         source="Referral-phrg"
         type="inbound"
+        {...props}
     />
 
     <br />
@@ -22,6 +24,7 @@ const SourceTypes = () => (
     <Source
         source="B.B.B. Outbound"
         type="outbound"
+        {...props}
     />
 
     <br />
@@ -30,6 +33,7 @@ const SourceTypes = () => (
     <Source
         source="Contractor.com"
         type="prospecting"
+        {...props}
     />
 
     <br />
@@ -38,6 +42,7 @@ const SourceTypes = () => (
     <Source
         source="Beards, Beers and Brats"
         type="events"
+        {...props}
     />
 
     <br />
@@ -46,6 +51,7 @@ const SourceTypes = () => (
     <Source
         source="BJ's Johnston-208"
         type="referral"
+        {...props}
     />
 
     <br />
@@ -62,6 +68,7 @@ const SourceTypes = () => (
                 userId: '48582',
               }
             }
+        {...props}
     />
 
     <br />
@@ -78,6 +85,7 @@ const SourceTypes = () => (
                 userId: '48582',
               }
             }
+        {...props}
     />
   </>
 )

@@ -1,7 +1,7 @@
 import React from 'react'
 import { Icon } from '../../'
 
-const IconFlip = () => {
+const IconFlip = (props) => {
   return (
     <div>
       <Icon
@@ -9,18 +9,21 @@ const IconFlip = () => {
           flip="horizontal"
           icon="question-circle"
           size="2x"
+          {...props}
       />
       <Icon
           fixedWidth
           flip="vertical"
           icon="question-circle"
           size="2x"
+          {...props}
       />
       <Icon
           fixedWidth
           flip="both"
           icon="question-circle"
           size="2x"
+          {...props}
       />
     </div>
   )

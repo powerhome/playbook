@@ -1,7 +1,7 @@
 import React from 'react'
 import { StarRating } from '../../'
 
-const StarRatingDefault = () => (
+const StarRatingDefault = (props) => (
   <>
     <StarRating />
 
@@ -9,18 +9,21 @@ const StarRatingDefault = () => (
 
     <StarRating
         rating={3}
+        {...props}
     />
 
     <br />
 
     <StarRating
         rating={1.5}
+        {...props}
     />
 
     <br />
 
     <StarRating
         rating={5}
+        {...props}
     />
   </>
 )

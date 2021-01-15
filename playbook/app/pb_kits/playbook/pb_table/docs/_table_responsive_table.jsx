@@ -1,14 +1,17 @@
 import React from 'react'
 import { Table, Title } from '../../'
 
-const TableResponsiveTable = () => {
+const TableResponsiveTable = (props) => {
   return (
     <div>
       <Title
           size={4}
           text="Default"
+          {...props}
       />
-      <Table>
+      <Table
+          {...props}
+      >
         <thead>
           <tr>
             <th>{'Column 1'}</th>
@@ -33,8 +36,12 @@ const TableResponsiveTable = () => {
       <Title
           size={4}
           text="Default"
+          {...props}
       />
-      <Table responsive="none">
+      <Table
+          responsive="none"
+          {...props}
+      >
         <thead>
           <tr>
             <th>{'Column 1'}</th>

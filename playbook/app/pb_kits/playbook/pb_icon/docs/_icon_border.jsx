@@ -1,7 +1,7 @@
 import React from 'react'
 import { Icon } from '../../'
 
-const IconBorder = () => {
+const IconBorder = (props) => {
   return (
     <div>
       <Icon
@@ -9,6 +9,7 @@ const IconBorder = () => {
           fixedWidth
           icon="user"
           size="2x"
+          {...props}
       />
     </div>
   )

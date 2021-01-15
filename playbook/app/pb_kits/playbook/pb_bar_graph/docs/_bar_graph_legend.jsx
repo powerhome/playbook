@@ -6,7 +6,7 @@ const chartData = [{
   data: [1475, 200, 3000, 654, 656],
 }]
 
-const BarGraphLegend = () => (
+const BarGraphLegend = (props) => (
   <div>
     <BarGraph
         axisTitle="Number of Employees"
@@ -16,6 +16,7 @@ const BarGraphLegend = () => (
         title="Bar Graph with Legend"
         xAxisCategories={['Jan', 'Feb', 'Mar', 'Apr', 'May']}
         yAxisMin={0}
+        {...props}
     />
   </div>
 )

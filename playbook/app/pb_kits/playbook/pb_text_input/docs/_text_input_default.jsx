@@ -5,7 +5,7 @@ import {
   Title,
 } from '../../'
 
-const TextInputDefault = () => {
+const TextInputDefault = (props) => {
   const handleOnChangeFirstName = ({ target }) => {
     setFirstName(target.value)
   }
@@ -36,6 +36,7 @@ const TextInputDefault = () => {
           onChange={handleOnChangeFormField}
           placeholder="Enter first name"
           value={formFields.firstName}
+          {...props}
       />
       <TextInput
           label="Last Name"
@@ -43,6 +44,7 @@ const TextInputDefault = () => {
           onChange={handleOnChangeFormField}
           placeholder="Enter last name"
           value={formFields.lastName}
+          {...props}
       />
       <TextInput
           label="Phone Number"
@@ -51,6 +53,7 @@ const TextInputDefault = () => {
           placeholder="Enter phone number"
           type="phone"
           value={formFields.phone}
+          {...props}
       />
       <TextInput
           label="Email Address"
@@ -59,6 +62,7 @@ const TextInputDefault = () => {
           placeholder="Enter email address"
           type="email"
           value={formFields.email}
+          {...props}
       />
       <TextInput
           label="Zip Code"
@@ -67,6 +71,7 @@ const TextInputDefault = () => {
           placeholder="Enter zip code"
           type="number"
           value={formFields.zip}
+          {...props}
       />
 
       <br />
@@ -85,6 +90,7 @@ const TextInputDefault = () => {
           placeholder="Enter first name"
           ref={ref}
           value={firstName}
+          {...props}
       />
 
       <If condition={firstName !== ''}>
