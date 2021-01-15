@@ -14,7 +14,7 @@ $pb_selectable_card_border: 2px;
   display: block;
   margin-bottom: 0;
 
-  label {
+  > label {
     @include pb_card;
     padding: $space_sm + 1;
     cursor: pointer;
@@ -65,6 +65,11 @@ $pb_selectable_card_border: 2px;
       .pb_selectable_card_circle {
         opacity: $opacity_10;
       }
+
+      .separator {
+        width: 2px;
+        background: $royal;
+      }
     }
   }
 
@@ -87,5 +92,14 @@ $pb_selectable_card_border: 2px;
         background: transparent;
       }
     }
+  }
+
+  .separator {
+    align-self: stretch;
+    transition-property: all;
+    transition-duration: $transition_short;
+    transition-timing-function: $easeIn;
+    width: 1px;
+    background: $border_light;
   }
 }
