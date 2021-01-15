@@ -4,7 +4,7 @@ module Playbook
   module PbSampleHelper
     def kits_used(sample)
       code = get_raw_code(sample, "rails")
-      kits_array = code.scan(/pb_rails\("(\w+)(?:"|\/)/)
+      kits_array = code.scan(%r{pb_rails\("(\w+)(?:"|/)})
       kits_array.uniq
     end
 
