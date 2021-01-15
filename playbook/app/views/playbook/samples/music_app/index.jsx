@@ -110,6 +110,7 @@ const MusicApp = () => {
                           dark
                           key={index}
                           padding="none"
+                          paddingBottom="xs"
                           paddingLeft="lg"
                       >
                         {linkText}
@@ -129,6 +130,7 @@ const MusicApp = () => {
                         dark
                         key={index}
                         padding="none"
+                        paddingBottom="xs"
                         paddingLeft="lg"
                     >
                       {linkText}
@@ -206,9 +208,9 @@ const MusicApp = () => {
                       <Icon
                           dark
                           icon="chevron-down"
+                          marginRight="sm"
                           padding="none"
-                          paddingRight="sm"
-                          size="2x"
+                          size="1x"
                       />
                     </Body>
                   </Flex>
