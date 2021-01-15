@@ -18,20 +18,25 @@ const BottomRightIcon = ({icon, ...rest}) =>  (
   </Body>
 )
 
+
+
 const MusicApp = () => {
+  window.addEventListener('DOMContentLoaded', () => {
+    const fullHeightElems = document.querySelectorAll(".fullHeight")
+    fullHeightElems.forEach(elem => elem.style.height = "100%")
+  })
+
   return (
     <Background
         backgroundColor="dark"
         padding="none"
     >
       <Flex
-          className="fullpage"
           orientation="column"
           vertical="stretch"
       >
         <FlexItem grow>
           <Layout
-              className="fullHeight"
               collapse="xs"
               position="left"
               size="sm"
@@ -40,115 +45,114 @@ const MusicApp = () => {
             <Layout.Side>
 {/**--------------------- Sidebar start --------------------- */}
               <Flex
-                      className="fullHeight"
-                      orientation="column"
-                      spacing="between"
-                      vertical="stretch"
+                  className="fullHeight"
+                  orientation="column"
+                  spacing="between"
+                  vertical="stretch"
+              >
+                <div>
+                  <Table
+                      container={false}
+                      dark
+                      disableHover
+                      marginBottom="lg"
+                      marginTop="md"
+                      responsive="none"
+                      size="sm"
                   >
-                    <div>
-                      <Table
-                          container={false}
+                    <tbody>
+                      <TableRow
                           dark
-                          disableHover
-                          marginBottom="lg"
-                          marginTop="md"
-                          responsive="none"
-                          size="sm"
+                          sideHighlightColor="category_2"
                       >
-                        <tbody>
-                          <TableRow
-                              dark
-                              sideHighlightColor="category_2"
-                          >
-                            <td>
-                              <Body dark>
-                                <Icon
-                                    dark
-                                    icon="home"
-                                    marginRight="xs"
-                                />
-                                Home
-                              </Body>
-                            </td>
-                          </TableRow>
-                          <tr>
-                            <td>
-                              <Body dark>
-                                <Icon
-                                    dark
-                                    icon="music"
-                                    marginRight="xs"
-                                />
-                                Browse
-                              </Body>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td>
-                              <Body dark>
-                                <Icon
-                                    dark
-                                    icon="radio"
-                                    marginRight="xs"
-                                />
-                                Radio
-                              </Body>
-                            </td>
-                          </tr>
-                        </tbody>
-                      </Table>
-                      <Caption paddingLeft="lg">Your Library</Caption>
-                      {
-                        yourLibraryLinks.map((linkText, index) =>
-                          <Body
-                              color="lighter"
-                              dark
-                              key={index}
-                              padding="none"
-                              paddingLeft="lg"
-                          >
-                            {linkText}
+                        <td>
+                          <Body dark>
+                            <Icon
+                                dark
+                                icon="home"
+                                marginRight="xs"
+                            />
+                            Home
                           </Body>
-                        )
-                      }
-                      <Caption
-                          paddingLeft="lg"
-                          paddingTop="lg"
-                      >
-                        Playlists
-                      </Caption>
-                      {
-                        playlists.map((linkText, index) =>
-                        <Body
-                            color="lighter"
-                            dark
-                            key={index}
-                            padding="none"
-                            paddingLeft="lg"
-                        >
-                          {linkText}
-                        </Body>
-                        )
-                      }
-                    </div>
-                    <div>
-                      <SectionSeparator dark />
+                        </td>
+                      </TableRow>
+                      <tr>
+                        <td>
+                          <Body dark>
+                            <Icon
+                                dark
+                                icon="music"
+                                marginRight="xs"
+                            />
+                            Browse
+                          </Body>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <Body dark>
+                            <Icon
+                                dark
+                                icon="radio"
+                                marginRight="xs"
+                            />
+                            Radio
+                          </Body>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </Table>
+                  <Caption paddingLeft="lg">Your Library</Caption>
+                  {
+                    yourLibraryLinks.map((linkText, index) =>
                       <Body
+                          color="lighter"
                           dark
-                          paddingY="sm"
+                          key={index}
+                          padding="none"
+                          paddingLeft="lg"
                       >
-                        <Icon
-                            marginLeft="lg"
-                            marginRight="xs"
-                            dark
-                            icon="plus-circle"
-                        />
-                        New Playlist
+                        {linkText}
                       </Body>
-                      <SectionSeparator dark />
-                    </div>
-                  </Flex>
-
+                    )
+                  }
+                  <Caption
+                      paddingLeft="lg"
+                      paddingTop="lg"
+                  >
+                    Playlists
+                  </Caption>
+                  {
+                    playlists.map((linkText, index) =>
+                    <Body
+                        color="lighter"
+                        dark
+                        key={index}
+                        padding="none"
+                        paddingLeft="lg"
+                    >
+                      {linkText}
+                    </Body>
+                    )
+                  }
+                </div>
+                <div>
+                  <SectionSeparator dark />
+                  <Body
+                      dark
+                      paddingY="sm"
+                  >
+                    <Icon
+                        marginLeft="lg"
+                        marginRight="xs"
+                        dark
+                        icon="plus-circle"
+                    />
+                    New Playlist
+                  </Body>
+                  <SectionSeparator dark />
+                </div>
+              </Flex>
 {/**--------------------- End of sidebar--------------------- */}
             </Layout.Side>
             <Layout.Body>
@@ -212,115 +216,115 @@ const MusicApp = () => {
                 {/* <Header /> */}
                 <FlexItem grow>
 {/**---------------------- Start Body  ---------------------- */}
-                  <Card
-                        className="fullHeight"
-                        dark
-                        padding="none"
+                <Card
+                      dark
+                      padding="none"
+                      paddingBottom="xs"
+                  >
+                    <Flex
+                        marginX="lg"
+                        orientation="column"
+                        paddingTop="lg"
+                        paddingX="xl"
+                        vertical="stretch"
                     >
-                      <Flex
-                          marginX="lg"
-                          orientation="column"
-                          paddingTop="lg"
-                          paddingX="xl"
-                          vertical="stretch"
-                      >
-                        <Title
-                            dark
-                            size={1}
-                            text="Home"
-                            marginBottom="sm"
-                        />
+                      <Title
+                          dark
+                          size={1}
+                          text="Home"
+                          marginBottom="sm"
+                      />
 
-                        <Title
-                            dark
-                            size={4}
-                            text="Your top podcasts"
-                        />
-                        <SectionSeparator dark/>
-                        <Flex paddingTop="sm">
-                          {
-                            playlistCardTitles.map((title, i) => (
-                                <FlexItem
-                                    fixedSize="175px"
-                                    paddingRight="sm"
-                                    key={i}
-                                >
-                                  <Image url={randomImageUrl(Math.floor(1000 * Math.random()))} />
-                                  <Caption dark >{title}</Caption>
-                                  <Caption dark
-                                          size="xs">
-                                    {playlistCardSubtext}
-                                  </Caption>
-                                </FlexItem>
-                            ))
-                          }
-                        </Flex>
-
-                        <Flex
-                            spacing="between"
-                            vertical="bottom"
-                        >
-                          <div>
-                            <Title
-                                dark
-                                paddingTop="sm"
-                                size={4}
-                                text="Made for you"
-                            />
-                            <Caption
-                                dark
-                                size="xs"
-                                text="Get better recommandations the more you listen."
-                            />
-                          </div>
-                          <div>
-                            <Flex paddingBottom="xs">
-                              <Body
-                                  color="lighter"
-                                  dark
-                              >
-                                <Icon
-                                    dark
-                                    icon="chevron-left"
-                                    size="1x"
-                                    padding="none"
-                                    marginRight="sm"
-                                />
-                              </Body>
-                              <Body dark>
-                                <Icon
-                                    dark
-                                    icon="chevron-right"
-                                    size="1x"
-                                    padding="none"
-                                />
-                              </Body>
-                            </Flex>
-                          </div>
-                        </Flex>
-                        <SectionSeparator dark/>
-                        <Flex paddingTop="sm">
-                          {
-                            [...Array(6)].map((_,i) => (
+                      <Title
+                          dark
+                          size={4}
+                          text="Your top podcasts"
+                      />
+                      <SectionSeparator dark/>
+                      <Flex paddingTop="sm">
+                        {
+                          playlistCardTitles.map((title, i) => (
                               <FlexItem
                                   fixedSize="175px"
-                                  key={i}
                                   paddingRight="sm"
+                                  key={i}
                               >
                                 <Image url={randomImageUrl(Math.floor(1000 * Math.random()))} />
-                                <Caption dark >Daily Mix {i+1}</Caption>
-                                <Caption
-                                    dark
-                                    size="xs"
-                                >
+                                <Caption dark >{title}</Caption>
+                                <Caption dark
+                                        size="xs">
                                   {playlistCardSubtext}
                                 </Caption>
                               </FlexItem>
-                            ))
-                          }
-                        </Flex>
+                          ))
+                        }
                       </Flex>
-                    </Card>
+
+                      <Flex
+                          spacing="between"
+                          vertical="bottom"
+                      >
+                        <div>
+                          <Title
+                              dark
+                              paddingTop="sm"
+                              size={4}
+                              text="Made for you"
+                          />
+                          <Caption
+                              dark
+                              size="xs"
+                              text="Get better recommandations the more you listen."
+                          />
+                        </div>
+                        <div>
+                          <Flex paddingBottom="xs">
+                            <Body
+                                color="lighter"
+                                dark
+                            >
+                              <Icon
+                                  dark
+                                  icon="chevron-left"
+                                  size="1x"
+                                  padding="none"
+                                  marginRight="sm"
+                              />
+                            </Body>
+                            <Body dark>
+                              <Icon
+                                  dark
+                                  icon="chevron-right"
+                                  size="1x"
+                                  padding="none"
+                              />
+                            </Body>
+                          </Flex>
+                        </div>
+                      </Flex>
+                      <SectionSeparator dark/>
+                      <Flex paddingTop="sm">
+                        {
+                          [...Array(6)].map((_,i) => (
+                            <FlexItem
+                                fixedSize="175px"
+                                key={i}
+                                paddingRight="sm"
+                            >
+                              <Image url={randomImageUrl(Math.floor(1000 * Math.random()))} />
+                              <Caption dark >Daily Mix {i+1}</Caption>
+                              <Caption
+                                  dark
+                                  size="xs"
+                              >
+                                {playlistCardSubtext}
+                              </Caption>
+                            </FlexItem>
+                          ))
+                        }
+                      </Flex>
+                    </Flex>
+                  </Card>
 {/**---------------------- End of Body ---------------------- */}
                 </FlexItem>
               </Flex>
@@ -338,7 +342,6 @@ const MusicApp = () => {
           >
             <FlexItem fixedSize="22%">
               <Flex
-                  className="fullHeight"
                   vertical="center"
               >
                 <Image
