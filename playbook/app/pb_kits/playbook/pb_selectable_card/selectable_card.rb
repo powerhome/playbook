@@ -22,6 +22,8 @@ module Playbook
       prop :name
       prop :text
       prop :value
+      prop :variant, type: Playbook::Props::String,
+                     default: "default"
 
       def classname
         [
@@ -43,6 +45,22 @@ module Playbook
           id: input_id_present,
           disabled: disabled
         )
+      end
+
+      def input
+        multi ? "checkbox" : "radio"
+      end
+
+      def label_class
+        variant == "display_input" ? "p_none" : spacing_classname
+      end
+
+      def is_checked
+        checked ? "checked" : ""
+      end
+
+      def is_disabled
+        disabled ? "disabled" : ""
       end
 
     private

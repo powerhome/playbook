@@ -2,7 +2,7 @@
 
 import React from 'react'
 import classnames from 'classnames'
-import { Icon } from '../'
+import { Card, Checkbox, Flex, Icon, Radio } from '../'
 
 import type { InputCallback } from '../types'
 
@@ -31,6 +31,7 @@ type SelectableCardProps = {
   onChange: InputCallback<HTMLInputElement>,
   text?: string,
   value?: string,
+  variant?: string,
 }
 
 const SelectableCard = ({
@@ -48,6 +49,7 @@ const SelectableCard = ({
   onChange = noop,
   text,
   value,
+  variant = 'default',
   ...props
 }: SelectableCardProps) => {
   const ariaProps = buildAriaProps(aria)
@@ -74,9 +76,17 @@ const SelectableCard = ({
     }
   }
 
-  const inputType = multi === false ? 'radio' : 'checkbox'
+  const inputRef = React.createRef()
+  // Delegate clicks to hidden input from visible one
+  const handleClick = () => {
+    inputRef.current.click()
+  }
 
+  const inputType = multi ? 'checkbox' : 'radio'
   const inputIdPresent = inputId !== null ? inputId : name
+  const Input = multi ? Checkbox : Radio
+  const labelProps = variant === 'displayInput' ? Object.assign(props, { padding: 'none' }) : props
+
   return (
     <div
         {...ariaProps}
@@ -90,15 +100,44 @@ const SelectableCard = ({
           id={inputIdPresent}
           name={name}
           onChange={onChange}
+          ref={inputRef}
           type={inputType}
           value={value}
       />
+
       <div className="buffer">
         <label
-            className={globalProps(props)}
+            className={globalProps(labelProps)}
             htmlFor={inputIdPresent}
         >
-          {text || children}
+          <Choose>
+            <When condition={variant === 'displayInput'}>
+              <Flex vertical="center">
+                <Flex
+                    orientation="column"
+                    padding="sm"
+                    paddingRight="xs"
+                    vertical="center"
+                >
+                  <Input>
+                    <input
+                        checked={checked}
+                        disabled={disabled}
+                        onClick={handleClick}
+                        type={inputType}
+                    />
+                  </Input>
+                </Flex>
+                <div className="separator" />
+                <Card.Body padding="sm">
+                  {text || children}
+                </Card.Body>
+              </Flex>
+            </When>
+            <Otherwise>
+              {text || children}
+            </Otherwise>
+          </Choose>
           {displayIcon()}
         </label>
       </div>
