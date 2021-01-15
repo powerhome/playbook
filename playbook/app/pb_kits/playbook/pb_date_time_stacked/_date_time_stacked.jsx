@@ -2,6 +2,7 @@
 
 import React from 'react'
 import { DateStacked, Flex, FlexItem, TimeStacked } from '../'
+import { buildDataProps } from '../utilities/props'
 import { globalProps } from '../utilities/globalProps.js'
 
 type DateTimeStackedProps = {
@@ -12,12 +13,15 @@ type DateTimeStackedProps = {
 }
 
 const DateTimeStacked = (props: DateTimeStackedProps) => {
-  const { date, dark } = props
+  const { date, data = {}, dark } = props,
+    dataProps = buildDataProps(data)
+
   return (
     <Flex
         className={globalProps(props)}
         orientation="row"
         vertical="center"
+        {...dataProps}
     >
       <FlexItem>
         <DateStacked
@@ -32,8 +36,8 @@ const DateTimeStacked = (props: DateTimeStackedProps) => {
         <TimeStacked
             className="pb_date_time_stacked_kit"
             dark={dark}
-            date={date}
             tag="caption"
+            time={date}
         />
       </FlexItem>
     </Flex>

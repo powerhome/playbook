@@ -5,21 +5,21 @@ const TimeStackedDefault = (props) => {
   return (
     <div>
       <TimeStacked
-          date={new Date().getTime()}
+          time={new Date()}
           timeZone="America/New_York"
           {...props}
       />
       <br />
       <TimeStacked
           align="center"
-          date={new Date()}
+          time={new Date()}
           timeZone="America/New_York"
           {...props}
       />
       <br />
       <TimeStacked
           align="right"
-          date={new Date()}
+          time={new Date()}
           timeZone="America/New_York"
           {...props}
       />

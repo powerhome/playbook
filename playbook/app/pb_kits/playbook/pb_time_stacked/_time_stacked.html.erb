@@ -3,7 +3,10 @@
     data: object.data,
     class: object.classname) do %>
 
-    <%= pb_rails("body", props: { text: object.format_time_string, color: "light", classname: "pb_time_stacked time-spacing" }) %>
-    <%= pb_rails("caption", props: { color: "light", tag: "span", text: object.pb_date_time.to_timezone.upcase, classname: "pb_time_stacked" }) %>
-
+    <%= pb_rails("body", props: { color: "light", classname: "pb_time_stacked time-spacing" }) do %>
+      <time>
+        <%= object.format_time_string %>
+        <%= pb_rails("caption", props: { color: "light", tag: "span", text: object.pb_date_time.to_timezone.upcase, classname: "pb_time_stacked" }) %>
+      </time>
+    <% end %>
 <% end %>
