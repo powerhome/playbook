@@ -18,10 +18,12 @@ module Playbook
       prop :input_id, type: Playbook::Props::String
 
       prop :input_options, type: Playbook::Props::Hash,
-                                      default: {}
+                           default: {}
       prop :name
       prop :text
       prop :value
+      prop :variant, type: Playbook::Props::String,
+                     default: "default"
 
       def classname
         generate_classname("pb_selectable_card_kit", checked_class, enable_disabled_class)
@@ -36,6 +38,22 @@ module Playbook
           id: input_id_present,
           disabled: disabled
         )
+      end
+
+      def input
+        multi ? "checkbox" : "radio"
+      end
+
+      def label_class
+        variant == "display_input" ? "p_none" : ""
+      end
+
+      def is_checked
+        checked ? "checked" : ""
+      end
+
+      def is_disabled
+        disabled ? "disabled" : ""
       end
 
     private
