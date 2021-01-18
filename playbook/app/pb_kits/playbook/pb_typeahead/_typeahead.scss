@@ -26,10 +26,6 @@
     }
   }
 
-  [class^="pb_text_input_kit"] .text_input_wrapper .text_input {
-    padding: 0;
-  }
-
   .pb_item_kit {
     padding: ($space_xs + 2) 0;
 
@@ -89,22 +85,51 @@
     }
   }
 
-  .dark {
+  &[class*=dark] {
     .pb_typeahead_wrapper .pb_typeahead_loading_indicator {
       color: $text_dk_light;
     }
+    [class^=pb_text_input_kit].dark .text_input_wrapper .text_input {
+      display: inherit !important;
+    }
+    .css-26l3qy-menu {
+      background-color: $bg_dark;
+      color: $white;
+    }
+    .css-b8ldur-Input {
+      color: white;
+    }
+    .css-1uccc91-singleValue{
+      color: white;
+    }
+    .css-1n7v3ny-option {
+      background-color: tint($focus_input_dark, 5%);
+    }
+    [class^=pb_list_kit] {
+      background-color: $bg_dark;
+    }
+    .pb_item_kit {
+      button {
+        color: white !important;
+      }
+      @media (hover:hover) {
+        &:hover {
+          background-color: tint($focus_input_dark, 5%);
+        }
+      }
+    }
   }
 
-  &.react-select {
+  &.react-select, &.react-select .dark {
     .text_input {
       display: inherit;
+      padding: 3px 4px;
       &_indicators {
         max-width: 70px;
       }
       &_value_container {
         flex-grow: 1;
         position: relative;
-        padding: 4px;
       }
     }
     .placeholder {

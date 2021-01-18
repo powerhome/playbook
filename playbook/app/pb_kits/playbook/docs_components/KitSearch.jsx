@@ -36,6 +36,7 @@ const KitSearch = (props: SearchProps) => {
     <div>
       <Typeahead
           className={classname}
+          dark={document.cookie.split('; ').includes('dark_mode=true')}
           id={id}
           onChange={handleChange}
           options={kits}

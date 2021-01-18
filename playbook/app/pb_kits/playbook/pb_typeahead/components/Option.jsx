@@ -21,6 +21,7 @@ const Option = (props: any) => {
             <User
                 align="left"
                 avatarUrl={imageUrl}
+                dark={props.selectProps.dark}
                 name={props.label}
                 orientation="horizontal"
             />
