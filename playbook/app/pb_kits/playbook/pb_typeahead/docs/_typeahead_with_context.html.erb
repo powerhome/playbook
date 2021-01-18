@@ -25,11 +25,6 @@
 
 <%= javascript_tag defer: "defer" do %>
 
-document.addEventListener("pb-typeahead-kit-typeahead-pills-example2-result-option-select", function(event) {
-    console.log('Option selected')
-    console.dir(event.detail)
-  })
-
   document.addEventListener("pb-typeahead-kit-search", function(event) {
     if (!event.target.dataset || !event.target.dataset.typeaheadExample2) return;
 
