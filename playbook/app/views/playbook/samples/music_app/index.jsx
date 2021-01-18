@@ -215,7 +215,6 @@ const MusicApp = () => {
                     </Body>
                   </Flex>
 {/**---------------------- End of Header---------------------- */}
-                {/* <Header /> */}
                 <FlexItem grow>
 {/**---------------------- Start Body  ---------------------- */}
                 <Card

@@ -1,5 +1,40 @@
-<%= pb_rails("title", props: { 
+<%= pb_rails("title", props: {
   margin_top: "xl",
   text: "Your Sample Page",
   size: 1
 }) %>
+
+<%= pb_rails("background", props: { background_color: "dark", padding: "none" }) do %>
+  <%= pb_rails("flex", props: { orientation: "column", vertical: "stretch"}) do %>
+    <%= pb_rails("flex/flex_item", props: {grow: true}) do %>
+      <%= pb_rails("layout", props: {collapse: "xs", position: "left", size: "sm", dark: true }) do %>
+        <%= pb_rails("layout/sidebar") do %>
+          <%= pb_rails("body", props: {dark: true}) do %>
+            SIDEBAR
+          <% end %>
+
+          <!-- SIDEBAR HERe -->
+        <% end %>
+        <%= pb_rails("layout/body") do %>
+          <%= pb_rails("flex", props: { class_name: "fullHeight", orientation: "column", vertical: "stretch"}) do %>
+            HEADER
+            <!-- HEADER -->
+            <%= pb_rails("flex/flex_item", props: { grow: true }) do %><% end %>
+            <%= pb_rails("card", props: { dark: true, padding: "none", paddingBottom: "xs"}) do %>
+              BODY
+              <!-- BODY -->
+            <% end %>
+          <% end %>
+        <% end %>
+      <% end %>
+    <% end %>
+    <%= pb_rails("background", props: { background_color: "dark", padding: "none" }) do %>
+      <%= pb_rails("flex", props: { padding: "xs", vertical: "stretch" }) do %>
+        <%= pb_rails("flex/flex_item", props: { fixed_size: "22%" }) do %>
+          Footer
+        <% end %>
+
+      <% end %>
+    <% end %>
+  <% end %>
+<% end %>
