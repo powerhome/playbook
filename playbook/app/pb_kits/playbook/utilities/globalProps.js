@@ -39,10 +39,16 @@ const darkProps = ({ dark }) => {
   return css
 }
 
+const maxWidthProps = ({ maxWidth }) => {
+  let css = ''
+  css += maxWidth  ? `max_width_${maxWidth } ` : ''
+  return css
+}
+
 // All Exported as a single function
 export const globalProps = (props, defaultProps = {}) => {
   const allProps = { ...props, ...defaultProps }
-  return spacingProps(allProps) + darkProps(allProps)
+  return spacingProps(allProps) + darkProps(allProps) + maxWidthProps(allProps)
 }
 
 export const deprecatedProps = (kit, props = []) => {

@@ -26,6 +26,10 @@
     }
   }
 
+  [class^="pb_text_input_kit"] .text_input_wrapper .text_input {
+    padding: 0;
+  }
+
   .pb_item_kit {
     padding: ($space_xs + 2) 0;
 
@@ -123,13 +127,13 @@
   &.react-select, &.react-select .dark {
     .text_input {
       display: inherit;
-      padding: 3px 4px;
       &_indicators {
         max-width: 70px;
       }
       &_value_container {
         flex-grow: 1;
         position: relative;
+        padding: 4px;
       }
     }
     .placeholder {

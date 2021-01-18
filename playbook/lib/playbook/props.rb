@@ -47,12 +47,23 @@ module Playbook
       dark ? "dark" : nil
     end
 
+    def max_width_props
+      selected_mw_props = max_width_options.keys.select { |sk| try(sk) }
+      return nil unless selected_mw_props.present?
+
+      selected_mw_props.map do |k|
+        width_value = send(k)
+        "max_width_#{width_value}" if max_width_values.include? width_value
+      end.compact.join(" ")
+    end
+
     def generate_classname(*name_parts, separator: "_")
       [
         name_parts.compact.join(separator),
         prop(:classname),
         spacing_props,
-        dark_props
+        dark_props,
+        max_width_props,
       ].compact.join(" ")
     end
 
@@ -79,6 +90,7 @@ module Playbook
       prop :margin_top
       prop :margin_x
       prop :margin_y
+      prop :max_width
       prop :padding
       prop :padding_bottom
       prop :padding_left
@@ -106,6 +118,16 @@ module Playbook
         padding_x: "px",
         padding_y: "py",
       }
+    end
+
+    def max_width_options
+      {
+        max_width: "mw",
+      }
+    end
+
+    def max_width_values
+      %w[sm md lg xl]
     end
 
     def spacing_values

@@ -14,39 +14,47 @@ $pb_selectable_card_border: 2px;
   display: block;
   margin-bottom: 0;
 
-  label {
-    @include pb_card;
-    padding: $space_sm + 1;
-    cursor: pointer;
+  > .buffer {
+    padding: 1px;
+    transition-property: all;
+    transition-duration: $transition_short;
+    transition-timing-function: $easeIn;
 
-    @media (hover:hover) {
-      &:hover {
-        box-shadow: $shadow-deep;
-        border-color: $slate;
+    > label {
+      @include pb_card;
+      padding: $space_sm;
+      margin-bottom: $space_sm;
+      cursor: pointer;
+
+      @media (hover:hover) {
+        &:hover {
+          box-shadow: $shadow-deep;
+          border-color: $slate;
+        }
       }
-    }
 
-    .pb_selectable_card_circle {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: $pb_selectable_card_indicator_size;
-      width: $pb_selectable_card_indicator_size;
-      border-radius: ($pb_selectable_card_indicator_size/2) + ($pb_selectable_card_border/2);
-      border-width: $pb_selectable_card_border;
-      border-style: solid;
-      border-color: $white;
-      background: $primary_action;
-      color: $white;
-      font-size: $font_smaller;
-      text-align: center;
-      position: absolute;
-      top: -($pb_selectable_card_indicator_size/2);
-      right: -($pb_selectable_card_indicator_size/2);
-      opacity: 0;
-      transition-property: opacity;
-      transition-duration: $transition_short;
-      transition-timing-function: $easeIn;
+      .pb_selectable_card_circle {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: $pb_selectable_card_indicator_size;
+        width: $pb_selectable_card_indicator_size;
+        border-radius: ($pb_selectable_card_indicator_size/2) + ($pb_selectable_card_border/2);
+        border-width: $pb_selectable_card_border;
+        border-style: solid;
+        border-color: $white;
+        background: $primary_action;
+        color: $white;
+        font-size: $font_smaller;
+        text-align: center;
+        position: absolute;
+        top: -($pb_selectable_card_indicator_size/2);
+        right: -($pb_selectable_card_indicator_size/2);
+        opacity: 0;
+        transition-property: opacity;
+        transition-duration: $transition_short;
+        transition-timing-function: $easeIn;
+      }
     }
   }
 
@@ -57,13 +65,24 @@ $pb_selectable_card_border: 2px;
     appearance: none;
     display: none;
 
-    &:checked ~ label {
-      position: relative;
-      @include pb_card_selected;
-      padding: $space_sm;
+    &:checked {
+      ~ .buffer {
+        padding: 0;
 
-      .pb_selectable_card_circle {
-        opacity: $opacity_10;
+        > label {
+          position: relative;
+          @include pb_card_selected;
+
+          .pb_selectable_card_circle {
+            opacity: $opacity_10;
+          }
+        }
+
+        .separator {
+          width: 2px;
+          margin-right: 0px;
+          background: $royal;
+        }
       }
     }
   }
@@ -87,5 +106,15 @@ $pb_selectable_card_border: 2px;
         background: transparent;
       }
     }
+  }
+
+  .separator {
+    align-self: stretch;
+    transition-property: all;
+    transition-duration: $transition_short;
+    transition-timing-function: $easeIn;
+    width: 1px;
+    margin-right: 1px;
+    background: $border_light;
   }
 }

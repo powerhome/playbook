@@ -15,6 +15,9 @@ module Playbook
                        default: {}
       prop :border_none, type: Playbook::Props::Boolean,
                          default: false
+      prop :border_radius, type: Playbook::Props::Enum,
+                           values: %w[xs sm md lg xl none rounded],
+                           default: "md"
 
       def classname
         generate_classname("pb_card_kit",
@@ -22,7 +25,8 @@ module Playbook
                            shadow_class,
                            highlight_position_class,
                            highlight_color_class,
-                           border_class)
+                           border_class,
+                           border_radius_class)
       end
 
       def body_padding
@@ -54,6 +58,10 @@ module Playbook
 
       def border_class
         border_none == true ? "border_none" : nil
+      end
+
+      def border_radius_class
+        border_radius != "md" ? "border_radius_#{border_radius}" : nil
       end
     end
   end
