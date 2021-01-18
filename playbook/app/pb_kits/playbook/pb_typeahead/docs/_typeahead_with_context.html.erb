@@ -11,11 +11,25 @@
     { value: "purple", value_text: "Purple" },
   ]
   }) %>
-<%= pb_rails("typeahead", props: { label: "Crayola Crayons", name: :foo, data: { typeahead_example2: true, search_context_value_selector: "[data-context-select] select" } }) %>
+
+  <%= pb_rails("typeahead", props: {
+  label: "Crayola Crayons",
+  name: :foo,
+  data: {
+    typeahead_example2: true,
+    search_context_value_selector: "[data-context-select] select"
+    }
+  }) %>
 
 <br><br><br>
 
 <%= javascript_tag defer: "defer" do %>
+
+document.addEventListener("pb-typeahead-kit-typeahead-pills-example2-result-option-select", function(event) {
+    console.log('Option selected')
+    console.dir(event.detail)
+  })
+
   document.addEventListener("pb-typeahead-kit-search", function(event) {
     if (!event.target.dataset || !event.target.dataset.typeaheadExample2) return;
 

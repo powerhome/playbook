@@ -94,6 +94,7 @@
     }
     .css-26l3qy-menu {
       background-color: $bg_dark;
+      color: $white;
     }
     .css-b8ldur-Input {
       color: white;
@@ -108,8 +109,9 @@
       background-color: $bg_dark;
     }
     .pb_item_kit {
-      padding: ($space_xs + 2) 0;
-
+      button {
+        color: white !important;
+      }
       @media (hover:hover) {
         &:hover {
           background-color: tint($focus_input_dark, 5%);
