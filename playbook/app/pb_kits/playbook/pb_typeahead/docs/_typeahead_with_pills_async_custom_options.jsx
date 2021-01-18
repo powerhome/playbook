@@ -46,7 +46,7 @@ const promiseOptions = (inputValue) =>
     }
   })
 
-const TypeaheadWithPillsAsyncCustomOptions = () => {
+const TypeaheadWithPillsAsyncCustomOptions = (props) => {
   const [users, setUsers] = useState([])
   const handleOnChange = (value) => setUsers(value)
 
@@ -67,6 +67,7 @@ const TypeaheadWithPillsAsyncCustomOptions = () => {
         <Caption
             marginBottom="xs"
             text="State (Users)"
+            {...props}
         />
         <For
             each="user"
@@ -80,6 +81,7 @@ const TypeaheadWithPillsAsyncCustomOptions = () => {
               marginBottom="md"
               name={user.label}
               orientation="horizontal"
+              {...props}
           />
         </For>
       </If>
@@ -100,6 +102,7 @@ const TypeaheadWithPillsAsyncCustomOptions = () => {
                 title={props.type}
             />
           )}
+          {...props}
       />
     </>
   )
