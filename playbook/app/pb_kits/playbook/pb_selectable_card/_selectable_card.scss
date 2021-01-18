@@ -17,6 +17,8 @@ $pb_selectable_card_border: 2px;
 
   > label {
     > .buffer {
+      display: inherit;
+      flex-direction: inherit;
       padding: 1px;
       transition-property: all;
       transition-duration: $transition_short;
