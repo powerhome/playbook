@@ -39,6 +39,9 @@
     resize: vertical;
     overflow: auto;
   }
+  &.resize_auto > textarea {
+    overflow: hidden;
+  }
 
   &.dark {
     textarea::placeholder {
