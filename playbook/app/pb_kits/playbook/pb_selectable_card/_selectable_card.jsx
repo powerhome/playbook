@@ -105,11 +105,11 @@ const SelectableCard = ({
           value={value}
       />
 
-      <div className="buffer">
-        <label
-            className={globalProps(labelProps)}
-            htmlFor={inputIdPresent}
-        >
+      <label
+          className={globalProps(labelProps)}
+          htmlFor={inputIdPresent}
+      >
+        <div className="buffer">
           <Choose>
             <When condition={variant === 'displayInput'}>
               <Flex vertical="center">
@@ -119,7 +119,7 @@ const SelectableCard = ({
                     paddingRight="xs"
                     vertical="center"
                 >
-                  <Input>
+                  <Input dark={dark}>
                     <input
                         checked={checked}
                         disabled={disabled}
@@ -129,7 +129,10 @@ const SelectableCard = ({
                   </Input>
                 </Flex>
                 <div className="separator" />
-                <Card.Body padding="sm">
+                <Card.Body
+                    dark={dark}
+                    padding="sm"
+                >
                   {text || children}
                 </Card.Body>
               </Flex>
@@ -139,8 +142,8 @@ const SelectableCard = ({
             </Otherwise>
           </Choose>
           {displayIcon()}
-        </label>
-      </div>
+        </div>
+      </label>
     </div>
   )
 }

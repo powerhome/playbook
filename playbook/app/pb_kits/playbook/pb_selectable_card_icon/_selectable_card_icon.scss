@@ -8,7 +8,7 @@
 
     transition-duration: $transition_short;
 
-		&:checked ~ .buffer > label {
+		&:checked ~ label {
       transition-timing-function: $easeIn;
 			color: $primary;
 
@@ -17,7 +17,7 @@
 				}
 			}
 
-    &:not(:checked) ~ .buffer > label {
+    &:not(:checked) ~ label {
       transition-timing-function: $easeOut;
         color: $slate;
       }
@@ -39,7 +39,7 @@
 
       transition-duration: $transition_short;
 
-      &:checked ~ .buffer > label {
+      &:checked ~ label {
         transition-timing-function: $easeIn;
         color: $active_dark;
 
@@ -49,7 +49,7 @@
 
       }
 
-      &:not(:checked) ~ .buffer > label {
+      &:not(:checked) ~ label {
         transition-timing-function: $easeOut;
         color: $text_dk_lighter;
 

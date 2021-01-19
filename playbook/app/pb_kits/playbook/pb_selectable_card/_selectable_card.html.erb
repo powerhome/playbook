@@ -9,8 +9,8 @@
     <%= radio_button_tag(object.name, object.value, object.checked, object.additional_input_options) %>
   <% end %>
 
-  <div class="buffer">
-    <label class="<%= object.label_class %>" for="<%= object.input_id_present %>">
+  <label class="<%= object.label_class %>" for="<%= object.input_id_present %>">
+    <div class="buffer">
       <% if object.variant == "display_input" %>
         <%= pb_rails("flex", props: { vertical: "center" }) do %>
           <%= pb_rails("flex", props: {
@@ -44,23 +44,25 @@
           </div>
         <% end %>
       <% end %>
-    </label>
-  </div>
+    </div>
+  </label>
+
+  <% if object.variant == "display_input" %>
+    <script>
+      var outerCheckbox = document.querySelector("input#<%= object.input_id || object.name %>")
+      var innerCheckbox = outerCheckbox.parentElement.querySelector("input#checkbox-styled")
+
+      outerCheckbox.addEventListener("change", () => {
+        const outerCheckbox = document.querySelector("input#<%= object.input_id || object.name %>")
+        const innerCheckbox = outerCheckbox.parentElement.querySelector("input#checkbox-styled")
+        innerCheckbox.checked = outerCheckbox.checked
+      })
+
+      innerCheckbox.addEventListener("change", () => {
+        const outerCheckbox = document.querySelector("input#<%= object.input_id || object.name %>")
+        const innerCheckbox = outerCheckbox.parentElement.querySelector("input#checkbox-styled")
+        outerCheckbox.checked = innerCheckbox.checked
+      })
+    </script>
+  <% end %>
 <% end %>
-
-<script>
-  var outerCheckbox = document.querySelector("input#<%= object.input_id || object.name %>")
-  var innerCheckbox = outerCheckbox.parentElement.querySelector("input#checkbox-styled")
-
-  outerCheckbox.addEventListener("change", () => {
-    const outerCheckbox = document.querySelector("input#<%= object.input_id || object.name %>")
-    const innerCheckbox = outerCheckbox.parentElement.querySelector("input#checkbox-styled")
-    innerCheckbox.checked = outerCheckbox.checked
-  })
-
-  innerCheckbox.addEventListener("change", () => {
-    const outerCheckbox = document.querySelector("input#<%= object.input_id || object.name %>")
-    const innerCheckbox = outerCheckbox.parentElement.querySelector("input#checkbox-styled")
-    outerCheckbox.checked = innerCheckbox.checked
-  })
-</script>
