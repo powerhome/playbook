@@ -418,8 +418,8 @@ const MusicApp = () => {
             <FlexItem fixedSize="22%">
               <Flex
                   className="fullHeight"
-                  vertical="center"
                   horizontal="right"
+                  vertical="center"
               >
                 <BottomRightIcon icon="list-music"/>
                 <BottomRightIcon icon="computer-speaker"/>

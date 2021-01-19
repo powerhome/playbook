@@ -1,24 +1,72 @@
 <% cookies[:dark_mode] = { value: "true" } %>
 
 <% def randomImageUrl;  "https://picsum.photos/id/#{Random.rand(1000)}/175" end %>
+<% yourLibraryLinks = ["Made For You", "Recently Played", "Liked Songs", "Albums", "Artists", "Podcasts"]%>
+<% playlists = ["podcasts", "THENX", "Adrenaline Workout", "New Music Friday", "RetroWave / Outrun", "Tiki Torch"] %>
 
 <%= pb_rails("background", props: { background_color: "dark", padding: "none" }) do %>
   <%= pb_rails("flex", props: { orientation: "column", vertical: "stretch"}) do %>
     <%= pb_rails("flex/flex_item", props: {grow: true}) do %>
-      <%= pb_rails("layout", props: {collapse: "xs", position: "left", size: "sm" }) do %>
+      <%= pb_rails("layout", props: {collapse: "xs", position: "left", size: "sm", variant: "dark" }) do %>
         <%= pb_rails("layout/sidebar") do %>
-          <%= pb_rails("body", props: {dark: true}) do %>
-            SIDEBAR
-          <% end %>
+<!-- ---------------------------- Sidebar ---------------------------- -->
+          <%= pb_rails("flex", props: { classname: "fullHeight", orientation: "column", spacing: "between", vertical: "stretch" }) do %>
+            <div>
+              <%= pb_rails("table", props: { container: false, disableHover: true, margin_bottom: "lg", margin_top: "md", responsive: "none", size: "sm" }) do %>
+                <tbody>
+                  <%= pb_rails("table/table_row", props: { side_hightlight_color: "category_2" }) do %>
+                    <td>
+                      <%= pb_rails("body") do %>
+                        <%= pb_rails("icon", props: { icon: "home", margin_right: "xs" }) %>
+                        Home
+                      <% end %>
+                    </td>
+                  <% end %>
+                  <tr>
+                    <td>
+                      <%= pb_rails("body") do %>
+                        <%= pb_rails("icon", props: { icon: "music", margin_right: "xs" }) %>
+                        Browse
+                      <% end %>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <%= pb_rails("body") do %>
+                        <%= pb_rails("icon", props: { icon: "radio", margin_right: "xs" }) %>
+                        Radio
+                      <% end %>
+                    </td>
+                  </tr>
+                </tbody>
+              <% end %>
+              <%= pb_rails("caption", props: { padding_left: "lg", text: "Your Library" }) %>
+              <% yourLibraryLinks.each do |link| %>
+                <%= pb_rails("body", props: { color: "lighter", padding: "none", padding_bottom: "xs", padding_left: "lg", text: link }) %>
+              <% end %>
 
-          <!-- SIDEBAR HERe -->
+              <%= pb_rails("caption", props: { padding_left: "lg", text: "Playlists" }) %>
+              <% playlists.each do |link| %>
+                <%= pb_rails("body", props: { color: "lighter", padding: "none", padding_bottom: "xs", padding_left: "lg", text: link }) %>
+              <% end %>
+            </div>
+
+
+
+
+
+
+
+
+          <% end %>
+<!-- ---------------------------- end Side ---------------------------- -->
         <% end %>
         <%= pb_rails("layout/body") do %>
           <%= pb_rails("flex", props: { class_name: "fullHeight", orientation: "column", vertical: "stretch"}) do %>
             HEADER
             <!-- HEADER -->
             <%= pb_rails("flex/flex_item", props: { grow: true }) do %><% end %>
-            <%= pb_rails("card", props: { padding: "none", paddingBottom: "xs"}) do %>
+            <%= pb_rails("card", props: { padding: "none", padding_bottom: "xs"}) do %>
               BODY
               <!-- BODY -->
             <% end %>
