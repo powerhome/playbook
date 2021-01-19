@@ -22,7 +22,7 @@ type TextareaProps = {
   name?: string,
   required?: boolean,
   rows?: number,
-  resize: 'none' | 'both' | 'horizontal' | 'vertical',
+  resize: 'none' | 'both' | 'horizontal' | 'vertical' | 'auto',
   onChange?: InputCallback<HTMLTextAreaElement>,
 }
 
@@ -55,6 +55,11 @@ const Textarea = ({
     return characterCount == 0 ? characterCount.toString() : characterCount
   }
 
+  const handleKeyDown = (e) => {
+    e.target.style.height = 'inherit'
+    e.target.style.height = `${e.target.scrollHeight}px`
+  }
+
   return (
     <div className={classes}>
       <Caption
@@ -68,6 +73,7 @@ const Textarea = ({
             disabled={disabled}
             name={name}
             onChange={onChange}
+            onKeyDown={resize == 'auto' ? handleKeyDown : null}
             placeholder={placeholder}
             ref={ref}
             required={required}
