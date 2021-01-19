@@ -88,6 +88,7 @@ const Typeahead = (props: Props) => {
   return (
     <div className={classes}>
       <Tag
+          classNamePrefix="typeahead-kit-select"
           onChange={handleOnChange}
           {...selectProps}
       />

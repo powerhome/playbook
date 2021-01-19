@@ -92,19 +92,26 @@
     [class^=pb_text_input_kit].dark .text_input_wrapper .text_input {
       display: inherit !important;
     }
-    .css-26l3qy-menu {
+    .typeahead-kit-select__menu {
       background-color: $bg_dark;
       color: $white;
     }
-    .css-b8ldur-Input {
-      color: white;
-    }
-    .css-1uccc91-singleValue{
-      color: white;
-    }
-    .css-1n7v3ny-option {
+    .typeahead-kit-select__option:hover {
       background-color: tint($focus_input_dark, 5%);
     }
+    .typeahead-kit-select__input {
+      color: white;
+      input:focus {
+        box-shadow: none;
+      }
+    }
+    .typeahead-kit-select__single-value{
+      color: white;
+    }
+    .typeahead-kit-select__option--is-focused {
+      background-color: tint($focus_input_dark, 5%);
+    }
+  
     [class^=pb_list_kit] {
       background-color: $bg_dark;
     }
