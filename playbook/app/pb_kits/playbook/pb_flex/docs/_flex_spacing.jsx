@@ -13,7 +13,7 @@ const FlexSpacing = (props) => {
         <br />
         <Flex
             className="bg_light"
-            spacing="none"
+            justify="none"
             {...props}
         >
           <FlexItem>
@@ -40,7 +40,7 @@ const FlexSpacing = (props) => {
         <br />
         <Flex
             className="bg_light"
-            spacing="around"
+            justify="around"
             {...props}
         >
           <FlexItem>
@@ -67,7 +67,7 @@ const FlexSpacing = (props) => {
         <br />
         <Flex
             className="bg_light"
-            spacing="between"
+            justify="between"
             {...props}
         >
           <FlexItem>
@@ -94,7 +94,7 @@ const FlexSpacing = (props) => {
         <br />
         <Flex
             className="bg_light"
-            spacing="evenly"
+            justify="evenly"
             {...props}
         >
           <FlexItem>

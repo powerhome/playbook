@@ -4,4 +4,4 @@
 
 * **Deprecated Prop**: `horizontal` | **Type**: String | **Values**: left | center | right | stretch | none
 
-* **New Prop**: `justify` | **Type**: String | **Values**: start | center | end | stretch | none
+* **New Prop**: `justify` | **Type**: String | **Values**: start | center | end | | none
