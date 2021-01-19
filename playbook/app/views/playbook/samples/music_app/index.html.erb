@@ -1,3 +1,4 @@
+<% previously_darkmode = cookies[:dark_mode] %>
 <% cookies[:dark_mode] = { value: "true" } %>
 
 <% def randomImageUrl;  "https://picsum.photos/id/#{Random.rand(1000)}/175" end %>
@@ -5,7 +6,7 @@
 <% playlists = ["podcasts", "THENX", "Adrenaline Workout", "New Music Friday", "RetroWave / Outrun", "Tiki Torch"] %>
 
 <%= pb_rails("background", props: { background_color: "dark", padding: "none" }) do %>
-  <%= pb_rails("flex", props: { orientation: "column", vertical: "stretch"}) do %>
+  <%= pb_rails("flex", props: { orientation: "column", horizontal: "stretch"}) do %>
     <%= pb_rails("flex/flex_item", props: {grow: true}) do %>
       <%= pb_rails("layout", props: {collapse: "xs", position: "left", size: "sm", variant: "dark" }) do %>
         <%= pb_rails("layout/sidebar") do %>
@@ -14,7 +15,7 @@
             <div>
               <%= pb_rails("table", props: { container: false, disableHover: true, margin_bottom: "lg", margin_top: "md", responsive: "none", size: "sm" }) do %>
                 <tbody>
-                  <%= pb_rails("table/table_row", props: { side_hightlight_color: "category_2" }) do %>
+                  <%= pb_rails("table/table_row", props: { side_highlight_color: "category_2" }) do %>
                     <td>
                       <%= pb_rails("body") do %>
                         <%= pb_rails("icon", props: { icon: "home", margin_right: "xs" }) %>
@@ -51,20 +52,39 @@
               <% end %>
             </div>
 
-
-
-
-
-
-
-
+            <div>
+              <%= pb_rails("section_separator") %>
+              <%= pb_rails("body", props: { padding_y: "sm" }) do %>
+                <%= pb_rails("icon", props: { icon: "plus_circle", margin_left: "lg", margin_right: "xs" }) %>
+                New Playlist
+              <% end %>
+              <%= pb_rails("section_separator") %>
+            </div>
           <% end %>
 <!-- ---------------------------- end Side ---------------------------- -->
         <% end %>
         <%= pb_rails("layout/body") do %>
-          <%= pb_rails("flex", props: { class_name: "fullHeight", orientation: "column", vertical: "stretch"}) do %>
-            HEADER
-            <!-- HEADER -->
+          <%= pb_rails("flex", props: { class_name: "fullHeight", orientation: "column", horizontal: "stretch"}) do %>
+<!-- ---------------------------- Header ---------------------------- -->
+            <%= pb_rails("flex", props: { padding_left: "lg", padding_y: "xs", vertical: "center" }) do %>
+              <%= pb_rails("body", props: { color: "lighter" }) do %>
+                <%= pb_rails("icon", props: { icon: "chevron-left", size: "1x", padding: "none", margin_x: "xl" })%>
+              <% end %>
+              <%= pb_rails("body") do %>
+                <%= pb_rails("icon", props: { icon: "chevron-right", size: "1x", padding: "none", margin_right: "lg" })%>
+              <% end %>
+
+              <%= pb_rails("text_input", props: { margin_top: "xs", placeholder: "Search" }) %>
+              <%= pb_rails("flex/flex_item", props: { grow: true }) do %><% end %>
+              <%= pb_rails("user", props: { align: "left", avatar_url: "https://randomuser.me/api/portraits/women/44.jpg", name: "Maria Illescas", orientation: "horizontal", padding_right: "sm" }) %>
+              <%= pb_rails("body") do %>
+                <%= pb_rails("icon", props: { icon: "chevron-down", size: "1x", padding: "none", margin_right: "sm" })%>
+              <% end %>
+
+
+
+            <% end %>
+<!-- ---------------------------- end Header ---------------------------- -->
             <%= pb_rails("flex/flex_item", props: { grow: true }) do %><% end %>
             <%= pb_rails("card", props: { padding: "none", padding_bottom: "xs"}) do %>
               BODY
@@ -91,28 +111,28 @@
         <% end %>
 
         <%= pb_rails("flex/flex_item", props: { fixed_size: "56%", margin_top: "xs" }) do %>
-          <%= pb_rails("flex", props: { orientation: "column", vertical: "stretch" }) do %>
+          <%= pb_rails("flex", props: { orientation: "column", horizontal: "stretch" }) do %>
             <%= pb_rails("body", props: { margin_bottom: "xs" }) do %>
               <%= pb_rails("flex", props: { horizontal: "center", vertical: "center" }) do %>
                 <%= pb_rails("icon", props: { margin_x: "sm", icon: "random" })%>
-                <%= pb_rails("icon", props: { margin_x: "sm", icon: "step-backward", size:"2x" }) %>
-                <%= pb_rails("icon", props: { margin_x: "sm", icon: "play-circle" }) %>
+                <%= pb_rails("icon", props: { margin_x: "sm", icon: "step-backward" }) %>
+                <%= pb_rails("icon", props: { margin_x: "sm", icon: "play-circle", size:"2x" }) %>
                 <%= pb_rails("icon", props: { margin_x: "sm", icon: "step-forward" }) %>
                 <%= pb_rails("icon", props: { margin_x: "sm", icon: "repeat" }) %>
               <% end %>
             <% end %>
             <%= pb_rails("flex", props: { horzontal: "center", vertical: "center" }) do %>
-              <% pb_rails("body", props: {margin_right: "sm", text: "2:00" }) %>
+              <%= pb_rails("body", props: {margin_right: "sm", text: "2:00" }) %>
               <%= pb_rails("flex/flex_item", props: { grow: true }) do %>
                 <%= pb_rails("progress_simple", props: { muted: true, percent: 20 }) %>
               <% end %>
-                <% pb_rails("body", props: {margin_right: "sm", text: "10:00" }) %>
+                <%= pb_rails("body", props: {margin_right: "sm", text: "10:00" }) %>
             <% end %>
           <% end %>
         <% end %>
 
         <%= pb_rails("flex/flex_item", props: { fixed_size: "22%"}) do %>
-          <%= pb_rails("flex", props: { className: "fullHeight", horzontal: "right", vertical: "center" }) do %>
+          <%= pb_rails("flex", props: { classname: "fullHeight", horizontal: "right", vertical: "center" }) do %>
             <%= pb_rails("body", props: { padding_right: "sm"}) do %>
               <%= pb_rails("icon", props: { icon: "list-music" }) %>
             <% end %>
@@ -123,9 +143,9 @@
               <%= pb_rails("icon", props: { icon: "volume" }) %>
             <% end %>
             <%= pb_rails("flex/flex_item", props: { fixed_size: "100px" }) do %>
-                <%= pb_rails("progress_simple", props: { muted: true, padding_right: "md", percent: 30 }) %>
+                <%= pb_rails("progress_simple", props: { muted: true, percent: 30 }) %>
             <% end %>
-            <%= pb_rails("body", props: { padding_right: "sm"}) do %>
+            <%= pb_rails("body", props: { padding_left: "sm"}) do %>
               <%= pb_rails("icon", props: { icon: "expand-alt" }) %>
             <% end %>
           <% end %>
@@ -135,3 +155,5 @@
     <% end %>
   <% end %>
 <% end %>
+
+<% cookies[:dark_mode] = previously_darkmode %>
