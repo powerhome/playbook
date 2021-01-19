@@ -22,7 +22,7 @@ yarn:
 	docker-compose run web yarn
 
 install:
-	make yarn && make bundle
+	docker-compose run web yarn && bundle
 
 it:
 	make install && make start
