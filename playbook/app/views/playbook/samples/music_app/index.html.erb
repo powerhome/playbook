@@ -23,47 +23,52 @@
       <%= pb_rails("layout", props: {collapse: "lg", position: "left", size: "sm", variant: "dark" }) do %>
         <%= pb_rails("layout/sidebar") do %>
 <!-- ---------------------------- Sidebar ---------------------------- -->
-          <%= pb_rails("flex", props: { classname: "fullHeight", orientation: "column", spacing: "between", vertical: "stretch" }) do %>
-            <div>
-              <%= pb_rails("table", props: { container: false, disableHover: true, margin_bottom: "lg", margin_top: "md", responsive: "none", size: "sm" }) do %>
-                <tbody>
-                  <%= pb_rails("table/table_row", props: { side_highlight_color: "category_2" }) do %>
-                    <td>
-                      <%= pb_rails("body") do %>
-                        <%= pb_rails("icon", props: { icon: "home", margin_right: "xs" }) %>
-                        Home
-                      <% end %>
-                    </td>
-                  <% end %>
-                  <tr>
-                    <td>
-                      <%= pb_rails("body") do %>
-                        <%= pb_rails("icon", props: { icon: "music", margin_right: "xs" }) %>
-                        Browse
-                      <% end %>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <%= pb_rails("body") do %>
-                        <%= pb_rails("icon", props: { icon: "radio", margin_right: "xs" }) %>
-                        Radio
-                      <% end %>
-                    </td>
-                  </tr>
-                </tbody>
-              <% end %>
-              <%= pb_rails("caption", props: { padding_left: "lg", text: "Your Library" }) %>
-              <% yourLibraryLinks.each do |link| %>
-                <%= pb_rails("body", props: { color: "lighter", padding: "none", padding_bottom: "xs", padding_left: "lg", text: link }) %>
-              <% end %>
-
-              <%= pb_rails("caption", props: { padding_left: "lg", padding_top: "lg", text: "Playlists" }) %>
-              <% playlists.each do |link| %>
-                <%= pb_rails("body", props: { color: "lighter", padding: "none", padding_bottom: "xs", padding_left: "lg", text: link }) %>
-              <% end %>
-            </div>
-
+          <%= pb_rails("flex", props: { classname: "fullHeight", orientation: "column", spacing: "between", horizontal: "stretch" }) do %>
+            <%= pb_rails("flex", props: { padding_right: "sm", spacing: "between", wrap: true }) do %>
+              <div>
+                <%= pb_rails("table", props: { container: false, disableHover: true, margin_top: "md", responsive: "none", size: "sm" }) do %>
+                  <tbody>
+                    <%= pb_rails("table/table_row", props: { side_highlight_color: "category_2" }) do %>
+                      <td>
+                        <%= pb_rails("body") do %>
+                          <%= pb_rails("icon", props: { icon: "home", margin_right: "xs" }) %>
+                          Home
+                        <% end %>
+                      </td>
+                    <% end %>
+                    <tr>
+                      <td>
+                        <%= pb_rails("body") do %>
+                          <%= pb_rails("icon", props: { icon: "music", margin_right: "xs" }) %>
+                          Browse
+                        <% end %>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <%= pb_rails("body") do %>
+                          <%= pb_rails("icon", props: { icon: "radio", margin_right: "xs" }) %>
+                          Radio
+                        <% end %>
+                      </td>
+                    </tr>
+                  </tbody>
+                <% end %>
+              </div>
+              <div>
+                <%= pb_rails("caption", props: { padding_left: "lg", padding_top: "lg", text: "Your Library" }) %>
+                <% yourLibraryLinks.each do |link| %>
+                  <%= pb_rails("body", props: { color: "lighter", padding: "none", padding_bottom: "xs", padding_left: "lg", text: link }) %>
+                <% end %>
+              </div>
+              <div>
+                <%= pb_rails("caption", props: { padding_left: "lg", padding_top: "lg", text: "Playlists" }) %>
+                <% playlists.each do |link| %>
+                  <%= pb_rails("body", props: { color: "lighter", padding: "none", padding_bottom: "xs", padding_left: "lg", text: link }) %>
+                <% end %>
+              </div>
+            <% end %>
+            <%= pb_rails("flex/flex_item", props: { grow: true }) do %><% end %>
             <div>
               <%= pb_rails("section_separator") %>
               <%= pb_rails("body", props: { padding_y: "sm" }) do %>

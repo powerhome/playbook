@@ -37,7 +37,7 @@ const MusicApp = () => {
       >
         <FlexItem grow>
           <Layout
-              collapse="xs"
+              collapse="lg"
               position="left"
               size="sm"
               dark
@@ -50,61 +50,94 @@ const MusicApp = () => {
                   spacing="between"
                   vertical="stretch"
               >
-                <div>
-                  <Table
-                      container={false}
-                      dark
-                      disableHover
-                      marginBottom="lg"
-                      marginTop="md"
-                      responsive="none"
-                      size="sm"
-                  >
-                    <tbody>
-                      <TableRow
-                          dark
-                          sideHighlightColor="category_2"
-                      >
-                        <td>
-                          <Body dark>
-                            <Icon
-                                dark
-                                icon="home"
-                                marginRight="xs"
-                            />
-                            Home
-                          </Body>
-                        </td>
-                      </TableRow>
-                      <tr>
-                        <td>
-                          <Body dark>
-                            <Icon
-                                dark
-                                icon="music"
-                                marginRight="xs"
-                            />
-                            Browse
-                          </Body>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          <Body dark>
-                            <Icon
-                                dark
-                                icon="radio"
-                                marginRight="xs"
-                            />
-                            Radio
-                          </Body>
-                        </td>
-                      </tr>
-                    </tbody>
-                  </Table>
-                  <Caption paddingLeft="lg">Your Library</Caption>
-                  {
-                    yourLibraryLinks.map((linkText, index) =>
+                <Flex
+                    paddingRight="sm"
+                    spacing="between"
+                    wrap={true}
+                >
+                  <div>
+                    <Table
+                        container={false}
+                        dark
+                        disableHover
+                        marginTop="md"
+                        responsive="none"
+                        size="sm"
+                    >
+                      <tbody>
+                        <TableRow
+                            dark
+                            sideHighlightColor="category_2"
+                        >
+                          <td>
+                            <Body dark>
+                              <Icon
+                                  dark
+                                  icon="home"
+                                  marginRight="xs"
+                              />
+                              Home
+                            </Body>
+                          </td>
+                        </TableRow>
+                        <tr>
+                          <td>
+                            <Body dark>
+                              <Icon
+                                  dark
+                                  icon="music"
+                                  marginRight="xs"
+                              />
+                              Browse
+                            </Body>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>
+                            <Body dark>
+                              <Icon
+                                  dark
+                                  icon="radio"
+                                  marginRight="xs"
+                              />
+                              Radio
+                            </Body>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </Table>
+                  </div>
+                  <div>
+                    <Caption
+                        paddingLeft="lg"
+                        paddingTop="lg"
+                    >
+                      Your Library
+                    </Caption>
+                    {
+                      yourLibraryLinks.map((linkText, index) =>
+                        <Body
+                            color="lighter"
+                            dark
+                            key={index}
+                            padding="none"
+                            paddingBottom="xs"
+                            paddingLeft="lg"
+                        >
+                          {linkText}
+                        </Body>
+                      )
+                    }
+                  </div>
+                  <div>
+                    <Caption
+                        paddingLeft="lg"
+                        paddingTop="lg"
+                    >
+                      Playlists
+                    </Caption>
+                    {
+                      playlists.map((linkText, index) =>
                       <Body
                           color="lighter"
                           dark
@@ -115,29 +148,11 @@ const MusicApp = () => {
                       >
                         {linkText}
                       </Body>
-                    )
-                  }
-                  <Caption
-                      paddingLeft="lg"
-                      paddingTop="lg"
-                  >
-                    Playlists
-                  </Caption>
-                  {
-                    playlists.map((linkText, index) =>
-                    <Body
-                        color="lighter"
-                        dark
-                        key={index}
-                        padding="none"
-                        paddingBottom="xs"
-                        paddingLeft="lg"
-                    >
-                      {linkText}
-                    </Body>
-                    )
-                  }
-                </div>
+                      )
+                    }
+                  </div>
+                </Flex>
+                <FlexItem grow />
                 <div>
                   <SectionSeparator dark />
                   <Body
