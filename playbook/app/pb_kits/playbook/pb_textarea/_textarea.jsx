@@ -57,25 +57,9 @@ const Textarea = ({
 
   const handleKeyDown = (e) => {
     e.target.style.height = 'inherit'
-    e.target.style.height = `${e.target.scrollHeight}px`
+    const height = e.target.scrollHeight + 20
+    e.target.style.height = `${height}px`
   }
-
-  //   const handleKeyDown = (e) => {
-  //     // Reset field height
-  //     e.target.style.height = 'inherit';
-
-  //     // Get the computed styles for the element
-  //     const computed = window.getComputedStyle(e.target);
-
-  //     // Calculate the height
-  //     const height = parseInt(computed.getPropertyValue('border-top-width'), 5)
-  //                  + parseInt(computed.getPropertyValue('padding-top'), 5)
-  //                  + e.target.scrollHeight
-  //                  + parseInt(computed.getPropertyValue('padding-bottom'), 5)
-  //                  + parseInt(computed.getPropertyValue('border-bottom-width'), 5);
-
-  //     e.target.style.height = `${height}px`;
-  // }
 
   return (
     <div className={classes}>
