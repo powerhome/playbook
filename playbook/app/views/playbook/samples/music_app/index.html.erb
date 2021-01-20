@@ -110,7 +110,7 @@
                 <%= pb_rails("title", props: { size: 4, text: "Your top podcasts" }) %>
                 <%= pb_rails("section_separator") %>
 
-                <%= pb_rails("flex", props: { padding_top: "sm"}) do %>
+                <%= pb_rails("flex", props: { padding_top: "sm", wrap: true}) do %>
                   <% playlistCardTitles.each do |title| %>
                     <%= pb_rails("flex/flex_item", props: { fixed_size: "175px", padding_right: "sm" }) do %>
                       <%= pb_rails("image", props: { url: randomImageUrl }) %>
@@ -136,7 +136,7 @@
                   </div>
                 <% end %>
                 <%= pb_rails("section_separator") %>
-                <%= pb_rails("flex", props: { padding_top: "sm"}) do %>
+                <%= pb_rails("flex", props: { padding_top: "sm", wrap: true}) do %>
                   <% 6.times do |i| %>
                     <%= pb_rails("flex/flex_item", props: { fixed_size: "175px", padding_right: "sm" }) do %>
                       <%= pb_rails("image", props: { url: randomImageUrl }) %>

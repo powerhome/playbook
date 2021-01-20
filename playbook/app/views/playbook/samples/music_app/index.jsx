@@ -257,7 +257,10 @@ const MusicApp = () => {
                           text="Your top podcasts"
                       />
                       <SectionSeparator dark/>
-                      <Flex paddingTop="sm">
+                      <Flex
+                          paddingTop="sm"
+                          wrap
+                      >
                         {
                           playlistCardTitles.map((title, i) => (
                               <FlexItem
@@ -319,7 +322,10 @@ const MusicApp = () => {
                         </div>
                       </Flex>
                       <SectionSeparator dark/>
-                      <Flex paddingTop="sm">
+                      <Flex
+                          paddingTop="sm"
+                          wrap
+                      >
                         {
                           [...Array(6)].map((_,i) => (
                             <FlexItem
