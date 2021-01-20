@@ -40,7 +40,6 @@ module Playbook
       def resize_class
         " resize_#{resize}"
       end
-
     end
   end
 end
