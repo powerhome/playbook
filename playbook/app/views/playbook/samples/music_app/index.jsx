@@ -1,29 +1,42 @@
-import React from "react"
+/* @flow */
+
+import React from 'react'
 
 import FlexItem from '../../../../pb_kits/playbook/pb_flex/_flex_item.jsx'
 import { Background, Body, Caption, Card, Flex, Icon, Image, Layout, ProgressSimple, SectionSeparator, Table, TableRow, TextInput, Title, User }  from '../../../../pb_kits/playbook'
 
-const yourLibraryLinks = ["Made For You", "Recently Played", "Liked Songs", "Albums", "Artists", "Podcasts"]
-const playlists = ["podcasts", "THENX", "Adrenaline Workout", "New Music Friday", "RetroWave / Outrun", "Tiki Torch"]
+const yourLibraryLinks = ['Made For You', 'Recently Played', 'Liked Songs', 'Albums', 'Artists', 'Podcasts']
+const playlists = ['podcasts', 'THENX', 'Adrenaline Workout', 'New Music Friday', 'RetroWave / Outrun', 'Tiki Torch']
 
 const randomImageUrl = (id) => `https://picsum.photos/id/${id}/175`
-const playlistCardSubtext = "A daily show for anyone who works a regular job and wants to start an income-earning pr..."
-const playlistCardTitles = ["Side Hustle School", "The Devslopes Podcast with Mark Wahlbeck", "Borrasca",
-                             "Philosophize This!", "How I Built This With Guy Raz"]
+const playlistCardSubtext = 'A daily show for anyone who works a regular job and wants to start an income-earning pr...'
+const playlistCardTitles = ['Side Hustle School', 'The Devslopes Podcast with Mark Wahlbeck', 'Borrasca',
+  'Philosophize This!', 'How I Built This With Guy Raz']
 
-const SmallIconPadded = ({icon, ...rest}) => <Icon marginX="sm" dark icon={icon} {...rest}/>
-const BottomRightIcon = ({icon, ...rest}) =>  (
-  <Body dark paddingRight="sm">
-    <Icon dark icon={icon}/>
+const SmallIconPadded = ({ icon, ...rest }: any) => (
+  <Icon
+      dark
+      icon={icon}
+      marginX="sm"
+      {...rest}
+  />
+)
+const BottomRightIcon = ({ icon }: any) =>  (
+  <Body
+      dark
+      paddingRight="sm"
+  >
+    <Icon
+        dark
+        icon={icon}
+    />
   </Body>
 )
 
-
-
 const MusicApp = () => {
   window.addEventListener('DOMContentLoaded', () => {
-    const fullHeightElems = document.querySelectorAll(".fullHeight")
-    fullHeightElems.forEach(elem => elem.style.height = "100%")
+    const fullHeightElems = document.querySelectorAll('.fullHeight')
+    fullHeightElems.forEach((elem) => elem.style.height = '100%')
   })
 
   return (
@@ -38,12 +51,12 @@ const MusicApp = () => {
         <FlexItem grow>
           <Layout
               collapse="lg"
+              dark
               position="left"
               size="sm"
-              dark
           >
             <Layout.Side>
-{/**--------------------- Sidebar start --------------------- */}
+              {/**--------------------- Sidebar start --------------------- */}
               <Flex
                   className="fullHeight"
                   orientation="column"
@@ -53,7 +66,7 @@ const MusicApp = () => {
                 <Flex
                     paddingRight="sm"
                     spacing="between"
-                    wrap={true}
+                    wrap
                 >
                   <div>
                     <Table
@@ -76,7 +89,7 @@ const MusicApp = () => {
                                   icon="home"
                                   marginRight="xs"
                               />
-                              Home
+                              {'Home'}
                             </Body>
                           </td>
                         </TableRow>
@@ -88,7 +101,7 @@ const MusicApp = () => {
                                   icon="music"
                                   marginRight="xs"
                               />
-                              Browse
+                              {'Browse'}
                             </Body>
                           </td>
                         </tr>
@@ -100,7 +113,7 @@ const MusicApp = () => {
                                   icon="radio"
                                   marginRight="xs"
                               />
-                              Radio
+                              {'Radio'}
                             </Body>
                           </td>
                         </tr>
@@ -112,10 +125,10 @@ const MusicApp = () => {
                         paddingLeft="lg"
                         paddingTop="lg"
                     >
-                      Your Library
+                      {'Your Library'}
                     </Caption>
                     {
-                      yourLibraryLinks.map((linkText, index) =>
+                      yourLibraryLinks.map((linkText, index) => (
                         <Body
                             color="lighter"
                             dark
@@ -126,7 +139,7 @@ const MusicApp = () => {
                         >
                           {linkText}
                         </Body>
-                      )
+                      ))
                     }
                   </div>
                   <div>
@@ -134,21 +147,21 @@ const MusicApp = () => {
                         paddingLeft="lg"
                         paddingTop="lg"
                     >
-                      Playlists
+                      {'Playlists'}
                     </Caption>
                     {
-                      playlists.map((linkText, index) =>
-                      <Body
-                          color="lighter"
-                          dark
-                          key={index}
-                          padding="none"
-                          paddingBottom="xs"
-                          paddingLeft="lg"
-                      >
-                        {linkText}
-                      </Body>
-                      )
+                      playlists.map((linkText, index) => (
+                        <Body
+                            color="lighter"
+                            dark
+                            key={index}
+                            padding="none"
+                            paddingBottom="xs"
+                            paddingLeft="lg"
+                        >
+                          {linkText}
+                        </Body>
+                      ))
                     }
                   </div>
                 </Flex>
@@ -160,17 +173,17 @@ const MusicApp = () => {
                       paddingY="sm"
                   >
                     <Icon
-                        marginLeft="lg"
-                        marginRight="xs"
                         dark
                         icon="plus-circle"
+                        marginLeft="lg"
+                        marginRight="xs"
                     />
-                    New Playlist
+                    {'New Playlist'}
                   </Body>
                   <SectionSeparator dark />
                 </div>
               </Flex>
-{/**--------------------- End of sidebar--------------------- */}
+              {/**--------------------- End of sidebar--------------------- */}
             </Layout.Side>
             <Layout.Body>
               <Flex
@@ -178,61 +191,64 @@ const MusicApp = () => {
                   orientation="column"
                   vertical="stretch"
               >
-{/**---------------------- Start Header ---------------------- */}
+                {/**---------------------- Start Header ---------------------- */}
                 <Flex
+                    dark
+                    paddingLeft="lg"
+                    paddingY="xs"
+                    vertical="center"
+                >
+                  <Body
+                      color="lighter"
                       dark
-                      paddingLeft="lg"
-                      paddingY="xs"
-                      vertical="center"
                   >
-                    <Body color="lighter" dark>
-                      <Icon
-                          dark
-                          icon="chevron-left"
-                          size="1x"
-                          padding="none"
-                          marginX="lg"
-                      />
-                    </Body>
-                    <Body dark>
-                      <Icon
-                          dark
-                          icon="chevron-right"
-                          size="1x"
-                          padding="none"
-                          marginRight="lg"
-                      />
-                    </Body>
+                    <Icon
+                        dark
+                        icon="chevron-left"
+                        marginX="lg"
+                        padding="none"
+                        size="1x"
+                    />
+                  </Body>
+                  <Body dark>
+                    <Icon
+                        dark
+                        icon="chevron-right"
+                        marginRight="lg"
+                        padding="none"
+                        size="1x"
+                    />
+                  </Body>
 
-                    <TextInput
+                  <TextInput
                       dark
                       placeholder="Search"
-                      />
+                  />
 
-                    <FlexItem grow />
+                  <FlexItem grow />
 
-                    <User
-                        align="left"
-                        avatarUrl="https://randomuser.me/api/portraits/women/44.jpg"
+                  <User
+                      align="left"
+                      avatarUrl="https://randomuser.me/api/portraits/women/44.jpg"
+                      dark
+                      name="Maria Illescas"
+                      orientation="horizontal"
+                      paddingRight="sm"
+                  />
+                  <Body dark>
+                    <Icon
                         dark
-                        name="Maria Illescas"
-                        orientation="horizontal"
-                        paddingRight="sm"
+                        icon="chevron-down"
+                        marginRight="sm"
+                        padding="none"
+                        size="1x"
                     />
-                    <Body dark>
-                      <Icon
-                          dark
-                          icon="chevron-down"
-                          marginRight="sm"
-                          padding="none"
-                          size="1x"
-                      />
-                    </Body>
-                  </Flex>
-{/**---------------------- End of Header---------------------- */}
+                  </Body>
+                </Flex>
+                {/**---------------------- End of Header---------------------- */}
                 <FlexItem grow>
-{/**---------------------- Start Body  ---------------------- */}
-                <Card
+                  {/**---------------------- Start Body  ---------------------- */}
+                  <Card
                       dark
                       padding="none"
                       paddingBottom="xs"
@@ -246,9 +262,9 @@ const MusicApp = () => {
                     >
                       <Title
                           dark
+                          marginBottom="sm"
                           size={1}
                           text="Home"
-                          marginBottom="sm"
                       />
 
                       <Title
@@ -256,25 +272,27 @@ const MusicApp = () => {
                           size={4}
                           text="Your top podcasts"
                       />
-                      <SectionSeparator dark/>
+                      <SectionSeparator dark />
                       <Flex
                           paddingTop="sm"
                           wrap
                       >
                         {
                           playlistCardTitles.map((title, i) => (
-                              <FlexItem
-                                  fixedSize="175px"
-                                  paddingRight="sm"
-                                  key={i}
+                            <FlexItem
+                                fixedSize="175px"
+                                key={i}
+                                paddingRight="sm"
+                            >
+                              <Image url={randomImageUrl(Math.floor(1000 * Math.random()))} />
+                              <Caption dark>{title}</Caption>
+                              <Caption
+                                  dark
+                                  size="xs"
                               >
-                                <Image url={randomImageUrl(Math.floor(1000 * Math.random()))} />
-                                <Caption dark >{title}</Caption>
-                                <Caption dark
-                                        size="xs">
-                                  {playlistCardSubtext}
-                                </Caption>
-                              </FlexItem>
+                                {playlistCardSubtext}
+                              </Caption>
+                            </FlexItem>
                           ))
                         }
                       </Flex>
@@ -305,36 +323,36 @@ const MusicApp = () => {
                               <Icon
                                   dark
                                   icon="chevron-left"
-                                  size="1x"
-                                  padding="none"
                                   marginRight="sm"
+                                  padding="none"
+                                  size="1x"
                               />
                             </Body>
                             <Body dark>
                               <Icon
                                   dark
                                   icon="chevron-right"
-                                  size="1x"
                                   padding="none"
+                                  size="1x"
                               />
                             </Body>
                           </Flex>
                         </div>
                       </Flex>
-                      <SectionSeparator dark/>
+                      <SectionSeparator dark />
                       <Flex
                           paddingTop="sm"
                           wrap
                       >
                         {
-                          [...Array(6)].map((_,i) => (
+                          [...Array(6)].map((_, i) => (
                             <FlexItem
                                 fixedSize="175px"
                                 key={i}
                                 paddingRight="sm"
                             >
                               <Image url={randomImageUrl(Math.floor(1000 * Math.random()))} />
-                              <Caption dark >Daily Mix {i+1}</Caption>
+                              <Caption dark>{`Daily Mix ${ i + 1 }`}</Caption>
                               <Caption
                                   dark
                                   size="xs"
@@ -347,24 +365,27 @@ const MusicApp = () => {
                       </Flex>
                     </Flex>
                   </Card>
-{/**---------------------- End of Body ---------------------- */}
+                  {/**---------------------- End of Body ---------------------- */}
                 </FlexItem>
               </Flex>
             </Layout.Body>
           </Layout>
         </FlexItem>
-{/**---------------------- Start Footer  ---------------------- */}
-      <Background
+        {/**---------------------- Start Footer  ---------------------- */}
+        <Background
             backgroundColor="dark"
             padding="none"
         >
           <Flex
+              horizontal="center"
               padding="xs"
               vertical="stretch"
-              horizontal="center"
               wrap
           >
-            <FlexItem grow fixedSize="22%">
+            <FlexItem
+                fixedSize="22%"
+                grow
+            >
               <Flex
                   vertical="center"
               >
@@ -372,17 +393,19 @@ const MusicApp = () => {
                     marginLeft="xs"
                     url={randomImageUrl(Math.floor(1000 * Math.random()))}
                 />
-                <Body dark
-                      paddingLeft="sm">
+                <Body
+                    dark
+                    paddingLeft="sm"
+                >
                   <Title
                       dark
                       size={4}
                   >
-                    Change Will Come
+                    {'Change Will Come'}
                     <Icon
-                          dark
-                          icon="heart"
-                          marginLeft="xs"
+                        dark
+                        icon="heart"
+                        marginLeft="xs"
                     />
                   </Title>
                   <Caption
@@ -395,14 +418,14 @@ const MusicApp = () => {
             </FlexItem>
 
             <FlexItem
-                grow
                 fixedSize="56%"
+                grow
                 marginTop="xs"
             >
               <Flex
+                  horizontal="center"
                   orientation="column"
                   vertical="stretch"
-                  horizontal="center"
               >
                 <Body
                     dark
@@ -412,11 +435,14 @@ const MusicApp = () => {
                       horizontal="center"
                       vertical="center"
                   >
-                    <SmallIconPadded icon="random"/>
-                    <SmallIconPadded icon="step-backward"/>
-                    <SmallIconPadded icon="play-circle" size="2x"/>
-                    <SmallIconPadded icon="step-forward"/>
-                    <SmallIconPadded icon="repeat"/>
+                    <SmallIconPadded icon="random" />
+                    <SmallIconPadded icon="step-backward" />
+                    <SmallIconPadded
+                        icon="play-circle"
+                        size="2x"
+                    />
+                    <SmallIconPadded icon="step-forward" />
+                    <SmallIconPadded icon="repeat" />
                   </Flex>
                 </Body>
                 <Flex
@@ -429,7 +455,10 @@ const MusicApp = () => {
                       text="2:00"
                   />
                   <FlexItem grow>
-                      <ProgressSimple muted percent={20} />
+                    <ProgressSimple
+                        muted
+                        percent={20}
+                    />
                   </FlexItem>
                   <Body
                       dark
@@ -440,28 +469,34 @@ const MusicApp = () => {
               </Flex>
             </FlexItem>
 
-            <FlexItem grow fixedSize="22%">
+            <FlexItem
+                fixedSize="22%"
+                grow
+            >
               <Flex
                   className="fullHeight"
                   horizontal="right"
                   vertical="center"
               >
-                <BottomRightIcon icon="list-music"/>
-                <BottomRightIcon icon="computer-speaker"/>
-                <BottomRightIcon icon="volume"/>
+                <BottomRightIcon icon="list-music" />
+                <BottomRightIcon icon="computer-speaker" />
+                <BottomRightIcon icon="volume" />
                 <FlexItem fixedSize="100px">
-                  <ProgressSimple muted paddingRight="md" percent={30} />
-                  </FlexItem>
-                <BottomRightIcon icon="expand-alt"/>
+                  <ProgressSimple
+                      muted
+                      paddingRight="md"
+                      percent={30}
+                  />
+                </FlexItem>
+                <BottomRightIcon icon="expand-alt" />
               </Flex>
             </FlexItem>
           </Flex>
         </Background>
-{/**---------------------- End of Footer ---------------------- */}
+        {/**---------------------- End of Footer ---------------------- */}
       </Flex>
     </Background>
   )
-
 }
 
 export default MusicApp
