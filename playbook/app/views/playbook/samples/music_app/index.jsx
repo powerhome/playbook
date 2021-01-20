@@ -275,7 +275,7 @@ const MusicApp = () => {
                           <Caption
                               dark
                               size="xs"
-                              text="Get better recommandations the more you listen."
+                              text="Get better recommendations the more you listen."
                           />
                         </div>
                         <div>
