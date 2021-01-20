@@ -4,7 +4,7 @@ import { Table, Title } from '../../'
 const TableResponsiveTable = (props) => {
   return (
     <div>
-       <Title
+      <Title
           size={4}
           text="Not Responsive"
           {...props}
