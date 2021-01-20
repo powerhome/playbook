@@ -22,15 +22,17 @@
                              "Philosophize This!", "How I Built This With Guy Raz"] %>
 
 <%= pb_rails("background", props: { background_color: "dark", padding: "none" }) do %>
-  <%= pb_rails("flex", props: { orientation: "column", horizontal: "stretch"}) do %>
+  <%= pb_rails("flex", props: { horizontal: "stretch", orientation: "column"}) do %>
     <%= pb_rails("flex/flex_item", props: {grow: true}) do %>
       <%= pb_rails("layout", props: {collapse: "lg", position: "left", size: "sm", variant: "dark" }) do %>
         <%= pb_rails("layout/sidebar") do %>
 <!-- ---------------------------- Sidebar ---------------------------- -->
-          <%= pb_rails("flex", props: { classname: "fullHeight", orientation: "column", spacing: "between", horizontal: "stretch" }) do %>
+          <%= pb_rails("flex", props: { classname: "fullHeight", horizontal: "stretch", orientation: "column", spacing: "between" }) do %>
             <%= pb_rails("flex", props: { padding_right: "sm", spacing: "between", wrap: true }) do %>
               <div>
-                <%= pb_rails("table", props: { container: false, disableHover: true, margin_top: "md", responsive: "none", size: "sm" }) do %>
+                <%= pb_rails("table",
+                             props: { container: false, disableHover: true,
+                                      margin_top: "md", responsive: "none", size: "sm" }) do %>
                   <tbody>
                     <%= pb_rails("table/table_row", props: { side_highlight_color: "category_2" }) do %>
                       <td>
@@ -62,13 +64,17 @@
               <div>
                 <%= pb_rails("caption", props: { padding_left: "lg", padding_top: "lg", text: "Your Library" }) %>
                 <% yourLibraryLinks.each do |link| %>
-                  <%= pb_rails("body", props: { color: "lighter", padding: "none", padding_bottom: "xs", padding_left: "lg", text: link }) %>
+                  <%= pb_rails("body",
+                               props: { color: "lighter", padding: "none",
+                                        padding_bottom: "xs", padding_left: "lg", text: link }) %>
                 <% end %>
               </div>
               <div>
                 <%= pb_rails("caption", props: { padding_left: "lg", padding_top: "lg", text: "Playlists" }) %>
                 <% playlists.each do |link| %>
-                  <%= pb_rails("body", props: { color: "lighter", padding: "none", padding_bottom: "xs", padding_left: "lg", text: link }) %>
+                  <%= pb_rails("body",
+                               props: { color: "lighter", padding: "none",
+                                        padding_bottom: "xs", padding_left: "lg", text: link }) %>
                 <% end %>
               </div>
             <% end %>
@@ -85,21 +91,23 @@
 <!-- ---------------------------- end Side ---------------------------- -->
         <% end %>
         <%= pb_rails("layout/body") do %>
-          <%= pb_rails("flex", props: { class_name: "fullHeight", orientation: "column", horizontal: "stretch"}) do %>
+          <%= pb_rails("flex", props: { class_name: "fullHeight", horizontal: "stretch", orientation: "column"}) do %>
 <!-- ---------------------------- Header ---------------------------- -->
             <%= pb_rails("flex", props: { padding_left: "lg", padding_y: "xs", vertical: "center" }) do %>
               <%= pb_rails("body", props: { color: "lighter" }) do %>
-                <%= pb_rails("icon", props: { icon: "chevron-left", size: "1x", padding: "none", margin_x: "xl" })%>
+                <%= pb_rails("icon", props: { icon: "chevron-left", margin_x: "xl", padding: "none", size: "1x" }) %>
               <% end %>
               <%= pb_rails("body") do %>
-                <%= pb_rails("icon", props: { icon: "chevron-right", size: "1x", padding: "none", margin_right: "lg" })%>
+                <%= pb_rails("icon",
+                             props: { icon: "chevron-right", size: "1x", padding: "none", margin_right: "lg" }) %>
               <% end %>
 
               <%= pb_rails("text_input", props: { margin_top: "xs", placeholder: "Search" }) %>
               <%= pb_rails("flex/flex_item", props: { grow: true }) do %><% end %>
               <%= pb_rails("user", props: { align: "left", avatar_url: "https://randomuser.me/api/portraits/women/44.jpg", name: "Maria Illescas", orientation: "horizontal", padding_right: "sm" }) %>
               <%= pb_rails("body") do %>
-                <%= pb_rails("icon", props: { icon: "chevron-down", size: "1x", padding: "none", margin_right: "sm" })%>
+                <%= pb_rails("icon",
+                             props: { icon: "chevron-down", size: "1x", padding: "none", margin_right: "sm" }) %>
               <% end %>
 
 
@@ -109,8 +117,10 @@
             <%= pb_rails("flex/flex_item", props: { grow: true }) do %><% end %>
 <!-- ---------------------------- BODY ---------------------------- -->
             <%= pb_rails("card", props: { padding: "none", padding_bottom: "xs"}) do %>
-              <%= pb_rails("flex", props: { margin_x: "lg", orientation: "column", padding_top: "lg", padding_x: "xl", horizontal: "stretch" }) do %>
-                <%= pb_rails("title", props: { margin_bottom: "sm", size: 1, text: "Home" })%>
+              <%= pb_rails("flex",
+                           props: { margin_x: "lg", horizontal: "stretch",
+                                    orientation: "column", padding_top: "lg", padding_x: "xl"  }) do %>
+                <%= pb_rails("title", props: { margin_bottom: "sm", size: 1, text: "Home" }) %>
                 <%= pb_rails("title", props: { size: 4, text: "Your top podcasts" }) %>
                 <%= pb_rails("section_separator") %>
 
@@ -126,12 +136,13 @@
                 <%= pb_rails("flex", props: { spacing: "between", vertical: "bottom"}) do %>
                   <div>
                     <%= pb_rails("title", props: { padding_top: "sm", size: 4, text: "Made for you" }) %>
-                    <%= pb_rails("caption", props: { size: "xs", text: "Get better recommendations the more you listen." }) %>
+                    <%= pb_rails("caption",
+                                 props: { size: "xs", text: "Get better recommendations the more you listen." }) %>
                   </div>
                   <div>
                     <%= pb_rails("flex", props: { padding_bottom: "xs" }) do %>
                       <%= pb_rails("body", props: { color: "lighter" }) do %>
-                        <%= pb_rails("icon", props: { icon: "chevron-left", padding: "none", margin_right: "sm" }) %>
+                        <%= pb_rails("icon", props: { icon: "chevron-left", margin_right: "sm", padding: "none" }) %>
                       <% end %>
                       <%= pb_rails("body") do %>
                         <%= pb_rails("icon", props: { icon: "chevron-right", padding: "none" }) %>
@@ -158,14 +169,14 @@
     <% end %>
 <!-- ---------------------------- FOOTER ---------------------------- -->
     <%= pb_rails("background", props: { background_color: "dark", padding: "none" }) do %>
-      <%= pb_rails("flex", props: { padding: "xs", vertical: "stretch", horizontal: "center", wrap: true }) do %>
+      <%= pb_rails("flex", props: { horizontal: "center", padding: "xs", vertical: "stretch", wrap: true }) do %>
         <%= pb_rails("flex/flex_item", props: { fixed_size: "22%", grow: true }) do %>
           <%= pb_rails("flex", props: { vertical: "center" }) do %>
             <%= pb_rails("image", props: {margin_left: "xs", url: randomImageUrl })%>
             <%= pb_rails("body", props: { padding_left: "sm" }) do %>
               <%= pb_rails("flex") do %>
                 <%= pb_rails("title", props: {  size: 4, text: "Change Will Come" }) %>
-                <%= pb_rails("icon", props: { icon: "heart", fixed_width: true, margin_left: "xs" }) %>
+                <%= pb_rails("icon", props: { fixed_width: true, icon: "heart", margin_left: "xs" }) %>
               <% end %>
               <%= pb_rails("caption", props: { size: "xs", text: "Cut Snake" }) %>
             <% end %>
@@ -176,7 +187,7 @@
           <%= pb_rails("flex", props: { orientation: "column", vertical: "center", horizontal: "stretch" }) do %>
             <%= pb_rails("body", props: { margin_bottom: "xs" }) do %>
               <%= pb_rails("flex", props: { horizontal: "center", vertical: "center" }) do %>
-                <%= pb_rails("icon", props: { margin_x: "sm", icon: "random" })%>
+                <%= pb_rails("icon", props: { margin_x: "sm", icon: "random" }) %>
                 <%= pb_rails("icon", props: { margin_x: "sm", icon: "step-backward" }) %>
                 <%= pb_rails("icon", props: { margin_x: "sm", icon: "play-circle", size:"2x" }) %>
                 <%= pb_rails("icon", props: { margin_x: "sm", icon: "step-forward" }) %>
