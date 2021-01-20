@@ -361,8 +361,10 @@ const MusicApp = () => {
           <Flex
               padding="xs"
               vertical="stretch"
+              horizontal="center"
+              wrap
           >
-            <FlexItem fixedSize="22%">
+            <FlexItem grow fixedSize="22%">
               <Flex
                   vertical="center"
               >
@@ -393,12 +395,14 @@ const MusicApp = () => {
             </FlexItem>
 
             <FlexItem
+                grow
                 fixedSize="56%"
                 marginTop="xs"
             >
               <Flex
                   orientation="column"
                   vertical="stretch"
+                  horizontal="center"
               >
                 <Body
                     dark
@@ -436,7 +440,7 @@ const MusicApp = () => {
               </Flex>
             </FlexItem>
 
-            <FlexItem fixedSize="22%">
+            <FlexItem grow fixedSize="22%">
               <Flex
                   className="fullHeight"
                   horizontal="right"
@@ -446,8 +450,8 @@ const MusicApp = () => {
                 <BottomRightIcon icon="computer-speaker"/>
                 <BottomRightIcon icon="volume"/>
                 <FlexItem fixedSize="100px">
-                <ProgressSimple muted paddingRight="md" percent={30} />
-                </FlexItem>
+                  <ProgressSimple muted paddingRight="md" percent={30} />
+                  </FlexItem>
                 <BottomRightIcon icon="expand-alt"/>
               </Flex>
             </FlexItem>

@@ -7,6 +7,10 @@
   .fullHeight {
     height: 100%;
   }
+
+  .volume-bar {
+    max-width: 100px
+  }
 </style>
 
 <% def randomImageUrl;  "https://picsum.photos/id/#{Random.rand(1000)}/175" end %>
@@ -154,8 +158,8 @@
     <% end %>
 <!-- ---------------------------- FOOTER ---------------------------- -->
     <%= pb_rails("background", props: { background_color: "dark", padding: "none" }) do %>
-      <%= pb_rails("flex", props: { padding: "xs", vertical: "stretch" }) do %>
-        <%= pb_rails("flex/flex_item", props: { fixed_size: "22%" }) do %>
+      <%= pb_rails("flex", props: { padding: "xs", vertical: "stretch", horizontal: "center", wrap: true }) do %>
+        <%= pb_rails("flex/flex_item", props: { fixed_size: "22%", grow: true }) do %>
           <%= pb_rails("flex", props: { vertical: "center" }) do %>
             <%= pb_rails("image", props: {margin_left: "xs", url: randomImageUrl })%>
             <%= pb_rails("body", props: { padding_left: "sm" }) do %>
@@ -168,8 +172,8 @@
           <% end %>
         <% end %>
 
-        <%= pb_rails("flex/flex_item", props: { fixed_size: "56%", margin_top: "xs" }) do %>
-          <%= pb_rails("flex", props: { orientation: "column", horizontal: "stretch" }) do %>
+        <%= pb_rails("flex/flex_item", props: { fixed_size: "56%", grow: true, margin_top: "xs" }) do %>
+          <%= pb_rails("flex", props: { orientation: "column", vertical: "center", horizontal: "stretch" }) do %>
             <%= pb_rails("body", props: { margin_bottom: "xs" }) do %>
               <%= pb_rails("flex", props: { horizontal: "center", vertical: "center" }) do %>
                 <%= pb_rails("icon", props: { margin_x: "sm", icon: "random" })%>
@@ -184,12 +188,12 @@
               <%= pb_rails("flex/flex_item", props: { grow: true }) do %>
                 <%= pb_rails("progress_simple", props: { muted: true, percent: 20 }) %>
               <% end %>
-                <%= pb_rails("body", props: {margin_right: "left", text: "10:00" }) %>
+              <%= pb_rails("body", props: { margin_left: "sm", text: "10:00" }) %>
             <% end %>
           <% end %>
         <% end %>
 
-        <%= pb_rails("flex/flex_item", props: { fixed_size: "22%"}) do %>
+        <%= pb_rails("flex/flex_item", props: { fixed_size: "22%", grow: true }) do %>
           <%= pb_rails("flex", props: { classname: "fullHeight", horizontal: "right", vertical: "center" }) do %>
             <%= pb_rails("body", props: { padding_right: "sm"}) do %>
               <%= pb_rails("icon", props: { icon: "list-music" }) %>
@@ -200,7 +204,7 @@
             <%= pb_rails("body", props: { padding_right: "sm"}) do %>
               <%= pb_rails("icon", props: { icon: "volume" }) %>
             <% end %>
-            <%= pb_rails("flex/flex_item", props: { fixed_size: "100px" }) do %>
+            <%= pb_rails("flex/flex_item", props: { classname: "volume-bar", grow: true }) do %>
                 <%= pb_rails("progress_simple", props: { muted: true, percent: 30 }) %>
             <% end %>
             <%= pb_rails("body", props: { padding_x: "sm"}) do %>
