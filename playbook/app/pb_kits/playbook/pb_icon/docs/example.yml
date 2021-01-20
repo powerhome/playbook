@@ -7,7 +7,7 @@ examples:
   - icon_pull: Icon Pull
   - icon_border: Icon Border
   - icon_sizes: Icon Sizes
-  - icon_default_dark: Icon Default Dark
+
   react:
   - icon_default: Icon Default
   - icon_rotate: Icon Rotate
@@ -16,4 +16,3 @@ examples:
   - icon_pull: Icon Pull
   - icon_border: Icon Border
   - icon_sizes: Icon Sizes
-  - icon_default_dark: Icon Default Dark
