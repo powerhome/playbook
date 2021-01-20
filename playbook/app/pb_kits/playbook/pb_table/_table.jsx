@@ -15,7 +15,7 @@ type TableProps = {
   dataTable: boolean,
   disableHover: boolean,
   id?: string,
-  responsive: "collapse" | "scroll" | "none",
+  responsive: "collapse" | "scroll" | "none" | "desktop" | "tablet",
   singleLine: boolean,
   size: "sm" | "md" | "lg",
 }

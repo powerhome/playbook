@@ -19,7 +19,7 @@ module Playbook
       prop :container, type: Playbook::Props::Boolean,
                        default: true
       prop :responsive, type: Playbook::Props::Enum,
-                        values: %w[collapse scroll none],
+                        values: %w[collapse scroll none tablet desktop],
                         default: "collapse"
       prop :text
 
