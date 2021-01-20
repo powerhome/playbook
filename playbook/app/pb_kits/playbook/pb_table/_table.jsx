@@ -2,13 +2,15 @@
 
 import React, { type Node } from 'react'
 import classnames from 'classnames'
-import { buildAriaProps, buildDataProps } from '../utilities/props'
+import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
 import { globalProps } from '../utilities/globalProps.js'
+import PbTable from './'
 
 type TableProps = {
   aria?: object,
   children: array<Node> | Node,
   className: string,
+  collapse?: "sm" | "md" | "lg",
   container: boolean,
   dark?: boolean,
   data?: object,
@@ -25,6 +27,7 @@ const Table = (props: TableProps) => {
     aria = {},
     children,
     className,
+    collapse = 'sm',
     container = true,
     dark,
     data = {},
@@ -38,6 +41,10 @@ const Table = (props: TableProps) => {
 
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
+  const tableCollapseCss = `table-collapse-${collapse}`
+
+  const instance = new PbTable()
+  instance.connect()
 
   return (
     <table
@@ -55,6 +62,7 @@ const Table = (props: TableProps) => {
           'no-hover': disableHover,
         },
         globalProps(props),
+        tableCollapseCss,
         className
       )}
         id={id}

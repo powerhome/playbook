@@ -21,12 +21,15 @@ module Playbook
       prop :responsive, type: Playbook::Props::Enum,
                         values: %w[collapse scroll none tablet desktop],
                         default: "collapse"
+      prop :collapse, type: Playbook::Props::Enum,
+                      values: %w[sm md lg],
+                      default: "sm"
       prop :text
 
       def classname
         generate_classname(
           "pb_table", "table-#{size}", single_line_class, dark_class,
-          disable_hover_class, container_class, data_table_class,
+          disable_hover_class, container_class, data_table_class, collapse_class,
           "table-responsive-#{responsive}", separator: " "
         )
       end
@@ -51,6 +54,10 @@ module Playbook
 
       def container_class
         container ? "table-card" : nil
+      end
+
+      def collapse_class
+        "table-collapse-#{collapse}"
       end
     end
   end

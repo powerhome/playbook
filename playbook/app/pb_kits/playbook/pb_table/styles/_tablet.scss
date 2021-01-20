@@ -3,9 +3,9 @@
 
 @media only screen and (max-width: $screen-lg-min) {
   [class^=pb_table] {
-    &.table-sm.table-responsive-tablet,
-    &.table-md.table-responsive-tablet,
-    &.table-lg.table-responsive-tablet {
+    &.table-sm.table-collapse-md,
+    &.table-md.table-collapse-md,
+    &.table-lg.table-collapse-md {
       width: 100%;
       background: none !important;
 

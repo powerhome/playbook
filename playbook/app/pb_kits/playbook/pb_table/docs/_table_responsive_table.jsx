@@ -36,10 +36,11 @@ const TableResponsiveTable = (props) => {
       <br />
       <Title
           size={4}
-          text="Default/Mobile"
+          text="Mobile"
           {...props}
       />
       <Table
+          collapse="sm"
           {...props}
       >
         <thead>
@@ -69,7 +70,7 @@ const TableResponsiveTable = (props) => {
           {...props}
       />
       <Table
-          responsive="tablet"
+          collapse="md"
           {...props}
       >
         <thead>
@@ -99,7 +100,7 @@ const TableResponsiveTable = (props) => {
           {...props}
       />
       <Table
-          responsive="desktop"
+          collapse="lg"
           {...props}
       >
         <thead>
