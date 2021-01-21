@@ -6,7 +6,7 @@ import {
   Title,
 } from '../..'
 
-const PopoverScrollHeight = () => {
+const PopoverScrollHeight = (props) => {
   const [showPopover, setShowPopover] = useState(false)
 
   const handleTogglePopover = () => {
@@ -35,6 +35,7 @@ const PopoverScrollHeight = () => {
         reference={popoverTrigger}
         shouldClosePopover={handleShouldClosePopover}
         show={showPopover}
+        {...props}
     >
       <Body
           marginBottom="sm"
@@ -43,10 +44,12 @@ const PopoverScrollHeight = () => {
           conditioned to a life of security, conformity, and conservation, all of
           which may appear to give one peace of mind, but in reality, nothing is
           more damaging to the adventurous spirit."
+          {...props}
       />
       <Title
           size={4}
           text="- Christopher McCandless"
+          {...props}
       />
 
     </PbReactPopover>

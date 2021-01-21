@@ -1,7 +1,7 @@
 import React from 'react'
 import { IconCircle } from '../../'
 
-const IconCircleColorDark = () => {
+const IconCircleColorDark = (props) => {
   return (
     <div>
       <IconCircle
@@ -9,6 +9,7 @@ const IconCircleColorDark = () => {
           icon="rocket"
           size="sm"
           variant="royal"
+          {...props}
       />
       <br />
       <IconCircle
@@ -16,6 +17,7 @@ const IconCircleColorDark = () => {
           icon="rocket"
           size="sm"
           variant="blue"
+          {...props}
       />
       <br />
       <IconCircle
@@ -23,6 +25,7 @@ const IconCircleColorDark = () => {
           icon="rocket"
           size="sm"
           variant="purple"
+          {...props}
       />
       <br />
       <IconCircle
@@ -30,6 +33,7 @@ const IconCircleColorDark = () => {
           icon="rocket"
           size="sm"
           variant="teal"
+          {...props}
       />
       <br />
       <IconCircle
@@ -37,6 +41,7 @@ const IconCircleColorDark = () => {
           icon="rocket"
           size="sm"
           variant="red"
+          {...props}
       />
       <br />
       <IconCircle
@@ -44,6 +49,7 @@ const IconCircleColorDark = () => {
           icon="rocket"
           size="sm"
           variant="yellow"
+          {...props}
       />
       <br />
       <IconCircle
@@ -51,6 +57,7 @@ const IconCircleColorDark = () => {
           icon="rocket"
           size="sm"
           variant="green"
+          {...props}
       />
     </div>
   )

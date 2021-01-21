@@ -85,13 +85,49 @@
     }
   }
 
-  .dark {
+  &[class*=dark] {
     .pb_typeahead_wrapper .pb_typeahead_loading_indicator {
       color: $text_dk_light;
     }
+    [class^=pb_text_input_kit].dark .text_input_wrapper .text_input {
+      display: inherit !important;
+    }
+    .typeahead-kit-select__menu {
+      background-color: $bg_dark;
+      color: $white;
+    }
+    .typeahead-kit-select__option:hover {
+      background-color: tint($focus_input_dark, 5%);
+    }
+    .typeahead-kit-select__input {
+      color: white;
+      input:focus {
+        box-shadow: none;
+      }
+    }
+    .typeahead-kit-select__single-value{
+      color: white;
+    }
+    .typeahead-kit-select__option--is-focused {
+      background-color: tint($focus_input_dark, 5%);
+    }
+  
+    [class^=pb_list_kit] {
+      background-color: $bg_dark;
+    }
+    .pb_item_kit {
+      button {
+        color: white !important;
+      }
+      @media (hover:hover) {
+        &:hover {
+          background-color: tint($focus_input_dark, 5%);
+        }
+      }
+    }
   }
 
-  &.react-select {
+  &.react-select, &.react-select .dark {
     .text_input {
       display: inherit;
       padding: 3px 4px;
@@ -100,7 +136,16 @@
       }
       &_value_container {
         flex-grow: 1;
+        position: relative;
       }
+    }
+    .placeholder {
+      position: absolute;
+      margin-right: 2px;
+      margin-left: 2px;
+      top: 50%;
+      transform: translateY(-50%);
+      box-sizing: border-box;
     }
   }
 }

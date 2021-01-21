@@ -1,9 +1,12 @@
 import React from 'react'
 import { Table } from '../../'
 
-const TableDataTable = () => {
+const TableDataTable = (props) => {
   return (
-    <Table dataTable>
+    <Table
+        dataTable
+        {...props}
+    >
       <thead>
         <tr>
           <th>{'Column 1'}</th>

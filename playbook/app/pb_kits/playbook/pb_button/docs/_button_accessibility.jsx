@@ -4,11 +4,11 @@ import { Button } from '../../'
 const ButtonAccessibility = (props) => (
   <div>
     <Button
-        {...props}
         aria={{ label: 'button' }}
         link="https://google.com"
         tag="a"
         text="Button with ARIA"
+        {...props}
     />
   </div>
 )

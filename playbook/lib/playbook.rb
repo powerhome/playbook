@@ -8,6 +8,7 @@ require "webpacker/react"
 require "playbook/props"
 require "playbook/version"
 require "playbook/engine" if defined?(Rails)
+require "playbook/markdown/template_handler"
 
 module Playbook
   ROOT_PATH = Pathname.new(File.join(__dir__, ".."))

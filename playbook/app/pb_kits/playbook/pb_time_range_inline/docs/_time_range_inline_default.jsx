@@ -1,18 +1,20 @@
 import React from 'react'
 import { TimeRangeInline } from '../../'
 
-const TimeRangeInlineDefault = () => (
+const TimeRangeInlineDefault = (props) => (
   <div>
     <TimeRangeInline
         endTime="2012-08-02T17:49:29Z"
         size="xs"
         startTime="2012-08-02T15:49:29Z"
+        {...props}
     />
     <br />
     <TimeRangeInline
         endTime="2012-08-02T17:49:29Z"
         size="sm"
         startTime="2012-08-02T15:49:29Z"
+        {...props}
     />
     <br />
     <br />
@@ -22,6 +24,7 @@ const TimeRangeInlineDefault = () => (
         size="xs"
         startTime="2012-08-02T15:49:29Z"
         timezone="true"
+        {...props}
     />
     <br />
     <TimeRangeInline
@@ -30,6 +33,7 @@ const TimeRangeInlineDefault = () => (
         size="sm"
         startTime="2012-08-02T15:49:29Z"
         timezone="true"
+        {...props}
     />
     <br />
     <br />
@@ -39,6 +43,7 @@ const TimeRangeInlineDefault = () => (
         icon="true"
         size="xs"
         startTime="2012-08-02T15:49:29Z"
+        {...props}
     />
     <br />
     <TimeRangeInline
@@ -47,6 +52,7 @@ const TimeRangeInlineDefault = () => (
         icon="true"
         size="sm"
         startTime="2012-08-02T15:49:29Z"
+        {...props}
     />
     <br />
     <br />
@@ -57,6 +63,7 @@ const TimeRangeInlineDefault = () => (
         size="xs"
         startTime="2012-08-02T15:49:29Z"
         timezone="true"
+        {...props}
     />
     <br />
     <TimeRangeInline
@@ -66,6 +73,7 @@ const TimeRangeInlineDefault = () => (
         size="sm"
         startTime="2012-08-02T15:49:29Z"
         timezone="true"
+        {...props}
     />
   </div>
 )

@@ -1,7 +1,7 @@
 import React from 'react'
 import { Select } from '../../'
 
-const SelectDefault = () => {
+const SelectDefault = (props) => {
   const options = [
     {
       value: '1',
@@ -23,6 +23,7 @@ const SelectDefault = () => {
           label="Favorite Food"
           name="food"
           options={options}
+          {...props}
       />
     </div>
   )

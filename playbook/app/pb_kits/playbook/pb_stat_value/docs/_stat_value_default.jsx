@@ -1,13 +1,19 @@
 import React from 'react'
 import { StatValue } from '../../'
 
-const StatValueDefault = () => {
+const StatValueDefault = (props) => {
   return (
     <>
-      <StatValue value={1048} />
+      <StatValue
+          value={1048}
+          {...props}
+      />
       <br />
       <br />
-      <StatValue value={0} />
+      <StatValue
+          value={0}
+          {...props}
+      />
     </>
   )
 }

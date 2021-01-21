@@ -1,7 +1,7 @@
 import React from 'react'
 import { User } from '../../'
 
-const UserVerticalSize = () => {
+const UserVerticalSize = (props) => {
   return (
     <div>
       <User
@@ -11,6 +11,7 @@ const UserVerticalSize = () => {
           orientation="vertical"
           size="sm"
           title="Remodeling Consultant"
+          {...props}
       />
       <br />
       <br />
@@ -21,6 +22,7 @@ const UserVerticalSize = () => {
           orientation="vertical"
           size="md"
           title="Remodeling Consultant"
+          {...props}
       />
       <br />
       <br />
@@ -31,6 +33,7 @@ const UserVerticalSize = () => {
           orientation="vertical"
           size="lg"
           title="Remodeling Consultant"
+          {...props}
       />
     </div>
   )

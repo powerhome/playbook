@@ -46,7 +46,7 @@ const promiseOptions = (inputValue) =>
     }
   })
 
-const TypeaheadWithPillsAsyncUsers = () => {
+const TypeaheadWithPillsAsyncUsers = (props) => {
   const [users, setUsers] = useState([])
   const handleOnChange = (value) => setUsers(value)
 
@@ -67,6 +67,7 @@ const TypeaheadWithPillsAsyncUsers = () => {
         <Caption
             marginBottom="xs"
             text="State (Users)"
+            {...props}
         />
         <For
             each="user"
@@ -74,11 +75,13 @@ const TypeaheadWithPillsAsyncUsers = () => {
         >
           <User
               align="left"
+              avatar
               avatarUrl={user.imageUrl}
               key={user.value}
               marginBottom="md"
               name={user.label}
               orientation="horizontal"
+              {...props}
           />
         </For>
       </If>
@@ -90,6 +93,7 @@ const TypeaheadWithPillsAsyncUsers = () => {
           onChange={handleOnChange}
           onMultiValueClick={handleOnMultiValueClick}
           placeholder="type the name of a Github user"
+          {...props}
       />
     </>
   )

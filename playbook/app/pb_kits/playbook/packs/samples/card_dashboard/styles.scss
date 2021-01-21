@@ -1,37 +1,17 @@
 @import "../../../tokens/screen_sizes";
+@import "../../../tokens/colors";
 
-@include break_at($screen-xs-min){
-  .card {
-    flex-basis: 100%;
-    width: 100%;
-    margin: 20px;
-    max-width: 100% !important;
-  }
-  .gaugeCard {
-    margin: 0 auto;
-    text-align: center;
-  }
-  .hideButton {
-    display: none;
-  }
+.grid1{
+  display: grid;
+  gap: 1px;
+  grid-template: auto auto / auto auto;
+  background-color: $border_light;
+  grid-auto-flow: dense;
 }
 
-.wrapper {
-  display: flex;
-  justify-content: space-evenly;
-  flex-wrap: wrap;
-  margin: 20px;
-  padding: 20px;
-}
-
-.card {
-  box-sizing: border-box;
-  margin: 20px;
-}
-
-.gaugeCard {
-  margin: 20px;
-  max-width: 0 auto;
-  text-align: center;
-  width: 25% !important;
+.grid2{
+  display: grid;
+  gap: 1px;
+  grid-template: repeat(2,auto) / repeat(4,1fr);
+  background-color: $border_light;
 }

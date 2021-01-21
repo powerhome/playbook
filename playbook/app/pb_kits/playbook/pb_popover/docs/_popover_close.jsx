@@ -5,7 +5,7 @@ import {
   PbReactPopover,
 } from '../..'
 
-const PopoverClose = () => {
+const PopoverClose = (props) => {
   const [showInsidePopover, setInsideShowPopover] = useState(false)
   const [showOutsidePopover, setOutsideShowPopover] = useState(false)
   const [showAnyPopover, setAnyShowPopover] = useState(false)
@@ -67,6 +67,7 @@ const PopoverClose = () => {
           reference={insidePopoverTrigger}
           shouldClosePopover={handleInsideShouldClosePopover}
           show={showInsidePopover}
+          {...props}
       >
         {'Click on me!'}
       </PbReactPopover>
@@ -78,6 +79,7 @@ const PopoverClose = () => {
           reference={outsidePopoverTrigger}
           shouldClosePopover={handleOutsideShouldClosePopover}
           show={showOutsidePopover}
+          {...props}
       >
         {'Click anywhere but me!'}
       </PbReactPopover>
@@ -89,6 +91,7 @@ const PopoverClose = () => {
           reference={anyPopoverTrigger}
           shouldClosePopover={handleAnyShouldClosePopover}
           show={showAnyPopover}
+          {...props}
       >
         {'Click anything!'}
       </PbReactPopover>

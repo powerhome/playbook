@@ -1,7 +1,7 @@
 examples:
   rails:
     - typeahead_default: Default
-    - typeahead_with_context_dark: With Context
+    - typeahead_with_context: With Context
     - typeahead_with_pills: With Pills
     - typeahead_with_pills_async: With Pills (Async Data)
     - typeahead_with_pills_async_users: With Pills (Async Data w/ Users)
@@ -11,3 +11,4 @@ examples:
     - typeahead_with_pills: With Pills
     - typeahead_with_pills_async: With Pills (Async Data)
     - typeahead_with_pills_async_users: With Pills (Async Data w/ Users)
+    - typeahead_with_pills_async_custom_options: With Pills (Async Data w/ Custom Options)

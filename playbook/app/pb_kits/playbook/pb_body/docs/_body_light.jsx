@@ -5,28 +5,28 @@ const BodyLight = (props) => {
   return (
     <div>
       <Body
-          {...props}
           text="I am a body kit (Default)"
+          {...props}
       />
       <Body
-          {...props}
           color="light"
           text="I am a body kit (Light)"
+          {...props}
       />
       <Body
-          {...props}
           color="lighter"
           text="I am a body kit (Lighter)"
+          {...props}
       />
       <Body
-          {...props}
           status="negative"
           text="I am a body kit (Status: negative)"
+          {...props}
       />
       <Body
-          {...props}
           status="positive"
           text="I am a body kit (Status: positive)"
+          {...props}
       />
     </div>
   )

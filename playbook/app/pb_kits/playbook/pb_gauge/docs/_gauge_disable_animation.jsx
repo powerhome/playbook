@@ -5,12 +5,13 @@ const data = [
   { name: 'Participants', value: 84 },
 ]
 
-const GaugeDisableAnimation = () => (
+const GaugeDisableAnimation = (props) => (
   <div>
     <Gauge
         chartData={data}
         disableAnimation
         id="gauge-disable-animation"
+        {...props}
     />
   </div>
 )
