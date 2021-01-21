@@ -55,10 +55,18 @@ const Textarea = ({
     return characterCount == 0 ? characterCount.toString() : characterCount
   }
 
+  // const handleKeyDown = (e) => {
+  //   e.target.style.height = 'inherit'
+  //   const height = e.target.scrollHeight + 20
+  //   e.target.style.height = `${height}px`
+  // }
+
   const handleKeyDown = (e) => {
     e.target.style.height = 'inherit'
-    const height = e.target.scrollHeight + 20
-    e.target.style.height = `${height}px`
+    if (e.target.scrollHeight <= 122) {
+      return
+    }
+    e.target.style.height = `${e.target.scrollHeight + 20}px`
   }
 
   return (
