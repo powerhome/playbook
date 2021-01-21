@@ -12,7 +12,6 @@ type FormPillProps = {
   text: string,
   name: string,
   onClick?: EventHandler,
-  onCloseMouseDown?: EventHandler,
   avatar?: boolean,
   avatarUrl?: string,
   closeProps?: {
