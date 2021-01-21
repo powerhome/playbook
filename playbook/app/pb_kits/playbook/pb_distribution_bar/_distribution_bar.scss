@@ -5,21 +5,26 @@
   $small_bar: 8px;
   $large_bar: 36px;
   display: flex;
+  border-radius: $large_bar;
+  overflow: auto;
   .pb_distribution_width {
     height: 100%;
     display: inline-block;
-    @for $i from 1 through length($bar_colors) {
-      &:nth-child(#{length($bar_colors)}n+#{$i}) {
-        background-color: nth($bar_colors, $i);
+    @each $name, $color in $data_colors {
+      &:nth-child(#{length($data_colors)}n+#{index(($data_colors), ($name $color))}) {
+        background-color: $color;
+      }
+      &.color_#{$name} {
+        background-color: $color !important;
       }
     }
     &:first-child {
-      border-top-left-radius: 18px;
-      border-bottom-left-radius: 18px;
+      border-top-left-radius: $large_bar;
+      border-bottom-left-radius: $large_bar;
     }
     &:last-child {
-      border-top-right-radius: 18px;
-      border-bottom-right-radius: 18px;
+      border-top-right-radius: $large_bar;
+      border-bottom-right-radius: $large_bar;
     }
   }
   &[class*=_sm] {

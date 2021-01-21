@@ -2,8 +2,10 @@ examples:
   
   rails:
   - distribution_bar_default: Default
+  - distribution_bar_custom_colors: Custom Colors
   
   
   react:
   - distribution_bar_default: Default
+  - distribution_bar_custom_colors: Custom Colors
   
