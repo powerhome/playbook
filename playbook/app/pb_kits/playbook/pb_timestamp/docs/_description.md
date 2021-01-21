@@ -1,1 +1,1 @@
-This kit displays time elapsed with a small timestamp
+This low profile kit displays time.  Elapsed, current, future, or otherwise.
