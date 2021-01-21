@@ -22,8 +22,8 @@ module Playbook
                         values: %w[collapse scroll none],
                         default: "collapse"
       prop :collapse, type: Playbook::Props::Enum,
-                      values: %w[sm md lg none],
-                      default: "none"
+                      values: %w[sm md lg],
+                      default: "sm"
       prop :text
 
       def classname
@@ -57,7 +57,7 @@ module Playbook
       end
 
       def collapse_class
-        "table-collapse-#{collapse}"
+        responsive != "none" ? "table-collapse-#{collapse}" : ""
       end
     end
   end
