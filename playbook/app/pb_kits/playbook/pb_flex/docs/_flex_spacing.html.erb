@@ -1,37 +1,52 @@
+
+<%= pb_rails("title", props: {size: 4, text: "None"}) %><br/>
 <div class="flex-doc-example">
-
-  <%= pb_rails("title", props: {size: 4, text: "None"}) %><br/>
-
-  <%= pb_rails("flex", props: {classname: "flex-container"}) do %>
+  <%= pb_rails("flex") do %>
     <%= pb_rails("flex/flex_item") do %>1<% end %>
     <%= pb_rails("flex/flex_item") do %>2<% end %>
+    <%= pb_rails("flex/flex_item") do %>3<% end %>
+    <%= pb_rails("flex/flex_item") do %>4<% end %>
   <% end %>
+</div>
 
   <br/><br/>
 
   <%= pb_rails("title", props: {size: 4, text: "Around"}) %><br/>
 
-  <%= pb_rails("flex", props: {classname: "flex-container", spacing: "around"}) do %>
+<div class="flex-doc-example">
+  <%= pb_rails("flex", props:{justify: "around" }) do %>
     <%= pb_rails("flex/flex_item") do %>1<% end %>
     <%= pb_rails("flex/flex_item") do %>2<% end %>
+    <%= pb_rails("flex/flex_item") do %>3<% end %>
+    <%= pb_rails("flex/flex_item") do %>4<% end %>
   <% end %>
+</div>
 
   <br/><br/>
 
   <%= pb_rails("title", props: {size: 4, text: "Evenly"}) %><br/>
 
-  <%= pb_rails("flex", props: {classname: "flex-container", spacing: "evenly"}) do %>
+<div class="flex-doc-example">
+  <%= pb_rails("flex", props:{justify: "evenly" }) do %>
     <%= pb_rails("flex/flex_item") do %>1<% end %>
     <%= pb_rails("flex/flex_item") do %>2<% end %>
+    <%= pb_rails("flex/flex_item") do %>3<% end %>
+    <%= pb_rails("flex/flex_item") do %>4<% end %>
   <% end %>
+</div>
 
   <br/><br/>
 
   <%= pb_rails("title", props: {size: 4, text: "Between"}) %><br/>
-
-  <%= pb_rails("flex", props: {classname: "flex-container", spacing: "between"}) do %>
+<div class="flex-doc-example">
+  <%= pb_rails("flex", props:{justify: "between" }) do %>
     <%= pb_rails("flex/flex_item") do %>1<% end %>
     <%= pb_rails("flex/flex_item") do %>2<% end %>
+    <%= pb_rails("flex/flex_item") do %>3<% end %>
+    <%= pb_rails("flex/flex_item") do %>4<% end %>
   <% end %>
+</div>
+
+
 
 </div>

@@ -1,25 +1,20 @@
 import React from 'react'
 import { Flex, FlexItem, Title } from  '../..'
 
-const FlexVertical = (props) => {
+const FlexAlign = (props) => {
   return (
     <>
-      <div className="flex-doc-example">
-        <Title
-            size={3}
-            text="Row"
-            {...props}
-        />
-        <br />
-        <Title
-            size={4}
-            text="Top"
-            {...props}
-        />
-        <br />
+
+      <Title
+          size={4}
+          text="Row"
+          {...props}
+      />
+      <br />
+
+      <div className="flex-doc-example ">
         <Flex
-            className="bg_light tall"
-            vertical="top"
+            align="start"
             {...props}
         >
           <FlexItem>
@@ -28,25 +23,20 @@ const FlexVertical = (props) => {
           <FlexItem>
             {'2'}
           </FlexItem>
-          <FlexItem>
+          <FlexItem padding="xl">
             {'3'}
           </FlexItem>
-          <FlexItem>
+          <FlexItem padding="md">
             {'4'}
           </FlexItem>
         </Flex>
+      </div>
 
-        <br />
+      <br />
 
-        <Title
-            size={4}
-            text="Center"
-            {...props}
-        />
-        <br />
+      <div className="flex-doc-example ">
         <Flex
-            className="bg_light tall"
-            vertical="center"
+            align="center"
             {...props}
         >
           <FlexItem>
@@ -55,25 +45,20 @@ const FlexVertical = (props) => {
           <FlexItem>
             {'2'}
           </FlexItem>
-          <FlexItem>
+          <FlexItem padding="xl">
             {'3'}
           </FlexItem>
-          <FlexItem>
+          <FlexItem padding="md">
             {'4'}
           </FlexItem>
         </Flex>
+      </div>
 
-        <br />
+      <br />
 
-        <Title
-            size={4}
-            text="Bottom"
-            {...props}
-        />
-        <br />
+      <div className="flex-doc-example ">
         <Flex
-            className="bg_light tall"
-            vertical="bottom"
+            align="end"
             {...props}
         >
           <FlexItem>
@@ -82,25 +67,20 @@ const FlexVertical = (props) => {
           <FlexItem>
             {'2'}
           </FlexItem>
-          <FlexItem>
+          <FlexItem padding="xl">
             {'3'}
           </FlexItem>
-          <FlexItem>
+          <FlexItem padding="md">
             {'4'}
           </FlexItem>
         </Flex>
+      </div>
 
-        <br />
+      <br />
 
-        <Title
-            size={4}
-            text="Stretch"
-            {...props}
-        />
-        <br />
+      <div className="flex-doc-example ">
         <Flex
-            className="bg_light tall"
-            horizontal="stretch"
+            align="stretch"
             orientation="row"
             {...props}
         >
@@ -110,88 +90,28 @@ const FlexVertical = (props) => {
           <FlexItem>
             {'2'}
           </FlexItem>
-          <FlexItem>
+          <FlexItem padding="xl">
             {'3'}
           </FlexItem>
-          <FlexItem>
+          <FlexItem padding="md">
             {'4'}
           </FlexItem>
         </Flex>
+      </div>
 
-        <br />
-        <Title
-            size={3}
-            text="Column"
-            {...props}
-        />
-        <br />
-        <Title
-            size={4}
-            text="Top"
-            {...props}
-        />
-        <br />
-        <Flex
-            className="bg_light tall"
-            horizontal="left"
-            orientation="column"
-            vertical="top"
-            {...props}
-        >
-          <FlexItem>
-            {'1'}
-          </FlexItem>
-          <FlexItem>
-            {'2'}
-          </FlexItem>
-          <FlexItem>
-            {'3'}
-          </FlexItem>
-          <FlexItem>
-            {'4'}
-          </FlexItem>
-        </Flex>
+      <br />
 
-        <br />
-        <Title
-            size={4}
-            text="Center"
-            {...props}
-        />
-        <br />
-        <Flex
-            className="bg_light tall"
-            horizontal="center"
-            orientation="column"
-            vertical="left"
-            {...props}
-        >
-          <FlexItem>
-            {'1'}
-          </FlexItem>
-          <FlexItem>
-            {'2'}
-          </FlexItem>
-          <FlexItem>
-            {'3'}
-          </FlexItem>
-          <FlexItem>
-            {'4'}
-          </FlexItem>
-        </Flex>
+      <Title
+          size={4}
+          text="Column"
+          {...props}
+      />
+      <br />
 
-        <br />
-        <Title
-            size={4}
-            text="Bottom"
-            {...props}
-        />
-        <br />
+      <div className="flex-doc-example ">
         <Flex
-            className="bg_light tall"
-            horizontal="bottom"
+            align="start"
             orientation="column"
-            vertical="left"
             {...props}
         >
           <FlexItem>
@@ -208,8 +128,78 @@ const FlexVertical = (props) => {
           </FlexItem>
         </Flex>
       </div>
+
+      <br />
+
+      <div className="flex-doc-example ">
+        <Flex
+            align="center"
+            orientation="column"
+            {...props}
+        >
+          <FlexItem>
+            {'1'}
+          </FlexItem>
+          <FlexItem>
+            {'2'}
+          </FlexItem>
+          <FlexItem>
+            {'3'}
+          </FlexItem>
+          <FlexItem>
+            {'4'}
+          </FlexItem>
+        </Flex>
+      </div>
+
+      <br />
+
+      <div className="flex-doc-example ">
+        <Flex
+            align="end"
+            orientation="column"
+            {...props}
+        >
+          <FlexItem>
+            {'1'}
+          </FlexItem>
+          <FlexItem>
+            {'2'}
+          </FlexItem>
+          <FlexItem>
+            {'3'}
+          </FlexItem>
+          <FlexItem>
+            {'4'}
+          </FlexItem>
+        </Flex>
+      </div>
+
+      <br />
+
+      <div className="flex-doc-example ">
+        <Flex
+            align="stretch"
+            orientation="column"
+            {...props}
+        >
+          <FlexItem>
+            {'1'}
+          </FlexItem>
+          <FlexItem>
+            {'2'}
+          </FlexItem>
+          <FlexItem>
+            {'3'}
+          </FlexItem>
+          <FlexItem>
+            {'4'}
+          </FlexItem>
+        </Flex>
+      </div>
+
     </>
   )
 }
 
-export default FlexVertical
+export default FlexAlign

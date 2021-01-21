@@ -1,19 +1,36 @@
 import React from 'react'
-import { Flex, FlexItem, Title } from  '../../'
+import { Flex, FlexItem } from  '../../'
 
-const FlexDefault = (props) => {
+const FlexGap = (props) => {
+  const count = () => {
+    const array = []
+    for (let i = 0; i < 40; i++) {
+      array.push(i)
+    }
+    return array
+  }
+
   return (
     <>
-
-      <Title
-          size={4}
-          text="Row"
-          {...props}
-      />
-      <br />
       <div className="flex-doc-example">
         <Flex
-            orientation="row"
+            gap="xs"
+            wrap
+            {...props}
+        >
+          {count().map((v, key) => (
+            <FlexItem key={key}>
+              {v}
+            </FlexItem>
+            ))}
+        </Flex>
+      </div>
+
+      <br />
+
+      <div className="flex-doc-example">
+        <Flex
+            columnGap="lg"
             {...props}
         >
           <FlexItem>
@@ -31,16 +48,10 @@ const FlexDefault = (props) => {
         </Flex>
       </div>
       <br />
-      <Title
-          size={4}
-          text="Column"
-          {...props}
-      />
-      <br />
       <div className="flex-doc-example">
         <Flex
-            align="start"
             orientation="column"
+            rowGap="xl"
             {...props}
         >
           <FlexItem>
@@ -61,4 +72,4 @@ const FlexDefault = (props) => {
   )
 }
 
-export default FlexDefault
+export default FlexGap
