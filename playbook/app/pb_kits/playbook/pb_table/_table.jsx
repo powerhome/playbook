@@ -27,7 +27,7 @@ const Table = (props: TableProps) => {
     aria = {},
     children,
     className,
-    collapse = "sm",
+    collapse = 'sm',
     container = true,
     dark,
     data = {},
@@ -41,7 +41,7 @@ const Table = (props: TableProps) => {
 
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
-  const tableCollapseCss = responsive !== "none" ? `table-collapse-${collapse}` : ""
+  const tableCollapseCss = responsive !== 'none' ? `table-collapse-${collapse}` : ''
 
   const instance = new PbTable()
   instance.connect()
