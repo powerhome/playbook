@@ -27,9 +27,6 @@ PbTypeahead.start()
 import PbTable from './pb_table'
 PbTable.start()
 
-import PbAvatar from './pb_avatar'
-PbAvatar.start()
-
 import 'flatpickr'
 
 import 'trix'
