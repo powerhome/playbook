@@ -24,6 +24,7 @@ const MultiValue = (props: Props) => {
   if (typeof imageUrl === 'string') formPillProps.avatarUrl = imageUrl
 
   const handleOnClick = removeProps.onClick
+  const handleMouseDown = (e) => e.stopPropagation()
 
   return (
     <components.MultiValueContainer
@@ -41,6 +42,7 @@ const MultiValue = (props: Props) => {
         <FormPill
             marginRight="xs"
             onClick={handleOnClick}
+            onCloseMouseDown={handleMouseDown}
             text={label}
         />
       </If>
