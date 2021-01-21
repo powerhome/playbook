@@ -25,6 +25,10 @@ module Playbook
       def online_status_props
         { status: status, classname: "size_#{size}" }
       end
+
+      def handle_img_error
+        "this.style.display = 'none'"
+      end
     end
   end
 end
