@@ -1,1 +1,1 @@
-This kit is a small indicator for the user to know s timestamp
+This kit displays time elapsed with a small timestamp
