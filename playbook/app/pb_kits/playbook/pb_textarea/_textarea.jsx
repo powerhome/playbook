@@ -1,11 +1,11 @@
 /* @flow */
 
-import React, { forwardRef, useRef, useEffect } from 'react'
+import React, { forwardRef, useEffect, useRef } from 'react'
 import classnames from 'classnames'
 import { Body, Caption, Flex, FlexItem } from '../'
 import type { InputCallback } from '../types.js'
 import { globalProps } from '../utilities/globalProps.js'
-import PbTextarea from "./"
+import PbTextarea from './'
 
 type TextareaProps = {
   characterCount?: string,
@@ -44,10 +44,9 @@ const Textarea = ({
   value,
   ...props
 }: TextareaProps, ref: React.ElementRef<"textarea">) => {
-
   ref = ref || useRef(false)
   useEffect(() => {
-    if(ref.current) {
+    if (ref.current) {
       PbTextarea.addMatch(ref.current)
     }
   })
