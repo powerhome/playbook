@@ -1,15 +1,22 @@
-.flex-doc-example {
+@import "../../../tokens/colors";
+
+
+[class^=flex-doc-example] {
   overflow: auto;
-  [class^=pb_flex_kit] {
-    background: #F3F7FB;
+  [class^=pb_flex_kit]{
+    background-color: $bg_light;
   }
-  .flex-item, [class^=pb_flex_item_kit] {
-    background: #E4E8F0;
-    min-width: 30px;
-    min-height: 30px;
-    color: #242B42;
+  [class^=pb_flex_item_kit]{
+    background-color: rgba($bg_dark,.5);
+    color: $white;
+    min-width: 40px;
+    min-height: 40px;
+    border: 1px solid $border_light;
+
   }
-  .tall {
-    min-height: 200px;
+  &.tall{
+    [class^=pb_flex_kit]{
+      height: 250px;
+    }
   }
 }

@@ -7,35 +7,48 @@ import { globalProps } from '../utilities/globalProps.js'
 type FlexProps = {
   children: array<React.ReactNode> | React.ReactNode,
   className?: string,
-  horizontal?: "left" | "center" | "right" | "stretch",
+  horizontal?: "left" | "center" | "right" | "stretch" | "none",
+  justify?: "start" | "center" | "end" | "around" | "between" | "evenly" | "none",
   id?: string,
   inline?: boolean,
   orientation?: "row" | "column",
   spacing?: "around" | "between" | "evenly" | "none",
   reverse?: boolean,
-  vertical?: "top" | "center" | "bottom" | "stretch" | "baseline",
+  vertical?: "top" | "center" | "bottom" | "stretch" | "baseline" | "none",
+  align?: "start" | "center" | "end" | "stretch" | "baseline" | "none",
+  gap?: "xs" | "sm" | "md" | "lg" | "xl" | "none",
+  rowGap?: "xs" | "sm" | "md" | "lg" | "xl" | "none",
+  columnGap?: "xs" | "sm" | "md" | "lg" | "xl" | "none",
   wrap?: boolean,
 }
 
 const Flex = (props: FlexProps) => {
   const {
+    align = 'none',
     children,
     className,
     inline = false,
     horizontal = 'left',
+    justify = 'none',
     orientation = 'row',
     spacing = 'none',
+    gap = 'none',
+    rowGap = 'none',
+    columnGap = 'none',
     reverse = false,
     vertical = 'top',
     wrap = false,
   } = props
   const orientationClass =
     orientation !== undefined ? `orientation_${orientation}` : ''
-  const horizontalClass =
-    horizontal !== undefined ? `justify_content_${horizontal}` : ''
-  const verticalClass = vertical !== undefined ? `align_items_${vertical}` : ''
+  const justifyClass =
+    justify !== 'none' ? `justify_content_${justify}` : `justify_content_${horizontal}`
+  const alignClass = align !== 'none' ? `align_items_${align}` : `align_items_${vertical}`
   const inlineClass = inline === true ? 'inline' : ''
   const spacingClass = spacing !== undefined ? `spacing_${spacing}` : ''
+  const gapClass = gap !== 'none' ? `gap_${gap}` : ''
+  const rowGapClass = rowGap !== 'none' ? `rowGap_${rowGap}` : ''
+  const columnGapClass = columnGap !== 'none' ? `columnGap_${columnGap}` : ''
   const wrapClass = wrap === true ? 'wrap' : ''
   const reverseClass = reverse === true ? 'reverse' : ''
   return (
@@ -44,12 +57,15 @@ const Flex = (props: FlexProps) => {
         buildCss(
           'pb_flex_kit',
           orientationClass,
-          horizontalClass,
-          verticalClass,
+          justifyClass,
+          alignClass,
           inlineClass,
-          spacingClass,
           reverseClass,
-          wrapClass
+          wrapClass,
+          spacingClass,
+          gapClass,
+          rowGapClass,
+          columnGapClass
         ),
         globalProps(props),
         className

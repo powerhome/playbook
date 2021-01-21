@@ -59,7 +59,7 @@ const FlexWrap = (props) => {
             {...props}
         />
         <br />
-        <Flex className="bg_light wide">
+        <Flex className="bg_light">
           <FlexItem fixedSize="300px">
             {'1'}
           </FlexItem>
