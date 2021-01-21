@@ -44,12 +44,14 @@ const Textarea = ({
   value,
   ...props
 }: TextareaProps, ref: React.ElementRef<"textarea">) => {
+
   ref = ref || useRef(false)
   useEffect(() => {
-    if (ref.current) {
+    if (ref.current && resize === "auto") {
       PbTextarea.addMatch(ref.current)
     }
   })
+
 
   const errorClass = error ? 'error' : null
   const resizeClass = `resize_${resize}`
