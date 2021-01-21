@@ -19,11 +19,11 @@ module Playbook
       prop :container, type: Playbook::Props::Boolean,
                        default: true
       prop :responsive, type: Playbook::Props::Enum,
-                        values: %w[collapse scroll none tablet desktop],
+                        values: %w[collapse scroll none],
                         default: "collapse"
       prop :collapse, type: Playbook::Props::Enum,
-                      values: %w[sm md lg],
-                      default: "sm"
+                      values: %w[sm md lg none],
+                      default: "none"
       prop :text
 
       def classname

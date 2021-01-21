@@ -36,7 +36,7 @@ const TableResponsiveTable = (props) => {
       <br />
       <Title
           size={4}
-          text="Mobile"
+          text="Collapse Mobile"
           {...props}
       />
       <Table
@@ -66,7 +66,7 @@ const TableResponsiveTable = (props) => {
       <br />
       <Title
           size={4}
-          text="Tablet"
+          text="Collapse Tablet"
           {...props}
       />
       <Table
@@ -96,7 +96,7 @@ const TableResponsiveTable = (props) => {
       <br />
       <Title
           size={4}
-          text="Desktop"
+          text="Collapse Desktop"
           {...props}
       />
       <Table
