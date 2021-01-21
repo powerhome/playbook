@@ -20,4 +20,5 @@ examples:
   - layout_collection_detail: Collection Detail Layout
   - layout_kanban: Kanban Layout
   - layout_content: Content Layout
+  - layout_masonry: Masonry Layout
 

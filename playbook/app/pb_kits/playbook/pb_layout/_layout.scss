@@ -46,7 +46,7 @@ $card-border-radius: $border_rad_lightest;
       column-gap: 1.5em;
       font-size: .85em;
 
-      .pb_card_kit_deselected {
+      [class^=pb_card_kit]{
         display: inline-block;
         background: #fff;
         padding: 1em;

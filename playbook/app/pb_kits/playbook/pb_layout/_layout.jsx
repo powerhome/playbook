@@ -19,7 +19,7 @@ type LayoutPropTypes = {
   size?: "xs" | "sm" | "md" | "base" | "lg" | "xl",
   variant?: "light" | "dark" | "gradient",
   transparent?: boolean,
-  layout?: "sidebar" | "collection" | "kanban" | "content",
+  layout?: "sidebar" | "collection" | "kanban" | "content" | "masonry",
 }
 
 type LayoutSideProps = {
