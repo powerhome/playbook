@@ -6,8 +6,11 @@ examples:
   - flex_reverse: Reverse
   - flex_wrap: Wrap
   - flex_spacing: Spacing
-  - flex_horizontal: Horizontal Alignment
-  - flex_vertical: Vertical Alignment
+  - flex_justify: Justify
+  - flex_align: Align
+  - flex_gap: Gap
+  - flex_item: Flex Item
+
 
 
   react:
@@ -16,5 +19,7 @@ examples:
   - flex_reverse: Reverse
   - flex_wrap: Wrap
   - flex_spacing: Spacing
-  - flex_horizontal: Horizontal Alignment
-  - flex_vertical: Vertical Alignment
+  - flex_justify: Justify
+  - flex_align: Align
+  - flex_gap: Gap
+  - flex_item_example: Flex Item

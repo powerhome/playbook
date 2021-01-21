@@ -1,24 +1,19 @@
 import React from 'react'
 import { Flex, FlexItem, Title } from  '../..'
 
-const FlexHorizontal = (props) => {
+const FlexJustify = (props) => {
   return (
     <>
+
+      <Title
+          size={4}
+          text="Row"
+          {...props}
+      />
+      <br />
       <div className="flex-doc-example">
-        <Title
-            size={3}
-            text="Row"
-            {...props}
-        />
-        <br />
-        <Title
-            size={4}
-            text="Left"
-            {...props}
-        />
-        <br />
         <Flex
-            horizontal="left"
+            justify="start"
             orientation="row"
             {...props}
         >
@@ -35,17 +30,11 @@ const FlexHorizontal = (props) => {
             {'4'}
           </FlexItem>
         </Flex>
-
-        <br />
-
-        <Title
-            size={4}
-            text="Center"
-            {...props}
-        />
-        <br />
+      </div>
+      <br />
+      <div className="flex-doc-example">
         <Flex
-            horizontal="center"
+            justify="center"
             orientation="row"
             {...props}
         >
@@ -62,17 +51,12 @@ const FlexHorizontal = (props) => {
             {'4'}
           </FlexItem>
         </Flex>
+      </div>
 
-        <br />
-
-        <Title
-            size={4}
-            text="Right"
-            {...props}
-        />
-        <br />
+      <br />
+      <div className="flex-doc-example">
         <Flex
-            horizontal="right"
+            justify="end"
             orientation="row"
             {...props}
         >
@@ -89,24 +73,21 @@ const FlexHorizontal = (props) => {
             {'4'}
           </FlexItem>
         </Flex>
+      </div>
+      <br />
 
-        <br />
-
-        <Title
-            size={3}
-            text="Column"
-            {...props}
-        />
-        <br />
-        <Title
-            size={4}
-            text="Left"
-            {...props}
-        />
-        <br />
+      <Title
+          size={4}
+          text="Column"
+          {...props}
+      />
+      <br />
+      <div className="flex-doc-example tall">
         <Flex
+            align="start"
+            className="bg_light tall"
+            justify="start"
             orientation="column"
-            vertical="left"
             {...props}
         >
           <FlexItem>
@@ -122,18 +103,14 @@ const FlexHorizontal = (props) => {
             {'4'}
           </FlexItem>
         </Flex>
-
-        <br />
-
-        <Title
-            size={4}
-            text="Center"
-            {...props}
-        />
-        <br />
+      </div>
+      <br />
+      <div className="flex-doc-example tall">
         <Flex
+            align="start"
+            className="bg_light tall"
+            justify="center"
             orientation="column"
-            vertical="center"
             {...props}
         >
           <FlexItem>
@@ -149,45 +126,14 @@ const FlexHorizontal = (props) => {
             {'4'}
           </FlexItem>
         </Flex>
-
-        <br />
-
-        <Title
-            size={4}
-            text="Right"
-            {...props}
-        />
-        <br />
+      </div>
+      <br />
+      <div className="flex-doc-example tall">
         <Flex
+            align="start"
+            className="bg_light tall"
+            justify="end"
             orientation="column"
-            vertical="right"
-            {...props}
-        >
-          <FlexItem>
-            {'1'}
-          </FlexItem>
-          <FlexItem>
-            {'2'}
-          </FlexItem>
-          <FlexItem>
-            {'3'}
-          </FlexItem>
-          <FlexItem>
-            {'4'}
-          </FlexItem>
-        </Flex>
-
-        <br />
-
-        <Title
-            size={4}
-            text="Stretch"
-            {...props}
-        />
-        <br />
-        <Flex
-            orientation="column"
-            vertical="stretch"
             {...props}
         >
           <FlexItem>
@@ -208,4 +154,4 @@ const FlexHorizontal = (props) => {
   )
 }
 
-export default FlexHorizontal
+export default FlexJustify

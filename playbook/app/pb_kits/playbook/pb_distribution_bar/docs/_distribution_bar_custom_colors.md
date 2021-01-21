@@ -1,0 +1,1 @@
+You can customize the order of the colors you would like to use by using the `colors` prop. Only the data colors will work for Playbook charts. See the [design page](/visual_guidelines) for reference.

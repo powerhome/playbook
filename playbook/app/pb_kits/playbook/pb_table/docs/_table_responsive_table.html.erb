@@ -1,6 +1,6 @@
-<%= pb_rails("title", props: { size: 4, text: "Default" }) %>
+<%= pb_rails("title", props: { size: 4, text: "Not Responsive" }) %>
 
-<%= pb_rails("table", props: { responsive: "collapse" }) do %>
+<%= pb_rails("table", props: { responsive: "none" }) do %>
   <thead>
     <tr>
       <th>Column 1</th>
@@ -23,9 +23,9 @@
 
 <br>
 
-<%= pb_rails("title", props: { size: 4, text: "Responsive Off" }) %>
+<%= pb_rails("title", props: { size: 4, text: "Collapse Mobile" }) %>
 
-<%= pb_rails("table", props: { responsive: "none" }) do %>
+<%= pb_rails("table", props: { collapse: "sm" }) do %>
   <thead>
     <tr>
       <th>Column 1</th>
@@ -45,3 +45,55 @@
     </tr>
   </tbody>
 <% end %>
+
+<br>
+
+<%= pb_rails("title", props: { size: 4, text: "Collapse Tablet" }) %>
+
+<%= pb_rails("table", props: { collapse: "md" }) do %>
+  <thead>
+    <tr>
+      <th>Column 1</th>
+      <th>Column 2</th>
+      <th>Column 3</th>
+      <th>Column 4</th>
+      <th>Column 5</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Value 1</td>
+      <td>Value 2</td>
+      <td>Value 3</td>
+      <td>Value 4</td>
+      <td>Value 5</td>
+    </tr>
+  </tbody>
+<% end %>
+
+<br>
+
+<%= pb_rails("title", props: { size: 4, text: "Collapse Desktop" }) %>
+
+<%= pb_rails("table", props: { collapse: "lg" }) do %>
+  <thead>
+    <tr>
+      <th>Column 1</th>
+      <th>Column 2</th>
+      <th>Column 3</th>
+      <th>Column 4</th>
+      <th>Column 5</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Value 1</td>
+      <td>Value 2</td>
+      <td>Value 3</td>
+      <td>Value 4</td>
+      <td>Value 5</td>
+    </tr>
+  </tbody>
+<% end %>
+
+
