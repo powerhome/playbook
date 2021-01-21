@@ -1,10 +1,11 @@
 /* @flow */
 
-import React, { forwardRef } from 'react'
+import React, { forwardRef, useRef, useEffect } from 'react'
 import classnames from 'classnames'
 import { Body, Caption, Flex, FlexItem } from '../'
 import type { InputCallback } from '../types.js'
 import { globalProps } from '../utilities/globalProps.js'
+import PbTextarea from "./"
 
 type TextareaProps = {
   characterCount?: string,
@@ -43,6 +44,14 @@ const Textarea = ({
   value,
   ...props
 }: TextareaProps, ref: React.ElementRef<"textarea">) => {
+
+  ref = ref || useRef(false)
+  useEffect(() => {
+    if(ref.current) {
+      PbTextarea.addMatch(ref.current)
+    }
+  })
+
   const errorClass = error ? 'error' : null
   const resizeClass = `resize_${resize}`
   const classes = classnames('pb_textarea_kit', errorClass, resizeClass, globalProps(props), className)
@@ -53,20 +62,6 @@ const Textarea = ({
 
   const checkIfZero = (characterCount) => {
     return characterCount == 0 ? characterCount.toString() : characterCount
-  }
-
-  // const handleKeyDown = (e) => {
-  //   e.target.style.height = 'inherit'
-  //   const height = e.target.scrollHeight + 20
-  //   e.target.style.height = `${height}px`
-  // }
-
-  const handleKeyDown = (e) => {
-    e.target.style.height = 'inherit'
-    if (e.target.scrollHeight <= 122) {
-      return
-    }
-    e.target.style.height = `${e.target.scrollHeight + 20}px`
   }
 
   return (
@@ -82,7 +77,6 @@ const Textarea = ({
             disabled={disabled}
             name={name}
             onChange={onChange}
-            onKeyDown={resize == 'auto' ? handleKeyDown : null}
             placeholder={placeholder}
             ref={ref}
             required={required}

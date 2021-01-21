@@ -4,7 +4,6 @@ examples:
   - textarea_default: Default
   - textarea_custom: Custom Textarea Input
   - textarea_resize: Resize
-  - textarea_auto_resize: Auto Resize
   - textarea_error: Textarea w/ Error
   - textarea_character_counter: Character Counter
 
@@ -12,6 +11,5 @@ examples:
   - textarea_default: Default
   - textarea_custom: Custom Textarea Input
   - textarea_resize: Resize
-  - textarea_auto_resize: Auto Resize
   - textarea_error: Textarea w/ Error
   - textarea_character_counter: Character Counter
