@@ -10,6 +10,7 @@ type ImageProps = {
   aria?: object,
   className?: string,
   data?: object,
+  hideOnError?: boolean,
   id?: string,
   size: "xs" | "sm" | "md" | "lg" | "xl",
   rounded?: boolean,
@@ -22,6 +23,7 @@ const Image = (props: ImageProps) => {
     aria = {},
     className,
     data = {},
+    hideOnError = false,
     id,
     rounded = false,
     size = '',
@@ -36,6 +38,7 @@ const Image = (props: ImageProps) => {
     className
   )
   const dataProps = buildDataProps(data)
+  const handleOnError = hideOnError ? (e) => e.target.style.display = 'none' : null
 
   return (
     <div>
@@ -46,6 +49,7 @@ const Image = (props: ImageProps) => {
           className={classes}
           data-src={url}
           id={id}
+          onError={handleOnError}
           rounded={rounded}
           src={url}
       />

@@ -53,6 +53,7 @@ const Avatar = (props: AvatarProps) => {
         <If condition={imageUrl}>
           <Image
               alt={name}
+              hideOnError
               url={imageUrl}
           />
         </If>
