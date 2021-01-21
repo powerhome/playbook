@@ -23,7 +23,7 @@ class SampleGenerator < Rails::Generators::NamedBase
       SAMPLES[category] = [@sample_name_underscore]
     end
 
-    File.open("app/pb_kits/playbook/data/samples.yml", "w") { |out| YAML.dump(samples_yaml, out) }
+    File.open("app/pb_kits/playbook/data/samples.yml", "w") { |out| YAML.dump(SAMPLES, out) }
   end
 
   def js_imports
