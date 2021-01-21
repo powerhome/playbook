@@ -5,7 +5,7 @@ const AvatarNoImage = (props) => {
   return (
     <div>
       <Avatar
-          imageUrl
+          imageUrl="Just some text here"
           name="Terry Johnson"
           size="xs"
           {...props}
