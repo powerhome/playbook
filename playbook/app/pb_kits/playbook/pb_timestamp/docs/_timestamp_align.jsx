@@ -1,13 +1,21 @@
 import React from 'react'
 import Timestamp from '../_timestamp.jsx'
 
+const todaysDate = new Date()
+const year = new Date().getFullYear() + 4
+const month = new Date().getMonth()
+const date = new Date().getDate()
+const hours = new Date().getHours()
+const minutes = new Date().getMinutes()
+const customDate = new Date(year, month, date, hours, minutes)
+
 const TimestampAlign = (props) => {
   return (
     <div>
       <Timestamp
           align="left"
-          showDate="false"
-          timestamp={new Date().getTime()}
+          showDate={false}
+          timestamp={todaysDate}
           {...props}
       />
 
@@ -15,8 +23,8 @@ const TimestampAlign = (props) => {
 
       <Timestamp
           align="left"
-          showDate="true"
-          timestamp={new Date().getTime()}
+          showDate
+          timestamp={todaysDate}
           {...props}
       />
 
@@ -24,8 +32,8 @@ const TimestampAlign = (props) => {
 
       <Timestamp
           align="left"
-          showDate="true"
-          timestamp={new Date((new Date()).getFullYear() + 4, (new Date().getMonth()), (new Date().getDate() + 1)).getTime()}
+          showDate
+          timestamp={customDate}
           {...props}
       />
 
@@ -34,8 +42,8 @@ const TimestampAlign = (props) => {
 
       <Timestamp
           align="center"
-          showDate="false"
-          timestamp={new Date().getTime()}
+          showDate={false}
+          timestamp={todaysDate}
           {...props}
       />
 
@@ -43,8 +51,8 @@ const TimestampAlign = (props) => {
 
       <Timestamp
           align="center"
-          showDate="true"
-          timestamp={new Date().getTime()}
+          showDate
+          timestamp={todaysDate}
           {...props}
       />
 
@@ -52,8 +60,8 @@ const TimestampAlign = (props) => {
 
       <Timestamp
           align="center"
-          showDate="true"
-          timestamp={new Date((new Date()).getFullYear() + 4, (new Date().getMonth()), (new Date().getDate() + 1)).getTime()}
+          showDate
+          timestamp={customDate}
           {...props}
       />
 
@@ -62,8 +70,8 @@ const TimestampAlign = (props) => {
 
       <Timestamp
           align="right"
-          showDate="false"
-          timestamp={new Date().getTime()}
+          showDate={false}
+          timestamp={todaysDate}
           {...props}
       />
 
@@ -71,8 +79,8 @@ const TimestampAlign = (props) => {
 
       <Timestamp
           align="right"
-          showDate="true"
-          timestamp={new Date().getTime()}
+          showDate
+          timestamp={todaysDate}
           {...props}
       />
 
@@ -80,8 +88,8 @@ const TimestampAlign = (props) => {
 
       <Timestamp
           align="right"
-          showDate="true"
-          timestamp={new Date((new Date()).getFullYear() + 4, (new Date().getMonth()), (new Date().getDate() + 1)).getTime()}
+          showDate
+          timestamp={customDate}
           {...props}
       />
     </div>

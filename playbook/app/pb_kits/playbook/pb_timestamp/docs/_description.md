@@ -1,1 +1,1 @@
-This kit is a small indicator for the user to know s timestamp
+This low profile kit displays time.  Elapsed, current, future, or otherwise.
