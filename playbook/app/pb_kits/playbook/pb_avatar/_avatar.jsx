@@ -1,6 +1,6 @@
 /* @flow */
 
-import React from 'react'
+import React, { useEffect, useRef } from 'react'
 import classnames from 'classnames'
 import { map } from 'lodash'
 
@@ -8,6 +8,7 @@ import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
 import { globalProps } from '../utilities/globalProps.js'
 
 import { Image, OnlineStatus } from '../'
+import PbAvatar from '.'
 
 type AvatarProps = {
   aria?: object,
@@ -36,6 +37,11 @@ const Avatar = (props: AvatarProps) => {
     className
   )
 
+  const wrapperDiv = useRef(false)
+  useEffect(() => {
+    wrapperDiv.current ? PbAvatar.addMatch(wrapperDiv.current) : null
+  })
+
   const initials = name && firstTwoInitials(name)
   dataProps['data-initials'] = initials
 
@@ -49,11 +55,12 @@ const Avatar = (props: AvatarProps) => {
       <div
           className="avatar_wrapper"
           data-initials={initials}
+          ref={wrapperDiv}
       >
         <If condition={imageUrl}>
           <Image
               alt={name}
-              hideOnError
+              // hideOnError
               url={imageUrl}
           />
         </If>
