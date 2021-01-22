@@ -38,7 +38,7 @@ const Avatar = (props: AvatarProps) => {
 
   const initials = name && firstTwoInitials(name)
   dataProps['data-initials'] = initials
-  const handleError = (e) => e.target.style.display = 'none'
+  const handleError = (e) => e.target.classList.add('failed-to-load')
 
   return (
     <div
@@ -54,7 +54,6 @@ const Avatar = (props: AvatarProps) => {
         <If condition={imageUrl}>
           <Image
               alt={name}
-              // hideOnError
               onError={handleError}
               url={imageUrl}
           />

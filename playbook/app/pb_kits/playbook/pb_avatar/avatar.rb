@@ -27,7 +27,7 @@ module Playbook
       end
 
       def handle_img_error
-        "this.style.display = 'none'"
+        "this.classList.add('failed-to-load')"
       end
     end
   end
