@@ -14,6 +14,10 @@ $avatar-sizes: (
 [class^=pb_avatar_kit] {
   position: relative;
 
+  img.failed-to-load {
+    display: none !important;
+  }
+
   @each $name, $size in $avatar-sizes {
     &[class*=_#{$name}],
     &[class*=_#{$name}_thumb] {
