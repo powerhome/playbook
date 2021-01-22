@@ -1,5 +1,5 @@
 import React from 'react'
-import { Card, Layout, Title, User } from '../../'
+import { Card, Image, Layout, Title, User } from '../../'
 
 const LayoutMasonry = (props) => {
   return (
@@ -32,7 +32,9 @@ const LayoutMasonry = (props) => {
                 title="Remodeling Consultant"
             />
           </Card>
-          <Card>{'Card content'}</Card>
+          <Image
+              url="https://unsplash.it/500/400/?image=634"
+          />
           <Card>
             <Title
                 size={4}
@@ -64,16 +66,14 @@ const LayoutMasonry = (props) => {
             />
           </Card>
           <Card>{'Card content'}</Card>
-          <Card>
-            <User
-                align="center"
-                avatarUrl="https://randomuser.me/api/portraits/women/44.jpg"
-                name="Anna Black"
-                orientation="vertical"
-                size="lg"
-                title="Remodeling Consultant"
-            />
-          </Card>
+          <User
+              align="center"
+              avatarUrl="https://randomuser.me/api/portraits/women/44.jpg"
+              name="Anna Black"
+              orientation="vertical"
+              size="lg"
+              title="Remodeling Consultant"
+          />
           <Card>{'Card content'}</Card>
           <Card>
             <Title

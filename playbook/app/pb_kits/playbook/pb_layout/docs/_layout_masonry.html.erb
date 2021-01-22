@@ -10,16 +10,14 @@
     <%= pb_rails("title", props: { text: "Title 3", tag: "h3", size: 3 }) %>
   <% end %>
 
-  <%= pb_rails("card" ) do %>
-    <%= pb_rails("user", props: {
-      name: "Anna Black",
-      title: "Remodeling Consultant",
-      orientation: "vertical",
-      align: "center",
-      size: "lg",
-      avatar_url: "https://randomuser.me/api/portraits/women/44.jpg"
-      }) %>
-  <% end %>
+  <%= pb_rails("user", props: {
+    name: "Anna Black",
+    title: "Remodeling Consultant",
+    orientation: "vertical",
+    align: "center",
+    size: "lg",
+    avatar_url: "https://randomuser.me/api/portraits/women/44.jpg"
+    }) %>
 
   <%= pb_rails("card" ) do %>
     Card content
@@ -49,9 +47,7 @@
     Card content
   <% end %>
 
-  <%= pb_rails("card" ) do %>
-    Card content
-  <% end %>
+  <%= pb_rails("image", props: { url: "https://unsplash.it/500/400/?image=634" }) %>
 
   <%= pb_rails("card" ) do %>
     Card content

@@ -32,7 +32,7 @@ $card-border-radius: $border_rad_lightest;
   }
 
   &[class*=_masonry] {
-    div.layout_body{
+    div.layout_body {
       -webkit-column-count: 4;
       -moz-column-count:4;
       column-count: 4;
@@ -46,10 +46,10 @@ $card-border-radius: $border_rad_lightest;
       column-gap: 1.5em;
       font-size: .85em;
 
-      [class^=pb_card_kit]{
-        display: inline-block;
-        background: #fff;
-        padding: 1em;
+      > * {
+        img {
+          max-width: 100%;
+        }
         margin: 0 0 1.5em;
         width: 100%;
         -webkit-transition:1s ease all;
@@ -57,14 +57,36 @@ $card-border-radius: $border_rad_lightest;
         -moz-box-sizing: border-box;
         -webkit-box-sizing: border-box;
       }
-
-      @media screen and (max-width: $screen-md-min) {
-        grid-template-columns: repeat(2, 1fr);
-      }
-       @media screen and (max-width: $screen-xs-min) {
-        grid-template-columns: repeat(1, 1fr);
+    }
+    @media only screen and (min-width: $screen-xl-min) {
+      div.layout_body {
+          -moz-column-count: 4;
+          -webkit-column-count: 4;
+          column-count: 4;
       }
     }
+    @media screen and (max-width: $screen-lg-min){
+      div.layout_body {
+          -moz-column-count: 3;
+          -webkit-column-count: 3;
+          column-count: 3;
+      }
+    }
+    @media screen and (max-width: $screen-md-min){
+      div.layout_body {
+          -moz-column-count: 2;
+          -webkit-column-count: 2;
+          column-count: 2;
+      }
+    }
+    @media screen and (max-width: $screen-xs-min) {
+      div.layout_body {
+          -moz-column-count: 1;
+          -webkit-column-count: 1;
+          column-count: 1;
+      }
+    }
+
   }
 
   &[class*=_collection_detail]{
