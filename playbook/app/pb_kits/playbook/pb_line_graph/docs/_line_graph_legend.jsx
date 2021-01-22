@@ -11,7 +11,7 @@ const LineGraphLegend = (props) => (
     <LineGraph
         axisTitle="Number of Employees"
         chartData={data}
-        id="bar-test-2"
+        id="line-test-2"
         legend
         title="Line Graph with Legend"
         xAxisCategories={['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug']}
