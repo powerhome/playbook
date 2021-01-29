@@ -52,11 +52,11 @@ const StarRating = ({
         className={css}
         id={id}
     >
-      <div className="pb_star_rating_number">
-        <If condition={!hideRating}>
-          {rating}
-        </If>
-      </div>
+      <If condition={!hideRating}>
+        <div className="pb_star_rating_number">
+            {rating}
+        </div>
+      </If>
 
       <div className="pb_star_rating_wrapper">
         <div className="pb_star_rating_highlight">
@@ -65,6 +65,7 @@ const StarRating = ({
                 fixedWidth
                 icon="star"
                 key={index}
+                className={index === 5 ? null : "react-preterminal-star"}
             />
           ))}
 
@@ -80,18 +81,22 @@ const StarRating = ({
           <Icon
               fixedWidth
               icon="star"
+              className="react-preterminal-star"
           />
           <Icon
               fixedWidth
               icon="star"
+              className="react-preterminal-star"
           />
           <Icon
               fixedWidth
               icon="star"
+              className="react-preterminal-star"
           />
           <Icon
               fixedWidth
               icon="star"
+              className="react-preterminal-star"
           />
           <Icon
               fixedWidth

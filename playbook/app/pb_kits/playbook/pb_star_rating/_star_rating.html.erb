@@ -3,9 +3,7 @@
     data: object.data,
     class: object.classname) do %>
     <%# Rating value %>
-    <% if object.hide_rating %>
-      <%= content_tag(:div, "", class: "pb_star_rating_number") %>
-    <% else %>
+    <% if !object.hide_rating %>
       <%= content_tag(:div, object.rating, class: "pb_star_rating_number") %>
     <% end %>
 

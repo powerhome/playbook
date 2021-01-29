@@ -50,6 +50,9 @@ $pb_star_rating_height: 26px;
       color: rgba($slate, $opacity-4);
       line-height: $pb_star_rating_height;
     }
+    [class*=pb_icon_kit].react-preterminal-star {
+      margin-right: 4px;
+    }
   }
 
   &[class*=_hide_rating] {
