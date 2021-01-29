@@ -6,7 +6,6 @@ const CustomErrorImage = (props) => {
     <>
       <Body text="Handle when an image fails to load or a broken link is passed. This is not neccessary most of the time." />
       <br />
-      <br />
       <Body text="Alter the display when the image fails to load:" />
       <Image
           alt="This is the alt text!"
