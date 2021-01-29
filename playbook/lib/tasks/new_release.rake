@@ -55,11 +55,11 @@ task :new_release, [:var] => [:environment] do |_task, args|
   # --------------------------------------- #
   if args[:var] == "alpha"
     # Search ruby gems for latest alpha version
-    latest_remote_alpha = (`gem search playbook_ui --pre`).match(/(\d.\d.\d.pre.alpha\d)/).to_s
+    latest_remote_alpha = (`gem search playbook_ui --pre`).match(/(\d+.\d+.\d+.pre.alpha\d+)/).to_s
     puts "\nLatest remote alpha version: #{latest_remote_alpha}"
   else
     # Search ruby gems for latest version
-    latest_remote_version = (`gem search playbook_ui`).match(/(\d.\d.\d)/).to_s
+    latest_remote_version = (`gem search playbook_ui`).match(/(\d+.\d+.\d+)/).to_s
     puts "\nLatest remote version: #{latest_remote_version}"
     # triplet here refers to the maj, min, and patch numbers
     # i.e. x.x.x
@@ -76,8 +76,8 @@ task :new_release, [:var] => [:environment] do |_task, args|
   # Error handling for invalid arguments
   case args[:var]
   when "alpha"
-    alpha_triplet = latest_remote_alpha.match(/(\d.\d.\d)/).to_s
-    base_triplet = (`gem search playbook_ui`).match(/(\d.\d.\d)/).to_s
+    alpha_triplet = latest_remote_alpha.match(/(\d+.\d+.\d+)/).to_s
+    base_triplet = (`gem search playbook_ui`).match(/(\d+.\d+.\d+)/).to_s
 
     if alpha_triplet != base_triplet
       new_version = base_triplet + ".pre.alpha1"
@@ -129,7 +129,7 @@ task :new_release, [:var] => [:environment] do |_task, args|
   `rm -rf playbook_ui-*.gem`
   puts "\nCreating Gem..."
   `gem build playbook_ui.gemspec`
-  puts "\nPushing to RubyGems... (not yet implemented)"
+  puts "\nPushing to RubyGems... (not yet ungated)"
   puts "\nUse gem push to publish manually (see new_release.rake for full command)"
   # `gem push playbook_ui-#{new_version}.gem`
 
@@ -141,12 +141,12 @@ task :new_release, [:var] => [:environment] do |_task, args|
   `rm dist/playbook-rails.css && mv dist/playbook-react.css dist/playbook.css`
   puts "\nCreating NPM package..."
   `npm pack`
-  puts "\nPublishing to NPM... (not yet implemented)"
+  puts "\nPublishing to NPM... (not yet ungated)"
   if args[:var] == "alpha"
-    puts "\nNPM Alpha Package Published! (not yet implemented)"
+    puts "\nNPM Alpha Package Published! (not yet ungated)"
     # `npm publish playbook-ui-#{npm_alpha}.tgz --tag alpha`
   else
-    puts "\nNPM Package Published! (not yet implemented)"
+    puts "\nNPM Package Published! (not yet ungated)"
     # `npm publish playbook-ui-#{new_version}.tgz`
   end
   puts "\nUse npm publish to push manually (see new_release.rake for full command)"
@@ -157,8 +157,9 @@ task :new_release, [:var] => [:environment] do |_task, args|
     puts "\nWrite a brief tag release description. You can edit this later on GitHub."
     description = STDIN.gets.chomp
     puts "\nCreating Tag..."
-    `git tag -a #{new_version} -m "#{description}"`
-    puts "\nPushing Tag to GitHub..."
-    `git push origin #{new_version}`
+    # `git tag -a #{new_version} -m "#{description}"`
+    puts "\nPushing Tag to GitHub... (not yet ungated)"
+    # `git push origin #{new_version}`
+    puts "\nCreate tag and push tag to Github manually (see new_release.rake for full command)"
   end
 end

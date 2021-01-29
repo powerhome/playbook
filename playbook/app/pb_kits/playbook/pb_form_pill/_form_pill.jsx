@@ -14,9 +14,14 @@ type FormPillProps = {
   onClick?: EventHandler,
   avatar?: boolean,
   avatarUrl?: string,
+  closeProps?: {
+    onClick?: EventHandler,
+    onMouseDown?: EventHandler,
+    onTouchEnd?: EventHandler,
+  },
 }
 const FormPill = (props: FormPillProps) => {
-  const { className, text, name, onClick = () => {}, avatarUrl } = props
+  const { className, text, name, onClick = () => {}, avatarUrl, closeProps = {} } = props
   const css = classnames(
     `pb_form_pill_kit_${'primary'}`,
     globalProps(props),
@@ -46,6 +51,7 @@ const FormPill = (props: FormPillProps) => {
       <div
           className="pb_form_pill_close"
           onClick={onClick}
+          {...closeProps}
       >
         <Icon
             fixedWidth
