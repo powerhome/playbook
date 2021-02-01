@@ -40,12 +40,14 @@ $card-border-radius: $border_rad_lightest;
       grid-auto-flow: dense;
       padding: 10px;
 
-      .span-2, .span_two {
-        grid-column: span 2;
+      .span_two {
+        grid-column-end: span 2;
+        grid-row-end: span 2;
       }
 
-      .span-3, .span_three {
-        grid-column: span 3;
+      .span_three {
+        grid-column-end: span 3;
+        grid-row-end: span 4;
       }
 
       div.layout_item {
@@ -54,13 +56,6 @@ $card-border-radius: $border_rad_lightest;
           max-width: 100%;
         }
       }
-
-      // > * {
-      //   img {
-      //     max-width: 100%;
-      //   }
-      //   // padding: 1rem;
-      // }
     }
 
     @media only screen and (min-width: $screen-xl-min) {
