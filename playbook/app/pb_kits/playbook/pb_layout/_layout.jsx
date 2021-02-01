@@ -32,6 +32,12 @@ type LayoutBodyProps = {
   className?: string,
 }
 
+type LayoutItemProps = {
+  children: array<React.ReactNode> | React.ReactNode,
+  className?: string,
+  span?: "one" | "two" | "three"
+}
+
 type LayoutHeaderProps = {
   children: array<React.ReactNode> | React.ReactNode,
   className?: string,
@@ -57,6 +63,17 @@ const Body = (props: LayoutBodyProps) => {
   const { children, className } = props
   return (
     <div className={classnames('layout_body', globalProps(props), className)}>
+      {children}
+    </div>
+  )
+}
+
+// Item component
+const Item = (props: LayoutItemProps) => {
+  const { children, className, span = "one" } = props
+  const spanClass = `span_${span}`
+  return (
+    <div className={classnames('layout_item', spanClass, globalProps(props), className)}>
       {children}
     </div>
   )
@@ -159,6 +176,7 @@ const Layout = (props: LayoutPropTypes) => {
 
 Layout.Side = Side
 Layout.Body = Body
+Layout.Item = Item
 Layout.Header = Header
 Layout.Footer = Footer
 

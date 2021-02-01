@@ -3,126 +3,58 @@ import { Card, Image, Layout, Title, User } from '../../'
 
 const LayoutMasonry = (props) => {
   return (
-    <div>
-      <Layout
-          layout="masonry"
-          {...props}
-      >
-        <Layout.Body>
-          <Card>
-            <Title
-                size={4}
-                tag="h4"
-                text="Title 4"
-            />
-            <Title
-                size={2}
-                tag="h2"
-                text="Title 2"
-            />
-          </Card>
-          <Card>{'Card content'}</Card>
-          <Card>
-            <User
-                align="center"
-                avatarUrl="https://randomuser.me/api/portraits/women/44.jpg"
-                name="Anna Black"
-                orientation="vertical"
-                size="lg"
-                title="Remodeling Consultant"
-            />
-          </Card>
+    <Layout
+        layout="masonry"
+        {...props}
+    >
+      <Layout.Body>
+        <Layout.Item >
+          <Image
+              url="https://images.unsplash.com/photo-1611932084285-4fc50bfb7102?ixid=MXwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwxMnx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60"
+          />
+        </Layout.Item>
+        <Layout.Item span="two">
+          <Image
+              url="https://images.unsplash.com/photo-1611934529218-748707e1d066?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=2307&q=80"
+          />
+        </Layout.Item>
+        <Layout.Item >
+          <Image
+              url="https://images.unsplash.com/photo-1611927263897-c2f1156bc760?ixid=MXwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwyMHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60"
+          />
+        </Layout.Item>
+        <Layout.Item span="three">
+          <Image
+              url="https://images.unsplash.com/photo-1611927263897-c2f1156bc760?ixid=MXwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwyMHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60"
+          />
+        </Layout.Item>
+        <Layout.Item >
+          <Image
+              url="https://images.unsplash.com/photo-1606851685679-2a35cfdd62d6?ixid=MXwxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHwxMXx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60"
+          />
+        </Layout.Item>
+        <Layout.Item span="two">
+          <Image
+              url="https://images.unsplash.com/photo-1612092172331-d788286028d5?ixid=MXwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw3Mnx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60"
+          />
+        </Layout.Item>
+        <Layout.Item >
+          <Image
+              url="https://images.unsplash.com/photo-1612123912968-5f6e964e8ea5?ixid=MXwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw0N3x8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60"
+          />
+        </Layout.Item>
+        <Layout.Item span="two">
+          <Image
+              url="https://images.unsplash.com/photo-1606851685679-2a35cfdd62d6?ixid=MXwxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHwxMXx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60"
+          />
+        </Layout.Item>
+        <Layout.Item >
           <Image
               url="https://unsplash.it/500/400/?image=634"
           />
-          <Card>
-            <Title
-                size={4}
-                tag="h4"
-                text="Title 4"
-            />
-            <Title
-                size={2}
-                tag="h2"
-                text="Title 2"
-            />
-            <Title
-                size={3}
-                tag="h3"
-                text="Title 3"
-            />
-          </Card>
-          <Card>{'Card content'}</Card>
-          <Card>
-            <Title
-                size={4}
-                tag="h4"
-                text="Title 4"
-            />
-            <Title
-                size={2}
-                tag="h2"
-                text="Title 2"
-            />
-          </Card>
-          <Card>{'Card content'}</Card>
-          <User
-              align="center"
-              avatarUrl="https://randomuser.me/api/portraits/women/44.jpg"
-              name="Anna Black"
-              orientation="vertical"
-              size="lg"
-              title="Remodeling Consultant"
-          />
-          <Card>{'Card content'}</Card>
-          <Card>
-            <Title
-                size={4}
-                tag="h4"
-                text="Title 4"
-            />
-            <Title
-                size={2}
-                tag="h2"
-                text="Title 2"
-            />
-            <Title
-                size={3}
-                tag="h3"
-                text="Title 3"
-            />
-            <Title
-                size={1}
-                tag="h1"
-                text="Title 1"
-            />
-          </Card>
-          <Card>{'Card content'}</Card>
-          <Card>
-            <Title
-                size={1}
-                tag="h1"
-                text="Title 1"
-            />
-            <Title
-                size={2}
-                tag="h2"
-                text="Title 2"
-            />
-            <Title
-                size={3}
-                tag="h3"
-                text="Title 3"
-            />
-            <Title
-                size={4}
-                tag="h4"
-                text="Title 4"
-            />
-          </Card>
-        </Layout.Body>
-      </Layout>
-    </div>
+        </Layout.Item>
+      </Layout.Body>
+    </Layout>
   )
 }
 
