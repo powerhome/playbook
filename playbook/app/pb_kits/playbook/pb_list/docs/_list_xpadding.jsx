@@ -2,11 +2,12 @@ import React from 'react'
 
 import { List, ListItem } from '../../'
 
-const ListXpadding = () => {
+const ListXpadding = (props) => {
   return (
     <>
       <List
           xpadding
+          {...props}
       >
         <ListItem>{'Item 1'}</ListItem>
         <ListItem>{'Item 2'}</ListItem>

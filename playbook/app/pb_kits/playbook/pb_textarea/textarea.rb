@@ -14,14 +14,21 @@ module Playbook
       prop :name
       prop :placeholder
       prop :resize, type: Playbook::Props::Enum,
-            values: %w[none both horizontal vertical],
-            default: "none"
+                    values: %w[none both horizontal vertical auto],
+                    default: "none"
       prop :rows, type: Playbook::Props::Number,
-            default: 4
+                  default: 4
       prop :value
+      prop :character_count
+      prop :onkeyup
+      prop :max_characters
 
       def classname
         generate_classname("pb_textarea_kit") + error_class + resize_class
+      end
+
+      def character_counter
+        max_characters && character_count ? "#{character_count} / #{max_characters}" : character_count
       end
 
     private
@@ -33,7 +40,6 @@ module Playbook
       def resize_class
         " resize_#{resize}"
       end
-
     end
   end
 end

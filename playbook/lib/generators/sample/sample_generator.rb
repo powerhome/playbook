@@ -17,15 +17,13 @@ class SampleGenerator < Rails::Generators::NamedBase
 
   def update_yaml
     category = options[:category].strip.downcase.underscore
-    samples_yaml = YAML.load_file("app/pb_kits/playbook/data/samples.yml")
-
-    if samples_yaml[category]
-      samples_yaml[category].push(@sample_name_underscore)
+    if SAMPLES[category]
+      SAMPLES[category].push(@sample_name_underscore)
     else
-      samples_yaml[category] = [@sample_name_underscore]
+      SAMPLES[category] = [@sample_name_underscore]
     end
 
-    File.open("app/pb_kits/playbook/data/samples.yml", "w") { |out| YAML.dump(samples_yaml, out) }
+    File.open("app/pb_kits/playbook/data/samples.yml", "w") { |out| YAML.dump(SAMPLES, out) }
   end
 
   def js_imports

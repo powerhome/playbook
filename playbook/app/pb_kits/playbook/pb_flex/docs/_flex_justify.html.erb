@@ -1,0 +1,66 @@
+
+<%= pb_rails("title", props: {size: 4, text: "Row"}) %><br/>
+<div class="flex-doc-example">
+  <%= pb_rails("flex", props:{justify: "start" }) do %>
+    <%= pb_rails("flex/flex_item") do %>1<% end %>
+    <%= pb_rails("flex/flex_item") do %>2<% end %>
+    <%= pb_rails("flex/flex_item") do %>3<% end %>
+    <%= pb_rails("flex/flex_item") do %>4<% end %>
+  <% end %>
+</div>
+
+  <br/><br/>
+
+<div class="flex-doc-example">
+  <%= pb_rails("flex", props:{justify: "center" }) do %>
+    <%= pb_rails("flex/flex_item") do %>1<% end %>
+    <%= pb_rails("flex/flex_item") do %>2<% end %>
+    <%= pb_rails("flex/flex_item") do %>3<% end %>
+    <%= pb_rails("flex/flex_item") do %>4<% end %>
+  <% end %>
+</div>
+
+  <br/><br/>
+
+<div class="flex-doc-example">
+  <%= pb_rails("flex", props:{justify: "end" }) do %>
+    <%= pb_rails("flex/flex_item") do %>1<% end %>
+    <%= pb_rails("flex/flex_item") do %>2<% end %>
+    <%= pb_rails("flex/flex_item") do %>3<% end %>
+    <%= pb_rails("flex/flex_item") do %>4<% end %>
+  <% end %>
+</div>
+
+  <br/><br/>
+
+    <%= pb_rails("title", props: {size: 4, text: "Column"}) %><br/>
+ <div class="flex-doc-example tall">
+  <%= pb_rails("flex", props:{ justify: "start", orientation: "column" }) do %>
+    <%= pb_rails("flex/flex_item") do %>1<% end %>
+    <%= pb_rails("flex/flex_item") do %>2<% end %>
+    <%= pb_rails("flex/flex_item") do %>3<% end %>
+    <%= pb_rails("flex/flex_item") do %>4<% end %>
+  <% end %>
+</div>
+
+  <br/><br/>
+
+  <div class="flex-doc-example tall">
+  <%= pb_rails("flex", props:{justify: "center", orientation: "column" }) do %>
+    <%= pb_rails("flex/flex_item") do %>1<% end %>
+    <%= pb_rails("flex/flex_item") do %>2<% end %>
+    <%= pb_rails("flex/flex_item") do %>3<% end %>
+    <%= pb_rails("flex/flex_item") do %>4<% end %>
+  <% end %>
+</div>
+
+  <br/><br/>
+
+<div class="flex-doc-example tall">
+  <%= pb_rails("flex", props:{ justify: "end", orientation: "column" }) do %>
+    <%= pb_rails("flex/flex_item") do %>1<% end %>
+    <%= pb_rails("flex/flex_item") do %>2<% end %>
+    <%= pb_rails("flex/flex_item") do %>3<% end %>
+    <%= pb_rails("flex/flex_item") do %>4<% end %>
+  <% end %>
+</div>

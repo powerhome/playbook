@@ -5,7 +5,7 @@ const data = [{
   name: 'Rating', value: 4.5,
 }]
 
-const GaugeMinMax = () => (
+const GaugeMinMax = (props) => (
   <div>
     <Gauge
         chartData={data}
@@ -14,6 +14,7 @@ const GaugeMinMax = () => (
         min={0}
         showLabels
         title="Product Rating"
+        {...props}
     />
   </div>
 )

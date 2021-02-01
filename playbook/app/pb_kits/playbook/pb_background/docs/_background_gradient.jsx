@@ -1,10 +1,11 @@
 import React from 'react'
 import { Background } from '../..'
 
-const BackgroundGradient = () => (
+const BackgroundGradient = (props) => (
   <Background
       backgroundColor="gradient"
       padding="xl"
+      {...props}
   />
 )
 

@@ -1,19 +1,21 @@
 import React from 'react'
 import { Flex, LabelValue, Title } from '../../'
 
-const LabelValueDetailsExamples = () => {
+const LabelValueDetailsExamples = (props) => {
   return (
     <div>
       <Title
           marginBottom="sm"
           size={4}
           text="Patient Profile"
+          {...props}
       />
 
       <Flex>
         <Flex
             marginRight="lg"
             orientation="column"
+            {...props}
         >
           <LabelValue
               icon="user"
@@ -21,16 +23,19 @@ const LabelValueDetailsExamples = () => {
               paddingBottom="sm"
               title="24 yrs old"
               variant="details"
+              {...props}
           />
           <LabelValue
               icon="weight"
               label="Weight"
               title="91 kg"
               variant="details"
+              {...props}
           />
         </Flex>
         <Flex
             orientation="column"
+            {...props}
         >
           <LabelValue
               icon="tint"
@@ -38,12 +43,14 @@ const LabelValueDetailsExamples = () => {
               paddingBottom="sm"
               title="A +"
               variant="details"
+              {...props}
           />
           <LabelValue
               icon="arrows-v"
               label="Height"
               title="187 cm"
               variant="details"
+              {...props}
           />
         </Flex>
       </Flex>
@@ -56,6 +63,7 @@ const LabelValueDetailsExamples = () => {
           marginBottom="sm"
           size={4}
           text="Workout Schedule"
+          {...props}
       />
 
       <LabelValue
@@ -66,6 +74,7 @@ const LabelValueDetailsExamples = () => {
           paddingBottom="sm"
           title="Bench Press"
           variant="details"
+          {...props}
       />
       <LabelValue
           active
@@ -75,6 +84,7 @@ const LabelValueDetailsExamples = () => {
           paddingBottom="sm"
           title="Barbell Curl"
           variant="details"
+          {...props}
       />
       <LabelValue
           active
@@ -84,6 +94,7 @@ const LabelValueDetailsExamples = () => {
           paddingBottom="sm"
           title="Back Squat"
           variant="details"
+          {...props}
       />
     </div>
   )

@@ -1,10 +1,13 @@
 import React from 'react'
 import { Table, TableRow } from '../../'
 
-const TableSideHighlight = () => {
+const TableSideHighlight = (props) => {
   return (
     <div>
-      <Table size="sm">
+      <Table
+          size="sm"
+          {...props}
+      >
         <thead>
           <tr>
             <th>{'Product colors'}</th>
@@ -15,28 +18,40 @@ const TableSideHighlight = () => {
           </tr>
         </thead>
         <tbody>
-          <TableRow sideHighlightColor="solar">
+          <TableRow
+              sideHighlightColor="solar"
+              {...props}
+          >
             <td>{'Solar'}</td>
             <td>{'Value 2'}</td>
             <td>{'Value 3'}</td>
             <td>{'Value 4'}</td>
             <td>{'Value 5'}</td>
           </TableRow>
-          <TableRow sideHighlightColor="roofing">
+          <TableRow
+              sideHighlightColor="roofing"
+              {...props}
+          >
             <td>{'Roofing'}</td>
             <td>{'Value 2'}</td>
             <td>{'Value 3'}</td>
             <td>{'Value 4'}</td>
             <td>{'Value 5'}</td>
           </TableRow>
-          <TableRow sideHighlightColor="gutters">
+          <TableRow
+              sideHighlightColor="gutters"
+              {...props}
+          >
             <td>{'Gutters'}</td>
             <td>{'Value 2'}</td>
             <td>{'Value 3'}</td>
             <td>{'Value 4'}</td>
             <td>{'Value 5'}</td>
           </TableRow>
-          <TableRow sideHighlightColor="none">
+          <TableRow
+              sideHighlightColor="none"
+              {...props}
+          >
             <td>{'None'}</td>
             <td>{'Value 2'}</td>
             <td>{'Value 3'}</td>
@@ -48,7 +63,10 @@ const TableSideHighlight = () => {
 
       <br />
 
-      <Table size="sm">
+      <Table
+          size="sm"
+          {...props}
+      >
         <thead>
           <tr>
             <th>{'Status colors'}</th>
@@ -59,28 +77,40 @@ const TableSideHighlight = () => {
           </tr>
         </thead>
         <tbody>
-          <TableRow sideHighlightColor="success">
+          <TableRow
+              sideHighlightColor="success"
+              {...props}
+          >
             <td>{'Success'}</td>
             <td>{'Value 2'}</td>
             <td>{'Value 3'}</td>
             <td>{'Value 4'}</td>
             <td>{'Value 5'}</td>
           </TableRow>
-          <TableRow sideHighlightColor="warning">
+          <TableRow
+              sideHighlightColor="warning"
+              {...props}
+          >
             <td>{'Warning'}</td>
             <td>{'Value 2'}</td>
             <td>{'Value 3'}</td>
             <td>{'Value 4'}</td>
             <td>{'Value 5'}</td>
           </TableRow>
-          <TableRow sideHighlightColor="error">
+          <TableRow
+              sideHighlightColor="error"
+              {...props}
+          >
             <td>{'Error'}</td>
             <td>{'Value 2'}</td>
             <td>{'Value 3'}</td>
             <td>{'Value 4'}</td>
             <td>{'Value 5'}</td>
           </TableRow>
-          <TableRow sideHighlightColor="none">
+          <TableRow
+              sideHighlightColor="none"
+              {...props}
+          >
             <td>{'None'}</td>
             <td>{'Value 2'}</td>
             <td>{'Value 3'}</td>
@@ -92,7 +122,10 @@ const TableSideHighlight = () => {
 
       <br />
 
-      <Table size="sm">
+      <Table
+          size="sm"
+          {...props}
+      >
         <thead>
           <tr>
             <th>{'Category Colors'}</th>
@@ -103,28 +136,40 @@ const TableSideHighlight = () => {
           </tr>
         </thead>
         <tbody>
-          <TableRow sideHighlightColor="category_1">
+          <TableRow
+              sideHighlightColor="category_1"
+              {...props}
+          >
             <td>{'Category Color 1'}</td>
             <td>{'Value 2'}</td>
             <td>{'Value 3'}</td>
             <td>{'Value 4'}</td>
             <td>{'Value 5'}</td>
           </TableRow>
-          <TableRow sideHighlightColor="category_2">
+          <TableRow
+              sideHighlightColor="category_2"
+              {...props}
+          >
             <td>{'Category Color 2'}</td>
             <td>{'Value 2'}</td>
             <td>{'Value 3'}</td>
             <td>{'Value 4'}</td>
             <td>{'Value 5'}</td>
           </TableRow>
-          <TableRow sideHighlightColor="category_3">
+          <TableRow
+              sideHighlightColor="category_3"
+              {...props}
+          >
             <td>{'Category Color 3'}</td>
             <td>{'Value 2'}</td>
             <td>{'Value 3'}</td>
             <td>{'Value 4'}</td>
             <td>{'Value 5'}</td>
           </TableRow>
-          <TableRow sideHighlightColor="none">
+          <TableRow
+              sideHighlightColor="none"
+              {...props}
+          >
             <td>{'None'}</td>
             <td>{'Value 2'}</td>
             <td>{'Value 3'}</td>

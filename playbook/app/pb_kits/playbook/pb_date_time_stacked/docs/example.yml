@@ -3,7 +3,5 @@ examples:
   rails:
   - date_time_stacked_default: Default
 
-
   react:
   - date_time_stacked_default: Default
-

@@ -65,10 +65,12 @@ module Playbook
     end
 
     def kit_show_rails
+      @type = "rails"
       render "playbook/pages/kit_show", layout: "layouts/playbook/kits"
     end
 
     def kit_show_react
+      @type = "react"
       render template: "playbook/pages/kit_show", layout: "layouts/playbook/kits"
     end
 

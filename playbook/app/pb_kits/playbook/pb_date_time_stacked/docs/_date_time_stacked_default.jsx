@@ -7,11 +7,6 @@ const DateTimeStackedDefault = (props) => (
         date={new Date()}
         {...props}
     />
-    <br />
-    <DateTimeStacked
-        date={new Date('20 Mar 2018')}
-        {...props}
-    />
   </div>
 )
 

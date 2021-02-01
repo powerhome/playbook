@@ -5,25 +5,25 @@ const BadgeDefault = (props) => {
   return (
     <div>
       <Badge
-          {...props}
           text="+1"
           variant="primary"
+          {...props}
       />
 
       &nbsp;
 
       <Badge
-          {...props}
           text="+4"
           variant="primary"
+          {...props}
       />
 
       &nbsp;
 
       <Badge
-          {...props}
           text="+1000"
           variant="primary"
+          {...props}
       />
     </div>
   )

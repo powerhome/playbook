@@ -4,9 +4,9 @@ import { Button } from '../../'
 const ButtonFullWidth = (props) => (
   <div>
     <Button
-        {...props}
         fullWidth
         text="Button Full Width"
+        {...props}
     />
   </div>
 )

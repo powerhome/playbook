@@ -5,29 +5,28 @@ const ContactDefault = (props) => {
   return (
     <div>
       <Contact
-          {...props}
           contactType="cell"
           contactValue="349-185-9988"
+          {...props}
       />
       <Contact
-          {...props}
           contactValue="5555555555"
+          {...props}
       />
       <Contact
-          {...props}
           contactType="email"
           contactValue="email@example.com"
+          {...props}
       />
       <Contact
-          {...props}
           contactType="work"
           contactValue="3245627482"
-
+          {...props}
       />
       <Contact
-          {...props}
           contactType="work-cell"
           contactValue="3245627482"
+          {...props}
       />
     </div>
   )

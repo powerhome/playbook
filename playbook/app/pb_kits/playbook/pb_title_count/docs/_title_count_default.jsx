@@ -1,12 +1,13 @@
 import React from 'react'
 import { TitleCount } from '../../'
 
-const TitleCountDefault = () => {
+const TitleCountDefault = (props) => {
   return (
     <>
       <TitleCount
           count={35.78}
           title="Appointments"
+          {...props}
       />
 
       <br />
@@ -15,6 +16,7 @@ const TitleCountDefault = () => {
           count={7399}
           size="lg"
           title="Appointments"
+          {...props}
       />
 
       <br />
@@ -23,6 +25,7 @@ const TitleCountDefault = () => {
           count={-379503.372}
           size="lg"
           title="Appointments"
+          {...props}
       />
     </>
   )
