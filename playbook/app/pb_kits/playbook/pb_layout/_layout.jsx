@@ -70,7 +70,7 @@ const Body = (props: LayoutBodyProps) => {
 
 // Item component
 const Item = (props: LayoutItemProps) => {
-  const { children, className, size = "sm" } = props
+  const { children, className, size = 'sm' } = props
   const sizeClass = `size_${size}`
   return (
     <div className={classnames('layout_item', sizeClass, globalProps(props), className)}>
