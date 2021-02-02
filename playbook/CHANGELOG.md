@@ -1,6 +1,63 @@
 
 
-## [7.13.0](https://github.com/powerhome/playbook/tree/HEAD)
+## [7.15.0](https://github.com/powerhome/playbook/tree/7.15.0)
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/7.14.0...7.15.0)
+
+**Kit Enhancements:**
+
+- Add Table Collapse prop for specific breakpoints [\#1329](https://github.com/powerhome/playbook/pull/1329) ([josephinef9](https://github.com/josephinef9))
+- Fixed Distribution Bar Cuttoff + added custom color props [\#1327](https://github.com/powerhome/playbook/pull/1327) ([jasoncypret](https://github.com/jasoncypret))
+- Adds truncation for select kit [\#1324](https://github.com/powerhome/playbook/pull/1324) ([jasoncypret](https://github.com/jasoncypret))
+- Add Auto Resizing to Textarea [\#1322](https://github.com/powerhome/playbook/pull/1322) ([josephinef9](https://github.com/josephinef9))
+- Flex Kit - Add and Refactor Props + Update Doc Examples [\#1319](https://github.com/powerhome/playbook/pull/1319) ([kre8sions](https://github.com/kre8sions))
+- Music Player sample page [\#1317](https://github.com/powerhome/playbook/pull/1317) ([patmccler](https://github.com/patmccler))
+- Add Empty Filter Message to Filter Kit [\#1271](https://github.com/powerhome/playbook/pull/1271) ([ljtinney](https://github.com/ljtinney))
+- Timestamp kit backward compatibility update [\#1234](https://github.com/powerhome/playbook/pull/1234) ([jasoncypret](https://github.com/jasoncypret))
+
+**Fixed Bugs:**
+
+- Prevent Typeahead menu opening on FormPill removal [\#1330](https://github.com/powerhome/playbook/pull/1330) ([patmccler](https://github.com/patmccler))
+
+**Improvements:**
+
+- Remove all dark mode doc examples [\#1328](https://github.com/powerhome/playbook/pull/1328) ([bh247484](https://github.com/bh247484))
+
+
+
+## [7.14.0](https://github.com/powerhome/playbook/tree/7.14.0)
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/7.13.0...7.14.0)
+
+**Kit Enhancements:**
+
+
+- Create and Customize the Darkmode Typeahead [\#1318](https://github.com/powerhome/playbook/pull/1318) ([josephinef9](https://github.com/josephinef9))
+- Create a prop that allows the card kit to use Border Radius variables [\#1306](https://github.com/powerhome/playbook/pull/1306) ([josephinef9](https://github.com/josephinef9))
+- Allow React Filter kit popover to be closed via a prop in the Filter kit[\#1303](https://github.com/powerhome/playbook/pull/1303) ([neildecapia](https://github.com/neildecapia))
+- Global Container width utilities [\#1298](https://github.com/powerhome/playbook/pull/1298) ([josephinef9](https://github.com/josephinef9))
+- Checkbox-on-selectable-card [\#1292](https://github.com/powerhome/playbook/pull/1292) ([patmccler](https://github.com/patmccler))
+- Added Custom options for typeahead kit  [\#1287](https://github.com/powerhome/playbook/pull/1287) ([KatherineMuedas](https://github.com/KatherineMuedas))
+- Add Object-fit: cover to the Image Kit [\#1309](https://github.com/powerhome/playbook/pull/1309) ([josephinef9](https://github.com/josephinef9))
+
+**Fixed Bugs:**
+
+- Fixed Some Style Issues with our Typeahead Kit for Dark Mode [\#1325](https://github.com/powerhome/playbook/pull/1325) ([jasperfurniss](https://github.com/jasperfurniss))
+- Revert "Remove custom webpacker instance" [\#1326](https://github.com/powerhome/playbook/pull/1326) ([thestephenmarshall](https://github.com/thestephenmarshall))
+- Fix select card form group [\#1320](https://github.com/powerhome/playbook/pull/1320) ([patmccler](https://github.com/patmccler))
+- Selectable card border bug \(using border\) [\#1308](https://github.com/powerhome/playbook/pull/1308) ([patmccler](https://github.com/patmccler))
+- Add padding to Typeahead Kit when it expands to two lines [\#1302](https://github.com/powerhome/playbook/pull/1302) ([josephinef9](https://github.com/josephinef9))
+- Set Overflow to be Auto on the Card Kit [\#1300](https://github.com/powerhome/playbook/pull/1300) ([josephinef9](https://github.com/josephinef9))
+- Fix missing CSS rule on radio kit [\#1311](https://github.com/powerhome/playbook/pull/1311) ([drborges](https://github.com/drborges))
+- Specifying Node Version for Github Actions [\#1315](https://github.com/powerhome/playbook/pull/1315) ([jasperfurniss](https://github.com/jasperfurniss))
+
+**Improvements:**
+- Update redcarpet requirement from = 3.4.0 to = 3.5.1 in /playbook [\#1307](https://github.com/powerhome/playbook/pull/1307) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump nokogiri from 1.10.10 to 1.11.1 in /playbook [\#1295](https://github.com/powerhome/playbook/pull/1295) ([dependabot[bot]](https://github.com/apps/dependabot))
+
+
+
+## [7.13.0](https://github.com/powerhome/playbook/tree/7.13.0)
 
 [Full Changelog](https://github.com/powerhome/playbook/compare/7.12.1...HEAD)
 
@@ -1208,12 +1265,3 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Removed (breaking changes)
 - React PbLayout prop `children` dropped support for single Node (https://github.com/powerhome/playbook/commit/b16da50914e110c75c6d96c985fa02781c9e2040#diff-c3ce2c91288ca3e730d3c56e7f73475cL11-L14)
 - Rails PbLayout prop `dark` dropped (https://github.com/powerhome/playbook/commit/b16da50914e110c75c6d96c985fa02781c9e2040#diff-377fda563d148f7b3ad33f904b7b0cdbL13)
-
-
-\* *This Changelog was automatically generated by [github_changelog_generator](https://github.com/github-changelog-generator/github-changelog-generator)*
-
-
-\* *This Changelog was automatically generated by [github_changelog_generator](https://github.com/github-changelog-generator/github-changelog-generator)*
-
-
-\* *This Changelog was automatically generated by [github_changelog_generator](https://github.com/github-changelog-generator/github-changelog-generator)*

@@ -23,8 +23,6 @@ const MultiValue = (props: Props) => {
 
   if (typeof imageUrl === 'string') formPillProps.avatarUrl = imageUrl
 
-  const handleOnClick = removeProps.onClick
-
   return (
     <components.MultiValueContainer
         className="text_input_multivalue_container"
@@ -33,14 +31,14 @@ const MultiValue = (props: Props) => {
       <If condition={imageUrl}>
         <FormPill
             avatarUrl={imageUrl}
+            closeProps={removeProps}
             marginRight="xs"
             name={label}
-            onClick={handleOnClick}
         />
         <Else />
         <FormPill
+            closeProps={removeProps}
             marginRight="xs"
-            onClick={handleOnClick}
             text={label}
         />
       </If>

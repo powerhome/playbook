@@ -3,12 +3,7 @@ examples:
   rails:
   - icon_value_default: Default
   - icon_value_align: Align
-  - icon_value_dark: Dark
-  - icon_value_align_dark: Align Dark
-
 
   react:
   - icon_value_default: Default
   - icon_value_align: Align
-  - icon_value_dark: Dark
-  - icon_value_align_dark: Align Dark

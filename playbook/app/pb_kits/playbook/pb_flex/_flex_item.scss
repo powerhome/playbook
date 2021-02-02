@@ -7,4 +7,14 @@
   &[class*=_grow] {
     flex-grow: 1;
   }
+
+  &[class*=_shrink] {
+    flex-shrink: 1;
+  }
+
+  @for $i from 0 through 12 {
+    &[class*=_flex_#{$i}]{
+      flex: $i;
+    }
+  }
 }

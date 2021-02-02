@@ -27,6 +27,9 @@ PbTypeahead.start()
 import PbTable from './pb_table'
 PbTable.start()
 
+import PbTextarea from './pb_textarea'
+PbTextarea.start()
+
 import 'flatpickr'
 
 import 'trix'

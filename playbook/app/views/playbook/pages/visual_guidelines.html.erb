@@ -6,8 +6,7 @@
           <%= pb_rails("body", props: {
             classname: "dark",
             text: "This page outlines the guiding principles that inform Playbook Design System's past, present, and future development.  
-            These core concepts are the basis upon which every higher order design element is built.  Some of these principles have 
-            been abstracted into sass variables listed below."
+            These core concepts are the basis upon which every higher order design element is built.  Some of these principles have been abstracted into sass variables listed below."
           }) %>
         </div>
     <% end %>
@@ -15,6 +14,7 @@
 
   <%= pb_rails("background", props: { classname: "token-wrapper", background_color: "light", padding: "xl" }) do %>
       <%= render "playbook/pages/visual_guidelines_partials/colors.html.slim" %>
+      <%= render "playbook/pages/visual_guidelines_partials/max_width.html.slim" %>
       <%= render "playbook/pages/visual_guidelines_partials/spacing.html.slim" %>
   <% end %>
 

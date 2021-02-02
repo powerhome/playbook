@@ -4,13 +4,14 @@ import { Flex, FlexItem, Title } from  '../../'
 const FlexDefault = (props) => {
   return (
     <>
+
+      <Title
+          size={4}
+          text="Row"
+          {...props}
+      />
+      <br />
       <div className="flex-doc-example">
-        <Title
-            size={4}
-            text="Row"
-            {...props}
-        />
-        <br />
         <Flex
             orientation="row"
             {...props}
@@ -28,17 +29,18 @@ const FlexDefault = (props) => {
             {'4'}
           </FlexItem>
         </Flex>
-
-        <br />
-        <Title
-            size={4}
-            text="Column"
-            {...props}
-        />
-        <br />
+      </div>
+      <br />
+      <Title
+          size={4}
+          text="Column"
+          {...props}
+      />
+      <br />
+      <div className="flex-doc-example">
         <Flex
+            align="start"
             orientation="column"
-            vertical="left"
             {...props}
         >
           <FlexItem>

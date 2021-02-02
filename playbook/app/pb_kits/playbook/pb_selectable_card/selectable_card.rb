@@ -26,7 +26,14 @@ module Playbook
                      default: "default"
 
       def classname
-        generate_classname("pb_selectable_card_kit", checked_class, enable_disabled_class)
+        [
+          generate_classname_without_spacing("pb_selectable_card_kit", checked_class, enable_disabled_class),
+          dark_props,
+        ].compact.join(" ")
+      end
+
+      def spacing_classname
+        generate_classname
       end
 
       def input_id_present
@@ -45,7 +52,7 @@ module Playbook
       end
 
       def label_class
-        variant == "display_input" ? "p_none" : ""
+        variant == "display_input" ? "p_none" : spacing_classname
       end
 
       def is_checked

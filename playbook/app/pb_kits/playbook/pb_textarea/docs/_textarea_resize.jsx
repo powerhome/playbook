@@ -5,6 +5,15 @@ const TextareaResize = (props) => {
   return (
     <div>
       <Textarea
+          label="auto"
+          placeholder="Resize Auto"
+          resize="auto"
+          {...props}
+      />
+
+      <br />
+
+      <Textarea
           label="vertical"
           placeholder="Resize Vertical"
           resize="vertical"
@@ -28,7 +37,6 @@ const TextareaResize = (props) => {
           resize="horizontal"
           {...props}
       />
-
     </div>
   )
 }

@@ -6,6 +6,7 @@ import { globalProps } from '../utilities/globalProps.js'
 
 type DistributionBarProps = {
   className?: string,
+  colors: array,
   data?: string,
   id?: string,
   size?: "lg" | "sm",
@@ -18,13 +19,13 @@ const normalizeCharacters = (widths) => {
   })
 }
 
-const barValues = (normalizedValues) => {
+const barValues = (normalizedValues, colors) => {
   const arrSum = (value) => value.reduce((a, b) => a + b, 0)
   const widthSum = arrSum(normalizedValues)
   return normalizedValues.map((value, i) => {
     return (
       <div
-          className="pb_distribution_width"
+          className={classnames('pb_distribution_width', colors[i] ? `color_${colors[i]}` : '')}
           key={i}
           style={{ width: `${(value * 100) / widthSum}%` }}
       />
@@ -33,12 +34,16 @@ const barValues = (normalizedValues) => {
 }
 
 const DistributionBar = (props: DistributionBarProps) => {
-  const { size = 'lg', widths = [1] } = props
+  const {
+    size = 'lg',
+    widths = [1],
+    colors = [],
+  } = props
   const normalizedValues = normalizeCharacters(widths)
 
   return (
     <div className={classnames(`pb_distribution_bar_${size}`, globalProps(props))}>
-      {barValues(normalizedValues)}
+      {barValues(normalizedValues, colors)}
     </div>
   )
 }

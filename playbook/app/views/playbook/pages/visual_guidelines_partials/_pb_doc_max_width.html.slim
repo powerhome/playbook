@@ -1,0 +1,19 @@
+br
+= pb_rails("title", props: { text: title, tag: "h4", size: 4 })
+
+- if defined?(usage) && usage.present?
+  = pb_rails("body", props: {"tag": "p"})
+    usage
+
+br
+= pb_rails("card", props: { max_width: "sm" })
+    code max_width_sm
+br
+= pb_rails("card", props: { max_width: "md" })
+    code max_width_md
+br
+= pb_rails("card", props: { max_width: "lg" })
+    code max_width_lg
+br
+= pb_rails("card", props: { max_width: "xl" })
+    code max_width_xl

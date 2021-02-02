@@ -13,7 +13,7 @@ const FlexReverse = (props) => {
         <br />
         <Flex
             className="bg_light"
-            horizontal="left"
+            justify="start"
             orientation="row"
             reverse
             {...props}
@@ -40,10 +40,10 @@ const FlexReverse = (props) => {
         />
         <br />
         <Flex
+            align="start"
             className="bg_light"
             orientation="column"
             reverse
-            vertical="left"
             {...props}
         >
           <FlexItem>

@@ -39,12 +39,13 @@ module Playbook
 
       def typeahead_with_pills_options
         base_options = {
+          dark: dark,
           defaultValue: default_options,
           id: id,
           isMulti: true,
           label: label,
           options: options,
-          placeholder: placeholder
+          placeholder: placeholder,
         }
 
         base_options.merge!({getOptionLabel: get_option_label}) if get_option_label.present?
