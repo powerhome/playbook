@@ -1,5 +1,5 @@
 import React from 'react'
-import { Flex, FlexItem, Gauge } from '../../'
+import { Flex, Gauge } from '../../'
 
 const GaugeSizing = (props) => (
   <div>
@@ -7,18 +7,15 @@ const GaugeSizing = (props) => (
         wrap
         {...props}
     >
-      <FlexItem
-          fixedSize="400px"
-          {...props}
-      >
+      <div style={{ overflow: 'hidden', flexBasis: '400px' }}>
         <Gauge
             chartData={[ { name: 'Point 1', value: 100 } ]}
             id="gauge-sizing4"
             {...props}
         />
-      </FlexItem>
-      <FlexItem
-          fixedSize="300px"
+      </div>
+      <div
+          style={{ overflow: 'hidden', flexBasis: '300px' }}
           {...props}
       >
         <Gauge
@@ -26,9 +23,9 @@ const GaugeSizing = (props) => (
             id="gauge-sizing3"
             {...props}
         />
-      </FlexItem>
-      <FlexItem
-          fixedSize="200px"
+      </div>
+      <div
+          style={{ overflow: 'hidden', flexBasis: '200px' }}
           {...props}
       >
         <Gauge
@@ -36,14 +33,17 @@ const GaugeSizing = (props) => (
             id="gauge-sizing2"
             {...props}
         />
-      </FlexItem>
-      <FlexItem fixedSize="125px">
+      </div>
+      <div
+          style={{ overflow: 'hidden', flexBasis: '125px' }}
+          {...props}
+      >
         <Gauge
             chartData={[ { name: 'Point 4', value: 25 } ]}
             id="gauge-sizing1"
             {...props}
         />
-      </FlexItem>
+      </div>
     </Flex>
   </div>
 )
