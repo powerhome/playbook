@@ -88,11 +88,6 @@ $pb_selectable_card_border: 2px;
           background: $royal;
         }
       }
-
-      .separator {
-        width: 2px;
-        background: $royal;
-      }
     }
   }
 
@@ -130,15 +125,6 @@ $pb_selectable_card_border: 2px;
     margin-right: 1px;
     margin-top: -1px;
     margin-bottom: -1px;
-    background: $border_light;
-  }
-
-  .separator {
-    align-self: stretch;
-    transition-property: all;
-    transition-duration: $transition_short;
-    transition-timing-function: $easeIn;
-    width: 1px;
     background: $border_light;
   }
 }
