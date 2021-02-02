@@ -25,7 +25,7 @@ $card-border-radius: $border_rad_lightest;
       @media screen and (max-width: $screen-md-min) {
         grid-template-columns: repeat(2, 1fr);
       }
-       @media screen and (max-width: $screen-xs-min) {
+      @media screen and (max-width: $screen-xs-min) {
         grid-template-columns: repeat(1, 1fr);
       }
     }
@@ -40,14 +40,18 @@ $card-border-radius: $border_rad_lightest;
       grid-auto-flow: dense;
       padding: 10px;
 
-      .span_two {
+      .size_md {
         grid-column-end: span 2;
         grid-row-end: span 2;
       }
 
-      .span_three {
+      .size_lg {
         grid-column-end: span 3;
         grid-row-end: span 4;
+      }
+
+      @media screen and (max-width: $screen-lg-min) {
+        grid-template-columns: repeat(3, 1fr);
       }
 
       div.layout_item, * {
@@ -57,36 +61,6 @@ $card-border-radius: $border_rad_lightest;
         }
       }
     }
-
-    @media only screen and (min-width: $screen-xl-min) {
-      div.layout_body {
-          -moz-column-count: 4;
-          -webkit-column-count: 4;
-          column-count: 4;
-      }
-    }
-    @media screen and (max-width: $screen-lg-min){
-      div.layout_body {
-          -moz-column-count: 3;
-          -webkit-column-count: 3;
-          column-count: 3;
-      }
-    }
-    @media screen and (max-width: $screen-md-min){
-      div.layout_body {
-          -moz-column-count: 2;
-          -webkit-column-count: 2;
-          column-count: 2;
-      }
-    }
-    @media screen and (max-width: $screen-xs-min) {
-      div.layout_body {
-          -moz-column-count: 1;
-          -webkit-column-count: 1;
-          column-count: 1;
-      }
-    }
-
   }
 
   &[class*=_collection_detail]{

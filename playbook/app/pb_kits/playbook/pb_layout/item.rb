@@ -7,18 +7,18 @@ module Playbook
 
       partial "pb_layout/item"
 
-      prop :span, type: Playbook::Props::Enum,
-                  values: %w[one two three],
-                  default: "one"
+      prop :size, type: Playbook::Props::Enum,
+                  values: %w[sm md lg],
+                  default: "sm"
 
       def classname
-        generate_classname("layout_item") + span_class
+        generate_classname("layout_item") + size_class
       end
 
     private
 
-      def span_class
-        " span_#{span}"
+      def size_class
+        " size_#{size}"
       end
     end
   end
