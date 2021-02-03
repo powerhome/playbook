@@ -24,6 +24,7 @@ type TextInputProps = {
   required?: boolean,
   type: string,
   value: string | number,
+  variant?: string,
   children: Node,
 }
 
@@ -46,6 +47,7 @@ const TextInput = (
     required,
     type = 'text',
     value = '',
+    variant = null,
     children = null,
   } = props
 
@@ -86,6 +88,7 @@ const TextInput = (
               type={type}
               value={value}
           />
+          {variant === 'passwordStrength' ? 'Showing password strength' : null}
           <If condition={error}>
             <Body
                 status="negative"
