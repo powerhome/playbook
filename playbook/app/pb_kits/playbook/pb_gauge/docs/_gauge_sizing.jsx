@@ -55,18 +55,6 @@ const GaugeSizing = (props) => (
             {...props}
         />
       </FlexItem>
-      <FlexItem
-          fixedSize="300px"
-          shrink
-          {...props}
-      >
-        <Gauge
-            chartData={[ { name: 'Point 2', value: 75 } ]}
-            id="gauge-sizing5"
-            {...props}
-        />
-        {'No "overflow: hidden", doesn\'t respond well to shrinking screen.'}
-      </FlexItem>
     </Flex>
   </div>
 )
