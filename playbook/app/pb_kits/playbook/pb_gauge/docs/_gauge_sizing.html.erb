@@ -5,25 +5,25 @@
 </style>
 
 <%= pb_rails("flex", props: {wrap: true}) do %>
-  <%= pb_rails("flex/flex_item", props: {classname: "hideOverflow", fixed_size: "400px", shrink: true }) do %>
+  <%= pb_rails("flex/flex_item", props: {fixed_size: "400px", overflow: "hidden", shrink: true }) do %>
       <%= pb_rails("gauge", props: {
         id: "gauge-sizing4",
         chart_data: [{ name: "Point 1", value: 100 }],
       }) %>
   <% end %>
-  <%= pb_rails("flex/flex_item", props: {classname: "hideOverflow", fixed_size: "300px", shrink: true }) do %>
+  <%= pb_rails("flex/flex_item", props: {fixed_size: "300px", overflow: "hidden", shrink: true }) do %>
       <%= pb_rails("gauge", props: {
         id: "gauge-sizing3",
         chart_data: [{ name: "Point 2", value: 75 }],
       }) %>
   <% end %>
-  <%= pb_rails("flex/flex_item", props: {classname: "hideOverflow", fixed_size: "200px", shrink: true }) do %>
+  <%= pb_rails("flex/flex_item", props: {fixed_size: "200px", overflow: "hidden", shrink: true }) do %>
       <%= pb_rails("gauge", props: {
         id: "gauge-sizing2",
         chart_data: [{ name: "Point 3", value: 50 }],
       }) %>
   <% end %>
-  <%= pb_rails("flex/flex_item", props: {classname: "hideOverflow", fixed_size: "125px", shrink: true }) do %>
+  <%= pb_rails("flex/flex_item", props: {fixed_size: "125px", overflow: "hidden", shrink: true }) do %>
       <%= pb_rails("gauge", props: {
         id: "gauge-sizing1",
         chart_data: [{ name: "Point 4", value: 25 }],

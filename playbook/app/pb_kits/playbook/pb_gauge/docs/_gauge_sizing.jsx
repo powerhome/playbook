@@ -1,5 +1,5 @@
 import React from 'react'
-import { Flex, Gauge } from '../../'
+import { Flex, FlexItem, Gauge } from '../../'
 
 const GaugeSizing = (props) => (
   <div>
@@ -7,15 +7,22 @@ const GaugeSizing = (props) => (
         wrap
         {...props}
     >
-      <div style={{ overflow: 'hidden', flexBasis: '400px' }}>
+      <FlexItem
+          fixedSize="400px"
+          overflow="hidden"
+          shrink
+          {...props}
+      >
         <Gauge
             chartData={[ { name: 'Point 1', value: 100 } ]}
             id="gauge-sizing4"
             {...props}
         />
-      </div>
-      <div
-          style={{ overflow: 'hidden', flexBasis: '300px' }}
+      </FlexItem>
+      <FlexItem
+          fixedSize="300px"
+          overflow="hidden"
+          shrink
           {...props}
       >
         <Gauge
@@ -23,9 +30,11 @@ const GaugeSizing = (props) => (
             id="gauge-sizing3"
             {...props}
         />
-      </div>
-      <div
-          style={{ overflow: 'hidden', flexBasis: '200px' }}
+      </FlexItem>
+      <FlexItem
+          fixedSize="200px"
+          overflow="hidden"
+          shrink
           {...props}
       >
         <Gauge
@@ -33,9 +42,11 @@ const GaugeSizing = (props) => (
             id="gauge-sizing2"
             {...props}
         />
-      </div>
-      <div
-          style={{ overflow: 'hidden', flexBasis: '125px' }}
+      </FlexItem>
+      <FlexItem
+          fixedSize="125px"
+          overflow="hidden"
+          shrink
           {...props}
       >
         <Gauge
@@ -43,7 +54,19 @@ const GaugeSizing = (props) => (
             id="gauge-sizing1"
             {...props}
         />
-      </div>
+      </FlexItem>
+      <FlexItem
+          fixedSize="300px"
+          shrink
+          {...props}
+      >
+        <Gauge
+            chartData={[ { name: 'Point 2', value: 75 } ]}
+            id="gauge-sizing5"
+            {...props}
+        />
+        {'No "overflow: hidden", doesn\'t respond well to shrinking screen.'}
+      </FlexItem>
     </Flex>
   </div>
 )
