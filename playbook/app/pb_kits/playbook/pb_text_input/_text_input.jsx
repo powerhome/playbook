@@ -1,7 +1,7 @@
 /* @flow */
 import React, { forwardRef } from 'react'
 import classnames from 'classnames'
-import { Body, Caption } from '../'
+import { Body, Caption, ProgressSimple } from '../'
 import { globalProps } from '../utilities/globalProps.js'
 
 import {
@@ -60,6 +60,37 @@ const TextInput = (
     className,
   ])
 
+  const passwordStrengthCalculation = (value) => {
+    let text = ''
+    let colorVariant = ''
+    let strength = ''
+
+    if (value.length < 1) {
+      text = ''
+      colorVariant = null
+      strength = 0
+    } else if (value.length >= 1 && value.length < 5) {
+      text = 'weak'
+      colorVariant = 'negative'
+      strength = 1
+    } else if (value.length >= 5 && value.length < 8) {
+      text = 'moderate'
+      colorVariant = 'default'
+      strength = 2
+    } else if (value.length >= 8 && value.length < 12) {
+      text = 'strong'
+      colorVariant = 'positive'
+      strength = 3
+    } else if (value.length >= 12) {
+      text = 'very strong'
+      colorVariant = 'positive'
+      strength = 4
+    }
+    return { colorVariant, text, strength }
+  }
+
+  const { colorVariant: passwordColorVariant, text: passwordText, strength: passwordStrength } = passwordStrengthCalculation(value)
+
   return (
     <div
         {...ariaProps}
@@ -88,7 +119,29 @@ const TextInput = (
               type={type}
               value={value}
           />
-          {variant === 'passwordStrength' ? 'Showing password strength' : null}
+          <Choose>
+            <When condition={variant === 'passwordStrength'}>
+              <Caption>{passwordText}</Caption>
+            </When>
+            <When condition={variant === 'passwordStrength1'}>
+              <meter
+                  max="4"
+                  min="0"
+                  optimum="3"
+                  value={passwordStrength}
+              />
+            </When>
+            <When condition={variant === 'passwordStrength2'}>
+              <>
+                <ProgressSimple
+                    max={4}
+                    value={passwordStrength}
+                    variant={passwordColorVariant}
+                />
+                <Caption>{passwordText}</Caption>
+              </>
+            </When>
+          </Choose>
           <If condition={error}>
             <Body
                 status="negative"
