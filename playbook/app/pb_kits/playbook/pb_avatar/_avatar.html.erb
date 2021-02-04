@@ -3,10 +3,8 @@
     data: object.data.merge(initials: object.initials),
     class: object.classname,
     aria: object.aria) do %>
-  <%= content_tag(:div,
-      data: { initials: object.initials },
-      class: "avatar_wrapper") do %>
-       <%= pb_rails("image", props: { url: object.image_url }) if object.image_url.present? %>
-      <% end %>
-       <%= pb_rails("online_status", props: object.online_status_props) if object.status %>
+  <%= content_tag(:div, data: { initials: object.initials }, class: "avatar_wrapper") do %>
+    <%= pb_rails("image", props: { url: object.image_url, on_error: object.handle_img_error }) if object.image_url.present? %>
+  <% end %>
+  <%= pb_rails("online_status", props: object.online_status_props) if object.status %>
 <% end %>
