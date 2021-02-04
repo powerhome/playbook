@@ -1,5 +1,4 @@
 <style>
-
   .image-error:before {
     content: "Sorry, the image below seems to be broken.";
     display: block;
@@ -10,22 +9,67 @@
     padding: 5px;
     outline: 1px solid red;
   }
-
 </style>
-<%= pb_rails("body", props: { text: "Handle when an image fails to load or a broken link is passed. This is not neccessary most of the time." }) %>
-<br/>
-<br/>
-<%= pb_rails("body", props: { text: "Alter the display when the image fails to load:" }) %>
-<%= pb_rails("image", props: { alt: "This is the alt text!", rounded: true, size: "xs", url: "not_a_picture", on_error: "this.style.color = 'red'"
- }) %>
-<br/>
-<br/>
-<%= pb_rails("body", props: { text: "Give it an error class:" }) %>
-<%= pb_rails("image", props: { alt: "This is the alt text!", rounded: true, size: "xs", url: "not_a_picture", on_error: "this.classList.add('image-error')"
- }) %>
-<br/>
-<br/>
-<%= pb_rails("body", props: { text: "Or hide it completely:" }) %>
 
-<%= pb_rails("image", props: { alt: "This is the alt text!", rounded: true, size: "xs", url: "not_a_picture", on_error: "this.style.display = 'none'"
- }) %>
+<%= pb_rails("body",
+  props: {
+    text: "Handle when an image fails to load or a broken link is passed. This is not neccessary most of the time."
+  }
+) %>
+
+<br>
+<br>
+
+<%= pb_rails("body",
+  props: {
+    text: "Alter the display when the image fails to load:"
+  }
+) %>
+
+<%= pb_rails("image",
+  props: {
+    alt: "This is the alt text!",
+    on_error: "this.style.color = 'red'",
+    rounded: true,
+    size: "xs",
+    url: "not_a_picture"
+  }
+) %>
+
+<br>
+<br>
+
+<%= pb_rails("body",
+  props: {
+    text: "Give it an error class:"
+  }
+) %>
+
+<%= pb_rails("image",
+  props: {
+    alt: "This is the alt text!",
+    on_error: "this.classList.add('image-error')",
+    rounded: true,
+    size: "xs",
+    url: "not_a_picture"
+  }
+) %>
+
+<br>
+<br>
+
+<%= pb_rails("body",
+  props: {
+   text: "Or hide it completely:"
+  }
+) %>
+
+<%= pb_rails("image",
+  props: {
+    alt: "This is the alt text!",
+    on_error: "this.style.display = 'none'",
+    rounded: true,
+    size: "xs",
+    url: "not_a_picture",
+  }
+) %>
