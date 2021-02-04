@@ -58,13 +58,14 @@ const SelectableCard = ({
   const dataProps = buildDataProps(data)
 
   const classes = classnames(buildCss('pb_selectable_card_kit',
-    { 'checked': checked,
+    {
+      'checked': checked,
       'disabled': disabled,
-      'enabled': !disabled
+      'enabled': !disabled,
     }),
-    { error },
-    dark ? 'dark' : '',
-    className
+  { error },
+  dark ? 'dark' : '',
+  className
   )
 
   const displayIcon = () => {

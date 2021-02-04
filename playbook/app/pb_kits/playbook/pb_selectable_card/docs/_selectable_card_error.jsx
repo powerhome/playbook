@@ -1,10 +1,10 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 import { Body, SelectableCard, Title } from '../..'
 
 const SelectableCardError = (props) => {
-      const [football, setFootball] = useState(false)
-      const [basketball, setBasketball] = useState(false)
-      const [baseball, setBaseball] = useState(false)
+  const [football, setFootball] = useState(false)
+  const [basketball, setBasketball] = useState(false)
+  const [baseball, setBaseball] = useState(false)
 
   return (
     <div>
