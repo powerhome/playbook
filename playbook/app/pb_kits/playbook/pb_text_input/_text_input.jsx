@@ -61,8 +61,12 @@ const TextInput = (
     className,
   ])
 
+  // Ref getting set to {} somehow from popper, not sure
+  if (ref && !(Object.prototype.hasOwnProperty.call(ref, 'current'))) ref = null
+
   const { colorVariant: passwordColorVariant, text: passwordText, strength: passwordStrength, suggestions: passwordSuggestions = [] } = (variant && value.length > 0 ? passwordStrengthCalculation(value) : {})
   const passwordDisplayStrength = passwordStrength + 1
+  const inputID = id || `password-input-${Math.floor(Math.random() * 1000)}`
 
   const infoIcon = (
     <Icon
@@ -70,6 +74,38 @@ const TextInput = (
         size="sm"
     />
   )
+
+  if (variant === 'passwordStrength4') {
+    const refProps = Object.assign({}, props, { variant: null })
+    const reference = (
+      <TextInput
+          {...refProps}
+      />
+    )
+
+    return (
+      <PbReactPopover
+          padding="xs"
+          placement="bottom"
+          reference={reference}
+          show={passwordDisplayStrength && inputID === document.activeElement.id}
+      >
+        <Caption>{'Strength: ' + passwordText}</Caption>
+        <ProgressSimple
+            max={5}
+            value={passwordDisplayStrength}
+            variant={passwordColorVariant}
+        />
+        <Caption>
+          {
+            passwordSuggestions.map((suggestion, i) => (
+              <p key={i}>{suggestion}</p>
+            )
+          )}
+        </Caption>
+      </PbReactPopover>
+    )
+  }
 
   return (
     <div
@@ -90,7 +126,7 @@ const TextInput = (
               {...props}
               className="text_input"
               disabled={disabled}
-              id={id}
+              id={inputID}
               name={name}
               onChange={onChange}
               placeholder={placeholder}
@@ -134,8 +170,7 @@ const TextInput = (
                       offset
                       placement="bottom"
                       reference={infoIcon}
-                      show={passwordDisplayStrength}
-                      {...props}
+                      show={passwordDisplayStrength && inputID === document.activeElement.id}
                   >
                     <Caption>
                       {

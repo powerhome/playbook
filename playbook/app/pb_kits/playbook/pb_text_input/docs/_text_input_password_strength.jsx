@@ -30,11 +30,21 @@ const TextInputPasswordStrength = (props) => {
           {...props}
       />
       <TextInput
+          id="4th-variant"
           label="Password"
           onChange={(e) => setValue(e.target.value)}
           placeholder="Enter a password"
           value={value}
           variant="passwordStrength3"
+          {...props}
+      />
+      <TextInput
+          id="5th-variant"
+          label="Password"
+          onChange={(e) => setValue(e.target.value)}
+          placeholder="Enter a password"
+          value={value}
+          variant="passwordStrength4"
           {...props}
       />
     </div>
