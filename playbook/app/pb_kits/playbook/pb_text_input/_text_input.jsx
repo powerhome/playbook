@@ -1,8 +1,9 @@
 /* @flow */
 import React, { forwardRef } from 'react'
 import classnames from 'classnames'
-import { Body, Caption, ProgressSimple } from '../'
+import { Body, Caption, Flex, Icon, PbReactPopover, ProgressSimple } from '../'
 import { globalProps } from '../utilities/globalProps.js'
+import passwordStrengthCalculation from '../utilities/passwordStrength.js'
 
 import {
   buildAriaProps,
@@ -60,36 +61,15 @@ const TextInput = (
     className,
   ])
 
-  const passwordStrengthCalculation = (value) => {
-    let text = ''
-    let colorVariant = ''
-    let strength = ''
+  const { colorVariant: passwordColorVariant, text: passwordText, strength: passwordStrength, suggestions: passwordSuggestions = [] } = (variant && value.length > 0 ? passwordStrengthCalculation(value) : {})
+  const passwordDisplayStrength = passwordStrength + 1
 
-    if (value.length < 1) {
-      text = ''
-      colorVariant = null
-      strength = 0
-    } else if (value.length >= 1 && value.length < 5) {
-      text = 'weak'
-      colorVariant = 'negative'
-      strength = 1
-    } else if (value.length >= 5 && value.length < 8) {
-      text = 'moderate'
-      colorVariant = 'default'
-      strength = 2
-    } else if (value.length >= 8 && value.length < 12) {
-      text = 'strong'
-      colorVariant = 'positive'
-      strength = 3
-    } else if (value.length >= 12) {
-      text = 'very strong'
-      colorVariant = 'positive'
-      strength = 4
-    }
-    return { colorVariant, text, strength }
-  }
-
-  const { colorVariant: passwordColorVariant, text: passwordText, strength: passwordStrength } = passwordStrengthCalculation(value)
+  const infoIcon = (
+    <Icon
+        icon="info"
+        size="sm"
+    />
+  )
 
   return (
     <div
@@ -125,20 +105,47 @@ const TextInput = (
             </When>
             <When condition={variant === 'passwordStrength1'}>
               <meter
-                  max="4"
+                  max="5"
                   min="0"
                   optimum="3"
-                  value={passwordStrength}
+                  value={passwordDisplayStrength}
               />
             </When>
             <When condition={variant === 'passwordStrength2'}>
               <>
                 <ProgressSimple
-                    max={4}
-                    value={passwordStrength}
+                    max={5}
+                    value={passwordDisplayStrength}
                     variant={passwordColorVariant}
                 />
                 <Caption>{passwordText}</Caption>
+              </>
+            </When>
+            <When condition={variant === 'passwordStrength3'}>
+              <>
+                <ProgressSimple
+                    max={5}
+                    value={passwordDisplayStrength}
+                    variant={passwordColorVariant}
+                />
+                <Flex>
+                  <Caption>{passwordText}</Caption>
+                  <PbReactPopover
+                      offset
+                      placement="bottom"
+                      reference={infoIcon}
+                      show={passwordDisplayStrength}
+                      {...props}
+                  >
+                    <Caption>
+                      {
+                        passwordSuggestions.map((suggestion, i) => (
+                          <p key={i}>{suggestion}</p>
+                        )
+                      )}
+                    </Caption>
+                  </PbReactPopover>
+                </Flex>
               </>
             </When>
           </Choose>
