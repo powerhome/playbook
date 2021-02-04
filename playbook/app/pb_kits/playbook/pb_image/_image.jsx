@@ -46,7 +46,6 @@ const Image = (props: ImageProps) => {
           className={classes}
           data-src={url}
           id={id}
-          rounded={rounded}
           src={url}
       />
     </div>
