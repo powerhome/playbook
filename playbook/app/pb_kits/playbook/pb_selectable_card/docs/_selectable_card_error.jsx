@@ -9,7 +9,7 @@ const SelectableCardError = (props) => {
   return (
     <div>
       <Title
-          dark
+          {...props}
           size={3}
           text="What sports do you like?"
       />
@@ -17,7 +17,6 @@ const SelectableCardError = (props) => {
       <SelectableCard
           {...props}
           checked={football}
-          dark
           error
           inputId="football"
           name="football"
@@ -25,13 +24,12 @@ const SelectableCardError = (props) => {
           value="football"
           variant="displayInput"
       >
-        <Body dark>{'Football'}</Body>
+        <Body {...props}>{'Football'}</Body>
       </SelectableCard>
 
       <SelectableCard
           {...props}
           checked={basketball}
-          dark
           error
           inputId="basketball"
           name="basketball"
@@ -39,13 +37,12 @@ const SelectableCardError = (props) => {
           value="basketball"
           variant="displayInput"
       >
-        <Body dark>{'Basketball'}</Body>
+        <Body {...props}>{'Basketball'}</Body>
       </SelectableCard>
 
       <SelectableCard
           {...props}
           checked={baseball}
-          dark
           error
           inputId="baseball"
           name="baseball"
@@ -53,7 +50,7 @@ const SelectableCardError = (props) => {
           value="baseball"
           variant="displayInput"
       >
-        <Body dark>{'Baseball'}</Body>
+        <Body {...props}>{'Baseball'}</Body>
       </SelectableCard>
     </div>
   )
