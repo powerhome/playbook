@@ -23,6 +23,7 @@ type SelectableCardProps = {
   dark?: boolean,
   data: object,
   disabled?: boolean,
+  error?: boolean,
   icon?: boolean,
   id?: string,
   inputId?: string,
@@ -42,6 +43,7 @@ const SelectableCard = ({
   dark = false,
   data = {},
   disabled = false,
+  error = false,
   icon = false,
   inputId = null,
   multi = true,
@@ -56,9 +58,12 @@ const SelectableCard = ({
   const dataProps = buildDataProps(data)
 
   const classes = classnames(buildCss('pb_selectable_card_kit',
-    { 'checked': checked,
+    {
+      'checked': checked,
       'disabled': disabled,
-      'enabled': !disabled }),
+      'enabled': !disabled,
+    }),
+  { error },
   dark ? 'dark' : '',
   className
   )
@@ -132,6 +137,7 @@ const SelectableCard = ({
                 <Card.Body
                     dark={dark}
                     padding="sm"
+                    status={error ? 'negative' : null}
                 >
                   {text || children}
                 </Card.Body>
