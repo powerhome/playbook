@@ -1,0 +1,35 @@
+br
+= pb_rails("title", props: { text: title, tag: "h4", size: 4 })
+
+- if defined?(usage) && usage.present?
+  = pb_rails("body", props: {"tag": "p"})
+    usage
+
+br
+
+scss class="myClass":
+  $height: 100px;
+  $width: 70%;
+  $position: absolute;
+  div.two { background: #C1CDD6; height: $height; width: $width; position: $position; margin-left: 50px; }
+  div.one { background: #FFFFFF; height: $height; width: $width; position: $position;}
+  div.three { background: #919EAB; height: $height; width: $width; margin-left: 100px; position: $position; }
+  div.z-index-example code { position: $position; right: 10px; bottom: 5px; }
+
+
+= pb_rails("card", props: { classname: "one z-index-example", max_width: "lg", z_index: "10" }) do
+  code z_index_10
+br
+br
+br
+= pb_rails("card", props: { classname: "two z-index-example",  max_width: "lg", z_index: "9" }) do
+  code z_index_9
+br
+br
+br
+= pb_rails("card", props: { classname: "three z-index-example",  max_width: "lg", z_index: "8" }) do
+  code z_index_8
+br
+br
+br
+br
