@@ -12,9 +12,9 @@ scss class="myClass":
   $width: 33%;
   $position: absolute;
 
-  div.one1 { height: $height; width: $width; position: $position; }
-  div.two2 { height: $height; width: $width; margin-left: 50px; position: $position; }
-  div.three3 { height: $height; width: $width; margin-left: 100px; position: $position; }
+  div.one { height: $height; width: $width; position: $position; }
+  div.two { height: $height; width: $width; margin-left: 50px; position: $position; }
+  div.three { height: $height; width: $width; margin-left: 100px; position: $position; }
   div.four { height: $height; width: $width; margin-left: 150px; position: $position; }
   div.five { height: $height; width: $width; margin-left: 200px; position: $position; }
   div.six { height: $height; width: $width; margin-left: 250px; position: $position; }
@@ -25,17 +25,17 @@ scss class="myClass":
 
   div.z-index-example code { position: $position; right: 10px; bottom: 5px; }
 
-= pb_rails("card", props: { classname: "one1 z-index-example", max_width: "lg", z_index: "10" }) do
+= pb_rails("card", props: { classname: "one z-index-example", max_width: "lg", z_index: "10" }) do
   code z_index_10
 br
 br
 br
-= pb_rails("card", props: { classname: "two2 z-index-example",  max_width: "lg", z_index: "9" }) do
+= pb_rails("card", props: { classname: "two z-index-example",  max_width: "lg", z_index: "9" }) do
   code z_index_9
 br
 br
 br
-= pb_rails("card", props: { classname: "three3 z-index-example",  max_width: "lg", z_index: "8" }) do
+= pb_rails("card", props: { classname: "three z-index-example",  max_width: "lg", z_index: "8" }) do
   code z_index_8
 br
 br
