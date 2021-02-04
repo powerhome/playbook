@@ -38,7 +38,7 @@ module Playbook
       end
 
       def overflow_class
-        overflow  ? " overflow_#{overflow}" : ""
+        overflow ? " overflow_#{overflow}" : ""
       end
 
       def shrink_class

@@ -12,7 +12,7 @@ RSpec.describe Playbook::PbFlex::FlexItem do
                       .with_values("0","1","2","3","4","5","6","7","8","9","10","11","12","none") }
   it { is_expected.to define_enum_prop(:overflow)
                       .with_default(nil)
-                      .with_values("auto","hidden", "initial", "inherit", "scroll", "visible", nil) }
+                      .with_values("auto", "hidden", "initial", "inherit", "scroll", "visible", nil) }
   it { is_expected.to define_boolean_prop(:shrink).with_default(false) }
   it { is_expected.to define_boolean_prop(:grow).with_default(false) }
   it { is_expected.to define_string_prop(:fixed_size)}
