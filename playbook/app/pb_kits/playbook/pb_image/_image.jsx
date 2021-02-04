@@ -48,13 +48,8 @@ const Image = (props: ImageProps) => {
           className={classes}
           data-src={url}
           id={id}
-<<<<<<< HEAD
-          onError={handleOnError}
-          rounded={+rounded}
-=======
           onError={onError}
-          rounded={rounded}
->>>>>>> Expose onerror in image instead
+          rounded={+rounded}
           src={url}
       />
     </div>
