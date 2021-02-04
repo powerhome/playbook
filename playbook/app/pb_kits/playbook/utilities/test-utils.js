@@ -1,7 +1,7 @@
 /* This file provides the base for tests */
 
 import React from 'react'
-import { render } from '@testing-library/react'
+import { render, screen } from '@testing-library/react'
 import '@testing-library/jest-dom/extend-expect'
 
 /*
@@ -26,4 +26,5 @@ export { customRender as render }
 export const renderKit = (Kit, props = {}, newProps = {}) => {
   const kitProps = { ...props, ...newProps }
   render(<Kit {...kitProps} />)
+  return screen.getByTestId(kitProps.data.testid)
 }
