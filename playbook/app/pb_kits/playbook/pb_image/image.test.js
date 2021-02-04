@@ -1,4 +1,4 @@
-import { renderKit } from '../utilities/test-utils'
+import { ensureAccessible, renderKit } from '../utilities/test-utils'
 
 import Image from './_image'
 
@@ -8,6 +8,10 @@ const props = {
   size: null,
   url: 'https://unsplash.it/500/400/?image=634',
 }
+
+it('Should be accessible', async () => {
+  ensureAccessible(Image, props)
+})
 
 test('alt attribute', () => {
   const kit = renderKit(Image, props)

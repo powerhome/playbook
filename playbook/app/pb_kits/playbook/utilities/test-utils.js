@@ -4,6 +4,10 @@ import React from 'react'
 import { render, screen } from '@testing-library/react'
 import '@testing-library/jest-dom/extend-expect'
 
+// Accessbility
+import { axe, toHaveNoViolations } from 'jest-axe'
+expect.extend(toHaveNoViolations)
+
 /*
   We can complicate this wrapper as needed.
   https://testing-library.com/docs/react-testing-library/setup
@@ -27,4 +31,11 @@ export const renderKit = (Kit, props = {}, newProps = {}) => {
   const kitProps = { ...props, ...newProps }
   render(<Kit {...kitProps} />)
   return screen.getByTestId(kitProps.data.testid)
+}
+
+export const ensureAccessible = async (Kit, props = {}, newProps = {}) => {
+  const kitProps = { ...props, ...newProps }
+  const render = () => <Kit {...kitProps} />
+  const html = render()
+  expect(await axe(html)).toHaveNoViolations()
 }
