@@ -1,6 +1,6 @@
 /* @flow */
 
-import React from 'react'
+import React, { useState } from 'react'
 import classnames from 'classnames'
 import { map } from 'lodash'
 
@@ -38,7 +38,9 @@ const Avatar = (props: AvatarProps) => {
 
   const initials = name && firstTwoInitials(name)
   dataProps['data-initials'] = initials
-  const handleError = (e) => e.target.classList.add('failed-to-load')
+
+  const [error, setError] = useState(false)
+  const handleError = () => setError(true)
 
   return (
     <div
@@ -51,7 +53,7 @@ const Avatar = (props: AvatarProps) => {
           className="avatar_wrapper"
           data-initials={initials}
       >
-        <If condition={imageUrl}>
+        <If condition={imageUrl && !error}>
           <Image
               alt={name}
               onError={handleError}
