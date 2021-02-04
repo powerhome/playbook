@@ -30,6 +30,9 @@ PbTable.start()
 import PbTextarea from './pb_textarea'
 PbTextarea.start()
 
+import PbAvatar from './pb_avatar'
+PbAvatar.start()
+
 import 'flatpickr'
 
 import 'trix'
