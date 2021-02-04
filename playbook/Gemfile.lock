@@ -41,6 +41,20 @@ GEM
     addressable (2.7.0)
       public_suffix (>= 2.0.2, < 5.0)
     ast (2.4.0)
+    axe-core-api (4.1.0)
+      capybara
+      dumb_delegator
+      selenium-webdriver
+      virtus
+      watir
+    axe-core-rspec (4.1.0)
+      axe-core-api
+      dumb_delegator
+      virtus
+    axiom-types (0.1.1)
+      descendants_tracker (~> 0.0.4)
+      ice_nine (~> 0.11.0)
+      thread_safe (~> 0.3, >= 0.3.1)
     babel-source (5.8.35)
     babel-transpiler (0.7.0)
       babel-source (>= 4.0, < 6)
@@ -54,14 +68,28 @@ GEM
       debug_inspector (>= 0.0.1)
     builder (3.2.4)
     byebug (11.0.0)
+    capybara (3.35.3)
+      addressable
+      mini_mime (>= 0.1.3)
+      nokogiri (~> 1.8)
+      rack (>= 1.6.0)
+      rack-test (>= 0.6.3)
+      regexp_parser (>= 1.5, < 3.0)
+      xpath (~> 3.2)
     childprocess (1.0.1)
       rake (< 13.0)
     coderay (1.1.2)
+    coercible (1.0.0)
+      descendants_tracker (~> 0.0.1)
     concurrent-ruby (1.1.7)
     connection_pool (2.2.3)
     crass (1.0.6)
     debug_inspector (0.0.3)
+    descendants_tracker (0.0.4)
+      thread_safe (~> 0.3, >= 0.3.1)
     diff-lcs (1.3)
+    dumb_delegator (1.0.0)
+    equalizer (0.0.11)
     erubi (1.9.0)
     execjs (2.7.0)
     faraday (1.3.0)
@@ -84,6 +112,7 @@ GEM
       railties (>= 5.0)
     i18n (1.8.5)
       concurrent-ruby (~> 1.0)
+    ice_nine (0.11.2)
     iniparse (1.5.0)
     jaro_winkler (1.5.4)
     listen (3.2.1)
@@ -93,6 +122,7 @@ GEM
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
     method_source (1.0.0)
+    mini_mime (1.0.2)
     mini_portile2 (2.5.0)
     minitest (5.14.2)
     multi_json (1.15.0)
@@ -140,6 +170,7 @@ GEM
       railties (>= 3.2)
       tilt
     redcarpet (3.5.1)
+    regexp_parser (1.8.2)
     retriable (3.1.2)
     rexml (3.2.4)
     rouge (3.15.0)
@@ -170,6 +201,7 @@ GEM
       unicode-display_width (>= 1.4.0, < 2.0)
     ruby-progressbar (1.10.1)
     ruby2_keywords (0.0.4)
+    rubyzip (2.3.0)
     sass (3.7.4)
       sass-listen (~> 4.0.0)
     sass-listen (4.0.0)
@@ -188,6 +220,9 @@ GEM
     sawyer (0.8.2)
       addressable (>= 2.3.5)
       faraday (> 0.8, < 2.0)
+    selenium-webdriver (3.142.7)
+      childprocess (>= 0.5, < 4.0)
+      rubyzip (>= 1.2.2)
     simple_form (5.0.2)
       actionpack (>= 5.0)
       activemodel (>= 5.0)
@@ -221,6 +256,14 @@ GEM
     uglifier (4.1.20)
       execjs (>= 0.3.0, < 3)
     unicode-display_width (1.7.0)
+    virtus (1.0.5)
+      axiom-types (~> 0.1)
+      coercible (~> 1.0)
+      descendants_tracker (~> 0.0, >= 0.0.3)
+      equalizer (~> 0.0, >= 0.0.9)
+    watir (6.17.0)
+      regexp_parser (~> 1.2)
+      selenium-webdriver (~> 3.6)
     web-console (3.7.0)
       actionview (>= 5.0)
       activemodel (>= 5.0)
@@ -232,11 +275,14 @@ GEM
       railties (>= 4.2)
     webpacker-react (0.3.2)
       webpacker
+    xpath (3.2.0)
+      nokogiri (~> 1.8)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
+  axe-core-rspec (= 4.1.0)
   better_errors (= 2.5.1)
   binding_of_caller (= 0.8.0)
   byebug (= 11.0.0)
@@ -246,6 +292,7 @@ DEPENDENCIES
   rainbow (= 2.2.2)
   rspec-rails (~> 3.8.0)
   rubocop (= 0.81.0)
+  selenium-webdriver (= 3.142.7)
   simple_form (>= 5.0.1, < 6.0.0)
   spring (= 2.0.2)
   spring-watcher-listen (= 2.0.1)
