@@ -1,8 +1,8 @@
 
 
-## [7.16.0](https://github.com/powerhome/playbook/tree/HEAD)
+## [7.16.0](https://github.com/powerhome/playbook/tree/7.16.0)
 
-[Full Changelog](https://github.com/powerhome/playbook/compare/7.15.1...HEAD)
+[Full Changelog](https://github.com/powerhome/playbook/compare/7.15.1...7.16.0)
 
 **Kit Enhancements:**
 
@@ -87,7 +87,7 @@
 - Remove custom webpacker instance [\#1239](https://github.com/powerhome/playbook/pull/1239) ([xjunior](https://github.com/xjunior))
 
 
-## [7.12.1](https://github.com/powerhome/playbook/tree/HEAD)
+## [7.12.1](https://github.com/powerhome/playbook/tree/7.12.1)
 
 [Full Changelog](https://github.com/powerhome/playbook/compare/7.12.0...HEAD)
 
@@ -96,7 +96,7 @@
 - Table prop passing hotfix [\#1304](https://github.com/powerhome/playbook/pull/1304) ([bh247484](https://github.com/bh247484))
 - Fixed build related issue triggered only in Nitro
 
-## [7.12.0](https://github.com/powerhome/playbook/tree/HEAD)
+## [7.12.0](https://github.com/powerhome/playbook/tree/7.12.0)
 
 [Full Changelog](https://github.com/powerhome/playbook/compare/7.12.0...HEAD)
 
