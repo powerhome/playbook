@@ -49,7 +49,7 @@ const DateRangeInline = (props: DateRangeInlineProps) => {
       <If condition={icon}>
         <Body
             color="light"
-            key={startDate.toString()}
+            key={Math.random()}
             tag="span"
         >
           <Icon

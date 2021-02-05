@@ -32,9 +32,7 @@ const FixedConfirmationToast = (props: FixedConfirmationToastProps) => {
   const icon = iconMap[status]
 
   const handleClick = () => {
-    if (closeable) {
-      toggleToast(false)
-    }
+    toggleToast(!closeable)
   }
 
   return (
