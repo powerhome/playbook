@@ -3,7 +3,7 @@ import React, { forwardRef, useEffect, useRef, useState } from 'react'
 import classnames from 'classnames'
 import { Body, Caption, Flex, Icon, PbReactPopover, ProgressSimple } from '../'
 import { globalProps } from '../utilities/globalProps.js'
-import passwordStrengthCalculation, { configOwasp }  from '../utilities/passwordStrength.js'
+import { owaspPasswordScore, zxcvbnPasswordScore }  from '../utilities/passwordStrength.js'
 
 import {
   buildAriaProps,
@@ -21,8 +21,10 @@ type TextInputProps = {
   name: string,
   label: string,
   onChange: (String) => void,
-  passwordCalc: (String) => { score: integer, feedback?: { suggestions?: array<string>, warning?: string} },
-  passwordOptions: {},
+  passwordOptions: {
+    calculate?: (String) => { score: integer, feedback?: { suggestions?: array<string>, warning?: string} },
+    config?: {}
+  },
   placeholder: string,
   required?: boolean,
   type: string,
@@ -46,8 +48,7 @@ const TextInput = (
     name,
     label,
     onChange = () => {},
-    passwordCalc,
-    passwordOptions,
+    passwordOptions = {},
     placeholder,
     required,
     type = 'text',
@@ -66,28 +67,17 @@ const TextInput = (
     className,
   ])
 
-  const [configuredOwasp, setConfiguredOwasp] = useState({})
+  const [passwordScorer, setPasswordScorer] = useState({ test: () => ({}) })
   useEffect(() => {
     if (variant === 'passwordStrengthOwasp') {
-      setConfiguredOwasp(configOwasp(passwordOptions))
+      setPasswordScorer(owaspPasswordScore(passwordOptions))
+    } else if (variant && variant?.includes('password')) {
+      setPasswordScorer(zxcvbnPasswordScore(passwordOptions))
     }
   }, [])
 
-  // Ref getting set to {} somehow from popper, not sure
-  if (ref && !(Object.prototype.hasOwnProperty.call(ref, 'current'))) ref = null
-
-  // Only needed until a package is decided on, just to help with examples for now
-  const chooseCalculation = () => {
-    if (!(variant && value.length > 0)) return {}
-
-    if (variant === 'passwordStrengthOwasp') {
-      return configuredOwasp.test(value)
-    }
-
-    return passwordStrengthCalculation(value, passwordCalc)
-  }
-
-  const passwordCalculationResult = chooseCalculation()
+  // Im sure this can be optimized... useMemo?
+  const passwordCalculationResult = passwordScorer.test(value)
 
   // Results from zxcvbn
   const {
@@ -99,6 +89,7 @@ const TextInput = (
   } = passwordCalculationResult
 
   // results from Owasp
+  // these are separate just for easy of seeing which is which
   const {
     strong: passwordStrong,
     optionalTestErrors: optionalPasswordErrors,
@@ -106,7 +97,8 @@ const TextInput = (
     isPassphrase,
   } = passwordCalculationResult
 
-  const passwordDisplayStrength = passwordStrength + 1
+  // ID used to determine which is focused to show popover,
+  // probably a better way to show, plus it doesnt unfocus
   const inputID = id || `password-input-${Math.floor(Math.random() * 1000)}`
   ref = ref || useRef(false)
 
@@ -164,14 +156,14 @@ const TextInput = (
                   max="5"
                   min="0"
                   optimum="3"
-                  value={passwordDisplayStrength}
+                  value={passwordStrength}
               />
             </When>
             <When condition={variant === 'passwordStrength2'}>
               <>
                 <ProgressSimple
                     max={5}
-                    value={passwordDisplayStrength}
+                    value={passwordStrength}
                     variant={passwordColorVariant}
                 />
                 <Caption>{passwordText}</Caption>
@@ -181,7 +173,7 @@ const TextInput = (
               <>
                 <ProgressSimple
                     max={5}
-                    value={passwordDisplayStrength}
+                    value={passwordStrength}
                     variant={passwordColorVariant}
                 />
                 <Flex>
@@ -190,7 +182,7 @@ const TextInput = (
                       offset
                       placement="bottom"
                       reference={infoIcon}
-                      show={passwordDisplayStrength && inputID === document.activeElement.id}
+                      show={passwordStrength && inputID === document.activeElement.id}
                   >
                     <Caption maxWidth="sm">
                       {
@@ -208,12 +200,12 @@ const TextInput = (
                   padding="xs"
                   placement="bottom"
                   referenceElement={ref.current}
-                  show={passwordDisplayStrength && inputID === document.activeElement.id}
+                  show={passwordStrength && inputID === document.activeElement.id}
               >
                 <Caption>{'Strength: ' + passwordText}</Caption>
                 <ProgressSimple
                     max={5}
-                    value={passwordDisplayStrength}
+                    value={passwordStrength}
                     variant={passwordColorVariant}
                 />
                 <If condition={passwordWarning}>
