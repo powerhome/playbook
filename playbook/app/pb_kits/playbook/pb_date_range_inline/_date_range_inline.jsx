@@ -49,6 +49,7 @@ const DateRangeInline = (props: DateRangeInlineProps) => {
       <If condition={icon}>
         <Body
             color="light"
+            key={startDate.toString()}
             tag="span"
         >
           <Icon
