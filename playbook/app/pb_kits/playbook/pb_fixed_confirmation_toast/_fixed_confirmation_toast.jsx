@@ -31,11 +31,15 @@ const FixedConfirmationToast = (props: FixedConfirmationToastProps) => {
   )
   const icon = iconMap[status]
 
+  const handleClick = () => {
+    toggleToast(!closeable)
+  }
+
   return (
     <If condition={showToast}>
       <div
           className={css}
-          onClick={closeable && (() => toggleToast(false))}
+          onClick={handleClick}
       >
         <If condition={icon}>
           <Icon

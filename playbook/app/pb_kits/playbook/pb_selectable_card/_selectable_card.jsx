@@ -129,6 +129,7 @@ const SelectableCard = ({
                         checked={checked}
                         disabled={disabled}
                         onClick={handleClick}
+                        readOnly
                         type={inputType}
                     />
                   </Input>

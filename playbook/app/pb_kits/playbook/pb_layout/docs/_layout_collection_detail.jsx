@@ -3,7 +3,7 @@ import { Card, Layout, Nav, NavItem } from '../../'
 const Cards = ({ n }) => {
   const cards = []
   for (let i = 0; i < n; ++i) {
-    cards.push(<Card>{'Card content'}</Card>)
+    cards.push(<Card key={i}>{'Card content'}</Card>)
   }
   return (cards)
 }
