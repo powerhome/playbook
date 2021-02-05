@@ -1,9 +1,9 @@
 /* @flow */
-import React, { forwardRef, useRef } from 'react'
+import React, { forwardRef, useEffect, useRef, useState } from 'react'
 import classnames from 'classnames'
 import { Body, Caption, Flex, Icon, PbReactPopover, ProgressSimple } from '../'
 import { globalProps } from '../utilities/globalProps.js'
-import passwordStrengthCalculation from '../utilities/passwordStrength.js'
+import passwordStrengthCalculation, { configOwasp }  from '../utilities/passwordStrength.js'
 
 import {
   buildAriaProps,
@@ -22,6 +22,7 @@ type TextInputProps = {
   label: string,
   onChange: (String) => void,
   passwordCalc: (String) => { score: integer, feedback?: { suggestions?: array<string>, warning?: string} },
+  passwordOptions: {},
   placeholder: string,
   required?: boolean,
   type: string,
@@ -46,6 +47,7 @@ const TextInput = (
     label,
     onChange = () => {},
     passwordCalc,
+    passwordOptions,
     placeholder,
     required,
     type = 'text',
@@ -64,13 +66,59 @@ const TextInput = (
     className,
   ])
 
+  const [configuredOwasp, setConfiguredOwasp] = useState({})
+  useEffect(() => {
+    if (variant === 'passwordStrengthOwasp') {
+      setConfiguredOwasp(configOwasp(passwordOptions))
+    }
+  }, [])
+
   // Ref getting set to {} somehow from popper, not sure
   if (ref && !(Object.prototype.hasOwnProperty.call(ref, 'current'))) ref = null
 
-  const { colorVariant: passwordColorVariant, text: passwordText, strength: passwordStrength, suggestions: passwordSuggestions = [], warning: passwordWarning } = (variant && value.length > 0 ? passwordStrengthCalculation(value, passwordCalc) : {})
+  // Only needed until a package is decided on, just to help with examples for now
+  const chooseCalculation = () => {
+    if (!(variant && value.length > 0)) return {}
+
+    if (variant === 'passwordStrengthOwasp') {
+      return configuredOwasp.test(value)
+    }
+
+    return passwordStrengthCalculation(value, passwordCalc)
+  }
+
+  const passwordCalculationResult = chooseCalculation()
+
+  // Results from zxcvbn
+  const {
+    colorVariant: passwordColorVariant,
+    strength: passwordStrength,
+    text: passwordText,
+    suggestions: passwordSuggestions = [],
+    warning: passwordWarning,
+  } = passwordCalculationResult
+
+  // results from Owasp
+  const {
+    strong: passwordStrong,
+    optionalTestErrors: optionalPasswordErrors,
+    requiredTestErrors: requiredPasswordErrors,
+    isPassphrase,
+  } = passwordCalculationResult
+
   const passwordDisplayStrength = passwordStrength + 1
   const inputID = id || `password-input-${Math.floor(Math.random() * 1000)}`
   ref = ref || useRef(false)
+
+  const strongPasswordOrPhrase = () => {
+    if (passwordStrong && isPassphrase) {
+      return 'This is a strong passphrase.'
+    } else if (passwordStrong) {
+      return 'This is a strong password.'
+    } else {
+      return 'This is not a strong password'
+    }
+  }
 
   const infoIcon = (
     <Icon
@@ -182,6 +230,39 @@ const TextInput = (
                   {
                     passwordSuggestions.map((suggestion, i) => (
                       <p key={i}>{suggestion}</p>
+                    )
+                  )}
+                </Body>
+              </PbReactPopover>
+            </When>
+            <When condition={variant === 'passwordStrengthOwasp'}>
+              <PbReactPopover
+                  padding="xs"
+                  placement="bottom"
+                  referenceElement={ref.current}
+                  show={value.length > 0 && inputID === document.activeElement.id}
+              >
+                <Caption>
+                  {strongPasswordOrPhrase()}
+                </Caption>
+                <Body
+                    maxWidth="xs"
+                    status="negative"
+                >
+                  {
+                    requiredPasswordErrors?.map((error, i) => (
+                      <p key={i}>{error}</p>
+                    )
+                    )}
+
+                </Body>
+                <Body
+                    color="light"
+                    maxWidth="xs"
+                >
+                  {
+                    optionalPasswordErrors?.map((error, i) => (
+                      <p key={i}>{error}</p>
                     )
                   )}
                 </Body>
