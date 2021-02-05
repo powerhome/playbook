@@ -46,6 +46,18 @@ const TextInputPasswordStrength = (props) => {
     return { feedback: { warning, suggestions }, score }
   }
 
+  const customPasswordOptions = {
+    config: {
+      minLength: 8,
+    },
+    requiredTests: [
+      (password) => !(/abc/.test(password)) ? 'Password must include \'abc\'' : null,
+    ],
+    optionalTests: [
+      (password) => password.length % 2 === 1 ? 'Password should have an even number of characters' : null,
+    ],
+  }
+
   return (
     <div>
       <TextInput
@@ -92,12 +104,31 @@ const TextInputPasswordStrength = (props) => {
       />
       <TextInput
           id="5th-variant-custom"
-          label="Password"
+          label="Password custom str function, zxcvbn style score"
           onChange={(e) => setValue(e.target.value)}
           passwordCalc={customStrengthCalc}
           placeholder="Enter a password"
           value={value}
           variant="passwordStrength4"
+          {...props}
+      />
+      <TextInput
+          id="6th-variant"
+          label="Password with Owasp"
+          onChange={(e) => setValue(e.target.value)}
+          placeholder="Enter a password"
+          value={value}
+          variant="passwordStrengthOwasp"
+          {...props}
+      />
+      <TextInput
+          id="7th-variant"
+          label="Password with Owasp with custom tests"
+          onChange={(e) => setValue(e.target.value)}
+          passwordOptions={customPasswordOptions}
+          placeholder="Enter a password"
+          value={value}
+          variant="passwordStrengthOwasp"
           {...props}
       />
     </div>
