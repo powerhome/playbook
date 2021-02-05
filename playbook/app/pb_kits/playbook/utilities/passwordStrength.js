@@ -1,7 +1,8 @@
 import zxcvbn from 'zxcvbn'
 
-const passwordStrength = (value) => {
-  const result = zxcvbn(value)
+const passwordStrength = (value, calculate = zxcvbn) => {
+  calculate = calculate || zxcvbn
+  const result = calculate(value)
 
   const SCORE_MAP = {
     0: {
@@ -28,6 +29,7 @@ const passwordStrength = (value) => {
 
   const resultObj = {
     suggestions: result.feedback.suggestions,
+    warning: result.feedback.warning,
     strength: result.score,
     ...SCORE_MAP[result.score],
   }

@@ -21,6 +21,7 @@ type TextInputProps = {
   name: string,
   label: string,
   onChange: (String) => void,
+  passwordCalc: (String) => { score: integer, feedback?: { suggestions?: array<string>, warning?: string} },
   placeholder: string,
   required?: boolean,
   type: string,
@@ -44,12 +45,14 @@ const TextInput = (
     name,
     label,
     onChange = () => {},
+    passwordCalc,
     placeholder,
     required,
     type = 'text',
     value = '',
     variant = null,
     children = null,
+    ...rest
   } = props
 
   const ariaProps = buildAriaProps(aria)
@@ -64,7 +67,7 @@ const TextInput = (
   // Ref getting set to {} somehow from popper, not sure
   if (ref && !(Object.prototype.hasOwnProperty.call(ref, 'current'))) ref = null
 
-  const { colorVariant: passwordColorVariant, text: passwordText, strength: passwordStrength, suggestions: passwordSuggestions = [] } = (variant && value.length > 0 ? passwordStrengthCalculation(value) : {})
+  const { colorVariant: passwordColorVariant, text: passwordText, strength: passwordStrength, suggestions: passwordSuggestions = [], warning: passwordWarning } = (variant && value.length > 0 ? passwordStrengthCalculation(value, passwordCalc) : {})
   const passwordDisplayStrength = passwordStrength + 1
   const inputID = id || `password-input-${Math.floor(Math.random() * 1000)}`
   ref = ref || useRef(false)
@@ -92,7 +95,7 @@ const TextInput = (
           {children}
           <Else />
           <input
-              {...props}
+              {...rest}
               className="text_input"
               disabled={disabled}
               id={inputID}
@@ -165,6 +168,13 @@ const TextInput = (
                     value={passwordDisplayStrength}
                     variant={passwordColorVariant}
                 />
+                <If condition={passwordWarning}>
+                  <Body
+                      maxWidth="xs"
+                      status="negative"
+                      text={passwordWarning}
+                  />
+                </If>
                 <Body
                     color="light"
                     maxWidth="xs"
