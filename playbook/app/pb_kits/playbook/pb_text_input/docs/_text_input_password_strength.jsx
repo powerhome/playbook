@@ -106,7 +106,7 @@ const TextInputPasswordStrength = (props) => {
           id="5th-variant-custom"
           label="Password custom str function, zxcvbn style score"
           onChange={(e) => setValue(e.target.value)}
-          passwordCalc={customStrengthCalc}
+          passwordOptions={{ calculate: customStrengthCalc }}
           placeholder="Enter a password"
           value={value}
           variant="passwordStrength4"
@@ -125,7 +125,7 @@ const TextInputPasswordStrength = (props) => {
           id="7th-variant"
           label="Password with Owasp with custom tests"
           onChange={(e) => setValue(e.target.value)}
-          passwordOptions={customPasswordOptions}
+          passwordOptions={{ owaspConfig: customPasswordOptions }}
           placeholder="Enter a password"
           value={value}
           variant="passwordStrengthOwasp"

@@ -15,9 +15,8 @@ import owasp from 'owasp-password-strength-test'
 // If we intend to offer box kits, or more kits in the future,
 //   maybe return an object with a test() function that returns the results
 //   to match the functionality of Oswap and make the code to handle different libs more similar
-const passwordStrength = (value, calculate = zxcvbn) => {
-  calculate = calculate || zxcvbn
-  const result = calculate(value)
+export const zxcvbnPasswordScore = (options) => {
+  const { calculate = zxcvbn } = options
 
   const SCORE_MAP = {
     0: {
@@ -38,21 +37,28 @@ const passwordStrength = (value, calculate = zxcvbn) => {
     },
     4: {
       text: 'Very Strong',
-      colorVariant: 'postive',
+      colorVariant: 'positive',
     },
   }
 
-  const resultObj = {
-    suggestions: result.feedback.suggestions,
-    warning: result.feedback.warning,
-    strength: result.score,
-    ...SCORE_MAP[result.score],
-  }
+  return {
+    test: (password = '') => {
+      if (password.length === 0) return {}
+      const result = calculate(password)
 
-  return resultObj
+      return (
+        {
+          suggestions: result.feedback.suggestions,
+          warning: result.feedback.warning,
+          strength: result.score + 1,
+          ...SCORE_MAP[result.score],
+        }
+      )
+    },
+  }
 }
 
-export const configOwasp = (options = {}) => {
+export const owaspPasswordScore = (options = {}) => {
   // Most of this functionality is to enable different inputs on the same page to use different settings
   // Otherwise, the same owasp object is used and configs can overwrite eachother
   // It seems unlikely that we'd have two password fields on the same page, but not impossible
@@ -86,7 +92,8 @@ export const configOwasp = (options = {}) => {
     minOptionalTestsToPass: 4,
   }
 
-  const { config = {}, optionalTests = [], requiredTests = [] } = options
+  const { owaspConfig = {} } = options
+  const { config = {}, optionalTests = [], requiredTests = [] } = owaspConfig
   owaspCopy.config(Object.assign({}, defaultConfig, config))
 
   // Include the default tests here, plus any additional passed by the user of the kit
@@ -99,6 +106,8 @@ export const configOwasp = (options = {}) => {
   //   so we have to change the global settings for the built in tests
   //   to respect the configs associated with this particular input
   owaspCopy.test = (password) => {
+    if (password.length === 0) return {}
+
     const outOfBoxConfig = Object.assign({}, owasp.configs)
     owasp.config(owaspCopy.configs)
     const result = owasp.test.call(owaspCopy, password)
@@ -109,5 +118,3 @@ export const configOwasp = (options = {}) => {
 
   return owaspCopy
 }
-
-export default passwordStrength
