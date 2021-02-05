@@ -1,5 +1,5 @@
 /* @flow */
-import React, { forwardRef } from 'react'
+import React, { forwardRef, useRef } from 'react'
 import classnames from 'classnames'
 import { Body, Caption, Flex, Icon, PbReactPopover, ProgressSimple } from '../'
 import { globalProps } from '../utilities/globalProps.js'
@@ -67,6 +67,7 @@ const TextInput = (
   const { colorVariant: passwordColorVariant, text: passwordText, strength: passwordStrength, suggestions: passwordSuggestions = [] } = (variant && value.length > 0 ? passwordStrengthCalculation(value) : {})
   const passwordDisplayStrength = passwordStrength + 1
   const inputID = id || `password-input-${Math.floor(Math.random() * 1000)}`
+  ref = ref || useRef(false)
 
   const infoIcon = (
     <Icon
@@ -74,38 +75,6 @@ const TextInput = (
         size="sm"
     />
   )
-
-  if (variant === 'passwordStrength4') {
-    const refProps = Object.assign({}, props, { variant: null })
-    const reference = (
-      <TextInput
-          {...refProps}
-      />
-    )
-
-    return (
-      <PbReactPopover
-          padding="xs"
-          placement="bottom"
-          reference={reference}
-          show={passwordDisplayStrength && inputID === document.activeElement.id}
-      >
-        <Caption>{'Strength: ' + passwordText}</Caption>
-        <ProgressSimple
-            max={5}
-            value={passwordDisplayStrength}
-            variant={passwordColorVariant}
-        />
-        <Caption>
-          {
-            passwordSuggestions.map((suggestion, i) => (
-              <p key={i}>{suggestion}</p>
-            )
-          )}
-        </Caption>
-      </PbReactPopover>
-    )
-  }
 
   return (
     <div
@@ -172,7 +141,7 @@ const TextInput = (
                       reference={infoIcon}
                       show={passwordDisplayStrength && inputID === document.activeElement.id}
                   >
-                    <Caption>
+                    <Caption maxWidth="sm">
                       {
                         passwordSuggestions.map((suggestion, i) => (
                           <p key={i}>{suggestion}</p>
@@ -182,6 +151,31 @@ const TextInput = (
                   </PbReactPopover>
                 </Flex>
               </>
+            </When>
+            <When condition={variant === 'passwordStrength4'}>
+              <PbReactPopover
+                  padding="xs"
+                  placement="bottom"
+                  referenceElement={ref.current}
+                  show={passwordDisplayStrength && inputID === document.activeElement.id}
+              >
+                <Caption>{'Strength: ' + passwordText}</Caption>
+                <ProgressSimple
+                    max={5}
+                    value={passwordDisplayStrength}
+                    variant={passwordColorVariant}
+                />
+                <Body
+                    color="light"
+                    maxWidth="xs"
+                >
+                  {
+                    passwordSuggestions.map((suggestion, i) => (
+                      <p key={i}>{suggestion}</p>
+                    )
+                  )}
+                </Body>
+              </PbReactPopover>
             </When>
           </Choose>
           <If condition={error}>
