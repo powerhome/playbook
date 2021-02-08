@@ -11,6 +11,7 @@ type ImageProps = {
   className?: string,
   data?: object,
   id?: string,
+  onError?: () => {},
   size: "xs" | "sm" | "md" | "lg" | "xl",
   rounded?: boolean,
   url: string,
@@ -23,6 +24,7 @@ const Image = (props: ImageProps) => {
     className,
     data = {},
     id,
+    onError = null,
     rounded = false,
     size = '',
     url = '',
@@ -48,6 +50,8 @@ const Image = (props: ImageProps) => {
           className={classes}
           data-src={url}
           id={id}
+          onError={onError}
+          rounded={+rounded}
           src={url}
       />
     </div>

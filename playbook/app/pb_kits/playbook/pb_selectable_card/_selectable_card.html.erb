@@ -24,7 +24,7 @@
             <% end %>
           <% end %>
           <div class="separator"></div>
-          <%= pb_rails("card/card_body", props: { padding: "sm" }) do %>
+          <%= pb_rails("card/card_body", props: { padding: "sm", status: object.status }) do %>
             <% if object.children.nil? %>
               <%= pb_rails("body", props: { text: object.text }) %>
             <% else %>
