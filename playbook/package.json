@@ -90,6 +90,7 @@
     "flow-bin": "0.137.0",
     "flow-runtime": "0.14.0",
     "highcharts": "7.2.2",
+    "jest-axe": "^4.1.0",
     "jsx-control-statements": "^3.2.8",
     "lazysizes": "^5.2.2",
     "lodash": "^4.17.19",
