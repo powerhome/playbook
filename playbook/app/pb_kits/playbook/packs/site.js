@@ -1,5 +1,3 @@
-import runAxe from "../utilities/accessibility"
-
 window.addEventListener('DOMContentLoaded', function() {
   document.querySelectorAll('[data-toggle]').forEach(function(toggle) {
     toggle.addEventListener('click', function(e) {
@@ -20,6 +18,6 @@ window.addEventListener('DOMContentLoaded', function() {
   })
 
   if (process.env.NODE_ENV === 'development') {
-    runAxe()
+    require("../utilities/accessibility").runAxe()
   }
 })

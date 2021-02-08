@@ -2,7 +2,7 @@
 
 import axe from 'axe-core'
 
-export default function runAxe(include = '.pb--kit-example', ignore = ['.pb--kit-example :first-child']) {
+export const runAxe = function(include = '.pb--kit-example', ignore = ['.pb--kit-example :first-child']) {
   axe
     .run({
       include: [include],
