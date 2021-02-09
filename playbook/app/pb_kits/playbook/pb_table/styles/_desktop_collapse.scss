@@ -1,4 +1,5 @@
 @import "../../tokens/border_radius";
+@import "../../tokens/positioning";
 @import "../../pb_caption/caption_mixin";
 
 @media only screen and (max-width: $screen-xl-min) {
@@ -11,9 +12,9 @@
 
       thead {
         tr {
-          left: -9999px;
+          left: $offscreen;
           position: absolute;
-          top: -9999px;
+          top: $offscreen;
 
           th {
             display: block;
