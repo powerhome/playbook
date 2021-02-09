@@ -54,7 +54,7 @@ const StarRating = ({
     >
       <If condition={!hideRating}>
         <div className="pb_star_rating_number">
-            {rating}
+          {rating}
         </div>
       </If>
 
@@ -62,10 +62,10 @@ const StarRating = ({
         <div className="pb_star_rating_highlight">
           {starCount().map((_, index) => (
             <Icon
+                className={index === 5 ? null : "react-preterminal-star"}
                 fixedWidth
                 icon="star"
                 key={index}
-                className={index === 5 ? null : "react-preterminal-star"}
             />
           ))}
 
@@ -79,24 +79,24 @@ const StarRating = ({
 
         <div className="pb_star_rating_base">
           <Icon
+              className="react-preterminal-star"
               fixedWidth
               icon="star"
-              className="react-preterminal-star"
           />
           <Icon
+              className="react-preterminal-star"
               fixedWidth
               icon="star"
-              className="react-preterminal-star"
           />
           <Icon
+              className="react-preterminal-star"
               fixedWidth
               icon="star"
-              className="react-preterminal-star"
           />
           <Icon
+              className="react-preterminal-star"
               fixedWidth
               icon="star"
-              className="react-preterminal-star"
           />
           <Icon
               fixedWidth
