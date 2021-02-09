@@ -28,7 +28,6 @@ const TableAlignmentShiftData = (props) => {
           </td>
         </tr>
       </tbody>
-      <br />
       <thead>
         <tr>
           <th>{'Espresso Drinks'}</th>

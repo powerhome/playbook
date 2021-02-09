@@ -10,6 +10,7 @@ RSpec.describe Playbook::PbImage::Image do
   it { is_expected.to define_prop(:alt) }
   it { is_expected.to define_prop(:url) }
   it { is_expected.to define_prop(:size) }
+  it { is_expected.to define_prop(:on_error) }
   it { is_expected.to define_boolean_prop(:rounded).with_default(false) }
 
   describe "#classname" do
