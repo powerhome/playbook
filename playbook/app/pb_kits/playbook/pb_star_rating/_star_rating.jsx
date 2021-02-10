@@ -92,7 +92,7 @@ const StarRating = ({
           <Icon
               fixedWidth={false}
               icon="star"
-          /> 
+          />
           <Icon
               fixedWidth={false}
               icon="star"
