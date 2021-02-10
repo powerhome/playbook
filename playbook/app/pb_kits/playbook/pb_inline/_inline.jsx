@@ -2,7 +2,7 @@
 
 /* @flow */
 
-import React, { useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import classnames from 'classnames'
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
 import { globalProps } from '../utilities/globalProps.js'
@@ -30,14 +30,18 @@ const Inline = (props: InlineProps) => {
   const classes = classnames(buildCss('pb_inline'), globalProps(props), className)
 
   const [editing, setEditing] = useState(false)
-  const [inputText, setInputText] = useState("placeholder")
 
   const TitleClickHandler = () => {
     setEditing(!editing)
-    console.log(!editing)
   }
 
-  console.log(textKit.props.text)
+  useEffect(()=> {
+    if(editing) {
+      modifiedInput.ref.current.focus()
+    }
+  })
+
+  const modifiedInput = React.cloneElement(textInput, { onBlur: ()=> { setEditing(!editing) }, ref: useRef(null) })
 
   return (
     <div
@@ -47,11 +51,10 @@ const Inline = (props: InlineProps) => {
         id={id}
     >
       <If condition={editing}>
-        {textInput}
+        {modifiedInput}
       </If>
       <If condition={!editing}>
         <div
-            // className="pb_title_kit_4"
             onClick={()=> TitleClickHandler()}
         >
           {textKit}

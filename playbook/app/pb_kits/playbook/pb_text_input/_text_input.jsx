@@ -41,6 +41,7 @@ const TextInput = (
     id,
     name,
     label,
+    onBlur = () => {},
     onChange = () => {},
     placeholder,
     required,
@@ -79,6 +80,7 @@ const TextInput = (
               disabled={disabled}
               id={id}
               name={name}
+              onBlur={onBlur}
               onChange={onChange}
               placeholder={placeholder}
               ref={ref}
