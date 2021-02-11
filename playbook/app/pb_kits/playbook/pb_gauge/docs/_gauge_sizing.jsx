@@ -9,6 +9,8 @@ const GaugeSizing = (props) => (
     >
       <FlexItem
           fixedSize="400px"
+          overflow="hidden"
+          shrink
           {...props}
       >
         <Gauge
@@ -19,6 +21,8 @@ const GaugeSizing = (props) => (
       </FlexItem>
       <FlexItem
           fixedSize="300px"
+          overflow="hidden"
+          shrink
           {...props}
       >
         <Gauge
@@ -29,6 +33,8 @@ const GaugeSizing = (props) => (
       </FlexItem>
       <FlexItem
           fixedSize="200px"
+          overflow="hidden"
+          shrink
           {...props}
       >
         <Gauge
@@ -37,7 +43,12 @@ const GaugeSizing = (props) => (
             {...props}
         />
       </FlexItem>
-      <FlexItem fixedSize="125px">
+      <FlexItem
+          fixedSize="125px"
+          overflow="hidden"
+          shrink
+          {...props}
+      >
         <Gauge
             chartData={[ { name: 'Point 4', value: 25 } ]}
             id="gauge-sizing1"

@@ -25,8 +25,40 @@ $card-border-radius: $border_rad_lightest;
       @media screen and (max-width: $screen-md-min) {
         grid-template-columns: repeat(2, 1fr);
       }
-       @media screen and (max-width: $screen-xs-min) {
+      @media screen and (max-width: $screen-xs-min) {
         grid-template-columns: repeat(1, 1fr);
+      }
+    }
+  }
+
+  &[class*=_masonry] {
+    div.layout_body {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      grid-gap: 10px;
+      grid-auto-rows: minmax(180px, auto);
+      grid-auto-flow: dense;
+      padding: 10px;
+
+      .size_md {
+        grid-column-end: span 2;
+        grid-row-end: span 2;
+      }
+
+      .size_lg {
+        grid-column-end: span 3;
+        grid-row-end: span 4;
+      }
+
+      @media screen and (max-width: $screen-lg-min) {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      div.layout_item, * {
+        display: flex;
+        img {
+          max-width: 100%;
+        }
       }
     }
   }

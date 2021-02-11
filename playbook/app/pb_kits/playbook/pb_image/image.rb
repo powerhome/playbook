@@ -4,6 +4,8 @@ module Playbook
   module PbImage
     class Image < Playbook::KitBase
       prop :alt
+      prop :on_error, type: Playbook::Props::String,
+                      default: nil
       prop :rounded, type: Playbook::Props::Boolean,
                      default: false
       prop :size, type: Playbook::Props::Enum,
