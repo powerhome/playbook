@@ -3,7 +3,6 @@
 
 [class^=pb_card_kit] {
   @include pb_card;
-  overflow: auto;
 
   &[class*=_selected] {
     @include pb_card_selected;

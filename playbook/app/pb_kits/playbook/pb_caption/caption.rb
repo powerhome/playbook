@@ -2,11 +2,7 @@
 
 module Playbook
   module PbCaption
-    class Caption
-      include Playbook::Props
-
-      partial "pb_caption/caption"
-
+    class Caption < Playbook::KitBase
       prop :size, type: Playbook::Props::Enum,
                   values: %w[xs sm md base lg xl],
                   default: "md"

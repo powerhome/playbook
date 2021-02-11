@@ -1,5 +1,5 @@
 examples:
-  
+
   rails:
   - gauge_default: Default
   - gauge_disable_animation: Disable Animation
@@ -9,16 +9,15 @@ examples:
   - gauge_min_max: Min Max Labels
   - gauge_sizing: Sizing
   - gauge_height: Height
-  
-  
+
+
   react:
   - gauge_default: Default
   - gauge_disable_animation: Disable Animation
-  - gauge_title: Title 
+  - gauge_title: Title
   - gauge_units: Units
   - gauge_full_circle: Full Circle
   - gauge_min_max: Min Max Labels
   - gauge_sizing: Sizing
   - gauge_height: Height
   - gauge_live_data: Live Data
-  

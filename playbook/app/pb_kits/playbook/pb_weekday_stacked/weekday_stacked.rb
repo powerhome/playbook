@@ -2,20 +2,14 @@
 
 module Playbook
   module PbWeekdayStacked
-    class WeekdayStacked
-      include ActionView::Helpers::TagHelper
-      include ActionView::Context
-      include Playbook::Props
-
-      partial "pb_weekday_stacked/weekday_stacked"
-
+    class WeekdayStacked < Playbook::KitBase
       prop :align, type: Playbook::Props::Enum,
                    values: %w[left center right],
                    default: "left"
 
       prop :date, type: Playbook::Props::Date,
                   default: ::Date.current
-                  
+
       prop :compact, type: Playbook::Props::Boolean,
                      default: false
 

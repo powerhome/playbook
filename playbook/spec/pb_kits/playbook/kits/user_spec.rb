@@ -5,8 +5,6 @@ require_relative "../../../../app/pb_kits/playbook/pb_user/user"
 RSpec.describe Playbook::PbUser::User do
   subject { Playbook::PbUser::User }
 
-  it { is_expected.to define_partial }
-
   it { is_expected.to define_enum_prop(:align)
                       .with_default("left")
                       .with_values("left", "center", "right")}

@@ -5,8 +5,6 @@ require_relative "../../../../app/pb_kits/playbook/pb_stat_value/stat_value"
 RSpec.describe Playbook::PbStatValue::StatValue do
   subject { Playbook::PbStatValue::StatValue }
 
-  it { is_expected.to define_partial }
-
   it { is_expected.to define_prop(:unit) }
   it { is_expected.to define_prop(:value)
                   .of_type(Playbook::Props::Number) }

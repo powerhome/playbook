@@ -53,13 +53,13 @@ const DateTime = (props: DateTimeProps) => {
           vertical="baseline"
       >
         <FormattedDate
-            datetime={datetime}
             showDayOfWeek={showDayOfWeek}
             size={size}
             timeZone={timeZone}
+            value={datetime}
         />
         <Time
-            date={new Date()}
+            date={datetime}
             marginLeft="sm"
             showIcon={showIcon}
             size={size}

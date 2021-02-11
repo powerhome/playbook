@@ -7,10 +7,10 @@ const RadioDefault = () => {
   return (
     <div>
       <Radio
-          defaultChecked
           label="Power"
           name="Group2"
           ref={ref}
+          tabIndex={0}
           value="Power"
       />
       <br />

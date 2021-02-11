@@ -5,8 +5,6 @@ require_relative "../../../../app/pb_kits/playbook/pb_badge/badge"
 RSpec.describe Playbook::PbBadge::Badge do
   subject { Playbook::PbBadge::Badge }
 
-  it { is_expected.to define_partial }
-
   it { is_expected.to define_prop(:text) }
   it { is_expected.to define_boolean_prop(:dark).with_default(false) }
   it { is_expected.to define_boolean_prop(:rounded).with_default(false) }

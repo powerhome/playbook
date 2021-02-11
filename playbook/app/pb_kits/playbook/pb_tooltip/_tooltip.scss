@@ -27,7 +27,7 @@ $tooltip_shadow: rgba(60, 106, 172, 0.18);
     display: block;
     opacity: 0;
     position: absolute;
-    left: -9999px;
+    left: $offscreen;
     top: 0;
     animation-name: fadeIn;
     animation-duration: 150ms;

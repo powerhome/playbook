@@ -57,6 +57,16 @@ module Playbook
       end.compact.join(" ")
     end
 
+    def z_index_props
+      selected_index_props = z_index_options.keys.select { |sk| try(sk) }
+      return nil unless selected_index_props.present?
+
+      selected_index_props.map do |k|
+        index_value = send(k)
+        "z_index_#{index_value}" if z_index_values.include? index_value
+      end.compact.join(" ")
+    end
+
     def generate_classname(*name_parts, separator: "_")
       [
         name_parts.compact.join(separator),
@@ -64,6 +74,7 @@ module Playbook
         spacing_props,
         dark_props,
         max_width_props,
+        z_index_props,
       ].compact.join(" ")
     end
 
@@ -78,6 +89,8 @@ module Playbook
     private :values, :values=
 
     included do
+      class_attribute :props, default: {}
+
       prop :id
       prop :data, type: Playbook::Props::Hash, default: {}
       prop :classname
@@ -99,6 +112,7 @@ module Playbook
       prop :padding_x
       prop :padding_y
       prop :dark, type: Playbook::Props::Boolean, default: false
+      prop :z_index
     end
 
     def spacing_options
@@ -130,23 +144,28 @@ module Playbook
       %w[sm md lg xl]
     end
 
+    def z_index_options
+      {
+        z_index: "z-index",
+      }
+    end
+
+    def z_index_values
+      %w[1 2 3 4 5 6 7 8 9 10]
+    end
+
     def spacing_values
       %w[none xs sm md lg xl]
     end
 
     class_methods do
-      def props
-        @props
-      end
-
       def clear_props
-        @props.keys.each { |prop_name| remove_method(prop_name) }
-        @props.clear
+        props.keys.each { |prop_name| remove_method(prop_name) }
+        props.clear
       end
 
       def prop(name, type: Playbook::Props::String, **options)
-        @props ||= {}
-        @props[name] = type.new(options.merge(name: name, kit: self))
+        self.props = self.props.merge(name => type.new(options.merge(name: name, kit: self)))
 
         define_method(name) { prop(name) }
       end

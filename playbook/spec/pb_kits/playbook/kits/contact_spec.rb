@@ -5,8 +5,6 @@ require_relative "../../../../app/pb_kits/playbook/pb_contact/contact"
 RSpec.describe Playbook::PbContact::Contact do
   subject { Playbook::PbContact::Contact }
 
-  it { is_expected.to define_partial }
-
   it { is_expected.to define_prop(:contact_type) }
   it { is_expected.to define_prop(:contact_value) }
   it { is_expected.to define_prop(:contact_detail) }

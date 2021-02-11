@@ -5,8 +5,6 @@ require_relative "../../../../app/pb_kits/playbook/pb_date/date"
 RSpec.describe Playbook::PbDate::Date do
   subject { Playbook::PbDate::Date }
 
-  it { is_expected.to define_partial }
-
   it { is_expected.to define_enum_prop(:alignment)
       .with_values("left", "center", "right")
       .with_default("left") }

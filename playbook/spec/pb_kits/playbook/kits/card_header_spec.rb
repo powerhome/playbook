@@ -5,10 +5,8 @@ require_relative "../../../../app/pb_kits/playbook/pb_card/card_header"
 RSpec.describe Playbook::PbCard::CardHeader do
   subject { Playbook::PbCard::CardHeader }
 
-  it { is_expected.to define_partial }
   it { is_expected.to define_string_prop(:header_color)
                       .with_default('category_1') }
-  
 
   describe "#classname" do
     it "returns namespaced class name", :aggregate_failures do

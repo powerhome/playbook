@@ -2,11 +2,7 @@
 
 module Playbook
   module PbLoadingInline
-    class LoadingInline
-      include Playbook::Props
-
-      partial "pb_loading_inline/loading_inline"
-
+    class LoadingInline < Playbook::KitBase
       prop :align, type: Playbook::Props::Enum,
                    values: %w[left center right],
                    default: "left"

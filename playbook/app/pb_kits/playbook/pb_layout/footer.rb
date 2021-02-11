@@ -2,11 +2,7 @@
 
 module Playbook
   module PbLayout
-    class Footer
-      include Playbook::Props
-
-      partial "pb_layout/footer"
-
+    class Footer < Playbook::KitBase
       prop :tag, type: Playbook::Props::Enum,
                  values: %w[ul li span div],
                  default: "div"

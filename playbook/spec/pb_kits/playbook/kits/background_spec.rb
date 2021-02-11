@@ -5,7 +5,6 @@ require_relative "../../../../app/pb_kits/playbook/pb_background/background"
 RSpec.describe Playbook::PbBackground::Background do
   subject { Playbook::PbBackground::Background }
 
-  it { is_expected.to define_partial }
   it { is_expected.to define_prop(:image_url) }
   it { is_expected.to define_enum_prop(:tag)
                       .with_default("div")

@@ -2,13 +2,11 @@
 
 module Playbook
   module PbAvatarActionButton
-    class AvatarActionButton
-      include Playbook::Props
-
+    class AvatarActionButton < Playbook::KitBase
       prop :action, type: Playbook::Props::String,
                     default: "add"
       prop :image_url, type: Playbook::Props::String
-      prop :link_url, type: Playbook::Props::String
+      prop :link_url, type: Playbook::Props::String, default: "#"
       prop :tooltip_text, type: Playbook::Props::String
       prop :tooltip_id, type: Playbook::Props::String
       prop :name, type: Playbook::Props::String,
@@ -19,8 +17,6 @@ module Playbook
       prop :placement, type: Playbook::Props::Enum,
                        values: %w[bottom_left bottom_right top_left top_right],
                        default: "bottom_left"
-
-      partial "pb_avatar_action_button/avatar_action_button"
 
       def classname
         generate_classname("pb_avatar_action_button_kit", action, size, placement)

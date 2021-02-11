@@ -5,7 +5,6 @@ require_relative "../../../../app/pb_kits/playbook/pb_progress_pills/progress_pi
 RSpec.describe Playbook::PbProgressPills::ProgressPills do
   subject { Playbook::PbProgressPills::ProgressPills }
 
-  it { is_expected.to define_partial }
   it { is_expected.to define_boolean_prop(:dark)
                       .with_default(false) }
   it { is_expected.to define_prop(:steps)

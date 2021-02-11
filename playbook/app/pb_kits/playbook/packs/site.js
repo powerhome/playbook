@@ -15,4 +15,8 @@ window.addEventListener('DOMContentLoaded', ()=> {
     openToggle.addEventListener('click', ()=> toggleLambda(codeDrawer))
     closeToggle.addEventListener('click', ()=> toggleLambda(codeDrawer))
   })
+
+  if (process.env.NODE_ENV === 'development') {
+    require("../utilities/accessibility").runAxe()
+  }
 })

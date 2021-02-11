@@ -2,11 +2,7 @@
 
 module Playbook
   module PbLabelValue
-    class LabelValue
-      include Playbook::Props
-
-      partial "pb_label_value/label_value"
-
+    class LabelValue < Playbook::KitBase
       prop :label, required: true
       prop :value
       prop :variant, type: Playbook::Props::Enum,
@@ -17,7 +13,6 @@ module Playbook
       prop :title
       prop :date
       prop :active, type: Playbook::Props::Boolean, default: false
-
 
       def classname
         generate_classname("pb_label_value_kit", variant_class)

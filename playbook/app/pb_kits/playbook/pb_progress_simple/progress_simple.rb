@@ -2,12 +2,8 @@
 
 module Playbook
   module PbProgressSimple
-    class ProgressSimple
-      include Playbook::Props
-
+    class ProgressSimple < Playbook::KitBase
       class ProgressError < StandardError; end
-
-      partial "pb_progress_simple/progress_simple"
 
       prop :align, type: Playbook::Props::Enum,
                    values: %w[left center right],

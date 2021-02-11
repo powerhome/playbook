@@ -26,6 +26,8 @@ $z_layers: (
   "default": 0
 );
 
+$offscreen: -9999px;
+
 @function z_index_for($layer) {
   @if not map-has-key($z_layers, $layer) {
     @error "No layer found for `#{$layer}` in $z_layers map.";

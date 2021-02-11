@@ -2,9 +2,7 @@
 
 module Playbook
   module PbSelectableList
-    class SelectableListItem
-      include Playbook::Props
-
+    class SelectableListItem < Playbook::KitBase
       prop :tabindex
 
       prop :checked, type: Playbook::Props::Boolean,
@@ -17,8 +15,6 @@ module Playbook
                      default: "radio"
       prop :input_options, type: Playbook::Props::Hash,
                            default: {}
-
-      partial "pb_selectable_list/selectable_list_item"
 
       def classname
         generate_classname("pb_selectable_list_item_kit")
