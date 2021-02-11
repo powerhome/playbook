@@ -2,11 +2,7 @@
 
 module Playbook
   module PbTime
-    class Time
-      include Playbook::Props
-
-      partial "pb_time/time"
-
+    class Time < Playbook::KitBase
       prop :time, required: true
       prop :size, type: Playbook::Props::Enum,
                   values: %w[xs sm md lg],

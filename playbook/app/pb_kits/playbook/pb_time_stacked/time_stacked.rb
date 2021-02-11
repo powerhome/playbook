@@ -2,11 +2,7 @@
 
 module Playbook
   module PbTimeStacked
-    class TimeStacked
-      include Playbook::Props
-
-      partial "pb_time_stacked/time_stacked"
-
+    class TimeStacked < Playbook::KitBase
       prop :time, required: true
       prop :align, type: Playbook::Props::Enum,
                    values: %w[left center right],

@@ -2,11 +2,7 @@
 
 module Playbook
   module PbTimeline
-    class Timeline
-      include Playbook::Props
-
-      partial "pb_timeline/timeline"
-
+    class Timeline < Playbook::KitBase
       prop :orientation, type: Playbook::Props::Enum,
                          values: %w[vertical horizontal],
                          default: "horizontal"

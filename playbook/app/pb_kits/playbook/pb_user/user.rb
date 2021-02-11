@@ -2,11 +2,7 @@
 
 module Playbook
   module PbUser
-    class User
-      include Playbook::Props
-
-      partial "pb_user/user"
-
+    class User < Playbook::KitBase
       prop :align, type: Playbook::Props::Enum,
                    values: %w[left center right],
                    default: "left"

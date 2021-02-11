@@ -5,8 +5,6 @@ require_relative "../../../../app/pb_kits/playbook/pb_person_contact/person_cont
 RSpec.describe Playbook::PbPersonContact::PersonContact do
   subject { Playbook::PbPersonContact::PersonContact }
 
-  it { is_expected.to define_partial }
-
   it { is_expected.to define_prop(:first_name) }
   it { is_expected.to define_prop(:last_name) }
   it { is_expected.to define_prop(:contacts)

@@ -4,13 +4,7 @@ require "action_view"
 
 module Playbook
   module PbSelect
-    class Select
-      include ActionView::Helpers::FormTagHelper
-      include ActionView::Context
-      include Playbook::Props
-
-      partial "pb_select/select"
-
+    class Select < Playbook::KitBase
       prop :blank_selection
       prop :disabled, type: Playbook::Props::Boolean, default: false
       prop :error

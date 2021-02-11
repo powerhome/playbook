@@ -2,11 +2,7 @@
 
 module Playbook
   module PbTitle
-    class Title
-      include Playbook::Props
-
-      partial "pb_title/title"
-
+    class Title < Playbook::KitBase
       prop :size, type: Playbook::Props::Enum,
                   values: [1, 2, 3, 4],
                   default: 3

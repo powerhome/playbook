@@ -2,11 +2,7 @@
 
 module Playbook
   module PbIconValue
-    class IconValue
-      include Playbook::Props
-
-      partial "pb_icon_value/icon_value"
-
+    class IconValue < Playbook::KitBase
       prop :text, required: true
       prop :icon, required: true
       prop :align, type: Playbook::Props::Enum,

@@ -2,12 +2,7 @@
 
 module Playbook
   module PbIconStatValue
-    class IconStatValue
-      include Playbook::Props
-      include ActionView::Helpers::NumberHelper
-
-      partial "pb_icon_stat_value/icon_stat_value"
-
+    class IconStatValue < Playbook::KitBase
       prop :icon, required: true
 
       prop :size, type: Playbook::Props::Enum,

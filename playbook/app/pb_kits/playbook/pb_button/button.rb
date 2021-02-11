@@ -2,11 +2,7 @@
 
 module Playbook
   module PbButton
-    class Button
-      include Playbook::Props
-
-      partial "pb_button/button"
-
+    class Button < Playbook::KitBase
       prop :disabled, type: Playbook::Props::Boolean,
                       default: false
       prop :full_width, type: Playbook::Props::Boolean,

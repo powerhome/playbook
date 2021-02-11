@@ -2,11 +2,7 @@
 
 module Playbook
   module PbProgressPills
-    class ProgressPills
-      include Playbook::Props
-
-      partial "pb_progress_pills/progress_pills"
-
+    class ProgressPills < Playbook::KitBase
       prop :active, type: Playbook::Props::Number,
                     default: 0
       prop :value

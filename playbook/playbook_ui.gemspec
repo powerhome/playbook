@@ -37,6 +37,7 @@ Gem::Specification.new do |s|
   s.add_dependency "sassc-rails", "1.3.0"
   s.add_dependency "slim-rails", "3.2.0"
   s.add_dependency "sprockets-rails", "2.3.3"
+  s.add_dependency "view_component", "2.23.2"
   s.add_dependency "webpacker", "4.2.2"
   s.add_dependency "webpacker-react", "~> 0.3.2"
 

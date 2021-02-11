@@ -5,8 +5,6 @@ require_relative "../../../../app/pb_kits/playbook/pb_icon_circle/icon_circle"
 RSpec.describe Playbook::PbIconCircle::IconCircle do
   subject { Playbook::PbIconCircle::IconCircle }
 
-  it { is_expected.to define_partial }
-
   it { is_expected.to define_prop(:icon).that_is_required }
   it { is_expected.to define_enum_prop(:size)
                       .with_default("md")

@@ -2,13 +2,7 @@
 
 module Playbook
   module PbDateRangeInline
-    class DateRangeInline
-      include ActionView::Helpers::TagHelper
-      include ActionView::Context
-      include Playbook::Props
-
-      partial "pb_date_range_inline/date_range_inline"
-
+    class DateRangeInline < Playbook::KitBase
       prop :end_date, type: Playbook::Props::Date, required: true
       prop :start_date, type: Playbook::Props::Date, required: true
       prop :icon, required: false

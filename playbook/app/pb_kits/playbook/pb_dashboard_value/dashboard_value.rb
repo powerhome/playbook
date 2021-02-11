@@ -2,11 +2,7 @@
 
 module Playbook
   module PbDashboardValue
-    class DashboardValue
-      include Playbook::Props
-
-      partial "pb_dashboard_value/dashboard_value"
-
+    class DashboardValue < Playbook::KitBase
       prop :align, type: Playbook::Props::Enum,
                    values: %w[left center right],
                    default: "left"

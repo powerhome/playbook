@@ -2,11 +2,7 @@
 
 module Playbook
   module PbLegend
-    class Legend
-      include Playbook::Props
-
-      partial "pb_legend/legend"
-
+    class Legend < Playbook::KitBase
       prop :color, type: Playbook::Props::Enum,
                    values: (1..7).map { |n| "data_#{n}" },
                    default: "data_1"

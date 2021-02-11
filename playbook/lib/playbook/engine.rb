@@ -10,6 +10,8 @@ module Playbook
       g.test_framework :rspec
     end
 
+    config.view_component.render_monkey_patch_enabled = false
+
     config.assets.paths ||= []
     config.assets.paths << "#{Gem.loaded_specs['playbook_ui'].full_gem_path}/fonts"
     config.assets.paths << "#{Gem.loaded_specs['playbook_ui'].full_gem_path}/app/pb_kits/playbook/pb_*"

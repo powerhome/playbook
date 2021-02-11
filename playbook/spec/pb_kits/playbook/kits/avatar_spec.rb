@@ -5,7 +5,6 @@ require_relative "../../../../app/pb_kits/playbook/pb_avatar/avatar"
 RSpec.describe Playbook::PbAvatar::Avatar do
   subject { Playbook::PbAvatar::Avatar }
 
-  it { is_expected.to define_partial }
   it { is_expected.to define_prop(:status) }
   it { is_expected.to define_prop(:image_url) }
   it { is_expected.to define_prop(:name)

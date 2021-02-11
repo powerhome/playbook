@@ -2,11 +2,7 @@
 
 module Playbook
   module PbDateTime
-    class DateTime
-      include Playbook::Props
-
-      partial "pb_date_time/date_time"
-
+    class DateTime < Playbook::KitBase
       prop :date, type: Playbook::Props::Date,
                   default: ::DateTime.current
       prop :align, type: Playbook::Props::Enum,

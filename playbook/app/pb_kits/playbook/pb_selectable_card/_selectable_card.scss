@@ -14,7 +14,6 @@ $pb_selectable_card_border: 2px;
   display: block;
   margin-bottom: 0;
 
-
   > label {
     > .buffer {
       display: inherit;
@@ -114,6 +113,16 @@ $pb_selectable_card_border: 2px;
     .separator {
       background: $bg_dark;
     }
+
+    &.error {
+      > label {
+        border-color: $error_dark;
+      }
+      .separator{
+        background: $error_dark;
+        width: 2px;
+      }
+    }
   }
 
   .separator {
@@ -126,5 +135,15 @@ $pb_selectable_card_border: 2px;
     margin-top: -1px;
     margin-bottom: -1px;
     background: $border_light;
+  }
+
+  &.error {
+    > label {
+      border-color: $error;
+    }
+    .separator {
+      background: $error;
+      width: 2px;
+    }
   }
 }

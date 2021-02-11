@@ -5,8 +5,6 @@ require_relative "../../../../app/pb_kits/playbook/pb_dashboard_value/dashboard_
 RSpec.describe Playbook::PbDashboardValue::DashboardValue do
   subject { Playbook::PbDashboardValue::DashboardValue }
 
-  it { is_expected.to define_partial }
-
   it { is_expected.to define_enum_prop(:align)
                       .with_values("left", "center", "right")
                       .with_default("left") }

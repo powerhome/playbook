@@ -19,7 +19,7 @@ type LayoutPropTypes = {
   size?: "xs" | "sm" | "md" | "base" | "lg" | "xl",
   variant?: "light" | "dark" | "gradient",
   transparent?: boolean,
-  layout?: "sidebar" | "collection" | "kanban" | "content",
+  layout?: "sidebar" | "collection" | "kanban" | "content" | "masonry",
 }
 
 type LayoutSideProps = {
@@ -30,6 +30,12 @@ type LayoutSideProps = {
 type LayoutBodyProps = {
   children: array<React.ReactNode> | React.ReactNode,
   className?: string,
+}
+
+type LayoutItemProps = {
+  children: array<React.ReactNode> | React.ReactNode,
+  className?: string,
+  size?: "sm" | "md" | "lg"
 }
 
 type LayoutHeaderProps = {
@@ -57,6 +63,17 @@ const Body = (props: LayoutBodyProps) => {
   const { children, className } = props
   return (
     <div className={classnames('layout_body', globalProps(props), className)}>
+      {children}
+    </div>
+  )
+}
+
+// Item component
+const Item = (props: LayoutItemProps) => {
+  const { children, className, size = 'sm' } = props
+  const sizeClass = `size_${size}`
+  return (
+    <div className={classnames('layout_item', sizeClass, globalProps(props), className)}>
       {children}
     </div>
   )
@@ -159,6 +176,7 @@ const Layout = (props: LayoutPropTypes) => {
 
 Layout.Side = Side
 Layout.Body = Body
+Layout.Item = Item
 Layout.Header = Header
 Layout.Footer = Footer
 

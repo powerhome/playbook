@@ -2,11 +2,7 @@
 
 module Playbook
   module PbTitleDetail
-    class TitleDetail
-      include Playbook::Props
-
-      partial "pb_title_detail/title_detail"
-
+    class TitleDetail < Playbook::KitBase
       prop :align, type: Playbook::Props::Enum,
                    values: %w[left center right],
                    default: "left"

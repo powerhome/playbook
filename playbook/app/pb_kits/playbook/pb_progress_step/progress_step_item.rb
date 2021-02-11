@@ -2,11 +2,7 @@
 
 module Playbook
   module PbProgressStep
-    class ProgressStepItem
-      include Playbook::Props
-
-      partial "pb_progress_step/progress_step_item"
-
+    class ProgressStepItem < Playbook::KitBase
       prop :status, type: Playbook::Props::Enum,
                     values: %w[complete active inactive hidden],
                     default: "inactive"

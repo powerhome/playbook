@@ -2,11 +2,7 @@
 
 module Playbook
   module PbMultipleUsers
-    class MultipleUsers
-      include Playbook::Props
-
-      partial "pb_multiple_users/multiple_users"
-
+    class MultipleUsers < Playbook::KitBase
       prop :reverse, type: Playbook::Props::Boolean, default: false
       prop :users, type: Playbook::Props::HashArray, required: true
 

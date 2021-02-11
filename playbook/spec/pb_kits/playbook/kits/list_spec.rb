@@ -5,7 +5,6 @@ require_relative "../../../../app/pb_kits/playbook/pb_list/list"
 RSpec.describe Playbook::PbList::List do
   subject { Playbook::PbList::List }
 
-  it { is_expected.to define_partial }
   it { is_expected.to define_boolean_prop(:borderless)
                       .with_default(false) }
   it { is_expected.to define_boolean_prop(:dark)
