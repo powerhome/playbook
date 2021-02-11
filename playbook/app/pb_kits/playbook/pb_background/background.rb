@@ -2,11 +2,7 @@
 
 module Playbook
   module PbBackground
-    class Background
-      include Playbook::Props
-
-      partial "pb_background/background"
-
+    class Background < Playbook::KitBase
       prop :background_color, type: Playbook::Props::Enum,
                               values: %w[gradient dark light white],
                               default: "light"

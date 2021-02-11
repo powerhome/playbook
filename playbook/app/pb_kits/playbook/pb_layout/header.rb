@@ -2,11 +2,7 @@
 
 module Playbook
   module PbLayout
-    class Header
-      include Playbook::Props
-
-      partial "pb_layout/header"
-
+    class Header < Playbook::KitBase
       prop :tag, type: Playbook::Props::Enum,
                  values: %w[ul li span div],
                  default: "div"

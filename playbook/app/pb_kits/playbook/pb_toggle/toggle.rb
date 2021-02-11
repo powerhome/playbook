@@ -4,13 +4,7 @@ require "action_view"
 
 module Playbook
   module PbToggle
-    class Toggle
-      include ActionView::Helpers::FormTagHelper
-      include ActionView::Context
-      include Playbook::Props
-
-      partial "pb_toggle/toggle"
-
+    class Toggle < Playbook::KitBase
       prop :input_options, type: Playbook::Props::Hash,
                            default: {}
 

@@ -5,7 +5,6 @@ require_relative "../../../../app/pb_kits/playbook/pb_timeline/timeline"
 RSpec.describe Playbook::PbTimeline::Timeline do
   subject { Playbook::PbTimeline::Timeline }
 
-  it { is_expected.to define_partial }
   it { is_expected.to define_enum_prop(:orientation)
                       .with_default("horizontal")
                       .with_values("vertical", "horizontal") }

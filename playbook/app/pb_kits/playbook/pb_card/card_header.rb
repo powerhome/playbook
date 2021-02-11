@@ -2,11 +2,7 @@
 
 module Playbook
     module PbCard
-      class CardHeader
-        include Playbook::Props
-  
-        partial "pb_card/child_kits/card_header"
-  
+      class CardHeader < Playbook::KitBase
         prop :header_color, type: Playbook::Props::String,
                             default: "category_1"
 
@@ -16,4 +12,3 @@ module Playbook
       end
     end
   end
-  

@@ -2,11 +2,7 @@
 
 module Playbook
   module PbSource
-    class Source
-      include Playbook::Props
-
-      partial "pb_source/source"
-
+    class Source < Playbook::KitBase
       prop :hide_icon, type: Playbook::Props::Boolean,
                        default: false
       prop :source, type: Playbook::Props::String

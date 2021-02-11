@@ -2,13 +2,7 @@
 
 module Playbook
   module PbCheckbox
-    class Checkbox
-      include Playbook::Props
-      include ActionView::Helpers::FormTagHelper
-      include ActionView::Context
-
-      partial "pb_checkbox/checkbox"
-
+    class Checkbox < Playbook::KitBase
       prop :error, type: Playbook::Props::Boolean, default: false
       prop :checked, type: Playbook::Props::Boolean, default: false
       prop :text

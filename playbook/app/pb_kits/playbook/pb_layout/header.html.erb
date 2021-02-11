@@ -1,0 +1,6 @@
+<%= content_tag(object.tag,
+    id: object.id,
+    data: object.data,
+    class: object.classname) do %>
+  <%= content.presence %>
+<% end %>

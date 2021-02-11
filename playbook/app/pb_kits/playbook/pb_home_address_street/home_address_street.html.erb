@@ -1,0 +1,6 @@
+<%= content_tag(:div,
+    id: object.id,
+    data: object.data,
+    class: object.classname) do %>
+  <%= render file: object.emphasis_partial, locals: { object: object } %>
+<% end %>

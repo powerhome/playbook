@@ -2,11 +2,7 @@
 
 module Playbook
   module PbPill
-    class Pill
-      include Playbook::Props
-
-      partial "pb_pill/pill"
-
+    class Pill < Playbook::KitBase
       prop :text
       prop :variant, type: Playbook::Props::Enum,
                      values: %w[success warning error info neutral primary],

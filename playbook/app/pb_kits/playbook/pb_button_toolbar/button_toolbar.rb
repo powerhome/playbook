@@ -2,11 +2,7 @@
 
 module Playbook
   module PbButtonToolbar
-    class ButtonToolbar
-      include Playbook::Props
-
-      partial "pb_button_toolbar/button_toolbar"
-
+    class ButtonToolbar < Playbook::KitBase
       prop :connected, type: Playbook::Props::Boolean, default: false
 
       prop :orientation, type: Playbook::Props::Enum,

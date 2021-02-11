@@ -2,11 +2,7 @@
 
 module Playbook
   module PbAvatar
-    class Avatar
-      include Playbook::Props
-
-      partial "pb_avatar/avatar"
-
+    class Avatar < Playbook::KitBase
       prop :image_url
       prop :name, default: ""
       prop :size, type: Playbook::Props::Enum,

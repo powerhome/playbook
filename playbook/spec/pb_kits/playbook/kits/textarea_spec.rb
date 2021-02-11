@@ -5,11 +5,8 @@ require_relative "../../../../app/pb_kits/playbook/pb_textarea/textarea"
 RSpec.describe Playbook::PbTextarea::Textarea do
   subject { Playbook::PbTextarea::Textarea }
 
-  it { is_expected.to define_partial }
-
   it { is_expected.to define_string_prop(:error) }
   it { is_expected.to define_string_prop(:label) }
-  it { is_expected.to define_string_prop(:object) }
   it { is_expected.to define_string_prop(:method) }
   it { is_expected.to define_string_prop(:placeholder) }
   it { is_expected.to define_string_prop(:value) }

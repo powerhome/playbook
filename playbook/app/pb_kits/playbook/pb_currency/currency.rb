@@ -2,12 +2,7 @@
 
 module Playbook
   module PbCurrency
-    class Currency
-      include ActionView::Context
-      include Playbook::Props
-
-      partial "pb_currency/currency"
-
+    class Currency < Playbook::KitBase
       prop :align, type: Playbook::Props::Enum,
                    values: %w[left center right],
                    default: "left"

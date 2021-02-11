@@ -5,8 +5,6 @@ require_relative "../../../../app/pb_kits/playbook/pb_flex/flex"
 RSpec.describe Playbook::PbFlex::Flex do
   subject { Playbook::PbFlex::Flex }
 
-  it { is_expected.to define_partial }
-
   it { is_expected.to define_enum_prop(:horizontal)
                       .with_default("left")
                       .with_values("left", "center", "right", "stretch", "none") }

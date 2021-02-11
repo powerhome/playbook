@@ -89,6 +89,8 @@ module Playbook
     private :values, :values=
 
     included do
+      class_attribute :props, default: {}
+
       prop :id
       prop :data, type: Playbook::Props::Hash, default: {}
       prop :classname
@@ -157,18 +159,13 @@ module Playbook
     end
 
     class_methods do
-      def props
-        @props
-      end
-
       def clear_props
-        @props.keys.each { |prop_name| remove_method(prop_name) }
-        @props.clear
+        props.keys.each { |prop_name| remove_method(prop_name) }
+        props.clear
       end
 
       def prop(name, type: Playbook::Props::String, **options)
-        @props ||= {}
-        @props[name] = type.new(options.merge(name: name, kit: self))
+        self.props = self.props.merge(name => type.new(options.merge(name: name, kit: self)))
 
         define_method(name) { prop(name) }
       end

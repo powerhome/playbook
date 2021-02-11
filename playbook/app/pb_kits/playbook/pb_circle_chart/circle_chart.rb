@@ -2,11 +2,7 @@
 
 module Playbook
   module PbCircleChart
-    class CircleChart
-      include Playbook::Props
-
-      partial "pb_circle_chart/circle_chart"
-
+    class CircleChart < Playbook::KitBase
       prop :chart_data, type: Playbook::Props::Array,
                         default: []
       prop :style, type: Playbook::Props::Enum,
@@ -23,7 +19,7 @@ module Playbook
       prop :start_angle, type: Playbook::Props::Numeric
       prop :header_format
       prop :data_label_html, default: '<div>{point.name}</div>'
-      prop :tooltip_html, default: '<span style="font-weight: bold; color:{point.color};">●</span> 
+      prop :tooltip_html, default: '<span style="font-weight: bold; color:{point.color};">●</span>
                                       {point.name}: ' + '<b>{point.y}
                                     </b>'
       prop :use_html, type: Playbook::Props::Boolean, default: false

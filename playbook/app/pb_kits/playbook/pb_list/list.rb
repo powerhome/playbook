@@ -2,11 +2,7 @@
 
 module Playbook
   module PbList
-    class List
-      include Playbook::Props
-
-      partial "pb_list/list"
-
+    class List < Playbook::KitBase
       prop :borderless, type: Playbook::Props::Boolean,
                         default: false
       prop :dark, type: Playbook::Props::Boolean,

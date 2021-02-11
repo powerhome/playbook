@@ -2,11 +2,7 @@
 
 module Playbook
   module PbSelectableList
-    class SelectableList
-      include Playbook::Props
-
-      partial "pb_selectable_list/selectable_list"
-
+    class SelectableList < Playbook::KitBase
       prop :variant, type: Playbook::Props::Enum,
                      values: %w[radio checkbox],
                      default: "checkbox"

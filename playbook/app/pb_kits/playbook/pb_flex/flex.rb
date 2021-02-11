@@ -2,11 +2,7 @@
 
 module Playbook
   module PbFlex
-    class Flex
-      include Playbook::Props
-
-      partial "pb_flex/flex"
-
+    class Flex < Playbook::KitBase
       prop :horizontal, type: Playbook::Props::Enum,
                         values: %w[left center right stretch none],
                         default: "left",

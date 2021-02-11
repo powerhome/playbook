@@ -5,8 +5,6 @@ require_relative "../../../../app/pb_kits/playbook/pb_toggle/toggle"
 RSpec.describe Playbook::PbToggle::Toggle do
   subject { Playbook::PbToggle::Toggle }
 
-  it { is_expected.to define_partial }
-
   it { is_expected.to define_enum_prop(:size)
     .with_default("sm")
     .with_values("sm", "md") }

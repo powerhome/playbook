@@ -4,12 +4,7 @@ require "action_view"
 
 module Playbook
   module PbContact
-    class Contact
-      include ActionView::Helpers::NumberHelper
-      include Playbook::Props
-
-      partial "pb_contact/contact"
-
+    class Contact < Playbook::KitBase
       prop :contact_type
       prop :contact_value
       prop :contact_detail

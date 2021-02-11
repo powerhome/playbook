@@ -2,11 +2,7 @@
 
 module Playbook
   module PbImage
-    class Image
-      include Playbook::Props
-
-      partial "pb_image/image"
-
+    class Image < Playbook::KitBase
       prop :alt
       prop :on_error, type: Playbook::Props::String,
                       default: nil

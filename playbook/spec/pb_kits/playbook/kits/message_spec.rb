@@ -5,8 +5,6 @@ require_relative "../../../../app/pb_kits/playbook/pb_message/message"
 RSpec.describe Playbook::PbMessage::Message do
   subject { Playbook::PbMessage::Message }
 
-  it { is_expected.to define_partial }
-
   it { is_expected.to define_prop(:avatar_name) }
   it { is_expected.to define_prop(:avatar_status) }
   it { is_expected.to define_prop(:avatar_url) }
