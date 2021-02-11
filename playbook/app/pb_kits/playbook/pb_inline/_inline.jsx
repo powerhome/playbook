@@ -1,12 +1,9 @@
-
-
 /* @flow */
 
 import React, { useEffect, useState, useRef } from 'react'
 import classnames from 'classnames'
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
 import { globalProps } from '../utilities/globalProps.js'
-import { TextInput, Title } from '../'
 
 type InlineProps = {
   aria?: object,
@@ -35,13 +32,17 @@ const Inline = (props: InlineProps) => {
     setEditing(!editing)
   }
 
-  useEffect(()=> {
-    if(editing) {
+  useEffect(() => {
+    if (editing) {
       modifiedInput.ref.current.focus()
     }
   })
 
-  const modifiedInput = React.cloneElement(textInput, { onBlur: ()=> { setEditing(!editing) }, ref: useRef(null) })
+  const modifiedInput = React.cloneElement(textInput, {
+    className: textKit.type.name === 'Title' ? `title_${textKit.props.size}` : null,
+    onBlur: () => setEditing(!editing),
+    ref: useRef(null),
+  })
 
   return (
     <div
@@ -55,7 +56,7 @@ const Inline = (props: InlineProps) => {
       </If>
       <If condition={!editing}>
         <div
-            onClick={()=> TitleClickHandler()}
+            onClick={() => TitleClickHandler()}
         >
           {textKit}
         </div>

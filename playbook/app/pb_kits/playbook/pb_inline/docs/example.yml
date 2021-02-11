@@ -3,4 +3,5 @@ examples:
   
   react:
   - inline_default: Default
-  
+  - inline_title: Title
+  - inline_body: Body

@@ -1,3 +1,33 @@
-.pb_inline {
+@import "../pb_title/title_mixin";
 
+.pb_inline {
+  // @for $i from 1 through 3 {
+  //   .pb_text_input_kit.title_#{$i} .text_input_wrapper input {
+  //     // sass does not support dynamic mixins names
+  //     // so can't just write: @include pb_title_#{$i}; below
+  //     @if $i = 1 {
+  //       @include pb_title_1;
+  //     }
+  //     @if $i = 2 {
+  //       @include pb_title_2;
+  //     }
+  //     @if $i = 3 {
+  //       @include pb_title_3;
+  //     }
+  //   }
+  // }
+  .pb_text_input_kit {
+    &.title_1 .text_input_wrapper input {
+      @include pb_title_1;
+    }
+    &.title_2 .text_input_wrapper input {
+      @include pb_title_2;
+    }
+    &.title_3 .text_input_wrapper input {
+      @include pb_title_3;
+    }
+  }
+  .text_input_wrapper, .pb_textarea_kit {
+    margin-bottom: 0;
+  }
 }

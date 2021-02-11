@@ -19,6 +19,7 @@ type TextInputProps = {
   id?: string,
   name: string,
   label: string,
+  onBlur: (String) => void,
   onChange: (String) => void,
   placeholder: string,
   required?: boolean,
