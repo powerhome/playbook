@@ -57,6 +57,8 @@ const Inline = (props: InlineProps) => {
       <If condition={!editing}>
         <div
             onClick={() => TitleClickHandler()}
+            onFocus={() => TitleClickHandler()}
+            tabIndex="0"
         >
           {textKit}
         </div>
