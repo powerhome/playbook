@@ -1,4 +1,3 @@
-// Move to separate file
 window.addEventListener('DOMContentLoaded', function() {
   document.querySelectorAll('[data-toggle]').forEach(function(toggle) {
     toggle.addEventListener('click', function(e) {
@@ -17,4 +16,8 @@ window.addEventListener('DOMContentLoaded', function() {
         .show()
     })
   })
+
+  if (process.env.NODE_ENV === 'development') {
+    require("../utilities/accessibility").runAxe()
+  }
 })
