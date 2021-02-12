@@ -26,6 +26,9 @@
     &.title_3 .text_input_wrapper input {
       @include pb_title_3;
     }
+    .text_input_wrapper input {
+      padding: 8px 5px;
+    }
   }
   .text_input_wrapper, .pb_textarea_kit {
     margin-bottom: 0;

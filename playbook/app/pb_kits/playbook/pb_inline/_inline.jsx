@@ -35,8 +35,14 @@ const Inline = (props: InlineProps) => {
   useEffect(() => {
     if (editing) {
       modifiedInput.ref.current.focus()
+
+      modifiedInput.ref.current.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' || e.key === 'Enter') {
+          setEditing(!editing)
+        }
+      })
     }
-  })
+  }, [editing])
 
   const modifiedInput = React.cloneElement(textInput, {
     className: textKit.type.name === 'Title' ? `title_${textKit.props.size}` : null,
