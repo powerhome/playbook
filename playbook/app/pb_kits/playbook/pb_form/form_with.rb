@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-# require_dependency "app/pb_kits/playbook/pb_form/form_builder"
-
 module Playbook
   module PbForm
     class FormWith < Playbook::KitBase

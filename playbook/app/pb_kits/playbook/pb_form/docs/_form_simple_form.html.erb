@@ -39,7 +39,6 @@
   ]
 %>
 
-
 <%= pb_rails("form/simple_form", props: { options: { model: example_form_model.new, url: "", method: :get } }) do |form| %>
   <%= form.input :example_text_field, as: :string %>
   <%= form.input :example_phone_field, as: :tel %>
