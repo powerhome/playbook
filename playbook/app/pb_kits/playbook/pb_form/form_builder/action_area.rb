@@ -14,10 +14,8 @@ module Playbook
         def button(value = nil, props:)
           props[:text] ||= value || submit_default_value
 
-          capture do
-            content_tag(:li) do
-              pb_rails("button", props: props)
-            end
+          content_tag(:li) do
+            pb_rails("button", props: props)
           end
         end
       end
