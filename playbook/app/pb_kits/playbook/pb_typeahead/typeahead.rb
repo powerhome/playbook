@@ -40,6 +40,7 @@ module Playbook
           id: id,
           isMulti: true,
           label: label,
+          name: name,
           options: options,
           placeholder: placeholder,
         }
