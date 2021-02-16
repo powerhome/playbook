@@ -49,6 +49,7 @@
     @media (hover: hover) {
       &:hover {
         cursor: pointer;
+        background-color: $white;
       }
     }
   }
