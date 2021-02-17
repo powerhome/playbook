@@ -1,8 +1,8 @@
-<%= simple_form_for *object.merged_form_system_options do |form| %>
-  <% instance_exec form, &object.children %>
+<%= simple_form_for model, options do |form| %>
+  <% instance_exec form, &children %>
 <% end %>
 
-<% if object.validate %>
+<% if validate %>
   <% content_for :pb_js do %>
     <%= javascript_tag do %>
       window.addEventListener('DOMContentLoaded', function() {
