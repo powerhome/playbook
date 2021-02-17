@@ -27,6 +27,7 @@ module Playbook
         {
           builder: Playbook::PbForm::SimpleForm::FormBuilder,
           html: html_options,
+          data: data,
           url: "",
         }.merge(prop(:options))
       end
