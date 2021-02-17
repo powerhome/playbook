@@ -13,6 +13,7 @@
 }
 .flatpickr-monthDropdown-months {
   appearance: none;
+  -webkit-appearance: none;
   @include pb_title_4;
   height: $space_xl;
   width: $space_xs * 12;
@@ -29,10 +30,14 @@
 }
 .numInputWrapper {
   display: contents;
+  display: -webkit-box;
+  display: -webkit-flex;
   .numInput {
     @include pb_title_4;
     border: 0;
     appearance: none;
+    -webkit-appearance: none;
+    border-radius: 0;
     background-color: transparent;
     border-left: solid 1px $border_light;
     padding-left: $space_md - 1.5;
@@ -45,6 +50,7 @@
     @media (hover: hover) {
       &:hover {
         cursor: pointer;
+        background-color: $white;
       }
     }
   }
@@ -61,6 +67,7 @@
 }
 .year-dropdown-icon {
   align-self: center;
+  -webkit-align-self: center;
   margin-top: $space_xs - 3;
   width: $space_xs + 2;
   position: relative;

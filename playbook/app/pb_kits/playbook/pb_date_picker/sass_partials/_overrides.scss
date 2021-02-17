@@ -42,3 +42,6 @@
   -webkit-box-shadow: none;
           box-shadow: none;
 }
+.flatpickr-current-month .flatpickr-monthDropdown-months:hover, .numInputWrapper:hover {
+  background-color: $white;
+}
