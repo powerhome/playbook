@@ -21,6 +21,12 @@ module Playbook
       end
     end
 
+    def pb_doc_kit_api(kit)
+      kit_class = Playbook::KitResolver.resolve(kit.to_s)
+      return unless kit_class
+      render partial: "playbook/config/pb_kit_api", locals: { kit_api: kit_class.props.keys }
+    end
+
     def has_kit_type?(kit, type)
       type ||= "rails"
       if type == "rails"
@@ -85,16 +91,6 @@ module Playbook
       ui = raw("<div class='pb--docItem-ui'>
           #{pb_kit(kit: kit, type: type, show_code: code, limit_examples: limit_examples)}</div>")
       title + ui
-    end
-
-    def pb_kit_api(kit)
-      kit_class_obj = get_class_name(kit.to_s)
-      @kit_api = if kit_class_obj < Playbook::PbKit::Base
-                   kit_class_obj.instance_method(:initialize).parameters.map(&:last)
-                 else
-                   kit_class_obj.props.keys
-                 end
-      render partial: "playbook/config/pb_kit_api"
     end
 
     def nav_hash_category(link)
@@ -195,12 +191,6 @@ module Playbook
       else
         {}
       end
-    end
-
-    def get_class_name(kit)
-      folder = is_subkit?(kit) ? kit.split("/")[0] : kit
-      item = is_subkit?(kit) ? kit.split("/")[-1] : kit
-      "Playbook::Pb#{folder.camelize}::#{item.camelize}".safe_constantize
     end
 
     def render_clickable_title(kit, type)
