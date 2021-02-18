@@ -1,20 +1,9 @@
-
 <% type ||= "rails" %>
-
-<% if type == "react" %>
-  <% contents = File.read("#{Playbook::Engine.root}/app/pb_kits/playbook/pb_#{@kit_examples[:kit]}/docs/_#{key}.jsx") %>
-<% else %>
-  <% contents = File.read("#{Playbook::Engine.root}/app/pb_kits/playbook/pb_#{@kit_examples[:kit]}/docs/_#{key}.html.erb") %>
-<% end %>
 
 <div class="pb--kit-example">
   <%= pb_rails("caption", props: { text: item }) %>
-  <br>
-  <% if type == "rails" %>
-    <%= render partial: "pb_#{@kit_examples[:kit]}/docs/#{key}" %>
-  <% elsif type == "react" %>
-    <%= pb_react(key.camelize) %>
-  <% end %>
+  <br />
+  <%= pb_doc_example(type, @kit_examples[:kit], key) %>
   <br>
 </div>
 
@@ -33,11 +22,9 @@
     <div class="pb--codeCopy" data-action="toggle" data-togglable="code_example" style="display: none" >
       <%= pb_rails("section_separator")%>
       <a href="#" id="toggle-close" data-toggle="false" class="pb--close-toggle">Close</a>
-      <% if type == "rails" %>
-        <pre class="highlight"><%= raw rouge(contents, "erb") %></pre>
-      <% elsif type == "react" %>
-        <pre class="highlight"><%= raw rouge(contents, "react")%></pre>
-      <% end %>
+      <pre class="highlight">
+        <%= pb_doc_source(type, @kit_examples[:kit], key) %>
+      </pre>
     </div>
   </div>
 <% end %>

@@ -1,202 +1,62 @@
 # frozen_string_literal: true
 
 RSpec.describe Playbook::Props do
-  describe "base props" do
-    subject! do
-      Class.new do
-        include Playbook::Props
+  subject! do
+    Class.new do
+      include Playbook::Props
 
-        prop :base_prop
-      end
+      prop :base_prop
     end
-    let!(:subclass) do
-      Class.new(subject) do
-        prop :subclass_prop
-      end
+  end
+  let!(:subclass) do
+    Class.new(subject) do
+      prop :subclass_prop
     end
-    let!(:another_subclass) do
-      Class.new(subject) do
-        prop :another_subclass_prop
-      end
-    end
-
-    it { is_expected.to define_prop(:id) }
-    it { is_expected.to define_hash_prop(:data).with_default({}) }
-    it { is_expected.to define_prop(:classname) }
-    it { is_expected.to define_hash_prop(:aria).with_default({}) }
-    it { is_expected.to define_prop(:margin) }
-    it { is_expected.to define_prop(:margin_bottom) }
-    it { is_expected.to define_prop(:margin_left) }
-    it { is_expected.to define_prop(:margin_right) }
-    it { is_expected.to define_prop(:margin_top) }
-    it { is_expected.to define_prop(:margin_x) }
-    it { is_expected.to define_prop(:margin_y) }
-    it { is_expected.to define_prop(:padding) }
-    it { is_expected.to define_prop(:padding_bottom) }
-    it { is_expected.to define_prop(:padding_left) }
-    it { is_expected.to define_prop(:padding_right) }
-    it { is_expected.to define_prop(:padding_top) }
-    it { is_expected.to define_prop(:padding_x) }
-    it { is_expected.to define_prop(:padding_y) }
-    it { is_expected.to define_boolean_prop(:dark).with_default(false) }
-
-    it "allows to inherit the parent's props and add to it" do
-      expect(subject).to define_prop(:base_prop)
-      expect(subject).to_not define_prop(:subclass_prop)
-      expect(subject).to_not define_prop(:another_subclass_prop)
-
-      expect(subclass).to define_prop(:base_prop)
-      expect(subclass).to define_prop(:subclass_prop)
-      expect(subclass).to_not define_prop(:another_subclass_prop)
-
-      expect(another_subclass).to define_prop(:base_prop)
-      expect(another_subclass).to_not define_prop(:subclass_prop)
-      expect(another_subclass).to define_prop(:another_subclass_prop)
-    end
-
-    describe "can be overwritten with custom values" do
-      it "#id" do
-        instance = subject.new(id: "123")
-        expect(instance.id).to eq("123")
-      end
-
-      it "#data" do
-        instance = subject.new(data: { foo: :bar })
-        expect(instance.data).to eq(foo: :bar)
-      end
-
-      it "#classname" do
-        instance = subject.new(classname: "foo_bar")
-        expect(instance.classname).to eq("foo_bar")
-      end
-
-      it "#aria" do
-        instance = subject.new(aria: { bar: :baz })
-        expect(instance.aria).to eq(bar: :baz)
-      end
-
-      it "#dark" do
-        instance = subject.new(dark: true)
-        expect(instance.dark).to eq(true)
-      end
-
-      describe "#children" do
-        it "allows to be passed as prop" do
-          block = -> { 42 }
-
-          kit = subject.new(children: block)
-
-          expect(kit.children.call).to eql 42
-        end
-
-        it "allows to be passed as a block" do
-          kit = subject.new({}) { 42 }
-
-          expect(kit.children.call).to eql 42
-        end
-      end
-    end
-
-    describe ".props" do
-      it "returns collection of available properties" do
-        expect(subject.props).to include(
-          :id, :data, :classname, :aria, :children,
-          :margin, :margin_bottom, :margin_left,
-          :margin_right, :margin_top, :margin_x, :margin_y,
-          :padding, :padding_bottom, :padding_left,
-          :padding_right, :padding_top, :padding_x, :padding_y,
-          :dark
-        )
-      end
-    end
-
-    describe "#generate_classname" do
-      it "with default separator" do
-        instance = subject.new(classname: "passed_classname")
-
-        expect(instance.generate_classname("separate", "with", "default")).to eq(
-          "separate_with_default passed_classname"
-        )
-      end
-
-      it "with custom separator" do
-        instance = subject.new(classname: "passed_classname")
-
-        expect(instance.generate_classname("separate", "with", "custom", separator: "X")).to eq(
-          "separateXwithXcustom passed_classname"
-        )
-
-        another_instance = subject.new(classname: "passed_classname")
-
-        expect(instance.generate_classname("separate", "with", "custom", separator: " ")).to eq(
-          "separate with custom passed_classname"
-        )
-      end
+  end
+  let!(:another_subclass) do
+    Class.new(subject) do
+      prop :another_subclass_prop
     end
   end
 
-  describe "additional props" do
-    subject do
-      Class.new do
-        include Playbook::Props
+  it "allows to inherit the parent's props and add to it" do
+    expect(subject).to define_prop(:base_prop)
+    expect(subject).to_not define_prop(:subclass_prop)
+    expect(subject).to_not define_prop(:another_subclass_prop)
 
-        prop :string_prop, type: Playbook::Props::String, default: "foo"
-        prop :boolean_prop, type: Playbook::Props::Boolean, default: true
-        prop :hash_prop, type: Playbook::Props::Hash, default: { baz: :foo }
-        prop :enum_prop, type: Playbook::Props::Enum,
-                         values: %i[up down left right],
-                         default: :right
-        prop :default_prop
-      end
+    expect(subclass).to define_prop(:base_prop)
+    expect(subclass).to define_prop(:subclass_prop)
+    expect(subclass).to_not define_prop(:another_subclass_prop)
+
+    expect(another_subclass).to define_prop(:base_prop)
+    expect(another_subclass).to_not define_prop(:subclass_prop)
+    expect(another_subclass).to define_prop(:another_subclass_prop)
+  end
+
+  describe "can be overwritten with custom values" do
+    it "#id" do
+      instance = subject.new(base_prop: "123")
+      expect(instance.base_prop).to eq("123")
     end
+  end
 
-    it { is_expected.to define_string_prop(:string_prop).with_default("foo") }
-    it { is_expected.to define_boolean_prop(:boolean_prop).with_default(true) }
-    it { is_expected.to define_hash_prop(:hash_prop).with_default(baz: :foo) }
-    it do
-      is_expected.to define_enum_prop(:enum_prop)
-                     .with_default(:right)
-                     .with_values(:up, :down, :left, :right)
-    end
-    it { is_expected.to define_string_prop(:default_prop).with_default(nil) }
-
-    describe "can be overwritten with custom values" do
-      it "as string" do
-        instance = subject.new(string_prop: "custom_string")
-        expect(instance.string_prop).to eq("custom_string")
-      end
-
-      it "as boolean" do
-        instance = subject.new(boolean_prop: true)
-        expect(instance.boolean_prop).to eq(true)
-      end
-
-      it "as hash" do
-        instance = subject.new(hash_prop: { custom: :value })
-        expect(instance.hash_prop).to eq(custom: :value)
-      end
-
-      it "as enum" do
-        instance = subject.new(enum_prop: :down)
-        expect(instance.enum_prop).to eq(:down)
-      end
-    end
-
-    describe ".props" do
-      it "returns collection of available properties", :aggregate_failures do
-        expect(subject.props).to include(:id, :data, :classname, :aria)
-        expect(subject.props).to include(:string_prop, :boolean_prop, :hash_prop, :enum_prop, :default_prop)
-      end
+  describe ".props" do
+    it "returns collection of available properties" do
+      expect(another_subclass.props.keys).to match_array [:base_prop, :another_subclass_prop]
     end
   end
 
   describe "required props" do
     subject do
-      Object.const_set("TestClassForRequiredProps", Class.new do
+      Class.new do
         include Playbook::Props
 
+        def self.to_s
+          "TestClassForRequiredProps"
+        end
+
         prop :required_prop, required: true
-      end)
+      end
     end
 
     it { is_expected.to define_string_prop(:required_prop).that_is_required }
