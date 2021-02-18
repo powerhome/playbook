@@ -38,7 +38,7 @@ module Playbook
       @kit_examples = get_kit_examples(kit, type)
       @limit_examples = limit_examples
       @show_code = show_code
-      render partial: "config/kit_example"
+      render partial: "playbook/config/kit_example"
     end
 
     def pb_kits(type: "rails", limit_examples: false)

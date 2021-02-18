@@ -4,7 +4,7 @@
       <% kit_example.each do |key, item| %>
         <% if index == 0 %>
           <%= pb_rails("card", props: { classname: "pb--doc", padding:"none" }) do %>
-            <%= render partial: "config/kit_ui", locals: { key: key, type: @type, item: item, show_code: @show_code } %>
+            <%= render partial: "playbook/config/kit_ui", locals: { key: key, type: @type, item: item, show_code: @show_code } %>
           <% end %>
         <% elsif index > 0 %>
           <% break %>
@@ -15,7 +15,7 @@
     <% @kit_examples[:examples].each do |kit_example| %>
       <% kit_example.each do |key, item| %>
         <%= pb_rails("card", props: { classname: "pb--doc", padding:"none" }) do %>
-          <%= render partial: "config/kit_ui", locals: { key: key, type: @type, item: item, show_code: @show_code } %>
+          <%= render partial: "playbook/config/kit_ui", locals: { key: key, type: @type, item: item, show_code: @show_code } %>
         <% end %>
       <% end %>
     <% end %>
