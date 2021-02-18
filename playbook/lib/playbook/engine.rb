@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require "sassc-rails"
 require "slim-rails"
 
@@ -18,12 +19,6 @@ module Playbook
 
     config.sass.load_paths ||= []
     config.sass.load_paths << Playbook::Engine.root.join("app/pb_kits/playbook")
-
-    initializer "playbook_ui.add_view_paths", after: :add_view_paths do |_app|
-      ActiveSupport.on_load(:action_controller) do
-        append_view_path Playbook::Engine.root.join("app/pb_kits/playbook/config")
-      end
-    end
 
     initializer "webpacker.proxy" do |app|
       insert_middleware = begin
