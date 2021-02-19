@@ -3,13 +3,13 @@
 <div class="pb--kit-example">
   <%= pb_rails("caption", props: { text: item }) %>
   <br />
-  <%= pb_doc_example(type, @kit_examples[:kit], key) %>
+  <%= pb_doc_example(type, kit, key) %>
   <br>
 </div>
 
 <% if @show_code %>
   <div class="markdown pb--kit-example-markdown <%= cookies[:dark_mode] == "true" ? "dark" : "" %>">
-    <%= markdown(get_per_sample_descriptions(@kit_examples[:kit], key)) %>
+    <%= markdown(get_per_sample_descriptions(kit, key)) %>
   </div>
   <div id="code-wrapper">
     <div class="pb--codeControls">
@@ -23,7 +23,7 @@
       <%= pb_rails("section_separator")%>
       <a href="#" id="toggle-close" data-toggle="false" class="pb--close-toggle">Close</a>
       <pre class="highlight">
-        <%= pb_doc_source(type, @kit_examples[:kit], key) %>
+        <%= pb_doc_source(type, kit, key) %>
       </pre>
     </div>
   </div>
