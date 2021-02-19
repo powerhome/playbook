@@ -12,51 +12,54 @@ const InlineTitle = (props) => {
     <div>
       <Inline
           {...props}
-          textInput={
-            <TextInput
-                onChange={handleInputChange}
-                value={formValue}
-            />
-          }
-          textKit={
+          displayKit={
             <Title
+                kitName="Title"
                 size={1}
                 tag="h1"
                 text={formValue}
             />
           }
-      />
-
-      <Inline
-          {...props}
-          textInput={
+          formInput={
             <TextInput
                 onChange={handleInputChange}
                 value={formValue}
             />
           }
-          textKit={
+      />
+
+      <Inline
+          {...props}
+          displayKit={
             <Title
+                kitName="Title"
                 size={2}
                 tag="h2"
                 text={formValue}
             />
           }
-      />
-
-      <Inline
-          {...props}
-          textInput={
+          formInput={
             <TextInput
                 onChange={handleInputChange}
                 value={formValue}
             />
           }
-          textKit={
+      />
+
+      <Inline
+          {...props}
+          displayKit={
             <Title
+                kitName="Title"
                 size={3}
                 tag="h3"
                 text={formValue}
+            />
+          }
+          formInput={
+            <TextInput
+                onChange={handleInputChange}
+                value={formValue}
             />
           }
       />

@@ -4,6 +4,7 @@ import React, { useEffect, useState, useRef } from 'react'
 import classnames from 'classnames'
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
 import { globalProps } from '../utilities/globalProps.js'
+import './_inline.scss'
 
 type InlineProps = {
   aria?: object,
@@ -18,8 +19,8 @@ const Inline = (props: InlineProps) => {
     className,
     data = {},
     id,
-    textInput,
-    textKit,
+    formInput,
+    displayKit,
   } = props
 
   const ariaProps = buildAriaProps(aria)
@@ -28,7 +29,7 @@ const Inline = (props: InlineProps) => {
 
   const [editing, setEditing] = useState(false)
 
-  const TitleClickHandler = () => {
+  const ToggleClickHandler = () => {
     setEditing(!editing)
   }
 
@@ -44,8 +45,13 @@ const Inline = (props: InlineProps) => {
     }
   }, [editing])
 
-  const modifiedInput = React.cloneElement(textInput, {
-    className: textKit.type.name === 'Title' ? `title_${textKit.props.size}` : null,
+  // console.log(formInput)
+
+  const { kitName, size } = displayKit.props
+  const textInputClassName = kitName ? (kitName.toLowerCase() + (size ? `_${size}` : null)) : null
+
+  const modifiedInput = React.cloneElement(formInput, {
+    className: textInputClassName,
     onBlur: () => setEditing(!editing),
     ref: useRef(null),
   })
@@ -62,11 +68,11 @@ const Inline = (props: InlineProps) => {
       </If>
       <If condition={!editing}>
         <div
-            onClick={() => TitleClickHandler()}
-            onFocus={() => TitleClickHandler()}
+            onClick={() => ToggleClickHandler()}
+            onFocus={() => ToggleClickHandler()}
             tabIndex="0"
         >
-          {textKit}
+          {displayKit}
         </div>
       </If>
 

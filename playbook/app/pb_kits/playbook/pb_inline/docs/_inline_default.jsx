@@ -12,17 +12,18 @@ const InlineDefault = (props) => {
     <div>
       <Inline
           {...props}
-          textInput={
-            <TextInput
-                onChange={handleInputChange}
-                value={formValue}
-            />
-          }
-          textKit={
+          displayKit={
             <Title
+                kitName="Title"
                 size={4}
                 tag="h4"
                 text={formValue}
+            />
+          }
+          formInput={
+            <TextInput
+                onChange={handleInputChange}
+                value={formValue}
             />
           }
       />

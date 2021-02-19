@@ -1,4 +1,5 @@
 @import "../pb_title/title_mixin";
+@import "../pb_body/body_mixins";
 
 .pb_inline {
   // @for $i from 1 through 3 {
@@ -25,6 +26,9 @@
     }
     &.title_3 .text_input_wrapper input {
       @include pb_title_3;
+    }
+    &.body .text_input_wrapper input {
+      @include pb_body_dark;
     }
     .text_input_wrapper input {
       padding: 8px 5px;

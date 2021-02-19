@@ -1,6 +1,6 @@
 /* @flow */
 
-import React, { useEffect, useRef } from 'react'
+import React, { forwardRef, useEffect, useRef } from 'react'
 import classnames from 'classnames'
 import useFocus from './useFocus.js'
 import Trix from 'trix'
@@ -10,6 +10,7 @@ type RichTextEditorProps = {
   className?: string,
   focus?: boolean,
   id?: string,
+  name: string,
   onChange: (string) => void,
   placeholder?: string,
   simple?: boolean,
@@ -18,11 +19,12 @@ type RichTextEditorProps = {
   value?: string,
 }
 
-const RichTextEditor = (props: RichTextEditorProps) => {
+const RichTextEditor = (props: RichTextEditorProps, ref: React.ElementRef<"input">) => {
   const {
     className,
     focus = false,
     id,
+    name,
     onChange,
     placeholder,
     simple = false,
@@ -108,6 +110,8 @@ const RichTextEditor = (props: RichTextEditorProps) => {
     >
       <input
           id={id}
+          name={name}
+          ref={ref}
           type="hidden"
           value={value}
       />
@@ -120,4 +124,4 @@ const RichTextEditor = (props: RichTextEditorProps) => {
   )
 }
 
-export default RichTextEditor
+export default forwardRef(RichTextEditor)
