@@ -52,9 +52,9 @@ module Playbook
 
     def pb_kit(kit: "", type: "rails", show_code: true, limit_examples: false)
       @type = type
-      @limit_examples = limit_examples
       @show_code = show_code
       examples = get_kit_examples(kit, type)
+      examples = examples.first(1) if limit_examples
       render partial: "playbook/config/kit_example", locals: { examples: examples, kit: kit }
     end
 
@@ -187,7 +187,7 @@ module Playbook
       if File.exist?(example_file)
         examples_list = YAML.load_file(example_file)
                             .inject({}) { |item, (k, v)| item[k.to_sym] = v; item }
-        examples_list.dig(:examples, type)
+        examples_list.dig(:examples, type) || []
       else
         []
       end
