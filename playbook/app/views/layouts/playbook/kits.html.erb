@@ -7,7 +7,7 @@
     <%= stylesheet_packs_with_chunks_tag 'main' %>
     <meta content="user-scalable=0, initial-scale=1.0, minimum-scale=1" name="viewport"></meta>
   </head>
-  <body>
+  <body class="kits">
     <%= render 'layouts/playbook/nav' %>
     <%= pb_rails("layout", props: {classname: "pb--page--content",variant: cookies[:dark_mode] == "true" ? 'dark' : 'light' }) do%>
       <%= render 'layouts/playbook/mobile_hamburger' %>
@@ -21,7 +21,7 @@
       <% end %>
     <%end%>
   </body>
-  <%= javascript_include_tag "https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js" %>
+
   <% if @type == 'react' %>
     <%= javascript_packs_with_chunks_tag 'application', 'popover_docs', 'react-examples', 'site' %>
   <% else %>

@@ -1,7 +1,7 @@
 import React from 'react'
 import { User } from '../../'
 
-const UserTextOnly = () => {
+const UserTextOnly = (props) => {
   return (
     <div className="pb--doc-demo-row">
       <User
@@ -10,12 +10,14 @@ const UserTextOnly = () => {
           orientation="horizontal"
           size="lg"
           title="Remodeling Consultant"
+          {...props}
       />
       <User
           align="left"
           name="Anna Black"
           orientation="horizontal"
           title="Remodeling Consultant"
+          {...props}
       />
     </div>
   )

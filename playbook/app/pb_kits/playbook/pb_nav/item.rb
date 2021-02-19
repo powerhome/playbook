@@ -2,11 +2,7 @@
 
 module Playbook
   module PbNav
-    class Item
-      include Playbook::Props
-
-      partial "pb_nav/item"
-
+    class Item < Playbook::KitBase
       prop :active, type: Playbook::Props::Boolean, default: false
       prop :link
       prop :text

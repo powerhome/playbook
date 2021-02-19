@@ -1,11 +1,12 @@
 import React from 'react'
 import { Body, Highlight } from '../../'
 
-const HighlightDefault = () => (
+const HighlightDefault = (props) => (
   <div>
     <Highlight
         highlightedText={['highlight kit']}
         text="This is the Highlight Kit"
+        {...props}
     />
     <br />
     <Body>
@@ -19,6 +20,7 @@ const HighlightDefault = () => (
         highlightedText={['highlighted in the Body Kit ']}
         highlighting
         text="This is text highlighted in the Body Kit using the text prop."
+        {...props}
     />
   </div>
 )

@@ -2,11 +2,7 @@
 
 module Playbook
   module PbStatChange
-    class StatChange
-      include Playbook::Props
-
-      partial "pb_stat_change/stat_change"
-
+    class StatChange < Playbook::KitBase
       prop :change, type: Playbook::Props::Enum,
                     values: %w[neutral increase decrease],
                     default: "neutral"

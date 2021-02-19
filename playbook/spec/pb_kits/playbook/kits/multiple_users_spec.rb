@@ -5,8 +5,6 @@ require_relative "../../../../app/pb_kits/playbook/pb_multiple_users/multiple_us
 RSpec.describe Playbook::PbMultipleUsers::MultipleUsers do
   subject { Playbook::PbMultipleUsers::MultipleUsers }
 
-  it { is_expected.to define_partial }
-
   it { is_expected.to define_boolean_prop(:reverse)
                       .with_default(false) }
   it { is_expected.to define_prop(:users)

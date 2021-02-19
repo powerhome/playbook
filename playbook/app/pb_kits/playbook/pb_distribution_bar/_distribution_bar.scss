@@ -1,25 +1,30 @@
 @import "../tokens/colors";
 
 [class^=pb_distribution_bar] {
-  $bar_colors: map-values($data_colors);
+  $bar_colors: map-merge($data_colors, $status_colors);
   $small_bar: 8px;
   $large_bar: 36px;
   display: flex;
+  border-radius: $large_bar;
+  overflow: auto;
   .pb_distribution_width {
     height: 100%;
     display: inline-block;
-    @for $i from 1 through length($bar_colors) {
-      &:nth-child(#{length($bar_colors)}n+#{$i}) {
-        background-color: nth($bar_colors, $i);
+    @each $name, $color in $bar_colors {
+      &:nth-child(#{length($bar_colors)}n+#{index(($bar_colors), ($name $color))}) {
+        background-color: $color;
+      }
+      &.color_#{$name} {
+        background-color: $color !important;
       }
     }
     &:first-child {
-      border-top-left-radius: 18px;
-      border-bottom-left-radius: 18px;
+      border-top-left-radius: $large_bar;
+      border-bottom-left-radius: $large_bar;
     }
     &:last-child {
-      border-top-right-radius: 18px;
-      border-bottom-right-radius: 18px;
+      border-top-right-radius: $large_bar;
+      border-bottom-right-radius: $large_bar;
     }
   }
   &[class*=_sm] {

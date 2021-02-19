@@ -1,7 +1,7 @@
 import React from 'react'
 import { Icon } from '../../'
 
-const IconPull = () => {
+const IconPull = (props) => {
   return (
     <div>
       <Icon
@@ -9,12 +9,14 @@ const IconPull = () => {
           icon="arrow-left"
           pull="left"
           size="2x"
+          {...props}
       />
       <Icon
           fixedWidth
           icon="arrow-right"
           pull="right"
           size="2x"
+          {...props}
       />
     </div>
   )

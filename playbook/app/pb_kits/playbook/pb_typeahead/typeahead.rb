@@ -2,9 +2,7 @@
 
 module Playbook
   module PbTypeahead
-    class Typeahead
-      include Playbook::Props
-
+    class Typeahead < Playbook::KitBase
       prop :async, type: Playbook::Props::Boolean,
                     default: false
       prop :default_options, type: Playbook::Props::HashArray, default: []
@@ -23,8 +21,6 @@ module Playbook
       prop :search_debounce_timeout, default: 250
       prop :value
 
-      partial "pb_typeahead/typeahead"
-
       def classname
         generate_classname("pb_typeahead_kit")
       end
@@ -39,12 +35,14 @@ module Playbook
 
       def typeahead_with_pills_options
         base_options = {
+          dark: dark,
           defaultValue: default_options,
           id: id,
           isMulti: true,
           label: label,
+          name: name,
           options: options,
-          placeholder: placeholder
+          placeholder: placeholder,
         }
 
         base_options.merge!({getOptionLabel: get_option_label}) if get_option_label.present?

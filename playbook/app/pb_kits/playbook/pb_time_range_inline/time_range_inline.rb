@@ -2,11 +2,7 @@
 
 module Playbook
   module PbTimeRangeInline
-    class TimeRangeInline
-      include Playbook::Props
-
-      partial "pb_time_range_inline/time_range_inline"
-
+    class TimeRangeInline < Playbook::KitBase
       prop :start_time, required: true
       prop :end_time, required: true
       prop :alignment, type: Playbook::Props::Enum,

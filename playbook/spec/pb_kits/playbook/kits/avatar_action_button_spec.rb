@@ -5,7 +5,6 @@ require_relative "../../../../app/pb_kits/playbook/pb_avatar_action_button/avata
 RSpec.describe Playbook::PbAvatarActionButton::AvatarActionButton do
   subject { Playbook::PbAvatarActionButton::AvatarActionButton }
 
-  it { is_expected.to define_partial }
   it { is_expected.to define_prop(:action)
                   .with_default("add") }
   it { is_expected.to define_prop(:image_url) }

@@ -2,16 +2,14 @@
 
 module Playbook
   module PbDistributionBar
-    class DistributionBar
-      include Playbook::Props
-
-      partial "pb_distribution_bar/distribution_bar"
-
+    class DistributionBar < Playbook::KitBase
       prop :size, type: Playbook::Props::Enum,
                   values: %w[lg sm],
                   default: "lg"
       prop :widths, type: Playbook::Props::NumberArray,
-                    default: [1]
+                  default: [1]
+      prop :colors, type: Playbook::Props::Array,
+                  default: []
 
       def classname
         generate_classname("pb_distribution_bar", size)
@@ -27,6 +25,7 @@ module Playbook
         {
           size: size,
           widths: widths,
+          colors: colors,
         }
       end
     end

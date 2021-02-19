@@ -5,7 +5,6 @@ require_relative "../../../../app/pb_kits/playbook/pb_progress_simple/progress_s
 RSpec.describe Playbook::PbProgressSimple::ProgressSimple do
   subject { Playbook::PbProgressSimple::ProgressSimple }
 
-  it { is_expected.to define_partial }
   it { is_expected.to define_enum_prop(:align)
     .with_values("left", "center", "right")
     .with_default("left") }

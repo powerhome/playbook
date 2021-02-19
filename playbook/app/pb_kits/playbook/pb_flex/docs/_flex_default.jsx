@@ -1,17 +1,20 @@
 import React from 'react'
 import { Flex, FlexItem, Title } from  '../../'
 
-const FlexDefault = () => {
+const FlexDefault = (props) => {
   return (
     <>
+
+      <Title
+          size={4}
+          text="Row"
+          {...props}
+      />
+      <br />
       <div className="flex-doc-example">
-        <Title
-            size={4}
-            text="Row"
-        />
-        <br />
         <Flex
             orientation="row"
+            {...props}
         >
           <FlexItem>
             {'1'}
@@ -26,16 +29,19 @@ const FlexDefault = () => {
             {'4'}
           </FlexItem>
         </Flex>
-
-        <br />
-        <Title
-            size={4}
-            text="Column"
-        />
-        <br />
+      </div>
+      <br />
+      <Title
+          size={4}
+          text="Column"
+          {...props}
+      />
+      <br />
+      <div className="flex-doc-example">
         <Flex
+            align="start"
             orientation="column"
-            vertical="left"
+            {...props}
         >
           <FlexItem>
             {'1'}

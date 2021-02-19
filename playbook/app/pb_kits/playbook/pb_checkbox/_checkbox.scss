@@ -1,5 +1,6 @@
 @import "../tokens/colors";
 @import "../tokens/transition";
+@import "../tokens/positioning";
 $transition: $transition_cubic;
 
 [class^=pb_checkbox_kit] {
@@ -41,7 +42,10 @@ $transition: $transition_cubic;
     cursor: pointer;
     height: 0;
     width: 0;
-    display: none;
+    left: $offscreen;
+    &:focus ~ .pb_checkbox_checkmark {
+      border-color: $primary_action;
+    }
     &:checked ~ .pb_checkbox_checkmark {
       background-color: $primary_action;
       border-color: $primary_action;

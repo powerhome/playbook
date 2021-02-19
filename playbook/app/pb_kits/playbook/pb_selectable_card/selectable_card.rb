@@ -2,15 +2,13 @@
 
 module Playbook
   module PbSelectableCard
-    class SelectableCard
-      include Playbook::Props
-
-      partial "pb_selectable_card/selectable_card"
-
+    class SelectableCard < Playbook::KitBase
       prop :checked, type: Playbook::Props::Boolean,
                      default: false
       prop :disabled, type: Playbook::Props::Boolean,
                       default: false
+      prop :error, type: Playbook::Props::Boolean,
+                   default: false
       prop :icon, type: Playbook::Props::Boolean,
                   default: false
       prop :multi, type: Playbook::Props::Boolean,
@@ -18,13 +16,23 @@ module Playbook
       prop :input_id, type: Playbook::Props::String
 
       prop :input_options, type: Playbook::Props::Hash,
-                                      default: {}
+                           default: {}
       prop :name
       prop :text
       prop :value
+      prop :variant, type: Playbook::Props::String,
+                     default: "default"
 
       def classname
-        generate_classname("pb_selectable_card_kit", checked_class, enable_disabled_class)
+        [
+          generate_classname_without_spacing("pb_selectable_card_kit", checked_class, enable_disabled_class),
+          error_class,
+          dark_props,
+        ].compact.join(" ")
+      end
+
+      def spacing_classname
+        generate_classname
       end
 
       def input_id_present
@@ -38,6 +46,26 @@ module Playbook
         )
       end
 
+      def input
+        multi ? "checkbox" : "radio"
+      end
+
+      def label_class
+        variant == "display_input" ? "p_none" : spacing_classname
+      end
+
+      def is_checked
+        checked ? "checked" : ""
+      end
+
+      def is_disabled
+        disabled ? "disabled" : ""
+      end
+
+      def status
+        error ? "negative" : nil
+      end
+
     private
 
       def checked_class
@@ -46,6 +74,10 @@ module Playbook
 
       def enable_disabled_class
         disabled ? "disabled" : "enabled"
+      end
+
+      def error_class
+        error ? "error" : nil
       end
     end
   end

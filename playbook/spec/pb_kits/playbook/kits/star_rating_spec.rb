@@ -5,8 +5,6 @@ require_relative "../../../../app/pb_kits/playbook/pb_star_rating/star_rating"
 RSpec.describe Playbook::PbStarRating::StarRating do
   subject { Playbook::PbStarRating::StarRating }
 
-  it { is_expected.to define_partial }
-
   it { is_expected.to define_prop(:rating)
                   .of_type(Playbook::Props::Numeric) }
 

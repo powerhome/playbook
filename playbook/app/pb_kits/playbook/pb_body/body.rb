@@ -2,12 +2,7 @@
 
 module Playbook
   module PbBody
-    class Body
-      include Playbook::Props
-      include ActionView::Helpers
-
-      partial "pb_body/body"
-
+    class Body < Playbook::KitBase
       prop :color, type: Playbook::Props::Enum,
                    values: %w[default light lighter],
                    default: "default"
@@ -19,7 +14,7 @@ module Playbook
                  default: "div"
       prop :text
       prop :highlighting, type: Playbook::Props::Boolean,
-                              default: false
+                          default: false
       prop :highlighted_text, type: Playbook::Props::Array,
                               default: []
 
@@ -28,14 +23,14 @@ module Playbook
       end
 
       def content
-        highlighting ? apply_highlight : text
+        body_text = super.presence || text
+        highlighting ? apply_highlight(body_text) : body_text
       end
 
     private
 
-      def apply_highlight
-        pb_highlight = Playbook::PbHighlight::Highlight.new() {"|"}
-        pb_highlight_output = ApplicationController.renderer.render(partial: pb_highlight, as: :object)
+      def apply_highlight(text)
+        pb_highlight_output = pb_rails("highlight") { "|" }
         highlight_tags = pb_highlight_output.split("|")
         highlight(text, highlighted_text, highlighter: "#{highlight_tags.first.html_safe} \\1 #{highlight_tags.last.html_safe}")
       end

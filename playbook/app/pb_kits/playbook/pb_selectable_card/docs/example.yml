@@ -6,6 +6,8 @@ examples:
   - selectable_card_block: Block
   - selectable_card_options: With Options
   - selectable_card_image: Image Example
+  - selectable_card_input: Input Variant
+  - selectable_card_error: With Errors
 
 
   react:
@@ -13,3 +15,5 @@ examples:
   - selectable_card_single_select: Single Select
   - selectable_card_block: Block
   - selectable_card_image: Image Example
+  - selectable_card_input: Input Variant
+  - selectable_card_error: With Errors

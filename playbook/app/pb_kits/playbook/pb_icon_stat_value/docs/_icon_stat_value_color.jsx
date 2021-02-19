@@ -1,7 +1,7 @@
 import React from 'react'
 import { IconStatValue } from '../../'
 
-const IconStatValueColor = () => {
+const IconStatValueColor = (props) => {
   return (
     <div>
       <IconStatValue
@@ -10,6 +10,7 @@ const IconStatValueColor = () => {
           unit="AU"
           value={0.39}
           variant="blue"
+          {...props}
       />
       <br />
       <IconStatValue
@@ -18,6 +19,7 @@ const IconStatValueColor = () => {
           unit="AU"
           value={0.723}
           variant="royal"
+          {...props}
       />
       <br />
       <IconStatValue
@@ -26,6 +28,7 @@ const IconStatValueColor = () => {
           unit="AU"
           value={1.0}
           variant="purple"
+          {...props}
       />
       <br />
       <IconStatValue
@@ -34,6 +37,7 @@ const IconStatValueColor = () => {
           unit="AU"
           value={1.524}
           variant="teal"
+          {...props}
       />
       <br />
       <IconStatValue
@@ -42,6 +46,7 @@ const IconStatValueColor = () => {
           unit="AU"
           value={5.203}
           variant="red"
+          {...props}
       />
       <br />
       <IconStatValue
@@ -50,6 +55,7 @@ const IconStatValueColor = () => {
           unit="AU"
           value={9.539}
           variant="yellow"
+          {...props}
       />
       <br />
       <IconStatValue
@@ -58,6 +64,7 @@ const IconStatValueColor = () => {
           unit="AU"
           value={19.18}
           variant="green"
+          {...props}
       />
     </div>
 

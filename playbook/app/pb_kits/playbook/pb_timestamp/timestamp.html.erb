@@ -1,0 +1,8 @@
+<%= content_tag(:div,
+  aria: object.aria,
+  id: object.id,
+  data: object.data,
+  class: object.classname) do %>
+
+  <%= pb_rails("caption", props: { text: object.caption_text, size: 'xs', dark: object.dark }) %>
+<% end %>

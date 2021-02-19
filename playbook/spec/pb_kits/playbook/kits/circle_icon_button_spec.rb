@@ -5,8 +5,6 @@ require_relative "../../../../app/pb_kits/playbook/pb_circle_icon_button/circle_
 RSpec.describe Playbook::PbCircleIconButton::CircleIconButton do
   subject { Playbook::PbCircleIconButton::CircleIconButton }
 
-  it { is_expected.to define_partial }
-
   it { is_expected.to define_enum_prop(:variant)
                       .with_default("primary")
                       .with_values("primary", "secondary", "link") }

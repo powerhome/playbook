@@ -1,7 +1,7 @@
 import React from 'react'
 import { HomeAddressStreet } from '../../'
 
-const HomeAddressStreetDefault = () => {
+const HomeAddressStreetDefault = (props) => {
   return (
     <HomeAddressStreet
         address="70 Prospect Ave"
@@ -13,6 +13,7 @@ const HomeAddressStreetDefault = () => {
         state="PA"
         territory="PHL"
         zipcode="19382"
+        {...props}
     />
   )
 }

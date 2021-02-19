@@ -1,5 +1,6 @@
 @import "../tokens/colors";
 @import "../tokens/spacing";
+@import "../tokens/positioning";
 @import "../pb_body/body";
 @import "../tokens/transition";
 
@@ -11,6 +12,7 @@
     width: 22px;
     min-width: 22px;
     height: 22px;
+    box-sizing: border-box;
     border-radius: 1000px;
     border: 2px solid $border_light;
     margin-right: $space_xs;
@@ -20,29 +22,39 @@
   }
 
   @media (hover:hover) {
-    &:hover .pb_radio_button {
-      border-color: $primary_action;
+    &:hover, &:focus {
+      .pb_radio_button {
+        border-color: $primary_action;
+      }
     }
   }
 
   input {
     position: relative;
-    display: none;
-    &:checked ~ .pb_radio_button {
-      border: 6px solid $primary;
+    left: $offscreen;
+    &:checked, &:focus {
+      & ~ .pb_radio_button {
+        border: 6px solid $primary;
+      }
     }
   }
   &.dark {
     .pb_radio_button {
       border-color: $border_dark;
     }
-    input:checked ~ .pb_radio_button {
-      border: 6px solid $primary;
+    input {
+      &:checked, &:focus {
+        & ~ .pb_radio_button {
+          border: 6px solid $primary;
+        }
+      }
     }
 
     @media (hover:hover) {
-      &:hover .pb_radio_button {
-        border-color: $primary_action;
+      &:hover, &:focus {
+        .pb_radio_button {
+          border-color: $primary_action;
+        }
       }
     }
     &.error {

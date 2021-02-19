@@ -5,8 +5,6 @@ require_relative "../../../../app/pb_kits/playbook/pb_date_picker/date_picker"
 RSpec.describe Playbook::PbDatePicker::DatePicker do
   subject { Playbook::PbDatePicker::DatePicker }
 
-  it { is_expected.to define_partial }
-
   it { is_expected.to define_boolean_prop(:allow_input).with_default(false) }
   it { is_expected.to define_boolean_prop(:dark).with_default(false) }
   it { is_expected.to define_prop(:default_date).with_default("") }

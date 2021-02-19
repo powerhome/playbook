@@ -32,11 +32,12 @@ Gem::Specification.new do |s|
   s.add_dependency "activesupport", ">= 5.1.6", "< 7.0"
   s.add_dependency "github_changelog_generator", "1.15.2"
   s.add_dependency "react-rails", "2.6.0"
-  s.add_dependency "redcarpet", "3.4.0"
+  s.add_dependency "redcarpet", "3.5.1"
   s.add_dependency "rouge", "3.15.0"
   s.add_dependency "sassc-rails", "1.3.0"
   s.add_dependency "slim-rails", "3.2.0"
   s.add_dependency "sprockets-rails", "2.3.3"
+  s.add_dependency "view_component", "2.23.2"
   s.add_dependency "webpacker", "4.2.2"
   s.add_dependency "webpacker-react", "~> 0.3.2"
 

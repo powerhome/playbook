@@ -7,4 +7,23 @@
   &[class*=_grow] {
     flex-grow: 1;
   }
+
+  &[class*=_shrink] {
+    flex-shrink: 1;
+  }
+
+
+  $overflow_values: auto, hidden, inherit, initial, scroll, visible;
+
+  @each $value in $overflow_values {
+    &.overflow_#{$value} {
+      overflow: #{$value}
+    }
+  }
+
+  @for $i from 0 through 12 {
+    &[class*=_flex_#{$i}]{
+      flex: $i;
+    }
+  }
 }

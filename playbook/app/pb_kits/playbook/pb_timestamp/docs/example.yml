@@ -2,6 +2,14 @@ examples:
 
   rails:
   - timestamp_default: Default
+  - timestamp_align: Alignments
+  - timestamp_timezones: Timezones
+  - timestamp_updated: Last Updated by
+  - timestamp_elapsed: Time Ago
 
   react:
   - timestamp_default: Default
+  - timestamp_align: Alignments
+  - timestamp_timezones: Timezones
+  - timestamp_updated: Last Updated by
+  - timestamp_elapsed: Time Ago

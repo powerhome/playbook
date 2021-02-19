@@ -2,14 +2,15 @@
 
 module Playbook
   module PbFlex
-    class Flex
-      include Playbook::Props
-
-      partial "pb_flex/flex"
-
+    class Flex < Playbook::KitBase
       prop :horizontal, type: Playbook::Props::Enum,
-                        values: %w[left center right stretch],
-                        default: "left"
+                        values: %w[left center right stretch none],
+                        default: "left",
+                        deprecated: true
+
+      prop :justify, type: Playbook::Props::Enum,
+                     values: %w[start center end stretch around between evenly none],
+                     default: "none"
 
       prop :inline, type: Playbook::Props::Boolean,
                     default: false
@@ -20,14 +21,32 @@ module Playbook
 
       prop :spacing, type: Playbook::Props::Enum,
                      values: %w[around between evenly none],
+                     default: "none",
+                     deprecated: true
+
+      prop :gap, type: Playbook::Props::Enum,
+                 values: %w[xs sm md lg xl none],
+                 default: "none"
+
+      prop :row_gap, type: Playbook::Props::Enum,
+                     values: %w[xs sm md lg xl none],
                      default: "none"
+
+      prop :column_gap, type: Playbook::Props::Enum,
+                        values: %w[xs sm md lg xl none],
+                        default: "none"
 
       prop :reverse, type: Playbook::Props::Boolean,
                      default: false
 
       prop :vertical, type: Playbook::Props::Enum,
-                      values: %w[top center bottom stretch baseline],
-                      default: "top"
+                      values: %w[top center bottom stretch baseline none],
+                      default: "top",
+                      deprecated: true
+
+      prop :align, type: Playbook::Props::Enum,
+                   values: %w[start center end stretch baseline none],
+                   default: "none"
 
       prop :wrap, type: Playbook::Props::Boolean,
                   default: false
@@ -35,24 +54,36 @@ module Playbook
       def classname
         generate_classname("pb_flex_kit",
                            orientation_class,
-                           horizontal_class,
-                           vertical_class,
+                           justify_class,
+                           align_class,
                            inline_class,
+                           reverse_class,
                            wrap_class,
-                           spacing_class)
+                           spacing_class,
+                           gap_class,
+                           row_gap_class,
+                           column_gap_class)
       end
 
     private
 
       def orientation_class
-        "orientation_#{orientation}#{reverse_class}"
+        "orientation_#{orientation}"
       end
 
       def horizontal_class
         if orientation == "row"
-          "justify_content_#{horizontal}#{reverse_class}"
+          "justify_content_#{horizontal}"
         else
-          "align_items_#{horizontal}"
+          "align_items_#{horizontal}" if align == "none"
+        end
+      end
+
+      def justify_class
+        if justify == "none"
+          horizontal_class
+        else
+          "justify_content_#{justify}"
         end
       end
 
@@ -65,19 +96,51 @@ module Playbook
       end
 
       def reverse_class
-        reverse ? "_reverse" : nil
+        reverse ? "reverse" : nil
       end
 
       def vertical_class
         if orientation == "row"
           "align_items_#{vertical}"
         else
-          "justify_content_#{vertical}_#{reverse_class}"
+          "justify_content_#{vertical}" if justify == "none"
+        end
+      end
+
+      def align_class
+        if align == "none"
+          vertical_class
+        else
+          "align_items_#{align}"
         end
       end
 
       def wrap_class
         wrap ? "wrap" : nil
+      end
+
+      def gap_class
+        if gap == "none"
+          nil
+        else
+          "gap_#{gap}"
+        end
+      end
+
+      def row_gap_class
+        if row_gap == "none"
+          nil
+        else
+          "rowGap_#{row_gap}"
+        end
+      end
+
+      def column_gap_class
+        if column_gap == "none"
+          nil
+        else
+          "columnGap_#{column_gap}"
+        end
       end
     end
   end

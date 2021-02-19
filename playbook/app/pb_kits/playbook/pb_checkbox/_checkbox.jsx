@@ -10,32 +10,34 @@ import { globalProps } from '../utilities/globalProps.js'
 type CheckboxProps = {
   aria?: object,
   checked?: boolean,
+  children: Node,
   className?: string,
   dark?: boolean,
   data?: object,
   error?: boolean,
   id?: string,
   name: string,
+  onChange: (boolean) => void,
+  tabIndex: number,
   text: string,
   value: string,
-  children: Node,
-  onChange: (boolean) => void,
 }
 
 const Checkbox = (props: CheckboxProps) => {
   const {
     aria = {},
     checked = false,
+    children = null,
     className,
     dark = false,
     data = {},
     error = false,
     id,
     name = '',
+    onChange = () => {},
+    tabIndex,
     text = '',
     value = '',
-    children = null,
-    onChange = () => {},
   } = props
 
   const dataProps = buildDataProps(data)
@@ -60,6 +62,7 @@ const Checkbox = (props: CheckboxProps) => {
             defaultChecked={checked}
             name={name}
             onChange={onChange}
+            tabIndex={tabIndex}
             type="checkbox"
             value={value}
         />

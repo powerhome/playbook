@@ -1,9 +1,11 @@
 import React from 'react'
 import { Table } from '../../'
 
-const TableAlignmentShiftData = () => {
+const TableAlignmentShiftData = (props) => {
   return (
-    <Table>
+    <Table
+        {...props}
+    >
       <thead>
         <tr>
           <th>&nbsp;</th>
@@ -26,7 +28,6 @@ const TableAlignmentShiftData = () => {
           </td>
         </tr>
       </tbody>
-      <br />
       <thead>
         <tr>
           <th>{'Espresso Drinks'}</th>

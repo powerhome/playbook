@@ -11,6 +11,7 @@ type ImageProps = {
   className?: string,
   data?: object,
   id?: string,
+  onError?: () => {},
   size: "xs" | "sm" | "md" | "lg" | "xl",
   rounded?: boolean,
   url: string,
@@ -23,6 +24,7 @@ const Image = (props: ImageProps) => {
     className,
     data = {},
     id,
+    onError = null,
     rounded = false,
     size = '',
     url = '',
@@ -30,7 +32,9 @@ const Image = (props: ImageProps) => {
 
   const ariaProps = buildAriaProps(aria)
   const classes = classnames(
-    buildCss('pb_image_kit lazyload blur_up', size),
+    buildCss('pb_image_kit', size),
+    'lazyload',
+    'blur_up',
     { rounded },
     globalProps(props),
     className
@@ -46,7 +50,8 @@ const Image = (props: ImageProps) => {
           className={classes}
           data-src={url}
           id={id}
-          rounded={rounded}
+          onError={onError}
+          rounded={+rounded}
           src={url}
       />
     </div>

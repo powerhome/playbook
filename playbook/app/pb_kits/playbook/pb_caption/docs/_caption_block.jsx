@@ -9,15 +9,15 @@ const CaptionBlock = (props) => {
       </Caption>
 
       <Caption
-          {...props}
           size="lg"
+          {...props}
       >
         {'Large Block'}
       </Caption>
 
       <Caption
-          {...props}
           size="xs"
+          {...props}
       >
         {'Subcaption Block'}
       </Caption>

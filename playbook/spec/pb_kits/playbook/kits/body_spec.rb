@@ -5,7 +5,6 @@ require_relative "../../../../app/pb_kits/playbook/pb_body/body"
 RSpec.describe Playbook::PbBody::Body do
   subject { Playbook::PbBody::Body }
 
-  it { is_expected.to define_partial }
   it { is_expected.to define_enum_prop(:color)
     .with_default("default")
     .with_values("default", "light", "lighter") }

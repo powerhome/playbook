@@ -21,14 +21,46 @@ $card-border-radius: $border_rad_lightest;
       grid-column-gap: $space_sm;
       grid-row-gap: $space_sm;
       grid-template-columns: repeat(4, 1fr);
-      
+
       @media screen and (max-width: $screen-md-min) {
         grid-template-columns: repeat(2, 1fr);
       }
-       @media screen and (max-width: $screen-xs-min) {
+      @media screen and (max-width: $screen-xs-min) {
         grid-template-columns: repeat(1, 1fr);
       }
-    } 
+    }
+  }
+
+  &[class*=_masonry] {
+    div.layout_body {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      grid-gap: 10px;
+      grid-auto-rows: minmax(180px, auto);
+      grid-auto-flow: dense;
+      padding: 10px;
+
+      .size_md {
+        grid-column-end: span 2;
+        grid-row-end: span 2;
+      }
+
+      .size_lg {
+        grid-column-end: span 3;
+        grid-row-end: span 4;
+      }
+
+      @media screen and (max-width: $screen-lg-min) {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      div.layout_item, * {
+        display: flex;
+        img {
+          max-width: 100%;
+        }
+      }
+    }
   }
 
   &[class*=_collection_detail]{
@@ -36,13 +68,13 @@ $card-border-radius: $border_rad_lightest;
       width: 100%;
       height: 100%;
       padding: $space_lg;
-      grid-template-areas: 
+      grid-template-areas:
       "side-bar collection";
       grid-template-columns: .25fr 1fr;
       grid-column-gap: $space_sm;
       div.layout_body{
         @media screen and (min-width: $screen-md-min) {
-        margin-left: $space_md;        
+        margin-left: $space_md;
         }
         @media screen and (max-width: $screen-lg-min) {
           grid-template-columns: repeat(3, 1fr);
@@ -61,7 +93,7 @@ $card-border-radius: $border_rad_lightest;
         grid-template-columns: 1fr;
         grid-row-gap: $space_sm;
       }
-      
+
   }
 
   &[class*=_kanban]{
@@ -76,7 +108,7 @@ $card-border-radius: $border_rad_lightest;
       content: '';
       flex: 0 0 $gap;
     }
-    
+
     div.layout_body{
       width: $list-width;
       height: 100vh;
@@ -135,7 +167,7 @@ $card-border-radius: $border_rad_lightest;
       width: 100%;
     }
   }
-  
+
 
   &[class*=_sidebar]{
     $layout_sizes: (
@@ -188,7 +220,7 @@ $card-border-radius: $border_rad_lightest;
     // Collapse Settings
     @each $position in $positions {
       @each $breakpoint_name, $breakpoint in $breakpoints {
-        &_#{$position}_collapse_#{$breakpoint_name} {
+        &[class*=_#{$position}_collapse_#{$breakpoint_name}] {
           @include break_at($breakpoint) {
             @if $position == 'left' {
               grid-template-areas: "layout_collapsed_#{$breakpoint_name}_sidebar" "layout_collapsed_#{$breakpoint_name}_body";
@@ -198,7 +230,7 @@ $card-border-radius: $border_rad_lightest;
               grid-template-areas: "layout_collapsed_#{$breakpoint_name}_body" "layout_collapsed_#{$breakpoint_name}_sidebar";
               grid-template-rows: 1fr auto;
             }
-            grid-template-columns: 1fr;
+            grid-template-columns: 1fr !important;
             &.full {
               min-height: auto !important;
             }

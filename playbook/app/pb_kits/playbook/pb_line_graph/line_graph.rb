@@ -2,11 +2,7 @@
 
 module Playbook
   module PbLineGraph
-    class LineGraph
-      include Playbook::Props
-
-      partial "pb_line_graph/line_graph"
-
+    class LineGraph < Playbook::KitBase
       prop :axis_title
       prop :chart_data, type: Playbook::Props::Array,
                         default: []

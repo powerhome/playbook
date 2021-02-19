@@ -1,47 +1,92 @@
-<div class="pb--kit-show sample-nav">
-  <div class="sample-actions">
-    <div class="items">
-      <a href="/samples">
-        <%= pb_rails("circle_icon_button", props: {variant: "primary", icon: "angle-left", dark: true}) %>
-      </a>
-    </div>
-  </div>
-  <div class="pb--kit-type-nav sample">
-    <%= pb_rails("nav", props: { orientation: "horizontal", classname: "code-controls"}) do %>
-      <%= pb_rails("nav/item", props: { text: "Rails", link: "#{sample_show_rails_path(@sample)}", active: action_name == 'sample_show_rails' }) %>
-      <%= pb_rails("nav/item", props: { text: "React", link: "#{sample_show_reacts_path(@sample)}", active: action_name == 'sample_show_react' }) %>
-    <% end %>
-  </div>
-  <div class="sample-actions-right">
-    <div class="items">
-      <%= pb_rails("button", props: { variant: "primary", id: 'kits-used' }) do %>
-          Kits Used
-          <%= pb_rails("icon", props: { icon: "angle-down"}) %>
-      <% end %>
-      <%= pb_rails("popover", props: { max_width: "300px", trigger_element_id: "kits-used", tooltip_id: "kits-used-tooltip", position: 'bottom', padding: "sm" }) do %>
-        <%= pb_rails("flex", props: { spacing: "around", wrap: true }) do %>
-              <% kits_used(@sample).each do |kit| %>
-                <a href=<%="/kits/#{kit[0]}"%>>
-                  <%= pb_rails("pill", props: {
-                    text: kit[0].titleize,
-                    variant: "primary",
-                  }) %>
-                </a>
-              <% end %>
-        <% end %>
-      <% end %>
-    </div>
-    <div class="items">
-      <%= pb_rails("circle_icon_button", props: { classname:"toggle-button-js", variant: "secondary", icon: "code", dark: true}) %>
-    </div>
-    <div class="items">
-      <%= pb_rails("circle_icon_button", props:{ classname: "expand", variant: "secondary", icon: "expand", dark: true}) %>
-    </div>
-  </div>
-</div>
-<%= pb_rails("circle_icon_button", props:{ classname: "compress", variant: "link", icon: "compress"}) %>
+<%= pb_rails("background", props: { background_color: "light", padding: "xl" }) do %>
 
-<%= render_sample_ui(@sample, @type) %>
+  <%= pb_rails("flex", props: { margin_bottom: "md" }) do %>
+    <a href="/samples">
+      <%= pb_rails("title", props: {
+        margin_right: "xs",
+        text: "Samples",
+        tag: "h4",
+        size: 4
+      }) %>
+    </a>
+    <%= pb_rails("title", props: {
+      margin_right: "xs",
+      text: "/",
+      tag: "h4",
+      size: 4
+    }) %>
+    <%= pb_rails("title", props: {
+      text: "#{get_category(@sample).titleize}",
+      tag: "h4",
+      size: 4
+    }) %>
+  <% end %>
+
+  <%= pb_rails("title", props: { 
+    margin_bottom: "xl",
+    text: @sample.titleize,
+    tag: "h2",
+    size: 2
+  }) %>
+
+  <%= pb_rails("card", props: { id: "sample-card", padding: "none", shadow: "deeper" }) do %>
+    <%= pb_rails("card/card_header", props: { padding: "xs", header_color: "white" }) do %>
+
+      <%= pb_rails("flex", props: { spacing: "between", vertical: "center" }) do %>
+  
+        <%= pb_rails("flex/flex_item", props: { margin_left: "sm" }) do %>
+          <%= pb_rails("nav", props: { orientation: "horizontal", variant: "subtle" }) do %>
+            <%= pb_rails("nav/item", props: { text: "Rails", link: "#{sample_show_rails_path(@sample)}", active: action_name == 'sample_show_rails' }) %>
+            <%= pb_rails("nav/item", props: { text: "React", link: "#{sample_show_reacts_path(@sample)}", active: action_name == 'sample_show_react' }) %>
+          <% end %>
+        <% end %>
+
+        <%= pb_rails("flex/flex_item", props: { margin_right: "sm" }) do %>
+          <%= pb_rails("flex", props: { classname: "header-icons" }) do %>
+
+            <%= pb_rails("body", props: { classname: "font-size-override", color: "light", id: 'kits-used' }) do %>
+                Kits Used
+                <%= pb_rails("icon", props: { icon: "angle-down"}) %>
+            <% end %>
+            <%= pb_rails("popover", props: { max_width: "300px", trigger_element_id: "kits-used", tooltip_id: "kits-used-tooltip", position: 'bottom', padding: "sm" }) do %>
+              <%= pb_rails("flex", props: { spacing: "around", wrap: true }) do %>
+                <% kits_used(@sample).each do |kit| %>
+                  <a href=<%="/kits/#{kit[0]}/#{@type}"%>>
+                    <%= pb_rails("pill", props: {
+                      text: kit[0].titleize,
+                      variant: "primary",
+                    }) %>
+                  </a>
+                <% end %>
+              <% end %>
+            <% end %>
+
+            <%= pb_rails("icon_value", props: {
+              classname: "font-size-override",
+              id: "toggle-button-js",
+              icon: "code",
+              margin_left: "md",
+              text: "Code"
+            }) %>
+            <%= pb_rails("icon_value", props: {
+              classname: "font-size-override",
+              id: "fullscreen-toggle",
+              icon: "expand",
+              margin_left: "md",
+              text: "Fullscreen"
+            }) %>
+          <% end %>
+          
+          <% end %>
+        <% end %>
+    <% end %>
+
+    <%= pb_rails("card/card_body", props: { classname: "bg_light", padding: "none" }) do %>
+      <%= render_sample_ui(@sample, @type) %>
+    <% end %>
+  <% end %>
+
+<% end %>
 
 <div class="pb--kit-show">
     <div class="pb--doc light_ui">

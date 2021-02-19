@@ -2,11 +2,7 @@
 
 module Playbook
   module PbTable
-    class TableRow
-      include Playbook::Props
-
-      partial "pb_table/table_row"
-
+    class TableRow < Playbook::KitBase
       prop :side_highlight_color, type: Playbook::Props::String,
                                   default: "none"
 

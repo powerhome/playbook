@@ -5,8 +5,6 @@ require_relative "../../../../app/pb_kits/playbook/pb_currency/currency"
 RSpec.describe Playbook::PbCurrency::Currency do
   subject { Playbook::PbCurrency::Currency }
 
-  it { is_expected.to define_partial }
-
   it { is_expected.to define_enum_prop(:align).with_default("left").with_values("left", "center", "right") }
   it { is_expected.to define_prop(:amount).of_type(Playbook::Props::String) }
   it { is_expected.to define_prop(:emphasized).of_type(Playbook::Props::Boolean) }

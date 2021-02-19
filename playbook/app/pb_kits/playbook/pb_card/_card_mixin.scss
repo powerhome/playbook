@@ -50,6 +50,12 @@ $pb_card_padding:(
       box-shadow: $shadow;
     }
   }
+
+  @each $name, $radius in $border_radius {
+    &[class*=_#{$name}] {
+      border-radius: $radius;
+    }
+  }
 }
 
 @mixin pb_card_dark {

@@ -3,16 +3,17 @@ import { Card, Layout, Nav, NavItem } from '../../'
 const Cards = ({ n }) => {
   const cards = []
   for (let i = 0; i < n; ++i) {
-    cards.push(<Card>{'Card content'}</Card>)
+    cards.push(<Card key={i}>{'Card content'}</Card>)
   }
   return (cards)
 }
 
-const LayoutCollectionDetail = () => {
+const LayoutCollectionDetail = (props) => {
   return (
     <div>
       <Layout
           layout="collection_detail"
+          {...props}
       >
         <Card padding="none">
           {
@@ -21,23 +22,28 @@ const LayoutCollectionDetail = () => {
                 marginTop="sm"
                 orientation="vertical"
                 title="Menu"
+                {...props}
             >
               <NavItem
                   link="#"
                   text="Photos"
+                  {...props}
               />
               <NavItem
                   link="#"
                   text="Music"
+                  {...props}
               />
               <NavItem
                   active
                   link="#"
                   text="Video"
+                  {...props}
               />
               <NavItem
                   link="#"
                   text="Files"
+                  {...props}
               />
             </Nav>
         }
