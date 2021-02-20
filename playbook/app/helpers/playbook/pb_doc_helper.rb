@@ -2,56 +2,56 @@
 
 module Playbook
   module PbDocHelper
-    def pb_doc_source(type, kit, example_key)
-      highlight = type == "react" ? "react" : "erb"
-      extension = type == "react" ? "jsx" : "html.erb"
-      source = read_source_file kit_path(kit).join("docs/_#{example_key}.#{extension}")
-      raw rouge(source, highlight)
+    # Used only in kit_show, dependent on kit path
+    def pb_doc_kit_footer(kit)
+      pb_doc_example_read_source kit, "_footer.md"
     end
 
+    def pb_doc_kit_description(kit)
+      pb_doc_example_read_source kit, "_description.md"
+    end
+
+    def pb_doc_has_kit_type?(kit, type = "rails")
+      if type == "react"
+        jsxfiles = File.join("**", "*.jsx")
+        Dir.glob(jsxfiles, base: pb_doc_kit_path(kit)).present?
+      else
+        erbfiles = File.join("**", "*.erb")
+        Dir.glob(erbfiles, base: pb_doc_kit_path(kit)).present?
+      end
+    end
+
+    # Actual PbDocHelper
     def pb_doc_example(type, kit, example_key)
       if type == "rails"
-        render file: kit_path(kit).join("docs/_#{example_key}.html.erb")
+        render file: pb_doc_kit_path(kit, "_#{example_key}.html.erb")
       elsif type == "react"
         pb_react(example_key.camelize)
       end
-    end
-
-    def has_kit_type?(kit, type)
-      type ||= "rails"
-      if type == "rails"
-        erbfiles = File.join("**", "*.erb")
-        Dir.glob(erbfiles, base: "#{kit_path(kit)}/docs").present?
-      elsif type == "react"
-        jsxfiles = File.join("**", "*.jsx")
-        Dir.glob(jsxfiles, base: "#{kit_path(kit)}/docs").present?
-      end
-    end
-
-    def get_kit_description(kit)
-      read_source_file kit_path(kit).join("docs/_description.md")
     end
 
     def pb_kit_title(title)
       title.remove("pb_").titleize.tr("_", " ")
     end
 
-    def get_per_sample_descriptions(kit, key)
-      read_source_file kit_path(kit).join("docs/_#{key}.md")
+    def pb_doc_example_description(kit, key)
+      pb_doc_example_read_source kit, "_#{key}.md"
     end
 
-    def get_kit_footer(kit)
-      read_source_file kit_path(kit).join("docs/_footer.md")
+    def pb_doc_example_source(type, kit, example_key)
+      extension = type == "react" ? "jsx" : "html.erb"
+      pb_doc_example_read_source kit, "_#{example_key}.#{extension}"
     end
 
     def pb_kit(kit: "", type: "rails", show_code: true, limit_examples: false)
       @type = type
       @show_code = show_code
-      examples = get_kit_examples(kit, type)
+      examples = pb_doc_kit_examples(kit, type)
       examples = examples.first(1) if limit_examples
       render partial: "playbook/config/kit_example", locals: { examples: examples, kit: kit }
     end
 
+    # Deal with lists of kits, used in Playbook doc and Externally
     def pb_kits(type: "rails", limit_examples: false)
       display_kits = []
       kits = get_kits
@@ -68,30 +68,30 @@ module Playbook
     end
 
     def get_kits
-      menu = YAML.load_file("#{Playbook::Engine.root}/app/pb_kits/playbook/data/menu.yml")
+      menu = YAML.load_file(Playbook::Engine.root.join("app/pb_kits/playbook/data/menu.yml"))
       menu["kits"]
     end
 
     def render_pb_doc_kit(kit, type, code = true, limit_examples)
-      title = render_clickable_title(kit, type)
+      title = pb_doc_render_clickable_title(kit, type)
       ui = raw("<div class='pb--docItem-ui'>
           #{pb_kit(kit: kit, type: type, show_code: code, limit_examples: limit_examples)}</div>")
       title + ui
     end
 
-    def read_source_file(*args)
-      path = Playbook::Engine.root.join(*args)
+  private
+
+    def pb_doc_kit_path(kit, *args)
+      Playbook::Engine.root.join("app/pb_kits/playbook/pb_#{kit}", "docs", *args)
+    end
+
+    def pb_doc_example_read_source(kit, file)
+      path = pb_doc_kit_path(kit, file)
       path.exist? ? path.read : ""
     end
 
-  private
-
-    def kit_path(kit)
-      Playbook::Engine.root.join("app/pb_kits/playbook/pb_#{kit}")
-    end
-
-    def get_kit_examples(kit, type)
-      example_file = kit_path(kit).join("docs/example.yml")
+    def pb_doc_kit_examples(kit, type)
+      example_file = pb_doc_kit_path(kit, "example.yml")
       if File.exist?(example_file)
         examples_list = YAML.load_file(example_file)
                             .inject({}) { |item, (k, v)| item[k.to_sym] = v; item }
@@ -101,7 +101,7 @@ module Playbook
       end
     end
 
-    def render_clickable_title(kit, type)
+    def pb_doc_render_clickable_title(kit, type)
       url = "#"
       begin
         url = if type == "react"
@@ -109,6 +109,8 @@ module Playbook
               else
                 kit_show_path(kit)
               end
+      # FIXME this is here because this helper generates a link for playbook website,
+      #       but shouldn't do anything when used elsewhere
       rescue
         puts "Kit Path Not Avaliable"
       end
