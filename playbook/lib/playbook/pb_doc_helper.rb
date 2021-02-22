@@ -21,6 +21,10 @@ module Playbook
       end.join.yield_self(&method(:raw))
     end
 
+    def nav_hash_array(link)
+      link.first.last
+    end
+
     # Deal with lists of kits, used in Playbook doc and Externally
     def pb_kits(type: "rails", limit_examples: false, dark_mode: false)
       display_kits = []

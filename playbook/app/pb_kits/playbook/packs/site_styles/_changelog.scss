@@ -1,4 +1,12 @@
+@import "../../tokens/spacing";
+
 .changelog-card-collection {
   max-width: 650px;
   margin: auto;
+  h2 {
+    margin-top: $space_xl;
+    &:first-child {
+      margin-top: 0;
+    }
+  }
 }
