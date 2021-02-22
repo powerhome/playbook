@@ -17,10 +17,6 @@ module Playbook
       raw("<div class='pb--docItem'>" + display_kits.join("</div><div class='pb--docItem'>") + "</div>")
     end
 
-    def pb_doc_kit_api(kit)
-      pb_rails("docs/kit_api", props: { kit: kit.to_s })
-    end
-
     def pb_doc_kit_footer(kit)
       pb_doc_example_read_source kit, "_footer.md"
     end

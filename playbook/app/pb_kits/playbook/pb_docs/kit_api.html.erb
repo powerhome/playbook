@@ -2,7 +2,7 @@
   <%= pb_rails("title", props: { text: "Available Props", size: 3, margin_bottom: "sm" }) %>
   <%= pb_rails("card", props: { padding: "none" }) do %>
     <%= pb_rails("list", props: { xpadding: true }) do %>
-      <% kit_api.each_with_index do |(key, value), index| %>
+      <% kit_props.each do |key, _def| %>
         <%= pb_rails("list/item") do %>
           <%= key %>
         <% end %>
