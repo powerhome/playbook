@@ -105,10 +105,6 @@ module Playbook
       super kit, props: dark_mode_props(props), &block
     end
 
-    def pb_react(kit, props: {}, options: {})
-      react_component kit.camelize, dark_mode_props(props), options
-    end
-
   private
 
     def dark_mode_props(props)

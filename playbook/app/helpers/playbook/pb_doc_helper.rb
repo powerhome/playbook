@@ -26,7 +26,7 @@ module Playbook
       if type == "rails"
         render file: pb_doc_kit_path(kit, "_#{example_key}.html.erb")
       elsif type == "react"
-        pb_react(example_key.camelize)
+        react_component(example_key.camelize, dark: dark_mode?)
       end
     end
 
