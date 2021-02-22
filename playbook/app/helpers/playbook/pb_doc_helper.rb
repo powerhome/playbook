@@ -2,26 +2,6 @@
 
 module Playbook
   module PbDocHelper
-    # Used only in kit_show, dependent on kit path
-    def pb_doc_kit_footer(kit)
-      pb_doc_example_read_source kit, "_footer.md"
-    end
-
-    def pb_doc_kit_description(kit)
-      pb_doc_example_read_source kit, "_description.md"
-    end
-
-    def pb_doc_has_kit_type?(kit, type = "rails")
-      if type == "react"
-        jsxfiles = File.join("**", "*.jsx")
-        Dir.glob(jsxfiles, base: pb_doc_kit_path(kit)).present?
-      else
-        erbfiles = File.join("**", "*.erb")
-        Dir.glob(erbfiles, base: pb_doc_kit_path(kit)).present?
-      end
-    end
-
-    # Actual PbDocHelper
     def pb_kit_title(title)
       title.remove("pb_").titleize.tr("_", " ")
     end
@@ -73,11 +53,6 @@ module Playbook
 
     def pb_doc_kit_path(kit, *args)
       Playbook.kit_path(kit, "docs", *args)
-    end
-
-    def pb_doc_example_read_source(kit, file)
-      path = pb_doc_kit_path(kit, file)
-      path.exist? ? path.read : ""
     end
 
     def pb_doc_kit_examples(kit, type)

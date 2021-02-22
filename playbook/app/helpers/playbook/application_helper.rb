@@ -18,9 +18,28 @@ module Playbook
     end
 
     def pb_doc_kit_api(kit)
-      kit_class = Playbook::KitResolver.resolve(kit.to_s)
-      return unless kit_class
-      render partial: "playbook/config/pb_kit_api", locals: { kit_api: kit_class.props.keys }
+      pb_rails("docs/kit_api", props: { kit: kit.to_s })
+    end
+
+    def pb_doc_kit_footer(kit)
+      pb_doc_example_read_source kit, "_footer.md"
+    end
+
+    def pb_doc_kit_description(kit)
+      pb_doc_example_read_source kit, "_description.md"
+    end
+
+    def pb_doc_example_read_source(kit, file)
+      Playbook.kit_path(kit, "docs", file).read
+    rescue Errno::ENOENT
+      ""
+    end
+
+    def pb_doc_has_kit_type?(kit, type = "rails")
+      extension = type == "react" ? "jsx" : "erb"
+      Playbook.kit_path(kit, "docs")
+              .glob("**/*.#{extension}")
+              .present?
     end
 
     def nav_hash_category(link)
