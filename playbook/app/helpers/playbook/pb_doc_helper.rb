@@ -6,6 +6,27 @@ module Playbook
       title.remove("pb_").titleize.tr("_", " ")
     end
 
+    def pb_doc_source(type, kit, example_key)
+      highlight = type == "react" ? "react" : "erb"
+      extension = type == "react" ? "jsx" : "html.erb"
+      source = read_source_file kit_path(kit).join("docs/_#{example_key}.#{extension}")
+      raw rouge(source, highlight)
+    end
+
+    def pb_doc_example(type, kit, example_key)
+      if type == "rails"
+        render file: kit_path(kit).join("docs/_#{example_key}.html.erb")
+      elsif type == "react"
+        pb_react(example_key.camelize)
+      end
+    end
+
+    def pb_doc_kit_api(kit)
+      kit_class = Playbook::KitResolver.resolve(kit.to_s)
+      return unless kit_class
+      render partial: "playbook/config/pb_kit_api", locals: { kit_api: kit_class.props.keys }
+    end
+
     def has_kit_type?(kit, type)
       type ||= "rails"
       if type == "rails"
@@ -17,20 +38,16 @@ module Playbook
       end
     end
 
-    def kit_path(kit)
-      "#{Playbook::Engine.root}/app/pb_kits/playbook/pb_#{kit}"
-    end
-
     def get_kit_description(kit)
-      read_source_file "app/pb_kits/playbook/pb_#{kit}/docs/_description.md"
+      read_source_file kit_path(kit).join("docs/_description.md")
     end
 
     def get_per_sample_descriptions(kit, key)
-      read_source_file "app/pb_kits/playbook/pb_#{kit}/docs/_#{key}.md"
+      read_source_file kit_path(kit).join("docs/_#{key}.md")
     end
 
     def get_kit_footer(kit)
-      read_source_file "app/pb_kits/playbook/pb_#{kit}/docs/_footer.md"
+      read_source_file kit_path(kit).join("docs/_footer.md")
     end
 
     def pb_kit(kit: "", type: "rails", show_code: true, limit_examples: false)
@@ -38,7 +55,7 @@ module Playbook
       @kit_examples = get_kit_examples(kit, type)
       @limit_examples = limit_examples
       @show_code = show_code
-      render partial: "config/kit_example"
+      render partial: "playbook/config/kit_example"
     end
 
     def pb_kits(type: "rails", limit_examples: false)
@@ -74,16 +91,6 @@ module Playbook
       ui = raw("<div class='pb--docItem-ui'>
           #{pb_kit(kit: kit, type: type, show_code: code, limit_examples: limit_examples)}</div>")
       title + ui
-    end
-
-    def pb_kit_api(kit)
-      kit_class_obj = get_class_name(kit.to_s)
-      @kit_api = if kit_class_obj < Playbook::PbKit::Base
-                   kit_class_obj.instance_method(:initialize).parameters.map(&:last)
-                 else
-                   kit_class_obj.props.keys
-                 end
-      render partial: "playbook/config/pb_kit_api"
     end
 
     def nav_hash_category(link)
@@ -171,9 +178,12 @@ module Playbook
 
   private
 
+    def kit_path(kit)
+      Playbook::Engine.root.join("app/pb_kits/playbook/pb_#{kit}")
+    end
+
     def get_kit_examples(kit, type)
-      example_file = File.join(Playbook::Engine.root,
-                               "app", "pb_kits", "playbook", "pb_#{kit}", "docs", "example.yml")
+      example_file = kit_path(kit).join("docs/example.yml")
       if File.exist? example_file
         examples_list = YAML.load_file(example_file)
                             .inject({}) { |item, (k, v)| item[k.to_sym] = v; item }
@@ -181,12 +191,6 @@ module Playbook
       else
         {}
       end
-    end
-
-    def get_class_name(kit)
-      folder = is_subkit?(kit) ? kit.split("/")[0] : kit
-      item = is_subkit?(kit) ? kit.split("/")[-1] : kit
-      "Playbook::Pb#{folder.camelize}::#{item.camelize}".safe_constantize
     end
 
     def render_clickable_title(kit, type)

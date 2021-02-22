@@ -2,11 +2,7 @@
 
 module Playbook
   module PbPersonContact
-    class PersonContact
-      include Playbook::Props
-
-      partial "pb_person_contact/person_contact"
-
+    class PersonContact < Playbook::KitBase
       prop :contacts, type: Playbook::Props::HashArray, default: []
       prop :first_name
       prop :last_name

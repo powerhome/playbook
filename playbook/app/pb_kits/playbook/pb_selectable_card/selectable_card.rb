@@ -2,11 +2,7 @@
 
 module Playbook
   module PbSelectableCard
-    class SelectableCard
-      include Playbook::Props
-
-      partial "pb_selectable_card/selectable_card"
-
+    class SelectableCard < Playbook::KitBase
       prop :checked, type: Playbook::Props::Boolean,
                      default: false
       prop :disabled, type: Playbook::Props::Boolean,

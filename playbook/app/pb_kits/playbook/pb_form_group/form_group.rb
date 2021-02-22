@@ -2,11 +2,7 @@
 
 module Playbook
   module PbFormGroup
-    class FormGroup
-      include Playbook::Props
-
-      partial "pb_form_group/form_group"
-
+    class FormGroup < Playbook::KitBase
       def classname
         generate_classname("pb_form_group_kit")
       end

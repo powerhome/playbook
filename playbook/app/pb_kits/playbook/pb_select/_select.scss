@@ -66,6 +66,10 @@
       background: $focus_input_dark;
       box-shadow: inset 0 -11px 20px rgba($white, 0.05);
       text-shadow: 0 0 0 $text_dk_default;
+      padding-right: $space_xl;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
       @media (hover:hover) {
         &:hover, &:active, &:focus {
           background-color: tint($focus_input_dark, 5%);

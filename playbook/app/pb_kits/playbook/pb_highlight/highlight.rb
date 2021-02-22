@@ -2,11 +2,7 @@
 
 module Playbook
   module PbHighlight
-    class Highlight
-      include Playbook::Props
-
-      partial "pb_highlight/highlight"
-
+    class Highlight < Playbook::KitBase
       prop :text
 
       def classname

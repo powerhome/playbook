@@ -5,8 +5,6 @@ require_relative "../../../../app/pb_kits/playbook/pb_typeahead/typeahead"
 RSpec.describe Playbook::PbTypeahead::Typeahead do
   subject { Playbook::PbTypeahead::Typeahead }
 
-  it { is_expected.to define_partial }
-
   it { is_expected.to define_prop(:async).with_default(false) }
   it { is_expected.to define_prop(:label) }
   it { is_expected.to define_prop(:load_options) }

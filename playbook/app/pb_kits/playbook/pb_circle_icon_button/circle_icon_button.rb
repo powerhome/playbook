@@ -1,10 +1,6 @@
 module Playbook
   module PbCircleIconButton
-    class CircleIconButton
-      include Playbook::Props
-
-      partial "pb_circle_icon_button/circle_icon_button"
-
+    class CircleIconButton < Playbook::KitBase
       prop :type, type: Playbook::Props::Enum,
                   values: %w[button submit reset],
                   default: "button"

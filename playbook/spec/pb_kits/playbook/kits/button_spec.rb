@@ -5,7 +5,6 @@ require_relative "../../../../app/pb_kits/playbook/pb_button/button"
 RSpec.describe Playbook::PbButton::Button do
   subject { Playbook::PbButton::Button }
 
-  it { is_expected.to define_partial }
   it { is_expected.to define_enum_prop(:variant)
                       .with_default("primary")
                       .with_values("primary", "secondary", "link") }

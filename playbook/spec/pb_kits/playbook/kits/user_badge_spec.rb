@@ -5,8 +5,6 @@ require_relative "../../../../app/pb_kits/playbook/pb_user_badge/user_badge"
 RSpec.describe Playbook::PbUserBadge::UserBadge do
   subject { Playbook::PbUserBadge::UserBadge }
 
-  it { is_expected.to define_partial }
-
   it { is_expected.to define_enum_prop(:badge)
                       .with_default("million-dollar")
                       .with_values("million-dollar", "veteran")}

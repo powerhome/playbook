@@ -5,12 +5,15 @@ import classnames from 'classnames'
 import useFocus from './useFocus.js'
 import Trix from 'trix'
 import { globalProps } from '../utilities/globalProps.js'
+import { buildAriaProps, buildDataProps } from '../utilities/props'
 
 type RichTextEditorProps = {
+  aria?: object,
   className?: string,
+  data?: object,
   focus?: boolean,
   id?: string,
-  name: string,
+  name?: string,
   onChange: (string) => void,
   placeholder?: string,
   simple?: boolean,
@@ -21,7 +24,9 @@ type RichTextEditorProps = {
 
 const RichTextEditor = (props: RichTextEditorProps, ref: React.ElementRef<"input">) => {
   const {
+    aria = {},
     className,
+    data = {},
     focus = false,
     id,
     name,
@@ -33,6 +38,8 @@ const RichTextEditor = (props: RichTextEditorProps, ref: React.ElementRef<"input
     value = '',
   } = props
   const trixRef = useRef()
+  const ariaProps = buildAriaProps(aria)
+  const dataProps = buildDataProps(data)
 
   useEffect(() => {
     Trix.config.textAttributes.inlineCode = {
@@ -100,6 +107,8 @@ const RichTextEditor = (props: RichTextEditorProps, ref: React.ElementRef<"input
 
   return (
     <div
+        {...ariaProps}
+        {...dataProps}
         className={classnames(
         RichTextEditorClass,
         SimpleClass,
@@ -117,6 +126,7 @@ const RichTextEditor = (props: RichTextEditorProps, ref: React.ElementRef<"input
       />
       <trix-editor
           input={id}
+          name={name}
           placeholder={placeholder}
           ref={trixRef}
       />

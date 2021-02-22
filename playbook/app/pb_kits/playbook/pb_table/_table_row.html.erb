@@ -1,7 +1,0 @@
-<%= content_tag(:tr,
-    aria: object.aria,
-    class: object.classname,
-    data: object.data,
-    id: object.id) do %>
-  <%= capture(&object.children) %>
-<% end %>

@@ -2,12 +2,8 @@
 
 module Playbook
   module PbList
-    class Item
-      include Playbook::Props
-
+    class Item < Playbook::KitBase
       prop :tabindex
-
-      partial "pb_list/item"
 
       def classname
         generate_classname("pb_item_kit")

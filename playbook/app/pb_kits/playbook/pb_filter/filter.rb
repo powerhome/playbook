@@ -2,11 +2,7 @@
 
 module Playbook
   module PbFilter
-    class Filter
-      include Playbook::Props
-
-      partial "pb_filter/filter"
-
+    class Filter < Playbook::KitBase
       prop :filters, type: Playbook::Props::HashArray, default: [{name: ''}]
       prop :sort_menu, type: Playbook::Props::HashArray, default: [{}]
       prop :results, type: Playbook::Props::Numeric
@@ -28,6 +24,14 @@ module Playbook
           nil
         else
           "#{results} Results"
+        end
+      end
+
+      def wrapper(&block)
+        if object.background
+          pb_rails("card", props: { padding: "none" }, &block)
+        else
+          capture(&block)
         end
       end
 

@@ -2,11 +2,7 @@
 
 module Playbook
   module PbTextInput
-    class TextInput
-      include Playbook::Props
-
-      partial "pb_text_input/text_input"
-
+    class TextInput < Playbook::KitBase
       prop :autocomplete, type: Playbook::Props::Boolean,
                           default: true
       prop :disabled, type: Playbook::Props::Boolean,

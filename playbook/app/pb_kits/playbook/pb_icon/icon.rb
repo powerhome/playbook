@@ -2,11 +2,7 @@
 
 module Playbook
   module PbIcon
-    class Icon
-      include Playbook::Props
-
-      partial "pb_icon/icon"
-
+    class Icon < Playbook::KitBase
       prop :border, type: Playbook::Props::Boolean,
                     default: false
       prop :fixed_width, type: Playbook::Props::Boolean,

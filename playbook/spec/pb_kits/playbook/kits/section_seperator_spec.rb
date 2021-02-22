@@ -5,8 +5,6 @@ require_relative "../../../../app/pb_kits/playbook/pb_section_separator/section_
 RSpec.describe Playbook::PbSectionSeparator::SectionSeparator do
   subject { Playbook::PbSectionSeparator::SectionSeparator }
 
-  it { is_expected.to define_partial }
-
   it { is_expected.to define_prop(:text) }
   it { is_expected.to define_enum_prop(:variant)
                       .with_default("card")

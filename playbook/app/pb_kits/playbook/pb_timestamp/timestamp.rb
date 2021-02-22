@@ -2,12 +2,8 @@
 
 module Playbook
   module PbTimestamp
-    class Timestamp
+    class Timestamp < Playbook::KitBase
       include ActionView::Helpers::DateHelper
-      include Playbook::Props
-
-      partial "pb_timestamp/timestamp"
-
       prop :text
       prop :timestamp
 

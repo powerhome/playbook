@@ -1,0 +1,18 @@
+<%= form_with(id: id,
+              aria: aria,
+              class: classname,
+              data: data,
+              builder: form_builder,
+              **options) do |form| %>
+  <% instance_exec form, &children %>
+
+  <% if validate %>
+    <% content_for :pb_js do %>
+      <%= javascript_tag do %>
+        window.addEventListener('DOMContentLoaded', function() {
+          PbFormValidation.start()
+        })
+      <% end %>
+    <% end %>
+  <% end %>
+<% end %>

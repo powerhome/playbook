@@ -5,8 +5,6 @@ require_relative "../../../../app/pb_kits/playbook/pb_date_time_stacked/date_tim
 RSpec.describe Playbook::PbDateTimeStacked::DateTimeStacked do
   subject { Playbook::PbDateTimeStacked::DateTimeStacked }
 
-  it { is_expected.to define_partial }
-
   it { is_expected.to define_prop(:dark)
                       .of_type(Playbook::Props::Boolean)
                       .with_default(false) }

@@ -6,7 +6,7 @@ const DistributionBarCustomColors = (props) => {
     <React.Fragment>
       <div>
         <DistributionBar
-            colors={['data_7', 'data_1', 'data_6']}
+            colors={['data_7', 'data_1', 'neutral']}
             widths={[4, 5, 3]}
             {...props}
         />

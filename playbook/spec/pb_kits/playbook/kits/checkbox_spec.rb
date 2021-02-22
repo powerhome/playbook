@@ -5,8 +5,6 @@ require_relative "../../../../app/pb_kits/playbook/pb_checkbox/checkbox"
 RSpec.describe Playbook::PbCheckbox::Checkbox do
   subject { Playbook::PbCheckbox::Checkbox }
 
-  it { is_expected.to define_partial }
-
   it { is_expected.to define_boolean_prop(:dark).with_default(false) }
   it { is_expected.to define_boolean_prop(:error).with_default(false) }
   it { is_expected.to define_boolean_prop(:required).with_default(false) }

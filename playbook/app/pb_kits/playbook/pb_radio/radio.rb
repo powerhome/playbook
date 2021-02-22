@@ -4,13 +4,7 @@ require "action_view"
 
 module Playbook
   module PbRadio
-    class Radio
-      include ActionView::Helpers::FormTagHelper
-      include ActionView::Context
-      include Playbook::Props
-
-      partial "pb_radio/radio"
-
+    class Radio < Playbook::KitBase
       prop :checked, type: Playbook::Props::Boolean,
                      default: false
       prop :error, type: Playbook::Props::Boolean,

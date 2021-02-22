@@ -2,11 +2,7 @@
 
 module Playbook
   module PbLayout
-    class Layout
-      include Playbook::Props
-
-      partial "pb_layout/layout"
-
+    class Layout < Playbook::KitBase
       prop :collapse, type: Playbook::Props::Enum,
                       values: %w[xs sm md lg xl],
                       default: "xs"

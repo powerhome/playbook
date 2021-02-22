@@ -2,11 +2,7 @@
 
 module Playbook
   module PbLayout
-    class Item
-      include Playbook::Props
-
-      partial "pb_layout/item"
-
+    class Item < Playbook::KitBase
       prop :size, type: Playbook::Props::Enum,
                   values: %w[sm md lg],
                   default: "sm"

@@ -2,11 +2,7 @@
 
 module Playbook
   module PbSectionSeparator
-    class SectionSeparator
-      include Playbook::Props
-
-      partial "pb_section_separator/section_separator"
-
+    class SectionSeparator < Playbook::KitBase
       prop :text
       prop :variant, type: Playbook::Props::Enum,
                      values: %w[card background],

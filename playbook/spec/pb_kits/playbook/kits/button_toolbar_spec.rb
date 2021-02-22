@@ -5,7 +5,6 @@ require_relative "../../../../app/pb_kits/playbook/pb_button_toolbar/button_tool
 RSpec.describe Playbook::PbButtonToolbar::ButtonToolbar do
   subject { Playbook::PbButtonToolbar::ButtonToolbar }
 
-  it { is_expected.to define_partial }
   it { is_expected.to define_enum_prop(:orientation)
                   .with_default("horizontal")
                   .with_values("horizontal", "vertical") }

@@ -1,5 +1,8 @@
 <%= pb_rails("radio", props: {
   text: "Power",
+  input_options: {
+    tabindex: 0
+  },
   name: "group 1",
   value: "Power"
 }) %>
@@ -9,8 +12,7 @@
 <%= pb_rails("radio", props: {
   text: "Nitro",
   name: "group 1",
-  value: "Nitro",
-  checked: true
+  value: "Nitro"
 }) %>
 
 <br>
