@@ -11,7 +11,7 @@ require "playbook/version"
 require "playbook/pb_kit_helper"
 require "playbook/kit_base"
 require "playbook/kit_resolver"
-require "playbook/markdown/template_handler"
+require "playbook/markdown"
 require "playbook/engine" if defined?(Rails)
 
 module Playbook
