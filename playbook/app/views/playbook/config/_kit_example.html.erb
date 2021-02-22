@@ -1,7 +1,0 @@
-<% examples.each do |kit_example| %>
-  <% kit_example.each do |key, item| %>
-    <%= pb_rails("card", props: { classname: "pb--doc", padding:"none" }) do %>
-      <%= render partial: "playbook/config/kit_ui", locals: { key: key, kit: kit, type: @type, item: item, show_code: @show_code } %>
-    <% end %>
-  <% end %>
-<% end %>

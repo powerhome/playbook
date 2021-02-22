@@ -44,11 +44,17 @@ module Playbook
     end
 
     def pb_kit(kit: "", type: "rails", show_code: true, limit_examples: false)
-      @type = type
-      @show_code = show_code
       examples = pb_doc_kit_examples(kit, type)
       examples = examples.first(1) if limit_examples
-      render partial: "playbook/config/kit_example", locals: { examples: examples, kit: kit }
+      examples.map do |example|
+        pb_rails "docs/kit_example", props: {
+          kit: kit,
+          example_title: example.values.first,
+          example_key: example.keys.first,
+          show_code: show_code,
+          type: type
+        }
+      end.join
     end
 
     # Deal with lists of kits, used in Playbook doc and Externally
