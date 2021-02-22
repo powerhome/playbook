@@ -89,7 +89,7 @@ module Playbook
   private
 
     def pb_doc_kit_path(kit, *args)
-      Playbook::Engine.root.join("app/pb_kits/playbook/pb_#{kit}", "docs", *args)
+      Playbook.kit_path(kit, "docs", *args)
     end
 
     def pb_doc_example_read_source(kit, file)

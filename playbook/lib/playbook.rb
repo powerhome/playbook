@@ -20,12 +20,16 @@ module Playbook
   class ConflictingPropsError < StandardError; end
   class MissingPropError < StandardError; end
 
-  class << self
-    def webpacker
-      @webpacker ||= ::Webpacker::Instance.new(
-        root_path: ROOT_PATH,
-        config_path: ROOT_PATH.join("config/webpacker.yml")
-      )
-    end
+module_function
+
+  def webpacker
+    @webpacker ||= ::Webpacker::Instance.new(
+      root_path: ROOT_PATH,
+      config_path: ROOT_PATH.join("config/webpacker.yml")
+    )
+  end
+
+  def kit_path(kit, *args)
+    Playbook::Engine.root.join("app/pb_kits/playbook/pb_#{kit}", *args)
   end
 end
