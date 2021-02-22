@@ -35,7 +35,7 @@ module Playbook
         end
       end
 
-      private
+    private
 
       def read_kit_file(*args)
         path = ::Playbook.kit_path(kit, "docs", *args)
