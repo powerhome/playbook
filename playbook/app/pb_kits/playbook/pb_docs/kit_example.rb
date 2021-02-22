@@ -10,6 +10,7 @@ module Playbook
       prop :example_key, type: Playbook::Props::String, required: true
       prop :show_code, type: Playbook::Props::Boolean, default: true
       prop :type, type: Playbook::Props::Enum, values: %w[rails react], default: "rails"
+      prop :dark, type: Playbook::Props::Boolean, default: false
 
       def example
         @example ||= pb_doc_example(type, kit, example_key)

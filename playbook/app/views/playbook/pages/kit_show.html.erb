@@ -40,9 +40,9 @@
     <%= pb_rails("section_separator") %>
   </div>
   <% if (action_name == "kit_show_rails") %>
-    <%= pb_kit(kit: @kit) %>
+    <%= pb_kit(kit: @kit, dark_mode: dark_mode?) %>
   <% else %>
-    <%= pb_kit(kit: @kit, type: "react") %>
+    <%= pb_kit(kit: @kit, type: "react", dark_mode: dark_mode?) %>
   <% end %>
 
   <div class="markdown <%= cookies[:dark_mode] == "true" ? 'dark' : '' %>">

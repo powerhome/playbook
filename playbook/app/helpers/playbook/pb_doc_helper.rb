@@ -43,7 +43,7 @@ module Playbook
       pb_doc_example_read_source kit, "_#{example_key}.#{extension}"
     end
 
-    def pb_kit(kit: "", type: "rails", show_code: true, limit_examples: false)
+    def pb_kit(kit: "", type: "rails", show_code: true, limit_examples: false, dark_mode: false)
       examples = pb_doc_kit_examples(kit, type)
       examples = examples.first(1) if limit_examples
       examples.map do |example|
@@ -52,22 +52,23 @@ module Playbook
           example_title: example.values.first,
           example_key: example.keys.first,
           show_code: show_code,
-          type: type
+          type: type,
+          dark: dark_mode
         }
-      end.join
+      end.join.yield_self(&method(:raw))
     end
 
     # Deal with lists of kits, used in Playbook doc and Externally
-    def pb_kits(type: "rails", limit_examples: false)
+    def pb_kits(type: "rails", limit_examples: false, dark_mode: false)
       display_kits = []
       kits = get_kits
       kits.each do |kit|
         if kit.is_a?(Hash)
           nav_hash_array(kit).each do |sub_kit|
-            display_kits << render_pb_doc_kit(sub_kit, type, false, limit_examples)
+            display_kits << render_pb_doc_kit(sub_kit, type, limit_examples, false, dark_mode)
           end
         else
-          display_kits << render_pb_doc_kit(kit, type, false, limit_examples)
+          display_kits << render_pb_doc_kit(kit, type, limit_examples, false, dark_mode)
         end
       end
       raw("<div class='pb--docItem'>" + display_kits.join("</div><div class='pb--docItem'>") + "</div>")
@@ -78,10 +79,10 @@ module Playbook
       menu["kits"]
     end
 
-    def render_pb_doc_kit(kit, type, code = true, limit_examples)
+    def render_pb_doc_kit(kit, type, limit_examples, code = true, dark_mode = false)
       title = pb_doc_render_clickable_title(kit, type)
       ui = raw("<div class='pb--docItem-ui'>
-          #{pb_kit(kit: kit, type: type, show_code: code, limit_examples: limit_examples)}</div>")
+          #{pb_kit(kit: kit, type: type, show_code: code, limit_examples: limit_examples, dark_mode: dark_mode)}</div>")
       title + ui
     end
 

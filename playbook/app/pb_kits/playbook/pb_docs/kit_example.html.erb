@@ -1,4 +1,4 @@
-<%= pb_rails("card", props: { classname: "pb--doc", padding: "none" }) do %>
+<%= pb_rails("card", props: { classname: "pb--doc", padding: "none", dark: dark }) do %>
   <div class="pb--kit-example">
     <%= pb_rails("caption", props: { text: example_title }) %>
     <br />
@@ -19,10 +19,10 @@
         </ul>
       </div>
       <div class="pb--codeCopy" data-action="toggle" data-togglable="code_example" style="display: none" >
-        <%= pb_rails("section_separator")%>
+        <%= pb_rails("section_separator", props: { dark: dark })%>
         <a href="#" id="toggle-close" data-toggle="false" class="pb--close-toggle">Close</a>
         <pre class="highlight">
-          <%= raw rouge(source, highlight) %>
+          <%= raw rouge(source, highlighter) %>
         </pre>
       </div>
     </div>
