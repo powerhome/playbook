@@ -22,25 +22,8 @@ module Playbook
     end
 
     # Actual PbDocHelper
-    def pb_doc_example(type, kit, example_key)
-      if type == "rails"
-        render file: pb_doc_kit_path(kit, "_#{example_key}.html.erb")
-      elsif type == "react"
-        react_component(example_key.camelize, dark: dark_mode?)
-      end
-    end
-
     def pb_kit_title(title)
       title.remove("pb_").titleize.tr("_", " ")
-    end
-
-    def pb_doc_example_description(kit, key)
-      pb_doc_example_read_source kit, "_#{key}.md"
-    end
-
-    def pb_doc_example_source(type, kit, example_key)
-      extension = type == "react" ? "jsx" : "html.erb"
-      pb_doc_example_read_source kit, "_#{example_key}.#{extension}"
     end
 
     def pb_kit(kit: "", type: "rails", show_code: true, limit_examples: false, dark_mode: false)

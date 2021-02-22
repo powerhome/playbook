@@ -3,7 +3,7 @@
 module Playbook
   module PbDocs
     class KitExample < Playbook::KitBase
-      include Playbook::PbDocHelper
+      include Playbook::Markdown::Helper
 
       prop :kit, type: Playbook::Props::String, required: true
       prop :example_title, type: Playbook::Props::String, required: true
@@ -13,11 +13,15 @@ module Playbook
       prop :dark, type: Playbook::Props::Boolean, default: false
 
       def example
-        @example ||= pb_doc_example(type, kit, example_key)
+        if type == "rails"
+          render inline: source
+        elsif type == "react"
+          react_component example_key.camelize, { dark: dark }
+        end
       end
 
       def description
-        @sample_description ||= pb_doc_example_description(kit, example_key)
+        @description ||= read_kit_file(kit, "_#{example_key}.md")
       end
 
       def highlighter
@@ -25,7 +29,17 @@ module Playbook
       end
 
       def source
-        @source ||= pb_doc_example_source(type, kit, example_key)
+        @source ||= begin
+          extension = type == "react" ? "jsx" : "html.erb"
+          read_kit_file("_#{example_key}.#{extension}")
+        end
+      end
+
+      private
+
+      def read_kit_file(*args)
+        path = ::Playbook.kit_path(kit, "docs", *args)
+        path.exist? ? path.read : ""
       end
     end
   end
