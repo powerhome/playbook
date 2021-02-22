@@ -2,7 +2,7 @@
 
 module Playbook
   module PbCollapsible
-    class Collapsible
+    class Collapsible < Playbook::KitBase
       include Playbook::Props
 
       partial "pb_collapsible/collapsible"
