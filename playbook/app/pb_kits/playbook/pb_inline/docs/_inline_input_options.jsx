@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Body, Inline, Textarea, TextInput } from '../../'
 
-const InlineBody = (props) => {
+const InlineInputOptions = (props) => {
   const [formValueTwo, setFormValueTwo] = useState('Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.')
 
   const handleAreaChange = (event) => {
@@ -14,7 +14,7 @@ const InlineBody = (props) => {
           {...props}
           displayKit={
             <Body
-                kitName="Body"
+                kitType="Body"
                 text={formValueTwo}
             />
           }
@@ -29,7 +29,7 @@ const InlineBody = (props) => {
           {...props}
           displayKit={
             <Body
-                kitName="Body"
+                kitType="Body"
                 text={formValueTwo}
             />
           }
@@ -45,4 +45,4 @@ const InlineBody = (props) => {
   )
 }
 
-export default InlineBody
+export default InlineInputOptions

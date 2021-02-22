@@ -14,7 +14,7 @@ const InlineDefault = (props) => {
           {...props}
           displayKit={
             <Title
-                kitName="Title"
+                kitType="Title"
                 size={4}
                 tag="h4"
                 text={formValue}

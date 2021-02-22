@@ -47,8 +47,8 @@ const Inline = (props: InlineProps) => {
 
   // console.log(formInput)
 
-  const { kitName, size } = displayKit.props
-  const textInputClassName = kitName ? (kitName.toLowerCase() + (size ? `_${size}` : null)) : null
+  const { kitType, size } = displayKit.props
+  const textInputClassName = kitType ? (kitType.toLowerCase() + (size ? `_${size}` : '')) : ''
 
   const modifiedInput = React.cloneElement(formInput, {
     className: textInputClassName,
