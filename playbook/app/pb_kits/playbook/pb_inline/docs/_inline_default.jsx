@@ -14,6 +14,7 @@ const InlineDefault = (props) => {
           {...props}
           displayKit={
             <Title
+                {...props}
                 kitType="Title"
                 size={4}
                 tag="h4"
@@ -22,6 +23,7 @@ const InlineDefault = (props) => {
           }
           formInput={
             <TextInput
+                {...props}
                 onChange={handleInputChange}
                 value={formValue}
             />

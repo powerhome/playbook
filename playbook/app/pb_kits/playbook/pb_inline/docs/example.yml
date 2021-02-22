@@ -1,6 +1,4 @@
 examples:
-  
-  
   react:
   - inline_default: Default
   - inline_text_options: Text Options

@@ -2,10 +2,14 @@ import React, { useState } from 'react'
 import { Body, Inline, Textarea, TextInput } from '../../'
 
 const InlineInputOptions = (props) => {
-  const [formValueTwo, setFormValueTwo] = useState('Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.')
+  const [formFields, setFormFields] = useState({
+    inputOne: 'Input One',
+    inputTwo: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+  })
 
-  const handleAreaChange = (event) => {
-    setFormValueTwo(event.target.value)
+  const handleChange = ({ target }) => {
+    const { name, value } = target
+    setFormFields({ ...formFields, [name]: value })
   }
 
   return (
@@ -14,14 +18,17 @@ const InlineInputOptions = (props) => {
           {...props}
           displayKit={
             <Body
+                {...props}
                 kitType="Body"
-                text={formValueTwo}
+                text={formFields.inputOne}
             />
           }
           formInput={
             <TextInput
-                onChange={handleAreaChange}
-                value={formValueTwo}
+                {...props}
+                name="inputOne"
+                onChange={handleChange}
+                value={formFields.inputOne}
             />
           }
       />
@@ -29,15 +36,18 @@ const InlineInputOptions = (props) => {
           {...props}
           displayKit={
             <Body
+                {...props}
                 kitType="Body"
-                text={formValueTwo}
+                text={formFields.inputTwo}
             />
           }
           formInput={
             <Textarea
-                onChange={handleAreaChange}
+                {...props}
+                name="inputTwo"
+                onChange={handleChange}
                 resize="auto"
-                value={formValueTwo}
+                value={formFields.inputTwo}
             />
           }
       />

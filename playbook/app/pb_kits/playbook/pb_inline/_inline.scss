@@ -4,20 +4,49 @@
 
 .pb_inline {
   .pb_text_input_kit {
-    &.title_1 .text_input_wrapper input {
-      @include pb_title_1;
+    &.title_1 {
+      .text_input_wrapper input {
+        @include pb_title_1;
+      }
+      &.dark .text_input_wrapper input {
+        @include pb_title_1;
+        @include pb_title_dark;
+      }
     }
-    &.title_2 .text_input_wrapper input {
-      @include pb_title_2;
+    &.title_2 {
+      .text_input_wrapper input {
+        @include pb_title_2;
+      }
+      &.dark .text_input_wrapper input {
+        @include pb_title_2;
+        @include pb_title_dark;
+      }
     }
-    &.title_3 .text_input_wrapper input {
-      @include pb_title_3;
+    &.title_3 {
+      .text_input_wrapper input {
+        @include pb_title_3;
+      }
+      &.dark .text_input_wrapper input {
+        @include pb_title_3;
+        @include pb_title_dark;
+      }
     }
-    &.body .text_input_wrapper input {
-      @include pb_body;
+    &.body {
+      .text_input_wrapper input {
+        @include pb_body;
+      }
+      &.dark .text_input_wrapper input {
+        @include pb_body_dark;
+      }
     }
-    &.caption .text_input_wrapper input {
-      @include caption;
+    &.caption {
+      .text_input_wrapper input {
+        @include caption;
+      }
+      &.dark .text_input_wrapper input {
+        @include caption;
+        @include caption_dark;
+      }
     }
     .text_input_wrapper input {
       padding: 8px 5px;

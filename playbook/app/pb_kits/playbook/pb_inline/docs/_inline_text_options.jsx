@@ -20,6 +20,7 @@ const InlineTextOptions = (props) => {
           {...props}
           displayKit={
             <Title
+                {...props}
                 kitType="Title"
                 size={1}
                 tag="h1"
@@ -28,6 +29,7 @@ const InlineTextOptions = (props) => {
           }
           formInput={
             <TextInput
+                {...props}
                 name="inputOne"
                 onChange={handleChange}
                 value={formFields.inputOne}
@@ -38,6 +40,7 @@ const InlineTextOptions = (props) => {
           {...props}
           displayKit={
             <Title
+                {...props}
                 kitType="Title 4"
                 size={4}
                 tag="h4"
@@ -46,6 +49,7 @@ const InlineTextOptions = (props) => {
           }
           formInput={
             <TextInput
+                {...props}
                 name="inputTwo"
                 onChange={handleChange}
                 value={formFields.inputTwo}
@@ -56,12 +60,14 @@ const InlineTextOptions = (props) => {
           {...props}
           displayKit={
             <Body
+                {...props}
                 kitType="Body"
                 text={formFields.inputThree}
             />
           }
           formInput={
             <TextInput
+                {...props}
                 name="inputThree"
                 onChange={handleChange}
                 value={formFields.inputThree}
@@ -72,12 +78,14 @@ const InlineTextOptions = (props) => {
           {...props}
           displayKit={
             <Caption
+                {...props}
                 kitType="Caption"
                 text={formFields.inputFour}
             />
           }
           formInput={
             <TextInput
+                {...props}
                 name="inputFour"
                 onChange={handleChange}
                 value={formFields.inputFour}

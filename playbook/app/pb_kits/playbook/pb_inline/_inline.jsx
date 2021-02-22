@@ -1,6 +1,6 @@
 /* @flow */
 
-import React, { useEffect, useState, useRef } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import classnames from 'classnames'
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
 import { globalProps } from '../utilities/globalProps.js'
@@ -10,6 +10,8 @@ type InlineProps = {
   aria?: object,
   className?: string,
   data?: object,
+  displayKit?: React.Node,
+  formInput?: React.Node,
   id?: string,
 }
 
@@ -18,9 +20,9 @@ const Inline = (props: InlineProps) => {
     aria = {},
     className,
     data = {},
+    displayKit,
     id,
     formInput,
-    displayKit,
   } = props
 
   const ariaProps = buildAriaProps(aria)
@@ -44,8 +46,6 @@ const Inline = (props: InlineProps) => {
       })
     }
   }, [editing])
-
-  // console.log(formInput)
 
   const { kitType, size } = displayKit.props
   const textInputClassName = kitType ? (kitType.toLowerCase() + (size ? `_${size}` : '')) : ''
