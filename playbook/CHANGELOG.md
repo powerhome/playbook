@@ -1,6 +1,6 @@
 
 
-## [Unreleased](https://github.com/powerhome/playbook/tree/HEAD)
+## [8.0.0](https://github.com/powerhome/playbook/tree/8.0.0)
 
 [Full Changelog](https://github.com/powerhome/playbook/compare/7.16.0...8.0.0)
 
