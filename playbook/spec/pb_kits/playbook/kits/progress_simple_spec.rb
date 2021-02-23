@@ -15,7 +15,7 @@ RSpec.describe Playbook::PbProgressSimple::ProgressSimple do
   it { is_expected.to define_prop(:percent).of_type(Playbook::Props::Percentage) }
   it { is_expected.to define_prop(:width) }
   it { is_expected.to define_enum_prop(:variant)
-    .with_values("default", "positive", "negative")
+    .with_values("default", "positive", "negative", "warning")
     .with_default("default") }
 
   describe "#classname" do
@@ -27,6 +27,7 @@ RSpec.describe Playbook::PbProgressSimple::ProgressSimple do
       expect(subject.new(variant: "default").classname).to eq "pb_progress_simple_kit_left"
       expect(subject.new(variant: "positive").classname).to eq "pb_progress_simple_kit_positive_left"
       expect(subject.new(variant: "negative").classname).to eq "pb_progress_simple_kit_negative_left"
+      expect(subject.new(variant: "warning").classname).to eq "pb_progress_simple_kit_warning_left"
     end
   end
 
