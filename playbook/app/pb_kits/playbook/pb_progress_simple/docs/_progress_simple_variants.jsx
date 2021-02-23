@@ -9,7 +9,7 @@ const ProgressSimpleVariants = () => {
       <br />
 
       <ProgressSimple
-          percent={80}
+          percent={90}
           variant="positive"
       />
 
