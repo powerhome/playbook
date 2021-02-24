@@ -4,6 +4,7 @@ module Playbook
   class ApplicationController < ActionController::Base
     helper Webpacker::Helper
     helper Playbook::ApplicationHelper
+    helper Playbook::Markdown::Helper
     helper Playbook::PbDocHelper
     helper Playbook::PbSampleHelper
 

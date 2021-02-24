@@ -15,7 +15,8 @@ module Playbook
         ext = "jsx"
       end
 
-      read_source_file "app/views/playbook/samples", sample, "index.#{ext}"
+      sample = Playbook::Engine.root.join("app/views/playbook/samples", sample, "index.#{ext}")
+      sample.exist? ? sample.read : ""
     end
 
     def get_sample_code_content(sample, type)
