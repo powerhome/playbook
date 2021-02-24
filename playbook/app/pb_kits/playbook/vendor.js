@@ -12,6 +12,9 @@ window.datePickerHelper = datePickerHelper
 // Lazy image loading
 import 'lazysizes'
 
+import PbCollapsible from './pb_collapsible'
+PbCollapsible.start()
+
 import PbPopover from './pb_popover'
 PbPopover.start()
 

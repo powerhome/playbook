@@ -1,0 +1,9 @@
+<%= content_tag(:div,
+    aria: object.aria,
+    class: object.classname,
+    data: object.data,
+    id: object.id) do %>
+    <% if object.children %>
+      <%= capture(&object.children) %>
+    <% end %>
+<% end %>
