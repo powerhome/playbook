@@ -3,5 +3,5 @@
     class: object.classname,
     data: object.data,
     id: object.id) do %>
-  <%= content if content.present? %>
+  <%= content.presence %>
 <% end %>
