@@ -3,7 +3,5 @@
     class: object.classname,
     data: object.data,
     id: object.id) do %>
-    <% if object.children %>
-      <%= capture(&object.children) %>
-    <% end %>
+  <%= content.presence %>
 <% end %>

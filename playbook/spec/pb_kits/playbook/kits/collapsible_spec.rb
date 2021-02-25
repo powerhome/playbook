@@ -5,8 +5,6 @@ require_relative "../../../../app/pb_kits/playbook/pb_collapsible/collapsible"
 RSpec.describe Playbook::PbCollapsible::Collapsible do
   subject { Playbook::PbCollapsible::Collapsible }
 
-  it { is_expected.to define_partial }
-
   describe "#classname" do
     it "returns namespaced class name",
     :aggregate_failures do
