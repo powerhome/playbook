@@ -9,13 +9,13 @@
       <%= pb_rails("image", props: { url: object.image_url, classname: "pb_nav_img_wrapper" }) %>
     <% end %>
     <% if object.icon_left %>
-      <%= pb_rails("icon", props: { icon: object.icon_left, classname: "pb_nav_list_item_icon_left", fixed_width: true}) %>
+      <%= pb_rails("icon", props: { aria: { label: object.icon_left }, icon: object.icon_left, classname: "pb_nav_list_item_icon_left", fixed_width: true}) %>
     <% end %>
     <span class="pb_nav_list_item_text">
       <%= object.text %><%= content.presence %>
     </span>
     <% if object.icon_right %>
-      <%= pb_rails("icon", props: { icon: object.icon_right, classname: "pb_nav_list_item_icon_right", fixed_width: true}) %>
+      <%= pb_rails("icon", props: { aria: { label: object.icon_right }, icon: object.icon_right, classname: "pb_nav_list_item_icon_right", fixed_width: true}) %>
     <% end %>
   <% end %>
 <% end %>
