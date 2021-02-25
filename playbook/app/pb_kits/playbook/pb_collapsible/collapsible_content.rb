@@ -3,10 +3,6 @@
 module Playbook
   module PbCollapsible
     class CollapsibleContent < Playbook::KitBase
-      include Playbook::Props
-
-      partial "pb_collapsible/child_kits/collapsible_content"
-
       def data
         Hash(values[:data]).merge(
           collapsible_content: true
