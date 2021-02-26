@@ -12,7 +12,7 @@
     "test": "jest",
     "test-coverage": "jest --collectCoverage",
     "test-coverage-summary": "jest --collectCoverage --coverageReporters=\"json-summary\"",
-    "release": "webpack --env.production"
+    "release": "webpack --env.production && node-sass app/pb_kits/playbook/packs/site_styles/_scaffold.scss dist/reset.css"
   },
   "repository": {
     "type": "git",

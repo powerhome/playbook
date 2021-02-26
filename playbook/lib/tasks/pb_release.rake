@@ -53,14 +53,6 @@ namespace :pb_release do
     input = STDIN.gets.chomp
     raise Nope unless input.downcase == "y"
 
-    # RubyGems
-    puts "\nCreating Gem..."
-    `gem build playbook_ui.gemspec`
-    puts "\nPushing to RubyGems..."
-    `gem push playbook_ui-#{version}.gem`
-    puts "\nPushed to RubyGems. Now lets clean up..."
-    `rm -rf playbook_ui-*.gem`
-
     # NPM
     puts "\nGenerating distribution files"
     `docker-compose run web yarn release`
@@ -72,6 +64,14 @@ namespace :pb_release do
     `npm publish playbook-ui-#{version}.tgz`
     puts "\nPublished to NPM. Now lets clean up..."
     `rm -rf playbook-ui-*.tgz`
+
+    # RubyGems
+    puts "\nCreating Gem..."
+    `gem build playbook_ui.gemspec`
+    puts "\nPushing to RubyGems..."
+    `gem push playbook_ui-#{version}.gem`
+    puts "\nPushed to RubyGems. Now lets clean up..."
+    `rm -rf playbook_ui-*.gem`
 
     # Tags
     puts "\nPushed to NPM. Now lets create a tag..."
