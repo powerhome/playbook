@@ -1,6 +1,6 @@
 
 import React from 'react'
-import { render, screen } from '../utilities/test-utils'
+import { fireEvent, render, screen, waitFor } from '../utilities/test-utils'
 
 import Button from './_button'
 
@@ -84,11 +84,28 @@ test('disable prop', () => {
   render(
     <Button
         data={{ testid: 'disable-test' }}
-        disable
+        disabled
     />
   )
 
   const kit      = screen.getByTestId('disable-test')
 
   expect(kit).toBeDisabled()
+})
+
+test('click event', async () => {
+  render(
+    <Button
+        data={{ testid: 'click-test' }}
+        onClick={() => alert('clicked button!')}
+    />
+  )
+
+  const kit      = screen.getByTestId('click-test')
+
+  fireEvent.click(kit)
+
+  await waitFor(() => screen.getByRole('alert'))
+
+  expect(screen.getByRole('alert')).toHaveTextContent('clicked button!')
 })
