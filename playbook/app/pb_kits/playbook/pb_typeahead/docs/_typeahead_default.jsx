@@ -13,6 +13,7 @@ const options = [
 const TypeaheadDefault = (props) => {
   return (
     <Typeahead
+        // badges
         label="Colors"
         options={options}
         {...props}

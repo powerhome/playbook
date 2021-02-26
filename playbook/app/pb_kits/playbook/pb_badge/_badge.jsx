@@ -3,6 +3,7 @@
 import React from 'react'
 import classnames from 'classnames'
 import { globalProps } from '../utilities/globalProps.js'
+import { Icon } from '../'
 
 import {
   buildAriaProps,
@@ -13,8 +14,15 @@ import {
 type BadgeProps = {
   aria?: object,
   className?: string,
+  closeProps?: {
+    onClick?: EventHandler,
+    onMouseDown?: EventHandler,
+    onTouchEnd?: EventHandler,
+  },
   data?: object,
   id?: string,
+  removeIcon?: Boolean,
+  removeOnClick?: EventHandler,
   rounded?: boolean,
   text?: string,
   variant?: "error" | "info" | "neutral" | "primary" | "success" | "warning",
@@ -23,8 +31,11 @@ const Badge = (props: BadgeProps) => {
   const {
     aria = {},
     className,
+    closeProps = {},
     data = {},
     id,
+    removeIcon = false,
+    removeOnClick = () => {},
     rounded = false,
     text,
     variant = 'neutral',
@@ -44,7 +55,21 @@ const Badge = (props: BadgeProps) => {
         className={css}
         id={id}
     >
-      <span>{text}</span>
+      <span>
+        <If condition={removeIcon}>
+          <span
+              onClick={removeOnClick}
+              style={{ cursor: 'pointer' }}
+              {...closeProps}
+          >
+            <Icon
+                fixedWidth
+                icon="times"
+            />
+          </span>
+        </If>
+        {text}
+      </span>
     </div>
   )
 }

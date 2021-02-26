@@ -41,6 +41,7 @@ type Props = {
 
 const Typeahead = (props: Props) => {
   const selectProps = {
+    badges: false,
     cacheOptions: true,
     components: {
       Control,

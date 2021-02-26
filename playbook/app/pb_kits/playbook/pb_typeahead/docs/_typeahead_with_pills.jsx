@@ -14,6 +14,7 @@ const TypeaheadWithPills = (props) => {
   return (
     <>
       <Typeahead
+          badges
           isMulti
           label="Colors"
           options={options}

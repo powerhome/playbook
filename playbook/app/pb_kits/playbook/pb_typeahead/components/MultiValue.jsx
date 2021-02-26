@@ -3,7 +3,7 @@
 import React from 'react'
 import { components } from 'react-select'
 
-import { FormPill } from '../../'
+import { FormPill, Badge } from '../../'
 
 type Props = {
   data: object,
@@ -15,6 +15,8 @@ type Props = {
 const MultiValue = (props: Props) => {
   const { removeProps } = props
   const { imageUrl, label } = props.data
+
+  console.log(props.selectProps.badges)
 
   const formPillProps = {
     marginRight: 'xs',
@@ -28,7 +30,7 @@ const MultiValue = (props: Props) => {
         className="text_input_multivalue_container"
         {...props}
     >
-      <If condition={imageUrl}>
+      {/* <If condition={imageUrl}>
         <FormPill
             avatarUrl={imageUrl}
             closeProps={removeProps}
@@ -40,6 +42,15 @@ const MultiValue = (props: Props) => {
             closeProps={removeProps}
             marginRight="xs"
             text={label}
+        />
+      </If> */}
+      <If condition={props.selectProps.badges}>
+        <Badge
+            closeProps={removeProps}
+            removeIcon
+            // removeOnClick={() => alert('remove')}
+            text={label}
+            variant="primary"
         />
       </If>
     </components.MultiValueContainer>
