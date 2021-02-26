@@ -1,7 +1,7 @@
 examples:
   rails:
-  - badge_default: Rectangle
+  - bread_crumb_default: Default
  
   react:
-  - badge_default: Rectangle
+  - bread_crumb_default: Default
  
