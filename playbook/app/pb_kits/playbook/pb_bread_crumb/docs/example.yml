@@ -1,0 +1,7 @@
+examples:
+  rails:
+  - badge_default: Rectangle
+ 
+  react:
+  - badge_default: Rectangle
+ 
