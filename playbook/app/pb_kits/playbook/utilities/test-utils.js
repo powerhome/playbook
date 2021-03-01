@@ -39,3 +39,15 @@ export const ensureAccessible = async (Kit, props = {}, newProps = {}) => {
   const html = render()
   expect(await axe(html)).toHaveNoViolations()
 }
+
+// export const appendAlert = (message) => {
+//   const alertWrapper = document.createElement('div')
+//   const textNode = document.createTextNode(message)
+//   const alertNode = alertWrapper.appendChild(textNode)
+//   document.querySelector('body').appendChild(alertNode)
+// }
+export const appendAlert = (message) => {
+  const alertNode = document.createElement('div')
+  alertNode.innerHTML = message
+  document.querySelector('body').appendChild(alertNode)
+}

@@ -1,6 +1,6 @@
 
 import React from 'react'
-import { fireEvent, render, screen, waitFor } from '../utilities/test-utils'
+import { appendAlert, fireEvent, render, screen, waitFor } from '../utilities/test-utils'
 
 import Button from './_button'
 
@@ -8,8 +8,6 @@ import Button from './_button'
 const htmlType = 'submit',
   text = 'Button Text',
   value = '1234'
-
-// const link = 'https://www.google.com'
 
 test('passes type, text, and value props to button', () => {
   render(
@@ -20,14 +18,6 @@ test('passes type, text, and value props to button', () => {
           text={text}
           value={value}
       />
-      {/* <Button
-          data={{ testid: 'link-test' }}
-          link={link}
-      />
-      <Button
-          data={{ testid: 'variant-test' }}
-          variant="secondary"
-      /> */}
     </>
   )
 
@@ -38,15 +28,6 @@ test('passes type, text, and value props to button', () => {
   expect(kit).toHaveAttribute('type', htmlType)
   expect(kit).toHaveAttribute('value', value)
   expect(content).toHaveTextContent(text)
-
-  // const kit2      = screen.getByTestId('link-test')
-
-  // expect(kit2).toHaveAttribute('href', link)
-
-  // const kit3      = screen.getByTestId('variant-test')
-
-  // expect(kit3).toHaveClass('pb_button_kit_secondary_inline_enabled')
-  // expect(kit3).toHaveAttribute('type', 'button')
 })
 
 // Link Test Variables
@@ -63,7 +44,6 @@ test('adds link to button', () => {
   const kit      = screen.getByTestId('link-test')
 
   expect(kit).toHaveAttribute('href', link)
-  // expect(kit).tagName('A')
 })
 
 test('button with secondary variant', () => {
@@ -93,19 +73,30 @@ test('disable prop', () => {
   expect(kit).toBeDisabled()
 })
 
+// const appendAlert = (message) => {
+//   const textNode = document.createTextNode(message)
+//   document.querySelector('body').appendChild(textNode)
+// }
+
 test('click event', async () => {
   render(
     <Button
         data={{ testid: 'click-test' }}
-        onClick={() => alert('clicked button!')}
+        // onClick={() => {
+        //     document.querySelector('body')
+        //             .appendChild(document.createElement('div')
+        //             .appendChild(document.createTextNode('clicked button!')))
+        //   }
+        // }
+        onClick={() => appendAlert('clicked button!')}
     />
   )
 
-  const kit      = screen.getByTestId('click-test')
+  const kit = screen.getByTestId('click-test')
 
   fireEvent.click(kit)
 
-  await waitFor(() => screen.getByRole('alert'))
+  await waitFor(() => screen.getByText('clicked button!'))
 
-  expect(screen.getByRole('alert')).toHaveTextContent('clicked button!')
+  expect(screen.getByText('clicked button!')).toBeInTheDocument()
 })
