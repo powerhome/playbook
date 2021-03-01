@@ -13,28 +13,15 @@ test('default test', () => {
           data={{ testid: 'child-button' }}
           text="Test"
       />
-      {/* <Button
-          text="Edit"
-      />
-      <Button
-          text="Copy"
-      />
-      <Button
-          text="Cut"
-      /> */}
     </ButtonToolbar>
   )
 
   const kit   = screen.getByTestId('default-test')
   const child = screen.getByTestId('child-button')
-  // const content  = screen.getByText(text)
 
   expect(kit).toHaveClass('pb_button_toolbar_kit_horizontal_primary')
   expect(kit).toContainElement(child)
   expect(child).toHaveClass('pb_button_kit_primary_inline_enabled')
-  // expect(kit).toHaveAttribute('type', htmlType)
-  // expect(kit).toHaveAttribute('value', value)
-  // expect(content).toHaveTextContent(text)
 })
 
 test('variant and orientation props', () => {

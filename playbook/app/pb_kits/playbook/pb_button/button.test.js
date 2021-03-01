@@ -73,21 +73,10 @@ test('disable prop', () => {
   expect(kit).toBeDisabled()
 })
 
-// const appendAlert = (message) => {
-//   const textNode = document.createTextNode(message)
-//   document.querySelector('body').appendChild(textNode)
-// }
-
 test('click event', async () => {
   render(
     <Button
         data={{ testid: 'click-test' }}
-        // onClick={() => {
-        //     document.querySelector('body')
-        //             .appendChild(document.createElement('div')
-        //             .appendChild(document.createTextNode('clicked button!')))
-        //   }
-        // }
         onClick={() => appendAlert('clicked button!')}
     />
   )
