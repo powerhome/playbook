@@ -5,9 +5,11 @@ examples:
     - checkbox_custom: Custom Checkbox
     - checkbox_error: Default w/ Error
     - checkbox_options: Checkbox w/ Options
+    - checkbox_indeterminate: Indeterminate Checkbox
 
   react:
   - checkbox_default: Default
   - checkbox_checked: Load as checked
   - checkbox_custom: Custom Checkbox
   - checkbox_error: Default w/ Error
+  - checkbox_indeterminate: Indeterminate Checkbox
