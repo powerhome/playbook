@@ -46,7 +46,7 @@ $tooltip_shadow: rgba(60, 106, 172, 0.18);
       content: " ";
       position: absolute;
       top: 100%;
-      left: 50%;
+      left: calc(50% - 10px);
       border-color: $white transparent transparent transparent;
       border-style: solid;
       border-width: 10px;
@@ -95,9 +95,10 @@ $tooltip_shadow: rgba(60, 106, 172, 0.18);
     box-shadow: -8px 0 28px 0 $tooltip_shadow;
     margin: 0 0 0 $space_sm;
     .arrow {
-      left: -#{$space_xs};
-      top: $arrow_vertical_offset;
+      left: -18px;
+      right: auto;
       margin-bottom: 0;
+      top: $arrow_vertical_offset;
       transform: rotate(90deg);
     }
     &.flipped .arrow {

@@ -61,7 +61,7 @@ class KitGenerator < Rails::Generators::NamedBase
       if yes?("Create RAILS #{@kit_name_underscore} kit? (y/N)")
         @rails_kit = true
         template "kit_ruby.erb", "#{full_kit_directory}/#{@kit_name_underscore}.rb"
-        template "kit_html.erb", "#{full_kit_directory}/_#{@kit_name_underscore}.html.erb"
+        template "kit_html.erb", "#{full_kit_directory}/#{@kit_name_underscore}.html.erb"
         template "kit_example_rails.erb", "#{full_kit_directory}/docs/_#{@kit_name_underscore}_default.html.erb"
         template "kit_ruby_spec.erb", "spec/pb_kits/playbook/kits/#{@kit_name_underscore}_spec.rb"
         say_status  "complete",

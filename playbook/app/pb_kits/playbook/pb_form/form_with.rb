@@ -14,16 +14,23 @@ module Playbook
         prop(:data).merge("pb-form-validation" => validate)
       end
 
-      def options
-        { url: "" }.merge(Hash(prop(:options)))
+      def form_options
+        {
+          url: "",
+          id: id,
+          aria: aria,
+          class: classname,
+          data: data,
+          builder: ::Playbook::PbForm::FormWith::FormBuilder,
+        }.merge(options)
+      end
+
+      def render_form(builder)
+        view_context.capture(builder, &children)
       end
 
       def classname
         [generate_classname("pb-form"), options[:class]].join(" ")
-      end
-
-      def form_builder
-        ::Playbook::PbForm::FormWith::FormBuilder
       end
 
       def render_in(view_context, &_block)

@@ -1,0 +1,9 @@
+examples:
+
+  rails:
+  - collapsible_default: Light
+
+  react:
+  - collapsible_default: Light
+  
+  

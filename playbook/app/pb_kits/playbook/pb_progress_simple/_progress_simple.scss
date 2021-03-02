@@ -33,6 +33,11 @@ $pb_progress_simple_height: 4px;
         background: $error;
       }
     }
+    &[class*=_warning] {
+      .progress_simple_value {
+        background: $warning;
+      }
+    }
 
   [class^=progress_simple_value] {
     width: 0%;

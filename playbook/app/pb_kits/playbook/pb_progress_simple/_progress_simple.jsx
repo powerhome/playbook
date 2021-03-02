@@ -14,7 +14,7 @@ type ProgressSimpleProps = {
   muted: boolean,
   percent: string,
   value: number,
-  variant?: "default" | "positive" | "negative",
+  variant?: "default" | "positive" | "negative" | "warning",
   width: string,
 }
 
