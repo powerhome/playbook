@@ -83,12 +83,6 @@
 }
 
 .text_input_wrapper_add_on {
-  // display: inline-flex;
-
-  flex-direction: row;
-  align-items: flex-end;
-  justify-content: flex-start;
-
   & > [class^=pb_text_input_kit]:not(:last-child) {
     .text_input_wrapper_add_on input, [class^=pb_text_input_kit] .text_input_wrapper_add_on .text_input {
       border-bottom-right-radius: 0;
@@ -113,7 +107,14 @@
     }
   }
 
-  .add-on-left{
+  .add-on-card-dark {
+    background-color: $bg-dark;
+  }
+  .text_input :focus + .add-on-card-dark {
+    background-color: $active_dark;
+  }
+
+  .add-on-left {
     .text_input {
       border-top-left-radius: 0 !important;
       border-bottom-left-radius: 0 !important;
@@ -127,14 +128,13 @@
     }
   }
   .card-left-aligned {
-    border-top-right-radius: 0;
-    border-bottom-right-radius: 0;
-    
+    border-top-right-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
   }
-  
+
   .card-right-aligned {
-    border-top-left-radius: 0;
-    border-bottom-left-radius: 0;
+    border-top-left-radius: 0 !important;
+    border-bottom-left-radius: 0 !important;
   }
 
   .border_right_off {
@@ -142,7 +142,7 @@
       border-right: 0;
     }
     .text_input {
-      border-left: 0;
+      border-left: 0 !important;
       padding-left: 0 !important;
     }
   }
@@ -164,11 +164,8 @@
       border-left: 0;
     }
     .text_input {
-      border-right: 0;
+      border-right: 0 !important;
       padding-right: 0 !important;
     }
   }
-
- 
-
 }

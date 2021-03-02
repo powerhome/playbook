@@ -24,7 +24,7 @@ type TextInputProps = {
   children: Node,
   addOn?: {
     icon?: string,
-    alignment?: string,
+    alignment?: 'right' | 'left',
     border?: boolean,
   },
 }
@@ -46,29 +46,21 @@ const TextInput = (props: TextInputProps, ref: React.ElementRef<"input">) => {
     type = 'text',
     value = '',
     children = null,
-    addOn = { icon: null, alignment: 'left', border: true },
+    addOn = { icon: null, alignment: 'right', border: true },
   } = props
 
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
-  const addOnClass = addOn.icon !== null ? 'text_input_wrapper_add_on' : null
-  const borderClass =
-    addOn.border == true && addOn.alignment == 'left'
-      ? 'border_right_on'
-      : addOn.border == true && addOn.alignment == 'right'
-        ? 'border_left_on'
-        : addOn.border == false && addOn.alignment == 'left'
-          ? 'border_right_off'
-          : addOn.border == false && addOn.alignment == 'right'
-            ? 'border_left_off'
-            : ''
-
+  const addOnClass = shouldShowAddOn ? 'text_input_wrapper_add_on' : null
   const css = classnames([
     'pb_text_input_kit',
     error ? 'error' : null,
     globalProps(props),
     className,
   ])
+  const shouldShowAddOn = (
+    addOn.icon !== null
+  )
   const addOnIcon = (
     <Icon
         className="add-on-icon"
@@ -91,6 +83,35 @@ const TextInput = (props: TextInputProps, ref: React.ElementRef<"input">) => {
         value={value}
     />
   )
+  const addOnBorder = (
+    <React.Fragment>
+      <If condition={addOn.border == true}>
+        <SectionSeparator
+            {...props}
+            orientation="vertical"
+        />
+      </If>
+    </React.Fragment>
+  )
+  const addOnInput = (
+    <React.Fragment>
+      <Flex
+          inline="flex-container"
+          vertical="stretch"
+      >
+        <If condition={addOn.alignment == 'left'}>
+          { addOnIcon }
+          { addOnBorder }
+          { textInput }
+        </If>
+        <If condition={addOn.alignment == 'right'}>
+          { textInput }
+          { addOnBorder }
+          { addOnIcon }
+        </If>
+      </Flex>
+    </React.Fragment>
+  )
 
   return (
     <div
@@ -104,42 +125,22 @@ const TextInput = (props: TextInputProps, ref: React.ElementRef<"input">) => {
           text={label}
       />
       <div className={`${addOnClass} text_input_wrapper`}>
-        <If condition={children}>
-          {children}
-          <Else />
-          <Choose>
-            <When condition={addOn.icon !== null && addOn.alignment == 'left'}>
-              <Flex
-                  className={`add-on-left ${borderClass}`}
-                  inline="flex-container"
-                  vertical="center"
-              >
-                <Card className="add-on-card card-left-aligned">
-                  {addOnIcon}
-                </Card>
-                {textInput}
-              </Flex>
-            </When>
-            <When condition={addOn.icon !== null && addOn.alignment == 'right'}>
-              <Flex
-                  className={`add-on-right ${borderClass}`}
-                  inline="flex-container"
-                  vertical="center"
-              >
-                {textInput}
-                <Card className="add-on-card card-right-aligned">
-                  {addOnIcon}
-                </Card>
-              </Flex>
-            </When>
-            <Otherwise>{textInput}</Otherwise>
-          </Choose>
-          <If condition={error}>
-            <Body
-                status="negative"
-                text={error}
-            />
-          </If>
+        <Choose>
+          <When condition={children}>
+            {children}
+          </When>
+          <When condition={shouldShowAddOn}>
+            { addOnInput }
+          </When>
+          <Otherwise>
+            { textInput }
+          </Otherwise>
+        </Choose>
+        <If condition={error}>
+          <Body
+              status="negative"
+              text={error}
+          />
         </If>
       </div>
     </div>

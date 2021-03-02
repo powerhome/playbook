@@ -17,6 +17,7 @@ require_relative "./props/numeric"
 require_relative "./props/percentage"
 require_relative "./props/proc"
 require_relative "./props/string"
+require_relative "./props/text_input_add_on"
 
 module Playbook
   module Props
