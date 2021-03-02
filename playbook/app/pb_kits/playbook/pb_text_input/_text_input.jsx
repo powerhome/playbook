@@ -52,19 +52,42 @@ const TextInput = (
     type = 'text',
     value = '',
     children = null,
-    addOn = { icon: null, alignment: 'left' },
+    addOn = { icon: null, alignment: 'left', border: true },
   } = props
 
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
-  const shouldShowAddOn = addOn.icon !== null ? '_add_on' : null
+  const addOnClass = addOn.icon !== null ? 'text_input_wrapper_add_on' : null
   const shouldShowAddOnBorder = addOn.border == true ? '_border' : null
+  // note that there's a kit for border already
   const css = classnames([
     'pb_text_input_kit',
     error ? 'error' : null,
     globalProps(props),
     className,
   ])
+  const addOnIcon = (
+    <Icon
+        color="lighter"
+        fixedWidth={false}
+        icon={addOn.icon}
+    />
+  )
+  const textInput = (
+    <input
+        {...props}
+        className="text_input"
+        disabled={disabled}
+        id={id}
+        name={name}
+        onChange={onChange}
+        placeholder={placeholder}
+        ref={ref}
+        required={required}
+        type={type}
+        value={value}
+    />
+  )
 
   return (
     <div
@@ -77,66 +100,21 @@ const TextInput = (
           dark={dark}
           text={label}
       />
-      {/* ${shouldShowAddOn}${shouldShowAddOnBorder} */}
-      <div className={`text_input_wrapper${shouldShowAddOn} text_input_wrapper`}>
+      <div className={`${addOnClass} text_input_wrapper`}>
         <If condition={children}>
           {children}
           <Else />
           <Choose>
-            <When condition={addOn.alignment == 'left' && addOn.icon !== null}>
-              <Icon
-                  fixedWidth={false}
-                  color="lighter"
-                  icon={addOn.icon}
-              />
-              <input
-                  {...props}
-                  className="text_input"
-                  disabled={disabled}
-                  id={id}
-                  name={name}
-                  onChange={onChange}
-                  placeholder={placeholder}
-                  ref={ref}
-                  required={required}
-                  type={type}
-                  value={value}
-              />
+            <When condition={addOn.icon !== null && addOn.alignment == 'left'}>
+              { addOnIcon }
+              { textInput }
             </When>
-            <When condition={addOn.alignment == 'right' && addOn.icon !== null}>
-              <input
-                  {...props}
-                  className="text_input"
-                  disabled={disabled}
-                  id={id}
-                  name={name}
-                  onChange={onChange}
-                  placeholder={placeholder}
-                  ref={ref}
-                  required={required}
-                  type={type}
-                  value={value}
-              />
-              <Icon
-                  fixedWidth={false}
-                  color="lighter"
-                  icon={addOn.icon}
-              />
+            <When condition={addOn.icon !== null && addOn.alignment == 'right'}>
+              { textInput }
+              { addOnIcon }
             </When>
             <Otherwise>
-              <input
-                  {...props}
-                  className="text_input"
-                  disabled={disabled}
-                  id={id}
-                  name={name}
-                  onChange={onChange}
-                  placeholder={placeholder}
-                  ref={ref}
-                  required={required}
-                  type={type}
-                  value={value}
-              />
+              { textInput }
             </Otherwise>
           </Choose>
           <If condition={error}>

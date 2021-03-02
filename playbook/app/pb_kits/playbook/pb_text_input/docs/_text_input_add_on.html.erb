@@ -1,1 +1,9 @@
-<%= pb_rails("text_input", props: { add_on: { icon: "user" }}) %>
+<%= pb_rails("text_input", props: { 
+  label: "Example 1", 
+  add_on: { icon: "user", alignment: 'right', border: true }
+}) %>
+
+<%= pb_rails("text_input", props: { 
+  label: "Example 2", 
+  add_on: { icon: "percent", alignment: 'left', border: false }
+}) %>
