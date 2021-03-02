@@ -10,11 +10,17 @@
       <%= content %>
     <% else %>
       <% if add_on[:alignment] == 'right' %>
-        <%= input_tag %>
-        <%= pb_rails("icon", props: { icon: add_on[:icon] }) %>
+        <%= pb_rails("flex", props: {classname: "flex-container", vertical: "stretch"}) do %>
+          <%= input_tag %>
+          <%= pb_rails("section_separator", props: { orientation: "vertical" }) if add_on[:border] %>
+          <%= pb_rails("icon", props: { icon: add_on[:icon] }) %>
+        <% end %>
       <% elsif add_on[:alignment] == 'left' %>
-        <%= pb_rails("icon", props: { icon: add_on[:icon] }) %>
-        <%= input_tag %>
+        <%= pb_rails("flex", props: {classname: "flex-container", vertical: "stretch"}) do %>
+          <%= pb_rails("icon", props: { icon: add_on[:icon] }) %>
+          <%= pb_rails("section_separator", props: { orientation: "vertical" }) if add_on[:border] %>
+          <%= input_tag %>
+        <% end %>
       <% else %>
         <%= input_tag %>
       <% end %>

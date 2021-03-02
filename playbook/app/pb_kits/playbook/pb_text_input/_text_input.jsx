@@ -1,7 +1,7 @@
 /* @flow */
 import React, { forwardRef } from 'react'
 import classnames from 'classnames'
-import { Body, Caption, Icon } from '../'
+import { Body, Caption, Flex, Icon, SectionSeparator } from '../'
 import { globalProps } from '../utilities/globalProps.js'
 
 import {
@@ -58,8 +58,6 @@ const TextInput = (
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
   const addOnClass = addOn.icon !== null ? 'text_input_wrapper_add_on' : null
-  const shouldShowAddOnBorder = addOn.border == true ? '_border' : null
-  // note that there's a kit for border already
   const css = classnames([
     'pb_text_input_kit',
     error ? 'error' : null,
@@ -106,12 +104,34 @@ const TextInput = (
           <Else />
           <Choose>
             <When condition={addOn.icon !== null && addOn.alignment == 'left'}>
-              { addOnIcon }
-              { textInput }
+              <Flex
+                  inline="flex-container"
+                  vertical="stretch"
+              >
+                { addOnIcon }
+                <If condition={addOn.border == true}>
+                  <SectionSeparator
+                      {...props}
+                      orientation="vertical"
+                  />
+                </If>
+                { textInput }
+              </Flex>
             </When>
             <When condition={addOn.icon !== null && addOn.alignment == 'right'}>
-              { textInput }
-              { addOnIcon }
+              <Flex
+                  inline="flex-container"
+                  vertical="stretch"
+              >
+                { textInput }
+                <If condition={addOn.border == true}>
+                  <SectionSeparator
+                      {...props}
+                      orientation="vertical"
+                  />
+                </If>
+                { addOnIcon }
+              </Flex>
             </When>
             <Otherwise>
               { textInput }
