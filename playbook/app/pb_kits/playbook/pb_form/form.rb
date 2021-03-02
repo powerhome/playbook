@@ -19,8 +19,17 @@ module Playbook
         end
       end
 
-      def render_in(view_context, &_block)
-        super(view_context, &nil)
+      def render_in(view_context, &block)
+        form_kit.render_in(view_context, &block)
+      end
+
+    private
+
+      def form_kit
+        @form_system ||= begin
+          ::Playbook::KitResolver.resolve("form/#{form_system}")
+                                 .new(options: form_system_options, validate: validate, children: children)
+        end
       end
     end
   end
