@@ -21,7 +21,7 @@ test('passes type, text, and value props to button', () => {
     </>
   )
 
-  const kit      = screen.getByTestId('primary-test')
+  const kit = screen.getByTestId('primary-test')
   const content  = screen.getByText(text)
 
   expect(kit).toHaveClass('pb_button_kit_primary_inline_enabled')
@@ -41,7 +41,7 @@ test('adds link to button', () => {
     />
   )
 
-  const kit      = screen.getByTestId('link-test')
+  const kit = screen.getByTestId('link-test')
 
   expect(kit).toHaveAttribute('href', link)
 })
@@ -54,7 +54,7 @@ test('button with secondary variant', () => {
     />
   )
 
-  const kit      = screen.getByTestId('variant-test')
+  const kit = screen.getByTestId('variant-test')
 
   expect(kit).toHaveClass('pb_button_kit_secondary_inline_enabled')
   expect(kit).toHaveAttribute('type', 'button')
@@ -68,7 +68,7 @@ test('disable prop', () => {
     />
   )
 
-  const kit      = screen.getByTestId('disable-test')
+  const kit = screen.getByTestId('disable-test')
 
   expect(kit).toBeDisabled()
 })
