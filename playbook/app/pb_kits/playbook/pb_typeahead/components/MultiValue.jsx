@@ -16,8 +16,6 @@ const MultiValue = (props: Props) => {
   const { removeProps } = props
   const { imageUrl, label } = props.data
 
-  console.log(props.selectProps.badges)
-
   const formPillProps = {
     marginRight: 'xs',
     name: label,

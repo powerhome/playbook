@@ -3,6 +3,7 @@
 import React from 'react'
 import Select from 'react-select'
 import AsyncSelect from 'react-select/async'
+import CreateableSelect from 'react-select/creatable'
 import { get } from 'lodash'
 import { globalProps } from '../utilities/globalProps.js'
 
@@ -26,6 +27,7 @@ import { noop } from '../utilities/props'
 
 type Props = {
   async?: boolean,
+  createable?: boolean,
   dark?: boolean,
   label?: string,
   loadOptions?: noop | string,
@@ -59,6 +61,7 @@ const Typeahead = (props: Props) => {
     isClearable: true,
     isSearchable: true,
     name,
+    onCreate: () => {},
     ...props,
   }
 
@@ -66,7 +69,8 @@ const Typeahead = (props: Props) => {
   if (typeof(props.getOptionLabel) === 'string') selectProps.getOptionLabel = get(window, props.getOptionLabel)
   if (typeof(props.getOptionValue) === 'string') selectProps.getOptionValue = get(window, props.getOptionValue)
 
-  const Tag = props.async ? AsyncSelect : Select
+  let Tag = props.async ? AsyncSelect : Select
+  if (props.createable) Tag = CreateableSelect
 
   const handleOnChange = (data, { action, option, removedValue }) => {
     if (action === 'select-option') {
