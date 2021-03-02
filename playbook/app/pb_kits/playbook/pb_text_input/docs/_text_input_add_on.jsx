@@ -7,14 +7,14 @@ const TextInputAddOn = (props) => {
       <div>
         <TextInput
             addOn={{ icon: 'user', alignment: 'right', border: true }}
-            label="Add On Label"
+            label="Right-Aligned Add On With Border"
             {...props}
         />
       </div>
       <div>
         <TextInput
             addOn={{ icon: 'percent', alignment: 'left', border: false }}
-            label="Add On Label"
+            label="Left-Aligned Add On With No Border"
             {...props}
         />
       </div>

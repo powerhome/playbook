@@ -28,9 +28,8 @@ module Playbook
         add_on[:icon] ? "text_input_wrapper_add_on " : ""
       end
 
-      def input_tag
-        tag(
-          :input,
+      def input_options
+        {
           autocomplete: autocomplete ? nil : "off",
           class: "text_input",
           data: validation_data,
@@ -42,7 +41,7 @@ module Playbook
           required: required,
           type: type,
           value: value
-        )
+        }
       end
 
     private

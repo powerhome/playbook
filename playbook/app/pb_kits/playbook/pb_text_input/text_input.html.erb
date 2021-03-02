@@ -11,7 +11,7 @@
     <% else %>
       <% if add_on[:alignment] == 'right' %>
         <%= pb_rails("flex", props: {classname: "flex-container", vertical: "stretch"}) do %>
-          <%= input_tag %>
+          <%= tag(:input, object.input_options) %>
           <%= pb_rails("section_separator", props: { orientation: "vertical" }) if add_on[:border] %>
           <%= pb_rails("icon", props: { icon: add_on[:icon] }) %>
         <% end %>
@@ -19,10 +19,10 @@
         <%= pb_rails("flex", props: {classname: "flex-container", vertical: "stretch"}) do %>
           <%= pb_rails("icon", props: { icon: add_on[:icon] }) %>
           <%= pb_rails("section_separator", props: { orientation: "vertical" }) if add_on[:border] %>
-          <%= input_tag %>
+          <%= tag(:input, object.input_options) %>
         <% end %>
       <% else %>
-        <%= input_tag %>
+        <%= tag(:input, object.input_options) %>
       <% end %>
     <% end %>
     <%= pb_rails("body", props: {dark: object.dark, status: "negative", text: object.error}) if object.error %>

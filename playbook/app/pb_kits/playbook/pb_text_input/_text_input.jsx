@@ -66,7 +66,6 @@ const TextInput = (
   ])
   const addOnIcon = (
     <Icon
-        color="lighter"
         fixedWidth={false}
         icon={addOn.icon}
     />
