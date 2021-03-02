@@ -17,6 +17,8 @@ module Playbook
       prop :validation, type: Playbook::Props::Hash,
                         default: {}
       prop :value
+      prop :add_on, type: Playbook::Props::AddOnHash,
+                        default: {}
 
       def classname
         generate_classname("pb_text_input_kit") + error_class
@@ -33,6 +35,17 @@ module Playbook
       def validation_data
         fields = {}
         fields[:message] = validation_message unless validation_message.blank?
+        fields
+      end
+
+      def add_on_data
+        return {} if add_on[:icon].empty? && add_on[:text].empty?
+
+        fields = {}
+        fields[:icon] = add_on[:icon] unless add_on[:icon].blank?
+        fields[:text] = add_on[:text] unless add_on[:text].blank?
+        fields[:border] = add_on[:border] || true
+        fields[:alignment] = add_on[:alignment] || "RIGHT" # TODO handle enum
         fields
       end
 
