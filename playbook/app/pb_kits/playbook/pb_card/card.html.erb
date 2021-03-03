@@ -1,0 +1,10 @@
+<%= content_tag(:div,
+    id: object.id,
+    data: object.data,
+    class: object.classname,
+    aria: object.aria,
+    dark: object.dark) do %>
+  <%= pb_rails("card/card_body", props: { padding: object.body_padding }) do %>
+    <%= content %>
+  <% end if content.present? %>
+<% end %>

@@ -2,11 +2,7 @@
 
 module Playbook
   module PbGauge
-    class Gauge
-      include Playbook::Props
-
-      partial "pb_gauge/gauge"
-
+    class Gauge < Playbook::KitBase
       prop :chart_data, type: Playbook::Props::Array,
                         default: [{ name: "Name", value: 0 }]
       prop :style, type: Playbook::Props::Enum,

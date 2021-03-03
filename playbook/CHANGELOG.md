@@ -1,5 +1,82 @@
 
 
+## [8.1.0](https://github.com/powerhome/playbook/tree/8.1.0)
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/8.0.0...8.1.0)
+
+**Kit Enhancements:**
+
+- Add yellow as option to progress simple kit [\#1365](https://github.com/powerhome/playbook/pull/1365) ([kellyeryan](https://github.com/kellyeryan))
+- Update to Time Stacked to use Time instead of Date [\#1290](https://github.com/powerhome/playbook/pull/1290) ([evalouderback](https://github.com/evalouderback))
+- Nav Kit - Accessibility Improvements \(\#1361\) [\#1361](https://github.com/powerhome/playbook/pull/1361) ([bh247484](https://github.com/bh247484))
+
+**Fixed Bugs:**
+
+- Update render of Collapsible to view component [\#1367](https://github.com/powerhome/playbook/pull/1367) ([coleerikson](https://github.com/coleerikson))
+- Reintroduce missing kit description markdown [\#1366](https://github.com/powerhome/playbook/pull/1366) ([bh247484](https://github.com/bh247484))
+- Fix tooltip - Center Arrows [\#1364](https://github.com/powerhome/playbook/pull/1364) ([kre8sions](https://github.com/kre8sions))
+
+**New Kits:**
+
+- Create Collapse Kit - Refresh [\#1310](https://github.com/powerhome/playbook/pull/1310) ([coleerikson](https://github.com/coleerikson))
+
+**Improvements:**
+
+- Update generators to view component [\#1369](https://github.com/powerhome/playbook/pull/1369) ([xjunior](https://github.com/xjunior))
+- Fix form kit view context [\#1368](https://github.com/powerhome/playbook/pull/1368) ([xjunior](https://github.com/xjunior))
+
+
+
+## [8.0.0](https://github.com/powerhome/playbook/tree/8.0.0)
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/7.16.0...8.0.0)
+
+**Kit Enhancements:**
+
+- Added status colors to the distribution bar [\#1357](https://github.com/powerhome/playbook/pull/1357) ([jasoncypret](https://github.com/jasoncypret))
+- Fixup dark mode select truncation [\#1356](https://github.com/powerhome/playbook/pull/1356) ([jasoncypret](https://github.com/jasoncypret))
+- Improved Accessibility by adding focus to Checkbox & Radio Kits [\#1354](https://github.com/powerhome/playbook/pull/1354) ([thestephenmarshall](https://github.com/thestephenmarshall))
+- Add data, aria, & name props to RichTextEditor [\#1352](https://github.com/powerhome/playbook/pull/1352) ([coleerikson](https://github.com/coleerikson))
+- Add console, Jest and Rspec Accessibility test capabilities [\#1346](https://github.com/powerhome/playbook/pull/1346) ([thestephenmarshall](https://github.com/thestephenmarshall))
+-  Add `zIndex` as a global prop [\#1345](https://github.com/powerhome/playbook/pull/1345) ([josephinef9](https://github.com/josephinef9))
+
+**Fixed Bugs:**
+
+- Add name prop to typeahead with pills options [\#1358](https://github.com/powerhome/playbook/pull/1358) ([coleerikson](https://github.com/coleerikson))
+
+**Improvements:**
+
+- Update webpack dev server [\#1351](https://github.com/powerhome/playbook/pull/1351) ([thestephenmarshall](https://github.com/thestephenmarshall))
+- Date Picker Safari fixes [\#1359](https://github.com/powerhome/playbook/pull/1359) ([bh247484](https://github.com/bh247484))
+- Unify Star Rating kit spacing [\#1353](https://github.com/powerhome/playbook/pull/1353) ([bh247484](https://github.com/bh247484))
+- Remove jQuery from docs site [\#1337](https://github.com/powerhome/playbook/pull/1337) ([bh247484](https://github.com/bh247484))
+- Clear partials use in kits [\#1314](https://github.com/powerhome/playbook/pull/1314) ([xjunior](https://github.com/xjunior))
+- Introduce form view component [\#1313](https://github.com/powerhome/playbook/pull/1313) ([xjunior](https://github.com/xjunior))
+- Introduce filter view component [\#1312](https://github.com/powerhome/playbook/pull/1312) ([xjunior](https://github.com/xjunior))
+- Introduce view component [\#1272](https://github.com/powerhome/playbook/pull/1272) ([xjunior](https://github.com/xjunior))
+
+
+
+## [7.16.0](https://github.com/powerhome/playbook/tree/7.16.0)
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/7.15.1...7.16.0)
+
+**Kit Enhancements:**
+
+- Update gauge examples using overflow in flex item [\#1343](https://github.com/powerhome/playbook/pull/1343) ([patmccler](https://github.com/patmccler))
+- Add Error State to Selectable Card [\#1342](https://github.com/powerhome/playbook/pull/1342) ([adub65](https://github.com/adub65))
+- Create a Masonry Variant for the Layout Kit  [\#1331](https://github.com/powerhome/playbook/pull/1331) ([josephinef9](https://github.com/josephinef9))
+
+**Fixed Bugs:**
+- Fix Image kit rounded prop warning [\#1341](https://github.com/powerhome/playbook/pull/1341) ([thestephenmarshall](https://github.com/thestephenmarshall))
+- Fix DateTime kit bug, add more examples [\#1332](https://github.com/powerhome/playbook/pull/1332) ([coleerikson](https://github.com/coleerikson))
+- Several fixes for kit warnings found on the "all kits" react page. [\#1348](https://github.com/powerhome/playbook/pull/1348) ([coleerikson](https://github.com/coleerikson))
+
+**Improvements:**
+- Avatar - hide broken image and alt text on failure to load [\#1334](https://github.com/powerhome/playbook/pull/1334) ([patmccler](https://github.com/patmccler))
+
+
+
 ## [7.15.0](https://github.com/powerhome/playbook/tree/7.15.0)
 
 [Full Changelog](https://github.com/powerhome/playbook/compare/7.14.0...7.15.0)
@@ -67,7 +144,7 @@
 - Remove custom webpacker instance [\#1239](https://github.com/powerhome/playbook/pull/1239) ([xjunior](https://github.com/xjunior))
 
 
-## [7.12.1](https://github.com/powerhome/playbook/tree/HEAD)
+## [7.12.1](https://github.com/powerhome/playbook/tree/7.12.1)
 
 [Full Changelog](https://github.com/powerhome/playbook/compare/7.12.0...HEAD)
 
@@ -76,7 +153,7 @@
 - Table prop passing hotfix [\#1304](https://github.com/powerhome/playbook/pull/1304) ([bh247484](https://github.com/bh247484))
 - Fixed build related issue triggered only in Nitro
 
-## [7.12.0](https://github.com/powerhome/playbook/tree/HEAD)
+## [7.12.0](https://github.com/powerhome/playbook/tree/7.12.0)
 
 [Full Changelog](https://github.com/powerhome/playbook/compare/7.12.0...HEAD)
 
@@ -1265,3 +1342,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Removed (breaking changes)
 - React PbLayout prop `children` dropped support for single Node (https://github.com/powerhome/playbook/commit/b16da50914e110c75c6d96c985fa02781c9e2040#diff-c3ce2c91288ca3e730d3c56e7f73475cL11-L14)
 - Rails PbLayout prop `dark` dropped (https://github.com/powerhome/playbook/commit/b16da50914e110c75c6d96c985fa02781c9e2040#diff-377fda563d148f7b3ad33f904b7b0cdbL13)
+
+
+\* *This Changelog was automatically generated by [github_changelog_generator](https://github.com/github-changelog-generator/github-changelog-generator)*

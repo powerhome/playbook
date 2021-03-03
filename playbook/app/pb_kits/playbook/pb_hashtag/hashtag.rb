@@ -2,11 +2,7 @@
 
 module Playbook
   module PbHashtag
-    class Hashtag
-      include Playbook::Props
-
-      partial "pb_hashtag/hashtag"
-
+    class Hashtag < Playbook::KitBase
       prop :text
       prop :type, type: Playbook::Props::Enum,
                   values: %w[default project home appointment],

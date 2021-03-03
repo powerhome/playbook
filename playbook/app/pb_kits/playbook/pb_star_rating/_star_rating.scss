@@ -3,7 +3,7 @@
 @import "../tokens/spacing";
 
 $pb_star_rating_number_width: 30px;
-$pb_star_rating_wrapper_width: 150px;
+$pb_star_rating_wrapper_width: 90px;
 $pb_star_rating_height: 26px;
 
 [class^=pb_star_rating_kit] {
@@ -35,16 +35,18 @@ $pb_star_rating_height: 26px;
     min-height: $pb_star_rating_height;
 
     .pb_star_rating_highlight {
+      display: flex;
       position: absolute;
-      top: 0;
+      top: 5px;
       left: 0;
       z-index: 5;
       color: $yellow;
       line-height: $pb_star_rating_height;
     }
     .pb_star_rating_base {
+      display: flex;
       position: absolute;
-      top: 0;
+      top: 5px;
       left: 0;
       z-index: 0;
       color: rgba($slate, $opacity-4);

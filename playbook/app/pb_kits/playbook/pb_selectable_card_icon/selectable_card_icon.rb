@@ -2,11 +2,7 @@
 
 module Playbook
   module PbSelectableCardIcon
-    class SelectableCardIcon
-      include Playbook::Props
-
-      partial "pb_selectable_card_icon/selectable_card_icon"
-
+    class SelectableCardIcon < Playbook::KitBase
       # Icon and text props
       prop :icon, type: Playbook::Props::String
       prop :title_text, type: Playbook::Props::String

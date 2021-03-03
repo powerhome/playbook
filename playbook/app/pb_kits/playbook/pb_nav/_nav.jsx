@@ -48,7 +48,7 @@ const Nav = (props: NavProps) => {
   )
 
   return (
-    <div
+    <nav
         {...ariaProps}
         {...dataProps}
         className={cardCss}
@@ -69,7 +69,7 @@ const Nav = (props: NavProps) => {
         </div>
       </If>
       <ul>{children}</ul>
-    </div>
+    </nav>
   )
 }
 

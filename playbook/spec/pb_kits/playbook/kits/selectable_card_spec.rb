@@ -5,8 +5,6 @@ require_relative "../../../../app/pb_kits/playbook/pb_selectable_card/selectable
 RSpec.describe Playbook::PbSelectableCard::SelectableCard do
   subject { Playbook::PbSelectableCard::SelectableCard }
 
-  it { is_expected.to define_partial }
-
   it { is_expected.to define_boolean_prop(:checked).with_default(false) }
   it { is_expected.to define_boolean_prop(:dark).with_default(false) }
   it { is_expected.to define_boolean_prop(:disabled).with_default(false) }

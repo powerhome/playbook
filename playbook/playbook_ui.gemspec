@@ -15,12 +15,10 @@ Gem::Specification.new do |s|
   s.license     = "MIT"
 
   s.files = Dir[
-    "app/controllers/playbook/application_controller.rb",
     "app/pb_kits/playbook/pb_*/**/*",
-    "app/pb_kits/playbook/{config,plugins,props,tokens,utilities}/**/*",
+    "app/pb_kits/playbook/{plugins,tokens,utilities}/**/*",
     "app/pb_kits/playbook/data/menu.yml",
     "app/pb_kits/playbook/*.{scss,js,rb}",
-    "app/helpers/**/*",
     "app/assets/images/*",
     "fonts/**/*",
     "lib/*.rb",
@@ -37,6 +35,7 @@ Gem::Specification.new do |s|
   s.add_dependency "sassc-rails", "1.3.0"
   s.add_dependency "slim-rails", "3.2.0"
   s.add_dependency "sprockets-rails", "2.3.3"
+  s.add_dependency "view_component", "2.23.2"
   s.add_dependency "webpacker", "4.2.2"
   s.add_dependency "webpacker-react", "~> 0.3.2"
 
@@ -45,7 +44,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency "byebug", "11.0.0"
   s.add_development_dependency "overcommit", "0.49.0"
   s.add_development_dependency "rainbow", "2.2.2"
-  s.add_development_dependency "rspec-rails", "~> 3.8.0"
+  s.add_development_dependency "rspec-rails", "~> 3.8", ">= 3.8.0"
   s.add_development_dependency "rubocop", "0.81.0"
   s.add_development_dependency "simple_form", ">= 5.0.1", "< 6.0.0"
   s.add_development_dependency "spring", "2.0.2"

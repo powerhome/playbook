@@ -2,13 +2,8 @@
 
 module Playbook
   module PbTextarea
-    class Textarea
-      include Playbook::Props
-
-      partial "pb_textarea/textarea"
-
+    class Textarea < Playbook::KitBase
       prop :error
-      prop :object
       prop :label
       prop :method
       prop :name

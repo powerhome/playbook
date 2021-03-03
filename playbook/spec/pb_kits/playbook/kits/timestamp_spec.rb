@@ -8,8 +8,6 @@ RSpec.describe Playbook::PbTimestamp::Timestamp do
   let(:timestamp) { DateTime.new(2020, 10, 10, 20, 30, 00).in_time_zone("America/New_York").freeze }
   let(:future_timestamp) { DateTime.new(2024, 10, 10, 20, 30, 00).in_time_zone("America/New_York").freeze }
 
-  it { is_expected.to define_partial }
-
   it { is_expected.to define_enum_prop(:align)
                       .with_values("left", "center", "right") }
   it { is_expected.to define_prop(:dark)

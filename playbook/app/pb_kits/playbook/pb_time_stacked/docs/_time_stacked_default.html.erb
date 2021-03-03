@@ -1,5 +1,18 @@
-<%= pb_rails("time_stacked", props: { date: DateTime.now }) %>
-<br/>
-<%= pb_rails("time_stacked", props: { align: "center", date: DateTime.now }) %>
-<br/>
-<%= pb_rails("time_stacked", props: { align: "right", date: DateTime.now }) %>
+<%= pb_rails("time_stacked", props: {
+  time: DateTime.now,
+  align: "left",
+}) %>
+
+<br>
+
+<%= pb_rails("time_stacked", props: {
+  time: Time.now,
+  align: "center"
+}) %>
+
+<br>
+
+<%= pb_rails("time_stacked", props: {
+  time: Time.now,
+  align: "right"
+}) %>

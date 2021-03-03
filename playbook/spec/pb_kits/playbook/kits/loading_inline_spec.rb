@@ -5,7 +5,6 @@ require_relative "../../../../app/pb_kits/playbook/pb_loading_inline/loading_inl
 RSpec.describe Playbook::PbLoadingInline::LoadingInline do
   subject { Playbook::PbLoadingInline::LoadingInline }
 
-  it { is_expected.to define_partial }
   it { is_expected.to define_boolean_prop(:dark) }
   it { is_expected.to define_enum_prop(:align)
                   .with_default("left")

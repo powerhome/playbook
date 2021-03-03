@@ -2,11 +2,7 @@
 
 module Playbook
   module PbTable
-    class Table
-      include Playbook::Props
-
-      partial "pb_table/table"
-
+    class Table < Playbook::KitBase
       prop :size, type: Playbook::Props::Enum,
                   values: %w[sm md lg],
                   default: "md"

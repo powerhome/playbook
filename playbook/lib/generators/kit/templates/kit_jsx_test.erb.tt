@@ -1,5 +1,5 @@
-import React from 'react'
-import { render, screen } from '../utilities/test-utils'
+import { ensureAccessible, renderKit } from '../utilities/test-utils'
+
 import { <%= @kit_name_pascal %> } from '../'
 
 /* See these resources for more testing info:
@@ -8,14 +8,10 @@ import { <%= @kit_name_pascal %> } from '../'
 */
 
 test('generated scaffold test - update me', () => {
-  const testId = "test1"
+  const props = {
+    data: { testid: 'default' }
+  }
 
-  render(
-    <<%= @kit_name_pascal %>
-      data={{ testid: testId }}
-    />
-  )
-
-  const kit = screen.getByTestId(testId)
+  const kit = renderKit(<%= @kit_name_pascal %> , props)
   expect(kit).toBeInTheDocument()
 })

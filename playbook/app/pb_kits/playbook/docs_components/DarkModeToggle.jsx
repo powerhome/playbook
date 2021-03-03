@@ -9,7 +9,7 @@ type ToggleProps = {
 }
 const DarkModeToggle = (props: ToggleProps) => {
   const { initMode } = props
-  const [darkMode, toggleDarkMode] = useState(JSON.parse(initMode) || false)
+  const [darkMode, toggleDarkMode] = useState(initMode ? JSON.parse(initMode) : false)
   const [loading, toggleLoading] = useState(false)
 
   const toggleHook = () => {

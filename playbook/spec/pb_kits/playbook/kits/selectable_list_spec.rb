@@ -5,8 +5,6 @@ require_relative "../../../../app/pb_kits/playbook/pb_selectable_list/selectable
 RSpec.describe Playbook::PbSelectableList::SelectableList do
   subject { Playbook::PbSelectableList::SelectableList }
 
-  it { is_expected.to define_partial }
-
   it { is_expected.to define_prop(:text) }
   it { is_expected.to define_enum_prop(:variant)
                       .with_default("checkbox")

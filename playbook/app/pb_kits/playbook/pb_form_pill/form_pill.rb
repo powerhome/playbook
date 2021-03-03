@@ -2,11 +2,7 @@
 
 module Playbook
   module PbFormPill
-    class FormPill
-      include Playbook::Props
-
-      partial "pb_form_pill/form_pill"
-
+    class FormPill < Playbook::KitBase
       prop :avatar_url
       prop :name
       prop :text

@@ -5,7 +5,6 @@ require_relative "../../../../app/pb_kits/playbook/pb_card/card"
 RSpec.describe Playbook::PbCard::Card do
   subject { Playbook::PbCard::Card }
 
-  it { is_expected.to define_partial }
   it { is_expected.to define_boolean_prop(:selected).with_default(false) }
   it { is_expected.to define_prop(:highlight)
                       .of_type(Playbook::Props::Hash)

@@ -6,6 +6,7 @@ const CheckboxDefault = (props) => {
     <div>
       <Checkbox
           name="default name"
+          tabIndex={0}
           text="Checkbox label"
           value="default value"
           {...props}

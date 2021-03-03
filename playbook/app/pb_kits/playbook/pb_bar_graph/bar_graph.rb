@@ -2,10 +2,7 @@
 
 module Playbook
   module PbBarGraph
-    class BarGraph
-      include Playbook::Props
-      partial "pb_bar_graph/bar_graph"
-
+    class BarGraph < Playbook::KitBase
       prop :axis_title
       prop :chart_data, type: Playbook::Props::Array,
                         default: []

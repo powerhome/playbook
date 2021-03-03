@@ -2,10 +2,7 @@
 
 module Playbook
   module PbPopover
-    class Popover
-      include Playbook::Props
-      partial "pb_popover/popover"
-
+    class Popover < Playbook::KitBase
       prop :position, type: Playbook::Props::Enum,
                       values: %w[top bottom left right],
                       default: "left"

@@ -5,8 +5,6 @@ require_relative "../../../../app/pb_kits/playbook/pb_date_year_stacked/date_yea
 RSpec.describe Playbook::PbDateYearStacked::DateYearStacked do
   subject { Playbook::PbDateYearStacked::DateYearStacked }
 
-  it { is_expected.to define_partial }
-
   it { is_expected.to define_enum_prop(:align)
                       .with_values("left", "center", "right")
                       .with_default "left" }

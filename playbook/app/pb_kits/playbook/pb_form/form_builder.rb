@@ -21,7 +21,7 @@ module Playbook
         prepend(DatePickerField)
 
         def actions(&block)
-          ActionArea.new(self).wrapper(&block)
+          @template.render_component ActionArea.new(submit_default_value: submit_default_value, children: block)
         end
       end
     end

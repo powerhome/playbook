@@ -5,8 +5,6 @@ require_relative "../../../../app/pb_kits/playbook/pb_table/table_row"
 RSpec.describe Playbook::PbTable::TableRow do
   subject { Playbook::PbTable::TableRow }
 
-  it { is_expected.to define_partial }
-
   it { is_expected.to define_string_prop(:side_highlight_color) }
 
   describe "#classname" do

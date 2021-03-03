@@ -2,13 +2,7 @@
 
 module Playbook
   module PbDate
-    class Date
-      include ActionView::Helpers::TagHelper
-      include ActionView::Context
-      include Playbook::Props
-
-      partial "pb_date/date"
-
+    class Date < Playbook::KitBase
       prop :date, required: true
       prop :alignment, type: Playbook::Props::Enum,
                        values: %w[left center right],

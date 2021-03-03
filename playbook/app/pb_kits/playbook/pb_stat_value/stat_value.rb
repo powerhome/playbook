@@ -2,12 +2,7 @@
 
 module Playbook
   module PbStatValue
-    class StatValue
-      include Playbook::Props
-      include ActionView::Helpers::NumberHelper
-
-      partial "pb_stat_value/stat_value"
-
+    class StatValue < Playbook::KitBase
       prop :unit
       prop :value, type: Playbook::Props::Number
 

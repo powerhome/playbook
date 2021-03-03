@@ -2,11 +2,7 @@
 
 module Playbook
   module PbPerson
-    class Person
-      include Playbook::Props
-
-      partial "pb_person/person"
-
+    class Person < Playbook::KitBase
       prop :first_name
       prop :last_name
 

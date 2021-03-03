@@ -2,11 +2,7 @@
 
 module Playbook
   module PbMessage
-    class Message
-      include Playbook::Props
-
-      partial "pb_message/message"
-
+    class Message < Playbook::KitBase
       prop :avatar_name
       prop :avatar_status
       prop :avatar_url

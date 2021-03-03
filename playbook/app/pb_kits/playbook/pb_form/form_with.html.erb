@@ -1,0 +1,11 @@
+<%= form_with(form_options, &method(:render_form)) %>
+
+<% if validate %>
+  <% content_for :pb_js do %>
+    <%= javascript_tag do %>
+      window.addEventListener('DOMContentLoaded', function() {
+        PbFormValidation.start()
+      })
+    <% end %>
+  <% end %>
+<% end %>

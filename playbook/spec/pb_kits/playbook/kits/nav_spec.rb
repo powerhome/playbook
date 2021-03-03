@@ -5,8 +5,6 @@ require_relative "../../../../app/pb_kits/playbook/pb_nav/nav"
 RSpec.describe Playbook::PbNav::Nav do
   subject { Playbook::PbNav::Nav }
 
-  it { is_expected.to define_partial }
-
   it { is_expected.to define_prop(:link)
                   .with_default("#") }
   it { is_expected.to define_prop(:title) }

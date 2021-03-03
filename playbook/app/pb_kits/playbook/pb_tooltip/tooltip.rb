@@ -2,10 +2,7 @@
 
 module Playbook
   module PbTooltip
-    class Tooltip
-      include Playbook::Props
-      partial "pb_tooltip/tooltip"
-
+    class Tooltip < Playbook::KitBase
       prop :position
       prop :trigger_element_selector
       prop :trigger_element_id, deprecated: true

@@ -5,8 +5,6 @@ require_relative "../../../../app/pb_kits/playbook/pb_table/table"
 RSpec.describe Playbook::PbTable::Table do
   subject { Playbook::PbTable::Table }
 
-  it { is_expected.to define_partial }
-
   it { is_expected.to define_enum_prop(:size)
                       .with_default("md")
                       .with_values("sm", "md", "lg") }

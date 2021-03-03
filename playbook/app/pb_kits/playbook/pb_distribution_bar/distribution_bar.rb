@@ -2,11 +2,7 @@
 
 module Playbook
   module PbDistributionBar
-    class DistributionBar
-      include Playbook::Props
-
-      partial "pb_distribution_bar/distribution_bar"
-
+    class DistributionBar < Playbook::KitBase
       prop :size, type: Playbook::Props::Enum,
                   values: %w[lg sm],
                   default: "lg"

@@ -2,11 +2,7 @@
 
 module Playbook
   module PbBadge
-    class Badge
-      include Playbook::Props
-
-      partial "pb_badge/badge"
-
+    class Badge < Playbook::KitBase
       prop :rounded, type: Playbook::Props::Boolean, default: false
       prop :text
       prop :variant, type: Playbook::Props::Enum,
