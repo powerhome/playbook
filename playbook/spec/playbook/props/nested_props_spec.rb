@@ -6,6 +6,10 @@ RSpec.describe Playbook::Props::NestedProps do
   subject { described_class.new(name: :subkit_props, kit: Class.new, nested_kit: Playbook::PbLegend::Legend) }
 
   describe "#validate" do
+    it "is valid if nil" do
+      expect(subject.validate(nil)).to be true
+    end
+
     it "is valid if conforms to the given kits props" do
       expect(subject.validate(color: "data_1", text: "valid")).to be true
     end

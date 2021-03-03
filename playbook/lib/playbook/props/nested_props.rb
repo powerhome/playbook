@@ -9,9 +9,12 @@ module Playbook
       end
 
       def validate(values)
+        return true if values.nil?
+
         @nested_kit.props.each do |prop_key, definition|
           definition.validate! definition.value(values[prop_key])
         end
+        true
       rescue Playbook::Props::Error
         false
       end
