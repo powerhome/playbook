@@ -17,8 +17,8 @@ module Playbook
       prop :validation, type: Playbook::Props::Hash,
                         default: {}
       prop :value
-      prop :add_on, type: Playbook::Props::TextInputAddOn,
-                    default: {}
+      prop :add_on, type: Playbook::Props::NestedProps,
+                    nested_kit: Playbook::PbTextInput::AddOn
 
       def classname
         generate_classname("pb_text_input_kit") + error_class
