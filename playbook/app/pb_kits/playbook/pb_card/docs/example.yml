@@ -4,6 +4,7 @@ examples:
   - card_highlight: Highlight Cards
   - card_header: Header Cards
   - card_selected: Selected
+  - card_tag: HTML Tag
   - card_padding: Padding Size
   - card_shadow: Shadow Size
   - card_content: Content Size
@@ -15,6 +16,7 @@ examples:
   - card_highlight: Highlight Cards
   - card_header: Header Cards
   - card_selected: Selected
+  - card_tag: HTML Tag
   - card_padding: Padding Size
   - card_shadow: Shadow Size
   - card_content: Content Size

@@ -9,6 +9,8 @@ module Playbook
                     default: "none"
       prop :highlight, type: Playbook::Props::Hash,
                        default: {}
+      prop :html_tag, type: Playbook::Props::String,
+                      default: "div"
       prop :border_none, type: Playbook::Props::Boolean,
                          default: false
       prop :border_radius, type: Playbook::Props::Enum,

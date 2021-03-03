@@ -3,18 +3,21 @@
 import React from 'react'
 import { get } from 'lodash'
 import classnames from 'classnames'
-import { buildCss } from '../utilities/props'
+import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
 import { globalProps } from '../utilities/globalProps.js'
 
 type CardPropTypes = {
+  aria?: object,
   borderNone?: boolean,
   borderRadius?: "xs" | "sm" | "md" | "lg" | "xl" | "none" | "rounded",
   children: array<React.ReactNode> | React.ReactNode,
   className?: string,
+  data?: object,
   highlight?: {
     position?: "side" | "top",
     color?: string,
   },
+  htmlTag?: string,
   padding?: string,
   selected?: boolean,
   shadow?: "none" | "deep" | "deeper" | "deepest",
@@ -62,11 +65,14 @@ const Body = (props: CardBodyProps) => {
 
 const Card = (props: CardPropTypes) => {
   const {
+    aria = {},
     borderNone = false,
     borderRadius = 'md',
     children,
     className,
+    data = {},
     highlight = {},
+    htmlTag = 'div',
     selected = false,
     shadow = 'none',
     padding = 'md',
@@ -78,6 +84,8 @@ const Card = (props: CardPropTypes) => {
     [`highlight_${highlight.position}`]: highlight.position,
     [`highlight_${highlight.color}`]: highlight.color,
   })
+  const ariaProps = buildAriaProps(aria)
+  const dataProps = buildDataProps(data)
 
   // coerce to array
   const cardChildren =
@@ -92,12 +100,17 @@ const Card = (props: CardPropTypes) => {
   }
 
   const nonHeaderChildren = cardChildren.filter((child) => (get(child, 'type.displayName') !== 'Header'))
+  const Tag = htmlTag
 
   return (
-    <div className={classnames(cardCss, globalProps(props, { padding }), className)}>
+    <Tag
+        {...ariaProps}
+        {...dataProps}
+        className={classnames(cardCss, globalProps(props, { padding }), className)}
+    >
       {subComponentTags('Header')}
       {nonHeaderChildren}
-    </div>
+    </Tag>
   )
 }
 
