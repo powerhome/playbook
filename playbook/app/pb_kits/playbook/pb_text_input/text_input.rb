@@ -24,15 +24,11 @@ module Playbook
         generate_classname("pb_text_input_kit") + error_class
       end
 
-      def add_on_class
-        should_show_add_on? ? "text_input_wrapper_add_on " : ""
-      end
-
       def input_tag
         tag(:input, input_options)
       end
 
-      def should_show_add_on?
+      def has_add_on?
         add_on.present?
       end
 
