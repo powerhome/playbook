@@ -8,6 +8,7 @@
 
 - Add yellow as option to progress simple kit [\#1365](https://github.com/powerhome/playbook/pull/1365) ([kellyeryan](https://github.com/kellyeryan))
 - Update to Time Stacked to use Time instead of Date [\#1290](https://github.com/powerhome/playbook/pull/1290) ([evalouderback](https://github.com/evalouderback))
+- Nav Kit - Accessibility Improvements \(\#1361\) [\#1361](https://github.com/powerhome/playbook/pull/1361) ([bh247484](https://github.com/bh247484))
 
 **Fixed Bugs:**
 
@@ -20,10 +21,6 @@
 - Create Collapse Kit - Refresh [\#1310](https://github.com/powerhome/playbook/pull/1310) ([coleerikson](https://github.com/coleerikson))
 
 **Improvements:**
-
-- Nav Kit - Accessibility Improvements \(\#1361\) [\#1361](https://github.com/powerhome/playbook/pull/1361) ([bh247484](https://github.com/bh247484))
-
-**Merged pull requests:**
 
 - Update generators to view component [\#1369](https://github.com/powerhome/playbook/pull/1369) ([xjunior](https://github.com/xjunior))
 - Fix form kit view context [\#1368](https://github.com/powerhome/playbook/pull/1368) ([xjunior](https://github.com/xjunior))
