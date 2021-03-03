@@ -28,6 +28,30 @@ module Playbook
         add_on[:icon] ? "text_input_wrapper_add_on " : ""
       end
 
+      def input_tag
+        tag(:input, input_options)
+      end
+
+      def should_show_add_on?
+        add_on[:icon].present?
+      end
+
+      def input_tag_with_add_on
+        input = []
+        if add_on[:alignment] == 'left'
+          input << pb_rails("icon", props: { icon: add_on[:icon] })
+          input << pb_rails("section_separator", props: { orientation: "vertical" }) if add_on[:border]
+          input << input_tag
+        elsif add_on[:alignment] == 'right'
+          input << input_tag
+          input << pb_rails("section_separator", props: { orientation: "vertical" }) if add_on[:border]
+          input << pb_rails("icon", props: { icon: add_on[:icon] })
+        end
+        input.join(' ').html_safe
+      end
+
+    private
+
       def input_options
         {
           autocomplete: autocomplete ? nil : "off",
@@ -43,8 +67,6 @@ module Playbook
           value: value
         }
       end
-
-    private
 
       def validation_message
         validation[:message] || ""

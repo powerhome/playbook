@@ -51,6 +51,7 @@ const TextInput = (props: TextInputProps, ref: React.ElementRef<"input">) => {
 
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
+  const shouldShowAddOn = addOn.icon !== null
   const addOnClass = shouldShowAddOn ? 'text_input_wrapper_add_on' : null
   const css = classnames([
     'pb_text_input_kit',
@@ -58,9 +59,6 @@ const TextInput = (props: TextInputProps, ref: React.ElementRef<"input">) => {
     globalProps(props),
     className,
   ])
-  const shouldShowAddOn = (
-    addOn.icon !== null
-  )
   const addOnIcon = (
     <Icon
         className="add-on-icon"
