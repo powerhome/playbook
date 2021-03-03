@@ -1,11 +1,10 @@
 module Playbook
   module Props
     class TextInputAddOn < Hash
-      ALIGNMENT_OPTIONS = %w[left right]
-
       def validate(value)
         @value = value
-        super(value) &&
+        return super(@value) if @value.empty?
+        super(@value) &&
           icon_valid? &&
           border_valid? &&
           alignment_valid?
@@ -13,20 +12,18 @@ module Playbook
 
       private
 
-      attr_reader :value
-
       def icon_valid?
-        value.dig('icon').is_a? ::String
+        @value.dig(:icon).is_a? ::String
       end
 
       def border_valid?
-        return unless (border = value.dig('border'))
-        border.is_a? ::Boolean
+        return true unless (border = @value.dig(:border))
+        border == true || border == false
       end
 
       def alignment_valid?
-        return unless (align = value.dig('alignment'))
-        align.in? ALIGNMENT_OPTIONS
+        return true unless (align = @value.dig(:alignment))
+        align.in? %w[left right]
       end
     end
   end

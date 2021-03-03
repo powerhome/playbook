@@ -17,7 +17,7 @@ module Playbook
       prop :validation, type: Playbook::Props::Hash,
                         default: {}
       prop :value
-      prop :add_on, type: Playbook::Props::Hash,
+      prop :add_on, type: Playbook::Props::TextInputAddOn,
                     default: {}
 
       def classname
