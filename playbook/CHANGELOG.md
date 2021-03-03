@@ -6,7 +6,7 @@
 
 **Kit Enhancements:**
 
-- \[CHMN-35\] Add yellow as option to progress simple kit [\#1365](https://github.com/powerhome/playbook/pull/1365) ([kellyeryan](https://github.com/kellyeryan))
+- Add yellow as option to progress simple kit [\#1365](https://github.com/powerhome/playbook/pull/1365) ([kellyeryan](https://github.com/kellyeryan))
 - Update to Time Stacked to use Time instead of Date [\#1290](https://github.com/powerhome/playbook/pull/1290) ([evalouderback](https://github.com/evalouderback))
 
 **Fixed Bugs:**
