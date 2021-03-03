@@ -28,10 +28,10 @@ import * as DatePicker from 'pb_date_picker/docs'
 import * as DateRangeInline from 'pb_date_range_inline/docs'
 import * as DateRangeStacked from 'pb_date_range_stacked/docs'
 import * as DateStacked from 'pb_date_stacked/docs'
-import * as DateYearStacked from 'pb_date_year_stacked/docs'
-import * as DistributionBarDocs from 'pb_distribution_bar/docs'
 import * as DateTime from 'pb_date_time/docs'
 import * as DateTimeStacked from 'pb_date_time_stacked/docs'
+import * as DateYearStacked from 'pb_date_year_stacked/docs'
+import * as DistributionBarDocs from 'pb_distribution_bar/docs'
 import * as FileUpload from 'pb_file_upload/docs'
 import * as Filter from 'pb_filter/docs'
 import * as FixedConfirmationToast from 'pb_fixed_confirmation_toast/docs'
@@ -59,6 +59,7 @@ import * as MultipleUsers from 'pb_multiple_users/docs'
 import * as MultipleUsersStacked from 'pb_multiple_users_stacked/docs'
 import * as Nav from 'pb_nav/docs'
 import * as OnlineStatus from 'pb_online_status/docs'
+import * as Passphrase from 'pb_passphrase/docs'
 import * as PbReactPopover from 'pb_popover/docs'
 import * as Person from 'pb_person/docs'
 import * as PersonContact from 'pb_person_contact/docs'
@@ -74,23 +75,24 @@ import * as SelectableCard from 'pb_selectable_card/docs'
 import * as SelectableCardIcon from 'pb_selectable_card_icon/docs'
 import * as SelectableIcon from 'pb_selectable_icon/docs'
 import * as SelectableList from 'pb_selectable_list/docs'
+import * as SiteComps from 'docs_components'
 import * as Source from 'pb_source/docs'
 import * as StarRating from 'pb_star_rating/docs'
 import * as StatChange from 'pb_stat_change/docs'
 import * as StatValue from 'pb_stat_value/docs'
 import * as Table from 'pb_table/docs'
-import * as Textarea from 'pb_textarea/docs'
 import * as TextInput from 'pb_text_input/docs'
+import * as Textarea from 'pb_textarea/docs'
 import * as Time from 'pb_time/docs'
-import * as Timeline from 'pb_timeline/docs'
-import * as TimeStacked from 'pb_time_stacked/docs'
-import * as Timestamp from 'pb_timestamp/docs'
 import * as TimeRangeInline from 'pb_time_range_inline/docs'
+import * as TimeStacked from 'pb_time_stacked/docs'
+import * as Timeline from 'pb_timeline/docs'
+import * as Timestamp from 'pb_timestamp/docs'
 import * as Title from 'pb_title/docs'
 import * as TitleCount from 'pb_title_count/docs'
 import * as TitleDetail from 'pb_title_detail/docs'
-import * as Typeahead from 'pb_typeahead/docs'
 import * as Toggle from 'pb_toggle/docs'
+import * as Typeahead from 'pb_typeahead/docs'
 import * as User from 'pb_user/docs'
 import * as UserBadge from 'pb_user_badge/docs'
 import * as WeekdayStacked from 'pb_weekday_stacked/docs'
@@ -118,10 +120,10 @@ WebpackerReact.setup({
   ...DateRangeInline,
   ...DateRangeStacked,
   ...DateStacked,
-  ...DateYearStacked,
-  ...DistributionBarDocs,
   ...DateTime,
   ...DateTimeStacked,
+  ...DateYearStacked,
+  ...DistributionBarDocs,
   ...FileUpload,
   ...Filter,
   ...FixedConfirmationToast,
@@ -149,6 +151,7 @@ WebpackerReact.setup({
   ...MultipleUsersStacked,
   ...Nav,
   ...OnlineStatus,
+  ...Passphrase,
   ...PbReactPopover,
   ...Person,
   ...PersonContact,
@@ -170,18 +173,18 @@ WebpackerReact.setup({
   ...StatChange,
   ...StatValue,
   ...Table,
-  ...Textarea,
   ...TextInput,
+  ...Textarea,
   ...Time,
-  ...Timeline,
-  ...TimeStacked,
-  ...Timestamp,
   ...TimeRangeInline,
+  ...TimeStacked,
+  ...Timeline,
+  ...Timestamp,
   ...Title,
   ...TitleCount,
   ...TitleDetail,
-  ...Typeahead,
   ...Toggle,
+  ...Typeahead,
   ...User,
   ...UserBadge,
   ...WeekdayStacked,
