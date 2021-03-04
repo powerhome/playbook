@@ -4,9 +4,24 @@ import { DateTimeStacked } from '../../'
 const DateTimeStackedDefault = (props) => (
   <div>
     <DateTimeStacked
-        date={new Date()}
+        datetime={new Date()}
         {...props}
     />
+    <br />
+    <DateTimeStacked
+        datetime={new Date()}
+        timeZone="Asia/Tokyo"
+
+        {...props}
+    />
+    <br />
+    <DateTimeStacked
+        datetime={new Date()}
+        timeZone="America/Denver"
+
+        {...props}
+    />
+
   </div>
 )
 
