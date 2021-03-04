@@ -1,20 +1,14 @@
-<%= pb_rails("flex", props: { classname: "text_input_wrapper_add_on flex-container", direction: "direction" }) do %>
+<%= pb_rails("flex", props: { classname: "add-on-left #{border_class}", direction: "direction" }) do %>
   <% if alignment == "right" %>
     <%= pb_rails("flex/flex_item", props: { grow: true }) do %>
       <%= content %>
     <% end %>
     <%= pb_rails("flex/flex_item") do %>
-      <%= pb_rails("section_separator", props: { orientation: "vertical" }) if border %>
+      <%= pb_rails("icon", props: { icon: icon, class: 'add-on-icon' }) %>
     <% end %>
+  <% elsif alignment == "left" %>
     <%= pb_rails("flex/flex_item") do %>
-      <%= pb_rails("icon", props: { icon: icon }) %>
-    <% end %>
-  <% else %>
-    <%= pb_rails("flex/flex_item") do %>
-      <%= pb_rails("icon", props: { icon: icon }) %>
-    <% end %>
-    <%= pb_rails("flex/flex_item") do %>
-      <%= pb_rails("section_separator", props: { orientation: "vertical" }) if border %>
+      <%= pb_rails("icon", props: { icon: icon, class: 'add-on-icon' }) %>
     <% end %>
     <%= pb_rails("flex/flex_item", props: { grow: true }) do %>
       <%= content %>

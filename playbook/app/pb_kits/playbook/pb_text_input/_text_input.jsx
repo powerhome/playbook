@@ -51,6 +51,11 @@ const TextInput = (props: TextInputProps, ref: React.ElementRef<"input">) => {
 
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
+
+  const borderToChange = addOn.alignment == 'left' ? 'right' : 'left'
+  const borderToggle = addOn.border ? 'on' : 'off'
+  const borderCss = `border_${borderToChange}_${borderToggle}`
+
   const shouldShowAddOn = addOn.icon !== null
   const addOnClass = shouldShowAddOn ? 'text_input_wrapper_add_on' : null
   const css = classnames([
