@@ -17,10 +17,10 @@ type CardPropTypes = {
     position?: "side" | "top",
     color?: string,
   },
-  htmlTag?: string,
   padding?: string,
   selected?: boolean,
   shadow?: "none" | "deep" | "deeper" | "deepest",
+  tag?: "div" | "section" | "footer" | "header" | "article" | "aside" | "main" | "nav",
 }
 
 type CardHeaderProps = {
@@ -72,9 +72,9 @@ const Card = (props: CardPropTypes) => {
     className,
     data = {},
     highlight = {},
-    htmlTag = 'div',
     selected = false,
     shadow = 'none',
+    tag = 'div',
     padding = 'md',
   } = props
   const borderCSS = borderNone == true ? 'border_none' : ''
@@ -102,7 +102,7 @@ const Card = (props: CardPropTypes) => {
   const nonHeaderChildren = cardChildren.filter((child) => (get(child, 'type.displayName') !== 'Header'))
 
   const tagOptions = ['div', 'section', 'footer', 'header', 'article', 'aside', 'main', 'nav']
-  const Tag = tagOptions.includes(htmlTag) ? htmlTag : 'div'
+  const Tag = tagOptions.includes(tag) ? tag : 'div'
 
   return (
     <Tag

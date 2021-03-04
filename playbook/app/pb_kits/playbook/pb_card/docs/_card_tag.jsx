@@ -5,49 +5,49 @@ const CardTag = (props) => {
   return (
     <div>
       <Card
-          htmlTag="section"
+          tag="section"
           {...props}
       >
         {'section'}
       </Card>
       <br />
       <Card
-          htmlTag="footer"
+          tag="footer"
           {...props}
       >
         {'footer'}
       </Card>
       <br />
       <Card
-          htmlTag="header"
+          tag="header"
           {...props}
       >
         {'header'}
       </Card>
       <br />
       <Card
-          htmlTag="article"
+          tag="article"
           {...props}
       >
         {'article'}
       </Card>
       <br />
       <Card
-          htmlTag="aside"
+          tag="aside"
           {...props}
       >
         {'aside'}
       </Card>
       <br />
       <Card
-          htmlTag="main"
+          tag="main"
           {...props}
       >
         {'main'}
       </Card>
       <br />
       <Card
-          htmlTag="nav"
+          tag="nav"
           {...props}
       >
         {'nav'}
