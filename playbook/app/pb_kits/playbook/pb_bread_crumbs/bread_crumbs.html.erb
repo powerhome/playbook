@@ -1,23 +1,20 @@
-<%= content_tag(:div,
-    aria: object.aria,
-    id: object.id,
-    data: object.data,
-    class: object.classname) do %>
-      <% object.children.each_with_index.reduce([]) do |c, (el, idx)|%>
-        <% if el[:icon].present? %>
-        <%= pb_rails("icon", props: { icon: el[:icon], fixed_width: true }) %>
-        <% end %>
-          <% if el[:link].present? %>
-            <div>
-              <a href=<%=el[:link]%>>
-                <%= el[:text] %> 
-              </a>
-            </div>
-          <% else %> 
-            <div>
-              <%= el[:text] %>
-            </div>
-          <% end %> 
-        
-      <%end%>
-<% end %>
+
+      <div class="pb_bread_crumb_items>
+        <% object.children.each do |child|%>
+          <div>
+          <% if child[:icon].present? %>
+          <%= pb_rails("icon", props: { icon: child[:icon], fixed_width: true }) %>
+          <% end %>
+            <% if child[:link].present? %>
+                <a class="pb_bread_crumb_item" href=<%=child[:link]%>>
+                  <%= child[:text] %> 
+                </a>
+            <% else %> 
+              <div>
+                <%= child[:text] %>
+              </div>
+            <% end %>
+        <%end%>
+       </div>
+      
+

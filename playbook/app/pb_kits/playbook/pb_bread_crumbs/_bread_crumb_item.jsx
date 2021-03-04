@@ -11,30 +11,33 @@ import {
   buildDataProps,
 } from '../utilities/props'
 
-type BreadCrumbsProps = {
+type BreadCrumbItemProps = {
   aria?: object,
   className?: string,
   data?: object,
   id?: string,
   text?: string
 }
-const BreadCrumbs = (props: BreadCrumbsProps) => {
+const BreadCrumbItem = (props: BreadCrumbItemProps) => {
   const {
     aria = {},
     className,
     data = {},
     id,
     text,
-    children
+    component = 'a',
+    dark,
+    ...rest
   } = props
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
   const css = classnames(
-    buildCss('pb_bread_crumbs_kit'),
+    buildCss('pb_bread_crumb_item_kit'),
     globalProps(props),
     className
   )
-
+  const Component = component || 'span'
+console.log('REST:???', rest);
   return (
     <div
         {...ariaProps}
@@ -42,18 +45,16 @@ const BreadCrumbs = (props: BreadCrumbsProps) => {
         className={css}
         id={id}
     >
-      {React.Children.toArray(children).map((child, idx) => {
-        return React.cloneElement(child, { key: `child-${idx}` })
-      })}
+        <Component className="pb_bread_crumb_item" {...rest} />
       </div>
   )
 }
 
-BreadCrumbs.propTypes = {
+BreadCrumbItem.propTypes = {
   aria: PropTypes.object,
   className: PropTypes.string,
   data: PropTypes.object,
   handleClick: PropTypes.func,
   children: PropTypes.node
 }
-export default BreadCrumbs
+export default BreadCrumbItem
