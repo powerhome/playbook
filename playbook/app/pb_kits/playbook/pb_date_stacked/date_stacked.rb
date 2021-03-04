@@ -2,13 +2,7 @@
 
 module Playbook
   module PbDateStacked
-    class DateStacked
-      include ActionView::Helpers::TagHelper
-      include ActionView::Context
-      include Playbook::Props
-
-      partial "pb_date_stacked/date_stacked"
-
+    class DateStacked < Playbook::KitBase
       prop :date, type: Playbook::Props::Date, required: true
       prop :align, type: Playbook::Props::Enum,
                   values: %w[left center right],
