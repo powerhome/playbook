@@ -4,6 +4,7 @@ import React from 'react'
 import Body from '../pb_body/_body.jsx'
 import Icon from '../pb_icon/_icon.jsx'
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
+import { randoInt } from '../utilities/numbers'
 import classnames from 'classnames'
 import { globalProps } from '../utilities/globalProps.js'
 
@@ -48,15 +49,19 @@ const Checkbox = (props: CheckboxProps) => {
     className
   )
 
+  const childrenWithProps = () => {
+    const cloneChild = (kid) => React.cloneElement(kid, { key: `text-input-${randoInt()}`, ...dataProps })
+    return children.length ? children.map((child) => cloneChild(child)) : cloneChild(children)
+  }
+
   return (
     <label
         {...ariaProps}
-        {...dataProps}
         className={classes}
         id={id}
     >
       <If condition={children}>
-        {children}
+        { childrenWithProps() }
         <Else />
         <input
             defaultChecked={checked}
@@ -65,6 +70,7 @@ const Checkbox = (props: CheckboxProps) => {
             tabIndex={tabIndex}
             type="checkbox"
             value={value}
+            {...dataProps}
         />
       </If>
 
