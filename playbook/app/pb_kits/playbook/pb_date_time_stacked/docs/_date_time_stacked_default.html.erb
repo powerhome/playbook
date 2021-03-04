@@ -1,1 +1,3 @@
-<%= pb_rails("date_time_stacked") %>
+  <%= pb_rails("date_time_stacked", props: { date: Date.today, time: Time.now }) %>
+<br>
+<%= pb_rails("date_time_stacked", props: { date: Date.new(2018, 03, 20), time: Time.now }) %>
