@@ -1,11 +1,12 @@
 # frozen_string_literal: true
 
 module Playbook
-  module PbBreadCrumb
-    class BreadCrumb < Playbook::KitBase
+  module PbBreadCrumbs
+    class BreadCrumbs < Playbook::KitBase
       prop :text
+      prop :children
       def classname
-        generate_classname("pb_bread_crumb_kit")
+        generate_classname("pb_bread_crumbs_kit")
       end
 
     private

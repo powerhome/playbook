@@ -12,7 +12,7 @@ import * as Background from 'pb_background/docs'
 import * as Badge from 'pb_badge/docs'
 import * as BarGraphDocs from 'pb_bar_graph/docs'
 import * as Body from 'pb_body/docs'
-import * as BreadCrumb from 'pb_bread_crumb/docs'
+import * as BreadCrumbs from 'pb_bread_crumbs/docs'
 import * as Button from 'pb_button/docs'
 import * as ButtonToolbar from 'pb_button_toolbar/docs'
 import * as Caption from 'pb_caption/docs'
@@ -103,7 +103,7 @@ WebpackerReact.setup({
   ...Badge,
   ...BarGraphDocs,
   ...Body,
-  ...BreadCrumb,
+  ...BreadCrumbs,
   ...Button,
   ...ButtonToolbar,
   ...Caption,

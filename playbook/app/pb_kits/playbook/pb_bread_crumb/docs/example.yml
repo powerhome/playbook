@@ -1,7 +1,0 @@
-examples:
-  rails:
-  - bread_crumb_default: Default
- 
-  react:
-  - bread_crumb_default: Default
- 

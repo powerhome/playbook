@@ -4,7 +4,7 @@
 @import "../tokens/spacing";
 @import "../tokens/typography";
 
-[class^=pb_bread_crumb_kit] {
+[class^=pb_bread_crumbs_kit] {
   $pb_badge_height: 18px;
 
   display: inline-flex;
@@ -16,12 +16,14 @@
   border-style: solid;
   border-color: $card_light;
 
-  span {
-    transform: translateY(1px);
-    display: inline-block;
-    font-size: $font_smaller - 1;
-    font-weight: $bolder;
+  svg {
+    padding-right: 5px;
   }
+    div:not(:last-of-type) a::after {
+      content: "/";
+      padding-left: 5px;
+      padding-right: 5px
+    }
 
   @each $color_name, $color_value in $status_colors {
     &[class*=_#{$color_name}]  {

@@ -1,6 +1,7 @@
 /* @flow */
 
 import React from 'react'
+import PropTypes from 'prop-types';
 import classnames from 'classnames'
 import { globalProps } from '../utilities/globalProps.js'
 
@@ -10,25 +11,27 @@ import {
   buildDataProps,
 } from '../utilities/props'
 
-type BreadCrumbProps = {
+type BreadCrumbsProps = {
   aria?: object,
   className?: string,
   data?: object,
   id?: string,
   text?: string
 }
-const BreadCrumb = (props: BreadCrumbProps) => {
+const BreadCrumbs = (props: BreadCrumbsProps) => {
   const {
     aria = {},
     className,
     data = {},
     id,
-    text
+    text,
+    children
   } = props
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
+  const separator = '/';
   const css = classnames(
-    buildCss('pb_bread_crumb_kit'),
+    buildCss('pb_bread_crumbs_kit'),
     globalProps(props),
     className
   )
@@ -40,9 +43,16 @@ const BreadCrumb = (props: BreadCrumbProps) => {
         className={css}
         id={id}
     >
-      <div><span>Whatttt is a crumb</span></div>
+     {children}
     </div>
   )
 }
 
-export default BreadCrumb
+BreadCrumbs.propTypes = {
+  aria: PropTypes.object,
+  className: PropTypes.string,
+  data: PropTypes.object,
+  handleClick: PropTypes.func,
+  children: PropTypes.node
+}
+export default BreadCrumbs
