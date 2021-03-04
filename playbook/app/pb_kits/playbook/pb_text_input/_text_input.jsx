@@ -1,13 +1,10 @@
 /* @flow */
 import React, { forwardRef } from 'react'
 import classnames from 'classnames'
-import { Body, Caption, Flex, Icon, SectionSeparator } from '../'
+import { Body, Caption, Card, Flex, Icon } from '../'
 import { globalProps } from '../utilities/globalProps.js'
 
-import {
-  buildAriaProps,
-  buildDataProps,
-} from '../utilities/props'
+import { buildAriaProps, buildDataProps } from '../utilities/props'
 
 type TextInputProps = {
   aria?: object,
@@ -32,10 +29,7 @@ type TextInputProps = {
   },
 }
 
-const TextInput = (
-  props: TextInputProps,
-  ref: React.ElementRef<"input">
-) => {
+const TextInput = (props: TextInputProps, ref: React.ElementRef<"input">) => {
   const {
     aria = {},
     className,
@@ -58,6 +52,17 @@ const TextInput = (
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
   const addOnClass = addOn.icon !== null ? 'text_input_wrapper_add_on' : null
+  const borderClass =
+    addOn.border == true && addOn.alignment == 'left'
+      ? 'border_right_on'
+      : addOn.border == true && addOn.alignment == 'right'
+        ? 'border_left_on'
+        : addOn.border == false && addOn.alignment == 'left'
+          ? 'border_right_off'
+          : addOn.border == false && addOn.alignment == 'right'
+            ? 'border_left_off'
+            : ''
+
   const css = classnames([
     'pb_text_input_kit',
     error ? 'error' : null,
@@ -66,6 +71,7 @@ const TextInput = (
   ])
   const addOnIcon = (
     <Icon
+        className="add-on-icon"
         fixedWidth={false}
         icon={addOn.icon}
     />
@@ -104,37 +110,29 @@ const TextInput = (
           <Choose>
             <When condition={addOn.icon !== null && addOn.alignment == 'left'}>
               <Flex
+                  className={`add-on-left ${borderClass}`}
                   inline="flex-container"
-                  vertical="stretch"
+                  vertical="center"
               >
-                { addOnIcon }
-                <If condition={addOn.border == true}>
-                  <SectionSeparator
-                      {...props}
-                      orientation="vertical"
-                  />
-                </If>
-                { textInput }
+                <Card className="add-on-card card-left-aligned">
+                  {addOnIcon}
+                </Card>
+                {textInput}
               </Flex>
             </When>
             <When condition={addOn.icon !== null && addOn.alignment == 'right'}>
               <Flex
+                  className={`add-on-right ${borderClass}`}
                   inline="flex-container"
-                  vertical="stretch"
+                  vertical="center"
               >
-                { textInput }
-                <If condition={addOn.border == true}>
-                  <SectionSeparator
-                      {...props}
-                      orientation="vertical"
-                  />
-                </If>
-                { addOnIcon }
+                {textInput}
+                <Card className="add-on-card card-right-aligned">
+                  {addOnIcon}
+                </Card>
               </Flex>
             </When>
-            <Otherwise>
-              { textInput }
-            </Otherwise>
+            <Otherwise>{textInput}</Otherwise>
           </Choose>
           <If condition={error}>
             <Body
