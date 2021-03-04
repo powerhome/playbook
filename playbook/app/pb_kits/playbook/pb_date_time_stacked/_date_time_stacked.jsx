@@ -1,9 +1,8 @@
+
 /* @flow */
 
 import React from 'react'
-import { DateStacked, Flex, FlexItem, TimeStacked } from '../'
-import { buildDataProps } from '../utilities/props'
-import { globalProps } from '../utilities/globalProps.js'
+import { DateStacked, Flex, FlexItem, SectionSeparator, TimeStacked } from '../'
 
 type DateTimeStackedProps = {
   data?: string,
@@ -13,31 +12,32 @@ type DateTimeStackedProps = {
 }
 
 const DateTimeStacked = (props: DateTimeStackedProps) => {
-  const { date, data = {}, dark } = props,
-    dataProps = buildDataProps(data)
-
+  const { date, dark } = props
   return (
+
     <Flex
-        className={globalProps(props)}
-        orientation="row"
-        vertical="center"
-        {...dataProps}
+        inline="flex-container"
+        vertical="stretch"
     >
       <FlexItem>
         <DateStacked
             align="right"
+            bold
             dark={dark}
             date={date}
-            reverse
-            size="sm"
         />
       </FlexItem>
+
+      <SectionSeparator
+          className="date-time-padding"
+          orientation="vertical"
+      />
       <FlexItem>
         <TimeStacked
             className="pb_date_time_stacked_kit"
             dark={dark}
+            date={date}
             tag="caption"
-            time={date}
         />
       </FlexItem>
     </Flex>
