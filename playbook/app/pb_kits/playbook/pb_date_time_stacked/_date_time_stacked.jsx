@@ -7,12 +7,13 @@ import { DateStacked, Flex, FlexItem, SectionSeparator, TimeStacked } from '../'
 type DateTimeStackedProps = {
   data?: string,
   id?: string,
-  date: date,
+  datetime: string,
   dark: boolean,
+  timeZone?: string,
 }
 
 const DateTimeStacked = (props: DateTimeStackedProps) => {
-  const { date, dark } = props
+  const { datetime, dark, timeZone = 'America/New_York' } = props
   return (
 
     <Flex
@@ -24,7 +25,8 @@ const DateTimeStacked = (props: DateTimeStackedProps) => {
             align="right"
             bold
             dark={dark}
-            date={date}
+            date={datetime}
+            timeZone={timeZone}
         />
       </FlexItem>
 
@@ -36,8 +38,9 @@ const DateTimeStacked = (props: DateTimeStackedProps) => {
         <TimeStacked
             className="pb_date_time_stacked_kit"
             dark={dark}
-            date={date}
+            date={datetime}
             tag="caption"
+            timeZone={timeZone}
         />
       </FlexItem>
     </Flex>

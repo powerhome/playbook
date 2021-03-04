@@ -8,6 +8,6 @@ RSpec.describe Playbook::PbDateTimeStacked::DateTimeStacked do
   it { is_expected.to define_prop(:dark)
                       .of_type(Playbook::Props::Boolean)
                       .with_default(false) }
-  it { is_expected.to define_prop(:date)
+  it { is_expected.to define_prop(:date_time)
                       .of_type(Playbook::Props::Date) }
 end

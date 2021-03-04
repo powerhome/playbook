@@ -1,3 +1,8 @@
-<%= pb_rails("date_time_stacked") %>
+<%= pb_rails("date_time_stacked", props: { date_time: DateTime.now }) %>
 <br>
-<%= pb_rails("date_time_stacked", props: { date: Date.new(2018, 03, 20) }) %>
+<%= pb_rails("date_time_stacked", props: { date_time: Date.new(2018, 03, 20) }) %>
+<br>
+<%= pb_rails("date_time_stacked", props: { date_time: DateTime.now, timezone: "Asia/Tokyo" }) %>
+<br>
+<%= pb_rails("date_time_stacked", props: { date_time: DateTime.now, timezone: "America/Denver" }) %>
+
