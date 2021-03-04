@@ -9,7 +9,8 @@ module Playbook
                     default: "none"
       prop :highlight, type: Playbook::Props::Hash,
                        default: {}
-      prop :html_tag, type: Playbook::Props::String,
+      prop :html_tag, type: Playbook::Props::Enum,
+                      values: %w[div section footer header article aside main nav],
                       default: "div"
       prop :border_none, type: Playbook::Props::Boolean,
                          default: false

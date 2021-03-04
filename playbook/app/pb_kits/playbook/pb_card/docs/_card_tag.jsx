@@ -1,73 +1,57 @@
 import React from 'react'
-import { Card, Flex } from '../../'
+import { Card } from '../../'
 
 const CardTag = (props) => {
   return (
     <div>
-      <Flex
-          justify="between"
+      <Card
+          htmlTag="section"
           {...props}
       >
-        <Card
-            {...props}
-        >
-          {'div by default'}
-        </Card>
-
-        <Card
-            htmlTag="section"
-            {...props}
-        >
-          {'section'}
-        </Card>
-
-        <Card
-            htmlTag="footer"
-            {...props}
-        >
-          {'footer'}
-        </Card>
-
-        <Card
-            htmlTag="header"
-            {...props}
-        >
-          {'header'}
-        </Card>
-      </Flex>
-
-      <Flex
-          justify="between"
+        {'section'}
+      </Card>
+      <br />
+      <Card
+          htmlTag="footer"
           {...props}
       >
-        <Card
-            htmlTag="article"
-            {...props}
-        >
-          {'article'}
-        </Card>
-
-        <Card
-            htmlTag="aside"
-            {...props}
-        >
-          {'aside'}
-        </Card>
-
-        <Card
-            htmlTag="main"
-            {...props}
-        >
-          {'main'}
-        </Card>
-
-        <Card
-            htmlTag="nav"
-            {...props}
-        >
-          {'nav'}
-        </Card>
-      </Flex>
+        {'footer'}
+      </Card>
+      <br />
+      <Card
+          htmlTag="header"
+          {...props}
+      >
+        {'header'}
+      </Card>
+      <br />
+      <Card
+          htmlTag="article"
+          {...props}
+      >
+        {'article'}
+      </Card>
+      <br />
+      <Card
+          htmlTag="aside"
+          {...props}
+      >
+        {'aside'}
+      </Card>
+      <br />
+      <Card
+          htmlTag="main"
+          {...props}
+      >
+        {'main'}
+      </Card>
+      <br />
+      <Card
+          htmlTag="nav"
+          {...props}
+      >
+        {'nav'}
+      </Card>
     </div>
   )
 }

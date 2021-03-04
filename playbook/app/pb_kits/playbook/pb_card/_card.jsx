@@ -100,7 +100,9 @@ const Card = (props: CardPropTypes) => {
   }
 
   const nonHeaderChildren = cardChildren.filter((child) => (get(child, 'type.displayName') !== 'Header'))
-  const Tag = htmlTag
+
+  const tagOptions = ['div', 'section', 'footer', 'header', 'article', 'aside', 'main', 'nav']
+  const Tag = tagOptions.includes(htmlTag) ? htmlTag : 'div'
 
   return (
     <Tag
