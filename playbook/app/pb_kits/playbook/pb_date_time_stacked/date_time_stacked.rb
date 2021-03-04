@@ -7,8 +7,6 @@ module Playbook
                   default: ::DateTime.current
       prop :dark, type: Playbook::Props::Boolean,
                   default: false
-      prop :time, default: ::DateTime.current
-
     end
   end
 end
