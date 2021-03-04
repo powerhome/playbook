@@ -114,26 +114,26 @@ const Button = (props: ButtonPropTypes) => {
   return (
     <If condition={link !== null}>
       <a
-          {...buttonAria}
-          {...dataProps}
           className={css}
           href={link}
           id={id}
           target={newWindow ? '_blank' : null}
+          {...buttonAria}
+          {...dataProps}
       >
         <If condition={loading}>{loadingIcon}</If>
         {content}
       </a>
       <Else />
       <button
-          {...buttonAria}
-          {...dataProps}
           className={css}
           disabled={disabled}
           id={id}
           onClick={onClick}
           type={htmlType}
           value={value}
+          {...buttonAria}
+          {...dataProps}
       >
         <If condition={loading}>{loadingIcon}</If>
         {content}

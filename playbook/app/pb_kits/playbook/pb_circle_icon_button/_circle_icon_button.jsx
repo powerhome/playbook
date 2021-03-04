@@ -15,6 +15,7 @@ import { globalProps } from '../utilities/globalProps.js'
 
 type CircleIconButtonProps = {
   aria?: object,
+  buttonData?: object,
   className?: string,
   dark?: boolean,
   data?: object,
@@ -31,6 +32,7 @@ type CircleIconButtonProps = {
 const CircleIconButton = (props: CircleIconButtonProps) => {
   const {
     aria = {},
+    buttonData = {},
     className,
     dark,
     data = {},
@@ -45,22 +47,23 @@ const CircleIconButton = (props: CircleIconButtonProps) => {
   } = props
 
   const ariaProps = buildAriaProps(aria)
-  const dataProps = buildDataProps(data)
   const classes = classnames(
     buildCss('pb_circle_icon_button_kit'),
     globalProps(props),
     className
   )
+  const dataProps = buildDataProps(data)
 
   return (
     <div
-        {...ariaProps}
-        {...dataProps}
         className={classes}
         id={id}
+        {...ariaProps}
+        {...dataProps}
     >
       <Button
           dark={dark}
+          data={buttonData}
           disabled={disabled}
           link={link}
           newWindow={newWindow}

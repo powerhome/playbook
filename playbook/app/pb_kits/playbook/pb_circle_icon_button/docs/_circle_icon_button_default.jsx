@@ -4,6 +4,8 @@ import { CircleIconButton } from '../../'
 const CircleIconButtonDefault = (props) => (
   <div>
     <CircleIconButton
+        buttonData={{ testid: 'button-test' }}
+        data={{ testid: 'circleiconbutton-test' }}
         icon="plus"
         variant="primary"
         {...props}
