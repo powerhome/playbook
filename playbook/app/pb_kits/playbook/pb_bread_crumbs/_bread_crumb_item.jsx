@@ -37,7 +37,6 @@ const BreadCrumbItem = (props: BreadCrumbItemProps) => {
     className
   )
   const Component = component || 'span'
-console.log('REST:???', rest);
   return (
     <div
         {...ariaProps}
