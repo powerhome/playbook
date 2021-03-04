@@ -5,12 +5,14 @@ const AvatarActionButtonActions = (props) => (
   <div className="pb--doc-demo-row">
     <AvatarActionButton
         action="add"
+        imageAlt="Add Sophia Carden"
         imageUrl="https://randomuser.me/api/portraits/women/8.jpg"
         name="Sophia Carden"
         {...props}
     />
     <AvatarActionButton
         action="remove"
+        imageAlt="Remove Sophia Carden"
         imageUrl="https://randomuser.me/api/portraits/women/8.jpg"
         name="Sophia Carden"
         {...props}

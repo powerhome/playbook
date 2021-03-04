@@ -19,6 +19,7 @@ type AvatarActionButtonProps = {
   dark?: boolean,
   data?: Object,
   id?: string,
+  imageAlt?: string,
   imageUrl?: string,
   linkUrl?: string,
   name?: string,
@@ -35,6 +36,7 @@ const AvatarActionButton = (props: AvatarActionButtonProps) => {
     dark = false,
     data = {},
     id,
+    imageAlt = '',
     imageUrl,
     linkUrl,
     name,
@@ -71,6 +73,7 @@ const AvatarActionButton = (props: AvatarActionButtonProps) => {
           onClick={onClick}
       >
         <Avatar
+            imageAlt={imageAlt}
             imageUrl={imageUrl}
             name={name}
             size={size}
