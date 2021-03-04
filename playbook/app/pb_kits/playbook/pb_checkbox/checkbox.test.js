@@ -38,7 +38,6 @@ test('returns dark class name', () => {
 test('returns indeterminate class name', () => {
   render(
     <Checkbox
-        checked
         data={{ testid: testId }}
         indeterminate
         name="checkbox-name"
@@ -48,5 +47,48 @@ test('returns indeterminate class name', () => {
   )
 
   const kit = screen.getByTestId(testId)
-  expect(kit).toHaveClass(`${kitClass}_checked_indeterminate`)
+  expect(kit).toHaveClass(`${kitClass}_indeterminate`)
+})
+
+test('has name attribute', () => {
+  render(
+    <Checkbox
+        data={{ testid: testId }}
+        name="checkbox-name"
+        text="Checkbox"
+        value="check-box value"
+    />
+  )
+
+  const kit = screen.getByTestId(testId)
+  expect(kit.getElementsByTagName('input')[0]).toHaveAttribute('name', 'checkbox-name')
+})
+
+test('has value attribute', () => {
+  render(
+    <Checkbox
+        data={{ testid: testId }}
+        name="checkbox-name"
+        text="Checkbox"
+        value="checkbox value"
+    />
+  )
+
+  const kit = screen.getByTestId(testId)
+  expect(kit.getElementsByTagName('input')[0]).toHaveAttribute('value', 'checkbox value')
+})
+
+test('has checked attribute', () => {
+  render(
+    <Checkbox
+        checked
+        data={{ testid: testId }}
+        name="checkbox-name"
+        text="Checkbox"
+        value="check-box value"
+    />
+  )
+
+  const kit = screen.getByTestId(testId)
+  expect(kit.getElementsByTagName('input')[0]).toHaveAttribute('checked')
 })
