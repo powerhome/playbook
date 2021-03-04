@@ -1,17 +1,13 @@
-<%= pb_rails("flex", props: { classname: "add-on-#{alignment} #{border_class}", direction: "direction" }) do %>
-  <% if alignment == "right" %>
-    <%= pb_rails("flex/flex_item", props: { grow: true }) do %>
-      <%= content %>
+<%= pb_rails("flex", props: { classname: "add-on-#{alignment} #{border_class}", vertical: "center"}) do %>
+  <% if alignment == "left" %>
+    <%= pb_rails("card", props: {classname: "add-on-card card-left-aligned"}) do %>
+      <%= pb_rails("icon", props: { icon: icon, classname: "add-on-icon", fixed_width: false }) %>
     <% end %>
-    <%= pb_rails("card") do %>
-      <%= pb_rails("icon", props: { icon: icon, classname: 'add-on-icon' }) %>
-    <% end %>
-  <% elsif alignment == "left" %>
-    <%= pb_rails("card") do %>
-      <%= pb_rails("icon", props: { icon: icon, classname: 'add-on-icon' }) %>
-    <% end %>
-    <%= pb_rails("flex/flex_item", props: { grow: true }) do %>
-      <%= content %>
+    <%= content %>
+  <% elsif alignment == "right" %>
+    <%= content %>
+    <%= pb_rails("card", props: {classname: "add-on-card card-right-aligned"}) do %>
+      <%= pb_rails("icon", props: { icon: icon, classname: "add-on-icon", fixed_width: false }) %>
     <% end %>
   <% end %>
 <% end %>

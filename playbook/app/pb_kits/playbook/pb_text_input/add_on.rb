@@ -15,7 +15,7 @@ module Playbook
           border_to_change = 'left'
         end
 
-        "border_#{alignment}_#{border_toggle}"
+        "border_#{border_to_change}_#{border_toggle}"
       end
     end
   end

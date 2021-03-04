@@ -32,6 +32,10 @@ module Playbook
         add_on.present?
       end
 
+      def add_on_class
+        has_add_on? ? 'text_input_wrapper_add_on' : nil
+      end
+
     private
 
       def input_options
