@@ -68,6 +68,7 @@ const DialogSizes = () => {
         {dialogs.map((dialog) => (
           <Dialog
               key={dialog.size}
+              onClose={dialog.toggle}
               opened={dialog.visible}
               size={dialog.size}
           >

@@ -5,8 +5,10 @@ import classnames from 'classnames'
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
 import { globalProps } from '../utilities/globalProps.js'
 import Modal from 'react-modal'
-import { Button, Flex, SectionSeparator } from '../'
-import { DialogHeader } from './_dialog_header'
+import { Button } from '../'
+import DialogHeader  from './child_kits/_dialog_header'
+import DialogFooter from './child_kits/_dialog_footer'
+import DialogBody from './child_kits/_dialog_body'
 import { DialogContext } from './_dialog_context'
 
 type DialogProps = {
@@ -23,50 +25,11 @@ type DialogProps = {
   onClose?: () => void,
   onConfirm?: () => void,
   opened: boolean,
+  shouldCloseOnOverlayClick: boolean,
   size?: "sm" | "md" | "lg" | "content",
   text?: string,
   title?: string,
   trigger?: string
-}
-
-// Body component
-const DialogBody = (props: DialogBodyProps) => {
-  const { children, padding = 'sm', className } = props
-  const bodyCSS = buildCss('dialog_body')
-  const bodySpacing = globalProps(props, { padding })
-
-  return (
-    <div className={classnames(bodyCSS, bodySpacing, className)}>
-      {children}
-    </div>
-  )
-}
-
-// Footer component
-const DialogFooter = (props: DialogFooterProps) => {
-  const {
-    children,
-    padding = 'sm',
-    className,
-    spacing = 'between',
-    separator = false,
-  } = props
-  const footerCSS = buildCss('dialog_footer')
-  const footerSpacing = globalProps(props, { padding })
-
-  return (
-    <>
-      <If condition={separator}>
-        <SectionSeparator />
-      </If>
-      <Flex
-          className={classnames(footerCSS, footerSpacing, className)}
-          spacing={spacing}
-      >
-        {children}
-      </Flex>
-    </>
-  )
 }
 
 const Dialog = (props: DialogProps) => {
@@ -83,6 +46,7 @@ const Dialog = (props: DialogProps) => {
     onCancel = () => {},
     onConfirm = () => {},
     onClose = () => {},
+    shouldCloseOnOverlayClick = true,
     text,
     title,
     trigger,
@@ -141,8 +105,9 @@ const Dialog = (props: DialogProps) => {
             closeTimeoutMS={200}
             contentLabel="Minimal Modal Example"
             isOpen={modalIsOpened}
-            onRequestClose={close}
+            onRequestClose={onClose}
             overlayClassName={overlayClassNames}
+            shouldCloseOnOverlayClick={shouldCloseOnOverlayClick}
         >
           <If condition={title}>
             <Dialog.Header>{title}</Dialog.Header>

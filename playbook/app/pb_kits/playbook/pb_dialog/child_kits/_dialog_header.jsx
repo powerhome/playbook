@@ -2,11 +2,11 @@
 
 import React, { useContext } from 'react'
 import classnames from 'classnames'
-import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
-import { globalProps } from '../utilities/globalProps.js'
-import { Flex, SectionSeparator } from '../'
-import { CloseIcon } from './_close_icon'
-import { DialogContext } from './_dialog_context'
+import { buildAriaProps, buildCss, buildDataProps } from '../../utilities/props'
+import { globalProps } from '../../utilities/globalProps.js'
+import { Flex, SectionSeparator } from '../../'
+import { CloseIcon } from '../_close_icon'
+import { DialogContext } from '../_dialog_context'
 
 type DialogHeaderProps = {
   aria?: object,

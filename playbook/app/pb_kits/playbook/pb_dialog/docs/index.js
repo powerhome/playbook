@@ -3,3 +3,4 @@ export { default as DialogCompoundComponents } from './_dialog_compound_componen
 export { default as DialogSizes } from './_dialog_sizes.jsx'
 export { default as DialogScrollable } from './_dialog_scrollable.jsx'
 export { default as DialogSeparators } from './_dialog_separators.jsx'
+export { default as DialogShouldCloseOnOverlay } from './_dialog_should_close_on_overlay.jsx'
