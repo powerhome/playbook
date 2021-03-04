@@ -19,3 +19,12 @@ $opacity: (
   opacity_8: $opacity_8,
   opacity_9: $opacity_9,
 );
+
+:export {
+  @mixin export_opacity($opacity_list) {
+    @each $name, $settings in $opacity_list {
+      #{$name}: $settings;
+    }
+  }
+  @include export_opacity($opacity);
+}

@@ -32,3 +32,13 @@ $border_radius: (
   border_radius_none:    $border_radius_none,
   border_radius_rounded: $border_radius_rounded
 );
+
+
+:export {
+  @mixin export_border_radius($border_radius_list) {
+    @each $name, $size in $border_radius_list {
+      #{$name}: $size;
+    }
+  }
+  @include export_border_radius($border_radius);
+}

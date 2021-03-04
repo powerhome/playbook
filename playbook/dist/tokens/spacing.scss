@@ -11,3 +11,13 @@ $spaces:(
   space_xl:   $space_xl,
   none: 0
 );
+
+
+:export {
+  @mixin export_spacing($spacing_list) {
+    @each $name, $size in $spacing_list {
+      #{$name}: $size;
+    }
+  }
+  @include export_spacing($spaces);
+}

@@ -34,3 +34,12 @@ $offscreen: -9999px;
   }
   @return map-get($z_layers, $layer);
 }
+
+:export {
+  @mixin export_z_index($z_index_list) {
+    @each $name, $settings in $z_index_list {
+      #{$name}: $settings;
+    }
+  }
+  @include export_z_index($z_index);
+}
