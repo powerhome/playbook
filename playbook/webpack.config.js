@@ -11,6 +11,9 @@ const COPY_PLUGIN_CONFIG = new CopyPlugin({
   patterns: [
     {
       from: path.resolve(__dirname, 'app/pb_kits/playbook/tokens'),
+      globOptions: {
+        ignore: ["**/exports/**"]
+      },
       to: path.resolve(__dirname, 'dist/tokens'),
       transformPath(targetPath) {
         return targetPath.replace(/^tokens\/\_/, 'tokens/')
