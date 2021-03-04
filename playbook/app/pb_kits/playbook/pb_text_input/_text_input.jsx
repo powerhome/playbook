@@ -88,12 +88,20 @@ const TextInput = (props: TextInputProps, ref: React.ElementRef<"input">) => {
   )
   const addOnBorder = (
     <React.Fragment>
-      <If condition={addOn.border == true}>
-        <SectionSeparator
-            {...props}
-            orientation="vertical"
-        />
-      </If>
+      <Flex
+          className={`add-on-${addOn.alignment} ${borderCss}`}
+          inline="flex-container"
+          vertical="center"
+      >
+        <If condition={addOn.alignment == 'left'}>
+          <Card className="add-on-card card-left-aligned">{addOnIcon}</Card>
+          {textInput}
+        </If>
+        <If condition={addOn.alignment == 'right'}>
+          {textInput}
+          <Card className="add-on-card card-right-aligned">{addOnIcon}</Card>
+        </If>
+      </Flex>
     </React.Fragment>
   )
   const addOnInput = (
