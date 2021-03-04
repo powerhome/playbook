@@ -3,7 +3,7 @@
 import React from 'react'
 import { get } from 'lodash'
 import classnames from 'classnames'
-import { buildCss } from '../utilities/props'
+import { buildCss, buildDataProps } from '../utilities/props'
 import { globalProps } from '../utilities/globalProps.js'
 
 type CardPropTypes = {
@@ -11,6 +11,7 @@ type CardPropTypes = {
   borderRadius?: "xs" | "sm" | "md" | "lg" | "xl" | "none" | "rounded",
   children: array<React.ReactNode> | React.ReactNode,
   className?: string,
+  data?: object,
   highlight?: {
     position?: "side" | "top",
     color?: string,
@@ -66,6 +67,7 @@ const Card = (props: CardPropTypes) => {
     borderRadius = 'md',
     children,
     className,
+    data = {},
     highlight = {},
     selected = false,
     shadow = 'none',
@@ -78,6 +80,8 @@ const Card = (props: CardPropTypes) => {
     [`highlight_${highlight.position}`]: highlight.position,
     [`highlight_${highlight.color}`]: highlight.color,
   })
+
+  const dataProps = buildDataProps(data)
 
   // coerce to array
   const cardChildren =
@@ -94,7 +98,10 @@ const Card = (props: CardPropTypes) => {
   const nonHeaderChildren = cardChildren.filter((child) => (get(child, 'type.displayName') !== 'Header'))
 
   return (
-    <div className={classnames(cardCss, globalProps(props, { padding }), className)}>
+    <div
+        className={classnames(cardCss, globalProps(props, { padding }), className)}
+        {...dataProps}
+    >
       {subComponentTags('Header')}
       {nonHeaderChildren}
     </div>
