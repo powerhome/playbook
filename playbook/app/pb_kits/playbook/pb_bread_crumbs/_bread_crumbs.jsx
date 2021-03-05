@@ -20,7 +20,7 @@ type BreadCrumbsProps = {
 }
 const BreadCrumbs = (props: BreadCrumbsProps) => {
   const {
-    aria = {},
+    aria = { label: 'Breadcrumb Navigation' },
     className,
     data = {},
     id,
