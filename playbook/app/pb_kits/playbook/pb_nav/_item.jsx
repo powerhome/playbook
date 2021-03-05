@@ -75,6 +75,7 @@ const NavItem = (props: NavItemProps) => {
               key={iconLeft}
           >
             <Icon
+                aria={{ label: iconLeft }}
                 className="pb_nav_list_item_icon_left"
                 fixedWidth
                 icon={iconLeft}
@@ -90,6 +91,7 @@ const NavItem = (props: NavItemProps) => {
               key={iconRight}
           >
             <Icon
+                aria={{ label: iconRight }}
                 className="pb_nav_list_item_icon_right"
                 fixedWidth
                 icon={iconRight}

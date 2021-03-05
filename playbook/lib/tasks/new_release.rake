@@ -125,14 +125,6 @@ task :new_release, [:var] => [:environment] do |_task, args|
   #        Build and Publish Packages       #
   # --------------------------------------- #
 
-  # RubyGems
-  `rm -rf playbook_ui-*.gem`
-  puts "\nCreating Gem..."
-  `gem build playbook_ui.gemspec`
-  puts "\nPushing to RubyGems... (not yet ungated)"
-  puts "\nUse gem push to publish manually (see new_release.rake for full command)"
-  # `gem push playbook_ui-#{new_version}.gem`
-
   # NPM
   `rm -rf playbook-ui-*.tgz`
   puts "\nGenerating distribution files"
@@ -150,6 +142,14 @@ task :new_release, [:var] => [:environment] do |_task, args|
     # `npm publish playbook-ui-#{new_version}.tgz`
   end
   puts "\nUse npm publish to push manually (see new_release.rake for full command)"
+
+  # RubyGems
+  `rm -rf playbook_ui-*.gem`
+  puts "\nCreating Gem..."
+  `gem build playbook_ui.gemspec`
+  puts "\nPushing to RubyGems... (not yet ungated)"
+  puts "\nUse gem push to publish manually (see new_release.rake for full command)"
+  # `gem push playbook_ui-#{new_version}.gem`
 
   # Github tag
   if args[:var] != "alpha"

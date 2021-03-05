@@ -21,7 +21,7 @@ module Playbook
       end
 
       def description
-        @description ||= read_kit_file(kit, "_#{example_key}.md")
+        @description ||= read_kit_file("_#{example_key}.md")
       end
 
       def highlighter

@@ -2,6 +2,7 @@
 
 import React from 'react'
 import classnames from 'classnames'
+import { buildDataProps } from '../utilities/props'
 import { globalProps } from '../utilities/globalProps.js'
 
 import Icon from '../pb_icon/_icon.jsx'
@@ -13,6 +14,7 @@ type ButtonPropTypes = {
   },
   children?: array<React.ReactChild>,
   className?: string | array<string>,
+  data?: object,
   disabled?: boolean,
   fixedWidth?: boolean,
   fullWidth?: boolean,
@@ -69,6 +71,7 @@ const Button = (props: ButtonPropTypes) => {
   const {
     children,
     className,
+    data = {},
     disabled,
     icon = null,
     id,
@@ -82,6 +85,7 @@ const Button = (props: ButtonPropTypes) => {
   } = props
 
   const buttonAria = buttonAriaProps(props)
+  const dataProps = buildDataProps(data)
   const css = classnames(
     buttonClassName(props),
     globalProps(props),
@@ -111,6 +115,7 @@ const Button = (props: ButtonPropTypes) => {
     <If condition={link !== null}>
       <a
           {...buttonAria}
+          {...dataProps}
           className={css}
           href={link}
           id={id}
@@ -122,6 +127,7 @@ const Button = (props: ButtonPropTypes) => {
       <Else />
       <button
           {...buttonAria}
+          {...dataProps}
           className={css}
           disabled={disabled}
           id={id}

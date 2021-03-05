@@ -3,49 +3,27 @@
 module Playbook
   module PbTimeStacked
     class TimeStacked < Playbook::KitBase
+      prop :time, required: true
       prop :align, type: Playbook::Props::Enum,
                    values: %w[left center right],
                    default: "left"
-      prop :classnames, type: Playbook::Props::String,
-                        default: nil
-      prop :dark, type: Playbook::Props::Boolean,
-                  default: false
-      prop :date, type: Playbook::Props::Date, required: true
+      prop :timezone, default: "America/New_York"
 
       def classname
-        generate_classname("pb_time_stacked_kit", dark_class)
-      end
-
-      def day
-        day = Playbook::PbKit::PbDateTime.new(date)
-        content_tag(:time, datetime: day.to_iso) do
-          day.to_day.to_s
-        end
-      end
-
-      def month
-        month = Playbook::PbKit::PbDateTime.new(date)
-        content_tag(:time, datetime: month.to_iso) do
-          month.to_month.to_s
-        end
+        # convert deprecated prop values
+        generate_classname("pb_time_stacked_kit", align)
       end
 
       def format_time_string
-        "#{pb_date_time.to_full_hour}:#{pb_date_time.to_minutes}#{pb_date_time.to_meridian}"
+        "#{pb_date_time.to_hour}:#{pb_date_time.to_minutes}#{pb_date_time.to_meridian}"
       end
 
-      def format_timezone
-        pb_date_time.to_timezone
-      end
-
-    private
-
-      def dark_class
-        dark ? "dark" : nil
+      def format_timezone_string
+        pb_date_time.to_timezone.to_s
       end
 
       def pb_date_time
-        Playbook::PbKit::PbDateTime.new(date)
+        Playbook::PbKit::PbDateTime.new(time, timezone)
       end
     end
   end

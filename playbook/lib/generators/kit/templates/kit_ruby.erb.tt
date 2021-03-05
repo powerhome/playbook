@@ -2,10 +2,7 @@
 
 module Playbook
   module Pb<%= @kit_name_pascal %>
-    class <%= @kit_name_pascal %>
-      include Playbook::Props
-
-      partial "<%= "pb_#{@kit_name_underscore}/#{@kit_name_underscore}" %>"
+    class <%= @kit_name_pascal %> < ::Playbook::KitBase
     end
   end
 end

@@ -1,0 +1,10 @@
+@import "../spacing";
+
+:export {
+  @mixin export_spacing($spacing_list) {
+    @each $name, $size in $spacing_list {
+      #{$name}: $size;
+    }
+  }
+  @include export_spacing($spaces);
+}

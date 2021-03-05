@@ -18,7 +18,7 @@ module Playbook
       # could this possibly be [sm, md, lg]?
       prop :width, default: "100%"
       prop :variant, type: Playbook::Props::Enum,
-                     values: %w[default positive negative],
+                     values: %w[default positive negative warning],
                      default: "default"
 
       def number_value
