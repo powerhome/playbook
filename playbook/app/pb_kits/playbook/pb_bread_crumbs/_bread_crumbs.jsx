@@ -24,7 +24,6 @@ const BreadCrumbs = (props: BreadCrumbsProps) => {
     className,
     data = {},
     id,
-    text,
     children
   } = props
   const ariaProps = buildAriaProps(aria)
@@ -42,9 +41,7 @@ const BreadCrumbs = (props: BreadCrumbsProps) => {
         className={css}
         id={id}
     >
-      {React.Children.toArray(children).map((child, idx) => {
-        return React.cloneElement(child, { key: `child-${idx}` })
-      })}
+      {children}
       </div>
   )
 }
@@ -53,7 +50,6 @@ BreadCrumbs.propTypes = {
   aria: PropTypes.object,
   className: PropTypes.string,
   data: PropTypes.object,
-  handleClick: PropTypes.func,
   children: PropTypes.node
 }
 export default BreadCrumbs

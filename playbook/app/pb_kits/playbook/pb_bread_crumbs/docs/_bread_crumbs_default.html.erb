@@ -1,9 +1,17 @@
 
 <div>
-  <%= pb_rails("bread_crumbs", props: { children: [
-      { link: "/home", text: "Home", icon: "home" },
-      { link: "/users", text: "Users", icon: "users" },
-      { text: "User", icon: "user" }
-      ]
-  }) %>
+  <%= pb_rails("bread_crumbs") do%>
+    <%= pb_rails("icon", props: { icon: 'home'}) %>
+    <%= pb_rails("bread_crumbs/bread_crumb_item", props: { link: '/' }) do %> 
+      <%= pb_rails("title", props: { size: 4, text: "Home" }) %>
+     <%end%>
+     <%= pb_rails("icon", props: { icon: 'users'}) %>
+    <%= pb_rails("bread_crumbs/bread_crumb_item", props: { link: '/users' }) do %> 
+      <%= pb_rails("title", props: { size: 4, text: "Users" }) %>
+     <%end%>
+     <%= pb_rails("icon", props: { icon: 'user'}) %>
+    <%= pb_rails("bread_crumbs/bread_crumb_item") do %> 
+      <%= pb_rails("title", props: { size: 4, text: "User" }) %>
+     <%end%>
+    <%end%>
 </div>
