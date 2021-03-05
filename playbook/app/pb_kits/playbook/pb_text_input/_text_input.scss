@@ -36,6 +36,16 @@
   }
 
   &.dark {
+    .add_on_left{
+      .text_input {
+        border-left: 0;
+      }
+    }
+    .add_on_right {
+      .text_input {
+        border-right: 0;
+      }
+    }
     .text_input_wrapper {
       margin-bottom: 1rem;
 

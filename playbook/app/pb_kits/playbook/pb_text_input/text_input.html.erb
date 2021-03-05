@@ -9,7 +9,7 @@
     <% if content.present? %>
       <%= content %>
     <% elsif has_add_on? %>
-      <%= pb_rails("text_input/add_on", props: object.add_on) do %>
+      <%= pb_rails("text_input/add_on", props: object.add_on_props) do %>
         <%= input_tag %>
       <% end %>
     <% else %>

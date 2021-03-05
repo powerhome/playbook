@@ -52,12 +52,14 @@ const TextInput = (props: TextInputProps, ref: React.ElementRef<"input">) => {
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
 
-  const borderToChange = addOn.alignment == 'left' ? 'right' : 'left'
-  const borderToggle = addOn.border ? 'on' : 'off'
+  const addOnAlignment = addOn.alignment === 'left' ? 'left' :'right'
+  const borderToChange = addOnAlignment === 'left' ? 'right' : 'left'
+  const borderToggle = addOn.border === false ? 'off' : 'on'
   const borderCss = `border_${borderToChange}_${borderToggle}`
 
   const shouldShowAddOn = addOn.icon !== null
-  const addOnClass = shouldShowAddOn ? 'text_input_wrapper_add_on' : null
+  const addOnCss = shouldShowAddOn ? 'text_input_wrapper_add_on' : null
+  const addOnDarkModeCardCss = (shouldShowAddOn && dark) ? 'add-on-card-dark' : null
   const css = classnames([
     'pb_text_input_kit',
     error ? 'error' : null,
@@ -67,6 +69,7 @@ const TextInput = (props: TextInputProps, ref: React.ElementRef<"input">) => {
   const addOnIcon = (
     <Icon
         className="add-on-icon"
+        dark={dark}
         fixedWidth={false}
         icon={addOn.icon}
     />
@@ -93,13 +96,22 @@ const TextInput = (props: TextInputProps, ref: React.ElementRef<"input">) => {
           inline="flex-container"
           vertical="center"
       >
-        <If condition={addOn.alignment == 'left'}>
-          <Card className="add-on-card card-left-aligned">{addOnIcon}</Card>
+        <If condition={addOnAlignment == 'left'}>
+          <Card
+              className={`${addOnDarkModeCardCss} add-on-card card-left-aligned`}
+              dark={dark}
+          >
+            {addOnIcon}
+          </Card>
           {textInput}
-        </If>
-        <If condition={addOn.alignment == 'right'}>
+          <Else />
           {textInput}
-          <Card className="add-on-card card-right-aligned">{addOnIcon}</Card>
+          <Card
+              className={`${addOnDarkModeCardCss} add-on-card card-right-aligned`}
+              dark={dark}
+          >
+            {addOnIcon}
+          </Card>
         </If>
       </Flex>
     </React.Fragment>
@@ -135,7 +147,7 @@ const TextInput = (props: TextInputProps, ref: React.ElementRef<"input">) => {
           dark={dark}
           text={label}
       />
-      <div className={`${addOnClass} text_input_wrapper`}>
+      <div className={`${addOnCss} text_input_wrapper`}>
         <Choose>
           <When condition={children}>
             {children}

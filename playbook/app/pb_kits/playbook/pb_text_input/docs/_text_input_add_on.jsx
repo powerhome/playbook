@@ -2,10 +2,15 @@ import React, { useState } from 'react'
 import { TextInput } from '../../'
 
 const TextInputAddOn = (props) => {
+  const [defaultInput, setDefaultInput] = useState('')
   const [firstInput, setFirstInput] = useState('')
   const [secondInput, setSecondInput] = useState('')
   const [thirdInput, setThirdInput] = useState('')
   const [fourthInput, setFourthInput] = useState('')
+
+  const handleUpdateDefaultInput = ({ target }) => {
+    setDefaultInput(target.value)
+  }
 
   const handleUpdateFirstInput = ({ target }) => {
     setFirstInput(target.value)
@@ -25,6 +30,15 @@ const TextInputAddOn = (props) => {
 
   return (
     <>
+      <div>
+        <TextInput
+            addOn={{ icon: 'bat' }}
+            label="Add On With Defaults"
+            onChange={handleUpdateDefaultInput}
+            value={defaultInput}
+            {...props}
+        />
+      </div>
       <div>
         <TextInput
             addOn={{ icon: 'user', alignment: 'right', border: true }}

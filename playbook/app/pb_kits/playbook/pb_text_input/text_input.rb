@@ -36,6 +36,10 @@ module Playbook
         has_add_on? ? 'text_input_wrapper_add_on' : nil
       end
 
+      def add_on_props
+        { dark: dark }.merge(add_on || {})
+      end
+
     private
 
       def input_options
