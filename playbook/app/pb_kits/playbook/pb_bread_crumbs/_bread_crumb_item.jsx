@@ -44,8 +44,8 @@ const BreadCrumbItem = (props: BreadCrumbItemProps) => {
         className={css}
         id={id}
     >
-        <Component className="pb_bread_crumb_item" {...rest} />
-      </div>
+      <Component className="pb_bread_crumb_item" {...rest} />
+    </div>
   )
 }
 
