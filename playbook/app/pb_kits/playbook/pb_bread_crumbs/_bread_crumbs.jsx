@@ -42,7 +42,7 @@ const BreadCrumbs = (props: BreadCrumbsProps) => {
         id={id}
     >
       {children}
-      </div>
+    </nav>
   )
 }
 
