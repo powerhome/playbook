@@ -120,8 +120,9 @@
   .add-on-card-dark {
     background-color: $bg-dark;
   }
-  .text_input :focus + .add-on-card-dark {
-    background-color: $active_dark;
+  .text_input:focus ~ .add-on-card-dark {
+    background-color: $focus_input_dark;
+    border-width: 0px;
   }
 
   .add-on-left {
