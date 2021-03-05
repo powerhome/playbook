@@ -13,15 +13,15 @@ const BreadCrumbsDefault = (props) => {
       >
         <Icon icon="home" size="1x" />
         <BreadCrumbItem {...props} href="/home">
-          <Title size="4" text="Home" />
+          <Title size="4" tag="span" text="Home" />
         </BreadCrumbItem>
           <Icon icon="users" size="1x" />
         <Link {...props} href="/users">
-          <Title size="4" text="Users" />
+          <Title size="4" tag="span" text="Users" />
         </Link>
           <Icon icon="user" size="1x" />
         <Link {...props} >
-          <Title size="4" text="User" />
+          <Title size="4" tag="span" text="User" />
         </Link>
       </BreadCrumbs>
   )
