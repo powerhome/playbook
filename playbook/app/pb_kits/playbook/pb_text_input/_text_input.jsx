@@ -24,7 +24,7 @@ type TextInputProps = {
   children: Node,
   addOn?: {
     icon?: string,
-    alignment?: 'right' | 'left',
+    alignment?: "right" | "left",
     border?: boolean,
   },
 }
@@ -55,7 +55,7 @@ const TextInput = (props: TextInputProps, ref: React.ElementRef<"input">) => {
   const addOnAlignment = addOn.alignment === 'left' ? 'left' :'right'
   const borderToChange = addOnAlignment === 'left' ? 'right' : 'left'
   const borderToggle = addOn.border === false ? 'off' : 'on'
-  const borderCss = `border_${borderToChange}_${borderToggle}`
+  const borderClass = `border_${borderToChange}_${borderToggle}`
 
   const shouldShowAddOn = addOn.icon !== null
   const addOnCss = shouldShowAddOn ? 'text_input_wrapper_add_on' : null
@@ -89,10 +89,11 @@ const TextInput = (props: TextInputProps, ref: React.ElementRef<"input">) => {
         value={value}
     />
   )
-  const addOnBorder = (
+
+  const addOnInput = (
     <React.Fragment>
       <Flex
-          className={`add-on-${addOn.alignment} ${borderCss}`}
+          className={`add-on-${addOnAlignment} ${borderClass}`}
           inline="flex-container"
           vertical="center"
       >
@@ -116,25 +117,6 @@ const TextInput = (props: TextInputProps, ref: React.ElementRef<"input">) => {
       </Flex>
     </React.Fragment>
   )
-  const addOnInput = (
-    <React.Fragment>
-      <Flex
-          inline="flex-container"
-          vertical="stretch"
-      >
-        <If condition={addOn.alignment == 'left'}>
-          { addOnIcon }
-          { addOnBorder }
-          { textInput }
-        </If>
-        <If condition={addOn.alignment == 'right'}>
-          { textInput }
-          { addOnBorder }
-          { addOnIcon }
-        </If>
-      </Flex>
-    </React.Fragment>
-  )
 
   return (
     <div
@@ -149,15 +131,9 @@ const TextInput = (props: TextInputProps, ref: React.ElementRef<"input">) => {
       />
       <div className={`${addOnCss} text_input_wrapper`}>
         <Choose>
-          <When condition={children}>
-            {children}
-          </When>
-          <When condition={shouldShowAddOn}>
-            { addOnInput }
-          </When>
-          <Otherwise>
-            { textInput }
-          </Otherwise>
+          <When condition={children}>{children}</When>
+          <When condition={shouldShowAddOn}>{addOnInput}</When>
+          <Otherwise>{textInput}</Otherwise>
         </Choose>
         <If condition={error}>
           <Body
