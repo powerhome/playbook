@@ -35,7 +35,7 @@ const BreadCrumbs = (props: BreadCrumbsProps) => {
   )
 
   return (
-    <div
+    <nav
         {...ariaProps}
         {...dataProps}
         className={css}
