@@ -6,6 +6,7 @@ const AvatarActionButtonDefault = (props) => (
     <AvatarActionButton
         imageAlt="Sophia Carden"
         imageUrl="https://randomuser.me/api/portraits/women/8.jpg"
+        linkAriaLabel="Sophia Carden"
         name="Sophia Carden"
         {...props}
     />

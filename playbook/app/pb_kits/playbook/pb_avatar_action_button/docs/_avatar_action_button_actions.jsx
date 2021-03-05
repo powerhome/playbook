@@ -7,6 +7,7 @@ const AvatarActionButtonActions = (props) => (
         action="add"
         imageAlt="Add Sophia Carden"
         imageUrl="https://randomuser.me/api/portraits/women/8.jpg"
+        linkAriaLabel="Add Sophia Carden"
         name="Sophia Carden"
         {...props}
     />
@@ -14,6 +15,7 @@ const AvatarActionButtonActions = (props) => (
         action="remove"
         imageAlt="Remove Sophia Carden"
         imageUrl="https://randomuser.me/api/portraits/women/8.jpg"
+        linkAriaLabel="Remove Sophia Carden"
         name="Sophia Carden"
         {...props}
     />

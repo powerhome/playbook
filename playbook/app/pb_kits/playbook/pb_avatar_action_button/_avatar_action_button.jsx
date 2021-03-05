@@ -15,6 +15,7 @@ import { globalProps } from '../utilities/globalProps.js'
 type AvatarActionButtonProps = {
   action?: string,
   aria: Object,
+  linkAriaLabel?: string,
   className?: string,
   dark?: boolean,
   data?: Object,
@@ -32,6 +33,7 @@ const AvatarActionButton = (props: AvatarActionButtonProps) => {
   const {
     action = 'add',
     aria = {},
+    linkAriaLabel,
     className,
     dark = false,
     data = {},
@@ -69,6 +71,7 @@ const AvatarActionButton = (props: AvatarActionButtonProps) => {
         id={id}
     >
       <a
+          aria-label={linkAriaLabel}
           href={linkUrl}
           onClick={onClick}
       >
