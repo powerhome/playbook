@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require_relative "../../../../app/pb_kits/playbook/pb_text_input/add_on"
 require_relative "../../../../app/pb_kits/playbook/pb_text_input/text_input"
 
 RSpec.describe Playbook::PbTextInput::TextInput do
