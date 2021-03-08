@@ -52,7 +52,7 @@ const TextInput = (props: TextInputProps, ref: React.ElementRef<"input">) => {
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
 
-  const addOnAlignment = addOn.alignment === 'left' ? 'left' :'right'
+  const addOnAlignment = addOn.alignment === 'left' ? 'left' : 'right'
   const borderToChange = addOnAlignment === 'left' ? 'right' : 'left'
   const borderToggle = addOn.border === false ? 'off' : 'on'
   const borderClass = `border_${borderToChange}_${borderToggle}`
