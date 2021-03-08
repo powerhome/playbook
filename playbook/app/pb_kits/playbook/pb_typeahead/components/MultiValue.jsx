@@ -46,10 +46,24 @@ const MultiValue = (props: Props) => {
         <Badge
             closeProps={removeProps}
             removeIcon
-            // removeOnClick={() => alert('remove')}
             text={label}
             variant="primary"
         />
+        <Else />
+        <If condition={imageUrl}>
+          <FormPill
+              avatarUrl={imageUrl}
+              closeProps={removeProps}
+              marginRight="xs"
+              name={label}
+          />
+          <Else />
+          <FormPill
+              closeProps={removeProps}
+              marginRight="xs"
+              text={label}
+          />
+        </If>
       </If>
     </components.MultiValueContainer>
   )
