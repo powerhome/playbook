@@ -104,21 +104,34 @@
     padding: 0;
   }
 
-  .add-on-card {
-    height: 45px;
-    margin: 0;
-    padding: 0 !important;
-    align-items: center;
-    justify-content: center;
-    width: 45px;
-
-    .add-on-icon {
+  .add-on {
+    &-card {
+      height: 45px;
+      margin: 0;
+      padding: 0 !important;
+      align-items: center;
+      justify-content: center;
+      width: 45px;
+    }
+    &-icon {
       color: $text_lt_lighter;
     }
-  }
+    &-card-dark {
+      background-color: $bg-dark;
+    }
+    &-left {
+      .text_input {
+        border-top-left-radius: 0 !important;
+        border-bottom-left-radius: 0 !important;
+      }
+    }
 
-  .add-on-card-dark {
-    background-color: $bg-dark;
+    &-right {
+      .text_input{
+        border-top-right-radius: 0 !important;
+        border-bottom-right-radius: 0 !important;
+      }
+    }
   }
   .text_input:focus ~ .add-on-card-dark {
     background-color: $focus_input_dark;
