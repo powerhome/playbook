@@ -48,6 +48,10 @@ module Playbook
         prop(:options).fetch(:html, {})
       end
 
+      def render_form(builder)
+        view_context.capture(builder, &children)
+      end
+
       def render_in(view_context, &_block)
         super(view_context, &nil)
       end
