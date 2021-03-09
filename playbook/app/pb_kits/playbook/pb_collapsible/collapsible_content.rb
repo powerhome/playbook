@@ -12,6 +12,10 @@ module Playbook
       def classname
         generate_classname("pb_collapsible_content_kit", "toggle-content", padding, separator: " ")
       end
+
+      def aria_content
+        {labelledby: "collapsible"}.merge! aria
+      end
     end
   end
 end

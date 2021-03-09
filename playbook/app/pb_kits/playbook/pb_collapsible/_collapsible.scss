@@ -1,3 +1,4 @@
+// Start: This isn't being used
 [class^=pb_collapsible_kit] {
   .toggle-content {
     display: none;
@@ -12,4 +13,9 @@
     display: block;
     height: auto;
   }
+}
+// End: This isn't being used
+
+[class^=pb_collapsible_main_kit] {
+  cursor: pointer;
 }
