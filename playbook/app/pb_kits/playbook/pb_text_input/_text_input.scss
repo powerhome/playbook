@@ -148,35 +148,33 @@
     border-bottom-left-radius: 0 !important;
   }
 
-  .border_right_off {
-    .card-left-aligned {
-      border-right: 0;
+  .border {
+    &_right_off {
+      .card-left-aligned {
+        border-right: 0;
+      }
+      .text_input {
+        border-left: 0 !important;
+        padding-left: 0 !important;
+      }
     }
-    .text_input {
-      border-left: 0 !important;
-      padding-left: 0 !important;
+    &_left_on {
+      .card-right-aligned {
+        border-left: 0;
+      }
+    }
+    &_right_on {
+      .card-left-aligned {
+        border-right: 0;
+      }
+    }
+    &_left_off {
+      .card-right-aligned {
+        border-left: 0;
+      }
+      .text_input {
+        border-right: 0 !important;
+        padding-right: 0 !important;
+      }
     }
   }
-
-  .border_left_on {
-    .card-right-aligned {
-      border-left: 0;
-    }
-  }
-
-  .border_right_on {
-    .card-left-aligned {
-      border-right: 0;
-    }
-  }
-
-  .border_left_off {
-    .card-right-aligned {
-      border-left: 0;
-    }
-    .text_input {
-      border-right: 0 !important;
-      padding-right: 0 !important;
-    }
-  }
-}
