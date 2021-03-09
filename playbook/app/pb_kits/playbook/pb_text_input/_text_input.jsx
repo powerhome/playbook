@@ -52,12 +52,13 @@ const TextInput = (props: TextInputProps, ref: React.ElementRef<"input">) => {
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
 
-  const addOnAlignment = addOn.alignment === 'left' ? 'left' : 'right'
+  const { alignment, border, icon } = addOn
+  const addOnAlignment = alignment === 'left' ? 'left' : 'right'
   const borderToChange = addOnAlignment === 'left' ? 'right' : 'left'
-  const borderToggle = addOn.border === false ? 'off' : 'on'
-  const borderClass = `border_${borderToChange}_${borderToggle}`
+  const borderToggle = border === false ? 'off' : 'on'
+  const borderCss = `border_${borderToChange}_${borderToggle}`
 
-  const shouldShowAddOn = addOn.icon !== null
+  const shouldShowAddOn = icon !== null
   const addOnCss = shouldShowAddOn ? 'text_input_wrapper_add_on' : null
   const addOnDarkModeCardCss = (shouldShowAddOn && dark) ? 'add-on-card-dark' : null
   const css = classnames([
@@ -71,7 +72,7 @@ const TextInput = (props: TextInputProps, ref: React.ElementRef<"input">) => {
         className="add-on-icon"
         dark={dark}
         fixedWidth={false}
-        icon={addOn.icon}
+        icon={icon}
     />
   )
   const textInput = (
@@ -93,7 +94,7 @@ const TextInput = (props: TextInputProps, ref: React.ElementRef<"input">) => {
   const addOnInput = (
     <React.Fragment>
       <Flex
-          className={`add-on-${addOnAlignment} ${borderClass}`}
+          className={`add-on-${addOnAlignment} ${borderCss}`}
           inline="flex-container"
           vertical="center"
       >

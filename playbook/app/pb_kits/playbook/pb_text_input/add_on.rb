@@ -18,6 +18,10 @@ module Playbook
         "border_#{border_to_change}_#{border_toggle}"
       end
 
+      def left_aligned?
+        alignment == "left"
+      end
+
       def dark_mode_css
         dark ? 'add-on-card-dark' : nil
       end
