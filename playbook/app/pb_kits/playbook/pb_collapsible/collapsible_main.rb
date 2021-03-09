@@ -4,9 +4,7 @@ module Playbook
   module PbCollapsible
     class CollapsibleMain < Playbook::KitBase
       def data
-        Hash(values[:data]).merge(
-          collapsible_main: true
-        )
+        Hash(prop(:data)).merge(collapsible_main: true)
       end
 
       def classname

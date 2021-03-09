@@ -30,7 +30,6 @@ const ButtonDefault = (props) => (
         {...props}
     />
   </div>
-
 )
 
 export default ButtonDefault

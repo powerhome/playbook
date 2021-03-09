@@ -1,6 +1,6 @@
 {
   "name": "playbook-ui",
-  "version": "8.0.0",
+  "version": "8.1.0",
   "description": "Nitro's Design System",
   "main": "./dist/playbook-react.js",
   "scripts": {
@@ -12,7 +12,7 @@
     "test": "jest",
     "test-coverage": "jest --collectCoverage",
     "test-coverage-summary": "jest --collectCoverage --coverageReporters=\"json-summary\"",
-    "release": "webpack --env.production && node-sass app/pb_kits/playbook/packs/site_styles/_scaffold.scss dist/reset.css"
+    "release": "webpack --env.production && node-sass --output-style compressed app/pb_kits/playbook/packs/site_styles/_scaffold.scss dist/reset.css"
   },
   "repository": {
     "type": "git",

@@ -1,8 +1,12 @@
 .pb-form {
   .pb-form-actions {
     list-style: none;
-    margin: 8px;
+    margin: 0;
     padding: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-direction: row;
 
     > li {
       display: inline-flex;
