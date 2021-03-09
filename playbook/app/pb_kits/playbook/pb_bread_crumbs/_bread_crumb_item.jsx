@@ -1,7 +1,6 @@
 /* @flow */
 
 import React from 'react'
-import PropTypes from 'prop-types';
 import classnames from 'classnames'
 import { globalProps } from '../utilities/globalProps.js'
 
@@ -16,7 +15,7 @@ type BreadCrumbItemProps = {
   className?: string,
   data?: object,
   id?: string,
-  text?: string
+  component?: element
 }
 const BreadCrumbItem = (props: BreadCrumbItemProps) => {
   const {
@@ -24,9 +23,7 @@ const BreadCrumbItem = (props: BreadCrumbItemProps) => {
     className,
     data = {},
     id,
-    text,
     component = 'a',
-    dark,
     ...rest
   } = props
   const ariaProps = buildAriaProps(aria)
@@ -44,16 +41,11 @@ const BreadCrumbItem = (props: BreadCrumbItemProps) => {
         className={css}
         id={id}
     >
-      <Component className="pb_bread_crumb_item" {...rest} />
+      <Component
+          className="pb_bread_crumb_item"
+          {...rest}
+      />
     </div>
   )
-}
-
-BreadCrumbItem.propTypes = {
-  aria: PropTypes.object,
-  className: PropTypes.string,
-  data: PropTypes.object,
-  handleClick: PropTypes.func,
-  children: PropTypes.node
 }
 export default BreadCrumbItem

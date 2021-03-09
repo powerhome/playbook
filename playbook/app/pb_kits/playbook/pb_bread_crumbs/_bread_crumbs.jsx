@@ -1,7 +1,6 @@
 /* @flow */
 
 import React from 'react'
-import PropTypes from 'prop-types';
 import classnames from 'classnames'
 import { globalProps } from '../utilities/globalProps.js'
 
@@ -16,7 +15,8 @@ type BreadCrumbsProps = {
   className?: string,
   data?: object,
   id?: string,
-  text?: string
+  text?: string,
+  children?: node
 }
 const BreadCrumbs = (props: BreadCrumbsProps) => {
   const {
@@ -24,7 +24,7 @@ const BreadCrumbs = (props: BreadCrumbsProps) => {
     className,
     data = {},
     id,
-    children
+    children,
   } = props
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
@@ -46,10 +46,4 @@ const BreadCrumbs = (props: BreadCrumbsProps) => {
   )
 }
 
-BreadCrumbs.propTypes = {
-  aria: PropTypes.object,
-  className: PropTypes.string,
-  data: PropTypes.object,
-  children: PropTypes.node
-}
 export default BreadCrumbs
