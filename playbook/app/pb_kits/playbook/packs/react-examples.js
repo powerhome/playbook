@@ -29,6 +29,7 @@ import * as DateRangeInline from 'pb_date_range_inline/docs'
 import * as DateRangeStacked from 'pb_date_range_stacked/docs'
 import * as DateStacked from 'pb_date_stacked/docs'
 import * as DateYearStacked from 'pb_date_year_stacked/docs'
+import * as Dialog from 'pb_dialog/docs'
 import * as DistributionBarDocs from 'pb_distribution_bar/docs'
 import * as DateTime from 'pb_date_time/docs'
 import * as DateTimeStacked from 'pb_date_time_stacked/docs'
@@ -123,6 +124,7 @@ WebpackerReact.setup({
   ...DistributionBarDocs,
   ...DateTime,
   ...DateTimeStacked,
+  ...Dialog,
   ...FileUpload,
   ...Filter,
   ...FixedConfirmationToast,

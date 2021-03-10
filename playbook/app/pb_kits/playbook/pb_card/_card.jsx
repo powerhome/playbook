@@ -3,14 +3,16 @@
 import React from 'react'
 import { get } from 'lodash'
 import classnames from 'classnames'
-import { buildCss } from '../utilities/props'
+import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
 import { globalProps } from '../utilities/globalProps.js'
 
 type CardPropTypes = {
+  aria?: object,
   borderNone?: boolean,
   borderRadius?: "xs" | "sm" | "md" | "lg" | "xl" | "none" | "rounded",
   children: array<React.ReactNode> | React.ReactNode,
   className?: string,
+  data?: object,
   highlight?: {
     position?: "side" | "top",
     color?: string,
@@ -18,6 +20,7 @@ type CardPropTypes = {
   padding?: string,
   selected?: boolean,
   shadow?: "none" | "deep" | "deeper" | "deepest",
+  tag?: "div" | "section" | "footer" | "header" | "article" | "aside" | "main" | "nav",
 }
 
 type CardHeaderProps = {
@@ -62,13 +65,16 @@ const Body = (props: CardBodyProps) => {
 
 const Card = (props: CardPropTypes) => {
   const {
+    aria = {},
     borderNone = false,
     borderRadius = 'md',
     children,
     className,
+    data = {},
     highlight = {},
     selected = false,
     shadow = 'none',
+    tag = 'div',
     padding = 'md',
   } = props
   const borderCSS = borderNone == true ? 'border_none' : ''
@@ -78,6 +84,8 @@ const Card = (props: CardPropTypes) => {
     [`highlight_${highlight.position}`]: highlight.position,
     [`highlight_${highlight.color}`]: highlight.color,
   })
+  const ariaProps = buildAriaProps(aria)
+  const dataProps = buildDataProps(data)
 
   // coerce to array
   const cardChildren =
@@ -93,11 +101,18 @@ const Card = (props: CardPropTypes) => {
 
   const nonHeaderChildren = cardChildren.filter((child) => (get(child, 'type.displayName') !== 'Header'))
 
+  const tagOptions = ['div', 'section', 'footer', 'header', 'article', 'aside', 'main', 'nav']
+  const Tag = tagOptions.includes(tag) ? tag : 'div'
+
   return (
-    <div className={classnames(cardCss, globalProps(props, { padding }), className)}>
+    <Tag
+        {...ariaProps}
+        {...dataProps}
+        className={classnames(cardCss, globalProps(props, { padding }), className)}
+    >
       {subComponentTags('Header')}
       {nonHeaderChildren}
-    </div>
+    </Tag>
   )
 }
 

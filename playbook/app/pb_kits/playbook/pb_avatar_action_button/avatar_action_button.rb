@@ -5,6 +5,8 @@ module Playbook
     class AvatarActionButton < Playbook::KitBase
       prop :action, type: Playbook::Props::String,
                     default: "add"
+      prop :link_aria_label, type: Playbook::Props::String
+      prop :image_alt, type: Playbook::Props::String
       prop :image_url, type: Playbook::Props::String
       prop :link_url, type: Playbook::Props::String, default: "#"
       prop :tooltip_text, type: Playbook::Props::String

@@ -7,6 +7,7 @@ RSpec.describe Playbook::PbAvatarActionButton::AvatarActionButton do
 
   it { is_expected.to define_prop(:action)
                   .with_default("add") }
+  it { is_expected.to define_prop(:image_alt) }
   it { is_expected.to define_prop(:image_url) }
   it { is_expected.to define_prop(:link_url) }
   it { is_expected.to define_prop(:tooltip_text) }

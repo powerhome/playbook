@@ -15,6 +15,7 @@ type AvatarProps = {
   data?: object,
   dark?: boolean,
   id?: string,
+  imageAlt?: string,
   imageUrl: string,
   name: string,
   size?: "md" | "lg" | "sm" | "xl" | "xs",
@@ -27,7 +28,18 @@ const firstTwoInitials = (name) =>
     .substring(0, 2)
 
 const Avatar = (props: AvatarProps) => {
-  const { aria = {}, className, data = {}, name = null, id = '', imageUrl, size = 'md', status = null, dark = false } = props
+  const {
+    aria = {},
+    className,
+    data = {},
+    name = null,
+    id = '',
+    imageAlt = '',
+    imageUrl,
+    size = 'md',
+    status = null,
+    dark = false,
+  } = props
   const dataProps = buildDataProps(data)
   const ariaProps = buildAriaProps(aria)
   const classes = classnames(
@@ -55,7 +67,7 @@ const Avatar = (props: AvatarProps) => {
       >
         <If condition={imageUrl && !error}>
           <Image
-              alt={name}
+              alt={imageAlt}
               onError={handleError}
               url={imageUrl}
           />

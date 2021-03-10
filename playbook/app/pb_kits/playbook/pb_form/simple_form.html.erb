@@ -1,6 +1,4 @@
-<%= simple_form_for model, options do |form| %>
-  <% instance_exec form, &children %>
-<% end %>
+<%= simple_form_for model, options, &method(:render_form) %>
 
 <% if validate %>
   <% content_for :pb_js do %>
