@@ -54,21 +54,23 @@
 
 // Dialog Styles
 
-$spacer: ($space_xl + $space_md);
-$small: 300px;
-$medium: 500px;
-$large: 800px;
-$animation-duration: 0.2s;
-$z-index: 100;
-$opacity_visible: 1;
-$opacity_hidden: 0;
-
 .pb_dialog {
+
+	// Local Variables
+	$gutter: $space_lg;
+	$small: 300px;
+	$medium: 500px;
+	$large: 800px;
+	$animation-duration: 0.2s;
+	$z-index: 100;
+	$opacity_visible: 1;
+	$opacity_hidden: 0;
+
 	@include pb_card;
-	box-shadow: $shadow_deepest !important;
-	border: 0px !important;
-	max-height: calc(100vh - #{$spacer});
-	max-width: calc(100vw - #{$spacer});
+	box-shadow: $shadow_deepest;
+	border: 0;
+	max-height: calc(100vh - #{$gutter * 2});
+	max-width: calc(100vw - #{$gutter * 2});
 	overflow: scroll;
 	animation-name: modalFadeIn;
 	animation-duration: $animation-duration;

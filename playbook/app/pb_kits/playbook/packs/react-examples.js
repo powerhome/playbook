@@ -188,5 +188,3 @@ WebpackerReact.setup({
   ...UserBadge,
   ...WeekdayStacked,
 })
-
-
