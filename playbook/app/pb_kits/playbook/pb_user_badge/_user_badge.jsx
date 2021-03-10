@@ -23,7 +23,7 @@ const UserBadge = (props: UserBadgeProps) => {
     size = 'md',
   } = props
 
-  const image = require(`./badges/_${badge}.svg`)
+  const image = require(`./badges/${badge}.svg`)
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
   const classes = classnames(
