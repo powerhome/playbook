@@ -47,7 +47,6 @@ kits:
   - multiple_users
   - multiple_users_stacked
   - nav
-  - online_status
   - tags:
     - badge
     - hashtag
