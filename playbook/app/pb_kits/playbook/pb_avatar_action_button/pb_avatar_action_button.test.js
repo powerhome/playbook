@@ -1,30 +1,31 @@
 import React from 'react'
 import { render, screen } from '../utilities/test-utils'
 
-import Avatar from './_avatar'
+import AvatarActionButton from './_avatar_action_button'
 
-const imageUrl = 'https://randomuser.me/api/portraits/men/44.jpg',
-  testId = 'tjohnson',
-  name = 'Terry Johnson',
-  imageAlt = 'Terry Johnson Standing'
+const imageUrl = 'https://randomuser.me/api/portraits/women/8.jpg',
+  testId = 'scarden',
+  name = 'Sophia Carden',
+  imageAlt = 'Sophia Carden Profile'
 
 test('loads the given image url and name', () => {
   render(
-    <Avatar
+    <AvatarActionButton
         data={{ testid: testId }}
         imageAlt={imageAlt}
         imageUrl={imageUrl}
+        linkAriaLabel={name}
         name={name}
     />
   )
 
   const kit      = screen.getByTestId(testId)
   const image    = screen.getByAltText(imageAlt)
-  const initials = name.split(/\s/)[0].substr(0, 1) + name.split(/\s/)[1].substr(0, 1)
+  const link     = kit.children[0]
 
-  expect(kit).toHaveClass('pb_avatar_kit_md')
-  expect(kit).toHaveAttribute('data-initials', initials)
+  expect(kit).toHaveClass('pb_avatar_action_button_kit_add_bottom_left_md')
   expect(image).toHaveAttribute('data-src', imageUrl)
   expect(image).toHaveAttribute('src', imageUrl)
   expect(image).toHaveAttribute('alt', imageAlt)
+  expect(link).toHaveAttribute('aria-label', name)
 })
