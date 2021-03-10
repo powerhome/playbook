@@ -55,19 +55,19 @@ const Dialog = (props: DialogProps) => {
   const dataProps = buildDataProps(data)
 
   const dialogClassNames = {
-    base: classnames('dialog', buildCss('dialog', size)),
-    afterOpen: 'dialog_after_open',
-    beforeClose: 'dialog_before_close',
+    base: classnames('pb_dialog', buildCss('pb_dialog', size)),
+    afterOpen: 'pb_dialog_after_open',
+    beforeClose: 'pb_dialog_before_close',
   }
 
   const overlayClassNames = {
-    base: 'dialog_overlay',
-    afterOpen: 'dialog_overlay_after_open',
-    beforeClose: 'dialog_overlay_before_close',
+    base: 'pb_dialog_overlay',
+    afterOpen: 'pb_dialog_overlay_after_open',
+    beforeClose: 'pb_dialog_overlay_before_close',
   }
 
   const classes = classnames(
-    buildCss('pb_dialog'),
+    buildCss('pb_dialog_wrapper'),
     globalProps(props),
     className
   )

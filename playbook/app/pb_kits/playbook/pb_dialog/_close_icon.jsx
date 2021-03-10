@@ -11,7 +11,7 @@ export const CloseIcon = (props: CloseIconProps) => {
   const { onClose } = props
   return (
     <div
-        className="dialog_close_icon"
+        className="pb_dialog_close_icon"
         onClick={onClose}
     >
       <Icon
