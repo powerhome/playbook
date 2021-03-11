@@ -79,7 +79,7 @@ const Icon = (props: IconProps) => {
     className
   )
 
-  aria.label = icon
+  aria.label ? null : aria.label = icon
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
 
