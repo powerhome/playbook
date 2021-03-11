@@ -14,30 +14,19 @@ type FormGroupProps = {
   id?: string,
 }
 
-const formGroupClassName = (props: ButtonPropTypes) => {
-  const {
-    fullWidth = false,
-  } = props
-
-  let className = 'pb_button_kit'
-
-  className += fullWidth ? '_full' : ''
-
-  return className
-}
-
 const FormGroup = (props: FormGroupProps) => {
   const {
     aria = {},
     className,
     data = {},
+    fullWidth = false,
     id,
     children,
   } = props
 
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
-  const classes = classnames(buildCss('pb_form_group_kit'), globalProps(props), formGroupClassName(props), className)
+  const classes = classnames(buildCss('pb_form_group_kit', { full: fullWidth }), globalProps(props), className)
 
   return (
     <div

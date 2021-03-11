@@ -22,7 +22,7 @@ const FormGroupFullWidth = (props) => (
         />
       </FormGroup>
     </div>
-    <br/>
+    <br />
     <div>
       <FormGroup fullWidth>
         <TextInput
