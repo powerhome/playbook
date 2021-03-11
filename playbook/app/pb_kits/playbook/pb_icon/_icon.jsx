@@ -2,12 +2,14 @@
 
 import React from 'react'
 import classnames from 'classnames'
+import { buildAriaProps, buildDataProps } from '../utilities/props'
 import { globalProps } from '../utilities/globalProps.js'
 
 type IconProps = {
-  aria?: Object,
+  aria?: object,
   border?: boolean,
   className?: string,
+  data?: object,
   fixedWidth?: boolean,
   flip?: "horizontal" | "vertical" | "both" | "none",
   icon: string,
@@ -41,8 +43,10 @@ const flipMap = {
 
 const Icon = (props: IconProps) => {
   const {
+    aria = {},
     border = false,
     className,
+    data = {},
     fixedWidth = true,
     flip = false,
     icon,
@@ -75,8 +79,14 @@ const Icon = (props: IconProps) => {
     className
   )
 
+  aria.label = icon
+  const ariaProps = buildAriaProps(aria)
+  const dataProps = buildDataProps(data)
+
   return (
     <i
+        {...ariaProps}
+        {...dataProps}
         className={classes}
         id={id}
     />
