@@ -16,7 +16,6 @@ module Playbook
 
       def form_options
         {
-          url: "",
           id: id,
           aria: aria,
           class: classname,
