@@ -26,9 +26,9 @@ Gem::Specification.new do |s|
     "dist/reset.css"
   ] + ["Rakefile", "README.md"]
 
-  s.add_dependency "actionpack", ">= 5.2.4.5", "< 6.0"
-  s.add_dependency "actionview", ">= 5.2.4.5", "< 7.0"
-  s.add_dependency "activesupport", ">= 5.2.4.5", "< 7.0"
+  s.add_dependency "actionpack", ">= 5.2.4.4", "< 6.0"
+  s.add_dependency "actionview", ">= 5.2.4.4", "< 7.0"
+  s.add_dependency "activesupport", ">= 5.2.4.4", "< 7.0"
   s.add_dependency "github_changelog_generator", "1.15.2"
   s.add_dependency "react-rails", "2.6.0"
   s.add_dependency "redcarpet", "3.5.1"
