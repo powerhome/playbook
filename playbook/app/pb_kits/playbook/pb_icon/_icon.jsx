@@ -83,13 +83,22 @@ const Icon = (props: IconProps) => {
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
 
+  // console.log(aria)
+
   return (
-    <i
-        {...ariaProps}
-        {...dataProps}
-        className={classes}
-        id={id}
-    />
+    <>
+      <i
+          {...dataProps}
+          className={classes}
+          id={id}
+      />
+      <span
+          {...ariaProps}
+          hidden="true"
+          // aria-label={icon}
+          // style={{ display: 'none' }}
+      />
+    </>
   )
 }
 
