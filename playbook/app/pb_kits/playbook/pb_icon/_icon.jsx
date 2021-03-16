@@ -79,11 +79,9 @@ const Icon = (props: IconProps) => {
     className
   )
 
-  aria.label ? null : aria.label = icon
+  aria.label ? null : aria.label = `${icon} icon`
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
-
-  // console.log(aria)
 
   return (
     <>
@@ -95,8 +93,6 @@ const Icon = (props: IconProps) => {
       <span
           {...ariaProps}
           hidden="true"
-          // aria-label={icon}
-          // style={{ display: 'none' }}
       />
     </>
   )

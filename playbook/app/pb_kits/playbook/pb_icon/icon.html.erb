@@ -1,5 +1,7 @@
 <%= content_tag(:i, nil,
     id: object.id,
     data: object.data,
-    class: object.classname,
-    aria: { label: object.icon }.merge(object.aria) )%>
+    class: object.classname ) %>
+<%= content_tag(:span, nil,
+    aria: { label: "#{object.icon} icon" }.merge(object.aria),
+    hidden: true ) %>
