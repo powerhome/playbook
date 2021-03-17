@@ -21,9 +21,7 @@
   "author": "powerhome",
   "license": "ISC",
   "engines": {
-    "node": "10.17.0 || 12.20.1",
-    "npm": "6.11.3",
-    "yarn": "1.13.0 || 1.22.5"
+    "node": "10.17.0 || 12.20.1"
   },
   "directories": {
     "lib": "dist"
