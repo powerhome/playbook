@@ -7,12 +7,14 @@ import { DateStacked, Flex, FlexItem, SectionSeparator, TimeStacked } from '../'
 type DateTimeStackedProps = {
   data?: string,
   id?: string,
+  date: string,
   datetime: string,
   dark: boolean,
   timeZone?: string,
 }
 
 const DateTimeStacked = (props: DateTimeStackedProps) => {
+  if (props.date) deprecatedProps('Date Time Stacked', ['date']) //date prop is deprecated, use datetime instead
   const { datetime, dark, timeZone = 'America/New_York' } = props
   return (
 

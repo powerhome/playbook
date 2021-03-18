@@ -3,6 +3,7 @@
 module Playbook
   module PbDateTimeStacked
     class DateTimeStacked < Playbook::KitBase
+      prop :date, deprecated: true
       prop :date_time, type: Playbook::Props::Date,
                   default: ::DateTime.current
       prop :dark, type: Playbook::Props::Boolean,
