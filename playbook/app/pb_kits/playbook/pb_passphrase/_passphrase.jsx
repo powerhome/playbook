@@ -1,11 +1,11 @@
 
 /* @flow */
 
-import React from 'react'
+import React, { useState } from 'react'
 import classnames from 'classnames'
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
 import { globalProps } from '../utilities/globalProps.js'
-import { Caption, ProgressSimple, TextInput } from '../'
+import { Caption, Icon, ProgressSimple, TextInput } from '../'
 
 type PassphraseProps = {
   aria?: object,
@@ -35,6 +35,9 @@ const Passphrase = (props: PassphraseProps) => {
     strongThreshold = 3,
     value,
   } = props
+
+  const [showPassword, setShowPassword] = useState(false)
+  const toggleShowPassword = () => setShowPassword(!showPassword)
 
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
@@ -74,11 +77,20 @@ const Passphrase = (props: PassphraseProps) => {
     >
       <Caption text={label} />
       <TextInput
+          className="password-text-input"
           onChange={onChange}
           placeholder="Enter a passphrase..."
-          type="password"
+          type={showPassword ? 'text' : 'password'}
           value={value}
       />
+      <span
+          className="show-password-icon"
+          onClick={toggleShowPassword}
+      >
+        <Icon
+            icon="eye"
+        />
+      </span>
       <ProgressSimple
           percent={progressPercent}
           variant={progressVariant}

@@ -1,3 +1,9 @@
 .pb_passphrase {
+  .password-text-input input{
+    padding-right: 50px;
+  }
 
+  .show-password-icon {
+    padding: 0 15px;
+  }
 }
