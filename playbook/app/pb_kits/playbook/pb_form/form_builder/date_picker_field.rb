@@ -2,7 +2,7 @@
 
 module Playbook
   module PbForm
-    module FormBuilder
+    class FormBuilder
       module DatePickerField
         def date_picker(name, props: {})
           prefix = @object_name

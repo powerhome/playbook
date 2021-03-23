@@ -2,7 +2,7 @@
 
 module Playbook
   module PbForm
-    module FormBuilder
+    class FormBuilder
       class FormFieldBuilder < Module
         def initialize(method_name, kit_name:)
           define_method method_name do |name, props: {}, **options, &block|

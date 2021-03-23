@@ -2,7 +2,7 @@
 
 module Playbook
   module PbForm
-    module FormBuilder
+    class FormBuilder
       module CollectionSelectField
         def collection_select(name, collection, value_method, text_method, options = {}, html_options = {}, props: {} )
           props[:label] = @template.label(@object_name, name) if props[:label] == true
