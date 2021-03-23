@@ -1,4 +1,4 @@
-/* @flow */
+
 /*eslint-disable flowtype/space-before-type-colon */
 
 import moment from 'moment'

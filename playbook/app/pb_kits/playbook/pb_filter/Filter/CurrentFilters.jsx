@@ -1,4 +1,4 @@
-/* @flow */
+
 
 import React from 'react'
 import { isEmpty, map, omitBy } from 'lodash'

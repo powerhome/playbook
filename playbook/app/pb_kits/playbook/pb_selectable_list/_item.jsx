@@ -1,4 +1,4 @@
-/* @flow */
+
 import React, { Node } from 'react'
 import classnames from 'classnames'
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'

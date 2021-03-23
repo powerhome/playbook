@@ -1,4 +1,4 @@
-/* @flow */
+
 
 import React, { Node } from 'react'
 import { Card } from '../../'

@@ -1,0 +1,30 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "allowJs": true,
+    "allowSyntheticDefaultImports": true,
+    "checkJs": false,
+    "declaration": false,
+    "declarationMap": false,
+    "jsx": "react",
+    "lib": ["dom", "es2015", "es2016", "dom.iterable"],
+    "module": "es2015",
+    "moduleResolution": "node",
+    "noImplicitAny": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "preserveConstEnums": true,
+    "removeComments": false,
+    "skipLibCheck": true,
+    "sourceMap": true,
+    "target": "es2016"
+  },
+  "exclude": [
+    "node_modules/**/*"
+  ],
+  "include": [
+    "app/pb_kits/playbook/**/*.ts",
+    "app/pb_kits/playbook/**/*.tsx",
+    "types.d.ts"
+  ]
+}

@@ -1,4 +1,4 @@
-/* @flow */
+
 
 import classnames from 'classnames'
 import React, { useContext } from 'react'

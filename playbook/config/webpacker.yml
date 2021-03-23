@@ -49,6 +49,8 @@ default: &default
     - .jpg
     - .erb
     - .jsx
+    - .ts
+    - .tsx
 
 development:
   <<: *default

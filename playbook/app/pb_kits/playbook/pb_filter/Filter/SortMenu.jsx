@@ -1,4 +1,4 @@
-/* @flow */
+
 
 import React, { useState } from 'react'
 import { find, map, partial } from 'lodash'

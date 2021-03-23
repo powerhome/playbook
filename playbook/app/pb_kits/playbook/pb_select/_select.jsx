@@ -1,4 +1,4 @@
-/* @flow */
+
 
 import React, { forwardRef } from 'react'
 import classnames from 'classnames'

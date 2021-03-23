@@ -1,4 +1,4 @@
-/* @flow */
+
 
 import React, { useState } from 'react'
 import { Button, Dialog, Flex } from '../../'

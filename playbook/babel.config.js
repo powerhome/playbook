@@ -43,8 +43,7 @@ module.exports = function(api) {
       '@babel/preset-flow',
     ].filter(Boolean),
     plugins: [
-      'babel-plugin-jsx-control-statements',
-      '@babel/plugin-proposal-export-default-from',
+      '@babel/preset-typescript',
       require('babel-plugin-macros'),
       require('@babel/plugin-syntax-dynamic-import').default,
       isTestEnv && require('babel-plugin-dynamic-import-node'),

@@ -1,4 +1,4 @@
-/* @flow */
+
 
 import React from 'react'
 import DateTime from '../pb_kit/dateTime.js'

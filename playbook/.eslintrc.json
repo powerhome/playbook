@@ -1,17 +1,14 @@
 {
   "root": true,
   "plugins": [
-    "flowtype",
-    "jsx-control-statements",
+    "@typescript-eslint",
     "react"
   ],
   "extends": [
-    "eslint:recommended",
-    "plugin:flowtype/recommended",
-    "plugin:jsx-control-statements/recommended",
+    "plugin:@typescript-eslint/recommended",
     "plugin:react/recommended"
   ],
-  "parser": "babel-eslint",
+  "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "ecmaFeatures": {
       "jsx": true
@@ -59,7 +56,6 @@
     }],
     "space-in-parens": ["error", "never"],
     "space-infix-ops": 2,
-    "jsx-control-statements/jsx-use-if-tag": 2,
     "jsx-quotes": 2,
     "react/forbid-prop-types": 2,
     "react/jsx-boolean-value": 2,

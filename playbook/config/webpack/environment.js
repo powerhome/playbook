@@ -10,16 +10,28 @@ environment.loaders.get('sass')
 
 environment.loaders.insert('react-svg', svg, { before: 'file' })
 
-environment.loaders.insert('javascript', {
-  test: /\.(js|jsx|mjs)$/,
-  use: {
-    loader: 'babel-loader',
-    options: {
-      cacheDirectory: true,
+// environment.loaders.insert('javascript', {
+//   test: /\.(js|jsx|mjs)$/,
+//   use: {
+//     loader: 'babel-loader',
+//     options: {
+//       cacheDirectory: true,
+//     },
+//   },
+//   exclude: /(node_modules)/,
+// })
+
+environment.loaders.insert('typescript', {
+  test: /\.(ts|tsx)$/,
+  use: [
+    {
+      loader: 'babel-loader'
     },
-  },
-  exclude: /(node_modules)/,
-})
+    {
+      loader: 'ts-loader'
+    }
+  ]
+});
 
 const fileLoader = environment.loaders.get('file')
 fileLoader.exclude = /\.(svg)$/i

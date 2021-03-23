@@ -1,4 +1,4 @@
-/* @flow */
+
 
 import React from 'react'
 import FilterSingle, { FilterSingleProps } from './FilterSingle'
