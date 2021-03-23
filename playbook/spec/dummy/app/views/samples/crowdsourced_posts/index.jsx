@@ -1,5 +1,5 @@
 import React from 'react'
-import FlexItem from '../../../../pb_kits/playbook/pb_flex/_flex_item.jsx'
+import FlexItem from '../../../../../../app/pb_kits/playbook/pb_flex/_flex_item.jsx'
 import {
   Background,
   Badge,
@@ -18,7 +18,7 @@ import {
   SectionSeparator,
   TextInput,
   Title,
-} from '../../../../pb_kits/playbook'
+} from '../../../../../../app/pb_kits/playbook'
 
 const trendingStories = [
   {

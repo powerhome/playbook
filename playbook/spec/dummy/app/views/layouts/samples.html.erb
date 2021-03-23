@@ -8,15 +8,15 @@
         <%= stylesheet_packs_with_chunks_tag 'main', 'samples/index' %>
     </head>
     <body>
-      <%= render 'layouts/playbook/nav'%>
-      <%= render 'layouts/playbook/mobile_hamburger'%>
+      <%= render 'layouts/nav'%>
+      <%= render 'layouts/mobile_hamburger'%>
       <%= pb_rails("layout/sidebar", props: { classname: "pb--page--sideNav non-kit"}) do %>
-        <%= render 'layouts/playbook/sidebar'%>
+        <%= render 'layouts/sidebar'%>
       <% end %>
       <div class="sample-layout">
         <%= yield %>
       </div>
-      <%= render 'layouts/playbook/footer'%>
+      <%= render 'layouts/footer'%>
     </body>
 
     <% if @type == 'react' %>

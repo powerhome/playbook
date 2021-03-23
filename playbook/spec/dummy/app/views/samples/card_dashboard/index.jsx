@@ -17,7 +17,7 @@ import {
   ProgressSimple,
   SectionSeparator,
   Title,
-} from '../../../../pb_kits/playbook'
+} from '../../../../../../app/pb_kits/playbook'
 
 ////////////////////////////////////////////////////
 //

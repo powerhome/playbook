@@ -1,6 +1,6 @@
 import React from 'react'
-import { BarGraph, LineGraph, Nav, User } from '../../../../pb_kits/playbook'
-import NavItem from '../../../../pb_kits/playbook/pb_nav/_item.jsx'
+import { BarGraph, LineGraph, Nav, User } from '../../../../../../app/pb_kits/playbook'
+import NavItem from '../../../../../../app/pb_kits/playbook/pb_nav/_item.jsx'
 
 const chartData = [
   {

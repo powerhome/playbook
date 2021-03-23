@@ -2,8 +2,8 @@
 
 import React from 'react'
 
-import FlexItem from '../../../../pb_kits/playbook/pb_flex/_flex_item.jsx'
-import { Background, Body, Caption, Card, Flex, Icon, Image, Layout, ProgressSimple, SectionSeparator, Table, TableRow, TextInput, Title, User }  from '../../../../pb_kits/playbook'
+import FlexItem from '../../../../../../app/pb_kits/playbook/pb_flex/_flex_item.jsx'
+import { Background, Body, Caption, Card, Flex, Icon, Image, Layout, ProgressSimple, SectionSeparator, Table, TableRow, TextInput, Title, User }  from '../../../../../../app/pb_kits/playbook'
 
 const yourLibraryLinks = ['Made For You', 'Recently Played', 'Liked Songs', 'Albums', 'Artists', 'Podcasts']
 const playlists = ['podcasts', 'THENX', 'Adrenaline Workout', 'New Music Friday', 'RetroWave / Outrun', 'Tiki Torch']
