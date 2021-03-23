@@ -9,15 +9,5 @@ RSpec.describe Playbook::PbForm::Form do
 
       expect(view_object.form_system_options).to include(class: "example-class-option")
     end
-
-    it "adds pb-form to the simple_form `class` option" do
-      model = double
-      view_object = Playbook::PbForm::Form.new(
-        form_system: "simple_form",
-        form_system_options: [model, { html: { class: "example-class-option" } }]
-      )
-
-      expect(view_object.form_system_options).to include(html: { class: "example-class-option" }, model: model)
-    end
   end
 end

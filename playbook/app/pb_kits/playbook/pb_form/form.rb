@@ -4,7 +4,7 @@ module Playbook
   module PbForm
     class Form < ::Playbook::KitBase
       prop :form_system, type: Playbook::Props::Enum,
-                         values: %w[form_with simple_form],
+                         values: %w[form_with],
                          default: "form_with"
       prop :form_system_options, type: Playbook::Props::Base
       prop :validate, type: Playbook::Props::Boolean, default: false
