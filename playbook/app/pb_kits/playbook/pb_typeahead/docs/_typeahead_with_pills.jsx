@@ -22,6 +22,7 @@ const TypeaheadWithPills = (props) => {
           onChange={(value) => console.log(value)}
           options={initOptions}
           placeholder=""
+          plusIcon
           {...props}
       />
     </>

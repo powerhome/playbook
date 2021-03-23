@@ -10,6 +10,7 @@ import { globalProps } from '../utilities/globalProps.js'
 import Control from './components/Control'
 import ClearIndicator from './components/ClearIndicator'
 import IndicatorsContainer from './components/IndicatorsContainer'
+import Input from './components/Input'
 import MenuList from './components/MenuList'
 import MultiValue from './components/MultiValue'
 import Option from './components/Option'
@@ -50,6 +51,7 @@ const Typeahead = (props: Props) => {
       ClearIndicator,
       IndicatorsContainer,
       IndicatorSeparator: null,
+      Input,
       MenuList,
       MultiValue,
       Option,
@@ -62,6 +64,7 @@ const Typeahead = (props: Props) => {
     isSearchable: true,
     name,
     onCreate: () => {},
+    plusIcon: false,
     ...props,
   }
 
