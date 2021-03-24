@@ -20,7 +20,7 @@ module Playbook
           aria: aria,
           class: classname,
           data: data,
-          builder: ::Playbook::PbForm::FormBuilder,
+          builder: ::Playbook::Forms::Builder,
         }.merge(options)
       end
 

@@ -1,8 +1,16 @@
 # frozen_string_literal: true
 
 module Playbook
-  module PbForm
-    class FormBuilder < ::ActionView::Helpers::FormBuilder
+  module Forms
+    class Builder < ::ActionView::Helpers::FormBuilder
+      require_relative "builder/action_area"
+      require_relative "builder/checkbox_field"
+      require_relative "builder/collection_select_field"
+      require_relative "builder/date_picker_field"
+      require_relative "builder/form_field_builder"
+      require_relative "builder/select_field"
+      require_relative "builder/typeahead_field"
+
       prepend(FormFieldBuilder.new(:email_field, kit_name: "text_input"))
       prepend(FormFieldBuilder.new(:number_field, kit_name: "text_input"))
       prepend(FormFieldBuilder.new(:search_field, kit_name: "text_input"))
@@ -11,11 +19,6 @@ module Playbook
       prepend(FormFieldBuilder.new(:password_field, kit_name: "text_input"))
       prepend(FormFieldBuilder.new(:url_field, kit_name: "text_input"))
       prepend(FormFieldBuilder.new(:text_area, kit_name: "textarea"))
-      prepend(TypeaheadField)
-      prepend(SelectField)
-      prepend(CollectionSelectField)
-      prepend(CheckboxField)
-      prepend(DatePickerField)
 
       def actions
         @template.send(:view_context).content_tag :ol, class: "pb-form-actions" do

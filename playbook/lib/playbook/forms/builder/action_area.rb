@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 module Playbook
-  module PbForm
-    class FormBuilder
+  module Forms
+    class Builder
       class ActionArea
         def initialize(view_context, submit_default_value)
           self.view_context = view_context
