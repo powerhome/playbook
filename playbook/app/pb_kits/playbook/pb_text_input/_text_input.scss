@@ -49,6 +49,8 @@
         @include pb_title_4;
         @include pb_title_dark;
         overflow: hidden;
+        background-color: rgba($white,$opacity_1);
+        border-color: rgba($white,.15);
       }
 
       input:focus,
