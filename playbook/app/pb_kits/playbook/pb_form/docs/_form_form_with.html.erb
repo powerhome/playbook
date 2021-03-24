@@ -13,7 +13,7 @@
   ]
 %>
 
-<%= pb_rails("form", props: { form_system_options: { scope: :example, url: "", method: :get } }) do |form| %>
+<%= pb_form_with(scope: :example, url: "", method: :get) do |form| %>
   <%= form.typeahead :example_user, props: { data: { typeahead_example1: true, user: {} }, placeholder: "Search for a user" } %>
   <%= form.text_field :example_text_field, props: { label: true } %>
   <%= form.telephone_field :example_phone_field, props: { label: true } %>

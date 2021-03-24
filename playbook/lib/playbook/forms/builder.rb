@@ -21,7 +21,8 @@ module Playbook
       prepend(FormFieldBuilder.new(:text_area, kit_name: "textarea"))
 
       def actions
-        @template.send(:view_context).content_tag :ol, class: "pb-form-actions" do
+        context = @template.respond_to?(:view_context) ? @template.view_context : @template
+        context.content_tag :ol, class: "pb-form-actions" do
           yield ActionArea.new(@template, submit_default_value)
         end
       end
