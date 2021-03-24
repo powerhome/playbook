@@ -16,6 +16,7 @@ kits:
     - gauge
     - legend
     - line_graph
+  - dialog
   - filter
   - fixed_confirmation_toast
   - flex
@@ -96,4 +97,4 @@ kits:
     - weekday_stacked
   - user
   - user_badge
-  - dialog
+

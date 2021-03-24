@@ -1,6 +1,6 @@
 {
   "name": "playbook-ui",
-  "version": "8.1.0",
+  "version": "8.2.1",
   "description": "Nitro's Design System",
   "main": "./dist/playbook-react.js",
   "scripts": {
@@ -21,9 +21,7 @@
   "author": "powerhome",
   "license": "ISC",
   "engines": {
-    "node": "10.17.0 || 12.20.1",
-    "npm": "6.11.3",
-    "yarn": "1.13.0 || 1.22.5"
+    "node": "10.17.0 || 12.20.1"
   },
   "directories": {
     "lib": "dist"
