@@ -25,9 +25,9 @@
     }
 
     input:hover,
-      .text_input:hover{
-        background-color: rgba($focus_input_light,$opacity_5);
-      }
+    .text_input:hover{
+      background-color: rgba($focus_input_light,$opacity_5);
+    }
 
     input:focus,
     .text_input:focus,
