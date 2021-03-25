@@ -9,6 +9,7 @@
 @import "./trix_styles";
 
 
+
 .trix-content pre {
   display: inline-block;
   width: 100%;
@@ -25,9 +26,6 @@
 
 [class^=pb_rich_text_editor_kit] {
 
-
-
-  // trix-toolbar { display: none; }
   // Disables File Attatchment Button in Toolbar
   trix-toolbar [data-trix-button-group="file-tools"] {
     display: none;
@@ -64,6 +62,19 @@
       border-top-right-radius: $border_rad_heavier !important;
     }
   }
+  &:focus-within{
+    .trix-button-row, trix-editor {
+      background-color: $focus_input_light;
+      border-color: $primary;
+    }
+  }
+  .trix-dialog.trix-dialog--link{
+      background-color: $white ;
+      border: 1px solid $border_light;
+      box-shadow: none;
+      margin-top: $space_sm;
+      margin-left: $space_sm;
+    }
 
   &.sticky {
     trix-toolbar {
@@ -87,7 +98,7 @@
       height: $space_lg;
       width: $space_lg;
       margin: $space_xs / 2;
-      border-radius: $space_xs / 4;
+      border-radius: $border_rad_heavier;
       &::before {
         background-size: auto;
       }
@@ -121,6 +132,7 @@
   // https://github.com/basecamp/trix/issues/464#issuecomment-564683997
   
   &[class*=dark] {
+    
     // Dark SVG Icon Styles
     .trix-button--icon-bold::before {
       background-image: url("data:image/svg+xml,%3Csvg width='11px' height='14px' viewBox='0 0 11 14' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'%3E%3Cg id='Symbols' stroke='none' stroke-width='1' fill='none' fill-rule='evenodd' fill-opacity='0.6'%3E%3Cg id='Rich-Text/Dark/Field-Only/Empty' transform='translate(-19.000000, -17.000000)' fill='%23FFFFFF' fill-rule='nonzero'%3E%3Cg id='Styling1' transform='translate(7.000000, 7.000000)'%3E%3Cpath d='M20.6,16.79 C21.565,16.115 22.25,15.025 22.25,14 C22.25,11.745 20.505,10 18.25,10 L12,10 L12,24 L19.04,24 C21.135,24 22.75,22.3 22.75,20.21 C22.75,18.69 21.885,17.395 20.6,16.79 Z M15,12.5 L18,12.5 C18.83,12.5 19.5,13.17 19.5,14 C19.5,14.83 18.83,15.5 18,15.5 L15,15.5 L15,12.5 L15,12.5 Z M18.5,21.5 L15,21.5 L15,18.5 L18.5,18.5 C19.33,18.5 20,19.17 20,20 C20,20.83 19.33,21.5 18.5,21.5 Z' id='Shape'%3E%3C/path%3E%3C/g%3E%3C/g%3E%3C/g%3E%3C/svg%3E");    
@@ -183,25 +195,45 @@
 
     // Dark Mode Placeholder 
     trix-editor:empty:not(:focus)::before {
-      color: $text_dk_light;
+      color: $focus_input_dark;
     }
 
     trix-editor {
-      @include pb_textarea_dark;
-      background: #2f3968;
+      background-color: rgba($white, .1);
+      border-color: rgba($white,.15);
       border-top-left-radius: 0;
       border-top-right-radius: 0;
+      color: $text_dk_default;
     }
 
     trix-toolbar {
       .trix-button-row {
-        background: #2f3968;
-        border: 1px solid rgba(255, 255, 255, 0.1) !important;
+        background-color: rgba($white,.1);
+        border: 1px solid rgba($white, .15);
+        border-bottom: 0;
       }
-    }
+      .trix-active{
+        background: $active_dark !important;
+      }
+      button.trix-button.trix-button--icon.trix-button{
+        &:hover{
+          background-color: rgba($white,.15);
+        }
+        &:focus{
+          background-color: $active_dark !important;
+        }
+      }
+      &:focus{
+        border-color:$active_dark;
+      }
 
-    trix-editor:focus {
-      @include pb_textarea_focus_dark;
+    }
+    
+    &:focus-within{
+      .trix-button-row, trix-editor {
+        background-color: rgba($white,.03);
+        border-color: $active_dark !important;
+      }
     }
 
     &.error {
@@ -209,8 +241,16 @@
         border-color: $error_dark;
       }
     }
+
+    .trix-dialog.trix-dialog--link.trix-active{
+      background-color: tint($bg_dark,10%) !important;
+      border: 1px solid rgba($white,.1);
+      box-shadow: none;
+      margin-top: $space_sm;
+      margin-left: $space_sm;
+    }
+    .trix-button--dialog{
+      color: $white;
+    }
   }
 }
-
-
- 
