@@ -4,44 +4,12 @@ rescue LoadError
   puts 'You must `gem install bundler` and `bundle install` to run rake tasks'
 end
 
-require 'rdoc/task'
-
-RDoc::Task.new(:rdoc) do |rdoc|
-  rdoc.rdoc_dir = 'rdoc'
-  rdoc.title    = 'Playbook'
-  rdoc.options << '--line-numbers'
-  rdoc.rdoc_files.include('README.md')
-  rdoc.rdoc_files.include('lib/**/*.rb')
-end
-
-require 'github_changelog_generator/task'
-
-GitHubChangelogGenerator::RakeTask.new :changelog do |config|
-  config.user = 'powerhome'
-  config.project = 'playbook'
-  config.since_tag = Playbook::VERSION
-  config.header = ''
-  config.issues = false
-  config.base = 'CHANGELOG.md'
-  config.enhancement_prefix = '**Kit Enhancements:**'
-  config.bug_prefix = '**Fixed Bugs:**'
-  config.max_issues = 75
-  config.add_sections = {"New Kits":{"prefix":"**New Kits:**","labels":["new kit"]},"Improvements": {"prefix":"**Improvements:**","labels":["improvement"]},"Breaking": {"prefix":"**Breaking Changes:**","labels":["breaking"]}}
-end
-
 APP_RAKEFILE = File.expand_path("spec/dummy/Rakefile", __dir__)
 load 'rails/tasks/engine.rake'
-
 load 'rails/tasks/statistics.rake'
 
 require 'bundler/gem_tasks'
 
-require 'rake/testtask'
-
-Rake::TestTask.new(:test) do |t|
-  t.libs << 'test'
-  t.pattern = 'spec/**/*_spec.rb'
-  t.verbose = false
-end
+Dir["private/tasks/*.rake"].each(&method(:load))
 
 task default: :test
