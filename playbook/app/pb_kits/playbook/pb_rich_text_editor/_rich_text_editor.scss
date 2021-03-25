@@ -124,6 +124,12 @@
         }
       } 
     }
+
+    button.trix-button.trix-button--icon.trix-button{
+      &:hover{
+        background-color: rgba($border_light,.50);
+      }
+    }
   }
 
 
