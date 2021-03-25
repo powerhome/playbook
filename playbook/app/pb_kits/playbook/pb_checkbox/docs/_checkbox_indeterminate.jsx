@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Checkbox, Table } from '../..'
 
-const CheckboxIndeterminate = () => {
+const CheckboxIndeterminate = (props) => {
   const [checkboxes, setCheckboxes] = useState([
     { name: 'Coffee', checked: false },
     { name: 'Ice Cream', checked: false },
@@ -44,6 +44,7 @@ const CheckboxIndeterminate = () => {
                 onChange={onToggleAll}
                 text={isNoneChecked ? 'Check All' : 'Uncheck All'}
                 value="check-box value"
+                {...props}
             />
           </th>
         </tr>
@@ -60,6 +61,7 @@ const CheckboxIndeterminate = () => {
                   }}
                   text={checkbox.name}
                   value="check-box value"
+                  {...props}
               />
             </td>
           </tr>
