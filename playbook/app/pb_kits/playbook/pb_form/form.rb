@@ -3,16 +3,18 @@
 module Playbook
   module PbForm
     class Form < ::Playbook::KitBase
-      prop :form_system, deprecated: "Playbook only supports form_with",
+      prop :form_system, deprecated: "Playbook only supports form_with and this prop is ignored",
                          type: Playbook::Props::Base
       prop :form_system_options, deprecated: "Use options instead",
                                  type: Playbook::Props::Base
       prop :options, type: Playbook::Props::Base
       prop :validate, type: Playbook::Props::Boolean, default: false
 
-      def data
-        prop(:data).merge("pb-form-validation" => validate)
+      def render_in(view_context, &block)
+        view_context.pb_form_with(form_options, &block)
       end
+
+    private
 
       def form_options
         {
@@ -20,24 +22,8 @@ module Playbook
           aria: aria,
           class: classname,
           data: data,
-          builder: ::Playbook::Forms::Builder,
-        }.merge(options)
-      end
-
-      def options
-        prop(:options) || prop(:form_system_options) || { }
-      end
-
-      def render_form(builder)
-        view_context.capture(builder, &children)
-      end
-
-      def classname
-        [generate_classname("pb-form"), options[:class]].join(" ")
-      end
-
-      def render_in(view_context, &_block)
-        super(view_context, &nil)
+          validate: validate,
+        }.merge(prop(:options) || prop(:form_system_options) || { })
       end
     end
   end

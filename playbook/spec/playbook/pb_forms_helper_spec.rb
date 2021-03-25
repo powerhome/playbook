@@ -3,6 +3,8 @@
 require "rails_helper"
 
 RSpec.describe Playbook::PbFormsHelper, type: :helper do
+  before { helper.extend(Playbook::PbKitHelper) }
+
   let(:form_body) do
     -> (builder) do
       concat builder.text_field :name

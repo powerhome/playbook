@@ -13,6 +13,8 @@ Dir[File.expand_path("support/**/*.rb", __dir__)].sort.each(&method(:require))
 
 RSpec.configure do |config|
   config.include RSpecHtmlMatchers, type: :helper
+  config.include RSpec::Rails::HelperExampleGroup, type: :kit
+  config.include RSpecHtmlMatchers, type: :kit
 
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
   config.use_transactional_fixtures = true

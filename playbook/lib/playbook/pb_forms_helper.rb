@@ -2,8 +2,6 @@
 
 module Playbook
   module PbFormsHelper
-    include Playbook::PbKitHelper
-
     # Renders a pb form with ::Playbook::Forms::Builder, that can render
     # Playbook kits in the most railsie way.
     #
