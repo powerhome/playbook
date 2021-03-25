@@ -4,12 +4,13 @@
 $transition: $transition_cubic;
 
 [class^=pb_checkbox_kit] {
-  display: inline-flex;
   cursor: pointer;
+  display: inline-flex;
+  vertical-align: middle;
   .pb_checkbox_label {
-    padding-left: $space_xs;
     cursor: pointer;
     font-size: $text_lt_default;
+    padding-left: $space_xs;
     user-select: none;
   }
 
