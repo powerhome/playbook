@@ -5,6 +5,7 @@
 
 [class^=pb_textarea_kit] {
   margin-bottom: $space_sm;
+  
   [class^=pb_caption_kit] {
     margin-bottom: $space_xs;
     display: block;
@@ -28,14 +29,7 @@
     background-color: rgba($focus_input_light,$opacity_5);
   }
 
-  &.error {
-    [class*=pb_body_kit] {
-      margin-top: $space_xs / 2;
-    }
-    > textarea {
-      border-color: $error;
-    }
-  }
+
   &.resize_both > textarea {
     resize: both;
     overflow: auto;
@@ -56,22 +50,26 @@
     textarea,
     .pb_text_area_kit {
       @include pb_body_dark;
-      background-color: rgba($white,$opacity_1);
-      border-color: rgba($white,.15);
+      background-color: rgba($white, $opacity_1);
+      border-color: rgba($white, 0.15);
     }
     textarea:focus, .pb_text_area_kit:focus {
       border-color: $active_dark;
-      background-color: rgba($white,.025);
+      background-color: rgba($white, 0.025);
       -webkit-box-shadow: none;
     }
     textarea:hover,
     .pb_text_area_kit:hover {
-      background-color: rgba($white,.15);
+      background-color: rgba($white, 0.15);
     }
-    &.error {
-      textarea {
-        border-color: $error_dark;
-      }
+  }
+
+  &.error {
+    [class*=pb_body_kit] {
+      margin-top: $space_xs / 2;
+    }
+    textarea {
+      border-color: $error;
     }
   }
 

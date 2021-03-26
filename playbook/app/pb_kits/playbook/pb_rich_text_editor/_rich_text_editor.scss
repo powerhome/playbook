@@ -127,7 +127,7 @@
 
     button.trix-button.trix-button--icon.trix-button{
       &:hover{
-        background-color: rgba($border_light,.50);
+        background-color: rgba($border_light, 0.50);
       }
     }
   }
@@ -205,8 +205,8 @@
     }
 
     trix-editor {
-      background-color: rgba($white, .1);
-      border-color: rgba($white,.15);
+      background-color: rgba($white, 0.1);
+      border-color: rgba($white, 0.15);
       border-top-left-radius: 0;
       border-top-right-radius: 0;
       color: $text_dk_default;
@@ -214,8 +214,8 @@
 
     trix-toolbar {
       .trix-button-row {
-        background-color: rgba($white,.1);
-        border: 1px solid rgba($white, .15);
+        background-color: rgba($white, 0.1);
+        border: 1px solid rgba($white, 0.15);
         border-bottom: 0;
       }
       .trix-active{
@@ -223,7 +223,7 @@
       }
       button.trix-button.trix-button--icon.trix-button{
         &:hover{
-          background-color: rgba($white,.15);
+          background-color: rgba($white, 0.15);
         }
         &:focus{
           background-color: $active_dark !important;
@@ -237,20 +237,20 @@
     
     &:focus-within{
       .trix-button-row, trix-editor {
-        background-color: rgba($white,.03);
+        background-color: rgba($white, 0.03);
         border-color: $active_dark !important;
       }
     }
 
     &.error {
-      > trix-editor {
+      trix-editor {
         border-color: $error_dark;
       }
     }
 
     .trix-dialog.trix-dialog--link.trix-active{
-      background-color: tint($bg_dark,10%) !important;
-      border: 1px solid rgba($white,.1);
+      background-color: tint($bg_dark, 10%) !important;
+      border: 1px solid rgba($white, 0.1);
       box-shadow: none;
       margin-top: $space_sm;
       margin-left: $space_sm;

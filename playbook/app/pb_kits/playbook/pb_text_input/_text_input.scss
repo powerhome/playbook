@@ -54,12 +54,12 @@
         @include pb_body_dark;
         overflow: hidden;
         background-color: rgba($white,$opacity_1);
-        border-color: rgba($white,.15);
+        border-color: rgba($white, 0.15);
       }
 
       input:hover,
       .text_input:hover{
-        background-color: rgba($white,.15);
+        background-color: rgba($white, 0.15);
       }
 
       input:focus,
@@ -67,7 +67,7 @@
       input:-webkit-autofill:focus,
       .text_input:-webkit-autofill:focus {
         border-color: $active_dark;
-        background-color: rgba($white,.025);
+        background-color: rgba($white, 0.025);
         -webkit-box-shadow: none;
 
       }
