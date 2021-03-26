@@ -4,9 +4,23 @@
 @import "../tokens/shadows";
 
 [class^=pb_typeahead_kit] {
+  .typeahead-kit-select__option {
+    cursor: pointer;
+  }
   .pb_typeahead_wrapper {
     position: relative;
 
+    .text_input_value_container{
+      cursor: text;
+    }
+    .text_input_indicators,
+    .pb_list_kit{
+      cursor: pointer;
+    }
+
+
+      
+    
     .pb_typeahead_loading_indicator {
       position: absolute;
       width: min-content;
@@ -97,8 +111,12 @@
       color: $white;
     }
     .typeahead-kit-select__option:hover {
-      background-color: tint($focus_input_dark, 5%);
+      background-color: $active_dark;
     }
+    .typeahead-kit-select__indicator:hover{
+      color: $white;
+    }
+ 
     .typeahead-kit-select__input {
       color: white;
       input:focus {
@@ -109,7 +127,7 @@
       color: white;
     }
     .typeahead-kit-select__option--is-focused {
-      background-color: tint($focus_input_dark, 5%);
+      background-color: $active_dark;
     }
   
     [class^=pb_list_kit] {
@@ -121,7 +139,7 @@
       }
       @media (hover:hover) {
         &:hover {
-          background-color: tint($focus_input_dark, 5%);
+          background-color: rgba($white,.1);
         }
       }
     }
