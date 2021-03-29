@@ -13,7 +13,7 @@ module Playbook
     private
 
       def full_width_class
-        full_width ? "full" : " "
+        full_width ? "full" : nil
       end
     end
   end
