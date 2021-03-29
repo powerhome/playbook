@@ -6,6 +6,7 @@ import classnames from 'classnames'
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
 import { globalProps } from '../utilities/globalProps.js'
 import { Body, Caption, Icon, ProgressSimple, TextInput } from '../'
+import { zxcvbnPasswordScore }  from './passwordStrength.js'
 
 type PassphraseProps = {
   aria?: object,
@@ -31,10 +32,12 @@ const Passphrase = (props: PassphraseProps) => {
     label = 'Passphrase',
     // minLength, this will be needed
     onChange = () => {},
-    strengthFunction,
     strongThreshold = 3,
     value,
   } = props
+
+  // maybe this can be memoized?
+  const calculator = zxcvbnPasswordScore({ averageThreshold, strongThreshold })
 
   const [showPassword, setShowPassword] = useState(false)
   const toggleShowPassword = () => setShowPassword(!showPassword)
@@ -43,30 +46,8 @@ const Passphrase = (props: PassphraseProps) => {
   const dataProps = buildDataProps(data)
   const classes = classnames(buildCss('pb_passphrase'), globalProps(props), className)
 
-  const feedbackValues = (str) => {
-    let percent = 0
-    let variant = 'default'
-    let text = ''
-
-    if (str > 0 && str < averageThreshold) {
-      percent = 25
-      variant = 'negative'
-      text = 'Weak Passphrase'
-    } else if (str >= averageThreshold && str < strongThreshold){
-      percent = 50
-      variant = 'warning'
-      text = 'Average Passphrase'
-    } else if (str >= strongThreshold) {
-      percent = 100
-      variant = 'positive'
-      text = 'Strong Passphrase'
-    }
-    return [percent.toString(), variant, text]
-  }
-
-  const strength = strengthFunction ? strengthFunction(value) : Math.floor(value.length / 3)
-
-  const [progressPercent, progressVariant, strengthLabel] = feedbackValues(strength)
+  const { percent: progressPercent, variant: progressVariant, text: strengthLabel, strength, suggestions, warning } = calculator.test(value)
+  //This needs a debounce here.
 
   return (
     <div
@@ -112,6 +93,8 @@ const Passphrase = (props: PassphraseProps) => {
           text={strengthLabel}
       />
       {strength}
+      {suggestions}
+      {warning}
     </div>
   )
 }
