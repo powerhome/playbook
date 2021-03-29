@@ -5,7 +5,7 @@ import React, { useState } from 'react'
 import classnames from 'classnames'
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
 import { globalProps } from '../utilities/globalProps.js'
-import { Caption, Icon, ProgressSimple, TextInput } from '../'
+import { Body, Caption, Icon, ProgressSimple, TextInput } from '../'
 
 type PassphraseProps = {
   aria?: object,
@@ -76,21 +76,33 @@ const Passphrase = (props: PassphraseProps) => {
         id={id}
     >
       <Caption text={label} />
-      <TextInput
-          className="password-text-input"
-          onChange={onChange}
-          placeholder="Enter a passphrase..."
-          type={showPassword ? 'text' : 'password'}
-          value={value}
-      />
-      <span
-          className="show-password-icon"
-          onClick={toggleShowPassword}
-      >
-        <Icon
-            icon="eye"
+      <div className="text-input-wrapper">
+        <TextInput
+            className="password-text-input"
+            onChange={onChange}
+            placeholder="Enter a passphrase..."
+            type={showPassword ? 'text' : 'password'}
+            value={value}
         />
-      </span>
+        <span
+            className="show-password-icon"
+            onClick={toggleShowPassword}
+        >
+          <Body
+              className={showPassword ? 'hide-icon' : ''}
+              color="light"
+          >
+            <Icon icon="eye-slash" />
+          </Body>
+          <Body
+              className={showPassword ? '' : 'hide-icon'}
+              color="light"
+          >
+            <Icon icon="eye" />
+          </Body>
+
+        </span>
+      </div>
       <ProgressSimple
           percent={progressPercent}
           variant={progressVariant}
