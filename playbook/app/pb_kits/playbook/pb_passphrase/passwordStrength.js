@@ -1,19 +1,5 @@
 import zxcvbn from 'zxcvbn'
 
-// This takes a function, or falls back to using zxcvbn
-// Function should return an object of this form:
-// {
-//   score: integer,
-//   feedback: {
-//     warning: string
-//     suggestions: array<string>
-//   }
-// }
-// this is to match the format from zxcvbn and could be changed
-//
-// If we intend to offer box kits, or more kits in the future,
-//   maybe return an object with a test() function that returns the results
-//   to match the functionality of Oswap and make the code to handle different libs more similar
 export const zxcvbnPasswordScore = (options) => {
   const { calculate = zxcvbn } = options
 

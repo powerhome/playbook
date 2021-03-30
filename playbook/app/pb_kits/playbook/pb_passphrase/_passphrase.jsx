@@ -5,7 +5,7 @@ import React, { useState } from 'react'
 import classnames from 'classnames'
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
 import { globalProps } from '../utilities/globalProps.js'
-import { Body, Caption, Icon, ProgressSimple, TextInput } from '../'
+import { Body, Caption, Flex, Icon, ProgressSimple, TextInput } from '../'
 import { zxcvbnPasswordScore }  from './passwordStrength.js'
 
 type PassphraseProps = {
@@ -19,6 +19,7 @@ type PassphraseProps = {
   onChange: (String) => void,
   strengthFunction?: (string) => any,
   strongThreshold?: number,
+  tips?: Array<string>,
   value: string,
 }
 
@@ -33,6 +34,7 @@ const Passphrase = (props: PassphraseProps) => {
     // minLength, this will be needed
     onChange = () => {},
     strongThreshold = 3,
+    tips = [],
     value,
   } = props
 
@@ -56,7 +58,18 @@ const Passphrase = (props: PassphraseProps) => {
         className={classes}
         id={id}
     >
-      <Caption text={label} />
+      <Flex align="baseline">
+        <Caption text={label} />
+        <If condition={tips.length > 0}>
+          <a>
+            <Icon
+                icon="info-circle"
+                size="xs"
+                variant="link"
+            />
+          </a>
+        </If>
+      </Flex>
       <div className="text-input-wrapper">
         <TextInput
             className="password-text-input"
