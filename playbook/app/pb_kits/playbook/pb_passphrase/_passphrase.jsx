@@ -5,7 +5,7 @@ import React, { useState } from 'react'
 import classnames from 'classnames'
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
 import { globalProps } from '../utilities/globalProps.js'
-import { Body, Caption, Flex, Icon, ProgressSimple, TextInput } from '../'
+import { Body, Caption, Flex, Icon, PbReactPopover, ProgressSimple, TextInput } from '../'
 import { zxcvbnPasswordScore }  from './passwordStrength.js'
 
 type PassphraseProps = {
@@ -41,6 +41,8 @@ const Passphrase = (props: PassphraseProps) => {
   // maybe this can be memoized?
   const calculator = zxcvbnPasswordScore({ averageThreshold, strongThreshold })
 
+  const [showPopover, setShowPopover] = useState(false)
+  const toggleShowPopover = () => setShowPopover(!showPopover)
   const [showPassword, setShowPassword] = useState(false)
   const toggleShowPassword = () => setShowPassword(!showPassword)
 
@@ -50,6 +52,16 @@ const Passphrase = (props: PassphraseProps) => {
 
   const { percent: progressPercent, variant: progressVariant, text: strengthLabel, strength, suggestions, warning } = calculator.test(value)
   //This needs a debounce here.
+
+  const popoverReference = (
+    <a onClick={toggleShowPopover}>
+      <Icon
+          icon="info-circle"
+          size="xs"
+          variant="link"
+      />
+    </a>
+  )
 
   return (
     <div
@@ -61,13 +73,15 @@ const Passphrase = (props: PassphraseProps) => {
       <Flex align="baseline">
         <Caption text={label} />
         <If condition={tips.length > 0}>
-          <a>
-            <Icon
-                icon="info-circle"
-                size="xs"
-                variant="link"
-            />
-          </a>
+          <PbReactPopover
+              placement="right"
+              reference={popoverReference}
+              show={showPopover}
+          >
+            {
+              tips.join(' ')
+            }
+          </PbReactPopover>
         </If>
       </Flex>
       <div className="text-input-wrapper">
