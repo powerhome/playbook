@@ -78,9 +78,32 @@ const Passphrase = (props: PassphraseProps) => {
               reference={popoverReference}
               show={showPopover}
           >
-            {
-              tips.join(' ')
-            }
+            <Flex
+                align="center"
+                orientation="column"
+            >
+              <Caption
+                  marginBottom="xs"
+                  text="Tips for a good passphrase"
+              />
+              <div>
+                {
+                  tips.map((tip, i) => (
+                    <Caption
+                        key={i}
+                        marginBottom="xs"
+                        size="xs"
+                    >
+                      <Icon
+                          icon="shield-check"
+                          marginRight="xs"
+                      />
+                      {tip}
+                    </Caption>
+                  ))
+                }
+              </div>
+            </Flex>
           </PbReactPopover>
         </If>
       </Flex>
