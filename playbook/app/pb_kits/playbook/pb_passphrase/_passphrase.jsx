@@ -13,6 +13,7 @@ type PassphraseProps = {
   averageThreshold?: number,
   className?: string,
   data?: object,
+  dark?: boolean,
   id?: string,
   label?: string,
   minLength?: number,
@@ -28,6 +29,7 @@ const Passphrase = (props: PassphraseProps) => {
     aria = {},
     averageThreshold = 2,
     className,
+    dark = false,
     data = {},
     id,
     label = 'Passphrase',
@@ -56,6 +58,7 @@ const Passphrase = (props: PassphraseProps) => {
   const popoverReference = (
     <a onClick={toggleShowPopover}>
       <Icon
+          dark={dark}
           icon="info-circle"
           size="xs"
           variant="link"
@@ -74,6 +77,7 @@ const Passphrase = (props: PassphraseProps) => {
         <Caption text={label} />
         <If condition={tips.length > 0}>
           <PbReactPopover
+              className={dark ? 'passphrase-popover-dark' : ''}
               placement="right"
               reference={popoverReference}
               show={showPopover}
@@ -83,6 +87,7 @@ const Passphrase = (props: PassphraseProps) => {
                 orientation="column"
             >
               <Caption
+                  dark={dark}
                   marginBottom="xs"
                   text="Tips for a good passphrase"
               />
@@ -90,11 +95,13 @@ const Passphrase = (props: PassphraseProps) => {
                 {
                   tips.map((tip, i) => (
                     <Caption
+                        dark={dark}
                         key={i}
                         marginBottom="xs"
                         size="xs"
                     >
                       <Icon
+                          dark={dark}
                           icon="shield-check"
                           marginRight="xs"
                       />
@@ -110,6 +117,7 @@ const Passphrase = (props: PassphraseProps) => {
       <div className="text-input-wrapper">
         <TextInput
             className="password-text-input"
+            dark={dark}
             onChange={onChange}
             placeholder="Enter a passphrase..."
             type={showPassword ? 'text' : 'password'}
@@ -117,17 +125,20 @@ const Passphrase = (props: PassphraseProps) => {
         />
         <span
             className="show-password-icon"
+            dark={dark}
             onClick={toggleShowPassword}
         >
           <Body
               className={showPassword ? 'hide-icon' : ''}
               color="light"
+              dark={dark}
           >
             <Icon icon="eye-slash" />
           </Body>
           <Body
               className={showPassword ? '' : 'hide-icon'}
               color="light"
+              dark={dark}
           >
             <Icon icon="eye" />
           </Body>
@@ -135,10 +146,12 @@ const Passphrase = (props: PassphraseProps) => {
         </span>
       </div>
       <ProgressSimple
+          dark={dark}
           percent={progressPercent}
           variant={progressVariant}
       />
       <Caption
+          dark={dark}
           size="xs"
           text={strengthLabel}
       />

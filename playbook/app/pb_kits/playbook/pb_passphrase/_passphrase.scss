@@ -1,3 +1,5 @@
+@import "../tokens/colors";
+
 .pb_passphrase {
   .text-input-wrapper {
     position: relative;
@@ -15,4 +17,8 @@
       }
     }
   }
+}
+
+.passphrase-popover-dark .pb_popover_body {
+  background: $bg_dark;
 }
