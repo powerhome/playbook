@@ -10,7 +10,7 @@ DEPLOYER_MOUNTS = ${AWS_CREDS_MOUNT} --mount type=bind,source=$(HOME)/.kube,dest
 RUN_DEPLOYER = docker run --tty ${INTERACTIVE} --env AWS_ACCESS_KEY_ID --env AWS_SECRET_ACCESS_KEY --rm --env BUILD_DEPS_AND_PACKAGE=false ${DEPLOYER_MOUNTS} ${DEPLOYER_IMAGE}
 
 start:
-	docker-compose up --build
+	docker-compose up
 
 build:
 	docker-compose build
