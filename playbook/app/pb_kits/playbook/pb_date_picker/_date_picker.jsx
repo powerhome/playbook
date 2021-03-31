@@ -118,7 +118,6 @@ const DatePicker = (props: DatePickerProps) => {
         className={classes}
         id={id}
     >
-      {className}
       <div className="input_wrapper">
         <TextInput
             aria={inputAria}
