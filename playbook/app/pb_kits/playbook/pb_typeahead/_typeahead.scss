@@ -9,18 +9,13 @@
   }
   .pb_typeahead_wrapper {
     position: relative;
-
     .text_input_value_container{
       cursor: text;
     }
     .text_input_indicators,
-    .pb_list_kit{
+    .pb_list_kit {
       cursor: pointer;
     }
-
-
-      
-    
     .pb_typeahead_loading_indicator {
       position: absolute;
       width: min-content;
@@ -31,7 +26,6 @@
       transition: opacity .15s ease-in-out;
     }
   }
-
   [class^=pb_text_input_kit] {
     .text_input_wrapper {
       & > input:first-child {
@@ -39,7 +33,6 @@
       }
     }
   }
-
   .pb_item_kit {
     padding: ($space_xs + 2) 0;
 
@@ -49,7 +42,6 @@
       }
     }
   }
-
   [class^=pb_list_kit] {
     max-height: 18em;
     overflow-y: auto;
@@ -63,17 +55,14 @@
     border-radius: $border_rad_heavier;
     transition: opacity .25s ease-in-out;
   }
-
   &:focus-within [class^=pb_list_kit] {
     display: block;
     opacity: 1;
   }
-
   &:not(:focus-within) [class^=pb_list_kit] {
     display: none;
     opacity: 0;
   }
-
   [class^=pb_list_kit] {
     margin-top: -$space-sm;
     li {
@@ -83,7 +72,6 @@
       &:focus-within {
         background-color: $active_light;
       }
-
       > button {
         background: none;
         color: $text_lt_default;
@@ -98,7 +86,6 @@
       }
     }
   }
-
   &[class*=dark] {
     .pb_typeahead_wrapper .pb_typeahead_loading_indicator {
       color: $text_dk_light;
@@ -113,23 +100,21 @@
     .typeahead-kit-select__option:hover {
       background-color: $active_dark;
     }
-    .typeahead-kit-select__indicator:hover{
+    .typeahead-kit-select__indicator:hover {
       color: $white;
     }
- 
     .typeahead-kit-select__input {
       color: white;
       input:focus {
         box-shadow: none;
       }
     }
-    .typeahead-kit-select__single-value{
+    .typeahead-kit-select__single-value {
       color: white;
     }
     .typeahead-kit-select__option--is-focused {
       background-color: $active_dark;
     }
-  
     [class^=pb_list_kit] {
       background-color: $bg_dark;
     }
@@ -144,7 +129,6 @@
       }
     }
   }
-
   &.react-select, &.react-select .dark {
     .text_input {
       display: inherit;
