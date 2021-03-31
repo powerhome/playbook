@@ -1,6 +1,6 @@
 /* @flow */
 
-import React from 'react'
+import React, { forwardRef } from 'react'
 import classnames from 'classnames'
 import { buildCss } from '../utilities/props'
 import { globalProps } from '../utilities/globalProps.js'
@@ -22,11 +22,12 @@ type FlexProps = {
   wrap?: boolean,
 }
 
-const Flex = (props: FlexProps) => {
+const Flex = (props: FlexProps, ref: React.ElementRef<"div">) => {
   const {
     align = 'none',
     children,
     className,
+    id,
     inline = false,
     horizontal = 'left',
     justify = 'none',
@@ -70,10 +71,12 @@ const Flex = (props: FlexProps) => {
         globalProps(props),
         className
       )}
+        id={id}
+        ref={ref}
     >
       {children}
     </div>
   )
 }
 
-export default Flex
+export default forwardRef(Flex)

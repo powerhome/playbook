@@ -1,6 +1,6 @@
 /* @flow */
 
-import React, { useState } from 'react'
+import React from 'react'
 import { Typeahead } from '../..'
 
 const initOptions = [
@@ -11,7 +11,7 @@ const initOptions = [
 ]
 
 const TypeaheadWithPills = (props) => {
-  const [values, setValues] = useState([])
+  // const [values, setValues] = useState([])
   return (
     <>
       <Typeahead
@@ -19,9 +19,9 @@ const TypeaheadWithPills = (props) => {
           createable
           isMulti
           label="Colors"
-          onChange={(value) => console.log(value)}
+          // onChange={(value) => console.log(value)}
           options={initOptions}
-          placeholder=""
+          placeholder="Placeholder"
           plusIcon
           {...props}
       />

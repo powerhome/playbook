@@ -148,4 +148,13 @@
       box-sizing: border-box;
     }
   }
+
+  .typeahead-plus-icon {
+    color: $neutral;
+  }
+
+  [class^=pb_badge_kit] span {
+    line-height: 16.5px;
+    letter-spacing: normal;
+  }
 }
