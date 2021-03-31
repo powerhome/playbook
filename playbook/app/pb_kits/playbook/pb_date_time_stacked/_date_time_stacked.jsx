@@ -2,10 +2,12 @@
 /* @flow */
 
 import React from 'react'
+import { buildCss } from '../utilities/props'
+import { deprecatedProps, globalProps } from '../utilities/globalProps.js'
+
 import { DateStacked, Flex, FlexItem, SectionSeparator, TimeStacked } from '../'
 
 type DateTimeStackedProps = {
-  data?: string,
   id?: string,
   date: string,
   datetime: string,
@@ -14,20 +16,29 @@ type DateTimeStackedProps = {
 }
 
 const DateTimeStacked = (props: DateTimeStackedProps) => {
-  if (props.date) deprecatedProps('Date Time Stacked', ['date']) //date prop is deprecated, use datetime instead
-  const { datetime, dark, timeZone = 'America/New_York' } = props
-  return (
+  if (props.date) deprecatedProps('Date Time Stacked', ['date'])
 
+  const {
+    date,
+    datetime,
+    dark,
+    timeZone = 'America/New_York',
+  } = props
+
+  const classes = buildCss('pb_date_time_stacked_kit', globalProps(props))
+
+  return (
     <Flex
         inline="flex-container"
         vertical="stretch"
+        {...props}
     >
       <FlexItem>
         <DateStacked
             align="right"
             bold
             dark={dark}
-            date={datetime}
+            date={date || datetime}
             timeZone={timeZone}
         />
       </FlexItem>
@@ -38,9 +49,9 @@ const DateTimeStacked = (props: DateTimeStackedProps) => {
       />
       <FlexItem>
         <TimeStacked
-            className="pb_date_time_stacked_kit"
+            className={classes}
             dark={dark}
-            date={datetime}
+            date={date || datetime}
             tag="caption"
             timeZone={timeZone}
         />
