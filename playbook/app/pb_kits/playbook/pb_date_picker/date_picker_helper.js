@@ -168,7 +168,7 @@ const datePickerHelper = (config) => {
   }
 
   // Fix event bubbling bug on wrapper
-  picker.querySelector('.flatpickr-wrapper').addEventListener('click', (e) => e.stopPropogation())
+  document.querySelector(`#${pickerId}`).parentElement.addEventListener('click', (e) => e.stopPropagation())
 }
 
 export default datePickerHelper
