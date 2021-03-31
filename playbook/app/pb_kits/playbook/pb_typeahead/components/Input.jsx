@@ -11,9 +11,9 @@ const Input = (props: any) => {
   if (plusIcon) {
     useEffect(() => {
       const plusIcon = inputWrapper.current.querySelector('.typeahead-plus-icon')
-      const values = props.selectProps.value
-      if (!values || values.length == 0){
-        const offset = inputWrapper.current.parentElement.querySelector('.placeholder').clientWidth
+      const placeholder = inputWrapper.current.parentElement.querySelector('.placeholder')
+      if (placeholder){
+        const offset = placeholder.clientWidth
         plusIcon.style.marginLeft = `${offset + 2}px`
       } else {
         plusIcon.style.marginLeft = '0px'
