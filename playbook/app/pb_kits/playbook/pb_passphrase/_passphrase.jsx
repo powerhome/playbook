@@ -11,6 +11,7 @@ import { zxcvbnPasswordScore }  from './passwordStrength.js'
 type PassphraseProps = {
   aria?: object,
   averageThreshold?: number,
+  confirmation?: boolean,
   className?: string,
   data?: object,
   dark?: boolean,
@@ -29,6 +30,7 @@ const Passphrase = (props: PassphraseProps) => {
     aria = {},
     averageThreshold = 2,
     className,
+    confirmation = false,
     dark = false,
     data = {},
     id,
@@ -40,11 +42,6 @@ const Passphrase = (props: PassphraseProps) => {
     value,
   } = props
 
-  const calculator = useMemo(
-    () => zxcvbnPasswordScore({ averageThreshold, strongThreshold, minLength }),
-    [averageThreshold, strongThreshold, minLength]
-  )
-
   const [showPopover, setShowPopover] = useState(false)
   const toggleShowPopover = () => setShowPopover(!showPopover)
   const [showPassword, setShowPassword] = useState(false)
@@ -53,6 +50,11 @@ const Passphrase = (props: PassphraseProps) => {
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
   const classes = classnames(buildCss('pb_passphrase'), globalProps(props), className)
+
+  const calculator = useMemo(
+    () => confirmation ? { test: () => ({}) } : zxcvbnPasswordScore({ averageThreshold, strongThreshold, minLength }),
+    [averageThreshold, strongThreshold, minLength]
+  )
 
   const { percent: progressPercent, variant: progressVariant, text: strengthLabel, strength, suggestions, warning } = calculator.test(value)
 
@@ -75,44 +77,46 @@ const Passphrase = (props: PassphraseProps) => {
         id={id}
     >
       <Flex align="baseline">
-        <Caption text={label} />
-        <If condition={tips.length > 0}>
-          <PbReactPopover
-              className={dark ? 'passphrase-popover-dark' : ''}
-              placement="right"
-              reference={popoverReference}
-              show={showPopover}
-          >
-            <Flex
-                align="center"
-                orientation="column"
+        <If condition={!confirmation}>
+          <Caption text={label} />
+          <If condition={tips.length > 0}>
+            <PbReactPopover
+                className={dark ? 'passphrase-popover-dark' : ''}
+                placement="right"
+                reference={popoverReference}
+                show={showPopover}
             >
-              <Caption
-                  dark={dark}
-                  marginBottom="xs"
-                  text="Tips for a good passphrase"
-              />
-              <div>
-                {
-                  tips.map((tip, i) => (
-                    <Caption
-                        dark={dark}
-                        key={i}
-                        marginBottom="xs"
-                        size="xs"
-                    >
-                      <Icon
+              <Flex
+                  align="center"
+                  orientation="column"
+              >
+                <Caption
+                    dark={dark}
+                    marginBottom="xs"
+                    text="Tips for a good passphrase"
+                />
+                <div>
+                  {
+                    tips.map((tip, i) => (
+                      <Caption
                           dark={dark}
-                          icon="shield-check"
-                          marginRight="xs"
-                      />
-                      {tip}
-                    </Caption>
-                  ))
-                }
-              </div>
-            </Flex>
-          </PbReactPopover>
+                          key={i}
+                          marginBottom="xs"
+                          size="xs"
+                      >
+                        <Icon
+                            dark={dark}
+                            icon="shield-check"
+                            marginRight="xs"
+                        />
+                        {tip}
+                      </Caption>
+                    ))
+                  }
+                </div>
+              </Flex>
+            </PbReactPopover>
+          </If>
         </If>
       </Flex>
       <div className="text-input-wrapper">
@@ -146,16 +150,18 @@ const Passphrase = (props: PassphraseProps) => {
 
         </span>
       </div>
-      <ProgressSimple
-          dark={dark}
-          percent={progressPercent}
-          variant={progressVariant}
-      />
-      <Caption
-          dark={dark}
-          size="xs"
-          text={strengthLabel}
-      />
+      <If condition={!confirmation}>
+        <ProgressSimple
+            dark={dark}
+            percent={progressPercent}
+            variant={progressVariant}
+        />
+        <Caption
+            dark={dark}
+            size="xs"
+            text={strengthLabel}
+        />
+      </If>
       {strength}
       {suggestions}
       {warning}
