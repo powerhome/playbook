@@ -9,7 +9,6 @@
 @import "./trix_styles";
 
 
-
 .trix-content pre {
   display: inline-block;
   width: 100%;
@@ -29,12 +28,6 @@
   trix-toolbar [data-trix-button-group="file-tools"] {
     display: none;
   }
-
-  //Disables the predefined transition values
-  // trix-toolbar, trix-editor {
-  //  transition: none !important;
-  // }
-
 
   // Simple Mode (shows only BOLD & ITALIC)
   &.simple {
@@ -61,7 +54,6 @@
   &.focus-editor-targets {
     trix-toolbar {
       display: none;
-
     }
     :not(.focused-editor) {
       border-top-left-radius: $border_rad_heavier !important;
