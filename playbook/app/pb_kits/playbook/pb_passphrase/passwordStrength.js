@@ -14,24 +14,24 @@ export const zxcvbnPasswordScore = (options) => {
     strongThreshold,
     test: function (password = '') {
       const feedbackValues = (str) => {
-        let percent = '0'
-        let variant = 'negative'
-        let text = ''
+        let percent, variant, text
 
-        if (password.length > 0) {
-          if (password.length < this.minLength || str > 0 && str < this.averageThreshold) {
-            percent = '25'
-            variant = 'negative'
-            text = 'Weak Passphrase'
-          } else if (str >= this.averageThreshold && str < this.strongThreshold){
-            percent = '50'
-            variant = 'warning'
-            text = 'Average Passphrase'
-          } else if (str >= this.strongThreshold) {
-            percent = '100'
-            variant = 'positive'
-            text = 'Strong Passphrase'
-          }
+        if (password.length <= 0) {
+          percent = '0'
+          variant = 'negative'
+          text = ''
+        } else if (password.length < this.minLength || str < this.averageThreshold) {
+          percent = '25'
+          variant = 'negative'
+          text = 'Weak Passphrase'
+        } else if (str < this.strongThreshold){
+          percent = '50'
+          variant = 'warning'
+          text = 'Average Passphrase'
+        } else if (str >= this.strongThreshold) {
+          percent = '100'
+          variant = 'positive'
+          text = 'Strong Passphrase'
         }
         return { percent, variant, text }
       }
