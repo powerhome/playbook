@@ -42,7 +42,6 @@ kits:
   - icon_stat_value
   - icon_value
   - image
-  - inline
   - layout
   - list
   - loading_inline
