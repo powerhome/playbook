@@ -23,6 +23,8 @@ const OnlineStatus = (props: OnlineStatusProps) => {
     status = 'offline',
   } = props
 
+  aria.label = status
+
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
   const classes = classnames(buildCss('pb_online_status_kit', status), globalProps(props), className)

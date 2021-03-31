@@ -13,7 +13,7 @@ RSpec.describe Playbook::PbCaption::Caption do
     is_expected.to define_enum_prop(:tag)
                    .with_default("div")
                    .with_values("h1", "h2", "h3", "h4", "h5",
-                                "h6", "p", "span", "div")
+                                "h6", "p", "span", "div", "caption")
   end
   it { is_expected.to define_string_prop(:text) }
   it { is_expected.to define_enum_prop(:variant)

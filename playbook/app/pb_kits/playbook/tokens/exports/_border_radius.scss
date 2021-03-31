@@ -1,0 +1,10 @@
+@import "../border_radius";
+
+:export {
+  @mixin export_border_radius($border_radius_list) {
+    @each $name, $size in $border_radius_list {
+      #{$name}: $size;
+    }
+  }
+  @include export_border_radius($border_radius);
+}

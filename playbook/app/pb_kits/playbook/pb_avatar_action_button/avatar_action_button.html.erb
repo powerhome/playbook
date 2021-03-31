@@ -14,11 +14,12 @@
         <% end %>
     <% end %>
 
-    <%= link_to object.link_url, id: object.tooltip_id do %>
+    <%= link_to object.link_url, id: object.tooltip_id, 'aria-label': object.link_aria_label do %>
       <%= pb_rails("avatar", props: {
         dark: object.dark,
         name: object.name,
         size: object.size,
+        image_alt: object.image_alt,
         image_url: object.image_url,
         class: "avatar_action"
       }) %>

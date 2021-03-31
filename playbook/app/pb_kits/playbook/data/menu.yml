@@ -16,6 +16,7 @@ kits:
     - gauge
     - legend
     - line_graph
+  - dialog
   - filter
   - fixed_confirmation_toast
   - flex
@@ -47,11 +48,11 @@ kits:
   - multiple_users
   - multiple_users_stacked
   - nav
-  - online_status
   - tags:
     - badge
     - hashtag
     - pill
+  - passphrase
   - popover
   - progress:
     - progress_pills
@@ -96,4 +97,3 @@ kits:
     - weekday_stacked
   - user
   - user_badge
-  - passphrase

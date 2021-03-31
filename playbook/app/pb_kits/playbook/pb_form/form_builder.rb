@@ -19,9 +19,11 @@ module Playbook
         prepend(CollectionSelectField)
         prepend(CheckboxField)
         prepend(DatePickerField)
+      end
 
-        def actions(&block)
-          @template.render_component ActionArea.new(submit_default_value: submit_default_value, children: block)
+      def actions
+        @template.send(:view_context).content_tag :ol, class: "pb-form-actions" do
+          yield ActionArea.new(@template, submit_default_value)
         end
       end
     end

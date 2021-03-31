@@ -42,6 +42,15 @@ See [docs/upgrade-guide](./docs/upgrade-guide)
 
 * [Common Errors & Solutions](https://github.com/powerhome/playbook/wiki/Common-Errors-&-Solutions)
 
+### Reset.css
+
+Playbook provides it's own `reset.css` boilerplate for optional use in your application. You can either:
+
+1. Import the `dist/reset.css` from the playbook_ui gem into your Rails view: `@import "reset.css"` (note: your path may vary depending on your application's asset paths)
+2. Import or include the file via the npm package: `import 'reset.css'` (note: your path may vary depending on your application's node-sass `includePaths`)
+
+This asset aims to provide a commonly styles base for supported browsers.
+
 ### Building Playbook Kits
 
 * [Generating a Kit](https://github.com/powerhome/playbook/wiki/Generating-a-Kit)
