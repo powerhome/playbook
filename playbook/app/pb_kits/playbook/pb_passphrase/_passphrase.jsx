@@ -40,7 +40,6 @@ const Passphrase = (props: PassphraseProps) => {
     value,
   } = props
 
-  // maybe this can be memoized?
   const calculator = useMemo(
     () => zxcvbnPasswordScore({ averageThreshold, strongThreshold, minLength }),
     [averageThreshold, strongThreshold, minLength]
@@ -56,7 +55,6 @@ const Passphrase = (props: PassphraseProps) => {
   const classes = classnames(buildCss('pb_passphrase'), globalProps(props), className)
 
   const { percent: progressPercent, variant: progressVariant, text: strengthLabel, strength, suggestions, warning } = calculator.test(value)
-  //This needs a debounce here.
 
   const popoverReference = (
     <a onClick={toggleShowPopover}>
