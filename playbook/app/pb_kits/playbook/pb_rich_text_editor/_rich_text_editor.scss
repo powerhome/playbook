@@ -23,7 +23,6 @@
   overflow-x: auto;
 }
 
-
 [class^=pb_rich_text_editor_kit] {
 
   // Disables File Attatchment Button in Toolbar
@@ -32,9 +31,10 @@
   }
 
   //Disables the predefined transition values
-  trix-toolbar, trix-editor {
-   transition: none !important;
-  }
+  // trix-toolbar, trix-editor {
+  //  transition: none !important;
+  // }
+
 
   // Simple Mode (shows only BOLD & ITALIC)
   &.simple {
@@ -69,8 +69,9 @@
     }
   }
   &:focus-within,
-  &:focus{
+  &:focus,&:not(:focus),&:not(:focus-within){
     .trix-button-row, trix-editor {
+      @include transition_default;
       background-color: $focus_input_light;
       border-color: $primary;
     }

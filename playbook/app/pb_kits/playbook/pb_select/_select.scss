@@ -26,6 +26,7 @@
     }
     &:focus{
       border-color: $primary;
+      @include transition_default;
     }
     &:disabled ~ .pb_select_kit_caret {
       opacity: 0.5;
