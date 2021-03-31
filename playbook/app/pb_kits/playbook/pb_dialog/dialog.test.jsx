@@ -9,7 +9,7 @@ import { Dialog } from '../'
   - https://jestjs.io/docs/en/using-matchers
 */
 
-test('generated scaffold test - update me', () => {
+test('Kit renders Dialog', () => {
   const testId = 'test1'
 
   render(
