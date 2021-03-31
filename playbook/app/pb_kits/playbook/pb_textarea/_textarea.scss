@@ -22,14 +22,13 @@
   .pb_text_area_kit:focus {
     border-color: $primary;
     @include pb_textarea_focus_light;
+    @include transition_default;
   }
-
   textarea:hover,
   .pb_text_area_kit:hover {
     background-color: rgba($focus_input_light,$opacity_5);
   }
-
-
+  
   &.resize_both > textarea {
     resize: both;
     overflow: auto;
@@ -56,11 +55,6 @@
     textarea:focus, .pb_text_area_kit:focus {
       border-color: $active_dark;
       background-color: rgba($white, 0.025);
-      -webkit-box-shadow: none;
-    }
-    textarea:hover,
-    .pb_text_area_kit:hover {
-      background-color: rgba($white, 0.15);
     }
   }
 

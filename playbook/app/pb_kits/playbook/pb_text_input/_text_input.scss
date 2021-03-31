@@ -34,9 +34,10 @@
     input:-webkit-autofill:focus,
     .text_input:-webkit-autofill:focus {
       @include pb_textarea_focus;
+      @include transition_default;
       border-color: $primary;
-      -webkit-box-shadow: 0 0 0px 1000px $focus_input_light inset;
-      transition: background-color 5000s ease-in-out 0s;
+      background-color: rgba($focus_input_light,$opacity_5);
+      
     }
   }
 
@@ -68,8 +69,6 @@
       .text_input:-webkit-autofill:focus {
         border-color: $active_dark;
         background-color: rgba($white, 0.025);
-        -webkit-box-shadow: none;
-
       }
     }
 

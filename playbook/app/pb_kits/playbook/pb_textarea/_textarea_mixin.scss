@@ -22,7 +22,7 @@
   overflow-wrap: break-word;
   resize: none;
   transition-property: box-shadow, color, background-color;
-  transition-duration: .24s;
+  transition-duration: .3s;
   transition-timing-function: $bezier;
   &[type=number] {
     -moz-appearance:textfield;
@@ -40,9 +40,9 @@
   &:-webkit-autofill,
   &:-webkit-autofill:hover,
   &:-internal-autofill-selected {
-    -webkit-text-fill-color: $text_color;
-    -webkit-box-shadow: 0 0 0px 1000px transparent inset;
-    transition: background-color 5000s ease-in-out 0s;
+    color: $text_color;
+    background-color: rgba($focus_input_light, $opacity_5);
+    transition: background-color 0.3s ease-in-out 0s;
     font-family: $font_family_base;
   }
 }
@@ -67,4 +67,9 @@
 
 @mixin pb_textarea_focus_dark {
   @include pb_textarea_focus($focus_input_dark);
+}
+
+// Transitions ======================
+@mixin transition_default{
+  transition: background-color 0.3s ease-in-out 0s, border-color 0.3s ease-in-out 0s ;
 }
