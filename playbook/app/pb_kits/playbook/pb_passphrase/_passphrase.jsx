@@ -81,7 +81,6 @@ const Passphrase = (props: PassphraseProps) => {
           <Caption text={label} />
           <If condition={tips.length > 0}>
             <PbReactPopover
-                className={dark ? 'passphrase-popover-dark' : ''}
                 placement="right"
                 reference={popoverReference}
                 show={showPopover}
@@ -91,7 +90,6 @@ const Passphrase = (props: PassphraseProps) => {
                   orientation="column"
               >
                 <Caption
-                    dark={dark}
                     marginBottom="xs"
                     text="Tips for a good passphrase"
                 />
@@ -99,13 +97,11 @@ const Passphrase = (props: PassphraseProps) => {
                   {
                     tips.map((tip, i) => (
                       <Caption
-                          dark={dark}
                           key={i}
                           marginBottom="xs"
                           size="xs"
                       >
                         <Icon
-                            dark={dark}
                             icon="shield-check"
                             marginRight="xs"
                         />
