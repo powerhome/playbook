@@ -19,7 +19,6 @@ type PassphraseProps = {
   label?: string,
   minLength?: number,
   onChange: (String) => void,
-  strengthFunction?: (string) => any,
   strongThreshold?: number,
   tips?: Array<string>,
   value: string,
@@ -34,7 +33,7 @@ const Passphrase = (props: PassphraseProps) => {
     dark = false,
     data = {},
     id,
-    label = 'Passphrase',
+    label = confirmation ? 'Confirm Passphrase' : 'Passphrase',
     minLength,
     onChange = () => {},
     strongThreshold = 3,
@@ -53,7 +52,7 @@ const Passphrase = (props: PassphraseProps) => {
 
   const calculator = useMemo(
     () => confirmation ? { test: () => ({}) } : zxcvbnPasswordScore({ averageThreshold, strongThreshold, minLength }),
-    [averageThreshold, strongThreshold, minLength]
+    [averageThreshold, confirmation, strongThreshold, minLength]
   )
 
   const { percent: progressPercent, variant: progressVariant, text: strengthLabel, strength, suggestions, warning } = calculator.test(value)
@@ -77,42 +76,40 @@ const Passphrase = (props: PassphraseProps) => {
         id={id}
     >
       <Flex align="baseline">
-        <If condition={!confirmation}>
-          <Caption text={label} />
-          <If condition={tips.length > 0}>
-            <PbReactPopover
-                placement="right"
-                reference={popoverReference}
-                show={showPopover}
+        <Caption text={label} />
+        <If condition={tips.length > 0 && !confirmation}>
+          <PbReactPopover
+              placement="right"
+              reference={popoverReference}
+              show={showPopover}
+          >
+            <Flex
+                align="center"
+                orientation="column"
             >
-              <Flex
-                  align="center"
-                  orientation="column"
-              >
-                <Caption
-                    marginBottom="xs"
-                    text="Tips for a good passphrase"
-                />
-                <div>
-                  {
-                    tips.map((tip, i) => (
-                      <Caption
-                          key={i}
-                          marginBottom="xs"
-                          size="xs"
-                      >
-                        <Icon
-                            icon="shield-check"
-                            marginRight="xs"
-                        />
-                        {tip}
-                      </Caption>
-                    ))
-                  }
-                </div>
-              </Flex>
-            </PbReactPopover>
-          </If>
+              <Caption
+                  marginBottom="xs"
+                  text="Tips for a good passphrase"
+              />
+              <div>
+                {
+                  tips.map((tip, i) => (
+                    <Caption
+                        key={i}
+                        marginBottom="xs"
+                        size="xs"
+                    >
+                      <Icon
+                          icon="shield-check"
+                          marginRight="xs"
+                      />
+                      {tip}
+                    </Caption>
+                  ))
+                }
+              </div>
+            </Flex>
+          </PbReactPopover>
         </If>
       </Flex>
       <div className="text-input-wrapper">
@@ -143,7 +140,6 @@ const Passphrase = (props: PassphraseProps) => {
           >
             <Icon icon="eye" />
           </Body>
-
         </span>
       </div>
       <If condition={!confirmation}>
