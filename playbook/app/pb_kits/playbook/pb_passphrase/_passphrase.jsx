@@ -33,7 +33,7 @@ const Passphrase = (props: PassphraseProps) => {
     data = {},
     id,
     label = 'Passphrase',
-    // minLength, this will be needed
+    minLength,
     onChange = () => {},
     strongThreshold = 3,
     tips = [],
@@ -41,7 +41,7 @@ const Passphrase = (props: PassphraseProps) => {
   } = props
 
   // maybe this can be memoized?
-  const calculator = zxcvbnPasswordScore({ averageThreshold, strongThreshold })
+  const calculator = zxcvbnPasswordScore({ averageThreshold, strongThreshold, minLength })
 
   const [showPopover, setShowPopover] = useState(false)
   const toggleShowPopover = () => setShowPopover(!showPopover)
