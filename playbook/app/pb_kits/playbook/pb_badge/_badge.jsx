@@ -56,6 +56,7 @@ const Badge = (props: BadgeProps) => {
         id={id}
     >
       <span>
+        {text}
         <If condition={removeIcon}>
           <span
               onClick={removeOnClick}
@@ -68,7 +69,6 @@ const Badge = (props: BadgeProps) => {
             />
           </span>
         </If>
-        {text}
       </span>
     </div>
   )
