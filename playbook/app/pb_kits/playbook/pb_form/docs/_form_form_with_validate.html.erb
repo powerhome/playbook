@@ -14,7 +14,7 @@
 %>
 
 <%= pb_rails("form/form_with", props: {
-    options: { scope: :example, method: :get, url: "" },
+    scope: :example, method: :get, url: "",
     validate: true
   }) do |form| %>
   <%= form.text_field :example_text_field, props: { label: true, required: true } %>
