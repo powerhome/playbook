@@ -1,7 +1,7 @@
 
 /* @flow */
 
-import React, { useState } from 'react'
+import React, { useMemo, useState } from 'react'
 import classnames from 'classnames'
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
 import { globalProps } from '../utilities/globalProps.js'
@@ -41,7 +41,10 @@ const Passphrase = (props: PassphraseProps) => {
   } = props
 
   // maybe this can be memoized?
-  const calculator = zxcvbnPasswordScore({ averageThreshold, strongThreshold, minLength })
+  const calculator = useMemo(
+    () => zxcvbnPasswordScore({ averageThreshold, strongThreshold, minLength }),
+    [averageThreshold, strongThreshold, minLength]
+  )
 
   const [showPopover, setShowPopover] = useState(false)
   const toggleShowPopover = () => setShowPopover(!showPopover)
