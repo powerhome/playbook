@@ -26,6 +26,11 @@ module Playbook
          step <= active ? "_active" : "_inactive"
       end
 
+      def aria_attributes
+        return aria if aria.present?
+        { hidden: true }
+      end
+
       def dark_pill
         dark ? " dark" : nil
       end
