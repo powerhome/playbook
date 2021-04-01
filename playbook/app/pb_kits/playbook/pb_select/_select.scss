@@ -19,6 +19,7 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    max-height: 45px;
     @media (hover:hover) {
       &:hover, &:active, &:focus {
         background-color: $focus_input_light;

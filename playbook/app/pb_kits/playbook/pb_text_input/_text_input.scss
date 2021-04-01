@@ -17,6 +17,7 @@
     }
     input,
     .text_input {
+      max-height: 45px;
       @include pb_textarea_light;
       overflow: hidden;
     }
