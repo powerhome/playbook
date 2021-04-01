@@ -16,6 +16,7 @@ type PassphraseProps = {
   data?: object,
   dark?: boolean,
   id?: string,
+  inputProps?: {},
   label?: string,
   minLength?: number,
   onChange: (String) => void,
@@ -33,6 +34,7 @@ const Passphrase = (props: PassphraseProps) => {
     dark = false,
     data = {},
     id,
+    inputProps = {},
     label = confirmation ? 'Confirm Passphrase' : 'Passphrase',
     minLength,
     onChange = () => {},
@@ -123,6 +125,7 @@ const Passphrase = (props: PassphraseProps) => {
             placeholder="Enter a passphrase..."
             type={showPassword ? 'text' : 'password'}
             value={value}
+            {...inputProps}
         />
         <span
             className="show-password-icon"
