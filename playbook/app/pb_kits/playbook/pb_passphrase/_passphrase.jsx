@@ -1,7 +1,7 @@
 
 /* @flow */
 
-import React, { useMemo, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import classnames from 'classnames'
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
 import { globalProps } from '../utilities/globalProps.js'
@@ -20,6 +20,7 @@ type PassphraseProps = {
   label?: string,
   minLength?: number,
   onChange: (String) => void,
+  strengthChanged?: (number) => void,
   strongThreshold?: number,
   tips?: Array<string>,
   value: string,
@@ -38,6 +39,7 @@ const Passphrase = (props: PassphraseProps) => {
     label = confirmation ? 'Confirm Passphrase' : 'Passphrase',
     minLength,
     onChange = () => {},
+    strengthChanged,
     strongThreshold = 3,
     tips = [],
     value,
@@ -57,10 +59,19 @@ const Passphrase = (props: PassphraseProps) => {
     [averageThreshold, confirmation, strongThreshold, minLength]
   )
 
-  const { percent: progressPercent, variant: progressVariant, text: strengthLabel } = calculator.test(value)
+  const { percent: progressPercent, variant: progressVariant, text: strengthLabel, strength } = calculator.test(value)
+
+  useEffect(() => {
+    if (typeof strengthChanged === 'function') {
+      strengthChanged(strength)
+    }
+  }, [strength])
 
   const popoverReference = (
-    <a onClick={toggleShowPopover}>
+    <a
+        className={dark ? 'dark' : null}
+        onClick={toggleShowPopover}
+    >
       <Icon
           dark={dark}
           icon="info-circle"
