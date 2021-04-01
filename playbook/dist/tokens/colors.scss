@@ -92,7 +92,7 @@ $hover_colors: (
 
 /* Focus colors -----------------------*/
 $focus_input_light:   rgba($active_light, $opacity_5);
-$focus_input_dark:    rgba($bg_dark, $opacity_10);
+$focus_input_dark:    rgba(#144075, $opacity_5);
 $focus_input_colors: (
   focus_input_light:        $focus_input_light,
   focus_input_dark:         $focus_input_dark
@@ -114,7 +114,7 @@ $shadow_colors: (
 
 /* Text colors ------------------------*/
 $text_lt_default:     $charcoal;
-$text_lt_light:       #919EAB;
+$text_lt_light:       #687887;
 $text_lt_lighter:     $slate;
 $text_dk_default:     $white;
 $text_dk_light:       rgba($white, $opacity_6);
