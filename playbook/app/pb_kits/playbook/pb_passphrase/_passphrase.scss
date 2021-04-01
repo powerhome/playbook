@@ -4,6 +4,10 @@
 .pb_passphrase {
   margin-bottom: $space_sm;
 
+  a.dark {
+    color: $white;
+  }
+
   .passphrase-label{
     margin-right: 4px;
   }
