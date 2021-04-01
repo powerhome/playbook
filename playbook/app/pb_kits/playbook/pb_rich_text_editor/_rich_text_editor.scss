@@ -60,6 +60,11 @@
   &:focus,&:not(:focus),&:not(:focus-within) {
     .trix-button-row, trix-editor {
       @include transition_default;
+    }
+  }
+  &:focus-within,
+  &:focus{
+    .trix-button-row, trix-editor {
       background-color: $focus_input_light;
       border-color: $primary;
     }
