@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 module Playbook
-  module PbForm
-    class FormBuilder
+  module Forms
+    class Builder
       class FormFieldBuilder < Module
         def initialize(method_name, kit_name:)
           define_method method_name do |name, props: {}, **options, &block|

@@ -13,10 +13,7 @@
   ]
 %>
 
-<%= pb_rails("form", props: {
-    options: { scope: :example, method: :get, url: "" },
-    validate: true
-  }) do |form| %>
+<%= pb_form_with(scope: :example, method: :get, url: "", validate: true) do |form| %>
   <%= form.text_field :example_text_field, props: { label: true, required: true } %>
   <%= form.telephone_field :example_phone_field, props: { label: true, required: true, validation: { pattern: "[0-9]{3}-[0-9]{3}-[0-9]{4}", message: "Please enter a valid phone number (example: 888-888-8888)." } } %>
   <%= form.email_field :example_email_field, props: { label: true, required: true } %>

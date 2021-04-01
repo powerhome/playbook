@@ -2,26 +2,40 @@
 
 require "rails_helper"
 
-RSpec.describe Playbook::PbForm::Form do
-  describe "#form_options" do
-    it "allows the user to set the URL" do
-      model = double
-      kit = ::Playbook::PbForm::Form.new(options: { model: model, url: "http://example.org" })
+RSpec.describe Playbook::PbForm::Form, type: :kit do
+  before do
+    helper.extend Playbook::PbKitHelper
+    helper.define_singleton_method :users_path do |*|
+      "/users"
+    end
+  end
 
-      expect(kit.form_options).to include(url: "http://example.org", model: model)
+  it "allows the user to set the URL" do
+    rendered = helper.pb_rails "form", props: { options: { url: "http://example.org"} }
+
+    expect(rendered).to have_tag("form[action='http://example.org']")
+  end
+
+  it "allows the user to not set the URL" do
+    model_name = double(name: "User", route_key: :users, param_key: :id)
+    model = double("model", model_name: model_name, persisted?: false)
+    object = double("object", to_model: model)
+    rendered = helper.pb_rails "form", props: { options: { model: object } }
+
+    expect(rendered).to have_tag("form[action='/users']")
+  end
+
+  it "allows the user to set the URL" do
+    rendered = helper.pb_rails "form", props: { options: { url: "http://example.org"} }
+
+    expect(rendered).to have_tag("form.pb-form")
+  end
+
+  it "allows the user render actions" do
+    rendered = helper.pb_rails "form", props: { options: { url: "http://example.org"} } do |form|
+      form.actions(&:submit)
     end
 
-    it "allows the user to not set a URL" do
-      model = double
-      kit = ::Playbook::PbForm::Form.new(options: { model: model })
-
-      expect(kit.form_options).to_not have_key(:url)
-    end
-
-    it "adds pb-form to the form_with `class` option" do
-      view_object = Playbook::PbForm::Form.new(options: { class: "example-class-option" })
-
-      expect(view_object.form_options).to include(class: "example-class-option")
-    end
+    expect(rendered).to have_tag("form > ol.pb-form-actions > li > button.pb_button_kit_primary_inline_enabled[type=submit]")
   end
 end
