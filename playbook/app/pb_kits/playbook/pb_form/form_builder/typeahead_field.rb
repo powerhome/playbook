@@ -2,7 +2,7 @@
 
 module Playbook
   module PbForm
-    module FormBuilder
+    class FormBuilder
       module TypeaheadField
         def typeahead(name, _options = {}, _html_options = {}, props: {})
           props[:name] = name

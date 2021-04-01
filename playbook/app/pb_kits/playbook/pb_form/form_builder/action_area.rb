@@ -2,7 +2,7 @@
 
 module Playbook
   module PbForm
-    module FormBuilder
+    class FormBuilder
       class ActionArea
         def initialize(view_context, submit_default_value)
           self.view_context = view_context

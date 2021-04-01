@@ -2,7 +2,7 @@
 
 module Playbook
   module PbForm
-    module FormBuilder
+    class FormBuilder
       module CheckboxField
         def check_box(name, props: {}, **options)
           label_text = @template.label(@object_name, name) if props[:label] == true
