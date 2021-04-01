@@ -1,32 +1,16 @@
 /* @flow */
 
-import React, { useEffect, useRef } from 'react'
+import React from 'react'
 import { components } from 'react-select'
 import { Flex, Icon } from '../../'
 
-const Input = (props: any) => {
-  const { plusIcon } = props.selectProps
-  const inputWrapper = useRef(null)
-
-  if (plusIcon) {
-    useEffect(() => {
-      const plusIcon = inputWrapper.current.querySelector('.typeahead-plus-icon')
-      const placeholder = inputWrapper.current.parentElement.querySelector('.placeholder')
-      if (placeholder){
-        const offset = placeholder.clientWidth
-        plusIcon.style.marginLeft = `${offset + 2}px`
-      } else {
-        plusIcon.style.marginLeft = '0px'
-      }
-    })
-  }
-
-  return (
+const Input = (props: any) => (
+  <>
     <Flex
         align="center"
-        ref={inputWrapper}
+        className="input-wrapper"
     >
-      <If condition={plusIcon}>
+      <If condition={props.selectProps.plusIcon}>
         <Icon
             className="typeahead-plus-icon"
             icon="plus"
@@ -37,7 +21,7 @@ const Input = (props: any) => {
           {...props}
       />
     </Flex>
-  )
-}
+  </>
+)
 
 export default Input
