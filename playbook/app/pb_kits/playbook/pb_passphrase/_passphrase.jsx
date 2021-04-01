@@ -55,7 +55,7 @@ const Passphrase = (props: PassphraseProps) => {
     [averageThreshold, confirmation, strongThreshold, minLength]
   )
 
-  const { percent: progressPercent, variant: progressVariant, text: strengthLabel, strength, suggestions, warning } = calculator.test(value)
+  const { percent: progressPercent, variant: progressVariant, text: strengthLabel } = calculator.test(value)
 
   const popoverReference = (
     <a onClick={toggleShowPopover}>
@@ -76,7 +76,10 @@ const Passphrase = (props: PassphraseProps) => {
         id={id}
     >
       <Flex align="baseline">
-        <Caption text={label} />
+        <Caption
+            className="passphrase-label"
+            text={label}
+        />
         <If condition={tips.length > 0 && !confirmation}>
           <PbReactPopover
               placement="right"
@@ -154,9 +157,6 @@ const Passphrase = (props: PassphraseProps) => {
             text={strengthLabel}
         />
       </If>
-      {strength}
-      {suggestions}
-      {warning}
     </div>
   )
 }
