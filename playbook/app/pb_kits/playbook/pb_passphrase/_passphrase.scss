@@ -2,6 +2,8 @@
 @import "../tokens/spacing";
 
 .pb_passphrase {
+  margin-bottom: $space_sm;
+
   .passphrase-label{
     margin-right: 4px;
   }
