@@ -19,19 +19,19 @@ export const zxcvbnPasswordScore = (options) => {
         if (password.length <= 0) {
           percent = '0'
           variant = 'negative'
-          text = ''
+          text = '\u00A0' //nbsp to keep form from jumping when typing beings
         } else if (password.length < this.minLength || str < this.averageThreshold) {
           percent = '25'
           variant = 'negative'
-          text = 'Weak Passphrase'
+          text = 'Too weak'
         } else if (str < this.strongThreshold){
           percent = '50'
           variant = 'warning'
-          text = 'Average Passphrase'
+          text = 'Almost there, keep going!'
         } else if (str >= this.strongThreshold) {
           percent = '100'
           variant = 'positive'
-          text = 'Strong Passphrase'
+          text = 'Success! Strong passphrase'
         }
         return { percent, variant, text }
       }
