@@ -47,6 +47,23 @@ const PassphraseDefault = (props) => {
         />
         <span>{`Current strength is ${strength}`}</span>
       </div>
+      <div>
+        <Passphrase
+            common={input.includes('password')}
+            onChange={handleChange}
+            value={input}
+            {...props}
+        />
+      </div>
+      <div>
+        <Passphrase
+            onChange={handleChange}
+            showTipsBelow="md"
+            tips={['Write more words', 'Please, more']}
+            value={input}
+            {...props}
+        />
+      </div>
     </>
   )
 }
