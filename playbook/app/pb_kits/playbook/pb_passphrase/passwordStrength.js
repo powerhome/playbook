@@ -12,7 +12,7 @@ export const zxcvbnPasswordScore = (options) => {
     minLength,
     averageThreshold,
     strongThreshold,
-    test: function (password = '') {
+    test: function (password = '', common = false) {
       const feedbackValues = (str) => {
         let percent, variant, text
 
@@ -20,6 +20,10 @@ export const zxcvbnPasswordScore = (options) => {
           percent = '0'
           variant = 'negative'
           text = '\u00A0' //nbsp to keep form from jumping when typing beings
+        } else if (common) {
+          percent = '25'
+          variant = 'negative'
+          text = 'This passphrase is too common'
         } else if (password.length < this.minLength || str < this.averageThreshold) {
           percent = '25'
           variant = 'negative'

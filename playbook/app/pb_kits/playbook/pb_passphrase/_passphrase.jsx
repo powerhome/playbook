@@ -11,6 +11,7 @@ import { zxcvbnPasswordScore }  from './passwordStrength.js'
 type PassphraseProps = {
   aria?: object,
   averageThreshold?: number,
+  common?: boolean,
   confirmation?: boolean,
   className?: string,
   data?: object,
@@ -20,6 +21,7 @@ type PassphraseProps = {
   label?: string,
   minLength?: number,
   onChange: (String) => void,
+  showTipsBelow?: 'always' | "xs" | "sm" | "md" | "lg" | "xl",
   strengthChanged?: (number) => void,
   strongThreshold?: number,
   tips?: Array<string>,
@@ -31,6 +33,7 @@ const Passphrase = (props: PassphraseProps) => {
     aria = {},
     averageThreshold = 2,
     className,
+    common = false,
     confirmation = false,
     dark = false,
     data = {},
@@ -39,6 +42,7 @@ const Passphrase = (props: PassphraseProps) => {
     label = confirmation ? 'Confirm Passphrase' : 'Passphrase',
     minLength,
     onChange = () => {},
+    showTipsBelow = 'always',
     strengthChanged,
     strongThreshold = 3,
     tips = [],
@@ -59,7 +63,7 @@ const Passphrase = (props: PassphraseProps) => {
     [averageThreshold, confirmation, strongThreshold, minLength]
   )
 
-  const { percent: progressPercent, variant: progressVariant, text: strengthLabel, strength } = calculator.test(value)
+  const { percent: progressPercent, variant: progressVariant, text: strengthLabel, strength } = calculator.test(value, common)
 
   useEffect(() => {
     if (typeof strengthChanged === 'function') {
@@ -67,9 +71,10 @@ const Passphrase = (props: PassphraseProps) => {
     }
   }, [strength])
 
+  const tipClass = classnames((dark ? 'dark' : null), (showTipsBelow === 'always' ? null : `show-below-${showTipsBelow}`))
   const popoverReference = (
     <a
-        className={dark ? 'dark' : null}
+        className={tipClass}
         onClick={toggleShowPopover}
     >
       <Icon

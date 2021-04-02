@@ -1,5 +1,6 @@
 @import "../tokens/colors";
 @import "../tokens/spacing";
+@import "../tokens/screen_sizes";
 
 .pb_passphrase {
   margin-bottom: $space_sm;
@@ -7,6 +8,21 @@
   a.dark {
     color: $white;
   }
+
+  a {
+
+    &[class*=show-below-] {
+      display: none;
+    }
+    @each $breakpoint_name, $breakpoint in $breakpoints {
+      &.show-below-#{$breakpoint_name} {
+        @include break_at($breakpoint) {
+          display: inline;
+        }
+      }
+    }
+  }
+
 
   .passphrase-label{
     margin-right: 4px;
