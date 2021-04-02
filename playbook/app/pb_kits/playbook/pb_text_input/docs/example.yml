@@ -9,4 +9,3 @@ examples:
   - text_input_error: With Error
   - text_input_custom: Custom
   - text_input_disabled: Disabled
-  - text_input_password_strength: Password Strength
