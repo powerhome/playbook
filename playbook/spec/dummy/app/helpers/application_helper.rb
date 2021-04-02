@@ -2,6 +2,7 @@
 
 module ApplicationHelper
   include ::Webpacker::React::Helpers
+  include ::Playbook::PbFormsHelper
   include ::Playbook::PbKitHelper
 
   def current_webpacker_instance
