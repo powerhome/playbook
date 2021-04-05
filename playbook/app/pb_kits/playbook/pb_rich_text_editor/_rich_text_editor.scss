@@ -81,6 +81,7 @@
       position: sticky;
       top: 0;
       z-index: 1;
+      background-color: $white;
     }
   }
   trix-editor {
@@ -206,9 +207,15 @@
         border-color: $active_dark !important;
       }
     }
+    
     &.error {
       trix-editor {
         border-color: $error_dark;
+      }
+    }
+    &.sticky {
+    trix-toolbar {
+        background-color: tint($bg_dark, 10%) !important;
       }
     }
     .trix-dialog.trix-dialog--link.trix-active {
