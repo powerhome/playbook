@@ -9,6 +9,7 @@
   }
   .pb_typeahead_wrapper {
     position: relative;
+
     .text_input_value_container{
       cursor: text;
     }
@@ -28,6 +29,9 @@
   }
   [class^=pb_text_input_kit] {
     .text_input_wrapper {
+      .text_input {
+        max-height: none;
+      }
       & > input:first-child {
         padding-right: $space_xl;
       }
