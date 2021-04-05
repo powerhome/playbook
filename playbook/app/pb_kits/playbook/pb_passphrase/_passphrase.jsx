@@ -22,7 +22,7 @@ type PassphraseProps = {
   minLength?: number,
   onChange: (String) => void,
   showTipsBelow?: 'always' | "xs" | "sm" | "md" | "lg" | "xl",
-  strengthChanged?: (number) => void,
+  onStrengthChange?: (number) => void,
   strongThreshold?: number,
   tips?: Array<string>,
   value: string,
@@ -43,7 +43,7 @@ const Passphrase = (props: PassphraseProps) => {
     minLength,
     onChange = () => {},
     showTipsBelow = 'always',
-    strengthChanged,
+    onStrengthChange,
     strongThreshold = 3,
     tips = [],
     value,
@@ -66,8 +66,8 @@ const Passphrase = (props: PassphraseProps) => {
   const { percent: progressPercent, variant: progressVariant, text: strengthLabel, strength } = calculator.test(value, common)
 
   useEffect(() => {
-    if (typeof strengthChanged === 'function') {
-      strengthChanged(strength)
+    if (typeof onStrengthChange === 'function') {
+      onStrengthChange(strength)
     }
   }, [strength])
 
