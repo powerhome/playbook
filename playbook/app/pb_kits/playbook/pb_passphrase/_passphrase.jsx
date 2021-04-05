@@ -46,7 +46,7 @@ const Passphrase = (props: PassphraseProps) => {
     onStrengthChange,
     strongThreshold = 3,
     tips = [],
-    value,
+    value = '',
   } = props
 
   const [showPopover, setShowPopover] = useState(false)
@@ -166,7 +166,7 @@ const Passphrase = (props: PassphraseProps) => {
       </div>
       <If condition={!confirmation}>
         <ProgressSimple
-            className={value.length === 0 ? 'progress-empty-input' : null}
+            className={(!value || value.length === 0) ? 'progress-empty-input' : null}
             dark={dark}
             percent={progressPercent}
             variant={progressVariant}
