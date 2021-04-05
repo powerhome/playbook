@@ -6,7 +6,6 @@
 [class^=pb_typeahead_kit] {
   .pb_typeahead_wrapper {
     position: relative;
-
     .pb_typeahead_loading_indicator {
       position: absolute;
       width: min-content;
@@ -20,6 +19,9 @@
 
   [class^=pb_text_input_kit] {
     .text_input_wrapper {
+      .text_input {
+        max-height: none;
+      }
       & > input:first-child {
         padding-right: $space_xl;
       }
