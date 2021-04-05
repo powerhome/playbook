@@ -111,7 +111,7 @@ $pb_selectable_card_border: 2px;
     }
 
     .separator {
-      background: rgba($white,.1);
+      background: $bg_dark;
     }
 
     &.error {

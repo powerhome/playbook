@@ -4,10 +4,7 @@ import { Select } from '../../'
 const SelectCustomSelect = (props) => {
   return (
     <div>
-      <Select
-          label="Favorite Holiday"
-          {...props}
-      >
+      <Select label="Favorite Holiday">
         <select
             id="holiday"
             name="holiday"

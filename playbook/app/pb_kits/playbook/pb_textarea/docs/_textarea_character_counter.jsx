@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Textarea } from '../../'
 
-const TextareaCharacterCounter = (props) => {
+const TextareaCharacterCounter = () => {
   const [value1, setValue1] = useState('Counting characters!')
   const [value2, setValue2] = useState('This counter prevents the user from exceeding the maximum number of allowed characters. Just try it!')
   const [value3, setValue3] = useState('This counter alerts the user that they have exceeded the maximum number of allowed characters.')
@@ -41,7 +41,6 @@ const TextareaCharacterCounter = (props) => {
           label="Count Only"
           onChange={(event) => setCount1(event.target.value.length)}
           rows={4}
-          {...props}
       />
 
       <br />
@@ -53,7 +52,6 @@ const TextareaCharacterCounter = (props) => {
           onChange={() => handleMaxCount(event)}
           rows={4}
           value={value1}
-          {...props}
       />
 
       <br />
@@ -65,7 +63,6 @@ const TextareaCharacterCounter = (props) => {
           onChange={() => handleMaxCountWithBlocker(event, 100)}
           rows={4}
           value={value2}
-          {...props}
       />
 
       <br />
@@ -78,7 +75,6 @@ const TextareaCharacterCounter = (props) => {
           onChange={() => handleMaxCountWithError(event, 75)}
           rows={4}
           value={value3}
-          {...props}
       />
     </>
   )

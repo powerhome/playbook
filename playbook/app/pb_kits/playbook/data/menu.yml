@@ -7,6 +7,7 @@ kits:
     - button_toolbar
     - circle_icon_button
   - card
+  - checkbox
   - collapsible
   - charts_and_graphs:
     - bar_graph
@@ -20,14 +21,12 @@ kits:
   - fixed_confirmation_toast
   - flex
   - forms:
-    - checkbox
     - date_picker
     - file_upload
     - form
     - form_group
     - form_pill
     - radio
-    - rich_text_editor
     - select
     - selectable_card
     - selectable_card_icon
@@ -58,6 +57,7 @@ kits:
     - progress_pills
     - progress_simple
     - progress_step
+  - rich_text_editor
   - section_separator
   - source
   - star_rating
@@ -96,3 +96,4 @@ kits:
     - weekday_stacked
   - user
   - user_badge
+
