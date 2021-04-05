@@ -5,7 +5,7 @@ require_relative "../../../../app/pb_kits/playbook/pb_passphrase/passphrase"
 RSpec.describe Playbook::PbPassphrase::Passphrase do
   subject { Playbook::PbPassphrase::Passphrase }
 
-  it { is_expected.to define_partial }
+  # it { is_expected.to define_partial }
 
   # Do not leave this file blank. Use other spec files for example tests.
 end
