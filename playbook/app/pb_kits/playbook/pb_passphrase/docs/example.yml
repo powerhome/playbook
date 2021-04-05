@@ -1,4 +1,8 @@
 examples:
+
+  rails:
+  - passphrase_default: Default
+
   react:
   - passphrase_default: Default
   - passphrase_meter_settings: Meter Settings
