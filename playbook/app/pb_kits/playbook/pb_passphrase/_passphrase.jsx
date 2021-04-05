@@ -166,6 +166,7 @@ const Passphrase = (props: PassphraseProps) => {
       </div>
       <If condition={!confirmation}>
         <ProgressSimple
+            className={value.length === 0 ? 'progress-empty-input' : null}
             dark={dark}
             percent={progressPercent}
             variant={progressVariant}
