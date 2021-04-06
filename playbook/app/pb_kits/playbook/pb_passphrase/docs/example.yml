@@ -9,3 +9,4 @@ examples:
   - passphrase_input_props: Input props
   - passphrase_tips: Tips
   - passphrase_strength_change: Strength Change
+  - passphrase_common: Common Passphrases
