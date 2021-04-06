@@ -1,7 +1,7 @@
 
 /* @flow */
 
-import React, { useEffect, useMemo, useState } from 'react'
+import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import classnames from 'classnames'
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
 import { globalProps } from '../utilities/globalProps.js'
@@ -25,6 +25,7 @@ type PassphraseProps = {
   onStrengthChange?: (number) => void,
   strongThreshold?: number,
   tips?: Array<string>,
+  uncontrolled?: boolean,
   value: string,
 }
 
@@ -46,8 +47,21 @@ const Passphrase = (props: PassphraseProps) => {
     onStrengthChange,
     strongThreshold = 3,
     tips = [],
+    uncontrolled = false,
     value = '',
   } = props
+
+  const [uncontrolledValue, setUncontrolledValue] = useState('')
+
+  const handleChange = useCallback(
+    (e) => uncontrolled ? setUncontrolledValue(e.target.value) :  onChange(e),
+    [uncontrolled, onChange]
+  )
+
+  const displayValue = useMemo(
+    () => (uncontrolled ? uncontrolledValue : value),
+    [value, uncontrolledValue, uncontrolled],
+  )
 
   const [showPopover, setShowPopover] = useState(false)
   const toggleShowPopover = () => setShowPopover(!showPopover)
@@ -63,7 +77,7 @@ const Passphrase = (props: PassphraseProps) => {
     [averageThreshold, confirmation, strongThreshold, minLength]
   )
 
-  const { percent: progressPercent, variant: progressVariant, text: strengthLabel, strength } = calculator.test(value, common)
+  const { percent: progressPercent, variant: progressVariant, text: strengthLabel, strength } = calculator.test(displayValue, common)
 
   useEffect(() => {
     if (typeof onStrengthChange === 'function') {
@@ -137,10 +151,10 @@ const Passphrase = (props: PassphraseProps) => {
         <TextInput
             className="password-text-input"
             dark={dark}
-            onChange={onChange}
+            onChange={handleChange}
             placeholder="Enter a passphrase..."
             type={showPassword ? 'text' : 'password'}
-            value={value}
+            value={displayValue}
             {...inputProps}
         />
         <span
@@ -166,7 +180,7 @@ const Passphrase = (props: PassphraseProps) => {
       </div>
       <If condition={!confirmation}>
         <ProgressSimple
-            className={(!value || value.length === 0) ? 'progress-empty-input' : null}
+            className={(!displayValue || displayValue.length === 0) ? 'progress-empty-input' : null}
             dark={dark}
             percent={progressPercent}
             variant={progressVariant}

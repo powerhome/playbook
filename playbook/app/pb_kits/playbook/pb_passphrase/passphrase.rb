@@ -29,6 +29,7 @@ module Playbook
           showTipsBelow: show_tips_below,
           strongThreshold: strong_threshold,
           tips: tips,
+          uncontrolled: true,
         }.compact
       end
     end
