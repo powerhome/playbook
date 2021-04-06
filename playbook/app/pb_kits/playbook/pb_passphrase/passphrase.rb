@@ -18,7 +18,7 @@ module Playbook
       # prop :on_change
 
       def classname
-        generate_classname("pb_passphrase_kit")
+        generate_classname("pb_passphrase")
       end
 
       def passphrase_options
