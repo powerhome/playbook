@@ -65,8 +65,8 @@ const Passphrase = (props: PassphraseProps) => {
 
   const [showPopover, setShowPopover] = useState(false)
   const toggleShowPopover = () => setShowPopover(!showPopover)
-  const [showPassword, setShowPassword] = useState(false)
-  const toggleShowPassword = () => setShowPassword(!showPassword)
+  const [showPassphrase, setShowPassphrase] = useState(false)
+  const toggleShowPassphrase = () => setShowPassphrase(!showPassphrase)
 
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
@@ -85,7 +85,11 @@ const Passphrase = (props: PassphraseProps) => {
     }
   }, [strength])
 
-  const tipClass = classnames((dark ? 'dark' : null), (showTipsBelow === 'always' ? null : `show-below-${showTipsBelow}`))
+  const tipClass = classnames(
+    (dark ? 'dark' : null),
+    (showTipsBelow === 'always' ? null : `show-below-${showTipsBelow}`),
+  )
+
   const popoverReference = (
     <a
         className={tipClass}
@@ -147,30 +151,31 @@ const Passphrase = (props: PassphraseProps) => {
           </PbReactPopover>
         </If>
       </Flex>
-      <div className="text-input-wrapper">
+      <div className="passphrase-text-input-wrapper">
         <TextInput
-            className="password-text-input"
+            className="passphrase-text-input"
             dark={dark}
+            marginBottom="xs"
             onChange={handleChange}
             placeholder="Enter a passphrase..."
-            type={showPassword ? 'text' : 'password'}
+            type={showPassphrase ? 'text' : 'password'}
             value={displayValue}
             {...inputProps}
         />
         <span
-            className="show-password-icon"
+            className="show-passphrase-icon"
             dark={dark}
-            onClick={toggleShowPassword}
+            onClick={toggleShowPassphrase}
         >
           <Body
-              className={showPassword ? 'hide-icon' : ''}
+              className={showPassphrase ? 'hide-icon' : ''}
               color="light"
               dark={dark}
           >
             <Icon icon="eye-slash" />
           </Body>
           <Body
-              className={showPassword ? '' : 'hide-icon'}
+              className={showPassphrase ? '' : 'hide-icon'}
               color="light"
               dark={dark}
           >
@@ -180,7 +185,7 @@ const Passphrase = (props: PassphraseProps) => {
       </div>
       <If condition={!confirmation}>
         <ProgressSimple
-            className={(!displayValue || displayValue.length === 0) ? 'progress-empty-input' : null}
+            className={displayValue.length === 0 ? 'progress-empty-input' : null}
             dark={dark}
             percent={progressPercent}
             variant={progressVariant}
