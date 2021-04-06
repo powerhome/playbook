@@ -24,6 +24,7 @@ const PassphraseInputProps = (props) => {
             inputProps={{
               children: (
                 <input
+                    onChange={handleChange}
                     type="password"
                     value={input}
                 />),

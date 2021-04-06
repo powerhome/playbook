@@ -23,27 +23,26 @@
     }
   }
 
-
   .passphrase-label{
     margin-right: 4px;
   }
 
-  .text-input-wrapper {
+  .passphrase-text-input-wrapper {
     position: relative;
 
     .pb_text_input_kit_label {
       margin-bottom: 4px;
     }
 
-    .password-text-input input{
+    .passphrase-text-input input{
       padding-right: 42px;
     }
 
-    .text_input_wrapper {
-      margin-bottom: $space_xs;
+    .passphrase-text-input .text_input_wrapper {
+      margin-bottom: 0;
     }
 
-    .show-password-icon {
+    .show-passphrase-icon {
       position: absolute;
       right: 11px;
       top: 11px;
