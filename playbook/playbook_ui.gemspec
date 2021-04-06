@@ -36,8 +36,8 @@ Gem::Specification.new do |s|
   s.add_dependency "slim-rails", "~> 3.2"
   s.add_dependency "sprockets-rails", "~> 2.3"
   s.add_dependency "view_component", "~> 2.23"
-  s.add_dependency "webpacker", "~> 4.2"
-  s.add_dependency "webpacker-react", "~> 0.3"
+  s.add_dependency "webpacker", "~> 4.3"
+  s.add_dependency "webpacker-react", "~> 0.3.2"
 
   s.add_development_dependency "better_errors", "2.5.1"
   s.add_development_dependency "binding_of_caller", "0.8.0"
