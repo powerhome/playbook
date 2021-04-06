@@ -38,9 +38,6 @@
 
   &[class*=_horizontal]  {
     align-items: center;
-    .content_wrapper > * {
-      padding: 0 0 0 0;
-    }
 
     &[class*=_center]  {
       justify-content: center;
