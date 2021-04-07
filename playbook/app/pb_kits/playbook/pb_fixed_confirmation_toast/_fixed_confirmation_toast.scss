@@ -47,6 +47,15 @@ $confirmation_toast_colors: (
       .pb_icon {
         color: $white;
       }
+
+      &[class*=_multi_line]  {
+        .pb_fixed_confirmation_toast_text {
+          color: $white;
+          margin: 0 $space_md 0 $space_md;
+          max-width: 100%;
+          white-space: break-spaces;
+        }
+      }
     }
   }
 }
