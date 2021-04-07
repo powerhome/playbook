@@ -7,6 +7,8 @@ module Playbook
                     values: %w[success error neutral tip],
                     default: "neutral"
       prop :text, type: Playbook::Props::String
+      prop :multi_line, type: Playbook::Props::Boolean,
+                       default: false
       prop :closeable, type: Playbook::Props::Boolean,
                        default: false
 
@@ -16,6 +18,10 @@ module Playbook
 
       def close_class
         closeable.present? ? " remove_toast" : ""
+      end
+
+      def multi_line_class
+        multi_line.present? ? "_multi_line" : ""
       end
 
       def icon_value
@@ -32,7 +38,7 @@ module Playbook
       end
 
       def classname
-        generate_classname("pb_fixed_confirmation_toast_kit", status) + close_class
+        generate_classname("pb_fixed_confirmation_toast_kit", status) + multi_line_class + close_class
       end
     end
   end
