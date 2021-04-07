@@ -21,7 +21,7 @@ type PassphraseProps = {
   label?: string,
   minLength?: number,
   onChange: (String) => void,
-  showTipsBelow?: 'always' | "xs" | "sm" | "md" | "lg" | "xl",
+  showTipsBelow?: 'always' | 'xs' | 'sm' | 'md' | 'lg' | 'xl',
   onStrengthChange?: (number) => void,
   strongThreshold?: number,
   tips?: Array<string>,

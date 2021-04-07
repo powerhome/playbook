@@ -1,16 +1,16 @@
 <%= pb_rails("passphrase", props: {
   input_props: {
-    name: "my-disabled-field",
-    id: "my-disabled-passphrase",
     disabled: true
+    id: "my-disabled-passphrase",
+    name: "my-disabled-field",
   },
   label: "Input props passed directly to input kit"
 }) %>
 
 <%= pb_rails("passphrase", props: {
   input_props: {
-    name: "my-value-name",
     id: "my-custome-id",
+    name: "my-value-name",
   },
-  label: "Set name, id, ect for use in forms"
+  label: "Set name, id, etc for use in forms"
 }) %>
