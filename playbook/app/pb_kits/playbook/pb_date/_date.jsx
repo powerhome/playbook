@@ -100,9 +100,9 @@ const PbDate = (props: PbDateProps) => {
                 tag="span"
             >
               <Icon
-                  size='xs'
                   fixedWidth
                   icon="calendar-alt"
+                  size="xs"
               />
             </Caption>
           </If>
