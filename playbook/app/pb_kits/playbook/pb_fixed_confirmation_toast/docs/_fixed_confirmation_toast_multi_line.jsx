@@ -7,7 +7,7 @@ const FixedConfirmationToastMultiLine = (props) => {
       <FixedConfirmationToast
           multiLine
           status="tip"
-          text={'Scan to Assign Selected Items. Click here to generate report'}
+          text="Scan to Assign Selected Items. Click here to generate report"
           {...props}
       />
     </div>

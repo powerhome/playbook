@@ -26,7 +26,7 @@ const FixedConfirmationToast = (props: FixedConfirmationToastProps) => {
   const [showToast, toggleToast] = useState(true)
   const { className, closeable = false, multiLine = false, status = 'neutral', text } = props
   const css = classnames(
-    `pb_fixed_confirmation_toast_kit_${status}${multiLine === true ? "_multi_line" : ""}`,
+    `pb_fixed_confirmation_toast_kit_${status}${multiLine === true ? '_multi_line' : ''}`,
     globalProps(props),
     className
   )
