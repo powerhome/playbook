@@ -26,6 +26,7 @@ kits:
     - form
     - form_group
     - form_pill
+    - passphrase
     - radio
     - select
     - selectable_card
@@ -52,7 +53,6 @@ kits:
     - badge
     - hashtag
     - pill
-  - passphrase
   - popover
   - progress:
     - progress_pills
