@@ -51,13 +51,13 @@
         display: none;
       }
     }
+  }
 
-    + .pb_progress_simple_wrapper, + .pb_progress_simple_wrapper_dark {
-      margin-bottom: 4px;
+  .pb_progress_simple_wrapper, .pb_progress_simple_wrapper_dark {
+    margin-bottom: 4px;
 
-      &.progress-empty-input {
-        visibility: hidden;
-      }
+    &.progress-empty-input {
+      visibility: hidden;
     }
   }
 }

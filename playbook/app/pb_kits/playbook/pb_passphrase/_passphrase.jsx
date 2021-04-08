@@ -111,78 +111,80 @@ const Passphrase = (props: PassphraseProps) => {
         className={classes}
         id={id}
     >
-      <Flex align="baseline">
-        <Caption
-            className="passphrase-label"
-            text={label}
-        />
-        <If condition={tips.length > 0 && !confirmation}>
-          <PbReactPopover
-              placement="right"
-              reference={popoverReference}
-              show={showPopover}
-          >
-            <Flex
-                align="center"
-                orientation="column"
+      <label>
+        <Flex align="baseline">
+          <Caption
+              className="passphrase-label"
+              text={label}
+          />
+          <If condition={tips.length > 0 && !confirmation}>
+            <PbReactPopover
+                placement="right"
+                reference={popoverReference}
+                show={showPopover}
             >
-              <Caption
-                  marginBottom="xs"
-                  text="Tips for a good passphrase"
-              />
-              <div>
-                {
-                  tips.map((tip, i) => (
-                    <Caption
-                        key={i}
-                        marginBottom="xs"
-                        size="xs"
-                    >
-                      <Icon
-                          icon="shield-check"
-                          marginRight="xs"
-                      />
-                      {tip}
-                    </Caption>
-                  ))
-                }
-              </div>
-            </Flex>
-          </PbReactPopover>
-        </If>
-      </Flex>
-      <div className="passphrase-text-input-wrapper">
-        <TextInput
-            className="passphrase-text-input"
-            dark={dark}
-            marginBottom="xs"
-            onChange={handleChange}
-            placeholder="Enter a passphrase..."
-            type={showPassphrase ? 'text' : 'password'}
-            value={displayValue}
-            {...inputProps}
-        />
-        <span
-            className="show-passphrase-icon"
-            dark={dark}
-            onClick={toggleShowPassphrase}
-        >
-          <Body
-              className={showPassphrase ? 'hide-icon' : ''}
-              color="light"
+              <Flex
+                  align="center"
+                  orientation="column"
+              >
+                <Caption
+                    marginBottom="xs"
+                    text="Tips for a good passphrase"
+                />
+                <div>
+                  {
+                    tips.map((tip, i) => (
+                      <Caption
+                          key={i}
+                          marginBottom="xs"
+                          size="xs"
+                      >
+                        <Icon
+                            icon="shield-check"
+                            marginRight="xs"
+                        />
+                        {tip}
+                      </Caption>
+                    ))
+                  }
+                </div>
+              </Flex>
+            </PbReactPopover>
+          </If>
+        </Flex>
+        <div className="passphrase-text-input-wrapper">
+          <TextInput
+              className="passphrase-text-input"
               dark={dark}
-          >
-            <Icon icon="eye-slash" />
-          </Body>
-          <Body
-              className={showPassphrase ? '' : 'hide-icon'}
-              color="light"
+              marginBottom="xs"
+              onChange={handleChange}
+              placeholder="Enter a passphrase..."
+              type={showPassphrase ? 'text' : 'password'}
+              value={displayValue}
+              {...inputProps}
+          />
+          <span
+              className="show-passphrase-icon"
               dark={dark}
+              onClick={toggleShowPassphrase}
           >
-            <Icon icon="eye" />
-          </Body>
-        </span>
-      </div>
+            <Body
+                className={showPassphrase ? 'hide-icon' : ''}
+                color="light"
+                dark={dark}
+            >
+              <Icon icon="eye-slash" />
+            </Body>
+            <Body
+                className={showPassphrase ? '' : 'hide-icon'}
+                color="light"
+                dark={dark}
+            >
+              <Icon icon="eye" />
+            </Body>
+          </span>
+        </div>
+      </label>
       <If condition={!confirmation}>
         <ProgressSimple
             className={displayValue.length === 0 ? 'progress-empty-input' : null}
