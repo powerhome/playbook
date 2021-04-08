@@ -5,8 +5,8 @@ import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import classnames from 'classnames'
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
 import { globalProps } from '../utilities/globalProps.js'
-import { Body, Caption, Flex, Icon, PbReactPopover, ProgressSimple, TextInput } from '../'
 import { zxcvbnPasswordScore }  from './passwordStrength.js'
+import { Body, Caption, Flex, Icon, PbReactPopover, ProgressSimple, TextInput } from '../'
 
 type PassphraseProps = {
   aria?: object,

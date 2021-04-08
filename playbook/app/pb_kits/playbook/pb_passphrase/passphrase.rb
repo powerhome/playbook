@@ -12,11 +12,6 @@ module Playbook
       prop :strong_threshold
       prop :tips, type: Playbook::Props::Array, default: []
 
-      # prop :on_strength_change
-      # might not need these?
-      # prop :common
-      # prop :on_change
-
       def classname
         generate_classname("pb_passphrase")
       end
