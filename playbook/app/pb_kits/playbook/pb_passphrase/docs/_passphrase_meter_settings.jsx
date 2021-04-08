@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Passphrase, TextInput } from '../../'
+import { Body, Passphrase, TextInput } from '../../'
 
 const PassphraseMeterSettings = (props) => {
   const [input, setInput] = useState('')
@@ -11,12 +11,17 @@ const PassphraseMeterSettings = (props) => {
   return (
     <>
       <div>
+        <Body>
+          {'These examples will all share the same input value. Type in any of the inputs to see how the strength meter changes in response to different settings.'}
+        </Body>
+        <br />
         <TextInput
             disabled
             label="Calculated Strength"
             readOnly
             value={strength}
         />
+
         <Passphrase
             label="Default settings"
             onChange={handleChange}
