@@ -1,16 +1,16 @@
 
 
-## [Unreleased](https://github.com/powerhome/playbook/tree/HEAD)
+## [9.2.2](https://github.com/powerhome/playbook/tree/HEAD)
 
 [Full Changelog](https://github.com/powerhome/playbook/compare/9.2.1...HEAD)
 
-**Merged pull requests:**
+**Fixed Bugs:**
 
 - Fix Rich text Focus State [\#1444](https://github.com/powerhome/playbook/pull/1444) ([kre8sions](https://github.com/kre8sions))
 
 
 
-## [Unreleased](https://github.com/powerhome/playbook/tree/HEAD)
+## [9.2.1](https://github.com/powerhome/playbook/tree/9.2.1) (2021-04-07)
 
 [Full Changelog](https://github.com/powerhome/playbook/compare/9.2.0...HEAD)
 
