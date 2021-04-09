@@ -84,7 +84,7 @@
     "axe-core": "^4.1.1",
     "circular-dependency-plugin": "^5.2.2",
     "clean-webpack-plugin": "2.0.2",
-    "copy-webpack-plugin": "6.2.1",
+    "copy-webpack-plugin": "6.4.1",
     "css-loader": "^3.6.0",
     "css-modules-flow-types-loader": "^0.3.1",
     "es5-shim": "^4.5.9",
