@@ -92,7 +92,7 @@
     "eslint-plugin-flowtype": "4.4.1",
     "eslint-plugin-jsx-control-statements": "2.2.1",
     "eslint-plugin-react": "git://github.com/rafbgarcia/eslint-plugin-react#fix-other-curly-brace-presence-edge-cases",
-    "flow-bin": "0.137.0",
+    "flow-bin": "0.148.0",
     "flow-runtime": "0.14.0",
     "husky": "3.1.0",
     "identity-obj-proxy": "^3.0.0",
