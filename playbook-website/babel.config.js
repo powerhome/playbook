@@ -25,7 +25,6 @@ module.exports = function(api) {
           },
           modules: 'commonjs'
         },
-        '@babel/preset-react'
       ],
       (isProductionEnv || isDevelopmentEnv) && [
         '@babel/preset-env',
@@ -37,6 +36,7 @@ module.exports = function(api) {
           exclude: ['transform-typeof-symbol']
         }
       ],
+      '@babel/preset-flow',
       [
         '@babel/preset-react',
         {
@@ -50,6 +50,8 @@ module.exports = function(api) {
       '@babel/plugin-syntax-dynamic-import',
       isTestEnv && 'babel-plugin-dynamic-import-node',
       '@babel/plugin-transform-destructuring',
+      'babel-plugin-jsx-control-statements',
+      '@babel/plugin-proposal-export-default-from',
       [
         '@babel/plugin-proposal-class-properties',
         {

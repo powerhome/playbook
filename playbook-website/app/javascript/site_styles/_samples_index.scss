@@ -1,0 +1,67 @@
+@import "playbook-ui/dist/tokens/spacing";
+@import "playbook-ui/dist/tokens/colors";
+@import "playbook-ui/dist/tokens/border_radius";
+@import "playbook-ui/dist/tokens/screen_sizes";
+@import "playbook-ui/dist/tokens/shadows";
+
+.samples_index {
+  .header-text {
+    max-width: 600px;
+    margin: auto;
+  }
+  .list {
+    padding-left: $space_lg;
+    border-left: $border_light solid 1px;
+    margin-top: $space_md;
+    min-width: 300px;
+  }
+  .main-content-wrapper {
+    max-width: 1000px;
+    margin: auto;
+  }
+  // Background padding override
+  .pb_background_kit {
+    padding: $space_xl * 1.75 !important;
+  }
+  .preview {
+    margin-right: $space_lg;
+  }
+  .sample_screenshot {
+    width: (1168px / 4);
+    height: (815px / 4);
+    border-radius: $border_rad_heaviest;
+    box-shadow: $shadow_deep;
+  }
+  .sample-card-grid-override {
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)) !important;
+  }
+  // Mobile Styles
+  @include break_at(731px){
+    .list {
+      padding-left: 0;
+      border-left: none;
+      margin-top: $space_lg;
+      min-width: auto;
+    }
+    .pb_background_kit {
+      padding: $space_xl !important;
+    }
+    .preview {
+      margin-right: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .samples_flex_wrapper {
+      flex-direction: column;
+      align-items: center;
+    }
+  }
+  // Resize image dynamically
+  @include break_at(388px){
+    .sample_screenshot {
+      width: 100%;
+      height: 100%;
+    }
+  }
+}
