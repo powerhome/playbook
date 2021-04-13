@@ -85,8 +85,8 @@ const config = {
       path.resolve(__dirname, 'config/webpack/loaders')
     ],
   },
-  optimization: (env) => {
-    return { minimize: env.development ? false : true }
+  optimization: () => {
+    return { minimize: process.env.NODE_ENV === 'development' ? false : true }
   },
   output: {
     libraryTarget: 'commonjs2',
@@ -112,19 +112,6 @@ const config = {
         BABEL_JS_CONFIG,
         svgUrlLoader
       ],
-    },
-    js: {
-      rules: [
-        {
-          test: /\.scss$/i,
-          use: [
-            CSS_LOADER_CONFIG,
-            SASS_LOADER_CONFIG,
-          ],
-        },
-        BABEL_JS_CONFIG,
-        svgUrlLoader
-      ]
     }
   }
 }
@@ -133,12 +120,12 @@ new webpack.DefinePlugin({
   'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
 })
 
-const mainConfig = (env) => {
+const mainConfig = () => {
   return {
     mode: 'production',
     resolve: config.resolve,
     resolveLoader: config.resolveLoader,
-    optimization: config.optimization(env),
+    optimization: config.optimization(),
     externals: config.externals,
     entry: {
       'playbook-react': './app/pb_kits/playbook/index.js',
@@ -155,12 +142,12 @@ const mainConfig = (env) => {
   }
 }
 
-const docsConfig = (env) => {
+const docsConfig = () => {
   return {
     mode: 'production',
     resolve: config.resolve,
     resolveLoader: config.resolveLoader,
-    optimization: config.optimization(env),
+    optimization: config.optimization(),
     externals: config.externals,
     entry: {
       'playbook-doc': './app/pb_kits/playbook/packs/react-examples.js',
@@ -171,7 +158,7 @@ const docsConfig = (env) => {
       path: config.output.path,
     },
     plugins: config.plugins(),
-    module: config.module.js,
+    module: config.module.main,
     resolve: config.resolve
   }
 }
