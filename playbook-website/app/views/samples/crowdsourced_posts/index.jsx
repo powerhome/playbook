@@ -1,6 +1,6 @@
 import React from 'react'
-import FlexItem from '../../../../../../app/pb_kits/playbook/pb_flex/_flex_item.jsx'
 import {
+  FlexItem,
   Background,
   Badge,
   Body,
@@ -18,7 +18,7 @@ import {
   SectionSeparator,
   TextInput,
   Title,
-} from '../../../../../../app/pb_kits/playbook'
+} from 'playbook-ui'
 
 const trendingStories = [
   {
