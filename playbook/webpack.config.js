@@ -1,7 +1,6 @@
 const path = require('path')
 
 const webpack = require('webpack')
-const svgUrlLoader = require('./config/webpack/loaders/svg.js')
 
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
@@ -57,12 +56,36 @@ const SASS_LOADER_CONFIG = {
   }
 }
 
-const config = {
+const SVG_URL_LOADER = {
+  test: /\.svg$/,
+  exclude: /node_modules/,
+  use: [
+    {
+      loader: 'svg-url-loader',
+      options: {
+        limit: 10000,
+      },
+    },
+  ],
+}
+
+new webpack.DefinePlugin({
+  'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
+})
+
+module.exports = {
+  mode: 'production',
+  entry: {
+    'playbook-react': './app/pb_kits/playbook/index.js',
+    'playbook-rails': './app/pb_kits/playbook/vendor.js',
+    'playbook-doc': './app/pb_kits/playbook/playbook-doc.js',
+    'reset.css': './app/pb_kits/playbook/_reset.scss',
+  },
   externals: {
-    react: 'react',
-    'react-dom': 'react-dom',
-    trix: 'trix',
-    'webpacker-react': 'webpacker-react',
+    'react': 'commonjs react',
+    'react-dom': 'commonjs react-dom',
+    'trix': 'commonjs trix',
+    'webpacker-react': 'commonjs webpacker-react',
   },
   resolve: {
     extensions: [
@@ -85,82 +108,28 @@ const config = {
       path.resolve(__dirname, 'config/webpack/loaders')
     ],
   },
-  optimization: () => {
-    return { minimize: process.env.NODE_ENV === 'development' ? false : true }
-  },
+  optimization: { minimize: process.env.NODE_ENV === 'development' ? false : true },
   output: {
     libraryTarget: 'commonjs2',
+    filename: '[name].js',
     path: path.resolve(__dirname, 'dist')
   },
-  plugins: () => {
-    let pluginList = []
-    pluginList.push(new MiniCssExtractPlugin({ filename: '[name].css' }))
-    pluginList.push(COPY_PLUGIN_CONFIG)
-    return pluginList
-  },
+  plugins: [
+    new MiniCssExtractPlugin({ filename: '[name].css' }),
+    COPY_PLUGIN_CONFIG,
+  ],
   module: {
-    main: {
-      rules: [
-        {
-          test: /\.scss$/i,
-          use: [
-            MiniCssExtractPlugin.loader,
-            CSS_LOADER_CONFIG,
-            SASS_LOADER_CONFIG,
-          ],
-        },
-        BABEL_JS_CONFIG,
-        svgUrlLoader
-      ],
-    }
+    rules: [
+      {
+        test: /\.scss$/i,
+        use: [
+          MiniCssExtractPlugin.loader,
+          CSS_LOADER_CONFIG,
+          SASS_LOADER_CONFIG,
+        ],
+      },
+      BABEL_JS_CONFIG,
+      SVG_URL_LOADER,
+    ],
   }
 }
-
-new webpack.DefinePlugin({
-  'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
-})
-
-const mainConfig = () => {
-  return {
-    mode: 'production',
-    resolve: config.resolve,
-    resolveLoader: config.resolveLoader,
-    optimization: config.optimization(),
-    externals: config.externals,
-    entry: {
-      'playbook-react': './app/pb_kits/playbook/index.js',
-      'playbook-rails': './app/pb_kits/playbook/vendor.js',
-    },
-    output: {
-      libraryTarget: config.output.libraryTarget,
-      filename: '[name].js',
-      path: config.output.path,
-    },
-    plugins: config.plugins(),
-    module: config.module.main,
-    resolve: config.resolve
-  }
-}
-
-const docsConfig = () => {
-  return {
-    mode: 'production',
-    resolve: config.resolve,
-    resolveLoader: config.resolveLoader,
-    optimization: config.optimization(),
-    externals: config.externals,
-    entry: {
-      'playbook-doc': './app/pb_kits/playbook/packs/react-examples.js',
-    },
-    output: {
-      libraryTarget: 'amd',
-      filename: '[name].js',
-      path: config.output.path,
-    },
-    plugins: config.plugins(),
-    module: config.module.main,
-    resolve: config.resolve
-  }
-}
-
-module.exports = [mainConfig, docsConfig]
