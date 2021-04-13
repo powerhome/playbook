@@ -9,8 +9,8 @@ module Playbook
       prop :get_option_value
       prop :id
       prop :label
-      prop :loading, type: Playbook::Props::Boolean, default: false
       prop :load_options
+      prop :loading, type: Playbook::Props::Boolean, default: false
       prop :name
       prop :options, type: Playbook::Props::HashArray, default: []
       prop :pills, type: Playbook::Props::Boolean, default: false
