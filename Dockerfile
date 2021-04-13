@@ -19,20 +19,23 @@ RUN curl -o- https://raw.githubusercontent.com/creationix/nvm/$NVM_VERSION/insta
     && nvm use default \
     && npm install -g npm@$NPM_VERSION yarn@$YARN_VERSION
 
+RUN apt-get update -y \
+    && apt-get install -y shared-mime-info=1.5-2ubuntu0.2\
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
 WORKDIR /home/app/src
 
-ADD lib/playbook/version.rb /home/app/src/lib/playbook/
-ADD Gemfile* *.gemspec /home/app/src/
+# Dependencies
+COPY --chown=app:app playbook /home/app/src/playbook
+
+# Yarn
+WORKDIR /home/app/src/playbook
 RUN bundle install --frozen
-
-ADD package.json yarn.lock /home/app/src/
 RUN yarn install
-RUN curl https://github.com/sass/node-sass/releases/download/v4.13.0/linux-x64-64_binding.node -o /home/app/src/node_modules/node-sass/vendor/linux-x64-64_binding.node
+RUN curl https://github.com/sass/node-sass/releases/download/v4.13.0/linux-x64-64_binding.node -o node_modules/node-sass/vendor/linux-x64-64_binding.node
 
-COPY ./startup.sh /
-RUN chmod +x /startup.sh
+RUN chmod +x services/*.sh
+RUN mkdir /etc/service/puma && ln -s /home/app/src/playbook/services/puma.sh /etc/service/puma/run
 
-ADD --chown=app:app . /home/app/src
-RUN mkdir /etc/service/puma && ln -s /home/app/src/services/puma.sh /etc/service/puma/run
-
-RUN /startup.sh $precompileassets
+RUN services/startup.sh $precompileassets
