@@ -42,19 +42,15 @@ module Playbook
           id: id,
           isMulti: true,
           label: label,
+          loading: loading,
           name: name,
           options: options,
           placeholder: placeholder,
         }
 
-        base_options.merge!({getOptionLabel: get_option_label}) if get_option_label.present?
-        base_options.merge!({getOptionValue: get_option_value}) if get_option_value.present?
-
-        base_options.merge!({
-          async: true,
-          loadOptions: load_options,
-        }) if async
-
+        base_options.merge!({ getOptionLabel: get_option_label }) if get_option_label.present?
+        base_options.merge!({ getOptionValue: get_option_value }) if get_option_value.present?
+        base_options.merge!({ async: true, loadOptions: load_options }) if async
         base_options
       end
     end
