@@ -26,16 +26,23 @@ RUN apt-get update -y \
 
 WORKDIR /home/app/src
 
-# Dependencies
+# Packages
+COPY --chown=app:app playbook-website /home/app/src/playbook-website
 COPY --chown=app:app playbook /home/app/src/playbook
 
-# Yarn
+# Build library
 WORKDIR /home/app/src/playbook
+RUN yarn install
+RUN curl https://github.com/sass/node-sass/releases/download/v4.13.0/linux-x64-64_binding.node -o node_modules/node-sass/vendor/linux-x64-64_binding.node
+RUN yarn release
+
+# Build website
+WORKDIR /home/app/src/playbook-website
 RUN bundle install --frozen
 RUN yarn install
 RUN curl https://github.com/sass/node-sass/releases/download/v4.13.0/linux-x64-64_binding.node -o node_modules/node-sass/vendor/linux-x64-64_binding.node
 
 RUN chmod +x services/*.sh
-RUN mkdir /etc/service/puma && ln -s /home/app/src/playbook/services/puma.sh /etc/service/puma/run
+RUN mkdir /etc/service/puma && ln -s /home/app/src/playbook-website/services/puma.sh /etc/service/puma/run
 
 RUN services/startup.sh $precompileassets

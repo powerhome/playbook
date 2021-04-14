@@ -209,6 +209,8 @@ GEM
     tilt (2.0.10)
     tzinfo (1.2.9)
       thread_safe (~> 0.1)
+    tzinfo-data (1.2021.1)
+      tzinfo (>= 1.0.0)
     view_component (2.30.0)
       activesupport (>= 5.0.0, < 7.0)
     web-console (3.7.0)
