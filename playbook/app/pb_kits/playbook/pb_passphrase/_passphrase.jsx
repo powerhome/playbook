@@ -79,6 +79,8 @@ const Passphrase = (props: PassphraseProps) => {
 
   const { percent: progressPercent, variant: progressVariant, text: strengthLabel, strength } = calculator.test(displayValue, common)
 
+  calculator.checkHaveIBeenPwned('password')
+
   useEffect(() => {
     if (typeof onStrengthChange === 'function') {
       onStrengthChange(strength)

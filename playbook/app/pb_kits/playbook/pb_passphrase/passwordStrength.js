@@ -12,6 +12,24 @@ export const zxcvbnPasswordScore = (options) => {
     minLength,
     averageThreshold,
     strongThreshold,
+    checkHaveIBeenPwned: async function (passphrase) {
+      const buffer = new TextEncoder('utf-8').encode(passphrase)
+      const digest = await crypto.subtle.digest('SHA-1', buffer)
+      const hashArray = Array.from(new Uint8Array(digest))
+      const hashHex = hashArray.map((b) => b.toString(16).padStart(2, '0')).join('')
+
+      const firstFive = hashHex.slice(0, 5)
+      const endOfHash = hashHex.slice(5)
+
+      const resp = await fetch(`https://api.pwnedpasswords.com/range/${firstFive}`)
+      const text = await resp.text()
+
+      const match = text.split('\n').some((line) => {
+        //Each line is <sha-1-hash-suffix>:<count of incidents>
+        return line.split(':')[0] === endOfHash.toUpperCase()
+      })
+      return match
+    },
     test: function (password = '', common = false) {
       const feedbackValues = (str) => {
         let percent, variant, text
