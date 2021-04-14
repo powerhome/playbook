@@ -3,8 +3,6 @@
 import React, { useEffect } from 'react'
 import { Typeahead } from 'playbook-ui'
 
-window.KitSearchReact = React;
-
 type SearchProps = {
   classname: String,
   kits: Array,
