@@ -21,7 +21,7 @@ module Playbook
       end
 
       def multi_line_class
-        multi_line.present? ? "_multi_line" : ""
+        multi_line.present? ? "multi_line" : ""
       end
 
       def icon_value
@@ -38,7 +38,7 @@ module Playbook
       end
 
       def classname
-        generate_classname("pb_fixed_confirmation_toast_kit", status) + multi_line_class + close_class
+        generate_classname("pb_fixed_confirmation_toast_kit", status, multi_line_class) + close_class
       end
     end
   end
