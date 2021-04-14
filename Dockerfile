@@ -32,6 +32,7 @@ COPY --chown=app:app playbook /home/app/src/playbook
 
 # Build library
 WORKDIR /home/app/src/playbook
+RUN bundle install --frozen
 RUN yarn install
 RUN curl https://github.com/sass/node-sass/releases/download/v4.13.0/linux-x64-64_binding.node -o node_modules/node-sass/vendor/linux-x64-64_binding.node
 RUN yarn release
