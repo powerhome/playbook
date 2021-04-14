@@ -10,7 +10,6 @@ module Playbook
       prop :id
       prop :label
       prop :load_options
-      prop :loading, type: Playbook::Props::Boolean, default: false
       prop :name
       prop :options, type: Playbook::Props::HashArray, default: []
       prop :pills, type: Playbook::Props::Boolean, default: false
@@ -20,11 +19,7 @@ module Playbook
       prop :value
 
       def classname
-        generate_classname("pb_typeahead_kit", loading_class)
-      end
-
-      def loading_class
-        loading ? "loading" : nil
+        generate_classname("pb_typeahead_kit")
       end
 
       def data
@@ -42,7 +37,6 @@ module Playbook
           id: id,
           isMulti: true,
           label: label,
-          loading: loading,
           name: name,
           options: options,
           placeholder: placeholder,

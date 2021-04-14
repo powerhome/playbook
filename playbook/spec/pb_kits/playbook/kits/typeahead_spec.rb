@@ -14,7 +14,6 @@ RSpec.describe Playbook::PbTypeahead::Typeahead do
   it { is_expected.to define_prop(:id) }
   it { is_expected.to define_prop(:label) }
   it { is_expected.to define_prop(:load_options) }
-  it { is_expected.to define_boolean_prop(:loading).with_default(false) }
   it { is_expected.to define_prop(:name) }
   it { is_expected.to define_prop(:options)
                       .of_type(Playbook::Props::HashArray)
@@ -28,7 +27,6 @@ RSpec.describe Playbook::PbTypeahead::Typeahead do
   describe "#classname" do
     it "returns namespaced class name", :aggregate_failures do
       expect(subject.new({}).classname).to eq "pb_typeahead_kit"
-      expect(subject.new(classname: "loading").classname).to eq "pb_typeahead_kit loading"
     end
   end
 end
