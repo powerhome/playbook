@@ -5,7 +5,8 @@ import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import classnames from 'classnames'
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
 import { globalProps } from '../utilities/globalProps.js'
-import { zxcvbnPasswordScore }  from './passwordStrength.js'
+import { zxcvbnPasswordScore }  from './passwordStrength'
+import useHaveIBeenPwned from './useHaveIBeenPwned'
 import { Body, Caption, Flex, Icon, PbReactPopover, ProgressSimple, TextInput } from '../'
 
 type PassphraseProps = {
@@ -43,7 +44,7 @@ const Passphrase = (props: PassphraseProps) => {
     id,
     inputProps = {},
     label = confirmation ? 'Confirm Passphrase' : 'Passphrase',
-    minLength,
+    minLength = 12,
     onChange = () => {},
     showTipsBelow = 'always',
     onStrengthChange,
@@ -75,11 +76,16 @@ const Passphrase = (props: PassphraseProps) => {
   const classes = classnames(buildCss('pb_passphrase'), globalProps(props), className)
 
   const calculator = useMemo(
-    () => confirmation ? { test: () => ({}) } : zxcvbnPasswordScore({ averageThreshold, checkPwned, minLength, strongThreshold }),
+    () => confirmation ? { test: () => ({}) } : zxcvbnPasswordScore({ averageThreshold, minLength, strongThreshold }),
     [averageThreshold, confirmation, strongThreshold, minLength]
   )
 
-  const { percent: progressPercent, variant: progressVariant, text: strengthLabel, strength } = calculator.test(displayValue, common)
+  const isPwned = checkPwned ? useHaveIBeenPwned(displayValue, minLength) : false
+
+  const { percent: progressPercent, variant: progressVariant, text: strengthLabel, strength } = useMemo(
+    () => calculator.test(displayValue, common, isPwned),
+    [displayValue, common, isPwned]
+  )
 
   useEffect(() => {
     if (typeof onStrengthChange === 'function') {
