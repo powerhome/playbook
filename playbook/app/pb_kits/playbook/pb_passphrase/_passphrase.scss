@@ -5,6 +5,10 @@
 .pb_passphrase {
   margin-bottom: $space_sm;
 
+  label {
+    display: inline;
+  }
+
   a.dark {
     color: $white;
   }
