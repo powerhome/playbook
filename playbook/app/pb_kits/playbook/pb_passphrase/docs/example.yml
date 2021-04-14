@@ -13,3 +13,4 @@ examples:
   - passphrase_tips: Tips
   - passphrase_strength_change: Strength Change
   - passphrase_common: Common Passphrases
+  - passphrase_breached: Breached Passphrases

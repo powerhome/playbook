@@ -11,6 +11,7 @@ import { Body, Caption, Flex, Icon, PbReactPopover, ProgressSimple, TextInput } 
 type PassphraseProps = {
   aria?: object,
   averageThreshold?: number,
+  checkPwned?: boolean,
   common?: boolean,
   confirmation?: boolean,
   className?: string,
@@ -33,6 +34,7 @@ const Passphrase = (props: PassphraseProps) => {
   const {
     aria = {},
     averageThreshold = 2,
+    checkPwned = false,
     className,
     common = false,
     confirmation = false,
@@ -73,13 +75,11 @@ const Passphrase = (props: PassphraseProps) => {
   const classes = classnames(buildCss('pb_passphrase'), globalProps(props), className)
 
   const calculator = useMemo(
-    () => confirmation ? { test: () => ({}) } : zxcvbnPasswordScore({ averageThreshold, strongThreshold, minLength }),
+    () => confirmation ? { test: () => ({}) } : zxcvbnPasswordScore({ averageThreshold, checkPwned, minLength, strongThreshold }),
     [averageThreshold, confirmation, strongThreshold, minLength]
   )
 
   const { percent: progressPercent, variant: progressVariant, text: strengthLabel, strength } = calculator.test(displayValue, common)
-
-  calculator.checkHaveIBeenPwned('password')
 
   useEffect(() => {
     if (typeof onStrengthChange === 'function') {

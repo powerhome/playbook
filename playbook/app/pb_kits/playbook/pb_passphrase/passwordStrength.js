@@ -3,6 +3,7 @@ import zxcvbn from 'zxcvbn'
 export const zxcvbnPasswordScore = (options) => {
   const {
     calculate = zxcvbn,
+    checkPwned,
     averageThreshold = 2,
     strongThreshold = 3,
     minLength = 12,
@@ -33,6 +34,12 @@ export const zxcvbnPasswordScore = (options) => {
     test: function (password = '', common = false) {
       const feedbackValues = (str) => {
         let percent, variant, text
+
+        if (checkPwned) {
+          // TODO: respond to this value
+          // console.log('checking if passphrase is pwned')
+          // this.checkHaveIBeenPwned(password).then((pwned) => console.log('pwned: ', pwned))
+        }
 
         if (password.length <= 0) {
           percent = '0'
