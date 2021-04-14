@@ -53,9 +53,10 @@ const Checkbox = (props: CheckboxProps) => {
 
   useEffect(() => {
     if (checkRef.current) {
+      checkRef.current.checked = checked
       checkRef.current.indeterminate = indeterminate
     }
-  }, [indeterminate])
+  }, [indeterminate, checked])
 
   return (
     <label
