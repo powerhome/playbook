@@ -21,7 +21,7 @@ module Playbook
       end
 
       def multi_line_class
-        multi_line.present? ? "multi_line" : ""
+        multi_line.present? ? "multi_line" : nil
       end
 
       def icon_value

@@ -18,7 +18,7 @@ type FixedConfirmationToastProps = {
   data?: string,
   id?: string,
   multiLine?: boolean,
-  status?: "success" | "error" | "neutral" | "tip",
+  status?: 'success' | 'error' | 'neutral' | 'tip',
   text: string,
 }
 
