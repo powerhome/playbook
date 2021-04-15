@@ -1,5 +1,13 @@
 {
   "name": "playbook-project",
   "private": true,
-  "workspaces": ["playbook", "playbook-website"]
+  "workspaces": {
+    "packages": [
+      "playbook",
+      "playbook-website"
+    ],
+    "nohoist": [
+      "**/@rails/**"
+    ]
+  }
 }
