@@ -1,8 +1,8 @@
 <div class="landing-page">
-  <%= pb_rails("background", props: { classname: "homepage-hero", image_url: image_url("landing-background.svg"), padding: "xl" }) do %>
+  <%= pb_rails("background", props: { classname: "homepage-hero", image_url: asset_pack_path("media/images/landing-background.svg"), padding: "xl" }) do %>
     <%= pb_rails("flex", props: { classname: "flex-container hero-inner-wrapper", horizontal: "center", wrap: true } ) do %>
       <div class="flex-item">
-        <%= image_tag("landing-image.svg", class: "pb-hero-image") %>
+        <%= image_pack_tag("media/images/landing-image.svg", class: "pb-hero-image") %>
       </div>
       <%= pb_rails("flex/flex_item", props: { classname: "hero-text-width", margin_top: "xl" }) do %>
         <%= pb_rails("title", props: { classname: "dark", margin_bottom: "md", text: "Playbook Design System", tag: "h2", size: 2 }) %>

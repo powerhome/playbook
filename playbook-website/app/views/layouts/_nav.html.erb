@@ -7,7 +7,7 @@
       <%= pb_rails("flex", props: { spacing: "between", vertical: "center" }) do %>
         <%= pb_rails("flex/flex_item", props: {}) do %>
           <%= link_to root_url do %>
-            <%= image_tag("pb-logo.svg") %>
+            <%= image_pack_tag("media/images/pb-logo.svg") %>
           <% end %>
           <%= pb_rails("caption", props: { classname: "pb-version-tag", text: Playbook::VERSION }) %>
         <% end %>
@@ -45,7 +45,7 @@
             <div class="pb_circle_icon_button_kit github-nav-icon">
               <a class="pb_button_kit_secondary_inline_enabled" type="button" href="https://github.com/powerhome/playbook" target="_self">
               <span class="pb_button_content">
-                <%= image_tag("github-brands.svg", class: "mt_sm", style: "height:28px;width:28px") %>
+                <%= image_pack_tag("media/images/github-brands.svg", class: "mt_sm", style: "height:28px;width:28px") %>
               </span>
               </a>
             </div>
