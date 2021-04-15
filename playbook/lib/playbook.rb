@@ -1,11 +1,7 @@
 # frozen_string_literal: true
 
-require "action_view"
-require "view_component/engine"
-require "webpacker/react"
-require "sassc-rails"
-
 require "playbook/version"
+require "playbook/engine"
 require "playbook/props"
 require "playbook/forms"
 require "playbook/pb_forms_helper"
@@ -14,7 +10,6 @@ require "playbook/pb_doc_helper"
 require "playbook/kit_base"
 require "playbook/kit_resolver"
 require "playbook/markdown"
-require "playbook/engine"
 
 module Playbook
   ROOT_PATH = Pathname.new(File.join(__dir__, ".."))

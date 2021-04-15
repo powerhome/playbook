@@ -1,5 +1,11 @@
 # frozen_string_literal: true
 
+require "view_component/engine"
+require "action_view/railtie"
+require "view_component/engine"
+require "webpacker/react"
+require "sassc-rails"
+
 module Playbook
   class Engine < ::Rails::Engine
     isolate_namespace Playbook
