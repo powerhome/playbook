@@ -5,9 +5,6 @@
     "packages": [
       "playbook",
       "playbook-website"
-    ],
-    "nohoist": [
-      "**/@rails/**"
     ]
   }
 }
