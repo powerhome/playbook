@@ -18,7 +18,6 @@ Rails.application.routes.draw do
   get 'guides',     to: "guides#create_kit"
   get 'guides/use-in-nitro', to: "guides#use_nitro"
 
-
   # Full Page Samples Get Generated Here
   get 'samples/:name', to: "samples#sample_show_rails", as: 'sample_show'
   get 'samples/:name/rails', to: "samples#sample_show_rails", as: 'sample_show_rails'
