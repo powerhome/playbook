@@ -7,7 +7,7 @@ environment.optimization = {
   minimize: true,
   minimizer: [new TerserPlugin({
     cache: true,
-    sourceMap: true,
+    sourceMap: false,
   })],
 }
 
