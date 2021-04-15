@@ -7,6 +7,7 @@ const ProgressPillsStatus = (props) => {
     <div>
       <ProgressPills
           active={2}
+          aria={{ label: '2 out of 3 steps complete' }}
           steps={3}
           title="Status:"
           value="Orientation"
