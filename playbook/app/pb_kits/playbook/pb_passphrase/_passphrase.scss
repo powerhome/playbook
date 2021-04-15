@@ -50,6 +50,12 @@
       position: absolute;
       right: 11px;
       top: 11px;
+      cursor: pointer;
+      @media (hover:hover) {
+        &:hover .pb_body_kit_light {
+          color: $primary;
+        }
+      }
 
       .hide-icon {
         display: none;
