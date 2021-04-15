@@ -3,12 +3,12 @@
 import React, { useEffect } from 'react'
 import { Typeahead } from 'playbook-ui'
 
-type SearchProps = {
+type KitSearchProps = {
   classname: String,
   kits: Array,
   id: String,
 }
-const KitSearch = ({ classname, id, kits }: SearchProps) => {
+const KitSearch = ({ classname, id, kits }: KitSearchProps) => {
   useEffect(() => {
     if (id === 'desktop-kit-search') {
       window.addEventListener('keydown', (e) => {

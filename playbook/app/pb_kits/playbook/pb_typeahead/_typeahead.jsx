@@ -3,7 +3,7 @@
 import React from 'react'
 import Select from 'react-select'
 import AsyncSelect from 'react-select/async'
-import { get, isString } from 'lodash'
+import { get, isString, uniqueId } from 'lodash'
 import { globalProps } from '../utilities/globalProps.js'
 
 import Control from './components/Control'
@@ -24,7 +24,8 @@ import { noop } from '../utilities/props'
  * @prop {string} label - the text for the optional typeahead input label
  */
 
-type Props = {
+type TypeaheadProps = {
+  id?: string,
   async?: boolean,
   dark?: boolean,
   label?: string,
@@ -36,10 +37,10 @@ type Props = {
 
 /**
  * @constant {React.ReactComponent} Typeahead
- * @param {Props} props - props as described at https://react-select.com/props
+ * @param {TypeaheadProps} props - props as described at https://react-select.com/props
  */
 
-const Typeahead = ({ loadOptions = noop, getOptionLabel, getOptionValue, async, ...props }: Props) => {
+const Typeahead = ({ loadOptions = noop, getOptionLabel, id, getOptionValue, async, ...props }: TypeaheadProps) => {
   const selectProps = {
     cacheOptions: true,
     components: {
@@ -57,7 +58,7 @@ const Typeahead = ({ loadOptions = noop, getOptionLabel, getOptionValue, async, 
     getOptionLabel: isString(getOptionLabel) ? get(window, getOptionLabel) : getOptionLabel,
     getOptionValue: isString(getOptionValue) ? get(window, getOptionValue) : getOptionValue,
     defaultOptions: true,
-    id: 'react-select-input',
+    id: id || uniqueId(),
     isClearable: true,
     isSearchable: true,
     ...props,
@@ -65,7 +66,7 @@ const Typeahead = ({ loadOptions = noop, getOptionLabel, getOptionValue, async, 
 
   const Tag = async ? AsyncSelect : Select
 
-  const handleOnChange = (data, { action, option, removedValue }) => {
+  const handleOnChange = (_data, { action, option, removedValue }) => {
     if (action === 'select-option') {
       if (selectProps.onMultiValueClick) selectProps.onMultiValueClick(option)
       const multiValueClearEvent = new CustomEvent(`pb-typeahead-kit-${selectProps.id}-result-option-select`, { detail: option })
