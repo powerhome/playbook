@@ -24,25 +24,23 @@ RUN apt-get update -y \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
+# Build Library
 WORKDIR /home/app/src
-
-# Packages
-COPY --chown=app:app playbook-website /home/app/src/playbook-website
-COPY --chown=app:app playbook /home/app/src/playbook
-
-# Build library
-WORKDIR /home/app/src/playbook
-RUN bundle install --frozen
+COPY playbook-website/package.json playbook-website/
+COPY playbook/package.json playbook/
+COPY package.json yarn.lock ./
 RUN yarn install
 RUN curl https://github.com/sass/node-sass/releases/download/v4.13.0/linux-x64-64_binding.node -o node_modules/node-sass/vendor/linux-x64-64_binding.node
-RUN yarn release
+
+COPY --chown=app:app playbook /home/app/src/playbook
+RUN yarn workspace playbook-ui release
 
 # Build website
+COPY --chown=app:app playbook-website /home/app/src/playbook-website
 WORKDIR /home/app/src/playbook-website
 RUN bundle install --frozen
-RUN yarn install
-RUN curl https://github.com/sass/node-sass/releases/download/v4.13.0/linux-x64-64_binding.node -o node_modules/node-sass/vendor/linux-x64-64_binding.node
 
+# Setup service
 RUN chmod +x services/*.sh
 RUN mkdir /etc/service/puma && ln -s /home/app/src/playbook-website/services/puma.sh /etc/service/puma/run
 

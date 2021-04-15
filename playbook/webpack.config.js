@@ -51,7 +51,7 @@ const SASS_LOADER_CONFIG = {
   loader: 'sass-loader',
   options: {
     sassOptions: {
-      includePaths: [path.resolve(__dirname, 'node_modules')],
+      includePaths: [path.resolve(__dirname, '../node_modules')],
     }
   }
 }
@@ -98,12 +98,12 @@ module.exports = {
     ],
     modules: [
       path.resolve(__dirname, 'app/pb_kits/playbook'),
-      path.resolve(__dirname, 'node_modules'),
+      path.resolve(__dirname, '../node_modules'),
     ]
   },
   resolveLoader: {
     modules: [
-      'node_modules',
+      '../node_modules',
       path.resolve(__dirname, 'config/webpack/loaders')
     ],
   },

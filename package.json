@@ -1,2 +1,5 @@
 {
+  "name": "playbook-project",
+  "private": true,
+  "workspaces": ["playbook", "playbook-website"]
 }
