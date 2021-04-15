@@ -8,7 +8,7 @@
 
 **New Kits:**
 
-- \[NUXE-372\] Passphrase Kit [\#1349](https://github.com/powerhome/playbook/pull/1349) ([patmccler](https://github.com/patmccler))
+- Passphrase Kit [\#1349](https://github.com/powerhome/playbook/pull/1349) ([patmccler](https://github.com/patmccler))
 
 ## [9.5.0](https://github.com/powerhome/playbook/tree/9.5.0)
 
