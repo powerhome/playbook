@@ -1,3 +1,13 @@
+## [9.5.0](https://github.com/powerhome/playbook/tree/9.5.0)
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/9.4.0...9.5.0)
+
+**Kit Enhancements:**
+
+- Add aria-labels to Icon kit [\#1387](https://github.com/powerhome/playbook/pull/1387) ([bh247484](https://github.com/bh247484))
+
+
+
 ## [9.4.0](https://github.com/powerhome/playbook/tree/9.4.0)
 
 [Full Changelog](https://github.com/powerhome/playbook/compare/9.3.1...9.4.0)
