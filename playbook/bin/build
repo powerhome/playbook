@@ -6,4 +6,4 @@ set -e
 
 echo ">>> Building"
 time bin/rubocop --display-cop-names --extra-details --parallel --display-style-guide --config .rubocop.yml
-npm run lint
+time yarn lint

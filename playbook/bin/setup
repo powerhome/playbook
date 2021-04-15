@@ -3,11 +3,10 @@
 set -e
 
 echo ">>> Installing dependencies"
-BUNDLE_PATH=${BUNDLE_TO:-$(cd "$(dirname "$0")/../../../vendor/bundle"; pwd)}
 if [ -z $CI ] ; then
   time bundle check || bundle install --quiet
 else
-  time bundle check --path $BUNDLE_PATH || bundle install --path $BUNDLE_PATH --deployment
+  time bundle check || bundle install --deployment
 fi
 
 if [ -z $CI ] ; then
