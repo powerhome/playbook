@@ -1,6 +1,6 @@
-@import "../tokens/colors";
-@import "../tokens/typography";
-@import "../tokens/line_height";
+@import "./colors";
+@import "./typography";
+@import "./line_height";
 
 @mixin pb_title(
     $fontSize: $heading_1,
@@ -36,5 +36,3 @@
 @mixin pb_title_dark {
   color: $text_dk_default;
 }
-
-

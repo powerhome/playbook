@@ -1,25 +1,25 @@
-// @import "playbook-ui/dist/pb_title/title_mixin";
+@import "playbook-ui/dist/tokens/titles";
 @import "playbook-ui/dist/tokens/typography";
 @import "playbook-ui/dist/tokens/spacing";
 @import "playbook-ui/dist/tokens/colors";
 
 .markdown {
   h1 {
-    // @include pb_title_1;
+    @include pb_title_1;
     margin: 1rem 0;
   }
 
   h2 {
-    // @include pb_title_2;
+    @include pb_title_2;
     margin: 1rem 0;
   }
 
   h3 {
-    // @include pb_title_3;
+    @include pb_title_3;
     margin: 1rem 0;
   }
   h4 {
-    // @include pb_title_4;
+    @include pb_title_4;
     margin: 1rem 0;
   }
   h5 {
@@ -76,7 +76,7 @@
     align-items: left;
     &:last-child {
       border-bottom: 0;
-      // padding-bottom: 0;
+      padding-bottom: 0;
     }
   }
   &.dark {
