@@ -3,7 +3,7 @@
 import React from 'react'
 import Select from 'react-select'
 import AsyncSelect from 'react-select/async'
-import { get } from 'lodash'
+import { get, isString } from 'lodash'
 import { globalProps } from '../utilities/globalProps.js'
 
 import Control from './components/Control'
@@ -28,9 +28,9 @@ type Props = {
   async?: boolean,
   dark?: boolean,
   label?: string,
-  loadOptions?: noop | string,
-  getOptionLabel?: () => any,
-  getOptionValue?: () => any,
+  loadOptions?: string,
+  getOptionLabel?: string | (() => any),
+  getOptionValue?: string | (() => any),
   name?: string,
 }
 
@@ -39,7 +39,7 @@ type Props = {
  * @param {Props} props - props as described at https://react-select.com/props
  */
 
-const Typeahead = (props: Props) => {
+const Typeahead = ({ loadOptions = noop, getOptionLabel, getOptionValue, async, ...props }: Props) => {
   const selectProps = {
     cacheOptions: true,
     components: {
@@ -53,19 +53,17 @@ const Typeahead = (props: Props) => {
       Placeholder,
       ValueContainer,
     },
+    loadOptions: isString(loadOptions) ? get(window, loadOptions) : loadOptions,
+    getOptionLabel: isString(getOptionLabel) ? get(window, getOptionLabel) : getOptionLabel,
+    getOptionValue: isString(getOptionValue) ? get(window, getOptionValue) : getOptionValue,
     defaultOptions: true,
     id: 'react-select-input',
     isClearable: true,
     isSearchable: true,
-    name,
     ...props,
   }
 
-  if (typeof(props.loadOptions) === 'string') selectProps.loadOptions = get(window, props.loadOptions)
-  if (typeof(props.getOptionLabel) === 'string') selectProps.getOptionLabel = get(window, props.getOptionLabel)
-  if (typeof(props.getOptionValue) === 'string') selectProps.getOptionValue = get(window, props.getOptionValue)
-
-  const Tag = props.async ? AsyncSelect : Select
+  const Tag = async ? AsyncSelect : Select
 
   const handleOnChange = (data, { action, option, removedValue }) => {
     if (action === 'select-option') {
