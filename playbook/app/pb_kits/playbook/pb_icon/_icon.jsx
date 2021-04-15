@@ -92,7 +92,7 @@ const Icon = (props: IconProps) => {
       />
       <span
           {...ariaProps}
-          hidden="true"
+          hidden
       />
     </>
   )
