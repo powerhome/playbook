@@ -27,7 +27,7 @@ const FixedConfirmationToast = (props: FixedConfirmationToastProps) => {
   const { className, closeable = false, multiLine = false, status = 'neutral', text } = props
   const css = classnames(
     `pb_fixed_confirmation_toast_kit_${status}`,
-    multiLine ? '_multi_line' : null,
+    {'_multi_line' : multiLine},
     globalProps(props),
     className
   )
