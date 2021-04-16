@@ -19,7 +19,7 @@ export const zxcvbnPasswordScore = (options) => {
         if (password.length <= 0) {
           percent = '0'
           variant = 'negative'
-          text = '\u00A0' //nbsp to keep form from jumping when typing beings
+          text = '\u00A0' //nbsp to keep form from jumping when typing begins
         } else if (isPwned) {
           percent = '25'
           variant = 'negative'
