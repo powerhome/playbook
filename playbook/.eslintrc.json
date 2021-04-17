@@ -26,6 +26,8 @@
     "es6": true
   },
   "globals": {
+    "expect": "readonly",
+    "jest": "readonly"
   },
   "rules": {
     "arrow-parens": [2, "always"],
