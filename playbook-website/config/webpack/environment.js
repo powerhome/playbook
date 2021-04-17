@@ -10,7 +10,7 @@ environment.loaders.insert('javascript', {
       cacheDirectory: true,
     },
   },
-  exclude: /(node_modules|playbook-ui)/,
+  exclude: /(node_modules|playbook\/dist)/,
 })
 
 module.exports = environment
