@@ -1,10 +1,8 @@
 # frozen_string_literal: true
 
-require "view_component/engine"
 require "action_view/railtie"
 require "view_component/engine"
 require "webpacker/react"
-require "sassc-rails"
 
 module Playbook
   class Engine < ::Rails::Engine
@@ -16,11 +14,15 @@ module Playbook
 
     config.view_component.render_monkey_patch_enabled = false
 
-    config.assets.paths ||= []
-    config.assets.paths << Playbook::Engine.root.join("fonts")
-    config.assets.paths << Playbook::Engine.root.join("app/pb_kits/playbook/pb_*")
+    if config.respond_to?(:assets)
+      config.assets.paths ||= []
+      config.assets.paths << Playbook::Engine.root.join("fonts")
+      config.assets.paths << Playbook::Engine.root.join("app/pb_kits/playbook/pb_*")
+    end
 
-    config.sass.load_paths ||= []
-    config.sass.load_paths << Playbook::Engine.root.join("app/pb_kits/playbook")
+    if config.respond_to?(:sass)
+      config.sass.load_paths ||= []
+      config.sass.load_paths << Playbook::Engine.root.join("app/pb_kits/playbook")
+    end
   end
 end
