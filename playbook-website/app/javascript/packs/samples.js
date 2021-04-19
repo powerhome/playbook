@@ -2,7 +2,8 @@ import '../samples/index.scss'
 
 import WebpackerReact from 'webpacker-react'
 
-// Sample Imports - Please rearrange/alphabaetize after Sample Generator appends new imports
+// Please rearrange/alphabaetize after Sample Generator appends new imports
+// Sample Imports
 import AnalyticsDashboard from '../../views/samples/analytics_dashboard'
 import CrmClientList from '../../views/samples/crm_client_list'
 import ConferenceStatistics from '../../views/samples/conference_statistics'
