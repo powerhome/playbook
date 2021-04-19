@@ -1,6 +1,6 @@
 /* @flow */
 
-import React, { forwardRef, useEffect, useRef } from 'react'
+import React, { useEffect, useRef } from 'react'
 import classnames from 'classnames'
 import useFocus from './useFocus.js'
 import Trix from 'trix'
@@ -22,7 +22,7 @@ type RichTextEditorProps = {
   value?: string,
 }
 
-const RichTextEditor = (props: RichTextEditorProps, ref: React.ElementRef<"input">) => {
+const RichTextEditor = (props: RichTextEditorProps) => {
   const {
     aria = {},
     className,
@@ -120,7 +120,6 @@ const RichTextEditor = (props: RichTextEditorProps, ref: React.ElementRef<"input
       <input
           id={id}
           name={name}
-          ref={ref}
           type="hidden"
           value={value}
       />
@@ -134,4 +133,4 @@ const RichTextEditor = (props: RichTextEditorProps, ref: React.ElementRef<"input
   )
 }
 
-export default forwardRef(RichTextEditor)
+export default RichTextEditor
