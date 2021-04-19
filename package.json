@@ -1,5 +1,5 @@
 {
   "devDependencies": {
-    "jest-axe": "^4.1.0"
+    "jest-axe": "4.1.0"
   }
 }
