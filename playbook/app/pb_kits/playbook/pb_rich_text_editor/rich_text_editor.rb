@@ -10,7 +10,7 @@ module Playbook
                     default: false
 
       prop :sticky, type: Playbook::Props::Boolean,
-                   default: false
+                    default: false
 
       prop :value
       prop :template
@@ -41,7 +41,7 @@ module Playbook
           sticky: sticky,
           value: value,
           template: template,
-          placeholder: placeholder
+          placeholder: placeholder,
         }
       end
     end

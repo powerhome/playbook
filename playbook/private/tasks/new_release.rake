@@ -55,11 +55,11 @@ task :new_release, [:var] => [:environment] do |_task, args|
   # --------------------------------------- #
   if args[:var] == "alpha"
     # Search ruby gems for latest alpha version
-    latest_remote_alpha = (`gem search playbook_ui --pre`).match(/(\d+.\d+.\d+.pre.alpha\d+)/).to_s
+    latest_remote_alpha = `gem search playbook_ui --pre`.match(/(\d+.\d+.\d+.pre.alpha\d+)/).to_s
     puts "\nLatest remote alpha version: #{latest_remote_alpha}"
   else
     # Search ruby gems for latest version
-    latest_remote_version = (`gem search playbook_ui`).match(/(\d+.\d+.\d+)/).to_s
+    latest_remote_version = `gem search playbook_ui`.match(/(\d+.\d+.\d+)/).to_s
     puts "\nLatest remote version: #{latest_remote_version}"
     # triplet here refers to the maj, min, and patch numbers
     # i.e. x.x.x
@@ -77,7 +77,7 @@ task :new_release, [:var] => [:environment] do |_task, args|
   case args[:var]
   when "alpha"
     alpha_triplet = latest_remote_alpha.match(/(\d+.\d+.\d+)/).to_s
-    base_triplet = (`gem search playbook_ui`).match(/(\d+.\d+.\d+)/).to_s
+    base_triplet = `gem search playbook_ui`.match(/(\d+.\d+.\d+)/).to_s
 
     if alpha_triplet != base_triplet
       new_version = base_triplet + ".pre.alpha1"

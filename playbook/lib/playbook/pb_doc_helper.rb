@@ -16,7 +16,7 @@ module Playbook
           example_key: example.keys.first,
           show_code: show_code,
           type: type,
-          dark: dark_mode
+          dark: dark_mode,
         }
       end.join.yield_self(&method(:raw))
     end

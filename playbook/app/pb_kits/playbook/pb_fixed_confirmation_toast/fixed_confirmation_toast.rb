@@ -8,7 +8,7 @@ module Playbook
                     default: "neutral"
       prop :text, type: Playbook::Props::String
       prop :multi_line, type: Playbook::Props::Boolean,
-                       default: false
+                        default: false
       prop :closeable, type: Playbook::Props::Boolean,
                        default: false
 

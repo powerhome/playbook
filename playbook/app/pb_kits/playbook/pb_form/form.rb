@@ -23,7 +23,7 @@ module Playbook
           class: classname,
           data: data,
           validate: validate,
-        }.merge(prop(:options) || prop(:form_system_options) || { })
+        }.merge(prop(:options) || prop(:form_system_options) || {})
       end
     end
   end
