@@ -19,7 +19,6 @@ type TextInputProps = {
   id?: string,
   name: string,
   label: string,
-  onBlur: (String) => void,
   onChange: (String) => void,
   placeholder: string,
   required?: boolean,
@@ -42,7 +41,6 @@ const TextInput = (
     id,
     name,
     label,
-    onBlur = () => {},
     onChange = () => {},
     placeholder,
     required,
@@ -81,7 +79,6 @@ const TextInput = (
               disabled={disabled}
               id={id}
               name={name}
-              onBlur={onBlur}
               onChange={onChange}
               placeholder={placeholder}
               ref={ref}

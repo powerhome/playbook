@@ -24,7 +24,6 @@ type TextareaProps = {
   required?: boolean,
   rows?: number,
   resize: 'none' | 'both' | 'horizontal' | 'vertical' | 'auto',
-  onBlur?: InputCallback<HTMLTextAreaElement>,
   onChange?: InputCallback<HTMLTextAreaElement>,
 }
 
@@ -38,7 +37,6 @@ const Textarea = ({
   label,
   maxCharacters,
   name,
-  onBlur = () => {},
   onChange = () => {},
   placeholder,
   required,
@@ -77,7 +75,6 @@ const Textarea = ({
             className="pb_textarea_kit"
             disabled={disabled}
             name={name}
-            onBlur={onBlur}
             onChange={onChange}
             placeholder={placeholder}
             ref={ref}
