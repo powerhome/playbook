@@ -80,7 +80,7 @@
   "devDependencies": {
     "@actions/core": "1.2.6",
     "@actions/github": "4.0.0",
-    "@testing-library/jest-dom": "5.11.10",
+    "@testing-library/jest-dom": "5.11.6",
     "@testing-library/react": "11.1.2",
     "axe-core": "4.1.1",
     "circular-dependency-plugin": "5.2.2",
