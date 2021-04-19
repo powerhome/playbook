@@ -15,7 +15,7 @@ export default function useZxcvbn(options) {
 
   useEffect(() => {
     if (confirmation) {
-      return {}
+      return
     }
 
     setResult(calculator(passphrase))
