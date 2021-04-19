@@ -1,6 +1,42 @@
-<%= pb_rails("nav", props: {title: "Menu", link: "#"}) do %>
-  <%= pb_rails("nav/item", props: { link: "#", active: true }) do%>Photos<% end %>
-  <%= pb_rails("nav/item", props: { link: "#" }) do%>Music<% end %>
-  <%= pb_rails("nav/item", props: { link: "#" }) do%>Video<% end %>
-  <%= pb_rails("nav/item", props: { link: "#" }) do%>Files<% end %>
+<%= pb_rails("nav", props: {title: "Users", link: "#"}) do %>
+  <%= pb_rails("nav/item", props: { link: "#", active: true }) do%>
+    <%= pb_rails("user", props: {
+      name: "Anna Black",
+      territory: "PHL",
+      title: "Remodeling Consultant",
+      orientation: "horizontal",
+      align: "left",
+      avatar_url: "https://randomuser.me/api/portraits/women/44.jpg"
+    }) %>
+  <% end %>
+  <%= pb_rails("nav/item", props: { link: "#" }) do%>
+    <%= pb_rails("user", props: {
+      name: "Julie Hamilton",
+      territory: "PHL",
+      title: "Inside Sales Agent",
+      orientation: "horizontal",
+      align: "left",
+      avatar_url: "https://randomuser.me/api/portraits/women/45.jpg"
+      }) %>
+    <% end %>
+  <%= pb_rails("nav/item", props: { link: "#" }) do%>
+    <%= pb_rails("user", props: {
+      name: "Dennis Wilks",
+      territory: "PHL",
+      title: "Senior Remodeling Consultant",
+      orientation: "horizontal",
+      align: "left",
+      avatar_url: "https://randomuser.me/api/portraits/men/44.jpg"
+      }) %>
+    <% end %>
+  <%= pb_rails("nav/item", props: { link: "#" }) do%>
+    <%= pb_rails("user", props: {
+      name: "Ronnie Martin",
+      territory: "PHL",
+      title: "Customer Development Representative",
+      orientation: "horizontal",
+      align: "left",
+      avatar_url: "https://randomuser.me/api/portraits/men/46.jpg"
+      }) %>
+    <% end %>
 <% end %>

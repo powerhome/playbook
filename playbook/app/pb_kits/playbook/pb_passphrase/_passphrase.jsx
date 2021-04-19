@@ -82,7 +82,7 @@ const Passphrase = (props: PassphraseProps) => {
     if (typeof onStrengthChange === 'function') {
       onStrengthChange(strength)
     }
-  }, [strength, common, isPwned])
+  }, [strength])
 
   const tipClass = classnames(
     (dark ? 'dark' : null),

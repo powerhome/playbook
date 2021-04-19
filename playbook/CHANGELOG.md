@@ -1,3 +1,61 @@
+## [9.7.0](https://github.com/powerhome/playbook/tree/9.7.0)
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/9.6.1...9.7.0)
+
+**Kit Enhancements:**
+
+- \[NUXE-479\] - Add margin overrides to select [\#1394](https://github.com/powerhome/playbook/pull/1394) ([coleerikson](https://github.com/coleerikson))
+
+**Merged pull requests:**
+
+- 9.6.1 [\#1457](https://github.com/powerhome/playbook/pull/1457) ([thestephenmarshall](https://github.com/thestephenmarshall))
+
+## [9.6.1](https://github.com/powerhome/playbook/tree/9.6.1)
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/9.6.0...9.6.1)
+
+**Fixed Bugs:**
+
+- Pin react-select [\#1455](https://github.com/powerhome/playbook/pull/1455) ([thestephenmarshall](https://github.com/thestephenmarshall))
+
+## [9.6.0](https://github.com/powerhome/playbook/tree/9.6.0)
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/9.5.0...9.6.0)
+
+**Fixed Bugs:**
+
+- Fix Image kit rounded prop warning [\#1341](https://github.com/powerhome/playbook/pull/1341) ([thestephenmarshall](https://github.com/thestephenmarshall))
+
+**New Kits:**
+
+- Passphrase Kit [\#1349](https://github.com/powerhome/playbook/pull/1349) ([patmccler](https://github.com/patmccler))
+
+## [9.5.0](https://github.com/powerhome/playbook/tree/9.5.0)
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/9.4.0...9.5.0)
+
+**Kit Enhancements:**
+
+- Add aria-labels to Icon kit [\#1387](https://github.com/powerhome/playbook/pull/1387) ([bh247484](https://github.com/bh247484))
+
+
+
+## [9.4.0](https://github.com/powerhome/playbook/tree/9.4.0)
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/9.3.1...9.4.0)
+
+**Kit Enhancements:**
+
+- \[NUXE-560\] - Indeterminate example, kit upgrade [\#1408](https://github.com/powerhome/playbook/pull/1408) ([coleerikson](https://github.com/coleerikson))
+
+
+
+## [9.3.1](https://github.com/powerhome/playbook/tree/9.3.1) (2021-04-09)
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/9.3.0...9.3.1)
+
+
+
 ## [9.3.0](https://github.com/powerhome/playbook/tree/9.3.0)
 
 [Full Changelog](https://github.com/powerhome/playbook/compare/9.2.2...9.3.0)
@@ -39,7 +97,7 @@
 
 **Improvements:**
 
-- \[NUXE-578\] Cleanup playbook gem [\#1404](https://github.com/powerhome/playbook/pull/1404) ([xjunior](https://github.com/xjunior))
+- Cleanup playbook gem [\#1404](https://github.com/powerhome/playbook/pull/1404) ([xjunior](https://github.com/xjunior))
 
 
 
@@ -53,7 +111,7 @@
 
 **Kit Enhancements:**
 
-- \[NUXE-575\] - Form helpers [\#1406](https://github.com/powerhome/playbook/pull/1406) ([xjunior](https://github.com/xjunior))
+- Form helpers [\#1406](https://github.com/powerhome/playbook/pull/1406) ([xjunior](https://github.com/xjunior))
 
 
 
@@ -297,18 +355,18 @@
 
 **Kit Enhancements:**
 
-- \[NUXE-90\] generator kit alphabetize content [\#1283](https://github.com/powerhome/playbook/pull/1283) ([andrew-k9](https://github.com/andrew-k9))
-- \[NUXE-363\] UX - KIT DEV - Add character counter prop to Textarea Kit [\#1277](https://github.com/powerhome/playbook/pull/1277) ([stephenmckeon](https://github.com/stephenmckeon))
+- generator kit alphabetize content [\#1283](https://github.com/powerhome/playbook/pull/1283) ([andrew-k9](https://github.com/andrew-k9))
+- UX - KIT DEV - Add character counter prop to Textarea Kit [\#1277](https://github.com/powerhome/playbook/pull/1277) ([stephenmckeon](https://github.com/stephenmckeon))
 - Jest Code Coverage Action [\#1276](https://github.com/powerhome/playbook/pull/1276) ([thestephenmarshall](https://github.com/thestephenmarshall))
 
 **Fixed Bugs:**
 
-- \[NUXE-315\] UX - KIT DEV - Remove extra Margin from selectable cards [\#1291](https://github.com/powerhome/playbook/pull/1291) ([josephinef9](https://github.com/josephinef9))
+- UX - KIT DEV - Remove extra Margin from selectable cards [\#1291](https://github.com/powerhome/playbook/pull/1291) ([josephinef9](https://github.com/josephinef9))
 - Fixes genrator error [\#1286](https://github.com/powerhome/playbook/pull/1286) ([jasoncypret](https://github.com/jasoncypret))
 
 **Improvements:**
 
-- \[NUXE-367\] Fix typeahead cursor position \(REACT\) [\#1297](https://github.com/powerhome/playbook/pull/1297) ([josephinef9](https://github.com/josephinef9))
+- Fix typeahead cursor position \(REACT\) [\#1297](https://github.com/powerhome/playbook/pull/1297) ([josephinef9](https://github.com/josephinef9))
 - Dashboard cards [\#1296](https://github.com/powerhome/playbook/pull/1296) ([kre8sions](https://github.com/kre8sions))
 - Add mobile search [\#1289](https://github.com/powerhome/playbook/pull/1289) ([bh247484](https://github.com/bh247484))
 - Sample show redesign [\#1279](https://github.com/powerhome/playbook/pull/1279) ([bh247484](https://github.com/bh247484))
@@ -357,15 +415,15 @@
 **Kit Enhancements:**
 
 - Allow getOption\[Label|Value\] props in Typeahead [\#1244](https://github.com/powerhome/playbook/pull/1244) ([thestephenmarshall](https://github.com/thestephenmarshall))
-- \[NUXE-210\] - Update release script \(v2\) [\#1241](https://github.com/powerhome/playbook/pull/1241) ([bh247484](https://github.com/bh247484))
+- Update release script \(v2\) [\#1241](https://github.com/powerhome/playbook/pull/1241) ([bh247484](https://github.com/bh247484))
 - Table Reorganization, and change default alignment to top [\#1240](https://github.com/powerhome/playbook/pull/1240) ([jasoncypret](https://github.com/jasoncypret))
-- \[NUXE-331\] Kit search [\#1235](https://github.com/powerhome/playbook/pull/1235) ([bh247484](https://github.com/bh247484))
+- Kit search [\#1235](https://github.com/powerhome/playbook/pull/1235) ([bh247484](https://github.com/bh247484))
 - Move Playbook::Props to lib [\#1229](https://github.com/powerhome/playbook/pull/1229) ([xjunior](https://github.com/xjunior))
-- \[NUXE-77\] Add Icon Prop to Stat Change [\#1227](https://github.com/powerhome/playbook/pull/1227) ([ljtinney](https://github.com/ljtinney))
+- Add Icon Prop to Stat Change [\#1227](https://github.com/powerhome/playbook/pull/1227) ([ljtinney](https://github.com/ljtinney))
 
 **Improvements:**
 
-- \[NUXE-278\] SAMPLE PAGE - Crowdsourced Posts \(Reddit home page\) [\#1237](https://github.com/powerhome/playbook/pull/1237) ([stephenmckeon](https://github.com/stephenmckeon))
+- SAMPLE PAGE - Crowdsourced Posts \(Reddit home page\) [\#1237](https://github.com/powerhome/playbook/pull/1237) ([stephenmckeon](https://github.com/stephenmckeon))
 
 
 
@@ -375,7 +433,7 @@
 
 **Kit Enhancements:**
 
-- \[NUXE-316\] Currency Kit Updates [\#1226](https://github.com/powerhome/playbook/pull/1226) ([stephenmckeon](https://github.com/stephenmckeon))
+- Currency Kit Updates [\#1226](https://github.com/powerhome/playbook/pull/1226) ([stephenmckeon](https://github.com/stephenmckeon))
 
 **Improvements:**
 
@@ -1480,42 +1538,3 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Removed (breaking changes)
 - React PbLayout prop `children` dropped support for single Node (https://github.com/powerhome/playbook/commit/b16da50914e110c75c6d96c985fa02781c9e2040#diff-c3ce2c91288ca3e730d3c56e7f73475cL11-L14)
 - Rails PbLayout prop `dark` dropped (https://github.com/powerhome/playbook/commit/b16da50914e110c75c6d96c985fa02781c9e2040#diff-377fda563d148f7b3ad33f904b7b0cdbL13)
-
-
-\* *This Changelog was automatically generated by [github_changelog_generator](https://github.com/github-changelog-generator/github-changelog-generator)*
-
-
-\* *This Changelog was automatically generated by [github_changelog_generator](https://github.com/github-changelog-generator/github-changelog-generator)*
-
-
-\* *This Changelog was automatically generated by [github_changelog_generator](https://github.com/github-changelog-generator/github-changelog-generator)*
-
-
-\* *This Changelog was automatically generated by [github_changelog_generator](https://github.com/github-changelog-generator/github-changelog-generator)*
-
-
-\* *This Changelog was automatically generated by [github_changelog_generator](https://github.com/github-changelog-generator/github-changelog-generator)*
-
-
-\* *This Changelog was automatically generated by [github_changelog_generator](https://github.com/github-changelog-generator/github-changelog-generator)*
-
-
-\* *This Changelog was automatically generated by [github_changelog_generator](https://github.com/github-changelog-generator/github-changelog-generator)*
-
-
-\* *This Changelog was automatically generated by [github_changelog_generator](https://github.com/github-changelog-generator/github-changelog-generator)*
-
-
-\* *This Changelog was automatically generated by [github_changelog_generator](https://github.com/github-changelog-generator/github-changelog-generator)*
-
-
-\* *This Changelog was automatically generated by [github_changelog_generator](https://github.com/github-changelog-generator/github-changelog-generator)*
-
-
-\* *This Changelog was automatically generated by [github_changelog_generator](https://github.com/github-changelog-generator/github-changelog-generator)*
-
-
-\* *This Changelog was automatically generated by [github_changelog_generator](https://github.com/github-changelog-generator/github-changelog-generator)*
-
-
-\* *This Changelog was automatically generated by [github_changelog_generator](https://github.com/github-changelog-generator/github-changelog-generator)*
