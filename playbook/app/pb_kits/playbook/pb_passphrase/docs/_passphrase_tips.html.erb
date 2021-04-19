@@ -1,0 +1,26 @@
+<%= pb_rails("passphrase", props: {
+  label: "Pass an array of strings to the tips prop",
+  tips: ['And the info icon will appear.', 'Each string will be displayed as its own tip'],
+}) %>
+
+<%= pb_rails("passphrase", props: {
+  label: "Omit the prop to hide the icon"
+}) %>
+
+<%= pb_rails("passphrase", props: {
+  label: "Only show tips at small screen size",
+  show_tips_below: "sm",
+  tips: ['Make the password longer', 'Type more things', 'Use something else'],
+}) %>
+
+<%= pb_rails("passphrase", props: {
+  label: "Only show tips at medium screen size",
+  show_tips_below: "md",
+  tips: ['Make the password longer', 'Type more things', 'Use something else'],
+}) %>
+
+<%= pb_rails("passphrase", props: {
+  label: "Only show tips at large screen size",
+  show_tips_below: "lg",
+  tips: ['Make the password longer', 'Type more things', 'Use something else'],
+}) %>

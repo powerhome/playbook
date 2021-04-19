@@ -1,6 +1,6 @@
 {
   "name": "playbook-ui",
-  "version": "9.3.0-alpha-inline3",
+  "version": "9.7.0",
   "description": "Nitro's Design System",
   "main": "./dist/playbook-react.js",
   "scripts": {
@@ -70,11 +70,12 @@
     "react-highlight-words": "^0.16.0",
     "react-modal": "^3.12.1",
     "react-popper": "^2.1.0",
-    "react-select": "~3.0.8",
+    "react-select": "3.0.8",
     "svg-url-loader": "^4.0.0",
     "terser-webpack-plugin": "^3.1.0",
     "trix": "^1.3.0",
-    "webpacker-react": "^0.3.2"
+    "webpacker-react": "^0.3.2",
+    "zxcvbn": "^4.4.2"
   },
   "devDependencies": {
     "@actions/core": "^1.2.6",

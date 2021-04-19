@@ -14,7 +14,7 @@ type FlexItemPropTypes = {
 }
 
 const FlexItem = (props: FlexItemPropTypes) => {
-  const { children, className, fixedSize, grow, overflow = null, shrink, flex } = props
+  const { children, className, fixedSize, grow, overflow = null, shrink, flex = 'none' } = props
   const growClass = grow === true ? 'grow' : ''
   const flexClass = flex !== 'none' ? `flex_${flex}` : ''
   const overflowClass = overflow ? `overflow_${overflow}` : ''
