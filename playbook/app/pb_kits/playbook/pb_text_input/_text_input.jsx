@@ -17,6 +17,7 @@ type TextInputProps = {
   disabled?: boolean,
   error?: string,
   id?: string,
+  inline?: boolean,
   name: string,
   label: string,
   onChange: (String) => void,
@@ -39,6 +40,7 @@ const TextInput = (
     disabled,
     error,
     id,
+    inline,
     name,
     label,
     onChange = () => {},
@@ -53,6 +55,7 @@ const TextInput = (
   const dataProps = buildDataProps(data)
   const css = classnames([
     'pb_text_input_kit',
+    inline ? 'inline' : null,
     error ? 'error' : null,
     globalProps(props),
     className,
