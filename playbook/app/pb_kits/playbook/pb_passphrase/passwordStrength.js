@@ -20,11 +20,7 @@ export const zxcvbnPasswordScore = (options) => {
           percent = '0'
           variant = 'negative'
           text = '\u00A0' //nbsp to keep form from jumping when typing begins
-        } else if (isPwned) {
-          percent = '25'
-          variant = 'negative'
-          text = 'This passphrase is compromised. Use a different one.'
-        } else if (common) {
+        } else if (common || isPwned) {
           percent = '25'
           variant = 'negative'
           text = 'This passphrase is too common'
@@ -50,7 +46,7 @@ export const zxcvbnPasswordScore = (options) => {
         {
           suggestions: result.feedback.suggestions,
           warning: result.feedback.warning,
-          strength: result.score,
+          strength: common || isPwned ? 0 : result.score,
           ...feedbackValues(result.score),
         }
       )

@@ -72,7 +72,7 @@ const Passphrase = (props: PassphraseProps) => {
   const toggleShowPassphrase = () => setShowPassphrase(!showPassphrase)
 
   const ariaProps = buildAriaProps(aria)
-  const dataProps = buildDataProps(data)
+
   const classes = classnames(buildCss('pb_passphrase'), globalProps(props), className)
 
   const calculator = useMemo(
@@ -87,11 +87,16 @@ const Passphrase = (props: PassphraseProps) => {
     [displayValue, common, isPwned]
   )
 
+  const dataProps = useMemo(
+    () => (buildDataProps(Object.assign({}, data, { strength }))),
+    [data, strength]
+  )
+
   useEffect(() => {
     if (typeof onStrengthChange === 'function') {
       onStrengthChange(strength)
     }
-  }, [strength])
+  }, [strength, common, isPwned])
 
   const tipClass = classnames(
     (dark ? 'dark' : null),
