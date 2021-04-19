@@ -5,7 +5,7 @@ import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import classnames from 'classnames'
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
 import { globalProps } from '../utilities/globalProps.js'
-import { zxcvbnPasswordScore }  from './passwordStrength'
+import useZxcvbn from './useZxcvbn'
 import useHaveIBeenPwned from './useHaveIBeenPwned'
 import { Body, Caption, Flex, Icon, PbReactPopover, ProgressSimple, TextInput } from '../'
 
@@ -53,6 +53,7 @@ const Passphrase = (props: PassphraseProps) => {
     uncontrolled = false,
     value = '',
   } = props
+  const ariaProps = buildAriaProps(aria)
 
   const [uncontrolledValue, setUncontrolledValue] = useState('')
 
@@ -71,26 +72,11 @@ const Passphrase = (props: PassphraseProps) => {
   const [showPassphrase, setShowPassphrase] = useState(false)
   const toggleShowPassphrase = () => setShowPassphrase(!showPassphrase)
 
-  const ariaProps = buildAriaProps(aria)
-
   const classes = classnames(buildCss('pb_passphrase'), globalProps(props), className)
-
-  const calculator = useMemo(
-    () => confirmation ? { test: () => ({}) } : zxcvbnPasswordScore({ averageThreshold, minLength, strongThreshold }),
-    [averageThreshold, confirmation, strongThreshold, minLength]
-  )
 
   const isPwned = checkPwned ? useHaveIBeenPwned(displayValue, minLength) : false
 
-  const { percent: progressPercent, variant: progressVariant, text: strengthLabel, strength } = useMemo(
-    () => calculator.test(displayValue, common, isPwned),
-    [displayValue, common, isPwned]
-  )
-
-  const dataProps = useMemo(
-    () => (buildDataProps(Object.assign({}, data, { strength }))),
-    [data, strength]
-  )
+  const { percent: progressPercent, variant: progressVariant, text: strengthLabel, strength } = useZxcvbn({ passphrase: value, common, isPwned, confirmation, averageThreshold, minLength, strongThreshold })
 
   useEffect(() => {
     if (typeof onStrengthChange === 'function') {
@@ -101,6 +87,10 @@ const Passphrase = (props: PassphraseProps) => {
   const tipClass = classnames(
     (dark ? 'dark' : null),
     (showTipsBelow === 'always' ? null : `show-below-${showTipsBelow}`),
+  )
+  const dataProps = useMemo(
+    () => (buildDataProps(Object.assign({}, data, { strength }))),
+    [data, strength]
   )
 
   const popoverReference = (
