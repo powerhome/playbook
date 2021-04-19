@@ -121,3 +121,15 @@ test('popover target does not show when tips are not given', () => {
   const kit = screen.getByTestId(testId)
   expect(kit.querySelector('[class^=pb_popover_reference_wrapper]')).toBeNull()
 })
+
+test('data-strength attribute exposes strength of password', () => {
+  render(
+    <Passphrase
+        data={{ testid: testId }}
+        value="correct horse battery staple"
+    />
+  )
+
+  const kit = screen.getByTestId(testId)
+  expect(parseInt(kit.getAttribute('data-strength'))).toBeGreaterThan(0)
+})
