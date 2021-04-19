@@ -40,7 +40,6 @@ module Playbook
 
       def log(message)
         logger = ActiveSupport::Logger.new(STDOUT)
-        log_formatter = ::Logger::Formatter.new
         @logger ||= ActiveSupport::TaggedLogging.new(logger)
         @logger.log(0, message)
       end

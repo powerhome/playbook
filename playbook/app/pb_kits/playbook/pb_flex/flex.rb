@@ -74,8 +74,8 @@ module Playbook
       def horizontal_class
         if orientation == "row"
           "justify_content_#{horizontal}"
-        else
-          "align_items_#{horizontal}" if align == "none"
+        elsif align == "none"
+          "align_items_#{horizontal}"
         end
       end
 
@@ -102,8 +102,8 @@ module Playbook
       def vertical_class
         if orientation == "row"
           "align_items_#{vertical}"
-        else
-          "justify_content_#{vertical}" if justify == "none"
+        elsif justify == "none"
+          "justify_content_#{vertical}"
         end
       end
 

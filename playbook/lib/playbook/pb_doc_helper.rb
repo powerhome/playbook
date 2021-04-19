@@ -41,10 +41,12 @@ module Playbook
       raw("<div class='pb--docItem'>" + display_kits.join("</div><div class='pb--docItem'>") + "</div>")
     end
 
+    # rubocop:disable Naming/AccessorMethodName
     def get_kits
       menu = YAML.load_file(Playbook::Engine.root.join("app/pb_kits/playbook/data/menu.yml"))
       menu["kits"]
     end
+    # rubocop:enable Naming/AccessorMethodName
 
     def render_pb_doc_kit(kit, type, limit_examples, code = true, dark_mode = false)
       title = pb_doc_render_clickable_title(kit, type)
@@ -78,7 +80,7 @@ module Playbook
               else
                 kit_show_path(kit)
               end
-      # FIXME this is here because this helper generates a link for playbook website,
+      # FIXME: this is here because this helper generates a link for playbook website,
       #       but shouldn't do anything when used elsewhere
       rescue
         puts "Kit Path Not Avaliable"
