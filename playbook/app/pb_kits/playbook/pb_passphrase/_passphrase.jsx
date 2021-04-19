@@ -76,7 +76,7 @@ const Passphrase = (props: PassphraseProps) => {
 
   const isPwned = checkPwned ? useHaveIBeenPwned(displayValue, minLength) : false
 
-  const { percent: progressPercent, variant: progressVariant, text: strengthLabel, strength } = useZxcvbn({ passphrase: value, common, isPwned, confirmation, averageThreshold, minLength, strongThreshold })
+  const { percent: progressPercent, variant: progressVariant, text: strengthLabel, strength } = useZxcvbn({ passphrase: displayValue, common, isPwned, confirmation, averageThreshold, minLength, strongThreshold })
 
   useEffect(() => {
     if (typeof onStrengthChange === 'function') {
