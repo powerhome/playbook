@@ -3,7 +3,7 @@
 import React from 'react'
 import { Typeahead } from '../..'
 
-const initOptions = [
+const options = [
   { label: 'Windows', value: '#FFA500' },
   { label: 'Siding', value: '#FF0000' },
   { label: 'Doors', value: '#00FF00' },
@@ -11,7 +11,6 @@ const initOptions = [
 ]
 
 const TypeaheadWithPills = (props) => {
-  // const [values, setValues] = useState([])
   return (
     <>
       <Typeahead
@@ -19,8 +18,7 @@ const TypeaheadWithPills = (props) => {
           createable
           isMulti
           label="Colors"
-          // onChange={(value) => console.log(value)}
-          options={initOptions}
+          options={options}
           placeholder="Placeholder"
           plusIcon
           {...props}
