@@ -2,6 +2,11 @@ const path = require('path')
 
 const webpack = require('webpack')
 
+const SOURCE_PATH = path.resolve(__dirname, 'app/pb_kits/playbook')
+const DIST_PATH = path.resolve(__dirname, 'dist')
+const NODE_MODULES_PATH = path.resolve(__dirname, '../node_modules')
+const IS_DEVELOPMENT = process.env.NODE_ENV === 'development'
+
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
 // Copy tokens and fonts to dist
@@ -9,18 +14,18 @@ const CopyPlugin = require('copy-webpack-plugin')
 const COPY_PLUGIN_CONFIG = new CopyPlugin({
   patterns: [
     {
-      from: path.resolve(__dirname, 'app/pb_kits/playbook/tokens'),
+      from: `${SOURCE_PATH}/tokens`,
       globOptions: {
         ignore: ['**/exports/**'],
       },
-      to: path.resolve(__dirname, 'dist/tokens'),
+      to: `${DIST_PATH}/tokens`,
       transformPath(targetPath) {
         return targetPath.replace(/^tokens\/\_/, 'tokens/')
       },
     },
     {
       from: path.resolve(__dirname, 'fonts'),
-      to: path.resolve(__dirname, 'dist/fonts'),
+      to: `${DIST_PATH}/fonts`,
     },
   ],
   options: {
@@ -72,12 +77,11 @@ new webpack.DefinePlugin({
 })
 
 module.exports = {
-  mode: 'production',
   entry: {
-    'playbook-react': './app/pb_kits/playbook/index.js',
-    'playbook-rails': './app/pb_kits/playbook/playbook-rails.js',
-    'playbook-doc': './app/pb_kits/playbook/playbook-doc.js',
-    'reset.css': './app/pb_kits/playbook/_reset.scss',
+    'playbook-react': `${SOURCE_PATH}/index.js`,
+    'playbook-rails': `${SOURCE_PATH}/playbook-rails.js`,
+    'playbook-doc': `${SOURCE_PATH}/playbook-doc.js`,
+    'reset.css': `${SOURCE_PATH}/_reset.scss`,
   },
   externals: {
     'react': 'commonjs react',
@@ -95,21 +99,20 @@ module.exports = {
       '.jsx',
     ],
     modules: [
-      path.resolve(__dirname, 'app/pb_kits/playbook'),
-      path.resolve(__dirname, '../node_modules'),
+      SOURCE_PATH,
+      NODE_MODULES_PATH,
     ],
   },
   resolveLoader: {
     modules: [
-      '../node_modules',
-      path.resolve(__dirname, 'config/webpack/loaders')
+      NODE_MODULES_PATH,
     ],
   },
-  optimization: { minimize: process.env.NODE_ENV === 'development' ? false : true },
+  optimization: { minimize: !IS_DEVELOPMENT },
   output: {
     libraryTarget: 'commonjs2',
     filename: '[name].js',
-    path: path.resolve(__dirname, 'dist')
+    path: DIST_PATH,
   },
   plugins: [
     new MiniCssExtractPlugin({ filename: '[name].css' }),
