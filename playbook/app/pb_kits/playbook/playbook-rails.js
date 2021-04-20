@@ -38,11 +38,4 @@ import 'flatpickr'
 import 'trix'
 
 // React-Rendered Rails Kits =====
-import WebpackerReact from 'webpacker-react'
-import ujs from 'webpacker-react/ujs'
-import * as ReactRailsPBKits from './react_rails_kits.js'
-WebpackerReact.registerComponents({ ...ReactRailsPBKits })
-ujs.setup(
-  () => WebpackerReact.mountComponents(),
-  () => WebpackerReact.unmountComponents()
-)
+import './playbook-rails-react-bindings.js'
