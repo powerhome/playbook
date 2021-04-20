@@ -3,7 +3,7 @@ Rails.application.config.content_security_policy do |p|
   p.font_src    :self, :https, :data, :unsafe_inline
   p.img_src     :self, :https, :data, :unsafe_inline
   p.object_src  :none
-  p.script_src  :self, :https, :unsafe_inline
+  p.script_src  :self, :https, :unsafe_eval
   p.style_src   :self, :https, :unsafe_inline
 
   # To allow connections to the webpack-dev-server running in
