@@ -19,23 +19,29 @@ export default function useZxcvbn(options) {
     setResult(calculator(passphrase))
     const str = result.score
 
-    if (passphrase.length <= 0) {
+    const noPassphrase = passphrase.length <= 0
+    const commonPassphrase = common || isPwned
+    const weakPassphrase = passphrase.length < minLength || str < averageThreshold
+    const averagePassphrase = str < strongThreshold
+    const strongPassphrase = str >= strongThreshold
+
+    if (noPassphrase) {
       setPercent('0')
       setVariant('negative')
       setText('\u00A0') //nbsp to keep height constant
-    } else if (common || isPwned) {
+    } else if (commonPassphrase) {
       setPercent('25')
       setVariant('negative')
       setText('This passphrase is too common')
-    } else if (passphrase.length < minLength || str < averageThreshold) {
+    } else if (weakPassphrase) {
       setPercent('25')
       setVariant('negative')
       setText('Too weak')
-    } else if (str < strongThreshold){
+    } else if (averagePassphrase){
       setPercent('50')
       setVariant('warning')
       setText('Almost there, keep going!')
-    } else if (str >= strongThreshold) {
+    } else if (strongPassphrase) {
       setPercent('100')
       setVariant('positive')
       setText('Success! Strong passphrase')
