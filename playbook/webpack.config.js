@@ -11,7 +11,7 @@ const COPY_PLUGIN_CONFIG = new CopyPlugin({
     {
       from: path.resolve(__dirname, 'app/pb_kits/playbook/tokens'),
       globOptions: {
-        ignore: ["**/exports/**"]
+        ignore: ['**/exports/**'],
       },
       to: path.resolve(__dirname, 'dist/tokens'),
       transformPath(targetPath) {
@@ -39,12 +39,10 @@ const CSS_LOADER_CONFIG = {
   options: {
     modules: {
       localIdentName: '[name]',
-      getLocalIdent: (context, localIdentName, localName, options) => {
-        return localName;
-      }
+      getLocalIdent: (_context, _localIdentName, localName) => localName,
     },
     sourceMap: true,
-  }
+  },
 }
 
 const SASS_LOADER_CONFIG = {
@@ -52,8 +50,8 @@ const SASS_LOADER_CONFIG = {
   options: {
     sassOptions: {
       includePaths: [path.resolve(__dirname, '../node_modules')],
-    }
-  }
+    },
+  },
 }
 
 const SVG_URL_LOADER = {
@@ -89,17 +87,17 @@ module.exports = {
   },
   resolve: {
     extensions: [
-      ".js",
-      ".sass",
-      ".scss",
-      ".css",
-      ".svg",
-      ".jsx",
+      '.js',
+      '.sass',
+      '.scss',
+      '.css',
+      '.svg',
+      '.jsx',
     ],
     modules: [
       path.resolve(__dirname, 'app/pb_kits/playbook'),
       path.resolve(__dirname, '../node_modules'),
-    ]
+    ],
   },
   resolveLoader: {
     modules: [
@@ -130,5 +128,5 @@ module.exports = {
       BABEL_JS_CONFIG,
       SVG_URL_LOADER,
     ],
-  }
+  },
 }
