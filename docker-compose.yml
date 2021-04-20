@@ -4,6 +4,7 @@ volumes:
   database:
 services:
   web:
+    working_dir: /home/app/src/playbook-website
     build:
       context: .
       args:
