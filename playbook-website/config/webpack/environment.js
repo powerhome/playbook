@@ -1,4 +1,4 @@
-// const path = require('path')
+const path = require('path')
 
 const { environment } = require('@rails/webpacker')
 
@@ -10,7 +10,7 @@ environment.loaders.insert('javascript', {
       cacheDirectory: true,
     },
   },
-  exclude: /(node_modules|playbook\/dist)/,
+  include: path.resolve(__dirname, '../../app'),
 })
 
 module.exports = environment
