@@ -86,10 +86,10 @@ module.exports = {
     'reset.css': `${SOURCE_PATH}/_reset.scss`,
   },
   externals: {
-    'react': 'commonjs react',
-    'react-dom': 'commonjs react-dom',
-    'trix': 'commonjs trix',
-    'webpacker-react': 'commonjs webpacker-react',
+    'react': 'react',
+    'react-dom': 'react-dom',
+    'trix': 'trix',
+    'webpacker-react': 'webpacker-react',
   },
   resolve: {
     extensions: [
@@ -112,7 +112,7 @@ module.exports = {
   },
   optimization: { minimize: !IS_DEVELOPMENT },
   output: {
-    libraryTarget: 'commonjs2',
+    libraryTarget: 'umd',
     filename: '[name].js',
     path: DIST_PATH,
   },
