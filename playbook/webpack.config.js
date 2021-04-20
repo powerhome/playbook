@@ -77,7 +77,7 @@ module.exports = {
   mode: 'production',
   entry: {
     'playbook-react': './app/pb_kits/playbook/index.js',
-    'playbook-rails': './app/pb_kits/playbook/vendor.js',
+    'playbook-rails': './app/pb_kits/playbook/playbook-rails.js',
     'playbook-doc': './app/pb_kits/playbook/playbook-doc.js',
     'reset.css': './app/pb_kits/playbook/_reset.scss',
   },
