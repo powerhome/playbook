@@ -28,12 +28,3 @@ $breakpoints: (
     @content;
   }
 }
-
-:export {
-  @mixin export_breakpoints($breakpoints_list) {
-    @each $name, $settings in $breakpoints_list {
-      #{$name}: $settings;
-    }
-  }
-  @include export_breakpoints($breakpoints);
-}

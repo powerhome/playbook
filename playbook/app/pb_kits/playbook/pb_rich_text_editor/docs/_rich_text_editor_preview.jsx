@@ -5,7 +5,7 @@ import {
   RichTextEditor,
 } from '../../'
 
-const RichTextEditorPreview = () => {
+const RichTextEditorPreview = (props) => {
   const [showPreview, setShowPreview] = useState(false)
   const [previewText, setPreviewText] = useState(<div />)
 
@@ -19,6 +19,7 @@ const RichTextEditorPreview = () => {
       <RichTextEditor
           id="content-preview-editor"
           onChange={handleChange}
+          {...props}
       />
       <If condition={showPreview}>
         <Card marginTop="md">

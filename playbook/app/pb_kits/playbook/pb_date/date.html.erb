@@ -39,11 +39,10 @@
 
     <!-- icon -->
     <% if object.show_icon %>
-      <%= pb_rails("body", props: {
-        color: "light",
+      <%= pb_rails("caption", props: {
         tag: "div",
       }) do %>
-        <%= pb_rails("icon", props: { icon: "calendar-alt", fixed_width: true }) %>
+        <%= pb_rails("icon", props: { icon: "calendar-alt", fixed_width: true, size: 'xs' }) %>
       <% end %>
     <% end %>
 

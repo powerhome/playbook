@@ -1,15 +1,15 @@
 FROM quay.io/powerhome/passenger-customizable:0.9.35
 ARG precompileassets
 
-RUN bash -lc 'rvm remove all --force && rvm install ruby-2.5.0 && rvm --default use ruby-2.5.0 && gem install bundler -v 1.16.1'
+RUN bash -lc 'rvm remove all --force && rvm install ruby-2.5.0 && rvm --default use ruby-2.5.0 && gem install bundler -v 1.17.3'
 RUN /pd_build/ruby_support/install_ruby_utils.sh
 RUN /pd_build/ruby_support/finalize.sh
 
 ENV NODE_OPTIONS "--max_old_space_size=8192"
 ENV NVM_VERSION v0.33.8
-ENV NODE_VERSION v10.17.0
+ENV NODE_VERSION v12.20.1
 ENV NPM_VERSION 6.11.3
-ENV YARN_VERSION 1.13.0
+ENV YARN_VERSION 1.22.0
 ENV NVM_DIR /home/app/.nvm
 ENV PATH $NVM_DIR/versions/node/$NODE_VERSION/bin:$PATH
 RUN curl -o- https://raw.githubusercontent.com/creationix/nvm/$NVM_VERSION/install.sh | bash \

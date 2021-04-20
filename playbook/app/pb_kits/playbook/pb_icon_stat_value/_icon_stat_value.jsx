@@ -52,6 +52,7 @@ const IconStatValue = (props: IconStatValueProps) => {
       return (
         <Title
             size={1}
+            tag="span"
             text={`${value}`}
         />
       )
@@ -59,6 +60,7 @@ const IconStatValue = (props: IconStatValueProps) => {
       return (
         <Title
             size={2}
+            tag="span"
             text={`${value}`}
         />
       )
@@ -66,6 +68,7 @@ const IconStatValue = (props: IconStatValueProps) => {
       return (
         <Title
             size={3}
+            tag="span"
             text={`${value}`}
         />
       )

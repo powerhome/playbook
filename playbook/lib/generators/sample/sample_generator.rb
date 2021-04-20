@@ -11,8 +11,8 @@ class SampleGenerator < Rails::Generators::NamedBase
     sample_name = name.strip.downcase
     @sample_name_underscore = sample_name.parameterize.underscore
     @react_comp = @sample_name_underscore.camelize
-    template "sample_rails_index.erb", "app/views/playbook/samples/#{@sample_name_underscore}/index.html.erb"
-    template "sample_react_index.erb", "app/views/playbook/samples/#{@sample_name_underscore}/index.jsx"
+    template "sample_rails_index.erb", "spec/dummy/app/views/samples/#{@sample_name_underscore}/index.html.erb"
+    template "sample_react_index.erb", "spec/dummy/app/views/samples/#{@sample_name_underscore}/index.jsx"
   end
 
   def update_yaml
@@ -28,7 +28,7 @@ class SampleGenerator < Rails::Generators::NamedBase
 
   def js_imports
     append_to_file("app/pb_kits/playbook/packs/samples.js") do
-      "\nimport #{@react_comp} from '../../../views/playbook/samples/#{@sample_name_underscore}/index.jsx'\n"
+      "\nimport #{@react_comp} from '../../../../spec/dummy/app/views/samples/#{@sample_name_underscore}/index.jsx'\n"
     end
     append_to_file("app/pb_kits/playbook/packs/samples.js") do
       "WebpackerReact.setup({ #{@react_comp} })\n"
