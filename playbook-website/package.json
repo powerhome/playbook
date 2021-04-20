@@ -3,7 +3,8 @@
   "name": "playbook-website",
   "version": "1.0.0",
   "scripts": {
-    "watch": "./bin/webpack-dev-server"
+    "watch": "./bin/webpack-dev-server",
+    "release": "RAILS_ENV=production NODE_ENV=production ./bin/webpack"
   },
   "dependencies": {
     "@rails/webpacker": "5.2.1",

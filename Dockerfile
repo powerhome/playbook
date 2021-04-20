@@ -34,7 +34,6 @@ RUN yarn install
 RUN curl https://github.com/sass/node-sass/releases/download/v4.13.0/linux-x64-64_binding.node -o node_modules/node-sass/vendor/linux-x64-64_binding.node
 
 COPY --chown=app:app playbook /home/app/src/playbook
-RUN yarn workspace playbook-ui release
 
 # Bundle website
 COPY --chown=app:app playbook-website /home/app/src/playbook-website
@@ -44,4 +43,4 @@ RUN cd playbook-website && bundle install --frozen
 RUN chmod +x playbook-website/services/*.sh
 RUN mkdir /etc/service/puma && ln -s /home/app/src/playbook-website/services/puma.sh /etc/service/puma/run
 
-RUN services/startup.sh $precompileassets
+RUN if [ "${precompileassets}" = "disable" ]; then echo "Pre-compilation disabled"; else yarn workspaces foreach run release; fi
