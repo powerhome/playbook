@@ -45,7 +45,7 @@ export default function useHaveIBeenPwned(passphrase, minLength, delay = 400) {
         clearTimeout(handler)
       }
     },
-    [passphrase]
+    [passphrase, minLength, delay]
   )
 
   return isPwned
