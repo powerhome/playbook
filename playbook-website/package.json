@@ -2,6 +2,9 @@
   "private": true,
   "name": "playbook-website",
   "version": "1.0.0",
+  "scripts": {
+    "watch": "./bin/webpack-dev-server"
+  },
   "dependencies": {
     "@rails/webpacker": "5.2.1",
     "playbook-ui": ">= 1",
