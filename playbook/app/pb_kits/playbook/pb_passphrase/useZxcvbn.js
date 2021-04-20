@@ -14,9 +14,7 @@ export default function useZxcvbn(options) {
   const [result, setResult] = useState({})
 
   useEffect(() => {
-    if (confirmation) {
-      return
-    }
+    if (confirmation) return
 
     setResult(calculator(passphrase))
     const str = result.score

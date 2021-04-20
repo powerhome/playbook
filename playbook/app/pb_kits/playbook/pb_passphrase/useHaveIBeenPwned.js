@@ -38,6 +38,7 @@ export default function useHaveIBeenPwned(passphrase, minLength, delay = 400) {
       const handler = setTimeout(() => {
         checkHaveIBeenPwned(passphrase)
           .then((pwned) => setIsPwned(pwned))
+          .catch(() => setIsPwned(false))
       }, delay)
 
       return () => {
