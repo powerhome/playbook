@@ -36,6 +36,7 @@ const COPY_PLUGIN_CONFIG = new CopyPlugin({
 const BABEL_JS_CONFIG = {
   test: /\.(js|jsx|mjs)$/,
   use: 'babel-loader',
+  include: SOURCE_PATH,
   exclude: /node_modules/,
 }
 
@@ -54,13 +55,14 @@ const SASS_LOADER_CONFIG = {
   loader: 'sass-loader',
   options: {
     sassOptions: {
-      includePaths: [path.resolve(__dirname, '../node_modules')],
+      includePaths: [NODE_MODULES_PATH],
     },
   },
 }
 
 const SVG_URL_LOADER = {
   test: /\.svg$/,
+  include: SOURCE_PATH,
   exclude: /node_modules/,
   use: [
     {
