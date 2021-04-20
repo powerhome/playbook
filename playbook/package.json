@@ -10,7 +10,8 @@
     "test": "jest",
     "test-coverage": "jest --collectCoverage",
     "test-coverage-summary": "jest --collectCoverage --coverageReporters=\"json-summary\"",
-    "release": "webpack --env.production"
+    "watch": "webpack --watch --mode=development",
+    "release": "webpack --mode=production"
   },
   "repository": {
     "type": "git",
