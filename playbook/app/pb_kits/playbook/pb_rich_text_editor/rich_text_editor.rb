@@ -6,11 +6,14 @@ module Playbook
       prop :focus, type: Playbook::Props::Boolean,
                    default: false
 
+      prop :inline, type: Playbook::Props::Boolean,
+                    default: false
+
       prop :simple, type: Playbook::Props::Boolean,
                     default: false
 
       prop :sticky, type: Playbook::Props::Boolean,
-                   default: false
+                    default: false
 
       prop :value
       prop :template
@@ -35,13 +38,14 @@ module Playbook
       def rich_text_options
         {
           id: id,
+          inline: inline,
           className: classname,
           focus: focus,
           simple: simple,
           sticky: sticky,
           value: value,
           template: template,
-          placeholder: placeholder
+          placeholder: placeholder,
         }
       end
     end

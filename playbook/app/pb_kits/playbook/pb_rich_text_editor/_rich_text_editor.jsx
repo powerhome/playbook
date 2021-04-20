@@ -13,6 +13,7 @@ type RichTextEditorProps = {
   data?: object,
   focus?: boolean,
   id?: string,
+  inline?: boolean,
   name?: string,
   onChange: (string) => void,
   placeholder?: string,
@@ -29,6 +30,7 @@ const RichTextEditor = (props: RichTextEditorProps) => {
     data = {},
     focus = false,
     id,
+    inline,
     name,
     onChange,
     placeholder,
@@ -47,10 +49,14 @@ const RichTextEditor = (props: RichTextEditorProps) => {
       inheritable: true,
     }
 
+    // console.log(trixRef.current)
+
     trixRef.current.addEventListener('trix-initialize', (event) => {
       const element = event.target
 
       const { toolbarElement, editor } = element
+
+      // console.log(element, 'initialized')
 
       const blockCodeButton = toolbarElement.querySelector(
         '[data-trix-attribute=code]'
@@ -77,6 +83,8 @@ const RichTextEditor = (props: RichTextEditorProps) => {
         blockCodeButton.hidden = type == 'inline'
         inlineCodeButton.hidden = type == 'block'
       })
+
+      if (inline) editor.element.after(toolbarElement)
     })
 
     trixRef.current.addEventListener('trix-change', (event) => {
@@ -103,6 +111,7 @@ const RichTextEditor = (props: RichTextEditorProps) => {
   const SimpleClass = simple ? 'simple' : ''
   const FocusClass = focus ? 'focus-editor-targets' : ''
   const StickyClass = sticky ? 'sticky' : ''
+  const InlineClass = inline ? 'inline' : ''
   const css = classnames(globalProps(props), className)
 
   return (
@@ -114,6 +123,7 @@ const RichTextEditor = (props: RichTextEditorProps) => {
         SimpleClass,
         FocusClass,
         StickyClass,
+        InlineClass,
         css
       )}
     >

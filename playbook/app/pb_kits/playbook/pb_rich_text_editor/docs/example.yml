@@ -8,6 +8,8 @@ examples:
   - rich_text_editor_sticky: Sticky
   - rich_text_editor_templates: Templates
   - rich_text_editor_preview: Preview
+  - rich_text_editor_inline: Inline
+  - rich_text_editor_last: Last
 
   react:
   - rich_text_editor_default: Default
@@ -17,3 +19,5 @@ examples:
   - rich_text_editor_sticky: Sticky
   - rich_text_editor_templates: Templates
   - rich_text_editor_preview: Preview
+  - rich_text_editor_inline: Inline
+  - rich_text_editor_last: Last
