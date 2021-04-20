@@ -30,7 +30,7 @@ const RichTextEditor = (props: RichTextEditorProps) => {
     data = {},
     focus = false,
     id,
-    inline,
+    inline = false,
     name,
     onChange,
     placeholder,
@@ -49,14 +49,10 @@ const RichTextEditor = (props: RichTextEditorProps) => {
       inheritable: true,
     }
 
-    // console.log(trixRef.current)
-
     trixRef.current.addEventListener('trix-initialize', (event) => {
       const element = event.target
 
       const { toolbarElement, editor } = element
-
-      // console.log(element, 'initialized')
 
       const blockCodeButton = toolbarElement.querySelector(
         '[data-trix-attribute=code]'

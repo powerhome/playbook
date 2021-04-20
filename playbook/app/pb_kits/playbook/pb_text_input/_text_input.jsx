@@ -40,7 +40,7 @@ const TextInput = (
     disabled,
     error,
     id,
-    inline,
+    inline = false,
     name,
     label,
     onChange = () => {},

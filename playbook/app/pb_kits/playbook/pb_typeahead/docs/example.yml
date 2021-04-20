@@ -12,3 +12,4 @@ examples:
     # - typeahead_with_pills_async: With Pills (Async Data)
     # - typeahead_with_pills_async_users: With Pills (Async Data w/ Users)
     # - typeahead_with_pills_async_custom_options: With Pills (Async Data w/ Custom Options)
+    - typeahead_inline: Inline

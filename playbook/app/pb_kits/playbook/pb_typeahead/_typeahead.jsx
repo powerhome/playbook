@@ -6,6 +6,7 @@ import AsyncSelect from 'react-select/async'
 import CreateableSelect from 'react-select/creatable'
 import { get } from 'lodash'
 import { globalProps } from '../utilities/globalProps.js'
+import classnames from 'classnames'
 
 import Control from './components/Control'
 import ClearIndicator from './components/ClearIndicator'
@@ -58,6 +59,7 @@ const Typeahead = (props: Props) => {
     },
     defaultOptions: true,
     id: 'react-select-input',
+    inline: false,
     isClearable: true,
     isSearchable: true,
     name,
@@ -90,9 +92,10 @@ const Typeahead = (props: Props) => {
   }
 
   const classes = `pb_typeahead_kit react-select ${globalProps(props)}`
+  const inlineClass = selectProps.inline ? 'inline' : null
 
   return (
-    <div className={classes}>
+    <div className={classnames(classes, inlineClass)}>
       <Tag
           classNamePrefix="typeahead-kit-select"
           onChange={handleOnChange}

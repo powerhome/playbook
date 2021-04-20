@@ -167,4 +167,14 @@
     line-height: 16.5px;
     letter-spacing: normal;
   }
+  &.inline {
+    &:not(:hover) {
+      .text_input {
+        border-color: transparent;
+      }
+      .text_input_indicators .css-tlfecz-indicatorContainer {
+        color: transparent;
+      }
+    }
+  }
 }
