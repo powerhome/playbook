@@ -24,8 +24,9 @@ RUN apt-get update -y \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-# Build Library
 WORKDIR /home/app/src
+
+# Build Library
 COPY playbook-website/package.json playbook-website/
 COPY playbook/package.json playbook/
 COPY package.json yarn.lock ./
@@ -35,13 +36,12 @@ RUN curl https://github.com/sass/node-sass/releases/download/v4.13.0/linux-x64-6
 COPY --chown=app:app playbook /home/app/src/playbook
 RUN yarn workspace playbook-ui release
 
-# Build website
+# Bundle website
 COPY --chown=app:app playbook-website /home/app/src/playbook-website
-WORKDIR /home/app/src/playbook-website
-RUN bundle install --frozen
+RUN cd playbook-website && bundle install --frozen
 
 # Setup service
-RUN chmod +x services/*.sh
+RUN chmod +x playbook-website/services/*.sh
 RUN mkdir /etc/service/puma && ln -s /home/app/src/playbook-website/services/puma.sh /etc/service/puma/run
 
 RUN services/startup.sh $precompileassets

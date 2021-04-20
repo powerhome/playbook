@@ -28,7 +28,7 @@ services:
           memory: 2G
     env_file:
       - '.env.docker'
-    command: bash -c "rm -rf public/packs && rm -rf tmp/pids/server.pid && ./bin/webpack-dev-server"
+    command: bash -c "yarn workspaces foreach -pvi run watch"
     volumes:
       - .:/home/app/src
     ports:
