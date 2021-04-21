@@ -18,6 +18,6 @@
   },
   "lint-staged": {
     "*.{js,jsx}": "eslint",
-    "*.rb": "bundle exec rubocop"
+    "*.rb": "bundle exec rubocop --parallel"
   }
 }
