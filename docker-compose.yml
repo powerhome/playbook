@@ -29,7 +29,7 @@ services:
           memory: 2G
     env_file:
       - '.env.docker'
-    command: bash -c "yarn workspaces foreach -pvi run watch"
+    command: bash -c "yarn watch-all"
     volumes:
       - .:/home/app/src
     ports:
