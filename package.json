@@ -17,6 +17,7 @@
     "lint-staged": "^10.5.4"
   },
   "lint-staged": {
-    "*.{js,jsx}": "eslint"
+    "*.{js,jsx}": "eslint",
+    "*.rb": "bundle exec rubocop"
   }
 }

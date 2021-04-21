@@ -5,8 +5,6 @@ require "rake"
 # --------------------------------------- #
 #           Helper Functions              #
 # --------------------------------------- #
-
-# rubocop:disable Lint/LiteralAsCondition
 def confirmation_loop(version, npm_alpha, rake_arg)
   while true
     if rake_arg == "alpha"
@@ -44,7 +42,6 @@ def confirmation_loop(version, npm_alpha, rake_arg)
   end
   [version, npm_alpha]
 end
-# rubocop:enable Lint/LiteralAsCondition
 
 # run with...
 # `bundle exec rake "app:new_release[arg]"`  <<-- Create Makefile command that's more concise?

@@ -1,14 +1,10 @@
 AllCops:
   TargetRubyVersion: 2.5
   Exclude:
-    - "bin/*"
-    - "config/**/*"
-    - "db/**/*"
-    - "db/schema.rb"
+    - "**/spec/**/*"
+    - "**/bin/*"
     - "node_modules/**/*"
-    - "Rakefile"
-    - "spec/dummy/**/*"
-    - "vendor/**/*"
+    - "**/vendor/**/*"
 
 Layout/AccessModifierIndentation:
   EnforcedStyle: outdent
