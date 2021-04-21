@@ -3,12 +3,20 @@
   "private": true,
   "scripts": {
     "watch-all": "yarn workspaces foreach -ivp run watch",
-    "release-all": "yarn workspaces foreach -iv run release"
+    "release-all": "yarn workspaces foreach -iv run release",
+    "prepare": "husky install"
   },
   "workspaces": {
     "packages": [
       "playbook",
       "playbook-website"
     ]
+  },
+  "devDependencies": {
+    "husky": "^6.0.0",
+    "lint-staged": "^10.5.4"
+  },
+  "lint-staged": {
+    "*.{js,jsx}": "eslint"
   }
 }
