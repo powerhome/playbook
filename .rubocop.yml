@@ -1,10 +1,5 @@
 AllCops:
   TargetRubyVersion: 2.5
-  Exclude:
-    - "**/spec/**/*"
-    - "**/bin/*"
-    - "node_modules/**/*"
-    - "**/vendor/**/*"
 
 Layout/AccessModifierIndentation:
   EnforcedStyle: outdent
