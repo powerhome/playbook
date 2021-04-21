@@ -44,4 +44,4 @@ RUN cd playbook-website && bundle install --frozen
 RUN chmod +x playbook-website/services/*.sh
 RUN mkdir /etc/service/puma && ln -s /home/app/src/playbook-website/services/puma.sh /etc/service/puma/run
 
-RUN if [ "${precompileassets}" = "disable" ]; then echo "Pre-compilation disabled"; else yarn workspaces foreach run release; fi
+RUN if [ "${precompileassets}" = "disable" ]; then echo "Pre-compilation disabled"; else yarn release-all; fi

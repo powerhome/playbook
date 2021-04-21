@@ -1,6 +1,10 @@
 {
   "name": "playbook-project",
   "private": true,
+  "scripts": {
+    "watch-all": "yarn workspaces foreach -ivp run watch",
+    "release-all": "yarn workspaces foreach -iv run release"
+  },
   "workspaces": {
     "packages": [
       "playbook",
