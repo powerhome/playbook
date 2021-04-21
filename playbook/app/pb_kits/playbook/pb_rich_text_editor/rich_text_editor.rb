@@ -14,6 +14,8 @@ module Playbook
 
       prop :sticky, type: Playbook::Props::Boolean,
                     default: false
+      prop :toolbar_bottom, type: Playbook::Props::Boolean,
+                            default: false
 
       prop :value
       prop :template
@@ -43,6 +45,7 @@ module Playbook
           focus: focus,
           simple: simple,
           sticky: sticky,
+          toolbarBottom: toolbar_bottom,
           value: value,
           template: template,
           placeholder: placeholder,

@@ -6,6 +6,7 @@ const RichTextEditorInline = (props) => (
     <RichTextEditor
         id="inline"
         inline
+        toolbarBottom
         value="Try hovering over this text. Then try modifying it or adding more of your own text."
         {...props}
     />
