@@ -11,5 +11,3 @@ load 'rails/tasks/statistics.rake'
 require 'bundler/gem_tasks'
 
 Dir["private/tasks/*.rake"].each(&method(:load))
-
-task default: :test
