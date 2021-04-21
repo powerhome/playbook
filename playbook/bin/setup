@@ -3,12 +3,5 @@
 set -e
 
 echo ">>> Installing dependencies"
-if [ -z $CI ] ; then
-  time bundle check || bundle install --quiet
-else
-  time bundle check || bundle install --deployment
-fi
-
-if [ -z $CI ] ; then
-  yarn check --integrity 2> /dev/null || yarn install
-fi
+time bundle check || bundle install --quiet
+time yarn install
