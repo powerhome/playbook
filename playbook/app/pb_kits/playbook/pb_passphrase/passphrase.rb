@@ -4,6 +4,7 @@ module Playbook
   module PbPassphrase
     class Passphrase < Playbook::KitBase
       prop :average_threshold
+      prop :check_pwned
       prop :confirmation, type: Playbook::Props::Boolean, default: false
       prop :input_props, type: Playbook::Props::Hash, default: {}
       prop :label
@@ -18,6 +19,7 @@ module Playbook
 
       def passphrase_options
         {
+          checkPwned: check_pwned,
           dark: dark,
           id: id,
           averageThreshold: average_threshold,

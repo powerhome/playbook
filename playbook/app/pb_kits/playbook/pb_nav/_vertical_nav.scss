@@ -16,7 +16,7 @@ $selector: ".pb_nav_list";
     list-style: none;
   }
 
-  [class*=_title] {
+  [class*=pb_nav_list_title] {
     padding: 0 $space_md $space_sm;
   }
 

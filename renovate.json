@@ -9,15 +9,17 @@
     {
       "packageNames": [
         "@rails/webpacker",
+        "babel",
         "bundler",
         "node-sass",
         "rails",
         "react",
         "react-dom",
+        "react-select",
         "yarn"
       ],
       "packagePatterns": [
-        "^(babel|webpacker|webpack|node)"
+        "^(@babel|babel|webpacker|webpack|node)"
       ],
       "enabled": false
     }
