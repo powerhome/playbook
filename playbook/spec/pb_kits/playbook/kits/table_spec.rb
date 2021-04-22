@@ -5,9 +5,11 @@ require_relative "../../../../app/pb_kits/playbook/pb_table/table"
 RSpec.describe Playbook::PbTable::Table do
   subject { Playbook::PbTable::Table }
 
-  it { is_expected.to define_enum_prop(:size)
-                      .with_default("md")
-                      .with_values("sm", "md", "lg") }
+  it {
+    is_expected.to define_enum_prop(:size)
+      .with_default("md")
+      .with_values("sm", "md", "lg")
+  }
   it { is_expected.to define_boolean_prop(:single_line).with_default(false) }
   it { is_expected.to define_boolean_prop(:dark).with_default(false) }
   it { is_expected.to define_boolean_prop(:data_table).with_default(false) }

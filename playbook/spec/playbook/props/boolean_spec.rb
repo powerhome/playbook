@@ -14,7 +14,7 @@ RSpec.describe Playbook::Props::Boolean do
 
     it "returns false given anything else", :aggregate_failures do
       expect(subject.validate("true")).to eq false
-      expect(subject.validate(:false)).to eq false
+      expect(subject.validate(:false)).to eq false # rubocop:disable Lint/BooleanSymbol
       expect(subject.validate(1)).to eq false
       expect(subject.validate({})).to eq false
       expect(subject.validate([])).to eq false
