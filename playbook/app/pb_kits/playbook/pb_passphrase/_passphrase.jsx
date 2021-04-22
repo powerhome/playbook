@@ -5,12 +5,14 @@ import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import classnames from 'classnames'
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
 import { globalProps } from '../utilities/globalProps.js'
-import { zxcvbnPasswordScore }  from './passwordStrength.js'
+import useZxcvbn from './useZxcvbn'
+import useHaveIBeenPwned from './useHaveIBeenPwned'
 import { Body, Caption, Flex, Icon, PbReactPopover, ProgressSimple, TextInput } from '../'
 
 type PassphraseProps = {
   aria?: object,
   averageThreshold?: number,
+  checkPwned?: boolean,
   common?: boolean,
   confirmation?: boolean,
   className?: string,
@@ -33,6 +35,7 @@ const Passphrase = (props: PassphraseProps) => {
   const {
     aria = {},
     averageThreshold = 2,
+    checkPwned = false,
     className,
     common = false,
     confirmation = false,
@@ -41,7 +44,7 @@ const Passphrase = (props: PassphraseProps) => {
     id,
     inputProps = {},
     label = confirmation ? 'Confirm Passphrase' : 'Passphrase',
-    minLength,
+    minLength = 12,
     onChange = () => {},
     showTipsBelow = 'always',
     onStrengthChange,
@@ -50,6 +53,7 @@ const Passphrase = (props: PassphraseProps) => {
     uncontrolled = false,
     value = '',
   } = props
+  const ariaProps = buildAriaProps(aria)
 
   const [uncontrolledValue, setUncontrolledValue] = useState('')
 
@@ -68,16 +72,11 @@ const Passphrase = (props: PassphraseProps) => {
   const [showPassphrase, setShowPassphrase] = useState(false)
   const toggleShowPassphrase = () => setShowPassphrase(!showPassphrase)
 
-  const ariaProps = buildAriaProps(aria)
-  const dataProps = buildDataProps(data)
   const classes = classnames(buildCss('pb_passphrase'), globalProps(props), className)
 
-  const calculator = useMemo(
-    () => confirmation ? { test: () => ({}) } : zxcvbnPasswordScore({ averageThreshold, strongThreshold, minLength }),
-    [averageThreshold, confirmation, strongThreshold, minLength]
-  )
+  const isPwned = checkPwned ? useHaveIBeenPwned(displayValue, minLength) : false
 
-  const { percent: progressPercent, variant: progressVariant, text: strengthLabel, strength } = calculator.test(displayValue, common)
+  const { percent: progressPercent, variant: progressVariant, text: strengthLabel, strength } = useZxcvbn({ passphrase: displayValue, common, isPwned, confirmation, averageThreshold, minLength, strongThreshold })
 
   useEffect(() => {
     if (typeof onStrengthChange === 'function') {
@@ -88,6 +87,10 @@ const Passphrase = (props: PassphraseProps) => {
   const tipClass = classnames(
     (dark ? 'dark' : null),
     (showTipsBelow === 'always' ? null : `show-below-${showTipsBelow}`),
+  )
+  const dataProps = useMemo(
+    () => (buildDataProps(Object.assign({}, data, { strength }))),
+    [data, strength]
   )
 
   const popoverReference = (

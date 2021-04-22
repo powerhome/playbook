@@ -12,6 +12,7 @@ const PassphraseDefault = (props) => {
     <>
       <div>
         <Passphrase
+            id="my-passphrase"
             onChange={handleChange}
             value={input}
             {...props}
