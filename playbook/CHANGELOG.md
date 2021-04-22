@@ -1,8 +1,14 @@
+## [9.9.0](https://github.com/powerhome/playbook/tree/9.9.0)
 
+[Full Changelog](https://github.com/powerhome/playbook/compare/9.8.0...9.9.0)
 
-## [9.8.0](https://github.com/powerhome/playbook/tree/HEAD)
+**Kit Enhancements:**
 
-[Full Changelog](https://github.com/powerhome/playbook/compare/9.7.0...HEAD)
+- HaveIBeenPwned passphrase [\#1462](https://github.com/powerhome/playbook/pull/1462) ([patmccler](https://github.com/patmccler))
+
+## [9.8.0](https://github.com/powerhome/playbook/tree/9.8.0)
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/9.7.0...9.8.0)
 
 **Kit Enhancements:**
 
