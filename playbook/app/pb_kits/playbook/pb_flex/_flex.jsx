@@ -27,7 +27,6 @@ const Flex = (props: FlexProps) => {
     align = 'none',
     children,
     className,
-    id,
     inline = false,
     horizontal = 'left',
     justify = 'none',
@@ -71,7 +70,6 @@ const Flex = (props: FlexProps) => {
         globalProps(props),
         className
       )}
-        id={id}
     >
       {children}
     </div>
