@@ -259,31 +259,6 @@
     }
   }
   &.inline {
-    // trix-editor {
-    //   border-top-left-radius: 6px;
-    //   border-top-right-radius: 6px;
-    //   border-bottom: none;
-    //   border-bottom-left-radius: 0;
-    //   border-bottom-right-radius: 0;
-    //   &:empty:not(:focus)::before {
-    //     color: $neutral !important;
-    //   }
-    // }
-    // trix-toolbar .trix-button-row {
-    //   border-top: none;
-    //   border-top-left-radius: 0;
-    //   border-top-right-radius: 0;
-    //   border-bottom: 1px solid $border_light;
-    //   border-bottom-left-radius: 6px;
-    //   border-bottom-right-radius: 6px;
-    // }
-    // &:focus, &:focus-within {
-    //   trix-toolbar .trix-button-row {
-    //     @include transition_default;
-    //     border-color: $primary;
-    //     background-color: $focus_input_light;
-    //   }
-    // }
     &:hover {
       trix-editor {
         @include transition_default;

@@ -5,12 +5,14 @@ examples:
     - typeahead_with_pills: With Pills
     - typeahead_with_pills_async: With Pills (Async Data)
     - typeahead_with_pills_async_users: With Pills (Async Data w/ Users)
+    - typeahead_inline: Inline
+    - typeahead_multi_kit: Multi Kit Options
 
   react:
-    # - typeahead_default: Default
+    - typeahead_default: Default
     - typeahead_with_pills: With Pills
-    # - typeahead_with_pills_async: With Pills (Async Data)
-    # - typeahead_with_pills_async_users: With Pills (Async Data w/ Users)
-    # - typeahead_with_pills_async_custom_options: With Pills (Async Data w/ Custom Options)
+    - typeahead_with_pills_async: With Pills (Async Data)
+    - typeahead_with_pills_async_users: With Pills (Async Data w/ Users)
+    - typeahead_with_pills_async_custom_options: With Pills (Async Data w/ Custom Options)
     - typeahead_inline: Inline
     - typeahead_multi_kit: Multi Kit Options

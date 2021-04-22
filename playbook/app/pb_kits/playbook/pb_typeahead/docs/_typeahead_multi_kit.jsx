@@ -3,37 +3,38 @@
 import React from 'react'
 import { Typeahead } from '../../'
 
-const synths = [
-  { label: 'Oberheim', value: 'OBXa' },
-  { label: 'Moog', value: 'Minimoog' },
-  { label: 'Roland', value: 'Juno' },
-  { label: 'Korg', value: 'MS-20' },
+const labels = [
+  { label: 'Verve', value: '1956' },
+  { label: 'Stax', value: '1957' },
+  { label: 'Motown', value: '1959' },
+  { label: 'Kudu', value: '1971' },
+  { label: 'Stones Throw', value: '1996' },
 ]
 
-const cities = [
-  { label: 'Budapest', value: 'Hungary' },
-  { label: 'Singapore', value: 'Singapore' },
-  { label: 'Oslo', value: 'Norway' },
-  { label: 'Lagos', value: 'Nigeria' },
+const expressionists = [
+  { label: 'Kandinsky', value: 'Russia' },
+  { label: 'Klee', value: 'Switzerland' },
+  { label: 'Kokoschka', value: 'Austria' },
+  { label: 'Kirchner', value: 'Germany' },
 ]
 
 const TypeaheadMultiKit = (props) => {
   return (
     <>
       <Typeahead
+          defaultValue={[labels[0]]}
           isMulti
           label="Badges"
           multiKit="badge"
-          options={synths}
+          options={labels}
           {...props}
       />
       <Typeahead
+          defaultValue={[expressionists[0]]}
           isMulti
-          label="Small Pill"
+          label="Small Pills"
           multiKit="smallPill"
-          options={cities}
-          placeholder="Add cities"
-          plusIcon
+          options={expressionists}
           {...props}
       />
     </>
