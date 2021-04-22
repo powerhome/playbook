@@ -17,20 +17,20 @@ const cities = [
   { label: 'Lagos', value: 'Nigeria' },
 ]
 
-const TypeaheadInline = (props) => {
+const TypeaheadMultiKit = (props) => {
   return (
     <>
       <Typeahead
-          inline
           isMulti
-          label="Synths"
+          label="Badges"
+          multiKit="badge"
           options={synths}
           {...props}
       />
       <Typeahead
-          inline
           isMulti
-          label="Placeholder Plus Icon"
+          label="Small Pill"
+          multiKit="smallPill"
           options={cities}
           placeholder="Add cities"
           plusIcon
@@ -40,4 +40,4 @@ const TypeaheadInline = (props) => {
   )
 }
 
-export default TypeaheadInline
+export default TypeaheadMultiKit

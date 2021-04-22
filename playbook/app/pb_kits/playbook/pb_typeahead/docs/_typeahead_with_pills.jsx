@@ -14,10 +14,10 @@ const TypeaheadWithPills = (props) => {
   return (
     <>
       <Typeahead
-          badges
           createable
           isMulti
           label="Colors"
+          multiKit="badge"
           options={options}
           placeholder="Placeholder"
           plusIcon

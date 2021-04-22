@@ -44,7 +44,6 @@ type Props = {
 
 const Typeahead = (props: Props) => {
   const selectProps = {
-    badges: false,
     cacheOptions: true,
     components: {
       Control,
@@ -63,6 +62,7 @@ const Typeahead = (props: Props) => {
     isClearable: true,
     isSearchable: true,
     name,
+    multiKit: '',
     onCreate: () => {},
     plusIcon: false,
     ...props,

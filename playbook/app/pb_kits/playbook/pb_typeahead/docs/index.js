@@ -4,3 +4,4 @@ export { default as TypeaheadWithPillsAsync } from './_typeahead_with_pills_asyn
 export { default as TypeaheadWithPillsAsyncUsers } from './_typeahead_with_pills_async_users'
 export { default as TypeaheadWithPillsAsyncCustomOptions } from './_typeahead_with_pills_async_custom_options'
 export { default as TypeaheadInline } from './_typeahead_inline'
+export { default as TypeaheadMultiKit } from './_typeahead_multi_kit'

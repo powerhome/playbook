@@ -15,7 +15,7 @@ type Props = {
 const MultiValue = (props: Props) => {
   const { removeProps } = props
   const { imageUrl, label } = props.data
-  const { badges } = props.selectProps
+  const { multiKit } = props.selectProps
 
   const formPillProps = {
     marginRight: 'xs',
@@ -29,7 +29,7 @@ const MultiValue = (props: Props) => {
         className="text_input_multivalue_container"
         {...props}
     >
-      <If condition={badges}>
+      <If condition={multiKit === 'badge'}>
         <Badge
             closeProps={removeProps}
             removeIcon
@@ -43,11 +43,13 @@ const MultiValue = (props: Props) => {
               closeProps={removeProps}
               marginRight="xs"
               name={label}
+              size={multiKit === 'smallPill' ? 'small' : ''}
           />
           <Else />
           <FormPill
               closeProps={removeProps}
               marginRight="xs"
+              size={multiKit === 'smallPill' ? 'small' : ''}
               text={label}
           />
         </If>
