@@ -15,9 +15,9 @@ export default function useZxcvbn(options) {
 
   useEffect(() => {
     if (confirmation) return
-
-    setResult(calculator(passphrase))
-    const str = result.score
+    const newResult = calculator(passphrase)
+    setResult(newResult)
+    const str = newResult.score
 
     const noPassphrase = passphrase.length <= 0
     const commonPassphrase = common || isPwned
