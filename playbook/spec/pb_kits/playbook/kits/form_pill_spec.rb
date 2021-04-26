@@ -8,6 +8,7 @@ RSpec.describe Playbook::PbFormPill::FormPill do
   it { is_expected.to define_prop(:text) }
   it { is_expected.to define_prop(:name) }
   it { is_expected.to define_prop(:avatar_url) }
+  it { is_expected.to define_prop(:size) }
 
   describe "#classname" do
     it "returns namespaced class name", :aggregate_failures do
