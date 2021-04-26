@@ -63,7 +63,7 @@ const Typeahead = (props: Props) => {
     isSearchable: true,
     name,
     multiKit: '',
-    onCreate: () => {},
+    onCreateOption: null,
     plusIcon: false,
     ...props,
   }

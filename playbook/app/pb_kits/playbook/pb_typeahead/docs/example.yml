@@ -16,3 +16,4 @@ examples:
     - typeahead_with_pills_async_custom_options: With Pills (Async Data w/ Custom Options)
     - typeahead_inline: Inline
     - typeahead_multi_kit: Multi Kit Options
+    - typeahead_createable: Createable
