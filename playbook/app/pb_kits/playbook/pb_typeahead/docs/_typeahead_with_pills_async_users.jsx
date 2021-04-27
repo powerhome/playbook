@@ -90,6 +90,7 @@ const TypeaheadWithPillsAsyncUsers = (props) => {
           isMulti
           label="Github Users"
           loadOptions={promiseOptions}
+          noOptionsMessage={() => 'Type to Search'}
           onChange={handleOnChange}
           onMultiValueClick={handleOnMultiValueClick}
           placeholder="type the name of a Github user"

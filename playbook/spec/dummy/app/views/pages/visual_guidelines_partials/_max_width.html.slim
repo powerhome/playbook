@@ -1,0 +1,10 @@
+= pb_rails("title", props: { margin_top: "xl", text: "Max Width", tag: "h1", size: 1 })
+
+br
+= render :partial => "pages/visual_guidelines_partials/pb_doc_max_width",
+    locals:{ title: "Max Width Options",
+    usage: "Used for building Kits: Use the max_width prop when you would like to limit a kit's maximum width.",
+    sizes:[{name:"Small",variable:"max_width_sm"},
+      {name:"Medium",variable:"max_width_md"},
+      {name:"Large",variable:"max_width_lg"},
+      {name:"Extra Large",variable:"max_width_xl"}]}

@@ -17,11 +17,15 @@ module Playbook
       prop :required, type: Playbook::Props::Boolean, default: false
 
       def classname
-        generate_classname("pb_select")
+        generate_classname("pb_select", select_margin_bottom, separator: " ")
       end
 
       def select_wrapper_class
         "pb_select_kit_wrapper" + error_class
+      end
+
+      def select_margin_bottom
+        margin.present? || margin_bottom.present? ? nil : "mb_sm"
       end
 
       def options_to_array
