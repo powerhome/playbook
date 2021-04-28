@@ -21,11 +21,12 @@ module Playbook
 
       def options
         {
-          id: id,
-          data: data,
-          class: classname,
-          disabled: disabled,
           aria: aria,
+          class: classname,
+          data: data,
+          disabled: disabled,
+          id: id,
+          role: "button",
           type: type,
           value: value,
         }.compact
@@ -34,7 +35,8 @@ module Playbook
       def link_options
         options.merge(
           href: link,
-          target: new_window ? "_blank" : "_self"
+          role: "link",
+          target: new_window ? "_blank" : "_self",
         )
       end
 
