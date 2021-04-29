@@ -15,6 +15,7 @@
     "webpacker-react": "^0.3.2"
   },
   "devDependencies": {
+    "@babel/core": "^7.13.16",
     "@babel/preset-flow": "^7.12.1",
     "@babel/preset-react": "^7.13.13",
     "axe-core": "^4.1.1",
