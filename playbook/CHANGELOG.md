@@ -1,3 +1,20 @@
+## [9.10.0](https://github.com/powerhome/playbook/tree/9.10.0)
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/9.9.0...9.10.0)
+
+**Kit Enhancements:**
+
+- \[NUXE-490\] - Update Button for A11y [\#1429](https://github.com/powerhome/playbook/pull/1429) ([coleerikson](https://github.com/coleerikson))
+
+**Fixed Bugs:**
+
+- \[CHMN-78\] Hotfix passphrase strength bar display [\#1468](https://github.com/powerhome/playbook/pull/1468) ([patmccler](https://github.com/patmccler))
+
+**Merged pull requests:**
+
+- Add script [\#1466](https://github.com/powerhome/playbook/pull/1466) ([thestephenmarshall](https://github.com/thestephenmarshall))
+- Pin dependencies [\#1461](https://github.com/powerhome/playbook/pull/1461) ([renovate[bot]](https://github.com/apps/renovate))
+
 ## [9.9.0](https://github.com/powerhome/playbook/tree/9.9.0)
 
 [Full Changelog](https://github.com/powerhome/playbook/compare/9.8.0...9.9.0)
