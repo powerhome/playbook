@@ -9,10 +9,12 @@ examples:
   - icon_sizes: Icon Sizes
 
   react:
-  - icon_default: Icon Default
-  - icon_rotate: Icon Rotate
-  - icon_flip: Icon Flip
-  - icon_animate: Icon Animation
-  - icon_pull: Icon Pull
-  - icon_border: Icon Border
-  - icon_sizes: Icon Sizes
+  # - icon_default: Icon Default
+  # - icon_rotate: Icon Rotate
+  # - icon_flip: Icon Flip
+  # - icon_animate: Icon Animation
+  # - icon_pull: Icon Pull
+  # - icon_border: Icon Border
+  # - icon_sizes: Icon Sizes
+  - icon_custom: Custom Icon Support
+
