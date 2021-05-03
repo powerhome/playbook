@@ -89,7 +89,7 @@ const Passphrase = (props: PassphraseProps) => {
   }, [strength])
 
   const tipClass = classnames(
-    "passphrase-popover",
+    'passphrase-popover',
     (showTipsBelow === 'always' ? null : `show-below-${showTipsBelow}`),
   )
   const dataProps = useMemo(
@@ -125,8 +125,8 @@ const Passphrase = (props: PassphraseProps) => {
                 closeOnClick="outside"
                 placement="right"
                 reference={popoverReference}
-                show={showPopover}
                 shouldClosePopover={handleShouldClosePopover}
+                show={showPopover}
             >
               <Flex
                   align="center"
