@@ -9,20 +9,13 @@
     display: inline;
   }
 
-  a.dark {
-    color: $white;
+  [class*=show-below-] {
+    display: none;
   }
-
-  a {
-
-    &[class*=show-below-] {
-      display: none;
-    }
-    @each $breakpoint_name, $breakpoint in $breakpoints {
-      &.show-below-#{$breakpoint_name} {
-        @include break_at($breakpoint) {
-          display: inline;
-        }
+  @each $breakpoint_name, $breakpoint in $breakpoints {
+    .show-below-#{$breakpoint_name} {
+      @include break_at($breakpoint) {
+        display: inline;
       }
     }
   }
@@ -70,4 +63,10 @@
       visibility: hidden;
     }
   }
+  .passphrase-popover {
+    position: relative;
+    top: $space_sm;
+    left: -($space_xs * 1.25);
+  }
 }
+
