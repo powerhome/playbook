@@ -5,6 +5,7 @@ const DialogDefault = () => {
   const [isOpen, setIsOpen] = useState(false)
   const close = () => setIsOpen(false)
   const open = () => setIsOpen(true)
+  const [isLoading, setIsLoading] = useState(false)
 
   return (
     <>
@@ -12,9 +13,10 @@ const DialogDefault = () => {
       <Dialog
           cancelButton="Cancel"
           confirmButton="Okay"
+          loading={isLoading}
           onCancel={close}
           onClose={close}
-          onConfirm={close}
+          onConfirm={setIsLoading(!isLoading)}
           opened={isOpen}
           size="sm"
           text="Hello Body Text, Nice to meet ya."
