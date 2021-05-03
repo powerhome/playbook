@@ -16,7 +16,7 @@ const DialogDefault = () => {
           loading={isLoading}
           onCancel={close}
           onClose={close}
-          onConfirm={setIsLoading(!isLoading)}
+          onConfirm={() => setIsLoading(!isLoading)}
           opened={isOpen}
           size="sm"
           text="Hello Body Text, Nice to meet ya."
