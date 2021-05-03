@@ -43,7 +43,7 @@ const Dialog = (props: DialogProps) => {
     id,
     size = 'md',
     children,
-    loading,
+    loading = false,
     opened,
     onCancel = () => {},
     onConfirm = () => {},
