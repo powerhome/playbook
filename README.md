@@ -12,6 +12,7 @@ Playbook is the first design system built for both Rails & React interfaces. Ins
 
 ## Getting started
 
+1. `cd playbook`
 1. Run `make it`
 1. Install overcommit hooks `bin/overcommit`
 1. open [http://localhost:8089](http://localhost:8089)
@@ -57,12 +58,12 @@ See [docs/upgrade-guide](./docs/upgrade-guide)
 ### Testing Playbook Kits Locally
 
 #### Testing React Kits locally
-1.  Inside of your Playbook repository, run `yarn link`. 
+1.  Inside of your Playbook repository, run `yarn link`.
 2.  Inside of the directory you want to test with playbook, run `yarn link playbook-ui`.
 3.  Run `yarn hmr` in your directory you want to test with playbook, and hard refresh (command + shift + R) your browser.
 4.  Test all the things!
 5.  When finished, inside of the directory you want to test with playbook, run `yarn unlink playbook-ui`.
-6.  Inside of your Playbook repository, run `yarn unlink`. 
+6.  Inside of your Playbook repository, run `yarn unlink`.
 
 #### Jest & React-Testing-Library for Writing Tests
 
