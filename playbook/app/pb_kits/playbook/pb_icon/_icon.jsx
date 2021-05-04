@@ -9,6 +9,8 @@ type IconProps = {
   aria?: object,
   border?: boolean,
   className?: string,
+  color?: string,
+  custom?: boolean,
   data?: object,
   fixedWidth?: boolean,
   flip?: "horizontal" | "vertical" | "both" | "none",
@@ -46,6 +48,7 @@ const Icon = (props: IconProps) => {
     aria = {},
     border = false,
     className,
+    color,
     data = {},
     fixedWidth = true,
     flip = false,
@@ -59,10 +62,13 @@ const Icon = (props: IconProps) => {
     size,
     spin = false,
   } = props
+
+  const customIconList = ['powergon', 'greensky', 'nitro']
+
   const classes = classnames(
     flipMap[flip],
     'pb_icon_kit',
-    'far',
+    `${customIconList.includes(icon) ? 'fak' : 'far'}`,
     {
       'fa-border': border,
       'fa-fw': fixedWidth,
@@ -86,6 +92,7 @@ const Icon = (props: IconProps) => {
   return (
     <>
       <i
+          style={{ 'color': `${color}` }}
           {...dataProps}
           className={classes}
           id={id}
