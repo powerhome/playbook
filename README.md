@@ -12,21 +12,19 @@ Playbook is the first design system built for both Rails & React interfaces. Ins
 
 ## Getting started
 
-1. Run `make it`
+1. ru `yarn && bundle`
 1. Install overcommit hooks `bin/overcommit`
-1. open [http://localhost:8089](http://localhost:8089)
-
-To clean up this project from your local machine, run `make stop`, which will drop all containers and networks associated with this project. To purge all resources, do `make clean`, which also removes images and volumes for a blank slate.
-
+1. run `bin/rails s`
+1. open [http://localhost:3000](http://localhost:3000)
 
 <details><summary>Making changes to the Gemfile:</summary>
 <p>
 
-* Stop the `make start` process
-* Run `make bundle` to (un-)install gems and update the `Gemfile.lock`
-* Re-start the server with `make start`
+* Kill the `rails` Ctrl + C
+* `bundle`
+* Re-start the server with `bin/rails s`
 
-To run the tests, do `bin/test`. To launch a shell in the container run `make shell`, or to launch a Rails console run `make console`
+To run the tests, do `bin/test`.
 
 </p>
 </details>
