@@ -6,11 +6,11 @@ import '../../../../fonts/custom-icons.js'
 
 
 // Things i know 
-// -- upgrade fontawesome to when it supports the `fak` custom icon sets which i think is 5.14.0 -- but we should just upgrade to latest anyway
-// -- Font awesome is picky. This plugin eases the entire process by giving FA exactly what it needs. SVGO Compressor by sketch.
+// -- Upgrade fontawesome to when it supports the `fak` custom icon sets which i think is 5.14.0 -- but we should just upgrade to latest anyway
+// -- SVGO Compressor by sketch: Font awesome is picky. This plugin eases the entire process by giving FA exactly what it needs. 
 // -- Furthermore on it's pickiness, i had to resize the symbol to be 16x20 MAX pixels. It cannot be bigger, or FA won't accept it.
-
-// -- We would need to go through all our icons and get them small, and then export (the plugin kicks in whenever you export -- you only need to have it installed ), so they have a single svg path, etc.
+// -- We would need to go through all our icons and get them small, and then export 
+    // (the plugin kicks in whenever you export -- you only need to have it installed ), so they have a single svg path, etc.
 
 // --  I'm not sure what is included exactly in our custom-icons script that I got from the website... BUT the other icons-- namely our fontawesome stuff still seems in tact.
 // --  We still need the import 'regular-min.js', BUT we can no longer include fontawesome-min.js .... this new script (custom-icons.js) takes the place of that one PLUS includes our custom icons.

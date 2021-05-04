@@ -1,15 +1,30 @@
-import React from "react"
-import { Icon, Flex } from "../../"
+import React from 'react'
+import { Flex, Icon } from '../../'
 
 const IconCustom = (props) => {
   return (
     <div>
-    <Flex align="center">
-      <Icon size="5x" icon='powergon' {...props} marginRight="lg" />
-      <Icon size="5x" icon='greensky' {...props} marginRight="lg" color="#228722" />
-      <Icon size="3x" icon='nitro' {...props} />
-    </Flex>
-      
+      <Flex align="center">
+        <Icon
+            icon="powergon"
+            size="5x"
+            {...props}
+            marginRight="lg"
+        />
+        <Icon
+            icon="greensky"
+            size="5x"
+            {...props}
+            color="#228722"
+            marginRight="lg"
+        />
+        <Icon
+            icon="nitro"
+            size="3x"
+            {...props}
+        />
+      </Flex>
+
     </div>
   )
 }
