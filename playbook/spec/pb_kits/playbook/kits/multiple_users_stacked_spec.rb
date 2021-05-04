@@ -5,8 +5,10 @@ require_relative "../../../../app/pb_kits/playbook/pb_multiple_users_stacked/mul
 RSpec.describe Playbook::PbMultipleUsersStacked::MultipleUsersStacked do
   subject { Playbook::PbMultipleUsersStacked::MultipleUsersStacked }
 
-  it { is_expected.to define_prop(:users)
-                      .of_type(Playbook::Props::HashArray) }
+  it {
+    is_expected.to define_prop(:users)
+      .of_type(Playbook::Props::HashArray)
+  }
 
   describe "#classname" do
     it "returns namespaced class name", :aggregate_failures do

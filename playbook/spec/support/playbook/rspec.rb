@@ -82,7 +82,7 @@ module Playbook
       failure_message do |subject_class|
         base_message = "expected #{subject_class} to define :#{prop_key} enum prop"
         default_message = "with default of #{@default}"
-        values_message = "with values of #{@values&.join(", ")}"
+        values_message = "with values of #{@values&.join(', ')}"
 
         if @default && @values
           [base_message, default_message, values_message].join(" ")

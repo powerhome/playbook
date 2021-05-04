@@ -11,7 +11,7 @@ RSpec.describe Playbook::PbForm::Form, type: :kit do
   end
 
   it "allows the user to set the URL" do
-    rendered = helper.pb_rails "form", props: { options: { url: "http://example.org"} }
+    rendered = helper.pb_rails "form", props: { options: { url: "http://example.org" } }
 
     expect(rendered).to have_tag("form[action='http://example.org']")
   end
@@ -26,13 +26,13 @@ RSpec.describe Playbook::PbForm::Form, type: :kit do
   end
 
   it "allows the user to set the URL" do
-    rendered = helper.pb_rails "form", props: { options: { url: "http://example.org"} }
+    rendered = helper.pb_rails "form", props: { options: { url: "http://example.org" } }
 
     expect(rendered).to have_tag("form.pb-form")
   end
 
   it "allows the user render actions" do
-    rendered = helper.pb_rails "form", props: { options: { url: "http://example.org"} } do |form|
+    rendered = helper.pb_rails "form", props: { options: { url: "http://example.org" } } do |form|
       form.actions(&:submit)
     end
 

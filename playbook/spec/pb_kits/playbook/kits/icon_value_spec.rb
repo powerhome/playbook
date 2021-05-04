@@ -7,9 +7,11 @@ RSpec.describe Playbook::PbIconValue::IconValue do
 
   it { is_expected.to define_prop(:icon).that_is_required }
   it { is_expected.to define_prop(:text) }
-  it { is_expected.to define_enum_prop(:align)
-                  .with_default("left")
-                  .with_values("left", "center", "right") }
+  it {
+    is_expected.to define_enum_prop(:align)
+      .with_default("left")
+      .with_values("left", "center", "right")
+  }
 
   describe "#classname" do
     it "returns namespaced class name", :aggregate_failures do

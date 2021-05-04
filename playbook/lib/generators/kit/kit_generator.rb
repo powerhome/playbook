@@ -5,8 +5,8 @@ class KitGenerator < Rails::Generators::NamedBase
   source_root File.expand_path("templates", __dir__)
   class_option :props, type: :array, default: []
 
-  REACT_EXAMPLES_PATH = "app/pb_kits/playbook/packs/react-examples.js".freeze
-  REACT_INDEX_PATH = "app/pb_kits/playbook/index.js".freeze
+  REACT_EXAMPLES_PATH = "app/pb_kits/playbook/packs/react-examples.js"
+  REACT_INDEX_PATH = "app/pb_kits/playbook/index.js"
 
   def create_templates
     kit_name = name.strip.downcase
@@ -38,7 +38,7 @@ class KitGenerator < Rails::Generators::NamedBase
       say_status  "#{@kit_name_capitalize} kit already exists.",
                   "Please choose another name or manually make changes to the existing kit.",
                   :red
-      return
+      nil
     else
       # Add kit to Playbook menu ==========================
       open("app/pb_kits/playbook/data/menu.yml", "a") do |f|
@@ -78,14 +78,14 @@ class KitGenerator < Rails::Generators::NamedBase
         template "kit_js.erb", "#{full_kit_directory}/docs/index.js"
 
         react_imports_page(
-          path: "#{REACT_EXAMPLES_PATH}",
+          path: REACT_EXAMPLES_PATH.to_s,
           import_statement: "import * as #{@kit_name_pascal} from 'pb_#{@kit_name_underscore}/docs'\n",
           webpack_statement: "  ...#{@kit_name_pascal},\n",
           import_area_indicator: "// KIT EXAMPLES\n"
         )
 
         react_export_page(
-          path: "#{REACT_INDEX_PATH}",
+          path: REACT_INDEX_PATH.to_s,
           export_statement: "export #{@kit_name_pascal} from './pb_#{@kit_name_underscore}/_#{@kit_name_underscore}.jsx'\n",
           start_comment: "// vvv React Component JSX Imports from the React Kits vvv\n",
           end_comment: "// ^^^ React Component JSX Imports from the React Kits ^^^\n"

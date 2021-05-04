@@ -5,12 +5,16 @@ require_relative "../../../../app/pb_kits/playbook/pb_button_toolbar/button_tool
 RSpec.describe Playbook::PbButtonToolbar::ButtonToolbar do
   subject { Playbook::PbButtonToolbar::ButtonToolbar }
 
-  it { is_expected.to define_enum_prop(:orientation)
-                  .with_default("horizontal")
-                  .with_values("horizontal", "vertical") }
-  it { is_expected.to define_enum_prop(:variant)
-                  .with_default("primary")
-                  .with_values("primary", "secondary") }
+  it {
+    is_expected.to define_enum_prop(:orientation)
+      .with_default("horizontal")
+      .with_values("horizontal", "vertical")
+  }
+  it {
+    is_expected.to define_enum_prop(:variant)
+      .with_default("primary")
+      .with_values("primary", "secondary")
+  }
   it { is_expected.to define_boolean_prop(:connected).with_default(false) }
   it { is_expected.to define_prop(:text) }
 

@@ -23,11 +23,12 @@ module Playbook
       end
 
       def active_step(step)
-         step <= active ? "_active" : "_inactive"
+        step <= active ? "_active" : "_inactive"
       end
 
       def aria_attributes
         return aria if aria.present?
+
         { hidden: true }
       end
 
