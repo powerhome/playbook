@@ -21,18 +21,14 @@ module Playbook
       end
 
       def returned_icon
-        if icon
-          icon
-        else
-          case change
-          when "increase"
-            "arrow-up"
-          when "decrease"
-            "arrow-down"
-          else
-            false
-          end
-        end
+        icon || case change
+                when "increase"
+                  "arrow-up"
+                when "decrease"
+                  "arrow-down"
+                else
+                  false
+                end
       end
 
       def classname

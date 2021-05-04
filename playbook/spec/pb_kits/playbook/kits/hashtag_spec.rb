@@ -6,9 +6,11 @@ RSpec.describe Playbook::PbHashtag::Hashtag do
   subject { Playbook::PbHashtag::Hashtag }
 
   it { is_expected.to define_prop(:text) }
-  it { is_expected.to define_enum_prop(:type)
-                      .with_default("default")
-                      .with_values("default", "project", "home", "appointment") }
+  it {
+    is_expected.to define_enum_prop(:type)
+      .with_default("default")
+      .with_values("default", "project", "home", "appointment")
+  }
   it { is_expected.to define_prop(:url) }
 
   describe "#classname" do

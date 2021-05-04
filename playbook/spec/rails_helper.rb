@@ -7,7 +7,7 @@ require File.expand_path("dummy/config/environment", __dir__)
 abort("The Rails environment is running in production mode!") if Rails.env.production?
 
 require "rspec/rails"
-require 'rspec-html-matchers'
+require "rspec-html-matchers"
 
 Dir[File.expand_path("support/**/*.rb", __dir__)].sort.each(&method(:require))
 

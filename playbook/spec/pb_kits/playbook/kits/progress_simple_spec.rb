@@ -5,18 +5,24 @@ require_relative "../../../../app/pb_kits/playbook/pb_progress_simple/progress_s
 RSpec.describe Playbook::PbProgressSimple::ProgressSimple do
   subject { Playbook::PbProgressSimple::ProgressSimple }
 
-  it { is_expected.to define_enum_prop(:align)
-    .with_values("left", "center", "right")
-    .with_default("left") }
+  it {
+    is_expected.to define_enum_prop(:align)
+      .with_values("left", "center", "right")
+      .with_default("left")
+  }
   it { is_expected.to define_prop(:value).of_type(Playbook::Props::Number) }
   it { is_expected.to define_prop(:max).of_type(Playbook::Props::Number) }
-  it { is_expected.to define_boolean_prop(:muted)
-    .with_default(false) }
+  it {
+    is_expected.to define_boolean_prop(:muted)
+      .with_default(false)
+  }
   it { is_expected.to define_prop(:percent).of_type(Playbook::Props::Percentage) }
   it { is_expected.to define_prop(:width) }
-  it { is_expected.to define_enum_prop(:variant)
-    .with_values("default", "positive", "negative", "warning")
-    .with_default("default") }
+  it {
+    is_expected.to define_enum_prop(:variant)
+      .with_values("default", "positive", "negative", "warning")
+      .with_default("default")
+  }
 
   describe "#classname" do
     it "returns namespaced class name", :aggregate_failures do
@@ -45,7 +51,6 @@ RSpec.describe Playbook::PbProgressSimple::ProgressSimple do
     it "raises when not enough progress props are passed" do
       expect { subject.new(value: 7).number_value }.to raise_error(Playbook::MissingPropError)
       expect { subject.new(max: 7).number_value }.to raise_error(Playbook::MissingPropError)
-
     end
   end
 end

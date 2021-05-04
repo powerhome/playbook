@@ -24,7 +24,6 @@ module Playbook
 
       prop :value, type: Playbook::Props::Numeric
 
-
       def classname
         generate_classname("pb_icon_stat_value_kit", orientation, size, variant)
       end

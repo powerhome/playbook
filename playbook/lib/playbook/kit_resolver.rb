@@ -8,7 +8,7 @@ module Playbook
     end
 
     def initialize
-      @cache = Hash.new do |cache, kit_name|
+      @cache = Hash.new do |_cache, kit_name|
         is_subkit = kit_name.match(%r{[/\\]})
         folder = is_subkit ? kit_name.split("/")[0] : kit_name
         item = is_subkit ? kit_name.split("/")[-1] : kit_name

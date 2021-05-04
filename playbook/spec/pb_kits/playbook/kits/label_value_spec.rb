@@ -7,9 +7,11 @@ RSpec.describe Playbook::PbLabelValue::LabelValue do
 
   it { is_expected.to define_string_prop(:label).that_is_required }
   it { is_expected.to define_string_prop(:value) }
-  it { is_expected.to define_enum_prop(:variant)
-                      .with_values("default", "details")
-                      .with_default("default") }
+  it {
+    is_expected.to define_enum_prop(:variant)
+      .with_values("default", "details")
+      .with_default("default")
+  }
 
   describe "#classname" do
     it "returns namespaced class name", :aggregate_failures do

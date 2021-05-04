@@ -5,12 +5,16 @@ require_relative "../../../../app/pb_kits/playbook/pb_distribution_bar/distribut
 RSpec.describe Playbook::PbDistributionBar::DistributionBar do
   subject { Playbook::PbDistributionBar::DistributionBar }
 
-  it { is_expected.to define_enum_prop(:size)
-                      .with_default("lg")
-                      .with_values("lg", "sm") }
-  it { is_expected.to define_prop(:widths)
-                      .of_type(Playbook::Props::NumberArray)
-                      .with_default([1]) }
+  it {
+    is_expected.to define_enum_prop(:size)
+      .with_default("lg")
+      .with_values("lg", "sm")
+  }
+  it {
+    is_expected.to define_prop(:widths)
+      .of_type(Playbook::Props::NumberArray)
+      .with_default([1])
+  }
 
   describe "#classname" do
     it "returns namespaced class name", :aggregate_failures do
