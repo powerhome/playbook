@@ -15,7 +15,8 @@ Playbook is the first design system built for both Rails & React interfaces. Ins
 1. ru `yarn && bundle`
 1. Install overcommit hooks `bin/overcommit`
 1. run `bin/rails s`
-1. open [http://localhost:3000](http://localhost:3000)
+1. run `./bin/webpack-dev-server`
+3. open [http://localhost:3000](http://localhost:3000)
 
 <details><summary>Making changes to the Gemfile:</summary>
 <p>
