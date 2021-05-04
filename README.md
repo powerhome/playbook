@@ -12,7 +12,7 @@ Playbook is the first design system built for both Rails & React interfaces. Ins
 
 ## Getting started
 
-1. ru `yarn && bundle`
+1. run `yarn && bundle`
 1. Install overcommit hooks `bin/overcommit`
 1. run `bin/rails s`
 1. run `./bin/webpack-dev-server`
