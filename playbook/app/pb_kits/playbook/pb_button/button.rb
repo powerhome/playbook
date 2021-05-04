@@ -36,7 +36,7 @@ module Playbook
         options.merge(
           href: link,
           role: "link",
-          target: new_window ? "_blank" : "_self",
+          target: new_window ? "_blank" : "_self"
         )
       end
 
