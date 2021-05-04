@@ -25,6 +25,10 @@ Playbook is the first design system built for both Rails & React interfaces. Ins
 1. `rails server`
 1. open [http://localhost:3000](http://localhost:3000)
 
+### Running tests
+
+Run `test.sh` from the `playbook` directory.
+
 ## Additional resources
 
 ### Upgrading between versions
