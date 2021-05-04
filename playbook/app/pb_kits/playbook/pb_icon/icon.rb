@@ -29,7 +29,6 @@ module Playbook
       prop :spin, type: Playbook::Props::Boolean,
                   default: false
 
-
       def classname
         generate_classname(
           "pb_icon_kit",
@@ -52,10 +51,9 @@ module Playbook
     private
 
       def custom_icon_class
-        custom_icon_list = ['powergon', 'greensky', 'nitro']
+        custom_icon_list = %w[powergon greensky nitro]
         custom_icon_list.include?(icon) ? "fak" : "far"
       end
-
 
       def border_class
         border ? "fa-border" : nil
