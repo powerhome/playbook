@@ -5,14 +5,20 @@ require_relative "../../../../app/pb_kits/playbook/pb_source/source"
 RSpec.describe Playbook::PbSource::Source do
   subject { Playbook::PbSource::Source }
 
-  it { is_expected.to define_boolean_prop(:hide_icon)
-                      .with_default(false) }
+  it {
+    is_expected.to define_boolean_prop(:hide_icon)
+      .with_default(false)
+  }
   it { is_expected.to define_prop(:source).of_type(Playbook::Props::String) }
-  it { is_expected.to define_enum_prop(:type)
-                      .with_values("user", "retail", "inbound", "outbound", "prospecting", "events", "referral")
-                      .with_default("inbound") }
-  it { is_expected.to define_prop(:user).of_type(Playbook::Props::Hash)
-                      .with_default({}) }
+  it {
+    is_expected.to define_enum_prop(:type)
+      .with_values("user", "retail", "inbound", "outbound", "prospecting", "events", "referral")
+      .with_default("inbound")
+  }
+  it {
+    is_expected.to define_prop(:user).of_type(Playbook::Props::Hash)
+                                     .with_default({})
+  }
 
   describe "#type_text" do
     it "titlizes the type when no user is present" do
@@ -20,7 +26,7 @@ RSpec.describe Playbook::PbSource::Source do
     end
 
     it "returns the user's name when a user is present" do
-      expect(subject.new(type: "user", user: {name: "New User"}).type_text).to eq "New User"
+      expect(subject.new(type: "user", user: { name: "New User" }).type_text).to eq "New User"
     end
   end
 
@@ -29,31 +35,30 @@ RSpec.describe Playbook::PbSource::Source do
       expect(subject.new(type: "prospecting", user: {}).user_id).to eq nil
       expect(subject.new(type: "referral", user: { name: "User" }).user_id).to eq nil
       expect(subject.new(type: "user", user: { name: "User", user_id: 435 }).user_id).to eq 435
-
     end
   end
 
   describe "#show_icon?" do
     it "returns true only when passed a type that uses an icon and no user is present", :aggregate_failures do
       expect(subject.new(type: "prospecting", user: {}).show_icon?).to eq true
-      expect(subject.new(type: "referral", user: {name: "user"}).show_icon?).to eq false
-      expect(subject.new(type: "user", user: {name: "First User"}).show_icon?).to eq false
+      expect(subject.new(type: "referral", user: { name: "user" }).show_icon?).to eq false
+      expect(subject.new(type: "user", user: { name: "First User" }).show_icon?).to eq false
     end
   end
 
   describe "#avatar" do
-    it "returns nil when not passed a user, and when the type is one that should have an icon", :aggregate_failures  do
+    it "returns nil when not passed a user, and when the type is one that should have an icon", :aggregate_failures do
       expect(subject.new(type: "referral").avatar).to eq nil
       expect(subject.new(type: "user").avatar).to eq nil
     end
 
     it "removes the user's id from the hash if one is passed" do
-      expect(subject.new(type: "user", user: { name: "First User", user_id: 33 }).avatar).to_not include(:user_id => 33)
+      expect(subject.new(type: "user", user: { name: "First User", user_id: 33 }).avatar).to_not include(user_id: 33)
     end
 
     it "updates avatar props hash with size: sm" do
-      expect(subject.new(type: "referral", user: { name: "user" }).avatar).to include(:size => "sm")
-      expect(subject.new(type: "referral", user: { name: "user", size: "lg" }).avatar).to include(:size => "sm")
+      expect(subject.new(type: "referral", user: { name: "user" }).avatar).to include(size: "sm")
+      expect(subject.new(type: "referral", user: { name: "user", size: "lg" }).avatar).to include(size: "sm")
     end
   end
 

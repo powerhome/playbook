@@ -7,9 +7,11 @@ RSpec.describe Playbook::PbTitleDetail::TitleDetail do
 
   it { is_expected.to define_string_prop(:title).that_is_required }
   it { is_expected.to define_string_prop(:detail).that_is_required }
-  it { is_expected.to define_enum_prop(:align)
-                      .with_values("left", "center", "right")
-                      .with_default("left") }
+  it {
+    is_expected.to define_enum_prop(:align)
+      .with_values("left", "center", "right")
+      .with_default("left")
+  }
 
   describe "#classname" do
     it "returns namespaced class name", :aggregate_failures do

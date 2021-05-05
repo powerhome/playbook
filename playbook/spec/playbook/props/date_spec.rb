@@ -5,7 +5,7 @@ RSpec.describe Playbook::Props::Date do
 
   describe "#validate" do
     it "returns true given a Ruby:Date", :aggregate_failures do
-      expect(subject.validate(Date.new(2020, 03, 02))).to eq true
+      expect(subject.validate(Date.new(2020, 0o3, 0o2))).to eq true
     end
 
     it "returns false given anything else", :aggregate_failures do

@@ -6,8 +6,10 @@ RSpec.describe Playbook::PbStatValue::StatValue do
   subject { Playbook::PbStatValue::StatValue }
 
   it { is_expected.to define_prop(:unit) }
-  it { is_expected.to define_prop(:value)
-                  .of_type(Playbook::Props::Number) }
+  it {
+    is_expected.to define_prop(:value)
+      .of_type(Playbook::Props::Number)
+  }
 
   describe "#classname" do
     it "returns namespaced class name", :aggregate_failures do

@@ -7,9 +7,11 @@ RSpec.describe Playbook::PbFixedConfirmationToast::FixedConfirmationToast do
 
   it { is_expected.to define_prop(:text).of_type(Playbook::Props::String) }
   it { is_expected.to define_prop(:multi_line).of_type(Playbook::Props::Boolean) }
-  it { is_expected.to define_enum_prop(:status)
-                      .with_default("neutral")
-                      .with_values("success", "error", "neutral", "tip") }
+  it {
+    is_expected.to define_enum_prop(:status)
+      .with_default("neutral")
+      .with_values("success", "error", "neutral", "tip")
+  }
 
   describe "#show_text?" do
     it "returns true if text is present", :aggregate_failures do
@@ -49,5 +51,3 @@ RSpec.describe Playbook::PbFixedConfirmationToast::FixedConfirmationToast do
     end
   end
 end
-
-

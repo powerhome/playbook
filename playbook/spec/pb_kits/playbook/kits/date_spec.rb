@@ -5,25 +5,31 @@ require_relative "../../../../app/pb_kits/playbook/pb_date/date"
 RSpec.describe Playbook::PbDate::Date do
   subject { Playbook::PbDate::Date }
 
-  it { is_expected.to define_enum_prop(:alignment)
+  it {
+    is_expected.to define_enum_prop(:alignment)
       .with_values("left", "center", "right")
-      .with_default("left") }
+      .with_default("left")
+  }
   it { is_expected.to define_prop(:date) }
-  it { is_expected.to define_boolean_prop(:show_icon)
-      .with_default(false) }
+  it {
+    is_expected.to define_boolean_prop(:show_icon)
+      .with_default(false)
+  }
   it do
     is_expected.to define_enum_prop(:size)
       .with_default("md")
       .with_values("lg", "md", "sm", "xs")
   end
-  it { is_expected.to define_boolean_prop(:show_day_of_week)
-      .with_default(false) }
+  it {
+    is_expected.to define_boolean_prop(:show_day_of_week)
+      .with_default(false)
+  }
   it { is_expected.to define_prop(:timezone) }
 
   describe "#day_of_week" do
     it "displays the date" do
       expect(subject.new(
-        date: Date.new(2019, 10, 31),
+        date: Date.new(2019, 10, 31)
       ).day_of_week).to include "Thu"
     end
   end
@@ -31,7 +37,7 @@ RSpec.describe Playbook::PbDate::Date do
   describe "#day" do
     it "displays the day" do
       expect(subject.new(
-        date: Date.new(2020, 9, 15),
+        date: Date.new(2020, 9, 15)
       ).day).to eq("15")
     end
   end
@@ -39,7 +45,7 @@ RSpec.describe Playbook::PbDate::Date do
   describe "#month" do
     it "displays the month" do
       expect(subject.new(
-        date: Date.new(2019, 10, 19),
+        date: Date.new(2019, 10, 19)
       ).month).to eq("Oct")
     end
   end
@@ -47,7 +53,7 @@ RSpec.describe Playbook::PbDate::Date do
   describe "#year" do
     it "displays the year" do
       expect(subject.new(
-        date: Date.new(2019, 12, 19),
+        date: Date.new(2019, 12, 19)
       ).year).to eq("2019")
     end
   end

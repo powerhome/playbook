@@ -10,7 +10,7 @@ module Playbook
       prop :icon, required: false, default: "check"
 
       def name_icon
-        icon ? icon : "check"
+        icon || "check"
       end
 
       def classname

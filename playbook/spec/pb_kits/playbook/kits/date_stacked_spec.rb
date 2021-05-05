@@ -33,9 +33,7 @@ RSpec.describe Playbook::PbDateStacked::DateStacked do
 
   describe "#year" do
     it "returns the date prop's year as a string if date prop's year is not current year" do
-      if subject.new(date: Date.today).year != subject.new(date: Date.new(2018, 10, 19)).year
-        expect(subject.new(date: Date.new(2018, 10, 19)).year).to include "2018"
-      end
+      expect(subject.new(date: Date.new(2018, 10, 19)).year).to include "2018" if subject.new(date: Date.today).year != subject.new(date: Date.new(2018, 10, 19)).year
     end
   end
 
@@ -52,7 +50,6 @@ RSpec.describe Playbook::PbDateStacked::DateStacked do
       expect(subject.new(date: date, bold: bold).classname).to eq "pb_date_stacked_kit_left_sm_#{bold}"
       expect(subject.new(date: date, reverse: true).classname).to include "_reverse"
       expect(subject.new(date: date, dark: true).classname).to include "_dark"
-
     end
   end
 end

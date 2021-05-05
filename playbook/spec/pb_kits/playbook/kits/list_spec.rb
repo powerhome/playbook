@@ -5,18 +5,28 @@ require_relative "../../../../app/pb_kits/playbook/pb_list/list"
 RSpec.describe Playbook::PbList::List do
   subject { Playbook::PbList::List }
 
-  it { is_expected.to define_boolean_prop(:borderless)
-                      .with_default(false) }
-  it { is_expected.to define_boolean_prop(:dark)
-                      .with_default(false) }
-  it { is_expected.to define_enum_prop(:layout)
-                      .with_values("left", "right", "")
-                      .with_default("")}
-  it { is_expected.to define_prop(:size)}
-  it { is_expected.to define_boolean_prop(:ordered)
-                      .with_default(false) }
-  it { is_expected.to define_boolean_prop(:xpadding)
-                      .with_default(false) }
+  it {
+    is_expected.to define_boolean_prop(:borderless)
+      .with_default(false)
+  }
+  it {
+    is_expected.to define_boolean_prop(:dark)
+      .with_default(false)
+  }
+  it {
+    is_expected.to define_enum_prop(:layout)
+      .with_values("left", "right", "")
+      .with_default("")
+  }
+  it { is_expected.to define_prop(:size) }
+  it {
+    is_expected.to define_boolean_prop(:ordered)
+      .with_default(false)
+  }
+  it {
+    is_expected.to define_boolean_prop(:xpadding)
+      .with_default(false)
+  }
 
   describe "#classname" do
     it "returns namespaced class name", :aggregate_failures do
@@ -29,5 +39,4 @@ RSpec.describe Playbook::PbList::List do
       expect(subject.new(dark: true, xpadding: true, size: "large", borderless: true, layout: "left").list_classname).to eq "pb_list_kit_xpadding_borderless_dark_large_layout_left"
     end
   end
-
 end
