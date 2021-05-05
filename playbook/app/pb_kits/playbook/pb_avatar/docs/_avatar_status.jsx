@@ -5,6 +5,7 @@ const AvatarStatus = (props) => {
   return (
     <>
       <Avatar
+          imageAlt="Terry Johnson Status"
           imageUrl="https://randomuser.me/api/portraits/men/44.jpg"
           name="Terry Johnson"
           size="sm"
@@ -14,6 +15,7 @@ const AvatarStatus = (props) => {
       <br />
 
       <Avatar
+          imageAlt="Terry Johnson Online"
           imageUrl="https://randomuser.me/api/portraits/men/44.jpg"
           name="Terry Johnson"
           size="sm"
@@ -24,6 +26,7 @@ const AvatarStatus = (props) => {
       <br />
 
       <Avatar
+          imageAlt="Terry Johnson Away"
           imageUrl="https://randomuser.me/api/portraits/men/44.jpg"
           name="Terry Johnson"
           size="sm"
@@ -34,6 +37,7 @@ const AvatarStatus = (props) => {
       <br />
 
       <Avatar
+          imageAlt="Terry Johnson Offline"
           imageUrl="https://randomuser.me/api/portraits/men/44.jpg"
           name="Terry Johnson"
           size="sm"

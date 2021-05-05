@@ -5,10 +5,14 @@ require_relative "../../../../app/pb_kits/playbook/pb_date_range_inline/date_ran
 RSpec.describe Playbook::PbDateRangeInline::DateRangeInline do
   subject { Playbook::PbDateRangeInline::DateRangeInline }
 
-  it { is_expected.to define_prop(:start_date).of_type(Playbook::Props::Date)
-                                              .that_is_required }
-  it { is_expected.to define_prop(:end_date).of_type(Playbook::Props::Date)
-                                              .that_is_required }
+  it {
+    is_expected.to define_prop(:start_date).of_type(Playbook::Props::Date)
+                                           .that_is_required
+  }
+  it {
+    is_expected.to define_prop(:end_date).of_type(Playbook::Props::Date)
+                                         .that_is_required
+  }
 
   it { is_expected.to define_prop(:dark).with_default(false) }
   it { is_expected.to define_prop(:icon).with_default(false) }

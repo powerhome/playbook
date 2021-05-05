@@ -95,16 +95,16 @@ const PbDate = (props: PbDateProps) => {
         <Else />
         <>
           <If condition={showIcon}>
-            <Body
+            <Caption
                 className="pb_icon_kit_container"
-                color="light"
                 tag="span"
             >
               <Icon
                   fixedWidth
                   icon="calendar-alt"
+                  size="xs"
               />
-            </Body>
+            </Caption>
           </If>
           <If condition={showDayOfWeek}>
             <Caption tag="div">

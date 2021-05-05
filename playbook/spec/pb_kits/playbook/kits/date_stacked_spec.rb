@@ -5,17 +5,27 @@ require_relative "../../../../app/pb_kits/playbook/pb_date_stacked/date_stacked"
 RSpec.describe Playbook::PbDateStacked::DateStacked do
   subject { Playbook::PbDateStacked::DateStacked }
 
-  it { is_expected.to define_enum_prop(:align)
-                      .with_values("left", "center", "right") }
-  it { is_expected.to define_enum_prop(:size)
-                      .with_values("sm", "md") }
-  it { is_expected.to define_prop(:dark)
-                      .of_type(Playbook::Props::Boolean) }
-  it { is_expected.to define_prop(:reverse)
-                      .of_type(Playbook::Props::Boolean) }
-  it { is_expected.to define_prop(:date)
-                      .of_type(Playbook::Props::Date)
-                      .that_is_required }
+  it {
+    is_expected.to define_enum_prop(:align)
+      .with_values("left", "center", "right")
+  }
+  it {
+    is_expected.to define_enum_prop(:size)
+      .with_values("sm", "md")
+  }
+  it {
+    is_expected.to define_prop(:dark)
+      .of_type(Playbook::Props::Boolean)
+  }
+  it {
+    is_expected.to define_prop(:reverse)
+      .of_type(Playbook::Props::Boolean)
+  }
+  it {
+    is_expected.to define_prop(:date)
+      .of_type(Playbook::Props::Date)
+      .that_is_required
+  }
 
   describe "#month" do
     it "returns the date prop's month and month as a string" do
@@ -31,9 +41,7 @@ RSpec.describe Playbook::PbDateStacked::DateStacked do
 
   describe "#year" do
     it "returns the date prop's year as a string if date prop's year is not current year" do
-      if subject.new(date: Date.today).year != subject.new(date: Date.new(2018, 10, 19)).year
-        expect(subject.new(date: Date.new(2018, 10, 19)).year).to include "2018"
-      end
+      expect(subject.new(date: Date.new(2018, 10, 19)).year).to include "2018" if subject.new(date: Date.today).year != subject.new(date: Date.new(2018, 10, 19)).year
     end
   end
 
@@ -48,7 +56,6 @@ RSpec.describe Playbook::PbDateStacked::DateStacked do
       expect(subject.new(date: date, align: align).classname).to eq "pb_date_stacked_kit_#{align}_sm"
       expect(subject.new(date: date, reverse: true).classname).to include "_reverse"
       expect(subject.new(date: date, dark: true).classname).to include "_dark"
-
     end
   end
 end

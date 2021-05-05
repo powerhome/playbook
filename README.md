@@ -1,3 +1,6 @@
+[![npm version](https://badge.fury.io/js/playbook-ui.svg)](https://badge.fury.io/js/playbook-ui)
+[![Gem Version](https://badge.fury.io/rb/playbook_ui.svg)](https://badge.fury.io/rb/playbook_ui)
+
 # Playbook Design System
 
 Playbook is the first design system built for both Rails & React interfaces. Inspired by [Velocity](https://www.invisionapp.com/inside-design/design-resources/design-system-dashboard-ui-kit/), Playbook takes a modern design approach, and applies it in a way that makes it easy to support bleeding edge, or legacy systems. Playbook is built & maintained by the User Experience & Development teams at Power Home Remodeling, the largest home remodeler in the US.
@@ -9,21 +12,20 @@ Playbook is the first design system built for both Rails & React interfaces. Ins
 
 ## Getting started
 
-1. Run `make it`
+1. run `yarn && bundle`
 1. Install overcommit hooks `bin/overcommit`
-1. open [http://localhost:8089](http://localhost:8089)
-
-To clean up this project from your local machine, run `make stop`, which will drop all containers and networks associated with this project. To purge all resources, do `make clean`, which also removes images and volumes for a blank slate.
-
+1. run `bin/rails s`
+1. run `./bin/webpack-dev-server`
+3. open [http://localhost:3000](http://localhost:3000)
 
 <details><summary>Making changes to the Gemfile:</summary>
 <p>
 
-* Stop the `make start` process
-* Run `make bundle` to (un-)install gems and update the `Gemfile.lock`
-* Re-start the server with `make start`
+* Kill the `rails` Ctrl + C
+* `bundle`
+* Re-start the server with `bin/rails s`
 
-To run the tests, do `bin/test`. To launch a shell in the container run `make shell`, or to launch a Rails console run `make console`
+To run the tests, do `bin/test`.
 
 </p>
 </details>

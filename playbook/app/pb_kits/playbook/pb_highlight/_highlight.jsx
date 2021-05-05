@@ -28,7 +28,7 @@ const Highlight = (props: HighlightProps) => {
         autoEscape
         data={data}
         highlightClassName={classnames(globalProps(props), className)}
-        highlightTag="span"
+        highlightTag="mark"
         id={id}
         searchWords={highlightedText}
         textToHighlight={text || children}

@@ -42,7 +42,7 @@ RSpec.describe Playbook::Props do
 
   describe ".props" do
     it "returns collection of available properties" do
-      expect(another_subclass.props.keys).to match_array [:base_prop, :another_subclass_prop]
+      expect(another_subclass.props.keys).to match_array %i[base_prop another_subclass_prop]
     end
   end
 

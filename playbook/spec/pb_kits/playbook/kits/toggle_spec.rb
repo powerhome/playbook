@@ -5,9 +5,11 @@ require_relative "../../../../app/pb_kits/playbook/pb_toggle/toggle"
 RSpec.describe Playbook::PbToggle::Toggle do
   subject { Playbook::PbToggle::Toggle }
 
-  it { is_expected.to define_enum_prop(:size)
-    .with_default("sm")
-    .with_values("sm", "md") }
+  it {
+    is_expected.to define_enum_prop(:size)
+      .with_default("sm")
+      .with_values("sm", "md")
+  }
   it { is_expected.to define_boolean_prop(:checked).with_default(false) }
   it { is_expected.to define_prop(:name) }
   it { is_expected.to define_prop(:value) }

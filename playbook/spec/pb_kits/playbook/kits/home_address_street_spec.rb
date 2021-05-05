@@ -8,14 +8,15 @@ RSpec.describe Playbook::PbHomeAddressStreet::HomeAddressStreet do
   it { is_expected.to define_prop(:address) }
   it { is_expected.to define_prop(:city) }
   it { is_expected.to define_prop(:emphasis) }
-  it { is_expected.to define_prop(:home_id)
-                      .of_type(Playbook::Props::Number) }
+  it {
+    is_expected.to define_prop(:home_id)
+      .of_type(Playbook::Props::Number)
+  }
   it { is_expected.to define_prop(:home_url) }
   it { is_expected.to define_prop(:house_style) }
   it { is_expected.to define_prop(:state) }
   it { is_expected.to define_prop(:zipcode) }
   it { is_expected.to define_boolean_prop(:dark) }
-
 
   describe "#classname" do
     it "returns namespaced class name", :aggregate_failures do

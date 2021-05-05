@@ -25,6 +25,7 @@ const StatValue = (props: StatValueProps) => {
       return (
         <Title
             size={1}
+            tag="span"
             text={`${value}`}
         />
       )
@@ -36,6 +37,7 @@ const StatValue = (props: StatValueProps) => {
       return (
         <Title
             size={3}
+            tag="span"
             text={unit}
         />
       )

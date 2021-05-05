@@ -4,6 +4,7 @@ set -e
 
 echo ">>> eslint"
 time yarn
+time bin/rubocop
 time yarn lint
 time yarn test
 

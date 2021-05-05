@@ -22,6 +22,7 @@ const LoadingInline = (props: LoadingInlineProps) => {
     >
       <Body color="light">
         <Icon
+            aria={{ label: 'loading icon' }}
             fixedWidth
             icon="spinner"
             pulse

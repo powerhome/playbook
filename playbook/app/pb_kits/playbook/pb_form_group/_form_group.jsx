@@ -10,6 +10,7 @@ type FormGroupProps = {
   children?: Node,
   className?: string,
   data?: object,
+  fullWidth?: boolean,
   id?: string,
 }
 
@@ -18,13 +19,14 @@ const FormGroup = (props: FormGroupProps) => {
     aria = {},
     className,
     data = {},
+    fullWidth = false,
     id,
     children,
   } = props
 
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
-  const classes = classnames(buildCss('pb_form_group_kit'), globalProps(props), className)
+  const classes = classnames(buildCss('pb_form_group_kit', { full: fullWidth }), globalProps(props), className)
 
   return (
     <div

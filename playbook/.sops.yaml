@@ -1,13 +1,19 @@
 creation_rules:
-  - filename_regex: production
+  - path_regex: production
     key_groups:
     - kms:
       - arn: "arn:aws:kms:us-east-1:205083374951:key/405f40cd-a18a-40ed-bf2f-a0e7816a9a5c"
+      - arn: "arn:aws:kms:us-east-1:205083374951:key/405f40cd-a18a-40ed-bf2f-a0e7816a9a5c"
+        role: "arn:aws:iam::205083374951:role/UX"
       pgp:
       - "C534CBAA229396B3FFC0CBB8FEFCDD8B6EB6B73B" # Ben Klang
+      - "181D7230C1982F01D9751710F0C07D7B2AC4F268" # Ben Langfeld
 
   - key_groups:
     - kms:
       - arn: "arn:aws:kms:us-east-1:205083374951:key/d46e780d-ee0a-4a7d-b049-0443e1b91d41"
+      - arn: "arn:aws:kms:us-east-1:205083374951:key/d46e780d-ee0a-4a7d-b049-0443e1b91d41"
+        role: "arn:aws:iam::205083374951:role/UX"
       pgp:
       - "C534CBAA229396B3FFC0CBB8FEFCDD8B6EB6B73B" # Ben Klang
+      - "181D7230C1982F01D9751710F0C07D7B2AC4F268" # Ben Langfeld

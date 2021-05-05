@@ -7,9 +7,9 @@ module Playbook
                   values: %w[lg sm],
                   default: "lg"
       prop :widths, type: Playbook::Props::NumberArray,
-                  default: [1]
+                    default: [1]
       prop :colors, type: Playbook::Props::Array,
-                  default: []
+                    default: []
 
       def classname
         generate_classname("pb_distribution_bar", size)

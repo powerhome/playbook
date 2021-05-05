@@ -11,7 +11,7 @@ RSpec.describe Playbook::Props::Number do
 
     it "returns false given anything besides a number", :aggregate_failures do
       expect(subject.validate("true")).to eq false
-      expect(subject.validate(:false)).to eq false
+      expect(subject.validate(false)).to eq false
       expect(subject.validate("a")).to eq false
       expect(subject.validate({})).to eq false
     end

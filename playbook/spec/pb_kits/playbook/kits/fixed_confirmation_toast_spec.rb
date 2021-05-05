@@ -6,9 +6,12 @@ RSpec.describe Playbook::PbFixedConfirmationToast::FixedConfirmationToast do
   subject { Playbook::PbFixedConfirmationToast::FixedConfirmationToast }
 
   it { is_expected.to define_prop(:text).of_type(Playbook::Props::String) }
-  it { is_expected.to define_enum_prop(:status)
-                      .with_default("neutral")
-                      .with_values("success", "error", "neutral", "tip") }
+  it { is_expected.to define_prop(:multi_line).of_type(Playbook::Props::Boolean) }
+  it {
+    is_expected.to define_enum_prop(:status)
+      .with_default("neutral")
+      .with_values("success", "error", "neutral", "tip")
+  }
 
   describe "#show_text?" do
     it "returns true if text is present", :aggregate_failures do
@@ -44,8 +47,7 @@ RSpec.describe Playbook::PbFixedConfirmationToast::FixedConfirmationToast do
       expect(subject.new(text: text, status: "tip").classname).to eq "pb_fixed_confirmation_toast_kit_tip"
       expect(subject.new(text: text, status: "tip", dark: true).classname).to eq "pb_fixed_confirmation_toast_kit_tip dark"
       expect(subject.new(text: text, status: "tip", closeable: true).classname).to eq "pb_fixed_confirmation_toast_kit_tip remove_toast"
+      expect(subject.new(text: text, status: "error", multi_line: true).classname).to eq "pb_fixed_confirmation_toast_kit_error_multi_line"
     end
   end
 end
-
-

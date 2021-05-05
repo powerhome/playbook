@@ -3,6 +3,7 @@ examples:
   rails:
   - form_group_default: Default
   - form_group_button: Button
+  - form_group_full_width: Full Width
   - form_group_date_picker: Date Picker
   # - form_group_typeahead: Typeahead
   - form_group_select: Select
@@ -13,6 +14,7 @@ examples:
   react:
   - form_group_default: Default
   - form_group_button: Button
+  - form_group_full_width: Full Width
   - form_group_date_picker: Date Picker
   # - form_group_typeahead: Typeahead
   - form_group_select: Select

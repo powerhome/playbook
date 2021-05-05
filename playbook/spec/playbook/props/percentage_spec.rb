@@ -26,7 +26,7 @@ RSpec.describe Playbook::Props::Percentage do
 
     it "returns false given anything that is not numeric", :aggregate_failures do
       expect(subject.validate(true)).to eq false
-      expect(subject.validate(:false)).to eq false
+      expect(subject.validate(false)).to eq false
       expect(subject.validate("a")).to eq false
       expect(subject.validate({})).to eq false
     end

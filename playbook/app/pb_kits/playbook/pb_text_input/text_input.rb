@@ -33,7 +33,7 @@ module Playbook
       end
 
       def add_on_class
-        has_add_on? ? 'text_input_wrapper_add_on' : nil
+        has_add_on? ? "text_input_wrapper_add_on" : nil
       end
 
       def add_on_props
@@ -54,7 +54,7 @@ module Playbook
           placeholder: placeholder,
           required: required,
           type: type,
-          value: value
+          value: value,
         }
       end
 

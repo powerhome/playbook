@@ -8,33 +8,33 @@
     margin-bottom: $space_xs;
     display: block;
   }
-
   .text_input_wrapper {
     margin-bottom: $space_sm;
     display: block;
-
     input::placeholder,
     .text_input .placeholder {
       @include pb_body_light;
     }
-
     input,
     .text_input {
+      max-height: 45px;
       @include pb_textarea_light;
-      @include pb_title_4;
       overflow: hidden;
     }
-
+    input:hover,
+    .text_input:hover{
+      background-color: rgba($focus_input_light,$opacity_5);
+    }
     input:focus,
     .text_input:focus,
     input:-webkit-autofill:focus,
     .text_input:-webkit-autofill:focus {
       @include pb_textarea_focus;
-      -webkit-box-shadow: 0 0 0px 1000px $focus_input_light inset;
-      transition: background-color 5000s ease-in-out 0s;
+      @include transition_default;
+      border-color: $primary;
+      background-color: rgba($focus_input_light,$opacity_5);
     }
   }
-
   &.dark {
     .add_on_left {
       .text_input {
@@ -48,29 +48,29 @@
     }
     .text_input_wrapper {
       margin-bottom: 1rem;
-
       input::placeholder,
       .text_input .placeholder {
         @include pb_body_light_dark;
       }
-
       input, .text_input {
         @include pb_textarea_dark;
-        @include pb_title_4;
-        @include pb_title_dark;
+        @include pb_body_dark;
         overflow: hidden;
+        background-color: rgba($white,$opacity_1);
+        border-color: rgba($white, 0.15);
       }
-
+      input:hover,
+      .text_input:hover{
+        background-color: rgba($white, 0.15);
+      }
       input:focus,
       .text_input:focus,
       input:-webkit-autofill:focus,
       .text_input:-webkit-autofill:focus {
-        @include pb_textarea_focus_dark;
-        -webkit-box-shadow: 0 0 0px 1000px $focus_input_dark inset;
-        transition: background-color 5000s ease-in-out 0s;
+        border-color: $active_dark;
+        background-color: rgba($white, 0.025);
       }
     }
-
     &.error {
       .text_input_wrapper {
         input, .text_input {
@@ -79,7 +79,6 @@
       }
     }
   }
-
   &.error {
     .text_input_wrapper {
       [class*=pb_body_kit] {

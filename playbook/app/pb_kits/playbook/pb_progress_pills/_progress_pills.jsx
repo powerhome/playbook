@@ -46,7 +46,7 @@ const ProgressPill = ({ active, dark, step }: ProgressPillProps) => (
 const ProgressPills = (props: ProgressPillsProps) => {
   const {
     active = 0,
-    aria = {},
+    aria = { hidden: true },
     className,
     data = {},
     id,

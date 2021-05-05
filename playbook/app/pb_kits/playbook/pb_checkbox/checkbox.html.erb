@@ -3,9 +3,17 @@
                         data: object.data,
                         class: object.classname) do %>
   <%= content.presence || object.input %>
-  <span class="pb_checkbox_checkmark">
-    <%= pb_rails("icon", props: { icon: "check", id: "check_icon", classname: "check_icon", fixed_width: true}) %>
-  </span>
+  <% if object.indeterminate %>
+    <span class="pb_checkbox_indeterminate">
+      <%= pb_rails("icon", props: { icon: "minus", classname: "indeterminate_icon", fixed_width: true}) %>
+      <%= pb_rails("icon", props: { icon: "check", classname: "check_icon hidden", fixed_width: true}) %>
+    </span>
+  <% else %>
+    <span class="pb_checkbox_checkmark">
+      <%= pb_rails("icon", props: { icon: "check", classname: "check_icon", fixed_width: true}) %>
+      <%= pb_rails("icon", props: { icon: "minus", classname: "indeterminate_icon hidden", fixed_width: true}) %>
+    </span>
+  <% end %>
   <span class="pb_checkbox_label">
     <%= pb_rails("body", props: { status: object.checkbox_label_status, text: object.text, dark: object.dark, margin_right: object.form_spacing ? "xs" : "" }) %>
   </span>
