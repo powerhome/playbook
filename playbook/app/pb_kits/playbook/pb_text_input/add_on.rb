@@ -8,12 +8,12 @@ module Playbook
       prop :border, type: Playbook::Props::Boolean, default: true
 
       def border_css
-        border_toggle = border ? 'on' : 'off'
-        if alignment == 'left'
-          border_to_change = 'right'
-        else
-          border_to_change = 'left'
-        end
+        border_toggle = border ? "on" : "off"
+        border_to_change = if alignment == "left"
+                             "right"
+                           else
+                             "left"
+                           end
 
         "border_#{border_to_change}_#{border_toggle}"
       end
@@ -23,7 +23,7 @@ module Playbook
       end
 
       def dark_mode_css
-        dark ? 'add-on-card-dark' : nil
+        dark ? "add-on-card-dark" : nil
       end
     end
   end
