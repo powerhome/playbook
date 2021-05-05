@@ -5,15 +5,15 @@ module Playbook
     class DateTimeStacked < Playbook::KitBase
       prop :date, deprecated: true
       prop :date_time, type: Playbook::Props::Date,
-                  default: ::DateTime.current
+                       default: ::DateTime.current
       prop :dark, type: Playbook::Props::Boolean,
                   default: false
       prop :timezone, type: Playbook::Props::String,
-                  default: "America/New_York"
+                      default: "America/New_York"
 
-    def date_time_value
-      date || date_time
-    end
+      def date_time_value
+        date || date_time
+      end
     end
   end
 end

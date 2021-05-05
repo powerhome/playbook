@@ -5,23 +5,35 @@ require_relative "../../../../app/pb_kits/playbook/pb_date_stacked/date_stacked"
 RSpec.describe Playbook::PbDateStacked::DateStacked do
   subject { Playbook::PbDateStacked::DateStacked }
 
-  it { is_expected.to define_enum_prop(:align)
-                      .with_values("left", "center", "right") }
-  it { is_expected.to define_enum_prop(:size)
-                      .with_values("sm", "md") }
-  it { is_expected.to define_prop(:dark)
-                      .of_type(Playbook::Props::Boolean) }
-  it { is_expected.to define_prop(:reverse)
-                      .of_type(Playbook::Props::Boolean) }
-  it { is_expected.to define_prop(:date)
-                      .of_type(Playbook::Props::Date)
-                      .that_is_required }
-  it { is_expected.to define_prop(:bold)
-                      .of_type(Playbook::Props::Boolean) }
+  it {
+    is_expected.to define_enum_prop(:align)
+      .with_values("left", "center", "right")
+  }
+  it {
+    is_expected.to define_enum_prop(:size)
+      .with_values("sm", "md")
+  }
+  it {
+    is_expected.to define_prop(:dark)
+      .of_type(Playbook::Props::Boolean)
+  }
+  it {
+    is_expected.to define_prop(:reverse)
+      .of_type(Playbook::Props::Boolean)
+  }
+  it {
+    is_expected.to define_prop(:date)
+      .of_type(Playbook::Props::Date)
+      .that_is_required
+  }
+  it {
+    is_expected.to define_prop(:bold)
+      .of_type(Playbook::Props::Boolean)
+  }
 
   describe "#month" do
     it "displays the month" do
-      expect(subject.new(date: Date.new(2019, 10, 19),).month).to eq("Oct")
+      expect(subject.new(date: Date.new(2019, 10, 19)).month).to eq("Oct")
     end
   end
 
