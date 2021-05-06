@@ -9,6 +9,7 @@ AllCops:
     - "Rakefile"
     - "spec/dummy/**/*"
     - "vendor/**/*"
+    - "lib/playbook/props/*"
 
 Layout/AccessModifierIndentation:
   EnforcedStyle: outdent
