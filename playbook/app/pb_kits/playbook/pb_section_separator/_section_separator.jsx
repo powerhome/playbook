@@ -38,9 +38,13 @@ const SectionSeparator = (props: SectionSeparatorProps) => {
         className={classes}
         id={id}
     >
-      <span>
-        <Caption text={text} />
-      </span>
+
+      <If condition={text}>
+        <span>
+          <Caption text={text} />
+        </span>
+      </If>
+
     </div>
   )
 }
