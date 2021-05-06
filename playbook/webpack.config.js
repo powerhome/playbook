@@ -20,7 +20,7 @@ const COPY_PLUGIN_CONFIG = new CopyPlugin({
       },
       to: `${DIST_PATH}/tokens`,
       transformPath(targetPath) {
-        return targetPath.replace(/^tokens\/\_/, 'tokens/')
+        return targetPath.replace(/^tokens\/_/, 'tokens/')
       },
     },
     {
