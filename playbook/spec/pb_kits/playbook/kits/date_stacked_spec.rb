@@ -26,10 +26,14 @@ RSpec.describe Playbook::PbDateStacked::DateStacked do
       .of_type(Playbook::Props::Date)
       .that_is_required
   }
+  it {
+    is_expected.to define_prop(:bold)
+      .of_type(Playbook::Props::Boolean)
+  }
 
   describe "#month" do
-    it "returns the date prop's month and month as a string" do
-      expect(subject.new(date: Date.today).month).to include Date.today.month.to_s
+    it "displays the month" do
+      expect(subject.new(date: Date.new(2019, 10, 19)).month).to eq("Oct")
     end
   end
 
@@ -50,10 +54,12 @@ RSpec.describe Playbook::PbDateStacked::DateStacked do
       date = Date.today
       align = "left"
       size = "sm"
+      bold = false
 
-      expect(subject.new(date: date).classname).to eq "pb_date_stacked_kit_left_sm"
-      expect(subject.new(date: date, size: size).classname).to eq "pb_date_stacked_kit_left_#{size}"
-      expect(subject.new(date: date, align: align).classname).to eq "pb_date_stacked_kit_#{align}_sm"
+      expect(subject.new(date: date).classname).to eq "pb_date_stacked_kit_left_sm_false"
+      expect(subject.new(date: date, size: size).classname).to eq "pb_date_stacked_kit_left_#{size}_false"
+      expect(subject.new(date: date, align: align).classname).to eq "pb_date_stacked_kit_#{align}_sm_false"
+      expect(subject.new(date: date, bold: bold).classname).to eq "pb_date_stacked_kit_left_sm_#{bold}"
       expect(subject.new(date: date, reverse: true).classname).to include "_reverse"
       expect(subject.new(date: date, dark: true).classname).to include "_dark"
     end

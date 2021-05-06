@@ -2,6 +2,7 @@ kits:
   - avatar
   - avatar_action_button
   - background
+  - bread_crumbs
   - buttons:
     - button
     - button_toolbar
