@@ -4243,7 +4243,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"commander@npm:^2.20.0":
+"commander@npm:^2.15.1, commander@npm:^2.20.0":
   version: 2.20.3
   resolution: "commander@npm:2.20.3"
   checksum: b73428e97de7624323f81ba13f8ed9271de487017432d18b4da3f07cfc528ad754bbd199004bd5d14e0ccd67d1fdfe0ec8dbbd4c438b401df3c4cc387bfd1daa
@@ -6313,6 +6313,20 @@ __metadata:
   version: 1.0.2
   resolution: "for-in@npm:1.0.2"
   checksum: e8d7280a654216e9951103e407d1655c2dfa67178ad468cb0b35701df6b594809ccdc66671b3478660d0e6c4bca9d038b1f1fc032716a184c19d67319550c554
+  languageName: node
+  linkType: hard
+
+"foreman@npm:^3.0.1":
+  version: 3.0.1
+  resolution: "foreman@npm:3.0.1"
+  dependencies:
+    commander: ^2.15.1
+    http-proxy: ^1.17.0
+    mustache: ^2.2.1
+    shell-quote: ^1.6.1
+  bin:
+    nf: nf.js
+  checksum: 89e57ebd6085a97cdb07261900f48f824cf8a748d5fae93298ea6b4f8eb49bec0545e532e33688ceef59f7b598c8a5d166e436658b1fc5f025afacc9824e4082
   languageName: node
   linkType: hard
 
@@ -9517,6 +9531,15 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
+"mustache@npm:^2.2.1":
+  version: 2.3.2
+  resolution: "mustache@npm:2.3.2"
+  bin:
+    mustache: ./bin/mustache
+  checksum: cda37731370c3958965297416b8e7161b2e85538975d8555b8f877c9578f57f75379c8377df56c9eb7e042972d01b7d83f0cb117ae21a69ff3beac57626053f4
+  languageName: node
+  linkType: hard
+
 "mute-stream@npm:0.0.8":
   version: 0.0.8
   resolution: "mute-stream@npm:0.0.8"
@@ -10480,6 +10503,7 @@ fsevents@^1.2.7:
   version: 0.0.0-use.local
   resolution: "playbook-project@workspace:."
   dependencies:
+    foreman: ^3.0.1
     husky: ^6.0.0
     lint-staged: ^10.5.4
   languageName: unknown
@@ -12784,6 +12808,13 @@ fsevents@^1.2.7:
   version: 3.0.0
   resolution: "shebang-regex@npm:3.0.0"
   checksum: ea18044ffaf18129ced5a246660a9171a7dff98999aaa9de8abb237d8a7711d8a1f76e16881399994ee429156717ce1c6a50c665bb18a4d55a7f80b9125b1f7d
+  languageName: node
+  linkType: hard
+
+"shell-quote@npm:^1.6.1":
+  version: 1.7.2
+  resolution: "shell-quote@npm:1.7.2"
+  checksum: 3b3d06814ca464cde8594c27bdd57a1f4c06b26ad2988b08b5819f97ac1edfd7cb7313fda1c909da33211972c72c5a7906b7da2b62078109f9d3274d3f404fa9
   languageName: node
   linkType: hard
 

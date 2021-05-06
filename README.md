@@ -10,24 +10,22 @@ Playbook is the first design system built for both Rails & React interfaces. Ins
 ### Requirements
 
 - [asdf](https://github.com/asdf-vm/asdf)
-- `asdf install`
-- Install overcommit hooks `bin/overcommit`
+- Install language tools: `asdf install`
 
 ### Getting started
 
-1. `yarn install` to install all projects dependencies
-1. `yarn watch-all` to start watchers
+1. Install commit hooks `yarn prepare`
+1. Install all projects dependencies: `yarn install`
+1. Install website ruby dependencies: `cd playbook-website && bundle`
 
-### Running the website
+### Running the website for development
 
-1. From another terminal, go to `playbook-webiste`
-1. `bundle install`
-1. `rails server`
-1. open [http://localhost:3000](http://localhost:3000)
+1. Start watchers and servers: `yarn start-dev`
+1. Open [http://localhost:3000](http://localhost:3000)
 
-### Running tests
+### Running library tests
 
-Run `test.sh` from the `playbook` directory.
+1. `cd playbook && ./test.sh`
 
 ## Additional resources
 
