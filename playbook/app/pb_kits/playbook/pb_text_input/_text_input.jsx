@@ -1,13 +1,10 @@
 /* @flow */
 import React, { forwardRef } from 'react'
 import classnames from 'classnames'
-import { Body, Caption } from '../'
+import { Body, Caption, Card, Flex, Icon } from '../'
 import { globalProps } from '../utilities/globalProps.js'
 
-import {
-  buildAriaProps,
-  buildDataProps,
-} from '../utilities/props'
+import { buildAriaProps, buildDataProps } from '../utilities/props'
 
 type TextInputProps = {
   aria?: object,
@@ -26,12 +23,14 @@ type TextInputProps = {
   type: string,
   value: string | number,
   children: Node,
+  addOn?: {
+    icon?: string,
+    alignment?: "right" | "left",
+    border?: boolean,
+  },
 }
 
-const TextInput = (
-  props: TextInputProps,
-  ref: React.ElementRef<"input">
-) => {
+const TextInput = (props: TextInputProps, ref: React.ElementRef<"input">) => {
   const {
     aria = {},
     className,
@@ -49,10 +48,21 @@ const TextInput = (
     type = 'text',
     value = '',
     children = null,
+    addOn = { icon: null, alignment: 'right', border: true },
   } = props
 
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
+
+  const { alignment, border, icon } = addOn
+  const addOnAlignment = alignment === 'left' ? 'left' : 'right'
+  const borderToChange = addOnAlignment === 'left' ? 'right' : 'left'
+  const borderToggle = border === false ? 'off' : 'on'
+  const borderCss = `border_${borderToChange}_${borderToggle}`
+
+  const shouldShowAddOn = icon !== null
+  const addOnCss = shouldShowAddOn ? 'text_input_wrapper_add_on' : null
+  const addOnDarkModeCardCss = (shouldShowAddOn && dark) ? 'add-on-card-dark' : null
   const css = classnames([
     'pb_text_input_kit',
     inline ? 'inline' : null,
@@ -60,6 +70,57 @@ const TextInput = (
     globalProps(props),
     className,
   ])
+  const addOnIcon = (
+    <Icon
+        className="add-on-icon"
+        dark={dark}
+        fixedWidth={false}
+        icon={icon}
+    />
+  )
+  const textInput = (
+    <input
+        {...props}
+        className="text_input"
+        disabled={disabled}
+        id={id}
+        name={name}
+        onChange={onChange}
+        placeholder={placeholder}
+        ref={ref}
+        required={required}
+        type={type}
+        value={value}
+    />
+  )
+
+  const addOnInput = (
+    <React.Fragment>
+      <Flex
+          className={`add-on-${addOnAlignment} ${borderCss}`}
+          inline="flex-container"
+          vertical="center"
+      >
+        <If condition={addOnAlignment == 'left'}>
+          <Card
+              className={`${addOnDarkModeCardCss} add-on-card card-left-aligned`}
+              dark={dark}
+          >
+            {addOnIcon}
+          </Card>
+          {textInput}
+          <Else />
+          {textInput}
+          <Card
+              className={`${addOnDarkModeCardCss} add-on-card card-right-aligned`}
+              dark={dark}
+          >
+            {addOnIcon}
+          </Card>
+        </If>
+      </Flex>
+    </React.Fragment>
+  )
 
   return (
     <div
@@ -72,29 +133,17 @@ const TextInput = (
           dark={dark}
           text={label}
       />
-      <div className="text_input_wrapper">
-        <If condition={children}>
-          {children}
-          <Else />
-          <input
-              {...props}
-              className="text_input"
-              disabled={disabled}
-              id={id}
-              name={name}
-              onChange={onChange}
-              placeholder={placeholder}
-              ref={ref}
-              required={required}
-              type={type}
-              value={value}
+      <div className={`${addOnCss} text_input_wrapper`}>
+        <Choose>
+          <When condition={children}>{children}</When>
+          <When condition={shouldShowAddOn}>{addOnInput}</When>
+          <Otherwise>{textInput}</Otherwise>
+        </Choose>
+        <If condition={error}>
+          <Body
+              status="negative"
+              text={error}
           />
-          <If condition={error}>
-            <Body
-                status="negative"
-                text={error}
-            />
-          </If>
         </If>
       </div>
     </div>

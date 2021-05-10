@@ -7,8 +7,9 @@ AllCops:
     - "db/schema.rb"
     - "node_modules/**/*"
     - "Rakefile"
-    - "spec/**/*"
+    - "spec/dummy/**/*"
     - "vendor/**/*"
+    - "lib/playbook/props/*"
 
 Layout/AccessModifierIndentation:
   EnforcedStyle: outdent

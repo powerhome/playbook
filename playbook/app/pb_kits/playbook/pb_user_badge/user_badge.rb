@@ -15,7 +15,7 @@ module Playbook
       end
 
       def display_badge
-        @badge ||= begin
+        @display_badge ||= begin
           badge_path = File.join(
             File.dirname(self.class.source_location),
             "badges",

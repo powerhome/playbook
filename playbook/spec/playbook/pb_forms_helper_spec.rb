@@ -6,9 +6,9 @@ RSpec.describe Playbook::PbFormsHelper, type: :helper do
   before { helper.extend(Playbook::PbKitHelper) }
 
   let(:form_body) do
-    -> (builder) do
+    ->(builder) do
       concat builder.text_field :name
-      concat builder.actions {|a| a.submit }
+      concat builder.actions(&:submit)
     end
   end
 
@@ -26,7 +26,7 @@ RSpec.describe Playbook::PbFormsHelper, type: :helper do
     it "renders the javascript" do
       subject
 
-      expect(helper.content_for(:pb_js)).to match %r{window.addEventListener\("DOMContentLoaded", function\(\) \{ PbFormValidation.start\(\) \}\)}
+      expect(helper.content_for(:pb_js)).to match(/window.addEventListener\("DOMContentLoaded", function\(\) \{ PbFormValidation.start\(\) \}\)/)
     end
   end
 

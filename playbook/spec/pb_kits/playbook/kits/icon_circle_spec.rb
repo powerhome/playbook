@@ -6,12 +6,16 @@ RSpec.describe Playbook::PbIconCircle::IconCircle do
   subject { Playbook::PbIconCircle::IconCircle }
 
   it { is_expected.to define_prop(:icon).that_is_required }
-  it { is_expected.to define_enum_prop(:size)
-                      .with_default("md")
-                      .with_values("xs", "sm", "md", "base", "lg", "xl") }
-  it { is_expected.to define_enum_prop(:variant)
-                      .with_default("default")
-                      .with_values("default", "royal", "blue", "purple", "teal", "red", "yellow", "green") }
+  it {
+    is_expected.to define_enum_prop(:size)
+      .with_default("md")
+      .with_values("xs", "sm", "md", "base", "lg", "xl")
+  }
+  it {
+    is_expected.to define_enum_prop(:variant)
+      .with_default("default")
+      .with_values("default", "royal", "blue", "purple", "teal", "red", "yellow", "green")
+  }
 
   describe "#classname" do
     it "returns namespaced class name", :aggregate_failures do
@@ -28,5 +32,3 @@ RSpec.describe Playbook::PbIconCircle::IconCircle do
     end
   end
 end
-
-

@@ -9,6 +9,7 @@ import { globalProps } from '../utilities/globalProps.js'
 
 type DateStackedProps = {
   align?: "left" | "center" | "right",
+  bold?: boolean,
   className?: string | array<string>,
   dark?: boolean,
   data?: string,
@@ -26,6 +27,7 @@ const sizes = {
 const DateStacked = (props: DateStackedProps) => {
   const {
     align = 'left',
+    bold = false,
     reverse = false,
     className,
     dark = false,
@@ -46,19 +48,51 @@ const DateStacked = (props: DateStackedProps) => {
   const inputYear = dateTimestamp.toYear().toString()
 
   return (
-    <div className={classes}>
-      <div className="pb_date_stacked_day_month">
-        <Caption text={dateTimestamp.toMonth().toUpperCase()} />
-        <Title
-            dark={dark}
-            size={sizes[size]}
-            text={dateTimestamp.toDay()}
-        />
-      </div>
-      <If condition={currentYear != inputYear}>
-        <Caption size="xs">{inputYear}</Caption>
+
+    <div>
+      <If condition={bold == false}>
+
+        <div className={classes}>
+          <div className="pb_date_stacked_day_month">
+            <Caption text={dateTimestamp.toMonth().toUpperCase()} />
+            <Title
+                dark={dark}
+                size={sizes[size]}
+                text={dateTimestamp.toDay()}
+            />
+          </div>
+          <If condition={currentYear != inputYear}>
+            <Caption size="xs">{inputYear}</Caption>
+          </If>
+        </div>
+        <Else />
+        <>
+          <div className={classes}>
+            <div className="pb_date_stacked_day_month">
+
+              <Title
+                  bold
+                  dark={dark}
+                  size="4"
+                  text={dateTimestamp.toMonth()}
+              />
+              <Title
+                  bold
+                  dark={dark}
+                  size="4"
+                  text={dateTimestamp.toDay()}
+              />
+              <If condition={currentYear != inputYear}>
+                <Title size="4">{inputYear}</Title>
+              </If>
+            </div>
+
+          </div>
+
+        </>
       </If>
     </div>
+
   )
 }
 

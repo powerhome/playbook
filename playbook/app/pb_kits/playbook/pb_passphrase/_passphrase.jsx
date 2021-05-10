@@ -7,7 +7,7 @@ import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
 import { globalProps } from '../utilities/globalProps.js'
 import useZxcvbn from './useZxcvbn'
 import useHaveIBeenPwned from './useHaveIBeenPwned'
-import { Body, Caption, Flex, Icon, PbReactPopover, ProgressSimple, TextInput } from '../'
+import { Body, Caption, CircleIconButton, Flex, Icon, PbReactPopover, ProgressSimple, TextInput } from '../'
 
 type PassphraseProps = {
   aria?: object,
@@ -69,6 +69,10 @@ const Passphrase = (props: PassphraseProps) => {
 
   const [showPopover, setShowPopover] = useState(false)
   const toggleShowPopover = () => setShowPopover(!showPopover)
+  const handleShouldClosePopover = (shouldClosePopover) => {
+    setShowPopover(!shouldClosePopover)
+  }
+
   const [showPassphrase, setShowPassphrase] = useState(false)
   const toggleShowPassphrase = () => setShowPassphrase(!showPassphrase)
 
@@ -85,7 +89,7 @@ const Passphrase = (props: PassphraseProps) => {
   }, [strength])
 
   const tipClass = classnames(
-    (dark ? 'dark' : null),
+    'passphrase-popover',
     (showTipsBelow === 'always' ? null : `show-below-${showTipsBelow}`),
   )
   const dataProps = useMemo(
@@ -94,17 +98,13 @@ const Passphrase = (props: PassphraseProps) => {
   )
 
   const popoverReference = (
-    <a
+    <CircleIconButton
         className={tipClass}
+        dark={dark}
+        icon="info-circle"
         onClick={toggleShowPopover}
-    >
-      <Icon
-          dark={dark}
-          icon="info-circle"
-          size="xs"
-          variant="link"
-      />
-    </a>
+        variant="link"
+    />
   )
 
   return (
@@ -122,8 +122,10 @@ const Passphrase = (props: PassphraseProps) => {
           />
           <If condition={tips.length > 0 && !confirmation}>
             <PbReactPopover
+                closeOnClick="outside"
                 placement="right"
                 reference={popoverReference}
+                shouldClosePopover={handleShouldClosePopover}
                 show={showPopover}
             >
               <Flex

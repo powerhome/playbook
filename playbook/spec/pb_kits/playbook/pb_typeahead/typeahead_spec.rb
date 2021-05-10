@@ -20,7 +20,7 @@ RSpec.describe Playbook::PbTypeahead::Typeahead do
 
   describe "#typeahead_with_pills_options" do
     before(:each) do
-      @expected_options = [{ label: 'Windows', value: '1' }]
+      @expected_options = [{ label: "Windows", value: "1" }]
       @expected_label = "Label Here"
       @expected_placeholder = "Placeholder Here"
     end
@@ -40,9 +40,9 @@ RSpec.describe Playbook::PbTypeahead::Typeahead do
       expect(default_options_example.typeahead_with_pills_options[:options]).to match_array(@expected_options)
     end
     it "returns props with load_options", :aggregate_failures do
-      default_options_example = subject.new(async: true, load_options: 'foo', label: @expected_label, options: @expected_options, placeholder: @expected_placeholder)
+      default_options_example = subject.new(async: true, load_options: "foo", label: @expected_label, options: @expected_options, placeholder: @expected_placeholder)
       expect(default_options_example.typeahead_with_pills_options[:async]).to be(true)
-      expect(default_options_example.typeahead_with_pills_options[:loadOptions]).to eq('foo')
+      expect(default_options_example.typeahead_with_pills_options[:loadOptions]).to eq("foo")
     end
   end
 end

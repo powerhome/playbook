@@ -6,9 +6,11 @@ RSpec.describe Playbook::PbPill::Pill do
   subject { Playbook::PbPill::Pill }
 
   it { is_expected.to define_prop(:text) }
-  it { is_expected.to define_enum_prop(:variant)
-                      .with_default("neutral")
-                      .with_values("neutral", "success", "warning", "error", "info", "primary") }
+  it {
+    is_expected.to define_enum_prop(:variant)
+      .with_default("neutral")
+      .with_values("neutral", "success", "warning", "error", "info", "primary")
+  }
   describe "#classname" do
     it "returns namespaced class name", :aggregate_failures do
       expect(subject.new({}).classname).to eq "pb_pill_kit_neutral"
