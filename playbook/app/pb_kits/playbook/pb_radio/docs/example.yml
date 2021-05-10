@@ -10,3 +10,4 @@ examples:
   - radio_default: Default
   - radio_custom: Custom
   - radio_error: With Error
+  - radio_alignment: Alignment
