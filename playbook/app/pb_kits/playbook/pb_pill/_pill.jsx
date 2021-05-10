@@ -40,6 +40,7 @@ const Pill = (props: PillProps) => {
       <Title
           className="pb_pill_text"
           size={4}
+          tag="div"
           text={text}
       />
     </div>

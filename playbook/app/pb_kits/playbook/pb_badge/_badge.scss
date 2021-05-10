@@ -15,9 +15,9 @@
   border-width: 1px;
   border-style: solid;
   border-color: $card_light;
+  white-space: nowrap;
 
   span {
-    transform: translateY(1px);
     display: inline-block;
     font-size: $font_smaller - 1;
     font-weight: $bolder;
