@@ -8,18 +8,31 @@ module Playbook
       prop :get_option_label
       prop :get_option_value
       prop :id
+      prop :inline, type: Playbook::Props::Boolean,
+                    default: false
       prop :label
       prop :load_options
+      prop :multi_kit, type: Playbook::Props::String,
+                       default: ""
       prop :name
-      prop :options, type: Playbook::Props::HashArray, default: []
-      prop :pills, type: Playbook::Props::Boolean, default: false
+      prop :options, type: Playbook::Props::HashArray,
+                     default: []
+      prop :pills, type: Playbook::Props::Boolean,
+                   default: false
+
       prop :placeholder
+      prop :plus_icon, type: Playbook::Props::Boolean,
+                       default: false
       prop :search_term_minimum_length, default: 3
       prop :search_debounce_timeout, default: 250
       prop :value
 
       def classname
         generate_classname("pb_typeahead_kit")
+      end
+
+      def inline_class
+        inline ? " inline" : ""
       end
 
       def data
@@ -35,11 +48,14 @@ module Playbook
           dark: dark,
           defaultValue: default_options,
           id: id,
+          inline: inline,
           isMulti: true,
           label: label,
+          multiKit: multi_kit,
           name: name,
           options: options,
           placeholder: placeholder,
+          plusIcon: plus_icon,
         }
 
         base_options.merge!({ getOptionLabel: get_option_label }) if get_option_label.present?

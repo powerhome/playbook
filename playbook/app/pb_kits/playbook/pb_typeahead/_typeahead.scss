@@ -154,4 +154,27 @@
       box-sizing: border-box;
     }
   }
+  .placeholder+.input-wrapper .typeahead-plus-icon {
+    display: none;
+  }
+  .typeahead-kit-select__control--is-focused .typeahead-plus-icon {
+    display: none;
+  }
+  .typeahead-plus-icon {
+    color: $text_lt_lighter;
+  }
+  [class^=pb_badge_kit] span {
+    line-height: 16.5px;
+    letter-spacing: normal;
+  }
+  &.inline {
+    &:not(:hover) {
+      .text_input {
+        border-color: transparent;
+      }
+      .text_input_indicators .css-tlfecz-indicatorContainer {
+        color: transparent;
+      }
+    }
+  }
 }

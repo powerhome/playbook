@@ -25,6 +25,8 @@ type DatePickerProps = {
   id?: String,
   inputAria?: object,
   inputData?: object,
+  inputOnChange?: (String) => void,
+  inputValue?: any,
   label?: String,
   maxDate: String,
   minDate: String,
@@ -55,6 +57,8 @@ const DatePicker = (props: DatePickerProps) => {
     id,
     inputAria,
     inputData,
+    inputOnChange,
+    inputValue,
     label = 'Date Picker',
     maxDate,
     minDate,
@@ -114,7 +118,6 @@ const DatePicker = (props: DatePickerProps) => {
         className={classes}
         id={id}
     >
-      {className}
       <div className="input_wrapper">
         <TextInput
             aria={inputAria}
@@ -126,7 +129,9 @@ const DatePicker = (props: DatePickerProps) => {
             id={pickerId}
             label={hideLabel ? null : label}
             name={name}
+            onChange={inputOnChange}
             placeholder={placeholder}
+            value={inputValue}
         />
         <If condition={!hideIcon}>
           <div
