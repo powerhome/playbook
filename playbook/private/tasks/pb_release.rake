@@ -39,9 +39,6 @@ namespace :pb_release do
       puts "Updated Gemfile.lock"
       puts "\n\n"
 
-      puts "\nCreating dist files"
-      `yarn release`
-
       puts "Commit your changes and create a PR to merge to master"
     end
   end
@@ -55,7 +52,7 @@ namespace :pb_release do
 
     # NPM
     puts "\nGenerating distribution files"
-    `docker-compose run web yarn release`
+    `yarn release`
     puts "\nOrganizing distribution files"
     `rm dist/playbook-rails.css && rm dist/playbook-doc.css && mv dist/playbook-react.css dist/playbook.css`
     puts "\nCreating NPM package..."
