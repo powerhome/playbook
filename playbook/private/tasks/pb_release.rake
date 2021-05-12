@@ -28,14 +28,12 @@ namespace :pb_release do
 
       # Update version.rb
       version_rb = File.read("lib/playbook/version.rb")
-      new_version_rb = version_rb.gsub(/VERSION = "#{old_version}".freeze/, "VERSION = \"#{new_version}\".freeze")
+      old_version_rb = version_rb.gsub(/PREVIOUS_VERSION\s\=\s\"\w{1,3}.\w{1,3}.\w{1,3}\"/, "PREVIOUS_VERSION = \"#{old_version}\"")
+      new_version_rb = old_version_rb.gsub(/\sVERSION\s\=\s\"\w{1,3}.\w{1,3}.\w{1,3}\"/, " VERSION = \"#{new_version}\"")
       File.open("lib/playbook/version.rb", "w") { |file| file.puts new_version_rb }
       puts "Updated lib/playbook/version.rb"
 
-      # Update gemfile.lock
-      gemfile = File.read("Gemfile.lock")
-      new_gemfile = gemfile.gsub(/playbook_ui \(#{Regexp.escape(old_version)}\)/, "playbook_ui (#{new_version})")
-      File.open("Gemfile.lock", "w") { |file| file.puts new_gemfile }
+      `bundle`
       puts "Updated Gemfile.lock"
       puts "\n\n"
 
