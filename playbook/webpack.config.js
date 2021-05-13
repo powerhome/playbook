@@ -92,12 +92,9 @@ module.exports = {
     'webpacker-react': 'webpacker-react',
   },
   resolve: {
+    // Extensions used (in the specified order order)to resolve imports w/o an explicit extension
     extensions: [
       '.js',
-      '.sass',
-      '.scss',
-      '.css',
-      '.svg',
       '.jsx',
     ],
     modules: [
