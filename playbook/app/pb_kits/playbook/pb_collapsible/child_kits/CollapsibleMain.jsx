@@ -1,12 +1,13 @@
 /* @flow */
 
 import classnames from 'classnames'
-import { Flex, FlexItem } from '../../'
 import React, { useContext } from 'react'
 import { buildCss } from '../../utilities/props'
-import { globalProps } from '../../utilities/globalProps.js'
+import { globalProps } from '../../utilities/globalProps'
 
-import { CollapsibleContext } from '../_collapsible.jsx'
+import Flex from '../../pb_flex/_flex'
+import FlexItem from '../../pb_flex/_flex_item'
+import CollapsibleContext from '../context'
 
 type CollapsibleMainProps = {
   children: array<React.ReactNode> | React.ReactNode,
