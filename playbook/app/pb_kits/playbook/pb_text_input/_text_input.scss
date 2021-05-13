@@ -89,6 +89,14 @@
       }
     }
   }
+  &.inline {
+    &:not(:hover) { 
+      .text_input_wrapper input:not(:focus) {
+        background-color: transparent;
+        border-color: transparent;
+      }
+    }
+  }
 }
 
 .text_input_wrapper_add_on {

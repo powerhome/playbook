@@ -3,8 +3,10 @@
 import React from 'react'
 import Select from 'react-select'
 import AsyncSelect from 'react-select/async'
+import CreateableSelect from 'react-select/creatable'
 import { get, isString, uniqueId } from 'lodash'
 import { globalProps } from '../utilities/globalProps.js'
+import classnames from 'classnames'
 
 import Control from './components/Control'
 import ClearIndicator from './components/ClearIndicator'
@@ -27,6 +29,7 @@ import { noop } from '../utilities/props'
 type TypeaheadProps = {
   id?: string,
   async?: boolean,
+  createable?: boolean,
   dark?: boolean,
   label?: string,
   loadOptions?: string,
@@ -40,7 +43,7 @@ type TypeaheadProps = {
  * @param {TypeaheadProps} props - props as described at https://react-select.com/props
  */
 
-const Typeahead = ({ loadOptions = noop, getOptionLabel, id, getOptionValue, async, ...props }: TypeaheadProps) => {
+const Typeahead = ({ loadOptions = noop, getOptionLabel, id, getOptionValue, createable, async, ...props }: TypeaheadProps) => {
   const selectProps = {
     cacheOptions: true,
     components: {
@@ -59,12 +62,17 @@ const Typeahead = ({ loadOptions = noop, getOptionLabel, id, getOptionValue, asy
     getOptionValue: isString(getOptionValue) ? get(window, getOptionValue) : getOptionValue,
     defaultOptions: true,
     id: id || uniqueId(),
+    inline: false,
     isClearable: true,
     isSearchable: true,
+    name,
+    multiKit: '',
+    onCreateOption: null,
+    plusIcon: false,
     ...props,
   }
 
-  const Tag = async ? AsyncSelect : Select
+  const Tag = createable ? CreateableSelect : (async ? AsyncSelect : Select)
 
   const handleOnChange = (_data, { action, option, removedValue }) => {
     if (action === 'select-option') {
@@ -83,9 +91,10 @@ const Typeahead = ({ loadOptions = noop, getOptionLabel, id, getOptionValue, asy
   }
 
   const classes = `pb_typeahead_kit react-select ${globalProps(props)}`
+  const inlineClass = selectProps.inline ? 'inline' : null
 
   return (
-    <div className={classes}>
+    <div className={classnames(classes, inlineClass)}>
       <Tag
           classNamePrefix="typeahead-kit-select"
           onChange={handleOnChange}

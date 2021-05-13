@@ -9,10 +9,12 @@ import { buildAriaProps, buildDataProps } from '../utilities/props'
 
 type RichTextEditorProps = {
   aria?: object,
+  toolbarBottom?: Boolean,
   className?: string,
   data?: object,
   focus?: boolean,
   id?: string,
+  inline?: boolean,
   name?: string,
   onChange: (string) => void,
   placeholder?: string,
@@ -25,10 +27,12 @@ type RichTextEditorProps = {
 const RichTextEditor = (props: RichTextEditorProps) => {
   const {
     aria = {},
+    toolbarBottom = false,
     className,
     data = {},
     focus = false,
     id,
+    inline = false,
     name,
     onChange,
     placeholder,
@@ -77,6 +81,8 @@ const RichTextEditor = (props: RichTextEditorProps) => {
         blockCodeButton.hidden = type == 'inline'
         inlineCodeButton.hidden = type == 'block'
       })
+
+      if (toolbarBottom) editor.element.after(toolbarElement)
     })
 
     trixRef.current.addEventListener('trix-change', (event) => {
@@ -103,6 +109,8 @@ const RichTextEditor = (props: RichTextEditorProps) => {
   const SimpleClass = simple ? 'simple' : ''
   const FocusClass = focus ? 'focus-editor-targets' : ''
   const StickyClass = sticky ? 'sticky' : ''
+  const InlineClass = inline ? 'inline' : ''
+  const ToolbarBottomClass = toolbarBottom ? 'toolbar-bottom' : ''
   const css = classnames(globalProps(props), className)
 
   return (
@@ -114,6 +122,8 @@ const RichTextEditor = (props: RichTextEditorProps) => {
         SimpleClass,
         FocusClass,
         StickyClass,
+        InlineClass,
+        ToolbarBottomClass,
         css
       )}
     >
