@@ -1,6 +1,7 @@
 import React from 'react'
-import { Nav } from '../../'
-import NavItem from '../_item.jsx'
+
+import Nav from '../_nav'
+import NavItem from '../_item'
 
 const BlockNoTitleNav = (props) => {
   return (

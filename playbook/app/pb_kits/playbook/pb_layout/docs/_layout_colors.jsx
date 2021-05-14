@@ -1,5 +1,8 @@
 import React from 'react'
-import { Body, Layout } from '../../'
+
+import Layout from '../_layout'
+
+import Body from '../../pb_body/_body'
 
 const LayoutColor = (props) => {
   return (

@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
-import { Radio } from '../../'
+
+import Radio from '../_radio'
 
 const RadioCustom = (props) => {
   const [choice, setChoice] = useState('power')

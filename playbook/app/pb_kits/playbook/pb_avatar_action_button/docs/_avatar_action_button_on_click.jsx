@@ -1,5 +1,6 @@
 import React from 'react'
-import { AvatarActionButton } from '../../'
+
+import AvatarActionButton from '../_avatar_action_button'
 
 const AvatarActionButtonOnClick = (props) => (
   <div className="pb--doc-demo-row">

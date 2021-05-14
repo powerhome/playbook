@@ -1,5 +1,6 @@
 import React from 'react'
-import { Textarea } from '../../'
+
+import Textarea from '../_textarea'
 
 const TextareaCustom = (props) => {
   return (

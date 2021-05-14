@@ -1,5 +1,7 @@
 import React from 'react'
-import { CircleChart, Title } from '../../'
+
+import CircleChart from '../_circle_chart'
+import Title from '../../pb_title/_title'
 
 const dataWithABlock = [
   {

@@ -1,6 +1,8 @@
 import React from 'react'
-import Timeline from '../_timeline.jsx'
-import { Body, TitleDetail } from '../../'
+
+import Timeline from '../_timeline'
+import Body from '../../pb_body/_body'
+import TitleDetail from '../../pb_title_detail/_title_detail'
 
 const TimelineDefault = (props) => (
   <div>

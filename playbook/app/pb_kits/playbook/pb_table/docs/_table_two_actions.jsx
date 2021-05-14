@@ -1,6 +1,7 @@
 import React from 'react'
-import { Table } from '../..'
-import { Button } from '../../'
+
+import Table from '../_table'
+import Button from '../../pb_button/_button'
 
 const TableOneAction = (props) => {
   return (

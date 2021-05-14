@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
-import { Button, CircleChart } from '../../'
+
+import CircleChart from '../_circle_chart'
+import Button from '../../pb_button/_button'
 
 const CircleChartLiveData = (props) => {
   const [data, setData] = useState([

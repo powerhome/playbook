@@ -1,5 +1,6 @@
 import React from 'react'
-import { Legend } from '../../'
+
+import Legend from '../_legend'
 
 const products = ['Windows', 'Doors', 'Roofing', 'Siding', 'Solar Gutters', 'Insulation', 'Other']
 

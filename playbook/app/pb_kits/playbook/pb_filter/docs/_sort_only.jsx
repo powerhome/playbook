@@ -1,5 +1,6 @@
 import React from 'react'
-import { Filter } from '../../'
+
+import Filter from '../_filter'
 
 const SortOnly = (props) => (
   <Filter

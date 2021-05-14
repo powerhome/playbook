@@ -1,5 +1,6 @@
 import React from 'react'
-import { DashboardValue } from '../../'
+
+import DashboardValue from '../../pb_dashboard_value/_dashboard_value'
 
 const DashboardValueDefault = (props) => {
   return (

@@ -1,5 +1,6 @@
 import React from 'react'
-import { IconValue } from '../../'
+
+import IconValue from '../_icon_value'
 
 const IconValueAlign = (props) => {
   return (

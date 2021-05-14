@@ -1,5 +1,6 @@
 import React from 'react'
-import { StarRating } from '../../'
+
+import StarRating from '../_star_rating'
 
 const StarRatingHide = (props) => (
 

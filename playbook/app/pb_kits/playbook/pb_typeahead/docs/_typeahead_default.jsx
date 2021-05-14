@@ -1,7 +1,8 @@
 // @flow
 
 import React from 'react'
-import { Typeahead } from '../../'
+
+import Typeahead from '../_typeahead'
 
 const options = [
   { label: 'Orange', value: '#FFA500' },

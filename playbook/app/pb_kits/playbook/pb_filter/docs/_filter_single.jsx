@@ -1,5 +1,11 @@
 import React from 'react'
-import { Button, Filter, Flex, Select, TextInput } from '../../'
+
+import Filter from '../_filter'
+
+import Button from '../../pb_button/_button'
+import Flex from '../../pb_flex/_flex'
+import Select from '../../pb_select/_select'
+import TextInput from '../../pb_text_input/_text_input'
 
 const FilterSingle = (props) => {
   const options = [

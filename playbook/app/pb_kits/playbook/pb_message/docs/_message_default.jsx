@@ -1,5 +1,6 @@
 import React from 'react'
-import { Message } from '../../'
+
+import Message from '../_message'
 
 const MessageDefault = (props) => {
   return (

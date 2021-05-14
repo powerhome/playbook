@@ -1,5 +1,6 @@
 import React from 'react'
-import { TextInput } from '../../'
+
+import TextInput from '../_text_input'
 
 class TextInputDisabled extends React.Component {
   render(props) {

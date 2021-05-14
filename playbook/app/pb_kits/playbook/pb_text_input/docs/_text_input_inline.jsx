@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
-import { TextInput } from '../../'
+
+import TextInput from '../_text_input'
 
 const TextInputInline = (props) => {
   const [value, setValue] = useState('Inline Input')

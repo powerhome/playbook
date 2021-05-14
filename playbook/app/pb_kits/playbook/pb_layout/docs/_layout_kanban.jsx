@@ -1,16 +1,15 @@
 import React from 'react'
-import {
-  Avatar,
-  Caption,
-  Card,
-  Flex,
-  FlexItem,
-  Icon,
-  Layout,
-  MultipleUsers,
-  Timestamp,
-  Title,
-} from '../../'
+
+import Avatar from '../../pb_avatar/_avatar'
+import Caption from '../../pb_caption/_caption'
+import Card from '../../pb_card/_card'
+import Flex from '../../pb_flex/_flex'
+import FlexItem from '../../pb_flex/_flex_item'
+import Icon from '../../pb_icon/_icon'
+import Layout from '../../pb_layout/_layout'
+import MultipleUsers from '../../pb_multiple_users/_multiple_users'
+import Timestamp from '../../pb_timestamp/_timestamp'
+import Title from '../../pb_title/_title'
 
 const LayoutKanban = (props) => {
   return (

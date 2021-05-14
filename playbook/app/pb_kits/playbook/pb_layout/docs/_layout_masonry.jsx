@@ -1,5 +1,8 @@
 import React from 'react'
-import { Image, Layout } from '../../'
+
+import Layout from '../_layout'
+
+import Image from '../../pb_image/_image'
 
 const LayoutMasonry = (props) => {
   return (
