@@ -126,17 +126,17 @@ const Select = ({
             {optionsList}
           </select>
         </If>
+        <Icon
+            className="pb_select_kit_caret"
+            fixedWidth
+            icon="angle-down"
+        />
         <If condition={error}>
           <Body
               status="negative"
               text={error}
           />
         </If>
-        <Icon
-            className="pb_select_kit_caret"
-            fixedWidth
-            icon="angle-down"
-        />
       </label>
     </div>
   )

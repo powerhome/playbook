@@ -14,6 +14,7 @@ RSpec.describe Playbook::PbTypeahead::Typeahead do
   it { is_expected.to define_prop(:get_option_label) }
   it { is_expected.to define_prop(:get_option_value) }
   it { is_expected.to define_prop(:id) }
+  it { is_expected.to define_prop(:inline).with_default(false) }
   it { is_expected.to define_prop(:label) }
   it { is_expected.to define_prop(:load_options) }
   it { is_expected.to define_prop(:name) }

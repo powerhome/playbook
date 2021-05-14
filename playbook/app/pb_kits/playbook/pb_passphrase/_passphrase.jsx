@@ -122,6 +122,7 @@ const Passphrase = (props: PassphraseProps) => {
           />
           <If condition={tips.length > 0 && !confirmation}>
             <PbReactPopover
+                className="passphrase-tips"
                 closeOnClick="outside"
                 placement="right"
                 reference={popoverReference}

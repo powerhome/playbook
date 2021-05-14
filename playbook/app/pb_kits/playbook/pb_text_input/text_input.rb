@@ -8,6 +8,8 @@ module Playbook
       prop :disabled, type: Playbook::Props::Boolean,
                       default: false
       prop :error
+      prop :inline, type: Playbook::Props::Boolean,
+                    default: false
       prop :label
       prop :name
       prop :placeholder
@@ -21,7 +23,7 @@ module Playbook
                     nested_kit: Playbook::PbTextInput::AddOn
 
       def classname
-        generate_classname("pb_text_input_kit") + error_class
+        generate_classname("pb_text_input_kit") + error_class + inline_class
       end
 
       def input_tag
@@ -74,6 +76,10 @@ module Playbook
 
       def error_class
         error ? " error" : ""
+      end
+
+      def inline_class
+        inline ? " inline" : ""
       end
     end
   end
