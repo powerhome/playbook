@@ -5,6 +5,7 @@ examples:
   - radio_custom: Custom
   - radio_error: With Error
   - radio_options: With Options
+  - radio_alignment: Alignment
 
   react:
   - radio_default: Default
