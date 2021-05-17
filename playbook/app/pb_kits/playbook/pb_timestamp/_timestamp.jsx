@@ -82,8 +82,6 @@ const Timestamp = (props: TimestampProps) => {
     return `Last updated ${userDisplay} ${dateTimestamp.value.fromNow()}`
   }
 
-  const datetimeOrText = timestamp ? fullDateDisplay() : text
-
   const captionText = () => {
     switch (variant) {
     case 'updated':
@@ -91,7 +89,7 @@ const Timestamp = (props: TimestampProps) => {
     case 'elapsed':
       return formatElapsedString(userDisplay, timeDisplay)
     default:
-      return showDate ? datetimeOrText : fullTimeDisplay()
+      return showDate ? timestamp ? fullDateDisplay() : text : fullTimeDisplay()
     }
   }
 
