@@ -7,6 +7,8 @@ import 'playbook-ui/dist/playbook-doc' // playbook-react doc components
 import 'playbook-ui/dist/fonts/fontawesome-min'
 import 'playbook-ui/dist/fonts/regular-min'
 
+import '../site_styles/main.scss'
+
 import DarkModeToggle from '../components/DarkModeToggle'
 import KitSearch from '../components/KitSearch'
 import SnippetToggle from '../components/SnippetToggle'
