@@ -17,5 +17,6 @@ WebpackerReact.setup({
   SnippetToggle,
 })
 
-const images = require.context('../images', true)
+// eslint-disable-next-line no-unused-vars
+const _images = require.context('../images', true)
 // const imagePath = (name) => images(name, true)

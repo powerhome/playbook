@@ -1,5 +1,5 @@
 import React from 'react'
-import { BarGraph, LineGraph, Nav, User, NavItem } from 'playbook-ui'
+import { BarGraph, LineGraph, Nav, NavItem, User } from 'playbook-ui'
 
 const chartData = [
   {

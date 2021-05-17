@@ -10600,6 +10600,7 @@ fsevents@^1.2.7:
     babel-plugin-transform-flow-strip-types: ^6.22.0
     babel-plugin-transform-react-remove-prop-types: ^0.4.24
     babel-preset-flow: 6.23.0
+    eslint: 6.6.0
     playbook-ui: ">= 1"
     react: 16.14.0
     react-dom: 16.14.0

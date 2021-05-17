@@ -1,7 +1,7 @@
 /* @flow */
 
 import React from 'react'
-import { FlexItem, Background, Body, Caption, Card, Flex, Icon, Image, Layout, ProgressSimple, SectionSeparator, Table, TableRow, TextInput, Title, User }  from 'playbook-ui'
+import { Background, Body, Caption, Card, Flex, FlexItem, Icon, Image, Layout, ProgressSimple, SectionSeparator, Table, TableRow, TextInput, Title, User }  from 'playbook-ui'
 
 const yourLibraryLinks = ['Made For You', 'Recently Played', 'Liked Songs', 'Albums', 'Artists', 'Podcasts']
 const playlists = ['podcasts', 'THENX', 'Adrenaline Workout', 'New Music Friday', 'RetroWave / Outrun', 'Tiki Torch']

@@ -1,5 +1,5 @@
 import React from 'react'
-import { BarGraph, Body, Button, Caption, Card, Checkbox, Flex, Layout, LineGraph, SectionSeparator, Table, Title, FlexItem } from 'playbook-ui'
+import { BarGraph, Body, Button, Caption, Card, Checkbox, Flex, FlexItem, Layout, LineGraph, SectionSeparator, Table, Title } from 'playbook-ui'
 
 const data = [{
   name: '2020 | SF',

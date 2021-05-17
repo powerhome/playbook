@@ -1,13 +1,13 @@
 import React from 'react'
 import {
-  FlexItem,
   Background,
   Badge,
   Body,
   Button,
   Caption,
   Card,
-  Flex, Icon,
+  Flex,
+  FlexItem, Icon,
   IconCircle,
   IconValue,
   Image,
