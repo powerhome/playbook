@@ -22,7 +22,7 @@
     }) %>
   <% end %>
 
-  <%= pb_rails("title", props: { 
+  <%= pb_rails("title", props: {
     margin_bottom: "xl",
     text: @sample.titleize,
     tag: "h2",
@@ -33,11 +33,11 @@
     <%= pb_rails("card/card_header", props: { padding: "xs", header_color: "white" }) do %>
 
       <%= pb_rails("flex", props: { spacing: "between", vertical: "center" }) do %>
-  
+
         <%= pb_rails("flex/flex_item", props: { margin_left: "sm" }) do %>
           <%= pb_rails("nav", props: { orientation: "horizontal", variant: "subtle" }) do %>
-            <%= pb_rails("nav/item", props: { text: "Rails", link: "#{sample_show_rails_path(@sample)}", active: action_name == 'sample_show_rails' }) %>
-            <%= pb_rails("nav/item", props: { text: "React", link: "#{sample_show_reacts_path(@sample)}", active: action_name == 'sample_show_react' }) %>
+            <%= pb_rails("nav/item", props: { text: "Rails", link: "#{sample_show_path(@sample, type: :rails)}", active: current_sample_type.rails? }) %>
+            <%= pb_rails("nav/item", props: { text: "React", link: "#{sample_show_path(@sample, type: :react)}", active: current_sample_type.react? }) %>
           <% end %>
         <% end %>
 
@@ -51,7 +51,7 @@
             <%= pb_rails("popover", props: { max_width: "300px", trigger_element_id: "kits-used", tooltip_id: "kits-used-tooltip", position: 'bottom', padding: "sm" }) do %>
               <%= pb_rails("flex", props: { spacing: "around", wrap: true }) do %>
                 <% kits_used(@sample).each do |kit| %>
-                  <a href=<%="/kits/#{kit[0]}/#{@type}"%>>
+                  <a href=<%="/kits/#{kit[0]}/#{current_sample_type}"%>>
                     <%= pb_rails("pill", props: {
                       text: kit[0].titleize,
                       variant: "primary",
@@ -76,13 +76,13 @@
               text: "Fullscreen"
             }) %>
           <% end %>
-          
+
           <% end %>
         <% end %>
     <% end %>
 
     <%= pb_rails("card/card_body", props: { classname: "bg_light", padding: "none" }) do %>
-      <%= render_sample_ui(@sample, @type) %>
+      <%= render_sample_ui(@sample, current_sample_type) %>
     <% end %>
   <% end %>
 
@@ -92,8 +92,8 @@
     <div class="pb--doc light_ui">
         <div class="pb--codeCopy close" >
             <a class="pb--close-toggle copy-clipboard" href="#">Copy to Clipboard</a>
-            <div class="hiddenCodeforCopy"><%= get_raw_code(@sample, @type) %></div>
-            <pre class="highlight"><%= get_sample_code_content(@sample, @type) %></pre>
+            <div class="hiddenCodeforCopy"><%= get_raw_code(@sample, current_sample_type) %></div>
+            <pre class="highlight"><%= get_sample_code_content(@sample, current_sample_type) %></pre>
         </div>
     </div>
 </div>

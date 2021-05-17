@@ -21,10 +21,10 @@ Rails.application.routes.draw do
   get "guides/use-in-nitro", to: "guides#use_nitro"
 
   # Full Page Samples Get Generated Here
-  get "samples/:name", to: "samples#sample_show_rails", as: "sample_show"
-  get "samples/:name/rails", to: "samples#sample_show_rails", as: "sample_show_rails"
-  get "samples/:name/react", to: "samples#sample_show_react", as: "sample_show_reacts"
-  get "samples/", to: "samples#samples_index"
+  get "samples", to: "samples#index"
+  get "samples/:name(/:type)", defaults: { type: "rails" },
+                               to: "samples#show",
+                               as: "sample_show"
 
   # dark mode
   get "/enable_dark_mode", to: "pages#enable_dark_mode", as: "enable_dark_mode"

@@ -6,7 +6,7 @@ require_relative "application_controller"
 
 class SamplesController < ApplicationController
   before_action :set_playbook
-  before_action :set_sample, only: %i[sample_show_rails sample_show_react]
+  before_action :set_sample, only: :show
   before_action :delete_dark_mode_cookie
 
   layout "samples"
@@ -15,26 +15,16 @@ class SamplesController < ApplicationController
     @playbook = true
   end
 
-  def samples
-    params[:type] ||= "rails"
-    @type = params[:type]
-  end
+  def index; end
 
-  def samples_index; end
-
-  def sample_show_rails
-    params[:type] ||= "rails"
-    @type = params[:type]
-    render template: "samples/sample_show"
-  end
-
-  def sample_show_react
-    params[:type] ||= "react"
-    @type = params[:type]
-    render template: "samples/sample_show"
-  end
+  def show; end
 
 private
+
+  def current_sample_type
+    params[:type].inquiry
+  end
+  helper_method :current_sample_type
 
   def set_sample
     if SAMPLES.flatten(2).include?(params[:name])
