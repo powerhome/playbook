@@ -1,5 +1,3 @@
-import '../samples/index.scss'
-
 import WebpackerReact from 'webpacker-react'
 
 // Please rearrange/alphabaetize after Sample Generator appends new imports
