@@ -28,7 +28,7 @@ class PagesController < ApplicationController
   def getting_started; end
 
   def changelog
-    @data = File.read("../../CHANGELOG.md")
+    @data = Playbook::Engine.root.join("CHANGELOG.md").read
   end
 
   def grid
