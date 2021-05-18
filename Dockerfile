@@ -29,7 +29,7 @@ WORKDIR /home/app/src
 # Build Library
 COPY playbook-website/package.json playbook-website/
 COPY playbook/package.json playbook/
-COPY .rubocop.yml package.json .yarnrc.yml yarn.lock ./
+COPY package.json .rubocop.yml .eslintrc.json .yarnrc.yml yarn.lock ./
 COPY .yarn ./.yarn
 RUN yarn install
 RUN curl https://github.com/sass/node-sass/releases/download/v4.13.0/linux-x64-64_binding.node -o node_modules/node-sass/vendor/linux-x64-64_binding.node
