@@ -17,6 +17,7 @@ Playbook is the first design system built for both Rails & React interfaces. Ins
 1. Install commit hooks `yarn prepare`
 1. Install all projects dependencies: `yarn install`
 1. Install website ruby dependencies: `cd playbook-website && bundle`
+  1. If you receive a bundle(r) related error, be sure that `bundler` is installed first. See the `BUNDLED WITH` section of `playbook-website/Gemfile.lock` for the exact version to install.
 
 ### Running the website for development
 
