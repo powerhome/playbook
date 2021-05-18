@@ -2,9 +2,9 @@
 
 import React, { useEffect, useRef } from 'react'
 import classnames from 'classnames'
-import useFocus from './useFocus.js'
+import useFocus from './useFocus'
 import Trix from 'trix'
-import { globalProps } from '../utilities/globalProps.js'
+import { globalProps } from '../utilities/globalProps'
 import { buildAriaProps, buildDataProps } from '../utilities/props'
 
 type RichTextEditorProps = {

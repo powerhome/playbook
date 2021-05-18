@@ -35,7 +35,5 @@ PbTextarea.start()
 
 import 'flatpickr'
 
-import 'trix'
-
 // React-Rendered Rails Kits =====
-import './playbook-rails-react-bindings.js'
+import './playbook-rails-react-bindings'
