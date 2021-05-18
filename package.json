@@ -20,6 +20,6 @@
   },
   "lint-staged": {
     "*.{js,jsx}": "eslint",
-    "*.rb": "bundle exec rubocop --parallel"
+    "*.rb": "bundle exec --gemfile=playbook-website/Gemfile rubocop --parallel"
   }
 }
