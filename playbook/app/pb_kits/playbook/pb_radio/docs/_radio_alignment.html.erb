@@ -1,0 +1,27 @@
+<%= pb_rails("flex") do %>
+  <%= pb_rails("radio", props: {
+    alignment: "vertical",
+    text: "Power",
+    input_options: {
+      tabindex: 0
+    },
+    margin_right: "sm",
+    name: "group 1",
+    value: "Power"
+  }) %>
+
+  <%= pb_rails("radio", props: {
+    alignment: "vertical",
+    text: "Nitro",
+    margin_right: "sm",
+    name: "group 1",
+    value: "Nitro"
+  }) %>
+
+  <%= pb_rails("radio", props: {
+    alignment: "vertical",
+    text: "Google",
+    name: "group 1",
+    value: "Google"
+  }) %>
+<% end %>

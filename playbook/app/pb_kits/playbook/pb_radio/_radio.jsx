@@ -9,6 +9,7 @@ import { globalProps } from '../utilities/globalProps.js'
 
 type RadioProps = {
   aria?: object,
+  alignment?: String,
   checked?: Boolean,
   children?: Node,
   className?: String,
@@ -25,6 +26,7 @@ type RadioProps = {
 
 const Radio = ({
   aria = {},
+  alignment = '',
   children,
   className,
   dark = false,
@@ -40,7 +42,7 @@ const Radio = ({
 }: RadioProps, ref) => {
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
-  const classes = classnames(buildCss('pb_radio_kit'), { error }, { dark }, globalProps(props), className)
+  const classes = classnames(buildCss('pb_radio_kit'), { error }, { dark }, globalProps(props), alignment, className)
 
   return (
     <label
