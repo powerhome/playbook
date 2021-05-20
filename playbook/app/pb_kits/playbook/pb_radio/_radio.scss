@@ -38,6 +38,16 @@
       }
     }
   }
+
+  &.vertical {
+    flex-direction: column;
+    align-items: center;
+    .pb_radio_button {
+      margin-right: 0px;
+      margin-bottom: $space_xs;
+    }
+  }
+
   &.dark {
     .pb_radio_button {
       border-color: $border_dark;

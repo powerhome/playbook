@@ -8,3 +8,4 @@ node_modules
 !.yarn/sdks
 !.yarn/versions
 .pnp.*
+yarn-error.log
