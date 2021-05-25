@@ -5,10 +5,10 @@ __metadata:
   version: 4
   cacheKey: 7
 
-"@actions/core@npm:1.2.6":
-  version: 1.2.6
-  resolution: "@actions/core@npm:1.2.6"
-  checksum: 984c7d5ae95c02f62f69549a9d5cfbc0db0b035f519775301b397c167791ceee269fb504cb622da541d1fa305ee4ad3fc30d017c6407045aa4eb6809eee4c549
+"@actions/core@npm:1.3.0":
+  version: 1.3.0
+  resolution: "@actions/core@npm:1.3.0"
+  checksum: 8829af9595388018bb4eff5ebf74f868738f36a549305a7702bf0d872df0778a0bceae3b51e4a159dd698a775a5dd7efc676e811c28ce44602358c65750f150e
   languageName: node
   linkType: hard
 
@@ -1343,7 +1343,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/runtime@npm:^7.1.2, @babel/runtime@npm:^7.10.2, @babel/runtime@npm:^7.11.2, @babel/runtime@npm:^7.12.1, @babel/runtime@npm:^7.12.5, @babel/runtime@npm:^7.4.4, @babel/runtime@npm:^7.5.5, @babel/runtime@npm:^7.7.2, @babel/runtime@npm:^7.8.4, @babel/runtime@npm:^7.9.2":
+"@babel/runtime@npm:^7.1.2, @babel/runtime@npm:^7.10.2, @babel/runtime@npm:^7.11.2, @babel/runtime@npm:^7.12.5, @babel/runtime@npm:^7.4.4, @babel/runtime@npm:^7.5.5, @babel/runtime@npm:^7.7.2, @babel/runtime@npm:^7.8.4, @babel/runtime@npm:^7.9.2":
   version: 7.13.17
   resolution: "@babel/runtime@npm:7.13.17"
   dependencies:
@@ -1968,9 +1968,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@testing-library/dom@npm:^7.26.6":
-  version: 7.30.4
-  resolution: "@testing-library/dom@npm:7.30.4"
+"@testing-library/dom@npm:^7.28.1":
+  version: 7.31.0
+  resolution: "@testing-library/dom@npm:7.31.0"
   dependencies:
     "@babel/code-frame": ^7.10.4
     "@babel/runtime": ^7.12.5
@@ -1980,7 +1980,7 @@ __metadata:
     dom-accessibility-api: ^0.5.4
     lz-string: ^1.4.4
     pretty-format: ^26.6.2
-  checksum: 113225e873ec36739be2d0866b5108626253178c34727b51d6c04a046fea815450e40d0b1be63849dff46745043381e0b40fd03f8c1d5a447bc24ffde0f42ec9
+  checksum: 84c4bf5d33091b2eb668d8305591362bf9e3037eaca636bc97469622feaa3407ce1cc2af6d5f1a81b66b3e566cebef5b2c01d3ee47bc4c92abca38969f0f155d
   languageName: node
   linkType: hard
 
@@ -2000,16 +2000,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@testing-library/react@npm:11.1.2":
-  version: 11.1.2
-  resolution: "@testing-library/react@npm:11.1.2"
+"@testing-library/react@npm:11.2.7":
+  version: 11.2.7
+  resolution: "@testing-library/react@npm:11.2.7"
   dependencies:
-    "@babel/runtime": ^7.12.1
-    "@testing-library/dom": ^7.26.6
+    "@babel/runtime": ^7.12.5
+    "@testing-library/dom": ^7.28.1
   peerDependencies:
     react: "*"
     react-dom: "*"
-  checksum: 64895ea94b2a17eb2c9c0b9b25fb45b32100e50939fa2608756a0c4e8475b7ad6885743d8fc29edc466a8a45ff561eccec44c594624f34e64784e8c04a342eec
+  checksum: 389c9f3e83f59677f5283783788d18f8cd499342a0e5c1f67821c292860afe5f282ff8b5ced795b9c2f7d78132005d8b6b33e1b3e3a9004e240e3569f8e168ef
   languageName: node
   linkType: hard
 
@@ -2918,10 +2918,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"axe-core@npm:4.1.1":
-  version: 4.1.1
-  resolution: "axe-core@npm:4.1.1"
-  checksum: cd00c2d359f118bb2631a0e018a5d9183996488aec5dd52c7cea2c96613725c388268f0b01d22f594271837d5f26b586a1e79e302578527fe28e71ea433c0660
+"axe-core@npm:4.2.1":
+  version: 4.2.1
+  resolution: "axe-core@npm:4.2.1"
+  checksum: 6a3f1a9f2d4c8a27aafd044acb2d02d52008ef392aeced4859fcfa85a559347e267eeb9db1f7d5807eda30d895354cdbfeb3437b018b45904e3cc609bf461906
   languageName: node
   linkType: hard
 
@@ -10513,7 +10513,7 @@ fsevents@^1.2.7:
   version: 0.0.0-use.local
   resolution: "playbook-ui@workspace:playbook"
   dependencies:
-    "@actions/core": 1.2.6
+    "@actions/core": 1.3.0
     "@actions/github": 4.0.0
     "@babel/cli": ^7.12.1
     "@babel/core": ^7.12.3
@@ -10526,8 +10526,8 @@ fsevents@^1.2.7:
     "@babel/preset-react": ^7.12.5
     "@popperjs/core": ^2.6.0
     "@testing-library/jest-dom": 5.11.6
-    "@testing-library/react": 11.1.2
-    axe-core: 4.1.1
+    "@testing-library/react": 11.2.7
+    axe-core: 4.2.1
     babel-eslint: 10.1.0
     babel-jest: ^26.6.3
     babel-loader: ^8.0.5
