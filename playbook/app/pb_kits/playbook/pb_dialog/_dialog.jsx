@@ -55,7 +55,7 @@ const Dialog = (props: DialogProps) => {
   const dataProps = buildDataProps(data)
 
   const dialogClassNames = {
-    base: classnames('pb_dialog', buildCss('pb_dialog', size)),
+    base: classnames('pb_dialog', buildCss('pb_dialog', size), className ? buildCss('pb_dialog', className) : null),
     afterOpen: 'pb_dialog_after_open',
     beforeClose: 'pb_dialog_before_close',
   }
