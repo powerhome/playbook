@@ -74,7 +74,10 @@ const Passphrase = (props: PassphraseProps) => {
   }
 
   const [showPassphrase, setShowPassphrase] = useState(false)
-  const toggleShowPassphrase = () => setShowPassphrase(!showPassphrase)
+  const toggleShowPassphrase = (e) => {
+    e.preventDefault()
+    setShowPassphrase(!showPassphrase)
+  }
 
   const classes = classnames(buildCss('pb_passphrase'), globalProps(props), className)
 
