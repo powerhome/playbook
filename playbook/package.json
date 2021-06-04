@@ -1,6 +1,6 @@
 {
   "name": "playbook-ui",
-  "version": "9.16.0",
+  "version": "9.17.0",
   "description": "Nitro's Design System",
   "main": "./dist/playbook-react.js",
   "scripts": {
@@ -56,7 +56,7 @@
     "classnames": "^2.2.6",
     "core-js": "3",
     "flatpickr": "^4.6.6",
-    "highcharts": "^7.2.2",
+    "highcharts": "^9.0.0",
     "jsx-control-statements": "^3.2.8",
     "lazysizes": "^5.2.2",
     "lodash": "^4.17.19",

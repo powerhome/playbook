@@ -6879,10 +6879,10 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"highcharts@npm:^7.2.2":
-  version: 7.2.2
-  resolution: "highcharts@npm:7.2.2"
-  checksum: bbd142a10a1ba4c9da65df064a24d87f16a0704389f30e0647f07d2691a3233bc6bf196ab97e86cac1e6980c6a6d07dd899275735093c7ceca44012ab17e8178
+"highcharts@npm:^9.0.0":
+  version: 9.1.1
+  resolution: "highcharts@npm:9.1.1"
+  checksum: f9881bb7bb791eb5ec595fdf0c1af0e6bf8124f93cb578add6035d99abb57a91cf40a372a81d401d9132c9d7ce855336aa69b5fc72c36a72785d106a7edecbcb
   languageName: node
   linkType: hard
 
@@ -10551,7 +10551,7 @@ fsevents@^1.2.7:
     flatpickr: ^4.6.6
     flow-bin: 0.137.0
     flow-runtime: 0.14.0
-    highcharts: ^7.2.2
+    highcharts: ^9.0.0
     identity-obj-proxy: 3.0.0
     jest: 26.4.2
     jest-axe: 4.1.0
