@@ -11,8 +11,8 @@ const DialogDefault = () => {
       <Button onClick={open}>{'Open Dialog'}</Button>
       <Dialog
           cancelButton="Cancel"
-          confirmButton="Okay"
           className="wrapper"
+          confirmButton="Okay"
           onCancel={close}
           onClose={close}
           onConfirm={close}
