@@ -34,6 +34,7 @@ const MessageDefault = (props) => {
           avatarUrl="https://randomuser.me/api/portraits/women/39.jpg"
           message="To process your order, I will need your full name."
           timestamp="4 hours ago"
+          timestampObject={new Date}
           {...props}
       />
 

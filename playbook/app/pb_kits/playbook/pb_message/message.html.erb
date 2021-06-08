@@ -19,15 +19,17 @@
       <% if object.timestamp_object.present? %>
         <%= pb_rails("timestamp", props: {
           timestamp: object.timestamp_object,
-          classname: "pull-right #{object.timestamp_object.present? ? 'message_timestamp' : nil}"
+          classname: "pull-right message_timestamp"
         }) %>
       <% end %>
 
-      <%= pb_rails("title", props: {
-        size: 4,
-        text: object.label,
-        classname: "message_title"
-      }) %>
+      <% if object.label.present? %>
+        <%= pb_rails("title", props: {
+          size: 4,
+          text: object.label,
+          classname: "message_title"
+        }) %>
+      <% end %>
       <%= pb_rails("body", props: {
         text: object.message,
         classname: "pb_message_body"
