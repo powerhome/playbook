@@ -23,7 +23,6 @@ const MessageDefault = (props) => {
           label="Support"
           message="We will escalate this issue to a Senior Support agent."
           timestamp="9 minutes ago"
-          timestampObject={new Date}
           {...props}
       />
 
