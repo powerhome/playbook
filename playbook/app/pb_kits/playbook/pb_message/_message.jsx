@@ -1,7 +1,7 @@
 /* @flow */
 
 import React from 'react'
-import { Avatar, Body, Caption, Timestamp, Title } from '../'
+import { Avatar, Body, Timestamp, Title } from '../'
 import classnames from 'classnames'
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
 import { globalProps } from '../utilities/globalProps.js'
@@ -63,15 +63,28 @@ const Message = (props: MessageProps) => {
         />
       </If>
       <div className="content_wrapper">
-        <Timestamp text={timestamp} className={`pull-right ${timestampObject ? 'message_humanized_time' : null}`} />
+        <Timestamp
+            className={`pull-right ${timestampObject ? 'message_humanized_time' : null}`}
+            text={timestamp}
+        />
         <If condition={timestampObject}>
-          <Timestamp timestamp={timestampObject} className={"pull-right message_timestamp"} />
+          <Timestamp
+              className="pull-right message_timestamp"
+              timestamp={timestampObject}
+          />
         </If>
 
         <If condition={label}>
-          <Title className="message_title" text={label} size={4} />
+          <Title
+              className="message_title"
+              size={4}
+              text={label}
+          />
         </If>
-        <Body className={"pb_message_body"} text={message} />
+        <Body
+            className="pb_message_body"
+            text={message}
+        />
       </div>
     </div>
   )
