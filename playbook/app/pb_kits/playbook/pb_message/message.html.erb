@@ -32,7 +32,7 @@
       <% end %>
       <%= pb_rails("body", props: {
         text: object.message,
-        classname: "pb_message_body"
+        classname: "pb_message_body #{object.label.blank? ? 'body_spaced' : nil}"
       }) %>
     </div>
 <% end %>

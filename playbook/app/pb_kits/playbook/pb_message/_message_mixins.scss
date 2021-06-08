@@ -3,7 +3,6 @@
 @mixin pb_message {
   display: flex;
   justify-content: flex-start;
-  align-items: center;
 
   .content_wrapper {
     width: 100%;
@@ -25,14 +24,22 @@
     }
   }
 
+  .pb_avatar_kit_xs {
+    margin-top: $space-xs/2;
+  }
+
   &[class*=_avatar] {
     .content_wrapper {
-      margin-left: $space-sm;
+      margin-left: $space-xs;
     }
   }
 
   .pb_message_body {
     font-size: 15px;
+  }
+
+  .body_spaced {
+    margin-top: 7px;
   }
 
   .message_timestamp {

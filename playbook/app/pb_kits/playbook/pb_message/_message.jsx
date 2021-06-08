@@ -64,7 +64,7 @@ const Message = (props: MessageProps) => {
       </If>
       <div className="content_wrapper">
         <Timestamp
-            className={`pull-right ${timestampObject ? 'message_humanized_time' : null}`}
+            className={`pull-right ${timestampObject ? "message_humanized_time" : null}`}
             text={timestamp}
         />
         <If condition={timestampObject}>
@@ -82,7 +82,7 @@ const Message = (props: MessageProps) => {
           />
         </If>
         <Body
-            className="pb_message_body"
+            className={`pb_message_body ${label ? null : "body_spaced"}`}
             text={message}
         />
       </div>

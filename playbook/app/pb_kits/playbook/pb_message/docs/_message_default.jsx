@@ -23,6 +23,7 @@ const MessageDefault = (props) => {
           label="Support"
           message="We will escalate this issue to a Senior Support agent."
           timestamp="9 minutes ago"
+          timestampObject={new Date}
           {...props}
       />
 
@@ -34,7 +35,6 @@ const MessageDefault = (props) => {
           avatarUrl="https://randomuser.me/api/portraits/women/39.jpg"
           message="To process your order, I will need your full name."
           timestamp="4 hours ago"
-          timestampObject={new Date}
           {...props}
       />
 
