@@ -12,23 +12,22 @@
       }) %>
     <% end %>
     <div class="content_wrapper">
-      <%= pb_rails("flex", props: { justify: "between" }) do %>
-        <%= pb_rails("title", props: {
-          size: 4,
-          text: object.label,
-          classname: "message_title"
-        }) %>
+      <%= pb_rails("timestamp", props: {
+        text: object.timestamp,
+        classname: "pull-right #{object.timestamp_object.present? ? 'message_humanized_time' : nil}"
+      }) %>
+      <% if object.timestamp_object.present? %>
         <%= pb_rails("timestamp", props: {
-          text: object.timestamp,
-          classname: object.timestamp_object.present? ? "message_humanized_time" : nil
+          timestamp: object.timestamp_object,
+          classname: "pull-right #{object.timestamp_object.present? ? 'message_timestamp' : nil}"
         }) %>
-        <% if object.timestamp_object.present? %>
-          <%= pb_rails("timestamp", props: {
-            timestamp: object.timestamp_object,
-            classname: "message_timestamp",
-          }) %>
-        <% end %>
       <% end %>
+
+      <%= pb_rails("title", props: {
+        size: 4,
+        text: object.label,
+        classname: "message_title"
+      }) %>
       <%= pb_rails("body", props: {
         text: object.message,
         classname: "pb_message_body"

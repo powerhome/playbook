@@ -6,11 +6,11 @@
   align-items: center;
 
   .content_wrapper {
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    flex-direction: column;
     width: 100%;
+
+    .pull-right {
+      float: right;
+    }
 
     [class^=pb_flex_] {
       width: 100%;
