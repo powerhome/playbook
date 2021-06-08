@@ -1,7 +1,7 @@
 /* @flow */
 
 import React from 'react'
-import { Avatar, Body, Caption } from '../'
+import { Avatar, Body, Caption, Title } from '../'
 import classnames from 'classnames'
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
 import { globalProps } from '../utilities/globalProps.js'
@@ -56,13 +56,13 @@ const Message = (props: MessageProps) => {
         <Avatar
             imageUrl={avatarUrl}
             name={avatarName}
-            size="sm"
+            size="xs"
             status={avatarStatus}
         />
       </If>
       <div className="content_wrapper">
         <If condition={label}>
-          <Caption>{label}</Caption>
+          <Title classname="message_title" text={label} />
         </If>
         <Body>{message}</Body>
         <If condition={timestamp}>

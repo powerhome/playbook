@@ -9,6 +9,7 @@ module Playbook
       prop :label
       prop :message
       prop :timestamp
+      prop :timestamp_object
 
       def classname
         generate_classname("pb_message_kit", avatar_class)

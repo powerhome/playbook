@@ -6,20 +6,32 @@
     <% if object.valid? %>
       <%= pb_rails("avatar", props: {
         name: object.avatar_name,
-        size: "sm",
+        size: "xs",
         image_url: object.avatar_url,
         status: object.avatar_status
       }) %>
     <% end %>
     <div class="content_wrapper">
-      <%= pb_rails("caption", props: {
-        text: object.label
-      }) %>
+      <%= pb_rails("flex", props: { justify: "between" }) do %>
+        <%= pb_rails("title", props: {
+          size: 4,
+          text: object.label,
+          classname: "message_title"
+        }) %>
+        <%= pb_rails("timestamp", props: {
+          text: object.timestamp,
+          classname: object.timestamp_object.present? ? "message_humanized_time" : nil
+        }) %>
+        <% if object.timestamp_object.present? %>
+          <%= pb_rails("timestamp", props: {
+            timestamp: object.timestamp_object,
+            classname: "message_timestamp",
+          }) %>
+        <% end %>
+      <% end %>
       <%= pb_rails("body", props: {
-        text: object.message
-      }) %>
-      <%= pb_rails("timestamp", props: {
-        text: object.timestamp
+        text: object.message,
+        classname: "pb_message_body"
       }) %>
     </div>
 <% end %>

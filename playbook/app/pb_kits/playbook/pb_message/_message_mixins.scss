@@ -10,15 +10,42 @@
     justify-content: center;
     align-items: flex-start;
     flex-direction: column;
+    width: 100%;
+
+    [class^=pb_flex_] {
+      width: 100%;
+    }
 
     .message_text {
       margin: 0 0 $space-xs/2;
     }
+
+    .message_title {
+      font-size: $font_small;
+    }
   }
 
-  &[class*=_avatar]  {
+  &[class*=_avatar] {
     .content_wrapper {
       margin-left: $space-sm;
+    }
+  }
+
+  .pb_message_body {
+    font-size: 15px;
+  }
+
+  .message_timestamp {
+    display: none;
+  }
+
+  &:hover {
+    .message_timestamp {
+      display: block;
+    }
+
+    .message_humanized_time {
+      display: none;
     }
   }
 }
