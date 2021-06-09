@@ -11,11 +11,13 @@ const DialogDefault = () => {
       <Button onClick={open}>{'Open Dialog'}</Button>
       <Dialog
           cancelButton="Cancel"
+          className="wrapper"
           confirmButton="Okay"
           onCancel={close}
           onClose={close}
           onConfirm={close}
           opened={isOpen}
+          portalClassName="portal"
           size="sm"
           text="Hello Body Text, Nice to meet ya."
           title="Header Title is the Title Prop"
