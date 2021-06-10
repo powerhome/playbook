@@ -11,7 +11,7 @@
 **Fixed Bugs:**
 
 - Fix invalid date in Date Time docs for Firefox [\#1510](https://github.com/powerhome/playbook/pull/1510) ([kellyeryan](https://github.com/kellyeryan))
-- \[CHMN-101\] Don't allow popover to open when clicking on eyeball in the passphrase kit [\#1506](https://github.com/powerhome/playbook/pull/1506) ([josephinef9](https://github.com/josephinef9))
+- Don't allow popover to open when clicking on eyeball in the passphrase kit [\#1506](https://github.com/powerhome/playbook/pull/1506) ([josephinef9](https://github.com/josephinef9))
 
 
 
