@@ -1,7 +1,7 @@
 /* @flow */
 
 import React from 'react'
-import { Avatar, Body, Timestamp, Title } from '../'
+import { Avatar, Body, Flex, Timestamp, Title } from '../'
 import classnames from 'classnames'
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
 import { globalProps } from '../utilities/globalProps.js'
@@ -34,7 +34,7 @@ const Message = (props: MessageProps) => {
     message,
     timestamp,
     timestampObject,
-    alignTimestamp = "right",
+    alignTimestamp = 'right',
   } = props
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
@@ -65,7 +65,10 @@ const Message = (props: MessageProps) => {
         />
       </If>
       <div className="content_wrapper">
-        <Flex orientation="row" justify={alignTimestamp === "left" ? "none" : "between"}>
+        <Flex
+            justify={alignTimestamp === 'left' ? 'none' : 'between'}
+            orientation="row"
+        >
           <If condition={label}>
             <Title
                 className="message_title"
