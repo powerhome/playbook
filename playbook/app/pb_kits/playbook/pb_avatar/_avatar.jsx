@@ -18,7 +18,7 @@ type AvatarProps = {
   imageAlt?: string,
   imageUrl: string,
   name: string,
-  size?: "md" | "lg" | "sm" | "xl" | "xs",
+  size?: "md" | "lg" | "sm" | "xl" | "xs" | "xxs",
   status: "away" | "offline" | "online",
 }
 
