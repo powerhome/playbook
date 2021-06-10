@@ -1,5 +1,20 @@
 
 
+## [9.18.0](https://github.com/powerhome/playbook/tree/9.18.0) (2021-06-09)
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/9.17.0...9.18.0)
+
+**Kit Enhancements:**
+
+- Add the value of a Dialog's portalClassName prop to the React Modal portal DIV class attribute [\#1507](https://github.com/powerhome/playbook/pull/1507) ([stevelandwehr](https://github.com/stevelandwehr))
+
+**Fixed Bugs:**
+
+- Fix invalid date in Date Time docs for Firefox [\#1510](https://github.com/powerhome/playbook/pull/1510) ([kellyeryan](https://github.com/kellyeryan))
+- Don't allow popover to open when clicking on eyeball in the passphrase kit [\#1506](https://github.com/powerhome/playbook/pull/1506) ([josephinef9](https://github.com/josephinef9))
+
+
+
 ## [9.17.0](https://github.com/powerhome/playbook/tree/9.17.0) (2021-06-03)
 
 [Full Changelog](https://github.com/powerhome/playbook/compare/9.16.0...9.17.0)
