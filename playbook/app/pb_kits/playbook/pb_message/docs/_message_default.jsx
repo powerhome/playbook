@@ -23,6 +23,7 @@ const MessageDefault = (props) => {
           label="Patrick Welch"
           message="We will escalate this issue to a Senior Support agent."
           timestamp="9 minutes ago"
+          alignTimestamp="left"
           {...props}
       />
 
