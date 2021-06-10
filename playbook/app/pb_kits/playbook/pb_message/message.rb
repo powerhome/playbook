@@ -10,6 +10,7 @@ module Playbook
       prop :message
       prop :timestamp
       prop :timestamp_object
+      prop :align_timestamp, type: Playbook::Props::Enum, values: %w[left right], default: "right"
 
       def classname
         generate_classname("pb_message_kit", avatar_class)

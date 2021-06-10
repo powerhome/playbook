@@ -7,8 +7,8 @@
   .content_wrapper {
     width: 100%;
 
-    .pull-right {
-      float: right;
+    .pull-left {
+      margin-left: $space-xs;
     }
 
     [class^=pb_flex_] {
@@ -22,10 +22,6 @@
     .message_title {
       font-size: $font_small;
     }
-  }
-
-  .pb_avatar_kit_xs {
-    margin-top: $space-xs/2;
   }
 
   &[class*=_avatar] {

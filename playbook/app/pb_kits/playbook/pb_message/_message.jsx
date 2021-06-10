@@ -18,6 +18,7 @@ type MessageProps = {
   message: string,
   timestamp?: string,
   timestampObject?: string,
+  alignTimestamp?: string,
 }
 
 const Message = (props: MessageProps) => {
@@ -33,6 +34,7 @@ const Message = (props: MessageProps) => {
     message,
     timestamp,
     timestampObject,
+    alignTimestamp = "right",
   } = props
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
@@ -63,24 +65,25 @@ const Message = (props: MessageProps) => {
         />
       </If>
       <div className="content_wrapper">
-        <Timestamp
-            className={`pull-right ${timestampObject ? 'message_humanized_time' : null}`}
-            text={timestamp}
-        />
-        <If condition={timestampObject}>
+        <Flex orientation="row" justify={alignTimestamp === "left" ? "none" : "between"}>
+          <If condition={label}>
+            <Title
+                className="message_title"
+                size={4}
+                text={label}
+            />
+          </If>
           <Timestamp
-              className="pull-right message_timestamp"
-              timestamp={timestampObject}
+              className={`pull-${alignTimestamp} ${timestampObject ? 'message_humanized_time' : null}`}
+              text={timestamp}
           />
-        </If>
-
-        <If condition={label}>
-          <Title
-              className="message_title"
-              size={4}
-              text={label}
-          />
-        </If>
+          <If condition={timestampObject}>
+            <Timestamp
+                className={`pull-${alignTimestamp} message_timestamp`}
+                timestamp={timestampObject}
+            />
+          </If>
+        </Flex>
         <Body
             className={`pb_message_body ${label ? null : 'body_spaced'}`}
             text={message}

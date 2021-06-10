@@ -6,7 +6,7 @@ const MessageTimestamp = (props) => {
     <Message
         avatarName="Wade Winningham"
         avatarUrl="https://randomuser.me/api/portraits/men/14.jpg"
-        label="Support"
+        label="Anna Black"
         message="We will escalate this issue to a Senior Support agent."
         timestamp="9 minutes ago"
         timestampObject={new Date}
