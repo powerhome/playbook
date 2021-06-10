@@ -18,12 +18,12 @@ const MessageDefault = (props) => {
       <br />
 
       <Message
+          alignTimestamp="left"
           avatarName="Wade Winningham"
           avatarUrl="https://randomuser.me/api/portraits/men/14.jpg"
           label="Patrick Welch"
           message="We will escalate this issue to a Senior Support agent."
           timestamp="9 minutes ago"
-          alignTimestamp="left"
           {...props}
       />
 

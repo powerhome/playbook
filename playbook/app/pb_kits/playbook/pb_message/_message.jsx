@@ -88,7 +88,7 @@ const Message = (props: MessageProps) => {
           </If>
         </Flex>
         <Body
-            className={`pb_message_body ${label ? null : 'body_spaced'}`}
+            className="pb_message_body"
             text={message}
         />
       </div>
