@@ -6,7 +6,10 @@ const svg = require('./loaders/svg')
 
 environment.loaders.get('sass')
   .use.find((item) => item.loader === 'sass-loader')
-  .options.includePaths = [path.resolve(__dirname, 'node_modules/trix')]
+  .options.includePaths = [
+    path.resolve(__dirname, 'node_modules/trix'),
+    path.resolve(__dirname, '../../app/assets'),
+  ]
 
 environment.loaders.insert('react-svg', svg, { before: 'file' })
 
