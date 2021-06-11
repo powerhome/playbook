@@ -1,0 +1,64 @@
+
+$font_family_base: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif;
+
+
+/* CLEAN UP AND REMOVE */
+$font_jumbo:        36px;
+$font_largest:      32px;
+$font_larger:       28px;
+$font_large:        20px;
+$font_base:         16px;
+$font_default:      $font_base;
+$font_normal:       $font_base;
+$font_medium:       $font_base;
+$font_small:        14px;
+$font_smaller:      12px;
+$font_smallest:     11px;
+
+
+$text_jumbo:        $font_jumbo;
+$text_largest:      $font_largest;
+$text_larger:       $font_larger;
+$text_large:        $font_large;
+$text_base:         $font_base;
+$text_default:      $font_base;
+$text_normal:       $font_base;
+$text_medium:       $font_base;
+$text_small:        $font_small;
+$text_smaller:      $font_smaller;
+$text_smallest:     $font_smallest;
+
+
+/* Headings */
+$heading_1: 48px;
+$heading_2: 34px;
+$heading_3: $font_larger;
+$heading_4: $font_base;
+
+
+
+
+// Letter Spacing
+$lspace_tightest:         -.1em;
+$lspace_tighter:          -.07em;
+$lspace_tight:            -.03em;
+$lspace_normal:           0;
+$lspace_loose:            .03em;
+$lspace_looser:           .07em;
+$lspace_loosest:          .1em;
+$lspace_super_loosest:    .2em;
+
+
+
+
+
+/* Standard Font Weights */
+$bold:          600;
+$regular:       400;
+
+/* Non_Standard Font Weights */
+$extrabold:     900;
+$boldest:       800;
+$bolder:        700;
+$light:         300;
+$lighter:       100;
