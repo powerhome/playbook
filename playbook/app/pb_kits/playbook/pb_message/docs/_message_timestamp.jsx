@@ -16,6 +16,7 @@ const MessageTimestamp = (props) => {
       <br />
       <br />
       <Message
+          alignTimestamp="left"
           avatarName="Wade Winningham"
           avatarUrl="https://randomuser.me/api/portraits/men/14.jpg"
           label="Becca Jacobs"
