@@ -25,6 +25,7 @@ type DialogProps = {
   onClose?: () => void,
   onConfirm?: () => void,
   opened: boolean,
+  portalClassName?: string,
   shouldCloseOnOverlayClick: boolean,
   size?: "sm" | "md" | "lg" | "content",
   text?: string,
@@ -46,6 +47,7 @@ const Dialog = (props: DialogProps) => {
     onCancel = () => {},
     onConfirm = () => {},
     onClose = () => {},
+    portalClassName,
     shouldCloseOnOverlayClick = true,
     text,
     title,
@@ -107,6 +109,7 @@ const Dialog = (props: DialogProps) => {
             isOpen={modalIsOpened}
             onRequestClose={onClose}
             overlayClassName={overlayClassNames}
+            portalClassName={portalClassName}
             shouldCloseOnOverlayClick={shouldCloseOnOverlayClick}
         >
           <If condition={title}>
