@@ -3,15 +3,28 @@ import { Message } from '../../'
 
 const MessageTimestamp = (props) => {
   return (
-    <Message
-        avatarName="Wade Winningham"
-        avatarUrl="https://randomuser.me/api/portraits/men/14.jpg"
-        label="Anna Black"
-        message="We will escalate this issue to a Senior Support agent."
-        timestamp="9 minutes ago"
-        timestampObject={new Date}
-        {...props}
-    />
+    <>
+      <Message
+          avatarName="Wade Winningham"
+          avatarUrl="https://randomuser.me/api/portraits/men/14.jpg"
+          label="Anna Black"
+          message="We will escalate this issue to a Senior Support agent."
+          timestamp="9 minutes ago"
+          timestampObject={new Date}
+          {...props}
+      />
+      <br />
+      <br />
+      <Message
+          avatarName="Wade Winningham"
+          avatarUrl="https://randomuser.me/api/portraits/men/14.jpg"
+          label="Becca Jacobs"
+          message="Application for Kate Smith is waiting for your approval"
+          timestamp="12.20p"
+          timestampObject={new Date}
+          {...props}
+      />
+    </>
   )
 }
 
