@@ -72,10 +72,13 @@ const config = {
       ".css",
       ".svg",
       ".jsx",
+      ".woff",
+      ".woff2",
     ],
     modules: [
       path.resolve(__dirname, 'app/pb_kits/playbook'),
       path.resolve(__dirname, 'app/assets'),
+      path.resolve(__dirname, 'fonts'),
       path.resolve(__dirname, 'node_modules'),
     ]
   },
