@@ -1,7 +1,7 @@
 /* @flow */
 
 import React from 'react'
-import { Avatar, Body, Caption } from '../'
+import { Avatar, Body, Flex, Timestamp, Title } from '../'
 import classnames from 'classnames'
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
 import { globalProps } from '../utilities/globalProps.js'
@@ -17,6 +17,8 @@ type MessageProps = {
   label?: string,
   message: string,
   timestamp?: string,
+  timestampObject?: string,
+  alignTimestamp?: string,
 }
 
 const Message = (props: MessageProps) => {
@@ -31,6 +33,8 @@ const Message = (props: MessageProps) => {
     label,
     message,
     timestamp,
+    timestampObject,
+    alignTimestamp = 'right',
   } = props
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
@@ -56,18 +60,37 @@ const Message = (props: MessageProps) => {
         <Avatar
             imageUrl={avatarUrl}
             name={avatarName}
-            size="sm"
+            size="xs"
             status={avatarStatus}
         />
       </If>
       <div className="content_wrapper">
-        <If condition={label}>
-          <Caption>{label}</Caption>
-        </If>
-        <Body>{message}</Body>
-        <If condition={timestamp}>
-          <Caption size="xs">{timestamp}</Caption>
-        </If>
+        <Flex
+            justify={alignTimestamp === 'left' ? 'none' : 'between'}
+            orientation="row"
+        >
+          <If condition={label}>
+            <Title
+                className="message_title"
+                size={4}
+                text={label}
+            />
+          </If>
+          <Timestamp
+              className={`pull-${alignTimestamp} ${timestampObject ? 'message_humanized_time' : null}`}
+              text={timestamp}
+          />
+          <If condition={timestampObject}>
+            <Timestamp
+                className={`pull-${alignTimestamp} message_timestamp`}
+                timestamp={timestampObject}
+            />
+          </If>
+        </Flex>
+        <Body
+            className="pb_message_body"
+            text={message}
+        />
       </div>
     </div>
   )
