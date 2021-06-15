@@ -35,7 +35,6 @@ const MultipleUsers = (props: MultipleUsersProps) => {
     users.length > maxDisplayedUsers ? maxDisplayedUsers - 1 : users.length
   const usersToDisplay = users.slice(0, displayCount)
   const reverseClass = reverse === true ? 'reverse' : ''
-
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
   const classes = classnames(

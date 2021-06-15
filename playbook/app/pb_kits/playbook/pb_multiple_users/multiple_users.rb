@@ -30,7 +30,6 @@ module Playbook
       def reverse_class
         reverse ? "reverse" : nil
       end
-
     end
   end
 end
