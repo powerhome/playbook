@@ -35,6 +35,7 @@ const MultipleUsers = (props: MultipleUsersProps) => {
     users.length > maxDisplayedUsers ? maxDisplayedUsers - 1 : users.length
   const usersToDisplay = users.slice(0, displayCount)
   const reverseClass = reverse === true ? 'reverse' : ''
+  const avatarSize = () => size === 'xxs' ? '_xxs' : ''
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
   const classes = classnames(
@@ -61,7 +62,7 @@ const MultipleUsers = (props: MultipleUsersProps) => {
       ))}
 
       <If condition={users.length > maxDisplayedUsers}>
-        <div className={`pb_multiple_users_item multiple_users_badge${size == 'xxs' ? '_xxs' : ''}`}>
+        <div className={`pb_multiple_users_item multiple_users_badge${avatarSize()}`}>
           {`+${users.length - 3}`}
         </div>
       </If>
