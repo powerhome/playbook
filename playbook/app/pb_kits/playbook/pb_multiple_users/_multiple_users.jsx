@@ -14,6 +14,7 @@ type MultipleUsersProps = {
   id?: string,
   maxDisplayedUsers?: number,
   reverse?: boolean,
+  size?: string,
   users: array<object>,
 }
 
@@ -26,14 +27,15 @@ const MultipleUsers = (props: MultipleUsersProps) => {
     id,
     maxDisplayedUsers = 4,
     reverse = false,
+    size = 'xs',
     users,
   } = props
 
   const displayCount =
     users.length > maxDisplayedUsers ? maxDisplayedUsers - 1 : users.length
   const usersToDisplay = users.slice(0, displayCount)
-
   const reverseClass = reverse === true ? 'reverse' : ''
+
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
   const classes = classnames(
@@ -55,12 +57,12 @@ const MultipleUsers = (props: MultipleUsersProps) => {
             className="pb_multiple_users_item"
             dark={dark}
             key={index}
-            size="xs"
+            size={size}
         />
       ))}
 
       <If condition={users.length > maxDisplayedUsers}>
-        <div className="pb_multiple_users_item multiple_users_badge">
+        <div className={`pb_multiple_users_item multiple_users_badge${size == 'xxs' ? '_xxs' : ''}`}>
           {`+${users.length - 3}`}
         </div>
       </If>
