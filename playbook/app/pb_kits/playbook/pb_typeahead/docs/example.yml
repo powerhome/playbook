@@ -17,3 +17,4 @@ examples:
     - typeahead_inline: Inline
     - typeahead_multi_kit: Multi Kit Options
     - typeahead_createable: Createable
+    - typeahead_async_createable: Createable (+ Async Data)
