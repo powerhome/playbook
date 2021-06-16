@@ -78,7 +78,7 @@ const config = {
     modules: [
       path.resolve(__dirname, 'app/pb_kits/playbook'),
       path.resolve(__dirname, 'app/assets'),
-      path.resolve(__dirname, 'fonts'),
+      path.resolve(__dirname, 'app/pb_kits/playbook/packs'),
       path.resolve(__dirname, 'node_modules'),
     ]
   },
@@ -112,6 +112,17 @@ const config = {
             SASS_LOADER_CONFIG,
           ],
         },
+        {
+        test: /\.(woff(2)?)(\?v=\d+\.\d+\.\d+)?$/,
+        use: [{
+          loader: 'file-loader',
+          options: {
+            name: '[name].[ext]',
+            publicPath: 'fonts/',
+            outputPath: 'fonts/', 
+          }
+        }]
+      },
         BABEL_JS_CONFIG,
         svgUrlLoader
       ],
