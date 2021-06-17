@@ -11,7 +11,7 @@ $pb_multiple_users_size_xxs: map-get($avatar-sizes, "xxs");
 [class^=pb_multiple_users_kit] {
   display: inline-flex;
 
-  .multiple_users_badge,
+  .multiple_users_badge_xs,
   .multiple_users_badge_xxs {
     display: flex;
     align-items: center;
