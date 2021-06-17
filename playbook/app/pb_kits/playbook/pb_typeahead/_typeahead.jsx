@@ -4,6 +4,7 @@ import React from 'react'
 import Select from 'react-select'
 import AsyncSelect from 'react-select/async'
 import CreateableSelect from 'react-select/creatable'
+import AsyncCreateableSelect from 'react-select/async-creatable'
 import { get } from 'lodash'
 import { globalProps } from '../utilities/globalProps.js'
 import classnames from 'classnames'
@@ -73,7 +74,7 @@ const Typeahead = (props: Props) => {
   if (typeof(props.getOptionValue) === 'string') selectProps.getOptionValue = get(window, props.getOptionValue)
 
   let Tag = props.async ? AsyncSelect : Select
-  if (props.createable) Tag = CreateableSelect
+  if (props.createable) Tag = props.async ? AsyncCreateableSelect : CreateableSelect
 
   const handleOnChange = (data, { action, option, removedValue }) => {
     if (action === 'select-option') {
