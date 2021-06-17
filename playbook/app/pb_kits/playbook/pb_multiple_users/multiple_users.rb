@@ -19,7 +19,7 @@ module Playbook
         generate_classname("pb_multiple_users_kit", reverse_class)
       end
 
-      def avatar_size(size = 'xs')
+      def avatar_size(size = "xs")
         return data[:size] = "xs" if size.blank? || size == "xs"
 
         data[:size] = "xxs"
