@@ -13,7 +13,7 @@
     <% end %>
 
     <% if object.more_than_four %>
-      <div class="pb_multiple_users_item multiple_users_badge<%= (object.data[:size] == 'xxs') ? '_xxs' : 'xs' %>">
+      <div class="pb_multiple_users_item multiple_users_badge<%= (object.data[:size] == 'xxs') ? '_xxs' : '_xs' %>">
         <%= "+#{object.users.count - object.display_count}" %>
       </div>
     <% end %>
