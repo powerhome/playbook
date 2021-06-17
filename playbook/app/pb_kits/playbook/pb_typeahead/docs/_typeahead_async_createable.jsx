@@ -15,8 +15,8 @@ import { Typeahead } from '../..'
 const filterResults = (results) =>
   results.items.map((result) => {
     return {
-      name: result.login,
-      id: result.id,
+      label: result.login,
+      value: result.id,
     }
   })
 
@@ -34,7 +34,9 @@ const promiseOptions = (inputValue) =>
     if (inputValue) {
       fetch(`https://api.github.com/search/users?q=${inputValue}`)
         .then((response) => response.json())
-        .then((results) => resolve(filterResults(results)))
+        .then((results) => {
+          resolve(results.items ? filterResults(results) : [])
+        })
     } else {
       resolve([])
     }
