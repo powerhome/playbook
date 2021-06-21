@@ -73,8 +73,11 @@ const Typeahead = ({ loadOptions = noop, getOptionLabel, id, getOptionValue, cre
     ...props,
   }
 
-  const Tag = props.createable ? (props.async ? AsyncCreateableSelect : CreateableSelect)
-                               : (props.async ? AsyncSelect : Select)
+  const Tag = (
+    createable
+      ? (async ? AsyncCreateableSelect : CreateableSelect)
+      : (async ? AsyncSelect : Select)
+  )
 
   const handleOnChange = (_data, { action, option, removedValue }) => {
     if (action === 'select-option') {
