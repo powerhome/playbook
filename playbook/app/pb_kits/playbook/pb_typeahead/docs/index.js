@@ -6,3 +6,4 @@ export { default as TypeaheadWithPillsAsyncCustomOptions } from './_typeahead_wi
 export { default as TypeaheadInline } from './_typeahead_inline.jsx'
 export { default as TypeaheadMultiKit } from './_typeahead_multi_kit.jsx'
 export { default as TypeaheadCreateable } from './_typeahead_createable.jsx'
+export { default as TypeaheadAsyncCreateable } from './_typeahead_async_createable.jsx'
