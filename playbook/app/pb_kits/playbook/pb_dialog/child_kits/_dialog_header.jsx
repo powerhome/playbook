@@ -4,9 +4,11 @@ import React, { useContext } from 'react'
 import classnames from 'classnames'
 import { buildAriaProps, buildCss, buildDataProps } from '../../utilities/props'
 import { globalProps } from '../../utilities/globalProps.js'
-import { Flex, SectionSeparator } from '../../'
+
 import { CloseIcon } from '../_close_icon'
 import { DialogContext } from '../_dialog_context'
+import Flex from '../../pb_flex/_flex'
+import SectionSeparator from '../../pb_section_separator/_section_separator'
 
 type DialogHeaderProps = {
   aria?: object,

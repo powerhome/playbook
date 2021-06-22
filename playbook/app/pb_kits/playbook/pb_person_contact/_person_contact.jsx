@@ -3,15 +3,12 @@
 import React from 'react'
 import classnames from 'classnames'
 
-import {
-  buildAriaProps,
-  buildCss,
-  buildDataProps,
-} from '../utilities/props'
+import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
+import { globalProps } from '../utilities/globalProps'
 
-import { globalProps } from '../utilities/globalProps.js'
-
-import { Caption, Contact, Person } from '../'
+import Caption from '../pb_caption/_caption'
+import Contact from '../pb_contact/_contact'
+import Person from '../pb_person/_person'
 
 type ContactItem = {
   contactType: string,

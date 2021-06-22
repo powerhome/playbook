@@ -2,11 +2,13 @@
 
 import React from 'react'
 import classnames from 'classnames'
-import { buildCss } from '../utilities/props'
-import DateTime from '../pb_kit/dateTime.js'
-import { globalProps } from '../utilities/globalProps.js'
 
-import { Body, Title } from '../'
+import DateTime from '../pb_kit/dateTime'
+import { buildCss } from '../utilities/props'
+import { globalProps } from '../utilities/globalProps'
+
+import Body from '../pb_body/_body'
+import Title from '../pb_title/_title'
 
 type DateYearStackedProps = {
   align?: "left" | "center" | "right",

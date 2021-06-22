@@ -2,10 +2,15 @@
 
 import React from 'react'
 import classnames from 'classnames'
-import { buildCss } from '../utilities/props'
-import { globalProps } from '../utilities/globalProps.js'
 
-import { Body, DateYearStacked, Flex, FlexItem, Icon } from '../'
+import { buildCss } from '../utilities/props'
+import { globalProps } from '../utilities/globalProps'
+
+import Body from '../pb_body/_body'
+import Flex from '../pb_flex/_flex'
+import FlexItem from '../pb_flex/_flex_item'
+import DateYearStacked from '../pb_date_year_stacked/_date_year_stacked'
+import Icon from '../pb_icon/_icon'
 
 type DateRangeStackedProps = {
   className?: string | array<string>,

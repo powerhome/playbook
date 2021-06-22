@@ -2,8 +2,9 @@
 
 import React from 'react'
 import classnames from 'classnames'
+
 import { globalProps } from '../utilities/globalProps.js'
-import { pbChart } from '../'
+import pbChart from '../plugins/pb_chart'
 
 type LineGraphProps = {
   axisTitle?: string,

@@ -3,9 +3,7 @@
 import React from 'react'
 import { components } from 'react-select'
 
-import {
-  User,
-} from '../../'
+import User from '../../pb_user/_user'
 
 const Option = (props: any) => {
   const {

@@ -2,10 +2,14 @@
 
 import React, { useEffect } from 'react'
 import classnames from 'classnames'
+
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
-import { globalProps } from '../utilities/globalProps.js'
-import { Icon, TextInput } from '../'
-import datePickerHelper from './date_picker_helper.js'
+import { globalProps } from '../utilities/globalProps'
+
+import datePickerHelper from './date_picker_helper'
+
+import Icon from '../pb_icon/_icon'
+import TextInput from '../pb_text_input/_text_input'
 
 type DatePickerProps = {
   allowInput?: Boolean,

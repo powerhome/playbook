@@ -3,19 +3,14 @@
 import React from 'react'
 import classnames from 'classnames'
 
-import {
-  buildDataProps,
-} from '../utilities/props'
-import {
-  titleize,
-} from '../utilities/text'
-import {
-  Avatar,
-  Body,
-  Caption,
-  IconCircle,
-  Title,
-} from '../'
+import { buildDataProps } from '../utilities/props'
+import { titleize } from '../utilities/text'
+
+import Avatar from '../pb_avatar/_avatar'
+import Body from '../pb_body/_body'
+import Caption from '../pb_caption/_caption'
+import IconCircle from '../pb_icon_circle/_icon_circle'
+import Title from '../pb_title/_title'
 
 type SourceProps = {
   className?: string,

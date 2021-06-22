@@ -4,8 +4,10 @@ import React from 'react'
 import classnames from 'classnames'
 
 import { buildCss } from '../utilities/props'
-import { Body, Icon } from '../'
-import { globalProps } from '../utilities/globalProps.js'
+import { globalProps } from '../utilities/globalProps'
+
+import Body from '../pb_body/_body'
+import Icon from '../pb_icon/_icon'
 
 const statusMap = {
   increase: 'positive',

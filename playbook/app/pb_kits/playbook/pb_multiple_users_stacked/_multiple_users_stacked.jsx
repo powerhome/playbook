@@ -3,10 +3,12 @@
 
 import React from 'react'
 import classnames from 'classnames'
-import { globalProps } from '../utilities/globalProps.js'
-import { Avatar, Badge } from '../'
 
+import { globalProps } from '../utilities/globalProps'
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
+
+import Avatar from '../pb_avatar/_avatar'
+import Badge from '../pb_badge/_badge'
 
 type MultipleUsersStackedProps = {
   aria?: object,

@@ -2,15 +2,16 @@
 
 import React from 'react'
 import classnames from 'classnames'
-import { globalProps } from '../utilities/globalProps.js'
 
+import { globalProps } from '../utilities/globalProps'
 import {
   buildAriaProps,
   buildCss,
   buildDataProps,
 } from '../utilities/props'
 
-import { Body, Title } from '../'
+import Body from '../pb_body/_body'
+import Title from '../pb_title/_title'
 
 type PersonProps = {
   aria?: object,

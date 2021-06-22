@@ -2,8 +2,10 @@
 
 import React from 'react'
 import classnames from 'classnames'
+
 import { buildCss } from '../utilities/props'
-import { Icon } from '..'
+
+import Icon from '../pb_icon/_icon'
 
 type ProgressStepItemProps = {
   className?: string,

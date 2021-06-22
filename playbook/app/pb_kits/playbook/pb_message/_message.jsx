@@ -1,10 +1,16 @@
 /* @flow */
 
 import React from 'react'
-import { Avatar, Body, Flex, Timestamp, Title } from '../'
 import classnames from 'classnames'
+
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
-import { globalProps } from '../utilities/globalProps.js'
+import { globalProps } from '../utilities/globalProps'
+
+import Avatar from '../pb_avatar/_avatar'
+import Body from '../pb_body/_body'
+import Flex from '../pb_flex/_flex'
+import Timestamp from '../pb_timestamp/_timestamp'
+import Title from '../pb_title/_title'
 
 type MessageProps = {
   aria: object,

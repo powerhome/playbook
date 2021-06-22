@@ -2,14 +2,15 @@
 
 import React from 'react'
 import classnames from 'classnames'
-import { globalProps } from '../utilities/globalProps.js'
-import { Icon } from '../'
 
+import { globalProps } from '../utilities/globalProps'
 import {
   buildAriaProps,
   buildCss,
   buildDataProps,
 } from '../utilities/props'
+
+import Icon from '../pb_icon/_icon'
 
 type BadgeProps = {
   aria?: object,
