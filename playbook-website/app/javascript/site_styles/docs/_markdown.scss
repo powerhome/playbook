@@ -1,0 +1,88 @@
+@import "playbook-ui/dist/tokens/titles";
+@import "playbook-ui/dist/tokens/typography";
+@import "playbook-ui/dist/tokens/spacing";
+@import "playbook-ui/dist/tokens/colors";
+
+.markdown {
+  h1 {
+    @include pb_title_1;
+    margin: 1rem 0;
+  }
+
+  h2 {
+    @include pb_title_2;
+    margin: 1rem 0;
+  }
+
+  h3 {
+    @include pb_title_3;
+    margin: 1rem 0;
+  }
+  h4 {
+    @include pb_title_4;
+    margin: 1rem 0;
+  }
+  h5 {
+    margin: 1rem 0;
+  }
+  h6 {
+    margin: 1rem 0;
+  }
+
+  hr {
+    margin: 2rem 0;
+  }
+  p{
+    margin: 1.5rem 0;
+  }
+  code {
+    background: #122b3b;
+    color: #faf6e4;
+    padding: 0.1rem 0.3rem;
+    margin: 0 5px;
+    box-shadow: 0 2px 10px $shadow;
+    border-radius: 0.25rem;
+    overflow: hidden;
+    font-size: 14px;
+  }
+
+  body {
+    font-size: 1rem;
+  }
+
+  ul, ol {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  ol {
+    counter-reset: list-counter;
+    li:before {
+      content: counter(list-counter);
+      counter-increment: list-counter;
+      display: block;
+      width: 20px;
+      flex: 0 0 20px;
+      text-align: left;
+      color: $text_lt_default;
+      font-weight: $bold;
+      margin-right: $space-sm;
+    }
+  }
+  li {
+    border-bottom: 1px solid $border_light;
+    padding: $space-sm 0;
+    display: flex;
+    align-items: left;
+    &:last-child {
+      border-bottom: 0;
+      padding-bottom: 0;
+    }
+  }
+  &.dark {
+    color: $text_dk_light ;
+    h1,h2,h3,h4,h5,h6 {
+     color: $text_dk_light;
+    }
+  }
+}

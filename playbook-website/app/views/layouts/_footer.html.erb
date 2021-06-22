@@ -1,0 +1,43 @@
+<div class="pb--page--footer">
+  <div class="inner-footer-wrapper">
+    <%= pb_rails("flex", props: { horizontal: "center", spacing: "around", wrap: true }) do %>
+      <%= pb_rails("flex/flex_item", props: { classname: "footer-logo-block" }) do %>
+        <%= image_pack_tag("media/images/pb-white-logo.svg") %>
+        <%= pb_rails("body", props: { text: "Made with love", color: "lighter", margin_top: "xs" }) %>
+      <% end %>
+      <%= pb_rails("flex/flex_item", props: {}) do %>
+        <%= pb_rails("caption", props: { classname: "dark", text: "Playbook", margin_bottom: "xs" }) %>
+        <a href="/">
+          <%= pb_rails("body", props: { classname: "dark", text: "Introduction" }) %>
+        </a>
+        <a href="/getting_started">
+          <%= pb_rails("body", props: { classname: "dark", text: "Getting Started" }) %>
+        </a>
+        <a href="/kits">
+          <%= pb_rails("body", props: { classname: "dark", text: "Browse Kits" }) %>
+        </a>
+        <a href="/changelog">
+          <%= pb_rails("body", props: { classname: "dark", text: "View Changelog" }) %>
+        </a>
+      <% end %>
+      <%= pb_rails("flex/flex_item", props: {}) do %>
+        <%= pb_rails("caption", props: { classname: "dark", text: "Additional Links", margin_bottom: "xs" }) %>
+        <a href="https://github.com/powerhome/playbook">
+          <%= pb_rails("body", props: { classname: "dark", text: "Playbook Github" }) %>
+        </a>
+        <a href="https://www.techatpower.com/jobs">
+          <%= pb_rails("body", props: { classname: "dark", text: "Open Positions" }) %>
+        </a>
+        <a href="https://www.techatpower.com/">
+          <%= pb_rails("body", props: { classname: "dark", text: "Tech at Power" }) %>
+        </a>
+        <a href="https://powerhrg.com/">
+          <%= pb_rails("body", props: { classname: "dark", text: "Power Website" }) %>
+        </a>
+      <% end %>
+    <% end %>
+    <div class="copyright-tag">
+      <%= pb_rails("body", props: { text: "© Power Home Remodeling", color: "lighter" }) %>
+    </div>
+  </div>
+</div>

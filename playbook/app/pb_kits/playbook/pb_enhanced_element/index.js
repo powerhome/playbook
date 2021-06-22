@@ -26,11 +26,12 @@ export default class PbEnhancedElement {
   }
 
   static addMatch(element) {
-    if (this.elements.has(element)) return
+    if (element._pbEnhanced || this.elements.has(element)) return
 
     const enhansedElement = new this(element)
     enhansedElement.connect()
     this.elements.set(element, enhansedElement)
+    element._pbEnhanced = enhansedElement
   }
 
   static removeMatch(element) {

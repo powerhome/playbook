@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title> Playbook Design System </title>
+    <%= csrf_meta_tags%>
+    <%= csp_meta_tag%>
+    <%= stylesheet_packs_with_chunks_tag 'application' %>
+    <meta content="user-scalable=0, initial-scale=1.0, minimum-scale=1" name="viewport" />
+  </head>
+  <body>
+    <%= render 'layouts/nav'%>
+    <%= render 'layouts/mobile_hamburger'%>
+    <%= pb_rails("layout/sidebar", props: { classname: "pb--page--sideNav non-kit"}) do %>
+      <%= render 'layouts/sidebar'%>
+    <% end %>
+    <%= yield %>
+    <%= render 'layouts/footer'%>
+  </body>
+  <%= javascript_packs_with_chunks_tag 'application', 'site' %>
+  <%= yield :pb_js %>
+  <%= render 'layouts/ga'%>
+</html>
