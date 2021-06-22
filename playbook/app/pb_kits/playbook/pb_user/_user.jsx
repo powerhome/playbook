@@ -2,9 +2,13 @@
 
 import React from 'react'
 import classnames from 'classnames'
+
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
-import { Avatar, Body, Title } from '../'
-import { globalProps } from '../utilities/globalProps.js'
+import { globalProps } from '../utilities/globalProps'
+
+import Avatar from '../pb_avatar/_avatar'
+import Body from '../pb_body/_body'
+import Title from '../pb_title/_title'
 
 type UserProps = {
   align?: "left" | "center" | "right",

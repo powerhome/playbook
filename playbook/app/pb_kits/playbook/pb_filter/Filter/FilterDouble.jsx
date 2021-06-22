@@ -1,7 +1,6 @@
 /* @flow */
 
 import React from 'react'
-import { Caption, Flex, SectionSeparator } from '../../'
 
 import CurrentFilters, { FilterDescription } from './CurrentFilters'
 import FilterBackground, { FilterBackgroundProps } from './FilterBackground'
@@ -13,6 +12,9 @@ import SortMenu, {
   SortValue,
 } from './SortMenu'
 
+import Caption from '../../pb_caption/_caption'
+import Flex from '../../pb_flex/_flex'
+import SectionSeparator from '../../pb_section_separator/_section_separator'
 export type FilterDoubleProps = {
   children: Node,
   filters?: FilterDescription,

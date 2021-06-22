@@ -1,11 +1,13 @@
 import Highcharts from 'highcharts'
 
-import { highchartsTheme } from '../pb_dashboard/pbChartsLightTheme.js'
+import { highchartsTheme } from '../pb_dashboard/pbChartsLightTheme'
 import colors from '../tokens/exports/_colors.scss'
 
-require('highcharts/modules/variable-pie')(Highcharts)
-import highchartsMore from 'highcharts/highcharts-more.js'
-import solidGauge from 'highcharts/modules/solid-gauge.js'
+import pie from 'highcharts/modules/variable-pie'
+import highchartsMore from 'highcharts/highcharts-more'
+import solidGauge from 'highcharts/modules/solid-gauge'
+
+pie(Highcharts)
 
 // Map Data Color String Props to our SCSS Variables
 const mapColors = (array) => {

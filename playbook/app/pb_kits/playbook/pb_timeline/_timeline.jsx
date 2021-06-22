@@ -2,8 +2,10 @@
 
 import React from 'react'
 import classnames from 'classnames'
-import TimelineItem from './_item.jsx'
+
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
+
+import TimelineItem from './_item.jsx'
 
 type TimelineProps = {
   aria?: object,

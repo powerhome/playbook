@@ -1,7 +1,9 @@
 /* @flow */
 
 import React from 'react'
-import { Caption, TitleCount } from '../../'
+
+import Caption from '../../pb_caption/_caption'
+import TitleCount from '../../pb_title_count/_title_count'
 
 const resultsText = (results: number): string => results == 1 ? 'Result' : 'Results'
 

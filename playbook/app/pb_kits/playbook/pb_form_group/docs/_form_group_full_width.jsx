@@ -1,5 +1,8 @@
 import React from 'react'
-import { Button, FormGroup, TextInput } from '../../'
+
+import FormGroup from '../_form_group'
+import TextInput from '../../pb_text_input/_text_input'
+import Button from '../../pb_button/_button'
 
 const FormGroupFullWidth = (props) => (
   <div>

@@ -1,5 +1,6 @@
 import React from 'react'
-import { PersonContact } from '../../'
+
+import PersonContact from '../_person_contact'
 
 const PersonContactWithDetail = (props) => {
   return (

@@ -1,17 +1,29 @@
 const path = require('path')
 
 const webpack = require('webpack')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const CircularDependencyPlugin = require('circular-dependency-plugin')
 
 const SOURCE_PATH = path.resolve(__dirname, 'app/pb_kits/playbook')
 const DIST_PATH = path.resolve(__dirname, 'dist')
 const NODE_MODULES_PATH = path.resolve(__dirname, '../node_modules')
 const IS_DEVELOPMENT = process.env.NODE_ENV === 'development'
 
-const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const CIRCULAR_DEPENDENCY_PLUGIN = new CircularDependencyPlugin({
+  // exclude detection of files based on a RegExp
+  exclude: /node_modules/,
+  // add errors to webpack instead of warnings
+  failOnError: true,
+  // allow import cycles that include an asyncronous import,
+  // e.g. via import(/* webpackMode: "weak" */ './file.js')
+  allowAsyncCycles: false,
+  // set the current working directory for displaying module paths
+  cwd: process.cwd(),
+})
 
 // Copy tokens and fonts to dist
 const CopyPlugin = require('copy-webpack-plugin')
-const COPY_PLUGIN_CONFIG = new CopyPlugin({
+const COPY_PLUGIN = new CopyPlugin({
   patterns: [
     {
       from: `${SOURCE_PATH}/tokens`,
@@ -33,14 +45,14 @@ const COPY_PLUGIN_CONFIG = new CopyPlugin({
   },
 })
 
-const BABEL_JS_CONFIG = {
+const BABEL_LOADER = {
   test: /\.(js|jsx|mjs)$/,
   use: 'babel-loader',
   include: SOURCE_PATH,
   exclude: /node_modules/,
 }
 
-const CSS_LOADER_CONFIG = {
+const CSS_LOADER = {
   loader: 'css-loader',
   options: {
     modules: {
@@ -51,7 +63,7 @@ const CSS_LOADER_CONFIG = {
   },
 }
 
-const SASS_LOADER_CONFIG = {
+const SASS_LOADER = {
   loader: 'sass-loader',
   options: {
     sassOptions: {
@@ -115,7 +127,8 @@ module.exports = {
   },
   plugins: [
     new MiniCssExtractPlugin({ filename: '[name].css' }),
-    COPY_PLUGIN_CONFIG,
+    CIRCULAR_DEPENDENCY_PLUGIN,
+    COPY_PLUGIN,
   ],
   module: {
     rules: [
@@ -123,11 +136,11 @@ module.exports = {
         test: /\.scss$/i,
         use: [
           MiniCssExtractPlugin.loader,
-          CSS_LOADER_CONFIG,
-          SASS_LOADER_CONFIG,
+          CSS_LOADER,
+          SASS_LOADER,
         ],
       },
-      BABEL_JS_CONFIG,
+      BABEL_LOADER,
       SVG_URL_LOADER,
     ],
   },

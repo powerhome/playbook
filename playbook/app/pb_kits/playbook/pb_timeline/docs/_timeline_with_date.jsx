@@ -1,6 +1,7 @@
 import React from 'react'
-import Timeline from '../_timeline.jsx'
-import { TitleDetail } from '../../'
+
+import Timeline from '../_timeline'
+import TitleDetail from '../../pb_title_detail/_title_detail'
 
 const TimelineWithDate = (props) => (
   <div>

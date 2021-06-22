@@ -1,5 +1,6 @@
 import React from 'react'
-import { Title } from '../../'
+
+import Title from '../_title'
 
 const TitleLight = (props) => {
   return (

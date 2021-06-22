@@ -2,10 +2,12 @@
 
 import React, { useState } from 'react'
 import classnames from 'classnames'
+import Modal from 'react-modal'
+
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
 import { globalProps } from '../utilities/globalProps.js'
-import Modal from 'react-modal'
-import { Button } from '../'
+
+import Button from '../pb_button/_button'
 import DialogHeader  from './child_kits/_dialog_header'
 import DialogFooter from './child_kits/_dialog_footer'
 import DialogBody from './child_kits/_dialog_body'

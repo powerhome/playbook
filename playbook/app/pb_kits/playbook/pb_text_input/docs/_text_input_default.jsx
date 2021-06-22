@@ -1,9 +1,8 @@
 import React, { useState } from 'react'
-import {
-  Caption,
-  TextInput,
-  Title,
-} from '../../'
+
+import Caption from '../../pb_caption/_caption'
+import TextInput from '../../pb_text_input/_text_input'
+import Title from '../../pb_title/_title'
 
 const TextInputDefault = (props) => {
   const handleOnChangeFirstName = ({ target }) => {

@@ -1,5 +1,9 @@
 import React from 'react'
-import { Caption, Card, Layout } from '../../'
+
+import Layout from '../_layout'
+
+import Card from '../../pb_card/_card'
+import Caption from '../../pb_caption/_caption'
 
 const LayoutKanbanResponsive = (props) => {
   return (

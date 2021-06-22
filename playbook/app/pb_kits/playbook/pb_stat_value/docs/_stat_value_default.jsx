@@ -1,5 +1,6 @@
 import React from 'react'
-import { StatValue } from '../../'
+
+import StatValue from '../_stat_value'
 
 const StatValueDefault = (props) => {
   return (

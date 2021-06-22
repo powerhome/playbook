@@ -1,5 +1,8 @@
 import React from 'react'
-import { Body, Card, Title } from '../../'
+
+import Card from '../_card'
+import Title from '../../pb_title/_title'
+import Body from '../../pb_body/_body'
 
 const CardHeader = (props) => {
   return (

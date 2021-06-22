@@ -1,6 +1,10 @@
 import React from 'react'
 
-import { Currency, List, ListItem, Title } from '../../'
+import List from '../_list'
+import ListItem from '../_list_item'
+
+import Currency from '../../pb_currency/_currency'
+import Title from '../../pb_title/_title'
 
 const ListLayoutRight = (props) => {
   return (

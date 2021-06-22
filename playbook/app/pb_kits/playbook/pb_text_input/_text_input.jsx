@@ -1,10 +1,15 @@
 /* @flow */
 import React, { forwardRef } from 'react'
 import classnames from 'classnames'
-import { Body, Caption, Card, Flex, Icon } from '../'
-import { globalProps } from '../utilities/globalProps.js'
 
+import { globalProps } from '../utilities/globalProps.js'
 import { buildAriaProps, buildDataProps } from '../utilities/props'
+
+import Flex from '../pb_flex/_flex'
+import Card from '../pb_card/_card'
+import Caption from '../pb_caption/_caption'
+import Body from '../pb_body/_body'
+import Icon from '../pb_icon/_icon'
 
 type TextInputProps = {
   aria?: object,

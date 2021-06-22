@@ -1,5 +1,6 @@
 import React from 'react'
-import { OnlineStatus } from '../../'
+
+import OnlineStatus from '../_online_status'
 
 const OnlineStatusDefault = (props) => (
   <>

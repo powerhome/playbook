@@ -1,5 +1,6 @@
 import React from 'react'
-import { Currency } from '../../'
+
+import Currency from '../_currency'
 
 const CurrencyNoSymbol = (props) => {
   return (

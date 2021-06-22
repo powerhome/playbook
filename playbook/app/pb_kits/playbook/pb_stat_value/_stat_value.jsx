@@ -2,8 +2,9 @@
 
 import React from 'react'
 import classnames from 'classnames'
-import { Title } from '../'
-import { globalProps } from '../utilities/globalProps.js'
+
+import { globalProps } from '../utilities/globalProps'
+import Title from '../pb_title/_title'
 
 type StatValueProps = {
   className?: string,

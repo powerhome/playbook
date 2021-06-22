@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
-import { Body, Passphrase } from '../../'
+
+import Passphrase from '../_passphrase'
+import Body from '../../pb_body/_body'
 
 const PassphraseCommon = (props) => {
   const [input, setInput] = useState('')

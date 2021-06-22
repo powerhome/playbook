@@ -1,5 +1,6 @@
 import React from 'react'
-import { Icon } from '../../'
+
+import Icon from '../_icon'
 
 const IconPull = (props) => {
   return (

@@ -1,5 +1,6 @@
 import React from 'react'
-import { MultipleUsersStacked } from '../../'
+
+import MultipleUsersStacked from '../_multiple_users_stacked'
 
 const MultipleUsersStackedDefault = (props) => {
   return (

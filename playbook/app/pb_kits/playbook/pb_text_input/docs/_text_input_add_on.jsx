@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
-import { TextInput } from '../../'
+
+import TextInput from '../_text_input'
 
 const TextInputAddOn = (props) => {
   const [defaultInput, setDefaultInput] = useState('')
