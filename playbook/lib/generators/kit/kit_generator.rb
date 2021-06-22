@@ -5,7 +5,7 @@ class KitGenerator < Rails::Generators::NamedBase
   source_root File.expand_path("templates", __dir__)
   class_option :props, type: :array, default: []
 
-  REACT_EXAMPLES_PATH = "app/pb_kits/playbook/playbook-doc.js"
+  REACT_EXAMPLES_PATH = "app/pb_kits/playbook/packs/react-examples.js"
   REACT_INDEX_PATH = "app/pb_kits/playbook/index.js"
 
   def create_templates

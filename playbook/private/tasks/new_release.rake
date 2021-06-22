@@ -5,8 +5,10 @@ require "rake"
 # --------------------------------------- #
 #           Helper Functions              #
 # --------------------------------------- #
+
+# rubocop:disable Lint/LiteralAsCondition
 def confirmation_loop(version, npm_alpha, rake_arg)
-  loop do
+  while true
     if rake_arg == "alpha"
       STDOUT.puts "\nNew alpha versions will be #{version} and #{npm_alpha} continue?  (y/n)"
     else
@@ -22,26 +24,32 @@ def confirmation_loop(version, npm_alpha, rake_arg)
 
     next unless response == "n"
 
-    if rake_arg == "alpha"
-      STDOUT.puts "\nInput alpha base version"
-      alpha_base = STDIN.gets.chomp.downcase
-      STDOUT.puts "\nInput alpha suffix version"
-      alpha_suffix = STDIN.gets.chomp.downcase
+    while true
+      if rake_arg == "alpha"
+        STDOUT.puts "\nInput alpha base version"
+        alpha_base = STDIN.gets.chomp.downcase
+        STDOUT.puts "\nInput alpha suffix version"
+        alpha_suffix = STDIN.gets.chomp.downcase
 
-      version = "#{alpha_base}.pre.alpha#{alpha_suffix}"
-      npm_alpha = "#{alpha_base}-alpha#{alpha_suffix}"
-    else
-      STDOUT.puts "\nWhat would you like the version to be?"
-      version = STDIN.gets.chomp.downcase
+        version = "#{alpha_base}.pre.alpha#{alpha_suffix}"
+        npm_alpha = "#{alpha_base}-alpha#{alpha_suffix}"
+      else
+        STDOUT.puts "\nWhat would you like the version to be?"
+        response = STDIN.gets.chomp.downcase
+
+        version = response
+      end
+      break
     end
   end
   [version, npm_alpha]
 end
+# rubocop:enable Lint/LiteralAsCondition
 
 # run with...
 # `bundle exec rake "app:new_release[arg]"`  <<-- Create Makefile command that's more concise?
 # Arg options: major, minor, patch, alpha
-task :new_release, [:var] do |_task, args|
+task :new_release, [:var] => [:environment] do |_task, args|
   new_version = ""
 
   # --------------------------------------- #
@@ -122,7 +130,7 @@ task :new_release, [:var] do |_task, args|
   # NPM
   `rm -rf playbook-ui-*.tgz`
   puts "\nGenerating distribution files"
-  `yarn release`
+  `docker-compose run web yarn release`
   puts "\nOrganizing distribution files"
   `rm dist/playbook-rails.css && mv dist/playbook-react.css dist/playbook.css`
   puts "\nCreating NPM package..."

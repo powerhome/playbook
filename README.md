@@ -3,30 +3,32 @@
 
 # Playbook Design System
 
-Playbook is the first design system built for both Rails & React interfaces. Inspired by [Velocity](https://www.invisionapp.com/inside-design/design-resources/design-system-dashboard-ui-kit/), Playbook takes a modern design approach and applies it in a way that makes it easy to support bleeding edge or legacy systems. Playbook is built & maintained by the User Experience & Development teams at [Power Home Remodeling](https://www.techatpower.com/), the largest home remodeler in the US.
+Playbook is the first design system built for both Rails & React interfaces. Inspired by [Velocity](https://www.invisionapp.com/inside-design/design-resources/design-system-dashboard-ui-kit/), Playbook takes a modern design approach, and applies it in a way that makes it easy to support bleeding edge, or legacy systems. Playbook is built & maintained by the User Experience & Development teams at Power Home Remodeling, the largest home remodeler in the US.
 
-## Development
+## Requirements
 
-### Requirements
+- Docker 17.09 or later
+- Docker Compose 1.17.1 or later
 
-- [asdf](https://github.com/asdf-vm/asdf)
-- Install language tools: `asdf install`
+## Getting started
 
-### Getting started
+1. run `yarn && bundle`
+1. Install overcommit hooks `bin/overcommit`
+1. run `bin/rails s`
+1. run `./bin/webpack-dev-server`
+3. open [http://localhost:3000](http://localhost:3000)
 
-1. Install commit hooks `yarn prepare`
-1. Install all projects dependencies: `yarn install`
-1. Install website ruby dependencies: `cd playbook-website && bundle`
-  1. If you receive a bundle(r) related error, be sure that `bundler` is installed first. See the `BUNDLED WITH` section of `playbook-website/Gemfile.lock` for the exact version to install.
+<details><summary>Making changes to the Gemfile:</summary>
+<p>
 
-### Running the website for development
+* Kill the `rails` Ctrl + C
+* `bundle`
+* Re-start the server with `bin/rails s`
 
-1. Start watchers and servers: `yarn start-dev`
-1. Open [http://localhost:3000](http://localhost:3000)
+To run the tests, do `bin/test`.
 
-### Running library tests
-
-1. `cd playbook && ./test.sh`
+</p>
+</details>
 
 ## Additional resources
 
@@ -54,13 +56,12 @@ See [docs/upgrade-guide](./docs/upgrade-guide)
 ### Testing Playbook Kits Locally
 
 #### Testing React Kits locally
-
-1.  From inside the `playbook-ui` directory, run `yarn link`;
-1.  From Inside the project you want to test with `playbook-ui`, run `yarn link playbook-ui`;
-1.  Rebuild the project now using this version of `playbook-ui`;
-1.  Test all the things!
-1.  When finished, from inside the project you were testing with `playbook-ui`, run `yarn unlink playbook-ui`;
-1.  From Inside the `playbook-ui` directory, run `yarn unlink`;
+1.  Inside of your Playbook repository, run `yarn link`. 
+2.  Inside of the directory you want to test with playbook, run `yarn link playbook-ui`.
+3.  Run `yarn hmr` in your directory you want to test with playbook, and hard refresh (command + shift + R) your browser.
+4.  Test all the things!
+5.  When finished, inside of the directory you want to test with playbook, run `yarn unlink playbook-ui`.
+6.  Inside of your Playbook repository, run `yarn unlink`. 
 
 #### Jest & React-Testing-Library for Writing Tests
 

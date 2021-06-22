@@ -1,7 +1,0 @@
-inherit_from: ../.rubocop.yml
-
-AllCops:
-  Exclude:
-    - "bin/*"
-    - "node_modules/**/*"
-    - "vendor/**/*"

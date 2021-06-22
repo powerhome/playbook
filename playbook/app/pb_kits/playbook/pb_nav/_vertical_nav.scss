@@ -3,8 +3,8 @@
 @import "../tokens/border_radius";
 @import "../tokens/animation-curves";
 @import "../tokens/typography";
-@import "../tokens/titles";
 @import "../pb_body/body_mixins";
+@import "../pb_title/title_mixin";
 @import "./subtle_mixin";
 
 $selector: ".pb_nav_list";
@@ -134,7 +134,7 @@ $selector: ".pb_nav_list";
       border-bottom: 0;
     }
   }
-
+  
 }
 
 //Image Wrapper
