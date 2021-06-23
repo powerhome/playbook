@@ -53,3 +53,13 @@
   timestamp: "2 days ago",
   avatar_name: "Tim Wenhold"
 }) %>
+
+<br><br>
+
+<%= pb_rails("message", props: {
+  label: "",
+  timestamp: "2 days ago",
+  avatar_name: "Tim Wenhold"
+}) do %>
+  <%= pb_rails("image", props: { alt: "picture of a misty forest", size: "xl", url: "https://unsplash.it/500/400/?image=634" }) %>
+<% end %>

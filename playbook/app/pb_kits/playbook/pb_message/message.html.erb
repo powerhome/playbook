@@ -32,7 +32,7 @@
           }) %>
         <% end %>
       <% end %>
-      <%= pb_rails("body", props: {
+      <%= content.presence || pb_rails("body", props: {
         text: object.message,
         classname: "pb_message_body"
       }) %>
