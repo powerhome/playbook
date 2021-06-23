@@ -1,0 +1,18 @@
+@import "../tokens/spacing";
+@import "../tokens/colors";
+@import "../tokens/opacity";
+
+.pb_walkthrough {
+
+
+color:blue;
+
+
+}
+
+[class^=pb_card_kit]{
+  &.walkthrough_tooltip{
+    background-color: aqua !important;
+    z-index: 300;
+  } 
+}

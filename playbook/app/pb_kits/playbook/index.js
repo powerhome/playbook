@@ -4,6 +4,7 @@ import 'lazysizes/plugins/attrchange/ls.attrchange'
 import 'lazysizes'
 
 // vvv React Component JSX Imports from the React Kits vvv
+export { default as Walkthrough } from './pb_walkthrough/_walkthrough.jsx'
 export { default as Avatar } from './pb_avatar/_avatar'
 export { default as AvatarActionButton } from './pb_avatar_action_button/_avatar_action_button'
 export { default as Background } from './pb_background/_background'
