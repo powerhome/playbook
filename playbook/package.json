@@ -88,6 +88,7 @@
     "eslint-plugin-flowtype": "4.4.1",
     "eslint-plugin-jsx-control-statements": "2.2.1",
     "eslint-plugin-react": "git://github.com/rafbgarcia/eslint-plugin-react#fix-other-curly-brace-presence-edge-cases",
+    "filemanager-webpack-plugin": "^6.1.2",
     "flow-bin": "0.153.0",
     "flow-runtime": "0.14.0",
     "identity-obj-proxy": "3.0.0",

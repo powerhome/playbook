@@ -3,6 +3,8 @@ const path = require('path')
 const webpack = require('webpack')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const CircularDependencyPlugin = require('circular-dependency-plugin')
+const FileManagerPlugin = require('filemanager-webpack-plugin');
+const CopyPlugin = require('copy-webpack-plugin')
 
 const SOURCE_PATH = path.resolve(__dirname, 'app/pb_kits/playbook')
 const DIST_PATH = path.resolve(__dirname, 'dist')
@@ -22,7 +24,6 @@ const CIRCULAR_DEPENDENCY_PLUGIN = new CircularDependencyPlugin({
 })
 
 // Copy tokens and fonts to dist
-const CopyPlugin = require('copy-webpack-plugin')
 const COPY_PLUGIN = new CopyPlugin({
   patterns: [
     {
@@ -42,6 +43,22 @@ const COPY_PLUGIN = new CopyPlugin({
   ],
   options: {
     concurrency: 100,
+  },
+})
+
+// Remove extra css and js created by webpack
+const CLEAN_DIST_PLUGIN  = new FileManagerPlugin({
+  events: {
+    onStart: {
+      delete: [ DIST_PATH ],
+    },
+    onEnd: {
+      move: [
+        { source: `${DIST_PATH}/playbook-react.css`, destination: `${DIST_PATH}/playbook.css` },
+        { source: `${DIST_PATH}/reset.css.css`, destination: `${DIST_PATH}/reset.css`},
+      ],
+      delete: [ `${DIST_PATH}/playbook-rails.css`, `${DIST_PATH}/playbook-doc.css`, `${DIST_PATH}/reset.css.js` ]
+    },
   },
 })
 
@@ -129,6 +146,7 @@ module.exports = {
     new MiniCssExtractPlugin({ filename: '[name].css' }),
     CIRCULAR_DEPENDENCY_PLUGIN,
     COPY_PLUGIN,
+    CLEAN_DIST_PLUGIN,
   ],
   module: {
     rules: [
