@@ -3,7 +3,7 @@ const path = require('path')
 const webpack = require('webpack')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const CircularDependencyPlugin = require('circular-dependency-plugin')
-const FileManagerPlugin = require('filemanager-webpack-plugin');
+const FileManagerPlugin = require('filemanager-webpack-plugin')
 const CopyPlugin = require('copy-webpack-plugin')
 
 const SOURCE_PATH = path.resolve(__dirname, 'app/pb_kits/playbook')
@@ -55,9 +55,9 @@ const CLEAN_DIST_PLUGIN  = new FileManagerPlugin({
     onEnd: {
       move: [
         { source: `${DIST_PATH}/playbook-react.css`, destination: `${DIST_PATH}/playbook.css` },
-        { source: `${DIST_PATH}/reset.css.css`, destination: `${DIST_PATH}/reset.css`},
+        { source: `${DIST_PATH}/reset.css.css`, destination: `${DIST_PATH}/reset.css` },
       ],
-      delete: [ `${DIST_PATH}/playbook-rails.css`, `${DIST_PATH}/playbook-doc.css`, `${DIST_PATH}/reset.css.js` ]
+      delete: [ `${DIST_PATH}/playbook-rails.css`, `${DIST_PATH}/playbook-doc.css`, `${DIST_PATH}/reset.css.js` ],
     },
   },
 })
