@@ -1,13 +1,14 @@
 /* eslint-disable react/display-name */
+/* eslint-disable no-unused-vars */
 
 /* @flow */
 
-import React from 'react'
+import React, { useState } from 'react'
 import classnames from 'classnames'
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
 import { globalProps } from '../utilities/globalProps.js'
-import Joyride from 'react-joyride'
-// import CircleIconButton from '../pb_circle_icon_button/_circle_icon_button'
+import Joyride, { ACTIONS, EVENTS, STATUS } from 'react-joyride'
+import CircleIconButton from '../pb_circle_icon_button/_circle_icon_button'
 import Button from '../pb_button/_button'
 import Card from '../pb_card/_card'
 import Flex from '../pb_flex/_flex'
@@ -23,6 +24,7 @@ type WalkthroughProps = {
   id?: string,
   run?: boolean,
   steps?: array,
+  stepIndex?: number,
 }
 
 // type BeaconProps = {
@@ -51,22 +53,14 @@ type TooltipProps = {
 //       {...props}
 //   />
 // ))
-
+// const [state, setState] = useState({
+//   stepIndex: 0,
+//   continuous: false,
+// })
 const Tooltip = React.forwardRef((props: TooltipProps, ref) => (
-// const {
-//   continuous,
-//   index,
-//   step,
-//   backProps,
-//   closeProps,
-//   primaryProps,
-//   tooltipProps,
-// } = props
-// return (
 
   <div
       {...props.tooltipProps}
-      ref={ref}
   >
     <Card
         borderNone
@@ -74,8 +68,17 @@ const Tooltip = React.forwardRef((props: TooltipProps, ref) => (
         padding="none"
     >
       {props.step.title && <div>
-        <Flex padding="sm">
+        <Flex
+            align="center"
+            justify="between"
+            padding="xs"
+        >
           <Title size={4}>{props.step.title}</Title>
+          <CircleIconButton
+              icon="times"
+              size="sm"
+              variant="link"
+          />
         </Flex>
         <SectionSeparator />
       </div>}
@@ -87,25 +90,29 @@ const Tooltip = React.forwardRef((props: TooltipProps, ref) => (
           padding="sm"
       >
         {props.index > 0 && (
-        <Button {...props.backProps}>
-          <div id="back">{'Back'}</div>
-        </Button>
-    )}
-        {props.continuous && (
-        <Button {...props.primaryProps}>
-          <div id="next">{'Next'}</div>
-        </Button>
-    )}
+          <Button
+              {...props.backProps}
+              id="back"
+              text="Back"
+          />
+        )}
+        {props.continuous &&  (
+          <Button
+              {...props.primaryProps}
+              id="next"
+              text="Next"
+          />
+        )}
         {!props.continuous && (
-        <Button {...props.closeProps}>
-          <div id="close">{'Close'}</div>
-        </Button>
-    )}
+          <Button
+              {...props.closeProps}
+              id="close"
+              text="Close"
+          />
+        )}
       </Flex>
     </Card>
   </div>
-
-// )
 ))
 
 const Walkthrough = (props: WalkthroughProps) => {
@@ -123,7 +130,9 @@ const Walkthrough = (props: WalkthroughProps) => {
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
   const classes = classnames(buildCss('pb_walkthrough'), globalProps(props), className)
-
+  const settings = {
+    stepIndex: null,
+  }
   return (
     <div
         {...ariaProps}
@@ -138,6 +147,7 @@ const Walkthrough = (props: WalkthroughProps) => {
           run={run}
           steps={steps}
           tooltipComponent={Tooltip}
+          {...settings}
       />
     </div>
   )
