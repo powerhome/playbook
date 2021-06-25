@@ -103,6 +103,20 @@ const SVG_URL_LOADER = {
   ],
 }
 
+const FONT_LOADER = {
+  test: /\.woff2$/,
+  exclude: /node_modules/,
+  use: [
+    {
+      loader: 'file-loader',
+      options: {
+        name: '[name].[ext]',
+        outputPath: 'fonts/',
+      },
+    },
+  ],
+}
+
 new webpack.DefinePlugin({
   'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
 })
@@ -160,6 +174,7 @@ module.exports = {
       },
       BABEL_LOADER,
       SVG_URL_LOADER,
+      FONT_LOADER,
     ],
   },
 }
