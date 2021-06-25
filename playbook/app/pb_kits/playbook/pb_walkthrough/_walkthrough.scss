@@ -2,17 +2,18 @@
 @import "../tokens/colors";
 @import "../tokens/opacity";
 
-.pb_walkthrough {
 
 
-color:blue;
+span.pb_walkthrough_beacon {
+  background-color: rgba(255, 27, 14, 0.6);
+  border-radius: 50%;
+  display: inline-block;
+  height: 3rem;
+  width: 3rem;
+  .inner{
 
-
-}
-
-[class^=pb_card_kit]{
-  &.walkthrough_tooltip{
-    background-color: aqua !important;
-    z-index: 300;
-  } 
+  }
+  .outer{
+    
+  }
 }

@@ -3,4 +3,4 @@ examples:
   
   react:
   - walkthrough_default: Default
-  
+  - walkthrough_continuous: Continuous

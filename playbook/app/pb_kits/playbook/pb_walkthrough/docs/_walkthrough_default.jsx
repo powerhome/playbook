@@ -12,10 +12,16 @@ const WalkthroughDefault = (props) => {
         target: '.example',
       },
       {
-        title: 'Toggle Title 2',
+        title: 'Toggle',
         content:
         'By default the walkthrough kit will cycle through each step provided.',
         target: '.pb_toggle_control',
+      },
+      {
+        title: 'Top Nav',
+        content:
+          'By default the walkthrough kit will cycle through each step provided.',
+        target: '.pb--page--topNav',
       },
     ],
   })
@@ -49,7 +55,7 @@ const WalkthroughDefault = (props) => {
           })
         }}
       >
-        {'Stop Tour'}
+        {'Reset/Stop Tour'}
       </Button>
 
       <Walkthrough
