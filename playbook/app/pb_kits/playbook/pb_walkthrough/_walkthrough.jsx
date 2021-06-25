@@ -166,29 +166,29 @@ const Walkthrough = (props: WalkthroughProps) => {
     showSkipButton,
   } = props
 
-  // const ariaProps = buildAriaProps(aria)
-  // const dataProps = buildDataProps(data)
-  // const classes = classnames(buildCss('pb_walkthrough'), globalProps(props), className)
+  const ariaProps = buildAriaProps(aria)
+  const dataProps = buildDataProps(data)
+  const classes = classnames(buildCss('pb_walkthrough'), globalProps(props), className)
 
   return (
-  // <div
-  //     {...ariaProps}
-  //     {...dataProps}
-  //     className={classes}
-  //     id={id}
-  // >
-    <Joyride
+    <div
+        {...ariaProps}
+        {...dataProps}
+        className={classes}
+        id={id}
+    >
+      <Joyride
         // beaconComponent={Beacon}
-        callback={callback}
-        continuous={continuous}
-        disableScrolling
-        run={run}
-        showSkipButton={showSkipButton}
-        steps={steps}
-        tooltipComponent={Tooltip}
-        {...props}
-    />
-  // </div>
+          callback={callback}
+          continuous={continuous}
+          disableScrolling
+          run={run}
+          showSkipButton={showSkipButton}
+          steps={steps}
+          tooltipComponent={Tooltip}
+          {...props}
+      />
+    </div>
   )
 }
 
