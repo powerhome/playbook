@@ -95,12 +95,15 @@ const Message = (props: MessageProps) => {
             />
           </If>
         </Flex>
-        { children || (
+        <If condition={message}>
           <Body
               className="pb_message_body"
               text={message}
           />
-        ) }
+        </If>
+        <If condition={children}>
+          { children }
+        </If>
       </div>
     </div>
   )
