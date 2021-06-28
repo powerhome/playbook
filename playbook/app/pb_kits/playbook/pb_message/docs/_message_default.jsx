@@ -77,6 +77,22 @@ const MessageDefault = (props) => {
         />
       </Message>
 
+      <br />
+      <br />
+
+      <Message
+          label="Keith Craig"
+          message="Please hold for one moment, I will check with my manager."
+          timestamp="2 days ago"
+          {...props}
+      >
+        <Image
+            alt="picture of a misty forest"
+            size="md"
+            url="https://unsplash.it/500/400/?image=634"
+        />
+      </Message>
+
     </div>
   )
 }
