@@ -3,7 +3,8 @@
 import React from 'react'
 import { components } from 'react-select'
 
-import { Badge, FormPill } from '../../'
+import Badge from '../../pb_badge/_badge'
+import FormPill from '../../pb_form_pill/_form_pill'
 
 type Props = {
   data: object,

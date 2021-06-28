@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
-import { SelectableCardIcon } from '../../'
+
+import SelectableCardIcon from '../_selectable_card_icon'
 
 const SelectableCardIconSingleSelect = (props) => {
   const [selectedFormat, toggleFormat] = useState(null)

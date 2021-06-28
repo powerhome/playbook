@@ -4,8 +4,11 @@ import React from 'react'
 import classnames from 'classnames'
 
 import { joinPresent, titleize } from '../utilities/text'
-import { Body, Hashtag, Title } from '../'
-import { globalProps } from '../utilities/globalProps.js'
+import { globalProps } from '../utilities/globalProps'
+
+import Body from '../pb_body/_body'
+import Hashtag from '../pb_hashtag/_hashtag'
+import Title from '../pb_title/_title'
 
 type HomeAddressStreetProps = {
   address: string,

@@ -2,9 +2,11 @@
 
 import React from 'react'
 import classnames from 'classnames'
+
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
-import { Avatar } from '../'
 import { globalProps } from '../utilities/globalProps.js'
+
+import Avatar from '../pb_avatar/_avatar'
 
 type MultipleUsersProps = {
   aria?: object,

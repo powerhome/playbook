@@ -1,5 +1,6 @@
 import React from 'react'
-import { FixedConfirmationToast } from '../../'
+
+import FixedConfirmationToast from '../_fixed_confirmation_toast'
 
 const FixedConfirmationToastClose = (props) => {
   return (

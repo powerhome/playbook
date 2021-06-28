@@ -1,5 +1,6 @@
 import React from 'react'
-import { Layout } from '../../'
+
+import Layout from '../_layout'
 
 const LayoutSizes = (props) => {
   return (

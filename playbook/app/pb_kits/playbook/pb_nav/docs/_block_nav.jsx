@@ -1,6 +1,8 @@
 import React from 'react'
-import { Nav, User } from '../../'
-import NavItem from '../_item.jsx'
+
+import Nav from '../_nav'
+import NavItem from '../_item'
+import User from '../../pb_user/_user'
 
 const BlockNav = (props) => {
   return (

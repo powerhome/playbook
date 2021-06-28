@@ -1,5 +1,6 @@
 import React from 'react'
-import { DateTimeStacked } from '../../'
+
+import DateTimeStacked from '../_date_time_stacked'
 
 const DateTimeStackedDefault = (props) => (
   <div>
@@ -26,6 +27,3 @@ const DateTimeStackedDefault = (props) => (
 )
 
 export default DateTimeStackedDefault
-
-// *Development Note* -  We are reviewing this kit for a potential name change due to naming collisions when `new Date()` is used.
-// To avoid this bug, please use name spacing as shown in the code examples. ie `import { Date as AliasedComponentName } from '../../'

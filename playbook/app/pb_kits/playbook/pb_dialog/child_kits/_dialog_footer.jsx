@@ -2,9 +2,12 @@
 
 import React from 'react'
 import classnames from 'classnames'
+
 import { buildCss } from '../../utilities/props'
 import { globalProps } from '../../utilities/globalProps.js'
-import { Flex, SectionSeparator } from '../../'
+
+import Flex from '../../pb_flex/_flex'
+import SectionSeparator from '../../pb_section_separator/_section_separator'
 
 // Footer component
 const DialogFooter = (props: DialogFooterProps) => {

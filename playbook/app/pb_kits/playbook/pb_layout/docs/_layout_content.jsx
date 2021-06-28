@@ -1,5 +1,8 @@
 import React from 'react'
-import { Card, Layout } from '../../'
+
+import Layout from '../_layout'
+
+import Card from '../../pb_card/_card'
 
 const LayoutContent = () => {
   return (

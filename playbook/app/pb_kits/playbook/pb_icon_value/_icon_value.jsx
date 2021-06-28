@@ -2,11 +2,12 @@
 
 import React from 'react'
 import classnames from 'classnames'
-import { Body, Icon } from '../'
 
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
+import { globalProps } from '../utilities/globalProps'
 
-import { globalProps } from '../utilities/globalProps.js'
+import Body from '../pb_body/_body'
+import Icon from '../pb_icon/_icon'
 
 type IconValueProps = {
   align?: "left" | "center" | "right",

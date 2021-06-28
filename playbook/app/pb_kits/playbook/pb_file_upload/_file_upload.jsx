@@ -2,13 +2,14 @@
 
 import React, { useCallback } from 'react'
 import { useDropzone } from 'react-dropzone'
-import { buildCss, noop } from '../utilities/props'
 import classnames from 'classnames'
-import { globalProps } from '../utilities/globalProps.js'
 
-import type { Callback } from '../types.js'
+import { buildCss, noop } from '../utilities/props'
+import { globalProps } from '../utilities/globalProps'
+import type { Callback } from '../types'
 
-import { Body, Card } from '..'
+import Body from '../pb_body/_body'
+import Card from '../pb_card/_card'
 
 type FileUploadProps = {
   accept?: array<string>,

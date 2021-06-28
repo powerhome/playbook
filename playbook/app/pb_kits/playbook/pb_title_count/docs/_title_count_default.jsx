@@ -1,5 +1,6 @@
 import React from 'react'
-import { TitleCount } from '../../'
+
+import TitleCount from '../_title_count'
 
 const TitleCountDefault = (props) => {
   return (

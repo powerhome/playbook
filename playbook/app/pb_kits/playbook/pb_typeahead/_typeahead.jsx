@@ -4,7 +4,8 @@ import React from 'react'
 import Select from 'react-select'
 import AsyncSelect from 'react-select/async'
 import CreateableSelect from 'react-select/creatable'
-import { get } from 'lodash'
+import AsyncCreateableSelect from 'react-select/async-creatable'
+import { get, isString, uniqueId } from 'lodash'
 import { globalProps } from '../utilities/globalProps.js'
 import classnames from 'classnames'
 
@@ -26,23 +27,24 @@ import { noop } from '../utilities/props'
  * @prop {string} label - the text for the optional typeahead input label
  */
 
-type Props = {
+type TypeaheadProps = {
+  id?: string,
   async?: boolean,
   createable?: boolean,
   dark?: boolean,
   label?: string,
-  loadOptions?: noop | string,
-  getOptionLabel?: () => any,
-  getOptionValue?: () => any,
+  loadOptions?: string,
+  getOptionLabel?: string | (() => any),
+  getOptionValue?: string | (() => any),
   name?: string,
 }
 
 /**
  * @constant {React.ReactComponent} Typeahead
- * @param {Props} props - props as described at https://react-select.com/props
+ * @param {TypeaheadProps} props - props as described at https://react-select.com/props
  */
 
-const Typeahead = (props: Props) => {
+const Typeahead = ({ loadOptions = noop, getOptionLabel, id, getOptionValue, createable, async, ...props }: TypeaheadProps) => {
   const selectProps = {
     cacheOptions: true,
     components: {
@@ -56,8 +58,11 @@ const Typeahead = (props: Props) => {
       Placeholder,
       ValueContainer,
     },
+    loadOptions: isString(loadOptions) ? get(window, loadOptions) : loadOptions,
+    getOptionLabel: isString(getOptionLabel) ? get(window, getOptionLabel) : getOptionLabel,
+    getOptionValue: isString(getOptionValue) ? get(window, getOptionValue) : getOptionValue,
     defaultOptions: true,
-    id: 'react-select-input',
+    id: id || uniqueId(),
     inline: false,
     isClearable: true,
     isSearchable: true,
@@ -68,14 +73,13 @@ const Typeahead = (props: Props) => {
     ...props,
   }
 
-  if (typeof(props.loadOptions) === 'string') selectProps.loadOptions = get(window, props.loadOptions)
-  if (typeof(props.getOptionLabel) === 'string') selectProps.getOptionLabel = get(window, props.getOptionLabel)
-  if (typeof(props.getOptionValue) === 'string') selectProps.getOptionValue = get(window, props.getOptionValue)
+  const Tag = (
+    createable
+      ? (async ? AsyncCreateableSelect : CreateableSelect)
+      : (async ? AsyncSelect : Select)
+  )
 
-  let Tag = props.async ? AsyncSelect : Select
-  if (props.createable) Tag = CreateableSelect
-
-  const handleOnChange = (data, { action, option, removedValue }) => {
+  const handleOnChange = (_data, { action, option, removedValue }) => {
     if (action === 'select-option') {
       if (selectProps.onMultiValueClick) selectProps.onMultiValueClick(option)
       const multiValueClearEvent = new CustomEvent(`pb-typeahead-kit-${selectProps.id}-result-option-select`, { detail: option })

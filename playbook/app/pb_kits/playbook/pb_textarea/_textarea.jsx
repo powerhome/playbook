@@ -2,10 +2,16 @@
 
 import React, { forwardRef, useEffect, useRef } from 'react'
 import classnames from 'classnames'
-import { Body, Caption, Flex, FlexItem } from '../'
-import type { InputCallback } from '../types.js'
-import { globalProps } from '../utilities/globalProps.js'
+
 import PbTextarea from './'
+import type { InputCallback } from '../types.js'
+
+import { globalProps } from '../utilities/globalProps'
+
+import Body from '../pb_body/_body'
+import Caption from '../pb_caption/_caption'
+import Flex from '../pb_flex/_flex'
+import FlexItem from '../pb_flex/_flex_item'
 
 type TextareaProps = {
   characterCount?: string,

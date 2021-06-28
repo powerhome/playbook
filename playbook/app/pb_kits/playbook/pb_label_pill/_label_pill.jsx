@@ -6,7 +6,8 @@ import { globalProps } from '../utilities/globalProps.js'
 
 import { buildAriaProps, buildDataProps } from '../utilities/props'
 
-import { Caption, Pill } from '../'
+import Pill from '../pb_pill/_pill'
+import Caption from '../pb_caption/_caption'
 
 type LabelPillProps = {
   aria?: object,

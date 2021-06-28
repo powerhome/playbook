@@ -1,5 +1,6 @@
 import React from 'react'
-import { CircleChart } from '../../'
+
+import CircleChart from '../_circle_chart'
 
 const dataFirst = [
   {

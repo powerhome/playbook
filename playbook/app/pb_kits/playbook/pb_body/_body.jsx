@@ -2,9 +2,11 @@
 
 import React from 'react'
 import classnames from 'classnames'
+
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
-import { Highlight } from '../'
-import { globalProps } from '../utilities/globalProps.js'
+import { globalProps } from '../utilities/globalProps'
+
+import Highlight from '../pb_highlight/_highlight'
 
 type BodyProps = {
   aria?: object,

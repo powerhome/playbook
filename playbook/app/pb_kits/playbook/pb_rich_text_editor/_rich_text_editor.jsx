@@ -2,10 +2,17 @@
 
 import React, { useEffect, useRef } from 'react'
 import classnames from 'classnames'
-import useFocus from './useFocus.js'
-import Trix from 'trix'
-import { globalProps } from '../utilities/globalProps.js'
+import useFocus from './useFocus'
+import { globalProps } from '../utilities/globalProps'
 import { buildAriaProps, buildDataProps } from '../utilities/props'
+
+try {
+  const Trix = require('trix')
+  Trix.config.textAttributes.inlineCode = {
+    tagName: 'code',
+    inheritable: true,
+  }
+} catch (_e) { /* do nothing */ }
 
 type RichTextEditorProps = {
   aria?: object,
@@ -46,11 +53,6 @@ const RichTextEditor = (props: RichTextEditorProps) => {
   const dataProps = buildDataProps(data)
 
   useEffect(() => {
-    Trix.config.textAttributes.inlineCode = {
-      tagName: 'code',
-      inheritable: true,
-    }
-
     trixRef.current.addEventListener('trix-initialize', (event) => {
       const element = event.target
 

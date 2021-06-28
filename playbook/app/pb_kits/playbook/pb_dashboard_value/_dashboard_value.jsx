@@ -4,11 +4,10 @@ import React from 'react'
 import classnames from 'classnames'
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
 import { globalProps } from '../utilities/globalProps.js'
-import {
-  Body,
-  StatChange,
-  StatValue,
-} from '../'
+
+import Body from '../pb_body/_body'
+import StatChange from '../pb_stat_change/_stat_change'
+import StatValue from '../pb_stat_value/_stat_value'
 
 type DashboardValueProps = {
   align?: 'left' | 'center' | 'right',

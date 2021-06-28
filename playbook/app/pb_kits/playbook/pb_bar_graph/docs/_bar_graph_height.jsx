@@ -1,5 +1,6 @@
 import React from 'react'
-import { BarGraph } from '../../'
+
+import BarGraph from '../_bar_graph'
 
 const chartData = [{
   name: 'Number of Installations',

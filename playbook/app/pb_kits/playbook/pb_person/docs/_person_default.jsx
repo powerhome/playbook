@@ -1,5 +1,6 @@
 import React from 'react'
-import { Person } from '../../'
+
+import Person from '../_person'
 
 const PersonDefault = (props) => {
   return (

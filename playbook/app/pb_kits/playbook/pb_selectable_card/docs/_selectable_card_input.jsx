@@ -1,9 +1,8 @@
 import React, { useState } from 'react'
-import {
-  Body,
-  SelectableCard,
-  Title,
-} from '../../'
+
+import Body from '../../pb_body/_body'
+import SelectableCard from '../../pb_selectable_card/_selectable_card'
+import Title from '../../pb_title/_title'
 
 const SelectableCardInput = (props) => {
   const [state, setState] = useState({

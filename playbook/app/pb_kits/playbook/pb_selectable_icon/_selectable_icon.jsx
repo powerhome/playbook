@@ -2,15 +2,16 @@
 
 import React from 'react'
 import classnames from 'classnames'
-import { Icon, Title } from '../'
 
+import { globalProps } from '../utilities/globalProps'
 import {
   buildAriaProps,
   buildCss,
   buildDataProps,
 } from '../utilities/props'
 
-import { globalProps } from '../utilities/globalProps.js'
+import Icon from '../pb_icon/_icon'
+import Title from '../pb_title/_title'
 
 type SelectableIconProps = {
   aria?: Object,

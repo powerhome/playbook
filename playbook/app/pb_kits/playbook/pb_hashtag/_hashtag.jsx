@@ -4,9 +4,10 @@
 import React from 'react'
 import classnames from 'classnames'
 
-import { Badge } from '../'
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
-import { globalProps } from '../utilities/globalProps.js'
+import { globalProps } from '../utilities/globalProps'
+
+import Badge from '../pb_badge/_badge'
 
 type HashtagProps = {
   aria?: object,

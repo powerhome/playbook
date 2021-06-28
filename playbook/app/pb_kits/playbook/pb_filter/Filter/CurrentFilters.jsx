@@ -2,7 +2,10 @@
 
 import React from 'react'
 import { isEmpty, map, omitBy } from 'lodash'
-import { Body, Caption, Title } from '../../'
+
+import Body from '../../pb_body/_body'
+import Caption from '../../pb_caption/_caption'
+import Title from '../../pb_title/_title'
 
 export type FilterDescription = {
   [key: string]: ?string | boolean,

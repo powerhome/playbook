@@ -1,5 +1,6 @@
 import React from 'react'
-import { HomeAddressStreet } from '../../'
+
+import HomeAddressStreet from '../_home_address_street'
 
 const HomeAddressStreetModified = (props) => {
   return (

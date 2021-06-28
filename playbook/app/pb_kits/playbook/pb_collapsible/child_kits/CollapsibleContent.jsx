@@ -6,7 +6,7 @@ import AnimateHeight from 'react-animate-height'
 import { buildCss } from '../../utilities/props'
 import { globalProps } from '../../utilities/globalProps.js'
 
-import { CollapsibleContext } from '../_collapsible.jsx'
+import CollapsibleContext from '../context'
 
 type CollapsibleContentProps = {
   children: array<React.ReactNode> | React.ReactNode | string,

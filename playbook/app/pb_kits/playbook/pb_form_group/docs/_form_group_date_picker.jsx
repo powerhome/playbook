@@ -1,5 +1,9 @@
 import React from 'react'
-import { DatePicker, FormGroup, TextInput } from '../../'
+
+import FormGroup from '../_form_group'
+
+import DatePicker from '../../pb_date_picker/_date_picker'
+import TextInput from '../../pb_text_input/_text_input'
 
 const FormGroupDatePicker = (props) => (
   <div>

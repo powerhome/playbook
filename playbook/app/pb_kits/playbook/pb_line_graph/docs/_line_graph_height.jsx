@@ -1,5 +1,5 @@
 import React from 'react'
-import { LineGraph } from '../../'
+import LineGraph from '../_line_graph'
 
 const data = [{
   name: 'Number of Installations',

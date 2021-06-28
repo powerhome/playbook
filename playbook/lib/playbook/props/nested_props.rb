@@ -4,7 +4,7 @@ module Playbook
   module Props
     class NestedProps < Playbook::Props::Base
       def initialize(nested_kit:, **kwargs)
-        super **kwargs
+        super(**kwargs)
         @nested_kit = nested_kit
       end
 

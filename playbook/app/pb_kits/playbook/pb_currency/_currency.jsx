@@ -4,8 +4,11 @@ import React from 'react'
 import classnames from 'classnames'
 
 import { globalProps } from '../utilities/globalProps.js'
-import { Body, Caption, Title } from '../'
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
+
+import Body from '../pb_body/_body'
+import Caption from '../pb_caption/_caption'
+import Title from '../pb_title/_title'
 
 type CurrencyProps = {
   align?: 'center' | 'left' | 'right',

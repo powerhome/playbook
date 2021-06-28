@@ -2,10 +2,15 @@
 /* @flow */
 
 import React from 'react'
-import { buildCss } from '../utilities/props'
-import { deprecatedProps, globalProps } from '../utilities/globalProps.js'
 
-import { DateStacked, Flex, FlexItem, SectionSeparator, TimeStacked } from '../'
+import { buildCss } from '../utilities/props'
+import { deprecatedProps, globalProps } from '../utilities/globalProps'
+
+import Flex from '../pb_flex/_flex'
+import FlexItem from '../pb_flex/_flex_item'
+import SectionSeparator from '../pb_section_separator/_section_separator'
+import TimeStacked from '../pb_time_stacked/_time_stacked'
+import DateStacked from '../pb_date_stacked/_date_stacked'
 
 type DateTimeStackedProps = {
   id?: string,
