@@ -54,14 +54,6 @@ See [docs/upgrade-guide](./docs/upgrade-guide)
 ### Testing Playbook Kits Locally
 
 #### Testing React Kits locally
-<<<<<<< HEAD
-1.  Inside of your Playbook repository, run `yarn link`.
-2.  Inside of the directory you want to test with playbook, run `yarn link playbook-ui`.
-3.  Run `yarn hmr` in your directory you want to test with playbook, and hard refresh (command + shift + R) your browser.
-4.  Test all the things!
-5.  When finished, inside of the directory you want to test with playbook, run `yarn unlink playbook-ui`.
-6.  Inside of your Playbook repository, run `yarn unlink`.
-=======
 
 1.  From inside the `playbook-ui` directory, run `yarn link`;
 1.  From Inside the project you want to test with `playbook-ui`, run `yarn link playbook-ui`;
@@ -69,7 +61,6 @@ See [docs/upgrade-guide](./docs/upgrade-guide)
 1.  Test all the things!
 1.  When finished, from inside the project you were testing with `playbook-ui`, run `yarn unlink playbook-ui`;
 1.  From Inside the `playbook-ui` directory, run `yarn unlink`;
->>>>>>> master
 
 #### Jest & React-Testing-Library for Writing Tests
 
