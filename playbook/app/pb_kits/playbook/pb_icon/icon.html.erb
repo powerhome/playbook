@@ -1,3 +1,15 @@
+<% if object.custom_svg %>
+
+  <%= object.custom_svg %>
+  <%# <object data="https://upload.wikimedia.org/wikipedia/commons/3/3b/Wrench_font_awesome.svg" type="image/svg+xml"></object> %>
+  <%# <svg>
+    <use href="https://upload.wikimedia.org/wikipedia/commons/3/3b/Wrench_font_awesome.svg">
+  </svg> %>
+
+  <%# <%= content_tag(:object, nil, class: "test", data: "https://upload.wikimedia.org/wikipedia/commons/3/3b/Wrench_font_awesome.svg") %>
+
+<% else %>
+
 <%= content_tag(:i, nil,
     id: object.id,
     data: object.data,
@@ -5,3 +17,8 @@
 <%= content_tag(:span, nil,
     aria: { label: "#{object.icon} icon" }.merge(object.aria),
     hidden: true ) %>
+
+
+
+
+<% end %>

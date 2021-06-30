@@ -1,1 +1,48 @@
 <%= pb_rails("icon", props: { icon: "user", fixed_width: true }) %>
+
+<%
+  def my_svg
+    File.open("app/javascript/images/powergon.svg") do |file|
+      raw file.read
+    end
+  end
+%>
+
+<div class="icon-wrapper" style="width:300px;color:blue;">
+
+  <%= pb_rails("icon", props: {
+    custom_svg: my_svg
+  }) %>
+
+  <%= pb_rails("icon", props: {
+    custom_svg: content_tag(
+      :object,
+      nil,
+      class: "test",
+      data: asset_pack_path("media/images/powergon.svg")
+    )
+  }) %>
+
+  <%= pb_rails("icon", props: {
+    custom_svg: content_tag(
+      :object,
+      nil,
+      class: "test",
+      data: "https://upload.wikimedia.org/wikipedia/commons/3/3b/Wrench_font_awesome.svg"
+    )
+  }) %>
+
+
+
+  <% if false %>
+  <%= pb_rails("icon", props: { custom_svg: { type: "local", path: "app/javascript/images/powergon.svg" } }) %>
+  <%= pb_rails("icon", props: { custom_svg: { type: "remote", path: "https://upload.wikimedia.org/wikipedia/commons/3/3b/Wrench_font_awesome.svg" } }) %>
+  <% end %>
+
+  <%# <%= image_pack_tag("media/images/powergon.svg") %>
+
+  
+  <%# <%= pb_rails("icon", props: { custom_svg: image_pack_tag("media/images/powergon.svg") }) %>
+  <%# <%= pb_rails("icon", props: { custom_svg: my_svg }) %>
+  <%# <%= pb_rails("icon", props: { custom_svg: content_tag(:svg, class: "test") do content_tag(:use, nil, 'xlink:href' => "media/images/powergon.svg") end }) %>
+</div>

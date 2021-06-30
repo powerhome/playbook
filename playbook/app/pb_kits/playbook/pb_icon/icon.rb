@@ -10,7 +10,8 @@ module Playbook
       prop :flip, type: Playbook::Props::Enum,
                   values: ["horizontal", "vertical", "both", nil],
                   default: nil
-      prop :icon, required: true
+      # prop :icon, required: true
+      prop :icon
       prop :inverse, type: Playbook::Props::Boolean,
                      default: false
       prop :list_item, type: Playbook::Props::Boolean,
@@ -28,6 +29,8 @@ module Playbook
                   default: nil
       prop :spin, type: Playbook::Props::Boolean,
                   default: false
+
+      prop :custom_svg, default: nil
 
       def classname
         generate_classname(
