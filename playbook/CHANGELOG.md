@@ -6,14 +6,14 @@
 
 **Breaking changes:**
 
-- \[NUXE-605\] Decouple website from library [\#1452](https://github.com/powerhome/playbook/pull/1452) ([xjunior](https://github.com/xjunior))
+- Decouple website from library [\#1452](https://github.com/powerhome/playbook/pull/1452) ([xjunior](https://github.com/xjunior))
 
 **Kit Enhancements:**
 
-- \[NUX-2012\] Move dist cleanup to webpack [\#1539](https://github.com/powerhome/playbook/pull/1539) ([xjunior](https://github.com/xjunior))
-- \[BOP-1014\] Add children to message react kit [\#1536](https://github.com/powerhome/playbook/pull/1536) ([haydenrou](https://github.com/haydenrou))
-- \[NUXE-784\] Clear circular imports [\#1532](https://github.com/powerhome/playbook/pull/1532) ([xjunior](https://github.com/xjunior))
-- \[BOP-993\] Update avatar kit/multi-user kit to support xxs size [\#1521](https://github.com/powerhome/playbook/pull/1521) ([derricklannaman](https://github.com/derricklannaman))
+- Move dist cleanup to webpack [\#1539](https://github.com/powerhome/playbook/pull/1539) ([xjunior](https://github.com/xjunior))
+- Add children to message react kit [\#1536](https://github.com/powerhome/playbook/pull/1536) ([haydenrou](https://github.com/haydenrou))
+- Clear circular imports [\#1532](https://github.com/powerhome/playbook/pull/1532) ([xjunior](https://github.com/xjunior))
+- Update avatar kit/multi-user kit to support xxs size [\#1521](https://github.com/powerhome/playbook/pull/1521) ([derricklannaman](https://github.com/derricklannaman))
 
 **Merged pull requests:**
 
@@ -29,7 +29,7 @@
 
 **Kit Enhancements:**
 
-- \[BOP-979\] Enhance message kit to accept timestamp object for hover [\#1516](https://github.com/powerhome/playbook/pull/1516) ([haydenrou](https://github.com/haydenrou))
+- Enhance message kit to accept timestamp object for hover [\#1516](https://github.com/powerhome/playbook/pull/1516) ([haydenrou](https://github.com/haydenrou))
 
 **Fixed Bugs:**
 
@@ -83,7 +83,7 @@
 
 **Fixed Bugs:**
 
-- \[NUXE-673\] Fix Timestamp Duplicated Zone [\#1498](https://github.com/powerhome/playbook/pull/1498) ([thestephenmarshall](https://github.com/thestephenmarshall))
+- Fix Timestamp Duplicated Zone [\#1498](https://github.com/powerhome/playbook/pull/1498) ([thestephenmarshall](https://github.com/thestephenmarshall))
 
 **Merged pull requests:**
 
