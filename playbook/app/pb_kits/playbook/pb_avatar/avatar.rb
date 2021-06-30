@@ -9,7 +9,7 @@ module Playbook
       prop :name, type: Playbook::Props::String,
                   default: ""
       prop :size, type: Playbook::Props::Enum,
-                  values: %w[xs sm md base lg xl],
+                  values: %w[xxs xs sm md base lg xl],
                   default: "md"
       prop :status
 
