@@ -22,6 +22,7 @@ type DialogProps = {
   confirmButton?: string,
   data?: object,
   id?: string,
+  loading?: boolean,
   onCancel?: () => void,
   onChange?: () => void,
   onClose?: () => void,
@@ -45,6 +46,7 @@ const Dialog = (props: DialogProps) => {
     id,
     size = 'md',
     children,
+    loading = false,
     opened,
     onCancel = () => {},
     onConfirm = () => {},
@@ -123,7 +125,12 @@ const Dialog = (props: DialogProps) => {
 
           <If condition={cancelButton && confirmButton}>
             <Dialog.Footer>
-              <Button onClick={onConfirm}>{confirmButton}</Button>
+              <Button
+                  loading={loading}
+                  onClick={onConfirm}
+              >
+                {confirmButton}
+              </Button>
               <Button
                   id="cancel-button"
                   onClick={onCancel}
