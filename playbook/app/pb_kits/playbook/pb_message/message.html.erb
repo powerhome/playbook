@@ -32,9 +32,14 @@
           }) %>
         <% end %>
       <% end %>
-      <%= pb_rails("body", props: {
-        text: object.message,
-        classname: "pb_message_body"
-      }) %>
+      <% if content.present? %>
+        <%= content %>
+      <% end %>
+      <% if object.message.present? %>
+        <%= pb_rails("body", props: {
+          text: object.message,
+          classname: "pb_message_body"
+        }) %>
+      <% end %>
     </div>
 <% end %>
