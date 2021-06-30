@@ -4,3 +4,5 @@ examples:
   react:
   - walkthrough_default: Default
   - walkthrough_continuous: Continuous
+  - walkthrough_no_beacon: No Beacon
+  - walkthrough_multi_beacon: Multi Beacon

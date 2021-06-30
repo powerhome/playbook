@@ -1,2 +1,4 @@
 export { default as WalkthroughDefault } from './_walkthrough_default.jsx'
 export { default as WalkthroughContinuous } from './_walkthrough_continuous.jsx'
+export { default as WalkthroughNoBeacon } from './_walkthrough_no_beacon.jsx'
+export { default as WalkthroughMultiBeacon } from './_walkthrough_multi_beacon.jsx'

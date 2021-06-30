@@ -14,7 +14,6 @@ import Card from '../pb_card/_card'
 import Flex from '../pb_flex/_flex'
 import SectionSeparator from '../pb_section_separator/_section_separator'
 import Title from '../pb_title/_title'
-import { render } from 'react-dom'
 
 type WalkthroughProps = {
   aria?: object,
@@ -178,7 +177,6 @@ const Walkthrough = (props: WalkthroughProps) => {
         id={id}
     >
       <Joyride
-        // beaconComponent={Beacon}
           callback={callback}
           continuous={continuous}
           disableScrolling
