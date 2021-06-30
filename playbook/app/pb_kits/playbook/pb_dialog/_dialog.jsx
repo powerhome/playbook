@@ -125,7 +125,12 @@ const Dialog = (props: DialogProps) => {
 
           <If condition={cancelButton && confirmButton}>
             <Dialog.Footer>
-              <Button onClick={onConfirm} loading={loading}>{confirmButton}</Button>
+              <Button
+                  loading={loading}
+                  onClick={onConfirm}
+              >
+                {confirmButton}
+              </Button>
               <Button
                   id="cancel-button"
                   onClick={onCancel}
