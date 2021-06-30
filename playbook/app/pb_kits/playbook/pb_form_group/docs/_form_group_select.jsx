@@ -1,5 +1,9 @@
 import React from 'react'
-import { FormGroup, Select, TextInput } from '../../'
+
+import FormGroup from '../_form_group'
+
+import Select from '../../pb_select/_select'
+import TextInput from '../../pb_text_input/_text_input'
 
 const FormGroupSelect = (props) => {
   const options = [

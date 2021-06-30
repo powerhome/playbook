@@ -1,0 +1,38 @@
+@import "./colors";
+@import "./typography";
+@import "./line_height";
+
+@mixin pb_title(
+    $fontSize: $heading_1,
+    $fontWeight: $lighter,
+    $lineHeight: $lh_tighter
+){
+  font-size: $fontSize;
+  letter-spacing: $lspace_tight;
+  font-weight: $fontWeight;
+  color: $text_lt_default;
+  margin: 0;
+  line-height: $lineHeight;
+  font-family: $font_family_base;
+}
+
+@mixin pb_title_1 {
+  @include pb_title($heading_1);
+  letter-spacing: -0.03em;
+}
+
+@mixin pb_title_2 {
+  @include pb_title($heading_2, $lighter, 0.96);
+}
+
+@mixin pb_title_3 {
+  @include pb_title($heading_3);
+}
+
+@mixin pb_title_4 {
+  @include pb_title($heading_4, $bolder);
+}
+
+@mixin pb_title_dark {
+  color: $text_dk_default;
+}

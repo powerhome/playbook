@@ -2,17 +2,26 @@
 
 import React, { useEffect, useRef } from 'react'
 import classnames from 'classnames'
-import useFocus from './useFocus.js'
-import Trix from 'trix'
-import { globalProps } from '../utilities/globalProps.js'
+import useFocus from './useFocus'
+import { globalProps } from '../utilities/globalProps'
 import { buildAriaProps, buildDataProps } from '../utilities/props'
+
+try {
+  const Trix = require('trix')
+  Trix.config.textAttributes.inlineCode = {
+    tagName: 'code',
+    inheritable: true,
+  }
+} catch (_e) { /* do nothing */ }
 
 type RichTextEditorProps = {
   aria?: object,
+  toolbarBottom?: Boolean,
   className?: string,
   data?: object,
   focus?: boolean,
   id?: string,
+  inline?: boolean,
   name?: string,
   onChange: (string) => void,
   placeholder?: string,
@@ -25,10 +34,12 @@ type RichTextEditorProps = {
 const RichTextEditor = (props: RichTextEditorProps) => {
   const {
     aria = {},
+    toolbarBottom = false,
     className,
     data = {},
     focus = false,
     id,
+    inline = false,
     name,
     onChange,
     placeholder,
@@ -42,11 +53,6 @@ const RichTextEditor = (props: RichTextEditorProps) => {
   const dataProps = buildDataProps(data)
 
   useEffect(() => {
-    Trix.config.textAttributes.inlineCode = {
-      tagName: 'code',
-      inheritable: true,
-    }
-
     trixRef.current.addEventListener('trix-initialize', (event) => {
       const element = event.target
 
@@ -77,6 +83,8 @@ const RichTextEditor = (props: RichTextEditorProps) => {
         blockCodeButton.hidden = type == 'inline'
         inlineCodeButton.hidden = type == 'block'
       })
+
+      if (toolbarBottom) editor.element.after(toolbarElement)
     })
 
     trixRef.current.addEventListener('trix-change', (event) => {
@@ -103,6 +111,8 @@ const RichTextEditor = (props: RichTextEditorProps) => {
   const SimpleClass = simple ? 'simple' : ''
   const FocusClass = focus ? 'focus-editor-targets' : ''
   const StickyClass = sticky ? 'sticky' : ''
+  const InlineClass = inline ? 'inline' : ''
+  const ToolbarBottomClass = toolbarBottom ? 'toolbar-bottom' : ''
   const css = classnames(globalProps(props), className)
 
   return (
@@ -114,6 +124,8 @@ const RichTextEditor = (props: RichTextEditorProps) => {
         SimpleClass,
         FocusClass,
         StickyClass,
+        InlineClass,
+        ToolbarBottomClass,
         css
       )}
     >

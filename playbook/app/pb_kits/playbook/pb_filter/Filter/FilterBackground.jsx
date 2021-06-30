@@ -1,9 +1,11 @@
 /* @flow */
 
 import React, { Node } from 'react'
-import { Card } from '../../'
 import classnames from 'classnames'
+
 import { globalProps } from '../../utilities/globalProps.js'
+
+import Card from '../../pb_card/_card'
 
 type FilterBackgroundProps = {
   background: boolean,

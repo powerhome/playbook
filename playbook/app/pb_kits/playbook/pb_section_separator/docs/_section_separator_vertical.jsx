@@ -1,5 +1,9 @@
 import React from 'react'
-import { Flex, FlexItem, SectionSeparator } from '../../'
+
+import SectionSeparator from '../_section_separator'
+
+import Flex from '../../pb_flex/_flex'
+import FlexItem from '../../pb_flex/_flex_item'
 
 const SectionSeparatorVertical = (props) => {
   return (

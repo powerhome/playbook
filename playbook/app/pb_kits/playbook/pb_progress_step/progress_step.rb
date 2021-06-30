@@ -9,7 +9,7 @@ module Playbook
       prop :icon, type: Playbook::Props::Boolean,
                   default: false
       prop :show_icon, type: Playbook::Props::Boolean,
-                  default: false
+                       default: false
       prop :variant, type: Playbook::Props::Enum,
                      values: %w[default tracker],
                      default: "default"

@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
-import { SelectableIcon } from '../../'
+
+import SelectableIcon from '../_selectable_icon'
 
 const SelectableIconDefault = (props) => {
   const [ checkSelected, toggleSelected ] = useState(true)

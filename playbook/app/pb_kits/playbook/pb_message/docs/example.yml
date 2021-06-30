@@ -1,9 +1,11 @@
 examples:
-  
+
   rails:
   - message_default: Default
-  
-  
+  - message_timestamp: With Timestamp Hover
+
+
   react:
   - message_default: Default
-  
+  - message_timestamp: With Timestamp Hover
+

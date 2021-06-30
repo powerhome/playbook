@@ -1,5 +1,6 @@
 import React from 'react'
-import { TitleDetail } from '../../'
+
+import TitleDetail from '../_title_detail'
 
 const TitleDetailDefault = (props) => (
   <div>

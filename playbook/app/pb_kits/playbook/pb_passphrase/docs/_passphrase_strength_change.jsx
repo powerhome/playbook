@@ -1,5 +1,8 @@
 import React, { useState } from 'react'
-import { Passphrase, TextInput } from '../../'
+
+import Passphrase from '../_passphrase'
+
+import TextInput from '../../pb_text_input/_text_input'
 
 const PassphraseStrengthChange = (props) => {
   const [input, setInput] = useState('')

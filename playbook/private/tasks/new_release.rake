@@ -5,9 +5,8 @@ require "rake"
 # --------------------------------------- #
 #           Helper Functions              #
 # --------------------------------------- #
-
 def confirmation_loop(version, npm_alpha, rake_arg)
-  while true do
+  loop do
     if rake_arg == "alpha"
       STDOUT.puts "\nNew alpha versions will be #{version} and #{npm_alpha} continue?  (y/n)"
     else
@@ -21,24 +20,19 @@ def confirmation_loop(version, npm_alpha, rake_arg)
       break
     end
 
-    if response == "n"
-      while true do
-        if rake_arg == "alpha"
-          STDOUT.puts "\nInput alpha base version"
-          alpha_base = STDIN.gets.chomp.downcase
-          STDOUT.puts "\nInput alpha suffix version"
-          alpha_suffix = STDIN.gets.chomp.downcase
+    next unless response == "n"
 
-          version = "#{alpha_base}.pre.alpha#{alpha_suffix}"
-          npm_alpha = "#{alpha_base}-alpha#{alpha_suffix}"
-        else
-          STDOUT.puts "\nWhat would you like the version to be?"
-          response = STDIN.gets.chomp.downcase
+    if rake_arg == "alpha"
+      STDOUT.puts "\nInput alpha base version"
+      alpha_base = STDIN.gets.chomp.downcase
+      STDOUT.puts "\nInput alpha suffix version"
+      alpha_suffix = STDIN.gets.chomp.downcase
 
-          version = response
-        end
-        break
-      end
+      version = "#{alpha_base}.pre.alpha#{alpha_suffix}"
+      npm_alpha = "#{alpha_base}-alpha#{alpha_suffix}"
+    else
+      STDOUT.puts "\nWhat would you like the version to be?"
+      version = STDIN.gets.chomp.downcase
     end
   end
   [version, npm_alpha]
@@ -47,7 +41,7 @@ end
 # run with...
 # `bundle exec rake "app:new_release[arg]"`  <<-- Create Makefile command that's more concise?
 # Arg options: major, minor, patch, alpha
-task :new_release, [:var] => [:environment] do |_task, args|
+task :new_release, [:var] do |_task, args|
   new_version = ""
 
   # --------------------------------------- #
@@ -55,11 +49,11 @@ task :new_release, [:var] => [:environment] do |_task, args|
   # --------------------------------------- #
   if args[:var] == "alpha"
     # Search ruby gems for latest alpha version
-    latest_remote_alpha = (`gem search playbook_ui --pre`).match(/(\d+.\d+.\d+.pre.alpha\d+)/).to_s
+    latest_remote_alpha = `gem search playbook_ui --pre`.match(/(\d+.\d+.\d+.pre.alpha\d+)/).to_s
     puts "\nLatest remote alpha version: #{latest_remote_alpha}"
   else
     # Search ruby gems for latest version
-    latest_remote_version = (`gem search playbook_ui`).match(/(\d+.\d+.\d+)/).to_s
+    latest_remote_version = `gem search playbook_ui`.match(/(\d+.\d+.\d+)/).to_s
     puts "\nLatest remote version: #{latest_remote_version}"
     # triplet here refers to the maj, min, and patch numbers
     # i.e. x.x.x
@@ -77,7 +71,7 @@ task :new_release, [:var] => [:environment] do |_task, args|
   case args[:var]
   when "alpha"
     alpha_triplet = latest_remote_alpha.match(/(\d+.\d+.\d+)/).to_s
-    base_triplet = (`gem search playbook_ui`).match(/(\d+.\d+.\d+)/).to_s
+    base_triplet = `gem search playbook_ui`.match(/(\d+.\d+.\d+)/).to_s
 
     if alpha_triplet != base_triplet
       new_version = base_triplet + ".pre.alpha1"
@@ -128,7 +122,7 @@ task :new_release, [:var] => [:environment] do |_task, args|
   # NPM
   `rm -rf playbook-ui-*.tgz`
   puts "\nGenerating distribution files"
-  `docker-compose run web yarn release`
+  `yarn release`
   puts "\nOrganizing distribution files"
   `rm dist/playbook-rails.css && mv dist/playbook-react.css dist/playbook.css`
   puts "\nCreating NPM package..."
@@ -155,7 +149,7 @@ task :new_release, [:var] => [:environment] do |_task, args|
   if args[:var] != "alpha"
     puts "\nPushed to NPM. Now lets create a tag..."
     puts "\nWrite a brief tag release description. You can edit this later on GitHub."
-    description = STDIN.gets.chomp
+    # description = STDIN.gets.chomp
     puts "\nCreating Tag..."
     # `git tag -a #{new_version} -m "#{description}"`
     puts "\nPushing Tag to GitHub... (not yet ungated)"

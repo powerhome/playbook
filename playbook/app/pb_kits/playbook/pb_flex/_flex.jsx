@@ -2,11 +2,12 @@
 
 import React from 'react'
 import classnames from 'classnames'
-import { buildCss } from '../utilities/props'
+import { buildCss, buildDataProps } from '../utilities/props'
 import { globalProps } from '../utilities/globalProps.js'
 type FlexProps = {
   children: array<React.ReactNode> | React.ReactNode,
   className?: string,
+  data?: object,
   horizontal?: "left" | "center" | "right" | "stretch" | "none",
   justify?: "start" | "center" | "end" | "around" | "between" | "evenly" | "none",
   id?: string,
@@ -27,6 +28,7 @@ const Flex = (props: FlexProps) => {
     align = 'none',
     children,
     className,
+    data = {},
     inline = false,
     horizontal = 'left',
     justify = 'none',
@@ -51,6 +53,8 @@ const Flex = (props: FlexProps) => {
   const columnGapClass = columnGap !== 'none' ? `columnGap_${columnGap}` : ''
   const wrapClass = wrap === true ? 'wrap' : ''
   const reverseClass = reverse === true ? 'reverse' : ''
+  const dataProps = buildDataProps(data)
+
   return (
     <div
         className={classnames(
@@ -70,6 +74,7 @@ const Flex = (props: FlexProps) => {
         globalProps(props),
         className
       )}
+        {...dataProps}
     >
       {children}
     </div>

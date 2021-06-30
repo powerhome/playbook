@@ -16,7 +16,7 @@ module Playbook
           button(value, props: props)
         end
 
-        def button(value = nil, props:)
+        def button(_value = nil, props:)
           view_context.content_tag(:li) do
             view_context.pb_rails("button", props: props)
           end

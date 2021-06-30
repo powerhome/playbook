@@ -3,8 +3,6 @@
 set -e
 
 echo ">>> eslint"
-time yarn
-time yarn lint
 time yarn test
 
 echo ">>> Testing"

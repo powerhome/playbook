@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
-import { FormGroup, SelectableCardIcon } from '../../'
+
+import FormGroup from '../_form_group'
+import SelectableCardIcon from '../../pb_selectable_card_icon/_selectable_card_icon'
 
 const FormGroupSelectableCardIcon = (props) => {
   const [selectedFormat, toggleFormat] = useState(null)

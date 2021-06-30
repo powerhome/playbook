@@ -1,4 +1,6 @@
-require 'redcarpet'
+# frozen_string_literal: true
+
+require "redcarpet"
 
 module Playbook
   module Markdown
@@ -20,7 +22,7 @@ module Playbook
           markdown.render(template).html_safe
         end
 
-        private
+      private
 
         def md_options
           @md_options ||= {

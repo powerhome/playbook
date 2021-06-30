@@ -1,5 +1,5 @@
 <%= pb_rails("message", props: {
-  label: "Message",
+  label: "Anna Black",
   message: "How can we assist you today?",
   timestamp: "20 seconds ago",
   avatar_name: "Mike Bishop",
@@ -10,27 +10,20 @@
 <br><br>
 
 <%= pb_rails("message", props: {
-  label: "Support",
+  label: "Patrick Welch",
   message: "We'll escalate this issue to a Senior Support agent.",
   timestamp: "9 minutes ago",
-  avatar_name:"Wade Winningham",
-  avatar_url: "https://randomuser.me/api/portraits/men/14.jpg"
+  avatar_name: "Wade Winningham",
+  avatar_url: "https://randomuser.me/api/portraits/men/14.jpg",
+  align_timestamp: "left"
 }) %>
 
 <br><br>
 
 <%= pb_rails("message", props: {
-  message: "To processs your order, I'll need your full name.",
-  timestamp: "4 hours ago",
-  avatar_name: "Lisa Thompson",
-  avatar_url: "https://randomuser.me/api/portraits/women/39.jpg"
-}) %>
-
-<br><br>
-
-<%= pb_rails("message", props: {
-  label: "Application",
+  label: "Lucille Sanchez",
   message: "Application for Kate Smith is waiting for your approval",
+  timestamp: "4 hours ago",
   avatar_name: "Becca Jacobs",
   avatar_url: "https://randomuser.me/api/portraits/women/50.jpg"
 }) %>
@@ -38,7 +31,7 @@
 <br><br>
 
 <%= pb_rails("message", props: {
-  label: "Complaint",
+  label: "Beverly Reyes",
   message: "We're so sorry you had a bad experience!",
   timestamp: "2 days ago",
   avatar_name: "Tim Wenhold"
@@ -47,7 +40,37 @@
 <br><br>
 
 <%= pb_rails("message", props: {
-  label: "Support",
+  label: "Keith Craig",
   message: "Please hold for one moment, I'll check with my manager.",
   timestamp: "2 days ago"
 }) %>
+
+<br><br>
+
+<%= pb_rails("message", props: {
+  label: "",
+  message: "We're so sorry you had a bad experience!",
+  timestamp: "2 days ago",
+  avatar_name: "Tim Wenhold"
+}) %>
+
+<br><br>
+
+<%= pb_rails("message", props: {
+  label: "",
+  timestamp: "2 days ago",
+  avatar_name: "Tim Wenhold"
+}) do %>
+  <%= pb_rails("image", props: { alt: "picture of a misty forest", size: "xl", url: "https://unsplash.it/500/400/?image=634" }) %>
+<% end %>
+
+<br><br>
+
+<%= pb_rails("message", props: {
+  label: "",
+  message: "Please hold for one moment, I'll check with my manager.",
+  timestamp: "2 days ago",
+  avatar_name: "Tim Wenhold"
+}) do %>
+  <%= pb_rails("image", props: { alt: "picture of a misty forest", size: "xl", url: "https://unsplash.it/500/400/?image=634" }) %>
+<% end %>

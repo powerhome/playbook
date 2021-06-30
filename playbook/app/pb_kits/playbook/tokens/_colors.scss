@@ -243,6 +243,10 @@ $category_colors: (
 
 $transparent: transparent;
 
+@function tint($color, $percentage) {
+  @return mix($white, $color, $percentage);
+}
+
 @mixin gradient($start: $gradient_start, $end: $gradient_end) {
   background: $start;
   background: -moz-linear-gradient(-45deg,  $start 0%, $end 100%);

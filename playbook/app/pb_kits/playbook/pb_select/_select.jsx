@@ -2,21 +2,14 @@
 
 import React, { forwardRef } from 'react'
 import classnames from 'classnames'
-import {
-  Body,
-  Caption,
-  Icon,
-} from '../'
 
-import {
-  buildAriaProps,
-  buildCss,
-  buildDataProps,
-} from '../utilities/props'
-
-import { globalProps } from '../utilities/globalProps.js'
-
+import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
+import { globalProps } from '../utilities/globalProps'
 import type { InputCallback } from '../types'
+
+import Body from '../pb_body/_body'
+import Caption from '../pb_caption/_caption'
+import Icon from '../pb_icon/_icon'
 
 type SelectOption = {
   value: string,
@@ -126,17 +119,17 @@ const Select = ({
             {optionsList}
           </select>
         </If>
+        <Icon
+            className="pb_select_kit_caret"
+            fixedWidth
+            icon="angle-down"
+        />
         <If condition={error}>
           <Body
               status="negative"
               text={error}
           />
         </If>
-        <Icon
-            className="pb_select_kit_caret"
-            fixedWidth
-            icon="angle-down"
-        />
       </label>
     </div>
   )

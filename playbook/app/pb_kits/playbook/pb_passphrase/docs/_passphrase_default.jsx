@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
-import { Passphrase } from '../../'
+
+import Passphrase from '../_passphrase'
 
 const PassphraseDefault = (props) => {
   const [input, setInput] = useState('')

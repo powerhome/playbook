@@ -2,7 +2,12 @@
 
 import React, { useState } from 'react'
 import { find, map, partial } from 'lodash'
-import { Button, Icon, List, ListItem, PbReactPopover } from '../../'
+
+import Button from '../../pb_button/_button'
+import Icon from '../../pb_icon/_icon'
+import List from '../../pb_list/_list'
+import ListItem from '../../pb_list/_list_item'
+import PbReactPopover from '../../pb_popover/_popover'
 
 export type Direction = 'asc' | 'desc'
 export type SortOptions = { [name: string]: string }

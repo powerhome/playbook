@@ -1,5 +1,6 @@
 import React from 'react'
-import { LoadingInline } from '../../'
+
+import LoadingInline from '../_loading_inline'
 
 const LoadingInlineLight = (props) => {
   return (

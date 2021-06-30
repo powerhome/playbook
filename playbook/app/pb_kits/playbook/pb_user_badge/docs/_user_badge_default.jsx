@@ -1,5 +1,6 @@
 import React from 'react'
-import { UserBadge } from '../../'
+
+import UserBadge from '../_user_badge'
 
 const UserBadgeDefault = () => {
   return (

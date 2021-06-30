@@ -1,5 +1,6 @@
 import React from 'react'
-import { LabelPill } from '../../'
+
+import LabelPill from '../_label_pill'
 
 const LabelPillDefault = (props) => (
 

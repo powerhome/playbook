@@ -1,5 +1,6 @@
 import React from 'react'
-import { Source } from '../../'
+
+import Source from '../_source'
 
 const SourceNoicon = (props) => (
   <>

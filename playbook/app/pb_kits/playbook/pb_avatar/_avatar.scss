@@ -3,6 +3,7 @@
 @import "../tokens/typography";
 
 $avatar-sizes: (
+  "xxs":  20px,
   "xs":   28px,
   "sm":   38px,
   "md":   60px,
@@ -67,6 +68,10 @@ $avatar-sizes: (
         top: 0;
         bottom: auto;
         left: auto;
+
+        &.size_xxs {
+          right: -5px;
+        }
 
         &.size_xs {
           right: -4px;

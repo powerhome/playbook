@@ -1,5 +1,9 @@
 import React from 'react'
-import { Button, FormGroup, Typeahead } from '../../'
+
+import FormGroup from '../_form_group'
+
+import Button from '../../pb_button/_button'
+import Typeahead from '../../pb_typeahead/_typeahead'
 
 const FormGroupTypeahead = (props) => {
   const options = [

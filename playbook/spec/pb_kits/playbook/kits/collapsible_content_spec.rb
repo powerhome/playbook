@@ -14,8 +14,8 @@ RSpec.describe Playbook::PbCollapsible::CollapsibleContent do
 
   describe "#data" do
     it "returns expected data attributes", :aggregate_failures do
-      expect(subject.new({}).data).to eq ({collapsible_content: true})
-      expect(subject.new(data:{foo: "bar"}).data).to eq ({collapsible_content: true, foo: "bar"})
+      expect(subject.new({}).data).to eq(collapsible_content: true)
+      expect(subject.new(data: { foo: "bar" }).data).to eq(collapsible_content: true, foo: "bar")
     end
   end
 end

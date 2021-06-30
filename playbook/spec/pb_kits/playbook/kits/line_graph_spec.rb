@@ -24,17 +24,17 @@ RSpec.describe Playbook::PbLineGraph::LineGraph do
   describe "#chart_type" do
     it "returns the correct type based on truthiness of gradient", :aggregate_failures do
       expect(subject.new({}).chart_type).to eq "line"
-      expect(subject.new({gradient: false}).chart_type).to eq "line"
-      expect(subject.new({gradient: true}).chart_type).to eq "area"
+      expect(subject.new({ gradient: false }).chart_type).to eq "line"
+      expect(subject.new({ gradient: true }).chart_type).to eq "area"
     end
   end
 
   describe "#chart_options" do
     it "returns the correct options in a hash", :aggregate_failures do
-      expect(subject.new({gradient: true}).chart_options[:type]).to eq "area"
-      expect(subject.new({title: "New Chart"}).chart_options[:type]).to eq "line"
-      expect(subject.new({title: "New Chart"}).chart_options[:title]).to eq "New Chart"
-      expect(subject.new({point_start: 4}).chart_options[:pointStart]).to eq 4
+      expect(subject.new({ gradient: true }).chart_options[:type]).to eq "area"
+      expect(subject.new({ title: "New Chart" }).chart_options[:type]).to eq "line"
+      expect(subject.new({ title: "New Chart" }).chart_options[:title]).to eq "New Chart"
+      expect(subject.new({ point_start: 4 }).chart_options[:pointStart]).to eq 4
     end
   end
 end

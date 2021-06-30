@@ -1,9 +1,14 @@
 /* @flow */
+
 import React, { Node } from 'react'
 import classnames from 'classnames'
+
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
-import { globalProps } from '../utilities/globalProps.js'
-import { Checkbox, ListItem, Radio } from '..'
+import { globalProps } from '../utilities/globalProps'
+
+import Checkbox from '../pb_checkbox/_checkbox'
+import ListItem from '../pb_list/_list_item'
+import Radio from '../pb_radio/_radio'
 
 type SelectableListItemProps = {
   aria?: object,

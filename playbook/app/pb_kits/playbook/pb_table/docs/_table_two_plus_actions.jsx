@@ -1,6 +1,7 @@
 import React from 'react'
-import { Table } from '../..'
-import { CircleIconButton } from '../../'
+
+import Table from '../_table'
+import CircleIconButton from '../../pb_circle_icon_button/_circle_icon_button'
 
 const TableTwoPlusActions = (props) => {
   return (

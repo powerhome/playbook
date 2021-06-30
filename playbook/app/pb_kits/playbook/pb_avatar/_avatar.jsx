@@ -5,9 +5,10 @@ import classnames from 'classnames'
 import { map } from 'lodash'
 
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
-import { globalProps } from '../utilities/globalProps.js'
+import { globalProps } from '../utilities/globalProps'
 
-import { Image, OnlineStatus } from '../'
+import Image from '../pb_image/_image'
+import OnlineStatus from '../pb_online_status/_online_status'
 
 type AvatarProps = {
   aria?: object,
@@ -18,7 +19,7 @@ type AvatarProps = {
   imageAlt?: string,
   imageUrl: string,
   name: string,
-  size?: "md" | "lg" | "sm" | "xl" | "xs",
+  size?: "md" | "lg" | "sm" | "xl" | "xs" | "xxs",
   status: "away" | "offline" | "online",
 }
 

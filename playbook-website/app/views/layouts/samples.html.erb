@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Full Screen Examples</title>
+        <%= csrf_meta_tags %>
+        <%= csp_meta_tag %>
+        <meta content="user-scalable=0, initial-scale=1.0, minimum-scale=1" name="viewport"/>
+        <%= stylesheet_packs_with_chunks_tag 'application' %>
+    </head>
+    <body>
+      <%= render 'layouts/nav'%>
+      <%= render 'layouts/mobile_hamburger'%>
+      <%= pb_rails("layout/sidebar", props: { classname: "pb--page--sideNav non-kit"}) do %>
+        <%= render 'layouts/sidebar'%>
+      <% end %>
+      <div class="sample-layout">
+        <%= yield %>
+      </div>
+      <%= render 'layouts/footer'%>
+    </body>
+
+    <%= javascript_packs_with_chunks_tag 'application', 'samples', 'sample-show' %>
+    <%= yield :pb_js if @type != 'react' %>
+</html>

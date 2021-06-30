@@ -1,5 +1,8 @@
 import React, { useEffect } from 'react'
-import { Button, DatePicker } from '../../'
+
+import DatePicker from '../_date_picker'
+
+import Button from '../../pb_button/_button'
 
 const DatePickerFlatpickrMethods = () => {
   let fpInstance

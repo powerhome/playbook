@@ -2,10 +2,12 @@
 
 import React from 'react'
 import classnames from 'classnames'
-import DateTime from '../pb_kit/dateTime.js'
+
+import DateTime from '../pb_kit/dateTime'
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
-import { Caption } from '../'
-import { globalProps } from '../utilities/globalProps.js'
+import { globalProps } from '../utilities/globalProps'
+
+import Caption from '../pb_caption/_caption'
 
 type TimestampProps = {
   align?: "left" | "center" | "right",
@@ -82,8 +84,6 @@ const Timestamp = (props: TimestampProps) => {
     return `Last updated ${userDisplay} ${dateTimestamp.value.fromNow()}`
   }
 
-  const datetimeOrText = timestamp ? fullDateDisplay() : text
-
   const captionText = () => {
     switch (variant) {
     case 'updated':
@@ -91,7 +91,7 @@ const Timestamp = (props: TimestampProps) => {
     case 'elapsed':
       return formatElapsedString(userDisplay, timeDisplay)
     default:
-      return showDate ? datetimeOrText : fullTimeDisplay()
+      return showDate ? timestamp ? fullDateDisplay() : text : fullTimeDisplay()
     }
   }
 

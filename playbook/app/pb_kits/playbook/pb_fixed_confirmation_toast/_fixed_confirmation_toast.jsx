@@ -2,8 +2,11 @@
 
 import React, { useState } from 'react'
 import classnames from 'classnames'
-import { Icon, Title } from '../'
-import { globalProps } from '../utilities/globalProps.js'
+
+import { globalProps } from '../utilities/globalProps'
+
+import Icon from '../pb_icon/_icon'
+import Title from '../pb_title/_title'
 
 const iconMap = {
   success: 'check',

@@ -1,13 +1,22 @@
-
 /* @flow */
 
 import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import classnames from 'classnames'
+
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
 import { globalProps } from '../utilities/globalProps.js'
+
 import useZxcvbn from './useZxcvbn'
 import useHaveIBeenPwned from './useHaveIBeenPwned'
-import { Body, Caption, Flex, Icon, PbReactPopover, ProgressSimple, TextInput } from '../'
+
+import Body from '../pb_body/_body'
+import Caption from '../pb_caption/_caption'
+import CircleIconButton from '../pb_circle_icon_button/_circle_icon_button'
+import Flex from '../pb_flex/_flex'
+import Icon from '../pb_icon/_icon'
+import PbReactPopover from '../pb_popover/_popover'
+import ProgressSimple from '../pb_progress_simple/_progress_simple'
+import TextInput from '../pb_text_input/_text_input'
 
 type PassphraseProps = {
   aria?: object,
@@ -69,8 +78,15 @@ const Passphrase = (props: PassphraseProps) => {
 
   const [showPopover, setShowPopover] = useState(false)
   const toggleShowPopover = () => setShowPopover(!showPopover)
+  const handleShouldClosePopover = (shouldClosePopover) => {
+    setShowPopover(!shouldClosePopover)
+  }
+
   const [showPassphrase, setShowPassphrase] = useState(false)
-  const toggleShowPassphrase = () => setShowPassphrase(!showPassphrase)
+  const toggleShowPassphrase = (e) => {
+    e.preventDefault()
+    setShowPassphrase(!showPassphrase)
+  }
 
   const classes = classnames(buildCss('pb_passphrase'), globalProps(props), className)
 
@@ -85,7 +101,7 @@ const Passphrase = (props: PassphraseProps) => {
   }, [strength])
 
   const tipClass = classnames(
-    (dark ? 'dark' : null),
+    'passphrase-popover',
     (showTipsBelow === 'always' ? null : `show-below-${showTipsBelow}`),
   )
   const dataProps = useMemo(
@@ -94,17 +110,13 @@ const Passphrase = (props: PassphraseProps) => {
   )
 
   const popoverReference = (
-    <a
+    <CircleIconButton
         className={tipClass}
+        dark={dark}
+        icon="info-circle"
         onClick={toggleShowPopover}
-    >
-      <Icon
-          dark={dark}
-          icon="info-circle"
-          size="xs"
-          variant="link"
-      />
-    </a>
+        variant="link"
+    />
   )
 
   return (
@@ -122,8 +134,11 @@ const Passphrase = (props: PassphraseProps) => {
           />
           <If condition={tips.length > 0 && !confirmation}>
             <PbReactPopover
+                className="passphrase-tips"
+                closeOnClick="outside"
                 placement="right"
                 reference={popoverReference}
+                shouldClosePopover={handleShouldClosePopover}
                 show={showPopover}
             >
               <Flex

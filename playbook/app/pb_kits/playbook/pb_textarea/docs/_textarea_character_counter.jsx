@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
-import { Textarea } from '../../'
+
+import Textarea from '../_textarea'
 
 const TextareaCharacterCounter = (props) => {
   const [value1, setValue1] = useState('Counting characters!')

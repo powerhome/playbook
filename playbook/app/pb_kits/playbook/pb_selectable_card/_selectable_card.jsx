@@ -2,10 +2,9 @@
 
 import React from 'react'
 import classnames from 'classnames'
-import { Card, Checkbox, Flex, Icon, Radio } from '../'
 
 import type { InputCallback } from '../types'
-
+import { globalProps } from '../utilities/globalProps'
 import {
   buildAriaProps,
   buildCss,
@@ -13,7 +12,11 @@ import {
   noop,
 } from '../utilities/props'
 
-import { globalProps } from '../utilities/globalProps.js'
+import Icon from '../pb_icon/_icon'
+import Checkbox from '../pb_checkbox/_checkbox'
+import Card from '../pb_card/_card'
+import Flex from '../pb_flex/_flex'
+import Radio from '../pb_radio/_radio'
 
 type SelectableCardProps = {
   aria?: object,

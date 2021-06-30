@@ -2,10 +2,15 @@
 
 import React from 'react'
 import classnames from 'classnames'
+
 import DateTime from '../pb_kit/dateTime.js'
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
-import { Body, Caption, Icon, Title } from '../'
-import { globalProps } from '../utilities/globalProps.js'
+import { globalProps } from '../utilities/globalProps'
+
+import Body from '../pb_body/_body'
+import Caption from '../pb_caption/_caption'
+import Icon from '../pb_icon/_icon'
+import Title from '../pb_title/_title'
 
 const dateString = (value: DateTime) => {
   const month = value.toMonthNum()

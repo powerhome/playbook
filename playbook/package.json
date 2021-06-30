@@ -1,22 +1,22 @@
 {
   "name": "playbook-ui",
-  "version": "9.10.0",
+  "version": "9.19.0",
   "description": "Nitro's Design System",
   "main": "./dist/playbook-react.js",
   "scripts": {
-    "build": "./bin/webpack --profile --progress --max_old_space_size=8192 --env.development",
-    "build-dist": "RAILS_ENV=dist NODE_ENV=dist ./bin/webpack --profile --progress --max_old_space_size=8192",
     "flow": "flow",
-    "lint": "./node_modules/eslint/bin/eslint.js . --ext .js,.jsx",
-    "lint-fix": "./node_modules/eslint/bin/eslint.js . --ext .js,.jsx --fix",
+    "lint": "eslint . --ext .js,.jsx",
+    "lint-fix": "eslint . --ext .js,.jsx --fix",
     "test": "jest",
     "test-coverage": "jest --collectCoverage",
     "test-coverage-summary": "jest --collectCoverage --coverageReporters=\"json-summary\"",
-    "release": "webpack --env.production && node-sass --output-style compressed app/pb_kits/playbook/packs/site_styles/_scaffold.scss dist/reset.css"
+    "watch": "webpack --watch --mode=development",
+    "release": "webpack --mode=production"
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://github.com/powerhome/playbook.git"
+    "url": "git+ssh://github.com/powerhome/playbook.git",
+    "directory": "playbook"
   },
   "author": "powerhome",
   "license": "ISC",
@@ -45,7 +45,6 @@
     "@babel/preset-flow": "^7.12.1",
     "@babel/preset-react": "^7.12.5",
     "@popperjs/core": "^2.6.0",
-    "@rails/webpacker": "^4.3.0",
     "babel-eslint": "10.1.0",
     "babel-jest": "^26.6.3",
     "babel-loader": "^8.0.5",
@@ -53,18 +52,17 @@
     "babel-plugin-jsx-control-statements": "^4.0.0",
     "babel-plugin-transform-decorators-legacy": "^1.3.4",
     "babel-plugin-transform-flow-strip-types": "^6.22.0",
-    "babel-plugin-transform-react-remove-prop-types": "^0.4.23",
     "babel-preset-flow": "6.23.0",
     "classnames": "^2.2.6",
+    "core-js": "3",
     "flatpickr": "^4.6.6",
-    "highcharts": "^7.2.2",
+    "highcharts": "^9.0.0",
     "jsx-control-statements": "^3.2.8",
     "lazysizes": "^5.2.2",
     "lodash": "^4.17.19",
     "moment": "^2.29.1",
     "moment-strftime": "^0.5.0",
     "moment-timezone": "^0.5.26",
-    "rails-erb-loader": "^5.5.1",
     "react-animate-height": "^2.0.23",
     "react-dropzone": "^10.2.2",
     "react-highlight-words": "^0.16.0",
@@ -72,17 +70,14 @@
     "react-popper": "^2.1.0",
     "react-select": "3.0.8",
     "svg-url-loader": "^4.0.0",
-    "terser-webpack-plugin": "^3.1.0",
-    "trix": "^1.3.0",
-    "webpacker-react": "^0.3.2",
     "zxcvbn": "^4.4.2"
   },
   "devDependencies": {
-    "@actions/core": "1.2.6",
+    "@actions/core": "1.4.0",
     "@actions/github": "4.0.0",
-    "@testing-library/jest-dom": "5.11.6",
-    "@testing-library/react": "11.1.2",
-    "axe-core": "4.1.1",
+    "@testing-library/jest-dom": "5.14.1",
+    "@testing-library/react": "11.2.7",
+    "axe-core": "4.2.2",
     "circular-dependency-plugin": "5.2.2",
     "clean-webpack-plugin": "2.0.2",
     "copy-webpack-plugin": "6.2.1",
@@ -93,21 +88,22 @@
     "eslint-plugin-flowtype": "4.4.1",
     "eslint-plugin-jsx-control-statements": "2.2.1",
     "eslint-plugin-react": "git://github.com/rafbgarcia/eslint-plugin-react#fix-other-curly-brace-presence-edge-cases",
-    "flow-bin": "0.137.0",
+    "filemanager-webpack-plugin": "^4.0.0",
+    "flow-bin": "0.153.0",
     "flow-runtime": "0.14.0",
-    "husky": "3.1.0",
     "identity-obj-proxy": "3.0.0",
     "jest": "26.4.2",
     "jest-axe": "4.1.0",
-    "lint-staged": "10.5.0",
     "mini-css-extract-plugin": "0.12.0",
     "node-sass": "^4.12.0",
-    "prop-types": "15.6.2",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "sass-loader": "7.3.1",
+    "trix": "^1.3.0",
     "webpack": "^4.0.0",
-    "webpack-dev-server": "3.11.2"
+    "webpack-cli": "^3.3.12",
+    "webpack-dev-server": "3.11.2",
+    "webpacker-react": "^0.3.2"
   },
   "peerDependencies": {
     "react": "^16.8.6",
@@ -120,10 +116,5 @@
     "selfsigned": "^1.10.8",
     "set-value": "^2.0.1",
     "yargs-parser": "^13.1.2"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
   }
 }

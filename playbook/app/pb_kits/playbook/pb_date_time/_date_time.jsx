@@ -2,9 +2,13 @@
 
 import React from 'react'
 import classnames from 'classnames'
+
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
-import { globalProps } from '../utilities/globalProps.js'
-import {  Flex, Date as FormattedDate, Time } from '../'
+import { globalProps } from '../utilities/globalProps'
+
+import Flex from '../pb_flex/_flex'
+import Time from '../pb_time/_time'
+import FormattedDate from '../pb_date/_date'
 
 type DateTimeProps = {
   align?: "left" | "center" | "right",

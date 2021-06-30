@@ -17,6 +17,7 @@ require_relative "./props/numeric"
 require_relative "./props/percentage"
 require_relative "./props/proc"
 require_relative "./props/string"
+require_relative "./props/nested_props"
 
 module Playbook
   module Props
@@ -36,9 +37,6 @@ module Playbook
       self.class.props[name].value values[name]
     end
 
-    attr_accessor :values
-    private :values, :values=
-
     included do
       class_attribute :props, default: {}
     end
@@ -50,7 +48,7 @@ module Playbook
       end
 
       def prop(name, type: Playbook::Props::String, **options)
-        self.props = self.props.merge(name => type.new(options.merge(name: name, kit: self)))
+        self.props = props.merge(name => type.new(options.merge(name: name, kit: self)))
 
         define_method(name) { prop(name) }
       end

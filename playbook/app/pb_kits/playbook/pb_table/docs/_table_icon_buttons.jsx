@@ -1,6 +1,10 @@
 import React from 'react'
-import { Table } from '../..'
-import { CircleIconButton, Flex, FlexItem } from '../../'
+
+import Table from '../_table'
+
+import CircleIconButton from '../../pb_circle_icon_button/_circle_icon_button'
+import Flex from '../../pb_flex/_flex'
+import FlexItem from '../../pb_flex/_flex_item'
 
 const TableIconButtons = (props) => {
   return (

@@ -1,5 +1,6 @@
 import React from 'react'
-import { Image } from '../../'
+
+import Image from '../_image'
 
 const RoundedImage = (props) => {
   return (

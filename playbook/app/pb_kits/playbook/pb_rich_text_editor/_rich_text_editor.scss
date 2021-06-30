@@ -5,6 +5,7 @@
 @import "../tokens/typography";
 @import "../tokens/opacity";
 @import "../tokens/spacing";
+@import "../tokens/transition";
 @import "../pb_icon/icon";
 @import "./trix_styles";
 
@@ -226,6 +227,66 @@
     }
     .trix-button--dialog {
       color: $white;
+    }
+  }
+  &.toolbar-bottom {
+    trix-editor {
+      border-top-left-radius: 6px;
+      border-top-right-radius: 6px;
+      border-bottom: none;
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
+      &:empty:not(:focus)::before {
+        color: $neutral !important;
+      }
+    }
+    trix-toolbar .trix-button-row {
+      border-top: none;
+      border-top-left-radius: 0;
+      border-top-right-radius: 0;
+      border-bottom: 1px solid $border_light;
+      border-bottom-left-radius: 6px;
+      border-bottom-right-radius: 6px;
+    }
+    trix-toolbar {
+      display: grid;
+    }
+    &:focus, &:focus-within {
+      trix-toolbar .trix-button-row {
+        @include transition_default;
+        border-color: $primary;
+      }
+    }
+  }
+  &.inline {
+    &:hover {
+      trix-editor {
+        @include transition_default;
+        border-color: $border_light;
+        background-color: $white;
+        &+ trix-toolbar .trix-button-row {
+          transition: all 0.3s ease-in-out 0s;
+          opacity: 100;
+        }
+      }
+    }
+    trix-editor {
+      @include transition_default;
+      border-color: transparent;
+      background-color: transparent;
+      &+ trix-toolbar .trix-button-row  {
+        transition: all 0.3s ease-in-out 0s;
+        opacity: 0;
+      }
+      &:focus {
+        @include transition_default;
+        border-color: $primary;
+        background-color: $focus_input_light;
+        &+ trix-toolbar .trix-button-row  {
+          transition: all 0.3s ease-in-out 0s;
+          opacity: 100;
+        }
+      }
     }
   }
 }

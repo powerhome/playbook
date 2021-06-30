@@ -7,6 +7,12 @@ const AvatarNoImage = (props) => {
       <Avatar
           imageUrl="Just some text here"
           name="Terry Johnson"
+          size="xxs"
+          {...props}
+      />
+      <Avatar
+          imageUrl="Just some text here"
+          name="Terry Johnson"
           size="xs"
           {...props}
       />

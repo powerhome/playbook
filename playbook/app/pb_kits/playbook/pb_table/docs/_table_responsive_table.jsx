@@ -1,5 +1,7 @@
 import React from 'react'
-import { Table, Title } from '../../'
+
+import Table from '../_table'
+import Title from '../../pb_title/_title'
 
 const TableResponsiveTable = (props) => {
   return (

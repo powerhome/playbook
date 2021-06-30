@@ -12,7 +12,6 @@ module Playbook
                  values: %w[h1 h2 h3 h4 h5 h6 p div span],
                  default: "div"
 
-
       def classname
         generate_classname("pb_background_kit", image_classname, background_color_classname, separator: " ")
       end

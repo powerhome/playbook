@@ -1,5 +1,6 @@
 import React from 'react'
-import { DatePicker } from '../../'
+
+import DatePicker from '../_date_picker'
 
 const DatePickerMinMax = (props) => (
   <div>

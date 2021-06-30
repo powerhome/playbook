@@ -2,10 +2,12 @@
 
 import React, { useState } from 'react'
 import classnames from 'classnames'
+import Modal from 'react-modal'
+
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
 import { globalProps } from '../utilities/globalProps.js'
-import Modal from 'react-modal'
-import { Button } from '../'
+
+import Button from '../pb_button/_button'
 import DialogHeader  from './child_kits/_dialog_header'
 import DialogFooter from './child_kits/_dialog_footer'
 import DialogBody from './child_kits/_dialog_body'
@@ -26,6 +28,7 @@ type DialogProps = {
   onClose?: () => void,
   onConfirm?: () => void,
   opened: boolean,
+  portalClassName?: string,
   shouldCloseOnOverlayClick: boolean,
   size?: "sm" | "md" | "lg" | "content",
   text?: string,
@@ -48,6 +51,7 @@ const Dialog = (props: DialogProps) => {
     onCancel = () => {},
     onConfirm = () => {},
     onClose = () => {},
+    portalClassName,
     shouldCloseOnOverlayClick = true,
     text,
     title,
@@ -109,6 +113,7 @@ const Dialog = (props: DialogProps) => {
             isOpen={modalIsOpened}
             onRequestClose={onClose}
             overlayClassName={overlayClassNames}
+            portalClassName={portalClassName}
             shouldCloseOnOverlayClick={shouldCloseOnOverlayClick}
         >
           <If condition={title}>

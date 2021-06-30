@@ -1,5 +1,8 @@
 import React from 'react'
-import { Body, Image } from '../../'
+
+import Image from '../_image'
+
+import Body from '../../pb_body/_body'
 
 const CustomErrorImage = (props) => {
   return (

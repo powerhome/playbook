@@ -2,15 +2,16 @@
 
 import React from 'react'
 import classnames from 'classnames'
-import { Avatar, Icon } from '../'
 
 import {
   buildAriaProps,
   buildCss,
   buildDataProps,
 } from '../utilities/props'
-
 import { globalProps } from '../utilities/globalProps.js'
+
+import Avatar from '../pb_avatar/_avatar'
+import Icon from '../pb_icon/_icon'
 
 type AvatarActionButtonProps = {
   action?: string,

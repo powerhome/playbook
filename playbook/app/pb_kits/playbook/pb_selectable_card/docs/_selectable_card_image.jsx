@@ -1,9 +1,8 @@
 import React, { useState } from 'react'
-import {
-  Body,
-  Image,
-  SelectableCard,
-} from '../../'
+
+import Body from '../../pb_body/_body'
+import Image from '../../pb_image/_image'
+import SelectableCard from '../../pb_selectable_card/_selectable_card'
 
 const SelectableCardImage = (props) => {
   const [selectedImage, setSelectedImage] = useState(true)

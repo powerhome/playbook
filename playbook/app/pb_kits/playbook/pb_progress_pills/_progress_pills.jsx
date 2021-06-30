@@ -1,16 +1,13 @@
 /* @flow */
 
 import React from 'react'
-import { Body, Title } from '../'
 import classnames from 'classnames'
 
-import {
-  buildAriaProps,
-  buildCss,
-  buildDataProps,
-} from '../utilities/props'
+import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
+import { globalProps } from '../utilities/globalProps'
 
-import { globalProps } from '../utilities/globalProps.js'
+import Body from '../pb_body/_body'
+import Title from '../pb_title/_title'
 
 type ProgressPillsProps = {
   active?: number,

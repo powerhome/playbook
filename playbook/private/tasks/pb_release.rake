@@ -2,7 +2,7 @@
 
 namespace :pb_release do
   desc "Update the version number in preparation to release"
-  task version: :environment do
+  task :version do
     puts "\n"
     puts "*" * 20 + " Create New Playbook Release " + "*" * 20
     ack = "\nFirst, before creating a new version please make sure you are familiar with SemVer guidlines: "
@@ -28,26 +28,29 @@ namespace :pb_release do
 
       # Update version.rb
       version_rb = File.read("lib/playbook/version.rb")
-      new_version_rb = version_rb.gsub(/VERSION = "#{old_version}".freeze/, "VERSION = \"#{new_version}\".freeze")
+      old_version_rb = version_rb.gsub(/PREVIOUS_VERSION\s\=\s\"\w{1,3}.\w{1,3}.\w{1,3}\"/, "PREVIOUS_VERSION = \"#{old_version}\"")
+      new_version_rb = old_version_rb.gsub(/\sVERSION\s\=\s\"\w{1,3}.\w{1,3}.\w{1,3}\"/, " VERSION = \"#{new_version}\"")
       File.open("lib/playbook/version.rb", "w") { |file| file.puts new_version_rb }
       puts "Updated lib/playbook/version.rb"
 
-      # Update gemfile.lock
-      gemfile = File.read("Gemfile.lock")
-      new_gemfile = gemfile.gsub(/playbook_ui \(#{Regexp.escape(old_version)}\)/, "playbook_ui (#{new_version})")
-      File.open("Gemfile.lock", "w") { |file| file.puts new_gemfile }
+      `bundle`
       puts "Updated Gemfile.lock"
       puts "\n\n"
 
-      puts "\nCreating dist files"
-      `yarn release`
+      puts "\nLets create a tag..."
+      puts "\nWrite a brief tag release description. You can edit this later on GitHub."
+      description = STDIN.gets.chomp
+      puts "\nCreating Tag..."
+      `git tag -a #{new_version} -m "#{description || new_version}"`
+      puts "\nPushing Tag to GitHub..."
+      `git push origin #{new_version}`
 
       puts "Commit your changes and create a PR to merge to master"
     end
   end
 
-  desc "Publish to RubyGems, NPM, and Create a Tag"
-  task push: :environment do
+  desc "Publish to RubyGems & NPM"
+  task :push do
     version = Playbook::VERSION
     puts "You about to release version #{version}. Is that correct? (y/N)"
     input = STDIN.gets.chomp
@@ -55,9 +58,7 @@ namespace :pb_release do
 
     # NPM
     puts "\nGenerating distribution files"
-    `docker-compose run web yarn release`
-    puts "\nOrganizing distribution files"
-    `rm dist/playbook-rails.css && rm dist/playbook-doc.css && mv dist/playbook-react.css dist/playbook.css`
+    `yarn release`
     puts "\nCreating NPM package..."
     `npm pack`
     puts "\nPublishing to NPM..."
@@ -74,14 +75,7 @@ namespace :pb_release do
     `rm -rf playbook_ui-*.gem`
 
     # Tags
-    puts "\nPushed to NPM. Now lets create a tag..."
-    puts "\nWrite a brief tag release description. You can edit this later on GitHub."
-    description = STDIN.gets.chomp
-    puts "\nCreating Tag..."
-    `git tag -a #{version} -m "#{description}"`
-    puts "\nPushing Tag to GitHub..."
-    `git push origin #{version}`
-
+    puts "\nPushed to NPM."
     puts "\n\n"
     puts "Complete! Don't forget to add your release notes https://github.com/powerhome/playbook/releases/tag/#{version}"
   end

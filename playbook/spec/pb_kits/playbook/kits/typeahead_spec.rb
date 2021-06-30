@@ -6,18 +6,23 @@ RSpec.describe Playbook::PbTypeahead::Typeahead do
   subject { Playbook::PbTypeahead::Typeahead }
 
   it { is_expected.to define_boolean_prop(:async).with_default(false) }
-  it { is_expected.to define_prop(:default_options)
-                      .of_type(Playbook::Props::HashArray)
-                      .with_default([]) }
+  it {
+    is_expected.to define_prop(:default_options)
+      .of_type(Playbook::Props::HashArray)
+      .with_default([])
+  }
   it { is_expected.to define_prop(:get_option_label) }
   it { is_expected.to define_prop(:get_option_value) }
   it { is_expected.to define_prop(:id) }
+  it { is_expected.to define_prop(:inline).with_default(false) }
   it { is_expected.to define_prop(:label) }
   it { is_expected.to define_prop(:load_options) }
   it { is_expected.to define_prop(:name) }
-  it { is_expected.to define_prop(:options)
-                      .of_type(Playbook::Props::HashArray)
-                      .with_default([]) }
+  it {
+    is_expected.to define_prop(:options)
+      .of_type(Playbook::Props::HashArray)
+      .with_default([])
+  }
   it { is_expected.to define_boolean_prop(:pills).with_default(false) }
   it { is_expected.to define_prop(:placeholder) }
   it { is_expected.to define_prop(:search_term_minimum_length).with_default(3) }
