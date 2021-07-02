@@ -8,3 +8,4 @@ examples:
   react:
   - multiple_users_default: Default
   - multiple_users_reverse: Reverse
+  - multiple_users_size: Size
