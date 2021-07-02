@@ -1,6 +1,6 @@
 {
   "name": "playbook-ui",
-  "version": "9.19.0",
+  "version": "10.0.0",
   "description": "Nitro's Design System",
   "main": "./dist/playbook-react.js",
   "scripts": {
