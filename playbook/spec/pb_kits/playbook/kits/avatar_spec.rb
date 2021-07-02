@@ -15,7 +15,7 @@ RSpec.describe Playbook::PbAvatar::Avatar do
   it {
     is_expected.to define_enum_prop(:size)
       .with_default("md")
-      .with_values("xxs", "xs", "sm", "md", "base", "lg", "xl")
+      .with_values("xs", "sm", "md", "base", "lg", "xl")
   }
   describe "#classname" do
     it "returns namespaced class name", :aggregate_failures do
