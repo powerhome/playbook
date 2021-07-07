@@ -2,7 +2,7 @@ import React from 'react'
 import { RichTextEditor } from '../../'
 
 const RichTextEditorDefault = (props) => (
-  <div style={{ display: 'flex' }}>
+  <div>
     <RichTextEditor
         {...props}
     />
