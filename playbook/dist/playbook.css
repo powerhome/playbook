@@ -16013,7 +16013,7 @@ trix-editor .attachment__metadata .attachment__size {
   overflow-x: auto; }
 
 [class^=pb_rich_text_editor_kit] {
-  width: 100%; }
+  overflow-x: auto; }
   [class^=pb_rich_text_editor_kit] trix-toolbar [data-trix-button-group="file-tools"] {
     display: none; }
   [class^=pb_rich_text_editor_kit].simple [data-trix-button-group="history-tools"] {
