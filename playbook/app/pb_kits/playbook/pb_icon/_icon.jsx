@@ -9,6 +9,7 @@ type IconProps = {
   aria?: object,
   border?: boolean,
   className?: string,
+  customIcon?: SVGElement,
   data?: object,
   fixedWidth?: boolean,
   flip?: "horizontal" | "vertical" | "both" | "none",
@@ -46,6 +47,7 @@ const Icon = (props: IconProps) => {
     aria = {},
     border = false,
     className,
+    customIcon,
     data = {},
     fixedWidth = true,
     flip = false,
@@ -59,22 +61,29 @@ const Icon = (props: IconProps) => {
     size,
     spin = false,
   } = props
+
+  const faClasses = {
+    'fa-border': border,
+    'fa-fw': fixedWidth,
+    'fa-inverse': inverse,
+    'fa-li': listItem,
+    'fa-pulse': pulse,
+    'fa-spin': spin,
+    [`fa-${size}`]: size,
+    [`fa-pull-${pull}`]: pull,
+    [`fa-rotate-${rotation}`]: rotation,
+  }
+
+  // Lets check and see if the icon prop is referring to a custom Power icon...
+  // If so, then set fa-icon to "custom"
+  // this ensures the JS will not do any further operations
+  faClasses[`fa-${icon}`] = customIcon ? 'custom' : icon
+
   const classes = classnames(
     flipMap[flip],
     'pb_icon_kit',
     'far',
-    {
-      'fa-border': border,
-      'fa-fw': fixedWidth,
-      'fa-inverse': inverse,
-      'fa-li': listItem,
-      'fa-pulse': pulse,
-      'fa-spin': spin,
-      [`fa-${icon}`]: icon,
-      [`fa-${size}`]: size,
-      [`fa-pull-${pull}`]: pull,
-      [`fa-rotate-${rotation}`]: rotation,
-    },
+    faClasses,
     globalProps(props),
     className
   )
@@ -83,17 +92,28 @@ const Icon = (props: IconProps) => {
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
 
+  // Add a conditional here to show only the SVG if custom
   return (
     <>
-      <i
-          {...dataProps}
-          className={classes}
-          id={id}
-      />
-      <span
-          {...ariaProps}
-          hidden
-      />
+      <If condition={customIcon}>
+        {
+          React.cloneElement(customIcon, {
+            ...dataProps,
+            className: classes,
+            id,
+          })
+        }
+        <Else />
+        <i
+            {...dataProps}
+            className={classes}
+            id={id}
+        />
+        <span
+            {...ariaProps}
+            hidden
+        />
+      </If>
     </>
   )
 }
