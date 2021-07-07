@@ -1,3 +1,9 @@
 [class^=pb_icon_kit]{
 
 }
+
+[class^=pb_custom_icon_wrapper] {
+  svg path {
+    fill: currentColor;
+  }
+}

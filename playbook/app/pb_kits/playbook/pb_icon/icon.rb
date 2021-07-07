@@ -30,7 +30,8 @@ module Playbook
       prop :spin, type: Playbook::Props::Boolean,
                   default: false
 
-      prop :custom_svg, default: nil
+      prop :custom_icon, type: Playbook::Props::String,
+                         default: nil
 
       def classname
         generate_classname(
@@ -49,6 +50,27 @@ module Playbook
           spin_class,
           separator: " "
         )
+      end
+
+      def custom_icon_classname
+        generate_classname(
+          "pb_icon_kit",
+          border_class,
+          fixed_width_class,
+          flip_class,
+          inverse_class,
+          list_item_class,
+          pull_class,
+          pulse_class,
+          rotation_class,
+          size_class,
+          spin_class,
+          separator: " "
+        )
+      end
+
+      def render_svg(path)
+        raw URI.open(path).read if File.extname(path) == ".svg"
       end
 
     private
