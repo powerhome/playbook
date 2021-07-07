@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require "open-uri"
+
 module Playbook
   module PbIcon
     class Icon < Playbook::KitBase
@@ -70,7 +72,7 @@ module Playbook
       end
 
       def render_svg(path)
-        raw URI.open(path).read if File.extname(path) == ".svg"
+        raw open(path).read if File.extname(path) == ".svg" # rubocop:disable Security/Open
       end
 
     private

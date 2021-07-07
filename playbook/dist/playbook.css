@@ -2659,6 +2659,64 @@ Background colors ------------------*/
 /* Non_Standard Font Weights */
 [class^=pb_avatar_kit] {
   position: relative; }
+  [class^=pb_avatar_kit][class*=_xxs], [class^=pb_avatar_kit][class*=_xxs_thumb] {
+    width: 20px;
+    height: 20px;
+    object-fit: cover;
+    position: relative;
+    flex-shrink: 0;
+    flex-grow: 0;
+    flex-basis: 20px; }
+    [class^=pb_avatar_kit][class*=_xxs] .avatar_wrapper, [class^=pb_avatar_kit][class*=_xxs_thumb] .avatar_wrapper {
+      width: 20px;
+      height: 20px;
+      object-fit: cover;
+      border-radius: 1000px;
+      background: #C1CDD6;
+      overflow: hidden;
+      position: relative;
+      flex-shrink: 0;
+      flex-grow: 0;
+      flex-basis: 20px; }
+      [class^=pb_avatar_kit][class*=_xxs] .avatar_wrapper::before, [class^=pb_avatar_kit][class*=_xxs_thumb] .avatar_wrapper::before {
+        content: attr(data-initials);
+        width: 100%;
+        height: 100%;
+        display: block;
+        color: #FFFFFF;
+        text-align: center;
+        font-size: 7.6px;
+        line-height: 20px;
+        text-transform: uppercase;
+        position: relative; }
+      [class^=pb_avatar_kit][class*=_xxs] .avatar_wrapper img, [class^=pb_avatar_kit][class*=_xxs_thumb] .avatar_wrapper img {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        border-radius: 1000px;
+        object-fit: cover;
+        display: block; }
+    [class^=pb_avatar_kit][class*=_xxs] [class^=pb_online_status], [class^=pb_avatar_kit][class*=_xxs_thumb] [class^=pb_online_status] {
+      position: absolute;
+      right: 0;
+      top: 0;
+      bottom: auto;
+      left: auto; }
+      [class^=pb_avatar_kit][class*=_xxs] [class^=pb_online_status].size_xxs, [class^=pb_avatar_kit][class*=_xxs_thumb] [class^=pb_online_status].size_xxs {
+        right: -5px; }
+      [class^=pb_avatar_kit][class*=_xxs] [class^=pb_online_status].size_xs, [class^=pb_avatar_kit][class*=_xxs_thumb] [class^=pb_online_status].size_xs {
+        right: -4px; }
+      [class^=pb_avatar_kit][class*=_xxs] [class^=pb_online_status].size_md, [class^=pb_avatar_kit][class*=_xxs_thumb] [class^=pb_online_status].size_md {
+        top: auto;
+        bottom: 6px; }
+      [class^=pb_avatar_kit][class*=_xxs] [class^=pb_online_status].size_lg, [class^=pb_avatar_kit][class*=_xxs_thumb] [class^=pb_online_status].size_lg {
+        top: auto;
+        bottom: 14px; }
+      [class^=pb_avatar_kit][class*=_xxs] [class^=pb_online_status].size_xl, [class^=pb_avatar_kit][class*=_xxs_thumb] [class^=pb_online_status].size_xl {
+        top: auto;
+        bottom: 22px; }
   [class^=pb_avatar_kit][class*=_xs], [class^=pb_avatar_kit][class*=_xs_thumb] {
     width: 28px;
     height: 28px;
@@ -2704,6 +2762,8 @@ Background colors ------------------*/
       top: 0;
       bottom: auto;
       left: auto; }
+      [class^=pb_avatar_kit][class*=_xs] [class^=pb_online_status].size_xxs, [class^=pb_avatar_kit][class*=_xs_thumb] [class^=pb_online_status].size_xxs {
+        right: -5px; }
       [class^=pb_avatar_kit][class*=_xs] [class^=pb_online_status].size_xs, [class^=pb_avatar_kit][class*=_xs_thumb] [class^=pb_online_status].size_xs {
         right: -4px; }
       [class^=pb_avatar_kit][class*=_xs] [class^=pb_online_status].size_md, [class^=pb_avatar_kit][class*=_xs_thumb] [class^=pb_online_status].size_md {
@@ -2760,6 +2820,8 @@ Background colors ------------------*/
       top: 0;
       bottom: auto;
       left: auto; }
+      [class^=pb_avatar_kit][class*=_sm] [class^=pb_online_status].size_xxs, [class^=pb_avatar_kit][class*=_sm_thumb] [class^=pb_online_status].size_xxs {
+        right: -5px; }
       [class^=pb_avatar_kit][class*=_sm] [class^=pb_online_status].size_xs, [class^=pb_avatar_kit][class*=_sm_thumb] [class^=pb_online_status].size_xs {
         right: -4px; }
       [class^=pb_avatar_kit][class*=_sm] [class^=pb_online_status].size_md, [class^=pb_avatar_kit][class*=_sm_thumb] [class^=pb_online_status].size_md {
@@ -2816,6 +2878,8 @@ Background colors ------------------*/
       top: 0;
       bottom: auto;
       left: auto; }
+      [class^=pb_avatar_kit][class*=_md] [class^=pb_online_status].size_xxs, [class^=pb_avatar_kit][class*=_md_thumb] [class^=pb_online_status].size_xxs {
+        right: -5px; }
       [class^=pb_avatar_kit][class*=_md] [class^=pb_online_status].size_xs, [class^=pb_avatar_kit][class*=_md_thumb] [class^=pb_online_status].size_xs {
         right: -4px; }
       [class^=pb_avatar_kit][class*=_md] [class^=pb_online_status].size_md, [class^=pb_avatar_kit][class*=_md_thumb] [class^=pb_online_status].size_md {
@@ -2872,6 +2936,8 @@ Background colors ------------------*/
       top: 0;
       bottom: auto;
       left: auto; }
+      [class^=pb_avatar_kit][class*=_base] [class^=pb_online_status].size_xxs, [class^=pb_avatar_kit][class*=_base_thumb] [class^=pb_online_status].size_xxs {
+        right: -5px; }
       [class^=pb_avatar_kit][class*=_base] [class^=pb_online_status].size_xs, [class^=pb_avatar_kit][class*=_base_thumb] [class^=pb_online_status].size_xs {
         right: -4px; }
       [class^=pb_avatar_kit][class*=_base] [class^=pb_online_status].size_md, [class^=pb_avatar_kit][class*=_base_thumb] [class^=pb_online_status].size_md {
@@ -2928,6 +2994,8 @@ Background colors ------------------*/
       top: 0;
       bottom: auto;
       left: auto; }
+      [class^=pb_avatar_kit][class*=_lg] [class^=pb_online_status].size_xxs, [class^=pb_avatar_kit][class*=_lg_thumb] [class^=pb_online_status].size_xxs {
+        right: -5px; }
       [class^=pb_avatar_kit][class*=_lg] [class^=pb_online_status].size_xs, [class^=pb_avatar_kit][class*=_lg_thumb] [class^=pb_online_status].size_xs {
         right: -4px; }
       [class^=pb_avatar_kit][class*=_lg] [class^=pb_online_status].size_md, [class^=pb_avatar_kit][class*=_lg_thumb] [class^=pb_online_status].size_md {
@@ -2984,6 +3052,8 @@ Background colors ------------------*/
       top: 0;
       bottom: auto;
       left: auto; }
+      [class^=pb_avatar_kit][class*=_xl] [class^=pb_online_status].size_xxs, [class^=pb_avatar_kit][class*=_xl_thumb] [class^=pb_online_status].size_xxs {
+        right: -5px; }
       [class^=pb_avatar_kit][class*=_xl] [class^=pb_online_status].size_xs, [class^=pb_avatar_kit][class*=_xl_thumb] [class^=pb_online_status].size_xs {
         right: -4px; }
       [class^=pb_avatar_kit][class*=_xl] [class^=pb_online_status].size_md, [class^=pb_avatar_kit][class*=_xl_thumb] [class^=pb_online_status].size_md {
@@ -3001,6 +3071,46 @@ Background colors ------------------*/
 
 [class^=pb_avatar_action_button_kit][class*=_remove] a {
   color: #FF2229; }
+
+[class^=pb_avatar_action_button_kit][class*=_xxs] {
+  position: relative;
+  width: 25px;
+  height: 22px;
+  display: flex; }
+  [class^=pb_avatar_action_button_kit][class*=_xxs] [class^=pb_tooltip_kit] {
+    justify-self: center; }
+  [class^=pb_avatar_action_button_kit][class*=_xxs][class*=_bottom] .icon {
+    width: 10px;
+    height: 10px;
+    position: absolute;
+    background-color: #FFFFFF;
+    border-radius: 10px;
+    font-size: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+    top: 12.7px; }
+    [class^=pb_avatar_action_button_kit][class*=_xxs][class*=_bottom] .icon.dark {
+      background-color: #0a0527; }
+  [class^=pb_avatar_action_button_kit][class*=_xxs][class*=_top] .icon {
+    width: 10px;
+    height: 10px;
+    position: absolute;
+    background-color: #FFFFFF;
+    border-radius: 10px;
+    font-size: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+    bottom: 12.7px; }
+    [class^=pb_avatar_action_button_kit][class*=_xxs][class*=_top] .icon.dark {
+      background-color: #0a0527; }
+  [class^=pb_avatar_action_button_kit][class*=_xxs][class*=_right] .icon {
+    left: 15px; }
+  [class^=pb_avatar_action_button_kit][class*=_xxs][class*=_left] [class^=pb_avatar_kit] {
+    padding-left: 5px; }
 
 [class^=pb_avatar_action_button_kit][class*=_xs] {
   position: relative;
@@ -7349,6 +7459,64 @@ Background colors ------------------*/
 /* Non_Standard Font Weights */
 [class^=pb_avatar_kit] {
   position: relative; }
+  [class^=pb_avatar_kit][class*=_xxs], [class^=pb_avatar_kit][class*=_xxs_thumb] {
+    width: 20px;
+    height: 20px;
+    object-fit: cover;
+    position: relative;
+    flex-shrink: 0;
+    flex-grow: 0;
+    flex-basis: 20px; }
+    [class^=pb_avatar_kit][class*=_xxs] .avatar_wrapper, [class^=pb_avatar_kit][class*=_xxs_thumb] .avatar_wrapper {
+      width: 20px;
+      height: 20px;
+      object-fit: cover;
+      border-radius: 1000px;
+      background: #C1CDD6;
+      overflow: hidden;
+      position: relative;
+      flex-shrink: 0;
+      flex-grow: 0;
+      flex-basis: 20px; }
+      [class^=pb_avatar_kit][class*=_xxs] .avatar_wrapper::before, [class^=pb_avatar_kit][class*=_xxs_thumb] .avatar_wrapper::before {
+        content: attr(data-initials);
+        width: 100%;
+        height: 100%;
+        display: block;
+        color: #FFFFFF;
+        text-align: center;
+        font-size: 7.6px;
+        line-height: 20px;
+        text-transform: uppercase;
+        position: relative; }
+      [class^=pb_avatar_kit][class*=_xxs] .avatar_wrapper img, [class^=pb_avatar_kit][class*=_xxs_thumb] .avatar_wrapper img {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        border-radius: 1000px;
+        object-fit: cover;
+        display: block; }
+    [class^=pb_avatar_kit][class*=_xxs] [class^=pb_online_status], [class^=pb_avatar_kit][class*=_xxs_thumb] [class^=pb_online_status] {
+      position: absolute;
+      right: 0;
+      top: 0;
+      bottom: auto;
+      left: auto; }
+      [class^=pb_avatar_kit][class*=_xxs] [class^=pb_online_status].size_xxs, [class^=pb_avatar_kit][class*=_xxs_thumb] [class^=pb_online_status].size_xxs {
+        right: -5px; }
+      [class^=pb_avatar_kit][class*=_xxs] [class^=pb_online_status].size_xs, [class^=pb_avatar_kit][class*=_xxs_thumb] [class^=pb_online_status].size_xs {
+        right: -4px; }
+      [class^=pb_avatar_kit][class*=_xxs] [class^=pb_online_status].size_md, [class^=pb_avatar_kit][class*=_xxs_thumb] [class^=pb_online_status].size_md {
+        top: auto;
+        bottom: 6px; }
+      [class^=pb_avatar_kit][class*=_xxs] [class^=pb_online_status].size_lg, [class^=pb_avatar_kit][class*=_xxs_thumb] [class^=pb_online_status].size_lg {
+        top: auto;
+        bottom: 14px; }
+      [class^=pb_avatar_kit][class*=_xxs] [class^=pb_online_status].size_xl, [class^=pb_avatar_kit][class*=_xxs_thumb] [class^=pb_online_status].size_xl {
+        top: auto;
+        bottom: 22px; }
   [class^=pb_avatar_kit][class*=_xs], [class^=pb_avatar_kit][class*=_xs_thumb] {
     width: 28px;
     height: 28px;
@@ -7394,6 +7562,8 @@ Background colors ------------------*/
       top: 0;
       bottom: auto;
       left: auto; }
+      [class^=pb_avatar_kit][class*=_xs] [class^=pb_online_status].size_xxs, [class^=pb_avatar_kit][class*=_xs_thumb] [class^=pb_online_status].size_xxs {
+        right: -5px; }
       [class^=pb_avatar_kit][class*=_xs] [class^=pb_online_status].size_xs, [class^=pb_avatar_kit][class*=_xs_thumb] [class^=pb_online_status].size_xs {
         right: -4px; }
       [class^=pb_avatar_kit][class*=_xs] [class^=pb_online_status].size_md, [class^=pb_avatar_kit][class*=_xs_thumb] [class^=pb_online_status].size_md {
@@ -7450,6 +7620,8 @@ Background colors ------------------*/
       top: 0;
       bottom: auto;
       left: auto; }
+      [class^=pb_avatar_kit][class*=_sm] [class^=pb_online_status].size_xxs, [class^=pb_avatar_kit][class*=_sm_thumb] [class^=pb_online_status].size_xxs {
+        right: -5px; }
       [class^=pb_avatar_kit][class*=_sm] [class^=pb_online_status].size_xs, [class^=pb_avatar_kit][class*=_sm_thumb] [class^=pb_online_status].size_xs {
         right: -4px; }
       [class^=pb_avatar_kit][class*=_sm] [class^=pb_online_status].size_md, [class^=pb_avatar_kit][class*=_sm_thumb] [class^=pb_online_status].size_md {
@@ -7506,6 +7678,8 @@ Background colors ------------------*/
       top: 0;
       bottom: auto;
       left: auto; }
+      [class^=pb_avatar_kit][class*=_md] [class^=pb_online_status].size_xxs, [class^=pb_avatar_kit][class*=_md_thumb] [class^=pb_online_status].size_xxs {
+        right: -5px; }
       [class^=pb_avatar_kit][class*=_md] [class^=pb_online_status].size_xs, [class^=pb_avatar_kit][class*=_md_thumb] [class^=pb_online_status].size_xs {
         right: -4px; }
       [class^=pb_avatar_kit][class*=_md] [class^=pb_online_status].size_md, [class^=pb_avatar_kit][class*=_md_thumb] [class^=pb_online_status].size_md {
@@ -7562,6 +7736,8 @@ Background colors ------------------*/
       top: 0;
       bottom: auto;
       left: auto; }
+      [class^=pb_avatar_kit][class*=_base] [class^=pb_online_status].size_xxs, [class^=pb_avatar_kit][class*=_base_thumb] [class^=pb_online_status].size_xxs {
+        right: -5px; }
       [class^=pb_avatar_kit][class*=_base] [class^=pb_online_status].size_xs, [class^=pb_avatar_kit][class*=_base_thumb] [class^=pb_online_status].size_xs {
         right: -4px; }
       [class^=pb_avatar_kit][class*=_base] [class^=pb_online_status].size_md, [class^=pb_avatar_kit][class*=_base_thumb] [class^=pb_online_status].size_md {
@@ -7618,6 +7794,8 @@ Background colors ------------------*/
       top: 0;
       bottom: auto;
       left: auto; }
+      [class^=pb_avatar_kit][class*=_lg] [class^=pb_online_status].size_xxs, [class^=pb_avatar_kit][class*=_lg_thumb] [class^=pb_online_status].size_xxs {
+        right: -5px; }
       [class^=pb_avatar_kit][class*=_lg] [class^=pb_online_status].size_xs, [class^=pb_avatar_kit][class*=_lg_thumb] [class^=pb_online_status].size_xs {
         right: -4px; }
       [class^=pb_avatar_kit][class*=_lg] [class^=pb_online_status].size_md, [class^=pb_avatar_kit][class*=_lg_thumb] [class^=pb_online_status].size_md {
@@ -7674,6 +7852,8 @@ Background colors ------------------*/
       top: 0;
       bottom: auto;
       left: auto; }
+      [class^=pb_avatar_kit][class*=_xl] [class^=pb_online_status].size_xxs, [class^=pb_avatar_kit][class*=_xl_thumb] [class^=pb_online_status].size_xxs {
+        right: -5px; }
       [class^=pb_avatar_kit][class*=_xl] [class^=pb_online_status].size_xs, [class^=pb_avatar_kit][class*=_xl_thumb] [class^=pb_online_status].size_xs {
         right: -4px; }
       [class^=pb_avatar_kit][class*=_xl] [class^=pb_online_status].size_md, [class^=pb_avatar_kit][class*=_xl_thumb] [class^=pb_online_status].size_md {
@@ -10746,6 +10926,64 @@ Background colors ------------------*/
 /* Non_Standard Font Weights */
 [class^=pb_avatar_kit] {
   position: relative; }
+  [class^=pb_avatar_kit][class*=_xxs], [class^=pb_avatar_kit][class*=_xxs_thumb] {
+    width: 20px;
+    height: 20px;
+    object-fit: cover;
+    position: relative;
+    flex-shrink: 0;
+    flex-grow: 0;
+    flex-basis: 20px; }
+    [class^=pb_avatar_kit][class*=_xxs] .avatar_wrapper, [class^=pb_avatar_kit][class*=_xxs_thumb] .avatar_wrapper {
+      width: 20px;
+      height: 20px;
+      object-fit: cover;
+      border-radius: 1000px;
+      background: #C1CDD6;
+      overflow: hidden;
+      position: relative;
+      flex-shrink: 0;
+      flex-grow: 0;
+      flex-basis: 20px; }
+      [class^=pb_avatar_kit][class*=_xxs] .avatar_wrapper::before, [class^=pb_avatar_kit][class*=_xxs_thumb] .avatar_wrapper::before {
+        content: attr(data-initials);
+        width: 100%;
+        height: 100%;
+        display: block;
+        color: #FFFFFF;
+        text-align: center;
+        font-size: 7.6px;
+        line-height: 20px;
+        text-transform: uppercase;
+        position: relative; }
+      [class^=pb_avatar_kit][class*=_xxs] .avatar_wrapper img, [class^=pb_avatar_kit][class*=_xxs_thumb] .avatar_wrapper img {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        border-radius: 1000px;
+        object-fit: cover;
+        display: block; }
+    [class^=pb_avatar_kit][class*=_xxs] [class^=pb_online_status], [class^=pb_avatar_kit][class*=_xxs_thumb] [class^=pb_online_status] {
+      position: absolute;
+      right: 0;
+      top: 0;
+      bottom: auto;
+      left: auto; }
+      [class^=pb_avatar_kit][class*=_xxs] [class^=pb_online_status].size_xxs, [class^=pb_avatar_kit][class*=_xxs_thumb] [class^=pb_online_status].size_xxs {
+        right: -5px; }
+      [class^=pb_avatar_kit][class*=_xxs] [class^=pb_online_status].size_xs, [class^=pb_avatar_kit][class*=_xxs_thumb] [class^=pb_online_status].size_xs {
+        right: -4px; }
+      [class^=pb_avatar_kit][class*=_xxs] [class^=pb_online_status].size_md, [class^=pb_avatar_kit][class*=_xxs_thumb] [class^=pb_online_status].size_md {
+        top: auto;
+        bottom: 6px; }
+      [class^=pb_avatar_kit][class*=_xxs] [class^=pb_online_status].size_lg, [class^=pb_avatar_kit][class*=_xxs_thumb] [class^=pb_online_status].size_lg {
+        top: auto;
+        bottom: 14px; }
+      [class^=pb_avatar_kit][class*=_xxs] [class^=pb_online_status].size_xl, [class^=pb_avatar_kit][class*=_xxs_thumb] [class^=pb_online_status].size_xl {
+        top: auto;
+        bottom: 22px; }
   [class^=pb_avatar_kit][class*=_xs], [class^=pb_avatar_kit][class*=_xs_thumb] {
     width: 28px;
     height: 28px;
@@ -10791,6 +11029,8 @@ Background colors ------------------*/
       top: 0;
       bottom: auto;
       left: auto; }
+      [class^=pb_avatar_kit][class*=_xs] [class^=pb_online_status].size_xxs, [class^=pb_avatar_kit][class*=_xs_thumb] [class^=pb_online_status].size_xxs {
+        right: -5px; }
       [class^=pb_avatar_kit][class*=_xs] [class^=pb_online_status].size_xs, [class^=pb_avatar_kit][class*=_xs_thumb] [class^=pb_online_status].size_xs {
         right: -4px; }
       [class^=pb_avatar_kit][class*=_xs] [class^=pb_online_status].size_md, [class^=pb_avatar_kit][class*=_xs_thumb] [class^=pb_online_status].size_md {
@@ -10847,6 +11087,8 @@ Background colors ------------------*/
       top: 0;
       bottom: auto;
       left: auto; }
+      [class^=pb_avatar_kit][class*=_sm] [class^=pb_online_status].size_xxs, [class^=pb_avatar_kit][class*=_sm_thumb] [class^=pb_online_status].size_xxs {
+        right: -5px; }
       [class^=pb_avatar_kit][class*=_sm] [class^=pb_online_status].size_xs, [class^=pb_avatar_kit][class*=_sm_thumb] [class^=pb_online_status].size_xs {
         right: -4px; }
       [class^=pb_avatar_kit][class*=_sm] [class^=pb_online_status].size_md, [class^=pb_avatar_kit][class*=_sm_thumb] [class^=pb_online_status].size_md {
@@ -10903,6 +11145,8 @@ Background colors ------------------*/
       top: 0;
       bottom: auto;
       left: auto; }
+      [class^=pb_avatar_kit][class*=_md] [class^=pb_online_status].size_xxs, [class^=pb_avatar_kit][class*=_md_thumb] [class^=pb_online_status].size_xxs {
+        right: -5px; }
       [class^=pb_avatar_kit][class*=_md] [class^=pb_online_status].size_xs, [class^=pb_avatar_kit][class*=_md_thumb] [class^=pb_online_status].size_xs {
         right: -4px; }
       [class^=pb_avatar_kit][class*=_md] [class^=pb_online_status].size_md, [class^=pb_avatar_kit][class*=_md_thumb] [class^=pb_online_status].size_md {
@@ -10959,6 +11203,8 @@ Background colors ------------------*/
       top: 0;
       bottom: auto;
       left: auto; }
+      [class^=pb_avatar_kit][class*=_base] [class^=pb_online_status].size_xxs, [class^=pb_avatar_kit][class*=_base_thumb] [class^=pb_online_status].size_xxs {
+        right: -5px; }
       [class^=pb_avatar_kit][class*=_base] [class^=pb_online_status].size_xs, [class^=pb_avatar_kit][class*=_base_thumb] [class^=pb_online_status].size_xs {
         right: -4px; }
       [class^=pb_avatar_kit][class*=_base] [class^=pb_online_status].size_md, [class^=pb_avatar_kit][class*=_base_thumb] [class^=pb_online_status].size_md {
@@ -11015,6 +11261,8 @@ Background colors ------------------*/
       top: 0;
       bottom: auto;
       left: auto; }
+      [class^=pb_avatar_kit][class*=_lg] [class^=pb_online_status].size_xxs, [class^=pb_avatar_kit][class*=_lg_thumb] [class^=pb_online_status].size_xxs {
+        right: -5px; }
       [class^=pb_avatar_kit][class*=_lg] [class^=pb_online_status].size_xs, [class^=pb_avatar_kit][class*=_lg_thumb] [class^=pb_online_status].size_xs {
         right: -4px; }
       [class^=pb_avatar_kit][class*=_lg] [class^=pb_online_status].size_md, [class^=pb_avatar_kit][class*=_lg_thumb] [class^=pb_online_status].size_md {
@@ -11071,6 +11319,8 @@ Background colors ------------------*/
       top: 0;
       bottom: auto;
       left: auto; }
+      [class^=pb_avatar_kit][class*=_xl] [class^=pb_online_status].size_xxs, [class^=pb_avatar_kit][class*=_xl_thumb] [class^=pb_online_status].size_xxs {
+        right: -5px; }
       [class^=pb_avatar_kit][class*=_xl] [class^=pb_online_status].size_xs, [class^=pb_avatar_kit][class*=_xl_thumb] [class^=pb_online_status].size_xs {
         right: -4px; }
       [class^=pb_avatar_kit][class*=_xl] [class^=pb_online_status].size_md, [class^=pb_avatar_kit][class*=_xl_thumb] [class^=pb_online_status].size_md {
@@ -11539,6 +11789,64 @@ Background colors ------------------*/
 /* Non_Standard Font Weights */
 [class^=pb_avatar_kit] {
   position: relative; }
+  [class^=pb_avatar_kit][class*=_xxs], [class^=pb_avatar_kit][class*=_xxs_thumb] {
+    width: 20px;
+    height: 20px;
+    object-fit: cover;
+    position: relative;
+    flex-shrink: 0;
+    flex-grow: 0;
+    flex-basis: 20px; }
+    [class^=pb_avatar_kit][class*=_xxs] .avatar_wrapper, [class^=pb_avatar_kit][class*=_xxs_thumb] .avatar_wrapper {
+      width: 20px;
+      height: 20px;
+      object-fit: cover;
+      border-radius: 1000px;
+      background: #C1CDD6;
+      overflow: hidden;
+      position: relative;
+      flex-shrink: 0;
+      flex-grow: 0;
+      flex-basis: 20px; }
+      [class^=pb_avatar_kit][class*=_xxs] .avatar_wrapper::before, [class^=pb_avatar_kit][class*=_xxs_thumb] .avatar_wrapper::before {
+        content: attr(data-initials);
+        width: 100%;
+        height: 100%;
+        display: block;
+        color: #FFFFFF;
+        text-align: center;
+        font-size: 7.6px;
+        line-height: 20px;
+        text-transform: uppercase;
+        position: relative; }
+      [class^=pb_avatar_kit][class*=_xxs] .avatar_wrapper img, [class^=pb_avatar_kit][class*=_xxs_thumb] .avatar_wrapper img {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        border-radius: 1000px;
+        object-fit: cover;
+        display: block; }
+    [class^=pb_avatar_kit][class*=_xxs] [class^=pb_online_status], [class^=pb_avatar_kit][class*=_xxs_thumb] [class^=pb_online_status] {
+      position: absolute;
+      right: 0;
+      top: 0;
+      bottom: auto;
+      left: auto; }
+      [class^=pb_avatar_kit][class*=_xxs] [class^=pb_online_status].size_xxs, [class^=pb_avatar_kit][class*=_xxs_thumb] [class^=pb_online_status].size_xxs {
+        right: -5px; }
+      [class^=pb_avatar_kit][class*=_xxs] [class^=pb_online_status].size_xs, [class^=pb_avatar_kit][class*=_xxs_thumb] [class^=pb_online_status].size_xs {
+        right: -4px; }
+      [class^=pb_avatar_kit][class*=_xxs] [class^=pb_online_status].size_md, [class^=pb_avatar_kit][class*=_xxs_thumb] [class^=pb_online_status].size_md {
+        top: auto;
+        bottom: 6px; }
+      [class^=pb_avatar_kit][class*=_xxs] [class^=pb_online_status].size_lg, [class^=pb_avatar_kit][class*=_xxs_thumb] [class^=pb_online_status].size_lg {
+        top: auto;
+        bottom: 14px; }
+      [class^=pb_avatar_kit][class*=_xxs] [class^=pb_online_status].size_xl, [class^=pb_avatar_kit][class*=_xxs_thumb] [class^=pb_online_status].size_xl {
+        top: auto;
+        bottom: 22px; }
   [class^=pb_avatar_kit][class*=_xs], [class^=pb_avatar_kit][class*=_xs_thumb] {
     width: 28px;
     height: 28px;
@@ -11584,6 +11892,8 @@ Background colors ------------------*/
       top: 0;
       bottom: auto;
       left: auto; }
+      [class^=pb_avatar_kit][class*=_xs] [class^=pb_online_status].size_xxs, [class^=pb_avatar_kit][class*=_xs_thumb] [class^=pb_online_status].size_xxs {
+        right: -5px; }
       [class^=pb_avatar_kit][class*=_xs] [class^=pb_online_status].size_xs, [class^=pb_avatar_kit][class*=_xs_thumb] [class^=pb_online_status].size_xs {
         right: -4px; }
       [class^=pb_avatar_kit][class*=_xs] [class^=pb_online_status].size_md, [class^=pb_avatar_kit][class*=_xs_thumb] [class^=pb_online_status].size_md {
@@ -11640,6 +11950,8 @@ Background colors ------------------*/
       top: 0;
       bottom: auto;
       left: auto; }
+      [class^=pb_avatar_kit][class*=_sm] [class^=pb_online_status].size_xxs, [class^=pb_avatar_kit][class*=_sm_thumb] [class^=pb_online_status].size_xxs {
+        right: -5px; }
       [class^=pb_avatar_kit][class*=_sm] [class^=pb_online_status].size_xs, [class^=pb_avatar_kit][class*=_sm_thumb] [class^=pb_online_status].size_xs {
         right: -4px; }
       [class^=pb_avatar_kit][class*=_sm] [class^=pb_online_status].size_md, [class^=pb_avatar_kit][class*=_sm_thumb] [class^=pb_online_status].size_md {
@@ -11696,6 +12008,8 @@ Background colors ------------------*/
       top: 0;
       bottom: auto;
       left: auto; }
+      [class^=pb_avatar_kit][class*=_md] [class^=pb_online_status].size_xxs, [class^=pb_avatar_kit][class*=_md_thumb] [class^=pb_online_status].size_xxs {
+        right: -5px; }
       [class^=pb_avatar_kit][class*=_md] [class^=pb_online_status].size_xs, [class^=pb_avatar_kit][class*=_md_thumb] [class^=pb_online_status].size_xs {
         right: -4px; }
       [class^=pb_avatar_kit][class*=_md] [class^=pb_online_status].size_md, [class^=pb_avatar_kit][class*=_md_thumb] [class^=pb_online_status].size_md {
@@ -11752,6 +12066,8 @@ Background colors ------------------*/
       top: 0;
       bottom: auto;
       left: auto; }
+      [class^=pb_avatar_kit][class*=_base] [class^=pb_online_status].size_xxs, [class^=pb_avatar_kit][class*=_base_thumb] [class^=pb_online_status].size_xxs {
+        right: -5px; }
       [class^=pb_avatar_kit][class*=_base] [class^=pb_online_status].size_xs, [class^=pb_avatar_kit][class*=_base_thumb] [class^=pb_online_status].size_xs {
         right: -4px; }
       [class^=pb_avatar_kit][class*=_base] [class^=pb_online_status].size_md, [class^=pb_avatar_kit][class*=_base_thumb] [class^=pb_online_status].size_md {
@@ -11808,6 +12124,8 @@ Background colors ------------------*/
       top: 0;
       bottom: auto;
       left: auto; }
+      [class^=pb_avatar_kit][class*=_lg] [class^=pb_online_status].size_xxs, [class^=pb_avatar_kit][class*=_lg_thumb] [class^=pb_online_status].size_xxs {
+        right: -5px; }
       [class^=pb_avatar_kit][class*=_lg] [class^=pb_online_status].size_xs, [class^=pb_avatar_kit][class*=_lg_thumb] [class^=pb_online_status].size_xs {
         right: -4px; }
       [class^=pb_avatar_kit][class*=_lg] [class^=pb_online_status].size_md, [class^=pb_avatar_kit][class*=_lg_thumb] [class^=pb_online_status].size_md {
@@ -11864,6 +12182,8 @@ Background colors ------------------*/
       top: 0;
       bottom: auto;
       left: auto; }
+      [class^=pb_avatar_kit][class*=_xl] [class^=pb_online_status].size_xxs, [class^=pb_avatar_kit][class*=_xl_thumb] [class^=pb_online_status].size_xxs {
+        right: -5px; }
       [class^=pb_avatar_kit][class*=_xl] [class^=pb_online_status].size_xs, [class^=pb_avatar_kit][class*=_xl_thumb] [class^=pb_online_status].size_xs {
         right: -4px; }
       [class^=pb_avatar_kit][class*=_xl] [class^=pb_online_status].size_md, [class^=pb_avatar_kit][class*=_xl_thumb] [class^=pb_online_status].size_md {
@@ -11878,7 +12198,8 @@ Background colors ------------------*/
 
 [class^=pb_multiple_users_kit] {
   display: inline-flex; }
-  [class^=pb_multiple_users_kit] .multiple_users_badge {
+  [class^=pb_multiple_users_kit] .multiple_users_badge_xs,
+  [class^=pb_multiple_users_kit] .multiple_users_badge_xxs {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -11890,6 +12211,9 @@ Background colors ------------------*/
     color: #0056CF;
     font-weight: 600;
     font-size: 10px; }
+  [class^=pb_multiple_users_kit] .multiple_users_badge_xxs {
+    width: 20px;
+    height: 20px; }
   [class^=pb_multiple_users_kit] .pb_multiple_users_item {
     margin-left: -9px;
     margin-right: 0; }
@@ -12011,6 +12335,64 @@ Background colors ------------------*/
 /* Non_Standard Font Weights */
 [class^=pb_avatar_kit] {
   position: relative; }
+  [class^=pb_avatar_kit][class*=_xxs], [class^=pb_avatar_kit][class*=_xxs_thumb] {
+    width: 20px;
+    height: 20px;
+    object-fit: cover;
+    position: relative;
+    flex-shrink: 0;
+    flex-grow: 0;
+    flex-basis: 20px; }
+    [class^=pb_avatar_kit][class*=_xxs] .avatar_wrapper, [class^=pb_avatar_kit][class*=_xxs_thumb] .avatar_wrapper {
+      width: 20px;
+      height: 20px;
+      object-fit: cover;
+      border-radius: 1000px;
+      background: #C1CDD6;
+      overflow: hidden;
+      position: relative;
+      flex-shrink: 0;
+      flex-grow: 0;
+      flex-basis: 20px; }
+      [class^=pb_avatar_kit][class*=_xxs] .avatar_wrapper::before, [class^=pb_avatar_kit][class*=_xxs_thumb] .avatar_wrapper::before {
+        content: attr(data-initials);
+        width: 100%;
+        height: 100%;
+        display: block;
+        color: #FFFFFF;
+        text-align: center;
+        font-size: 7.6px;
+        line-height: 20px;
+        text-transform: uppercase;
+        position: relative; }
+      [class^=pb_avatar_kit][class*=_xxs] .avatar_wrapper img, [class^=pb_avatar_kit][class*=_xxs_thumb] .avatar_wrapper img {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        border-radius: 1000px;
+        object-fit: cover;
+        display: block; }
+    [class^=pb_avatar_kit][class*=_xxs] [class^=pb_online_status], [class^=pb_avatar_kit][class*=_xxs_thumb] [class^=pb_online_status] {
+      position: absolute;
+      right: 0;
+      top: 0;
+      bottom: auto;
+      left: auto; }
+      [class^=pb_avatar_kit][class*=_xxs] [class^=pb_online_status].size_xxs, [class^=pb_avatar_kit][class*=_xxs_thumb] [class^=pb_online_status].size_xxs {
+        right: -5px; }
+      [class^=pb_avatar_kit][class*=_xxs] [class^=pb_online_status].size_xs, [class^=pb_avatar_kit][class*=_xxs_thumb] [class^=pb_online_status].size_xs {
+        right: -4px; }
+      [class^=pb_avatar_kit][class*=_xxs] [class^=pb_online_status].size_md, [class^=pb_avatar_kit][class*=_xxs_thumb] [class^=pb_online_status].size_md {
+        top: auto;
+        bottom: 6px; }
+      [class^=pb_avatar_kit][class*=_xxs] [class^=pb_online_status].size_lg, [class^=pb_avatar_kit][class*=_xxs_thumb] [class^=pb_online_status].size_lg {
+        top: auto;
+        bottom: 14px; }
+      [class^=pb_avatar_kit][class*=_xxs] [class^=pb_online_status].size_xl, [class^=pb_avatar_kit][class*=_xxs_thumb] [class^=pb_online_status].size_xl {
+        top: auto;
+        bottom: 22px; }
   [class^=pb_avatar_kit][class*=_xs], [class^=pb_avatar_kit][class*=_xs_thumb] {
     width: 28px;
     height: 28px;
@@ -12056,6 +12438,8 @@ Background colors ------------------*/
       top: 0;
       bottom: auto;
       left: auto; }
+      [class^=pb_avatar_kit][class*=_xs] [class^=pb_online_status].size_xxs, [class^=pb_avatar_kit][class*=_xs_thumb] [class^=pb_online_status].size_xxs {
+        right: -5px; }
       [class^=pb_avatar_kit][class*=_xs] [class^=pb_online_status].size_xs, [class^=pb_avatar_kit][class*=_xs_thumb] [class^=pb_online_status].size_xs {
         right: -4px; }
       [class^=pb_avatar_kit][class*=_xs] [class^=pb_online_status].size_md, [class^=pb_avatar_kit][class*=_xs_thumb] [class^=pb_online_status].size_md {
@@ -12112,6 +12496,8 @@ Background colors ------------------*/
       top: 0;
       bottom: auto;
       left: auto; }
+      [class^=pb_avatar_kit][class*=_sm] [class^=pb_online_status].size_xxs, [class^=pb_avatar_kit][class*=_sm_thumb] [class^=pb_online_status].size_xxs {
+        right: -5px; }
       [class^=pb_avatar_kit][class*=_sm] [class^=pb_online_status].size_xs, [class^=pb_avatar_kit][class*=_sm_thumb] [class^=pb_online_status].size_xs {
         right: -4px; }
       [class^=pb_avatar_kit][class*=_sm] [class^=pb_online_status].size_md, [class^=pb_avatar_kit][class*=_sm_thumb] [class^=pb_online_status].size_md {
@@ -12168,6 +12554,8 @@ Background colors ------------------*/
       top: 0;
       bottom: auto;
       left: auto; }
+      [class^=pb_avatar_kit][class*=_md] [class^=pb_online_status].size_xxs, [class^=pb_avatar_kit][class*=_md_thumb] [class^=pb_online_status].size_xxs {
+        right: -5px; }
       [class^=pb_avatar_kit][class*=_md] [class^=pb_online_status].size_xs, [class^=pb_avatar_kit][class*=_md_thumb] [class^=pb_online_status].size_xs {
         right: -4px; }
       [class^=pb_avatar_kit][class*=_md] [class^=pb_online_status].size_md, [class^=pb_avatar_kit][class*=_md_thumb] [class^=pb_online_status].size_md {
@@ -12224,6 +12612,8 @@ Background colors ------------------*/
       top: 0;
       bottom: auto;
       left: auto; }
+      [class^=pb_avatar_kit][class*=_base] [class^=pb_online_status].size_xxs, [class^=pb_avatar_kit][class*=_base_thumb] [class^=pb_online_status].size_xxs {
+        right: -5px; }
       [class^=pb_avatar_kit][class*=_base] [class^=pb_online_status].size_xs, [class^=pb_avatar_kit][class*=_base_thumb] [class^=pb_online_status].size_xs {
         right: -4px; }
       [class^=pb_avatar_kit][class*=_base] [class^=pb_online_status].size_md, [class^=pb_avatar_kit][class*=_base_thumb] [class^=pb_online_status].size_md {
@@ -12280,6 +12670,8 @@ Background colors ------------------*/
       top: 0;
       bottom: auto;
       left: auto; }
+      [class^=pb_avatar_kit][class*=_lg] [class^=pb_online_status].size_xxs, [class^=pb_avatar_kit][class*=_lg_thumb] [class^=pb_online_status].size_xxs {
+        right: -5px; }
       [class^=pb_avatar_kit][class*=_lg] [class^=pb_online_status].size_xs, [class^=pb_avatar_kit][class*=_lg_thumb] [class^=pb_online_status].size_xs {
         right: -4px; }
       [class^=pb_avatar_kit][class*=_lg] [class^=pb_online_status].size_md, [class^=pb_avatar_kit][class*=_lg_thumb] [class^=pb_online_status].size_md {
@@ -12336,6 +12728,8 @@ Background colors ------------------*/
       top: 0;
       bottom: auto;
       left: auto; }
+      [class^=pb_avatar_kit][class*=_xl] [class^=pb_online_status].size_xxs, [class^=pb_avatar_kit][class*=_xl_thumb] [class^=pb_online_status].size_xxs {
+        right: -5px; }
       [class^=pb_avatar_kit][class*=_xl] [class^=pb_online_status].size_xs, [class^=pb_avatar_kit][class*=_xl_thumb] [class^=pb_online_status].size_xs {
         right: -4px; }
       [class^=pb_avatar_kit][class*=_xl] [class^=pb_online_status].size_md, [class^=pb_avatar_kit][class*=_xl_thumb] [class^=pb_online_status].size_md {
@@ -21570,6 +21964,64 @@ Background colors ------------------*/
 /* Non_Standard Font Weights */
 [class^=pb_avatar_kit] {
   position: relative; }
+  [class^=pb_avatar_kit][class*=_xxs], [class^=pb_avatar_kit][class*=_xxs_thumb] {
+    width: 20px;
+    height: 20px;
+    object-fit: cover;
+    position: relative;
+    flex-shrink: 0;
+    flex-grow: 0;
+    flex-basis: 20px; }
+    [class^=pb_avatar_kit][class*=_xxs] .avatar_wrapper, [class^=pb_avatar_kit][class*=_xxs_thumb] .avatar_wrapper {
+      width: 20px;
+      height: 20px;
+      object-fit: cover;
+      border-radius: 1000px;
+      background: #C1CDD6;
+      overflow: hidden;
+      position: relative;
+      flex-shrink: 0;
+      flex-grow: 0;
+      flex-basis: 20px; }
+      [class^=pb_avatar_kit][class*=_xxs] .avatar_wrapper::before, [class^=pb_avatar_kit][class*=_xxs_thumb] .avatar_wrapper::before {
+        content: attr(data-initials);
+        width: 100%;
+        height: 100%;
+        display: block;
+        color: #FFFFFF;
+        text-align: center;
+        font-size: 7.6px;
+        line-height: 20px;
+        text-transform: uppercase;
+        position: relative; }
+      [class^=pb_avatar_kit][class*=_xxs] .avatar_wrapper img, [class^=pb_avatar_kit][class*=_xxs_thumb] .avatar_wrapper img {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        border-radius: 1000px;
+        object-fit: cover;
+        display: block; }
+    [class^=pb_avatar_kit][class*=_xxs] [class^=pb_online_status], [class^=pb_avatar_kit][class*=_xxs_thumb] [class^=pb_online_status] {
+      position: absolute;
+      right: 0;
+      top: 0;
+      bottom: auto;
+      left: auto; }
+      [class^=pb_avatar_kit][class*=_xxs] [class^=pb_online_status].size_xxs, [class^=pb_avatar_kit][class*=_xxs_thumb] [class^=pb_online_status].size_xxs {
+        right: -5px; }
+      [class^=pb_avatar_kit][class*=_xxs] [class^=pb_online_status].size_xs, [class^=pb_avatar_kit][class*=_xxs_thumb] [class^=pb_online_status].size_xs {
+        right: -4px; }
+      [class^=pb_avatar_kit][class*=_xxs] [class^=pb_online_status].size_md, [class^=pb_avatar_kit][class*=_xxs_thumb] [class^=pb_online_status].size_md {
+        top: auto;
+        bottom: 6px; }
+      [class^=pb_avatar_kit][class*=_xxs] [class^=pb_online_status].size_lg, [class^=pb_avatar_kit][class*=_xxs_thumb] [class^=pb_online_status].size_lg {
+        top: auto;
+        bottom: 14px; }
+      [class^=pb_avatar_kit][class*=_xxs] [class^=pb_online_status].size_xl, [class^=pb_avatar_kit][class*=_xxs_thumb] [class^=pb_online_status].size_xl {
+        top: auto;
+        bottom: 22px; }
   [class^=pb_avatar_kit][class*=_xs], [class^=pb_avatar_kit][class*=_xs_thumb] {
     width: 28px;
     height: 28px;
@@ -21615,6 +22067,8 @@ Background colors ------------------*/
       top: 0;
       bottom: auto;
       left: auto; }
+      [class^=pb_avatar_kit][class*=_xs] [class^=pb_online_status].size_xxs, [class^=pb_avatar_kit][class*=_xs_thumb] [class^=pb_online_status].size_xxs {
+        right: -5px; }
       [class^=pb_avatar_kit][class*=_xs] [class^=pb_online_status].size_xs, [class^=pb_avatar_kit][class*=_xs_thumb] [class^=pb_online_status].size_xs {
         right: -4px; }
       [class^=pb_avatar_kit][class*=_xs] [class^=pb_online_status].size_md, [class^=pb_avatar_kit][class*=_xs_thumb] [class^=pb_online_status].size_md {
@@ -21671,6 +22125,8 @@ Background colors ------------------*/
       top: 0;
       bottom: auto;
       left: auto; }
+      [class^=pb_avatar_kit][class*=_sm] [class^=pb_online_status].size_xxs, [class^=pb_avatar_kit][class*=_sm_thumb] [class^=pb_online_status].size_xxs {
+        right: -5px; }
       [class^=pb_avatar_kit][class*=_sm] [class^=pb_online_status].size_xs, [class^=pb_avatar_kit][class*=_sm_thumb] [class^=pb_online_status].size_xs {
         right: -4px; }
       [class^=pb_avatar_kit][class*=_sm] [class^=pb_online_status].size_md, [class^=pb_avatar_kit][class*=_sm_thumb] [class^=pb_online_status].size_md {
@@ -21727,6 +22183,8 @@ Background colors ------------------*/
       top: 0;
       bottom: auto;
       left: auto; }
+      [class^=pb_avatar_kit][class*=_md] [class^=pb_online_status].size_xxs, [class^=pb_avatar_kit][class*=_md_thumb] [class^=pb_online_status].size_xxs {
+        right: -5px; }
       [class^=pb_avatar_kit][class*=_md] [class^=pb_online_status].size_xs, [class^=pb_avatar_kit][class*=_md_thumb] [class^=pb_online_status].size_xs {
         right: -4px; }
       [class^=pb_avatar_kit][class*=_md] [class^=pb_online_status].size_md, [class^=pb_avatar_kit][class*=_md_thumb] [class^=pb_online_status].size_md {
@@ -21783,6 +22241,8 @@ Background colors ------------------*/
       top: 0;
       bottom: auto;
       left: auto; }
+      [class^=pb_avatar_kit][class*=_base] [class^=pb_online_status].size_xxs, [class^=pb_avatar_kit][class*=_base_thumb] [class^=pb_online_status].size_xxs {
+        right: -5px; }
       [class^=pb_avatar_kit][class*=_base] [class^=pb_online_status].size_xs, [class^=pb_avatar_kit][class*=_base_thumb] [class^=pb_online_status].size_xs {
         right: -4px; }
       [class^=pb_avatar_kit][class*=_base] [class^=pb_online_status].size_md, [class^=pb_avatar_kit][class*=_base_thumb] [class^=pb_online_status].size_md {
@@ -21839,6 +22299,8 @@ Background colors ------------------*/
       top: 0;
       bottom: auto;
       left: auto; }
+      [class^=pb_avatar_kit][class*=_lg] [class^=pb_online_status].size_xxs, [class^=pb_avatar_kit][class*=_lg_thumb] [class^=pb_online_status].size_xxs {
+        right: -5px; }
       [class^=pb_avatar_kit][class*=_lg] [class^=pb_online_status].size_xs, [class^=pb_avatar_kit][class*=_lg_thumb] [class^=pb_online_status].size_xs {
         right: -4px; }
       [class^=pb_avatar_kit][class*=_lg] [class^=pb_online_status].size_md, [class^=pb_avatar_kit][class*=_lg_thumb] [class^=pb_online_status].size_md {
@@ -21895,6 +22357,8 @@ Background colors ------------------*/
       top: 0;
       bottom: auto;
       left: auto; }
+      [class^=pb_avatar_kit][class*=_xl] [class^=pb_online_status].size_xxs, [class^=pb_avatar_kit][class*=_xl_thumb] [class^=pb_online_status].size_xxs {
+        right: -5px; }
       [class^=pb_avatar_kit][class*=_xl] [class^=pb_online_status].size_xs, [class^=pb_avatar_kit][class*=_xl_thumb] [class^=pb_online_status].size_xs {
         right: -4px; }
       [class^=pb_avatar_kit][class*=_xl] [class^=pb_online_status].size_md, [class^=pb_avatar_kit][class*=_xl_thumb] [class^=pb_online_status].size_md {
