@@ -25,7 +25,10 @@ class PagesController < ApplicationController
     redirect_back(fallback_location: root_path)
   end
 
-  def getting_started; end
+  def getting_started
+    @rails_getting_started = Rails.root.join("app/views/pages/getting_started_partials/_rails_getting_started.md").read
+    @react_getting_started = Rails.root.join("app/views/pages/getting_started_partials/_react_getting_started.md").read
+  end
 
   def changelog
     @data = Playbook::Engine.root.join("CHANGELOG.md").read
