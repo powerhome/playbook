@@ -1,0 +1,36 @@
+// z_index variables
+$z_1: 100;
+$z_2: 200;
+$z_3: 300;
+$z_4: 400;
+$z_5: 500;
+$z_6: 600;
+$z_7: 700;
+$z_8: 800;
+$z_9: 900;
+$z_10: 1000;
+$z_index: (
+  zindex_1: $z_1,
+  zindex_2: $z_1,
+  zindex_3: $z_1,
+  zindex_4: $z_1,
+  zindex_5: $z_1,
+  zindex_6: $z_1,
+  zindex_7: $z_1,
+  zindex_8: $z_1,
+  zindex_9: $z_1,
+);
+
+$z_layers: (
+  "header": $z_10,
+  "default": 0
+);
+
+$offscreen: -9999px;
+
+@function z_index_for($layer) {
+  @if not map-has-key($z_layers, $layer) {
+    @error "No layer found for `#{$layer}` in $z_layers map.";
+  }
+  @return map-get($z_layers, $layer);
+}

@@ -1,0 +1,13 @@
+$space_xs:    8px;
+$space_sm:    16px;
+$space_md:    24px;
+$space_lg:    32px;
+$space_xl:    40px;
+$spaces:(
+  space_xs:   $space_xs,
+  space_sm:   $space_sm,
+  space_md:   $space_md,
+  space_lg:   $space_lg,
+  space_xl:   $space_xl,
+  none: 0
+);

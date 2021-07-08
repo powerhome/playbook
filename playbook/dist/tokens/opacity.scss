@@ -1,0 +1,21 @@
+$opacity_1: .1;
+$opacity_2: .2;
+$opacity_3: .3;
+$opacity_4: .4;
+$opacity_5: .5;
+$opacity_6: .6;
+$opacity_7: .7;
+$opacity_8: .8;
+$opacity_9: .9;
+$opacity_10: 1;
+$opacity: (
+  opacity_1: $opacity_1,
+  opacity_2: $opacity_2,
+  opacity_3: $opacity_3,
+  opacity_4: $opacity_4,
+  opacity_5: $opacity_5,
+  opacity_6: $opacity_6,
+  opacity_7: $opacity_7,
+  opacity_8: $opacity_8,
+  opacity_9: $opacity_9,
+);

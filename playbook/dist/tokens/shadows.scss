@@ -1,0 +1,13 @@
+@import "colors";
+@import "opacity";
+
+$shadow_none: 0 0 0 0 transparent;
+$shadow_deep: 0 4px 10px 0 rgba($shadow, 0.16);
+$shadow_deeper: 0 12px 28px 0 rgba($shadow, 0.18);
+$shadow_deepest: 0 30px 38px 4px $shadow, 0 2px 14px 4px rgba($shadow, 0.1);
+$box_shadows: (
+  shadow_none: $shadow_none,
+  shadow_deep: $shadow_deep,
+  shadow_deeper: $shadow_deeper,
+  shadow_deepest: $shadow_deepest
+);
