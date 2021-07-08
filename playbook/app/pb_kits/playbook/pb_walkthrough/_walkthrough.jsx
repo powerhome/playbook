@@ -37,31 +37,39 @@ type WalkthroughProps = {
   showSkipButton?: Boolean,
   spotlightClicks?: Boolean,
   spotlightPadding?: number,
-  styles?: object,
+  styles?: {
+    options: {
+      beaconSize?: Number,
+      arrowColor?: String,
+      backgroundColor?: String,
+      primaryColor?: String,
+      overlayColor?: String,
+      spotlightShadow?: String,
+      width?: Number,
+      zIndex?: Number,
+    },
+  },
 }
 
 type TooltipProps = {
-  continuous?: Boolean,
-  className?: String,
-  index?: number,
-  isLastStep?: Boolean,
-  size?: number,
-  step?: object,
-  skip?: Boolean,
-  backProps?: object,
-  closeProps?: object,
-  primaryProps?: object,
-  skipProps?: object,
-  tooltipProps?: object,
-}
-
-// type BeaconProps = {
-//   onClick?: () => void,
-//   onMouseEnter?: () => void,
-//   ref?: () => void,
-//   title?: String,
-//   className?: String,
-// }
+    continuous?: Boolean,
+    className?: String,
+    index?: number,
+    isLastStep?: Boolean,
+    size?: number,
+    step: {
+      title?: String,
+      content?: String,
+      target: String,
+      disableBeacon?: Boolean,
+    },
+    skip?: Boolean,
+    backProps?: object,
+    closeProps?: object,
+    primaryProps?: object,
+    skipProps?: object,
+    tooltipProps?: object,
+  }
 
 const Tooltip = React.forwardRef((props: TooltipProps, ref) => (
   <div
@@ -142,16 +150,6 @@ const Tooltip = React.forwardRef((props: TooltipProps, ref) => (
   </div>
 ))
 
-// const Beacon = (props: BeaconProps) => (
-//   <span
-//       {...props}
-//       className="pb_walkthrough_beacon"
-//   >
-//     <span className="inner" />
-//     <span className="outer" />
-//   </span>
-// )
-
 const Walkthrough = (props: WalkthroughProps) => {
   const {
     aria = {},
@@ -159,9 +157,11 @@ const Walkthrough = (props: WalkthroughProps) => {
     className,
     continuous = false,
     data = {},
+    disableOverlay,
     id,
     run = false,
     steps,
+    styles,
     showSkipButton,
   } = props
 
@@ -179,10 +179,12 @@ const Walkthrough = (props: WalkthroughProps) => {
       <Joyride
           callback={callback}
           continuous={continuous}
+          disableOverlay={disableOverlay}
           disableScrolling
           run={run}
           showSkipButton={showSkipButton}
           steps={steps}
+          styles={styles}
           tooltipComponent={Tooltip}
           {...props}
       />
