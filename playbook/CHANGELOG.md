@@ -1,5 +1,19 @@
 
 
+## [10.0.1](https://github.com/powerhome/playbook/tree/10.0.1) (2021-07-02)
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/10.0.0...10.0.1)
+
+**Fixed Bugs:**
+
+- Mend xxs avatars [\#1545](https://github.com/powerhome/playbook/pull/1545) ([bh247484](https://github.com/bh247484))
+
+**Merged pull requests:**
+
+- Revert "Update avatar kit/multi-user kit to support xxs size" [\#1544](https://github.com/powerhome/playbook/pull/1544) ([bh247484](https://github.com/bh247484))
+
+
+
 ## [10.0.0](https://github.com/powerhome/playbook/tree/10.0.0) (2021-06-30)
 
 [Full Changelog](https://github.com/powerhome/playbook/compare/9.19.0...10.0.0)
