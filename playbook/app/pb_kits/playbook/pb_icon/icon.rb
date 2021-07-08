@@ -12,8 +12,9 @@ module Playbook
       prop :flip, type: Playbook::Props::Enum,
                   values: ["horizontal", "vertical", "both", nil],
                   default: nil
-      # prop :icon, required: true
       prop :icon
+      prop :custom_icon, type: Playbook::Props::String,
+                         default: nil
       prop :inverse, type: Playbook::Props::Boolean,
                      default: false
       prop :list_item, type: Playbook::Props::Boolean,
@@ -31,9 +32,6 @@ module Playbook
                   default: nil
       prop :spin, type: Playbook::Props::Boolean,
                   default: false
-
-      prop :custom_icon, type: Playbook::Props::String,
-                         default: nil
 
       def classname
         generate_classname(
@@ -72,7 +70,14 @@ module Playbook
       end
 
       def render_svg(path)
-        raw open(path).read if File.extname(path) == ".svg" # rubocop:disable Security/Open
+        if File.extname(path) == ".svg"
+          doc = Nokogiri::XML(open(path)) # rubocop:disable Security/Open
+          svg = doc.at_css "svg"
+          svg["class"] = "pb_custom_icon " + object.custom_icon_classname
+          raw doc
+        else
+          raise("Custom icon must be an svg. Please check your path and file type.")
+        end
       end
 
     private

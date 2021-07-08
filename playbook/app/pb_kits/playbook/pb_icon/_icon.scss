@@ -2,8 +2,11 @@
 
 }
 
-[class^=pb_custom_icon_wrapper] {
-  svg path {
+// Rails custom icon styles
+svg.pb_custom_icon {
+  width: 1em;
+  fill: currentColor;
+  path {
     fill: currentColor;
   }
 }

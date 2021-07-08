@@ -19,6 +19,11 @@ RSpec.describe Playbook::PbIcon::Icon do
   }
   it { is_expected.to define_prop(:icon) }
   it {
+    is_expected.to define_prop(:custom_icon)
+      .of_type(Playbook::Props::String)
+      .with_default(nil)
+  }
+  it {
     is_expected.to define_prop(:inverse)
       .of_type(Playbook::Props::Boolean)
   }

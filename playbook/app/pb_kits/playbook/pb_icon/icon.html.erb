@@ -1,15 +1,6 @@
 <% if object.custom_icon %>
-
-  <%= content_tag(:div, nil,
-      id: object.id,
-      data: object.data,
-      class: "pb_custom_icon_wrapper " + object.custom_icon_classname
-  ) do %>
-    <%= object.render_svg(object.custom_icon) %>
-  <% end %>
-
+  <%= object.render_svg(object.custom_icon) %>
 <% else %>
-
   <%= content_tag(:i, nil,
       id: object.id,
       data: object.data,
@@ -19,5 +10,4 @@
       aria: { label: "#{object.icon} icon" }.merge(object.aria),
       hidden: true
   ) %>
-
 <% end %>

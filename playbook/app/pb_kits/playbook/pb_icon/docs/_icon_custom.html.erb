@@ -1,0 +1,22 @@
+<%# SVG fill color inherited from css color property %>
+<div class="icon-wrapper" style="color:blue;">
+
+  <p><%= pb_rails("icon", props: { custom_icon: "https://upload.wikimedia.org/wikipedia/commons/3/3b/Wrench_font_awesome.svg", size: "2x" } ) %></p>
+  <p><%= pb_rails("icon", props: { custom_icon: "app/javascript/images/powergon.svg", size: "3x" } ) %></p>
+  
+  <%= pb_rails("icon", props: { flip: "vertical", custom_icon: "app/javascript/images/powergon.svg", size: "5x" } ) %>
+  <%= pb_rails("icon", props: { rotation: 90, custom_icon: "app/javascript/images/powergon.svg", size: "5x" } ) %>
+  <%= pb_rails("icon", props: { spin: true, custom_icon: "app/javascript/images/powergon.svg", size: "5x" } ) %>
+  <%= pb_rails("icon", props: { custom_icon: "app/javascript/images/powergon.svg", size: "8x" } ) %>
+
+
+  <%# <%= pb_rails("icon", props: { custom_icon: "https://en.wikipedia.org/wiki/Portable_Network_Graphics#/media/File:PNG_transparency_demonstration_1.png", size: "8x" } ) %>
+
+
+  <%= pb_rails("body", props: { 
+    text: "Custom icons must be SVGs. They can be locally or remotely
+    sourced and are compatible with other icon props (size, rotation,
+    spin, flip, etc). Their SVG fill colors will be inherited from
+    parent element's css color properties."
+  } ) %>
+</div>
