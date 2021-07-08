@@ -17075,7 +17075,7 @@ Background colors ------------------*/
   transition: all 0.15s ease; }
   @media (hover: hover) {
     [class^=pb_selectable_icon]:hover * {
-      transition: all 0.15s ease;
+      transition: transform 0.15s ease;
       transform: translateY(-2px); } }
   [class^=pb_selectable_icon] * {
     cursor: pointer; }

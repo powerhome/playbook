@@ -5,7 +5,7 @@ import { Icon } from '../../'
 const config = {
   moon: (
     <svg
-        aria-hidden="true"
+        ariaHidden="true"
         focusable="false"
         role="img"
         viewBox="0 0 512 512"

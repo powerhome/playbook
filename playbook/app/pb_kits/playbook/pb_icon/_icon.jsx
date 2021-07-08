@@ -77,12 +77,13 @@ const Icon = (props: IconProps) => {
   // Lets check and see if the icon prop is referring to a custom Power icon...
   // If so, then set fa-icon to "custom"
   // this ensures the JS will not do any further operations
-  faClasses[`fa-${icon}`] = customIcon ? 'custom' : icon
+  // faClasses[`fa-${icon}`] = customIcon ? 'custom' : icon
+  if (!customIcon) faClasses[`fa-${icon}`] = icon
 
   const classes = classnames(
     flipMap[flip],
     'pb_icon_kit',
-    'far',
+    customIcon ? '' : 'far',
     faClasses,
     globalProps(props),
     className

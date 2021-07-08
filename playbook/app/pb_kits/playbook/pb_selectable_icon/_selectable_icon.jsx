@@ -17,6 +17,7 @@ type SelectableIconProps = {
   aria?: Object,
   checked?: boolean,
   className?: string,
+  customIcon?: SVGElement,
   disabled?: boolean,
   data?: Object,
   icon: string,
@@ -32,6 +33,7 @@ const SelectableIcon = ({
   aria = {},
   className,
   checked = false,
+  customIcon,
   data = {},
   disabled = false,
   icon,
@@ -69,6 +71,7 @@ const SelectableIcon = ({
       <If condition={inputs === 'disabled'}>
         <>
           <Icon
+              customIcon={customIcon}
               icon={icon}
               size="2x"
           />
@@ -92,6 +95,7 @@ const SelectableIcon = ({
           />
           <label htmlFor={inputIdPresent}>
             <Icon
+                customIcon={customIcon}
                 icon={icon}
                 size="2x"
             />
