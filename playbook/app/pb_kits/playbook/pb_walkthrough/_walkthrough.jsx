@@ -59,7 +59,7 @@ type TooltipProps = {
     size?: number,
     step: {
       title?: String,
-      content?: String,
+      content?: array<React.ReactNode> | React.ReactNode | String,
       target: String,
       disableBeacon?: Boolean,
     },
@@ -77,7 +77,6 @@ const Tooltip = React.forwardRef((props: TooltipProps, ref) => (
   >
     <Card
         borderNone
-        maxWidth="sm"
         padding="none"
     >
       {props.step.title && <div>
