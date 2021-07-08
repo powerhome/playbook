@@ -16,3 +16,4 @@ examples:
   - icon_pull: Icon Pull
   - icon_border: Icon Border
   - icon_sizes: Icon Sizes
+  - icon_custom: Icon Custom

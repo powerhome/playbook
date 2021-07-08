@@ -4,6 +4,9 @@ module Playbook
   module PbMultipleUsers
     class MultipleUsers < Playbook::KitBase
       prop :reverse, type: Playbook::Props::Boolean, default: false
+      prop :size, type: Playbook::Props::Enum,
+                  values: %w[xxs xs],
+                  default: "xs"
       prop :users, type: Playbook::Props::HashArray, required: true
 
       def more_than_four

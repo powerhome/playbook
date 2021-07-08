@@ -8,6 +8,15 @@ const AvatarDefault = (props) => {
           imageAlt="Terry Johnson Standing"
           imageUrl="https://randomuser.me/api/portraits/men/44.jpg"
           name="Terry Johnson"
+          size="xxs"
+          status="online"
+          {...props}
+      />
+      <br />
+      <Avatar
+          imageAlt="Terry Johnson Standing"
+          imageUrl="https://randomuser.me/api/portraits/men/44.jpg"
+          name="Terry Johnson"
           size="xs"
           status="online"
           {...props}
