@@ -17,6 +17,7 @@ type MessageProps = {
   avatarName?: string,
   avatarStatus?: string,
   avatarUrl?: string,
+  children?: array<React.ReactNode> | React.ReactNode,
   className?: string,
   data?: object,
   id?: string,
@@ -33,6 +34,7 @@ const Message = (props: MessageProps) => {
     avatarName,
     avatarStatus = null,
     avatarUrl,
+    children,
     className,
     data = {},
     id,
@@ -93,10 +95,15 @@ const Message = (props: MessageProps) => {
             />
           </If>
         </Flex>
-        <Body
-            className="pb_message_body"
-            text={message}
-        />
+        <If condition={message}>
+          <Body
+              className="pb_message_body"
+              text={message}
+          />
+        </If>
+        <If condition={children}>
+          { children }
+        </If>
       </div>
     </div>
   )

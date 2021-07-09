@@ -1,6 +1,6 @@
 {
   "name": "playbook-ui",
-  "version": "9.19.0",
+  "version": "10.0.1",
   "description": "Nitro's Design System",
   "main": "./dist/playbook-react.js",
   "scripts": {
@@ -88,7 +88,7 @@
     "eslint-plugin-flowtype": "4.4.1",
     "eslint-plugin-jsx-control-statements": "2.2.1",
     "eslint-plugin-react": "git://github.com/rafbgarcia/eslint-plugin-react#fix-other-curly-brace-presence-edge-cases",
-    "filemanager-webpack-plugin": "^6.1.2",
+    "filemanager-webpack-plugin": "^4.0.0",
     "flow-bin": "0.153.0",
     "flow-runtime": "0.14.0",
     "identity-obj-proxy": "3.0.0",
