@@ -41,7 +41,7 @@ const darkProps = ({ dark }) => {
 
 const numberSpacingProps = ({ numberSpacing }) => {
   let css = ''
-  css += numberSpacing ? `${numberSpacing}` : ''
+  css += numberSpacing ? `${numberSpacing} ` : ''
   return css
 }
 
