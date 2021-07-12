@@ -14,7 +14,7 @@ module Playbook
 
       selected_index_props.map do |k|
         index_value = send(k)
-        index_value.to_s if number_spacing_values.include? index_value
+        "ns_#{index_value}" if number_spacing_values.include? index_value
       end.compact.join(" ")
     end
 

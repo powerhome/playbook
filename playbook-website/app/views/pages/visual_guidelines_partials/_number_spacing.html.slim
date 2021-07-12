@@ -1,0 +1,8 @@
+= pb_rails("title", props: { margin_top: "xl", text: "Number Spacing", tag: "h1", size: 1 })
+
+br
+= render :partial => "pages/visual_guidelines_partials/pb_doc_number_spacing",
+    locals:{ title: "Number Spacing Options",
+    usage: "Used for formatting numbers to be monospaced.",
+    sizes:[{name:"Normal",variable:"default"},
+      {name:"Tabular",variable:"tabular"}]}
