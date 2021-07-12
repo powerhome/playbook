@@ -19,6 +19,7 @@ type SelectableCardIconProps = {
   checked?: boolean,
   checkmark: boolean,
   className?: string,
+  customIcon?: SVGElement,
   dark?: boolean,
   data?: Object,
   disabled?: boolean,
@@ -38,6 +39,7 @@ const SelectableCardIcon = (props: SelectableCardIconProps) => {
     checkmark = false,
     checked = false,
     className,
+    customIcon,
     dark = false,
     data = {},
     disabled = false,
@@ -72,6 +74,7 @@ const SelectableCardIcon = (props: SelectableCardIconProps) => {
     >
       <SelectableCard
           checked={checked}
+          customIcon={customIcon}
           dark={dark}
           disabled={disabled}
           icon={checkmark}
@@ -84,6 +87,7 @@ const SelectableCardIcon = (props: SelectableCardIconProps) => {
         {
           <>
             <SelectableIcon
+                customIcon={customIcon}
                 icon={icon}
                 inputs="disabled"
                 size="2x"

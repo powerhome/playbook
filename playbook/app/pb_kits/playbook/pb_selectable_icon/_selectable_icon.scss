@@ -7,7 +7,7 @@
 	transition: all $transition_short ease;
 	@media (hover:hover) {
 		&:hover * {
-			transition: all $transition_short ease;
+			transition: transform $transition_short ease;
 			transform: translateY(-2px);
 		}
 	}

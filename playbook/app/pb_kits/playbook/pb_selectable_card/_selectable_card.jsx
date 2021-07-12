@@ -23,6 +23,7 @@ type SelectableCardProps = {
   checked: boolean,
   children?: array<React.ReactChild>,
   className?: string,
+  customIcon?: SVGElement,
   dark?: boolean,
   data: object,
   disabled?: boolean,
@@ -43,6 +44,7 @@ const SelectableCard = ({
   checked = false,
   children,
   className,
+  customIcon,
   dark = false,
   data = {},
   disabled = false,
@@ -76,6 +78,7 @@ const SelectableCard = ({
       return (
         <div className="pb_selectable_card_circle">
           <Icon
+              customIcon={customIcon}
               fixedWidth
               icon="check"
           />
