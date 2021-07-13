@@ -49,9 +49,6 @@ const COPY_PLUGIN = new CopyPlugin({
 // Remove extra css and js created by webpack
 const CLEAN_DIST_PLUGIN  = new FileManagerPlugin({
   events: {
-    onStart: {
-      delete: [ DIST_PATH ],
-    },
     onEnd: {
       move: [
         { source: `${DIST_PATH}/playbook-react.css`, destination: `${DIST_PATH}/playbook.css` },

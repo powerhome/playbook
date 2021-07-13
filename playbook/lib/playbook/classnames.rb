@@ -15,6 +15,7 @@ module Playbook
         dark_props,
         max_width_props,
         z_index_props,
+        number_spacing_props,
       ].compact.join(" ")
     end
 
