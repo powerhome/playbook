@@ -39,12 +39,6 @@ const darkProps = ({ dark }) => {
   return css
 }
 
-const numberSpacingProps = ({ numberSpacing }) => {
-  let css = ''
-  css += numberSpacing ? `ns_${numberSpacing} ` : ''
-  return css
-}
-
 const maxWidthProps = ({ maxWidth }) => {
   let css = ''
   css += maxWidth ? `max_width_${maxWidth } ` : ''
@@ -60,7 +54,7 @@ const zIndexProps = ({ zIndex }) => {
 // All Exported as a single function
 export const globalProps = (props, defaultProps = {}) => {
   const allProps = { ...props, ...defaultProps }
-  return spacingProps(allProps) + darkProps(allProps) + maxWidthProps(allProps) + zIndexProps(allProps) + numberSpacingProps(allProps)
+  return spacingProps(allProps) + darkProps(allProps) + maxWidthProps(allProps) + zIndexProps(allProps)
 }
 
 export const deprecatedProps = (kit, props = []) => {
