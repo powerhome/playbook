@@ -47,14 +47,14 @@ const COPY_PLUGIN = new CopyPlugin({
 })
 
 // Remove extra css and js created by webpack
-const CLEAN_DIST_PLUGIN  = new FileManagerPlugin({
+const CLEAN_DIST_PLUGIN = new FileManagerPlugin({
   events: {
     onEnd: {
-      move: [
-        { source: `${DIST_PATH}/playbook-react.css`, destination: `${DIST_PATH}/playbook.css` },
-        { source: `${DIST_PATH}/reset.css.css`, destination: `${DIST_PATH}/reset.css` },
+      delete: [
+        `${DIST_PATH}/playbook-rails.css`,
+        `${DIST_PATH}/playbook-doc.css`,
+        `${DIST_PATH}/reset.js`,
       ],
-      delete: [ `${DIST_PATH}/playbook-rails.css`, `${DIST_PATH}/playbook-doc.css`, `${DIST_PATH}/reset.css.js` ],
     },
   },
 })
@@ -106,10 +106,10 @@ new webpack.DefinePlugin({
 
 module.exports = {
   entry: {
-    'playbook-react': `${SOURCE_PATH}/index.js`,
+    'playbook': `${SOURCE_PATH}/index.js`,
     'playbook-rails': `${SOURCE_PATH}/playbook-rails.js`,
     'playbook-doc': `${SOURCE_PATH}/playbook-doc.js`,
-    'reset.css': `${SOURCE_PATH}/_reset.scss`,
+    'reset': `${SOURCE_PATH}/_reset.scss`,
   },
   externals: {
     'react': 'react',
