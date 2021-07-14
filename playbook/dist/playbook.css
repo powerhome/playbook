@@ -13776,62 +13776,7 @@ Background colors ------------------*/
   from {
     opacity: 1; }
   to {
-    opacity: 0; }
-  .pb_popover_body {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    min-width: 0;
-    word-wrap: break-word;
-    background-color: #FFFFFF;
-    background-clip: border-box;
-    border-width: 1px;
-    border-style: solid;
-    border-color: #E4E8F0;
-    border-radius: 6px;
-    transition-property: all;
-    transition-duration: 0.15s;
-    transition-timing-function: cubic-bezier(0.42, 0, 1, 1);
-    [class*=_shadow_none] {
-      box-shadow: 0 0 0 0 transparent; }
-    [class*=_shadow_deep] {
-      box-shadow: 0 4px 10px 0 rgba(60, 106, 172, 0.16); }
-    [class*=_shadow_deeper] {
-      box-shadow: 0 12px 28px 0 rgba(60, 106, 172, 0.18); }
-    [class*=_shadow_deepest] {
-      box-shadow: 0 30px 38px 4px rgba(60, 106, 172, 0.2), 0 2px 14px 4px rgba(60, 106, 172, 0.1); }
-    [class*=_lightest] {
-      border-radius: 1px; }
-    [class*=_lighter] {
-      border-radius: 2px; }
-    [class*=_light] {
-      border-radius: 4px; }
-    [class*=_normal] {
-      border-radius: 0; }
-    [class*=_heavy] {
-      border-radius: 5px; }
-    [class*=_heavier] {
-      border-radius: 6px; }
-    [class*=_heaviest] {
-      border-radius: 7px; }
-    [class*=_border_radius_xs] {
-      border-radius: 4px; }
-    [class*=_border_radius_sm] {
-      border-radius: 4px; }
-    [class*=_border_radius_md] {
-      border-radius: 6px; }
-    [class*=_border_radius_lg] {
-      border-radius: 8px; }
-    [class*=_border_radius_xl] {
-      border-radius: 16px; }
-    [class*=_border_radius_none] {
-      border-radius: 0; }
-    [class*=_border_radius_rounded] {
-      border-radius: 1000px; }
-    border: 0;
-    box-shadow: 0 12px 28px 0 rgba(60, 106, 172, 0.18); }
-  .overflow_handling {
-    overflow: auto; } }
+    opacity: 0; } }
 
 .pb_popover_tooltip {
   opacity: 0;
