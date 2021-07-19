@@ -3,14 +3,12 @@
 
 /* @flow */
 
-import React, { useState } from 'react'
+import React from 'react'
 import classnames from 'classnames'
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
 import { globalProps } from '../utilities/globalProps.js'
-import Joyride, { ACTIONS, EVENTS, STATUS } from 'react-joyride'
-import CircleIconButton from '../pb_circle_icon_button/_circle_icon_button'
+import Joyride from 'react-joyride'
 import Button from '../pb_button/_button'
-import Card from '../pb_card/_card'
 import Flex from '../pb_flex/_flex'
 import SectionSeparator from '../pb_section_separator/_section_separator'
 import Title from '../pb_title/_title'
@@ -172,23 +170,26 @@ const Walkthrough = (props: WalkthroughProps) => {
   const classes = classnames(buildCss('pb_walkthrough'), globalProps(props), className)
 
   return (
-    <Joyride
+    <div
         {...ariaProps}
         {...dataProps}
-        callback={callback}
         className={classes}
-        continuous={continuous}
-        disableOverlay={disableOverlay}
-        disableScrolling
-        floaterProps={floaterProps}
         id={id}
-        run={run}
-        showSkipButton={showSkipButton}
-        steps={steps}
-        styles={styles}
-        tooltipComponent={Tooltip}
-        {...props}
-    />
+    >
+      <Joyride
+          callback={callback}
+          continuous={continuous}
+          disableOverlay={disableOverlay}
+          disableScrolling
+          floaterProps={floaterProps}
+          run={run}
+          showSkipButton={showSkipButton}
+          steps={steps}
+          styles={styles}
+          tooltipComponent={Tooltip}
+          {...props}
+      />
+    </div>
 
   )
 }
