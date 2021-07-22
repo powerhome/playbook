@@ -5227,6 +5227,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"deep-diff@npm:^1.0.2":
+  version: 1.0.2
+  resolution: "deep-diff@npm:1.0.2"
+  checksum: 2cad2385af35be25be35bc36ecea1caf412e3c5c05390006bfb0145edbf17d8191b98bd6fc7b2471871b12e182b17de3962301bc96228201b8863620451e289b
+  languageName: node
+  linkType: hard
+
 "deep-equal@npm:^1.0.1":
   version: 1.1.1
   resolution: "deep-equal@npm:1.1.1"
@@ -6086,7 +6093,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"exenv@npm:^1.2.0":
+"exenv@npm:^1.2.0, exenv@npm:^1.2.2":
   version: 1.2.2
   resolution: "exenv@npm:1.2.2"
   checksum: 09fd080c0478739f0154916b73dea07f30f97972e1b3be3368d2b96d282d889b509f05e163d830e323c9ab1e94b0a293a9947b410651325df467c404f37f32f1
@@ -6250,7 +6257,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"fast-deep-equal@npm:^3.1.1":
+"fast-deep-equal@npm:^3.1.1, fast-deep-equal@npm:^3.1.3":
   version: 3.1.3
   resolution: "fast-deep-equal@npm:3.1.3"
   checksum: 451526766b219503131d11e823eaadd1533080b0be4860e316670b039dcaf31cd1007c2fe036a9b922abba7c040dfad5e942ed79d21f2ff849e50049f36e0fb7
@@ -8036,6 +8043,13 @@ fsevents@^1.2.7:
   version: 1.0.1
   resolution: "is-lambda@npm:1.0.1"
   checksum: 669ea37e8fafa800d076e7e7c64eadc9fd2a0607a3bc67e602d37092f2fec91c29929cdeec94e694607a88a2e0bdc7f8e122a9819dacadf05a9c5767c9672eb7
+  languageName: node
+  linkType: hard
+
+"is-lite@npm:^0.8.0, is-lite@npm:^0.8.1":
+  version: 0.8.1
+  resolution: "is-lite@npm:0.8.1"
+  checksum: 2fd8cefd79378221bdfd6abf42367a602e20ff74f15d68837cd4e837fd5f199a3ca3e3c42fb625e7d2bc0c544a819e94f13272341da4783cc79a1ca79eb8398d
   languageName: node
   linkType: hard
 
@@ -10021,6 +10035,20 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
+"nested-property@npm:1.0.1":
+  version: 1.0.1
+  resolution: "nested-property@npm:1.0.1"
+  checksum: 83244d39690cd8facca0778f2aff2d40d0a113806796d88fa3e04d05fb896568e529d0c62c180a7d3b5160f344ab82f681a944587209aeb3821e0105fc52477b
+  languageName: node
+  linkType: hard
+
+"nested-property@npm:^4.0.0":
+  version: 4.0.0
+  resolution: "nested-property@npm:4.0.0"
+  checksum: 62774e58b75b07a83b252b23578d71316363648cf4db40c233c3582c9dc2ca98a91247d5960a0fd80325b06a47595275afdbf4276d38255b47fed848dba2220d
+  languageName: node
+  linkType: hard
+
 "nice-try@npm:^1.0.4":
   version: 1.0.5
   resolution: "nice-try@npm:1.0.5"
@@ -11053,6 +11081,7 @@ fsevents@^1.2.7:
     react-dom: ^16.8.6
     react-dropzone: ^10.2.2
     react-highlight-words: ^0.16.0
+    react-joyride: ^2.3.0
     react-modal: ^3.12.1
     react-popper: ^2.1.0
     react-select: 3.0.8
@@ -11112,6 +11141,13 @@ fsevents@^1.2.7:
   dependencies:
     ts-pnp: ^1.1.6
   checksum: 39a484182f8fc08cb1420d4a5ccf16457c6498a4546bfbad9e00df7238ba7d98796e9aa6f82a4e803a627860409ffed491a55c5a1384e09bed60cefeb618586d
+  languageName: node
+  linkType: hard
+
+"popper.js@npm:^1.16.0":
+  version: 1.16.1
+  resolution: "popper.js@npm:1.16.1"
+  checksum: eb53806fb7680e31c7d1db096f95438a40a7cb869f7ee0e27100c0860f11583a0d322606c6073618e7fe8865f834ec36482901b547256d9a0cf2b22434bca75d
   languageName: node
   linkType: hard
 
@@ -12262,6 +12298,24 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
+"react-floater@npm:^0.7.2":
+  version: 0.7.3
+  resolution: "react-floater@npm:0.7.3"
+  dependencies:
+    deepmerge: ^4.2.2
+    exenv: ^1.2.2
+    is-lite: ^0.8.1
+    popper.js: ^1.16.0
+    react-proptype-conditional-require: ^1.0.4
+    tree-changes: ^0.5.1
+  peerDependencies:
+    prop-types: ^15.7.2
+    react: ^15.0.0 || ^16.0.0 || ^17.0.0
+    react-dom: ^15.0.0 || ^16.0.0 || ^17.0.0
+  checksum: d4c5209d9f91131913595fbd15c64fac8143e089a6df4f5551a620d191b93a0333b9a70919da27e9bb68e2e2a9546660a62afc7c2b91e1b2bbf1999feacda66e
+  languageName: node
+  linkType: hard
+
 "react-highlight-words@npm:^0.16.0":
   version: 0.16.0
   resolution: "react-highlight-words@npm:0.16.0"
@@ -12286,7 +12340,7 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"react-is@npm:^16.8.1":
+"react-is@npm:^16.13.1, react-is@npm:^16.8.1":
   version: 16.13.1
   resolution: "react-is@npm:16.13.1"
   checksum: 11bcf1267a314a522615f626f3ce3727a3a24cdbf61c4d452add3550a7875326669631326cfb1ba3e92b6f72244c32ffecf93ad21c0cad8455d3e169d0e3f060
@@ -12297,6 +12351,28 @@ fsevents@^1.2.7:
   version: 17.0.2
   resolution: "react-is@npm:17.0.2"
   checksum: 3eff23f410d40ab9bc5177f147a92c7f42c356a21ecea340e0554566956d67e5e1ba56f26cc7fa22339ac3c7151744177bd6305eaa26d3cbf15f354358c9d9b6
+  languageName: node
+  linkType: hard
+
+"react-joyride@npm:^2.3.0":
+  version: 2.3.0
+  resolution: "react-joyride@npm:2.3.0"
+  dependencies:
+    deep-diff: ^1.0.2
+    deepmerge: ^4.2.2
+    exenv: ^1.2.2
+    is-lite: ^0.8.0
+    nested-property: ^4.0.0
+    react-floater: ^0.7.2
+    react-is: ^16.13.1
+    scroll: ^3.0.1
+    scrollparent: ^2.0.1
+    tree-changes: ^0.6.1
+  peerDependencies:
+    prop-types: ^15.0.0
+    react: ^15.0.0 || ^16.0.0 || ^17.0.0
+    react-dom: ^15.0.0 || ^16.0.0 || ^17.0.0
+  checksum: 907e2c2c2c26dbaacb474027f231675827fdf4314724b4149e95c6b83a4e03563d113824650faedf1261a548ef1d0e304b60f0febeee3b6d3298768f75361dd8
   languageName: node
   linkType: hard
 
@@ -12332,6 +12408,13 @@ fsevents@^1.2.7:
     "@popperjs/core": ^2.0.0
     react: ^16.8.0 || ^17
   checksum: 5cac009001e2a7c640ba931afedbbf33c94a672a3f7c6ef672e55561b72778c6941a09f57156962114b9e47793779728088845fc306c43477ddc645cdb8793ea
+  languageName: node
+  linkType: hard
+
+"react-proptype-conditional-require@npm:^1.0.4":
+  version: 1.0.4
+  resolution: "react-proptype-conditional-require@npm:1.0.4"
+  checksum: 6fdffb5f1a29b6d090cd4c25065a9e29425c2e7f6edfe96058b1eda59685162f724ab622c6d8054f3d9f2b1c45d1390b5d893298ad56bfe8fbce71aa707d6fed
   languageName: node
   linkType: hard
 
@@ -12377,6 +12460,16 @@ fsevents@^1.2.7:
     object-assign: ^4.1.1
     prop-types: ^15.6.2
   checksum: 2769580b22952a52de3b5b2ea0f09cb904030b762d759739f49ab4da0b1f550e5c087ce3728c4be90f423d09481e0c075483c0c30b1ea9c549445c8b12020fd3
+  languageName: node
+  linkType: hard
+
+"react@npm:^16.8.0 || ^17.0.0":
+  version: 17.0.2
+  resolution: "react@npm:17.0.2"
+  dependencies:
+    loose-envify: ^1.1.0
+    object-assign: ^4.1.1
+  checksum: 7d0dfebafe1d297503157abb2e9acdb49852185deb8700c16f4a6faad87642f84903ab18cfc16f40b9a0dfe97540f99834982ee953e6d48b39c41608dc3e4b29
   languageName: node
   linkType: hard
 
@@ -13049,6 +13142,20 @@ fsevents@^1.2.7:
     ajv: ^6.12.5
     ajv-keywords: ^3.5.2
   checksum: a084f593f222560c412a4d8f40c92386c01c1c709f27c0672c2f02927a4d4d475f57f8b8e91198d0defb452add160476a03f07a05b26200a64b5124fa874e158
+  languageName: node
+  linkType: hard
+
+"scroll@npm:^3.0.1":
+  version: 3.0.1
+  resolution: "scroll@npm:3.0.1"
+  checksum: 8de4280bee46c2ffaea6d2a95cc4a595e35f5441fa1c359f30b66b1cf9111886f0b5618853dfa59377b2917fa4fae0bd94de03ce91e349794218f0198e9ab185
+  languageName: node
+  linkType: hard
+
+"scrollparent@npm:^2.0.1":
+  version: 2.0.1
+  resolution: "scrollparent@npm:2.0.1"
+  checksum: ae04a1123446e07fd2e2cd96c1a51005c1ce69b308911813a98ef052500eed71fcb6c6ef8f29725263526e22b54a6a1e27e65c8009804e063e08c370a4ad0fa1
   languageName: node
   linkType: hard
 
@@ -14387,6 +14494,30 @@ fsevents@^1.2.7:
   dependencies:
     punycode: ^2.1.1
   checksum: d6da91f2463fa8d30c938331d02bebf01bd96af68016bc233ad37c9e4bc7e607a46065f5eab2034076aab5fdac362c02421b34c29c57095d0d310d3833e2736f
+  languageName: node
+  linkType: hard
+
+"tree-changes@npm:^0.5.1":
+  version: 0.5.1
+  resolution: "tree-changes@npm:0.5.1"
+  dependencies:
+    deep-diff: ^1.0.2
+    nested-property: 1.0.1
+  checksum: 65201227ff846638b07df99bdedab27dcfc47e97824da0cff011eb1dec6fd2996088bcace6876800125a378c4caa8e17a3439c516dd0dc2ef6a86464af5c8e4c
+  languageName: node
+  linkType: hard
+
+"tree-changes@npm:^0.6.1":
+  version: 0.6.1
+  resolution: "tree-changes@npm:0.6.1"
+  dependencies:
+    fast-deep-equal: ^3.1.3
+    is-lite: ^0.8.0
+    react: ^16.8.0 || ^17.0.0
+  dependenciesMeta:
+    react:
+      optional: true
+  checksum: cab17ad8da2d4b52bc5856c541057730fd9b1c3c14bf83425b00fa859babf34e9f46747117fad8e40d17f7d74a8ec2d70061a2e1f47239276059233ad03ed668
   languageName: node
   linkType: hard
 

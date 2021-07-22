@@ -1,33 +1,57 @@
 
 
+## [10.2.1](https://github.com/powerhome/playbook/tree/10.2.1) (2021-07-22)
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/10.2.0...10.2.1)
+
+**Local Changes**
+
+- Resolve yarn dependency failures in `10.2.0`
+
+
+
+## [10.2.0](https://github.com/powerhome/playbook/tree/10.2.0) (2021-07-22)
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/10.1.0...10.2.0)
+
+**New Kits:**
+
+- Walkthrough Kit [\#1537](https://github.com/powerhome/playbook/pull/1537) ([kre8sions](https://github.com/kre8sions))
+
+**Merged pull requests:**
+
+- Revert Rich Text Editor overflow property [\#1567](https://github.com/powerhome/playbook/pull/1567) ([bh247484](https://github.com/bh247484))
+
+
+
 ## [10.1.0](https://github.com/powerhome/playbook/tree/10.1.0) (2021-07-14)
 
 [Full Changelog](https://github.com/powerhome/playbook/compare/10.0.1...10.1.0)
 
 **Kit Enhancements:**
 
-- \[NUXE-820\] Reintroduce Rails size prop to Multiple Users kit [\#1546](https://github.com/powerhome/playbook/pull/1546) ([bh247484](https://github.com/bh247484))
+- Reintroduce Rails size prop to Multiple Users kit [\#1546](https://github.com/powerhome/playbook/pull/1546) ([bh247484](https://github.com/bh247484))
 
 **Fixed Bugs:**
 
 - Fix Playbook [\#1562](https://github.com/powerhome/playbook/pull/1562) ([thestephenmarshall](https://github.com/thestephenmarshall))
 - Fix popover copypasta [\#1561](https://github.com/powerhome/playbook/pull/1561) ([thestephenmarshall](https://github.com/thestephenmarshall))
-- Fix custom icon \[NUXE-837\] [\#1553](https://github.com/powerhome/playbook/pull/1553) ([thestephenmarshall](https://github.com/thestephenmarshall))
+- Fix custom icon [\#1553](https://github.com/powerhome/playbook/pull/1553) ([thestephenmarshall](https://github.com/thestephenmarshall))
 - Fix getting started page [\#1550](https://github.com/powerhome/playbook/pull/1550) ([bh247484](https://github.com/bh247484))
-- \[NUXE-589\] Fix Rich Text Editor flex container bug [\#1549](https://github.com/powerhome/playbook/pull/1549) ([bh247484](https://github.com/bh247484))
-- \[NUXE-640\] Restructure Button kit stylings [\#1542](https://github.com/powerhome/playbook/pull/1542) ([bh247484](https://github.com/bh247484))
+- Fix Rich Text Editor flex container bug [\#1549](https://github.com/powerhome/playbook/pull/1549) ([bh247484](https://github.com/bh247484))
+- Restructure Button kit stylings [\#1542](https://github.com/powerhome/playbook/pull/1542) ([bh247484](https://github.com/bh247484))
 
 **Improvements:**
 
 - Global prop numberSpacing [\#1559](https://github.com/powerhome/playbook/pull/1559) ([kre8sions](https://github.com/kre8sions))
-- \[NUXE-649\] Add global prop numberSpacing [\#1555](https://github.com/powerhome/playbook/pull/1555) ([kre8sions](https://github.com/kre8sions))
+- Add global prop numberSpacing [\#1555](https://github.com/powerhome/playbook/pull/1555) ([kre8sions](https://github.com/kre8sions))
 - Preload Proxima Nova fonts [\#1552](https://github.com/powerhome/playbook/pull/1552) ([kre8sions](https://github.com/kre8sions))
-- \[NUXE-649\] - Remove Base64 Fonts [\#1541](https://github.com/powerhome/playbook/pull/1541) ([kre8sions](https://github.com/kre8sions))
+- Remove Base64 Fonts [\#1541](https://github.com/powerhome/playbook/pull/1541) ([kre8sions](https://github.com/kre8sions))
 
 **Merged pull requests:**
 
-- Revert "\[NUXE-649\] Add global prop numberSpacing" [\#1558](https://github.com/powerhome/playbook/pull/1558) ([kre8sions](https://github.com/kre8sions))
-- \[NUXE-832\] Fixes the dev-start from Crashing [\#1554](https://github.com/powerhome/playbook/pull/1554) ([jasperfurniss](https://github.com/jasperfurniss))
+- Revert "Add global prop numberSpacing" [\#1558](https://github.com/powerhome/playbook/pull/1558) ([kre8sions](https://github.com/kre8sions))
+- Fixes the dev-start from Crashing [\#1554](https://github.com/powerhome/playbook/pull/1554) ([jasperfurniss](https://github.com/jasperfurniss))
 - Update dependency ruby to v2.7.4 [\#1547](https://github.com/powerhome/playbook/pull/1547) ([renovate[bot]](https://github.com/apps/renovate))
 - Update dependency flow-bin to v0.155.0 [\#1538](https://github.com/powerhome/playbook/pull/1538) ([renovate[bot]](https://github.com/apps/renovate))
 - Update dependency axe-core to v4.3.0 [\#1533](https://github.com/powerhome/playbook/pull/1533) ([renovate[bot]](https://github.com/apps/renovate))
@@ -160,11 +184,11 @@
 
 **Kit Enhancements:**
 
-- \[CHMN-98\] Add classname to popover on passphrase kit  [\#1489](https://github.com/powerhome/playbook/pull/1489) ([josephinef9](https://github.com/josephinef9))
+- Add classname to popover on passphrase kit  [\#1489](https://github.com/powerhome/playbook/pull/1489) ([josephinef9](https://github.com/josephinef9))
 
 **Fixed Bugs:**
 
-- \[NUXE-655\] Move error text [\#1490](https://github.com/powerhome/playbook/pull/1490) ([thestephenmarshall](https://github.com/thestephenmarshall))
+- Move error text [\#1490](https://github.com/powerhome/playbook/pull/1490) ([thestephenmarshall](https://github.com/thestephenmarshall))
 - Fixed broken styles in multiple users stacked + pill accessibility, badge alignment, & menu re-organization [\#1488](https://github.com/powerhome/playbook/pull/1488) ([jasoncypret](https://github.com/jasoncypret))
 
 **Merged pull requests:**
@@ -1787,6 +1811,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Removed (breaking changes)
 - React PbLayout prop `children` dropped support for single Node (https://github.com/powerhome/playbook/commit/b16da50914e110c75c6d96c985fa02781c9e2040#diff-c3ce2c91288ca3e730d3c56e7f73475cL11-L14)
 - Rails PbLayout prop `dark` dropped (https://github.com/powerhome/playbook/commit/b16da50914e110c75c6d96c985fa02781c9e2040#diff-377fda563d148f7b3ad33f904b7b0cdbL13)
+
+
+\* *This Changelog was automatically generated by [github_changelog_generator](https://github.com/github-changelog-generator/github-changelog-generator)*
 
 
 \* *This Changelog was automatically generated by [github_changelog_generator](https://github.com/github-changelog-generator/github-changelog-generator)*
