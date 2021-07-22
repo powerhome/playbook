@@ -23,8 +23,6 @@
   overflow-x: auto;
 }
 [class^=pb_rich_text_editor_kit] {
-  // Fixes flex container resizing bug
-  overflow-x: auto;
   // Disables File Attatchment Button in Toolbar
   trix-toolbar [data-trix-button-group="file-tools"] {
     display: none;
