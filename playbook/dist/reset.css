@@ -1,2 +1,61 @@
-*{box-sizing:border-box;margin:0;padding:0}*:before,*:after{box-sizing:border-box}html{-webkit-tap-highlight-color:rgba(0,0,0,0);height:100vh;overflow-x:hidden}body{font-family:"Proxima Nova","Helvetica Neue",Helvetica,Arial,sans_serif;font-size:16px;line-height:1.5;background-color:#F3F7FB;height:100%;letter-spacing:0;font-weight:400;font-style:normal;text-rendering:optimizeLegibility;-moz-font-feature-settings:"liga" on;color:#242B42;margin:0 !important;padding:0 !important;box-sizing:border-box;min-height:100vh;padding:50px}a{text-decoration:none;color:#0056CF}
+/* CLEAN UP AND REMOVE */
+/* Headings */
+/* Standard Font Weights */
+/* Non_Standard Font Weights */
+/*=====================================
+Base colors should not be documented.
+Only document color use.
+
+Colors -----------------------------*/
+/* Specialty Gradient -----------------*/
+/* Interface colors -------------------*/
+/* Main colors ------------------------*/
+/*=====================================
+
+Background colors ------------------*/
+/* Card colors ------------------*/
+/* Active colors ----------------------*/
+/* Hover colors -----------------------*/
+/* Focus colors -----------------------*/
+/* Border colors ----------------------*/
+/* Shadow colors ----------------------*/
+/* Text colors ------------------------*/
+/* Data colors ------------------------*/
+/* Status colors ----------------------*/
+/* Link colors ------------------------*/
+/* Product colors ---------------------*/
+/* Category colors ---------------------*/
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0; }
+  *:before, *:after {
+    box-sizing: border-box; }
+
+html {
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  height: 100vh;
+  overflow-x: hidden; }
+
+body {
+  font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif;
+  font-size: 16px;
+  line-height: 1.5;
+  background-color: #F3F7FB;
+  height: 100%;
+  letter-spacing: 0;
+  font-weight: 400;
+  font-style: normal;
+  text-rendering: optimizeLegibility;
+  -moz-font-feature-settings: "liga" on;
+  color: #242B42;
+  margin: 0 !important;
+  padding: 0 !important;
+  box-sizing: border-box;
+  min-height: 100vh;
+  padding: 50px; }
+
+a {
+  text-decoration: none;
+  color: #0056CF; }
 
