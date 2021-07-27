@@ -99,7 +99,7 @@ $selector: ".pb_nav_list";
         border-color: rgba($white, $opacity_3);
       }
       &[class*=_active] [class*=_link]{
-        border-color: $white;
+        border-color: $active_dark;
         [class*=_text],[class*=_icon]{
           color: $text_dk_default;
         }
