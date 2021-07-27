@@ -65,7 +65,7 @@ GEM
     babel-transpiler (0.7.0)
       babel-source (>= 4.0, < 6)
       execjs (~> 2.0)
-    better_errors (2.5.1)
+    better_errors (2.9.1)
       coderay (>= 1.0.0)
       erubi (>= 1.0.0)
       rack (>= 0.9.0)
@@ -234,7 +234,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  better_errors (= 2.5.1)
+  better_errors (= 2.9.1)
   bootsnap (>= 1.1.0)
   byebug
   capybara (>= 2.15)
