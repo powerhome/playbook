@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    playbook_ui (10.3.0)
+    playbook_ui (10.4.0)
       actionpack (>= 5.2.4.5, < 7.0)
       actionview (>= 5.2.4.5, < 7.0)
       activesupport (>= 5.2.4.5, < 7.0)
@@ -263,4 +263,4 @@ DEPENDENCIES
   tzinfo-data (= 1.2018.9)
 
 BUNDLED WITH
-   2.2.11
+   2.2.15
