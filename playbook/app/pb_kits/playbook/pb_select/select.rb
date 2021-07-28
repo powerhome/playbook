@@ -18,6 +18,10 @@ module Playbook
       prop :options, type: Playbook::Props::HashArray, required: false, default: []
       prop :required, type: Playbook::Props::Boolean, default: false
 
+      def classnames
+        classname + inline_class + compact_class
+      end
+
       def classname
         generate_classname("pb_select", select_margin_bottom, separator: " ")
       end

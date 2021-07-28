@@ -24,7 +24,6 @@ const SelectInline = (props) => {
           label="Favorite Food"
           name="food"
           options={options}
-          value="2"
           {...props}
       />
       <Body
