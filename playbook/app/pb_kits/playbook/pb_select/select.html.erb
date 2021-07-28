@@ -1,7 +1,7 @@
 <%= content_tag(:div,
   data: object.data,
   aria: object.aria,
-  class: object.classname) do %>
+  class: object.classname + object.inline_class + object.compact_class) do %>
   <% if object.label %>
     <label class="pb_select_kit_label" for="<%= object.name %>">
       <%= pb_rails("caption", props: { text: object.label }) %>

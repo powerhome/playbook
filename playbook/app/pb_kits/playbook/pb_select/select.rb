@@ -6,9 +6,11 @@ module Playbook
   module PbSelect
     class Select < Playbook::KitBase
       prop :blank_selection
+      prop :compact, type: Playbook::Props::Boolean, default: false
       prop :disabled, type: Playbook::Props::Boolean, default: false
       prop :error
       prop :include_blank
+      prop :inline, type: Playbook::Props::Boolean, default: false
       prop :label
       prop :multiple, type: Playbook::Props::Boolean, default: false
       prop :name
@@ -18,6 +20,14 @@ module Playbook
 
       def classname
         generate_classname("pb_select", select_margin_bottom, separator: " ")
+      end
+
+      def inline_class
+        inline ? " inline " : " "
+      end
+
+      def compact_class
+        compact ? "compact" : ""
       end
 
       def select_wrapper_class
