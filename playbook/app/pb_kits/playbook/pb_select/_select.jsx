@@ -131,7 +131,7 @@ const Select = ({
         <Icon
             className="pb_select_kit_caret"
             fixedWidth
-            icon="angle-down"
+            icon={inline ? 'chevron-down' : 'angle-down'}
         />
         <If condition={error}>
           <Body

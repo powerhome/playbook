@@ -34,6 +34,10 @@ module Playbook
         compact ? "compact" : ""
       end
 
+      def icon
+        inline ? "chevron-down" : "angle-down"
+      end
+
       def select_wrapper_class
         "pb_select_kit_wrapper" + error_class
       end
