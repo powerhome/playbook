@@ -43,7 +43,7 @@ const FileUpload = (props: FileUploadProps) => {
           <If condition={isDragActive}>
             <p>{'Drop the files here ...'}</p>
             <Else />
-            <p>{'Drag & drop some files here, or click to select files'}</p>
+            <p>{'Choose a file or drag it here'}</p>
           </If>
         </Body>
       </Card>
