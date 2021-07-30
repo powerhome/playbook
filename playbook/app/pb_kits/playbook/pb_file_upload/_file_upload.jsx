@@ -32,7 +32,13 @@ const FileUpload = (props: FileUploadProps) => {
     onDrop,
   })
 
-  const acceptedFileTypes = accept.map((fileType) => (fileType.replace('image/', ' ')))
+  const acceptedFileTypes = accept.map((fileType) => {
+    if (fileType.startsWith('image/')) {
+      return fileType.replace('image/', ' ')
+    } else {
+      return fileType
+    }
+  })
 
   return (
     <div
