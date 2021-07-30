@@ -32,6 +32,8 @@ const FileUpload = (props: FileUploadProps) => {
     onDrop,
   })
 
+  const acceptedFileTypes = accept.map((fileType) => (fileType.replace('image/', ' ')))
+
   return (
     <div
         className={classnames(buildCss('pb_file_upload_kit'), globalProps(props), className)}
@@ -43,7 +45,7 @@ const FileUpload = (props: FileUploadProps) => {
           <If condition={isDragActive}>
             <p>{'Drop the files here ...'}</p>
             <Else />
-            <p>{'Choose a file or drag it here'}</p>
+            <p>{`Choose a file or drag it here. The accepted file types are: ${acceptedFileTypes}`}</p>
           </If>
         </Body>
       </Card>
