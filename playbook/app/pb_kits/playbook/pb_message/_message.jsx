@@ -25,6 +25,7 @@ type MessageProps = {
   message: string,
   timestamp?: string,
   timestampObject?: string,
+  timezone?: string,
   alignTimestamp?: string,
 }
 
@@ -42,6 +43,7 @@ const Message = (props: MessageProps) => {
     message,
     timestamp,
     timestampObject,
+    timezone,
     alignTimestamp = 'right',
   } = props
   const ariaProps = buildAriaProps(aria)
@@ -87,11 +89,13 @@ const Message = (props: MessageProps) => {
           <Timestamp
               className={`pull-${alignTimestamp} ${timestampObject ? 'message_humanized_time' : null}`}
               text={timestamp}
+              timezone={timezone}
           />
           <If condition={timestampObject}>
             <Timestamp
                 className={`pull-${alignTimestamp} message_timestamp`}
                 timestamp={timestampObject}
+                timezone={timezone}
             />
           </If>
         </Flex>
