@@ -12,7 +12,7 @@ Playbook is the first design system built for both Rails & React interfaces. Ins
 - [asdf](https://github.com/asdf-vm/asdf)
 - Install language tools: `asdf install`
 
-### Getting Started and Running the Playbook for Development
+### Getting Started and Running Playbook for Development
 
 1. After cloning the repo, you should have the following nested folders among other files. It will be important to pay attention to which folder we are in as we get playbook running:
     ```
