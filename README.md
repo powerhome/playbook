@@ -12,7 +12,7 @@ Playbook is the first design system built for both Rails & React interfaces. Ins
 - [asdf](https://github.com/asdf-vm/asdf)
 - Install language tools: `asdf install`
 
-### Getting Started and Running the website for Development
+### Getting Started and Running the Playbook for Development
 
 1. After cloning the repo, you should have the following nested folders among other files. It will be important to pay attention to which folder we are in as we get playbook running:
     ```
@@ -24,7 +24,7 @@ Playbook is the first design system built for both Rails & React interfaces. Ins
 3. Again from the top-level playbook folder run: `yarn install`
 4. cd into the playbook-website folder: `cd playbook-website`
 5. From the playbook-website folder run: `bundle install`
-    n.b.: If you receive a bundle(r) related error, be sure that bundler is installed first. See the BUNDLED WITH section of `playbook-website/Gemfile.lock` for the exact version to install.
+    **n.b.:** If you receive a bundle(r) related error, be sure that bundler is installed first. See the BUNDLED WITH section of `playbook-website/Gemfile.lock` for the exact version to install.
 6. cd back into the top-level playbook folder: `cd ..`
 7. From the top-level playbook folder run `yarn start-dev` This may take a little while.
 8. Once it says "compiled successfully", navigate to [http://localhost:3000](http://localhost:3000) and you should see the playbook website.
