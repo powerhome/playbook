@@ -132,4 +132,41 @@
       }
     }
   }
+  &.inline {
+    &:not(:hover) {
+      svg {
+        display: none;
+      }
+    }
+    &:hover {
+      select {
+        color: $white !important;
+        background: rgba(0,130,255,0.1);
+        text-shadow: none;
+      }
+
+      svg {
+        color: #0056CF !important;
+        font-size: 16px;
+      }
+    }
+
+    select {
+      box-shadow: none;
+      border-color: transparent;
+      background: transparent;
+      padding: 4px 8px;
+      border-radius: 4px;
+
+      option {
+        background-color: $white;
+      }
+    }
+
+    &.compact {
+      select {
+        font-size: 12px;
+      }
+    }
+  }
 }
