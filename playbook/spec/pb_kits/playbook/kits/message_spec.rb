@@ -11,6 +11,7 @@ RSpec.describe Playbook::PbMessage::Message do
   it { is_expected.to define_prop(:label) }
   it { is_expected.to define_prop(:message) }
   it { is_expected.to define_prop(:timestamp) }
+  it { is_expected.to define_prop(:timezone).with_default("America/New_York") }
 
   describe "#classname" do
     it "returns namespaced class name", :aggregate_failures do
