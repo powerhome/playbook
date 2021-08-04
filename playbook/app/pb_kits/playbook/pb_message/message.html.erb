@@ -23,11 +23,13 @@
 
         <%= pb_rails("timestamp", props: {
           text: object.timestamp,
+          timezone: object.timezone,
           classname: "pull-#{object.align_timestamp} #{object.timestamp_object.present? ? 'message_humanized_time' : nil}"
         }) %>
         <% if object.timestamp_object.present? %>
           <%= pb_rails("timestamp", props: {
             timestamp: object.timestamp_object,
+            timezone: object.timezone,
             classname: "pull-#{object.align_timestamp} message_timestamp"
           }) %>
         <% end %>
