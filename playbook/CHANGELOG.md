@@ -1,5 +1,24 @@
 
 
+## [10.5.0](https://github.com/powerhome/playbook/tree/10.5.0) (2021-08-04)
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/10.4.0...10.5.0)
+
+**Kit Enhancements:**
+
+- Add timezone prop down to timestamp kit from message kit [\#1573](https://github.com/powerhome/playbook/pull/1573) ([haydenrou](https://github.com/haydenrou))
+- Add inline and inline compact options to the select kit for inline usage [\#1571](https://github.com/powerhome/playbook/pull/1571) ([haydenrou](https://github.com/haydenrou))
+
+**Fixed Bugs:**
+
+- Fix documentation for getting started with PB [\#1574](https://github.com/powerhome/playbook/pull/1574) ([kellyeryan](https://github.com/kellyeryan))
+
+**Improvements:**
+
+- PB File Uploads - Changes copy and adds list of permissible file types [\#1572](https://github.com/powerhome/playbook/pull/1572) ([kellyeryan](https://github.com/kellyeryan))
+
+
+
 ## [10.4.0](https://github.com/powerhome/playbook/tree/10.4.0) (2021-07-28)
 
 [Full Changelog](https://github.com/powerhome/playbook/compare/10.3.0...10.4.0)
@@ -16,7 +35,7 @@
 
 **Improvements:**
 
-- \[NUXE-825\] Horizontal Nav underline color update [\#1564](https://github.com/powerhome/playbook/pull/1564) ([megantrimble](https://github.com/megantrimble))
+- Horizontal Nav underline color update [\#1564](https://github.com/powerhome/playbook/pull/1564) ([megantrimble](https://github.com/megantrimble))
 
 **Merged pull requests:**
 
