@@ -64,6 +64,37 @@
     transform: translateY(-50%);
     pointer-events: none;
   }
+  &.inline {
+    &:not(:hover) {
+      svg {
+        display: none;
+      }
+    }
+    &:hover {
+      select {
+        color: $primary !important;
+        background: rgba(0,130,255,0.1);
+      }
+      svg {
+        color: $primary !important;
+        font-size: 16px;
+      }
+    }
+    select {
+      box-shadow: none;
+      border-color: transparent;
+      padding: 4px 8px;
+      border-radius: 4px;
+      option {
+        background-color: $white;
+      }
+    }
+    &.compact {
+      select {
+        font-size: 12px;
+      }
+    }
+  }
 }
 
 [class^=pb_select].dark {
@@ -93,6 +124,38 @@
         > select:first-child {
           border-color: $error_dark;
         }
+      }
+    }
+  }
+  &.inline {
+    &:not(:hover) {
+      svg {
+        display: none;
+      }
+    }
+    &:hover {
+      select {
+        color: $white !important;
+        background: rgba(0,130,255,0.1);
+      }
+      svg {
+        color: $primary !important;
+        font-size: 16px;
+      }
+    }
+    select {
+      box-shadow: none;
+      border-color: transparent;
+      background: transparent;
+      padding: 4px 8px;
+      border-radius: 4px;
+      option {
+        background-color: $white;
+      }
+    }
+    &.compact {
+      select {
+        font-size: 12px;
       }
     }
   }

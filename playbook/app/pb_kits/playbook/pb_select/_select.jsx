@@ -21,6 +21,7 @@ type SelectProps = {
   aria?: object,
   blankSelection?: string,
   children?: React.Node,
+  compact?: boolean,
   className?: string,
   data?: object,
   disabled?: boolean,
@@ -29,6 +30,7 @@ type SelectProps = {
   options: SelectOption[],
   id?: string,
   includeBlank?: string,
+  inline?: boolean,
   label?: string,
   margin: string,
   marginBottom: string,
@@ -53,10 +55,12 @@ const Select = ({
   blankSelection,
   children,
   className,
+  compact = false,
   data = {},
   disabled = false,
   error,
   label,
+  inline = false,
   multiple = false,
   name,
   onChange = () => {},
@@ -69,13 +73,18 @@ const Select = ({
   const dataProps = buildDataProps(data)
   const optionsList = createOptions(options)
 
+  const inlineClass = inline ? 'inline' : null
+  const compactClass = compact ? 'compact' : null
   const classes = classnames(
     buildCss('pb_select'),
     globalProps({
       ...props,
       marginBottom: props.marginBottom || props.margin || 'sm',
     }),
-    className)
+    className,
+    inlineClass,
+    compactClass
+  )
 
   const selectWrapperClass = classnames(buildCss('pb_select_kit_wrapper'), { error }, className)
 
