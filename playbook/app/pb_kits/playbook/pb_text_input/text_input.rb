@@ -10,6 +10,8 @@ module Playbook
       prop :error
       prop :inline, type: Playbook::Props::Boolean,
                     default: false
+      prop :input_options, type: Playbook::Props::Hash,
+                           default: {}
       prop :label
       prop :name
       prop :placeholder
@@ -27,7 +29,7 @@ module Playbook
       end
 
       def input_tag
-        tag(:input, input_options)
+        tag(:input, all_input_options)
       end
 
       def has_add_on?
@@ -44,13 +46,13 @@ module Playbook
 
     private
 
-      def input_options
+      def all_input_options
         {
           autocomplete: autocomplete ? nil : "off",
-          class: "text_input",
+          class: "text_input #{input_options.dig(:classname) || ''}",
           data: validation_data,
           disabled: disabled,
-          id: id,
+          id: input_options.dig(:id) || id,
           name: name,
           pattern: validation_pattern,
           placeholder: placeholder,
@@ -69,7 +71,7 @@ module Playbook
       end
 
       def validation_data
-        fields = {}
+        fields = input_options.dig(:data) || {}
         fields[:message] = validation_message unless validation_message.blank?
         fields
       end

@@ -15,6 +15,7 @@ RSpec.describe Playbook::PbTextInput::TextInput do
   it { is_expected.to define_prop(:placeholder) }
   it { is_expected.to define_prop(:value) }
   it { is_expected.to define_prop(:type).with_default("text") }
+  it { is_expected.to define_prop(:input_options).of_type(Playbook::Props::Hash).with_default({}) }
 
   describe "#classname" do
     it "returns namespaced class name", :aggregate_failures do

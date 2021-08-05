@@ -17,6 +17,8 @@ module Playbook
       prop :name
       prop :options, type: Playbook::Props::HashArray,
                      default: []
+      prop :input_options, type: Playbook::Props::Hash,
+                           default: {}
       prop :pills, type: Playbook::Props::Boolean,
                    default: false
 
