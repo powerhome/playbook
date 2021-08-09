@@ -28,6 +28,7 @@ RSpec.describe Playbook::PbTypeahead::Typeahead do
   it { is_expected.to define_prop(:search_term_minimum_length).with_default(3) }
   it { is_expected.to define_prop(:search_debounce_timeout).with_default(250) }
   it { is_expected.to define_prop(:value) }
+  it { is_expected.to define_prop(:input_options).of_type(Playbook::Props::Hash).with_default({}) }
 
   describe "#classname" do
     it "returns namespaced class name", :aggregate_failures do

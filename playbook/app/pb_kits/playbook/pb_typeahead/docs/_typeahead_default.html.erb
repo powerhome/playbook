@@ -1,4 +1,15 @@
-<%= pb_rails("typeahead", props: { label: "user", name: :foo, data: { typeahead_example: true } }) %>
+<%= pb_rails("typeahead", props: {
+  label: "user",
+  name: :foo,
+  data: { typeahead_example: true },
+  input_options: {
+    classname: "my-typeahead-class",
+    data: {
+      typeahead_testing: "data field test"
+    },
+    id: "typeahead-input-id-test",
+  },
+})%>
 
 <br><br><br>
 
