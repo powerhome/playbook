@@ -4,7 +4,7 @@ module Playbook
   module PbCollapsible
     class CollapsibleMain < Playbook::KitBase
       prop :id, type: Playbook::Props::String,
-                  default: "pb_collapsible_kit"
+                default: "pb_collapsible_kit"
 
       def data
         Hash(prop(:data)).merge(collapsible_main: true)
@@ -15,7 +15,7 @@ module Playbook
       end
 
       def aria_main
-        {label: "Toggle Section Content", role: "button"}.merge! aria
+        { label: "Toggle Section Content", role: "button" }.merge! aria
       end
     end
   end

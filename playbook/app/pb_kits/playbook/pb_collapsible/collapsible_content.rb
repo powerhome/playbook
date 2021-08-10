@@ -14,7 +14,7 @@ module Playbook
       end
 
       def aria_content
-        {labelledby: "collapsible"}.merge! aria
+        { labelledby: "collapsible" }.merge! aria
       end
     end
   end
