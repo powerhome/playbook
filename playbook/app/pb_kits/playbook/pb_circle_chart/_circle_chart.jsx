@@ -1,13 +1,13 @@
 /* @flow */
 
 import React, { useEffect, useRef } from 'react'
-import { pbChart } from '../'
-import { globalProps } from '../utilities/globalProps'
 import classnames from 'classnames'
 import Highcharts from 'highcharts'
 
+import { globalProps } from '../utilities/globalProps'
 import { buildAriaProps, buildDataProps } from '../utilities/props'
 
+import pbChart from '../plugins/pb_chart'
 type CircleChartProps = {
   aria: Object,
   chartData?: array,

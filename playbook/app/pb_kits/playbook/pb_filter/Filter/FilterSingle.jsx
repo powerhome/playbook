@@ -2,7 +2,8 @@
 
 import React from 'react'
 import { isEmpty } from 'lodash'
-import { Flex } from '../../'
+
+import Flex from '../../pb_flex/_flex'
 
 import CurrentFilters, { FilterDescription } from './CurrentFilters'
 import FilterBackground, { FilterBackgroundProps } from './FilterBackground'

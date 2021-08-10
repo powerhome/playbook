@@ -6,6 +6,11 @@ const AvatarDefault = (props) => {
     <div>
       <Avatar
           name="Terry Johnson"
+          size="xxs"
+          {...props}
+      />
+      <Avatar
+          name="Terry Johnson"
           size="xs"
           {...props}
       />

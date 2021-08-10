@@ -2,22 +2,40 @@
 
 require "rails_helper"
 
-RSpec.describe Playbook::PbForm::Form do
-  describe "#form_system_options" do
-    it "adds pb-form to the form_with `class` option" do
-      view_object = Playbook::PbForm::Form.new(form_system_options: { class: "example-class-option" })
+RSpec.describe Playbook::PbForm::Form, type: :kit do
+  before do
+    helper.extend Playbook::PbKitHelper
+    helper.define_singleton_method :users_path do |*|
+      "/users"
+    end
+  end
 
-      expect(view_object.form_system_options).to include(class: "example-class-option")
+  it "allows the user to set the URL" do
+    rendered = helper.pb_rails "form", props: { options: { url: "http://example.org" } }
+
+    expect(rendered).to have_tag("form[action='http://example.org']")
+  end
+
+  it "allows the user to not set the URL" do
+    model_name = double(name: "User", route_key: :users, param_key: :id)
+    model = double("model", model_name: model_name, persisted?: false)
+    object = double("object", to_model: model)
+    rendered = helper.pb_rails "form", props: { options: { model: object } }
+
+    expect(rendered).to have_tag("form[action='/users']")
+  end
+
+  it "allows the user to set the URL" do
+    rendered = helper.pb_rails "form", props: { options: { url: "http://example.org" } }
+
+    expect(rendered).to have_tag("form.pb-form")
+  end
+
+  it "allows the user render actions" do
+    rendered = helper.pb_rails "form", props: { options: { url: "http://example.org" } } do |form|
+      form.actions(&:submit)
     end
 
-    it "adds pb-form to the simple_form `class` option" do
-      model = double
-      view_object = Playbook::PbForm::Form.new(
-        form_system: "simple_form",
-        form_system_options: [model, { html: { class: "example-class-option" } }]
-      )
-
-      expect(view_object.form_system_options).to include(html: { class: "example-class-option" }, model: model)
-    end
+    expect(rendered).to have_tag("form > ol.pb-form-actions > li > button.pb_button_kit_primary_inline_enabled[type=submit]")
   end
 end

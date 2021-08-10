@@ -5,9 +5,10 @@ import classnames from 'classnames'
 import { map } from 'lodash'
 
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
-import { globalProps } from '../utilities/globalProps.js'
+import { globalProps } from '../utilities/globalProps'
 
-import { Image, OnlineStatus } from '../'
+import Image from '../pb_image/_image'
+import OnlineStatus from '../pb_online_status/_online_status'
 
 type AvatarProps = {
   aria?: object,
@@ -15,9 +16,10 @@ type AvatarProps = {
   data?: object,
   dark?: boolean,
   id?: string,
+  imageAlt?: string,
   imageUrl: string,
   name: string,
-  size?: "md" | "lg" | "sm" | "xl" | "xs",
+  size?: "md" | "lg" | "sm" | "xl" | "xs" | "xxs",
   status: "away" | "offline" | "online",
 }
 
@@ -27,7 +29,18 @@ const firstTwoInitials = (name) =>
     .substring(0, 2)
 
 const Avatar = (props: AvatarProps) => {
-  const { aria = {}, className, data = {}, name = null, id = '', imageUrl, size = 'md', status = null, dark = false } = props
+  const {
+    aria = {},
+    className,
+    data = {},
+    name = null,
+    id = '',
+    imageAlt = '',
+    imageUrl,
+    size = 'md',
+    status = null,
+    dark = false,
+  } = props
   const dataProps = buildDataProps(data)
   const ariaProps = buildAriaProps(aria)
   const classes = classnames(
@@ -55,7 +68,7 @@ const Avatar = (props: AvatarProps) => {
       >
         <If condition={imageUrl && !error}>
           <Image
-              alt={name}
+              alt={imageAlt}
               onError={handleError}
               url={imageUrl}
           />

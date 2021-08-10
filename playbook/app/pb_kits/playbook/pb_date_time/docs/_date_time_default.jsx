@@ -29,7 +29,8 @@ const DateTimeDefault = (props) => (
     <br />
 
     <DateTime
-        datetime={new Date('2020-12-31 14:24:09 -0500')}
+        datetime={new Date('2020/12/31 14:24:09 -0500')}
+        timeZone="Asia/Tokyo"
         {...props}
     />
   </div>

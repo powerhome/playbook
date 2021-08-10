@@ -2,12 +2,15 @@
 
 import React from 'react'
 import classnames from 'classnames'
+import { buildAriaProps, buildDataProps } from '../utilities/props'
 import { globalProps } from '../utilities/globalProps.js'
 
 type IconProps = {
-  aria?: Object,
+  aria?: object,
   border?: boolean,
   className?: string,
+  customIcon?: SVGElement,
+  data?: object,
   fixedWidth?: boolean,
   flip?: "horizontal" | "vertical" | "both" | "none",
   icon: string,
@@ -41,8 +44,11 @@ const flipMap = {
 
 const Icon = (props: IconProps) => {
   const {
+    aria = {},
     border = false,
     className,
+    customIcon,
+    data = {},
     fixedWidth = true,
     flip = false,
     icon,
@@ -55,31 +61,61 @@ const Icon = (props: IconProps) => {
     size,
     spin = false,
   } = props
+
+  const faClasses = {
+    'fa-border': border,
+    'fa-fw': fixedWidth,
+    'fa-inverse': inverse,
+    'fa-li': listItem,
+    'fa-pulse': pulse,
+    'fa-spin': spin,
+    [`fa-${size}`]: size,
+    [`fa-pull-${pull}`]: pull,
+    [`fa-rotate-${rotation}`]: rotation,
+  }
+
+  // Lets check and see if the icon prop is referring to a custom Power icon...
+  // If so, then set fa-icon to "custom"
+  // this ensures the JS will not do any further operations
+  // faClasses[`fa-${icon}`] = customIcon ? 'custom' : icon
+  if (!customIcon) faClasses[`fa-${icon}`] = icon
+
   const classes = classnames(
     flipMap[flip],
     'pb_icon_kit',
-    'far',
-    {
-      'fa-border': border,
-      'fa-fw': fixedWidth,
-      'fa-inverse': inverse,
-      'fa-li': listItem,
-      'fa-pulse': pulse,
-      'fa-spin': spin,
-      [`fa-${icon}`]: icon,
-      [`fa-${size}`]: size,
-      [`fa-pull-${pull}`]: pull,
-      [`fa-rotate-${rotation}`]: rotation,
-    },
+    customIcon ? '' : 'far',
+    faClasses,
     globalProps(props),
     className
   )
 
+  aria.label ? null : aria.label = `${icon} icon`
+  const ariaProps = buildAriaProps(aria)
+  const dataProps = buildDataProps(data)
+
+  // Add a conditional here to show only the SVG if custom
   return (
-    <i
-        className={classes}
-        id={id}
-    />
+    <>
+      <If condition={customIcon}>
+        {
+          React.cloneElement(customIcon, {
+            ...dataProps,
+            className: classes,
+            id,
+          })
+        }
+        <Else />
+        <i
+            {...dataProps}
+            className={classes}
+            id={id}
+        />
+        <span
+            {...ariaProps}
+            hidden
+        />
+      </If>
+    </>
   )
 }
 

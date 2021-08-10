@@ -5,9 +5,11 @@ require_relative "../../../../app/pb_kits/playbook/pb_button/button"
 RSpec.describe Playbook::PbButton::Button do
   subject { Playbook::PbButton::Button }
 
-  it { is_expected.to define_enum_prop(:variant)
-                      .with_default("primary")
-                      .with_values("primary", "secondary", "link") }
+  it {
+    is_expected.to define_enum_prop(:variant)
+      .with_default("primary")
+      .with_values("primary", "secondary", "link")
+  }
   it { is_expected.to define_boolean_prop(:disabled).with_default(false) }
   it { is_expected.to define_boolean_prop(:full_width).with_default(false) }
   it { is_expected.to define_boolean_prop(:loading).with_default(false) }
@@ -38,17 +40,17 @@ RSpec.describe Playbook::PbButton::Button do
     context "returns all the correct options" do
       it "disabled", :aggregate_failures do
         expect(subject.new(disabled: true).options).to include disabled: true
-        expect(subject.new().options).to_not include disabled: true
+        expect(subject.new.options).to_not include disabled: true
       end
 
       it "type", :aggregate_failures do
         expect(subject.new(type: "button").options).to include(:type)
-        expect(subject.new().options).to_not include(:type)
+        expect(subject.new.options).to_not include(:type)
       end
 
       it "value", :aggregate_failures do
         expect(subject.new(value: "123").options).to include(:value)
-        expect(subject.new().options).to_not include(:value)
+        expect(subject.new.options).to_not include(:value)
       end
     end
   end

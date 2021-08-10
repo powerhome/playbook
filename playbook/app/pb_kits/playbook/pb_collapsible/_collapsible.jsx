@@ -1,13 +1,15 @@
 /* @flow */
 
-import classnames from 'classnames'
 import React, { useState } from 'react'
+
+import classnames from 'classnames'
+
 import { globalProps } from '../utilities/globalProps.js'
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
+
 import CollapsibleContent from './child_kits/CollapsibleContent'
 import CollapsibleMain from './child_kits/CollapsibleMain'
-
-export const CollapsibleContext = React.createContext({})
+import CollapsibleContext from './context'
 
 type CollapsibleProps = {
   children: CollapsibleMain | CollapsibleContent | ReactNode,

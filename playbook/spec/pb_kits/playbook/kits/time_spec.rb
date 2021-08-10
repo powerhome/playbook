@@ -18,19 +18,19 @@ RSpec.describe Playbook::PbTime::Time do
   it do
     is_expected.to define_enum_prop(:size)
       .with_default("sm")
-      .with_values("lg","md", "sm", "xs")
+      .with_values("lg", "md", "sm", "xs")
   end
 
   describe "#format_time_string" do
     it "returns a formatted string" do
-      time = Time.new(2002, 04, 06, 9, 1, 1, "-05:00")
+      time = Time.new(2002, 0o4, 0o6, 9, 1, 1, "-05:00")
       # -05:00, 5 hrs. behind UTC (East Coast)
       expect([" 9:01a", " 10:01a"]).to include(subject.new(time: time).format_time_string)
       # This test accomodates daylight savings
     end
 
     it "returns a formatted string that respects a timezone" do
-      time = Time.new(2002, 04, 06, 9, 1, 1, "-05:00")
+      time = Time.new(2002, 0o4, 0o6, 9, 1, 1, "-05:00")
       # -05:00, 5 hrs. behind UTC (East Coast)
       expect([" 6:01a", " 7:01a"]).to include(subject.new(time: time, timezone: "America/Los_Angeles").format_time_string)
       # This test accomodates daylight savings
@@ -39,7 +39,7 @@ RSpec.describe Playbook::PbTime::Time do
 
   describe "#format_timezone" do
     it "returns the default formatted timezone" do
-      expect(['EDT', 'EST']).to include(subject.new(time: DateTime.current).format_timezone_string)
+      expect(%w[EDT EST]).to include(subject.new(time: DateTime.current).format_timezone_string)
     end
 
     it "returns a unique formatted timezone" do

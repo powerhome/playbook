@@ -3,14 +3,9 @@
 import React from 'react'
 import classnames from 'classnames'
 
-import {
-  buildAriaProps,
-  buildDataProps,
-} from '../utilities/props'
+import { buildAriaProps, buildDataProps } from '../utilities/props'
 
-import {
-  Icon,
-} from '../'
+import Icon from '../pb_icon/_icon'
 
 type StarRatingProps = {
   aria?: object,

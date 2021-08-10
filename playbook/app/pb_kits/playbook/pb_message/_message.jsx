@@ -1,22 +1,32 @@
 /* @flow */
 
 import React from 'react'
-import { Avatar, Body, Caption } from '../'
 import classnames from 'classnames'
+
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
-import { globalProps } from '../utilities/globalProps.js'
+import { globalProps } from '../utilities/globalProps'
+
+import Avatar from '../pb_avatar/_avatar'
+import Body from '../pb_body/_body'
+import Flex from '../pb_flex/_flex'
+import Timestamp from '../pb_timestamp/_timestamp'
+import Title from '../pb_title/_title'
 
 type MessageProps = {
   aria: object,
   avatarName?: string,
   avatarStatus?: string,
   avatarUrl?: string,
+  children?: array<React.ReactNode> | React.ReactNode,
   className?: string,
   data?: object,
   id?: string,
   label?: string,
   message: string,
   timestamp?: string,
+  timestampObject?: string,
+  timezone?: string,
+  alignTimestamp?: string,
 }
 
 const Message = (props: MessageProps) => {
@@ -25,12 +35,16 @@ const Message = (props: MessageProps) => {
     avatarName,
     avatarStatus = null,
     avatarUrl,
+    children,
     className,
     data = {},
     id,
     label,
     message,
     timestamp,
+    timestampObject,
+    timezone,
+    alignTimestamp = 'right',
   } = props
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
@@ -56,17 +70,43 @@ const Message = (props: MessageProps) => {
         <Avatar
             imageUrl={avatarUrl}
             name={avatarName}
-            size="sm"
+            size="xs"
             status={avatarStatus}
         />
       </If>
       <div className="content_wrapper">
-        <If condition={label}>
-          <Caption>{label}</Caption>
+        <Flex
+            justify={alignTimestamp === 'left' ? 'none' : 'between'}
+            orientation="row"
+        >
+          <If condition={label}>
+            <Title
+                className="message_title"
+                size={4}
+                text={label}
+            />
+          </If>
+          <Timestamp
+              className={`pull-${alignTimestamp} ${timestampObject ? 'message_humanized_time' : null}`}
+              text={timestamp}
+              timezone={timezone}
+          />
+          <If condition={timestampObject}>
+            <Timestamp
+                className={`pull-${alignTimestamp} message_timestamp`}
+                timestamp={timestampObject}
+                timezone={timezone}
+            />
+          </If>
+        </Flex>
+        <If condition={message}>
+          <Body
+              className="pb_message_body"
+              text={message}
+          />
         </If>
-        <Body>{message}</Body>
-        <If condition={timestamp}>
-          <Caption size="xs">{timestamp}</Caption>
+        <If condition={children}>
+          { children }
         </If>
       </div>
     </div>

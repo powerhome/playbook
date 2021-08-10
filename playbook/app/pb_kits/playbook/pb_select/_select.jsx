@@ -2,21 +2,14 @@
 
 import React, { forwardRef } from 'react'
 import classnames from 'classnames'
-import {
-  Body,
-  Caption,
-  Icon,
-} from '../'
 
-import {
-  buildAriaProps,
-  buildCss,
-  buildDataProps,
-} from '../utilities/props'
-
-import { globalProps } from '../utilities/globalProps.js'
-
+import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
+import { globalProps } from '../utilities/globalProps'
 import type { InputCallback } from '../types'
+
+import Body from '../pb_body/_body'
+import Caption from '../pb_caption/_caption'
+import Icon from '../pb_icon/_icon'
 
 type SelectOption = {
   value: string,
@@ -28,6 +21,7 @@ type SelectProps = {
   aria?: object,
   blankSelection?: string,
   children?: React.Node,
+  compact?: boolean,
   className?: string,
   data?: object,
   disabled?: boolean,
@@ -36,7 +30,10 @@ type SelectProps = {
   options: SelectOption[],
   id?: string,
   includeBlank?: string,
+  inline?: boolean,
   label?: string,
+  margin: string,
+  marginBottom: string,
   multiple?: boolean,
   name?: string,
   required?: boolean,
@@ -58,10 +55,12 @@ const Select = ({
   blankSelection,
   children,
   className,
+  compact = false,
   data = {},
   disabled = false,
   error,
   label,
+  inline = false,
   multiple = false,
   name,
   onChange = () => {},
@@ -74,7 +73,19 @@ const Select = ({
   const dataProps = buildDataProps(data)
   const optionsList = createOptions(options)
 
-  const classes = classnames(buildCss('pb_select'), globalProps(props), className)
+  const inlineClass = inline ? 'inline' : null
+  const compactClass = compact ? 'compact' : null
+  const classes = classnames(
+    buildCss('pb_select'),
+    globalProps({
+      ...props,
+      marginBottom: props.marginBottom || props.margin || 'sm',
+    }),
+    className,
+    inlineClass,
+    compactClass
+  )
+
   const selectWrapperClass = classnames(buildCss('pb_select_kit_wrapper'), { error }, className)
 
   return (
@@ -117,17 +128,17 @@ const Select = ({
             {optionsList}
           </select>
         </If>
+        <Icon
+            className="pb_select_kit_caret"
+            fixedWidth
+            icon="angle-down"
+        />
         <If condition={error}>
           <Body
               status="negative"
               text={error}
           />
         </If>
-        <Icon
-            className="pb_select_kit_caret"
-            fixedWidth
-            icon="angle-down"
-        />
       </label>
     </div>
   )

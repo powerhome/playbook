@@ -1,32 +1,36 @@
+[![npm version](https://badge.fury.io/js/playbook-ui.svg)](https://badge.fury.io/js/playbook-ui)
+[![Gem Version](https://badge.fury.io/rb/playbook_ui.svg)](https://badge.fury.io/rb/playbook_ui)
+
 # Playbook Design System
 
-Playbook is the first design system built for both Rails & React interfaces. Inspired by [Velocity](https://www.invisionapp.com/inside-design/design-resources/design-system-dashboard-ui-kit/), Playbook takes a modern design approach, and applies it in a way that makes it easy to support bleeding edge, or legacy systems. Playbook is built & maintained by the User Experience & Development teams at Power Home Remodeling, the largest home remodeler in the US.
+Playbook is the first design system built for both Rails & React interfaces. Inspired by [Velocity](https://www.invisionapp.com/inside-design/design-resources/design-system-dashboard-ui-kit/), Playbook takes a modern design approach and applies it in a way that makes it easy to support bleeding edge or legacy systems. Playbook is built & maintained by the User Experience & Development teams at [Power Home Remodeling](https://www.techatpower.com/), the largest home remodeler in the US.
 
-## Requirements
+## Development
 
-- Docker 17.09 or later
-- Docker Compose 1.17.1 or later
+### Requirements
 
-## Getting started
+- [asdf](https://github.com/asdf-vm/asdf)
+- Install language tools: `asdf install`
 
-1. Run `make it`
-1. Install overcommit hooks `bin/overcommit`
-1. open [http://localhost:8089](http://localhost:8089)
+### Getting Started and Running Playbook for Development
 
-To clean up this project from your local machine, run `make stop`, which will drop all containers and networks associated with this project. To purge all resources, do `make clean`, which also removes images and volumes for a blank slate.
+1. After cloning the repo, you should have the following nested folders among other files. It will be important to pay attention to which folder we are in as we get playbook running:
+    ```
+    playbook
+    │   playbook
+    │   playbook-website
+    ```
+2. From the top-level playbook folder run: `yarn prepare && yarn install`
+4. cd into the playbook-website folder: `cd playbook-website`
+5. From the playbook-website folder run: `bundle install`
+    **n.b.:** If you receive a bundle(r) related error, be sure that bundler is installed first. See the BUNDLED WITH section of `playbook-website/Gemfile.lock` for the exact version to install.
+6. cd back into the top-level playbook folder: `cd ..`
+7. From the top-level playbook folder run `yarn start-dev` This may take a little while.
+8. Once it says "compiled successfully", navigate to [http://localhost:3000](http://localhost:3000) and you should see the playbook website.
 
+### Running library tests
 
-<details><summary>Making changes to the Gemfile:</summary>
-<p>
-
-* Stop the `make start` process
-* Run `make bundle` to (un-)install gems and update the `Gemfile.lock`
-* Re-start the server with `make start`
-
-To run the tests, do `bin/test`. To launch a shell in the container run `make shell`, or to launch a Rails console run `make console`
-
-</p>
-</details>
+1. `cd playbook && ./test.sh`
 
 ## Additional resources
 
@@ -54,12 +58,13 @@ See [docs/upgrade-guide](./docs/upgrade-guide)
 ### Testing Playbook Kits Locally
 
 #### Testing React Kits locally
-1.  Inside of your Playbook repository, run `yarn link`. 
-2.  Inside of the directory you want to test with playbook, run `yarn link playbook-ui`.
-3.  Run `yarn hmr` in your directory you want to test with playbook, and hard refresh (command + shift + R) your browser.
-4.  Test all the things!
-5.  When finished, inside of the directory you want to test with playbook, run `yarn unlink playbook-ui`.
-6.  Inside of your Playbook repository, run `yarn unlink`. 
+
+1.  From inside the `playbook-ui` directory, run `yarn link`;
+1.  From Inside the project you want to test with `playbook-ui`, run `yarn link playbook-ui`;
+1.  Rebuild the project now using this version of `playbook-ui`;
+1.  Test all the things!
+1.  When finished, from inside the project you were testing with `playbook-ui`, run `yarn unlink playbook-ui`;
+1.  From Inside the `playbook-ui` directory, run `yarn unlink`;
 
 #### Jest & React-Testing-Library for Writing Tests
 

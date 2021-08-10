@@ -1,5 +1,519 @@
 
 
+## [10.5.0](https://github.com/powerhome/playbook/tree/10.5.0) (2021-08-04)
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/10.4.0...10.5.0)
+
+**Kit Enhancements:**
+
+- Add timezone prop down to timestamp kit from message kit [\#1573](https://github.com/powerhome/playbook/pull/1573) ([haydenrou](https://github.com/haydenrou))
+- Add inline and inline compact options to the select kit for inline usage [\#1571](https://github.com/powerhome/playbook/pull/1571) ([haydenrou](https://github.com/haydenrou))
+
+**Fixed Bugs:**
+
+- Fix documentation for getting started with PB [\#1574](https://github.com/powerhome/playbook/pull/1574) ([kellyeryan](https://github.com/kellyeryan))
+
+**Improvements:**
+
+- PB File Uploads - Changes copy and adds list of permissible file types [\#1572](https://github.com/powerhome/playbook/pull/1572) ([kellyeryan](https://github.com/kellyeryan))
+
+
+
+## [10.4.0](https://github.com/powerhome/playbook/tree/10.4.0) (2021-07-28)
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/10.3.0...10.4.0)
+
+**Fixed Bugs:**
+
+- Mend chart token imports [\#1569](https://github.com/powerhome/playbook/pull/1569) ([bh247484](https://github.com/bh247484))
+
+
+
+## [10.3.0](https://github.com/powerhome/playbook/tree/10.3.0) (2021-07-27)
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/10.2.1...10.3.0)
+
+**Improvements:**
+
+- Horizontal Nav underline color update [\#1564](https://github.com/powerhome/playbook/pull/1564) ([megantrimble](https://github.com/megantrimble))
+
+**Merged pull requests:**
+
+- Ruby 2.6.6 [\#1568](https://github.com/powerhome/playbook/pull/1568) ([thestephenmarshall](https://github.com/thestephenmarshall))
+- Update dependency flow-bin to v0.156.0 [\#1565](https://github.com/powerhome/playbook/pull/1565) ([renovate[bot]](https://github.com/apps/renovate))
+- Update dependency axe-core to v4.3.1 [\#1560](https://github.com/powerhome/playbook/pull/1560) ([renovate[bot]](https://github.com/apps/renovate))
+- Bump addressable from 2.7.0 to 2.8.0 in /playbook [\#1557](https://github.com/powerhome/playbook/pull/1557) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump addressable from 2.7.0 to 2.8.0 in /playbook-website [\#1556](https://github.com/powerhome/playbook/pull/1556) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Update dependency rubocop to v0.93.1 [\#1535](https://github.com/powerhome/playbook/pull/1535) ([renovate[bot]](https://github.com/apps/renovate))
+- Update dependency listen to "\>= 3.0.5", "\< 3.6.1" [\#1534](https://github.com/powerhome/playbook/pull/1534) ([renovate[bot]](https://github.com/apps/renovate))
+- Update dependency better\_errors to v2.9.1 [\#1531](https://github.com/powerhome/playbook/pull/1531) ([renovate[bot]](https://github.com/apps/renovate))
+- Pin dependencies [\#1530](https://github.com/powerhome/playbook/pull/1530) ([renovate[bot]](https://github.com/apps/renovate))
+- Bump puma from 3.12.6 to 5.3.2 in /playbook-website [\#1527](https://github.com/powerhome/playbook/pull/1527) ([dependabot[bot]](https://github.com/apps/dependabot))
+
+
+
+## [10.2.1](https://github.com/powerhome/playbook/tree/10.2.1) (2021-07-22)
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/10.2.0...10.2.1)
+
+**Local Changes**
+
+- Resolve yarn dependency failures in `10.2.0`
+
+
+
+## [10.2.0](https://github.com/powerhome/playbook/tree/10.2.0) (2021-07-22)
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/10.1.0...10.2.0)
+
+**New Kits:**
+
+- Walkthrough Kit [\#1537](https://github.com/powerhome/playbook/pull/1537) ([kre8sions](https://github.com/kre8sions))
+
+**Merged pull requests:**
+
+- Revert Rich Text Editor overflow property [\#1567](https://github.com/powerhome/playbook/pull/1567) ([bh247484](https://github.com/bh247484))
+
+
+
+## [10.1.0](https://github.com/powerhome/playbook/tree/10.1.0) (2021-07-14)
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/10.0.1...10.1.0)
+
+**Kit Enhancements:**
+
+- Reintroduce Rails size prop to Multiple Users kit [\#1546](https://github.com/powerhome/playbook/pull/1546) ([bh247484](https://github.com/bh247484))
+
+**Fixed Bugs:**
+
+- Fix Playbook [\#1562](https://github.com/powerhome/playbook/pull/1562) ([thestephenmarshall](https://github.com/thestephenmarshall))
+- Fix popover copypasta [\#1561](https://github.com/powerhome/playbook/pull/1561) ([thestephenmarshall](https://github.com/thestephenmarshall))
+- Fix custom icon [\#1553](https://github.com/powerhome/playbook/pull/1553) ([thestephenmarshall](https://github.com/thestephenmarshall))
+- Fix getting started page [\#1550](https://github.com/powerhome/playbook/pull/1550) ([bh247484](https://github.com/bh247484))
+- Fix Rich Text Editor flex container bug [\#1549](https://github.com/powerhome/playbook/pull/1549) ([bh247484](https://github.com/bh247484))
+- Restructure Button kit stylings [\#1542](https://github.com/powerhome/playbook/pull/1542) ([bh247484](https://github.com/bh247484))
+
+**Improvements:**
+
+- Global prop numberSpacing [\#1559](https://github.com/powerhome/playbook/pull/1559) ([kre8sions](https://github.com/kre8sions))
+- Add global prop numberSpacing [\#1555](https://github.com/powerhome/playbook/pull/1555) ([kre8sions](https://github.com/kre8sions))
+- Preload Proxima Nova fonts [\#1552](https://github.com/powerhome/playbook/pull/1552) ([kre8sions](https://github.com/kre8sions))
+- Remove Base64 Fonts [\#1541](https://github.com/powerhome/playbook/pull/1541) ([kre8sions](https://github.com/kre8sions))
+
+**Merged pull requests:**
+
+- Revert "Add global prop numberSpacing" [\#1558](https://github.com/powerhome/playbook/pull/1558) ([kre8sions](https://github.com/kre8sions))
+- Fixes the dev-start from Crashing [\#1554](https://github.com/powerhome/playbook/pull/1554) ([jasperfurniss](https://github.com/jasperfurniss))
+- Update dependency ruby to v2.7.4 [\#1547](https://github.com/powerhome/playbook/pull/1547) ([renovate[bot]](https://github.com/apps/renovate))
+- Update dependency flow-bin to v0.155.0 [\#1538](https://github.com/powerhome/playbook/pull/1538) ([renovate[bot]](https://github.com/apps/renovate))
+- Update dependency axe-core to v4.3.0 [\#1533](https://github.com/powerhome/playbook/pull/1533) ([renovate[bot]](https://github.com/apps/renovate))
+- Bump nokogiri from 1.11.2 to 1.11.7 in /playbook [\#1528](https://github.com/powerhome/playbook/pull/1528) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump nokogiri from 1.11.3 to 1.11.7 in /playbook-website [\#1526](https://github.com/powerhome/playbook/pull/1526) ([dependabot[bot]](https://github.com/apps/dependabot))
+
+
+
+## [10.0.1](https://github.com/powerhome/playbook/tree/10.0.1) (2021-07-02)
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/10.0.0...10.0.1)
+
+**Fixed Bugs:**
+
+- Mend xxs avatars [\#1545](https://github.com/powerhome/playbook/pull/1545) ([bh247484](https://github.com/bh247484))
+
+**Merged pull requests:**
+
+- Revert "Update avatar kit/multi-user kit to support xxs size" [\#1544](https://github.com/powerhome/playbook/pull/1544) ([bh247484](https://github.com/bh247484))
+
+
+
+## [10.0.0](https://github.com/powerhome/playbook/tree/10.0.0) (2021-06-30)
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/9.19.0...10.0.0)
+
+**Breaking changes:**
+
+- Decouple website from library [\#1452](https://github.com/powerhome/playbook/pull/1452) ([xjunior](https://github.com/xjunior))
+
+**Kit Enhancements:**
+
+- Move dist cleanup to webpack [\#1539](https://github.com/powerhome/playbook/pull/1539) ([xjunior](https://github.com/xjunior))
+- Add children to message react kit [\#1536](https://github.com/powerhome/playbook/pull/1536) ([haydenrou](https://github.com/haydenrou))
+- Clear circular imports [\#1532](https://github.com/powerhome/playbook/pull/1532) ([xjunior](https://github.com/xjunior))
+- Update avatar kit/multi-user kit to support xxs size [\#1521](https://github.com/powerhome/playbook/pull/1521) ([derricklannaman](https://github.com/derricklannaman))
+
+**Merged pull requests:**
+
+- Change filemanager-webpack-plugin version to 4.0.0 [\#1540](https://github.com/powerhome/playbook/pull/1540) ([kre8sions](https://github.com/kre8sions))
+- Bump hosted-git-info from 2.8.8 to 2.8.9 in /playbook [\#1487](https://github.com/powerhome/playbook/pull/1487) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Add loading prop to dialog button [\#1480](https://github.com/powerhome/playbook/pull/1480) ([haydenrou](https://github.com/haydenrou))
+
+
+
+## [9.19.0](https://github.com/powerhome/playbook/tree/9.19.0) (2021-06-16)
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/9.18.0...9.19.0)
+
+**Kit Enhancements:**
+
+- Enhance message kit to accept timestamp object for hover [\#1516](https://github.com/powerhome/playbook/pull/1516) ([haydenrou](https://github.com/haydenrou))
+
+**Fixed Bugs:**
+
+- Typeahead AsyncCreatable [\#1523](https://github.com/powerhome/playbook/pull/1523) ([thestephenmarshall](https://github.com/thestephenmarshall))
+
+**Merged pull requests:**
+
+- Bump ssri from 6.0.1 to 6.0.2 in /playbook [\#1520](https://github.com/powerhome/playbook/pull/1520) ([dependabot[bot]](https://github.com/apps/dependabot))
+- 9.18.0 Version Bump [\#1518](https://github.com/powerhome/playbook/pull/1518) ([jasperfurniss](https://github.com/jasperfurniss))
+- Update dependency @actions/core to v1.4.0 [\#1515](https://github.com/powerhome/playbook/pull/1515) ([renovate[bot]](https://github.com/apps/renovate))
+- Bump ws from 6.2.1 to 6.2.2 in /playbook [\#1513](https://github.com/powerhome/playbook/pull/1513) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Update dependency @testing-library/jest-dom to v5.14.1 [\#1512](https://github.com/powerhome/playbook/pull/1512) ([renovate[bot]](https://github.com/apps/renovate))
+- Update dependency axe-core to v4.2.2 [\#1511](https://github.com/powerhome/playbook/pull/1511) ([renovate[bot]](https://github.com/apps/renovate))
+- Update dependency flow-bin to v0.153.0 [\#1477](https://github.com/powerhome/playbook/pull/1477) ([renovate[bot]](https://github.com/apps/renovate))
+
+
+
+## [9.18.0](https://github.com/powerhome/playbook/tree/9.18.0) (2021-06-09)
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/9.17.0...9.18.0)
+
+**Kit Enhancements:**
+
+- Add the value of a Dialog's portalClassName prop to the React Modal portal DIV class attribute [\#1507](https://github.com/powerhome/playbook/pull/1507) ([stevelandwehr](https://github.com/stevelandwehr))
+
+**Fixed Bugs:**
+
+- Fix invalid date in Date Time docs for Firefox [\#1510](https://github.com/powerhome/playbook/pull/1510) ([kellyeryan](https://github.com/kellyeryan))
+- Don't allow popover to open when clicking on eyeball in the passphrase kit [\#1506](https://github.com/powerhome/playbook/pull/1506) ([josephinef9](https://github.com/josephinef9))
+
+
+
+## [9.17.0](https://github.com/powerhome/playbook/tree/9.17.0) (2021-06-03)
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/9.16.0...9.17.0)
+
+**Merged pull requests:**
+
+- Update jwalton/gh-find-current-pr action to v1.1.0 [\#1509](https://github.com/powerhome/playbook/pull/1509) ([renovate[bot]](https://github.com/apps/renovate))
+- Bump dns-packet from 1.3.1 to 1.3.4 in /playbook [\#1508](https://github.com/powerhome/playbook/pull/1508) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump browserslist from 4.16.3 to 4.16.6 in /playbook [\#1505](https://github.com/powerhome/playbook/pull/1505) ([dependabot[bot]](https://github.com/apps/dependabot))
+- 9.16.0 [\#1504](https://github.com/powerhome/playbook/pull/1504) ([thestephenmarshall](https://github.com/thestephenmarshall))
+- Bump highcharts from 7.2.2 to 9.0.0 in /playbook [\#1486](https://github.com/powerhome/playbook/pull/1486) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump rexml from 3.2.4 to 3.2.5 in /playbook [\#1478](https://github.com/powerhome/playbook/pull/1478) ([dependabot[bot]](https://github.com/apps/dependabot))
+
+
+
+## [9.16.0](https://github.com/powerhome/playbook/tree/9.16.0) (2021-05-24)
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/9.15.0...9.16.0)
+
+**Fixed Bugs:**
+
+- Fix Timestamp Duplicated Zone [\#1498](https://github.com/powerhome/playbook/pull/1498) ([thestephenmarshall](https://github.com/thestephenmarshall))
+
+**Merged pull requests:**
+
+- Update dependency @actions/core to v1.3.0 [\#1503](https://github.com/powerhome/playbook/pull/1503) ([renovate[bot]](https://github.com/apps/renovate))
+- Bump nokogiri from 1.11.2 to 1.11.4 in /playbook [\#1502](https://github.com/powerhome/playbook/pull/1502) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Update dependency axe-core to v4.2.1 [\#1501](https://github.com/powerhome/playbook/pull/1501) ([renovate[bot]](https://github.com/apps/renovate))
+- Update dependency @testing-library/react to v11.2.7 [\#1495](https://github.com/powerhome/playbook/pull/1495) ([renovate[bot]](https://github.com/apps/renovate))
+
+## [9.15.0](https://github.com/powerhome/playbook/tree/9.15.0) (2021-05-19)
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/9.14.1...9.15.0)
+
+**Kit Enhancements:**
+
+- Radio alignment [\#1496](https://github.com/powerhome/playbook/pull/1496) ([bh247484](https://github.com/bh247484))
+
+**Merged pull requests:**
+
+- Update release script [\#1493](https://github.com/powerhome/playbook/pull/1493) ([thestephenmarshall](https://github.com/thestephenmarshall))
+
+## [9.14.1](https://github.com/powerhome/playbook/tree/9.14.1) (2021-05-12)
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/9.13.0...9.14.1)
+
+**Kit Enhancements:**
+
+- Add classname to popover on passphrase kit  [\#1489](https://github.com/powerhome/playbook/pull/1489) ([josephinef9](https://github.com/josephinef9))
+
+**Fixed Bugs:**
+
+- Move error text [\#1490](https://github.com/powerhome/playbook/pull/1490) ([thestephenmarshall](https://github.com/thestephenmarshall))
+- Fixed broken styles in multiple users stacked + pill accessibility, badge alignment, & menu re-organization [\#1488](https://github.com/powerhome/playbook/pull/1488) ([jasoncypret](https://github.com/jasoncypret))
+
+**Merged pull requests:**
+
+- Bump hosted-git-info from 2.8.8 to 2.8.9 in /playbook [\#1487](https://github.com/powerhome/playbook/pull/1487) ([dependabot[bot]](https://github.com/apps/dependabot))
+
+## [9.13.0](https://github.com/powerhome/playbook/tree/9.13.0)
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/9.12.0...9.13.0)
+
+**Kit Enhancements:**
+
+- Inline Modal Playbook Additions [\#1467](https://github.com/powerhome/playbook/pull/1467) ([bh247484](https://github.com/bh247484))
+
+## [9.12.0](https://github.com/powerhome/playbook/tree/9.12.0)
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/9.11.0...9.12.0)
+
+**Kit Enhancements:**
+
+- Add close on click "outside" prop to passphrase popover [\#1479](https://github.com/powerhome/playbook/pull/1479) ([josephinef9](https://github.com/josephinef9))
+- Update Design for Date Time Stacked [\#1378](https://github.com/powerhome/playbook/pull/1378) ([evalouderback](https://github.com/evalouderback))
+- New Prop added to Text Input - \(Add On\)  [\#1374](https://github.com/powerhome/playbook/pull/1374) ([that-jill](https://github.com/that-jill))
+
+**New Kits:**
+
+- Added the Breadcrumb kit [\#1379](https://github.com/powerhome/playbook/pull/1379) ([Elektro1776](https://github.com/Elektro1776))
+
+**Merged pull requests:**
+
+- Use UX AWS role for SOPS decryption [\#1481](https://github.com/powerhome/playbook/pull/1481) ([benlangfeld](https://github.com/benlangfeld))
+
+## [9.11.0](https://github.com/powerhome/playbook/tree/9.11.0)
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/9.10.0...9.11.0)
+
+**Merged pull requests:**
+
+- Rails 5.2.4.5 [\#1470](https://github.com/powerhome/playbook/pull/1470) ([thestephenmarshall](https://github.com/thestephenmarshall))
+- Reenable Rubocop [\#1463](https://github.com/powerhome/playbook/pull/1463) ([xjunior](https://github.com/xjunior))
+
+## [9.10.0](https://github.com/powerhome/playbook/tree/9.10.0)
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/9.9.0...9.10.0)
+
+**Kit Enhancements:**
+
+- Update Button for A11y [\#1429](https://github.com/powerhome/playbook/pull/1429) ([coleerikson](https://github.com/coleerikson))
+
+**Fixed Bugs:**
+
+- Hotfix passphrase strength bar display [\#1468](https://github.com/powerhome/playbook/pull/1468) ([patmccler](https://github.com/patmccler))
+
+**Merged pull requests:**
+
+- Add script [\#1466](https://github.com/powerhome/playbook/pull/1466) ([thestephenmarshall](https://github.com/thestephenmarshall))
+- Pin dependencies [\#1461](https://github.com/powerhome/playbook/pull/1461) ([renovate[bot]](https://github.com/apps/renovate))
+
+## [9.9.0](https://github.com/powerhome/playbook/tree/9.9.0)
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/9.8.0...9.9.0)
+
+**Kit Enhancements:**
+
+- HaveIBeenPwned passphrase [\#1462](https://github.com/powerhome/playbook/pull/1462) ([patmccler](https://github.com/patmccler))
+
+## [9.8.0](https://github.com/powerhome/playbook/tree/9.8.0)
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/9.7.0...9.8.0)
+
+**Kit Enhancements:**
+
+- Add spec testing to typeahead, fix rubocop errors [\#1449](https://github.com/powerhome/playbook/pull/1449) ([adub65](https://github.com/adub65))
+- Date variant small with icon [\#1443](https://github.com/powerhome/playbook/pull/1443) ([megantrimble](https://github.com/megantrimble))
+- Fixed Confirmation Toast Responsive [\#1442](https://github.com/powerhome/playbook/pull/1442) ([kellyeryan](https://github.com/kellyeryan))
+- Updated user css file [\#1435](https://github.com/powerhome/playbook/pull/1435) ([christinaatai](https://github.com/christinaatai))
+- Form Group Full Width Prop [\#1386](https://github.com/powerhome/playbook/pull/1386) ([megantrimble](https://github.com/megantrimble))
+
+**Fixed Bugs:**
+
+- Set a default value for flex items [\#1453](https://github.com/powerhome/playbook/pull/1453) ([kre8sions](https://github.com/kre8sions))
+
+## [9.7.0](https://github.com/powerhome/playbook/tree/9.7.0)
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/9.6.1...9.7.0)
+
+**Kit Enhancements:**
+
+- Add margin overrides to select [\#1394](https://github.com/powerhome/playbook/pull/1394) ([coleerikson](https://github.com/coleerikson))
+
+**Merged pull requests:**
+
+- 9.6.1 [\#1457](https://github.com/powerhome/playbook/pull/1457) ([thestephenmarshall](https://github.com/thestephenmarshall))
+
+## [9.6.1](https://github.com/powerhome/playbook/tree/9.6.1)
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/9.6.0...9.6.1)
+
+**Fixed Bugs:**
+
+- Pin react-select [\#1455](https://github.com/powerhome/playbook/pull/1455) ([thestephenmarshall](https://github.com/thestephenmarshall))
+
+## [9.6.0](https://github.com/powerhome/playbook/tree/9.6.0)
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/9.5.0...9.6.0)
+
+**Fixed Bugs:**
+
+- Fix Image kit rounded prop warning [\#1341](https://github.com/powerhome/playbook/pull/1341) ([thestephenmarshall](https://github.com/thestephenmarshall))
+
+**New Kits:**
+
+- Passphrase Kit [\#1349](https://github.com/powerhome/playbook/pull/1349) ([patmccler](https://github.com/patmccler))
+
+## [9.5.0](https://github.com/powerhome/playbook/tree/9.5.0)
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/9.4.0...9.5.0)
+
+**Kit Enhancements:**
+
+- Add aria-labels to Icon kit [\#1387](https://github.com/powerhome/playbook/pull/1387) ([bh247484](https://github.com/bh247484))
+
+
+
+## [9.4.0](https://github.com/powerhome/playbook/tree/9.4.0)
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/9.3.1...9.4.0)
+
+**Kit Enhancements:**
+
+- Indeterminate example, kit upgrade [\#1408](https://github.com/powerhome/playbook/pull/1408) ([coleerikson](https://github.com/coleerikson))
+
+
+
+## [9.3.1](https://github.com/powerhome/playbook/tree/9.3.1) (2021-04-09)
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/9.3.0...9.3.1)
+
+
+
+## [9.3.0](https://github.com/powerhome/playbook/tree/9.3.0)
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/9.2.2...9.3.0)
+
+**Merged pull requests:**
+
+- Looser deps [\#1440](https://github.com/powerhome/playbook/pull/1440) ([thestephenmarshall](https://github.com/thestephenmarshall))
+
+
+
+## [9.2.2](https://github.com/powerhome/playbook/tree/9.2.2)
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/9.2.1...9.2.2)
+
+**Fixed Bugs:**
+
+- Fix Rich text Focus State [\#1444](https://github.com/powerhome/playbook/pull/1444) ([kre8sions](https://github.com/kre8sions))
+
+
+
+## [9.2.1](https://github.com/powerhome/playbook/tree/9.2.1) (2021-04-07)
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/9.2.0...9.2.1)
+
+**Fixed Bugs:**
+
+- Fix rich text toolbar background [\#1436](https://github.com/powerhome/playbook/pull/1436) ([kre8sions](https://github.com/kre8sions))
+
+
+
+## [9.1.0](https://github.com/powerhome/playbook/tree/9.1.0) (2021-04-05)
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/9.0.0...9.1.0)
+
+**Fixed Bugs:**
+
+- Fix typahead height [\#1433](https://github.com/powerhome/playbook/pull/1433) ([jasoncypret](https://github.com/jasoncypret))
+- Correcting z-index bleed on avatar [\#1430](https://github.com/powerhome/playbook/pull/1430) ([jasoncypret](https://github.com/jasoncypret))
+
+**Improvements:**
+
+- Cleanup playbook gem [\#1404](https://github.com/powerhome/playbook/pull/1404) ([xjunior](https://github.com/xjunior))
+
+
+
+## [9.0.0](https://github.com/powerhome/playbook/tree/9.0.0) (2021-04-01)
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/8.3.0...9.0.0)
+
+**Breaking changes:**
+
+- \[Forms\] Drop simple form support [\#1403](https://github.com/powerhome/playbook/pull/1403) ([xjunior](https://github.com/xjunior))
+
+**Kit Enhancements:**
+
+- Form helpers [\#1406](https://github.com/powerhome/playbook/pull/1406) ([xjunior](https://github.com/xjunior))
+
+
+
+## [8.3.0](https://github.com/powerhome/playbook/tree/8.3.0) (2021-04-01)
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/8.2.1...8.3.0)
+
+**Kit Enhancements:**
+
+- Update body light to a more accessible color [\#1412](https://github.com/powerhome/playbook/pull/1412) ([kre8sions](https://github.com/kre8sions))
+
+**Improvements:**
+
+- Accessibility Improvements, Color Fixes, Menu Changes [\#1405](https://github.com/powerhome/playbook/pull/1405)([kre8sions](https://github.com/kre8sions))
+- Moves renovate config to the correct place [\#1413](https://github.com/powerhome/playbook/pull/1413) ([benlangfeld](https://github.com/benlangfeld))
+- Do not build everything on every start up [\#1410](https://github.com/powerhome/playbook/pull/1410) ([xjunior](https://github.com/xjunior))
+- Reorganize private rake tasks [\#1409](https://github.com/powerhome/playbook/pull/1409) ([xjunior](https://github.com/xjunior))
+- Add example noOptionsMessage usage to docs [\#1407](https://github.com/powerhome/playbook/pull/1407) ([thestephenmarshall](https://github.com/thestephenmarshall))
+
+
+
+## [8.2.1](https://github.com/powerhome/playbook/tree/8.2.1) (2021-03-23)
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/8.1.3...8.2.1)
+
+**Improvements:**
+- Make github_changelog_generator a dev dependency [\#1399](https://github.com/powerhome/playbook/pull/1399) ([benlangfeld](https://github.com/benlangfeld))
+- Don't specify compatible versions of npm/yarn [\#1395](https://github.com/powerhome/playbook/pull/1395) ([benlangfeld](https://github.com/benlangfeld))
+- Downgrade activerecord until Nitro updated [\#1393](https://github.com/powerhome/playbook/pull/1393) ([thestephenmarshall](https://github.com/thestephenmarshall))
+- Upgrade max of action pack gem [\#1398](https://github.com/powerhome/playbook/pull/1398) ([coleerikson](https://github.com/coleerikson))
+- Revert "Allow url to be empty so form\_with can generate a url based on the model" [\#1400](https://github.com/powerhome/playbook/pull/1400) ([jasperfurniss](https://github.com/jasperfurniss))
+
+
+## [8.1.3](https://github.com/powerhome/playbook/tree/8.1.3) (2021-03-18)
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/8.2.0...8.1.3)
+
+
+## [8.2.0](https://github.com/powerhome/playbook/tree/HEAD) (2021-03-11)
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/8.1.2...8.2.0)
+
+**Kit Enhancements:**
+
+- Add image alt attributes as props to avatar kits [\#1377](https://github.com/powerhome/playbook/pull/1377) ([coleerikson](https://github.com/coleerikson))
+- Add indeterminate checkbox option to kits [\#1372](https://github.com/powerhome/playbook/pull/1372) ([coleerikson](https://github.com/coleerikson))
+- Add React tests for Button, Button Toolbar, Circle Icon Button [\#1371](https://github.com/powerhome/playbook/pull/1371) ([bh247484](https://github.com/bh247484))
+- Add CSS Reset to Dist [\#1370](https://github.com/powerhome/playbook/pull/1370) ([thestephenmarshall](https://github.com/thestephenmarshall))
+
+**Fixed Bugs:**
+
+- React User Badge bug hotfix [\#1385](https://github.com/powerhome/playbook/pull/1385) ([bh247484](https://github.com/bh247484))
+- Fix forms and action area rendering context [\#1380](https://github.com/powerhome/playbook/pull/1380) ([xjunior](https://github.com/xjunior))
+
+**New Kits:**
+
+- Dialog Kit (React) [\#1254](https://github.com/powerhome/playbook/pull/1254) ([jasperfurniss](https://github.com/jasperfurniss))
+
+**Security fixes:**
+
+- Security udpate for actionpack, actionview and activesupport [\#1382](https://github.com/powerhome/playbook/pull/1382) ([thestephenmarshall](https://github.com/thestephenmarshall))
+
+**Improvements:**
+
+- Add caption html tag to Caption kit [\#1381](https://github.com/powerhome/playbook/pull/1381) ([bh247484](https://github.com/bh247484))
+- Add tags and aria + data props to Card kit [\#1376](https://github.com/powerhome/playbook/pull/1376) ([bh247484](https://github.com/bh247484))
+- Online Status Accessibility Improvements [\#1375](https://github.com/powerhome/playbook/pull/1375) ([bh247484](https://github.com/bh247484))
+- Update renovate config [\#1373](https://github.com/powerhome/playbook/pull/1373) ([thestephenmarshall](https://github.com/thestephenmarshall))
+
+## [8.1.2](https://github.com/powerhome/playbook/tree/8.1.2) (2021-03-04)
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/8.1.1...8.1.2)
+
+## [8.1.1](https://github.com/powerhome/playbook/tree/8.1.1) (2021-03-04)
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/8.0.2...8.1.1)
+
 ## [8.1.0](https://github.com/powerhome/playbook/tree/8.1.0)
 
 [Full Changelog](https://github.com/powerhome/playbook/compare/8.0.0...8.1.0)
@@ -26,6 +540,13 @@
 - Fix form kit view context [\#1368](https://github.com/powerhome/playbook/pull/1368) ([xjunior](https://github.com/xjunior))
 
 
+## [8.0.3](https://github.com/powerhome/playbook/tree/8.0.3) (2021-03-04)
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/8.1.2...8.0.3)
+
+## [8.0.2](https://github.com/powerhome/playbook/tree/8.0.2) (2021-03-04)
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/8.2.0-alpha1...8.0.2)
 
 ## [8.0.0](https://github.com/powerhome/playbook/tree/8.0.0)
 
@@ -159,18 +680,18 @@
 
 **Kit Enhancements:**
 
-- \[NUXE-90\] generator kit alphabetize content [\#1283](https://github.com/powerhome/playbook/pull/1283) ([andrew-k9](https://github.com/andrew-k9))
-- \[NUXE-363\] UX - KIT DEV - Add character counter prop to Textarea Kit [\#1277](https://github.com/powerhome/playbook/pull/1277) ([stephenmckeon](https://github.com/stephenmckeon))
+- generator kit alphabetize content [\#1283](https://github.com/powerhome/playbook/pull/1283) ([andrew-k9](https://github.com/andrew-k9))
+- UX - KIT DEV - Add character counter prop to Textarea Kit [\#1277](https://github.com/powerhome/playbook/pull/1277) ([stephenmckeon](https://github.com/stephenmckeon))
 - Jest Code Coverage Action [\#1276](https://github.com/powerhome/playbook/pull/1276) ([thestephenmarshall](https://github.com/thestephenmarshall))
 
 **Fixed Bugs:**
 
-- \[NUXE-315\] UX - KIT DEV - Remove extra Margin from selectable cards [\#1291](https://github.com/powerhome/playbook/pull/1291) ([josephinef9](https://github.com/josephinef9))
+- UX - KIT DEV - Remove extra Margin from selectable cards [\#1291](https://github.com/powerhome/playbook/pull/1291) ([josephinef9](https://github.com/josephinef9))
 - Fixes genrator error [\#1286](https://github.com/powerhome/playbook/pull/1286) ([jasoncypret](https://github.com/jasoncypret))
 
 **Improvements:**
 
-- \[NUXE-367\] Fix typeahead cursor position \(REACT\) [\#1297](https://github.com/powerhome/playbook/pull/1297) ([josephinef9](https://github.com/josephinef9))
+- Fix typeahead cursor position \(REACT\) [\#1297](https://github.com/powerhome/playbook/pull/1297) ([josephinef9](https://github.com/josephinef9))
 - Dashboard cards [\#1296](https://github.com/powerhome/playbook/pull/1296) ([kre8sions](https://github.com/kre8sions))
 - Add mobile search [\#1289](https://github.com/powerhome/playbook/pull/1289) ([bh247484](https://github.com/bh247484))
 - Sample show redesign [\#1279](https://github.com/powerhome/playbook/pull/1279) ([bh247484](https://github.com/bh247484))
@@ -219,15 +740,15 @@
 **Kit Enhancements:**
 
 - Allow getOption\[Label|Value\] props in Typeahead [\#1244](https://github.com/powerhome/playbook/pull/1244) ([thestephenmarshall](https://github.com/thestephenmarshall))
-- \[NUXE-210\] - Update release script \(v2\) [\#1241](https://github.com/powerhome/playbook/pull/1241) ([bh247484](https://github.com/bh247484))
+- Update release script \(v2\) [\#1241](https://github.com/powerhome/playbook/pull/1241) ([bh247484](https://github.com/bh247484))
 - Table Reorganization, and change default alignment to top [\#1240](https://github.com/powerhome/playbook/pull/1240) ([jasoncypret](https://github.com/jasoncypret))
-- \[NUXE-331\] Kit search [\#1235](https://github.com/powerhome/playbook/pull/1235) ([bh247484](https://github.com/bh247484))
+- Kit search [\#1235](https://github.com/powerhome/playbook/pull/1235) ([bh247484](https://github.com/bh247484))
 - Move Playbook::Props to lib [\#1229](https://github.com/powerhome/playbook/pull/1229) ([xjunior](https://github.com/xjunior))
-- \[NUXE-77\] Add Icon Prop to Stat Change [\#1227](https://github.com/powerhome/playbook/pull/1227) ([ljtinney](https://github.com/ljtinney))
+- Add Icon Prop to Stat Change [\#1227](https://github.com/powerhome/playbook/pull/1227) ([ljtinney](https://github.com/ljtinney))
 
 **Improvements:**
 
-- \[NUXE-278\] SAMPLE PAGE - Crowdsourced Posts \(Reddit home page\) [\#1237](https://github.com/powerhome/playbook/pull/1237) ([stephenmckeon](https://github.com/stephenmckeon))
+- SAMPLE PAGE - Crowdsourced Posts \(Reddit home page\) [\#1237](https://github.com/powerhome/playbook/pull/1237) ([stephenmckeon](https://github.com/stephenmckeon))
 
 
 
@@ -237,7 +758,7 @@
 
 **Kit Enhancements:**
 
-- \[NUXE-316\] Currency Kit Updates [\#1226](https://github.com/powerhome/playbook/pull/1226) ([stephenmckeon](https://github.com/stephenmckeon))
+- Currency Kit Updates [\#1226](https://github.com/powerhome/playbook/pull/1226) ([stephenmckeon](https://github.com/stephenmckeon))
 
 **Improvements:**
 

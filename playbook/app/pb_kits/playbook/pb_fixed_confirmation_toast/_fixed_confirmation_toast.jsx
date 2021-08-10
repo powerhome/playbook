@@ -2,8 +2,11 @@
 
 import React, { useState } from 'react'
 import classnames from 'classnames'
-import { Icon, Title } from '../'
-import { globalProps } from '../utilities/globalProps.js'
+
+import { globalProps } from '../utilities/globalProps'
+
+import Icon from '../pb_icon/_icon'
+import Title from '../pb_title/_title'
 
 const iconMap = {
   success: 'check',
@@ -17,15 +20,17 @@ type FixedConfirmationToastProps = {
   closeable?: boolean,
   data?: string,
   id?: string,
-  status?: "success" | "error" | "neutral" | "tip",
+  multiLine?: boolean,
+  status?: 'success' | 'error' | 'neutral' | 'tip',
   text: string,
 }
 
 const FixedConfirmationToast = (props: FixedConfirmationToastProps) => {
   const [showToast, toggleToast] = useState(true)
-  const { className, closeable = false, status = 'neutral', text } = props
+  const { className, closeable = false, multiLine = false, status = 'neutral', text } = props
   const css = classnames(
     `pb_fixed_confirmation_toast_kit_${status}`,
+    { '_multi_line': multiLine },
     globalProps(props),
     className
   )

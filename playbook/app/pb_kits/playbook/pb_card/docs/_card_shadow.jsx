@@ -1,5 +1,6 @@
 import React from 'react'
-import { Card } from '../../'
+
+import Card from '../_card'
 
 const CardShadow = (props) => {
   return (

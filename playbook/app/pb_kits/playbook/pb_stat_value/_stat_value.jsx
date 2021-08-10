@@ -2,8 +2,9 @@
 
 import React from 'react'
 import classnames from 'classnames'
-import { Title } from '../'
-import { globalProps } from '../utilities/globalProps.js'
+
+import { globalProps } from '../utilities/globalProps'
+import Title from '../pb_title/_title'
 
 type StatValueProps = {
   className?: string,
@@ -25,6 +26,7 @@ const StatValue = (props: StatValueProps) => {
       return (
         <Title
             size={1}
+            tag="span"
             text={`${value}`}
         />
       )
@@ -36,6 +38,7 @@ const StatValue = (props: StatValueProps) => {
       return (
         <Title
             size={3}
+            tag="span"
             text={unit}
         />
       )

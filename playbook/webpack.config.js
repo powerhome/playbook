@@ -1,27 +1,44 @@
 const path = require('path')
 
 const webpack = require('webpack')
-const svgUrlLoader = require('./config/webpack/loaders/svg.js')
-
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const CircularDependencyPlugin = require('circular-dependency-plugin')
+const FileManagerPlugin = require('filemanager-webpack-plugin')
+const CopyPlugin = require('copy-webpack-plugin')
+
+const SOURCE_PATH = path.resolve(__dirname, 'app/pb_kits/playbook')
+const DIST_PATH = path.resolve(__dirname, 'dist')
+const NODE_MODULES_PATH = path.resolve(__dirname, '../node_modules')
+const IS_DEVELOPMENT = process.env.NODE_ENV === 'development'
+
+const CIRCULAR_DEPENDENCY_PLUGIN = new CircularDependencyPlugin({
+  // exclude detection of files based on a RegExp
+  exclude: /node_modules/,
+  // add errors to webpack instead of warnings
+  failOnError: true,
+  // allow import cycles that include an asyncronous import,
+  // e.g. via import(/* webpackMode: "weak" */ './file.js')
+  allowAsyncCycles: false,
+  // set the current working directory for displaying module paths
+  cwd: process.cwd(),
+})
 
 // Copy tokens and fonts to dist
-const CopyPlugin = require('copy-webpack-plugin')
-const COPY_PLUGIN_CONFIG = new CopyPlugin({
+const COPY_PLUGIN = new CopyPlugin({
   patterns: [
     {
-      from: path.resolve(__dirname, 'app/pb_kits/playbook/tokens'),
+      from: `${SOURCE_PATH}/tokens`,
       globOptions: {
-        ignore: ["**/exports/**"]
+        ignore: ['**/exports/**'],
       },
-      to: path.resolve(__dirname, 'dist/tokens'),
+      to: `${DIST_PATH}/tokens`,
       transformPath(targetPath) {
-        return targetPath.replace(/^tokens\/\_/, 'tokens/')
+        return targetPath.replace(/^tokens\/_/, 'tokens/')
       },
     },
     {
       from: path.resolve(__dirname, 'fonts'),
-      to: path.resolve(__dirname, 'dist/fonts'),
+      to: `${DIST_PATH}/fonts`,
     },
   ],
   options: {
@@ -29,151 +46,117 @@ const COPY_PLUGIN_CONFIG = new CopyPlugin({
   },
 })
 
-const BABEL_JS_CONFIG = {
+// Remove extra css and js created by webpack
+const CLEAN_DIST_PLUGIN = new FileManagerPlugin({
+  events: {
+    onEnd: {
+      delete: [
+        `${DIST_PATH}/playbook-rails.css`,
+        `${DIST_PATH}/playbook-doc.css`,
+        `${DIST_PATH}/reset.js`,
+      ],
+    },
+  },
+})
+
+const BABEL_LOADER = {
   test: /\.(js|jsx|mjs)$/,
   use: 'babel-loader',
+  include: SOURCE_PATH,
   exclude: /node_modules/,
 }
 
-const CSS_LOADER_CONFIG = {
+const CSS_LOADER = {
   loader: 'css-loader',
   options: {
     modules: {
       localIdentName: '[name]',
-      getLocalIdent: (context, localIdentName, localName, options) => {
-        return localName;
-      }
+      getLocalIdent: (_context, _localIdentName, localName) => localName,
     },
     sourceMap: true,
-  }
+  },
 }
 
-const SASS_LOADER_CONFIG = {
+const SASS_LOADER = {
   loader: 'sass-loader',
   options: {
     sassOptions: {
-      includePaths: [path.resolve(__dirname, 'node_modules')],
-    }
-  }
+      includePaths: [NODE_MODULES_PATH],
+    },
+  },
 }
 
-const config = {
-  externals: {
-    react: 'react',
-    'react-dom': 'react-dom',
-    trix: 'trix',
-    'webpacker-react': 'webpacker-react',
-  },
-  resolve: {
-    extensions: [
-      ".js",
-      ".sass",
-      ".scss",
-      ".css",
-      ".svg",
-      ".jsx",
-    ],
-    modules: [
-      path.resolve(__dirname, 'app/pb_kits/playbook'),
-      path.resolve(__dirname, 'app/assets'),
-      path.resolve(__dirname, 'node_modules'),
-    ]
-  },
-  resolveLoader: {
-    modules: [
-      'node_modules',
-      path.resolve(__dirname, 'config/webpack/loaders')
-    ],
-  },
-  optimization: (env) => {
-    return { minimize: env.development ? false : true }
-  },
-  output: {
-    libraryTarget: 'commonjs2',
-    path: path.resolve(__dirname, 'dist')
-  },
-  plugins: () => {
-    let pluginList = []
-    pluginList.push(new MiniCssExtractPlugin({ filename: '[name].css' }))
-    pluginList.push(COPY_PLUGIN_CONFIG)
-    return pluginList
-  },
-  module: {
-    main: {
-      rules: [
-        {
-          test: /\.scss$/i,
-          use: [
-            MiniCssExtractPlugin.loader,
-            CSS_LOADER_CONFIG,
-            SASS_LOADER_CONFIG,
-          ],
-        },
-        BABEL_JS_CONFIG,
-        svgUrlLoader
-      ],
+const SVG_URL_LOADER = {
+  test: /\.svg$/,
+  include: SOURCE_PATH,
+  exclude: /node_modules/,
+  use: [
+    {
+      loader: 'svg-url-loader',
+      options: {
+        limit: 10000,
+      },
     },
-    js: {
-      rules: [
-        {
-          test: /\.scss$/i,
-          use: [
-            CSS_LOADER_CONFIG,
-            SASS_LOADER_CONFIG,
-          ],
-        },
-        BABEL_JS_CONFIG,
-        svgUrlLoader
-      ]
-    }
-  }
+  ],
 }
 
 new webpack.DefinePlugin({
   'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
 })
 
-const mainConfig = (env) => {
-  return {
-    mode: 'production',
-    resolve: config.resolve,
-    resolveLoader: config.resolveLoader,
-    optimization: config.optimization(env),
-    externals: config.externals,
-    entry: {
-      'playbook-react': './app/pb_kits/playbook/index.js',
-      'playbook-rails': './app/pb_kits/playbook/vendor.js',
-    },
-    output: {
-      libraryTarget: config.output.libraryTarget,
-      filename: '[name].js',
-      path: config.output.path,
-    },
-    plugins: config.plugins(),
-    module: config.module.main,
-    resolve: config.resolve
-  }
+module.exports = {
+  entry: {
+    'playbook': `${SOURCE_PATH}/index.js`,
+    'playbook-rails': `${SOURCE_PATH}/playbook-rails.js`,
+    'playbook-doc': `${SOURCE_PATH}/playbook-doc.js`,
+    'reset': `${SOURCE_PATH}/_reset.scss`,
+  },
+  externals: {
+    'react': 'react',
+    'react-dom': 'react-dom',
+    'trix': 'trix',
+    'webpacker-react': 'webpacker-react',
+  },
+  resolve: {
+    // Extensions used (in the specified order order)to resolve imports w/o an explicit extension
+    extensions: [
+      '.js',
+      '.jsx',
+    ],
+    modules: [
+      SOURCE_PATH,
+      NODE_MODULES_PATH,
+    ],
+  },
+  resolveLoader: {
+    modules: [
+      NODE_MODULES_PATH,
+    ],
+  },
+  optimization: { minimize: !IS_DEVELOPMENT },
+  output: {
+    libraryTarget: 'umd',
+    filename: '[name].js',
+    path: DIST_PATH,
+  },
+  plugins: [
+    new MiniCssExtractPlugin({ filename: '[name].css' }),
+    CIRCULAR_DEPENDENCY_PLUGIN,
+    COPY_PLUGIN,
+    CLEAN_DIST_PLUGIN,
+  ],
+  module: {
+    rules: [
+      {
+        test: /\.scss$/i,
+        use: [
+          MiniCssExtractPlugin.loader,
+          CSS_LOADER,
+          SASS_LOADER,
+        ],
+      },
+      BABEL_LOADER,
+      SVG_URL_LOADER,
+    ],
+  },
 }
-
-const docsConfig = (env) => {
-  return {
-    mode: 'production',
-    resolve: config.resolve,
-    resolveLoader: config.resolveLoader,
-    optimization: config.optimization(env),
-    externals: config.externals,
-    entry: {
-      'playbook-doc': './app/pb_kits/playbook/packs/react-examples.js',
-    },
-    output: {
-      libraryTarget: 'amd',
-      filename: '[name].js',
-      path: config.output.path,
-    },
-    plugins: config.plugins(),
-    module: config.module.js,
-    resolve: config.resolve
-  }
-}
-
-module.exports = [mainConfig, docsConfig]

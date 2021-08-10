@@ -1,5 +1,5 @@
 import { commonSettings } from '../pb_dashboard/commonSettings.js'
-import typography from '../tokens/_typography.scss'
+import typography from '../tokens/exports/_typography.scss'
 
 const sizeColumns = function(highchart) {
   const column = highchart.plotOptions.column

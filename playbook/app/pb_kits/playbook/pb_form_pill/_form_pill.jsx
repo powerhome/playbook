@@ -14,6 +14,7 @@ type FormPillProps = {
   onClick?: EventHandler,
   avatar?: boolean,
   avatarUrl?: string,
+  size?: string,
   closeProps?: {
     onClick?: EventHandler,
     onMouseDown?: EventHandler,
@@ -21,11 +22,20 @@ type FormPillProps = {
   },
 }
 const FormPill = (props: FormPillProps) => {
-  const { className, text, name, onClick = () => {}, avatarUrl, closeProps = {} } = props
+  const {
+    className,
+    text,
+    name,
+    onClick = () => {},
+    avatarUrl,
+    closeProps = {},
+    size = '',
+  } = props
   const css = classnames(
     `pb_form_pill_kit_${'primary'}`,
     globalProps(props),
-    className
+    className,
+    size === 'small' ? 'small' : null,
   )
   return (
     <div className={css}>

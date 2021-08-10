@@ -54,9 +54,6 @@ RSpec.describe Playbook::KitBase do
       expect(instance.generate_classname("separate", "with", "custom", separator: "X")).to eq(
         "separateXwithXcustom passed_classname"
       )
-
-      another_instance = subject.new(classname: "passed_classname")
-
       expect(instance.generate_classname("separate", "with", "custom", separator: " ")).to eq(
         "separate with custom passed_classname"
       )

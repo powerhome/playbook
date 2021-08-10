@@ -2,11 +2,12 @@
 
 import React from 'react'
 import classnames from 'classnames'
-import { globalProps } from '../utilities/globalProps.js'
 
-import { Body, Title } from '../'
-
+import { globalProps } from '../utilities/globalProps'
 import { buildCss, buildDataProps } from '../utilities/props'
+
+import Body from '../pb_body/_body'
+import Title from '../pb_title/_title'
 
 type TitleDetailProps = {
   align?: "left" | "center" | "right",

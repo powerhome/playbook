@@ -2,9 +2,13 @@
 
 import React from 'react'
 import classnames from 'classnames'
-import { Body, Caption, Icon } from '../'
-import DateTime from '../pb_kit/dateTime.js'
-import { globalProps } from '../utilities/globalProps.js'
+
+import DateTime from '../pb_kit/dateTime'
+import { globalProps } from '../utilities/globalProps'
+
+import Body from '../pb_body/_body'
+import Caption from '../pb_caption/_caption'
+import Icon from '../pb_icon/_icon'
 
 type TimeRangeInlineProps = {
   className?: string,

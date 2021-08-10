@@ -1,7 +1,11 @@
 import React, { useState } from 'react'
+
 import ProgressStep from '../_progress_step.jsx'
-import ProgressStepItem from '../_progress_step_item.jsx'
-import { Button, Caption } from '../../'
+import ProgressStepItem from '../_progress_step_item'
+
+import Caption from '../../pb_caption/_caption'
+import Button from '../../pb_button/_button'
+
 const ProgressStepTrackerClickEvents = (props) => {
   const [warning, setWarning] = useState(false)
   const showWarning = warning == true

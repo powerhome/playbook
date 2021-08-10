@@ -25,3 +25,5 @@ yarn-error.log
 .byebug_history
 spec_results/
 spec/examples.txt
+dist/playbook-*.css
+dist/reset.css.*

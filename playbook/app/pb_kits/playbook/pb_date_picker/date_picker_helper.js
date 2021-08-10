@@ -166,6 +166,9 @@ const datePickerHelper = (config) => {
     picker.input.style.caretColor = 'transparent'
     picker.input.style.cursor = 'pointer'
   }
+
+  // Fix event bubbling bug on wrapper
+  document.querySelector(`#${pickerId}`).parentElement.addEventListener('click', (e) => e.stopPropagation())
 }
 
 export default datePickerHelper

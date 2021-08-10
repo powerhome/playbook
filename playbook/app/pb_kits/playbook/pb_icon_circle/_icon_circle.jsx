@@ -4,9 +4,10 @@ import React from 'react'
 
 import classnames from 'classnames'
 
-import { Icon } from '../'
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
-import { globalProps } from '../utilities/globalProps.js'
+import { globalProps } from '../utilities/globalProps'
+
+import Icon from '../pb_icon/_icon'
 
 type IconCircleProps = {
   aria?: object,

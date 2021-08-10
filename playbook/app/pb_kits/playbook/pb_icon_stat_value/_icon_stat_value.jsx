@@ -2,9 +2,15 @@
 
 import React from 'react'
 import classnames from 'classnames'
+
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
-import { Body, Caption, Flex, IconCircle, Title } from '../'
 import { globalProps } from '../utilities/globalProps.js'
+
+import Body from '../pb_body/_body'
+import Caption from '../pb_caption/_caption'
+import Flex from '../pb_flex/_flex'
+import IconCircle from '../pb_icon_circle/_icon_circle'
+import Title from '../pb_title/_title'
 
 type IconStatValueProps = {
   aria?: object,
@@ -52,6 +58,7 @@ const IconStatValue = (props: IconStatValueProps) => {
       return (
         <Title
             size={1}
+            tag="span"
             text={`${value}`}
         />
       )
@@ -59,6 +66,7 @@ const IconStatValue = (props: IconStatValueProps) => {
       return (
         <Title
             size={2}
+            tag="span"
             text={`${value}`}
         />
       )
@@ -66,6 +74,7 @@ const IconStatValue = (props: IconStatValueProps) => {
       return (
         <Title
             size={3}
+            tag="span"
             text={`${value}`}
         />
       )

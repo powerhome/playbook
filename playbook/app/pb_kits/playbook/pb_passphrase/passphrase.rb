@@ -1,0 +1,38 @@
+# frozen_string_literal: true
+
+module Playbook
+  module PbPassphrase
+    class Passphrase < Playbook::KitBase
+      prop :average_threshold
+      prop :check_pwned
+      prop :confirmation, type: Playbook::Props::Boolean, default: false
+      prop :input_props, type: Playbook::Props::Hash, default: {}
+      prop :label
+      prop :min_length
+      prop :show_tips_below
+      prop :strong_threshold
+      prop :tips, type: Playbook::Props::Array, default: []
+
+      def classname
+        generate_classname("pb_passphrase")
+      end
+
+      def passphrase_options
+        {
+          checkPwned: check_pwned,
+          dark: dark,
+          id: id,
+          averageThreshold: average_threshold,
+          confirmation: confirmation,
+          inputProps: input_props,
+          label: label,
+          minLength: min_length,
+          showTipsBelow: show_tips_below,
+          strongThreshold: strong_threshold,
+          tips: tips,
+          uncontrolled: true,
+        }.compact
+      end
+    end
+  end
+end

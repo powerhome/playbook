@@ -3,6 +3,7 @@
 require "playbook/classnames"
 require "playbook/spacing"
 require "playbook/z_index"
+require "playbook/number_spacing"
 
 module Playbook
   class KitBase < ViewComponent::Base
@@ -11,6 +12,7 @@ module Playbook
     include Playbook::Classnames
     include Playbook::Spacing
     include Playbook::ZIndex
+    include Playbook::NumberSpacing
 
     prop :id
     prop :data, type: Playbook::Props::Hash, default: {}

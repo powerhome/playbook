@@ -2,16 +2,14 @@
 
 import React from 'react'
 import classnames from 'classnames'
-import { buildDataProps } from '../utilities/props'
+import { buildAriaProps, buildDataProps } from '../utilities/props'
 import { globalProps } from '../utilities/globalProps.js'
 
 import Icon from '../pb_icon/_icon.jsx'
 
 type EventHandler = (SyntheticInputEvent<HTMLInputElement>) => void
 type ButtonPropTypes = {
-  aria?: {
-    label: string,
-  },
+  aria?: object,
   children?: array<React.ReactChild>,
   className?: string | array<string>,
   data?: object,
@@ -55,20 +53,9 @@ const buttonClassName = (props: ButtonPropTypes) => {
   return className
 }
 
-const buttonAriaProps = (props: ButtonPropTypes) => {
-  const { aria } = props
-  if (typeof aria !== 'object') return {}
-  const { label } = aria
-
-  const ariaProps = {}
-
-  if (label !== null) ariaProps['aria-label'] = label
-
-  return ariaProps
-}
-
 const Button = (props: ButtonPropTypes) => {
   const {
+    aria = {},
     children,
     className,
     data = {},
@@ -84,7 +71,7 @@ const Button = (props: ButtonPropTypes) => {
     value,
   } = props
 
-  const buttonAria = buttonAriaProps(props)
+  const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
   const css = classnames(
     buttonClassName(props),
@@ -114,26 +101,28 @@ const Button = (props: ButtonPropTypes) => {
   return (
     <If condition={link !== null}>
       <a
+          {...ariaProps}
+          {...dataProps}
           className={css}
           href={link}
           id={id}
+          role="link"
           target={newWindow ? '_blank' : null}
-          {...buttonAria}
-          {...dataProps}
       >
         <If condition={loading}>{loadingIcon}</If>
         {content}
       </a>
       <Else />
       <button
+          {...ariaProps}
+          {...dataProps}
           className={css}
           disabled={disabled}
           id={id}
           onClick={onClick}
+          role="button"
           type={htmlType}
           value={value}
-          {...buttonAria}
-          {...dataProps}
       >
         <If condition={loading}>{loadingIcon}</If>
         {content}

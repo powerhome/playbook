@@ -6,12 +6,16 @@ RSpec.describe Playbook::PbBackground::Background do
   subject { Playbook::PbBackground::Background }
 
   it { is_expected.to define_prop(:image_url) }
-  it { is_expected.to define_enum_prop(:tag)
-                      .with_default("div")
-                      .with_values("h1", "h2", "h3", "h4", "h5", "h6", "p", "span", "div") }
-  it { is_expected.to define_enum_prop(:background_color)
-                      .with_default("light")
-                      .with_values("gradient", "dark", "light", "white") }
+  it {
+    is_expected.to define_enum_prop(:tag)
+      .with_default("div")
+      .with_values("h1", "h2", "h3", "h4", "h5", "h6", "p", "span", "div")
+  }
+  it {
+    is_expected.to define_enum_prop(:background_color)
+      .with_default("light")
+      .with_values("gradient", "dark", "light", "white")
+  }
   describe "#classname" do
     it "returns namespaced class name", :aggregate_failures do
       expect(subject.new({}).classname).to eq "pb_background_kit  pb_background_color_light"

@@ -1,5 +1,7 @@
 import React from 'react'
-import { Table, TableRow } from '../../'
+
+import Table from '../_table'
+import TableRow from '../_table_row'
 
 const TableSideHighlight = (props) => {
   return (

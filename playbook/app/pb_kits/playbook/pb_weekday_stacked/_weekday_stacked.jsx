@@ -5,7 +5,8 @@ import classnames from 'classnames'
 import { globalProps } from '../utilities/globalProps.js'
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
 
-import { Caption, Title } from '../'
+import Caption from '../pb_caption/_caption'
+import Title from '../pb_title/_title'
 
 import DateTime from '../pb_kit/dateTime.js'
 
@@ -22,8 +23,8 @@ type WeekdayStackedProps = {
   id?: string,
 }
 
-const getDayOfWeek = (date, compact) => {
-  const dateTime = new DateTime({ value: date })
+const getDayOfWeek = (value, compact) => {
+  const dateTime = new DateTime({ value })
   if (compact) {
     return dateTime.toDayAbbr()
   } else {
@@ -31,8 +32,8 @@ const getDayOfWeek = (date, compact) => {
   }
 }
 
-const getFormattedDate = (date, variant) => {
-  const dateTime = new DateTime({ value: date })
+const getFormattedDate = (value, variant) => {
+  const dateTime = new DateTime({ value })
   if (variant === 'day_only') {
     return dateTime.toDay()
   } else {

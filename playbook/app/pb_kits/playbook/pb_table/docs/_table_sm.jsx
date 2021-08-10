@@ -1,5 +1,6 @@
 import React from 'react'
-import { Table } from '../../'
+
+import Table from '../_table'
 
 const TableSm = (props) => {
   return (

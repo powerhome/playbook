@@ -1,5 +1,6 @@
 import React from 'react'
-import { Checkbox } from '../../'
+
+import Checkbox from '../_checkbox'
 
 const CheckboxDefault = (props) => {
   return (

@@ -1,13 +1,17 @@
 kits:
-  - avatar
-  - avatar_action_button
+  - avatars:
+    - avatar
+    - avatar_action_button
+    - multiple_users
+    - multiple_users_stacked
+    - user
   - background
+  - bread_crumbs
   - buttons:
     - button
     - button_toolbar
     - circle_icon_button
   - card
-  - checkbox
   - collapsible
   - charts_and_graphs:
     - bar_graph
@@ -16,16 +20,19 @@ kits:
     - gauge
     - legend
     - line_graph
+  - dialog
   - filter
   - fixed_confirmation_toast
-  - flex
   - forms:
+    - checkbox
     - date_picker
     - file_upload
     - form
     - form_group
     - form_pill
+    - passphrase
     - radio
+    - rich_text_editor
     - select
     - selectable_card
     - selectable_card_icon
@@ -33,21 +40,20 @@ kits:
     - selectable_list
     - text_input
     - textarea
-    - typeahead
     - toggle
+    - typeahead
   - highlight
   - icon
   - icon_circle
   - icon_stat_value
   - icon_value
   - image
-  - layout
+  - layouts:
+    - flex
+    - layout
   - list
   - loading_inline
-  - multiple_users
-  - multiple_users_stacked
   - nav
-  - online_status
   - tags:
     - badge
     - hashtag
@@ -57,13 +63,23 @@ kits:
     - progress_pills
     - progress_simple
     - progress_step
-  - rich_text_editor
   - section_separator
-  - source
   - star_rating
-  - stat_change
   - table
   - timeline
+  - time_and_date:
+    - date
+    - date_range_inline
+    - date_range_stacked
+    - date_stacked
+    - date_time
+    - date_time_stacked
+    - date_year_stacked
+    - time
+    - time_range_inline
+    - time_stacked
+    - timestamp
+    - weekday_stacked
   - tooltip
   - typography:
     - body
@@ -73,26 +89,16 @@ kits:
     - contact
     - currency
     - dashboard_value
-    - date
-    - date_range_inline
-    - date_range_stacked
-    - date_stacked
-    - date_time
-    - date_time_stacked
-    - date_year_stacked
     - home_address_street
     - label_pill
     - label_value
     - message
     - person
     - person_contact
+    - source
+    - stat_change
     - stat_value
-    - time
-    - time_stacked
-    - timestamp
-    - time_range_inline
     - title_count
     - title_detail
-    - weekday_stacked
-  - user
   - user_badge
+  - walkthrough

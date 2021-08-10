@@ -1,5 +1,6 @@
 import React from 'react'
-import { IconCircle } from '../../'
+
+import IconCircle from '../_icon_circle'
 
 const IconCircleDefault = (props) => {
   return (

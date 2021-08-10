@@ -1,6 +1,7 @@
 import React from 'react'
 
-import { List, ListItem } from '../../'
+import List from '../_list'
+import ListItem from '../_list_item'
 
 const ListBorderless = (props) => {
   return (

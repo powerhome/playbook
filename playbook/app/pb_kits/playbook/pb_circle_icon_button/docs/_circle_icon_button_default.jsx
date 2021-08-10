@@ -1,5 +1,6 @@
 import React from 'react'
-import { CircleIconButton } from '../../'
+
+import CircleIconButton from '../_circle_icon_button'
 
 const CircleIconButtonDefault = (props) => (
   <div>

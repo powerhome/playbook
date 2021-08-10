@@ -5,9 +5,10 @@ import classnames from 'classnames'
 
 import DateTime from '../pb_kit/dateTime.js'
 import { buildCss, buildDataProps } from '../utilities/props'
-import { deprecatedProps, globalProps } from '../utilities/globalProps.js'
+import { deprecatedProps, globalProps } from '../utilities/globalProps'
 
-import { Body, Caption } from '../'
+import Body from '../pb_body/_body'
+import Caption from '../pb_caption/_caption'
 
 type TimeStackedProps = {
   align?: 'left' | 'center' | 'right',

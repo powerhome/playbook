@@ -1,0 +1,75 @@
+AllCops:
+  TargetRubyVersion: 2.5
+
+Layout/AccessModifierIndentation:
+  EnforcedStyle: outdent
+
+Layout/LineLength:
+  Enabled: false
+
+Lint/RaiseException:
+  Enabled: true
+
+Lint/ScriptPermission:
+  Enabled: false
+
+Lint/StructNewOverride:
+  Enabled: true
+
+Metrics:
+  Enabled: false
+
+Naming/PredicateName:
+  Enabled: false
+
+Naming/MethodParameterName:
+  AllowedNames:
+    - io
+    - id
+    - to
+    - by
+    - "on"
+    - in
+    - at
+
+Style/CaseEquality:
+  Enabled: false
+
+Style/Documentation:
+  Enabled: false
+
+Style/EachWithObject:
+  Enabled: false
+
+Style/GuardClause:
+  Enabled: false
+
+Style/HashEachMethods:
+  Enabled: false
+
+Style/HashTransformKeys:
+  Enabled: false
+
+Style/HashTransformValues:
+  Enabled: false
+
+Style/Lambda:
+  EnforcedStyle: literal
+
+Style/NumericLiterals:
+  Enabled: false
+
+Style/RescueStandardError:
+  EnforcedStyle: implicit
+
+Style/Semicolon:
+  Enabled: false
+
+Style/StringLiterals:
+  EnforcedStyle: double_quotes
+
+Style/TrailingCommaInArrayLiteral:
+  EnforcedStyleForMultiline: comma
+
+Style/TrailingCommaInHashLiteral:
+  EnforcedStyleForMultiline: comma

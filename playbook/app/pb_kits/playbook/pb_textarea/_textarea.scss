@@ -1,32 +1,34 @@
 @import "../pb_body/body_mixins";
 @import "./textarea_mixin";
-@import "../pb_title/title_mixin";
 @import "../tokens/spacing";
+@import "../tokens/titles";
 
 [class^=pb_textarea_kit] {
   margin-bottom: $space_sm;
+
   [class^=pb_caption_kit] {
     margin-bottom: $space_xs;
     display: block;
   }
-  textarea::placeholder {
+  textarea::placeholder,
+  .pb_text_area_kit::placeholder {
     @include pb_body_light;
   }
-  > textarea {
+  textarea,
+  .pb_text_area_kit {
     @include pb_textarea_light;
   }
-  textarea:focus {
+  textarea:focus,
+  .pb_text_area_kit:focus {
+    border-color: $primary;
     @include pb_textarea_focus_light;
+    @include transition_default;
+  }
+  textarea:hover,
+  .pb_text_area_kit:hover {
+    background-color: rgba($focus_input_light,$opacity_5);
   }
 
-  &.error {
-    [class*=pb_body_kit] {
-      margin-top: $space_xs / 2;
-    }
-    > textarea {
-      border-color: $error;
-    }
-  }
   &.resize_both > textarea {
     resize: both;
     overflow: auto;
@@ -44,16 +46,24 @@
     textarea::placeholder {
       @include pb_body_light_dark;
     }
-    > textarea {
-      @include pb_textarea_dark;
+    textarea,
+    .pb_text_area_kit {
+      @include pb_body_dark;
+      background-color: rgba($white, $opacity_1);
+      border-color: rgba($white, 0.15);
     }
-    textarea:focus {
-      @include pb_textarea_focus_dark;
+    textarea:focus, .pb_text_area_kit:focus {
+      border-color: $active_dark;
+      background-color: rgba($white, 0.025);
     }
-    &.error {
-      > textarea {
-        border-color: $error_dark;
-      }
+  }
+
+  &.error {
+    [class*=pb_body_kit] {
+      margin-top: $space_xs / 2;
+    }
+    textarea {
+      border-color: $error;
     }
   }
 

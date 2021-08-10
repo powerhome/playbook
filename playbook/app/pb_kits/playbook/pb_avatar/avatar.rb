@@ -3,10 +3,13 @@
 module Playbook
   module PbAvatar
     class Avatar < Playbook::KitBase
-      prop :image_url
-      prop :name, default: ""
+      prop :image_url, type: Playbook::Props::String
+      prop :image_alt, type: Playbook::Props::String,
+                       default: ""
+      prop :name, type: Playbook::Props::String,
+                  default: ""
       prop :size, type: Playbook::Props::Enum,
-                  values: %w[xs sm md base lg xl],
+                  values: %w[xxs xs sm md base lg xl],
                   default: "md"
       prop :status
 

@@ -1,10 +1,14 @@
 import React from 'react'
-import { Select } from '../../'
+
+import Select from '../_select'
 
 const SelectCustomSelect = (props) => {
   return (
     <div>
-      <Select label="Favorite Holiday">
+      <Select
+          label="Favorite Holiday"
+          {...props}
+      >
         <select
             id="holiday"
             name="holiday"

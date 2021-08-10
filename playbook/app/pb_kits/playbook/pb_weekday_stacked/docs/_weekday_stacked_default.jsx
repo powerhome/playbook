@@ -1,7 +1,6 @@
 import React from 'react'
-import {
-  WeekdayStacked,
-} from '../../'
+
+import WeekdayStacked from '../_weekday_stacked'
 
 const WeekdayStackedDefault = (props) => (
   <div>

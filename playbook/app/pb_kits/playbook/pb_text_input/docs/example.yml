@@ -4,8 +4,12 @@ examples:
   - text_input_error: With Error
   - text_input_custom: Custom
   - text_input_disabled: Disabled
+  - text_input_add_on: Add On
+  - text_input_inline: Inline
   react:
   - text_input_default: Default
   - text_input_error: With Error
   - text_input_custom: Custom
   - text_input_disabled: Disabled
+  - text_input_add_on: Add On
+  - text_input_inline: Inline

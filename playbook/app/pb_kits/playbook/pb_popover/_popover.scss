@@ -19,14 +19,6 @@
   to {
     opacity: 0;
   }
-  .pb_popover_body {
-    @include pb_card;
-    border: 0;
-    box-shadow: $shadow_deeper;
-  }
-  .overflow_handling {
-    overflow: auto;
-  }
 }
 
 .pb_popover_tooltip {

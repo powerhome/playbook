@@ -2,23 +2,26 @@
 
 import React from 'react'
 import classnames from 'classnames'
-import { Avatar, Icon } from '../'
 
 import {
   buildAriaProps,
   buildCss,
   buildDataProps,
 } from '../utilities/props'
-
 import { globalProps } from '../utilities/globalProps.js'
+
+import Avatar from '../pb_avatar/_avatar'
+import Icon from '../pb_icon/_icon'
 
 type AvatarActionButtonProps = {
   action?: string,
   aria: Object,
+  linkAriaLabel?: string,
   className?: string,
   dark?: boolean,
   data?: Object,
   id?: string,
+  imageAlt?: string,
   imageUrl?: string,
   linkUrl?: string,
   name?: string,
@@ -31,10 +34,12 @@ const AvatarActionButton = (props: AvatarActionButtonProps) => {
   const {
     action = 'add',
     aria = {},
+    linkAriaLabel,
     className,
     dark = false,
     data = {},
     id,
+    imageAlt = '',
     imageUrl,
     linkUrl,
     name,
@@ -67,10 +72,12 @@ const AvatarActionButton = (props: AvatarActionButtonProps) => {
         id={id}
     >
       <a
+          aria-label={linkAriaLabel}
           href={linkUrl}
           onClick={onClick}
       >
         <Avatar
+            imageAlt={imageAlt}
             imageUrl={imageUrl}
             name={name}
             size={size}

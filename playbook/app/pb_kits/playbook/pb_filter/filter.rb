@@ -3,7 +3,7 @@
 module Playbook
   module PbFilter
     class Filter < Playbook::KitBase
-      prop :filters, type: Playbook::Props::HashArray, default: [{name: ''}]
+      prop :filters, type: Playbook::Props::HashArray, default: [{ name: "" }]
       prop :sort_menu, type: Playbook::Props::HashArray, default: [{}]
       prop :results, type: Playbook::Props::Numeric
       prop :template, type: Playbook::Props::Enum,

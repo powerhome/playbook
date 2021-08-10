@@ -5,6 +5,16 @@ const DateVariants = (props) => {
   return (
     <div>
       <FormattedDate
+          showIcon
+          size="sm"
+          value="1995-12-25"
+          {...props}
+      />
+
+      <br />
+      <br />
+
+      <FormattedDate
           value="1995-12-25"
           {...props}
       />

@@ -1,5 +1,8 @@
 import React from 'react'
-import { Button, FormGroup, TextInput } from '../../'
+
+import Button from '../../pb_button/_button'
+import FormGroup from '../../pb_form_group/_form_group'
+import TextInput from '../../pb_text_input/_text_input'
 
 const FormGroupButton = (props) => (
   <div>

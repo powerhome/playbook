@@ -1,11 +1,16 @@
 /* @flow */
 
 import React from 'react'
-import DateTime from '../pb_kit/dateTime.js'
-import { Body, Caption, Icon, Title } from '../'
 import classnames from 'classnames'
-import { globalProps } from '../utilities/globalProps.js'
+
+import DateTime from '../pb_kit/dateTime'
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
+import { globalProps } from '../utilities/globalProps'
+
+import Body from '../pb_body/_body'
+import Caption from '../pb_caption/_caption'
+import Icon from '../pb_icon/_icon'
+import Title from '../pb_title/_title'
 
 type PbDateProps = {
   alignment?: "left" | "center" | "right",
@@ -95,16 +100,16 @@ const PbDate = (props: PbDateProps) => {
         <Else />
         <>
           <If condition={showIcon}>
-            <Body
+            <Caption
                 className="pb_icon_kit_container"
-                color="light"
                 tag="span"
             >
               <Icon
                   fixedWidth
                   icon="calendar-alt"
+                  size="xs"
               />
-            </Body>
+            </Caption>
           </If>
           <If condition={showDayOfWeek}>
             <Caption tag="div">

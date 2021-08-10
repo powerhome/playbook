@@ -1,5 +1,6 @@
 import React from 'react'
-import { Select } from '../../'
+
+import Select from '../_select'
 
 const SelectRequired = (props) => {
   const options = [

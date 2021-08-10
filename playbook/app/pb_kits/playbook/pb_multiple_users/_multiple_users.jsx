@@ -2,9 +2,11 @@
 
 import React from 'react'
 import classnames from 'classnames'
+
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
-import { Avatar } from '../'
 import { globalProps } from '../utilities/globalProps.js'
+
+import Avatar from '../pb_avatar/_avatar'
 
 type MultipleUsersProps = {
   aria?: object,
@@ -14,6 +16,7 @@ type MultipleUsersProps = {
   id?: string,
   maxDisplayedUsers?: number,
   reverse?: boolean,
+  size?: string,
   users: array<object>,
 }
 
@@ -26,6 +29,7 @@ const MultipleUsers = (props: MultipleUsersProps) => {
     id,
     maxDisplayedUsers = 4,
     reverse = false,
+    size = 'xs',
     users,
   } = props
 
@@ -34,12 +38,18 @@ const MultipleUsers = (props: MultipleUsersProps) => {
   const usersToDisplay = users.slice(0, displayCount)
 
   const reverseClass = reverse === true ? 'reverse' : ''
+  const avatarSizeClass = size === 'xxs' ? 'xxs' : 'xs'
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
   const classes = classnames(
     buildCss('pb_multiple_users_kit', reverseClass),
     globalProps(props),
     className
+  )
+
+  const itemClasses = classnames(
+    'pb_multiple_users_item',
+    buildCss('multiple_users_badge', avatarSizeClass)
   )
 
   return (
@@ -55,12 +65,12 @@ const MultipleUsers = (props: MultipleUsersProps) => {
             className="pb_multiple_users_item"
             dark={dark}
             key={index}
-            size="xs"
+            size={size}
         />
       ))}
 
       <If condition={users.length > maxDisplayedUsers}>
-        <div className="pb_multiple_users_item multiple_users_badge">
+        <div className={itemClasses}>
           {`+${users.length - 3}`}
         </div>
       </If>

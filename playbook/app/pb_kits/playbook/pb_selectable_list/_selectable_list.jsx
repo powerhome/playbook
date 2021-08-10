@@ -1,9 +1,11 @@
 /* @flow */
 import React from 'react'
 import classnames from 'classnames'
+
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
-import { globalProps } from '../utilities/globalProps.js'
-import { List } from  '..'
+import { globalProps } from '../utilities/globalProps'
+
+import List from  '../pb_list/_list'
 import SelectableListItem from './_item.jsx'
 
 type SelectableListProps = {

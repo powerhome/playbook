@@ -1,6 +1,7 @@
 import React from 'react'
-import { Card } from '../../'
-import { SectionSeparator } from '../../'
+
+import Card from '../_card'
+import SectionSeparator from '../../pb_section_separator/_section_separator'
 
 const CardSeparator = (props) => {
   return (

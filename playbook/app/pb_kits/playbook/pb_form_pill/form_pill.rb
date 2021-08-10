@@ -6,6 +6,7 @@ module Playbook
       prop :avatar_url
       prop :name
       prop :text
+      prop :size
 
       def classname
         generate_classname("pb_form_pill_kit", "primary", name, text)
@@ -13,6 +14,10 @@ module Playbook
 
       def display_text
         name.downcase
+      end
+
+      def size_class
+        size == "small" ? " small" : ""
       end
     end
   end

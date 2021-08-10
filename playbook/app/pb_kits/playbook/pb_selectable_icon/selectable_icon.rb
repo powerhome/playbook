@@ -20,7 +20,7 @@ module Playbook
       prop :value
 
       prop :input_options, type: Playbook::Props::Hash,
-                                      default: {}
+                           default: {}
 
       # Conditional rendering for input field
       prop :inputs, type: Playbook::Props::String,

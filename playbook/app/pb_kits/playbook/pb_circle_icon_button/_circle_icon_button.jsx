@@ -3,15 +3,14 @@
 import React from 'react'
 import classnames from 'classnames'
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
-import { Button, Icon } from '../'
 
 import type { Callback } from '../types'
 
-import {
-  noop,
-} from '../utilities/props'
-
+import { noop } from '../utilities/props'
 import { globalProps } from '../utilities/globalProps.js'
+
+import Button from '../pb_button/_button'
+import Icon from '../pb_icon/_icon'
 
 type CircleIconButtonProps = {
   aria?: object,

@@ -2,9 +2,12 @@
 
 import React from 'react'
 import classnames from 'classnames'
-import { Icon, Image } from '../'
+
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
-import { globalProps } from '../utilities/globalProps.js'
+import { globalProps } from '../utilities/globalProps'
+
+import Icon from '../pb_icon/_icon'
+import Image from '../pb_image/_image'
 
 type NavItemProps = {
   active?: boolean,
@@ -75,7 +78,6 @@ const NavItem = (props: NavItemProps) => {
               key={iconLeft}
           >
             <Icon
-                aria={{ label: iconLeft }}
                 className="pb_nav_list_item_icon_left"
                 fixedWidth
                 icon={iconLeft}
@@ -91,7 +93,6 @@ const NavItem = (props: NavItemProps) => {
               key={iconRight}
           >
             <Icon
-                aria={{ label: iconRight }}
                 className="pb_nav_list_item_icon_right"
                 fixedWidth
                 icon={iconRight}

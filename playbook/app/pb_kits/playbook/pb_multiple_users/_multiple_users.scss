@@ -6,11 +6,13 @@
 $pb_multiple_users_overlap: -9px;
 $pb_multiple_users_border_size: 1px;
 $pb_multiple_users_size: map-get($avatar-sizes, "xs");
+$pb_multiple_users_size_xxs: map-get($avatar-sizes, "xxs");
 
 [class^=pb_multiple_users_kit] {
   display: inline-flex;
 
-  .multiple_users_badge {
+  .multiple_users_badge_xs,
+  .multiple_users_badge_xxs {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -22,6 +24,11 @@ $pb_multiple_users_size: map-get($avatar-sizes, "xs");
     color: $primary;
     font-weight: $bold;
     font-size: $font_smallest - 1;
+  }
+
+  .multiple_users_badge_xxs {
+    width: $pb_multiple_users_size_xxs;
+    height: $pb_multiple_users_size_xxs;
   }
 
   .pb_multiple_users_item {

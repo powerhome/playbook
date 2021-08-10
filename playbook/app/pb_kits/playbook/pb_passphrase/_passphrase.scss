@@ -1,0 +1,78 @@
+@import "../tokens/colors";
+@import "../tokens/spacing";
+@import "../tokens/screen_sizes";
+
+.pb_passphrase {
+  margin-bottom: $space_sm;
+
+  label {
+    display: inline;
+  }
+
+  [class*=show-below-] {
+    display: none;
+  }
+  @each $breakpoint_name, $breakpoint in $breakpoints {
+    .show-below-#{$breakpoint_name} {
+      @include break_at($breakpoint) {
+        display: inline;
+      }
+    }
+  }
+
+  .passphrase-label {
+    margin-right: ($space_xs/2);
+  }
+
+  .passphrase-text-input-wrapper {
+    position: relative;
+
+    .pb_text_input_kit_label {
+      margin-bottom: ($space_xs/2);
+    }
+
+    .passphrase-text-input input {
+      padding-right: 42px;
+    }
+
+    .passphrase-text-input .text_input_wrapper {
+      margin-bottom: 0;
+    }
+
+    .show-passphrase-icon {
+      position: absolute;
+      right: 11px;
+      top: 11px;
+      cursor: pointer;
+      @media (hover:hover) {
+        &:hover .pb_body_kit_light {
+          color: $primary;
+        }
+      }
+
+      .hide-icon {
+        display: none;
+      }
+    }
+  }
+
+  .pb_progress_simple_wrapper, .pb_progress_simple_wrapper_dark {
+    margin-bottom: ($space_xs/2);
+
+    &.progress-empty-input {
+      visibility: hidden;
+    }
+  }
+  .passphrase-popover {
+    position: relative;
+    left: -($space_xs * 1.25);
+  }
+  @-moz-document url-prefix() {
+    .passphrase-popover {
+      position: relative;
+      top: $space_sm;
+      left: -($space_xs * 1.5);
+    }
+  }
+}
+

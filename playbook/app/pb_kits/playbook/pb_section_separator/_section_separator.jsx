@@ -1,9 +1,11 @@
 /* @flow */
 import React from 'react'
 import classnames from 'classnames'
-import { Caption } from '../'
+
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
-import { globalProps } from '../utilities/globalProps.js'
+import { globalProps } from '../utilities/globalProps'
+
+import Caption from '../pb_caption/_caption'
 
 type SectionSeparatorProps = {
   aria: object,
@@ -38,9 +40,13 @@ const SectionSeparator = (props: SectionSeparatorProps) => {
         className={classes}
         id={id}
     >
-      <span>
-        <Caption text={text} />
-      </span>
+
+      <If condition={text}>
+        <span>
+          <Caption text={text} />
+        </span>
+      </If>
+
     </div>
   )
 }

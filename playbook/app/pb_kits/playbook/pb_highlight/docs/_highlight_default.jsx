@@ -1,5 +1,7 @@
 import React from 'react'
-import { Body, Highlight } from '../../'
+
+import Highlight from '../_highlight'
+import Body from '../../pb_body/_body'
 
 const HighlightDefault = (props) => (
   <div>

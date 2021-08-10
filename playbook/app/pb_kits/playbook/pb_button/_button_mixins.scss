@@ -12,8 +12,17 @@ $pb_button_h_padding: 34px;
 $pb_button_hover_darken: 4%;
 $pb_button_border_width: 0px;
 
+@mixin pb_button_variant($bg: $primary_action, $color: $text_dk_default, $border: transparent) {
+  background-color: $bg;
+  color: $color;
+  border-color: $border;
 
-@mixin pb_button($bg: $primary_action, $color: $text_dk_default, $border: transparent) {
+  &:active {
+    border-color: darken($bg, $pb_button_hover_darken);
+  }
+}
+
+@mixin pb_button {
   text-rendering: optimizeLegibility;
   font-size: $font_small;
   font-weight: $bold;
@@ -21,15 +30,12 @@ $pb_button_border_width: 0px;
   vertical-align: middle;
   text-transform: none;
   border-width: $pb_button_border_width;
-  border-color: $border;
   border-style: solid;
   border-radius: $border_rad_light;
   min-height: $pb_button_size;
   line-height: 1.5;
   padding: $pb_button_v_padding $pb_button_h_padding;
   cursor: pointer;
-  background-color: $bg;
-  color: $color;
   outline: none;
   transition: background $transition_default ease, color $transition_default ease;
   box-sizing: border-box;
@@ -57,7 +63,6 @@ $pb_button_border_width: 0px;
   &:active {
     outline: none;
     border-width: $pb_button_border_width;
-    border-color: darken($bg, $pb_button_hover_darken);
   }
   
 };
@@ -68,7 +73,7 @@ $pb_button_border_width: 0px;
 
 // Primary ======================
 @mixin pb_button_primary {
-  @include pb_button;
+  @include pb_button_variant($primary_action, $text_dk_default, transparent);
 
   @media (hover:hover) {
     &:hover {
@@ -79,7 +84,7 @@ $pb_button_border_width: 0px;
 
 // Secondary ====================
 @mixin pb_button_secondary {
-  @include pb_button(rgba($primary_action, 0.05), $primary_action);
+  @include pb_button_variant(rgba($primary_action, 0.05), $primary_action);
 
   @media (hover:hover) {
     &:hover {
@@ -90,7 +95,7 @@ $pb_button_border_width: 0px;
 
 // Link =========================
 @mixin pb_button_link {
-  @include pb_button($transparent, $primary_action);
+  @include pb_button_variant($transparent, $primary_action);
 
   @media (hover:hover) {
     &:hover {
@@ -102,7 +107,7 @@ $pb_button_border_width: 0px;
 // Disabled ====================
 @mixin pb_button_disabled {
   $disabled_color: rgba($charcoal, $opacity_5);
-  @include pb_button(rgba($slate, $opacity_4), $disabled_color);
+  @include pb_button_variant(rgba($slate, $opacity_4), $disabled_color);
   pointer-events: none;
 }
 
@@ -127,7 +132,7 @@ $pb_button_border_width: 0px;
 
 // Dark Primary =================
 @mixin pb_button_primary_dark{
-  @include pb_button($primary_action);
+  @include pb_button_variant($primary_action);
 
   @media (hover:hover) {
     &:hover {
@@ -138,7 +143,7 @@ $pb_button_border_width: 0px;
 
 // Dark Secondary ==============
 @mixin pb_button_secondary_dark{
-  @include pb_button(rgba($white, 0.2), $white);
+  @include pb_button_variant(rgba($white, 0.2), $white);
 
   @media (hover:hover) {
     &:hover {
@@ -149,7 +154,7 @@ $pb_button_border_width: 0px;
 
 // Dark Link =============
 @mixin pb_button_link_dark {
-  @include pb_button($transparent, $white);
+  @include pb_button_variant($transparent, $white);
 
   @media (hover:hover) {
     &:hover {
@@ -161,6 +166,6 @@ $pb_button_border_width: 0px;
 // Dark Disabled ====================
 @mixin pb_button_disabled_dark {
   $disabled_color: rgba($white, $opacity_5);
-  @include pb_button(rgba($slate, $opacity_5), $disabled_color);
+  @include pb_button_variant(rgba($slate, $opacity_5), $disabled_color);
   pointer-events: none;
 }
