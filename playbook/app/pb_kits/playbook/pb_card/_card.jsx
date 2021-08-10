@@ -87,8 +87,6 @@ const Card = (props: CardPropTypes) => {
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
 
-  const dataProps = buildDataProps(data)
-
   // coerce to array
   const cardChildren =
     typeof children === 'object' && children.length ? children : [children]
