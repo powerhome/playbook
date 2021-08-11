@@ -11,7 +11,6 @@ import Body from '../pb_body/_body'
 import Caption from '../pb_caption/_caption'
 import Icon from '../pb_icon/_icon'
 
-
 type DateRangeInlineProps = {
   className?: string,
   id?: string,

@@ -52,12 +52,11 @@ const Checkbox = (props: CheckboxProps) => {
     className
   )
 
-
   const childrenWithProps = () => {
     const cloneChild = (kid) => React.cloneElement(kid, { key: `child-${randoInt()}`, ...dataProps })
     return children.length ? children.map((child) => cloneChild(child)) : cloneChild(children)
   }
-  
+
   useEffect(() => {
     if (checkRef.current) {
       checkRef.current.checked = checked
