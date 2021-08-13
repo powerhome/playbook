@@ -19,7 +19,7 @@ type FileUploadProps = {
 
 const FileUpload = (props: FileUploadProps) => {
   const {
-    accept = ['image/png', 'image/jpg', 'image/jpeg', 'image/svg+xml'],
+    accept = ['*'],
     className,
     onFilesAccepted = noop,
   } = props
