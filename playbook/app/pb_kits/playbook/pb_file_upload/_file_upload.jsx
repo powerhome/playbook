@@ -14,13 +14,14 @@ import Card from '../pb_card/_card'
 type FileUploadProps = {
   accept?: array<string>,
   className?: string,
+  acceptedFilesDescription?: string,
   onFilesAccepted: Callback,
 }
 
 const FileUpload = (props: FileUploadProps) => {
   const {
     accept = ['image/png', 'image/jpg', 'image/jpeg', 'image/svg+xml'],
-    acceptedFilesDescription = "",
+    acceptedFilesDescription = '',
     className,
     onFilesAccepted = noop,
   } = props
