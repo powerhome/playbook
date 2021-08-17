@@ -1,6 +1,6 @@
-Depending on the data you send to the `date` prop you might have unexpected results due to ruby `Date` and `DateTime` classes.
+## React
 
-Don't care about timezones? Use `Date`.
+Use of `Date` without sending `timeZone` prop will default to `America/New_York` time zone.
 
-If you need a date that recognizes a timezone, especially when paired with the [Time kit](/kits/time), leverage `DateTime`.
+Another kit that recognizes a timezone which is especially useful when paired with the [Time](/kits/time) kit is [DateTime](/kits/date_time).
 
