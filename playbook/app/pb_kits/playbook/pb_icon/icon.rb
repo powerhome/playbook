@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require "open-uri"
+
 module Playbook
   module PbIcon
     class Icon < Playbook::KitBase
@@ -10,7 +12,9 @@ module Playbook
       prop :flip, type: Playbook::Props::Enum,
                   values: ["horizontal", "vertical", "both", nil],
                   default: nil
-      prop :icon, required: true
+      prop :icon
+      prop :custom_icon, type: Playbook::Props::String,
+                         default: nil
       prop :inverse, type: Playbook::Props::Boolean,
                      default: false
       prop :list_item, type: Playbook::Props::Boolean,
@@ -46,6 +50,34 @@ module Playbook
           spin_class,
           separator: " "
         )
+      end
+
+      def custom_icon_classname
+        generate_classname(
+          "pb_icon_kit",
+          border_class,
+          fixed_width_class,
+          flip_class,
+          inverse_class,
+          list_item_class,
+          pull_class,
+          pulse_class,
+          rotation_class,
+          size_class,
+          spin_class,
+          separator: " "
+        )
+      end
+
+      def render_svg(path)
+        if File.extname(path) == ".svg"
+          doc = Nokogiri::XML(open(path)) # rubocop:disable Security/Open
+          svg = doc.at_css "svg"
+          svg["class"] = "pb_custom_icon " + object.custom_icon_classname
+          raw doc
+        else
+          raise("Custom icon must be an svg. Please check your path and file type.")
+        end
       end
 
     private

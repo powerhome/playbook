@@ -17,7 +17,12 @@ RSpec.describe Playbook::PbIcon::Icon do
     is_expected.to define_enum_prop(:flip)
       .with_values("horizontal", "vertical", "both", nil)
   }
-  it { is_expected.to define_prop(:icon).that_is_required }
+  it { is_expected.to define_prop(:icon) }
+  it {
+    is_expected.to define_prop(:custom_icon)
+      .of_type(Playbook::Props::String)
+      .with_default(nil)
+  }
   it {
     is_expected.to define_prop(:inverse)
       .of_type(Playbook::Props::Boolean)
@@ -66,10 +71,6 @@ RSpec.describe Playbook::PbIcon::Icon do
       expect(subject.new(icon: icon, size: size).classname).to eq "pb_icon_kit far fa-user fa-#{size}"
       expect(subject.new(icon: icon, spin: true).classname).to eq "pb_icon_kit far fa-user fa-spin"
       expect(subject.new(icon: icon, classname: "additional_class").classname).to eq "pb_icon_kit far fa-user additional_class"
-    end
-
-    it "raises an error when not given an icon" do
-      expect { subject.new({}) }.to raise_error(Playbook::Props::Error)
     end
   end
 end
