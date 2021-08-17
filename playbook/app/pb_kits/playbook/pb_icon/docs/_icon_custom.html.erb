@@ -1,0 +1,16 @@
+<%# SVG fill color inherited from css color property %>
+<div class="icon-wrapper">
+
+  <% svg_url = "https://upload.wikimedia.org/wikipedia/commons/3/3b/Wrench_font_awesome.svg" %>
+  <p><%= pb_rails("icon", props: { custom_icon: svg_url } ) %></p>
+  <p><%= pb_rails("icon", props: { rotation: 90, custom_icon: svg_url, size: "2x" } ) %></p>
+  <p><%= pb_rails("icon", props: { spin: true, custom_icon: svg_url, size: "3x" } ) %></p>
+  <p><%= pb_rails("icon", props: { size: "5x", custom_icon: svg_url } ) %></p>
+  <p><%= pb_rails("icon", props: { flip: "horizontal", size: "5x", custom_icon: svg_url } ) %></p>
+
+  <%= pb_rails("body", props: {
+    text: "Custom icons are compatible with other icon props (size, rotation,
+    spin, flip, etc). Their SVG fill colors will be inherited from
+    parent element's css color properties."
+  } ) %>
+</div>

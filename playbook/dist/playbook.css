@@ -3591,6 +3591,12 @@ Background colors ------------------*/
       font-weight: 400;
       font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif; }
 
+svg.pb_custom_icon {
+  width: 1em;
+  fill: currentColor; }
+  svg.pb_custom_icon path {
+    fill: currentColor; }
+
 [class^=pb_currency_kit][class*=_center] > [class^=pb_caption],
 [class^=pb_currency_kit][class*=_center] > [class^=pb_title],
 [class^=pb_currency_kit][class*=_center] > [class^=pb_body] {
@@ -3739,6 +3745,12 @@ Background colors ------------------*/
   display: flex;
   justify-content: flex-start;
   align-items: baseline; }
+
+svg.pb_custom_icon {
+  width: 1em;
+  fill: currentColor; }
+  svg.pb_custom_icon path {
+    fill: currentColor; }
 
 /*=====================================
 Base colors should not be documented.
@@ -4185,6 +4197,12 @@ Background colors ------------------*/
   justify-content: flex-start;
   align-items: flex-end;
   flex-direction: column; }
+
+svg.pb_custom_icon {
+  width: 1em;
+  fill: currentColor; }
+  svg.pb_custom_icon path {
+    fill: currentColor; }
 
 /*=====================================
 Base colors should not be documented.
@@ -7305,6 +7323,12 @@ Background colors ------------------*/
 [class^=pb_highlight_kit] {
   background-color: rgba(249, 187, 0, 0.2); }
 
+svg.pb_custom_icon {
+  width: 1em;
+  fill: currentColor; }
+  svg.pb_custom_icon path {
+    fill: currentColor; }
+
 /*=====================================
 Base colors should not be documented.
 Only document color use.
@@ -7355,6 +7379,12 @@ Background colors ------------------*/
 /* Headings */
 /* Standard Font Weights */
 /* Non_Standard Font Weights */
+svg.pb_custom_icon {
+  width: 1em;
+  fill: currentColor; }
+  svg.pb_custom_icon path {
+    fill: currentColor; }
+
 [class^=pb_icon_circle_kit] {
   display: flex;
   justify-content: center;
@@ -7667,6 +7697,12 @@ Background colors ------------------*/
 /* Headings */
 /* Standard Font Weights */
 /* Non_Standard Font Weights */
+svg.pb_custom_icon {
+  width: 1em;
+  fill: currentColor; }
+  svg.pb_custom_icon path {
+    fill: currentColor; }
+
 [class^=pb_icon_circle_kit] {
   display: flex;
   justify-content: center;
@@ -7823,6 +7859,12 @@ Background colors ------------------*/
 /* Headings */
 /* Standard Font Weights */
 /* Non_Standard Font Weights */
+svg.pb_custom_icon {
+  width: 1em;
+  fill: currentColor; }
+  svg.pb_custom_icon path {
+    fill: currentColor; }
+
 /*=====================================
 Base colors should not be documented.
 Only document color use.
@@ -10062,6 +10104,12 @@ Background colors ------------------*/
       font-size: 16px;
       font-weight: 400;
       font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif; }
+
+svg.pb_custom_icon {
+  width: 1em;
+  fill: currentColor; }
+  svg.pb_custom_icon path {
+    fill: currentColor; }
 
 [class^=pb_loading_inline_kit] {
   display: flex;
@@ -13083,6 +13131,12 @@ Background colors ------------------*/
       font-weight: 400;
       font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif; }
 
+svg.pb_custom_icon {
+  width: 1em;
+  fill: currentColor; }
+  svg.pb_custom_icon path {
+    fill: currentColor; }
+
 /*=====================================
 Base colors should not be documented.
 Only document color use.
@@ -14708,6 +14762,12 @@ Background colors ------------------*/
 /* Headings */
 /* Standard Font Weights */
 /* Non_Standard Font Weights */
+svg.pb_custom_icon {
+  width: 1em;
+  fill: currentColor; }
+  svg.pb_custom_icon path {
+    fill: currentColor; }
+
 /*
 Trix 1.3.0
 Copyright © 2020 Basecamp, LLC
@@ -17235,6 +17295,12 @@ Background colors ------------------*/
   [class^=pb_star_rating_kit][class*=_hide_rating] .pb_star_rating_number {
     display: none; }
 
+svg.pb_custom_icon {
+  width: 1em;
+  fill: currentColor; }
+  svg.pb_custom_icon path {
+    fill: currentColor; }
+
 /*=====================================
 Base colors should not be documented.
 Only document color use.
@@ -19168,6 +19234,12 @@ Background colors ------------------*/
 /* Headings */
 /* Standard Font Weights */
 /* Non_Standard Font Weights */
+svg.pb_custom_icon {
+  width: 1em;
+  fill: currentColor; }
+  svg.pb_custom_icon path {
+    fill: currentColor; }
+
 /*=====================================
 Base colors should not be documented.
 Only document color use.
