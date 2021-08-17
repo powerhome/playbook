@@ -14,12 +14,14 @@ import Card from '../pb_card/_card'
 type FileUploadProps = {
   accept?: array<string>,
   className?: string,
+  acceptedFilesDescription?: string,
   onFilesAccepted: Callback,
 }
 
 const FileUpload = (props: FileUploadProps) => {
   const {
     accept = ['*'],
+    acceptedFilesDescription = '',
     className,
     onFilesAccepted = noop,
   } = props
@@ -51,7 +53,7 @@ const FileUpload = (props: FileUploadProps) => {
           <If condition={isDragActive}>
             <p>{'Drop the files here ...'}</p>
             <Else />
-            <p>{`Choose a file or drag it here. The accepted file types are: ${acceptedFileTypes}`}</p>
+            <p>{`Choose a file or drag it here. The accepted file types are: ${acceptedFilesDescription || acceptedFileTypes}`}</p>
           </If>
         </Body>
       </Card>
