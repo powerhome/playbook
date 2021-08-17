@@ -21,6 +21,7 @@ type PbDateProps = {
   showDayOfWeek?: boolean,
   showIcon?: boolean,
   size?: string,
+  timeZone?: String,
   value: string | date,
 }
 
@@ -34,10 +35,11 @@ const PbDate = (props: PbDateProps) => {
     showDayOfWeek = false,
     showIcon = false,
     size = 'md',
+    timeZone,
     value,
   } = props
 
-  const dateTimestamp = new DateTime({ value: value })
+  const dateTimestamp = new DateTime({ value: value, zone: timeZone })
   const weekday = dateTimestamp.toWeekday()
   const month = dateTimestamp.toMonth()
   const day = dateTimestamp.toDay()
