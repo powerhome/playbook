@@ -5,6 +5,8 @@ import moment from 'moment'
 import 'moment-strftime'
 import 'moment-timezone'
 
+window.moment = moment
+
 type DateTimeType = {
   value: String | Date,
   zone?: String,
@@ -18,7 +20,7 @@ export default class DateTime {
   }
 
   convertToTimestampZone(value, zone) {
-    return moment(value).tz(zone)
+    return moment.tz(value, zone)
   }
 
   convertToTimezone() {
