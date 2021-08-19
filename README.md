@@ -28,13 +28,15 @@ Playbook is the first design system built for both Rails & React interfaces. Ins
 7. From the top-level playbook folder run `yarn start-dev` This may take a little while.
 8. Once it says "compiled successfully", navigate to [http://localhost:3000](http://localhost:3000) and you should see the playbook website.
 
-### Running library tests
+### Running Library Tests
 
 1. `cd playbook && ./test.sh`
 
-## Additional resources
+---
 
-### Adding npm dependencies
+## Additional Resources
+
+### Adding NPM Dependencies
 
 1. You need to be working in `playbook/playbook` or `playbook/playbook-website` subdirectory
 1. run `yarn workspace playbook-website add <lib name>` to add to the website
