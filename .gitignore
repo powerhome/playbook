@@ -11,4 +11,3 @@ node_modules
 yarn-error.log
 .husky
 .husky/*
-.husky
