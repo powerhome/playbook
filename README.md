@@ -34,6 +34,13 @@ Playbook is the first design system built for both Rails & React interfaces. Ins
 
 ## Additional resources
 
+### Adding npm dependencies
+
+1. You need to be working in `playbook/playbook` or `playbook/playbook-website` subdirectory
+1. run `yarn workspace playbook-website add <lib name>` to add to the website
+1. run `yarn workspace playbook-ui add <lib name>` to add to the kit source
+1. run `yarn workspace playbook-project add <lib name>` to add to the main project
+
 ### Upgrading between versions
 
 See [docs/upgrade-guide](./docs/upgrade-guide)
