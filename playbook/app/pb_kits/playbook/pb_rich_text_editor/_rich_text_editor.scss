@@ -89,6 +89,9 @@
     @include pb_textarea_light;
     border-top-left-radius: 0;
     border-top-right-radius: 0;
+    &:empty:not(:focus)::before {
+      color: $text_lt_light;
+    }
     a {
       cursor: pointer;
     }
@@ -175,7 +178,7 @@
     }
     // Dark Mode Placeholder
     trix-editor:empty:not(:focus)::before {
-      color: rgba(255, 255, 255, .15)
+      color: rgba(255, 255, 255, .15);
     }
     trix-editor {
       background-color: rgba($white, 0.1);
@@ -239,9 +242,6 @@
       border-bottom: none;
       border-bottom-left-radius: 0;
       border-bottom-right-radius: 0;
-      &:empty:not(:focus)::before {
-        color: $neutral !important;
-      }
     }
     trix-toolbar .trix-button-row {
       border-top: none;
