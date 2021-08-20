@@ -21,5 +21,6 @@
   "lint-staged": {
     "*.{js,jsx}": "eslint",
     "*.rb": "bundle exec --gemfile=playbook-website/Gemfile rubocop --parallel"
-  }
+  },
+  "packageManager": "yarn@2.4.2"
 }
