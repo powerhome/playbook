@@ -20,7 +20,7 @@ Playbook is the first design system built for both Rails & React interfaces. Ins
     │   playbook
     │   playbook-website
     ```
-2. From the top-level playbook folder run: `yarn prepare && yarn install`
+2. From the top-level playbook folder run: `yarn install && yarn prepare`
 4. cd into the playbook-website folder: `cd playbook-website`
 5. From the playbook-website folder run: `bundle install`
     **n.b.:** If you receive a bundle(r) related error, be sure that bundler is installed first. See the BUNDLED WITH section of `playbook-website/Gemfile.lock` for the exact version to install.
