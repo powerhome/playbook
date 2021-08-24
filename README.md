@@ -11,6 +11,9 @@ Playbook is the first design system built for both Rails & React interfaces. Ins
 
 - [asdf](https://github.com/asdf-vm/asdf)
 - Install language tools: `asdf install`
+- `asdf plugin add ruby`
+- `asdf plugin add yarn`
+- `asdf plugin add nodejs`
 
 ### Getting Started and Running Playbook for Development
 
@@ -20,7 +23,7 @@ Playbook is the first design system built for both Rails & React interfaces. Ins
     │   playbook
     │   playbook-website
     ```
-2. From the top-level playbook folder run: `yarn prepare && yarn install`
+2. From the top-level playbook folder run: `yarn install && yarn prepare`
 4. cd into the playbook-website folder: `cd playbook-website`
 5. From the playbook-website folder run: `bundle install`
     **n.b.:** If you receive a bundle(r) related error, be sure that bundler is installed first. See the BUNDLED WITH section of `playbook-website/Gemfile.lock` for the exact version to install.
@@ -28,11 +31,20 @@ Playbook is the first design system built for both Rails & React interfaces. Ins
 7. From the top-level playbook folder run `yarn start-dev` This may take a little while.
 8. Once it says "compiled successfully", navigate to [http://localhost:3000](http://localhost:3000) and you should see the playbook website.
 
-### Running library tests
+### Running Library Tests
 
 1. `cd playbook && ./test.sh`
 
-## Additional resources
+---
+
+## Additional Resources
+
+### Adding NPM Dependencies
+
+1. You need to be working in `playbook/playbook` or `playbook/playbook-website` subdirectory
+1. run `yarn workspace playbook-website add <lib name>` to add to the website
+1. run `yarn workspace playbook-ui add <lib name>` to add to the kit source
+1. run `yarn workspace playbook-project add <lib name>` to add to the main project
 
 ### Upgrading between versions
 

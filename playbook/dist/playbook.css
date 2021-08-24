@@ -5216,6 +5216,7 @@ span.flatpickr-weekday {
     -webkit-transform: translate3d(0, 0, 0);
     transform: translate3d(0, 0, 0); } }
 
+<<<<<<< HEAD
 /*
     == Styles for the inline date picker ==
     Do not display the angle-down icon until a date has been selected
@@ -5256,6 +5257,8 @@ span.flatpickr-weekday {
   height: 36px;
   border: none; }
 
+=======
+>>>>>>> master
 [class^=pb_date_picker_kit] .input_wrapper {
   margin-bottom: 16px;
   position: relative;
