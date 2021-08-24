@@ -11,6 +11,9 @@ Playbook is the first design system built for both Rails & React interfaces. Ins
 
 - [asdf](https://github.com/asdf-vm/asdf)
 - Install language tools: `asdf install`
+- `asdf plugin add ruby`
+- `asdf plugin add yarn`
+- `asdf plugin add nodejs`
 
 ### Getting Started and Running Playbook for Development
 
