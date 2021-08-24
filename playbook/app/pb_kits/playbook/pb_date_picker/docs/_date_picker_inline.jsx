@@ -1,11 +1,11 @@
-import React from "react"
+import React from 'react'
 
-import DatePicker from "../_date_picker"
+import DatePicker from '../_date_picker'
 
 const DatePickerInline = (props) => {
   const selectDateHandler = (dateSelected) => {
     if (dateSelected) {
-      document.querySelector(".inline-date-picker").classList.add("show-angle-down-icon")
+      document.querySelector('.inline-date-picker').classList.add('show-angle-down-icon')
     }
   }
 
