@@ -3,7 +3,7 @@ import React from 'react'
 import DatePicker from '../_date_picker'
 
 const DatePickerInline = (props) => {
-  const selectDateHandler = (dateSelected) => {
+  const showAngleDownHandler = (dateSelected) => {
     if (dateSelected) {
       document.querySelector('.inline-date-picker').classList.add('show-angle-down-icon')
     }
@@ -15,7 +15,7 @@ const DatePickerInline = (props) => {
           className="inline-date-picker"
           hideIcon
           inLine
-          onChange={selectDateHandler}
+          onChange={showAngleDownHandler}
           pickerId="date-picker-inline"
           {...props}
       />

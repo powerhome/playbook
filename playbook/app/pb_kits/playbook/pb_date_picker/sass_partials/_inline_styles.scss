@@ -1,3 +1,5 @@
+/*@import "./../pb_textarea/textarea_mixin";*/
+
   /*
     == Styles for the inline date picker ==
     Do not display the angle-down icon until a date has been selected
@@ -19,6 +21,8 @@
       [class^="pb_text_input_kit"] .text_input_wrapper .flatpickr-wrapper input::placeholder,
       [class^="pb_text_input_kit"] .text_input_wrapper .flatpickr-wrapper .text_input .placeholder {
         color: $primary;
+        font-weight: normal;
+        font-weight: 450;
       }
       #date-picker-inline-angle-down {
         svg {
@@ -30,7 +34,8 @@
       &:not(:hover) {
         #date-picker-inline-angle-down {
           svg {
-            color: #687887;
+            /*color: #687887;*/
+            color: $primary;
           }
         }
       }
@@ -46,6 +51,63 @@
       border: none;
       padding: 5px 5px 5px 10px;
       background-color: #FFF;
+      &:hover {
+        background: rgba(0,130,255,0.1);
+        transition: background-color 0.2s ease;
+        box-shadow: none;
+      }
+    }
+    #date-picker-inline-angle-down {
+      height: 36px;
+      border: none;
+    }
+  }
+}
+
+/*
+  DARK MODE
+*/
+[class^=pb_date_picker_kit].dark {
+  &.inline-date-picker {
+    &:not(:hover) {
+      #date-picker-inline-angle-down {
+        svg {
+        }
+      }
+    }
+    &:hover {
+      [class^="pb_text_input_kit"] .text_input_wrapper input,
+      [class^="pb_text_input_kit"] .text_input_wrapper .text_input,
+      [class^="pb_text_input_kit"] .text_input_wrapper .flatpickr-wrapper input::placeholder,
+      [class^="pb_text_input_kit"] .text_input_wrapper .flatpickr-wrapper .text_input .placeholder {
+        color: $white;
+      }
+      #date-picker-inline-angle-down {
+        svg {
+          display: none;
+        }
+      }
+    }
+    &.show-angle-down-icon {
+      &:not(:hover) {
+        #date-picker-inline-angle-down {
+          svg {
+            color: $white;
+          }
+        }
+      }
+      #date-picker-inline-angle-down {
+        svg {
+          display: inline-block;
+          color: $white;
+        }
+      }
+    }
+    #date-picker-inline,
+    #date-picker-inline .active {
+      background-color: rgba($white,.10);
+      border: none;
+      padding: 5px 5px 5px 10px;
       &:hover {
         background: rgba(0,130,255,0.1);
         transition: background-color 0.2s ease;

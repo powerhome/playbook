@@ -24,6 +24,8 @@ module Playbook
                        default: false
       prop :hide_label, type: Playbook::Props::Boolean,
                         default: false
+      prop :inline, type: Playbook::Props::Boolean,
+                       default: false
       prop :label, type: Playbook::Props::String,
                    default: "Date Picker"
       prop :input_aria, type: Playbook::Props::Hash,
@@ -57,6 +59,7 @@ module Playbook
           disableWeekdays: disable_weekdays,
           format: format,
           hideIcon: hide_icon,
+          inline: inline,
           maxDate: max_date,
           minDate: min_date,
           mode: mode,
