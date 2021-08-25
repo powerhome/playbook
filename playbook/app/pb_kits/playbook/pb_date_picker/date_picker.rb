@@ -25,7 +25,7 @@ module Playbook
       prop :hide_label, type: Playbook::Props::Boolean,
                         default: false
       prop :inline, type: Playbook::Props::Boolean,
-                       default: false
+                    default: false
       prop :label, type: Playbook::Props::String,
                    default: "Date Picker"
       prop :input_aria, type: Playbook::Props::Hash,

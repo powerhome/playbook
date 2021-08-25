@@ -51,8 +51,6 @@
       background-color: #FFF;
       &:hover {
         background: rgba(0,130,255,0.1);
-        /*background: $active_dark;*/
-        /*opacity: 0.1;*/
         transition: background-color 0.2s ease;
         box-shadow: none;
       }

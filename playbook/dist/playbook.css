@@ -5251,8 +5251,6 @@ span.flatpickr-weekday {
   [class^=pb_date_picker_kit].inline-date-picker #date-picker-inline:hover,
   [class^=pb_date_picker_kit].inline-date-picker #date-picker-inline .active:hover {
     background: rgba(0, 130, 255, 0.1);
-    /*background: $active_dark;*/
-    /*opacity: 0.1;*/
     transition: background-color 0.2s ease;
     box-shadow: none; }
 
