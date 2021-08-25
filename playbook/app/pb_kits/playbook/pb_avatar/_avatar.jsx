@@ -10,23 +10,24 @@ import { globalProps } from '../utilities/globalProps'
 import Image from '../pb_image/_image'
 import OnlineStatus from '../pb_online_status/_online_status'
 
-type AvatarProps = {
-  aria?: object,
-  className?: string,
-  data?: object,
-  dark?: boolean,
-  id?: string,
-  imageAlt?: string,
-  imageUrl: string,
-  name: string,
-  size?: "md" | "lg" | "sm" | "xl" | "xs" | "xxs",
-  status: "away" | "offline" | "online",
-}
 
 const firstTwoInitials = (name) =>
   map(name.split(/\s/), (name) => name[0])
     .join('')
     .substring(0, 2)
+
+type AvatarProps = {
+    aria?: object,
+    className?: string,
+    data?: object,
+    dark?: boolean,
+    id?: string,
+    imageAlt?: string,
+    imageUrl: string,
+    name: string,
+    size?: "md" | "lg" | "sm" | "xl" | "xs" | "xxs",
+    status: "away" | "offline" | "online",
+  }
 
 const Avatar = (props: AvatarProps) => {
   const {
