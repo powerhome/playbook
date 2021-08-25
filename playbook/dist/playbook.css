@@ -5216,7 +5216,6 @@ span.flatpickr-weekday {
     -webkit-transform: translate3d(0, 0, 0);
     transform: translate3d(0, 0, 0); } }
 
-/*@import "./../pb_textarea/textarea_mixin";*/
 /*
     == Styles for the inline date picker ==
     Do not display the angle-down icon until a date has been selected
