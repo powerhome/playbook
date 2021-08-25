@@ -21,8 +21,7 @@
       [class^="pb_text_input_kit"] .text_input_wrapper .flatpickr-wrapper input::placeholder,
       [class^="pb_text_input_kit"] .text_input_wrapper .flatpickr-wrapper .text_input .placeholder {
         color: $primary;
-        font-weight: normal;
-        font-weight: 450;
+        font-weight: 600;
       }
       #date-picker-inline-angle-down {
         svg {
@@ -34,8 +33,7 @@
       &:not(:hover) {
         #date-picker-inline-angle-down {
           svg {
-            /*color: #687887;*/
-            color: $primary;
+           color: $text_lt_light;
           }
         }
       }
@@ -53,6 +51,8 @@
       background-color: #FFF;
       &:hover {
         background: rgba(0,130,255,0.1);
+        /*background: $active_dark;*/
+        /*opacity: 0.1;*/
         transition: background-color 0.2s ease;
         box-shadow: none;
       }

@@ -5231,15 +5231,13 @@ span.flatpickr-weekday {
 [class^=pb_date_picker_kit].inline-date-picker:hover [class^="pb_text_input_kit"] .text_input_wrapper .flatpickr-wrapper input::placeholder,
 [class^=pb_date_picker_kit].inline-date-picker:hover [class^="pb_text_input_kit"] .text_input_wrapper .flatpickr-wrapper .text_input .placeholder {
   color: #0056CF;
-  font-weight: normal;
-  font-weight: 450; }
+  font-weight: 600; }
 
 [class^=pb_date_picker_kit].inline-date-picker:hover #date-picker-inline-angle-down svg {
   display: none; }
 
 [class^=pb_date_picker_kit].inline-date-picker.show-angle-down-icon:not(:hover) #date-picker-inline-angle-down svg {
-  /*color: #687887;*/
-  color: #0056CF; }
+  color: #687887; }
 
 [class^=pb_date_picker_kit].inline-date-picker.show-angle-down-icon #date-picker-inline-angle-down svg {
   display: inline-block;
@@ -5253,6 +5251,8 @@ span.flatpickr-weekday {
   [class^=pb_date_picker_kit].inline-date-picker #date-picker-inline:hover,
   [class^=pb_date_picker_kit].inline-date-picker #date-picker-inline .active:hover {
     background: rgba(0, 130, 255, 0.1);
+    /*background: $active_dark;*/
+    /*opacity: 0.1;*/
     transition: background-color 0.2s ease;
     box-shadow: none; }
 
