@@ -32,6 +32,31 @@
         }) %>
       </div>
     <% end %>
+
+    <!-- Inline -->
+    <% if object.hide_icon && object.inline %>
+      <!-- Plus Icon -->
+      <div
+          class="<%= object.icon_wrapper_class %>"
+          id="<%= object.picker_id %>-icon-plus"
+      >
+        <%= pb_rails("icon", props: {
+          classname: "plus-icon",
+          icon: "plus"
+        }) %>
+      </div>
+
+      <!-- Angle Down Icon -->
+      <div
+          class="<%= object.icon_wrapper_class %>"
+          id="<%= object.picker_id %>-angle-down"
+      >
+        <%= pb_rails("icon", props: {
+          classname: "angle_down_icon",
+          icon: "angle-down"
+        }) %>
+      </div>
+    <% end %>
   </div>
 
   <%= javascript_tag do %>

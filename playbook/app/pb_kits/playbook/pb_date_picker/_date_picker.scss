@@ -2,6 +2,7 @@
 @import "../pb_textarea/textarea_mixin";
 @import "../tokens/colors";
 @import "./sass_partials/flatpickr_styles";
+@import "./sass_partials/inline_styles";
 
 [class^=pb_date_picker_kit] {
   .input_wrapper {
@@ -36,5 +37,5 @@
       border-color: $primary;
     }
   }
-  
+
 }

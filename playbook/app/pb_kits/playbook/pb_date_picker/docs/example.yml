@@ -1,5 +1,5 @@
 examples:
-  
+
   rails:
   - date_picker_default: Default
   - date_picker_hide_icon: Hide Input Icon
@@ -15,8 +15,9 @@ examples:
   - date_picker_hooks: Hooks
   - date_picker_year_range: Year Range
   - date_picker_anti_patterns: Anti-Patterns
-  
-  
+  - date_picker_inline: Inline
+
+
   react:
   - date_picker_default: Default
   - date_picker_hide_icon: Hide Input Icon
@@ -32,3 +33,4 @@ examples:
   - date_picker_flatpickr_methods: Flatpickr Methods
   - date_picker_hooks: Hooks
   - date_picker_year_range: Year Range
+  - date_picker_inline: Inline
