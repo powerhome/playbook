@@ -82,7 +82,8 @@
       }
       #date-picker-inline-angle-down {
         svg {
-          display: none;
+          display: inline-block;
+          color: $text_dk_default;
         }
       }
     }

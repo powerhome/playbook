@@ -5268,7 +5268,8 @@ span.flatpickr-weekday {
   color: #FFFFFF; }
 
 [class^=pb_date_picker_kit].dark.inline-date-picker:hover #date-picker-inline-angle-down svg {
-  display: none; }
+  display: inline-block;
+  color: #FFFFFF; }
 
 [class^=pb_date_picker_kit].dark.inline-date-picker.show-angle-down-icon:not(:hover) #date-picker-inline-angle-down svg {
   color: #FFFFFF; }
