@@ -156,6 +156,15 @@ const DatePicker = (props: DatePickerProps) => {
         <If condition={hideIcon && inLine}>
           <div
               className={iconWrapperClass()}
+              id={`${pickerId}-icon-plus`}
+          >
+            <Icon
+                className="date-picker-plus-icon"
+                icon="plus"
+            />
+          </div>
+          <div
+              className={iconWrapperClass()}
               id={`${pickerId}-angle-down`}
           >
             <Icon

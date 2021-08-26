@@ -1,15 +1,24 @@
   /*
-    == Styles for the inline date picker ==
-    Do not display the angle-down icon until a date has been selected
-    On text input hover, change placeholder color, input text, & angle-down icon to $primary
-    Do not affect the angle-down icon in the flatpickr
+    === Date Picker States ===
+    Default - No value in date picker - display grey Plus icon
+    Hover - No value in date picker - display blue Plus icon
+   - After Value in Date Picker -
+      Default - display grey caret icon
+      Hover - display blue caret icon
   */
 [class^=pb_date_picker_kit] {
+  /*Default - No value in date picker*/
   &.inline-date-picker {
     &:not(:hover) {
       #date-picker-inline-angle-down {
         svg {
           display: none;
+        }
+      }
+      #date-picker-inline-icon-plus {
+        svg {
+          color: $slate;
+          display: inline-block;
         }
       }
     }
@@ -22,6 +31,11 @@
       }
       #date-picker-inline-angle-down {
         svg {
+          display: none;
+        }
+      }
+      #date-picker-inline-icon-plus {
+        svg {
           display: inline-block;
           color: $primary;
         }
@@ -31,8 +45,19 @@
       &:not(:hover) {
         #date-picker-inline-angle-down {
           svg {
-           color: $text_lt_light;
+            display: inline-block;
+            color: $text_lt_light;
           }
+        }
+        #date-picker-inline-icon-plus {
+          svg {
+            display: none;
+          }
+        }
+      }
+      #date-picker-inline-icon-plus {
+        svg {
+          display: none;
         }
       }
       #date-picker-inline-angle-down {
@@ -53,8 +78,9 @@
         box-shadow: none;
       }
     }
-    #date-picker-inline-angle-down {
-      height: 36px;
+    #date-picker-inline-angle-down,
+    #date-picker-inline-icon-plus {
+      height: 33px;
       border: none;
     }
   }
@@ -68,6 +94,13 @@
     &:not(:hover) {
       #date-picker-inline-angle-down {
         svg {
+          display: none;
+        }
+      }
+      #date-picker-inline-icon-plus {
+        svg {
+          display: inline-block;
+          color: $white;
         }
       }
     }
@@ -80,8 +113,13 @@
       }
       #date-picker-inline-angle-down {
         svg {
+          display: none;
+        }
+      }
+      #date-picker-inline-icon-plus {
+        svg {
           display: inline-block;
-          color: $text_dk_default;
+          color: $white;
         }
       }
     }
@@ -89,8 +127,19 @@
       &:not(:hover) {
         #date-picker-inline-angle-down {
           svg {
+            display: inline-block;
             color: $white;
           }
+        }
+        #date-picker-inline-icon-plus {
+          svg {
+            display: none;
+          }
+        }
+      }
+      #date-picker-inline-icon-plus {
+        svg {
+          display: none;
         }
       }
       #date-picker-inline-angle-down {
@@ -111,8 +160,9 @@
         box-shadow: none;
       }
     }
-    #date-picker-inline-angle-down {
-      height: 36px;
+    #date-picker-inline-angle-down,
+    #date-picker-inline-icon-plus {
+      height: 33px;
       border: none;
     }
   }

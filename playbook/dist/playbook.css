@@ -5217,49 +5217,65 @@ span.flatpickr-weekday {
     transform: translate3d(0, 0, 0); } }
 
 /*
-    == Styles for the inline date picker ==
-    Do not display the angle-down icon until a date has been selected
-    On text input hover, change placeholder color, input text, & angle-down icon to $primary
-    Do not affect the angle-down icon in the flatpickr
+    === Date Picker States ===
+    Default - No value in date picker - display grey Plus icon
+    Hover - No value in date picker - display blue Plus icon
+   - After Value in Date Picker -
+      Default - display grey caret icon
+      Hover - display blue caret icon
   */
-[class^=pb_date_picker_kit].inline-date-picker:not(:hover) #date-picker-inline-angle-down svg {
-  display: none; }
-
-[class^=pb_date_picker_kit].inline-date-picker:hover [class^="pb_text_input_kit"] .text_input_wrapper input,
-[class^=pb_date_picker_kit].inline-date-picker:hover [class^="pb_text_input_kit"] .text_input_wrapper .text_input,
-[class^=pb_date_picker_kit].inline-date-picker:hover [class^="pb_text_input_kit"] .text_input_wrapper .flatpickr-wrapper input::placeholder,
-[class^=pb_date_picker_kit].inline-date-picker:hover [class^="pb_text_input_kit"] .text_input_wrapper .flatpickr-wrapper .text_input .placeholder {
-  color: #0056CF; }
-
-[class^=pb_date_picker_kit].inline-date-picker:hover #date-picker-inline-angle-down svg {
-  display: inline-block;
-  color: #0056CF; }
-
-[class^=pb_date_picker_kit].inline-date-picker.show-angle-down-icon:not(:hover) #date-picker-inline-angle-down svg {
-  color: #687887; }
-
-[class^=pb_date_picker_kit].inline-date-picker.show-angle-down-icon #date-picker-inline-angle-down svg {
-  display: inline-block;
-  color: #0056CF; }
-
-[class^=pb_date_picker_kit].inline-date-picker #date-picker-inline,
-[class^=pb_date_picker_kit].inline-date-picker #date-picker-inline .active {
-  border: none;
-  padding: 5px 5px 5px 10px;
-  background-color: #FFF; }
-  [class^=pb_date_picker_kit].inline-date-picker #date-picker-inline:hover,
-  [class^=pb_date_picker_kit].inline-date-picker #date-picker-inline .active:hover {
-    background: rgba(0, 130, 255, 0.1);
-    transition: background-color 0.2s ease;
-    box-shadow: none; }
-
-[class^=pb_date_picker_kit].inline-date-picker #date-picker-inline-angle-down {
-  height: 36px;
-  border: none; }
+[class^=pb_date_picker_kit] {
+  /*Default - No value in date picker*/ }
+  [class^=pb_date_picker_kit].inline-date-picker:not(:hover) #date-picker-inline-angle-down svg {
+    display: none; }
+  [class^=pb_date_picker_kit].inline-date-picker:not(:hover) #date-picker-inline-icon-plus svg {
+    color: #C1CDD6;
+    display: inline-block; }
+  [class^=pb_date_picker_kit].inline-date-picker:hover [class^="pb_text_input_kit"] .text_input_wrapper input,
+  [class^=pb_date_picker_kit].inline-date-picker:hover [class^="pb_text_input_kit"] .text_input_wrapper .text_input,
+  [class^=pb_date_picker_kit].inline-date-picker:hover [class^="pb_text_input_kit"] .text_input_wrapper .flatpickr-wrapper input::placeholder,
+  [class^=pb_date_picker_kit].inline-date-picker:hover [class^="pb_text_input_kit"] .text_input_wrapper .flatpickr-wrapper .text_input .placeholder {
+    color: #0056CF; }
+  [class^=pb_date_picker_kit].inline-date-picker:hover #date-picker-inline-angle-down svg {
+    display: none; }
+  [class^=pb_date_picker_kit].inline-date-picker:hover #date-picker-inline-icon-plus svg {
+    display: inline-block;
+    color: #0056CF; }
+  [class^=pb_date_picker_kit].inline-date-picker.show-angle-down-icon:not(:hover) #date-picker-inline-angle-down svg {
+    display: inline-block;
+    color: #687887; }
+  [class^=pb_date_picker_kit].inline-date-picker.show-angle-down-icon:not(:hover) #date-picker-inline-icon-plus svg {
+    display: none; }
+  [class^=pb_date_picker_kit].inline-date-picker.show-angle-down-icon #date-picker-inline-icon-plus svg {
+    display: none; }
+  [class^=pb_date_picker_kit].inline-date-picker.show-angle-down-icon #date-picker-inline-angle-down svg {
+    display: inline-block;
+    color: #0056CF; }
+  [class^=pb_date_picker_kit].inline-date-picker #date-picker-inline,
+  [class^=pb_date_picker_kit].inline-date-picker #date-picker-inline .active {
+    border: none;
+    padding: 5px 5px 5px 10px;
+    background-color: #FFF; }
+    [class^=pb_date_picker_kit].inline-date-picker #date-picker-inline:hover,
+    [class^=pb_date_picker_kit].inline-date-picker #date-picker-inline .active:hover {
+      background: rgba(0, 130, 255, 0.1);
+      transition: background-color 0.2s ease;
+      box-shadow: none; }
+  [class^=pb_date_picker_kit].inline-date-picker #date-picker-inline-angle-down,
+  [class^=pb_date_picker_kit].inline-date-picker #date-picker-inline-icon-plus {
+    height: 33px;
+    border: none; }
 
 /*
   DARK MODE
 */
+[class^=pb_date_picker_kit].dark.inline-date-picker:not(:hover) #date-picker-inline-angle-down svg {
+  display: none; }
+
+[class^=pb_date_picker_kit].dark.inline-date-picker:not(:hover) #date-picker-inline-icon-plus svg {
+  display: inline-block;
+  color: #FFFFFF; }
+
 [class^=pb_date_picker_kit].dark.inline-date-picker:hover [class^="pb_text_input_kit"] .text_input_wrapper input,
 [class^=pb_date_picker_kit].dark.inline-date-picker:hover [class^="pb_text_input_kit"] .text_input_wrapper .text_input,
 [class^=pb_date_picker_kit].dark.inline-date-picker:hover [class^="pb_text_input_kit"] .text_input_wrapper .flatpickr-wrapper input::placeholder,
@@ -5267,11 +5283,21 @@ span.flatpickr-weekday {
   color: #FFFFFF; }
 
 [class^=pb_date_picker_kit].dark.inline-date-picker:hover #date-picker-inline-angle-down svg {
+  display: none; }
+
+[class^=pb_date_picker_kit].dark.inline-date-picker:hover #date-picker-inline-icon-plus svg {
   display: inline-block;
   color: #FFFFFF; }
 
 [class^=pb_date_picker_kit].dark.inline-date-picker.show-angle-down-icon:not(:hover) #date-picker-inline-angle-down svg {
+  display: inline-block;
   color: #FFFFFF; }
+
+[class^=pb_date_picker_kit].dark.inline-date-picker.show-angle-down-icon:not(:hover) #date-picker-inline-icon-plus svg {
+  display: none; }
+
+[class^=pb_date_picker_kit].dark.inline-date-picker.show-angle-down-icon #date-picker-inline-icon-plus svg {
+  display: none; }
 
 [class^=pb_date_picker_kit].dark.inline-date-picker.show-angle-down-icon #date-picker-inline-angle-down svg {
   display: inline-block;
@@ -5288,8 +5314,9 @@ span.flatpickr-weekday {
     transition: background-color 0.2s ease;
     box-shadow: none; }
 
-[class^=pb_date_picker_kit].dark.inline-date-picker #date-picker-inline-angle-down {
-  height: 36px;
+[class^=pb_date_picker_kit].dark.inline-date-picker #date-picker-inline-angle-down,
+[class^=pb_date_picker_kit].dark.inline-date-picker #date-picker-inline-icon-plus {
+  height: 33px;
   border: none; }
 
 [class^=pb_date_picker_kit] .input_wrapper {
