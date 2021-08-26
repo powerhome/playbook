@@ -21,11 +21,11 @@
       [class^="pb_text_input_kit"] .text_input_wrapper .flatpickr-wrapper input::placeholder,
       [class^="pb_text_input_kit"] .text_input_wrapper .flatpickr-wrapper .text_input .placeholder {
         color: $primary;
-        font-weight: 600;
       }
       #date-picker-inline-angle-down {
         svg {
-          display: none;
+          display: inline-block;
+          color: $primary;
         }
       }
     }
