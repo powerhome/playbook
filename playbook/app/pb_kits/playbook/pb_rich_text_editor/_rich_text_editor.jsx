@@ -115,9 +115,10 @@ const RichTextEditor = (props: RichTextEditorProps) => {
     const trixEditorContainer = clickedElement.closest('.pb_rich_text_editor_kit')
     if (!trixEditorContainer) return
 
-    if (clickedElement.nodeName === 'A' && clickedElement.hasAttribute('href')) {
-      window.open(clickedElement.href)
-    }
+    const anchorElement = clickedElement.closest('a')
+    if (!anchorElement) return
+
+    if (anchorElement.hasAttribute('href')) window.open(anchorElement.href)
   }
 
   const handleClick = (event) => {
