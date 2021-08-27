@@ -37,7 +37,6 @@ Gem::Specification.new do |s|
 
   s.add_development_dependency "byebug", "11.0.0"
   s.add_development_dependency "github_changelog_generator", "1.15.2"
-  s.add_development_dependency "overcommit", "0.49.0"
   s.add_development_dependency "rails", ">= 5.2.4.5", "< 6.0"
   s.add_development_dependency "rspec-html-matchers", "0.9.1"
   s.add_development_dependency "rspec-rails", "~> 3.8", ">= 3.8.0"
