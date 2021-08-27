@@ -103,13 +103,13 @@ const Dialog = (props: DialogProps) => {
           {...ariaProps}
           {...dataProps}
           className={classes}
-          id={id}
       >
         <Modal
             ariaHideApp={false}
             className={dialogClassNames}
             closeTimeoutMS={200}
             contentLabel="Minimal Modal Example"
+            id={id}
             isOpen={modalIsOpened}
             onRequestClose={onClose}
             overlayClassName={overlayClassNames}
