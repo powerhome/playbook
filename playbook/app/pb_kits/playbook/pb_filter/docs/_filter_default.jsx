@@ -1,6 +1,10 @@
 import React from 'react'
 import { Button, Filter, Flex, Select, TextInput } from '../../'
 
+const SortingChangeCallback = (sortOptions) => {
+  alert(JSON.stringify(sortOptions[0]))
+}
+
 const FilterDefault = (props) => {
   const options = [
     { value: 'USA' },
@@ -18,6 +22,7 @@ const FilterDefault = (props) => {
             'Full Name': 'John Wick',
             'City': 'San Francisco',
           }}
+          onSortChange={SortingChangeCallback}
           results={1}
           sortOptions={{
             popularity: 'Popularity',
@@ -62,6 +67,7 @@ const FilterDefault = (props) => {
 
       <Filter
           double
+          onSortChange={SortingChangeCallback}
           results={1}
           sortOptions={{
             popularity: 'Popularity',
