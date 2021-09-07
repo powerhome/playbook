@@ -60,9 +60,9 @@ const Textarea = ({
   })
 
   const errorClass = error ? 'error' : null
-  const InlineClass = inline ? 'inline' : ''
+  const inlineClass = inline ? 'inline' : ''
   const resizeClass = `resize_${resize}`
-  const classes = classnames('pb_textarea_kit', errorClass, InlineClass, resizeClass, globalProps(props), className)
+  const classes = classnames('pb_textarea_kit', errorClass, inlineClass, resizeClass, globalProps(props), className)
 
   const characterCounter = () => {
     return maxCharacters && characterCount ? `${checkIfZero(characterCount)} / ${maxCharacters}` : checkIfZero(characterCount)
