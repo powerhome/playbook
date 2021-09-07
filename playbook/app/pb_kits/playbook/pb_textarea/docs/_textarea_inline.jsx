@@ -8,7 +8,7 @@ const TextareaInline = (props) => {
       <Textarea
           inline
           rows={1}
-          value="Try hovering over this text. Then try modifying it or adding more of your own text."
+          value="Try clicking into this text."
           {...props}
       />
     </div>
