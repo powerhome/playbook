@@ -69,10 +69,12 @@
 
   &.inline {
     textarea {
-      border-color: transparent;
-    }
-    textarea:focus {
-      border-color: $primary;
+      &:not(:hover) {
+        border-color: transparent;
+      }
+      &:focus {
+        border-color: $primary;
+      }
     }
   }
 

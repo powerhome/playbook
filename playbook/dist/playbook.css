@@ -19322,7 +19322,7 @@ Background colors ------------------*/
     margin-top: 4px; }
   [class^=pb_textarea_kit].error textarea {
     border-color: #FF2229; }
-  [class^=pb_textarea_kit].inline textarea {
+  [class^=pb_textarea_kit].inline textarea:not(:hover) {
     border-color: transparent; }
   [class^=pb_textarea_kit].inline textarea:focus {
     border-color: #0056CF; }
