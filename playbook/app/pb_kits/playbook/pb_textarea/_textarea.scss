@@ -67,6 +67,15 @@
     }
   }
 
+  &.inline {
+    textarea {
+      border-color: transparent;
+    }
+    textarea:focus {
+      border-color: $primary
+    }
+  }
+
   .pb_caption_kit_xs {
     text-align: right;
   }
