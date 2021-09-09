@@ -24,7 +24,7 @@ Gem::Specification.new do |s|
     "lib/*.rb",
     "lib/playbook/**/*",
     "dist/reset.css"
-  ] + ["Rakefile", "README.md"]
+  ] + ["Rakefile"]
 
   s.add_dependency "actionpack", ">= 5.2.4.5", "< 6.0"
   s.add_dependency "actionview", ">= 5.2.4.5", "< 6.0"
