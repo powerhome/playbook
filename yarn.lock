@@ -5,10 +5,10 @@ __metadata:
   version: 4
   cacheKey: 7
 
-"@actions/core@npm:1.4.0":
-  version: 1.4.0
-  resolution: "@actions/core@npm:1.4.0"
-  checksum: 7319ef629ef4827d9823db1b356190661fda42834e2895826338a6ac2beda1bb7f1a36256983648f1336a1af57995bf559a5f27713271cc186f8f9d77bc805fa
+"@actions/core@npm:1.5.0":
+  version: 1.5.0
+  resolution: "@actions/core@npm:1.5.0"
+  checksum: e53f68721d09eec4b8b6f6e9d0399f7d296374ee284670641bb464f36e7ad87bca162848ed4ff38094105465cea7cdd48bb68f4942298aae2fd3fb7bf0fdf713
   languageName: node
   linkType: hard
 
@@ -11189,7 +11189,7 @@ fsevents@^1.2.7:
   version: 0.0.0-use.local
   resolution: "playbook-ui@workspace:playbook"
   dependencies:
-    "@actions/core": 1.4.0
+    "@actions/core": 1.5.0
     "@actions/github": 4.0.0
     "@babel/cli": ^7.12.1
     "@babel/core": ^7.12.3
