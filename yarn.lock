@@ -6667,12 +6667,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"flow-bin@npm:0.157.0":
-  version: 0.157.0
-  resolution: "flow-bin@npm:0.157.0"
+"flow-bin@npm:0.160.0":
+  version: 0.160.0
+  resolution: "flow-bin@npm:0.160.0"
   bin:
     flow: cli.js
-  checksum: 0950bfc538937437f5f2182eb7aeec56c22ccb5757f968fad16127f4eb908bac1d9185746d2749ac5e431513625ba9120547adcdd2f97934f0a4cd76f5572946
+  checksum: bb99b12b8e564992f6c6e7a808e433e1e854e3bd631e637610046d8ed57ab893014832fb2a74ad32d3018f6d694f078652edbfb1796b27082532b2382fc1bac5
   languageName: node
   linkType: hard
 
@@ -11221,7 +11221,7 @@ fsevents@^1.2.7:
     eslint-plugin-react: "git://github.com/rafbgarcia/eslint-plugin-react#fix-other-curly-brace-presence-edge-cases"
     filemanager-webpack-plugin: 4.0.0
     flatpickr: ^4.6.6
-    flow-bin: 0.157.0
+    flow-bin: 0.160.0
     flow-runtime: 0.14.0
     highcharts: ^9.0.0
     identity-obj-proxy: 3.0.0
