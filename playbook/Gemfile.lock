@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    playbook_ui (10.8.0)
+    playbook_ui (10.9.0)
       actionpack (>= 5.2.4.5, < 6.0)
       actionview (>= 5.2.4.5, < 6.0)
       activesupport (>= 5.2.4.5, < 6.0)
@@ -176,7 +176,7 @@ GEM
     redcarpet (3.5.1)
     retriable (3.1.2)
     rexml (3.2.5)
-    rouge (3.26.0)
+    rouge (3.26.1)
     rspec (3.9.0)
       rspec-core (~> 3.9.0)
       rspec-expectations (~> 3.9.0)
@@ -235,10 +235,10 @@ GEM
     tzinfo-data (1.2018.9)
       tzinfo (>= 1.0.0)
     unicode-display_width (1.7.0)
-    view_component (2.38.0)
+    view_component (2.40.0)
       activesupport (>= 5.0.0, < 8.0)
       method_source (~> 1.0)
-    webpacker (5.4.0)
+    webpacker (5.4.3)
       activesupport (>= 5.2)
       rack-proxy (>= 0.6.1)
       railties (>= 5.2)
