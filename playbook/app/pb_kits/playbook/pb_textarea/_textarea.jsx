@@ -20,6 +20,7 @@ type TextareaProps = {
   disabled?: boolean,
   error?: string,
   id?: string,
+  inline?: boolean,
   object?: string,
   method?: string,
   label?: string,
@@ -38,6 +39,7 @@ const Textarea = ({
   className,
   children,
   disabled,
+  inline = false,
   resize = 'none',
   error,
   label,
@@ -58,8 +60,9 @@ const Textarea = ({
   })
 
   const errorClass = error ? 'error' : null
+  const inlineClass = inline ? 'inline' : ''
   const resizeClass = `resize_${resize}`
-  const classes = classnames('pb_textarea_kit', errorClass, resizeClass, globalProps(props), className)
+  const classes = classnames('pb_textarea_kit', errorClass, inlineClass, resizeClass, globalProps(props), className)
 
   const characterCounter = () => {
     return maxCharacters && characterCount ? `${checkIfZero(characterCount)} / ${maxCharacters}` : checkIfZero(characterCount)
