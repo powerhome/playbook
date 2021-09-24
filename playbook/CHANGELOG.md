@@ -1,3 +1,12 @@
+## [10.10.0](https://github.com/powerhome/playbook/tree/10.10.0) (2021-09-23)
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/10.9.0...10.10.0)
+
+**Merged pull requests:**
+
+- Clean up unused Table Styles [\#1609](https://github.com/powerhome/playbook/pull/1609)([jasoncypret](https://github.com/jasoncypret))
+- Flexible dependencies for clients [#\1615](https://github.com/powerhome/playbook/pull/1615)([jasoncypret](https://github.com/jasoncypret))
+
 
 
 ## [10.9.0](https://github.com/powerhome/playbook/tree/10.9.0) (2021-09-20)
