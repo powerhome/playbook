@@ -1,4 +1,4 @@
-FROM quay.io/powerhome/passenger-customizable:0.9.35
+FROM quay.io/powerhome/passenger-customizable:1.0.12
 ARG precompileassets
 
 RUN bash -lc 'rvm remove all --force && rvm install ruby-2.6.6 && rvm --default use ruby-2.6.6 && gem install bundler -v 2.2.25'
