@@ -19,6 +19,10 @@ RUN curl -o- https://raw.githubusercontent.com/creationix/nvm/$NVM_VERSION/insta
     && nvm use default \
     && npm install -g npm@$NPM_VERSION yarn@$YARN_VERSION
 
+RUN mv /etc/apt/sources.list.d{,.bak}
+RUN apt update && apt install -y ca-certificates
+RUN mv /etc/apt/sources.list.d{.bak,}
+
 RUN apt-get update -y \
     && apt-get install -y shared-mime-info=1.5-2ubuntu0.2\
     && apt-get clean \
