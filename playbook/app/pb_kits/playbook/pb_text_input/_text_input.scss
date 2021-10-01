@@ -90,7 +90,11 @@
     }
   }
   &.inline {
-    &:not(:hover) { 
+    .text_input_wrapper input::placeholder,
+    .text_input_wrapper .text_input .placeholder {
+      opacity: 1;
+    }
+    &:not(:hover) {
       .text_input_wrapper input:not(:focus) {
         background-color: transparent;
         border-color: transparent;

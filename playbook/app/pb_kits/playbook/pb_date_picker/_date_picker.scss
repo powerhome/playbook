@@ -31,11 +31,11 @@
       }
     }
   }
+
   &:focus,:focus-within{
     div.cal_icon_wrapper, input.text_input{
       @include transition_default;
       border-color: $primary;
     }
   }
-
 }
