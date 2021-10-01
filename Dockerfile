@@ -1,8 +1,9 @@
 FROM phusion/passenger-customizable:1.0.19
 ARG precompileassets
 
-RUN mv /etc/apt/sources.list.d /etc/apt/sources.list.d.bak
-RUN apt update && apt install -y ca-certificates
+RUN mv /etc/apt/sources.list.d /etc/apt/sources.list.d.bak && \
+    apt update && apt install -y ca-certificates && \
+    mv /etc/apt/sources.list.d.bak /etc/apt/sources.list.d
 
 RUN bash -lc 'rvm remove all --force && rvm install ruby-2.6.6 && rvm --default use ruby-2.6.6 && gem install bundler -v 2.2.25'
 RUN /pd_build/ruby_support/install_ruby_utils.sh
@@ -26,8 +27,6 @@ RUN apt-get update -y \
     && apt-get install -y shared-mime-info=1.15-1\
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
-
-RUN mv /etc/apt/sources.list.d.bak /etc/apt/sources.list.d
 
 WORKDIR /home/app/src
 
