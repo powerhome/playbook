@@ -8,6 +8,11 @@ module Playbook
                     default: "inactive"
 
       prop :icon, required: false, default: "check"
+      prop :tooltip, required: false
+      prop :tooltip_position, required: false
+      prop :step_direction, type: Playbook::Props::Enum,
+                            values: %w[horizontal vertical],
+                            default: "horizontal"
 
       def name_icon
         icon || "check"
@@ -15,6 +20,22 @@ module Playbook
 
       def classname
         generate_classname("pb_progress_step_item", status)
+      end
+
+      def box_classname
+        classname.split(" ").last # used for tooltips, returns tooltip-trigger-<num>
+      end
+
+      def step_tooltip_position
+        if tooltip_position.present?
+          if step_direction == "vertical"
+            "right"
+          else
+            "top"
+          end
+        else
+          tooltip_position
+        end
       end
     end
   end
