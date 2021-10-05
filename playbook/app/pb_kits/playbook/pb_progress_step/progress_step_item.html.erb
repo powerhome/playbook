@@ -11,7 +11,7 @@
         <%= pb_rails("tooltip", props: {
           trigger_element_selector: "##{object.box_classname}",
           tooltip_id: "example-tooltip",
-          position: object.get_tooltip_position
+          position: object.step_tooltip_position
         }) do %>
             <%= object.tooltip %>
       <% end %>
