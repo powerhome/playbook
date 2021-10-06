@@ -70,7 +70,7 @@ const Timestamp = (props: TimestampProps) => {
 
   const fullDateDisplay = () => {
     let fullDisplay = `${dateTimestamp.toMonth()} ${dateTimestamp.toDay()}`
-    if (dateTimestamp.toYear() > currentYear) {
+    if (dateTimestamp.toYear() !== currentYear) {
       fullDisplay = `${fullDisplay}, ${dateTimestamp.toYear()}`
     }
     return `${fullDisplay} ${' \u00b7 '} ${fullTimeDisplay()}`
