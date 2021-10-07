@@ -22,8 +22,8 @@ module Playbook
         generate_classname("pb_progress_step_item", status)
       end
 
-      def box_classname
-        classname.split(" ").last # used for tooltips, returns tooltip-trigger-<num>
+      def tooltip_trigger_class
+        classname.split(" ").last
       end
 
       def step_tooltip_position
