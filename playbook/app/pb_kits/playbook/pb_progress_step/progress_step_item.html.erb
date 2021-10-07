@@ -9,7 +9,7 @@
     <% if object.tooltip.present? %>
       <div>
         <%= pb_rails("tooltip", props: {
-          trigger_element_selector: "##{object.box_classname}",
+          trigger_element_selector: "##{object.tooltip_trigger_class}",
           tooltip_id: "example-tooltip",
           position: object.step_tooltip_position
         }) do %>
