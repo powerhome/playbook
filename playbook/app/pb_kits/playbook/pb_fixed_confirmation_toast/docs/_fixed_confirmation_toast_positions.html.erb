@@ -6,7 +6,7 @@
 <%= pb_rails("button", props: { text: "Bottom Right", variant: "secondary", data: { toast: "#toast-bottom-right" } }) %>
 
 <%= pb_rails("fixed_confirmation_toast", props: {
-  classname: "toast-to-hide hide",
+  classname: "toast-to-hide",
   closeable: true,
   id: "toast-top-center",
   text: "Top Center",
@@ -16,7 +16,7 @@
 }) %>
 
 <%= pb_rails("fixed_confirmation_toast", props: {
-  classname: "toast-to-hide hide",
+  classname: "toast-to-hide",
   closeable: true,
   id: "toast-top-left",
   text: "Top Left",
@@ -26,7 +26,7 @@
 }) %>
 
 <%= pb_rails("fixed_confirmation_toast", props: {
-  classname: "toast-to-hide hide",
+  classname: "toast-to-hide",
   closeable: true,
   id: "toast-top-right",
   text: "Top Right",
@@ -36,7 +36,7 @@
 }) %>
 
 <%= pb_rails("fixed_confirmation_toast", props: {
-  classname: "toast-to-hide hide",
+  classname: "toast-to-hide",
   closeable: true,
   id: "toast-bottom-center",
   text: "Bottom Center",
@@ -46,7 +46,7 @@
 }) %>
 
 <%= pb_rails("fixed_confirmation_toast", props: {
-  classname: "toast-to-hide hide",
+  classname: "toast-to-hide",
   closeable: true,
   id: "toast-bottom-left",
   text: "Bottom Left",
@@ -56,7 +56,7 @@
 }) %>
 
 <%= pb_rails("fixed_confirmation_toast", props: {
-  classname: "toast-to-hide hide",
+  classname: "toast-to-hide",
   closeable: true,
   id: "toast-bottom-right",
   text: "Bottom Right",
@@ -66,12 +66,25 @@
 }) %>
 
 <script type="text/javascript">
-  document.querySelectorAll("button[data-toast]").forEach((button) => {
+  const toasts = document.querySelectorAll(".toast-to-hide")
+  const buttons = document.querySelectorAll("button[data-toast]")
+
+  const hideToasts = () => {
+    toasts.forEach((toast) => {
+      toast.style.display = "none"
+    })
+  }
+
+  hideToasts()
+
+  buttons.forEach((button) => {
     button.onclick = () => {
-      document.querySelectorAll(".toast-to-hide").forEach((toast) => {
-        toast.classList.add("hide");
-      });
-      document.querySelector(button.getAttribute("data-toast")).classList.toggle("hide");
+      hideToasts()
+      let toast = document.querySelector(button.getAttribute("data-toast"))
+
+      if (toast) {
+        toast.style.display = "flex"
+      }
     }
-  });
+  })
 </script>

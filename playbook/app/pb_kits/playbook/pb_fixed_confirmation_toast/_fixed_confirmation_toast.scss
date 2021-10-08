@@ -1,3 +1,4 @@
+@import "../tokens/positioning";
 @import "../tokens/spacing";
 @import "../tokens/colors";
 @import "../pb_body/body";
@@ -32,13 +33,9 @@ $confirmation_toast_colors: (
 
   &.positioned_toast {
     position: fixed;
-    z-index: 900;
+    z-index: $z_9;
     display: flex;
     justify-content: space-around;
-
-    &.hide {
-      display: none;
-    }
 
     &.top {
       top: $space_md;
