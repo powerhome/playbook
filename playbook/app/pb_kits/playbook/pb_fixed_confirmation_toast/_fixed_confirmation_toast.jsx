@@ -1,6 +1,6 @@
 /* @flow */
 
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import classnames from 'classnames'
 
 import { globalProps } from '../utilities/globalProps'
@@ -19,25 +19,45 @@ type FixedConfirmationToastProps = {
   className?: string,
   closeable?: boolean,
   data?: string,
+  horizontal?: 'right' | 'left' | 'center',
   id?: string,
   multiLine?: boolean,
+  onClose?: () => void,
+  open?: boolean,
   status?: 'success' | 'error' | 'neutral' | 'tip',
   text: string,
+  vertical?: 'top' | 'bottom',
 }
 
 const FixedConfirmationToast = (props: FixedConfirmationToastProps) => {
   const [showToast, toggleToast] = useState(true)
-  const { className, closeable = false, multiLine = false, status = 'neutral', text } = props
+  const {
+    className,
+    closeable = false,
+    horizontal,
+    multiLine = false,
+    onClose = () => {},
+    open = true,
+    status = 'neutral',
+    text,
+    vertical,
+  } = props
   const css = classnames(
     `pb_fixed_confirmation_toast_kit_${status}`,
     { '_multi_line': multiLine },
+    { [`positioned_toast ${vertical} ${horizontal}`]: vertical && horizontal },
     globalProps(props),
     className
   )
   const icon = iconMap[status]
 
+  useEffect(() => {
+    toggleToast(open)
+  }, [open])
+
   const handleClick = () => {
     toggleToast(!closeable)
+    onClose()
   }
 
   return (

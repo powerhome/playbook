@@ -4,8 +4,10 @@ examples:
   - fixed_confirmation_toast_default: Default
   - fixed_confirmation_toast_multi_line: Multi Line
   - fixed_confirmation_toast_close: Click to Close
+  - fixed_confirmation_toast_positions: Click to Show Positions
   
   react:
   - fixed_confirmation_toast_default: Default
   - fixed_confirmation_toast_multi_line: Multi Line
   - fixed_confirmation_toast_close: Click to Close
+  - fixed_confirmation_toast_positions: Click to Show Positions
