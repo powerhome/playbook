@@ -12,6 +12,16 @@ RSpec.describe Playbook::PbFixedConfirmationToast::FixedConfirmationToast do
       .with_default("neutral")
       .with_values("success", "error", "neutral", "tip")
   }
+  it {
+    is_expected.to define_enum_prop(:horizontal)
+      .with_default(nil)
+      .with_values(nil, "right", "left", "center")
+  }
+  it {
+    is_expected.to define_enum_prop(:vertical)
+      .with_default(nil)
+      .with_values(nil, "top", "bottom")
+  }
 
   describe "#show_text?" do
     it "returns true if text is present", :aggregate_failures do
@@ -37,6 +47,14 @@ RSpec.describe Playbook::PbFixedConfirmationToast::FixedConfirmationToast do
     end
   end
 
+  describe "#position_class" do
+    it "returns correct position classes", :aggregate_failures do
+      expect(subject.new.position_class).to eq ""
+      expect(subject.new(vertical: "bottom").position_class).to eq ""
+      expect(subject.new(vertical: "bottom", horizontal: "center").position_class).to eq " positioned_toast bottom center"
+    end
+  end
+
   describe "#classname" do
     it "returns namespaced class name", :aggregate_failures do
       text = "Test text"
@@ -48,6 +66,8 @@ RSpec.describe Playbook::PbFixedConfirmationToast::FixedConfirmationToast do
       expect(subject.new(text: text, status: "tip", dark: true).classname).to eq "pb_fixed_confirmation_toast_kit_tip dark"
       expect(subject.new(text: text, status: "tip", closeable: true).classname).to eq "pb_fixed_confirmation_toast_kit_tip remove_toast"
       expect(subject.new(text: text, status: "error", multi_line: true).classname).to eq "pb_fixed_confirmation_toast_kit_error_multi_line"
+      expect(subject.new(text: text, status: "neutral", vertical: "top").classname).to eq "pb_fixed_confirmation_toast_kit_neutral"
+      expect(subject.new(text: text, status: "neutral", vertical: "top", horizontal: "center").classname).to eq "pb_fixed_confirmation_toast_kit_neutral positioned_toast top center"
     end
   end
 end

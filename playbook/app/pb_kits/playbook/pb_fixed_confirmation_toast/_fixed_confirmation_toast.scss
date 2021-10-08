@@ -1,3 +1,4 @@
+@import "../tokens/positioning";
 @import "../tokens/spacing";
 @import "../tokens/colors";
 @import "../pb_body/body";
@@ -28,6 +29,37 @@ $confirmation_toast_colors: (
   }
   &:hover .fa-times {
     opacity: 1;
+  }
+
+  &.positioned_toast {
+    position: fixed;
+    z-index: $z_9;
+    display: flex;
+    justify-content: space-around;
+
+    &.top {
+      top: $space_md;
+    }
+
+    &.bottom {
+      bottom: $space_md;
+    }
+
+    &.left {
+      left: $space_md;
+      right: auto;
+    }
+
+    &.center {
+      left: 50%;
+      right: auto;
+      transform: translateX(-50%);
+    }
+
+    &.right {
+      left: auto;
+      right: $space_md;
+    }
   }
 
   @each $color_name, $color_value in $confirmation_toast_colors {
