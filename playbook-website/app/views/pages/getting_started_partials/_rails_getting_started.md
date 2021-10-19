@@ -18,7 +18,7 @@ bundle
 
 #### Import the all kit styles (Asset Pipeline)
 ```scss
-# app/controllers/application_controller.rb
+# app/assets/stylesheets/application.scss
 
  @import "playbook";
 ```
