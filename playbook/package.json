@@ -1,6 +1,6 @@
 {
   "name": "playbook-ui",
-  "version": "10.12.0",
+  "version": "10.13.0-pre-node-update",
   "description": "Nitro's Design System",
   "main": "./dist/playbook.js",
   "scripts": {
@@ -20,9 +20,6 @@
   },
   "author": "powerhome",
   "license": "ISC",
-  "engines": {
-    "node": "10.17.0 || 12.20.1"
-  },
   "directories": {
     "lib": "dist"
   },
