@@ -20,9 +20,6 @@
   },
   "author": "powerhome",
   "license": "ISC",
-  "engines": {
-    "node": "10.17.0 || 12.20.1"
-  },
   "directories": {
     "lib": "dist"
   },
