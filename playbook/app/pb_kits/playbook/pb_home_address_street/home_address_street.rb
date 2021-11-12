@@ -26,7 +26,7 @@ module Playbook
       end
 
       def city_state
-        [city.titleize, state].join(", ")
+        [city&.titleize, state].join(", ")
       end
 
       def zip
