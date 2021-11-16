@@ -1,0 +1,13 @@
+<%= pb_rails("title", props: { margin_top: "xl", text: "Line Height", tag: "h1", size: 1 })%>
+ <p>The line-height CSS property sets the height of a line box. It's commonly used to set the distance between lines of text. <br>
+     On block-level elements, it specifies the minimum height of line boxes within the element. On non-replaced inline elements,<br>
+    it specifies the height that is used to calculate line box height.</p>
+<br>
+
+<%= render :partial => "pages/visual_guidelines_partials/pb_doc_spacing",
+    locals:{ title: "Line Height Options",
+    usage: "Used for building Kits:  Line height is based of (n) times size of font family style. This is auto adjust to account for any style chosen",
+    sizes:[{name:"line-height: 1 ",variable:">line-height: 1"},
+      {name:"line-height: 1.5",variable:">line-height: 1.5"},
+      {name:"line-height: 2",variable:"s>line-height: 2"},
+      {name:"Eline-height: 2.5",variable:">line-height: 2.5"}]} %>
