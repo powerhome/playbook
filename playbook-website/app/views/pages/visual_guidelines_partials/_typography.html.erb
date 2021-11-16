@@ -1,0 +1,301 @@
+<div class="typography_tokens">
+    <%= pb_rails("title", props: { margin_top: "xl", text: "Typography", tag: "h1", size: 1 }) %>
+
+    <%= pb_rails("body", props: { margin_top: "sm", text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."}) %>
+
+    <div class="import_typography">
+        <%= pb_rails("card", props: { margin_top: "sm", shadow: "deep"}) do %>
+            <%= pb_rails("body", props: { text: "To use typography for your custom CSS, import typography into your .scss file:" }) %><br />
+            <%= pb_rails("title", props: { text: "@import \"tokens/typography\";", tag: "h4", size: 4 }) %>
+        <% end %>
+    </div>
+
+    <div class="header_tokens">
+        <%= pb_rails("title", props: { margin_top: "lg", text: "Header Tokens", tag: "h4", size: 4 }) %> 
+        <%= pb_rails("card", props: { margin_top: "sm", shadow: "deep"}) do %>
+            <%= pb_rails("flex", props: {orientation: "row", align: "end", justify: "center", column_gap: "xl", wrap: true }) do %>
+                <%= pb_rails("flex", props: {orientation: "column", align: "center", justify: "between"}) do %>
+                    <%= pb_rails("flex/flex_item") do %>
+                        <%= pb_rails("title", props: { text: "Title 1", tag: "h1", size: 1 }) %>
+                    <% end %>
+                    <%= pb_rails("flex/flex_item") do %>
+                        <%= pb_rails("caption", props: { text: "$heading_1", size: "xs" }) %>
+                    <% end %>
+                    <%= pb_rails("flex/flex_item") do %>
+                        <%= pb_rails("circle_icon_button", props: { variant: "link", icon: "copy", horizontal: "center" }) %>
+                    <% end %>
+                <% end %>
+
+                <%= pb_rails("flex", props: {orientation: "column", align: "center", justify: "between"}) do %>
+                    <%= pb_rails("flex/flex_item") do %>
+                        <%= pb_rails("title", props: { text: "Title 2", tag: "h2", size: 2 }) %>
+                    <% end %>
+                    <%= pb_rails("flex/flex_item") do %>
+                        <%= pb_rails("caption", props: { text: "$heading_2", size: "xs" }) %>
+                    <% end %>
+                    <%= pb_rails("flex/flex_item") do %>
+                        <%= pb_rails("circle_icon_button", props: { variant: "link", icon: "copy", horizontal: "center" }) %>
+                    <% end %>
+                <% end %>
+
+                <%= pb_rails("flex", props: {orientation: "column", align: "center", justify: "between"}) do %>
+                    <%= pb_rails("flex/flex_item") do %>
+                        <%= pb_rails("title", props: { text: "Title 3", tag: "h3", size: 3 }) %>
+                    <% end %>
+                    <%= pb_rails("flex/flex_item") do %>
+                        <%= pb_rails("caption", props: { text: "$heading_3", size: "xs" }) %>
+                    <% end %>
+                    <%= pb_rails("flex/flex_item") do %>
+                        <%= pb_rails("circle_icon_button", props: { variant: "link", icon: "copy", horizontal: "center" }) %>
+                    <% end %>
+                <% end %>
+
+                <%= pb_rails("flex", props: {orientation: "column", align: "center", justify: "between"}) do %>
+                    <%= pb_rails("flex/flex_item") do %>
+                        <%= pb_rails("title", props: { text: "Title 4", tag: "h4", size: 4 }) %>
+                    <% end %>
+                    <%= pb_rails("flex/flex_item") do %>
+                        <%= pb_rails("caption", props: { text: "$heading_4", size: "xs" }) %>
+                    <% end %>
+                    <%= pb_rails("flex/flex_item") do %>
+                        <%= pb_rails("circle_icon_button", props: { variant: "link", icon: "copy", horizontal: "center" }) %>
+                    <% end %>
+                <% end %>
+            <% end %>
+        <% end %>
+    </div>
+
+    <div class="lspacing_tokens">
+        <%= pb_rails("title", props: { margin_top: "lg", text: "Letter Spacing Tokens", tag: "h4", size: 4 }) %> 
+        <%= pb_rails("card", props: { margin_top: "sm", shadow: "deep"}) do %>
+            <%= pb_rails("flex", props: {orientation: "row", align: "end", column_gap: "xl", wrap: true }) do %>
+
+                <%= pb_rails("flex", props: {orientation: "column", align: "center", justify: "between"}) do %>
+                    <%= pb_rails("flex/flex_item") do %>
+                        <div class="pb_title_kit_3 ls_super_loosest">Super<br />Loosest</div>
+                    <% end %>
+                    <%= pb_rails("flex/flex_item") do %>
+                        <%= pb_rails("caption", props: { text: "$lspace_super_loosest", size: "xs" }) %>
+                    <% end %>
+                    <%= pb_rails("flex/flex_item") do %>
+                        <%= pb_rails("circle_icon_button", props: { variant: "link", icon: "copy", horizontal: "center" }) %>
+                    <% end %>
+                <% end %>
+
+                <%= pb_rails("flex", props: {orientation: "column", align: "center", justify: "between"}) do %>
+                    <%= pb_rails("flex/flex_item") do %>
+                        <div class="pb_title_kit_3 ls_loosest">Loosest</div>
+                    <% end %>
+                    <%= pb_rails("flex/flex_item") do %>
+                        <%= pb_rails("caption", props: { text: "$lspace_loosest", size: "xs" }) %>
+                    <% end %>
+                    <%= pb_rails("flex/flex_item") do %>
+                        <%= pb_rails("circle_icon_button", props: { variant: "link", icon: "copy", horizontal: "center" }) %>
+                    <% end %>
+                <% end %>
+
+                <%= pb_rails("flex", props: {orientation: "column", align: "center", justify: "between"}) do %>
+                    <%= pb_rails("flex/flex_item") do %>
+                        <div class="pb_title_kit_3 ls_looser">Looser</div>
+                    <% end %>
+                    <%= pb_rails("flex/flex_item") do %>
+                        <%= pb_rails("caption", props: { text: "$lspace_looser", size: "xs" }) %>
+                    <% end %>
+                    <%= pb_rails("flex/flex_item") do %>
+                        <%= pb_rails("circle_icon_button", props: { variant: "link", icon: "copy", horizontal: "center" }) %>
+                    <% end %>
+                <% end %>
+
+                <%= pb_rails("flex", props: {orientation: "column", align: "center", justify: "between"}) do %>
+                    <%= pb_rails("flex/flex_item") do %>
+                        <div class="pb_title_kit_3 ls_loose">Loose</div>
+                    <% end %>
+                    <%= pb_rails("flex/flex_item") do %>
+                        <%= pb_rails("caption", props: { text: "$lspace_loose", size: "xs" }) %>
+                    <% end %>
+                    <%= pb_rails("flex/flex_item") do %>
+                        <%= pb_rails("circle_icon_button", props: { variant: "link", icon: "copy", horizontal: "center" }) %>
+                    <% end %>
+                <% end %>
+
+                <%= pb_rails("flex", props: {orientation: "column", align: "center", justify: "between"}) do %>
+                    <%= pb_rails("flex/flex_item") do %>
+                        <div class="pb_title_kit_3 ls_normal">Normal</div>
+                    <% end %>
+                    <%= pb_rails("flex/flex_item") do %>
+                        <%= pb_rails("caption", props: { text: "$lspace_normal", size: "xs" }) %>
+                    <% end %>
+                    <%= pb_rails("flex/flex_item") do %>
+                        <%= pb_rails("circle_icon_button", props: { variant: "link", icon: "copy", horizontal: "center" }) %>
+                    <% end %>
+                <% end %>
+
+                <%= pb_rails("flex", props: {orientation: "column", align: "center", justify: "between"}) do %>
+                    <%= pb_rails("flex/flex_item") do %>
+                        <div class="pb_title_kit_3 ls_tight">Tight</div>
+                    <% end %>
+                    <%= pb_rails("flex/flex_item") do %>
+                        <%= pb_rails("caption", props: { text: "$lspace_tight", size: "xs" }) %>
+                    <% end %>
+                    <%= pb_rails("flex/flex_item") do %>
+                        <%= pb_rails("circle_icon_button", props: { variant: "link", icon: "copy", horizontal: "center" }) %>
+                    <% end %>
+                <% end %>
+
+                <%= pb_rails("flex", props: {orientation: "column", align: "center", justify: "between"}) do %>
+                    <%= pb_rails("flex/flex_item") do %>
+                        <div class="pb_title_kit_3 ls_tighter">Tighter</div>
+                    <% end %>
+                    <%= pb_rails("flex/flex_item") do %>
+                        <%= pb_rails("caption", props: { text: "$lspace_tighter", size: "xs" }) %>
+                    <% end %>
+                    <%= pb_rails("flex/flex_item") do %>
+                        <%= pb_rails("circle_icon_button", props: { variant: "link", icon: "copy", horizontal: "center" }) %>
+                    <% end %>
+                <% end %>
+
+                <%= pb_rails("flex", props: {orientation: "column", align: "center", justify: "between"}) do %>
+                    <%= pb_rails("flex/flex_item") do %>
+                        <div class="pb_title_kit_3 ls_tightest">Tightest</div>
+                    <% end %>
+                    <%= pb_rails("flex/flex_item") do %>
+                        <%= pb_rails("caption", props: { text: "$lspace_tightest", size: "xs" }) %>
+                    <% end %>
+                    <%= pb_rails("flex/flex_item") do %>
+                        <%= pb_rails("circle_icon_button", props: { variant: "link", icon: "copy", horizontal: "center" }) %>
+                    <% end %>
+                <% end %>
+            <% end %>
+    
+        <% end %>
+    </div>
+
+    <div class="size_tokens">
+        <%= pb_rails("title", props: { margin_top: "lg", text: "Size Tokens", tag: "h4", size: 4 }) %> 
+        <%= pb_rails("card", props: { margin_top: "sm", shadow: "deep"}) do %>
+
+            <%= pb_rails("flex", props: {orientation: "row", align: "end", column_gap: "lg", wrap: true }) do %>
+                <%= pb_rails("flex", props: {orientation: "column", align: "center", justify: "between"}) do %>
+                    <%= pb_rails("flex/flex_item") do %>
+                        <div class="text_jumbo">Jumbo</div>
+                    <% end %>
+                    <%= pb_rails("flex/flex_item") do %>
+                        <%= pb_rails("caption", props: { text: "$text_jumbo", size: "xs" }) %>
+                    <% end %>
+                    <%= pb_rails("flex/flex_item") do %>
+                        <%= pb_rails("circle_icon_button", props: { variant: "link", icon: "copy", horizontal: "center" }) %>
+                    <% end %>
+                <% end %>
+
+                <%= pb_rails("flex", props: {orientation: "column", align: "center", justify: "between"}) do %>
+                    <%= pb_rails("flex/flex_item") do %>
+                        <div class="text_largest">Largest</div>
+                    <% end %>
+                    <%= pb_rails("flex/flex_item") do %>
+                        <%= pb_rails("caption", props: { text: "$text_largest", size: "xs" }) %>
+                    <% end %>
+                    <%= pb_rails("flex/flex_item") do %>
+                        <%= pb_rails("circle_icon_button", props: { variant: "link", icon: "copy", horizontal: "center" }) %>
+                    <% end %>
+                <% end %>
+
+                <%= pb_rails("flex", props: {orientation: "column", align: "center", justify: "between"}) do %>
+                    <%= pb_rails("flex/flex_item") do %>
+                        <div class="text_larger">Larger</div>
+                    <% end %>
+                    <%= pb_rails("flex/flex_item") do %>
+                        <%= pb_rails("caption", props: { text: "$text_larger", size: "xs" }) %>
+                    <% end %>
+                    <%= pb_rails("flex/flex_item") do %>
+                        <%= pb_rails("circle_icon_button", props: { variant: "link", icon: "copy", horizontal: "center" }) %>
+                    <% end %>
+                <% end %>
+
+                <%= pb_rails("flex", props: {orientation: "column", align: "center", justify: "between"}) do %>
+                    <%= pb_rails("flex/flex_item") do %>
+                        <div class="text_large">Large</div>
+                    <% end %>
+                    <%= pb_rails("flex/flex_item") do %>
+                        <%= pb_rails("caption", props: { text: "$text_large", size: "xs" }) %>
+                    <% end %>
+                    <%= pb_rails("flex/flex_item") do %>
+                        <%= pb_rails("circle_icon_button", props: { variant: "link", icon: "copy", horizontal: "center" }) %>
+                    <% end %>
+                <% end %>
+
+                <%= pb_rails("flex", props: {orientation: "column", align: "center", justify: "between"}) do %>
+                    <%= pb_rails("flex/flex_item") do %>
+                        <div class="text_default">Default</div>
+                    <% end %>
+                    <%= pb_rails("flex/flex_item") do %>
+                        <%= pb_rails("caption", props: { text: "$text_default", size: "xs" }) %>
+                    <% end %>
+                    <%= pb_rails("flex/flex_item") do %>
+                        <%= pb_rails("circle_icon_button", props: { variant: "link", icon: "copy", horizontal: "center" }) %>
+                    <% end %>
+                <% end %>
+
+                <%= pb_rails("flex", props: {orientation: "column", align: "center", justify: "between"}) do %>
+                    <%= pb_rails("flex/flex_item") do %>
+                        <div class="text_default">Normal</div>
+                    <% end %>
+                    <%= pb_rails("flex/flex_item") do %>
+                        <%= pb_rails("caption", props: { text: "$text_normal", size: "xs" }) %>
+                    <% end %>
+                    <%= pb_rails("flex/flex_item") do %>
+                        <%= pb_rails("circle_icon_button", props: { variant: "link", icon: "copy", horizontal: "center" }) %>
+                    <% end %>
+                <% end %>
+
+                <%= pb_rails("flex", props: {orientation: "column", align: "center", justify: "between"}) do %>
+                    <%= pb_rails("flex/flex_item") do %>
+                        <div class="text_default">Medium</div>
+                    <% end %>
+                    <%= pb_rails("flex/flex_item") do %>
+                        <%= pb_rails("caption", props: { text: "$text_medium", size: "xs" }) %>
+                    <% end %>
+                    <%= pb_rails("flex/flex_item") do %>
+                        <%= pb_rails("circle_icon_button", props: { variant: "link", icon: "copy", horizontal: "center" }) %>
+                    <% end %>
+                <% end %>
+
+                <%= pb_rails("flex", props: {orientation: "column", align: "center", justify: "between"}) do %>
+                    <%= pb_rails("flex/flex_item") do %>
+                        <div class="text_small">Small</div>
+                    <% end %>
+                    <%= pb_rails("flex/flex_item") do %>
+                        <%= pb_rails("caption", props: { text: "$text_small", size: "xs" }) %>
+                    <% end %>
+                    <%= pb_rails("flex/flex_item") do %>
+                        <%= pb_rails("circle_icon_button", props: { variant: "link", icon: "copy", horizontal: "center" }) %>
+                    <% end %>
+                <% end %>
+
+                <%= pb_rails("flex", props: {orientation: "column", align: "center", justify: "between"}) do %>
+                    <%= pb_rails("flex/flex_item") do %>
+                        <div class="text_smaller">Smaller</div>
+                    <% end %>
+                    <%= pb_rails("flex/flex_item") do %>
+                        <%= pb_rails("caption", props: { text: "$text_smaller", size: "xs" }) %>
+                    <% end %>
+                    <%= pb_rails("flex/flex_item") do %>
+                        <%= pb_rails("circle_icon_button", props: { variant: "link", icon: "copy", horizontal: "center" }) %>
+                    <% end %>
+                <% end %>
+
+                <%= pb_rails("flex", props: {orientation: "column", align: "center", justify: "between"}) do %>
+                    <%= pb_rails("flex/flex_item") do %>
+                        <div class="text_smallest">Smallest</div>
+                    <% end %>
+                    <%= pb_rails("flex/flex_item") do %>
+                        <%= pb_rails("caption", props: { text: "$text_smallest", size: "xs" }) %>
+                    <% end %>
+                    <%= pb_rails("flex/flex_item") do %>
+                        <%= pb_rails("circle_icon_button", props: { variant: "link", icon: "copy", horizontal: "center" }) %>
+                    <% end %>
+                <% end %>
+            <% end %>
+
+        <% end %>
+    </div>
+</div>

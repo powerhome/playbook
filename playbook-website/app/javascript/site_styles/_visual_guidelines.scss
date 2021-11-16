@@ -1,7 +1,7 @@
 @import "playbook-ui/dist/tokens/spacing";
 @import "playbook-ui/dist/tokens/screen_sizes";
 @import "playbook-ui/dist/tokens/colors";
-
+@import "playbook-ui/dist/tokens/typography";
 
 .visual_guidelines {
   @import "border_radius_guidelines";
@@ -47,5 +47,71 @@
   }
   .border-bottom {
     border-radius: 0 0 6px 6px;
+  }
+}
+
+  [class^=pb_title_kit][class*=_3].ls_tightest {
+      letter-spacing: $lspace_tightest !important;
+    }
+
+  [class^=pb_title_kit][class*=_3].ls_tighter {
+      letter-spacing: $lspace_tighter !important;
+    }
+
+  [class^=pb_title_kit][class*=_3].ls_tight{
+    letter-spacing: $lspace_tight !important;
+  }
+
+  [class^=pb_title_kit][class*=_3].ls_normal{
+    letter-spacing: $lspace_normal !important;
+  }
+
+  [class^=pb_title_kit][class*=_3].ls_loose{
+    letter-spacing: $lspace_loose !important;
+  }
+
+  [class^=pb_title_kit][class*=_3].ls_looser{
+    letter-spacing: $lspace_looser !important;
+  }
+
+  [class^=pb_title_kit][class*=_3].ls_loosest{
+    letter-spacing: $lspace_loosest !important;
+  }
+
+  [class^=pb_title_kit][class*=_3].ls_super_loosest{
+    letter-spacing: $lspace_super_loosest !important;
+    text-align: center !important;
+  }
+
+  .text_jumbo {
+    font-size: $text_jumbo;
+  }
+
+  .text_largest {
+    font-size: $text_largest;
+  }
+
+  .text_larger {
+    font-size: $text_larger;
+  }
+
+  .text_larger {
+    font-size: $text_large;
+  }
+
+  .text_default {
+    font-size: $font_base;
+  }
+
+  .text_small {
+    font-size: $font_small;
+  }
+
+  .text_smaller {
+    font-size: $font_smaller;
+  }
+
+  .text_smallest {
+    font-size: $font_smallest;
   }
 }
