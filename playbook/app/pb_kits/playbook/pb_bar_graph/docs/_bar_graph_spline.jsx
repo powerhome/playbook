@@ -9,7 +9,7 @@ const chartData = [{
   type: 'spline',
   name: 'Trend Line',
   data: [1975, 600, 2500, 924, 500],
-  color: '#0056cf',
+  color: '#F9BB00',
 }]
 
 const BarGraphSpline = (props) => (
