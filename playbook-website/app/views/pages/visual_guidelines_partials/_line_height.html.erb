@@ -7,7 +7,10 @@
 <%= render :partial => "pages/visual_guidelines_partials/pb_doc_spacing",
     locals:{ title: "Line Height Options",
     usage: "Used for building Kits:  Line height is based of (n) times size of font family style. This is auto adjust to account for any style chosen",
-    sizes:[{name:"line-height: 1 ",variable:">line-height: 1"},
-      {name:"line-height: 1.5",variable:">line-height: 1.5"},
-      {name:"line-height: 2",variable:"s>line-height: 2"},
-      {name:"Eline-height: 2.5",variable:">line-height: 2.5"}]} %>
+    sizes:[{name:"line-height: 1 ",variable:">tightest"},
+      {name:"line-height: 1.2",variable:">tighter"},
+      {name:"line-height: 1.4",variable:">tight"},
+      {name:"line-height: 1.5",variable:">normal"},
+      {name:"line-height: 1.6",variable:">loose"},
+      {name:"line-height: 1.8",variable:"s>$lh_looser"},
+      {name:"line-height: 2",variable:">$lh_loosest"}]} %>
