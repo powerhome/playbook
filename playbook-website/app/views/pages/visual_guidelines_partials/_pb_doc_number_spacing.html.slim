@@ -5,14 +5,36 @@ br
   = pb_rails("body", props: {"tag": "p"})
     usage
 
+
 br
 = pb_rails("card", props: { max_width: "sm" })
     code default 
     = pb_rails("body")
         p $1,231,123,123.00
         p $7,444,112,512.00
-= pb_rails("card", props: { max_width: "sm", number_spacing: "tabular", margin_top: "sm" })
+= pb_rails("card", props: { max_width: "sm", number_spacing: "tabular", margin_top: "sm", margin_bottom: "sm" })
     code tabular 
     = pb_rails("body")
         p $1,231,123,123.00
         p $7,444,112,512.00
+        
+    br
+= pb_rails("card", props: {shadow: "deep", margin_bottom: "xl", padding: "none", padding_top: "md" }) do
+    = pb_rails("flex", props: {classname: "flex-container", vertical: "stretch", padding_x: "md", padding_bottom: "md" })
+        = pb_rails("flex/flex_item", props: {flex: "1" }) do
+                = pb_rails("caption", props: {text: "Props", margin_bottom: "sm" })
+                = pb_rails("pill", props: { text: "number_spacing", variant: "neutral" })
+                
+        end
+        = pb_rails("section_separator", props: { orientation: "vertical" })
+        = pb_rails("flex/flex_item", props: {flex: "1" }) do
+            = pb_rails("caption", props: {text: "Values", margin_bottom: "sm" })
+            = pb_rails("pill", props: {text: "tabular", variant: "warning"})
+        end
+    end
+
+- react_contents = Rails.root.join("app/views/pages/code_snippets/number_spacing_jsx.txt").read
+= pb_rails("background", props: { background_color: "dark", padding: "xs", id: "code-wrapper" }) do
+  .pb--codeCopy[data-action="toggle" data-toggleable="code-example"]
+    pre.highlight
+      = raw rouge(react_contents, "react")
