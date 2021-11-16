@@ -1,6 +1,6 @@
 import React from 'react'
 
-const positioningDefault = () => {
+const PositioningDefault = () => {
   return (
    <User
         align="center"
@@ -14,4 +14,4 @@ const positioningDefault = () => {
   )
 }
 
-export default positioningDefault
+export default PositioningDefault
