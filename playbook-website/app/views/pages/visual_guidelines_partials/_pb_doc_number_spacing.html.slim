@@ -5,7 +5,6 @@ br
   = pb_rails("body", props: {"tag": "p"})
     usage
 
-
 br
 = pb_rails("card", props: { max_width: "sm" })
     code default 
@@ -18,8 +17,7 @@ br
         p $1,231,123,123.00
         p $7,444,112,512.00
         
-    br
-= pb_rails("card", props: {shadow: "deep", margin_bottom: "xl", padding: "none", padding_top: "md" }) do
+= pb_rails("card", props: {shadow: "deep", padding: "none", padding_top: "md" }) do
     = pb_rails("flex", props: {classname: "flex-container", vertical: "stretch", padding_x: "md", padding_bottom: "md" })
         = pb_rails("flex/flex_item", props: {flex: "1" }) do
                 = pb_rails("caption", props: {text: "Props", margin_bottom: "sm" })
