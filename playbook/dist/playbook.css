@@ -2906,12 +2906,9 @@ Background colors ------------------*/
     [class^=pb_badge_kit].dark[class*=_primary] {
       background: rgba(1, 78, 190, 0.2); }
 
-<<<<<<< HEAD
-=======
 .pb_bar_graph rect.highcharts-background {
   fill: #0000 !important; }
 
->>>>>>> master
 /*=====================================
 Base colors should not be documented.
 Only document color use.
@@ -7422,12 +7419,9 @@ Background colors ------------------*/
   fill: #687887;
   font: 400 16px "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif; }
 
-<<<<<<< HEAD
-=======
 [class^=pb_gauge_kit] rect.highcharts-background {
   fill: #0000 !important; }
 
->>>>>>> master
 [class^=pb_hastag_kit] {
   display: inline-block; }
 
@@ -9933,12 +9927,9 @@ Background colors ------------------*/
   border-radius: 5px;
   background: #FF2229; }
 
-<<<<<<< HEAD
-=======
 rect.highcharts-background {
   fill: #0000 !important; }
 
->>>>>>> master
 /*=====================================
 Base colors should not be documented.
 Only document color use.

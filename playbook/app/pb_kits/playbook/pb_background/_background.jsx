@@ -4,7 +4,6 @@ import React from 'react'
 import classnames from 'classnames'
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
 import { globalProps } from '../utilities/globalProps.js'
-// import { style } from './style.css'
 
 type BackgroundProps = {
   aria?: object,
