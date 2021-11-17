@@ -4,6 +4,7 @@ import React from 'react'
 import classnames from 'classnames'
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
 import { globalProps } from '../utilities/globalProps.js'
+// import { style } from './style.css'
 
 type BackgroundProps = {
   aria?: object,
@@ -31,6 +32,7 @@ const Background = (props: BackgroundProps) => {
 
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
+
   const classes = classnames(buildCss('pb_background_kit'), globalProps(props), `pb_background_color_${backgroundColor}`, className)
   const Tag = `${tag}`
   const backgroundStyle = {
@@ -42,19 +44,19 @@ const Background = (props: BackgroundProps) => {
     <>
       <If condition={imageUrl}>
         <Tag
-            className={classes + 'lazyload blur_up'}
             style={backgroundStyle}
             {...ariaProps}
             {...dataProps}
+            className={classes}
             id={id}
         >
           { children }
         </Tag>
         <Else />
         <Tag
-            className={classes}
             {...ariaProps}
             {...dataProps}
+            className={classes}
             id={id}
         >
           { children }

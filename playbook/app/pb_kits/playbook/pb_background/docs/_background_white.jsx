@@ -1,5 +1,6 @@
 import React from 'react'
 import { Background } from '../..'
+// import style from './style.css'
 
 const BackgroundWhite = (props) => (
   <div>
@@ -7,6 +8,7 @@ const BackgroundWhite = (props) => (
         backgroundColor="white"
         padding="xl"
         {...props}
+        // className={style.classy}
     />
   </div>
 

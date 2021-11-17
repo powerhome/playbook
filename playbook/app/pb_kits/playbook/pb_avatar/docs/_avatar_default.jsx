@@ -1,5 +1,6 @@
 import React from 'react'
 import { Avatar } from '../../'
+import styles from './style.scss'
 
 const AvatarDefault = (props) => {
   return (
@@ -56,6 +57,7 @@ const AvatarDefault = (props) => {
           size="xl"
           status="offline"
           {...props}
+          classname={styles.classy}
       />
     </div>
   )
