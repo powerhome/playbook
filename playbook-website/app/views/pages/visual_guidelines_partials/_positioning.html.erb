@@ -1,0 +1,43 @@
+<%= pb_rails("title", props: { margin_top: "xl", text: "Positioning", tag: "h1", size: 1 }) %>
+<br />
+If you're going to be using position absolute you might find it handy to use some of the index properties. We have multiple ways to use z-index, take a look at the examples below.
+<br />
+<%= render :partial => "pages/visual_guidelines_partials/pb_doc_positioning",
+  locals:{ title: "Global Props" } %>
+Available in every kit.  These are added globally as they are most flexible when developing.
+<br />
+<%= pb_rails("card", props: {shadow: "deep", margin_bottom: "xl", padding: "xl", padding_top: "xl" }) do %>    
+<%= pb_rails("flex", props: {classname: "flex-container", vertical: "stretch", padding_x: "sm", padding_bottom: "sm" }) do %>
+    <%= pb_rails("flex/flex_item", props: {flex: "1" }) do %>    
+    <%= pb_rails("caption", props: {text: "Props", margin_bottom: "xl" }) %>
+    <%= pb_rails("pill", props: { text: "z_index", variant: "neutral" }) %>         
+       <% end %>
+    <%= pb_rails("section_separator", props: { orientation: "vertical" }) %>
+    <%= pb_rails("flex/flex_item", props: {flex: "1" }) do %>
+    <%= pb_rails("caption", props: {text: "Values", margin_bottom: "xl" }) %>
+    <%= pb_rails("pill", props: {text: "1", variant: "warning"}) %>
+    <%= pb_rails("pill", props: {text: "2", variant: "warning"}) %>
+    <%= pb_rails("pill", props: {text: "3", variant: "warning"}) %>
+    <%= pb_rails("pill", props: {text: "4", variant: "warning"}) %>
+    <%= pb_rails("pill", props: {text: "5", variant: "warning"}) %>
+    <%= pb_rails("pill", props: {text: "6", variant: "warning"}) %>
+    <%= pb_rails("pill", props: {text: "7", variant: "warning"}) %>
+    <%= pb_rails("pill", props: {text: "8", variant: "warning"}) %>
+    <%= pb_rails("pill", props: {text: "9", variant: "warning"}) %>
+    <%= pb_rails("pill", props: {text: "10", variant: "warning"}) %>
+    <% end %>
+  <% end %>
+<% end %>
+<% react_contents = Rails.root.join("app/views/pages/code_snippets/positioning_jsx.txt").read%>
+<%= pb_rails("background", props: { background_color: "dark", padding: "lg", id: "code-wrapper" }) do %>
+  <div class="pb--codeCopy" data-action="toggle" data-toggleable="code-example">
+  <pre class="highlight">
+<%= raw rouge(react_contents, "react") %>
+<% end %>
+</pre>
+</div>
+<br />
+<br />
+<br />
+<br />
+<br />
