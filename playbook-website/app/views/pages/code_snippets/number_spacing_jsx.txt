@@ -1,15 +1,5 @@
-import React from 'react'
 
-import Currency from '../_currency'
-
-const CurrencySize = (props) => {
-  return (
     <Currency
-        amount="2,000.50"
-        numberSpacing= "tabular"
-        {...props}
+        amount="2,000"
+        numberSpacing="tabular"
     />
-  )
-}
-
-export default CurrencySize
