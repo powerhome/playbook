@@ -2,51 +2,54 @@
 <br>
 <%= pb_rails("title", props: { text: "Border Radius Options", tag: "h4", size: 4 }) %> 
 <br>
-<%= pb_rails("card", props: { padding: "none"
+<%= pb_rails("card", props: { padding: "none", shadow: "deep"
 })  do %>
     <%= pb_rails("flex", props:{ wrap: true, justify: "start", padding: "md", id:"border_radius_variables"}) do %>
        
-        <div id="border_radius_container">
-            <div id="border_radius_rounded"></div>
+        <div class="pr_sm" id="border_radius_container">
+            <div class="m_sm" id="border_radius_rounded"></div>
             <%= pb_rails("title", props: { text: "Rounded", tag: "h4", size: 4 }) %>
             <%= pb_rails("caption", props: { text: "$border_radius_rounded", size: 'xs' }) %>
         </div>
-        <div id="border_radius_container">
-            <div id="border_radius_xl"></div>
+        <div class="pr_sm" id="border_radius_container">
+            <div class="m_sm" id="border_radius_xl"></div>
             <%= pb_rails("title", props: { text: "Extra Large", tag: "h4", size: 4 }) %>
             <%= pb_rails("caption", props: { text: "$border_radius_xl", size: 'xs' }) %>
         </div>
-        <div id="border_radius_container">
-            <div id="border_radius_lg"></div>
+        <div class="pr_sm" id="border_radius_container">
+            <div class="m_sm" id="border_radius_lg"></div>
             <%= pb_rails("title", props: { text: "Large", tag: "h4", size: 4 }) %>
             <%= pb_rails("caption", props: { text: "$border_radius_lg", size: 'xs' }) %>
         </div>
-        <div id="border_radius_container">
-            <div id="border_radius_md"></div>
+        <div class="pr_sm" id="border_radius_container">
+            <div class="m_sm" id="border_radius_md"></div>
             <%= pb_rails("title", props: { text: "Medium", tag: "h4", size: 4 }) %>
             <%= pb_rails("caption", props: { text: "$border_radius_md", size: 'xs' }) %>
         </div>
-        <div id="border_radius_container">
-            <div id="border_radius_sm"></div>
+        <div class="pr_sm" id="border_radius_container">
+            <div class="m_sm" id="border_radius_sm"></div>
             <%= pb_rails("title", props: { text: "Small", tag: "h4", size: 4 }) %>
             <%= pb_rails("caption", props: { text: "$border_radius_sm", size: 'xs' }) %>
         </div>
-        <div id="border_radius_container">
-            <div id="border_radius_xs"></div>
+        <div class="pr_sm" id="border_radius_container">
+            <div class="m_sm" id="border_radius_xs"></div>
             <%= pb_rails("title", props: { text: "Extra Small", tag: "h4", size: 4 }) %>
             <%= pb_rails("caption", props: { text: "$border_radius_xs", size: 'xs' }) %>
         </div>
-        <div id="border_radius_container">
-            <div id="border_radius_none"></div>
+        <div class="pr_sm" id="border_radius_container">
+            <div class="m_sm" id="border_radius_none"></div>
             <%= pb_rails("title", props: { text: "None", tag: "h4", size: 4 }) %>
             <%= pb_rails("caption", props: { text: "$border_radius_none", size: 'xs' }) %>
         </div>
         
     <% end %>
-    <%= pb_rails("section_separator") %>
+    
+    <% react_contents = Rails.root.join("app/views/pages/code_snippets/border_radius_tokens.txt").read %>
 
-    <%= pb_rails("card/card_body", props: { margin: "sm", padding: "sm" }) do %>
-        <%= pb_rails("caption", props: { padding_bottom: "xs", text: "EXAMPLE IN SASS" }) %>
-        <%= pb_rails("title", props: { text: '@import "tokens/border_radius"', tag: "h4", size: 4 }) %>
+    <%= pb_rails("background", props: { background_color: "dark", padding: "xs", id: "code-wrapper" }) do %>
+        <div class="pb--codeCopy" data-action="toggle" data-togglable="code_example">
+          <pre class="highlight"><%= raw rouge(react_contents, "react") %></pre>
+        </div>        
     <% end %>
+
 <% end %>
