@@ -24,8 +24,6 @@ const FlexItem = (props: FlexItemPropTypes) => {
     fixedSize !== undefined ? { flexBasis: `${fixedSize}` } : null
   const orderClass = order !== 'none' ? `order_${order}` : null
 
-
-
   return (
     <div
         className={classnames(buildCss('pb_flex_item_kit', growClass, shrinkClass, flexClass), overflowClass, orderClass, globalProps(props), className)}
