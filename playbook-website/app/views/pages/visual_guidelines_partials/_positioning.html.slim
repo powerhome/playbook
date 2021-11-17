@@ -1,26 +1,21 @@
 = pb_rails("title", props: { margin_top: "xl", text: "Positioning", tag: "h1", size: 1 })
 
 br
-= render :partial => "pages/visual_guidelines_partials/pb_doc_positioning",
-    locals:{ title: "Positioning Options",
-    usage: "Used for building Kits: Use the z-index prop when you want to stack elements.",
-    sizes:[{name:"One",variable:"z_index_1"},
-     {name:"Two",variable:"z_index_2"},
-     {name:"Three",variable:"z_index_3"},
-     {name:"Four",variable:"z_index_4"},
-     {name:"Five",variable:"z_index_5"},
-     {name:"Six",variable:"z_index_6"},
-     {name:"Seven",variable:"z_index_7"},
-     {name:"Eight",variable:"z_index_8"},
-     {name:"Nine",variable:"z_index_9"},
-     {name:"Ten",variable:"z_index_10"},]}
-br
-br
-br
-br
-br
+= pb_rails("card", props: {shadow: "deep", margin_bottom: "xl", padding: "xl", padding_top: "xl" }) do
+    = pb_rails("flex", props: {classname: "flex-container", vertical: "stretch", padding_x: "sm", padding_bottom: "sm" })
+        = pb_rails("flex/flex_item", props: {flex: "1" }) do
+                = pb_rails("caption", props: {text: "Props", margin_bottom: "xl" })
+                = pb_rails("pill", props: { text: "z_index", variant: "neutral" })
+                
+        end
+        = pb_rails("section_separator", props: { orientation: "vertical" })
+        = pb_rails("flex/flex_item", props: {flex: "1" }) do
+            = pb_rails("caption", props: {text: "Values", margin_bottom: "xl" })
+            = pb_rails("pill", props: {text: "1 2 3 4 5 6 7 8 9 10", variant: "warning"})
+        end
+    end
 - react_contents = Rails.root.join("app/views/pages/code_snippets/positioning_jsx.txt").read
-= pb_rails("background", props: { background_color: "dark", padding: "xs", id: "code-wrapper" }) do
+= pb_rails("background", props: { background_color: "dark", padding: "lg", id: "code-wrapper" }) do
   .pb--codeCopy[data-action="toggle" data-toggleable="code-example"]
     pre.highlight
       = raw rouge(react_contents, "react")
