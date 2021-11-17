@@ -12,6 +12,37 @@
     flex-shrink: 1;
   }
 
+  //Order Items
+  @for $i from 0 through 12 {
+    &[class*=order_#{$i}]{
+      order: $i;
+    }
+  }
+  &[class*=order_first]{
+    order: -1;
+  }
+
+  //Justify Items
+  &[class*=justify_items_left],
+  &[class*=justify_items_top],
+  &[class*=justify_items_start] {
+    justify-items: start;
+  }
+
+  &[class*=justify_items_right],
+  &[class*=justify_items_bottom],
+  &[class*=justify_items_end] {
+    justify-items: end;
+  }
+
+  &[class*=justify_items_center] {
+    justify-items: center;
+  }
+
+  &[class*=justify_items_stretch] {
+    justify-items: stretch;
+  }
+
 
   $overflow_values: auto, hidden, inherit, initial, scroll, visible;
 

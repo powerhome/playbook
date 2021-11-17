@@ -1,5 +1,5 @@
 import React from 'react'
-import { Flex, FlexItem, Title } from  '../../'
+import { Flex, FlexItem, Title } from  '../..'
 
 const FlexItemExample = (props) => {
   return (
@@ -102,6 +102,31 @@ const FlexItemExample = (props) => {
             {'3'}
           </FlexItem>
           <FlexItem flex={2}>
+            {'4'}
+          </FlexItem>
+        </Flex>
+      </div>
+
+      <Title
+          size={4}
+          text="Order"
+      />
+      <br />
+      <div className="flex-doc-example">
+        <Flex
+            gap="xs"
+            {...props}
+        >
+          <FlexItem order={4}>
+            {'1'}
+          </FlexItem>
+          <FlexItem order={2}>
+            {'2'}
+          </FlexItem>
+          <FlexItem order={1}>
+            {'3'}
+          </FlexItem>
+          <FlexItem order={3}>
             {'4'}
           </FlexItem>
         </Flex>

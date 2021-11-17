@@ -51,6 +51,8 @@ module Playbook
       prop :wrap, type: Playbook::Props::Boolean,
                   default: false
 
+
+
       def classname
         generate_classname("pb_flex_kit",
                            orientation_class,
@@ -142,6 +144,7 @@ module Playbook
           "columnGap_#{column_gap}"
         end
       end
+
     end
   end
 end

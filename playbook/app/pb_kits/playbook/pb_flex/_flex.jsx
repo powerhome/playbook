@@ -69,7 +69,7 @@ const Flex = (props: FlexProps) => {
           spacingClass,
           gapClass,
           rowGapClass,
-          columnGapClass
+          columnGapClass,
         ),
         globalProps(props),
         className
