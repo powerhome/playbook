@@ -1,0 +1,95 @@
+<%= pb_rails("title", props: {text: "Line Height", size: 1 }) %>
+<%= pb_rails("body", props: { margin_y: "lg"} ) do %>
+  The line-height property sets the height of a line box or the line itself text sits in.  <br>
+  On block-level elements, it specifies the minimum height of line boxes within the element. <br>
+  On non-replaced inline elements, it specifies the height that is used to calculate line box height.<br>
+  Below are non-unit numbers used to indicate the space mulitplied by height of Font-family chosen. <br>
+  Will need to set import of tokens into css or scss file and set to classname which can be then applied to <br>
+  code.
+<% end %>
+
+<%= pb_rails("card", props: {shadow: "deep", margin_bottom: "xl", padding: "none", padding_top: "md" }) do %>
+
+  <%= pb_rails("flex", props: {classname: "flex-container", vertical: "stretch", padding_x: "md", padding_bottom: "sm" }) do %>
+    <%= pb_rails("flex/flex_item", props: {flex: "1"}) do %>
+      <%= pb_rails("card", props: {shadow: "deep", margin_bottom: "xl", padding: "none", padding_top: "md" }) do %>
+      <%= pb_rails("caption", props: {text: "Line Height Token", margin_bottom: "sm"}) %>
+      <%= pb_rails("body", props: { margin_y: "lg"} ) do %>
+        <div> 
+        <%= pb_rails("pill", props: { text: "$lh_tightest", variant: "neutral" }) %>
+          <p class="card-tightest">
+            Power is expanding into several territories in the west. <br>
+            Expansion will happen of the next 5 to 10 years time. <br>
+            As growth, ramps back up we will have to keep up in hiring. <br>
+          </p>
+        </div>
+        <br>
+        <div> 
+          <%= pb_rails("pill", props: { text: "$lh_tighter", variant: "neutral" }) %>
+          <p class="card-tighter">
+            Power is expanding into several territories in the west. <br>
+            Expansion will happen of the next 5 to 10 years time. <br>
+            As growth, ramps back up we will have to keep up in hiring. <br>
+          </p>
+        </div>
+        <br>
+        <div> 
+          <%= pb_rails("pill", props: { text: "$lh_tight", variant: "neutral" }) %>
+          <p class="card-tight">
+            Power is expanding into several territories in the west. <br>
+            Expansion will happen of the next 5 to 10 years time. <br>
+            As growth, ramps back up we will have to keep up in hiring. <br>
+          </p>
+        </div>
+        <br>
+        <div> 
+          <%= pb_rails("pill", props: { text: "$lh_normal", variant: "neutral" }) %>
+          <p class="card-normal">
+            Power is expanding into several territories in the west. <br>
+            Expansion will happen of the next 5 to 10 years time. <br>
+            As growth, ramps back up we will have to keep up in hiring. <br>
+          </p>
+        </div>
+        <br>
+        <div> 
+          <%= pb_rails("pill", props: { text: "$lh_loose", variant: "neutral" }) %>
+          <p class="card-loose">
+            Power is expanding into several territories in the west. <br>
+            Expansion will happen of the next 5 to 10 years time. <br>
+            As growth, ramps back up we will have to keep up in hiring. <br>
+          </p>
+        </div>
+        <br>
+        <div> 
+          <%= pb_rails("pill", props: { text: "$lh_looser", variant: "neutral" }) %>
+          <p class="card-looser">
+            Power is expanding into several territories in the west. <br>
+            Expansion will happen of the next 5 to 10 years time. <br>
+            As growth, ramps back up we will have to keep up in hiring. <br>
+          </p>
+        </div>
+        <br>
+        <div> 
+          <%= pb_rails("pill", props: { text: "$lh_loosest", variant: "neutral" }) %>
+          <p class="card-loosest">
+            Power is expanding into several territories in the west. <br>
+            Expansion will happen of the next 5 to 10 years time. <br>
+            As growth, ramps back up we will have to keep up in hiring. <br>
+          </p>
+        </div>
+      <% end %>
+    <% end %>
+   <% end %>
+  <% end %>
+        
+  
+
+  <% react_contents = Rails.root.join("app/views/pages/code_snippets/line_height_jxs.txt").read %>
+
+  <%= pb_rails("background", props: { background_color: "dark", padding: "xs", id: "code-wrapper" }) do %>
+      <div class="pb--codeCopy" data-action="toggle" data-togglable="code_example">
+        <pre class="highlight"><%= raw rouge(react_contents, "react") %></pre>
+      </div>        
+  <% end %>
+
+<% end %>

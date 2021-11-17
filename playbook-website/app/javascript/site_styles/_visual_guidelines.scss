@@ -2,6 +2,7 @@
 @import "playbook-ui/dist/tokens/screen_sizes";
 @import "playbook-ui/dist/tokens/colors";
 
+@import "playbook-ui/dist/tokens/line_height";
 
 .visual_guidelines {
   @import "border_radius_guidelines";
@@ -48,4 +49,26 @@
   .border-bottom {
     border-radius: 0 0 6px 6px;
   }
+}
+
+.card-tightest {
+  line-height: $lh-tightest
+}
+.card-tighter {
+  line-height: $lh-tighter
+}
+.card-tight {
+  line-height: $lh-tight
+}
+.card-normal {
+  line-height: $lh-normal
+}
+.card-loose{
+  line-height: $lh-loose
+}
+.card-looser {
+  line-height: $lh-looser
+}
+.card-loosest {
+  line-height: $lh-loosest
 }
