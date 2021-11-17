@@ -1,6 +1,16 @@
 <h1 aria-label="online" class="pb_title_kit_1">Opacity</h1>
 <br>
-
+<%= pb_rails("body", props: {
+  text: "
+  The word opaque is used for describing objects that are fully visible, i.e. with no transparency. 
+  On a web page, a fully opaque element has an opacity value of 1 and a fully transparent element has an opacity value of 0. 
+  By default, all elements have an opacity value of 1. From 0 to 1, the opacity property controls the transparency level of the element."
+}) %>
+<br>
+<h4 aria-label="online" class="pb_title_kit_4 pt_sm">Opacity Tokens</h4><br>
+<%= pb_rails("body", props: {
+  text: "Make your own styles using Playbook tokens to keep your site consistent. To use the opacity for your custom css import into your scss file:"
+}) %><br>
 <ul class="pb--utlities-color">
 <li data-name="Data 1" data-variable="$data_1">
 <div class="pb--color_data_1 opacity_1"></div>
@@ -54,74 +64,10 @@
 </div>
 <p class="name">Opacity_10</p>
 <p class="var">$opacity_10</p></li>
-</ul><%= pb_rails("card", props: {
-})  do %>
-  <%= pb_rails("caption", props: { text: "Example in SCSS"}) %>
-  <code>@import "tokens/opacity";</code>
+</ul>
+<% react_contents = Rails.root.join("app/views/pages/code_snippets/user_jsx.txt").read %>
+<%= pb_rails("background", props: { background_color: "dark", padding: "xs", id: "code-wrapper" }) do %>
+  <div class="pb--codeCopy" data-action="toggle" data-togglable="code_example">
+  <%= pb_rails("caption", props: { text: "Example in SCSS"}) %><pre class="highlight"><code>@import "tokens/opacity";</code></pre>
+  </div>        
 <% end %>
-<br>
-<h4 aria-label="online" class="pb_title_kit_4 pt_sm">Opacity Options</h4>
-<br>
-<%= pb_rails("table", props: { size: "sm" }) do %>
-  <thead>
-    <tr>
-      <th>Variables</th>
-      <th>Opacity Code</th>
-      
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>$opacity_1</td>
-      <td><code> opacity: $opacity_1;</code></td>
-      
-    </tr>
-    <tr>
-      <td>$opacity_2</td>
-      <td><code> opacity: $opacity_2;</code></td>
-     
-    </tr>
-    <tr>
-      <td>$opacity_3</td>
-      <td><code>opacity: $opacity_3;</code></td>
-    </tr>
-    <tr>
-    <td>$opacity_4</td>
-    <td><code> opacity: $opacity_4;</code></td>
-   
-  </tr>
-  <tr>
-  <td>$opacity_5</td>
-  <td><code> opacity: $opacity_5;</code></td>
- 
-</tr>
-<tr>
-<td>$opacity_6</td>
-<td><code> opacity: $opacity_6;</code></td>
-
-</tr>
-<tr>
-<td>$opacity_7</td>
-<td><code> opacity: $opacity_7;</code></td>
-
-</tr>
-<tr>
-<td>$opacity_8</td>
-<td><code> opacity: $opacity_8;</code></td>
-
-</tr>
-<tr>
-<td>$opacity_9</td>
-<td><code>opacity: $opacity_9;</code></td>
-
-</tr>
-<tr>
-<td>$opacity_10</td>
-<td><code> opacity: $opacity_10;</code></td>
-
-</tr>
-  </tbody>
-<% end %>
-
-
-
