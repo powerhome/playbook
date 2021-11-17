@@ -22,7 +22,6 @@ const FlexItem = (props: FlexItemPropTypes) => {
   const shrinkClass = shrink === true ? 'shrink' : ''
   const fixedStyle =
     fixedSize !== undefined ? { flexBasis: `${fixedSize}` } : null
-
   const orderClass = order !== 'none' ? `order_${order}` : null
 
 
