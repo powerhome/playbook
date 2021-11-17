@@ -67,7 +67,7 @@ const Body = (props: CardBodyProps) => {
 const Card = (props: CardPropTypes) => {
   const {
     aria = {},
-    background = 'white',
+    background,
     borderNone = false,
     borderRadius = 'md',
     children,
