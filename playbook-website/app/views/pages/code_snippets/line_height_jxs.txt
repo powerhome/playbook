@@ -1,14 +1,1 @@
-@import "tokens/line_height";;
-
-.cardloosest {
-  line-height: $lh-_loosest
-}
-
-const LineHeight = () => {
-  return (
-    <div>
-      <Card class"=cardloosest">{'Card content here.}</Card>
-    </div>
-  )
-}
-
+@import "tokens/line_height";
