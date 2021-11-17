@@ -15,12 +15,9 @@ module Playbook
                       values: %w[auto hidden inherit initial scroll visible] + [nil],
                       default: nil
 
-
       prop :order, type: Playbook::Props::Enum,
-                    values: %w[1 2 3 4 5 6 7 8 9 10 11 12 first none],
-                    default: "none"
-
-
+                   values: %w[1 2 3 4 5 6 7 8 9 10 11 12 first none],
+                   default: "none"
 
       def classname
         generate_classname("pb_flex_item_kit", fixed_size_class, grow_class, shrink_class, flex_class) + overflow_class + order_class
@@ -57,7 +54,7 @@ module Playbook
       end
 
       def order_class
-        if order == 'none'
+        if order == "none"
           "none"
         else
           "order_#{order}"

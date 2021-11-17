@@ -11,7 +11,6 @@ type FlexItemPropTypes = {
   flex: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 'none',
   className: string,
   overflow?: "auto" | "hidden" | "initial" | "inherit" | "scroll" | "visible",
-  // justify?: "start" | "end" | "center" | "stretch" | "none",
   order?: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 'first' | 'none',
 }
 
