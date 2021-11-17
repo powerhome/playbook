@@ -1,5 +1,6 @@
 @import "playbook-ui/dist/tokens/spacing";
 @import "playbook-ui/dist/tokens/screen_sizes";
+@import "playbook-ui/dist/tokens/line_height";
 
 .visual_guidelines {
   .header-text {
@@ -42,4 +43,26 @@
     .nine { margin-left: 400px; }
     .ten { margin-left: 450px; }
   }
+}
+
+.card-tightest {
+  line-height: $lh-tightest
+}
+.card-tighter {
+  line-height: $lh-tighter
+}
+.card-tight {
+  line-height: $lh-tight
+}
+.card-normal {
+  line-height: $lh-normal
+}
+.card-loose{
+  line-height: $lh-loose
+}
+.card-looser {
+  line-height: $lh-looser
+}
+.card-loosest {
+  line-height: $lh-loosest
 }

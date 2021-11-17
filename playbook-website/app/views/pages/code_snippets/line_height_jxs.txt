@@ -1,43 +1,4 @@
-import React from 'react'
-@import "tokens/line_height";
 
-const LineHeight = () => {
-  return (
-   import React from 'react'
-import Card from '../_card.jsx'
+@import "tokens/line_height";;
 
-const CardLight = (props) => {
-  return (
-    <div>
-      <Card {tightest}>{'Card content'}</Card>
-    </div>
-
-    <div>
-      <Card {tighter}>{'Card content'}</Card>
-    </div>
-
-    <div>
-      <Card {tight}>{'Card content'}</Card>
-    </div>
-
-    <div>
-      <Card {normal}>{'Card content'}</Card>
-    </div>
-
-    <div>
-      <Card {loose}>{'Card content'}</Card>
-    </div>
-
-    <div>
-      <Card {looser}>{'Card content'}</Card>
-    </div>
-    
-    <div>
-      <Card {loosest}>{'Card content'}</Card>
-    </div>
-  
-  )
-}
-
-export default LineHeight
 
