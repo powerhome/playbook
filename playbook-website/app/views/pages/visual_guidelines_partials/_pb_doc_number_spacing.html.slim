@@ -1,6 +1,8 @@
 br
 = pb_rails("title", props: { text: title, tag: "h4", size: 4 })
 
+p hello
+
 - if defined?(usage) && usage.present?
   = pb_rails("body", props: {"tag": "p"})
     usage
@@ -21,7 +23,7 @@ br
     = pb_rails("flex", props: {classname: "flex-container", vertical: "stretch", padding_x: "md", padding_bottom: "md" })
         = pb_rails("flex/flex_item", props: {flex: "1" }) do
                 = pb_rails("caption", props: {text: "Props", margin_bottom: "sm" })
-                = pb_rails("pill", props: { text: "number_spacing", variant: "neutral" })
+                = pb_rails("pill", props: { text: "numberSpacing", variant: "neutral" })
                 
         end
         = pb_rails("section_separator", props: { orientation: "vertical" })
