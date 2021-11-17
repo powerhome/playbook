@@ -1,0 +1,8 @@
+<%= pb_rails("title", props: { text: title, tag: "h4", size: 4, margin_top: "sm" }) %>
+
+<% if defined?(usage) && usage.present? %> 
+    <%= pb_rails("body", props: {"tag": "p", margin_bottom: "md"}) %>
+   <% usage %>
+<% end %>
+    
+
