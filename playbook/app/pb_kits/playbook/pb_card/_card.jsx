@@ -8,6 +8,7 @@ import { globalProps } from '../utilities/globalProps.js'
 
 type CardPropTypes = {
   aria?: object,
+  background?: "white" | "dark" | "light" | "windows",
   borderNone?: boolean,
   borderRadius?: "xs" | "sm" | "md" | "lg" | "xl" | "none" | "rounded",
   children: array<React.ReactNode> | React.ReactNode,
@@ -66,6 +67,7 @@ const Body = (props: CardBodyProps) => {
 const Card = (props: CardPropTypes) => {
   const {
     aria = {},
+    background = 'white',
     borderNone = false,
     borderRadius = 'md',
     children,
@@ -78,7 +80,7 @@ const Card = (props: CardPropTypes) => {
     padding = 'md',
   } = props
   const borderCSS = borderNone == true ? 'border_none' : ''
-  const cardCss = buildCss('pb_card_kit', `shadow_${shadow}`, `${borderCSS}`, `border_radius_${borderRadius}`, {
+  const cardCss = buildCss('pb_card_kit', `background_${background}`, `shadow_${shadow}`, `${borderCSS}`, `border_radius_${borderRadius}`, {
     selected,
     deselected: !selected,
     [`highlight_${highlight.position}`]: highlight.position,
