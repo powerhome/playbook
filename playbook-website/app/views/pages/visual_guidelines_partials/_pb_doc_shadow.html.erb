@@ -1,0 +1,88 @@
+
+<%= pb_rails("title", props: {margin_top: "xl", text: "Shadow", size: 1 }) %>
+<%= pb_rails("body", props: { margin_y: "lg"} ) do %>
+  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris vitae gravida nibh. Integer nec lorem vitae purus vehicula gravida sed at nibh. Cras suscipit nibh sed sem rhoncus accumsan. Nulla iaculis odio odio, non porta purus pellentesque non. Integer tortor nisi, gravida at tempor eu, pretium quis velit. Sed tincidunt vulputate ipsum ac ornare. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus odio urna, ornare sed mauris a, iaculis consectetur dui. Vivamus ac rutrum mi, in vehicula neque. 
+<% end %>
+
+<h4 aria-label="online" class="pb_title_kit_4 pt_sm">Global Props</h4>
+
+<%= pb_rails("body", props: { margin_y: "md"} ) do %>
+  Available in every kit. These are added globally as they are most flexible when developing.
+<% end %>
+
+<%= pb_rails("card", props: {shadow: "deep", margin_bottom: "xl", padding: "none", padding_top: "md" }) do %>
+
+  <%= pb_rails("flex", props: {classname: "flex-container", vertical: "stretch", padding_x: "md", padding_bottom: "sm" }) do %>
+    <%= pb_rails("flex/flex_item", props: {flex: "1"}) do %>
+      <%= pb_rails("caption", props: {text: "Props", margin_bottom: "sm"}) %>
+        <%= pb_rails("pill", props: { text: "shadow", variant: "neutral" }) %>
+    <% end %>
+    <%= pb_rails("section_separator", props: { orientation: "vertical" }) %>
+    <%= pb_rails("flex/flex_item", props: {flex: "1"}) do %>
+        <%= pb_rails("caption", props: {text: "Values", margin_bottom: "sm"}) %>
+        <%= pb_rails("pill", props: { text: "none", variant: "warning" }) %>
+        <%= pb_rails("pill", props: { text: "deep", variant: "warning" }) %>
+        <%= pb_rails("pill", props: { text: "deeper", variant: "warning" }) %>
+        <%= pb_rails("pill", props: { text: "deepest", variant: "warning" }) %>
+    <% end %>
+  <% end %>
+
+  <% react_contents = Rails.root.join("app/views/pages/code_snippets/shadow_jsx.txt").read %>
+
+  <%= pb_rails("background", props: { background_color: "dark", padding: "xs", id: "code-wrapper" }) do %>
+      <div class="pb--codeCopy" data-action="toggle" data-togglable="code_example">
+        <pre class="highlight"><%= raw rouge(react_contents, "react") %></pre>
+      </div>        
+  <% end %>
+
+<% end %>
+
+<br>
+
+<h4 aria-label="online" class="pb_title_kit_4 pt_sm">Tokens</h4>
+
+<%= pb_rails("body", props: { margin_y: "md"} ) do %>
+  Make your own styles using Playbook tokens to keep your site consistent.
+<% end %>
+
+    <%= pb_rails("card", props: {shadow: "deep", margin_bottom: "xl", padding: "none", padding_top: "md" }) do %>
+
+      <%= pb_rails("flex", props: {classname: "flex-container", vertical: "stretch", padding_x: "md", padding_bottom: "sm" }) do %>
+        
+          <%= pb_rails("flex", props:{ wrap: true, justify: "start", padding: "md"}) do %>
+      
+              <div class="shadow-box-container">
+                  <div class="shadow-box-border shadow-box-none"></div>
+                  <%= pb_rails("title", props: { text: "None", tag: "h4", size: 4 }) %>
+                  <%= pb_rails("caption", props: { text: "$shadow_none", size: 'xs' }) %>
+              </div>
+              <div class="shadow-box-container">
+                  <div class="shadow-box-border shadow-box-deep"></div>
+                  <%= pb_rails("title", props: { text: "Deep", tag: "h4", size: 4 }) %>
+                  <%= pb_rails("caption", props: { text: "$shadow_deep", size: 'xs' }) %>
+              </div>
+              <div class="shadow-box-container">
+                  <div class="shadow-box-border shadow-box-deeper"></div>
+                  <%= pb_rails("title", props: { text: "Deeper", tag: "h4", size: 4 }) %>
+                  <%= pb_rails("caption", props: { text: "$shadow_deeper", size: 'xs' }) %>
+              </div>
+              <div class="shadow-box-container">
+                  <div class="shadow-box-border shadow-box-deepest"></div>
+                  <%= pb_rails("title", props: { text: "Deepest", tag: "h4", size: 4 }) %>
+                  <%= pb_rails("caption", props: { text: "$shadow_deepest", size: 'xs' }) %>
+              </div>
+      
+          <% end %>
+      <% end %>
+    
+      <% react_contents = Rails.root.join("app/views/pages/code_snippets/shadow_erb.txt").read %>
+    
+      <%= pb_rails("background", props: { background_color: "dark", padding: "xs", id: "code-wrapper" }) do %>
+          <div class="pb--codeCopy" data-action="toggle" data-togglable="code_example">
+            <pre class="highlight"><%= raw rouge(react_contents, "react") %></pre>
+          </div>        
+      <% end %>
+    
+    <% end %>
+    
+

@@ -1,0 +1,7 @@
+EXAMPLE IN SASS
+
+@import "tokens/shadows";
+
+.selector { 
+    box-shadow: $shadow_deep;
+}
