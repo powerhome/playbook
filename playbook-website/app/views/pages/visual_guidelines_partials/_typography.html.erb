@@ -68,11 +68,11 @@
     <div class="lspacing_tokens">
         <%= pb_rails("title", props: { margin_top: "lg", text: "Letter Spacing Tokens", tag: "h4", size: 4 }) %> 
         <%= pb_rails("card", props: { margin_top: "sm", shadow: "deep"}) do %>
-            <%= pb_rails("flex", props: {orientation: "row", align: "end", column_gap: "xl", wrap: true }) do %>
+            <%= pb_rails("flex", props: {orientation: "row", align: "end", justify: "center", column_gap: "xl", wrap: true }) do %>
 
                 <%= pb_rails("flex", props: {orientation: "column", align: "center", justify: "between"}) do %>
                     <%= pb_rails("flex/flex_item") do %>
-                        <div class="pb_title_kit_3 ls_super_loosest">Super<br />Loosest</div>
+                        <div class="ls_super_loosest">Super<br />Loosest</div>
                     <% end %>
                     <%= pb_rails("flex/flex_item") do %>
                         <%= pb_rails("caption", props: { text: "$lspace_super_loosest", size: "xs" }) %>
@@ -84,7 +84,7 @@
 
                 <%= pb_rails("flex", props: {orientation: "column", align: "center", justify: "between"}) do %>
                     <%= pb_rails("flex/flex_item") do %>
-                        <div class="pb_title_kit_3 ls_loosest">Loosest</div>
+                        <div class="ls_loosest">Loosest</div>
                     <% end %>
                     <%= pb_rails("flex/flex_item") do %>
                         <%= pb_rails("caption", props: { text: "$lspace_loosest", size: "xs" }) %>
@@ -96,7 +96,7 @@
 
                 <%= pb_rails("flex", props: {orientation: "column", align: "center", justify: "between"}) do %>
                     <%= pb_rails("flex/flex_item") do %>
-                        <div class="pb_title_kit_3 ls_looser">Looser</div>
+                        <div class="ls_looser">Looser</div>
                     <% end %>
                     <%= pb_rails("flex/flex_item") do %>
                         <%= pb_rails("caption", props: { text: "$lspace_looser", size: "xs" }) %>
@@ -108,7 +108,7 @@
 
                 <%= pb_rails("flex", props: {orientation: "column", align: "center", justify: "between"}) do %>
                     <%= pb_rails("flex/flex_item") do %>
-                        <div class="pb_title_kit_3 ls_loose">Loose</div>
+                        <div class="ls_loose">Loose</div>
                     <% end %>
                     <%= pb_rails("flex/flex_item") do %>
                         <%= pb_rails("caption", props: { text: "$lspace_loose", size: "xs" }) %>
@@ -120,7 +120,7 @@
 
                 <%= pb_rails("flex", props: {orientation: "column", align: "center", justify: "between"}) do %>
                     <%= pb_rails("flex/flex_item") do %>
-                        <div class="pb_title_kit_3 ls_normal">Normal</div>
+                        <div class="ls_normal">Normal</div>
                     <% end %>
                     <%= pb_rails("flex/flex_item") do %>
                         <%= pb_rails("caption", props: { text: "$lspace_normal", size: "xs" }) %>
@@ -132,7 +132,7 @@
 
                 <%= pb_rails("flex", props: {orientation: "column", align: "center", justify: "between"}) do %>
                     <%= pb_rails("flex/flex_item") do %>
-                        <div class="pb_title_kit_3 ls_tight">Tight</div>
+                        <div class="ls_tight">Tight</div>
                     <% end %>
                     <%= pb_rails("flex/flex_item") do %>
                         <%= pb_rails("caption", props: { text: "$lspace_tight", size: "xs" }) %>
@@ -144,7 +144,7 @@
 
                 <%= pb_rails("flex", props: {orientation: "column", align: "center", justify: "between"}) do %>
                     <%= pb_rails("flex/flex_item") do %>
-                        <div class="pb_title_kit_3 ls_tighter">Tighter</div>
+                        <div class="ls_tighter">Tighter</div>
                     <% end %>
                     <%= pb_rails("flex/flex_item") do %>
                         <%= pb_rails("caption", props: { text: "$lspace_tighter", size: "xs" }) %>
@@ -156,7 +156,7 @@
 
                 <%= pb_rails("flex", props: {orientation: "column", align: "center", justify: "between"}) do %>
                     <%= pb_rails("flex/flex_item") do %>
-                        <div class="pb_title_kit_3 ls_tightest">Tightest</div>
+                        <div class="ls_tightest">Tightest</div>
                     <% end %>
                     <%= pb_rails("flex/flex_item") do %>
                         <%= pb_rails("caption", props: { text: "$lspace_tightest", size: "xs" }) %>
