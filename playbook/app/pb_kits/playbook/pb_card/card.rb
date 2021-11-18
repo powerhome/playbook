@@ -17,6 +17,9 @@ module Playbook
       prop :border_radius, type: Playbook::Props::Enum,
                            values: %w[xs sm md lg xl none rounded],
                            default: "md"
+      prop :background, type: Playbook::Props::Enum,
+                        values: %w[white light dark windows siding doors solar roofing gutters insulation],
+                        default: "white"
 
       def classname
         generate_classname("pb_card_kit",
@@ -24,6 +27,7 @@ module Playbook
                            shadow_class,
                            highlight_position_class,
                            highlight_color_class,
+                           background_class,
                            border_class,
                            border_radius_class)
       end
@@ -52,6 +56,10 @@ module Playbook
 
       def highlight_color_class
         highlight[:color].present? ? "highlight_#{highlight[:color]}" : nil
+      end
+
+      def background_class
+        background != "white" ? "background_#{background}" : nil
       end
 
       def border_class
