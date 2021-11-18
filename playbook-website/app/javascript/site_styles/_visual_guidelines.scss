@@ -52,23 +52,65 @@
 }
 
 .card-tightest {
-  line-height: $lh-tightest
+  font-size: 28px;
+  letter-spacing: -0.03em;
+  font-weight: 100;
+  color: #242B42;
+  margin: 0;
+  line-height: 1.0;
+  font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif
 }
 .card-tighter {
-  line-height: $lh-tighter
+  font-size: 28px;
+  letter-spacing: -0.03em;
+  font-weight: 100;
+  color: #242B42;
+  margin: 0;
+  line-height: 1.2;
+  font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif
 }
 .card-tight {
-  line-height: $lh-tight
+  font-size: 28px;
+  letter-spacing: -0.03em;
+  font-weight: 100;
+  color: #242B42;
+  margin: 0;
+  line-height: 1.4;
+  font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif
 }
 .card-normal {
-  line-height: $lh-normal
+  font-size: 28px;
+  letter-spacing: -0.03em;
+  font-weight: 100;
+  color: #242B42;
+  margin: 0;
+  line-height: 1.5;
+  font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif
 }
 .card-loose{
-  line-height: $lh-loose
+  font-size: 28px;
+  letter-spacing: -0.03em;
+  font-weight: 100;
+  color: #242B42;
+  margin: 0;
+  line-height: 1.6;
+  font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif
 }
 .card-looser {
-  line-height: $lh-looser
+  font-size: 28px;
+  letter-spacing: -0.03em;
+  font-weight: 100;
+  color: #242B42;
+  margin: 0;
+  line-height: 1.8;
+  font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif
 }
-.card-loosest {
-  line-height: $lh-loosest
+.Card-loosest {
+  font-size: 28px;
+  letter-spacing: -0.03em;
+  font-weight: 100;
+  color: #242B42;
+  margin: 0;
+  line-height: 2.0;
+  font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif;
 }
