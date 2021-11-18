@@ -55,7 +55,7 @@ module Playbook
 
       def order_class
         if order == "none"
-          "none"
+          ""
         else
           "order_#{order}"
         end

@@ -27,12 +27,12 @@ RSpec.describe Playbook::PbFlex::FlexItem do
   describe "#classname" do
     it "returns namespaced class name", :aggregate_failures do
       expect(subject.new(order: "1").classname).to eq "pb_flex_item_kitorder_1"
-      expect(subject.new({}).classname).to eq "pb_flex_item_kitnone"
-      expect(subject.new(grow: true).classname).to eq "pb_flex_item_kit_grownone"
-      expect(subject.new(shrink: true).classname).to eq "pb_flex_item_kit_shrinknone"
-      expect(subject.new(flex: "1").classname).to eq "pb_flex_item_kit_flex_1none"
-      expect(subject.new(fixed_size: "250px").classname).to eq "pb_flex_item_kit_fixed_sizenone"
-      expect(subject.new(overflow: "hidden").classname).to eq "pb_flex_item_kit overflow_hiddennone"
+      expect(subject.new({}).classname).to eq "pb_flex_item_kit"
+      expect(subject.new(grow: true).classname).to eq "pb_flex_item_kit_grow"
+      expect(subject.new(shrink: true).classname).to eq "pb_flex_item_kit_shrink"
+      expect(subject.new(flex: "1").classname).to eq "pb_flex_item_kit_flex_1"
+      expect(subject.new(fixed_size: "250px").classname).to eq "pb_flex_item_kit_fixed_size"
+      expect(subject.new(overflow: "hidden").classname).to eq "pb_flex_item_kit overflow_hidden"
     end
   end
 end

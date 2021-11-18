@@ -107,6 +107,7 @@ const FlexItemExample = (props) => {
         </Flex>
       </div>
 
+      <br />
       <Title
           size={4}
           text="Order"

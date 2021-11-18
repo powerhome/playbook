@@ -71,9 +71,9 @@ $gapTypes: (
 
 
   // Alignment: Align Items
-  &[class*=justify_items_left],
-  &[class*=justify_items_top],
-  &[class*=justify_items_start] {
+  &[class*=align_items_left],
+  &[class*=align_items_top],
+  &[class*=align_items_start] {
     align-items: flex-start;
   }
 
