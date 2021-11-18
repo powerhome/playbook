@@ -1,6 +1,14 @@
 <%= pb_rails("title", props: { margin_top: "xl", text: "Border Radius", tag: "h1", size: 1 }) %>
 <br>
-<%= pb_rails("title", props: { text: "Border Radius Options", tag: "h4", size: 4 }) %> 
+<%= pb_rails("body", props: {
+  text: "We have very specific settings for border radius to keep the interface looking consistent and clean. If you ever need to access these to build new things here are examples for how to do that."
+}) %>
+<br>
+<%= pb_rails("title", props: {margin_top: "sm", text: "Tokens", tag: "h4", size: 4 }) %> 
+<br>
+<%= pb_rails("body", props: {
+  text: "Make up your own styles using Playbook tokens to keep your site consistent."
+}) %>
 <br>
 <%= pb_rails("card", props: { padding: "none", shadow: "deep"
 })  do %>
