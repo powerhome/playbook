@@ -1,5 +1,6 @@
 import React from 'react'
 import Title from '../../pb_title/_title'
+import { Body } from '../../'
 import Card from '../_card.jsx'
 
 const CardBackground = (props) => {
@@ -16,15 +17,24 @@ const CardBackground = (props) => {
 
       <Card
           background="dark"
-          className="dark"
+          dark
           {...props}
       >
-        {'Dark'}
+        <Body
+            color="lighter"
+            text="Dark"
+            {...props}
+        />
       </Card>
 
       <br />
 
-      <Card>{'White'}</Card>
+      <Card>
+        <Body
+            text="White"
+            {...props}
+        />
+      </Card>
 
       <br />
 
@@ -32,7 +42,10 @@ const CardBackground = (props) => {
           background="light"
           {...props}
       >
-        {'Light'}
+        <Body
+            text="Light"
+            {...props}
+        />
       </Card>
 
       <br />
@@ -48,10 +61,13 @@ const CardBackground = (props) => {
 
       <Card
           background="windows"
-          className="dark"
           {...props}
       >
-        {'Windows'}
+        <Body
+            color="lighter"
+            text="Windows"
+            {...props}
+        />
       </Card>
 
       <br />
@@ -60,7 +76,10 @@ const CardBackground = (props) => {
           background="siding"
           {...props}
       >
-        {'Siding'}
+        <Body
+            text="Siding"
+            {...props}
+        />
       </Card>
 
       <br />
@@ -69,7 +88,10 @@ const CardBackground = (props) => {
           background="doors"
           {...props}
       >
-        {'Doors'}
+        <Body
+            text="Doors"
+            {...props}
+        />
       </Card>
 
       <br />

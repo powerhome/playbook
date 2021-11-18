@@ -2,20 +2,27 @@
 
 <br>
 
-<%= pb_rails("card", props: { background: "dark", classname: "dark" })  do %>
-  Dark
+<%= pb_rails("card", props: { background: "dark", dark: true })  do %>
+  <%= pb_rails("body", props: {
+  text: "Dark",
+  color: "lighter"
+}) %>
 <% end %>
 
 <br>
 
 <%= pb_rails("card")  do %>
-  White
+  <%= pb_rails("body", props: {
+  text: "White"
+}) %>
 <% end %>
 
 <br>
 
 <%= pb_rails("card", props: { background: "light" })  do %>
-  Light
+  <%= pb_rails("body", props: {
+  text: "Light"
+}) %>
 <% end %>
 
 <br>
@@ -24,20 +31,27 @@
 
 <br>
 
-<%= pb_rails("card", props: { background: "windows", classname: "dark" })  do %>
-  Windows
+<%= pb_rails("card", props: { background: "windows", dark: true })  do %>
+  <%= pb_rails("body", props: {
+  text: "Windows",
+  color: "lighter"
+}) %>
 <% end %>
 
 <br>
 
 <%= pb_rails("card", props: { background: "siding" })  do %>
-  Siding
+  <%= pb_rails("body", props: {
+  text: "Siding"
+}) %>
 <% end %>
 
 <br>
 
 <%= pb_rails("card", props: { background: "doors" })  do %>
-  Doors
+  <%= pb_rails("body", props: {
+  text: "Doors"
+}) %>
 <% end %>
 
 <br>
