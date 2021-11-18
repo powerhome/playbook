@@ -8,4 +8,8 @@
     fill: $text_lt_light;
     font: $regular $font_base $font_family_base;
   }
+
+  rect.highcharts-background {
+    fill: #0000 !important;
+  }
 }

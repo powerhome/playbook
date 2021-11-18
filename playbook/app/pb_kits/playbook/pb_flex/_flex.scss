@@ -10,8 +10,8 @@ $gapSpaces:(
 );
 
 $gapTypes: (
-  gap: gap, 
-  columnGap: column-gap, 
+  gap: gap,
+  columnGap: column-gap,
   rowGap: row-gap
   );
 
@@ -69,12 +69,14 @@ $gapTypes: (
     justify-content: center;
   }
 
+
   // Alignment: Align Items
   &[class*=align_items_left],
   &[class*=align_items_top],
   &[class*=align_items_start] {
     align-items: flex-start;
   }
+
 
   &[class*=align_items_right],
   &[class*=align_items_bottom],

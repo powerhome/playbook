@@ -1,0 +1,45 @@
+br
+= pb_rails("title", props: { text: "Screen Sizing Options", tag: "h4", size: 4 })
+br
+ul.pb_card_kit_shadow_deep_deselected.p_md
+  markdown: 
+    To use the breakpoints for your custom css import screen sizes into your scss file:<br/>
+    `@import "tokens/screen_sizes";`<br/>
+    <br/>
+
+
+    <br/>
+    Breakpoints:<br/>
+    `$breakpoints: (`<br/>
+      &nbsp; &nbsp;  `xs: 575px,`<br/>
+      &nbsp; &nbsp; `sm: 576px,`<br/>
+      &nbsp; &nbsp; `md: 768px,`<br/>
+      &nbsp; &nbsp; `lg: 992px,`<br/>
+      &nbsp; &nbsp; `xl: 1200px`<br/>
+    `);`<br/>
+    
+    <br/>
+
+    You can use these like this:<br/> `map-get($breakpoints, "sm"); // will return 576px`<br/>
+
+    <br/>
+
+    Or as a function:<br/> `breakpoint("sm") // will return 576px`<br/>
+
+    <br/>
+
+    You can also use the `break_at` media query helper to make your code easier to understand:<br/> 
+    `@include break_at(1290px) {`<br/>
+      &nbsp; &nbsp; `.some_class {`<br/>
+      &nbsp; &nbsp; &nbsp; &nbsp; `padding: 0;`<br/>
+      &nbsp; &nbsp; `}`<br/>
+      `}`<br/>
+    
+    <br/>
+
+    or using the break-point function:<br/> 
+    `@include break_at( breakpoint("sm") ) {`<br/>
+      &nbsp; &nbsp; `.some_class {`<br/>
+      &nbsp; &nbsp; &nbsp; &nbsp; `padding: 0;`<br/>
+      &nbsp; &nbsp; `}`<br/>
+      `}`<br/>
