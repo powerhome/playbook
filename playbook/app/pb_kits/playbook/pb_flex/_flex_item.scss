@@ -12,6 +12,15 @@
     flex-shrink: 1;
   }
 
+  //Order Items
+  @for $i from 0 through 12 {
+    &[class*=order_#{$i}]{
+      order: $i;
+    }
+  }
+  &[class*=order_first]{
+    order: -1;
+  }
 
   $overflow_values: auto, hidden, inherit, initial, scroll, visible;
 
