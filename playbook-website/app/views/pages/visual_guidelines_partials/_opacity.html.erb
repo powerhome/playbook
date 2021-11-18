@@ -1,3 +1,4 @@
+
 <h1 aria-label="online" class="pb_title_kit_1">Opacity</h1>
 <br>
 <%= pb_rails("body", props: {
@@ -11,7 +12,9 @@
 <%= pb_rails("body", props: {
   text: "Make your own styles using Playbook tokens to keep your site consistent. To use the opacity for your custom css import into your scss file:"
 }) %><br>
-<ul class="pb--utlities-color">
+
+<%= pb_rails("card", props: {shadow: "deep", margin_bottom: "xl", padding: "none", padding_top: "md" }) do %>
+<ul class="opacity-play pb--utlities-color">
 <li data-name="Data 1" data-variable="$data_1">
 <div class="pb--color_data_1 opacity_1"></div>
 <p class="name">Opacity_1</p>
@@ -66,8 +69,9 @@
 <p class="var">$opacity_10</p></li>
 </ul>
 <% react_contents = Rails.root.join("app/views/pages/code_snippets/user_jsx.txt").read %>
-<%= pb_rails("background", props: { background_color: "dark", padding: "xs", id: "code-wrapper" }) do %>
+<%= pb_rails("background", props: { background_color: "dark", padding: "xs", id: "code-wrapper", padding_left: "lg" }) do %>
   <div class="pb--codeCopy" data-action="toggle" data-togglable="code_example">
-  <%= pb_rails("caption", props: { text: "Example in SCSS"}) %><pre class="highlight"><code>@import "tokens/opacity";</code></pre>
-  </div>        
+  <pre class="highlight">Example in SCSS<p><code>@import "tokens/opacity";</code></p></pre>
+  </div>     
+  <% end %>  
 <% end %>

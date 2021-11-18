@@ -7282,6 +7282,48 @@ Background colors ------------------*/
 [class^=pb_flex_item_kit][class*=_shrink] {
   flex-shrink: 1; }
 
+[class^=pb_flex_item_kit][class*=order_0] {
+  order: 0; }
+
+[class^=pb_flex_item_kit][class*=order_1] {
+  order: 1; }
+
+[class^=pb_flex_item_kit][class*=order_2] {
+  order: 2; }
+
+[class^=pb_flex_item_kit][class*=order_3] {
+  order: 3; }
+
+[class^=pb_flex_item_kit][class*=order_4] {
+  order: 4; }
+
+[class^=pb_flex_item_kit][class*=order_5] {
+  order: 5; }
+
+[class^=pb_flex_item_kit][class*=order_6] {
+  order: 6; }
+
+[class^=pb_flex_item_kit][class*=order_7] {
+  order: 7; }
+
+[class^=pb_flex_item_kit][class*=order_8] {
+  order: 8; }
+
+[class^=pb_flex_item_kit][class*=order_9] {
+  order: 9; }
+
+[class^=pb_flex_item_kit][class*=order_10] {
+  order: 10; }
+
+[class^=pb_flex_item_kit][class*=order_11] {
+  order: 11; }
+
+[class^=pb_flex_item_kit][class*=order_12] {
+  order: 12; }
+
+[class^=pb_flex_item_kit][class*=order_first] {
+  order: -1; }
+
 [class^=pb_flex_item_kit].overflow_auto {
   overflow: auto; }
 

@@ -42,7 +42,21 @@
     .nine { margin-left: 400px; }
     .ten { margin-left: 450px; }
   }
-
+ ul {
+   
+  &.opacity-play {
+  list-style: none;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin: none;
+  background: none;
+  border-radius: none;
+  border: 0px;
+  padding: none;
+  flex-wrap: wrap;
+  }
+}
   .opacity_1{
     opacity: .1;
   }

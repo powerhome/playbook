@@ -1,3 +1,19 @@
+ul {
+   
+  &.opacity-play {
+  list-style: none;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin: none;
+  background: none;
+  border-radius: none;
+  border: 0px;
+  padding: none;
+  flex-wrap: wrap;
+  }
+}
+
 .selector { 
   .opacity_1{
     opacity: $opacity_1;
