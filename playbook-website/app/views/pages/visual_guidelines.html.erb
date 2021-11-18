@@ -1,5 +1,5 @@
 <div class="visual_guidelines">
-  <%= pb_rails("background", props: { background_color: "dark", padding: "xl" }) do %>
+  <%= pb_rails("background", props: { background_color: "dark", padding: "xl", classname: "visual_guidelines_hero" }) do %>
     <%= pb_rails("flex", props: { classname: "header-text", orientation: "column", horizontal: "center"}) do %>
         <div>
           <%= pb_rails("title", props: { classname: "dark", margin_bottom: "lg", text: "Our Visual Language", tag: "h1", size: 1 }) %>
@@ -16,7 +16,7 @@
       <%= render "pages/visual_guidelines_partials/colors.html.slim" %>
       <%= render "pages/visual_guidelines_partials/max_width.html.slim" %>
       <%= render "pages/visual_guidelines_partials/number_spacing.html.slim" %>
-      <%= render "pages/visual_guidelines_partials/positioning.html.slim" %>
+      <%= render "pages/visual_guidelines_partials/positioning" %>
       <%= render "pages/visual_guidelines_partials/spacing.html.slim" %>
       <%= render "pages/visual_guidelines_partials/border_radius.html.erb" %>
   <% end %>

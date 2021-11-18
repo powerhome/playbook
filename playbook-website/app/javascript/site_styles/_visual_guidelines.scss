@@ -9,8 +9,7 @@
     max-width: 600px;
     margin: auto;
   }
-  // Background padding override
-  .pb_background_kit {
+  &_hero {
     padding: $space_xl * 1.75 !important;
   }
   .token-wrapper {
@@ -18,7 +17,7 @@
     margin: auto;
   }
   @include break_at(breakpoint("sm")){
-    .pb_background_kit {
+    .visual_guidelines_hero {
       padding: $space_xl !important;
     }
   }
