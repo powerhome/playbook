@@ -14,6 +14,7 @@ type ImageProps = {
   onError?: () => {},
   size: "xs" | "sm" | "md" | "lg" | "xl",
   rounded?: boolean,
+  transition: "blur" | "fade" | "scale",
   url: string,
 }
 
@@ -27,6 +28,7 @@ const Image = (props: ImageProps) => {
     onError = null,
     rounded = false,
     size = '',
+    transition = '',
     url = '',
   } = props
 
@@ -34,7 +36,7 @@ const Image = (props: ImageProps) => {
   const classes = classnames(
     buildCss('pb_image_kit', size),
     'lazyload',
-    'blur_up',
+    transition,
     { rounded },
     globalProps(props),
     className
@@ -53,6 +55,7 @@ const Image = (props: ImageProps) => {
           onError={onError}
           rounded={+rounded}
           src={url}
+          transition={transition}
       />
     </div>
   )

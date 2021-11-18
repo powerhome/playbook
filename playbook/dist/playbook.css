@@ -8285,13 +8285,28 @@ Background colors ------------------*/
     flex-basis: 60px; }
   [class^=pb_image_kit][class*=rounded] {
     border-radius: 7px; }
-  [class^=pb_image_kit] .blur_up {
-    -webkit-filter: blur(6px);
-    filter: blur(6px);
-    transition: filter 550ms, -webkit-filter 550ms; }
-  [class^=pb_image_kit] .blur_up.lazyloaded {
-    -webkit-filter: blur(0);
-    filter: blur(0); }
+  [class^=pb_image_kit].fade {
+    opacity: 0;
+    transition: opacity 250ms ease-in; }
+    [class^=pb_image_kit].fade.lazyloaded {
+      opacity: 1;
+      transition: opacity 250ms ease-in; }
+  [class^=pb_image_kit].blur {
+    -webkit-filter: blur(5px);
+    filter: blur(5px);
+    transition: filter 250ms ease-in; }
+    [class^=pb_image_kit].blur.lazyloaded {
+      -webkit-filter: blur(0);
+      filter: blur(0);
+      transition: filter 250ms ease-in; }
+  [class^=pb_image_kit].scale {
+    opacity: 0;
+    transform: scale(0.9);
+    transition: opacity, scale 700ms; }
+    [class^=pb_image_kit].scale.lazyloaded {
+      opacity: 1;
+      transform: scale(1);
+      transition: opacity, scale 700ms; }
   [class^=pb_image_kit][class*=_sm] {
     width: 80px;
     height: 80px;
@@ -8302,13 +8317,28 @@ Background colors ------------------*/
     flex-basis: 80px; }
   [class^=pb_image_kit][class*=rounded] {
     border-radius: 7px; }
-  [class^=pb_image_kit] .blur_up {
-    -webkit-filter: blur(6px);
-    filter: blur(6px);
-    transition: filter 550ms, -webkit-filter 550ms; }
-  [class^=pb_image_kit] .blur_up.lazyloaded {
-    -webkit-filter: blur(0);
-    filter: blur(0); }
+  [class^=pb_image_kit].fade {
+    opacity: 0;
+    transition: opacity 250ms ease-in; }
+    [class^=pb_image_kit].fade.lazyloaded {
+      opacity: 1;
+      transition: opacity 250ms ease-in; }
+  [class^=pb_image_kit].blur {
+    -webkit-filter: blur(5px);
+    filter: blur(5px);
+    transition: filter 250ms ease-in; }
+    [class^=pb_image_kit].blur.lazyloaded {
+      -webkit-filter: blur(0);
+      filter: blur(0);
+      transition: filter 250ms ease-in; }
+  [class^=pb_image_kit].scale {
+    opacity: 0;
+    transform: scale(0.9);
+    transition: opacity, scale 700ms; }
+    [class^=pb_image_kit].scale.lazyloaded {
+      opacity: 1;
+      transform: scale(1);
+      transition: opacity, scale 700ms; }
   [class^=pb_image_kit][class*=_md] {
     width: 100px;
     height: 100px;
@@ -8319,13 +8349,28 @@ Background colors ------------------*/
     flex-basis: 100px; }
   [class^=pb_image_kit][class*=rounded] {
     border-radius: 7px; }
-  [class^=pb_image_kit] .blur_up {
-    -webkit-filter: blur(6px);
-    filter: blur(6px);
-    transition: filter 550ms, -webkit-filter 550ms; }
-  [class^=pb_image_kit] .blur_up.lazyloaded {
-    -webkit-filter: blur(0);
-    filter: blur(0); }
+  [class^=pb_image_kit].fade {
+    opacity: 0;
+    transition: opacity 250ms ease-in; }
+    [class^=pb_image_kit].fade.lazyloaded {
+      opacity: 1;
+      transition: opacity 250ms ease-in; }
+  [class^=pb_image_kit].blur {
+    -webkit-filter: blur(5px);
+    filter: blur(5px);
+    transition: filter 250ms ease-in; }
+    [class^=pb_image_kit].blur.lazyloaded {
+      -webkit-filter: blur(0);
+      filter: blur(0);
+      transition: filter 250ms ease-in; }
+  [class^=pb_image_kit].scale {
+    opacity: 0;
+    transform: scale(0.9);
+    transition: opacity, scale 700ms; }
+    [class^=pb_image_kit].scale.lazyloaded {
+      opacity: 1;
+      transform: scale(1);
+      transition: opacity, scale 700ms; }
   [class^=pb_image_kit][class*=_lg] {
     width: 120px;
     height: 120px;
@@ -8336,13 +8381,28 @@ Background colors ------------------*/
     flex-basis: 120px; }
   [class^=pb_image_kit][class*=rounded] {
     border-radius: 7px; }
-  [class^=pb_image_kit] .blur_up {
-    -webkit-filter: blur(6px);
-    filter: blur(6px);
-    transition: filter 550ms, -webkit-filter 550ms; }
-  [class^=pb_image_kit] .blur_up.lazyloaded {
-    -webkit-filter: blur(0);
-    filter: blur(0); }
+  [class^=pb_image_kit].fade {
+    opacity: 0;
+    transition: opacity 250ms ease-in; }
+    [class^=pb_image_kit].fade.lazyloaded {
+      opacity: 1;
+      transition: opacity 250ms ease-in; }
+  [class^=pb_image_kit].blur {
+    -webkit-filter: blur(5px);
+    filter: blur(5px);
+    transition: filter 250ms ease-in; }
+    [class^=pb_image_kit].blur.lazyloaded {
+      -webkit-filter: blur(0);
+      filter: blur(0);
+      transition: filter 250ms ease-in; }
+  [class^=pb_image_kit].scale {
+    opacity: 0;
+    transform: scale(0.9);
+    transition: opacity, scale 700ms; }
+    [class^=pb_image_kit].scale.lazyloaded {
+      opacity: 1;
+      transform: scale(1);
+      transition: opacity, scale 700ms; }
   [class^=pb_image_kit][class*=_xl] {
     width: 140px;
     height: 140px;
@@ -8353,13 +8413,28 @@ Background colors ------------------*/
     flex-basis: 140px; }
   [class^=pb_image_kit][class*=rounded] {
     border-radius: 7px; }
-  [class^=pb_image_kit] .blur_up {
-    -webkit-filter: blur(6px);
-    filter: blur(6px);
-    transition: filter 550ms, -webkit-filter 550ms; }
-  [class^=pb_image_kit] .blur_up.lazyloaded {
-    -webkit-filter: blur(0);
-    filter: blur(0); }
+  [class^=pb_image_kit].fade {
+    opacity: 0;
+    transition: opacity 250ms ease-in; }
+    [class^=pb_image_kit].fade.lazyloaded {
+      opacity: 1;
+      transition: opacity 250ms ease-in; }
+  [class^=pb_image_kit].blur {
+    -webkit-filter: blur(5px);
+    filter: blur(5px);
+    transition: filter 250ms ease-in; }
+    [class^=pb_image_kit].blur.lazyloaded {
+      -webkit-filter: blur(0);
+      filter: blur(0);
+      transition: filter 250ms ease-in; }
+  [class^=pb_image_kit].scale {
+    opacity: 0;
+    transform: scale(0.9);
+    transition: opacity, scale 700ms; }
+    [class^=pb_image_kit].scale.lazyloaded {
+      opacity: 1;
+      transform: scale(1);
+      transition: opacity, scale 700ms; }
 
 /*=====================================
 Base colors should not be documented.
