@@ -9,15 +9,16 @@ When building your interface it is common to add max width to specific kits so t
  Available in every kit.  These are added globally as they are most flexible when developing.
 <br>
 <br>
-<%= pb_rails("card", props: {shadow: "deep", margin_bottom: "xl", padding: "none", padding_top: "none", max_width: "xl" }) do %>
+<%= pb_rails("card", props: {shadow: "deep", margin_bottom: "none", padding: "none", max_width: "xl" }) do %>
 
 <%= render :partial => "pages/visual_guidelines_partials/pb_doc_max_width" %>
-      <%= pb_rails("card", props: {shadow: "deep", margin_bottom: "none", padding: "none", padding_top: "sm", max_width: "xl" }) do %>
+      <%= pb_rails("section_separator", props: {padding: "sm"}) %>
+      
         <%= pb_rails("flex", props: {classname: "flex-container", vertical: "stretch", padding_x: "md", padding_bottom: "sm" }) do %>
           <%= pb_rails("flex/flex_item", props: {flex: "1"}) do %>
             <%= pb_rails("caption", props: {text: "Props", margin_bottom: "sm"}) %>
               <%= pb_rails("pill", props: { text: "max Width", variant: "neutral" }) %>
-          <% end %>
+            <% end %>
           <%= pb_rails("section_separator", props: { orientation: "vertical" }) %>
           <%= pb_rails("flex/flex_item", props: {flex: "1"}) do %>
               <%= pb_rails("caption", props: {text: "Values", margin_bottom: "sm"}) %>
@@ -27,14 +28,14 @@ When building your interface it is common to add max width to specific kits so t
               <%= pb_rails("pill", props: { text: "xl", variant: "warning" }) %>
              <% end %>
           <% end %>
-        <% end %>
+       
       
         <% react_contents = Rails.root.join("app/views/pages/code_snippets/width_jsx.txt").read %>
 
-        <%= pb_rails("background", props: { background_color: "dark", padding: "none", id: "code-wrapper", max_width: "xl", margin: "none"}) do %>
+        <%= pb_rails("background", props: { background_color: "dark", padding: "none", id: "code-wrapper", max_width: "xl", margin: "none", classname:"border-bottom"}) do %>
             <div class="pb--codeCopy" data-action="toggle" data-togglable="code_example">
               <pre class="highlight" style="margin: 0px"><%= raw rouge(react_contents, "react") %></pre>
             </div>        
         <% end %>
-      
       <% end %>
+ 
