@@ -20,6 +20,11 @@ RSpec.describe Playbook::PbCard::Card do
       .with_default("none")
       .with_values("none", "deep", "deeper", "deepest")
   end
+  it do
+    is_expected.to define_enum_prop(:background)
+      .with_default("white")
+      .with_values("white", "light", "dark", "windows", "siding", "doors", "solar", "roofing", "gutters", "insulation")
+  end
 
   describe "#classname" do
     it "returns namespaced class name", :aggregate_failures do
@@ -34,6 +39,8 @@ RSpec.describe Playbook::PbCard::Card do
       expect(subject.new(highlight: { color: "windows" }).classname).to eq "pb_card_kit_deselected_highlight_windows"
       expect(subject.new(highlight: { color: "error" }).classname).to eq "pb_card_kit_deselected_highlight_error"
       expect(subject.new(highlight: { color: "category_2" }).classname).to eq "pb_card_kit_deselected_highlight_category_2"
+      expect(subject.new(background: "dark", classname: "dark").classname).to eq "pb_card_kit_deselected_background_dark dark"
+      expect(subject.new(background: "siding").classname).to eq "pb_card_kit_deselected_background_siding"
     end
   end
 end
