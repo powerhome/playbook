@@ -1168,7 +1168,6 @@ Background colors ------------------*/
   flex-direction: column;
   min-width: 0;
   word-wrap: break-word;
-  background-color: #FFFFFF;
   background-clip: border-box;
   border-width: 1px;
   border-style: solid;
@@ -1177,6 +1176,26 @@ Background colors ------------------*/
   transition-property: all;
   transition-duration: 0.15s;
   transition-timing-function: cubic-bezier(0.42, 0, 1, 1); }
+  [class^=pb_card_kit][class*=background_windows] {
+    background: #0056CF; }
+  [class^=pb_card_kit][class*=background_siding] {
+    background: #F9BB00; }
+  [class^=pb_card_kit][class*=background_doors] {
+    background: #00C4D7; }
+  [class^=pb_card_kit][class*=background_solar] {
+    background: #00CA74; }
+  [class^=pb_card_kit][class*=background_roofing] {
+    background: #C1CDD6; }
+  [class^=pb_card_kit][class*=background_gutters] {
+    background: #9E64E9; }
+  [class^=pb_card_kit][class*=background_insulation] {
+    background: #FF2229; }
+  [class^=pb_card_kit][class*=background_dark] {
+    background: #0a0527; }
+  [class^=pb_card_kit][class*=background_light] {
+    background: #F3F7FB; }
+  [class^=pb_card_kit][class*=background_white] {
+    background: #FFFFFF; }
   [class^=pb_card_kit][class*=_shadow_none] {
     box-shadow: 0 0 0 0 transparent; }
   [class^=pb_card_kit][class*=_shadow_deep] {
@@ -1223,7 +1242,6 @@ Background colors ------------------*/
     flex-direction: column;
     min-width: 0;
     word-wrap: break-word;
-    background-color: rgba(255, 255, 255, 0.1);
     background-clip: border-box;
     border-width: 1px;
     border-style: solid;
@@ -1232,6 +1250,26 @@ Background colors ------------------*/
     transition-property: all;
     transition-duration: 0.15s;
     transition-timing-function: cubic-bezier(0.42, 0, 1, 1); }
+    [class^=pb_card_kit].dark[class*=background_windows] {
+      background: #0056CF; }
+    [class^=pb_card_kit].dark[class*=background_siding] {
+      background: #F9BB00; }
+    [class^=pb_card_kit].dark[class*=background_doors] {
+      background: #00C4D7; }
+    [class^=pb_card_kit].dark[class*=background_solar] {
+      background: #00CA74; }
+    [class^=pb_card_kit].dark[class*=background_roofing] {
+      background: #C1CDD6; }
+    [class^=pb_card_kit].dark[class*=background_gutters] {
+      background: #9E64E9; }
+    [class^=pb_card_kit].dark[class*=background_insulation] {
+      background: #FF2229; }
+    [class^=pb_card_kit].dark[class*=background_dark] {
+      background: #0a0527; }
+    [class^=pb_card_kit].dark[class*=background_light] {
+      background: #F3F7FB; }
+    [class^=pb_card_kit].dark[class*=background_white] {
+      background: #FFFFFF; }
     [class^=pb_card_kit].dark[class*=_shadow_none] {
       box-shadow: 0 0 0 0 transparent; }
     [class^=pb_card_kit].dark[class*=_shadow_deep] {
@@ -6007,7 +6045,6 @@ Background colors ------------------*/
   flex-direction: column;
   min-width: 0;
   word-wrap: break-word;
-  background-color: #FFFFFF;
   background-clip: border-box;
   border-width: 1px;
   border-style: solid;
@@ -6025,6 +6062,10 @@ Background colors ------------------*/
   animation-duration: 0.2s;
   outline: none;
   animation-timing-function: cubic-bezier(0.86, 0, 0.07, 1); }
+  .pb_dialog[class*=background_bg_light] {
+    background: #F3F7FB; }
+  .pb_dialog[class*=background_bg_dark] {
+    background: #0a0527; }
   .pb_dialog[class*=_shadow_none] {
     box-shadow: 0 0 0 0 transparent; }
   .pb_dialog[class*=_shadow_deep] {
@@ -7281,6 +7322,48 @@ Background colors ------------------*/
 
 [class^=pb_flex_item_kit][class*=_shrink] {
   flex-shrink: 1; }
+
+[class^=pb_flex_item_kit][class*=order_0] {
+  order: 0; }
+
+[class^=pb_flex_item_kit][class*=order_1] {
+  order: 1; }
+
+[class^=pb_flex_item_kit][class*=order_2] {
+  order: 2; }
+
+[class^=pb_flex_item_kit][class*=order_3] {
+  order: 3; }
+
+[class^=pb_flex_item_kit][class*=order_4] {
+  order: 4; }
+
+[class^=pb_flex_item_kit][class*=order_5] {
+  order: 5; }
+
+[class^=pb_flex_item_kit][class*=order_6] {
+  order: 6; }
+
+[class^=pb_flex_item_kit][class*=order_7] {
+  order: 7; }
+
+[class^=pb_flex_item_kit][class*=order_8] {
+  order: 8; }
+
+[class^=pb_flex_item_kit][class*=order_9] {
+  order: 9; }
+
+[class^=pb_flex_item_kit][class*=order_10] {
+  order: 10; }
+
+[class^=pb_flex_item_kit][class*=order_11] {
+  order: 11; }
+
+[class^=pb_flex_item_kit][class*=order_12] {
+  order: 12; }
+
+[class^=pb_flex_item_kit][class*=order_first] {
+  order: -1; }
 
 [class^=pb_flex_item_kit].overflow_auto {
   overflow: auto; }
@@ -13990,7 +14073,6 @@ Background colors ------------------*/
   flex-direction: column;
   min-width: 0;
   word-wrap: break-word;
-  background-color: #FFFFFF;
   background-clip: border-box;
   border-width: 1px;
   border-style: solid;
@@ -14001,6 +14083,10 @@ Background colors ------------------*/
   transition-timing-function: cubic-bezier(0.42, 0, 1, 1);
   border: 0;
   box-shadow: 0 12px 28px 0 rgba(60, 106, 172, 0.18); }
+  .pb_popover_body[class*=background_bg_light] {
+    background: #F3F7FB; }
+  .pb_popover_body[class*=background_bg_dark] {
+    background: #0a0527; }
   .pb_popover_body[class*=_shadow_none] {
     box-shadow: 0 0 0 0 transparent; }
   .pb_popover_body[class*=_shadow_deep] {
@@ -16229,7 +16315,6 @@ Background colors ------------------*/
   flex-direction: column;
   min-width: 0;
   word-wrap: break-word;
-  background-color: #FFFFFF;
   background-clip: border-box;
   border-width: 1px;
   border-style: solid;
@@ -16238,6 +16323,26 @@ Background colors ------------------*/
   transition-property: all;
   transition-duration: 0.15s;
   transition-timing-function: cubic-bezier(0.42, 0, 1, 1); }
+  [class^=pb_card_kit][class*=background_windows] {
+    background: #0056CF; }
+  [class^=pb_card_kit][class*=background_siding] {
+    background: #F9BB00; }
+  [class^=pb_card_kit][class*=background_doors] {
+    background: #00C4D7; }
+  [class^=pb_card_kit][class*=background_solar] {
+    background: #00CA74; }
+  [class^=pb_card_kit][class*=background_roofing] {
+    background: #C1CDD6; }
+  [class^=pb_card_kit][class*=background_gutters] {
+    background: #9E64E9; }
+  [class^=pb_card_kit][class*=background_insulation] {
+    background: #FF2229; }
+  [class^=pb_card_kit][class*=background_dark] {
+    background: #0a0527; }
+  [class^=pb_card_kit][class*=background_light] {
+    background: #F3F7FB; }
+  [class^=pb_card_kit][class*=background_white] {
+    background: #FFFFFF; }
   [class^=pb_card_kit][class*=_shadow_none] {
     box-shadow: 0 0 0 0 transparent; }
   [class^=pb_card_kit][class*=_shadow_deep] {
@@ -16284,7 +16389,6 @@ Background colors ------------------*/
     flex-direction: column;
     min-width: 0;
     word-wrap: break-word;
-    background-color: rgba(255, 255, 255, 0.1);
     background-clip: border-box;
     border-width: 1px;
     border-style: solid;
@@ -16293,6 +16397,26 @@ Background colors ------------------*/
     transition-property: all;
     transition-duration: 0.15s;
     transition-timing-function: cubic-bezier(0.42, 0, 1, 1); }
+    [class^=pb_card_kit].dark[class*=background_windows] {
+      background: #0056CF; }
+    [class^=pb_card_kit].dark[class*=background_siding] {
+      background: #F9BB00; }
+    [class^=pb_card_kit].dark[class*=background_doors] {
+      background: #00C4D7; }
+    [class^=pb_card_kit].dark[class*=background_solar] {
+      background: #00CA74; }
+    [class^=pb_card_kit].dark[class*=background_roofing] {
+      background: #C1CDD6; }
+    [class^=pb_card_kit].dark[class*=background_gutters] {
+      background: #9E64E9; }
+    [class^=pb_card_kit].dark[class*=background_insulation] {
+      background: #FF2229; }
+    [class^=pb_card_kit].dark[class*=background_dark] {
+      background: #0a0527; }
+    [class^=pb_card_kit].dark[class*=background_light] {
+      background: #F3F7FB; }
+    [class^=pb_card_kit].dark[class*=background_white] {
+      background: #FFFFFF; }
     [class^=pb_card_kit].dark[class*=_shadow_none] {
       box-shadow: 0 0 0 0 transparent; }
     [class^=pb_card_kit].dark[class*=_shadow_deep] {
@@ -17037,7 +17161,6 @@ Background colors ------------------*/
     flex-direction: column;
     min-width: 0;
     word-wrap: break-word;
-    background-color: #FFFFFF;
     background-clip: border-box;
     border-width: 1px;
     border-style: solid;
@@ -17056,6 +17179,26 @@ Background colors ------------------*/
       transition-property: all;
       transition-duration: 0.15s;
       transition-timing-function: cubic-bezier(0.42, 0, 1, 1); }
+    [class^=pb_selectable_card_kit] > label[class*=background_windows] {
+      background: #0056CF; }
+    [class^=pb_selectable_card_kit] > label[class*=background_siding] {
+      background: #F9BB00; }
+    [class^=pb_selectable_card_kit] > label[class*=background_doors] {
+      background: #00C4D7; }
+    [class^=pb_selectable_card_kit] > label[class*=background_solar] {
+      background: #00CA74; }
+    [class^=pb_selectable_card_kit] > label[class*=background_roofing] {
+      background: #C1CDD6; }
+    [class^=pb_selectable_card_kit] > label[class*=background_gutters] {
+      background: #9E64E9; }
+    [class^=pb_selectable_card_kit] > label[class*=background_insulation] {
+      background: #FF2229; }
+    [class^=pb_selectable_card_kit] > label[class*=background_dark] {
+      background: #0a0527; }
+    [class^=pb_selectable_card_kit] > label[class*=background_light] {
+      background: #F3F7FB; }
+    [class^=pb_selectable_card_kit] > label[class*=background_white] {
+      background: #FFFFFF; }
     [class^=pb_selectable_card_kit] > label[class*=_shadow_none] {
       box-shadow: 0 0 0 0 transparent; }
     [class^=pb_selectable_card_kit] > label[class*=_shadow_deep] {
@@ -17148,7 +17291,6 @@ Background colors ------------------*/
       flex-direction: column;
       min-width: 0;
       word-wrap: break-word;
-      background-color: rgba(255, 255, 255, 0.1);
       background-clip: border-box;
       border-width: 1px;
       border-style: solid;
@@ -17158,6 +17300,26 @@ Background colors ------------------*/
       transition-duration: 0.15s;
       transition-timing-function: cubic-bezier(0.42, 0, 1, 1);
       background: transparent; }
+      [class^=pb_selectable_card_kit].dark > label[class*=background_windows] {
+        background: #0056CF; }
+      [class^=pb_selectable_card_kit].dark > label[class*=background_siding] {
+        background: #F9BB00; }
+      [class^=pb_selectable_card_kit].dark > label[class*=background_doors] {
+        background: #00C4D7; }
+      [class^=pb_selectable_card_kit].dark > label[class*=background_solar] {
+        background: #00CA74; }
+      [class^=pb_selectable_card_kit].dark > label[class*=background_roofing] {
+        background: #C1CDD6; }
+      [class^=pb_selectable_card_kit].dark > label[class*=background_gutters] {
+        background: #9E64E9; }
+      [class^=pb_selectable_card_kit].dark > label[class*=background_insulation] {
+        background: #FF2229; }
+      [class^=pb_selectable_card_kit].dark > label[class*=background_dark] {
+        background: #0a0527; }
+      [class^=pb_selectable_card_kit].dark > label[class*=background_light] {
+        background: #F3F7FB; }
+      [class^=pb_selectable_card_kit].dark > label[class*=background_white] {
+        background: #FFFFFF; }
       [class^=pb_selectable_card_kit].dark > label[class*=_shadow_none] {
         box-shadow: 0 0 0 0 transparent; }
       [class^=pb_selectable_card_kit].dark > label[class*=_shadow_deep] {
