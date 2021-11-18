@@ -24,11 +24,7 @@ const CardBackground = (props) => {
 
       <br />
 
-      <Card
-          {...props}
-      >
-        {'White'}
-      </Card>
+      <Card>{'White'}</Card>
 
       <br />
 
