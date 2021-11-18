@@ -37,7 +37,7 @@ br
     end
 
 - react_contents = Rails.root.join("app/views/pages/code_snippets/number_spacing_jsx.txt").read
-= pb_rails("background", props: { background_color: "dark", padding: "xs", id: "code-wrapper" }) do
+= pb_rails("background", props: { background_color: "dark", padding: "xs", id: "code-wrapper", max_width: "xl" }) do
   .pb--codeCopy[data-action="toggle" data-toggleable="code-example"]
     pre.highlight
       = raw rouge(react_contents, "react")
