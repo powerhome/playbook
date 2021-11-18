@@ -51,7 +51,7 @@ $background_colors: map-merge($product_colors, $additional_colors);
   transition-timing-function: $easeIn;
 
   @each $name, $color in $background_colors {
-    &[class*=_#{$name}] {
+    &[class*=background_#{$name}] {
       background: $color;
     }
   };

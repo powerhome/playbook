@@ -80,9 +80,10 @@ const Card = (props: CardPropTypes) => {
     padding = 'md',
   } = props
   const borderCSS = borderNone == true ? 'border_none' : ''
-  const cardCss = buildCss('pb_card_kit', `background_${background}`, `shadow_${shadow}`, `${borderCSS}`, `border_radius_${borderRadius}`, {
+  const cardCss = buildCss('pb_card_kit', `shadow_${shadow}`, `${borderCSS}`, `border_radius_${borderRadius}`, {
     selected,
     deselected: !selected,
+    [`background_${background}`]: background,
     [`highlight_${highlight.position}`]: highlight.position,
     [`highlight_${highlight.color}`]: highlight.color,
   })
