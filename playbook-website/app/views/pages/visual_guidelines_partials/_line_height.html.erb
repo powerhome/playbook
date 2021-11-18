@@ -13,59 +13,40 @@
 
 <%= pb_rails("card", props: {margin_bottom: "xl", padding: "none", padding_top: "xs", right: "sm", max_width: "lg" }) do %>
   <%= pb_rails("layout", props: {layout: "collection"}) do %>
-    <%= pb_rails("layout/body") do %>
+    <%= pb_rails("layout/body", props: {orientation: "row", columns: "3"}) do %>
+
         <%= pb_rails("card") do %> 
-          <p class="card-tightest">
-            The quick brown fox<br>
-            jumps over the lazy dog
-          </p>
+          <p  class="card-tightest" > The quick brown fox jumps over the lazy dog</p>
           <%= pb_rails("pill", props: { text: "$lh_tightest", variant: "neutral", margin_top: "md" }) %>
       <% end %>
+      
       <%= pb_rails("card") do %> 
-        <p class="card-tighter">
-          The quick brown fox<br>
-          jumps over the lazy dog
-        </p>
+        <p  class="card-tighter" > The quick brown fox jumps over the lazy dog</p>
         <%= pb_rails("pill", props: { text: "$lh_tighter", variant: "neutral", margin_bottom: "sm",   margin_top: "md" }) %>
       <% end %>
     
       <%= pb_rails("card") do %> 
-          <p class="card-tight">
-            The quick brown fox<br>
-            jumps over the lazy dog
-          </p>
-          <%= pb_rails("pill", props: { text: "$lh_tight", variant: "neutral",  margin_top: "md", margin_bottom: "sm" }) %>
+        <p  class="card-tight" > The quick brown fox jumps over the lazy dog</p>
+        <%= pb_rails("pill", props: { text: "$lh_tight", variant: "neutral",  margin_top: "md", margin_bottom: "sm" }) %>
       <% end %>
       
       <%= pb_rails("card") do %> 
-          <p class="card-normal">
-            The quick brown fox<br>
-            jumps over the lazy dog
-          </p>
+        <p  class="card-normal" > The quick brown fox jumps over the lazy dog</p>
         <%= pb_rails("pill", props: { text: "$lh_nomral", variant: "neutral",  margin_top: "md", margin_bottom: "sm" }) %>
       <% end %>
    
       <%= pb_rails("card") do %> 
-          <p class="card-loose">
-           The quick brown fox<br>
-           jumps over the lazy dog.
-          </p>
+        <p  class="card-loose" > The quick brown fox jumps over the lazy dog</p>
         <%= pb_rails("pill", props: { text: "$lh_loose", variant: "neutral", margin_bottom: "sm", margin_top: "md" }) %>
       <% end %>
    
       <%= pb_rails("card") do %> 
-          <p class="card-looser">
-            The quick brown fox<br>
-            jumps over the lazy dog.
-          </p>
+        <p  class="card-looser" > The quick brown fox jumps over the lazy dog</p>
         <%= pb_rails("pill", props: { text: "$lh_looser", variant: "neutral", margin_bottom: "sm", margin_top: "md" }) %>
       <% end %>
   
       <%= pb_rails("card") do %> 
-          <p class="card-loosest">
-            The quick brown fox<br>
-            jumps over the lazy dog
-          </p>
+        <p  class="Card-loosest" > The quick brown fox jumps over the lazy dog</p>
         <%= pb_rails("pill", props: { text: "$lh_loosest", variant: "neutral", margin_bottom: "sm", margin_top: "md" }) %>
     <% end %>
    <% end %>
