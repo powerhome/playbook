@@ -1,34 +1,37 @@
 br
 = pb_rails("title", props: { text: title, tag: "h4", size: 4 })
 
-p hello
+= pb_rails("body", props: { margin_top: "sm", text: "Available in every kit. These are added globally as they are most flexible when developing." }) 
 
 - if defined?(usage) && usage.present?
   = pb_rails("body", props: {"tag": "p"})
     usage
 
 br
-= pb_rails("card", props: { max_width: "sm" })
-    code default 
-    = pb_rails("body")
-        p $1,231,123,123.00
-        p $7,444,112,512.00
-= pb_rails("card", props: { max_width: "sm", number_spacing: "tabular", margin_top: "sm", margin_bottom: "sm" })
-    code tabular 
-    = pb_rails("body")
-        p $1,231,123,123.00
-        p $7,444,112,512.00
-        
-= pb_rails("card", props: {shadow: "deep", padding: "none", padding_top: "md" }) do
-    = pb_rails("flex", props: {classname: "flex-container", vertical: "stretch", padding_x: "md", padding_bottom: "md" })
+= pb_rails("card", props: { text: "visual guide", max_width: "xl" })
+    = pb_rails("caption", props: {text: "Visual Guide", margin_bottom: "sm" })
+    = pb_rails("card", props: { max_width: "xl" })
+    = pb_rails("table", props: { size: "md", margin_bottom: "md" })
+      tr
+        td = pb_rails("caption", props: {text: "normal" })
+        td = pb_rails("caption", props: {text: "tabular"})
+      tr
+        td = pb_rails("body", props: {text: "$1,231,123,123.00" })
+        td = pb_rails("body", props: {text: "$1,231,123,123.00", number_spacing: "tabular" })
+      tr
+        td = pb_rails("body", props: {text: "$7,444,112,512.00" })
+        td = pb_rails("body", props: {text: "$7,444,112,512.00", number_spacing: "tabular"})
+
+    = pb_rails("section_separator", props: { orientation: "horizontal" })
+    = pb_rails("flex", props: {classname: "flex-container", vertical: "stretch", padding_x: "sm", padding_bottom: "md" })
         = pb_rails("flex/flex_item", props: {flex: "1" }) do
-                = pb_rails("caption", props: {text: "Props", margin_bottom: "sm" })
+                = pb_rails("caption", props: {text: "Props", margin_bottom: "sm", margin_top: "sm" })
                 = pb_rails("pill", props: { text: "numberSpacing", variant: "neutral" })
                 
-        end
-        = pb_rails("section_separator", props: { orientation: "vertical" })
+        
+        = pb_rails("section_separator", props: { orientation: "vertical", margin_top: "sm" })
         = pb_rails("flex/flex_item", props: {flex: "1" }) do
-            = pb_rails("caption", props: {text: "Values", margin_bottom: "sm" })
+            = pb_rails("caption", props: {text: "Values", margin_bottom: "sm", margin_top: "sm" })
             = pb_rails("pill", props: {text: "tabular", variant: "warning"})
         end
     end

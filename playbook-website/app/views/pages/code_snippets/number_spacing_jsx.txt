@@ -1,3 +1,5 @@
+EXAMPLE IN USE
+
 <Currency
     amount="2,000"
     numberSpacing="tabular"
