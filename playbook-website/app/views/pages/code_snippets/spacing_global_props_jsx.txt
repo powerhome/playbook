@@ -1,0 +1,3 @@
+EXAMPLE IN USE
+
+    <Badge paddingTop="sm"/>
