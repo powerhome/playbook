@@ -52,11 +52,11 @@
         
     <% end %>
     
-    <% react_contents = Rails.root.join("app/views/pages/code_snippets/border_radius_tokens.txt").read %>
+    <% border_radius_tokens = Rails.root.join("app/views/pages/code_snippets/border_radius_tokens.txt").read %>
 
     <%= pb_rails("background", props: { background_color: "dark", padding: "xs", id: "code-wrapper" }) do %>
         <div class="pb--codeCopy" data-action="toggle" data-togglable="code_example">
-          <pre class="highlight"><%= raw rouge(react_contents, "react") %></pre>
+          <pre class="highlight"><%= raw rouge(border_radius_tokens, "react") %></pre>
         </div>        
     <% end %>
 
