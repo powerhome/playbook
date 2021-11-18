@@ -1,7 +1,11 @@
 @import "playbook-ui/dist/tokens/spacing";
 @import "playbook-ui/dist/tokens/screen_sizes";
+@import "playbook-ui/dist/tokens/colors";
+
 
 .visual_guidelines {
+  @import "border_radius_guidelines";
+
   .header-text {
     max-width: 600px;
     margin: auto;
