@@ -1,0 +1,173 @@
+  /*
+    === Date Picker States ===
+    Default - No value in date picker - display grey Plus icon
+    Hover - No value in date picker - display blue Plus icon
+   - After Value in Date Picker -
+      Default - display grey caret icon
+      Hover - display blue caret icon
+  */
+[class^=pb_date_picker_kit] {
+  /*Default - No value in date picker*/
+  &.inline-date-picker {
+    [class^="pb_text_input_kit"] .text_input_wrapper .flatpickr-wrapper input::placeholder,
+    [class^="pb_text_input_kit"] .text_input_wrapper .flatpickr-wrapper .text_input .placeholder {
+      opacity: 1;
+    }
+    &:not(:hover) {
+      #date-picker-inline-angle-down {
+        svg {
+          display: none;
+        }
+      }
+      #date-picker-inline-icon-plus {
+        svg {
+          color: $slate;
+          display: inline-block;
+        }
+      }
+    }
+    &:hover {
+      [class^="pb_text_input_kit"] .text_input_wrapper input,
+      [class^="pb_text_input_kit"] .text_input_wrapper .text_input,
+      [class^="pb_text_input_kit"] .text_input_wrapper .flatpickr-wrapper input::placeholder,
+      [class^="pb_text_input_kit"] .text_input_wrapper .flatpickr-wrapper .text_input .placeholder {
+        color: $primary;
+      }
+      #date-picker-inline-angle-down {
+        svg {
+          display: none;
+        }
+      }
+      #date-picker-inline-icon-plus {
+        svg {
+          display: inline-block;
+          color: $primary;
+        }
+      }
+    }
+    &.show-angle-down-icon {
+      &:not(:hover) {
+        #date-picker-inline-angle-down {
+          svg {
+            display: inline-block;
+            color: $text_lt_light;
+          }
+        }
+        #date-picker-inline-icon-plus {
+          svg {
+            display: none;
+          }
+        }
+      }
+      #date-picker-inline-icon-plus {
+        svg {
+          display: none;
+        }
+      }
+      #date-picker-inline-angle-down {
+        svg {
+          display: inline-block;
+          color: $primary;
+        }
+      }
+    }
+    #date-picker-inline,
+    #date-picker-inline .active {
+      border: none;
+      padding: 5px 5px 5px 10px;
+      background-color: #FFF;
+      &:hover {
+        background: rgba(0,130,255,0.1);
+        transition: background-color 0.2s ease;
+        box-shadow: none;
+      }
+    }
+    #date-picker-inline-angle-down,
+    #date-picker-inline-icon-plus {
+      height: 33px;
+      border: none;
+    }
+  }
+}
+
+/*
+  DARK MODE
+*/
+[class^=pb_date_picker_kit].dark {
+  &.inline-date-picker {
+    &:not(:hover) {
+      #date-picker-inline-angle-down {
+        svg {
+          display: none;
+        }
+      }
+      #date-picker-inline-icon-plus {
+        svg {
+          display: inline-block;
+          color: $white;
+        }
+      }
+    }
+    &:hover {
+      [class^="pb_text_input_kit"] .text_input_wrapper input,
+      [class^="pb_text_input_kit"] .text_input_wrapper .text_input,
+      [class^="pb_text_input_kit"] .text_input_wrapper .flatpickr-wrapper input::placeholder,
+      [class^="pb_text_input_kit"] .text_input_wrapper .flatpickr-wrapper .text_input .placeholder {
+        color: $white;
+      }
+      #date-picker-inline-angle-down {
+        svg {
+          display: none;
+        }
+      }
+      #date-picker-inline-icon-plus {
+        svg {
+          display: inline-block;
+          color: $white;
+        }
+      }
+    }
+    &.show-angle-down-icon {
+      &:not(:hover) {
+        #date-picker-inline-angle-down {
+          svg {
+            display: inline-block;
+            color: $white;
+          }
+        }
+        #date-picker-inline-icon-plus {
+          svg {
+            display: none;
+          }
+        }
+      }
+      #date-picker-inline-icon-plus {
+        svg {
+          display: none;
+        }
+      }
+      #date-picker-inline-angle-down {
+        svg {
+          display: inline-block;
+          color: $white;
+        }
+      }
+    }
+    #date-picker-inline,
+    #date-picker-inline .active {
+      background-color: rgba($white,.10);
+      border: none;
+      padding: 5px 5px 5px 10px;
+      &:hover {
+        background: rgba(0,130,255,0.1);
+        transition: background-color 0.2s ease;
+        box-shadow: none;
+      }
+    }
+    #date-picker-inline-angle-down,
+    #date-picker-inline-icon-plus {
+      height: 33px;
+      border: none;
+    }
+  }
+}

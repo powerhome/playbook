@@ -6,6 +6,7 @@ examples:
   - textarea_resize: Resize
   - textarea_error: Textarea w/ Error
   - textarea_character_counter: Character Counter
+  - textarea_inline: Inline
 
   react:
   - textarea_default: Default
@@ -13,3 +14,4 @@ examples:
   - textarea_resize: Resize
   - textarea_error: Textarea w/ Error
   - textarea_character_counter: Character Counter
+  - textarea_inline: Inline

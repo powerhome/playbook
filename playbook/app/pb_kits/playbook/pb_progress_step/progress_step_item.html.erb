@@ -2,10 +2,21 @@
   id: object.id,
   data: object.data,
   class: object.classname) do %>
-  <div class="box">
+  <div class="box" style="max-width: min-content;" id="<%= object.tooltip_trigger_class %>">
     <div class="circle">
       <%= pb_rails("icon", props: { icon: object.icon, size: "xs" }) if object.icon.present? %>
     </div>
+    <% if object.tooltip.present? %>
+      <div>
+        <%= pb_rails("tooltip", props: {
+          trigger_element_selector: "##{object.tooltip_trigger_class}",
+          tooltip_id: "example-tooltip",
+          position: object.step_tooltip_position
+        }) do %>
+            <%= object.tooltip %>
+      <% end %>
+      </div>
+    <% end %>
     <div class="content">
       <%= content.presence %>
     <div>

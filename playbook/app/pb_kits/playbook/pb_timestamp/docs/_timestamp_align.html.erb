@@ -20,6 +20,14 @@
   align: "left"
 }) %>
 
+<br>
+
+<%= pb_rails("timestamp", props: {
+  timestamp: DateTime.now - 1.year,
+  show_date: true,
+  align: "left"
+}) %>
+
 <br><br>
 
 <%= pb_rails("timestamp", props: {
@@ -44,6 +52,14 @@
   align: "center"
 }) %>
 
+<br>
+
+<%= pb_rails("timestamp", props: {
+  timestamp: DateTime.now - 1.year,
+  show_date: true,
+  align: "center"
+}) %>
+
 <br><br>
 
 <%= pb_rails("timestamp", props: {
@@ -64,6 +80,14 @@
 
 <%= pb_rails("timestamp", props: {
   timestamp: DateTime.now + 4.years,
+  show_date: true,
+  align: "right"
+}) %>
+
+<br>
+
+<%= pb_rails("timestamp", props: {
+  timestamp: DateTime.now - 1.year,
   show_date: true,
   align: "right"
 }) %>

@@ -279,29 +279,6 @@ Background colors ------------------*/
 /* Link colors ------------------------*/
 /* Product colors ---------------------*/
 /* Category colors ---------------------*/
-/*=====================================
-Base colors should not be documented.
-Only document color use.
-
-Colors -----------------------------*/
-/* Specialty Gradient -----------------*/
-/* Interface colors -------------------*/
-/* Main colors ------------------------*/
-/*=====================================
-
-Background colors ------------------*/
-/* Card colors ------------------*/
-/* Active colors ----------------------*/
-/* Hover colors -----------------------*/
-/* Focus colors -----------------------*/
-/* Border colors ----------------------*/
-/* Shadow colors ----------------------*/
-/* Text colors ------------------------*/
-/* Data colors ------------------------*/
-/* Status colors ----------------------*/
-/* Link colors ------------------------*/
-/* Product colors ---------------------*/
-/* Category colors ---------------------*/
 /* CLEAN UP AND REMOVE */
 /* Headings */
 /* Standard Font Weights */
@@ -408,29 +385,6 @@ Background colors ------------------*/
 /* Link colors ------------------------*/
 /* Product colors ---------------------*/
 /* Category colors ---------------------*/
-/*=====================================
-Base colors should not be documented.
-Only document color use.
-
-Colors -----------------------------*/
-/* Specialty Gradient -----------------*/
-/* Interface colors -------------------*/
-/* Main colors ------------------------*/
-/*=====================================
-
-Background colors ------------------*/
-/* Card colors ------------------*/
-/* Active colors ----------------------*/
-/* Hover colors -----------------------*/
-/* Focus colors -----------------------*/
-/* Border colors ----------------------*/
-/* Shadow colors ----------------------*/
-/* Text colors ------------------------*/
-/* Data colors ------------------------*/
-/* Status colors ----------------------*/
-/* Link colors ------------------------*/
-/* Product colors ---------------------*/
-/* Category colors ---------------------*/
 /* CLEAN UP AND REMOVE */
 /* Headings */
 /* Standard Font Weights */
@@ -592,29 +546,6 @@ Background colors ------------------*/
 /* Link colors ------------------------*/
 /* Product colors ---------------------*/
 /* Category colors ---------------------*/
-/*=====================================
-Base colors should not be documented.
-Only document color use.
-
-Colors -----------------------------*/
-/* Specialty Gradient -----------------*/
-/* Interface colors -------------------*/
-/* Main colors ------------------------*/
-/*=====================================
-
-Background colors ------------------*/
-/* Card colors ------------------*/
-/* Active colors ----------------------*/
-/* Hover colors -----------------------*/
-/* Focus colors -----------------------*/
-/* Border colors ----------------------*/
-/* Shadow colors ----------------------*/
-/* Text colors ------------------------*/
-/* Data colors ------------------------*/
-/* Status colors ----------------------*/
-/* Link colors ------------------------*/
-/* Product colors ---------------------*/
-/* Category colors ---------------------*/
 /* CLEAN UP AND REMOVE */
 /* Headings */
 /* Standard Font Weights */
@@ -730,29 +661,6 @@ Background colors ------------------*/
     [class^=pb_button_kit].dark[class*=_disabled]:active {
       border-color: rgba(181, 195, 206, 0.5); }
 
-/*=====================================
-Base colors should not be documented.
-Only document color use.
-
-Colors -----------------------------*/
-/* Specialty Gradient -----------------*/
-/* Interface colors -------------------*/
-/* Main colors ------------------------*/
-/*=====================================
-
-Background colors ------------------*/
-/* Card colors ------------------*/
-/* Active colors ----------------------*/
-/* Hover colors -----------------------*/
-/* Focus colors -----------------------*/
-/* Border colors ----------------------*/
-/* Shadow colors ----------------------*/
-/* Text colors ------------------------*/
-/* Data colors ------------------------*/
-/* Status colors ----------------------*/
-/* Link colors ------------------------*/
-/* Product colors ---------------------*/
-/* Category colors ---------------------*/
 /*=====================================
 Base colors should not be documented.
 Only document color use.
@@ -1137,29 +1045,6 @@ Background colors ------------------*/
 /* Link colors ------------------------*/
 /* Product colors ---------------------*/
 /* Category colors ---------------------*/
-/*=====================================
-Base colors should not be documented.
-Only document color use.
-
-Colors -----------------------------*/
-/* Specialty Gradient -----------------*/
-/* Interface colors -------------------*/
-/* Main colors ------------------------*/
-/*=====================================
-
-Background colors ------------------*/
-/* Card colors ------------------*/
-/* Active colors ----------------------*/
-/* Hover colors -----------------------*/
-/* Focus colors -----------------------*/
-/* Border colors ----------------------*/
-/* Shadow colors ----------------------*/
-/* Text colors ------------------------*/
-/* Data colors ------------------------*/
-/* Status colors ----------------------*/
-/* Link colors ------------------------*/
-/* Product colors ---------------------*/
-/* Category colors ---------------------*/
 /* Default Equations */
 /* Penner Equations (approximated) originally created by @robpenner */
 [class^=pb_card_kit] {
@@ -1168,7 +1053,6 @@ Background colors ------------------*/
   flex-direction: column;
   min-width: 0;
   word-wrap: break-word;
-  background-color: #FFFFFF;
   background-clip: border-box;
   border-width: 1px;
   border-style: solid;
@@ -1177,6 +1061,26 @@ Background colors ------------------*/
   transition-property: all;
   transition-duration: 0.15s;
   transition-timing-function: cubic-bezier(0.42, 0, 1, 1); }
+  [class^=pb_card_kit][class*=background_windows] {
+    background: #0056CF; }
+  [class^=pb_card_kit][class*=background_siding] {
+    background: #F9BB00; }
+  [class^=pb_card_kit][class*=background_doors] {
+    background: #00C4D7; }
+  [class^=pb_card_kit][class*=background_solar] {
+    background: #00CA74; }
+  [class^=pb_card_kit][class*=background_roofing] {
+    background: #C1CDD6; }
+  [class^=pb_card_kit][class*=background_gutters] {
+    background: #9E64E9; }
+  [class^=pb_card_kit][class*=background_insulation] {
+    background: #FF2229; }
+  [class^=pb_card_kit][class*=background_dark] {
+    background: #0a0527; }
+  [class^=pb_card_kit][class*=background_light] {
+    background: #F3F7FB; }
+  [class^=pb_card_kit][class*=background_white] {
+    background: #FFFFFF; }
   [class^=pb_card_kit][class*=_shadow_none] {
     box-shadow: 0 0 0 0 transparent; }
   [class^=pb_card_kit][class*=_shadow_deep] {
@@ -1223,7 +1127,6 @@ Background colors ------------------*/
     flex-direction: column;
     min-width: 0;
     word-wrap: break-word;
-    background-color: rgba(255, 255, 255, 0.1);
     background-clip: border-box;
     border-width: 1px;
     border-style: solid;
@@ -1232,6 +1135,26 @@ Background colors ------------------*/
     transition-property: all;
     transition-duration: 0.15s;
     transition-timing-function: cubic-bezier(0.42, 0, 1, 1); }
+    [class^=pb_card_kit].dark[class*=background_windows] {
+      background: #0056CF; }
+    [class^=pb_card_kit].dark[class*=background_siding] {
+      background: #F9BB00; }
+    [class^=pb_card_kit].dark[class*=background_doors] {
+      background: #00C4D7; }
+    [class^=pb_card_kit].dark[class*=background_solar] {
+      background: #00CA74; }
+    [class^=pb_card_kit].dark[class*=background_roofing] {
+      background: #C1CDD6; }
+    [class^=pb_card_kit].dark[class*=background_gutters] {
+      background: #9E64E9; }
+    [class^=pb_card_kit].dark[class*=background_insulation] {
+      background: #FF2229; }
+    [class^=pb_card_kit].dark[class*=background_dark] {
+      background: #0a0527; }
+    [class^=pb_card_kit].dark[class*=background_light] {
+      background: #F3F7FB; }
+    [class^=pb_card_kit].dark[class*=background_white] {
+      background: #FFFFFF; }
     [class^=pb_card_kit].dark[class*=_shadow_none] {
       box-shadow: 0 0 0 0 transparent; }
     [class^=pb_card_kit].dark[class*=_shadow_deep] {
@@ -2082,29 +2005,6 @@ Background colors ------------------*/
 /* Link colors ------------------------*/
 /* Product colors ---------------------*/
 /* Category colors ---------------------*/
-/*=====================================
-Base colors should not be documented.
-Only document color use.
-
-Colors -----------------------------*/
-/* Specialty Gradient -----------------*/
-/* Interface colors -------------------*/
-/* Main colors ------------------------*/
-/*=====================================
-
-Background colors ------------------*/
-/* Card colors ------------------*/
-/* Active colors ----------------------*/
-/* Hover colors -----------------------*/
-/* Focus colors -----------------------*/
-/* Border colors ----------------------*/
-/* Shadow colors ----------------------*/
-/* Text colors ------------------------*/
-/* Data colors ------------------------*/
-/* Status colors ----------------------*/
-/* Link colors ------------------------*/
-/* Product colors ---------------------*/
-/* Category colors ---------------------*/
 /* CLEAN UP AND REMOVE */
 /* Headings */
 /* Standard Font Weights */
@@ -2827,29 +2727,6 @@ Background colors ------------------*/
 /* Link colors ------------------------*/
 /* Product colors ---------------------*/
 /* Category colors ---------------------*/
-/*=====================================
-Base colors should not be documented.
-Only document color use.
-
-Colors -----------------------------*/
-/* Specialty Gradient -----------------*/
-/* Interface colors -------------------*/
-/* Main colors ------------------------*/
-/*=====================================
-
-Background colors ------------------*/
-/* Card colors ------------------*/
-/* Active colors ----------------------*/
-/* Hover colors -----------------------*/
-/* Focus colors -----------------------*/
-/* Border colors ----------------------*/
-/* Shadow colors ----------------------*/
-/* Text colors ------------------------*/
-/* Data colors ------------------------*/
-/* Status colors ----------------------*/
-/* Link colors ------------------------*/
-/* Product colors ---------------------*/
-/* Category colors ---------------------*/
 /* CLEAN UP AND REMOVE */
 /* Headings */
 /* Standard Font Weights */
@@ -2905,6 +2782,9 @@ Background colors ------------------*/
       background: rgba(175, 185, 197, 0.2); }
     [class^=pb_badge_kit].dark[class*=_primary] {
       background: rgba(1, 78, 190, 0.2); }
+
+.pb_bar_graph rect.highcharts-background {
+  fill: #0000 !important; }
 
 /*=====================================
 Base colors should not be documented.
@@ -3106,29 +2986,6 @@ Background colors ------------------*/
 /* Link colors ------------------------*/
 /* Product colors ---------------------*/
 /* Category colors ---------------------*/
-/*=====================================
-Base colors should not be documented.
-Only document color use.
-
-Colors -----------------------------*/
-/* Specialty Gradient -----------------*/
-/* Interface colors -------------------*/
-/* Main colors ------------------------*/
-/*=====================================
-
-Background colors ------------------*/
-/* Card colors ------------------*/
-/* Active colors ----------------------*/
-/* Hover colors -----------------------*/
-/* Focus colors -----------------------*/
-/* Border colors ----------------------*/
-/* Shadow colors ----------------------*/
-/* Text colors ------------------------*/
-/* Data colors ------------------------*/
-/* Status colors ----------------------*/
-/* Link colors ------------------------*/
-/* Product colors ---------------------*/
-/* Category colors ---------------------*/
 /* CLEAN UP AND REMOVE */
 /* Headings */
 /* Standard Font Weights */
@@ -3244,29 +3101,6 @@ Background colors ------------------*/
     [class^=pb_button_kit].dark[class*=_disabled]:active {
       border-color: rgba(181, 195, 206, 0.5); }
 
-/*=====================================
-Base colors should not be documented.
-Only document color use.
-
-Colors -----------------------------*/
-/* Specialty Gradient -----------------*/
-/* Interface colors -------------------*/
-/* Main colors ------------------------*/
-/*=====================================
-
-Background colors ------------------*/
-/* Card colors ------------------*/
-/* Active colors ----------------------*/
-/* Hover colors -----------------------*/
-/* Focus colors -----------------------*/
-/* Border colors ----------------------*/
-/* Shadow colors ----------------------*/
-/* Text colors ------------------------*/
-/* Data colors ------------------------*/
-/* Status colors ----------------------*/
-/* Link colors ------------------------*/
-/* Product colors ---------------------*/
-/* Category colors ---------------------*/
 /*=====================================
 Base colors should not be documented.
 Only document color use.
@@ -4364,29 +4198,6 @@ Background colors ------------------*/
 /* Link colors ------------------------*/
 /* Product colors ---------------------*/
 /* Category colors ---------------------*/
-/*=====================================
-Base colors should not be documented.
-Only document color use.
-
-Colors -----------------------------*/
-/* Specialty Gradient -----------------*/
-/* Interface colors -------------------*/
-/* Main colors ------------------------*/
-/*=====================================
-
-Background colors ------------------*/
-/* Card colors ------------------*/
-/* Active colors ----------------------*/
-/* Hover colors -----------------------*/
-/* Focus colors -----------------------*/
-/* Border colors ----------------------*/
-/* Shadow colors ----------------------*/
-/* Text colors ------------------------*/
-/* Data colors ------------------------*/
-/* Status colors ----------------------*/
-/* Link colors ------------------------*/
-/* Product colors ---------------------*/
-/* Category colors ---------------------*/
 /* Default Equations */
 /* Penner Equations (approximated) originally created by @robpenner */
 /*=====================================
@@ -5216,6 +5027,112 @@ span.flatpickr-weekday {
     -webkit-transform: translate3d(0, 0, 0);
     transform: translate3d(0, 0, 0); } }
 
+/*
+    === Date Picker States ===
+    Default - No value in date picker - display grey Plus icon
+    Hover - No value in date picker - display blue Plus icon
+   - After Value in Date Picker -
+      Default - display grey caret icon
+      Hover - display blue caret icon
+  */
+[class^=pb_date_picker_kit] {
+  /*Default - No value in date picker*/ }
+  [class^=pb_date_picker_kit].inline-date-picker [class^="pb_text_input_kit"] .text_input_wrapper .flatpickr-wrapper input::placeholder,
+  [class^=pb_date_picker_kit].inline-date-picker [class^="pb_text_input_kit"] .text_input_wrapper .flatpickr-wrapper .text_input .placeholder {
+    opacity: 1; }
+  [class^=pb_date_picker_kit].inline-date-picker:not(:hover) #date-picker-inline-angle-down svg {
+    display: none; }
+  [class^=pb_date_picker_kit].inline-date-picker:not(:hover) #date-picker-inline-icon-plus svg {
+    color: #C1CDD6;
+    display: inline-block; }
+  [class^=pb_date_picker_kit].inline-date-picker:hover [class^="pb_text_input_kit"] .text_input_wrapper input,
+  [class^=pb_date_picker_kit].inline-date-picker:hover [class^="pb_text_input_kit"] .text_input_wrapper .text_input,
+  [class^=pb_date_picker_kit].inline-date-picker:hover [class^="pb_text_input_kit"] .text_input_wrapper .flatpickr-wrapper input::placeholder,
+  [class^=pb_date_picker_kit].inline-date-picker:hover [class^="pb_text_input_kit"] .text_input_wrapper .flatpickr-wrapper .text_input .placeholder {
+    color: #0056CF; }
+  [class^=pb_date_picker_kit].inline-date-picker:hover #date-picker-inline-angle-down svg {
+    display: none; }
+  [class^=pb_date_picker_kit].inline-date-picker:hover #date-picker-inline-icon-plus svg {
+    display: inline-block;
+    color: #0056CF; }
+  [class^=pb_date_picker_kit].inline-date-picker.show-angle-down-icon:not(:hover) #date-picker-inline-angle-down svg {
+    display: inline-block;
+    color: #687887; }
+  [class^=pb_date_picker_kit].inline-date-picker.show-angle-down-icon:not(:hover) #date-picker-inline-icon-plus svg {
+    display: none; }
+  [class^=pb_date_picker_kit].inline-date-picker.show-angle-down-icon #date-picker-inline-icon-plus svg {
+    display: none; }
+  [class^=pb_date_picker_kit].inline-date-picker.show-angle-down-icon #date-picker-inline-angle-down svg {
+    display: inline-block;
+    color: #0056CF; }
+  [class^=pb_date_picker_kit].inline-date-picker #date-picker-inline,
+  [class^=pb_date_picker_kit].inline-date-picker #date-picker-inline .active {
+    border: none;
+    padding: 5px 5px 5px 10px;
+    background-color: #FFF; }
+    [class^=pb_date_picker_kit].inline-date-picker #date-picker-inline:hover,
+    [class^=pb_date_picker_kit].inline-date-picker #date-picker-inline .active:hover {
+      background: rgba(0, 130, 255, 0.1);
+      transition: background-color 0.2s ease;
+      box-shadow: none; }
+  [class^=pb_date_picker_kit].inline-date-picker #date-picker-inline-angle-down,
+  [class^=pb_date_picker_kit].inline-date-picker #date-picker-inline-icon-plus {
+    height: 33px;
+    border: none; }
+
+/*
+  DARK MODE
+*/
+[class^=pb_date_picker_kit].dark.inline-date-picker:not(:hover) #date-picker-inline-angle-down svg {
+  display: none; }
+
+[class^=pb_date_picker_kit].dark.inline-date-picker:not(:hover) #date-picker-inline-icon-plus svg {
+  display: inline-block;
+  color: #FFFFFF; }
+
+[class^=pb_date_picker_kit].dark.inline-date-picker:hover [class^="pb_text_input_kit"] .text_input_wrapper input,
+[class^=pb_date_picker_kit].dark.inline-date-picker:hover [class^="pb_text_input_kit"] .text_input_wrapper .text_input,
+[class^=pb_date_picker_kit].dark.inline-date-picker:hover [class^="pb_text_input_kit"] .text_input_wrapper .flatpickr-wrapper input::placeholder,
+[class^=pb_date_picker_kit].dark.inline-date-picker:hover [class^="pb_text_input_kit"] .text_input_wrapper .flatpickr-wrapper .text_input .placeholder {
+  color: #FFFFFF; }
+
+[class^=pb_date_picker_kit].dark.inline-date-picker:hover #date-picker-inline-angle-down svg {
+  display: none; }
+
+[class^=pb_date_picker_kit].dark.inline-date-picker:hover #date-picker-inline-icon-plus svg {
+  display: inline-block;
+  color: #FFFFFF; }
+
+[class^=pb_date_picker_kit].dark.inline-date-picker.show-angle-down-icon:not(:hover) #date-picker-inline-angle-down svg {
+  display: inline-block;
+  color: #FFFFFF; }
+
+[class^=pb_date_picker_kit].dark.inline-date-picker.show-angle-down-icon:not(:hover) #date-picker-inline-icon-plus svg {
+  display: none; }
+
+[class^=pb_date_picker_kit].dark.inline-date-picker.show-angle-down-icon #date-picker-inline-icon-plus svg {
+  display: none; }
+
+[class^=pb_date_picker_kit].dark.inline-date-picker.show-angle-down-icon #date-picker-inline-angle-down svg {
+  display: inline-block;
+  color: #FFFFFF; }
+
+[class^=pb_date_picker_kit].dark.inline-date-picker #date-picker-inline,
+[class^=pb_date_picker_kit].dark.inline-date-picker #date-picker-inline .active {
+  background-color: rgba(255, 255, 255, 0.1);
+  border: none;
+  padding: 5px 5px 5px 10px; }
+  [class^=pb_date_picker_kit].dark.inline-date-picker #date-picker-inline:hover,
+  [class^=pb_date_picker_kit].dark.inline-date-picker #date-picker-inline .active:hover {
+    background: rgba(0, 130, 255, 0.1);
+    transition: background-color 0.2s ease;
+    box-shadow: none; }
+
+[class^=pb_date_picker_kit].dark.inline-date-picker #date-picker-inline-angle-down,
+[class^=pb_date_picker_kit].dark.inline-date-picker #date-picker-inline-icon-plus {
+  height: 33px;
+  border: none; }
+
 [class^=pb_date_picker_kit] .input_wrapper {
   margin-bottom: 16px;
   position: relative;
@@ -5789,54 +5706,8 @@ Background colors ------------------*/
 /* Link colors ------------------------*/
 /* Product colors ---------------------*/
 /* Category colors ---------------------*/
-/*=====================================
-Base colors should not be documented.
-Only document color use.
-
-Colors -----------------------------*/
-/* Specialty Gradient -----------------*/
-/* Interface colors -------------------*/
-/* Main colors ------------------------*/
-/*=====================================
-
-Background colors ------------------*/
-/* Card colors ------------------*/
-/* Active colors ----------------------*/
-/* Hover colors -----------------------*/
-/* Focus colors -----------------------*/
-/* Border colors ----------------------*/
-/* Shadow colors ----------------------*/
-/* Text colors ------------------------*/
-/* Data colors ------------------------*/
-/* Status colors ----------------------*/
-/* Link colors ------------------------*/
-/* Product colors ---------------------*/
-/* Category colors ---------------------*/
 /* Default Equations */
 /* Penner Equations (approximated) originally created by @robpenner */
-/*=====================================
-Base colors should not be documented.
-Only document color use.
-
-Colors -----------------------------*/
-/* Specialty Gradient -----------------*/
-/* Interface colors -------------------*/
-/* Main colors ------------------------*/
-/*=====================================
-
-Background colors ------------------*/
-/* Card colors ------------------*/
-/* Active colors ----------------------*/
-/* Hover colors -----------------------*/
-/* Focus colors -----------------------*/
-/* Border colors ----------------------*/
-/* Shadow colors ----------------------*/
-/* Text colors ------------------------*/
-/* Data colors ------------------------*/
-/* Status colors ----------------------*/
-/* Link colors ------------------------*/
-/* Product colors ---------------------*/
-/* Category colors ---------------------*/
 /*=====================================
 Base colors should not be documented.
 Only document color use.
@@ -5898,7 +5769,6 @@ Background colors ------------------*/
   flex-direction: column;
   min-width: 0;
   word-wrap: break-word;
-  background-color: #FFFFFF;
   background-clip: border-box;
   border-width: 1px;
   border-style: solid;
@@ -5916,6 +5786,10 @@ Background colors ------------------*/
   animation-duration: 0.2s;
   outline: none;
   animation-timing-function: cubic-bezier(0.86, 0, 0.07, 1); }
+  .pb_dialog[class*=background_bg_light] {
+    background: #F3F7FB; }
+  .pb_dialog[class*=background_bg_dark] {
+    background: #0a0527; }
   .pb_dialog[class*=_shadow_none] {
     box-shadow: 0 0 0 0 transparent; }
   .pb_dialog[class*=_shadow_deep] {
@@ -6441,6 +6315,25 @@ Background colors ------------------*/
     right: -8px; }
   [class^=pb_fixed_confirmation_toast_kit]:hover .fa-times {
     opacity: 1; }
+  [class^=pb_fixed_confirmation_toast_kit].positioned_toast {
+    position: fixed;
+    z-index: 900;
+    display: flex;
+    justify-content: space-around; }
+    [class^=pb_fixed_confirmation_toast_kit].positioned_toast.top {
+      top: 24px; }
+    [class^=pb_fixed_confirmation_toast_kit].positioned_toast.bottom {
+      bottom: 24px; }
+    [class^=pb_fixed_confirmation_toast_kit].positioned_toast.left {
+      left: 24px;
+      right: auto; }
+    [class^=pb_fixed_confirmation_toast_kit].positioned_toast.center {
+      left: 50%;
+      right: auto;
+      transform: translateX(-50%); }
+    [class^=pb_fixed_confirmation_toast_kit].positioned_toast.right {
+      left: auto;
+      right: 24px; }
   [class^=pb_fixed_confirmation_toast_kit][class*=_neutral] {
     background: #C1CDD6; }
     [class^=pb_fixed_confirmation_toast_kit][class*=_neutral] .pb_fixed_confirmation_toast_text {
@@ -6590,29 +6483,6 @@ Background colors ------------------*/
     border-bottom-left-radius: 0;
     border-top-left-radius: 0; }
 
-/*=====================================
-Base colors should not be documented.
-Only document color use.
-
-Colors -----------------------------*/
-/* Specialty Gradient -----------------*/
-/* Interface colors -------------------*/
-/* Main colors ------------------------*/
-/*=====================================
-
-Background colors ------------------*/
-/* Card colors ------------------*/
-/* Active colors ----------------------*/
-/* Hover colors -----------------------*/
-/* Focus colors -----------------------*/
-/* Border colors ----------------------*/
-/* Shadow colors ----------------------*/
-/* Text colors ------------------------*/
-/* Data colors ------------------------*/
-/* Status colors ----------------------*/
-/* Link colors ------------------------*/
-/* Product colors ---------------------*/
-/* Category colors ---------------------*/
 /*=====================================
 Base colors should not be documented.
 Only document color use.
@@ -7154,6 +7024,48 @@ Background colors ------------------*/
 [class^=pb_flex_item_kit][class*=_shrink] {
   flex-shrink: 1; }
 
+[class^=pb_flex_item_kit][class*=order_0] {
+  order: 0; }
+
+[class^=pb_flex_item_kit][class*=order_1] {
+  order: 1; }
+
+[class^=pb_flex_item_kit][class*=order_2] {
+  order: 2; }
+
+[class^=pb_flex_item_kit][class*=order_3] {
+  order: 3; }
+
+[class^=pb_flex_item_kit][class*=order_4] {
+  order: 4; }
+
+[class^=pb_flex_item_kit][class*=order_5] {
+  order: 5; }
+
+[class^=pb_flex_item_kit][class*=order_6] {
+  order: 6; }
+
+[class^=pb_flex_item_kit][class*=order_7] {
+  order: 7; }
+
+[class^=pb_flex_item_kit][class*=order_8] {
+  order: 8; }
+
+[class^=pb_flex_item_kit][class*=order_9] {
+  order: 9; }
+
+[class^=pb_flex_item_kit][class*=order_10] {
+  order: 10; }
+
+[class^=pb_flex_item_kit][class*=order_11] {
+  order: 11; }
+
+[class^=pb_flex_item_kit][class*=order_12] {
+  order: 12; }
+
+[class^=pb_flex_item_kit][class*=order_first] {
+  order: -1; }
+
 [class^=pb_flex_item_kit].overflow_auto {
   overflow: auto; }
 
@@ -7291,6 +7203,9 @@ Background colors ------------------*/
   fill: #687887;
   font: 400 16px "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif; }
 
+[class^=pb_gauge_kit] rect.highcharts-background {
+  fill: #0000 !important; }
+
 [class^=pb_hastag_kit] {
   display: inline-block; }
 
@@ -7326,29 +7241,6 @@ svg.pb_custom_icon {
   svg.pb_custom_icon path {
     fill: currentColor; }
 
-/*=====================================
-Base colors should not be documented.
-Only document color use.
-
-Colors -----------------------------*/
-/* Specialty Gradient -----------------*/
-/* Interface colors -------------------*/
-/* Main colors ------------------------*/
-/*=====================================
-
-Background colors ------------------*/
-/* Card colors ------------------*/
-/* Active colors ----------------------*/
-/* Hover colors -----------------------*/
-/* Focus colors -----------------------*/
-/* Border colors ----------------------*/
-/* Shadow colors ----------------------*/
-/* Text colors ------------------------*/
-/* Data colors ------------------------*/
-/* Status colors ----------------------*/
-/* Link colors ------------------------*/
-/* Product colors ---------------------*/
-/* Category colors ---------------------*/
 /*=====================================
 Base colors should not be documented.
 Only document color use.
@@ -7644,29 +7536,6 @@ Background colors ------------------*/
   [class^=pb_caption_kit][class*=dark] {
     color: rgba(255, 255, 255, 0.6); }
 
-/*=====================================
-Base colors should not be documented.
-Only document color use.
-
-Colors -----------------------------*/
-/* Specialty Gradient -----------------*/
-/* Interface colors -------------------*/
-/* Main colors ------------------------*/
-/*=====================================
-
-Background colors ------------------*/
-/* Card colors ------------------*/
-/* Active colors ----------------------*/
-/* Hover colors -----------------------*/
-/* Focus colors -----------------------*/
-/* Border colors ----------------------*/
-/* Shadow colors ----------------------*/
-/* Text colors ------------------------*/
-/* Data colors ------------------------*/
-/* Status colors ----------------------*/
-/* Link colors ------------------------*/
-/* Product colors ---------------------*/
-/* Category colors ---------------------*/
 /*=====================================
 Base colors should not be documented.
 Only document color use.
@@ -8095,29 +7964,6 @@ Background colors ------------------*/
   [class^=pb_icon_value_kit][class*=_right] {
     justify-content: flex-end; }
 
-/*=====================================
-Base colors should not be documented.
-Only document color use.
-
-Colors -----------------------------*/
-/* Specialty Gradient -----------------*/
-/* Interface colors -------------------*/
-/* Main colors ------------------------*/
-/*=====================================
-
-Background colors ------------------*/
-/* Card colors ------------------*/
-/* Active colors ----------------------*/
-/* Hover colors -----------------------*/
-/* Focus colors -----------------------*/
-/* Border colors ----------------------*/
-/* Shadow colors ----------------------*/
-/* Text colors ------------------------*/
-/* Data colors ------------------------*/
-/* Status colors ----------------------*/
-/* Link colors ------------------------*/
-/* Product colors ---------------------*/
-/* Category colors ---------------------*/
 /*=====================================
 Base colors should not be documented.
 Only document color use.
@@ -9796,6 +9642,9 @@ Background colors ------------------*/
   border-radius: 5px;
   background: #FF2229; }
 
+rect.highcharts-background {
+  fill: #0000 !important; }
+
 /*=====================================
 Base colors should not be documented.
 Only document color use.
@@ -10118,29 +9967,6 @@ svg.pb_custom_icon {
   [class^=pb_loading_inline_kit][class*=_right] {
     justify-content: flex-end; }
 
-/*=====================================
-Base colors should not be documented.
-Only document color use.
-
-Colors -----------------------------*/
-/* Specialty Gradient -----------------*/
-/* Interface colors -------------------*/
-/* Main colors ------------------------*/
-/*=====================================
-
-Background colors ------------------*/
-/* Card colors ------------------*/
-/* Active colors ----------------------*/
-/* Hover colors -----------------------*/
-/* Focus colors -----------------------*/
-/* Border colors ----------------------*/
-/* Shadow colors ----------------------*/
-/* Text colors ------------------------*/
-/* Data colors ------------------------*/
-/* Status colors ----------------------*/
-/* Link colors ------------------------*/
-/* Product colors ---------------------*/
-/* Category colors ---------------------*/
 /*=====================================
 Base colors should not be documented.
 Only document color use.
@@ -11004,29 +10830,6 @@ Background colors ------------------*/
 /* Link colors ------------------------*/
 /* Product colors ---------------------*/
 /* Category colors ---------------------*/
-/*=====================================
-Base colors should not be documented.
-Only document color use.
-
-Colors -----------------------------*/
-/* Specialty Gradient -----------------*/
-/* Interface colors -------------------*/
-/* Main colors ------------------------*/
-/*=====================================
-
-Background colors ------------------*/
-/* Card colors ------------------*/
-/* Active colors ----------------------*/
-/* Hover colors -----------------------*/
-/* Focus colors -----------------------*/
-/* Border colors ----------------------*/
-/* Shadow colors ----------------------*/
-/* Text colors ------------------------*/
-/* Data colors ------------------------*/
-/* Status colors ----------------------*/
-/* Link colors ------------------------*/
-/* Product colors ---------------------*/
-/* Category colors ---------------------*/
 /* CLEAN UP AND REMOVE */
 /* Headings */
 /* Standard Font Weights */
@@ -11481,52 +11284,6 @@ Background colors ------------------*/
       margin-left: 0;
       margin-right: -9px; }
 
-/*=====================================
-Base colors should not be documented.
-Only document color use.
-
-Colors -----------------------------*/
-/* Specialty Gradient -----------------*/
-/* Interface colors -------------------*/
-/* Main colors ------------------------*/
-/*=====================================
-
-Background colors ------------------*/
-/* Card colors ------------------*/
-/* Active colors ----------------------*/
-/* Hover colors -----------------------*/
-/* Focus colors -----------------------*/
-/* Border colors ----------------------*/
-/* Shadow colors ----------------------*/
-/* Text colors ------------------------*/
-/* Data colors ------------------------*/
-/* Status colors ----------------------*/
-/* Link colors ------------------------*/
-/* Product colors ---------------------*/
-/* Category colors ---------------------*/
-/*=====================================
-Base colors should not be documented.
-Only document color use.
-
-Colors -----------------------------*/
-/* Specialty Gradient -----------------*/
-/* Interface colors -------------------*/
-/* Main colors ------------------------*/
-/*=====================================
-
-Background colors ------------------*/
-/* Card colors ------------------*/
-/* Active colors ----------------------*/
-/* Hover colors -----------------------*/
-/* Focus colors -----------------------*/
-/* Border colors ----------------------*/
-/* Shadow colors ----------------------*/
-/* Text colors ------------------------*/
-/* Data colors ------------------------*/
-/* Status colors ----------------------*/
-/* Link colors ------------------------*/
-/* Product colors ---------------------*/
-/* Category colors ---------------------*/
 /*=====================================
 Base colors should not be documented.
 Only document color use.
@@ -12035,29 +11792,6 @@ Background colors ------------------*/
 /* Non_Standard Font Weights */
 /* Default Equations */
 /* Penner Equations (approximated) originally created by @robpenner */
-/*=====================================
-Base colors should not be documented.
-Only document color use.
-
-Colors -----------------------------*/
-/* Specialty Gradient -----------------*/
-/* Interface colors -------------------*/
-/* Main colors ------------------------*/
-/*=====================================
-
-Background colors ------------------*/
-/* Card colors ------------------*/
-/* Active colors ----------------------*/
-/* Hover colors -----------------------*/
-/* Focus colors -----------------------*/
-/* Border colors ----------------------*/
-/* Shadow colors ----------------------*/
-/* Text colors ------------------------*/
-/* Data colors ------------------------*/
-/* Status colors ----------------------*/
-/* Link colors ------------------------*/
-/* Product colors ---------------------*/
-/* Category colors ---------------------*/
 /*=====================================
 Base colors should not be documented.
 Only document color use.
@@ -13772,29 +13506,6 @@ Background colors ------------------*/
 /* Link colors ------------------------*/
 /* Product colors ---------------------*/
 /* Category colors ---------------------*/
-/*=====================================
-Base colors should not be documented.
-Only document color use.
-
-Colors -----------------------------*/
-/* Specialty Gradient -----------------*/
-/* Interface colors -------------------*/
-/* Main colors ------------------------*/
-/*=====================================
-
-Background colors ------------------*/
-/* Card colors ------------------*/
-/* Active colors ----------------------*/
-/* Hover colors -----------------------*/
-/* Focus colors -----------------------*/
-/* Border colors ----------------------*/
-/* Shadow colors ----------------------*/
-/* Text colors ------------------------*/
-/* Data colors ------------------------*/
-/* Status colors ----------------------*/
-/* Link colors ------------------------*/
-/* Product colors ---------------------*/
-/* Category colors ---------------------*/
 /* Default Equations */
 /* Penner Equations (approximated) originally created by @robpenner */
 /*=====================================
@@ -13856,7 +13567,6 @@ Background colors ------------------*/
   flex-direction: column;
   min-width: 0;
   word-wrap: break-word;
-  background-color: #FFFFFF;
   background-clip: border-box;
   border-width: 1px;
   border-style: solid;
@@ -13867,6 +13577,10 @@ Background colors ------------------*/
   transition-timing-function: cubic-bezier(0.42, 0, 1, 1);
   border: 0;
   box-shadow: 0 12px 28px 0 rgba(60, 106, 172, 0.18); }
+  .pb_popover_body[class*=background_bg_light] {
+    background: #F3F7FB; }
+  .pb_popover_body[class*=background_bg_dark] {
+    background: #0a0527; }
   .pb_popover_body[class*=_shadow_none] {
     box-shadow: 0 0 0 0 transparent; }
   .pb_popover_body[class*=_shadow_deep] {
@@ -13910,29 +13624,6 @@ Background colors ------------------*/
 .pb_popover_reference_wrapper {
   display: inline-block; }
 
-/*=====================================
-Base colors should not be documented.
-Only document color use.
-
-Colors -----------------------------*/
-/* Specialty Gradient -----------------*/
-/* Interface colors -------------------*/
-/* Main colors ------------------------*/
-/*=====================================
-
-Background colors ------------------*/
-/* Card colors ------------------*/
-/* Active colors ----------------------*/
-/* Hover colors -----------------------*/
-/* Focus colors -----------------------*/
-/* Border colors ----------------------*/
-/* Shadow colors ----------------------*/
-/* Text colors ------------------------*/
-/* Data colors ------------------------*/
-/* Status colors ----------------------*/
-/* Link colors ------------------------*/
-/* Product colors ---------------------*/
-/* Category colors ---------------------*/
 /*=====================================
 Base colors should not be documented.
 Only document color use.
@@ -14584,29 +14275,6 @@ Background colors ------------------*/
 /* Link colors ------------------------*/
 /* Product colors ---------------------*/
 /* Category colors ---------------------*/
-/*=====================================
-Base colors should not be documented.
-Only document color use.
-
-Colors -----------------------------*/
-/* Specialty Gradient -----------------*/
-/* Interface colors -------------------*/
-/* Main colors ------------------------*/
-/*=====================================
-
-Background colors ------------------*/
-/* Card colors ------------------*/
-/* Active colors ----------------------*/
-/* Hover colors -----------------------*/
-/* Focus colors -----------------------*/
-/* Border colors ----------------------*/
-/* Shadow colors ----------------------*/
-/* Text colors ------------------------*/
-/* Data colors ------------------------*/
-/* Status colors ----------------------*/
-/* Link colors ------------------------*/
-/* Product colors ---------------------*/
-/* Category colors ---------------------*/
 /* Default Equations */
 /* Penner Equations (approximated) originally created by @robpenner */
 /*=====================================
@@ -14682,56 +14350,10 @@ Background colors ------------------*/
 /* Link colors ------------------------*/
 /* Product colors ---------------------*/
 /* Category colors ---------------------*/
-/*=====================================
-Base colors should not be documented.
-Only document color use.
-
-Colors -----------------------------*/
-/* Specialty Gradient -----------------*/
-/* Interface colors -------------------*/
-/* Main colors ------------------------*/
-/*=====================================
-
-Background colors ------------------*/
-/* Card colors ------------------*/
-/* Active colors ----------------------*/
-/* Hover colors -----------------------*/
-/* Focus colors -----------------------*/
-/* Border colors ----------------------*/
-/* Shadow colors ----------------------*/
-/* Text colors ------------------------*/
-/* Data colors ------------------------*/
-/* Status colors ----------------------*/
-/* Link colors ------------------------*/
-/* Product colors ---------------------*/
-/* Category colors ---------------------*/
 /* CLEAN UP AND REMOVE */
 /* Headings */
 /* Standard Font Weights */
 /* Non_Standard Font Weights */
-/*=====================================
-Base colors should not be documented.
-Only document color use.
-
-Colors -----------------------------*/
-/* Specialty Gradient -----------------*/
-/* Interface colors -------------------*/
-/* Main colors ------------------------*/
-/*=====================================
-
-Background colors ------------------*/
-/* Card colors ------------------*/
-/* Active colors ----------------------*/
-/* Hover colors -----------------------*/
-/* Focus colors -----------------------*/
-/* Border colors ----------------------*/
-/* Shadow colors ----------------------*/
-/* Text colors ------------------------*/
-/* Data colors ------------------------*/
-/* Status colors ----------------------*/
-/* Link colors ------------------------*/
-/* Product colors ---------------------*/
-/* Category colors ---------------------*/
 /*=====================================
 Base colors should not be documented.
 Only document color use.
@@ -15322,6 +14944,10 @@ trix-editor .attachment__metadata .attachment__size {
     background-color: rgba(247, 251, 255, 0.5);
     transition: background-color 0.3s ease-in-out 0s;
     font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif; }
+  [class^=pb_rich_text_editor_kit] trix-editor:empty:not(:focus)::before {
+    color: #687887; }
+  [class^=pb_rich_text_editor_kit] trix-editor a {
+    cursor: pointer; }
 
 [class^=pb_rich_text_editor_kit] trix-toolbar .trix-button--icon {
   height: 32px;
@@ -15392,7 +15018,7 @@ trix-editor .attachment__metadata .attachment__size {
   background-image: url("data:image/svg+xml,%3Csvg width='21px' height='9px' viewBox='0 0 21 9' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'%3E%3Cg id='Symbols' stroke='none' stroke-width='1' fill='none' fill-rule='evenodd' fill-opacity='0.6'%3E%3Cg id='Rich-Text/Dark/Field-Only/Empty' transform='translate(-700.000000, -20.000000)' fill='%23FFFFFF' fill-rule='nonzero'%3E%3Cg id='Undo/Redo' transform='translate(659.000000, 7.000000)'%3E%3Cpath d='M57.855,16.6 C56.015,14.985 53.605,14 50.96,14 C46.31,14 42.375,17.03 41,21.22 L43.365,22 C44.415,18.805 47.415,16.5 50.96,16.5 C52.915,16.5 54.69,17.22 56.075,18.385 L52.46,22 L61.46,22 L61.46,13 L57.855,16.6 Z' id='Path'%3E%3C/path%3E%3C/g%3E%3C/g%3E%3C/g%3E%3C/svg%3E"); }
 
 [class^=pb_rich_text_editor_kit][class*=dark] trix-editor:empty:not(:focus)::before {
-  color: rgba(20, 64, 117, 0.5); }
+  color: rgba(255, 255, 255, 0.15); }
 
 [class^=pb_rich_text_editor_kit][class*=dark] trix-editor {
   background-color: rgba(255, 255, 255, 0.1);
@@ -15444,8 +15070,6 @@ trix-editor .attachment__metadata .attachment__size {
   border-bottom: none;
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0; }
-  [class^=pb_rich_text_editor_kit].toolbar-bottom trix-editor:empty:not(:focus)::before {
-    color: #C1CDD6 !important; }
 
 [class^=pb_rich_text_editor_kit].toolbar-bottom trix-toolbar .trix-button-row {
   border-top: none;
@@ -15462,28 +15086,44 @@ trix-editor .attachment__metadata .attachment__size {
   transition: background-color 0.3s ease-in-out 0s, border-color 0.3s ease-in-out 0s;
   border-color: #0056CF; }
 
+[class^=pb_rich_text_editor_kit].inline trix-toolbar {
+  opacity: 0;
+  transition: all 0.3s ease-in-out 0s; }
+
+[class^=pb_rich_text_editor_kit].inline.focused trix-toolbar {
+  opacity: 100; }
+
+[class^=pb_rich_text_editor_kit].inline:hover trix-toolbar {
+  opacity: 100; }
+
 [class^=pb_rich_text_editor_kit].inline:hover trix-editor {
   transition: background-color 0.3s ease-in-out 0s, border-color 0.3s ease-in-out 0s;
   border-color: #E4E8F0;
   background-color: #FFFFFF; }
-  [class^=pb_rich_text_editor_kit].inline:hover trix-editor + trix-toolbar .trix-button-row {
-    transition: all 0.3s ease-in-out 0s;
-    opacity: 100; }
+
+[class^=pb_rich_text_editor_kit].inline:hover:focus-within trix-editor {
+  transition: background-color 0.3s ease-in-out 0s, border-color 0.3s ease-in-out 0s;
+  border-color: #0056CF;
+  background-color: rgba(247, 251, 255, 0.5); }
 
 [class^=pb_rich_text_editor_kit].inline trix-editor {
   transition: background-color 0.3s ease-in-out 0s, border-color 0.3s ease-in-out 0s;
   border-color: transparent;
   background-color: transparent; }
-  [class^=pb_rich_text_editor_kit].inline trix-editor + trix-toolbar .trix-button-row {
-    transition: all 0.3s ease-in-out 0s;
-    opacity: 0; }
   [class^=pb_rich_text_editor_kit].inline trix-editor:focus {
     transition: background-color 0.3s ease-in-out 0s, border-color 0.3s ease-in-out 0s;
     border-color: #0056CF;
     background-color: rgba(247, 251, 255, 0.5); }
-    [class^=pb_rich_text_editor_kit].inline trix-editor:focus + trix-toolbar .trix-button-row {
-      transition: all 0.3s ease-in-out 0s;
-      opacity: 100; }
+
+[class^=pb_rich_text_editor_kit].inline[class*=dark]:hover .trix-button-row,
+[class^=pb_rich_text_editor_kit].inline[class*=dark]:hover trix-editor {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.15); }
+
+[class^=pb_rich_text_editor_kit].inline[class*=dark]:focus-within .trix-button-row,
+[class^=pb_rich_text_editor_kit].inline[class*=dark]:focus-within trix-editor {
+  background-color: rgba(255, 255, 255, 0.03);
+  border-color: #0082ff !important; }
 
 /*=====================================
 Base colors should not be documented.
@@ -15626,29 +15266,6 @@ Background colors ------------------*/
 /* Headings */
 /* Standard Font Weights */
 /* Non_Standard Font Weights */
-/*=====================================
-Base colors should not be documented.
-Only document color use.
-
-Colors -----------------------------*/
-/* Specialty Gradient -----------------*/
-/* Interface colors -------------------*/
-/* Main colors ------------------------*/
-/*=====================================
-
-Background colors ------------------*/
-/* Card colors ------------------*/
-/* Active colors ----------------------*/
-/* Hover colors -----------------------*/
-/* Focus colors -----------------------*/
-/* Border colors ----------------------*/
-/* Shadow colors ----------------------*/
-/* Text colors ------------------------*/
-/* Data colors ------------------------*/
-/* Status colors ----------------------*/
-/* Link colors ------------------------*/
-/* Product colors ---------------------*/
-/* Category colors ---------------------*/
 /*=====================================
 Base colors should not be documented.
 Only document color use.
@@ -16046,29 +15663,6 @@ Background colors ------------------*/
 /* Link colors ------------------------*/
 /* Product colors ---------------------*/
 /* Category colors ---------------------*/
-/*=====================================
-Base colors should not be documented.
-Only document color use.
-
-Colors -----------------------------*/
-/* Specialty Gradient -----------------*/
-/* Interface colors -------------------*/
-/* Main colors ------------------------*/
-/*=====================================
-
-Background colors ------------------*/
-/* Card colors ------------------*/
-/* Active colors ----------------------*/
-/* Hover colors -----------------------*/
-/* Focus colors -----------------------*/
-/* Border colors ----------------------*/
-/* Shadow colors ----------------------*/
-/* Text colors ------------------------*/
-/* Data colors ------------------------*/
-/* Status colors ----------------------*/
-/* Link colors ------------------------*/
-/* Product colors ---------------------*/
-/* Category colors ---------------------*/
 /* Default Equations */
 /* Penner Equations (approximated) originally created by @robpenner */
 [class^=pb_card_kit] {
@@ -16077,7 +15671,6 @@ Background colors ------------------*/
   flex-direction: column;
   min-width: 0;
   word-wrap: break-word;
-  background-color: #FFFFFF;
   background-clip: border-box;
   border-width: 1px;
   border-style: solid;
@@ -16086,6 +15679,26 @@ Background colors ------------------*/
   transition-property: all;
   transition-duration: 0.15s;
   transition-timing-function: cubic-bezier(0.42, 0, 1, 1); }
+  [class^=pb_card_kit][class*=background_windows] {
+    background: #0056CF; }
+  [class^=pb_card_kit][class*=background_siding] {
+    background: #F9BB00; }
+  [class^=pb_card_kit][class*=background_doors] {
+    background: #00C4D7; }
+  [class^=pb_card_kit][class*=background_solar] {
+    background: #00CA74; }
+  [class^=pb_card_kit][class*=background_roofing] {
+    background: #C1CDD6; }
+  [class^=pb_card_kit][class*=background_gutters] {
+    background: #9E64E9; }
+  [class^=pb_card_kit][class*=background_insulation] {
+    background: #FF2229; }
+  [class^=pb_card_kit][class*=background_dark] {
+    background: #0a0527; }
+  [class^=pb_card_kit][class*=background_light] {
+    background: #F3F7FB; }
+  [class^=pb_card_kit][class*=background_white] {
+    background: #FFFFFF; }
   [class^=pb_card_kit][class*=_shadow_none] {
     box-shadow: 0 0 0 0 transparent; }
   [class^=pb_card_kit][class*=_shadow_deep] {
@@ -16132,7 +15745,6 @@ Background colors ------------------*/
     flex-direction: column;
     min-width: 0;
     word-wrap: break-word;
-    background-color: rgba(255, 255, 255, 0.1);
     background-clip: border-box;
     border-width: 1px;
     border-style: solid;
@@ -16141,6 +15753,26 @@ Background colors ------------------*/
     transition-property: all;
     transition-duration: 0.15s;
     transition-timing-function: cubic-bezier(0.42, 0, 1, 1); }
+    [class^=pb_card_kit].dark[class*=background_windows] {
+      background: #0056CF; }
+    [class^=pb_card_kit].dark[class*=background_siding] {
+      background: #F9BB00; }
+    [class^=pb_card_kit].dark[class*=background_doors] {
+      background: #00C4D7; }
+    [class^=pb_card_kit].dark[class*=background_solar] {
+      background: #00CA74; }
+    [class^=pb_card_kit].dark[class*=background_roofing] {
+      background: #C1CDD6; }
+    [class^=pb_card_kit].dark[class*=background_gutters] {
+      background: #9E64E9; }
+    [class^=pb_card_kit].dark[class*=background_insulation] {
+      background: #FF2229; }
+    [class^=pb_card_kit].dark[class*=background_dark] {
+      background: #0a0527; }
+    [class^=pb_card_kit].dark[class*=background_light] {
+      background: #F3F7FB; }
+    [class^=pb_card_kit].dark[class*=background_white] {
+      background: #FFFFFF; }
     [class^=pb_card_kit].dark[class*=_shadow_none] {
       box-shadow: 0 0 0 0 transparent; }
     [class^=pb_card_kit].dark[class*=_shadow_deep] {
@@ -16885,7 +16517,6 @@ Background colors ------------------*/
     flex-direction: column;
     min-width: 0;
     word-wrap: break-word;
-    background-color: #FFFFFF;
     background-clip: border-box;
     border-width: 1px;
     border-style: solid;
@@ -16904,6 +16535,26 @@ Background colors ------------------*/
       transition-property: all;
       transition-duration: 0.15s;
       transition-timing-function: cubic-bezier(0.42, 0, 1, 1); }
+    [class^=pb_selectable_card_kit] > label[class*=background_windows] {
+      background: #0056CF; }
+    [class^=pb_selectable_card_kit] > label[class*=background_siding] {
+      background: #F9BB00; }
+    [class^=pb_selectable_card_kit] > label[class*=background_doors] {
+      background: #00C4D7; }
+    [class^=pb_selectable_card_kit] > label[class*=background_solar] {
+      background: #00CA74; }
+    [class^=pb_selectable_card_kit] > label[class*=background_roofing] {
+      background: #C1CDD6; }
+    [class^=pb_selectable_card_kit] > label[class*=background_gutters] {
+      background: #9E64E9; }
+    [class^=pb_selectable_card_kit] > label[class*=background_insulation] {
+      background: #FF2229; }
+    [class^=pb_selectable_card_kit] > label[class*=background_dark] {
+      background: #0a0527; }
+    [class^=pb_selectable_card_kit] > label[class*=background_light] {
+      background: #F3F7FB; }
+    [class^=pb_selectable_card_kit] > label[class*=background_white] {
+      background: #FFFFFF; }
     [class^=pb_selectable_card_kit] > label[class*=_shadow_none] {
       box-shadow: 0 0 0 0 transparent; }
     [class^=pb_selectable_card_kit] > label[class*=_shadow_deep] {
@@ -16996,7 +16647,6 @@ Background colors ------------------*/
       flex-direction: column;
       min-width: 0;
       word-wrap: break-word;
-      background-color: rgba(255, 255, 255, 0.1);
       background-clip: border-box;
       border-width: 1px;
       border-style: solid;
@@ -17006,6 +16656,26 @@ Background colors ------------------*/
       transition-duration: 0.15s;
       transition-timing-function: cubic-bezier(0.42, 0, 1, 1);
       background: transparent; }
+      [class^=pb_selectable_card_kit].dark > label[class*=background_windows] {
+        background: #0056CF; }
+      [class^=pb_selectable_card_kit].dark > label[class*=background_siding] {
+        background: #F9BB00; }
+      [class^=pb_selectable_card_kit].dark > label[class*=background_doors] {
+        background: #00C4D7; }
+      [class^=pb_selectable_card_kit].dark > label[class*=background_solar] {
+        background: #00CA74; }
+      [class^=pb_selectable_card_kit].dark > label[class*=background_roofing] {
+        background: #C1CDD6; }
+      [class^=pb_selectable_card_kit].dark > label[class*=background_gutters] {
+        background: #9E64E9; }
+      [class^=pb_selectable_card_kit].dark > label[class*=background_insulation] {
+        background: #FF2229; }
+      [class^=pb_selectable_card_kit].dark > label[class*=background_dark] {
+        background: #0a0527; }
+      [class^=pb_selectable_card_kit].dark > label[class*=background_light] {
+        background: #F3F7FB; }
+      [class^=pb_selectable_card_kit].dark > label[class*=background_white] {
+        background: #FFFFFF; }
       [class^=pb_selectable_card_kit].dark > label[class*=_shadow_none] {
         box-shadow: 0 0 0 0 transparent; }
       [class^=pb_selectable_card_kit].dark > label[class*=_shadow_deep] {
@@ -18139,29 +17809,6 @@ Background colors ------------------*/
 /* Link colors ------------------------*/
 /* Product colors ---------------------*/
 /* Category colors ---------------------*/
-/*=====================================
-Base colors should not be documented.
-Only document color use.
-
-Colors -----------------------------*/
-/* Specialty Gradient -----------------*/
-/* Interface colors -------------------*/
-/* Main colors ------------------------*/
-/*=====================================
-
-Background colors ------------------*/
-/* Card colors ------------------*/
-/* Active colors ----------------------*/
-/* Hover colors -----------------------*/
-/* Focus colors -----------------------*/
-/* Border colors ----------------------*/
-/* Shadow colors ----------------------*/
-/* Text colors ------------------------*/
-/* Data colors ------------------------*/
-/* Status colors ----------------------*/
-/* Link colors ------------------------*/
-/* Product colors ---------------------*/
-/* Category colors ---------------------*/
 /* CLEAN UP AND REMOVE */
 /* Headings */
 /* Standard Font Weights */
@@ -18235,37 +17882,8 @@ Background colors ------------------*/
     [class^=pb_table].table-sm.table-responsive-collapse.table-md tbody tr td:first-child, [class^=pb_table].table-sm.table-responsive-collapse.table-md tbody tr td:last-child, [class^=pb_table].table-md.table-responsive-collapse.table-md tbody tr td:first-child, [class^=pb_table].table-md.table-responsive-collapse.table-md tbody tr td:last-child, [class^=pb_table].table-lg.table-responsive-collapse.table-md tbody tr td:first-child, [class^=pb_table].table-lg.table-responsive-collapse.table-md tbody tr td:last-child {
       padding: 16px 8px !important; }
     [class^=pb_table].table-sm.table-responsive-collapse.table-lg tbody tr td:first-child, [class^=pb_table].table-sm.table-responsive-collapse.table-lg tbody tr td:last-child, [class^=pb_table].table-md.table-responsive-collapse.table-lg tbody tr td:first-child, [class^=pb_table].table-md.table-responsive-collapse.table-lg tbody tr td:last-child, [class^=pb_table].table-lg.table-responsive-collapse.table-lg tbody tr td:first-child, [class^=pb_table].table-lg.table-responsive-collapse.table-lg tbody tr td:last-child {
-      padding: 32px 8px !important; }
-  .hide-labels tbody tr td::before {
-    content: '';
-    left: 0;
-    padding-right: 0;
-    position: relative;
-    width: 0; } }
+      padding: 32px 8px !important; } }
 
-/*=====================================
-Base colors should not be documented.
-Only document color use.
-
-Colors -----------------------------*/
-/* Specialty Gradient -----------------*/
-/* Interface colors -------------------*/
-/* Main colors ------------------------*/
-/*=====================================
-
-Background colors ------------------*/
-/* Card colors ------------------*/
-/* Active colors ----------------------*/
-/* Hover colors -----------------------*/
-/* Focus colors -----------------------*/
-/* Border colors ----------------------*/
-/* Shadow colors ----------------------*/
-/* Text colors ------------------------*/
-/* Data colors ------------------------*/
-/* Status colors ----------------------*/
-/* Link colors ------------------------*/
-/* Product colors ---------------------*/
-/* Category colors ---------------------*/
 /*=====================================
 Base colors should not be documented.
 Only document color use.
@@ -18362,37 +17980,8 @@ Background colors ------------------*/
     [class^=pb_table].table-sm.table-collapse-sm.table-md tbody tr td:first-child, [class^=pb_table].table-sm.table-collapse-sm.table-md tbody tr td:last-child, [class^=pb_table].table-md.table-collapse-sm.table-md tbody tr td:first-child, [class^=pb_table].table-md.table-collapse-sm.table-md tbody tr td:last-child, [class^=pb_table].table-lg.table-collapse-sm.table-md tbody tr td:first-child, [class^=pb_table].table-lg.table-collapse-sm.table-md tbody tr td:last-child {
       padding: 16px 8px !important; }
     [class^=pb_table].table-sm.table-collapse-sm.table-lg tbody tr td:first-child, [class^=pb_table].table-sm.table-collapse-sm.table-lg tbody tr td:last-child, [class^=pb_table].table-md.table-collapse-sm.table-lg tbody tr td:first-child, [class^=pb_table].table-md.table-collapse-sm.table-lg tbody tr td:last-child, [class^=pb_table].table-lg.table-collapse-sm.table-lg tbody tr td:first-child, [class^=pb_table].table-lg.table-collapse-sm.table-lg tbody tr td:last-child {
-      padding: 32px 8px !important; }
-  .hide-labels tbody tr td::before {
-    content: '';
-    left: 0;
-    padding-right: 0;
-    position: relative;
-    width: 0; } }
+      padding: 32px 8px !important; } }
 
-/*=====================================
-Base colors should not be documented.
-Only document color use.
-
-Colors -----------------------------*/
-/* Specialty Gradient -----------------*/
-/* Interface colors -------------------*/
-/* Main colors ------------------------*/
-/*=====================================
-
-Background colors ------------------*/
-/* Card colors ------------------*/
-/* Active colors ----------------------*/
-/* Hover colors -----------------------*/
-/* Focus colors -----------------------*/
-/* Border colors ----------------------*/
-/* Shadow colors ----------------------*/
-/* Text colors ------------------------*/
-/* Data colors ------------------------*/
-/* Status colors ----------------------*/
-/* Link colors ------------------------*/
-/* Product colors ---------------------*/
-/* Category colors ---------------------*/
 /*=====================================
 Base colors should not be documented.
 Only document color use.
@@ -18489,37 +18078,8 @@ Background colors ------------------*/
     [class^=pb_table].table-sm.table-collapse-md.table-md tbody tr td:first-child, [class^=pb_table].table-sm.table-collapse-md.table-md tbody tr td:last-child, [class^=pb_table].table-md.table-collapse-md.table-md tbody tr td:first-child, [class^=pb_table].table-md.table-collapse-md.table-md tbody tr td:last-child, [class^=pb_table].table-lg.table-collapse-md.table-md tbody tr td:first-child, [class^=pb_table].table-lg.table-collapse-md.table-md tbody tr td:last-child {
       padding: 16px 8px !important; }
     [class^=pb_table].table-sm.table-collapse-md.table-lg tbody tr td:first-child, [class^=pb_table].table-sm.table-collapse-md.table-lg tbody tr td:last-child, [class^=pb_table].table-md.table-collapse-md.table-lg tbody tr td:first-child, [class^=pb_table].table-md.table-collapse-md.table-lg tbody tr td:last-child, [class^=pb_table].table-lg.table-collapse-md.table-lg tbody tr td:first-child, [class^=pb_table].table-lg.table-collapse-md.table-lg tbody tr td:last-child {
-      padding: 32px 8px !important; }
-  .hide-labels tbody tr td::before {
-    content: '';
-    left: 0;
-    padding-right: 0;
-    position: relative;
-    width: 0; } }
+      padding: 32px 8px !important; } }
 
-/*=====================================
-Base colors should not be documented.
-Only document color use.
-
-Colors -----------------------------*/
-/* Specialty Gradient -----------------*/
-/* Interface colors -------------------*/
-/* Main colors ------------------------*/
-/*=====================================
-
-Background colors ------------------*/
-/* Card colors ------------------*/
-/* Active colors ----------------------*/
-/* Hover colors -----------------------*/
-/* Focus colors -----------------------*/
-/* Border colors ----------------------*/
-/* Shadow colors ----------------------*/
-/* Text colors ------------------------*/
-/* Data colors ------------------------*/
-/* Status colors ----------------------*/
-/* Link colors ------------------------*/
-/* Product colors ---------------------*/
-/* Category colors ---------------------*/
 /*=====================================
 Base colors should not be documented.
 Only document color use.
@@ -18616,37 +18176,8 @@ Background colors ------------------*/
     [class^=pb_table].table-sm.table-collapse-lg.table-md tbody tr td:first-child, [class^=pb_table].table-sm.table-collapse-lg.table-md tbody tr td:last-child, [class^=pb_table].table-md.table-collapse-lg.table-md tbody tr td:first-child, [class^=pb_table].table-md.table-collapse-lg.table-md tbody tr td:last-child, [class^=pb_table].table-lg.table-collapse-lg.table-md tbody tr td:first-child, [class^=pb_table].table-lg.table-collapse-lg.table-md tbody tr td:last-child {
       padding: 16px 8px !important; }
     [class^=pb_table].table-sm.table-collapse-lg.table-lg tbody tr td:first-child, [class^=pb_table].table-sm.table-collapse-lg.table-lg tbody tr td:last-child, [class^=pb_table].table-md.table-collapse-lg.table-lg tbody tr td:first-child, [class^=pb_table].table-md.table-collapse-lg.table-lg tbody tr td:last-child, [class^=pb_table].table-lg.table-collapse-lg.table-lg tbody tr td:first-child, [class^=pb_table].table-lg.table-collapse-lg.table-lg tbody tr td:last-child {
-      padding: 32px 8px !important; }
-  .hide-labels tbody tr td::before {
-    content: '';
-    left: 0;
-    padding-right: 0;
-    position: relative;
-    width: 0; } }
+      padding: 32px 8px !important; } }
 
-/*=====================================
-Base colors should not be documented.
-Only document color use.
-
-Colors -----------------------------*/
-/* Specialty Gradient -----------------*/
-/* Interface colors -------------------*/
-/* Main colors ------------------------*/
-/*=====================================
-
-Background colors ------------------*/
-/* Card colors ------------------*/
-/* Active colors ----------------------*/
-/* Hover colors -----------------------*/
-/* Focus colors -----------------------*/
-/* Border colors ----------------------*/
-/* Shadow colors ----------------------*/
-/* Text colors ------------------------*/
-/* Data colors ------------------------*/
-/* Status colors ----------------------*/
-/* Link colors ------------------------*/
-/* Product colors ---------------------*/
-/* Category colors ---------------------*/
 /*=====================================
 Base colors should not be documented.
 Only document color use.
@@ -18906,6 +18437,10 @@ Background colors ------------------*/
 [class^=pb_text_input_kit].error .text_input_wrapper input, [class^=pb_text_input_kit].error .text_input_wrapper .text_input {
   border-color: #FF2229; }
 
+[class^=pb_text_input_kit].inline .text_input_wrapper input::placeholder,
+[class^=pb_text_input_kit].inline .text_input_wrapper .text_input .placeholder {
+  opacity: 1; }
+
 [class^=pb_text_input_kit].inline:not(:hover) .text_input_wrapper input:not(:focus) {
   background-color: transparent;
   border-color: transparent; }
@@ -18999,29 +18534,6 @@ Background colors ------------------*/
 /* Headings */
 /* Standard Font Weights */
 /* Non_Standard Font Weights */
-/*=====================================
-Base colors should not be documented.
-Only document color use.
-
-Colors -----------------------------*/
-/* Specialty Gradient -----------------*/
-/* Interface colors -------------------*/
-/* Main colors ------------------------*/
-/*=====================================
-
-Background colors ------------------*/
-/* Card colors ------------------*/
-/* Active colors ----------------------*/
-/* Hover colors -----------------------*/
-/* Focus colors -----------------------*/
-/* Border colors ----------------------*/
-/* Shadow colors ----------------------*/
-/* Text colors ------------------------*/
-/* Data colors ------------------------*/
-/* Status colors ----------------------*/
-/* Link colors ------------------------*/
-/* Product colors ---------------------*/
-/* Category colors ---------------------*/
 /*=====================================
 Base colors should not be documented.
 Only document color use.
@@ -19201,6 +18713,10 @@ Background colors ------------------*/
     margin-top: 4px; }
   [class^=pb_textarea_kit].error textarea {
     border-color: #FF2229; }
+  [class^=pb_textarea_kit].inline textarea:not(:hover) {
+    border-color: transparent; }
+  [class^=pb_textarea_kit].inline textarea:focus {
+    border-color: #0056CF; }
   [class^=pb_textarea_kit] .pb_caption_kit_xs {
     text-align: right; }
 
@@ -20686,29 +20202,6 @@ Background colors ------------------*/
 /* Link colors ------------------------*/
 /* Product colors ---------------------*/
 /* Category colors ---------------------*/
-/*=====================================
-Base colors should not be documented.
-Only document color use.
-
-Colors -----------------------------*/
-/* Specialty Gradient -----------------*/
-/* Interface colors -------------------*/
-/* Main colors ------------------------*/
-/*=====================================
-
-Background colors ------------------*/
-/* Card colors ------------------*/
-/* Active colors ----------------------*/
-/* Hover colors -----------------------*/
-/* Focus colors -----------------------*/
-/* Border colors ----------------------*/
-/* Shadow colors ----------------------*/
-/* Text colors ------------------------*/
-/* Data colors ------------------------*/
-/* Status colors ----------------------*/
-/* Link colors ------------------------*/
-/* Product colors ---------------------*/
-/* Category colors ---------------------*/
 [class^=pb_typeahead_kit] .typeahead-kit-select__option {
   cursor: pointer; }
 
@@ -21158,29 +20651,6 @@ Background colors ------------------*/
       font-weight: 400;
       font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif; }
 
-/*=====================================
-Base colors should not be documented.
-Only document color use.
-
-Colors -----------------------------*/
-/* Specialty Gradient -----------------*/
-/* Interface colors -------------------*/
-/* Main colors ------------------------*/
-/*=====================================
-
-Background colors ------------------*/
-/* Card colors ------------------*/
-/* Active colors ----------------------*/
-/* Hover colors -----------------------*/
-/* Focus colors -----------------------*/
-/* Border colors ----------------------*/
-/* Shadow colors ----------------------*/
-/* Text colors ------------------------*/
-/* Data colors ------------------------*/
-/* Status colors ----------------------*/
-/* Link colors ------------------------*/
-/* Product colors ---------------------*/
-/* Category colors ---------------------*/
 /*=====================================
 Base colors should not be documented.
 Only document color use.

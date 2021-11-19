@@ -1,13 +1,14 @@
 PATH
   remote: ../playbook
   specs:
-    playbook_ui (10.6.0)
-      actionpack (>= 5.2.4.5, < 7.0)
-      actionview (>= 5.2.4.5, < 7.0)
-      activesupport (>= 5.2.4.5, < 7.0)
+    playbook_ui (10.14.0)
+      actionpack (>= 5.2.4.5)
+      actionview (>= 5.2.4.5)
+      activesupport (>= 5.2.4.5)
       react-rails (~> 2.6)
       redcarpet (~> 3.5)
       rouge (~> 3.15)
+      rubocop-performance (~> 1.9.2)
       view_component (~> 2.23)
       webpacker-react (~> 0.3.2)
 
@@ -92,7 +93,7 @@ GEM
     crass (1.0.6)
     erubi (1.10.0)
     execjs (2.8.1)
-    ffi (1.9.25)
+    ffi (1.15.4)
     globalid (0.4.2)
       activesupport (>= 4.2.0)
     health_check (3.0.0)
@@ -100,10 +101,9 @@ GEM
     i18n (1.8.10)
       concurrent-ruby (~> 1.0)
     io-like (0.3.1)
-    listen (3.1.5)
-      rb-fsevent (~> 0.9, >= 0.9.4)
-      rb-inotify (~> 0.9, >= 0.9.7)
-      ruby_dep (~> 1.2)
+    listen (3.7.0)
+      rb-fsevent (~> 0.10, >= 0.10.3)
+      rb-inotify (~> 0.9, >= 0.9.10)
     loofah (2.9.1)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
@@ -112,12 +112,12 @@ GEM
     marcel (1.0.1)
     method_source (1.0.0)
     mini_mime (1.1.0)
-    mini_portile2 (2.5.3)
+    mini_portile2 (2.6.1)
     minitest (5.14.4)
     msgpack (1.4.2)
     nio4r (2.5.7)
-    nokogiri (1.11.7)
-      mini_portile2 (~> 2.5.0)
+    nokogiri (1.12.5)
+      mini_portile2 (~> 2.6.1)
       racc (~> 1.4)
     parallel (1.20.1)
     parser (3.0.2.0)
@@ -157,7 +157,7 @@ GEM
       thor (>= 0.19.0, < 2.0)
     rainbow (3.0.0)
     rake (13.0.3)
-    rb-fsevent (0.10.4)
+    rb-fsevent (0.11.0)
     rb-inotify (0.10.1)
       ffi (~> 1.0)
     react-rails (2.6.1)
@@ -169,7 +169,7 @@ GEM
     redcarpet (3.5.1)
     regexp_parser (2.1.1)
     rexml (3.2.5)
-    rouge (3.26.0)
+    rouge (3.26.1)
     rubocop (0.93.1)
       parallel (~> 1.10)
       parser (>= 2.7.1.5)
@@ -181,8 +181,10 @@ GEM
       unicode-display_width (>= 1.4.0, < 2.0)
     rubocop-ast (1.8.0)
       parser (>= 3.0.1.1)
+    rubocop-performance (1.9.2)
+      rubocop (>= 0.90.0, < 2.0)
+      rubocop-ast (>= 0.4.0)
     ruby-progressbar (1.11.0)
-    ruby_dep (1.5.0)
     rubyzip (2.3.0)
     selenium-webdriver (3.142.7)
       childprocess (>= 0.5, < 4.0)
@@ -214,7 +216,7 @@ GEM
     tzinfo-data (1.2021.1)
       tzinfo (>= 1.0.0)
     unicode-display_width (1.7.0)
-    view_component (2.36.0)
+    view_component (2.42.0)
       activesupport (>= 5.0.0, < 8.0)
       method_source (~> 1.0)
     web-console (3.7.0)
@@ -244,7 +246,7 @@ DEPENDENCIES
   capybara (>= 2.15)
   chromedriver-helper
   health_check
-  listen (>= 3.0.5, < 3.6.1)
+  listen (>= 3.0.5, < 3.7.1)
   playbook_ui!
   puma (~> 5.3)
   rails (~> 5.2.4, >= 5.2.4.4)
@@ -261,4 +263,4 @@ RUBY VERSION
    ruby 2.6.6p146
 
 BUNDLED WITH
-   2.2.11
+   2.2.31

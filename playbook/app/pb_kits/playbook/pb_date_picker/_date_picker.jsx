@@ -27,6 +27,7 @@ type DatePickerProps = {
   hideIcon?: Boolean,
   hideLabel?: Boolean,
   id?: String,
+  inLine?: Boolean,
   inputAria?: object,
   inputData?: object,
   inputOnChange?: (String) => void,
@@ -59,6 +60,7 @@ const DatePicker = (props: DatePickerProps) => {
     hideIcon = false,
     hideLabel = false,
     id,
+    inLine = true,
     inputAria,
     inputData,
     inputOnChange,
@@ -92,6 +94,7 @@ const DatePicker = (props: DatePickerProps) => {
       disableWeekdays: disableWeekdays,
       format: format,
       hideIcon: hideIcon,
+      inLine: inLine,
       maxDate: maxDate,
       minDate: minDate,
       mode: mode,
@@ -137,6 +140,7 @@ const DatePicker = (props: DatePickerProps) => {
             placeholder={placeholder}
             value={inputValue}
         />
+
         <If condition={!hideIcon}>
           <div
               className={iconWrapperClass()}
@@ -148,6 +152,28 @@ const DatePicker = (props: DatePickerProps) => {
             />
           </div>
         </If>
+
+        <If condition={hideIcon && inLine}>
+          <div
+              className={iconWrapperClass()}
+              id={`${pickerId}-icon-plus`}
+          >
+            <Icon
+                className="date-picker-plus-icon"
+                icon="plus"
+            />
+          </div>
+          <div
+              className={iconWrapperClass()}
+              id={`${pickerId}-angle-down`}
+          >
+            <Icon
+                className="angle_down_icon"
+                icon="angle-down"
+            />
+          </div>
+        </If>
+
       </div>
     </div>
   )

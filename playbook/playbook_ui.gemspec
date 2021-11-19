@@ -24,24 +24,24 @@ Gem::Specification.new do |s|
     "lib/*.rb",
     "lib/playbook/**/*",
     "dist/reset.css"
-  ] + ["Rakefile", "README.md"]
+  ] + ["Rakefile"]
 
-  s.add_dependency "actionpack", ">= 5.2.4.5", "< 7.0"
-  s.add_dependency "actionview", ">= 5.2.4.5", "< 7.0"
-  s.add_dependency "activesupport", ">= 5.2.4.5", "< 7.0"
+  s.add_dependency "actionpack", ">= 5.2.4.5"
+  s.add_dependency "actionview", ">= 5.2.4.5"
+  s.add_dependency "activesupport", ">= 5.2.4.5"
   s.add_dependency "react-rails", "~> 2.6"
   s.add_dependency "redcarpet", "~> 3.5"
   s.add_dependency "rouge", "~> 3.15"
+  s.add_dependency "rubocop-performance", "~> 1.9.2"
   s.add_dependency "view_component", "~> 2.23"
   s.add_dependency "webpacker-react", "~> 0.3.2"
 
   s.add_development_dependency "byebug", "11.0.0"
   s.add_development_dependency "github_changelog_generator", "1.15.2"
-  s.add_development_dependency "overcommit", "0.49.0"
-  s.add_development_dependency "rails", ">= 5.2.4.5", "< 7.0"
+  s.add_development_dependency "rails", ">= 5.2.4.5"
   s.add_development_dependency "rspec-html-matchers", "0.9.1"
   s.add_development_dependency "rspec-rails", "~> 3.8", ">= 3.8.0"
-  s.add_development_dependency "rubocop", "0.81.0"
+  s.add_development_dependency "rubocop", "0.93.1"
   s.add_development_dependency "spring", "2.0.2"
   s.add_development_dependency "spring-watcher-listen", "2.0.1"
   s.add_development_dependency "tzinfo-data", "1.2018.9"

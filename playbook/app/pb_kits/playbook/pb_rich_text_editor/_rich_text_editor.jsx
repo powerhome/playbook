@@ -2,6 +2,7 @@
 
 import React, { useEffect, useRef } from 'react'
 import classnames from 'classnames'
+import inlineFocus from './inlineFocus'
 import useFocus from './useFocus'
 import { globalProps } from '../utilities/globalProps'
 import { buildAriaProps, buildDataProps } from '../utilities/props'
@@ -106,6 +107,27 @@ const RichTextEditor = (props: RichTextEditorProps) => {
     document.addEventListener('trix-blur', useFocus),
     useFocus())
     : null
+
+  document.addEventListener('trix-focus', inlineFocus)
+  document.addEventListener('trix-blur', inlineFocus)
+
+  const handleAnchorElementClick = (clickedElement) => {
+    const trixEditorContainer = clickedElement.closest('.pb_rich_text_editor_kit')
+    if (!trixEditorContainer) return
+
+    const anchorElement = clickedElement.closest('a')
+    if (!anchorElement) return
+
+    if (anchorElement.hasAttribute('href')) window.open(anchorElement.href)
+  }
+
+  const handleClick = (event) => {
+    handleAnchorElementClick(event.target)
+  }
+
+  useEffect(() => {
+    trixRef.current.addEventListener('click', handleClick)
+  }, [])
 
   const RichTextEditorClass = 'pb_rich_text_editor_kit'
   const SimpleClass = simple ? 'simple' : ''

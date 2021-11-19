@@ -11,6 +11,12 @@ module Playbook
                         default: false
       prop :closeable, type: Playbook::Props::Boolean,
                        default: false
+      prop :horizontal, type: Playbook::Props::Enum,
+                        values: [nil, "right", "left", "center"],
+                        default: nil
+      prop :vertical, type: Playbook::Props::Enum,
+                      values: [nil, "top", "bottom"],
+                      default: nil
 
       def show_text?
         text.present?
@@ -18,6 +24,10 @@ module Playbook
 
       def close_class
         closeable.present? ? " remove_toast" : ""
+      end
+
+      def position_class
+        horizontal && vertical ? " positioned_toast #{vertical} #{horizontal}" : ""
       end
 
       def multi_line_class
@@ -38,7 +48,7 @@ module Playbook
       end
 
       def classname
-        generate_classname("pb_fixed_confirmation_toast_kit", status, multi_line_class) + close_class
+        generate_classname("pb_fixed_confirmation_toast_kit", status, multi_line_class) + close_class + position_class
       end
     end
   end

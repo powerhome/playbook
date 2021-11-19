@@ -1,5 +1,156 @@
 
 
+## [10.14.0](https://github.com/powerhome/playbook/tree/10.14.0) (2021-11-12)
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/10.13.1...10.14.0)
+
+**Fixed Bugs:**
+
+- Add & operator to guard against nil [\#1639](https://github.com/powerhome/playbook/pull/1639) ([kellyeryan](https://github.com/kellyeryan))
+
+
+
+## [10.13.1](https://github.com/powerhome/playbook/tree/10.13.1) (2021-11-04)
+
+- No changes patched for NPM
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/10.13.0...10.13.1)
+
+**Merged pull requests:**
+
+- Removed Node version pinning [\#1638](https://github.com/powerhome/playbook/pull/1638) ([kre8sions](https://github.com/kre8sions))
+- Fixes a typo in the getting started readme [\#1633](https://github.com/powerhome/playbook/pull/1633) ([jasoncypret](https://github.com/jasoncypret))
+
+
+
+## [10.13.0](https://github.com/powerhome/playbook/tree/10.13.0) (2021-11-04)
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/10.13.0...10.13.0)
+
+**Merged pull requests:**
+
+- Removed Node version pinning [\#1638](https://github.com/powerhome/playbook/pull/1638) ([kre8sions](https://github.com/kre8sions))
+- Fixes a typo in the getting started readme [\#1633](https://github.com/powerhome/playbook/pull/1633) ([jasoncypret](https://github.com/jasoncypret))
+
+## [10.13.0](https://github.com/powerhome/playbook/tree/10.13.0) (2021-10-08)
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/10.12.0...10.13.0)
+
+
+
+## [10.12.0](https://github.com/powerhome/playbook/tree/10.12.0) (2021-10-08)
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/10.11.0...10.12.0)
+
+**Kit Enhancements:**
+
+- Added option for tooltips in progress\_steps [\#1627](https://github.com/powerhome/playbook/pull/1627) ([nehaabraham](https://github.com/nehaabraham))
+- Playbook - Issue - Position Fixed Confirmation Toast Kit: Add new props [\#1626](https://github.com/powerhome/playbook/pull/1626) ([dfmedeiros](https://github.com/dfmedeiros))
+
+**Fixed Bugs:**
+
+- Display a date's past year in the React Timestamp kit [\#1628](https://github.com/powerhome/playbook/pull/1628) ([stevelandwehr](https://github.com/stevelandwehr))
+
+**Merged pull requests:**
+
+- Update dependency @actions/core to v1.6.0 [\#1623](https://github.com/powerhome/playbook/pull/1623) ([renovate[bot]](https://github.com/apps/renovate))
+- Bump nokogiri from 1.12.3 to 1.12.5 in /playbook [\#1621](https://github.com/powerhome/playbook/pull/1621) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump nokogiri from 1.11.7 to 1.12.5 in /playbook-website [\#1620](https://github.com/powerhome/playbook/pull/1620) ([dependabot[bot]](https://github.com/apps/dependabot))
+
+
+
+## [10.11.0](https://github.com/powerhome/playbook/tree/10.11.0) (2021-10-01)
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/10.10.0...10.11.0)
+
+**Kit Enhancements:**
+
+- Update placeholder text color [\#1624](https://github.com/powerhome/playbook/pull/1624) ([derricklannaman](https://github.com/derricklannaman))
+
+**Merged pull requests:**
+
+- Update image to fix certificate issue [\#1625](https://github.com/powerhome/playbook/pull/1625) ([codemonium](https://github.com/codemonium))
+
+## [10.10.0](https://github.com/powerhome/playbook/tree/10.10.0) (2021-09-23)
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/10.9.0...10.10.0)
+
+**Merged pull requests:**
+
+- Clean up unused Table Styles [\#1609](https://github.com/powerhome/playbook/pull/1609)([jasoncypret](https://github.com/jasoncypret))
+- Flexible dependencies for clients [#\1615](https://github.com/powerhome/playbook/pull/1615)([jasoncypret](https://github.com/jasoncypret))
+
+
+
+## [10.9.0](https://github.com/powerhome/playbook/tree/10.9.0) (2021-09-20)
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/10.8.0...10.9.0)
+
+**Merged pull requests:**
+
+- Update dependency @types/react to v17.0.21 [\#1610](https://github.com/powerhome/playbook/pull/1610) ([renovate[bot]](https://github.com/apps/renovate))
+- Update dependency es5-shim to v4.6.2 [\#1607](https://github.com/powerhome/playbook/pull/1607) ([renovate[bot]](https://github.com/apps/renovate))
+- Pin dependencies [\#1600](https://github.com/powerhome/playbook/pull/1600) ([renovate[bot]](https://github.com/apps/renovate))
+- Update dependency axe-core to v4.3.3 [\#1594](https://github.com/powerhome/playbook/pull/1594) ([renovate[bot]](https://github.com/apps/renovate))
+- Update dependency @actions/core to v1.5.0 [\#1589](https://github.com/powerhome/playbook/pull/1589) ([renovate[bot]](https://github.com/apps/renovate))
+- Update jwalton/gh-find-current-pr action to v1.2.0 [\#1588](https://github.com/powerhome/playbook/pull/1588) ([renovate[bot]](https://github.com/apps/renovate))
+- Update dependency listen to "\>= 3.0.5", "\< 3.7.1" [\#1587](https://github.com/powerhome/playbook/pull/1587) ([renovate[bot]](https://github.com/apps/renovate))
+- Update dependency flow-bin to v0.160.0 [\#1586](https://github.com/powerhome/playbook/pull/1586) ([renovate[bot]](https://github.com/apps/renovate))
+
+
+
+## [10.8.0](https://github.com/powerhome/playbook/tree/10.8.0) (2021-09-09)
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/10.7.1...10.8.0)
+
+**Kit Enhancements:**
+
+- Inline text area [\#1611](https://github.com/powerhome/playbook/pull/1611) ([idanzonshein](https://github.com/idanzonshein))
+
+**Improvements:**
+
+- Added sort change example to the docs [\#1608](https://github.com/powerhome/playbook/pull/1608) ([jasoncypret](https://github.com/jasoncypret))
+- Use recent deployer image [\#1614](https://github.com/powerhome/playbook/pull/1614) ([benlangfeld](https://github.com/benlangfeld))
+- Remove overcommit references from playbook [\#1604](https://github.com/powerhome/playbook/pull/1604) ([xjunior](https://github.com/xjunior))
+
+
+
+## [10.7.1](https://github.com/powerhome/playbook/tree/10.7.1) (2021-08-27)
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/10.7.0...10.7.1)
+
+**Improvements:**
+
+- Update Dialog id prop [\#1603](https://github.com/powerhome/playbook/pull/1603) ([kre8sions](https://github.com/kre8sions))
+
+**Merged pull requests:**
+
+- Move typescript deps to dev\_dependencies [\#1599](https://github.com/powerhome/playbook/pull/1599) ([thestephenmarshall](https://github.com/thestephenmarshall))
+
+## [10.7.0](https://github.com/powerhome/playbook/tree/10.7.0) (2021-08-26)
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/10.6.1-alpha1...10.7.0)
+
+**Kit Enhancements:**
+
+- Create inline date picker [\#1592](https://github.com/powerhome/playbook/pull/1592) ([derricklannaman](https://github.com/derricklannaman))
+- Fix React Rich Text Editor to better support inline version [\#1591](https://github.com/powerhome/playbook/pull/1591) ([stevelandwehr](https://github.com/stevelandwehr))
+
+**Fixed Bugs:**
+
+- Fix clicking on formatted links in Rich Text Editor [\#1598](https://github.com/powerhome/playbook/pull/1598) ([stevelandwehr](https://github.com/stevelandwehr))
+
+**Merged pull requests:**
+
+- Add Typescript Deps [\#1590](https://github.com/powerhome/playbook/pull/1590) ([thestephenmarshall](https://github.com/thestephenmarshall))
+- Use bundler 2.2.25 and rails \< 6.0 [\#1585](https://github.com/powerhome/playbook/pull/1585) ([thestephenmarshall](https://github.com/thestephenmarshall))
+
+## [10.6.1-alpha1](https://github.com/powerhome/playbook/tree/10.6.1-alpha1) (2021-08-18)
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/10.6.0...10.6.1-alpha1)
+
+
+
 ## [10.6.0](https://github.com/powerhome/playbook/tree/10.6.0) (2021-08-17)
 
 [Full Changelog](https://github.com/powerhome/playbook/compare/10.5.0...10.6.0)
@@ -1882,9 +2033,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Removed (breaking changes)
 - React PbLayout prop `children` dropped support for single Node (https://github.com/powerhome/playbook/commit/b16da50914e110c75c6d96c985fa02781c9e2040#diff-c3ce2c91288ca3e730d3c56e7f73475cL11-L14)
 - Rails PbLayout prop `dark` dropped (https://github.com/powerhome/playbook/commit/b16da50914e110c75c6d96c985fa02781c9e2040#diff-377fda563d148f7b3ad33f904b7b0cdbL13)
-
-
-\* *This Changelog was automatically generated by [github_changelog_generator](https://github.com/github-changelog-generator/github-changelog-generator)*
 
 
 \* *This Changelog was automatically generated by [github_changelog_generator](https://github.com/github-changelog-generator/github-changelog-generator)*

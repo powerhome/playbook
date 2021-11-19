@@ -1,7 +1,11 @@
-FROM quay.io/powerhome/passenger-customizable:0.9.35
+FROM phusion/passenger-customizable:1.0.19
 ARG precompileassets
 
-RUN bash -lc 'rvm remove all --force && rvm install ruby-2.6.6 && rvm --default use ruby-2.6.6 && gem install bundler -v 2.2.11'
+RUN mv /etc/apt/sources.list.d /etc/apt/sources.list.d.bak && \
+    apt update && apt install -y ca-certificates && \
+    mv /etc/apt/sources.list.d.bak /etc/apt/sources.list.d
+
+RUN bash -lc 'rvm remove all --force && rvm install ruby-2.6.6 && rvm --default use ruby-2.6.6 && gem install bundler -v 2.2.31'
 RUN /pd_build/ruby_support/install_ruby_utils.sh
 RUN /pd_build/ruby_support/finalize.sh
 
@@ -20,7 +24,7 @@ RUN curl -o- https://raw.githubusercontent.com/creationix/nvm/$NVM_VERSION/insta
     && npm install -g npm@$NPM_VERSION yarn@$YARN_VERSION
 
 RUN apt-get update -y \
-    && apt-get install -y shared-mime-info=1.5-2ubuntu0.2\
+    && apt-get install -y shared-mime-info=1.15-1\
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
