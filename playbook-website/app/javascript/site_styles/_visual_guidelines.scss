@@ -46,6 +46,10 @@
     .nine { margin-left: 400px; }
     .ten { margin-left: 450px; }
   }
+
+  .border-bottom {
+    border-radius: 0 0 6px 6px;
+  }
 }
 
 .card-tightest {
@@ -110,8 +114,4 @@
   margin: 0;
   line-height: 2.0;
   font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif;
-}
-
-.border-bottom {
-  border-radius: 0 0 6px 6px;
 }
