@@ -1,15 +1,12 @@
 @import "../tokens/colors";
 
-$additional_colors: (
+$background_colors: (
   "gradient": linear-gradient(135deg, $gradient_start 0%, $gradient_end 100%),
   "dark": $bg_dark,
   "light": $bg_light,
   "white": $white,
 );
 
-$merge_kits1: map-merge($status_colors, $category_colors);
-$merge_kits2: map-merge($merge_kits1, $product_colors);
-$background_colors: map-merge($additional_colors, $merge_kits2);
 
 [class^=pb_background_kit] {
   max-width: 100%;

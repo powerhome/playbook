@@ -5,13 +5,9 @@ examples:
   - background_white: White
   - background_gradient: Gradient
   - background_image: Image
-  - background_status: Status
-  - background_category: Category
 
   react:
   - background_light: Light
   - background_white: White
   - background_gradient: Gradient
   - background_image: Image
-  - background_status: Status
-  - background_category: Category
