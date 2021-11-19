@@ -1,0 +1,37 @@
+<div class="p_sm">
+<%= pb_rails("caption", props: { text: "Visual Guide", padding_top: "sm" }) %>
+<br>
+
+<% if defined?(usage) && usage.present? %>
+  <%= pb_rails("body", props: {"tag": "p"}) do %>
+    usage
+ <% end %>
+<% end %>
+ 
+<%= pb_rails("background", props: { background_color: "gradient", padding: "xs", max_width: "xl" }) do %> 
+<%= pb_rails("title", props: { text: "XL", size: 4, classname: "dark" }) %>
+
+<% end %>
+
+<br>
+
+<%= pb_rails("background", props: { background_color: "gradient", padding: "xs", max_width: "lg" }) do %> 
+<%= pb_rails("title", props: { text: "LG", size: 4, classname: "dark" }) %>
+
+<% end %>
+
+<br>
+
+<%= pb_rails("background", props: { background_color: "gradient", padding: "xs", max_width: "md" }) do %> 
+<%= pb_rails("title", props: { text: "MD", size: 4, classname: "dark" }) %>
+
+<% end %>
+
+<br>
+
+<%= pb_rails("background", props: { background_color: "gradient", padding: "xs", max_width: "sm" }) do %> 
+<%= pb_rails("title", props: { text: "SM", size: 4, classname: "dark" }) %>
+
+<% end %>
+
+</div>

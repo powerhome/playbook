@@ -1,6 +1,7 @@
 examples:
   rails:
   - card_light: Default
+  - card_background: Card Backgrounds
   - card_highlight: Highlight Cards
   - card_header: Header Cards
   - card_selected: Selected
@@ -13,6 +14,7 @@ examples:
   - card_border_radius: Border Radius
   react:
   - card_light: Default
+  - card_background: Card Backgrounds
   - card_highlight: Highlight Cards
   - card_header: Header Cards
   - card_selected: Selected
