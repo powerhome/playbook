@@ -10,10 +10,6 @@ Playbook is the first design system built for both Rails & React interfaces. Ins
 ### Requirements
 
 - [asdf](https://github.com/asdf-vm/asdf)
-- Install language tools: `asdf install`
-- `asdf plugin add ruby`
-- `asdf plugin add yarn`
-- `asdf plugin add nodejs`
 
 ### Getting Started and Running Playbook for Development
 
@@ -23,15 +19,12 @@ Playbook is the first design system built for both Rails & React interfaces. Ins
     │   playbook
     │   playbook-website
     ```
-2. From the top-level playbook folder run: `yarn install && yarn prepare`
-4. cd into the playbook-website folder: `cd playbook-website`
-5. From the playbook-website folder run: `bundle install`
-6. From the playbook folder run: `bundle install`
-    **note:** If you receive a bundle(r) related error, be sure that bundler is installed first. See the BUNDLED WITH section of `playbook-website/Gemfile.lock` for the exact version to install.
-7. For example, if the version from above is `2.2.11` then you would run `gem install bundler -v 2.2.11` then proceed with `bundle install` afterwards.
-7. cd back into the top-level playbook folder: `cd ..`
-8. From the top-level playbook folder run `yarn start-dev` This may take a little while.
-9. Once it says "compiled successfully", navigate to [http://localhost:3000](http://localhost:3000) and you should see the playbook website.
+1. Ensure your installed version of `bundler` is the same as the `BUNDLED WITH` section found in [Gemfile.lock](./Gemfile.lock). You can check the version you have by running `bundle -v`.
+
+1. From the root directory, run `./setup.sh`
+
+1. From the top-level playbook folder run `yarn start-dev` This may take a little while.
+1. Once you see the "compiled successfully" message in your terminal, navigate to [http://localhost:3000](http://localhost:3000) and you should see the playbook website.
 
 ### Running Library Tests
 
