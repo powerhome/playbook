@@ -3,7 +3,7 @@
 import React from 'react'
 import classnames from 'classnames'
 import { buildCss, buildDataProps } from '../utilities/props'
-import { globalProps } from '../utilities/globalProps.js'
+import { deprecatedProps, globalProps } from '../utilities/globalProps.js'
 type FlexProps = {
   children: array<React.ReactNode> | React.ReactNode,
   className?: string,
@@ -69,9 +69,10 @@ const Flex = (props: FlexProps) => {
           spacingClass,
           gapClass,
           rowGapClass,
-          columnGapClass
+          columnGapClass,
         ),
         globalProps(props),
+        deprecatedProps('Flex', ['horizontal', 'vertical', 'spacing']),
         className
       )}
         {...dataProps}

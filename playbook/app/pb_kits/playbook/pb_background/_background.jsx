@@ -7,7 +7,7 @@ import { globalProps } from '../utilities/globalProps.js'
 
 type BackgroundProps = {
   aria?: object,
-  backgroundColor?: 'gradient' | 'dark' | 'light' | 'white',
+  backgroundColor?: 'gradient' | 'dark' | 'light' | 'white' | 'success' | 'warning' | 'error' | 'info' | 'neutral' | 'primary' | 'category_1' | 'category_2' | 'category_3' | 'category_4' | 'category_5' | 'category_6' | 'category_7' | 'category_8' | 'category_9' | 'category_10' | 'category_11' | 'category_12' | 'category_13' | 'category_14' | 'category_15' | 'category_16' | 'category_17' | 'category_18' | 'category_19' | 'category_20' | 'category_21',
   children?: array<React.ReactNode> | React.ReactNode,
   className?: string,
   data?: object,
@@ -31,6 +31,7 @@ const Background = (props: BackgroundProps) => {
 
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
+
   const classes = classnames(buildCss('pb_background_kit'), globalProps(props), `pb_background_color_${backgroundColor}`, className)
   const Tag = `${tag}`
   const backgroundStyle = {
@@ -42,19 +43,19 @@ const Background = (props: BackgroundProps) => {
     <>
       <If condition={imageUrl}>
         <Tag
-            className={classes + 'lazyload blur_up'}
             style={backgroundStyle}
             {...ariaProps}
             {...dataProps}
+            className={classes}
             id={id}
         >
           { children }
         </Tag>
         <Else />
         <Tag
-            className={classes}
             {...ariaProps}
             {...dataProps}
+            className={classes}
             id={id}
         >
           { children }
