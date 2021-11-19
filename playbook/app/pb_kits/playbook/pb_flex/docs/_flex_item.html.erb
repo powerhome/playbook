@@ -47,3 +47,16 @@
     <%= pb_rails("flex/flex_item", props: {flex: "2"}) do %>4<% end %>
   <% end %>
 </div>
+
+<br/><br/>
+
+<%= pb_rails("title", props: {size: 4, text: "Order"}) %>
+<br/>
+<div class="flex-doc-example">
+  <%= pb_rails("flex", props: { gap: "sm"}) do %>
+    <%= pb_rails("flex/flex_item", props: {order: "4"}) do %>1<% end %>
+    <%= pb_rails("flex/flex_item", props: {order: "2"}) do %>2<% end %>
+    <%= pb_rails("flex/flex_item", props: {order: "1"}) do %>3<% end %>
+    <%= pb_rails("flex/flex_item", props: {order: "3"}) do %>4<% end %>
+  <% end %>
+</div>
