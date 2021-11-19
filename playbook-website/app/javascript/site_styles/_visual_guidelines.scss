@@ -1,8 +1,12 @@
 @import "playbook-ui/dist/tokens/spacing";
 @import "playbook-ui/dist/tokens/screen_sizes";
 @import "playbook-ui/dist/tokens/line_height";
+@import "playbook-ui/dist/tokens/colors";
+
 
 .visual_guidelines {
+  @import "border_radius_guidelines";
+
   .header-text {
     max-width: 600px;
     margin: auto;
@@ -106,4 +110,8 @@
   margin: 0;
   line-height: 2.0;
   font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif;
+}
+
+.border-bottom {
+  border-radius: 0 0 6px 6px;
 }
