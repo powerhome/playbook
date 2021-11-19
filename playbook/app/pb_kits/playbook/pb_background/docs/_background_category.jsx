@@ -1,6 +1,6 @@
 import React from 'react'
 import { Background } from '../..'
-import { Flex } from 'playbook-ui'
+import { Flex } from '../..'
 
 const BackgroundCategory = (props) => (
   <Flex
