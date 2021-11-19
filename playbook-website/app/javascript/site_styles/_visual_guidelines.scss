@@ -7,20 +7,24 @@
     max-width: 600px;
     margin: auto;
   }
+
   &_hero {
     padding: $space_xl * 1.75 !important;
   }
+
   .token-wrapper {
     max-width: 1242px;
     margin: auto;
   }
-  @include break_at(breakpoint("sm")){
+
+  @include break_at(breakpoint("sm")) {
     .visual_guidelines_hero {
       padding: $space_xl !important;
     }
   }
+
   .positioning-guideline {
-    & > * {
+    &>* {
       height: 100px;
       width: 33%;
       position: absolute;
@@ -32,59 +36,96 @@
       }
     }
 
-    .two { margin-left: 50px; }
-    .three { margin-left: 100px; }
-    .four { margin-left: 150px; }
-    .five { margin-left: 200px; }
-    .six { margin-left: 250px; }
-    .seven { margin-left: 300px; }
-    .eight { margin-left: 350px; }
-    .nine { margin-left: 400px; }
-    .ten { margin-left: 450px; }
+    .two {
+      margin-left: 50px;
+    }
+
+    .three {
+      margin-left: 100px;
+    }
+
+    .four {
+      margin-left: 150px;
+    }
+
+    .five {
+      margin-left: 200px;
+    }
+
+    .six {
+      margin-left: 250px;
+    }
+
+    .seven {
+      margin-left: 300px;
+    }
+
+    .eight {
+      margin-left: 350px;
+    }
+
+    .nine {
+      margin-left: 400px;
+    }
+
+    .ten {
+      margin-left: 450px;
+    }
   }
- ul {
-   
-  &.opacity-play {
-  list-style: none;
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  margin: none;
-  background: none;
-  border-radius: none;
-  border: 0px;
-  padding: none;
-  flex-wrap: wrap;
+
+  ul {
+
+    &.opacity-removing-utilities {
+      list-style: none;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      margin: none;
+      background: none;
+      border-radius: none;
+      border: 0px;
+      padding: none;
+      flex-wrap: wrap;
+    }
   }
-}
-  .opacity_1{
+
+  .opacity_1 {
     opacity: .1;
   }
-  .opacity_2{
+
+  .opacity_2 {
     opacity: .2;
   }
-  .opacity_3{
+
+  .opacity_3 {
     opacity: .3;
   }
-  .opacity_4{
+
+  .opacity_4 {
     opacity: .4;
   }
-  .opacity_5{
+
+  .opacity_5 {
     opacity: .5;
   }
-  .opacity_6{
+
+  .opacity_6 {
     opacity: .6;
   }
-  .opacity_7{
+
+  .opacity_7 {
     opacity: .7;
   }
-  .opacity_8{
+
+  .opacity_8 {
     opacity: .8;
   }
-  .opacity_9{
+
+  .opacity_9 {
     opacity: .9;
   }
-  .opacity_10{
+
+  .opacity_10 {
     opacity: 1;
   }
 }
