@@ -76,6 +76,7 @@ class PagesController < ApplicationController
 
   def visual_guidelines
     @max_width_code_example = Rails.root.join("app/views/pages/code_snippets/width_jsx.txt").read
+    @number_spacing_code_example = Rails.root.join("app/views/pages/code_snippets/number_spacing_jsx.txt").read
   end
 
 private
