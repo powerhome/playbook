@@ -1,6 +1,7 @@
 @import "playbook-ui/dist/tokens/spacing";
 @import "playbook-ui/dist/tokens/screen_sizes";
 @import "playbook-ui/dist/tokens/opacity";
+@import "./opacity_guidelines"
 
 .visual_guidelines {
   .header-text {
@@ -73,59 +74,59 @@
     }
   }
 
-  ul.opacity-removing-utilities {
+//   ul.opacity-removing-utilities {
 
-    &.opacity-removing-utilities {
-      list-style: none;
-      display: flex;
-      justify-content: flex-start;
-      align-items: center;
-      margin: none;
-      background: none;
-      border-radius: none;
-      border: 0px;
-      padding: none;
-      flex-wrap: wrap;
-    }
-  }
+   
+//       list-style: none;
+//       display: flex;
+//       justify-content: flex-start;
+//       align-items: center;
+//       margin: none;
+//       background: none;
+//       border-radius: none;
+//       border: 0px;
+//       padding: none;
+//       flex-wrap: wrap;
+    
+//   }
 
-  .opacity_1 {
-    opacity: .1;
-  }
+//   .opacity_1 {
+//     opacity: .1;
+//   }
 
-  .opacity_2 {
-    opacity: .2;
-  }
+//   .opacity_2 {
+//     opacity: .2;
+//   }
 
-  .opacity_3 {
-    opacity: .3;
-  }
+//   .opacity_3 {
+//     opacity: .3;
+//   }
 
-  .opacity_4 {
-    opacity: .4;
-  }
+//   .opacity_4 {
+//     opacity: .4;
+//   }
 
-  .opacity_5 {
-    opacity: .5;
-  }
+//   .opacity_5 {
+//     opacity: .5;
+//   }
 
-  .opacity_6 {
-    opacity: .6;
-  }
+//   .opacity_6 {
+//     opacity: .6;
+//   }
 
-  .opacity_7 {
-    opacity: .7;
-  }
+//   .opacity_7 {
+//     opacity: .7;
+//   }
 
-  .opacity_8 {
-    opacity: .8;
-  }
+//   .opacity_8 {
+//     opacity: .8;
+//   }
 
-  .opacity_9 {
-    opacity: .9;
-  }
+//   .opacity_9 {
+//     opacity: .9;
+//   }
 
-  .opacity_10 {
-    opacity: 1;
-  }
+//   .opacity_10 {
+//     opacity: 1;
+//   }
 }

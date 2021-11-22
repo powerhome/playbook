@@ -1,6 +1,4 @@
-ul.opacity-removing-utilities {
-
-  &.opacity-removing-utilities {
+ul.opacity-removing-utilities {  
     list-style: none;
     display: flex;
     justify-content: flex-start;
@@ -11,7 +9,7 @@ ul.opacity-removing-utilities {
     border: 0px;
     padding: none;
     flex-wrap: wrap;
-  }
+  
 }
   .opacity_1 {
     opacity: $opacity_1;
