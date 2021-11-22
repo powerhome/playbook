@@ -2,8 +2,12 @@
 @import "playbook-ui/dist/tokens/screen_sizes";
 @import "playbook-ui/dist/tokens/opacity";
 @import "opacity_guidelines";
+@import "playbook-ui/dist/tokens/colors";
+
 
 .visual_guidelines {
+  @import "border_radius_guidelines";
+
   .header-text {
     max-width: 600px;
     margin: auto;
@@ -12,7 +16,7 @@
   &_hero {
     padding: $space_xl * 1.75 !important;
   }
-
+ 
   .token-wrapper {
     max-width: 1242px;
     margin: auto;
@@ -72,5 +76,8 @@
     .ten {
       margin-left: 450px;
     }
+  }
+  .border-bottom {
+    border-radius: 0 0 6px 6px;
   }
 }
