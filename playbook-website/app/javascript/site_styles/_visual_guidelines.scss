@@ -29,7 +29,7 @@
   }
 
   .positioning-guideline {
-    &>* {
+    & > * {
       height: 100px;
       width: 33%;
       position: absolute;
