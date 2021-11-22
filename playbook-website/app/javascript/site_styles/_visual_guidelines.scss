@@ -6,6 +6,7 @@
   // Example Sections
   @import "visual_guidelines/typography_guidelines";
   @import "visual_guidelines/border_radius_guidelines";
+  @import "visual_guidelines/spacing_tokens";
 
   &_hero {
     padding: $space_xl * 1.75 !important;

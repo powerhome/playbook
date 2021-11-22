@@ -1,55 +1,43 @@
 @import "playbook-ui/dist/tokens/border_radius";
 
-#border_radius_container {
-  text-align: center;
-}
-
-#border_radius_rounded {
-  border: $border_light 1px solid;
-  height: 100px;
-  width: 100px;
-  border-radius: $border_radius_rounded;
-}
-
-#border_radius_xl {
-  border: $border_light 1px solid;
-  height: 100px;
-  width: 100px;
-  border-radius: $border_radius_xl;
-}
-
-#border_radius_lg {
-  border: $border_light 1px solid;
-  height: 100px;
-  width: 100px;
-  border-radius: $border_radius_lg;
-}
-
-#border_radius_md {
-  border: $border_light 1px solid;
-  height: 100px;
-  width: 100px;
-  border-radius: $border_radius_md;
-}
-
-#border_radius_sm {
-  border: $border_light 1px solid;
-  height: 100px;
-  width: 100px;
-  border-radius: $border_radius_sm;
-}
-
-#border_radius_xs {
-  border: $border_light 1px solid;
-  height: 100px;
-  width: 100px;
-  margin: 20px 15px 15px;
-  border-radius: $border_radius_xs;
-}
-
-#border_radius_none {
-  border: $border_light 1px solid;
-  height: 100px;
-  width: 100px;
-  border-radius: $border_radius_none;
+.border_radius {
+  @mixin border-example {
+    border: $border_light 1px solid;
+    height: 100px;
+    width: 100px;
+    margin: auto;
+  }
+  &_container {
+    text-align: center;
+    flex: 1;
+    margin-bottom: $space_xs;
+  }
+  &_rounded {
+    @include border-example;
+    border-radius: $border_radius_rounded;
+  }
+  &_xl {
+    @include border-example;
+    border-radius: $border_radius_xl;
+  }
+  &_lg {
+    @include border-example;
+    border-radius: $border_radius_lg;
+  }
+  &_md {
+    @include border-example;
+    border-radius: $border_radius_md;
+  }
+  &_sm {
+    @include border-example;
+    border-radius: $border_radius_sm;
+  }
+  &_xs {
+    @include border-example;
+    border-radius: $border_radius_xs;
+  }
+  &_none {
+    @include border-example;
+    border-radius: $border_radius_none;
+  }
 }
