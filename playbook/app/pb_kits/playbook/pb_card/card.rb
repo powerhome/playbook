@@ -59,7 +59,7 @@ module Playbook
       end
 
       def background_class
-        background != "white" ? "background_#{background}" : nil
+        background.present? ? "background_#{background}" : "background_white"
       end
 
       def border_class
