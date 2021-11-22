@@ -1062,25 +1062,27 @@ Background colors ------------------*/
   transition-duration: 0.15s;
   transition-timing-function: cubic-bezier(0.42, 0, 1, 1); }
   [class^=pb_card_kit][class*=background_windows] {
-    background: #0056CF; }
+    background-color: #0056CF; }
   [class^=pb_card_kit][class*=background_siding] {
-    background: #F9BB00; }
+    background-color: #F9BB00; }
   [class^=pb_card_kit][class*=background_doors] {
-    background: #00C4D7; }
+    background-color: #00C4D7; }
   [class^=pb_card_kit][class*=background_solar] {
-    background: #00CA74; }
+    background-color: #00CA74; }
   [class^=pb_card_kit][class*=background_roofing] {
-    background: #C1CDD6; }
+    background-color: #C1CDD6; }
   [class^=pb_card_kit][class*=background_gutters] {
-    background: #9E64E9; }
+    background-color: #9E64E9; }
   [class^=pb_card_kit][class*=background_insulation] {
-    background: #FF2229; }
+    background-color: #FF2229; }
   [class^=pb_card_kit][class*=background_dark] {
-    background: #0a0527; }
+    background-color: #0a0527; }
   [class^=pb_card_kit][class*=background_light] {
-    background: #F3F7FB; }
+    background-color: #F3F7FB; }
   [class^=pb_card_kit][class*=background_white] {
-    background: #FFFFFF; }
+    background-color: #FFFFFF; }
+  [class^=pb_card_kit][class*=background_none] {
+    background-color: none; }
   [class^=pb_card_kit][class*=_shadow_none] {
     box-shadow: 0 0 0 0 transparent; }
   [class^=pb_card_kit][class*=_shadow_deep] {
@@ -1134,27 +1136,31 @@ Background colors ------------------*/
     border-radius: 6px;
     transition-property: all;
     transition-duration: 0.15s;
-    transition-timing-function: cubic-bezier(0.42, 0, 1, 1); }
+    transition-timing-function: cubic-bezier(0.42, 0, 1, 1);
+    background-color: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.1); }
     [class^=pb_card_kit].dark[class*=background_windows] {
-      background: #0056CF; }
+      background-color: #0056CF; }
     [class^=pb_card_kit].dark[class*=background_siding] {
-      background: #F9BB00; }
+      background-color: #F9BB00; }
     [class^=pb_card_kit].dark[class*=background_doors] {
-      background: #00C4D7; }
+      background-color: #00C4D7; }
     [class^=pb_card_kit].dark[class*=background_solar] {
-      background: #00CA74; }
+      background-color: #00CA74; }
     [class^=pb_card_kit].dark[class*=background_roofing] {
-      background: #C1CDD6; }
+      background-color: #C1CDD6; }
     [class^=pb_card_kit].dark[class*=background_gutters] {
-      background: #9E64E9; }
+      background-color: #9E64E9; }
     [class^=pb_card_kit].dark[class*=background_insulation] {
-      background: #FF2229; }
+      background-color: #FF2229; }
     [class^=pb_card_kit].dark[class*=background_dark] {
-      background: #0a0527; }
+      background-color: #0a0527; }
     [class^=pb_card_kit].dark[class*=background_light] {
-      background: #F3F7FB; }
+      background-color: #F3F7FB; }
     [class^=pb_card_kit].dark[class*=background_white] {
-      background: #FFFFFF; }
+      background-color: #FFFFFF; }
+    [class^=pb_card_kit].dark[class*=background_none] {
+      background-color: none; }
     [class^=pb_card_kit].dark[class*=_shadow_none] {
       box-shadow: 0 0 0 0 transparent; }
     [class^=pb_card_kit].dark[class*=_shadow_deep] {
@@ -5788,9 +5794,9 @@ Background colors ------------------*/
   outline: none;
   animation-timing-function: cubic-bezier(0.86, 0, 0.07, 1); }
   .pb_dialog[class*=background_bg_light] {
-    background: #F3F7FB; }
+    background-color: #F3F7FB; }
   .pb_dialog[class*=background_bg_dark] {
-    background: #0a0527; }
+    background-color: #0a0527; }
   .pb_dialog[class*=_shadow_none] {
     box-shadow: 0 0 0 0 transparent; }
   .pb_dialog[class*=_shadow_deep] {
@@ -13603,9 +13609,9 @@ Background colors ------------------*/
   border: 0;
   box-shadow: 0 12px 28px 0 rgba(60, 106, 172, 0.18); }
   .pb_popover_body[class*=background_bg_light] {
-    background: #F3F7FB; }
+    background-color: #F3F7FB; }
   .pb_popover_body[class*=background_bg_dark] {
-    background: #0a0527; }
+    background-color: #0a0527; }
   .pb_popover_body[class*=_shadow_none] {
     box-shadow: 0 0 0 0 transparent; }
   .pb_popover_body[class*=_shadow_deep] {
@@ -15705,25 +15711,27 @@ Background colors ------------------*/
   transition-duration: 0.15s;
   transition-timing-function: cubic-bezier(0.42, 0, 1, 1); }
   [class^=pb_card_kit][class*=background_windows] {
-    background: #0056CF; }
+    background-color: #0056CF; }
   [class^=pb_card_kit][class*=background_siding] {
-    background: #F9BB00; }
+    background-color: #F9BB00; }
   [class^=pb_card_kit][class*=background_doors] {
-    background: #00C4D7; }
+    background-color: #00C4D7; }
   [class^=pb_card_kit][class*=background_solar] {
-    background: #00CA74; }
+    background-color: #00CA74; }
   [class^=pb_card_kit][class*=background_roofing] {
-    background: #C1CDD6; }
+    background-color: #C1CDD6; }
   [class^=pb_card_kit][class*=background_gutters] {
-    background: #9E64E9; }
+    background-color: #9E64E9; }
   [class^=pb_card_kit][class*=background_insulation] {
-    background: #FF2229; }
+    background-color: #FF2229; }
   [class^=pb_card_kit][class*=background_dark] {
-    background: #0a0527; }
+    background-color: #0a0527; }
   [class^=pb_card_kit][class*=background_light] {
-    background: #F3F7FB; }
+    background-color: #F3F7FB; }
   [class^=pb_card_kit][class*=background_white] {
-    background: #FFFFFF; }
+    background-color: #FFFFFF; }
+  [class^=pb_card_kit][class*=background_none] {
+    background-color: none; }
   [class^=pb_card_kit][class*=_shadow_none] {
     box-shadow: 0 0 0 0 transparent; }
   [class^=pb_card_kit][class*=_shadow_deep] {
@@ -15777,27 +15785,31 @@ Background colors ------------------*/
     border-radius: 6px;
     transition-property: all;
     transition-duration: 0.15s;
-    transition-timing-function: cubic-bezier(0.42, 0, 1, 1); }
+    transition-timing-function: cubic-bezier(0.42, 0, 1, 1);
+    background-color: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.1); }
     [class^=pb_card_kit].dark[class*=background_windows] {
-      background: #0056CF; }
+      background-color: #0056CF; }
     [class^=pb_card_kit].dark[class*=background_siding] {
-      background: #F9BB00; }
+      background-color: #F9BB00; }
     [class^=pb_card_kit].dark[class*=background_doors] {
-      background: #00C4D7; }
+      background-color: #00C4D7; }
     [class^=pb_card_kit].dark[class*=background_solar] {
-      background: #00CA74; }
+      background-color: #00CA74; }
     [class^=pb_card_kit].dark[class*=background_roofing] {
-      background: #C1CDD6; }
+      background-color: #C1CDD6; }
     [class^=pb_card_kit].dark[class*=background_gutters] {
-      background: #9E64E9; }
+      background-color: #9E64E9; }
     [class^=pb_card_kit].dark[class*=background_insulation] {
-      background: #FF2229; }
+      background-color: #FF2229; }
     [class^=pb_card_kit].dark[class*=background_dark] {
-      background: #0a0527; }
+      background-color: #0a0527; }
     [class^=pb_card_kit].dark[class*=background_light] {
-      background: #F3F7FB; }
+      background-color: #F3F7FB; }
     [class^=pb_card_kit].dark[class*=background_white] {
-      background: #FFFFFF; }
+      background-color: #FFFFFF; }
+    [class^=pb_card_kit].dark[class*=background_none] {
+      background-color: none; }
     [class^=pb_card_kit].dark[class*=_shadow_none] {
       box-shadow: 0 0 0 0 transparent; }
     [class^=pb_card_kit].dark[class*=_shadow_deep] {
@@ -16562,25 +16574,27 @@ Background colors ------------------*/
       transition-duration: 0.15s;
       transition-timing-function: cubic-bezier(0.42, 0, 1, 1); }
     [class^=pb_selectable_card_kit] > label[class*=background_windows] {
-      background: #0056CF; }
+      background-color: #0056CF; }
     [class^=pb_selectable_card_kit] > label[class*=background_siding] {
-      background: #F9BB00; }
+      background-color: #F9BB00; }
     [class^=pb_selectable_card_kit] > label[class*=background_doors] {
-      background: #00C4D7; }
+      background-color: #00C4D7; }
     [class^=pb_selectable_card_kit] > label[class*=background_solar] {
-      background: #00CA74; }
+      background-color: #00CA74; }
     [class^=pb_selectable_card_kit] > label[class*=background_roofing] {
-      background: #C1CDD6; }
+      background-color: #C1CDD6; }
     [class^=pb_selectable_card_kit] > label[class*=background_gutters] {
-      background: #9E64E9; }
+      background-color: #9E64E9; }
     [class^=pb_selectable_card_kit] > label[class*=background_insulation] {
-      background: #FF2229; }
+      background-color: #FF2229; }
     [class^=pb_selectable_card_kit] > label[class*=background_dark] {
-      background: #0a0527; }
+      background-color: #0a0527; }
     [class^=pb_selectable_card_kit] > label[class*=background_light] {
-      background: #F3F7FB; }
+      background-color: #F3F7FB; }
     [class^=pb_selectable_card_kit] > label[class*=background_white] {
-      background: #FFFFFF; }
+      background-color: #FFFFFF; }
+    [class^=pb_selectable_card_kit] > label[class*=background_none] {
+      background-color: none; }
     [class^=pb_selectable_card_kit] > label[class*=_shadow_none] {
       box-shadow: 0 0 0 0 transparent; }
     [class^=pb_selectable_card_kit] > label[class*=_shadow_deep] {
@@ -16681,27 +16695,31 @@ Background colors ------------------*/
       transition-property: all;
       transition-duration: 0.15s;
       transition-timing-function: cubic-bezier(0.42, 0, 1, 1);
+      background-color: rgba(255, 255, 255, 0.1);
+      border-color: rgba(255, 255, 255, 0.1);
       background: transparent; }
       [class^=pb_selectable_card_kit].dark > label[class*=background_windows] {
-        background: #0056CF; }
+        background-color: #0056CF; }
       [class^=pb_selectable_card_kit].dark > label[class*=background_siding] {
-        background: #F9BB00; }
+        background-color: #F9BB00; }
       [class^=pb_selectable_card_kit].dark > label[class*=background_doors] {
-        background: #00C4D7; }
+        background-color: #00C4D7; }
       [class^=pb_selectable_card_kit].dark > label[class*=background_solar] {
-        background: #00CA74; }
+        background-color: #00CA74; }
       [class^=pb_selectable_card_kit].dark > label[class*=background_roofing] {
-        background: #C1CDD6; }
+        background-color: #C1CDD6; }
       [class^=pb_selectable_card_kit].dark > label[class*=background_gutters] {
-        background: #9E64E9; }
+        background-color: #9E64E9; }
       [class^=pb_selectable_card_kit].dark > label[class*=background_insulation] {
-        background: #FF2229; }
+        background-color: #FF2229; }
       [class^=pb_selectable_card_kit].dark > label[class*=background_dark] {
-        background: #0a0527; }
+        background-color: #0a0527; }
       [class^=pb_selectable_card_kit].dark > label[class*=background_light] {
-        background: #F3F7FB; }
+        background-color: #F3F7FB; }
       [class^=pb_selectable_card_kit].dark > label[class*=background_white] {
-        background: #FFFFFF; }
+        background-color: #FFFFFF; }
+      [class^=pb_selectable_card_kit].dark > label[class*=background_none] {
+        background-color: none; }
       [class^=pb_selectable_card_kit].dark > label[class*=_shadow_none] {
         box-shadow: 0 0 0 0 transparent; }
       [class^=pb_selectable_card_kit].dark > label[class*=_shadow_deep] {

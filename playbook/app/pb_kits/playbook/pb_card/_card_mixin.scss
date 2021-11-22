@@ -23,6 +23,7 @@ $additional_colors: (
   "dark": $bg_dark,
   "light": $bg_light,
   "white": $white,
+  "none": none,
 );
 $background_colors: map-merge($product_colors, $additional_colors);
 
@@ -52,7 +53,7 @@ $background_colors: map-merge($product_colors, $additional_colors);
 
   @each $name, $color in $background_colors {
     &[class*=background_#{$name}] {
-      background: $color;
+      background-color: $color;
     }
   };
 
@@ -72,6 +73,8 @@ $background_colors: map-merge($product_colors, $additional_colors);
 @mixin pb_card_dark {
   color: $white;
   @include pb_card($card_dark, $border_dark);
+  background-color: $card_dark;
+  border-color: $border_dark;
 }
 
 @mixin pb_card_highlight($width, $height, $background){
