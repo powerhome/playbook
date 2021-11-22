@@ -13506,6 +13506,29 @@ Background colors ------------------*/
 /* Link colors ------------------------*/
 /* Product colors ---------------------*/
 /* Category colors ---------------------*/
+/*=====================================
+Base colors should not be documented.
+Only document color use.
+
+Colors -----------------------------*/
+/* Specialty Gradient -----------------*/
+/* Interface colors -------------------*/
+/* Main colors ------------------------*/
+/*=====================================
+
+Background colors ------------------*/
+/* Card colors ------------------*/
+/* Active colors ----------------------*/
+/* Hover colors -----------------------*/
+/* Focus colors -----------------------*/
+/* Border colors ----------------------*/
+/* Shadow colors ----------------------*/
+/* Text colors ------------------------*/
+/* Data colors ------------------------*/
+/* Status colors ----------------------*/
+/* Link colors ------------------------*/
+/* Product colors ---------------------*/
+/* Category colors ---------------------*/
 /* Default Equations */
 /* Penner Equations (approximated) originally created by @robpenner */
 /*=====================================
@@ -13575,6 +13598,7 @@ Background colors ------------------*/
   transition-property: all;
   transition-duration: 0.15s;
   transition-timing-function: cubic-bezier(0.42, 0, 1, 1);
+  background-color: #FFFFFF;
   border: 0;
   box-shadow: 0 12px 28px 0 rgba(60, 106, 172, 0.18); }
   .pb_popover_body[class*=background_bg_light] {
