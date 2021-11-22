@@ -14,9 +14,10 @@
 
   <%= pb_rails("background", props: { classname: "token-wrapper", background_color: "light", padding: "xl" }) do %>
       <%= render "pages/visual_guidelines_partials/colors.html.slim" %>
-      <%= render "pages/visual_guidelines_partials/max_width.html.slim" %>
+      <%= render "pages/visual_guidelines_partials/max_width.html.erb" %>
       <%= render "pages/visual_guidelines_partials/number_spacing.html.slim" %>
       <%= render "pages/visual_guidelines_partials/positioning" %>
       <%= render "pages/visual_guidelines_partials/spacing.html.slim" %>
+      <%= render "pages/visual_guidelines_partials/border_radius.html.erb" %>
   <% end %>
 </div>

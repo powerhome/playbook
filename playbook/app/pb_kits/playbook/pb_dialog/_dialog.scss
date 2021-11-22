@@ -67,6 +67,7 @@
 	$opacity_hidden: 0;
 
 	@include pb_card;
+	background-color: $white;
 	box-shadow: $shadow_deepest;
 	border: 0;
 	max-height: calc(100vh - #{$gutter * 2});
