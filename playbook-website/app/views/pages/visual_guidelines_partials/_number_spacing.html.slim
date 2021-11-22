@@ -1,8 +1,8 @@
 = pb_rails("title", props: { margin_top: "xl", text: "Number Spacing", tag: "h1", size: 1 })
-
+= pb_rails("body", props: { margin_top: "xl", text: "When dealing with numbers it can be helpful to controll the way the font handles number spacing. A font like proxima nova is an open type face that enables us to use tabular spacing for example. This alligns the numbers equally to make those numbers in a table easier to compare. This is avaliable in EVERY kit as a global prop. See example" ,tag: "p", size: 2 })
 br
 = render :partial => "pages/visual_guidelines_partials/pb_doc_number_spacing",
-    locals:{ title: "Number Spacing Options",
+    locals:{ title: "Global Props",
     usage: "Used for formatting numbers to be monospaced.",
     sizes:[{name:"Normal",variable:"default"},
       {name:"Tabular",variable:"tabular"}]}
