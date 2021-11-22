@@ -1,120 +1,31 @@
 @import "playbook-ui/dist/tokens/spacing";
 @import "playbook-ui/dist/tokens/screen_sizes";
-@import "playbook-ui/dist/tokens/colors";
-@import "playbook-ui/dist/tokens/typography";
-@import "./typography_guidelines";
-@import "./border_radius_guidelines";
 
 .visual_guidelines {
-  .header-text {
-    max-width: 600px;
-    margin: auto;
-  }
+
+  // Example Sections
+  @import "visual_guidelines/typography_guidelines";
+  @import "visual_guidelines/border_radius_guidelines";
+
   &_hero {
     padding: $space_xl * 1.75 !important;
+    .header-text {
+      max-width: 600px;
+      margin: auto;
+    }
+    @include break_at(breakpoint("sm")){    
+      padding: $space_xl !important;
+    }
   }
+  
+  // Main Sections
   .token-wrapper {
     max-width: 1242px;
     margin: auto;
   }
-  @include break_at(breakpoint("sm")){
-    .visual_guidelines_hero {
-      padding: $space_xl !important;
-    }
-  }
-  .positioning-guideline {
-    & > * {
-      height: 100px;
-      width: 33%;
-      position: absolute;
 
-      code {
-        position: absolute;
-        right: 10px;
-        bottom: 5px;
-      }
-    }
-
-    .two { margin-left: 50px; }
-    .three { margin-left: 100px; }
-    .four { margin-left: 150px; }
-    .five { margin-left: 200px; }
-    .six { margin-left: 250px; }
-    .seven { margin-left: 300px; }
-    .eight { margin-left: 350px; }
-    .nine { margin-left: 400px; }
-    .ten { margin-left: 450px; }
-  }
+  // General Code Round Bottom
   .border-bottom {
     border-radius: 0 0 6px 6px;
   }
 }
-
-  [class^=pb_title_kit][class*=_3].ls_tightest {
-      letter-spacing: $lspace_tightest !important;
-    }
-
-  [class^=pb_title_kit][class*=_3].ls_tighter {
-      letter-spacing: $lspace_tighter !important;
-    }
-
-  [class^=pb_title_kit][class*=_3].ls_tight{
-    letter-spacing: $lspace_tight !important;
-  }
-
-  [class^=pb_title_kit][class*=_3].ls_normal{
-    letter-spacing: $lspace_normal !important;
-  }
-
-  [class^=pb_title_kit][class*=_3].ls_loose{
-    letter-spacing: $lspace_loose !important;
-  }
-
-  [class^=pb_title_kit][class*=_3].ls_looser{
-    letter-spacing: $lspace_looser !important;
-  }
-
-  [class^=pb_title_kit][class*=_3].ls_loosest{
-    letter-spacing: $lspace_loosest !important;
-  }
-
-  [class^=pb_title_kit][class*=_3].ls_super_loosest{
-    letter-spacing: $lspace_super_loosest !important;
-    text-align: center !important;
-  }
-
-  .text_jumbo {
-    font-size: $text_jumbo;
-  }
-
-  .text_largest {
-    font-size: $text_largest;
-  }
-
-  .text_larger {
-    font-size: $text_larger;
-  }
-
-  .text_larger {
-    font-size: $text_large;
-  }
-
-  .text_default {
-    font-size: $font_base;
-  }
-
-  .text_small {
-    font-size: $font_small;
-  }
-
-  .text_smaller {
-    font-size: $font_smaller;
-  }
-
-  .text_smallest {
-    font-size: $font_smallest;
-  }
-}
-}
-
-@import "./typography_guidelines"
