@@ -31,7 +31,7 @@ module Playbook
       end
 
       def transition_class
-        transition == "none" ? nil : transition.to_s
+        transition == "none" ? nil : transition
       end
     end
   end

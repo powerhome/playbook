@@ -23,13 +23,13 @@
   <% end %>
 <% end %>
 <br/>
-<%= pb_rails("image",  props: { classname: "cool", alt: "picture of a misty forest", url: "https://unsplash.it/500/400/?image=634" }) %>
+<%= pb_rails("image",  props: { classname: "transition-image", alt: "picture of a misty forest", url: "https://unsplash.it/500/400/?image=634" }) %>
 
 
 
 <script>
   const updateTransition = (transition) => {
-    const imageTransition = document.querySelector('.cool');
+    const imageTransition = document.querySelector('.transition-image');
     imageTransition.classList.remove("fade", "blur", "scale", "lazyloaded")
     imageTransition.classList.add(transition, "lazyload")
   }
@@ -37,7 +37,6 @@
   window.addEventListener('DOMContentLoaded', () => {
     const transitionDropdown = document.querySelector("#transition-dropdown")
     transitionDropdown.addEventListener('change', function() {
-        console.log('You selected: ', this.value);
         const transition = this.value
         updateTransition(transition)
     });
