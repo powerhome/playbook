@@ -32,7 +32,6 @@ const CardBackground = (props) => {
       <Card>
         <Body
             text="White"
-            {...props}
         />
       </Card>
 

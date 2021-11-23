@@ -50,6 +50,7 @@ $background_colors: map-merge($product_colors, $additional_colors);
   transition-property: all;
   transition-duration: $transition_short;
   transition-timing-function: $easeIn;
+  background-color: $white;
 
   @each $name, $color in $background_colors {
     &[class*=background_#{$name}] {

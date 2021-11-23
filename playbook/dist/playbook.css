@@ -1060,7 +1060,8 @@ Background colors ------------------*/
   border-radius: 6px;
   transition-property: all;
   transition-duration: 0.15s;
-  transition-timing-function: cubic-bezier(0.42, 0, 1, 1); }
+  transition-timing-function: cubic-bezier(0.42, 0, 1, 1);
+  background-color: #FFFFFF; }
   [class^=pb_card_kit][class*=background_windows] {
     background-color: #0056CF; }
   [class^=pb_card_kit][class*=background_siding] {
@@ -1137,6 +1138,7 @@ Background colors ------------------*/
     transition-property: all;
     transition-duration: 0.15s;
     transition-timing-function: cubic-bezier(0.42, 0, 1, 1);
+    background-color: #FFFFFF;
     background-color: rgba(255, 255, 255, 0.1);
     border-color: rgba(255, 255, 255, 0.1); }
     [class^=pb_card_kit].dark[class*=background_windows] {
@@ -5783,6 +5785,7 @@ Background colors ------------------*/
   transition-property: all;
   transition-duration: 0.15s;
   transition-timing-function: cubic-bezier(0.42, 0, 1, 1);
+  background-color: #FFFFFF;
   background-color: #FFFFFF;
   box-shadow: 0 30px 38px 4px rgba(60, 106, 172, 0.2), 0 2px 14px 4px rgba(60, 106, 172, 0.1);
   border: 0;
@@ -13606,6 +13609,7 @@ Background colors ------------------*/
   transition-duration: 0.15s;
   transition-timing-function: cubic-bezier(0.42, 0, 1, 1);
   background-color: #FFFFFF;
+  background-color: #FFFFFF;
   border: 0;
   box-shadow: 0 12px 28px 0 rgba(60, 106, 172, 0.18); }
   .pb_popover_body[class*=background_bg_light] {
@@ -15709,7 +15713,8 @@ Background colors ------------------*/
   border-radius: 6px;
   transition-property: all;
   transition-duration: 0.15s;
-  transition-timing-function: cubic-bezier(0.42, 0, 1, 1); }
+  transition-timing-function: cubic-bezier(0.42, 0, 1, 1);
+  background-color: #FFFFFF; }
   [class^=pb_card_kit][class*=background_windows] {
     background-color: #0056CF; }
   [class^=pb_card_kit][class*=background_siding] {
@@ -15786,6 +15791,7 @@ Background colors ------------------*/
     transition-property: all;
     transition-duration: 0.15s;
     transition-timing-function: cubic-bezier(0.42, 0, 1, 1);
+    background-color: #FFFFFF;
     background-color: rgba(255, 255, 255, 0.1);
     border-color: rgba(255, 255, 255, 0.1); }
     [class^=pb_card_kit].dark[class*=background_windows] {
@@ -16563,6 +16569,7 @@ Background colors ------------------*/
     transition-duration: 0.15s;
     transition-timing-function: cubic-bezier(0.42, 0, 1, 1);
     background-color: #FFFFFF;
+    background-color: #FFFFFF;
     padding: 16px;
     margin-bottom: 16px;
     cursor: pointer; }
@@ -16695,6 +16702,7 @@ Background colors ------------------*/
       transition-property: all;
       transition-duration: 0.15s;
       transition-timing-function: cubic-bezier(0.42, 0, 1, 1);
+      background-color: #FFFFFF;
       background-color: rgba(255, 255, 255, 0.1);
       border-color: rgba(255, 255, 255, 0.1);
       background: transparent; }
