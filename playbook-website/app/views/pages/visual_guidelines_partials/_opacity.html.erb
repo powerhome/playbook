@@ -65,11 +65,12 @@
       <p class="var">$opacity_10</p>
    </li>
 </ul>
-<% react_contents = Rails.root.join("app/views/pages/code_snippets/user_jsx.txt").read %>
-<%= pb_rails("background", props: { background_color: "dark", padding: "xs", id: "code-wrapper", padding_left: "lg" }) do %>
-<div class="pb--codeCopy" data-action="toggle" data-togglable="code_example">
-   <pre class="highlight">Example in SCSS<p><code>@import "tokens/opacity";</code></p></pre>
-</div>
-
+<% react_contents = Rails.root.join("app/views/pages/code_snippets/opacity_tokens.txt").read %>
+    
+<%= pb_rails("background", props: { background_color: "dark", padding: "xs", id: "code-wrapper" }) do %>
+  <%= pb_rails("caption", props: { padding_x: "md", padding_top: "md", text: "Example in Sass" }) %>
+    <div class="pb--codeCopy" data-action="toggle" data-togglable="code_example">
+      <pre class="highlight"><%= raw rouge(react_contents, "react") %></pre>
+    </div>    
 <% end %>  
 <% end %>
