@@ -1,0 +1,6 @@
+Example In SASS
+@import "Tokens/Positioning
+
+.selector {
+    z-index: $z_10
+}
