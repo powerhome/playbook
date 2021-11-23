@@ -74,7 +74,23 @@ class PagesController < ApplicationController
 
   def principles; end
 
-  def visual_guidelines; end
+  def visual_guidelines
+    @max_width_code_example = Rails.root.join("app/views/pages/code_snippets/width_jsx.txt").read
+    @number_spacing_code_example = Rails.root.join("app/views/pages/code_snippets/number_spacing_jsx.txt").read
+    @position_code_example = Rails.root.join("app/views/pages/code_snippets/positioning_jsx.txt").read
+    @spacing_code_example = Rails.root.join("app/views/pages/code_snippets/spacing_global_props_jsx.txt").read
+    @spacing_token_example = Rails.root.join("app/views/pages/code_snippets/spacing_tokens_jsx.txt").read
+    @border_radius_token_example = Rails.root.join("app/views/pages/code_snippets/border_radius_tokens.txt").read
+    @typography_token_example = Rails.root.join("app/views/pages/code_snippets/typography_tokens.txt").read
+    @line_height_token_example = Rails.root.join("app/views/pages/code_snippets/line_height_jsx.txt").read
+    @space_sizes = [
+      { name: "Extra Small", variable: "space_xs" },
+      { name: "Small", variable: "space_sm" },
+      { name: "Medium", variable: "space_md" },
+      { name: "Large", variable: "space_lg" },
+      { name: "Extra Large", variable: "space_xl" },
+    ]
+  end
 
 private
 
