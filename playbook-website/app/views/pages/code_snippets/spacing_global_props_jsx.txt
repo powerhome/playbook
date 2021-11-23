@@ -1,3 +1,1 @@
-EXAMPLE IN USE
-
-    <Badge paddingTop="sm"/>
+<Badge paddingTop="sm"/>

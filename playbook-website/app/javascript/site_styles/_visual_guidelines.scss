@@ -1,50 +1,31 @@
 @import "playbook-ui/dist/tokens/spacing";
 @import "playbook-ui/dist/tokens/screen_sizes";
-@import "playbook-ui/dist/tokens/colors";
-
 
 .visual_guidelines {
-  @import "border_radius_guidelines";
 
-  .header-text {
-    max-width: 600px;
-    margin: auto;
-  }
+  // Example Sections
+  @import "visual_guidelines/typography_guidelines";
+  @import "visual_guidelines/border_radius_guidelines";
+  @import "visual_guidelines/spacing_tokens";
+
   &_hero {
     padding: $space_xl * 1.75 !important;
+    .header-text {
+      max-width: 600px;
+      margin: auto;
+    }
+    @include break_at(breakpoint("sm")){    
+      padding: $space_xl !important;
+    }
   }
+  
+  // Main Sections
   .token-wrapper {
     max-width: 1242px;
     margin: auto;
   }
-  @include break_at(breakpoint("sm")){
-    .visual_guidelines_hero {
-      padding: $space_xl !important;
-    }
-  }
-  .positioning-guideline {
-    & > * {
-      height: 100px;
-      width: 33%;
-      position: absolute;
 
-      code {
-        position: absolute;
-        right: 10px;
-        bottom: 5px;
-      }
-    }
-
-    .two { margin-left: 50px; }
-    .three { margin-left: 100px; }
-    .four { margin-left: 150px; }
-    .five { margin-left: 200px; }
-    .six { margin-left: 250px; }
-    .seven { margin-left: 300px; }
-    .eight { margin-left: 350px; }
-    .nine { margin-left: 400px; }
-    .ten { margin-left: 450px; }
-  }
+  // General Code Round Bottom
   .border-bottom {
     border-radius: 0 0 6px 6px;
   }
