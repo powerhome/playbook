@@ -18,18 +18,18 @@ module Playbook
                            values: %w[xs sm md lg xl none rounded],
                            default: "md"
       prop :background, type: Playbook::Props::Enum,
-                        values: %w[white light dark windows siding doors solar roofing gutters insulation],
-                        default: "white"
+                        values: %w[white light dark windows siding doors solar roofing gutters insulation none],
+                        default: "none"
 
       def classname
         generate_classname("pb_card_kit",
                            selected_class,
                            shadow_class,
-                           highlight_position_class,
-                           highlight_color_class,
-                           background_class,
                            border_class,
-                           border_radius_class)
+                           border_radius_class,
+                           background_class,
+                           highlight_position_class,
+                           highlight_color_class)
       end
 
       def body_padding
@@ -59,7 +59,7 @@ module Playbook
       end
 
       def background_class
-        background != "white" ? "background_#{background}" : nil
+        background == "none" ? nil : "background_#{background}"
       end
 
       def border_class

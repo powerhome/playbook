@@ -22,8 +22,8 @@ RSpec.describe Playbook::PbCard::Card do
   end
   it do
     is_expected.to define_enum_prop(:background)
-      .with_default("white")
-      .with_values("white", "light", "dark", "windows", "siding", "doors", "solar", "roofing", "gutters", "insulation")
+      .with_default("none")
+      .with_values("white", "light", "dark", "windows", "siding", "doors", "solar", "roofing", "gutters", "insulation", "none")
   end
 
   describe "#classname" do
