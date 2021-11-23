@@ -3,8 +3,8 @@
   If you're going to be using position absolute you might find it handy to use some of the index properties. We have multiple ways to use z-index, take a look at the examples below.
 <% end %>
 <%= pb_rails("body", props: {margin_top: "xl", margin_bottom: "sm"}) do %>
-<%= render :partial => "pages/visual_guidelines_partials/pb_doc_positioning",
-  locals:{ title: "Global Props" } %>
+<%= pb_rails("title", props: {text: "Global Props", size: 4, margin_top: "md" }) %>
+<br>
   Available in every kit.  These are added globally as they are most flexible when developing.
 <% end %>
       <%= pb_rails("card", props: {shadow: "deep", margin_bottom: "xl", padding: "none", padding_top: "md" }) do %>
@@ -37,5 +37,7 @@
               <pre class="highlight"><%= raw rouge(react_contents, "react") %></pre>
             </div>        
         <% end %>
-      
+
       <% end %>
+
+      <%= render "pages/visual_guidelines_partials/pb_doc_positioning" %>
