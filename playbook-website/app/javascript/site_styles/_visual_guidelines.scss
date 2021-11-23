@@ -1,8 +1,5 @@
 @import "playbook-ui/dist/tokens/spacing";
 @import "playbook-ui/dist/tokens/screen_sizes";
-@import "playbook-ui/dist/tokens/colors";
-
-@import "playbook-ui/dist/tokens/line_height";
 
 .visual_guidelines {
 
@@ -10,6 +7,7 @@
   @import "visual_guidelines/typography_guidelines";
   @import "visual_guidelines/border_radius_guidelines";
   @import "visual_guidelines/spacing_tokens";
+  @import "visual_guidelines/line_height_guidelines";
 
   &_hero {
     padding: $space_xl * 1.75 !important;
@@ -28,90 +26,8 @@
     margin: auto;
   }
 
-      code {
-        position: absolute;
-        right: 10px;
-        bottom: 5px;
-      }
-    }
-
-    .two { margin-left: 50px; }
-    .three { margin-left: 100px; }
-    .four { margin-left: 150px; }
-    .five { margin-left: 200px; }
-    .six { margin-left: 250px; }
-    .seven { margin-left: 300px; }
-    .eight { margin-left: 350px; }
-    .nine { margin-left: 400px; }
-    .ten { margin-left: 450px; }
-  }
-
   // General Code Round Bottom
   .border-bottom {
     border-radius: 0 0 6px 6px;
   }
-}
-
-.card-tightest {
-  font-size: 28px;
-  letter-spacing: -0.03em;
-  font-weight: 100;
-  color: #242B42;
-  margin: 0;
-  line-height: 1.0;
-  font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif
-}
-.card-tighter {
-  font-size: 28px;
-  letter-spacing: -0.03em;
-  font-weight: 100;
-  color: #242B42;
-  margin: 0;
-  line-height: 1.2;
-  font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif
-}
-.card-tight {
-  font-size: 28px;
-  letter-spacing: -0.03em;
-  font-weight: 100;
-  color: #242B42;
-  margin: 0;
-  line-height: 1.4;
-  font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif
-}
-.card-normal {
-  font-size: 28px;
-  letter-spacing: -0.03em;
-  font-weight: 100;
-  color: #242B42;
-  margin: 0;
-  line-height: 1.5;
-  font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif
-}
-.card-loose{
-  font-size: 28px;
-  letter-spacing: -0.03em;
-  font-weight: 100;
-  color: #242B42;
-  margin: 0;
-  line-height: 1.6;
-  font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif
-}
-.card-looser {
-  font-size: 28px;
-  letter-spacing: -0.03em;
-  font-weight: 100;
-  color: #242B42;
-  margin: 0;
-  line-height: 1.8;
-  font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif
-}
-.Card-loosest {
-  font-size: 28px;
-  letter-spacing: -0.03em;
-  font-weight: 100;
-  color: #242B42;
-  margin: 0;
-  line-height: 2.0;
-  font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif;
 }

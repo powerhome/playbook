@@ -279,29 +279,6 @@ Background colors ------------------*/
 /* Link colors ------------------------*/
 /* Product colors ---------------------*/
 /* Category colors ---------------------*/
-/*=====================================
-Base colors should not be documented.
-Only document color use.
-
-Colors -----------------------------*/
-/* Specialty Gradient -----------------*/
-/* Interface colors -------------------*/
-/* Main colors ------------------------*/
-/*=====================================
-
-Background colors ------------------*/
-/* Card colors ------------------*/
-/* Active colors ----------------------*/
-/* Hover colors -----------------------*/
-/* Focus colors -----------------------*/
-/* Border colors ----------------------*/
-/* Shadow colors ----------------------*/
-/* Text colors ------------------------*/
-/* Data colors ------------------------*/
-/* Status colors ----------------------*/
-/* Link colors ------------------------*/
-/* Product colors ---------------------*/
-/* Category colors ---------------------*/
 /* CLEAN UP AND REMOVE */
 /* Headings */
 /* Standard Font Weights */
@@ -408,29 +385,6 @@ Background colors ------------------*/
 /* Link colors ------------------------*/
 /* Product colors ---------------------*/
 /* Category colors ---------------------*/
-/*=====================================
-Base colors should not be documented.
-Only document color use.
-
-Colors -----------------------------*/
-/* Specialty Gradient -----------------*/
-/* Interface colors -------------------*/
-/* Main colors ------------------------*/
-/*=====================================
-
-Background colors ------------------*/
-/* Card colors ------------------*/
-/* Active colors ----------------------*/
-/* Hover colors -----------------------*/
-/* Focus colors -----------------------*/
-/* Border colors ----------------------*/
-/* Shadow colors ----------------------*/
-/* Text colors ------------------------*/
-/* Data colors ------------------------*/
-/* Status colors ----------------------*/
-/* Link colors ------------------------*/
-/* Product colors ---------------------*/
-/* Category colors ---------------------*/
 /* CLEAN UP AND REMOVE */
 /* Headings */
 /* Standard Font Weights */
@@ -592,29 +546,6 @@ Background colors ------------------*/
 /* Link colors ------------------------*/
 /* Product colors ---------------------*/
 /* Category colors ---------------------*/
-/*=====================================
-Base colors should not be documented.
-Only document color use.
-
-Colors -----------------------------*/
-/* Specialty Gradient -----------------*/
-/* Interface colors -------------------*/
-/* Main colors ------------------------*/
-/*=====================================
-
-Background colors ------------------*/
-/* Card colors ------------------*/
-/* Active colors ----------------------*/
-/* Hover colors -----------------------*/
-/* Focus colors -----------------------*/
-/* Border colors ----------------------*/
-/* Shadow colors ----------------------*/
-/* Text colors ------------------------*/
-/* Data colors ------------------------*/
-/* Status colors ----------------------*/
-/* Link colors ------------------------*/
-/* Product colors ---------------------*/
-/* Category colors ---------------------*/
 /* CLEAN UP AND REMOVE */
 /* Headings */
 /* Standard Font Weights */
@@ -730,29 +661,6 @@ Background colors ------------------*/
     [class^=pb_button_kit].dark[class*=_disabled]:active {
       border-color: rgba(181, 195, 206, 0.5); }
 
-/*=====================================
-Base colors should not be documented.
-Only document color use.
-
-Colors -----------------------------*/
-/* Specialty Gradient -----------------*/
-/* Interface colors -------------------*/
-/* Main colors ------------------------*/
-/*=====================================
-
-Background colors ------------------*/
-/* Card colors ------------------*/
-/* Active colors ----------------------*/
-/* Hover colors -----------------------*/
-/* Focus colors -----------------------*/
-/* Border colors ----------------------*/
-/* Shadow colors ----------------------*/
-/* Text colors ------------------------*/
-/* Data colors ------------------------*/
-/* Status colors ----------------------*/
-/* Link colors ------------------------*/
-/* Product colors ---------------------*/
-/* Category colors ---------------------*/
 /*=====================================
 Base colors should not be documented.
 Only document color use.
@@ -1137,29 +1045,6 @@ Background colors ------------------*/
 /* Link colors ------------------------*/
 /* Product colors ---------------------*/
 /* Category colors ---------------------*/
-/*=====================================
-Base colors should not be documented.
-Only document color use.
-
-Colors -----------------------------*/
-/* Specialty Gradient -----------------*/
-/* Interface colors -------------------*/
-/* Main colors ------------------------*/
-/*=====================================
-
-Background colors ------------------*/
-/* Card colors ------------------*/
-/* Active colors ----------------------*/
-/* Hover colors -----------------------*/
-/* Focus colors -----------------------*/
-/* Border colors ----------------------*/
-/* Shadow colors ----------------------*/
-/* Text colors ------------------------*/
-/* Data colors ------------------------*/
-/* Status colors ----------------------*/
-/* Link colors ------------------------*/
-/* Product colors ---------------------*/
-/* Category colors ---------------------*/
 /* Default Equations */
 /* Penner Equations (approximated) originally created by @robpenner */
 [class^=pb_card_kit] {
@@ -1168,7 +1053,6 @@ Background colors ------------------*/
   flex-direction: column;
   min-width: 0;
   word-wrap: break-word;
-  background-color: #FFFFFF;
   background-clip: border-box;
   border-width: 1px;
   border-style: solid;
@@ -1246,7 +1130,6 @@ Background colors ------------------*/
     flex-direction: column;
     min-width: 0;
     word-wrap: break-word;
-    background-color: rgba(255, 255, 255, 0.1);
     background-clip: border-box;
     border-width: 1px;
     border-style: solid;
@@ -2130,29 +2013,6 @@ Background colors ------------------*/
 /* Link colors ------------------------*/
 /* Product colors ---------------------*/
 /* Category colors ---------------------*/
-/*=====================================
-Base colors should not be documented.
-Only document color use.
-
-Colors -----------------------------*/
-/* Specialty Gradient -----------------*/
-/* Interface colors -------------------*/
-/* Main colors ------------------------*/
-/*=====================================
-
-Background colors ------------------*/
-/* Card colors ------------------*/
-/* Active colors ----------------------*/
-/* Hover colors -----------------------*/
-/* Focus colors -----------------------*/
-/* Border colors ----------------------*/
-/* Shadow colors ----------------------*/
-/* Text colors ------------------------*/
-/* Data colors ------------------------*/
-/* Status colors ----------------------*/
-/* Link colors ------------------------*/
-/* Product colors ---------------------*/
-/* Category colors ---------------------*/
 /* CLEAN UP AND REMOVE */
 /* Headings */
 /* Standard Font Weights */
@@ -2875,29 +2735,6 @@ Background colors ------------------*/
 /* Link colors ------------------------*/
 /* Product colors ---------------------*/
 /* Category colors ---------------------*/
-/*=====================================
-Base colors should not be documented.
-Only document color use.
-
-Colors -----------------------------*/
-/* Specialty Gradient -----------------*/
-/* Interface colors -------------------*/
-/* Main colors ------------------------*/
-/*=====================================
-
-Background colors ------------------*/
-/* Card colors ------------------*/
-/* Active colors ----------------------*/
-/* Hover colors -----------------------*/
-/* Focus colors -----------------------*/
-/* Border colors ----------------------*/
-/* Shadow colors ----------------------*/
-/* Text colors ------------------------*/
-/* Data colors ------------------------*/
-/* Status colors ----------------------*/
-/* Link colors ------------------------*/
-/* Product colors ---------------------*/
-/* Category colors ---------------------*/
 /* CLEAN UP AND REMOVE */
 /* Headings */
 /* Standard Font Weights */
@@ -2953,6 +2790,9 @@ Background colors ------------------*/
       background: rgba(175, 185, 197, 0.2); }
     [class^=pb_badge_kit].dark[class*=_primary] {
       background: rgba(1, 78, 190, 0.2); }
+
+.pb_bar_graph rect.highcharts-background {
+  fill: #0000 !important; }
 
 /*=====================================
 Base colors should not be documented.
@@ -3154,29 +2994,6 @@ Background colors ------------------*/
 /* Link colors ------------------------*/
 /* Product colors ---------------------*/
 /* Category colors ---------------------*/
-/*=====================================
-Base colors should not be documented.
-Only document color use.
-
-Colors -----------------------------*/
-/* Specialty Gradient -----------------*/
-/* Interface colors -------------------*/
-/* Main colors ------------------------*/
-/*=====================================
-
-Background colors ------------------*/
-/* Card colors ------------------*/
-/* Active colors ----------------------*/
-/* Hover colors -----------------------*/
-/* Focus colors -----------------------*/
-/* Border colors ----------------------*/
-/* Shadow colors ----------------------*/
-/* Text colors ------------------------*/
-/* Data colors ------------------------*/
-/* Status colors ----------------------*/
-/* Link colors ------------------------*/
-/* Product colors ---------------------*/
-/* Category colors ---------------------*/
 /* CLEAN UP AND REMOVE */
 /* Headings */
 /* Standard Font Weights */
@@ -3292,29 +3109,6 @@ Background colors ------------------*/
     [class^=pb_button_kit].dark[class*=_disabled]:active {
       border-color: rgba(181, 195, 206, 0.5); }
 
-/*=====================================
-Base colors should not be documented.
-Only document color use.
-
-Colors -----------------------------*/
-/* Specialty Gradient -----------------*/
-/* Interface colors -------------------*/
-/* Main colors ------------------------*/
-/*=====================================
-
-Background colors ------------------*/
-/* Card colors ------------------*/
-/* Active colors ----------------------*/
-/* Hover colors -----------------------*/
-/* Focus colors -----------------------*/
-/* Border colors ----------------------*/
-/* Shadow colors ----------------------*/
-/* Text colors ------------------------*/
-/* Data colors ------------------------*/
-/* Status colors ----------------------*/
-/* Link colors ------------------------*/
-/* Product colors ---------------------*/
-/* Category colors ---------------------*/
 /*=====================================
 Base colors should not be documented.
 Only document color use.
@@ -4389,29 +4183,6 @@ Background colors ------------------*/
 /* Headings */
 /* Standard Font Weights */
 /* Non_Standard Font Weights */
-/*=====================================
-Base colors should not be documented.
-Only document color use.
-
-Colors -----------------------------*/
-/* Specialty Gradient -----------------*/
-/* Interface colors -------------------*/
-/* Main colors ------------------------*/
-/*=====================================
-
-Background colors ------------------*/
-/* Card colors ------------------*/
-/* Active colors ----------------------*/
-/* Hover colors -----------------------*/
-/* Focus colors -----------------------*/
-/* Border colors ----------------------*/
-/* Shadow colors ----------------------*/
-/* Text colors ------------------------*/
-/* Data colors ------------------------*/
-/* Status colors ----------------------*/
-/* Link colors ------------------------*/
-/* Product colors ---------------------*/
-/* Category colors ---------------------*/
 /*=====================================
 Base colors should not be documented.
 Only document color use.
@@ -5943,54 +5714,8 @@ Background colors ------------------*/
 /* Link colors ------------------------*/
 /* Product colors ---------------------*/
 /* Category colors ---------------------*/
-/*=====================================
-Base colors should not be documented.
-Only document color use.
-
-Colors -----------------------------*/
-/* Specialty Gradient -----------------*/
-/* Interface colors -------------------*/
-/* Main colors ------------------------*/
-/*=====================================
-
-Background colors ------------------*/
-/* Card colors ------------------*/
-/* Active colors ----------------------*/
-/* Hover colors -----------------------*/
-/* Focus colors -----------------------*/
-/* Border colors ----------------------*/
-/* Shadow colors ----------------------*/
-/* Text colors ------------------------*/
-/* Data colors ------------------------*/
-/* Status colors ----------------------*/
-/* Link colors ------------------------*/
-/* Product colors ---------------------*/
-/* Category colors ---------------------*/
 /* Default Equations */
 /* Penner Equations (approximated) originally created by @robpenner */
-/*=====================================
-Base colors should not be documented.
-Only document color use.
-
-Colors -----------------------------*/
-/* Specialty Gradient -----------------*/
-/* Interface colors -------------------*/
-/* Main colors ------------------------*/
-/*=====================================
-
-Background colors ------------------*/
-/* Card colors ------------------*/
-/* Active colors ----------------------*/
-/* Hover colors -----------------------*/
-/* Focus colors -----------------------*/
-/* Border colors ----------------------*/
-/* Shadow colors ----------------------*/
-/* Text colors ------------------------*/
-/* Data colors ------------------------*/
-/* Status colors ----------------------*/
-/* Link colors ------------------------*/
-/* Product colors ---------------------*/
-/* Category colors ---------------------*/
 /*=====================================
 Base colors should not be documented.
 Only document color use.
@@ -6052,7 +5777,6 @@ Background colors ------------------*/
   flex-direction: column;
   min-width: 0;
   word-wrap: break-word;
-  background-color: #FFFFFF;
   background-clip: border-box;
   border-width: 1px;
   border-style: solid;
@@ -6838,29 +6562,6 @@ Background colors ------------------*/
 /* Link colors ------------------------*/
 /* Product colors ---------------------*/
 /* Category colors ---------------------*/
-/*=====================================
-Base colors should not be documented.
-Only document color use.
-
-Colors -----------------------------*/
-/* Specialty Gradient -----------------*/
-/* Interface colors -------------------*/
-/* Main colors ------------------------*/
-/*=====================================
-
-Background colors ------------------*/
-/* Card colors ------------------*/
-/* Active colors ----------------------*/
-/* Hover colors -----------------------*/
-/* Focus colors -----------------------*/
-/* Border colors ----------------------*/
-/* Shadow colors ----------------------*/
-/* Text colors ------------------------*/
-/* Data colors ------------------------*/
-/* Status colors ----------------------*/
-/* Link colors ------------------------*/
-/* Product colors ---------------------*/
-/* Category colors ---------------------*/
 /* CLEAN UP AND REMOVE */
 /* Headings */
 /* Standard Font Weights */
@@ -7333,6 +7034,48 @@ Background colors ------------------*/
 [class^=pb_flex_item_kit][class*=_shrink] {
   flex-shrink: 1; }
 
+[class^=pb_flex_item_kit][class*=order_0] {
+  order: 0; }
+
+[class^=pb_flex_item_kit][class*=order_1] {
+  order: 1; }
+
+[class^=pb_flex_item_kit][class*=order_2] {
+  order: 2; }
+
+[class^=pb_flex_item_kit][class*=order_3] {
+  order: 3; }
+
+[class^=pb_flex_item_kit][class*=order_4] {
+  order: 4; }
+
+[class^=pb_flex_item_kit][class*=order_5] {
+  order: 5; }
+
+[class^=pb_flex_item_kit][class*=order_6] {
+  order: 6; }
+
+[class^=pb_flex_item_kit][class*=order_7] {
+  order: 7; }
+
+[class^=pb_flex_item_kit][class*=order_8] {
+  order: 8; }
+
+[class^=pb_flex_item_kit][class*=order_9] {
+  order: 9; }
+
+[class^=pb_flex_item_kit][class*=order_10] {
+  order: 10; }
+
+[class^=pb_flex_item_kit][class*=order_11] {
+  order: 11; }
+
+[class^=pb_flex_item_kit][class*=order_12] {
+  order: 12; }
+
+[class^=pb_flex_item_kit][class*=order_first] {
+  order: -1; }
+
 [class^=pb_flex_item_kit].overflow_auto {
   overflow: auto; }
 
@@ -7470,6 +7213,9 @@ Background colors ------------------*/
   fill: #687887;
   font: 400 16px "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif; }
 
+[class^=pb_gauge_kit] rect.highcharts-background {
+  fill: #0000 !important; }
+
 [class^=pb_hastag_kit] {
   display: inline-block; }
 
@@ -7505,29 +7251,6 @@ svg.pb_custom_icon {
   svg.pb_custom_icon path {
     fill: currentColor; }
 
-/*=====================================
-Base colors should not be documented.
-Only document color use.
-
-Colors -----------------------------*/
-/* Specialty Gradient -----------------*/
-/* Interface colors -------------------*/
-/* Main colors ------------------------*/
-/*=====================================
-
-Background colors ------------------*/
-/* Card colors ------------------*/
-/* Active colors ----------------------*/
-/* Hover colors -----------------------*/
-/* Focus colors -----------------------*/
-/* Border colors ----------------------*/
-/* Shadow colors ----------------------*/
-/* Text colors ------------------------*/
-/* Data colors ------------------------*/
-/* Status colors ----------------------*/
-/* Link colors ------------------------*/
-/* Product colors ---------------------*/
-/* Category colors ---------------------*/
 /*=====================================
 Base colors should not be documented.
 Only document color use.
@@ -7823,29 +7546,6 @@ Background colors ------------------*/
   [class^=pb_caption_kit][class*=dark] {
     color: rgba(255, 255, 255, 0.6); }
 
-/*=====================================
-Base colors should not be documented.
-Only document color use.
-
-Colors -----------------------------*/
-/* Specialty Gradient -----------------*/
-/* Interface colors -------------------*/
-/* Main colors ------------------------*/
-/*=====================================
-
-Background colors ------------------*/
-/* Card colors ------------------*/
-/* Active colors ----------------------*/
-/* Hover colors -----------------------*/
-/* Focus colors -----------------------*/
-/* Border colors ----------------------*/
-/* Shadow colors ----------------------*/
-/* Text colors ------------------------*/
-/* Data colors ------------------------*/
-/* Status colors ----------------------*/
-/* Link colors ------------------------*/
-/* Product colors ---------------------*/
-/* Category colors ---------------------*/
 /*=====================================
 Base colors should not be documented.
 Only document color use.
@@ -8274,29 +7974,6 @@ Background colors ------------------*/
   [class^=pb_icon_value_kit][class*=_right] {
     justify-content: flex-end; }
 
-/*=====================================
-Base colors should not be documented.
-Only document color use.
-
-Colors -----------------------------*/
-/* Specialty Gradient -----------------*/
-/* Interface colors -------------------*/
-/* Main colors ------------------------*/
-/*=====================================
-
-Background colors ------------------*/
-/* Card colors ------------------*/
-/* Active colors ----------------------*/
-/* Hover colors -----------------------*/
-/* Focus colors -----------------------*/
-/* Border colors ----------------------*/
-/* Shadow colors ----------------------*/
-/* Text colors ------------------------*/
-/* Data colors ------------------------*/
-/* Status colors ----------------------*/
-/* Link colors ------------------------*/
-/* Product colors ---------------------*/
-/* Category colors ---------------------*/
 /*=====================================
 Base colors should not be documented.
 Only document color use.
@@ -9975,6 +9652,9 @@ Background colors ------------------*/
   border-radius: 5px;
   background: #FF2229; }
 
+rect.highcharts-background {
+  fill: #0000 !important; }
+
 /*=====================================
 Base colors should not be documented.
 Only document color use.
@@ -10297,29 +9977,6 @@ svg.pb_custom_icon {
   [class^=pb_loading_inline_kit][class*=_right] {
     justify-content: flex-end; }
 
-/*=====================================
-Base colors should not be documented.
-Only document color use.
-
-Colors -----------------------------*/
-/* Specialty Gradient -----------------*/
-/* Interface colors -------------------*/
-/* Main colors ------------------------*/
-/*=====================================
-
-Background colors ------------------*/
-/* Card colors ------------------*/
-/* Active colors ----------------------*/
-/* Hover colors -----------------------*/
-/* Focus colors -----------------------*/
-/* Border colors ----------------------*/
-/* Shadow colors ----------------------*/
-/* Text colors ------------------------*/
-/* Data colors ------------------------*/
-/* Status colors ----------------------*/
-/* Link colors ------------------------*/
-/* Product colors ---------------------*/
-/* Category colors ---------------------*/
 /*=====================================
 Base colors should not be documented.
 Only document color use.
@@ -11183,29 +10840,6 @@ Background colors ------------------*/
 /* Link colors ------------------------*/
 /* Product colors ---------------------*/
 /* Category colors ---------------------*/
-/*=====================================
-Base colors should not be documented.
-Only document color use.
-
-Colors -----------------------------*/
-/* Specialty Gradient -----------------*/
-/* Interface colors -------------------*/
-/* Main colors ------------------------*/
-/*=====================================
-
-Background colors ------------------*/
-/* Card colors ------------------*/
-/* Active colors ----------------------*/
-/* Hover colors -----------------------*/
-/* Focus colors -----------------------*/
-/* Border colors ----------------------*/
-/* Shadow colors ----------------------*/
-/* Text colors ------------------------*/
-/* Data colors ------------------------*/
-/* Status colors ----------------------*/
-/* Link colors ------------------------*/
-/* Product colors ---------------------*/
-/* Category colors ---------------------*/
 /* CLEAN UP AND REMOVE */
 /* Headings */
 /* Standard Font Weights */
@@ -11660,52 +11294,6 @@ Background colors ------------------*/
       margin-left: 0;
       margin-right: -9px; }
 
-/*=====================================
-Base colors should not be documented.
-Only document color use.
-
-Colors -----------------------------*/
-/* Specialty Gradient -----------------*/
-/* Interface colors -------------------*/
-/* Main colors ------------------------*/
-/*=====================================
-
-Background colors ------------------*/
-/* Card colors ------------------*/
-/* Active colors ----------------------*/
-/* Hover colors -----------------------*/
-/* Focus colors -----------------------*/
-/* Border colors ----------------------*/
-/* Shadow colors ----------------------*/
-/* Text colors ------------------------*/
-/* Data colors ------------------------*/
-/* Status colors ----------------------*/
-/* Link colors ------------------------*/
-/* Product colors ---------------------*/
-/* Category colors ---------------------*/
-/*=====================================
-Base colors should not be documented.
-Only document color use.
-
-Colors -----------------------------*/
-/* Specialty Gradient -----------------*/
-/* Interface colors -------------------*/
-/* Main colors ------------------------*/
-/*=====================================
-
-Background colors ------------------*/
-/* Card colors ------------------*/
-/* Active colors ----------------------*/
-/* Hover colors -----------------------*/
-/* Focus colors -----------------------*/
-/* Border colors ----------------------*/
-/* Shadow colors ----------------------*/
-/* Text colors ------------------------*/
-/* Data colors ------------------------*/
-/* Status colors ----------------------*/
-/* Link colors ------------------------*/
-/* Product colors ---------------------*/
-/* Category colors ---------------------*/
 /*=====================================
 Base colors should not be documented.
 Only document color use.
@@ -12214,29 +11802,6 @@ Background colors ------------------*/
 /* Non_Standard Font Weights */
 /* Default Equations */
 /* Penner Equations (approximated) originally created by @robpenner */
-/*=====================================
-Base colors should not be documented.
-Only document color use.
-
-Colors -----------------------------*/
-/* Specialty Gradient -----------------*/
-/* Interface colors -------------------*/
-/* Main colors ------------------------*/
-/*=====================================
-
-Background colors ------------------*/
-/* Card colors ------------------*/
-/* Active colors ----------------------*/
-/* Hover colors -----------------------*/
-/* Focus colors -----------------------*/
-/* Border colors ----------------------*/
-/* Shadow colors ----------------------*/
-/* Text colors ------------------------*/
-/* Data colors ------------------------*/
-/* Status colors ----------------------*/
-/* Link colors ------------------------*/
-/* Product colors ---------------------*/
-/* Category colors ---------------------*/
 /*=====================================
 Base colors should not be documented.
 Only document color use.
@@ -14035,7 +13600,6 @@ Background colors ------------------*/
   flex-direction: column;
   min-width: 0;
   word-wrap: break-word;
-  background-color: #FFFFFF;
   background-clip: border-box;
   border-width: 1px;
   border-style: solid;
@@ -14095,29 +13659,6 @@ Background colors ------------------*/
 .pb_popover_reference_wrapper {
   display: inline-block; }
 
-/*=====================================
-Base colors should not be documented.
-Only document color use.
-
-Colors -----------------------------*/
-/* Specialty Gradient -----------------*/
-/* Interface colors -------------------*/
-/* Main colors ------------------------*/
-/*=====================================
-
-Background colors ------------------*/
-/* Card colors ------------------*/
-/* Active colors ----------------------*/
-/* Hover colors -----------------------*/
-/* Focus colors -----------------------*/
-/* Border colors ----------------------*/
-/* Shadow colors ----------------------*/
-/* Text colors ------------------------*/
-/* Data colors ------------------------*/
-/* Status colors ----------------------*/
-/* Link colors ------------------------*/
-/* Product colors ---------------------*/
-/* Category colors ---------------------*/
 /*=====================================
 Base colors should not be documented.
 Only document color use.
@@ -14769,29 +14310,6 @@ Background colors ------------------*/
 /* Link colors ------------------------*/
 /* Product colors ---------------------*/
 /* Category colors ---------------------*/
-/*=====================================
-Base colors should not be documented.
-Only document color use.
-
-Colors -----------------------------*/
-/* Specialty Gradient -----------------*/
-/* Interface colors -------------------*/
-/* Main colors ------------------------*/
-/*=====================================
-
-Background colors ------------------*/
-/* Card colors ------------------*/
-/* Active colors ----------------------*/
-/* Hover colors -----------------------*/
-/* Focus colors -----------------------*/
-/* Border colors ----------------------*/
-/* Shadow colors ----------------------*/
-/* Text colors ------------------------*/
-/* Data colors ------------------------*/
-/* Status colors ----------------------*/
-/* Link colors ------------------------*/
-/* Product colors ---------------------*/
-/* Category colors ---------------------*/
 /* Default Equations */
 /* Penner Equations (approximated) originally created by @robpenner */
 /*=====================================
@@ -14867,56 +14385,10 @@ Background colors ------------------*/
 /* Link colors ------------------------*/
 /* Product colors ---------------------*/
 /* Category colors ---------------------*/
-/*=====================================
-Base colors should not be documented.
-Only document color use.
-
-Colors -----------------------------*/
-/* Specialty Gradient -----------------*/
-/* Interface colors -------------------*/
-/* Main colors ------------------------*/
-/*=====================================
-
-Background colors ------------------*/
-/* Card colors ------------------*/
-/* Active colors ----------------------*/
-/* Hover colors -----------------------*/
-/* Focus colors -----------------------*/
-/* Border colors ----------------------*/
-/* Shadow colors ----------------------*/
-/* Text colors ------------------------*/
-/* Data colors ------------------------*/
-/* Status colors ----------------------*/
-/* Link colors ------------------------*/
-/* Product colors ---------------------*/
-/* Category colors ---------------------*/
 /* CLEAN UP AND REMOVE */
 /* Headings */
 /* Standard Font Weights */
 /* Non_Standard Font Weights */
-/*=====================================
-Base colors should not be documented.
-Only document color use.
-
-Colors -----------------------------*/
-/* Specialty Gradient -----------------*/
-/* Interface colors -------------------*/
-/* Main colors ------------------------*/
-/*=====================================
-
-Background colors ------------------*/
-/* Card colors ------------------*/
-/* Active colors ----------------------*/
-/* Hover colors -----------------------*/
-/* Focus colors -----------------------*/
-/* Border colors ----------------------*/
-/* Shadow colors ----------------------*/
-/* Text colors ------------------------*/
-/* Data colors ------------------------*/
-/* Status colors ----------------------*/
-/* Link colors ------------------------*/
-/* Product colors ---------------------*/
-/* Category colors ---------------------*/
 /*=====================================
 Base colors should not be documented.
 Only document color use.
@@ -15852,29 +15324,6 @@ Background colors ------------------*/
 /* Link colors ------------------------*/
 /* Product colors ---------------------*/
 /* Category colors ---------------------*/
-/*=====================================
-Base colors should not be documented.
-Only document color use.
-
-Colors -----------------------------*/
-/* Specialty Gradient -----------------*/
-/* Interface colors -------------------*/
-/* Main colors ------------------------*/
-/*=====================================
-
-Background colors ------------------*/
-/* Card colors ------------------*/
-/* Active colors ----------------------*/
-/* Hover colors -----------------------*/
-/* Focus colors -----------------------*/
-/* Border colors ----------------------*/
-/* Shadow colors ----------------------*/
-/* Text colors ------------------------*/
-/* Data colors ------------------------*/
-/* Status colors ----------------------*/
-/* Link colors ------------------------*/
-/* Product colors ---------------------*/
-/* Category colors ---------------------*/
 /* Default Equations */
 /* Penner Equations (approximated) originally created by @robpenner */
 /*=====================================
@@ -16249,29 +15698,6 @@ Background colors ------------------*/
 /* Link colors ------------------------*/
 /* Product colors ---------------------*/
 /* Category colors ---------------------*/
-/*=====================================
-Base colors should not be documented.
-Only document color use.
-
-Colors -----------------------------*/
-/* Specialty Gradient -----------------*/
-/* Interface colors -------------------*/
-/* Main colors ------------------------*/
-/*=====================================
-
-Background colors ------------------*/
-/* Card colors ------------------*/
-/* Active colors ----------------------*/
-/* Hover colors -----------------------*/
-/* Focus colors -----------------------*/
-/* Border colors ----------------------*/
-/* Shadow colors ----------------------*/
-/* Text colors ------------------------*/
-/* Data colors ------------------------*/
-/* Status colors ----------------------*/
-/* Link colors ------------------------*/
-/* Product colors ---------------------*/
-/* Category colors ---------------------*/
 /* Default Equations */
 /* Penner Equations (approximated) originally created by @robpenner */
 [class^=pb_card_kit] {
@@ -16280,7 +15706,6 @@ Background colors ------------------*/
   flex-direction: column;
   min-width: 0;
   word-wrap: break-word;
-  background-color: #FFFFFF;
   background-clip: border-box;
   border-width: 1px;
   border-style: solid;
@@ -16358,7 +15783,6 @@ Background colors ------------------*/
     flex-direction: column;
     min-width: 0;
     word-wrap: break-word;
-    background-color: rgba(255, 255, 255, 0.1);
     background-clip: border-box;
     border-width: 1px;
     border-style: solid;
@@ -17136,7 +16560,6 @@ Background colors ------------------*/
     flex-direction: column;
     min-width: 0;
     word-wrap: break-word;
-    background-color: #FFFFFF;
     background-clip: border-box;
     border-width: 1px;
     border-style: solid;
@@ -17271,7 +16694,6 @@ Background colors ------------------*/
       flex-direction: column;
       min-width: 0;
       word-wrap: break-word;
-      background-color: rgba(255, 255, 255, 0.1);
       background-clip: border-box;
       border-width: 1px;
       border-style: solid;
@@ -18439,29 +17861,6 @@ Background colors ------------------*/
 /* Link colors ------------------------*/
 /* Product colors ---------------------*/
 /* Category colors ---------------------*/
-/*=====================================
-Base colors should not be documented.
-Only document color use.
-
-Colors -----------------------------*/
-/* Specialty Gradient -----------------*/
-/* Interface colors -------------------*/
-/* Main colors ------------------------*/
-/*=====================================
-
-Background colors ------------------*/
-/* Card colors ------------------*/
-/* Active colors ----------------------*/
-/* Hover colors -----------------------*/
-/* Focus colors -----------------------*/
-/* Border colors ----------------------*/
-/* Shadow colors ----------------------*/
-/* Text colors ------------------------*/
-/* Data colors ------------------------*/
-/* Status colors ----------------------*/
-/* Link colors ------------------------*/
-/* Product colors ---------------------*/
-/* Category colors ---------------------*/
 /* CLEAN UP AND REMOVE */
 /* Headings */
 /* Standard Font Weights */
@@ -18537,29 +17936,6 @@ Background colors ------------------*/
     [class^=pb_table].table-sm.table-responsive-collapse.table-lg tbody tr td:first-child, [class^=pb_table].table-sm.table-responsive-collapse.table-lg tbody tr td:last-child, [class^=pb_table].table-md.table-responsive-collapse.table-lg tbody tr td:first-child, [class^=pb_table].table-md.table-responsive-collapse.table-lg tbody tr td:last-child, [class^=pb_table].table-lg.table-responsive-collapse.table-lg tbody tr td:first-child, [class^=pb_table].table-lg.table-responsive-collapse.table-lg tbody tr td:last-child {
       padding: 32px 8px !important; } }
 
-/*=====================================
-Base colors should not be documented.
-Only document color use.
-
-Colors -----------------------------*/
-/* Specialty Gradient -----------------*/
-/* Interface colors -------------------*/
-/* Main colors ------------------------*/
-/*=====================================
-
-Background colors ------------------*/
-/* Card colors ------------------*/
-/* Active colors ----------------------*/
-/* Hover colors -----------------------*/
-/* Focus colors -----------------------*/
-/* Border colors ----------------------*/
-/* Shadow colors ----------------------*/
-/* Text colors ------------------------*/
-/* Data colors ------------------------*/
-/* Status colors ----------------------*/
-/* Link colors ------------------------*/
-/* Product colors ---------------------*/
-/* Category colors ---------------------*/
 /*=====================================
 Base colors should not be documented.
 Only document color use.
@@ -18681,29 +18057,6 @@ Background colors ------------------*/
 /* Link colors ------------------------*/
 /* Product colors ---------------------*/
 /* Category colors ---------------------*/
-/*=====================================
-Base colors should not be documented.
-Only document color use.
-
-Colors -----------------------------*/
-/* Specialty Gradient -----------------*/
-/* Interface colors -------------------*/
-/* Main colors ------------------------*/
-/*=====================================
-
-Background colors ------------------*/
-/* Card colors ------------------*/
-/* Active colors ----------------------*/
-/* Hover colors -----------------------*/
-/* Focus colors -----------------------*/
-/* Border colors ----------------------*/
-/* Shadow colors ----------------------*/
-/* Text colors ------------------------*/
-/* Data colors ------------------------*/
-/* Status colors ----------------------*/
-/* Link colors ------------------------*/
-/* Product colors ---------------------*/
-/* Category colors ---------------------*/
 /* CLEAN UP AND REMOVE */
 /* Headings */
 /* Standard Font Weights */
@@ -18802,29 +18155,6 @@ Background colors ------------------*/
 /* Link colors ------------------------*/
 /* Product colors ---------------------*/
 /* Category colors ---------------------*/
-/*=====================================
-Base colors should not be documented.
-Only document color use.
-
-Colors -----------------------------*/
-/* Specialty Gradient -----------------*/
-/* Interface colors -------------------*/
-/* Main colors ------------------------*/
-/*=====================================
-
-Background colors ------------------*/
-/* Card colors ------------------*/
-/* Active colors ----------------------*/
-/* Hover colors -----------------------*/
-/* Focus colors -----------------------*/
-/* Border colors ----------------------*/
-/* Shadow colors ----------------------*/
-/* Text colors ------------------------*/
-/* Data colors ------------------------*/
-/* Status colors ----------------------*/
-/* Link colors ------------------------*/
-/* Product colors ---------------------*/
-/* Category colors ---------------------*/
 /* CLEAN UP AND REMOVE */
 /* Headings */
 /* Standard Font Weights */
@@ -18900,29 +18230,6 @@ Background colors ------------------*/
     [class^=pb_table].table-sm.table-collapse-lg.table-lg tbody tr td:first-child, [class^=pb_table].table-sm.table-collapse-lg.table-lg tbody tr td:last-child, [class^=pb_table].table-md.table-collapse-lg.table-lg tbody tr td:first-child, [class^=pb_table].table-md.table-collapse-lg.table-lg tbody tr td:last-child, [class^=pb_table].table-lg.table-collapse-lg.table-lg tbody tr td:first-child, [class^=pb_table].table-lg.table-collapse-lg.table-lg tbody tr td:last-child {
       padding: 32px 8px !important; } }
 
-/*=====================================
-Base colors should not be documented.
-Only document color use.
-
-Colors -----------------------------*/
-/* Specialty Gradient -----------------*/
-/* Interface colors -------------------*/
-/* Main colors ------------------------*/
-/*=====================================
-
-Background colors ------------------*/
-/* Card colors ------------------*/
-/* Active colors ----------------------*/
-/* Hover colors -----------------------*/
-/* Focus colors -----------------------*/
-/* Border colors ----------------------*/
-/* Shadow colors ----------------------*/
-/* Text colors ------------------------*/
-/* Data colors ------------------------*/
-/* Status colors ----------------------*/
-/* Link colors ------------------------*/
-/* Product colors ---------------------*/
-/* Category colors ---------------------*/
 /*=====================================
 Base colors should not be documented.
 Only document color use.
@@ -19279,29 +18586,6 @@ Background colors ------------------*/
 /* Headings */
 /* Standard Font Weights */
 /* Non_Standard Font Weights */
-/*=====================================
-Base colors should not be documented.
-Only document color use.
-
-Colors -----------------------------*/
-/* Specialty Gradient -----------------*/
-/* Interface colors -------------------*/
-/* Main colors ------------------------*/
-/*=====================================
-
-Background colors ------------------*/
-/* Card colors ------------------*/
-/* Active colors ----------------------*/
-/* Hover colors -----------------------*/
-/* Focus colors -----------------------*/
-/* Border colors ----------------------*/
-/* Shadow colors ----------------------*/
-/* Text colors ------------------------*/
-/* Data colors ------------------------*/
-/* Status colors ----------------------*/
-/* Link colors ------------------------*/
-/* Product colors ---------------------*/
-/* Category colors ---------------------*/
 /*=====================================
 Base colors should not be documented.
 Only document color use.
@@ -20970,29 +20254,6 @@ Background colors ------------------*/
 /* Link colors ------------------------*/
 /* Product colors ---------------------*/
 /* Category colors ---------------------*/
-/*=====================================
-Base colors should not be documented.
-Only document color use.
-
-Colors -----------------------------*/
-/* Specialty Gradient -----------------*/
-/* Interface colors -------------------*/
-/* Main colors ------------------------*/
-/*=====================================
-
-Background colors ------------------*/
-/* Card colors ------------------*/
-/* Active colors ----------------------*/
-/* Hover colors -----------------------*/
-/* Focus colors -----------------------*/
-/* Border colors ----------------------*/
-/* Shadow colors ----------------------*/
-/* Text colors ------------------------*/
-/* Data colors ------------------------*/
-/* Status colors ----------------------*/
-/* Link colors ------------------------*/
-/* Product colors ---------------------*/
-/* Category colors ---------------------*/
 [class^=pb_typeahead_kit] .typeahead-kit-select__option {
   cursor: pointer; }
 
@@ -21442,29 +20703,6 @@ Background colors ------------------*/
       font-weight: 400;
       font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif; }
 
-/*=====================================
-Base colors should not be documented.
-Only document color use.
-
-Colors -----------------------------*/
-/* Specialty Gradient -----------------*/
-/* Interface colors -------------------*/
-/* Main colors ------------------------*/
-/*=====================================
-
-Background colors ------------------*/
-/* Card colors ------------------*/
-/* Active colors ----------------------*/
-/* Hover colors -----------------------*/
-/* Focus colors -----------------------*/
-/* Border colors ----------------------*/
-/* Shadow colors ----------------------*/
-/* Text colors ------------------------*/
-/* Data colors ------------------------*/
-/* Status colors ----------------------*/
-/* Link colors ------------------------*/
-/* Product colors ---------------------*/
-/* Category colors ---------------------*/
 /*=====================================
 Base colors should not be documented.
 Only document color use.

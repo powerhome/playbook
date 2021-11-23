@@ -1,0 +1,37 @@
+@mixin line_height_tiken_visual {
+  font-size: 28px;
+  letter-spacing: -0.03em;
+  font-weight: 100;
+  color: #242B42;
+  margin: 0;
+  font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif;
+}
+
+.card-tightest {
+  @include line_height_tiken_visual;
+  line-height: 1.0;
+}
+.card-tighter {
+  @include line_height_tiken_visual;
+  line-height: 1.2;
+}
+.card-tight {
+  @include line_height_tiken_visual;
+  line-height: 1.4;
+}
+.card-normal {
+  @include line_height_tiken_visual;
+  line-height: 1.5;
+}
+.card-loose {
+  @include line_height_tiken_visual;
+  line-height: 1.6;
+}
+.card-looser {
+  @include line_height_tiken_visual;
+  line-height: 1.8;
+}
+.card-loosest {
+  @include line_height_tiken_visual;
+  line-height: 2.0;
+}
