@@ -1,3 +1,1 @@
-EXAMPLE IN USE 
-
-<Pill text="example" zindex="5" />
+<Pill text="example" zIndex="5" />

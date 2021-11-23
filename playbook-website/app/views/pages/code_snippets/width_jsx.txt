@@ -1,5 +1,1 @@
-EXAMPLE IN USE
-
 <Card maxWidth="xl">{'Card content'}</Card>
-  
-

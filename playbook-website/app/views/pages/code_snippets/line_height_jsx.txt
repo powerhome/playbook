@@ -1,0 +1,5 @@
+@import "tokens/line_height";
+
+.selector {
+  line-height: $lh_tight;
+}
