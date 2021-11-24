@@ -1,6 +1,5 @@
-Example In SASS
-@import "Tokens/Positioning
+@import "tokens/positioning
 
 .selector {
-    z-index: $z_10
+    z-index: $z_10;
 }

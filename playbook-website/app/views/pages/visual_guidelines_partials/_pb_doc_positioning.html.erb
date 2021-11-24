@@ -1,5 +1,4 @@
-<%= pb_rails("title", props: {text: "Tokens", size: 4 }) %>
-<br>
+<%= pb_rails("title", props: {text: "Tokens", size: 4, margin_bottom: 'md', margin_top: 'lg'}) %>
 <%= pb_rails("body", props: {text: "Make your own styles using Playbook tokens to keep your site consistent",}) %>
 <br>
 <%= pb_rails("card", props: { shadow: "deep" }) do %>
@@ -56,12 +55,11 @@
     </div>
     <br>    
 <% end %>
-     <% react_contents = Rails.root.join("app/views/pages/code_snippets/position_token.txt").read %>
-
-        <%= pb_rails("background", props: { background_color: "dark", padding: "xs", id: "code-wrapper", shadow: "deeper" }) do %>
-            <div class="pb--codeCopy" data-action="toggle" data-togglable="code_example">
-              <pre class="highlight pb_none"><%= raw rouge(react_contents, "react") %></pre>
-            </div>        
-        <% end %>
+        <%= pb_rails("background", props: { id: "code-wrapper", classname: "border-bottom", background_color: "dark", padding: "none" }) do %>
+    <%= pb_rails("caption", props: { text: "EXAMPLE IN USE", padding_top: "lg", margin_x: "xl", classname: "dark" }) %>
+    <div class="pb--codeCopy">
+      <pre class="highlight pt_sm" style="margin: 0px"><%= raw rouge(@position_token_example, "react") %></pre>
+    </div>
+  <% end %>
 <br>
 <br>
