@@ -7,6 +7,7 @@
   @import "visual_guidelines/typography_guidelines";
   @import "visual_guidelines/border_radius_guidelines";
   @import "visual_guidelines/spacing_tokens";
+  @import "visual_guidelines/line_height_guidelines";
 
   &_hero {
     padding: $space_xl * 1.75 !important;
