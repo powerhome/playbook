@@ -12,6 +12,49 @@
     flex-shrink: 1;
   }
 
+  &[class*=display_flex] {
+    display: flex;
+  }
+
+  // Display Flex - React
+  &[class*=displayFlex] {
+    display: flex;
+  }
+
+  // Alignment: Align Self - Rails
+  &[class*=align_self_start] {
+    align-self: flex-start;
+  }
+  
+  &[class*=align_self_end] {
+    align-self: flex-end;
+  }
+  
+  &[class*=align_self_center] {
+    align-self: center;
+  }
+  
+  &[class*=align_self_stretch] {
+    align-self: stretch;
+  }
+
+  // Alignment: Align Self - React
+  &[class*=alignSelf_start] {
+    align-self: flex-start;
+  }
+  
+  &[class*=alignSelf_end] {
+    align-self: flex-end;
+  }
+  
+  &[class*=alignSelf_center] {
+    align-self: center;
+  }
+  
+  &[class*=alignSelf_stretch] {
+    align-self: stretch;
+  }
+
   //Order Items
   @for $i from 0 through 12 {
     &[class*=order_#{$i}]{

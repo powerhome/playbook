@@ -6,6 +6,33 @@ const FlexItemExample = (props) => {
     <>
       <Title
           size={4}
+          text="Display Flex"
+      />
+      <br />
+      <div className="flex-doc-example">
+        <FlexItem
+            displayFlex
+            gap="xs"
+            {...props}
+        >
+          <FlexItem>
+            {'1'}
+          </FlexItem>
+          <FlexItem>
+            {'2'}
+          </FlexItem>
+          <FlexItem>
+            {'3'}
+          </FlexItem>
+          <FlexItem>
+            {'4'}
+          </FlexItem>
+        </FlexItem>
+      </div>
+
+      <br />
+      <Title
+          size={4}
           text="Grow"
       />
       <br />

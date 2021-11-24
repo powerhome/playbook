@@ -1,0 +1,91 @@
+<%= pb_rails("title", props: {size: 4, text: "Row"}) %>
+<br/>
+  <div class="flex-doc-example">
+    <%= pb_rails("flex") do %>
+      <%= pb_rails("flex/flex_item", props: {padding:"sm", align_self:"start"}) do %>1<% end %>
+      <%= pb_rails("flex/flex_item", props:{padding:"lg"}) do %>2<% end %>
+      <%= pb_rails("flex/flex_item", props:{padding:"lg"}) do %>3<% end %>
+      <%= pb_rails("flex/flex_item", props:{padding:"lg"}) do %>4<% end %>
+    <% end %>
+  </div>
+
+  <br/><br/>
+
+ <div class="flex-doc-example">
+  <%= pb_rails("flex") do %>
+    <%= pb_rails("flex/flex_item", props:{padding:"sm", align_self:"end"}) do %>1<% end %>
+    <%= pb_rails("flex/flex_item", props:{padding:"lg"}) do %>2<% end %>
+    <%= pb_rails("flex/flex_item", props:{padding:"lg"}) do %>3<% end %>
+    <%= pb_rails("flex/flex_item", props:{padding:"lg"}) do %>4<% end %>
+  <% end %>
+</div>
+
+  <br/><br/>
+
+ <div class="flex-doc-example">
+  <%= pb_rails("flex") do %>
+    <%= pb_rails("flex/flex_item", props:{padding:"sm", align_self: "center"}) do %>1<% end %>
+    <%= pb_rails("flex/flex_item", props:{padding:"lg"}) do %>2<% end %>
+    <%= pb_rails("flex/flex_item", props:{padding:"lg"}) do %>3<% end %>
+    <%= pb_rails("flex/flex_item", props:{padding:"lg"}) do %>4<% end %>
+  <% end %>
+</div>
+
+  <br/><br/>
+
+   <div class="flex-doc-example">
+  <%= pb_rails("flex") do %>
+    <%= pb_rails("flex/flex_item", props:{padding:"sm", align_self:"stretch"}) do %>1<% end %>
+    <%= pb_rails("flex/flex_item", props:{padding:"md"}) do %>2<% end %>
+    <%= pb_rails("flex/flex_item", props:{padding:"md"}) do %>3<% end %>
+    <%= pb_rails("flex/flex_item", props:{padding:"md"}) do %>4<% end %>
+  <% end %>
+</div>
+
+  <br/><br/>
+
+  <br/>
+
+<%= pb_rails("title", props: {size: 4, text: "Column"}) %>
+<br/>
+  <div class="flex-doc-example">
+    <%= pb_rails("flex", props: {orientation: "column"}) do %>
+      <%= pb_rails("flex/flex_item", props: {padding:"sm", align_self:"start"}) do %>1<% end %>
+      <%= pb_rails("flex/flex_item", props:{padding:"sm"}) do %>2<% end %>
+      <%= pb_rails("flex/flex_item", props:{padding:"sm"}) do %>3<% end %>
+      <%= pb_rails("flex/flex_item", props:{padding:"sm"}) do %>4<% end %>
+    <% end %>
+  </div>
+
+  <br/><br/>
+
+ <div class="flex-doc-example">
+  <%= pb_rails("flex", props: {orientation: "column"}) do %>
+    <%= pb_rails("flex/flex_item", props:{padding:"sm", align_self: "end"}) do %>1<% end %>
+    <%= pb_rails("flex/flex_item", props:{padding:"sm"}) do %>2<% end %>
+    <%= pb_rails("flex/flex_item", props:{padding:"sm"}) do %>3<% end %>
+    <%= pb_rails("flex/flex_item", props:{padding:"sm"}) do %>4<% end %>
+  <% end %>
+</div>
+
+  <br/><br/>
+
+ <div class="flex-doc-example">
+  <%= pb_rails("flex", props: {orientation: "column"}) do %>
+    <%= pb_rails("flex/flex_item", props:{padding:"sm", align_self:"center"}) do %>1<% end %>
+    <%= pb_rails("flex/flex_item", props:{padding:"sm"}) do %>2<% end %>
+    <%= pb_rails("flex/flex_item", props:{padding:"sm"}) do %>3<% end %>
+    <%= pb_rails("flex/flex_item", props:{padding:"sm"}) do %>4<% end %>
+  <% end %>
+</div>
+
+  <br/><br/>
+
+   <div class="flex-doc-example">
+  <%= pb_rails("flex", props: {orientation: "column"}) do %>
+    <%= pb_rails("flex/flex_item", props:{padding: "sm", align_self:"stretch"}) do %>1<% end %>
+    <%= pb_rails("flex/flex_item", props:{padding:"sm"}) do %>2<% end %>
+    <%= pb_rails("flex/flex_item", props:{padding:"sm"}) do %>3<% end %>
+    <%= pb_rails("flex/flex_item", props:{padding:"sm"}) do %>4<% end %>
+  <% end %>
+</div>
