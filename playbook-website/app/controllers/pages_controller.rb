@@ -84,12 +84,19 @@ class PagesController < ApplicationController
     @typography_token_example = Rails.root.join("app/views/pages/code_snippets/typography_tokens.txt").read
     @line_height_token_example = Rails.root.join("app/views/pages/code_snippets/line_height_jsx.txt").read
     @position_token_example = Rails.root.join("app/views/pages/code_snippets/position_token.txt").read
+    @shadow_token_example = Rails.root.join("app/views/pages/code_snippets/shadow_erb.txt").read
     @space_sizes = [
       { name: "Extra Small", variable: "space_xs" },
       { name: "Small", variable: "space_sm" },
       { name: "Medium", variable: "space_md" },
       { name: "Large", variable: "space_lg" },
       { name: "Extra Large", variable: "space_xl" },
+    ]
+    @shadow_colors = [
+      { name: "Shadow None", variable: "shadow_none" },
+      { name: "Shadow Deep", variable: "shadow_deep" },
+      { name: "Shadow Deeper", variable: "shadow_deeper" },
+      { name: "Shadow Deepest", variable: "shadow_deepest" },
     ]
   end
 
