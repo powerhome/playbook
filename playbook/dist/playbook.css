@@ -7091,6 +7091,10 @@ Background colors ------------------*/
       flex-basis: 20px; }
       [class^=pb_form_pill_kit].small [class^=pb_avatar_kit]::before, [class^=pb_form_pill_kit].small [class^=pb_avatar_kit] .avatar_wrapper::before {
         line-height: 21px; }
+  [class^=pb_form_pill_kit][class*=lowercase] {
+    text-transform: lowercase; }
+  [class^=pb_form_pill_kit][class*=none] {
+    text-transform: none; }
 
 [class^=pb_flex_item_kit][class*=_fixed_size] {
   flex-grow: 0;
@@ -8451,6 +8455,10 @@ Background colors ------------------*/
   height: 22px;
   border-radius: 11px;
   white-space: nowrap; }
+  [class^=pb_pill_kit][class*=lowercase] {
+    text-transform: lowercase; }
+  [class^=pb_pill_kit][class*=none] {
+    text-transform: none; }
   [class^=pb_pill_kit][class*=_success] {
     background: rgba(0, 202, 116, 0.1); }
     [class^=pb_pill_kit][class*=_success] .pb_pill_text {
@@ -13513,6 +13521,10 @@ Background colors ------------------*/
   height: 22px;
   border-radius: 11px;
   white-space: nowrap; }
+  [class^=pb_pill_kit][class*=lowercase] {
+    text-transform: lowercase; }
+  [class^=pb_pill_kit][class*=none] {
+    text-transform: none; }
   [class^=pb_pill_kit][class*=_success] {
     background: rgba(0, 202, 116, 0.1); }
     [class^=pb_pill_kit][class*=_success] .pb_pill_text {
