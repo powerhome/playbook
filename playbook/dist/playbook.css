@@ -21726,6 +21726,15 @@ Background colors ------------------*/
   padding-top: 0 !important;
   padding-bottom: 0 !important; }
 
+.max_width_xs {
+  max-width: 360px; }
+
+.max_width_0 {
+  max-width: 0; }
+
+.max_width_none {
+  max-width: none; }
+
 .max_width_sm {
   max-width: 540px; }
 
