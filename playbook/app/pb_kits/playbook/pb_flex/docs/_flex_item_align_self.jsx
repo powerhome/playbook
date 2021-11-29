@@ -1,7 +1,7 @@
 import React from 'react'
-import { Flex, FlexItem, Title } from  '../../'
+import { Flex, FlexItem, Title } from  '../..'
 
-const FlexAlignSelf = (props) => {
+const FlexItemAlignSelf = (props) => {
   return (
     <>
       <Title
@@ -207,4 +207,4 @@ const FlexAlignSelf = (props) => {
   )
 }
 
-export default FlexAlignSelf
+export default FlexItemAlignSelf

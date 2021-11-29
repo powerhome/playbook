@@ -12,16 +12,12 @@
     flex-shrink: 1;
   }
 
+  // Display Flex - Rails & React
   &[class*=display_flex] {
     display: flex;
   }
 
-  // Display Flex - React
-  &[class*=displayFlex] {
-    display: flex;
-  }
-
-  // Alignment: Align Self - Rails
+  // Alignment: Align Self - Rails & React
   &[class*=align_self_start] {
     align-self: flex-start;
   }
@@ -35,23 +31,6 @@
   }
   
   &[class*=align_self_stretch] {
-    align-self: stretch;
-  }
-
-  // Alignment: Align Self - React
-  &[class*=alignSelf_start] {
-    align-self: flex-start;
-  }
-  
-  &[class*=alignSelf_end] {
-    align-self: flex-end;
-  }
-  
-  &[class*=alignSelf_center] {
-    align-self: center;
-  }
-  
-  &[class*=alignSelf_stretch] {
     align-self: stretch;
   }
 

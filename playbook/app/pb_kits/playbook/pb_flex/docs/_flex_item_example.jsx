@@ -16,16 +16,16 @@ const FlexItemExample = (props) => {
             {...props}
         >
           <FlexItem>
-            {'1'}
+            {'We'}
           </FlexItem>
           <FlexItem>
-            {'2'}
+            {'Are'}
           </FlexItem>
           <FlexItem>
-            {'3'}
+            {'Being'}
           </FlexItem>
           <FlexItem>
-            {'4'}
+            {'Flexed'}
           </FlexItem>
         </FlexItem>
       </div>

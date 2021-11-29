@@ -19,11 +19,11 @@ type FlexItemPropTypes = {
 const FlexItem = (props: FlexItemPropTypes) => {
   const { children, className, fixedSize, grow, overflow = null, shrink, flex = 'none', order = 'none', alignSelf = null, displayFlex } = props
   const growClass = grow === true ? 'grow' : ''
-  const displayFlexClass = displayFlex === true ? 'displayFlex' : ''
+  const displayFlexClass = displayFlex === true ? `display_flex_${displayFlex}` : ''
   const flexClass = flex !== 'none' ? `flex_${flex}` : ''
   const overflowClass = overflow ? `overflow_${overflow}` : ''
   const shrinkClass = shrink === true ? 'shrink' : ''
-  const alignSelfClass = alignSelf ? `alignSelf_${alignSelf}` : ''
+  const alignSelfClass = alignSelf ? `align_self_${alignSelf}` : ''
   const fixedStyle =
     fixedSize !== undefined ? { flexBasis: `${fixedSize}` } : null
   const orderClass = order !== 'none' ? `order_${order}` : null
