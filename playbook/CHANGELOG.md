@@ -1,5 +1,46 @@
 
 
+## [10.15.0](https://github.com/powerhome/playbook/tree/10.15.0) (2021-11-29)
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/10.14.0...10.15.0)
+
+**Kit Enhancements:**
+
+- Add Background Colors to the Card Kit [\#1660](https://github.com/powerhome/playbook/pull/1660) ([Ivancandido11](https://github.com/Ivancandido11))
+- Add additional flex box property to  FlexItem kit [\#1651](https://github.com/powerhome/playbook/pull/1651) ([JelenaD1](https://github.com/JelenaD1))
+- Added Border Radius Tokens to Visual Guidelines PB [\#1648](https://github.com/powerhome/playbook/pull/1648) ([RexGluck](https://github.com/RexGluck))
+- Remove chart background color [\#1640](https://github.com/powerhome/playbook/pull/1640) ([kyleschechter](https://github.com/kyleschechter))
+- Background kit colors [\#1668](https://github.com/powerhome/playbook/pull/1668) ([jasoncypret](https://github.com/jasoncypret))
+
+**Fixed Bugs:**
+
+- Set Default Background for Card Kit [\#1671](https://github.com/powerhome/playbook/pull/1671) ([kre8sions](https://github.com/kre8sions))
+- Made background kit work with CSS Modules [\#1654](https://github.com/powerhome/playbook/pull/1654) ([CooperSawyer1](https://github.com/CooperSawyer1))
+- Fix Card Classnames and Dark mode [\#1674](https://github.com/powerhome/playbook/pull/1674) ([kre8sions](https://github.com/kre8sions))
+
+**Improvements:**
+
+- Improve spacing global props docs [\#1662](https://github.com/powerhome/playbook/pull/1662) ([KurstynStorms](https://github.com/KurstynStorms))
+- Screen size docs -Update Slim files to ERB [\#1659](https://github.com/powerhome/playbook/pull/1659) ([ericawinne](https://github.com/ericawinne))
+- Fixed greedy padding on the background kit from visual guidelines [\#1656](https://github.com/powerhome/playbook/pull/1656) ([jasoncypret](https://github.com/jasoncypret))
+- Improve max width global props docs/visual-guidelines [\#1653](https://github.com/powerhome/playbook/pull/1653) ([jon1735](https://github.com/jon1735))
+- Add Spline example to Bar Graph docs [\#1650](https://github.com/powerhome/playbook/pull/1650) ([RudeChowder](https://github.com/RudeChowder))
+- added screen sizing docs [\#1649](https://github.com/powerhome/playbook/pull/1649) ([ericawinne](https://github.com/ericawinne))
+- Improve positioning global props docs [\#1642](https://github.com/powerhome/playbook/pull/1642) ([RobGentile17](https://github.com/RobGentile17))
+- Update Rubocop Dependencies [\#1644](https://github.com/powerhome/playbook/pull/1644) ([Ivancandido11](https://github.com/Ivancandido11))
+- Bump puma from 5.3.2 to 5.5.2 in /playbook-website [\#1676](https://github.com/powerhome/playbook/pull/1676) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Improve number spacing [\#1670](https://github.com/powerhome/playbook/pull/1670) ([jasoncypret](https://github.com/jasoncypret))
+- remove deprecated props [\#1669](https://github.com/powerhome/playbook/pull/1669) ([jasoncypret](https://github.com/jasoncypret))
+- Added-zIndex Docs [\#1647](https://github.com/powerhome/playbook/pull/1647) ([datnghiem13](https://github.com/datnghiem13))
+- Line height tokens [\#1666](https://github.com/powerhome/playbook/pull/1666) ([jasoncypret](https://github.com/jasoncypret))
+- Add Typography Tokens on Visual Guidelines [\#1655](https://github.com/powerhome/playbook/pull/1655) ([kathrenepowerhrg](https://github.com/kathrenepowerhrg))
+- Text transform prop pill [\#1680](https://github.com/powerhome/playbook/pull/1680) ([batistaDev1113](https://github.com/batistaDev1113))
+- Expand max width props global [\#1673](https://github.com/powerhome/playbook/pull/1673) ([pauljpark](https://github.com/pauljpark))
+- Improve spacing global props docs [\#1667](https://github.com/powerhome/playbook/pull/1667) ([jasoncypret](https://github.com/jasoncypret))
+- Shadow section for visual guidelines [\#1658](https://github.com/powerhome/playbook/pull/1658) ([nickamantia](https://github.com/nickamantia))
+
+
+
 ## [10.14.0](https://github.com/powerhome/playbook/tree/10.14.0) (2021-11-12)
 
 [Full Changelog](https://github.com/powerhome/playbook/compare/10.13.1...10.14.0)

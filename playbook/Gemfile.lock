@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    playbook_ui (10.14.0)
+    playbook_ui (10.15.0)
       actionpack (>= 5.2.4.5)
       actionview (>= 5.2.4.5)
       activesupport (>= 5.2.4.5)
@@ -242,7 +242,7 @@ GEM
     tzinfo-data (1.2018.9)
       tzinfo (>= 1.0.0)
     unicode-display_width (1.8.0)
-    view_component (2.42.0)
+    view_component (2.45.0)
       activesupport (>= 5.0.0, < 8.0)
       method_source (~> 1.0)
     webpacker (5.4.3)
@@ -272,4 +272,4 @@ DEPENDENCIES
   tzinfo-data (= 1.2018.9)
 
 BUNDLED WITH
-   2.2.31
+   2.2.32
