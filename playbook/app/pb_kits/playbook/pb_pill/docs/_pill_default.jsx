@@ -1,10 +1,13 @@
 import React from 'react'
 import Pill from '../_pill.jsx'
 
-const PillDefault = () => {
+const PillDefault = (props) => {
   return (
     <div>
-      <Pill text="default" />
+      <Pill
+          text="default"
+          {...props}
+      />
     </div>
   )
 }
