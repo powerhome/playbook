@@ -1,17 +1,13 @@
-<h1 aria-label="online" class="pb_title_kit_1">Opacity</h1>
-<br>
-<%= pb_rails("body", props: {
-   text: "
-   The word opaque is used for describing objects that are fully visible, i.e. with no transparency. 
+<%= pb_rails("title", props: { text: "Opacity", size: 1, margin_top: "xl", padding_top: "xl"  }) %>
+<%= pb_rails("body", props: { tag: "p", margin_bottom: "lg", margin_top: "xs" }) do %>
+The word opaque is used for describing objects that are fully visible, i.e. with no transparency. 
    On a web page, a fully opaque element has an opacity value of 1 and a fully transparent element has an opacity value of 0. 
-   By default, all elements have an opacity value of 1. From 0 to 1, the opacity property controls the transparency level of the element."
-   }) %>
-<br>
-<h4 aria-label="online" class="pb_title_kit_4 pt_sm">Opacity Tokens</h4>
-<br>
-<%= pb_rails("body", props: {
-   text: "Make your own styles using Playbook tokens to keep your site consistent. To use the opacity for your custom css import into your scss file:"
-   }) %><br>
+   By default, all elements have an opacity value of 1. From 0 to 1, the opacity property controls the transparency level of the element.
+   <% end %>
+   <%= pb_rails("title", props: { text: "Scss Tokens", tag: "h3", size: 4 }) %>
+<%= pb_rails("body", props: { tag: "p", margin_bottom: "lg", margin_top: "xs" }) do %>
+   Make your own styles using Playbook tokens to keep your site consistent. To use the opacity for your custom css import into your scss file.
+<% end %>
 <%= pb_rails("card", props: {shadow: "deep", margin_bottom: "xl", padding: "none", padding_top: "md" }) do %>
 <ul class="opacity-removing-utilities pb--utlities-color">
    <li data-name="Data 1" data-variable="$data_1">
@@ -64,13 +60,11 @@
       <p class="name">Opacity_10</p>
       <p class="var">$opacity_10</p>
    </li>
-</ul>
-<% react_contents = Rails.root.join("app/views/pages/code_snippets/opacity_tokens.txt").read %>
-    
+</ul>    
 <%= pb_rails("background", props: { background_color: "dark", padding: "xs", id: "code-wrapper" }) do %>
   <%= pb_rails("caption", props: { padding_x: "md", padding_top: "md", text: "Example in Sass" }) %>
     <div class="pb--codeCopy" data-action="toggle" data-togglable="code_example">
-      <pre class="highlight"><%= raw rouge(react_contents, "react") %></pre>
+      <pre class="highlight"><%= raw rouge(@opacity_code_example, "react") %></pre>
     </div>    
-<% end %>  
+<% end %>
 <% end %>

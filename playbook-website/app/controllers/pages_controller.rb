@@ -75,6 +75,7 @@ class PagesController < ApplicationController
   def principles; end
 
   def visual_guidelines
+    @opacity_code_example = Rails.root.join("app/views/pages/code_snippets/opacity_tokens.txt").read
     @max_width_code_example = Rails.root.join("app/views/pages/code_snippets/width_jsx.txt").read
     @number_spacing_code_example = Rails.root.join("app/views/pages/code_snippets/number_spacing_jsx.txt").read
     @position_code_example = Rails.root.join("app/views/pages/code_snippets/positioning_jsx.txt").read
