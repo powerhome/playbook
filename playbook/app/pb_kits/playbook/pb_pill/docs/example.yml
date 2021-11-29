@@ -2,8 +2,12 @@ examples:
   
   rails:
   - pill_default: Default
+  - pill_variants: Variants
+  - pill_example: Example
  
   
   
   react:
   - pill_default: Default
+  - pill_variants: Variants
+  - pill_example: Example

@@ -8,12 +8,16 @@ module Playbook
       prop :text
       prop :size
 
+      prop :text_transform, type: Playbook::Props::Enum,
+                            values: %w[none lowercase],
+                            default: "none"
+
       def classname
-        generate_classname("pb_form_pill_kit", "primary", name, text)
+        generate_classname("pb_form_pill_kit", "primary", name, text, text_transform)
       end
 
       def display_text
-        name.downcase
+        object.text
       end
 
       def size_class

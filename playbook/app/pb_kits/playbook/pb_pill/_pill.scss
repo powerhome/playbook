@@ -14,6 +14,14 @@ $pb_pill_height: 22px;
   border-radius: $pb_pill_height/2;
   white-space: nowrap;
 
+  &[class*=lowercase] {
+    text-transform: lowercase;
+  }
+
+  &[class*=none] {
+    text-transform: none;
+  }
+
   @each $color_name, $color_value in $status_color_text {
     &[class*=_#{$color_name}]  {
         background: rgba($color_value, $opacity-1);

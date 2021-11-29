@@ -14,6 +14,7 @@ type PillProps = {
   id?: string,
   text: string,
   variant?: "success" | "warning" | "error" | "info" | "neutral",
+  textTransform?: "none" | "lowercase"
 }
 
 const Pill = (props: PillProps) => {
@@ -24,11 +25,12 @@ const Pill = (props: PillProps) => {
     id,
     text,
     variant = 'neutral',
+    textTransform = 'lowercase',
   } = props
 
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
-  const classes = classnames(buildCss('pb_pill_kit', variant), globalProps(props), className)
+  const classes = classnames(buildCss('pb_pill_kit', variant, textTransform), globalProps(props), className)
 
   return (
     <div
