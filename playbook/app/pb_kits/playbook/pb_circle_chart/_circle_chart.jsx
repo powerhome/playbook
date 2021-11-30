@@ -44,7 +44,7 @@ const CircleChart = (props: CircleChartProps) => {
     dataLabelHtml = '<div>{point.name}</div>',
     dataLabels = false,
     headerFormat = null,
-    height = '400',
+    height,
     id,
     innerSize = 'md',
     legend = false,
