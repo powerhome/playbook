@@ -1,0 +1,5 @@
+@import "tokens/positioning
+
+.selector {
+    z-index: $z_10;
+}

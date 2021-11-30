@@ -70,4 +70,11 @@ $form_pill_colors: (
       &::before { line-height: 21px; }
     }
   }
+  &[class*=lowercase] {
+    text-transform: lowercase;
+  }
+
+  &[class*=none] {
+    text-transform: none;
+  }
 }

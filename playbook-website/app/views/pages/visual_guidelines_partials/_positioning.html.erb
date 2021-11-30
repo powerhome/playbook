@@ -1,42 +1,38 @@
-<%= pb_rails("title", props: {text: "Positioning", size: 1, margin_top: "md" }) %>
-<%= pb_rails("body", props: {margin_bottom: "xl", padding_bottom: "lg", padding_top: "sm"}) do %>
-  If you're going to be using position absolute you might find it handy to use some of the index properties. We have multiple ways to use z-index, take a look at the examples below.
+<%= pb_rails("title", props: { text: "Positioning", size: 1, margin_top: "xl", padding_top: "xl"  }) %>
+<%= pb_rails("body", props: { tag: "p", margin_top: "xs", margin_bottom: "lg" }) do %>
+  If you're going to be using position absolute you might find it handy to use some of the 
+  index properties. We have multiple ways to use z-index, take a look at the examples below.
 <% end %>
-
-<%= pb_rails("body", props: {margin_top: "xl", margin_bottom: "sm"}) do %>
-<%= render :partial => "pages/visual_guidelines_partials/pb_doc_positioning",
-  locals:{ title: "Global Props" } %>
-  Available in every kit.  These are added globally as they are most flexible when developing.
+<%= pb_rails("title", props: { text: "Global Props", tag: "h3", size: 4 }) %>
+<%= pb_rails("body", props: { tag: "p", margin_bottom: "lg", margin_top: "xs" }) do %>
+ Available in every kit.  These are added globally as they are most flexible when developing.
 <% end %>
-      <%= pb_rails("card", props: {shadow: "deep", margin_bottom: "xl", padding: "none", padding_top: "md" }) do %>
-
-        <%= pb_rails("flex", props: {classname: "flex-container", vertical: "stretch", padding_x: "md", padding_bottom: "sm" }) do %>
-          <%= pb_rails("flex/flex_item", props: {flex: "1"}) do %>
-            <%= pb_rails("caption", props: {text: "Props", margin_bottom: "sm"}) %>
-              <%= pb_rails("pill", props: { text: "z_index", variant: "neutral" }) %>
-          <% end %>
-          <%= pb_rails("section_separator", props: { orientation: "vertical" }) %>
-          <%= pb_rails("flex/flex_item", props: {flex: "1"}) do %>
-              <%= pb_rails("caption", props: {text: "Values", margin_bottom: "sm"}) %>
-              <%= pb_rails("pill", props: { text: "1", variant: "warning" }) %>
-              <%= pb_rails("pill", props: { text: "2", variant: "warning" }) %>
-              <%= pb_rails("pill", props: { text: "3", variant: "warning" }) %>
-              <%= pb_rails("pill", props: { text: "4", variant: "warning" }) %>
-              <%= pb_rails("pill", props: { text: "5", variant: "warning" }) %>
-              <%= pb_rails("pill", props: { text: "6", variant: "warning" }) %>
-              <%= pb_rails("pill", props: { text: "7", variant: "warning" }) %>
-              <%= pb_rails("pill", props: { text: "8", variant: "warning" }) %>
-              <%= pb_rails("pill", props: { text: "9", variant: "warning" }) %>
-              <%= pb_rails("pill", props: { text: "10", variant: "warning" }) %>
-          <% end %>
-        <% end %>
-      
-        <% react_contents = Rails.root.join("app/views/pages/code_snippets/positioning_jsx.txt").read %>
-
-        <%= pb_rails("background", props: { background_color: "dark", padding: "xs", id: "code-wrapper", padding_left: "lg" }) do %>
-            <div class="pb--codeCopy" data-action="toggle" data-togglable="code_example">
-              <pre class="highlight"><%= raw rouge(react_contents, "react") %></pre>
-            </div>        
-        <% end %>
-      
-      <% end %>
+<%= pb_rails("card", props: { shadow: "deep", margin_bottom: "none", padding: "none" }) do %>
+  <%= pb_rails("flex", props: { vertical: "stretch", padding_x: "md", padding_top: "md", padding_bottom: "md" }) do %>
+    <%= pb_rails("flex/flex_item", props: { flex: "1" }) do %>
+      <%= pb_rails("caption", props: { text: "Props", margin_bottom: "sm" }) %>
+        <%= pb_rails("pill", props: { text: "zIndex", variant: "neutral" }) %>
+    <% end %>
+    <%= pb_rails("section_separator", props: { orientation: "vertical", margin_x: "sm" }) %>
+    <%= pb_rails("flex/flex_item", props: { flex: "1" }) do %>
+      <%= pb_rails("caption", props: {text: "Values", margin_bottom: "sm"}) %>
+      <%= pb_rails("pill", props: { text: "1", variant: "warning" }) %>
+      <%= pb_rails("pill", props: { text: "2", variant: "warning" }) %>
+      <%= pb_rails("pill", props: { text: "3", variant: "warning" }) %>
+      <%= pb_rails("pill", props: { text: "4", variant: "warning" }) %>
+      <%= pb_rails("pill", props: { text: "5", variant: "warning" }) %>
+      <%= pb_rails("pill", props: { text: "6", variant: "warning" }) %>
+      <%= pb_rails("pill", props: { text: "7", variant: "warning" }) %>
+      <%= pb_rails("pill", props: { text: "8", variant: "warning" }) %>
+      <%= pb_rails("pill", props: { text: "9", variant: "warning" }) %>
+      <%= pb_rails("pill", props: { text: "10", variant: "warning" }) %>
+    <% end %>
+  <% end %>
+  <%= pb_rails("background", props: { id: "code-wrapper", classname: "border-bottom", background_color: "dark", padding: "none" }) do %>
+    <%= pb_rails("caption", props: { text: "EXAMPLE IN USE", padding_top: "lg", margin_x: "xl", classname: "dark" }) %>
+    <div class="pb--codeCopy">
+      <pre class="highlight pt_sm" style="margin: 0px"><%= raw rouge(@position_code_example, "react") %></pre>
+    </div>
+  <% end %>
+<% end %>
+<%= render "pages/visual_guidelines_partials/pb_doc_positioning" %>

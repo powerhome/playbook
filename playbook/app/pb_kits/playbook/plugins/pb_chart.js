@@ -155,6 +155,7 @@ class pbChart {
         text: this.defaults.title,
       },
       chart: {
+        height: this.defaults.height,
         type: this.defaults.type,
         events: {
           render: (event) => alignBlockElement(event),
@@ -172,7 +173,6 @@ class pbChart {
             format: this.defaults.dataLabelHtml,
           },
           showInLegend: this.defaults.showInLegend,
-
         },
       },
 
