@@ -83,6 +83,7 @@ class PagesController < ApplicationController
     @border_radius_token_example = Rails.root.join("app/views/pages/code_snippets/border_radius_tokens.txt").read
     @typography_token_example = Rails.root.join("app/views/pages/code_snippets/typography_tokens.txt").read
     @line_height_token_example = Rails.root.join("app/views/pages/code_snippets/line_height_jsx.txt").read
+    @position_token_example = Rails.root.join("app/views/pages/code_snippets/position_token.txt").read
     @shadow_token_example = Rails.root.join("app/views/pages/code_snippets/shadow_erb.txt").read
     @space_sizes = [
       { name: "Extra Small", variable: "space_xs" },

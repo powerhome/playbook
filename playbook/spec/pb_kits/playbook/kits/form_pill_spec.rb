@@ -12,8 +12,8 @@ RSpec.describe Playbook::PbFormPill::FormPill do
 
   describe "#classname" do
     it "returns namespaced class name", :aggregate_failures do
-      expect(subject.new({}).classname).to eq "pb_form_pill_kit_primary"
-      expect(subject.new(classname: "additional_class").classname).to eq "pb_form_pill_kit_primary additional_class"
+      expect(subject.new({}).classname).to eq "pb_form_pill_kit_primary_none"
+      expect(subject.new(classname: "additional_class").classname).to eq "pb_form_pill_kit_primary_none additional_class"
     end
   end
 end
