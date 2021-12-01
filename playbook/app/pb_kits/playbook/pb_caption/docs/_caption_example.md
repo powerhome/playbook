@@ -1,0 +1,1 @@
+The above examples accept different prop values for color. Those can be `default`, `light`, or `link`. The `light` value will be passed in as default if none is being passed. The same applies to any of the variations on the Caption kit.
