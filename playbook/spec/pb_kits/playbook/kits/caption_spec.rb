@@ -32,13 +32,13 @@ RSpec.describe Playbook::PbCaption::Caption do
 
   describe "#classname" do
     it "returns namespaced class name", :aggregate_failures do
-      expect(subject.new({}).classname).to eq "pb_caption_kit_md"
-      expect(subject.new(dark: true).classname).to eq "pb_caption_kit_md dark"
-      expect(subject.new(size: "lg").classname).to eq "pb_caption_kit_lg"
-      expect(subject.new(size: "xs").classname).to eq "pb_caption_kit_xs"
-      expect(subject.new(size: "xs", variant: "link").classname).to eq "pb_caption_kit_xs_link"
-      expect(subject.new(dark: true, size: "lg").classname).to eq "pb_caption_kit_lg dark"
-      expect(subject.new(classname: "additional_class").classname).to eq "pb_caption_kit_md additional_class"
+      expect(subject.new({}).classname).to eq "pb_caption_kit_md_light"
+      expect(subject.new(dark: true).classname).to eq "pb_caption_kit_md_light dark"
+      expect(subject.new(size: "lg").classname).to eq "pb_caption_kit_lg_light"
+      expect(subject.new(size: "xs").classname).to eq "pb_caption_kit_xs_light"
+      expect(subject.new(size: "xs", variant: "link").classname).to eq "pb_caption_kit_xs_link_light"
+      expect(subject.new(dark: true, size: "lg").classname).to eq "pb_caption_kit_lg_light dark"
+      expect(subject.new(classname: "additional_class").classname).to eq "pb_caption_kit_md_light additional_class"
     end
   end
 end
