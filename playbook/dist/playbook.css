@@ -34,8 +34,6 @@ Background colors ------------------*/
     background: #F3F7FB; }
   [class^=pb_background_kit].pb_background_color_white {
     background: #FFFFFF; }
-<<<<<<< HEAD
-=======
   [class^=pb_background_kit].pb_background_color_success {
     background: #00CA74; }
   [class^=pb_background_kit].pb_background_color_warning {
@@ -104,7 +102,6 @@ Background colors ------------------*/
     background: #9E64E9; }
   [class^=pb_background_kit].pb_background_color_insulation {
     background: #FF2229; }
->>>>>>> 0de8ca96b833aca94a18f93ba968fad69d09a3b5
   [class^=pb_background_kit] .blur_up {
     -webkit-filter: blur(6px);
     filter: blur(6px);
