@@ -1,14 +1,13 @@
 PATH
   remote: .
   specs:
-    playbook_ui (10.15.0)
+    playbook_ui (10.16.0)
       actionpack (>= 5.2.4.5)
       actionview (>= 5.2.4.5)
       activesupport (>= 5.2.4.5)
       react-rails (~> 2.6)
       redcarpet (~> 3.5)
       rouge (~> 3.15)
-      rubocop-performance (~> 1.9.2)
       view_component (~> 2.23)
       webpacker-react (~> 0.3.2)
 
@@ -267,9 +266,10 @@ DEPENDENCIES
   rspec-html-matchers (= 0.9.1)
   rspec-rails (~> 3.8, >= 3.8.0)
   rubocop (= 0.93.1)
+  rubocop-performance (~> 1.9.2)
   spring (= 2.0.2)
   spring-watcher-listen (= 2.0.1)
   tzinfo-data (= 1.2018.9)
 
 BUNDLED WITH
-   2.2.32
+   2.2.31

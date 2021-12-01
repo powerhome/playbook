@@ -1,5 +1,25 @@
 
 
+## [10.16.0](https://github.com/powerhome/playbook/tree/10.16.0) (2021-11-30)
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/10.15.1...10.16.0)
+
+**Kit Enhancements:**
+
+- Add support for height prop in pie charts [\#1679](https://github.com/powerhome/playbook/pull/1679) ([maricris-sn](https://github.com/maricris-sn))
+
+
+
+## [10.15.1](https://github.com/powerhome/playbook/tree/10.15.1) (2021-11-29)
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/10.15.0...10.15.1)
+
+**Merged pull requests:**
+
+- Remove rubocop as a main dependency [\#1682](https://github.com/powerhome/playbook/pull/1682) ([jasoncypret](https://github.com/jasoncypret))
+
+
+
 ## [10.15.0](https://github.com/powerhome/playbook/tree/10.15.0) (2021-11-29)
 
 [Full Changelog](https://github.com/powerhome/playbook/compare/10.14.0...10.15.0)
