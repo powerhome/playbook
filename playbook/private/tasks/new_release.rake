@@ -8,12 +8,12 @@ require "rake"
 def confirmation_loop(version, npm_alpha, rake_arg)
   loop do
     if rake_arg == "alpha"
-      STDOUT.puts "\nNew alpha versions will be #{version} and #{npm_alpha} continue?  (y/n)"
+      $stdout.puts "\nNew alpha versions will be #{version} and #{npm_alpha} continue?  (y/n)"
     else
-      STDOUT.puts "\nNew version will be #{version}, continue?  Type 'n' to enter your version manually. (y/n)"
+      $stdout.puts "\nNew version will be #{version}, continue?  Type 'n' to enter your version manually. (y/n)"
     end
 
-    response = STDIN.gets.chomp.downcase
+    response = $stdin.gets.chomp.downcase
 
     if response == "y"
       puts "\nOkay, changing versions and building packages now."
@@ -23,16 +23,16 @@ def confirmation_loop(version, npm_alpha, rake_arg)
     next unless response == "n"
 
     if rake_arg == "alpha"
-      STDOUT.puts "\nInput alpha base version"
-      alpha_base = STDIN.gets.chomp.downcase
-      STDOUT.puts "\nInput alpha suffix version"
-      alpha_suffix = STDIN.gets.chomp.downcase
+      $stdout.puts "\nInput alpha base version"
+      alpha_base = $stdin.gets.chomp.downcase
+      $stdout.puts "\nInput alpha suffix version"
+      alpha_suffix = $stdin.gets.chomp.downcase
 
       version = "#{alpha_base}.pre.alpha#{alpha_suffix}"
       npm_alpha = "#{alpha_base}-alpha#{alpha_suffix}"
     else
-      STDOUT.puts "\nWhat would you like the version to be?"
-      version = STDIN.gets.chomp.downcase
+      $stdout.puts "\nWhat would you like the version to be?"
+      version = $stdin.gets.chomp.downcase
     end
   end
   [version, npm_alpha]
@@ -74,7 +74,7 @@ task :new_release, [:var] do |_task, args|
     base_triplet = `gem search playbook_ui`.match(/(\d+.\d+.\d+)/).to_s
 
     if alpha_triplet != base_triplet
-      new_version = base_triplet + ".pre.alpha1"
+      new_version = "#{base_triplet}.pre.alpha1"
     else
       # Increment latest alpha version by 1
       latest_remote_alpha[-1] = (latest_remote_alpha[-1].to_i + 1).to_s
@@ -149,7 +149,7 @@ task :new_release, [:var] do |_task, args|
   if args[:var] != "alpha"
     puts "\nPushed to NPM. Now lets create a tag..."
     puts "\nWrite a brief tag release description. You can edit this later on GitHub."
-    # description = STDIN.gets.chomp
+    # description = $stdin.gets.chomp
     puts "\nCreating Tag..."
     # `git tag -a #{new_version} -m "#{description}"`
     puts "\nPushing Tag to GitHub... (not yet ungated)"
