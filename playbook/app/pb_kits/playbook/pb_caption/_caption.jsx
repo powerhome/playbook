@@ -12,16 +12,7 @@ type CaptionProps = {
 	data?: object,
 	id?: string,
 	size?: "xs" | "sm" | "md" | "lg" | "xl",
-	tag?: | "h1"
-		| "h2"
-		| "h3"
-		| "h4"
-		| "h5"
-		| "h6"
-		| "p"
-		| "span"
-		| "div"
-		| "caption",
+	tag?: "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "p" | "span" | "div" | "caption",
 	text?: string,
 	variant?: null | "link",
 	color?: "default" | "link" | "light",
