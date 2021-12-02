@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+# rubocop:disable Style/HashLikeCase
+
 module Playbook
   module PbCircleChart
     class CircleChart < Playbook::KitBase
@@ -90,3 +92,5 @@ module Playbook
     end
   end
 end
+
+# rubocop:enable Style/HashLikeCase

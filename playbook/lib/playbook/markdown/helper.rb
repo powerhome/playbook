@@ -80,7 +80,7 @@ module Playbook
             loop do
               break unless @headers.include?(permalink)
 
-              permalink.gsub!(/\_(\d+)$/, "_#{Regexp.last_match(1).to_i + 1}")
+              permalink.gsub!(/_(\d+)$/, "_#{Regexp.last_match(1).to_i + 1}")
             end
           end
           @headers << permalink
@@ -121,7 +121,7 @@ module Playbook
         if @list_items[0].include?("[do]") || @list_items[0].include?("[dont]")
           @element_items = []
           @list_items.each do |item, _index|
-            item.gsub(%r{\<li>(.*)\</li>}) do
+            item.gsub(%r{<li>(.*)</li>}) do
               @element_items.push(Regexp.last_match(1))
             end
           end
