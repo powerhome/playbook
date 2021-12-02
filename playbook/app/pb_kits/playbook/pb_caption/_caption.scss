@@ -1,5 +1,4 @@
 @import "../tokens/colors";
-
 @import "caption_mixin";
 
 [class^="pb_caption_kit"] {
@@ -15,19 +14,30 @@
 			color: $primary;
 		}
 	}
-	&[class*="dark"] {
-		@include caption_dark;
-	}
-
-	&[class*="default"] {
-		color: $text_lt_default;
-	}
 
 	&[class*="light"] {
 		color: $text_lt_light;
 	}
 
+
+	&[class*="default"] {
+		color: $text_lt_default;
+	}
+
 	&[class*="link"] {
 		color: $primary;
 	}
+
+	// &[class*="dark"] {
+	// 	@include caption_dark;
+	// }
+
+	&[class*=dark] {
+    // @include caption_dark;
+    @each $dark_color_name, $dark_color_value in $pb_dark_caption_colors { 
+      &[class*=_#{$dark_color_name}][class*=dark]{
+        @include caption_color($dark_color_value); 
+      }
+    }
+  }
 }
