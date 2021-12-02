@@ -1,0 +1,23 @@
+@import "../tokens/exports/colors";
+@import "../tokens/exports/opacity";
+
+$shadow_none: 0 0 0 0 transparent;
+$shadow_deep: 0 4px 10px 0 rgba($shadow, 0.16);
+$shadow_deeper: 0 12px 28px 0 rgba($shadow, 0.18);
+$shadow_deepest: 0 30px 38px 4px $shadow, 0 2px 14px 4px rgba($shadow, 0.1);
+
+.shadow_none {
+  box-shadow: $shadow_none;
+}
+
+.shadow_deep {
+  box-shadow: $shadow_deep;
+}
+
+.shadow_deeper { 
+  box-shadow: $shadow_deeper;
+}
+
+.shadow_deepest { 
+  box-shadow: $shadow_deepest; 
+}
