@@ -59,7 +59,7 @@ const Caption = (props: CaptionProps) => {
   const css = classnames(
     buildCss('pb_caption_kit', size, variant, color),
     globalProps(props),
-    className
+    className,
   )
 
   return (
