@@ -48,6 +48,10 @@ module Playbook
                    values: %w[start center end stretch baseline none],
                    default: "none"
 
+      prop :align_self, type: Playbook::Props::Enum,
+                        values: %w[start end center stretch none],
+                        default: "none"
+
       prop :wrap, type: Playbook::Props::Boolean,
                   default: false
 
@@ -62,7 +66,8 @@ module Playbook
                            spacing_class,
                            gap_class,
                            row_gap_class,
-                           column_gap_class)
+                           column_gap_class,
+                           align_self_class)
       end
 
     private
@@ -112,6 +117,14 @@ module Playbook
           vertical_class
         else
           "align_items_#{align}"
+        end
+      end
+
+      def align_self_class
+        if align_self == "none"
+          nil
+        else
+          "align_self_#{align_self}"
         end
       end
 
