@@ -15,11 +15,7 @@ RSpec.describe Playbook::PbCard::Card do
     is_expected.to define_boolean_prop(:border_none)
       .with_default(false)
   }
-  it do
-    is_expected.to define_enum_prop(:shadow)
-      .with_default("none")
-      .with_values("none", "deep", "deeper", "deepest")
-  end
+
   it do
     is_expected.to define_enum_prop(:background)
       .with_default("none")
