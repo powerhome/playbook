@@ -47,7 +47,7 @@ jobs:
 
       - name: Find Current Pull Request
         id: findPr
-        uses: jwalton/gh-find-current-pr@v1.2.0
+        uses: jwalton/gh-find-current-pr@v1.2.1
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
 
