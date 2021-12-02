@@ -76,7 +76,7 @@
     "@babel/preset-typescript": "^7.15.0",
     "@testing-library/jest-dom": "5.14.1",
     "@testing-library/react": "11.2.7",
-    "@types/react": "17.0.21",
+    "@types/react": "17.0.37",
     "axe-core": "4.3.3",
     "circular-dependency-plugin": "5.2.2",
     "clean-webpack-plugin": "2.0.2",

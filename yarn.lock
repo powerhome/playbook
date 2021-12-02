@@ -2302,14 +2302,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react@npm:17.0.21":
-  version: 17.0.21
-  resolution: "@types/react@npm:17.0.21"
+"@types/react@npm:17.0.37":
+  version: 17.0.37
+  resolution: "@types/react@npm:17.0.37"
   dependencies:
     "@types/prop-types": "*"
     "@types/scheduler": "*"
     csstype: ^3.0.2
-  checksum: c3f0c465a2d680c17ff7fa5dc4ec2a796044f710f37b7917960c4eedcb5dfab502da3df4aee24f0f57a5a8600fabd3f0085fe2ebf00c4870df70d2ce02a3982f
+  checksum: 9edbfaf07cdfbb6cebdd30e972bca85e1f73dca082c83c0fdecd2b75a0f8af2159814748c55b80e64ab0a392a732340923fd1f0ca57789d17acba12ce3b22c99
   languageName: node
   linkType: hard
 
@@ -11206,7 +11206,7 @@ fsevents@^1.2.7:
     "@popperjs/core": ^2.6.0
     "@testing-library/jest-dom": 5.14.1
     "@testing-library/react": 11.2.7
-    "@types/react": 17.0.21
+    "@types/react": 17.0.37
     axe-core: 4.3.3
     babel-eslint: 10.1.0
     babel-jest: ^26.6.3
