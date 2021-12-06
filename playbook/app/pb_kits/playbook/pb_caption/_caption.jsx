@@ -29,7 +29,7 @@ const Caption = (props: CaptionProps) => {
     tag = 'div',
     text,
     variant = null,
-    color = 'light',
+    color,
   } = props
   const tagOptions = [
     'h1',
