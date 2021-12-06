@@ -7106,6 +7106,21 @@ Background colors ------------------*/
 [class^=pb_flex_item_kit][class*=_shrink] {
   flex-shrink: 1; }
 
+[class^=pb_flex_item_kit][class*=display_flex] {
+  display: flex; }
+
+[class^=pb_flex_item_kit][class*=align_self_start] {
+  align-self: flex-start; }
+
+[class^=pb_flex_item_kit][class*=align_self_end] {
+  align-self: flex-end; }
+
+[class^=pb_flex_item_kit][class*=align_self_center] {
+  align-self: center; }
+
+[class^=pb_flex_item_kit][class*=align_self_stretch] {
+  align-self: stretch; }
+
 [class^=pb_flex_item_kit][class*=order_0] {
   order: 0; }
 
@@ -7240,6 +7255,14 @@ Background colors ------------------*/
     align-items: stretch; }
   [class^=pb_flex_kit][class*=align_items_baseline] {
     align-items: baseline; }
+  [class^=pb_flex_kit][class*=align_self_start] {
+    align-self: flex-start; }
+  [class^=pb_flex_kit][class*=align_self_end] {
+    align-self: flex-end; }
+  [class^=pb_flex_kit][class*=align_self_center] {
+    align-self: center; }
+  [class^=pb_flex_kit][class*=align_self_stretch] {
+    align-self: stretch; }
   [class^=pb_flex_kit][class*=spacing_around], [class^=pb_flex_kit][class*=justify_content_around] {
     justify-content: space-around; }
   [class^=pb_flex_kit][class*=spacing_between], [class^=pb_flex_kit][class*=justify_content_between] {
