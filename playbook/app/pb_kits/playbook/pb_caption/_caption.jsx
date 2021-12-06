@@ -6,16 +6,16 @@ import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
 import { globalProps } from '../utilities/globalProps.js'
 
 type CaptionProps = {
-	aria?: object,
-	className?: string,
-	children: array<React.ReactNode> | React.ReactNode,
-	data?: object,
-	id?: string,
-	size?: "xs" | "sm" | "md" | "lg" | "xl",
-	tag?: "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "p" | "span" | "div" | "caption",
-	text?: string,
-	variant?: null | "link",
-	color?: "default" | "link" | "light",
+  aria?: object,
+  className?: string,
+  children: array<React.ReactNode> | React.ReactNode,
+  data?: object,
+  id?: string,
+  size?: "xs" | "sm" | "md" | "lg" | "xl",
+  tag?: "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "p" | "span" | "div" | "caption",
+  text?: string,
+  variant?: null | "link",
+  color?: "default" | "link" | "light",
 };
 
 const Caption = (props: CaptionProps) => {

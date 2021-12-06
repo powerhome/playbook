@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-indent-props */
 import React from 'react'
 import Caption from '../_caption'
 
@@ -5,19 +6,19 @@ const CaptionExample = (props) => {
   return (
     <div>
       <Caption
-          color="default"
-          text="text default"
-          {...props}
+        color="default"
+        text="text default"
+        {...props}
       />
       <Caption
-          color="light"
-          text="text light"
-          {...props}
+        color="light"
+        text="text light"
+        {...props}
       />
       <Caption
-          color="link"
-          text="text link"
-          {...props}
+        color="link"
+        text="text link"
+        {...props}
       />
     </div>
   )
