@@ -4,19 +4,21 @@ namespace :pb_release do
   desc "Update the version number in preparation to release"
   task :version do
     puts "\n"
-    puts "*" * 20 + " Create New Playbook Release " + "*" * 20
+    puts "*" * 20
+    puts " Create New Playbook Release "
+    puts "*" * 20
     ack = "\nFirst, before creating a new version please make sure you are familiar with SemVer guidlines: "
     ack += "\nhttps://semver.org/#semantic-versioning-specification-semver. "
     ack += "\n\nDoing so will ensure the proper version is selected for the release. "
     ack += "\nSee also: https://github.com/powerhome/playbook/wiki/Releasing-a-New-Version#determining-the-version."
     ack += "\n\nReady to start? y/N"
-    STDOUT.puts ack
-    agreed = STDIN.gets.chomp.downcase
+    $stdout.puts ack
+    agreed = $stdin.gets.chomp.downcase
 
     if agreed == "y"
       old_version = Playbook::VERSION
-      STDOUT.puts "What would you like the next release number to be? Currently #{old_version}"
-      new_version = STDIN.gets.chomp
+      $stdout.puts "What would you like the next release number to be? Currently #{old_version}"
+      new_version = $stdin.gets.chomp
       puts "Ok great, let's make version #{new_version}"
       puts "\n\n"
 
@@ -28,8 +30,8 @@ namespace :pb_release do
 
       # Update version.rb
       version_rb = File.read("lib/playbook/version.rb")
-      old_version_rb = version_rb.gsub(/PREVIOUS_VERSION\s\=\s\"\w{1,3}.\w{1,3}.\w{1,3}\"/, "PREVIOUS_VERSION = \"#{old_version}\"")
-      new_version_rb = old_version_rb.gsub(/\sVERSION\s\=\s\"\w{1,3}.\w{1,3}.\w{1,3}\"/, " VERSION = \"#{new_version}\"")
+      old_version_rb = version_rb.gsub(/PREVIOUS_VERSION\s=\s"\w{1,3}.\w{1,3}.\w{1,3}"/, "PREVIOUS_VERSION = \"#{old_version}\"")
+      new_version_rb = old_version_rb.gsub(/\sVERSION\s=\s"\w{1,3}.\w{1,3}.\w{1,3}"/, " VERSION = \"#{new_version}\"")
       File.open("lib/playbook/version.rb", "w") { |file| file.puts new_version_rb }
       puts "Updated lib/playbook/version.rb"
 
@@ -39,7 +41,7 @@ namespace :pb_release do
 
       puts "\nLets create a tag..."
       puts "\nWrite a brief tag release description. You can edit this later on GitHub."
-      description = STDIN.gets.chomp
+      description = $stdin.gets.chomp
       puts "\nCreating Tag..."
       `git tag -a #{new_version} -m "#{description || new_version}"`
       puts "\nPushing Tag to GitHub..."
@@ -53,7 +55,7 @@ namespace :pb_release do
   task :push do
     version = Playbook::VERSION
     puts "You about to release version #{version}. Is that correct? (y/N)"
-    input = STDIN.gets.chomp
+    input = $stdin.gets.chomp
     raise Nope unless input.downcase == "y"
 
     # NPM
