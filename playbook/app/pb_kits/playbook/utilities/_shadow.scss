@@ -2,9 +2,10 @@
 
 @mixin shadow-classes($shadows-list) {
   @each $name, $shadow in $shadows-list {
-    .shadow_#{$name} {
+    .#{$name} {
       box-shadow: $shadow;
     }
   }
 }
 @include shadow-classes($box_shadows);
+ 
