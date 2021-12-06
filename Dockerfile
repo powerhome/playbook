@@ -5,9 +5,10 @@ RUN mv /etc/apt/sources.list.d /etc/apt/sources.list.d.bak && \
     apt update && apt install -y ca-certificates && \
     mv /etc/apt/sources.list.d.bak /etc/apt/sources.list.d
 
-RUN bash -lc 'rvm remove all --force && rvm install ruby-2.6.6 && rvm --default use ruby-2.6.6 && gem install bundler -v 2.2.31'
+RUN bash -lc 'rvm remove all --force && rvm install ruby-2.7.4 && rvm --default use ruby-2.7.4 && gem install bundler -v 2.2.31'
 RUN /pd_build/ruby_support/install_ruby_utils.sh
 RUN /pd_build/ruby_support/finalize.sh
+
 
 ENV NODE_OPTIONS "--max_old_space_size=8192"
 ENV NVM_VERSION v0.33.8
