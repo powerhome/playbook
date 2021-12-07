@@ -2,7 +2,7 @@ apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
   name: playbook
-  title: Playbook Website
+  title: Playbook
   description: Playbook is the first design system built for both Rails & React interfaces.
   links:
     - url: https://playbook.powerapp.cloud/
@@ -23,8 +23,8 @@ apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
   name: playbook-ui
-  title: Playbook UI Library
-  description: Playbook is the first design system built for both Rails & React interfaces.
+  title: Playbook UI
+  description: Playbook UI is the library that provides both Rails and React components that adhere to the Playbook design system.
   links:
     - url: https://www.npmjs.com/package/playbook-ui
       title: Playbook UI NPM Package
