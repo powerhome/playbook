@@ -23,13 +23,13 @@ const Caption = (props: CaptionProps) => {
     aria = {},
     className,
     children,
+    color,
     data = {},
     id,
     size = 'md',
     tag = 'div',
     text,
     variant = null,
-    color,
   } = props
   const tagOptions = [
     'h1',

@@ -1065,19 +1065,19 @@ Background colors ------------------*/
 /* Headings */
 /* Standard Font Weights */
 /* Non_Standard Font Weights */
-[class^="pb_caption_kit"] {
+[class^=pb_caption_kit] {
   font-weight: 600;
   color: #687887;
   text-transform: uppercase;
   font-size: 12px;
   letter-spacing: 0.07em; }
-  [class^="pb_caption_kit"][class^="pb_caption_kit_lg"] {
+  [class^=pb_caption_kit][class^=pb_caption_kit_lg] {
     font-weight: 400;
     color: #687887;
     text-transform: uppercase;
     font-size: 20px;
     letter-spacing: 0.07em; }
-  [class^="pb_caption_kit"][class^="pb_caption_kit_xs"] {
+  [class^=pb_caption_kit][class^=pb_caption_kit_xs] {
     font-weight: 400;
     color: #687887;
     text-transform: uppercase;
@@ -1085,19 +1085,19 @@ Background colors ------------------*/
     letter-spacing: 0.07em;
     text-transform: none;
     letter-spacing: unset; }
-    [class^="pb_caption_kit"][class^="pb_caption_kit_xs"][class*="_link"] {
+    [class^=pb_caption_kit][class^=pb_caption_kit_xs][class*="_link"] {
       color: #0056CF; }
-  [class^="pb_caption_kit"][class*="light"] {
+  [class^=pb_caption_kit][class*=light] {
     color: #687887; }
-  [class^="pb_caption_kit"][class*="default"] {
+  [class^=pb_caption_kit][class*=default] {
     color: #242B42; }
-  [class^="pb_caption_kit"][class*="link"] {
+  [class^=pb_caption_kit][class*=link] {
     color: #0056CF; }
-  [class^="pb_caption_kit"][class*=dark][class*=_default][class*=dark] {
+  [class^=pb_caption_kit][class*=dark][class*=_default][class*=dark] {
     color: #fff; }
-  [class^="pb_caption_kit"][class*=dark][class*=_light][class*=dark] {
+  [class^=pb_caption_kit][class*=dark][class*=_light][class*=dark] {
     color: rgba(255, 255, 255, 0.6); }
-  [class^="pb_caption_kit"][class*=dark][class*=_link][class*=dark] {
+  [class^=pb_caption_kit][class*=dark][class*=_link][class*=dark] {
     color: #0056CF; }
 
 /*=====================================
@@ -3038,19 +3038,19 @@ Background colors ------------------*/
 /* Headings */
 /* Standard Font Weights */
 /* Non_Standard Font Weights */
-[class^="pb_caption_kit"] {
+[class^=pb_caption_kit] {
   font-weight: 600;
   color: #687887;
   text-transform: uppercase;
   font-size: 12px;
   letter-spacing: 0.07em; }
-  [class^="pb_caption_kit"][class^="pb_caption_kit_lg"] {
+  [class^=pb_caption_kit][class^=pb_caption_kit_lg] {
     font-weight: 400;
     color: #687887;
     text-transform: uppercase;
     font-size: 20px;
     letter-spacing: 0.07em; }
-  [class^="pb_caption_kit"][class^="pb_caption_kit_xs"] {
+  [class^=pb_caption_kit][class^=pb_caption_kit_xs] {
     font-weight: 400;
     color: #687887;
     text-transform: uppercase;
@@ -3058,19 +3058,19 @@ Background colors ------------------*/
     letter-spacing: 0.07em;
     text-transform: none;
     letter-spacing: unset; }
-    [class^="pb_caption_kit"][class^="pb_caption_kit_xs"][class*="_link"] {
+    [class^=pb_caption_kit][class^=pb_caption_kit_xs][class*="_link"] {
       color: #0056CF; }
-  [class^="pb_caption_kit"][class*="light"] {
+  [class^=pb_caption_kit][class*=light] {
     color: #687887; }
-  [class^="pb_caption_kit"][class*="default"] {
+  [class^=pb_caption_kit][class*=default] {
     color: #242B42; }
-  [class^="pb_caption_kit"][class*="link"] {
+  [class^=pb_caption_kit][class*=link] {
     color: #0056CF; }
-  [class^="pb_caption_kit"][class*=dark][class*=_default][class*=dark] {
+  [class^=pb_caption_kit][class*=dark][class*=_default][class*=dark] {
     color: #fff; }
-  [class^="pb_caption_kit"][class*=dark][class*=_light][class*=dark] {
+  [class^=pb_caption_kit][class*=dark][class*=_light][class*=dark] {
     color: rgba(255, 255, 255, 0.6); }
-  [class^="pb_caption_kit"][class*=dark][class*=_link][class*=dark] {
+  [class^=pb_caption_kit][class*=dark][class*=_link][class*=dark] {
     color: #0056CF; }
 
 .pb-circle-chart-block {
@@ -5709,19 +5709,19 @@ Background colors ------------------*/
 /* Headings */
 /* Standard Font Weights */
 /* Non_Standard Font Weights */
-[class^="pb_caption_kit"] {
+[class^=pb_caption_kit] {
   font-weight: 600;
   color: #687887;
   text-transform: uppercase;
   font-size: 12px;
   letter-spacing: 0.07em; }
-  [class^="pb_caption_kit"][class^="pb_caption_kit_lg"] {
+  [class^=pb_caption_kit][class^=pb_caption_kit_lg] {
     font-weight: 400;
     color: #687887;
     text-transform: uppercase;
     font-size: 20px;
     letter-spacing: 0.07em; }
-  [class^="pb_caption_kit"][class^="pb_caption_kit_xs"] {
+  [class^=pb_caption_kit][class^=pb_caption_kit_xs] {
     font-weight: 400;
     color: #687887;
     text-transform: uppercase;
@@ -5729,19 +5729,19 @@ Background colors ------------------*/
     letter-spacing: 0.07em;
     text-transform: none;
     letter-spacing: unset; }
-    [class^="pb_caption_kit"][class^="pb_caption_kit_xs"][class*="_link"] {
+    [class^=pb_caption_kit][class^=pb_caption_kit_xs][class*="_link"] {
       color: #0056CF; }
-  [class^="pb_caption_kit"][class*="light"] {
+  [class^=pb_caption_kit][class*=light] {
     color: #687887; }
-  [class^="pb_caption_kit"][class*="default"] {
+  [class^=pb_caption_kit][class*=default] {
     color: #242B42; }
-  [class^="pb_caption_kit"][class*="link"] {
+  [class^=pb_caption_kit][class*=link] {
     color: #0056CF; }
-  [class^="pb_caption_kit"][class*=dark][class*=_default][class*=dark] {
+  [class^=pb_caption_kit][class*=dark][class*=_default][class*=dark] {
     color: #fff; }
-  [class^="pb_caption_kit"][class*=dark][class*=_light][class*=dark] {
+  [class^=pb_caption_kit][class*=dark][class*=_light][class*=dark] {
     color: rgba(255, 255, 255, 0.6); }
-  [class^="pb_caption_kit"][class*=dark][class*=_link][class*=dark] {
+  [class^=pb_caption_kit][class*=dark][class*=_link][class*=dark] {
     color: #0056CF; }
 
 /*=====================================
@@ -7738,19 +7738,19 @@ Background colors ------------------*/
 /* Headings */
 /* Standard Font Weights */
 /* Non_Standard Font Weights */
-[class^="pb_caption_kit"] {
+[class^=pb_caption_kit] {
   font-weight: 600;
   color: #687887;
   text-transform: uppercase;
   font-size: 12px;
   letter-spacing: 0.07em; }
-  [class^="pb_caption_kit"][class^="pb_caption_kit_lg"] {
+  [class^=pb_caption_kit][class^=pb_caption_kit_lg] {
     font-weight: 400;
     color: #687887;
     text-transform: uppercase;
     font-size: 20px;
     letter-spacing: 0.07em; }
-  [class^="pb_caption_kit"][class^="pb_caption_kit_xs"] {
+  [class^=pb_caption_kit][class^=pb_caption_kit_xs] {
     font-weight: 400;
     color: #687887;
     text-transform: uppercase;
@@ -7758,19 +7758,19 @@ Background colors ------------------*/
     letter-spacing: 0.07em;
     text-transform: none;
     letter-spacing: unset; }
-    [class^="pb_caption_kit"][class^="pb_caption_kit_xs"][class*="_link"] {
+    [class^=pb_caption_kit][class^=pb_caption_kit_xs][class*="_link"] {
       color: #0056CF; }
-  [class^="pb_caption_kit"][class*="light"] {
+  [class^=pb_caption_kit][class*=light] {
     color: #687887; }
-  [class^="pb_caption_kit"][class*="default"] {
+  [class^=pb_caption_kit][class*=default] {
     color: #242B42; }
-  [class^="pb_caption_kit"][class*="link"] {
+  [class^=pb_caption_kit][class*=link] {
     color: #0056CF; }
-  [class^="pb_caption_kit"][class*=dark][class*=_default][class*=dark] {
+  [class^=pb_caption_kit][class*=dark][class*=_default][class*=dark] {
     color: #fff; }
-  [class^="pb_caption_kit"][class*=dark][class*=_light][class*=dark] {
+  [class^=pb_caption_kit][class*=dark][class*=_light][class*=dark] {
     color: rgba(255, 255, 255, 0.6); }
-  [class^="pb_caption_kit"][class*=dark][class*=_link][class*=dark] {
+  [class^=pb_caption_kit][class*=dark][class*=_link][class*=dark] {
     color: #0056CF; }
 
 /*=====================================
@@ -8363,19 +8363,19 @@ Background colors ------------------*/
 /* Headings */
 /* Standard Font Weights */
 /* Non_Standard Font Weights */
-[class^="pb_caption_kit"] {
+[class^=pb_caption_kit] {
   font-weight: 600;
   color: #687887;
   text-transform: uppercase;
   font-size: 12px;
   letter-spacing: 0.07em; }
-  [class^="pb_caption_kit"][class^="pb_caption_kit_lg"] {
+  [class^=pb_caption_kit][class^=pb_caption_kit_lg] {
     font-weight: 400;
     color: #687887;
     text-transform: uppercase;
     font-size: 20px;
     letter-spacing: 0.07em; }
-  [class^="pb_caption_kit"][class^="pb_caption_kit_xs"] {
+  [class^=pb_caption_kit][class^=pb_caption_kit_xs] {
     font-weight: 400;
     color: #687887;
     text-transform: uppercase;
@@ -8383,19 +8383,19 @@ Background colors ------------------*/
     letter-spacing: 0.07em;
     text-transform: none;
     letter-spacing: unset; }
-    [class^="pb_caption_kit"][class^="pb_caption_kit_xs"][class*="_link"] {
+    [class^=pb_caption_kit][class^=pb_caption_kit_xs][class*="_link"] {
       color: #0056CF; }
-  [class^="pb_caption_kit"][class*="light"] {
+  [class^=pb_caption_kit][class*=light] {
     color: #687887; }
-  [class^="pb_caption_kit"][class*="default"] {
+  [class^=pb_caption_kit][class*=default] {
     color: #242B42; }
-  [class^="pb_caption_kit"][class*="link"] {
+  [class^=pb_caption_kit][class*=link] {
     color: #0056CF; }
-  [class^="pb_caption_kit"][class*=dark][class*=_default][class*=dark] {
+  [class^=pb_caption_kit][class*=dark][class*=_default][class*=dark] {
     color: #fff; }
-  [class^="pb_caption_kit"][class*=dark][class*=_light][class*=dark] {
+  [class^=pb_caption_kit][class*=dark][class*=_light][class*=dark] {
     color: rgba(255, 255, 255, 0.6); }
-  [class^="pb_caption_kit"][class*=dark][class*=_link][class*=dark] {
+  [class^=pb_caption_kit][class*=dark][class*=_link][class*=dark] {
     color: #0056CF; }
 
 /*=====================================
@@ -10941,19 +10941,19 @@ Background colors ------------------*/
 /* Headings */
 /* Standard Font Weights */
 /* Non_Standard Font Weights */
-[class^="pb_caption_kit"] {
+[class^=pb_caption_kit] {
   font-weight: 600;
   color: #687887;
   text-transform: uppercase;
   font-size: 12px;
   letter-spacing: 0.07em; }
-  [class^="pb_caption_kit"][class^="pb_caption_kit_lg"] {
+  [class^=pb_caption_kit][class^=pb_caption_kit_lg] {
     font-weight: 400;
     color: #687887;
     text-transform: uppercase;
     font-size: 20px;
     letter-spacing: 0.07em; }
-  [class^="pb_caption_kit"][class^="pb_caption_kit_xs"] {
+  [class^=pb_caption_kit][class^=pb_caption_kit_xs] {
     font-weight: 400;
     color: #687887;
     text-transform: uppercase;
@@ -10961,19 +10961,19 @@ Background colors ------------------*/
     letter-spacing: 0.07em;
     text-transform: none;
     letter-spacing: unset; }
-    [class^="pb_caption_kit"][class^="pb_caption_kit_xs"][class*="_link"] {
+    [class^=pb_caption_kit][class^=pb_caption_kit_xs][class*="_link"] {
       color: #0056CF; }
-  [class^="pb_caption_kit"][class*="light"] {
+  [class^=pb_caption_kit][class*=light] {
     color: #687887; }
-  [class^="pb_caption_kit"][class*="default"] {
+  [class^=pb_caption_kit][class*=default] {
     color: #242B42; }
-  [class^="pb_caption_kit"][class*="link"] {
+  [class^=pb_caption_kit][class*=link] {
     color: #0056CF; }
-  [class^="pb_caption_kit"][class*=dark][class*=_default][class*=dark] {
+  [class^=pb_caption_kit][class*=dark][class*=_default][class*=dark] {
     color: #fff; }
-  [class^="pb_caption_kit"][class*=dark][class*=_light][class*=dark] {
+  [class^=pb_caption_kit][class*=dark][class*=_light][class*=dark] {
     color: rgba(255, 255, 255, 0.6); }
-  [class^="pb_caption_kit"][class*=dark][class*=_link][class*=dark] {
+  [class^=pb_caption_kit][class*=dark][class*=_link][class*=dark] {
     color: #0056CF; }
 
 /*=====================================
@@ -19370,19 +19370,19 @@ Background colors ------------------*/
 /* Headings */
 /* Standard Font Weights */
 /* Non_Standard Font Weights */
-[class^="pb_caption_kit"] {
+[class^=pb_caption_kit] {
   font-weight: 600;
   color: #687887;
   text-transform: uppercase;
   font-size: 12px;
   letter-spacing: 0.07em; }
-  [class^="pb_caption_kit"][class^="pb_caption_kit_lg"] {
+  [class^=pb_caption_kit][class^=pb_caption_kit_lg] {
     font-weight: 400;
     color: #687887;
     text-transform: uppercase;
     font-size: 20px;
     letter-spacing: 0.07em; }
-  [class^="pb_caption_kit"][class^="pb_caption_kit_xs"] {
+  [class^=pb_caption_kit][class^=pb_caption_kit_xs] {
     font-weight: 400;
     color: #687887;
     text-transform: uppercase;
@@ -19390,19 +19390,19 @@ Background colors ------------------*/
     letter-spacing: 0.07em;
     text-transform: none;
     letter-spacing: unset; }
-    [class^="pb_caption_kit"][class^="pb_caption_kit_xs"][class*="_link"] {
+    [class^=pb_caption_kit][class^=pb_caption_kit_xs][class*="_link"] {
       color: #0056CF; }
-  [class^="pb_caption_kit"][class*="light"] {
+  [class^=pb_caption_kit][class*=light] {
     color: #687887; }
-  [class^="pb_caption_kit"][class*="default"] {
+  [class^=pb_caption_kit][class*=default] {
     color: #242B42; }
-  [class^="pb_caption_kit"][class*="link"] {
+  [class^=pb_caption_kit][class*=link] {
     color: #0056CF; }
-  [class^="pb_caption_kit"][class*=dark][class*=_default][class*=dark] {
+  [class^=pb_caption_kit][class*=dark][class*=_default][class*=dark] {
     color: #fff; }
-  [class^="pb_caption_kit"][class*=dark][class*=_light][class*=dark] {
+  [class^=pb_caption_kit][class*=dark][class*=_light][class*=dark] {
     color: rgba(255, 255, 255, 0.6); }
-  [class^="pb_caption_kit"][class*=dark][class*=_link][class*=dark] {
+  [class^=pb_caption_kit][class*=dark][class*=_link][class*=dark] {
     color: #0056CF; }
 
 [class^=pb_time_kit][class*=_center] {
@@ -21660,19 +21660,19 @@ Background colors ------------------*/
 /* Headings */
 /* Standard Font Weights */
 /* Non_Standard Font Weights */
-[class^="pb_caption_kit"] {
+[class^=pb_caption_kit] {
   font-weight: 600;
   color: #687887;
   text-transform: uppercase;
   font-size: 12px;
   letter-spacing: 0.07em; }
-  [class^="pb_caption_kit"][class^="pb_caption_kit_lg"] {
+  [class^=pb_caption_kit][class^=pb_caption_kit_lg] {
     font-weight: 400;
     color: #687887;
     text-transform: uppercase;
     font-size: 20px;
     letter-spacing: 0.07em; }
-  [class^="pb_caption_kit"][class^="pb_caption_kit_xs"] {
+  [class^=pb_caption_kit][class^=pb_caption_kit_xs] {
     font-weight: 400;
     color: #687887;
     text-transform: uppercase;
@@ -21680,19 +21680,19 @@ Background colors ------------------*/
     letter-spacing: 0.07em;
     text-transform: none;
     letter-spacing: unset; }
-    [class^="pb_caption_kit"][class^="pb_caption_kit_xs"][class*="_link"] {
+    [class^=pb_caption_kit][class^=pb_caption_kit_xs][class*="_link"] {
       color: #0056CF; }
-  [class^="pb_caption_kit"][class*="light"] {
+  [class^=pb_caption_kit][class*=light] {
     color: #687887; }
-  [class^="pb_caption_kit"][class*="default"] {
+  [class^=pb_caption_kit][class*=default] {
     color: #242B42; }
-  [class^="pb_caption_kit"][class*="link"] {
+  [class^=pb_caption_kit][class*=link] {
     color: #0056CF; }
-  [class^="pb_caption_kit"][class*=dark][class*=_default][class*=dark] {
+  [class^=pb_caption_kit][class*=dark][class*=_default][class*=dark] {
     color: #fff; }
-  [class^="pb_caption_kit"][class*=dark][class*=_light][class*=dark] {
+  [class^=pb_caption_kit][class*=dark][class*=_light][class*=dark] {
     color: rgba(255, 255, 255, 0.6); }
-  [class^="pb_caption_kit"][class*=dark][class*=_link][class*=dark] {
+  [class^=pb_caption_kit][class*=dark][class*=_link][class*=dark] {
     color: #0056CF; }
 
 /*=====================================
