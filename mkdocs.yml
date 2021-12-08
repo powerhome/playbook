@@ -4,3 +4,5 @@ nav:
   - "Home": "README.md"
   - "Upgrade Guide": "upgrade-guide.md"
   - "Change Log": "CHANGELOG.md"
+plugins:
+  - techdocs-core
