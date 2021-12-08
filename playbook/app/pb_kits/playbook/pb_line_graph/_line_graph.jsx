@@ -25,7 +25,8 @@ type LineGraphProps = {
   legend?: boolean,
   toggleLegendClick?: boolean,
   height?: string,
-}
+  colors: array,
+  }
 
 export default class LineGraph extends React.Component<LineGraphProps> {
   static defaultProps = {
@@ -52,11 +53,13 @@ export default class LineGraph extends React.Component<LineGraphProps> {
       legend,
       toggleLegendClick,
       height,
+      colors = [],
     } = this.props
 
     new pbChart(`.${className}`, {
       axisTitle: axisTitle,
       chartData: chartData,
+      colors: colors,
       id: id,
       pointStart: pointStart,
       subtitle: subTitle,

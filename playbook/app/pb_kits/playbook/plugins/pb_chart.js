@@ -74,7 +74,7 @@ class pbChart {
     } else if (this.options.type == 'gauge') {
       this.setupGauge()
     } else {
-      this.setupChart()
+      this.setupChart(options)
     }
   }
 
@@ -195,7 +195,7 @@ class pbChart {
     })
   }
 
-  setupChart() {
+  setupChart(options) {
     Highcharts.setOptions(highchartsTheme)
 
     const configOptions = {
@@ -222,6 +222,7 @@ class pbChart {
       legend: {
         enabled: this.defaults.legend,
       },
+      colors: options.colors !== undefined && options.colors.length > 0 ? mapColors(options.colors) : highchartsTheme.colors,
       plotOptions: {
         series: {
           pointStart: this.defaults.pointStart,
