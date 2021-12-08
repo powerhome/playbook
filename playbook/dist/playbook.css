@@ -1038,23 +1038,46 @@ Background colors ------------------*/
 /* Link colors ------------------------*/
 /* Product colors ---------------------*/
 /* Category colors ---------------------*/
+/*=====================================
+Base colors should not be documented.
+Only document color use.
+
+Colors -----------------------------*/
+/* Specialty Gradient -----------------*/
+/* Interface colors -------------------*/
+/* Main colors ------------------------*/
+/*=====================================
+
+Background colors ------------------*/
+/* Card colors ------------------*/
+/* Active colors ----------------------*/
+/* Hover colors -----------------------*/
+/* Focus colors -----------------------*/
+/* Border colors ----------------------*/
+/* Shadow colors ----------------------*/
+/* Text colors ------------------------*/
+/* Data colors ------------------------*/
+/* Status colors ----------------------*/
+/* Link colors ------------------------*/
+/* Product colors ---------------------*/
+/* Category colors ---------------------*/
 /* CLEAN UP AND REMOVE */
 /* Headings */
 /* Standard Font Weights */
 /* Non_Standard Font Weights */
-[class^=pb_caption_kit] {
+[class^="pb_caption_kit"] {
   font-weight: 600;
   color: #687887;
   text-transform: uppercase;
   font-size: 12px;
   letter-spacing: 0.07em; }
-  [class^=pb_caption_kit][class^=pb_caption_kit_lg] {
+  [class^="pb_caption_kit"][class^="pb_caption_kit_lg"] {
     font-weight: 400;
     color: #687887;
     text-transform: uppercase;
     font-size: 20px;
     letter-spacing: 0.07em; }
-  [class^=pb_caption_kit][class^=pb_caption_kit_xs] {
+  [class^="pb_caption_kit"][class^="pb_caption_kit_xs"] {
     font-weight: 400;
     color: #687887;
     text-transform: uppercase;
@@ -1062,10 +1085,20 @@ Background colors ------------------*/
     letter-spacing: 0.07em;
     text-transform: none;
     letter-spacing: unset; }
-    [class^=pb_caption_kit][class^=pb_caption_kit_xs][class*=_link] {
+    [class^="pb_caption_kit"][class^="pb_caption_kit_xs"][class*="_link"] {
       color: #0056CF; }
-  [class^=pb_caption_kit][class*=dark] {
+  [class^="pb_caption_kit"][class*="light"] {
+    color: #687887; }
+  [class^="pb_caption_kit"][class*="default"] {
+    color: #242B42; }
+  [class^="pb_caption_kit"][class*="link"] {
+    color: #0056CF; }
+  [class^="pb_caption_kit"][class*="dark"][class*="_default"][class*="dark"] {
+    color: #fff; }
+  [class^="pb_caption_kit"][class*="dark"][class*="_light"][class*="dark"] {
     color: rgba(255, 255, 255, 0.6); }
+  [class^="pb_caption_kit"][class*="dark"][class*="_link"][class*="dark"] {
+    color: #0056CF; }
 
 /*=====================================
 Base colors should not be documented.
@@ -1343,14 +1376,6 @@ Background colors ------------------*/
     flex-basis: auto;
     min-height: 1px;
     border: 0; }
-  [class^=pb_card_kit][class*=_shadow_none] {
-    box-shadow: 0 0 0 0 transparent; }
-  [class^=pb_card_kit][class*=_shadow_deep] {
-    box-shadow: 0 4px 10px 0 rgba(60, 106, 172, 0.16); }
-  [class^=pb_card_kit][class*=_shadow_deeper] {
-    box-shadow: 0 12px 28px 0 rgba(60, 106, 172, 0.18); }
-  [class^=pb_card_kit][class*=_shadow_deepest] {
-    box-shadow: 0 30px 38px 4px rgba(60, 106, 172, 0.2), 0 2px 14px 4px rgba(60, 106, 172, 0.1); }
   [class^=pb_card_kit][class*=_highlight] {
     overflow: hidden; }
   [class^=pb_card_kit][class*=_highlight_top][class*=_highlight_success]::before {
@@ -2978,23 +3003,46 @@ Background colors ------------------*/
 /* Link colors ------------------------*/
 /* Product colors ---------------------*/
 /* Category colors ---------------------*/
+/*=====================================
+Base colors should not be documented.
+Only document color use.
+
+Colors -----------------------------*/
+/* Specialty Gradient -----------------*/
+/* Interface colors -------------------*/
+/* Main colors ------------------------*/
+/*=====================================
+
+Background colors ------------------*/
+/* Card colors ------------------*/
+/* Active colors ----------------------*/
+/* Hover colors -----------------------*/
+/* Focus colors -----------------------*/
+/* Border colors ----------------------*/
+/* Shadow colors ----------------------*/
+/* Text colors ------------------------*/
+/* Data colors ------------------------*/
+/* Status colors ----------------------*/
+/* Link colors ------------------------*/
+/* Product colors ---------------------*/
+/* Category colors ---------------------*/
 /* CLEAN UP AND REMOVE */
 /* Headings */
 /* Standard Font Weights */
 /* Non_Standard Font Weights */
-[class^=pb_caption_kit] {
+[class^="pb_caption_kit"] {
   font-weight: 600;
   color: #687887;
   text-transform: uppercase;
   font-size: 12px;
   letter-spacing: 0.07em; }
-  [class^=pb_caption_kit][class^=pb_caption_kit_lg] {
+  [class^="pb_caption_kit"][class^="pb_caption_kit_lg"] {
     font-weight: 400;
     color: #687887;
     text-transform: uppercase;
     font-size: 20px;
     letter-spacing: 0.07em; }
-  [class^=pb_caption_kit][class^=pb_caption_kit_xs] {
+  [class^="pb_caption_kit"][class^="pb_caption_kit_xs"] {
     font-weight: 400;
     color: #687887;
     text-transform: uppercase;
@@ -3002,10 +3050,20 @@ Background colors ------------------*/
     letter-spacing: 0.07em;
     text-transform: none;
     letter-spacing: unset; }
-    [class^=pb_caption_kit][class^=pb_caption_kit_xs][class*=_link] {
+    [class^="pb_caption_kit"][class^="pb_caption_kit_xs"][class*="_link"] {
       color: #0056CF; }
-  [class^=pb_caption_kit][class*=dark] {
+  [class^="pb_caption_kit"][class*="light"] {
+    color: #687887; }
+  [class^="pb_caption_kit"][class*="default"] {
+    color: #242B42; }
+  [class^="pb_caption_kit"][class*="link"] {
+    color: #0056CF; }
+  [class^="pb_caption_kit"][class*="dark"][class*="_default"][class*="dark"] {
+    color: #fff; }
+  [class^="pb_caption_kit"][class*="dark"][class*="_light"][class*="dark"] {
     color: rgba(255, 255, 255, 0.6); }
+  [class^="pb_caption_kit"][class*="dark"][class*="_link"][class*="dark"] {
+    color: #0056CF; }
 
 .pb-circle-chart-block {
   position: absolute;
@@ -5616,23 +5674,46 @@ Background colors ------------------*/
 /* Link colors ------------------------*/
 /* Product colors ---------------------*/
 /* Category colors ---------------------*/
+/*=====================================
+Base colors should not be documented.
+Only document color use.
+
+Colors -----------------------------*/
+/* Specialty Gradient -----------------*/
+/* Interface colors -------------------*/
+/* Main colors ------------------------*/
+/*=====================================
+
+Background colors ------------------*/
+/* Card colors ------------------*/
+/* Active colors ----------------------*/
+/* Hover colors -----------------------*/
+/* Focus colors -----------------------*/
+/* Border colors ----------------------*/
+/* Shadow colors ----------------------*/
+/* Text colors ------------------------*/
+/* Data colors ------------------------*/
+/* Status colors ----------------------*/
+/* Link colors ------------------------*/
+/* Product colors ---------------------*/
+/* Category colors ---------------------*/
 /* CLEAN UP AND REMOVE */
 /* Headings */
 /* Standard Font Weights */
 /* Non_Standard Font Weights */
-[class^=pb_caption_kit] {
+[class^="pb_caption_kit"] {
   font-weight: 600;
   color: #687887;
   text-transform: uppercase;
   font-size: 12px;
   letter-spacing: 0.07em; }
-  [class^=pb_caption_kit][class^=pb_caption_kit_lg] {
+  [class^="pb_caption_kit"][class^="pb_caption_kit_lg"] {
     font-weight: 400;
     color: #687887;
     text-transform: uppercase;
     font-size: 20px;
     letter-spacing: 0.07em; }
-  [class^=pb_caption_kit][class^=pb_caption_kit_xs] {
+  [class^="pb_caption_kit"][class^="pb_caption_kit_xs"] {
     font-weight: 400;
     color: #687887;
     text-transform: uppercase;
@@ -5640,10 +5721,20 @@ Background colors ------------------*/
     letter-spacing: 0.07em;
     text-transform: none;
     letter-spacing: unset; }
-    [class^=pb_caption_kit][class^=pb_caption_kit_xs][class*=_link] {
+    [class^="pb_caption_kit"][class^="pb_caption_kit_xs"][class*="_link"] {
       color: #0056CF; }
-  [class^=pb_caption_kit][class*=dark] {
+  [class^="pb_caption_kit"][class*="light"] {
+    color: #687887; }
+  [class^="pb_caption_kit"][class*="default"] {
+    color: #242B42; }
+  [class^="pb_caption_kit"][class*="link"] {
+    color: #0056CF; }
+  [class^="pb_caption_kit"][class*="dark"][class*="_default"][class*="dark"] {
+    color: #fff; }
+  [class^="pb_caption_kit"][class*="dark"][class*="_light"][class*="dark"] {
     color: rgba(255, 255, 255, 0.6); }
+  [class^="pb_caption_kit"][class*="dark"][class*="_link"][class*="dark"] {
+    color: #0056CF; }
 
 /*=====================================
 Base colors should not be documented.
@@ -7612,23 +7703,46 @@ Background colors ------------------*/
 /* Link colors ------------------------*/
 /* Product colors ---------------------*/
 /* Category colors ---------------------*/
+/*=====================================
+Base colors should not be documented.
+Only document color use.
+
+Colors -----------------------------*/
+/* Specialty Gradient -----------------*/
+/* Interface colors -------------------*/
+/* Main colors ------------------------*/
+/*=====================================
+
+Background colors ------------------*/
+/* Card colors ------------------*/
+/* Active colors ----------------------*/
+/* Hover colors -----------------------*/
+/* Focus colors -----------------------*/
+/* Border colors ----------------------*/
+/* Shadow colors ----------------------*/
+/* Text colors ------------------------*/
+/* Data colors ------------------------*/
+/* Status colors ----------------------*/
+/* Link colors ------------------------*/
+/* Product colors ---------------------*/
+/* Category colors ---------------------*/
 /* CLEAN UP AND REMOVE */
 /* Headings */
 /* Standard Font Weights */
 /* Non_Standard Font Weights */
-[class^=pb_caption_kit] {
+[class^="pb_caption_kit"] {
   font-weight: 600;
   color: #687887;
   text-transform: uppercase;
   font-size: 12px;
   letter-spacing: 0.07em; }
-  [class^=pb_caption_kit][class^=pb_caption_kit_lg] {
+  [class^="pb_caption_kit"][class^="pb_caption_kit_lg"] {
     font-weight: 400;
     color: #687887;
     text-transform: uppercase;
     font-size: 20px;
     letter-spacing: 0.07em; }
-  [class^=pb_caption_kit][class^=pb_caption_kit_xs] {
+  [class^="pb_caption_kit"][class^="pb_caption_kit_xs"] {
     font-weight: 400;
     color: #687887;
     text-transform: uppercase;
@@ -7636,10 +7750,20 @@ Background colors ------------------*/
     letter-spacing: 0.07em;
     text-transform: none;
     letter-spacing: unset; }
-    [class^=pb_caption_kit][class^=pb_caption_kit_xs][class*=_link] {
+    [class^="pb_caption_kit"][class^="pb_caption_kit_xs"][class*="_link"] {
       color: #0056CF; }
-  [class^=pb_caption_kit][class*=dark] {
+  [class^="pb_caption_kit"][class*="light"] {
+    color: #687887; }
+  [class^="pb_caption_kit"][class*="default"] {
+    color: #242B42; }
+  [class^="pb_caption_kit"][class*="link"] {
+    color: #0056CF; }
+  [class^="pb_caption_kit"][class*="dark"][class*="_default"][class*="dark"] {
+    color: #fff; }
+  [class^="pb_caption_kit"][class*="dark"][class*="_light"][class*="dark"] {
     color: rgba(255, 255, 255, 0.6); }
+  [class^="pb_caption_kit"][class*="dark"][class*="_link"][class*="dark"] {
+    color: #0056CF; }
 
 /*=====================================
 Base colors should not be documented.
@@ -8204,23 +8328,46 @@ Background colors ------------------*/
 /* Link colors ------------------------*/
 /* Product colors ---------------------*/
 /* Category colors ---------------------*/
+/*=====================================
+Base colors should not be documented.
+Only document color use.
+
+Colors -----------------------------*/
+/* Specialty Gradient -----------------*/
+/* Interface colors -------------------*/
+/* Main colors ------------------------*/
+/*=====================================
+
+Background colors ------------------*/
+/* Card colors ------------------*/
+/* Active colors ----------------------*/
+/* Hover colors -----------------------*/
+/* Focus colors -----------------------*/
+/* Border colors ----------------------*/
+/* Shadow colors ----------------------*/
+/* Text colors ------------------------*/
+/* Data colors ------------------------*/
+/* Status colors ----------------------*/
+/* Link colors ------------------------*/
+/* Product colors ---------------------*/
+/* Category colors ---------------------*/
 /* CLEAN UP AND REMOVE */
 /* Headings */
 /* Standard Font Weights */
 /* Non_Standard Font Weights */
-[class^=pb_caption_kit] {
+[class^="pb_caption_kit"] {
   font-weight: 600;
   color: #687887;
   text-transform: uppercase;
   font-size: 12px;
   letter-spacing: 0.07em; }
-  [class^=pb_caption_kit][class^=pb_caption_kit_lg] {
+  [class^="pb_caption_kit"][class^="pb_caption_kit_lg"] {
     font-weight: 400;
     color: #687887;
     text-transform: uppercase;
     font-size: 20px;
     letter-spacing: 0.07em; }
-  [class^=pb_caption_kit][class^=pb_caption_kit_xs] {
+  [class^="pb_caption_kit"][class^="pb_caption_kit_xs"] {
     font-weight: 400;
     color: #687887;
     text-transform: uppercase;
@@ -8228,10 +8375,20 @@ Background colors ------------------*/
     letter-spacing: 0.07em;
     text-transform: none;
     letter-spacing: unset; }
-    [class^=pb_caption_kit][class^=pb_caption_kit_xs][class*=_link] {
+    [class^="pb_caption_kit"][class^="pb_caption_kit_xs"][class*="_link"] {
       color: #0056CF; }
-  [class^=pb_caption_kit][class*=dark] {
+  [class^="pb_caption_kit"][class*="light"] {
+    color: #687887; }
+  [class^="pb_caption_kit"][class*="default"] {
+    color: #242B42; }
+  [class^="pb_caption_kit"][class*="link"] {
+    color: #0056CF; }
+  [class^="pb_caption_kit"][class*="dark"][class*="_default"][class*="dark"] {
+    color: #fff; }
+  [class^="pb_caption_kit"][class*="dark"][class*="_light"][class*="dark"] {
     color: rgba(255, 255, 255, 0.6); }
+  [class^="pb_caption_kit"][class*="dark"][class*="_link"][class*="dark"] {
+    color: #0056CF; }
 
 /*=====================================
 Base colors should not be documented.
@@ -10749,23 +10906,46 @@ Background colors ------------------*/
 /* Link colors ------------------------*/
 /* Product colors ---------------------*/
 /* Category colors ---------------------*/
+/*=====================================
+Base colors should not be documented.
+Only document color use.
+
+Colors -----------------------------*/
+/* Specialty Gradient -----------------*/
+/* Interface colors -------------------*/
+/* Main colors ------------------------*/
+/*=====================================
+
+Background colors ------------------*/
+/* Card colors ------------------*/
+/* Active colors ----------------------*/
+/* Hover colors -----------------------*/
+/* Focus colors -----------------------*/
+/* Border colors ----------------------*/
+/* Shadow colors ----------------------*/
+/* Text colors ------------------------*/
+/* Data colors ------------------------*/
+/* Status colors ----------------------*/
+/* Link colors ------------------------*/
+/* Product colors ---------------------*/
+/* Category colors ---------------------*/
 /* CLEAN UP AND REMOVE */
 /* Headings */
 /* Standard Font Weights */
 /* Non_Standard Font Weights */
-[class^=pb_caption_kit] {
+[class^="pb_caption_kit"] {
   font-weight: 600;
   color: #687887;
   text-transform: uppercase;
   font-size: 12px;
   letter-spacing: 0.07em; }
-  [class^=pb_caption_kit][class^=pb_caption_kit_lg] {
+  [class^="pb_caption_kit"][class^="pb_caption_kit_lg"] {
     font-weight: 400;
     color: #687887;
     text-transform: uppercase;
     font-size: 20px;
     letter-spacing: 0.07em; }
-  [class^=pb_caption_kit][class^=pb_caption_kit_xs] {
+  [class^="pb_caption_kit"][class^="pb_caption_kit_xs"] {
     font-weight: 400;
     color: #687887;
     text-transform: uppercase;
@@ -10773,10 +10953,20 @@ Background colors ------------------*/
     letter-spacing: 0.07em;
     text-transform: none;
     letter-spacing: unset; }
-    [class^=pb_caption_kit][class^=pb_caption_kit_xs][class*=_link] {
+    [class^="pb_caption_kit"][class^="pb_caption_kit_xs"][class*="_link"] {
       color: #0056CF; }
-  [class^=pb_caption_kit][class*=dark] {
+  [class^="pb_caption_kit"][class*="light"] {
+    color: #687887; }
+  [class^="pb_caption_kit"][class*="default"] {
+    color: #242B42; }
+  [class^="pb_caption_kit"][class*="link"] {
+    color: #0056CF; }
+  [class^="pb_caption_kit"][class*="dark"][class*="_default"][class*="dark"] {
+    color: #fff; }
+  [class^="pb_caption_kit"][class*="dark"][class*="_light"][class*="dark"] {
     color: rgba(255, 255, 255, 0.6); }
+  [class^="pb_caption_kit"][class*="dark"][class*="_link"][class*="dark"] {
+    color: #0056CF; }
 
 /*=====================================
 Base colors should not be documented.
@@ -16031,14 +16221,6 @@ Background colors ------------------*/
     flex-basis: auto;
     min-height: 1px;
     border: 0; }
-  [class^=pb_card_kit][class*=_shadow_none] {
-    box-shadow: 0 0 0 0 transparent; }
-  [class^=pb_card_kit][class*=_shadow_deep] {
-    box-shadow: 0 4px 10px 0 rgba(60, 106, 172, 0.16); }
-  [class^=pb_card_kit][class*=_shadow_deeper] {
-    box-shadow: 0 12px 28px 0 rgba(60, 106, 172, 0.18); }
-  [class^=pb_card_kit][class*=_shadow_deepest] {
-    box-shadow: 0 30px 38px 4px rgba(60, 106, 172, 0.2), 0 2px 14px 4px rgba(60, 106, 172, 0.1); }
   [class^=pb_card_kit][class*=_highlight] {
     overflow: hidden; }
   [class^=pb_card_kit][class*=_highlight_top][class*=_highlight_success]::before {
@@ -19145,23 +19327,46 @@ Background colors ------------------*/
 /* Link colors ------------------------*/
 /* Product colors ---------------------*/
 /* Category colors ---------------------*/
+/*=====================================
+Base colors should not be documented.
+Only document color use.
+
+Colors -----------------------------*/
+/* Specialty Gradient -----------------*/
+/* Interface colors -------------------*/
+/* Main colors ------------------------*/
+/*=====================================
+
+Background colors ------------------*/
+/* Card colors ------------------*/
+/* Active colors ----------------------*/
+/* Hover colors -----------------------*/
+/* Focus colors -----------------------*/
+/* Border colors ----------------------*/
+/* Shadow colors ----------------------*/
+/* Text colors ------------------------*/
+/* Data colors ------------------------*/
+/* Status colors ----------------------*/
+/* Link colors ------------------------*/
+/* Product colors ---------------------*/
+/* Category colors ---------------------*/
 /* CLEAN UP AND REMOVE */
 /* Headings */
 /* Standard Font Weights */
 /* Non_Standard Font Weights */
-[class^=pb_caption_kit] {
+[class^="pb_caption_kit"] {
   font-weight: 600;
   color: #687887;
   text-transform: uppercase;
   font-size: 12px;
   letter-spacing: 0.07em; }
-  [class^=pb_caption_kit][class^=pb_caption_kit_lg] {
+  [class^="pb_caption_kit"][class^="pb_caption_kit_lg"] {
     font-weight: 400;
     color: #687887;
     text-transform: uppercase;
     font-size: 20px;
     letter-spacing: 0.07em; }
-  [class^=pb_caption_kit][class^=pb_caption_kit_xs] {
+  [class^="pb_caption_kit"][class^="pb_caption_kit_xs"] {
     font-weight: 400;
     color: #687887;
     text-transform: uppercase;
@@ -19169,10 +19374,20 @@ Background colors ------------------*/
     letter-spacing: 0.07em;
     text-transform: none;
     letter-spacing: unset; }
-    [class^=pb_caption_kit][class^=pb_caption_kit_xs][class*=_link] {
+    [class^="pb_caption_kit"][class^="pb_caption_kit_xs"][class*="_link"] {
       color: #0056CF; }
-  [class^=pb_caption_kit][class*=dark] {
+  [class^="pb_caption_kit"][class*="light"] {
+    color: #687887; }
+  [class^="pb_caption_kit"][class*="default"] {
+    color: #242B42; }
+  [class^="pb_caption_kit"][class*="link"] {
+    color: #0056CF; }
+  [class^="pb_caption_kit"][class*="dark"][class*="_default"][class*="dark"] {
+    color: #fff; }
+  [class^="pb_caption_kit"][class*="dark"][class*="_light"][class*="dark"] {
     color: rgba(255, 255, 255, 0.6); }
+  [class^="pb_caption_kit"][class*="dark"][class*="_link"][class*="dark"] {
+    color: #0056CF; }
 
 [class^=pb_time_kit][class*=_center] {
   text-align: center; }
@@ -21402,23 +21617,46 @@ Background colors ------------------*/
 /* Link colors ------------------------*/
 /* Product colors ---------------------*/
 /* Category colors ---------------------*/
+/*=====================================
+Base colors should not be documented.
+Only document color use.
+
+Colors -----------------------------*/
+/* Specialty Gradient -----------------*/
+/* Interface colors -------------------*/
+/* Main colors ------------------------*/
+/*=====================================
+
+Background colors ------------------*/
+/* Card colors ------------------*/
+/* Active colors ----------------------*/
+/* Hover colors -----------------------*/
+/* Focus colors -----------------------*/
+/* Border colors ----------------------*/
+/* Shadow colors ----------------------*/
+/* Text colors ------------------------*/
+/* Data colors ------------------------*/
+/* Status colors ----------------------*/
+/* Link colors ------------------------*/
+/* Product colors ---------------------*/
+/* Category colors ---------------------*/
 /* CLEAN UP AND REMOVE */
 /* Headings */
 /* Standard Font Weights */
 /* Non_Standard Font Weights */
-[class^=pb_caption_kit] {
+[class^="pb_caption_kit"] {
   font-weight: 600;
   color: #687887;
   text-transform: uppercase;
   font-size: 12px;
   letter-spacing: 0.07em; }
-  [class^=pb_caption_kit][class^=pb_caption_kit_lg] {
+  [class^="pb_caption_kit"][class^="pb_caption_kit_lg"] {
     font-weight: 400;
     color: #687887;
     text-transform: uppercase;
     font-size: 20px;
     letter-spacing: 0.07em; }
-  [class^=pb_caption_kit][class^=pb_caption_kit_xs] {
+  [class^="pb_caption_kit"][class^="pb_caption_kit_xs"] {
     font-weight: 400;
     color: #687887;
     text-transform: uppercase;
@@ -21426,10 +21664,20 @@ Background colors ------------------*/
     letter-spacing: 0.07em;
     text-transform: none;
     letter-spacing: unset; }
-    [class^=pb_caption_kit][class^=pb_caption_kit_xs][class*=_link] {
+    [class^="pb_caption_kit"][class^="pb_caption_kit_xs"][class*="_link"] {
       color: #0056CF; }
-  [class^=pb_caption_kit][class*=dark] {
+  [class^="pb_caption_kit"][class*="light"] {
+    color: #687887; }
+  [class^="pb_caption_kit"][class*="default"] {
+    color: #242B42; }
+  [class^="pb_caption_kit"][class*="link"] {
+    color: #0056CF; }
+  [class^="pb_caption_kit"][class*="dark"][class*="_default"][class*="dark"] {
+    color: #fff; }
+  [class^="pb_caption_kit"][class*="dark"][class*="_light"][class*="dark"] {
     color: rgba(255, 255, 255, 0.6); }
+  [class^="pb_caption_kit"][class*="dark"][class*="_link"][class*="dark"] {
+    color: #0056CF; }
 
 /*=====================================
 Base colors should not be documented.
@@ -21802,6 +22050,42 @@ Background colors ------------------*/
 
 .ns_tabular {
   font-variant-numeric: tabular-nums !important; }
+
+/*=====================================
+Base colors should not be documented.
+Only document color use.
+
+Colors -----------------------------*/
+/* Specialty Gradient -----------------*/
+/* Interface colors -------------------*/
+/* Main colors ------------------------*/
+/*=====================================
+
+Background colors ------------------*/
+/* Card colors ------------------*/
+/* Active colors ----------------------*/
+/* Hover colors -----------------------*/
+/* Focus colors -----------------------*/
+/* Border colors ----------------------*/
+/* Shadow colors ----------------------*/
+/* Text colors ------------------------*/
+/* Data colors ------------------------*/
+/* Status colors ----------------------*/
+/* Link colors ------------------------*/
+/* Product colors ---------------------*/
+/* Category colors ---------------------*/
+
+.shadow_none {
+  box-shadow: 0 0 0 0 transparent; }
+
+.shadow_deep {
+  box-shadow: 0 4px 10px 0 rgba(60, 106, 172, 0.16); }
+
+.shadow_deeper {
+  box-shadow: 0 12px 28px 0 rgba(60, 106, 172, 0.18); }
+
+.shadow_deepest {
+  box-shadow: 0 30px 38px 4px rgba(60, 106, 172, 0.2), 0 2px 14px 4px rgba(60, 106, 172, 0.1); }
 
 /*=====================================
 Base colors should not be documented.
