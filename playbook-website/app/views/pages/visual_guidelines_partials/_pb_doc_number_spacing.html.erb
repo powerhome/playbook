@@ -1,0 +1,67 @@
+
+<%= pb_rails("title", props: { text: title, tag: "h3", size: 4 }) %>
+<%= pb_rails("body", props: { 
+  tag: "p",
+  margin_bottom: "lg",
+  margin_top: "xs",
+  text: "Available in every kit. These are added globally as they are most flexible 
+  when developing."
+}) %>
+
+<%= pb_rails("card", props: { shadow: "deep", margin_bottom: "none", padding: "none", max_width: "xl" }) do %>
+  <%= pb_rails("card/card_body", props: { padding_x: "md", padding_top: "md", padding_bottom: "xs"}) do %>  
+    <%= pb_rails("caption", props: {text: "Visual Guide", margin_bottom: "sm" }) %>
+    <%= pb_rails("table", props: { size: "md" }) do %>
+      <thead>
+        <tr>
+          <th>
+            <%= pb_rails("caption", props: {text: "normal" }) %>
+          </th>
+          <th>
+            <%= pb_rails("caption", props: {text: "tabular"}) %>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            <%= pb_rails("body", props: {text: "$1,231,123,123.00" }) %>
+          </td>
+          <td>
+            <%= pb_rails("body", props: {text: "$1,231,123,123.00", number_spacing: "tabular" }) %>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <%= pb_rails("body", props: {text: "$7,444,112,512.00" })%>
+          </td>
+          <td>
+            <%= pb_rails("body", props: {text: "$7,444,112,512.00", number_spacing: "tabular"})%>
+          </td>
+        </tr>
+      </tbody>
+    <% end %>
+  <% end %>
+
+  <%= pb_rails("section_separator", props: { padding: "sm" }) %>
+  <%= pb_rails("flex", props: { vertical: "stretch", padding_x: "md", padding_top: "xs", padding_bottom: "md"  }) do %>
+      <%= pb_rails("flex/flex_item", props: { flex: "1" }) do %>
+        <%= pb_rails("caption", props: {text: "Props", margin_bottom: "sm", margin_top: "sm" }) %>
+        <%= pb_rails("pill", props: { text_transform: "none", text: "numberSpacing", variant: "neutral" }) %>   
+      <% end %> 
+      <%= pb_rails("section_separator", props: { orientation: "vertical", margin_x: "sm" }) %>
+      <%= pb_rails("flex/flex_item", props: { flex: "1" }) do %>
+        <%= pb_rails("caption", props: {text: "Values", margin_bottom: "sm", margin_top: "sm" }) %>
+        <%= pb_rails("pill", props: {text: "tabular", variant: "warning"}) %>
+      <% end %>
+  <% end %>
+
+  
+
+  <%= pb_rails("background", props: { id: "code-wrapper", classname: "border-bottom", background_color: "dark", padding: "none" }) do %>
+    <%= pb_rails("caption", props: { text: "EXAMPLE IN USE", padding_top: "lg", margin_x: "xl", classname: "dark" }) %>
+    <div class="pb--codeCopy">
+      <pre class="highlight pt_sm" style="margin: 0px"><%= raw rouge(@number_spacing_code_example, "react")%></pre>
+    </div>        
+  <% end %>
+<% end %>

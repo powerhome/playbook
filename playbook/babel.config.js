@@ -20,6 +20,7 @@ module.exports = function(api) {
       isTestEnv && [
         require('@babel/preset-env').default,
         {
+          loose: true,
           targets: {
             node: 'current',
           },
@@ -52,9 +53,6 @@ module.exports = function(api) {
       require('@babel/plugin-transform-destructuring').default,
       [
         require('@babel/plugin-proposal-class-properties').default,
-        {
-          loose: true,
-        },
       ],
       [
         require('@babel/plugin-proposal-object-rest-spread').default,

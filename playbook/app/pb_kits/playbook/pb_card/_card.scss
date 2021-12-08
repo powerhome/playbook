@@ -45,12 +45,6 @@
     border: 0;
   }
 
-  @each $name, $shadow in $box_shadows {
-    &[class*=_#{$name}] {
-      box-shadow: $shadow;
-    }
-  }
-
   &[class*=_highlight] {
     overflow: hidden;
   }

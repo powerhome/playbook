@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# rubocop:disable Style/SingleArgumentDig
 module Playbook
   module PbTextInput
     class TextInput < Playbook::KitBase
@@ -86,3 +87,4 @@ module Playbook
     end
   end
 end
+# rubocop:enable Style/SingleArgumentDig

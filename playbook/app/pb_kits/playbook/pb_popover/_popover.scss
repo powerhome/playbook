@@ -1,4 +1,5 @@
 @import "../tokens/positioning";
+@import "../tokens/colors";
 @import "../pb_card/card_mixin";
 @import "../tokens/shadows";
 
@@ -43,6 +44,7 @@
 }
 .pb_popover_body {
   @include pb_card;
+  background-color: $white;
   border: 0;
   box-shadow: $shadow_deeper;
 }

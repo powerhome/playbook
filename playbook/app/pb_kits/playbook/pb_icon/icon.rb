@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+# rubocop:disable Style/StringConcatenation, Style/HashLikeCase
+
 require "open-uri"
 
 module Playbook
@@ -135,3 +137,5 @@ module Playbook
     end
   end
 end
+
+# rubocop:enable Style/StringConcatenation, Style/HashLikeCase

@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# rubocop:disable Style/StringConcatenation
 class KitGenerator < Rails::Generators::NamedBase
   desc "This generator creates a new Playbook Kit"
   source_root File.expand_path("templates", __dir__)
@@ -103,6 +104,7 @@ class KitGenerator < Rails::Generators::NamedBase
     end
   end
 
+# rubocop:enable Style/StringConcatenation
 private
 
   def react_imports_page(path:, import_statement:, webpack_statement:, import_area_indicator:)

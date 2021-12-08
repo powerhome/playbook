@@ -14,13 +14,15 @@ RSpec.describe Playbook::PbBackground::Background do
   it {
     is_expected.to define_enum_prop(:background_color)
       .with_default("light")
-      .with_values("gradient", "dark", "light", "white")
+      .with_values("gradient", "dark", "light", "white", "success", "warning", "error", "info", "neutral", "primary", "category_1", "category_2", "category_3", "category_4", "category_5", "category_6", "category_7", "category_8", "category_9", "category_10", "category_11", "category_12", "category_13", "category_14", "category_15", "category_16", "category_17", "category_18", "category_19", "category_20", "category_21")
   }
   describe "#classname" do
     it "returns namespaced class name", :aggregate_failures do
       expect(subject.new({}).classname).to eq "pb_background_kit  pb_background_color_light"
       expect(subject.new(background_color: "gradient").classname).to eq "pb_background_kit  pb_background_color_gradient"
       expect(subject.new(padding: "xl").classname).to eq "pb_background_kit  pb_background_color_light p_xl"
+      expect(subject.new(background_color: "success").classname).to eq "pb_background_kit  pb_background_color_success"
+      expect(subject.new(background_color: "category_1").classname).to eq "pb_background_kit  pb_background_color_category_1"
     end
   end
 end

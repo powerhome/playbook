@@ -8,6 +8,7 @@ import { globalProps } from '../utilities/globalProps.js'
 
 type CardPropTypes = {
   aria?: object,
+  background?: "white" | "dark" | "light" | "windows" | "siding" | "doors" | "solar" | "roofing" | "gutters" | "insulation" | "none",
   borderNone?: boolean,
   borderRadius?: "xs" | "sm" | "md" | "lg" | "xl" | "none" | "rounded",
   children: array<React.ReactNode> | React.ReactNode,
@@ -19,7 +20,6 @@ type CardPropTypes = {
   },
   padding?: string,
   selected?: boolean,
-  shadow?: "none" | "deep" | "deeper" | "deepest",
   tag?: "div" | "section" | "footer" | "header" | "article" | "aside" | "main" | "nav",
 }
 
@@ -66,6 +66,7 @@ const Body = (props: CardBodyProps) => {
 const Card = (props: CardPropTypes) => {
   const {
     aria = {},
+    background = 'none',
     borderNone = false,
     borderRadius = 'md',
     children,
@@ -73,14 +74,13 @@ const Card = (props: CardPropTypes) => {
     data = {},
     highlight = {},
     selected = false,
-    shadow = 'none',
     tag = 'div',
     padding = 'md',
   } = props
   const borderCSS = borderNone == true ? 'border_none' : ''
-  const cardCss = buildCss('pb_card_kit', `shadow_${shadow}`, `${borderCSS}`, `border_radius_${borderRadius}`, {
-    selected,
-    deselected: !selected,
+  const selectedCSS = selected == true ? 'selected' : 'deselected'
+  const backgroundCSS = background == 'none' ? '' : `background_${background}`
+  const cardCss = buildCss('pb_card_kit', selectedCSS, borderCSS, `border_radius_${borderRadius}`, backgroundCSS, {
     [`highlight_${highlight.position}`]: highlight.position,
     [`highlight_${highlight.color}`]: highlight.color,
   })
