@@ -21,6 +21,8 @@ module Playbook
       prop :toggle_legend_click, type: Playbook::Props::Boolean,
                                  default: true
       prop :height
+      prop :colors, type: Playbook::Props::Array,
+                    default: []
 
       def chart_type
         orientation == "horizontal" ? "bar" : "column"
@@ -42,6 +44,7 @@ module Playbook
           legend: legend,
           toggleLegendClick: toggle_legend_click,
           height: height,
+          colors: colors,
         }
       end
 
