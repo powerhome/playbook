@@ -74,7 +74,7 @@
     "@actions/core": "1.6.0",
     "@actions/github": "4.0.0",
     "@babel/preset-typescript": "^7.15.0",
-    "@testing-library/jest-dom": "5.14.1",
+    "@testing-library/jest-dom": "5.16.1",
     "@testing-library/react": "11.2.7",
     "@types/react": "17.0.21",
     "axe-core": "4.3.3",
