@@ -14,9 +14,9 @@ RSpec.describe Playbook::PbImage::Image do
 
   describe "#classname" do
     it "returns namespaced class name", :aggregate_failures do
-      expect(subject.new({}).classname).to eq "pb_image_kit  lazyload"
-      expect(subject.new({ size: "xs" }).classname).to eq "pb_image_kit_xs  lazyload"
-      expect(subject.new({ rounded: true }).classname).to eq "pb_image_kit  lazyload rounded"
+      expect(subject.new({}).classname).to eq "pb_image_kit fade lazyload"
+      expect(subject.new({ size: "xs" }).classname).to eq "pb_image_kit_xs fade lazyload"
+      expect(subject.new({ rounded: true }).classname).to eq "pb_image_kit fade lazyload rounded"
     end
   end
 end

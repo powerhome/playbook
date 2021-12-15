@@ -13,7 +13,7 @@ module Playbook
                   default: "none"
       prop :transition, type: Playbook::Props::Enum,
                         values: %w[blur fade scale none],
-                        default: "none"
+                        default: "fade"
       prop :url
 
       def classname

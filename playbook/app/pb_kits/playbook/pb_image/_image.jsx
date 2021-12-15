@@ -28,7 +28,7 @@ const Image = (props: ImageProps) => {
     onError = null,
     rounded = false,
     size = '',
-    transition = '',
+    transition = 'fade',
     url = '',
   } = props
 
