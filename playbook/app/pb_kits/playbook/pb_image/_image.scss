@@ -30,30 +30,28 @@ $image-sizes: (
 
     &.fade {
       opacity: 0;
-      transition: opacity 250ms ease-in;
       &.lazyloaded {
         opacity: 1;
-        transition: opacity 250ms ease-in;
+        transition: opacity 300ms ease-in;
       }
     }
+    
     &.blur {
-      -webkit-filter: blur(5px);
       filter: blur(5px);
-      transition: filter 250ms ease-in;
       &.lazyloaded {
         -webkit-filter: blur(0);
         filter: blur(0);
-        transition: filter 250ms ease-in;
+        transition: filter 300ms ease-in;
       }
     }
+    
     &.scale {
       opacity: 0;
       transform: scale(0.9);
-      transition: opacity, scale 700ms;
       &.lazyloaded {
         opacity: 1;
         transform: scale(1);
-        transition: opacity, scale 700ms;
+        transition: 700ms ease-in;
       }
     }
   }

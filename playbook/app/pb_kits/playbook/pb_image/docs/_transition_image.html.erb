@@ -1,4 +1,3 @@
-
 <%= pb_rails("flex") do %>
   <%= pb_rails("flex/flex_item", props: {fixed_size: "250px"}) do %>
     <%= pb_rails("select", props: {
@@ -8,37 +7,51 @@
     options: [
         {
           value: 'fade',
-          text: 'fade',
         },
         {
           value: 'blur',
-          text: 'blur',
         },
         {
           value: 'scale',
-          text: 'scale',
         },
     ]
     }) %>
   <% end %>
+    <%= pb_rails("flex/flex_item") do %>
+      <%= pb_rails("button", props: {classname: "button", text: "Load Image", margin_left: "sm", margin_top: "xs", disabled: true }) %>
+    <% end %>
 <% end %>
-<br/>
-<%= pb_rails("image",  props: { classname: "transition-image", alt: "picture of a misty forest", url: "https://unsplash.it/500/400/?image=634" }) %>
-
-
+<%= pb_rails("image",  props: { classname: "transition-image", alt: "picture of a misty forest", url: "", on_error: "this.style.display = 'none'" }) %>
 
 <script>
-  const updateTransition = (transition) => {
-    const imageTransition = document.querySelector('.transition-image');
-    imageTransition.classList.remove("fade", "blur", "scale", "lazyloaded")
-    imageTransition.classList.add(transition, "lazyload")
-  }
+    window.addEventListener('DOMContentLoaded', () => {
+        const button = document.querySelector(".button")
+        const transitionDropdown = document.querySelector("#transition-dropdown")
+        var option = ''
 
-  window.addEventListener('DOMContentLoaded', () => {
-    const transitionDropdown = document.querySelector("#transition-dropdown")
-    transitionDropdown.addEventListener('change', function() {
-        const transition = this.value
-        updateTransition(transition)
+        transitionDropdown.addEventListener('change', function() {
+          if (this.value === '') {
+            button.className = button.className + ' _disabled'
+          } else {
+            button.removeAttribute("disabled");
+            button.className = button.className.replace(/\_disabled/gi, '')
+            option = this.value
+          }
+        });
+
+        const updateTransition = (transition) => {
+          const imageTransition = document.querySelector('.transition-image')
+          if (imageTransition.classList.value.includes(transition)) {
+          } else {
+            imageTransition.removeAttribute("style")
+            imageTransition.classList.remove("fade", "blur", "scale", "lazyloaded")
+            imageTransition.classList.add(transition, "lazyload")
+            imageTransition.src = "https://unsplash.it/500/400/?image=634"
+          }
+        }
+      
+        button.addEventListener('click', function() {
+          updateTransition(option)
+        })
     });
-  });
 </script>
