@@ -14,10 +14,13 @@ const TransitionImage = (props) => {
   })
 
   const loadImage = () => {
+    document.querySelector('.image').classList.remove(transition, 'lazyloaded')
     setApply({
       url: 'https://unsplash.it/500/400/?image=634',
       transition: transition,
-    })
+    },
+    document.querySelector('.image').classList.add(transition, 'lazyload')
+    )
   }
 
   const handleTransition = ({ target }) => {
@@ -61,6 +64,7 @@ const TransitionImage = (props) => {
       <div style={{ display: apply.url === '' ? 'none' : 'block' }}>
         <Image
             alt="picture of a misty forest"
+            className="image"
             transition={apply.transition}
             url={apply.url}
             {...props}

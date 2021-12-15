@@ -41,13 +41,10 @@
 
         const updateTransition = (transition) => {
           const imageTransition = document.querySelector('.transition-image')
-          if (imageTransition.classList.value.includes(transition)) {
-          } else {
             imageTransition.removeAttribute("style")
             imageTransition.classList.remove("fade", "blur", "scale", "lazyloaded")
             imageTransition.classList.add(transition, "lazyload")
             imageTransition.src = "https://unsplash.it/500/400/?image=634"
-          }
         }
       
         button.addEventListener('click', function() {
