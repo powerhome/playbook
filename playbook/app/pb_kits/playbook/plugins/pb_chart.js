@@ -10,6 +10,7 @@ import solidGauge from 'highcharts/modules/solid-gauge'
 pie(Highcharts)
 
 // Map Data Color String Props to our SCSS Variables
+
 const mapColors = (array) => {
   const regex = /(data)\-[1-8]/ //eslint-disable-line
 
