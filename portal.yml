@@ -1,0 +1,62 @@
+apiVersion: backstage.io/v1alpha1
+kind: System
+metadata:
+  name: playbook
+  title: Playbook
+  description: Playbook is the first design system built for both Rails & React interfaces.
+  links:
+    - url: https://playbook.powerapp.cloud/
+      title: Playbook Production
+      icon: public
+    - url: https://staging.playbook.powerapp.cloud/
+      title: Playbook Staging
+      icon: build
+    - url: https://www.npmjs.com/package/playbook-ui
+      title: Playbook UI NPM Package
+      icon: public
+    - url: https://rubygems.org/gems/playbook_ui
+      title: Playbook UI Gem
+      icon: public
+  annotations:
+    backstage.io/techdocs-ref: dir:.
+spec:
+  owner: ux-team
+  domain: ux
+---
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: playbook-website
+  title: Playbook Website
+  description: Playbook's Rails website
+  links:
+    - url: https://playbook.powerapp.cloud/
+      title: Playbook Production
+      icon: public
+    - url: https://staging.playbook.powerapp.cloud/
+      title: Playbook Staging
+      icon: build
+spec:
+  type: website
+  owner: ux-team
+  lifecycle: production
+  system: playbook
+---
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: playbook-ui
+  title: Playbook UI
+  description: Playbook UI is the library that provides both Rails and React components that adhere to the Playbook design system.
+  links:
+    - url: https://www.npmjs.com/package/playbook-ui
+      title: Playbook UI NPM Package
+      icon: public
+    - url: https://rubygems.org/gems/playbook_ui
+      title: Playbook UI Gem
+      icon: public
+spec:
+  type: library
+  owner: ux-team
+  lifecycle: production
+  system: playbook

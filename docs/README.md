@@ -43,7 +43,7 @@ Playbook is the first design system built for both Rails & React interfaces. Ins
 
 ### Upgrading between versions
 
-See [docs/upgrade-guide](./docs/upgrade-guide)
+See [docs/upgrade-guide](./upgrade-guide)
 
 ### Releases
 
