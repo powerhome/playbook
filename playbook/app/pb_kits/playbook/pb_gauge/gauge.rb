@@ -20,6 +20,7 @@ module Playbook
       prop :disable_animation, type: Playbook::Props::Boolean, default: false
       prop :min, type: Playbook::Props::Numeric, default: 0
       prop :max, type: Playbook::Props::Numeric, default: 100
+      prop :colors, type: Playbook::Props::Array, default: []
 
       def chart_data_formatted
         chart_data.map { |hash| hash[:y] = hash.delete :value }
@@ -42,6 +43,7 @@ module Playbook
           style: style,
           tooltipHtml: tooltip_html,
           type: "gauge",
+          colors: colors,
         }.to_json.html_safe
       end
 
