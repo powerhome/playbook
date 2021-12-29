@@ -22,6 +22,7 @@ metadata:
 spec:
   owner: ux-team
   domain: ux
+  lifecycle: production
 ---
 apiVersion: backstage.io/v1alpha1
 kind: Component
