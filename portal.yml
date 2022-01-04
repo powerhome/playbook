@@ -19,6 +19,7 @@ metadata:
       icon: public
   annotations:
     backstage.io/techdocs-ref: dir:.
+    jenkins.io/github-folder: powerhome/playbook
 spec:
   owner: ux-team
   domain: ux
