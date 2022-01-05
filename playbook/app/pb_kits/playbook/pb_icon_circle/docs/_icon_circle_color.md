@@ -1,0 +1,1 @@
+Customize your icon circle by passing one of our eight base colors to the `variant` prop: `royal` `orange` `purple` `teal` `red` `yellow` `green`

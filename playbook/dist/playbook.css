@@ -7587,6 +7587,11 @@ svg.pb_custom_icon {
     background: rgba(229, 116, 72, 0.2); }
     [class^=pb_icon_circle_kit][class*=_orange].dark {
       background: rgba(229, 116, 72, 0.5); }
+  [class^=pb_icon_circle_kit][class*=_default] {
+    color: #93a8b8;
+    background: rgba(133, 152, 170, 0.2); }
+    [class^=pb_icon_circle_kit][class*=_default].dark {
+      background: rgba(133, 152, 170, 0.5); }
 
 /*=====================================
 Base colors should not be documented.
@@ -7915,6 +7920,11 @@ svg.pb_custom_icon {
     background: rgba(229, 116, 72, 0.2); }
     [class^=pb_icon_circle_kit][class*=_orange].dark {
       background: rgba(229, 116, 72, 0.5); }
+  [class^=pb_icon_circle_kit][class*=_default] {
+    color: #93a8b8;
+    background: rgba(133, 152, 170, 0.2); }
+    [class^=pb_icon_circle_kit][class*=_default].dark {
+      background: rgba(133, 152, 170, 0.5); }
 
 [class^=pb_icon_stat_value_kit] {
   display: flex;
