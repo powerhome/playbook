@@ -15,7 +15,7 @@ const IconCircleColor = (props) => {
       <IconCircle
           icon="rocket"
           size="sm"
-          variant="blue"
+          variant="orange"
           {...props}
       />
       <br />
