@@ -9,6 +9,7 @@ examples:
   - gauge_min_max: Min Max Labels
   - gauge_sizing: Sizing
   - gauge_height: Height
+  - gauge_colors: Color Overrides
 
 
   react:
@@ -21,3 +22,4 @@ examples:
   - gauge_sizing: Sizing
   - gauge_height: Height
   - gauge_live_data: Live Data
+  - gauge_colors: Color Overrides

@@ -105,6 +105,13 @@ new webpack.DefinePlugin({
 })
 
 module.exports = {
+  watchOptions: {
+    ignored: [
+      `${DIST_PATH}/playbook-rails.css`,
+      `${DIST_PATH}/playbook-doc.css`,
+      `${DIST_PATH}/reset.js`,
+    ],
+  },
   entry: {
     'playbook': `${SOURCE_PATH}/index.js`,
     'playbook-rails': `${SOURCE_PATH}/playbook-rails.js`,

@@ -1,7 +1,7 @@
 PATH
   remote: ../playbook
   specs:
-    playbook_ui (10.16.0)
+    playbook_ui (10.17.0)
       actionpack (>= 5.2.4.5)
       actionview (>= 5.2.4.5)
       activesupport (>= 5.2.4.5)
@@ -118,8 +118,8 @@ GEM
     nokogiri (1.12.5)
       mini_portile2 (~> 2.6.1)
       racc (~> 1.4)
-    parallel (1.20.1)
-    parser (3.0.2.0)
+    parallel (1.21.0)
+    parser (3.0.3.2)
       ast (~> 2.4.1)
     public_suffix (4.0.6)
     puma (5.5.2)
@@ -166,22 +166,22 @@ GEM
       railties (>= 3.2)
       tilt
     redcarpet (3.5.1)
-    regexp_parser (2.1.1)
+    regexp_parser (2.2.0)
     rexml (3.2.5)
     rouge (3.26.1)
-    rubocop (0.93.1)
+    rubocop (1.23.0)
       parallel (~> 1.10)
-      parser (>= 2.7.1.5)
+      parser (>= 3.0.0.0)
       rainbow (>= 2.2.2, < 4.0)
-      regexp_parser (>= 1.8)
+      regexp_parser (>= 1.8, < 3.0)
       rexml
-      rubocop-ast (>= 0.6.0)
+      rubocop-ast (>= 1.12.0, < 2.0)
       ruby-progressbar (~> 1.7)
-      unicode-display_width (>= 1.4.0, < 2.0)
-    rubocop-ast (1.8.0)
+      unicode-display_width (>= 1.4.0, < 3.0)
+    rubocop-ast (1.14.0)
       parser (>= 3.0.1.1)
-    rubocop-performance (1.9.2)
-      rubocop (>= 0.90.0, < 2.0)
+    rubocop-performance (1.11.5)
+      rubocop (>= 1.7.0, < 2.0)
       rubocop-ast (>= 0.4.0)
     ruby-progressbar (1.11.0)
     rubyzip (2.3.0)
@@ -214,8 +214,8 @@ GEM
       thread_safe (~> 0.1)
     tzinfo-data (1.2021.1)
       tzinfo (>= 1.0.0)
-    unicode-display_width (1.7.0)
-    view_component (2.42.0)
+    unicode-display_width (2.1.0)
+    view_component (2.45.0)
       activesupport (>= 5.0.0, < 8.0)
       method_source (~> 1.0)
     web-console (3.7.0)
@@ -249,8 +249,8 @@ DEPENDENCIES
   playbook_ui!
   puma (~> 5.5)
   rails (~> 5.2.4, >= 5.2.4.4)
-  rubocop (= 0.93.1)
-  rubocop-performance (~> 1.9.2)
+  rubocop (= 1.23.0)
+  rubocop-performance (~> 1.11.5)
   selenium-webdriver
   slim-rails (~> 3.2)
   spring
@@ -260,7 +260,7 @@ DEPENDENCIES
   webpacker (= 4.3.0)
 
 RUBY VERSION
-   ruby 2.6.6p146
+   ruby 2.7.4p191
 
 BUNDLED WITH
    2.2.31

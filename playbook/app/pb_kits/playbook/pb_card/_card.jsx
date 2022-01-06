@@ -20,7 +20,6 @@ type CardPropTypes = {
   },
   padding?: string,
   selected?: boolean,
-  shadow?: "none" | "deep" | "deeper" | "deepest",
   tag?: "div" | "section" | "footer" | "header" | "article" | "aside" | "main" | "nav",
 }
 
@@ -75,14 +74,13 @@ const Card = (props: CardPropTypes) => {
     data = {},
     highlight = {},
     selected = false,
-    shadow = 'none',
     tag = 'div',
     padding = 'md',
   } = props
   const borderCSS = borderNone == true ? 'border_none' : ''
   const selectedCSS = selected == true ? 'selected' : 'deselected'
   const backgroundCSS = background == 'none' ? '' : `background_${background}`
-  const cardCss = buildCss('pb_card_kit', selectedCSS, `shadow_${shadow}`, borderCSS, `border_radius_${borderRadius}`, backgroundCSS, {
+  const cardCss = buildCss('pb_card_kit', selectedCSS, borderCSS, `border_radius_${borderRadius}`, backgroundCSS, {
     [`highlight_${highlight.position}`]: highlight.position,
     [`highlight_${highlight.color}`]: highlight.color,
   })

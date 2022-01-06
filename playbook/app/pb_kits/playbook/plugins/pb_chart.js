@@ -10,25 +10,14 @@ import solidGauge from 'highcharts/modules/solid-gauge'
 pie(Highcharts)
 
 // Map Data Color String Props to our SCSS Variables
+
 const mapColors = (array) => {
+  const regex = /(data)\-[1-8]/ //eslint-disable-line
+
   const newArray = array.map((item) => {
-    return item == 'data-1'
-      ? `${colors.data_1}`
-      : item == 'data-2'
-        ? `${colors.data_2}`
-        : item == 'data-3'
-          ? `${colors.data_3}`
-          : item == 'data-4'
-            ? `${colors.data_4}`
-            : item == 'data-5'
-              ? `${colors.data_5}`
-              : item == 'data-6'
-                ? `${colors.data_6}`
-                : item == 'data-7'
-                  ? `${colors.data_7}`
-                  : item == 'data-8'
-                    ? `${colors.data_8}`
-                    : ''
+    return regex.test(item)
+      ? `${colors[`data_${item[item.length - 1]}`]}`
+      : item
   })
   return newArray
 }
@@ -72,13 +61,13 @@ class pbChart {
     if (this.options.type == 'variablepie' || this.options.type ==  'pie'){
       this.setupPieChart(options)
     } else if (this.options.type == 'gauge') {
-      this.setupGauge()
+      this.setupGauge(options)
     } else {
-      this.setupChart()
+      this.setupChart(options)
     }
   }
 
-  setupGauge() {
+  setupGauge(options) {
     highchartsMore(Highcharts)
     solidGauge(Highcharts)
     Highcharts.setOptions(highchartsTheme)
@@ -128,19 +117,21 @@ class pbChart {
         pointFormat: this.defaults.tooltipHtml,
         followPointer: true,
       },
+      colors: options.colors !== undefined && options.colors.length > 0 ? mapColors(options.colors) : highchartsTheme.colors,
       plotOptions: {
         series: {
           animation: !this.defaults.disableAnimation,
         },
         solidgauge: {
+          borderColor: options.colors !== undefined && options.colors.length === 1 ? mapColors(options.colors).join() : highchartsTheme.colors[0],
           dataLabels: {
             format: `<span class="prefix">${this.defaults.prefix}</span>` +
             '<span class="fix">{y:,f}</span>' +
             `<span class="suffix">${this.defaults.suffix}</span>`,
-          },
-        },
+          }        },
       },
-    })
+    },
+    )
     document.querySelectorAll('.gauge-pane').forEach((pane) => pane.setAttribute('stroke-linejoin', 'round'))
     if (document.querySelector('.prefix')) {
       document.querySelectorAll('.prefix').forEach((prefix) => prefix.setAttribute('y', '28'))
@@ -195,7 +186,7 @@ class pbChart {
     })
   }
 
-  setupChart() {
+  setupChart(options) {
     Highcharts.setOptions(highchartsTheme)
 
     const configOptions = {
@@ -222,6 +213,7 @@ class pbChart {
       legend: {
         enabled: this.defaults.legend,
       },
+      colors: options.colors !== undefined && options.colors.length > 0 ? mapColors(options.colors) : highchartsTheme.colors,
       plotOptions: {
         series: {
           pointStart: this.defaults.pointStart,

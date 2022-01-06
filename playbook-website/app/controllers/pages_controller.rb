@@ -86,6 +86,7 @@ class PagesController < ApplicationController
     @line_height_token_example = Rails.root.join("app/views/pages/code_snippets/line_height_jsx.txt").read
     @position_token_example = Rails.root.join("app/views/pages/code_snippets/position_token.txt").read
     @shadow_token_example = Rails.root.join("app/views/pages/code_snippets/shadow_erb.txt").read
+    @shadow_in_use_code_example = Rails.root.join("app/views/pages/code_snippets/shadow_in_use_jsx.txt").read
     @space_sizes = [
       { name: "Extra Small", variable: "space_xs" },
       { name: "Small", variable: "space_sm" },

@@ -19,8 +19,15 @@ module Playbook
                    values: %w[1 2 3 4 5 6 7 8 9 10 11 12 first none],
                    default: "none"
 
+      prop :align_self, type: Playbook::Props::Enum,
+                        values: %w[start center end stretch] + [nil],
+                        default: nil
+
+      prop :display_flex, type: Playbook::Props::Boolean,
+                          default: false
+
       def classname
-        generate_classname("pb_flex_item_kit", fixed_size_class, grow_class, shrink_class, flex_class) + overflow_class + order_class
+        generate_classname("pb_flex_item_kit", fixed_size_class, grow_class, shrink_class, flex_class, display_flex_class) + overflow_class + order_class + align_self_class
       end
 
       def style_value
@@ -28,6 +35,14 @@ module Playbook
       end
 
     private
+
+      def align_self_class
+        align_self ? "align_self_#{align_self}" : ""
+      end
+
+      def display_flex_class
+        display_flex ? "display_flex" : nil
+      end
 
       def fixed_size_class
         fixed_size.present? ? "fixed_size" : nil

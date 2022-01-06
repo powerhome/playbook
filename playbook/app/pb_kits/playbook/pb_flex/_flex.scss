@@ -77,7 +77,6 @@ $gapTypes: (
     align-items: flex-start;
   }
 
-
   &[class*=align_items_right],
   &[class*=align_items_bottom],
   &[class*=align_items_end] {
@@ -94,6 +93,23 @@ $gapTypes: (
 
   &[class*=align_items_baseline] {
     align-items: baseline;
+  }
+
+  // Alignment: Align Self - Rails & React
+  &[class*=align_self_start] {
+    align-self: flex-start;
+  }
+  
+  &[class*=align_self_end] {
+    align-self: flex-end;
+  }
+  
+  &[class*=align_self_center] {
+    align-self: center;
+  }
+  
+  &[class*=align_self_stretch] {
+    align-self: stretch;
   }
 
   // Spacing

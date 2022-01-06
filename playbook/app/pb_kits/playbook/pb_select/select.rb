@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# rubocop:disable Style/StringConcatenation
 require "action_view"
 
 module Playbook
@@ -72,3 +73,5 @@ module Playbook
     end
   end
 end
+
+# rubocop:enable Style/StringConcatenation
