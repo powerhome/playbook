@@ -7554,39 +7554,44 @@ svg.pb_custom_icon {
     flex-basis: 100px; }
   [class^=pb_icon_circle_kit][class*=_royal] {
     color: #0056CF;
-    background: rgba(1, 78, 190, 0.2); }
+    background: rgba(1, 78, 190, 0.1); }
     [class^=pb_icon_circle_kit][class*=_royal].dark {
-      background: rgba(1, 78, 190, 0.5); }
+      background: rgba(1, 78, 190, 0.2); }
   [class^=pb_icon_circle_kit][class*=_purple] {
     color: #9E64E9;
-    background: rgba(143, 91, 214, 0.2); }
+    background: rgba(143, 91, 214, 0.1); }
     [class^=pb_icon_circle_kit][class*=_purple].dark {
-      background: rgba(143, 91, 214, 0.5); }
+      background: rgba(143, 91, 214, 0.2); }
   [class^=pb_icon_circle_kit][class*=_teal] {
     color: #00C4D7;
-    background: rgba(1, 177, 197, 0.2); }
+    background: rgba(1, 177, 197, 0.1); }
     [class^=pb_icon_circle_kit][class*=_teal].dark {
-      background: rgba(1, 177, 197, 0.5); }
+      background: rgba(1, 177, 197, 0.2); }
   [class^=pb_icon_circle_kit][class*=_red] {
     color: #FF2229;
-    background: rgba(231, 31, 41, 0.2); }
+    background: rgba(231, 31, 41, 0.1); }
     [class^=pb_icon_circle_kit][class*=_red].dark {
-      background: rgba(231, 31, 41, 0.5); }
+      background: rgba(231, 31, 41, 0.2); }
   [class^=pb_icon_circle_kit][class*=_yellow] {
     color: #F9BB00;
-    background: rgba(225, 169, 4, 0.2); }
+    background: rgba(225, 169, 4, 0.1); }
     [class^=pb_icon_circle_kit][class*=_yellow].dark {
-      background: rgba(225, 169, 4, 0.5); }
+      background: rgba(225, 169, 4, 0.2); }
   [class^=pb_icon_circle_kit][class*=_green] {
     color: #00CA74;
-    background: rgba(1, 182, 108, 0.2); }
+    background: rgba(1, 182, 108, 0.1); }
     [class^=pb_icon_circle_kit][class*=_green].dark {
-      background: rgba(1, 182, 108, 0.5); }
+      background: rgba(1, 182, 108, 0.2); }
   [class^=pb_icon_circle_kit][class*=_orange] {
     color: #FD804C;
-    background: rgba(229, 116, 72, 0.2); }
+    background: rgba(229, 116, 72, 0.1); }
     [class^=pb_icon_circle_kit][class*=_orange].dark {
-      background: rgba(229, 116, 72, 0.5); }
+      background: rgba(229, 116, 72, 0.2); }
+  [class^=pb_icon_circle_kit][class*=_default] {
+    color: #93a8b8;
+    background: rgba(133, 152, 170, 0.1); }
+    [class^=pb_icon_circle_kit][class*=_default].dark {
+      background: rgba(133, 152, 170, 0.2); }
 
 /*=====================================
 Base colors should not be documented.
@@ -7882,39 +7887,44 @@ svg.pb_custom_icon {
     flex-basis: 100px; }
   [class^=pb_icon_circle_kit][class*=_royal] {
     color: #0056CF;
-    background: rgba(1, 78, 190, 0.2); }
+    background: rgba(1, 78, 190, 0.1); }
     [class^=pb_icon_circle_kit][class*=_royal].dark {
-      background: rgba(1, 78, 190, 0.5); }
+      background: rgba(1, 78, 190, 0.2); }
   [class^=pb_icon_circle_kit][class*=_purple] {
     color: #9E64E9;
-    background: rgba(143, 91, 214, 0.2); }
+    background: rgba(143, 91, 214, 0.1); }
     [class^=pb_icon_circle_kit][class*=_purple].dark {
-      background: rgba(143, 91, 214, 0.5); }
+      background: rgba(143, 91, 214, 0.2); }
   [class^=pb_icon_circle_kit][class*=_teal] {
     color: #00C4D7;
-    background: rgba(1, 177, 197, 0.2); }
+    background: rgba(1, 177, 197, 0.1); }
     [class^=pb_icon_circle_kit][class*=_teal].dark {
-      background: rgba(1, 177, 197, 0.5); }
+      background: rgba(1, 177, 197, 0.2); }
   [class^=pb_icon_circle_kit][class*=_red] {
     color: #FF2229;
-    background: rgba(231, 31, 41, 0.2); }
+    background: rgba(231, 31, 41, 0.1); }
     [class^=pb_icon_circle_kit][class*=_red].dark {
-      background: rgba(231, 31, 41, 0.5); }
+      background: rgba(231, 31, 41, 0.2); }
   [class^=pb_icon_circle_kit][class*=_yellow] {
     color: #F9BB00;
-    background: rgba(225, 169, 4, 0.2); }
+    background: rgba(225, 169, 4, 0.1); }
     [class^=pb_icon_circle_kit][class*=_yellow].dark {
-      background: rgba(225, 169, 4, 0.5); }
+      background: rgba(225, 169, 4, 0.2); }
   [class^=pb_icon_circle_kit][class*=_green] {
     color: #00CA74;
-    background: rgba(1, 182, 108, 0.2); }
+    background: rgba(1, 182, 108, 0.1); }
     [class^=pb_icon_circle_kit][class*=_green].dark {
-      background: rgba(1, 182, 108, 0.5); }
+      background: rgba(1, 182, 108, 0.2); }
   [class^=pb_icon_circle_kit][class*=_orange] {
     color: #FD804C;
-    background: rgba(229, 116, 72, 0.2); }
+    background: rgba(229, 116, 72, 0.1); }
     [class^=pb_icon_circle_kit][class*=_orange].dark {
-      background: rgba(229, 116, 72, 0.5); }
+      background: rgba(229, 116, 72, 0.2); }
+  [class^=pb_icon_circle_kit][class*=_default] {
+    color: #93a8b8;
+    background: rgba(133, 152, 170, 0.1); }
+    [class^=pb_icon_circle_kit][class*=_default].dark {
+      background: rgba(133, 152, 170, 0.2); }
 
 [class^=pb_icon_stat_value_kit] {
   display: flex;

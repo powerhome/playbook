@@ -52,9 +52,9 @@ $pb_icon_circle_sizes: (
   @each $color_name, $color_value in $colors {
     &[class*=_#{$color_name}] {
       color: $color_value;
-      background: rgba(mix($bg_dark, $color_value, 10%), $opacity_2);
+      background: rgba(mix($bg_dark, $color_value, 10%), $opacity_1);
       &.dark {
-        background: rgba(mix($bg_dark, $color_value, 10%), $opacity_5);
+        background: rgba(mix($bg_dark, $color_value, 10%), $opacity_2);
       }
     }
   }
