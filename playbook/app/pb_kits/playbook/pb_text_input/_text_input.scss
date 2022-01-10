@@ -88,6 +88,62 @@
         border-color: $error;
       }
     }
+    .text_input_wrapper_add_on {
+      .add-on {
+        &-right {
+          .add-on-card {
+            border: 1px solid red;
+            border-left: 0;
+          }
+          // input, .text-input {
+          //   border-right: 0;
+          // }
+        }
+        &-left {
+          .add-on-card {
+            border: 1px solid red;
+            border-right: 0;
+          }
+          // input, .text-input {
+          //   border-left: 0;
+          // }
+        }
+      }
+      .border {
+        &_left {
+          &_on {
+            .card-right-aligned {
+              border-left: 0;
+            }
+          }
+          &_off {
+            .card-right-aligned {
+              border-left: 0;
+            }
+            .text_input {
+              border-right: 0 !important;
+              padding-right: 0 !important;
+            }
+          }
+        }
+        &_right {
+          &_on {
+            .card-left-aligned {
+              border-right: 0;
+            }
+          }
+          &_off {
+            .card-left-aligned {
+              border-right: 0;
+            }
+            .text_input {
+              border-left: 0 !important;
+              padding-left: 0 !important;
+            }
+          }
+        }
+      }
+    }
   }
   &.inline {
     .text_input_wrapper input::placeholder,
