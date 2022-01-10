@@ -1,0 +1,24 @@
+<%= pb_rails("card/card_body", props: { padding_x: "md", padding_top: "md", padding_bottom: "xs"}) do %>
+  <%= pb_rails("caption", props: { text: "Visual Guide", margin_bottom: "xs"}) %>
+  
+  <%= pb_rails("background", props: { background_color: "gradient", padding: "xs", max_width: "xl", margin_bottom: "xs" }) do %> 
+    <%= pb_rails("title", props: { text: "XL", size: 4, classname: "dark" }) %>
+  <% end %>
+
+  <%= pb_rails("background", props: { background_color: "gradient", padding: "xs", max_width: "lg", margin_bottom: "xs" }) do %> 
+    <%= pb_rails("title", props: { text: "LG", size: 4, classname: "dark" }) %>
+  <% end %>
+
+  <%= pb_rails("background", props: { background_color: "gradient", padding: "xs", max_width: "md", margin_bottom: "xs" }) do %> 
+    <%= pb_rails("title", props: { text: "MD", size: 4, classname: "dark" }) %>
+  <% end %>
+
+  <%= pb_rails("background", props: { background_color: "gradient", padding: "xs", max_width: "sm", margin_bottom: "xs" }) do %> 
+    <%= pb_rails("title", props: { text: "SM", size: 4, classname: "dark" }) %>
+  <% end %>
+
+  <%= pb_rails("background", props: { background_color: "gradient", padding: "xs", max_width: "xs" }) do %> 
+    <%= pb_rails("title", props: { text: "XS", size: 4, classname: "dark" }) %>
+  <% end %>
+
+<% end %>

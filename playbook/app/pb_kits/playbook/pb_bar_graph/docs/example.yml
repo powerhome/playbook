@@ -6,6 +6,7 @@ examples:
   - bar_graph_legend_non_clickable: Legend Non Clickable
   - bar_graph_height: Height
   - bar_graph_spline: Spline
+  - bar_graph_colors: Color Overrides
 
 
   react:
@@ -14,3 +15,4 @@ examples:
   - bar_graph_legend_non_clickable: Legend Non Clickable
   - bar_graph_height: Height
   - bar_graph_spline: Spline
+  - bar_graph_colors: Color Overrides

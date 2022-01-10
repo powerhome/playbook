@@ -70,7 +70,7 @@ module Playbook
     end
 
     def max_width_values
-      %w[sm md lg xl]
+      %w[xs sm md lg xl 0 none]
     end
   end
 end

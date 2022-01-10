@@ -1,0 +1,57 @@
+<%= pb_rails("title", props: { text: "Card Colors", tag: "h4", size: 4 }) %>
+
+<br>
+
+<%= pb_rails("card", props: { background: "dark", dark: true })  do %>
+  <%= pb_rails("body", props: {
+  text: "Dark",
+  color: "lighter"
+}) %>
+<% end %>
+
+<br>
+
+<%= pb_rails("card")  do %>
+  <%= pb_rails("body", props: {
+  text: "White"
+}) %>
+<% end %>
+
+<br>
+
+<%= pb_rails("card", props: { background: "light"})  do %>
+  <%= pb_rails("body", props: {
+  text: "Light"
+}) %>
+<% end %>
+
+<br>
+
+<%= pb_rails("title", props: { text: "Product Colors", tag: "h4", size: 4 }) %>
+
+<br>
+
+<%= pb_rails("card", props: { background: "windows", dark: true })  do %>
+  <%= pb_rails("body", props: {
+  text: "Windows",
+  color: "lighter"
+}) %>
+<% end %>
+
+<br>
+
+<%= pb_rails("card", props: { background: "siding" })  do %>
+  <%= pb_rails("body", props: {
+  text: "Siding"
+}) %>
+<% end %>
+
+<br>
+
+<%= pb_rails("card", props: { background: "doors" })  do %>
+  <%= pb_rails("body", props: {
+  text: "Doors"
+}) %>
+<% end %>
+
+<br>

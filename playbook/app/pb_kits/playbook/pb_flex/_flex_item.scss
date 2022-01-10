@@ -12,6 +12,37 @@
     flex-shrink: 1;
   }
 
+  // Display Flex - Rails & React
+  &[class*=display_flex] {
+    display: flex;
+  }
+
+  // Alignment: Align Self - Rails & React
+  &[class*=align_self_start] {
+    align-self: flex-start;
+  }
+  
+  &[class*=align_self_end] {
+    align-self: flex-end;
+  }
+  
+  &[class*=align_self_center] {
+    align-self: center;
+  }
+  
+  &[class*=align_self_stretch] {
+    align-self: stretch;
+  }
+
+  //Order Items
+  @for $i from 0 through 12 {
+    &[class*=order_#{$i}]{
+      order: $i;
+    }
+  }
+  &[class*=order_first]{
+    order: -1;
+  }
 
   $overflow_values: auto, hidden, inherit, initial, scroll, visible;
 

@@ -1,0 +1,5 @@
+@import "tokens/border_radius"
+
+.selector {
+    border-radius: $border_radius_xl;
+}

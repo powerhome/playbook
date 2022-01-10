@@ -7,7 +7,7 @@ module Playbook
     class Base
       attr_reader :default, :deprecated, :required, :name, :kit
 
-      def initialize(default: nil, deprecated: false, required: false, name:, kit:)
+      def initialize(name:, kit:, default: nil, deprecated: false, required: false)
         @default = default
         @deprecated = deprecated
         @required = required
@@ -39,7 +39,7 @@ module Playbook
       end
 
       def log(message)
-        logger = ActiveSupport::Logger.new(STDOUT)
+        logger = ActiveSupport::Logger.new($stdout)
         @logger ||= ActiveSupport::TaggedLogging.new(logger)
         @logger.log(0, message)
       end

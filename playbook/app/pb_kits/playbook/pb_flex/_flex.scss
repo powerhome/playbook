@@ -10,8 +10,8 @@ $gapSpaces:(
 );
 
 $gapTypes: (
-  gap: gap, 
-  columnGap: column-gap, 
+  gap: gap,
+  columnGap: column-gap,
   rowGap: row-gap
   );
 
@@ -69,6 +69,7 @@ $gapTypes: (
     justify-content: center;
   }
 
+
   // Alignment: Align Items
   &[class*=align_items_left],
   &[class*=align_items_top],
@@ -92,6 +93,23 @@ $gapTypes: (
 
   &[class*=align_items_baseline] {
     align-items: baseline;
+  }
+
+  // Alignment: Align Self - Rails & React
+  &[class*=align_self_start] {
+    align-self: flex-start;
+  }
+  
+  &[class*=align_self_end] {
+    align-self: flex-end;
+  }
+  
+  &[class*=align_self_center] {
+    align-self: center;
+  }
+  
+  &[class*=align_self_stretch] {
+    align-self: stretch;
   }
 
   // Spacing

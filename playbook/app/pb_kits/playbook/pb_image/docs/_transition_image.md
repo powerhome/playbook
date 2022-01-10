@@ -1,0 +1,1 @@
+To add a transition, simply use the `transition` prop and one of the three string options `"fade"`, `"blur"`, or `"scale"`.

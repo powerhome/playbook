@@ -5,6 +5,7 @@ examples:
   - line_graph_legend: Legend
   - line_graph_legend_nonclickable: Legend Nonclickable
   - line_graph_height: Height
+  - line_graph_colors: Color Overrides
 
 
   react:
@@ -12,3 +13,4 @@ examples:
   - line_graph_legend: Legend
   - line_graph_legend_nonclickable: Legend Nonclickable
   - line_graph_height: Height
+  - line_graph_colors: Color Overrides

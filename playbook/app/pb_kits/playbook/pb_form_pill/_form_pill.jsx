@@ -15,6 +15,7 @@ type FormPillProps = {
   avatar?: boolean,
   avatarUrl?: string,
   size?: string,
+  textTransform?: "none" | "lowercase",
   closeProps?: {
     onClick?: EventHandler,
     onMouseDown?: EventHandler,
@@ -30,12 +31,14 @@ const FormPill = (props: FormPillProps) => {
     avatarUrl,
     closeProps = {},
     size = '',
+    textTransform = 'none',
   } = props
   const css = classnames(
     `pb_form_pill_kit_${'primary'}`,
     globalProps(props),
     className,
     size === 'small' ? 'small' : null,
+    textTransform,
   )
   return (
     <div className={css}>

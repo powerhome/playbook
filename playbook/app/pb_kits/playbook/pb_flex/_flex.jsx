@@ -21,6 +21,7 @@ type FlexProps = {
   rowGap?: "xs" | "sm" | "md" | "lg" | "xl" | "none",
   columnGap?: "xs" | "sm" | "md" | "lg" | "xl" | "none",
   wrap?: boolean,
+  alignSelf?: "start" | "end" | "center" | "stretch" | "none"
 }
 
 const Flex = (props: FlexProps) => {
@@ -40,6 +41,7 @@ const Flex = (props: FlexProps) => {
     reverse = false,
     vertical = 'top',
     wrap = false,
+    alignSelf = 'none',
   } = props
   const orientationClass =
     orientation !== undefined ? `orientation_${orientation}` : ''
@@ -53,6 +55,7 @@ const Flex = (props: FlexProps) => {
   const columnGapClass = columnGap !== 'none' ? `columnGap_${columnGap}` : ''
   const wrapClass = wrap === true ? 'wrap' : ''
   const reverseClass = reverse === true ? 'reverse' : ''
+  const alignSelfClass = alignSelf !== 'none' ? `align_self_${alignSelf}` : ''
   const dataProps = buildDataProps(data)
 
   return (
@@ -69,7 +72,8 @@ const Flex = (props: FlexProps) => {
           spacingClass,
           gapClass,
           rowGapClass,
-          columnGapClass
+          columnGapClass,
+          alignSelfClass
         ),
         globalProps(props),
         className
