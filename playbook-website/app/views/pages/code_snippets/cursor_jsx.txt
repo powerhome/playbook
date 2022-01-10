@@ -4,6 +4,6 @@ React:
 <Body/>
 
 Rails:
-<%= pb_rails("body", props: { cursor:"pointer" }) do %>
+<%= pb_rails("body", props: { cursor: "pointer" }) do %>
   Body content
 <% end %>
