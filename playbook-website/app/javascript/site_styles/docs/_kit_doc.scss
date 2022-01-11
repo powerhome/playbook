@@ -181,11 +181,19 @@ pre.highlight {
 .itemSSeperator {
   float: left;
   width: 60px;
-
 }
 
 .SSeperatorscroll {
   width: 100%;
   height: 200px;
   overflow: scroll;
+}
+
+.flexSSeperatorContainer {
+width:100vh;
+height: 150px;
+}
+
+.flexSSeperatortext {
+  height:200px;
 }
