@@ -11,7 +11,7 @@ const TextInputError = (props) => {
   return (
     <div>
       <TextInput
-          addOn={{ icon: 'user', alignment: 'right', border: true }}
+          addOn={{ icon: 'user', alignment: 'left', border: true }}
           error="Please enter a valid email address"
           label="Email Address"
           onChange={handleUpdateEmail}
@@ -21,7 +21,7 @@ const TextInputError = (props) => {
           {...props}
       />
       <TextInput
-          addOn={{ icon: 'user', alignment: 'right', border: true }}
+          addOn={{ icon: 'user', alignment: 'left', border: true }}
           label="Confirm Email Address"
           onChange={handleUpdateEmail}
           placeholder="Confirm email address"

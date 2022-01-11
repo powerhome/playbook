@@ -18839,6 +18839,34 @@ Background colors ------------------*/
 [class^=pb_text_input_kit].error .text_input_wrapper input, [class^=pb_text_input_kit].error .text_input_wrapper .text_input {
   border-color: #FF2229; }
 
+[class^=pb_text_input_kit].error .text_input_wrapper_add_on .add-on-right .add-on-card {
+  border: 1px solid red;
+  border-left: 0; }
+
+[class^=pb_text_input_kit].error .text_input_wrapper_add_on .add-on-left .add-on-card {
+  border: 1px solid red;
+  border-right: 0; }
+
+[class^=pb_text_input_kit].error .text_input_wrapper_add_on .border_left_on .card-right-aligned {
+  border-left: 0; }
+
+[class^=pb_text_input_kit].error .text_input_wrapper_add_on .border_left_off .card-right-aligned {
+  border-left: 0; }
+
+[class^=pb_text_input_kit].error .text_input_wrapper_add_on .border_left_off .text_input {
+  border-right: 0 !important;
+  padding-right: 0 !important; }
+
+[class^=pb_text_input_kit].error .text_input_wrapper_add_on .border_right_on .card-left-aligned {
+  border-right: 0; }
+
+[class^=pb_text_input_kit].error .text_input_wrapper_add_on .border_right_off .card-left-aligned {
+  border-right: 0; }
+
+[class^=pb_text_input_kit].error .text_input_wrapper_add_on .border_right_off .text_input {
+  border-left: 0 !important;
+  padding-left: 0 !important; }
+
 [class^=pb_text_input_kit].inline .text_input_wrapper input::placeholder,
 [class^=pb_text_input_kit].inline .text_input_wrapper .text_input .placeholder {
   opacity: 1; }
