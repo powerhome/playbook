@@ -57,10 +57,16 @@ const zIndexProps = ({ zIndex }) => {
   return css
 }
 
+const flexProps = ({ flex }) => {
+  let css = ''
+  css += flex ? `flex-${flex}` : ''
+  return css
+}
+
 // All Exported as a single function
 export const globalProps = (props, defaultProps = {}) => {
   const allProps = { ...props, ...defaultProps }
-  return spacingProps(allProps) + darkProps(allProps) + maxWidthProps(allProps) + zIndexProps(allProps) + numberSpacingProps(allProps)
+  return spacingProps(allProps) + darkProps(allProps) + maxWidthProps(allProps) + zIndexProps(allProps) + numberSpacingProps(allProps) + flexProps(allProps)
 }
 
 export const deprecatedProps = (kit, props = []) => {
