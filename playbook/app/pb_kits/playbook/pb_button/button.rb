@@ -19,8 +19,8 @@ module Playbook
       prop :type
       prop :value
       prop :size, type: Playbook::Props::Enum,
-                  values: %w[sm md lg],
-                  default: "md"
+                  values: ["sm", "md", "lg", nil],
+                  default: nil
 
       def options
         {

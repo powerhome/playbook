@@ -38,7 +38,7 @@ const buttonClassName = (props: ButtonPropTypes) => {
     loading = false,
     type = 'inline',
     variant = 'primary',
-    size = 'md',
+    size = null,
   } = props
 
   let className = 'pb_button_kit'
