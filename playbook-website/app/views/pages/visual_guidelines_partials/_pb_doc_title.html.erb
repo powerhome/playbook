@@ -1,0 +1,13 @@
+<%= pb_rails("title", props: { text: title, size: title_size, margin_top: "xl", padding_top: "xl" }) %>
+<%= pb_rails("body", props: {
+  tag: "p",
+  text: description,
+  margin_bottom: "lg",
+  margin_top: "xs"
+}) %>
+<% if global_props %>
+  <%= pb_rails("title", props: { text: "Global Props", tag: "h3", size: 4 }) %>
+  <%= pb_rails("body", props: { tag: "p", margin_bottom: "lg", margin_top: "xs" }) do %>
+  Available in every kit.  These are added globally as they are most flexible when developing.
+  <% end %>
+<% end %>
