@@ -63,10 +63,16 @@ const shadowProps = ({ shadow }) => {
   return css
 }
 
+const lineHeightProps = ({ lineHeight }) => {
+  let css = ''
+  css += lineHeight ? `line_height_${lineHeight} ` : ''
+  return css
+}
+
 // All Exported as a single function
 export const globalProps = (props, defaultProps = {}) => {
   const allProps = { ...props, ...defaultProps }
-  return spacingProps(allProps) + darkProps(allProps) + maxWidthProps(allProps) + zIndexProps(allProps) + numberSpacingProps(allProps) + shadowProps(allProps)
+  return spacingProps(allProps) + darkProps(allProps) + maxWidthProps(allProps) + zIndexProps(allProps) + numberSpacingProps(allProps) + shadowProps(allProps) + lineHeightProps(allProps)
 }
 
 export const deprecatedProps = (kit, props = []) => {

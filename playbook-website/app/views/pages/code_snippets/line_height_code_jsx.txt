@@ -1,0 +1,3 @@
+<Body lineHeight="looser">
+  Body content
+<Body/>

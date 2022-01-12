@@ -1,0 +1,11 @@
+@import "../tokens/exports/line_height";
+
+@mixin line_height_classes($line_height_list) {
+  @each $name, $line-height in $line_height_list {
+    .#{$name} {
+      line-height: $line-height;
+    }
+  }
+}
+@include line_height_classes($line_height);
+ 

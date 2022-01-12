@@ -15,6 +15,7 @@ module Playbook
     include Playbook::ZIndex
     include Playbook::NumberSpacing
     include Playbook::Shadow
+    include Playbook::LineHeight
 
     prop :id
     prop :data, type: Playbook::Props::Hash, default: {}
