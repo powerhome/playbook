@@ -22090,6 +22090,9 @@ Background colors ------------------*/
   padding-top: 0 !important;
   padding-bottom: 0 !important; }
 
+.cursor_pointer {
+  cursor: pointer; }
+
 .max_width_xs {
   max-width: 360px; }
 
