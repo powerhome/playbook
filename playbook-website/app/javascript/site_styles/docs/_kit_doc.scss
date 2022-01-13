@@ -1,3 +1,5 @@
+
+
 @import "playbook-ui/dist/tokens/colors";
 @import "playbook-ui/dist/tokens/spacing";
 
@@ -180,20 +182,21 @@ pre.highlight {
 
 .itemSSeperator {
   float: left;
-  width: 60px;
+  width: 50%;
 }
 
 .SSeperatorscroll {
   width: 100%;
-  height: 200px;
+  height: 50px;
   overflow: scroll;
 }
 
 .flexSSeperatorContainer {
-width:100vh;
-height: 150px;
+height: 100px;
+
 }
 
 .flexSSeperatortext {
-  height:200px;
+ width:50%;
 }
+
