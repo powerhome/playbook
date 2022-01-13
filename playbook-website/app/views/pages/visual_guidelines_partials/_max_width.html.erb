@@ -1,4 +1,4 @@
-<%= render partial: "pages/visual_guidelines_partials/pb_doc_title",
+<%= render partial: "pages/visual_guidelines_partials/partial_title",
   locals: {
     title: "Max Width",
     title_size: 1,
@@ -9,15 +9,15 @@
   }
 %>
 <%= pb_rails("card", props: { shadow: "deep", margin_bottom: "none", padding: "none" }) do %>
-  <%= render partial: "pages/visual_guidelines_partials/pb_doc_max_width" %>
+  <%= render "pages/visual_guidelines_partials/pb_doc_max_width" %>
   <%= pb_rails("section_separator", props: { padding: "sm" }) %>
-  <%= render partial: "pages/visual_guidelines_partials/pb_doc_props",
+  <%= render partial: "pages/visual_guidelines_partials/partial_props",
     locals: {
       props: ["maxWidth"],
-      values: ["xs", "sm", "md", "lg", "xl"]
+      values: %w[xs sm md lg xl]
     }
   %>
-  <%= render partial: "pages/visual_guidelines_partials/pb_doc_code_example",
+  <%= render partial: "pages/visual_guidelines_partials/partial_code_example",
     locals: {
       example: "app/views/pages/code_snippets/width_jsx.txt"
     }

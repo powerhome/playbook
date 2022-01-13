@@ -1,4 +1,4 @@
-<%= render partial: "pages/visual_guidelines_partials/pb_doc_title",
+<%= render partial: "pages/visual_guidelines_partials/partial_title",
   locals: {
     title: "Number Spacing",
     title_size: 1,
@@ -10,15 +10,15 @@
   }
 %>
 <%= pb_rails("card", props: { shadow: "deep", margin_bottom: "none", padding: "none", max_width: "xl" }) do %>
-  <%= render partial: "pages/visual_guidelines_partials/pb_doc_number_spacing" %>
+  <%= render "pages/visual_guidelines_partials/pb_doc_number_spacing" %>
   <%= pb_rails("section_separator", props: { padding: "sm" }) %>
-  <%= render partial: "pages/visual_guidelines_partials/pb_doc_props",
+  <%= render partial: "pages/visual_guidelines_partials/partial_props",
     locals: {
       props: ["numberSpacing"],
       values: ["tabular"]
     }
   %>
-  <%= render partial: "pages/visual_guidelines_partials/pb_doc_code_example",
+  <%= render partial: "pages/visual_guidelines_partials/partial_code_example",
     locals: {
       example: "app/views/pages/code_snippets/number_spacing_jsx.txt"
     }

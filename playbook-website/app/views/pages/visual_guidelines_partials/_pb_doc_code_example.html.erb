@@ -1,6 +1,0 @@
-<%= pb_rails("background", props: { id: "code-wrapper", classname: "border-bottom", background_color: "dark", padding: "none" }) do %>
-  <%= pb_rails("caption", props: { text: "EXAMPLE IN USE", padding_top: "lg", margin_x: "xl", classname: "dark" }) %>
-  <div class="pb--codeCopy">
-    <pre class="highlight pt_sm" style="margin: 0px"><%= raw rouge(Rails.root.join(example).read, "react") %></pre>
-  </div>
-<% end %>

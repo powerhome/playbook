@@ -1,4 +1,4 @@
-<%= render partial: "pages/visual_guidelines_partials/pb_doc_title",
+<%= render partial: "pages/visual_guidelines_partials/partial_title",
   locals: {
     title: "Positioning",
     title_size: 1,
@@ -13,13 +13,13 @@
   padding: "none",
   padding_top: "xs"
 }) do %>
-  <%= render partial: "pages/visual_guidelines_partials/pb_doc_props",
+  <%= render partial: "pages/visual_guidelines_partials/partial_props",
     locals: {
       props: ["zIndex"],
       values: %w[1 2 3 4 5 6 7 8 9 10]
     }
   %>
-  <%= render partial: "pages/visual_guidelines_partials/pb_doc_code_example",
+  <%= render partial: "pages/visual_guidelines_partials/partial_code_example",
     locals: {
       example: "app/views/pages/code_snippets/positioning_jsx.txt"
     }

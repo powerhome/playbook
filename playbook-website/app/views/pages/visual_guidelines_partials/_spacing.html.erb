@@ -1,4 +1,4 @@
-<%= render partial: "pages/visual_guidelines_partials/pb_doc_title",
+<%= render partial: "pages/visual_guidelines_partials/partial_title",
   locals: {
     title: "Spacing",
     title_size: 1,
@@ -8,14 +8,14 @@
   }
 %>
 <%= pb_rails("card", props: { shadow: "deep", margin_bottom: "none", padding: "none" }) do %>
-  <%= render partial: "pages/visual_guidelines_partials/pb_doc_props",
+  <%= render partial: "pages/visual_guidelines_partials/partial_props",
     locals: {
       props: %w[margin marginLeft marginBottom marginRight marginTop marginX marginY
                 padding paddingBottom paddingLeft paddingRight paddingTop paddingX paddingY],
       values: ["none", "xs", "sm", "md", "lg", "xl"]
     }
   %>
-  <%= render partial: "pages/visual_guidelines_partials/pb_doc_code_example",
+  <%= render partial: "pages/visual_guidelines_partials/partial_code_example",
     locals: {
       example: "app/views/pages/code_snippets/spacing_global_props_jsx.txt"
     }
@@ -27,10 +27,9 @@
   Make your own sytles using Playbook tokens to keep your site consistent.
 <% end %>
 
-
 <%= pb_rails("card", props: { shadow: "deep", margin_bottom: "none", padding: "none" }) do %>
-  <%= render partial: "pages/visual_guidelines_partials/pb_doc_spacing_tokens" %>
-  <%= render partial: "pages/visual_guidelines_partials/pb_doc_code_example",
+  <%= render "pages/visual_guidelines_partials/pb_doc_spacing_tokens" %>
+  <%= render partial: "pages/visual_guidelines_partials/partial_code_example",
     locals: {
       example: "app/views/pages/code_snippets/spacing_tokens_jsx.txt"
     }
