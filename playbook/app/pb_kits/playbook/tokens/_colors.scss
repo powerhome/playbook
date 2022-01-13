@@ -12,6 +12,7 @@ $red:                 #FF2229;
 $yellow:              #F9BB00;
 $green:               #00CA74;
 $orange:              #FD804C;
+$default:             #93a8b8;
 $colors: (
   royal:              $royal,
   purple:             $purple,
@@ -19,7 +20,8 @@ $colors: (
   red:                $red,
   yellow:             $yellow,
   green:              $green,
-  orange:             $orange
+  orange:             $orange,
+  default:            $default,
 );
 
 /* Specialty Gradient -----------------*/

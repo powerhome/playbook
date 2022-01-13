@@ -1,0 +1,9 @@
+React:
+<Body cursor="pointer">
+  Body content
+<Body/>
+
+Rails:
+<%= pb_rails("body", props: { cursor: "pointer" }) do %>
+  Body content
+<% end %>

@@ -20,9 +20,11 @@ metadata:
   annotations:
     backstage.io/techdocs-ref: dir:.
     pagerduty.com/integration-key: aa4876104a614402c057d129aa5ccace
+    jenkins.io/github-folder: powerhome/playbook
 spec:
   owner: ux-team
   domain: ux
+  lifecycle: production
 ---
 apiVersion: backstage.io/v1alpha1
 kind: Component
