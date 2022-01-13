@@ -1,7 +1,7 @@
  <%= pb_rails("title", props: { text: "Flex Item", tag: "h4", size: 4 }) %> </br>
 
-<%= pb_rails("flex", props: {classname: "flex-container", vertical: "stretch"}) do %>
-    <%= pb_rails("body", props: {classname: "flex-item"}) do %>
+<%= pb_rails("flex", props: { classname: "flex-container", vertical: "stretch" }) do %>
+    <%= pb_rails("body", props: { classname: "flex-item" }) do %>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua
     <% end %>
     <%= pb_rails("section_separator", props: { orientation: "vertical" }) %>
@@ -9,14 +9,14 @@
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua
     <% end %>
     <%= pb_rails("section_separator", props: { orientation: "vertical" }) %>
-    <%= pb_rails("body", props: {classname: "flex-item"}) do %>
+    <%= pb_rails("body", props: { classname: "flex-item" }) do %>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua
     <% end %>
 <% end %>
 </br>
 <div class="clear"></div>
 <%= pb_rails("title", props: { text: "Flex Container", tag: "h4", size: 4 }) %> </br>
-  <%= pb_rails("flex", props: {orientation: "column", inline:false, classname: "flexSSeperatortext"}) do %>
+  <%= pb_rails("flex", props: { orientation: "column", inline:false, classname: "flexSSeperatortext" }) do %>
     <%= pb_rails("flex") do %>    
         <%= pb_rails("section_separator", props: { orientation: "vertical", classname: "flexSSeperatorContainer" }) %> 
         <%= pb_rails("body", props: { classname: "flexSSeperatortext" }) do %>
