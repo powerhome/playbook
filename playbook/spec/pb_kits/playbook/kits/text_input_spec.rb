@@ -25,6 +25,7 @@ RSpec.describe Playbook::PbTextInput::TextInput do
       expect(subject.new({ inline: true }).classname).to eq "pb_text_input_kit inline"
       expect(subject.new({ error: "Please enter a valid email" }).classname).to eq "pb_text_input_kit error"
       expect(subject.new({ dark: true, error: "Please enter a valid email" }).classname).to eq "pb_text_input_kit dark error"
+      expect(subject.new({ margin_bottom: "lg" }).classname).to eq "pb_text_input_kit mb_lg"
     end
   end
 end
