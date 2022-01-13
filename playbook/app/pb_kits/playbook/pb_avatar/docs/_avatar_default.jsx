@@ -15,7 +15,7 @@ const AvatarDefault = (props) => {
       <br />
       <Avatar
           imageAlt="Terry Johnson Standing"
-          imageUrl="https://randomuser.me/api/portraits/men/44.jpg"
+          imageUrl="https://randomuser.me/api/portraits/men/45.jpg"
           name="Terry Johnson"
           size="xs"
           status="online"
@@ -24,7 +24,7 @@ const AvatarDefault = (props) => {
       <br />
       <Avatar
           imageAlt="Terry Johnson Standing"
-          imageUrl="https://randomuser.me/api/portraits/men/44.jpg"
+          imageUrl="https://randomuser.me/api/portraits/men/43.jpg"
           name="Terry Johnson"
           size="sm"
           status="online"
@@ -33,7 +33,7 @@ const AvatarDefault = (props) => {
       <br />
       <Avatar
           imageAlt="Terry Johnson Standing"
-          imageUrl="https://randomuser.me/api/portraits/men/44.jpg"
+          imageUrl="https://randomuser.me/api/portraits/men/42.jpg"
           name="Terry Johnson"
           size="md"
           status="away"
