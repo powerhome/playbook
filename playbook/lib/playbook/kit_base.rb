@@ -5,6 +5,7 @@ require "playbook/spacing"
 require "playbook/z_index"
 require "playbook/number_spacing"
 require "playbook/shadow"
+require "playbook/cursor"
 
 module Playbook
   class KitBase < ViewComponent::Base
@@ -15,6 +16,7 @@ module Playbook
     include Playbook::ZIndex
     include Playbook::NumberSpacing
     include Playbook::Shadow
+    include Playbook::Cursor
 
     prop :id
     prop :data, type: Playbook::Props::Hash, default: {}
