@@ -2,7 +2,7 @@
 
 @mixin line-height-classes($line-height-list) {
   @each $name, $line-height in $line-height-list {
-    .#{$name} {
+    [class*=pb_] .line_height_#{$name} {
       line-height: $line-height;
     }
   }

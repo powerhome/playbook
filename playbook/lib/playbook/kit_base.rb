@@ -5,6 +5,7 @@ require "playbook/spacing"
 require "playbook/z_index"
 require "playbook/number_spacing"
 require "playbook/shadow"
+require "playbook/line_height"
 
 module Playbook
   class KitBase < ViewComponent::Base
