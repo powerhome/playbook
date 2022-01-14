@@ -23,6 +23,7 @@ RSpec.describe Playbook::KitBase do
   it { is_expected.to define_prop(:padding_y) }
   it { is_expected.to define_boolean_prop(:dark).with_default(false) }
   it { is_expected.to define_prop(:shadow) }
+  it { is_expected.to define_prop(:display) }
 
   describe "#children" do
     it "allows to be passed as prop" do

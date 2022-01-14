@@ -22152,6 +22152,24 @@ Background colors ------------------*/
 .shadow_deepest {
   box-shadow: 0 30px 38px 4px rgba(60, 106, 172, 0.2), 0 2px 14px 4px rgba(60, 106, 172, 0.1); }
 
+.display_block {
+  display: block; }
+
+.display_inline_block {
+  display: inline-block; }
+
+.display_inline {
+  display: inline; }
+
+.display_flex {
+  display: flex; }
+
+.display_inline_flex {
+  display: inline-flex; }
+
+.display_hidden {
+  display: none; }
+
 /*=====================================
 Base colors should not be documented.
 Only document color use.
