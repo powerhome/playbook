@@ -115,8 +115,8 @@
               border-left: 0;
             }
             .text_input {
-              border-right: 0 !important;
-              padding-right: 0 !important;
+              border-right: 0;
+              padding-right: 0;
             }
           }
         }
@@ -131,8 +131,8 @@
               border-right: 0;
             }
             .text_input {
-              border-left: 0 !important;
-              padding-left: 0 !important;
+              border-left: 0;
+              padding-left: 0;
             }
           }
         }
@@ -169,7 +169,7 @@
     &-card {
       height: 45px;
       margin: 0;
-      padding: 0 !important;
+      padding: 0;
       align-items: center;
       justify-content: center;
       width: 45px;
@@ -182,15 +182,15 @@
     }
     &-left {
       .text_input {
-        border-top-left-radius: 0 !important;
-        border-bottom-left-radius: 0 !important;
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
       }
     }
 
     &-right {
       .text_input{
-        border-top-right-radius: 0 !important;
-        border-bottom-right-radius: 0 !important;
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
       }
     }
   }
@@ -198,15 +198,14 @@
     background-color: $focus_input_dark;
     border-width: 0px;
   }
-
   .card-left-aligned {
-    border-top-right-radius: 0 !important;
-    border-bottom-right-radius: 0 !important;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
   }
 
   .card-right-aligned {
-    border-top-left-radius: 0 !important;
-    border-bottom-left-radius: 0 !important;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
   }
 
   .border {
@@ -215,8 +214,8 @@
         border-right: 0;
       }
       .text_input {
-        border-left: 0 !important;
-        padding-left: 0 !important;
+        border-left: 0;
+        padding-left: 0;
       }
     }
     &_left_on {
@@ -234,8 +233,8 @@
         border-left: 0;
       }
       .text_input {
-        border-right: 0 !important;
-        padding-right: 0 !important;
+        border-right: 0;
+        padding-right: 0;
       }
     }
   }
