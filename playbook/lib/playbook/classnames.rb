@@ -18,6 +18,7 @@ module Playbook
         number_spacing_props,
         shadow_props,
         display_props,
+        cursor_props,
       ].compact.join(" ")
     end
 

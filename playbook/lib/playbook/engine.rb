@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require "action_view/railtie"
-require "view_component/engine"
 require "webpacker/react"
 
 module Playbook

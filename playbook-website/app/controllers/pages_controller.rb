@@ -78,6 +78,7 @@ class PagesController < ApplicationController
     @max_width_code_example = Rails.root.join("app/views/pages/code_snippets/width_jsx.txt").read
     @number_spacing_code_example = Rails.root.join("app/views/pages/code_snippets/number_spacing_jsx.txt").read
     @position_code_example = Rails.root.join("app/views/pages/code_snippets/positioning_jsx.txt").read
+    @cursor_code_example = Rails.root.join("app/views/pages/code_snippets/cursor_jsx.txt").read
     @spacing_code_example = Rails.root.join("app/views/pages/code_snippets/spacing_global_props_jsx.txt").read
     @spacing_token_example = Rails.root.join("app/views/pages/code_snippets/spacing_tokens_jsx.txt").read
     @border_radius_token_example = Rails.root.join("app/views/pages/code_snippets/border_radius_tokens.txt").read

@@ -69,10 +69,16 @@ const displayProps = ({ display }) => {
   return css
 }
 
+const cursorProps = ({ cursor }) => {
+  let css = ''
+  css += cursor ? `cursor_${cursor} ` : ''
+  return css
+}
+
 // All Exported as a single function
 export const globalProps = (props, defaultProps = {}) => {
   const allProps = { ...props, ...defaultProps }
-  return spacingProps(allProps) + darkProps(allProps) + maxWidthProps(allProps) + zIndexProps(allProps) + numberSpacingProps(allProps) + shadowProps(allProps) + displayProps(allProps)
+  return spacingProps(allProps) + darkProps(allProps) + maxWidthProps(allProps) + zIndexProps(allProps) + numberSpacingProps(allProps) + shadowProps(allProps) + displayProps(allProps) + cursorProps(allProps)
 }
 
 export const deprecatedProps = (kit, props = []) => {
