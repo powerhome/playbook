@@ -4697,9 +4697,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"copy-webpack-plugin@npm:6.2.1":
-  version: 6.2.1
-  resolution: "copy-webpack-plugin@npm:6.2.1"
+"copy-webpack-plugin@npm:6.4.1":
+  version: 6.4.1
+  resolution: "copy-webpack-plugin@npm:6.4.1"
   dependencies:
     cacache: ^15.0.5
     fast-glob: ^3.2.4
@@ -4714,7 +4714,7 @@ __metadata:
     webpack-sources: ^1.4.3
   peerDependencies:
     webpack: ^4.37.0 || ^5.0.0
-  checksum: 99ef83b4237b51e95618365ad2e62775b640fe1cae0d39d3ab03bcb09c9026a00ab0fb1c03f72d164c1457482114ddf959e7a03ab409704f34686e0a64ee4a31
+  checksum: ed5eb2bac2d67822dcf08e5023340d75392be6864f5f5734a9a1f60d64f7b028ee0279216e469de395eb9c94391fdafe46a800bda31f8b490f3f591d4255f163
   languageName: node
   linkType: hard
 
@@ -11226,7 +11226,7 @@ fsevents@^1.2.7:
     circular-dependency-plugin: 5.2.2
     classnames: ^2.2.6
     clean-webpack-plugin: 2.0.2
-    copy-webpack-plugin: 6.2.1
+    copy-webpack-plugin: 6.4.1
     core-js: 3
     css-loader: 3.6.0
     css-modules-flow-types-loader: 0.3.1
