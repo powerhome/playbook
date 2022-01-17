@@ -85,7 +85,7 @@
     "css-modules-flow-types-loader": "0.3.1",
     "es5-shim": "4.6.2",
     "eslint": "6.6.0",
-    "eslint-plugin-flowtype": "4.4.1",
+    "eslint-plugin-flowtype": "4.7.0",
     "eslint-plugin-jsx-control-statements": "2.2.1",
     "eslint-plugin-react": "git://github.com/rafbgarcia/eslint-plugin-react#fix-other-curly-brace-presence-edge-cases",
     "filemanager-webpack-plugin": "4.0.0",
