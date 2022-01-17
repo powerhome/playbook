@@ -10,6 +10,8 @@ examples:
   - flex_align: Align
   - flex_gap: Gap
   - flex_item: Flex Item
+  - flex_item_align_self: Flex Item - Align Self
+
 
 
 
@@ -23,3 +25,4 @@ examples:
   - flex_align: Align
   - flex_gap: Gap
   - flex_item_example: Flex Item
+  - flex_item_align_self: Flex Item - Align Self

@@ -14,7 +14,7 @@ RSpec.describe Playbook::PbIconCircle::IconCircle do
   it {
     is_expected.to define_enum_prop(:variant)
       .with_default("default")
-      .with_values("default", "royal", "blue", "purple", "teal", "red", "yellow", "green")
+      .with_values("default", "royal", "orange", "purple", "teal", "red", "yellow", "green")
   }
 
   describe "#classname" do

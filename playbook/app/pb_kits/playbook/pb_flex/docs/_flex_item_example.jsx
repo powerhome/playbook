@@ -1,9 +1,36 @@
 import React from 'react'
-import { Flex, FlexItem, Title } from  '../../'
+import { Flex, FlexItem, Title } from  '../..'
 
 const FlexItemExample = (props) => {
   return (
     <>
+      <Title
+          size={4}
+          text="Display Flex"
+      />
+      <br />
+      <div className="flex-doc-example">
+        <FlexItem
+            displayFlex
+            gap="xs"
+            {...props}
+        >
+          <FlexItem>
+            {'We'}
+          </FlexItem>
+          <FlexItem>
+            {'Are'}
+          </FlexItem>
+          <FlexItem>
+            {'Being'}
+          </FlexItem>
+          <FlexItem>
+            {'Flexed'}
+          </FlexItem>
+        </FlexItem>
+      </div>
+
+      <br />
       <Title
           size={4}
           text="Grow"
@@ -102,6 +129,32 @@ const FlexItemExample = (props) => {
             {'3'}
           </FlexItem>
           <FlexItem flex={2}>
+            {'4'}
+          </FlexItem>
+        </Flex>
+      </div>
+
+      <br />
+      <Title
+          size={4}
+          text="Order"
+      />
+      <br />
+      <div className="flex-doc-example">
+        <Flex
+            gap="xs"
+            {...props}
+        >
+          <FlexItem order={4}>
+            {'1'}
+          </FlexItem>
+          <FlexItem order={2}>
+            {'2'}
+          </FlexItem>
+          <FlexItem order={1}>
+            {'3'}
+          </FlexItem>
+          <FlexItem order={3}>
             {'4'}
           </FlexItem>
         </Flex>

@@ -33,4 +33,10 @@ RSpec.describe Playbook::PbTitle::Title do
       expect(subject.new(size: 4, variant: "link").classname).to eq "pb_title_kit_4_link"
     end
   end
+
+  describe "rendered content" do
+    it "contains content if text is passed to the block" do
+      expect((subject.new({}) { "sample text" }).children).to be_truthy
+    end
+  end
 end

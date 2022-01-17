@@ -1,0 +1,56 @@
+@import "playbook-ui/dist/tokens/colors";
+@import "playbook-ui/dist/tokens/spacing";
+
+.pb--tokens-spacing {
+  &-token {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-content: center;
+    text-align: center;
+    &-example {
+      display: block;
+      border-radius: 4px;
+      width: 80px;
+      height: 80px;
+      position: relative;
+      border: 1px solid;
+      border-color: $royal;
+    }
+    &::before {
+      content: attr(data-name);
+      width: 100%;
+      position: absolute;
+      top: 105px;
+      left: 0;
+      text-align: center;
+      font-size: 14px;
+      font-weight: 600;
+
+    }
+    &::after {
+      content: attr(data-variable);
+      width: 100%;
+      position: absolute;
+      top: 124px;
+      left: 0;
+      text-align: center;
+      font-size: 12px;
+      opacity: 0.7;
+
+    }  
+    &:first-child {
+      margin-left: 0;
+    }
+  }
+}
+
+
+@each $name, $value in $spaces{
+  div.pb--spacing_#{$name}{
+    width: #{$value};
+    height: 78px;
+    background: $shadow;
+  }
+}

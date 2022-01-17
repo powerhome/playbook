@@ -16,6 +16,8 @@ module Playbook
         max_width_props,
         z_index_props,
         number_spacing_props,
+        shadow_props,
+        cursor_props,
       ].compact.join(" ")
     end
 

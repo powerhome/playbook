@@ -2,10 +2,19 @@ import { ensureAccessible, renderKit } from '../utilities/test-utils'
 import { DateTimeStacked } from '../'
 
 /* eslint-disable jsx-control-statements/jsx-jcs-no-undef */
+const currentDate = new Date()
+
+const datetime = new Date('Wed Mar 31 2021 12:00:00 GMT-0500'),
+  monthName = datetime.toLocaleString('en-US', { month: 'short' }),
+  day = datetime.getDate(),
+  fullYear = datetime.getFullYear(),
+  optionalYear = currentDate.getFullYear() !== fullYear ? fullYear : ''
+
+const monthDayYear = `${monthName}${day}${optionalYear}`
 
 const props = {
   data: { testid: 'datetimestacked' },
-  datetime: new Date('Wed Mar 31 2021 12:00:00 GMT-0500'),
+  datetime,
 }
 
 test('Kit renders date time', () => {
@@ -19,17 +28,17 @@ it('Should be accessible', async () => {
 
 test('renders time in default timezone', () => {
   const kit = renderKit(DateTimeStacked, props)
-  expect(kit).toHaveTextContent(/Mar311:00pEDT/i)
+  expect(kit).toHaveTextContent(`${monthDayYear}1:00pEDT`)
 })
 
 test('renders time in timezone', () => {
   props.timeZone = 'Asia/Tokyo'
   const kit = renderKit(DateTimeStacked, props)
-  expect(kit).toHaveTextContent(/Mar312:00aJST/i)
+  expect(kit).toHaveTextContent(`${monthDayYear}2:00aJST`)
 })
 
 test('renders time in timezone', () => {
   props.timeZone = 'America/Denver'
   const kit = renderKit(DateTimeStacked, props)
-  expect(kit).toHaveTextContent(/Mar3111:00aMDT/i)
+  expect(kit).toHaveTextContent(`${monthDayYear}11:00aMDT`)
 })

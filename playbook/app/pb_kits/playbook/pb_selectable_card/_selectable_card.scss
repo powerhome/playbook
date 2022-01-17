@@ -25,6 +25,7 @@ $pb_selectable_card_border: 2px;
     }
 
     @include pb_card;
+    background-color: $white;
     padding: $space_sm;
     margin-bottom: $space_sm;
     cursor: pointer;

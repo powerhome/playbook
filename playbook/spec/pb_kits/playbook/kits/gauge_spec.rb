@@ -16,6 +16,7 @@ RSpec.describe Playbook::PbGauge::Gauge do
   it { is_expected.to define_boolean_prop(:disable_animation).with_default(false) }
   it { is_expected.to define_prop(:min).of_type(Playbook::Props::Numeric).with_default(0) }
   it { is_expected.to define_prop(:max).of_type(Playbook::Props::Numeric).with_default(100) }
+  it { is_expected.to define_prop(:colors).of_type(Playbook::Props::Array).with_default([]) }
 
   describe "#classname" do
     it "returns namespaced class name", :aggregate_failures do

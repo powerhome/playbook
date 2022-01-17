@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+# rubocop:disable Style/CaseLikeIf
+
 module Playbook
   module PbDocs
     class KitExample < Playbook::KitBase
@@ -44,3 +46,5 @@ module Playbook
     end
   end
 end
+
+# rubocop:enable Style/CaseLikeIf

@@ -1,0 +1,24 @@
+<%= pb_rails("title", props: { text: "Global Props", tag: "h3", size: 4, margin_bottom: "xs"  }) %> 
+<%= pb_rails("body", props: {text: "Available in every kit. These are added globally as they are most flexible when developing.", margin_bottom: "sm"}) %>
+<%= pb_rails("card", props: { shadow: "deep", margin_bottom: "sm", padding: "none" }) do %>
+    <%= pb_rails("flex", props: { vertical: "stretch", padding_x: "md", padding_top: "md", padding_bottom: "md" }) do %>
+      <%= pb_rails("flex/flex_item", props: { flex: "1" }) do %>
+        <%= pb_rails("caption", props: { text: "Props", margin_bottom: "sm" }) %>
+          <%= pb_rails("pill", props: { text: "shadow", variant: "neutral" }) %>
+      <% end %>
+      <%= pb_rails("section_separator", props: { orientation: "vertical", margin_x: "sm" }) %>
+      <%= pb_rails("flex/flex_item", props: { flex: "1" }) do %>
+        <%= pb_rails("caption", props: {text: "Values", margin_bottom: "sm"}) %>
+        <%= pb_rails("pill", props: { text: "none", variant: "warning" }) %>
+        <%= pb_rails("pill", props: { text: "deep", variant: "warning" }) %>
+        <%= pb_rails("pill", props: { text: "deeper", variant: "warning" }) %>
+        <%= pb_rails("pill", props: { text: "deepest", variant: "warning" }) %>
+      <% end %>
+    <% end %>
+    <%= pb_rails("background", props: { id: "code-wrapper", classname: "border-bottom", background_color: "dark", padding: "none" }) do %>
+      <%= pb_rails("caption", props: { text: "EXAMPLE IN USE", padding_top: "lg", margin_x: "xl", classname: "dark" }) %>
+      <div class="pb--codeCopy">
+        <pre class="highlight pt_sm" style="margin: 0px"><%= raw rouge(@shadow_in_use_code_example, "react") %></pre>
+      </div>
+    <% end %>
+  <% end %>

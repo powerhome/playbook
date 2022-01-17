@@ -1,4 +1,4 @@
-module.exports = function(api) {
+module.exports = function (api) {
   var validEnv = ['development', 'test', 'production']
   var currentEnv = api.env()
   var isDevelopmentEnv = api.env('development')
@@ -8,8 +8,8 @@ module.exports = function(api) {
   if (!validEnv.includes(currentEnv)) {
     throw new Error(
       'Please specify a valid `NODE_ENV` or ' +
-        '`BABEL_ENV` environment variables. Valid values are "development", ' +
-        '"test", and "production". Instead, received: ' +
+        '`BABEL_ENV` environment variables. Valid values are development, ' +
+        'test, and production. Instead, received: ' +
         JSON.stringify(currentEnv) +
         '.'
     )
@@ -20,10 +20,11 @@ module.exports = function(api) {
       isTestEnv && [
         '@babel/preset-env',
         {
+          loose: true,
           targets: {
-            node: 'current'
+            node: 'current',
           },
-          modules: 'commonjs'
+          modules: 'commonjs',
         },
       ],
       (isProductionEnv || isDevelopmentEnv) && [
@@ -33,17 +34,17 @@ module.exports = function(api) {
           useBuiltIns: 'entry',
           corejs: 3,
           modules: false,
-          exclude: ['transform-typeof-symbol']
-        }
+          exclude: ['transform-typeof-symbol'],
+        },
       ],
       '@babel/preset-flow',
       [
         '@babel/preset-react',
         {
           development: isDevelopmentEnv || isTestEnv,
-          useBuiltIns: true
-        }
-      ]
+          useBuiltIns: true,
+        },
+      ],
     ].filter(Boolean),
     plugins: [
       'babel-plugin-macros',
@@ -52,38 +53,33 @@ module.exports = function(api) {
       '@babel/plugin-transform-destructuring',
       'babel-plugin-jsx-control-statements',
       '@babel/plugin-proposal-export-default-from',
-      [
-        '@babel/plugin-proposal-class-properties',
-        {
-          loose: true
-        }
-      ],
+      ['@babel/plugin-proposal-class-properties'],
       [
         '@babel/plugin-proposal-object-rest-spread',
         {
-          useBuiltIns: true
-        }
+          useBuiltIns: true,
+        },
       ],
       [
         '@babel/plugin-transform-runtime',
         {
           helpers: false,
           regenerator: true,
-          corejs: false
-        }
+          corejs: false,
+        },
       ],
       [
         '@babel/plugin-transform-regenerator',
         {
-          async: false
-        }
+          async: false,
+        },
       ],
       isProductionEnv && [
         'babel-plugin-transform-react-remove-prop-types',
         {
-          removeImport: true
-        }
-      ]
-    ].filter(Boolean)
+          removeImport: true,
+        },
+      ],
+    ].filter(Boolean),
   }
 }

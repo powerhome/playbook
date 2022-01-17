@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+# rubocop:disable Style/HashLikeCase
+
 module Playbook
   module PbCircleChart
     class CircleChart < Playbook::KitBase
@@ -25,6 +27,7 @@ module Playbook
       prop :use_html, type: Playbook::Props::Boolean, default: false
       prop :legend, type: Playbook::Props::Boolean, default: false
       prop :title, default: ""
+      prop :height
       prop :rounded, type: Playbook::Props::Boolean, default: false
       prop :colors, type: Playbook::Props::Array,
                     default: []
@@ -67,6 +70,7 @@ module Playbook
           borderWidth: rounded_border_width,
           chartData: chart_data_formatted,
           title: title,
+          height: height,
           type: chart_type,
           showInLegend: legend,
           dataLabelHtml: data_label_html,
@@ -88,3 +92,5 @@ module Playbook
     end
   end
 end
+
+# rubocop:enable Style/HashLikeCase

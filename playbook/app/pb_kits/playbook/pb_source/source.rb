@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# rubocop:disable Style/SingleArgumentDig, Style/HashLikeCase
 module Playbook
   module PbSource
     class Source < Playbook::KitBase
@@ -59,3 +60,5 @@ module Playbook
     end
   end
 end
+
+# rubocop:enable Style/SingleArgumentDig, Style/HashLikeCase

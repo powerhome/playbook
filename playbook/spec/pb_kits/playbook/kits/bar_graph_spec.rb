@@ -20,6 +20,7 @@ RSpec.describe Playbook::PbBarGraph::BarGraph do
     is_expected.to define_prop(:chart_data)
       .with_default([])
   }
+  it { is_expected.to define_prop(:colors).of_type(Playbook::Props::Array).with_default([]) }
 
   describe "#classname" do
     it "returns namespaced class name", :aggregate_failures do
