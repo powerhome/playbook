@@ -6699,10 +6699,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"flow-runtime@npm:0.14.0":
-  version: 0.14.0
-  resolution: "flow-runtime@npm:0.14.0"
-  checksum: 35b97f38ae6456e39132548bf361e9b053e464dbb4e872da03fc3d95e60594a44a76f98f7fef98f397ff5c46c588dd9727422b3abcb0fc06b9febdb76c6abe67
+"flow-runtime@npm:0.17.0":
+  version: 0.17.0
+  resolution: "flow-runtime@npm:0.17.0"
+  checksum: f62f41a7d7e146f738e076326338a8c360ba128177200184531b479805d24e60c1c62f1860fea55309af37080d09f090847f1ffd1c14d560ae8a561ca8b11f1c
   languageName: node
   linkType: hard
 
@@ -11238,7 +11238,7 @@ fsevents@^1.2.7:
     filemanager-webpack-plugin: 4.0.0
     flatpickr: ^4.6.6
     flow-bin: 0.160.0
-    flow-runtime: 0.14.0
+    flow-runtime: 0.17.0
     highcharts: ^9.0.0
     identity-obj-proxy: 3.0.0
     jest: 26.4.2
