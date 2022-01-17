@@ -5,6 +5,12 @@ require_relative "../../../../app/pb_kits/playbook/pb_caption/caption"
 RSpec.describe Playbook::PbCaption::Caption do
   subject { Playbook::PbCaption::Caption }
 
+  it {
+    is_expected.to define_enum_prop(:color)
+      .with_default("default")
+      .with_values("default", "light", "lighter", "success", "error", "link")
+  }
+
   it { is_expected.to define_boolean_prop(:dark).with_default(false) }
   it {
     is_expected.to define_enum_prop(:size)
