@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require "view_component"
+
 require "playbook/version"
 require "playbook/engine"
 require "playbook/props"
