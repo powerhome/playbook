@@ -20,5 +20,6 @@
 }
 
 [class^=pb_legend_kit] {
-  @include indicator-colors($data_colors)
+  @include indicator-colors($data_colors);
+  @include indicator-colors($status_colors)
 }

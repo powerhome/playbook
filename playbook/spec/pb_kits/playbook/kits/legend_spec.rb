@@ -8,7 +8,7 @@ RSpec.describe Playbook::PbLegend::Legend do
   it {
     is_expected.to define_enum_prop(:color)
       .with_default("data_1")
-      .with_values("data_1", "data_2", "data_3", "data_4", "data_5", "data_6", "data_7")
+      .with_values("data_1", "data_2", "data_3", "data_4", "data_5", "data_6", "data_7", "success", "warning", "error", "info", "neutral", "primary")
   }
 
   it { is_expected.to define_string_prop(:prefix_text) }
@@ -23,8 +23,8 @@ RSpec.describe Playbook::PbLegend::Legend do
 
   describe "#classname" do
     it "returns namespaced class name", :aggregate_failures do
-      color = "data_1"
-      expect(subject.new(color: color, dark: true, text: "Text").classname).to eq "pb_legend_kit_data_1 dark"
+      expect(subject.new(color: "data_1", dark: true, text: "Text").classname).to eq "pb_legend_kit_data_1 dark"
+      expect(subject.new(color: "success", text: "Test").classname).to eq "pb_legend_kit_success"
     end
   end
 end
