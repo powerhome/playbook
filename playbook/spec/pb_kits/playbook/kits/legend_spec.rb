@@ -23,7 +23,8 @@ RSpec.describe Playbook::PbLegend::Legend do
 
   describe "#classname" do
     it "returns namespaced class name", :aggregate_failures do
-      expect(subject.new(color: "data_1", dark: true, text: "Text").classname).to eq "pb_legend_kit_data_1 dark"
+      expect(subject.new(text: "Test default").classname).to eq "pb_legend_kit_data_1"
+      expect(subject.new(color: "data_5", dark: true, text: "Text").classname).to eq "pb_legend_kit_data_5 dark"
       expect(subject.new(color: "success", text: "Test").classname).to eq "pb_legend_kit_success"
     end
   end
