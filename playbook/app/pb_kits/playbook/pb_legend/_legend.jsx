@@ -18,7 +18,13 @@ type LegendProps = {
     | "data_4"
     | "data_5"
     | "data_6"
-    | "data_7",
+    | "data_7"
+    | "success"
+    | "warning"
+    | "error"
+    | "info"
+    | "neutral"
+    | "primary",
   dark?: boolean,
   data?: object,
   id?: string,
