@@ -18,12 +18,24 @@
     color: $text_lt_light;
   }
 
+  &[class*="lighter"] {
+    color: $text_lt_lighter;
+  }
+
   &[class*="default"] {
     color: $text_lt_default;
   }
 
   &[class*="link"] {
     color: $primary;
+  }
+
+  &[class*="success"] {
+    color: $green;
+  }
+
+  &[class*="error"] {
+    color: $red;
   }
 
   &[class*="dark"] {

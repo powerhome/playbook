@@ -5,6 +5,7 @@ const CaptionVariants = (props) => {
   return (
     <div>
       <Caption
+          color="success"
           size="xs"
           text="Subcaption (link)"
           variant="link"

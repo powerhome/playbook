@@ -15,8 +15,8 @@ module Playbook
                      default: nil
 
       prop :color, type: Playbook::Props::Enum,
-                   values: [nil, "light", "default", "link"],
-                   default: nil
+                   values: %w[default light lighter success error link],
+                   default: "default"
 
       def classname
         generate_classname("pb_caption_kit", size, variant, color)

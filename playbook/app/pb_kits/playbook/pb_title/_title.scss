@@ -17,8 +17,28 @@
   &[class*=_4] {
     @include pb_title_4;
 
-    &[class*=_link]  {
+    &[class*="link"] {
       color: $primary;
+    }
+
+    &[class*="default"] {
+      color: $text_lt_default;
+    }
+
+    &[class*="light"] {
+      color: $text_lt_light;
+    }
+
+    &[class*="lighter"] {
+      color: $text_lt_lighter;
+    }
+
+    &[class*="success"] {
+      color: $green;
+    }
+  
+    &[class*="error"] {
+      color: $red;
     }
 
   }

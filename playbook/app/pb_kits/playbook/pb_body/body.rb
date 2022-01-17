@@ -4,7 +4,7 @@ module Playbook
   module PbBody
     class Body < Playbook::KitBase
       prop :color, type: Playbook::Props::Enum,
-                   values: %w[default light lighter],
+                   values: %w[default light lighter link],
                    default: "default"
       prop :status, type: Playbook::Props::Enum,
                     values: %w[neutral negative positive],

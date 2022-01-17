@@ -1,1 +1,1 @@
-The above examples accept different prop values for color. Those can be `default`,`link` and `light`.  Passing the `light` color prop is optional as it will apply this color when no prop is being passed. The same applies to any of the variations on the Caption kit.
+These colors are not for standard usage. You can use this colors prop to make fixes it colors are not appearing properly but consult your UX team members if you are deciding to implement it"
