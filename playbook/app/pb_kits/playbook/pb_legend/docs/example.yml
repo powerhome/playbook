@@ -3,11 +3,9 @@ examples:
   rails:
   - legend_default: Default
   - legend_prefix: With Prefix Text
-  - legend_status_colors: With Status Colors
-
-
+  - legend_colors: Colors
 
   react:
   - legend_default: Default
   - legend_prefix: With Prefix Text
-  - legend_status_colors: With Status Colors
+  - legend_colors: Colors
