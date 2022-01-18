@@ -15,15 +15,15 @@ test('returns namespaced class name', () => {
   expect(kit).toHaveClass('pb_legend_kit_data_1')
 })
 
-test('with status colors', () => {
+test('color prop', () => {
   render(
     <Legend
-        color="success"
+        color="category_17"
         data={{ testid: 'primary-test' }}
         text="Test colors"
     />
   )
 
   const kit = screen.getByTestId('primary-test')
-  expect(kit).toHaveClass('pb_legend_kit_success')
+  expect(kit).toHaveClass('pb_legend_kit_category_17')
 })

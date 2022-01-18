@@ -6,9 +6,8 @@ RSpec.describe Playbook::PbLegend::Legend do
   subject { Playbook::PbLegend::Legend }
 
   it {
-    is_expected.to define_enum_prop(:color)
+    is_expected.to define_string_prop(:color)
       .with_default("data_1")
-      .with_values("data_1", "data_2", "data_3", "data_4", "data_5", "data_6", "data_7", "success", "warning", "error", "info", "neutral", "primary")
   }
 
   it { is_expected.to define_string_prop(:prefix_text) }
