@@ -1,56 +1,36 @@
-<%= pb_rails("title", props: { text: "Line Height", size: 1, margin_top: "xl", padding_top: "xl" }) %>
-<%= pb_rails("body", props: { tag: "p", margin_top: "xs", margin_bottom: "lg" }) do %>
-  Odds are you might want to build or expand upon the text patterns we have provided. 
-  If so below is a good reference of the global props and tokens that are available for you and your 
-  typography needs.
-<% end %>
-
-<%= render "pages/visual_guidelines_partials/pb_doc_line_height" %>
-
-
-<%= pb_rails("title", props: { text: "Tokens", tag: "h3", size: 4, margin_top: "lg"}) %>
-<%= pb_rails("body", props: { tag: "p", margin_bottom: "lg", margin_top: "xs" }) do %>
+<%= render partial: "pages/visual_guidelines_partials/partial_title",
+  locals: {
+    title: "Line Height",
+    title_size: 1,
+    description: "Odds are you might want to build or expand upon the text patterns we have provided.
+                  If so below is a good reference of the tokens that are available for you and your
+                  typography needs.",
+    global_props: false
+  }
+%>
+<%= pb_rails("title", props: {
+  size: 4,
+  tag: "h3",
+  text: "Tokens"
+}) %>
+<%= pb_rails("body", props: {
+  margin_bottom: "lg",
+  margin_top: "xs",
+  tag: "p"
+}) do %>
   Make up your own styles using Playbook tokens to keep your site consistent.
 <% end %>
 
+ <%= render "pages/visual_guidelines_partials/pb_doc_line_height"%>
 
-<%= pb_rails("card", props: { shadow: "deep", margin_bottom: "none", padding: "none" }) do %>
-  <%= pb_rails("layout", props: { layout: "collection", margin: "md" }) do %>
-    <%= pb_rails("layout/body", props: {orientation: "row", columns: "3"}) do %>
-      <%= pb_rails("card/card_body", props: { margin: "sm" }) do %>
-        <p class="card-tightest" >The quick brown fox jumps over the lazy dog</p>
-        <%= pb_rails("caption", props: { text: "$lh_tightest", size: 'xs' }) %>
-      <% end %>
-      <%= pb_rails("card/card_body", props: { margin: "sm" }) do %>
-        <p class="card-tighter" >The quick brown fox jumps over the lazy dog</p>
-        <%= pb_rails("caption", props: { text: "$lh_tighter", size: 'xs' }) %>
-      <% end %>
-      <%= pb_rails("card/card_body", props: { margin: "sm" }) do %>
-        <p class="card-tight" >The quick brown fox jumps over the lazy dog</p>
-        <%= pb_rails("caption", props: { text: "$lh_tight", size: 'xs' }) %>
-      <% end %>
-      <%= pb_rails("card/card_body", props: { margin: "sm" }) do %>
-        <p class="card-normal">The quick brown fox jumps over the lazy dog</p>
-        <%= pb_rails("caption", props: { text: "$lh_normal", size: 'xs' }) %>
-      <% end %>
-      <%= pb_rails("card/card_body", props: { margin: "sm" }) do %>
-        <p class="card-loose">The quick brown fox jumps over the lazy dog</p>
-        <%= pb_rails("caption", props: { text: "$lh_loose", size: 'xs' }) %>
-      <% end %>
-      <%= pb_rails("card/card_body", props: { margin: "sm" }) do %>
-        <p class="card-looser">The quick brown fox jumps over the lazy dog</p>
-        <%= pb_rails("caption", props: { text: "$lh_looser", size: 'xs' }) %>
-      <% end %>
-      <%= pb_rails("card/card_body", props: { margin: "sm" }) do %>
-        <p class="card-loosest">The quick brown fox jumps over the lazy dog</p>
-        <%= pb_rails("caption", props: { text: "$lh_loosest", size: 'xs' }) %>
-      <% end %>
-   <% end %>
-  <% end %>
-  <%= pb_rails("background", props: { id: "code-wrapper", classname: "border-bottom", background_color: "dark", padding: "none" }) do %>
-    <%= pb_rails("caption", props: { text: "EXAMPLE IN USE", padding_top: "lg", margin_x: "xl", classname: "dark" }) %>
-    <div class="pb--codeCopy">
-      <pre class="highlight pt_sm" style="margin: 0px"><%= raw rouge(@line_height_token_example, "react") %></pre>
-    </div>
-  <% end %>
+<%= pb_rails("card", props: {
+  margin_bottom: "none",
+  padding: "none",
+  shadow: "deep"
+}) do %>
+  <%= render partial: "pages/visual_guidelines_partials/partial_code_example",
+    locals: {
+      example: "app/views/pages/code_snippets/line_height_jsx.txt"
+    }
+  %>
 <% end %>
