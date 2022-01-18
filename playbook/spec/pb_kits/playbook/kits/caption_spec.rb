@@ -46,6 +46,7 @@ RSpec.describe Playbook::PbCaption::Caption do
       expect(subject.new(dark: true, size: "lg").classname).to eq "pb_caption_kit_lg dark"
       expect(subject.new(classname: "additional_class").classname).to eq "pb_caption_kit_md additional_class"
       expect(subject.new(classname: "additional_class", color: "light").classname).to eq "pb_caption_kit_md_light additional_class"
+      expect(subject.new(color: "lighter").classname).to eq "pb_caption_kit_md_lighter"
     end
   end
 end

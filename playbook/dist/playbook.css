@@ -1089,10 +1089,16 @@ Background colors ------------------*/
       color: #0056CF; }
   [class^="pb_caption_kit"][class*="light"] {
     color: #687887; }
+  [class^="pb_caption_kit"][class*="lighter"] {
+    color: #C1CDD6; }
   [class^="pb_caption_kit"][class*="default"] {
     color: #242B42; }
   [class^="pb_caption_kit"][class*="link"] {
     color: #0056CF; }
+  [class^="pb_caption_kit"][class*="success"] {
+    color: #00CA74; }
+  [class^="pb_caption_kit"][class*="error"] {
+    color: #FF2229; }
   [class^="pb_caption_kit"][class*="dark"][class*="_default"][class*="dark"] {
     color: #fff; }
   [class^="pb_caption_kit"][class*="dark"][class*="_light"][class*="dark"] {
@@ -2077,8 +2083,18 @@ Background colors ------------------*/
   margin: 0;
   line-height: 1.2;
   font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif; }
-  [class^=pb_title_kit][class*=_4][class*=_link] {
+  [class^=pb_title_kit][class*=_4][class*="link"] {
     color: #0056CF; }
+  [class^=pb_title_kit][class*=_4][class*="default"] {
+    color: #242B42; }
+  [class^=pb_title_kit][class*=_4][class*="light"] {
+    color: #687887; }
+  [class^=pb_title_kit][class*=_4][class*="lighter"] {
+    color: #C1CDD6; }
+  [class^=pb_title_kit][class*=_4][class*="success"] {
+    color: #00CA74; }
+  [class^=pb_title_kit][class*=_4][class*="error"] {
+    color: #FF2229; }
 
 [class^=pb_title_kit].dark {
   color: #FFFFFF; }
@@ -3054,10 +3070,16 @@ Background colors ------------------*/
       color: #0056CF; }
   [class^="pb_caption_kit"][class*="light"] {
     color: #687887; }
+  [class^="pb_caption_kit"][class*="lighter"] {
+    color: #C1CDD6; }
   [class^="pb_caption_kit"][class*="default"] {
     color: #242B42; }
   [class^="pb_caption_kit"][class*="link"] {
     color: #0056CF; }
+  [class^="pb_caption_kit"][class*="success"] {
+    color: #00CA74; }
+  [class^="pb_caption_kit"][class*="error"] {
+    color: #FF2229; }
   [class^="pb_caption_kit"][class*="dark"][class*="_default"][class*="dark"] {
     color: #fff; }
   [class^="pb_caption_kit"][class*="dark"][class*="_light"][class*="dark"] {
@@ -3700,8 +3722,18 @@ Background colors ------------------*/
   margin: 0;
   line-height: 1.2;
   font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif; }
-  [class^=pb_title_kit][class*=_4][class*=_link] {
+  [class^=pb_title_kit][class*=_4][class*="link"] {
     color: #0056CF; }
+  [class^=pb_title_kit][class*=_4][class*="default"] {
+    color: #242B42; }
+  [class^=pb_title_kit][class*=_4][class*="light"] {
+    color: #687887; }
+  [class^=pb_title_kit][class*=_4][class*="lighter"] {
+    color: #C1CDD6; }
+  [class^=pb_title_kit][class*=_4][class*="success"] {
+    color: #00CA74; }
+  [class^=pb_title_kit][class*=_4][class*="error"] {
+    color: #FF2229; }
 
 [class^=pb_title_kit].dark {
   color: #FFFFFF; }
@@ -4255,8 +4287,18 @@ Background colors ------------------*/
   margin: 0;
   line-height: 1.2;
   font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif; }
-  [class^=pb_title_kit][class*=_4][class*=_link] {
+  [class^=pb_title_kit][class*=_4][class*="link"] {
     color: #0056CF; }
+  [class^=pb_title_kit][class*=_4][class*="default"] {
+    color: #242B42; }
+  [class^=pb_title_kit][class*=_4][class*="light"] {
+    color: #687887; }
+  [class^=pb_title_kit][class*=_4][class*="lighter"] {
+    color: #C1CDD6; }
+  [class^=pb_title_kit][class*=_4][class*="success"] {
+    color: #00CA74; }
+  [class^=pb_title_kit][class*=_4][class*="error"] {
+    color: #FF2229; }
 
 [class^=pb_title_kit].dark {
   color: #FFFFFF; }
@@ -5645,8 +5687,18 @@ Background colors ------------------*/
   margin: 0;
   line-height: 1.2;
   font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif; }
-  [class^=pb_title_kit][class*=_4][class*=_link] {
+  [class^=pb_title_kit][class*=_4][class*="link"] {
     color: #0056CF; }
+  [class^=pb_title_kit][class*=_4][class*="default"] {
+    color: #242B42; }
+  [class^=pb_title_kit][class*=_4][class*="light"] {
+    color: #687887; }
+  [class^=pb_title_kit][class*=_4][class*="lighter"] {
+    color: #C1CDD6; }
+  [class^=pb_title_kit][class*=_4][class*="success"] {
+    color: #00CA74; }
+  [class^=pb_title_kit][class*=_4][class*="error"] {
+    color: #FF2229; }
 
 [class^=pb_title_kit].dark {
   color: #FFFFFF; }
@@ -5725,10 +5777,16 @@ Background colors ------------------*/
       color: #0056CF; }
   [class^="pb_caption_kit"][class*="light"] {
     color: #687887; }
+  [class^="pb_caption_kit"][class*="lighter"] {
+    color: #C1CDD6; }
   [class^="pb_caption_kit"][class*="default"] {
     color: #242B42; }
   [class^="pb_caption_kit"][class*="link"] {
     color: #0056CF; }
+  [class^="pb_caption_kit"][class*="success"] {
+    color: #00CA74; }
+  [class^="pb_caption_kit"][class*="error"] {
+    color: #FF2229; }
   [class^="pb_caption_kit"][class*="dark"][class*="_default"][class*="dark"] {
     color: #fff; }
   [class^="pb_caption_kit"][class*="dark"][class*="_light"][class*="dark"] {
@@ -7679,8 +7737,18 @@ Background colors ------------------*/
   margin: 0;
   line-height: 1.2;
   font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif; }
-  [class^=pb_title_kit][class*=_4][class*=_link] {
+  [class^=pb_title_kit][class*=_4][class*="link"] {
     color: #0056CF; }
+  [class^=pb_title_kit][class*=_4][class*="default"] {
+    color: #242B42; }
+  [class^=pb_title_kit][class*=_4][class*="light"] {
+    color: #687887; }
+  [class^=pb_title_kit][class*=_4][class*="lighter"] {
+    color: #C1CDD6; }
+  [class^=pb_title_kit][class*=_4][class*="success"] {
+    color: #00CA74; }
+  [class^=pb_title_kit][class*=_4][class*="error"] {
+    color: #FF2229; }
 
 [class^=pb_title_kit].dark {
   color: #FFFFFF; }
@@ -7759,10 +7827,16 @@ Background colors ------------------*/
       color: #0056CF; }
   [class^="pb_caption_kit"][class*="light"] {
     color: #687887; }
+  [class^="pb_caption_kit"][class*="lighter"] {
+    color: #C1CDD6; }
   [class^="pb_caption_kit"][class*="default"] {
     color: #242B42; }
   [class^="pb_caption_kit"][class*="link"] {
     color: #0056CF; }
+  [class^="pb_caption_kit"][class*="success"] {
+    color: #00CA74; }
+  [class^="pb_caption_kit"][class*="error"] {
+    color: #FF2229; }
   [class^="pb_caption_kit"][class*="dark"][class*="_default"][class*="dark"] {
     color: #fff; }
   [class^="pb_caption_kit"][class*="dark"][class*="_light"][class*="dark"] {
@@ -8444,10 +8518,16 @@ Background colors ------------------*/
       color: #0056CF; }
   [class^="pb_caption_kit"][class*="light"] {
     color: #687887; }
+  [class^="pb_caption_kit"][class*="lighter"] {
+    color: #C1CDD6; }
   [class^="pb_caption_kit"][class*="default"] {
     color: #242B42; }
   [class^="pb_caption_kit"][class*="link"] {
     color: #0056CF; }
+  [class^="pb_caption_kit"][class*="success"] {
+    color: #00CA74; }
+  [class^="pb_caption_kit"][class*="error"] {
+    color: #FF2229; }
   [class^="pb_caption_kit"][class*="dark"][class*="_default"][class*="dark"] {
     color: #fff; }
   [class^="pb_caption_kit"][class*="dark"][class*="_light"][class*="dark"] {
@@ -11022,10 +11102,16 @@ Background colors ------------------*/
       color: #0056CF; }
   [class^="pb_caption_kit"][class*="light"] {
     color: #687887; }
+  [class^="pb_caption_kit"][class*="lighter"] {
+    color: #C1CDD6; }
   [class^="pb_caption_kit"][class*="default"] {
     color: #242B42; }
   [class^="pb_caption_kit"][class*="link"] {
     color: #0056CF; }
+  [class^="pb_caption_kit"][class*="success"] {
+    color: #00CA74; }
+  [class^="pb_caption_kit"][class*="error"] {
+    color: #FF2229; }
   [class^="pb_caption_kit"][class*="dark"][class*="_default"][class*="dark"] {
     color: #fff; }
   [class^="pb_caption_kit"][class*="dark"][class*="_light"][class*="dark"] {
@@ -12786,8 +12872,18 @@ Background colors ------------------*/
   margin: 0;
   line-height: 1.2;
   font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif; }
-  [class^=pb_title_kit][class*=_4][class*=_link] {
+  [class^=pb_title_kit][class*=_4][class*="link"] {
     color: #0056CF; }
+  [class^=pb_title_kit][class*=_4][class*="default"] {
+    color: #242B42; }
+  [class^=pb_title_kit][class*=_4][class*="light"] {
+    color: #687887; }
+  [class^=pb_title_kit][class*=_4][class*="lighter"] {
+    color: #C1CDD6; }
+  [class^=pb_title_kit][class*=_4][class*="success"] {
+    color: #00CA74; }
+  [class^=pb_title_kit][class*=_4][class*="error"] {
+    color: #FF2229; }
 
 [class^=pb_title_kit].dark {
   color: #FFFFFF; }
@@ -13318,8 +13414,18 @@ Background colors ------------------*/
   margin: 0;
   line-height: 1.2;
   font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif; }
-  [class^=pb_title_kit][class*=_4][class*=_link] {
+  [class^=pb_title_kit][class*=_4][class*="link"] {
     color: #0056CF; }
+  [class^=pb_title_kit][class*=_4][class*="default"] {
+    color: #242B42; }
+  [class^=pb_title_kit][class*=_4][class*="light"] {
+    color: #687887; }
+  [class^=pb_title_kit][class*=_4][class*="lighter"] {
+    color: #C1CDD6; }
+  [class^=pb_title_kit][class*=_4][class*="success"] {
+    color: #00CA74; }
+  [class^=pb_title_kit][class*=_4][class*="error"] {
+    color: #FF2229; }
 
 [class^=pb_title_kit].dark {
   color: #FFFFFF; }
@@ -17670,8 +17776,18 @@ Background colors ------------------*/
   margin: 0;
   line-height: 1.2;
   font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif; }
-  [class^=pb_title_kit][class*=_4][class*=_link] {
+  [class^=pb_title_kit][class*=_4][class*="link"] {
     color: #0056CF; }
+  [class^=pb_title_kit][class*=_4][class*="default"] {
+    color: #242B42; }
+  [class^=pb_title_kit][class*=_4][class*="light"] {
+    color: #687887; }
+  [class^=pb_title_kit][class*=_4][class*="lighter"] {
+    color: #C1CDD6; }
+  [class^=pb_title_kit][class*=_4][class*="success"] {
+    color: #00CA74; }
+  [class^=pb_title_kit][class*=_4][class*="error"] {
+    color: #FF2229; }
 
 [class^=pb_title_kit].dark {
   color: #FFFFFF; }
@@ -19443,10 +19559,16 @@ Background colors ------------------*/
       color: #0056CF; }
   [class^="pb_caption_kit"][class*="light"] {
     color: #687887; }
+  [class^="pb_caption_kit"][class*="lighter"] {
+    color: #C1CDD6; }
   [class^="pb_caption_kit"][class*="default"] {
     color: #242B42; }
   [class^="pb_caption_kit"][class*="link"] {
     color: #0056CF; }
+  [class^="pb_caption_kit"][class*="success"] {
+    color: #00CA74; }
+  [class^="pb_caption_kit"][class*="error"] {
+    color: #FF2229; }
   [class^="pb_caption_kit"][class*="dark"][class*="_default"][class*="dark"] {
     color: #fff; }
   [class^="pb_caption_kit"][class*="dark"][class*="_light"][class*="dark"] {
@@ -19871,8 +19993,18 @@ Background colors ------------------*/
   margin: 0;
   line-height: 1.2;
   font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif; }
-  [class^=pb_title_kit][class*=_4][class*=_link] {
+  [class^=pb_title_kit][class*=_4][class*="link"] {
     color: #0056CF; }
+  [class^=pb_title_kit][class*=_4][class*="default"] {
+    color: #242B42; }
+  [class^=pb_title_kit][class*=_4][class*="light"] {
+    color: #687887; }
+  [class^=pb_title_kit][class*=_4][class*="lighter"] {
+    color: #C1CDD6; }
+  [class^=pb_title_kit][class*=_4][class*="success"] {
+    color: #00CA74; }
+  [class^=pb_title_kit][class*=_4][class*="error"] {
+    color: #FF2229; }
 
 [class^=pb_title_kit].dark {
   color: #FFFFFF; }
@@ -20188,8 +20320,18 @@ Background colors ------------------*/
   margin: 0;
   line-height: 1.2;
   font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif; }
-  [class^=pb_title_kit][class*=_4][class*=_link] {
+  [class^=pb_title_kit][class*=_4][class*="link"] {
     color: #0056CF; }
+  [class^=pb_title_kit][class*=_4][class*="default"] {
+    color: #242B42; }
+  [class^=pb_title_kit][class*=_4][class*="light"] {
+    color: #687887; }
+  [class^=pb_title_kit][class*=_4][class*="lighter"] {
+    color: #C1CDD6; }
+  [class^=pb_title_kit][class*=_4][class*="success"] {
+    color: #00CA74; }
+  [class^=pb_title_kit][class*=_4][class*="error"] {
+    color: #FF2229; }
 
 [class^=pb_title_kit].dark {
   color: #FFFFFF; }
@@ -20866,8 +21008,18 @@ Background colors ------------------*/
   margin: 0;
   line-height: 1.2;
   font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif; }
-  [class^=pb_title_kit][class*=_4][class*=_link] {
+  [class^=pb_title_kit][class*=_4][class*="link"] {
     color: #0056CF; }
+  [class^=pb_title_kit][class*=_4][class*="default"] {
+    color: #242B42; }
+  [class^=pb_title_kit][class*=_4][class*="light"] {
+    color: #687887; }
+  [class^=pb_title_kit][class*=_4][class*="lighter"] {
+    color: #C1CDD6; }
+  [class^=pb_title_kit][class*=_4][class*="success"] {
+    color: #00CA74; }
+  [class^=pb_title_kit][class*=_4][class*="error"] {
+    color: #FF2229; }
 
 [class^=pb_title_kit].dark {
   color: #FFFFFF; }
@@ -21653,8 +21805,18 @@ Background colors ------------------*/
   margin: 0;
   line-height: 1.2;
   font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif; }
-  [class^=pb_title_kit][class*=_4][class*=_link] {
+  [class^=pb_title_kit][class*=_4][class*="link"] {
     color: #0056CF; }
+  [class^=pb_title_kit][class*=_4][class*="default"] {
+    color: #242B42; }
+  [class^=pb_title_kit][class*=_4][class*="light"] {
+    color: #687887; }
+  [class^=pb_title_kit][class*=_4][class*="lighter"] {
+    color: #C1CDD6; }
+  [class^=pb_title_kit][class*=_4][class*="success"] {
+    color: #00CA74; }
+  [class^=pb_title_kit][class*=_4][class*="error"] {
+    color: #FF2229; }
 
 [class^=pb_title_kit].dark {
   color: #FFFFFF; }
@@ -21733,10 +21895,16 @@ Background colors ------------------*/
       color: #0056CF; }
   [class^="pb_caption_kit"][class*="light"] {
     color: #687887; }
+  [class^="pb_caption_kit"][class*="lighter"] {
+    color: #C1CDD6; }
   [class^="pb_caption_kit"][class*="default"] {
     color: #242B42; }
   [class^="pb_caption_kit"][class*="link"] {
     color: #0056CF; }
+  [class^="pb_caption_kit"][class*="success"] {
+    color: #00CA74; }
+  [class^="pb_caption_kit"][class*="error"] {
+    color: #FF2229; }
   [class^="pb_caption_kit"][class*="dark"][class*="_default"][class*="dark"] {
     color: #fff; }
   [class^="pb_caption_kit"][class*="dark"][class*="_light"][class*="dark"] {
