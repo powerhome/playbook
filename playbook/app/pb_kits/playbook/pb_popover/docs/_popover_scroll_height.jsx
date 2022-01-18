@@ -31,6 +31,7 @@ const PopoverScrollHeight = (props) => {
         maxHeight="150px"
         maxWidth="240px"
         offset
+        padding="sm"
         placement="top"
         reference={popoverTrigger}
         shouldClosePopover={handleShouldClosePopover}
