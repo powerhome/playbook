@@ -7,8 +7,8 @@ RSpec.describe Playbook::PbCaption::Caption do
 
   it {
     is_expected.to define_enum_prop(:color)
-      .with_default("default")
-      .with_values("default", "light", "lighter", "success", "error", "link")
+      .with_default(nil)
+      .with_values(nil, "default", "light", "lighter", "success", "error", "link")
   }
 
   it { is_expected.to define_boolean_prop(:dark).with_default(false) }
@@ -24,11 +24,6 @@ RSpec.describe Playbook::PbCaption::Caption do
                    "h6", "p", "span", "div", "caption")
   end
   it { is_expected.to define_string_prop(:text) }
-  it {
-    is_expected.to define_enum_prop(:variant)
-      .with_values(nil, "link")
-      .with_default(nil)
-  }
 
   describe "#caption output" do
     it "returns text output", :aggregate_failures do
