@@ -12,7 +12,13 @@ import Title from '../pb_title/_title'
 type LegendProps = {
   aria?: object,
   className?: string,
-  color?: string,
+  color?: | "data_1"
+    | "data_2"
+    | "data_3"
+    | "data_4"
+    | "data_5"
+    | "data_6"
+    | "data_7",
   dark?: boolean,
   data?: object,
   id?: string,

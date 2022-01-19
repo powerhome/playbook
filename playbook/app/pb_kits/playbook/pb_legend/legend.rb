@@ -3,7 +3,8 @@
 module Playbook
   module PbLegend
     class Legend < Playbook::KitBase
-      prop :color, type: Playbook::Props::String,
+      prop :color, type: Playbook::Props::Enum,
+                   values: (1..7).map { |n| "data_#{n}" },
                    default: "data_1"
       prop :prefix_text
       prop :text, required: true

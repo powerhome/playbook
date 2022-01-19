@@ -15,6 +15,10 @@ RSpec.describe Playbook::Props::NestedProps do
     end
 
     it "is not valid if a value doesn't conform to the expected values of a kit" do
+      expect(subject.validate(color: "red", text: "valid")).to be false
+    end
+
+    it "is not valid if a value doesn't conform to the expected values of a kit" do
       expect(subject.validate(color: "data_2")).to be false
     end
   end
