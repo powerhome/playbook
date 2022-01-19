@@ -3,6 +3,8 @@
 @import "../tokens/animation-curves";
 @import "../tokens/typography";
 @import "./subtle_mixin";
+@import "./bold_mixin";
+@import "../tokens/shadows";
 
 $selector: ".pb_nav_list";
 
@@ -92,7 +94,7 @@ $selector: ".pb_nav_list";
       }
     }
   }
-  
+
   &[class*=dark]{
     [class*=pb_nav_list_kit_item]{
       [class*=_link]{

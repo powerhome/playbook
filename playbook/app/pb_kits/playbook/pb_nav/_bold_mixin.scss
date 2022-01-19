@@ -1,0 +1,22 @@
+@mixin bold {
+  @include subtle;
+
+  [class*=pb_nav_list_kit_item] {
+    &[class*=_active] [class*=_link] {
+      // @include pb_title_4;
+      background-color: $primary;
+      color: $white;
+      box-shadow: $shadow_deep;
+      @media (hover:hover) {
+        &:hover {
+          [class*=_text],[class*=_icon] {
+            color: $white;
+          }
+        }
+      }
+      [class*=_text],[class*=_icon] {
+        font-weight: $bold;
+      }
+    }
+  }
+}

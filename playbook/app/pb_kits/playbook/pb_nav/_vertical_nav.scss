@@ -6,6 +6,7 @@
 @import "../tokens/titles";
 @import "../pb_body/body_mixins";
 @import "./subtle_mixin";
+@import "./bold_mixin";
 @import "../tokens/shadows";
 
 $selector: ".pb_nav_list";
@@ -94,19 +95,7 @@ $selector: ".pb_nav_list";
 
   // Bold Variant
   &[class*=_bold] {
-    @include subtle;
-
-    [class*=pb_nav_list_kit_item] {
-      &[class*=_active] [class*=_link] {
-        // @include pb_title_4;
-        background-color: $primary;
-        color: $white;
-        box-shadow: $shadow_deep;
-        [class*=_text],[class*=_icon] {
-          font-weight: $bold;
-        }
-      }
-    }
+    @include bold;
   }
 
   // Show Highlight
