@@ -1,46 +1,26 @@
 @import "../tokens/titles";
 @import "../tokens/colors";
+@import './title_mixin';
 
 [class^=pb_title_kit]{
   &[class*=_1] {
     @include pb_title_1;
+    @include title_colors;
   }
 
   &[class*=_2] {
     @include pb_title_2;
+    @include title_colors;
   }
 
   &[class*=_3] {
     @include pb_title_3;
+    @include title_colors;
   }
 
   &[class*=_4] {
     @include pb_title_4;
-
-    &[class*="link"] {
-      color: $primary;
-    }
-
-    &[class*="default"] {
-      color: $text_lt_default;
-    }
-
-    &[class*="light"] {
-      color: $text_lt_light;
-    }
-
-    &[class*="lighter"] {
-      color: $text_lt_lighter;
-    }
-
-    &[class*="success"] {
-      color: $green;
-    }
-  
-    &[class*="error"] {
-      color: $red;
-    }
-
+    @include title_colors;
   }
 
   &.dark {
