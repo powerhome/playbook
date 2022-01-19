@@ -52,17 +52,13 @@ export default class PbPopover extends PbEnhancedElement {
         this.hideTooltip()
         break
       case 'outside':
-        if (isTooltipElement) {
-          this.checkCloseTooltip()
-        } else {
+        if (!isTooltipElement || isTriggerElement) {
           this.hideTooltip()
         }
         break
       case 'inside':
         if (isTooltipElement || isTriggerElement) {
           this.hideTooltip()
-        } else {
-          this.checkCloseTooltip()
         }
         break
       }
