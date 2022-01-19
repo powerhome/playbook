@@ -158,44 +158,24 @@ pre.highlight {
 
 /* VERTICAL SECTION SEPERATOR */
 
-.fixedHeightSSeparator {
-  height: 200px;
-  width: 30px;
-  float: left;
-}
-
-.SFixedHeight {
-  float: left;
-  width: 200px;
-}
 
 .clear {
   clear: both;
 }
 
-.autoHeightSSeperator {
-  height: 100vh;
-  width: 100px;
-  float: left;
-}
 
 .itemSSeperator {
   float: left;
   width: 50%;
-}
-
-.SSeperatorscroll {
-  width: 100%;
   height: 50px;
-  overflow: scroll;
+  overflow: auto;
 }
 
-.flexSSeperatorContainer {
-  height: 100px;
+
+.fixSSeperatorContainer {
+  height: 60px;
 }
 
-.flexSSeperatortext {
-  width: 50%;
-}
+
 
 
