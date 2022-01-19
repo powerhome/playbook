@@ -4,7 +4,10 @@
 $pb_caption_colors: (
   default:        $text_lt_default,
   light:          $text_lt_light,
-  link:           $primary-action,
+  link:           $primary,
+  lighter:        $text_lt_lighter,
+  success:        $success,
+  error:          $error,
 );
 
 $pb_dark_caption_colors: (
@@ -38,4 +41,11 @@ $pb_dark_caption_colors: (
 
 @mixin caption_dark {
   color: $text_dk_light;
+}
+@mixin pb_caption_kit_colors {
+  @each $name, $color in $pb_caption_colors {
+    &[class*="#{$name}"] {
+      color: $color
+    }
+  }
 }

@@ -3,7 +3,7 @@
 import React from 'react'
 import classnames from 'classnames'
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
-import { globalProps } from '../utilities/globalProps.js'
+import { deprecatedProps, globalProps } from '../utilities/globalProps.js'
 
 type CaptionProps = {
   aria?: object,
@@ -19,6 +19,7 @@ type CaptionProps = {
 };
 
 const Caption = (props: CaptionProps) => {
+  if (props.variant) deprecatedProps('Title', ['variant']) //variant prop is deprecated, use color instead
   const {
     aria = {},
     children,
@@ -29,7 +30,6 @@ const Caption = (props: CaptionProps) => {
     size = 'md',
     tag = 'div',
     text,
-    variant = null,
   } = props
   const tagOptions = [
     'h1',
@@ -48,7 +48,7 @@ const Caption = (props: CaptionProps) => {
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
   const css = classnames(
-    buildCss('pb_caption_kit', size, variant, color),
+    buildCss('pb_caption_kit', size, color),
     globalProps(props),
     className,
   )
