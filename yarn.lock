@@ -2302,14 +2302,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react@npm:17.0.21":
-  version: 17.0.21
-  resolution: "@types/react@npm:17.0.21"
+"@types/react@npm:17.0.38":
+  version: 17.0.38
+  resolution: "@types/react@npm:17.0.38"
   dependencies:
     "@types/prop-types": "*"
     "@types/scheduler": "*"
     csstype: ^3.0.2
-  checksum: c3f0c465a2d680c17ff7fa5dc4ec2a796044f710f37b7917960c4eedcb5dfab502da3df4aee24f0f57a5a8600fabd3f0085fe2ebf00c4870df70d2ce02a3982f
+  checksum: b04dcee8a5e530ec22d9d624c76ad198130b29751b28d66678def14d2def8be9c6fc1e3515d4700f23feb765a8eae7e278f27eaf841b006670a41b421c0a6866
   languageName: node
   linkType: hard
 
@@ -4697,9 +4697,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"copy-webpack-plugin@npm:6.2.1":
-  version: 6.2.1
-  resolution: "copy-webpack-plugin@npm:6.2.1"
+"copy-webpack-plugin@npm:6.4.1":
+  version: 6.4.1
+  resolution: "copy-webpack-plugin@npm:6.4.1"
   dependencies:
     cacache: ^15.0.5
     fast-glob: ^3.2.4
@@ -4714,7 +4714,7 @@ __metadata:
     webpack-sources: ^1.4.3
   peerDependencies:
     webpack: ^4.37.0 || ^5.0.0
-  checksum: 99ef83b4237b51e95618365ad2e62775b640fe1cae0d39d3ab03bcb09c9026a00ab0fb1c03f72d164c1457482114ddf959e7a03ab409704f34686e0a64ee4a31
+  checksum: ed5eb2bac2d67822dcf08e5023340d75392be6864f5f5734a9a1f60d64f7b028ee0279216e469de395eb9c94391fdafe46a800bda31f8b490f3f591d4255f163
   languageName: node
   linkType: hard
 
@@ -5902,10 +5902,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"es5-shim@npm:4.6.2":
-  version: 4.6.2
-  resolution: "es5-shim@npm:4.6.2"
-  checksum: 59527d2447bee06216d1dfb07d508312e0f2b3c2a868618122d9d0cddbf2d7c1829b1ca1ac1ed25d5dd4b30f3ca5b1e6c769b07b2051b096da0e8c2aaa8da07e
+"es5-shim@npm:4.6.4":
+  version: 4.6.4
+  resolution: "es5-shim@npm:4.6.4"
+  checksum: eedc6c5bd5bb36e5715ef95c79a23a0fce53e973192b877b491d6c0aef273f9b707c7283c73b24eddf9686778bc954cd52de5408d6872309809e6a52d820b8dc
   languageName: node
   linkType: hard
 
@@ -5956,14 +5956,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-plugin-flowtype@npm:4.4.1":
-  version: 4.4.1
-  resolution: "eslint-plugin-flowtype@npm:4.4.1"
+"eslint-plugin-flowtype@npm:4.7.0":
+  version: 4.7.0
+  resolution: "eslint-plugin-flowtype@npm:4.7.0"
   dependencies:
     lodash: ^4.17.15
   peerDependencies:
     eslint: ">=6.1.0"
-  checksum: d727f07f211f13c076bb5e6d2c0c46d41b195b2b7e6adbef47165ee36f281e4a12bef04bbbaf3bbef1e170ccb787862ade98f460cd42bbc9b8902fc5066f0cb2
+  checksum: 2a1e799bcf92a620de1cc4fe143e1a10de4c1d18728a2082e8ca8632b238437d4119b6a395008aebf01dca563ffe9352acf1d8e483f68135f6ad055490fa26a9
   languageName: node
   linkType: hard
 
@@ -6699,10 +6699,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"flow-runtime@npm:0.14.0":
-  version: 0.14.0
-  resolution: "flow-runtime@npm:0.14.0"
-  checksum: 35b97f38ae6456e39132548bf361e9b053e464dbb4e872da03fc3d95e60594a44a76f98f7fef98f397ff5c46c588dd9727422b3abcb0fc06b9febdb76c6abe67
+"flow-runtime@npm:0.17.0":
+  version: 0.17.0
+  resolution: "flow-runtime@npm:0.17.0"
+  checksum: f62f41a7d7e146f738e076326338a8c360ba128177200184531b479805d24e60c1c62f1860fea55309af37080d09f090847f1ffd1c14d560ae8a561ca8b11f1c
   languageName: node
   linkType: hard
 
@@ -11213,7 +11213,7 @@ fsevents@^1.2.7:
     "@popperjs/core": ^2.6.0
     "@testing-library/jest-dom": 5.16.1
     "@testing-library/react": 11.2.7
-    "@types/react": 17.0.21
+    "@types/react": 17.0.38
     axe-core: 4.3.3
     babel-eslint: 10.1.0
     babel-jest: ^26.6.3
@@ -11226,19 +11226,19 @@ fsevents@^1.2.7:
     circular-dependency-plugin: 5.2.2
     classnames: ^2.2.6
     clean-webpack-plugin: 2.0.2
-    copy-webpack-plugin: 6.2.1
+    copy-webpack-plugin: 6.4.1
     core-js: 3
     css-loader: 3.6.0
     css-modules-flow-types-loader: 0.3.1
-    es5-shim: 4.6.2
+    es5-shim: 4.6.4
     eslint: 6.6.0
-    eslint-plugin-flowtype: 4.4.1
+    eslint-plugin-flowtype: 4.7.0
     eslint-plugin-jsx-control-statements: 2.2.1
     eslint-plugin-react: "git://github.com/rafbgarcia/eslint-plugin-react#fix-other-curly-brace-presence-edge-cases"
     filemanager-webpack-plugin: 4.0.0
     flatpickr: ^4.6.6
     flow-bin: 0.160.0
-    flow-runtime: 0.14.0
+    flow-runtime: 0.17.0
     highcharts: ^9.0.0
     identity-obj-proxy: 3.0.0
     jest: 26.4.2
