@@ -75,10 +75,16 @@ const cursorProps = ({ cursor }) => {
   return css
 }
 
+const transitionProps = ({ transition }) => {
+  let css = ''
+  css += transition ? `transition_${transition} ` : ''
+  return css
+}
+
 // All Exported as a single function
 export const globalProps = (props, defaultProps = {}) => {
   const allProps = { ...props, ...defaultProps }
-  return spacingProps(allProps) + darkProps(allProps) + maxWidthProps(allProps) + zIndexProps(allProps) + numberSpacingProps(allProps) + shadowProps(allProps) + displayProps(allProps) + cursorProps(allProps)
+  return spacingProps(allProps) + darkProps(allProps) + maxWidthProps(allProps) + zIndexProps(allProps) + numberSpacingProps(allProps) + shadowProps(allProps) + displayProps(allProps) + cursorProps(allProps) + transitionProps(allProps)
 }
 
 export const deprecatedProps = (kit, props = []) => {
