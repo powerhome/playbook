@@ -1,0 +1,24 @@
+<%= pb_rails("flex", props: {
+  padding_bottom: "md",
+  padding_top: "xs",
+  padding_x: "md",
+  vertical: "stretch"
+}) do %>
+  <%= pb_rails("flex/flex_item", props: { flex: "1" }) do %>
+    <%= pb_rails("caption", props: { margin_bottom: "sm", text: "Props" }) %>
+    <% props.each do |prop| %>
+      <%= pb_rails("pill", props: {
+        text: prop,
+        text_transform: "none",
+        variant: "neutral"
+      }) %>
+    <% end %>
+  <% end %>
+  <%= pb_rails("section_separator", props: { margin_x: "sm", orientation: "vertical" }) %>
+  <%= pb_rails("flex/flex_item", props: { flex: "1" }) do %>
+    <%= pb_rails("caption", props: { margin_bottom: "sm", text: "Values" }) %>
+    <% values.each do |value| %>
+      <%= pb_rails("pill", props: { text: value, variant: "warning" }) %>
+    <% end %>
+  <% end %>
+<% end %>

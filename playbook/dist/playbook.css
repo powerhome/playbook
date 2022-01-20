@@ -491,6 +491,17 @@ Background colors ------------------*/
   [class^=pb_button_kit]:active {
     outline: none;
     border-width: 0px; }
+  [class^=pb_button_kit][class*=_sm] {
+    font-size: 0.75rem;
+    padding: calc(0.75rem / 2) calc(0.75rem * 2.42) !important; }
+  [class^=pb_button_kit][class*=_md] {
+    font-size: 0.875rem;
+    padding: calc(0.875rem / 2) calc(0.875rem * 2.42) !important; }
+  [class^=pb_button_kit][class*=_lg] {
+    font-size: 1.125rem;
+    padding: calc(1.125rem / 2) calc(1.125rem * 2.42) !important; }
+  [class^=pb_button_kit][class*=_sm] {
+    min-height: 0; }
   [class^=pb_button_kit][class*=_primary] {
     background-color: #0056CF;
     color: #FFFFFF;
@@ -652,6 +663,17 @@ Background colors ------------------*/
   [class^=pb_button_kit]:active {
     outline: none;
     border-width: 0px; }
+  [class^=pb_button_kit][class*=_sm] {
+    font-size: 0.75rem;
+    padding: calc(0.75rem / 2) calc(0.75rem * 2.42) !important; }
+  [class^=pb_button_kit][class*=_md] {
+    font-size: 0.875rem;
+    padding: calc(0.875rem / 2) calc(0.875rem * 2.42) !important; }
+  [class^=pb_button_kit][class*=_lg] {
+    font-size: 1.125rem;
+    padding: calc(1.125rem / 2) calc(1.125rem * 2.42) !important; }
+  [class^=pb_button_kit][class*=_sm] {
+    min-height: 0; }
   [class^=pb_button_kit][class*=_primary] {
     background-color: #0056CF;
     color: #FFFFFF;
@@ -1093,12 +1115,14 @@ Background colors ------------------*/
     color: #242B42; }
   [class^="pb_caption_kit"][class*="link"] {
     color: #0056CF; }
-  [class^="pb_caption_kit"][class*="dark"][class*="_default"][class*="dark"] {
-    color: #fff; }
-  [class^="pb_caption_kit"][class*="dark"][class*="_light"][class*="dark"] {
+  [class^="pb_caption_kit"].dark {
     color: rgba(255, 255, 255, 0.6); }
-  [class^="pb_caption_kit"][class*="dark"][class*="_link"][class*="dark"] {
-    color: #0056CF; }
+    [class^="pb_caption_kit"].dark[class*="_default"] {
+      color: #FFFFFF; }
+    [class^="pb_caption_kit"].dark[class*="_light"] {
+      color: rgba(255, 255, 255, 0.6); }
+    [class^="pb_caption_kit"].dark[class*="_link"] {
+      color: #0056CF; }
 
 /*=====================================
 Base colors should not be documented.
@@ -3058,12 +3082,14 @@ Background colors ------------------*/
     color: #242B42; }
   [class^="pb_caption_kit"][class*="link"] {
     color: #0056CF; }
-  [class^="pb_caption_kit"][class*="dark"][class*="_default"][class*="dark"] {
-    color: #fff; }
-  [class^="pb_caption_kit"][class*="dark"][class*="_light"][class*="dark"] {
+  [class^="pb_caption_kit"].dark {
     color: rgba(255, 255, 255, 0.6); }
-  [class^="pb_caption_kit"][class*="dark"][class*="_link"][class*="dark"] {
-    color: #0056CF; }
+    [class^="pb_caption_kit"].dark[class*="_default"] {
+      color: #FFFFFF; }
+    [class^="pb_caption_kit"].dark[class*="_light"] {
+      color: rgba(255, 255, 255, 0.6); }
+    [class^="pb_caption_kit"].dark[class*="_link"] {
+      color: #0056CF; }
 
 .pb-circle-chart-block {
   position: absolute;
@@ -3158,6 +3184,17 @@ Background colors ------------------*/
   [class^=pb_button_kit]:active {
     outline: none;
     border-width: 0px; }
+  [class^=pb_button_kit][class*=_sm] {
+    font-size: 0.75rem;
+    padding: calc(0.75rem / 2) calc(0.75rem * 2.42) !important; }
+  [class^=pb_button_kit][class*=_md] {
+    font-size: 0.875rem;
+    padding: calc(0.875rem / 2) calc(0.875rem * 2.42) !important; }
+  [class^=pb_button_kit][class*=_lg] {
+    font-size: 1.125rem;
+    padding: calc(1.125rem / 2) calc(1.125rem * 2.42) !important; }
+  [class^=pb_button_kit][class*=_sm] {
+    min-height: 0; }
   [class^=pb_button_kit][class*=_primary] {
     background-color: #0056CF;
     color: #FFFFFF;
@@ -5729,12 +5766,14 @@ Background colors ------------------*/
     color: #242B42; }
   [class^="pb_caption_kit"][class*="link"] {
     color: #0056CF; }
-  [class^="pb_caption_kit"][class*="dark"][class*="_default"][class*="dark"] {
-    color: #fff; }
-  [class^="pb_caption_kit"][class*="dark"][class*="_light"][class*="dark"] {
+  [class^="pb_caption_kit"].dark {
     color: rgba(255, 255, 255, 0.6); }
-  [class^="pb_caption_kit"][class*="dark"][class*="_link"][class*="dark"] {
-    color: #0056CF; }
+    [class^="pb_caption_kit"].dark[class*="_default"] {
+      color: #FFFFFF; }
+    [class^="pb_caption_kit"].dark[class*="_light"] {
+      color: rgba(255, 255, 255, 0.6); }
+    [class^="pb_caption_kit"].dark[class*="_link"] {
+      color: #0056CF; }
 
 /*=====================================
 Base colors should not be documented.
@@ -7763,12 +7802,14 @@ Background colors ------------------*/
     color: #242B42; }
   [class^="pb_caption_kit"][class*="link"] {
     color: #0056CF; }
-  [class^="pb_caption_kit"][class*="dark"][class*="_default"][class*="dark"] {
-    color: #fff; }
-  [class^="pb_caption_kit"][class*="dark"][class*="_light"][class*="dark"] {
+  [class^="pb_caption_kit"].dark {
     color: rgba(255, 255, 255, 0.6); }
-  [class^="pb_caption_kit"][class*="dark"][class*="_link"][class*="dark"] {
-    color: #0056CF; }
+    [class^="pb_caption_kit"].dark[class*="_default"] {
+      color: #FFFFFF; }
+    [class^="pb_caption_kit"].dark[class*="_light"] {
+      color: rgba(255, 255, 255, 0.6); }
+    [class^="pb_caption_kit"].dark[class*="_link"] {
+      color: #0056CF; }
 
 /*=====================================
 Base colors should not be documented.
@@ -8448,12 +8489,14 @@ Background colors ------------------*/
     color: #242B42; }
   [class^="pb_caption_kit"][class*="link"] {
     color: #0056CF; }
-  [class^="pb_caption_kit"][class*="dark"][class*="_default"][class*="dark"] {
-    color: #fff; }
-  [class^="pb_caption_kit"][class*="dark"][class*="_light"][class*="dark"] {
+  [class^="pb_caption_kit"].dark {
     color: rgba(255, 255, 255, 0.6); }
-  [class^="pb_caption_kit"][class*="dark"][class*="_link"][class*="dark"] {
-    color: #0056CF; }
+    [class^="pb_caption_kit"].dark[class*="_default"] {
+      color: #FFFFFF; }
+    [class^="pb_caption_kit"].dark[class*="_light"] {
+      color: rgba(255, 255, 255, 0.6); }
+    [class^="pb_caption_kit"].dark[class*="_link"] {
+      color: #0056CF; }
 
 /*=====================================
 Base colors should not be documented.
@@ -11026,12 +11069,14 @@ Background colors ------------------*/
     color: #242B42; }
   [class^="pb_caption_kit"][class*="link"] {
     color: #0056CF; }
-  [class^="pb_caption_kit"][class*="dark"][class*="_default"][class*="dark"] {
-    color: #fff; }
-  [class^="pb_caption_kit"][class*="dark"][class*="_light"][class*="dark"] {
+  [class^="pb_caption_kit"].dark {
     color: rgba(255, 255, 255, 0.6); }
-  [class^="pb_caption_kit"][class*="dark"][class*="_link"][class*="dark"] {
-    color: #0056CF; }
+    [class^="pb_caption_kit"].dark[class*="_default"] {
+      color: #FFFFFF; }
+    [class^="pb_caption_kit"].dark[class*="_light"] {
+      color: rgba(255, 255, 255, 0.6); }
+    [class^="pb_caption_kit"].dark[class*="_link"] {
+      color: #0056CF; }
 
 /*=====================================
 Base colors should not be documented.
@@ -12262,6 +12307,29 @@ Background colors ------------------*/
 /* Headings */
 /* Standard Font Weights */
 /* Non_Standard Font Weights */
+/*=====================================
+Base colors should not be documented.
+Only document color use.
+
+Colors -----------------------------*/
+/* Specialty Gradient -----------------*/
+/* Interface colors -------------------*/
+/* Main colors ------------------------*/
+/*=====================================
+
+Background colors ------------------*/
+/* Card colors ------------------*/
+/* Active colors ----------------------*/
+/* Hover colors -----------------------*/
+/* Focus colors -----------------------*/
+/* Border colors ----------------------*/
+/* Shadow colors ----------------------*/
+/* Text colors ------------------------*/
+/* Data colors ------------------------*/
+/* Status colors ----------------------*/
+/* Link colors ------------------------*/
+/* Product colors ---------------------*/
+/* Category colors ---------------------*/
 [class^=pb_nav_list][class*=_vertical] ul {
   padding: 0;
   margin: 0;
@@ -12362,6 +12430,64 @@ Background colors ------------------*/
     font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif;
     color: #0056CF; }
 
+[class^=pb_nav_list][class*=_vertical][class*=_bold] [class*=pb_nav_list_kit_item] {
+  list-style: none;
+  border-radius: 6px;
+  border-bottom: 0;
+  margin: 8px 14px; }
+  [class^=pb_nav_list][class*=_vertical][class*=_bold] [class*=pb_nav_list_kit_item] [class*=_link] {
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    border: none;
+    padding: 8px 14px;
+    transition-property: color, background-color;
+    transition-duration: 0.15s;
+    transition-timing-function: cubic-bezier(0.64, 0, 0.35, 1);
+    border-radius: 6px;
+    line-height: 1.4;
+    color: #242B42;
+    font-size: 16px;
+    font-weight: 400;
+    font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif; }
+    [class^=pb_nav_list][class*=_vertical][class*=_bold] [class*=pb_nav_list_kit_item] [class*=_link] [class*=_icon_left] {
+      margin-right: 10px;
+      color: #C1CDD6; }
+    [class^=pb_nav_list][class*=_vertical][class*=_bold] [class*=pb_nav_list_kit_item] [class*=_link] [class*=_icon_right] {
+      margin-left: 10px;
+      color: #242B42; }
+    [class^=pb_nav_list][class*=_vertical][class*=_bold] [class*=pb_nav_list_kit_item] [class*=_link] [class*=_text] {
+      flex: 1;
+      font-weight: 400; }
+    @media (hover: hover) {
+      [class^=pb_nav_list][class*=_vertical][class*=_bold] [class*=pb_nav_list_kit_item] [class*=_link]:hover {
+        background-color: rgba(0, 86, 207, 0.03); }
+        [class^=pb_nav_list][class*=_vertical][class*=_bold] [class*=pb_nav_list_kit_item] [class*=_link]:hover [class*=_icon] {
+          color: #0056CF; }
+        [class^=pb_nav_list][class*=_vertical][class*=_bold] [class*=pb_nav_list_kit_item] [class*=_link]:hover [class*=_text] {
+          color: #0056CF; } }
+  [class^=pb_nav_list][class*=_vertical][class*=_bold] [class*=pb_nav_list_kit_item][class*=_active] [class*=_link] {
+    font-size: 16px;
+    letter-spacing: -0.03em;
+    font-weight: 700;
+    color: #242B42;
+    margin: 0;
+    line-height: 1.2;
+    font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif;
+    color: #0056CF; }
+
+[class^=pb_nav_list][class*=_vertical][class*=_bold] [class*=pb_nav_list_kit_item][class*=_active] [class*=_link] {
+  background-color: #0056CF;
+  color: #FFFFFF;
+  box-shadow: 0 4px 10px 0 rgba(60, 106, 172, 0.16); }
+  @media (hover: hover) {
+    [class^=pb_nav_list][class*=_vertical][class*=_bold] [class*=pb_nav_list_kit_item][class*=_active] [class*=_link]:hover {
+      background-color: #004ebb; }
+      [class^=pb_nav_list][class*=_vertical][class*=_bold] [class*=pb_nav_list_kit_item][class*=_active] [class*=_link]:hover [class*=_text], [class^=pb_nav_list][class*=_vertical][class*=_bold] [class*=pb_nav_list_kit_item][class*=_active] [class*=_link]:hover [class*=_icon] {
+        color: #FFFFFF; } }
+  [class^=pb_nav_list][class*=_vertical][class*=_bold] [class*=pb_nav_list_kit_item][class*=_active] [class*=_link] [class*=_text], [class^=pb_nav_list][class*=_vertical][class*=_bold] [class*=pb_nav_list_kit_item][class*=_active] [class*=_link] [class*=_icon] {
+    font-weight: 700; }
+
 [class^=pb_nav_list][class*=_vertical][class*=_highlight] [class*=_active] {
   background-color: #f7fbff; }
 
@@ -12421,6 +12547,29 @@ Background colors ------------------*/
 /* Headings */
 /* Standard Font Weights */
 /* Non_Standard Font Weights */
+/*=====================================
+Base colors should not be documented.
+Only document color use.
+
+Colors -----------------------------*/
+/* Specialty Gradient -----------------*/
+/* Interface colors -------------------*/
+/* Main colors ------------------------*/
+/*=====================================
+
+Background colors ------------------*/
+/* Card colors ------------------*/
+/* Active colors ----------------------*/
+/* Hover colors -----------------------*/
+/* Focus colors -----------------------*/
+/* Border colors ----------------------*/
+/* Shadow colors ----------------------*/
+/* Text colors ------------------------*/
+/* Data colors ------------------------*/
+/* Status colors ----------------------*/
+/* Link colors ------------------------*/
+/* Product colors ---------------------*/
+/* Category colors ---------------------*/
 [class^=pb_nav_list][class*=_horizontal] ul {
   display: flex;
   align-items: center;
@@ -12523,6 +12672,70 @@ Background colors ------------------*/
     background-color: rgba(255, 255, 255, 0.1); }
   [class^=pb_nav_list][class*=_horizontal][class*=_subtle] [class*=_active] [class*=_item_link] [class*=_item_text] {
     color: #0056CF; }
+
+[class^=pb_nav_list][class*=_horizontal][class*=_bold] [class*=pb_nav_list_kit_item] {
+  list-style: none;
+  border-radius: 6px;
+  border-bottom: 0;
+  margin: 8px 14px; }
+  [class^=pb_nav_list][class*=_horizontal][class*=_bold] [class*=pb_nav_list_kit_item] [class*=_link] {
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    border: none;
+    padding: 8px 14px;
+    transition-property: color, background-color;
+    transition-duration: 0.15s;
+    transition-timing-function: cubic-bezier(0.64, 0, 0.35, 1);
+    border-radius: 6px;
+    line-height: 1.4;
+    color: #242B42;
+    font-size: 16px;
+    font-weight: 400;
+    font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif; }
+    [class^=pb_nav_list][class*=_horizontal][class*=_bold] [class*=pb_nav_list_kit_item] [class*=_link] [class*=_icon_left] {
+      margin-right: 10px;
+      color: #C1CDD6; }
+    [class^=pb_nav_list][class*=_horizontal][class*=_bold] [class*=pb_nav_list_kit_item] [class*=_link] [class*=_icon_right] {
+      margin-left: 10px;
+      color: #242B42; }
+    [class^=pb_nav_list][class*=_horizontal][class*=_bold] [class*=pb_nav_list_kit_item] [class*=_link] [class*=_text] {
+      flex: 1;
+      font-weight: 400; }
+    @media (hover: hover) {
+      [class^=pb_nav_list][class*=_horizontal][class*=_bold] [class*=pb_nav_list_kit_item] [class*=_link]:hover {
+        background-color: rgba(0, 86, 207, 0.03); }
+        [class^=pb_nav_list][class*=_horizontal][class*=_bold] [class*=pb_nav_list_kit_item] [class*=_link]:hover [class*=_icon] {
+          color: #0056CF; }
+        [class^=pb_nav_list][class*=_horizontal][class*=_bold] [class*=pb_nav_list_kit_item] [class*=_link]:hover [class*=_text] {
+          color: #0056CF; } }
+  [class^=pb_nav_list][class*=_horizontal][class*=_bold] [class*=pb_nav_list_kit_item][class*=_active] [class*=_link] {
+    font-size: 16px;
+    letter-spacing: -0.03em;
+    font-weight: 700;
+    color: #242B42;
+    margin: 0;
+    line-height: 1.2;
+    font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif;
+    color: #0056CF; }
+
+[class^=pb_nav_list][class*=_horizontal][class*=_bold] [class*=pb_nav_list_kit_item][class*=_active] [class*=_link] {
+  background-color: #0056CF;
+  color: #FFFFFF;
+  box-shadow: 0 4px 10px 0 rgba(60, 106, 172, 0.16); }
+  @media (hover: hover) {
+    [class^=pb_nav_list][class*=_horizontal][class*=_bold] [class*=pb_nav_list_kit_item][class*=_active] [class*=_link]:hover {
+      background-color: #004ebb; }
+      [class^=pb_nav_list][class*=_horizontal][class*=_bold] [class*=pb_nav_list_kit_item][class*=_active] [class*=_link]:hover [class*=_text], [class^=pb_nav_list][class*=_horizontal][class*=_bold] [class*=pb_nav_list_kit_item][class*=_active] [class*=_link]:hover [class*=_icon] {
+        color: #FFFFFF; } }
+  [class^=pb_nav_list][class*=_horizontal][class*=_bold] [class*=pb_nav_list_kit_item][class*=_active] [class*=_link] [class*=_text], [class^=pb_nav_list][class*=_horizontal][class*=_bold] [class*=pb_nav_list_kit_item][class*=_active] [class*=_link] [class*=_icon] {
+    font-weight: 700; }
+
+[class^=pb_nav_list][class*=_horizontal][class*=_bold] [class*=pb_nav_list_kit_item] {
+  margin: 0; }
+
+[class^=pb_nav_list][class*=_horizontal][class*=_bold] [class*=_active] [class*=_text] {
+  color: #FFFFFF; }
 
 [class^=pb_nav_list][class*=_horizontal][class*=dark] [class*=pb_nav_list_kit_item] [class*=_link] {
   border-color: rgba(255, 255, 255, 0.3); }
@@ -18839,6 +19052,34 @@ Background colors ------------------*/
 [class^=pb_text_input_kit].error .text_input_wrapper input, [class^=pb_text_input_kit].error .text_input_wrapper .text_input {
   border-color: #FF2229; }
 
+[class^=pb_text_input_kit].error .text_input_wrapper_add_on .add-on-right .add-on-card {
+  border: 1px solid red;
+  border-left: 0; }
+
+[class^=pb_text_input_kit].error .text_input_wrapper_add_on .add-on-left .add-on-card {
+  border: 1px solid red;
+  border-right: 0; }
+
+[class^=pb_text_input_kit].error .text_input_wrapper_add_on .border_left_on .card-right-aligned {
+  border-left: 0; }
+
+[class^=pb_text_input_kit].error .text_input_wrapper_add_on .border_left_off .card-right-aligned {
+  border-left: 0; }
+
+[class^=pb_text_input_kit].error .text_input_wrapper_add_on .border_left_off .text_input {
+  border-right: 0;
+  padding-right: 0; }
+
+[class^=pb_text_input_kit].error .text_input_wrapper_add_on .border_right_on .card-left-aligned {
+  border-right: 0; }
+
+[class^=pb_text_input_kit].error .text_input_wrapper_add_on .border_right_off .card-left-aligned {
+  border-right: 0; }
+
+[class^=pb_text_input_kit].error .text_input_wrapper_add_on .border_right_off .text_input {
+  border-left: 0;
+  padding-left: 0; }
+
 [class^=pb_text_input_kit].inline .text_input_wrapper input::placeholder,
 [class^=pb_text_input_kit].inline .text_input_wrapper .text_input .placeholder {
   opacity: 1; }
@@ -18858,7 +19099,7 @@ Background colors ------------------*/
 .text_input_wrapper_add_on .add-on-card {
   height: 45px;
   margin: 0;
-  padding: 0 !important;
+  padding: 0;
   align-items: center;
   justify-content: center;
   width: 45px; }
@@ -18870,31 +19111,31 @@ Background colors ------------------*/
   background-color: #0a0527; }
 
 .text_input_wrapper_add_on .add-on-left .text_input {
-  border-top-left-radius: 0 !important;
-  border-bottom-left-radius: 0 !important; }
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0; }
 
 .text_input_wrapper_add_on .add-on-right .text_input {
-  border-top-right-radius: 0 !important;
-  border-bottom-right-radius: 0 !important; }
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0; }
 
 .text_input_wrapper_add_on .text_input:focus ~ .add-on-card-dark {
   background-color: rgba(20, 64, 117, 0.5);
   border-width: 0px; }
 
 .text_input_wrapper_add_on .card-left-aligned {
-  border-top-right-radius: 0 !important;
-  border-bottom-right-radius: 0 !important; }
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0; }
 
 .text_input_wrapper_add_on .card-right-aligned {
-  border-top-left-radius: 0 !important;
-  border-bottom-left-radius: 0 !important; }
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0; }
 
 .text_input_wrapper_add_on .border_right_off .card-left-aligned {
   border-right: 0; }
 
 .text_input_wrapper_add_on .border_right_off .text_input {
-  border-left: 0 !important;
-  padding-left: 0 !important; }
+  border-left: 0;
+  padding-left: 0; }
 
 .text_input_wrapper_add_on .border_left_on .card-right-aligned {
   border-left: 0; }
@@ -18906,8 +19147,8 @@ Background colors ------------------*/
   border-left: 0; }
 
 .text_input_wrapper_add_on .border_left_off .text_input {
-  border-right: 0 !important;
-  padding-right: 0 !important; }
+  border-right: 0;
+  padding-right: 0; }
 
 /*=====================================
 Base colors should not be documented.
@@ -19447,12 +19688,14 @@ Background colors ------------------*/
     color: #242B42; }
   [class^="pb_caption_kit"][class*="link"] {
     color: #0056CF; }
-  [class^="pb_caption_kit"][class*="dark"][class*="_default"][class*="dark"] {
-    color: #fff; }
-  [class^="pb_caption_kit"][class*="dark"][class*="_light"][class*="dark"] {
+  [class^="pb_caption_kit"].dark {
     color: rgba(255, 255, 255, 0.6); }
-  [class^="pb_caption_kit"][class*="dark"][class*="_link"][class*="dark"] {
-    color: #0056CF; }
+    [class^="pb_caption_kit"].dark[class*="_default"] {
+      color: #FFFFFF; }
+    [class^="pb_caption_kit"].dark[class*="_light"] {
+      color: rgba(255, 255, 255, 0.6); }
+    [class^="pb_caption_kit"].dark[class*="_link"] {
+      color: #0056CF; }
 
 [class^=pb_time_kit][class*=_center] {
   text-align: center; }
@@ -21737,12 +21980,14 @@ Background colors ------------------*/
     color: #242B42; }
   [class^="pb_caption_kit"][class*="link"] {
     color: #0056CF; }
-  [class^="pb_caption_kit"][class*="dark"][class*="_default"][class*="dark"] {
-    color: #fff; }
-  [class^="pb_caption_kit"][class*="dark"][class*="_light"][class*="dark"] {
+  [class^="pb_caption_kit"].dark {
     color: rgba(255, 255, 255, 0.6); }
-  [class^="pb_caption_kit"][class*="dark"][class*="_link"][class*="dark"] {
-    color: #0056CF; }
+    [class^="pb_caption_kit"].dark[class*="_default"] {
+      color: #FFFFFF; }
+    [class^="pb_caption_kit"].dark[class*="_light"] {
+      color: rgba(255, 255, 255, 0.6); }
+    [class^="pb_caption_kit"].dark[class*="_link"] {
+      color: #0056CF; }
 
 /*=====================================
 Base colors should not be documented.
@@ -22154,6 +22399,45 @@ Background colors ------------------*/
 
 .shadow_deepest {
   box-shadow: 0 30px 38px 4px rgba(60, 106, 172, 0.2), 0 2px 14px 4px rgba(60, 106, 172, 0.1); }
+
+[class*=pb_] .line_height_tightest {
+  line-height: 1; }
+
+[class*=pb_] .line_height_tighter {
+  line-height: 1.2; }
+
+[class*=pb_] .line_height_tight {
+  line-height: 1.4; }
+
+[class*=pb_] .line_height_normal {
+  line-height: 1.5; }
+
+[class*=pb_] .line_height_loose {
+  line-height: 1.6; }
+
+[class*=pb_] .line_height_looser {
+  line-height: 1.8; }
+
+[class*=pb_] .line_height_loosest {
+  line-height: 2; }
+
+.display_block {
+  display: block; }
+
+.display_inline_block {
+  display: inline-block; }
+
+.display_inline {
+  display: inline; }
+
+.display_flex {
+  display: flex; }
+
+.display_inline_flex {
+  display: inline-flex; }
+
+.display_hidden {
+  display: none; }
 
 /*=====================================
 Base colors should not be documented.

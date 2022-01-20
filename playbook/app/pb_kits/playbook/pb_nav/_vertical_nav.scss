@@ -6,6 +6,8 @@
 @import "../tokens/titles";
 @import "../pb_body/body_mixins";
 @import "./subtle_mixin";
+@import "./bold_mixin";
+@import "../tokens/shadows";
 
 $selector: ".pb_nav_list";
 
@@ -87,12 +89,17 @@ $selector: ".pb_nav_list";
   }
 
   // Subtle Variant
-  &[class*=_subtle]  {
+  &[class*=_subtle] {
     @include subtle;
   }
 
+  // Bold Variant
+  &[class*=_bold] {
+    @include bold;
+  }
+
   // Show Highlight
-  &[class*=_highlight]  {
+  &[class*=_highlight] {
     [class*=_active] {
       background-color: $active_light;
     }
