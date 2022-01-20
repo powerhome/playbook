@@ -16,7 +16,7 @@ module Playbook
       prop :variant, deprecated: true
 
       def classname
-        generate_classname("pb_title_kit", size, variant, color)
+        generate_classname("pb_title_kit", size, color)
       end
     end
   end
