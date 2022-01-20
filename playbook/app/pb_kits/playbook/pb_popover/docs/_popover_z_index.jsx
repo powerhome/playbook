@@ -36,6 +36,7 @@ const PopoverZIndex = (props) => {
       <PbReactPopover
           closeOnClick="outside"
           offset
+          padding="sm"
           placement="top"
           reference={popoverTrigger}
           shouldClosePopover={handleShouldClosePopover}
