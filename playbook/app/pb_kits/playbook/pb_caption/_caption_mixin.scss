@@ -11,9 +11,9 @@ $pb_caption_colors: (
 );
 
 $pb_dark_caption_colors: (
-  default:        #fff,
+  default:        $text_dk_default,
   light:          $text_dk_light,
-  link:           $primary-action,
+  link:           $primary,
 );
 
 

@@ -14,10 +14,11 @@
 
   @include pb_caption_kit_colors;
 
-  &[class*="dark"] {
-    @each $dark_color_name, $dark_color_value in $pb_dark_caption_colors {
-      &[class*="_#{$dark_color_name}"][class*="dark"] {
-      @include caption_color($dark_color_value);
+  &.dark {
+    @include caption_dark;
+    @each $name, $color in $pb_dark_caption_colors {
+      &[class*="_#{$name}"] {
+        color: $color;
       }
     }
   }
