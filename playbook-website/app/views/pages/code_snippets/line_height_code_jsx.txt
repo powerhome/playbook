@@ -1,0 +1,12 @@
+React:
+
+<Body lineHeight="looser">
+  Body content
+<Body/>
+
+
+Rails: 
+
+<%= pb_rails("body", props: { line_height:"looser" }) do %>
+  Body content
+<% end %>
