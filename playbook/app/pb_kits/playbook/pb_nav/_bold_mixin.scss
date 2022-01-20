@@ -8,7 +8,7 @@
       box-shadow: $shadow_deep;
       @media (hover:hover) {
         &:hover {
-          background-color: rgba($primary, 0.95);
+          background-color: darken($primary, 4%);
           [class*=_text],[class*=_icon] {
             color: $white;
           }

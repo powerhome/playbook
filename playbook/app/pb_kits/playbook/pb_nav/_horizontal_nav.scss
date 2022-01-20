@@ -95,6 +95,20 @@ $selector: ".pb_nav_list";
     }
   }
 
+  // Bold Variant
+  &[class*=_bold] {
+    @include bold;
+    // Horizontal Overrides
+    [class*=pb_nav_list_kit_item] {
+      margin: 0;
+    }
+    [class*=_active] {
+      [class*=_text] {
+        color: $white;
+      }
+    }
+  }
+
   &[class*=dark]{
     [class*=pb_nav_list_kit_item]{
       [class*=_link]{
