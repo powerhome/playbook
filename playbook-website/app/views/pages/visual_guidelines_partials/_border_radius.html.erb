@@ -1,55 +1,34 @@
-<%= pb_rails("title", props: { text: "Border Radius", size: 1, margin_top: "xl", padding_top: "xl" }) %>
-<%= pb_rails("body", props: { tag: "p", margin_top: "xs", margin_bottom: "lg" }) do %>
-  We have very specific settings for border radius to keep the interface 
-  looking consistent and clean. If you ever need to access these to build 
-  new things here are examples for how to do that.
-<% end %>
-<%= pb_rails("title", props: { text: "Tokens", tag: "h3", size: 4 }) %>
-<%= pb_rails("body", props: { tag: "p", margin_bottom: "lg", margin_top: "xs" }) do %>
+<%= render partial: "pages/visual_guidelines_partials/partial_title",
+  locals: {
+    title: "Border Radius",
+    title_size: 1,
+    description: "We have very specific settings for border radius to keep the interface
+                  looking consistent and clean. If you ever need to access these to build
+                  new things here are examples for how to do that.",
+    global_props: false
+  }
+%>
+<%= pb_rails("title", props: {
+  size: 4,
+  tag: "h3",
+  text: "Tokens"
+}) %>
+<%= pb_rails("body", props: {
+  margin_bottom: "lg",
+  margin_top: "xs",
+  tag: "p"
+}) do %>
   Make up your own styles using Playbook tokens to keep your site consistent.
 <% end %>
-<%= pb_rails("card", props: { shadow: "deep", margin_bottom: "none", padding: "none" }) do %>
-  <%= pb_rails("flex", props:{ wrap: true, align: "center", padding: "md", justify: "center" }) do %>
-    <div class="border_radius_container">
-      <div class="border_radius_rounded"></div>
-      <%= pb_rails("title", props: { text: "Rounded", tag: "h4", size: 4, margin_top: "xs" }) %>
-      <%= pb_rails("caption", props: { text: "$border_radius_rounded", size: 'xs' }) %>
-    </div>
-    <div class="border_radius_container">
-      <div class="border_radius_xl"></div>
-      <%= pb_rails("title", props: { text: "Extra Large", tag: "h4", size: 4, margin_top: "xs" }) %>
-      <%= pb_rails("caption", props: { text: "$border_radius_xl", size: 'xs' }) %>
-    </div>
-    <div class="border_radius_container">
-      <div class="border_radius_lg"></div>
-      <%= pb_rails("title", props: { text: "Large", tag: "h4", size: 4, margin_top: "xs" }) %>
-      <%= pb_rails("caption", props: { text: "$border_radius_lg", size: 'xs' }) %>
-    </div>
-    <div class="border_radius_container">
-      <div class="border_radius_md"></div>
-      <%= pb_rails("title", props: { text: "Medium", tag: "h4", size: 4, margin_top: "xs" }) %>
-      <%= pb_rails("caption", props: { text: "$border_radius_md", size: 'xs' }) %>
-    </div>
-    <div class="border_radius_container">
-      <div class="border_radius_sm"></div>
-      <%= pb_rails("title", props: { text: "Small", tag: "h4", size: 4, margin_top: "xs" }) %>
-      <%= pb_rails("caption", props: { text: "$border_radius_sm", size: 'xs' }) %>
-    </div>
-    <div class="border_radius_container">
-      <div class="border_radius_xs"></div>
-      <%= pb_rails("title", props: { text: "Extra Small", tag: "h4", size: 4, margin_top: "xs" }) %>
-      <%= pb_rails("caption", props: { text: "$border_radius_xs", size: 'xs' }) %>
-    </div>
-    <div class="border_radius_container">
-      <div class="border_radius_none"></div>
-      <%= pb_rails("title", props: { text: "None", tag: "h4", size: 4, margin_top: "xs" }) %>
-      <%= pb_rails("caption", props: { text: "$border_radius_none", size: 'xs' }) %>
-    </div>
-  <% end %>
-  <%= pb_rails("background", props: { id: "code-wrapper", classname: "border-bottom", background_color: "dark", padding: "none" }) do %>
-    <%= pb_rails("caption", props: { text: "EXAMPLE IN USE", padding_top: "lg", margin_x: "xl", classname: "dark" }) %>
-    <div class="pb--codeCopy">
-      <pre class="highlight pt_sm" style="margin: 0px"><%= raw rouge(@border_radius_token_example, "react") %></pre>
-    </div>
-  <% end %>
+<%= pb_rails("card", props: {
+  margin_bottom: "none",
+  padding: "none",
+  shadow: "deep"
+}) do %>
+  <%= render "pages/visual_guidelines_partials/pb_doc_border_radius" %>
+  <%= render partial: "pages/visual_guidelines_partials/partial_code_example",
+    locals: {
+      example: "app/views/pages/code_snippets/border_radius_tokens.txt"
+    }
+  %>
 <% end %>

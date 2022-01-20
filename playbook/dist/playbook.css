@@ -521,6 +521,17 @@ Background colors ------------------*/
   [class^=pb_button_kit]:active {
     outline: none;
     border-width: 0px; }
+  [class^=pb_button_kit][class*=_sm] {
+    font-size: 0.75rem;
+    padding: calc(0.75rem / 2) calc(0.75rem * 2.42) !important; }
+  [class^=pb_button_kit][class*=_md] {
+    font-size: 0.875rem;
+    padding: calc(0.875rem / 2) calc(0.875rem * 2.42) !important; }
+  [class^=pb_button_kit][class*=_lg] {
+    font-size: 1.125rem;
+    padding: calc(1.125rem / 2) calc(1.125rem * 2.42) !important; }
+  [class^=pb_button_kit][class*=_sm] {
+    min-height: 0; }
   [class^=pb_button_kit][class*=_primary] {
     background-color: #0056CF;
     color: #FFFFFF;
@@ -682,6 +693,17 @@ Background colors ------------------*/
   [class^=pb_button_kit]:active {
     outline: none;
     border-width: 0px; }
+  [class^=pb_button_kit][class*=_sm] {
+    font-size: 0.75rem;
+    padding: calc(0.75rem / 2) calc(0.75rem * 2.42) !important; }
+  [class^=pb_button_kit][class*=_md] {
+    font-size: 0.875rem;
+    padding: calc(0.875rem / 2) calc(0.875rem * 2.42) !important; }
+  [class^=pb_button_kit][class*=_lg] {
+    font-size: 1.125rem;
+    padding: calc(1.125rem / 2) calc(1.125rem * 2.42) !important; }
+  [class^=pb_button_kit][class*=_sm] {
+    min-height: 0; }
   [class^=pb_button_kit][class*=_primary] {
     background-color: #0056CF;
     color: #FFFFFF;
@@ -3269,6 +3291,17 @@ Background colors ------------------*/
   [class^=pb_button_kit]:active {
     outline: none;
     border-width: 0px; }
+  [class^=pb_button_kit][class*=_sm] {
+    font-size: 0.75rem;
+    padding: calc(0.75rem / 2) calc(0.75rem * 2.42) !important; }
+  [class^=pb_button_kit][class*=_md] {
+    font-size: 0.875rem;
+    padding: calc(0.875rem / 2) calc(0.875rem * 2.42) !important; }
+  [class^=pb_button_kit][class*=_lg] {
+    font-size: 1.125rem;
+    padding: calc(1.125rem / 2) calc(1.125rem * 2.42) !important; }
+  [class^=pb_button_kit][class*=_sm] {
+    min-height: 0; }
   [class^=pb_button_kit][class*=_primary] {
     background-color: #0056CF;
     color: #FFFFFF;
@@ -23662,6 +23695,24 @@ Background colors ------------------*/
 
 .shadow_deepest {
   box-shadow: 0 30px 38px 4px rgba(60, 106, 172, 0.2), 0 2px 14px 4px rgba(60, 106, 172, 0.1); }
+
+.display_block {
+  display: block; }
+
+.display_inline_block {
+  display: inline-block; }
+
+.display_inline {
+  display: inline; }
+
+.display_flex {
+  display: flex; }
+
+.display_inline_flex {
+  display: inline-flex; }
+
+.display_hidden {
+  display: none; }
 
 /*=====================================
 Base colors should not be documented.
