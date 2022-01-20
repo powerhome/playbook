@@ -9,7 +9,7 @@ type CaptionProps = {
   aria?: object,
   children: array<React.ReactNode> | React.ReactNode,
   className?: string,
-  color?: "default" | "lighter" | "success" | "error" | "link",
+  color?: "default" | "light" | "lighter" | "success" | "error" | "link",
   data?: object,
   id?: string,
   size?: "xs" | "sm" | "md" | "lg" | "xl",
