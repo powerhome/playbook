@@ -20,12 +20,14 @@
 }) do %>
   Make up your own styles using Playbook tokens to keep your site consistent.
 <% end %>
+
+ <%= render "pages/visual_guidelines_partials/pb_doc_line_height"%>
+
 <%= pb_rails("card", props: {
   margin_bottom: "none",
   padding: "none",
   shadow: "deep"
 }) do %>
-  <%= render "pages/visual_guidelines_partials/pb_doc_line_height"%>
   <%= render partial: "pages/visual_guidelines_partials/partial_code_example",
     locals: {
       example: "app/views/pages/code_snippets/line_height_jsx.txt"
