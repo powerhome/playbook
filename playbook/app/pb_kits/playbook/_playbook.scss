@@ -47,6 +47,7 @@
 @import 'pb_label_value/label_value';
 @import 'pb_layout/layout';
 @import 'pb_legend/legend';
+@import 'pb_lightbox/lightbox';
 @import 'pb_line_graph/line_graph';
 @import 'pb_list/list';
 @import 'pb_loading_inline/loading_inline';
@@ -93,9 +94,10 @@
 @import 'pb_walkthrough/walkthrough';
 @import 'pb_weekday_stacked/weekday_stacked';
 @import './utilities/spacing';
+@import './utilities/cursor';
 @import './utilities/max_width';
 @import './utilities/positioning';
 @import './utilities/number_spacing';
 @import './utilities/shadow';
-
-@import 'pb_lightbox/lightbox';
+@import './utilities/line_height';
+@import './utilities/display';

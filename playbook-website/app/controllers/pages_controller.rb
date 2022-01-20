@@ -78,6 +78,7 @@ class PagesController < ApplicationController
     @max_width_code_example = Rails.root.join("app/views/pages/code_snippets/width_jsx.txt").read
     @number_spacing_code_example = Rails.root.join("app/views/pages/code_snippets/number_spacing_jsx.txt").read
     @position_code_example = Rails.root.join("app/views/pages/code_snippets/positioning_jsx.txt").read
+    @cursor_code_example = Rails.root.join("app/views/pages/code_snippets/cursor_jsx.txt").read
     @spacing_code_example = Rails.root.join("app/views/pages/code_snippets/spacing_global_props_jsx.txt").read
     @spacing_token_example = Rails.root.join("app/views/pages/code_snippets/spacing_tokens_jsx.txt").read
     @border_radius_token_example = Rails.root.join("app/views/pages/code_snippets/border_radius_tokens.txt").read
@@ -86,6 +87,8 @@ class PagesController < ApplicationController
     @position_token_example = Rails.root.join("app/views/pages/code_snippets/position_token.txt").read
     @shadow_token_example = Rails.root.join("app/views/pages/code_snippets/shadow_erb.txt").read
     @shadow_in_use_code_example = Rails.root.join("app/views/pages/code_snippets/shadow_in_use_jsx.txt").read
+    @line_height_code_example = Rails.root.join("app/views/pages/code_snippets/line_height_code_jsx.txt").read
+    @display_in_use_code_example = Rails.root.join("app/views/pages/code_snippets/display_in_use_jsx.txt").read
     @space_sizes = [
       { name: "Extra Small", variable: "space_xs" },
       { name: "Small", variable: "space_sm" },

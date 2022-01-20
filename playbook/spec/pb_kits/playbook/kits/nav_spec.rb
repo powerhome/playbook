@@ -17,7 +17,7 @@ RSpec.describe Playbook::PbNav::Nav do
   }
   it {
     is_expected.to define_enum_prop(:variant)
-      .with_values("normal", "subtle")
+      .with_values("normal", "subtle", "bold")
       .with_default("normal")
   }
 
@@ -27,6 +27,7 @@ RSpec.describe Playbook::PbNav::Nav do
       expect(subject.new(orientation: "horizontal").classname).to eq "pb_nav_list_normal_horizontal_highlight"
       expect(subject.new(orientation: "vertical").classname).to eq "pb_nav_list_normal_vertical_highlight"
       expect(subject.new(variant: "subtle").classname).to eq "pb_nav_list_subtle_vertical_highlight"
+      expect(subject.new(variant: "bold").classname).to eq "pb_nav_list_bold_vertical_highlight"
     end
   end
 end

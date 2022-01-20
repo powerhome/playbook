@@ -7,6 +7,7 @@ const props = {
   data: { testid: 'avatar' },
   size: null,
   url: 'https://unsplash.it/500/400/?image=634',
+  transition: 'blur',
 }
 
 it('Should be accessible', async () => {
@@ -20,16 +21,20 @@ test('alt attribute', () => {
 
 test('default classname', () => {
   const kit = renderKit(Image, props)
-  expect(kit).toHaveClass('pb_image_kit lazyload blur_up')
+  expect(kit).toHaveClass('pb_image_kit lazyload')
 })
 
 test('size = xs', () => {
   const kit = renderKit(Image, props, { size: 'xs' })
-  expect(kit).toHaveClass('pb_image_kit_xs lazyload blur_up')
+  expect(kit).toHaveClass('pb_image_kit_xs lazyload')
+})
+
+test('transition = blur', () => {
+  const kit = renderKit(Image, props, { transition: 'blur' })
+  expect(kit).toHaveClass('pb_image_kit lazyload blur')
 })
 
 test('rounded = true', () => {
   const kit = renderKit(Image, props, { rounded: true })
-  expect(kit).toHaveClass('pb_image_kit lazyload blur_up rounded')
+  expect(kit).toHaveClass('pb_image_kit lazyload rounded')
 })
-
