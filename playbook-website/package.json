@@ -8,7 +8,9 @@
     "release": "RAILS_ENV=production NODE_ENV=production ./bin/webpack"
   },
   "dependencies": {
+    "@codesandbox/sandpack-react": "^0.13.1",
     "@rails/webpacker": "5.2.1",
+    "framer-motion": "^5.5.5",
     "playbook-ui": ">= 1",
     "react": "16.14.0",
     "react-dom": "16.14.0",

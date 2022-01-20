@@ -8,7 +8,7 @@ examples:
   - button_accessibility: Button Accessibility Options
   - button_options: Button Additional Options
   react:
-  - button_default: Button Variants
+  - button_default: Button Sizes
   - button_full_width: Button Full Width
   - button_link: Button Links
   - button_loading: Button Loading

@@ -23,7 +23,8 @@
     "browser": true,
     "node": true,
     "mocha": true,
-    "es6": true
+    "es6": true,
+    "jsx-control-statements/jsx-control-statements": true
   },
   "globals": {
     "expect": "readonly",
@@ -61,6 +62,7 @@
     }],
     "space-in-parens": ["error", "never"],
     "space-infix-ops": 2,
+    "jsx-control-statements/jsx-jcs-no-undef": 1,
     "jsx-control-statements/jsx-use-if-tag": 2,
     "jsx-quotes": 2,
     "react/forbid-prop-types": 2,
