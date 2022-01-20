@@ -9,7 +9,7 @@ examples:
   - button_options: Button Additional Options
   - button_size: Button Size
   react:
-  - button_default: Button Sizes
+  - button_default: Button Variants
   - button_full_width: Button Full Width
   - button_link: Button Links
   - button_loading: Button Loading
