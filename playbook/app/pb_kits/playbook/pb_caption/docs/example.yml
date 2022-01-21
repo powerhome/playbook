@@ -2,9 +2,9 @@ examples:
   rails:
     - caption_light: Default
     - caption_block: Block
-    - caption_example: Color Variations
+    - caption_colors: Colors
 
   react:
     - caption_light: Default
     - caption_block: Block
-    - caption_example: Color Variations
+    - caption_colors: Colors
