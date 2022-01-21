@@ -12,7 +12,7 @@ type BodyProps = {
   aria?: object,
   className?: string,
   children?: array<React.ReactChild>,
-  color?: 'default' | 'light' | 'lighter',
+  color?: 'default' | 'light' | 'lighter' | 'link',
   dark?: boolean,
   data?: object,
   highlightedText?: array<string>,
