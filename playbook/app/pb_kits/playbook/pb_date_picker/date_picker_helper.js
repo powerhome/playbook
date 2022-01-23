@@ -52,18 +52,9 @@ const datePickerHelper = (config) => {
     }
   }
 
-  const setMonthAndYearPlugin = () => {
-    if (plugins === false) {
-      return []
-    } else {
-      return [monthSelectPlugin({
-        shorthand: true,
-        dateFormat: 'F Y',
-        altFormat: 'F Y',
-        theme: 'light',
-      })]
-    }
-  }
+  const setMonthAndYearPlugin = () => (
+    plugins ? [ monthSelectPlugin({ shorthand: true, dateFormat: 'F Y', altFormat: 'F Y' }) ] : []
+  )
 
   // ===========================================================
   // |             Flatpickr initializer w/ config             |
