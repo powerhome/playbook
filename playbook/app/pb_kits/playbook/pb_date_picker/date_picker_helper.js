@@ -12,9 +12,9 @@ const datePickerHelper = (config) => {
     maxDate,
     minDate,
     mode,
-    monthSelect,
     onChange = () => {},
     pickerId,
+    plugins,
     required,
     yearRange,
   } = config
@@ -53,7 +53,7 @@ const datePickerHelper = (config) => {
   }
 
   const setMonthAndYearPlugin = () => {
-    if (monthSelect === false) {
+    if (plugins === false) {
       return []
     } else {
       return [monthSelectPlugin({

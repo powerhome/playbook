@@ -36,11 +36,11 @@ type DatePickerProps = {
   maxDate: String,
   minDate: String,
   mode?: String,
-  monthSelect: Boolean,
   name: String,
   onChange: (String) => void,
   pickerId?: String,
   placeholder?: String,
+  plugins?: Boolean,
   type?: String,
   yearRange?: Array,
 }
@@ -70,11 +70,11 @@ const DatePicker = (props: DatePickerProps) => {
     maxDate,
     minDate,
     mode = 'single',
-    monthSelect = false,
     name,
     onChange = () => {},
     pickerId,
     placeholder = 'Select Date',
+    plugins = false,
     yearRange = [ 1900, 2100 ],
   } = props
 
@@ -100,9 +100,9 @@ const DatePicker = (props: DatePickerProps) => {
       maxDate: maxDate,
       minDate: minDate,
       mode: mode,
-      monthSelect: monthSelect,
       onChange: onChange,
       pickerId: pickerId,
+      plugins: plugins,
       yearRange: yearRange,
     })
   }, [])
