@@ -15,6 +15,7 @@ type BackgroundProps = {
   imageUrl?: string,
   padding?: 'none' | 'xs' | 'sm' | 'md' | 'lg' | 'xl',
   tag?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p' | 'span' | 'div',
+  transition?: 'fade' | 'blur' | 'scale',
 }
 
 const Background = (props: BackgroundProps) => {
@@ -27,12 +28,13 @@ const Background = (props: BackgroundProps) => {
     id,
     imageUrl = '',
     tag = 'div',
+    transition = null,
   } = props
 
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
 
-  const classes = classnames(buildCss('pb_background_kit'), globalProps(props), `pb_background_color_${backgroundColor}`, className)
+  const classes = classnames(buildCss('pb_background_kit'), 'lazyload', transition, globalProps(props), `pb_background_color_${backgroundColor}`, className)
   const Tag = `${tag}`
   const backgroundStyle = {
     backgroundImage: `url(${imageUrl})`,
