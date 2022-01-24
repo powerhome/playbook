@@ -1,26 +1,26 @@
 @import "../tokens/titles";
 @import "../tokens/colors";
+@import './title_mixin';
 
 [class^=pb_title_kit]{
   &[class*=_1] {
     @include pb_title_1;
+    @include title_colors;
   }
 
   &[class*=_2] {
     @include pb_title_2;
+    @include title_colors;
   }
 
   &[class*=_3] {
     @include pb_title_3;
+    @include title_colors;
   }
 
   &[class*=_4] {
     @include pb_title_4;
-
-    &[class*=_link]  {
-      color: $primary;
-    }
-
+    @include title_colors;
   }
 
   &.dark {

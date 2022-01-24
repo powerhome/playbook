@@ -233,6 +233,36 @@ Background colors ------------------*/
     font-size: 16px;
     font-weight: 400;
     font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif; }
+  [class^=pb_body_kit][class*=_link] {
+    line-height: 1.4;
+    color: #0056CF;
+    font-size: 16px;
+    font-weight: 400;
+    font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif; }
+  [class^=pb_body_kit][class*=_default_default] {
+    line-height: 1.4;
+    color: #242B42;
+    font-size: 16px;
+    font-weight: 400;
+    font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif; }
+  [class^=pb_body_kit][class*=_default_negative] {
+    line-height: 1.4;
+    color: #FF2229;
+    font-size: 16px;
+    font-weight: 400;
+    font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif; }
+  [class^=pb_body_kit][class*=_default_dark_negative] {
+    line-height: 1.4;
+    color: #ff464c;
+    font-size: 16px;
+    font-weight: 400;
+    font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif; }
+  [class^=pb_body_kit][class*=_default_positive] {
+    line-height: 1.4;
+    color: #00CA74;
+    font-size: 16px;
+    font-weight: 400;
+    font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif; }
   [class^=pb_body_kit][class*=_default][class*=dark] {
     line-height: 1.4;
     color: #FFFFFF;
@@ -1107,14 +1137,18 @@ Background colors ------------------*/
     letter-spacing: 0.07em;
     text-transform: none;
     letter-spacing: unset; }
-    [class^="pb_caption_kit"][class^="pb_caption_kit_xs"][class*="_link"] {
-      color: #0056CF; }
-  [class^="pb_caption_kit"][class*="light"] {
-    color: #687887; }
   [class^="pb_caption_kit"][class*="default"] {
     color: #242B42; }
+  [class^="pb_caption_kit"][class*="light"] {
+    color: #687887; }
   [class^="pb_caption_kit"][class*="link"] {
     color: #0056CF; }
+  [class^="pb_caption_kit"][class*="lighter"] {
+    color: #C1CDD6; }
+  [class^="pb_caption_kit"][class*="success"] {
+    color: #00CA74; }
+  [class^="pb_caption_kit"][class*="error"] {
+    color: #FF2229; }
   [class^="pb_caption_kit"].dark {
     color: rgba(255, 255, 255, 0.6); }
     [class^="pb_caption_kit"].dark[class*="_default"] {
@@ -2065,6 +2099,33 @@ Background colors ------------------*/
 /* Link colors ------------------------*/
 /* Product colors ---------------------*/
 /* Category colors ---------------------*/
+/*=====================================
+Base colors should not be documented.
+Only document color use.
+
+Colors -----------------------------*/
+/* Specialty Gradient -----------------*/
+/* Interface colors -------------------*/
+/* Main colors ------------------------*/
+/*=====================================
+
+Background colors ------------------*/
+/* Card colors ------------------*/
+/* Active colors ----------------------*/
+/* Hover colors -----------------------*/
+/* Focus colors -----------------------*/
+/* Border colors ----------------------*/
+/* Shadow colors ----------------------*/
+/* Text colors ------------------------*/
+/* Data colors ------------------------*/
+/* Status colors ----------------------*/
+/* Link colors ------------------------*/
+/* Product colors ---------------------*/
+/* Category colors ---------------------*/
+/* CLEAN UP AND REMOVE */
+/* Headings */
+/* Standard Font Weights */
+/* Non_Standard Font Weights */
 [class^=pb_title_kit][class*=_1] {
   font-size: 48px;
   letter-spacing: -0.03em;
@@ -2074,6 +2135,18 @@ Background colors ------------------*/
   line-height: 1.2;
   font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif;
   letter-spacing: -0.03em; }
+  [class^=pb_title_kit][class*=_1][class*=_default] {
+    color: #242B42; }
+  [class^=pb_title_kit][class*=_1][class*=_light] {
+    color: #687887; }
+  [class^=pb_title_kit][class*=_1][class*=_lighter] {
+    color: #C1CDD6; }
+  [class^=pb_title_kit][class*=_1][class*=_success] {
+    color: #00CA74; }
+  [class^=pb_title_kit][class*=_1][class*=_error] {
+    color: #FF2229; }
+  [class^=pb_title_kit][class*=_1][class*=_link] {
+    color: #0056CF; }
 
 [class^=pb_title_kit][class*=_2] {
   font-size: 34px;
@@ -2083,6 +2156,18 @@ Background colors ------------------*/
   margin: 0;
   line-height: 0.96;
   font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif; }
+  [class^=pb_title_kit][class*=_2][class*=_default] {
+    color: #242B42; }
+  [class^=pb_title_kit][class*=_2][class*=_light] {
+    color: #687887; }
+  [class^=pb_title_kit][class*=_2][class*=_lighter] {
+    color: #C1CDD6; }
+  [class^=pb_title_kit][class*=_2][class*=_success] {
+    color: #00CA74; }
+  [class^=pb_title_kit][class*=_2][class*=_error] {
+    color: #FF2229; }
+  [class^=pb_title_kit][class*=_2][class*=_link] {
+    color: #0056CF; }
 
 [class^=pb_title_kit][class*=_3] {
   font-size: 28px;
@@ -2092,6 +2177,18 @@ Background colors ------------------*/
   margin: 0;
   line-height: 1.2;
   font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif; }
+  [class^=pb_title_kit][class*=_3][class*=_default] {
+    color: #242B42; }
+  [class^=pb_title_kit][class*=_3][class*=_light] {
+    color: #687887; }
+  [class^=pb_title_kit][class*=_3][class*=_lighter] {
+    color: #C1CDD6; }
+  [class^=pb_title_kit][class*=_3][class*=_success] {
+    color: #00CA74; }
+  [class^=pb_title_kit][class*=_3][class*=_error] {
+    color: #FF2229; }
+  [class^=pb_title_kit][class*=_3][class*=_link] {
+    color: #0056CF; }
 
 [class^=pb_title_kit][class*=_4] {
   font-size: 16px;
@@ -2101,6 +2198,16 @@ Background colors ------------------*/
   margin: 0;
   line-height: 1.2;
   font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif; }
+  [class^=pb_title_kit][class*=_4][class*=_default] {
+    color: #242B42; }
+  [class^=pb_title_kit][class*=_4][class*=_light] {
+    color: #687887; }
+  [class^=pb_title_kit][class*=_4][class*=_lighter] {
+    color: #C1CDD6; }
+  [class^=pb_title_kit][class*=_4][class*=_success] {
+    color: #00CA74; }
+  [class^=pb_title_kit][class*=_4][class*=_error] {
+    color: #FF2229; }
   [class^=pb_title_kit][class*=_4][class*=_link] {
     color: #0056CF; }
 
@@ -3074,14 +3181,18 @@ Background colors ------------------*/
     letter-spacing: 0.07em;
     text-transform: none;
     letter-spacing: unset; }
-    [class^="pb_caption_kit"][class^="pb_caption_kit_xs"][class*="_link"] {
-      color: #0056CF; }
-  [class^="pb_caption_kit"][class*="light"] {
-    color: #687887; }
   [class^="pb_caption_kit"][class*="default"] {
     color: #242B42; }
+  [class^="pb_caption_kit"][class*="light"] {
+    color: #687887; }
   [class^="pb_caption_kit"][class*="link"] {
     color: #0056CF; }
+  [class^="pb_caption_kit"][class*="lighter"] {
+    color: #C1CDD6; }
+  [class^="pb_caption_kit"][class*="success"] {
+    color: #00CA74; }
+  [class^="pb_caption_kit"][class*="error"] {
+    color: #FF2229; }
   [class^="pb_caption_kit"].dark {
     color: rgba(255, 255, 255, 0.6); }
     [class^="pb_caption_kit"].dark[class*="_default"] {
@@ -3502,6 +3613,36 @@ Background colors ------------------*/
     font-size: 16px;
     font-weight: 400;
     font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif; }
+  [class^=pb_body_kit][class*=_link] {
+    line-height: 1.4;
+    color: #0056CF;
+    font-size: 16px;
+    font-weight: 400;
+    font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif; }
+  [class^=pb_body_kit][class*=_default_default] {
+    line-height: 1.4;
+    color: #242B42;
+    font-size: 16px;
+    font-weight: 400;
+    font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif; }
+  [class^=pb_body_kit][class*=_default_negative] {
+    line-height: 1.4;
+    color: #FF2229;
+    font-size: 16px;
+    font-weight: 400;
+    font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif; }
+  [class^=pb_body_kit][class*=_default_dark_negative] {
+    line-height: 1.4;
+    color: #ff464c;
+    font-size: 16px;
+    font-weight: 400;
+    font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif; }
+  [class^=pb_body_kit][class*=_default_positive] {
+    line-height: 1.4;
+    color: #00CA74;
+    font-size: 16px;
+    font-weight: 400;
+    font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif; }
   [class^=pb_body_kit][class*=_default][class*=dark] {
     line-height: 1.4;
     color: #FFFFFF;
@@ -3701,6 +3842,33 @@ Background colors ------------------*/
 /* Link colors ------------------------*/
 /* Product colors ---------------------*/
 /* Category colors ---------------------*/
+/*=====================================
+Base colors should not be documented.
+Only document color use.
+
+Colors -----------------------------*/
+/* Specialty Gradient -----------------*/
+/* Interface colors -------------------*/
+/* Main colors ------------------------*/
+/*=====================================
+
+Background colors ------------------*/
+/* Card colors ------------------*/
+/* Active colors ----------------------*/
+/* Hover colors -----------------------*/
+/* Focus colors -----------------------*/
+/* Border colors ----------------------*/
+/* Shadow colors ----------------------*/
+/* Text colors ------------------------*/
+/* Data colors ------------------------*/
+/* Status colors ----------------------*/
+/* Link colors ------------------------*/
+/* Product colors ---------------------*/
+/* Category colors ---------------------*/
+/* CLEAN UP AND REMOVE */
+/* Headings */
+/* Standard Font Weights */
+/* Non_Standard Font Weights */
 [class^=pb_title_kit][class*=_1] {
   font-size: 48px;
   letter-spacing: -0.03em;
@@ -3710,6 +3878,18 @@ Background colors ------------------*/
   line-height: 1.2;
   font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif;
   letter-spacing: -0.03em; }
+  [class^=pb_title_kit][class*=_1][class*=_default] {
+    color: #242B42; }
+  [class^=pb_title_kit][class*=_1][class*=_light] {
+    color: #687887; }
+  [class^=pb_title_kit][class*=_1][class*=_lighter] {
+    color: #C1CDD6; }
+  [class^=pb_title_kit][class*=_1][class*=_success] {
+    color: #00CA74; }
+  [class^=pb_title_kit][class*=_1][class*=_error] {
+    color: #FF2229; }
+  [class^=pb_title_kit][class*=_1][class*=_link] {
+    color: #0056CF; }
 
 [class^=pb_title_kit][class*=_2] {
   font-size: 34px;
@@ -3719,6 +3899,18 @@ Background colors ------------------*/
   margin: 0;
   line-height: 0.96;
   font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif; }
+  [class^=pb_title_kit][class*=_2][class*=_default] {
+    color: #242B42; }
+  [class^=pb_title_kit][class*=_2][class*=_light] {
+    color: #687887; }
+  [class^=pb_title_kit][class*=_2][class*=_lighter] {
+    color: #C1CDD6; }
+  [class^=pb_title_kit][class*=_2][class*=_success] {
+    color: #00CA74; }
+  [class^=pb_title_kit][class*=_2][class*=_error] {
+    color: #FF2229; }
+  [class^=pb_title_kit][class*=_2][class*=_link] {
+    color: #0056CF; }
 
 [class^=pb_title_kit][class*=_3] {
   font-size: 28px;
@@ -3728,6 +3920,18 @@ Background colors ------------------*/
   margin: 0;
   line-height: 1.2;
   font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif; }
+  [class^=pb_title_kit][class*=_3][class*=_default] {
+    color: #242B42; }
+  [class^=pb_title_kit][class*=_3][class*=_light] {
+    color: #687887; }
+  [class^=pb_title_kit][class*=_3][class*=_lighter] {
+    color: #C1CDD6; }
+  [class^=pb_title_kit][class*=_3][class*=_success] {
+    color: #00CA74; }
+  [class^=pb_title_kit][class*=_3][class*=_error] {
+    color: #FF2229; }
+  [class^=pb_title_kit][class*=_3][class*=_link] {
+    color: #0056CF; }
 
 [class^=pb_title_kit][class*=_4] {
   font-size: 16px;
@@ -3737,6 +3941,16 @@ Background colors ------------------*/
   margin: 0;
   line-height: 1.2;
   font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif; }
+  [class^=pb_title_kit][class*=_4][class*=_default] {
+    color: #242B42; }
+  [class^=pb_title_kit][class*=_4][class*=_light] {
+    color: #687887; }
+  [class^=pb_title_kit][class*=_4][class*=_lighter] {
+    color: #C1CDD6; }
+  [class^=pb_title_kit][class*=_4][class*=_success] {
+    color: #00CA74; }
+  [class^=pb_title_kit][class*=_4][class*=_error] {
+    color: #FF2229; }
   [class^=pb_title_kit][class*=_4][class*=_link] {
     color: #0056CF; }
 
@@ -3850,6 +4064,36 @@ Background colors ------------------*/
   [class^=pb_body_kit][class*=_lighter] {
     line-height: 1.4;
     color: #C1CDD6;
+    font-size: 16px;
+    font-weight: 400;
+    font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif; }
+  [class^=pb_body_kit][class*=_default_default] {
+    line-height: 1.4;
+    color: #242B42;
+    font-size: 16px;
+    font-weight: 400;
+    font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif; }
+  [class^=pb_body_kit][class*=_default_negative] {
+    line-height: 1.4;
+    color: #FF2229;
+    font-size: 16px;
+    font-weight: 400;
+    font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif; }
+  [class^=pb_body_kit][class*=_default_dark_negative] {
+    line-height: 1.4;
+    color: #ff464c;
+    font-size: 16px;
+    font-weight: 400;
+    font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif; }
+  [class^=pb_body_kit][class*=_default_positive] {
+    line-height: 1.4;
+    color: #00CA74;
+    font-size: 16px;
+    font-weight: 400;
+    font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif; }
+  [class^=pb_body_kit][class*=_link] {
+    line-height: 1.4;
+    color: #0056CF;
     font-size: 16px;
     font-weight: 400;
     font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif; }
@@ -4064,6 +4308,36 @@ Background colors ------------------*/
   [class^=pb_body_kit][class*=_lighter] {
     line-height: 1.4;
     color: #C1CDD6;
+    font-size: 16px;
+    font-weight: 400;
+    font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif; }
+  [class^=pb_body_kit][class*=_default_default] {
+    line-height: 1.4;
+    color: #242B42;
+    font-size: 16px;
+    font-weight: 400;
+    font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif; }
+  [class^=pb_body_kit][class*=_default_negative] {
+    line-height: 1.4;
+    color: #FF2229;
+    font-size: 16px;
+    font-weight: 400;
+    font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif; }
+  [class^=pb_body_kit][class*=_default_dark_negative] {
+    line-height: 1.4;
+    color: #ff464c;
+    font-size: 16px;
+    font-weight: 400;
+    font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif; }
+  [class^=pb_body_kit][class*=_default_positive] {
+    line-height: 1.4;
+    color: #00CA74;
+    font-size: 16px;
+    font-weight: 400;
+    font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif; }
+  [class^=pb_body_kit][class*=_link] {
+    line-height: 1.4;
+    color: #0056CF;
     font-size: 16px;
     font-weight: 400;
     font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif; }
@@ -4256,6 +4530,33 @@ Background colors ------------------*/
 /* Link colors ------------------------*/
 /* Product colors ---------------------*/
 /* Category colors ---------------------*/
+/*=====================================
+Base colors should not be documented.
+Only document color use.
+
+Colors -----------------------------*/
+/* Specialty Gradient -----------------*/
+/* Interface colors -------------------*/
+/* Main colors ------------------------*/
+/*=====================================
+
+Background colors ------------------*/
+/* Card colors ------------------*/
+/* Active colors ----------------------*/
+/* Hover colors -----------------------*/
+/* Focus colors -----------------------*/
+/* Border colors ----------------------*/
+/* Shadow colors ----------------------*/
+/* Text colors ------------------------*/
+/* Data colors ------------------------*/
+/* Status colors ----------------------*/
+/* Link colors ------------------------*/
+/* Product colors ---------------------*/
+/* Category colors ---------------------*/
+/* CLEAN UP AND REMOVE */
+/* Headings */
+/* Standard Font Weights */
+/* Non_Standard Font Weights */
 [class^=pb_title_kit][class*=_1] {
   font-size: 48px;
   letter-spacing: -0.03em;
@@ -4265,6 +4566,18 @@ Background colors ------------------*/
   line-height: 1.2;
   font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif;
   letter-spacing: -0.03em; }
+  [class^=pb_title_kit][class*=_1][class*=_default] {
+    color: #242B42; }
+  [class^=pb_title_kit][class*=_1][class*=_light] {
+    color: #687887; }
+  [class^=pb_title_kit][class*=_1][class*=_lighter] {
+    color: #C1CDD6; }
+  [class^=pb_title_kit][class*=_1][class*=_success] {
+    color: #00CA74; }
+  [class^=pb_title_kit][class*=_1][class*=_error] {
+    color: #FF2229; }
+  [class^=pb_title_kit][class*=_1][class*=_link] {
+    color: #0056CF; }
 
 [class^=pb_title_kit][class*=_2] {
   font-size: 34px;
@@ -4274,6 +4587,18 @@ Background colors ------------------*/
   margin: 0;
   line-height: 0.96;
   font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif; }
+  [class^=pb_title_kit][class*=_2][class*=_default] {
+    color: #242B42; }
+  [class^=pb_title_kit][class*=_2][class*=_light] {
+    color: #687887; }
+  [class^=pb_title_kit][class*=_2][class*=_lighter] {
+    color: #C1CDD6; }
+  [class^=pb_title_kit][class*=_2][class*=_success] {
+    color: #00CA74; }
+  [class^=pb_title_kit][class*=_2][class*=_error] {
+    color: #FF2229; }
+  [class^=pb_title_kit][class*=_2][class*=_link] {
+    color: #0056CF; }
 
 [class^=pb_title_kit][class*=_3] {
   font-size: 28px;
@@ -4283,6 +4608,18 @@ Background colors ------------------*/
   margin: 0;
   line-height: 1.2;
   font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif; }
+  [class^=pb_title_kit][class*=_3][class*=_default] {
+    color: #242B42; }
+  [class^=pb_title_kit][class*=_3][class*=_light] {
+    color: #687887; }
+  [class^=pb_title_kit][class*=_3][class*=_lighter] {
+    color: #C1CDD6; }
+  [class^=pb_title_kit][class*=_3][class*=_success] {
+    color: #00CA74; }
+  [class^=pb_title_kit][class*=_3][class*=_error] {
+    color: #FF2229; }
+  [class^=pb_title_kit][class*=_3][class*=_link] {
+    color: #0056CF; }
 
 [class^=pb_title_kit][class*=_4] {
   font-size: 16px;
@@ -4292,6 +4629,16 @@ Background colors ------------------*/
   margin: 0;
   line-height: 1.2;
   font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif; }
+  [class^=pb_title_kit][class*=_4][class*=_default] {
+    color: #242B42; }
+  [class^=pb_title_kit][class*=_4][class*=_light] {
+    color: #687887; }
+  [class^=pb_title_kit][class*=_4][class*=_lighter] {
+    color: #C1CDD6; }
+  [class^=pb_title_kit][class*=_4][class*=_success] {
+    color: #00CA74; }
+  [class^=pb_title_kit][class*=_4][class*=_error] {
+    color: #FF2229; }
   [class^=pb_title_kit][class*=_4][class*=_link] {
     color: #0056CF; }
 
@@ -5646,6 +5993,33 @@ Background colors ------------------*/
 /* Link colors ------------------------*/
 /* Product colors ---------------------*/
 /* Category colors ---------------------*/
+/*=====================================
+Base colors should not be documented.
+Only document color use.
+
+Colors -----------------------------*/
+/* Specialty Gradient -----------------*/
+/* Interface colors -------------------*/
+/* Main colors ------------------------*/
+/*=====================================
+
+Background colors ------------------*/
+/* Card colors ------------------*/
+/* Active colors ----------------------*/
+/* Hover colors -----------------------*/
+/* Focus colors -----------------------*/
+/* Border colors ----------------------*/
+/* Shadow colors ----------------------*/
+/* Text colors ------------------------*/
+/* Data colors ------------------------*/
+/* Status colors ----------------------*/
+/* Link colors ------------------------*/
+/* Product colors ---------------------*/
+/* Category colors ---------------------*/
+/* CLEAN UP AND REMOVE */
+/* Headings */
+/* Standard Font Weights */
+/* Non_Standard Font Weights */
 [class^=pb_title_kit][class*=_1] {
   font-size: 48px;
   letter-spacing: -0.03em;
@@ -5655,6 +6029,18 @@ Background colors ------------------*/
   line-height: 1.2;
   font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif;
   letter-spacing: -0.03em; }
+  [class^=pb_title_kit][class*=_1][class*=_default] {
+    color: #242B42; }
+  [class^=pb_title_kit][class*=_1][class*=_light] {
+    color: #687887; }
+  [class^=pb_title_kit][class*=_1][class*=_lighter] {
+    color: #C1CDD6; }
+  [class^=pb_title_kit][class*=_1][class*=_success] {
+    color: #00CA74; }
+  [class^=pb_title_kit][class*=_1][class*=_error] {
+    color: #FF2229; }
+  [class^=pb_title_kit][class*=_1][class*=_link] {
+    color: #0056CF; }
 
 [class^=pb_title_kit][class*=_2] {
   font-size: 34px;
@@ -5664,6 +6050,18 @@ Background colors ------------------*/
   margin: 0;
   line-height: 0.96;
   font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif; }
+  [class^=pb_title_kit][class*=_2][class*=_default] {
+    color: #242B42; }
+  [class^=pb_title_kit][class*=_2][class*=_light] {
+    color: #687887; }
+  [class^=pb_title_kit][class*=_2][class*=_lighter] {
+    color: #C1CDD6; }
+  [class^=pb_title_kit][class*=_2][class*=_success] {
+    color: #00CA74; }
+  [class^=pb_title_kit][class*=_2][class*=_error] {
+    color: #FF2229; }
+  [class^=pb_title_kit][class*=_2][class*=_link] {
+    color: #0056CF; }
 
 [class^=pb_title_kit][class*=_3] {
   font-size: 28px;
@@ -5673,6 +6071,18 @@ Background colors ------------------*/
   margin: 0;
   line-height: 1.2;
   font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif; }
+  [class^=pb_title_kit][class*=_3][class*=_default] {
+    color: #242B42; }
+  [class^=pb_title_kit][class*=_3][class*=_light] {
+    color: #687887; }
+  [class^=pb_title_kit][class*=_3][class*=_lighter] {
+    color: #C1CDD6; }
+  [class^=pb_title_kit][class*=_3][class*=_success] {
+    color: #00CA74; }
+  [class^=pb_title_kit][class*=_3][class*=_error] {
+    color: #FF2229; }
+  [class^=pb_title_kit][class*=_3][class*=_link] {
+    color: #0056CF; }
 
 [class^=pb_title_kit][class*=_4] {
   font-size: 16px;
@@ -5682,6 +6092,16 @@ Background colors ------------------*/
   margin: 0;
   line-height: 1.2;
   font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif; }
+  [class^=pb_title_kit][class*=_4][class*=_default] {
+    color: #242B42; }
+  [class^=pb_title_kit][class*=_4][class*=_light] {
+    color: #687887; }
+  [class^=pb_title_kit][class*=_4][class*=_lighter] {
+    color: #C1CDD6; }
+  [class^=pb_title_kit][class*=_4][class*=_success] {
+    color: #00CA74; }
+  [class^=pb_title_kit][class*=_4][class*=_error] {
+    color: #FF2229; }
   [class^=pb_title_kit][class*=_4][class*=_link] {
     color: #0056CF; }
 
@@ -5758,14 +6178,18 @@ Background colors ------------------*/
     letter-spacing: 0.07em;
     text-transform: none;
     letter-spacing: unset; }
-    [class^="pb_caption_kit"][class^="pb_caption_kit_xs"][class*="_link"] {
-      color: #0056CF; }
-  [class^="pb_caption_kit"][class*="light"] {
-    color: #687887; }
   [class^="pb_caption_kit"][class*="default"] {
     color: #242B42; }
+  [class^="pb_caption_kit"][class*="light"] {
+    color: #687887; }
   [class^="pb_caption_kit"][class*="link"] {
     color: #0056CF; }
+  [class^="pb_caption_kit"][class*="lighter"] {
+    color: #C1CDD6; }
+  [class^="pb_caption_kit"][class*="success"] {
+    color: #00CA74; }
+  [class^="pb_caption_kit"][class*="error"] {
+    color: #FF2229; }
   [class^="pb_caption_kit"].dark {
     color: rgba(255, 255, 255, 0.6); }
     [class^="pb_caption_kit"].dark[class*="_default"] {
@@ -6391,6 +6815,36 @@ Background colors ------------------*/
   [class^=pb_body_kit][class*=_lighter] {
     line-height: 1.4;
     color: #C1CDD6;
+    font-size: 16px;
+    font-weight: 400;
+    font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif; }
+  [class^=pb_body_kit][class*=_default_default] {
+    line-height: 1.4;
+    color: #242B42;
+    font-size: 16px;
+    font-weight: 400;
+    font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif; }
+  [class^=pb_body_kit][class*=_default_negative] {
+    line-height: 1.4;
+    color: #FF2229;
+    font-size: 16px;
+    font-weight: 400;
+    font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif; }
+  [class^=pb_body_kit][class*=_default_dark_negative] {
+    line-height: 1.4;
+    color: #ff464c;
+    font-size: 16px;
+    font-weight: 400;
+    font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif; }
+  [class^=pb_body_kit][class*=_default_positive] {
+    line-height: 1.4;
+    color: #00CA74;
+    font-size: 16px;
+    font-weight: 400;
+    font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif; }
+  [class^=pb_body_kit][class*=_link] {
+    line-height: 1.4;
+    color: #0056CF;
     font-size: 16px;
     font-weight: 400;
     font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif; }
@@ -7682,6 +8136,33 @@ Background colors ------------------*/
 /* Link colors ------------------------*/
 /* Product colors ---------------------*/
 /* Category colors ---------------------*/
+/*=====================================
+Base colors should not be documented.
+Only document color use.
+
+Colors -----------------------------*/
+/* Specialty Gradient -----------------*/
+/* Interface colors -------------------*/
+/* Main colors ------------------------*/
+/*=====================================
+
+Background colors ------------------*/
+/* Card colors ------------------*/
+/* Active colors ----------------------*/
+/* Hover colors -----------------------*/
+/* Focus colors -----------------------*/
+/* Border colors ----------------------*/
+/* Shadow colors ----------------------*/
+/* Text colors ------------------------*/
+/* Data colors ------------------------*/
+/* Status colors ----------------------*/
+/* Link colors ------------------------*/
+/* Product colors ---------------------*/
+/* Category colors ---------------------*/
+/* CLEAN UP AND REMOVE */
+/* Headings */
+/* Standard Font Weights */
+/* Non_Standard Font Weights */
 [class^=pb_title_kit][class*=_1] {
   font-size: 48px;
   letter-spacing: -0.03em;
@@ -7691,6 +8172,18 @@ Background colors ------------------*/
   line-height: 1.2;
   font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif;
   letter-spacing: -0.03em; }
+  [class^=pb_title_kit][class*=_1][class*=_default] {
+    color: #242B42; }
+  [class^=pb_title_kit][class*=_1][class*=_light] {
+    color: #687887; }
+  [class^=pb_title_kit][class*=_1][class*=_lighter] {
+    color: #C1CDD6; }
+  [class^=pb_title_kit][class*=_1][class*=_success] {
+    color: #00CA74; }
+  [class^=pb_title_kit][class*=_1][class*=_error] {
+    color: #FF2229; }
+  [class^=pb_title_kit][class*=_1][class*=_link] {
+    color: #0056CF; }
 
 [class^=pb_title_kit][class*=_2] {
   font-size: 34px;
@@ -7700,6 +8193,18 @@ Background colors ------------------*/
   margin: 0;
   line-height: 0.96;
   font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif; }
+  [class^=pb_title_kit][class*=_2][class*=_default] {
+    color: #242B42; }
+  [class^=pb_title_kit][class*=_2][class*=_light] {
+    color: #687887; }
+  [class^=pb_title_kit][class*=_2][class*=_lighter] {
+    color: #C1CDD6; }
+  [class^=pb_title_kit][class*=_2][class*=_success] {
+    color: #00CA74; }
+  [class^=pb_title_kit][class*=_2][class*=_error] {
+    color: #FF2229; }
+  [class^=pb_title_kit][class*=_2][class*=_link] {
+    color: #0056CF; }
 
 [class^=pb_title_kit][class*=_3] {
   font-size: 28px;
@@ -7709,6 +8214,18 @@ Background colors ------------------*/
   margin: 0;
   line-height: 1.2;
   font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif; }
+  [class^=pb_title_kit][class*=_3][class*=_default] {
+    color: #242B42; }
+  [class^=pb_title_kit][class*=_3][class*=_light] {
+    color: #687887; }
+  [class^=pb_title_kit][class*=_3][class*=_lighter] {
+    color: #C1CDD6; }
+  [class^=pb_title_kit][class*=_3][class*=_success] {
+    color: #00CA74; }
+  [class^=pb_title_kit][class*=_3][class*=_error] {
+    color: #FF2229; }
+  [class^=pb_title_kit][class*=_3][class*=_link] {
+    color: #0056CF; }
 
 [class^=pb_title_kit][class*=_4] {
   font-size: 16px;
@@ -7718,6 +8235,16 @@ Background colors ------------------*/
   margin: 0;
   line-height: 1.2;
   font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif; }
+  [class^=pb_title_kit][class*=_4][class*=_default] {
+    color: #242B42; }
+  [class^=pb_title_kit][class*=_4][class*=_light] {
+    color: #687887; }
+  [class^=pb_title_kit][class*=_4][class*=_lighter] {
+    color: #C1CDD6; }
+  [class^=pb_title_kit][class*=_4][class*=_success] {
+    color: #00CA74; }
+  [class^=pb_title_kit][class*=_4][class*=_error] {
+    color: #FF2229; }
   [class^=pb_title_kit][class*=_4][class*=_link] {
     color: #0056CF; }
 
@@ -7794,14 +8321,18 @@ Background colors ------------------*/
     letter-spacing: 0.07em;
     text-transform: none;
     letter-spacing: unset; }
-    [class^="pb_caption_kit"][class^="pb_caption_kit_xs"][class*="_link"] {
-      color: #0056CF; }
-  [class^="pb_caption_kit"][class*="light"] {
-    color: #687887; }
   [class^="pb_caption_kit"][class*="default"] {
     color: #242B42; }
+  [class^="pb_caption_kit"][class*="light"] {
+    color: #687887; }
   [class^="pb_caption_kit"][class*="link"] {
     color: #0056CF; }
+  [class^="pb_caption_kit"][class*="lighter"] {
+    color: #C1CDD6; }
+  [class^="pb_caption_kit"][class*="success"] {
+    color: #00CA74; }
+  [class^="pb_caption_kit"][class*="error"] {
+    color: #FF2229; }
   [class^="pb_caption_kit"].dark {
     color: rgba(255, 255, 255, 0.6); }
     [class^="pb_caption_kit"].dark[class*="_default"] {
@@ -8107,6 +8638,36 @@ Background colors ------------------*/
   [class^=pb_body_kit][class*=_lighter] {
     line-height: 1.4;
     color: #C1CDD6;
+    font-size: 16px;
+    font-weight: 400;
+    font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif; }
+  [class^=pb_body_kit][class*=_default_default] {
+    line-height: 1.4;
+    color: #242B42;
+    font-size: 16px;
+    font-weight: 400;
+    font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif; }
+  [class^=pb_body_kit][class*=_default_negative] {
+    line-height: 1.4;
+    color: #FF2229;
+    font-size: 16px;
+    font-weight: 400;
+    font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif; }
+  [class^=pb_body_kit][class*=_default_dark_negative] {
+    line-height: 1.4;
+    color: #ff464c;
+    font-size: 16px;
+    font-weight: 400;
+    font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif; }
+  [class^=pb_body_kit][class*=_default_positive] {
+    line-height: 1.4;
+    color: #00CA74;
+    font-size: 16px;
+    font-weight: 400;
+    font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif; }
+  [class^=pb_body_kit][class*=_link] {
+    line-height: 1.4;
+    color: #0056CF;
     font-size: 16px;
     font-weight: 400;
     font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif; }
@@ -8481,14 +9042,18 @@ Background colors ------------------*/
     letter-spacing: 0.07em;
     text-transform: none;
     letter-spacing: unset; }
-    [class^="pb_caption_kit"][class^="pb_caption_kit_xs"][class*="_link"] {
-      color: #0056CF; }
-  [class^="pb_caption_kit"][class*="light"] {
-    color: #687887; }
   [class^="pb_caption_kit"][class*="default"] {
     color: #242B42; }
+  [class^="pb_caption_kit"][class*="light"] {
+    color: #687887; }
   [class^="pb_caption_kit"][class*="link"] {
     color: #0056CF; }
+  [class^="pb_caption_kit"][class*="lighter"] {
+    color: #C1CDD6; }
+  [class^="pb_caption_kit"][class*="success"] {
+    color: #00CA74; }
+  [class^="pb_caption_kit"][class*="error"] {
+    color: #FF2229; }
   [class^="pb_caption_kit"].dark {
     color: rgba(255, 255, 255, 0.6); }
     [class^="pb_caption_kit"].dark[class*="_default"] {
@@ -8617,6 +9182,36 @@ Background colors ------------------*/
   [class^=pb_body_kit][class*=_lighter] {
     line-height: 1.4;
     color: #C1CDD6;
+    font-size: 16px;
+    font-weight: 400;
+    font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif; }
+  [class^=pb_body_kit][class*=_default_default] {
+    line-height: 1.4;
+    color: #242B42;
+    font-size: 16px;
+    font-weight: 400;
+    font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif; }
+  [class^=pb_body_kit][class*=_default_negative] {
+    line-height: 1.4;
+    color: #FF2229;
+    font-size: 16px;
+    font-weight: 400;
+    font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif; }
+  [class^=pb_body_kit][class*=_default_dark_negative] {
+    line-height: 1.4;
+    color: #ff464c;
+    font-size: 16px;
+    font-weight: 400;
+    font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif; }
+  [class^=pb_body_kit][class*=_default_positive] {
+    line-height: 1.4;
+    color: #00CA74;
+    font-size: 16px;
+    font-weight: 400;
+    font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif; }
+  [class^=pb_body_kit][class*=_link] {
+    line-height: 1.4;
+    color: #0056CF;
     font-size: 16px;
     font-weight: 400;
     font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif; }
@@ -9869,6 +10464,36 @@ Background colors ------------------*/
     font-size: 16px;
     font-weight: 400;
     font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif; }
+  [class^=pb_body_kit][class*=_link] {
+    line-height: 1.4;
+    color: #0056CF;
+    font-size: 16px;
+    font-weight: 400;
+    font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif; }
+  [class^=pb_body_kit][class*=_default_default] {
+    line-height: 1.4;
+    color: #242B42;
+    font-size: 16px;
+    font-weight: 400;
+    font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif; }
+  [class^=pb_body_kit][class*=_default_negative] {
+    line-height: 1.4;
+    color: #FF2229;
+    font-size: 16px;
+    font-weight: 400;
+    font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif; }
+  [class^=pb_body_kit][class*=_default_dark_negative] {
+    line-height: 1.4;
+    color: #ff464c;
+    font-size: 16px;
+    font-weight: 400;
+    font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif; }
+  [class^=pb_body_kit][class*=_default_positive] {
+    line-height: 1.4;
+    color: #00CA74;
+    font-size: 16px;
+    font-weight: 400;
+    font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif; }
   [class^=pb_body_kit][class*=_default][class*=dark] {
     line-height: 1.4;
     color: #FFFFFF;
@@ -10280,6 +10905,36 @@ Background colors ------------------*/
   [class^=pb_body_kit][class*=_lighter] {
     line-height: 1.4;
     color: #C1CDD6;
+    font-size: 16px;
+    font-weight: 400;
+    font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif; }
+  [class^=pb_body_kit][class*=_default_default] {
+    line-height: 1.4;
+    color: #242B42;
+    font-size: 16px;
+    font-weight: 400;
+    font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif; }
+  [class^=pb_body_kit][class*=_default_negative] {
+    line-height: 1.4;
+    color: #FF2229;
+    font-size: 16px;
+    font-weight: 400;
+    font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif; }
+  [class^=pb_body_kit][class*=_default_dark_negative] {
+    line-height: 1.4;
+    color: #ff464c;
+    font-size: 16px;
+    font-weight: 400;
+    font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif; }
+  [class^=pb_body_kit][class*=_default_positive] {
+    line-height: 1.4;
+    color: #00CA74;
+    font-size: 16px;
+    font-weight: 400;
+    font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif; }
+  [class^=pb_body_kit][class*=_link] {
+    line-height: 1.4;
+    color: #0056CF;
     font-size: 16px;
     font-weight: 400;
     font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif; }
@@ -10973,6 +11628,36 @@ Background colors ------------------*/
     font-size: 16px;
     font-weight: 400;
     font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif; }
+  [class^=pb_body_kit][class*=_link] {
+    line-height: 1.4;
+    color: #0056CF;
+    font-size: 16px;
+    font-weight: 400;
+    font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif; }
+  [class^=pb_body_kit][class*=_default_default] {
+    line-height: 1.4;
+    color: #242B42;
+    font-size: 16px;
+    font-weight: 400;
+    font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif; }
+  [class^=pb_body_kit][class*=_default_negative] {
+    line-height: 1.4;
+    color: #FF2229;
+    font-size: 16px;
+    font-weight: 400;
+    font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif; }
+  [class^=pb_body_kit][class*=_default_dark_negative] {
+    line-height: 1.4;
+    color: #ff464c;
+    font-size: 16px;
+    font-weight: 400;
+    font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif; }
+  [class^=pb_body_kit][class*=_default_positive] {
+    line-height: 1.4;
+    color: #00CA74;
+    font-size: 16px;
+    font-weight: 400;
+    font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif; }
   [class^=pb_body_kit][class*=_default][class*=dark] {
     line-height: 1.4;
     color: #FFFFFF;
@@ -11134,14 +11819,18 @@ Background colors ------------------*/
     letter-spacing: 0.07em;
     text-transform: none;
     letter-spacing: unset; }
-    [class^="pb_caption_kit"][class^="pb_caption_kit_xs"][class*="_link"] {
-      color: #0056CF; }
-  [class^="pb_caption_kit"][class*="light"] {
-    color: #687887; }
   [class^="pb_caption_kit"][class*="default"] {
     color: #242B42; }
+  [class^="pb_caption_kit"][class*="light"] {
+    color: #687887; }
   [class^="pb_caption_kit"][class*="link"] {
     color: #0056CF; }
+  [class^="pb_caption_kit"][class*="lighter"] {
+    color: #C1CDD6; }
+  [class^="pb_caption_kit"][class*="success"] {
+    color: #00CA74; }
+  [class^="pb_caption_kit"][class*="error"] {
+    color: #FF2229; }
   [class^="pb_caption_kit"].dark {
     color: rgba(255, 255, 255, 0.6); }
     [class^="pb_caption_kit"].dark[class*="_default"] {
@@ -13036,6 +13725,33 @@ Background colors ------------------*/
 /* Link colors ------------------------*/
 /* Product colors ---------------------*/
 /* Category colors ---------------------*/
+/*=====================================
+Base colors should not be documented.
+Only document color use.
+
+Colors -----------------------------*/
+/* Specialty Gradient -----------------*/
+/* Interface colors -------------------*/
+/* Main colors ------------------------*/
+/*=====================================
+
+Background colors ------------------*/
+/* Card colors ------------------*/
+/* Active colors ----------------------*/
+/* Hover colors -----------------------*/
+/* Focus colors -----------------------*/
+/* Border colors ----------------------*/
+/* Shadow colors ----------------------*/
+/* Text colors ------------------------*/
+/* Data colors ------------------------*/
+/* Status colors ----------------------*/
+/* Link colors ------------------------*/
+/* Product colors ---------------------*/
+/* Category colors ---------------------*/
+/* CLEAN UP AND REMOVE */
+/* Headings */
+/* Standard Font Weights */
+/* Non_Standard Font Weights */
 [class^=pb_title_kit][class*=_1] {
   font-size: 48px;
   letter-spacing: -0.03em;
@@ -13045,6 +13761,18 @@ Background colors ------------------*/
   line-height: 1.2;
   font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif;
   letter-spacing: -0.03em; }
+  [class^=pb_title_kit][class*=_1][class*=_default] {
+    color: #242B42; }
+  [class^=pb_title_kit][class*=_1][class*=_light] {
+    color: #687887; }
+  [class^=pb_title_kit][class*=_1][class*=_lighter] {
+    color: #C1CDD6; }
+  [class^=pb_title_kit][class*=_1][class*=_success] {
+    color: #00CA74; }
+  [class^=pb_title_kit][class*=_1][class*=_error] {
+    color: #FF2229; }
+  [class^=pb_title_kit][class*=_1][class*=_link] {
+    color: #0056CF; }
 
 [class^=pb_title_kit][class*=_2] {
   font-size: 34px;
@@ -13054,6 +13782,18 @@ Background colors ------------------*/
   margin: 0;
   line-height: 0.96;
   font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif; }
+  [class^=pb_title_kit][class*=_2][class*=_default] {
+    color: #242B42; }
+  [class^=pb_title_kit][class*=_2][class*=_light] {
+    color: #687887; }
+  [class^=pb_title_kit][class*=_2][class*=_lighter] {
+    color: #C1CDD6; }
+  [class^=pb_title_kit][class*=_2][class*=_success] {
+    color: #00CA74; }
+  [class^=pb_title_kit][class*=_2][class*=_error] {
+    color: #FF2229; }
+  [class^=pb_title_kit][class*=_2][class*=_link] {
+    color: #0056CF; }
 
 [class^=pb_title_kit][class*=_3] {
   font-size: 28px;
@@ -13063,6 +13803,18 @@ Background colors ------------------*/
   margin: 0;
   line-height: 1.2;
   font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif; }
+  [class^=pb_title_kit][class*=_3][class*=_default] {
+    color: #242B42; }
+  [class^=pb_title_kit][class*=_3][class*=_light] {
+    color: #687887; }
+  [class^=pb_title_kit][class*=_3][class*=_lighter] {
+    color: #C1CDD6; }
+  [class^=pb_title_kit][class*=_3][class*=_success] {
+    color: #00CA74; }
+  [class^=pb_title_kit][class*=_3][class*=_error] {
+    color: #FF2229; }
+  [class^=pb_title_kit][class*=_3][class*=_link] {
+    color: #0056CF; }
 
 [class^=pb_title_kit][class*=_4] {
   font-size: 16px;
@@ -13072,6 +13824,16 @@ Background colors ------------------*/
   margin: 0;
   line-height: 1.2;
   font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif; }
+  [class^=pb_title_kit][class*=_4][class*=_default] {
+    color: #242B42; }
+  [class^=pb_title_kit][class*=_4][class*=_light] {
+    color: #687887; }
+  [class^=pb_title_kit][class*=_4][class*=_lighter] {
+    color: #C1CDD6; }
+  [class^=pb_title_kit][class*=_4][class*=_success] {
+    color: #00CA74; }
+  [class^=pb_title_kit][class*=_4][class*=_error] {
+    color: #FF2229; }
   [class^=pb_title_kit][class*=_4][class*=_link] {
     color: #0056CF; }
 
@@ -13174,6 +13936,36 @@ Background colors ------------------*/
   [class^=pb_body_kit][class*=_lighter] {
     line-height: 1.4;
     color: #C1CDD6;
+    font-size: 16px;
+    font-weight: 400;
+    font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif; }
+  [class^=pb_body_kit][class*=_default_default] {
+    line-height: 1.4;
+    color: #242B42;
+    font-size: 16px;
+    font-weight: 400;
+    font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif; }
+  [class^=pb_body_kit][class*=_default_negative] {
+    line-height: 1.4;
+    color: #FF2229;
+    font-size: 16px;
+    font-weight: 400;
+    font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif; }
+  [class^=pb_body_kit][class*=_default_dark_negative] {
+    line-height: 1.4;
+    color: #ff464c;
+    font-size: 16px;
+    font-weight: 400;
+    font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif; }
+  [class^=pb_body_kit][class*=_default_positive] {
+    line-height: 1.4;
+    color: #00CA74;
+    font-size: 16px;
+    font-weight: 400;
+    font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif; }
+  [class^=pb_body_kit][class*=_link] {
+    line-height: 1.4;
+    color: #0056CF;
     font-size: 16px;
     font-weight: 400;
     font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif; }
@@ -13421,6 +14213,36 @@ Background colors ------------------*/
     font-size: 16px;
     font-weight: 400;
     font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif; }
+  [class^=pb_body_kit][class*=_link] {
+    line-height: 1.4;
+    color: #0056CF;
+    font-size: 16px;
+    font-weight: 400;
+    font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif; }
+  [class^=pb_body_kit][class*=_default_default] {
+    line-height: 1.4;
+    color: #242B42;
+    font-size: 16px;
+    font-weight: 400;
+    font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif; }
+  [class^=pb_body_kit][class*=_default_negative] {
+    line-height: 1.4;
+    color: #FF2229;
+    font-size: 16px;
+    font-weight: 400;
+    font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif; }
+  [class^=pb_body_kit][class*=_default_dark_negative] {
+    line-height: 1.4;
+    color: #ff464c;
+    font-size: 16px;
+    font-weight: 400;
+    font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif; }
+  [class^=pb_body_kit][class*=_default_positive] {
+    line-height: 1.4;
+    color: #00CA74;
+    font-size: 16px;
+    font-weight: 400;
+    font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif; }
   [class^=pb_body_kit][class*=_default][class*=dark] {
     line-height: 1.4;
     color: #FFFFFF;
@@ -13568,6 +14390,33 @@ Background colors ------------------*/
 /* Link colors ------------------------*/
 /* Product colors ---------------------*/
 /* Category colors ---------------------*/
+/*=====================================
+Base colors should not be documented.
+Only document color use.
+
+Colors -----------------------------*/
+/* Specialty Gradient -----------------*/
+/* Interface colors -------------------*/
+/* Main colors ------------------------*/
+/*=====================================
+
+Background colors ------------------*/
+/* Card colors ------------------*/
+/* Active colors ----------------------*/
+/* Hover colors -----------------------*/
+/* Focus colors -----------------------*/
+/* Border colors ----------------------*/
+/* Shadow colors ----------------------*/
+/* Text colors ------------------------*/
+/* Data colors ------------------------*/
+/* Status colors ----------------------*/
+/* Link colors ------------------------*/
+/* Product colors ---------------------*/
+/* Category colors ---------------------*/
+/* CLEAN UP AND REMOVE */
+/* Headings */
+/* Standard Font Weights */
+/* Non_Standard Font Weights */
 [class^=pb_title_kit][class*=_1] {
   font-size: 48px;
   letter-spacing: -0.03em;
@@ -13577,6 +14426,18 @@ Background colors ------------------*/
   line-height: 1.2;
   font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif;
   letter-spacing: -0.03em; }
+  [class^=pb_title_kit][class*=_1][class*=_default] {
+    color: #242B42; }
+  [class^=pb_title_kit][class*=_1][class*=_light] {
+    color: #687887; }
+  [class^=pb_title_kit][class*=_1][class*=_lighter] {
+    color: #C1CDD6; }
+  [class^=pb_title_kit][class*=_1][class*=_success] {
+    color: #00CA74; }
+  [class^=pb_title_kit][class*=_1][class*=_error] {
+    color: #FF2229; }
+  [class^=pb_title_kit][class*=_1][class*=_link] {
+    color: #0056CF; }
 
 [class^=pb_title_kit][class*=_2] {
   font-size: 34px;
@@ -13586,6 +14447,18 @@ Background colors ------------------*/
   margin: 0;
   line-height: 0.96;
   font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif; }
+  [class^=pb_title_kit][class*=_2][class*=_default] {
+    color: #242B42; }
+  [class^=pb_title_kit][class*=_2][class*=_light] {
+    color: #687887; }
+  [class^=pb_title_kit][class*=_2][class*=_lighter] {
+    color: #C1CDD6; }
+  [class^=pb_title_kit][class*=_2][class*=_success] {
+    color: #00CA74; }
+  [class^=pb_title_kit][class*=_2][class*=_error] {
+    color: #FF2229; }
+  [class^=pb_title_kit][class*=_2][class*=_link] {
+    color: #0056CF; }
 
 [class^=pb_title_kit][class*=_3] {
   font-size: 28px;
@@ -13595,6 +14468,18 @@ Background colors ------------------*/
   margin: 0;
   line-height: 1.2;
   font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif; }
+  [class^=pb_title_kit][class*=_3][class*=_default] {
+    color: #242B42; }
+  [class^=pb_title_kit][class*=_3][class*=_light] {
+    color: #687887; }
+  [class^=pb_title_kit][class*=_3][class*=_lighter] {
+    color: #C1CDD6; }
+  [class^=pb_title_kit][class*=_3][class*=_success] {
+    color: #00CA74; }
+  [class^=pb_title_kit][class*=_3][class*=_error] {
+    color: #FF2229; }
+  [class^=pb_title_kit][class*=_3][class*=_link] {
+    color: #0056CF; }
 
 [class^=pb_title_kit][class*=_4] {
   font-size: 16px;
@@ -13604,6 +14489,16 @@ Background colors ------------------*/
   margin: 0;
   line-height: 1.2;
   font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif; }
+  [class^=pb_title_kit][class*=_4][class*=_default] {
+    color: #242B42; }
+  [class^=pb_title_kit][class*=_4][class*=_light] {
+    color: #687887; }
+  [class^=pb_title_kit][class*=_4][class*=_lighter] {
+    color: #C1CDD6; }
+  [class^=pb_title_kit][class*=_4][class*=_success] {
+    color: #00CA74; }
+  [class^=pb_title_kit][class*=_4][class*=_error] {
+    color: #FF2229; }
   [class^=pb_title_kit][class*=_4][class*=_link] {
     color: #0056CF; }
 
@@ -13706,6 +14601,36 @@ Background colors ------------------*/
   [class^=pb_body_kit][class*=_lighter] {
     line-height: 1.4;
     color: #C1CDD6;
+    font-size: 16px;
+    font-weight: 400;
+    font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif; }
+  [class^=pb_body_kit][class*=_default_default] {
+    line-height: 1.4;
+    color: #242B42;
+    font-size: 16px;
+    font-weight: 400;
+    font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif; }
+  [class^=pb_body_kit][class*=_default_negative] {
+    line-height: 1.4;
+    color: #FF2229;
+    font-size: 16px;
+    font-weight: 400;
+    font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif; }
+  [class^=pb_body_kit][class*=_default_dark_negative] {
+    line-height: 1.4;
+    color: #ff464c;
+    font-size: 16px;
+    font-weight: 400;
+    font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif; }
+  [class^=pb_body_kit][class*=_default_positive] {
+    line-height: 1.4;
+    color: #00CA74;
+    font-size: 16px;
+    font-weight: 400;
+    font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif; }
+  [class^=pb_body_kit][class*=_link] {
+    line-height: 1.4;
+    color: #0056CF;
     font-size: 16px;
     font-weight: 400;
     font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif; }
@@ -13959,6 +14884,36 @@ Background colors ------------------*/
   [class^=pb_body_kit][class*=_lighter] {
     line-height: 1.4;
     color: #C1CDD6;
+    font-size: 16px;
+    font-weight: 400;
+    font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif; }
+  [class^=pb_body_kit][class*=_default_default] {
+    line-height: 1.4;
+    color: #242B42;
+    font-size: 16px;
+    font-weight: 400;
+    font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif; }
+  [class^=pb_body_kit][class*=_default_negative] {
+    line-height: 1.4;
+    color: #FF2229;
+    font-size: 16px;
+    font-weight: 400;
+    font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif; }
+  [class^=pb_body_kit][class*=_default_dark_negative] {
+    line-height: 1.4;
+    color: #ff464c;
+    font-size: 16px;
+    font-weight: 400;
+    font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif; }
+  [class^=pb_body_kit][class*=_default_positive] {
+    line-height: 1.4;
+    color: #00CA74;
+    font-size: 16px;
+    font-weight: 400;
+    font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif; }
+  [class^=pb_body_kit][class*=_link] {
+    line-height: 1.4;
+    color: #0056CF;
     font-size: 16px;
     font-weight: 400;
     font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif; }
@@ -14773,6 +15728,36 @@ Background colors ------------------*/
   [class^=pb_body_kit][class*=_lighter] {
     line-height: 1.4;
     color: #C1CDD6;
+    font-size: 16px;
+    font-weight: 400;
+    font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif; }
+  [class^=pb_body_kit][class*=_default_default] {
+    line-height: 1.4;
+    color: #242B42;
+    font-size: 16px;
+    font-weight: 400;
+    font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif; }
+  [class^=pb_body_kit][class*=_default_negative] {
+    line-height: 1.4;
+    color: #FF2229;
+    font-size: 16px;
+    font-weight: 400;
+    font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif; }
+  [class^=pb_body_kit][class*=_default_dark_negative] {
+    line-height: 1.4;
+    color: #ff464c;
+    font-size: 16px;
+    font-weight: 400;
+    font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif; }
+  [class^=pb_body_kit][class*=_default_positive] {
+    line-height: 1.4;
+    color: #00CA74;
+    font-size: 16px;
+    font-weight: 400;
+    font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif; }
+  [class^=pb_body_kit][class*=_link] {
+    line-height: 1.4;
+    color: #0056CF;
     font-size: 16px;
     font-weight: 400;
     font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif; }
@@ -17779,6 +18764,36 @@ Background colors ------------------*/
     font-size: 16px;
     font-weight: 400;
     font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif; }
+  [class^=pb_body_kit][class*=_link] {
+    line-height: 1.4;
+    color: #0056CF;
+    font-size: 16px;
+    font-weight: 400;
+    font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif; }
+  [class^=pb_body_kit][class*=_default_default] {
+    line-height: 1.4;
+    color: #242B42;
+    font-size: 16px;
+    font-weight: 400;
+    font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif; }
+  [class^=pb_body_kit][class*=_default_negative] {
+    line-height: 1.4;
+    color: #FF2229;
+    font-size: 16px;
+    font-weight: 400;
+    font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif; }
+  [class^=pb_body_kit][class*=_default_dark_negative] {
+    line-height: 1.4;
+    color: #ff464c;
+    font-size: 16px;
+    font-weight: 400;
+    font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif; }
+  [class^=pb_body_kit][class*=_default_positive] {
+    line-height: 1.4;
+    color: #00CA74;
+    font-size: 16px;
+    font-weight: 400;
+    font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif; }
   [class^=pb_body_kit][class*=_default][class*=dark] {
     line-height: 1.4;
     color: #FFFFFF;
@@ -17920,6 +18935,33 @@ Background colors ------------------*/
 /* Link colors ------------------------*/
 /* Product colors ---------------------*/
 /* Category colors ---------------------*/
+/*=====================================
+Base colors should not be documented.
+Only document color use.
+
+Colors -----------------------------*/
+/* Specialty Gradient -----------------*/
+/* Interface colors -------------------*/
+/* Main colors ------------------------*/
+/*=====================================
+
+Background colors ------------------*/
+/* Card colors ------------------*/
+/* Active colors ----------------------*/
+/* Hover colors -----------------------*/
+/* Focus colors -----------------------*/
+/* Border colors ----------------------*/
+/* Shadow colors ----------------------*/
+/* Text colors ------------------------*/
+/* Data colors ------------------------*/
+/* Status colors ----------------------*/
+/* Link colors ------------------------*/
+/* Product colors ---------------------*/
+/* Category colors ---------------------*/
+/* CLEAN UP AND REMOVE */
+/* Headings */
+/* Standard Font Weights */
+/* Non_Standard Font Weights */
 [class^=pb_title_kit][class*=_1] {
   font-size: 48px;
   letter-spacing: -0.03em;
@@ -17929,6 +18971,18 @@ Background colors ------------------*/
   line-height: 1.2;
   font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif;
   letter-spacing: -0.03em; }
+  [class^=pb_title_kit][class*=_1][class*=_default] {
+    color: #242B42; }
+  [class^=pb_title_kit][class*=_1][class*=_light] {
+    color: #687887; }
+  [class^=pb_title_kit][class*=_1][class*=_lighter] {
+    color: #C1CDD6; }
+  [class^=pb_title_kit][class*=_1][class*=_success] {
+    color: #00CA74; }
+  [class^=pb_title_kit][class*=_1][class*=_error] {
+    color: #FF2229; }
+  [class^=pb_title_kit][class*=_1][class*=_link] {
+    color: #0056CF; }
 
 [class^=pb_title_kit][class*=_2] {
   font-size: 34px;
@@ -17938,6 +18992,18 @@ Background colors ------------------*/
   margin: 0;
   line-height: 0.96;
   font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif; }
+  [class^=pb_title_kit][class*=_2][class*=_default] {
+    color: #242B42; }
+  [class^=pb_title_kit][class*=_2][class*=_light] {
+    color: #687887; }
+  [class^=pb_title_kit][class*=_2][class*=_lighter] {
+    color: #C1CDD6; }
+  [class^=pb_title_kit][class*=_2][class*=_success] {
+    color: #00CA74; }
+  [class^=pb_title_kit][class*=_2][class*=_error] {
+    color: #FF2229; }
+  [class^=pb_title_kit][class*=_2][class*=_link] {
+    color: #0056CF; }
 
 [class^=pb_title_kit][class*=_3] {
   font-size: 28px;
@@ -17947,6 +19013,18 @@ Background colors ------------------*/
   margin: 0;
   line-height: 1.2;
   font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif; }
+  [class^=pb_title_kit][class*=_3][class*=_default] {
+    color: #242B42; }
+  [class^=pb_title_kit][class*=_3][class*=_light] {
+    color: #687887; }
+  [class^=pb_title_kit][class*=_3][class*=_lighter] {
+    color: #C1CDD6; }
+  [class^=pb_title_kit][class*=_3][class*=_success] {
+    color: #00CA74; }
+  [class^=pb_title_kit][class*=_3][class*=_error] {
+    color: #FF2229; }
+  [class^=pb_title_kit][class*=_3][class*=_link] {
+    color: #0056CF; }
 
 [class^=pb_title_kit][class*=_4] {
   font-size: 16px;
@@ -17956,6 +19034,16 @@ Background colors ------------------*/
   margin: 0;
   line-height: 1.2;
   font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif; }
+  [class^=pb_title_kit][class*=_4][class*=_default] {
+    color: #242B42; }
+  [class^=pb_title_kit][class*=_4][class*=_light] {
+    color: #687887; }
+  [class^=pb_title_kit][class*=_4][class*=_lighter] {
+    color: #C1CDD6; }
+  [class^=pb_title_kit][class*=_4][class*=_success] {
+    color: #00CA74; }
+  [class^=pb_title_kit][class*=_4][class*=_error] {
+    color: #FF2229; }
   [class^=pb_title_kit][class*=_4][class*=_link] {
     color: #0056CF; }
 
@@ -19592,6 +20680,36 @@ Background colors ------------------*/
     font-size: 16px;
     font-weight: 400;
     font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif; }
+  [class^=pb_body_kit][class*=_link] {
+    line-height: 1.4;
+    color: #0056CF;
+    font-size: 16px;
+    font-weight: 400;
+    font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif; }
+  [class^=pb_body_kit][class*=_default_default] {
+    line-height: 1.4;
+    color: #242B42;
+    font-size: 16px;
+    font-weight: 400;
+    font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif; }
+  [class^=pb_body_kit][class*=_default_negative] {
+    line-height: 1.4;
+    color: #FF2229;
+    font-size: 16px;
+    font-weight: 400;
+    font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif; }
+  [class^=pb_body_kit][class*=_default_dark_negative] {
+    line-height: 1.4;
+    color: #ff464c;
+    font-size: 16px;
+    font-weight: 400;
+    font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif; }
+  [class^=pb_body_kit][class*=_default_positive] {
+    line-height: 1.4;
+    color: #00CA74;
+    font-size: 16px;
+    font-weight: 400;
+    font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif; }
   [class^=pb_body_kit][class*=_default][class*=dark] {
     line-height: 1.4;
     color: #FFFFFF;
@@ -19753,14 +20871,18 @@ Background colors ------------------*/
     letter-spacing: 0.07em;
     text-transform: none;
     letter-spacing: unset; }
-    [class^="pb_caption_kit"][class^="pb_caption_kit_xs"][class*="_link"] {
-      color: #0056CF; }
-  [class^="pb_caption_kit"][class*="light"] {
-    color: #687887; }
   [class^="pb_caption_kit"][class*="default"] {
     color: #242B42; }
+  [class^="pb_caption_kit"][class*="light"] {
+    color: #687887; }
   [class^="pb_caption_kit"][class*="link"] {
     color: #0056CF; }
+  [class^="pb_caption_kit"][class*="lighter"] {
+    color: #C1CDD6; }
+  [class^="pb_caption_kit"][class*="success"] {
+    color: #00CA74; }
+  [class^="pb_caption_kit"][class*="error"] {
+    color: #FF2229; }
   [class^="pb_caption_kit"].dark {
     color: rgba(255, 255, 255, 0.6); }
     [class^="pb_caption_kit"].dark[class*="_default"] {
@@ -20151,6 +21273,33 @@ Background colors ------------------*/
 /* Link colors ------------------------*/
 /* Product colors ---------------------*/
 /* Category colors ---------------------*/
+/*=====================================
+Base colors should not be documented.
+Only document color use.
+
+Colors -----------------------------*/
+/* Specialty Gradient -----------------*/
+/* Interface colors -------------------*/
+/* Main colors ------------------------*/
+/*=====================================
+
+Background colors ------------------*/
+/* Card colors ------------------*/
+/* Active colors ----------------------*/
+/* Hover colors -----------------------*/
+/* Focus colors -----------------------*/
+/* Border colors ----------------------*/
+/* Shadow colors ----------------------*/
+/* Text colors ------------------------*/
+/* Data colors ------------------------*/
+/* Status colors ----------------------*/
+/* Link colors ------------------------*/
+/* Product colors ---------------------*/
+/* Category colors ---------------------*/
+/* CLEAN UP AND REMOVE */
+/* Headings */
+/* Standard Font Weights */
+/* Non_Standard Font Weights */
 [class^=pb_title_kit][class*=_1] {
   font-size: 48px;
   letter-spacing: -0.03em;
@@ -20160,6 +21309,18 @@ Background colors ------------------*/
   line-height: 1.2;
   font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif;
   letter-spacing: -0.03em; }
+  [class^=pb_title_kit][class*=_1][class*=_default] {
+    color: #242B42; }
+  [class^=pb_title_kit][class*=_1][class*=_light] {
+    color: #687887; }
+  [class^=pb_title_kit][class*=_1][class*=_lighter] {
+    color: #C1CDD6; }
+  [class^=pb_title_kit][class*=_1][class*=_success] {
+    color: #00CA74; }
+  [class^=pb_title_kit][class*=_1][class*=_error] {
+    color: #FF2229; }
+  [class^=pb_title_kit][class*=_1][class*=_link] {
+    color: #0056CF; }
 
 [class^=pb_title_kit][class*=_2] {
   font-size: 34px;
@@ -20169,6 +21330,18 @@ Background colors ------------------*/
   margin: 0;
   line-height: 0.96;
   font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif; }
+  [class^=pb_title_kit][class*=_2][class*=_default] {
+    color: #242B42; }
+  [class^=pb_title_kit][class*=_2][class*=_light] {
+    color: #687887; }
+  [class^=pb_title_kit][class*=_2][class*=_lighter] {
+    color: #C1CDD6; }
+  [class^=pb_title_kit][class*=_2][class*=_success] {
+    color: #00CA74; }
+  [class^=pb_title_kit][class*=_2][class*=_error] {
+    color: #FF2229; }
+  [class^=pb_title_kit][class*=_2][class*=_link] {
+    color: #0056CF; }
 
 [class^=pb_title_kit][class*=_3] {
   font-size: 28px;
@@ -20178,6 +21351,18 @@ Background colors ------------------*/
   margin: 0;
   line-height: 1.2;
   font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif; }
+  [class^=pb_title_kit][class*=_3][class*=_default] {
+    color: #242B42; }
+  [class^=pb_title_kit][class*=_3][class*=_light] {
+    color: #687887; }
+  [class^=pb_title_kit][class*=_3][class*=_lighter] {
+    color: #C1CDD6; }
+  [class^=pb_title_kit][class*=_3][class*=_success] {
+    color: #00CA74; }
+  [class^=pb_title_kit][class*=_3][class*=_error] {
+    color: #FF2229; }
+  [class^=pb_title_kit][class*=_3][class*=_link] {
+    color: #0056CF; }
 
 [class^=pb_title_kit][class*=_4] {
   font-size: 16px;
@@ -20187,6 +21372,16 @@ Background colors ------------------*/
   margin: 0;
   line-height: 1.2;
   font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif; }
+  [class^=pb_title_kit][class*=_4][class*=_default] {
+    color: #242B42; }
+  [class^=pb_title_kit][class*=_4][class*=_light] {
+    color: #687887; }
+  [class^=pb_title_kit][class*=_4][class*=_lighter] {
+    color: #C1CDD6; }
+  [class^=pb_title_kit][class*=_4][class*=_success] {
+    color: #00CA74; }
+  [class^=pb_title_kit][class*=_4][class*=_error] {
+    color: #FF2229; }
   [class^=pb_title_kit][class*=_4][class*=_link] {
     color: #0056CF; }
 
@@ -20289,6 +21484,36 @@ Background colors ------------------*/
   [class^=pb_body_kit][class*=_lighter] {
     line-height: 1.4;
     color: #C1CDD6;
+    font-size: 16px;
+    font-weight: 400;
+    font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif; }
+  [class^=pb_body_kit][class*=_default_default] {
+    line-height: 1.4;
+    color: #242B42;
+    font-size: 16px;
+    font-weight: 400;
+    font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif; }
+  [class^=pb_body_kit][class*=_default_negative] {
+    line-height: 1.4;
+    color: #FF2229;
+    font-size: 16px;
+    font-weight: 400;
+    font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif; }
+  [class^=pb_body_kit][class*=_default_dark_negative] {
+    line-height: 1.4;
+    color: #ff464c;
+    font-size: 16px;
+    font-weight: 400;
+    font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif; }
+  [class^=pb_body_kit][class*=_default_positive] {
+    line-height: 1.4;
+    color: #00CA74;
+    font-size: 16px;
+    font-weight: 400;
+    font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif; }
+  [class^=pb_body_kit][class*=_link] {
+    line-height: 1.4;
+    color: #0056CF;
     font-size: 16px;
     font-weight: 400;
     font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif; }
@@ -20468,6 +21693,33 @@ Background colors ------------------*/
 /* Link colors ------------------------*/
 /* Product colors ---------------------*/
 /* Category colors ---------------------*/
+/*=====================================
+Base colors should not be documented.
+Only document color use.
+
+Colors -----------------------------*/
+/* Specialty Gradient -----------------*/
+/* Interface colors -------------------*/
+/* Main colors ------------------------*/
+/*=====================================
+
+Background colors ------------------*/
+/* Card colors ------------------*/
+/* Active colors ----------------------*/
+/* Hover colors -----------------------*/
+/* Focus colors -----------------------*/
+/* Border colors ----------------------*/
+/* Shadow colors ----------------------*/
+/* Text colors ------------------------*/
+/* Data colors ------------------------*/
+/* Status colors ----------------------*/
+/* Link colors ------------------------*/
+/* Product colors ---------------------*/
+/* Category colors ---------------------*/
+/* CLEAN UP AND REMOVE */
+/* Headings */
+/* Standard Font Weights */
+/* Non_Standard Font Weights */
 [class^=pb_title_kit][class*=_1] {
   font-size: 48px;
   letter-spacing: -0.03em;
@@ -20477,6 +21729,18 @@ Background colors ------------------*/
   line-height: 1.2;
   font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif;
   letter-spacing: -0.03em; }
+  [class^=pb_title_kit][class*=_1][class*=_default] {
+    color: #242B42; }
+  [class^=pb_title_kit][class*=_1][class*=_light] {
+    color: #687887; }
+  [class^=pb_title_kit][class*=_1][class*=_lighter] {
+    color: #C1CDD6; }
+  [class^=pb_title_kit][class*=_1][class*=_success] {
+    color: #00CA74; }
+  [class^=pb_title_kit][class*=_1][class*=_error] {
+    color: #FF2229; }
+  [class^=pb_title_kit][class*=_1][class*=_link] {
+    color: #0056CF; }
 
 [class^=pb_title_kit][class*=_2] {
   font-size: 34px;
@@ -20486,6 +21750,18 @@ Background colors ------------------*/
   margin: 0;
   line-height: 0.96;
   font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif; }
+  [class^=pb_title_kit][class*=_2][class*=_default] {
+    color: #242B42; }
+  [class^=pb_title_kit][class*=_2][class*=_light] {
+    color: #687887; }
+  [class^=pb_title_kit][class*=_2][class*=_lighter] {
+    color: #C1CDD6; }
+  [class^=pb_title_kit][class*=_2][class*=_success] {
+    color: #00CA74; }
+  [class^=pb_title_kit][class*=_2][class*=_error] {
+    color: #FF2229; }
+  [class^=pb_title_kit][class*=_2][class*=_link] {
+    color: #0056CF; }
 
 [class^=pb_title_kit][class*=_3] {
   font-size: 28px;
@@ -20495,6 +21771,18 @@ Background colors ------------------*/
   margin: 0;
   line-height: 1.2;
   font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif; }
+  [class^=pb_title_kit][class*=_3][class*=_default] {
+    color: #242B42; }
+  [class^=pb_title_kit][class*=_3][class*=_light] {
+    color: #687887; }
+  [class^=pb_title_kit][class*=_3][class*=_lighter] {
+    color: #C1CDD6; }
+  [class^=pb_title_kit][class*=_3][class*=_success] {
+    color: #00CA74; }
+  [class^=pb_title_kit][class*=_3][class*=_error] {
+    color: #FF2229; }
+  [class^=pb_title_kit][class*=_3][class*=_link] {
+    color: #0056CF; }
 
 [class^=pb_title_kit][class*=_4] {
   font-size: 16px;
@@ -20504,6 +21792,16 @@ Background colors ------------------*/
   margin: 0;
   line-height: 1.2;
   font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif; }
+  [class^=pb_title_kit][class*=_4][class*=_default] {
+    color: #242B42; }
+  [class^=pb_title_kit][class*=_4][class*=_light] {
+    color: #687887; }
+  [class^=pb_title_kit][class*=_4][class*=_lighter] {
+    color: #C1CDD6; }
+  [class^=pb_title_kit][class*=_4][class*=_success] {
+    color: #00CA74; }
+  [class^=pb_title_kit][class*=_4][class*=_error] {
+    color: #FF2229; }
   [class^=pb_title_kit][class*=_4][class*=_link] {
     color: #0056CF; }
 
@@ -20606,6 +21904,36 @@ Background colors ------------------*/
   [class^=pb_body_kit][class*=_lighter] {
     line-height: 1.4;
     color: #C1CDD6;
+    font-size: 16px;
+    font-weight: 400;
+    font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif; }
+  [class^=pb_body_kit][class*=_default_default] {
+    line-height: 1.4;
+    color: #242B42;
+    font-size: 16px;
+    font-weight: 400;
+    font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif; }
+  [class^=pb_body_kit][class*=_default_negative] {
+    line-height: 1.4;
+    color: #FF2229;
+    font-size: 16px;
+    font-weight: 400;
+    font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif; }
+  [class^=pb_body_kit][class*=_default_dark_negative] {
+    line-height: 1.4;
+    color: #ff464c;
+    font-size: 16px;
+    font-weight: 400;
+    font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif; }
+  [class^=pb_body_kit][class*=_default_positive] {
+    line-height: 1.4;
+    color: #00CA74;
+    font-size: 16px;
+    font-weight: 400;
+    font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif; }
+  [class^=pb_body_kit][class*=_link] {
+    line-height: 1.4;
+    color: #0056CF;
     font-size: 16px;
     font-weight: 400;
     font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif; }
@@ -21146,6 +22474,33 @@ Background colors ------------------*/
 /* Link colors ------------------------*/
 /* Product colors ---------------------*/
 /* Category colors ---------------------*/
+/*=====================================
+Base colors should not be documented.
+Only document color use.
+
+Colors -----------------------------*/
+/* Specialty Gradient -----------------*/
+/* Interface colors -------------------*/
+/* Main colors ------------------------*/
+/*=====================================
+
+Background colors ------------------*/
+/* Card colors ------------------*/
+/* Active colors ----------------------*/
+/* Hover colors -----------------------*/
+/* Focus colors -----------------------*/
+/* Border colors ----------------------*/
+/* Shadow colors ----------------------*/
+/* Text colors ------------------------*/
+/* Data colors ------------------------*/
+/* Status colors ----------------------*/
+/* Link colors ------------------------*/
+/* Product colors ---------------------*/
+/* Category colors ---------------------*/
+/* CLEAN UP AND REMOVE */
+/* Headings */
+/* Standard Font Weights */
+/* Non_Standard Font Weights */
 [class^=pb_title_kit][class*=_1] {
   font-size: 48px;
   letter-spacing: -0.03em;
@@ -21155,6 +22510,18 @@ Background colors ------------------*/
   line-height: 1.2;
   font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif;
   letter-spacing: -0.03em; }
+  [class^=pb_title_kit][class*=_1][class*=_default] {
+    color: #242B42; }
+  [class^=pb_title_kit][class*=_1][class*=_light] {
+    color: #687887; }
+  [class^=pb_title_kit][class*=_1][class*=_lighter] {
+    color: #C1CDD6; }
+  [class^=pb_title_kit][class*=_1][class*=_success] {
+    color: #00CA74; }
+  [class^=pb_title_kit][class*=_1][class*=_error] {
+    color: #FF2229; }
+  [class^=pb_title_kit][class*=_1][class*=_link] {
+    color: #0056CF; }
 
 [class^=pb_title_kit][class*=_2] {
   font-size: 34px;
@@ -21164,6 +22531,18 @@ Background colors ------------------*/
   margin: 0;
   line-height: 0.96;
   font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif; }
+  [class^=pb_title_kit][class*=_2][class*=_default] {
+    color: #242B42; }
+  [class^=pb_title_kit][class*=_2][class*=_light] {
+    color: #687887; }
+  [class^=pb_title_kit][class*=_2][class*=_lighter] {
+    color: #C1CDD6; }
+  [class^=pb_title_kit][class*=_2][class*=_success] {
+    color: #00CA74; }
+  [class^=pb_title_kit][class*=_2][class*=_error] {
+    color: #FF2229; }
+  [class^=pb_title_kit][class*=_2][class*=_link] {
+    color: #0056CF; }
 
 [class^=pb_title_kit][class*=_3] {
   font-size: 28px;
@@ -21173,6 +22552,18 @@ Background colors ------------------*/
   margin: 0;
   line-height: 1.2;
   font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif; }
+  [class^=pb_title_kit][class*=_3][class*=_default] {
+    color: #242B42; }
+  [class^=pb_title_kit][class*=_3][class*=_light] {
+    color: #687887; }
+  [class^=pb_title_kit][class*=_3][class*=_lighter] {
+    color: #C1CDD6; }
+  [class^=pb_title_kit][class*=_3][class*=_success] {
+    color: #00CA74; }
+  [class^=pb_title_kit][class*=_3][class*=_error] {
+    color: #FF2229; }
+  [class^=pb_title_kit][class*=_3][class*=_link] {
+    color: #0056CF; }
 
 [class^=pb_title_kit][class*=_4] {
   font-size: 16px;
@@ -21182,6 +22573,16 @@ Background colors ------------------*/
   margin: 0;
   line-height: 1.2;
   font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif; }
+  [class^=pb_title_kit][class*=_4][class*=_default] {
+    color: #242B42; }
+  [class^=pb_title_kit][class*=_4][class*=_light] {
+    color: #687887; }
+  [class^=pb_title_kit][class*=_4][class*=_lighter] {
+    color: #C1CDD6; }
+  [class^=pb_title_kit][class*=_4][class*=_success] {
+    color: #00CA74; }
+  [class^=pb_title_kit][class*=_4][class*=_error] {
+    color: #FF2229; }
   [class^=pb_title_kit][class*=_4][class*=_link] {
     color: #0056CF; }
 
@@ -21284,6 +22685,36 @@ Background colors ------------------*/
   [class^=pb_body_kit][class*=_lighter] {
     line-height: 1.4;
     color: #C1CDD6;
+    font-size: 16px;
+    font-weight: 400;
+    font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif; }
+  [class^=pb_body_kit][class*=_default_default] {
+    line-height: 1.4;
+    color: #242B42;
+    font-size: 16px;
+    font-weight: 400;
+    font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif; }
+  [class^=pb_body_kit][class*=_default_negative] {
+    line-height: 1.4;
+    color: #FF2229;
+    font-size: 16px;
+    font-weight: 400;
+    font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif; }
+  [class^=pb_body_kit][class*=_default_dark_negative] {
+    line-height: 1.4;
+    color: #ff464c;
+    font-size: 16px;
+    font-weight: 400;
+    font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif; }
+  [class^=pb_body_kit][class*=_default_positive] {
+    line-height: 1.4;
+    color: #00CA74;
+    font-size: 16px;
+    font-weight: 400;
+    font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif; }
+  [class^=pb_body_kit][class*=_link] {
+    line-height: 1.4;
+    color: #0056CF;
     font-size: 16px;
     font-weight: 400;
     font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif; }
@@ -21933,6 +23364,33 @@ Background colors ------------------*/
 /* Link colors ------------------------*/
 /* Product colors ---------------------*/
 /* Category colors ---------------------*/
+/*=====================================
+Base colors should not be documented.
+Only document color use.
+
+Colors -----------------------------*/
+/* Specialty Gradient -----------------*/
+/* Interface colors -------------------*/
+/* Main colors ------------------------*/
+/*=====================================
+
+Background colors ------------------*/
+/* Card colors ------------------*/
+/* Active colors ----------------------*/
+/* Hover colors -----------------------*/
+/* Focus colors -----------------------*/
+/* Border colors ----------------------*/
+/* Shadow colors ----------------------*/
+/* Text colors ------------------------*/
+/* Data colors ------------------------*/
+/* Status colors ----------------------*/
+/* Link colors ------------------------*/
+/* Product colors ---------------------*/
+/* Category colors ---------------------*/
+/* CLEAN UP AND REMOVE */
+/* Headings */
+/* Standard Font Weights */
+/* Non_Standard Font Weights */
 [class^=pb_title_kit][class*=_1] {
   font-size: 48px;
   letter-spacing: -0.03em;
@@ -21942,6 +23400,18 @@ Background colors ------------------*/
   line-height: 1.2;
   font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif;
   letter-spacing: -0.03em; }
+  [class^=pb_title_kit][class*=_1][class*=_default] {
+    color: #242B42; }
+  [class^=pb_title_kit][class*=_1][class*=_light] {
+    color: #687887; }
+  [class^=pb_title_kit][class*=_1][class*=_lighter] {
+    color: #C1CDD6; }
+  [class^=pb_title_kit][class*=_1][class*=_success] {
+    color: #00CA74; }
+  [class^=pb_title_kit][class*=_1][class*=_error] {
+    color: #FF2229; }
+  [class^=pb_title_kit][class*=_1][class*=_link] {
+    color: #0056CF; }
 
 [class^=pb_title_kit][class*=_2] {
   font-size: 34px;
@@ -21951,6 +23421,18 @@ Background colors ------------------*/
   margin: 0;
   line-height: 0.96;
   font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif; }
+  [class^=pb_title_kit][class*=_2][class*=_default] {
+    color: #242B42; }
+  [class^=pb_title_kit][class*=_2][class*=_light] {
+    color: #687887; }
+  [class^=pb_title_kit][class*=_2][class*=_lighter] {
+    color: #C1CDD6; }
+  [class^=pb_title_kit][class*=_2][class*=_success] {
+    color: #00CA74; }
+  [class^=pb_title_kit][class*=_2][class*=_error] {
+    color: #FF2229; }
+  [class^=pb_title_kit][class*=_2][class*=_link] {
+    color: #0056CF; }
 
 [class^=pb_title_kit][class*=_3] {
   font-size: 28px;
@@ -21960,6 +23442,18 @@ Background colors ------------------*/
   margin: 0;
   line-height: 1.2;
   font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif; }
+  [class^=pb_title_kit][class*=_3][class*=_default] {
+    color: #242B42; }
+  [class^=pb_title_kit][class*=_3][class*=_light] {
+    color: #687887; }
+  [class^=pb_title_kit][class*=_3][class*=_lighter] {
+    color: #C1CDD6; }
+  [class^=pb_title_kit][class*=_3][class*=_success] {
+    color: #00CA74; }
+  [class^=pb_title_kit][class*=_3][class*=_error] {
+    color: #FF2229; }
+  [class^=pb_title_kit][class*=_3][class*=_link] {
+    color: #0056CF; }
 
 [class^=pb_title_kit][class*=_4] {
   font-size: 16px;
@@ -21969,6 +23463,16 @@ Background colors ------------------*/
   margin: 0;
   line-height: 1.2;
   font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif; }
+  [class^=pb_title_kit][class*=_4][class*=_default] {
+    color: #242B42; }
+  [class^=pb_title_kit][class*=_4][class*=_light] {
+    color: #687887; }
+  [class^=pb_title_kit][class*=_4][class*=_lighter] {
+    color: #C1CDD6; }
+  [class^=pb_title_kit][class*=_4][class*=_success] {
+    color: #00CA74; }
+  [class^=pb_title_kit][class*=_4][class*=_error] {
+    color: #FF2229; }
   [class^=pb_title_kit][class*=_4][class*=_link] {
     color: #0056CF; }
 
@@ -22045,14 +23549,18 @@ Background colors ------------------*/
     letter-spacing: 0.07em;
     text-transform: none;
     letter-spacing: unset; }
-    [class^="pb_caption_kit"][class^="pb_caption_kit_xs"][class*="_link"] {
-      color: #0056CF; }
-  [class^="pb_caption_kit"][class*="light"] {
-    color: #687887; }
   [class^="pb_caption_kit"][class*="default"] {
     color: #242B42; }
+  [class^="pb_caption_kit"][class*="light"] {
+    color: #687887; }
   [class^="pb_caption_kit"][class*="link"] {
     color: #0056CF; }
+  [class^="pb_caption_kit"][class*="lighter"] {
+    color: #C1CDD6; }
+  [class^="pb_caption_kit"][class*="success"] {
+    color: #00CA74; }
+  [class^="pb_caption_kit"][class*="error"] {
+    color: #FF2229; }
   [class^="pb_caption_kit"].dark {
     color: rgba(255, 255, 255, 0.6); }
     [class^="pb_caption_kit"].dark[class*="_default"] {

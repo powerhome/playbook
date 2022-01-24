@@ -10,16 +10,14 @@ module Playbook
                  values: %w[h1 h2 h3 h4 h5 h6 p span div caption],
                  default: "div"
       prop :text
-      prop :variant, type: Playbook::Props::Enum,
-                     values: [nil, "link"],
-                     default: nil
+      prop :variant, deprecated: true
 
       prop :color, type: Playbook::Props::Enum,
-                   values: [nil, "light", "default", "link"],
+                   values: [nil, "default", "light", "lighter", "success", "error", "link"],
                    default: nil
 
       def classname
-        generate_classname("pb_caption_kit", size, variant, color)
+        generate_classname("pb_caption_kit", size, color)
       end
     end
   end
