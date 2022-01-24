@@ -89,6 +89,7 @@ const TextInput = (props: TextInputProps, ref: React.ElementRef<"input">) => {
         className="text_input"
         disabled={disabled}
         id={id}
+        key={`${id}_${className}`}
         name={name}
         onChange={onChange}
         placeholder={placeholder}
