@@ -92,13 +92,13 @@
       .add-on {
         &-right {
           .add-on-card {
-            border: 1px solid red;
+            border: 1px solid $error;
             border-left: 0;
           }
         }
         &-left {
           .add-on-card {
-            border: 1px solid red;
+            border: 1px solid $error;
             border-right: 0;
           }
         }
@@ -169,7 +169,7 @@
     &-card {
       height: 45px;
       margin: 0;
-      padding: 0;
+      padding: 0 !important;
       align-items: center;
       justify-content: center;
       width: 45px;
