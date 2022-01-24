@@ -75,6 +75,9 @@ const TextInput = (props: TextInputProps, ref: React.ElementRef<"input">) => {
     globalProps(props),
     className,
   ])
+  const generateUniqueKey = (id) => {
+    return `text_input_${id}_${ new Date().getTime() }`
+  }
   const addOnIcon = (
     <Icon
         className="add-on-icon"
@@ -104,6 +107,7 @@ const TextInput = (props: TextInputProps, ref: React.ElementRef<"input">) => {
       <Flex
           className={`add-on-${addOnAlignment} ${borderCss}`}
           inline="flex-container"
+          key={generateUniqueKey(id)}
           vertical="center"
       >
         <If condition={addOnAlignment == 'left'}>
