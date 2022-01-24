@@ -1,4 +1,5 @@
 @import "../tokens/colors";
+@import "../tokens/transitions";
 
 $additional_colors: (
   "gradient": linear-gradient(135deg, $gradient_start 0%, $gradient_end 100%),

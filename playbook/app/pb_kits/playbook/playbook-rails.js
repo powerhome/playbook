@@ -11,6 +11,7 @@ window.datePickerHelper = datePickerHelper
 
 // Lazy image loading
 import 'lazysizes'
+import 'lazysizes/plugins/unveilhooks/ls.unveilhooks'
 
 import PbCollapsible from './pb_collapsible'
 PbCollapsible.start()
