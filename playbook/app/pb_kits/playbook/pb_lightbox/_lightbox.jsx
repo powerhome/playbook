@@ -5,7 +5,7 @@ import React, { useState } from 'react'
 import classnames from 'classnames'
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props.js'
 import { globalProps } from '../utilities/globalProps.js'
-import { Icon } from '../'
+import Icon from '../pb_icon/_icon'
 
 import Carousel from './Carousel/index.jsx'
 
