@@ -1,3 +1,8 @@
+.numInput {
+  border-left: none !important;
+}
+
+// Manual Import
 .flatpickr-monthSelect-months {
   margin: 10px 1px 3px 1px;
   flex-wrap: wrap;
@@ -83,10 +88,10 @@
 .flatpickr-monthSelect-month.selected,
 .flatpickr-monthSelect-month.startRange,
 .flatpickr-monthSelect-month.endRange {
-  background-color: #569ff7;
+  background-color: $primary;
   box-shadow: none;
   color: #fff;
-  border-color: #569ff7;
+  border-color: $primary;
 }
 
 .flatpickr-monthSelect-month.startRange {

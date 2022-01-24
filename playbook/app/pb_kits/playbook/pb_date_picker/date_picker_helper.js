@@ -160,8 +160,10 @@ const datePickerHelper = (config) => {
   }
 
   // Adding dropdown icons to year and month selects
-  // picker.monthElements[0].insertAdjacentHTML('afterend', '<i class="far fa-angle-down month-dropdown-icon"></i>')
-  // dropdown.insertAdjacentHTML('afterend', '<i class="far fa-angle-down year-dropdown-icon" id="test-id"></i>')
+  dropdown.insertAdjacentHTML('afterend', '<i class="far fa-angle-down year-dropdown-icon" id="test-id"></i>')
+  if (picker.monthElements[0].parentElement) {
+    return picker.monthElements[0].insertAdjacentHTML('afterend', '<i class="far fa-angle-down month-dropdown-icon"></i>')
+  }
 
   // Remove readonly attribute for validation and or text input
   if (allowInput){
