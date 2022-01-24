@@ -1,30 +1,50 @@
-
+/* eslint-disable no-unused-vars */
 /* @flow */
 
-import React from 'react'
+import React, { useState } from 'react'
 import classnames from 'classnames'
-import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
+import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props.js'
 import { globalProps } from '../utilities/globalProps.js'
+import { Icon } from '../'
 
-type LightboxProps = {
+import Carousel from './Carousel/index'
+
+type LightboxType = {
   aria?: object,
   className?: string,
   data?: object,
   id?: string,
+  photos: [],
+  initialPhoto: string,
+  onClose: Function,
+  icon: string,
+  iconSize: number,
 }
 
-const Lightbox = (props: LightboxProps) => {
+const Lightbox = (props: LightboxType) => {
   const {
     aria = {},
     className,
     data = {},
-    id,
+    id = '',
+    photos,
+    initialPhoto,
+    onClose,
+    icon,
+    iconSize,
   } = props
+  const [activePhoto, setActivePhoto] = useState(initialPhoto)
 
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
-  const classes = classnames(buildCss('pb_lightbox'), globalProps(props), className)
-
+  const classes = classnames(
+    buildCss('pb_lightbox'),
+    globalProps(props),
+    className
+  )
+  const handleOnSlide = (index) => {
+    setActivePhoto(photos[index])
+  }
   return (
     <div
         {...ariaProps}
@@ -32,7 +52,28 @@ const Lightbox = (props: LightboxProps) => {
         className={classes}
         id={id}
     >
-      {className}
+      <div className="carousel">
+        <div className="carousel-header">
+          <div
+              className="close-icon"
+              onClick={onClose}
+          >
+            <Icon
+                icon={icon}
+                size={iconSize}
+            />
+          </div>
+          <div className="active-photo-overlay" />
+        </div>
+        <Carousel
+            current={photos.indexOf(initialPhoto)}
+            images={photos.map((photo) => ({
+            url: photo,
+            thumbnail: photo,
+          }))}
+            onChange={handleOnSlide}
+        />
+      </div>
     </div>
   )
 }

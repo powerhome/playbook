@@ -1,5 +1,5 @@
 @import "../tokens/spacing";
-.EstimatePhotoViewer {
+
   .carousel {
     .home-tour-main-content {
       overflow-y: hidden;
@@ -74,20 +74,19 @@
     }
   }
 
-.photo-cards {
-  .overlay {
-    width: 100% !important;
-    height: 50% !important;
-    bottom: 0;
-    position: absolute !important;
-    border-radius: 0px 0px 5px 5px;
-    background: linear-gradient(-180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.77) 100%);
-  }
+  .photo-cards {
+    .overlay {
+      width: 100% !important;
+      height: 50% !important;
+      bottom: 0;
+      position: absolute !important;
+      border-radius: 0px 0px 5px 5px;
+      background: linear-gradient(-180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.77) 100%);
+    }
 
-  .overlay,
-  .overlay ~ .key-photo-icon,
-  .overlay ~ .tag-counter {
-    pointer-events: none;
+    .overlay,
+    .overlay ~ .key-photo-icon,
+    .overlay ~ .tag-counter {
+      pointer-events: none;
+    }
   }
-}
-}

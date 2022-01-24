@@ -10016,48 +10016,48 @@ Background colors ------------------*/
   border-radius: 5px;
   background: #FF2229; }
 
-.EstimatePhotoViewer .carousel .home-tour-main-content {
+.carousel .home-tour-main-content {
   overflow-y: hidden; }
 
-.EstimatePhotoViewer .carousel .image-gallery-slide-wrapper {
+.carousel .image-gallery-slide-wrapper {
   width: 1024px;
   height: 686px; }
 
-.EstimatePhotoViewer .carousel .image-gallery-slide div {
+.carousel .image-gallery-slide div {
   height: auto; }
 
-.EstimatePhotoViewer .carousel .image-gallery-slide .image-gallery-image {
+.carousel .image-gallery-slide .image-gallery-image {
   max-height: 100% !important;
   max-width: 100% !important;
   height: 692px !important;
   width: 100% !important;
   object-fit: cover; }
 
-.EstimatePhotoViewer .carousel .image-gallery-left-nav .image-gallery-svg, .EstimatePhotoViewer .carousel .image-gallery-right-nav .image-gallery-svg {
+.carousel .image-gallery-left-nav .image-gallery-svg, .carousel .image-gallery-right-nav .image-gallery-svg {
   height: 120px;
   width: 30px;
   opacity: 0.4; }
 
-.EstimatePhotoViewer .carousel .image-gallery-thumbnails {
+.carousel .image-gallery-thumbnails {
   overflow-x: auto; }
 
-.EstimatePhotoViewer .carousel .image-gallery-thumbnails-container {
+.carousel .image-gallery-thumbnails-container {
   width: 1024px;
   padding-left: 4px; }
 
-.EstimatePhotoViewer .carousel .image-gallery-thumbnails {
+.carousel .image-gallery-thumbnails {
   padding-top: 3px;
   background: #000; }
 
-.EstimatePhotoViewer .carousel .image-gallery-thumbnail-image {
+.carousel .image-gallery-thumbnail-image {
   height: 64px;
   width: 93px; }
 
-.EstimatePhotoViewer .carousel .image-gallery-thumbnail + .image-gallery-thumbnail {
+.carousel .image-gallery-thumbnail + .image-gallery-thumbnail {
   margin-left: 2px;
   margin-top: 2px; }
 
-.EstimatePhotoViewer .carousel .carousel-header {
+.carousel .carousel-header {
   background: black;
   border-radius: 0px;
   min-height: 51px;
@@ -10070,13 +10070,13 @@ Background colors ------------------*/
   align-items: center;
   padding: 16px;
   transition: all .5s; }
-  .EstimatePhotoViewer .carousel .carousel-header .close-icon {
+  .carousel .carousel-header .close-icon {
     color: white;
     margin-left: 16px;
     top: 16px;
     position: absolute; }
 
-.EstimatePhotoViewer .photo-cards .overlay {
+.photo-cards .overlay {
   width: 100% !important;
   height: 50% !important;
   bottom: 0;
@@ -10084,9 +10084,9 @@ Background colors ------------------*/
   border-radius: 0px 0px 5px 5px;
   background: linear-gradient(-180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.77) 100%); }
 
-.EstimatePhotoViewer .photo-cards .overlay,
-.EstimatePhotoViewer .photo-cards .overlay ~ .key-photo-icon,
-.EstimatePhotoViewer .photo-cards .overlay ~ .tag-counter {
+.photo-cards .overlay,
+.photo-cards .overlay ~ .key-photo-icon,
+.photo-cards .overlay ~ .tag-counter {
   pointer-events: none; }
 
 rect.highcharts-background {

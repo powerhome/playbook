@@ -3,8 +3,7 @@
 import React, { useState } from 'react'
 import { useToggler } from '../hooks/useToggler.js'
 import { Flex, Image } from '../../'
-import styles from '../Lightbox/styles.scss'
-import Lightbox from '../Lightbox/index.jsx'
+import Lightbox from '../_lightbox'
 
 export default function LightboxDefault() {
   const photos = [
@@ -25,7 +24,7 @@ export default function LightboxDefault() {
 
   return (
     <>
-      <div className={styles.EstimatePhotoViewer}>
+      <div>
         {showLightbox ? (
           <Lightbox
               icon="times"
@@ -35,7 +34,7 @@ export default function LightboxDefault() {
               photos={photos}
           />
         ) : (
-          <div className={styles.PhotoViewer}>
+          <div className="PhotoViewer">
             <Flex>
               {photos.map((photo, index) => {
                 return (
