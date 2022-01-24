@@ -7,7 +7,7 @@ import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props.js'
 import { globalProps } from '../utilities/globalProps.js'
 import { Icon } from '../'
 
-import Carousel from './Carousel/index'
+import Carousel from './Carousel/index.jsx'
 
 type LightboxType = {
   aria?: object,
