@@ -5,7 +5,7 @@ import { useToggler } from '../hooks/useToggler.js'
 import { Flex, Image } from '../../'
 import Lightbox from '../_lightbox'
 
-export default function LightboxDefault() {
+const LightboxDefault = (props) => {
   const photos = [
     'https://images.unsplash.com/photo-1638727228877-d2a79ab75e68?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2668&q=80',
   ]
@@ -32,6 +32,7 @@ export default function LightboxDefault() {
               initialPhoto={selectedPhoto}
               onClose={handleCloseLightbox}
               photos={photos}
+              {...props}
           />
         ) : (
           <div className="PhotoViewer">
@@ -60,3 +61,5 @@ export default function LightboxDefault() {
     </>
   )
 }
+
+export default LightboxDefault
