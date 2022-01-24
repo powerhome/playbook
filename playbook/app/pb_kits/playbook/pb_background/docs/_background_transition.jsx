@@ -61,11 +61,11 @@ const BackgroundTransition = (props) => {
           />
         </FlexItem>
       </Flex>
-      <div style={{ display: apply.url === '' ? 'none' : 'block' }}>
+      <div style={{ display: apply.imageUrl === '' ? 'none' : 'block' }}>
         <Background
             alt="picture of a misty forest"
             className="background"
-            imageUrl={apply.url}
+            imageUrl={apply.imageUrl}
             transition={apply.transition}
             {...props}
         />
