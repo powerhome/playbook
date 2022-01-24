@@ -67,11 +67,11 @@ const Lightbox = (props: LightboxType) => {
         </div>
         <Carousel
             current={photos.indexOf(initialPhoto)}
-            images={photos.map((photo) => ({
+            onChange={handleOnSlide}
+            photos={photos.map((photo) => ({
             url: photo,
             thumbnail: photo,
           }))}
-            onChange={handleOnSlide}
         />
       </div>
     </div>

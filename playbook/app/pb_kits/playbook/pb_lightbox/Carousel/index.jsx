@@ -16,14 +16,14 @@ type CarouselType = {
   icon: string,
   iconSize: number,
   current: number,
-  images: Array<string>,
+  photos: Array<string>,
   onChange: (index: number) => void,
   onClick: (index: number) => void,
 }
 
 export default function Carousel({
   current = 0,
-  images,
+  photos,
   onClick = noop,
   onChange = noop,
 }: CarouselType) {
@@ -40,13 +40,13 @@ export default function Carousel({
           current={currentIndex}
           onChange={handleChange}
           onClick={onClick}
-          urls={images.map((image) => image.url)}
+          urls={photos.map((photo) => photo.url)}
       />
-      {images.length > 1 ? (
+      {photos.length > 1 ? (
         <Thumbnails
             current={currentIndex}
             onChange={handleChange}
-            urls={images.map((image) => image.thumbnail)}
+            urls={photos.map((photo) => photo.thumbnail)}
         />
       ) : null}
     </div>
