@@ -64,7 +64,7 @@ const BackgroundTransition = (props) => {
       <div style={{ display: apply.url === '' ? 'none' : 'block' }}>
         <Background
             alt="picture of a misty forest"
-            className="image"
+            className="background"
             imageUrl={apply.url}
             transition={apply.transition}
             {...props}
