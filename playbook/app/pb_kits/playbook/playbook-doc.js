@@ -51,6 +51,7 @@ import * as LabelPill from 'pb_label_pill/docs'
 import * as LabelValue from 'pb_label_value/docs'
 import * as Layout from 'pb_layout/docs'
 import * as LegendDocs from 'pb_legend/docs'
+import * as Lightbox from 'pb_lightbox/docs'
 import * as LineGraphDocs from 'pb_line_graph/docs'
 import * as List from 'pb_list/docs'
 import * as LoadingInline from 'pb_loading_inline/docs'
@@ -145,6 +146,7 @@ WebpackerReact.setup({
   ...LabelValue,
   ...Layout,
   ...LegendDocs,
+  ...Lightbox,
   ...LineGraphDocs,
   ...List,
   ...LoadingInline,

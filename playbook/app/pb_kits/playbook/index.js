@@ -4,7 +4,6 @@ import 'lazysizes/plugins/attrchange/ls.attrchange'
 import 'lazysizes'
 
 // vvv React Component JSX Imports from the React Kits vvv
-export { default as Walkthrough } from './pb_walkthrough/_walkthrough'
 export { default as Avatar } from './pb_avatar/_avatar'
 export { default as AvatarActionButton } from './pb_avatar_action_button/_avatar_action_button'
 export { default as Background } from './pb_background/_background'
@@ -55,6 +54,7 @@ export { default as Layout } from './pb_layout/_layout'
 export { default as Legend } from './pb_legend/_legend'
 export { default as LineGraph } from './pb_line_graph/_line_graph'
 export { default as List } from './pb_list/_list'
+export { default as Lightbox } from './pb_lightbox/_lightbox'
 export { default as ListItem } from './pb_list/_list_item'
 export { default as LoadingInline } from './pb_loading_inline/_loading_inline'
 export { default as Message } from './pb_message/_message'
@@ -101,6 +101,7 @@ export { default as Toggle } from './pb_toggle/_toggle'
 export { default as Typeahead } from './pb_typeahead/_typeahead'
 export { default as User } from './pb_user/_user'
 export { default as UserBadge } from './pb_user_badge/_user_badge'
+export { default as Walkthrough } from './pb_walkthrough/_walkthrough'
 export { default as WeekdayStacked } from './pb_weekday_stacked/_weekday_stacked'
 // ^^^ React Component JSX Imports from the React Kits ^^^
 
