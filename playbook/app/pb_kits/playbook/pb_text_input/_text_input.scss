@@ -92,13 +92,13 @@
       .add-on {
         &-right {
           .add-on-card {
-            border: 1px solid red;
+            border: 1px solid $error;
             border-left: 0;
           }
         }
         &-left {
           .add-on-card {
-            border: 1px solid red;
+            border: 1px solid $error;
             border-right: 0;
           }
         }
