@@ -38,7 +38,7 @@ const Lightbox = (props: LightboxType) => {
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
   const classes = classnames(
-    buildCss('pb_lightbox'),
+    buildCss('pb_lightbox_kit'),
     globalProps(props),
     className
   )
