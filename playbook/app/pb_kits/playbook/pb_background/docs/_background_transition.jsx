@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-import { Background } from '../..'
+import Background from '../_background'
 import Select from '../../pb_select/_select'
 import FlexItem from '../../pb_flex/_flex_item'
 import Flex from '../../pb_flex/_flex'
