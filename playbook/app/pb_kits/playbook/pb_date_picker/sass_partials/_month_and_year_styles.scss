@@ -1,3 +1,6 @@
+@import "../../tokens/colors";
+
+
 .numInput {
   border-left: none !important;
 }
@@ -14,7 +17,7 @@
   border-radius: 4px;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
-  color: #393939;
+  color: $text_lt_default;
   cursor: pointer;
   display: inline-block;
   font-weight: 400;
@@ -65,10 +68,11 @@
 .flatpickr-monthSelect-month.inRange.today,
 .flatpickr-monthSelect-month:hover,
 .flatpickr-monthSelect-month:focus {
-  background: #e6e6e6;
+  background: $active_light;
+  font-weight: $bold;
+  color: $text_lt_default;
   cursor: pointer;
   outline: 0;
-  border-color: #e6e6e6;
 }
 
 .flatpickr-monthSelect-theme-dark .flatpickr-monthSelect-month.inRange,
@@ -89,6 +93,7 @@
 .flatpickr-monthSelect-month.startRange,
 .flatpickr-monthSelect-month.endRange {
   background-color: $primary;
+  font-weight: $bold;
   box-shadow: none;
   color: #fff;
   border-color: $primary;
