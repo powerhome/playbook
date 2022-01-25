@@ -61,6 +61,8 @@ $section_colors_dark: (
       }
     }
     &[class*=_vertical] {
+      margin-left: $space_xs;
+      margin-right: $space_xs;
       &::after {
         @include section_separator_vertical(true);
       }
