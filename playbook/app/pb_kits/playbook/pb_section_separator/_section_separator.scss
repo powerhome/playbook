@@ -36,13 +36,15 @@ $section_colors_dark: (
     justify-content: center;
   }
   &[class*=_vertical] {
+    margin-left: $space_xs;
+    margin-right: $space_xs;
     &::after {
       @include section_separator_vertical(false);
     }
   }
-  
+
   // Dark =========================
-  
+
   &.dark {
     &::after {
       @include section_separator_horizontal(true);
