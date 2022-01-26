@@ -43,6 +43,7 @@ const buttonClassName = (props: ButtonPropTypes) => {
 
   let className = 'pb_button_kit'
 
+  className += `${size !== null ? `_${size}` : '_md'}`
   className += `${variant !== null ? `_${variant}` : ''}`
   className += `${type !== null ? `_${type}` : ''}`
   className += `${size !== null ? `_${size}` : ''}`
