@@ -18,9 +18,6 @@ module Playbook
       prop :text
       prop :type
       prop :value
-      prop :size, type: Playbook::Props::Enum,
-                  values: ["sm", "md", "lg", nil],
-                  default: nil
 
       def options
         {
@@ -47,11 +44,11 @@ module Playbook
         link ? "a" : "button"
       end
 
-      def classname
-        generate_classname("pb_button_kit", size, variant, full_width_class, disabled_class, loading_class)
-      end
-
     private
+
+      def classname
+        generate_classname("pb_button_kit", variant, full_width_class, disabled_class, loading_class)
+      end
 
       def disabled_class
         disabled ? "disabled" : "enabled"
