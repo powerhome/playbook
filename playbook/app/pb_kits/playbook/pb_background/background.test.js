@@ -20,3 +20,8 @@ test('backgroundColor = category_1', () => {
   const kit = renderKit(Background, props, { backgroundColor: 'category_1' })
   expect(kit).toHaveClass('pb_background_kit pb_background_color_category_1')
 })
+
+test('backgroundTransition'), () => {
+  const kit = renderKit(Background, props, { backgroundTransition: 'fade' })
+  expect(kit).toHaveClass('pb_background_kit pb_background_transition')
+}

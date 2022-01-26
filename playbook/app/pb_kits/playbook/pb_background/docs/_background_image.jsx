@@ -71,9 +71,7 @@ const BackgroundImage = (props) => {
           </FlexItem>
         </Flex>
       </Background>
-      <Flex
-          marginTop="xl"
-      >
+      <Flex marginTop="xl">
         <FlexItem fixedSize="250px">
           <Select
               blankSelection="Select a Transition..."

@@ -17,7 +17,7 @@ module Playbook
                         default: nil
 
       def classname
-        generate_classname("pb_background_kit", "lazyload", `#{transition}`, background_color_classname, separator: " ")
+        generate_classname("pb_background_kit", `#{transition}`, background_color_classname, separator: " ")
       end
 
     private
