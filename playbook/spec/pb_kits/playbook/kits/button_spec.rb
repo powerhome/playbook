@@ -12,7 +12,7 @@ RSpec.describe Playbook::PbButton::Button do
   }
   it {
     is_expected.to define_enum_prop(:size)
-      .with_default("md")
+      .with_default(nil)
       .with_values("sm", "md", "lg", nil)
   }
   it { is_expected.to define_boolean_prop(:disabled).with_default(false) }
@@ -62,12 +62,12 @@ RSpec.describe Playbook::PbButton::Button do
 
   describe "#classname" do
     it "returns namespaced class name", :aggregate_failures do
-      expect(subject.new({}).classname).to eq "pb_button_kit_md_primary_inline_enabled"
-      expect(subject.new(variant: "secondary").classname).to eq "pb_button_kit_md_secondary_inline_enabled"
-      expect(subject.new(disabled: true).classname).to eq "pb_button_kit_md_primary_inline_disabled"
-      expect(subject.new(full_width: true).classname).to eq "pb_button_kit_md_primary_block_enabled"
-      expect(subject.new(size: "sm").classname).to eq "pb_button_kit_sm_primary_inline_enabled"
-      expect(subject.new(size: "lg").classname).to eq "pb_button_kit_lg_primary_inline_enabled"
+      expect(subject.new({}).classname).to eq "pb_button_kit_primary_inline_enabled"
+      expect(subject.new(variant: "secondary").classname).to eq "pb_button_kit_secondary_inline_enabled"
+      expect(subject.new(disabled: true).classname).to eq "pb_button_kit_primary_inline_disabled"
+      expect(subject.new(full_width: true).classname).to eq "pb_button_kit_primary_block_enabled"
+      expect(subject.new(size: "sm").classname).to eq "pb_button_kit_primary_inline_enabled size_sm"
+      expect(subject.new(size: "lg").classname).to eq "pb_button_kit_primary_inline_enabled size_lg"
     end
   end
 end

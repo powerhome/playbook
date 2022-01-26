@@ -20,7 +20,7 @@ module Playbook
       prop :value
       prop :size, type: Playbook::Props::Enum,
                   values: ["sm", "md", "lg", nil],
-                  default: "md"
+                  default: nil
 
       def options
         {
@@ -50,7 +50,8 @@ module Playbook
     private
 
       def classname
-        generate_classname("pb_button_kit", variant, full_width_class, disabled_class, loading_class)
+        @class = generate_classname("pb_button_kit", variant, full_width_class, disabled_class, loading_class)
+        @class + size_class
       end
 
       def disabled_class
@@ -63,6 +64,10 @@ module Playbook
 
       def loading_class
         loading ? "loading" : nil
+      end
+
+      def size_class
+        size ? " size_#{size}" : ""
       end
     end
   end
