@@ -5,6 +5,7 @@ import Select from '../../pb_select/_select'
 import FlexItem from '../../pb_flex/_flex_item'
 import Flex from '../../pb_flex/_flex'
 import Button from '../../pb_button/_button'
+import Title from '../../pb_title/_title'
 
 const BackgroundTransition = (props) => {
   const [transition, setTransition] = useState('')
@@ -16,7 +17,6 @@ const BackgroundTransition = (props) => {
   const loadImage = () => {
     document.querySelector('.background').classList.remove(transition, 'lazyloaded')
     setApply({
-      imageUrl: 'https://unsplash.it/500/400/?image=634',
       transition: transition,
     },
     document.querySelector('.background').classList.add(transition, 'lazyload')
@@ -63,12 +63,28 @@ const BackgroundTransition = (props) => {
       </Flex>
       <div style={{ display: apply.imageUrl === '' ? 'none' : 'block' }}>
         <Background
-            alt="picture of a misty forest"
+            alt="colorful background"
             className="background"
-            imageUrl={apply.imageUrl}
+            imageUrl="https://images.unsplash.com/photo-1528459801416-a9e53bbf4e17?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1000&q=80"
             transition={apply.transition}
             {...props}
-        />
+        >
+          <Flex
+              orientation="column"
+              vertical="center"
+              {...props}
+          >
+            <FlexItem>
+              <Title
+                  dark
+                  padding="lg"
+                  size={1}
+                  text="Background Kit Transition"
+                  {...props}
+              />
+            </FlexItem>
+          </Flex>
+        </Background>
       </div>
     </>
   )
