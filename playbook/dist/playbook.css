@@ -20214,11 +20214,11 @@ Background colors ------------------*/
   border-color: #FF2229; }
 
 [class^=pb_text_input_kit].error .text_input_wrapper_add_on .add-on-right .add-on-card {
-  border: 1px solid red;
+  border: 1px solid #FF2229;
   border-left: 0; }
 
 [class^=pb_text_input_kit].error .text_input_wrapper_add_on .add-on-left .add-on-card {
-  border: 1px solid red;
+  border: 1px solid #FF2229;
   border-right: 0; }
 
 [class^=pb_text_input_kit].error .text_input_wrapper_add_on .border_left_on .card-right-aligned {
@@ -20260,7 +20260,7 @@ Background colors ------------------*/
 .text_input_wrapper_add_on .add-on-card {
   height: 45px;
   margin: 0;
-  padding: 0;
+  padding: 0 !important;
   align-items: center;
   justify-content: center;
   width: 45px; }
