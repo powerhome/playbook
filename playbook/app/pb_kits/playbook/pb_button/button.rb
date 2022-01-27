@@ -47,12 +47,12 @@ module Playbook
         link ? "a" : "button"
       end
 
-    private
-
       def classname
-        @class = generate_classname("pb_button_kit", variant, full_width_class, disabled_class, loading_class)
-        @class + size_class
+        button_class = generate_classname("pb_button_kit", variant, full_width_class, disabled_class, loading_class)
+        button_class + size_class
       end
+
+    private
 
       def disabled_class
         disabled ? "disabled" : "enabled"

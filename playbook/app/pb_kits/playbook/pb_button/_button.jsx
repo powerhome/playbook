@@ -22,7 +22,7 @@ type ButtonPropTypes = {
   loading?: boolean,
   newWindow?: boolean,
   onClick?: EventHandler,
-  size: 'large' | 'medium' | 'small',
+  size?: 'sm' | 'md' | 'lg',
   text?: string,
   type: 'inline' | null,
   htmlType: string | 'button',
@@ -36,20 +36,19 @@ const buttonClassName = (props: ButtonPropTypes) => {
     disabled = false,
     fullWidth = false,
     loading = false,
-    size = null,
     type = 'inline',
     variant = 'primary',
+    size = null,
   } = props
 
   let className = 'pb_button_kit'
 
   className += `${variant !== null ? `_${variant}` : ''}`
   className += `${type !== null ? `_${type}` : ''}`
-  className += `${size !== null ? `_${size}` : ''}`
   className += `${fullWidth ? '_block' : ''}`
   className += disabled ? '_disabled' : '_enabled'
   className += loading ? '_loading' : ''
-  className += `${size !== null ? ` size_${size}` : ' '}`
+  className += `${size !== null ? ` size_${size}` : ''}`
 
   return className
 }
