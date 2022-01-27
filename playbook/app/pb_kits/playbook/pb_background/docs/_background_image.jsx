@@ -10,11 +10,11 @@ const BackgroundImage = (props) => {
   })
 
   const loadImage = () => {
-    document.querySelector('.background').classList.remove(transition, 'lazyloaded')
+    document.querySelector('background-image').classList.remove(transition, 'lazyloaded')
     setApply({
       transition: transition,
     },
-    document.querySelector('.background').classList.add(transition, 'lazyload')
+    document.querySelector('background-image').classList.add(transition, 'lazyload')
     )
   }
 
@@ -38,7 +38,7 @@ const BackgroundImage = (props) => {
     <>
       <Background
           alt="colorful background"
-          className="background"
+          className="background-image"
           imageUrl="https://images.unsplash.com/photo-1528459801416-a9e53bbf4e17?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1000&q=80"
           transition={apply.transition}
           {...props}

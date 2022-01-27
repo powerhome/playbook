@@ -13,8 +13,8 @@ module Playbook
                  default: "div"
 
       prop :transition, type: Playbook::Props::Enum,
-                        values: %w[fade blur scale],
-                        default: "fade"
+                        values: ["fade", "blur", "scale", nil],
+                        default: nil
 
       def classname
         generate_classname("pb_background_kit", `#{transition}`, background_color_classname, separator: " ")

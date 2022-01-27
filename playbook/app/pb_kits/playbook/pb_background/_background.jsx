@@ -28,7 +28,7 @@ const Background = (props: BackgroundProps) => {
     id,
     imageUrl = '',
     tag = 'div',
-    transition = 'fade',
+    transition = '',
   } = props
 
   const ariaProps = buildAriaProps(aria)
