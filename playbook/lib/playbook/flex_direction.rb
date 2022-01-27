@@ -23,7 +23,7 @@ module Playbook
     end
 
     def flex_direction_values
-      %w[flex_row flex_column flex_row_reverse flex_column_reverse]
+      %w[row column row_reverse column_reverse]
     end
   end
 end

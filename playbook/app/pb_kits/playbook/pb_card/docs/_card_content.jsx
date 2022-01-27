@@ -6,7 +6,7 @@ const CardContent = (props) => {
   return (
     <div>
       <Card
-          cursor="pointer"
+          flexDirection="column"
           {...props}
       >
         {'Card content'}
