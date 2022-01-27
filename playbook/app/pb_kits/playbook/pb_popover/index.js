@@ -61,7 +61,7 @@ export default class PbPopover extends PbEnhancedElement {
         }
         break
       }
-    }, { once: true, capture: true })
+    }, true)
   }
 
   hideTooltip() {
