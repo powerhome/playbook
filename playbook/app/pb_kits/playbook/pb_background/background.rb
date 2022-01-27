@@ -17,7 +17,7 @@ module Playbook
                         default: "fade"
 
       def classname
-        generate_classname("pb_background_kit", image_classname, background_color_classname, separator: " ")
+        generate_classname("pb_background_kit", `#{transition}`, background_color_classname, separator: " ")
       end
 
     private
