@@ -20,6 +20,7 @@ module Playbook
         line_height_props,
         display_props,
         cursor_props,
+        flex_direction_props,
       ].compact.join(" ")
     end
 

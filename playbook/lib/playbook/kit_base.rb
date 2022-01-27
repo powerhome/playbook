@@ -8,6 +8,7 @@ require "playbook/shadow"
 require "playbook/line_height"
 require "playbook/display"
 require "playbook/cursor"
+require "playbook/flex_direction"
 
 module Playbook
   class KitBase < ViewComponent::Base
@@ -21,6 +22,7 @@ module Playbook
     include Playbook::LineHeight
     include Playbook::Display
     include Playbook::Cursor
+    include Playbook::FlexDirection
 
     prop :id
     prop :data, type: Playbook::Props::Hash, default: {}

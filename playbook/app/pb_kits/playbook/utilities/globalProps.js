@@ -81,10 +81,16 @@ const cursorProps = ({ cursor }) => {
   return css
 }
 
+const flexDirectionProps = ({ flexDirection }) => {
+  let css = ''
+  css += flexDirection ? `flexDirection_${flexDirection} ` : ''
+  return css
+}
+
 // All Exported as a single function
 export const globalProps = (props, defaultProps = {}) => {
   const allProps = { ...props, ...defaultProps }
-  return spacingProps(allProps) + darkProps(allProps) + maxWidthProps(allProps) + zIndexProps(allProps) + numberSpacingProps(allProps) + shadowProps(allProps) + lineHeightProps(allProps) + cursorProps(allProps) + displayProps(allProps)
+  return spacingProps(allProps) + darkProps(allProps) + maxWidthProps(allProps) + zIndexProps(allProps) + numberSpacingProps(allProps) + shadowProps(allProps) + lineHeightProps(allProps) + cursorProps(allProps) + displayProps(allProps) + flexDirectionProps(allProps)
 }
 
 export const deprecatedProps = (kit, props = []) => {

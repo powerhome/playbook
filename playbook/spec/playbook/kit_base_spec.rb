@@ -26,6 +26,7 @@ RSpec.describe Playbook::KitBase do
   it { is_expected.to define_prop(:line_height) }
   it { is_expected.to define_prop(:display) }
   it { is_expected.to define_prop(:cursor) }
+  it { is_expected.to define_prop(:flex_direction) }
 
   describe "#children" do
     it "allows to be passed as prop" do
