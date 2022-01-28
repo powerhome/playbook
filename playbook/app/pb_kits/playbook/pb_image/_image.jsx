@@ -44,20 +44,18 @@ const Image = (props: ImageProps) => {
   const dataProps = buildDataProps(data)
 
   return (
-    <div>
-      <img
-          {...ariaProps}
-          {...dataProps}
-          alt={alt}
-          className={classes}
-          data-src={url}
-          id={id}
-          onError={onError}
-          rounded={+rounded}
-          src={url}
-          transition={transition}
-      />
-    </div>
+    <img
+        {...ariaProps}
+        {...dataProps}
+        alt={alt}
+        className={classes}
+        data-src={url}
+        id={id}
+        onError={onError}
+        rounded={+rounded}
+        src={url}
+        transition={transition}
+    />
   )
 }
 
