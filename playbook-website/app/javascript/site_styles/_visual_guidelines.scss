@@ -30,62 +30,6 @@
     margin: auto;
   }
 
-  @include break_at(breakpoint("sm")) {
-    .visual_guidelines_hero {
-      padding: $space_xl !important;
-    }
-  }
-
-  .positioning-guideline {
-    & > * {
-      height: 100px;
-      width: 33%;
-      position: absolute;
-
-      code {
-        position: absolute;
-        right: 10px;
-        bottom: 5px;
-      }
-    }
-
-    .two {
-      margin-left: 50px;
-    }
-
-    .three {
-      margin-left: 100px;
-    }
-
-    .four {
-      margin-left: 150px;
-    }
-
-    .five {
-      margin-left: 200px;
-    }
-
-    .six {
-      margin-left: 250px;
-    }
-
-    .seven {
-      margin-left: 300px;
-    }
-
-    .eight {
-      margin-left: 350px;
-    }
-
-    .nine {
-      margin-left: 400px;
-    }
-
-    .ten {
-      margin-left: 450px;
-    }
-  }
-
   // General Code Round Bottom
   .border-bottom {
     border-radius: 0 0 6px 6px;
