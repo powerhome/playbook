@@ -47,6 +47,7 @@
 @import 'pb_label_value/label_value';
 @import 'pb_layout/layout';
 @import 'pb_legend/legend';
+@import 'pb_lightbox/lightbox';
 @import 'pb_line_graph/line_graph';
 @import 'pb_list/list';
 @import 'pb_loading_inline/loading_inline';
@@ -98,3 +99,5 @@
 @import './utilities/positioning';
 @import './utilities/number_spacing';
 @import './utilities/shadow';
+@import './utilities/line_height';
+@import './utilities/display';

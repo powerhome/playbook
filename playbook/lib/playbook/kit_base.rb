@@ -5,6 +5,8 @@ require "playbook/spacing"
 require "playbook/z_index"
 require "playbook/number_spacing"
 require "playbook/shadow"
+require "playbook/line_height"
+require "playbook/display"
 require "playbook/cursor"
 
 module Playbook
@@ -16,6 +18,8 @@ module Playbook
     include Playbook::ZIndex
     include Playbook::NumberSpacing
     include Playbook::Shadow
+    include Playbook::LineHeight
+    include Playbook::Display
     include Playbook::Cursor
 
     prop :id

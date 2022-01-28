@@ -10,26 +10,15 @@
 
   &[class^="pb_caption_kit_xs"] {
     @include caption_xs;
-    &[class*="_link"] {
-      color: $primary;}
   }
 
-  &[class*="light"] {
-    color: $text_lt_light;
-  }
+  @include pb_caption_kit_colors;
 
-  &[class*="default"] {
-    color: $text_lt_default;
-  }
-
-  &[class*="link"] {
-    color: $primary;
-  }
-
-  &[class*="dark"] {
-    @each $dark_color_name, $dark_color_value in $pb_dark_caption_colors {
-      &[class*="_#{$dark_color_name}"][class*="dark"] {
-      @include caption_color($dark_color_value);
+  &.dark {
+    @include caption_dark;
+    @each $name, $color in $pb_dark_caption_colors {
+      &[class*="_#{$name}"] {
+        color: $color;
       }
     }
   }

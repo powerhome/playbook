@@ -3,12 +3,13 @@
 import React from 'react'
 import classnames from 'classnames'
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
-import { globalProps } from '../utilities/globalProps.js'
+import { deprecatedProps, globalProps } from '../utilities/globalProps.js'
 
 type TitleProps = {
   aria?: object,
   children?: array<React.ReactNode> | React.ReactNode,
   className?: string,
+  color?: "default" | "light" | "lighter" | "success" | "error" | "link",
   data?: object,
   id?: string,
   size?: 1 | 2 | 3 | 4,
@@ -18,24 +19,25 @@ type TitleProps = {
 }
 
 const Title = (props: TitleProps) => {
+  if (props.variant) deprecatedProps('Title', ['variant']) //variant prop is deprecated, use color instead
   const {
     aria = {},
     children,
     className,
+    color,
     data = {},
     id,
     size = 3,
     tag = 'h3',
     text,
-    variant = null,
   } = props
 
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
   const classes = classnames(
-    buildCss('pb_title_kit', size, variant),
+    buildCss('pb_title_kit', size, color),
     globalProps(props),
-    className
+    className,
   )
   const Tag = `${tag}`
 

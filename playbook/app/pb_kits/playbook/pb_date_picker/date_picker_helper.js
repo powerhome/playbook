@@ -1,4 +1,5 @@
 import flatpickr from 'flatpickr'
+import monthSelectPlugin from 'flatpickr/dist/plugins/monthSelect'
 
 const datePickerHelper = (config) => {
   const {
@@ -13,6 +14,7 @@ const datePickerHelper = (config) => {
     mode,
     onChange = () => {},
     pickerId,
+    plugins,
     required,
     yearRange,
   } = config
@@ -49,6 +51,10 @@ const datePickerHelper = (config) => {
       parentInput.style.justifyContent = ''
     }
   }
+
+  const setMonthAndYearPlugin = () => (
+    plugins ? [ monthSelectPlugin({ shorthand: true, dateFormat: 'F Y', altFormat: 'F Y' }) ] : []
+  )
 
   // ===========================================================
   // |             Flatpickr initializer w/ config             |
@@ -97,6 +103,7 @@ const datePickerHelper = (config) => {
     onYearChange: [() => {
       yearChangeHook()
     }],
+    plugins: setMonthAndYearPlugin(),
     prevArrow: '<i class="far fa-angle-left"></i>',
     static: true,
   })
@@ -153,8 +160,10 @@ const datePickerHelper = (config) => {
   }
 
   // Adding dropdown icons to year and month selects
-  picker.monthElements[0].insertAdjacentHTML('afterend', '<i class="far fa-angle-down month-dropdown-icon"></i>')
   dropdown.insertAdjacentHTML('afterend', '<i class="far fa-angle-down year-dropdown-icon" id="test-id"></i>')
+  if (picker.monthElements[0].parentElement) {
+    return picker.monthElements[0].insertAdjacentHTML('afterend', '<i class="far fa-angle-down month-dropdown-icon"></i>')
+  }
 
   // Remove readonly attribute for validation and or text input
   if (allowInput){

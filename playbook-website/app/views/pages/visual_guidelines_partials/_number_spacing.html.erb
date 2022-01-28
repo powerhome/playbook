@@ -1,21 +1,26 @@
-<%= pb_rails("title", props: { margin_top: "xl", padding_top: "xl", text: "Number Spacing", tag: "h1", size: 1 }) %>
-<%= pb_rails("body", props: { tag: "p", margin_top: "xs", margin_bottom: "lg" }) do %>
-  When dealing with numbers it can be helpful to controll the way the font handles number 
-  spacing. A font like proxima nova is an open type face that enables us to use tabular 
-  spacing for example. This alligns the numbers equally to make those numbers in a table 
-  easier to compare. This is avaliable in EVERY kit as a global prop. See example:
-<% end %>
-<%= render partial: "pages/visual_guidelines_partials/pb_doc_number_spacing",
+<%= render partial: "pages/visual_guidelines_partials/partial_title",
   locals: {
-    title: "Global Props",
-    sizes:[
-      {
-        name: "Normal",
-        variable:"default"
-      },
-      {
-        name: "Tabular",
-        variable: "tabular"}
-    ]
+    title: "Number Spacing",
+    title_size: 1,
+    description: "When dealing with numbers it can be helpful to controll the way the font handles number
+                  spacing. A font like proxima nova is an open type face that enables us to use tabular
+                  spacing for example. This alligns the numbers equally to make those numbers in a table
+                  easier to compare. This is avaliable in EVERY kit as a global prop. See example:",
+    global_props: true
   }
 %>
+<%= pb_rails("card", props: { shadow: "deep", margin_bottom: "none", padding: "none", max_width: "xl" }) do %>
+  <%= render "pages/visual_guidelines_partials/pb_doc_number_spacing" %>
+  <%= pb_rails("section_separator", props: { padding: "sm" }) %>
+  <%= render partial: "pages/visual_guidelines_partials/partial_props",
+    locals: {
+      props: ["numberSpacing"],
+      values: ["tabular"]
+    }
+  %>
+  <%= render partial: "pages/visual_guidelines_partials/partial_code_example",
+    locals: {
+      example: "app/views/pages/code_snippets/number_spacing_jsx.txt"
+    }
+  %>
+<% end %>

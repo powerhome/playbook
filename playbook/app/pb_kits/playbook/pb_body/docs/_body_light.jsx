@@ -19,6 +19,11 @@ const BodyLight = (props) => {
           {...props}
       />
       <Body
+          color="link"
+          text="I am a body kit (Link)"
+          {...props}
+      />
+      <Body
           status="negative"
           text="I am a body kit (Status: negative)"
           {...props}
