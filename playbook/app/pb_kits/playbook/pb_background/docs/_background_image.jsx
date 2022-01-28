@@ -10,12 +10,11 @@ const BackgroundImage = (props) => {
   })
 
   const loadImage = () => {
-    document.querySelector('background-image').classList.remove(transition, 'lazyloaded')
+    document.querySelector('.background-image').classList.remove(transition, 'lazyloaded')
     setApply({
       transition: transition,
-    },
-    document.querySelector('background-image').classList.add(transition, 'lazyload')
-    )
+    })
+    document.querySelector('.background-image').classList.add(transition, 'lazyload')
   }
 
   const handleTransition = ({ target }) => {

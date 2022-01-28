@@ -34,7 +34,7 @@ const Background = (props: BackgroundProps) => {
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
 
-  const classes = classnames(buildCss('pb_background_kit'), backgroundStyle, transition, globalProps(props), `pb_background_color_${backgroundColor}`, className)
+  const classes = classnames(buildCss('pb_background_kit'), backgroundStyle, transition, 'lazyload', globalProps(props), `pb_background_color_${backgroundColor}`, className)
   const Tag = `${tag}`
   const backgroundStyle = {
     backgroundImage: `url(${imageUrl})`,

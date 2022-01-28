@@ -22,10 +22,6 @@ module Playbook
 
     private
 
-      def image_classname
-        image_url.present? ? "lazyload blur_up" : ""
-      end
-
       def background_color_classname
         !image_url.present? ? "pb_background_color_#{background_color}" : ""
       end
