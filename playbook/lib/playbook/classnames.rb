@@ -21,6 +21,7 @@ module Playbook
         display_props,
         cursor_props,
         flex_direction_props,
+        flex_wrap_props,
       ].compact.join(" ")
     end
 

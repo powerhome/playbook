@@ -47,13 +47,13 @@ const numberSpacingProps = ({ numberSpacing }) => {
 
 const maxWidthProps = ({ maxWidth }) => {
   let css = ''
-  css += maxWidth ? `max_width_${maxWidth } ` : ''
+  css += maxWidth ? `max_width_${maxWidth} ` : ''
   return css
 }
 
 const zIndexProps = ({ zIndex }) => {
   let css = ''
-  css += zIndex ? `z_index_${zIndex } ` : ''
+  css += zIndex ? `z_index_${zIndex} ` : ''
   return css
 }
 
@@ -83,14 +83,24 @@ const cursorProps = ({ cursor }) => {
 
 const flexDirectionProps = ({ flexDirection }) => {
   let css = ''
-  css += flexDirection ? `flexDirection_${flexDirection} ` : ''
+  css += flexDirection == 'columnReverse' ? 'flex_direction_column_reverse' :
+    flexDirection == 'rowReverse' ? 'flex_direction_row_reverse' :
+      flexDirection ? `flex_direction_${flexDirection} ` : ''
+  return css
+}
+
+const flexWrapProps = ({ flexWrap }) => {
+  let css = ''
+  css += flexWrap == 'wrapReverse' ? 'flex_wrap_reverse' :
+    flexWrap == 'noWrap' ? 'flex_nowrap' :
+      flexWrap ? `flex_wrap_${flexWrap} ` : ''
   return css
 }
 
 // All Exported as a single function
 export const globalProps = (props, defaultProps = {}) => {
   const allProps = { ...props, ...defaultProps }
-  return spacingProps(allProps) + darkProps(allProps) + maxWidthProps(allProps) + zIndexProps(allProps) + numberSpacingProps(allProps) + shadowProps(allProps) + lineHeightProps(allProps) + cursorProps(allProps) + displayProps(allProps) + flexDirectionProps(allProps)
+  return spacingProps(allProps) + darkProps(allProps) + maxWidthProps(allProps) + zIndexProps(allProps) + numberSpacingProps(allProps) + shadowProps(allProps) + lineHeightProps(allProps) + cursorProps(allProps) + displayProps(allProps) + flexDirectionProps(allProps) + flexWrapProps(allProps)
 }
 
 export const deprecatedProps = (kit, props = []) => {

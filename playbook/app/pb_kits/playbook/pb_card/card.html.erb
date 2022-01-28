@@ -4,7 +4,7 @@
     class: object.classname,
     aria: object.aria,
     dark: object.dark) do %>
-  <%= pb_rails("card/card_body", props: { padding: object.body_padding }) do %>
+  <%= pb_rails("card/card_body", props: { padding: object.body_padding, flex_direction: object.body_flex_direction, flex_wrap: object.body_flex_wrap }) do %>
     <%= content %>
   <% end if content.present? %>
 <% end %>

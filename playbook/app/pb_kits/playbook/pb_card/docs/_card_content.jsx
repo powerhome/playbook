@@ -1,15 +1,21 @@
 import React from 'react'
 
 import Card from '../_card'
+import { Body, Icon } from '../../'
 
 const CardContent = (props) => {
   return (
     <div>
       <Card
-          flexDirection="column"
+          flexWrap="wrap"
           {...props}
       >
-        {'Card content'}
+        <Icon
+            icon="house"
+            size="2x"
+        />
+        <Body text="This is the first" />
+        <Body text="This is the second" />
       </Card>
       <br />
       <Card

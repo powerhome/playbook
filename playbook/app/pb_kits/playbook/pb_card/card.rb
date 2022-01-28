@@ -36,6 +36,22 @@ module Playbook
         end
       end
 
+      def body_flex_direction
+        if flex_direction.present?
+          "flex_direction_#{flex_direction}"
+        else
+          ""
+        end
+      end
+
+      def body_flex_wrap
+        if flex_wrap.present?
+          "flex_wrap_#{flex_wrap}"
+        else
+          ""
+        end
+      end
+
     private
 
       def selected_class

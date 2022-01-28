@@ -1,15 +1,19 @@
-.flex_row {
+.flex_direction_row {
+  display: flex;
   flex-direction: row;
 }
 
-.flex_column {
+.flex_direction_column {
+  display: flex;
   flex-direction: column;
 }
 
-.flex_row_reverse {
+.flex_direction_row_reverse {
+  display: flex;
   flex-direction: row-reverse;
 }
 
-.flex_column_reverse {
+.flex_direction_column_reverse {
+  display: flex;
   flex-direction: column-reverse;
 }

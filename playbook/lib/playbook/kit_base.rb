@@ -9,6 +9,7 @@ require "playbook/line_height"
 require "playbook/display"
 require "playbook/cursor"
 require "playbook/flex_direction"
+require "playbook/flex_wrap"
 
 module Playbook
   class KitBase < ViewComponent::Base
@@ -23,6 +24,7 @@ module Playbook
     include Playbook::Display
     include Playbook::Cursor
     include Playbook::FlexDirection
+    include Playbook::FlexWrap
 
     prop :id
     prop :data, type: Playbook::Props::Hash, default: {}
