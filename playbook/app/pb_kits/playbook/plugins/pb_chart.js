@@ -79,7 +79,7 @@ class pbChart {
   setupGauge(options) {
     highchartsMore(Highcharts)
     solidGauge(Highcharts)
-    Highcharts.setOptions(highchartsTheme)
+    this.setupTheme()
 
     Highcharts.chart(this.defaults.id, {
       chart: {
