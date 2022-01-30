@@ -62,6 +62,10 @@ module Playbook
         rounded == true ? "null" : nil
       end
 
+      def dark_theme
+        dark ? "dark" : ""
+      end
+
       def chart_options
         {
           id: id,
@@ -69,6 +73,7 @@ module Playbook
           borderColor: rounded_border_color,
           borderWidth: rounded_border_width,
           chartData: chart_data_formatted,
+          dark: dark_theme,
           title: title,
           height: height,
           type: chart_type,

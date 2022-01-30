@@ -149,7 +149,7 @@ class pbChart {
   }
 
   setupPieChart(options) {
-    Highcharts.setOptions(highchartsTheme)
+    this.setupTheme()
     Highcharts.chart(this.defaults.id, {
       title: {
         text: this.defaults.title,
