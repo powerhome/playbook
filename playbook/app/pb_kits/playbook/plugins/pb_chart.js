@@ -1,6 +1,7 @@
 import Highcharts from 'highcharts'
 
 import { highchartsTheme } from '../pb_dashboard/pbChartsLightTheme'
+import { highchartsDarkTheme } from '../pb_dashboard/pbChartsDarkTheme'
 import colors from '../tokens/exports/_colors.scss'
 
 import pie from 'highcharts/modules/variable-pie'
@@ -64,6 +65,14 @@ class pbChart {
       this.setupGauge(options)
     } else {
       this.setupChart(options)
+    }
+  }
+
+  setupTheme() {
+    if (this.options.dark) {
+      Highcharts.setOptions(highchartsDarkTheme)
+    } else {
+      Highcharts.setOptions(highchartsTheme)
     }
   }
 
@@ -187,8 +196,7 @@ class pbChart {
   }
 
   setupChart(options) {
-    Highcharts.setOptions(highchartsTheme)
-
+    this.setupTheme()
     const configOptions = {
       title: {
         text: this.defaults.title,
