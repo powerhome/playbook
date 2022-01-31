@@ -133,10 +133,16 @@ const alignSelfProps = ({ alignSelf }) => {
   return css
 }
 
+const flexProps = ({ flex }) => {
+  let css = ''
+  css += flex ? `flex_${flex}` : ''
+  return css
+}
+
 // All Exported as a single function
 export const globalProps = (props, defaultProps = {}) => {
   const allProps = { ...props, ...defaultProps }
-  return spacingProps(allProps) + darkProps(allProps) + maxWidthProps(allProps) + zIndexProps(allProps) + numberSpacingProps(allProps) + shadowProps(allProps) + lineHeightProps(allProps) + cursorProps(allProps) + displayProps(allProps) + flexDirectionProps(allProps) + flexWrapProps(allProps) + justifyContentProps(allProps) + justifySelfProps(allProps) + alignItemsProps(allProps) + alignContentProps(allProps) + alignSelfProps(allProps)
+  return spacingProps(allProps) + darkProps(allProps) + maxWidthProps(allProps) + zIndexProps(allProps) + numberSpacingProps(allProps) + shadowProps(allProps) + lineHeightProps(allProps) + cursorProps(allProps) + displayProps(allProps) + flexDirectionProps(allProps) + flexWrapProps(allProps) + justifyContentProps(allProps) + justifySelfProps(allProps) + alignItemsProps(allProps) + alignContentProps(allProps) + alignSelfProps(allProps) + flexProps(allProps)
 }
 
 export const deprecatedProps = (kit, props = []) => {

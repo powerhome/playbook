@@ -92,6 +92,14 @@ module Playbook
         end
       end
 
+      def body_flex
+        if flex.present?
+          "flex_#{flex}"
+        else
+          ""
+        end
+      end
+
     private
 
       def selected_class

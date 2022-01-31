@@ -27,6 +27,7 @@ module Playbook
         align_items_props,
         align_content_props,
         align_self_props,
+        flex_props,
       ].compact.join(" ")
     end
 
