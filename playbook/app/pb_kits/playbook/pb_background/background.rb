@@ -17,13 +17,13 @@ module Playbook
                         default: nil
 
       def classname
-        generate_classname("pb_background_kit", "lazyload", `#{transition}`, background_color_classname, separator: " ")
+        generate_classname("pb_background_kit", image_classname, separator: " ")
       end
 
     private
 
-      def background_color_classname
-        !image_url.present? ? "pb_background_color_#{background_color}" : ""
+      def image_classname
+        image_url.present? ? "lazyload #{transition}" : "pb_background_color_#{background_color}"
       end
     end
   end
