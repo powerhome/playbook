@@ -12,6 +12,9 @@ require "playbook/flex_direction"
 require "playbook/flex_wrap"
 require "playbook/justify_content"
 require "playbook/justify_self"
+require "playbook/align_items"
+require "playbook/align_content"
+require "playbook/align_self"
 
 module Playbook
   class KitBase < ViewComponent::Base
@@ -29,6 +32,9 @@ module Playbook
     include Playbook::FlexWrap
     include Playbook::JustifyContent
     include Playbook::JustifySelf
+    include Playbook::AlignItems
+    include Playbook::AlignContent
+    include Playbook::AlignSelf
 
     prop :id
     prop :data, type: Playbook::Props::Hash, default: {}

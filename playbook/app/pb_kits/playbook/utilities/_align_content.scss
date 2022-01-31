@@ -1,0 +1,29 @@
+.align_content_start {
+  display: flex;
+  align-content: start;
+}
+
+.align_content_end {
+  display: flex;
+  align-content: end;
+}
+
+.align_content_center {
+  display: flex;
+  align-content: center;
+}
+
+.align_content_space_between {
+  display: flex;
+  align-content: space-between;
+}
+
+.align_content_space_around {
+  display: flex;
+  align-content: space-around;
+}
+
+.align_content_space_evenly {
+  display: flex;
+  align-content: space-evenly;
+}

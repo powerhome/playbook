@@ -112,10 +112,31 @@ const justifySelfProps = ({ justifySelf }) => {
   return css
 }
 
+const alignItemsProps = ({ alignItems }) => {
+  let css = ''
+  css += alignItems ? `align_items_${alignItems}` : ''
+  return css
+}
+
+const alignContentProps = ({ alignContent }) => {
+  let css = ''
+  css += alignContent == 'spaceBetween' ? 'align_content_space_between' :
+    alignContent == 'spaceEvenly' ? 'align_content_space_evenly' :
+      alignContent == 'spaceAround' ? 'align_content_space_around' :
+        alignContent ? `align_content_${alignContent}` : ''
+  return css
+}
+
+const alignSelfProps = ({ alignSelf }) => {
+  let css = ''
+  css += alignSelf ? `align_self_${alignSelf}` : ''
+  return css
+}
+
 // All Exported as a single function
 export const globalProps = (props, defaultProps = {}) => {
   const allProps = { ...props, ...defaultProps }
-  return spacingProps(allProps) + darkProps(allProps) + maxWidthProps(allProps) + zIndexProps(allProps) + numberSpacingProps(allProps) + shadowProps(allProps) + lineHeightProps(allProps) + cursorProps(allProps) + displayProps(allProps) + flexDirectionProps(allProps) + flexWrapProps(allProps) + justifyContentProps(allProps) + justifySelfProps(allProps)
+  return spacingProps(allProps) + darkProps(allProps) + maxWidthProps(allProps) + zIndexProps(allProps) + numberSpacingProps(allProps) + shadowProps(allProps) + lineHeightProps(allProps) + cursorProps(allProps) + displayProps(allProps) + flexDirectionProps(allProps) + flexWrapProps(allProps) + justifyContentProps(allProps) + justifySelfProps(allProps) + alignItemsProps(allProps) + alignContentProps(allProps) + alignSelfProps(allProps)
 }
 
 export const deprecatedProps = (kit, props = []) => {

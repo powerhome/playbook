@@ -1,6 +1,5 @@
 <%= pb_rails("card", props: { 
-  flex_direction: "row",
-  justify_self: "stretch" 
+  flex_direction: "row"
 }) do %>
   <%= pb_rails("icon", props: {
     icon: "house"
@@ -14,8 +13,7 @@
 <br>
 
 <%= pb_rails("card", props: { 
-  flex_direction: "column",
-  justify_self: "end" 
+  align_content: "end" 
 }) do %>
   <%= pb_rails("icon", props: {
     icon: "house"

@@ -24,6 +24,9 @@ module Playbook
         flex_wrap_props,
         justify_content_props,
         justify_self_props,
+        align_items_props,
+        align_content_props,
+        align_self_props,
       ].compact.join(" ")
     end
 

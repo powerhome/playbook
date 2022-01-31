@@ -68,6 +68,30 @@ module Playbook
         end
       end
 
+      def body_align_items
+        if align_items.present?
+          "align_items_#{align_items}"
+        else
+          ""
+        end
+      end
+
+      def body_align_content
+        if align_content.present?
+          "align_content_#{align_content}"
+        else
+          ""
+        end
+      end
+
+      def body_align_self
+        if align_self.present?
+          "align_self_#{align_self}"
+        else
+          ""
+        end
+      end
+
     private
 
       def selected_class
