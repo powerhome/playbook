@@ -6031,9 +6031,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint@npm:6.6.0":
-  version: 6.6.0
-  resolution: "eslint@npm:6.6.0"
+"eslint@npm:6.8.0":
+  version: 6.8.0
+  resolution: "eslint@npm:6.8.0"
   dependencies:
     "@babel/code-frame": ^7.0.0
     ajv: ^6.10.0
@@ -6050,7 +6050,7 @@ __metadata:
     file-entry-cache: ^5.0.1
     functional-red-black-tree: ^1.0.1
     glob-parent: ^5.0.0
-    globals: ^11.7.0
+    globals: ^12.1.0
     ignore: ^4.0.6
     import-fresh: ^3.0.0
     imurmurhash: ^0.1.4
@@ -6063,7 +6063,7 @@ __metadata:
     minimatch: ^3.0.4
     mkdirp: ^0.5.1
     natural-compare: ^1.4.0
-    optionator: ^0.8.2
+    optionator: ^0.8.3
     progress: ^2.0.0
     regexpp: ^2.0.1
     semver: ^6.1.2
@@ -6074,7 +6074,7 @@ __metadata:
     v8-compile-cache: ^2.0.3
   bin:
     eslint: ./bin/eslint.js
-  checksum: e593370f38c42dc5333f2052941ee8199aa194c6753d2d83d195f895c788ac131eead9b0b80ab40c3a972f6907c9573f793f7dd856da6e55a6bf4342a8976b12
+  checksum: 796be0e038188d4cd8062541394d29f35606a7cee00cead5f6c8e3f9db932f0d19ee946df16fd593e0bcd614f896a416afa916bf82d9420576537ac349f2a06d
   languageName: node
   linkType: hard
 
@@ -7116,10 +7116,19 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"globals@npm:^11.1.0, globals@npm:^11.7.0":
+"globals@npm:^11.1.0":
   version: 11.12.0
   resolution: "globals@npm:11.12.0"
   checksum: 2563d3306a7e646fd9ec484b0ca29bf8847d9dc6ebbe86026f11e31bda04f420f6536c2decbd4cb96350379801d2cce352ab373c40be8b024324775b31f882f9
+  languageName: node
+  linkType: hard
+
+"globals@npm:^12.1.0":
+  version: 12.4.0
+  resolution: "globals@npm:12.4.0"
+  dependencies:
+    type-fest: ^0.8.1
+  checksum: 0b9764bdeab0bc9762dea8954a0d4c5db029420bd8bf693df9098ce7e045ccaf9b2d259185396fd048b051d42fdc8dc7ab02af62e3dbeb2324a78a05aac8d33c
   languageName: node
   linkType: hard
 
@@ -10700,7 +10709,7 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"optionator@npm:^0.8.1, optionator@npm:^0.8.2":
+"optionator@npm:^0.8.1, optionator@npm:^0.8.3":
   version: 0.8.3
   resolution: "optionator@npm:0.8.3"
   dependencies:
@@ -11231,7 +11240,7 @@ fsevents@^1.2.7:
     css-loader: 3.6.0
     css-modules-flow-types-loader: 0.3.1
     es5-shim: 4.6.4
-    eslint: 6.6.0
+    eslint: 6.8.0
     eslint-plugin-flowtype: 4.7.0
     eslint-plugin-jsx-control-statements: 2.2.1
     eslint-plugin-react: "git://github.com/rafbgarcia/eslint-plugin-react#fix-other-curly-brace-presence-edge-cases"
@@ -11292,7 +11301,7 @@ fsevents@^1.2.7:
     babel-plugin-transform-flow-strip-types: ^6.22.0
     babel-plugin-transform-react-remove-prop-types: ^0.4.24
     babel-preset-flow: 6.23.0
-    eslint: 6.6.0
+    eslint: 6.8.0
     playbook-ui: ">= 1"
     react: 16.14.0
     react-dom: 16.14.0
