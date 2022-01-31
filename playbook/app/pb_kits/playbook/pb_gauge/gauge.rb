@@ -27,16 +27,12 @@ module Playbook
         chart_data
       end
 
-      def dark_theme
-        dark ? "dark" : ""
-      end
-
       def chart_options
         {
           id: id,
           chartData: chart_data_formatted,
           circumference: full_circle ? [0, 360] : [-100, 100],
-          dark: dark_theme,
+          dark: dark ? "dark" : "",
           disableAnimation: disable_animation,
           height: height,
           min: min,

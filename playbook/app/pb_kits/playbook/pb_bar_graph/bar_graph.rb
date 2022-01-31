@@ -28,16 +28,12 @@ module Playbook
         orientation == "horizontal" ? "bar" : "column"
       end
 
-      def dark_theme
-        dark ? "dark" : ""
-      end
-
       def chart_options
         {
           id: id,
           className: classname,
           chartData: chart_data,
-          dark: dark_theme,
+          dark: dark ? "dark" : "",
           type: chart_type,
           title: title,
           subtitle: subtitle,

@@ -69,11 +69,7 @@ class pbChart {
   }
 
   setupTheme() {
-    if (this.options.dark) {
-      Highcharts.setOptions(highchartsDarkTheme)
-    } else {
-      Highcharts.setOptions(highchartsTheme)
-    }
+    this.options.dark ? Highcharts.setOptions(highchartsDarkTheme) :  Highcharts.setOptions(highchartsTheme)
   }
 
   setupGauge(options) {
