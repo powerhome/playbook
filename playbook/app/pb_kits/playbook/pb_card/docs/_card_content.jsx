@@ -7,13 +7,11 @@ const CardContent = (props) => {
   return (
     <div>
       <Card
-          flexWrap="wrap"
+          flexDirection="row"
+          justifySelf="stretch"
           {...props}
       >
-        <Icon
-            icon="house"
-            size="2x"
-        />
+        <Icon icon="house" />
         <Body text="This is the first" />
         <Body text="This is the second" />
       </Card>

@@ -10,6 +10,8 @@ require "playbook/display"
 require "playbook/cursor"
 require "playbook/flex_direction"
 require "playbook/flex_wrap"
+require "playbook/justify_content"
+require "playbook/justify_self"
 
 module Playbook
   class KitBase < ViewComponent::Base
@@ -25,6 +27,8 @@ module Playbook
     include Playbook::Cursor
     include Playbook::FlexDirection
     include Playbook::FlexWrap
+    include Playbook::JustifyContent
+    include Playbook::JustifySelf
 
     prop :id
     prop :data, type: Playbook::Props::Hash, default: {}

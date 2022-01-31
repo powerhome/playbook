@@ -22,6 +22,8 @@ module Playbook
         cursor_props,
         flex_direction_props,
         flex_wrap_props,
+        justify_content_props,
+        justify_self_props,
       ].compact.join(" ")
     end
 

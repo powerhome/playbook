@@ -97,10 +97,25 @@ const flexWrapProps = ({ flexWrap }) => {
   return css
 }
 
+const justifyContentProps = ({ justifyContent }) => {
+  let css = ''
+  css += justifyContent == 'spaceBetween' ? 'justify_content_space_between' :
+    justifyContent == 'spaceEvenly' ? 'justify_content_space_evenly' :
+      justifyContent == 'spaceAround' ? 'justify_content_space_around' :
+        justifyContent ? `justify_content_${justifyContent}` : ''
+  return css
+}
+
+const justifySelfProps = ({ justifySelf }) => {
+  let css = ''
+  css += justifySelf ? `justify_self_${justifySelf}` : ''
+  return css
+}
+
 // All Exported as a single function
 export const globalProps = (props, defaultProps = {}) => {
   const allProps = { ...props, ...defaultProps }
-  return spacingProps(allProps) + darkProps(allProps) + maxWidthProps(allProps) + zIndexProps(allProps) + numberSpacingProps(allProps) + shadowProps(allProps) + lineHeightProps(allProps) + cursorProps(allProps) + displayProps(allProps) + flexDirectionProps(allProps) + flexWrapProps(allProps)
+  return spacingProps(allProps) + darkProps(allProps) + maxWidthProps(allProps) + zIndexProps(allProps) + numberSpacingProps(allProps) + shadowProps(allProps) + lineHeightProps(allProps) + cursorProps(allProps) + displayProps(allProps) + flexDirectionProps(allProps) + flexWrapProps(allProps) + justifyContentProps(allProps) + justifySelfProps(allProps)
 }
 
 export const deprecatedProps = (kit, props = []) => {

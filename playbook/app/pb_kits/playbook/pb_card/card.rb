@@ -52,6 +52,22 @@ module Playbook
         end
       end
 
+      def body_justify_content
+        if justify_content.present?
+          "justify_content_#{justify_content}"
+        else
+          ""
+        end
+      end
+
+      def body_justify_self
+        if justify_self.present?
+          "justify_self_#{justify_self}"
+        else
+          ""
+        end
+      end
+
     private
 
       def selected_class
