@@ -2,5 +2,5 @@
 
 module Playbook
   PREVIOUS_VERSION = "10.18.0"
-  VERSION = "10.18.1"
+  VERSION = "10.19.0"
 end
