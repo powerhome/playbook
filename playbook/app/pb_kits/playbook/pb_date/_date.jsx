@@ -107,7 +107,7 @@ const PbDate = (props: PbDateProps) => {
               <Icon
                   fixedWidth
                   icon="calendar-alt"
-                  size="xs"
+                  size="sm"
               />
             </Caption>
           </If>
