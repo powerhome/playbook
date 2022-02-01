@@ -1,5 +1,111 @@
 
 
+## [10.20.0](https://github.com/powerhome/playbook/tree/10.20.0) (2022-02-01)
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/10.19.0...10.20.0)
+
+
+**Kit Enhancements:**
+
+- Updating size for icon on variant prop [\#1731](https://github.com/powerhome/playbook/pull/1731) ([jon1735](https://github.com/jon1735))
+
+
+**Fixed Bugs:**
+
+- Added back variant prop and tested for Title and Caption [\#1757](https://github.com/powerhome/playbook/pull/1757) ([jasperfurniss](https://github.com/jasperfurniss))
+
+
+**Improvements:**
+
+- Update dependency axe-core to v4.4.0 [\#1755](https://github.com/powerhome/playbook/pull/1755) ([renovate[bot]](https://github.com/apps/renovate))
+- Update dependency listen to "\>= 3.0.5", "\< 3.7.2" [\#1726](https://github.com/powerhome/playbook/pull/1726) ([renovate[bot]](https://github.com/apps/renovate))
+- Update dependency eslint to v6.8.0 [\#1709](https://github.com/powerhome/playbook/pull/1709) ([renovate[bot]](https://github.com/apps/renovate))
+- Update dependency flow-bin to v0.170.0 [\#1696](https://github.com/powerhome/playbook/pull/1696) ([renovate[bot]](https://github.com/apps/renovate))
+
+
+
+## [10.19.0](https://github.com/powerhome/playbook/tree/10.19.0) (2022-01-31)
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/10.19.0-lightbox-alpha-1...10.19.0)
+
+**Kit Enhancements:**
+
+- Configure the Date Picker Kit to be able to select month only as an option [#1735](https://github.com/powerhome/playbook/pull/1735) ([JelenaD1](https://github.com/jelenaD1))
+
+- Section separator: Add ability to remove margin from vertical orientation [#1744](https://github.com/powerhome/playbook/pull/1744) ([JelenaD1](https://github.com/jelenaD1))
+
+- Allow base typography to have access to basic text colors [#1728](https://github.com/powerhome/playbook/pull/1728) ([RobGentile17](https://github.com/RobGentile17))
+
+- Configure the Date Picker Kit to be able to select month only as an option [\#1735](https://github.com/powerhome/playbook/pull/1735) ([JelenaD1](https://github.com/JelenaD1))
+
+- Allow Legend Kit to use our Status Colors [\#1730](https://github.com/powerhome/playbook/pull/1730) ([JelenaD1](https://github.com/JelenaD1))
+
+- Updating padding prop to popover kit[\#1727](https://github.com/powerhome/playbook/pull/1727) ([jon1735](https://github.com/jon1735))
+
+- Nav Kit new "bold" variant [\#1735](https://github.com/powerhome/playbook/pull/1735) ([thestephenmarshall](https://github.com/thestephenmarshall))
+
+- Adding lineHeight props examples and partial functionality [\#1720](https://github.com/powerhome/playbook/pull/1733) ([kyleschechter](https://github.com/kyleschechter))
+
+- Override add on padding for text input[\#1739](https://github.com/powerhome/playbook/pull/1739) ([kyleschechter](https://github.com/kyleschechter))
+
+
+**Fixed Bugs:**
+
+- Fix title kit spacing  [\#1746](https://github.com/powerhome/playbook/pull/1746) ([jasoncypret](https://github.com/jasoncypret))
+
+- Fixed dark mode colors [\#1732](https://github.com/powerhome/playbook/pull/1732) ([JelenaD1](https://github.com/jelenaD1))
+
+- Bug Fix Text-input add-on error border color [#1712](https://github.com/powerhome/playbook/pull/1712) ([kyleschechter](https://github.com/kyleschechter))
+
+
+**Improvements:**
+
+- Remove div wrapping Image kit [\#1737](https://github.com/powerhome/playbook/pull/1737) ([kyleschechter](https://github.com/kyleschechter))
+
+- Remove dist folder tracking [#1742](https://github.com/powerhome/playbook/pull/1742) ([thestephenmarshall](https://github.com/thestephenmarshall))
+
+
+
+
+
+
+## [10.18.2](https://github.com/powerhome/playbook/tree/10.18.2) (2022-01-26)
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/10.18.1...10.18.2)
+
+## [10.18.1](https://github.com/powerhome/playbook/tree/10.18.1) (2022-01-19)
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/10.18.0...10.18.1)
+
+**Improvements:**
+
+- \[PLAY-53\]Create partials for visual guideline card sections [\#1718](https://github.com/powerhome/playbook/pull/1718) ([kyleschechter](https://github.com/kyleschechter))
+
+
+
+## [10.19.0](https://github.com/powerhome/playbook/tree/10.19.0) (2022-01-31)
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/10.19.0-lightbox-alpha-1...10.19.0)
+
+**Kit Enhancements:**
+
+- Configure the Date Picker Kit to be able to select month only as an option [\#1735](https://github.com/powerhome/playbook/pull/1735) ([JelenaD1](https://github.com/JelenaD1))
+- Allow Legend Kit to use our Status Colors \#1725 [\#1730](https://github.com/powerhome/playbook/pull/1730) ([thestephenmarshall](https://github.com/thestephenmarshall))
+
+**Fixed Bugs:**
+
+- Section separator: Add ability to remove margin from vertical orentation [\#1744](https://github.com/powerhome/playbook/pull/1744) ([JelenaD1](https://github.com/JelenaD1))
+
+**Improvements:**
+
+- Remove div wrapping Image kit [\#1737](https://github.com/powerhome/playbook/pull/1737) ([kyleschechter](https://github.com/kyleschechter))
+
+
+
+## [10.18.2](https://github.com/powerhome/playbook/tree/10.18.2) (2022-01-26)
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/10.18.1...10.18.2)
+
 ## [10.18.0](https://github.com/powerhome/playbook/tree/10.18.0) (2022-01-17)
 
 [Full Changelog](https://github.com/powerhome/playbook/compare/10.18.0...10.18.0)
@@ -2155,9 +2261,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Removed (breaking changes)
 - React PbLayout prop `children` dropped support for single Node (https://github.com/powerhome/playbook/commit/b16da50914e110c75c6d96c985fa02781c9e2040#diff-c3ce2c91288ca3e730d3c56e7f73475cL11-L14)
 - Rails PbLayout prop `dark` dropped (https://github.com/powerhome/playbook/commit/b16da50914e110c75c6d96c985fa02781c9e2040#diff-377fda563d148f7b3ad33f904b7b0cdbL13)
-
-
-\* *This Changelog was automatically generated by [github_changelog_generator](https://github.com/github-changelog-generator/github-changelog-generator)*
 
 
 \* *This Changelog was automatically generated by [github_changelog_generator](https://github.com/github-changelog-generator/github-changelog-generator)*

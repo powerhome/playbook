@@ -30,12 +30,13 @@ const Title = (props: TitleProps) => {
     size = 3,
     tag = 'h3',
     text,
+    variant = null,
   } = props
 
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
   const classes = classnames(
-    buildCss('pb_title_kit', size, color),
+    buildCss('pb_title_kit', size, variant, color),
     globalProps(props),
     className,
   )
