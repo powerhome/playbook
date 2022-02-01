@@ -89,6 +89,17 @@ class PagesController < ApplicationController
     @shadow_in_use_code_example = Rails.root.join("app/views/pages/code_snippets/shadow_in_use_jsx.txt").read
     @line_height_code_example = Rails.root.join("app/views/pages/code_snippets/line_height_code_jsx.txt").read
     @display_in_use_code_example = Rails.root.join("app/views/pages/code_snippets/display_in_use_jsx.txt").read
+    @flex_direction_code_example = Rails.root.join("app/views/pages/code_snippets/flex_direction_jsx.txt").read
+    @flex_wrap_code_example = Rails.root.join("app/views/pages/code_snippets/flex_wrap_jsx.txt").read
+    @justify_content_code_example = Rails.root.join("app/views/pages/code_snippets/justify_content_jsx.txt").read
+    @justify_self_code_example = Rails.root.join("app/views/pages/code_snippets/justify_self_jsx.txt").read
+    @align_items_code_example = Rails.root.join("app/views/pages/code_snippets/align_items_jsx.txt").read
+    @align_content_code_example = Rails.root.join("app/views/pages/code_snippets/align_content_jsx.txt").read
+    @align_self_code_example = Rails.root.join("app/views/pages/code_snippets/align_self_jsx.txt").read
+    @flex_code_example = Rails.root.join("app/views/pages/code_snippets/flex_jsx.txt").read
+    @flex_grow_code_example = Rails.root.join("app/views/pages/code_snippets/flex_grow_jsx.txt").read
+    @flex_shrink_code_example = Rails.root.join("app/views/pages/code_snippets/flex_shrink_jsx.txt").read
+    @order_code_example = Rails.root.join("app/views/pages/code_snippets/order_jsx.txt").read
     @space_sizes = [
       { name: "Extra Small", variable: "space_xs" },
       { name: "Small", variable: "space_sm" },

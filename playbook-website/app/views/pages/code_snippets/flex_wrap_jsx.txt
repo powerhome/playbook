@@ -1,0 +1,3 @@
+<Body flexWrap="wrap">
+  Body content
+<Body/>

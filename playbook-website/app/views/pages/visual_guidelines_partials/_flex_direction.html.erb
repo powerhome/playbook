@@ -1,4 +1,4 @@
-<%= pb_rails("title", props: { text: "Cursor", size: 1, margin_top: "xl", margin_bottom: "sm", padding_top: "xl"  }) %>
+<%= pb_rails("title", props: { text: "Flex Direction", size: 1, margin_top: "xl", margin_bottom: "sm", padding_top: "xl"  }) %>
 <%= pb_rails("title", props: { text: "Global Props", tag: "h3", size: 4 }) %>
 <%= pb_rails("body", props: { tag: "p", margin_bottom: "lg", margin_top: "xs" }) do %>
  Available in every kit.  These are added globally as they are most flexible when developing.
@@ -7,18 +7,21 @@
   <%= pb_rails("flex", props: { vertical: "stretch", padding_x: "md", padding_top: "md", padding_bottom: "md" }) do %>
     <%= pb_rails("flex/flex_item", props: { flex: "1" }) do %>
       <%= pb_rails("caption", props: { text: "Props", margin_bottom: "sm" }) %>
-        <%= pb_rails("pill", props: { text_transform: "none", text: "cursor", variant: "neutral" }) %>
+        <%= pb_rails("pill", props: { text_transform: "none", text: "flexDirection", variant: "neutral" }) %>
     <% end %>
     <%= pb_rails("section_separator", props: { orientation: "vertical", margin_x: "sm" }) %>
     <%= pb_rails("flex/flex_item", props: { flex: "1" }) do %>
       <%= pb_rails("caption", props: {text: "Values", margin_bottom: "sm"}) %>
-      <%= pb_rails("pill", props: { text: "pointer", variant: "warning" }) %>
+      <%= pb_rails("pill", props: { text: "row", variant: "warning" }) %>
+      <%= pb_rails("pill", props: { text: "column", variant: "warning" }) %>
+      <%= pb_rails("pill", props: { text_transform: "none", text: "rowReverse", variant: "warning" }) %>
+      <%= pb_rails("pill", props: { text_transform: "none", text: "columnReverse", variant: "warning" }) %>
     <% end %>
   <% end %>
   <%= pb_rails("background", props: { id: "code-wrapper", classname: "border-bottom", background_color: "dark", padding: "none" }) do %>
     <%= pb_rails("caption", props: { text: "EXAMPLE IN USE", padding_top: "lg", margin_x: "xl", classname: "dark" }) %>
     <div class="pb--codeCopy">
-      <pre class="highlight pt_sm" style="margin: 0px"><%= raw rouge(@cursor_code_example, "react") %></pre>
+      <pre class="highlight pt_sm" style="margin: 0px"><%= raw rouge(@flex_direction_code_example, "react") %></pre>
     </div>
   <% end %>
 <% end %>

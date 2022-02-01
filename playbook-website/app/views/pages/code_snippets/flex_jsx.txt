@@ -1,0 +1,3 @@
+<Body flex="auto">
+  Body content
+<Body/>

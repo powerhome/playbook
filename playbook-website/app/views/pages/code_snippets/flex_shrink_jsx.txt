@@ -1,0 +1,3 @@
+<Body flexShrink="1">
+  Body content
+<Body/>
