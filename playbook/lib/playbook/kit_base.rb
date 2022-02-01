@@ -16,6 +16,9 @@ require "playbook/align_items"
 require "playbook/align_content"
 require "playbook/align_self"
 require "playbook/flex"
+require "playbook/flex_grow"
+require "playbook/flex_shrink"
+require "playbook/order"
 
 module Playbook
   class KitBase < ViewComponent::Base
@@ -37,6 +40,9 @@ module Playbook
     include Playbook::AlignContent
     include Playbook::AlignSelf
     include Playbook::Flex
+    include Playbook::FlexGrow
+    include Playbook::FlexShrink
+    include Playbook::Order
 
     prop :id
     prop :data, type: Playbook::Props::Hash, default: {}

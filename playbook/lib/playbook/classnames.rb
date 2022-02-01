@@ -28,6 +28,9 @@ module Playbook
         align_content_props,
         align_self_props,
         flex_props,
+        flex_grow_props,
+        flex_shrink_props,
+        order_props,
       ].compact.join(" ")
     end
 

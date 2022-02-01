@@ -100,6 +100,30 @@ module Playbook
         end
       end
 
+      def body_flex_grow
+        if flex_grow.present?
+          "flex_grow_#{flex_grow}"
+        else
+          ""
+        end
+      end
+
+      def body_flex_shrink
+        if flex_shrink.present?
+          "flex_shrink_#{flex_shrink}"
+        else
+          ""
+        end
+      end
+
+      def body_order
+        if order.present?
+          "order_#{order}"
+        else
+          ""
+        end
+      end
+
     private
 
       def selected_class

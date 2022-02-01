@@ -4,7 +4,7 @@
     class: object.classname,
     aria: object.aria,
     dark: object.dark) do %>
-  <%= pb_rails("card/card_body", props: { padding: object.body_padding, flex_direction: object.body_flex_direction, flex_wrap: object.body_flex_wrap, justify_content: object.body_justify_content, justify_self: object.body_justify_self, align_items: object.body_align_items, align_content: object.body_align_content, align_self: object.body_align_self, flex: object.body_flex }) do %>
+  <%= pb_rails("card/card_body", props: { padding: object.body_padding, flex_direction: object.body_flex_direction, flex_wrap: object.body_flex_wrap, justify_content: object.body_justify_content, justify_self: object.body_justify_self, align_items: object.body_align_items, align_content: object.body_align_content, align_self: object.body_align_self, flex: object.body_flex, flex_grow: object.body_flex_grow, flex_shrink: object.body_flex_shrink, order: object.body_order }) do %>
     <%= content %>
   <% end if content.present? %>
 <% end %>

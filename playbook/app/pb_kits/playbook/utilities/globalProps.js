@@ -114,7 +114,9 @@ const justifySelfProps = ({ justifySelf }) => {
 
 const alignItemsProps = ({ alignItems }) => {
   let css = ''
-  css += alignItems ? `align_items_${alignItems}` : ''
+  css += alignItems == 'flexStart' ? 'align_items_flex_start' :
+    alignItems == 'flexEnd' ? 'align_items_flex_end' :
+      alignItems ? `align_items_${alignItems}` : ''
   return css
 }
 
@@ -139,10 +141,28 @@ const flexProps = ({ flex }) => {
   return css
 }
 
+const flexGrowProps = ({ flexGrow }) => {
+  let css = ''
+  css += flexGrow ? `flex_grow_${flexGrow}` : ''
+  return css
+}
+
+const flexShrinkProps = ({ flexShrink }) => {
+  let css = ''
+  css += flexShrink ? `flex_shrink_${flexShrink}` : ''
+  return css
+}
+
+const orderProps = ({ order }) => {
+  let css = ''
+  css += order ? `order_${order}` : ''
+  return css
+}
+
 // All Exported as a single function
 export const globalProps = (props, defaultProps = {}) => {
   const allProps = { ...props, ...defaultProps }
-  return spacingProps(allProps) + darkProps(allProps) + maxWidthProps(allProps) + zIndexProps(allProps) + numberSpacingProps(allProps) + shadowProps(allProps) + lineHeightProps(allProps) + cursorProps(allProps) + displayProps(allProps) + flexDirectionProps(allProps) + flexWrapProps(allProps) + justifyContentProps(allProps) + justifySelfProps(allProps) + alignItemsProps(allProps) + alignContentProps(allProps) + alignSelfProps(allProps) + flexProps(allProps)
+  return spacingProps(allProps) + darkProps(allProps) + maxWidthProps(allProps) + zIndexProps(allProps) + numberSpacingProps(allProps) + shadowProps(allProps) + lineHeightProps(allProps) + cursorProps(allProps) + displayProps(allProps) + flexDirectionProps(allProps) + flexWrapProps(allProps) + justifyContentProps(allProps) + justifySelfProps(allProps) + alignItemsProps(allProps) + alignContentProps(allProps) + alignSelfProps(allProps) + flexProps(allProps) + flexGrowProps(allProps) + flexShrinkProps(allProps) + orderProps(allProps)
 }
 
 export const deprecatedProps = (kit, props = []) => {

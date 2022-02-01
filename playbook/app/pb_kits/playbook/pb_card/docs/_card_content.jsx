@@ -7,8 +7,8 @@ const CardContent = (props) => {
   return (
     <div>
       <Card
-          alignSelf="end"
           flexDirection="row"
+          justifyContent="spaceEvenly"
           {...props}
       >
         <Icon icon="house" />
