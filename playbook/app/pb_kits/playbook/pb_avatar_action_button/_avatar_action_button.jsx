@@ -8,7 +8,7 @@ import {
   buildCss,
   buildDataProps,
 } from '../utilities/props'
-import { globalProps } from '../utilities/globalProps.js'
+import { globalProps } from '../utilities/globalProps'
 
 import Avatar from '../pb_avatar/_avatar'
 import Icon from '../pb_icon/_icon'

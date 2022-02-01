@@ -3,7 +3,7 @@
 import React from 'react'
 import classnames from 'classnames'
 import { buildAriaProps, buildDataProps } from '../utilities/props'
-import { globalProps } from '../utilities/globalProps.js'
+import { globalProps } from '../utilities/globalProps'
 
 import Icon from '../pb_icon/_icon.jsx'
 
@@ -106,6 +106,7 @@ const Button = (props: ButtonPropTypes) => {
           className={css}
           href={link}
           id={id}
+          rel="noreferrer"
           role="link"
           target={newWindow ? '_blank' : null}
       >

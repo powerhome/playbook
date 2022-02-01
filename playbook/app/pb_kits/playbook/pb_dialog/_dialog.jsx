@@ -5,7 +5,7 @@ import classnames from 'classnames'
 import Modal from 'react-modal'
 
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
-import { globalProps } from '../utilities/globalProps.js'
+import { globalProps } from '../utilities/globalProps'
 
 import Button from '../pb_button/_button'
 import DialogHeader  from './child_kits/_dialog_header'
