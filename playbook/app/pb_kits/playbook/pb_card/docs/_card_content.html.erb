@@ -7,7 +7,8 @@
   }) %>
   <%= pb_rails("body", props: {
     text: "This is a test",
-    order: "2"
+    order: "2",
+    flex_grow: "1"
   }) %>
 <% end %>
 
@@ -16,7 +17,7 @@
 
 <%= pb_rails("card", props: { 
   flex_direction: "column",
-  flex_shrink: "0" 
+  flex_shrink: 1 
 }) do %>
   <%= pb_rails("icon", props: {
     icon: "house"
