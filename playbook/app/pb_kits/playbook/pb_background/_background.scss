@@ -26,7 +26,7 @@ $background_colors: map-merge($additional_colors, $merge_kits2);
     opacity: 0;
     &.lazyloaded {
       opacity: 1;
-      transition: opacity 300ms ease-in;
+      transition: opacity 400ms ease-in;
     }
   }
   
@@ -35,7 +35,7 @@ $background_colors: map-merge($additional_colors, $merge_kits2);
     &.lazyloaded {
       -webkit-filter: blur(0);
       filter: blur(0);
-      transition: filter 300ms ease-in;
+      transition: filter 400ms ease-in;
     }
   }
   
