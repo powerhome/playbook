@@ -7,7 +7,7 @@ examples:
   - background_image: Image
   - background_status: Status
   - background_category: Category
-  - background_transition: Transition
+  # - background_transition: Transition
 
   react:
   - background_light: Light
@@ -16,4 +16,4 @@ examples:
   - background_image: Image
   - background_status: Status
   - background_category: Category
-  - background_transition: Transition
+  # - background_transition: Transition
