@@ -30,21 +30,15 @@ const CodeEditor = ({ source }) => {
           'playbook-ui': 'latest',
         },
 
-        entry: 'index.js',
+        entry: './src/index.js',
 
         files: {
           '/App.js': `${source}`,
           '/index.js': `${code}`,
         },
       }}
-        options={{
-        externalResources: [
-          'https://unpkg.com/@playbook-ui/dist/reset.css.css',
-          'https://unpkg.com/@laybook-ui/dist/playbook.css',
-        ],
-      }}
         template="react"
-        theme="monokai-pro"
+        theme="night-owl"
     />
   )
 }

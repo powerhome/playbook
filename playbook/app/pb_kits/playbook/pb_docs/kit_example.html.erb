@@ -21,7 +21,7 @@
       <div class="pb--codeCopy" data-action="toggle" data-togglable="code_example" style="display: none" >
         <%= pb_rails("section_separator", props: { dark: dark })%>
         <a href="#" id="toggle-close" data-toggle="false" class="pb--close-toggle">Close</a>
-        <%= react_component("CodeEditor", source: source, path: ::Playbook.kit_path(kit, "docs")) %>
+        <%= react_component("CodeEditor", source: source, path: ::Playbook.kit_path(kit, "docs"), kit: kit) %>
       </div>
     </div>
   <% end %>
