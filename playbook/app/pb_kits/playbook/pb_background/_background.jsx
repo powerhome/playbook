@@ -30,6 +30,8 @@ const Background = (props: BackgroundProps) => {
   } = props
 
   const ariaProps = buildAriaProps(aria)
+  // eslint-disable-next-line no-unused-vars
+  const hello = test
   const dataProps = buildDataProps(data)
 
   const classes = classnames(buildCss('pb_background_kit'), globalProps(props), `pb_background_color_${backgroundColor}`, className)
