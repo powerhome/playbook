@@ -4,54 +4,47 @@ import '@codesandbox/sandpack-react/dist/index.css'
 
 /* eslint react/prop-types: 0 */
 
-const code = `import React from 'react'
-import { Button } from 'playbook-ui'
+const code = `import React from "react";
+import ReactDOM from "react-dom";
 
-const ButtonDefault = (props) => (
-  <div>
-    <Button
-        marginRight="xl"
-        onClick={() => alert('button clicked!')}
-        text="Button Primary"
-        {...props}
-    />
-    {' '}
-    <Button
-        onClick={() => alert('button clicked!')}
-        text="Button Secondary"
-        variant="secondary"
-        {...props}
-    />
-    {' '}
-    <Button
-        onClick={() => alert('button clicked!')}
-        text="Button Link"
-        variant="link"
-        {...props}
-    />
-    <Button
-        disabled
-        onClick={() => alert('button clicked!')}
-        text="Button Disabled"
-        {...props}
-    />
-  </div>
-)
+import App from "./App";
+import "playbook-ui/dist/reset.css";
+import "playbook-ui/dist/playbook.css";
+import "playbook-ui/dist/fonts/fontawesome-min";
+import "playbook-ui/dist/fonts/regular-min";
 
-export default ButtonDefault`
+const rootElement = document.getElementById("root");
+ReactDOM.render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>,
+  rootElement
+);
+`
 
-const CodeEditor = () => {
+const CodeEditor = ({ source }) => {
   return (
     <Sandpack
         customSetup={{
         dependencies: {
           'playbook-ui': 'latest',
         },
-        entry: 'test.js',
+
+        entry: 'index.js',
+
         files: {
-          test: `${code}`,
+          '/App.js': `${source}`,
+          '/index.js': `${code}`,
         },
       }}
+        options={{
+        externalResources: [
+          'https://unpkg.com/@playbook-ui/dist/reset.css.css',
+          'https://unpkg.com/@laybook-ui/dist/playbook.css',
+        ],
+      }}
+        template="react"
+        theme="monokai-pro"
     />
   )
 }
