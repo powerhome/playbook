@@ -1,3 +1,0 @@
-<Body alignSelf="start">
-  Body content
-<Body/>

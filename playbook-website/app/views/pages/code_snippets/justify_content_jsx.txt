@@ -1,3 +1,0 @@
-<Body justifyContent="start">
-  Body content
-<Body/>

@@ -1,3 +1,0 @@
-<Body flexDirection="columnReverse">
-  Body content
-<Body/>

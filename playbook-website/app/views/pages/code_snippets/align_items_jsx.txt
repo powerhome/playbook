@@ -1,3 +1,0 @@
-<Body alignItems="flexStart">
-  Body content
-<Body/>

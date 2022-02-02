@@ -1,3 +1,0 @@
-<Body flexGrow="1">
-  Body content
-<Body/>
