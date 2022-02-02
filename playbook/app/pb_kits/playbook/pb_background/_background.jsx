@@ -13,7 +13,7 @@ type BackgroundProps = {
   className?: string,
   data?: object,
   id?: string,
-  imageUrl: string,
+  imageUrl?: string,
   padding?: 'none' | 'xs' | 'sm' | 'md' | 'lg' | 'xl',
   tag?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p' | 'span' | 'div',
   transition?: 'fade' | 'blur' | 'scale',

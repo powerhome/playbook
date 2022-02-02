@@ -32,23 +32,19 @@
     ]
     }) %>
   <% end %>
-    <%= pb_rails("flex/flex_item") do %>
-      <%= pb_rails("button", props: {classname: "button", text: "Add Lazyload", margin_left: "sm", margin_top: "xs", disabled: true }) %>
-    <% end %>
 <% end %> 
 
 <script>
     window.addEventListener('DOMContentLoaded', () => {
-        const button = document.querySelector(".button")
         const transitionDropdown = document.querySelector("#transition-dropdown")
         var option = ''
 
         transitionDropdown.addEventListener('change', function() {
           if (this.value === '') {
-            button.className = button.className + ' _disabled'
+            (transitionDropdown).className = (transitionDropdown).className + ' _disabled'
           } else {
-            button.removeAttribute("disabled");
-            button.className = button.className.replace(/\_disabled/gi, '')
+            (transitionDropdown).removeAttribute("disabled");
+            (transitionDropdown).className = (transitionDropdown)
             option = this.value
           }
         });
@@ -58,7 +54,7 @@
             imageTransition.classList.remove("fade", "blur", "scale", "lazyloaded")
             imageTransition.classList.add(transition, "lazyload")   
         } 
-        button.addEventListener('click', function() {
+        (transitionDropdown).addEventListener('change', function() {
           updateTransition(option)
         })
     });
