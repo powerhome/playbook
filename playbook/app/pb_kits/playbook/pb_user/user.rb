@@ -20,18 +20,11 @@ module Playbook
       prop :territory
 
       def classname
-        generate_classname("pb_user_kit", align, orientation, size)
+        generate_classname("pb_user_kit", align, orientation)
       end
 
       def avatar_size
-        case size
-        when "lg"
-          "xl"
-        when "md"
-          "md"
-        else
-          "sm"
-        end
+        size == "lg" ? "xl" : size
       end
 
       def title_size
