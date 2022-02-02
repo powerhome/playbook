@@ -1,31 +1,10 @@
 <%= pb_rails("card", props: { 
-  flex_direction: "row"
+  cursor: "pointer" 
 }) do %>
-  <%= pb_rails("icon", props: {
-    icon: "house",
-    order: "3"
-  }) %>
-  <%= pb_rails("body", props: {
-    text: "This is a test",
-    order: "2",
-    flex_grow: "1"
-  }) %>
+  Card Content
 <% end %>
-
 
 <br>
-
-<%= pb_rails("card", props: { 
-  flex_direction: "column",
-  flex_shrink: 1 
-}) do %>
-  <%= pb_rails("icon", props: {
-    icon: "house"
-  }) %>
-  <%= pb_rails("body", props: {
-    text: "This is a test"
-  }) %>
-<% end %>
 
 <%= pb_rails("card") do %>
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec iaculis, risus a fringilla luctus, sapien eros sodales ex, quis molestie est nulla non turpis. Vestibulum aliquet at ipsum eget posuere. Morbi sed laoreet erat. Sed commodo posuere lectus, at porta nulla ornare a. Suspendisse quam est, sollicitudin ut enim sit amet, commodo placerat enim. Donec laoreet metus ac mauris pellentesque mattis. Pellentesque luctus vel mauris non aliquam. Mauris hendrerit mattis porttitor. Curabitur vehicula justo non ex consectetur commodo. Quisque posuere aliquet quam. Maecenas malesuada magna mauris, ac tempor metus euismod at.
