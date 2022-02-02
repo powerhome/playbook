@@ -33,6 +33,9 @@ module Playbook
       prop :dark, type: Playbook::Props::Boolean,
                   default: false
 
+      prop :abbreviate, type: Playbook::Props::Boolean,
+                        default: false
+
       def classname
         generate_classname("pb_currency_kit", align, size, dark_class)
       end
@@ -48,7 +51,7 @@ module Playbook
       def title_props
         {
           size: size_value,
-          text: whole_value,
+          text: abbreviate ? abbreviated_value : whole_value,
           classname: "pb_currency_value",
           dark: dark,
         }
@@ -84,10 +87,29 @@ module Playbook
         amount.split(".").first.to_s
       end
 
+      def abbreviated_value
+        value = amount.split(".").first.split(",")
+        return "0.#{value[0][0]}k" if value.length == 1
+
+        abbreviation = case value.length
+                       when 2
+                         "k"
+                       when 3
+                         "M"
+                       when 4
+                         "B"
+                       when 5
+                         "T"
+                       end
+        "#{value[0]}.#{value[1][0]}#{abbreviation}"
+      end
+
       def units_element
         _, decimal_part = amount.split(".")
         if unit.nil?
-          decimal_part.nil? ? ".00" : ".#{decimal_part}"
+          if abbreviate == false
+            decimal_part.nil? ? ".00" : ".#{decimal_part}"
+          end
         else
           unit
         end

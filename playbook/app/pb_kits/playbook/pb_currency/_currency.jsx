@@ -11,6 +11,7 @@ import Caption from '../pb_caption/_caption'
 import Title from '../pb_title/_title'
 
 type CurrencyProps = {
+  abbreviate?: boolean,
   align?: 'center' | 'left' | 'right',
   amount: string,
   aria?: object,
@@ -34,6 +35,7 @@ const sizes = {
 
 const Currency = (props: CurrencyProps) => {
   const {
+    abbreviate = false,
     align = 'left',
     aria = {},
     amount,
@@ -69,6 +71,21 @@ const Currency = (props: CurrencyProps) => {
     className
   )
 
+  const abbreviatedValue = () => {
+    const value = whole.split(',')
+    let abbr
+    if (value.length === 2) {
+      abbr = 'k'
+    } else if (value.length === 3) {
+      abbr = 'M'
+    } else if (value.length === 4) {
+      abbr = 'B'
+    } else if (value.length === 5) {
+      abbr = 'T'
+    }
+    return value.length === 1 ? `0.${value[0][0]}k` : `${value[0]}.${value[1][0]}${abbr}`
+  }
+
   return (
     <div
         {...ariaProps}
@@ -92,7 +109,7 @@ const Currency = (props: CurrencyProps) => {
             dark={dark}
             size={sizes[size]}
         >
-          {`${whole}`}
+          {abbreviate ? abbreviatedValue() : whole}
         </Title>
 
         <Body
@@ -103,7 +120,7 @@ const Currency = (props: CurrencyProps) => {
           <If condition={unit}>
             {unit}
             <Else />
-            {`.${decimal}`}
+            {abbreviate ? '' : `.${decimal}`}
           </If>
         </Body>
       </div>
