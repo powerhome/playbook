@@ -20,7 +20,7 @@ type FileUploadProps = {
 
 const FileUpload = (props: FileUploadProps) => {
   const {
-    accept = ['*'],
+    accept = null,
     acceptedFilesDescription = '',
     className,
     onFilesAccepted = noop,
@@ -34,13 +34,15 @@ const FileUpload = (props: FileUploadProps) => {
     onDrop,
   })
 
-  const acceptedFileTypes = accept.map((fileType) => {
-    if (fileType.startsWith('image/')) {
-      return fileType.replace('image/', ' ')
-    } else {
-      return fileType
-    }
-  })
+  const acceptedFileTypes = () => {
+    return accept.map((fileType) => {
+      if (fileType.startsWith('image/')) {
+        return fileType.replace('image/', ' ')
+      } else {
+        return fileType
+      }
+    })
+  }
 
   return (
     <div
@@ -53,7 +55,7 @@ const FileUpload = (props: FileUploadProps) => {
           <If condition={isDragActive}>
             <p>{'Drop the files here ...'}</p>
             <Else />
-            <p>{`Choose a file or drag it here. The accepted file types are: ${acceptedFilesDescription || acceptedFileTypes}`}</p>
+            <p>{accept === null ? 'Choose a file or drag it here' : `Choose a file or drag it here. The accepted file types are: ${acceptedFilesDescription || acceptedFileTypes()}`}</p>
           </If>
         </Body>
       </Card>
