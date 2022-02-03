@@ -88,20 +88,8 @@ module Playbook
       end
 
       def abbreviated_value
-        value = amount.split(".").first.split(",")
-        return "0.#{value[0][0]}k" if value.length == 1
-
-        abbreviation = case value.length
-                       when 2
-                         "k"
-                       when 3
-                         "M"
-                       when 4
-                         "B"
-                       when 5
-                         "T"
-                       end
-        "#{value[0]}.#{value[1][0]}#{abbreviation}"
+        value = amount.split(".").first.split(",").join("").to_i
+        number_to_human(value, units: { thousand: "K", million: "M", billion: "B", trillion: "T" })
       end
 
       def units_element

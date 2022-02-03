@@ -72,18 +72,10 @@ const Currency = (props: CurrencyProps) => {
   )
 
   const abbreviatedValue = () => {
-    const value = whole.split(',')
-    let abbr
-    if (value.length === 2) {
-      abbr = 'k'
-    } else if (value.length === 3) {
-      abbr = 'M'
-    } else if (value.length === 4) {
-      abbr = 'B'
-    } else if (value.length === 5) {
-      abbr = 'T'
-    }
-    return value.length === 1 ? `0.${value[0][0]}k` : `${value[0]}.${value[1][0]}${abbr}`
+    return new Intl.NumberFormat('en-US', {
+      notation: 'compact',
+      maximumFractionDigits: 1,
+    }).format(whole.split(',').join(''))
   }
 
   return (

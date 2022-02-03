@@ -16,7 +16,7 @@ const CurrencyAbbreviated = (props) => {
       />
       <Currency
           abbreviate
-          amount="45,300,000"
+          amount="45300000"
           label="Millions"
           marginBottom="md"
           size="md"
