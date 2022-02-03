@@ -2107,9 +2107,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@testing-library/jest-dom@npm:5.16.1":
-  version: 5.16.1
-  resolution: "@testing-library/jest-dom@npm:5.16.1"
+"@testing-library/jest-dom@npm:5.16.2":
+  version: 5.16.2
+  resolution: "@testing-library/jest-dom@npm:5.16.2"
   dependencies:
     "@babel/runtime": ^7.9.2
     "@types/testing-library__jest-dom": ^5.9.1
@@ -2120,7 +2120,7 @@ __metadata:
     dom-accessibility-api: ^0.5.6
     lodash: ^4.17.15
     redent: ^3.0.0
-  checksum: c91fb03e5bcec558cc16116e6fd051fb8818727c8d040aac167db229531c37b00937d5ce315e403fc6408a41447fa2739505be05b5103465d5685d6d7df3dda7
+  checksum: 5d193bc00b427497e9f45caccc793edddabef62b5a451c90dc2fee23adea1278d2ea763392e0043edff0d0d6cda5f0a783f653e49009db2d311837ed2898fef1
   languageName: node
   linkType: hard
 
@@ -11220,7 +11220,7 @@ fsevents@^1.2.7:
     "@babel/preset-react": ^7.12.5
     "@babel/preset-typescript": ^7.15.0
     "@popperjs/core": ^2.6.0
-    "@testing-library/jest-dom": 5.16.1
+    "@testing-library/jest-dom": 5.16.2
     "@testing-library/react": 11.2.7
     "@types/react": 17.0.38
     axe-core: 4.4.0
