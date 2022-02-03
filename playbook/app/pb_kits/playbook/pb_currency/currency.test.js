@@ -28,7 +28,7 @@ test('abbreviate prop returns proper abbreviated amount', () => {
     </>
   )
 
-  expect(screen.getByTestId('test-thousands')).toHaveTextContent('$3.2k')
+  expect(screen.getByTestId('test-thousands')).toHaveTextContent('$3.2K')
   expect(screen.getByTestId('test-millions')).toHaveTextContent('$3.2M')
   expect(screen.getByTestId('test-billions')).toHaveTextContent('$3.2B')
   expect(screen.getByTestId('test-trillions')).toHaveTextContent('$3.2T')
