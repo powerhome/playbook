@@ -3144,10 +3144,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"axe-core@npm:4.4.0":
-  version: 4.4.0
-  resolution: "axe-core@npm:4.4.0"
-  checksum: 77966669de94b785c1ea876e2f34c09744c463cc2db666e57de61de4923debc332c872d52013df3511e6bb093c8b268690d66081498a46985f4502e688fcdc97
+"axe-core@npm:4.4.1":
+  version: 4.4.1
+  resolution: "axe-core@npm:4.4.1"
+  checksum: c040149488e08c365cf105e917415720e926bc59277667534c20eb35fa72757072b3224cb08a9d228ac32ae142fecc2b8880235b83c3256842eb46a0a0e3b6f5
   languageName: node
   linkType: hard
 
@@ -11223,7 +11223,7 @@ fsevents@^1.2.7:
     "@testing-library/jest-dom": 5.16.1
     "@testing-library/react": 11.2.7
     "@types/react": 17.0.38
-    axe-core: 4.4.0
+    axe-core: 4.4.1
     babel-eslint: 10.1.0
     babel-jest: ^26.6.3
     babel-loader: ^8.0.5
@@ -11296,7 +11296,7 @@ fsevents@^1.2.7:
     "@babel/preset-flow": ^7.12.1
     "@babel/preset-react": ^7.13.13
     "@rails/webpacker": 5.2.1
-    axe-core: 4.4.0
+    axe-core: 4.4.1
     babel-plugin-flow-runtime: ^0.11.1
     babel-plugin-transform-flow-strip-types: ^6.22.0
     babel-plugin-transform-react-remove-prop-types: ^0.4.24
