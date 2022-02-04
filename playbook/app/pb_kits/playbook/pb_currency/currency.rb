@@ -87,9 +87,10 @@ module Playbook
         amount.split(".").first.to_s
       end
 
-      def abbreviated_value
-        value = amount.split(".").first.split(",").join("").to_i
-        number_to_human(value, units: { thousand: "K", million: "M", billion: "B", trillion: "T" }).gsub(/\s+/, "")
+      def abbreviated_value(index = 0..-2)
+        value = amount.split(".").first.split(",").join("")
+        abbreviated_num = number_to_human(value, units: { thousand: "K", million: "M", billion: "B", trillion: "T" }).gsub(/\s+/, "").to_s
+        abbreviated_num[index]
       end
 
       def units_element
@@ -97,7 +98,7 @@ module Playbook
         if unit.nil? && abbreviate == false
           decimal_part.nil? ? ".00" : ".#{decimal_part}"
         else
-          unit
+          abbreviate ? "#{abbreviated_value(-1)}#{unit}" : unit
         end
       end
 
