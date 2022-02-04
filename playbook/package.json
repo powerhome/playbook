@@ -1,7 +1,7 @@
 {
   "name": "playbook-ui",
   "version": "10.20.0",
-  "description": "Nitro's Design System",
+  "description": "Nitro's Design System Test",
   "main": "./dist/playbook.js",
   "scripts": {
     "flow": "flow",
