@@ -71,11 +71,18 @@ const Currency = (props: CurrencyProps) => {
     className
   )
 
-  const abbreviatedValue = () => {
-    return new Intl.NumberFormat('en-US', {
+  const getAbbreviatedValue = (arg) => {
+    const num = new Intl.NumberFormat('en-US', {
       notation: 'compact',
       maximumFractionDigits: 1,
-    }).format(whole.split(',').join(''))
+    }).format(whole.split(',').join('')).toString()
+    let output
+    if (arg === 'amount') {
+      output = num.slice(0, -1)
+    } else if (arg === 'unit') {
+      output = num.slice(-1)
+    }
+    return output
   }
 
   return (
@@ -101,7 +108,7 @@ const Currency = (props: CurrencyProps) => {
             dark={dark}
             size={sizes[size]}
         >
-          {abbreviate ? abbreviatedValue() : whole}
+          {abbreviate ? getAbbreviatedValue('amount') : whole}
         </Title>
 
         <Body
@@ -109,6 +116,7 @@ const Currency = (props: CurrencyProps) => {
             color="light"
             dark={dark}
         >
+          {abbreviate ? getAbbreviatedValue('unit') : null}
           <If condition={unit}>
             {unit}
             <Else />
