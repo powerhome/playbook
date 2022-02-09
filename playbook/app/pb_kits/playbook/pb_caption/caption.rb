@@ -20,7 +20,7 @@ module Playbook
                    default: nil
 
       def classname
-        generate_classname("pb_caption_kit", size, color)
+        generate_classname("pb_caption_kit", size, variant, color)
       end
     end
   end

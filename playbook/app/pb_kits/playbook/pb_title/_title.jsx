@@ -38,7 +38,7 @@ const Title = (props: TitleProps) => {
   const classes = classnames(
     buildCss('pb_title_kit', size, variant, color),
     globalProps(props),
-    className
+    className,
   )
   const Tag = `${tag}`
 
