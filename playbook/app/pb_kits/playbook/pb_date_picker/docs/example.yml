@@ -16,6 +16,7 @@ examples:
   - date_picker_year_range: Year Range
   - date_picker_anti_patterns: Anti-Patterns
   - date_picker_inline: Inline
+  - date_picker_month_and_year: Month & Year Only
 
 
   react:
@@ -34,3 +35,4 @@ examples:
   - date_picker_hooks: Hooks
   - date_picker_year_range: Year Range
   - date_picker_inline: Inline
+  - date_picker_month_and_year: Month & Year Only

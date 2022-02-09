@@ -1,12 +1,32 @@
 @import "../tokens/colors";
 @import "../tokens/typography";
 
+$pb_caption_colors: (
+  default:        $text_lt_default,
+  light:          $text_lt_light,
+  link:           $primary,
+  lighter:        $text_lt_lighter,
+  success:        $success,
+  error:          $error,
+);
+
+$pb_dark_caption_colors: (
+  default:        $text_dk_default,
+  light:          $text_dk_light,
+  link:           $primary,
+);
+
+
 @mixin caption($font_size: $font_smaller, $font_weight: $bold) {
   font-weight: $font_weight;
   color: $text_lt_light;
   text-transform: uppercase;
   font-size: $font_size;
   letter-spacing: $lspace_looser;
+}
+
+@mixin caption_color($color: $text_lt_light) {
+  color: $color;
 }
 
 @mixin caption_lg {
@@ -21,4 +41,11 @@
 
 @mixin caption_dark {
   color: $text_dk_light;
+}
+@mixin pb_caption_kit_colors {
+  @each $name, $color in $pb_caption_colors {
+    &[class*="#{$name}"] {
+      color: $color
+    }
+  }
 }

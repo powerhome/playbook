@@ -11,14 +11,7 @@ $pb_card_highlight_colors: map-merge(map-merge($status_colors, $product_colors),
 $pb_card_highlight_size: 4px;
 $pb_card_header_colors: map-merge($category_colors, $product_colors);
 $pb_card_header_border_radius: $border_rad_heavy;
-$pb_card_padding:(
-  none: 0,
-  xs: $space_xs,
-  sm: $space_sm,
-  md: $space_md,
-  lg: $space_lg,
-  xl: $space_xl,
-);
+
 $additional_colors: (
   "dark": $bg_dark,
   "light": $bg_light,

@@ -1,80 +1,37 @@
-<%= pb_rails("title", props: { text: "Spacing", size: 1, margin_top: "xl", padding_top: "xl" }) %>
-<%= pb_rails("body", props: { tag: "p", margin_top: "xs", margin_bottom: "lg" }) do %>
-  Used for building Kits: Spacing is sized by 8px which serves as the starting point and base that all spacing options follow.
-<% end %>
-<%= pb_rails("title", props: { text: "Global Props", tag: "h3", size: 4 }) %>
-<%= pb_rails("body", props: { tag: "p", margin_bottom: "lg", margin_top: "xs" }) do %>
- Available in every kit. These are added globally as they are most flexible 
-  when developing.
-<% end %>
+<%= render partial: "pages/visual_guidelines_partials/partial_title",
+  locals: {
+    title: "Spacing",
+    title_size: 1,
+    description: "Used for building Kits: Spacing is sized by 8px which serves as the starting point and base
+                  that all spacing options follow.",
+    global_props: true
+  }
+%>
 <%= pb_rails("card", props: { shadow: "deep", margin_bottom: "none", padding: "none" }) do %>
-  <%= pb_rails("flex", props: { vertical: "stretch", padding_x: "md", padding_top: "md", padding_bottom: "md" }) do %>
-    <%= pb_rails("flex/flex_item", props: { flex: "1" }) do %>
-      <%= pb_rails("caption", props: { text: "Props", margin_bottom: "sm"}) %>
-      <%= pb_rails("pill", props: { text: "margin", variant: "neutral" }) %>
-      <%= pb_rails("pill", props: { text: "marginBottom", variant: "neutral" }) %>
-      <%= pb_rails("pill", props: { text: "marginLeft", variant: "neutral" }) %>
-      <%= pb_rails("pill", props: { text: "marginRight", variant: "neutral" }) %>
-      <%= pb_rails("pill", props: { text: "marginTop", variant: "neutral" }) %>
-      <%= pb_rails("pill", props: { text: "marginX", variant: "neutral" }) %>
-      <%= pb_rails("pill", props: { text: "marginY", variant: "neutral" }) %>
-      <%= pb_rails("pill", props: { text: "padding", variant: "neutral" }) %>
-      <%= pb_rails("pill", props: { text: "paddingBottom", variant: "neutral" }) %>
-      <%= pb_rails("pill", props: { text: "paddingLeft", variant: "neutral" }) %>
-      <%= pb_rails("pill", props: { text: "paddingRight", variant: "neutral" }) %>
-      <%= pb_rails("pill", props: { text: "paddingTop", variant: "neutral" }) %>
-      <%= pb_rails("pill", props: { text: "paddingX", variant: "neutral" }) %>
-      <%= pb_rails("pill", props: { text: "paddingY", variant: "neutral" }) %>
-    <% end %>
-    <%= pb_rails("section_separator", props: { orientation: "vertical", margin_x: "sm" }) %>
-    <%= pb_rails("flex/flex_item", props: { flex: "1" }) do %>
-      <%= pb_rails("caption", props: {text: "Values", margin_bottom: "sm"}) %>
-      <%= pb_rails("pill", props: {text: "none", variant: "warning"}) %> 
-      <%= pb_rails("pill", props: {text: "xs", variant: "warning"}) %>
-      <%= pb_rails("pill", props: {text: "sm", variant: "warning"}) %>
-      <%= pb_rails("pill", props: {text: "md", variant: "warning"}) %>
-      <%= pb_rails("pill", props: {text: "lg", variant: "warning"}) %>
-      <%= pb_rails("pill", props: {text: "xl", variant: "warning"}) %>
-    <% end %>
-  <% end %>
-  <%= pb_rails("background", props: { id: "code-wrapper", classname: "border-bottom", background_color: "dark", padding: "none" }) do %>
-    <%= pb_rails("caption", props: { text: "EXAMPLE IN USE", padding_top: "lg", margin_x: "xl", classname: "dark" }) %>
-    <div class="pb--codeCopy">
-      <pre class="highlight pt_sm" style="margin: 0px"><%= raw rouge(@spacing_code_example, "react") %></pre>
-    </div>
-  <% end %>
+  <%= render partial: "pages/visual_guidelines_partials/partial_props",
+    locals: {
+      props: %w[margin marginLeft marginBottom marginRight marginTop marginX marginY
+                padding paddingBottom paddingLeft paddingRight paddingTop paddingX paddingY],
+      values: ["none", "xs", "sm", "md", "lg", "xl"]
+    }
+  %>
+  <%= render partial: "pages/visual_guidelines_partials/partial_code_example",
+    locals: {
+      example: "app/views/pages/code_snippets/spacing_global_props_jsx.txt"
+    }
+  %>
 <% end %>
-  
+
 <%= pb_rails("title", props: { text: "Tokens", tag: "h3", size: 4, margin_top: "xl" }) %>
 <%= pb_rails("body", props: { tag: "p", margin_bottom: "lg", margin_top: "xs" }) do %>
   Make your own sytles using Playbook tokens to keep your site consistent.
-<% end %> 
-
+<% end %>
 
 <%= pb_rails("card", props: { shadow: "deep", margin_bottom: "none", padding: "none" }) do %>
-  <%= pb_rails("flex", props: { classname: "pb--tokens-spacing", vertical: "stretch", padding_x: "md", padding_top: "md", padding_bottom: "md", wrap: true }) do %>
-    <% @space_sizes.each do |item| %>
-      <% variable = (defined?(item[:variable]) && !item[:variable].nil?) ? "$#{item[:variable]}" : ""%>
-      <% item[:dark] ||= false %>
-      <% item[:class] ||= item[:variable] %>
-      
-      <%= pb_rails("flex/flex_item", props: { flex: "1", classname: "pb--tokens-spacing-token" }) do %>
-        <div class="pb--tokens-spacing-token-example">
-          <div class=<%= "pb--spacing_#{item[:class]}" %>></div>
-        </div>
-        <%= pb_rails("body", props: { tag: "div" }) do %>
-          <%= "#{item[:name]}" %>
-        <% end %>
-        <%= pb_rails("caption", props: { text: variable, size: 'xs' }) %>
-      <% end %> 
-    <% end %>
-  
-  <% end %> 
-  
-  <%= pb_rails("background", props: { id: "code-wrapper", classname: "border-bottom", background_color: "dark", padding: "none" }) do %>
-    <%= pb_rails("caption", props: { text: "EXAMPLE IN USE", padding_top: "lg", margin_x: "xl", classname: "dark" }) %>
-    <div class="pb--codeCopy">
-      <pre class="highlight pt_sm" style="margin: 0px"><%= raw rouge(@spacing_token_example, "react") %></pre>
-    </div>
-  <% end %>
+  <%= render "pages/visual_guidelines_partials/pb_doc_spacing_tokens" %>
+  <%= render partial: "pages/visual_guidelines_partials/partial_code_example",
+    locals: {
+      example: "app/views/pages/code_snippets/spacing_tokens_jsx.txt"
+    }
+  %>
 <% end %>

@@ -26,6 +26,7 @@ module Playbook
     end
 
     # Deal with lists of kits, used in Playbook doc and Externally
+    # rubocop:disable Style/StringConcatenation
     def pb_kits(type: "rails", limit_examples: false, dark_mode: false)
       display_kits = []
       kits = get_kits
@@ -40,6 +41,7 @@ module Playbook
       end
       raw("<div class='pb--docItem'>" + display_kits.join("</div><div class='pb--docItem'>") + "</div>")
     end
+    # rubocop:enable Style/StringConcatenation
 
     # rubocop:disable Naming/AccessorMethodName
     def get_kits
@@ -48,12 +50,14 @@ module Playbook
     end
     # rubocop:enable Naming/AccessorMethodName
 
+    # rubocop:disable Style/OptionalBooleanParameter
     def render_pb_doc_kit(kit, type, limit_examples, code = true, dark_mode = false)
       title = pb_doc_render_clickable_title(kit, type)
       ui = raw("<div class='pb--docItem-ui'>
           #{pb_kit(kit: kit, type: type, show_code: code, limit_examples: limit_examples, dark_mode: dark_mode)}</div>")
       title + ui
     end
+  # rubocop:enable Style/OptionalBooleanParameter
 
   private
 

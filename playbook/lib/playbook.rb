@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require "view_component"
+
 require "playbook/version"
 require "playbook/engine"
 require "playbook/props"
@@ -15,6 +17,7 @@ module Playbook
   ROOT_PATH = Pathname.new(File.join(__dir__, ".."))
 
   class ConflictingPropsError < StandardError; end
+
   class MissingPropError < StandardError; end
 
 module_function

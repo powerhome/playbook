@@ -25,6 +25,7 @@ type GaugeProps = {
   suffix: string,
   title: string,
   tooltipHtml: string,
+  colors: array,
 }
 
 const Gauge = (props: GaugeProps) => {
@@ -45,6 +46,7 @@ const Gauge = (props: GaugeProps) => {
     suffix = '',
     title = '',
     tooltipHtml = '<span style="font-weight: bold; color:{point.color};">●</span>{point.name}: ' + '<b>{point.y}</b>',
+    colors = [],
   } = props
 
   const ariaProps = buildAriaProps(aria)
@@ -76,6 +78,7 @@ const Gauge = (props: GaugeProps) => {
       style: style,
       tooltipHtml: tooltipHtml,
       type: 'gauge',
+      colors: colors,
     })
   }, [])
 

@@ -1,36 +1,25 @@
-<%= pb_rails("title", props: { text: "Max Width", size: 1, margin_top: "xl", padding_top: "xl" }) %>
-<%= pb_rails("body", props: { tag: "p", margin_top: "xs", margin_bottom: "lg" }) do %>
-  When building your interface it is common to add max width to specific kits so the interface 
-  looks good at all sizes. We've made it easy to add max with ANY kit through our global props. 
-  See below:
-<% end %>
-<%= pb_rails("title", props: { text: "Global Props", tag: "h3", size: 4 }) %>
-<%= pb_rails("body", props: { tag: "p", margin_bottom: "lg", margin_top: "xs" }) do %>
- Available in every kit.  These are added globally as they are most flexible when developing.
-<% end %>
+<%= render partial: "pages/visual_guidelines_partials/partial_title",
+  locals: {
+    title: "Max Width",
+    title_size: 1,
+    description: "When building your interface it is common to add max width to specific kits so the interface
+                  looks good at all sizes. We've made it easy to add max with ANY kit through our global props.
+                  See below:",
+    global_props: true
+  }
+%>
 <%= pb_rails("card", props: { shadow: "deep", margin_bottom: "none", padding: "none" }) do %>
-  <%= render partial: "pages/visual_guidelines_partials/pb_doc_max_width" %>
+  <%= render "pages/visual_guidelines_partials/pb_doc_max_width" %>
   <%= pb_rails("section_separator", props: { padding: "sm" }) %>
-  <%= pb_rails("flex", props: { vertical: "stretch", padding_x: "md", padding_top: "xs", padding_bottom: "md" }) do %>
-    <%= pb_rails("flex/flex_item", props: { flex: "1" }) do %>
-      <%= pb_rails("caption", props: {text: "Props", margin_bottom: "sm"}) %>
-      <%= pb_rails("pill", props: { text: "max Width", variant: "neutral" }) %>
-    <% end %>
-    <%= pb_rails("section_separator", props: { orientation: "vertical", margin_x: "sm" }) %>
-    <%= pb_rails("flex/flex_item", props: { lex: "1" }) do %>
-      <%= pb_rails("caption", props: {text: "Values", margin_bottom: "sm"}) %>
-      <%= pb_rails("pill", props: { text: "xs", variant: "warning" }) %>
-      <%= pb_rails("pill", props: { text: "sm", variant: "warning" }) %>
-      <%= pb_rails("pill", props: { text: "md", variant: "warning" }) %>
-      <%= pb_rails("pill", props: { text: "lg", variant: "warning" }) %>
-      <%= pb_rails("pill", props: { text: "xl", variant: "warning" }) %>
-    <% end %>
-  <% end %>
-  <%= pb_rails("background", props: { id: "code-wrapper", classname: "border-bottom", background_color: "dark", padding: "none" }) do %>
-    <%= pb_rails("caption", props: { text: "EXAMPLE IN USE", padding_top: "lg", margin_x: "xl", classname: "dark" }) %>
-    <div class="pb--codeCopy">
-      <pre class="highlight pt_sm" style="margin: 0px"><%= raw rouge(@max_width_code_example, "react") %></pre>
-    </div>
-  <% end %>
+  <%= render partial: "pages/visual_guidelines_partials/partial_props",
+    locals: {
+      props: ["maxWidth"],
+      values: %w[xs sm md lg xl]
+    }
+  %>
+  <%= render partial: "pages/visual_guidelines_partials/partial_code_example",
+    locals: {
+      example: "app/views/pages/code_snippets/width_jsx.txt"
+    }
+  %>
 <% end %>
- 

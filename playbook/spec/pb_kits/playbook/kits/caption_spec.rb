@@ -5,6 +5,12 @@ require_relative "../../../../app/pb_kits/playbook/pb_caption/caption"
 RSpec.describe Playbook::PbCaption::Caption do
   subject { Playbook::PbCaption::Caption }
 
+  it {
+    is_expected.to define_enum_prop(:color)
+      .with_default(nil)
+      .with_values(nil, "default", "light", "lighter", "success", "error", "link")
+  }
+
   it { is_expected.to define_boolean_prop(:dark).with_default(false) }
   it {
     is_expected.to define_enum_prop(:size)
@@ -18,11 +24,6 @@ RSpec.describe Playbook::PbCaption::Caption do
                    "h6", "p", "span", "div", "caption")
   end
   it { is_expected.to define_string_prop(:text) }
-  it {
-    is_expected.to define_enum_prop(:variant)
-      .with_values(nil, "link")
-      .with_default(nil)
-  }
 
   describe "#caption output" do
     it "returns text output", :aggregate_failures do
@@ -36,9 +37,10 @@ RSpec.describe Playbook::PbCaption::Caption do
       expect(subject.new(dark: true).classname).to eq "pb_caption_kit_md dark"
       expect(subject.new(size: "lg").classname).to eq "pb_caption_kit_lg"
       expect(subject.new(size: "xs").classname).to eq "pb_caption_kit_xs"
-      expect(subject.new(size: "xs", variant: "link").classname).to eq "pb_caption_kit_xs_link"
       expect(subject.new(dark: true, size: "lg").classname).to eq "pb_caption_kit_lg dark"
       expect(subject.new(classname: "additional_class").classname).to eq "pb_caption_kit_md additional_class"
+      expect(subject.new(classname: "additional_class", color: "light").classname).to eq "pb_caption_kit_md_light additional_class"
+      expect(subject.new(color: "lighter").classname).to eq "pb_caption_kit_md_lighter"
     end
   end
 end

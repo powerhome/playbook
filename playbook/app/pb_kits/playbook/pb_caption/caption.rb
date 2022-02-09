@@ -12,10 +12,15 @@ module Playbook
       prop :text
       prop :variant, type: Playbook::Props::Enum,
                      values: [nil, "link"],
-                     default: nil
+                     default: nil,
+                     deprecated: true
+
+      prop :color, type: Playbook::Props::Enum,
+                   values: [nil, "default", "light", "lighter", "success", "error", "link"],
+                   default: nil
 
       def classname
-        generate_classname("pb_caption_kit", size, variant)
+        generate_classname("pb_caption_kit", size, color)
       end
     end
   end

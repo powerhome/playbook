@@ -25,6 +25,7 @@ RSpec.describe Playbook::PbDatePicker::DatePicker do
   it { is_expected.to define_prop(:mode).of_type(Playbook::Props::String).with_default("single") }
   it { is_expected.to define_prop(:picker_id).of_type(Playbook::Props::String).that_is_required }
   it { is_expected.to define_prop(:placeholder).of_type(Playbook::Props::String) }
+  it { is_expected.to define_prop(:plugins).of_type(Playbook::Props::Boolean).with_default(false) }
   it { is_expected.to define_boolean_prop(:required).with_default(false) }
   it { is_expected.to define_prop(:year_range).of_type(Playbook::Props::Array).with_default([1900, 2100]) }
 
