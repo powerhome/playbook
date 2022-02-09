@@ -11419,6 +11419,7 @@ fsevents@^1.2.7:
     flatpickr: ^4.6.6
     flow-bin: 0.170.0
     flow-runtime: 0.17.0
+    framer-motion: ^4.1.17
     highcharts: ^9.0.0
     identity-obj-proxy: 3.0.0
     jest: 26.4.2
@@ -11474,6 +11475,7 @@ fsevents@^1.2.7:
     babel-plugin-transform-react-remove-prop-types: ^0.4.24
     babel-preset-flow: 6.23.0
     eslint: 6.8.0
+    framer-motion: ^4.1.17
     playbook-ui: ">= 1"
     react: 16.14.0
     react-dom: 16.14.0
