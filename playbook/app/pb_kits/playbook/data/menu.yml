@@ -51,6 +51,7 @@ kits:
   - layouts:
     - flex
     - layout
+  - lightbox
   - list
   - loading_inline
   - nav
@@ -102,4 +103,3 @@ kits:
     - title_detail
   - user_badge
   - walkthrough
-  - lightbox

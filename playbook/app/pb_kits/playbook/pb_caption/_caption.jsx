@@ -30,6 +30,7 @@ const Caption = (props: CaptionProps) => {
     size = 'md',
     tag = 'div',
     text,
+    variant = null,
   } = props
   const tagOptions = [
     'h1',
