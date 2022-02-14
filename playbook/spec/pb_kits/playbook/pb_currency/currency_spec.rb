@@ -23,4 +23,32 @@ RSpec.describe Playbook::PbCurrency::Currency do
       expect(subject.new(amount: "2000", classname: "additional_class").classname).to eq "pb_currency_kit_left_md additional_class"
     end
   end
+
+  describe "when abbreviate prop is true" do
+    it "renders proper abbreviated amount for number in the thousands" do
+      num = subject.new(abbreviate: true, amount: "3200")
+
+      expect(num).to eq "3.2K"
+    end
+    it "renders proper abbreviated amount for number in the millions" do
+      num = subject.new(abbreviate: true, amount: "3,200,000")
+
+      expect(num).to eq "3.2M"
+    end
+    it "renders proper abbreviated amount for number in the billions" do
+      num = subject.new(abbreviate: true, amount: "3,200,000,000")
+
+      expect(num).to eq "3.2B"
+    end
+    it "renders proper abbreviated amount for number in the trillions" do
+      num = subject.new(abbreviate: true, amount: "3,200,000,000,000")
+
+      expect(num).to eq "3.2T"
+    end
+    it "renders proper abbreviated amount when a unit is passed to the kit" do
+      num = subject.new(abbreviate: true, amount: "3,200", unit: "/yr")
+
+      expect(num).to eq "3.2K/yr"
+    end
+  end
 end
