@@ -73,7 +73,7 @@ module Playbook
 
       def render_svg(path)
         if File.extname(path) == ".svg"
-          doc = Nokogiri::XML(open(path)) # rubocop:disable Security/Open
+          doc = Nokogiri::XML(File.open(path))
           svg = doc.at_css "svg"
           svg["class"] = "pb_custom_icon " + object.custom_icon_classname
           raw doc
