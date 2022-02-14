@@ -71,19 +71,23 @@ const Currency = (props: CurrencyProps) => {
     className
   )
 
-  const getAbbreviatedValue = (arg) => {
-    const num = new Intl.NumberFormat('en-US', {
-      notation: 'compact',
-      maximumFractionDigits: 1,
-    }).format(whole.split(',').join('')).toString()
-    let output
-    if (arg === 'amount') {
-      output = num.slice(0, -1)
-    } else if (arg === 'unit') {
-      output = num.slice(-1)
-    }
-    return output
+  const getFormattedNumber = (input) => new Intl.NumberFormat('en-US', {
+    notation: 'compact',
+    maximumFractionDigits: 1,
+  }).format(input)
+
+  type AbbrType = 'amount' | 'unit'
+
+  const getAbbreviatedValue = (abbrType: AbbrType) => {
+    const num = `${getFormattedNumber(whole.split(',').join(''))}`,
+      isAmount = abbrType === 'amount',
+      isUnit =  abbrType === 'unit'
+    return isAmount ? num.slice(0, -1) : isUnit ? num.slice(-1) : ''
   }
+
+  const getAmount = abbreviate ? getAbbreviatedValue('amount') : whole,
+    getAbbreviation = abbreviate ? getAbbreviatedValue('unit') : null,
+    getDecimalValue = abbreviate ? '' : `.${decimal}`
 
   return (
     <div
@@ -108,7 +112,7 @@ const Currency = (props: CurrencyProps) => {
             dark={dark}
             size={sizes[size]}
         >
-          {abbreviate ? getAbbreviatedValue('amount') : whole}
+          {getAmount}
         </Title>
 
         <Body
@@ -116,11 +120,11 @@ const Currency = (props: CurrencyProps) => {
             color="light"
             dark={dark}
         >
-          {abbreviate ? getAbbreviatedValue('unit') : null}
+          {getAbbreviation}
           <If condition={unit}>
             {unit}
             <Else />
-            {abbreviate ? '' : `.${decimal}`}
+            {getDecimalValue}
           </If>
         </Body>
       </div>
