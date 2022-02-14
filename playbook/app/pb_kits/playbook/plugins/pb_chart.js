@@ -1,6 +1,7 @@
 import Highcharts from 'highcharts'
 
 import { highchartsTheme } from '../pb_dashboard/pbChartsLightTheme'
+import { highchartsDarkTheme } from '../pb_dashboard/pbChartsDarkTheme'
 import colors from '../tokens/exports/_colors.scss'
 
 import pie from 'highcharts/modules/variable-pie'
@@ -67,10 +68,14 @@ class pbChart {
     }
   }
 
+  setupTheme() {
+    this.options.dark ? Highcharts.setOptions(highchartsDarkTheme) :  Highcharts.setOptions(highchartsTheme)
+  }
+
   setupGauge(options) {
     highchartsMore(Highcharts)
     solidGauge(Highcharts)
-    Highcharts.setOptions(highchartsTheme)
+    this.setupTheme()
 
     Highcharts.chart(this.defaults.id, {
       chart: {
@@ -140,7 +145,7 @@ class pbChart {
   }
 
   setupPieChart(options) {
-    Highcharts.setOptions(highchartsTheme)
+    this.setupTheme()
     Highcharts.chart(this.defaults.id, {
       title: {
         text: this.defaults.title,
@@ -187,8 +192,7 @@ class pbChart {
   }
 
   setupChart(options) {
-    Highcharts.setOptions(highchartsTheme)
-
+    this.setupTheme()
     const configOptions = {
       title: {
         text: this.defaults.title,
