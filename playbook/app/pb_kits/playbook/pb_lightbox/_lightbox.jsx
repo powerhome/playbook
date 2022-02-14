@@ -7,7 +7,7 @@ import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props.js'
 import { globalProps } from '../utilities/globalProps.js'
 import Icon from '../pb_icon/_icon'
 import LightboxHeader from './_lightbox_header'
-import { LightboxContext } from './_lightbox_context.jsx'
+import { LightboxContext } from './_lightbox_context'
 
 import Carousel from './Carousel/index.jsx'
 
