@@ -2,12 +2,10 @@
 /* @flow */
 
 import { noop } from 'lodash'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import Slides from './Slides'
 import Thumbnails from './Thumbnails'
-import useUnscrollableBody from './useUnscrollableBody'
-
 import styles from './styles.scss'
 
 type CarouselType = {
@@ -27,7 +25,14 @@ export default function Carousel({
   onClick = noop,
   onChange = noop,
 }: CarouselType) {
-  useUnscrollableBody()
+  useEffect(() => {
+    document.body.style.overflow = 'hidden'
+
+    return () => {
+      document.body.style.overflow = 'initial'
+    }
+  }, [])
+
   const [currentIndex, setCurrentIndex] = useState(current)
   const handleChange = (index) => {
     setCurrentIndex(index)
