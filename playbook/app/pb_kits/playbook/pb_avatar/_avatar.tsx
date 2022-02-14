@@ -41,7 +41,7 @@ const Avatar = (props: AvatarProps) => {
   const dataProps: {[key: string]: any} = buildDataProps(data)
   const ariaProps: {[key: string]: any} = buildAriaProps(aria)
   const classes = classnames(
-    buildCss('pb_avatar_kit', size),
+    buildCss('pb_avatar_kit', `size_${size}`),
     globalProps(props),
     className
   )

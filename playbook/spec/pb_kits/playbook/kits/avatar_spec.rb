@@ -19,9 +19,9 @@ RSpec.describe Playbook::PbAvatar::Avatar do
   }
   describe "#classname" do
     it "returns namespaced class name", :aggregate_failures do
-      expect(subject.new({}).classname).to eq "pb_avatar_kit_md"
-      expect(subject.new(classname: "additional_class").classname).to eq "pb_avatar_kit_md additional_class"
-      expect(subject.new(size: "lg").classname).to eq "pb_avatar_kit_lg"
+      expect(subject.new({}).classname).to eq "pb_avatar_kit_size_md"
+      expect(subject.new(classname: "additional_class").classname).to eq "pb_avatar_kit_size_md additional_class"
+      expect(subject.new(size: "lg").classname).to eq "pb_avatar_kit_size_lg"
     end
   end
 end

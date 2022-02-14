@@ -32,7 +32,7 @@ const Image = (props: ImageType) => {
 
   const ariaProps = buildAriaProps(aria)
   const classes = classnames(
-    buildCss('pb_image_kit', size),
+    buildCss('pb_image_kit', size ? `size_${size}` : null),
     'lazyload',
     transition,
     { rounded },

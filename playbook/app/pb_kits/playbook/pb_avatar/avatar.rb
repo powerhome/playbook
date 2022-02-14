@@ -18,7 +18,7 @@ module Playbook
       end
 
       def classname
-        generate_classname("pb_avatar_kit", size)
+        generate_classname("pb_avatar_kit", "size_#{size}")
       end
 
       def online_status_props

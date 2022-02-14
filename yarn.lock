@@ -6061,10 +6061,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"es5-shim@npm:4.6.4":
-  version: 4.6.4
-  resolution: "es5-shim@npm:4.6.4"
-  checksum: eedc6c5bd5bb36e5715ef95c79a23a0fce53e973192b877b491d6c0aef273f9b707c7283c73b24eddf9686778bc954cd52de5408d6872309809e6a52d820b8dc
+"es5-shim@npm:4.6.5":
+  version: 4.6.5
+  resolution: "es5-shim@npm:4.6.5"
+  checksum: ae13704356b10a6cdbf4db41fcabb025878e0ae719f9ec6a3487eb53e44aee79dfad0cb29d9c2f4378f6de5aeb513d5535742a67d67276aa7ddb273312a4fc53
   languageName: node
   linkType: hard
 
@@ -11480,7 +11480,7 @@ fsevents@^1.2.7:
     core-js: 3
     css-loader: 3.6.0
     css-modules-flow-types-loader: 0.3.1
-    es5-shim: 4.6.4
+    es5-shim: 4.6.5
     eslint: 6.8.0
     eslint-plugin-flowtype: 5.2.0
     eslint-plugin-jsx-control-statements: 2.2.1
