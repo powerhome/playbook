@@ -3,7 +3,7 @@
 import React from 'react'
 import { noop } from 'lodash'
 import { TransformComponent, TransformWrapper } from 'react-zoom-pan-pinch'
-import { Image } from '../../'
+import Image from '../../pb_image/_image'
 
 import styles from './styles.scss'
 
