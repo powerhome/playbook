@@ -36,15 +36,14 @@ export default class PbPopover extends PbEnhancedElement {
       }
 
       setTimeout(() => {
-        this.popper.update()
         this.toggleTooltip()
+        this.popper.update()
       }, 0)
     })
   }
 
   checkCloseTooltip() {
     document.querySelector('body').addEventListener('click', ({ target }) => {
-      const isTriggerElement = target.closest(`#${this.triggerElementId}`) !== null
       const isTooltipElement = target.closest(`#${this.tooltipId}`) !== null
 
       switch (this.closeOnClick) {
@@ -52,21 +51,17 @@ export default class PbPopover extends PbEnhancedElement {
         this.hideTooltip()
         break
       case 'outside':
-        if (isTooltipElement) {
-          this.checkCloseTooltip()
-        } else {
+        if (!isTooltipElement) {
           this.hideTooltip()
         }
         break
       case 'inside':
-        if (isTooltipElement || isTriggerElement) {
+        if (isTooltipElement) {
           this.hideTooltip()
-        } else {
-          this.checkCloseTooltip()
         }
         break
       }
-    }, { once: true })
+    }, true)
   }
 
   hideTooltip() {

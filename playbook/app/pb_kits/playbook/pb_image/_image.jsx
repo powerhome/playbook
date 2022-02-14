@@ -34,7 +34,7 @@ const Image = (props: ImageProps) => {
 
   const ariaProps = buildAriaProps(aria)
   const classes = classnames(
-    buildCss('pb_image_kit', size),
+    buildCss('pb_image_kit', size ? `size_${size}` : null),
     'lazyload',
     transition,
     { rounded },
@@ -44,20 +44,18 @@ const Image = (props: ImageProps) => {
   const dataProps = buildDataProps(data)
 
   return (
-    <div>
-      <img
-          {...ariaProps}
-          {...dataProps}
-          alt={alt}
-          className={classes}
-          data-src={url}
-          id={id}
-          onError={onError}
-          rounded={+rounded}
-          src={url}
-          transition={transition}
-      />
-    </div>
+    <img
+        {...ariaProps}
+        {...dataProps}
+        alt={alt}
+        className={classes}
+        data-src={url}
+        id={id}
+        onError={onError}
+        rounded={+rounded}
+        src={url}
+        transition={transition}
+    />
   )
 }
 

@@ -150,16 +150,14 @@ export default class PbReactPopover extends React.Component<PbPopoverProps> {
       const targetIsReference =
         target.closest('.pb_popover_reference_wrapper') !== null
 
-      if (targetIsReference) return
-
       switch (closeOnClick) {
       case 'outside':
-        if (!targetIsPopover) {
+        if (!targetIsPopover || targetIsReference) {
           shouldClosePopover(true)
         }
         break
       case 'inside':
-        if (targetIsPopover) {
+        if (targetIsPopover || targetIsReference) {
           shouldClosePopover(true)
         }
         break

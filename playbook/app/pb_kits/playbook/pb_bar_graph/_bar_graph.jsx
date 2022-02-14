@@ -8,6 +8,7 @@ import pbChart from '../plugins/pb_chart'
 
 type BarGraphProps = {
   axisTitle: string,
+  dark?: Boolean,
   xAxisCategories: array,
   yAxisMin: number,
   yAxisMax: number,
@@ -30,6 +31,7 @@ type BarGraphProps = {
 export default class BarGraph extends React.Component<BarGraphProps> {
   static defaultProps = {
     className: 'pb_bar_graph',
+    dark: false,
     type: 'column',
     legend: false,
     toggleLegendClick: true,
@@ -38,6 +40,7 @@ export default class BarGraph extends React.Component<BarGraphProps> {
   componentDidMount() {
     const {
       axisTitle,
+      dark,
       xAxisCategories,
       yAxisMin,
       yAxisMax,
@@ -56,6 +59,7 @@ export default class BarGraph extends React.Component<BarGraphProps> {
 
     new pbChart(`.${className}`, {
       axisTitle: axisTitle,
+      dark,
       chartData: chartData,
       colors: colors,
       id: id,

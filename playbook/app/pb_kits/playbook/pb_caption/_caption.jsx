@@ -30,6 +30,7 @@ const Caption = (props: CaptionProps) => {
     size = 'md',
     tag = 'div',
     text,
+    variant = null,
   } = props
   const tagOptions = [
     'h1',
@@ -48,7 +49,7 @@ const Caption = (props: CaptionProps) => {
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
   const css = classnames(
-    buildCss('pb_caption_kit', size, color),
+    buildCss('pb_caption_kit', size, variant, color),
     globalProps(props),
     className,
   )
