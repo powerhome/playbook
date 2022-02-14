@@ -1,12 +1,12 @@
 /* @flow */
 
 import { noop } from 'lodash'
-// import { motion } from 'framer-motion'
+import { motion } from 'framer-motion'
 import React, { useState } from 'react'
 
 import Slide from './Slide'
 import styles from './styles.scss'
-// import useSlides from './useSlides'
+import useSlides from './useSlides'
 
 type SlidesType = {
   urls: Array<string>,
@@ -17,19 +17,29 @@ type SlidesType = {
 
 export default function Slides({
   urls = [],
+  current = 0,
   onClick = noop,
+  onChange = noop,
 }: SlidesType) {
   const [zooming, setZooming] = useState(false)
-  // const { controls, dragConstraints, handleDragEnd } = useSlides({
-  //   current,
-  //   pagesCount: urls.length,
-  //   onChange,
-  // })
+  const { controls, dragConstraints, handleDragEnd } = useSlides({
+    current,
+    pagesCount: urls.length,
+    onChange,
+  })
 
   const handleZoom = (isZooming) => setZooming(isZooming)
 
   return (
-    <div className={styles.Slides}>
+    <motion.div
+        animate={controls}
+        className={styles.Slides}
+        drag={!zooming && 'x'}
+        dragConstraints={dragConstraints}
+        dragElastic={0.05}
+        onDragEnd={handleDragEnd}
+        transition={{ type: 'spring', bounce: 0 }}
+    >
       {urls.map((url, i) => (
         <Slide
             key={i}
@@ -39,7 +49,6 @@ export default function Slides({
             zooming={zooming}
         />
       ))}
-    </div>
-    // </motion.div>
+    </motion.div>
   )
 }
