@@ -49,6 +49,7 @@ const buttonClassName = (props: ButtonPropTypes) => {
   className += `${fullWidth ? '_block' : ''}`
   className += disabled ? '_disabled' : '_enabled'
   className += loading ? '_loading' : ''
+  className += `${size !== null ? ` size_${size}` : ''}`
 
   return className
 }

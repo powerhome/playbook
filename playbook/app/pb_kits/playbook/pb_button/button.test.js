@@ -100,5 +100,5 @@ test('size prop', () => {
 
   const kit = screen.getByTestId('size-test')
 
-  expect(kit).toHaveClass('pb_button_kit_sm_primary_inline_enabled')
+  expect(kit).toHaveClass('pb_button_kit_primary_inline_enabled size_sm')
 })

@@ -6,17 +6,17 @@ $pb_button_sizes: (
   "lg":   1.125rem,
 );
 
-[class^=pb_button_kit]{
+[class*=pb_button_kit]{
   @include pb_button;
   // Size =================
   @each $name, $size in $pb_button_sizes {
-    &[class*=_#{$name}] {
+    &[class*=size_#{$name}] {
       font-size: $size;
       padding: calc(#{$size} / 2) calc(#{$size} * 2.42) !important;
     }
-  }
-  &[class*=_sm] {
-    min-height: 0;
+    @if $name == "sm" {
+      min-height: 0;
+    }
   }
 
   // Variants =================

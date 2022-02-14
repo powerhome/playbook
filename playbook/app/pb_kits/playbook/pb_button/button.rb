@@ -48,7 +48,8 @@ module Playbook
       end
 
       def classname
-        generate_classname("pb_button_kit", size, variant, full_width_class, disabled_class, loading_class)
+        button_class = generate_classname("pb_button_kit", variant, full_width_class, disabled_class, loading_class)
+        button_class + size_class
       end
 
     private
@@ -63,6 +64,10 @@ module Playbook
 
       def loading_class
         loading ? "loading" : nil
+      end
+
+      def size_class
+        size ? " size_#{size}" : ""
       end
     end
   end

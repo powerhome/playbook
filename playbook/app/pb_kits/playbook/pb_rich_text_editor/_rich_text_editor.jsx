@@ -129,6 +129,10 @@ const RichTextEditor = (props: RichTextEditorProps) => {
     trixRef.current.addEventListener('click', handleClick)
   }, [])
 
+  useEffect(() => {
+    trixRef.current.editor.loadHTML(value)
+  }, [value])
+
   const RichTextEditorClass = 'pb_rich_text_editor_kit'
   const SimpleClass = simple ? 'simple' : ''
   const FocusClass = focus ? 'focus-editor-targets' : ''

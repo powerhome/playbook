@@ -26,7 +26,7 @@ test('default classname', () => {
 
 test('size = xs', () => {
   const kit = renderKit(Image, props, { size: 'xs' })
-  expect(kit).toHaveClass('pb_image_kit_xs lazyload')
+  expect(kit).toHaveClass('pb_image_kit_size_xs lazyload')
 })
 
 test('transition = blur', () => {
