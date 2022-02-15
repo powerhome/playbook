@@ -7,7 +7,7 @@ import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
 import type { Callback } from '../types'
 
 import { noop } from '../utilities/props'
-import { globalProps } from '../utilities/globalProps.js'
+import { globalProps } from '../utilities/globalProps'
 
 import Button from '../pb_button/_button'
 import Icon from '../pb_icon/_icon'

@@ -1,4 +1,5 @@
 /* @flow */
+/* eslint-disable react-hooks/rules-of-hooks */
 
 import React, { useEffect, useRef } from 'react'
 import classnames from 'classnames'
@@ -128,6 +129,10 @@ const RichTextEditor = (props: RichTextEditorProps) => {
   useEffect(() => {
     trixRef.current.addEventListener('click', handleClick)
   }, [])
+
+  useEffect(() => {
+    trixRef.current.editor.loadHTML(value)
+  }, [value])
 
   const RichTextEditorClass = 'pb_rich_text_editor_kit'
   const SimpleClass = simple ? 'simple' : ''

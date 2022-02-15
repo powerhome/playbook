@@ -3,7 +3,7 @@
 import React from 'react'
 import classnames from 'classnames'
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
-import { deprecatedProps, globalProps } from '../utilities/globalProps.js'
+import { deprecatedProps, globalProps } from '../utilities/globalProps'
 
 type CaptionProps = {
   aria?: object,
@@ -30,6 +30,7 @@ const Caption = (props: CaptionProps) => {
     size = 'md',
     tag = 'div',
     text,
+    variant = null,
   } = props
   const tagOptions = [
     'h1',
@@ -48,7 +49,7 @@ const Caption = (props: CaptionProps) => {
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
   const css = classnames(
-    buildCss('pb_caption_kit', size, color),
+    buildCss('pb_caption_kit', size, variant, color),
     globalProps(props),
     className,
   )

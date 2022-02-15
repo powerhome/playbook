@@ -22,14 +22,30 @@ $background_colors: map-merge($additional_colors, $merge_kits2);
     }
   };
 
-  .blur_up {
-    -webkit-filter: blur(6px);
-    filter: blur(6px);
-    transition: filter 550ms, -webkit-filter 550ms;
+  &.fade {
+    opacity: 0;
+    &.lazyloaded {
+      opacity: 1;
+      transition: opacity 400ms ease-in;
+    }
   }
-
-  .blur_up.lazyloaded {
-    -webkit-filter: blur(0);
-    filter: blur(0);
+  
+  &.blur {
+    filter: blur(5px);
+    &.lazyloaded {
+      -webkit-filter: blur(0);
+      filter: blur(0);
+      transition: filter 400ms ease-in;
+    }
+  }
+  
+  &.scale {
+    opacity: 0;
+    transform: scale(0.9);
+    &.lazyloaded {
+      opacity: 1;
+      transform: scale(1);
+      transition: 700ms ease-in;
+    }
   }
 }

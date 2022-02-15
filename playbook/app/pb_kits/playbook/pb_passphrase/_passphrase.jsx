@@ -1,10 +1,11 @@
 /* @flow */
+/* eslint-disable react-hooks/rules-of-hooks */
 
 import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import classnames from 'classnames'
 
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
-import { globalProps } from '../utilities/globalProps.js'
+import { globalProps } from '../utilities/globalProps'
 
 import useZxcvbn from './useZxcvbn'
 import useHaveIBeenPwned from './useHaveIBeenPwned'

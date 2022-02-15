@@ -89,3 +89,16 @@ test('click event', async () => {
 
   expect(screen.getByText('clicked button!')).toBeInTheDocument()
 })
+
+test('size prop', () => {
+  render(
+    <Button
+        data={{ testid: 'size-test' }}
+        size="sm"
+    />
+  )
+
+  const kit = screen.getByTestId('size-test')
+
+  expect(kit).toHaveClass('pb_button_kit_primary_inline_enabled size_sm')
+})

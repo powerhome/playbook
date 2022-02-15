@@ -21,6 +21,7 @@ type BodyProps = {
   status?: 'negative' | 'neutral' | 'positive',
   tag?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p' | 'span' | 'div',
   text?: string,
+  variant: null | 'link',
 }
 
 const Body = (props: BodyProps) => {
@@ -36,12 +37,13 @@ const Body = (props: BodyProps) => {
     status,
     tag = 'div',
     text,
+    variant = null,
   } = props
 
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
   const classes = classnames(
-    buildCss('pb_body_kit', color, status),
+    buildCss('pb_body_kit', color, variant, status),
     globalProps(props),
     className
   )

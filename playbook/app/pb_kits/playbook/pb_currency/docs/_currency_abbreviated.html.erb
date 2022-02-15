@@ -1,0 +1,27 @@
+<%= pb_rails("currency", props: {
+  abbreviate: true,
+  amount: "2,200.50",
+  label: "Thousands (with Unit)",
+  margin_bottom: "md",
+  unit: "/mo",
+}) %>
+
+<%= pb_rails("currency", props: {
+  abbreviate: true,
+  amount: "3424123",
+  label: "Millions",
+  margin_bottom: "md",
+}) %>
+
+<%= pb_rails("currency", props: {
+  abbreviate: true,
+  amount: "45,300,000,000",
+  label: "Billions",
+  margin_bottom: "md",
+}) %>
+
+<%= pb_rails("currency", props: {
+  abbreviate: true,
+  amount: "983,200,000,000,000",
+  label: "Trillions",
+}) %>
