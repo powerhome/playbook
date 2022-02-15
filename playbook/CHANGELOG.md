@@ -6,26 +6,26 @@
 
 **Kit Enhancements:**
 
-- \[PLAY-88\] Currency kit new abbreviate prop [\#1763](https://github.com/powerhome/playbook/pull/1763) ([kyleschechter](https://github.com/kyleschechter))
-- \[PLAY-30\] Line Graph Chart: Add Darkmode [\#1752](https://github.com/powerhome/playbook/pull/1752) ([JelenaD1](https://github.com/JelenaD1))
-- \[Play-19\] background kit add lazy loading to images pt 2 [\#1743](https://github.com/powerhome/playbook/pull/1743) ([jon1735](https://github.com/jon1735))
-- \[PLAY-76\]Text Input kit spacing fixed [\#1722](https://github.com/powerhome/playbook/pull/1722) ([JelenaD1](https://github.com/JelenaD1))
+- Currency kit new abbreviate prop [\#1763](https://github.com/powerhome/playbook/pull/1763) ([kyleschechter](https://github.com/kyleschechter))
+- Line Graph Chart: Add Darkmode [\#1752](https://github.com/powerhome/playbook/pull/1752) ([JelenaD1](https://github.com/JelenaD1))
+- background kit add lazy loading to images pt 2 [\#1743](https://github.com/powerhome/playbook/pull/1743) ([jon1735](https://github.com/jon1735))
+- Text Input kit spacing fixed [\#1722](https://github.com/powerhome/playbook/pull/1722) ([JelenaD1](https://github.com/JelenaD1))
 
 **Fixed Bugs:**
 
 - Fix typo CSS attribute name [\#1774](https://github.com/powerhome/playbook/pull/1774) ([bklang](https://github.com/bklang))
-- \[PLAY-16\] File Upload Kit: Can't upload Pages, Numbers, and Keynote files \[\#1575\] [\#1768](https://github.com/powerhome/playbook/pull/1768) ([JelenaD1](https://github.com/JelenaD1))
-- \[PCA-17\] React Rich Text Editor Kit: Field doesn't update with an external value update \[\#1579\] [\#1760](https://github.com/powerhome/playbook/pull/1760) ([JelenaD1](https://github.com/JelenaD1))
-- \[PLAY-111\] Size Prop styling needs to be corrected: Avatar [\#1758](https://github.com/powerhome/playbook/pull/1758) ([nickamantia](https://github.com/nickamantia))
-- \[PLAY-112\] Size Prop styling needs to be corrected: Image Kit [\#1756](https://github.com/powerhome/playbook/pull/1756) ([JelenaD1](https://github.com/JelenaD1))
-- \[PCA-105\] Add size prop to the button kit/fixing bug on previous PR [\#1749](https://github.com/powerhome/playbook/pull/1749) ([JelenaD1](https://github.com/JelenaD1))
-- \[Play-82\]Bug Popover close on any [\#1724](https://github.com/powerhome/playbook/pull/1724) ([kyleschechter](https://github.com/kyleschechter))
+- File Upload Kit: Can't upload Pages, Numbers, and Keynote files \[\#1575\] [\#1768](https://github.com/powerhome/playbook/pull/1768) ([JelenaD1](https://github.com/JelenaD1))
+- React Rich Text Editor Kit: Field doesn't update with an external value update \[\#1579\] [\#1760](https://github.com/powerhome/playbook/pull/1760) ([JelenaD1](https://github.com/JelenaD1))
+- Size Prop styling needs to be corrected: Avatar [\#1758](https://github.com/powerhome/playbook/pull/1758) ([nickamantia](https://github.com/nickamantia))
+- Size Prop styling needs to be corrected: Image Kit [\#1756](https://github.com/powerhome/playbook/pull/1756) ([JelenaD1](https://github.com/JelenaD1))
+- Add size prop to the button kit/fixing bug on previous PR [\#1749](https://github.com/powerhome/playbook/pull/1749) ([JelenaD1](https://github.com/JelenaD1))
+- Bug Popover close on any [\#1724](https://github.com/powerhome/playbook/pull/1724) ([kyleschechter](https://github.com/kyleschechter))
 
 **Merged pull requests:**
 
 - Update dependency puma to v5.6.2 \[SECURITY\] [\#1777](https://github.com/powerhome/playbook/pull/1777) ([renovate[bot]](https://github.com/apps/renovate))
 - Update dependency es5-shim to v4.6.5 [\#1773](https://github.com/powerhome/playbook/pull/1773) ([renovate[bot]](https://github.com/apps/renovate))
-- \[PLAY-102\] Enable and Configure Typescript in Playbook [\#1759](https://github.com/powerhome/playbook/pull/1759) ([thestephenmarshall](https://github.com/thestephenmarshall))
+- Enable and Configure Typescript in Playbook [\#1759](https://github.com/powerhome/playbook/pull/1759) ([thestephenmarshall](https://github.com/thestephenmarshall))
 
 
 
