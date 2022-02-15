@@ -2,5 +2,5 @@
 
 module Playbook
   PREVIOUS_VERSION = "10.19.0"
-  VERSION = "10.20.0"
+  VERSION = "10.21.0.pre.alpha.lightbox"
 end

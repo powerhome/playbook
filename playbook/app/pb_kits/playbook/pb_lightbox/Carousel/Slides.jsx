@@ -5,7 +5,6 @@ import { motion } from 'framer-motion'
 import React, { useState } from 'react'
 
 import Slide from './Slide'
-import styles from './styles.scss'
 import useSlides from './useSlides'
 
 type SlidesType = {
@@ -33,7 +32,7 @@ export default function Slides({
   return (
     <motion.div
         animate={controls}
-        className={styles.Slides}
+        className="Slides"
         drag={!zooming && 'x'}
         dragConstraints={dragConstraints}
         dragElastic={0.05}

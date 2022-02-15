@@ -5,8 +5,6 @@ import { noop } from 'lodash'
 import { TransformComponent, TransformWrapper } from 'react-zoom-pan-pinch'
 import Image from '../../pb_image/_image'
 
-import styles from './styles.scss'
-
 type SlideType = {
   alt: string,
   current: number,
@@ -37,12 +35,12 @@ export default function Slide({
         panning={{ disabled: !zooming }}
     >
       <button
-          className={styles.Slide}
+          className="Slide"
           onClick={onClick}
           onDoubleClick={() => onZoom(false)}
           tabIndex={-1}
       >
-        <TransformComponent className={styles.TransformComponent}>
+        <TransformComponent className="TransformComponent">
           <Image
               alt={alt}
               url={url}

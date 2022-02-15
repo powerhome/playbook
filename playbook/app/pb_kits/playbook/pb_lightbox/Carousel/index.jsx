@@ -6,7 +6,6 @@ import React, { useEffect, useState } from 'react'
 
 import Slides from './Slides'
 import Thumbnails from './Thumbnails'
-import styles from './styles.scss'
 
 type CarouselType = {
   initialPhoto: string,
@@ -40,7 +39,7 @@ export default function Carousel({
   }
 
   return (
-    <div className={styles.Lightbox}>
+    <div className="Lightbox">
       <Slides
           current={currentIndex}
           onChange={handleChange}

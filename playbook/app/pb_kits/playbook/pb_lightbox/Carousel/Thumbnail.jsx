@@ -5,8 +5,6 @@ import { noop } from 'lodash'
 import classnames from 'classnames'
 import Image from '../../pb_image/_image'
 
-import styles from './styles.scss'
-
 type ThumbnailType = {
   active?: boolean,
   alt?: string,
@@ -22,9 +20,10 @@ export default function Thumbnail({
   url,
   onClick = noop,
 }: ThumbnailType) {
+  const activeClasses = classnames('Thumbnail', { active })
   return (
     <button
-        className={classnames(styles.Thumbnail, { [styles.active]: active })}
+        className={classnames(activeClasses)}
         onClick={onClick}
         style={{ width }}
         type="button"

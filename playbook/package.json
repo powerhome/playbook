@@ -1,6 +1,6 @@
 {
   "name": "playbook-ui",
-  "version": "10.20.0",
+  "version": "10.21.0-alpha-lightbox",
   "description": "Nitro's Design System",
   "main": "./dist/playbook.js",
   "scripts": {

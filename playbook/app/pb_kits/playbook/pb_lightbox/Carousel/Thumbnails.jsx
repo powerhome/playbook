@@ -8,8 +8,6 @@ import { useWindowSize } from '../hooks/useWindowSize'
 
 import Thumbnail from './Thumbnail'
 
-import styles from './styles.scss'
-
 export const indexWithinBounds = (
   current: number,
   min: number,
@@ -35,9 +33,7 @@ export default function Thumbnails({
   const viewportSize = useWindowSize()
   const thumbnailWidth = viewportSize.width / 8
   const draggable = thumbnailWidth * urls.length > viewportSize.width
-  const css = classnames(styles.Thumbnails, {
-    [styles.draggable]: draggable,
-  })
+  const css = classnames('Thumbnails', { draggable })
   const dragConstraints = {
     left: -1 * (thumbnailWidth * urls.length - viewportSize.width),
     right: 0,
