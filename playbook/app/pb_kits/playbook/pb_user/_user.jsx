@@ -53,7 +53,7 @@ const User = (props: UserProps) => {
   const dataProps = buildDataProps(data)
 
   const classes = classnames(
-    buildCss('pb_user_kit', align, orientation),
+    buildCss('pb_user_kit', align, orientation, size),
     globalProps(props),
     className,
   )

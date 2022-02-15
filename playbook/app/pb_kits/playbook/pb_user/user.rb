@@ -20,7 +20,7 @@ module Playbook
       prop :territory
 
       def classname
-        generate_classname("pb_user_kit", align, orientation)
+        generate_classname("pb_user_kit", align, orientation, size)
       end
 
       def avatar_size
