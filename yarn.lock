@@ -2192,7 +2192,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/eslint@npm:^7.2.6":
+"@types/eslint@npm:^7.28.2":
   version: 7.29.0
   resolution: "@types/eslint@npm:7.29.0"
   dependencies:
@@ -6218,19 +6218,20 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-webpack-plugin@npm:2.5.1":
-  version: 2.5.1
-  resolution: "eslint-webpack-plugin@npm:2.5.1"
+"eslint-webpack-plugin@npm:2.6.0":
+  version: 2.6.0
+  resolution: "eslint-webpack-plugin@npm:2.6.0"
   dependencies:
-    "@types/eslint": ^7.2.6
+    "@types/eslint": ^7.28.2
     arrify: ^2.0.1
-    jest-worker: ^26.6.2
-    micromatch: ^4.0.2
-    schema-utils: ^3.0.0
+    jest-worker: ^27.3.1
+    micromatch: ^4.0.4
+    normalize-path: ^3.0.0
+    schema-utils: ^3.1.1
   peerDependencies:
-    eslint: ^7.0.0
+    eslint: ^7.0.0 || ^8.0.0
     webpack: ^4.0.0 || ^5.0.0
-  checksum: caa604a712c3cf82c0d8e9d40abd0f265f12e91ff50c55ce359a3e7585660c14e1352b625651af15fa8915881b250c983d3c81a55cbebb6a37d355ed62c8948b
+  checksum: 79a4577faaf7babac04e4612b47fdb8257c2bad3079a59f4d5e47b8b79a6685d569beee1506b6c440caaac54a441dffb51aa05eb4875706cec90dc597ce98f9d
   languageName: node
   linkType: hard
 
@@ -9202,6 +9203,17 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
+"jest-worker@npm:^27.3.1":
+  version: 27.5.1
+  resolution: "jest-worker@npm:27.5.1"
+  dependencies:
+    "@types/node": "*"
+    merge-stream: ^2.0.0
+    supports-color: ^8.0.0
+  checksum: 1930798552f62f2e2833def2329c6057804bea444dd434e45255ed6af4dedbb5a381445883acee0cc09c6e09efc757fbd9f5f1f491125f72276aae0d1e472105
+  languageName: node
+  linkType: hard
+
 "jest@npm:26.4.2":
   version: 26.4.2
   resolution: "jest@npm:26.4.2"
@@ -11486,7 +11498,7 @@ fsevents@^1.2.7:
     eslint-plugin-jsx-control-statements: 2.2.1
     eslint-plugin-react: 7.22.0
     eslint-plugin-react-hooks: 4.2.0
-    eslint-webpack-plugin: 2.5.1
+    eslint-webpack-plugin: 2.6.0
     filemanager-webpack-plugin: 4.0.0
     flatpickr: ^4.6.6
     flow-bin: 0.170.0
@@ -13583,7 +13595,7 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"schema-utils@npm:^3.0.0":
+"schema-utils@npm:^3.0.0, schema-utils@npm:^3.1.1":
   version: 3.1.1
   resolution: "schema-utils@npm:3.1.1"
   dependencies:
@@ -14617,6 +14629,15 @@ fsevents@^1.2.7:
   dependencies:
     has-flag: ^4.0.0
   checksum: 8e57067c39216f3c2ffce7cc14ca934d54746192571203aa9c9922d97d2d55cc1bdaa9e41a11f91e620670b5a74ebdec6b548a885d8cc2dea7cab59e21416029
+  languageName: node
+  linkType: hard
+
+"supports-color@npm:^8.0.0":
+  version: 8.1.1
+  resolution: "supports-color@npm:8.1.1"
+  dependencies:
+    has-flag: ^4.0.0
+  checksum: 0219f5c91753fea8dc8046cd4b18d39458b5dc0c6421c67c1072209faae9ba93b89283252e3b05d5c18901fd9f8b95001e3247fb93e2265f66d584a676522c75
   languageName: node
   linkType: hard
 
