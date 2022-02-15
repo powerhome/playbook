@@ -6,7 +6,7 @@
 import React from 'react'
 import classnames from 'classnames'
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
-import { globalProps } from '../utilities/globalProps.js'
+import { globalProps } from '../utilities/globalProps'
 import Joyride from 'react-joyride'
 import Button from '../pb_button/_button'
 import Flex from '../pb_flex/_flex'

@@ -1,24 +1,22 @@
-/* @flow */
-
 import React from 'react'
 import classnames from 'classnames'
-import { globalProps } from '../utilities/globalProps.js'
+import { GlobalProps, globalProps } from '../utilities/globalProps'
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
 
-type ImageProps = {
+type ImageType = {
   alt?: string,
-  aria?: object,
+  aria?: {[key: string]: string},
   className?: string,
-  data?: object,
+  data?: {[key: string]: string},
   id?: string,
-  onError?: () => {},
-  size: "xs" | "sm" | "md" | "lg" | "xl",
+  onError?: () => void,
+  size?: "xs" | "sm" | "md" | "lg" | "xl",
   rounded?: boolean,
-  transition: "blur" | "fade" | "scale",
-  url: string,
-}
+  transition?: "blur" | "fade" | "scale",
+  url?: string,
+} & GlobalProps
 
-const Image = (props: ImageProps) => {
+const Image = (props: ImageType) => {
   const {
     alt = '',
     aria = {},
@@ -52,9 +50,7 @@ const Image = (props: ImageProps) => {
         data-src={url}
         id={id}
         onError={onError}
-        rounded={+rounded}
         src={url}
-        transition={transition}
     />
   )
 }

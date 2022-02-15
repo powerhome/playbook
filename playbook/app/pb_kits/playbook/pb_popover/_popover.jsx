@@ -13,7 +13,7 @@ import {
 import { buildAriaProps, buildCss, buildDataProps, noop } from '../utilities/props'
 
 import classnames from 'classnames'
-import { globalProps } from '../utilities/globalProps.js'
+import { globalProps } from '../utilities/globalProps'
 
 type PbPopoverProps = {
   aria?: object,

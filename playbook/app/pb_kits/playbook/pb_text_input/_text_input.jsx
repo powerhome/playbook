@@ -2,7 +2,7 @@
 import React, { forwardRef } from 'react'
 import classnames from 'classnames'
 
-import { globalProps } from '../utilities/globalProps.js'
+import { globalProps } from '../utilities/globalProps'
 import { buildAriaProps, buildDataProps } from '../utilities/props'
 
 import Flex from '../pb_flex/_flex'

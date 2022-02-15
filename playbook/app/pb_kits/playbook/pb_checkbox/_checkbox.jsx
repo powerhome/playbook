@@ -5,7 +5,7 @@ import Body from '../pb_body/_body.jsx'
 import Icon from '../pb_icon/_icon.jsx'
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
 import classnames from 'classnames'
-import { globalProps } from '../utilities/globalProps.js'
+import { globalProps } from '../utilities/globalProps'
 
 type CheckboxProps = {
   aria?: object,

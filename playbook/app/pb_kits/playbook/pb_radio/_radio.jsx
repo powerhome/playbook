@@ -5,7 +5,7 @@ import React, { forwardRef } from 'react'
 import Body from '../pb_body/_body.jsx'
 import classnames from 'classnames'
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
-import { globalProps } from '../utilities/globalProps.js'
+import { globalProps } from '../utilities/globalProps'
 
 type RadioProps = {
   aria?: object,

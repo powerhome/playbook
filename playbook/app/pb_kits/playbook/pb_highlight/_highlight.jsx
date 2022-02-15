@@ -3,7 +3,7 @@
 import Highlighter from 'react-highlight-words'
 import React from 'react'
 import classnames from 'classnames'
-import { globalProps } from '../utilities/globalProps.js'
+import { globalProps } from '../utilities/globalProps'
 
 type HighlightProps = {
   className?: string,
