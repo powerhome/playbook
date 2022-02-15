@@ -24,31 +24,36 @@ RSpec.describe Playbook::PbCurrency::Currency do
     end
   end
 
-  describe "when abbreviate prop is true" do
+  describe "when prop abbreviate is set to true" do
     it "renders proper abbreviated amount for number in the thousands" do
       num = subject.new(abbreviate: true, amount: "3200")
 
-      expect(num).to eq "3.2K"
+      expect(num.title_props[:text]).to eq "3.2"
+      expect(num.body_props[:text]).to eq "K"
     end
     it "renders proper abbreviated amount for number in the millions" do
       num = subject.new(abbreviate: true, amount: "3,200,000")
 
-      expect(num).to eq "3.2M"
+      expect(num.title_props[:text]).to eq "3.2"
+      expect(num.body_props[:text]).to eq "M"
     end
     it "renders proper abbreviated amount for number in the billions" do
       num = subject.new(abbreviate: true, amount: "3,200,000,000")
 
-      expect(num).to eq "3.2B"
+      expect(num.title_props[:text]).to eq "3.2"
+      expect(num.body_props[:text]).to eq "B"
     end
     it "renders proper abbreviated amount for number in the trillions" do
       num = subject.new(abbreviate: true, amount: "3,200,000,000,000")
 
-      expect(num).to eq "3.2T"
+      expect(num.title_props[:text]).to eq "3.2"
+      expect(num.body_props[:text]).to eq "T"
     end
     it "renders proper abbreviated amount when a unit is passed to the kit" do
       num = subject.new(abbreviate: true, amount: "3,200", unit: "/yr")
 
-      expect(num).to eq "3.2K/yr"
+      expect(num.title_props[:text]).to eq "3.2"
+      expect(num.body_props[:text]).to eq "K/yr"
     end
   end
 end
