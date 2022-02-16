@@ -16,14 +16,27 @@ module Playbook
                         values: ["blur", "fade", "scale", nil],
                         default: nil
 
+      prop :custom_color, type: Playbook::Props::String,
+                          default: nil
+
       def classname
         generate_classname("pb_background_kit", image_classname, separator: " ")
+      end
+
+      def custom_background_color
+        custom_color.present? && custom_color.match(/^#[0-9A-F]{6}$/i) ? "background-color: #{custom_color};" : "background-color: #FFFFFF;"
       end
 
     private
 
       def image_classname
-        image_url.present? ? "lazyload #{transition}" : "pb_background_color_#{background_color}"
+        if image_url.present?
+          "lazyload #{transition}"
+        elsif custom_color.present?
+          ""
+        else
+          "pb_background_color_#{background_color}"
+        end
       end
     end
   end
