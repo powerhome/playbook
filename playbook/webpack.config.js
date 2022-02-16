@@ -59,9 +59,23 @@ const CLEAN_DIST_PLUGIN = new FileManagerPlugin({
   },
 })
 
-const BABEL_LOADER = {
+const JS_LOADER = {
   test: /\.(js|jsx|mjs)$/,
   use: 'babel-loader',
+  include: SOURCE_PATH,
+  exclude: /node_modules/,
+}
+
+const TS_LOADER = {
+  test: /\.(ts|tsx)$/,
+  use: [
+    {
+      loader: 'babel-loader',
+    },
+    {
+      loader: 'ts-loader',
+    },
+  ],
   include: SOURCE_PATH,
   exclude: /node_modules/,
 }
@@ -127,6 +141,8 @@ module.exports = {
   resolve: {
     // Extensions used (in the specified order order)to resolve imports w/o an explicit extension
     extensions: [
+      '.ts',
+      '.tsx',
       '.js',
       '.jsx',
     ],
@@ -162,7 +178,8 @@ module.exports = {
           SASS_LOADER,
         ],
       },
-      BABEL_LOADER,
+      TS_LOADER,
+      JS_LOADER,
       SVG_URL_LOADER,
     ],
   },

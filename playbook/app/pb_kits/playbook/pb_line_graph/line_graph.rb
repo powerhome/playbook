@@ -32,6 +32,7 @@ module Playbook
           id: id,
           className: classname,
           chartData: chart_data,
+          dark: dark ? "dark" : "",
           type: chart_type,
           title: title,
           subtitle: subtitle,

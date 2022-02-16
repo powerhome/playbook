@@ -3,7 +3,7 @@
 import React, { useContext } from 'react'
 import classnames from 'classnames'
 import { buildAriaProps, buildCss, buildDataProps } from '../../utilities/props'
-import { globalProps } from '../../utilities/globalProps.js'
+import { globalProps } from '../../utilities/globalProps'
 
 import { CloseIcon } from '../_close_icon'
 import { DialogContext } from '../_dialog_context'

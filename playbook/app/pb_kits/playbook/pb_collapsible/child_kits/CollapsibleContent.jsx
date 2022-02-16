@@ -4,7 +4,7 @@ import classnames from 'classnames'
 import React, { useContext } from 'react'
 import AnimateHeight from 'react-animate-height'
 import { buildCss } from '../../utilities/props'
-import { globalProps } from '../../utilities/globalProps.js'
+import { globalProps } from '../../utilities/globalProps'
 
 import CollapsibleContext from '../context'
 

@@ -27,7 +27,7 @@ module Playbook
       end
 
       def size_class
-        size == "none" ? nil : "_#{size}"
+        size == "none" ? nil : "_size_#{size}"
       end
 
       def transition_class

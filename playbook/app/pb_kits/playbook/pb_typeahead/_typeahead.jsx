@@ -6,7 +6,7 @@ import AsyncSelect from 'react-select/async'
 import CreateableSelect from 'react-select/creatable'
 import AsyncCreateableSelect from 'react-select/async-creatable'
 import { get, isString, uniqueId } from 'lodash'
-import { globalProps } from '../utilities/globalProps.js'
+import { globalProps } from '../utilities/globalProps'
 import classnames from 'classnames'
 
 import Control from './components/Control'

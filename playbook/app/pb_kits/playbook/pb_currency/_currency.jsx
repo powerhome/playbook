@@ -3,7 +3,7 @@
 import React from 'react'
 import classnames from 'classnames'
 
-import { globalProps } from '../utilities/globalProps.js'
+import { globalProps } from '../utilities/globalProps'
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
 
 import Body from '../pb_body/_body'
@@ -11,6 +11,7 @@ import Caption from '../pb_caption/_caption'
 import Title from '../pb_title/_title'
 
 type CurrencyProps = {
+  abbreviate?: boolean,
   align?: 'center' | 'left' | 'right',
   amount: string,
   aria?: object,
@@ -34,6 +35,7 @@ const sizes = {
 
 const Currency = (props: CurrencyProps) => {
   const {
+    abbreviate = false,
     align = 'left',
     aria = {},
     amount,
@@ -69,6 +71,24 @@ const Currency = (props: CurrencyProps) => {
     className
   )
 
+  const getFormattedNumber = (input) => new Intl.NumberFormat('en-US', {
+    notation: 'compact',
+    maximumFractionDigits: 1,
+  }).format(input)
+
+  type AbbrType = 'amount' | 'unit'
+
+  const getAbbreviatedValue = (abbrType: AbbrType) => {
+    const num = `${getFormattedNumber(whole.split(',').join(''))}`,
+      isAmount = abbrType === 'amount',
+      isUnit =  abbrType === 'unit'
+    return isAmount ? num.slice(0, -1) : isUnit ? num.slice(-1) : ''
+  }
+
+  const getAmount = abbreviate ? getAbbreviatedValue('amount') : whole,
+    getAbbreviation = abbreviate ? getAbbreviatedValue('unit') : null,
+    getDecimalValue = abbreviate ? '' : `.${decimal}`
+
   return (
     <div
         {...ariaProps}
@@ -92,7 +112,7 @@ const Currency = (props: CurrencyProps) => {
             dark={dark}
             size={sizes[size]}
         >
-          {`${whole}`}
+          {getAmount}
         </Title>
 
         <Body
@@ -100,10 +120,11 @@ const Currency = (props: CurrencyProps) => {
             color="light"
             dark={dark}
         >
+          {getAbbreviation}
           <If condition={unit}>
             {unit}
             <Else />
-            {`.${decimal}`}
+            {getDecimalValue}
           </If>
         </Body>
       </div>
