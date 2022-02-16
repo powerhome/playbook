@@ -1,6 +1,7 @@
+/* eslint-disable camelcase */
 /* @flow */
 
-import React, { type Node, useEffect } from 'react'
+import React, { type Node } from 'react'
 import classnames from 'classnames'
 import { buildAriaProps, buildDataProps } from '../utilities/props'
 import { globalProps } from '../utilities/globalProps.js'
@@ -20,7 +21,7 @@ type TableProps = {
   responsive: "collapse" | "scroll" | "none",
   singleLine: boolean,
   size: "sm" | "md" | "lg",
-  sticky: boolean,
+  sticky?: boolean,
 }
 
 const Table = (props: TableProps) => {
@@ -38,36 +39,21 @@ const Table = (props: TableProps) => {
     responsive = 'collapse',
     singleLine = false,
     size = 'sm',
-    // sticky = false,
+    sticky = false,
   } = props
 
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
-  const tableCollapseCss = responsive !== 'none' ? `table-collapse-${collapse}` : ''
+  const tableCollapseCss =
+    responsive !== 'none' ? `table-collapse-${collapse}` : ''
 
   const instance = new PbTable()
   instance.connect()
-
-  const tableScroll = () => {
-    useEffect(() => {
-      window.addEventListener('scroll', stickyHeader)
-      return () => {
-        window.removeEventListener('scroll', stickyHeader)
-      }
-    })
-  }
-
-  const stickyHeader = () => {
-    const header = document.querySelector('.thead')
-    const scrollTop = window.scrollY
-    scrollTop >= 250 ? header.classList.add('stickyHeader') : header.classList.remove('stickyHeader')
-  }
 
   return (
     <table
         {...ariaProps}
         {...dataProps}
-        {...tableScroll}
         className={classnames(
         'pb_table',
         `table-${size}`,
@@ -75,9 +61,10 @@ const Table = (props: TableProps) => {
         {
           'table-card': container,
           'table-dark': dark,
-          'data_table': dataTable,
+          data_table: dataTable,
           'single-line': singleLine,
           'no-hover': disableHover,
+          'sticky-header': sticky,
         },
         globalProps(props),
         tableCollapseCss,
