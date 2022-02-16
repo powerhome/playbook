@@ -1,0 +1,1 @@
+`custom_color` needs to be passed as a hex value (ex. "#e43718"). It is not case sensitive, but needs to start with `#`. `custom_color` takes the place of the background color, so use one prop or the other, NOT both.

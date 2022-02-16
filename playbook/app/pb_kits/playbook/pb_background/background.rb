@@ -24,7 +24,7 @@ module Playbook
       end
 
       def custom_background_color
-        custom_color.present? && custom_color.match(/^#[0-9A-F]{6}$/i) ? "background-color: #{custom_color};" : "background-color: #FFFFFF;"
+        custom_color.present? && custom_color.match(/^#[0-9A-F]{6}$/i) ? "background-color: #{custom_color};" : nil
       end
 
     private
