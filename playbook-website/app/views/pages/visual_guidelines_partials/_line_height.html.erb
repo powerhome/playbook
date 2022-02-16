@@ -8,29 +8,5 @@
     global_props: false
   }
 %>
-<%= pb_rails("title", props: {
-  size: 4,
-  tag: "h3",
-  text: "Tokens"
-}) %>
-<%= pb_rails("body", props: {
-  margin_bottom: "lg",
-  margin_top: "xs",
-  tag: "p"
-}) do %>
-  Make up your own styles using Playbook tokens to keep your site consistent.
-<% end %>
 
  <%= render "pages/visual_guidelines_partials/pb_doc_line_height"%>
-
-<%= pb_rails("card", props: {
-  margin_bottom: "none",
-  padding: "none",
-  shadow: "deep"
-}) do %>
-  <%= render partial: "pages/visual_guidelines_partials/partial_code_example",
-    locals: {
-      example: "app/views/pages/code_snippets/line_height_jsx.txt"
-    }
-  %>
-<% end %>

@@ -27,35 +27,49 @@
     </div>
   <% end %>
 <% end %>
-<%= pb_rails("layout", props: { layout: "collection", margin: "md" }) do %>
-  <%= pb_rails("layout/body", props: { orientation: "row", columns: "3" }) do %>
-    <%= pb_rails("card/card_body", props: { margin: "sm" }) do %>
-      <p class="card-tightest" >The quick brown fox jumps over the lazy dog</p>
-      <%= pb_rails("caption", props: { margin_top: "xs", text: "$lh_tightest", size: "xs" }) %>
+<%= pb_rails("title", props: { text: "Tokens", tag: "h3", size: 4, margin_top: 'lg' }) %>
+<%= pb_rails("body", props: { tag: "p", margin_bottom: "lg", margin_top: "xs" }) do %>
+  Make up your own styles using Playbook tokens to keep your site consistent.
+<% end %>
+<%= pb_rails("card", props: { shadow: "deep", margin_bottom: "none", padding: "none" }) do %>
+  <%= pb_rails("flex", props: { vertical: "stretch", padding_x: "md", padding_top: "md", padding_bottom: "md" }) do %>
+    <%= pb_rails("layout", props: { layout: "collection", margin: "md" }) do %>
+      <%= pb_rails("layout/body", props: { orientation: "row", columns: "3" }) do %>
+        <%= pb_rails("card/card_body", props: { margin: "sm" }) do %>
+          <p class="card-tightest" >The quick brown fox jumps over the lazy dog</p>
+          <%= pb_rails("caption", props: { margin_top: "xs", text: "$lh_tightest", size: "xs" }) %>
+        <% end %>
+        <%= pb_rails("card/card_body", props: { margin: "sm" }) do %>
+          <p class="card-tighter" >The quick brown fox jumps over the lazy dog</p>
+          <%= pb_rails("caption", props: { margin_top: "xs", text: "$lh_tighter", size: "xs" }) %>
+        <% end %>
+        <%= pb_rails("card/card_body", props: { margin: "sm" }) do %>
+          <p class="card-tight" >The quick brown fox jumps over the lazy dog</p>
+          <%= pb_rails("caption", props: { margin_top: "xs", text: "$lh_tight", size: "xs" }) %>
+        <% end %>
+        <%= pb_rails("card/card_body", props: { margin: "sm" }) do %>
+          <p class="card-normal">The quick brown fox jumps over the lazy dog</p>
+          <%= pb_rails("caption", props: { margin_top: "xs", text: "$lh_normal", size: "xs" }) %>
+        <% end %>
+        <%= pb_rails("card/card_body", props: { margin: "sm" }) do %>
+          <p class="card-loose">The quick brown fox jumps over the lazy dog</p>
+          <%= pb_rails("caption", props: { margin_top: "xs", text: "$lh_loose", size: "xs" }) %>
+        <% end %>
+        <%= pb_rails("card/card_body", props: { margin: "sm" }) do %>
+          <p class="card-looser">The quick brown fox jumps over the lazy dog</p>
+          <%= pb_rails("caption", props: { margin_top: "xs", text: "$lh_looser", size: "xs" }) %>
+        <% end %>
+        <%= pb_rails("card/card_body", props: { margin: "sm" }) do %>
+          <p class="card-loosest">The quick brown fox jumps over the lazy dog</p>
+          <%= pb_rails("caption", props: { margin_top: "xs", text: "$lh_loosest", size: "xs" }) %>
+        <% end %>
+      <% end %>
     <% end %>
-    <%= pb_rails("card/card_body", props: { margin: "sm" }) do %>
-      <p class="card-tighter" >The quick brown fox jumps over the lazy dog</p>
-      <%= pb_rails("caption", props: { margin_top: "xs", text: "$lh_tighter", size: "xs" }) %>
-    <% end %>
-    <%= pb_rails("card/card_body", props: { margin: "sm" }) do %>
-      <p class="card-tight" >The quick brown fox jumps over the lazy dog</p>
-      <%= pb_rails("caption", props: { margin_top: "xs", text: "$lh_tight", size: "xs" }) %>
-    <% end %>
-    <%= pb_rails("card/card_body", props: { margin: "sm" }) do %>
-      <p class="card-normal">The quick brown fox jumps over the lazy dog</p>
-      <%= pb_rails("caption", props: { margin_top: "xs", text: "$lh_normal", size: "xs" }) %>
-    <% end %>
-    <%= pb_rails("card/card_body", props: { margin: "sm" }) do %>
-      <p class="card-loose">The quick brown fox jumps over the lazy dog</p>
-      <%= pb_rails("caption", props: { margin_top: "xs", text: "$lh_loose", size: "xs" }) %>
-    <% end %>
-    <%= pb_rails("card/card_body", props: { margin: "sm" }) do %>
-      <p class="card-looser">The quick brown fox jumps over the lazy dog</p>
-      <%= pb_rails("caption", props: { margin_top: "xs", text: "$lh_looser", size: "xs" }) %>
-    <% end %>
-    <%= pb_rails("card/card_body", props: { margin: "sm" }) do %>
-      <p class="card-loosest">The quick brown fox jumps over the lazy dog</p>
-      <%= pb_rails("caption", props: { margin_top: "xs", text: "$lh_loosest", size: "xs" }) %>
-    <% end %>
+  <% end %>
+  <%= pb_rails("background", props: { id: "code-wrapper", classname: "border-bottom", background_color: "dark", padding: "none" }) do %>
+    <%= pb_rails("caption", props: { text: "EXAMPLE IN USE", padding_top: "lg", margin_x: "xl", classname: "dark" }) %>
+    <div class="pb--codeCopy">
+      <pre class="highlight pt_sm" style="margin: 0px"><%= raw rouge(@line_height_token_example, "react") %></pre>
+    </div>
   <% end %>
 <% end %>
