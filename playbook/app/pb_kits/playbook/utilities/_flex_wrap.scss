@@ -1,14 +1,14 @@
 .flex_wrap_wrap {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: wrap !important;
 }
 
 .flex_wrap_nowrap {
   display: flex;
-  flex-wrap: nowrap;
+  flex-wrap: nowrap !important;
 }
 
 .flex_wrap_wrap_reverse {
   display: flex;
-  flex-wrap: wrap-reverse;
+  flex-wrap: wrap-reverse !important;
 }

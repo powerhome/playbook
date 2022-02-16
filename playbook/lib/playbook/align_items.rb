@@ -23,7 +23,7 @@ module Playbook
     end
 
     def align_items_values
-      %w[start end center baseline stretch]
+      %w[flex_start flex_end start end center baseline stretch]
     end
   end
 end

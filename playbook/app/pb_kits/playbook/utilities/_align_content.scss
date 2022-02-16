@@ -1,29 +1,29 @@
 .align_content_start {
   display: flex;
-  align-content: start;
+  align-content: start !important;
 }
 
 .align_content_end {
   display: flex;
-  align-content: end;
+  align-content: end !important;
 }
 
 .align_content_center {
   display: flex;
-  align-content: center;
+  align-content: center !important;
 }
 
 .align_content_space_between {
   display: flex;
-  align-content: space-between;
+  align-content: space-between !important;
 }
 
 .align_content_space_around {
   display: flex;
-  align-content: space-around;
+  align-content: space-around !important;
 }
 
 .align_content_space_evenly {
   display: flex;
-  align-content: space-evenly;
+  align-content: space-evenly !important;
 }
