@@ -1,1 +1,1 @@
-Use `sticky="true"` on a table to allow the table header to be fixed in place when the user scrolls. 
+Use `sticky="true"` on a table to allow the table header to be fixed in place when the user scrolls
