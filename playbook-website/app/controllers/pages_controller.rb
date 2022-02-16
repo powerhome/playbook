@@ -89,6 +89,7 @@ class PagesController < ApplicationController
     @shadow_in_use_code_example = Rails.root.join("app/views/pages/code_snippets/shadow_in_use_jsx.txt").read
     @line_height_code_example = Rails.root.join("app/views/pages/code_snippets/line_height_code_jsx.txt").read
     @display_in_use_code_example = Rails.root.join("app/views/pages/code_snippets/display_in_use_jsx.txt").read
+    @justify_self_code_example = Rails.root.join("app/views/pages/code_snippets/justify_self_jsx.txt").read
     @space_sizes = [
       { name: "Extra Small", variable: "space_xs" },
       { name: "Small", variable: "space_sm" },
