@@ -1,6 +1,6 @@
 /* @flow */
 
-import React, { type Node } from 'react'
+import React, { type Node, useEffect } from 'react'
 import classnames from 'classnames'
 import { buildAriaProps, buildDataProps } from '../utilities/props'
 import { globalProps } from '../utilities/globalProps.js'
@@ -20,6 +20,7 @@ type TableProps = {
   responsive: "collapse" | "scroll" | "none",
   singleLine: boolean,
   size: "sm" | "md" | "lg",
+  sticky: boolean,
 }
 
 const Table = (props: TableProps) => {
@@ -37,6 +38,7 @@ const Table = (props: TableProps) => {
     responsive = 'collapse',
     singleLine = false,
     size = 'sm',
+    // sticky = false,
   } = props
 
   const ariaProps = buildAriaProps(aria)
@@ -46,10 +48,26 @@ const Table = (props: TableProps) => {
   const instance = new PbTable()
   instance.connect()
 
+  const tableScroll = () => {
+    useEffect(() => {
+      window.addEventListener('scroll', stickyHeader)
+      return () => {
+        window.removeEventListener('scroll', stickyHeader)
+      }
+    })
+  }
+
+  const stickyHeader = () => {
+    const header = document.querySelector('.thead')
+    const scrollTop = window.scrollY
+    scrollTop >= 250 ? header.classList.add('stickyHeader') : header.classList.remove('stickyHeader')
+  }
+
   return (
     <table
         {...ariaProps}
         {...dataProps}
+        {...tableScroll}
         className={classnames(
         'pb_table',
         `table-${size}`,
