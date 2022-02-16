@@ -92,7 +92,7 @@ const Lightbox = (props: LightboxType) => {
           id={id}
       >
         <div className="carousel">
-          <Lightbox.Header>{children}</Lightbox.Header>
+          {children}
           <Carousel
               current={photos.indexOf(initialPhoto)}
               onChange={handleOnSlide}

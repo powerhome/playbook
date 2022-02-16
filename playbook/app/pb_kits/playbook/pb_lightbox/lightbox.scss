@@ -59,7 +59,7 @@
       position: fixed;
       top: 0;
       left: 0;
-      z-index: 2;
+      z-index: 9999999;
       align-items: center;
       padding: $space-sm;
       transition: all .5s;
@@ -121,6 +121,15 @@
       width: 100%;
       height: 100%;
     }
+
+    [class^="react-transform-component"] {
+      width: 100%;
+      height: 100%;
+      img {
+        height: 100%;
+      }
+    }
+
   }
   
   .Slide,
