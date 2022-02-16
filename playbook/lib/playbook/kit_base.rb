@@ -8,6 +8,17 @@ require "playbook/shadow"
 require "playbook/line_height"
 require "playbook/display"
 require "playbook/cursor"
+require "playbook/flex_direction"
+require "playbook/flex_wrap"
+require "playbook/justify_content"
+require "playbook/justify_self"
+require "playbook/align_items"
+require "playbook/align_content"
+require "playbook/align_self"
+require "playbook/flex"
+require "playbook/flex_grow"
+require "playbook/flex_shrink"
+require "playbook/order"
 
 module Playbook
   class KitBase < ViewComponent::Base
@@ -21,6 +32,17 @@ module Playbook
     include Playbook::LineHeight
     include Playbook::Display
     include Playbook::Cursor
+    include Playbook::FlexDirection
+    include Playbook::FlexWrap
+    include Playbook::JustifyContent
+    include Playbook::JustifySelf
+    include Playbook::AlignItems
+    include Playbook::AlignContent
+    include Playbook::AlignSelf
+    include Playbook::Flex
+    include Playbook::FlexGrow
+    include Playbook::FlexShrink
+    include Playbook::Order
 
     prop :id
     prop :data, type: Playbook::Props::Hash, default: {}

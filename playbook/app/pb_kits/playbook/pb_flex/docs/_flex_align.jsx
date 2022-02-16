@@ -7,7 +7,7 @@ const FlexAlign = (props) => {
 
       <Title
           size={4}
-          text="Row"
+          text="row"
           {...props}
       />
       <br />
