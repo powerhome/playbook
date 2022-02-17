@@ -1,0 +1,1 @@
+Background size can be passed into the background kit. Values `auto`, `contain`, `cover` are accepted.

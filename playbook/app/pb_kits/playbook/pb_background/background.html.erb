@@ -4,7 +4,8 @@
       data: object.data,
       id: object.id,
       class: object.classname,
-      style: "background-image: url('#{object.image_url}');"
+      style: "background-image: url('#{object.image_url}');
+              background-size: #{object.background_size};"
   ) do %>
     <%= content.presence %>
   <% end %>
@@ -13,7 +14,8 @@
       aria: object.aria,
       data: object.data,
       id: object.id,
-      class: object.classname
+      class: object.classname,
+      style: "background-size: #{object.background_size};"
   ) do %>
     <%= content.presence %>
   <% end %>
