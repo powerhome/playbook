@@ -1,67 +1,37 @@
-.flex_direction_row {
-  display: flex;
-  flex-direction: row !important;
-}
+$flex_direction_values: (
+  row: row,
+  column: column,
+  row_reverse: row-reverse,
+  column_reverse: column-reverse
+);
 
-.flex_direction_column {
-  display: flex;
-  flex-direction: column !important;
-}
+$media-query-breakpoints: (
+  xs: "xs",
+  sm: "sm",
+  md: "md",
+  lg: "lg",
+  xl: "xl"
+);
 
-.flex_direction_row_reverse {
-  display: flex;
-  flex-direction: row-reverse !important;
-}
-
-.flex_direction_column_reverse {
-  display: flex;
-  flex-direction: column-reverse !important;
-}
-
-@include break_at( breakpoint("sm") ) {
-  .sm\:flex-col {
-    flex-direction: column;
+@each $flex-direction, $flex-direction-value in $flex_direction_values {
+  .flex_direction_#{$flex-direction} {
+    display: flex;
+    flex-direction: #{$flex-direction-value} !important;
   }
 }
 
-@include break_at( breakpoint("md") ) {
-  .md\:flex-row {
-    flex-direction: row;
+@each $flex-direction, $flex-direction-value in $flex_direction_values {
+  @each $breakpoint, $breakpoint-value in $media-query-breakpoints {
+    .flex_direction_#{$breakpoint}_#{$flex-direction} {
+      display: flex;
+      @include break_at( breakpoint($breakpoint-value)) {
+        flex-direction: #{$flex-direction-value} !important;
+      }
+    }
   }
 }
 
-@include break_at( breakpoint("lg") ) {
-  .lg\:flex-col {
-    flex-direction: column;
-  }
-}
 
-@include break_at( breakpoint("xl") ) {
-  .xl\:flex-col {
-    flex-direction: column;
-  }
-}
 
-@include break_at( breakpoint("sm") ) {
-  .sm\:flex-row {
-    flex-direction: row;
-  }
-}
 
-@include break_at( breakpoint("md") ) {
-  .md\:flex-row {
-    flex-direction: row;
-  }
-}
 
-@include break_at( breakpoint("lg") ) {
-  .lg\:flex-row {
-    flex-direction: row;
-  }
-}
-
-@include break_at( breakpoint("xl") ) {
-  .xl\:flex-row {
-    flex-direction: row;
-  }
-}
