@@ -1,0 +1,7 @@
+examples:
+
+rails:
+- treemap_chart_default: Default
+
+react:
+- treemap_chart_default: Default
