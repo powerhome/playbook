@@ -12,7 +12,13 @@ module Playbook
 
       selected_props.map do |k|
         flex_direction_value = send(k)
-        "flex_direction_#{flex_direction_value}" if flex_direction_values.include? flex_direction_value
+        if flex_direction_value.is_a?(Hash)
+          flex_direction_value.map do |media_size, flex_value|
+            "flex_direction_#{media_size}_#{flex_value}"
+          end
+        else
+          "flex_direction_#{flex_direction_value}" unless flex_direction_value.nil?
+        end
       end.compact.join(" ")
     end
 
