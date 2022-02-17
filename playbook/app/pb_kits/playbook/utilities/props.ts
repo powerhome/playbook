@@ -10,10 +10,11 @@ import classnames from 'classnames'
  * @param {Object} data the object containing the data to derive the props from.
  * @returns {Object} an object whose keys have the prefix added to them.
  */
-const buildPrefixedProps = (prefix, data) => Object.keys(data).reduce((props, key) => {
-  props[`${prefix}-${key}`] = data[key]
-  return props
-}, {})
+const buildPrefixedProps = (prefix: string, data: {[key: string]: any}) => 
+  Object.keys(data).reduce((props: {[key: string]: any}, key: string) => {
+    props[`${prefix}-${key}`] = data[key]
+    return props
+  }, {})
 
 /**
  * Represent a "No-Operation" function that can be used as a sensible
@@ -29,7 +30,8 @@ export const noop = () => {}
  * @param {Object} aria the object containing the aria prop values.
  * @returns {Object} an object holding the HTML valid aria props and their values.
  */
-export const buildAriaProps = (aria) => buildPrefixedProps('aria', aria)
+export const buildAriaProps = (aria: {[key: string]: string}): {[key: string]: string} => 
+  buildPrefixedProps('aria', aria)
 
 /**
  * Maps a given data object into HTML valid data attribtues and their values.
@@ -37,7 +39,7 @@ export const buildAriaProps = (aria) => buildPrefixedProps('aria', aria)
  * @param {Object} data the object containing the data prop values.
  * @returns {Object} an object holding the HTML valid data props and their values.
  */
-export const buildDataProps = (data) => buildPrefixedProps('data', data)
+export const buildDataProps = (data: {[key: string]: any}) => buildPrefixedProps('data', data)
 
 /**
  * Builds a Playbook valid root className off of the incoming css rules.
@@ -45,5 +47,5 @@ export const buildDataProps = (data) => buildPrefixedProps('data', data)
  * @param {Object} rules a 'classnames' compliant rules object, used to derive the root className.
  * @returns {String} the derived root className value.
  */
-export const buildCss = (...rules) => classnames(rules).replace(/\s/g, '_')
+export const buildCss = (...rules: string[]) => classnames(rules).replace(/\s/g, '_')
 

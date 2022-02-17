@@ -3,8 +3,8 @@ import React from 'react'
 import classnames from 'classnames'
 import Title from '../pb_title/_title.jsx'
 import Icon from '../pb_icon/_icon.jsx'
-import Avatar from '../pb_avatar/_avatar.jsx'
-import { globalProps } from '../utilities/globalProps.js'
+import Avatar from '../pb_avatar/_avatar'
+import { globalProps } from '../utilities/globalProps'
 
 type FormPillProps = {
   className?: string,

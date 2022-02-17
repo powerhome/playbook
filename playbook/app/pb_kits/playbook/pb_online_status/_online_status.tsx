@@ -1,18 +1,16 @@
-/* @flow */
-
 import React from 'react'
 import classnames from 'classnames'
-import { globalProps } from '../utilities/globalProps.js'
+import { GlobalProps, globalProps } from '../utilities/globalProps'
 
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
 
 type OnlineStatusProps = {
-  aria?: object,
+  aria?: {[key: string]: string},
   className?: string,
-  data?: object,
+  data?: {[key: string]: string | number},
   id?: string,
   status?: "online" | "offline" | "away",
-}
+} & GlobalProps
 
 const OnlineStatus = (props: OnlineStatusProps) => {
   const {

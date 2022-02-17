@@ -47,13 +47,13 @@ const numberSpacingProps = ({ numberSpacing }) => {
 
 const maxWidthProps = ({ maxWidth }) => {
   let css = ''
-  css += maxWidth ? `max_width_${maxWidth } ` : ''
+  css += maxWidth ? `max_width_${maxWidth} ` : ''
   return css
 }
 
 const zIndexProps = ({ zIndex }) => {
   let css = ''
-  css += zIndex ? `z_index_${zIndex } ` : ''
+  css += zIndex ? `z_index_${zIndex} ` : ''
   return css
 }
 
@@ -81,10 +81,88 @@ const cursorProps = ({ cursor }) => {
   return css
 }
 
+const flexDirectionProps = ({ flexDirection }) => {
+  let css = ''
+  css += flexDirection == 'columnReverse' ? 'flex_direction_column_reverse' :
+    flexDirection == 'rowReverse' ? 'flex_direction_row_reverse' :
+      flexDirection ? `flex_direction_${flexDirection} ` : ''
+  return css
+}
+
+const flexWrapProps = ({ flexWrap }) => {
+  let css = ''
+  css += flexWrap == 'wrapReverse' ? 'flex_wrap_reverse' :
+    flexWrap == 'noWrap' ? 'flex_nowrap' :
+      flexWrap ? `flex_wrap_${flexWrap} ` : ''
+  return css
+}
+
+const justifyContentProps = ({ justifyContent }) => {
+  let css = ''
+  css += justifyContent == 'spaceBetween' ? 'justify_content_space_between' :
+    justifyContent == 'spaceEvenly' ? 'justify_content_space_evenly' :
+      justifyContent == 'spaceAround' ? 'justify_content_space_around' :
+        justifyContent ? `justify_content_${justifyContent}` : ''
+  return css
+}
+
+const justifySelfProps = ({ justifySelf }) => {
+  let css = ''
+  css += justifySelf ? `justify_self_${justifySelf}` : ''
+  return css
+}
+
+const alignItemsProps = ({ alignItems }) => {
+  let css = ''
+  css += alignItems == 'flexStart' ? 'align_items_flex_start' :
+    alignItems == 'flexEnd' ? 'align_items_flex_end' :
+      alignItems ? `align_items_${alignItems}` : ''
+  return css
+}
+
+const alignContentProps = ({ alignContent }) => {
+  let css = ''
+  css += alignContent == 'spaceBetween' ? 'align_content_space_between' :
+    alignContent == 'spaceEvenly' ? 'align_content_space_evenly' :
+      alignContent == 'spaceAround' ? 'align_content_space_around' :
+        alignContent ? `align_content_${alignContent}` : ''
+  return css
+}
+
+const alignSelfProps = ({ alignSelf }) => {
+  let css = ''
+  css += alignSelf ? `align_self_${alignSelf}` : ''
+  return css
+}
+
+const flexProps = ({ flex }) => {
+  let css = ''
+  css += flex ? `flex_${flex}` : ''
+  return css
+}
+
+const flexGrowProps = ({ flexGrow }) => {
+  let css = ''
+  css += flexGrow ? `flex_grow_${flexGrow}` : ''
+  return css
+}
+
+const flexShrinkProps = ({ flexShrink }) => {
+  let css = ''
+  css += flexShrink ? `flex_shrink_${flexShrink}` : ''
+  return css
+}
+
+const orderProps = ({ order }) => {
+  let css = ''
+  css += order ? `order_${order}` : ''
+  return css
+}
+
 // All Exported as a single function
 export const globalProps = (props, defaultProps = {}) => {
   const allProps = { ...props, ...defaultProps }
-  return spacingProps(allProps) + darkProps(allProps) + maxWidthProps(allProps) + zIndexProps(allProps) + numberSpacingProps(allProps) + shadowProps(allProps) + lineHeightProps(allProps) + cursorProps(allProps) + displayProps(allProps)
+  return spacingProps(allProps) + darkProps(allProps) + maxWidthProps(allProps) + zIndexProps(allProps) + numberSpacingProps(allProps) + shadowProps(allProps) + lineHeightProps(allProps) + cursorProps(allProps) + displayProps(allProps) + flexDirectionProps(allProps) + flexWrapProps(allProps) + justifyContentProps(allProps) + justifySelfProps(allProps) + alignItemsProps(allProps) + alignContentProps(allProps) + alignSelfProps(allProps) + flexProps(allProps) + flexGrowProps(allProps) + flexShrinkProps(allProps) + orderProps(allProps)
 }
 
 export const deprecatedProps = (kit, props = []) => {
