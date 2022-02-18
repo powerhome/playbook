@@ -65,7 +65,7 @@ const Background = (props: BackgroundProps) => {
             {...dataProps}
             className={classes}
             id={id}
-            style={{ backgroundColor: customColor }}
+            style={customColor ? { backgroundColor: customColor } : null}
         >
           { children }
         </Tag>
