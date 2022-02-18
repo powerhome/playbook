@@ -66,6 +66,8 @@ type Flex = {
   flex?: None | "initial" | "auto" | 1
 }
 
+// type FlexDirectionLabels = "xs" | "sm" | "md" | "lg" | "xl"
+// type FlexDirectionOptions = "row" | "column" | "row_reverse" | "column_reverse"
 type FlexDirection = {
   flexDirection?: "row" | "column" | "rowReverse" | "columnReverse"
 }
@@ -107,7 +109,7 @@ type AlignSelf = {
 }
 
 type Order = {
-  order?: None | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12
+  order?: None| "first" | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12
 }
 
 export type GlobalProps = AlignContent & AlignItems & AlignSelf &
@@ -203,26 +205,29 @@ const PROP_CATEGORIES: {[key:string]: (props: {[key: string]: any}) => string} =
     css += cursor ? `cursor_${cursor} ` : ''
     return css
   },
-  flexDirectionProps: ({ flexDirection }: FlexDirection) => {
-    let css = ''
-    css += flexDirection == 'columnReverse' ? 'flex_direction_column_reverse' :
-      flexDirection == 'rowReverse' ? 'flex_direction_row_reverse' :
-        flexDirection ? `flex_direction_${flexDirection} ` : ''
-    return css
+  flexDirectionProps: ({ flexDirection }: any) => { //WIP: figure out the type
+    if (typeof flexDirection !== 'object') return
+
+    // let css = ''
+    const flexKeys: string[] = Object.keys(flexDirection)
+
+    return flexKeys.map((key: string) => {
+      const flexDirectionValue: string = flexDirection[key]
+      return `flex_direction_${key}_${flexDirectionValue}`
+    }).join(" ")
+
+    // css += flexDirection == 'columnReverse' ? 'flex_direction_column_reverse' :
+    // flexDirection == 'rowReverse' ? 'flex_direction_row_reverse' :
+    //   flexDirection ? `flex_direction_${flexDirection} ` : ''
   },
   flexWrapProps: ({ flexWrap }: FlexWrap) => {
     let css = ''
-    css += flexWrap == 'wrapReverse' ? 'flex_wrap_reverse' :
-      flexWrap == 'nowrap' ? 'flex_nowrap' :
-        flexWrap ? `flex_wrap_${flexWrap} ` : ''
+    css += flexWrap ? `flex_wrap_${flexWrap}` : ''
     return css
   },
   justifyContentProps: ({ justifyContent }: JustifyContent) => {
     let css = ''
-    css += justifyContent == 'spaceBetween' ? 'justify_content_space_between' :
-      justifyContent == 'spaceEvenly' ? 'justify_content_space_evenly' :
-        justifyContent == 'spaceAround' ? 'justify_content_space_around' :
-          justifyContent ? `justify_content_${justifyContent}` : ''
+    css += justifyContent ? `justify_content_${justifyContent}` : ''
     return css
   },
   justifySelfProps: ({ justifySelf }: JustifySelf) => {
@@ -232,17 +237,12 @@ const PROP_CATEGORIES: {[key:string]: (props: {[key: string]: any}) => string} =
   },
   alignItemsProps: ({ alignItems }: AlignItems) => {
     let css = ''
-    css += alignItems == 'flexStart' ? 'align_items_flex_start' :
-      alignItems == 'flexEnd' ? 'align_items_flex_end' :
-        alignItems ? `align_items_${alignItems}` : ''
+    css += alignItems ? `align_items_${alignItems}` : ''
     return css
   },
   alignContentProps: ({ alignContent }: AlignContent) => {
     let css = ''
-    css += alignContent == 'spaceBetween' ? 'align_content_space_between' :
-      alignContent == 'spaceEvenly' ? 'align_content_space_evenly' :
-        alignContent == 'spaceAround' ? 'align_content_space_around' :
-          alignContent ? `align_content_${alignContent}` : ''
+    css += alignContent ? `align_content_${alignContent}` : ''
     return css
   },
   alignSelfProps: ({ alignSelf }: AlignSelf) => {
@@ -251,7 +251,7 @@ const PROP_CATEGORIES: {[key:string]: (props: {[key: string]: any}) => string} =
     return css
   },
   flexProps: ({ flex }: Flex) => {
-    let css = ''
+    let css =''
     css += flex ? `flex_${flex}` : ''
     return css
   },
