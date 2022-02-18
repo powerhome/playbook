@@ -21,6 +21,11 @@ RSpec.describe Playbook::PbBackground::Background do
       .with_default(nil)
       .with_values("fade", "blur", "scale", nil)
   }
+  it {
+    is_expected.to define_enum_prop(:background_size)
+      .with_default("cover")
+      .with_values("cover", "contain", "auto")
+  }
   describe "#classname" do
     it "returns namespaced class name", :aggregate_failures do
       expect(subject.new({}).classname).to eq "pb_background_kit pb_background_color_light"
