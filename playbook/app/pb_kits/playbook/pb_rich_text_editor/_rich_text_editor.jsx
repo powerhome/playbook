@@ -62,11 +62,12 @@ const RichTextEditor = (props: RichTextEditorProps) => {
   // DOM manipulation must wait for editor to be ready
   if (editor) {
     const toolbarElement = element.parentElement.querySelector('trix-toolbar'),
-    blockCodeButton = toolbarElement.querySelector('[data-trix-attribute=code]'),
-    inlineCodeButton = blockCodeButton.cloneNode(true)
+    blockCodeButton = toolbarElement.querySelector('[data-trix-attribute=code]')
+
+    let inlineCodeButton = toolbarElement.querySelector('[data-trix-attribute=inlineCode]')
+    if (!inlineCodeButton) inlineCodeButton = blockCodeButton.cloneNode(true)
 
     // set button attributes
-    inlineCodeButton.hidden = true
     inlineCodeButton.dataset.trixAttribute = 'inlineCode'
     blockCodeButton.insertAdjacentElement('afterend', inlineCodeButton)
 
