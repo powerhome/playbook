@@ -59,6 +59,10 @@ type BorderRadius = {
   borderRadius?: "none" | "xs" | "sm" | "md" | "lg" | "xl" | "rounded",
 }
 
+type FlexDirection = {
+  flexDirection?: "row" | "column" | "row_reverse" | "column_reverse",
+}
+
 export type GlobalProps = BorderRadius & Cursor & Dark & Display & LineHeight & Margin & MaxWidth & NumberSpacing & Padding & Shadow & ZIndex
 
 // Prop categories
@@ -134,6 +138,11 @@ const PROP_CATEGORIES: {[key:string]: (props: {[key: string]: any}) => string} =
   cursorProps: ({ cursor }: Cursor) => {
     let css = ''
     css += cursor ? `cursor_${cursor} ` : ''
+    return css
+  },
+  flexDirectionProps: ({ flexDirection }: FlexDirection) => {
+    let css = ''
+    css += flexDirection ? `flexDirection_${flexDirection} ` : ''
     return css
   }
 }
