@@ -13,5 +13,5 @@ it('Should be accessible', async () => {
 
 test('sticky = true', () => {
   const kit = renderKit(Table, props, { sticky: 'true' })
-  expect(kit).toHaveClass('pb-table table-sm table-responsive-collapse table-card sticky-header table-collapse-sm')
+  expect(kit).toHaveClass('pb_table table-sm table-responsive-collapse table-card sticky-header table-collapse-sm')
 })
