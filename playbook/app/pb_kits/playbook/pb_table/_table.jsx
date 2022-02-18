@@ -61,7 +61,7 @@ const Table = (props: TableProps) => {
         {
           'table-card': container,
           'table-dark': dark,
-          data_table: dataTable,
+          'data_table': dataTable,
           'single-line': singleLine,
           'no-hover': disableHover,
           'sticky-header': sticky,

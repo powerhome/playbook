@@ -2,7 +2,7 @@ import React from 'react'
 
 import Table from '../_table'
 
-const StickyTableSm = (props) => {
+const StickyTable = (props) => {
   return (
     <Table
         size="sm"
@@ -94,4 +94,4 @@ const StickyTableSm = (props) => {
   )
 }
 
-export default StickyTableSm
+export default StickyTable
