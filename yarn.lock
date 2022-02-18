@@ -11579,6 +11579,7 @@ fsevents@^1.2.7:
     react-modal: ^3.12.1
     react-popper: ^2.1.0
     react-select: 3.0.8
+    react-trix: ^0.9.0
     sass-loader: 7.3.1
     svg-url-loader: ^4.0.0
     trix: 1.3.1
@@ -12958,6 +12959,18 @@ fsevents@^1.2.7:
     react: ">=15.0.0"
     react-dom: ">=15.0.0"
   checksum: eefed08c48a0d377b5fac3ac7fac54ed986d5dcdd4494f36075954c9d2d257072a9d18cc02c6d8e6698034722b1ff9419ad0c24ef068dea742edcff9f8ea4ba9
+  languageName: node
+  linkType: hard
+
+"react-trix@npm:^0.9.0":
+  version: 0.9.0
+  resolution: "react-trix@npm:0.9.0"
+  dependencies:
+    trix: ^1.2.2
+  peerDependencies:
+    react: ">=16.0"
+    react-dom: ">=16.0"
+  checksum: 4bfc5ff5c304a6b26205fd21c08988c0fbeeed7952bfb312b7392b8112322d7ff3171b867e8003cb33c48eaad90e9cb24a32f92e035dd61781f03e7f3c46f4f6
   languageName: node
   linkType: hard
 
@@ -15110,7 +15123,7 @@ resolve@^2.0.0-next.3:
   languageName: node
   linkType: hard
 
-"trix@npm:1.3.1":
+"trix@npm:1.3.1, trix@npm:^1.2.2":
   version: 1.3.1
   resolution: "trix@npm:1.3.1"
   checksum: 981f88254615a60e7a767922b40cf320a3cbc72f07a971a713c1acbc18d9393cac9a08e3f3f28e77c755829eb920e2b0a063a97cc7bda720dcb86fa0edf6f0ba

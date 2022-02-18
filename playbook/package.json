@@ -67,6 +67,7 @@
     "react-modal": "^3.12.1",
     "react-popper": "^2.1.0",
     "react-select": "3.0.8",
+    "react-trix": "^0.9.0",
     "svg-url-loader": "^4.0.0",
     "zxcvbn": "^4.4.2"
   },
