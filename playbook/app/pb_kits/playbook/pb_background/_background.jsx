@@ -42,7 +42,7 @@ const Background = (props: BackgroundProps) => {
     backgroundImage: `url(${imageUrl})`,
     backgroundSize: 'cover',
   }
-  const getBackgroundColor = customColor ? '' : `pb_background_color_${backgroundColor}`
+  const getBackgroundColor = customColor ? 'pb_background_custom_color' : `pb_background_color_${backgroundColor}`
   const classes = classnames(buildCss('pb_background_kit'), 'lazyload', backgroundStyle, transition, globalProps(props), getBackgroundColor, className)
   const Tag = `${tag}`
 

@@ -24,7 +24,7 @@ module Playbook
       end
 
       def custom_background_color
-        custom_color.present? && custom_color.match(/^#[0-9A-F]{6}$/i) ? "background-color: #{custom_color};" : nil
+        "background-color: #{custom_color};"
       end
 
     private
@@ -33,7 +33,7 @@ module Playbook
         if image_url.present?
           "lazyload #{transition}"
         elsif custom_color.present?
-          ""
+          "pb_background_custom_color"
         else
           "pb_background_color_#{background_color}"
         end

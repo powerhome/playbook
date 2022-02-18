@@ -21,6 +21,8 @@ RSpec.describe Playbook::PbBackground::Background do
       .with_default(nil)
       .with_values("fade", "blur", "scale", nil)
   }
+  it { is_expected.to define_prop(:custom_color) }
+
   describe "#classname" do
     it "returns namespaced class name", :aggregate_failures do
       expect(subject.new({}).classname).to eq "pb_background_kit pb_background_color_light"
@@ -29,6 +31,15 @@ RSpec.describe Playbook::PbBackground::Background do
       expect(subject.new(background_color: "success").classname).to eq "pb_background_kit pb_background_color_success"
       expect(subject.new(background_color: "category_1").classname).to eq "pb_background_kit pb_background_color_category_1"
       expect(subject.new(transition: "fade", image_url: "test.jpeg").classname).to eq "pb_background_kit lazyload fade"
+      expect(subject.new(custom_color: "#1d99a8").classname).to eq "pb_background_kit pb_background_custom_color"
+    end
+  end
+
+  describe "#custom_background_color" do
+    it "returns a hash with a hex value assigned to the background-color" do
+      kit = subject.new(custom_color: "#1d99a8")
+
+      expect(kit.custom_background_color).to eq "background-color: #1d99a8;"
     end
   end
 end
