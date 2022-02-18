@@ -23,5 +23,5 @@ test('backgroundColor = category_1', () => {
 
 test('backgroundSize = auto', () => {
   const kit = renderKit(Background, props, { backgroundSize: 'auto' })
-  expect(kit).toHaveStyle('pb_background_kit pb_background_size_auto')
+  expect(kit).toHaveStyle('background-size: auto')
 })
