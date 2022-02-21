@@ -61,7 +61,6 @@ const Background = (props: BackgroundProps) => {
         </Tag>
         <Else />
         <Tag
-            style={backgroundStyle}
             {...ariaProps}
             {...dataProps}
             className={classes}
