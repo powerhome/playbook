@@ -22,6 +22,6 @@ test('backgroundColor = category_1', () => {
 })
 
 test('backgroundSize = auto', () => {
-  const kit = renderKit(Background, props, { backgroundSize: 'auto' })
+  const kit = renderKit(Background, props, { classname: "background-image", imageUrl: "https://images.unsplash.com/photo-1528459801416-a9e53bbf4e17?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1000&q=80", backgroundSize: 'auto' })
   expect(kit).toHaveStyle('background-size: auto')
 })
