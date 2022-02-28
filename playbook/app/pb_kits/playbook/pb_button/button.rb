@@ -21,7 +21,7 @@ module Playbook
       prop :size, type: Playbook::Props::Enum,
                   values: ["sm", "md", "lg", nil],
                   default: nil
-      prop :form
+      prop :form, default: nil
 
       def options
         {
@@ -33,7 +33,7 @@ module Playbook
           role: "button",
           type: type,
           value: value,
-          form: form
+          form: form,
         }.compact
       end
 

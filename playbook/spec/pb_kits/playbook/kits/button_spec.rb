@@ -23,6 +23,7 @@ RSpec.describe Playbook::PbButton::Button do
   it { is_expected.to define_prop(:link) }
   it { is_expected.to define_prop(:type) }
   it { is_expected.to define_prop(:value) }
+  it { is_expected.to define_prop(:form).with_default(nil) }
 
   describe "#tag" do
     it "returns 'button' when link is not provided" do

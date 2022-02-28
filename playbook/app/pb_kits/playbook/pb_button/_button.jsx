@@ -15,6 +15,7 @@ type ButtonPropTypes = {
   data?: object,
   disabled?: boolean,
   fixedWidth?: boolean,
+  form: string,
   fullWidth?: boolean,
   icon?: string,
   id?: string,
@@ -69,6 +70,7 @@ const Button = (props: ButtonPropTypes) => {
     text,
     htmlType = 'button',
     value,
+    form = null
   } = props
 
   const ariaProps = buildAriaProps(aria)
@@ -119,6 +121,7 @@ const Button = (props: ButtonPropTypes) => {
           {...dataProps}
           className={css}
           disabled={disabled}
+          form={form}
           id={id}
           onClick={onClick}
           role="button"
