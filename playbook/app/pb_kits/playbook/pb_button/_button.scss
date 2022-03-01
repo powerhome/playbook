@@ -13,9 +13,9 @@ $pb_button_sizes: (
     &[class*=size_#{$name}] {
       font-size: $size;
       padding: calc(#{$size} / 2) calc(#{$size} * 2.42) !important;
-    }
-    @if $name == "sm" {
-      min-height: 0;
+      @if $name == "sm" {
+        min-height: 0;
+      }
     }
   }
 
