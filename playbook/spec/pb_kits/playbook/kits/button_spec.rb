@@ -58,6 +58,11 @@ RSpec.describe Playbook::PbButton::Button do
         expect(subject.new(value: "123").options).to include(:value)
         expect(subject.new.options).to_not include(:value)
       end
+
+      it "form", :aggregate_failures do
+        expect(subject.new(form: "form-id").options).to include(:form)
+        expect(subject.new.options).to_not include(:form)
+      end
     end
   end
 

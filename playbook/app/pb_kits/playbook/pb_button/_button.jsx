@@ -15,7 +15,7 @@ type ButtonPropTypes = {
   data?: object,
   disabled?: boolean,
   fixedWidth?: boolean,
-  form: string,
+  form?: string,
   fullWidth?: boolean,
   icon?: string,
   id?: string,
