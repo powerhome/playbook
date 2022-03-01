@@ -1,6 +1,6 @@
 {
   "name": "playbook-ui",
-  "version": "10.21.0",
+  "version": "10.22.0",
   "description": "Nitro's Design System",
   "main": "./dist/playbook.js",
   "scripts": {
@@ -95,7 +95,7 @@
     "eslint-plugin-react-hooks": "4.3.0",
     "eslint-webpack-plugin": "2.6.0",
     "filemanager-webpack-plugin": "4.0.0",
-    "flow-bin": "0.170.0",
+    "flow-bin": "0.172.0",
     "flow-runtime": "0.17.0",
     "identity-obj-proxy": "3.0.0",
     "jest": "26.4.2",

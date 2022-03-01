@@ -11,6 +11,7 @@ const LineGraphDefault = (props) => (
     <LineGraph
         axisTitle="Number of Employees"
         chartData={data}
+        height="300px"
         id="line-fixed-height"
         title="Fixed Height (300px)"
         xAxisCategories={['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']}
