@@ -75,8 +75,6 @@ const TextInput = (props: TextInputProps, ref: React.ElementRef<"input">) => {
     globalProps(props),
     className,
   ])
-  const uniqueTextInputKey = `${id ? id : ''}${Math.ceil(Math.random() * 100000)}`
-
   const addOnIcon = (
     <Icon
         className="add-on-icon"
@@ -91,7 +89,6 @@ const TextInput = (props: TextInputProps, ref: React.ElementRef<"input">) => {
         className="text_input"
         disabled={disabled}
         id={id}
-        key={uniqueTextInputKey}
         name={name}
         onChange={onChange}
         placeholder={placeholder}
