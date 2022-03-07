@@ -31,7 +31,7 @@ $pb_button_sizes: (
   }
 
   // Disabled =================
-  &[class*=_disabled]  {
+  &[class*=_disabled], &:disabled, &:[aria-disabled]  {
     @include pb_button_disabled;
   }
 
@@ -55,7 +55,7 @@ $pb_button_sizes: (
     &[class*=_link]  {
       @include pb_button_link_dark;
     }
-    &[class*=_disabled]  {
+    &[class*=_disabled], &:disabled, &:[aria-disabled]  {
       @include pb_button_disabled_dark;
     }
   }
