@@ -50,11 +50,15 @@ module Playbook
       end
 
       def classname
-        button_class = generate_classname("pb_button_kit", variant, full_width_class, loading_class)
+        button_class = generate_classname("pb_button_kit", variant, full_width_class, disabled_class, loading_class)
         button_class + size_class
       end
 
     private
+
+      def disabled_class
+        disabled ? "disabled" : "enabled"
+      end
 
       def full_width_class
         full_width ? "block" : "inline"
