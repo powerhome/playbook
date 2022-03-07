@@ -118,3 +118,6 @@ export { default as PbTable } from './pb_table'
 export { default as PbTextarea } from './pb_textarea'
 export { default as PbTooltip } from './pb_tooltip'
 export { default as PbTypeahead } from './pb_typeahead'
+
+// eslint-disable-next-line no-console
+console.log('CACHE BUSTED')

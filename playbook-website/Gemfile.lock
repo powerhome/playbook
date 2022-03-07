@@ -1,7 +1,7 @@
 PATH
   remote: ../playbook
   specs:
-    playbook_ui (10.20.0)
+    playbook_ui (10.23.0.pre.cachetest)
       actionpack (>= 5.2.4.5)
       actionview (>= 5.2.4.5)
       activesupport (>= 5.2.4.5)
@@ -168,7 +168,7 @@ GEM
     redcarpet (3.5.1)
     regexp_parser (2.2.0)
     rexml (3.2.5)
-    rouge (3.27.0)
+    rouge (3.28.0)
     rubocop (1.23.0)
       parallel (~> 1.10)
       parser (>= 3.0.0.0)
@@ -215,7 +215,7 @@ GEM
     tzinfo-data (1.2021.1)
       tzinfo (>= 1.0.0)
     unicode-display_width (2.1.0)
-    view_component (2.48.0)
+    view_component (2.49.0)
       activesupport (>= 5.0.0, < 8.0)
       method_source (~> 1.0)
     web-console (3.7.0)
