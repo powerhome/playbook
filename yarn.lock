@@ -2319,14 +2319,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react@npm:17.0.38":
-  version: 17.0.38
-  resolution: "@types/react@npm:17.0.38"
+"@types/react@npm:17.0.40":
+  version: 17.0.40
+  resolution: "@types/react@npm:17.0.40"
   dependencies:
     "@types/prop-types": "*"
     "@types/scheduler": "*"
     csstype: ^3.0.2
-  checksum: b04dcee8a5e530ec22d9d624c76ad198130b29751b28d66678def14d2def8be9c6fc1e3515d4700f23feb765a8eae7e278f27eaf841b006670a41b421c0a6866
+  checksum: 8d30473e02e3d06c4e058cec5df1ca52fdbd01e71858f99d8a31990b7a01033a781df6e806fe62a755810c8ad8c49c83182144d22762b83fc552a8967cd1d21b
   languageName: node
   linkType: hard
 
@@ -11528,7 +11528,7 @@ fsevents@^1.2.7:
     "@popperjs/core": ^2.6.0
     "@testing-library/jest-dom": 5.16.1
     "@testing-library/react": 11.2.7
-    "@types/react": 17.0.38
+    "@types/react": 17.0.40
     "@typescript-eslint/eslint-plugin": 4.33.0
     "@typescript-eslint/parser": 4.33.0
     axe-core: 4.4.0
