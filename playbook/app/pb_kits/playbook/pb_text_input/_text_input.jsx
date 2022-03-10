@@ -37,6 +37,11 @@ type TextInputProps = {
 
 const TextInput = (props: TextInputProps, ref: React.ElementRef<"input">) => {
   const {
+    addOn = { icon: null, alignment: 'right', border: true },
+    ...domSafeProps
+  } = props
+
+  const {
     aria = {},
     className,
     data = {},
@@ -53,7 +58,6 @@ const TextInput = (props: TextInputProps, ref: React.ElementRef<"input">) => {
     type = 'text',
     value = '',
     children = null,
-    addOn = { icon: null, alignment: 'right', border: true },
   } = props
 
   const ariaProps = buildAriaProps(aria)
@@ -85,7 +89,7 @@ const TextInput = (props: TextInputProps, ref: React.ElementRef<"input">) => {
   )
   const textInput = (
     <input
-        {...props}
+        {...domSafeProps}
         className="text_input"
         disabled={disabled}
         id={id}
