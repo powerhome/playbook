@@ -2,7 +2,7 @@
 import React, { forwardRef } from 'react'
 import classnames from 'classnames'
 
-import { globalProps } from '../utilities/globalProps'
+import { globalProps, domSafeProps } from '../utilities/globalProps'
 import { buildAriaProps, buildDataProps } from '../utilities/props'
 
 import Flex from '../pb_flex/_flex'
@@ -38,14 +38,10 @@ type TextInputProps = {
 const TextInput = (props: TextInputProps, ref: React.ElementRef<"input">) => {
   const {
     addOn = { icon: null, alignment: 'right', border: true },
-    ...domSafeProps
-  } = props
-
-  const {
     aria = {},
     className,
-    data = {},
     dark = false,
+    data = {},
     disabled,
     error,
     id,
@@ -89,7 +85,7 @@ const TextInput = (props: TextInputProps, ref: React.ElementRef<"input">) => {
   )
   const textInput = (
     <input
-        {...domSafeProps}
+        {...domSafeProps(props)}
         className="text_input"
         disabled={disabled}
         id={id}
