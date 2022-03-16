@@ -108,21 +108,25 @@ const TextInput = (props: TextInputProps, ref: React.ElementRef<"input">) => {
           vertical="center"
       >
         <If condition={addOnAlignment == 'left'}>
-          <Card
-              className={`${addOnDarkModeCardCss} add-on-card card-left-aligned`}
-              dark={dark}
-          >
-            {addOnIcon}
-          </Card>
-          {textInput}
-          <Else />
-          {textInput}
-          <Card
-              className={`${addOnDarkModeCardCss} add-on-card card-right-aligned`}
-              dark={dark}
-          >
-            {addOnIcon}
-          </Card>
+          <>
+            <Card
+                className={`${addOnDarkModeCardCss} add-on-card card-left-aligned`}
+                dark={dark}
+            >
+              {addOnIcon}
+            </Card>
+            {textInput}
+          </>
+        <Else />
+          <>
+            {textInput}
+            <Card
+                className={`${addOnDarkModeCardCss} add-on-card card-right-aligned`}
+                dark={dark}
+            >
+              {addOnIcon}
+            </Card>
+          </>
         </If>
       </Flex>
     </React.Fragment>

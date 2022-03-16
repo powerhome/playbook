@@ -10,7 +10,6 @@ test('returns namespaced class name', () => {
   render(
     <TextInput
         data={{ testid: testId }}
-        id="let-me-test-this"
         label="First Name"
         placeholder="Enter first name"
     />
@@ -25,7 +24,6 @@ test('returns additional class name', () => {
     <TextInput
         className="additional_class"
         data={{ testid: testId }}
-        id="let-me-test-this"
         label="First Name"
         placeholder="Enter first name"
     />
@@ -40,7 +38,6 @@ test('returns additional class name', () => {
     <TextInput
         dark
         data={{ testid: testId }}
-        id="let-me-test-this"
         label="First Name"
         placeholder="Enter first name"
     />
@@ -55,7 +52,6 @@ test('returns additional class name', () => {
     <TextInput
         data={{ testid: testId }}
         error="Please enter a valid email"
-        id="let-me-test-this"
         label="First Name"
         placeholder="Enter first name"
     />
@@ -71,7 +67,6 @@ test('returns additional class name', () => {
         dark
         data={{ testid: testId }}
         error="Please enter a valid email"
-        id="let-me-test-this"
         label="First Name"
         placeholder="Enter first name"
     />
@@ -85,7 +80,6 @@ test('returns additional class name', () => {
   render(
     <TextInput
         data={{ testid: testId }}
-        id="let-me-test-this"
         label="First Name"
         marginBottom="lg"
         placeholder="Enter first name"
