@@ -8,7 +8,66 @@ import {
   Sizes,
 } from '../types'
 
+type Alignment = "start" | "end" | "center"
+
+type AlignContent = {
+  alignContent?: Alignment & Space
+}
+
+type AlignItems = {
+  alignItems?: Alignment & ("flexStart" | "flexEnd" | "stretch" | "baseline")
+}
+
+
+type AlignSelf = {
+  alignSelf?: Alignment & ("auto" | "stretch" | "baseline")
+}
 type AllSizes = None & Sizes
+
+type BorderRadius = {
+  borderRadius?: "none" | "xs" | "sm" | "md" | "lg" | "xl" | "rounded",
+}
+
+type Cursor = {
+  cursor?: "pointer",
+}
+
+type Dark = {
+  dark?: boolean,
+}
+
+type Flex = {
+  flex?: "auto" | "initial" | "0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9" | "10" | "11" | "12" | "none",
+}
+
+type FlexDirection = {
+  flexDirection?: "row" | "column" | "rowReverse" | "columnReverse"
+}
+
+type FlexGrow = {
+  flexGrow?: Binary
+}
+// type FlexDirectionOptions = "row" | "column" | "row_reverse" | "column_reverse"
+
+type FlexShrink = {
+  flexShrink?: Binary
+}
+
+type FlexWrap = {
+  flexWrap?: "wrap" | "nowrap" | "wrapReverse"
+}
+
+type JustifyContent = {
+  justifyContent?: Alignment & Space
+}
+
+type JustifySelf = {
+  justifySelf?: Alignment & ("auto" | "stretch")
+}
+
+type LineHeight = {
+  lineHeight?: "loosest" | "looser" | "loose" | "normal" | "tight" | "tighter" | "tightest",
+}
 
 type Margin = {
   marginRight?: AllSizes,
@@ -18,6 +77,18 @@ type Margin = {
   marginX?: AllSizes,
   marginY?: AllSizes,
   margin?: AllSizes,
+}
+
+type MaxWidth = {
+  maxWidth?: Sizes,
+}
+
+type NumberSpacing = {
+  numberSpacing?: "tabular",
+}
+
+type Order = {
+  order?: None| "first" | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12
 }
 
 type Padding = {
@@ -30,88 +101,17 @@ type Padding = {
   padding?: AllSizes,
 }
 
-type Dark = {
-  dark?: boolean,
+type Shadow = {
+  shadow?: "none" | "deep" | "deeper" | "deepest",
 }
 
-type NumberSpacing = {
-  numberSpacing?: "tabular",
-}
-
-type MaxWidth = {
-  maxWidth?: Sizes,
-}
+type Space = "spaceBetween" | "spaceAround" | "spaceEvenly"
 
 type ZIndex = {
   zIndex?: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10,
 }
 
-type Shadow = {
-  shadow?: None | "deep" | "deeper" | "deepest",
-}
-
-type LineHeight = {
-  lineHeight?: "loosest" | "looser" | "loose" | "normal" | "tight" | "tighter" | "tightest",
-}
-
-type Cursor = {
-  cursor?: "pointer",
-}
-
-type BorderRadius = {
-  borderRadius?: None | "xs" | "sm" | "md" | "lg" | "xl" | "rounded",
-}
-
-type Flex = {
-  flex?: None | "initial" | "auto" | 1
-}
-
-// type FlexDirectionLabels = "xs" | "sm" | "md" | "lg" | "xl"
-// type FlexDirectionOptions = "row" | "column" | "row_reverse" | "column_reverse"
-type FlexDirection = {
-  flexDirection?: "row" | "column" | "rowReverse" | "columnReverse"
-}
-
-type FlexGrow = {
-  flexGrow?: Binary
-}
-
-type FlexShrink = {
-  flexShrink?: Binary
-}
-
-type FlexWrap = {
-  flexWrap?: "wrap" | "nowrap" | "wrapReverse"
-}
-
-type Alignment = "start" | "end" | "center"
-
-type Space = "spaceBetween" | "spaceAround" | "spaceEvenly"
-
-type JustifyContent = {
-  justifyContent?: Alignment & Space
-}
-
-type JustifySelf = {
-  justifySelf?: Alignment & ("auto" | "stretch")
-}
-
-type AlignContent = {
-  alignContent?: Alignment & Space
-}
-
-type AlignItems = {
-  alignItems?: Alignment & ("flexStart" | "flexEnd" | "stretch" | "baseline")
-}
-
-type AlignSelf = {
-  alignSelf?: Alignment & ("auto" | "stretch" | "baseline")
-}
-
-type Order = {
-  order?: None| "first" | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12
-}
-
+// keep this as the last type definition
 export type GlobalProps = AlignContent & AlignItems & AlignSelf &
   BorderRadius & Cursor & Dark & Display & DisplaySizes & Flex & FlexDirection &
   FlexGrow & FlexShrink & FlexWrap & JustifyContent & JustifySelf &
@@ -208,17 +208,12 @@ const PROP_CATEGORIES: {[key:string]: (props: {[key: string]: any}) => string} =
   flexDirectionProps: ({ flexDirection }: any) => { //WIP: figure out the type
     if (typeof flexDirection !== 'object') return
 
-    // let css = ''
     const flexKeys: string[] = Object.keys(flexDirection)
 
     return flexKeys.map((key: string) => {
       const flexDirectionValue: string = flexDirection[key]
       return `flex_direction_${key}_${flexDirectionValue}`
     }).join(" ")
-
-    // css += flexDirection == 'columnReverse' ? 'flex_direction_column_reverse' :
-    // flexDirection == 'rowReverse' ? 'flex_direction_row_reverse' :
-    //   flexDirection ? `flex_direction_${flexDirection} ` : ''
   },
   flexWrapProps: ({ flexWrap }: FlexWrap) => {
     let css = ''
