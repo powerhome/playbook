@@ -2270,6 +2270,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/lodash@npm:^4.14.180":
+  version: 4.14.180
+  resolution: "@types/lodash@npm:4.14.180"
+  checksum: cceb37ae8eee285ada446df66de56bd239db9e786a8496fb0b8cf50b78fb891bdf48c7ab7fcc30f753fcf702d87a1521c957d5165d7aa8ef842456a3a3869647
+  languageName: node
+  linkType: hard
+
 "@types/minimatch@npm:*":
   version: 3.0.5
   resolution: "@types/minimatch@npm:3.0.5"
@@ -11537,6 +11544,7 @@ fsevents@^1.2.7:
     "@popperjs/core": ^2.6.0
     "@testing-library/jest-dom": 5.16.1
     "@testing-library/react": 11.2.7
+    "@types/lodash": ^4.14.180
     "@types/react": 17.0.38
     "@typescript-eslint/eslint-plugin": 4.33.0
     "@typescript-eslint/parser": 4.33.0
