@@ -21,12 +21,13 @@ module Playbook
       end
 
       # rubocop:disable Lint/FloatComparison
-      # Comparing the value coerced to a float versus an integer is exactly the point of this methodd
+      # Comparing the value coerced to a float versus an integer is the point of this methodd
       def sanitized_stat_value
-        if stat_value[:value].to_f == stat_value[:value].to_i
-          stat_value[:value].to_i
+        value = stat_value[:value]
+        if value.is_a?(::String)
+          value.to_f == value.to_i ? value.to_i : value.to_f
         else
-          stat_value[:value].to_f
+          value
         end
       end
       # rubocop:enable Lint/FloatComparison
