@@ -13,14 +13,14 @@ module Playbook
                         default: {}
 
       def formatted_stat_value
-        { **stat_value, value: sanitize_stat_value }
+        { **stat_value, value: sanitized_stat_value }
       end
 
       def classname
         generate_classname("pb_dashboard_value_kit", align)
       end
 
-      def sanitize_stat_value
+      def sanitized_stat_value
         if stat_value[:value].to_f == stat_value[:value].to_i
           stat_value[:value].to_i
         else
