@@ -20,6 +20,8 @@ module Playbook
         generate_classname("pb_dashboard_value_kit", align)
       end
 
+      # rubocop:disable Lint/FloatComparison
+      # Comparing the value coerced to a float versus an integer is exactly the point of this methodd
       def sanitized_stat_value
         if stat_value[:value].to_f == stat_value[:value].to_i
           stat_value[:value].to_i
@@ -27,6 +29,7 @@ module Playbook
           stat_value[:value].to_f
         end
       end
+      # rubocop:enable Lint/FloatComparison
     end
   end
 end
