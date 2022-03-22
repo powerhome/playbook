@@ -8,7 +8,7 @@ RSpec.describe Playbook::PbStatValue::StatValue do
   it { is_expected.to define_prop(:unit) }
   it {
     is_expected.to define_prop(:value)
-      .of_type(Playbook::Props::Number)
+      .of_type(Playbook::Props::Numeric)
   }
 
   describe "#classname" do
