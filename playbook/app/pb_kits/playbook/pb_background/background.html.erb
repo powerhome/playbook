@@ -5,6 +5,7 @@
       id: object.id,
       class: object.classname,
       style: "background-image: url('#{object.image_url}');
+              background-repeat: #{object.background_repeat};
               background-size: #{object.background_size};"
   ) do %>
     <%= content.presence %>

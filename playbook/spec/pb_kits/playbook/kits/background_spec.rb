@@ -22,6 +22,11 @@ RSpec.describe Playbook::PbBackground::Background do
       .with_values("fade", "blur", "scale", nil)
   }
   it {
+    is_expected.to define_enum_prop(:background_repeat)
+      .with_default("initial")
+      .with_values("repeat", "repeat-x", "repeat-y", "no-repeat", "space", "round", "initial", "inherit")
+  }
+  it {
     is_expected.to define_enum_prop(:background_size)
       .with_default("cover")
       .with_values("cover", "contain", "auto")
