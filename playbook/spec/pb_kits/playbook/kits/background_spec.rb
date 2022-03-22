@@ -38,7 +38,7 @@ RSpec.describe Playbook::PbBackground::Background do
       expect(subject.new(padding: "xl").classname).to eq "pb_background_kit pb_background_color_light p_xl"
       expect(subject.new(background_color: "success").classname).to eq "pb_background_kit pb_background_color_success"
       expect(subject.new(background_color: "category_1").classname).to eq "pb_background_kit pb_background_color_category_1"
-      expect(subject.new(transition: "fade", image_url: "test.jpeg").classname).to eq "pb_background_kit lazyload fade"
+      expect(subject.new(transition: "fade", image_url: "test.jpeg").classname).to eq "pb_background_kit pb_background_color_light lazyload fade"
     end
   end
 end
