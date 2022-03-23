@@ -20,6 +20,17 @@ module Playbook
         line_height_props,
         display_props,
         cursor_props,
+        flex_direction_props,
+        flex_wrap_props,
+        justify_content_props,
+        justify_self_props,
+        align_items_props,
+        align_content_props,
+        align_self_props,
+        flex_props,
+        flex_grow_props,
+        flex_shrink_props,
+        order_props,
       ].compact.join(" ")
     end
 

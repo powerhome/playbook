@@ -4,7 +4,7 @@ module Playbook
   module PbCard
     class CardBody < Playbook::KitBase
       def classname
-        generate_classname("pb_card_body_kit", padding, separator: " ")
+        generate_classname("pb_card_body_kit", padding, flex_direction, justify_content, flex_wrap, justify_self, align_items, align_content, align_self, flex, flex_grow, flex_shrink, order, separator: " ")
       end
     end
   end

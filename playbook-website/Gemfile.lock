@@ -1,7 +1,7 @@
 PATH
   remote: ../playbook
   specs:
-    playbook_ui (10.21.0)
+    playbook_ui (10.23.0)
       actionpack (>= 5.2.4.5)
       actionview (>= 5.2.4.5)
       activesupport (>= 5.2.4.5)
@@ -215,7 +215,7 @@ GEM
     tzinfo-data (1.2021.1)
       tzinfo (>= 1.0.0)
     unicode-display_width (2.1.0)
-    view_component (2.49.0)
+    view_component (2.50.0)
       activesupport (>= 5.0.0, < 8.0)
       method_source (~> 1.0)
     web-console (3.7.0)
