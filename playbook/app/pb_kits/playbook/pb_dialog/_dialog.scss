@@ -8,7 +8,7 @@
 
 
 
-// Dialog Animations 
+// Dialog Animations
 
 @keyframes modalFadeIn {
 	from {
@@ -72,7 +72,7 @@
 	border: 0;
 	max-height: calc(100vh - #{$gutter * 2});
 	max-width: calc(100vw - #{$gutter * 2});
-	overflow: scroll;
+	overflow: auto;
 	animation-name: modalFadeIn;
 	animation-duration: $animation-duration;
 	outline: none;
