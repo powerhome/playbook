@@ -2270,6 +2270,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/lodash@npm:^4.14.180":
+  version: 4.14.180
+  resolution: "@types/lodash@npm:4.14.180"
+  checksum: cceb37ae8eee285ada446df66de56bd239db9e786a8496fb0b8cf50b78fb891bdf48c7ab7fcc30f753fcf702d87a1521c957d5165d7aa8ef842456a3a3869647
+  languageName: node
+  linkType: hard
+
 "@types/minimatch@npm:*":
   version: 3.0.5
   resolution: "@types/minimatch@npm:3.0.5"
@@ -8935,6 +8942,15 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
+"jest-fail-on-console@npm:^2.2.3":
+  version: 2.2.3
+  resolution: "jest-fail-on-console@npm:2.2.3"
+  dependencies:
+    chalk: ^4.1.0
+  checksum: a333a8e784f1ef6a9fd15c93ccb8b2040b337153aab93ae6a63aa4ab952a778bb3728cbae2646a876235c7a564e9ab9d6648ff83986aec071a98aa0406b4747a
+  languageName: node
+  linkType: hard
+
 "jest-get-type@npm:^26.3.0":
   version: 26.3.0
   resolution: "jest-get-type@npm:26.3.0"
@@ -11528,6 +11544,7 @@ fsevents@^1.2.7:
     "@popperjs/core": ^2.6.0
     "@testing-library/jest-dom": 5.16.1
     "@testing-library/react": 11.2.7
+    "@types/lodash": ^4.14.180
     "@types/react": 17.0.42
     "@typescript-eslint/eslint-plugin": 4.33.0
     "@typescript-eslint/parser": 4.33.0
@@ -11562,6 +11579,7 @@ fsevents@^1.2.7:
     identity-obj-proxy: 3.0.0
     jest: 26.4.2
     jest-axe: 4.1.0
+    jest-fail-on-console: ^2.2.3
     jsx-control-statements: ^3.2.8
     lazysizes: ^5.2.2
     lodash: ^4.17.19

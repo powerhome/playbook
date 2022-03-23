@@ -2,7 +2,7 @@
 
 import React from 'react'
 import classnames from 'classnames'
-import { globalProps } from '../utilities/globalProps'
+import { globalProps, domSafeProps } from '../utilities/globalProps'
 
 import {
   buildAriaProps,
@@ -43,7 +43,7 @@ const BreadCrumbItem = (props: BreadCrumbItemProps) => {
     >
       <Component
           className="pb_bread_crumb_item"
-          {...rest}
+          {...domSafeProps(rest)}
       />
     </div>
   )

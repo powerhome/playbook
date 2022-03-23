@@ -2,7 +2,7 @@
 import React, { forwardRef } from 'react'
 import classnames from 'classnames'
 
-import { globalProps } from '../utilities/globalProps'
+import { globalProps, domSafeProps } from '../utilities/globalProps'
 import { buildAriaProps, buildDataProps } from '../utilities/props'
 
 import Flex from '../pb_flex/_flex'
@@ -37,10 +37,11 @@ type TextInputProps = {
 
 const TextInput = (props: TextInputProps, ref: React.ElementRef<"input">) => {
   const {
+    addOn = { icon: null, alignment: 'right', border: true },
     aria = {},
     className,
-    data = {},
     dark = false,
+    data = {},
     disabled,
     error,
     id,
@@ -53,7 +54,6 @@ const TextInput = (props: TextInputProps, ref: React.ElementRef<"input">) => {
     type = 'text',
     value = '',
     children = null,
-    addOn = { icon: null, alignment: 'right', border: true },
   } = props
 
   const ariaProps = buildAriaProps(aria)
@@ -85,10 +85,11 @@ const TextInput = (props: TextInputProps, ref: React.ElementRef<"input">) => {
   )
   const textInput = (
     <input
-        {...props}
+        {...domSafeProps(props)}
         className="text_input"
         disabled={disabled}
         id={id}
+        key={id}
         name={name}
         onChange={onChange}
         placeholder={placeholder}
@@ -107,21 +108,25 @@ const TextInput = (props: TextInputProps, ref: React.ElementRef<"input">) => {
           vertical="center"
       >
         <If condition={addOnAlignment == 'left'}>
-          <Card
-              className={`${addOnDarkModeCardCss} add-on-card card-left-aligned`}
-              dark={dark}
-          >
-            {addOnIcon}
-          </Card>
-          {textInput}
-          <Else />
-          {textInput}
-          <Card
-              className={`${addOnDarkModeCardCss} add-on-card card-right-aligned`}
-              dark={dark}
-          >
-            {addOnIcon}
-          </Card>
+          <>
+            <Card
+                className={`${addOnDarkModeCardCss} add-on-card card-left-aligned`}
+                dark={dark}
+            >
+              {addOnIcon}
+            </Card>
+            {textInput}
+          </>
+        <Else />
+          <>
+            {textInput}
+            <Card
+                className={`${addOnDarkModeCardCss} add-on-card card-right-aligned`}
+                dark={dark}
+            >
+              {addOnIcon}
+            </Card>
+          </>
         </If>
       </Flex>
     </React.Fragment>
