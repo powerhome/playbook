@@ -48,7 +48,7 @@ module Playbook
     private
 
       def image_classname
-        background_class = "pb_background_color_#{background_color}"
+        background_class = custom_color.present? ? "pb_background_custom_color" : "pb_background_color_#{background_color}"
         background_class_lazy = image_url.present? ? " lazyload #{transition}" : ""
         "#{background_class}#{background_class_lazy}"
       end
