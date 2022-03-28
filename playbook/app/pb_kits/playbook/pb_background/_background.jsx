@@ -13,6 +13,7 @@ type BackgroundProps = {
   backgroundSize?: 'auto' | 'cover' | 'contain',
   children?: array<React.ReactNode> | React.ReactNode,
   className?: string,
+  customColor?: string,
   data?: object,
   id?: string,
   imageUrl?: string,
@@ -30,6 +31,7 @@ const Background = (props: BackgroundProps) => {
     backgroundSize = 'cover',
     children,
     className,
+    customColor,
     data = {},
     id,
     imageUrl = '',
@@ -45,8 +47,8 @@ const Background = (props: BackgroundProps) => {
     backgroundRepeat: `${backgroundRepeat}`,
     backgroundSize: `${backgroundSize}`,
   }
-
-  const classes = classnames(buildCss('pb_background_kit'), 'lazyload', transition, globalProps(props), `pb_background_color_${backgroundColor}`, className)
+  const getBackgroundColor = customColor ? 'pb_background_custom_color' : `pb_background_color_${backgroundColor}`
+  const classes = classnames(buildCss('pb_background_kit'), 'lazyload', backgroundStyle, transition, globalProps(props), getBackgroundColor, className)
   const Tag = `${tag}`
 
   return (
@@ -68,6 +70,7 @@ const Background = (props: BackgroundProps) => {
             {...dataProps}
             className={classes}
             id={id}
+            style={customColor ? { backgroundColor: customColor } : null}
         >
           { children }
         </Tag>
