@@ -2107,9 +2107,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@testing-library/jest-dom@npm:5.16.1":
-  version: 5.16.1
-  resolution: "@testing-library/jest-dom@npm:5.16.1"
+"@testing-library/jest-dom@npm:5.16.3":
+  version: 5.16.3
+  resolution: "@testing-library/jest-dom@npm:5.16.3"
   dependencies:
     "@babel/runtime": ^7.9.2
     "@types/testing-library__jest-dom": ^5.9.1
@@ -2120,7 +2120,7 @@ __metadata:
     dom-accessibility-api: ^0.5.6
     lodash: ^4.17.15
     redent: ^3.0.0
-  checksum: c91fb03e5bcec558cc16116e6fd051fb8818727c8d040aac167db229531c37b00937d5ce315e403fc6408a41447fa2739505be05b5103465d5685d6d7df3dda7
+  checksum: 34d52d09337eb399fc72de8a21c84753e7c03a0998f5fb0574c5b1114f86cf060fe831e550d3da08ff1a77b35ced272d46071b74581c41d16e240415f95aa579
   languageName: node
   linkType: hard
 
@@ -2326,14 +2326,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react@npm:17.0.38":
-  version: 17.0.38
-  resolution: "@types/react@npm:17.0.38"
+"@types/react@npm:17.0.43":
+  version: 17.0.43
+  resolution: "@types/react@npm:17.0.43"
   dependencies:
     "@types/prop-types": "*"
     "@types/scheduler": "*"
     csstype: ^3.0.2
-  checksum: b04dcee8a5e530ec22d9d624c76ad198130b29751b28d66678def14d2def8be9c6fc1e3515d4700f23feb765a8eae7e278f27eaf841b006670a41b421c0a6866
+  checksum: d368aa3d03f1951554398882771d562a0e0c81fe02f7d11d974721bbb667d2643b95ecdc01c783bdab2c2f69704524379f96e73e86b413faf3501c932c25b4b6
   languageName: node
   linkType: hard
 
@@ -6918,12 +6918,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"flow-bin@npm:0.172.0":
-  version: 0.172.0
-  resolution: "flow-bin@npm:0.172.0"
+"flow-bin@npm:0.174.1":
+  version: 0.174.1
+  resolution: "flow-bin@npm:0.174.1"
   bin:
     flow: cli.js
-  checksum: 19af0ba6001f896a32253868cb51f15fa851bd8a38fa8f6666f227ca440346463846afa861745bd9e70dfc59c597874a66067ca9898755f5ddec9182f0cacc7b
+  checksum: 980603d011306aa442d3659227776af43cf900a24890ecfc2eededd5b3c0b6c967ef9d4bb77aa7b176753bab42061bc073866de5cb91614aeb5f125cccf79a3d
   languageName: node
   linkType: hard
 
@@ -11542,7 +11542,7 @@ fsevents@^1.2.7:
     "@babel/preset-react": ^7.12.5
     "@babel/preset-typescript": ^7.15.0
     "@popperjs/core": ^2.6.0
-    "@testing-library/jest-dom": 5.16.1
+    "@testing-library/jest-dom": 5.16.3
     "@testing-library/react": 11.2.7
     "@types/lodash": ^4.14.180
     "@types/react": 17.0.38
@@ -11573,7 +11573,7 @@ fsevents@^1.2.7:
     eslint-webpack-plugin: 2.6.0
     filemanager-webpack-plugin: 4.0.0
     flatpickr: ^4.6.6
-    flow-bin: 0.172.0
+    flow-bin: 0.174.1
     flow-runtime: 0.17.0
     highcharts: ^9.0.0
     identity-obj-proxy: 3.0.0
@@ -11597,6 +11597,7 @@ fsevents@^1.2.7:
     react-modal: ^3.12.1
     react-popper: ^2.1.0
     react-select: 3.0.8
+    react-trix: ^0.9.0
     sass-loader: 7.3.1
     svg-url-loader: ^4.0.0
     trix: 1.3.1
@@ -12976,6 +12977,18 @@ fsevents@^1.2.7:
     react: ">=15.0.0"
     react-dom: ">=15.0.0"
   checksum: eefed08c48a0d377b5fac3ac7fac54ed986d5dcdd4494f36075954c9d2d257072a9d18cc02c6d8e6698034722b1ff9419ad0c24ef068dea742edcff9f8ea4ba9
+  languageName: node
+  linkType: hard
+
+"react-trix@npm:^0.9.0":
+  version: 0.9.0
+  resolution: "react-trix@npm:0.9.0"
+  dependencies:
+    trix: ^1.2.2
+  peerDependencies:
+    react: ">=16.0"
+    react-dom: ">=16.0"
+  checksum: 4bfc5ff5c304a6b26205fd21c08988c0fbeeed7952bfb312b7392b8112322d7ff3171b867e8003cb33c48eaad90e9cb24a32f92e035dd61781f03e7f3c46f4f6
   languageName: node
   linkType: hard
 
@@ -15128,7 +15141,7 @@ resolve@^2.0.0-next.3:
   languageName: node
   linkType: hard
 
-"trix@npm:1.3.1":
+"trix@npm:1.3.1, trix@npm:^1.2.2":
   version: 1.3.1
   resolution: "trix@npm:1.3.1"
   checksum: 981f88254615a60e7a767922b40cf320a3cbc72f07a971a713c1acbc18d9393cac9a08e3f3f28e77c755829eb920e2b0a063a97cc7bda720dcb86fa0edf6f0ba

@@ -41,6 +41,7 @@
     border-bottom-right-radius: 0;
     border-top-right-radius: 0;
     min-height: 45px;
+    margin-bottom: 16px;
   }
 
   & > [class^=pb_button_kit]:not(:first-child) {
@@ -48,6 +49,7 @@
     border-top-left-radius: 0;
     border-left-width: 0;
     min-height: 45px;
+    margin-bottom: 16px;
   }
 
   & > [class^=pb_date_picker_kit]:not(:last-child) {
