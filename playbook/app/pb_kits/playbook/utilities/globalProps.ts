@@ -1,3 +1,5 @@
+import { omit } from 'lodash'
+
 type Sizes = "xs" | "sm" | "md" | "lg" | "xl"
 type None = "none"
 
@@ -271,4 +273,25 @@ export const deprecatedProps = (kit: string, props: string[] = []): void => {
       console.warn(`${kit} Kit: The prop '${prop}' is deprecated and will be removed in a future release!`)
     })
   }
+}
+
+export const domSafeProps = (props: {[key: string]: string}): {[key: string]: string} => {
+  const notSafeProps = [
+    'marginRight',
+    'marginLeft',
+    'marginTop',
+    'marginBottom',
+    'marginX',
+    'marginY',
+    'margin',
+    'paddingRight',
+    'paddingLeft',
+    'paddingTop',
+    'paddingBottom',
+    'paddingX',
+    'paddingY',
+    'padding',
+    'dark',
+  ]
+  return omit(props, notSafeProps)
 }

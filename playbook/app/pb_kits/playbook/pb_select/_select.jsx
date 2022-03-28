@@ -4,7 +4,7 @@ import React, { forwardRef } from 'react'
 import classnames from 'classnames'
 
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
-import { globalProps } from '../utilities/globalProps'
+import { globalProps, domSafeProps } from '../utilities/globalProps'
 import type { InputCallback } from '../types'
 
 import Body from '../pb_body/_body'
@@ -112,7 +112,7 @@ const Select = ({
           {children}
           <Else />
           <select
-              {...props}
+              {...domSafeProps(props)}
               disabled={disabled}
               id={name}
               multiple={multiple}
