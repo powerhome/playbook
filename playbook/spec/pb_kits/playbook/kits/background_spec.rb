@@ -23,6 +23,17 @@ RSpec.describe Playbook::PbBackground::Background do
   }
   it { is_expected.to define_prop(:custom_color) }
 
+  it {
+    is_expected.to define_enum_prop(:background_repeat)
+      .with_default("initial")
+      .with_values("repeat", "repeat-x", "repeat-y", "no-repeat", "space", "round", "initial", "inherit")
+  }
+  it {
+    is_expected.to define_enum_prop(:background_size)
+      .with_default("cover")
+      .with_values("cover", "contain", "auto")
+  }
+
   describe "#classname" do
     it "returns namespaced class name", :aggregate_failures do
       expect(subject.new({}).classname).to eq "pb_background_kit pb_background_color_light"
@@ -40,6 +51,7 @@ RSpec.describe Playbook::PbBackground::Background do
       kit = subject.new(custom_color: "#1d99a8")
 
       expect(kit.custom_background_color).to eq "background-color: #1d99a8;"
+      expect(subject.new(transition: "fade", image_url: "test.jpeg").classname).to eq "pb_background_kit pb_background_color_light lazyload fade"
     end
   end
 end
