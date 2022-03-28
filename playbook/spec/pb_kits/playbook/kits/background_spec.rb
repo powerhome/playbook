@@ -21,6 +21,16 @@ RSpec.describe Playbook::PbBackground::Background do
       .with_default(nil)
       .with_values("fade", "blur", "scale", nil)
   }
+  it {
+    is_expected.to define_enum_prop(:background_repeat)
+      .with_default("initial")
+      .with_values("repeat", "repeat-x", "repeat-y", "no-repeat", "space", "round", "initial", "inherit")
+  }
+  it {
+    is_expected.to define_enum_prop(:background_size)
+      .with_default("cover")
+      .with_values("cover", "contain", "auto")
+  }
   describe "#classname" do
     it "returns namespaced class name", :aggregate_failures do
       expect(subject.new({}).classname).to eq "pb_background_kit pb_background_color_light"
@@ -28,7 +38,7 @@ RSpec.describe Playbook::PbBackground::Background do
       expect(subject.new(padding: "xl").classname).to eq "pb_background_kit pb_background_color_light p_xl"
       expect(subject.new(background_color: "success").classname).to eq "pb_background_kit pb_background_color_success"
       expect(subject.new(background_color: "category_1").classname).to eq "pb_background_kit pb_background_color_category_1"
-      expect(subject.new(transition: "fade", image_url: "test.jpeg").classname).to eq "pb_background_kit lazyload fade"
+      expect(subject.new(transition: "fade", image_url: "test.jpeg").classname).to eq "pb_background_kit pb_background_color_light lazyload fade"
     end
   end
 end
