@@ -13,6 +13,7 @@
     "watch": "webpack --watch --mode=development",
     "release": "webpack --mode=production"
   },
+  "sideEffects": false,
   "repository": {
     "type": "git",
     "url": "git+ssh://github.com/powerhome/playbook.git",
