@@ -12,7 +12,7 @@ const StatValueDefault = (props) => {
       <br />
       <br />
       <StatValue
-          value={0}
+          value={10.48}
           {...props}
       />
     </>

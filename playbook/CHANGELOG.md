@@ -1,5 +1,111 @@
 
 
+## [10.24.0](https://github.com/powerhome/playbook/tree/10.24.0) (2022-03-28)
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/10.23.0...10.24.0)
+
+**Kit Enhancements:**
+
+- Allow decimals to be displayed for Rails's `Stat Value` and `Dashboard Value` kits [\#1818](https://github.com/powerhome/playbook/pull/1818) ([garettarrowood](https://github.com/garettarrowood))
+- Only spread to DOM element compatible props [\#1813](https://github.com/powerhome/playbook/pull/1813) ([gmfvpereira](https://github.com/gmfvpereira))
+- Background Kit - Set Background Size [\#1793](https://github.com/powerhome/playbook/pull/1793) ([Beznus](https://github.com/Beznus))
+- Background kit custom colors prop [\#1788](https://github.com/powerhome/playbook/pull/1788) ([kyleschechter](https://github.com/kyleschechter))
+
+**Fixed Bugs:**
+
+- Dialog Kit shows a strange border intermittently [\#1810](https://github.com/powerhome/playbook/pull/1810) ([kellyeryan](https://github.com/kellyeryan))
+
+**Merged pull requests:**
+
+- Pin dependency @types/lodash to 4.14.180 [\#1826](https://github.com/powerhome/playbook/pull/1826) ([renovate[bot]](https://github.com/apps/renovate))
+- Update dependency jest-fail-on-console to v2.3.0 [\#1825](https://github.com/powerhome/playbook/pull/1825) ([renovate[bot]](https://github.com/apps/renovate))
+- Update dependency @types/react to v17.0.43 [\#1823](https://github.com/powerhome/playbook/pull/1823) ([renovate[bot]](https://github.com/apps/renovate))
+- Update dependency @testing-library/jest-dom to v5.16.3 [\#1822](https://github.com/powerhome/playbook/pull/1822) ([renovate[bot]](https://github.com/apps/renovate))
+- Update dependency @types/react to v17.0.42 [\#1820](https://github.com/powerhome/playbook/pull/1820) ([renovate[bot]](https://github.com/apps/renovate))
+- Update dependency @types/react to v17.0.41 [\#1817](https://github.com/powerhome/playbook/pull/1817) ([renovate[bot]](https://github.com/apps/renovate))
+- Update dependency flow-bin to v0.174.1 [\#1816](https://github.com/powerhome/playbook/pull/1816) ([renovate[bot]](https://github.com/apps/renovate))
+
+
+
+## [10.23.0](https://github.com/powerhome/playbook/tree/10.23.0) (2022-03-16)
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/10.22.1...10.23.0)
+
+**Kit Enhancements:**
+
+- Use react-trix lib for RTE kit [\#1794](https://github.com/powerhome/playbook/pull/1794) ([thestephenmarshall](https://github.com/thestephenmarshall))
+
+**Fixed Bugs:**
+
+- Form Group Kit alignment bug fixed [\#1792](https://github.com/powerhome/playbook/pull/1792) ([JelenaD1](https://github.com/JelenaD1))
+- Button's min-height bug fix [\#1790](https://github.com/powerhome/playbook/pull/1790) ([JelenaD1](https://github.com/JelenaD1))
+
+**Improvements:**
+
+- Addressing deprecation warning in order to avoid using Kernel.open [\#1778](https://github.com/powerhome/playbook/pull/1778) ([delucas](https://github.com/delucas))
+
+**Merged pull requests:**
+
+- Bump view\_component from 2.49.0 to 2.49.1 in /playbook [\#1805](https://github.com/powerhome/playbook/pull/1805) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Remove globalProps.js \>\> globalProps.ts [\#1796](https://github.com/powerhome/playbook/pull/1796) ([thestephenmarshall](https://github.com/thestephenmarshall))
+
+
+
+## [10.22.0](https://github.com/powerhome/playbook/tree/10.22.0) (2022-03-01)
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/10.21.0...10.22.0)
+
+**Kit Enhancements:**
+
+- Add form as a prop for button kit [\#1801](https://github.com/powerhome/playbook/pull/1801) ([nehaabraham](https://github.com/nehaabraham))
+- Add flexbox scss file [\#1786](https://github.com/powerhome/playbook/pull/1786) ([RobGentile17](https://github.com/RobGentile17))
+- Add flexbox props to all kits [\#1750](https://github.com/powerhome/playbook/pull/1750) ([RobGentile17](https://github.com/RobGentile17))
+
+**Fixed Bugs:**
+
+- React Line Graph - line graph height doc example missing a fixed height prop [\#1797](https://github.com/powerhome/playbook/pull/1797) ([JelenaD1](https://github.com/JelenaD1))
+
+**Merged pull requests:**
+
+- Update dependency flow-bin to v0.172.0 [\#1789](https://github.com/powerhome/playbook/pull/1789) ([renovate[bot]](https://github.com/apps/renovate))
+- Update typescript-eslint monorepo to v4.33.0 [\#1785](https://github.com/powerhome/playbook/pull/1785) ([renovate[bot]](https://github.com/apps/renovate))
+- Update dependency eslint-webpack-plugin to v2.6.0 [\#1783](https://github.com/powerhome/playbook/pull/1783) ([renovate[bot]](https://github.com/apps/renovate))
+- Update dependency eslint-plugin-react-hooks to v4.3.0 [\#1782](https://github.com/powerhome/playbook/pull/1782) ([renovate[bot]](https://github.com/apps/renovate))
+- Playbook 10.21.0 [\#1781](https://github.com/powerhome/playbook/pull/1781) ([thestephenmarshall](https://github.com/thestephenmarshall))
+- Update dependency eslint-plugin-react to v7.28.0 [\#1780](https://github.com/powerhome/playbook/pull/1780) ([renovate[bot]](https://github.com/apps/renovate))
+- Update dependency eslint-plugin-flowtype to v5.10.0 [\#1779](https://github.com/powerhome/playbook/pull/1779) ([renovate[bot]](https://github.com/apps/renovate))
+
+
+
+## [10.21.0](https://github.com/powerhome/playbook/tree/10.21.0) (2022-02-15)
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/10.20.0...10.21.0)
+
+**Kit Enhancements:**
+
+- Currency kit new abbreviate prop [\#1763](https://github.com/powerhome/playbook/pull/1763) ([kyleschechter](https://github.com/kyleschechter))
+- Line Graph Chart: Add Darkmode [\#1752](https://github.com/powerhome/playbook/pull/1752) ([JelenaD1](https://github.com/JelenaD1))
+- background kit add lazy loading to images pt 2 [\#1743](https://github.com/powerhome/playbook/pull/1743) ([jon1735](https://github.com/jon1735))
+- Text Input kit spacing fixed [\#1722](https://github.com/powerhome/playbook/pull/1722) ([JelenaD1](https://github.com/JelenaD1))
+
+**Fixed Bugs:**
+
+- Fix typo CSS attribute name [\#1774](https://github.com/powerhome/playbook/pull/1774) ([bklang](https://github.com/bklang))
+- File Upload Kit: Can't upload Pages, Numbers, and Keynote files \[\#1575\] [\#1768](https://github.com/powerhome/playbook/pull/1768) ([JelenaD1](https://github.com/JelenaD1))
+- React Rich Text Editor Kit: Field doesn't update with an external value update \[\#1579\] [\#1760](https://github.com/powerhome/playbook/pull/1760) ([JelenaD1](https://github.com/JelenaD1))
+- Size Prop styling needs to be corrected: Avatar [\#1758](https://github.com/powerhome/playbook/pull/1758) ([nickamantia](https://github.com/nickamantia))
+- Size Prop styling needs to be corrected: Image Kit [\#1756](https://github.com/powerhome/playbook/pull/1756) ([JelenaD1](https://github.com/JelenaD1))
+- Add size prop to the button kit/fixing bug on previous PR [\#1749](https://github.com/powerhome/playbook/pull/1749) ([JelenaD1](https://github.com/JelenaD1))
+- Bug Popover close on any [\#1724](https://github.com/powerhome/playbook/pull/1724) ([kyleschechter](https://github.com/kyleschechter))
+
+**Merged pull requests:**
+
+- Update dependency puma to v5.6.2 \[SECURITY\] [\#1777](https://github.com/powerhome/playbook/pull/1777) ([renovate[bot]](https://github.com/apps/renovate))
+- Update dependency es5-shim to v4.6.5 [\#1773](https://github.com/powerhome/playbook/pull/1773) ([renovate[bot]](https://github.com/apps/renovate))
+- Enable and Configure Typescript in Playbook [\#1759](https://github.com/powerhome/playbook/pull/1759) ([thestephenmarshall](https://github.com/thestephenmarshall))
+
+
+
 ## [10.20.0](https://github.com/powerhome/playbook/tree/10.20.0) (2022-02-01)
 
 [Full Changelog](https://github.com/powerhome/playbook/compare/10.19.0...10.20.0)
@@ -2261,6 +2367,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Removed (breaking changes)
 - React PbLayout prop `children` dropped support for single Node (https://github.com/powerhome/playbook/commit/b16da50914e110c75c6d96c985fa02781c9e2040#diff-c3ce2c91288ca3e730d3c56e7f73475cL11-L14)
 - Rails PbLayout prop `dark` dropped (https://github.com/powerhome/playbook/commit/b16da50914e110c75c6d96c985fa02781c9e2040#diff-377fda563d148f7b3ad33f904b7b0cdbL13)
+
+
+\* *This Changelog was automatically generated by [github_changelog_generator](https://github.com/github-changelog-generator/github-changelog-generator)*
+
+
+\* *This Changelog was automatically generated by [github_changelog_generator](https://github.com/github-changelog-generator/github-changelog-generator)*
+
+
+\* *This Changelog was automatically generated by [github_changelog_generator](https://github.com/github-changelog-generator/github-changelog-generator)*
+
+
+\* *This Changelog was automatically generated by [github_changelog_generator](https://github.com/github-changelog-generator/github-changelog-generator)*
 
 
 \* *This Changelog was automatically generated by [github_changelog_generator](https://github.com/github-changelog-generator/github-changelog-generator)*
