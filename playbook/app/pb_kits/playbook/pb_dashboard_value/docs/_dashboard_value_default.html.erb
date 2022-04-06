@@ -1,21 +1,28 @@
 <%= pb_rails("dashboard_value", props: {
   stat_label: "Decreased Value",
-  stat_value: {value: 1428, unit: "appts"},
-  stat_change: {change: "decrease", value: 26.1}
+  stat_value: { value: 1428, unit: "appts" },
+  stat_change: { change: "decrease", value: 26.1 }
 }) %>
 
 <br><br>
 
 <%= pb_rails("dashboard_value", props: {
   stat_label: "Increased Value",
-  stat_value: {value: 938, unit: "homes"},
-  stat_change: {change: "increase", value: 56.1}
+  stat_value: { value: 938, unit: "homes" },
+  stat_change: { change: "increase", value: 56.1 }
 }) %>
 
 <br><br>
 
 <%= pb_rails("dashboard_value", props: {
   stat_label: "Neutral Value",
-  stat_value: {value: 261, unit: "windows"},
-  stat_change: {value: 86}
+  stat_value: { value: 261, unit: "windows" },
+  stat_change: { value: 86 }
+}) %>
+
+<br><br>
+
+<%= pb_rails("dashboard_value", props: {
+  stat_label: "Pitch Rate",
+  stat_value: { value: 90.9, unit: "%" }
 }) %>
