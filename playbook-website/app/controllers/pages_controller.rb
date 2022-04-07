@@ -6,6 +6,7 @@ require "redcarpet"
 require_relative "application_controller"
 
 class PagesController < ApplicationController
+  before_action :set_js, only: %i[visual_guidelines_react]
   before_action :set_kit, only: %i[kit_show_rails kit_show_react]
   before_action :ensure_kit_type_exists, only: %i[kit_show_rails kit_show_react]
   before_action :set_category, only: %i[kit_category_show_rails kit_category_show_react]
@@ -106,6 +107,10 @@ class PagesController < ApplicationController
   end
 
 private
+
+  def set_js
+    @application_js.concat ["visual_guidelines"]
+  end
 
   def set_category
     categories = MENU["kits"].map { |link| link.first.first if link.is_a?(Hash) }.compact
