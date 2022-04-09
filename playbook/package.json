@@ -57,7 +57,7 @@
     "jsx-control-statements": "^3.2.8",
     "lazysizes": "^5.2.2",
     "lodash": "^4.17.19",
-    "moment": "^2.29.1",
+    "moment": "^2.29.2",
     "moment-strftime": "^0.5.0",
     "moment-timezone": "^0.5.26",
     "react-animate-height": "^2.0.23",
