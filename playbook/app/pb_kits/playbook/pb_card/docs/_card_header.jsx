@@ -149,33 +149,10 @@ const CardHeader = (props) => {
           padding="none"
       >
         <Card.Header
-            headerColor="bg_light"
-        >
-          <Body
-              {...props}
-              text="Light"
-          />
-        </Card.Header>
-        <Card.Body>
-          <Body
-              {...props}
-              text="Body"
-          />
-        </Card.Body>
-      </Card>
-
-      <br />
-
-      <Card
-          {...props}
-          padding="none"
-      >
-        <Card.Header
             headerColor="bg_dark"
         >
           <Body
               {...props}
-              dark
               text="Dark"
           />
         </Card.Header>
@@ -186,7 +163,6 @@ const CardHeader = (props) => {
           />
         </Card.Body>
       </Card>
-
     </div>
   )
 }

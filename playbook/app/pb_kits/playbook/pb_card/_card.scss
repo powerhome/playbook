@@ -1,5 +1,12 @@
 @import "card_mixin";
 
+@function lightenText($color_value) {
+  $text_color: $text_lt_default;
+  @if (lightness($color_value) < 47) {
+    $text_color: $text_dk_default;
+  }
+  @return $text_color;
+}
 
 [class^=pb_card_kit] {
   @include pb_card;
@@ -30,6 +37,9 @@
     @each $color_name, $color_value in $pb_card_header_colors {
       &[class*=_#{$color_name}] {
         @include pb_card_header_color($color_value);
+        [class^=pb_body_kit] {
+          color: lightenText($color_value);
+        }
       }
     }
     &[class*=_white] {
