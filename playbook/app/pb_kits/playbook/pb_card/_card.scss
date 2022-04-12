@@ -1,8 +1,8 @@
 @import "card_mixin";
 
-@function lightenText($color_value) {
+@function lightenText($color_value, $threshold: 47) {
   $text_color: $text_lt_default;
-  @if (lightness($color_value) < 47) {
+  @if ((type-of($color_value) == color) and (lightness($color_value) < $threshold)) {
     $text_color: $text_dk_default;
   }
   @return $text_color;
