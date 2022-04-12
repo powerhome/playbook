@@ -32,7 +32,7 @@ Gem::Specification.new do |s|
   s.add_dependency "react-rails", "2.6.1"
   s.add_dependency "redcarpet", "~> 3.5"
   s.add_dependency "rouge", "~> 3.15"
-  s.add_dependency "view_component", "2.48.0"
+  s.add_dependency "view_component", "2.52.0"
   s.add_dependency "webpacker-react", "~> 0.3.2"
 
   s.add_development_dependency "byebug", "11.0.0"
