@@ -3,12 +3,14 @@
 import React from 'react'
 import { get } from 'lodash'
 import classnames from 'classnames'
+
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
 import { globalProps } from '../utilities/globalProps'
+import { productColors, categoryColors, backgroundColors } from '../types'
 
 type CardPropTypes = {
   aria?: object,
-  background?: "white" | "dark" | "light" | "windows" | "siding" | "doors" | "solar" | "roofing" | "gutters" | "insulation" | "none",
+  background?: backgroundColors | productColors | "none",
   borderNone?: boolean,
   borderRadius?: "xs" | "sm" | "md" | "lg" | "xl" | "none" | "rounded",
   children: array<React.ReactNode> | React.ReactNode,
@@ -24,7 +26,7 @@ type CardPropTypes = {
 }
 
 type CardHeaderProps = {
-  headerColor?: "white" | "dark" | "light" | "windows" | "siding" | "doors" | "solar" | "roofing" | "gutters" | "insulation" | "none" | "category_1" | "category_2" | "category_3" | "category_4" | "category_5" | "category_6" | "category_7" | "category_8" | "category_9" | "category_10" | "category_11" | "category_12" | "category_13" | "category_14" | "category_15" | "category_16" | "category_17" | "category_18" | "category_19" | "category_20" | "category_21",
+  headerColor?: backgroundColors | productColors | categoryColors | "none",
   children: array<React.ReactNode> | React.ReactNode,
   className?: string,
   padding?: string,

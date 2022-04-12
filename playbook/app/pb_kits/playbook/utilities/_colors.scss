@@ -6,6 +6,14 @@
   @return mix($bg_dark, $color, $percentage);
 }
 
+@function lightenText($color_value, $threshold: 47) {
+  $text_color: $text_lt_default;
+  @if ((type-of($color_value) == color) and (lightness($color_value) < $threshold)) {
+    $text_color: $text_dk_default;
+  }
+  @return $text_color;
+}
+
 @mixin background-color($colors-list) {
   @each $name, $color in $colors-list {
     .#{$name} {
