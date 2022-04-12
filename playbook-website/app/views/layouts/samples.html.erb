@@ -19,6 +19,6 @@
       <%= render 'layouts/footer'%>
     </body>
 
-    <%= javascript_packs_with_chunks_tag 'application', 'samples', 'sample-show' %>
+    <%= javascript_packs_with_chunks_tag(*@application_js) %>
     <%= yield :pb_js if @type != 'react' %>
 </html>
