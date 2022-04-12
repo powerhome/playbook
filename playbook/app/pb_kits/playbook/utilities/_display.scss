@@ -21,3 +21,50 @@
 .display_hidden {
     display: none;
 }
+
+// $media-query-breakpoints: (
+//     xs: "xs",
+//     sm: "sm",
+//     md: "md",
+//     lg: "lg",
+//     xl: "xl"
+// );
+
+// $display_values: (
+//     block: "block",
+//     inline-block: "inline-block",
+//     inline: "inline",
+//     flex: "flex",
+//     inline-flex: "inline-flex",
+//     none: "none"
+// );
+
+// @each $display,
+// $display-value in $display_values {
+//     .display_#{$display} {
+//         display: #{$display-value};
+//     }
+// }
+
+// @each $display,
+// $display-value in $display_values {
+
+//     @each $breakpoint,
+//     $breakpoint-value in $media-query-breakpoints {
+//         &[class*=_display_#{$breakpoint}_#{$display}] {
+//             @include break_at(breakpoint($breakpoint-value)) {
+//                 @if $display == 'xs' {
+//                     display: "none";
+//                 } @else if $display == 'sm' {
+//                     display: "flex";
+//                 } @else if $display == 'md' {
+//                     display: "inline";
+//                 } @else if $display == 'lg' {
+//                     display: "inline-block";
+//                 } @else if $display == 'xl' {
+//                     display: "block";
+//                 }
+//             }
+//         }
+//     }
+// }

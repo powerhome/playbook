@@ -182,7 +182,12 @@ const PROP_CATEGORIES: {[key:string]: (props: {[key: string]: any}) => string} =
   },
   displayProps: ({ display }: Display) => {
     let css = ''
-    css += display ? `display_${display} ` : ''
+    css += display == 'xs' ? 'none' :
+      display == 'sm' ? 'flex' :
+      display == 'md' ? 'inline' :
+      display == 'lg' ? 'inline-block' :
+      display == 'xl' ? 'block' :
+      display ? `display_${display} ` : ''
     return css
   },
   cursorProps: ({ cursor }: Cursor) => {
