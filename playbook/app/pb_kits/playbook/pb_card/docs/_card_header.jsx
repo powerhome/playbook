@@ -149,7 +149,7 @@ const CardHeader = (props) => {
           padding="none"
       >
         <Card.Header
-            headerColor="bg_dark"
+            headerColor="dark"
         >
           <Body
               {...props}
