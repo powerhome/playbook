@@ -50,25 +50,3 @@ $display_values: (
         }
     }
 }
-
-// @each $display,
-// $display-value in $display_values {
-//     .display_#{$display} {
-//         @include break_at(breakpoint($breakpoint-value)) {
-//             display: #{$display-value};
-//         }
-//     }
-// }
-
-// @each $display,
-// $display-value in $display_values {
-
-//     @each $breakpoint,
-//     $breakpoint-value in $breakpoints {
-//         &[class*=_display_#{$breakpoint}_#{$display}] {
-//             @include break_at(breakpoint($breakpoint-value)) {
-//                 display: #{$display-value};
-//             }
-//         }
-//     }
-// }
