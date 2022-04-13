@@ -6,11 +6,11 @@ import classnames from 'classnames'
 
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
 import { globalProps } from '../utilities/globalProps'
-import { productColors, categoryColors, backgroundColors } from '../types'
+import { ProductColors, CategoryColors, BackgroundColors } from '../types'
 
 type CardPropTypes = {
   aria?: object,
-  background?: backgroundColors | productColors | "none",
+  background?: BackgroundColors | ProductColors | "none",
   borderNone?: boolean,
   borderRadius?: "xs" | "sm" | "md" | "lg" | "xl" | "none" | "rounded",
   children: array<React.ReactNode> | React.ReactNode,
@@ -26,7 +26,7 @@ type CardPropTypes = {
 }
 
 type CardHeaderProps = {
-  headerColor?: backgroundColors | productColors | categoryColors | "none",
+  headerColor?: BackgroundColors | ProductColors | CategoryColors | "none",
   children: array<React.ReactNode> | React.ReactNode,
   className?: string,
   padding?: string,
