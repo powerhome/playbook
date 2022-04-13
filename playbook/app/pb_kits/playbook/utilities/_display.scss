@@ -22,27 +22,41 @@
     display: none;
 }
 
-// $media-query-breakpoints: (
-//     xs: "xs",
-//     sm: "sm",
-//     md: "md",
-//     lg: "lg",
-//     xl: "xl"
-// );
+$breakpoints: (
+  xs: $screen-xs-min,
+  sm: $screen-sm-min,
+  md: $screen-md-min,
+  lg: $screen-lg-min,
+  xl: $screen-xl-min
+);
 
-// $display_values: (
-//     block: "block",
-//     inline-block: "inline-block",
-//     inline: "inline",
-//     flex: "flex",
-//     inline-flex: "inline-flex",
-//     none: "none"
-// );
+$display_values: (
+    block: block,
+    inline-block: inline-block,
+    inline: inline,
+    flex: flex,
+    inline-flex: inline-flex,
+    hidden: hidden
+);
+
+// display_$size_$value
+
+@each $screen_size, $breakpoint in $breakpoints {
+    @each $display, $display_value in $display_values {
+        .display_#{$size}_#{$display} {
+            @include break_at(breakpoint($screen_size)) {
+                display: #{$display_value};
+            }
+        }
+    }
+}
 
 // @each $display,
 // $display-value in $display_values {
 //     .display_#{$display} {
-//         display: #{$display-value};
+//         @include break_at(breakpoint($breakpoint-value)) {
+//             display: #{$display-value};
+//         }
 //     }
 // }
 
@@ -50,20 +64,10 @@
 // $display-value in $display_values {
 
 //     @each $breakpoint,
-//     $breakpoint-value in $media-query-breakpoints {
+//     $breakpoint-value in $breakpoints {
 //         &[class*=_display_#{$breakpoint}_#{$display}] {
 //             @include break_at(breakpoint($breakpoint-value)) {
-//                 @if $display == 'xs' {
-//                     display: "none";
-//                 } @else if $display == 'sm' {
-//                     display: "flex";
-//                 } @else if $display == 'md' {
-//                     display: "inline";
-//                 } @else if $display == 'lg' {
-//                     display: "inline-block";
-//                 } @else if $display == 'xl' {
-//                     display: "block";
-//                 }
+//                 display: #{$display-value};
 //             }
 //         }
 //     }

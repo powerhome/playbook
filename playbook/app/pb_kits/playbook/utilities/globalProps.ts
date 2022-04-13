@@ -50,7 +50,7 @@ type LineHeight = {
 }
 
 type Display = {
-  display?: "block" | "flex" | "hidden" | "inline_block" | "inline" | "inline_flex",
+  display?: "block" | "flex" | "hidden" | "inline_block" | "inline" | "inline_flex"
 }
 
 type Cursor = {
@@ -182,11 +182,11 @@ const PROP_CATEGORIES: {[key:string]: (props: {[key: string]: any}) => string} =
   },
   displayProps: ({ display }: Display) => {
     let css = ''
-    css += display == 'xs' ? 'none' :
-      display == 'sm' ? 'flex' :
-      display == 'md' ? 'inline' :
-      display == 'lg' ? 'inline-block' :
-      display == 'xl' ? 'block' :
+    css += display == 'hidden' ? 'display_hidden' :
+      display == 'flex' ? 'display_flex' :
+      display == 'inline' ? 'display_inline' :
+      display == 'inline_block' ? 'display_inline-block' :
+      display == 'block' ? 'display_block' :
       display ? `display_${display} ` : ''
     return css
   },
