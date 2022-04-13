@@ -8942,12 +8942,12 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"jest-fail-on-console@npm:2.3.0":
-  version: 2.3.0
-  resolution: "jest-fail-on-console@npm:2.3.0"
+"jest-fail-on-console@npm:2.4.1":
+  version: 2.4.1
+  resolution: "jest-fail-on-console@npm:2.4.1"
   dependencies:
     chalk: ^4.1.0
-  checksum: f1bf446ab26d349d242b9176a98c5084f99efa56642aa7983590289a4f88fac3b607e3e88bd08974a2e2d3e75ab053d7fa8b5d5ca18c423f7d6cf01a8c73bb25
+  checksum: 0f7a87b3ef8bd243e4418e85337c68bb51cbd18e54392afffbccedf8cc349892be2c1f5afba7dbb1ca7f3deab6abce605865420fc2cb193500198de3205d6243
   languageName: node
   linkType: hard
 
@@ -11579,7 +11579,7 @@ fsevents@^1.2.7:
     identity-obj-proxy: 3.0.0
     jest: 26.4.2
     jest-axe: 4.1.0
-    jest-fail-on-console: 2.3.0
+    jest-fail-on-console: 2.4.1
     jsx-control-statements: ^3.2.8
     lazysizes: ^5.2.2
     lodash: ^4.17.19
