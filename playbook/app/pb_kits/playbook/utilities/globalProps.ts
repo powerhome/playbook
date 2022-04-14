@@ -1,6 +1,6 @@
 import { omit } from 'lodash'
 
-type Sizes = "xs" | "sm" | "md" | "lg" | "xl"
+type Sizes = "xxs" | "xs" | "sm" | "md" | "lg" | "xl"
 type None = "none"
 
 type AllSizes = None & Sizes
@@ -50,7 +50,10 @@ type LineHeight = {
 }
 
 type Display = {
-  display?: Sizes,
+  display?: {
+    display: "hidden" | "flex" | "inline" | "inline_block" | "block"
+    size: Sizes,
+  }
 }
 
 type Cursor = {
@@ -182,7 +185,7 @@ const PROP_CATEGORIES: {[key:string]: (props: {[key: string]: any}) => string} =
   },
   displayProps: ({ display }: Display) => {
     let css = ''
-    css += display ? `display_${display} ` : ''
+    css += (display && display.size && display.display) ? `display_${display.size}_${display.display} ` : ''
     return css
   },
   cursorProps: ({ cursor }: Cursor) => {

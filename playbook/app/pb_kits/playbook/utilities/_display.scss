@@ -33,11 +33,11 @@ $breakpoints: (
 );
 
 $display_values: (
-    xs: $display_hidden,
-    sm: $display_flex,
-    md: $display_inline,
-    lg: $display_inline_block,
-    xl: $display_block
+    hidden: $display_hidden,
+    flex: $display_flex,
+    inline: $display_inline,
+    inline_block: $display_inline_block,
+    block: $display_block
 );
 
 // display_$size_$value

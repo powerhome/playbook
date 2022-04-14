@@ -6,7 +6,7 @@ const CardLight = (props) => {
     <div>
       <Card
           borderRadius="rounded"
-          display='md'
+          display={{ display: 'inline', size: 'md' }}
           {...props}
       >
         {'Rounded (1000px)'}
@@ -16,7 +16,6 @@ const CardLight = (props) => {
 
       <Card
           borderRadius="xl"
-          display='xs'
           {...props}
       >
         {'Extra large (16px)'}
@@ -26,7 +25,6 @@ const CardLight = (props) => {
 
       <Card
           borderRadius="lg"
-          display='xl'
           {...props}
       >
         {'Large (8px)'}
