@@ -14,6 +14,7 @@ type CardPropTypes = {
   children: array<React.ReactNode> | React.ReactNode,
   className?: string,
   data?: object,
+  display?: string,
   highlight?: {
     position?: "side" | "top",
     color?: string,
@@ -27,12 +28,13 @@ type CardHeaderProps = {
   headerColor?: string,
   children: array<React.ReactNode> | React.ReactNode,
   className?: string,
-  padding?: string,
+  padding?: string
 }
 
 type CardBodyProps = {
   children: array<React.ReactNode> | React.ReactNode | string,
   className?: string,
+  display?: string,
   padding?: string,
 }
 
@@ -52,9 +54,9 @@ const Header = (props: CardHeaderProps) => {
 
 // Body component
 const Body = (props: CardBodyProps) => {
-  const { children, padding = 'md', className } = props
+  const { children, padding = 'md', display, className } = props
   const bodyCSS = buildCss('pb_card_body_kit')
-  const bodySpacing = globalProps(props, { padding })
+  const bodySpacing = globalProps(props, { display, padding })
 
   return (
     <div className={classnames(bodyCSS, bodySpacing, className)}>
@@ -72,6 +74,7 @@ const Card = (props: CardPropTypes) => {
     children,
     className,
     data = {},
+    display,
     highlight = {},
     selected = false,
     tag = 'div',
@@ -108,7 +111,7 @@ const Card = (props: CardPropTypes) => {
     <Tag
         {...ariaProps}
         {...dataProps}
-        className={classnames(cardCss, globalProps(props, { padding }), className)}
+        className={classnames(cardCss, globalProps(props, { display, padding }), className)}
     >
       {subComponentTags('Header')}
       {nonHeaderChildren}

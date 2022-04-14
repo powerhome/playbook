@@ -4,6 +4,7 @@
 @import "../tokens/colors";
 @import "../tokens/transition";
 @import "../tokens/animation-curves";
+@import "../tokens/display";
 
 $pb_card_border_width: 1px;
 $pb_card_border_radius: $border_rad_heavier;
@@ -31,7 +32,7 @@ $background_colors: map-merge($product_colors, $additional_colors);
 
 @mixin pb_card($background: $card_light, $border_color: $border_light) {
   position: relative;
-  display: flex;
+  // display: flex;
   flex-direction: column;
   min-width: 0;
   word-wrap: break-word;
