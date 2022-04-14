@@ -209,6 +209,30 @@ const highchartsTheme = {
         threshold: null,
       },
     },
+
+    //TREEMAP CHART STYLES
+    treeemap: {
+      layoutAlgorithm: "squarified",
+      allowDrillToNode: false,
+      animationLimit: 1000,
+      color: "#fff",
+      dataLabels: {
+        enabled: false,
+      },
+      levels: [
+        {
+          level: 1,
+          dataLabels: {
+            enabled: true,
+          },
+          borderWidth: 0,
+          levelIsConstant: false,
+        },
+        {
+          level: 1,
+        },
+      ],
+    },
   },
 }
 
