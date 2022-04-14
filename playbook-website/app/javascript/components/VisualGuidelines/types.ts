@@ -9,3 +9,7 @@ export type Example = {
   colors: Variable[],
   title: string,
 }
+
+export type Template = {
+
+}
