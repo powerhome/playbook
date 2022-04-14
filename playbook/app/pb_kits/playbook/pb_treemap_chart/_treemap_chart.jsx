@@ -7,14 +7,11 @@ import { globalProps } from '../utilities/globalProps'
 import pbChart from '../plugins/pb_chart'
 
 type TreemapChartProps = {
-  axisTitle: string,
   dark?: Boolean,
-  xAxisCategories: array,
-  yAxisMin: number,
-  yAxisMax: number,
   chartData: array<{
     name: string,
-    data: array<number>,
+    parent?: string | number,
+    data: number,
   }>,
   className?: string,
   id: number,
@@ -29,16 +26,12 @@ export default class TreemapChart extends React.Component<TreemapChartProps> {
   static defaultProps = {
     className: 'pb_treemap_chart',
     dark: false,
-    type: 'column',
+    type: 'treemap',
   }
 
   componentDidMount() {
     const {
-      axisTitle,
       dark,
-      xAxisCategories,
-      yAxisMin,
-      yAxisMax,
       className,
       chartData,
       id,
@@ -50,7 +43,6 @@ export default class TreemapChart extends React.Component<TreemapChartProps> {
     } = this.props
 
     new pbChart(`.${className}`, {
-      axisTitle: axisTitle,
       dark,
       chartData: chartData,
       colors: colors,
@@ -58,9 +50,6 @@ export default class TreemapChart extends React.Component<TreemapChartProps> {
       subtitle: subTitle,
       type,
       title: title,
-      xAxisCategories: xAxisCategories,
-      yAxisMin: yAxisMin,
-      yAxisMax: yAxisMax,
       height: height,
     })
   }
@@ -78,43 +67,3 @@ export default class TreemapChart extends React.Component<TreemapChartProps> {
     )
   }
 }
-
-// /* @flow */
-
-// import React from 'react'
-// import classnames from 'classnames'
-// import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
-// import { globalProps } from '../utilities/globalProps'
-
-// type TreemapChartProps = {
-//   aria?: object,
-//   className?: string,
-//   data?: object,
-//   id?: string,
-// }
-
-// const TreemapChart = (props: TreemapChartProps) => {
-//   const {
-//     aria = {},
-//   className,
-//   data = {},
-//   id,
-//   } = props
-
-//   const ariaProps = buildAriaProps(aria)
-//   const dataProps = buildDataProps(data)
-//   const classes = classnames(buildCss('pb_treemap_chart'), globalProps(props), className)
-
-//   return (
-//     <div
-//         {...ariaProps}
-//         {...dataProps}
-//         className={classes}
-//         id={id}
-//     >
-//       {className}
-//     </div>
-//   )
-// }
-
-// export default TreemapChart

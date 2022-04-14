@@ -195,6 +195,23 @@ class pbChart {
     })
   }
 
+  setupTreemap(options) {
+    treemap(Highcharts)
+    options.dark ? Highcharts.setOptions(highchartsDarkTheme) :  Highcharts.setOptions(highchartsTheme)
+    Highcharts.chart(this.defaults.id, {
+      title: {
+        text: this.defaults.title,
+      },
+      chart: {
+        height: this.defaults.height,
+        type: this.defaults.type,
+      },
+      series: [{
+        data: this.defaults.chartData,
+      }],
+    })
+  }
+
   setupChart(options) {
     this.setupTheme()
     const configOptions = {
@@ -239,21 +256,6 @@ class pbChart {
     }
 
     Highcharts.chart(this.defaults.id, configOptions)
-  }
-
-  setupTreemap(options) {
-    treemap(Highcharts)
-    options.dark ? Highcharts.setOptions(highchartsDarkTheme) :  Highcharts.setOptions(highchartsTheme)
-    Highcharts.chart(this.defaults.id, {
-      title: {
-        text: this.defaults.title,
-      },
-      chart: {
-        height: this.defaults.height,
-        type: this.defaults.type,
-      },
-
-    })
   }
 
   refresh(silent = false) {
