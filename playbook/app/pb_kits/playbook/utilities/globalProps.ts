@@ -1,4 +1,5 @@
 import { omit } from 'lodash'
+import { camelToSnakeCase } from './text'
 
 import {
   Binary,
@@ -17,7 +18,6 @@ type AlignContent = {
 type AlignItems = {
   alignItems?: Alignment & ("flexStart" | "flexEnd" | "stretch" | "baseline")
 }
-
 
 type AlignSelf = {
   alignSelf?: Alignment & ("auto" | "stretch" | "baseline")
@@ -45,7 +45,7 @@ type FlexDirection = {
 }
 
 type FlexGrow = {
-  flexGrow?: Binary
+  flexGrow?: 0 | 1
 }
 // type FlexDirectionOptions = "row" | "column" | "row_reverse" | "column_reverse"
 
@@ -205,12 +205,21 @@ const PROP_CATEGORIES: {[key:string]: (props: {[key: string]: any}) => string} =
     css += cursor ? `cursor_${cursor} ` : ''
     return css
   },
-  flexDirectionProps: ({ flexDirection }: any) => { //WIP: figure out the type
+  alignItemsProps: ({ alignItems }: AlignItems) => {
+    return alignItems ? `align_items_${camelToSnakeCase(alignItems)}` : ''
+  },
+  alignContentProps: ({ alignContent }: AlignContent) => {
+    return alignContent ? `align_content_${camelToSnakeCase(alignContent)}` : ''
+  },
+  alignSelfProps: ({ alignSelf }: AlignSelf) => {
+    return alignSelf ? `align_self_${alignSelf}` : ''
+  },
+  flexDirectionProps: ({ flexDirection }: FlexDirection) => {
     if (typeof flexDirection !== 'object') return
 
     const flexKeys: string[] = Object.keys(flexDirection)
 
-    return flexKeys.map((key: string) => {
+    return flexKeys.map((key: Sizes) => {
       const flexDirectionValue: string = flexDirection[key]
       return `flex_direction_${key}_${flexDirectionValue}`
     }).join(" ")
@@ -220,50 +229,23 @@ const PROP_CATEGORIES: {[key:string]: (props: {[key: string]: any}) => string} =
     css += flexWrap ? `flex_wrap_${flexWrap}` : ''
     return css
   },
-  justifyContentProps: ({ justifyContent }: JustifyContent) => {
-    let css = ''
-    css += justifyContent ? `justify_content_${justifyContent}` : ''
-    return css
-  },
-  justifySelfProps: ({ justifySelf }: JustifySelf) => {
-    let css = ''
-    css += justifySelf ? `justify_self_${justifySelf}` : ''
-    return css
-  },
-  alignItemsProps: ({ alignItems }: AlignItems) => {
-    let css = ''
-    css += alignItems ? `align_items_${alignItems}` : ''
-    return css
-  },
-  alignContentProps: ({ alignContent }: AlignContent) => {
-    let css = ''
-    css += alignContent ? `align_content_${alignContent}` : ''
-    return css
-  },
-  alignSelfProps: ({ alignSelf }: AlignSelf) => {
-    let css = ''
-    css += alignSelf ? `align_self_${alignSelf}` : ''
-    return css
-  },
   flexProps: ({ flex }: Flex) => {
-    let css =''
-    css += flex ? `flex_${flex}` : ''
-    return css
+    return flex ? `flex_${flex}` : ''
   },
   flexGrowProps: ({ flexGrow }: FlexGrow) => {
-    let css = ''
-    css += flexGrow ? `flex_grow_${flexGrow}` : ''
-    return css
+    return typeof(flexGrow) !== undefined ? `flex_grow_${flexGrow}` : ''
   },
   flexShrinkProps: ({ flexShrink }: FlexShrink) => {
-    let css = ''
-    css += flexShrink ? `flex_shrink_${flexShrink}` : ''
-    return css
+    return typeof(flexShrink) !== undefined ? `flex_shrink_${flexShrink}` : ''
+  },
+  justifyContentProps: ({ justifyContent }: JustifyContent) => {
+    return justifyContent ? `justify_content_${camelToSnakeCase(justifyContent)}` : ''
+  },
+  justifySelfProps: ({ justifySelf }: JustifySelf) => {
+    return justifySelf ? `justify_self_${justifySelf}` : ''
   },
   orderProps: ({ order }: Order) => {
-    let css = ''
-    css += order ? `order_${order}` : ''
-    return css
+    return order ? `order_${order}` : ''
   }
 }
 
