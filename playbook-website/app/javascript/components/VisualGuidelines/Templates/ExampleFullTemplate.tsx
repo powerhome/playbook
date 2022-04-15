@@ -4,7 +4,7 @@
 
 import React from 'react'
 // import cn from 'classnames'
-import { Background, Card, Flex, FlexItem, Caption, SectionSeparator } from 'playbook-ui'
+import { Background, Caption, Card, Flex, FlexItem, SectionSeparator } from 'playbook-ui'
 import { Template as TemplateType } from '../types'
 
 const ExampleFullTemplate = ({
@@ -16,44 +16,53 @@ const ExampleFullTemplate = ({
             paddingTop="xs"
             paddingX="md"
         >
-            <Card shadow="deep">
+            <Card
+                shadow="deeper"
+                padding="none"
+            >
                 <FlexItem>
-                    <Card
-                        paddingX="md"
-                        paddingTop="md"
-                        paddingBottom="xs"
-                    >
+                    <Card.Body>
                         <Caption
                             text="Visual Guide"
                             marginBottom="xs"
                         />
-                    </Card>
+                    </Card.Body>
+                <SectionSeparator variant="card"/>
                 </FlexItem>
-                <SectionSeparator padding="sm"/>
-                <FlexItem flex={1}>
-                    <Caption
-                        marginBottom="sm"
-                        text="Props"
-                    />
-                </FlexItem>
-                <SectionSeparator
-                    marginX="sm"
-                    orientations="vertical"
-                />
-                <FlexItem flex={1}>
-                    <Caption
-                        marginBottom="sm"
-                        text="Values"
-                    />
-                </FlexItem>
+                <Flex
+                    orientation="row"
+                    marginTop="md"
+                    inline="flex-container"
+                    vertical="stretch"
+                >
+                    <Card.Body>
+                        <FlexItem>
+                            <Caption
+                                marginBottom="sm"
+                                paddingLeft="sm"
+                                text="Props"
+                            />
+                        </FlexItem>
+                    </Card.Body>
+                        <SectionSeparator
+                            orientation="vertical"
+                            variant="card"
+                        />
+                    <Card.Body>
+                        <FlexItem>
+                            <Caption
+                                marginBottom="sm"
+                                text="Values"
+                            />
+                        </FlexItem>
+                    </Card.Body>
+                </Flex>
                 <FlexItem>
-                    <Background
-                        cn="border-bottom"
-                        backroundColor="dark"
-                    >
+                    <Background backgroundColor="category_21">
                         <Caption
                             cn="dark"
                             marginX="xl"
+                            paddingBottom="lg"
                             paddingTop="lg"
                             text="EXAMPLE IN USE"
                         />
