@@ -78,7 +78,7 @@
     "@testing-library/jest-dom": "5.16.4",
     "@testing-library/react": "11.2.7",
     "@types/lodash": "4.14.181",
-    "@types/react": "17.0.43",
+    "@types/react": "17.0.44",
     "@typescript-eslint/eslint-plugin": "4.33.0",
     "@typescript-eslint/parser": "4.33.0",
     "axe-core": "4.4.0",
