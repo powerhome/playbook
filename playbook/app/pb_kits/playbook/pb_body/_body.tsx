@@ -1,5 +1,3 @@
-/* @flow */
-
 import React from 'react'
 import classnames from 'classnames'
 
@@ -9,12 +7,12 @@ import { globalProps } from '../utilities/globalProps'
 import Highlight from '../pb_highlight/_highlight'
 
 type BodyProps = {
-  aria?: object,
+  aria?: {[key: string]: string},
   className?: string,
   children?: array<React.ReactChild>,
   color?: 'default' | 'light' | 'lighter' | 'link',
   dark?: boolean,
-  data?: object,
+  data?: {[key: string]: string},
   highlightedText?: array<string>,
   highlighting?: boolean,
   id?: string,
