@@ -9,7 +9,7 @@ import Highlight from '../pb_highlight/_highlight'
 type BodyProps = {
   aria?: {[key: string]: string},
   className?: string,
-  children?: array<React.ReactChild>, 
+  children?: array<React.ReactChild>,
   color?: 'default' | 'light' | 'lighter' | 'link',
   dark?: boolean,
   data?: {[key: string]: string},
@@ -38,7 +38,7 @@ const Body = (props: BodyProps) => {
     variant = null,
   } = props
 
-  const ariaProps = buildAriaProps(aria)
+  const ariaProps: {[key: string]: any} = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
   const classes = classnames(
     buildCss('pb_body_kit', color, variant, status),
