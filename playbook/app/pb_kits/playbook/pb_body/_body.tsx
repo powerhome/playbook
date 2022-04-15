@@ -9,7 +9,7 @@ import Highlight from '../pb_highlight/_highlight'
 type BodyProps = {
   aria?: {[key: string]: string},
   className?: string,
-  children?: array<React.ReactChild>,
+  children?: array<React.ReactChild>, 
   color?: 'default' | 'light' | 'lighter' | 'link',
   dark?: boolean,
   data?: {[key: string]: string},
