@@ -2107,9 +2107,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@testing-library/jest-dom@npm:5.16.3":
-  version: 5.16.3
-  resolution: "@testing-library/jest-dom@npm:5.16.3"
+"@testing-library/jest-dom@npm:5.16.4":
+  version: 5.16.4
+  resolution: "@testing-library/jest-dom@npm:5.16.4"
   dependencies:
     "@babel/runtime": ^7.9.2
     "@types/testing-library__jest-dom": ^5.9.1
@@ -2120,7 +2120,7 @@ __metadata:
     dom-accessibility-api: ^0.5.6
     lodash: ^4.17.15
     redent: ^3.0.0
-  checksum: 34d52d09337eb399fc72de8a21c84753e7c03a0998f5fb0574c5b1114f86cf060fe831e550d3da08ff1a77b35ced272d46071b74581c41d16e240415f95aa579
+  checksum: 0ed481ff4a0c48d40689de3ef7d187035fb22d95f5b2a661eae3c5a50a93f5145445e7a3fe530a70e0c79a3d72b076ba13a05f3c9d29accc4ce7b46ad6fef1f0
   languageName: node
   linkType: hard
 
@@ -2270,10 +2270,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/lodash@npm:4.14.180":
-  version: 4.14.180
-  resolution: "@types/lodash@npm:4.14.180"
-  checksum: cceb37ae8eee285ada446df66de56bd239db9e786a8496fb0b8cf50b78fb891bdf48c7ab7fcc30f753fcf702d87a1521c957d5165d7aa8ef842456a3a3869647
+"@types/lodash@npm:4.14.181":
+  version: 4.14.181
+  resolution: "@types/lodash@npm:4.14.181"
+  checksum: 633c02517483a52413f0824c44b4fc2089668f421b3eb0f075acb4cebd9b53146bbb662f6a871e466badfbe52ecc9ddfbcf59e299ec6922871be14d7c167b674
   languageName: node
   linkType: hard
 
@@ -11542,9 +11542,9 @@ fsevents@^1.2.7:
     "@babel/preset-react": ^7.12.5
     "@babel/preset-typescript": ^7.15.0
     "@popperjs/core": ^2.6.0
-    "@testing-library/jest-dom": 5.16.3
+    "@testing-library/jest-dom": 5.16.4
     "@testing-library/react": 11.2.7
-    "@types/lodash": 4.14.180
+    "@types/lodash": 4.14.181
     "@types/react": 17.0.44
     "@typescript-eslint/eslint-plugin": 4.33.0
     "@typescript-eslint/parser": 4.33.0
