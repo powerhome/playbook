@@ -11592,7 +11592,7 @@ fsevents@^1.2.7:
     react-animate-height: ^2.0.23
     react-dom: ^16.8.6
     react-dropzone: ^10.2.2
-    react-highlight-words: ^0.16.0
+    react-highlight-words: ^0.18.0
     react-joyride: ^2.3.0
     react-modal: ^3.12.1
     react-popper: ^2.1.0
@@ -12844,16 +12844,16 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"react-highlight-words@npm:^0.16.0":
-  version: 0.16.0
-  resolution: "react-highlight-words@npm:0.16.0"
+"react-highlight-words@npm:^0.18.0":
+  version: 0.18.0
+  resolution: "react-highlight-words@npm:0.18.0"
   dependencies:
     highlight-words-core: ^1.2.0
     memoize-one: ^4.0.0
     prop-types: ^15.5.8
   peerDependencies:
-    react: ^0.14.0 || ^15.0.0 || ^16.0.0-0
-  checksum: 8db6e7c8976ca8c2155ec3780ff33e37e9d159fc115d4fe6f8a767ae83d72dfb592e8a33717d8246d9aa81c485d6485f3214560c6f97d8c5052223eaf7eb4c1e
+    react: ^0.14.0 || ^15.0.0 || ^16.0.0-0 || ^17.0.0-0 || ^18.0.0-0
+  checksum: f1b80646a0e8f039e49a0e3f90c03fbcb3c2ac95786ddc028494d4022df7c8502907d58bf8aad017d1b319c70f34a99ab073812085c45f39077ec38eb202d85e
   languageName: node
   linkType: hard
 

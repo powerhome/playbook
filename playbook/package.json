@@ -62,7 +62,7 @@
     "moment-timezone": "^0.5.26",
     "react-animate-height": "^2.0.23",
     "react-dropzone": "^10.2.2",
-    "react-highlight-words": "^0.16.0",
+    "react-highlight-words": "^0.18.0",
     "react-joyride": "^2.3.0",
     "react-modal": "^3.12.1",
     "react-popper": "^2.1.0",
