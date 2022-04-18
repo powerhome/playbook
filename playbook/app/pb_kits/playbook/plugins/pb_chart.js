@@ -10,7 +10,6 @@ import solidGauge from 'highcharts/modules/solid-gauge'
 import treemap from 'highcharts/modules/treemap'
 
 pie(Highcharts)
-treemap(Highcharts)
 
 // Map Data Color String Props to our SCSS Variables
 
@@ -197,7 +196,9 @@ class pbChart {
 
   setupTreemap(options) {
     treemap(Highcharts)
+    this.setupTheme()
     options.dark ? Highcharts.setOptions(highchartsDarkTheme) :  Highcharts.setOptions(highchartsTheme)
+
     Highcharts.chart(this.defaults.id, {
       title: {
         text: this.defaults.title,
@@ -206,6 +207,7 @@ class pbChart {
         height: this.defaults.height,
         type: this.defaults.type,
       },
+      credits: false,
       series: [{
         data: this.defaults.chartData,
       }],

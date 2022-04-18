@@ -213,9 +213,19 @@ const highchartsTheme = {
     //TREEMAP CHART STYLES
     treeemap: {
       layoutAlgorithm: "squarified",
-      allowDrillToNode: false,
+      allowTraversingTree: false,
       animationLimit: 1000,
       color: "#fff",
+      colors:  [
+        "#4D89DD",
+        "#3378D9",
+        "#2B72D7",
+        "#4081DB",
+        "#558FEF",
+        "#0056CF",
+        "#1A67D4",
+      ],
+      // colorByPoint: true,
       dataLabels: {
         enabled: false,
       },
@@ -223,13 +233,10 @@ const highchartsTheme = {
         {
           level: 1,
           dataLabels: {
-            enabled: true,
+            enabled: false,
           },
           borderWidth: 0,
           levelIsConstant: false,
-        },
-        {
-          level: 1,
         },
       ],
     },

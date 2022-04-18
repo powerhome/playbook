@@ -1,9 +1,9 @@
 examples:
-  
+
   rails:
   - treemap_chart_default: Default
-  
-  
+
   react:
   - treemap_chart_default: Default
-  
+  - treemap_chart_grouped_data: Grouped Data
+  - treemap_chart_drillable: Drillable
