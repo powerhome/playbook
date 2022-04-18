@@ -9,11 +9,11 @@ import Highlight from '../pb_highlight/_highlight'
 type BodyProps = {
   aria?: {[key: string]: string},
   className?: string,
-  children?: array<React.ReactChild>,
+  children?: React.ReactChild[],
   color?: 'default' | 'light' | 'lighter' | 'link',
   dark?: boolean,
   data?: {[key: string]: string},
-  highlightedText?: array<string>,
+  highlightedText?: string[],
   highlighting?: boolean,
   id?: string,
   status?: 'negative' | 'neutral' | 'positive',
@@ -22,7 +22,7 @@ type BodyProps = {
   variant: null | 'link',
 }
 
-const Body = (props: BodyProps) => {
+const Body = (props: BodyProps): React.ReactElement => {
   const {
     aria = {},
     className,
@@ -39,13 +39,14 @@ const Body = (props: BodyProps) => {
   } = props
 
   const ariaProps: {[key: string]: any} = buildAriaProps(aria)
-  const dataProps = buildDataProps(data)
+  const dataProps: {[key: string]: any} = buildDataProps(data)
   const classes = classnames(
     buildCss('pb_body_kit', color, variant, status),
     globalProps(props),
     className
   )
-  const Tag = `${tag}`
+  const Tag: React.ReactElement | any = `${tag}`
+
 
   return (
     <Tag
@@ -54,11 +55,12 @@ const Body = (props: BodyProps) => {
         className={classes}
         id={id}
     >
-      <If condition={highlighting}>
-        <Highlight highlightedText={highlightedText}>{text || children}</Highlight>
-        <Else />
-        { text || children }
-      </If>
+      { highlighting && (
+         <Highlight highlightedText={highlightedText}>{text || children}</Highlight>
+      ) }
+      { !highlighting && (
+        text || children
+      ) }
     </Tag>
   )
 }
