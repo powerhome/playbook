@@ -6,7 +6,7 @@ import React from 'react'
 import { Background, Caption, Card, Flex, FlexItem, Pill, SectionSeparator } from 'playbook-ui'
 import { Template as TemplateType } from '../types'
 
-const ExampleFullTemplate = ({
+const PropsValuesTemplate = ({
 
   }: TemplateType): React.ReactElement => (
     <div>
@@ -19,18 +19,6 @@ const ExampleFullTemplate = ({
                 shadow="deeper"
                 padding="none"
             >
-                <FlexItem>
-                    <Card.Body>
-                        <Caption
-                            text="Visual Guide"
-                            marginBottom="xs"
-                        />
-                    </Card.Body>
-                <SectionSeparator
-                    alignItems="center"
-                    variant="card"
-                />
-                </FlexItem>
                 <Flex
                     orientation="row"
                     inline="flex-container"
@@ -83,4 +71,4 @@ const ExampleFullTemplate = ({
     </div>
 )
 
-export default ExampleFullTemplate
+export default PropsValuesTemplate
