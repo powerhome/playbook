@@ -10379,10 +10379,17 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"moment@npm:>= 2.9.0, moment@npm:^2.11.2, moment@npm:^2.29.1":
+"moment@npm:>= 2.9.0, moment@npm:^2.11.2":
   version: 2.29.1
   resolution: "moment@npm:2.29.1"
   checksum: 86729013febf7160de5b93da69273dd304d674b0224f9544b3abd09a87671ddd2cdd57598261ce57588910d63747ffd5590965e83c790d8bf327083c0e0a06e0
+  languageName: node
+  linkType: hard
+
+"moment@npm:^2.29.2":
+  version: 2.29.3
+  resolution: "moment@npm:2.29.3"
+  checksum: ab0d432d93ef0f6e40ee8a66feb8cfa15d6b9665c74141890b6488825c6f0cb5edfcc1781b3b84c0c82c4a5ba21a9f1d176e1fd4de705bb8300444e6b7f9209e
   languageName: node
   linkType: hard
 
@@ -11584,7 +11591,7 @@ fsevents@^1.2.7:
     lazysizes: ^5.2.2
     lodash: ^4.17.19
     mini-css-extract-plugin: 0.12.0
-    moment: ^2.29.1
+    moment: ^2.29.2
     moment-strftime: ^0.5.0
     moment-timezone: ^0.5.26
     node-sass: ^4.12.0
