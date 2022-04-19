@@ -31,6 +31,15 @@ const DashboardValueDefault = (props) => {
           statValue={{ value: '261', unit: 'windows' }}
           {...props}
       />
+
+      <br />
+      <br />
+
+      <DashboardValue
+          statLabel="Pitch Rate"
+          statValue={{ value: '90.9', unit: '%' }}
+          {...props}
+      />
     </div>
   )
 }

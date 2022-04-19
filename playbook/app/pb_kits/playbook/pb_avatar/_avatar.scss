@@ -16,8 +16,8 @@ $avatar-sizes: (
   position: relative;
 
   @each $name, $size in $avatar-sizes {
-    &[class*=_#{$name}],
-    &[class*=_#{$name}_thumb] {
+    &[class*=_size_#{$name}],
+    &[class*=_size_#{$name}_thumb] {
       width: $size;
       height: $size;
       object-fit: cover;

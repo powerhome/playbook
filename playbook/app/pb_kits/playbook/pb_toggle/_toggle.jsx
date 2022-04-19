@@ -10,7 +10,7 @@ import {
   buildDataProps,
 } from '../utilities/props'
 
-import { globalProps } from '../utilities/globalProps.js'
+import { globalProps } from '../utilities/globalProps'
 
 type Props = {
   aria?: object,

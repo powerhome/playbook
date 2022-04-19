@@ -6,6 +6,7 @@ require "redcarpet"
 require_relative "application_controller"
 
 class PagesController < ApplicationController
+  before_action :set_js, only: %i[visual_guidelines_react]
   before_action :set_kit, only: %i[kit_show_rails kit_show_react]
   before_action :ensure_kit_type_exists, only: %i[kit_show_rails kit_show_react]
   before_action :set_category, only: %i[kit_category_show_rails kit_category_show_react]
@@ -74,6 +75,10 @@ class PagesController < ApplicationController
 
   def principles; end
 
+  # TODO: rename this method once all guidelines are completed
+  def visual_guidelines_react; end
+
+  # TODO: remove this method once all guidelines are completed
   def visual_guidelines
     @max_width_code_example = Rails.root.join("app/views/pages/code_snippets/width_jsx.txt").read
     @number_spacing_code_example = Rails.root.join("app/views/pages/code_snippets/number_spacing_jsx.txt").read
@@ -89,6 +94,7 @@ class PagesController < ApplicationController
     @shadow_in_use_code_example = Rails.root.join("app/views/pages/code_snippets/shadow_in_use_jsx.txt").read
     @line_height_code_example = Rails.root.join("app/views/pages/code_snippets/line_height_code_jsx.txt").read
     @display_in_use_code_example = Rails.root.join("app/views/pages/code_snippets/display_in_use_jsx.txt").read
+    @justify_self_code_example = Rails.root.join("app/views/pages/code_snippets/justify_self_jsx.txt").read
     @space_sizes = [
       { name: "Extra Small", variable: "space_xs" },
       { name: "Small", variable: "space_sm" },
@@ -105,6 +111,10 @@ class PagesController < ApplicationController
   end
 
 private
+
+  def set_js
+    @application_js.concat ["visual_guidelines"]
+  end
 
   def set_category
     categories = MENU["kits"].map { |link| link.first.first if link.is_a?(Hash) }.compact

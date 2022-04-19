@@ -75,3 +75,17 @@ test('returns additional class name', () => {
   const kit = screen.getByTestId(testId)
   expect(kit).toHaveClass(`${kitClass} dark error`)
 })
+
+test('returns additional class name', () => {
+  render(
+    <TextInput
+        data={{ testid: testId }}
+        label="First Name"
+        marginBottom="lg"
+        placeholder="Enter first name"
+    />
+  )
+
+  const kit = screen.getByTestId(testId)
+  expect(kit).toHaveClass(`${kitClass} mb_lg`)
+})

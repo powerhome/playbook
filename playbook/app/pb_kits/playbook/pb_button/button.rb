@@ -18,6 +18,10 @@ module Playbook
       prop :text
       prop :type
       prop :value
+      prop :size, type: Playbook::Props::Enum,
+                  values: ["sm", "md", "lg", nil],
+                  default: nil
+      prop :form, default: nil
 
       def options
         {
@@ -29,6 +33,7 @@ module Playbook
           role: "button",
           type: type,
           value: value,
+          form: form,
         }.compact
       end
 
@@ -44,11 +49,12 @@ module Playbook
         link ? "a" : "button"
       end
 
-    private
-
       def classname
-        generate_classname("pb_button_kit", variant, full_width_class, disabled_class, loading_class)
+        button_class = generate_classname("pb_button_kit", variant, full_width_class, disabled_class, loading_class)
+        button_class + size_class
       end
+
+    private
 
       def disabled_class
         disabled ? "disabled" : "enabled"
@@ -60,6 +66,10 @@ module Playbook
 
       def loading_class
         loading ? "loading" : nil
+      end
+
+      def size_class
+        size ? " size_#{size}" : ""
       end
     end
   end

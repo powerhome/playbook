@@ -3,7 +3,7 @@
 import React from 'react'
 import classnames from 'classnames'
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
-import { deprecatedProps, globalProps } from '../utilities/globalProps.js'
+import { deprecatedProps, globalProps } from '../utilities/globalProps'
 
 type CaptionProps = {
   aria?: object,

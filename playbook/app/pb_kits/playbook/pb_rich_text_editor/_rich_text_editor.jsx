@@ -1,11 +1,12 @@
 /* @flow */
+/* eslint-disable react-hooks/rules-of-hooks */
 
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useState } from 'react'
 import classnames from 'classnames'
 import inlineFocus from './inlineFocus'
 import useFocus from './useFocus'
 import { globalProps } from '../utilities/globalProps'
-import { buildAriaProps, buildDataProps } from '../utilities/props'
+import { buildAriaProps, buildDataProps, noop } from '../utilities/props'
 
 try {
   const Trix = require('trix')
@@ -14,6 +15,8 @@ try {
     inheritable: true,
   }
 } catch (_e) { /* do nothing */ }
+
+import { TrixEditor } from "react-trix"
 
 type RichTextEditorProps = {
   aria?: object,
@@ -24,7 +27,7 @@ type RichTextEditorProps = {
   id?: string,
   inline?: boolean,
   name?: string,
-  onChange: (string) => void,
+  onChange: (html: string, text: string) => void,
   placeholder?: string,
   simple?: boolean,
   sticky?: boolean,
@@ -39,129 +42,116 @@ const RichTextEditor = (props: RichTextEditorProps) => {
     className,
     data = {},
     focus = false,
-    id,
     inline = false,
     name,
-    onChange,
+    onChange = noop,
     placeholder,
     simple = false,
     sticky = false,
     template = '',
     value = '',
   } = props
-  const trixRef = useRef()
-  const ariaProps = buildAriaProps(aria)
-  const dataProps = buildDataProps(data)
 
-  useEffect(() => {
-    trixRef.current.addEventListener('trix-initialize', (event) => {
-      const element = event.target
+  const ariaProps = buildAriaProps(aria),
+  dataProps = buildDataProps(data),
+  [editor, setEditor] = useState()
 
-      const { toolbarElement, editor } = element
+  const handleOnEditorReady = (editorInstance) => setEditor(editorInstance),
+  element = editor?.element
 
-      const blockCodeButton = toolbarElement.querySelector(
-        '[data-trix-attribute=code]'
-      )
-      const inlineCodeButton = blockCodeButton.cloneNode(true)
+  // DOM manipulation must wait for editor to be ready
+  if (editor) {
+    const toolbarElement = element.parentElement.querySelector('trix-toolbar'),
+    blockCodeButton = toolbarElement.querySelector('[data-trix-attribute=code]')
 
-      inlineCodeButton.hidden = true
-      inlineCodeButton.dataset.trixAttribute = 'inlineCode'
-      blockCodeButton.insertAdjacentElement('afterend', inlineCodeButton)
+    let inlineCodeButton = toolbarElement.querySelector('[data-trix-attribute=inlineCode]')
+    if (!inlineCodeButton) inlineCodeButton = blockCodeButton.cloneNode(true)
 
-      const getCodeFormattingType = () => {
-        if (editor.attributeIsActive('code')) return 'block'
-        if (editor.attributeIsActive('inlineCode')) return 'inline'
+    // set button attributes
+    inlineCodeButton.dataset.trixAttribute = 'inlineCode'
+    blockCodeButton.insertAdjacentElement('afterend', inlineCodeButton)
 
-        const range = editor.getSelectedRange()
-        if (range[0] == range[1]) return 'block'
+    if (toolbarBottom) editor.element.after(toolbarElement)
 
-        const text = editor.getSelectedDocument().toString().trim()
-        return /\n/.test(text) ? 'block' : 'inline'
-      }
+    const getCodeFormattingType = (): string => {
+      if (editor.attributeIsActive('code')) return 'block'
+      if (editor.attributeIsActive('inlineCode')) return 'inline'
 
-      element.addEventListener('trix-selection-change', () => {
-        const type = getCodeFormattingType()
-        blockCodeButton.hidden = type == 'inline'
-        inlineCodeButton.hidden = type == 'block'
-      })
+      const range = editor.getSelectedRange()
+      if (range[0] == range[1]) return 'block'
 
-      if (toolbarBottom) editor.element.after(toolbarElement)
-    })
-
-    trixRef.current.addEventListener('trix-change', (event) => {
-      onChange && onChange(event.target.innerHTML)
-    })
-  }, [trixRef])
-
-  useEffect(() => {
-    const editor = trixRef.current.editorController.editor
-    if (template) {
-      editor.loadHTML('')
-      editor.setSelectedRange([0, 0])
-      editor.insertHTML(template)
+      const text = editor.getSelectedDocument().toString().trim()
+      return /\n/.test(text) ? 'block' : 'inline'
     }
-  }, [template])
 
-  focus
-    ? (document.addEventListener('trix-focus', useFocus),
-    document.addEventListener('trix-blur', useFocus),
-    useFocus())
-    : null
+    // DOM event listeners
+    element.addEventListener('trix-selection-change', () => {
+      const type = getCodeFormattingType()
+      blockCodeButton.hidden = type == 'inline'
+      inlineCodeButton.hidden = type == 'block'
+    })
 
-  document.addEventListener('trix-focus', inlineFocus)
-  document.addEventListener('trix-blur', inlineFocus)
+    focus
+      ? (document.addEventListener('trix-focus', useFocus),
+      document.addEventListener('trix-blur', useFocus),
+      useFocus())
+      : null
 
-  const handleAnchorElementClick = (clickedElement) => {
-    const trixEditorContainer = clickedElement.closest('.pb_rich_text_editor_kit')
-    if (!trixEditorContainer) return
-
-    const anchorElement = clickedElement.closest('a')
-    if (!anchorElement) return
-
-    if (anchorElement.hasAttribute('href')) window.open(anchorElement.href)
-  }
-
-  const handleClick = (event) => {
-    handleAnchorElementClick(event.target)
+    document.addEventListener('trix-focus', inlineFocus)
+    document.addEventListener('trix-blur', inlineFocus)
   }
 
   useEffect(() => {
-    trixRef.current.addEventListener('click', handleClick)
-  }, [])
+    if (!editor || !template) return
+    editor.loadHTML('')
+    editor.setSelectedRange([0, 0])
+    editor.insertHTML(template)
+  }, [editor, template])
 
-  const RichTextEditorClass = 'pb_rich_text_editor_kit'
-  const SimpleClass = simple ? 'simple' : ''
-  const FocusClass = focus ? 'focus-editor-targets' : ''
-  const StickyClass = sticky ? 'sticky' : ''
-  const InlineClass = inline ? 'inline' : ''
-  const ToolbarBottomClass = toolbarBottom ? 'toolbar-bottom' : ''
-  const css = classnames(globalProps(props), className)
+  useEffect(() => {
+    if (!element) return
+    element.addEventListener('click', ({target}) => {
+      const trixEditorContainer = target.closest('.pb_rich_text_editor_kit')
+      if (!trixEditorContainer) return
+
+      const anchorElement = target.closest('a')
+      if (!anchorElement) return
+
+      if (anchorElement.hasAttribute('href')) window.open(anchorElement.href)
+    })
+  }, [element])
+
+  const richTextEditorClass = 'pb_rich_text_editor_kit',
+  simpleClass = simple ? 'simple' : '',
+  focusClass = focus ? 'focus-editor-targets' : '',
+  stickyClass = sticky ? 'sticky' : '',
+  inlineClass = inline ? 'inline' : '',
+  toolbarBottomClass = toolbarBottom ? 'toolbar-bottom' : ''
+
+  let css = classnames(globalProps(props), className)
+  css = classnames(
+    richTextEditorClass,
+    simpleClass,
+    focusClass,
+    stickyClass,
+    inlineClass,
+    toolbarBottomClass,
+    css
+  )
 
   return (
     <div
         {...ariaProps}
         {...dataProps}
-        className={classnames(
-        RichTextEditorClass,
-        SimpleClass,
-        FocusClass,
-        StickyClass,
-        InlineClass,
-        ToolbarBottomClass,
-        css
-      )}
+        className={css}
     >
-      <input
-          id={id}
-          name={name}
-          type="hidden"
-          value={value}
-      />
-      <trix-editor
-          input={id}
-          name={name}
+      <TrixEditor
+          className=""
+          fileParamName={name}
+          onChange={onChange}
+          onEditorReady={handleOnEditorReady}
           placeholder={placeholder}
-          ref={trixRef}
+          value={value}
       />
     </div>
   )

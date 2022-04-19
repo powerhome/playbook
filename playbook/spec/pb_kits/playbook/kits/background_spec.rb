@@ -16,13 +16,41 @@ RSpec.describe Playbook::PbBackground::Background do
       .with_default("light")
       .with_values("gradient", "dark", "light", "white", "success", "warning", "error", "info", "neutral", "primary", "category_1", "category_2", "category_3", "category_4", "category_5", "category_6", "category_7", "category_8", "category_9", "category_10", "category_11", "category_12", "category_13", "category_14", "category_15", "category_16", "category_17", "category_18", "category_19", "category_20", "category_21")
   }
+  it {
+    is_expected.to define_enum_prop(:transition)
+      .with_default(nil)
+      .with_values("fade", "blur", "scale", nil)
+  }
+  it { is_expected.to define_prop(:custom_color) }
+
+  it {
+    is_expected.to define_enum_prop(:background_repeat)
+      .with_default("initial")
+      .with_values("repeat", "repeat-x", "repeat-y", "no-repeat", "space", "round", "initial", "inherit")
+  }
+  it {
+    is_expected.to define_enum_prop(:background_size)
+      .with_default("cover")
+      .with_values("cover", "contain", "auto")
+  }
+
   describe "#classname" do
     it "returns namespaced class name", :aggregate_failures do
-      expect(subject.new({}).classname).to eq "pb_background_kit  pb_background_color_light"
-      expect(subject.new(background_color: "gradient").classname).to eq "pb_background_kit  pb_background_color_gradient"
-      expect(subject.new(padding: "xl").classname).to eq "pb_background_kit  pb_background_color_light p_xl"
-      expect(subject.new(background_color: "success").classname).to eq "pb_background_kit  pb_background_color_success"
-      expect(subject.new(background_color: "category_1").classname).to eq "pb_background_kit  pb_background_color_category_1"
+      expect(subject.new({}).classname).to eq "pb_background_kit pb_background_color_light"
+      expect(subject.new(background_color: "gradient").classname).to eq "pb_background_kit pb_background_color_gradient"
+      expect(subject.new(padding: "xl").classname).to eq "pb_background_kit pb_background_color_light p_xl"
+      expect(subject.new(background_color: "success").classname).to eq "pb_background_kit pb_background_color_success"
+      expect(subject.new(background_color: "category_1").classname).to eq "pb_background_kit pb_background_color_category_1"
+      expect(subject.new(transition: "fade", image_url: "test.jpeg").classname).to eq "pb_background_kit pb_background_color_light lazyload fade"
+      expect(subject.new(custom_color: "#1d99a8").classname).to eq "pb_background_kit pb_background_custom_color"
+    end
+  end
+
+  describe "#custom_background_color" do
+    it "returns a hash with a hex value assigned to the background-color" do
+      kit = subject.new(custom_color: "#1d99a8")
+
+      expect(kit.custom_background_color).to eq "background-color: #1d99a8;"
     end
   end
 end

@@ -1,4 +1,5 @@
 /* @flow */
+/* eslint-disable react-hooks/rules-of-hooks */
 
 import React, { forwardRef, useEffect, useRef } from 'react'
 import classnames from 'classnames'

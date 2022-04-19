@@ -3,7 +3,7 @@
 import React from 'react'
 import classnames from 'classnames'
 import { buildAriaProps, buildDataProps } from '../utilities/props'
-import { globalProps } from '../utilities/globalProps.js'
+import { globalProps } from '../utilities/globalProps'
 
 import Icon from '../pb_icon/_icon.jsx'
 
@@ -15,6 +15,7 @@ type ButtonPropTypes = {
   data?: object,
   disabled?: boolean,
   fixedWidth?: boolean,
+  form?: string,
   fullWidth?: boolean,
   icon?: string,
   id?: string,
@@ -22,7 +23,7 @@ type ButtonPropTypes = {
   loading?: boolean,
   newWindow?: boolean,
   onClick?: EventHandler,
-  size: 'large' | 'medium' | 'small',
+  size?: 'sm' | 'md' | 'lg',
   text?: string,
   type: 'inline' | null,
   htmlType: string | 'button',
@@ -36,19 +37,19 @@ const buttonClassName = (props: ButtonPropTypes) => {
     disabled = false,
     fullWidth = false,
     loading = false,
-    size = null,
     type = 'inline',
     variant = 'primary',
+    size = null,
   } = props
 
   let className = 'pb_button_kit'
 
   className += `${variant !== null ? `_${variant}` : ''}`
   className += `${type !== null ? `_${type}` : ''}`
-  className += `${size !== null ? `_${size}` : ''}`
   className += `${fullWidth ? '_block' : ''}`
   className += disabled ? '_disabled' : '_enabled'
   className += loading ? '_loading' : ''
+  className += `${size !== null ? ` size_${size}` : ''}`
 
   return className
 }
@@ -69,6 +70,7 @@ const Button = (props: ButtonPropTypes) => {
     text,
     htmlType = 'button',
     value,
+    form = null
   } = props
 
   const ariaProps = buildAriaProps(aria)
@@ -106,6 +108,7 @@ const Button = (props: ButtonPropTypes) => {
           className={css}
           href={link}
           id={id}
+          rel="noreferrer"
           role="link"
           target={newWindow ? '_blank' : null}
       >
@@ -118,6 +121,7 @@ const Button = (props: ButtonPropTypes) => {
           {...dataProps}
           className={css}
           disabled={disabled}
+          form={form}
           id={id}
           onClick={onClick}
           role="button"

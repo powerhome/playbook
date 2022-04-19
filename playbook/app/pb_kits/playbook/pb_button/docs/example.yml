@@ -7,6 +7,8 @@ examples:
   - button_block_content: Button Block Content
   - button_accessibility: Button Accessibility Options
   - button_options: Button Additional Options
+  - button_size: Button Size
+  - button_form: Button Form Attribute
   react:
   - button_default: Button Variants
   - button_full_width: Button Full Width
@@ -15,3 +17,5 @@ examples:
   - button_block_content: Button Block Content
   - button_accessibility: Button Accessibility Options
   - button_options: Button Additional Options (onClick)
+  - button_size: Button Size
+  - button_form: Button Form Attribute

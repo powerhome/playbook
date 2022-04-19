@@ -72,6 +72,8 @@ module.exports = {
 
   // An array of file extensions your modules use
   moduleFileExtensions: [
+    'ts',
+    'tsx',
     'js',
     'jsx',
   ],
@@ -126,7 +128,7 @@ module.exports = {
   // setupFiles: [],
 
   // A list of paths to modules that run some code to configure or set up the testing framework before each test
-  // setupFilesAfterEnv: [],
+  setupFilesAfterEnv: ['./utils/consoleFail.js'],
 
   // The number of seconds after which a test is considered as slow and reported as such in the results.
   // slowTestThreshold: 5,
