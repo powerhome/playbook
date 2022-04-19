@@ -10,76 +10,71 @@ const ExampleFullTemplate = ({
 
   }: TemplateType): React.ReactElement => (
     <div>
-        <Flex
-            paddingBottom="md"
-            paddingTop="xs"
-            paddingX="md"
+        <Card
+            marginY="sm"
+            shadow="deeper"
+            padding="none"
         >
-            <Card
-                shadow="deeper"
-                padding="none"
+            <FlexItem>
+                <Card.Body>
+                    <Caption
+                        text="Visual Guide"
+                        marginBottom="xs"
+                    />
+                </Card.Body>
+            <SectionSeparator
+                alignItems="center"
+                variant="card"
+            />
+            </FlexItem>
+            <Flex
+                orientation="row"
+                inline="flex-container"
+                vertical="stretch"
             >
-                <FlexItem>
-                    <Card.Body>
+                <Card.Body>
+                    <FlexItem>
                         <Caption
-                            text="Visual Guide"
-                            marginBottom="xs"
+                            align="left"
+                            marginBottom="sm"
+                            text="Props"
                         />
-                    </Card.Body>
-                <SectionSeparator
-                    alignItems="center"
-                    variant="card"
-                />
-                </FlexItem>
-                <Flex
-                    orientation="row"
-                    inline="flex-container"
-                    vertical="stretch"
-                >
-                    <Card.Body>
-                        <FlexItem>
-                            <Caption
-                                align="left"
-                                marginBottom="sm"
-                                text="Props"
-                            />
-                            <Pill
-                                text="propExample"
-                            />
-                        </FlexItem>
-                    </Card.Body>
-                        <SectionSeparator
-                            marginTop="md"
-                            marginBottom="md"
-                            orientation="vertical"
-                            variant="card"
+                        <Pill
+                            text="propExample"
                         />
-                    <Card.Body>
-                        <FlexItem>
-                            <Caption
-                                align="left"
-                                marginBottom="sm"
-                                text="Values"
-                            />
-                            <Pill
-                                text="propExample"
-                                variant="warning"
-                            />
-                        </FlexItem>
-                    </Card.Body>
-                </Flex>
-                <FlexItem>
-                    <Background backgroundColor="category_21">
+                    </FlexItem>
+                </Card.Body>
+                    <SectionSeparator
+                        marginTop="md"
+                        marginBottom="md"
+                        orientation="vertical"
+                        variant="card"
+                    />
+                <Card.Body>
+                    <FlexItem>
                         <Caption
-                            marginX="xl"
-                            paddingBottom="lg"
-                            paddingTop="lg"
-                            text="EXAMPLE IN USE"
+                            align="left"
+                            marginBottom="sm"
+                            text="Values"
                         />
-                    </Background>
-                </FlexItem>
-            </Card>
-        </Flex>
+                        <Pill
+                            text="propExample"
+                            variant="warning"
+                        />
+                    </FlexItem>
+                </Card.Body>
+            </Flex>
+            <FlexItem>
+                <Background backgroundColor="category_21">
+                    <Caption
+                        marginX="xl"
+                        paddingBottom="lg"
+                        paddingTop="lg"
+                        text="EXAMPLE IN USE"
+                    />
+                </Background>
+            </FlexItem>
+        </Card>
     </div>
 )
 
