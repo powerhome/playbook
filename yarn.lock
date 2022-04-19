@@ -2107,9 +2107,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@testing-library/jest-dom@npm:5.16.3":
-  version: 5.16.3
-  resolution: "@testing-library/jest-dom@npm:5.16.3"
+"@testing-library/jest-dom@npm:5.16.4":
+  version: 5.16.4
+  resolution: "@testing-library/jest-dom@npm:5.16.4"
   dependencies:
     "@babel/runtime": ^7.9.2
     "@types/testing-library__jest-dom": ^5.9.1
@@ -2120,7 +2120,7 @@ __metadata:
     dom-accessibility-api: ^0.5.6
     lodash: ^4.17.15
     redent: ^3.0.0
-  checksum: 34d52d09337eb399fc72de8a21c84753e7c03a0998f5fb0574c5b1114f86cf060fe831e550d3da08ff1a77b35ced272d46071b74581c41d16e240415f95aa579
+  checksum: 0ed481ff4a0c48d40689de3ef7d187035fb22d95f5b2a661eae3c5a50a93f5145445e7a3fe530a70e0c79a3d72b076ba13a05f3c9d29accc4ce7b46ad6fef1f0
   languageName: node
   linkType: hard
 
@@ -2270,10 +2270,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/lodash@npm:4.14.180":
-  version: 4.14.180
-  resolution: "@types/lodash@npm:4.14.180"
-  checksum: cceb37ae8eee285ada446df66de56bd239db9e786a8496fb0b8cf50b78fb891bdf48c7ab7fcc30f753fcf702d87a1521c957d5165d7aa8ef842456a3a3869647
+"@types/lodash@npm:4.14.182":
+  version: 4.14.182
+  resolution: "@types/lodash@npm:4.14.182"
+  checksum: e84c3e6bb03a241f648c8c8c8e0b3c26e00b932104d8d52599ff068adcc88d818a41aef9c3243b02d2e97273a9a605656d8ab3b64fb3c1afcbaa54a3ecf62f81
   languageName: node
   linkType: hard
 
@@ -2326,14 +2326,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react@npm:17.0.43":
-  version: 17.0.43
-  resolution: "@types/react@npm:17.0.43"
+"@types/react@npm:17.0.44":
+  version: 17.0.44
+  resolution: "@types/react@npm:17.0.44"
   dependencies:
     "@types/prop-types": "*"
     "@types/scheduler": "*"
     csstype: ^3.0.2
-  checksum: d368aa3d03f1951554398882771d562a0e0c81fe02f7d11d974721bbb667d2643b95ecdc01c783bdab2c2f69704524379f96e73e86b413faf3501c932c25b4b6
+  checksum: 50f46da2b774ab1e86eb896b4028b6e7e04a4201bbbba56fbba4742f37d31781b61f0f51f2d0872c4dc7441ece64856b007ab6e2584788310db64615be46769a
   languageName: node
   linkType: hard
 
@@ -6142,12 +6142,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-plugin-react-hooks@npm:4.3.0":
-  version: 4.3.0
-  resolution: "eslint-plugin-react-hooks@npm:4.3.0"
+"eslint-plugin-react-hooks@npm:4.4.0":
+  version: 4.4.0
+  resolution: "eslint-plugin-react-hooks@npm:4.4.0"
   peerDependencies:
     eslint: ^3.0.0 || ^4.0.0 || ^5.0.0 || ^6.0.0 || ^7.0.0 || ^8.0.0-0
-  checksum: 55d65863c0aeebbb470c494fe7fdf014b661c5aef21d1ab0c4f19b291d28b2a905de78eb6133891e4677abb7bc37c8b4a252aef007de1559ae28ad70e57d494a
+  checksum: 289f42b2066023672775c102b277f7b0296b4d5e6831a9a531fd639af1be7e0becd856a8ff9a00d4621cf9c5ba08b82b6714e07a1b420651ab11bcfe25062603
   languageName: node
   linkType: hard
 
@@ -8942,12 +8942,12 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"jest-fail-on-console@npm:2.3.0":
-  version: 2.3.0
-  resolution: "jest-fail-on-console@npm:2.3.0"
+"jest-fail-on-console@npm:2.4.1":
+  version: 2.4.1
+  resolution: "jest-fail-on-console@npm:2.4.1"
   dependencies:
     chalk: ^4.1.0
-  checksum: f1bf446ab26d349d242b9176a98c5084f99efa56642aa7983590289a4f88fac3b607e3e88bd08974a2e2d3e75ab053d7fa8b5d5ca18c423f7d6cf01a8c73bb25
+  checksum: 0f7a87b3ef8bd243e4418e85337c68bb51cbd18e54392afffbccedf8cc349892be2c1f5afba7dbb1ca7f3deab6abce605865420fc2cb193500198de3205d6243
   languageName: node
   linkType: hard
 
@@ -11549,10 +11549,10 @@ fsevents@^1.2.7:
     "@babel/preset-react": ^7.12.5
     "@babel/preset-typescript": ^7.15.0
     "@popperjs/core": ^2.6.0
-    "@testing-library/jest-dom": 5.16.3
+    "@testing-library/jest-dom": 5.16.4
     "@testing-library/react": 11.2.7
-    "@types/lodash": 4.14.180
-    "@types/react": 17.0.43
+    "@types/lodash": 4.14.182
+    "@types/react": 17.0.44
     "@typescript-eslint/eslint-plugin": 4.33.0
     "@typescript-eslint/parser": 4.33.0
     axe-core: 4.4.0
@@ -11576,7 +11576,7 @@ fsevents@^1.2.7:
     eslint-plugin-flowtype: 5.10.0
     eslint-plugin-jsx-control-statements: 2.2.1
     eslint-plugin-react: 7.28.0
-    eslint-plugin-react-hooks: 4.3.0
+    eslint-plugin-react-hooks: 4.4.0
     eslint-webpack-plugin: 2.6.0
     filemanager-webpack-plugin: 4.0.0
     flatpickr: ^4.6.6
@@ -11586,7 +11586,7 @@ fsevents@^1.2.7:
     identity-obj-proxy: 3.0.0
     jest: 26.4.2
     jest-axe: 4.1.0
-    jest-fail-on-console: 2.3.0
+    jest-fail-on-console: 2.4.1
     jsx-control-statements: ^3.2.8
     lazysizes: ^5.2.2
     lodash: ^4.17.19
