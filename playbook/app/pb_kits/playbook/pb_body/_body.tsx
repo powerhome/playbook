@@ -25,16 +25,16 @@ type BodyProps = {
 const Body = (props: BodyProps): React.ReactElement => {
   const {
     aria = {},
-    className,
     children,
+    className,
     color = '',
     data = {},
     highlightedText = [],
     highlighting = false,
-    id,
-    status,
+    id = '',
+    status = null,
     tag = 'div',
-    text,
+    text = '',
     variant = null,
   } = props
 
@@ -56,7 +56,12 @@ const Body = (props: BodyProps): React.ReactElement => {
         id={id}
     >
       { highlighting && (
-         <Highlight highlightedText={highlightedText}>{text || children}</Highlight>
+         <Highlight
+             highlightedText={highlightedText}
+             text={text}
+         >
+            {children}
+         </Highlight>
       ) }
       { !highlighting && (
         text || children
