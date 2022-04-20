@@ -15,7 +15,7 @@ const HighlightDefault = (props) => (
       {' '}
       {'Hello this is a'}
       {' '}
-      <Highlight>{' highlight wrapped'}</Highlight>
+      <Highlight text=" highlight wrapped"/>
     </Body>
     <br />
     <Body

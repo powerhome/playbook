@@ -22,7 +22,9 @@ const Highlight = (props: HighlightProps): React.ReactElement => {
     id = '',
     text = '',
   } = props
-  const highlightContent = (text || children) as string //TODO: reference PR -> cast to string as workaround
+
+  const highlightContent: any = text || children;
+
   return (
     <Highlighter
         autoEscape
