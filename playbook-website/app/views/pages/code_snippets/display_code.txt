@@ -1,0 +1,12 @@
+React:
+
+<Card display={{ display: "inline", size: "md" }}>
+  Card content
+<Card/>
+
+
+Rails:
+
+<%= pb_rails("card", props: { display: {display: "inline", size: "lg" }}) do %>
+  Card content
+<% end %>

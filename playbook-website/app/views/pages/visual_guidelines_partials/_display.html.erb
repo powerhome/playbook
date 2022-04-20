@@ -4,14 +4,17 @@
 <%= pb_rails("title", props: { text: "Global Props", tag: "h3", size: 4, margin_bottom: "xs" }) %>
 <%= pb_rails("body", props: { text: "Available in every kit. These are added globally as they are most flexible when developing.", margin_bottom: "sm" }) %>
 <%= pb_rails("card", props: { shadow: "deep", margin_bottom: "sm", padding: "none" }) do %>
-    <%= pb_rails("flex", props: { vertical: "stretch", padding_x: "md", padding_top: "md", padding_bottom: "md" }) do %>
-      <%= pb_rails("flex/flex_item", props: { flex: "1" }) do %>
-        <%= pb_rails("caption", props: { text: "Props", margin_bottom: "sm" }) %>
-          <%= pb_rails("pill", props: { text: "display", variant: "neutral" }) %>
+  <%= pb_rails("flex", props: { vertical: "stretch", padding_x: "md", padding_top: "md", padding_bottom: "md" }) do %>
+    <%= pb_rails("flex/flex_item", props: { flex: "1" }) do %>
+      <%= pb_rails("flex", props: { orientation: "column" }) do %>
+        <%= pb_rails("pill", props: { text: "display:", variant: "neutral" }) %>
+        <%= pb_rails("pill", props: { margin_left: "lg", margin_top: "sm", text: "display:", variant: "neutral" }) %>
+        <%= pb_rails("pill", props: { margin_left: "lg", margin_top: "md", text: "Size:", variant: "neutral" }) %>
       <% end %>
-      <%= pb_rails("section_separator", props: { orientation: "vertical", margin_x: "sm" }) %>
-      <%= pb_rails("flex/flex_item", props: { flex: "1" }) do %>
-        <%= pb_rails("caption", props: { text: "Values", margin_bottom: "sm" }) %>
+    <% end %>
+    <%= pb_rails("section_separator", props: { orientation: "vertical", margin_x: "sm" }) %>
+    <%= pb_rails("flex", props: { orientation: "column" }) do %>
+      <%= pb_rails("flex/flex_item", props: { flex: "1", margin_top: "xl" }) do %>
         <%= pb_rails("pill", props: { text: "block", variant: "warning" }) %>
         <%= pb_rails("pill", props: { text: "inline_block", variant: "warning" }) %>
         <%= pb_rails("pill", props: { text: "inline", variant: "warning" }) %>
@@ -19,44 +22,21 @@
         <%= pb_rails("pill", props: { text: "inline_flex", variant: "warning" }) %>
         <%= pb_rails("pill", props: { text: "hidden", variant: "warning" }) %>
       <% end %>
-    <% end %>
-    <%= pb_rails("background", props: { id: "code-wrapper", classname: "border-bottom", background_color: "dark", padding: "none" }) do %>
-      <%= pb_rails("caption", props: { text: "EXAMPLE IN USE", padding_top: "lg", margin_x: "xl", classname: "dark" }) %>
-      <div class="pb--codeCopy">
-        <pre class="highlight pt_sm" style="margin: 0px"><%= raw rouge(@display_in_use_code_example, "react") %></pre>
-      </div>
+      <%= pb_rails("flex/flex_item") do %>
+        <%= pb_rails("pill", props: { text: "xs", variant: "warning" }) %>
+        <%= pb_rails("pill", props: { text: "sm", variant: "warning" }) %>
+        <%= pb_rails("pill", props: { text: "md", variant: "warning" }) %>
+        <%= pb_rails("pill", props: { text: "lg", variant: "warning" }) %>
+        <%= pb_rails("pill", props: { text: "xl", variant: "warning" }) %>
+      <% end %>
     <% end %>
   <% end %>
-  <%= pb_rails("title", props: { text: "Utility Classes", tag: "h3", size: 4, margin_bottom: "xs" }) %>
-  <%= pb_rails("body", props: { text: "Just want the raw classes? We got you. All of our global props are simple CSS utilities available through classes.", margin_bottom: "sm" }) %>
-  <%= pb_rails("table", props: { size: "sm" }) do %>
-    <thead>
-      <tr>
-        <th>Class</th>
-        <th>Properties</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>xs</td>
-        <td>display: none;</td>
-      </tr>
-      <tr>
-        <td>sm</td>
-        <td>display: flex;</td>
-      </tr>
-      <tr>
-        <td>md</td>
-        <td>display: inline;</td>
-      </tr>
-      <tr>
-        <td>lg</td>
-        <td>display: inline_block;</td>
-      </tr>
-      <tr>
-        <td>xl</td>
-        <td>display: block;</td>
-      </tr>
-    </tbody>
-
+  <%= pb_rails("background", props: { id: "code-wrapper", classname: "border-bottom", background_color: "dark", padding: "none" }) do %>
+    <%= render partial: "pages/visual_guidelines_partials/partial_code_example",
+      locals: {
+        example: "app/views/pages/code_snippets/display_code.txt"
+      }
+    %>
   <% end %>
+<% end %>
+<%= render "pages/visual_guidelines_partials/display_breakpoints"%>

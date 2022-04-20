@@ -8,11 +8,16 @@ module Playbook
 
     def display_props
       selected_props = display_options.keys.select { |sk| try(sk) }
+
       return nil unless selected_props.present?
 
       selected_props.map do |k|
         display_value = send(k)
-        "display_#{display_value}" if display_values.include? display_value
+        screen_size = display_value[:size]
+        display = display_value[:display]
+
+        "display_#{screen_size}_#{display}" unless screen_size.blank? && display.blank?
+        puts "display_#{screen_size}_#{display}"
       end.compact.join(" ")
     end
 
