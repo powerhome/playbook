@@ -6,8 +6,8 @@ class KitGenerator < Rails::Generators::NamedBase
   source_root File.expand_path("templates", __dir__)
   class_option :props, type: :array, default: []
 
-  REACT_EXAMPLES_PATH = "app/pb_kits/playbook/playbook-doc.ts"
-  REACT_INDEX_PATH = "app/pb_kits/playbook/index.ts"
+  REACT_EXAMPLES_PATH = "app/pb_kits/playbook/playbook-doc.js"
+  REACT_INDEX_PATH = "app/pb_kits/playbook/index.js"
 
   def create_templates
     kit_name = name.strip.downcase
@@ -73,10 +73,10 @@ class KitGenerator < Rails::Generators::NamedBase
       # Ask user if React version should be generated ======
       if yes?("Create REACT #{@kit_name_pascal} kit? (y/N)")
         @react_kit = true
-        template "kit_tsx.erb", "#{full_kit_directory}/_#{@kit_name_underscore}.tsx"
-        template "kit_tsx_test.erb", "#{full_kit_directory}/#{@kit_name_underscore}.test.tsx"
-        template "kit_example_react.erb", "#{full_kit_directory}/docs/_#{@kit_name_underscore}_default.tsx"
-        template "kit_ts.erb", "#{full_kit_directory}/docs/index.ts"
+        template "kit_jsx.erb", "#{full_kit_directory}/_#{@kit_name_underscore}.jsx"
+        template "kit_jsx_test.erb", "#{full_kit_directory}/#{@kit_name_underscore}.test.jsx"
+        template "kit_example_react.erb", "#{full_kit_directory}/docs/_#{@kit_name_underscore}_default.jsx"
+        template "kit_js.erb", "#{full_kit_directory}/docs/index.js"
 
         react_imports_page(
           path: REACT_EXAMPLES_PATH.to_s,
@@ -87,9 +87,9 @@ class KitGenerator < Rails::Generators::NamedBase
 
         react_export_page(
           path: REACT_INDEX_PATH.to_s,
-          export_statement: "export #{@kit_name_pascal} from './pb_#{@kit_name_underscore}/_#{@kit_name_underscore}.tsx'\n",
-          start_comment: "// vvv React Component tsx Imports from the React Kits vvv\n",
-          end_comment: "// ^^^ React Component tsx Imports from the React Kits ^^^\n"
+          export_statement: "export #{@kit_name_pascal} from './pb_#{@kit_name_underscore}/_#{@kit_name_underscore}.jsx'\n",
+          start_comment: "// vvv React Component JSX Imports from the React Kits vvv\n",
+          end_comment: "// ^^^ React Component JSX Imports from the React Kits ^^^\n"
         )
 
         say_status  "complete",
