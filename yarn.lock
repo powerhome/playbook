@@ -10370,12 +10370,12 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"moment-timezone@npm:^0.5.26":
-  version: 0.5.33
-  resolution: "moment-timezone@npm:0.5.33"
+"moment-timezone@npm:^0.5.34":
+  version: 0.5.34
+  resolution: "moment-timezone@npm:0.5.34"
   dependencies:
     moment: ">= 2.9.0"
-  checksum: d4e72a3514a2885ab26b1cbc640e2f4785c997f9de28bb48bf3994ef137b0a560ca8f07eb07f11121e1223eef0c3bce4bc647b911111481a6a066bbc61285f99
+  checksum: 403165bf5a58858e4428f66aaece7bcb52d072474a74a68361ad63023092cc9cf0369bea95fafea67410ff52bd6e6e3402ab7375adb72d276360e021d83bb15f
   languageName: node
   linkType: hard
 
@@ -11593,7 +11593,7 @@ fsevents@^1.2.7:
     mini-css-extract-plugin: 0.12.0
     moment: ^2.29.2
     moment-strftime: ^0.5.0
-    moment-timezone: ^0.5.26
+    moment-timezone: ^0.5.34
     node-sass: ^4.12.0
     react: ^16.8.6
     react-animate-height: ^2.0.23
