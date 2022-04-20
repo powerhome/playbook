@@ -5,6 +5,7 @@ module Playbook
     class TreemapChart < ::Playbook::KitBase
       prop :chart_data, type: Playbook::Props::Array,
                         default: []
+      prop :drillable
       prop :subtitle
       prop :title
       prop :height
@@ -20,6 +21,7 @@ module Playbook
           id: id,
           className: classname,
           chartData: chart_data,
+          drillable: drillable,
           dark: dark ? "dark" : "",
           type: chart_type,
           title: title,

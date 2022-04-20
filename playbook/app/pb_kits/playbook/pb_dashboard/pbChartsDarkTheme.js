@@ -211,11 +211,10 @@ const highchartsDarkTheme = {
     },
 
     //TREEMAP CHART STYLES
-    treeemap: {
+    treemap: {
       layoutAlgorithm: "squarified",
       allowTraversingTree: false,
       animationLimit: 1000,
-      color: "#fff",
       colors: [
         colors.data_1,
         colors.data_2,
@@ -224,8 +223,9 @@ const highchartsDarkTheme = {
         colors.data_5,
         colors.data_6,
         colors.data_7,
+        colors.data_8,
       ],
-      // colorByPoint: true,
+      colorByPoint: true,
       dataLabels: {
         enabled: true,
       },
@@ -233,10 +233,8 @@ const highchartsDarkTheme = {
         {
           level: 1,
           dataLabels: {
-            enabled: true,
+            enabled: false,
           },
-          borderWidth: 0,
-          levelIsConstant: false,
         },
       ],
     },

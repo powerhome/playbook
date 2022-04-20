@@ -211,23 +211,23 @@ const highchartsTheme = {
     },
 
     //TREEMAP CHART STYLES
-    treeemap: {
+    treemap: {
       layoutAlgorithm: "squarified",
       allowTraversingTree: false,
       animationLimit: 1000,
-      color: "#fff",
-      colors:  [
-        "#4D89DD",
-        "#3378D9",
-        "#2B72D7",
-        "#4081DB",
-        "#558FEF",
-        "#0056CF",
-        "#1A67D4",
+      colors: [
+        colors.data_1,
+        colors.data_2,
+        colors.data_3,
+        colors.data_4,
+        colors.data_5,
+        colors.data_6,
+        colors.data_7,
+        colors.data_8,
       ],
-      // colorByPoint: true,
+      colorByPoint: true,
       dataLabels: {
-        enabled: false,
+        enabled: true,
       },
       levels: [
         {
@@ -235,8 +235,6 @@ const highchartsTheme = {
           dataLabels: {
             enabled: false,
           },
-          borderWidth: 0,
-          levelIsConstant: false,
         },
       ],
     },

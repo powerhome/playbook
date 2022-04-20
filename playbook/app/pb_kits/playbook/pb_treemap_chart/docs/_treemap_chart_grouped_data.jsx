@@ -34,7 +34,7 @@ const chartData = [
   }, {
     name: "Leadership",
     parent: 'BT',
-    value: 15,
+    value: 50,
   }, {
     name: "Sales",
     id: "Sales",
