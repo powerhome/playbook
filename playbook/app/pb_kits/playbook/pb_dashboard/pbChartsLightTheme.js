@@ -237,6 +237,9 @@ const highchartsTheme = {
           },
         },
       ],
+      traverseUpButton: {
+        position: { y: -40 },
+      }
     },
   },
 }

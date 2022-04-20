@@ -54,7 +54,7 @@ export default class TreemapChart extends React.Component<TreemapChartProps> {
       type,
       title: title,
       height: height,
-      drillable
+      drillable,
     })
   }
 

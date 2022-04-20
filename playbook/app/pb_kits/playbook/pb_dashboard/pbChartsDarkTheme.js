@@ -237,6 +237,9 @@ const highchartsDarkTheme = {
           },
         },
       ],
+      traverseUpButton: {
+        position: { y: -40 },
+      }
     },
   },
 }

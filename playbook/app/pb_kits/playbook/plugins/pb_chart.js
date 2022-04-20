@@ -211,6 +211,11 @@ class pbChart {
       series: [{
         data: this.defaults.chartData,
       }],
+      plotOptions: {
+        treemap: {
+          allowTraversingTree: this.defaults.drillable,
+        },
+      },
     })
   }
 
