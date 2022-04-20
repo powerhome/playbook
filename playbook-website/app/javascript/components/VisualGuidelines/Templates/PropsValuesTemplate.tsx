@@ -18,39 +18,38 @@ const PropsValuesTemplate = ({
             <Flex
                 orientation="row"
                 inline="flex-container"
+                justifyContent="spaceBetween"
                 vertical="stretch"
             >
-                <Card.Body>
-                    <FlexItem>
+                <FlexItem flex={1}>
+                    <Card.Body>
                         <Caption
-                            align="left"
                             marginBottom="sm"
                             text="Props"
                         />
                         <Pill
                             text="propExample"
                         />
-                    </FlexItem>
-                </Card.Body>
+                    </Card.Body>
+                </FlexItem>
                     <SectionSeparator
                         marginTop="md"
                         marginBottom="md"
                         orientation="vertical"
                         variant="card"
                     />
-                <Card.Body>
-                    <FlexItem>
+                <FlexItem flex={1}>
+                    <Card.Body>
                         <Caption
-                            align="left"
                             marginBottom="sm"
                             text="Values"
                         />
                         <Pill
-                            text="propExample"
+                            text="valueExample"
                             variant="warning"
                         />
-                    </FlexItem>
-                </Card.Body>
+                    </Card.Body>
+                </FlexItem>
             </Flex>
             <FlexItem>
                 <Background backgroundColor="category_21">
