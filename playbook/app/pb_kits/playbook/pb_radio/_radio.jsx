@@ -2,7 +2,7 @@
 /*eslint-disable react/no-multi-comp, flowtype/space-before-type-colon */
 
 import React, { forwardRef } from 'react'
-import Body from '../pb_body/_body.jsx'
+import Body from '../pb_body/_body'
 import classnames from 'classnames'
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
 import { globalProps } from '../utilities/globalProps'
