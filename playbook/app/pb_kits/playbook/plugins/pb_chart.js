@@ -216,6 +216,10 @@ class pbChart {
           allowTraversingTree: this.defaults.drillable,
         },
       },
+      tooltip: {
+        pointFormat: this.defaults.tooltipHtml,
+        useHTML: this.defaults.useHTML,
+      },
     })
   }
 

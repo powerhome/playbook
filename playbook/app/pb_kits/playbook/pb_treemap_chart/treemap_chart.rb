@@ -11,6 +11,10 @@ module Playbook
       prop :height
       prop :colors, type: Playbook::Props::Array,
                     default: []
+      prop :tooltip_html, default: '<span style="font-weight: bold; color:{point.color};">●</span>
+                                      {point.name}: ' + '<b>{point.y}
+                                    </b>'
+      prop :use_html, type: Playbook::Props::Boolean, default: false
 
       def chart_type
         "treemap"
@@ -28,6 +32,8 @@ module Playbook
           subtitle: subtitle,
           height: height,
           colors: colors,
+          tooltipHtml: tooltip_html,
+          useHtml: use_html,
         }
       end
 

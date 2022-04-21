@@ -21,6 +21,8 @@ type TreemapChartProps = {
   height?: string,
   colors: array,
   drillable?: Boolean,
+  tooltipHtml: String,
+  useHtml: Boolean,
 }
 
 export default class TreemapChart extends React.Component<TreemapChartProps> {
@@ -43,6 +45,8 @@ export default class TreemapChart extends React.Component<TreemapChartProps> {
       height,
       colors  = [],
       drillable,
+      tooltipHtml = '<span style="font-weight: bold; color:{point.color};">● </span>{point.name}: <b>{point.value}</b>',
+      useHtml = false,
     } = this.props
 
     new pbChart(`.${className}`, {
@@ -55,6 +59,8 @@ export default class TreemapChart extends React.Component<TreemapChartProps> {
       title: title,
       height: height,
       drillable,
+      tooltipHtml,
+      useHtml,
     })
   }
 
