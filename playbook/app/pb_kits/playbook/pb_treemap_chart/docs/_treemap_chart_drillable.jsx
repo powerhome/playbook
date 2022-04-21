@@ -55,8 +55,9 @@ const TreemapChartDrillable = (props) => (
     <TreemapChart
         chartData={chartData}
         drillable
+        grouped
         id="treemap-drillable"
-        title="Drillable Headcounts"
+        title="Drillable Grouped Headcounts"
         {...props}
     />
   </div>

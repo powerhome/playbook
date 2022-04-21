@@ -54,6 +54,7 @@ const TreemapChartGroupedData = (props) => (
   <div>
     <TreemapChart
         chartData={chartData}
+        grouped
         id="treemap-grouped-data"
         title="Department Headcounts"
         {...props}
