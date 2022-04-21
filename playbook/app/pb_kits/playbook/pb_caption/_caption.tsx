@@ -1,35 +1,36 @@
 import React from 'react'
 import classnames from 'classnames'
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
-import { deprecatedProps, globalProps } from '../utilities/globalProps'
+import { deprecatedProps, globalProps, GlobalProps } from '../utilities/globalProps'
 
 type CaptionProps = {
   aria?: {[key: string]: string},
-  children: React.ReactChild[], //what would I put after the | where it said React.ReactChild before?
+  children: React.ReactChild[],
   className?: string,
   color?: "default" | "light" | "lighter" | "success" | "error" | "link",
-  data?: {[key: string]: string}, //how do you know if its a situation that will take mult data types?
+  data?: {[key: string]: string},
   id?: string,
   size?: "xs" | "sm" | "md" | "lg" | "xl",
   tag?: "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "p" | "span" | "div" | "caption",
   text?: string,
   variant?: null | "link",
-};
+} & GlobalProps;
 
-const Caption = (props: CaptionProps) => {
+const Caption = (props: CaptionProps): React.ReactElement => {
   if (props.variant) deprecatedProps('Title', ['variant']) //variant prop is deprecated, use color instead
   const {
     aria = {},
     children,
     className,
-    color,
+    color = '',
     data = {},
-    id,
+    id = '',
     size = 'md',
     tag = 'div',
-    text,
+    text = '',
     variant = null,
   } = props
+
   const tagOptions = [
     'h1',
     'h2',
