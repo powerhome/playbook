@@ -4,9 +4,6 @@ import TreemapChart from '../_treemap_chart'
 
 const chartData = [
   {
-    name: "Business Units",
-    id: "Business Units",
-  }, {
     name: 'Revenue',
     parent: "Business Units",
     value: 1770,
@@ -30,7 +27,10 @@ const chartData = [
     name: "Installation Services",
     parent: "Business Units",
     value: 46,
-  }
+  }, {
+    name: "Business Units",
+    id: "Business Units",
+  },
 ]
 
 const TreemapChartTooltip = (props) => (

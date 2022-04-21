@@ -10,7 +10,16 @@ const chartData = [
   }, {
     name: 'Contact Center',
     parent: 'CD',
+    id: "Contact Center",
     value: 300,
+  }, {
+    name: "Inside Sales",
+    parent: "Contact Center",
+    value: 200,
+  }, {
+    name: "Scheduling",
+    parent: "Contact Center",
+    value: 100,
   }, {
     name: 'Field',
     parent: 'CD',
