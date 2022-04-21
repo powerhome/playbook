@@ -214,6 +214,7 @@ class pbChart {
       plotOptions: {
         treemap: {
           allowTraversingTree: this.defaults.drillable,
+          colors: options.colors !== undefined && options.colors.length > 0 ? mapColors(options.colors) : highchartsTheme.colors,
         },
       },
       tooltip: {

@@ -7,3 +7,4 @@ examples:
   - treemap_chart_default: Default
   - treemap_chart_grouped_data: Grouped Data
   - treemap_chart_drillable: Drillable
+  - treemap_chart_colors: Color Overrides
