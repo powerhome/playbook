@@ -3,13 +3,23 @@
 // This template has Visual Guide, Props, Values, and Example space
 
 import React from 'react'
-import { Background, Caption, Card, Flex, FlexItem, Pill, SectionSeparator } from 'playbook-ui'
+import { Background, Body, Caption, Card, Flex, FlexItem, Title } from 'playbook-ui'
 import { Template as TemplateType } from '../types'
 
 const TokensTemplate = ({
 
   }: TemplateType): React.ReactElement => (
     <div>
+        <Title
+            marginTop="xl"
+            marginBottom="md"
+            size={4}
+            tag="h4"
+            text="Tokens"
+        />
+            <Body marginBottom="lg">
+                {"Make your own styles using Playbook tokens to keep your site consistent"}
+            </Body>
         <Card
             marginY="sm"
             shadow="deeper"
