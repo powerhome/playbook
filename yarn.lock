@@ -2326,6 +2326,26 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/react-highlight-words@npm:^0.16.4":
+  version: 0.16.4
+  resolution: "@types/react-highlight-words@npm:0.16.4"
+  dependencies:
+    "@types/react": "*"
+  checksum: aca0f03de1cb429fc89ed88354907de8e811d42c757efafd7262b0650e88f89de387c60d48d1c26650b72f687b33423026c68f9a5cf254030b75bb6786d58321
+  languageName: node
+  linkType: hard
+
+"@types/react@npm:*":
+  version: 18.0.5
+  resolution: "@types/react@npm:18.0.5"
+  dependencies:
+    "@types/prop-types": "*"
+    "@types/scheduler": "*"
+    csstype: ^3.0.2
+  checksum: ad7b6db691aa4a71b13dd9d5fb84afe593b76e2e259b0b7ade99f77901ce3620df21658b064282667b766953992e33bf773528341cad85aee35e035ffcd779b7
+  languageName: node
+  linkType: hard
+
 "@types/react@npm:17.0.44":
   version: 17.0.44
   resolution: "@types/react@npm:17.0.44"
@@ -11546,6 +11566,7 @@ fsevents@^1.2.7:
     "@testing-library/react": 11.2.7
     "@types/lodash": 4.14.182
     "@types/react": 17.0.44
+    "@types/react-highlight-words": ^0.16.4
     "@typescript-eslint/eslint-plugin": 4.33.0
     "@typescript-eslint/parser": 4.33.0
     axe-core: 4.4.0
@@ -11592,7 +11613,7 @@ fsevents@^1.2.7:
     react-animate-height: ^2.0.23
     react-dom: ^16.8.6
     react-dropzone: ^10.2.2
-    react-highlight-words: ^0.16.0
+    react-highlight-words: ^0.18.0
     react-joyride: ^2.3.0
     react-modal: ^3.12.1
     react-popper: ^2.1.0
@@ -12844,16 +12865,16 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"react-highlight-words@npm:^0.16.0":
-  version: 0.16.0
-  resolution: "react-highlight-words@npm:0.16.0"
+"react-highlight-words@npm:^0.18.0":
+  version: 0.18.0
+  resolution: "react-highlight-words@npm:0.18.0"
   dependencies:
     highlight-words-core: ^1.2.0
     memoize-one: ^4.0.0
     prop-types: ^15.5.8
   peerDependencies:
-    react: ^0.14.0 || ^15.0.0 || ^16.0.0-0
-  checksum: 8db6e7c8976ca8c2155ec3780ff33e37e9d159fc115d4fe6f8a767ae83d72dfb592e8a33717d8246d9aa81c485d6485f3214560c6f97d8c5052223eaf7eb4c1e
+    react: ^0.14.0 || ^15.0.0 || ^16.0.0-0 || ^17.0.0-0 || ^18.0.0-0
+  checksum: f1b80646a0e8f039e49a0e3f90c03fbcb3c2ac95786ddc028494d4022df7c8502907d58bf8aad017d1b319c70f34a99ab073812085c45f39077ec38eb202d85e
   languageName: node
   linkType: hard
 
