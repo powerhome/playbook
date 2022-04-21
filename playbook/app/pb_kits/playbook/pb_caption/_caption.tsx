@@ -1,16 +1,14 @@
-/* @flow */
-
 import React from 'react'
 import classnames from 'classnames'
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
 import { deprecatedProps, globalProps } from '../utilities/globalProps'
 
 type CaptionProps = {
-  aria?: object,
-  children: array<React.ReactNode> | React.ReactNode,
+  aria?: {[key: string]: string},
+  children: React.ReactChild[], //what would I put after the | where it said React.ReactChild before?
   className?: string,
   color?: "default" | "light" | "lighter" | "success" | "error" | "link",
-  data?: object,
+  data?: {[key: string]: string}, //how do you know if its a situation that will take mult data types?
   id?: string,
   size?: "xs" | "sm" | "md" | "lg" | "xl",
   tag?: "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "p" | "span" | "div" | "caption",
