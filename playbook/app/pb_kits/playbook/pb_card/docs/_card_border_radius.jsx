@@ -6,6 +6,7 @@ const CardLight = (props) => {
     <div>
       <Card
           borderRadius="rounded"
+          display={{xs: "block", sm: "hidden", md: "inline", lg: "inline_block", xl: "flex"}}
           {...props}
       >
         {"Rounded (1000px)"}

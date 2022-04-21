@@ -11,13 +11,19 @@ module Playbook
 
       return nil unless selected_props.present?
 
+      puts "***" * 50
+      puts selected_props
+      puts display_value
+      puts screen_size
+      puts display
+      puts "***" * 50
+
       selected_props.map do |k|
         display_value = send(k)
         screen_size = display_value[:size]
         display = display_value[:display]
 
-        "display_#{screen_size}_#{display}" unless screen_size.blank? && display.blank?
-        puts "display_#{screen_size}_#{display}"
+        return "display_#{screen_size}_#{display}" unless screen_size.blank? || display.blank?
       end.compact.join(" ")
     end
 
