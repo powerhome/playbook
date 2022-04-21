@@ -1,9 +1,8 @@
 /* @flow */
 /*eslint-disable flowtype/space-before-type-colon */
 
-import moment from 'moment'
+import moment from 'moment-timezone'
 import 'moment-strftime'
-import 'moment-timezone'
 
 type DateTimeType = {
   value: String | Date,
