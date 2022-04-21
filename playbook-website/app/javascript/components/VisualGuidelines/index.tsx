@@ -4,6 +4,7 @@
 import React from 'react'
 import ExampleFullTemplate from './Templates/ExampleFullTemplate'
 import PropsValuesTemplate from './Templates/PropsValuesTemplate'
+import TokensTemplate from './Templates/TokensTemplate'
 import Colors from './Colors'
 
 const VisualGuidelines = (): React.ReactElement => (
@@ -11,6 +12,7 @@ const VisualGuidelines = (): React.ReactElement => (
     <Colors />
     <ExampleFullTemplate />
     <PropsValuesTemplate />
+    <TokensTemplate />
   </React.Fragment>
 )
 

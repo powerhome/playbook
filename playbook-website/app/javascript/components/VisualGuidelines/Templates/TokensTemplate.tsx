@@ -1,12 +1,12 @@
 /* eslint-disable flowtype/no-types-missing-file-annotation */
 // React Pure component - do not use state!
-// This template has Props, Values, and Example space
+// This template has Visual Guide, Props, Values, and Example space
 
 import React from 'react'
 import { Background, Caption, Card, Flex, FlexItem, Pill, SectionSeparator } from 'playbook-ui'
 import { Template as TemplateType } from '../types'
 
-const PropsValuesTemplate = ({
+const TokensTemplate = ({
 
   }: TemplateType): React.ReactElement => (
     <div>
@@ -23,31 +23,6 @@ const PropsValuesTemplate = ({
             >
                 <FlexItem flex={1}>
                     <Card.Body>
-                        <Caption
-                            marginBottom="sm"
-                            text="Props"
-                        />
-                        <Pill
-                            text="propExample"
-                        />
-                    </Card.Body>
-                </FlexItem>
-                    <SectionSeparator
-                        marginTop="md"
-                        marginBottom="md"
-                        orientation="vertical"
-                        variant="card"
-                    />
-                <FlexItem flex={1}>
-                    <Card.Body>
-                        <Caption
-                            marginBottom="sm"
-                            text="Values"
-                        />
-                        <Pill
-                            text="valueExample"
-                            variant="warning"
-                        />
                     </Card.Body>
                 </FlexItem>
             </Flex>
@@ -65,4 +40,4 @@ const PropsValuesTemplate = ({
     </div>
 )
 
-export default PropsValuesTemplate
+export default TokensTemplate

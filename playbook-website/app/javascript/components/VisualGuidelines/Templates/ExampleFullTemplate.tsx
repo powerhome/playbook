@@ -3,14 +3,36 @@
 // This template has Visual Guide, Props, Values, and Example space
 
 import React from 'react'
-import { Background, Caption, Card, Flex, FlexItem, Pill, SectionSeparator } from 'playbook-ui'
+import { Background, Body, Caption, Card, Flex, FlexItem, Pill, SectionSeparator, Title } from 'playbook-ui'
 import { Template as TemplateType } from '../types'
 
 const ExampleFullTemplate = ({
 
   }: TemplateType): React.ReactElement => (
     <div>
+        <Title
+            size={1}
+            paddingTop="xl"
+            marginBottom="sm"
+            marginTop="xl"
+            tag="h1"
+            text="Title 1"
+        />
+            <Body marginBottom="lg">
+                {"Example text to explain how this section works."}
+            </Body>
+        <Title
+            marginTop="sm"
+            marginBottom="xs"
+            size={4}
+            tag="h4"
+            text="Global Props"
+        />
+            <Body marginBottom="lg">
+                {"Available in every kit. These are added globally as they are most flexible when developing. ."}
+            </Body>
         <Card
+            borderRadius="md"
             marginY="sm"
             shadow="deeper"
             padding="none"
@@ -66,7 +88,10 @@ const ExampleFullTemplate = ({
                 </FlexItem>
             </Flex>
             <FlexItem>
-                <Background backgroundColor="category_21">
+                <Background
+                    backgroundColor="category_21"
+                    borderRadius="md"
+                >
                     <Caption
                         marginX="xl"
                         paddingBottom="lg"
