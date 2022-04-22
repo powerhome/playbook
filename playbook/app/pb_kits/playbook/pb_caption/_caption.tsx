@@ -22,12 +22,12 @@ const Caption = (props: CaptionProps): React.ReactElement => {
     aria = {},
     children,
     className,
-    color = '',
+    color,
     data = {},
-    id = '',
+    id,
     size = 'md',
     tag = 'div',
-    text = '',
+    text,
     variant = null,
   } = props
 
