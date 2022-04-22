@@ -1,22 +1,22 @@
 import React from 'react'
 import classnames from 'classnames'
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
-import { deprecatedProps, globalProps } from '../utilities/globalProps'
+import { deprecatedProps, GlobalProps, globalProps } from '../utilities/globalProps'
 
 type TitleProps = {
-  aria?: object,
-  children?: array<React.ReactNode> | React.ReactNode,
+  aria?: {[key: string]: string},
+  children?: React.ReactChild[]
   className?: string,
   color?: "default" | "light" | "lighter" | "success" | "error" | "link",
-  data?: object,
+  data?: {[key: string]: string},
   id?: string,
   size?: 1 | 2 | 3 | 4,
   tag?: "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "div" | "span",
   text?: string,
   variant?: null | "link",
-}
+} & GlobalProps
 
-const Title = (props: TitleProps) => {
+const Title = (props: TitleProps): React.ReactElement => {
   if (props.variant) deprecatedProps('Title', ['variant']) //variant prop is deprecated, use color instead
   const {
     aria = {},
@@ -31,14 +31,14 @@ const Title = (props: TitleProps) => {
     variant = null,
   } = props
 
-  const ariaProps = buildAriaProps(aria)
-  const dataProps = buildDataProps(data)
+  const ariaProps: {[key: string]: any} = buildAriaProps(aria)
+  const dataProps: {[key: string]: any} = buildDataProps(data)
   const classes = classnames(
-    buildCss('pb_title_kit', size, variant, color),
+    buildCss('pb_title_kit', `size_${size}`, variant, color),
     globalProps(props),
     className,
   )
-  const Tag = `${tag}`
+  const Tag: React.ReactElement | any = `${tag}`
 
   return (
     <Tag
