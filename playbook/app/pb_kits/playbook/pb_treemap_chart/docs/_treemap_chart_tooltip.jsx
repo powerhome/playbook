@@ -40,7 +40,7 @@ const TreemapChartTooltip = (props) => (
         id="treemap-tooltip"
         title="Business Unit Headcounts"
         tooltipHtml={"<p>Custom tooltip for {point.name} <br/>with value: {point.value}</p>"}
-        useHtml="true"
+        useHtml
         {...props}
     />
   </div>

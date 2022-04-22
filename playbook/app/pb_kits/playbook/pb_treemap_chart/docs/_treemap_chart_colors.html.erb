@@ -1,5 +1,8 @@
 <% data = [
   {
+    name: "Business Units",
+    id: "Business Units",
+  }, {
     name: 'Revenue',
     parent: "Business Units",
     value: 1770,
@@ -23,15 +26,12 @@
     name: "Installation Services",
     parent: "Business Units",
     value: 46,
-  }, {
-    name: "Business Units",
-    id: "Business Units",
-  },
+  }
 ] %>
-
 
 <%= pb_rails("treemap_chart", props: {
     chart_data: data,
-    id: "treemap-default",
-    title: "Employee Headcounts",
+    colors: ["data-7", "data-4", "#124732", "#8E6E53"],
+    id: "treemap-colors",
+    title: "Business Unit Headcounts",
 }) %>

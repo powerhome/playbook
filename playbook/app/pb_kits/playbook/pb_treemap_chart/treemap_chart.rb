@@ -12,9 +12,10 @@ module Playbook
       prop :colors, type: Playbook::Props::Array,
                     default: []
       prop :tooltip_html, default: '<span style="font-weight: bold; color:{point.color};">●</span>
-                                      {point.name}: ' + '<b>{point.y}
+                                      {point.name}: ' + '<b>{point.value}
                                     </b>'
       prop :use_html, type: Playbook::Props::Boolean, default: false
+      prop :grouped
 
       def chart_type
         "treemap"
@@ -34,6 +35,7 @@ module Playbook
           colors: colors,
           tooltipHtml: tooltip_html,
           useHtml: use_html,
+          grouped: grouped,
         }
       end
 

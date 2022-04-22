@@ -228,6 +228,11 @@ const highchartsDarkTheme = {
       colorByPoint: true,
       dataLabels: {
         enabled: true,
+        style: {
+          fontFamily: typography.font_family_base,
+          fontWeight: typography.bold,
+          fontSize: typography.heading_4,
+        },
       },
       levels: [
         {

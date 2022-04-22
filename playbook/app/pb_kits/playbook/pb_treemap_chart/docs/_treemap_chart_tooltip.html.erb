@@ -29,9 +29,10 @@
   },
 ] %>
 
-
 <%= pb_rails("treemap_chart", props: {
     chart_data: data,
-    id: "treemap-default",
-    title: "Employee Headcounts",
+    id: "treemap-tooltip",
+    title: "Business Unit Headcounts",
+    tooltip_html: "<p>Custom tooltip for {point.name} <br/>with value: {point.value}</p>",
+    use_html: true,
 }) %>
