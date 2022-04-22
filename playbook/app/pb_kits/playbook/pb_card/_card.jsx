@@ -3,12 +3,14 @@
 import React from 'react'
 import { get } from 'lodash'
 import classnames from 'classnames'
+
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
 import { globalProps } from '../utilities/globalProps'
+import { ProductColors, CategoryColors, BackgroundColors } from '../types'
 
 type CardPropTypes = {
   aria?: object,
-  background?: "white" | "dark" | "light" | "windows" | "siding" | "doors" | "solar" | "roofing" | "gutters" | "insulation" | "none",
+  background?: BackgroundColors | ProductColors | "none",
   borderNone?: boolean,
   borderRadius?: "xs" | "sm" | "md" | "lg" | "xl" | "none" | "rounded",
   children: array<React.ReactNode> | React.ReactNode,
@@ -24,7 +26,7 @@ type CardPropTypes = {
 }
 
 type CardHeaderProps = {
-  headerColor?: string,
+  headerColor?: BackgroundColors | ProductColors | CategoryColors | "none",
   children: array<React.ReactNode> | React.ReactNode,
   className?: string,
   padding?: string,
