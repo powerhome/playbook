@@ -99,7 +99,7 @@
     "flow-bin": "0.174.1",
     "flow-runtime": "0.17.0",
     "identity-obj-proxy": "3.0.0",
-    "jest": "26.4.2",
+    "jest": "26.6.3",
     "jest-axe": "4.1.0",
     "jest-fail-on-console": "2.4.1",
     "mini-css-extract-plugin": "0.12.0",
