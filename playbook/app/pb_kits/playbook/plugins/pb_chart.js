@@ -220,7 +220,7 @@ class pbChart {
       },
       tooltip: {
         pointFormat: this.defaults.tooltipHtml,
-        useHTML: this.defaults.useHTML,
+        useHTML: true,
       },
     })
   }

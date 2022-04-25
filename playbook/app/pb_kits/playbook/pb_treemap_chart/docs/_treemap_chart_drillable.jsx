@@ -4,59 +4,74 @@ import TreemapChart from '../_treemap_chart'
 
 const chartData = [
   {
-    name: 'Customer Development',
-    id: 'CD',
+    name: "Evergreen",
+    id: "Evergreen",
     color: "#0056CF",
   }, {
-    name: 'Contact Center',
-    parent: 'CD',
-    id: "Contact Center",
+    name: "Pine",
+    id: "Pine",
+    parent: "Evergreen",
     value: 300,
+    color: "#477BC4",
   }, {
-    name: "Inside Sales",
-    parent: "Contact Center",
-    value: 200,
+    name: "Ponderosa Pine",
+    parent: "Pine",
+    value: 50,
   }, {
-    name: "Scheduling",
-    parent: "Contact Center",
+    name: "Scots Pine",
+    parent: "Pine",
+    value: 150,
+  }, {
+    name: "White Pine",
+    parent: "Pine",
     value: 100,
   }, {
-    name: 'Field',
-    parent: 'CD',
-    value: 500,
+    name: "Douglas Fir",
+    parent: "Evergreen",
+    value: 150,
   }, {
-    name: "Leadership",
-    parent: 'CD',
-    value: 40,
+    name: "Juniper",
+    parent: "Evergreen",
+    value: 80,
   }, {
-    name: 'Business Technology',
-    id: 'BT',
+    name: "Hemlock",
+    parent: "Evergreen",
+    value: 30,
+  }, {
+    name: "Deciduous",
+    id: "Deciduous",
     color: "#F9BB00",
   }, {
-    name: 'Development',
-    parent: 'BT',
+    name: "Oak",
+    parent: "Deciduous",
+    value: 80,
+  }, {
+    name: "Maple",
+    id: "Maple",
+    parent: "Deciduous",
     value: 180,
+    color: "#F7CE52",
   }, {
-    name: 'Support',
-    parent: 'BT',
-    value: 40,
+    name: "Red Maple",
+    parent: "Maple",
+    value: 80,
   }, {
-    name: "Leadership",
-    parent: 'BT',
-    value: 15,
+    name: "Sugar Maple",
+    parent: "Maple",
+    value: 100,
   }, {
-    name: "Sales",
-    id: "Sales",
-    color: "#9E64E9",
-  },{
-    name: "Remodeling Consultant",
-    parent: "Sales",
-    value: 400,
-  }, {
-    name: "Quality Assurance",
-    parent: "Sales",
+    name: "Beech",
+    parent: "Deciduous",
     value: 50,
-  }
+  }, {
+    name: "Willow",
+    parent: "Deciduous",
+    value: 100,
+  }, {
+    name: "Juniper",
+    parent: "Deciduous",
+    value: 90,
+  },
 ]
 
 const TreemapChartDrillable = (props) => (
@@ -66,7 +81,7 @@ const TreemapChartDrillable = (props) => (
         drillable
         grouped
         id="treemap-drillable"
-        title="Drillable Grouped Headcounts"
+        title="Drillable Grouped Tree Species"
         {...props}
     />
   </div>

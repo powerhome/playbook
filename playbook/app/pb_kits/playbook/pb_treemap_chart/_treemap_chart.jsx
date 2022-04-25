@@ -48,7 +48,6 @@ export default class TreemapChart extends React.Component<TreemapChartProps> {
       colors  = [],
       drillable,
       tooltipHtml = '<span style="font-weight: bold; color:{point.color};">● </span>{point.name}: <b>{point.value}</b>',
-      useHtml = false,
       grouped,
     } = this.props
 
@@ -63,7 +62,6 @@ export default class TreemapChart extends React.Component<TreemapChartProps> {
       height: height,
       drillable,
       tooltipHtml,
-      useHtml,
       grouped,
     })
   }

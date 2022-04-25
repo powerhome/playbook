@@ -4,32 +4,32 @@ import TreemapChart from '../_treemap_chart'
 
 const chartData = [
   {
-    name: 'Revenue',
-    parent: "Business Units",
-    value: 1770,
+    name: "Pepperoni",
+    parent: "Toppings",
+    value: 600,
   }, {
-    name: 'Project Services',
-    parent: "Business Units",
-    value: 359,
+    name: "Cheese",
+    parent: "Toppings",
+    value: 510,
   }, {
-    name: 'Contact Center',
-    parent: "Business Units",
-    value: 186,
+    name: "Mushroom",
+    parent: "Toppings",
+    value: 330,
   },{
-    name: "Business Technology",
-    parent: "Business Units",
-    value: 161,
+    name: "Onions",
+    parent: "Toppings",
+    value: 250,
   }, {
-    name: 'People',
-    parent: "Business Units",
-    value: 104,
+    name: "Olives",
+    parent: "Toppings",
+    value: 204,
   }, {
-    name: "Installation Services",
-    parent: "Business Units",
-    value: 46,
+    name: "Pineapple",
+    parent: "Toppings",
+    value: 90,
   }, {
-    name: "Business Units",
-    id: "Business Units",
+    name: "Pizza Toppings",
+    id: "Toppings",
   },
 ]
 
@@ -38,7 +38,7 @@ const TreemapChartDefault = (props) => (
     <TreemapChart
         chartData={chartData}
         id="treemap-default"
-        title="Business Unit Headcounts"
+        title="Favored Pizza Toppings"
         {...props}
     />
   </div>

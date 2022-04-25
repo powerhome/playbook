@@ -14,7 +14,6 @@ module Playbook
       prop :tooltip_html, default: '<span style="font-weight: bold; color:{point.color};">●</span>
                                       {point.name}: ' + '<b>{point.value}
                                     </b>'
-      prop :use_html, type: Playbook::Props::Boolean, default: false
       prop :grouped
 
       def chart_type
@@ -34,7 +33,6 @@ module Playbook
           height: height,
           colors: colors,
           tooltipHtml: tooltip_html,
-          useHtml: use_html,
           grouped: grouped,
         }
       end

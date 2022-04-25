@@ -4,49 +4,49 @@ import TreemapChart from '../_treemap_chart'
 
 const chartData = [
   {
-    name: 'Customer Development',
-    id: 'CD',
+    name: 'Meat',
+    id: 'Meat',
     color: "#0056CF",
   }, {
-    name: 'Contact Center',
-    parent: 'CD',
-    value: 300,
+    name: 'Pepperoni',
+    parent: 'Meat',
+    value: 250,
   }, {
-    name: 'Field',
-    parent: 'CD',
-    value: 500,
-  }, {
-    name: "Leadership",
-    parent: 'CD',
-    value: 40,
-  }, {
-    name: 'Business Technology',
-    id: 'BT',
-    color: "#F9BB00",
-  }, {
-    name: 'Development',
-    parent: 'BT',
-    value: 180,
-  }, {
-    name: 'Support',
-    parent: 'BT',
-    value: 40,
-  }, {
-    name: "Leadership",
-    parent: 'BT',
-    value: 50,
-  }, {
-    name: "Sales",
-    id: "Sales",
-    color: "#9E64E9",
-  },{
-    name: "Remodeling Consultant",
-    parent: "Sales",
+    name: 'Meatball',
+    parent: 'Meat',
     value: 400,
   }, {
-    name: "Quality Assurance",
-    parent: "Sales",
-    value: 50,
+    name: "Anchovy",
+    parent: 'Meat',
+    value: 40,
+  }, {
+    name: 'Vegetarian',
+    id: 'Vegetarian',
+    color: "#F9BB00",
+  }, {
+    name: 'Onions',
+    parent: 'Vegetarian',
+    value: 300,
+  }, {
+    name: 'Pineapple',
+    parent: 'Vegetarian',
+    value: 90,
+  }, {
+    name: "Peppers",
+    parent: 'Vegetarian',
+    value: 80,
+  }, {
+    name: "Specialty",
+    id: "Specialty",
+    color: "#9E64E9",
+  },{
+    name: "Buffalo Chicken",
+    parent: "Specialty",
+    value: 400,
+  }, {
+    name: "Supreme",
+    parent: "Specialty",
+    value: 150,
   }
 ]
 
@@ -56,7 +56,7 @@ const TreemapChartGroupedData = (props) => (
         chartData={chartData}
         grouped
         id="treemap-grouped-data"
-        title="Department Headcounts"
+        title="Grouped Toppings"
         {...props}
     />
   </div>

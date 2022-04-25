@@ -4,42 +4,42 @@ import TreemapChart from '../_treemap_chart'
 
 const chartData = [
   {
-    name: "Business Units",
-    id: "Business Units",
+    name: "Pepperoni",
+    parent: "Toppings",
+    value: 600,
   }, {
-    name: 'Revenue',
-    parent: "Business Units",
-    value: 1770,
+    name: "Cheese",
+    parent: "Toppings",
+    value: 510,
   }, {
-    name: 'Project Services',
-    parent: "Business Units",
-    value: 359,
-  }, {
-    name: 'Contact Center',
-    parent: "Business Units",
-    value: 186,
+    name: "Mushroom",
+    parent: "Toppings",
+    value: 330,
   },{
-    name: "Business Technology",
-    parent: "Business Units",
-    value: 161,
+    name: "Onions",
+    parent: "Toppings",
+    value: 250,
   }, {
-    name: 'People',
-    parent: "Business Units",
-    value: 104,
+    name: "Olives",
+    parent: "Toppings",
+    value: 204,
   }, {
-    name: "Installation Services",
-    parent: "Business Units",
-    value: 46,
-  }
+    name: "Pineapple",
+    parent: "Toppings",
+    value: 90,
+  }, {
+    name: "Pizza Toppings",
+    id: "Toppings",
+  },
 ]
 
 const TreemapChartColors = (props) => (
   <div>
     <TreemapChart
         chartData={chartData}
-        colors={["data-7", "data-4", "#124732", "#8E6E53"]}
+        colors={["data-4", "data-7", "#8E6E53", "#124732"]}
         id="treemap-colors"
-        title="Business Unit Headcounts"
+        title="Favored Pizza Toppings"
         {...props}
     />
   </div>
