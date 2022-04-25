@@ -5,12 +5,12 @@ __metadata:
   version: 4
   cacheKey: 7
 
-"@actions/core@npm:1.6.0":
-  version: 1.6.0
-  resolution: "@actions/core@npm:1.6.0"
+"@actions/core@npm:1.7.0":
+  version: 1.7.0
+  resolution: "@actions/core@npm:1.7.0"
   dependencies:
     "@actions/http-client": ^1.0.11
-  checksum: 71533cc514e4a158cea7c855610a44376814cc1b897f600aaf97636fc1bf49956bd4f7ef8f1cd04beefe8baa5d001aea40aadafbcbc6b36a62840bc25082e4c4
+  checksum: 96a7dc6bd2d079822cb6792b463bb451d9c15ca7ab5718b3ab150840a3392c43c26a2416980c6223eda89e0c5398c5a1157e9d4a5d6c9acb604284eb784c65c7
   languageName: node
   linkType: hard
 
@@ -11556,7 +11556,7 @@ fsevents@^1.2.7:
   version: 0.0.0-use.local
   resolution: "playbook-ui@workspace:playbook"
   dependencies:
-    "@actions/core": 1.6.0
+    "@actions/core": 1.7.0
     "@actions/github": 4.0.0
     "@babel/cli": ^7.12.1
     "@babel/core": ^7.12.3
