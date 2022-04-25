@@ -11,13 +11,6 @@ module Playbook
 
       return nil unless selected_props.present?
 
-      puts "***" * 50
-      puts selected_props
-      puts display_value
-      puts screen_size
-      puts display
-      puts "***" * 50
-
       selected_props.map do |k|
         display_value = send(k)
         screen_size = display_value[:size]

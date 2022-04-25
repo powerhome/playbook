@@ -1,66 +1,71 @@
-import React from "react";
-import Card from "../_card.jsx";
+import React from 'react'
+import Card from '../_card.jsx'
 
 const CardLight = (props) => {
   return (
     <div>
       <Card
           borderRadius="rounded"
-          display={{xs: "block", sm: "hidden", md: "inline", lg: "inline_block", xl: "flex"}}
           {...props}
       >
-        {"Rounded (1000px)"}
+        {'Rounded (1000px)'}
       </Card>
 
       <br />
 
-      <Card borderRadius="xl"
+      <Card
+          borderRadius="xl"
           {...props}
       >
-        {"Extra large (16px)"}
+        {'Extra large (16px)'}
       </Card>
 
       <br />
 
-      <Card borderRadius="lg"
+      <Card
+          borderRadius="lg"
           {...props}
       >
-        {"Large (8px)"}
+        {'Large (8px)'}
       </Card>
 
       <br />
 
-      <Card borderRadius="md"
+      <Card
+          borderRadius="md"
           {...props}
       >
-        {"Medium (6px)"}
+        {'Medium (6px)'}
       </Card>
 
       <br />
 
-      <Card borderRadius="sm"
+      <Card
+          borderRadius="sm"
           {...props}
       >
-        {"Small (4px)"}
+        {'Small (4px)'}
       </Card>
 
       <br />
 
-      <Card borderRadius="xs"
+      <Card
+          borderRadius="xs"
           {...props}
       >
-        {"Extra small (4px)"}
+        {'Extra small (4px)'}
       </Card>
 
       <br />
 
-      <Card borderRadius="none"
+      <Card
+          borderRadius="none"
           {...props}
       >
-        {"None"}
+        {'None'}
       </Card>
     </div>
-  );
-};
+  )
+}
 
-export default CardLight;
+export default CardLight
