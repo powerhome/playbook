@@ -7,62 +7,61 @@ import { globalProps } from '../utilities/globalProps'
 import pbChart from '../plugins/pb_chart'
 
 type TreemapChartProps = {
-  dark?: Boolean,
   chartData: array<{
     name: string,
     parent?: string | number,
     data: number,
   }>,
   className?: string,
+  colors: array,
+  dark?: boolean,
+  drillable: boolean,
+  grouped: boolean,
+  height?: string,
   id: number,
   subTitle?: string,
   title: string,
+  tooltipHtml: string,
   type?: string,
-  height?: string,
-  colors: array,
-  drillable: Boolean,
-  tooltipHtml: String,
-  useHtml: Boolean,
-  grouped: Boolean,
 }
 
 export default class TreemapChart extends React.Component<TreemapChartProps> {
   static defaultProps = {
     className: 'pb_treemap_chart',
     dark: false,
-    type: 'treemap',
     drillable: false,
     grouped: false,
+    type: 'treemap',
   }
 
   componentDidMount() {
     const {
-      dark,
-      className,
       chartData,
+      className,
+      colors  = [],
+      dark,
+      drillable,
+      grouped,
+      height,
       id,
       subTitle,
-      title,
-      type,
-      height,
-      colors  = [],
-      drillable,
+      title = "",
       tooltipHtml = '<span style="font-weight: bold; color:{point.color};">● </span>{point.name}: <b>{point.value}</b>',
-      grouped,
+      type,
     } = this.props
 
     new pbChart(`.${className}`, {
-      dark,
       chartData: chartData,
       colors: colors,
+      dark,
+      drillable,
+      grouped,
+      height: height,
       id: id,
       subtitle: subTitle,
-      type,
       title: title,
-      height: height,
-      drillable,
       tooltipHtml,
-      grouped,
+      type,
     })
   }
 
