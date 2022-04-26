@@ -10,7 +10,9 @@ type TreemapChartProps = {
   chartData: array<{
     name: string,
     parent?: string | number,
-    data: number,
+    value: number,
+    color?: string,
+    id?: string | number,
   }>,
   className?: string,
   colors: array,
