@@ -3,8 +3,9 @@
 // This template has Visual Guide, Props, Values, and Example space
 
 import React from 'react'
-import { Background, Body, Caption, Card, Flex, FlexItem, Pill, SectionSeparator, Title } from 'playbook-ui'
+import { Body, Caption, Card, Flex, FlexItem, Pill, SectionSeparator, Title } from 'playbook-ui'
 import { Template as TemplateType } from '../types'
+// import styles from "styles.scss"
 
 const ExampleFullTemplate = ({
 
@@ -32,8 +33,7 @@ const ExampleFullTemplate = ({
                 {"Available in every kit. These are added globally as they are most flexible when developing."}
             </Body>
         <Card
-            borderRadius="md"
-            marginY="sm"
+            rounded
             shadow="deeper"
             padding="none"
         >
@@ -87,19 +87,18 @@ const ExampleFullTemplate = ({
                     </Card.Body>
                 </FlexItem>
             </Flex>
-            <FlexItem>
-                <Background
-                    backgroundColor="category_21"
-                    borderRadius="md"
-                >
-                    <Caption
-                        marginX="xl"
-                        paddingBottom="lg"
-                        paddingTop="lg"
-                        text="EXAMPLE IN USE"
-                    />
-                </Background>
-            </FlexItem>
+            <Card
+                // className={styles.templateCardFooter}
+                background="dark"
+                dark
+            >
+                <Caption
+                    marginX="xl"
+                    paddingBottom="lg"
+                    paddingTop="lg"
+                    text="EXAMPLE IN USE"
+                />
+            </Card>
         </Card>
     </div>
 )
