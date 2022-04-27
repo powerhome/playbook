@@ -6162,12 +6162,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-plugin-react-hooks@npm:4.4.0":
-  version: 4.4.0
-  resolution: "eslint-plugin-react-hooks@npm:4.4.0"
+"eslint-plugin-react-hooks@npm:4.5.0":
+  version: 4.5.0
+  resolution: "eslint-plugin-react-hooks@npm:4.5.0"
   peerDependencies:
     eslint: ^3.0.0 || ^4.0.0 || ^5.0.0 || ^6.0.0 || ^7.0.0 || ^8.0.0-0
-  checksum: 289f42b2066023672775c102b277f7b0296b4d5e6831a9a531fd639af1be7e0becd856a8ff9a00d4621cf9c5ba08b82b6714e07a1b420651ab11bcfe25062603
+  checksum: ee4dcbc02ed0a425b6157d6d87915e03b9e82d4b8a47e4d65314bc4c133ed08f42444bb3155837f1e11f312c7768d92ba9506ddf6c2cef3e2a958ead529b177d
   languageName: node
   linkType: hard
 
@@ -11597,7 +11597,7 @@ fsevents@^1.2.7:
     eslint-plugin-flowtype: 5.10.0
     eslint-plugin-jsx-control-statements: 2.2.1
     eslint-plugin-react: 7.28.0
-    eslint-plugin-react-hooks: 4.4.0
+    eslint-plugin-react-hooks: 4.5.0
     eslint-webpack-plugin: 2.6.0
     filemanager-webpack-plugin: 4.0.0
     flatpickr: ^4.6.6
