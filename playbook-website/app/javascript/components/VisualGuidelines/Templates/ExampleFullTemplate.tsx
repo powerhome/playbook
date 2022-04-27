@@ -92,9 +92,9 @@ const ExampleFullTemplate = ({
                 dark
             >
                 <Caption
-                    marginX="xl"
-                    paddingBottom="lg"
-                    paddingTop="lg"
+                    marginLeft="sm"
+                    paddingBottom="sm"
+                    paddingTop="xs"
                     text="EXAMPLE IN USE"
                 />
             </Card>
