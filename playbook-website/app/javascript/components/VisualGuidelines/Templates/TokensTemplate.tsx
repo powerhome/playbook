@@ -36,16 +36,18 @@ const TokensTemplate = ({
                     </Card.Body>
                 </FlexItem>
             </Flex>
-            <FlexItem>
-                <Background backgroundColor="category_21">
-                    <Caption
-                        marginX="xl"
-                        paddingBottom="lg"
-                        paddingTop="lg"
-                        text="EXAMPLE IN USE"
-                    />
-                </Background>
-            </FlexItem>
+            <Card
+                className={`border_radius_flat`}
+                background="dark"
+                dark
+            >
+                <Caption
+                    marginX="xl"
+                    paddingBottom="lg"
+                    paddingTop="lg"
+                    text="EXAMPLE IN USE"
+                />
+            </Card>
         </Card>
     </div>
 )
