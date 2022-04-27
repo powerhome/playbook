@@ -11,7 +11,7 @@ module Playbook
       prop :grouped, type: Playbook::Props::Boolean, default: false
       prop :height
       prop :title, default: ""
-      prop :tooltip_html, default: '<span style="font-weight: bold; color:{point.color};">●</span>
+      prop :tooltip_html, default: '<span style="font-weight: bold; color:{point.color};">&#9679; </span>
                                       {point.name}: ' + '<b>{point.value}
                                     </b>'
 

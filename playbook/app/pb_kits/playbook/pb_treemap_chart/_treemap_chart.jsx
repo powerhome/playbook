@@ -46,7 +46,7 @@ export default class TreemapChart extends React.Component<TreemapChartProps> {
       height,
       id,
       title = "",
-      tooltipHtml = '<span style="font-weight: bold; color:{point.color};">● </span>{point.name}: <b>{point.value}</b>',
+      tooltipHtml = '<span style="font-weight: bold; color:{point.color};">&#9679; </span>{point.name}: <b>{point.value}</b>',
       type,
     } = this.props
 
