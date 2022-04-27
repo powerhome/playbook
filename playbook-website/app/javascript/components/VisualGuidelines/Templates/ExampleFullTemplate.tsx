@@ -63,6 +63,7 @@ const ExampleFullTemplate = ({
                         />
                         <Pill
                             text="propExample"
+                            textTransform="none"
                         />
                     </Card.Body>
                 </FlexItem>
@@ -81,6 +82,7 @@ const ExampleFullTemplate = ({
                         />
                         <Pill
                             text="valueExample"
+                            textTransform="none"
                             variant="warning"
                         />
                     </Card.Body>

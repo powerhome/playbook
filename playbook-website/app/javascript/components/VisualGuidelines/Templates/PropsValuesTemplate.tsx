@@ -50,6 +50,7 @@ const PropsValuesTemplate = ({
                         />
                         <Pill
                             text="propExample"
+                            textTransform="none"
                         />
                     </Card.Body>
                 </FlexItem>
@@ -67,6 +68,7 @@ const PropsValuesTemplate = ({
                         />
                         <Pill
                             text="valueExample"
+                            textTransform="none"
                             variant="warning"
                         />
                     </Card.Body>
