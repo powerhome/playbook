@@ -13,10 +13,11 @@ module Playbook
 
       selected_props.map do |k|
         display_value = send(k)
-        screen_size = display_value[:size]
-        display = display_value[:display]
-
-        return "display_#{screen_size}_#{display}" unless screen_size.blank? || display.blank?
+        string = ""
+        display_value.each do |key, value|
+          string += "display_#{key}_#{value} "
+        end
+        return string unless string.blank?
       end.compact.join(" ")
     end
 

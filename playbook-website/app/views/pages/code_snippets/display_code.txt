@@ -1,12 +1,27 @@
 React:
 
-<Card display={{ display: "inline", size: "md" }}>
+<Card display={
+  {
+    xs: "hidden",
+    sm: "flex",
+    md: "inline",
+    lg: "inline_block",
+    xl: "block"
+  }
+}>
   Card content
 <Card/>
 
 
 Rails:
 
-<%= pb_rails("card", props: { display: {display: "inline", size: "lg" }}) do %>
+<%= pb_rails("card", props: {
+  display: {
+    xs: "hidden",
+    sm: "flex",
+    md: "inline",
+    lg: "inline_block",
+    xl: "block"
+  }}) do %>
   Card content
 <% end %>
