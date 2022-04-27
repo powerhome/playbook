@@ -2,19 +2,18 @@
 
 module Playbook
   module PbTreemapChart
-    class TreemapChart < ::Playbook::KitBase
+    class TreemapChart < Playbook::KitBase
       prop :chart_data, type: Playbook::Props::Array,
                         default: []
-      prop :drillable
-      prop :subtitle
-      prop :title
-      prop :height
       prop :colors, type: Playbook::Props::Array,
                     default: []
+      prop :drillable, type: Playbook::Props::Boolean, default: false
+      prop :grouped, type: Playbook::Props::Boolean, default: false
+      prop :height
+      prop :title, default: ""
       prop :tooltip_html, default: '<span style="font-weight: bold; color:{point.color};">●</span>
                                       {point.name}: ' + '<b>{point.value}
                                     </b>'
-      prop :grouped
 
       def chart_type
         "treemap"
@@ -22,18 +21,17 @@ module Playbook
 
       def chart_options
         {
-          id: id,
-          className: classname,
           chartData: chart_data,
-          drillable: drillable,
-          dark: dark ? "dark" : "",
-          type: chart_type,
-          title: title,
-          subtitle: subtitle,
-          height: height,
+          className: classname,
           colors: colors,
-          tooltipHtml: tooltip_html,
+          dark: dark ? "dark" : "",
+          drillable: drillable,
           grouped: grouped,
+          height: height,
+          id: id,
+          title: title,
+          tooltipHtml: tooltip_html,
+          type: chart_type,
         }
       end
 
