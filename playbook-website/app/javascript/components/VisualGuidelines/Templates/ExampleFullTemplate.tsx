@@ -5,7 +5,6 @@
 import React from 'react'
 import { Body, Caption, Card, Flex, FlexItem, Pill, SectionSeparator, Title } from 'playbook-ui'
 import { Template as TemplateType } from '../types'
-// import styles from "styles.scss"
 
 const ExampleFullTemplate = ({
 
@@ -88,7 +87,7 @@ const ExampleFullTemplate = ({
                 </FlexItem>
             </Flex>
             <Card
-                // className={styles.templateCardFooter}
+                className={`border_radius_flat`}
                 background="dark"
                 dark
             >
