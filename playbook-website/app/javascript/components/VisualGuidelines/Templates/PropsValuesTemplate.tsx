@@ -13,7 +13,7 @@ const PropsValuesTemplate = ({
         <Title
             size={1}
             paddingTop="xl"
-            marginBottom="sm"
+            marginBottom="xs"
             marginTop="xl"
             tag="h1"
             text="Title 1"
