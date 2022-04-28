@@ -183,15 +183,19 @@ const PROP_CATEGORIES: {[key:string]: (props: {[key: string]: any}) => string} =
   },
   displayProps: ( display: Display ) => {
     let css = ''
-    if (typeof(display) === 'string') {
-      css += display ? `display_${display} ` : ''
-    } else {
-      Object.entries(display).forEach((displayEntry) => {
-        displayEntry[0] == "display" ? Object.entries(displayEntry[1]).forEach((displayObj) => {
-          css += `display_${displayObj[0]}_${displayObj[1]} `
-        }) : ''
-      })
-    }
+    Object.entries(display).forEach((displayEntry) => {
+      if (displayEntry[0] == "display") {
+        if (typeof displayEntry[1] == "string") {
+          css += `display_${displayEntry[1]}`
+        } else if (typeof displayEntry[1] == "object") {
+          Object.entries(displayEntry[1]).forEach((displayObj) => {
+            css += `display_${displayObj[0]}_${displayObj[1]}`
+          })
+        } else {
+          ' '
+        }
+      }
+    })
     return css
   },
   cursorProps: ({ cursor }: Cursor) => {
