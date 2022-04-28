@@ -6,11 +6,8 @@
 
 import React from 'react'
 import { Body, Caption, Card, Flex, FlexItem, Pill, SectionSeparator, Title } from 'playbook-ui'
-import { Template as TemplateType } from '../types'
 
-const PropsValuesTemplate = ({
-
-  }: TemplateType): React.ReactElement => (
+const PropsValuesTemplate = (): React.ReactElement => (
     <div>
         <Title
             size={1}

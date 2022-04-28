@@ -6,11 +6,8 @@
 
 import React from 'react'
 import { Body, Caption, Card, Flex, FlexItem, Pill, SectionSeparator, Title } from 'playbook-ui'
-import { Template as TemplateType } from '../types'
 
-const ExampleFullTemplate = ({
-
-  }: TemplateType): React.ReactElement => (
+const ExampleFullTemplate = (): React.ReactElement => (
     <div>
         <Title
             size={1}

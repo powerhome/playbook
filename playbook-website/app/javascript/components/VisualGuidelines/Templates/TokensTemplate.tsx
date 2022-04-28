@@ -5,11 +5,8 @@
 
 import React from 'react'
 import { Body, Caption, Card, Flex, FlexItem, Title } from 'playbook-ui'
-import { Template as TemplateType } from '../types'
 
-const TokensTemplate = ({
-
-  }: TemplateType): React.ReactElement => (
+const TokensTemplate = (): React.ReactElement => (
     <div>
         <Title
             marginTop="xl"
