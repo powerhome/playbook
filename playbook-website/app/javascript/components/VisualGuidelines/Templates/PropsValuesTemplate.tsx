@@ -1,9 +1,11 @@
 /* eslint-disable flowtype/no-types-missing-file-annotation */
 // React Pure component - do not use state!
-// This template has Props, Values, and Example space
+
+// This template has sections Props, Values, and Example In Use space.
+// This template does not have a Visual Guide section.
 
 import React from 'react'
-import { Background, Body, Caption, Card, Flex, FlexItem, Pill, SectionSeparator, Title } from 'playbook-ui'
+import { Body, Caption, Card, Flex, FlexItem, Pill, SectionSeparator, Title } from 'playbook-ui'
 import { Template as TemplateType } from '../types'
 
 const PropsValuesTemplate = ({

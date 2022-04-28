@@ -1,6 +1,8 @@
 /* eslint-disable flowtype/no-types-missing-file-annotation */
 // React Pure component - do not use state!
-// This template has Visual Guide, Props, Values, and Example space
+
+// This template can be used for examples on the Visual Guidelines page.
+// It has sections for a Visual Guide, Props, Values, and Example In Use space.
 
 import React from 'react'
 import { Body, Caption, Card, Flex, FlexItem, Pill, SectionSeparator, Title } from 'playbook-ui'

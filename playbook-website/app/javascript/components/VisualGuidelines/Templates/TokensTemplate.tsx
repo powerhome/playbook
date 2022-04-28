@@ -1,9 +1,10 @@
 /* eslint-disable flowtype/no-types-missing-file-annotation */
 // React Pure component - do not use state!
-// This template has Visual Guide, Props, Values, and Example space
+
+// This template has an area to display tokens and the example in use in the code.
 
 import React from 'react'
-import { Background, Body, Caption, Card, Flex, FlexItem, Title } from 'playbook-ui'
+import { Body, Caption, Card, Flex, FlexItem, Title } from 'playbook-ui'
 import { Template as TemplateType } from '../types'
 
 const TokensTemplate = ({
