@@ -19,7 +19,7 @@ const TokensTemplate = ({
             text="Tokens"
         />
             <Body marginBottom="lg">
-                {"Make your own styles using Playbook tokens to keep your site consistent"}
+                {"Make your own styles using Playbook tokens to keep your site consistent."}
             </Body>
         <Card
             marginY="sm"
