@@ -5,12 +5,12 @@ __metadata:
   version: 4
   cacheKey: 7
 
-"@actions/core@npm:1.6.0":
-  version: 1.6.0
-  resolution: "@actions/core@npm:1.6.0"
+"@actions/core@npm:1.7.0":
+  version: 1.7.0
+  resolution: "@actions/core@npm:1.7.0"
   dependencies:
     "@actions/http-client": ^1.0.11
-  checksum: 71533cc514e4a158cea7c855610a44376814cc1b897f600aaf97636fc1bf49956bd4f7ef8f1cd04beefe8baa5d001aea40aadafbcbc6b36a62840bc25082e4c4
+  checksum: 96a7dc6bd2d079822cb6792b463bb451d9c15ca7ab5718b3ab150840a3392c43c26a2416980c6223eda89e0c5398c5a1157e9d4a5d6c9acb604284eb784c65c7
   languageName: node
   linkType: hard
 
@@ -1643,7 +1643,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@jest/core@npm:^26.4.2, @jest/core@npm:^26.6.3":
+"@jest/core@npm:^26.6.3":
   version: 26.6.3
   resolution: "@jest/core@npm:26.6.3"
   dependencies:
@@ -6087,10 +6087,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"es5-shim@npm:4.6.5":
-  version: 4.6.5
-  resolution: "es5-shim@npm:4.6.5"
-  checksum: ae13704356b10a6cdbf4db41fcabb025878e0ae719f9ec6a3487eb53e44aee79dfad0cb29d9c2f4378f6de5aeb513d5535742a67d67276aa7ddb273312a4fc53
+"es5-shim@npm:4.6.6":
+  version: 4.6.6
+  resolution: "es5-shim@npm:4.6.6"
+  checksum: fbc303f7d4f9b4837a77a9fea1ea40cff6626f3545b80ef373dc4ba95e3980f7841d8c70cbf271c5e58880edf69ae2e4e99c9ba545fc4cff2e398724bd8f0710
   languageName: node
   linkType: hard
 
@@ -6162,12 +6162,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-plugin-react-hooks@npm:4.4.0":
-  version: 4.4.0
-  resolution: "eslint-plugin-react-hooks@npm:4.4.0"
+"eslint-plugin-react-hooks@npm:4.5.0":
+  version: 4.5.0
+  resolution: "eslint-plugin-react-hooks@npm:4.5.0"
   peerDependencies:
     eslint: ^3.0.0 || ^4.0.0 || ^5.0.0 || ^6.0.0 || ^7.0.0 || ^8.0.0-0
-  checksum: 289f42b2066023672775c102b277f7b0296b4d5e6831a9a531fd639af1be7e0becd856a8ff9a00d4621cf9c5ba08b82b6714e07a1b420651ab11bcfe25062603
+  checksum: ee4dcbc02ed0a425b6157d6d87915e03b9e82d4b8a47e4d65314bc4c133ed08f42444bb3155837f1e11f312c7768d92ba9506ddf6c2cef3e2a958ead529b177d
   languageName: node
   linkType: hard
 
@@ -6938,12 +6938,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"flow-bin@npm:0.174.1":
-  version: 0.174.1
-  resolution: "flow-bin@npm:0.174.1"
+"flow-bin@npm:0.176.3":
+  version: 0.176.3
+  resolution: "flow-bin@npm:0.176.3"
   bin:
     flow: cli.js
-  checksum: 980603d011306aa442d3659227776af43cf900a24890ecfc2eededd5b3c0b6c967ef9d4bb77aa7b176753bab42061bc073866de5cb91614aeb5f125cccf79a3d
+  checksum: 8bac06e079ee34200c48b31f9e05a4332c15c221d2dd6a2307035a3e76179e90a597e5abc84f15f6f644796fba8cc49f2f005e22fc10c7486b504ba64a4d6369
   languageName: node
   linkType: hard
 
@@ -8833,7 +8833,7 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"jest-cli@npm:^26.4.2":
+"jest-cli@npm:^26.6.3":
   version: 26.6.3
   resolution: "jest-cli@npm:26.6.3"
   dependencies:
@@ -9295,16 +9295,16 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"jest@npm:26.4.2":
-  version: 26.4.2
-  resolution: "jest@npm:26.4.2"
+"jest@npm:26.6.3":
+  version: 26.6.3
+  resolution: "jest@npm:26.6.3"
   dependencies:
-    "@jest/core": ^26.4.2
+    "@jest/core": ^26.6.3
     import-local: ^3.0.2
-    jest-cli: ^26.4.2
+    jest-cli: ^26.6.3
   bin:
     jest: bin/jest.js
-  checksum: e577e4863188a5cba6454c9f3208774d7b38562c276aefae4b2abd8ff1006406026c33390bcea33f29a4d83115b3fafdbb113bfcc6124da6b4136797600855ad
+  checksum: 4ffcfefa2b30999a71c205e1aacf2b3d7af10f36c17ba1baf45677684116ad5aa6a5bb162ad2dd418f9ea99d18f24b70d8c83fb317b765a3acac361a50e9db9f
   languageName: node
   linkType: hard
 
@@ -10390,19 +10390,26 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"moment-timezone@npm:^0.5.26":
-  version: 0.5.33
-  resolution: "moment-timezone@npm:0.5.33"
+"moment-timezone@npm:^0.5.34":
+  version: 0.5.34
+  resolution: "moment-timezone@npm:0.5.34"
   dependencies:
     moment: ">= 2.9.0"
-  checksum: d4e72a3514a2885ab26b1cbc640e2f4785c997f9de28bb48bf3994ef137b0a560ca8f07eb07f11121e1223eef0c3bce4bc647b911111481a6a066bbc61285f99
+  checksum: 403165bf5a58858e4428f66aaece7bcb52d072474a74a68361ad63023092cc9cf0369bea95fafea67410ff52bd6e6e3402ab7375adb72d276360e021d83bb15f
   languageName: node
   linkType: hard
 
-"moment@npm:>= 2.9.0, moment@npm:^2.11.2, moment@npm:^2.29.1":
+"moment@npm:>= 2.9.0, moment@npm:^2.11.2":
   version: 2.29.1
   resolution: "moment@npm:2.29.1"
   checksum: 86729013febf7160de5b93da69273dd304d674b0224f9544b3abd09a87671ddd2cdd57598261ce57588910d63747ffd5590965e83c790d8bf327083c0e0a06e0
+  languageName: node
+  linkType: hard
+
+"moment@npm:^2.29.2":
+  version: 2.29.3
+  resolution: "moment@npm:2.29.3"
+  checksum: ab0d432d93ef0f6e40ee8a66feb8cfa15d6b9665c74141890b6488825c6f0cb5edfcc1781b3b84c0c82c4a5ba21a9f1d176e1fd4de705bb8300444e6b7f9209e
   languageName: node
   linkType: hard
 
@@ -11549,7 +11556,7 @@ fsevents@^1.2.7:
   version: 0.0.0-use.local
   resolution: "playbook-ui@workspace:playbook"
   dependencies:
-    "@actions/core": 1.6.0
+    "@actions/core": 1.7.0
     "@actions/github": 4.0.0
     "@babel/cli": ^7.12.1
     "@babel/core": ^7.12.3
@@ -11585,29 +11592,29 @@ fsevents@^1.2.7:
     core-js: 3
     css-loader: 3.6.0
     css-modules-flow-types-loader: 0.3.1
-    es5-shim: 4.6.5
+    es5-shim: 4.6.6
     eslint: 6.8.0
     eslint-plugin-flowtype: 5.10.0
     eslint-plugin-jsx-control-statements: 2.2.1
     eslint-plugin-react: 7.28.0
-    eslint-plugin-react-hooks: 4.4.0
+    eslint-plugin-react-hooks: 4.5.0
     eslint-webpack-plugin: 2.6.0
     filemanager-webpack-plugin: 4.0.0
     flatpickr: ^4.6.6
-    flow-bin: 0.174.1
+    flow-bin: 0.176.3
     flow-runtime: 0.17.0
     highcharts: ^9.0.0
     identity-obj-proxy: 3.0.0
-    jest: 26.4.2
+    jest: 26.6.3
     jest-axe: 4.1.0
     jest-fail-on-console: 2.4.1
     jsx-control-statements: ^3.2.8
     lazysizes: ^5.2.2
     lodash: ^4.17.19
     mini-css-extract-plugin: 0.12.0
-    moment: ^2.29.1
+    moment: ^2.29.2
     moment-strftime: ^0.5.0
-    moment-timezone: ^0.5.26
+    moment-timezone: ^0.5.34
     node-sass: ^4.12.0
     react: ^16.8.6
     react-animate-height: ^2.0.23
@@ -11622,7 +11629,7 @@ fsevents@^1.2.7:
     sass-loader: 7.3.1
     svg-url-loader: ^4.0.0
     trix: 1.3.1
-    ts-loader: 8.2.0
+    ts-loader: 8.4.0
     tsx-control-statements: 4.1.1
     typescript: 4.3.5
     webpack: ^4.0.0
@@ -15178,9 +15185,9 @@ resolve@^2.0.0-next.3:
   languageName: node
   linkType: hard
 
-"ts-loader@npm:8.2.0":
-  version: 8.2.0
-  resolution: "ts-loader@npm:8.2.0"
+"ts-loader@npm:8.4.0":
+  version: 8.4.0
+  resolution: "ts-loader@npm:8.4.0"
   dependencies:
     chalk: ^4.1.0
     enhanced-resolve: ^4.0.0
@@ -15190,7 +15197,7 @@ resolve@^2.0.0-next.3:
   peerDependencies:
     typescript: "*"
     webpack: "*"
-  checksum: c34c66e5193b234e9b2bca3a6ad21a25fc22fb05ac1c9b2e3b6c655adc431033bac60a36c1d0c9caea473ea91748e29f41bf91f25fad3930a32c06cbdee7d9f3
+  checksum: 9b76e5a76d65d1102c652ee55d09b9f3ca7cb504f98e9e0997aadf4ee49c0875d7df75b8072ae4fc1585f680599dbe76b14124b2588c7bb24b3ad19ca357495c
   languageName: node
   linkType: hard
 

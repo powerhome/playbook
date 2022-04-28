@@ -16,6 +16,7 @@ RSpec.describe Playbook::PbCard::CardHeader do
       expect(subject.new(header_color: "category_2").classname).to eq "pb_card_header_kit_category_2"
       expect(subject.new(header_color: "siding").classname).to eq "pb_card_header_kit_siding"
       expect(subject.new(header_color: "gutters").classname).to eq "pb_card_header_kit_gutters"
+      expect(subject.new(header_color: "bg_dark").classname).to eq "pb_card_header_kit_bg_dark"
       expect(subject.new(classname: "additional_class").classname).to eq "pb_card_header_kit_category_1 additional_class"
     end
   end

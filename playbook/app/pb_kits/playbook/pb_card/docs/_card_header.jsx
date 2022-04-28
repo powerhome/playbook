@@ -111,6 +111,58 @@ const CardHeader = (props) => {
         </Card.Body>
       </Card>
 
+      <br />
+
+      <Title
+          {...props}
+          size={4}
+          tag="h4"
+          text="Background Colors"
+      />
+
+      <br />
+
+      <Card
+          {...props}
+          padding="none"
+      >
+        <Card.Header
+            headerColor="white"
+        >
+          <Body
+              {...props}
+              text="White"
+          />
+        </Card.Header>
+        <Card.Body>
+          <Body
+              {...props}
+              text="Body"
+          />
+        </Card.Body>
+      </Card>
+
+      <br />
+
+      <Card
+          {...props}
+          padding="none"
+      >
+        <Card.Header
+            headerColor="dark"
+        >
+          <Body
+              {...props}
+              text="Dark"
+          />
+        </Card.Header>
+        <Card.Body>
+          <Body
+              {...props}
+              text="Body"
+          />
+        </Card.Body>
+      </Card>
     </div>
   )
 }
