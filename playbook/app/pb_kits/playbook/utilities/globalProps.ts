@@ -1,8 +1,12 @@
 import { omit } from 'lodash'
 
-type Sizes = "xxs" | "xs" | "sm" | "md" | "lg" | "xl"
-type None = "none"
-type DisplayType = "hidden" | "flex" | "inline" | "inline_block" | "block"
+import {
+  Binary,
+  Display,
+  DisplaySizes,
+  None,
+  Sizes,
+} from '../types'
 
 type AllSizes = None & Sizes
 
@@ -43,15 +47,11 @@ type ZIndex = {
 }
 
 type Shadow = {
-  shadow?: "none" | "deep" | "deeper" | "deepest",
+  shadow?: None | "deep" | "deeper" | "deepest",
 }
 
 type LineHeight = {
   lineHeight?: "loosest" | "looser" | "loose" | "normal" | "tight" | "tighter" | "tightest",
-}
-
-type Display = {
-  [key in Sizes]: DisplayType
 }
 
 type Cursor = {
@@ -59,11 +59,11 @@ type Cursor = {
 }
 
 type BorderRadius = {
-  borderRadius?: "none" | "xs" | "sm" | "md" | "lg" | "xl" | "rounded",
+  borderRadius?: None | "xs" | "sm" | "md" | "lg" | "xl" | "rounded",
 }
 
 type Flex = {
-  flex?: "none" | "initial" | "auto" | 1
+  flex?: None | "initial" | "auto" | 1
 }
 
 type FlexDirection = {
@@ -71,11 +71,11 @@ type FlexDirection = {
 }
 
 type FlexGrow = {
-  flexGrow?: 0 | 1
+  flexGrow?: Binary
 }
 
 type FlexShrink = {
-  flexShrink?: 0 | 1
+  flexShrink?: Binary
 }
 
 type FlexWrap = {
@@ -107,11 +107,11 @@ type AlignSelf = {
 }
 
 type Order = {
-  order?: "none" | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12
+  order?: None | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12
 }
 
 export type GlobalProps = AlignContent & AlignItems & AlignSelf &
-  BorderRadius & Cursor & Dark & Display & Flex & FlexDirection &
+  BorderRadius & Cursor & Dark & Display & DisplaySizes & Flex & FlexDirection &
   FlexGrow & FlexShrink & FlexWrap & JustifyContent & JustifySelf &
   LineHeight & Margin & MaxWidth & NumberSpacing & Order & Padding &
   Shadow & ZIndex
@@ -181,13 +181,17 @@ const PROP_CATEGORIES: {[key:string]: (props: {[key: string]: any}) => string} =
     css += lineHeight ? `line_height_${lineHeight} ` : ''
     return css
   },
-  displayProps: ( display: Display) => {
+  displayProps: ( display: Display ) => {
     let css = ''
-    Object.entries(display).forEach((displayEntry) => {
-      displayEntry[0] == "display" ? Object.entries(displayEntry[1]).forEach((displayObj) => {
-        css += `display_${displayObj[0]}_${displayObj[1]} `
-      }) : ''
-    })
+    if (typeof(display) === 'string') {
+      css += display ? `display_${display} ` : ''
+    } else {
+      Object.entries(display).forEach((displayEntry) => {
+        displayEntry[0] == "display" ? Object.entries(displayEntry[1]).forEach((displayObj) => {
+          css += `display_${displayObj[0]}_${displayObj[1]} `
+        }) : ''
+      })
+    }
     return css
   },
   cursorProps: ({ cursor }: Cursor) => {
@@ -264,7 +268,9 @@ const PROP_CATEGORIES: {[key:string]: (props: {[key: string]: any}) => string} =
   }
 }
 
-export const globalProps = (props: GlobalProps, defaultProps: {[key: string]: string} | {} = {}): string => {
+type DefaultProps = {[key: string]: string} | Record<string, unknown>
+
+export const globalProps = (props: GlobalProps, defaultProps: DefaultProps = {}): string => {
   const allProps = { ...props, ...defaultProps }
   return Object.keys(PROP_CATEGORIES).map((key) => {
     return PROP_CATEGORIES[key](allProps)

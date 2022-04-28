@@ -8,23 +8,30 @@ module Playbook
 
     def display_props
       selected_props = display_options.keys.select { |sk| try(sk) }
-
-      return nil unless selected_props.present?
-
-      selected_props.map do |k|
-        display_value = send(k)
-        string = ""
+      responsive = selected_props.present? && try(:display).is_a?(::Hash)
+      css = ""
+      if responsive
+        display_value = send(:display)
         display_value.each do |key, value|
-          string += "display_#{key}_#{value} "
+          css += "display_#{key}_#{value} " if display_size_values.include?(key.to_s) && display_values.include?(value.to_s)
         end
-        return string unless string.blank?
-      end.compact.join(" ")
+      else
+        selected_props.each do |k|
+          display_value = send(k)
+          css += "display_#{display_value}" if display_values.include? display_value
+        end
+      end
+      css unless css.blank?
     end
 
     def display_options
       {
         display: "display",
       }
+    end
+
+    def display_size_values
+      %w[xs sm md lg xl]
     end
 
     def display_values
