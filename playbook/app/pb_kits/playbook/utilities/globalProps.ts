@@ -181,7 +181,7 @@ const PROP_CATEGORIES: {[key:string]: (props: {[key: string]: any}) => string} =
     css += lineHeight ? `line_height_${lineHeight} ` : ''
     return css
   },
-  displayProps: ( display: Display ) => {
+  displayProps: (display: Display ) => {
     let css = ''
     Object.entries(display).forEach((displayEntry) => {
       if (displayEntry[0] == "display") {

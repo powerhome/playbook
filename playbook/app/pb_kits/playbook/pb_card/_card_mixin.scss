@@ -32,7 +32,7 @@ $pb_card_header_colors: map-merge(map-merge($product_colors, $additional_colors)
 
 @mixin pb_card($background: $card_light, $border_color: $border_light) {
   position: relative;
-  // display: flex;
+  display: flex;
   flex-direction: column;
   min-width: 0;
   word-wrap: break-word;
