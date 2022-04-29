@@ -27,11 +27,10 @@
     <% end %>
   <% end %>
   <%= pb_rails("background", props: { id: "code-wrapper", classname: "border-bottom", background_color: "dark", padding: "none" }) do %>
-    <%= render partial: "pages/visual_guidelines_partials/partial_code_example",
-      locals: {
-        example: "app/views/pages/code_snippets/display_code.txt"
-      }
-    %>
+    <%= pb_rails("caption", props: { text: "EXAMPLE IN USE", padding_top: "lg", margin_x: "xl", classname: "dark" }) %>
+    <div class="pb--codeCopy">
+      <pre class="highlight pt_sm" style="margin: 0px"><%= raw rouge(@display_in_use_code_example, "react") %></pre>
+    </div>
   <% end %>
 <% end %>
 <%= render "pages/visual_guidelines_partials/display_breakpoints"%>
