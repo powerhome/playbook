@@ -3,7 +3,7 @@
 import React from 'react'
 
 import classnames from 'classnames'
-import Title from '../pb_title/_title'
+import Title from '../pb_title/_title.jsx'
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
 import { globalProps } from '../utilities/globalProps'
 
