@@ -5,13 +5,11 @@ $flex_direction_values: (
   column_reverse: column-reverse
 );
 
-$media-query-breakpoints: (
-  xs: "xs",
-  sm: "sm",
-  md: "md",
-  lg: "lg",
-  xl: "xl"
-);
+@include break_at(breakpoint("lg")) {
+  .test {
+    display: none;
+  }
+}
 
 @each $flex-direction, $flex-direction-value in $flex_direction_values {
   .flex_direction_#{$flex-direction} {
@@ -21,12 +19,10 @@ $media-query-breakpoints: (
 }
 
 @each $flex-direction, $flex-direction-value in $flex_direction_values {
-  @each $breakpoint, $breakpoint-value in $media-query-breakpoints {
+  @each $breakpoint, $breakpoint-value in $breakpoints {
     .flex_direction_#{$breakpoint}_#{$flex-direction} {
       display: flex;
-      @include break_at( breakpoint($breakpoint-value)) {
-        flex-direction: #{$flex-direction-value} !important;
-      }
+      flex-direction: #{$flex-direction-value} !important;
     }
   }
 }

@@ -67,6 +67,22 @@ $display_values: (
     block: $display_block
 );
 
+@mixin break_on($min: null, $max: null) {
+  @if not $max {
+    @media screen and (min-width: $min) {
+      @content;
+    }
+  } @else if not $min {
+    @media screen and (max-width: $max) {
+      @content;
+    }
+  } @else {
+    @media screen and (min-width: $min) and (max-width: $max) {
+      @content;
+    }
+  }
+}
+
 @each $size, $size_value in $breakpoints {
     @each $display, $display_value in $display_values {
         $min_size: map-get($size_value, "min");

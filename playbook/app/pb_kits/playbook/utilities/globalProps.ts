@@ -44,10 +44,11 @@ type FlexDirection = {
   flexDirection?: "row" | "column" | "rowReverse" | "columnReverse"
 }
 
+// type FlexDirectionOptions = "row" | "column" | "row_reverse" | "column_reverse"
+
 type FlexGrow = {
   flexGrow?: 0 | 1
 }
-// type FlexDirectionOptions = "row" | "column" | "row_reverse" | "column_reverse"
 
 type FlexShrink = {
   flexShrink?: Binary
@@ -215,14 +216,15 @@ const PROP_CATEGORIES: {[key:string]: (props: {[key: string]: any}) => string} =
     return alignSelf ? `align_self_${alignSelf}` : ''
   },
   flexDirectionProps: ({ flexDirection }: FlexDirection) => {
-    if (typeof flexDirection !== 'object') return
-
-    const flexKeys: string[] = Object.keys(flexDirection)
-
-    return flexKeys.map((key: Sizes) => {
-      const flexDirectionValue: string = flexDirection[key]
-      return `flex_direction_${key}_${flexDirectionValue}`
-    }).join(" ")
+    if (typeof flexDirection == 'object') {
+      const flexKeys: string[] = Object.keys(flexDirection)
+      return flexKeys.map((size: Sizes) => {
+        const flexDirectionValue: string = flexDirection[size]
+        return `flex_direction_${size}_${flexDirectionValue}`
+      }).join(" ")
+    } else {
+      return flexDirection ? `flex_direction_${camelToSnakeCase(flexDirection)}` : ''
+    }
   },
   flexWrapProps: ({ flexWrap }: FlexWrap) => {
     let css = ''
@@ -233,10 +235,10 @@ const PROP_CATEGORIES: {[key:string]: (props: {[key: string]: any}) => string} =
     return flex ? `flex_${flex}` : ''
   },
   flexGrowProps: ({ flexGrow }: FlexGrow) => {
-    return typeof(flexGrow) !== undefined ? `flex_grow_${flexGrow}` : ''
+    return flexGrow ? `flex_grow_${flexGrow}` : ''
   },
   flexShrinkProps: ({ flexShrink }: FlexShrink) => {
-    return typeof(flexShrink) !== undefined ? `flex_shrink_${flexShrink}` : ''
+    return flexShrink ? `flex_shrink_${flexShrink}` : ''
   },
   justifyContentProps: ({ justifyContent }: JustifyContent) => {
     return justifyContent ? `justify_content_${camelToSnakeCase(justifyContent)}` : ''
