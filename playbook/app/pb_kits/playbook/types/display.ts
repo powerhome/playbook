@@ -4,6 +4,6 @@ export type Display = {
 
 export type DisplayType = "hidden" | "flex" | "inline" | "inline_block" | "block"
 
-export type DisplaySizes = {[key: string]: DisplayType}
+export type DisplaySizes = {[key: string]: DisplayType | any}
 
 export type None = "none"
