@@ -186,10 +186,10 @@ const PROP_CATEGORIES: {[key:string]: (props: {[key: string]: any}) => string} =
     Object.entries(display).forEach((displayEntry) => {
       if (displayEntry[0] == "display") {
         if (typeof displayEntry[1] == "string") {
-          css += `display_${displayEntry[1]}`
+          css += `display_${displayEntry[1]} `
         } else if (typeof displayEntry[1] == "object") {
           Object.entries(displayEntry[1]).forEach((displayObj) => {
-            css += `display_${displayObj[0]}_${displayObj[1]}`
+            css += `display_${displayObj[0]}_${displayObj[1]} `
           })
         } else {
           ' '

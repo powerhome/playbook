@@ -20,7 +20,7 @@
     display: inline-flex;
 }
 
-.display_hidden {
+.display_none {
     display: none;
 }
 
@@ -60,10 +60,11 @@ $breakpoints: (
 
 
 $display_values: (
-    hidden: $display_hidden,
+    none: $display_none,
     flex: $display_flex,
     inline: $display_inline,
     inline_block: $display_inline_block,
+    inline_flex: $display_inline_flex,
     block: $display_block
 );
 
@@ -71,10 +72,10 @@ $display_values: (
     @each $display, $display_value in $display_values {
         $min_size: map-get($size_value, "min");
         $max_size: map-get($size_value, "max");
-        @include break_on($min_size, $max_size) {
-            .display_#{$size}_#{$display} {
-                display: #{$display_value} !important;
-            }
+        .display_#{$size}_#{$display} {
+          @include break_on($min_size, $max_size) {
+            display: #{$display_value} !important;
+          }
         }
     }
 }

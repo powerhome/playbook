@@ -10,11 +10,11 @@ $screen-xl-min: 1200px;
 $screen-xl-max: $screen-xl-min - 1;
 
 $breakpoints: (
-  xs: $screen-xs-min, // $screen-xs-min
-  sm: $screen-sm-min, // $screen-xs-min + 1 thru $screen-md-min
-  md: $screen-md-min, // $screen-md-min + 1 thru $screen-md-lg
-  lg: $screen-lg-min, // $screen-lg-min + 1 thru $screen-md-xl
-  xl: $screen-xl-min  // $screen-xl-min + 1
+  xs: $screen-xs-min,
+  sm: $screen-sm-min,
+  md: $screen-md-min,
+  lg: $screen-lg-min,
+  xl: $screen-xl-min
 );
 
 
