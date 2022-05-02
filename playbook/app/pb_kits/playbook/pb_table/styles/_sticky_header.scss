@@ -1,0 +1,21 @@
+@import "../../tokens/colors";
+
+[class^="pb_table"] {
+  &.sticky-header {
+    thead {
+      position: sticky;
+      background: $white;
+      top: -40px;
+    }
+  }
+
+  &.dark {
+    &.sticky-header {
+      thead {
+        position: sticky;
+        background: #0a0527;
+        top: 0;
+      }
+    }
+  }
+}
