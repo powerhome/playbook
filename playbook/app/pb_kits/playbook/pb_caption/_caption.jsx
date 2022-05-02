@@ -1,22 +1,24 @@
+/* @flow */
+
 import React from 'react'
 import classnames from 'classnames'
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
-import { deprecatedProps, globalProps, GlobalProps } from '../utilities/globalProps'
+import { deprecatedProps, globalProps } from '../utilities/globalProps'
 
 type CaptionProps = {
-  aria?: {[key: string]: string},
-  children: React.ReactChild[],
+  aria?: object,
+  children: array<React.ReactNode> | React.ReactNode,
   className?: string,
   color?: "default" | "light" | "lighter" | "success" | "error" | "link",
-  data?: {[key: string]: string},
+  data?: object,
   id?: string,
   size?: "xs" | "sm" | "md" | "lg" | "xl",
   tag?: "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "p" | "span" | "div" | "caption",
   text?: string,
   variant?: null | "link",
-} & GlobalProps;
+};
 
-const Caption = (props: CaptionProps): React.ReactElement => {
+const Caption = (props: CaptionProps) => {
   if (props.variant) deprecatedProps('Title', ['variant']) //variant prop is deprecated, use color instead
   const {
     aria = {},
@@ -30,7 +32,6 @@ const Caption = (props: CaptionProps): React.ReactElement => {
     text,
     variant = null,
   } = props
-
   const tagOptions = [
     'h1',
     'h2',
