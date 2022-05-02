@@ -8,9 +8,9 @@ import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
 import { GlobalProps, globalProps } from '../utilities/globalProps'
 
 type PillProps = {
-  aria?: {[key: string] :string},
+  aria?: {[key: string]: string},
   className?: string,
-  data?: {[key: string] :string},
+  data?: {[key: string]: string},
   id?: string,
   text: string,
   variant?: "success" | "warning" | "error" | "info" | "neutral",
