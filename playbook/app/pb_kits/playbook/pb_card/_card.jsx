@@ -1,4 +1,3 @@
-/* eslint-disable react/no-multi-comp */
 /* @flow */
 
 import React from 'react'
@@ -30,7 +29,7 @@ type CardHeaderProps = {
   headerColor?: BackgroundColors | ProductColors | CategoryColors | "none",
   children: array<React.ReactNode> | React.ReactNode,
   className?: string,
-  padding?: string
+  padding?: string,
 }
 
 type CardBodyProps = {
@@ -57,7 +56,6 @@ const Header = (props: CardHeaderProps) => {
 const Body = (props: CardBodyProps) => {
   const { children, padding = 'md', className } = props
   const bodyCSS = buildCss('pb_card_body_kit')
-
   const bodySpacing = globalProps(props, { padding })
 
   return (
