@@ -20,7 +20,6 @@ kits:
     - gauge
     - legend
     - line_graph
-    - treemap_chart
   - dialog
   - filter
   - fixed_confirmation_toast

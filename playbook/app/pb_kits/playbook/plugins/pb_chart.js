@@ -7,7 +7,6 @@ import colors from '../tokens/exports/_colors.scss'
 import pie from 'highcharts/modules/variable-pie'
 import highchartsMore from 'highcharts/highcharts-more'
 import solidGauge from 'highcharts/modules/solid-gauge'
-import treemap from 'highcharts/modules/treemap'
 
 pie(Highcharts)
 
@@ -64,8 +63,6 @@ class pbChart {
       this.setupPieChart(options)
     } else if (this.options.type == 'gauge') {
       this.setupGauge(options)
-    } else if (this.options.type == 'treemap') {
-      this.setupTreemap(options)
     } else {
       this.setupChart(options)
     }
@@ -191,37 +188,6 @@ class pbChart {
         borderColor: options.borderWidth == 20 ? null : this.defaults.innerSize,
       }],
       credits: false,
-    })
-  }
-
-  setupTreemap(options) {
-    treemap(Highcharts)
-    this.setupTheme()
-    options.dark ? Highcharts.setOptions(highchartsDarkTheme) :  Highcharts.setOptions(highchartsTheme)
-
-    Highcharts.chart(this.defaults.id, {
-      title: {
-        text: this.defaults.title,
-      },
-      chart: {
-        height: this.defaults.height,
-        type: this.defaults.type,
-      },
-      credits: false,
-      series: [{
-        data: this.defaults.chartData,
-      }],
-      plotOptions: {
-        treemap: {
-          allowTraversingTree: this.defaults.drillable,
-          colorByPoint: !this.defaults.grouped,
-          colors: options.colors !== undefined && options.colors.length > 0 ? mapColors(options.colors) : highchartsTheme.colors,
-        },
-      },
-      tooltip: {
-        pointFormat: this.defaults.tooltipHtml,
-        useHTML: true,
-      },
     })
   }
 

@@ -4,6 +4,7 @@ import 'lazysizes/plugins/attrchange/ls.attrchange'
 import 'lazysizes'
 
 // vvv React Component JSX Imports from the React Kits vvv
+export { default as Walkthrough } from './pb_walkthrough/_walkthrough'
 export { default as Avatar } from './pb_avatar/_avatar'
 export { default as AvatarActionButton } from './pb_avatar_action_button/_avatar_action_button'
 export { default as Background } from './pb_background/_background'
@@ -97,11 +98,9 @@ export { default as Title } from './pb_title/_title'
 export { default as TitleCount } from './pb_title_count/_title_count'
 export { default as TitleDetail } from './pb_title_detail/_title_detail'
 export { default as Toggle } from './pb_toggle/_toggle'
-export { default as TreemapChart } from './pb_treemap_chart/_treemap_chart'
 export { default as Typeahead } from './pb_typeahead/_typeahead'
 export { default as User } from './pb_user/_user'
 export { default as UserBadge } from './pb_user_badge/_user_badge'
-export { default as Walkthrough } from './pb_walkthrough/_walkthrough'
 export { default as WeekdayStacked } from './pb_weekday_stacked/_weekday_stacked'
 // ^^^ React Component JSX Imports from the React Kits ^^^
 
