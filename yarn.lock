@@ -6938,12 +6938,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"flow-bin@npm:0.176.3":
-  version: 0.176.3
-  resolution: "flow-bin@npm:0.176.3"
+"flow-bin@npm:0.177.0":
+  version: 0.177.0
+  resolution: "flow-bin@npm:0.177.0"
   bin:
     flow: cli.js
-  checksum: 8bac06e079ee34200c48b31f9e05a4332c15c221d2dd6a2307035a3e76179e90a597e5abc84f15f6f644796fba8cc49f2f005e22fc10c7486b504ba64a4d6369
+  checksum: 7f4127f7b26ad0d78d7eb2ebf759241e1c2b3554da0b617e0109d982da706c2ff55963cc7b3a8bfacf664e55570fcd50db89b99b7c7b93f97a9d1036a6297731
   languageName: node
   linkType: hard
 
@@ -11594,7 +11594,7 @@ fsevents@^1.2.7:
     eslint-webpack-plugin: 2.6.0
     filemanager-webpack-plugin: 4.0.0
     flatpickr: ^4.6.6
-    flow-bin: 0.176.3
+    flow-bin: 0.177.0
     flow-runtime: 0.17.0
     highcharts: ^9.0.0
     identity-obj-proxy: 3.0.0
