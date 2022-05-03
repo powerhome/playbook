@@ -1,5 +1,5 @@
 import React from 'react'
-import Pill from '../_pill.tsx'
+import Pill from '../_pill'
 
 const PillVariants = (props) => {
   return (
