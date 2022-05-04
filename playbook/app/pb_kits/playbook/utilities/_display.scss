@@ -24,41 +24,6 @@
     display: none;
 }
 
-$screen-xs-min: 575px;
-$screen-xs-max: $screen-xs-min - 1;
-$screen-sm-min: 576px;
-$screen-sm-max: $screen-sm-min - 1;
-$screen-md-min: 768px;
-$screen-md-max: $screen-md-min - 1;
-$screen-lg-min: 992px;
-$screen-lg-max: $screen-lg-min - 1;
-$screen-xl-min: 1200px;
-$screen-xl-max: $screen-xl-min - 1;
-
-$breakpoints: (
-    xs: (
-        // min: 0,
-        max: $screen-xs-min // 575
-    ),
-    sm: (
-        min: $screen-sm-min, // 576
-        max: $screen-md-max  // 767
-    ),
-    md: (
-        min: $screen-md-min, // 768
-        max: $screen-lg-max // 991
-    ),
-    lg: (
-        min: $screen-lg-min, // 992
-        max: $screen-xl-max // 1199
-    ),
-    xl: (
-        min: $screen-xl-min, //1200
-        // max: 0
-    )
-);
-
-
 $display_values: (
     none: $display_none,
     flex: $display_flex,
@@ -68,7 +33,8 @@ $display_values: (
     block: $display_block
 );
 
-@each $size, $size_value in $breakpoints {
+// using a grid here
+@each $size, $size_value in $breakpoints_grid {
     @each $display, $display_value in $display_values {
         $min_size: map-get($size_value, "min");
         $max_size: map-get($size_value, "max");
