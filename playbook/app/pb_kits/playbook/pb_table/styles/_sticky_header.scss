@@ -13,7 +13,7 @@
   &.dark {
     &.sticky-header {
       thead {
-        background: #0a0527;
+        background: $bg_dark;
         position: sticky;
         top: -40px;
         z-index: 10;
