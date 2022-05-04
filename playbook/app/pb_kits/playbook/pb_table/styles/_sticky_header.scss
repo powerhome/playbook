@@ -5,8 +5,8 @@
     thead {
       background: $white;
       position: sticky;
-      top: -40px;
-      z-index: 10;
+      top: 0;
+      z-index: 1;
     }
   }
 
@@ -15,8 +15,8 @@
       thead {
         background: $bg_dark;
         position: sticky;
-        top: -40px;
-        z-index: 10;
+        top: 0;
+        z-index: 1;
       }
     }
   }
