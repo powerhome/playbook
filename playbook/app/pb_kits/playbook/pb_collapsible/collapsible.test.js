@@ -33,7 +33,7 @@ test('returns namespaced additional_class class name', () => {
         data={{ testid: testId }}
     >
       <Collapsible.Main>
-        <div>{'Main Section'}</div>
+        <div>{'Main Sections'}</div>
       </Collapsible.Main>
       <Collapsible.Content>
         <div>

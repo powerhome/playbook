@@ -50,7 +50,7 @@ const CollapsibleMain = ({
             vertical="center"
         >
           <FlexItem>{children}</FlexItem>
-          <FlexItem><Icon collapsed={context.collapsed} /></FlexItem>
+          <FlexItem curser="pointer"><Icon collapsed={context.collapsed} /></FlexItem>
         </Flex>
       </div>
     </div>

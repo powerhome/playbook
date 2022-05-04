@@ -21,5 +21,8 @@
   "lint-staged": {
     "*.{js,jsx}": "eslint",
     "*.rb": "bundle exec --gemfile=playbook-website/Gemfile rubocop --parallel"
+  },
+  "resolutions": {
+    "playbook-ui": "portal:/Users/drew/Development/playbook/playbook"
   }
 }
