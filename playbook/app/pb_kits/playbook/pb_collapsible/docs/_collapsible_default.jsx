@@ -3,7 +3,7 @@ import { Collapsible } from '../..'
 
 const CollapsibleDefault = () => (
   <Collapsible>
-    <Collapsible.Main cursor="pointer">
+    <Collapsible.Main>
       <div>{'Main Section'}</div>
     </Collapsible.Main>
     <Collapsible.Content>

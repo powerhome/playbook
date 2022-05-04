@@ -35,12 +35,14 @@ const Icon = ({ collapsed }: IconProps) => {
 const CollapsibleMain = ({
   children,
   className,
+  cursor = 'pointer',
   padding = 'md',
+
   ...props
 }: CollapsibleMainProps) => {
   const context = useContext(CollapsibleContext)
   const mainCSS = buildCss('pb_collapsible_main_kit')
-  const mainSpacing = globalProps(props, { padding })
+  const mainSpacing = globalProps(props, { cursor, padding })
 
   return (
     <div className={classnames(mainCSS, className, mainSpacing)}>
@@ -50,7 +52,7 @@ const CollapsibleMain = ({
             vertical="center"
         >
           <FlexItem>{children}</FlexItem>
-          <FlexItem curser="pointer"><Icon collapsed={context.collapsed} /></FlexItem>
+          <FlexItem><Icon collapsed={context.collapsed}/></FlexItem>
         </Flex>
       </div>
     </div>
