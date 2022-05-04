@@ -7,4 +7,4 @@ React Example: `<thead style={{ top: "-16px" }}>`
 Rails Example: `<thead style="top: -16px">`
 
 Sticky will not work if any parent/ancestor of the sticky element has any of the `overflow` properties set. By specifying a height on the overflowing container, you should be able to make sticky work.
-If the parent element has no `height` set then the sticky element won't have any area to stick to when scrolling.
+If the parent element has no `height` set, then the sticky element won't have any area to stick to when scrolling.
