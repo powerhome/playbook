@@ -3,18 +3,20 @@
 [class^="pb_table"] {
   &.sticky-header {
     thead {
-      position: sticky;
       background: $white;
+      position: sticky;
       top: -40px;
+      z-index: 10;
     }
   }
 
   &.dark {
     &.sticky-header {
       thead {
-        position: sticky;
         background: #0a0527;
+        position: sticky;
         top: -40px;
+        z-index: 10;
       }
     }
   }
