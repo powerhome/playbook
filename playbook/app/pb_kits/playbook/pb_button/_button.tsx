@@ -1,17 +1,16 @@
-/* @flow */
-
 import React from 'react'
 import classnames from 'classnames'
 import { buildAriaProps, buildDataProps } from '../utilities/props'
-import { globalProps } from '../utilities/globalProps'
+import { GlobalProps, globalProps } from '../utilities/globalProps'
 
-import Icon from '../pb_icon/_icon.jsx'
+import Icon from '../pb_icon/_icon'
 
-type EventHandler = (SyntheticInputEvent<HTMLInputElement>) => void
+type EventHandler = (React.ChangeEvent<HTMLInputElement>)
+
 type ButtonPropTypes = {
-  aria?: object,
-  children?: array<React.ReactChild>,
-  className?: string | array<string>,
+  aria?: {[key: string]: string},
+  children?: Array<React.ReactChild>,
+  className?: string | Array<string>,
   data?: object,
   disabled?: boolean,
   fixedWidth?: boolean,
@@ -30,7 +29,7 @@ type ButtonPropTypes = {
   value?: string | null,
   variant: 'primary' | 'secondary' | 'link',
   wrapperClass: string,
-}
+} & GlobalProps
 
 const buttonClassName = (props: ButtonPropTypes) => {
   const {
@@ -92,10 +91,9 @@ const Button = (props: ButtonPropTypes) => {
 
   const content = (
     <span className="pb_button_content">
-      <If condition={icon !== null}>
+      {icon && (
         <i className={`pb_icon_kit far fa-${icon} fa-fw`} />
-        {' '}
-      </If>
+      )}
       <span>{text || children}</span>
     </span>
   )
