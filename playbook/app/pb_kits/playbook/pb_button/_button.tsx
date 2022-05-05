@@ -9,8 +9,8 @@ type EventHandler = (React.MouseEventHandler<HTMLElement>)
 
 type ButtonPropTypes = {
   aria?: {[key: string]: string},
-  children?: Array<React.ReactChild>,
-  className?: string | Array<string>,
+  children?: React.ReactChild[] | React.ReactChild,
+  className?: string | string[],
   data?: object,
   disabled?: boolean,
   fixedWidth?: boolean,
