@@ -12,7 +12,7 @@ test('returns namespaced class name', () => {
   )
 
   const kit = screen.getByTestId('primary-test')
-  expect(kit).toHaveClass('pb_title_kit_3')
+  expect(kit).toHaveClass('pb_title_kit_size_3')
 })
 
 test('with colors', () => {
@@ -25,5 +25,5 @@ test('with colors', () => {
   )
 
   const kit = screen.getByTestId('primary-test')
-  expect(kit).toHaveClass('pb_title_kit_3_success')
+  expect(kit).toHaveClass('pb_title_kit_size_3_success')
 })
