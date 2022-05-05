@@ -12,7 +12,7 @@ Gem::Specification.new do |s|
   s.homepage    = "http://playbook.powerapp.cloud"
   s.summary     = "Playbook Design System"
   s.description = "Playbook Design System. Built for Nitro, but powering all."
-  s.license     = "MIT"
+  s.license     = "ISC"
 
   s.files = Dir[
     "app/pb_kits/playbook/pb_*/**/*",
@@ -29,10 +29,10 @@ Gem::Specification.new do |s|
   s.add_dependency "actionpack", ">= 5.2.4.5"
   s.add_dependency "actionview", ">= 5.2.4.5"
   s.add_dependency "activesupport", ">= 5.2.4.5"
-  s.add_dependency "react-rails", "~> 2.6"
+  s.add_dependency "react-rails", "2.6.1"
   s.add_dependency "redcarpet", "~> 3.5"
   s.add_dependency "rouge", "~> 3.15"
-  s.add_dependency "view_component", "~> 2.47"
+  s.add_dependency "view_component", "2.48.0"
   s.add_dependency "webpacker-react", "~> 0.3.2"
 
   s.add_development_dependency "byebug", "11.0.0"

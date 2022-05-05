@@ -209,6 +209,43 @@ const highchartsTheme = {
         threshold: null,
       },
     },
+
+    //TREEMAP CHART STYLES
+    treemap: {
+      layoutAlgorithm: "squarified",
+      allowTraversingTree: false,
+      animationLimit: 1000,
+      colors: [
+        colors.data_1,
+        colors.data_2,
+        colors.data_3,
+        colors.data_4,
+        colors.data_5,
+        colors.data_6,
+        colors.data_7,
+        colors.data_8,
+      ],
+      colorByPoint: true,
+      dataLabels: {
+        enabled: true,
+        style: {
+          fontFamily: typography.font_family_base,
+          fontWeight: typography.bold,
+          fontSize: typography.heading_4,
+        },
+      },
+      levels: [
+        {
+          level: 1,
+          dataLabels: {
+            enabled: false,
+          },
+        },
+      ],
+      traverseUpButton: {
+        position: { y: -40 },
+      }
+    },
   },
 }
 

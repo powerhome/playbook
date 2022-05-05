@@ -40,4 +40,7 @@
     @include border-example;
     border-radius: $border_radius_none;
   }
+  &_flat {
+    border-radius: 0 0 6px 6px !important;
+  }
 }

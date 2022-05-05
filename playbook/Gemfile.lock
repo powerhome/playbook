@@ -1,14 +1,14 @@
 PATH
   remote: .
   specs:
-    playbook_ui (10.24.0)
+    playbook_ui (10.25.1)
       actionpack (>= 5.2.4.5)
       actionview (>= 5.2.4.5)
       activesupport (>= 5.2.4.5)
-      react-rails (~> 2.6)
+      react-rails (= 2.6.1)
       redcarpet (~> 3.5)
       rouge (~> 3.15)
-      view_component (~> 2.47)
+      view_component (= 2.48.0)
       webpacker-react (~> 0.3.2)
 
 GEM
@@ -241,7 +241,7 @@ GEM
     tzinfo-data (1.2018.9)
       tzinfo (>= 1.0.0)
     unicode-display_width (2.1.0)
-    view_component (2.50.0)
+    view_component (2.48.0)
       activesupport (>= 5.0.0, < 8.0)
       method_source (~> 1.0)
     webpacker (5.4.3)

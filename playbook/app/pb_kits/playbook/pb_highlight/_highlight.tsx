@@ -1,28 +1,30 @@
-/* @flow */
 /* eslint-disable react/no-multi-comp, flowtype/space-before-type-colon */
 import Highlighter from 'react-highlight-words'
 import React from 'react'
 import classnames from 'classnames'
-import { globalProps } from '../utilities/globalProps'
+import { globalProps, GlobalProps } from '../utilities/globalProps'
 
 type HighlightProps = {
   className?: string,
-  data?: string,
+  data?: {[key: string]: string},
   id?: string,
-  children?: React.Node,
+  children?: React.ReactChild[] | string,
   text?: string,
-  highlightedText?: array<string>,
-}
+  highlightedText?: string[],
+} & GlobalProps
 
-const Highlight = (props: HighlightProps) => {
+const Highlight = (props: HighlightProps): React.ReactElement => {
   const {
-    className = 'pb_highlight_kit',
     children,
-    data,
-    id,
-    text,
+    className = 'pb_highlight_kit',
+    data = {},
     highlightedText = ['highlight'],
+    id = '',
+    text = '',
   } = props
+
+  const highlightContent: any = text || children;
+
   return (
     <Highlighter
         autoEscape
@@ -31,7 +33,7 @@ const Highlight = (props: HighlightProps) => {
         highlightTag="mark"
         id={id}
         searchWords={highlightedText}
-        textToHighlight={text || children}
+        textToHighlight={highlightContent}
     />
   )
 }

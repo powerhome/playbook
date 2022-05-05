@@ -1,5 +1,53 @@
 
 
+## [10.25.1](https://github.com/powerhome/playbook/tree/10.25.1) (2022-05-02)
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/10.25.0...10.25.1)
+
+**Merged pull requests:**
+
+- Revert "\[PLAY-145\]Caption Kit Convert Typescript" [\#1873](https://github.com/powerhome/playbook/pull/1873) ([thestephenmarshall](https://github.com/thestephenmarshall))
+- Revert "\[PLAY-146\]Title Kit Convert to Typescript" [\#1871](https://github.com/powerhome/playbook/pull/1871) ([thestephenmarshall](https://github.com/thestephenmarshall))
+- Revert "\[PLAY-9\] Treemap chart" [\#1869](https://github.com/powerhome/playbook/pull/1869) ([thestephenmarshall](https://github.com/thestephenmarshall))
+- Revert "Bump moment from 2.29.1 to 2.29.2" [\#1868](https://github.com/powerhome/playbook/pull/1868) ([thestephenmarshall](https://github.com/thestephenmarshall))
+- \[PLAY-162\] Add ISC license [\#1866](https://github.com/powerhome/playbook/pull/1866) ([thestephenmarshall](https://github.com/thestephenmarshall))
+- Update dependency eslint-plugin-react-hooks to v4.5.0 [\#1864](https://github.com/powerhome/playbook/pull/1864) ([renovate[bot]](https://github.com/apps/renovate))
+- Update dependency ts-loader to v8.4.0 [\#1863](https://github.com/powerhome/playbook/pull/1863) ([renovate[bot]](https://github.com/apps/renovate))
+- Update dependency @actions/core to v1.7.0 [\#1862](https://github.com/powerhome/playbook/pull/1862) ([renovate[bot]](https://github.com/apps/renovate))
+- Update dependency jest to v26.6.3 [\#1860](https://github.com/powerhome/playbook/pull/1860) ([renovate[bot]](https://github.com/apps/renovate))
+- Update dependency flow-bin to v0.176.3 [\#1859](https://github.com/powerhome/playbook/pull/1859) ([renovate[bot]](https://github.com/apps/renovate))
+- Update dependency es5-shim to v4.6.6 [\#1858](https://github.com/powerhome/playbook/pull/1858) ([renovate[bot]](https://github.com/apps/renovate))
+- \[PLAY-146\]Title Kit Convert to Typescript [\#1857](https://github.com/powerhome/playbook/pull/1857) ([ericawinne](https://github.com/ericawinne))
+- \[PLAY-145\]Caption Kit Convert Typescript [\#1856](https://github.com/powerhome/playbook/pull/1856) ([ericawinne](https://github.com/ericawinne))
+
+
+
+## [10.25.0](https://github.com/powerhome/playbook/tree/10.25.0) (2022-04-21)
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/10.24.0...10.25.0)
+
+**Kit Enhancements:**
+
+- \[PLAY-131\] Expand card header colors [\#1844](https://github.com/powerhome/playbook/pull/1844) ([RudeChowder](https://github.com/RudeChowder))
+- \[Play-144\] Body Kit Convert Typescript [\#1851](https://github.com/powerhome/playbook/pull/1851) ([ericawinne](https://github.com/ericawinne))
+
+**Merged pull requests:**
+
+- Update dependency @types/lodash to v4.14.182 [\#1854](https://github.com/powerhome/playbook/pull/1854) ([renovate[bot]](https://github.com/apps/renovate))
+- Update jwalton/gh-find-current-pr action to v1.3.0 [\#1853](https://github.com/powerhome/playbook/pull/1853) ([renovate[bot]](https://github.com/apps/renovate))
+- Fix kit generator \(default to JSX\) [\#1848](https://github.com/powerhome/playbook/pull/1848) ([thestephenmarshall](https://github.com/thestephenmarshall))
+- Lock down react-rails and view\_component [\#1845](https://github.com/powerhome/playbook/pull/1845) ([thestephenmarshall](https://github.com/thestephenmarshall))
+- \[PLAY-143\] Add view\_component to engine [\#1841](https://github.com/powerhome/playbook/pull/1841) ([thestephenmarshall](https://github.com/thestephenmarshall))
+- Update dependency jest-fail-on-console to v2.4.1 [\#1840](https://github.com/powerhome/playbook/pull/1840) ([renovate[bot]](https://github.com/apps/renovate))
+- Bump moment from 2.29.1 to 2.29.2 [\#1839](https://github.com/powerhome/playbook/pull/1839) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Update dependency @types/react to v17.0.44 [\#1835](https://github.com/powerhome/playbook/pull/1835) ([renovate[bot]](https://github.com/apps/renovate))
+- Update dependency @testing-library/jest-dom to v5.16.4 [\#1834](https://github.com/powerhome/playbook/pull/1834) ([renovate[bot]](https://github.com/apps/renovate))
+- Bump puma from 5.6.2 to 5.6.4 in /playbook-website [\#1829](https://github.com/powerhome/playbook/pull/1829) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Update dependency eslint-plugin-react-hooks to v4.4.0 [\#1828](https://github.com/powerhome/playbook/pull/1828) ([renovate[bot]](https://github.com/apps/renovate))
+- Update dependency @types/lodash to v4.14.181 [\#1827](https://github.com/powerhome/playbook/pull/1827) ([renovate[bot]](https://github.com/apps/renovate))
+
+
+
 ## [10.24.0](https://github.com/powerhome/playbook/tree/10.24.0) (2022-03-28)
 
 [Full Changelog](https://github.com/powerhome/playbook/compare/10.23.0...10.24.0)
@@ -2367,6 +2415,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Removed (breaking changes)
 - React PbLayout prop `children` dropped support for single Node (https://github.com/powerhome/playbook/commit/b16da50914e110c75c6d96c985fa02781c9e2040#diff-c3ce2c91288ca3e730d3c56e7f73475cL11-L14)
 - Rails PbLayout prop `dark` dropped (https://github.com/powerhome/playbook/commit/b16da50914e110c75c6d96c985fa02781c9e2040#diff-377fda563d148f7b3ad33f904b7b0cdbL13)
+
+
+\* *This Changelog was automatically generated by [github_changelog_generator](https://github.com/github-changelog-generator/github-changelog-generator)*
+
+
+\* *This Changelog was automatically generated by [github_changelog_generator](https://github.com/github-changelog-generator/github-changelog-generator)*
 
 
 \* *This Changelog was automatically generated by [github_changelog_generator](https://github.com/github-changelog-generator/github-changelog-generator)*
