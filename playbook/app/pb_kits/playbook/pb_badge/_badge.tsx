@@ -16,7 +16,7 @@ type BadgeProps = {
   closeProps?: {
     onClick?: React.MouseEventHandler<HTMLSpanElement>,
     onMouseDown?: React.MouseEventHandler<HTMLSpanElement>,
-    onTouchEnd?: React.MouseEventHandler<HTMLSpanElement>,
+    onTouchEnd?: React.TouchEventHandler<HTMLSpanElement>,
   },
   data?: object,
   id?: string,
