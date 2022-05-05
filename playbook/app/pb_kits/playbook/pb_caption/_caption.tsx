@@ -1,24 +1,22 @@
-/* @flow */
-
 import React from 'react'
 import classnames from 'classnames'
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
-import { deprecatedProps, globalProps } from '../utilities/globalProps'
+import { deprecatedProps, globalProps, GlobalProps } from '../utilities/globalProps'
 
-type TitleProps = {
-  aria?: object,
-  children?: array<React.ReactNode> | React.ReactNode,
+type CaptionProps = {
+  aria?: {[key: string]: string},
+  children: React.ReactChild[],
   className?: string,
   color?: "default" | "light" | "lighter" | "success" | "error" | "link",
-  data?: object,
+  data?: {[key: string]: string},
   id?: string,
-  size?: 1 | 2 | 3 | 4,
-  tag?: "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "div" | "span",
+  size?: "xs" | "sm" | "md" | "lg" | "xl",
+  tag?: "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "p" | "span" | "div" | "caption",
   text?: string,
   variant?: null | "link",
-}
+} & GlobalProps;
 
-const Title = (props: TitleProps) => {
+const Caption = (props: CaptionProps): React.ReactElement => {
   if (props.variant) deprecatedProps('Title', ['variant']) //variant prop is deprecated, use color instead
   const {
     aria = {},
@@ -27,26 +25,39 @@ const Title = (props: TitleProps) => {
     color,
     data = {},
     id,
-    size = 3,
-    tag = 'h3',
+    size = 'md',
+    tag = 'div',
     text,
     variant = null,
   } = props
 
+  const tagOptions = [
+    'h1',
+    'h2',
+    'h3',
+    'h4',
+    'h5',
+    'h6',
+    'p',
+    'span',
+    'div',
+    'caption',
+  ]
+  const Tag = tagOptions.includes(tag) ? tag : 'div'
+
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
-  const classes = classnames(
-    buildCss('pb_title_kit', size, variant, color),
+  const css = classnames(
+    buildCss('pb_caption_kit', size, variant, color),
     globalProps(props),
     className,
   )
-  const Tag = `${tag}`
 
   return (
     <Tag
         {...ariaProps}
         {...dataProps}
-        className={classes}
+        className={css}
         id={id}
     >
       {text || children}
@@ -54,4 +65,4 @@ const Title = (props: TitleProps) => {
   )
 }
 
-export default Title
+export default Caption
