@@ -4,7 +4,6 @@
 import React from 'react'
 
 import {
-  Background,
   Body,
   Caption,
   Card,
@@ -16,11 +15,12 @@ import {
 import PropsValues from './PropsValues'
 
 type ExampleType = {
-  children?: React.ReactChild[],
-  description: string,
+  children?: React.ReactChild[] | React.ReactChild,
+  description?: string,
   example?: string,
   globalProps?: { [key: string]: string[] | number[] },
-  title: string,
+  title?: string,
+  tokens?: { [key: string]: string | number }
 }
 
 const Example = ({
@@ -29,6 +29,7 @@ const Example = ({
   example,
   globalProps,
   title,
+  tokens,
 }: ExampleType): React.ReactElement => {
   const parser = new DOMParser(),
     parsedExample = parser.parseFromString(example, 'text/html'),
@@ -36,17 +37,21 @@ const Example = ({
 
   return (
     <div>
-      <Title
-          marginBottom="xs"
-          marginTop="xl"
-          paddingTop="xl"
-          size={1}
-          tag="h1"
-          text={title}
-      />
-      <Body marginBottom="lg">
-        {description}
-      </Body>
+      {title && (
+        <Title
+            marginBottom="xs"
+            marginTop="xl"
+            paddingTop="xl"
+            size={1}
+            tag="h1"
+            text={title}
+        />
+      )}
+      {description && (
+        <Body marginBottom="lg">
+          {description}
+        </Body>
+      )}
       { globalProps && (
         <React.Fragment>
           <Title
@@ -61,24 +66,40 @@ const Example = ({
           </Body>
         </React.Fragment>
       )}
+      { tokens && (
+        <React.Fragment>
+          <Title
+              marginBottom="xs"
+              marginTop="lg"
+              size={4}
+              tag="h4"
+              text="Tokens"
+          />
+          <Body marginBottom="lg">
+            {'Make your own styles using Playbook tokens to keep your site consistent.'}
+          </Body>
+        </React.Fragment>
+      )}
       <Card
           padding="none"
           rounded
           shadow="deeper"
       >
-        <FlexItem>
-          <Card.Body>
-            <Caption
-                marginBottom="xs"
-                text="Visual Guide"
+        {children &&  (
+          <FlexItem>
+            <Card.Body>
+              <Caption
+                  marginBottom="xs"
+                  text="Visual Guide"
+              />
+              { children }
+            </Card.Body>
+            <SectionSeparator
+                alignItems="center"
+                variant="card"
             />
-            { children }
-          </Card.Body>
-          <SectionSeparator
-              alignItems="center"
-              variant="card"
-          />
-        </FlexItem>
+          </FlexItem>
+        )}
         {globalProps && (
           <PropsValues {...globalProps} />
         )}

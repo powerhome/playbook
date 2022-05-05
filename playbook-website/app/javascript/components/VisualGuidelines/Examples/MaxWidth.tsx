@@ -7,7 +7,7 @@ import {
   Title,
 } from 'playbook-ui'
 
-import Example from './Templates/Example'
+import Example from '../Templates/Example'
 
 const SIZES = ['xs', 'sm', 'md', 'lg', 'xl'] //TODO: investigate using types
 
