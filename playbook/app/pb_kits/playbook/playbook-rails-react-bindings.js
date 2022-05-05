@@ -13,6 +13,7 @@ import Legend from './pb_legend/_legend'
 import LineGraph from './pb_line_graph/_line_graph'
 import Passphrase from './pb_passphrase/_passphrase'
 import RichTextEditor from './pb_rich_text_editor/_rich_text_editor'
+import TreemapChart from './pb_treemap_chart/_treemap_chart'
 import Typeahead from './pb_typeahead/_typeahead'
 
 WebpackerReact.registerComponents({
@@ -26,6 +27,7 @@ WebpackerReact.registerComponents({
   LineGraph,
   Passphrase,
   RichTextEditor,
+  TreemapChart,
   Typeahead,
 })
 
