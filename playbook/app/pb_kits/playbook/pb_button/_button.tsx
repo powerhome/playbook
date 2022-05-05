@@ -5,7 +5,7 @@ import { GlobalProps, globalProps } from '../utilities/globalProps'
 
 import Icon from '../pb_icon/_icon'
 
-type EventHandler = (React.ChangeEvent<HTMLInputElement>)
+type EventHandler = (React.MouseEventHandler<HTMLElement>)
 
 type ButtonPropTypes = {
   aria?: {[key: string]: string},
@@ -25,7 +25,7 @@ type ButtonPropTypes = {
   size?: 'sm' | 'md' | 'lg',
   text?: string,
   type: 'inline' | null,
-  htmlType: string | 'button',
+  htmlType: 'submit' | 'reset' | 'button' | undefined,
   value?: string | null,
   variant: 'primary' | 'secondary' | 'link',
   wrapperClass: string,
@@ -98,38 +98,59 @@ const Button = (props: ButtonPropTypes) => {
     </span>
   )
 
+  const ifLoading = () => {
+    if (loading){
+      return(
+        <>
+          {loadingIcon}
+        </>
+      )
+    } else {
+      return (
+        content
+      )
+    }
+  }
+
+  const displayButton = () => {
+    if (link)
+      return (
+        <a
+            {...ariaProps}
+            {...dataProps}
+            className={css}
+            href={link}
+            id={id}
+            rel="noreferrer"
+            role="link"
+            target={newWindow ? '_blank' : null}
+        >
+          {ifLoading()}
+        </a>
+      )
+    else
+      return (
+        <button
+            {...ariaProps}
+            {...dataProps}
+            className={css}
+            disabled={disabled}
+            form={form}
+            id={id}
+            onClick={onClick}
+            role="button"
+            type={htmlType}
+            value={value}
+        >
+          {ifLoading()}
+        </button>
+      )
+  }
+
   return (
-    <If condition={link !== null}>
-      <a
-          {...ariaProps}
-          {...dataProps}
-          className={css}
-          href={link}
-          id={id}
-          rel="noreferrer"
-          role="link"
-          target={newWindow ? '_blank' : null}
-      >
-        <If condition={loading}>{loadingIcon}</If>
-        {content}
-      </a>
-      <Else />
-      <button
-          {...ariaProps}
-          {...dataProps}
-          className={css}
-          disabled={disabled}
-          form={form}
-          id={id}
-          onClick={onClick}
-          role="button"
-          type={htmlType}
-          value={value}
-      >
-        <If condition={loading}>{loadingIcon}</If>
-        {content}
-      </button>
-    </If>
+    <>
+      {displayButton()}
+    </>
   )
 }
 
