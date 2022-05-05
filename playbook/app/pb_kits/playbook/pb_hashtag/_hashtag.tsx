@@ -1,16 +1,15 @@
-/* @flow */
 /* eslint-disable react/no-multi-comp, flowtype/space-before-type-colon */
 
 import React from 'react'
 import classnames from 'classnames'
 
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
-import { globalProps } from '../utilities/globalProps'
+import { globalProps, GlobalProps } from '../utilities/globalProps'
 
 import Badge from '../pb_badge/_badge'
 
 type HashtagProps = {
-  aria?: object,
+  aria?: {[key: string]: string},
   className?: string,
   dark?: boolean,
   data?: string,
@@ -18,7 +17,7 @@ type HashtagProps = {
   text?: string,
   type: "default" | "home" | "project" | "appointment",
   url?: string,
-}
+} & GlobalProps
 
 const typeMap = {
   home: 'H#',
