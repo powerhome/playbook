@@ -5,7 +5,7 @@ ifdef TTY
 	AWS_CREDS_MOUNT = --mount type=bind,source=$(HOME)/.aws/credentials,destination=/root/.aws/credentials,readonly
 endif
 
-DEPLOYER_IMAGE = quay.io/powerhome/deployer:master-c94bf553840b07335fbb8904d5a9963dd5ffce00-336
+DEPLOYER_IMAGE = image-registry.powerapp.cloud/playbook/playbook@sha256:6ead66b89a821ed5d35942547fe12fad6075ebe23a5bd78b3f1e005d107ff26c
 DEPLOYER_MOUNTS = ${AWS_CREDS_MOUNT} --mount type=bind,source=$(HOME)/.kube,destination=/root/.kube --mount type=bind,source=$(shell pwd),destination=/app --env BUILD_DEPS_AND_PACKAGE=false
 RUN_DEPLOYER = docker run --tty ${INTERACTIVE} --env AWS_ACCESS_KEY_ID --env AWS_SECRET_ACCESS_KEY --rm --env BUILD_DEPS_AND_PACKAGE=false ${DEPLOYER_MOUNTS} ${DEPLOYER_IMAGE}
 
