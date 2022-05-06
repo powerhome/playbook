@@ -19,7 +19,7 @@ app.build(
 
   stage('Code Checkout') {
     scmVars = checkout scm
-    appImage = "quay.io/powerhome/playbook:${git.triggeringCommit(scmVars)}"
+    appImage = "image-registry.powerapp.cloud/playbook/playbook:${git.triggeringCommit(scmVars)}"
   }
 
   app.dockerStage('Build Docker Image') {
@@ -32,6 +32,16 @@ app.build(
 }
 
 def buildDockerImage(scmVars, appImage) {
+  withCredentials([
+    usernamePassword(
+      credentialsId: 'app-registry-global',
+      usernameVariable: 'APP_REGISTRY_USERNAME',
+      passwordVariable: 'APP_REGISTRY_PASSWORD'
+    )
+  ]) {
+    // https://issues.jenkins.io/browse/JENKINS-59777
+    sh "docker login https://image-registry.powerapp.cloud -u $APP_REGISTRY_USERNAME -p $APP_REGISTRY_PASSWORD"
+  }
   try {
     github.setImageBuildState(scmVars, 'PENDING')
     sh "docker build -t ${appImage} ."
