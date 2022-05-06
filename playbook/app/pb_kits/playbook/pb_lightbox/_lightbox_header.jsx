@@ -2,7 +2,7 @@
 import React, { useContext } from 'react'
 import classnames from 'classnames'
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
-import { globalProps } from '../utilities/globalProps.js'
+import { globalProps } from '../utilities/globalProps'
 import { LightboxContext } from './_lightbox_context'
 import { LightboxHeaderIcon } from './_lightbox_header_icon'
 import Flex from '../pb_flex/_flex'
