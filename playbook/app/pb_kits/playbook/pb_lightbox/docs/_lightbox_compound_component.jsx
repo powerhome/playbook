@@ -28,8 +28,6 @@ const LightboxCompoundComponent = (props) => {
       <div>
         {showLightbox ? (
           <Lightbox
-              icon="times"
-              iconSize="2x"
               initialPhoto={selectedPhoto}
               onClose={handleCloseLightbox}
               photos={photos}

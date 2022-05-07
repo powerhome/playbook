@@ -39,11 +39,13 @@ const Lightbox = (props: LightboxType) => {
     initialPhoto,
     onClose,
     opened,
-    icon,
-    iconSize,
+    icon = 'times',
+    iconSize = '2x',
     trigger,
   } = props
   const [activePhoto, setActivePhoto] = useState(initialPhoto)
+  const [triggerOpened, setTriggerOpened] = useState(false),
+    modalIsOpened = trigger ? triggerOpened : opened
 
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
@@ -65,9 +67,6 @@ const Lightbox = (props: LightboxType) => {
       : onClose,
   }
 
-  const [triggerOpened, setTriggerOpened] = useState(false),
-    modalIsOpened = trigger ? triggerOpened : opened
-
   if (trigger) {
     const modalTrigger = document.querySelector(trigger)
     modalTrigger.addEventListener(
@@ -84,26 +83,29 @@ const Lightbox = (props: LightboxType) => {
     )
   }
   return (
-    <LightboxContext.Provider value={api}>
-      <div
-          {...ariaProps}
-          {...dataProps}
-          className={classes}
-          id={id}
-      >
-        <div className="carousel">
-          {children}
-          <Carousel
-              current={photos.indexOf(initialPhoto)}
-              onChange={handleOnSlide}
-              photos={photos.map((photo) => ({
-              url: photo,
-              thumbnail: photo,
-            }))}
-          />
+    <>
+      <LightboxContext.Provider value={api}>
+        <div
+            {...ariaProps}
+            {...dataProps}
+            className={classes}
+            id={id}
+        >
+          <div className="carousel">
+          <Lightbox.Header />
+            {children}
+            <Carousel
+                current={photos.indexOf(initialPhoto)}
+                onChange={handleOnSlide}
+                photos={photos.map((photo) => ({
+                url: photo,
+                thumbnail: photo,
+              }))}
+            />
+          </div>
         </div>
-      </div>
-    </LightboxContext.Provider>
+      </LightboxContext.Provider>
+    </>
   )
 }
 
