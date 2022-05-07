@@ -5,7 +5,6 @@ import React, { useState } from 'react'
 import classnames from 'classnames'
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
 import { globalProps } from '../utilities/globalProps'
-import Icon from '../pb_icon/_icon'
 import LightboxHeader from './_lightbox_header'
 import { LightboxContext } from './_lightbox_context'
 

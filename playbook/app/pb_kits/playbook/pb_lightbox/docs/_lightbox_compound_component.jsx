@@ -1,7 +1,7 @@
 /* @flow */
 /* eslint-disable jsx-control-statements/jsx-use-if-tag */
 import React, { useState } from 'react'
-import { Caption, Flex, FlexItem, Image, Title } from '../../'
+import { Flex, Image } from '../../'
 import Lightbox from '../_lightbox'
 
 const LightboxCompoundComponent = (props) => {
@@ -33,34 +33,10 @@ const LightboxCompoundComponent = (props) => {
               photos={photos}
               {...props}
           >
-            <Lightbox.Header>
-              <FlexItem flex={5}>
-                <Flex justify="center">
-                  <Flex
-                      align="center"
-                      orientation="column"
-                  >
-                    <Title
-                        dark
-                        paddingBottom="xs"
-                        size={4}
-                        text="Windows, Sidings, & Gutters"
-                    />
-
-                    <Caption dark>{'Dyamic Count goes here.'}</Caption>
-                  </Flex>
-                </Flex>
-              </FlexItem>
-              <FlexItem flex={1}>
-                <Flex justify="end">
-                  <Title
-                      dark
-                      size={4}
-                      text="All Photos"
-                  />
-                </Flex>
-              </FlexItem>
-            </Lightbox.Header>
+            <Lightbox.Header
+                text='Dyamic Count goes here.'
+                title='Windows, Sidings, & Gutters'
+            />
           </Lightbox>
         ) : (
           <div className="PhotoViewer">

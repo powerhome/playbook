@@ -5,8 +5,10 @@ import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
 import { globalProps } from '../utilities/globalProps'
 import { LightboxContext } from './_lightbox_context'
 import { LightboxHeaderIcon } from './_lightbox_header_icon'
+import Caption from '../pb_caption/_caption'
 import Flex from '../pb_flex/_flex'
 import FlexItem from '../pb_flex/_flex_item'
+import Title from '../pb_title/_title'
 
 type LightboxHeaderProps = {
   aria?: object,
@@ -31,6 +33,8 @@ const LightboxHeader = (props: LightboxHeaderProps) => {
     data = {},
     padding = 'sm',
     spacing = 'between',
+    text,
+    title,
     closeable = true,
     icon = 'times',
     iconSize = '2x',
@@ -60,6 +64,34 @@ const LightboxHeader = (props: LightboxHeaderProps) => {
                 iconSize={iconSize}
                 onClose={api.onClose}
             />
+          </FlexItem>
+          <If condition={title && text}>
+            <FlexItem flex={5}>
+              <Flex justify="center">
+                <Flex
+                    align="center"
+                    orientation="column"
+                >
+                  <Title
+                      dark
+                      paddingBottom="xs"
+                      size={4}
+                      text={title}
+                  />
+
+                  <Caption dark>{text}</Caption>
+                </Flex>
+              </Flex>
+            </FlexItem>
+          </If>
+          <FlexItem flex={1}>
+            <Flex justify="end">
+              <Title
+                  dark
+                  size={4}
+                  text="All Photos"
+              />
+            </Flex>
           </FlexItem>
         </If>
         {children}
