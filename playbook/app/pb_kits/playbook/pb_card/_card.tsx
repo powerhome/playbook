@@ -17,7 +17,7 @@ type CardPropTypes = {
   className?: string,
   data?: {[key: string]: string},
   highlight?: {
-    position?: string,
+    position?: "side" | "top",
     color?: string,
   },
   length?: number,
@@ -91,14 +91,15 @@ const Card = (props: CardPropTypes) => {
   const dataProps: {[key: string]: string} = buildDataProps(data)
 
   // coerce to array
-  const cardChildren =
-    typeof children === 'object' && React.Children.count ? children : [children]
+  const cardChildren = React.Children.toArray(children)
 
   const subComponentTags = (tagName: string) => {
     return cardChildren.filter((c: string) => (
       get(c, 'type.displayName') === tagName
-    )).map((child: string, i: string) => {
+    )).map((child, i) => {
+      if(React.isValidElement(child)) {
       return React.cloneElement(child, { key: `${tagName.toLowerCase()}-${i}` })
+      }
     })
   }
 
