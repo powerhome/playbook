@@ -28,16 +28,13 @@ const LightboxCompoundComponent = (props) => {
       <div>
         {showLightbox ? (
           <Lightbox
+              description='Dyamic Count goes here.'
               initialPhoto={selectedPhoto}
               onClose={handleCloseLightbox}
               photos={photos}
+              title='Windows, Sidings, & Gutters'
               {...props}
-          >
-            <Lightbox.Header
-                text='Dyamic Count goes here.'
-                title='Windows, Sidings, & Gutters'
-            />
-          </Lightbox>
+          />
         ) : (
           <div className="PhotoViewer">
             <Flex>

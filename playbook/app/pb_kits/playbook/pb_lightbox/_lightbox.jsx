@@ -24,6 +24,7 @@ type LightboxType = {
   icon: string,
   iconSize: number,
   trigger?: string,
+  title?: string,
 }
 
 const Lightbox = (props: LightboxType) => {
@@ -41,6 +42,7 @@ const Lightbox = (props: LightboxType) => {
     icon = 'times',
     iconSize = '2x',
     trigger,
+    title,
   } = props
   const [activePhoto, setActivePhoto] = useState(initialPhoto)
   const [triggerOpened, setTriggerOpened] = useState(false),
@@ -81,6 +83,7 @@ const Lightbox = (props: LightboxType) => {
       { once: true }
     )
   }
+
   return (
     <>
       <LightboxContext.Provider value={api}>
@@ -91,15 +94,20 @@ const Lightbox = (props: LightboxType) => {
             id={id}
         >
           <div className="carousel">
-          <Lightbox.Header />
+          <Lightbox.Header
+              icon={icon}
+              iconSize={iconSize}
+              text={description}
+              title={title}
+          />
             {children}
             <Carousel
-                current={photos.indexOf(initialPhoto)}
+                current={photos.indexOf(activePhoto)}
                 onChange={handleOnSlide}
                 photos={photos.map((photo) => ({
-                url: photo,
-                thumbnail: photo,
-              }))}
+                  url: photo,
+                  thumbnail: photo,
+                }))}
             />
           </div>
         </div>
