@@ -4,11 +4,20 @@
 import React from 'react'
 
 import Colors from './Colors'
+import MaxWidth from './Examples/MaxWidth'
+import Positioning from './Examples/Positioning'
 
-const VisualGuidelines = (): React.ReactElement => (
-  <React.Fragment>
-    <Colors />
-  </React.Fragment>
-)
+const VisualGuidelines = ({ examples }: {examples: {[key: string]: string}}): React.ReactElement => {
+  return (
+    <React.Fragment>
+      <Colors />
+      <MaxWidth example={examples.width_jsx} />
+      <Positioning
+          example={examples.positioning_jsx}
+          tokensExample={examples.position_token}
+      />
+    </React.Fragment>
+  )
+}
 
 export default VisualGuidelines
