@@ -1,1 +1,1 @@
-Lightbox contains 5 props: `photos` (an array of urls), `initialPhoto` (a number ), an `onClose` callback function, an `icon` prop that matches to our `Icon` kit, and an `iconSize` prop that also corresponds to our icon kit. 
+Lightbox contains 7 props: `photos` (an array of urls), `initialPhoto` (a number), an `onClose` callback function, a `title` and `description` string, an `icon` prop that matches to our `Icon` kit, and an `iconSize` prop that also corresponds to our icon kit.
