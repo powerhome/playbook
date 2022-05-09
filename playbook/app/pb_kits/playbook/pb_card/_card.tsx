@@ -1,42 +1,43 @@
-/* @flow */
+/* eslint-disable react/no-multi-comp */
 
 import React from 'react'
 import { get } from 'lodash'
 import classnames from 'classnames'
 
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
-import { globalProps } from '../utilities/globalProps'
+import { GlobalProps, globalProps } from '../utilities/globalProps'
 import { ProductColors, CategoryColors, BackgroundColors } from '../types'
 
 type CardPropTypes = {
-  aria?: object,
+  aria?: {[key: string]: string},
   background?: BackgroundColors | ProductColors | "none",
   borderNone?: boolean,
   borderRadius?: "xs" | "sm" | "md" | "lg" | "xl" | "none" | "rounded",
-  children: array<React.ReactNode> | React.ReactNode,
+  children: React.ReactChild[] | React.ReactChild | number,
   className?: string,
-  data?: object,
+  data?: {[key: string]: string},
   highlight?: {
-    position?: "side" | "top",
+    position?: string,
     color?: string,
   },
+  length?: number,
   padding?: string,
   selected?: boolean,
   tag?: "div" | "section" | "footer" | "header" | "article" | "aside" | "main" | "nav",
-}
+} & GlobalProps
 
 type CardHeaderProps = {
   headerColor?: BackgroundColors | ProductColors | CategoryColors | "none",
-  children: array<React.ReactNode> | React.ReactNode,
+  children: React.ReactChild[] | React.ReactChild,
   className?: string,
   padding?: string,
-}
+} & GlobalProps
 
 type CardBodyProps = {
-  children: array<React.ReactNode> | React.ReactNode | string,
+  children: React.ReactChild[] | React.ReactChild | string,
   className?: string,
   padding?: string,
-}
+} & GlobalProps
 
 // Header component
 const Header = (props: CardHeaderProps) => {
@@ -82,26 +83,26 @@ const Card = (props: CardPropTypes) => {
   const borderCSS = borderNone == true ? 'border_none' : ''
   const selectedCSS = selected == true ? 'selected' : 'deselected'
   const backgroundCSS = background == 'none' ? '' : `background_${background}`
-  const cardCss = buildCss('pb_card_kit', selectedCSS, borderCSS, `border_radius_${borderRadius}`, backgroundCSS, {
-    [`highlight_${highlight.position}`]: highlight.position,
-    [`highlight_${highlight.color}`]: highlight.color,
-  })
-  const ariaProps = buildAriaProps(aria)
-  const dataProps = buildDataProps(data)
+  const cardCss = buildCss('pb_card_kit', selectedCSS, borderCSS, `border_radius_${borderRadius}`, backgroundCSS,
+    `highlight_${highlight.position}`,
+    `highlight_${highlight.color}`,
+  )
+  const ariaProps: {[key: string]: string} = buildAriaProps(aria)
+  const dataProps: {[key: string]: string} = buildDataProps(data)
 
   // coerce to array
   const cardChildren =
-    typeof children === 'object' && children.length ? children : [children]
+    typeof children === 'object' && React.Children.count ? children : [children]
 
-  const subComponentTags = (tagName) => {
-    return cardChildren.filter((c) => (
+  const subComponentTags = (tagName: string) => {
+    return cardChildren.filter((c: string) => (
       get(c, 'type.displayName') === tagName
-    )).map((child, i) => {
+    )).map((child: string, i: string) => {
       return React.cloneElement(child, { key: `${tagName.toLowerCase()}-${i}` })
     })
   }
 
-  const nonHeaderChildren = cardChildren.filter((child) => (get(child, 'type.displayName') !== 'Header'))
+  const nonHeaderChildren = cardChildren.filter((child: Node) => (get(child, 'type.displayName') !== 'Header'))
 
   const tagOptions = ['div', 'section', 'footer', 'header', 'article', 'aside', 'main', 'nav']
   const Tag = tagOptions.includes(tag) ? tag : 'div'
