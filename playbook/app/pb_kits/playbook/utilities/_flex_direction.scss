@@ -5,24 +5,4 @@ $flex_direction_values: (
   column_reverse: column-reverse
 );
 
-@include break_at(breakpoint("lg")) {
-  .test {
-    display: none;
-  }
-}
-
-@each $flex-direction, $flex-direction-value in $flex_direction_values {
-  .flex_direction_#{$flex-direction} {
-    display: flex;
-    flex-direction: #{$flex-direction-value} !important;
-  }
-}
-
-@each $flex-direction, $flex-direction-value in $flex_direction_values {
-  @each $breakpoint, $breakpoint-value in $breakpoints {
-    .flex_direction_#{$breakpoint}_#{$flex-direction} {
-      display: flex;
-      flex-direction: #{$flex-direction-value} !important;
-    }
-  }
-}
+@include global_props_responsive_css($flex_direction_values, 'flex_direction', 'flex-direction');

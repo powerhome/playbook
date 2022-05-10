@@ -44,8 +44,6 @@ type FlexDirection = {
   flexDirection?: "row" | "column" | "rowReverse" | "columnReverse"
 }
 
-// type FlexDirectionOptions = "row" | "column" | "row_reverse" | "column_reverse"
-
 type FlexGrow = {
   flexGrow?: 0 | 1
 }
@@ -119,6 +117,14 @@ export type GlobalProps = AlignContent & AlignItems & AlignSelf &
   LineHeight & Margin & MaxWidth & NumberSpacing & Order & Padding &
   Shadow & ZIndex
 
+const getResponsivePropClasses = (prop: {[key: string]: string}, classPrefix: string) => {
+  const keys: string[] = Object.keys(prop)
+  return keys.map((size: Sizes) => {
+    const propValue: string = typeof(prop[size]) === 'string' ? camelToSnakeCase(prop[size]) : prop[size]
+    return `${classPrefix}_${size}_${propValue}`
+  }).join(" ")
+}
+
 // Prop categories
 const PROP_CATEGORIES: {[key:string]: (props: {[key: string]: any}) => string} = {
   spacingProps: ({
@@ -154,11 +160,7 @@ const PROP_CATEGORIES: {[key:string]: (props: {[key: string]: any}) => string} =
     css += padding ? `p_${padding} ` : ''
     return css
   },
-  darkProps: ({ dark }: Dark) => {
-    let css = ''
-    css += dark ? 'dark' : ''
-    return css
-  },
+  darkProps: ({ dark }: Dark) => dark ? 'dark' : '',
   numberSpacingProps: ({ numberSpacing }: NumberSpacing) => {
     let css = ''
     css += numberSpacing ? `ns_${numberSpacing} ` : ''
@@ -206,48 +208,81 @@ const PROP_CATEGORIES: {[key:string]: (props: {[key: string]: any}) => string} =
     css += cursor ? `cursor_${cursor} ` : ''
     return css
   },
-  alignItemsProps: ({ alignItems }: AlignItems) => {
-    return alignItems ? `align_items_${camelToSnakeCase(alignItems)}` : ''
-  },
   alignContentProps: ({ alignContent }: AlignContent) => {
+    if (typeof alignContent === 'object') {
+      return getResponsivePropClasses(alignContent, 'align_content')
+    }
     return alignContent ? `align_content_${camelToSnakeCase(alignContent)}` : ''
   },
+  alignItemsProps: ({ alignItems }: AlignItems) => {
+    if (typeof alignItems === 'object') {
+      return getResponsivePropClasses(alignItems, 'align_items')
+    } else {
+      return alignItems ? `align_items_${camelToSnakeCase(alignItems)}` : ''
+    }
+  },
   alignSelfProps: ({ alignSelf }: AlignSelf) => {
-    return alignSelf ? `align_self_${alignSelf}` : ''
+    if (typeof alignSelf === 'object') {
+      return getResponsivePropClasses(alignSelf, 'align_self')
+    } else {
+      return alignSelf ? `align_self_${alignSelf}` : ''
+    }
   },
   flexDirectionProps: ({ flexDirection }: FlexDirection) => {
     if (typeof flexDirection == 'object') {
-      const flexKeys: string[] = Object.keys(flexDirection)
-      return flexKeys.map((size: Sizes) => {
-        const flexDirectionValue: string = flexDirection[size]
-        return `flex_direction_${size}_${flexDirectionValue}`
-      }).join(" ")
+      return getResponsivePropClasses(flexDirection, 'flex_direction')
     } else {
       return flexDirection ? `flex_direction_${camelToSnakeCase(flexDirection)}` : ''
     }
   },
   flexWrapProps: ({ flexWrap }: FlexWrap) => {
-    let css = ''
-    css += flexWrap ? `flex_wrap_${flexWrap}` : ''
-    return css
+    if (typeof flexWrap == 'object') {
+      return getResponsivePropClasses(flexWrap, 'flex_wrap')
+    } else {
+      return flexWrap ? `flex_wrap_${camelToSnakeCase(flexWrap)}` : ''
+    }
   },
   flexProps: ({ flex }: Flex) => {
-    return flex ? `flex_${flex}` : ''
+    if (typeof flex === 'object') {
+      return getResponsivePropClasses(flex, 'flex')
+    } else {
+      return flex ? `flex_${flex}` : ''
+    }
   },
   flexGrowProps: ({ flexGrow }: FlexGrow) => {
-    return flexGrow ? `flex_grow_${flexGrow}` : ''
+    if (typeof flexGrow == 'object') {
+      return getResponsivePropClasses(flexGrow, 'flex_grow')
+    } else {
+      return flexGrow ? `flex_grow_${flexGrow}` : ''
+    }
   },
   flexShrinkProps: ({ flexShrink }: FlexShrink) => {
-    return flexShrink ? `flex_shrink_${flexShrink}` : ''
+    if (typeof flexShrink == 'object') {
+      return getResponsivePropClasses(flexShrink, 'flex_shrink')
+    } else {
+      return flexShrink ? `flex_shrink_${flexShrink}` : ''
+    }
   },
   justifyContentProps: ({ justifyContent }: JustifyContent) => {
-    return justifyContent ? `justify_content_${camelToSnakeCase(justifyContent)}` : ''
+    if (typeof justifyContent === 'object') {
+      return getResponsivePropClasses(justifyContent, 'justify_content')
+    } else {
+      return justifyContent ? `justify_content_${camelToSnakeCase(justifyContent)}` : ''
+    }
   },
   justifySelfProps: ({ justifySelf }: JustifySelf) => {
-    return justifySelf ? `justify_self_${justifySelf}` : ''
+    if (typeof justifySelf === 'object') {
+      return getResponsivePropClasses(justifySelf, 'justify_self')
+    } else {
+      return justifySelf ? `justify_self_${justifySelf}` : ''
+    }
   },
   orderProps: ({ order }: Order) => {
-    return order ? `order_${order}` : ''
+    if (typeof order === 'object') {
+      return getResponsivePropClasses(order, 'flex_order')
+    } else {
+      return order ? `flex_order_${order}` : ''
+    }
   }
 }
 
