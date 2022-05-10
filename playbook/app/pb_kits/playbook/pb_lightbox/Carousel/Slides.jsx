@@ -25,12 +25,12 @@ export default function Slides({
     <div
         className="Slides"
     >
-        <Slide
-            onClick={() => onChange(current)}
-            onZoom={handleZoom}
-            url={urls[current]}
-            zooming={zooming}
-        />
+      <Slide
+          onClick={() => onChange(current)}
+          onZoom={handleZoom}
+          url={urls[current]}
+          zooming={zooming}
+      />
     </div>
   )
 }
