@@ -2,8 +2,7 @@
 
 import { noop } from 'lodash'
 import classnames from 'classnames'
-import React, { useEffect } from 'react'
-import { motion, useAnimation } from 'framer-motion'
+import React from 'react'
 import { useWindowSize } from '../hooks/useWindowSize'
 
 import Thumbnail from './Thumbnail'
@@ -29,40 +28,14 @@ export default function Thumbnails({
   onChange = noop,
   urls = [],
 }: ThumbnailsType) {
-  const controls = useAnimation()
   const viewportSize = useWindowSize()
   const thumbnailWidth = viewportSize.width / 8
   const draggable = thumbnailWidth * urls.length > viewportSize.width
   const css = classnames('Thumbnails', { draggable })
-  const dragConstraints = {
-    left: -1 * (thumbnailWidth * urls.length - viewportSize.width),
-    right: 0,
-  }
-
-  const modifyTarget = (target) => {
-    const nextIndex = Math.round(Math.abs(target) / thumbnailWidth)
-    const snapTargetIndex = indexWithinBounds(nextIndex, 0, urls.length)
-    const snapTarget = snapTargetIndex * thumbnailWidth
-    const direction = Math.sign(target)
-    return direction * snapTarget
-  }
-
-  useEffect(() => {
-    if (draggable) {
-      const x = Math.max(-current * thumbnailWidth, dragConstraints.left)
-      controls.start({ x })
-    }
-  }, [controls, current, draggable, dragConstraints.left, thumbnailWidth])
 
   return (
-    <motion.div
-        animate={controls}
+    <div
         className={css}
-        drag={draggable && 'x'}
-        dragConstraints={dragConstraints}
-        dragElastic={0.05}
-        dragTransition={{ modifyTarget }}
-        transition={{ type: 'spring', bounce: 0 }}
     >
       {urls.map((url, i) => (
         <Thumbnail
@@ -73,6 +46,6 @@ export default function Thumbnails({
             url={url}
         />
       ))}
-    </motion.div>
+    </div>
   )
 }
