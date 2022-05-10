@@ -17,6 +17,26 @@ $breakpoints: (
   xl: $screen-xl-min
 );
 
+$breakpoints_grid: (
+    xs: (
+        max: $screen-xs-min
+    ),
+    sm: (
+        min: $screen-sm-min,
+        max: $screen-md-max
+    ),
+    md: (
+        min: $screen-md-min,
+        max: $screen-lg-max
+    ),
+    lg: (
+        min: $screen-lg-min,
+        max: $screen-xl-max
+    ),
+    xl: (
+        min: $screen-xl-min,
+    )
+);
 
 @function breakpoint($breakpoint_name) {
   @return map-get($breakpoints, $breakpoint_name);

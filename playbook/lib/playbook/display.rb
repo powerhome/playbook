@@ -37,7 +37,7 @@ module Playbook
     end
 
     def display_values
-      %w[block inline_block inline flex inline_flex hidden]
+      %w[block inline_block inline flex inline_flex none]
     end
   end
 end
