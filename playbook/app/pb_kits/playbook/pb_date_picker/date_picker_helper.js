@@ -1,5 +1,6 @@
 import flatpickr from 'flatpickr'
 import monthSelectPlugin from 'flatpickr/dist/plugins/monthSelect'
+// import weekSelectPlugin from "flatpickr/dist/plugins/weekSelect/weekSelect"
 
 const datePickerHelper = (config) => {
   const {
@@ -56,6 +57,10 @@ const datePickerHelper = (config) => {
     plugins ? [ monthSelectPlugin({ shorthand: true, dateFormat: 'F Y', altFormat: 'F Y' }) ] : []
   )
 
+  // const setWeek = weekSelectPlugin.selectedDates[0]
+  //           ? weekSelectPlugin.config.getWeek(weekSelectPlugin.selectedDates[0])
+  //           : null;
+
   // ===========================================================
   // |             Flatpickr initializer w/ config             |
   // ===========================================================
@@ -107,6 +112,9 @@ const datePickerHelper = (config) => {
     prevArrow: '<i class="far fa-angle-left"></i>',
     static: true,
   })
+      // plugins:  setWeek(),
+    // prevArrow: '<i class="far fa-angle-left"></i>',
+    // static: true,
 
   // ===========================================================
   //                 Additional JS Functionality               |
