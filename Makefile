@@ -5,7 +5,7 @@ ifdef TTY
 	AWS_CREDS_MOUNT = --mount type=bind,source=$(HOME)/.aws/credentials,destination=/root/.aws/credentials,readonly
 endif
 
-DEPLOYER_IMAGE = image-registry.powerapp.cloud/app/deployer@sha256:349dfeda19a069bfe1167f7369acbd91f313bc459cd73ed6082a868c2a3e626b
+DEPLOYER_IMAGE = image-registry.powerapp.cloud/app/deployer:master-467d8015ffc91fc62c347367db792bb6de0eeea8-1439
 DEPLOYER_MOUNTS = ${AWS_CREDS_MOUNT} --mount type=bind,source=$(HOME)/.kube,destination=/root/.kube --mount type=bind,source=$(shell pwd),destination=/app --env BUILD_DEPS_AND_PACKAGE=false
 RUN_DEPLOYER = docker run --tty ${INTERACTIVE} --env AWS_ACCESS_KEY_ID --env AWS_SECRET_ACCESS_KEY --rm --env BUILD_DEPS_AND_PACKAGE=false ${DEPLOYER_MOUNTS} ${DEPLOYER_IMAGE}
 
