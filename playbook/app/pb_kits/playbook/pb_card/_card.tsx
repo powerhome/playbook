@@ -6,7 +6,7 @@ import classnames from 'classnames'
 
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
 import { GlobalProps, globalProps } from '../utilities/globalProps'
-import { ProductColors, CategoryColors, BackgroundColors } from '../types'
+import type { ProductColors, CategoryColors, BackgroundColors } from '../types'
 
 type CardPropTypes = {
   aria?: {[key: string]: string},
