@@ -2,12 +2,16 @@ import React from 'react'
 
 import DatePicker from '../_date_picker'
 
-const DatePickerMonthAndYear = () => {
+const DatePickerWeek = () => {
   return (
     <div>
-      <DatePicker/>
+      <DatePicker
+          label="Date Picker"
+          pickerId="disabled-date"
+          plugins="ws"
+      />
     </div>
   )
 }
 
-export default DatePickerMonthAndYear
+export default DatePickerWeek

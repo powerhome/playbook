@@ -41,8 +41,9 @@ module Playbook
                        required: true
       prop :placeholder, type: Playbook::Props::String,
                          default: "Select Date"
-      prop :plugins, type: Playbook::Props::Boolean,
-                     default: false
+      prop :plugins, type: Playbook::Props::Enum,
+                     values: %w[ws ms none],
+                     default: "none"
       prop :required, type: Playbook::Props::Boolean,
                       default: false
       prop :year_range, type: Playbook::Props::Array,

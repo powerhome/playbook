@@ -40,7 +40,7 @@ type DatePickerProps = {
   onChange: (String) => void,
   pickerId?: String,
   placeholder?: String,
-  plugins?: Boolean,
+  plugins?: "ms" | "ws",
   type?: String,
   yearRange?: Array,
 }
@@ -74,7 +74,7 @@ const DatePicker = (props: DatePickerProps) => {
     onChange = () => {},
     pickerId,
     placeholder = 'Select Date',
-    plugins = false,
+    plugins = "",
     yearRange = [ 1900, 2100 ],
   } = props
 
