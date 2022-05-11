@@ -1,16 +1,14 @@
-/* @flow */
-
 import React from 'react'
 import classnames from 'classnames'
 import { buildAriaProps, buildDataProps } from '../utilities/props'
-import { globalProps } from '../utilities/globalProps'
+import { GlobalProps, globalProps } from '../utilities/globalProps'
 
 type IconProps = {
-  aria?: object,
-  border?: boolean,
+  aria?: {[key: string]: string},
+  border?: string,
   className?: string,
-  customIcon?: SVGElement,
-  data?: object,
+  customIcon?: {[key: string] :SVGElement},
+  data?: {[key: string]: string},
   fixedWidth?: boolean,
   flip?: "horizontal" | "vertical" | "both" | "none",
   icon: string,
@@ -34,12 +32,13 @@ type IconProps = {
     | "9x"
     | "10x",
   spin?: boolean,
-}
+} & GlobalProps
 
 const flipMap = {
   horizontal: 'fa-flip-horizontal',
   vertical: 'fa-flip-vertical',
   both: 'fa-flip-horizontal fa-flip-vertical',
+  none: ""
 }
 
 const Icon = (props: IconProps) => {
@@ -50,7 +49,7 @@ const Icon = (props: IconProps) => {
     customIcon,
     data = {},
     fixedWidth = true,
-    flip = false,
+    flip = "none",
     icon,
     id,
     inverse = false,
@@ -90,31 +89,42 @@ const Icon = (props: IconProps) => {
   )
 
   aria.label ? null : aria.label = `${icon} icon`
-  const ariaProps = buildAriaProps(aria)
-  const dataProps = buildDataProps(data)
+  const ariaProps: {[key: string]: any} = buildAriaProps(aria)
+  const dataProps: {[key: string]: any} = buildDataProps(data)
 
   // Add a conditional here to show only the SVG if custom
+  const displaySVG = (customIcon: any) => {
+    if (customIcon)
+      return (
+        <>
+          {
+            React.cloneElement(customIcon, {
+              ...dataProps,
+              className: classes,
+              id,
+            })
+          }
+        </>
+      )
+    else
+      return (
+        <>
+          <i
+              {...dataProps}
+              className={classes}
+              id={id}
+          />
+          <span
+              {...ariaProps}
+              hidden
+          />
+        </>
+      )
+  }
+
   return (
     <>
-      <If condition={customIcon}>
-        {
-          React.cloneElement(customIcon, {
-            ...dataProps,
-            className: classes,
-            id,
-          })
-        }
-        <Else />
-        <i
-            {...dataProps}
-            className={classes}
-            id={id}
-        />
-        <span
-            {...ariaProps}
-            hidden
-        />
-      </If>
+      {displaySVG(customIcon)}
     </>
   )
 }
