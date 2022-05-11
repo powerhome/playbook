@@ -8,7 +8,7 @@ type HighlightProps = {
   className?: string,
   data?: {[key: string]: string},
   id?: string,
-  children?: React.ReactChild[] | string,
+  children?: React.ReactChild[] | React.ReactChild | string,
   text?: string,
   highlightedText?: string[],
 } & GlobalProps
