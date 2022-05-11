@@ -1,14 +1,7 @@
-.flex_wrap_wrap {
-  display: flex;
-  flex-wrap: wrap !important;
-}
+$flex_wrap_values: (
+  wrap: wrap,
+  nowrap: nowrap,
+  wrap_reverse: wrap-reverse,
+);
 
-.flex_wrap_nowrap {
-  display: flex;
-  flex-wrap: nowrap !important;
-}
-
-.flex_wrap_wrap_reverse {
-  display: flex;
-  flex-wrap: wrap-reverse !important;
-}
+@include global_props_responsive_css($flex_wrap_values, 'flex_wrap', 'flex-wrap');

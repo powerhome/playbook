@@ -15,13 +15,11 @@ module Playbook
         display_value.each do |key, value|
           css += "display_#{key}_#{value} " if display_size_values.include?(key.to_s) && display_values.include?(value.to_s)
         end
-      elsif display_value.is_a?(String)
+      else
         selected_props.each do |k|
           display_value = send(k)
           css += "display_#{display_value}" if display_values.include? display_value
         end
-      else
-        ""
       end
       css unless css.blank?
     end
