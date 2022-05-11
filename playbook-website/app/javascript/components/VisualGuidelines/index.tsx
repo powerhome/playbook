@@ -6,6 +6,7 @@ import React from 'react'
 import Colors from './Colors'
 import MaxWidth from './Examples/MaxWidth'
 import Positioning from './Examples/Positioning'
+import LineHeight from './Examples/LineHeight'
 
 const VisualGuidelines = ({ examples }: {examples: {[key: string]: string}}): React.ReactElement => {
   return (
@@ -15,6 +16,10 @@ const VisualGuidelines = ({ examples }: {examples: {[key: string]: string}}): Re
       <Positioning
           example={examples.positioning_jsx}
           tokensExample={examples.position_token}
+      />
+      <LineHeight
+          example={examples.line_height_code_jsx}
+          tokensExample={examples.line_height_jsx}
       />
     </React.Fragment>
   )
