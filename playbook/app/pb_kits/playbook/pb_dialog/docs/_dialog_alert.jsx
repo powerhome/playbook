@@ -1,49 +1,56 @@
-import React, { useState } from 'react'
+import React, { useState } from "react"
+
 import {
   Body,
   Button,
-  Caption,
   Dialog,
-  RichTextEditor,
-  Typeahead,
-} from '../../'
+  IconCircle,
+  Title
+} from "../../"
 
 const DialogAlert = () => {
   const [isOpen, setIsOpen] = useState(false)
   const close = () => setIsOpen(false)
   const open = () => setIsOpen(true)
-  // const [isLoading, setIsLoading] = useState(false)
 
   return (
     <>
-      <Button onClick={open}>{'Open a Complex Dialog'}</Button>
+      <Button onClick={open}>{"Open a Default Alert"}</Button>
       <Dialog
+          borderRadius="xl"
           onClose={close}
           opened={isOpen}
-          size="lg"
+          size="md"
       >
-        <Dialog.Header>
-          <Body>{'What do you need us to take care of?'}</Body>
-        </Dialog.Header>
         <Dialog.Body>
-          <Caption marginBottom="xs">{'Description'}</Caption>
-          <RichTextEditor />
-          <br />
-          <Caption>
-            {
-              'Type in a word or term too help find tickets later. ex. training,'
-            }
-            {'phone setup, hr'}
-          </Caption>
-          <Typeahead placeholder="Tags.." />
+          <IconCircle
+              icon="exclamation-circle"
+              marginY="sm"
+              size="lg"
+          />
+          <Title
+              alignContent="center"
+              marginY="sm"
+              size={3}
+          >
+                {"Are you sure?"}
+          </Title>
+          <Body
+              marginY="sm"
+              text="Text explaining why this alert happened"
+          />
         </Dialog.Body>
         <Dialog.Footer>
-          <Button onClick={close}>{'Send My Issue'}</Button>
           <Button
               onClick={close}
-              variant="link"
+              variant="secondary"
           >
-            {'Back'}
+            {"No, Cancel"}
+          </Button>
+          <Button
+              onClick={close}
+          >
+            {"Yes, Do things"}
           </Button>
         </Dialog.Footer>
       </Dialog>

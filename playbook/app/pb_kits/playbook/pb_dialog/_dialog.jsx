@@ -29,6 +29,7 @@ type DialogProps = {
   onConfirm?: () => void,
   opened: boolean,
   portalClassName?: string,
+  shadow: string,
   shouldCloseOnOverlayClick: boolean,
   size?: "sm" | "md" | "lg" | "content",
   text?: string,
@@ -52,6 +53,7 @@ const Dialog = (props: DialogProps) => {
     onConfirm = () => {},
     onClose = () => {},
     portalClassName,
+    shadow,
     shouldCloseOnOverlayClick = true,
     text,
     title,
@@ -74,7 +76,7 @@ const Dialog = (props: DialogProps) => {
 
   const classes = classnames(
     buildCss('pb_dialog_wrapper'),
-    globalProps(props),
+    globalProps(props),shadow,
     className
   )
 
