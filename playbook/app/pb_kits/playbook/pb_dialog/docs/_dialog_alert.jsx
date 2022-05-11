@@ -4,6 +4,7 @@ import {
   Body,
   Button,
   Dialog,
+  Flex,
   IconCircle,
   Title
 } from "../../"
@@ -20,25 +21,29 @@ const DialogAlert = () => {
           borderRadius="xl"
           onClose={close}
           opened={isOpen}
-          size="md"
+          size="sm"
       >
         <Dialog.Body>
-          <IconCircle
-              icon="exclamation-circle"
-              marginY="sm"
-              size="lg"
-          />
-          <Title
-              alignContent="center"
-              marginY="sm"
-              size={3}
+          <Flex
+              align="center"
+              orientation="column"
           >
-                {"Are you sure?"}
-          </Title>
-          <Body
-              marginY="sm"
-              text="Text explaining why this alert happened"
-          />
+            <IconCircle
+                icon="exclamation-circle"
+                marginY="xs"
+                size="lg"
+            />
+            <Title
+                marginY="sm"
+                size={3}
+            >
+                  {"Are you sure?"}
+            </Title>
+            <Body
+                marginY="xs"
+                text="Text explaining why this alert happened"
+            />
+          </Flex>
         </Dialog.Body>
         <Dialog.Footer>
           <Button
