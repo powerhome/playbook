@@ -47,7 +47,7 @@ const LineHeight = ({ example, tokensExample }: {example: string, tokensExample?
             />
             <Caption
                 size="xs"
-                text={`$lh_${TOKENS[token]}`}
+                text={token}
             />
           </Card>
         ))}
