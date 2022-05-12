@@ -13,14 +13,15 @@ $pb_dark_body_colors: (
   default:        $text_dk_default,
   light:          $text_dk_light,
   lighter:        $text_dk_lighter,
+  link:           $primary,
 );
 
 // Order is important here!
 $pb_body_status: (
   default:        $text_lt_default,
-  negative:       $error,
-  dark_negative:  $error_dark_body,
-  positive:       $success,
+  error:          $error,
+  dark_error:     $error_dark_body,
+  success:        $success,
 );
 
 @mixin pb_body($color: $text_lt_default) {
@@ -54,14 +55,14 @@ $pb_body_status: (
 }
 
 // Statuses =====================
-@mixin pb_body_negative {
+@mixin pb_body_error {
   @include pb_body($error);
 }
 
-@mixin pb_body_dark_negative {
+@mixin pb_body_dark_error {
   @include pb_body($error_dark_body);
 }
 
-@mixin pb_body_positive {
+@mixin pb_body_success {
   @include pb_body($success);
 }

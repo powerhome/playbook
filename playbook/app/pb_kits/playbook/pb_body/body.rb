@@ -7,7 +7,7 @@ module Playbook
                    values: %w[default light lighter link],
                    default: "default"
       prop :status, type: Playbook::Props::Enum,
-                    values: %w[neutral negative positive],
+                    values: %w[neutral success error],
                     default: "neutral"
       prop :tag, type: Playbook::Props::Enum,
                  values: %w[h1 h2 h3 h4 h5 h6 p span div],
