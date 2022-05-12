@@ -1,23 +1,10 @@
-.justify_content_start {
-  justify-content: start !important;
-}
+$justify_content_values: (
+  start: start,
+  center: center,
+  end: end,
+  space_around: space-around,
+  space_between: space-between,
+  space_evenly: space-evenly,
+);
 
-.justify_content_end {
-  justify-content: end !important;
-}
-
-.justify_content_center {
-  justify-content: center !important;
-}
-
-.justify_content_space_between {
-  justify-content: space-between !important;
-}
-
-.justify_content_space_around {
-  justify-content: space-around !important;
-}
-
-.justify_content_space_evenly {
-  justify-content: space-evenly !important;
-}
+@include global_props_responsive_css($justify_content_values, 'justify_content', 'justify-content');

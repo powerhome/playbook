@@ -1,35 +1,11 @@
-.align_items_flex_start {
-  display: flex;
-  align-items: flex-start !important;
-}
+$align_items_values: (
+  flex_start: flex-start,
+  flex_end: flex-end,
+  start: start,
+  center: center,
+  end: end,
+  baseline: baseline,
+  stretch: stretch,
+);
 
-.align_items_flex_end {
-  display: flex;
-  align-items: flex-end !important;
-}
-
-.align_items_start {
-  display: flex;
-  align-items: start !important;
-}
-
-.align_items_end {
-  display: flex;
-  align-items: end !important;
-}
-
-
-.align_items_center {
-  display: flex;
-  align-items: center !important;
-}
-
-.align_items_baseline {
-  display: flex;
-  align-items: baseline !important;
-}
-
-.align_items_stretch {
-  display: flex;
-  align-items: stretch !important;
-}
+@include global_props_responsive_css($align_items_values, 'align_items', 'align-items');

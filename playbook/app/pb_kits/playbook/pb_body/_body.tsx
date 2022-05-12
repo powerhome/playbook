@@ -2,15 +2,20 @@ import React from 'react'
 import classnames from 'classnames'
 
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
-import { globalProps } from '../utilities/globalProps'
+import { globalProps, GlobalProps } from '../utilities/globalProps'
 
 import Highlight from '../pb_highlight/_highlight'
 
 type BodyProps = {
   aria?: {[key: string]: string},
   className?: string,
+<<<<<<< HEAD
   children?: React.ReactChild[],
   color?: 'default' | 'light' | 'lighter' | 'link' | 'error' | 'success',
+=======
+  children?: React.ReactChild[] | React.ReactChild,
+  color?: 'default' | 'light' | 'lighter' | 'link',
+>>>>>>> 05b79bb33cbdd5323bef0ddacd7f519f268f5a52
   dark?: boolean,
   data?: {[key: string]: string},
   highlightedText?: string[],
@@ -20,7 +25,7 @@ type BodyProps = {
   tag?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p' | 'span' | 'div',
   text?: string,
   variant: null | 'link',
-}
+} & GlobalProps
 
 const Body = (props: BodyProps): React.ReactElement => {
   const {
@@ -56,12 +61,12 @@ const Body = (props: BodyProps): React.ReactElement => {
         id={id}
     >
       { highlighting && (
-         <Highlight
-             highlightedText={highlightedText}
-             text={text}
-         >
-            {children}
-         </Highlight>
+        <Highlight
+            highlightedText={highlightedText}
+            text={text}
+        >
+          {children}
+        </Highlight>
       ) }
       { !highlighting && (
         text || children
