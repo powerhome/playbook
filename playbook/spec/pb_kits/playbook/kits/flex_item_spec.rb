@@ -15,7 +15,7 @@ RSpec.describe Playbook::PbFlex::FlexItem do
   it { is_expected.to define_string_prop(:fixed_size) }
   describe "#classname" do
     it "returns namespaced class name", :aggregate_failures do
-      expect(subject.new(order: "1").classname).to eq "pb_flex_item_kit order_1"
+      expect(subject.new(order: "1").classname).to eq "pb_flex_item_kit flex_order_1"
       expect(subject.new({}).classname).to eq "pb_flex_item_kit"
       expect(subject.new(grow: true).classname).to eq "pb_flex_item_kit_grow"
       expect(subject.new(shrink: true).classname).to eq "pb_flex_item_kit_shrink"

@@ -1,5 +1,5 @@
 import React from 'react'
-import Badge from '../_badge.jsx'
+import Badge from '../_badge'
 
 const BadgeColors = (props) => {
   return (
