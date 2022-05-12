@@ -9,13 +9,8 @@ import Highlight from '../pb_highlight/_highlight'
 type BodyProps = {
   aria?: {[key: string]: string},
   className?: string,
-<<<<<<< HEAD
-  children?: React.ReactChild[],
-  color?: 'default' | 'light' | 'lighter' | 'link' | 'error' | 'success',
-=======
   children?: React.ReactChild[] | React.ReactChild,
-  color?: 'default' | 'light' | 'lighter' | 'link',
->>>>>>> 05b79bb33cbdd5323bef0ddacd7f519f268f5a52
+  color?: 'default' | 'light' | 'lighter' | 'link'| 'error' | 'success',
   dark?: boolean,
   data?: {[key: string]: string},
   highlightedText?: string[],
