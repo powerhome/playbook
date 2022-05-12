@@ -21,7 +21,7 @@ const DialogAlert = () => {
           borderRadius="xl"
           onClose={close}
           opened={isOpen}
-          size="sm"
+          size="md"
       >
         <Dialog.Body>
           <Flex
