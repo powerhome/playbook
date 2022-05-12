@@ -1,1 +1,1 @@
-By default month&year plugin is disabled. To activate it set `plugins` prop to `week`. If using React pass "plugins"
+By default month&year plugin is disabled. To activate it set `plugins` prop to `ws`.

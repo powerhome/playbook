@@ -63,10 +63,6 @@ const datePickerHelper = (config) => {
     return p
   }
 
-  // const setWeek = weekSelectPlugin.selectedDates[0]
-  //           ? weekSelectPlugin.config.getWeek(weekSelectPlugin.selectedDates[0])
-  //           : null;
-
   // ===========================================================
   // |             Flatpickr initializer w/ config             |
   // ===========================================================
@@ -109,7 +105,7 @@ const datePickerHelper = (config) => {
       window.removeEventListener('resize', calendarResizer)
     }],
     onChange: [(selectedDates, dateStr) => {
-      onChange(dateStr, selectedDates)
+      onChange(dateStr, selectedDates) 
     }],
     onYearChange: [() => {
       yearChangeHook()
@@ -118,6 +114,10 @@ const datePickerHelper = (config) => {
     prevArrow: '<i class="far fa-angle-left"></i>',
     static: true,
   })
+
+    // const setWeek = weekSelectPlugin.selectedDates[0]
+  //           ? weekSelectPlugin.config.getWeek(weekSelectPlugin.selectedDates[0])
+  //           : null; Need to implement onto the onChange when ws prop is set
 
   // ===========================================================
   //                 Additional JS Functionality               |
@@ -174,6 +174,7 @@ const datePickerHelper = (config) => {
   dropdown.insertAdjacentHTML('afterend', '<i class="far fa-angle-down year-dropdown-icon" id="test-id"></i>')
   if (picker.monthElements[0].parentElement) {
     return picker.monthElements[0].insertAdjacentHTML('afterend', '<i class="far fa-angle-down month-dropdown-icon"></i>')
+  // if (picker.weekElements[0].insertAdjacentHTML)
   }
 
   // Remove readonly attribute for validation and or text input
