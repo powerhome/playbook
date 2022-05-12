@@ -9,6 +9,7 @@ $royal:               #0056CF;
 $purple:              #9E64E9;
 $teal:                #00C4D7;
 $red:                 #FF2229;
+$red_dark:            #ff4a50;
 $yellow:              #F9BB00;
 $green:               #00CA74;
 $orange:              #FD804C;
@@ -154,7 +155,7 @@ $data_colors: (
 $success:             $green;
 $warning:             $yellow;
 $error:               $red;
-$error_dark:          lighten($error, 5%);
+$error_dark:          $red_dark;
 $error_dark_body:     lighten($error_dark, 2%);
 $info:                $teal;
 $neutral:             $slate;

@@ -1,9 +1,7 @@
-/* @flow */
-
 import React from 'react'
 import classnames from 'classnames'
 
-import { globalProps } from '../utilities/globalProps'
+import { GlobalProps, globalProps } from '../utilities/globalProps'
 import {
   buildAriaProps,
   buildCss,
@@ -13,21 +11,22 @@ import {
 import Icon from '../pb_icon/_icon'
 
 type BadgeProps = {
-  aria?: object,
+  aria?: {[key: string]: string},
   className?: string,
   closeProps?: {
-    onClick?: EventHandler,
-    onMouseDown?: EventHandler,
-    onTouchEnd?: EventHandler,
+    onClick?: React.MouseEventHandler<HTMLSpanElement>,
+    onMouseDown?: React.MouseEventHandler<HTMLSpanElement>,
+    onTouchEnd?: React.TouchEventHandler<HTMLSpanElement>,
   },
-  data?: object,
+  data?: {[key: string]: string},
   id?: string,
-  removeIcon?: Boolean,
-  removeOnClick?: EventHandler,
+  removeIcon?: boolean,
+  removeOnClick?: React.MouseEventHandler<HTMLSpanElement>,
   rounded?: boolean,
   text?: string,
   variant?: "error" | "info" | "neutral" | "primary" | "success" | "warning",
-}
+} & GlobalProps
+
 const Badge = (props: BadgeProps) => {
   const {
     aria = {},
@@ -36,7 +35,7 @@ const Badge = (props: BadgeProps) => {
     data = {},
     id,
     removeIcon = false,
-    removeOnClick = () => {},
+    removeOnClick,
     rounded = false,
     text,
     variant = 'neutral',
@@ -44,7 +43,7 @@ const Badge = (props: BadgeProps) => {
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
   const css = classnames(
-    buildCss('pb_badge_kit', variant, { rounded }),
+    buildCss('pb_badge_kit', variant, rounded ? 'rounded' : null),
     globalProps(props),
     className
   )
@@ -58,7 +57,7 @@ const Badge = (props: BadgeProps) => {
     >
       <span>
         {text}
-        <If condition={removeIcon}>
+        {removeIcon && (
           <span
               onClick={removeOnClick}
               style={{ cursor: 'pointer' }}
@@ -69,7 +68,7 @@ const Badge = (props: BadgeProps) => {
                 icon="times"
             />
           </span>
-        </If>
+        )}
       </span>
     </div>
   )

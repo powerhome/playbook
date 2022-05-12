@@ -1,0 +1,26 @@
+@mixin global_props_css($props, $class_prefix, $css_attribute, $responsive) {
+  @each $propkey, $propvalue in $props {
+    .#{$class_prefix}_#{$propkey} {
+      #{$css_attribute}: #{$propvalue} !important;
+      @content;
+    }
+  }
+
+  @if $responsive {
+    @each $size, $size_value in $breakpoints_grid {
+      @each $prop_key, $prop_value in $props {
+          $min_size: map-get($size_value, "min");
+          $max_size: map-get($size_value, "max");
+          .#{$class_prefix}_#{$size}_#{$prop_key} {
+            @include break_on($min_size, $max_size) {
+              #{$css_attribute}: #{$prop_value} !important;
+            }
+          }
+      }
+    }
+  }
+}
+
+@mixin global_props_responsive_css($props, $class_prefix, $css_attribute) {
+  @include global_props_css($props, $class_prefix, $css_attribute, 1)
+}
