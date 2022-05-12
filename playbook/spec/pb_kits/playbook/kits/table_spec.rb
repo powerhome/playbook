@@ -16,6 +16,7 @@ RSpec.describe Playbook::PbTable::Table do
   it { is_expected.to define_boolean_prop(:disable_hover).with_default(false) }
   it { is_expected.to define_boolean_prop(:container).with_default(true) }
   it { is_expected.to define_prop(:text) }
+  it { is_expected.to define_boolean_prop(:sticky).with_default(false) }
 
   describe "#container" do
     it "returns false when it is specified" do
@@ -34,6 +35,7 @@ RSpec.describe Playbook::PbTable::Table do
       expect(subject.new(container: false).classname).to eq "pb_table table-md table-collapse-sm table-responsive-collapse"
       expect(subject.new(disable_hover: true).classname).to eq "pb_table table-md no-hover table-card table-collapse-sm table-responsive-collapse"
       expect(subject.new(disable_hover: true, dark: true, size: "lg", single_line: true).classname).to eq "pb_table table-lg single-line table-dark no-hover table-card table-collapse-sm table-responsive-collapse dark"
+      expect(subject.new(sticky: true).classname).to eq "pb_table table-md table-card sticky-header table-collapse-sm table-responsive-collapse"
     end
   end
 end

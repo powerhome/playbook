@@ -1,19 +1,9 @@
-.justify_self_auto {
-  justify-self: auto !important;
-}
+$justify_self_values: (
+  auto: auto,
+  start: start,
+  center: center,
+  end: end,
+  stretch: stretch,
+);
 
-.justify_self_start {
-  justify-self: start !important;
-}
-
-.justify_self_end {
-  justify-self: end !important;
-}
-
-.justify_self_center {
-  justify-self: center !important;
-}
-
-.justify_self_stretch {
-  justify-self: stretch !important;
-}
+@include global_props_responsive_css($justify_self_values, 'justify_self', 'justify-self');
