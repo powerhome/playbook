@@ -14,7 +14,7 @@ RSpec.describe Playbook::PbBody::Body do
   it {
     is_expected.to define_enum_prop(:status)
       .with_default("neutral")
-      .with_values("neutral", "negative", "positive")
+      .with_values("neutral", "error", "success")
   }
   it {
     is_expected.to define_enum_prop(:tag)
