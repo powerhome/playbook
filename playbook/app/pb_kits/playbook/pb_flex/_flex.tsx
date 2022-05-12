@@ -1,11 +1,10 @@
-/* @flow */
-
 import React from 'react'
 import classnames from 'classnames'
 import { buildCss, buildDataProps } from '../utilities/props'
-import { globalProps } from '../utilities/globalProps'
+import { GlobalProps, globalProps } from '../utilities/globalProps'
+
 type FlexProps = {
-  children: array<React.ReactNode> | React.ReactNode,
+  children: React.ReactChild[] | React.ReactNode,
   className?: string,
   data?: object,
   horizontal?: "left" | "center" | "right" | "stretch" | "none",
@@ -22,7 +21,7 @@ type FlexProps = {
   columnGap?: "xs" | "sm" | "md" | "lg" | "xl" | "none",
   wrap?: boolean,
   alignSelf?: "start" | "end" | "center" | "stretch" | "none"
-}
+} & GlobalProps
 
 const Flex = (props: FlexProps) => {
   const {
@@ -43,6 +42,7 @@ const Flex = (props: FlexProps) => {
     wrap = false,
     alignSelf = 'none',
   } = props
+  
   const orientationClass =
     orientation !== undefined ? `orientation_${orientation}` : ''
   const justifyClass =
