@@ -3,6 +3,7 @@ examples:
     - table_sm: Small
     - table_md: Medium
     - table_lg: Large
+    - table_sticky: Sticky Header
     - table_alignment_row: Row Alignment
     - table_alignment_column: Column Alignment
     - table_alignment_shift_row: Shift Row
@@ -25,6 +26,7 @@ examples:
     - table_sm: Small
     - table_md: Medium
     - table_lg: Large
+    - table_sticky: Sticky Header
     - table_alignment_row: Row Alignment
     - table_alignment_column: Column Alignment
     - table_alignment_shift_row: Shift Row
