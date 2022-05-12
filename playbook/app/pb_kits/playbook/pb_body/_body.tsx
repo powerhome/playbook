@@ -10,7 +10,7 @@ type BodyProps = {
   aria?: {[key: string]: string},
   className?: string,
   children?: React.ReactChild[] | React.ReactChild,
-  color?: 'default' | 'light' | 'lighter' | 'link'| 'error' | 'success',
+  color?: 'default' | 'light' | 'lighter' | 'link' | 'error' | 'success',
   dark?: boolean,
   data?: {[key: string]: string},
   highlightedText?: string[],
