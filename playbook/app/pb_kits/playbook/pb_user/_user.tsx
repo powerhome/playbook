@@ -1,10 +1,9 @@
-/* @flow */
 
 import React from 'react'
 import classnames from 'classnames'
 
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
-import { globalProps } from '../utilities/globalProps'
+import { GlobalProps, globalProps } from '../utilities/globalProps'
 
 import Avatar from '../pb_avatar/_avatar'
 import Body from '../pb_body/_body'
@@ -12,19 +11,19 @@ import Title from '../pb_title/_title'
 
 type UserProps = {
   align?: "left" | "center" | "right",
-  aria?: object,
-  avatar?: Boolean,
-  avatarUrl?: String,
-  className?: String,
+  aria?: {[key: string]: string},
+  avatar?: boolean,
+  avatarUrl?: string,
+  className?: string,
   dark?: boolean,
-  data?: object,
-  id?: String,
-  name?: String,
+  data?: {[key: string]: string},
+  id?: string,
+  name?: string,
   orientation?: "horiztonal" | "vertical",
   size?: "sm" | "md" | "lg",
-  territory?: String,
-  title?: String,
-}
+  territory?: string,
+  title?: string,
+} & GlobalProps
 
 const User = (props: UserProps) => {
   const {
@@ -43,20 +42,16 @@ const User = (props: UserProps) => {
     title = '',
   } = props
 
-  const avatarSizeMap = {
-    lg: 'xl',
-    md: 'md',
-    sm: 'sm',
-  }
-
-  const ariaProps = buildAriaProps(aria)
-  const dataProps = buildDataProps(data)
+  const dataProps: {[key: string]: string} = buildDataProps(data)
+  const ariaProps: {[key: string]: string} = buildAriaProps(aria)
 
   const classes = classnames(
     buildCss('pb_user_kit', align, orientation, size),
     globalProps(props),
     className,
   )
+
+  const avatarPresent = avatar || avatarUrl
 
   return (
     <div
@@ -65,14 +60,14 @@ const User = (props: UserProps) => {
         className={classes}
         id={id}
     >
-      <If condition={avatar || avatarUrl}>
+      { avatarPresent &&
         <Avatar
             imageUrl={avatarUrl}
             name={name}
-            size={avatarSizeMap[size]}
+            size={size}
+            status={null}
         />
-      </If>
-
+      }
       <div className="content_wrapper">
         <Title
             dark={dark}
@@ -82,6 +77,7 @@ const User = (props: UserProps) => {
         <Body
             color="light"
             dark={dark}
+            variant={null}
         >
           {territory === '' ? title : `${territory} • ${title}`}
         </Body>
