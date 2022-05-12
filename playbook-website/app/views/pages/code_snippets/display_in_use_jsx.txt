@@ -1,4 +1,15 @@
-<Button display="flex">
-  Button Text
-<Button/>
+<Card display="flex">
+  Card content
+<Card/>
 
+<Card
+  display={
+    xs: "hidden",
+    sm: "flex",
+    md: "inline",
+    lg: "inline_block",
+    xl: "block"
+  }
+>
+  Card content
+<Card/>

@@ -27,6 +27,8 @@ const customRender = (ui, options) =>
 export * from '@testing-library/react'
 export { customRender as render }
 
+export const SCREEN_SIZES = ["xs", "sm", "md", "lg", "xl"]
+
 export const renderKit = (Kit, props = {}, newProps = {}) => {
   const kitProps = { ...props, ...newProps }
   render(<Kit {...kitProps} />)

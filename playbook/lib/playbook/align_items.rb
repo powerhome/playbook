@@ -6,15 +6,23 @@ module Playbook
       base.prop :align_items
     end
 
+    # rubocop:disable Style/IfInsideElse
     def align_items_props
       selected_props = align_items_options.keys.select { |sk| try(sk) }
       return nil unless selected_props.present?
 
       selected_props.map do |k|
         align_items_value = send(k)
-        "align_items_#{align_items_value}" if align_items_values.include? align_items_value
+        if align_items_value.is_a?(Hash)
+          align_items_value.map do |media_size, align_value|
+            "align_items_#{media_size}_#{align_value.underscore}" if align_items_values.include? align_value.to_s
+          end
+        else
+          "align_items_#{align_items_value.underscore}" if align_items_values.include? align_items_value
+        end
       end.compact.join(" ")
     end
+    # rubocop:enable Style/IfInsideElse
 
     def align_items_options
       {
@@ -23,7 +31,7 @@ module Playbook
     end
 
     def align_items_values
-      %w[flex_start flex_end start end center baseline stretch]
+      %w[flexStart flexEnd start end center baseline stretch]
     end
   end
 end

@@ -8,6 +8,7 @@
     "lint": "eslint . --ext .js,.jsx",
     "lint-fix": "eslint . --ext .js,.jsx --fix",
     "test": "jest",
+    "test-watch": "jest --watch",
     "test-coverage": "jest --collectCoverage",
     "test-coverage-summary": "jest --collectCoverage --coverageReporters=\"json-summary\"",
     "watch": "webpack --watch --mode=development",
