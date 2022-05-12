@@ -1,18 +1,17 @@
-/* @flow */
-
 import React from 'react'
 import classnames from 'classnames'
 import { buildAriaProps, buildDataProps } from '../utilities/props'
-import { globalProps } from '../utilities/globalProps'
+import { GlobalProps, globalProps } from '../utilities/globalProps'
 
-import Icon from '../pb_icon/_icon.jsx'
+import Icon from '../pb_icon/_icon'
 
-type EventHandler = (SyntheticInputEvent<HTMLInputElement>) => void
+type EventHandler = (React.MouseEventHandler<HTMLElement>)
+
 type ButtonPropTypes = {
-  aria?: object,
-  children?: array<React.ReactChild>,
-  className?: string | array<string>,
-  data?: object,
+  aria?: {[key: string]: string},
+  children?: React.ReactChild[] | React.ReactChild,
+  className?: string | string[],
+  data?: {[key: string]: string},
   disabled?: boolean,
   fixedWidth?: boolean,
   form?: string,
@@ -26,11 +25,11 @@ type ButtonPropTypes = {
   size?: 'sm' | 'md' | 'lg',
   text?: string,
   type: 'inline' | null,
-  htmlType: string | 'button',
+  htmlType: 'submit' | 'reset' | 'button' | undefined,
   value?: string | null,
   variant: 'primary' | 'secondary' | 'link',
   wrapperClass: string,
-}
+} & GlobalProps
 
 const buttonClassName = (props: ButtonPropTypes) => {
   const {
@@ -64,7 +63,7 @@ const Button = (props: ButtonPropTypes) => {
     icon = null,
     id,
     loading = false,
-    onClick = () => {},
+    onClick,
     link = null,
     newWindow = false,
     text,
@@ -92,46 +91,66 @@ const Button = (props: ButtonPropTypes) => {
 
   const content = (
     <span className="pb_button_content">
-      <If condition={icon !== null}>
+      {icon && (
         <i className={`pb_icon_kit far fa-${icon} fa-fw`} />
-        {' '}
-      </If>
+      )}
       <span>{text || children}</span>
     </span>
   )
 
+  const ifLoading = () => {
+    if (loading){
+      return(
+        <>
+          {loadingIcon}
+        </>
+      )
+    } else {
+      return (
+        content
+      )
+    }
+  }
+
+  const displayButton = () => {
+    if (link)
+      return (
+        <a
+            {...ariaProps}
+            {...dataProps}
+            className={css}
+            href={link}
+            id={id}
+            rel="noreferrer"
+            role="link"
+            target={newWindow ? '_blank' : null}
+        >
+          {ifLoading()}
+        </a>
+      )
+    else
+      return (
+        <button
+            {...ariaProps}
+            {...dataProps}
+            className={css}
+            disabled={disabled}
+            form={form}
+            id={id}
+            onClick={onClick}
+            role="button"
+            type={htmlType}
+            value={value}
+        >
+          {ifLoading()}
+        </button>
+      )
+  }
+
   return (
-    <If condition={link !== null}>
-      <a
-          {...ariaProps}
-          {...dataProps}
-          className={css}
-          href={link}
-          id={id}
-          rel="noreferrer"
-          role="link"
-          target={newWindow ? '_blank' : null}
-      >
-        <If condition={loading}>{loadingIcon}</If>
-        {content}
-      </a>
-      <Else />
-      <button
-          {...ariaProps}
-          {...dataProps}
-          className={css}
-          disabled={disabled}
-          form={form}
-          id={id}
-          onClick={onClick}
-          role="button"
-          type={htmlType}
-          value={value}
-      >
-        <If condition={loading}>{loadingIcon}</If>
-        {content}
-      </button>
-    </If>
+    <>
+      {displayButton()}
+    </>
   )
 }
 

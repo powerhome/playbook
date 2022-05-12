@@ -1,7 +1,7 @@
 import React from 'react'
 import Title from '../../pb_title/_title'
 import { Body } from '../../'
-import Card from '../_card.jsx'
+import Card from '../_card'
 
 const CardBackground = (props) => {
   return (
