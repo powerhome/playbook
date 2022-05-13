@@ -2,13 +2,14 @@ import React from 'react'
 
 import DatePicker from '../_date_picker'
 
-const DatePickerWeek = () => {
+const DatePickerWeek = (props) => {
   return (
     <div>
       <DatePicker
           label="Date Picker"
-          pickerId="disabled-date"
+          pickerId="week-date-picker"
           plugins="ws"
+          {...props}
       />
     </div>
   )

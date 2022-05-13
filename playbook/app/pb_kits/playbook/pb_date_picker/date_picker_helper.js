@@ -1,6 +1,6 @@
 import flatpickr from 'flatpickr'
 import monthSelectPlugin from 'flatpickr/dist/plugins/monthSelect'
-import weekSelectPlugin from "flatpickr/dist/plugins/weekSelect/weekSelect"
+import weekSelect from "flatpickr/dist/plugins/weekSelect/weekSelect"
 
 const datePickerHelper = (config) => {
   const {
@@ -58,7 +58,7 @@ const datePickerHelper = (config) => {
     if (plugins === "ms") {
      p = [ monthSelectPlugin({ shorthand: true, dateFormat: 'F Y', altFormat: 'F Y' }) ] 
     } else if ( plugins === "ws") {
-      p = [ weekSelectPlugin({})]
+      p = [ weekSelect({shorthand: true, dateFormat: 'F Y', altFormat: 'F Y' })]
     } else p = []
     return p
   }
@@ -106,8 +106,8 @@ const datePickerHelper = (config) => {
     }],
     onChange: [(selectedDates, dateStr) => {
       onChange(dateStr, selectedDates) 
-      // if (plugins === "ws") weekSelectPlugin.selectedDates[0]
-      //   ? weekSelectPlugin.config.getWeek(weekSelectPlugin.selectedDates[0])
+      // if (plugins === "ws") weekSelect.selectedDates[0]
+      //   ? weekSelect.config.getWeek(weekSelectPlugin.selectedDates[0])
       //   : null
     }],
     onYearChange: [() => {

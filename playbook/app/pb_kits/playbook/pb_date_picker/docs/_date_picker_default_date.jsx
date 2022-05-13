@@ -8,7 +8,6 @@ const DatePickerDefaultDate = (props) => (
         defaultDate="07/31/2020"
         label="Default Date String"
         pickerId="date-picker-default-date1"
-        plugins="ms"
         {...props}
     />
     <DatePicker
