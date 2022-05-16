@@ -1,2 +1,2 @@
 ingress:
-  issueCerts: false # Certificate is issued once per cluster in the playbook-prs namespace
+  issueCert: false # Certificate is issued once per cluster in the playbook-prs namespace
