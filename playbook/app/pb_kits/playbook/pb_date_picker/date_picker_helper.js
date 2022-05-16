@@ -106,9 +106,6 @@ const datePickerHelper = (config) => {
     }],
     onChange: [(selectedDates, dateStr) => {
       onChange(dateStr, selectedDates) 
-      // if (plugins === "ws") weekSelect.selectedDates[0]
-      //   ? weekSelect.config.getWeek(weekSelectPlugin.selectedDates[0])
-      //   : null
     }],
     onYearChange: [() => {
       yearChangeHook()
@@ -117,10 +114,6 @@ const datePickerHelper = (config) => {
     prevArrow: '<i class="far fa-angle-left"></i>',
     static: true,
   })
-
-    // const setWeek = weekSelectPlugin.selectedDates[0]
-  //           ? weekSelectPlugin.config.getWeek(weekSelectPlugin.selectedDates[0])
-  //           : null; Need to implement onto the onChange when ws prop is set
 
   // ===========================================================
   //                 Additional JS Functionality               |
