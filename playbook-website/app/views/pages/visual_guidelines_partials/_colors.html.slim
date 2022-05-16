@@ -1,0 +1,112 @@
+= pb_rails("title", props: { text: "Colors", tag: "h1", size: 1 })
+
+// Text ----------------------------
+= render :partial => "pages/visual_guidelines_partials/pb_doc_color",
+    locals:{ title: "Text Colors",
+    usage: "Used for text",
+    colors: [{name: "Default", variable: "text_lt_default"},
+        {name: "Light", variable: "text_lt_light"},
+        {name: "Lighter", variable: "text_lt_lighter"},
+        {name: "Default Dk", variable: "text_dk_default", dark: true},
+        {name: "Light Dk", variable: "text_dk_light", dark: true},
+        {name: "Lighter Dk", variable: "text_dk_lighter", dark: true}]}
+
+// Backgrounds ---------------------
+= render :partial => "pages/visual_guidelines_partials/pb_doc_color",
+    locals:{ title: "Backgrounds",
+    usage: "Used for backgrounds",
+    colors: [{name: "Bg Light", variable: "bg_light"},
+        {name: "Bg Dark", variable: "bg_dark"},
+        {name: "Bg Gradient", variable: "bg_gradient"}]}
+
+// Cards ---------------------------
+= render :partial => "pages/visual_guidelines_partials/pb_doc_color",
+    locals:{ title: "Cards",
+    usage: "Used for card backgrounds",
+    colors: [{name: "Card Light", variable: "card_light"},
+        {name: "Card Dark", variable: "card_dark", dark: true}]}
+
+// Status --------------------------
+= render :partial => "pages/visual_guidelines_partials/pb_doc_color",
+    locals:{ title: "Status",
+    usage: "Used for status indicators",
+    colors: [{name: "Success", variable: "success"},
+        {name: "Warning", variable: "warning"},
+        {name: "Error", variable: "error"},
+        {name: "Info", variable: "info"},
+        {name: "Neutral", variable: "neutral"}]}
+
+// Data ----------------------------
+= render :partial => "pages/visual_guidelines_partials/pb_doc_color",
+    locals:{ title: "Data",
+    usage: "Used in graphs, charts and stats",
+    colors: [{name: "Data 1", variable: "data_1"},
+        {name: "Data 2", variable: "data_2"},
+        {name: "Data 3", variable: "data_3"},
+        {name: "Data 4", variable: "data_4"},
+        {name: "Data 5", variable: "data_5"},
+        {name: "Data 6", variable: "data_6"},
+        {name: "Data 7", variable: "data_7"},
+        {name: "Data 8", variable: "data_8"}]}
+
+// Actions -------------------------
+= render :partial => "pages/visual_guidelines_partials/pb_doc_color",
+    locals:{ title: "Actions",
+    usage: "Used for links and action buttons",
+    colors: [{name: "Primary", variable: "primary_action"}]}
+
+// Active --------------------------
+= render :partial => "pages/visual_guidelines_partials/pb_doc_color",
+    locals:{ title: "Active",
+    usage: "Used for active or selected states",
+    colors: [{name: "Active Light", variable: "active_light"},
+        {name: "Active Dark", variable: "active_dark", dark: true}]}
+
+// Border --------------------------
+= render :partial => "pages/visual_guidelines_partials/pb_doc_color",
+    locals:{ title: "Border",
+    colors: [{name: "Border Light", variable: "border_light"},
+        {name: "Border Dark", variable: "border_dark", dark: true}]}
+
+// Shadow --------------------------
+= render :partial => "pages/visual_guidelines_partials/pb_doc_color",
+    locals:{ title: "Shadow",
+    colors: [{name: "Shadow", variable: "shadow"}]}
+
+// Products ------------------------
+= render :partial => "pages/visual_guidelines_partials/pb_doc_color",
+    locals:{ title: "Product Colors",
+    usage: "Used for specific product indicators",
+    colors: [{name: "Windows", variable: "windows"},
+        {name: "Siding", variable: "siding"},
+        {name: "Doors", variable: "doors"},
+        {name: "Solar", variable: "solar"},
+        {name: "Roofing", variable: "roofing"},
+        {name: "Gutters", variable: "gutters"},
+        {name: "Attic Insulation", variable: "insulation"}]}
+
+// Category ------------------------
+= render :partial => "pages/visual_guidelines_partials/pb_doc_color",
+    locals:{ title: "Category Colors",
+    usage: "Used for categorization",
+    colors: [{name: "Category 1", variable: "category_1"},
+        {name: "Category 2", variable: "category_2"},
+        {name: "Category 3", variable: "category_3"},
+        {name: "Category 4", variable: "category_4"},
+        {name: "Category 5", variable: "category_5"},
+        {name: "Category 6", variable: "category_6"},
+        {name: "Category 7", variable: "category_7"},
+        {name: "Category 8", variable: "category_8"},
+        {name: "Category 9", variable: "category_9"},
+        {name: "Category 10", variable: "category_10"},
+        {name: "Category 11", variable: "category_11"},
+        {name: "Category 12", variable: "category_12"},
+        {name: "Category 13", variable: "category_13"},
+        {name: "Category 14", variable: "category_14"},
+        {name: "Category 15", variable: "category_15"},
+        {name: "Category 16", variable: "category_16"},
+        {name: "Category 17", variable: "category_17"},
+        {name: "Category 18", variable: "category_18"},
+        {name: "Category 19", variable: "category_19"},
+        {name: "Category 20", variable: "category_20"},
+        {name: "Category 21", variable: "category_21"}]}
