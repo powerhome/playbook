@@ -65,6 +65,7 @@ export const TEXT_COLORS = [
  ]
 
  export const CATEGORY = [
+  {name: "Category 1", variable: "category_1"},
   {name: "Category 2", variable: "category_2"},
   {name: "Category 3", variable: "category_3"},
   {name: "Category 4", variable: "category_4"},
