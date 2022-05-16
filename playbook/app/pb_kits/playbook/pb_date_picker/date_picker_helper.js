@@ -58,7 +58,7 @@ const datePickerHelper = (config) => {
     if (plugins === "ms") {
      p = [ monthSelectPlugin({ shorthand: true, dateFormat: 'F Y', altFormat: 'F Y' }) ] 
     } else if ( plugins === "ws") {
-      p = [ weekSelect({shorthand: true, dateFormat: 'F Y', altFormat: 'F Y' })]
+      p = [ weekSelect({})]
     } else p = []
     return p
   }
