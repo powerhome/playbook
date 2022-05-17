@@ -8,7 +8,8 @@ module Playbook
                    default: "default"
       prop :status, type: Playbook::Props::Enum,
                     values: %w[neutral positive negative],
-                    default: "neutral"
+                    default: "neutral",
+                    deprecated: true
       prop :tag, type: Playbook::Props::Enum,
                  values: %w[h1 h2 h3 h4 h5 h6 p span div],
                  default: "div"
