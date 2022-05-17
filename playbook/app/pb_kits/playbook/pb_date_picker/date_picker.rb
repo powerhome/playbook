@@ -17,6 +17,8 @@ module Playbook
                            default: []
       prop :disable_weekdays, type: Playbook::Props::Array,
                               default: []
+      prop :enable_time, type: Playbook::Props::Boolean,
+                         default: false
       prop :error, type: Playbook::Props::String
       prop :format, type: Playbook::Props::String,
                     default: "m/d/Y"
@@ -59,6 +61,7 @@ module Playbook
           disableDate: disable_date,
           disableRange: disable_range,
           disableWeekdays: disable_weekdays,
+          enableTime: enable_time,
           format: format,
           hideIcon: hide_icon,
           inline: inline,

@@ -14,3 +14,4 @@ export { default as DatePickerFlatpickrMethods } from './_date_picker_flatpickr_
 export { default as DatePickerYearRange } from './_date_picker_year_range.jsx'
 export { default as DatePickerInline } from './_date_picker_inline.jsx'
 export { default as DatePickerMonthAndYear } from './_date_picker_month_and_year.jsx'
+export { default as DatePickerTime } from './_date_picker_time.jsx'

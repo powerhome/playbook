@@ -8,6 +8,7 @@ const datePickerHelper = (config) => {
     disableDate,
     disableRange,
     disableWeekdays,
+    enableTime,
     format,
     maxDate,
     minDate,
@@ -86,9 +87,10 @@ const datePickerHelper = (config) => {
         )
       },
     ] : disabledParser(),
-    maxDate: maxDate,
-    minDate: minDate,
-    mode: mode,
+    enableTime,
+    maxDate,
+    minDate,
+    mode,
     nextArrow: '<i class="far fa-angle-right"></i>',
     onOpen: [() => {
       calendarResizer()
