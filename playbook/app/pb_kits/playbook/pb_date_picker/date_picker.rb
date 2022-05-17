@@ -41,10 +41,17 @@ module Playbook
                        required: true
       prop :placeholder, type: Playbook::Props::String,
                          default: "Select Date"
-      # prop :month, type: Playbook::Props::Boolean,
-      #                default: false
-      # prop :week, type: Playbook::Props::Boolean,
-      #                default: false
+      prop :plugins, type: Playbook::Props::Boolean,
+                     default: false,
+                     deprecated: true
+      # prop :monthselect, type: Playbook::Props::Boolean,
+      #                    default: false
+      # prop :weekselect, type: Playbook::Props::Boolean,
+      #                   default: false
+
+      prop :selecttype, type: Playbook::Props::Enum,
+                        values: %w[weekselect monthselect],
+                        default: "monthselect"
       prop :required, type: Playbook::Props::Boolean,
                       default: false
       prop :year_range, type: Playbook::Props::Array,
@@ -70,6 +77,9 @@ module Playbook
           pickerId: picker_id,
           plugins: plugins,
           required: required,
+          # monthselect: monthselect,
+          # weekselect: weekselect,
+          selecttype: selecttype,
           yearRange: year_range,
         }.to_json.html_safe
       end
