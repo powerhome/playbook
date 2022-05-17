@@ -40,7 +40,10 @@ type DatePickerProps = {
   onChange: (String) => void,
   pickerId?: String,
   placeholder?: String,
-  plugins?: "ms" | "ws",
+  plugins: Boolean,
+  monthSelect?: Boolean,
+  weekSelect?: Boolean,
+  selectionType?: "month" | "week",
   type?: String,
   yearRange?: Array,
 }
@@ -74,7 +77,10 @@ const DatePicker = (props: DatePickerProps) => {
     onChange = () => {},
     pickerId,
     placeholder = 'Select Date',
-    plugins = "",
+    plugins = false,
+    weekSelect = false,
+    monthSelect = false,
+    selectionType = '',
     yearRange = [ 1900, 2100 ],
   } = props
 
@@ -103,6 +109,9 @@ const DatePicker = (props: DatePickerProps) => {
       onChange: onChange,
       pickerId: pickerId,
       plugins: plugins,
+      weekSelect: weekSelect,
+      monthSelect: monthSelect,
+      selectionType: selectionType,
       yearRange: yearRange,
     })
   }, [])

@@ -7,8 +7,8 @@ const DatePickerWeek = (props) => {
     <div>
       <DatePicker
           label="Date Picker"
-          pickerId="week-date-picker"
-          plugins="ws"
+          pickerId="week-date-picker" 
+          selectionType="week"
           {...props}
       />
     </div>

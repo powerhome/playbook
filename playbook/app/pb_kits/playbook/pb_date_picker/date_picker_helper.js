@@ -17,6 +17,7 @@ const datePickerHelper = (config) => {
     pickerId,
     plugins,
     required,
+    selectionType,
     yearRange,
   } = config
 
@@ -55,9 +56,9 @@ const datePickerHelper = (config) => {
 
   const setPlugin = () => {
     let p 
-    if (plugins === "ms") {
+    if (selectionType === "month" || plugins === true) {
      p = [ monthSelectPlugin({ shorthand: true, dateFormat: 'F Y', altFormat: 'F Y' }) ] 
-    } else if ( plugins === "ws") {
+    } else if ( selectionType === "week") {
       p = [ weekSelect({})]
     } else p = []
     return p
