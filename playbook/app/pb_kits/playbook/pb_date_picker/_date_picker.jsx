@@ -4,7 +4,7 @@ import React, { useEffect } from 'react'
 import classnames from 'classnames'
 
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
-import { globalProps } from '../utilities/globalProps'
+import { deprecatedProps, globalProps } from '../utilities/globalProps'
 
 import datePickerHelper from './date_picker_helper'
 
@@ -46,6 +46,8 @@ type DatePickerProps = {
   yearRange?: Array,
 }
 const DatePicker = (props: DatePickerProps) => {
+  if (props.plugins) deprecatedProps('Date Picker', ['plugins'])
+
   const {
     allowInput = false,
     aria = {},
