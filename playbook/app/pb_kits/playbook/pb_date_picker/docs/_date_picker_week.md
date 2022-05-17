@@ -1,1 +1,1 @@
-By default selectType prop is disabled. To activate it set `selectType` prop to `week`.
+By default selectType prop is disabled. To activate it set `selectType` prop in JSX/TSX to `week`. To activate it set `select_type` prop in a rails file to `week`.
