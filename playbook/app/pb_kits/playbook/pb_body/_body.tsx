@@ -2,7 +2,7 @@ import React from 'react'
 import classnames from 'classnames'
 
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
-import { globalProps, GlobalProps } from '../utilities/globalProps'
+import { deprecatedProps, globalProps, GlobalProps } from '../utilities/globalProps'
 
 import Highlight from '../pb_highlight/_highlight'
 
@@ -23,6 +23,7 @@ type BodyProps = {
 } & GlobalProps
 
 const Body = (props: BodyProps): React.ReactElement => {
+  if (props.variant) deprecatedProps("Body", ["status"]) //status prop is deprecated, use color instead please
   const {
     aria = {},
     children,
