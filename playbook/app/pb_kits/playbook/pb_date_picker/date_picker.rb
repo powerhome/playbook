@@ -44,14 +44,9 @@ module Playbook
       prop :plugins, type: Playbook::Props::Boolean,
                      default: false,
                      deprecated: true
-      # prop :monthselect, type: Playbook::Props::Boolean,
-      #                    default: false
-      # prop :weekselect, type: Playbook::Props::Boolean,
-      #                   default: false
-
-      prop :selecttype, type: Playbook::Props::Enum,
-                        values: %w[weekselect monthselect],
-                        default: "monthselect"
+      prop :selection_type, type: Playbook::Props::Enum,
+                            values: %w[week month],
+                            default: "month"
       prop :required, type: Playbook::Props::Boolean,
                       default: false
       prop :year_range, type: Playbook::Props::Array,
@@ -77,9 +72,7 @@ module Playbook
           pickerId: picker_id,
           plugins: plugins,
           required: required,
-          # monthselect: monthselect,
-          # weekselect: weekselect,
-          selecttype: selecttype,
+          selectionType: selection_type,
           yearRange: year_range,
         }.to_json.html_safe
       end
