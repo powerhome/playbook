@@ -1,5 +1,5 @@
 import React from 'react'
-import Pill from '../_pill.jsx'
+import Pill from '../_pill'
 
 const PillDefault = (props) => {
   return (

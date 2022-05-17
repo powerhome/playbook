@@ -1,29 +1,10 @@
-.align_content_start {
-  display: flex;
-  align-content: start !important;
-}
+$align_content_values: (
+  start: start,
+  end: end,
+  center: center,
+  space_between: space-between,
+  space_around: space-around,
+  space_evenly: space-evenly
+);
 
-.align_content_end {
-  display: flex;
-  align-content: end !important;
-}
-
-.align_content_center {
-  display: flex;
-  align-content: center !important;
-}
-
-.align_content_space_between {
-  display: flex;
-  align-content: space-between !important;
-}
-
-.align_content_space_around {
-  display: flex;
-  align-content: space-around !important;
-}
-
-.align_content_space_evenly {
-  display: flex;
-  align-content: space-evenly !important;
-}
+@include global_props_responsive_css($align_content_values, 'align_content', 'align-content');
