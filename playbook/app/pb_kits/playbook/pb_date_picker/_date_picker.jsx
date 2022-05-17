@@ -4,7 +4,7 @@ import React, { useEffect } from 'react'
 import classnames from 'classnames'
 
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
-import { globalProps } from '../utilities/globalProps'
+import { deprecatedProps, globalProps } from '../utilities/globalProps'
 
 import datePickerHelper from './date_picker_helper'
 
@@ -41,11 +41,14 @@ type DatePickerProps = {
   onChange: (String) => void,
   pickerId?: String,
   placeholder?: String,
-  plugins?: Boolean,
+  plugins: Boolean,
+  selectionType?: "month" | "week",
   type?: String,
   yearRange?: Array,
 }
 const DatePicker = (props: DatePickerProps) => {
+  if (props.plugins) deprecatedProps('Date Picker', ['plugins'])
+
   const {
     allowInput = false,
     aria = {},
@@ -77,6 +80,7 @@ const DatePicker = (props: DatePickerProps) => {
     pickerId,
     placeholder = 'Select Date',
     plugins = false,
+    selectionType = '',
     yearRange = [ 1900, 2100 ],
   } = props
 
@@ -106,6 +110,7 @@ const DatePicker = (props: DatePickerProps) => {
       onChange,
       pickerId,
       plugins,
+      selectionType,
       yearRange,
     })
   })
