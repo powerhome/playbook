@@ -11,10 +11,9 @@ $image-sizes: (
 
 [class^=pb_image_kit] {
   position: relative;
-  object-fit: cover;
 
   @each $name, $size in $image-sizes {
-    .ls-blur-up-img,
+    &.ls-blur-up-img,
     &[class*=size_#{$name}] {
       width: $size;
       height: $size;
@@ -36,6 +35,7 @@ $image-sizes: (
       visibility: hidden;
     }
 
+    &.ls-blur-up-img,
     &.fade {
       opacity: 0;
       &.lazyloaded {
@@ -44,6 +44,7 @@ $image-sizes: (
       }
     }
 
+    &.ls-blur-up-img,
     &.blur {
       filter: blur(5px);
       &.lazyloaded {
@@ -53,6 +54,7 @@ $image-sizes: (
       }
     }
 
+    &.ls-blur-up-img,
     &.scale {
       opacity: 0;
       transform: scale(0.9);

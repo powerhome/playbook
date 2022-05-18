@@ -50,17 +50,10 @@ const Image = (props: ImageType): React.ReactElement => {
           {...dataProps}
           alt={alt}
           className={classes}
-          // data-src={url}
-          data-srcset={url}
+          data-src={url}
           id={id}
           onError={onError}
-          src={url}
       />
-
-      <script src="../plugins/object-fit/ls.object-fit.js"/>
-      <script src="../plugins/parent-fit/ls.parent-fit.js"/>
-      <script src="../plugins/blur-up/ls.blur-up.js"/>
-      <script src="../lazysizes.js"/>
     </>
   )
 }
