@@ -63,9 +63,7 @@ const Checkbox = (props: CheckboxProps): JSX.Element => {
         className={classes}
         id={id}
     >
-      <If condition={children}>
-        {children}
-        <Else />
+      {children &&
         <input
             defaultChecked={checked}
             name={name}
@@ -75,8 +73,8 @@ const Checkbox = (props: CheckboxProps): JSX.Element => {
             type="checkbox"
             value={value}
         />
-      </If>
-      <If condition={!indeterminate}>
+      }
+      {!indeterminate &&
         <span className="pb_checkbox_checkmark">
           <Icon
               className="check_icon"
@@ -84,9 +82,9 @@ const Checkbox = (props: CheckboxProps): JSX.Element => {
               icon="check"
           />
         </span>
-      </If>
+      }
 
-      <If condition={indeterminate}>
+      {indeterminate &&
         <span className="pb_checkbox_indeterminate">
           <Icon
               className="indeterminate_icon"
@@ -94,7 +92,7 @@ const Checkbox = (props: CheckboxProps): JSX.Element => {
               icon="minus"
           />
         </span>
-      </If>
+      }
 
       <Body
           className="pb_checkbox_label"
