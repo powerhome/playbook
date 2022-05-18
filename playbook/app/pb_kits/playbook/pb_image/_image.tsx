@@ -53,6 +53,7 @@ const Image = (props: ImageType): React.ReactElement => {
           data-src={url}
           id={id}
           onError={onError}
+          src={url}
       />
     </>
   )
