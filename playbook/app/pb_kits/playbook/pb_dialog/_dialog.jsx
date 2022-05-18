@@ -7,10 +7,14 @@ import Modal from 'react-modal'
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
 import { globalProps } from '../utilities/globalProps'
 
+import Body from '../pb_body_body'
 import Button from '../pb_button/_button'
 import DialogHeader  from './child_kits/_dialog_header'
 import DialogFooter from './child_kits/_dialog_footer'
 import DialogBody from './child_kits/_dialog_body'
+import Flex from '../pb_flex/_flex'
+import IconCircle from '../pb_icon_circle/_icon_circle'
+import Title from '../pb_title/_title'
 import { DialogContext } from './_dialog_context'
 
 type DialogProps = {
@@ -31,6 +35,8 @@ type DialogProps = {
   portalClassName?: string,
   shouldCloseOnOverlayClick: boolean,
   size?: "sm" | "md" | "lg" | "content",
+  status?: "info" | "caution" | "delete" | "error" | "success",
+  sweetAlert?: "default" | "dismiss" | "compact" | "stacked",
   text?: string,
   title?: string,
   trigger?: string
@@ -53,6 +59,8 @@ const Dialog = (props: DialogProps) => {
     onClose = () => {},
     portalClassName,
     shouldCloseOnOverlayClick = true,
+    status,
+    sweetAlert = null,
     text,
     title,
     trigger,
@@ -78,14 +86,14 @@ const Dialog = (props: DialogProps) => {
     className
   )
 
+  const [triggerOpened, setTriggerOpened] = useState(false),
+  modalIsOpened = trigger ? triggerOpened : opened
+
   const api = {
     onClose: trigger ? function(){
       setTriggerOpened(false)
     } : onClose,
   }
-
-  const [triggerOpened, setTriggerOpened] = useState(false),
-    modalIsOpened = trigger ? triggerOpened : opened
 
   if (trigger) {
     const modalTrigger = document.querySelector(trigger)
@@ -97,6 +105,82 @@ const Dialog = (props: DialogProps) => {
     }, { once: true })
   }
 
+  // const sweetAlertStyle = {
+  //   default: {
+  //     size: "md",
+  //   },
+  //   dismiss: {
+  //     size: "sm",
+  //   },
+  //   compact: {
+  //     size: "sm",
+  //   },
+  //   stacked: {
+  //     size: "sm",
+  //   },
+  // }
+
+  const sweetAlertStatus = {
+    default: {
+      icon: "exclamation-circle",
+      variant: "default",
+    },
+    caution: {
+      icon: "triangle-warning",
+      variant: "yellow",
+    },
+    delete: {
+      icon: "trash",
+      variant: "red",
+    },
+    error: {
+      icon: "times-circle",
+      variant: "red",
+    },
+    success: {
+      icon: "check-circle",
+      variant: "green",
+    },
+  }
+
+  const DefaultModal = () => {
+    return (
+      <Modal
+          ariaHideApp={false}
+          className={dialogClassNames}
+          closeTimeoutMS={200}
+          contentLabel='Minimal Modal Example'
+          id={id}
+          isOpen={modalIsOpened}
+          onRequestClose={onClose}
+          overlayClassName={overlayClassNames}
+          portalClassName={portalClassName}
+          shouldCloseOnOverlayClick={shouldCloseOnOverlayClick}
+      >
+        <If condition={title}>
+          <Dialog.Header>{title}</Dialog.Header>
+        </If>
+        <If condition={text}>
+          <Dialog.Body>{text}</Dialog.Body>
+        </If>
+        <If condition={cancelButton && confirmButton}>
+          <Dialog.Footer>
+            <Button loading={loading}
+                onClick={onConfirm}>
+              {confirmButton}
+            </Button>
+            <Button id='cancel-button'
+                onClick={onCancel}
+                variant='link'>
+              {cancelButton}
+            </Button>
+          </Dialog.Footer>
+        </If>
+        {children}
+      </Modal>
+    )
+  }
+
   return (
     <DialogContext.Provider value={api}>
       <div
@@ -104,6 +188,7 @@ const Dialog = (props: DialogProps) => {
           {...dataProps}
           className={classes}
       >
+        { sweetAlert ? (
         <Modal
             ariaHideApp={false}
             className={dialogClassNames}
@@ -116,33 +201,40 @@ const Dialog = (props: DialogProps) => {
             portalClassName={portalClassName}
             shouldCloseOnOverlayClick={shouldCloseOnOverlayClick}
         >
-          <If condition={title}>
-            <Dialog.Header>{title}</Dialog.Header>
-          </If>
-          <If condition={text}>
-            <Dialog.Body>{text}</Dialog.Body>
-          </If>
-
-          <If condition={cancelButton && confirmButton}>
-            <Dialog.Footer>
-              <Button
-                  loading={loading}
-                  onClick={onConfirm}
-              >
-                {confirmButton}
-              </Button>
-              <Button
-                  id="cancel-button"
-                  onClick={onCancel}
-                  variant="link"
-              >
-                {cancelButton}
-              </Button>
-            </Dialog.Footer>
-          </If>
-
-          {children}
-        </Modal>
+          <Dialog.Body>
+              <Flex align='center'
+                  orientation='column'>
+                <IconCircle
+                    icon={sweetAlertStatus[status].icon}
+                    marginY='xs'
+                    size='lg'
+                    variant={sweetAlertStatus[status].variant}
+                />
+                <Title marginY='sm'
+                    size={3}>
+                  {title}
+                </Title>
+                <Body marginY='xs'
+                    text={text} />
+              </Flex>
+            </Dialog.Body>
+            <If condition={cancelButton && confirmButton}>
+              <Dialog.Footer>
+                <Button loading={loading}
+                    onClick={onConfirm}>
+                  {confirmButton}
+                </Button>
+                <Button id='cancel-button'
+                    onClick={onCancel}
+                    variant='link'>
+                  {cancelButton}
+                </Button>
+              </Dialog.Footer>
+            </If>
+            {children}
+          </Modal> ) : (
+          <DefaultModal />
+        )}
       </div>
     </DialogContext.Provider>
   )
