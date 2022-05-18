@@ -43,6 +43,8 @@ type DatePickerProps = {
   placeholder?: String,
   plugins: Boolean,
   selectionType?: "month" | "week",
+  showTimezone?: Boolean,
+  timeFormat?: String,
   type?: String,
   yearRange?: Array,
 }
@@ -81,6 +83,7 @@ const DatePicker = (props: DatePickerProps) => {
     placeholder = 'Select Date',
     plugins = false,
     selectionType = '',
+    showTimezone = false,
     yearRange = [ 1900, 2100 ],
   } = props
 
@@ -111,6 +114,7 @@ const DatePicker = (props: DatePickerProps) => {
       pickerId,
       plugins,
       selectionType,
+      showTimezone,
       yearRange,
     })
   })

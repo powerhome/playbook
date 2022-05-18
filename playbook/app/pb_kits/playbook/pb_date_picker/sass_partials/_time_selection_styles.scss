@@ -1,0 +1,53 @@
+@import "../../tokens/typography";
+@import "../../tokens/spacing";
+@import "../../tokens/colors";
+
+[class^=pb_date_picker_kit] {
+  .pb_time_selection {
+    color: inherit;
+    text-align: left;
+    margin-left: $space_sm;
+    .numInputWrapper {
+      width: auto;
+      input.numInput {
+        border: 1px solid $border_light !important;
+        border-radius: 5px;
+        text-align: center;
+        width: 60px;
+        margin-left: 0;
+        padding: 0;
+        &:focus {
+          border-color: $primary_action !important;
+        }
+      }
+      span {
+        &.arrowUp, &.arrowDown {
+          display: none;
+        }
+      }
+    }
+    [class^=pb_caption_kit_xs] {
+      clear: both;
+      display: block;
+    }
+    .flatpickr {
+      &-time-separator {
+        margin: 0 $space_xs;
+        text-align: center;
+      }
+      &-am-pm {
+        margin-left: $space_md;
+        border: 1px solid $border_light;
+        border-radius: 5px;
+        width: 60px;
+        &:hover {
+          background-color: transparent;
+        }
+        &:focus {
+          border-color: $primary_action;
+          background-color: transparent;
+        }
+      }
+    }
+  }
+}

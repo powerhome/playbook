@@ -7,6 +7,7 @@ const DatePickerTime = (props) => (
     <DatePicker
         enableTime
         pickerId="date-picker-time"
+        showTimezone
         {...props}
     />
   </div>

@@ -1,6 +1,7 @@
 import flatpickr from 'flatpickr'
 import monthSelectPlugin from 'flatpickr/dist/plugins/monthSelect'
 import weekSelect from "flatpickr/dist/plugins/weekSelect/weekSelect"
+import timeSelectPlugin from './plugins/timeSelect'
 
 const datePickerHelper = (config) => {
   const {
@@ -19,6 +20,9 @@ const datePickerHelper = (config) => {
     plugins,
     required,
     selectionType,
+    showTimezone,
+    timeCaption = 'Select Time',
+    timeFormat = 'h:i K',
     yearRange,
   } = config
 
@@ -55,14 +59,25 @@ const datePickerHelper = (config) => {
     }
   }
 
-  const setPlugin = () => {
-    let p 
+  const setPlugins = () => {
+    let pluginList = []
+
+    // month and week selection
     if (selectionType === "month" || plugins === true) {
-     p = [ monthSelectPlugin({ shorthand: true, dateFormat: 'F Y', altFormat: 'F Y' }) ] 
+      pluginList.push(monthSelectPlugin({ shorthand: true, dateFormat: 'F Y', altFormat: 'F Y' }))
     } else if ( selectionType === "week") {
-      p = [ weekSelect({})]
-    } else p = []
-    return p
+      pluginList.push(weekSelect({}))
+    }
+
+    // time selection
+    if (enableTime) pluginList.push(timeSelectPlugin({ caption: timeCaption, showTimezone: showTimezone}))
+
+    // debugger
+    return pluginList
+  }
+
+  const getDateFormat = () => {
+    return enableTime ? `${format} ${timeFormat}` : format
   }
 
   // ===========================================================
@@ -71,7 +86,7 @@ const datePickerHelper = (config) => {
 
   flatpickr(`#${pickerId}`, {
     disableMobile: true,
-    dateFormat: format,
+    dateFormat: getDateFormat(),
     defaultDate: defaultDateGetter(),
     disable: disableWeekdays && disableWeekdays.length > 0 ? [
       (date) => {
@@ -113,7 +128,7 @@ const datePickerHelper = (config) => {
     onYearChange: [() => {
       yearChangeHook()
     }],
-    plugins: setPlugin(),
+    plugins: setPlugins(),
     prevArrow: '<i class="far fa-angle-left"></i>',
     static: true,
   })
