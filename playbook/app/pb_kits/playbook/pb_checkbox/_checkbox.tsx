@@ -1,14 +1,12 @@
-/* @flow */
-
 import React, { useEffect, useRef } from 'react'
 import Body from '../pb_body/_body'
 import Icon from '../pb_icon/_icon'
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
 import classnames from 'classnames'
-import { globalProps } from '../utilities/globalProps'
+import { globalProps, GlobalProps } from '../utilities/globalProps'
 
 type CheckboxProps = {
-  aria?: object,
+  aria?: {[key: string]: string},
   checked?: boolean,
   children: Node,
   className?: string,
@@ -18,13 +16,13 @@ type CheckboxProps = {
   id?: string,
   indeterminate?: boolean,
   name: string,
-  onChange: (boolean) => void,
+  onChange: () => void,
   tabIndex: number,
   text: string,
   value: string,
-}
+} & GlobalProps
 
-const Checkbox = (props: CheckboxProps) => {
+const Checkbox = (props: CheckboxProps): JSX.Element => {
   const {
     aria = {},
     checked = false,
@@ -46,7 +44,7 @@ const Checkbox = (props: CheckboxProps) => {
   const dataProps = buildDataProps(data)
   const ariaProps = buildAriaProps(aria)
   const classes = classnames(
-    buildCss('pb_checkbox_kit', { checked, error, indeterminate }),
+    buildCss('pb_checkbox_kit', { checked, error, indeterminate }.toString()),
     globalProps(props),
     className
   )
@@ -57,6 +55,7 @@ const Checkbox = (props: CheckboxProps) => {
       checkRef.current.indeterminate = indeterminate
     }
   }, [indeterminate, checked])
+  
 
   return (
     <label
