@@ -2,6 +2,8 @@ import React from 'react'
 import classnames from 'classnames'
 import { GlobalProps, globalProps } from '../utilities/globalProps'
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
+import 'lazysizes';
+import 'lazysizes/plugins/blur-up/ls.blur-up';
 
 type ImageType = {
   alt?: string,
@@ -42,16 +44,24 @@ const Image = (props: ImageType): React.ReactElement => {
   const dataProps = buildDataProps(data)
 
   return (
-    <img
-        {...ariaProps}
-        {...dataProps}
-        alt={alt}
-        className={classes}
-        data-src={url}
-        id={id}
-        onError={onError}
-        src={url}
-    />
+    <>
+      <img
+          {...ariaProps}
+          {...dataProps}
+          alt={alt}
+          className={classes}
+          // data-src={url}
+          data-srcset={url}
+          id={id}
+          onError={onError}
+          src={url}
+      />
+
+      <script src="../plugins/object-fit/ls.object-fit.js"/>
+      <script src="../plugins/parent-fit/ls.parent-fit.js"/>
+      <script src="../plugins/blur-up/ls.blur-up.js"/>
+      <script src="../lazysizes.js"/>
+    </>
   )
 }
 

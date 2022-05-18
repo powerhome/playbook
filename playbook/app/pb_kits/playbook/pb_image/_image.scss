@@ -14,6 +14,7 @@ $image-sizes: (
   object-fit: cover;
 
   @each $name, $size in $image-sizes {
+    .ls-blur-up-img,
     &[class*=size_#{$name}] {
       width: $size;
       height: $size;
@@ -22,10 +23,17 @@ $image-sizes: (
       flex-shrink: 0;
       flex-grow: 0;
       flex-basis: $size;
+      font-family: "blur-up: auto", "object-fit: cover";
+      object-fit: cover;
     }
 
     &[class*= rounded] {
       border-radius: $border-rad-heaviest;
+    }
+
+    &.ls-blur-up-is-loading,
+    &.lazyload:not([src]) {
+      visibility: hidden;
     }
 
     &.fade {
