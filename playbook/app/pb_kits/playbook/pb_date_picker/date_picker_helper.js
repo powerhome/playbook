@@ -22,7 +22,7 @@ const datePickerHelper = (config) => {
     selectionType,
     showTimezone,
     timeCaption = 'Select Time',
-    timeFormat = 'h:i K',
+    timeFormat = 'at h:i K',
     yearRange,
   } = config
 
@@ -123,7 +123,8 @@ const datePickerHelper = (config) => {
       window.removeEventListener('resize', calendarResizer)
     }],
     onChange: [(selectedDates, dateStr) => {
-      onChange(dateStr, selectedDates) 
+      // debugger
+      onChange(dateStr, selectedDates)
     }],
     onYearChange: [() => {
       yearChangeHook()

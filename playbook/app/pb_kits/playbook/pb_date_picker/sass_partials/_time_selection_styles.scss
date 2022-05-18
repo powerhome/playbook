@@ -26,6 +26,9 @@
         }
       }
     }
+    [class^=pb_caption_kit_md] {
+      line-height: $text_larger;
+    }
     [class^=pb_caption_kit_xs] {
       clear: both;
       display: block;
@@ -36,16 +39,30 @@
         text-align: center;
       }
       &-am-pm {
-        margin-left: $space_md;
-        border: 1px solid $border_light;
-        border-radius: 5px;
-        width: 60px;
-        &:hover {
-          background-color: transparent;
+        margin-left: $space_sm;
+        // border: 1px solid $border_light;
+        // border-radius: 5px;
+        // width: 60px;
+        // height: 40px;
+        // &:hover {
+        //   background-color: transparent;
+        // }
+        // &:focus {
+        //   border-color: $primary_action;
+        //   background-color: transparent;
+        // }
+        #datePickerAM, #datePickerPM {
+          display: none;
         }
-        &:focus {
-          border-color: $primary_action;
-          background-color: transparent;
+        &:focus, &:hover {
+          background: transparent;
+        }
+
+        [class^=pb_selectable_card_kit] > label {
+          padding: 0;
+          margin: 0;
+          width: 60px;
+          height: 40px;
         }
       }
     }

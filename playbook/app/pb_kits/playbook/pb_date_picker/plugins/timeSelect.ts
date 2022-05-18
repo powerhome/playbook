@@ -1,7 +1,5 @@
 import { Plugin } from "flatpickr/dist/types/options";
 import { Instance } from "flatpickr/dist/types/instance";
-import { createElement } from "flatpickr/dist/esm/utils/dom";
-import { int } from "flatpickr/dist/esm/utils";
 
 export type TimeSelection = {
   caption?: string,
@@ -23,32 +21,58 @@ function timeSelectPlugin(props: TimeSelection): Plugin {
       return `${tzAbbr} (${tzText})`
     }
 
-    const createAmPm = () => {
-      const {
-        config,
-        l10n,
-      } = fp
-      if (!config.time_24hr) {
-        // add self.amPM if appropriate
-        fp.amPM = createElement(
-          "span",
-          "flatpickr-am-pm time-selection-am-pm",
-          l10n.amPM[
-            int(
-              (fp.latestSelectedDateObj
-                ? fp.hourElement.value
-                : config.defaultHour) > 11
-            )
-          ]
-        );
-        fp.amPM.title = l10n.toggleTitle;
-        fp.amPM.tabIndex = -1;
-        fp.timeContainer.appendChild(fp.amPM);
+    const generateAmPmCard = (text: 'AM' | 'PM') => {
+      const selectableCard = document.createElement('div')
+      selectableCard.className = 'pb_selectable_card_kit_enabled'
+
+      const cardInput = document.createElement('input'),
+          cardInputId = `datePicker${text}`
+
+      cardInput.id = cardInputId
+      cardInput.name = 'datepicker-ampm'
+      cardInput.type = 'radio'
+      cardInput.value = text
+
+      const cardLabel = document.createElement('label'),
+      cardLabelBuffer = document.createElement('div')
+      cardLabel.setAttribute('for', cardInputId)
+      cardLabelBuffer.className = 'buffer'
+      cardLabelBuffer.innerHTML = text
+
+      cardLabel.append(cardLabelBuffer)
+      selectableCard.prepend(cardInput)
+      selectableCard.append(cardLabel)
+
+      return selectableCard
+    }
+
+    const generateAmPmToggle = () => {
+      if (fp.amPM) {
+        const formGroupKit = document.createElement('div')
+        formGroupKit.className = 'pb_form_group_kit'
+
+        const amCard = generateAmPmCard('AM')
+        amCard.addEventListener('click', ({target}) => {
+          console.log('Clicked AM', target)
+        })
+
+        const pmCard = generateAmPmCard('PM')
+        pmCard.addEventListener('click', ({target}) => {
+          console.log('Clicked PM', target)
+        })
+
+        formGroupKit.prepend(amCard)
+        formGroupKit.append(pmCard)
+
+        fp.amPM.innerHTML = ''
+        fp.amPM.append(formGroupKit)
       }
-      return fp.timeContainer;
     }
 
     return {
+      onValueUpdate() {
+        generateAmPmToggle()
+      },
       onReady() {
         const id = fp.input.id
 
@@ -74,7 +98,10 @@ function timeSelectPlugin(props: TimeSelection): Plugin {
           fp.timeContainer.append(subcaptionContainer)
         }
 
-        createAmPm()
+        // const icon = document.createElement('i')
+        // icon.className = 'pb_icon_kit far fa-fw fa-user mr_sm'
+        // fp.amPM.prepend(icon)
+        generateAmPmToggle()
 
         fp.loadedPlugins.push("timeSelectPlugin")
       }
