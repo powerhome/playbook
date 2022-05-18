@@ -40,7 +40,7 @@ const Checkbox = (props: CheckboxProps): JSX.Element => {
     value = '',
   } = props
 
-  const checkRef = useRef()
+  const checkRef = useRef(null)
   const dataProps = buildDataProps(data)
   const ariaProps = buildAriaProps(aria)
   const classes = classnames(
@@ -55,7 +55,6 @@ const Checkbox = (props: CheckboxProps): JSX.Element => {
       checkRef.current.indeterminate = indeterminate
     }
   }, [indeterminate, checked])
-  
 
   return (
     <label
