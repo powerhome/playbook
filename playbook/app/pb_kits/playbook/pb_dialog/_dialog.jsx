@@ -7,7 +7,7 @@ import Modal from 'react-modal'
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
 import { globalProps } from '../utilities/globalProps'
 
-import Body from '../pb_body_body'
+import Body from '../pb_body/_body'
 import Button from '../pb_button/_button'
 import DialogHeader  from './child_kits/_dialog_header'
 import DialogFooter from './child_kits/_dialog_footer'
