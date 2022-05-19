@@ -1,3 +1,4 @@
+/* eslint-disable react/no-multi-comp */
 /* @flow */
 
 import React, { useState } from 'react'
@@ -105,23 +106,8 @@ const Dialog = (props: DialogProps) => {
     }, { once: true })
   }
 
-  // const sweetAlertStyle = {
-  //   default: {
-  //     size: "md",
-  //   },
-  //   dismiss: {
-  //     size: "sm",
-  //   },
-  //   compact: {
-  //     size: "sm",
-  //   },
-  //   stacked: {
-  //     size: "sm",
-  //   },
-  // }
-
   const sweetAlertStatus = {
-    default: {
+    info: {
       icon: "exclamation-circle",
       variant: "default",
     },

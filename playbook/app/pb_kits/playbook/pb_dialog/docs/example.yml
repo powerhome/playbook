@@ -8,3 +8,4 @@ examples:
   - dialog_sizes: Sizes
   - dialog_scrollable: Scrollable
   - dialog_should_close_on_overlay: Overlay Click
+  - dialog_alert: Dialog Alert
