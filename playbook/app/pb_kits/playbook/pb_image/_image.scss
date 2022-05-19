@@ -30,11 +30,6 @@ $image-sizes: (
       border-radius: $border-rad-heaviest;
     }
 
-    &.ls-blur-up-is-loading,
-    &.lazyload:not([src]) {
-      visibility: hidden;
-    }
-
     &.ls-blur-up-img,
     &.fade:not(.ls-is-cached) {
       opacity: 0;
