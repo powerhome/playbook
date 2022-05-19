@@ -26,7 +26,7 @@ const Checkbox = (props: CheckboxProps): JSX.Element => {
   const {
     aria = {},
     checked = false,
-    children = null,
+    children,
     className,
     dark = false,
     data = {},
@@ -49,6 +49,23 @@ const Checkbox = (props: CheckboxProps): JSX.Element => {
     className
   )
 
+  const displayChildren = () => {
+    if (children)
+     return children
+    else 
+      return (
+        <input
+            defaultChecked={checked}
+            name={name}
+            onChange={onChange}
+            ref={checkRef}
+            tabIndex={tabIndex}
+            type="checkbox"
+            value={value}
+        />
+      )
+  }
+
   useEffect(() => {
     if (checkRef.current) {
       checkRef.current.checked = checked
@@ -63,18 +80,9 @@ const Checkbox = (props: CheckboxProps): JSX.Element => {
         className={classes}
         id={id}
     >
-    if condition={children}{
-        {children}}
-       else if {
-        <input
-            defaultChecked={checked}
-            name={name}
-            onChange={onChange}
-            ref={checkRef}
-            tabIndex={tabIndex}
-            type="checkbox"
-            value={value}
-        />}
+      <>
+    {displayChildren}
+    </>
 
       {!indeterminate &&
         <span className="pb_checkbox_checkmark">
@@ -100,6 +108,7 @@ const Checkbox = (props: CheckboxProps): JSX.Element => {
           className="pb_checkbox_label"
           dark={dark}
           status={error ? 'negative' : null}
+          variant={null}
       >
         {text}
       </Body>
