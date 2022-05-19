@@ -22,7 +22,7 @@ type CheckboxProps = {
   value: string,
 } & GlobalProps
 
-const Checkbox = (props: CheckboxProps): React.ReactElement => {
+const Checkbox = (props: CheckboxProps): JSX.Element => {
   const {
     aria = {},
     checked = false,
@@ -100,7 +100,6 @@ const Checkbox = (props: CheckboxProps): React.ReactElement => {
           className="pb_checkbox_label"
           dark={dark}
           status={error ? 'negative' : null}
-          variant={null}
       >
         {text}
       </Body>
