@@ -25,6 +25,9 @@ function timeSelectPlugin(props: TimeSelection): Plugin {
       const selectableCard = document.createElement('div')
       selectableCard.className = 'pb_selectable_card_kit_enabled'
 
+      // eslint-disable-next-line no-debugger
+      // debugger
+
       const cardInput = document.createElement('input'),
           cardInputId = `datePicker${text}`
 
@@ -35,6 +38,7 @@ function timeSelectPlugin(props: TimeSelection): Plugin {
 
       const cardLabel = document.createElement('label'),
       cardLabelBuffer = document.createElement('div')
+      cardLabel.className = `label-${text.toLowerCase()}`
       cardLabel.setAttribute('for', cardInputId)
       cardLabelBuffer.className = 'buffer'
       cardLabelBuffer.innerHTML = text
@@ -52,13 +56,19 @@ function timeSelectPlugin(props: TimeSelection): Plugin {
         formGroupKit.className = 'pb_form_group_kit'
 
         const amCard = generateAmPmCard('AM')
-        amCard.addEventListener('click', ({target}) => {
-          console.log('Clicked AM', target)
+        amCard.addEventListener('click', () => {
+          // eslint-disable-next-line no-debugger
+          // debugger
+          fp.selectedDates[0].setHours((fp.selectedDates[0].getHours() % 12) + 12 * 0)
+          fp.setDate(fp.selectedDates[0], true)
         })
 
         const pmCard = generateAmPmCard('PM')
-        pmCard.addEventListener('click', ({target}) => {
-          console.log('Clicked PM', target)
+        pmCard.addEventListener('click', () => {
+          // eslint-disable-next-line no-debugger
+          debugger
+          fp.selectedDates[0].setHours((fp.selectedDates[0].getHours() % 12) + 12)
+          fp.setDate(fp.selectedDates[0], true)
         })
 
         formGroupKit.prepend(amCard)
@@ -69,17 +79,51 @@ function timeSelectPlugin(props: TimeSelection): Plugin {
       }
     }
 
+    const getMeridiem = (dateObj: Date[]) => {
+      return parseInt(dateObj[0].toLocaleString('en-US', {
+        hour: 'numeric',
+        minute: 'numeric',
+        hour12: false
+      }).split(':')[0]) > 12 ? 'PM' : 'AM'
+    }
+
+    const updateAmPmToggle = () => {
+      if (!fp.selectedDates.length) return
+
+      const uncheckedClass = 'pb_selectable_card_kit_enabled',
+        checkedClass = 'pb_selectable_card_kit_checked_enabled',
+        pickerAM = document.getElementById('datePickerAM'),
+        pickerPM = document.getElementById('datePickerPM'),
+        meridiem = getMeridiem(fp.selectedDates)
+
+      // eslint-disable-next-line no-debugger
+      // debugger
+
+      // const hoursMil = (dateObj[0].getHours() % 12) + 12
+
+      if (meridiem === 'PM') {
+        pickerPM.parentElement.className = checkedClass
+        pickerAM.parentElement.className = uncheckedClass
+      } else if (meridiem === 'AM') {
+        pickerAM.parentElement.className = checkedClass
+        pickerPM.parentElement.className = uncheckedClass
+      }
+    }
+
+    const renderAmPm = () => {
+      generateAmPmToggle()
+      updateAmPmToggle()
+    }
+
     return {
       onValueUpdate() {
-        generateAmPmToggle()
+        renderAmPm()
       },
       onReady() {
         const id = fp.input.id
 
         if (!id || !fp?.timeContainer) return
 
-        // // eslint-disable-next-line no-debugger
-        // debugger
         fp.timeContainer.classList.add('pb_time_selection')
 
         // add caption text
@@ -101,7 +145,11 @@ function timeSelectPlugin(props: TimeSelection): Plugin {
         // const icon = document.createElement('i')
         // icon.className = 'pb_icon_kit far fa-fw fa-user mr_sm'
         // fp.amPM.prepend(icon)
-        generateAmPmToggle()
+
+        // eslint-disable-next-line no-debugger
+        // debugger
+        // if (this.selectedDates.length > 0) getMeridiem(this.selectedDates)
+        renderAmPm()
 
         fp.loadedPlugins.push("timeSelectPlugin")
       }

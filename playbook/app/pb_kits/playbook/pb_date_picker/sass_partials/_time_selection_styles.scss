@@ -40,17 +40,6 @@
       }
       &-am-pm {
         margin-left: $space_sm;
-        // border: 1px solid $border_light;
-        // border-radius: 5px;
-        // width: 60px;
-        // height: 40px;
-        // &:hover {
-        //   background-color: transparent;
-        // }
-        // &:focus {
-        //   border-color: $primary_action;
-        //   background-color: transparent;
-        // }
         #datePickerAM, #datePickerPM {
           display: none;
         }
@@ -63,6 +52,17 @@
           margin: 0;
           width: 60px;
           height: 40px;
+        }
+        [class^=pb_selectable_card_kit_checked] {
+          > label {
+            border-color: $primary_action;
+            &.label-am {
+              border-right: 1px solid $primary_action;
+            }
+            &.label-pm {
+              border-left: 1px solid $primary_action;
+            }
+          }
         }
       }
     }
