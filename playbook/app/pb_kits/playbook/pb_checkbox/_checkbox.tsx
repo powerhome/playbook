@@ -16,7 +16,7 @@ type CheckboxProps = {
   id?: string,
   indeterminate?: boolean,
   name: string,
-  onChange: () => void,
+  onChange: (event: React.FormEvent<HTMLInputElement>) => void,
   tabIndex: number,
   text: string,
   value: string,
@@ -63,7 +63,9 @@ const Checkbox = (props: CheckboxProps): React.ReactElement => {
         className={classes}
         id={id}
     >
-      {children &&
+    if condition={children}{
+        {children}}
+       else if {
         <input
             defaultChecked={checked}
             name={name}
@@ -72,8 +74,8 @@ const Checkbox = (props: CheckboxProps): React.ReactElement => {
             tabIndex={tabIndex}
             type="checkbox"
             value={value}
-        />
-      }
+        />}
+
       {!indeterminate &&
         <span className="pb_checkbox_checkmark">
           <Icon
