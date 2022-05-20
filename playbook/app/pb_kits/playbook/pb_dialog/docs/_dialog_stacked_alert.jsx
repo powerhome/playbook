@@ -17,31 +17,31 @@ const DialogStackedAlert = () => {
   const dialogs = [
     {
       status: "info",
-      sweetAlert: "single",
+      alertStyle: "single",
       text: "Text explaining why there is an alert",
       title: "Are you sure?",
       toggle: toggleSingleButtonOpen,
       visible: singleButtonOpen,
-      confirmButton:"Ok, Thanks",
+      confirmedButton:"Ok, Thanks",
     },
     {
       status: "error",
-      sweetAlert: "stacked",
+      alertStyle: "stacked",
       text: "Text explaining the error",
       title: "Error Message",
-      confirmButton:"Yes, Action",
-      cancelButton: "Ok, Cancel",
+      confirmedButton:"Yes, Action",
+      cancelledButton: "Ok, Cancel",
       toggle: toggleStackedButtonOpen,
       visible: stackedButtonOpen,
     },
     {
       status: "caution",
-      sweetAlert: "link",
+      alertStyle: "link",
       text: "This is the action you will be taking",
       title: "Are you sure?",
       toggle: toggleLinkButtonOpen,
       visible: linkButtonOpen,
-      confirmButton:"Ok, Thanks",
+      confirmedButton:"Ok, Thanks",
     }
   ]
 
@@ -76,12 +76,12 @@ const DialogStackedAlert = () => {
     <Flex>
       {dialogs.map((dialog) => (
         <Dialog
-            key={dialog.status && dialog.sweetAlert}
+            alertStyle={dialog.alertStyle}
+            key={dialog.status}
             onClose={dialog.toggle}
             opened={dialog.visible}
             size="sm"
             status={dialog.status}
-            sweetAlert={dialog.sweetAlert}
             text={dialog.text}
             title={dialog.title}
         >
@@ -90,17 +90,17 @@ const DialogStackedAlert = () => {
                 fullWidth
                 onClick={dialog.toggle}
             >
-              {dialog.confirmButton}
+              {dialog.confirmedButton}
             </Button>
           </Dialog.Footer>
-          <If condition={dialog.cancelButton}>
+          <If condition={dialog.cancelledButton}>
             <Dialog.Footer>
                 <Button
                     fullWidth
                     onClick={dialog.toggle}
                     variant="secondary"
                 >
-                  {dialog.cancelButton}
+                  {dialog.cancelledButton}
                 </Button>
             </Dialog.Footer>
            </If>

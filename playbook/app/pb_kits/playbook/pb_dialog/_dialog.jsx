@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-handler-names */
 /* eslint-disable react/no-multi-comp */
 /* @flow */
 
@@ -19,6 +20,7 @@ import Title from '../pb_title/_title'
 import { DialogContext } from './_dialog_context'
 
 type DialogProps = {
+  alertStyle?: "link" | "single" | "stacked" | "default",
   aria?: object,
   cancelButton?: string,
   children: array<React.ReactNode> | React.ReactNode | string,
@@ -37,7 +39,6 @@ type DialogProps = {
   shouldCloseOnOverlayClick: boolean,
   size?: "sm" | "md" | "lg" | "content",
   status?: "info" | "caution" | "delete" | "error" | "success",
-  sweetAlert?: "link" | "single" | "stacked" | "default",
   text?: string,
   title?: string,
   trigger?: string
@@ -45,6 +46,7 @@ type DialogProps = {
 
 const Dialog = (props: DialogProps) => {
   const {
+    alertStyle = "default",
     aria = {},
     cancelButton,
     confirmButton,
@@ -61,7 +63,6 @@ const Dialog = (props: DialogProps) => {
     portalClassName,
     shouldCloseOnOverlayClick = true,
     status,
-    sweetAlert = null,
     text,
     title,
     trigger,
@@ -128,6 +129,20 @@ const Dialog = (props: DialogProps) => {
       variant: "green",
     },
   }
+  // const sweetAlertStyle = () => {
+  //   link: {
+  //     <Flex>
+  //       <Button
+  //           variant="secondary"
+  //       >
+  //       {"Text Goes Here"}
+  //       </Button>
+  //       <Button>
+  //       {"More Text Here"}
+  //       </Button>
+  //     </Flex>
+  //   }
+  // }
 
   return (
     <DialogContext.Provider value={api}>
@@ -137,6 +152,7 @@ const Dialog = (props: DialogProps) => {
           className={classes}
       >
         <Modal
+            alertStyle={alertStyle}
             ariaHideApp={false}
             className={dialogClassNames}
             closeTimeoutMS={200}
@@ -148,43 +164,40 @@ const Dialog = (props: DialogProps) => {
             portalClassName={portalClassName}
             shouldCloseOnOverlayClick={shouldCloseOnOverlayClick}
             status={status}
-            sweetAlert={sweetAlert}
         >
           <Dialog.Body>
-              <Flex align='center'
-                  orientation='column'>
-                <If condition = {sweetAlertStatus[status]} >
-                  <IconCircle
-                      icon={sweetAlertStatus[status].icon}
-                      variant={sweetAlertStatus[status].variant}
-                  />
-                </If>
-                <Title marginY='sm'
-                    size={3}>
-                  {title}
-                </Title>
-                <Body marginY='xs'
-                    text={text}
+            <Flex align='center'
+                orientation='column'>
+              <If condition = {sweetAlertStatus[status]} >
+                <IconCircle
+                    icon={sweetAlertStatus[status].icon}
+                    variant={sweetAlertStatus[status].variant}
                 />
-              </Flex>
-            </Dialog.Body>
-            <If condition={cancelButton && confirmButton}>
-              <Dialog.Footer>
-                <Button
-                    loading={loading}
-                    onClick={onConfirm}
-                >
-                  {confirmButton}
-                </Button>
-                <Button id='cancel-button'
-                    onClick={onCancel}
-                    variant='link'>
-                  {cancelButton}
-                </Button>
-              </Dialog.Footer>
-            </If>
-            {children}
-          </Modal>
+              </If>
+              <Title marginY='sm'
+                  size={3}>
+                {title}
+              </Title>
+              <Body marginY='xs'
+                  text={text}
+              />
+            </Flex>
+          </Dialog.Body>
+            <Dialog.Footer>
+              <Button
+                  loading={loading}
+                  onClick={onConfirm}
+              >
+                {confirmButton}
+              </Button>
+              <Button id='cancel-button'
+                  onClick={onCancel}
+                  variant='link'>
+                {cancelButton}
+              </Button>
+            </Dialog.Footer>
+          {children}
+        </Modal>
       </div>
     </DialogContext.Provider>
   )
