@@ -14,7 +14,7 @@ app.build(
     limitMemory: '8Gi',
   ]
 ) {
-  def application = "power-jobs"
+  def application = "playbook"
   def registry = "image-registry.powerapp.cloud"
   def scmVars
   def appImage
