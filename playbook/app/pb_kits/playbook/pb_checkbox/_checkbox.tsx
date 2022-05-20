@@ -58,8 +58,9 @@ const Checkbox = (props: CheckboxProps): JSX.Element => {
 
   const checkboxChildren = () => {
     if (children)
-      return 
+      return (children)
     else 
+    return (
     <input
         defaultChecked={checked}
         name={name}
@@ -68,7 +69,7 @@ const Checkbox = (props: CheckboxProps): JSX.Element => {
         tabIndex={tabIndex}
         type="checkbox"
         value={value}
-      />
+      />)
   }
 
   return (
@@ -78,7 +79,7 @@ const Checkbox = (props: CheckboxProps): JSX.Element => {
         className={classes}
         id={id}
     >
-      {children && <>{checkboxChildren}</>}
+       <>{checkboxChildren()}</>
 
       {!indeterminate &&
         <span className="pb_checkbox_checkmark">
