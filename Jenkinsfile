@@ -25,9 +25,8 @@ app.build(
     appImage = "${registry}/${application}/${application}:${tag}"
   }
 
-
   app.dockerStage('Build Docker Image') {
-    buildDockerImage(scmVars, appImage, registry)
+    buildDockerImage(scmVars, appImage)
   }
 
   app.dockerStage('Test') {
@@ -35,12 +34,12 @@ app.build(
   }
 }
 
-def buildDockerImage(scmVars, appImage, registry) {
+def buildDockerImage(scmVars, appImage) {
   try {
     github.setImageBuildState(scmVars, 'PENDING')
     sh "docker build -t ${appImage} ."
     sh "docker push ${appImage}"
-    sh "docker push ${registry}:${scmVars.GIT_COMMIT}"
+    sh "docker push ${appImage}"
     github.setImageBuildState(scmVars, 'SUCCESS')
   } catch(e) {
     github.setImageBuildState(scmVars, 'FAILURE')
