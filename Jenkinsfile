@@ -38,7 +38,7 @@ app.build(
 def buildDockerImage(scmVars, appImage, registry) {
   try {
     github.setImageBuildState(scmVars, 'PENDING')
-    sh "docker build -t ${appImage} -t {app-image}-master ."
+    sh "docker build -t ${appImage} ."
     sh "docker push ${appImage}"
     sh "docker push ${registry}:${scmVars.GIT_COMMIT}"
     github.setImageBuildState(scmVars, 'SUCCESS')
