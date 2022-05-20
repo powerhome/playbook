@@ -20,7 +20,7 @@ spec:
         - name: quay-robot-powerhome
       containers:
         - name: playbook
-          image: "image-registry.powerapp.cloud/playbook/playbook:master-<%= image_tag %>"
+          image: "image-registry.powerapp.cloud/playbook/playbook:<%= image_tag %>"
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 3000
