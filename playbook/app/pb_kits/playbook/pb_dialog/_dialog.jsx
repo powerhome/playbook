@@ -183,6 +183,7 @@ const Dialog = (props: DialogProps) => {
               />
             </Flex>
           </Dialog.Body>
+          <If condition={cancelButton && confirmButton}>
             <Dialog.Footer>
               <Button
                   loading={loading}
@@ -192,10 +193,12 @@ const Dialog = (props: DialogProps) => {
               </Button>
               <Button id='cancel-button'
                   onClick={onCancel}
-                  variant='link'>
+                  variant='link'
+              >
                 {cancelButton}
               </Button>
             </Dialog.Footer>
+          </If>
           {children}
         </Modal>
       </div>
