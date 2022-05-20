@@ -44,8 +44,8 @@ const Checkbox = (props: CheckboxProps): JSX.Element => {
   const dataProps = buildDataProps(data)
   const ariaProps = buildAriaProps(aria)
   const classes = classnames(
-    buildCss('pb_checkbox_kit', checked.toString(), error.toString(), indeterminate.toString() ),
-    globalProps(props),
+    buildCss('pb_checkbox_kit', checked ? 'checked' : null, error ? 'error' : null, indeterminate? 'indeterminate' : null),
+    globalProps(props),        
     className
   )
 
