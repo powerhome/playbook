@@ -9,3 +9,4 @@ examples:
   - dialog_scrollable: Scrollable
   - dialog_should_close_on_overlay: Overlay Click
   - dialog_alert: Dialog Alert
+  - dialog_stacked_alert: Stacked Button Alert

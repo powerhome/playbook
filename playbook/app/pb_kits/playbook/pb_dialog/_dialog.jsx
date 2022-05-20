@@ -129,44 +129,6 @@ const Dialog = (props: DialogProps) => {
     },
   }
 
-  const DefaultModal = () => {
-    return (
-      <Modal
-          ariaHideApp={false}
-          className={dialogClassNames}
-          closeTimeoutMS={200}
-          contentLabel='Minimal Modal Example'
-          id={id}
-          isOpen={modalIsOpened}
-          onRequestClose={onClose}
-          overlayClassName={overlayClassNames}
-          portalClassName={portalClassName}
-          shouldCloseOnOverlayClick={shouldCloseOnOverlayClick}
-      >
-        <If condition={title}>
-          <Dialog.Header>{title}</Dialog.Header>
-        </If>
-        <If condition={text}>
-          <Dialog.Body>{text}</Dialog.Body>
-        </If>
-        <If condition={cancelButton && confirmButton}>
-          <Dialog.Footer>
-            <Button loading={loading}
-                onClick={onConfirm}>
-              {confirmButton}
-            </Button>
-            <Button id='cancel-button'
-                onClick={onCancel}
-                variant='link'>
-              {cancelButton}
-            </Button>
-          </Dialog.Footer>
-        </If>
-        {children}
-      </Modal>
-    )
-  }
-
   return (
     <DialogContext.Provider value={api}>
       <div
@@ -174,7 +136,6 @@ const Dialog = (props: DialogProps) => {
           {...dataProps}
           className={classes}
       >
-        { sweetAlert ? (
         <Modal
             ariaHideApp={false}
             className={dialogClassNames}
@@ -186,28 +147,33 @@ const Dialog = (props: DialogProps) => {
             overlayClassName={overlayClassNames}
             portalClassName={portalClassName}
             shouldCloseOnOverlayClick={shouldCloseOnOverlayClick}
+            status={status}
+            sweetAlert={sweetAlert}
         >
           <Dialog.Body>
               <Flex align='center'
                   orientation='column'>
-                <IconCircle
-                    icon={sweetAlertStatus[status].icon}
-                    marginY='xs'
-                    size='lg'
-                    variant={sweetAlertStatus[status].variant}
-                />
+                <If condition = {sweetAlertStatus[status]} >
+                  <IconCircle
+                      icon={sweetAlertStatus[status].icon}
+                      variant={sweetAlertStatus[status].variant}
+                  />
+                </If>
                 <Title marginY='sm'
                     size={3}>
                   {title}
                 </Title>
                 <Body marginY='xs'
-                    text={text} />
+                    text={text}
+                />
               </Flex>
             </Dialog.Body>
             <If condition={cancelButton && confirmButton}>
               <Dialog.Footer>
-                <Button loading={loading}
-                    onClick={onConfirm}>
+                <Button
+                    loading={loading}
+                    onClick={onConfirm}
+                >
                   {confirmButton}
                 </Button>
                 <Button id='cancel-button'
@@ -218,9 +184,7 @@ const Dialog = (props: DialogProps) => {
               </Dialog.Footer>
             </If>
             {children}
-          </Modal> ) : (
-          <DefaultModal />
-        )}
+          </Modal>
       </div>
     </DialogContext.Provider>
   )
