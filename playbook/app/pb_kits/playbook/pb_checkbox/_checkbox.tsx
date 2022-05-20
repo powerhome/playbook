@@ -11,7 +11,7 @@ type CheckboxProps = {
   children: Node,
   className?: string,
   dark?: boolean,
-  data?: object,
+  data?: {[key: string]: string},
   error?: boolean,
   id?: string,
   indeterminate?: boolean,
