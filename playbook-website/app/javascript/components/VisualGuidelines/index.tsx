@@ -6,6 +6,7 @@ import React from 'react'
 import Colors from './Colors'
 import MaxWidth from './Examples/MaxWidth'
 import Positioning from './Examples/Positioning'
+import Spacing from './Examples/Spacing'
 
 const VisualGuidelines = ({ examples }: {examples: {[key: string]: string}}): React.ReactElement => {
   return (
@@ -15,6 +16,10 @@ const VisualGuidelines = ({ examples }: {examples: {[key: string]: string}}): Re
       <Positioning
           example={examples.positioning_jsx}
           tokensExample={examples.position_token}
+      />
+      <Spacing
+          example={examples.spacing_global_props_jsx}
+          tokensExample={examples.spacing_tokens_jsx}
       />
     </React.Fragment>
   )
