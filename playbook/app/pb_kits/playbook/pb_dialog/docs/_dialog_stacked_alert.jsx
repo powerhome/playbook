@@ -1,39 +1,85 @@
+/* eslint-disable react/jsx-handler-names */
+
 import React, { useState } from "react"
 import { Button, Dialog, Flex } from "../.."
 
+const useDialog = (visible = false) => {
+  const [opened, setOpened] = useState(visible)
+  const toggle = () => setOpened(!opened)
+  return [opened, toggle]
+}
+
 const DialogStackedAlert = () => {
-  const [isOpen, setIsOpen] = useState(false)
-  const close = () => setIsOpen(false)
-  const open = () => setIsOpen(true)
+  const [singleButtonOpen, toggleSingleButtonOpen] = useDialog()
+  const [stackedButtonOpen, toggleStackedButtonOpen] = useDialog()
+  const [linkButtonOpen, toggleLinkButtonOpen] = useDialog()
 
   const dialogs = [
     {
-      sweetAlert: "default",
       status: "info",
+      sweetAlert: "single",
       text: "Text explaining why there is an alert",
       title: "Are you sure?",
-      confirmButton: "Ok, Thanks"
+      toggle: toggleSingleButtonOpen,
+      visible: singleButtonOpen,
+      confirmButton:"Ok, Thanks",
     },
     {
-      sweetAlert: "default",
       status: "error",
-      text: "Text explaining why there is an alert",
+      sweetAlert: "stacked",
+      text: "Text explaining the error",
+      title: "Error Message",
+      confirmButton:"Yes, Action",
+      cancelButton: "Ok, Cancel",
+      toggle: toggleStackedButtonOpen,
+      visible: stackedButtonOpen,
+    },
+    {
+      status: "caution",
+      sweetAlert: "link",
+      text: "This is the action you will be taking",
       title: "Are you sure?",
+      toggle: toggleLinkButtonOpen,
+      visible: linkButtonOpen,
+      confirmButton:"Ok, Thanks",
     }
   ]
 
   return (
     <div>
-    <Flex justify="between">
-      <Button  onClick={open}>{"1 Button Alert Status"}</Button>
-      <Button  onClick={open}>{"2 Button Alert Status"}</Button>
+    <Flex>
+      <Button
+          marginX="md"
+          onClick={toggleSingleButtonOpen}
+      >
+        {"1 Button Information Status"}
+      </Button>
+      <Button
+          marginX="md"
+          onClick={toggleStackedButtonOpen}
+      >
+        {"2 Button Error Status"}
+      </Button>
+      <Button
+          marginX="md"
+          onClick={toggleLinkButtonOpen}
+      >
+        {"1 Link Button Caution"}
+      </Button>
+      <Button
+          marginX="md"
+          onClick={toggleLinkButtonOpen}
+      >
+        {"2 Link Button Success"}
+      </Button>
     </Flex>
     <Flex>
       {dialogs.map((dialog) => (
         <Dialog
-            key={dialog.status}
-            onClose={close}
-            opened={isOpen}
+            key={dialog.status && dialog.sweetAlert}
+            onClose={dialog.toggle}
+            opened={dialog.visible}
+            size="sm"
             status={dialog.status}
             sweetAlert={dialog.sweetAlert}
             text={dialog.text}
@@ -42,11 +88,22 @@ const DialogStackedAlert = () => {
           <Dialog.Footer>
             <Button
                 fullWidth
-                onClick={close}
+                onClick={dialog.toggle}
             >
-              {"Yes, Action"}
+              {dialog.confirmButton}
             </Button>
           </Dialog.Footer>
+          <If condition={dialog.cancelButton}>
+            <Dialog.Footer>
+                <Button
+                    fullWidth
+                    onClick={dialog.toggle}
+                    variant="secondary"
+                >
+                  {dialog.cancelButton}
+                </Button>
+            </Dialog.Footer>
+           </If>
         </Dialog>
       ))}
     </Flex>

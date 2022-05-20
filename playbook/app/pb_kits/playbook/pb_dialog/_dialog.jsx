@@ -37,7 +37,7 @@ type DialogProps = {
   shouldCloseOnOverlayClick: boolean,
   size?: "sm" | "md" | "lg" | "content",
   status?: "info" | "caution" | "delete" | "error" | "success",
-  sweetAlert?: "default" | "dismiss" | "compact" | "stacked",
+  sweetAlert?: "link" | "single" | "stacked" | "default",
   text?: string,
   title?: string,
   trigger?: string
