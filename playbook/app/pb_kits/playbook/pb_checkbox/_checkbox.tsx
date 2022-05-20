@@ -49,29 +49,27 @@ const Checkbox = (props: CheckboxProps): JSX.Element => {
     className
   )
 
-  const displayChildren = () => {
-    if (children)
-     return children
-    else 
-      return (
-        <input
-            defaultChecked={checked}
-            name={name}
-            onChange={onChange}
-            ref={checkRef}
-            tabIndex={tabIndex}
-            type="checkbox"
-            value={value}
-        />
-      )
-  }
-
   useEffect(() => {
     if (checkRef.current) {
       checkRef.current.checked = checked
       checkRef.current.indeterminate = indeterminate
     }
   }, [indeterminate, checked])
+
+  const checkboxChildren = () => {
+    if (children)
+      return 
+    else 
+    <input
+        defaultChecked={checked}
+        name={name}
+        onChange={onChange}
+        ref={checkRef}
+        tabIndex={tabIndex}
+        type="checkbox"
+        value={value}
+      />
+  }
 
   return (
     <label
@@ -80,9 +78,7 @@ const Checkbox = (props: CheckboxProps): JSX.Element => {
         className={classes}
         id={id}
     >
-      <>
-    {displayChildren}
-    </>
+      {children && <>{checkboxChildren}</>}
 
       {!indeterminate &&
         <span className="pb_checkbox_checkmark">
