@@ -16,44 +16,45 @@ const PropsValues = (props: {[key: string]: string[] | number[]}): React.ReactEl
       orientation="row"
       vertical="stretch"
   >
-    { Object.keys(props).map((propKey: string) => (
-      <React.Fragment key={propKey}>
-        <FlexItem flex={1}>
-          <Card.Body>
-            <Caption
-                marginBottom="sm"
-                text="Props"
-            />
+    <React.Fragment>
+      <FlexItem flex={1}>
+        <Card.Body>
+          <Caption
+              marginBottom="sm"
+              text="Props"
+          />
+          { Object.keys(props).map((propKey: string) => (
             <Pill
+                key={propKey}
                 text={propKey}
                 textTransform="none"
             />
-          </Card.Body>
-        </FlexItem>
-        <SectionSeparator
-            marginBottom="md"
-            marginTop="md"
-            orientation="vertical"
-            variant="card"
-        />
-        <FlexItem flex={1}>
-          <Card.Body>
-            <Caption
-                marginBottom="sm"
-                text="Values"
+          ))}
+        </Card.Body>
+      </FlexItem>
+      <SectionSeparator
+          marginBottom="md"
+          marginTop="md"
+          orientation="vertical"
+          variant="card"
+      />
+      <FlexItem flex={1}>
+        <Card.Body>
+          <Caption
+              marginBottom="sm"
+              text="Values"
+          />
+          {Object.values(props)[0].map((propValue) => (
+            <Pill
+                key={`${propValue}`}
+                text={propValue}
+                textTransform="none"
+                variant="warning"
             />
-            {props[propKey].map((propValue) => (
-              <Pill
-                  key={`${propKey}-${propValue}`}
-                  text={propValue}
-                  textTransform="none"
-                  variant="warning"
-              />
-            ))}
-          </Card.Body>
-        </FlexItem>
-      </React.Fragment>
-    ))}
+          ))}
+        </Card.Body>
+      </FlexItem>
+    </React.Fragment>
   </Flex>
 )
 
