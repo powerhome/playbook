@@ -23,13 +23,18 @@ const PropsValues = (props: {[key: string]: string[] | number[]}): React.ReactEl
               marginBottom="sm"
               text="Props"
           />
-          { Object.keys(props).map((propKey: string) => (
-            <Pill
-                key={propKey}
-                text={propKey}
-                textTransform="none"
-            />
-          ))}
+          <Flex
+              gap="xs"
+              wrap
+          >
+            { Object.keys(props).map((propKey: string) => (
+              <Pill
+                  key={propKey}
+                  text={propKey}
+                  textTransform="none"
+              />
+            ))}
+          </Flex>
         </Card.Body>
       </FlexItem>
       <SectionSeparator
@@ -44,14 +49,16 @@ const PropsValues = (props: {[key: string]: string[] | number[]}): React.ReactEl
               marginBottom="sm"
               text="Values"
           />
-          {Object.values(props)[0].map((propValue) => (
-            <Pill
-                key={`${propValue}`}
-                text={propValue}
-                textTransform="none"
-                variant="warning"
-            />
-          ))}
+          <Flex gap="xs">
+            {Object.values(props)[0].map((propValue) => (
+              <Pill
+                  key={`${propValue}`}
+                  text={propValue}
+                  textTransform="none"
+                  variant="warning"
+              />
+            ))}
+          </Flex>
         </Card.Body>
       </FlexItem>
     </React.Fragment>
