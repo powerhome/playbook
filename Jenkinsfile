@@ -14,16 +14,20 @@ app.build(
     limitMemory: '8Gi',
   ]
 ) {
+  def application = "power-jobs"
+  def registry = "image-registry.powerapp.cloud"
   def scmVars
   def appImage
 
   stage('Code Checkout') {
     scmVars = checkout scm
-    appImage = "image-registry.powerapp.cloud/playbook/playbook:${git.triggeringCommit(scmVars)}"
+    tag = "${env.BRANCH_NAME.replaceAll('/', '_')}-${scmVars.GIT_COMMIT}-${env.BUILD_ID}"
+    appImage = "${registry}/${application}/${application}:${tag}"
   }
 
+
   app.dockerStage('Build Docker Image') {
-    buildDockerImage(scmVars, appImage)
+    buildDockerImage(scmVars, appImage, registry)
   }
 
   app.dockerStage('Test') {
@@ -31,11 +35,12 @@ app.build(
   }
 }
 
-def buildDockerImage(scmVars, appImage) {
+def buildDockerImage(scmVars, appImage, registry) {
   try {
     github.setImageBuildState(scmVars, 'PENDING')
-    sh "docker build -t ${appImage} ."
+    sh "docker build -t ${appImage} -t {app-image}-master ."
     sh "docker push ${appImage}"
+    sh "docker push ${registry}:${scmVars.GIT_COMMIT}"
     github.setImageBuildState(scmVars, 'SUCCESS')
   } catch(e) {
     github.setImageBuildState(scmVars, 'FAILURE')
