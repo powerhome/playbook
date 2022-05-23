@@ -47,8 +47,10 @@ module Playbook
                      default: false,
                      deprecated: true
       prop :selection_type, type: Playbook::Props::Enum,
-                            values: %w[week month],
-                            default: "month"
+                            values: %w[week month none],
+                            default: "none"
+      prop :show_timezone, type: Playbook::Props::Boolean,
+                           default: false
       prop :required, type: Playbook::Props::Boolean,
                       default: false
       prop :year_range, type: Playbook::Props::Array,
@@ -76,6 +78,7 @@ module Playbook
           plugins: plugins,
           required: required,
           selectionType: selection_type,
+          showTimezone: show_timezone,
           yearRange: year_range,
         }.to_json.html_safe
       end
