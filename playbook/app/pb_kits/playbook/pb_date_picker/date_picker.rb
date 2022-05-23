@@ -45,8 +45,8 @@ module Playbook
                      default: false,
                      deprecated: true
       prop :selection_type, type: Playbook::Props::Enum,
-                            values: %w[week month],
-                            default: "month"
+                            values: %w[week month none],
+                            default: "none"
       prop :required, type: Playbook::Props::Boolean,
                       default: false
       prop :year_range, type: Playbook::Props::Array,
