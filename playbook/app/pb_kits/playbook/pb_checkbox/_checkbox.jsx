@@ -1,28 +1,30 @@
+/* @flow */
+
 import React, { useEffect, useRef } from 'react'
 import Body from '../pb_body/_body'
 import Icon from '../pb_icon/_icon'
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
 import classnames from 'classnames'
-import { globalProps, GlobalProps } from '../utilities/globalProps'
+import { globalProps } from '../utilities/globalProps'
 
 type CheckboxProps = {
-  aria?: {[key: string]: string},
+  aria?: object,
   checked?: boolean,
-  children: React.ReactChild[] | React.ReactChild,
+  children: Node,
   className?: string,
   dark?: boolean,
-  data?:{[key: string]: string},
+  data?: object,
   error?: boolean,
   id?: string,
   indeterminate?: boolean,
   name: string,
-  onChange: (event: React.FormEvent<HTMLInputElement>) => void,
+  onChange: (boolean) => void,
   tabIndex: number,
   text: string,
   value: string,
-} & GlobalProps
+}
 
-const Checkbox = (props: CheckboxProps): React.ReactElement => {
+const Checkbox = (props: CheckboxProps) => {
   const {
     aria = {},
     checked = false,
@@ -40,12 +42,11 @@ const Checkbox = (props: CheckboxProps): React.ReactElement => {
     value = '',
   } = props
 
-  const checkRef = useRef(null)
+  const checkRef = useRef()
   const dataProps = buildDataProps(data)
   const ariaProps = buildAriaProps(aria)
   const classes = classnames(
-    buildCss('pb_checkbox_kit' ),
-    { checked, error, indeterminate },
+    buildCss('pb_checkbox_kit', { checked, error, indeterminate }),
     globalProps(props),
     className
   )
@@ -64,9 +65,9 @@ const Checkbox = (props: CheckboxProps): React.ReactElement => {
         className={classes}
         id={id}
     >
-    if condition={children}{
-        {children}}
-       else if {
+      <If condition={children}>
+        {children}
+        <Else />
         <input
             defaultChecked={checked}
             name={name}
@@ -75,9 +76,9 @@ const Checkbox = (props: CheckboxProps): React.ReactElement => {
             tabIndex={tabIndex}
             type="checkbox"
             value={value}
-        />}
-
-      {!indeterminate &&
+        />
+      </If>
+      <If condition={!indeterminate}>
         <span className="pb_checkbox_checkmark">
           <Icon
               className="check_icon"
@@ -85,9 +86,9 @@ const Checkbox = (props: CheckboxProps): React.ReactElement => {
               icon="check"
           />
         </span>
-      }
+      </If>
 
-      {indeterminate &&
+      <If condition={indeterminate}>
         <span className="pb_checkbox_indeterminate">
           <Icon
               className="indeterminate_icon"
@@ -95,13 +96,12 @@ const Checkbox = (props: CheckboxProps): React.ReactElement => {
               icon="minus"
           />
         </span>
-      }
+      </If>
 
       <Body
           className="pb_checkbox_label"
           dark={dark}
           status={error ? 'negative' : null}
-          variant={null}
       >
         {text}
       </Body>
