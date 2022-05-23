@@ -15,7 +15,7 @@ type FormPillProps = {
   avatar?: boolean,
   avatarUrl?: string,
   size?: string,
-  textTransform?: "none" | "lowercase",
+  textTransform?: 'none' | 'lowercase',
   closeProps?: {
     onClick?: React.MouseEventHandler<HTMLSpanElement>,
     onMouseDown?: React.MouseEventHandler<HTMLSpanElement>,
