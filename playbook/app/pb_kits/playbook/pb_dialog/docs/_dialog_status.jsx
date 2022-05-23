@@ -68,20 +68,32 @@ const DialogStatus = () => {
 
   return (
     <div>
-      <Flex justify="between">
-        <Button onClick={toggleInfoAlert}>
-            {"Information Status"}
+      <Flex>
+        <Button
+            marginX="md"
+            onClick={toggleInfoAlert}
+        >
+          {"Information Status"}
         </Button>
-        <Button onClick={toggleCautionAlert}>
-            {"Caution Status"}
+        <Button
+            marginX="md"
+            onClick={toggleCautionAlert}
+        >
+          {"Caution Status"}
         </Button>
-        <Button onClick={toggleSuccessAlert}>
-            {"Success Status"}
+        <Button
+            marginX="md"
+            onClick={toggleSuccessAlert}
+        >
+          {"Success Status"}
         </Button>
         <Button onClick={toggleErrorAlert}>
-            {"Error Status"}
+          {"Error Status"}
         </Button>
-        <Button onClick={toggleDeleteAlert}>
+        <Button
+            marginX="md"
+            onClick={toggleDeleteAlert}
+        >
           {"Delete Status"}
         </Button>
       </Flex>

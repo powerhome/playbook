@@ -129,20 +129,6 @@ const Dialog = (props: DialogProps) => {
       variant: "green",
     },
   }
-  // const sweetAlertStyle = () => {
-  //   link: {
-  //     <Flex>
-  //       <Button
-  //           variant="secondary"
-  //       >
-  //       {"Text Goes Here"}
-  //       </Button>
-  //       <Button>
-  //       {"More Text Here"}
-  //       </Button>
-  //     </Flex>
-  //   }
-  // }
 
   return (
     <DialogContext.Provider value={api}>
