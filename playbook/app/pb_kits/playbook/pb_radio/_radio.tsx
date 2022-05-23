@@ -1,4 +1,3 @@
-/* @flow */
 /*eslint-disable react/no-multi-comp, flowtype/space-before-type-colon */
 
 import React, { forwardRef } from 'react'
