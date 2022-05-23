@@ -8,24 +8,24 @@ import { globalProps, GlobalProps } from '../utilities/globalProps'
 
 type RadioProps = {
   aria?: {[key: string]: string},
-  alignment?: String,
+  alignment?: string,
   checked?: Boolean,
   children?: Node,
-  className?: String,
+  className?: string,
   dark?: boolean,
   data?: {[key: string]: string},
   error?: Boolean,
-  id?: String,
-  label: String,
-  name: String,
-  value: String,
-  text: String,
+  id?: string,
+  label: string,
+  name: string,
+  value: string,
+  text: string,
   onChange: (event: React.FormEvent<HTMLInputElement>)=>void,
 } & GlobalProps
 
 const Radio = ({
   aria = {},
-  alignment = '',
+  alignment,
   children,
   className,
   dark = false,
@@ -38,10 +38,13 @@ const Radio = ({
   value = 'radio_text',
   onChange = () => {},
   ...props
-}: RadioProps, ref): React.ReactElement => {
+}: RadioProps, ref: React.ReactElement) => {
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
-  const classes = classnames(buildCss('pb_radio_kit'), { error }, { dark }, globalProps(props), alignment, className)
+  const classes = classnames(
+    buildCss('pb_radio_kit', alignment, error ? 'error': null , dark ? 'dark': null),
+    globalProps(props),
+    className)
 
   const displayRadio = () => {
     if (children)
@@ -49,7 +52,6 @@ const Radio = ({
     else 
     return (
     <input
-        {...props}
         id={id}
         name={name}
         onChange={onChange}
@@ -57,6 +59,7 @@ const Radio = ({
         text={text}
         type="radio"
         value={value}
+        {...props}
     />
   )}
 
@@ -68,8 +71,8 @@ const Radio = ({
         htmlFor={id}
     >
     <>{displayRadio()}</>
-      <span className="pb_radio_button" />
-      <Body
+    <span className="pb_radio_button" />
+    <Body
           dark={dark}
           status={error ? 'negative' : null}
           text={label}
