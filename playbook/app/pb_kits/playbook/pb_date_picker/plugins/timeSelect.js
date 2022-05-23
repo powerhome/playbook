@@ -1,12 +1,4 @@
-// import { Plugin } from "flatpickr/dist/types/options";
-// import { Instance } from "flatpickr/dist/types/instance";
-
-export type TimeSelection = {
-  caption?: string,
-  showTimezone?: string,
-};
-
-export const getTimezoneText = (inputDate: Date): string => {
+export const getTimezoneText = (inputDate) => {
   const tzAbbr = inputDate.toLocaleDateString('en-US', {
     day: '2-digit',
     timeZoneName: 'short',
@@ -18,10 +10,10 @@ export const getTimezoneText = (inputDate: Date): string => {
   return `${tzAbbr} (${tzText})`
 }
 
-function timeSelectPlugin(props: TimeSelection): any {
-  return function(fp: any) {
+function timeSelectPlugin(props) {
+  return function(fp) {
 
-    const generateMeridiemCard = (text: 'AM' | 'PM') => {
+    const generateMeridiemCard = (text) => {
       const selectableCard = document.createElement('div')
       selectableCard.className = 'pb_selectable_card_kit_enabled'
 
@@ -73,17 +65,17 @@ function timeSelectPlugin(props: TimeSelection): any {
       document.querySelector('.pb_time_selection').append(meridiemContainer)
     }
 
-    const getMeridiem = (dateObj: Date[]) => {
+    const getMeridiem = (dateObj) => {
       return dateObj[0].getHours() < 12 ? 'AM' : 'PM'
     }
 
-    const updateMeridiemToggle = (forceClick?: boolean) => {
+    const updateMeridiemToggle = (forceClick) => {
       if (!fp.selectedDates.length) return
 
       const uncheckedClass = 'pb_selectable_card_kit_enabled',
         checkedClass = 'pb_selectable_card_kit_checked_enabled',
-        pickerAM: any = document.getElementById('datePickerAM'),
-        pickerPM: any = document.getElementById('datePickerPM'),
+        pickerAM = document.getElementById('datePickerAM'),
+        pickerPM = document.getElementById('datePickerPM'),
         meridiem = getMeridiem(fp.selectedDates)
 
       if (forceClick) {
