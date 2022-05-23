@@ -1,32 +1,29 @@
-import { Plugin } from "flatpickr/dist/types/options";
-import { Instance } from "flatpickr/dist/types/instance";
+// import { Plugin } from "flatpickr/dist/types/options";
+// import { Instance } from "flatpickr/dist/types/instance";
 
 export type TimeSelection = {
   caption?: string,
   showTimezone?: string,
 };
 
-function timeSelectPlugin(props: TimeSelection): Plugin {
-  return function(fp: Instance) {
+export const getTimezoneText = (inputDate: Date): string => {
+  const tzAbbr = inputDate.toLocaleDateString('en-US', {
+    day: '2-digit',
+    timeZoneName: 'short',
+  }).slice(4)
+  const tzText = inputDate.toLocaleDateString('en-US', {
+    day: '2-digit',
+    timeZoneName: 'long',
+  }).slice(4)
+  return `${tzAbbr} (${tzText})`
+}
 
-    const getTimezoneText = () => {
-      const tzAbbr = fp._initialDate.toLocaleDateString('en-US', {
-        day: '2-digit',
-        timeZoneName: 'short',
-      }).slice(4)
-      const tzText = fp._initialDate.toLocaleDateString('en-US', {
-        day: '2-digit',
-        timeZoneName: 'long',
-      }).slice(4)
-      return `${tzAbbr} (${tzText})`
-    }
+function timeSelectPlugin(props: TimeSelection): any {
+  return function(fp: any) {
 
-    const generateAmPmCard = (text: 'AM' | 'PM') => {
+    const generateMeridiemCard = (text: 'AM' | 'PM') => {
       const selectableCard = document.createElement('div')
       selectableCard.className = 'pb_selectable_card_kit_enabled'
-
-      // eslint-disable-next-line no-debugger
-      // debugger
 
       const cardInput = document.createElement('input'),
           cardInputId = `datePicker${text}`
@@ -50,56 +47,51 @@ function timeSelectPlugin(props: TimeSelection): Plugin {
       return selectableCard
     }
 
-    const generateAmPmToggle = () => {
-      if (fp.amPM) {
-        const formGroupKit = document.createElement('div')
-        formGroupKit.className = 'pb_form_group_kit'
+    const generateMeridiemToggle = () => {
+      fp.amPM.style.display = 'none'
+      const formGroupKit = document.createElement('div')
+      formGroupKit.className = 'pb_form_group_kit'
 
-        const amCard = generateAmPmCard('AM')
-        amCard.addEventListener('click', () => {
-          // eslint-disable-next-line no-debugger
-          // debugger
-          fp.selectedDates[0].setHours((fp.selectedDates[0].getHours() % 12) + 12 * 0)
-          fp.setDate(fp.selectedDates[0], true)
-        })
+      const amCard = generateMeridiemCard('AM')
+      amCard.addEventListener('click', () => {
+        fp.selectedDates[0].setHours((fp.selectedDates[0].getHours() % 12) + 12 * 0)
+        fp.setDate(fp.selectedDates[0], true)
+      })
 
-        const pmCard = generateAmPmCard('PM')
-        pmCard.addEventListener('click', () => {
-          // eslint-disable-next-line no-debugger
-          debugger
-          fp.selectedDates[0].setHours((fp.selectedDates[0].getHours() % 12) + 12)
-          fp.setDate(fp.selectedDates[0], true)
-        })
+      const pmCard = generateMeridiemCard('PM')
+      pmCard.addEventListener('click', () => {
+        fp.selectedDates[0].setHours((fp.selectedDates[0].getHours() % 12) + 12 * 1)
+        fp.setDate(fp.selectedDates[0], true)
+      })
 
-        formGroupKit.prepend(amCard)
-        formGroupKit.append(pmCard)
+      formGroupKit.prepend(amCard)
+      formGroupKit.append(pmCard)
 
-        fp.amPM.innerHTML = ''
-        fp.amPM.append(formGroupKit)
-      }
+      const meridiemContainer = document.createElement('div')
+      meridiemContainer.className = 'meridiem'
+      meridiemContainer.append(formGroupKit)
+      document.querySelector('.pb_time_selection').append(meridiemContainer)
     }
 
     const getMeridiem = (dateObj: Date[]) => {
-      return parseInt(dateObj[0].toLocaleString('en-US', {
-        hour: 'numeric',
-        minute: 'numeric',
-        hour12: false
-      }).split(':')[0]) > 12 ? 'PM' : 'AM'
+      return dateObj[0].getHours() < 12 ? 'AM' : 'PM'
     }
 
-    const updateAmPmToggle = () => {
+    const updateMeridiemToggle = (forceClick?: boolean) => {
       if (!fp.selectedDates.length) return
 
       const uncheckedClass = 'pb_selectable_card_kit_enabled',
         checkedClass = 'pb_selectable_card_kit_checked_enabled',
-        pickerAM = document.getElementById('datePickerAM'),
-        pickerPM = document.getElementById('datePickerPM'),
+        pickerAM: any = document.getElementById('datePickerAM'),
+        pickerPM: any = document.getElementById('datePickerPM'),
         meridiem = getMeridiem(fp.selectedDates)
 
-      // eslint-disable-next-line no-debugger
-      // debugger
-
-      // const hoursMil = (dateObj[0].getHours() % 12) + 12
+      if (forceClick) {
+        pickerAM.checked = false
+        pickerPM.checked = false
+        pickerPM.checked = meridiem === 'PM'
+        pickerAM.checked = meridiem === 'AM'
+      }
 
       if (meridiem === 'PM') {
         pickerPM.parentElement.className = checkedClass
@@ -110,14 +102,9 @@ function timeSelectPlugin(props: TimeSelection): Plugin {
       }
     }
 
-    const renderAmPm = () => {
-      generateAmPmToggle()
-      updateAmPmToggle()
-    }
-
     return {
       onValueUpdate() {
-        renderAmPm()
+        updateMeridiemToggle()
       },
       onReady() {
         const id = fp.input.id
@@ -134,22 +121,17 @@ function timeSelectPlugin(props: TimeSelection): Plugin {
           fp.timeContainer.prepend(captionContainer)
         }
 
+        // add meridiem toggle
+        generateMeridiemToggle()
+        updateMeridiemToggle(true)
+
         // add timezone text
         if (props.showTimezone) {
           const subcaptionContainer = document.createElement('div')
           subcaptionContainer.className = 'pb_caption_kit_xs'
-          subcaptionContainer.innerHTML = getTimezoneText()
+          subcaptionContainer.innerHTML = getTimezoneText(fp._initialDate)
           fp.timeContainer.append(subcaptionContainer)
         }
-
-        // const icon = document.createElement('i')
-        // icon.className = 'pb_icon_kit far fa-fw fa-user mr_sm'
-        // fp.amPM.prepend(icon)
-
-        // eslint-disable-next-line no-debugger
-        // debugger
-        // if (this.selectedDates.length > 0) getMeridiem(this.selectedDates)
-        renderAmPm()
 
         fp.loadedPlugins.push("timeSelectPlugin")
       }
