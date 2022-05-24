@@ -66,7 +66,7 @@ const Example = ({
               text="Global Props"
           />
           <Body marginBottom="lg">
-            {'Available in every kit. These are added globally as they are most flexible when developing.'}
+            {screenSizes ? 'Available in every kit. These are added globally as they are most flexible when developing. *Screen sizes are optional.' : 'Available in every kit. These are added globally as they are most flexible when developing.'}
           </Body>
         </React.Fragment>
       )}
