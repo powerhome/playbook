@@ -93,7 +93,7 @@
     "eslint": "6.8.0",
     "eslint-plugin-flowtype": "5.10.0",
     "eslint-plugin-jsx-control-statements": "2.2.1",
-    "eslint-plugin-react": "7.28.0",
+    "eslint-plugin-react": "7.30.0",
     "eslint-plugin-react-hooks": "4.5.0",
     "eslint-webpack-plugin": "2.6.0",
     "filemanager-webpack-plugin": "4.0.0",
