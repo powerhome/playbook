@@ -12,7 +12,7 @@ type RadioProps = {
   checked?: boolean,
   children?: Node,
   className?: string,
-  dark?: Boolean,
+  dark?: boolean,
   data?: {[key: string]: string},
   error?: boolean,
   id?: string,
