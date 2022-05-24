@@ -46,7 +46,10 @@ const Display = ({example}: {example: string}) => (
         text='Visual Guide'
         marginBottom='sm'
     />
-    <Table>
+    <Table
+        shadow="deep"
+        size='sm'
+    >
       <thead>
         <tr>
           <th>{'Screen Size'}</th>
@@ -56,8 +59,8 @@ const Display = ({example}: {example: string}) => (
         </tr>
       </thead>
       <tbody>
-        {UTILITY_CLASSES.map((utilityClass: any) => (
-          <tr key={utilityClass} >
+        {UTILITY_CLASSES.map((utilityClass: {[key: string]: string}) => (
+          <tr>
             <td>
               <Body
                 text={utilityClass.size}
@@ -84,4 +87,5 @@ const Display = ({example}: {example: string}) => (
     </Table>
   </React.Fragment>
 )
+
 export default Display
