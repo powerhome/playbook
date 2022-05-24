@@ -4,7 +4,7 @@ module Playbook
   module PbBackground
     class Background < Playbook::KitBase
       prop :background_color, type: Playbook::Props::Enum,
-                              values: %w[gradient dark light white success warning error info neutral primary category_1 category_2 category_3 category_4 category_5 category_6 category_7 category_8 category_9 category_10 category_11 category_12 category_13 category_14 category_15 category_16 category_17 category_18 category_19 category_20 category_21],
+                              values: %w[gradient dark light white success warning error info neutral primary category_1 category_2 category_3 category_4 category_5 category_6 category_7 category_8 category_9 category_10 category_11 category_12 category_13 category_14 category_15 category_16 category_17 category_18 category_19 category_20 category_21 data_1 data_2 data_3 data_4 data_5 data_6 data_7 data_8 text_lt_default text_lt_light text_lt_lighter text_dk_default text_dk_light text_dk_lighter bg_light bg_dark bg_gradient card_light card_dark primary_action active_light active_dark border_light border_dark shadow windows siding doors solar roofing gutters insulation],
                               default: "light"
 
       prop :background_repeat, type: Playbook::Props::Enum,
