@@ -7,6 +7,7 @@ import Colors from './Colors'
 import MaxWidth from './Examples/MaxWidth'
 import Positioning from './Examples/Positioning'
 import Spacing from './Examples/Spacing'
+import Cursor from './Examples/Cursor'
 
 const VisualGuidelines = ({ examples }: {examples: {[key: string]: string}}): React.ReactElement => {
   return (
@@ -21,6 +22,7 @@ const VisualGuidelines = ({ examples }: {examples: {[key: string]: string}}): Re
           example={examples.spacing_global_props_jsx}
           tokensExample={examples.spacing_tokens_jsx}
       />
+      <Cursor example={examples.cursor_jsx} />
     </React.Fragment>
   )
 }
