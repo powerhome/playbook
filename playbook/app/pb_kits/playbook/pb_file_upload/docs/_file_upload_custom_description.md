@@ -1,0 +1,1 @@
+Sometimes you may want to create a custom description that is easier for users to read. In this case, you can use the `acceptedFilesDescription` prop.

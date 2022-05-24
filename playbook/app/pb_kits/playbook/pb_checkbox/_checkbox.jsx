@@ -1,8 +1,8 @@
 /* @flow */
 
 import React, { useEffect, useRef } from 'react'
-import Body from '../pb_body/_body.jsx'
-import Icon from '../pb_icon/_icon.jsx'
+import Body from '../pb_body/_body'
+import Icon from '../pb_icon/_icon'
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
 import classnames from 'classnames'
 import { globalProps } from '../utilities/globalProps'

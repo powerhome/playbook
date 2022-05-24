@@ -1,9 +1,6 @@
-.flex_grow_1 {
-  display: flex;
-  flex-grow: 1 !important;
-}
+$flex_grow_values: (
+  0: 0,
+  1: 1,
+);
 
-.flex_grow_0 {
-  display: flex;
-  flex-grow: 0 !important;
-}
+@include global_props_responsive_css($flex_grow_values, 'flex_grow', 'flex-grow');

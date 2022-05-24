@@ -2,6 +2,7 @@
 
 require "yaml"
 require "redcarpet"
+require "rouge"
 
 require_relative "application_controller"
 
@@ -76,7 +77,18 @@ class PagesController < ApplicationController
   def principles; end
 
   # TODO: rename this method once all guidelines are completed
-  def visual_guidelines_react; end
+  def visual_guidelines_react
+    formatter = Rouge::Formatters::HTML.new
+    lexer = Rouge::Lexer.find("react")
+    kit_examples = {}
+    Dir.glob(Rails.root.join("app/views/pages/code_snippets/*.txt")).each do |example_path|
+      example_txt = File.read(example_path)
+
+      formatted_example_txt = formatter.format(lexer.lex(example_txt))
+      kit_examples[example_path.split("/").last.sub(".txt", "")] = formatted_example_txt
+    end
+    @kit_examples_json = kit_examples
+  end
 
   # TODO: remove this method once all guidelines are completed
   def visual_guidelines

@@ -1,6 +1,6 @@
 <%= pb_rails("title", props: { text: "Category Colors", tag: "h4", size: 4 }) %>
- 
-<br>  
+
+<br>
 
   <%= pb_rails("card", props: { padding: "none", header: true}) do %>
     <%= pb_rails("card/card_header", props: { padding: "sm" }) do %>
@@ -11,7 +11,7 @@
     <% end %>
   <% end %>
 
-<br> 
+<br>
 
   <%= pb_rails("card", props: { padding: "none", header: true}) do %>
     <%= pb_rails("card/card_header", props: { padding: "sm", header_color: "category_2" }) do %>
@@ -25,7 +25,7 @@
 
 <br>
 
-<%= pb_rails("title", props: { text: "Product Colors", tag: "h4", size: 4 }) %> 
+<%= pb_rails("title", props: { text: "Product Colors", tag: "h4", size: 4 }) %>
 
 <br>
 
@@ -43,6 +43,32 @@
 <%= pb_rails("card", props: { padding: "none", header: true}) do %>
   <%= pb_rails("card/card_header", props: { padding: "sm", header_color: "gutters" }) do %>
     <%= pb_rails("body", props: { text: "Gutters", dark: true }) %>
+  <% end %>
+  <%= pb_rails("card/card_body", props: { padding: "md" }) do %>
+    Body
+  <% end %>
+<% end %>
+
+<br>
+
+<%= pb_rails("title", props: { text: "Background Colors", tag: "h4", size: 4 }) %>
+
+<br>
+
+<%= pb_rails("card", props: { padding: "none", header: true}) do %>
+  <%= pb_rails("card/card_header", props: { padding: "sm", header_color: "white" }) do %>
+    <%= pb_rails("body", props: { text: "White" }) %>
+  <% end %>
+  <%= pb_rails("card/card_body", props: { padding: "md" }) do %>
+    Body
+  <% end %>
+<% end %>
+
+<br>
+
+<%= pb_rails("card", props: { padding: "none", header: true}) do %>
+  <%= pb_rails("card/card_header", props: { padding: "sm", header_color: "bg_dark" }) do %>
+    <%= pb_rails("body", props: { text: "Dark" }) %>
   <% end %>
   <%= pb_rails("card/card_body", props: { padding: "md" }) do %>
     Body

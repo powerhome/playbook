@@ -12,6 +12,6 @@
     <% end %>
   <% end %>
   <%= pb_rails("background", props: { classname: "token-wrapper", background_color: "light", padding: "xl" }) do %>
-    <%= react_component("VisualGuidelines") %>
+    <%= react_component("VisualGuidelines", examples: @kit_examples_json) %>
   <% end %>
 </div>
