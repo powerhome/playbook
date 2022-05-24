@@ -24,8 +24,6 @@ type ExampleType = {
   tokens?: { [key: string]: string | number }
 }
 
-
-
 const Example = ({
   children,
   description,
