@@ -16,8 +16,6 @@ spec:
       labels:
         app: playbook
     spec:
-      imagePullSecrets:
-        - name: quay-robot-powerhome
       containers:
         - name: playbook
           image: "image-registry.powerapp.cloud/playbook/playbook:<%= image_tag %>"
