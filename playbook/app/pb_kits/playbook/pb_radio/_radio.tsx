@@ -9,12 +9,12 @@ import { globalProps, GlobalProps } from '../utilities/globalProps'
 type RadioProps = {
   aria?: {[key: string]: string},
   alignment?: string,
-  checked?: Boolean,
+  checked?: boolean,
   children?: Node,
   className?: string,
   dark?: boolean,
   data?: {[key: string]: string},
-  error?: Boolean,
+  error?: boolean,
   id?: string,
   label: string,
   name: string,
@@ -38,7 +38,7 @@ const Radio = ({
   value = 'radio_text',
   onChange = () => {},
   ...props
-}: RadioProps, ref: React.ReactElement) => {
+}: RadioProps, ref) => {
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
   const classes = classnames(
@@ -56,7 +56,6 @@ const Radio = ({
         name={name}
         onChange={onChange}
         ref={ref}
-        text={text}
         type="radio"
         value={value}
         {...props}
@@ -76,6 +75,7 @@ const Radio = ({
           dark={dark}
           status={error ? 'negative' : null}
           text={label}
+          variant={null}
       />
     </label>
   )
