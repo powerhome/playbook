@@ -1,8 +1,7 @@
-/* @flow */
-import React, { forwardRef } from 'react'
+import React, { useRef } from 'react'
 import classnames from 'classnames'
 
-import { globalProps, domSafeProps } from '../utilities/globalProps'
+import { globalProps, GlobalProps, domSafeProps } from '../utilities/globalProps'
 import { buildAriaProps, buildDataProps } from '../utilities/props'
 
 import Flex from '../pb_flex/_flex'
@@ -12,9 +11,9 @@ import Body from '../pb_body/_body'
 import Icon from '../pb_icon/_icon'
 
 type TextInputProps = {
-  aria?: object,
-  className: string,
-  data?: object,
+  aria?: { [key: string]: string },
+  className?: string,
+  data?: { [key: string]: string },
   dark?: boolean,
   disabled?: boolean,
   error?: string,
@@ -22,7 +21,7 @@ type TextInputProps = {
   inline?: boolean,
   name: string,
   label: string,
-  onChange: (String) => void,
+  onChange: (e: React.FormEvent<HTMLInputElement>) => void,
   placeholder: string,
   required?: boolean,
   type: string,
@@ -33,7 +32,7 @@ type TextInputProps = {
     alignment?: "right" | "left",
     border?: boolean,
   },
-}
+} & GlobalProps
 
 const TextInput = (props: TextInputProps, ref: React.ElementRef<"input">) => {
   const {
@@ -48,13 +47,15 @@ const TextInput = (props: TextInputProps, ref: React.ElementRef<"input">) => {
     inline = false,
     name,
     label,
-    onChange = () => {},
+    onChange = () => { void 0 },
     placeholder,
     required,
     type = 'text',
     value = '',
     children = null,
   } = props
+
+  const inputRef = useRef<React.ElementRef<"input">>(ref)
 
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
@@ -93,7 +94,7 @@ const TextInput = (props: TextInputProps, ref: React.ElementRef<"input">) => {
         name={name}
         onChange={onChange}
         placeholder={placeholder}
-        ref={ref}
+        ref={inputRef}
         required={required}
         type={type}
         value={value}
@@ -104,33 +105,37 @@ const TextInput = (props: TextInputProps, ref: React.ElementRef<"input">) => {
     <React.Fragment>
       <Flex
           className={`add-on-${addOnAlignment} ${borderCss}`}
-          inline="flex-container"
+          inline
           vertical="center"
       >
-        <If condition={addOnAlignment == 'left'}>
-          <>
-            <Card
-                className={`${addOnDarkModeCardCss} add-on-card card-left-aligned`}
-                dark={dark}
-            >
-              {addOnIcon}
-            </Card>
-            {textInput}
-          </>
-        <Else />
-          <>
-            {textInput}
-            <Card
-                className={`${addOnDarkModeCardCss} add-on-card card-right-aligned`}
-                dark={dark}
-            >
-              {addOnIcon}
-            </Card>
-          </>
-        </If>
+        {addOnAlignment == 'left' && <>
+          <Card
+              className={`${addOnDarkModeCardCss} add-on-card card-left-aligned`}
+              dark={dark}
+          >
+            {addOnIcon}
+          </Card>
+          {textInput}
+        </> }
+        {addOnAlignment != 'left' && <>
+          {textInput}
+          <Card
+              className={`${addOnDarkModeCardCss} add-on-card card-right-aligned`}
+              dark={dark}
+          >
+            {addOnIcon}
+          </Card>
+        </> }
       </Flex>
     </React.Fragment>
   )
+
+  const render = (() => {
+    if(children) return children
+    if (shouldShowAddOn) return addOnInput
+
+    return textInput
+  })()
 
   return (
     <div
@@ -140,24 +145,20 @@ const TextInput = (props: TextInputProps, ref: React.ElementRef<"input">) => {
     >
       <Caption
           className="pb_text_input_kit_label"
-          dark={dark}
           text={label}
       />
       <div className={`${addOnCss} text_input_wrapper`}>
-        <Choose>
-          <When condition={children}>{children}</When>
-          <When condition={shouldShowAddOn}>{addOnInput}</When>
-          <Otherwise>{textInput}</Otherwise>
-        </Choose>
-        <If condition={error}>
-          <Body
-              status="negative"
-              text={error}
-          />
-        </If>
+        {render}
+
+        {error && <Body
+            status="negative"
+            text={error}
+            variant={null}
+                  />
+        }
       </div>
     </div>
   )
 }
 
-export default forwardRef(TextInput)
+export default TextInput
