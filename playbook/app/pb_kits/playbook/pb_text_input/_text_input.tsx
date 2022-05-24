@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import React, { forwardRef } from 'react'
 import classnames from 'classnames'
 
 import { globalProps, GlobalProps, domSafeProps } from '../utilities/globalProps'
@@ -34,7 +34,7 @@ type TextInputProps = {
   },
 } & GlobalProps
 
-const TextInput = (props: TextInputProps, ref: React.ElementRef<"input">) => {
+const TextInput = forwardRef<React.ElementRef<"input">, TextInputProps>((props, ref) => {
   const {
     addOn = { icon: null, alignment: 'right', border: true },
     aria = {},
@@ -54,8 +54,6 @@ const TextInput = (props: TextInputProps, ref: React.ElementRef<"input">) => {
     value = '',
     children = null,
   } = props
-
-  const inputRef = useRef<React.ElementRef<"input">>(ref)
 
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
@@ -94,7 +92,7 @@ const TextInput = (props: TextInputProps, ref: React.ElementRef<"input">) => {
         name={name}
         onChange={onChange}
         placeholder={placeholder}
-        ref={inputRef}
+        ref={ref}
         required={required}
         type={type}
         value={value}
@@ -159,6 +157,8 @@ const TextInput = (props: TextInputProps, ref: React.ElementRef<"input">) => {
       </div>
     </div>
   )
-}
+})
+
+TextInput.displayName = 'TextInput'
 
 export default TextInput
