@@ -153,15 +153,17 @@ const Dialog = (props: DialogProps) => {
         >
           <Dialog.Body>
             <Flex align='center'
-                orientation='column'>
-              <If condition = {sweetAlertStatus[status]} >
+                orientation='column'
+            >
+              <If condition = {sweetAlertStatus[status]}>
                 <IconCircle
                     icon={sweetAlertStatus[status].icon}
                     variant={sweetAlertStatus[status].variant}
                 />
               </If>
               <Title marginY='sm'
-                  size={3}>
+                  size={3}
+              >
                 {title}
               </Title>
               <Body marginY='xs'

@@ -1,8 +1,8 @@
 /* eslint-disable react/jsx-handler-names */
 
 import React, { useState } from "react"
-import { Button, Dialog, Flex } from "../.."
-import SectionSeparator from "../../pb_section_separator/_section_separator"
+import { Button, Dialog, Flex, SectionSeparator } from "../.."
+// import FlexItem from "../../pb_flex/_flex_item"
 
 const useDialog = (visible = false) => {
   const [opened, setOpened] = useState(visible)
@@ -36,7 +36,7 @@ const DialogStackedAlert = () => {
       visible: stackedButtonOpen,
     },
     {
-      status: "info",
+      status: "caution",
       text: "This is the action you will be taking",
       title: "Are you sure?",
       toggle: toggleSingleLinkButtonOpen,
@@ -104,7 +104,7 @@ const DialogStackedAlert = () => {
             </Button>
           </Dialog.Footer>
           <If condition={dialog.cancelledButton}>
-            <Dialog.Footer>
+            <Dialog.Footer paddingTop="none">
                 <Button
                     fullWidth
                     onClick={dialog.toggle}
@@ -125,8 +125,8 @@ const DialogStackedAlert = () => {
               >
                 {dialog.linkConfirmedButton}
               </Button>
+              <SectionSeparator orientation="vertical" />
               <If condition={dialog.linkCancelledButton}>
-                <SectionSeparator orientation="vertical" />
                 <Button
                     fullWidth
                     onClick={dialog.toggle}
