@@ -12,7 +12,7 @@ type RadioProps = {
   checked?: boolean,
   children?: Node,
   className?: string,
-  dark?: boolean,
+  dark?: Boolean,
   data?: {[key: string]: string},
   error?: boolean,
   id?: string,
@@ -38,7 +38,7 @@ const Radio = ({
   value = 'radio_text',
   onChange = () => {},
   ...props
-}: RadioProps, ref) => {
+}: RadioProps, ref: any) => {
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
   const classes = classnames(
@@ -46,7 +46,7 @@ const Radio = ({
     globalProps(props),
     className)
 
-  const displayRadio = () => {
+  const displayRadio = (props: RadioProps) => {
     if (children)
       return (children)
     else 
@@ -56,6 +56,7 @@ const Radio = ({
         name={name}
         onChange={onChange}
         ref={ref}
+        text={text}
         type="radio"
         value={value}
         {...props}
@@ -69,7 +70,7 @@ const Radio = ({
         className={classes}
         htmlFor={id}
     >
-    <>{displayRadio()}</>
+    <>{displayRadio(null)}</>
     <span className="pb_radio_button" />
     <Body
           dark={dark}
