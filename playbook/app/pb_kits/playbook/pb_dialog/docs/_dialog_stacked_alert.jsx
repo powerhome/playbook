@@ -1,8 +1,7 @@
 /* eslint-disable react/jsx-handler-names */
 
 import React, { useState } from "react"
-import { Button, Dialog, Flex, SectionSeparator } from "../.."
-// import FlexItem from "../../pb_flex/_flex_item"
+import { Button, Dialog, Flex, FlexItem, SectionSeparator } from "../.."
 
 const useDialog = (visible = false) => {
   const [opened, setOpened] = useState(visible)
@@ -46,7 +45,7 @@ const DialogStackedAlert = () => {
     {
       status: "success",
       text: "Text explaining what is successful",
-      title: "Successxs",
+      title: "Success",
       toggle: toggleTwoLinkButtonOpen,
       visible: twoLinkButtonOpen,
       linkConfirmedButton:"Ok",
@@ -105,37 +104,44 @@ const DialogStackedAlert = () => {
           </Dialog.Footer>
           <If condition={dialog.cancelledButton}>
             <Dialog.Footer paddingTop="none">
-                <Button
-                    fullWidth
-                    onClick={dialog.toggle}
-                    variant="secondary"
-                >
-                  {dialog.cancelledButton}
-                </Button>
+              <Button
+                  fullWidth
+                  onClick={dialog.toggle}
+                  variant="secondary"
+              >
+                {dialog.cancelledButton}
+              </Button>
             </Dialog.Footer>
           </If>
           </If>
           <If condition={dialog.linkCancelledButton || dialog.linkConfirmedButton} >
             <SectionSeparator />
-            <Dialog.Footer padding="none">
-              <Button
-                  fullWidth
-                  onClick={dialog.toggle}
-                  variant="link"
-              >
-                {dialog.linkConfirmedButton}
-              </Button>
-              <SectionSeparator orientation="vertical" />
-              <If condition={dialog.linkCancelledButton}>
+            <Flex
+                inline="flex-container"
+                vertical="stretch"
+            >
+              <FlexItem flex={1} >
                 <Button
                     fullWidth
                     onClick={dialog.toggle}
                     variant="link"
                 >
-                  {dialog.linkCancelledButton}
+                  {dialog.linkConfirmedButton}
                 </Button>
+              </FlexItem>
+              <If condition={dialog.linkCancelledButton}>
+                <SectionSeparator orientation="vertical"/>
+                <FlexItem flex={1}>
+                  <Button
+                      fullWidth
+                      onClick={dialog.toggle}
+                      variant="link"
+                  >
+                    {dialog.linkCancelledButton}
+                  </Button>
+                </FlexItem>
               </If>
-            </Dialog.Footer>
+            </Flex>
           </If>
         </Dialog>
       ))}
