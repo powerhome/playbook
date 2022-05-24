@@ -19,15 +19,19 @@ type ExampleType = {
   description?: string,
   example?: string,
   globalProps?: { [key: string]: string[] | number[] },
+  screenSizes?: { [key: string]: string[] | number[] },
   title?: string,
   tokens?: { [key: string]: string | number }
 }
+
+
 
 const Example = ({
   children,
   description,
   example,
   globalProps,
+  screenSizes,
   title,
   tokens,
 }: ExampleType): React.ReactElement => {
@@ -101,7 +105,10 @@ const Example = ({
           </FlexItem>
         )}
         {globalProps && (
-          <PropsValues {...globalProps} />
+          <PropsValues
+              globalProps={globalProps}
+              screenSizes={screenSizes}
+          />
         )}
         <Card
             background="dark"
