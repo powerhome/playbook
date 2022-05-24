@@ -87,4 +87,4 @@ When a new kit is generated, a placeholder React kit test will also be created. 
 
 Keep in mind: Styles are brought in from playbook through the rails gem, so you will not be able to test scss updates with yarn linking.
 
-The gem & package is available as open source under the terms of the [ICS License](https://opensource.org/licenses/ISC%22)
+The gem & npm package is available as open source under the terms of the [ISC License](https://opensource.org/licenses/ISC).
