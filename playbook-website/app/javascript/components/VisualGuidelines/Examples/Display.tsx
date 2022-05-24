@@ -47,7 +47,7 @@ const Display = ({example}: {example: string}) => (
         marginBottom='sm'
     />
     <Table
-        shadow="deep"
+        shadow='deep'
         size='sm'
     >
       <thead>
@@ -62,24 +62,16 @@ const Display = ({example}: {example: string}) => (
         {UTILITY_CLASSES.map((utilityClass: {[key: string]: string}) => (
           <tr>
             <td>
-              <Body
-                text={utilityClass.size}
-              />
+              {utilityClass.size}
             </td>
             <td>
-              <Body
-                text={utilityClass.media}
-              />
+              {utilityClass.media}
             </td>
             <td>
-              <Body
-                text={utilityClass.class}
-              />
+              {utilityClass.class}
             </td>
             <td>
-              <Body
-                text={utilityClass.properties}
-              />
+              {utilityClass.properties}
             </td>
           </tr>
         ))}
