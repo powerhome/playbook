@@ -42,7 +42,8 @@ const Radio = ({
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
   const classes = classnames(
-    buildCss('pb_radio_kit', alignment, dark ? 'dark': null, error ? 'error': null ),
+    buildCss('pb_radio_kit', alignment ),
+    dark ? 'dark': null, error ? 'error': null,
     globalProps(props),
     className)
 
