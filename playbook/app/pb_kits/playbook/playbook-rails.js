@@ -11,6 +11,7 @@ window.datePickerHelper = datePickerHelper
 
 // Lazy image loading
 import 'lazysizes'
+import 'lazysizes/plugins/blur-up/ls.blur-up'
 
 import PbCollapsible from './pb_collapsible'
 PbCollapsible.start()
