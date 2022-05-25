@@ -34,7 +34,7 @@ type TextInputProps = {
   },
 } & GlobalProps
 
-const TextInput = (props: TextInputProps, ref: React.ElementRef<"input">) => {
+const TextInput = forwardRef<React.ElementRef<"input">, TextInputProps>((props, ref) => {
   const {
     addOn = { icon: null, alignment: 'right', border: true },
     aria = {},
@@ -157,6 +157,8 @@ const TextInput = (props: TextInputProps, ref: React.ElementRef<"input">) => {
       </div>
     </div>
   )
-}
+})
 
-export default forwardRef(TextInput)
+TextInput.displayName = 'TextInput'
+
+export default TextInput
