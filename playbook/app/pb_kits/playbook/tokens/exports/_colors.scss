@@ -8,6 +8,7 @@
   }
   @include export-colors($product_colors);
   @include export-colors($status_colors);
+  @include export-colors($secondary_status_colors);
   @include export-colors($data_colors);
   @include export-colors($shadow_colors);
   @include export-colors($colors);
