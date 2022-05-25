@@ -120,9 +120,7 @@ const Select = ({
               required={required}
               value={value}
           >
-            <If condition={blankSelection}>
-              <option value="">{blankSelection}</option>
-            </If>
+            {blankSelection && <option value="">{blankSelection}</option>}
             {optionsList}
           </select>
         </If>
