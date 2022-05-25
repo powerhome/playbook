@@ -66,7 +66,7 @@ const Select = ({
   required = false,
   value,
   ...props
-}: SelectProps, ref: React.ElementRef<"select">) => {
+}: SelectProps, ref: React.LegacyRef<HTMLSelectElement>) => {
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
   const optionsList = createOptions(options)
