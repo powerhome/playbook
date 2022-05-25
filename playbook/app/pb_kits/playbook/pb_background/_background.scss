@@ -9,7 +9,11 @@ $additional_colors: (
 
 $merge_kits1: map-merge($status_colors, $category_colors);
 $merge_kits2: map-merge($merge_kits1, $product_colors);
-$background_colors: map-merge($additional_colors, $merge_kits2);
+$merge_kits3: map-merge($merge_kits2, $border_colors);
+$merge_kits4: map-merge($merge_kits3, $data_colors);
+$merge_kits5: map-merge($merge_kits4, $shadow_colors);
+$merge_kits6: map-merge($merge_kits5, $text_colors);
+$background_colors: map-merge($additional_colors, $merge_kits6);
 
 [class^=pb_background_kit] {
   max-width: 100%;
