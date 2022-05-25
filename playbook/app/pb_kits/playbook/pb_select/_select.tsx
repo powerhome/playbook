@@ -2,7 +2,7 @@ import React, { forwardRef } from 'react'
 import classnames from 'classnames'
 
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
-import { globalProps, domSafeProps, GlobalProps } from '../utilities/globalProps'
+import { globalProps, GlobalProps, domSafeProps } from '../utilities/globalProps'
 import type { InputCallback } from '../types'
 
 import Body from '../pb_body/_body'
