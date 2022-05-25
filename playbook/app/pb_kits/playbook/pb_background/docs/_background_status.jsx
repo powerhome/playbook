@@ -1,8 +1,13 @@
 import React from 'react'
 import { Background } from '../..'
+import { Flex } from '../..'
 
 const BackgroundStatus = (props) => (
-  <div className="pb--doc-demo-row">
+<Flex
+    gap="md"
+    justify="center"
+    wrap
+>
     <Background
         backgroundColor="success"
         padding="xl"
@@ -74,7 +79,7 @@ const BackgroundStatus = (props) => (
         padding="xl"
         {...props}
     />
-  </div>
+  </Flex>
 )
 
 export default BackgroundStatus
