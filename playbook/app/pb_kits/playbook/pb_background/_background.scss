@@ -7,7 +7,7 @@ $additional_colors: (
   "white": $white,
 );
 
-$merge_kits1: map-merge($status_colors, $category_colors, $secondary_status_colors);
+$merge_kits1: map-merge($status_colors, $category_colors);
 $merge_kits2: map-merge($merge_kits1, $product_colors);
 $background_colors: map-merge($additional_colors, $merge_kits2);
 

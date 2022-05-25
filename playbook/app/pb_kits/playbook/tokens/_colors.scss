@@ -153,36 +153,35 @@ $data_colors: (
 
 /* Status colors ----------------------*/
 $success:             $green;
-$success_secondary:   lighten($success, 90%);
+$success_secondary:   lighten($success, 10%);
 $warning:             $yellow;
-$warning_secondary:   lighten($warning, 90%);
+$warning_secondary:   lighten($warning, 10%);
 $error:               $red;
 $error_dark:          $red_dark;
 $error_dark_body:     lighten($error_dark, 2%);
-$error_secondary:     lighten($error, 90%);
+$error_secondary:     lighten($error, 10%);
 $info:                $teal;
-$info_secondary :     lighten($info, 90%);
+$info_secondary :     lighten($info, 10%);
 $neutral:             $slate;
-$neutral_secondary:   lighten($neutral, 90%);
+$neutral_secondary:   lighten($neutral, 10%);
 $primary:             $primary;
-$primary_secondary:    lighten($primary, 90%);
+$primary_secondary:    lighten($primary, 10%);
 
 $status_colors: (
   success:            $success,
-  warning:            $warning,
-  error:              $error,
-  info:               $info,
-  neutral:            $neutral,
-  primary:            $primary
-);
-$secondary_status_colors: (
   success_secondary:    $success_secondary,
-  error_secondary:      $error_secondary,
-  info_secondary:       $info_secondary,
+  warning:            $warning,
   warning_secondary:    $warning_secondary,
+  error:              $error,
+  error_secondary:      $error_secondary,
+  info:               $info,
+  info_secondary:       $info_secondary,
+  neutral:            $neutral,
   neutral_secondary:    $neutral_secondary,
+  primary:            $primary,
   primary_secondary:    $primary_secondary
 );
+
 
 
 $status_color_text: (
