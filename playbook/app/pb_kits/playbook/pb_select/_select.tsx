@@ -1,5 +1,3 @@
-/* @flow */
-
 import React, { forwardRef } from 'react'
 import classnames from 'classnames'
 
@@ -18,12 +16,12 @@ type SelectOption = {
 }
 
 type SelectProps = {
-  aria?: object,
+  aria?: { [key: string]: string },
   blankSelection?: string,
   children?: React.Node,
   compact?: boolean,
   className?: string,
-  data?: object,
+  data?: { [key: string]: string },
   disabled?: boolean,
   error?: string,
   onChange: InputCallback<HTMLSelectElement>,
