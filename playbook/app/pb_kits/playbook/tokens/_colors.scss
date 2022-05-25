@@ -167,6 +167,15 @@ $status_colors: (
   neutral:            $neutral,
   primary:            $primary
 );
+$secondary_status_colors: (
+  $success_secondary: lighten($sucess, 90%),
+  $error_secondary: lighten($error, 90%),
+  $info_secondary : lighten($info, 90%),
+  $warning_secondary: lighten($warning, 90%),
+  $neutral_secondary: lighten($neutral, 90%),
+  $primary_secondary: lighten($primary, 90%)
+);
+
 
 $status_color_text: (
   success:            $success,
