@@ -34,7 +34,7 @@ type TextInputProps = {
   },
 } & GlobalProps
 
-const TextInput = (props: TextInputProps, ref) => {
+const TextInput = (props: TextInputProps, ref: React.LegacyRef<HTMLInputElement>) => {
   const {
     addOn = { icon: null, alignment: 'right', border: true },
     aria = {},
