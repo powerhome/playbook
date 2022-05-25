@@ -94,16 +94,14 @@ const Select = ({
         {...dataProps}
         className={classes}
     >
-      <If condition={label}>
+      {label &&
         <label
             className="pb_select_kit_label"
             htmlFor={name}
         >
-          <Caption
-              text={label}
-          />
+          <Caption text={label} />
         </label>
-      </If>
+      }
       <label
           className={selectWrapperClass}
           htmlFor={name}
