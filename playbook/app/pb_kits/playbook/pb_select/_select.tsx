@@ -18,7 +18,7 @@ type SelectOption = {
 type SelectProps = {
   aria?: { [key: string]: string },
   blankSelection?: string,
-  children?: React.Node,
+  children?: Node,
   className?: string,
   compact?: boolean,
   data?: { [key: string]: string },
