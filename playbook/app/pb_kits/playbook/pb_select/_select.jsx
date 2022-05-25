@@ -133,12 +133,12 @@ const Select = ({
             fixedWidth
             icon="angle-down"
         />
-        <If condition={error}>
+        {error &&
           <Body
               status="negative"
               text={error}
           />
-        </If>
+        }
       </label>
     </div>
   )
