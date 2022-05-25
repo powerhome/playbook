@@ -87,6 +87,25 @@ const Select = ({
   )
 
   const selectWrapperClass = classnames(buildCss('pb_select_kit_wrapper'), { error }, className)
+  const selectBody =(() =>{
+    if (children) return children
+    return (
+      <select
+          {...domSafeProps(props)}
+          disabled={disabled}
+          id={name}
+          multiple={multiple}
+          name={name}
+          onChange={onChange}
+          ref={ref}
+          required={required}
+          value={value}
+      >
+        {blankSelection && <option value="">{blankSelection}</option>}
+        {optionsList}
+      </select>
+    )
+  })()
 
   return (
     <div
@@ -106,24 +125,7 @@ const Select = ({
           className={selectWrapperClass}
           htmlFor={name}
       >
-        <If condition={children}>
-          {children}
-          <Else />
-          <select
-              {...domSafeProps(props)}
-              disabled={disabled}
-              id={name}
-              multiple={multiple}
-              name={name}
-              onChange={onChange}
-              ref={ref}
-              required={required}
-              value={value}
-          >
-            {blankSelection && <option value="">{blankSelection}</option>}
-            {optionsList}
-          </select>
-        </If>
+        {selectBody}
         <Icon
             className="pb_select_kit_caret"
             fixedWidth
