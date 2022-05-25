@@ -9,7 +9,6 @@ RUN bash -lc 'rvm remove all --force && rvm install ruby-2.7.4 && rvm --default 
 RUN /pd_build/ruby_support/install_ruby_utils.sh
 RUN /pd_build/ruby_support/finalize.sh
 
-
 ENV NODE_OPTIONS "--max_old_space_size=8192"
 ENV NVM_VERSION v0.33.8
 ENV NODE_VERSION v12.20.1

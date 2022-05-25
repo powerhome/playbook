@@ -1,6 +1,6 @@
 {
   "name": "playbook-ui",
-  "version": "10.25.1",
+  "version": "10.26.0",
   "description": "Nitro's Design System",
   "main": "./dist/playbook.js",
   "scripts": {
@@ -8,6 +8,7 @@
     "lint": "eslint . --ext .js,.jsx",
     "lint-fix": "eslint . --ext .js,.jsx --fix",
     "test": "jest",
+    "test-watch": "jest --watch",
     "test-coverage": "jest --collectCoverage",
     "test-coverage-summary": "jest --collectCoverage --coverageReporters=\"json-summary\"",
     "watch": "webpack --watch --mode=development",
@@ -93,7 +94,7 @@
     "eslint": "6.8.0",
     "eslint-plugin-flowtype": "5.10.0",
     "eslint-plugin-jsx-control-statements": "2.2.1",
-    "eslint-plugin-react": "7.28.0",
+    "eslint-plugin-react": "7.30.0",
     "eslint-plugin-react-hooks": "4.5.0",
     "eslint-webpack-plugin": "2.6.0",
     "filemanager-webpack-plugin": "4.0.0",

@@ -1,6 +1,6 @@
 #!/usr/bin/env groovy
 
-library identifier: 'ci-kubed@v4.0.1', retriever: modernSCM([
+library identifier: 'ci-kubed@v5.0.0', retriever: modernSCM([
   $class: 'GitSCMSource',
   remote: 'git@github.com:powerhome/ci-kubed.git',
   credentialsId: 'powerci-github-ssh-key'
@@ -19,7 +19,7 @@ app.build(
 
   stage('Code Checkout') {
     scmVars = checkout scm
-    appImage = "quay.io/powerhome/playbook:${git.triggeringCommit(scmVars)}"
+    appImage = "image-registry.powerapp.cloud/playbook/playbook:${git.triggeringCommit(scmVars)}"
   }
 
   app.dockerStage('Build Docker Image') {
