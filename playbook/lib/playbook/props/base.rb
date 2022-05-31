@@ -7,12 +7,12 @@ module Playbook
     class Base
       attr_reader :default, :deprecated, :required, :name, :kit
 
-      def initialize(options = {})
-        @default = options.fetch(:default, nil)
-        @deprecated = options.fetch(:deprecated, false)
-        @required = options.fetch(:required, false)
-        @name = options.fetch(:name, nil)
-        @kit = options.fetch(:kit, nil)
+      def initialize(name:, kit:, default: nil, deprecated: false, required: false)
+        @default = default
+        @deprecated = deprecated
+        @required = required
+        @name = name
+        @kit = kit
       end
 
       def value(value)
