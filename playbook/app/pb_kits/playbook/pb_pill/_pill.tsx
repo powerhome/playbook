@@ -1,21 +1,19 @@
-/* @flow */
-
 import React from 'react'
 
 import classnames from 'classnames'
 import Title from '../pb_title/_title'
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
-import { globalProps } from '../utilities/globalProps'
+import { GlobalProps, globalProps } from '../utilities/globalProps'
 
 type PillProps = {
-  aria?: object,
+  aria?: {[key: string]: string},
   className?: string,
-  data?: object,
+  data?: {[key: string]: string},
   id?: string,
   text: string,
   variant?: "success" | "warning" | "error" | "info" | "neutral",
   textTransform?: "none" | "lowercase"
-}
+} & GlobalProps
 
 const Pill = (props: PillProps) => {
   const {

@@ -16,11 +16,9 @@ spec:
       labels:
         app: playbook
     spec:
-      imagePullSecrets:
-        - name: quay-robot-powerhome
       containers:
         - name: playbook
-          image: "quay.io/powerhome/playbook:<%= image_tag %>"
+          image: "image-registry.powerapp.cloud/playbook/playbook:<%= image_tag %>"
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 3000
