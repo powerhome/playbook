@@ -105,6 +105,9 @@ function timeSelectPlugin(props) {
 
         fp.timeContainer.classList.add('pb_time_selection')
 
+        // allow single minutes
+        fp.minuteElement.step = '1'
+
         // add caption text
         if (props.caption) {
           const captionContainer = document.createElement('div')

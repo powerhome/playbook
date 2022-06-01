@@ -122,7 +122,6 @@ const datePickerHelper = (config) => {
       window.removeEventListener('resize', calendarResizer)
     }],
     onChange: [(selectedDates, dateStr) => {
-      // debugger
       onChange(dateStr, selectedDates)
     }],
     onYearChange: [() => {
