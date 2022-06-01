@@ -72,7 +72,6 @@ const datePickerHelper = (config) => {
     // time selection
     if (enableTime) pluginList.push(timeSelectPlugin({ caption: timeCaption, showTimezone: showTimezone}))
 
-    // debugger
     return pluginList
   }
 
@@ -188,10 +187,8 @@ const datePickerHelper = (config) => {
   // Adding dropdown icons to year and month selects
   dropdown.insertAdjacentHTML('afterend', '<i class="far fa-angle-down year-dropdown-icon" id="test-id"></i>')
   if (picker.monthElements[0].parentElement) {
-    return picker.monthElements[0].insertAdjacentHTML('afterend', '<i class="far fa-angle-down month-dropdown-icon"></i>')}
-  // if (picker.weekElements[0].parentElement){
-  //   return  picker.weekElements[0].insertAdjacentHTML('afterend', '<i class="far fa-angle-down year-dropdown-icon" id="test-id"></i>')
-  // }
+    return picker.monthElements[0].insertAdjacentHTML('afterend', '<i class="far fa-angle-down month-dropdown-icon"></i>')
+  }
 
   // Remove readonly attribute for validation and or text input
   if (allowInput){

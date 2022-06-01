@@ -655,17 +655,13 @@ span.flatpickr-weekday {
 .flatpickr-time {
   text-align: center;
   outline: 0;
-  // display: block;
-  // height: 0;
   line-height: 40px;
-  // max-height: 40px;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
   overflow: hidden;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
-  // display: flex;
 }
 .flatpickr-time:after {
   content: "";
