@@ -16,6 +16,7 @@ import PropsValues from './PropsValues'
 
 type ExampleType = {
   children?: React.ReactChild[] | React.ReactChild,
+  customChildren?: boolean,
   description?: string,
   example?: string,
   globalProps?: { [key: string]: string[] | number[] },
@@ -26,6 +27,7 @@ type ExampleType = {
 
 const Example = ({
   children,
+  customChildren,
   description,
   example,
   globalProps,
@@ -87,7 +89,7 @@ const Example = ({
           rounded
           shadow="deeper"
       >
-        {children &&  (
+        {children && !customChildren && (
           <FlexItem>
             <Card.Body>
               <Caption
@@ -102,6 +104,7 @@ const Example = ({
             />
           </FlexItem>
         )}
+        {children && customChildren && (children)}
         {globalProps && (
           <PropsValues
               globalProps={globalProps}
