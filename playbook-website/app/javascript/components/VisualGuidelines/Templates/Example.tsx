@@ -20,7 +20,7 @@ type ExampleType = {
   description?: string,
   example?: string,
   globalProps?: { [key: string]: string[] | number[] },
-  globalPropsDescription?: string,
+  screenSizes?: { [key: string]: string[] | number[] },
   title?: string,
   tokens?: { [key: string]: string | number }
 }
@@ -31,7 +31,7 @@ const Example = ({
   description,
   example,
   globalProps,
-  globalPropsDescription,
+  screenSizes,
   title,
   tokens,
 }: ExampleType): React.ReactElement => {
@@ -56,7 +56,7 @@ const Example = ({
           {description}
         </Body>
       )}
-      { (globalProps || globalPropsDescription) && (
+      { globalProps && (
         <React.Fragment>
           <Title
               marginBottom="xs"
@@ -66,7 +66,7 @@ const Example = ({
               text="Global Props"
           />
           <Body marginBottom="lg">
-            {globalPropsDescription || 'Available in every kit. These are added globally as they are most flexible when developing.'}
+            {screenSizes ? 'Available in every kit. These are added globally as they are most flexible when developing. *Screen sizes are optional.' : 'Available in every kit. These are added globally as they are most flexible when developing.'}
           </Body>
         </React.Fragment>
       )}
@@ -106,7 +106,10 @@ const Example = ({
         )}
         {children && customChildren && (children)}
         {globalProps && (
-          <PropsValues {...globalProps} />
+          <PropsValues
+              globalProps={globalProps}
+              screenSizes={screenSizes}
+          />
         )}
         <Card
             background="dark"

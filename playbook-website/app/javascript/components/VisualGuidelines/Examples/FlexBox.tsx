@@ -33,7 +33,6 @@ const FlexBox = ({example}: {example: string}) => (
     example={example}
     customChildren={true}
     title='Flex Box'
-    globalPropsDescription={'Available in every kit. These are added globally as they are most flexible when developing. *Screen sizes are optional.'}
   >
     <Table>
       <thead>
