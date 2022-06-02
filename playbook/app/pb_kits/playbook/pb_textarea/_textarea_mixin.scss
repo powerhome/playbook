@@ -34,6 +34,7 @@
   }
   &:disabled, &:disabled:hover, &:disabled:focus, &:disabled:active {
     background-color: shade($background_color, 5%);
+    color: rgba(0, 0, 0, 0);
     box-shadow: none;
     opacity: 0.5;
   }

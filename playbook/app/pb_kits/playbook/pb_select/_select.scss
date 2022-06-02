@@ -30,6 +30,8 @@
     }
     &:disabled ~ .pb_select_kit_caret {
       opacity: 0.5;
+      cursor: default;
+      color: rgb(170, 170, 170);
     }
   }
   option {

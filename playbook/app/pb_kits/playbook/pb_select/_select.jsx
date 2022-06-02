@@ -123,7 +123,14 @@ const Select = ({
               value={value}
           >
             <If condition={blankSelection}>
-              <option value="">{blankSelection}</option>
+              <option
+                  disabled
+                  hidden
+                  selected
+                  value=""
+              >
+                {blankSelection}
+              </option>
             </If>
             {optionsList}
           </select>
