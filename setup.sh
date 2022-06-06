@@ -4,6 +4,8 @@ asdf install
 asdf plugin add ruby
 asdf plugin add yarn
 asdf plugin add nodejs
+asdf plugin add python
+asdf install
 
 echo "Running yarn install \n"
 yarn install
