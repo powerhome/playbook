@@ -16,18 +16,22 @@ import PropsValues from './PropsValues'
 
 type ExampleType = {
   children?: React.ReactChild[] | React.ReactChild,
+  customChildren?: boolean,
   description?: string,
   example?: string,
   globalProps?: { [key: string]: string[] | number[] },
+  screenSizes?: { [key: string]: string[] | number[] },
   title?: string,
   tokens?: { [key: string]: string | number }
 }
 
 const Example = ({
   children,
+  customChildren,
   description,
   example,
   globalProps,
+  screenSizes,
   title,
   tokens,
 }: ExampleType): React.ReactElement => {
@@ -62,7 +66,7 @@ const Example = ({
               text="Global Props"
           />
           <Body marginBottom="lg">
-            {'Available in every kit. These are added globally as they are most flexible when developing.'}
+            {screenSizes ? 'Available in every kit. These are added globally as they are most flexible when developing. *Screen sizes are optional.' : 'Available in every kit. These are added globally as they are most flexible when developing.'}
           </Body>
         </React.Fragment>
       )}
@@ -85,7 +89,7 @@ const Example = ({
           rounded
           shadow="deeper"
       >
-        {children &&  (
+        {children && !customChildren && (
           <FlexItem>
             <Card.Body>
               <Caption
@@ -100,8 +104,12 @@ const Example = ({
             />
           </FlexItem>
         )}
+        {children && customChildren && (children)}
         {globalProps && (
-          <PropsValues {...globalProps} />
+          <PropsValues
+              globalProps={globalProps}
+              screenSizes={screenSizes}
+          />
         )}
         <Card
             background="dark"

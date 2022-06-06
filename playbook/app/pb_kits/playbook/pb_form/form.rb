@@ -11,7 +11,7 @@ module Playbook
       prop :validate, type: Playbook::Props::Boolean, default: false
 
       def render_in(view_context, &block)
-        view_context.pb_form_with(form_options, &block)
+        view_context.pb_form_with(**form_options, &block)
       end
 
     private
