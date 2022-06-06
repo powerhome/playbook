@@ -2335,6 +2335,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/flatpickr@npm:^3.1.2":
+  version: 3.1.2
+  resolution: "@types/flatpickr@npm:3.1.2"
+  dependencies:
+    flatpickr: "*"
+  checksum: 1fe1b01bf7a77eff2cddc709a45f3067ca9ce850372a6af5fc0668a77ca0cd96ea7aa7b2ed52e61e7756bbb304cafa90282dd2e7d44d24c4e4812d67808b9d42
+  languageName: node
+  linkType: hard
+
 "@types/glob@npm:^7.1.1":
   version: 7.2.0
   resolution: "@types/glob@npm:7.2.0"
@@ -7070,6 +7079,13 @@ __metadata:
     rimraf: 2.6.3
     write: 1.0.3
   checksum: a36ba407553064be4a571cdee4021a50290f6179a0827df1d076a2e33cd84e543d0274cb15dbeb551c2ae6d53e611e3c02564a93f0d527563d0f560be7a14b0d
+  languageName: node
+  linkType: hard
+
+"flatpickr@npm:*":
+  version: 4.6.13
+  resolution: "flatpickr@npm:4.6.13"
+  checksum: 048a40f607f81f6f01caa1b6c1b7edda29147476c78d4158874f078e7bc317d0963be167177dce6ec8182deffd22c6eae886a0b727b3c4a2bf2afbcdadf56af0
   languageName: node
   linkType: hard
 
@@ -11821,6 +11837,7 @@ fsevents@^1.2.7:
     "@popperjs/core": ^2.6.0
     "@testing-library/jest-dom": 5.16.4
     "@testing-library/react": 11.2.7
+    "@types/flatpickr": ^3.1.2
     "@types/lodash": 4.14.182
     "@types/react": 17.0.44
     "@types/react-highlight-words": ^0.16.4
