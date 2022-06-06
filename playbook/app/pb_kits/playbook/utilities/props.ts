@@ -22,7 +22,7 @@ const buildPrefixedProps = (prefix: string, data: {[key: string]: any}) =>
  *
  * @returns {() => {}} the noop function.
  */
-export const noop = () => {}
+export const noop = (): void => { void 0 }
 
 /**
  * Maps a given aria object into HTML valid aria attribtues and their values.
@@ -47,5 +47,5 @@ export const buildDataProps = (data: {[key: string]: any}) => buildPrefixedProps
  * @param {Object} rules a 'classnames' compliant rules object, used to derive the root className.
  * @returns {String} the derived root className value.
  */
-export const buildCss = (...rules: string[]) => classnames(rules).replace(/\s/g, '_')
+export const buildCss = (...rules: (string | { [x: string]: string; })[]): string => classnames(rules).replace(/\s/g, '_')
 

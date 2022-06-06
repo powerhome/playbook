@@ -60,9 +60,12 @@ module Playbook
           plusIcon: plus_icon,
         }
 
-        base_options.merge!({ getOptionLabel: get_option_label }) if get_option_label.present?
-        base_options.merge!({ getOptionValue: get_option_value }) if get_option_value.present?
-        base_options.merge!({ async: true, loadOptions: load_options }) if async
+        base_options[:getOptionLabel] = get_option_label if get_option_label.present?
+        base_options[:getOptionValue] = get_option_value if get_option_value.present?
+        if async
+          base_options[:async] = true
+          base_options[:loadOptions] = load_options
+        end
         base_options
       end
     end

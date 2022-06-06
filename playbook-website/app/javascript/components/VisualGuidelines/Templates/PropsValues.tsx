@@ -7,62 +7,85 @@
 import React from 'react'
 import { Caption, Card, Flex, FlexItem, Pill, SectionSeparator } from 'playbook-ui'
 
-// type Props = {[key: string]: string | number}
+type Props = {
+  globalProps: {[key: string]: string[] | number[]},
+  screenSizes?: {[key: string]: string[] | number[]}
+}
 
-const PropsValues = (props: {[key: string]: string[] | number[]}): React.ReactElement => (
-  <Flex
-      inline="flex-container"
-      justifyContent="spaceBetween"
-      orientation="row"
-      vertical="stretch"
-  >
-    <React.Fragment>
-      <FlexItem flex={1}>
-        <Card.Body>
-          <Caption
-              marginBottom="sm"
-              text="Props"
-          />
-          <Flex
-              gap="xs"
-              wrap
-          >
-            { Object.keys(props).map((propKey: string) => (
+const PropsValues = (props: Props): React.ReactElement => {
+  return (
+    <Flex
+        inline="flex-container"
+        justifyContent="spaceBetween"
+        orientation="row"
+        vertical="stretch"
+    >
+      { Object.keys(props.globalProps).map((propKey: string) => (
+        <React.Fragment key={propKey}>
+          <FlexItem flex={1}>
+            <Card.Body>
+              <Caption
+                  marginBottom="sm"
+                  text="Props"
+              />
               <Pill
-                  key={propKey}
                   text={propKey}
                   textTransform="none"
               />
-            ))}
-          </Flex>
-        </Card.Body>
-      </FlexItem>
-      <SectionSeparator
-          marginBottom="md"
-          marginTop="md"
-          orientation="vertical"
-          variant="card"
-      />
-      <FlexItem flex={1}>
-        <Card.Body>
-          <Caption
-              marginBottom="sm"
-              text="Values"
+            </Card.Body>
+          </FlexItem>
+          <SectionSeparator
+              marginBottom="md"
+              marginTop="md"
+              orientation="vertical"
+              variant="card"
           />
-          <Flex gap="xs">
-            {Object.values(props)[0].map((propValue) => (
-              <Pill
-                  key={`${propValue}`}
-                  text={propValue}
-                  textTransform="none"
-                  variant="warning"
+          {props.screenSizes && (
+            <>
+              <FlexItem flex={1}>
+                <Card.Body>
+                  <Caption
+                      marginBottom="sm"
+                      text="Screen Size"
+                  />
+                  {Object.values(props.screenSizes)[0].map((propValue) => (
+                    <Pill
+                        key={`${propKey}-${propValue}`}
+                        text={propValue}
+                        textTransform="none"
+                        variant="warning"
+                    />
+                  ))}
+                </Card.Body>
+              </FlexItem>
+              <SectionSeparator
+                  marginBottom="md"
+                  marginTop="md"
+                  orientation="vertical"
+                  variant="card"
               />
-            ))}
-          </Flex>
-        </Card.Body>
-      </FlexItem>
-    </React.Fragment>
-  </Flex>
-)
+            </>
+          )}
+          <FlexItem flex={1}>
+            <Card.Body>
+              <Caption
+                  marginBottom="sm"
+                  text="Values"
+              />
+              {Object.values(props.globalProps)[0].map((propValue) => (
+                <Pill
+                    key={`${propKey}-${propValue}`}
+                    text={propValue}
+                    textTransform="none"
+                    variant="warning"
+                />
+              ))}
+            </Card.Body>
+          </FlexItem>
+        </React.Fragment>
+      ))}
+    </Flex>
+  )
+}
 
 export default PropsValues

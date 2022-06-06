@@ -6,3 +6,7 @@ AllCops:
     - "bin/*"
     - "node_modules/**/*"
     - "vendor/**/*"
+
+Layout/BlockAlignment:
+  Exclude:
+    - private/tasks/pb_release.rake

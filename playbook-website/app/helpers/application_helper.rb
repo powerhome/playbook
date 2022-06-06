@@ -10,7 +10,7 @@ module ApplicationHelper
     category_kits.each do |kit|
       display_kits << render_pb_doc_kit(kit, type, false)
     end
-    raw("<div class='pb--docItem'>" + display_kits.join("</div><div class='pb--docItem'>") + "</div>")
+    raw("<div class='pb--docItem'>#{display_kits.join("</div><div class='pb--docItem'>")}</div>")
   end
 
   def pb_doc_kit_footer(kit)
@@ -87,11 +87,10 @@ module ApplicationHelper
   end
 
   def format_search_hash(kit)
-    label_value_hash = {
+    {
       label: kit.to_s.titleize,
       value: @type == "react" || @type.nil? ? "/kits/#{kit}/react" : "/kits/#{kit}",
     }
-    label_value_hash
   end
 
   def search_list

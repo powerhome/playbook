@@ -1,0 +1,63 @@
+@import "../../tokens/typography";
+@import "../../tokens/spacing";
+@import "../../tokens/colors";
+
+[class^=pb_date_picker_kit] {
+  .pb_time_selection {
+    color: inherit;
+    text-align: left;
+    margin-left: $space_sm;
+    .numInputWrapper {
+      width: auto;
+      input.numInput {
+        border: 1px solid $border_light !important;
+        border-radius: 5px;
+        text-align: center;
+        width: 60px;
+        margin-left: 0;
+        padding: 0;
+        &:focus {
+          border-color: $primary_action !important;
+        }
+      }
+      span {
+        &.arrowUp, &.arrowDown {
+          display: none;
+        }
+      }
+    }
+    [class^=pb_caption_kit_md], [class^=pb_caption_kit_xs] {
+      line-height: $text_larger;
+    }
+    [class^=pb_caption_kit_xs] {
+      clear: both;
+      display: block;
+    }
+    .flatpickr {
+      &-time-separator {
+        margin: 0 $space_xs;
+        text-align: center;
+      }
+    }
+    .meridiem {
+      [class^=pb_form_group_kit] {
+        margin-left: $space_sm;
+      }
+
+      #datePickerAM, #datePickerPM {
+        display: none;
+      }
+      &:focus, &:hover {
+        background: transparent;
+      }
+
+      [class^=pb_selectable_card_kit] > label {
+        padding: 0;
+        margin: 0;
+        width: 60px;
+        height: 40px;
+        text-align: center;
+      }
+    }
+  }
+}
