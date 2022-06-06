@@ -1,10 +1,8 @@
-/* @flow */
-
 import React, { forwardRef } from 'react'
 import classnames from 'classnames'
 
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
-import { globalProps, domSafeProps } from '../utilities/globalProps'
+import { globalProps, GlobalProps, domSafeProps } from '../utilities/globalProps'
 import type { InputCallback } from '../types'
 
 import Body from '../pb_body/_body'
@@ -18,16 +16,14 @@ type SelectOption = {
 }
 
 type SelectProps = {
-  aria?: object,
+  aria?: { [key: string]: string },
   blankSelection?: string,
-  children?: React.Node,
-  compact?: boolean,
+  children?: Node,
   className?: string,
-  data?: object,
+  compact?: boolean,
+  data?: { [key: string]: string },
   disabled?: boolean,
   error?: string,
-  onChange: InputCallback<HTMLSelectElement>,
-  options: SelectOption[],
   id?: string,
   includeBlank?: string,
   inline?: boolean,
@@ -36,9 +32,11 @@ type SelectProps = {
   marginBottom: string,
   multiple?: boolean,
   name?: string,
+  onChange: InputCallback<HTMLSelectElement>,
+  options: SelectOption[],
   required?: boolean,
   value?: string,
-}
+} & GlobalProps
 
 const createOptions = (options: SelectOption[]) => options.map((option, index) => (
   <option
@@ -68,7 +66,7 @@ const Select = ({
   required = false,
   value,
   ...props
-}: SelectProps, ref: React.ElementRef<"select">) => {
+}: SelectProps, ref: React.LegacyRef<HTMLSelectElement>) => {
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
   const optionsList = createOptions(options)
@@ -87,6 +85,25 @@ const Select = ({
   )
 
   const selectWrapperClass = classnames(buildCss('pb_select_kit_wrapper'), { error }, className)
+  const selectBody =(() =>{
+    if (children) return children
+    return (
+      <select
+          {...domSafeProps(props)}
+          disabled={disabled}
+          id={name}
+          multiple={multiple}
+          name={name}
+          onChange={onChange}
+          ref={ref}
+          required={required}
+          value={value}
+      >
+        {blankSelection && <option value="">{blankSelection}</option>}
+        {optionsList}
+      </select>
+    )
+  })()
 
   return (
     <div
@@ -94,51 +111,30 @@ const Select = ({
         {...dataProps}
         className={classes}
     >
-      <If condition={label}>
+      {label &&
         <label
             className="pb_select_kit_label"
             htmlFor={name}
         >
-          <Caption
-              text={label}
-          />
+          <Caption text={label} />
         </label>
-      </If>
+      }
       <label
           className={selectWrapperClass}
           htmlFor={name}
       >
-        <If condition={children}>
-          {children}
-          <Else />
-          <select
-              {...domSafeProps(props)}
-              disabled={disabled}
-              id={name}
-              multiple={multiple}
-              name={name}
-              onChange={onChange}
-              ref={ref}
-              required={required}
-              value={value}
-          >
-            <If condition={blankSelection}>
-              <option value="">{blankSelection}</option>
-            </If>
-            {optionsList}
-          </select>
-        </If>
+        {selectBody}
         <Icon
             className="pb_select_kit_caret"
             fixedWidth
             icon="angle-down"
         />
-        <If condition={error}>
+        {error &&
           <Body
               status="negative"
               text={error}
           />
-        </If>
+        }
       </label>
     </div>
   )

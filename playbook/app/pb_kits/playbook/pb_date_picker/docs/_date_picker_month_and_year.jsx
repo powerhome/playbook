@@ -8,7 +8,7 @@ const DatePickerMonthAndYear = (props) => {
       <DatePicker
           label="Date Picker"
           pickerId="disabled-date"
-          plugins
+          selectionType="month"
           {...props}
       />
     </div>
