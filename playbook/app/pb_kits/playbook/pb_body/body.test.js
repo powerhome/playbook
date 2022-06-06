@@ -16,14 +16,17 @@ test('returns namespaced class name', () => {
 })
 
 test('with colors', () => {
-  render(
-    <Body
-        color="success"
-        data={{ testid: 'primary-test' }}
-        text="Test colors"
-    />
-  )
+  ['light', 'lighter', 'link', 'success', 'error'].forEach((color) => {
+    const testId = `colors-test-${color}`
+    render(
+      <Body
+          color={color}
+          data={{ testid: testId }}
+          text="Test colors"
+      />
+    )
 
-  const kit = screen.getByTestId('primary-test')
-  expect(kit).toHaveClass('pb_body_kit_success')
+    const kit = screen.getByTestId(testId)
+    expect(kit).toHaveClass(`pb_body_kit_${color}`)
+  })
 })
