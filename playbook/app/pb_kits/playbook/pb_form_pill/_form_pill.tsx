@@ -4,24 +4,24 @@ import classnames from 'classnames'
 import Title from '../pb_title/_title'
 import Icon from '../pb_icon/_icon'
 import Avatar from '../pb_avatar/_avatar'
-import { globalProps } from '../utilities/globalProps'
+import { globalProps, GlobalProps } from '../utilities/globalProps'
 
 type FormPillProps = {
   className?: string,
   id?: string,
   text: string,
   name: string,
-  onClick?: EventHandler,
+  onClick?: React.MouseEventHandler<HTMLSpanElement>,
   avatar?: boolean,
   avatarUrl?: string,
   size?: string,
-  textTransform?: "none" | "lowercase",
+  textTransform?: 'none' | 'lowercase',
   closeProps?: {
-    onClick?: EventHandler,
-    onMouseDown?: EventHandler,
-    onTouchEnd?: EventHandler,
-  },
-}
+    onClick?: React.MouseEventHandler<HTMLSpanElement>,
+    onMouseDown?: React.MouseEventHandler<HTMLSpanElement>,
+    onTouchEnd?: React.TouchEventHandler<HTMLSpanElement>,
+  }, 
+} & GlobalProps
 const FormPill = (props: FormPillProps) => {
   const {
     className,
@@ -42,25 +42,29 @@ const FormPill = (props: FormPillProps) => {
   )
   return (
     <div className={css}>
-      <If condition={name}>
+        {name &&
+        <>
         <Avatar
             imageUrl={avatarUrl}
             name={name}
             size="xs"
+            status={null}
         />
         <Title
             className="pb_form_pill_text"
             size={4}
             text={name}
         />
-      </If>
-      <If condition={text}>
+        </>
+        }
+
+      {text &&
         <Title
             className="pb_form_pill_tag"
             size={4}
             text={text}
         />
-      </If>
+      }
       <div
           className="pb_form_pill_close"
           onClick={onClick}
