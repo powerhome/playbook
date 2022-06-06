@@ -1,7 +1,7 @@
 import React from 'react'
 import classnames from 'classnames'
 
-import { GlobalProps, globalProps } from '../utilities/globalProps'
+import { globalProps, GlobalProps } from '../utilities/globalProps'
 import {
   buildAriaProps,
   buildCss,
@@ -26,7 +26,6 @@ type BadgeProps = {
   text?: string,
   variant?: "error" | "info" | "neutral" | "primary" | "success" | "warning",
 } & GlobalProps
-
 const Badge = (props: BadgeProps) => {
   const {
     aria = {},
