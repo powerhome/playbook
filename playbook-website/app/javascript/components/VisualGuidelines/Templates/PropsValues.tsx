@@ -9,14 +9,21 @@ import { Caption, Card, Flex, FlexItem, Pill, SectionSeparator } from 'playbook-
 
 // type Props = {[key: string]: string | number}
 
-const PropsValues = (props: {[key: string]: string[] | number[]}): React.ReactElement => (
+
+type Props = {
+  globalProps: {[key: string]: string[] | number[]} ,
+  screenSizes?: {[key: string]: string[] | number[]}
+}
+
+const PropsValues = (props: Props): React.ReactElement => {
+  return (
   <Flex
       inline="flex-container"
       justifyContent="spaceBetween"
       orientation="row"
       vertical="stretch"
   >
-    { Object.keys(props).map((propKey: string) => (
+    { Object.keys(props.globalProps).map((propKey: string) => (
       <React.Fragment key={propKey}>
         <FlexItem flex={1}>
           <Card.Body>
@@ -36,13 +43,39 @@ const PropsValues = (props: {[key: string]: string[] | number[]}): React.ReactEl
             orientation="vertical"
             variant="card"
         />
+        {props.screenSizes && (
+          <>
+            <FlexItem flex={1}>
+              <Card.Body>
+                <Caption
+                    marginBottom="sm"
+                    text="Screen Size"
+                />
+                {Object.values(props.screenSizes)[0].map((propValue) => (
+                  <Pill
+                      key={`${propKey}-${propValue}`}
+                      text={propValue}
+                      textTransform="none"
+                      variant="warning"
+                  />
+                ))}
+              </Card.Body>
+            </FlexItem>
+            <SectionSeparator
+                marginBottom="md"
+                marginTop="md"
+                orientation="vertical"
+                variant="card"
+            />
+          </>
+        )}
         <FlexItem flex={1}>
           <Card.Body>
             <Caption
                 marginBottom="sm"
                 text="Values"
             />
-            {props[propKey].map((propValue) => (
+            {Object.values(props.globalProps)[0].map((propValue) => (
               <Pill
                   key={`${propKey}-${propValue}`}
                   text={propValue}
@@ -55,6 +88,8 @@ const PropsValues = (props: {[key: string]: string[] | number[]}): React.ReactEl
       </React.Fragment>
     ))}
   </Flex>
-)
+  )
+}
+
 
 export default PropsValues

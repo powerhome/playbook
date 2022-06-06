@@ -40,7 +40,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency "rails", ">= 5.2.4.5"
   s.add_development_dependency "rspec-html-matchers", "0.9.1"
   s.add_development_dependency "rspec-rails", "~> 3.8", ">= 3.8.0"
-  s.add_development_dependency "rubocop", "1.20.0"
+  s.add_development_dependency "rubocop", "1.23.0"
   s.add_development_dependency "rubocop-performance", "~> 1.11.5"
   s.add_development_dependency "spring", "2.0.2"
   s.add_development_dependency "spring-watcher-listen", "2.0.1"

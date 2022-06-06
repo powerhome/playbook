@@ -56,7 +56,7 @@ namespace :pb_release do
     version = Playbook::VERSION
     puts "You about to release version #{version}. Is that correct? (y/N)"
     input = $stdin.gets.chomp
-    raise Nope unless input.downcase == "y"
+    raise Nope unless input.casecmp("y").zero?
 
     # NPM
     puts "\nGenerating distribution files"
