@@ -5,7 +5,7 @@ import { deprecatedProps, globalProps, GlobalProps } from '../utilities/globalPr
 
 type CaptionProps = {
   aria?: {[key: string]: string},
-  children: React.ReactChild[],
+  children?: React.ReactChild[],
   className?: string,
   color?: "default" | "light" | "lighter" | "success" | "error" | "link",
   data?: {[key: string]: string},
