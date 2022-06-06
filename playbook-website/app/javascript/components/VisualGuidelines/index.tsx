@@ -7,7 +7,9 @@ import Colors from './Colors'
 import MaxWidth from './Examples/MaxWidth'
 import Positioning from './Examples/Positioning'
 import BorderRadius from './Examples/BorderRadius'
+import Display from './Examples/Display'
 import Cursor from './Examples/Cursor'
+import FlexBox from './Examples/FlexBox'
 
 const VisualGuidelines = ({ examples }: {examples: {[key: string]: string}}): React.ReactElement => {
   return (
@@ -19,7 +21,9 @@ const VisualGuidelines = ({ examples }: {examples: {[key: string]: string}}): Re
           tokensExample={examples.position_token}
       />
       <BorderRadius tokensExample={examples.border_radius_tokens}/>
+      <Display example={examples.display_in_use_jsx} />
       <Cursor example={examples.cursor_jsx} />
+      <FlexBox example={examples.justify_self_jsx} />
     </React.Fragment>
   )
 }
