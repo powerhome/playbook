@@ -19,7 +19,7 @@ type BodyProps = {
   status?: 'negative' | 'neutral' | 'positive',
   tag?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p' | 'span' | 'div',
   text?: string,
-  variant: null | 'link',
+  variant?: null | 'link',
 } & GlobalProps
 
 const Body = (props: BodyProps): React.ReactElement => {
