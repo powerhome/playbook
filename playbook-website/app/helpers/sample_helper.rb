@@ -8,9 +8,10 @@ module SampleHelper
   end
 
   def get_raw_code(sample, type)
-    if type == "rails"
+    case type
+    when "rails"
       ext = "html.erb"
-    elsif type == "react"
+    when "react"
       ext = "jsx"
     end
 
@@ -19,9 +20,10 @@ module SampleHelper
   end
 
   def get_sample_code_content(sample, type)
-    if type == "rails"
+    case type
+    when "rails"
       rouge_type = "erb"
-    elsif type == "react"
+    when "react"
       rouge_type = "react"
     end
     code = get_raw_code(sample, type)
@@ -54,9 +56,10 @@ module SampleHelper
   end
 
   def render_sample_ui(sample, type)
-    if type == "rails"
+    case type
+    when "rails"
       render template: "samples/#{sample}/index.html.erb"
-    elsif type == "react"
+    when "react"
       react_component(sample.titleize.delete(" ").to_s)
     end
   end
