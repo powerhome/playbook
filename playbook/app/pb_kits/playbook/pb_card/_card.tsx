@@ -83,10 +83,10 @@ const Card = (props: CardPropTypes) => {
   const borderCSS = borderNone == true ? 'border_none' : ''
   const selectedCSS = selected == true ? 'selected' : 'deselected'
   const backgroundCSS = background == 'none' ? '' : `background_${background}`
-  const cardCss = buildCss('pb_card_kit', selectedCSS, borderCSS, `border_radius_${borderRadius}`, backgroundCSS,
-    `highlight_${highlight.position}`,
-    `highlight_${highlight.color}`,
-  )
+  const cardCss = buildCss('pb_card_kit', selectedCSS, borderCSS, `border_radius_${borderRadius}`, backgroundCSS, {
+    [`highlight_${highlight.position}`]: highlight.position,
+    [`highlight_${highlight.color}`]: highlight.color,
+  })
   const ariaProps: {[key: string]: string} = buildAriaProps(aria)
   const dataProps: {[key: string]: string} = buildDataProps(data)
 

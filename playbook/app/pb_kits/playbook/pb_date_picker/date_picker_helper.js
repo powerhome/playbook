@@ -1,5 +1,7 @@
 import flatpickr from 'flatpickr'
 import monthSelectPlugin from 'flatpickr/dist/plugins/monthSelect'
+import weekSelect from "flatpickr/dist/plugins/weekSelect/weekSelect"
+import timeSelectPlugin from './plugins/timeSelect'
 
 const datePickerHelper = (config) => {
   const {
@@ -8,6 +10,7 @@ const datePickerHelper = (config) => {
     disableDate,
     disableRange,
     disableWeekdays,
+    enableTime,
     format,
     maxDate,
     minDate,
@@ -16,6 +19,10 @@ const datePickerHelper = (config) => {
     pickerId,
     plugins,
     required,
+    selectionType,
+    showTimezone,
+    timeCaption = 'Select Time',
+    timeFormat = 'at h:i K',
     yearRange,
   } = config
 
@@ -52,9 +59,25 @@ const datePickerHelper = (config) => {
     }
   }
 
-  const setMonthAndYearPlugin = () => (
-    plugins ? [ monthSelectPlugin({ shorthand: true, dateFormat: 'F Y', altFormat: 'F Y' }) ] : []
-  )
+  const setPlugins = () => {
+    let pluginList = []
+
+    // month and week selection
+    if (selectionType === "month" || plugins === true) {
+      pluginList.push(monthSelectPlugin({ shorthand: true, dateFormat: 'F Y', altFormat: 'F Y' }))
+    } else if ( selectionType === "week") {
+      pluginList.push(weekSelect({}))
+    }
+
+    // time selection
+    if (enableTime) pluginList.push(timeSelectPlugin({ caption: timeCaption, showTimezone: showTimezone}))
+
+    return pluginList
+  }
+
+  const getDateFormat = () => {
+    return enableTime ? `${format} ${timeFormat}` : format
+  }
 
   // ===========================================================
   // |             Flatpickr initializer w/ config             |
@@ -62,7 +85,7 @@ const datePickerHelper = (config) => {
 
   flatpickr(`#${pickerId}`, {
     disableMobile: true,
-    dateFormat: format,
+    dateFormat: getDateFormat(),
     defaultDate: defaultDateGetter(),
     disable: disableWeekdays && disableWeekdays.length > 0 ? [
       (date) => {
@@ -86,9 +109,10 @@ const datePickerHelper = (config) => {
         )
       },
     ] : disabledParser(),
-    maxDate: maxDate,
-    minDate: minDate,
-    mode: mode,
+    enableTime,
+    maxDate,
+    minDate,
+    mode,
     nextArrow: '<i class="far fa-angle-right"></i>',
     onOpen: [() => {
       calendarResizer()
@@ -103,7 +127,7 @@ const datePickerHelper = (config) => {
     onYearChange: [() => {
       yearChangeHook()
     }],
-    plugins: setMonthAndYearPlugin(),
+    plugins: setPlugins(),
     prevArrow: '<i class="far fa-angle-left"></i>',
     static: true,
   })

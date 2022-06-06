@@ -37,7 +37,8 @@ RSpec.describe Playbook::PbButton::Button do
   describe "#link_options" do
     it "returns all the correct link options", :aggregate_failures do
       expect(subject.new(new_window: true).link_options).to include target: "_blank"
-      expect(subject.new(new_window: false).link_options).to include target: "_self"
+      expect(subject.new(new_window: false).link_options).to_not include(:target)
+
       expect(subject.new(link: "Google.com").link_options).to include href: "Google.com"
     end
   end
