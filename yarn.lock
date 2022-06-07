@@ -7082,14 +7082,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"flatpickr@npm:*":
-  version: 4.6.13
-  resolution: "flatpickr@npm:4.6.13"
-  checksum: 048a40f607f81f6f01caa1b6c1b7edda29147476c78d4158874f078e7bc317d0963be167177dce6ec8182deffd22c6eae886a0b727b3c4a2bf2afbcdadf56af0
-  languageName: node
-  linkType: hard
-
-"flatpickr@npm:^4.6.6":
+"flatpickr@npm:*, flatpickr@npm:^4.6.6":
   version: 4.6.13
   resolution: "flatpickr@npm:4.6.13"
   checksum: 048a40f607f81f6f01caa1b6c1b7edda29147476c78d4158874f078e7bc317d0963be167177dce6ec8182deffd22c6eae886a0b727b3c4a2bf2afbcdadf56af0
