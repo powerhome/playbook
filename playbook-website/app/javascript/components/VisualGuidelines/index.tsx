@@ -6,6 +6,7 @@ import React from 'react'
 import Colors from './Colors'
 import MaxWidth from './Examples/MaxWidth'
 import Positioning from './Examples/Positioning'
+import NumberSpacing from './Examples/NumberSpacing'
 import Shadows from './Examples/Shadows'
 import Spacing from './Examples/Spacing'
 import BorderRadius from './Examples/BorderRadius'
@@ -22,6 +23,7 @@ const VisualGuidelines = ({ examples }: {examples: {[key: string]: string}}): Re
           example={examples.positioning_jsx}
           tokensExample={examples.position_token}
       />
+      <NumberSpacing example={examples.number_spacing_jsx} />
       <Shadows
           example={examples.shadow_in_use_jsx}
           tokensExample={examples.shadow_erb}
