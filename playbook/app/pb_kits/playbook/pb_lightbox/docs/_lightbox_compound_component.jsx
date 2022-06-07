@@ -28,7 +28,7 @@ const LightboxCompoundComponent = (props) => {
       <div>
         {showLightbox ? (
           <Lightbox
-              description='Dyamic Count goes here.'
+              description='Dynamic Count Goes Here.'
               initialPhoto={selectedPhoto}
               onClose={handleCloseLightbox}
               photos={photos}

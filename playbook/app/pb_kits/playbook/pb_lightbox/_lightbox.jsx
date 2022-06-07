@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 /* @flow */
 
-import React, { useState } from 'react'
+import React, { Fragment, useEffect, useMemo, useRef, useState } from 'react'
 import classnames from 'classnames'
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
 import { globalProps } from '../utilities/globalProps'
@@ -44,7 +44,7 @@ const Lightbox = (props: LightboxType) => {
     trigger,
     title,
   } = props
-  const [activePhoto, setActivePhoto] = useState(initialPhoto)
+  const [activePhoto, setActivePhoto] = useState(0)
   const [triggerOpened, setTriggerOpened] = useState(false),
     modalIsOpened = trigger ? triggerOpened : opened
 
@@ -56,9 +56,14 @@ const Lightbox = (props: LightboxType) => {
     className
   )
 
-  const handleOnSlide = (index) => {
-    setActivePhoto(photos[index])
+  const handleOnSlide = (photoIndex) => {
+    setActivePhoto(photoIndex)
   }
+
+  const photosMap = useMemo(() => photos.map((photo) => ({
+    url: photo,
+    thumbnail: photo,
+  })), [photos])
 
   const api = {
     onClose: trigger
@@ -66,15 +71,24 @@ const Lightbox = (props: LightboxType) => {
         setTriggerOpened(false)
       }
       : onClose,
+    onArrowLeft: () => {
+      setActivePhoto(activePhoto > 0 ? activePhoto - 1 : 0)
+    },
+    onArrowRight: () => {
+      const nextPhoto = activePhoto < photos.length - 1 ? activePhoto + 1 : photos.length - 1
+      setActivePhoto(nextPhoto)
+    },
   }
 
+  const lightboxRef = useRef()
+
   if (trigger) {
-    const modalTrigger = document.querySelector(trigger)
+    const modalTrigger = lightboxRef.querySelector(trigger)
     modalTrigger.addEventListener(
       'click',
       () => {
         setTriggerOpened(true)
-        document
+        lightboxRef
           .querySelector('#cancel-button')
           .addEventListener('click', () => {
             setTriggerOpened(false)
@@ -84,14 +98,41 @@ const Lightbox = (props: LightboxType) => {
     )
   }
 
+  const handleKeyDown = ({key}) => {
+    switch(key.toLowerCase()) {
+      case 'escape': {
+        api.onClose()
+        break;
+      }
+      case 'arrowleft': {
+        api.onArrowLeft()
+        break;
+      }
+      case 'arrowright': {
+        api.onArrowRight()
+        break;
+      }
+    }
+  }
+
+  useEffect(() => {
+    window.addEventListener('keydown', handleKeyDown);
+
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [activePhoto])
+
   return (
-    <>
+    <Fragment>
       <LightboxContext.Provider value={api}>
         <div
             {...ariaProps}
             {...dataProps}
             className={classes}
             id={id}
+            ref={lightboxRef}
         >
           <div className="carousel">
           <Lightbox.Header
@@ -102,17 +143,14 @@ const Lightbox = (props: LightboxType) => {
           />
             {children}
             <Carousel
-                current={photos.indexOf(activePhoto)}
+                currentIndex={activePhoto}
                 onChange={handleOnSlide}
-                photos={photos.map((photo) => ({
-                  url: photo,
-                  thumbnail: photo,
-                }))}
+                photos={photosMap}
             />
           </div>
         </div>
       </LightboxContext.Provider>
-    </>
+    </Fragment>
   )
 }
 

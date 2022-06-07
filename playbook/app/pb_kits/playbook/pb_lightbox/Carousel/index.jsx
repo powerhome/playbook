@@ -2,7 +2,7 @@
 /* @flow */
 
 import { noop } from 'lodash'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 
 import Slides from './Slides'
 import Thumbnails from './Thumbnails'
@@ -12,14 +12,14 @@ type CarouselType = {
   onClose: Function,
   icon: string,
   iconSize: number,
-  current: number,
+  currentIndex: number,
   photos: Array<string>,
   onChange: (index: number) => void,
   onClick: (index: number) => void,
 }
 
 export default function Carousel({
-  current = 0,
+  currentIndex,
   photos,
   onClick = noop,
   onChange = noop,
@@ -32,9 +32,7 @@ export default function Carousel({
     }
   }, [])
 
-  const [currentIndex, setCurrentIndex] = useState(current)
   const handleChange = (index) => {
-    setCurrentIndex(index)
     onChange(index)
   }
 
