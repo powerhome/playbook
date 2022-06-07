@@ -1,5 +1,5 @@
 import React from 'react'
-import FormPill from '../_form_pill.jsx'
+import FormPill from '../_form_pill'
 
 const FormPillExample = (props) => {
   return (

@@ -38,11 +38,11 @@ module Playbook
       end
 
       def link_options
-        options.merge(
-          href: link,
-          role: "link",
-          target: new_window ? "_blank" : "_self"
-        )
+        options.tap do |option|
+          option[:href] = link
+          option[:role] = "link"
+          option[:target] = "_blank" if new_window
+        end
       end
 
       def tag
