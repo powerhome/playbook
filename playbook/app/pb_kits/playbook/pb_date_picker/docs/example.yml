@@ -18,6 +18,7 @@ examples:
   - date_picker_inline: Inline
   - date_picker_month_and_year: Month & Year Only
   - date_picker_week: Week
+  - date_picker_time: Time Selection
 
 
   react:
@@ -38,3 +39,4 @@ examples:
   - date_picker_inline: Inline
   - date_picker_month_and_year: Month & Year Only
   - date_picker_week: Week
+  - date_picker_time: Time Selection

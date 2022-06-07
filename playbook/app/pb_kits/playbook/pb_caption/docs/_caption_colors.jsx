@@ -14,6 +14,11 @@ const CaptionColors = (props) => {
           {...props}
       />
       <Caption
+          color="error"
+          text="Test colors"
+          {...props}
+      />
+      <Caption
           color="link"
           text="Test colors"
           {...props}
