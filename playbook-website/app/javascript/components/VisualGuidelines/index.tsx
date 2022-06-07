@@ -6,6 +6,7 @@ import React from 'react'
 import Colors from './Colors'
 import MaxWidth from './Examples/MaxWidth'
 import Positioning from './Examples/Positioning'
+import LineHeight from './Examples/LineHeight'
 import NumberSpacing from './Examples/NumberSpacing'
 import Shadows from './Examples/Shadows'
 import Spacing from './Examples/Spacing'
@@ -22,6 +23,10 @@ const VisualGuidelines = ({ examples }: {examples: {[key: string]: string}}): Re
       <Positioning
           example={examples.positioning_jsx}
           tokensExample={examples.position_token}
+      />
+      <LineHeight
+          example={examples.line_height_code_jsx}
+          tokensExample={examples.line_height_jsx}
       />
       <NumberSpacing example={examples.number_spacing_jsx} />
       <Shadows
