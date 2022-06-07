@@ -4,7 +4,7 @@ import React, { useEffect } from 'react'
 import classnames from 'classnames'
 
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
-import { globalProps } from '../utilities/globalProps'
+import { deprecatedProps, globalProps } from '../utilities/globalProps'
 
 import datePickerHelper from './date_picker_helper'
 
@@ -22,6 +22,7 @@ type DatePickerProps = {
   disableInput?: Boolean,
   disableRange?: Array,
   disableWeekdays?: Array,
+  enableTime?: Boolean,
   error?: String,
   format?: String,
   hideIcon?: Boolean,
@@ -40,11 +41,16 @@ type DatePickerProps = {
   onChange: (String) => void,
   pickerId?: String,
   placeholder?: String,
-  plugins?: Boolean,
+  plugins: Boolean,
+  selectionType?: "month" | "week",
+  showTimezone?: Boolean,
+  timeFormat?: String,
   type?: String,
   yearRange?: Array,
 }
 const DatePicker = (props: DatePickerProps) => {
+  if (props.plugins) deprecatedProps('Date Picker', ['plugins'])
+
   const {
     allowInput = false,
     aria = {},
@@ -56,6 +62,7 @@ const DatePicker = (props: DatePickerProps) => {
     disableInput,
     disableRange = null,
     disableWeekdays = null,
+    enableTime = false,
     error,
     format = 'm/d/Y',
     hideIcon = false,
@@ -75,6 +82,8 @@ const DatePicker = (props: DatePickerProps) => {
     pickerId,
     placeholder = 'Select Date',
     plugins = false,
+    selectionType = '',
+    showTimezone = false,
     yearRange = [ 1900, 2100 ],
   } = props
 
@@ -89,23 +98,26 @@ const DatePicker = (props: DatePickerProps) => {
 
   useEffect(() => {
     datePickerHelper({
-      allowInput: allowInput,
-      defaultDate: defaultDate,
-      disableDate: disableDate,
-      disableRange: disableRange,
-      disableWeekdays: disableWeekdays,
-      format: format,
-      hideIcon: hideIcon,
-      inLine: inLine,
-      maxDate: maxDate,
-      minDate: minDate,
-      mode: mode,
-      onChange: onChange,
-      pickerId: pickerId,
-      plugins: plugins,
-      yearRange: yearRange,
+      allowInput,
+      defaultDate,
+      disableDate,
+      disableRange,
+      disableWeekdays,
+      enableTime,
+      format,
+      hideIcon,
+      inLine,
+      maxDate,
+      minDate,
+      mode,
+      onChange,
+      pickerId,
+      plugins,
+      selectionType,
+      showTimezone,
+      yearRange,
     })
-  }, [])
+  })
 
   const iconWrapperClass = () => {
     let base = 'cal_icon_wrapper'

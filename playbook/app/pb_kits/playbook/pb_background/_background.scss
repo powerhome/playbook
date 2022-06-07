@@ -5,11 +5,18 @@ $additional_colors: (
   "dark": $bg_dark,
   "light": $bg_light,
   "white": $white,
+  "primary": $primary_action,
+  "shadow": $shadow,
 );
 
 $merge_kits1: map-merge($status_colors, $category_colors);
 $merge_kits2: map-merge($merge_kits1, $product_colors);
-$background_colors: map-merge($additional_colors, $merge_kits2);
+$merge_kits3: map-merge($merge_kits2, $text_colors);
+$merge_kits4: map-merge($merge_kits3, $card_colors);
+$merge_kits5: map-merge($merge_kits4, $status_colors);
+$merge_kits6: map-merge($merge_kits5, $data_colors);
+$merge_kits7: map-merge($merge_kits6, $border_colors);
+$background_colors: map-merge($additional_colors, $merge_kits7);
 
 [class^=pb_background_kit] {
   max-width: 100%;
