@@ -7,6 +7,7 @@ import Colors from './Colors'
 import MaxWidth from './Examples/MaxWidth'
 import Positioning from './Examples/Positioning'
 import Shadows from './Examples/Shadows'
+import Spacing from './Examples/Spacing'
 import BorderRadius from './Examples/BorderRadius'
 import Display from './Examples/Display'
 import Cursor from './Examples/Cursor'
@@ -24,6 +25,10 @@ const VisualGuidelines = ({ examples }: {examples: {[key: string]: string}}): Re
       <Shadows
           example={examples.shadow_in_use_jsx}
           tokensExample={examples.shadow_erb}
+      />
+      <Spacing
+          example={examples.spacing_global_props_jsx}
+          tokensExample={examples.spacing_tokens_jsx}
       />
       <BorderRadius tokensExample={examples.border_radius_tokens} />
       <Display example={examples.display_in_use_jsx} />
