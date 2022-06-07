@@ -1,1 +1,1 @@
-Status colors can be passed into the background kit. `success`, `warning`, `error`, `info`, `neutral`, and `primary`
+Status colors can be passed into the background kit. `success`, `success_secondary`, `warning`, `warning_secondary`, `error`, `error_secondary`, `info`, `info_secondary`, `neutral`, `neutral_secondary`, `primary`, and `primary_secondary`
