@@ -4,7 +4,7 @@
   @media (hover: hover) {
     &:hover {
       transition-duration: $transition_short;
-      transition-timing-function: $easeIn;    
+      transition-timing-function: $easeIn;
       background-color: #F6FAFF;
       border-color: #F6FAFF;
       box-shadow: $shadow_deep;
@@ -24,7 +24,7 @@
   background-color: $primary;
   border-color: $primary;
   box-shadow: $shadow_deep;
-  font-weight: $bold; 
+  font-weight: $bold;
 }
 .flatpickr-day.startRange {
   box-shadow: $space_sm + 1 0 0 #F7FBFF
@@ -36,6 +36,31 @@
   background-color: #F7FBFF;
   border: 2px;
   box-shadow: -$space_xs + 4 0 0 #F7FBFF, $space_xs - 3 0 0 #F7FBFF;
+}
+/*
+Plugin author didn't consider providing a class context, so
+instead we have to use the id! ¯\_(ツ)_/¯
+*/
+#cal-week-date-picker {
+  .flatpickr-day.inRange:not(.selected) {
+    &:nth-of-type(1),
+    &:nth-of-type(7n+1) {
+      border-radius: 30px 0 0 30px;
+    }
+    &:nth-of-type(7n) {
+      border-radius: 0 30px 30px 0;
+    }
+  }
+  .flatpickr-day.inRange {
+    &.selected {
+      background-color: $primary;
+      box-shadow: none;
+      color: #ffffff;
+    }
+  }
+  .flatpickr-day.selected:hover {
+    transition: none;
+  }
 }
 .flatpickr-innerContainer {
   overflow: visible;
