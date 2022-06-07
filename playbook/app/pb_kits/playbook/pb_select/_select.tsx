@@ -99,7 +99,13 @@ const Select = ({
           required={required}
           value={value}
       >
-        {blankSelection && <option value="">{blankSelection}</option>}
+        {blankSelection && (
+          <option
+              disabled
+              hidden
+              selected
+              value=""
+          >{blankSelection}</option>)}
         {optionsList}
       </select>
     )
