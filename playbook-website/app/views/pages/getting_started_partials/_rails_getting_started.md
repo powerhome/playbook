@@ -10,20 +10,25 @@ gem 'playbook_ui'
 bundle
 ```
 
-#### Add the View Helper to enable Rails Kits
+#### Add the View Helper to Enable Rails Kits
 ```rb
 # app/controllers/application_controller.rb
  helper Playbook::PbKitHelper
 ```
 
-#### Import the all kit styles (Asset Pipeline)
+### Add the `sassc-rails` Gem Dependency if Using Asset Pipeline
+```rb
+gem "sassc-rails"
+```
+
+#### Import the Kit Styles (Asset Pipeline)
 ```scss
 # app/assets/stylesheets/application.scss
 
  @import "playbook";
 ```
 
-or be selective 
+or be selective
 
 ```scss
 # app/assets/stylesheets/application.scss
@@ -38,7 +43,7 @@ From here all of our display kits should work for you nicely
 ## Javascript Enabled Rails Kits
 To use kits with interactivity, and our graphs you need to bring in the NPM package.
 
-#### Add Playbook Package
+#### Add the Playbook NPM Package
 ```sh
 yarn add "playbook-ui@stable"
 ```
@@ -56,7 +61,7 @@ Now that you have the package installed you could import styles via JS
 ```
 
 
-#### Import all the javascript needed for Rails Kits
+#### Import all the Javascript Needed for Rails Kits
 
 This will add all the javascript to use the popovers, & graphs for example.
 
@@ -64,7 +69,7 @@ This will add all the javascript to use the popovers, & graphs for example.
 import 'playbook-ui/dist/playbook-rails.js';
 ```
 
-#### Add inline Rails JS to your layout (Needed for Rails Graphs)
+#### Add Inline Rails JS to Your Layout (Needed for Rails Graphs)
 
 ```erb
 <%%= yield :pb_js %>
@@ -76,5 +81,5 @@ Playbook ships with font awesome but you’ll need to include it in your applica
 
 ```js
 import 'playbook-ui/dist/fonts/fontawesome-min';
- import 'playbook-ui/dist/fonts/regular-min';
+import 'playbook-ui/dist/fonts/regular-min';
 ```
