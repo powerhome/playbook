@@ -46,7 +46,7 @@ module Playbook
       end
 
       def emphasis_partial
-        File.join(File.dirname(self.class.source_location), "_#{emphasis}_emphasis")
+        File.join(File.dirname(self.class.source_location), "_#{emphasis}_emphasis.html.erb")
       end
 
     private
