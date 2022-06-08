@@ -90,7 +90,7 @@ kits:
     - contact
     - currency
     - dashboard_value
-    - home_address_street
+    # - home_address_street
     - label_pill
     - label_value
     - message
