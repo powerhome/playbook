@@ -24,7 +24,7 @@ module Playbook
     extend ActiveSupport::Concern
 
     attr_accessor :values
-    private :values, :values=
+    public :values, :values=
 
     def initialize(prop_values = {}, &block)
       self.values = { children: block }.merge(Hash(prop_values))

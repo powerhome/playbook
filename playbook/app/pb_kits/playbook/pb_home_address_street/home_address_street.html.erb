@@ -2,5 +2,6 @@
     id: object.id,
     data: object.data,
     class: object.classname) do %>
-  <%= render file: object.emphasis_partial, locals: { object: object } %>
+  <%= pb_rails("home_address_street/city_emphasis") %>
 <% end %>
+

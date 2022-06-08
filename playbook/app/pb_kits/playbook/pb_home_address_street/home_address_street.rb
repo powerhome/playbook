@@ -45,10 +45,6 @@ module Playbook
         house_style ? " \u00b7 " : ""
       end
 
-      def emphasis_partial
-        File.join(File.dirname(self.class.source_location), "_#{emphasis}_emphasis.html.erb")
-      end
-
     private
 
       def dark_class
