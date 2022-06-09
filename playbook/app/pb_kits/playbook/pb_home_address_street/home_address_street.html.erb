@@ -2,6 +2,6 @@
     id: object.id,
     data: object.data,
     class: object.classname) do %>
-  <%= pb_rails("home_address_street/#{emphasis}_emphasis") %>
+  <%= pb_rails("home_address_street/#{emphasis}_emphasis", props: object.send("#{emphasis}_emphasis_props")) %>
 <% end %>
 
