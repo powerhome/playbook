@@ -1,23 +1,32 @@
-/* @flow */
 import React from 'react'
 import classnames from 'classnames'
 import { buildCss } from '../utilities/props'
-import { globalProps } from '../utilities/globalProps'
+import { globalProps, GlobalProps } from '../utilities/globalProps'
 type FlexItemPropTypes = {
-  children: array<React.ReactNode> | React.ReactNode,
-  fixedSize: string,
-  grow: boolean,
-  shrink: boolean,
-  flex: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 'none',
-  className: string,
+  children: React.ReactNode[] | React.ReactNode,
+  fixedSize?: string,
+  grow?: boolean,
+  shrink?: boolean,
+  className?: string,
   overflow?: "auto" | "hidden" | "initial" | "inherit" | "scroll" | "visible",
   order?: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 'first' | 'none',
-  alignSelf?: "start" | "end" | "center" | "stretch",
-  displayFlex: boolean
-}
+  alignSelf?: "start" | "end" | "center" | "stretch" | null,
+  displayFlex?: boolean
+} & GlobalProps
 
-const FlexItem = (props: FlexItemPropTypes) => {
-  const { children, className, fixedSize, grow, overflow = null, shrink, flex = 'none', order = 'none', alignSelf = null, displayFlex } = props
+const FlexItem = (props: FlexItemPropTypes): React.ReactElement => {
+  const {
+    children,
+    className,
+    fixedSize,
+    grow,
+    overflow = null,
+    shrink,
+    flex = 'none',
+    order = 'none',
+    alignSelf,
+    displayFlex
+  } = props
   const growClass = grow === true ? 'grow' : ''
   const displayFlexClass = displayFlex === true ? `display_flex_${displayFlex}` : ''
   const flexClass = flex !== 'none' ? `flex_${flex}` : ''
