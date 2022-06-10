@@ -45,8 +45,29 @@ module Playbook
         house_style ? " \u00b7 " : ""
       end
 
-      def emphasis_partial
-        File.join(File.dirname(self.class.source_location), "_#{emphasis}_emphasis.html.erb")
+      def city_emphasis_props
+        {
+          address_house_style: address_house_style,
+          address_house_style2: address_house_style2,
+          city_state: city_state,
+          dark: dark,
+          home_id: home_id,
+          home_url: home_url,
+          territory: territory,
+          zip: zip,
+        }
+      end
+
+      def street_emphasis_props
+        {
+          address_house_style: address_house_style,
+          address_house_style2: address_house_style2,
+          city_state_zip: city_state_zip,
+          dark: dark,
+          home_id: home_id,
+          home_url: home_url,
+          territory: territory,
+        }
       end
 
     private
