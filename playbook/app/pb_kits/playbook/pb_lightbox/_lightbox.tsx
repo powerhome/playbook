@@ -1,7 +1,8 @@
 /* eslint-disable no-unused-vars */
 /* @flow */
 
-import React, { Fragment, useEffect, useMemo, useRef, useState } from 'react'
+import React, { Fragment, useMemo, useRef, useState } from 'react'
+import { useKbdControls } from './hooks/useKbdControls'
 import classnames from 'classnames'
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
 import { globalProps } from '../utilities/globalProps'
@@ -79,50 +80,25 @@ const Lightbox = (props: LightboxType): React.ReactNode => {
       setActivePhoto(nextPhoto)
     },
   }
+  useKbdControls(api)
 
   const lightboxRef: any = useRef()
 
-  if (trigger && lightboxRef) {
+  /*if (trigger && lightboxRef) {
     const modalTrigger = lightboxRef.querySelector(trigger)
     modalTrigger.addEventListener(
       'click',
       () => {
-        // setTriggerOpened(true)
+        setTriggerOpened(true)
         lightboxRef
           .querySelector('#cancel-button')
           .addEventListener('click', () => {
-            // setTriggerOpened(false)
+            setTriggerOpened(false)
           })
       },
       { once: true }
     )
-  }
-
-  const handleKeyDown = ({key}: {key: string}) => {
-    switch(key.toLowerCase()) {
-      case 'escape': {
-        api.onClose()
-        break;
-      }
-      case 'arrowleft': {
-        api.onArrowLeft()
-        break;
-      }
-      case 'arrowright': {
-        api.onArrowRight()
-        break;
-      }
-    }
-  }
-
-  useEffect(() => {
-    window.addEventListener('keydown', handleKeyDown);
-
-    return () => {
-      window.removeEventListener('keydown', handleKeyDown);
-    }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [activePhoto])
+  }*/
 
   return (
     <Fragment>
