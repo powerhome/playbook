@@ -38,7 +38,7 @@ const Title = (props: TitleProps): React.ReactElement => {
     globalProps(props),
     className,
   )
-  const Tag: ComponentType | keyof JSX.IntrinsicElements = `${tag}`
+  const Tag: ComponentType | any = `${tag}`
 
   return (
     <Tag

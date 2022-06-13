@@ -2,7 +2,7 @@
 /* eslint-disable jsx-control-statements/jsx-use-if-tag */
 import React, { useState } from 'react'
 import { Flex, Image } from '../../'
-import Lightbox from '../_lightbox.jsx'
+import Lightbox from '../_lightbox.tsx'
 
 const LightboxMultiple = (props) => {
   const photos = [
@@ -10,7 +10,7 @@ const LightboxMultiple = (props) => {
     'https://images.unsplash.com/photo-1526657782461-9fe13402a841?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1984&q=80',
     'https://images.unsplash.com/photo-1523057530100-383d7fbc77a1?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2669&q=80',
   ]
-  const [selectedPhoto, setSelectedPhoto] = useState(photos[0])
+  const [selectedPhoto, setSelectedPhoto] = useState(0)
   const [light, toggleLight] = useState(false)
 
   const handleCloseLightbox = () => {
@@ -41,7 +41,7 @@ const LightboxMultiple = (props) => {
               return (
                 <div
                     key={photos[index]}
-                    onClick={() => onPhotoClick(photo)}
+                    onClick={() => onPhotoClick(index)}
                 >
                   <Image
                       marginRight="xl"
