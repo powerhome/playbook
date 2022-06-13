@@ -1,6 +1,3 @@
-/* eslint-disable no-unused-vars */
-/* @flow */
-
 import React, { Fragment, useMemo, useRef, useState } from 'react'
 import { useKbdControls } from './hooks/useKbdControls'
 import classnames from 'classnames'
@@ -22,7 +19,6 @@ type LightboxType = {
   photos: [],
   initialPhoto?: number,
   onClose: () => void,
-  opened: boolean,
   icon: string,
   iconSize: IconSizes,
   trigger?: string,
@@ -40,14 +36,11 @@ const Lightbox = (props: LightboxType): React.ReactNode => {
     initialPhoto = 0,
     photos,
     onClose,
-    // opened = false,
     icon = 'times',
     iconSize = '2x',
-    trigger,
     title,
   } = props
   const [activePhoto, setActivePhoto] = useState(initialPhoto)
-  // const [triggerOpened, setTriggerOpened] = useState(false)
 
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
@@ -67,11 +60,7 @@ const Lightbox = (props: LightboxType): React.ReactNode => {
   })), [photos])
 
   const api = {
-    onClose: trigger
-      ? function () {
-        // setTriggerOpened(false)
-      }
-      : onClose,
+    onClose: onClose,
     onArrowLeft: () => {
       setActivePhoto(activePhoto > 0 ? activePhoto - 1 : 0)
     },
@@ -83,22 +72,6 @@ const Lightbox = (props: LightboxType): React.ReactNode => {
   useKbdControls(api)
 
   const lightboxRef: any = useRef()
-
-  /*if (trigger && lightboxRef) {
-    const modalTrigger = lightboxRef.querySelector(trigger)
-    modalTrigger.addEventListener(
-      'click',
-      () => {
-        setTriggerOpened(true)
-        lightboxRef
-          .querySelector('#cancel-button')
-          .addEventListener('click', () => {
-            setTriggerOpened(false)
-          })
-      },
-      { once: true }
-    )
-  }*/
 
   return (
     <Fragment>
