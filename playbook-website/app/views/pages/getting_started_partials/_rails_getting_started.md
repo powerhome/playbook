@@ -80,6 +80,6 @@ import 'playbook-ui/dist/playbook-rails.js';
 Playbook ships with font awesome but you’ll need to include it in your application
 
 ```js
-import 'playbook-ui/dist/fonts/fontawesome-min';
-import 'playbook-ui/dist/fonts/regular-min';
+//= require regular-min.js
+//= require fontawesome-min.js
 ```
