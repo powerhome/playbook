@@ -21,6 +21,7 @@ type CurrencyProps = {
   emphasized?: boolean,
   id?: string,
   label?: string,
+  decimals?: string,
   size?: 'sm' | 'md' | 'lg',
   symbol?: string,
   variant?: 'default' | 'light' | 'bold',
@@ -40,6 +41,7 @@ const Currency = (props: CurrencyProps) => {
     aria = {},
     amount,
     data = {},
+    decimals,
     emphasized = true,
     id,
     unit,
@@ -85,9 +87,12 @@ const Currency = (props: CurrencyProps) => {
     return isAmount ? num.slice(0, -1) : isUnit ? num.slice(-1) : ''
   }
 
-  const getAmount = abbreviate ? getAbbreviatedValue('amount') : whole,
+  const getMatchingDecimalAmount = decimals === "matching" ? amount : whole,
+    getMatchingDecimalValue = decimals === "matching" ? '' : `.${decimal}`
+
+  const getAmount = abbreviate ? getAbbreviatedValue('amount') : getMatchingDecimalAmount,
     getAbbreviation = abbreviate ? getAbbreviatedValue('unit') : null,
-    getDecimalValue = abbreviate ? '' : `.${decimal}`
+    getDecimalValue = abbreviate ? '' : getMatchingDecimalValue
 
   return (
     <div
