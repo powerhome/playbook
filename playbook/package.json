@@ -1,6 +1,6 @@
 {
   "name": "playbook-ui",
-  "version": "10.26.0",
+  "version": "11.0.1",
   "description": "Nitro's Design System",
   "main": "./dist/playbook.js",
   "scripts": {
@@ -79,6 +79,7 @@
     "@babel/preset-typescript": "^7.15.0",
     "@testing-library/jest-dom": "5.16.4",
     "@testing-library/react": "11.2.7",
+    "@types/flatpickr": "^3.1.2",
     "@types/lodash": "4.14.182",
     "@types/react": "17.0.44",
     "@typescript-eslint/eslint-plugin": "4.33.0",
@@ -93,7 +94,7 @@
     "eslint": "6.8.0",
     "eslint-plugin-flowtype": "5.10.0",
     "eslint-plugin-jsx-control-statements": "2.2.1",
-    "eslint-plugin-react": "7.28.0",
+    "eslint-plugin-react": "7.30.0",
     "eslint-plugin-react-hooks": "4.5.0",
     "eslint-webpack-plugin": "2.6.0",
     "filemanager-webpack-plugin": "4.0.0",

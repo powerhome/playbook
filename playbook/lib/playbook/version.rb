@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
 module Playbook
-  PREVIOUS_VERSION = "10.25.1"
-  VERSION = "10.26.0"
+  PREVIOUS_VERSION = "11.0.0"
+  VERSION = "11.0.1"
 end
