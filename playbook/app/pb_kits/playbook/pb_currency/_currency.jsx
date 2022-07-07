@@ -41,7 +41,7 @@ const Currency = (props: CurrencyProps) => {
     aria = {},
     amount,
     data = {},
-    decimals = 'matching',
+    decimals = 'default',
     emphasized = true,
     id,
     unit,
