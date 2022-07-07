@@ -36,8 +36,9 @@ module Playbook
       prop :abbreviate, type: Playbook::Props::Boolean,
                         default: false
 
-      prop :decimals, type: Playbook::Props::String,
-                      required: false
+      prop :decimals, type: Playbook::Props::Enum,
+                      values: %w[default matching],
+                      default: "default"
 
       def classname
         generate_classname("pb_currency_kit", align, size, dark_class)
