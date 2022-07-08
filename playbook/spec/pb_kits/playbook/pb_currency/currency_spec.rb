@@ -14,6 +14,7 @@ RSpec.describe Playbook::PbCurrency::Currency do
   it { is_expected.to define_prop(:symbol).with_default("$").of_type(Playbook::Props::String) }
   it { is_expected.to define_enum_prop(:variant).with_default("default").with_values("default", "light", "bold") }
   it { is_expected.to define_prop(:abbreviate).with_default(false).of_type(Playbook::Props::Boolean) }
+  it { is_expected.to define_enum_prop(:decimals).with_default("default").with_values("default", "matching") }
 
   describe "#classname" do
     it "returns namespaced class name", :aggregate_failures do
@@ -54,6 +55,24 @@ RSpec.describe Playbook::PbCurrency::Currency do
 
       expect(num.title_props[:text]).to eq "3.2"
       expect(num.body_props[:text]).to eq "K/yr"
+    end
+  end
+
+  describe "when prop decimals is set to matching" do
+    it "renders decimals as title text" do
+      num = subject.new(decimals: "matching", amount: "320.20")
+
+      expect(num.title_props[:text]).to eq "320.20"
+      expect(num.body_props[:text]).to be_empty
+    end
+  end
+
+  describe "when prop decimals is set to default" do
+    it "renders decimals as body text" do
+      num = subject.new(decimals: "default", amount: "320.20")
+
+      expect(num.title_props[:text]).to eq "320"
+      expect(num.body_props[:text]).to eq ".20"
     end
   end
 end
