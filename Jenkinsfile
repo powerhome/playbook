@@ -14,39 +14,29 @@ app.build(
     limitMemory: '8Gi',
   ]
 ) {
-  def application = "playbook"
-  def registry = "image-registry.powerapp.cloud"
-  def scmVars
-  def appImage
+  def appRepo = "image-registry.powerapp.cloud/playbook/playbook"
+  def commitHash, scmVars, tag
 
   stage('Code Checkout') {
     scmVars = checkout scm
-    tag = "${env.BRANCH_NAME.replaceAll('/', '_')}-${scmVars.GIT_COMMIT}-${env.BUILD_ID}"
-    appImage = "${registry}/${application}/${application}:${tag}"
+    commitHash = git.triggeringCommit(scmVars)
+    tag = "${env.BRANCH_NAME.replaceAll('/', '_')}-${commitHash}-${env.BUILD_ID}"
   }
 
   app.dockerStage('Build Docker Image') {
-    buildDockerImage(scmVars, appImage)
+    try {
+      github.setImageBuildState(scmVars, 'PENDING')
+      sh "docker build --tag ${appRepo}:${tag} --tag ${appRepo}:${commitHash} ."
+      sh "docker push ${appRepo}:${tag}"
+      sh "docker push ${appRepo}:${commitHash}"
+      github.setImageBuildState(scmVars, 'SUCCESS')
+    } catch(e) {
+      github.setImageBuildState(scmVars, 'FAILURE')
+      throw e
+    }
   }
 
   app.dockerStage('Test') {
-    testLibrary(appImage)
+    sh "docker run --tty --rm -w=/home/app/src/playbook ${appRepo}:${tag} ./test.sh"
   }
-}
-
-def buildDockerImage(scmVars, appImage) {
-  try {
-    github.setImageBuildState(scmVars, 'PENDING')
-    sh "docker build -t ${appImage} ."
-    sh "docker push ${appImage}"
-    sh "docker push ${appImage}"
-    github.setImageBuildState(scmVars, 'SUCCESS')
-  } catch(e) {
-    github.setImageBuildState(scmVars, 'FAILURE')
-    throw e
-  }
-}
-
-def testLibrary(appImage) {
-  sh "docker run --tty --rm -w=/home/app/src/playbook ${appImage} ./test.sh"
 }
