@@ -27,6 +27,8 @@ module Playbook
           "phone-laptop"
         when "wrong-phone"
           "phone-slash"
+        when "extension"
+          "phone-plus"
         else # "unknown" || "other"
           "phone"
         end
@@ -35,8 +37,12 @@ module Playbook
       def formatted_contact_value
         if contact_type == "email"
           contact_value
+        elsif contact_type == "extension" && contact_value.match(/^\d{4}$/)
+          contact_value
+        elsif contact_type != "email" && contact_type != "extension"
+          number_to_phone(formatted_value, area_code: true, raise: true)
         else
-          number_to_phone(formatted_value, area_code: true)
+          ""
         end
       end
 

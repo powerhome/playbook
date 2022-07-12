@@ -17,15 +17,18 @@ const contactTypeMap = {
   'work': 'phone-office',
   'work-cell': 'phone-laptop',
   'wrong-phone': 'phone-slash',
+  'extension': 'phone-plus',
 }
 
 const formatContact = (contactString, contactType) => {
-  if (contactType == 'email') {
-    return contactString
-  }
+  if (contactType == 'email') return contactString
   const cleaned = contactString.replace(/\D/g, '')
-  const phoneNumber = cleaned.match(/^(1|)?(\d{3})(\d{3})(\d{4})$/)
-  if (phoneNumber) {
+  if(contactType == 'extension') {
+    const extension = cleaned.match(/^\d{4}$/)
+    return extension
+  }
+  if (contactType !== 'email') {
+    const phoneNumber = cleaned.match(/^(1|)?(\d{3})(\d{3})(\d{4})$/)
     const intlCode = phoneNumber[1] ? '+1 ' : ''
     return [
       intlCode,
@@ -66,7 +69,6 @@ const Contact = (props: ContactProps) => {
     globalProps(props),
     className
   )
-
   return (
     <div
         {...ariaProps}
