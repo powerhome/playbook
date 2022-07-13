@@ -31,6 +31,7 @@ const LightboxDefault = (props) => {
               initialPhoto={selectedPhoto}
               onClose={handleCloseLightbox}
               photos={photos}
+              showCount={false}
               {...props}
           />
         ) : (

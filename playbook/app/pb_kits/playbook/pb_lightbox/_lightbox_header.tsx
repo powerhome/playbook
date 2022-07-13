@@ -23,6 +23,7 @@ type LightboxHeaderProps = {
   iconSize?: IconSizes,
   id?: string,
   text?: string,
+  textRight?: string,
   title?: string,
 } & GlobalProps
 
@@ -32,9 +33,9 @@ const LightboxHeader = (props: LightboxHeaderProps): React.ReactElement => {
     children,
     className,
     data = {},
-    padding = 'sm',
     spacing = 'between',
     text,
+    textRight = 'All Photos',
     title,
     closeable = true,
     icon = 'times',
@@ -45,7 +46,7 @@ const LightboxHeader = (props: LightboxHeaderProps): React.ReactElement => {
   const dataProps = buildDataProps(data)
   const api: any = useContext(LightboxContext)
   const headerCSS = buildCss('lightbox_header')
-  const headerSpacing = globalProps(props, { padding })
+  const headerSpacing = globalProps(props, { paddingY: 'sm' })
 
   const handleOnLightboxClose = () => api.onClose()
 
@@ -80,8 +81,10 @@ const LightboxHeader = (props: LightboxHeaderProps): React.ReactElement => {
         <Flex justify="end">
           <Title
               dark
+              marginRight="md"
+              marginTop="xs"
               size={4}
-              text="All Photos"
+              text={textRight}
           />
         </Flex>
       </FlexItem>

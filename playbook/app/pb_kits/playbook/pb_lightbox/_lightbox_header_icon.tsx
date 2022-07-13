@@ -14,7 +14,7 @@ export const LightboxHeaderIcon = (props: LightboxHeaderIconProps): React.ReactE
   const { onClose, icon, iconSize } = props
   return (
     <div
-        className="close-icon"
+        className="close-icon ml_sm"
         onClick={onClose}
     >
       <Icon

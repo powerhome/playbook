@@ -1,8 +1,6 @@
-/* @flow */
-
 import { noop } from 'lodash'
 import classnames from 'classnames'
-import React from 'react'
+import React, { useLayoutEffect } from 'react'
 import { useWindowSize } from '../hooks/useWindowSize'
 
 import Thumbnail from './Thumbnail'
@@ -31,21 +29,47 @@ export default function Thumbnails({
   const viewportSize = useWindowSize()
   const thumbnailWidth = viewportSize.width / 8
   const draggable = thumbnailWidth * urls.length > viewportSize.width
-  const css = classnames('Thumbnails', { draggable })
+  const shouldBeCentered = (thumbnailWidth * urls.length) < (viewportSize.width * 0.9)
+  const css = classnames('Thumbnails', { draggable }, { centered: shouldBeCentered })
+
+  const otherProps: { buttonRef?: React.RefObject<HTMLButtonElement> } = {}
+
+  const thumbnailsRef: React.RefObject<HTMLDivElement>  = React.createRef()
+
+  useLayoutEffect(() => {
+    if (shouldBeCentered) return
+
+    const currentThumbnail = otherProps.buttonRef.current as HTMLButtonElement,
+    thumbWidth = currentThumbnail.clientWidth,
+    scrollLeft = thumbWidth * current,
+    firstThumb: HTMLButtonElement = thumbnailsRef.current.querySelector('.Thumbnail:first-child'),
+    lastThumb: HTMLButtonElement = thumbnailsRef.current.querySelector('.Thumbnail:last-child')
+
+    firstThumb.style.marginLeft = `${(thumbnailsRef.current?.clientWidth / 2) - (thumbWidth / 2)}px`
+    lastThumb.style.marginRight = `${(thumbnailsRef.current?.clientWidth / 2) - (thumbWidth / 2)}px`
+    // if (scrollLeft > (viewportSize.width - thumbWidth)) thumbnailsRef.current?.scrollTo(scrollLeft, 0)
+    thumbnailsRef.current?.scrollTo(scrollLeft, 0)
+  })
 
   return (
     <div
         className={css}
+        ref={thumbnailsRef}
     >
-      {urls.map((url, i) => (
-        <Thumbnail
-            active={i === current}
-            alt={i.toString()}
-            key={i}
-            onClick={() => onChange(i)}
-            url={url}
-        />
-      ))}
+      {urls.map((url, i) => {
+        const active = i === current
+        if (active) otherProps.buttonRef = React.createRef()
+        return (
+          <Thumbnail
+              active={active}
+              alt={i.toString()}
+              key={i}
+              onClick={() => onChange(i)}
+              url={url}
+              {...otherProps}
+          />
+        )
+      })}
     </div>
   )
 }

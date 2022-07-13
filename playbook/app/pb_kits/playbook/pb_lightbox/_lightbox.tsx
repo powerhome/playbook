@@ -21,6 +21,8 @@ type LightboxType = {
   onClose: () => void,
   icon: string,
   iconSize: IconSizes,
+  showCount?: boolean,
+  textRight?: string,
   trigger?: string,
   title?: string,
 }
@@ -38,6 +40,8 @@ const Lightbox = (props: LightboxType): React.ReactNode => {
     onClose,
     icon = 'times',
     iconSize = '2x',
+    showCount = true,
+    textRight = 'All Photos',
     title,
   } = props
   const [activePhoto, setActivePhoto] = useState(initialPhoto)
@@ -73,6 +77,8 @@ const Lightbox = (props: LightboxType): React.ReactNode => {
 
   const lightboxRef: any = useRef()
 
+  const headerTextRight = showCount ? `${activePhoto + 1} / ${photos.length}` : textRight
+
   return (
     <Fragment>
       <LightboxContext.Provider value={api}>
@@ -88,6 +94,7 @@ const Lightbox = (props: LightboxType): React.ReactNode => {
               icon={icon}
               iconSize={iconSize}
               text={description}
+              textRight={headerTextRight}
               title={title}
           />
             {children}

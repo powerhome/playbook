@@ -42,6 +42,11 @@ const LightboxMultiple = (props) => {
     setSelectedPhoto(photo)
   }
 
+  const exampleStyles = {
+    width: "100%",
+    overflow: "auto"
+  }
+
   return (
     <div>
       {light ? (
@@ -54,7 +59,10 @@ const LightboxMultiple = (props) => {
             {...props}
         />
       ) : (
-        <div className="PhotoViewer">
+        <div
+            className="PhotoViewer"
+            style={exampleStyles}
+        >
           <Flex>
             {photos.map((photo, index) => {
               return (
