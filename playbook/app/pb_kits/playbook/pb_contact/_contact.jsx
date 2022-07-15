@@ -24,8 +24,7 @@ const formatContact = (contactString, contactType) => {
   if (contactType == 'email') return contactString
   const cleaned = contactString.replace(/\D/g, '')
   if(contactType == 'extension') {
-    const extension = cleaned.match(/^\d{4}$/)
-    return extension
+    return cleaned.match(/^\d{4}$/)
   }
   if (contactType !== 'email') {
     const phoneNumber = cleaned.match(/^(1|)?(\d{3})(\d{3})(\d{4})$/)
