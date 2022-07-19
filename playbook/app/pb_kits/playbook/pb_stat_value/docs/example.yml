@@ -3,6 +3,7 @@ examples:
   rails:
   - stat_value_default: Default
   - stat_value_unit: Unit Value
+  - stat_value_precision: Precision Value
 
 
   react:

@@ -36,6 +36,10 @@ module Playbook
       prop :abbreviate, type: Playbook::Props::Boolean,
                         default: false
 
+      prop :decimals, type: Playbook::Props::Enum,
+                      values: %w[default matching],
+                      default: "default"
+
       def classname
         generate_classname("pb_currency_kit", align, size, dark_class)
       end
@@ -84,6 +88,8 @@ module Playbook
     private
 
       def whole_value
+        return amount if decimals == "matching"
+
         amount.split(".").first.to_s
       end
 
@@ -94,6 +100,8 @@ module Playbook
       end
 
       def units_element
+        return "" if decimals == "matching" && !abbreviate && !unit
+
         _, decimal_part = amount.split(".")
         if unit.nil? && abbreviate == false
           decimal_part.nil? ? ".00" : ".#{decimal_part}"

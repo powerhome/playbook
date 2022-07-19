@@ -33,3 +33,31 @@ test('abbreviate prop returns proper abbreviated amount', () => {
   expect(screen.getByTestId('test-billions')).toHaveTextContent('$3.2B')
   expect(screen.getByTestId('test-trillions')).toHaveTextContent('$3.2T')
 })
+
+test('decimals matching prop returns decimals as title text', () => {
+  render(
+    <Currency
+        amount="320.20"
+        data={{ testid: 'test-decimals-matching' }}
+        decimals='matching'
+    />
+  )
+
+  const currencyKit = screen.getByTestId('test-decimals-matching')
+  expect(currencyKit.querySelector('.pb_currency_value')).toHaveTextContent('320.20')
+  expect(currencyKit.querySelector('.unit')).toHaveTextContent('')
+})
+
+test('decimals default prop returns decimals as body text', () => {
+  render(
+    <Currency
+        amount="320.20"
+        data={{ testid: 'test-decimals-default' }}
+        decimals='default'
+    />
+  )
+
+  const currencyKit = screen.getByTestId('test-decimals-default')
+  expect(currencyKit.querySelector('.pb_currency_value')).toHaveTextContent('320')
+  expect(currencyKit.querySelector('.unit')).toHaveTextContent('.20')
+})
