@@ -25,6 +25,7 @@ app.build(
     }
 
     stage('Test') {
+      compose.up()
       compose.exec "web", "./test.sh"
     }
   }
