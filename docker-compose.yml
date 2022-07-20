@@ -8,8 +8,8 @@ services:
     image: ${APP_IMAGE_REPO:-image-registry.powerapp.cloud/playbook/playbook}:${APP_IMAGE_TAG:-local}
     build:
       context: .
+      target: base
       args:
-        precompileassets: "disable"
         BUILDKIT_INLINE_CACHE: "1"
       cache_from:
         - image-registry.powerapp.cloud/playbook/playbook:${CACHE_TAG:-local}
@@ -23,8 +23,8 @@ services:
     image: ${APP_IMAGE_REPO:-image-registry.powerapp.cloud/playbook/playbook}:${APP_IMAGE_TAG:-local}
     build:
       context: .
+      target: base
       args:
-        precompileassets: "disable"
         BUILDKIT_INLINE_CACHE: "1"
       cache_from:
         - image-registry.powerapp.cloud/playbook/playbook:${CACHE_TAG:-local}

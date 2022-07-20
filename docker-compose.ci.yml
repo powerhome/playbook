@@ -1,11 +1,9 @@
 services:
   web:
     build:
-      args:
-        precompileassets: "enable"
+      target: prod
     volumes: []
   webpacker:
     build:
-      args:
-        precompileassets: "enable"
+      target: prod
     volumes: []
