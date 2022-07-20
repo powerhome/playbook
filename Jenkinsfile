@@ -25,9 +25,7 @@ app.build(
     }
 
     stage('Test') {
-      compose.command "run web pwd"
-      compose.command "run web ls"
-      compose.command "run web ./test.sh"
+      compose.command "run --workdir /home/app/src/playbook web ./test.sh"
     }
   }
 }
