@@ -1,0 +1,11 @@
+services:
+  web:
+    build:
+      args:
+        precompileassets: "enable"
+    volumes: []
+  webpacker:
+    build:
+      args:
+        precompileassets: "enable"
+    volumes: []
