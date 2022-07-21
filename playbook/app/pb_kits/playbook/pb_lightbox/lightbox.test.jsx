@@ -6,7 +6,7 @@ import { Lightbox } from '../'
 const testId = 'customId',
   kitClass = 'pb_lightbox_kit'
 
-test('Lightbox Test', () => {
+test('Lightbox Exists', () => {
   render(
     <Lightbox
         className="customClass"
@@ -14,7 +14,7 @@ test('Lightbox Test', () => {
         icon="close"
         iconSize="3x"
         id="test1"
-        initialPhoto="https://images.unsplash.com/photo-1518791841217-8f162f1e1131?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60"
+        initialPhoto={1}
         onClose={() => {}}
         photos={[
         'https://images.unsplash.com/photo-1518791841217-8f162f1e1131?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60',

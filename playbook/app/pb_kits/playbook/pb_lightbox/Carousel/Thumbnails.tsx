@@ -39,15 +39,15 @@ export default function Thumbnails({
   useLayoutEffect(() => {
     if (shouldBeCentered) return
 
-    const currentThumbnail = otherProps.buttonRef.current as HTMLButtonElement,
-    thumbWidth = currentThumbnail.clientWidth,
+    const currentThumbnail = otherProps.buttonRef.current
+
+    const thumbWidth = currentThumbnail.clientWidth,
     scrollLeft = thumbWidth * current,
     firstThumb: HTMLButtonElement = thumbnailsRef.current.querySelector('.Thumbnail:first-child'),
     lastThumb: HTMLButtonElement = thumbnailsRef.current.querySelector('.Thumbnail:last-child')
 
     firstThumb.style.marginLeft = `${(thumbnailsRef.current?.clientWidth / 2) - (thumbWidth / 2)}px`
     lastThumb.style.marginRight = `${(thumbnailsRef.current?.clientWidth / 2) - (thumbWidth / 2)}px`
-    // if (scrollLeft > (viewportSize.width - thumbWidth)) thumbnailsRef.current?.scrollTo(scrollLeft, 0)
     thumbnailsRef.current?.scrollTo(scrollLeft, 0)
   })
 
