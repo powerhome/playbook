@@ -39,10 +39,8 @@ module Playbook
           contact_value
         elsif contact_type == "extension" && contact_value.match(/^\d{4}$/)
           contact_value
-        elsif contact_type != "email" && contact_type != "extension"
-          number_to_phone(formatted_value, area_code: true, raise: true)
         else
-          ""
+          number_to_phone(formatted_value, area_code: true, raise: true)
         end
       end
 
