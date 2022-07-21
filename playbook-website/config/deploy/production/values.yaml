@@ -1,2 +1,2 @@
 ingress:
-  issueCerts: true
+  issueCert: true

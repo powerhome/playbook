@@ -16,7 +16,7 @@ type ImageType = {
   url?: string,
 } & GlobalProps
 
-const Image = (props: ImageType) => {
+const Image = (props: ImageType): React.ReactElement => {
   const {
     alt = '',
     aria = {},

@@ -2,27 +2,28 @@ import React from 'react'
 import classnames from 'classnames'
 
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
-import { globalProps } from '../utilities/globalProps'
+import { deprecatedProps, globalProps, GlobalProps } from '../utilities/globalProps'
 
 import Highlight from '../pb_highlight/_highlight'
 
 type BodyProps = {
   aria?: {[key: string]: string},
   className?: string,
-  children?: React.ReactChild[],
-  color?: 'default' | 'light' | 'lighter' | 'link',
+  children?: React.ReactChild[] | React.ReactChild,
+  color?: 'default' | 'light' | 'lighter' | 'link' | 'error' | 'success',
   dark?: boolean,
   data?: {[key: string]: string},
   highlightedText?: string[],
   highlighting?: boolean,
   id?: string,
-  status?: 'negative' | 'neutral' | 'positive',
+  status?: 'neutral' | 'negative' | 'positive',
   tag?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p' | 'span' | 'div',
   text?: string,
-  variant: null | 'link',
-}
+  variant?: null | 'link',
+} & GlobalProps
 
 const Body = (props: BodyProps): React.ReactElement => {
+  if (props.variant) deprecatedProps("Body", ["status"]) //status prop is deprecated, use color instead please
   const {
     aria = {},
     children,
@@ -56,12 +57,12 @@ const Body = (props: BodyProps): React.ReactElement => {
         id={id}
     >
       { highlighting && (
-         <Highlight
-             highlightedText={highlightedText}
-             text={text}
-         >
-            {children}
-         </Highlight>
+        <Highlight
+            highlightedText={highlightedText}
+            text={text}
+        >
+          {children}
+        </Highlight>
       ) }
       { !highlighting && (
         text || children

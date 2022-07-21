@@ -1,0 +1,13 @@
+$display_inline: inline;
+$display_block: block;
+$display_inline_block: inline-block;
+$display_flex: flex;
+$display_none: none;
+$display_inline_flex: inline-flex;
+$displays: (
+  display_none:   $display_none,
+  display_flex: $display_flex,
+  display_inline: $display_inline,
+  display_inline_block: $display_inline_block,
+  display_block: $display_block
+);

@@ -1,6 +1,6 @@
 #!/usr/bin/env groovy
 
-library identifier: 'ci-kubed@v4.0.1', retriever: modernSCM([
+library identifier: 'ci-kubed@v5.0.0', retriever: modernSCM([
   $class: 'GitSCMSource',
   remote: 'git@github.com:powerhome/ci-kubed.git',
   credentialsId: 'powerci-github-ssh-key'
@@ -14,35 +14,29 @@ app.build(
     limitMemory: '8Gi',
   ]
 ) {
-  def scmVars
-  def appImage
+  def appRepo = "image-registry.powerapp.cloud/playbook/playbook"
+  def commitHash, scmVars, tag
 
   stage('Code Checkout') {
     scmVars = checkout scm
-    appImage = "quay.io/powerhome/playbook:${git.triggeringCommit(scmVars)}"
+    commitHash = git.triggeringCommit(scmVars)
+    tag = "${env.BRANCH_NAME.replaceAll('/', '_')}-${commitHash}-${env.BUILD_ID}"
   }
 
   app.dockerStage('Build Docker Image') {
-    buildDockerImage(scmVars, appImage)
+    try {
+      github.setImageBuildState(scmVars, 'PENDING')
+      sh "docker build --tag ${appRepo}:${tag} --tag ${appRepo}:${commitHash} ."
+      sh "docker push ${appRepo}:${tag}"
+      sh "docker push ${appRepo}:${commitHash}"
+      github.setImageBuildState(scmVars, 'SUCCESS')
+    } catch(e) {
+      github.setImageBuildState(scmVars, 'FAILURE')
+      throw e
+    }
   }
 
   app.dockerStage('Test') {
-    testLibrary(appImage)
+    sh "docker run --tty --rm -w=/home/app/src/playbook ${appRepo}:${tag} ./test.sh"
   }
-}
-
-def buildDockerImage(scmVars, appImage) {
-  try {
-    github.setImageBuildState(scmVars, 'PENDING')
-    sh "docker build -t ${appImage} ."
-    sh "docker push ${appImage}"
-    github.setImageBuildState(scmVars, 'SUCCESS')
-  } catch(e) {
-    github.setImageBuildState(scmVars, 'FAILURE')
-    throw e
-  }
-}
-
-def testLibrary(appImage) {
-  sh "docker run --tty --rm -w=/home/app/src/playbook ${appImage} ./test.sh"
 }

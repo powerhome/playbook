@@ -21,11 +21,13 @@ module Playbook
                       values: %w[sm md lg],
                       default: "sm"
       prop :text
+      prop :sticky, type: Playbook::Props::Boolean,
+                    default: false
 
       def classname
         generate_classname(
           "pb_table", "table-#{size}", single_line_class, dark_class,
-          disable_hover_class, container_class, data_table_class, collapse_class,
+          disable_hover_class, container_class, data_table_class, sticky_class, collapse_class,
           "table-responsive-#{responsive}", separator: " "
         )
       end
@@ -54,6 +56,10 @@ module Playbook
 
       def collapse_class
         responsive != "none" ? "table-collapse-#{collapse}" : ""
+      end
+
+      def sticky_class
+        sticky ? "sticky-header" : nil
       end
     end
   end
