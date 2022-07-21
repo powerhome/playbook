@@ -27,7 +27,7 @@ const main = async () => {
     pull_number: pullNumber,
   }
 
-  core.info('Hello!');
+  core.info('Hello!!');
 
   const pr = await octokit.pulls.get(CREDS);
 
