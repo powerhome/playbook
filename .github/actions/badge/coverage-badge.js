@@ -28,9 +28,6 @@ const main = async () => {
   }
 
   core.info('Hello!');
-  core.info(githubRepo[0])
-  core.info(githubRepo[1])
-  core.info(pullNumber)
 
   const pr = await octokit.pulls.get(CREDS);
 
@@ -40,7 +37,7 @@ const main = async () => {
     badgeSubst = new RegExp('(\\!\\[' + badgeTitle + '\\]\\().+\\)/g'),
     updatedBody = body.indexOf(badgeTitle) > -1 ? body.replace(badgeSubst, `${badge}`) : `${badge}\r${body}`;
 
-  await octokit.pulls.update({ ...CREDS, body: updatedBody });
+  await octokit.pulls.update({ ...CREDS, body: updatedBody});
 };
 
 main().catch(err => core.setFailed(err.message));
