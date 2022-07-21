@@ -69,7 +69,6 @@ const Dialog = (props: DialogProps) => {
   } = props
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
-  console.log(alertStyle,status)
   const dialogClassNames = {
     base: classnames('pb_dialog', buildCss('pb_dialog', size)),
     afterOpen: 'pb_dialog_after_open',
