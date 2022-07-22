@@ -31,10 +31,10 @@
       <%= pb_rails("layout/body") do%>
         <div class="pb--page--content--main padding-override smooth-scroll <%= cookies[:dark_mode] == "true" ? 'dark' : '' %>">
           <%= yield %>
+          <%= render 'layouts/footer'%>
         </div>
       <% end %>
     <%end%>
-    <%= render 'layouts/footer'%>
   </body>
   <%= javascript_packs_with_chunks_tag(*@application_js) %>
   <%= yield :pb_js %>
