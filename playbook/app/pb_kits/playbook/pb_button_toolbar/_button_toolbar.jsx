@@ -9,12 +9,12 @@ import { globalProps } from '../utilities/globalProps'
 
 type ButtonToolbarProps = {
   aria?: object,
-  children?:  React.ReactChild[] | React.ReactChild,
+  children?: array<React.ReactChild>,
   className?: string,
   connected?: boolean,
   data?: object,
   id?: string,
-  onClick?: (event: SyntheticEvent<HTMLButtonElement>) => void,
+  onClick?: EventHandler,
   orientation?: "horizontal" | "vertical",
   text?: string,
  variant?: "primary" | "secondary",
