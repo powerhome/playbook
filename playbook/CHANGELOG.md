@@ -1,5 +1,115 @@
 
 
+## [11.1.2](https://github.com/powerhome/playbook/tree/11.1.2) (2022-07-18)
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/11.1.1...11.1.2)
+
+**Merged pull requests:**
+
+- Revert Back to TS and Fix Props in Radio Kit Input Field [\#1970](https://github.com/powerhome/playbook/pull/1970) ([thestephenmarshall](https://github.com/thestephenmarshall))
+
+
+
+## [11.1.1](https://github.com/powerhome/playbook/tree/11.1.1) (2022-07-15)
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/11.1.0...11.1.1)
+
+**Kit Enhancements:**
+
+- \[FINC-1393\] Add Precision to Stat Value Kit [\#1967](https://github.com/powerhome/playbook/pull/1967) ([maddiemc01](https://github.com/maddiemc01))
+
+**Merged pull requests:**
+
+- Revert "\[Play-190\] Radio Kit Typescript Conversion" [\#1969](https://github.com/powerhome/playbook/pull/1969) ([thestephenmarshall](https://github.com/thestephenmarshall))
+- Incl. branch as part of Playbook's image tag [\#1920](https://github.com/powerhome/playbook/pull/1920) ([gruberdev](https://github.com/gruberdev))
+
+
+
+## [11.1.0](https://github.com/powerhome/playbook/tree/11.1.0) (2022-07-08)
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/11.0.1...11.1.0)
+
+**Kit Enhancements:**
+
+- Add Matching Decimals Prop to Currency Kit  [\#1961](https://github.com/powerhome/playbook/pull/1961) ([stephenmckeon](https://github.com/stephenmckeon))
+
+**Merged pull requests:**
+
+- Revert "\[Play-159\] Play Adding Alert To Dialog Kit" [\#1964](https://github.com/powerhome/playbook/pull/1964) ([thestephenmarshall](https://github.com/thestephenmarshall))
+
+
+
+## [11.0.1](https://github.com/powerhome/playbook/tree/11.0.1) (2022-06-10)
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/11.0.0...11.0.1)
+
+**Fixed Bugs:**
+
+- Fix Home Address Street [\#1951](https://github.com/powerhome/playbook/pull/1951) ([thestephenmarshall](https://github.com/thestephenmarshall))
+
+**Merged pull requests:**
+
+- \[PLAY-58\] Swift UI / Setup folder and ReadMe file [\#1946](https://github.com/powerhome/playbook/pull/1946) ([kre8sions](https://github.com/kre8sions))
+
+
+
+## [11.0.0](https://github.com/powerhome/playbook/tree/11.0.0) (2022-06-07)
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/10.26.1...11.0.0)
+
+**Breaking changes:**
+
+- Add Ruby 3.1 & Rails Upgrades for Playbook Website [\#1942](https://github.com/powerhome/playbook/pull/1942) ([thestephenmarshall](https://github.com/thestephenmarshall))
+
+**Kit Enhancements:**
+
+- \[Play-118\] Adding All Colors to Background Kit [\#1934](https://github.com/powerhome/playbook/pull/1934) ([CooperSawyer1](https://github.com/CooperSawyer1))
+- \[Play-159\] Play Adding Alert To Dialog Kit [\#1909](https://github.com/powerhome/playbook/pull/1909) ([CooperSawyer1](https://github.com/CooperSawyer1))
+- \[PLAY-141\] Datepicker Allow Time Selection [\#1906](https://github.com/powerhome/playbook/pull/1906) ([thestephenmarshall](https://github.com/thestephenmarshall))
+- \[Play-182\] Update Success And Error Props [\#1900](https://github.com/powerhome/playbook/pull/1900) ([CooperSawyer1](https://github.com/CooperSawyer1))
+
+**Improvements:**
+
+- Make Button Kit Compatible with Turbo/Hotwire Features in Rails 7 [\#1941](https://github.com/powerhome/playbook/pull/1941) ([web-kat](https://github.com/web-kat))
+- \[PLAY-181\] Add Success And Error Colors For Dark Mode [\#1904](https://github.com/powerhome/playbook/pull/1904) ([Ivancandido11](https://github.com/Ivancandido11))
+- \[Play-136\] Add Ability to Select Weeks Instead of Days Date Picker Kit [\#1903](https://github.com/powerhome/playbook/pull/1903) ([dmcindoe](https://github.com/dmcindoe))
+
+**Merged pull requests:**
+
+- \[PLAY-170\] Convert Border Radius Visual Guideline to React [\#1939](https://github.com/powerhome/playbook/pull/1939) ([GordonHodanich](https://github.com/GordonHodanich))
+- \[PLAY-192\] Convert Select kit to TypeScript [\#1932](https://github.com/powerhome/playbook/pull/1932) ([mpabegg](https://github.com/mpabegg))
+- \[Play-193\] Text Input Kit Typescript Conversion [\#1929](https://github.com/powerhome/playbook/pull/1929) ([sergiopvilar](https://github.com/sergiopvilar))
+- \[Play-191\] Form Pill Kit Typescript Conversion [\#1921](https://github.com/powerhome/playbook/pull/1921) ([dmcindoe](https://github.com/dmcindoe))
+- \[PLAY-169\] Create React Spacing Partial [\#1916](https://github.com/powerhome/playbook/pull/1916) ([Ivancandido11](https://github.com/Ivancandido11))
+- \[Play-189\] Checkbox Kit Convert to TS [\#1914](https://github.com/powerhome/playbook/pull/1914) ([dmcindoe](https://github.com/dmcindoe))
+- Created Visual Guidelines Shadow Partial for React [\#1910](https://github.com/powerhome/playbook/pull/1910) ([GordonHodanich](https://github.com/GordonHodanich))
+- Updates Visual Guidelines Color Partial to TSX [\#1899](https://github.com/powerhome/playbook/pull/1899) ([GordonHodanich](https://github.com/GordonHodanich))
+- Create React Number Spacing Partial [\#1895](https://github.com/powerhome/playbook/pull/1895) ([Ivancandido11](https://github.com/Ivancandido11))
+- Create React Line Height Partial [\#1892](https://github.com/powerhome/playbook/pull/1892) ([Ivancandido11](https://github.com/Ivancandido11))
+- \[Play-153\] Hashtag Kit Convert to TS [\#1886](https://github.com/powerhome/playbook/pull/1886) ([dmcindoe](https://github.com/dmcindoe))
+
+## [10.26.1](https://github.com/powerhome/playbook/tree/10.26.1) (2022-05-27)
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/10.26.0...10.26.1)
+
+**Fixed Bugs:**
+
+- Fix Incorrect Type Declaration and Card Kit buildCss for Highlight Class [\#1943](https://github.com/powerhome/playbook/pull/1943) ([thestephenmarshall](https://github.com/thestephenmarshall))
+- \[PLAY-198\] Fix Title Bug [\#1925](https://github.com/powerhome/playbook/pull/1925) ([Ivancandido11](https://github.com/Ivancandido11))
+
+**Merged pull requests:**
+
+- Update view\_component requirement from = 2.48.0 to = 2.55.0 in /playbook [\#1927](https://github.com/powerhome/playbook/pull/1927) ([dependabot[bot]](https://github.com/apps/dependabot))
+- \[Rails 7 fix\] Conditionally use render\_component method in PbKitHelper [\#1926](https://github.com/powerhome/playbook/pull/1926) ([stephenagreer](https://github.com/stephenagreer))
+- APP Registry - No explicit imagePullSecrets [\#1922](https://github.com/powerhome/playbook/pull/1922) ([ryanmrodriguez](https://github.com/ryanmrodriguez))
+- Fix license reference [\#1918](https://github.com/powerhome/playbook/pull/1918) ([benlangfeld](https://github.com/benlangfeld))
+- Convert Visual Guidelines Cursor Partial to React [\#1915](https://github.com/powerhome/playbook/pull/1915) ([GordonHodanich](https://github.com/GordonHodanich))
+- Update dependency eslint-plugin-react to v7.30.0 [\#1913](https://github.com/powerhome/playbook/pull/1913) ([renovate[bot]](https://github.com/apps/renovate))
+- fix issuerCert typo prod [\#1905](https://github.com/powerhome/playbook/pull/1905) ([iblackman](https://github.com/iblackman))
+- Migration to the new registry \(Harbor\) [\#1883](https://github.com/powerhome/playbook/pull/1883) ([gruberdev](https://github.com/gruberdev))
+
+
+
 ## [10.26.0](https://github.com/powerhome/playbook/tree/10.26.0) (2022-05-12)
 
 [Full Changelog](https://github.com/powerhome/playbook/compare/10.25.1...10.26.0)
@@ -2438,6 +2548,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Removed (breaking changes)
 - React PbLayout prop `children` dropped support for single Node (https://github.com/powerhome/playbook/commit/b16da50914e110c75c6d96c985fa02781c9e2040#diff-c3ce2c91288ca3e730d3c56e7f73475cL11-L14)
 - Rails PbLayout prop `dark` dropped (https://github.com/powerhome/playbook/commit/b16da50914e110c75c6d96c985fa02781c9e2040#diff-377fda563d148f7b3ad33f904b7b0cdbL13)
+
+
+\* *This Changelog was automatically generated by [github_changelog_generator](https://github.com/github-changelog-generator/github-changelog-generator)*
+
+
+\* *This Changelog was automatically generated by [github_changelog_generator](https://github.com/github-changelog-generator/github-changelog-generator)*
+
+
+\* *This Changelog was automatically generated by [github_changelog_generator](https://github.com/github-changelog-generator/github-changelog-generator)*
+
+
+\* *This Changelog was automatically generated by [github_changelog_generator](https://github.com/github-changelog-generator/github-changelog-generator)*
+
+
+\* *This Changelog was automatically generated by [github_changelog_generator](https://github.com/github-changelog-generator/github-changelog-generator)*
 
 
 \* *This Changelog was automatically generated by [github_changelog_generator](https://github.com/github-changelog-generator/github-changelog-generator)*

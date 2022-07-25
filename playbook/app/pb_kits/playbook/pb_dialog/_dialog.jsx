@@ -69,7 +69,6 @@ const Dialog = (props: DialogProps) => {
   } = props
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
-
   const dialogClassNames = {
     base: classnames('pb_dialog', buildCss('pb_dialog', size)),
     afterOpen: 'pb_dialog_after_open',
@@ -151,26 +150,30 @@ const Dialog = (props: DialogProps) => {
             shouldCloseOnOverlayClick={shouldCloseOnOverlayClick}
             status={status}
         >
-          <Dialog.Body>
-            <Flex align='center'
-                orientation='column'
-            >
-              <If condition = {sweetAlertStatus[status]}>
+          <If condition={title && !status}>
+            <Dialog.Header>{title}</Dialog.Header>
+            <Dialog.Body>{text}</Dialog.Body>
+          </If>
+          <If condition={status}>
+            <Dialog.Body>
+              <Flex align='center'
+                  orientation='column'
+              >
                 <IconCircle
                     icon={sweetAlertStatus[status].icon}
                     variant={sweetAlertStatus[status].variant}
                 />
-              </If>
-              <Title marginY='sm'
-                  size={3}
-              >
-                {title}
-              </Title>
-              <Body marginY='xs'
-                  text={text}
-              />
-            </Flex>
-          </Dialog.Body>
+                <Title marginY='sm'
+                    size={3}
+                >
+                  {title}
+                </Title>
+                <Body marginY='xs'
+                    text={text}
+                />
+              </Flex>
+            </Dialog.Body>
+          </If>
           <If condition={cancelButton && confirmButton}>
             <Dialog.Footer>
               <Button

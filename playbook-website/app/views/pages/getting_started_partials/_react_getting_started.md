@@ -19,8 +19,8 @@ Can be imported in your Index.js file or top level app Component
 
 ```js
 import 'playbook-ui/dist/fonts/fontawesome-min';
- import 'playbook-ui/dist/fonts/regular-min';
- import 'playbook-ui/dist/playbook.css';
+import 'playbook-ui/dist/fonts/regular-min';
+import 'playbook-ui/dist/playbook.css';
 ```
 
 #### Import Playbook React components

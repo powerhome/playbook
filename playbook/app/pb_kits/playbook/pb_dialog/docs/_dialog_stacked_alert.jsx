@@ -57,25 +57,25 @@ const DialogStackedAlert = () => {
     <div>
     <Flex>
       <Button
-          marginX="md"
+          marginRight="md"
           onClick={toggleSingleButtonOpen}
       >
         {"1 Button Information Status"}
       </Button>
       <Button
-          marginX="md"
+          marginRight="md"
           onClick={toggleStackedButtonOpen}
       >
         {"2 Button Error Status"}
       </Button>
       <Button
-          marginX="md"
+          marginRight="md"
           onClick={toggleSingleLinkButtonOpen}
       >
         {"1 Link Button Caution"}
       </Button>
       <Button
-          marginX="md"
+          marginRight="md"
           onClick={toggleTwoLinkButtonOpen}
       >
         {"2 Link Button Success"}
