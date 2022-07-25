@@ -5,20 +5,30 @@ volumes:
 services:
   web:
     working_dir: /home/app/src/playbook-website
+    image: ${APP_IMAGE_REPO:-image-registry.powerapp.cloud/playbook/playbook}:${APP_IMAGE_TAG:-local}
     build:
       context: .
+      target: base
       args:
-        precompileassets: "disable"
+        BUILDKIT_INLINE_CACHE: "1"
+      cache_from:
+        - image-registry.powerapp.cloud/playbook/playbook:${CACHE_TAG:-local}
+        - image-registry.powerapp.cloud/playbook/playbook:main
     volumes:
       - .:/home/app/src
       - bundle:/usr/local/bundle
     ports:
       - "8089:3000"
   webpacker:
+    image: ${APP_IMAGE_REPO:-image-registry.powerapp.cloud/playbook/playbook}:${APP_IMAGE_TAG:-local}
     build:
       context: .
+      target: base
       args:
-        precompileassets: "disable"
+        BUILDKIT_INLINE_CACHE: "1"
+      cache_from:
+        - image-registry.powerapp.cloud/playbook/playbook:${CACHE_TAG:-local}
+        - image-registry.powerapp.cloud/playbook/playbook:main
     deploy:
       resources:
         limits:
