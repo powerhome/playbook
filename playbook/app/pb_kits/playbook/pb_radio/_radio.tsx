@@ -20,7 +20,7 @@ type RadioProps = {
   name: string,
   value: string,
   text: string,
-  onChange: (event: React.FormEvent<HTMLInputElement>)=>void,
+  onChange: (event: React.FormEvent<HTMLInputElement> | null)=>void,
 } & GlobalProps
 
 const Radio = ({
@@ -36,7 +36,7 @@ const Radio = ({
   name = 'radio_name',
   text = 'Radio Text',
   value = 'radio_text',
-  onChange = () => {},
+  onChange = () => { void 0 },
   ...props
 }: RadioProps, ref: any) => {
   const ariaProps = buildAriaProps(aria)
@@ -47,10 +47,10 @@ const Radio = ({
     globalProps(props),
     className)
 
-  const displayRadio = (props: RadioProps) => {
+  const displayRadio = (props: RadioProps & any) => {
     if (children)
       return (children)
-    else 
+    else
     return (
     <input
         id={id}
@@ -71,13 +71,13 @@ const Radio = ({
         className={classes}
         htmlFor={id}
     >
-    <>{displayRadio(null)}</>
+    <>{displayRadio(props)}</>
     <span className="pb_radio_button" />
     <Body
-          dark={dark}
-          status={error ? 'negative' : null}
-          text={label}
-          variant={null}
+        dark={dark}
+        status={error ? 'negative' : null}
+        text={label}
+        variant={null}
       />
     </label>
   )
