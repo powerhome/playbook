@@ -1,4 +1,4 @@
-import React, { ComponentType } from 'react'
+import React from 'react'
 import classnames from 'classnames'
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
 import { deprecatedProps, GlobalProps, globalProps } from '../utilities/globalProps'
@@ -38,7 +38,7 @@ const Title = (props: TitleProps): React.ReactElement => {
     globalProps(props),
     className,
   )
-  const Tag: ComponentType | any = `${tag}`
+  const Tag: React.ReactElement | any = `${tag}`
 
   return (
     <Tag
