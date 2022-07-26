@@ -4,7 +4,7 @@ import React from 'react'
 import classnames from 'classnames'
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
 
-import type { Callback } from '../types'
+type EventHandler = (React.MouseEventHandler<HTMLElement>)
 
 import { noop } from '../utilities/props'
 import { globalProps } from '../utilities/globalProps'
@@ -13,21 +13,21 @@ import Button from '../pb_button/_button'
 import Icon from '../pb_icon/_icon'
 
 type CircleIconButtonProps = {
-  aria?: object,
+  aria?: { [key: string]: string },
   className?: string,
   dark?: boolean,
-  data?: object,
+  data?: { [key: string]: string },
   disabled?: boolean,
   icon: string,
   id?: string,
   link?: string,
-  onClick?: Callback,
+  onClick?: EventHandler,
   newWindow?: boolean,
-  type?: 'button' | 'submit' | 'reset',
+  type?: 'button' | 'submit' | 'reset' | undefined,
   variant?: 'primary' | 'secondary' | 'link',
 }
 
-const CircleIconButton = (props: CircleIconButtonProps) => {
+const CircleIconButton = (props: CircleIconButtonProps): React.ReactElement => {
   const {
     aria = {},
     className,
@@ -61,11 +61,11 @@ const CircleIconButton = (props: CircleIconButtonProps) => {
       <Button
           dark={dark}
           disabled={disabled}
+          htmlType={type}
           link={link}
           newWindow={newWindow}
           onClick={onClick}
           text={null}
-          type={type}
           variant={variant}
       >
         <Icon
