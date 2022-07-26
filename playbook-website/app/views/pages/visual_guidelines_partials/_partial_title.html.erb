@@ -3,7 +3,8 @@
   padding_top: "xl",
   size: title_size,
   tag: "h2",
-  text: title
+  text: title,
+  id: title.parameterize(separator: '_')
 }) %>
 <%= pb_rails("body", props: {
   margin_bottom: "lg",
