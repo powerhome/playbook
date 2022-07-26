@@ -1,0 +1,38 @@
+# This is the base yml for project.yml and project_production.yml
+name: PlaybookDemo
+options:
+  indentWidth: 2
+  groupOrdering:
+    - order: []
+  deploymentTarget:
+    iOS: 15.0
+    macOS: 12.0
+packages:
+  Playbook:
+    path: ./
+targets:
+  Playbook-iOS:
+    type: application
+    platform: iOS
+    sources: [Shared]
+    dependencies:
+      - package: Playbook
+    settings:
+      base:
+        GENERATE_INFOPLIST_FILE: true
+        PRODUCT_BUNDLE_IDENTIFIER: com.powerhrg.playbookdemo
+        CURRENT_PROJECT_VERSION: 1
+        MARKETING_VERSION: 1
+  Playbook-macOS:
+    type: application
+    platform: macOS
+    sources: [Shared, macOS]
+    scheme: {}
+    dependencies:
+      - package: Playbook
+    settings:
+      base:
+        GENERATE_INFOPLIST_FILE: true
+        PRODUCT_BUNDLE_IDENTIFIER: com.powerhrg.playbookdemo
+        CURRENT_PROJECT_VERSION: 1
+        MARKETING_VERSION: 1
