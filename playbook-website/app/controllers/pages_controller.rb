@@ -120,6 +120,7 @@ class PagesController < ApplicationController
       { name: "Shadow Deeper", variable: "shadow_deeper" },
       { name: "Shadow Deepest", variable: "shadow_deepest" },
     ]
+    render "pages/visual_guidelines", layout: "layouts/visual_guidelines"
   end
 
 private

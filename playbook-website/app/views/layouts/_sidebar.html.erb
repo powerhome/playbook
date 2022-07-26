@@ -52,3 +52,28 @@
     <% end %>
   <% end %>
 <% end %>
+
+<% if current_page?('/visual_guidelines') %>
+  <%= pb_rails("nav", props: {
+    title: "Visual Guidelines",
+    link: all_link(@type),
+    variant: "subtle",
+    padding_y: "sm"
+  }) do %>
+    <% pb_rails("nav/item", props: {
+      text: "All",
+      link: all_link(@type),
+      active: all_active(controller_name, action_name)
+    }) %>
+    <% MENU["visual_guidelines"].each do |link| %>
+      <div class="category_section">
+        <%= pb_rails("nav/item", props: {
+          active: category_active(@category, link),
+          link: "##{link}"
+        }) do %>
+          <%= pb_kit_title(link) %>
+        <% end %>
+      </div>
+    <% end %>
+  <% end %>
+<% end %>
