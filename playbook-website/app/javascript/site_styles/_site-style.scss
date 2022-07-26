@@ -10,6 +10,7 @@ $nav_breakpoint: breakpoint("lg");
 body {
   overflow-x: hidden;
   position: relative;
+  &.visual_guidelines,
   &.kits {
     overflow-y: hidden;
   }
@@ -95,6 +96,12 @@ body {
       }
       &.height-override {
         height: auto;
+      }
+      &.padding-override {
+        padding: 0;
+      }
+      &.smooth-scroll {
+        scroll-behavior: smooth;
       }
     }
   }
