@@ -31,12 +31,12 @@ RSpec.describe Playbook::PbList::List do
   describe "#classname" do
     it "returns namespaced class name", :aggregate_failures do
       expect(subject.new({}).list_classname).to eq "pb_list_kit_"
-      expect(subject.new(dark: true).list_classname).to eq "pb_list_kit_dark_"
+      expect(subject.new(dark: true).list_classname).to eq "pb_list_kit_dark_ dark"
       expect(subject.new(borderless: true).list_classname).to eq "pb_list_kit_borderless_"
       expect(subject.new(xpadding: true).list_classname).to eq "pb_list_kit_xpadding_"
       expect(subject.new(size: "large").list_classname).to eq "pb_list_kit_large_"
       expect(subject.new(layout: "right").list_classname).to eq "pb_list_kit_layout_right"
-      expect(subject.new(dark: true, xpadding: true, size: "large", borderless: true, layout: "left").list_classname).to eq "pb_list_kit_xpadding_borderless_dark_large_layout_left"
+      expect(subject.new(dark: true, xpadding: true, size: "large", borderless: true, layout: "left").list_classname).to eq "pb_list_kit_xpadding_borderless_dark_large_layout_left dark"
     end
   end
 end
