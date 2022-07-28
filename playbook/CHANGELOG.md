@@ -4,6 +4,10 @@
 
 [Full Changelog](https://github.com/powerhome/playbook/compare/11.1.2...11.2.0)
 
+**New Kits** 
+- \[PLAY-158\] Lightbox Kit [\#1772](https://github.com/powerhome/playbook/pull/1772) ([jasperfurniss](https://github.com/jasperfurniss), [thestephenmarshall](https://github.com/thestephenmarshall), 
+[Ivancandido11](https://github.com/Ivancandido11))
+
 **Kit Enhancements:**
 
 - \[PLAY-211\] Typescript Conversion: Button Toolbar [\#1977](https://github.com/powerhome/playbook/pull/1977) ([augustomallmann](https://github.com/augustomallmann))
