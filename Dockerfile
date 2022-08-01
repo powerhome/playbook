@@ -1,5 +1,4 @@
-FROM phusion/passenger-customizable:1.0.19
-ARG precompileassets
+FROM phusion/passenger-customizable:1.0.19 AS base
 
 RUN mv /etc/apt/sources.list.d /etc/apt/sources.list.d.bak && \
     apt update && apt install -y ca-certificates && \
@@ -48,4 +47,6 @@ RUN cd playbook-website && bundle install --frozen
 RUN chmod +x playbook-website/services/*.sh
 RUN mkdir /etc/service/puma && ln -s /home/app/src/playbook-website/services/puma.sh /etc/service/puma/run
 
-RUN if [ "${precompileassets}" = "disable" ]; then echo "Pre-compilation disabled"; else yarn release-all; fi
+FROM base AS prod
+
+RUN yarn release-all

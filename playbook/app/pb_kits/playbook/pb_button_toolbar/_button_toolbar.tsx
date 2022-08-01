@@ -8,13 +8,13 @@ import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
 import { globalProps } from '../utilities/globalProps'
 
 type ButtonToolbarProps = {
-  aria?: object,
-  children?: array<React.ReactChild>,
+  aria?: {[key: string]: string},
+  children?: React.ReactChild[] | React.ReactChild,
   className?: string,
   connected?: boolean,
   data?: object,
   id?: string,
-  onClick?: EventHandler,
+  onClick?: React.MouseEventHandler<HTMLSpanElement>,
   orientation?: "horizontal" | "vertical",
   text?: string,
  variant?: "primary" | "secondary",
