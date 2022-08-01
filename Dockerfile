@@ -49,4 +49,5 @@ RUN mkdir /etc/service/puma && ln -s /home/app/src/playbook-website/services/pum
 
 FROM base AS prod
 
-RUN yarn release-all
+RUN (cd playbook; yarn release)
+RUN (cd playbook-website; yarn release)
