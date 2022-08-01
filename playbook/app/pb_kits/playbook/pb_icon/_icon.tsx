@@ -3,6 +3,20 @@ import classnames from 'classnames'
 import { buildAriaProps, buildDataProps } from '../utilities/props'
 import { GlobalProps, globalProps } from '../utilities/globalProps'
 
+export type IconSizes = "lg"
+| "xs"
+| "sm"
+| "1x"
+| "2x"
+| "3x"
+| "4x"
+| "5x"
+| "6x"
+| "7x"
+| "8x"
+| "9x"
+| "10x"
+
 type IconProps = {
   aria?: {[key: string]: string},
   border?: string,
@@ -18,19 +32,7 @@ type IconProps = {
   pull?: "left" | "right" | "none",
   pulse?: boolean,
   rotation?: 90 | 180 | 270,
-  size?: | "lg"
-    | "xs"
-    | "sm"
-    | "1x"
-    | "2x"
-    | "3x"
-    | "4x"
-    | "5x"
-    | "6x"
-    | "7x"
-    | "8x"
-    | "9x"
-    | "10x",
+  size?: IconSizes,
   spin?: boolean,
 } & GlobalProps
 
