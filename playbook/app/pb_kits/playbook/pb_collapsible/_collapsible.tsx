@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-// import CollapsibleContentProps from "./child_kits/CollapsibleContent"
 import classnames from 'classnames'
 
 import { globalProps } from '../utilities/globalProps'
