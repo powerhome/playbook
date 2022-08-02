@@ -1,7 +1,5 @@
-/* @flow */
-
 import React, { useState } from 'react'
-
+// import CollapsibleContentProps from "./child_kits/CollapsibleContent"
 import classnames from 'classnames'
 
 import { globalProps } from '../utilities/globalProps'
@@ -12,14 +10,15 @@ import CollapsibleMain from './child_kits/CollapsibleMain'
 import CollapsibleContext from './context'
 
 type CollapsibleProps = {
-  children: CollapsibleMain | CollapsibleContent | ReactNode,
-  aria?: object,
+  children?: JSX.Element | [],
+  aria?: {[key: string]: string},
   className?: string,
   collapsed?: boolean,
   data?: object,
   id?: string,
   padding?: string,
 }
+
 
 const useCollapsible = (initial = false) => {
   const [collapsed, setCollapsed] = useState(initial)
@@ -41,7 +40,7 @@ const Collapsible = ({
   ...props
 }: CollapsibleProps) => {
   const [isCollapsed, collapse] = useCollapsible(collapsed)
-  const CollapsibleParent = React.Children.toArray(children)
+  const CollapsibleParent = React.Children.toArray(children) as JSX.Element[]
 
   if (CollapsibleParent.length !== 2) {
     throw new Error('Collapsible requires <CollapsibleMain> and <CollapsibleContent> to function properly.')

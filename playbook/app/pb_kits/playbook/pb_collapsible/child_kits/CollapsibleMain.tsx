@@ -1,4 +1,3 @@
-/* @flow */
 
 import classnames from 'classnames'
 import React, { useContext } from 'react'
@@ -10,13 +9,14 @@ import FlexItem from '../../pb_flex/_flex_item'
 import CollapsibleContext from '../context'
 
 type CollapsibleMainProps = {
-  children: array<React.ReactNode> | React.ReactNode,
+  children: React.ReactNode[] | React.ReactNode,
   className?: string,
   padding?: string,
+  cursor?: string
 }
 
 type IconProps = {
-  collapsed: boolean
+  collapsed: boolean | (()=> void)
 }
 
 const Icon = ({ collapsed }: IconProps) => {
@@ -40,7 +40,7 @@ const CollapsibleMain = ({
 
   ...props
 }: CollapsibleMainProps) => {
-  const context = useContext(CollapsibleContext)
+  const context: {[key: string]: (()=> void)} | boolean = useContext(CollapsibleContext)
   const mainCSS = buildCss('pb_collapsible_main_kit')
   const mainSpacing = globalProps(props, { cursor, padding })
 
