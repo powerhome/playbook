@@ -5,3 +5,6 @@ examples:
   - tooltip_selectors: Using Common Selectors
   - tooltip_white: White
   - tooltip_with_icon_circle: Icon Circle Tooptip
+
+  react:
+  - tooltip_default: Default

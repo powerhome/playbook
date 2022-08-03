@@ -23,6 +23,7 @@ $tooltip_shadow: rgba(60, 106, 172, 0.18);
 }
 
 [class^="pb_tooltip_kit"] {
+  ~ .tooltip_tooltip,
   .tooltip_tooltip {
     display: block;
     opacity: 0;

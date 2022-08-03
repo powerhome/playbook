@@ -92,6 +92,7 @@ import * as Title from 'pb_title/docs'
 import * as TitleCount from 'pb_title_count/docs'
 import * as TitleDetail from 'pb_title_detail/docs'
 import * as Toggle from 'pb_toggle/docs'
+import * as Tooltip from 'pb_tooltip/docs'
 import * as TreemapChart from 'pb_treemap_chart/docs'
 import * as Typeahead from 'pb_typeahead/docs'
 import * as User from 'pb_user/docs'
@@ -188,6 +189,7 @@ WebpackerReact.setup({
   ...TitleCount,
   ...TitleDetail,
   ...Toggle,
+  ...Tooltip,
   ...TreemapChart,
   ...Typeahead,
   ...User,
