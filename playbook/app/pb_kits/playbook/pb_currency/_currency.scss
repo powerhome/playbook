@@ -49,7 +49,7 @@
 
     & > [class*=dollar_sign] {
       display: flex;
-      align-items: flex-start;
+      align-self: flex-start;
     }
     & > [class*=unit] {
       display: flex;
