@@ -23,6 +23,7 @@
   }
   [class^=pb_currency_wrapper] {
     display: flex;
+    align-items: baseline;
 
     &[class*=_deemphasized] [class^=pb_body_kit][class*=_light] {
       color: $text_lt_default;
