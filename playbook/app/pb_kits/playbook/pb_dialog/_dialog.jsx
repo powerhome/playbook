@@ -112,11 +112,11 @@ const Dialog = (props: DialogProps) => {
       variant: "default",
     },
     caution: {
-      icon: "triangle-warning",
+      icon: "exclamation-triangle",
       variant: "yellow",
     },
     delete: {
-      icon: "trash",
+      icon: "trash-alt",
       variant: "red",
     },
     error: {

@@ -7,7 +7,7 @@ import { globalProps } from '../../utilities/globalProps'
 
 // Body component
 const DialogBody = (props: DialogBodyProps) => {
-  const { children, padding = 'sm', className } = props
+  const { children, padding = 'md', className } = props
   const bodyCSS = buildCss('dialog_body')
   const bodySpacing = globalProps(props, { padding })
 

@@ -87,7 +87,10 @@ const DialogStatus = () => {
         >
           {"Success Status"}
         </Button>
-        <Button onClick={toggleErrorAlert}>
+        <Button 
+            marginRight="md"
+            onClick={toggleErrorAlert}
+        >
           {"Error Status"}
         </Button>
         <Button
