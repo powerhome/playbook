@@ -19,6 +19,10 @@ module Playbook
                      default: []
       prop :input_options, type: Playbook::Props::Hash,
                            default: {}
+
+      prop :is_multi, type: Playbook::Props::Boolean,
+                      default: true
+
       prop :pills, type: Playbook::Props::Boolean,
                    default: false
 
@@ -51,7 +55,7 @@ module Playbook
           defaultValue: default_options,
           id: id,
           inline: inline,
-          isMulti: true,
+          isMulti: is_multi,
           label: label,
           multiKit: multi_kit,
           name: name,
