@@ -14,8 +14,8 @@ import Avatar from '../pb_avatar/_avatar'
 import Icon from '../pb_icon/_icon'
 
 type AvatarActionButtonProps = {
-  action?: string,
-  aria: Object,
+  action?: "add" | "remove",
+  aria?: {[key: string]: string},
   linkAriaLabel?: string,
   className?: string,
   dark?: boolean,
@@ -25,9 +25,9 @@ type AvatarActionButtonProps = {
   imageUrl?: string,
   linkUrl?: string,
   name?: string,
-  onClick?: string,
+  onClick?: React.MouseEventHandler<HTMLSpanElement>,
   placement?: string,
-  size?: string,
+  size?: "md" | "lg" | "sm" | "xl" | "xs" | "xxs",
 }
 
 const AvatarActionButton = (props: AvatarActionButtonProps) => {
@@ -53,9 +53,9 @@ const AvatarActionButton = (props: AvatarActionButtonProps) => {
 
   const classes = classnames(buildCss(
     'pb_avatar_action_button_kit',
-    [action],
-    [placement],
-    [size]),
+    action,
+    placement,
+    size),
   globalProps(props),
   className)
 
