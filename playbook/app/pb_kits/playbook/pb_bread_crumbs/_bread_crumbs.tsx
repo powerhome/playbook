@@ -2,7 +2,7 @@
 
 import React from 'react'
 import classnames from 'classnames'
-import { globalProps, domSafeProps } from '../utilities/globalProps'
+import { globalProps } from '../utilities/globalProps'
 
 import {
   buildAriaProps,
@@ -10,42 +10,40 @@ import {
   buildDataProps,
 } from '../utilities/props'
 
-type BreadCrumbItemProps = {
-  aria?: object,
+type BreadCrumbsProps = {
+  aria?: {[key: string]: string},
   className?: string,
   data?: object,
   id?: string,
-  component?: element
+  text?: string,
+  children?: React.ReactChild[] | React.ReactNode,
 }
-const BreadCrumbItem = (props: BreadCrumbItemProps) => {
+const BreadCrumbs = (props: BreadCrumbsProps) => {
   const {
-    aria = {},
+    aria = { label: 'Breadcrumb Navigation' },
     className,
     data = {},
     id,
-    component = 'a',
-    ...rest
+    children,
   } = props
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
   const css = classnames(
-    buildCss('pb_bread_crumb_item_kit'),
+    buildCss('pb_bread_crumbs_kit'),
     globalProps(props),
     className
   )
-  const Component = component || 'span'
+
   return (
-    <div
+    <nav
         {...ariaProps}
         {...dataProps}
         className={css}
         id={id}
     >
-      <Component
-          className="pb_bread_crumb_item"
-          {...domSafeProps(rest)}
-      />
-    </div>
+      {children}
+    </nav>
   )
 }
-export default BreadCrumbItem
+
+export default BreadCrumbs
