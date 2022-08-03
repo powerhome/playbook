@@ -8,6 +8,8 @@ You can also pass `default_options` which will populate the initial pill selecti
 
 `default_options: [{ label: 'Windows', value: '#FFA500' }]`
 
+You can also pass `is_multi: false` which will take away the pill functionality allowing users to only select one option.
+
 #### Rails: Subscribing to JS Events
 
 JavaScript events are triggered based on actions you take within the kit such as selection, removal and clearing.
