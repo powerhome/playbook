@@ -23,6 +23,7 @@ RSpec.describe Playbook::PbButton::Button do
   it { is_expected.to define_prop(:link) }
   it { is_expected.to define_prop(:type) }
   it { is_expected.to define_prop(:value) }
+  it { is_expected.to define_prop(:form).with_default(nil) }
 
   describe "#tag" do
     it "returns 'button' when link is not provided" do
@@ -36,7 +37,8 @@ RSpec.describe Playbook::PbButton::Button do
   describe "#link_options" do
     it "returns all the correct link options", :aggregate_failures do
       expect(subject.new(new_window: true).link_options).to include target: "_blank"
-      expect(subject.new(new_window: false).link_options).to include target: "_self"
+      expect(subject.new(new_window: false).link_options).to_not include(:target)
+
       expect(subject.new(link: "Google.com").link_options).to include href: "Google.com"
     end
   end
@@ -56,6 +58,11 @@ RSpec.describe Playbook::PbButton::Button do
       it "value", :aggregate_failures do
         expect(subject.new(value: "123").options).to include(:value)
         expect(subject.new.options).to_not include(:value)
+      end
+
+      it "form", :aggregate_failures do
+        expect(subject.new(form: "form-id").options).to include(:form)
+        expect(subject.new.options).to_not include(:form)
       end
     end
   end

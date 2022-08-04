@@ -21,6 +21,7 @@ module Playbook
       prop :size, type: Playbook::Props::Enum,
                   values: ["sm", "md", "lg", nil],
                   default: nil
+      prop :form, default: nil
 
       def options
         {
@@ -32,15 +33,16 @@ module Playbook
           role: "button",
           type: type,
           value: value,
+          form: form,
         }.compact
       end
 
       def link_options
-        options.merge(
-          href: link,
-          role: "link",
-          target: new_window ? "_blank" : "_self"
-        )
+        options.tap do |option|
+          option[:href] = link
+          option[:role] = "link"
+          option[:target] = "_blank" if new_window
+        end
       end
 
       def tag

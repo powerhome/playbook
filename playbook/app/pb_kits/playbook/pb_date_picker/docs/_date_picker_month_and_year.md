@@ -1,1 +1,1 @@
-By default month&year plugin is disabled. To activate it set `plugins` prop to `true`.  If you're using React just pass a `plugins` prop to the kit.
+By default selectType prop is disabled. To activate it set `selectionType` prop in JSX/TSX to `month`. To activate it set `selection_type` prop in a rails file to `month`.

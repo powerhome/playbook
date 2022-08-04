@@ -184,7 +184,6 @@ const Passphrase = (props: PassphraseProps) => {
           />
           <span
               className="show-passphrase-icon"
-              dark={dark}
               onClick={toggleShowPassphrase}
           >
             <Body

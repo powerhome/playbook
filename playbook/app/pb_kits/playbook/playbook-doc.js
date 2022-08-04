@@ -51,6 +51,7 @@ import * as LabelPill from 'pb_label_pill/docs'
 import * as LabelValue from 'pb_label_value/docs'
 import * as Layout from 'pb_layout/docs'
 import * as LegendDocs from 'pb_legend/docs'
+import * as Lightbox from 'pb_lightbox/docs'
 import * as LineGraphDocs from 'pb_line_graph/docs'
 import * as List from 'pb_list/docs'
 import * as LoadingInline from 'pb_loading_inline/docs'
@@ -91,6 +92,7 @@ import * as Title from 'pb_title/docs'
 import * as TitleCount from 'pb_title_count/docs'
 import * as TitleDetail from 'pb_title_detail/docs'
 import * as Toggle from 'pb_toggle/docs'
+import * as TreemapChart from 'pb_treemap_chart/docs'
 import * as Typeahead from 'pb_typeahead/docs'
 import * as User from 'pb_user/docs'
 import * as UserBadge from 'pb_user_badge/docs'
@@ -145,6 +147,7 @@ WebpackerReact.setup({
   ...LabelValue,
   ...Layout,
   ...LegendDocs,
+  ...Lightbox,
   ...LineGraphDocs,
   ...List,
   ...LoadingInline,
@@ -185,6 +188,7 @@ WebpackerReact.setup({
   ...TitleCount,
   ...TitleDetail,
   ...Toggle,
+  ...TreemapChart,
   ...Typeahead,
   ...User,
   ...UserBadge,

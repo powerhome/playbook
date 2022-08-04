@@ -13,12 +13,24 @@ module Playbook
                         default: {}
 
       def formatted_stat_value
-        { **stat_value, value: stat_value[:value].to_i }
+        { **stat_value, value: sanitized_stat_value }
       end
 
       def classname
         generate_classname("pb_dashboard_value_kit", align)
       end
+
+      # rubocop:disable Lint/FloatComparison
+      # Comparing the value coerced to a float versus an integer is the point of this methodd
+      def sanitized_stat_value
+        value = stat_value[:value]
+        if value.is_a?(::String)
+          value.to_f == value.to_i ? value.to_i : value.to_f
+        else
+          value
+        end
+      end
+      # rubocop:enable Lint/FloatComparison
     end
   end
 end

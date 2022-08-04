@@ -1,20 +1,18 @@
-FROM phusion/passenger-customizable:1.0.19
-ARG precompileassets
+FROM phusion/passenger-customizable:1.0.19 AS base
 
 RUN mv /etc/apt/sources.list.d /etc/apt/sources.list.d.bak && \
     apt update && apt install -y ca-certificates && \
     mv /etc/apt/sources.list.d.bak /etc/apt/sources.list.d
 
-RUN bash -lc 'rvm remove all --force && rvm install ruby-2.7.4 && rvm --default use ruby-2.7.4 && gem install bundler -v 2.2.31'
+RUN bash -lc 'rvm remove all --force && rvm install ruby-3.1.2 && rvm --default use ruby-3.1.2 && gem install bundler -v 2.2.31'
 RUN /pd_build/ruby_support/install_ruby_utils.sh
 RUN /pd_build/ruby_support/finalize.sh
 
-
 ENV NODE_OPTIONS "--max_old_space_size=8192"
 ENV NVM_VERSION v0.33.8
-ENV NODE_VERSION v12.20.1
+ENV NODE_VERSION v14.18.1
 ENV NPM_VERSION 6.14.10
-ENV YARN_VERSION 1.22.10
+ENV YARN_VERSION 1.22.15
 ENV NVM_DIR /home/app/.nvm
 ENV PATH $NVM_DIR/versions/node/$NODE_VERSION/bin:$PATH
 RUN curl -o- https://raw.githubusercontent.com/creationix/nvm/$NVM_VERSION/install.sh | bash \
@@ -49,4 +47,7 @@ RUN cd playbook-website && bundle install --frozen
 RUN chmod +x playbook-website/services/*.sh
 RUN mkdir /etc/service/puma && ln -s /home/app/src/playbook-website/services/puma.sh /etc/service/puma/run
 
-RUN if [ "${precompileassets}" = "disable" ]; then echo "Pre-compilation disabled"; else yarn release-all; fi
+FROM base AS prod
+
+RUN (cd playbook; yarn release)
+RUN (cd playbook-website; yarn release)
