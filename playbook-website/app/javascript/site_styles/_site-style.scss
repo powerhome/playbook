@@ -10,6 +10,7 @@ $nav_breakpoint: breakpoint("lg");
 body {
   overflow-x: hidden;
   position: relative;
+  &.visual_guidelines,
   &.kits {
     overflow-y: hidden;
   }
@@ -84,7 +85,7 @@ body {
     }
     &--main {
       flex-grow: 1;
-      padding: 40px 60px;
+      padding: 0 60px 40px;
       height: calc(100vh - 89px);
       overflow: auto;
       @include break_at($nav_breakpoint) {
@@ -95,6 +96,12 @@ body {
       }
       &.height-override {
         height: auto;
+      }
+      &.padding-override {
+        padding: 0;
+      }
+      &.smooth-scroll {
+        scroll-behavior: smooth;
       }
     }
   }

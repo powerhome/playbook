@@ -20,6 +20,7 @@ type TableProps = {
   responsive: "collapse" | "scroll" | "none",
   singleLine: boolean,
   size: "sm" | "md" | "lg",
+  sticky?: boolean,
 }
 
 const Table = (props: TableProps) => {
@@ -37,6 +38,7 @@ const Table = (props: TableProps) => {
     responsive = 'collapse',
     singleLine = false,
     size = 'sm',
+    sticky = false,
   } = props
 
   const ariaProps = buildAriaProps(aria)
@@ -60,6 +62,7 @@ const Table = (props: TableProps) => {
           'data_table': dataTable,
           'single-line': singleLine,
           'no-hover': disableHover,
+          'sticky-header': sticky,
         },
         globalProps(props),
         tableCollapseCss,

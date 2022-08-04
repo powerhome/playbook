@@ -78,7 +78,7 @@ See [docs/upgrade-guide](./upgrade-guide)
 We are currently backfilling test cases for React kit test coverage using Jest and React Testing Library. More additions and enhancements
 to the testing libraries are currently in the works. In the meantime, please take a look at these resources:
 
-- https://github.com/testing-library/jest-dom#usage for useage and examples
+- https://github.com/testing-library/jest-dom#usage for usage and examples
 - https://jestjs.io/docs/en/using-matchers
 
 When a new kit is generated, a placeholder React kit test will also be created. You can run all the tests with `yarn test`.
@@ -86,3 +86,5 @@ When a new kit is generated, a placeholder React kit test will also be created. 
 ### Important Note
 
 Keep in mind: Styles are brought in from playbook through the rails gem, so you will not be able to test scss updates with yarn linking.
+
+The gem & npm package is available as open source under the terms of the [ISC License](https://opensource.org/licenses/ISC).

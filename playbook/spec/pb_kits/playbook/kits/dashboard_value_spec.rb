@@ -20,6 +20,28 @@ RSpec.describe Playbook::PbDashboardValue::DashboardValue do
       .of_type(Playbook::Props::Hash)
   }
 
+  describe "#sanitized_stat_value", :aggregate_failures do
+    it "returns integers when fed integers" do
+      expect(subject.new(stat_value: { value: 142 }).sanitized_stat_value).to eq 142
+      expect(subject.new(stat_value: { value: 563 }).sanitized_stat_value).to eq 563
+    end
+
+    it "returns decimals when fed decimals" do
+      expect(subject.new(stat_value: { value: 14.2 }).sanitized_stat_value).to eq 14.2
+      expect(subject.new(stat_value: { value: 67.01 }).sanitized_stat_value).to eq 67.01
+    end
+
+    it "returns an integer if fed a String that contains a number is divisible by 1" do
+      expect(subject.new(stat_value: { value: "142" }).sanitized_stat_value).to eq 142
+      expect(subject.new(stat_value: { value: "563.0" }).sanitized_stat_value).to eq 563
+    end
+
+    it "returns a decimal if fed a String that contains a number that is not divisible by 1" do
+      expect(subject.new(stat_value: { value: "14.2" }).sanitized_stat_value).to eq 14.2
+      expect(subject.new(stat_value: { value: "67.01" }).sanitized_stat_value).to eq 67.01
+    end
+  end
+
   describe "#classname" do
     it "returns namespaced class name", :aggregate_failures do
       expect(subject.new({}).classname).to eq "pb_dashboard_value_kit_left"

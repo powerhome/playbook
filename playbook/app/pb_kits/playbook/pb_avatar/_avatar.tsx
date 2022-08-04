@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import classnames from 'classnames'
 
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
-import { globalProps } from '../utilities/globalProps'
+import { globalProps, GlobalProps } from '../utilities/globalProps'
 
 import Image from '../pb_image/_image'
 import OnlineStatus from '../pb_online_status/_online_status'
@@ -17,15 +17,15 @@ type AvatarProps = {
   imageUrl: string,
   name: string,
   size?: "md" | "lg" | "sm" | "xl" | "xs" | "xxs",
-  status: "away" | "offline" | "online",
-}
+  status?: "away" | "offline" | "online",
+} & GlobalProps
 
 const firstTwoInitials = (name: string) =>
   name.split(/\s/).map((name) => name[0])
     .join('')
     .substring(0, 2)
 
-const Avatar = (props: AvatarProps) => {
+const Avatar = (props: AvatarProps): React.ReactElement => {
   const {
     aria = {},
     className,

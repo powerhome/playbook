@@ -1,3 +1,7 @@
 <Body justifySelf="start">
   Body content
 <Body/>
+
+<Body justifySelf={{xs: "start", md: "center", xl: "baseline"}}>
+  Body content
+<Body/>

@@ -17,6 +17,6 @@ export const runAxe = function(include = '.pb--kit-example', ignore = ['.pb--kit
       }
     })
     .catch((err) => {
-      console.error('Something bad happened:', err.message)
+      console.info('Accessibility Check:', err.message)
     })
 }

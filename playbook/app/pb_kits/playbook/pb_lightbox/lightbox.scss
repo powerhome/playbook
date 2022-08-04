@@ -1,0 +1,222 @@
+@import "../tokens/spacing";
+@import "../tokens/screen_sizes";
+
+$slides-margin: $space-md;
+
+.carousel {
+  .home-tour-main-content {
+    overflow-y: hidden;
+  }
+
+  .image-gallery-slide-wrapper {
+    width: 1024px;
+    height: 686px;
+  }
+
+  .image-gallery-slide div {
+    height: auto;
+  }
+
+  .image-gallery-slide .image-gallery-image {
+    max-height: 100% !important;
+    max-width: 100% !important;
+    height: 692px !important;
+    width: 100% !important;
+    object-fit: cover;
+  }
+
+  .image-gallery-left-nav .image-gallery-svg, .image-gallery-right-nav .image-gallery-svg {
+    height: 120px;
+    width: 30px;
+    opacity: 0.4;
+  }
+  .image-gallery-thumbnails {
+    overflow-x: auto;
+  }
+
+  .image-gallery-thumbnails-container {
+    width: 1024px;
+    padding-left: 4px;
+  }
+
+  .image-gallery-thumbnails {
+    padding-top: 3px;
+    background: #000;
+  }
+
+  .image-gallery-thumbnail-image {
+    height: 64px;
+    width: 93px;
+  }
+
+  .image-gallery-thumbnail + .image-gallery-thumbnail {
+    margin-left: 2px;
+    margin-top: 2px;
+  }
+
+  .carousel-header {
+    background: rgb(0, 0, 0);
+    border-radius: 0px;
+    min-height: 51px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 9999999;
+    align-items: center;
+    transition: all .5s;
+
+    .close-icon {
+      color: white;
+    }
+  }
+}
+
+.photo-cards {
+  .overlay {
+    width: 100% !important;
+    height: 50% !important;
+    bottom: 0;
+    position: absolute !important;
+    border-radius: 0px 0px 5px 5px;
+    background: linear-gradient(-180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.77) 100%);
+  }
+
+  .overlay,
+  .overlay ~ .key-photo-icon,
+  .overlay ~ .tag-counter {
+    pointer-events: none;
+  }
+}
+
+
+.Lightbox {
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  left: 0;
+  top: 0;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  background-color: black;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.Slides {
+  display: flex;
+  height: calc(100% - 120px);
+  width: 100%;
+  z-index: 1;
+
+  [class^="react-transform-wrapper"] {
+    flex-shrink: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  [class^="react-transform-content"] {
+    width: 100%;
+    height: 100%;
+  }
+
+  [class^="react-transform-component"] {
+    width: 100%;
+    height: 100%;
+    img {
+      height: 100%;
+    }
+  }
+
+}
+
+.Slide,
+.Thumbnail {
+  flex-shrink: 0;
+  border: none;
+  margin: 0;
+  padding: 0;
+  cursor: pointer;
+  background-color: transparent;
+}
+
+.Slide {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+
+  @media only screen and (max-width: $screen-xs-max) {
+    margin-top: 30px;
+  }
+
+  img {
+    width: 100vw;
+    height: 100vh;
+    object-fit: contain;
+  }
+}
+
+.BackBtn,
+.NextBtn {
+  z-index: 2;
+  color: black;
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  top: calc(50vh - 5px);
+  border: none;
+  border-radius: 50%;
+  background-color: white;
+}
+
+.BackBtn::before,
+.NextBtn::before {
+  content: "▸";
+}
+
+.BackBtn {
+  left: 30px;
+  transform: rotate(180deg);
+}
+
+.NextBtn {
+  right: 30px;
+}
+
+.Thumbnails {
+  display: flex;
+  padding: 3px;
+  overflow: auto;
+  position: absolute;
+  z-index: 1;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  &.centered {
+    justify-content: center;
+  }
+}
+
+.Thumbnails.draggable {
+  align-self: flex-start;
+}
+
+.Thumbnail {
+  padding: 3px;
+  height: 100%;
+
+  img {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.Thumbnail.active {
+  padding: 6px;
+  background-color: white;
+  box-shadow: 0 0 6px white;
+}

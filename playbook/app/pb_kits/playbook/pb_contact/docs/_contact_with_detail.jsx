@@ -27,6 +27,12 @@ const ContactDefault = (props) => {
           contactValue="3245627482"
           {...props}
       />
+      <Contact
+          contactDetail="Ext"
+          contactType='extension'
+          contactValue="1234"
+          {...props}
+      />
     </div>
   )
 }

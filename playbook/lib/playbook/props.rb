@@ -24,7 +24,7 @@ module Playbook
     extend ActiveSupport::Concern
 
     attr_accessor :values
-    private :values, :values=
+    private :values=
 
     def initialize(prop_values = {}, &block)
       self.values = { children: block }.merge(Hash(prop_values))
@@ -48,7 +48,7 @@ module Playbook
       end
 
       def prop(name, type: Playbook::Props::String, **options)
-        self.props = props.merge(name => type.new(options.merge(name: name, kit: self)))
+        self.props = props.merge(name => type.new(**options.merge(name: name, kit: self)))
 
         define_method(name) { prop(name) }
       end
