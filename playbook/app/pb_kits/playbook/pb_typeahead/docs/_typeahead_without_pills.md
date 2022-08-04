@@ -1,1 +1,1 @@
-By passing `is_multi: false` to the with pills kit, this will allow the user to only select one option from the drop down.
+Passing `is_multi: false` will allow the user to only select one option from the drop down. Note: this will disable `pills` prop.
