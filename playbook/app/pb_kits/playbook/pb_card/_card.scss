@@ -1,6 +1,5 @@
 @import "card_mixin";
 
-
 [class^=pb_card_kit] {
   @include pb_card;
 
@@ -30,6 +29,9 @@
     @each $color_name, $color_value in $pb_card_header_colors {
       &[class*=_#{$color_name}] {
         @include pb_card_header_color($color_value);
+        [class^=pb_body_kit] {
+          color: lightenText($color_value);
+        }
       }
     }
     &[class*=_white] {

@@ -20,6 +20,7 @@ kits:
     - gauge
     - legend
     - line_graph
+    - treemap_chart
   - dialog
   - filter
   - fixed_confirmation_toast
@@ -51,6 +52,7 @@ kits:
   - layouts:
     - flex
     - layout
+  - lightbox
   - list
   - loading_inline
   - nav
@@ -102,3 +104,16 @@ kits:
     - title_detail
   - user_badge
   - walkthrough
+visual_guidelines:
+  - colors
+  - max_width
+  - number_spacing
+  - positioning
+  - line_height
+  - spacing
+  - border_radius
+  - typography
+  - shadows
+  - display
+  - cursor
+  - flex_box

@@ -1,19 +1,8 @@
-.flex_direction_row {
-  display: flex;
-  flex-direction: row !important;
-}
+$flex_direction_values: (
+  row: row,
+  column: column,
+  row_reverse: row-reverse,
+  column_reverse: column-reverse
+);
 
-.flex_direction_column {
-  display: flex;
-  flex-direction: column !important;
-}
-
-.flex_direction_row_reverse {
-  display: flex;
-  flex-direction: row-reverse !important;
-}
-
-.flex_direction_column_reverse {
-  display: flex;
-  flex-direction: column-reverse !important;
-}
+@include global_props_responsive_css($flex_direction_values, 'flex_direction', 'flex-direction');

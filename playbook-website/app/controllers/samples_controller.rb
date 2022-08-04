@@ -5,6 +5,7 @@ require "yaml"
 require_relative "application_controller"
 
 class SamplesController < ApplicationController
+  before_action :set_js
   before_action :set_sample, only: :show
   before_action :delete_dark_mode_cookie
 
@@ -22,10 +23,16 @@ private
   helper_method :current_sample_type
 
   def set_sample
+    @application_js.concat ["sample-show"]
+
     if SAMPLES.flatten(2).include?(params[:name])
       @sample = params[:name]
     else
       redirect_to "/samples", flash: { error: "That sample does not exist" }
     end
+  end
+
+  def set_js
+    @application_js.concat ["samples"]
   end
 end

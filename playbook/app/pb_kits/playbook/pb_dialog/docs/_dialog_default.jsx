@@ -11,7 +11,7 @@ const DialogDefault = () => {
     <>
       <Button onClick={open}>{'Open Dialog'}</Button>
       <Dialog
-          cancelButton="Cancel"
+          cancelButton="Cancel Button"
           className="wrapper"
           confirmButton="Okay"
           loading={isLoading}
