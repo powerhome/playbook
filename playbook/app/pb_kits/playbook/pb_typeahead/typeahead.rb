@@ -49,7 +49,11 @@ module Playbook
         )
       end
 
-      def typeahead_with_pills_options
+      def is_react?
+        pills || !is_multi
+      end
+
+      def typeahead_react_options
         base_options = {
           dark: dark,
           defaultValue: default_options,
