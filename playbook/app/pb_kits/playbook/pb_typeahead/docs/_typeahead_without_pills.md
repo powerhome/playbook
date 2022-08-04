@@ -1,0 +1,1 @@
+By passing `is_multi: false` to the with pills kit, this will allow the user to only select one option from the drop down.
