@@ -1,6 +1,7 @@
-import React, { useRef } from "react";
+/* @flow*/
+
+import React, { useRef, useState } from "react";
 import classnames from 'classnames'
-import { useState } from "react";
 import {
   Placement,
   offset,
@@ -18,14 +19,14 @@ type TooltipProps = {
   text: string;
   placement?: Placement;
   children: JSX.Element;
-  zIndex: Pick<GlobalProps, 'ZIndex'>;
+  zIndex?: Pick<GlobalProps, 'ZIndex'>;
 } & GlobalProps;
 
 const Tooltip = (props: TooltipProps) => {
   const {
     children,
     text,
-    placement = 'top',
+    placement: preferredPlacement = "top",
     zIndex,
     ...rest
   } = props
@@ -44,9 +45,10 @@ const Tooltip = (props: TooltipProps) => {
       floating, 
       strategy, 
       context,
+      placement,
       middlewareData: { arrow: { x: arrowX, y: arrowY } = {} }
     } = useFloating({
-      placement,
+      placement: preferredPlacement,
       open,
       onOpenChange(open) {
         setOpen(open);
@@ -58,8 +60,8 @@ const Tooltip = (props: TooltipProps) => {
       offset(10),
       shift(),
       flip({
-        fallbackPlacements: ['right', 'top', 'left'],
-        fallbackStrategy: 'initialPlacement',
+        fallbackPlacements: ["top", "right", "bottom", "left"],
+        fallbackStrategy: "initialPlacement",
         flipAlignment: false
       }),
       arrow({ 
@@ -84,7 +86,7 @@ const Tooltip = (props: TooltipProps) => {
       <div 
         ref={reference} 
         className={`pb_tooltip_kit ${css}`} 
-        style={{ display: "inline-flex" }}
+        style={{ display: 'inline-flex' }}
         >
         {children}
       </div>
@@ -92,23 +94,25 @@ const Tooltip = (props: TooltipProps) => {
         <div
           {...getFloatingProps({
             ref: floating,
-            className: "tooltip_tooltip show",
+            className: `tooltip_tooltip ${placement} show`,
             style: {
               position: strategy,
               top: y ?? 0,
               left: x ?? 0,
               zIndex: zIndex ?? 0,
+              background: "white"
             }
           })}
         >
           {text}
           <div
             ref={arrowRef}
+            className= ''
             style={{
-              position: 'absolute',
+              position: strategy,
               width: '10px',
               height: '10px',
-              background: '#fff',
+              background: 'white',
               left: arrowX != null ? `${arrowX}px` : '',
               top: arrowY != null ? `${arrowY}px` : '',
               [staticSide]: '-5px',

@@ -1,81 +1,56 @@
 // @flow
 
 import React from 'react'
-import { Button, Flex, Tooltip } from '../..';
+import { Tooltip, Flex, FlexItem } from '../..';
 
 const TooltipDefault = () => {
 
   return (
-   <>
-     <Flex orientation="row">
+   <Flex 
+       alignItems='center'
+       flexDirection='column' 
+    >
+    <FlexItem>
       <Tooltip 
-          margin='md' 
+          marginTop='md' 
           placement='top' 
-          text='text goes here' 
+          text="Whoa. I'm a Tooltip" 
           zIndex={10}
       >
-        <Button text='hover me' />
+        {'Hover here (Top)'}
       </Tooltip>
-      <Tooltip 
-          margin='md'
-          placement='bottom' 
-          text='text goes here' 
-          zIndex={10}
-      >
-        <Button text='hover me' />
-      </Tooltip>
-      <Tooltip 
-          margin='md'
-          placement='right'
-          text='text goes here' 
-          zIndex={10}
-      >
-        <Button text='hover me' />
-      </Tooltip>
-      <Tooltip 
-          margin='md' 
-          placement='left' 
-          text='text goes here' 
-          zIndex={10}
-      >
-        <Button text='hover me' />
-      </Tooltip>
-    </Flex>
-    <Flex orientation="column">
-      <Tooltip 
-          margin='md'
-          placement='top' 
-          text='text goes here' 
-          zIndex={10}
-      >
-        {'Hover here (top)'}
-      </Tooltip>
-      <Tooltip 
-          margin='md' 
-          placement='bottom' 
-          text='text goes here' 
-          zIndex={10}
+    </FlexItem>
+    <FlexItem>
+     <Tooltip 
+         marginTop='md' 
+         placement='bottom' 
+         text="Whoa. I'm a Tooltip" 
+         zIndex={10}
       >
         {'Hover here (bottom)'}
       </Tooltip>
+    </FlexItem>
+    <FlexItem>
       <Tooltip 
-          margin='md' 
+          marginTop='md' 
           placement='right' 
-          text='text goes here' 
+          text="Whoa. I'm a Tooltip" 
           zIndex={10}
       >
-        {'Hover here (right)'}
+        {'Hover here (Right)'}
       </Tooltip>
+    </FlexItem>
+    <FlexItem>
       <Tooltip 
-          margin='md' 
+          marginTop='md' 
           placement='left' 
-          text='text goes here' 
+          text="Whoa. I'm a Tooltip" 
           zIndex={10}
       >
-        {'Hover here (left)'}
+        {'Hover here (Left)'}
       </Tooltip>
-    </Flex>
-   </>
+    </FlexItem>
+   </Flex>
   )
 }
 

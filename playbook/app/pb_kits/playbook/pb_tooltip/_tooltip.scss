@@ -53,6 +53,7 @@ $tooltip_shadow: rgba(60, 106, 172, 0.18);
       border-width: 10px;
       margin-bottom: 50px;
     }
+
     &.show {
       opacity: 1;
       z-index: $z_9;
@@ -61,12 +62,21 @@ $tooltip_shadow: rgba(60, 106, 172, 0.18);
       padding: $space_xs $space_sm;
       box-shadow: $shadow_deeper;
       border-radius: $border_rad_light;
-
       &.fade_out {
         animation-name: fadeOut;
         animation-duration: 150ms;
         animation-timing-function: linear;
         animation-fill-mode: forwards;
+      }
+      // Changes the box-shadow in react according to the tooltip's placement
+      &.right {
+        box-shadow: -8px 0 28px 0 $tooltip_shadow;
+      }
+      &.bottom {
+        box-shadow: 0 -12px 28px 0 $tooltip_shadow;
+      }
+      &.left {
+        box-shadow: 8px 0 28px 0 $tooltip_shadow;
       }
     }
   }
