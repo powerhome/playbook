@@ -17,7 +17,7 @@ type AvatarProps = {
   imageUrl: string,
   name: string,
   size?: "md" | "lg" | "sm" | "xl" | "xs" | "xxs",
-  status: "away" | "offline" | "online",
+  status?: "away" | "offline" | "online",
 } & GlobalProps
 
 const firstTwoInitials = (name: string) =>
