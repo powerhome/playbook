@@ -1,5 +1,5 @@
 import React from 'react'
-import BreadCrumbs from '../_bread_crumbs.jsx'
+import BreadCrumbs from '../_bread_crumbs'
 import { Icon, Title } from '../../'
 import BreadCrumbItem from '../_bread_crumb_item'
 
