@@ -1,26 +1,24 @@
-/* @flow */
-
 import React from 'react'
 import classnames from 'classnames'
 import { globalProps } from '../utilities/globalProps'
 
 type DistributionBarProps = {
   className?: string,
-  colors: array,
+  colors: [],
   data?: string,
   id?: string,
   size?: "lg" | "sm",
-  widths?: array<number>,
+  widths?: number[],
 }
 
-const normalizeCharacters = (widths) => {
+const normalizeCharacters = (widths:  number[]) => {
   return widths.map((width) => {
     return parseInt(width.toString().replace(/[^0-9.]/gi, ''))
   })
 }
 
-const barValues = (normalizedValues, colors) => {
-  const arrSum = (value) => value.reduce((a, b) => a + b, 0)
+const barValues = (normalizedValues: number[], colors: []) => {
+  const arrSum = (value: number[]) => value.reduce((a, b) => a + b, 0)
   const widthSum = arrSum(normalizedValues)
   return normalizedValues.map((value, i) => {
     return (
