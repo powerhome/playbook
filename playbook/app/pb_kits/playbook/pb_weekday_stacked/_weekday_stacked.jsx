@@ -8,7 +8,7 @@ import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
 import Caption from '../pb_caption/_caption'
 import Title from '../pb_title/_title'
 
-import DateTime from '../pb_kit/dateTime.js'
+import DateTime from '../pb_kit/dateTime'
 
 type WeekdayStackedProps = {
   align?: "left" | "center" | "right",
