@@ -19,14 +19,12 @@ module Playbook
       prop :tabindex
 
       def list_classname
-        [
-          "pb_list_kit",
-          xpadding_class,
-          borderless_class,
-          dark_class,
-          size_class,
-          layout_class,
-        ].compact.join("_")
+        generate_classname("pb_list_kit",
+                           xpadding_class,
+                           borderless_class,
+                           dark_class,
+                           size_class,
+                           layout_class)
       end
 
       def ordered_class
