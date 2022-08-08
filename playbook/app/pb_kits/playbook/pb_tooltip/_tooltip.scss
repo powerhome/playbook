@@ -54,6 +54,14 @@ $tooltip_shadow: rgba(60, 106, 172, 0.18);
       margin-bottom: 50px;
     }
 
+    // react arrow
+    .arrow_bg {
+      width: 10px;
+      height: 10px;
+      background-color: $white;
+      transform: rotate(45deg);
+    }
+
     &.show {
       opacity: 1;
       z-index: $z_9;
@@ -80,13 +88,19 @@ $tooltip_shadow: rgba(60, 106, 172, 0.18);
       }
     }
   }
+  &.dark,
   &[class*=_dark]{
+    ~.tooltip_tooltip,
     .tooltip_tooltip{
       color: $white;
       background-color: rgba($black, $opacity_9);
       .arrow {
         border-color: $black transparent transparent transparent;
         opacity: $opacity_9;
+      }
+      // react arrow
+      .arrow_bg {
+        background-color: rgba($black, $opacity_9);
       }
       &.flipped {
         .arrow {

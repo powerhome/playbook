@@ -100,23 +100,18 @@ const Tooltip = (props: TooltipProps) => {
               top: y ?? 0,
               left: x ?? 0,
               zIndex: zIndex ?? 0,
-              background: "white"
             }
           })}
         >
           {text}
           <div
             ref={arrowRef}
-            className= ''
+            className='arrow_bg'
             style={{
               position: strategy,
-              width: '10px',
-              height: '10px',
-              background: 'white',
               left: arrowX != null ? `${arrowX}px` : '',
               top: arrowY != null ? `${arrowY}px` : '',
               [staticSide]: '-5px',
-              transform: 'rotate(45deg)',
             }}
           />
         </div>

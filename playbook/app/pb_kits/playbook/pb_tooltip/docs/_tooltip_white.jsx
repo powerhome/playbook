@@ -3,7 +3,7 @@
 import React from 'react'
 import { Tooltip } from '../..';
 
-const TooltipWhite = () => {
+const TooltipWhite = (props) => {
 
   return (
    <>
@@ -11,6 +11,7 @@ const TooltipWhite = () => {
           placement="top" 
           text="Whoa. I'm a white tooltip" 
           zIndex={10}
+          {...props}
       >
         {"I am a white tooltip."}
       </Tooltip>

@@ -3,7 +3,7 @@
 import React from 'react'
 import { Tooltip, Flex, FlexItem } from '../..';
 
-const TooltipDefault = () => {
+const TooltipDefault = (props) => {
 
   return (
    <Flex 
@@ -16,6 +16,7 @@ const TooltipDefault = () => {
           placement='top' 
           text="Whoa. I'm a Tooltip" 
           zIndex={10}
+          {...props}
       >
         {'Hover here (Top)'}
       </Tooltip>
@@ -26,6 +27,7 @@ const TooltipDefault = () => {
          placement='bottom' 
          text="Whoa. I'm a Tooltip" 
          zIndex={10}
+         {...props}
       >
         {'Hover here (bottom)'}
       </Tooltip>
@@ -36,6 +38,7 @@ const TooltipDefault = () => {
           placement='right' 
           text="Whoa. I'm a Tooltip" 
           zIndex={10}
+          {...props}
       >
         {'Hover here (Right)'}
       </Tooltip>
@@ -46,6 +49,7 @@ const TooltipDefault = () => {
           placement='left' 
           text="Whoa. I'm a Tooltip" 
           zIndex={10}
+          {...props}
       >
         {'Hover here (Left)'}
       </Tooltip>
