@@ -22,7 +22,7 @@ type AlignItems = {
 type AlignSelf = {
   alignSelf?: Alignment & ("auto" | "stretch" | "baseline")
 }
-type AllSizes = None & Sizes
+type AllSizes = None | Sizes
 
 type BorderRadius = {
   borderRadius?: "none" | "xs" | "sm" | "md" | "lg" | "xl" | "rounded",
