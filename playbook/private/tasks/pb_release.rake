@@ -26,7 +26,7 @@ namespace :pb_release do
     if new_version.scan(".").count > 3
       $stdout.puts "Looks like you are creating an alpha. Is this true? Y/N"
       alpha = $stdin.gets.chomp.downcase == "y"
-      if !alpha
+      unless alpha
         $stdout.puts "Something looks wrong here, cancelling. Please re-check your version number and try again."
         exit
       end

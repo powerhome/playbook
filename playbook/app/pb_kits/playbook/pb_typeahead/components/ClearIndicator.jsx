@@ -7,7 +7,7 @@ const ClearContainer = (props: any) => {
   const { selectProps, clearValue } = props
   useEffect(() => {
     document.addEventListener(`pb-typeahead-kit-${selectProps.id}:clear`, clearValue)
-  }, [clearValue, selectProps])
+  }, true)
 
   return (
     <components.ClearIndicator

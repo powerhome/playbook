@@ -25,11 +25,7 @@
     "lib": "dist"
   },
   "files": [
-    "dist/playbook-rails.js",
-    "dist/playbook.css",
-    "dist/playbook.js",
-    "dist/reset.css",
-    "tokens/*",
+    "dist/*",
     "fonts/*"
   ],
   "bugs": {
