@@ -10,9 +10,9 @@ RUN /pd_build/ruby_support/finalize.sh
 
 ENV NODE_OPTIONS "--max_old_space_size=8192"
 ENV NVM_VERSION v0.33.8
-ENV NODE_VERSION v12.20.1
+ENV NODE_VERSION v14.18.1
 ENV NPM_VERSION 6.14.10
-ENV YARN_VERSION 1.22.10
+ENV YARN_VERSION 1.22.15
 ENV NVM_DIR /home/app/.nvm
 ENV PATH $NVM_DIR/versions/node/$NODE_VERSION/bin:$PATH
 RUN curl -o- https://raw.githubusercontent.com/creationix/nvm/$NVM_VERSION/install.sh | bash \
@@ -49,4 +49,5 @@ RUN mkdir /etc/service/puma && ln -s /home/app/src/playbook-website/services/pum
 
 FROM base AS prod
 
-RUN yarn release-all
+RUN (cd playbook; yarn release)
+RUN (cd playbook-website; yarn release)
