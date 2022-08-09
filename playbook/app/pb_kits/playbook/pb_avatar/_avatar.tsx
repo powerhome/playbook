@@ -7,6 +7,7 @@ import { globalProps, GlobalProps } from '../utilities/globalProps'
 import Image from '../pb_image/_image'
 import OnlineStatus from '../pb_online_status/_online_status'
 
+
 type AvatarProps = {
   aria?: {[key: string]: string},
   className?: string,
