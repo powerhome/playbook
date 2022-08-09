@@ -14,8 +14,11 @@ import {
   useDelayGroupContext,
 } from "@floating-ui/react-dom-interactions";
 import { GlobalProps, globalProps } from '../utilities/globalProps'
+import { buildAriaProps, buildDataProps } from "../utilities/props";
 
 type TooltipProps = {
+  aria?: {[key: string]: string},
+  data?: {[key: string]: string},
   text: string;
   placement?: Placement;
   children: JSX.Element;
@@ -24,13 +27,18 @@ type TooltipProps = {
 
 const Tooltip = (props: TooltipProps) => {
   const {
+    aria = {},
     children,
+    data = {},
     text,
     placement: preferredPlacement = "top",
     zIndex,
     ...rest
   } = props
 
+  const dataProps: {[key: string]: any} = buildDataProps(data)
+  const ariaProps: {[key: string]: any} = buildAriaProps(aria)
+  
   const css = classnames(
     globalProps(rest),
   )
@@ -87,12 +95,15 @@ const Tooltip = (props: TooltipProps) => {
         ref={reference} 
         className={`pb_tooltip_kit ${css}`} 
         style={{ display: 'inline-flex' }}
+        {...ariaProps}
+        {...dataProps}
         >
         {children}
       </div>
       {open && (
         <div
           {...getFloatingProps({
+            role: 'tooltip',
             ref: floating,
             className: `tooltip_tooltip ${placement} show`,
             style: {
