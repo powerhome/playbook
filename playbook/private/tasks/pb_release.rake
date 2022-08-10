@@ -1,5 +1,4 @@
 # frozen_string_literal: true
-require 'optparse'
 
 namespace :pb_release do
   desc "Update the version number in preparation to release"
@@ -62,11 +61,9 @@ namespace :pb_release do
     puts "\n\n"
 
     if alpha || dryrun
-      $stdout.puts "Not creating github tag for #{alpha ? "alpha release" : "dry run"}."
+      $stdout.puts "Not creating github tag for #{alpha ? 'alpha release' : 'dry run'}."
       exit
     end
-
-    exit
 
     puts "\nLets create a tag..."
     puts "\nWrite a brief tag release description. You can edit this later on GitHub."
@@ -81,29 +78,43 @@ namespace :pb_release do
 
   desc "Publish to RubyGems & NPM"
   task :push do
+    dryrun = ARGV.include? "-d"
+    puts "Dry run only!!!" if dryrun
+
     version = Playbook::VERSION
     npm_version = version.scan(".").count > 3 ? version.gsub(".pre", "").gsub(".alpha", "-alpha") : version
     puts "You about to release version #{version} | #{npm_version} (NPM). Is that correct? (y/N)"
     input = $stdin.gets.chomp
     raise Nope unless input.casecmp("y").zero?
 
-    # NPM
+    # NPM Packaging
     puts "\nGenerating distribution files"
     `yarn release`
     puts "\nCreating NPM package..."
     `npm pack`
-    puts "\nPublishing to NPM..."
-    `npm publish playbook-ui-#{npm_version}.tgz`
-    puts "\nPublished to NPM. Now lets clean up..."
-    `rm -rf playbook-ui-*.tgz`
+    # Publish to NPM
+    unless dryrun
+      puts "\nPublishing to NPM..."
+      `npm publish playbook-ui-#{npm_version}.tgz`
+      puts "\nPublished to NPM. Now lets clean up..."
+      `rm -rf playbook-ui-*.tgz`
+    end
 
     # RubyGems
     puts "\nCreating Gem..."
     `gem build playbook_ui.gemspec`
-    puts "\nPushing to RubyGems..."
-    `gem push playbook_ui-#{version}.gem`
-    puts "\nPushed to RubyGems. Now lets clean up..."
-    `rm -rf playbook_ui-*.gem`
+    # Publish to RubyGems
+    unless dryrun
+      puts "\nPushing to RubyGems..."
+      `gem push playbook_ui-#{version}.gem`
+      puts "\nPushed to RubyGems. Now lets clean up..."
+      `rm -rf playbook_ui-*.gem`
+    end
+
+    if dryrun
+      puts "Dry run complete. Nothing was published to NPM or RubyGems."
+      exit
+    end
 
     # Tags
     puts "\nPushed to NPM."
