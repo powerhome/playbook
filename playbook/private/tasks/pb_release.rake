@@ -1,8 +1,12 @@
 # frozen_string_literal: true
+require 'optparse'
 
 namespace :pb_release do
   desc "Update the version number in preparation to release"
   task :version do
+    dryrun = ARGV.include? "-d"
+    puts "Dry run only!!!" if dryrun
+
     puts "\n"
     puts "*" * 20
     puts " Create New Playbook Release "
@@ -15,7 +19,7 @@ namespace :pb_release do
     $stdout.puts ack
     agreed = $stdin.gets.chomp.downcase
 
-    return if agreed != "y"
+    exit if agreed != "y"
 
     old_version = Playbook::VERSION
     $stdout.puts "What would you like the next release number to be? Currently #{old_version}"
@@ -57,10 +61,12 @@ namespace :pb_release do
     puts "Updated Gemfile.lock"
     puts "\n\n"
 
-    if alpha
-      $stdout.puts "Not creating github tag for alpha release."
+    if alpha || dryrun
+      $stdout.puts "Not creating github tag for #{alpha ? "alpha release" : "dry run"}."
       exit
     end
+
+    exit
 
     puts "\nLets create a tag..."
     puts "\nWrite a brief tag release description. You can edit this later on GitHub."
