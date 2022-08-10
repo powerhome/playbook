@@ -1,3 +1,4 @@
-export { default as TooltipDefault } from './_tooltip_default'
-export { default as TooltipWhite } from './_tooltip_white'
-export { default as TooltipWithIconCircle } from './_tooltip_with_icon_circle'
+export { default as TooltipDefaultReact } from './_tooltip_default_react'
+export { default as TooltipInteraction } from './_tooltip_interaction'
+export { default as TooltipMargin } from './_tooltip_margin'
+export { default as TooltipIcon } from './_tooltip_icon'

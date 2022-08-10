@@ -3,16 +3,17 @@
 import React from 'react'
 import { Tooltip, Flex, FlexItem } from '../..';
 
-const TooltipDefault = (props) => {
+const TooltipDefaultReact = (props) => {
 
   return (
    <Flex 
-       alignItems='center'
-       flexDirection='column' 
-    >
+       flexDirection='row'
+       gap='md'
+       justifyContent='center'
+       wrap
+   >
     <FlexItem>
       <Tooltip 
-          marginTop='md' 
           placement='top' 
           text="Whoa. I'm a Tooltip" 
           zIndex={10}
@@ -23,18 +24,16 @@ const TooltipDefault = (props) => {
     </FlexItem>
     <FlexItem>
      <Tooltip 
-         marginTop='md' 
          placement='bottom' 
          text="Whoa. I'm a Tooltip" 
          zIndex={10}
          {...props}
-      >
-        {'Hover here (bottom)'}
+     >
+        {'Hover here (Bottom)'}
       </Tooltip>
     </FlexItem>
     <FlexItem>
       <Tooltip 
-          marginTop='md' 
           placement='right' 
           text="Whoa. I'm a Tooltip" 
           zIndex={10}
@@ -45,7 +44,6 @@ const TooltipDefault = (props) => {
     </FlexItem>
     <FlexItem>
       <Tooltip 
-          marginTop='md' 
           placement='left' 
           text="Whoa. I'm a Tooltip" 
           zIndex={10}
@@ -58,4 +56,4 @@ const TooltipDefault = (props) => {
   )
 }
 
-export default TooltipDefault
+export default TooltipDefaultReact
