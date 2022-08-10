@@ -1,5 +1,3 @@
-/* @flow */
-
 import React from 'react'
 import classnames from 'classnames'
 
@@ -10,7 +8,7 @@ import Body from '../pb_body/_body'
 import Caption from '../pb_caption/_caption'
 import Icon from '../pb_icon/_icon'
 
-const contactTypeMap = {
+const contactTypeMap: { [key: string]: string; } = {
   'cell': 'mobile',
   'email': 'envelope',
   'home': 'phone',
@@ -20,14 +18,17 @@ const contactTypeMap = {
   'extension': 'phone-plus',
 }
 
-const formatContact = (contactString, contactType) => {
+const formatContact = (contactString: string, contactType: string) => {
   if (contactType == 'email') return contactString
+
   const cleaned = contactString.replace(/\D/g, '')
+  const phoneNumber = cleaned.match(/^(1|)?(\d{3})(\d{3})(\d{4})$/)
+
   if(contactType == 'extension') {
     return cleaned.match(/^\d{4}$/)
   }
-  if (contactType !== 'email') {
-    const phoneNumber = cleaned.match(/^(1|)?(\d{3})(\d{3})(\d{4})$/)
+
+  if (phoneNumber) {
     const intlCode = phoneNumber[1] ? '+1 ' : ''
     return [
       intlCode,
@@ -39,12 +40,13 @@ const formatContact = (contactString, contactType) => {
       phoneNumber[4],
     ].join('')
   }
+  
   return null
 }
 
 type ContactProps = {
-  aria?: object,
-  className?: string | array<string>,
+  aria?: { [key: string]: string; },
+  className?: string | string[],
   contactDetail?: string,
   contactType?: string,
   contactValue: string,
@@ -85,13 +87,14 @@ const Contact = (props: ContactProps) => {
             icon={contactTypeMap[contactType] || 'phone'}
         />
         {` ${formatContact(contactValue, contactType)} `}
-        <If condition={contactDetail}>
+        {
+          contactDetail &&
           <Caption
               size="xs"
               tag="span"
               text={contactDetail}
           />
-        </If>
+        }
       </Body>
     </div>
   )
