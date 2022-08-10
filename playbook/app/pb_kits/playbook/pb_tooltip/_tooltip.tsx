@@ -11,14 +11,18 @@ import {
   useInteractions,
   useHover,
   flip,
+  safePolygon,
 } from "@floating-ui/react-dom-interactions"
 import { GlobalProps, globalProps } from "../utilities/globalProps"
 import { buildAriaProps, buildDataProps } from "../utilities/props"
+import Flex from "../pb_flex/_flex"
 
 type TooltipProps = {
   aria?: { [key: string]: string },
   data?: { [key: string]: string },
   text: string,
+  icon?: string,
+  interaction?: boolean,
   placement?: Placement,
   children: JSX.Element,
   zIndex?: Pick<GlobalProps, "ZIndex">,
@@ -29,6 +33,8 @@ const Tooltip = (props: TooltipProps) => {
     aria = {},
     children,
     data = {},
+    icon = null,
+    interaction = false,
     text,
     placement: preferredPlacement = "top",
     zIndex,
@@ -71,7 +77,11 @@ const Tooltip = (props: TooltipProps) => {
     ],
   })
 
-  const { getFloatingProps } = useInteractions([useHover(context)])
+  const { getFloatingProps } = useInteractions([
+    useHover(context, {
+      handleClose: interaction ? safePolygon() : null,
+    })
+  ])
 
   const staticSide = {
     top: "bottom",
@@ -106,7 +116,12 @@ const Tooltip = (props: TooltipProps) => {
             },
           })}
         >
-          {text}
+          <Flex gap="xs" align="center">
+            {icon && (
+            <i className={`pb_icon_kit far fa-${icon} fa-fw`} />
+            )}
+            {text}
+          </Flex>
           <div
             ref={arrowRef}
             className="arrow_bg"
