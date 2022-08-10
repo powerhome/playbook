@@ -1,26 +1,50 @@
-import React from "react"
-import { render, screen } from "../utilities/test-utils"
+import React from "react";
+import { cleanup, render, screen, fireEvent } from "../utilities/test-utils";
+import { Button, Tooltip } from "..";
 
-import { Button, Tooltip } from ".."
+function TooltipTest() {
+  const text = "this is a text",
+    placement = "top",
+    triggerText = "hover me",
+    zIndex = "10";
 
-const 
-  text = "this is a text",
-  placement = "top",
-  triggerText = "hover me",
-  zIndex = "10"
-
-test("renders the component", async () => {
-  render(
-    <Tooltip 
+  return (
+    <Tooltip
         data={{ testid: "primary-test" }}
-        placement={placement} 
-        text={text} 
-        zIndex={zIndex}>
-        <Button  
-            text={triggerText} />
+        placement={placement}
+        text={text}
+        zIndex={zIndex}
+    >
+      <Button text={triggerText} />
     </Tooltip>
-  )
-  const kit = screen.getByTestId('primary-test')
-  expect(kit).toBeInTheDocument()
-  expect(kit).toHaveClass('pb_tooltip_kit')
+  );
+}
+
+test("renders the component", () => {
+  render(<TooltipTest />);
+
+  const kit = screen.getByTestId("primary-test");
+  expect(kit).toBeInTheDocument();
+  expect(kit).toHaveClass("pb_tooltip_kit");
+
+  cleanup();
+});
+
+test("opens on mouseenter", () => {
+  render(<TooltipTest />);
+
+  fireEvent.mouseEnter(screen.getByRole("tooltip_trigger"));
+  expect(screen.queryByRole("tooltip")).toBeInTheDocument();
+
+  cleanup();
+});
+
+test("closes on mouseleave", () => {
+  render(<TooltipTest />);
+
+  fireEvent.mouseEnter(screen.getByRole("tooltip_trigger"));
+  fireEvent.mouseLeave(screen.getByRole("tooltip_trigger"));
+  expect(screen.queryByRole("tooltip")).not.toBeInTheDocument();
+
+  cleanup();
 });
