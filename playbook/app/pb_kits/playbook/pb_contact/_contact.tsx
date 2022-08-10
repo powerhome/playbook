@@ -20,12 +20,15 @@ const contactTypeMap: { [key: string]: string; } = {
 
 const formatContact = (contactString: string, contactType: string) => {
   if (contactType == 'email') return contactString
+
   const cleaned = contactString.replace(/\D/g, '')
+  const phoneNumber = cleaned.match(/^(1|)?(\d{3})(\d{3})(\d{4})$/)
+
   if(contactType == 'extension') {
     return cleaned.match(/^\d{4}$/)
   }
-  if (contactType !== 'email') {
-    const phoneNumber = cleaned.match(/^(1|)?(\d{3})(\d{3})(\d{4})$/)
+
+  if (phoneNumber) {
     const intlCode = phoneNumber[1] ? '+1 ' : ''
     return [
       intlCode,
@@ -37,6 +40,7 @@ const formatContact = (contactString: string, contactType: string) => {
       phoneNumber[4],
     ].join('')
   }
+  
   return null
 }
 
