@@ -1,4 +1,3 @@
-/* @flow */
 import React from 'react'
 import classnames from 'classnames'
 
@@ -8,10 +7,10 @@ import { globalProps } from '../utilities/globalProps'
 import Caption from '../pb_caption/_caption'
 
 type SectionSeparatorProps = {
-  aria: object,
+  aria: { [key: string]: string; },
   className: string,
   dark?: boolean,
-  data: object,
+  data: { [key: string]: string; },
   id: string,
   orientation?: "horizontal" | "vertical",
   text: string,
@@ -40,13 +39,13 @@ const SectionSeparator = (props: SectionSeparatorProps) => {
         className={classes}
         id={id}
     >
-
-      <If condition={text}>
-        <span>
+      {
+        text && (
+          <span>
           <Caption text={text} />
         </span>
-      </If>
-
+        )
+      }
     </div>
   )
 }
