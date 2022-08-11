@@ -5,7 +5,7 @@ import { deprecatedProps, GlobalProps, globalProps } from '../utilities/globalPr
 
 type TitleProps = {
   aria?: {[key: string]: string},
-  children?: React.ReactChild[],
+  children?: React.ReactChild[] | React.ReactChild,
   className?: string,
   color?: "default" | "light" | "lighter" | "success" | "error" | "link",
   data?: {[key: string]: string},
