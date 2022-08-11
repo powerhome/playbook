@@ -78,7 +78,7 @@
     "@actions/core": "1.9.1",
     "@actions/github": "4.0.0",
     "@babel/preset-typescript": "^7.15.0",
-    "@testing-library/jest-dom": "5.16.4",
+    "@testing-library/jest-dom": "5.16.5",
     "@testing-library/react": "11.2.7",
     "@types/flatpickr": "^3.1.2",
     "@types/jest": "26.0.14",
