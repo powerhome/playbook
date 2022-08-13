@@ -1,5 +1,3 @@
-/* @flow */
-
 import classnames from 'classnames'
 import React, { useContext } from 'react'
 import AnimateHeight from 'react-animate-height'
@@ -8,8 +6,8 @@ import { globalProps } from '../../utilities/globalProps'
 
 import CollapsibleContext from '../context'
 
-type CollapsibleContentProps = {
-  children: array<React.ReactNode> | React.ReactNode | string,
+export type CollapsibleContentProps = {
+  children?: React.ReactNode[] | React.ReactNode | string,
   className?: string,
   padding?: string,
 }
@@ -20,7 +18,7 @@ const CollapsibleContent = ({
   padding = 'md',
   ...props
 }: CollapsibleContentProps) => {
-  const context = useContext(CollapsibleContext)
+  const context: {[key: string]: boolean | string} = useContext(CollapsibleContext)
   const contentCSS = buildCss('pb_collapsible_content_kit')
   const contentSpacing = globalProps(props, { padding })
 
