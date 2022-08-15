@@ -17,7 +17,7 @@ test('returns namespaced class name', () => {
 })
 
 test('returns correct icon', () => {
-  render(
+ render(
     <>
       <Contact
           contactDetail="Cell"
@@ -84,4 +84,48 @@ test('returns correct icon', () => {
   expect(screen.getByTestId('test-wrong-type').querySelector('.pb_icon_kit')).toHaveClass('fa-phone')
   expect(screen.getByTestId('test-extension').querySelector('.pb_icon_kit')).toHaveClass('fa-phone-plus')
   expect(screen.getByTestId('test-empty').querySelector('.pb_icon_kit')).toHaveClass('fa-phone')
+})
+
+test("not compliant values return null in phone related contact types", () => {
+  const notCompliantValues = [
+    "349-185-998223",
+    "349-1858",
+    "",
+    "2",
+    "string",
+  ]
+  const contactTypes = [
+    "cell",
+    "work",
+    "work-cell",
+    "wrong-number",
+    "wrong-phone",
+    "wrong-type",
+    "extension",
+  ]
+
+  const buildData = contactTypes.reduce((response, type) => {
+    notCompliantValues.forEach((value) => response.push({ type, value }))
+    return response
+  }, [])
+
+  const { rerender } = render(
+    <Contact
+        contactType=""
+        contactValue=""
+        data={{ testid: `contact-kit-null-test` }}
+    />
+  )
+  buildData.map(({ type, value }) => {
+    rerender(
+      <Contact
+          contactType={type}
+          contactValue={value}
+          data={{ testid: `contact-kit-null-test` }}
+      />
+    )
+    expect(screen.getByTestId("contact-kit-null-test")).toHaveTextContent(
+      "null"
+    )
+  })
 })
