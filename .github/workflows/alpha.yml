@@ -19,7 +19,7 @@ jobs:
         with:
           node-version: 12
       - run: npm install
-      - run: npm test
       - uses: JS-DevTools/npm-publish@v1
         with:
           token: ${{ secrets.NPM_TOKEN }} 
+      - run: echo Latest Rails Alpha Version is ${{`gem search playbook_ui --pre`.match(/(\d+.\d+.\d+.pre.alpha\d+)/).to_s}}
