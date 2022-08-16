@@ -1,10 +1,6 @@
-/* @flow */
-
 import React from 'react'
 import classnames from 'classnames'
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
-
-type EventHandler = (React.MouseEventHandler<HTMLElement>)
 
 import { noop } from '../utilities/props'
 import { globalProps } from '../utilities/globalProps'
@@ -21,7 +17,7 @@ type CircleIconButtonProps = {
   icon: string,
   id?: string,
   link?: string,
-  onClick?: EventHandler,
+  onClick?: React.MouseEventHandler<HTMLElement>,
   newWindow?: boolean,
   type?: 'button' | 'submit' | 'reset' | undefined,
   variant?: 'primary' | 'secondary' | 'link',
