@@ -95,7 +95,6 @@ const DatePicker = (props: DatePickerProps) => {
   const classes = classnames(
     buildCss('pb_date_picker_kit'),
     globalProps(props),
-    'flatpickr',
     error ? 'error' : null,
     className
   )
