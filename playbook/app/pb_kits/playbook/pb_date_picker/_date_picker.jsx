@@ -42,6 +42,8 @@ type DatePickerProps = {
   pickerId?: String,
   placeholder?: String,
   plugins: Boolean,
+  position?: String,
+  static?: Boolean,
   selectionType?: "month" | "week",
   showTimezone?: Boolean,
   timeFormat?: String,
@@ -82,6 +84,7 @@ const DatePicker = (props: DatePickerProps) => {
     pickerId,
     placeholder = 'Select Date',
     plugins = false,
+    position = "above",
     selectionType = '',
     showTimezone = false,
     yearRange = [ 1900, 2100 ],
@@ -92,6 +95,7 @@ const DatePicker = (props: DatePickerProps) => {
   const classes = classnames(
     buildCss('pb_date_picker_kit'),
     globalProps(props),
+    'flatpickr',
     error ? 'error' : null,
     className
   )
@@ -113,6 +117,7 @@ const DatePicker = (props: DatePickerProps) => {
       onChange,
       pickerId,
       plugins,
+      position,
       selectionType,
       showTimezone,
       yearRange,

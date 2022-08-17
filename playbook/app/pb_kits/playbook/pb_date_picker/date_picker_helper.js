@@ -18,6 +18,7 @@ const datePickerHelper = (config) => {
     onChange = () => {},
     pickerId,
     plugins,
+    position,
     required,
     selectionType,
     showTimezone,
@@ -128,8 +129,9 @@ const datePickerHelper = (config) => {
       yearChangeHook()
     }],
     plugins: setPlugins(),
+    position,
     prevArrow: '<i class="far fa-angle-left"></i>',
-    static: true,
+    // static: true,
   })
 
   // ===========================================================
