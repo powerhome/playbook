@@ -1,39 +1,3 @@
-## [11.2.7](https://github.com/powerhome/playbook/compare/11.2.6...11.2.7) (2022-08-17)
-
-**Fixed Bugs:**
-- Dialog Title Patch [\#2017](https://github.com/powerhome/playbook/pull/2017)([augustomallmann](https://github.com/augustomallmann)) 
-
-## [11.2.6](https://github.com/powerhome/playbook/compare/11.2.5...11.2.6) (2022-08-12)
-
-**Fixed Bugs:**
-- Removed Momentjs Upgrade that Breaks BT Support Page [Commit](https://github.com/powerhome/playbook/commit/00b38124c7f5c07997470b119b932faa685f74ae)
-## [11.2.5](https://github.com/powerhome/playbook/compare/11.2.4...11.2.5) (2022-08-10)
-
-**Fixed Bugs:**
-- Pulling in the Typescript Conversion and The Conditional Fix of Contact Kit [Commit](https://github.com/powerhome/playbook/commit/dbb6a34d905efa0aa82b29bda866292c892ea062) ([jasperfurniss](https://github.com/jasperfurniss))
-
-## [11.2.4](https://github.com/powerhome/playbook/compare/11.2.3...11.2.4) (2022-08-9)
-
-**Fixed Bugs:**
-- Reverting Moment Dependabot Upgrade & Cutting Patch on Master [Commit](https://github.com/powerhome/playbook/commit/b9ba5b358665ea91fb5ae8bb40b313894e207e88) ([jasperfurniss](https://github.com/jasperfurniss))
-- Commiting Lingering LockFile for the Website [Commit](https://github.com/powerhome/playbook/commit/0055a2dbea8be1436b08392ac44e83f40b132ad5) ([jasperfurniss](https://github.com/jasperfurniss))
-
-## [11.2.3](https://github.com/powerhome/playbook/compare/11.2.2...11.2.3) (2022-08-04)
-**Fixed Bugs:**
-- Correct Yarn and Node Version in Prod [\#1986](https://github.com/powerhome/playbook/pull/1986) ([thestephenmarshall](https://github.com/thestephenmarshall))
-- Removing an Outdated File that is Causing Yarn Release to Break [\#1992](https://github.com/powerhome/playbook/pull/1992) ([jasperfurniss](https://github.com/jasperfurniss))
-
-**Kit Enhancements:**
-- Convert Avatar Action Button to Typescript [\#1975](https://github.com/powerhome/playbook/pull/1975) ([augustomallmann](https://github.com/augustomallmann))
-- Typescript Conversion: Bread Crumbs [\#1976](https://github.com/powerhome/playbook/pull/1976) ([augustomallmann](https://github.com/augustomallmann)) 
-
-## [11.2.2](https://github.com/powerhome/playbook/compare/11.2.1...11.2.2) (2022-08-04)
-**Fixed Bugs:**
-- Encountered an issue with our release script that caused the release to double the bundle size.
-
-## [11.2.1](https://github.com/powerhome/playbook/compare/11.2.0...11.2.1) (2022-08-01)
-**Fixed Bugs:**
-- Removing Github Action on Master That Is Causing CI Build Failures [\#1988](https://github.com/powerhome/playbook/pull/1988) ([jasperfurniss](https://github.com/jasperfurniss))
 
 
 ## [11.2.0](https://github.com/powerhome/playbook/tree/11.2.0) (2022-07-26)
