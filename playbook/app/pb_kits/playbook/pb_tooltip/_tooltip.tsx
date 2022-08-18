@@ -23,16 +23,19 @@ type TooltipProps = {
   text: string,
   icon?: string,
   interaction?: boolean,
+  light?: boolean,
   placement?: Placement,
   children: JSX.Element,
   zIndex?: Pick<GlobalProps, "ZIndex">,
 } & GlobalProps
 
 const Tooltip = (props: TooltipProps) => {
-  const {
+  let {
     aria = {},
     children,
     data = {},
+    light = false,
+    dark,
     icon = null,
     interaction = false,
     text,
@@ -41,11 +44,13 @@ const Tooltip = (props: TooltipProps) => {
     ...rest
   } = props
 
+  dark = !light
+
   const dataProps: { [key: string]: any } = buildDataProps(data)
   const ariaProps: { [key: string]: any } = buildAriaProps(aria)
 
-  const css = classnames(globalProps(rest))
-
+  const css = classnames(globalProps({dark, ...rest}))
+  console.log(dark)
   const [open, setOpen] = useState(false)
   const arrowRef = useRef(null)
   const {
