@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    playbook_ui (11.2.0)
+    playbook_ui (11.2.7)
       actionpack (>= 5.2.4.5)
       actionview (>= 5.2.4.5)
       activesupport (>= 5.2.4.5)
@@ -268,7 +268,7 @@ GEM
       spring (>= 1.2, < 3.0)
     strscan (3.0.3)
     thor (1.2.1)
-    tilt (2.0.10)
+    tilt (2.0.11)
     timeout (0.3.0)
     tzinfo (2.0.4)
       concurrent-ruby (~> 1.0)
