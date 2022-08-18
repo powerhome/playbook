@@ -1,7 +1,7 @@
 PATH
   remote: ../playbook
   specs:
-    playbook_ui (11.2.5)
+    playbook_ui (11.2.7)
       actionpack (>= 5.2.4.5)
       actionview (>= 5.2.4.5)
       activesupport (>= 5.2.4.5)
@@ -193,7 +193,7 @@ GEM
     redcarpet (3.5.1)
     regexp_parser (2.5.0)
     rexml (3.2.5)
-    rouge (3.29.0)
+    rouge (3.30.0)
     rubocop (1.32.0)
       json (~> 2.3)
       parallel (~> 1.10)
