@@ -1,3 +1,9 @@
+
+## [11.2.7](https://github.com/powerhome/playbook/compare/11.2.6...11.2.7) (2022-08-17)
+
+**Fixed Bugs:**
+- Dialog Title Patch [\#2017](https://github.com/powerhome/playbook/pull/2017)([augustomallmann](https://github.com/augustomallmann)) 
+
 ## [11.2.6](https://github.com/powerhome/playbook/compare/11.2.5...11.2.6) (2022-08-12)
 
 **Fixed Bugs:**
@@ -29,7 +35,6 @@
 ## [11.2.1](https://github.com/powerhome/playbook/compare/11.2.0...11.2.1) (2022-08-01)
 **Fixed Bugs:**
 - Removing Github Action on Master That Is Causing CI Build Failures [\#1988](https://github.com/powerhome/playbook/pull/1988) ([jasperfurniss](https://github.com/jasperfurniss))
-
 
 ## [11.2.0](https://github.com/powerhome/playbook/tree/11.2.0) (2022-07-26)
 
