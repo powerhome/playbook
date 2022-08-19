@@ -30,7 +30,7 @@ type TooltipProps = {
 } & GlobalProps
 
 const Tooltip = (props: TooltipProps) => {
-  let {
+  const {
     aria = {},
     children,
     data = {},
