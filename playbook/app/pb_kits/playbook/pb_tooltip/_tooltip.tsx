@@ -23,7 +23,7 @@ type TooltipProps = {
   text: string,
   icon?: string,
   interaction?: boolean,
-  light?: boolean,
+  white?: boolean,
   placement?: Placement,
   children: JSX.Element,
   zIndex?: Pick<GlobalProps, "ZIndex">,
@@ -34,23 +34,20 @@ const Tooltip = (props: TooltipProps) => {
     aria = {},
     children,
     data = {},
-    light = false,
-    dark,
     icon = null,
     interaction = false,
+    white = false,
     text,
     placement: preferredPlacement = "top",
     zIndex,
     ...rest
   } = props
 
-  dark = !light
 
   const dataProps: { [key: string]: any } = buildDataProps(data)
   const ariaProps: { [key: string]: any } = buildAriaProps(aria)
 
-  const css = classnames(globalProps({dark, ...rest}))
-  console.log(dark)
+  const css = classnames(globalProps({...rest}))
   const [open, setOpen] = useState(false)
   const arrowRef = useRef(null)
   const {
@@ -84,7 +81,9 @@ const Tooltip = (props: TooltipProps) => {
 
   const { getFloatingProps } = useInteractions([
     useHover(context, {
-      handleClose: interaction ? safePolygon() : null,
+      handleClose: interaction ? safePolygon({
+        blockPointerEvents: false
+      }) : null,
     })
   ])
 
@@ -112,7 +111,7 @@ const Tooltip = (props: TooltipProps) => {
           {...getFloatingProps({
             role: "tooltip",
             ref: floating,
-            className: `tooltip_tooltip ${placement} show`,
+            className: `tooltip_tooltip ${placement} visible ${white ? 'white' : ''}`,
             style: {
               position: strategy,
               top: y ?? 0,

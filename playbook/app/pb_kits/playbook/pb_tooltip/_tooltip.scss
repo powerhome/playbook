@@ -54,29 +54,20 @@ $tooltip_shadow: rgba(60, 106, 172, 0.18);
       margin-bottom: 50px;
     }
 
-    // react arrow
-    .arrow_bg {
-      width: 10px;
-      height: 10px;
-      background-color: $white;
-      transform: rotate(45deg);
-    }
+    
 
+    &.visible, 
     &.show {
-      opacity: 1;
       z-index: $z_9;
-      margin-bottom: $space_sm;
-      background-color: $white;
       padding: $space_xs $space_sm;
       box-shadow: $shadow_deeper;
       border-radius: $border_rad_light;
-      &.fade_out {
-        animation-name: fadeOut;
-        animation-duration: 150ms;
-        animation-timing-function: linear;
-        animation-fill-mode: forwards;
-      }
-      // Changes the box-shadow in react according to the tooltip's placement
+    }
+
+    // react only
+    &.visible {
+      color: $white;
+      background-color: rgba($black, $opacity_9);
       &.right {
         box-shadow: -8px 0 28px 0 $tooltip_shadow;
       }
@@ -86,12 +77,38 @@ $tooltip_shadow: rgba(60, 106, 172, 0.18);
       &.left {
         box-shadow: 8px 0 28px 0 $tooltip_shadow;
       }
+      &.white {
+        color: $charcoal;
+        background-color: $white;
+        .arrow_bg {
+          background-color: $white;
+        }
+      }
+      // react arrow
+      .arrow_bg {
+        width: 10px;
+        height: 10px;
+        background-color: rgba($black, $opacity_9);
+        transform: rotate(45deg);
+      }
+    }
+
+    &.show {
+      opacity: 1;
+      margin-bottom: $space_sm;
+      background-color: $white;
+      &.fade_out {
+        animation-name: fadeOut;
+        animation-duration: 150ms;
+        animation-timing-function: linear;
+        animation-fill-mode: forwards;
+      }
     }
   }
+
   &.dark,
   &[class*=_dark]{
-    ~.tooltip_tooltip,
-    .tooltip_tooltip{
+    .tooltip_tooltip {
       color: $white;
       background-color: rgba($black, $opacity_9);
       .arrow {

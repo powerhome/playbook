@@ -14,9 +14,9 @@ const TooltipWhite = (props) => {
    >
     <FlexItem>
       <Tooltip 
-          light
           placement='top' 
           text="Whoa. I'm a white tooltip." 
+          white
           zIndex={10}
           {...props}
       >
@@ -25,9 +25,9 @@ const TooltipWhite = (props) => {
     </FlexItem>
     <FlexItem>
      <Tooltip 
-         light
          placement='bottom' 
          text="Whoa. I'm a white tooltip." 
+         white
          zIndex={10}
          {...props}
      >
@@ -38,6 +38,7 @@ const TooltipWhite = (props) => {
       <Tooltip 
           placement='right' 
           text="Whoa. I'm a white tooltip." 
+          white
           zIndex={10}
           {...props}
       >
@@ -46,9 +47,9 @@ const TooltipWhite = (props) => {
     </FlexItem>
     <FlexItem>
       <Tooltip 
-          light
           placement='left' 
           text="Whoa. I'm a white tooltip." 
+          white
           zIndex={10}
           {...props}
       >
