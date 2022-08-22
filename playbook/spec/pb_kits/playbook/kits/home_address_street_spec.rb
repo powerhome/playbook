@@ -17,6 +17,10 @@ RSpec.describe Playbook::PbHomeAddressStreet::HomeAddressStreet do
   it { is_expected.to define_prop(:state) }
   it { is_expected.to define_prop(:zipcode) }
   it { is_expected.to define_boolean_prop(:dark) }
+  it {
+    is_expected.to define_boolean_prop(:new_window)
+      .with_default(false)
+  }
 
   describe "#classname" do
     it "returns namespaced class name", :aggregate_failures do
