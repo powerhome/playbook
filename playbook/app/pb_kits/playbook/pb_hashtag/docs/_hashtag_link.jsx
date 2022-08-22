@@ -5,7 +5,7 @@ const HashtagLink = (props) => {
   return (
     <div>
       <Hashtag
-          text="Same Window"
+          text="Open in the same window"
           type="project"
           url="https://google.com"
           {...props}
@@ -14,7 +14,7 @@ const HashtagLink = (props) => {
       <br />
       <Hashtag
           newWindow
-          text="New Window"
+          text="Open in a new window"
           type="project"
           url="https://google.com"
           {...props}
