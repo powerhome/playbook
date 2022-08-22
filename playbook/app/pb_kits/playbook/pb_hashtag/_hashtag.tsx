@@ -14,6 +14,7 @@ type HashtagProps = {
   dark?: boolean,
   data?: string,
   id?: string,
+  newWindow?: boolean,
   text?: string,
   type: "default" | "home" | "project" | "appointment",
   url?: string,
@@ -33,6 +34,7 @@ const Hashtag = (props: HashtagProps) => {
     dark = false,
     data = {},
     id,
+    newWindow,
     text,
     type = 'default',
     url,
@@ -49,7 +51,10 @@ const Hashtag = (props: HashtagProps) => {
         className={classes}
         id={id}
     >
-      <a href={url}>
+      <a href={url} 
+          rel="noreferrer"
+          target={(newWindow ? '_blank' : '_self')}
+      >
         <Badge
             dark={dark}
             text={typeMap[type] + text}
