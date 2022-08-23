@@ -54,8 +54,6 @@ $tooltip_shadow: rgba(60, 106, 172, 0.18);
       margin-bottom: 50px;
     }
 
-    
-
     &.visible, 
     &.show {
       z-index: $z_9;
@@ -77,13 +75,6 @@ $tooltip_shadow: rgba(60, 106, 172, 0.18);
       &.left {
         box-shadow: 8px 0 28px 0 $tooltip_shadow;
       }
-      &.white {
-        color: $charcoal;
-        background-color: $white;
-        .arrow_bg {
-          background-color: $white;
-        }
-      }
       // react arrow
       .arrow_bg {
         width: 10px;
@@ -93,6 +84,7 @@ $tooltip_shadow: rgba(60, 106, 172, 0.18);
       }
     }
 
+    //rails only
     &.show {
       opacity: 1;
       margin-bottom: $space_sm;
@@ -108,16 +100,25 @@ $tooltip_shadow: rgba(60, 106, 172, 0.18);
 
   &.dark,
   &[class*=_dark]{
+    ~.tooltip_tooltip,
     .tooltip_tooltip {
-      color: $white;
-      background-color: rgba($black, $opacity_9);
+      //react
+      &.visible {
+        color: $charcoal;
+        background-color: $white;
+      }
+      //rails
+      &.show {
+        color: $white;
+        background-color: rgba($black, $opacity_9);
+      }
       .arrow {
         border-color: $black transparent transparent transparent;
         opacity: $opacity_9;
       }
       // react arrow
       .arrow_bg {
-        background-color: rgba($black, $opacity_9);
+        background-color: $white;
       }
       &.flipped {
         .arrow {

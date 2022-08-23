@@ -23,7 +23,6 @@ type TooltipProps = {
   text: string,
   icon?: string,
   interaction?: boolean,
-  white?: boolean,
   placement?: Placement,
   children: JSX.Element,
   zIndex?: Pick<GlobalProps, "ZIndex">,
@@ -36,13 +35,13 @@ const Tooltip = (props: TooltipProps) => {
     data = {},
     icon = null,
     interaction = false,
-    white = false,
     text,
     placement: preferredPlacement = "top",
     zIndex,
     ...rest
   } = props
 
+  console.log(rest)
 
   const dataProps: { [key: string]: any } = buildDataProps(data)
   const ariaProps: { [key: string]: any } = buildAriaProps(aria)
@@ -111,7 +110,7 @@ const Tooltip = (props: TooltipProps) => {
           {...getFloatingProps({
             role: "tooltip",
             ref: floating,
-            className: `tooltip_tooltip ${placement} visible ${white ? 'white' : ''}`,
+            className: `tooltip_tooltip ${placement} visible`,
             style: {
               position: strategy,
               top: y ?? 0,
