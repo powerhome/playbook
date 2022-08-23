@@ -1,5 +1,61 @@
 
 
+## [11.3.0](https://github.com/powerhome/playbook/tree/11.3.0) (2022-08-19)
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/11.2.7...11.3.0)
+
+**Fixed Bugs:**
+- \[Play-199\] Fix Alignment on Currency Kit [\#1991](https://github.com/powerhome/playbook/pull/1991) ([nidaqg](https://github.com/nidaqg))
+- \[Play-235\] Classnames and global props in the list kit for rails [\#1981](https://github.com/powerhome/playbook/pull/1981) ([augustomallmann](https://github.com/augustomallmann))
+
+**Kit Enhancements**
+- \[Play-214\] Typescript Conversion of Collapsible Kit [\#1990](https://github.com/powerhome/playbook/pull/1990) ([nidaqg](https://github.com/nidaqg))
+- \[Play-229\] Converted Distribution Bar to Typescript [\#1989](https://github.com/powerhome/playbook/pull/1989) ([nidaqg](https://github.com/nidaqg))
+
+**Improvements**
+- \[Play-249\] Add Test Typing Dependencies [\#1999](https://github.com/powerhome/playbook/pull/1999) ([nidaqg](https://github.com/nidaqg))
+- \[Play-253\] Add Webpack Analysis Script [\#2006](https://github.com/powerhome/playbook/pull/2006) ([thestephenmarshall](https://github.com/thestephenmarshall))
+- Update dependency @actions/core to v1.9.1 [\#2002](https://github.com/powerhome/playbook/pull/2002)
+- Update dependency @types/react to v17.0.48 [\#1982](https://github.com/powerhome/playbook/pull/1982)
+
+
+## [11.2.7](https://github.com/powerhome/playbook/compare/11.2.6...11.2.7) (2022-08-17)
+
+**Fixed Bugs:**
+- Dialog Title Patch [\#2017](https://github.com/powerhome/playbook/pull/2017)([augustomallmann](https://github.com/augustomallmann)) 
+
+## [11.2.6](https://github.com/powerhome/playbook/compare/11.2.5...11.2.6) (2022-08-12)
+
+**Fixed Bugs:**
+- Removed Momentjs Upgrade that Breaks BT Support Page [Commit](https://github.com/powerhome/playbook/commit/00b38124c7f5c07997470b119b932faa685f74ae)
+## [11.2.5](https://github.com/powerhome/playbook/compare/11.2.4...11.2.5) (2022-08-10)
+
+**Fixed Bugs:**
+- Pulling in the Typescript Conversion and The Conditional Fix of Contact Kit [Commit](https://github.com/powerhome/playbook/commit/dbb6a34d905efa0aa82b29bda866292c892ea062) ([jasperfurniss](https://github.com/jasperfurniss))
+
+## [11.2.4](https://github.com/powerhome/playbook/compare/11.2.3...11.2.4) (2022-08-9)
+
+**Fixed Bugs:**
+- Reverting Moment Dependabot Upgrade & Cutting Patch on Master [Commit](https://github.com/powerhome/playbook/commit/b9ba5b358665ea91fb5ae8bb40b313894e207e88) ([jasperfurniss](https://github.com/jasperfurniss))
+- Commiting Lingering LockFile for the Website [Commit](https://github.com/powerhome/playbook/commit/0055a2dbea8be1436b08392ac44e83f40b132ad5) ([jasperfurniss](https://github.com/jasperfurniss))
+
+## [11.2.3](https://github.com/powerhome/playbook/compare/11.2.2...11.2.3) (2022-08-04)
+**Fixed Bugs:**
+- Correct Yarn and Node Version in Prod [\#1986](https://github.com/powerhome/playbook/pull/1986) ([thestephenmarshall](https://github.com/thestephenmarshall))
+- Removing an Outdated File that is Causing Yarn Release to Break [\#1992](https://github.com/powerhome/playbook/pull/1992) ([jasperfurniss](https://github.com/jasperfurniss))
+
+**Kit Enhancements:**
+- Convert Avatar Action Button to Typescript [\#1975](https://github.com/powerhome/playbook/pull/1975) ([augustomallmann](https://github.com/augustomallmann))
+- Typescript Conversion: Bread Crumbs [\#1976](https://github.com/powerhome/playbook/pull/1976) ([augustomallmann](https://github.com/augustomallmann)) 
+
+## [11.2.2](https://github.com/powerhome/playbook/compare/11.2.1...11.2.2) (2022-08-04)
+**Fixed Bugs:**
+- Encountered an issue with our release script that caused the release to double the bundle size.
+
+## [11.2.1](https://github.com/powerhome/playbook/compare/11.2.0...11.2.1) (2022-08-01)
+**Fixed Bugs:**
+- Removing Github Action on Master That Is Causing CI Build Failures [\#1988](https://github.com/powerhome/playbook/pull/1988) ([jasperfurniss](https://github.com/jasperfurniss))
+
 ## [11.2.0](https://github.com/powerhome/playbook/tree/11.2.0) (2022-07-26)
 
 [Full Changelog](https://github.com/powerhome/playbook/compare/11.1.2...11.2.0)
@@ -9,7 +65,7 @@
 [Ivancandido11](https://github.com/Ivancandido11))
 
 **Kit Enhancements:**
-
+- \[Play-214\]- Typescript Conversion of Collapsible Kit [\#1990](https://github.com/powerhome/playbook/pull/1990) ([nidaqg](https://github.com/nidaqg))
 - \[PLAY-211\] Typescript Conversion: Button Toolbar [\#1977](https://github.com/powerhome/playbook/pull/1977) ([augustomallmann](https://github.com/augustomallmann))
 - \[PLAY-206\] Dialog Kit: Fix Sweet Alert from Original PR [\#1973](https://github.com/powerhome/playbook/pull/1973) ([augustomallmann](https://github.com/augustomallmann))
 - \[PLAY-194\] Contact Kit Update: Extension Variant [\#1966](https://github.com/powerhome/playbook/pull/1966) ([augustomallmann](https://github.com/augustomallmann))
@@ -2581,54 +2637,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Removed (breaking changes)
 - React PbLayout prop `children` dropped support for single Node (https://github.com/powerhome/playbook/commit/b16da50914e110c75c6d96c985fa02781c9e2040#diff-c3ce2c91288ca3e730d3c56e7f73475cL11-L14)
 - Rails PbLayout prop `dark` dropped (https://github.com/powerhome/playbook/commit/b16da50914e110c75c6d96c985fa02781c9e2040#diff-377fda563d148f7b3ad33f904b7b0cdbL13)
-
-
-\* *This Changelog was automatically generated by [github_changelog_generator](https://github.com/github-changelog-generator/github-changelog-generator)*
-
-
-\* *This Changelog was automatically generated by [github_changelog_generator](https://github.com/github-changelog-generator/github-changelog-generator)*
-
-
-\* *This Changelog was automatically generated by [github_changelog_generator](https://github.com/github-changelog-generator/github-changelog-generator)*
-
-
-\* *This Changelog was automatically generated by [github_changelog_generator](https://github.com/github-changelog-generator/github-changelog-generator)*
-
-
-\* *This Changelog was automatically generated by [github_changelog_generator](https://github.com/github-changelog-generator/github-changelog-generator)*
-
-
-\* *This Changelog was automatically generated by [github_changelog_generator](https://github.com/github-changelog-generator/github-changelog-generator)*
-
-
-\* *This Changelog was automatically generated by [github_changelog_generator](https://github.com/github-changelog-generator/github-changelog-generator)*
-
-
-\* *This Changelog was automatically generated by [github_changelog_generator](https://github.com/github-changelog-generator/github-changelog-generator)*
-
-
-\* *This Changelog was automatically generated by [github_changelog_generator](https://github.com/github-changelog-generator/github-changelog-generator)*
-
-
-\* *This Changelog was automatically generated by [github_changelog_generator](https://github.com/github-changelog-generator/github-changelog-generator)*
-
-
-\* *This Changelog was automatically generated by [github_changelog_generator](https://github.com/github-changelog-generator/github-changelog-generator)*
-
-
-\* *This Changelog was automatically generated by [github_changelog_generator](https://github.com/github-changelog-generator/github-changelog-generator)*
-
-
-\* *This Changelog was automatically generated by [github_changelog_generator](https://github.com/github-changelog-generator/github-changelog-generator)*
-
-
-\* *This Changelog was automatically generated by [github_changelog_generator](https://github.com/github-changelog-generator/github-changelog-generator)*
-
-
-\* *This Changelog was automatically generated by [github_changelog_generator](https://github.com/github-changelog-generator/github-changelog-generator)*
-
-
-\* *This Changelog was automatically generated by [github_changelog_generator](https://github.com/github-changelog-generator/github-changelog-generator)*
 
 
 \* *This Changelog was automatically generated by [github_changelog_generator](https://github.com/github-changelog-generator/github-changelog-generator)*
