@@ -110,22 +110,27 @@ const Dialog = (props: DialogProps) => {
     info: {
       icon: "exclamation-circle",
       variant: "default",
+      size: 'lg'
     },
     caution: {
-      icon: "triangle-warning",
+      icon: "exclamation-triangle",
       variant: "yellow",
+      size: 'lg'
     },
     delete: {
-      icon: "trash",
+      icon: "trash-alt",
       variant: "red",
+      size: 'lg'
     },
     error: {
       icon: "times-circle",
       variant: "red",
+      size: 'lg'
     },
     success: {
       icon: "check-circle",
       variant: "green",
+      size: 'lg'
     },
   }
 
@@ -150,27 +155,34 @@ const Dialog = (props: DialogProps) => {
             shouldCloseOnOverlayClick={shouldCloseOnOverlayClick}
             status={status}
         >
-          <If condition={title}>
+          <If condition={title && !status}>
             <Dialog.Header>{title}</Dialog.Header>
           </If>
           <If condition={!status && text}>
-            <Dialog.Body>{text}</Dialog.Body>
+            <Dialog.Body>
+                {text}
+              </Dialog.Body>
           </If>
           <If condition={status}>
             <Dialog.Body>
-              <Flex align='center'
+              <Flex
+                  align='center'
                   orientation='column'
+                  padding='xs'
               >
                 <IconCircle
                     icon={sweetAlertStatus[status].icon}
+                    size={sweetAlertStatus[status].size}
                     variant={sweetAlertStatus[status].variant}
                 />
-                <Title marginY='sm'
+                <Title
+                    marginY='sm'
                     size={3}
                 >
                   {title}
                 </Title>
-                <Body marginY='xs'
+                <Body
+                    marginY='xs'
                     text={text}
                 />
               </Flex>

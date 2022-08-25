@@ -25,8 +25,8 @@ const DialogStatus = () => {
       title: "Are you Sure?",
       toggle: toggleInfoAlert,
       visible: infoAlertOpened,
-      buttonOneText:"No, Cancel",
-      buttonTwoText: "Yes, Action"
+      buttonOneText:"Yes, Action",
+      buttonTwoText: "No, Cancel"
     },
     {
       status: "caution",
@@ -34,8 +34,8 @@ const DialogStatus = () => {
       title: "Are you Sure?",
       toggle: toggleCautionAlert,
       visible: cautionAlertOpened,
-      buttonOneText:"No, Cancel",
-      buttonTwoText: "Yes, Action"
+      buttonOneText:"Yes, Action",
+      buttonTwoText: "No, Cancel"
     },
     {
       status: "delete",
@@ -43,8 +43,8 @@ const DialogStatus = () => {
       title: "Delete",
       toggle: toggleDeleteAlert,
       visible: deleteAlertOpened,
-      buttonOneText:"No, Cancel",
-      buttonTwoText: "Yes, Delete"
+      buttonOneText:"Yes, Delete",
+      buttonTwoText: "No, Cancel"
     },
     {
       status: "error",
@@ -52,8 +52,8 @@ const DialogStatus = () => {
       title: "Error Message",
       toggle: toggleErrorAlert,
       visible: errorAlertOpened,
-      buttonOneText:"No, Cancel",
-      buttonTwoText: "Ok, Thanks"
+      buttonOneText:"Ok, Thanks",
+      buttonTwoText: "No, Cancel"
     },
     {
       status: "success",
@@ -61,8 +61,8 @@ const DialogStatus = () => {
       title: "Success!",
       toggle: toggleSuccessAlert,
       visible: successAlertOpened,
-      buttonOneText:"No, Cancel",
-      buttonTwoText: "Ok, Thanks"
+      buttonOneText: "Ok, Thanks",
+      buttonTwoText:"No, Cancel"
     },
   ]
 
@@ -87,7 +87,10 @@ const DialogStatus = () => {
         >
           {"Success Status"}
         </Button>
-        <Button onClick={toggleErrorAlert}>
+        <Button 
+            marginRight="md"
+            onClick={toggleErrorAlert}
+        >
           {"Error Status"}
         </Button>
         <Button
@@ -110,12 +113,12 @@ const DialogStatus = () => {
           <Dialog.Footer>
             <Button
                 onClick={dialog.toggle}
-                variant="secondary"
             >
             {dialog.buttonOneText}
             </Button>
             <Button
                 onClick={dialog.toggle}
+                variant="secondary"
             >
             {dialog.buttonTwoText}
             </Button>
