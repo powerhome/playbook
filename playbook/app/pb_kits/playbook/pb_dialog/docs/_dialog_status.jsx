@@ -110,7 +110,9 @@ const DialogStatus = () => {
               text={dialog.text}
               title={dialog.title}
           >
-          <Dialog.Footer>
+          <Dialog.Footer
+              padding="md"
+          >
             <Button
                 onClick={dialog.toggle}
             >
