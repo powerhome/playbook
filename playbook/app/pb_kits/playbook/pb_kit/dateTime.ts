@@ -1,23 +1,22 @@
-/* @flow */
-/*eslint-disable flowtype/space-before-type-colon */
 
-import moment from 'moment'
+import moment, { Moment } from 'moment'
 import 'moment-strftime'
 import 'moment-timezone'
 
 type DateTimeType = {
-  value: String | Date,
-  zone?: String,
+  value: string | Date,
+  zone?: string,
 }
 
 const ABBR_DAYS = ['SU', 'M', 'T', 'W', 'TH', 'F', 'S']
 
 export default class DateTime {
+  value: Moment & any // moment-strftime is deprecated - TODO: remove library and use native moment fns
   constructor({ value, zone = 'America/New_York' }: DateTimeType) {
     this.value = this.convertToTimestampZone(value, zone)
   }
 
-  convertToTimestampZone(value, zone) {
+  convertToTimestampZone(value: string | Date, zone: string) {
     return moment(value).tz(zone)
   }
 
