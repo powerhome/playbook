@@ -20,7 +20,7 @@ module.exports = function(api) {
       isTestEnv && [
         require('@babel/preset-env').default,
         {
-          loose: true,
+          loose: false,
           targets: {
             node: 'current',
           },
