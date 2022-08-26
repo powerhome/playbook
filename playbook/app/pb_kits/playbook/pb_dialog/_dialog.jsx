@@ -37,7 +37,7 @@ type DialogProps = {
   opened: boolean,
   portalClassName?: string,
   shouldCloseOnOverlayClick: boolean,
-  size?: "sm" | "md" | "lg" | "content",
+  size?: "sm" | "md" | "lg" | 'status_size' | "content",
   status?: "info" | "caution" | "delete" | "error" | "success",
   text?: string,
   title?: string,

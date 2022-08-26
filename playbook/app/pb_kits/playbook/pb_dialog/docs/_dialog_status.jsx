@@ -20,24 +20,27 @@ const DialogStatus = () => {
 
   const dialogs = [
     {
+      size: 'status_size',
       status: "info",
       text: "Text explaining why there is an alert",
-      title: "Are you Sure?",
+      title: "Are you sure?",
       toggle: toggleInfoAlert,
       visible: infoAlertOpened,
       buttonOneText:"Yes, Action",
       buttonTwoText: "No, Cancel"
     },
     {
+      size: 'status_size',
       status: "caution",
       text: "This is the action you will be taking",
-      title: "Are you Sure?",
+      title: "Are you sure?",
       toggle: toggleCautionAlert,
       visible: cautionAlertOpened,
       buttonOneText:"Yes, Action",
       buttonTwoText: "No, Cancel"
     },
     {
+      size: 'status_size',
       status: "delete",
       text: "You are about to delete ...",
       title: "Delete",
@@ -47,6 +50,7 @@ const DialogStatus = () => {
       buttonTwoText: "No, Cancel"
     },
     {
+      size: 'status_size',
       status: "error",
       text: "Text explaining the error",
       title: "Error Message",
@@ -56,6 +60,7 @@ const DialogStatus = () => {
       buttonTwoText: "No, Cancel"
     },
     {
+      size: 'status_size',
       status: "success",
       text: "Text explaining what is successful",
       title: "Success!",
@@ -106,6 +111,7 @@ const DialogStatus = () => {
               key={dialog.status}
               onClose={dialog.toggle}
               opened={dialog.visible}
+              size={dialog.size}
               status={dialog.status}
               text={dialog.text}
               title={dialog.title}
