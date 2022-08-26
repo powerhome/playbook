@@ -1,5 +1,3 @@
-/* @flow */
-
 import React from 'react'
 
 import classnames from 'classnames'
@@ -10,10 +8,10 @@ import { globalProps } from '../utilities/globalProps'
 import Icon from '../pb_icon/_icon'
 
 type IconCircleProps = {
-  aria?: object,
+  aria?: {[key:string]: string},
   className?: string,
   dark?: boolean,
-  data?: object,
+  data?: {[key:string]: string},
   icon: string,
   id?: string,
   size?: "base" | "xs" | "sm" | "md" | "lg" | "xl",
