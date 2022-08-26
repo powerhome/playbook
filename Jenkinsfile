@@ -1,10 +1,6 @@
 #!/usr/bin/env groovy
 
-library identifier: 'ci-kubed@v5.1.0', retriever: modernSCM([
-  $class: 'GitSCMSource',
-  remote: 'git@github.com:powerhome/ci-kubed.git',
-  credentialsId: 'powerci-github-ssh-key'
-])
+library 'github.com/powerhome/ci-kubed@v5.5.1'
 
 app.build(
   resources: [
