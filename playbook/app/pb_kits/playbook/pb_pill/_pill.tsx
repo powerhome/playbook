@@ -11,7 +11,7 @@ type PillProps = {
   data?: {[key: string]: string},
   id?: string,
   text: string,
-  variant?: "success" | "warning" | "error" | "info" | "neutral",
+  variant?: "success" | "warning" | "error" | "info" | "neutral" | "primary",
   textTransform?: "none" | "lowercase"
 } & GlobalProps
 

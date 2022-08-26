@@ -1,5 +1,3 @@
-/* @flow */
-
 import React from 'react'
 import classnames from 'classnames'
 import { globalProps } from '../utilities/globalProps'
@@ -10,9 +8,9 @@ import Pill from '../pb_pill/_pill'
 import Caption from '../pb_caption/_caption'
 
 type LabelPillProps = {
-  aria?: object,
+  aria?: {[key: string]:string},
   className?: string,
-  data?: object,
+  data?: {[key: string]:string},
   id?: string,
   label?: string,
   pillValue?: string,
