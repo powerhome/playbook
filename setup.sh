@@ -14,9 +14,11 @@ echo "Installing commit hooks \n"
 yarn prepare
 
 echo "Bundling source \n"
-cd playbook && bundle
+(cd playbook; bundle)
 
 echo "Bundling website \n"
-cd ../playbook-website && bundle
+(cd playbook-website; bundle)
 
-cd ../
+echo "Compiling webpack bundle"
+rm -rf playbook/dist
+(cd playbook; yarn release)
