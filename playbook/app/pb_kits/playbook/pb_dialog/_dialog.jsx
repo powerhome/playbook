@@ -150,8 +150,10 @@ const Dialog = (props: DialogProps) => {
             shouldCloseOnOverlayClick={shouldCloseOnOverlayClick}
             status={status}
         >
-          <If condition={title && !status}>
+          <If condition={title}>
             <Dialog.Header>{title}</Dialog.Header>
+          </If>
+          <If condition={!status && text}>
             <Dialog.Body>{text}</Dialog.Body>
           </If>
           <If condition={status}>

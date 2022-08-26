@@ -1,5 +1,3 @@
-/* @flow */
-
 import React from 'react'
 import classnames from 'classnames'
 
@@ -14,10 +12,10 @@ type CurrencyProps = {
   abbreviate?: boolean,
   align?: 'center' | 'left' | 'right',
   amount: string,
-  aria?: object,
+  aria?: {[key:string]:string},
   className?: string,
   dark?: boolean,
-  data?: object,
+  data?: {[key:string]:string},
   decimals?: 'default' | 'matching',
   emphasized?: boolean,
   id?: string,
@@ -28,7 +26,7 @@ type CurrencyProps = {
   unit?: string,
 }
 
-const sizes = {
+const sizes: {lg: 1, md: 3, sm: 4} = {
   lg: 1,
   md: 3,
   sm: 4,
@@ -68,12 +66,12 @@ const Currency = (props: CurrencyProps) => {
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
   const classes = classnames(
-    buildCss('pb_currency_kit', align, size, { dark }),
+    buildCss('pb_currency_kit', align, size),
     globalProps(props),
     className
   )
 
-  const getFormattedNumber = (input) => new Intl.NumberFormat('en-US', {
+  const getFormattedNumber = (input: number | any ) => new Intl.NumberFormat('en-US', {
     notation: 'compact',
     maximumFractionDigits: 1,
   }).format(input)
@@ -126,11 +124,18 @@ const Currency = (props: CurrencyProps) => {
             dark={dark}
         >
           {getAbbreviation}
-          <If condition={unit}>
-            {unit}
-            <Else />
-            {getDecimalValue}
-          </If>
+          {
+            unit ? (
+              <>
+              {unit}
+              </>
+            ) : (
+              <>
+              {getDecimalValue}
+              </>
+            )
+          }
+          
         </Body>
       </div>
     </div>
