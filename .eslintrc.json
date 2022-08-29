@@ -3,13 +3,15 @@
   "plugins": [
     "flowtype",
     "jsx-control-statements",
-    "react"
+    "react",
+    "you-dont-need-lodash-underscore"
   ],
   "extends": [
     "eslint:recommended",
     "plugin:flowtype/recommended",
     "plugin:jsx-control-statements/recommended",
-    "plugin:react/recommended"
+    "plugin:react/recommended",
+    "plugin:you-dont-need-lodash-underscore/all"
   ],
   "parser": "babel-eslint",
   "parserOptions": {
