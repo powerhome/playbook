@@ -8,14 +8,7 @@ import { getTimezoneText } from './plugins/timeSelect'
 
 
 jest.setSystemTime(new Date('01/01/2020'));
-
 const DEFAULT_DATE = new Date()
-// DEFAULT_DATE.setFullYear(2022)
-// DEFAULT_DATE.setMonth(1)
-// DEFAULT_DATE.setDate(1)
-// DEFAULT_DATE.setHours(12)
-// DEFAULT_DATE.setMinutes(0)
-
 
 
 describe('DatePicker Kit', () => {
@@ -55,7 +48,6 @@ describe('DatePicker Kit', () => {
     expect(input).toBeInTheDocument()
 
     await waitFor(() => {
-
       expect(input).toHaveValue('01/01/2020')
     })
   })
