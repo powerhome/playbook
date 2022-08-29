@@ -16,6 +16,7 @@ export type IconSizes = "lg"
 | "8x"
 | "9x"
 | "10x"
+| ""
 
 type IconProps = {
   aria?: {[key: string]: string},
