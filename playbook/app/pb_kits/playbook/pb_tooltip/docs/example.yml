@@ -4,4 +4,10 @@ examples:
   - tooltip_default: Default
   - tooltip_selectors: Using Common Selectors
   - tooltip_white: White
-  - tooltip_with_icon_circle: Icon Circle Tooptip
+  - tooltip_with_icon_circle: Icon Circle Tooltip
+
+  react:
+  - tooltip_default_react: Default
+  - tooltip_interaction: Content Interaction
+  - tooltip_margin: Margin
+  - tooltip_icon: Tooltip with Icon

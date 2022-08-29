@@ -3,7 +3,7 @@
 import React from 'react'
 import classnames from 'classnames'
 
-import DateTime from '../pb_kit/dateTime.js'
+import DateTime from '../pb_kit/dateTime'
 import { buildCss } from '../utilities/props'
 import { globalProps } from '../utilities/globalProps'
 
