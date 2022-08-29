@@ -5,16 +5,22 @@ import { fireEvent, render, screen, waitFor, within } from '../utilities/test-ut
 import DatePicker from './_date_picker'
 import { getTimezoneText } from './plugins/timeSelect'
 
+
+
+jest.setSystemTime(new Date('01/01/2020'));
+
 const DEFAULT_DATE = new Date()
-DEFAULT_DATE.setFullYear(2022)
-DEFAULT_DATE.setMonth(1)
-DEFAULT_DATE.setDate(1)
-DEFAULT_DATE.setHours(12)
-DEFAULT_DATE.setMinutes(0)
+// DEFAULT_DATE.setFullYear(2022)
+// DEFAULT_DATE.setMonth(1)
+// DEFAULT_DATE.setDate(1)
+// DEFAULT_DATE.setHours(12)
+// DEFAULT_DATE.setMinutes(0)
+
+
 
 describe('DatePicker Kit', () => {
   beforeEach(() => {
-    jest.spyOn(console, 'error').mockImplementation(() => {});
+    jest.spyOn(console, 'error').mockImplementation(() => { });
   });
 
   test('renders DatePicker input field', () => {
@@ -44,10 +50,13 @@ describe('DatePicker Kit', () => {
 
     const kit = screen.getByTestId(testId)
 
+
     const input = within(kit).getByPlaceholderText('Select Date')
     expect(input).toBeInTheDocument()
+
     await waitFor(() => {
-      expect(input).toHaveValue('02/01/2022')
+
+      expect(input).toHaveValue('01/01/2020')
     })
   })
 
@@ -143,7 +152,7 @@ describe('DatePicker Kit', () => {
       }),
     )
     await waitFor(() => {
-      expect(input).toHaveValue('02/01/2022 at 12:00 AM')
+      expect(input).toHaveValue('01/01/2020 at 12:00 AM')
     })
 
     fireEvent(
@@ -154,7 +163,7 @@ describe('DatePicker Kit', () => {
       }),
     )
     await waitFor(() => {
-      expect(input).toHaveValue('02/01/2022 at 12:00 PM')
+      expect(input).toHaveValue('01/01/2020 at 12:00 PM')
     })
   })
 })
