@@ -182,7 +182,7 @@ module.exports = {
   // testURL: "http://localhost",
 
   // Setting this value to "fake" allows the use of fake timers for functions such as "setTimeout"
-  // timers: "real",
+  timers: "modern",
 
   // A map from regular expressions to paths to transformers
   // transform: undefined,
