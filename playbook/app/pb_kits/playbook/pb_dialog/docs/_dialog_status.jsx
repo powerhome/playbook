@@ -12,20 +12,21 @@ const useDialog = (visible = false) => {
 }
 
 const DialogStatus = () => {
-  const [infoAlertOpened, toggleInfoAlert] = useDialog()
+  const [defaultAlertOpened, toggleDefaultAlert] = useDialog()
   const [cautionAlertOpened, toggleCautionAlert] = useDialog()
+  const [deleteAlertOpened, toggleDeleteAlert] = useDialog()
+  const [infoAlertOpened, toggleInfoAlert] = useDialog()
   const [successAlertOpened, toggleSuccessAlert] = useDialog()
   const [errorAlertOpened, toggleErrorAlert] = useDialog()
-  const [deleteAlertOpened, toggleDeleteAlert] = useDialog()
 
   const dialogs = [
     {
       size: 'status_size',
-      status: "info",
+      status: "default",
       text: "Text explaining why there is an alert",
       title: "Are you sure?",
-      toggle: toggleInfoAlert,
-      visible: infoAlertOpened,
+      toggle: toggleDefaultAlert,
+      visible: defaultAlertOpened,
       buttonOneText:"Yes, Action",
       buttonTwoText: "No, Cancel"
     },
@@ -50,24 +51,31 @@ const DialogStatus = () => {
       buttonTwoText: "No, Cancel"
     },
     {
-      size: 'status_size',
-      status: "error",
-      text: "Text explaining the error",
-      title: "Error Message",
-      toggle: toggleErrorAlert,
-      visible: errorAlertOpened,
-      buttonOneText:"Ok, Thanks",
-      buttonTwoText: "No, Cancel"
+      size: 'sm',
+      status: "info",
+      text: "Text explaining why there is an alert",
+      title: "Information",
+      toggle: toggleInfoAlert,
+      visible: infoAlertOpened,
+      buttonOneText:"Ok, Thanks!",
     },
     {
-      size: 'status_size',
+      size: 'sm',
       status: "success",
       text: "Text explaining what is successful",
       title: "Success!",
       toggle: toggleSuccessAlert,
       visible: successAlertOpened,
-      buttonOneText: "Ok, Thanks",
-      buttonTwoText:"No, Cancel"
+      buttonOneText: "Great!",
+    },
+    {
+      size: 'sm',
+      status: "error",
+      text: "Text explaining the error",
+      title: "Error Message",
+      toggle: toggleErrorAlert,
+      visible: errorAlertOpened,
+      buttonOneText:"Oh no!",
     },
   ]
 
@@ -76,15 +84,27 @@ const DialogStatus = () => {
       <Flex>
         <Button
             marginRight="md"
-            onClick={toggleInfoAlert}
+            onClick={toggleDefaultAlert}
         >
-          {"Information Status"}
+          {"Default Status"}
         </Button>
         <Button
             marginRight="md"
             onClick={toggleCautionAlert}
         >
           {"Caution Status"}
+        </Button>
+        <Button
+            marginRight="md"
+            onClick={toggleDeleteAlert}
+        >
+          {"Delete Status"}
+        </Button>
+        <Button
+            marginRight="md"
+            onClick={toggleInfoAlert}
+        >
+          {"Information Status"}
         </Button>
         <Button
             marginRight="md"
@@ -97,12 +117,6 @@ const DialogStatus = () => {
             onClick={toggleErrorAlert}
         >
           {"Error Status"}
-        </Button>
-        <Button
-            marginRight="md"
-            onClick={toggleDeleteAlert}
-        >
-          {"Delete Status"}
         </Button>
       </Flex>
       <Flex>
@@ -117,19 +131,31 @@ const DialogStatus = () => {
               title={dialog.title}
           >
           <Dialog.Footer
-              padding="md"
+              paddingBottom="md"
+              paddingX="md"
           >
-            <Button
-                onClick={dialog.toggle}
-            >
-            {dialog.buttonOneText}
-            </Button>
-            <Button
-                onClick={dialog.toggle}
-                variant="secondary"
-            >
-            {dialog.buttonTwoText}
-            </Button>
+            <If condition={!dialog.buttonTwoText}>
+              <Button
+                  fullWidth
+                  onClick={dialog.toggle}
+              >
+              {dialog.buttonOneText}
+              </Button>
+            </If>
+            <If condition={dialog.buttonTwoText}>
+              <Button
+                  onClick={dialog.toggle}
+                  paddingRight="xl"
+              >
+              {dialog.buttonOneText}
+              </Button>
+              <Button
+                  onClick={dialog.toggle}
+                  variant="secondary"
+              >
+              {dialog.buttonTwoText}
+              </Button>
+            </If>
           </Dialog.Footer>
           </Dialog>
         ))}

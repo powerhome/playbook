@@ -1,7 +1,8 @@
 /* eslint-disable react/jsx-handler-names */
-
 import React, { useState } from "react"
-import { Button, Dialog, Flex, FlexItem, SectionSeparator } from "../.."
+import { Button, Dialog, Flex,
+  //  FlexItem, SectionSeparator 
+  } from "../.."
 
 const useDialog = (visible = false) => {
   const [opened, setOpened] = useState(visible)
@@ -10,53 +11,108 @@ const useDialog = (visible = false) => {
 }
 
 const DialogStackedAlert = () => {
-  const [singleButtonOpen, toggleSingleButtonOpen] = useDialog()
-  const [stackedButtonOpen, toggleStackedButtonOpen] = useDialog()
-  const [singleLinkButtonOpen, toggleSingleLinkButtonOpen] = useDialog()
-  const [twoLinkButtonOpen, toggleTwoLinkButtonOpen] = useDialog()
+  const [defaultAlertOpened, toggleDefaultAlert] = useDialog()
+  const [cautionAlertOpened, toggleCautionAlert] = useDialog()
+  const [deleteAlertOpened, toggleDeleteAlert] = useDialog()
+  // const [singleButtonOpen, toggleSingleButtonOpen] = useDialog()
+  // const [stackedButtonOpen, toggleStackedButtonOpen] = useDialog()
+  // const [singleLinkButtonOpen, toggleSingleLinkButtonOpen] = useDialog()
+  // const [twoLinkButtonOpen, toggleTwoLinkButtonOpen] = useDialog()
 
 
   const dialogs = [
     {
-      status: "info",
+      size: 'sm',
+      status: "default",
       text: "Text explaining why there is an alert",
       title: "Are you sure?",
-      toggle: toggleSingleButtonOpen,
-      visible: singleButtonOpen,
-      confirmedButton:"Ok, Thanks",
+      toggle: toggleDefaultAlert,
+      visible: defaultAlertOpened,
+      buttonOneText:"Yes, Action",
+      buttonTwoText: "No, Cancel"
     },
     {
-      status: "error",
-      text: "Text explaining the error",
-      title: "Error Message",
-      confirmedButton:"Yes, Action",
-      cancelledButton: "Ok, Cancel",
-      toggle: toggleStackedButtonOpen,
-      visible: stackedButtonOpen,
-    },
-    {
+      size: 'sm',
       status: "caution",
       text: "This is the action you will be taking",
       title: "Are you sure?",
-      toggle: toggleSingleLinkButtonOpen,
-      visible: singleLinkButtonOpen,
-      linkConfirmedButton:"Ok, Thanks!"
+      toggle: toggleCautionAlert,
+      visible: cautionAlertOpened,
+      buttonOneText:"Yes, Action",
+      buttonTwoText: "No, Cancel"
     },
     {
-      status: "success",
-      text: "Text explaining what is successful",
-      title: "Success",
-      toggle: toggleTwoLinkButtonOpen,
-      visible: twoLinkButtonOpen,
-      linkConfirmedButton:"Ok",
-      linkCancelledButton: "Cancel"
-    }
+      size: 'sm',
+      status: "delete",
+      text: "You are about to delete ...",
+      title: "Delete",
+      toggle: toggleDeleteAlert,
+      visible: deleteAlertOpened,
+      buttonOneText:"Yes, Delete",
+      buttonTwoText: "No, Cancel"
+    },
+    // {
+    //   size: 'sm',
+    //   status: "info",
+    //   text: "Text explaining why there is an alert",
+    //   title: "Are you sure?",
+    //   toggle: toggleSingleButtonOpen,
+    //   visible: singleButtonOpen,
+    //   confirmedButton:"Ok, Thanks",
+    // },
+    // {
+    //   size: 'sm',
+    //   status: "error",
+    //   text: "Text explaining the error",
+    //   title: "Error Message",
+    //   confirmedButton:"Yes, Action",
+    //   cancelledButton: "Ok, Cancel",
+    //   toggle: toggleStackedButtonOpen,
+    //   visible: stackedButtonOpen,
+    // },
+    // {
+    //   size: 'sm',
+    //   status: "caution",
+    //   text: "This is the action you will be taking",
+    //   title: "Are you sure?",
+    //   toggle: toggleSingleLinkButtonOpen,
+    //   visible: singleLinkButtonOpen,
+    //   linkConfirmedButton:"Ok, Thanks!"
+    // },
+    // {
+    //   size: 'sm',
+    //   status: "success",
+    //   text: "Text explaining what is successful",
+    //   title: "Success",
+    //   toggle: toggleTwoLinkButtonOpen,
+    //   visible: twoLinkButtonOpen,
+    //   linkConfirmedButton:"Ok",
+    //   linkCancelledButton: "Cancel"
+    // }
   ]
 
   return (
     <div>
     <Flex>
       <Button
+          marginRight="md"
+          onClick={toggleDefaultAlert}
+      >
+        {"Default Status"}
+      </Button>
+      <Button
+          marginRight="md"
+          onClick={toggleCautionAlert}
+      >
+        {"Caution Status"}
+      </Button>
+      <Button
+          marginRight="md"
+          onClick={toggleDeleteAlert}
+      >
+        {"Delete Status"}
+      </Button>
+      {/* <Button
           marginRight="md"
           onClick={toggleSingleButtonOpen}
       >
@@ -67,8 +123,8 @@ const DialogStackedAlert = () => {
           onClick={toggleStackedButtonOpen}
       >
         {"2 Button Error Status"}
-      </Button>
-      <Button
+      </Button> */}
+      {/* <Button
           marginRight="md"
           onClick={toggleSingleLinkButtonOpen}
       >
@@ -79,7 +135,7 @@ const DialogStackedAlert = () => {
           onClick={toggleTwoLinkButtonOpen}
       >
         {"2 Link Button Success"}
-      </Button>
+      </Button> */}
     </Flex>
     <Flex>
       {dialogs.map((dialog) => (
@@ -88,12 +144,37 @@ const DialogStackedAlert = () => {
             key={dialog.status}
             onClose={dialog.toggle}
             opened={dialog.visible}
-            size="sm"
+            size={dialog.size}
             status={dialog.status}
             text={dialog.text}
             title={dialog.title}
         >
-        <If condition={dialog.cancelledButton || dialog.confirmedButton}>
+        <Dialog.Footer
+            padding="sm"
+            paddingBottom = "none"
+            paddingX="md"
+        >
+          <Button
+              fullWidth
+              onClick={dialog.toggle}
+          >
+            {dialog.buttonOneText}
+          </Button>
+        </Dialog.Footer>
+        <Dialog.Footer
+            padding="sm"
+            paddingBottom = "md"
+            paddingX="md"
+        >
+          <Button
+              fullWidth
+              onClick={dialog.toggle}
+              variant="secondary"
+          >
+            {dialog.buttonTwoText}
+          </Button>
+        </Dialog.Footer>
+        {/* <If condition={dialog.cancelledButton || dialog.confirmedButton}>
           <Dialog.Footer>
             <Button
                 fullWidth
@@ -113,8 +194,8 @@ const DialogStackedAlert = () => {
               </Button>
             </Dialog.Footer>
           </If>
-          </If>
-          <If condition={dialog.linkCancelledButton || dialog.linkConfirmedButton} >
+        </If>
+        <If condition={dialog.linkCancelledButton || dialog.linkConfirmedButton} >
             <SectionSeparator />
             <Flex
                 inline="flex-container"
@@ -142,7 +223,7 @@ const DialogStackedAlert = () => {
                 </FlexItem>
               </If>
             </Flex>
-          </If>
+        </If> */}
         </Dialog>
       ))}
     </Flex>

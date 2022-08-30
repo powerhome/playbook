@@ -107,8 +107,13 @@ const Dialog = (props: DialogProps) => {
   }
 
   const sweetAlertStatus = {
-    info: {
+    default: {
       icon: "exclamation-circle",
+      variant: "default",
+      size: 'lg'
+    },
+    info: {
+      icon: "info-circle",
       variant: "default",
       size: 'lg'
     },
@@ -164,11 +169,12 @@ const Dialog = (props: DialogProps) => {
               </Dialog.Body>
           </If>
           <If condition={status}>
-            <Dialog.Body>
+            <Dialog.Body
+                padding="md"
+            >
               <Flex
                   align='center'
                   orientation='column'
-                  padding='xs'
               >
                 <IconCircle
                     icon={sweetAlertStatus[status].icon}
@@ -176,13 +182,13 @@ const Dialog = (props: DialogProps) => {
                     variant={sweetAlertStatus[status].variant}
                 />
                 <Title
-                    marginY='sm'
+                    marginTop='sm'
                     size={3}
                 >
                   {title}
                 </Title>
                 <Body
-                    marginY='xs'
+                    marginTop='xs'
                     text={text}
                 />
               </Flex>
