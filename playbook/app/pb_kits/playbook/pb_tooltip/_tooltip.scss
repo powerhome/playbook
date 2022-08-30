@@ -23,6 +23,7 @@ $tooltip_shadow: rgba(60, 106, 172, 0.18);
 }
 
 [class^="pb_tooltip_kit"] {
+  ~ .tooltip_tooltip,
   .tooltip_tooltip {
     display: block;
     opacity: 0;
@@ -52,15 +53,42 @@ $tooltip_shadow: rgba(60, 106, 172, 0.18);
       border-width: 10px;
       margin-bottom: 50px;
     }
+
+    &.visible, 
     &.show {
-      opacity: 1;
       z-index: $z_9;
-      margin-bottom: $space_sm;
-      background-color: $white;
       padding: $space_xs $space_sm;
       box-shadow: $shadow_deeper;
       border-radius: $border_rad_light;
+    }
 
+    // react only
+    &.visible {
+      color: $white;
+      background-color: rgba($black, $opacity_9);
+      &.right {
+        box-shadow: -8px 0 28px 0 $tooltip_shadow;
+      }
+      &.bottom {
+        box-shadow: 0 -12px 28px 0 $tooltip_shadow;
+      }
+      &.left {
+        box-shadow: 8px 0 28px 0 $tooltip_shadow;
+      }
+      // react arrow
+      .arrow_bg {
+        width: 10px;
+        height: 10px;
+        background-color: rgba($black, $opacity_9);
+        transform: rotate(45deg);
+      }
+    }
+
+    //rails only
+    &.show {
+      opacity: 1;
+      margin-bottom: $space_sm;
+      background-color: $white;
       &.fade_out {
         animation-name: fadeOut;
         animation-duration: 150ms;
@@ -69,13 +97,28 @@ $tooltip_shadow: rgba(60, 106, 172, 0.18);
       }
     }
   }
+
+  &.dark,
   &[class*=_dark]{
-    .tooltip_tooltip{
-      color: $white;
-      background-color: rgba($black, $opacity_9);
+    ~.tooltip_tooltip,
+    .tooltip_tooltip {
+      //react
+      &.visible {
+        color: $charcoal;
+        background-color: $white;
+      }
+      //rails
+      &.show {
+        color: $white;
+        background-color: rgba($black, $opacity_9);
+      }
       .arrow {
         border-color: $black transparent transparent transparent;
         opacity: $opacity_9;
+      }
+      // react arrow
+      .arrow_bg {
+        background-color: $white;
       }
       &.flipped {
         .arrow {
