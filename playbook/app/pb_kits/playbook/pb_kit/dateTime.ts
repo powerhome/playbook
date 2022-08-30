@@ -11,7 +11,7 @@ type DateTimeType = {
 const ABBR_DAYS = ['SU', 'M', 'T', 'W', 'TH', 'F', 'S']
 
 export default class DateTime {
-  value: Moment & any // moment-strftime is deprecated - TODO: remove library and use native moment fns
+  value: Moment & any
   constructor({ value, zone = 'America/New_York' }: DateTimeType) {
     this.value = this.convertToTimestampZone(value, zone)
   }

@@ -5441,10 +5441,10 @@ flatten@^1.0.2:
   resolved "https://registry.yarnpkg.com/flatten/-/flatten-1.0.3.tgz#c1283ac9f27b368abc1e36d1ff7b04501a30356b"
   integrity sha512-dVsPA/UwQ8+2uoFe5GHtiBMu48dWLTdsuEd7CKGlZlD78r1TTWBvDuFaFGKCo/ZfEr95Uk56vZoX86OsHkUeIg==
 
-flow-bin@0.183.0:
-  version "0.183.0"
-  resolved "https://registry.yarnpkg.com/flow-bin/-/flow-bin-0.183.0.tgz#17f37c94edd04b705a897b5890dd6cdc02e0c94e"
-  integrity sha512-7IJHUnMPYgNEZU8t9M4vJII/G+fJft9C/INm2+HRSXx5KDF2j+vD2iap6+Yg2FWgXTnNLUvk7kr1QdO5Fk/8/Q==
+flow-bin@0.185.2:
+  version "0.185.2"
+  resolved "https://registry.yarnpkg.com/flow-bin/-/flow-bin-0.185.2.tgz#b45a07d45cf641198e86e47848e35f64b0688c4c"
+  integrity sha512-Vphs8Z4Qo17dzlPKe/l8M85JvGn1Tf5NV6xESZLg8p9ktdIbNUYaxnq/WBQPoESiLrGdrC2v+rfezfh3tvxkvQ==
 
 flow-config-parser@^0.3.0:
   version "0.3.0"
@@ -6985,10 +6985,10 @@ jest-environment-node@^26.6.2:
     jest-mock "^26.6.2"
     jest-util "^26.6.2"
 
-jest-fail-on-console@2.4.1:
-  version "2.4.1"
-  resolved "https://registry.yarnpkg.com/jest-fail-on-console/-/jest-fail-on-console-2.4.1.tgz#f69dd656e0e902ac9f1b368bde90c286cba07ddb"
-  integrity sha512-z0Pk/g3DzJrJglJX70fo2ThHFV3t8jyBVwmYnjee5r/7NaYMQ2Ajb7ANqjf4ryPMY5N8zYhAHrZjxX6kJT8/gw==
+jest-fail-on-console@2.5.0:
+  version "2.5.0"
+  resolved "https://registry.yarnpkg.com/jest-fail-on-console/-/jest-fail-on-console-2.5.0.tgz#86d80d9e2365f3e7bcbb46276bbce29d30be3eec"
+  integrity sha512-VOxmGPY5DG4LkOwQtue4dTK486fjYQO1mkFnrvO5tkGi5e6G4JlxvaRO3KiCFk7ZLUOxgqgnQTGoGinagxHeDg==
   dependencies:
     chalk "^4.1.0"
 

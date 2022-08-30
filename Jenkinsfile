@@ -6,8 +6,8 @@ app.build(
   resources: [
     requestCpu: '1',
     limitCpu: '2',
-    requestMemory: '5Gi',
-    limitMemory: '8Gi',
+    requestMemory: '10Gi',
+    limitMemory: '10Gi',
   ]
 ) {
   app.composeBuild(
