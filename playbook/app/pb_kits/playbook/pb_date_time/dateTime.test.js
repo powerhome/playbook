@@ -3,8 +3,8 @@ import { render, screen } from '../utilities/test-utils'
 
 import DateTime from './_date_time'
 
-jest.setSystemTime(new Date('01/01/2020'));
-const DEFAULT_DATE = new Date()
+jest.useFakeTimers()
+const DEFAULT_DATE = new Date('01/01/2020')
 const testId = 'datetime-kit'
 
 describe('DateTime Kit', () => {
@@ -33,7 +33,7 @@ describe('DateTime Kit', () => {
 
     const kit = screen.getByTestId(testId)
     const text = kit.querySelector('.pb_date_kit_left')
-    expect(text.textContent).toEqual('Wed • Jan 1')
+    expect(text.textContent).toEqual('Wed • Jan 1, 2020')
   })
   test('renders DatePicker text right', () => {
     render(
