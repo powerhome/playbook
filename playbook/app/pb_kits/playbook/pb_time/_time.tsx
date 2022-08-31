@@ -3,7 +3,7 @@ import classnames from "classnames";
 
 import DateTime from "../pb_kit/dateTime";
 import { buildCss } from "../utilities/props";
-import { globalProps } from "../utilities/globalProps";
+import { globalProps, GlobalProps } from "../utilities/globalProps";
 
 import Body from "../pb_body/_body";
 import Caption from "../pb_caption/_caption";
@@ -20,7 +20,7 @@ type TimeProps = {
   size?: "md" | "sm";
   showTimezone?: boolean;
   timeZone?: string;
-};
+} & GlobalProps
 
 const Time = (props: TimeProps) => {
   const {

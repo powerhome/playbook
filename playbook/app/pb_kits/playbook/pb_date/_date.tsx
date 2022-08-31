@@ -12,7 +12,7 @@ import Title from "../pb_title/_title";
 
 type PbDateProps = {
   alignment?: "left" | "center" | "right";
-  aria: { [key: string]: string };
+  aria?: { [key: string]: string };
   className?: string;
   data?: { [key: string]: string };
   id?: string;
