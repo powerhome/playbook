@@ -36,10 +36,6 @@ const COPY_PLUGIN = new CopyPlugin({
         return targetPath.replace(/^tokens\/_/, 'tokens/')
       },
     },
-    {
-      from: path.resolve(__dirname, 'fonts'),
-      to: `${DIST_PATH}/fonts`,
-    },
   ],
   options: {
     concurrency: 100,

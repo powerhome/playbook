@@ -20,7 +20,6 @@ Gem::Specification.new do |s|
     "app/pb_kits/playbook/data/menu.yml",
     "app/pb_kits/playbook/*.{scss,js,rb}",
     "app/assets/images/*",
-    "fonts/**/*",
     "lib/*.rb",
     "lib/playbook/**/*",
     "dist/reset.css"

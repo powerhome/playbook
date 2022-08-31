@@ -8,6 +8,7 @@
     "release": "RAILS_ENV=production NODE_ENV=production ./bin/webpack"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-pro": "^6.2.0",
     "@rails/webpacker": "5.2.1",
     "playbook-ui": ">= 1",
     "react": "16.14.0",
