@@ -4,15 +4,24 @@ import { render, screen } from '../utilities/test-utils'
 import DateTime from './_date_time'
 
 jest.useFakeTimers()
-const DEFAULT_DATE = new Date('01/01/2020')
 const testId = 'datetime-kit'
+
+const realDate = Date
+
+beforeEach(() => {
+  global.Date.now = jest.fn(() => new Date('01/01/2020').getTime());
+})
+
+afterEach(() => {
+  global.Date = realDate;
+})
 
 describe('DateTime Kit', () => {
   test('renders DatePicker className', () => {
     render(
       <DateTime
           data={{ testid: testId }}
-          datetime={DEFAULT_DATE}
+          datetime={new Date(Date.now())}
           showDayOfWeek
           showIcon
       />
@@ -25,7 +34,7 @@ describe('DateTime Kit', () => {
     render(
       <DateTime
           data={{ testid: testId }}
-          datetime={DEFAULT_DATE}
+          datetime={new Date(Date.now())}
           showDayOfWeek
           showIcon
       />
@@ -39,7 +48,7 @@ describe('DateTime Kit', () => {
     render(
       <DateTime
           data={{ testid: testId }}
-          datetime={DEFAULT_DATE}
+          datetime={new Date(Date.now())}
           showDayOfWeek
           showIcon
       />
@@ -56,7 +65,7 @@ describe('DateTime Kit', () => {
     render(
       <DateTime
           data={{ testid: testId }}
-          datetime={DEFAULT_DATE}
+          datetime={new Date(Date.now())}
           showDayOfWeek
       />
     )
@@ -70,7 +79,7 @@ describe('DateTime Kit', () => {
     render(
       <DateTime
           data={{ testid: testId }}
-          datetime={DEFAULT_DATE}
+          datetime={new Date(Date.now())}
           showDayOfWeek
           timeZone="Asia/Tokyo"
       />
@@ -85,7 +94,7 @@ describe('DateTime Kit', () => {
     render(
       <DateTime
           data={{ testid: testId }}
-          datetime={DEFAULT_DATE}
+          datetime={new Date(Date.now())}
           showDayOfWeek
           size="sm"
       />
