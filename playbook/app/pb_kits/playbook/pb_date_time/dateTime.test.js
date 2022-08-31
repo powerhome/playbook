@@ -3,13 +3,14 @@ import { render, screen } from '../utilities/test-utils'
 
 import DateTime from './_date_time'
 
-jest.useFakeTimers()
+const TEST_DATE = '01/01/2020 00:00:000 GMT-0500'
+jest.setSystemTime(new Date(TEST_DATE));
 const testId = 'datetime-kit'
 
 const realDate = Date
 
 beforeEach(() => {
-  global.Date.now = jest.fn(() => new Date('01/01/2020').getTime());
+  global.Date.now = jest.fn(() => new Date(TEST_DATE).getTime());
 })
 
 afterEach(() => {
@@ -42,7 +43,7 @@ describe('DateTime Kit', () => {
 
     const kit = screen.getByTestId(testId)
     const text = kit.querySelector('.pb_date_kit_left')
-    expect(text.textContent).toEqual('Wed • Jan 1, 2020')
+    expect(text.textContent).toEqual('Wed • Jan 1')
   })
   test('renders DatePicker text right', () => {
     render(
