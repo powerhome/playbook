@@ -2,7 +2,7 @@ import React from "react";
 import classnames from "classnames";
 
 import { globalProps } from "../utilities/globalProps";
-import { buildCss } from "../utilities/props";
+import { buildCss, buildDataProps } from "../utilities/props";
 import DateTime from "../pb_kit/dateTime";
 
 import Body from "../pb_body/_body";
@@ -41,6 +41,7 @@ const DateRangeInline = (props: DateRangeInlineProps) => {
     dark = false,
     size = "sm",
     align = "left",
+    data = {},
     startDate,
     endDate,
     className,
@@ -76,7 +77,7 @@ const DateRangeInline = (props: DateRangeInlineProps) => {
   };
 
   const dateRangeClasses = buildCss("pb_date_range_inline_kit", align);
-
+  const dataProps = buildDataProps(data)
   const renderTime = (date: Date | string) => {
     return (
       <time dateTime={dateTimeIso(date)}>
@@ -91,6 +92,7 @@ const DateRangeInline = (props: DateRangeInlineProps) => {
 
   return (
     <div
+    {...dataProps}
       className={classnames(dateRangeClasses, globalProps(props), className)}
     >
       <div className="pb_date_range_inline_wrapper">
