@@ -2,7 +2,7 @@ import React from 'react'
 import classnames from 'classnames'
 
 import DateTime from '../pb_kit/dateTime'
-import { buildCss } from '../utilities/props'
+import { buildCss, buildDataProps } from '../utilities/props'
 import { globalProps } from '../utilities/globalProps'
 
 import Body from '../pb_body/_body'
@@ -18,16 +18,18 @@ type DateYearStackedProps = {
 }
 
 const DateYearStacked = (props: DateYearStackedProps) => {
-  const { align = 'left', className, dark = false, date } = props
+  const { align = 'left', className, dark = false, date, data={} } = props
   const dateTimestamp = new DateTime({ value: date })
   const css = classnames(
     buildCss('pb_date_year_stacked', align),
     globalProps(props),
     className
   )
+  const dataProps = buildDataProps(data)
 
   return (
-    <div className={css}>
+    <div {...dataProps}
+    className={css}>
       <Title
           dark={dark}
           size={4}
