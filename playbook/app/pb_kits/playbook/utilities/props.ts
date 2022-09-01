@@ -47,5 +47,5 @@ export const buildDataProps = (data: {[key: string]: any}) => buildPrefixedProps
  * @param {Object} rules a 'classnames' compliant rules object, used to derive the root className.
  * @returns {String} the derived root className value.
  */
-export const buildCss = (...rules: (string | { [x: string]: string; } | { [x: string]: boolean; })[]): string => classnames(rules).replace(/\s/g, '_')
+export const buildCss = (...rules: (string | { [x: string]: string | boolean; })[]): string => classnames(rules).replace(/\s/g, '_')
 
