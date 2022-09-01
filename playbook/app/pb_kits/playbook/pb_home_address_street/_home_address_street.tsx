@@ -7,12 +7,15 @@ import { globalProps } from '../utilities/globalProps'
 import Body from '../pb_body/_body'
 import Hashtag from '../pb_hashtag/_hashtag'
 import Title from '../pb_title/_title'
+import { buildAriaProps, buildDataProps } from '../utilities/props'
 
 type HomeAddressStreetProps = {
+  aria?: { [key: string]: string },
   address: string,
   addressCont: string,
   city: string,
   className?: string,
+  data?: { [key: string]: string },
   dark?: boolean,
   emphasis: "street" | "city",
   homeId: string,
@@ -27,8 +30,10 @@ const HomeAddressStreet = (props: HomeAddressStreetProps) => {
   const {
     address,
     addressCont,
+    aria = {},
     city,
     className,
+    data = {},
     dark = false,
     emphasis = 'street',
     homeId,
@@ -48,8 +53,12 @@ const HomeAddressStreet = (props: HomeAddressStreetProps) => {
       globalProps(props),
       className
     )
+
+  const dataProps: { [key: string]: any } = buildDataProps(data)
+  const ariaProps: { [key: string]: any } = buildAriaProps(aria)
+  
   return (
-    <div className={classes(className, dark)}>
+    <div className={classes(className, dark)} {...ariaProps} {...dataProps}>
       {emphasis == 'street' && 
         <div>
           <Title
