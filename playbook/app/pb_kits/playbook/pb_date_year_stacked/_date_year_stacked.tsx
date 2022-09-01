@@ -1,5 +1,3 @@
-/* @flow */
-
 import React from 'react'
 import classnames from 'classnames'
 
@@ -12,7 +10,7 @@ import Title from '../pb_title/_title'
 
 type DateYearStackedProps = {
   align?: "left" | "center" | "right",
-  className?: string | array<string>,
+  className?: string | string[],
   dark?: boolean,
   data?: string,
   date: string,
