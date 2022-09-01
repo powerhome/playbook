@@ -1,5 +1,5 @@
 import React from "react";
-import { cleanup, render, screen, fireEvent } from "../utilities/test-utils";
+import { cleanup, render, screen, fireEvent, waitFor } from "../utilities/test-utils";
 import { Button, Tooltip } from "..";
 
 function TooltipTest() {
@@ -30,21 +30,24 @@ test("renders the component", () => {
   cleanup();
 });
 
-test("opens on mouseenter", () => {
+test("opens on mouseenter", async () => {
   render(<TooltipTest />);
 
   fireEvent.mouseEnter(screen.getByRole("tooltip_trigger"));
-  expect(screen.queryByRole("tooltip")).toBeInTheDocument();
-
-  cleanup();
+  await waitFor(() => {
+    expect(screen.queryByRole("tooltip")).toBeInTheDocument();
+    cleanup();
+  })
 });
 
-test("closes on mouseleave", () => {
+test("closes on mouseleave", async () => {
   render(<TooltipTest />);
 
   fireEvent.mouseEnter(screen.getByRole("tooltip_trigger"));
   fireEvent.mouseLeave(screen.getByRole("tooltip_trigger"));
-  expect(screen.queryByRole("tooltip")).not.toBeInTheDocument();
 
-  cleanup();
+  await waitFor(() => {
+    expect(screen.queryByRole("tooltip")).not.toBeInTheDocument();
+    cleanup();
+  })
 });
