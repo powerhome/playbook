@@ -1,5 +1,5 @@
 import React from 'react'
-import { cleanup, fireEvent, render, screen, waitFor } from '../utilities/test-utils'
+import { fireEvent, render, screen, waitForElementToBeRemoved } from '../utilities/test-utils'
 
 import { Lightbox } from '../'
 
@@ -27,7 +27,6 @@ test('Kit renders', () => {
   const kit = screen.getByTestId(testId)
   expect(kit).toHaveClass(`${kitClass} customClass`)
   expect(kit).toBeInTheDocument()
-  cleanup()
 })
 
 test('Shows selected images', () => {
@@ -68,7 +67,6 @@ test('Shows selected images', () => {
   )
 
   expect(image).toHaveAttribute('src', TEST_PHOTOS[0])
-  cleanup()
 })
 
 test('Closes on escape key', async () => {
@@ -86,46 +84,41 @@ test('Closes on escape key', async () => {
 
   const kit = screen.getByTestId(testId)
 
-  fireEvent.keyDown(
-    global.window,
-    {
-      bubbles: true,
-      key: "Escape",
-      code: "Escape",
-      keyCode: 27,
-      charCode: 27
-    }
+  fireEvent(
+    document.body,
+    new KeyboardEvent('keydown', {
+      keyCode: 27, //escape
+    })
   )
 
-  await waitFor(() => {
-    expect(kit).not.toBeInTheDocument()
-  })
+  waitForElementToBeRemoved(kit)
+    .then(() => expect(kit).not.toBeInTheDocument())
 })
 
-// test('Closes on close button', async () => {
-//   render(
-//     <Lightbox
-//         data={{ testid: testId }}
-//         icon="close"
-//         iconSize="3x"
-//         id="test1"
-//         initialPhoto={0}
-//         onClose={() => {}}
-//         photos={TEST_PHOTOS}
-//     />
-//   )
+test('Closes on close button', () => {
+  render(
+    <Lightbox
+        data={{ testid: testId }}
+        icon="close"
+        iconSize="3x"
+        id="test1"
+        initialPhoto={0}
+        onClose={() => {}}
+        photos={TEST_PHOTOS}
+    />
+  )
 
-//   const kit = screen.getByTestId(testId)
-//   const closeIcon = kit.getElementsByClassName('close-icon')[0]
+  const kit = screen.getByTestId(testId)
+  const closeIcon = kit.getElementsByClassName('close-icon')[0]
 
-//   fireEvent(
-//     closeIcon,
-//     new MouseEvent('click', {
-//       bubbles: true,
-//       cancelable: true,
-//     }),
-//   )
+  fireEvent(
+    closeIcon,
+    new MouseEvent('click', {
+      bubbles: true,
+      cancelable: true,
+    }),
+  )
 
-//   await waitForElementToBeRemoved(kit)
-//   cleanup()
-// })
+  waitForElementToBeRemoved(kit)
+    .then(() => expect(kit).not.toBeInTheDocument())
+})
