@@ -11,6 +11,7 @@ import NumberSpacing from './Examples/NumberSpacing'
 import Shadows from './Examples/Shadows'
 import Spacing from './Examples/Spacing'
 import BorderRadius from './Examples/BorderRadius'
+import Typography from './Examples/Typography'
 import Display from './Examples/Display'
 import Cursor from './Examples/Cursor'
 import FlexBox from './Examples/FlexBox'
@@ -38,6 +39,7 @@ const VisualGuidelines = ({ examples }: {examples: {[key: string]: string}}): Re
           tokensExample={examples.spacing_tokens_jsx}
       />
       <BorderRadius tokensExample={examples.border_radius_tokens} />
+      <Typography example={examples.typography_tokens}/>
       <Display example={examples.display_in_use_jsx} />
       <Cursor example={examples.cursor_jsx} />
       <FlexBox example={examples.justify_self_jsx} />
