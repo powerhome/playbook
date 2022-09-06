@@ -61,7 +61,7 @@
 
   <%= javascript_tag do %>
     window.addEventListener("DOMContentLoaded", () => {
-        datePickerHelper(<%= object.date_picker_config %>)
+        datePickerHelper(<%= object.date_picker_config %>, "<%= object.scroll_container %>")
     })
   <% end %>
 <% end %>

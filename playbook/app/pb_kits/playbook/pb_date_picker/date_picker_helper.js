@@ -3,7 +3,11 @@ import monthSelectPlugin from 'flatpickr/dist/plugins/monthSelect'
 import weekSelect from "flatpickr/dist/plugins/weekSelect/weekSelect"
 import timeSelectPlugin from './plugins/timeSelect'
 
-const datePickerHelper = (config) => {
+const getPositionElement = (element) => {
+  return (typeof element === 'string') ? document.querySelectorAll(element)[0] : element
+}
+
+const datePickerHelper = (config, scrollContainer) => {
   const {
     allowInput,
     defaultDate,
@@ -18,9 +22,12 @@ const datePickerHelper = (config) => {
     onChange = () => {},
     pickerId,
     plugins,
+    position = "auto",
+    positionElement,
     required,
     selectionType,
     showTimezone,
+    staticPosition = true,
     timeCaption = 'Select Time',
     timeFormat = 'at h:i K',
     yearRange,
@@ -117,19 +124,23 @@ const datePickerHelper = (config) => {
     onOpen: [() => {
       calendarResizer()
       window.addEventListener('resize', calendarResizer)
+      if (!staticPosition && scrollContainer) attachToScroll(scrollContainer)
     }],
     onClose: [() => {
       window.removeEventListener('resize', calendarResizer)
+      if (!staticPosition && scrollContainer) detachFromScroll(scrollContainer)
     }],
     onChange: [(selectedDates, dateStr) => {
-      onChange(dateStr, selectedDates) 
+      onChange(dateStr, selectedDates)
     }],
     onYearChange: [() => {
       yearChangeHook()
     }],
     plugins: setPlugins(),
+    position,
+    positionElement: getPositionElement(positionElement),
     prevArrow: '<i class="far fa-angle-left"></i>',
-    static: true,
+    static: staticPosition,
   })
 
   // ===========================================================
@@ -139,6 +150,17 @@ const datePickerHelper = (config) => {
   // Assign dynamically sourced flatpickr instance to variable
   const picker = document.querySelector(`#${pickerId}`)._flatpickr
   picker.innerContainer.parentElement.id = `cal-${pickerId}`
+
+  // Attach / detach to / from scroll events
+  const scrollEvent = () => {
+    picker._positionCalendar()
+  }
+  function attachToScroll(scrollParent) {
+    document.querySelectorAll(scrollParent)[0]?.addEventListener("scroll", scrollEvent, { passive: true })
+  }
+  function detachFromScroll(scrollParent = document.body) {
+    document.querySelectorAll(scrollParent)[0]?.removeEventListener("scroll", scrollEvent)
+  }
 
   // replace year selector with dropdown
   picker.yearElements[0].parentElement.innerHTML = `<select class="numInput cur-year" type="number" tabIndex="-1" aria-label="Year" id="year-${pickerId}"></select>`
