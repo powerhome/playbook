@@ -8,10 +8,10 @@ import Icon from '../pb_icon/_icon'
 type EventHandler = (React.MouseEventHandler<HTMLElement>)
 
 type ButtonPropTypes = {
-  aria?: {[key: string]: string},
+  aria?: { [key: string]: string },
   children?: React.ReactChild[] | React.ReactChild,
   className?: string | string[],
-  data?: {[key: string]: string},
+  data?: { [key: string]: string },
   disabled?: boolean,
   fixedWidth?: boolean,
   form?: string,
@@ -24,11 +24,11 @@ type ButtonPropTypes = {
   onClick?: EventHandler,
   size?: 'sm' | 'md' | 'lg',
   text?: string,
-  type: 'inline' | null,
+  type?: 'inline' | null,
   htmlType: 'submit' | 'reset' | 'button' | undefined,
   value?: string | null,
   variant: 'primary' | 'secondary' | 'link',
-  wrapperClass: string,
+  wrapperClass?: string,
 } & GlobalProps
 
 const buttonClassName = (props: ButtonPropTypes) => {
@@ -99,8 +99,8 @@ const Button = (props: ButtonPropTypes) => {
   )
 
   const ifLoading = () => {
-    if (loading){
-      return(
+    if (loading) {
+      return (
         <>
           {loadingIcon}
         </>

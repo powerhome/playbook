@@ -1,5 +1,5 @@
-<% if object.pills %>
-  <%= react_component('Typeahead', object.typeahead_with_pills_options) %>
+<% if object.is_react? %>
+  <%= react_component('Typeahead', object.typeahead_react_options) %>
 <% else %>
   <%= content_tag(:div,
                 id: object.id,
