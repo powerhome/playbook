@@ -1,6 +1,6 @@
 import React from 'react'
 import { render, screen, cleanup } from "../utilities/test-utils";
-import { Dialog } from '../'
+import { Dialog} from '../'
 
 /* eslint-disable jsx-control-statements/jsx-jcs-no-undef */
 
@@ -10,6 +10,9 @@ import { Dialog } from '../'
 */
 
 const testId = "primary-test"
+const text="Hello Body Text, Nice to meet ya."
+const title="Header Title is the Title Prop"
+const size="sm"
 
 function DialogTest(props) {
   return (
@@ -18,26 +21,36 @@ function DialogTest(props) {
           // className="wrapper"
           // confirmButton="Okay"
           data={{ testid: testId }}
-          loading={isLoading}
-          onCancel={close}
-          onClose={close}
-          onConfirm={() => setIsLoading(!isLoading)}
-          opened={isOpen}
-          portalClassName="portal"
-          size="sm"
-          text="Hello Body Text, Nice to meet ya."
-          title="Header Title is the Title Prop"
+          // loading={isLoading}
+          // onCancel={close}
+          // onClose={close}
+          // onConfirm={() => setIsLoading(!isLoading)}
+          // opened={isOpen}
+          // portalClassName="portal"
+          size={size}
+          text={text}
+          title={title}
           {...props}
       />
   );
 }
 
-test('Kit renders Dialog', () => {
+test('renders the component', () => {
 
   render(<DialogTest/>)
 
   const kit = screen.getByTestId(testId)
   expect(kit).toBeInTheDocument()
+  expect(kit).toHaveClass('pb_dialog_wrapper');
 
   cleanup()
 })
+
+test("renders the title", () => {
+  const { container } = render(<DialogTest />);
+  const item = container.getElementsByClassName("dialog_body")
+  expect(item).toBeInTheDocument;
+  // expect(item).toHaveTextContent(text);
+
+  cleanup()
+});
