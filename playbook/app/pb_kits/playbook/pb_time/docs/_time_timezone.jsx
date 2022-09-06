@@ -1,5 +1,5 @@
 import React from 'react'
-import Time from '../_time.jsx'
+import Time from '../_time'
 
 const TimeTimezone = (props) => {
   const zones = {

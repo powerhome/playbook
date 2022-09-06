@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react'
-import Time from '../_time.jsx'
+import Time from '../_time'
 
 const TimeSizes = (props) => {
   return (
