@@ -12,13 +12,13 @@ import '../site_styles/main.scss'
 import DarkModeToggle from '../components/DarkModeToggle'
 import KitSearch from '../components/KitSearch'
 import SnippetToggle from '../components/SnippetToggle'
-import ReactSidebar from '../components/ReactSidebar'
+import Sidebar from '../components/Sidebar'
 
 WebpackerReact.setup({
   DarkModeToggle,
   KitSearch,
   SnippetToggle,
-  ReactSidebar,
+  Sidebar,
 })
 
 // Produce image assets

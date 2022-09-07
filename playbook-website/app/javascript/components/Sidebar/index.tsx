@@ -16,7 +16,7 @@ export const MENU_ITEMS = [
   "Flex Box",
 ];
 
-const ReactSidebar = () => {
+const Sidebar = () => {
 
   return (
     <>
@@ -36,4 +36,4 @@ const ReactSidebar = () => {
   
 };
 
-export default ReactSidebar;
+export default Sidebar;

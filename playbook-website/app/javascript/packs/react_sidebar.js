@@ -1,7 +1,7 @@
 import WebpackerReact from 'webpacker-react'
 
-import ReactSidebar from '../components/ReactSidebar'
+import Sidebar from '../components/Sidebar'
 
 WebpackerReact.setup({
-  ReactSidebar,
+  Sidebar,
 })
