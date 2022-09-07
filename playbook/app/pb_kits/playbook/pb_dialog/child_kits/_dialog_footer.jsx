@@ -28,15 +28,15 @@ type DialogFooterProps = {
 const DialogFooter = (props: DialogFooterProps) => {
   const {
     children,
-    padding = 'sm',
+    padding = "sm",
     paddingBottom = "sm",
     paddingX = "sm",
     className,
-    spacing = 'between',
+    spacing = "between",
     separator = false,
   } = props
 
-  const footerCSS = buildCss('dialog_footer')
+  const footerCSS = buildCss("dialog_footer")
   const footerSpacing = globalProps(props, { padding, paddingBottom, paddingX })
 
   return (

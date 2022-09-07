@@ -53,7 +53,7 @@ const Dialog = (props: DialogProps) => {
     className,
     data = {},
     id,
-    size = 'md',
+    size = "md",
     children,
     loading = false,
     opened,
@@ -110,32 +110,32 @@ const Dialog = (props: DialogProps) => {
     default: {
       icon: "exclamation-circle",
       variant: "default",
-      size: 'lg'
+      size: "lg"
     },
     info: {
       icon: "info-circle",
       variant: "default",
-      size: 'lg'
+      size: "lg"
     },
     caution: {
       icon: "exclamation-triangle",
       variant: "yellow",
-      size: 'lg'
+      size: "lg"
     },
     delete: {
       icon: "trash-alt",
       variant: "red",
-      size: 'lg'
+      size: "lg"
     },
     error: {
       icon: "times-circle",
       variant: "red",
-      size: 'lg'
+      size: "lg"
     },
     success: {
       icon: "check-circle",
       variant: "green",
-      size: 'lg'
+      size: "lg"
     },
   }
 
@@ -173,8 +173,8 @@ const Dialog = (props: DialogProps) => {
                 padding="md"
             >
               <Flex
-                  align='center'
-                  orientation='column'
+                  align="center"
+                  orientation="column"
               >
                 <IconCircle
                     icon={sweetAlertStatus[status].icon}
@@ -182,13 +182,13 @@ const Dialog = (props: DialogProps) => {
                     variant={sweetAlertStatus[status].variant}
                 />
                 <Title
-                    marginTop='sm'
+                    marginTop="sm"
                     size={3}
                 >
                   {title}
                 </Title>
                 <Body
-                    marginTop='xs'
+                    marginTop="xs"
                     text={text}
                 />
               </Flex>
@@ -202,9 +202,9 @@ const Dialog = (props: DialogProps) => {
               >
                 {confirmButton}
               </Button>
-              <Button id='cancel-button'
+              <Button id="cancel-button"
                   onClick={onCancel}
-                  variant='link'
+                  variant="link"
               >
                 {cancelButton}
               </Button>

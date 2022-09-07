@@ -15,7 +15,7 @@ const DialogStackedAlert = () => {
 
   const dialogs = [
     {
-      size: 'sm',
+      size: "sm",
       status: "default",
       text: "Text explaining why there is an alert",
       title: "Are you sure?",
@@ -25,7 +25,7 @@ const DialogStackedAlert = () => {
       buttonTwoText: "No, Cancel"
     },
     {
-      size: 'sm',
+      size: "sm",
       status: "caution",
       text: "This is the action you will be taking",
       title: "Are you sure?",
@@ -35,7 +35,7 @@ const DialogStackedAlert = () => {
       buttonTwoText: "No, Cancel"
     },
     {
-      size: 'sm',
+      size: "sm",
       status: "delete",
       text: "You are about to delete ...",
       title: "Delete",

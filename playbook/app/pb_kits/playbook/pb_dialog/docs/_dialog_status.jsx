@@ -21,7 +21,7 @@ const DialogStatus = () => {
 
   const dialogs = [
     {
-      size: 'status_size',
+      size: "status_size",
       status: "default",
       text: "Text explaining why there is an alert",
       title: "Are you sure?",
@@ -31,7 +31,7 @@ const DialogStatus = () => {
       buttonTwoText: "No, Cancel"
     },
     {
-      size: 'status_size',
+      size: "status_size",
       status: "caution",
       text: "This is the action you will be taking",
       title: "Are you sure?",
@@ -41,7 +41,7 @@ const DialogStatus = () => {
       buttonTwoText: "No, Cancel"
     },
     {
-      size: 'status_size',
+      size: "status_size",
       status: "delete",
       text: "You are about to delete ...",
       title: "Delete",
@@ -51,7 +51,7 @@ const DialogStatus = () => {
       buttonTwoText: "No, Cancel"
     },
     {
-      size: 'sm',
+      size: "sm",
       status: "info",
       text: "Text explaining why there is an alert",
       title: "Information",
@@ -60,7 +60,7 @@ const DialogStatus = () => {
       buttonOneText:"Ok, Thanks!",
     },
     {
-      size: 'sm',
+      size: "sm",
       status: "success",
       text: "Text explaining what is successful",
       title: "Success!",
@@ -69,7 +69,7 @@ const DialogStatus = () => {
       buttonOneText: "Great!",
     },
     {
-      size: 'sm',
+      size: "sm",
       status: "error",
       text: "Text explaining the error",
       title: "Error Message",
