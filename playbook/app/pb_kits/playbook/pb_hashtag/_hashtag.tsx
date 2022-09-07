@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-no-target-blank */
 /* eslint-disable react/no-multi-comp, flowtype/space-before-type-colon */
 
 import React from 'react'
@@ -15,6 +16,7 @@ type HashtagProps = {
   data?: string,
   id?: string,
   newWindow?: boolean,
+  rel?: string,
   text?: string,
   type: "default" | "home" | "project" | "appointment",
   url?: string,
@@ -35,6 +37,7 @@ const Hashtag = (props: HashtagProps) => {
     data = {},
     id,
     newWindow,
+    rel,
     text,
     type = 'default',
     url,
@@ -51,8 +54,9 @@ const Hashtag = (props: HashtagProps) => {
         className={classes}
         id={id}
     >
-      <a href={url} 
-          rel="noreferrer"
+      <a
+          href={url}
+          rel={(newWindow ? "noreferrer" : rel)}
           target={(newWindow ? '_blank' : '_self')}
       >
         <Badge

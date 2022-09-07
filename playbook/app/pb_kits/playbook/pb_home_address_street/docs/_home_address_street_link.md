@@ -1,1 +1,1 @@
-Use the newWindow/new_window prop to control whether the link opens on the same page or a new tab (same page is the default behavior)
+Use the `newWindow` / `new_window` prop to control whether the link opens on the same page or a new tab (same page is the default behavior)
