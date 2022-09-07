@@ -22,7 +22,8 @@
     url: object.home_url || "#",
     type: "home",
     dark: object.dark,
-    classname: "home-hashtag"}) %>
+    classname: "home-hashtag",
+    new_window: object.new_window}) %>
 <% end %>
 
 <%= pb_rails "body", props: { color: "light", tag: "span", dark: object.dark } do %>
