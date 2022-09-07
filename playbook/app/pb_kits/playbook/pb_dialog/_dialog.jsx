@@ -37,7 +37,7 @@ type DialogProps = {
   opened: boolean,
   portalClassName?: string,
   shouldCloseOnOverlayClick: boolean,
-  size?: "sm" | "md" | "lg" | "content",
+  size?: "sm" | "md" | "lg" | "status_size" | "content",
   status?: "info" | "caution" | "delete" | "error" | "success",
   text?: string,
   title?: string,
@@ -53,7 +53,7 @@ const Dialog = (props: DialogProps) => {
     className,
     data = {},
     id,
-    size = 'md',
+    size = "md",
     children,
     loading = false,
     opened,
@@ -107,25 +107,35 @@ const Dialog = (props: DialogProps) => {
   }
 
   const sweetAlertStatus = {
-    info: {
+    default: {
       icon: "exclamation-circle",
       variant: "default",
+      size: "lg"
+    },
+    info: {
+      icon: "info-circle",
+      variant: "default",
+      size: "lg"
     },
     caution: {
-      icon: "triangle-warning",
+      icon: "exclamation-triangle",
       variant: "yellow",
+      size: "lg"
     },
     delete: {
-      icon: "trash",
+      icon: "trash-alt",
       variant: "red",
+      size: "lg"
     },
     error: {
       icon: "times-circle",
       variant: "red",
+      size: "lg"
     },
     success: {
       icon: "check-circle",
       variant: "green",
+      size: "lg"
     },
   }
 
@@ -150,27 +160,35 @@ const Dialog = (props: DialogProps) => {
             shouldCloseOnOverlayClick={shouldCloseOnOverlayClick}
             status={status}
         >
-          <If condition={title}>
+          <If condition={title && !status}>
             <Dialog.Header>{title}</Dialog.Header>
           </If>
           <If condition={!status && text}>
-            <Dialog.Body>{text}</Dialog.Body>
+            <Dialog.Body>
+                {text}
+              </Dialog.Body>
           </If>
           <If condition={status}>
-            <Dialog.Body>
-              <Flex align='center'
-                  orientation='column'
+            <Dialog.Body
+                padding="md"
+            >
+              <Flex
+                  align="center"
+                  orientation="column"
               >
                 <IconCircle
                     icon={sweetAlertStatus[status].icon}
+                    size={sweetAlertStatus[status].size}
                     variant={sweetAlertStatus[status].variant}
                 />
-                <Title marginY='sm'
+                <Title
+                    marginTop="sm"
                     size={3}
                 >
                   {title}
                 </Title>
-                <Body marginY='xs'
+                <Body
+                    marginTop="xs"
                     text={text}
                 />
               </Flex>
@@ -184,9 +202,9 @@ const Dialog = (props: DialogProps) => {
               >
                 {confirmButton}
               </Button>
-              <Button id='cancel-button'
+              <Button id="cancel-button"
                   onClick={onCancel}
-                  variant='link'
+                  variant="link"
               >
                 {cancelButton}
               </Button>
