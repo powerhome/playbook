@@ -2,7 +2,6 @@ import React, {useState} from 'react'
 import { render, cleanup, waitFor, fireEvent } from "../utilities/test-utils";
 import { Dialog, Button } from '../'
 
-const testId = "primary-test"
 const text="Hello Body Text, Nice to meet ya."
 const title="Header Title is the Title Prop"
 const size="sm"
@@ -21,7 +20,6 @@ function DialogTest() {
           cancelButton={cancelButton}
           className="wrapper"
           confirmButton={confirmButton}
-          data={{ testid: testId }}
           loading={isLoading}
           onCancel={close}
           onClose={close}
