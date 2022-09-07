@@ -1,7 +1,7 @@
 /* eslint-disable flowtype/no-types-missing-file-annotation */
 
 // React Pure component - do not use state!
-import React from 'react'
+import React, {useRef, useEffect} from 'react'
 
 import Colors from './Colors'
 import MaxWidth from './Examples/MaxWidth'
@@ -17,9 +17,20 @@ import Cursor from './Examples/Cursor'
 import FlexBox from './Examples/FlexBox'
 
 const VisualGuidelines = ({ examples }: {examples: {[key: string]: string}}): React.ReactElement => {
+  const myRef = useRef(null)
+useEffect(() => {
+    setTimeout(() => {
+        const scrollToRef = (ref: any) => {
+          window.scrollTo(0, ref.current.offsetTop)
+        }
+        scrollToRef(myRef)
+    }, 0)
+  }, [])
   return (
     <React.Fragment>
+      <div id='Colors'>
       <Colors />
+      </div>
       <MaxWidth example={examples.width_jsx} />
       <Positioning
           example={examples.positioning_jsx}
@@ -38,7 +49,9 @@ const VisualGuidelines = ({ examples }: {examples: {[key: string]: string}}): Re
           example={examples.spacing_global_props_jsx}
           tokensExample={examples.spacing_tokens_jsx}
       />
+      <div id='BorderRadius'>
       <BorderRadius tokensExample={examples.border_radius_tokens} />
+      </div>
       <Typography example={examples.typography_tokens}/>
       <Display example={examples.display_in_use_jsx} />
       <Cursor example={examples.cursor_jsx} />
