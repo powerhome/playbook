@@ -1,5 +1,3 @@
-/* @flow*/
-
 import React, { useRef, useState } from "react"
 import classnames from "classnames"
 import {
@@ -40,8 +38,6 @@ const Tooltip = (props: TooltipProps) => {
     zIndex,
     ...rest
   } = props
-
-  console.log(rest)
 
   const dataProps: { [key: string]: any } = buildDataProps(data)
   const ariaProps: { [key: string]: any } = buildAriaProps(aria)
