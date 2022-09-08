@@ -1,19 +1,11 @@
 <%=
   pb_rails("filter", props: {
-    min_width: "600px",
-    id: "25",
-    position: "top",
+    id: "pla",
     filters: [
-      { name: "name", value: "John Wick" },
-      { name: "city", value: "San Francisco"}
+      { name: "name", value: "John Wick" }
     ],
-    sort_menu: [
-      { item: "Popularity", link: "?q[sorts]=managers_popularity+asc", active: true, direction: "desc" },
-      { item: "Mananger's Title", link: "?q[sorts]=managers_title+asc", active: false },
-      { item: "Manager's Name", link: "?q[sorts]=managers_name+asc", active: false },
-    ],
-    template: "default",
-    results: 1,
+    placement: "right",
+    template:"filter_only",
   }) do
 %>
   <%

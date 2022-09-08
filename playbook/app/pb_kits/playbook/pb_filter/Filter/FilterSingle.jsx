@@ -33,6 +33,7 @@ const FilterSingle = ({
   children,
   dark,
   minWidth,
+  placement,
   ...bgProps
 }: FilterSingleProps) => {
   return (
@@ -49,6 +50,7 @@ const FilterSingle = ({
           <FiltersPopover
               dark={dark}
               minWidth={minWidth}
+              placement={placement}
           >
             {children}
           </FiltersPopover>
