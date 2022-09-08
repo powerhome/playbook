@@ -50,7 +50,7 @@ const Spacing = ({ example, tokensExample }: {example: string, tokensExample?: s
         example={tokensExample}
         tokens={TOKENS}
     >
-      <Flex justify="evenly">
+      <Flex justify="evenly" wrap>
         { Object.keys(TOKENS).map((token) => (
           <Flex
               key={token}
