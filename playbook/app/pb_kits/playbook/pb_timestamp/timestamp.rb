@@ -12,6 +12,8 @@ module Playbook
       prop :align,  type: Playbook::Props::Enum,
                     values: %w[left center right],
                     default: "left"
+      prop :hide_updated, type: Playbook::Props::Boolean,
+                          default: false
       prop :show_date, type: Playbook::Props::Boolean,
                        default: true
       prop :show_timezone, type: Playbook::Props::Boolean,
@@ -70,8 +72,9 @@ module Playbook
       def format_elapsed_string
         user_string = show_user ? " by #{text}" : ""
         datetime_string = " #{time_ago_in_words(pb_date_time.convert_to_timestamp)} ago"
+        updated_string = hide_updated ? "" : "Last updated"
 
-        "Last updated#{user_string}#{datetime_string}"
+        "#{updated_string}#{user_string}#{datetime_string}"
       end
 
       def datetime_or_text
