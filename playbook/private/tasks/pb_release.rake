@@ -82,7 +82,8 @@ namespace :pb_release do
     puts "Dry run only!!!" if dryrun
 
     version = Playbook::VERSION
-    npm_version = version.scan(".").count > 3 ? version.gsub(".pre", "").gsub(".alpha", "-alpha") : version
+    looks_like_alpha = version.scan(".").count > 3
+    npm_version = looks_like_alpha ? version.gsub(".pre", "").gsub(".alpha", "-alpha") : version
     puts "You about to release version #{version} | #{npm_version} (NPM). Is that correct? (y/N)"
     input = $stdin.gets.chomp
     raise Nope unless input.casecmp("y").zero?
@@ -95,7 +96,8 @@ namespace :pb_release do
     # Publish to NPM
     unless dryrun
       puts "\nPublishing to NPM..."
-      `npm publish playbook-ui-#{npm_version}.tgz`
+      npm_suffix = looks_like_alpha ? "--tag alpha" : ""
+      `npm publish playbook-ui-#{npm_version}.tgz #{npm_suffix}`
       puts "\nPublished to NPM. Now lets clean up..."
       `rm -rf playbook-ui-*.tgz`
     end
