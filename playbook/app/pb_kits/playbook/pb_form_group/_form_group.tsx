@@ -1,12 +1,10 @@
-/* @flow */
-
 import React from 'react'
 import classnames from 'classnames'
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
 import { globalProps } from '../utilities/globalProps'
 
 type FormGroupProps = {
-  aria?: object,
+  aria?: {[key: string]: string},
   children?: Node,
   className?: string,
   data?: object,
@@ -27,7 +25,6 @@ const FormGroup = (props: FormGroupProps) => {
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
   const classes = classnames(buildCss('pb_form_group_kit', { full: fullWidth }), globalProps(props), className)
-
   return (
     <div
         {...ariaProps}
