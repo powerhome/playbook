@@ -1,5 +1,3 @@
-/* @flow */
-
 import React from 'react'
 import classnames from 'classnames'
 
@@ -12,9 +10,9 @@ import FormattedDate from '../pb_date/_date'
 
 type DateTimeProps = {
   align?: "left" | "center" | "right",
-  aria?: object,
+  aria?: { [key: string]: string; },
   className?: string,
-  data?: object,
+  data?: { [key: string]: string; },
   datetime: string,
   id?: string,
   size?: "sm" | "md",
@@ -59,7 +57,6 @@ const DateTime = (props: DateTimeProps) => {
         <FormattedDate
             showDayOfWeek={showDayOfWeek}
             size={size}
-            timeZone={timeZone}
             value={datetime}
         />
         <Time

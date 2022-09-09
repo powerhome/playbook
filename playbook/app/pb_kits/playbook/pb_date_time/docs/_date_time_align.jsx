@@ -1,5 +1,5 @@
 import React from 'react'
-import DateTime from '../_date_time.jsx'
+import DateTime from '../_date_time'
 
 const DateTimeAlign = (props) => (
   <div>
