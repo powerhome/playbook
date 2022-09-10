@@ -41,8 +41,6 @@ const Tooltip = (props: TooltipProps) => {
     ...rest
   } = props
 
-  console.log(rest)
-
   const dataProps: { [key: string]: any } = buildDataProps(data)
   const ariaProps: { [key: string]: any } = buildAriaProps(aria)
 
