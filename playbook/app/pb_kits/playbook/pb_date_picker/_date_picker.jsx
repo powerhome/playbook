@@ -42,12 +42,17 @@ type DatePickerProps = {
   pickerId?: String,
   placeholder?: String,
   plugins: Boolean,
+  position: String,
+  positionElement?: HTMLElement | null,
+  scrollContainer?: String,
   selectionType?: "month" | "week",
   showTimezone?: Boolean,
+  staticPosition: Boolean,
   timeFormat?: String,
   type?: String,
   yearRange?: Array,
 }
+
 const DatePicker = (props: DatePickerProps) => {
   if (props.plugins) deprecatedProps('Date Picker', ['plugins'])
 
@@ -82,8 +87,12 @@ const DatePicker = (props: DatePickerProps) => {
     pickerId,
     placeholder = 'Select Date',
     plugins = false,
+    position,
+    positionElement,
+    scrollContainer,
     selectionType = '',
     showTimezone = false,
+    staticPosition = true,
     yearRange = [ 1900, 2100 ],
   } = props
 
@@ -113,10 +122,13 @@ const DatePicker = (props: DatePickerProps) => {
       onChange,
       pickerId,
       plugins,
+      position,
+      positionElement,
       selectionType,
       showTimezone,
+      staticPosition,
       yearRange,
-    })
+    }, scrollContainer)
   })
 
   const iconWrapperClass = () => {
