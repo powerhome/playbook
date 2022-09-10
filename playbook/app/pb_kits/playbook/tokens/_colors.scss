@@ -5,15 +5,15 @@ Base colors should not be documented.
 Only document color use.
 
 Colors -----------------------------*/
-$royal:               #0056CF;
-$purple:              #9E64E9;
-$teal:                #00C4D7;
-$red:                 #FF2229;
-$red_dark:            #ff4a50;
-$yellow:              #F9BB00;
-$green:               #00CA74;
-$orange:              #FD804C;
-$default:             #93a8b8;
+$royal:               #0056CF !default;
+$purple:              #9E64E9 !default;
+$teal:                #00C4D7 !default;
+$red:                 #FF2229 !default;
+$red_dark:            #ff4a50 !default;
+$yellow:              #F9BB00 !default;
+$green:               #00CA74 !default;
+$orange:              #FD804C !default;
+$default:             #93a8b8 !default;
 $colors: (
   royal:              $royal,
   purple:             $purple,
@@ -26,15 +26,15 @@ $colors: (
 );
 
 /* Specialty Gradient -----------------*/
-$gradient_start:      #1C75F2;
-$gradient_end:        $royal;
+$gradient_start:      #1C75F2 !default;
+$gradient_end:        $royal !default;
 
 /* Interface colors -------------------*/
-$white:               #FFFFFF;
-$silver:              #F3F7FB;
-$slate:               #C1CDD6;
-$charcoal:            #242B42;
-$black:               #000000;
+$white:               #FFFFFF !default;
+$silver:              #F3F7FB !default;
+$slate:               #C1CDD6 !default;
+$charcoal:            #242B42 !default;
+$black:               #000000 !default;
 
 $interface_colors: (
   white:              $white,
@@ -46,9 +46,9 @@ $interface_colors: (
 );
 
 /* Main colors ------------------------*/
-$primary:             $royal;
-$secondary:           $yellow;
-$tertiary:            $purple;
+$primary:             $royal !default;
+$secondary:           $yellow !default;
+$tertiary:            $purple !default;
 $main_colors: (
   primary:            $primary,
   secondary:          $secondary,
@@ -57,29 +57,29 @@ $main_colors: (
 /*=====================================
 
 Background colors ------------------*/
-$bg_light:            $silver;
-$bg_dark:             #0a0527;
+$bg_light:            $silver !default;
+$bg_dark:             #0a0527 !default;
 $background_colors: (
   bg_light:           $bg_light,
   bg_dark:            $bg_dark
 );
 
 /* Card colors ------------------*/
-$card_light:          $white;
+$card_light:          $white !default;
 $card_dark:           rgba($white, $opacity_1);
 $card_colors: (
   card_light:         $card_light,
   card_dark:          $card_dark
 );
 
-$primary-action:      $primary;
+$primary-action:      $primary !default;
 $action_colors: (
   primary_action:            $primary-action
 );
 
 /* Active colors ----------------------*/
 $active_light:        lighten(#E5F2FF, 3.5%);
-$active_dark:         #0082ff;
+$active_dark:         #0082ff !default;
 $active_colors: (
   active_light:       $active_light,
   active_dark:        $active_dark
@@ -102,7 +102,7 @@ $focus_input_colors: (
 );
 
 /* Border colors ----------------------*/
-$border_light:        #E4E8F0;
+$border_light:        #E4E8F0 !default;
 $border_dark:         rgba($white, $opacity_1);
 $border_colors: (
   border_light:       $border_light,
@@ -116,10 +116,10 @@ $shadow_colors: (
 );
 
 /* Text colors ------------------------*/
-$text_lt_default:     $charcoal;
-$text_lt_light:       #687887;
-$text_lt_lighter:     $slate;
-$text_dk_default:     $white;
+$text_lt_default:     $charcoal !default;
+$text_lt_light:       #687887 !default;
+$text_lt_lighter:     $slate !default;
+$text_dk_default:     $white !default;
 $text_dk_light:       rgba($white, $opacity_6);
 $text_dk_lighter:     rgba($white, $opacity_4);
 $text_colors: (
@@ -132,14 +132,14 @@ $text_colors: (
 );
 
 /* Data colors ------------------------*/
-$data_1:              $royal;
-$data_2:              $yellow;
-$data_3:              $purple;
-$data_4:              $green;
-$data_5:              $orange;
-$data_6:              #144075;
-$data_7:              $teal;
-$data_8:              $red;
+$data_1:              $royal !default;
+$data_2:              $yellow !default;
+$data_3:              $purple !default;
+$data_4:              $green !default;
+$data_5:              $orange !default;
+$data_6:              #144075 !default;
+$data_7:              $teal !default;
+$data_8:              $red !default;
 $data_colors: (
   data_1:             $data_1,
   data_2:             $data_2,
@@ -152,19 +152,19 @@ $data_colors: (
 );
 
 /* Status colors ----------------------*/
-$success:             $green;
+$success:             $green !default;
 $success_secondary:   lighten($success, 10%);
-$warning:             $yellow;
+$warning:             $yellow !default;
 $warning_secondary:   lighten($warning, 10%);
-$error:               $red;
-$error_dark:          $red_dark;
+$error:               $red !default;
+$error_dark:          $red_dark !default;
 $error_dark_body:     lighten($error_dark, 2%);
 $error_secondary:     lighten($error, 10%);
-$info:                $teal;
+$info:                $teal !default;
 $info_secondary :     lighten($info, 10%);
-$neutral:             $slate;
+$neutral:             $slate !default;
 $neutral_secondary:   lighten($neutral, 10%);
-$primary:             $primary;
+$primary:             $primary !default;
 $primary_secondary:    lighten($primary, 10%);
 
 $status_colors: (
@@ -194,16 +194,16 @@ $status_color_text: (
 );
 
 /* Link colors ------------------------*/
-$primary_action:      $primary;
+$primary_action:      $primary !default;
 
 /* Product colors ---------------------*/
-$windows:             $royal;
-$siding:              $yellow;
-$doors:               $teal;
-$solar:               $green;
-$roofing:             $slate;
-$gutters:             $purple;
-$insulation:          $red;
+$windows:             $royal !default;
+$siding:              $yellow !default;
+$doors:               $teal !default;
+$solar:               $green !default;
+$roofing:             $slate !default;
+$gutters:             $purple !default;
+$insulation:          $red !default;
 $product_colors: (
   windows:            $windows,
   siding:             $siding,
@@ -215,27 +215,27 @@ $product_colors: (
 );
 
 /* Category colors ---------------------*/
-$category_1:   $royal;
-$category_2:   #0CD2E5;
-$category_3:   $yellow;
-$category_4:   #14D595;
-$category_5:   #A057FF;
-$category_6:   #FF7034;
-$category_7:   #97DA22;
-$category_8:   #EA599F;
-$category_9:   #0091FF;
-$category_10:  #5027E4;
-$category_11:  $red;
-$category_12:  #109922;
-$category_13:  #058F9D;
-$category_14:  #A33E6F;
-$category_15:  #B2171C;
-$category_16:  #0A5C49;
-$category_17:  #325B91;
-$category_18:  #BE4714;
-$category_19:  #000080;
-$category_20:  #5C0E0A;
-$category_21:  #040830;
+$category_1:   $royal !default;
+$category_2:   #0CD2E5 !default;
+$category_3:   $yellow !default;
+$category_4:   #14D595 !default;
+$category_5:   #A057FF !default;
+$category_6:   #FF7034 !default;
+$category_7:   #97DA22 !default;
+$category_8:   #EA599F !default;
+$category_9:   #0091FF !default;
+$category_10:  #5027E4 !default;
+$category_11:  $red !default;
+$category_12:  #109922 !default;
+$category_13:  #058F9D !default;
+$category_14:  #A33E6F !default;
+$category_15:  #B2171C !default;
+$category_16:  #0A5C49 !default;
+$category_17:  #325B91 !default;
+$category_18:  #BE4714 !default;
+$category_19:  #000080 !default;
+$category_20:  #5C0E0A !default;
+$category_21:  #040830 !default;
 $category_colors: (
   category_1:   $category_1,
   category_2:   $category_2,
@@ -260,7 +260,7 @@ $category_colors: (
   category_21:  $category_21
 );
 
-$transparent: transparent;
+$transparent: transparent !default;
 
 @function tint($color, $percentage) {
   @return mix($white, $color, $percentage);
