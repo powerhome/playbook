@@ -12,3 +12,12 @@
   variant: "elapsed",
   show_user: false
 }) %>
+
+<br>
+
+<%= pb_rails("timestamp", props: {
+  timestamp: DateTime.now,
+  variant: "elapsed",
+  show_user: false,
+  hide_updated: true
+}) %>

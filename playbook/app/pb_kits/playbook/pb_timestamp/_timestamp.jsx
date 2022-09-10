@@ -21,6 +21,7 @@ type TimestampProps = {
   id?: string,
   showDate?: boolean,
   showUser?: boolean,
+  hideUpdated?: boolean,
   showTimezone?: boolean,
   variant?: "default" | "elapsed" | "updated"
 }
@@ -37,6 +38,7 @@ const Timestamp = (props: TimestampProps) => {
     timezone,
     showDate = true,
     showUser = false,
+    hideUpdated = false,
     showTimezone = false,
     variant = 'default',
   } = props
@@ -57,6 +59,7 @@ const Timestamp = (props: TimestampProps) => {
   const dateDisplay = `${dateTimestamp.toMonth()} ${dateTimestamp.toDay()}`
   const shouldShowUser = showUser == true && text.length > 0
   const shouldShowTimezone = showTimezone == true && timezone.length > 0
+  const updatedText = hideUpdated ? "" : "Last updated"
   const userDisplay = shouldShowUser ? ` by ${text}` : ''
 
   let timeDisplay = `${dateTimestamp.toHour()}:${dateTimestamp.toMinute()}${dateTimestamp.toMeridian()}`
@@ -81,7 +84,7 @@ const Timestamp = (props: TimestampProps) => {
   }
 
   const formatElapsedString = () => {
-    return `Last updated ${userDisplay} ${dateTimestamp.value.fromNow()}`
+    return `${updatedText} ${userDisplay} ${dateTimestamp.value.fromNow()}`
   }
 
   const captionText = () => {
@@ -89,7 +92,7 @@ const Timestamp = (props: TimestampProps) => {
     case 'updated':
       return formatUpdatedString(userDisplay, dateTimestamp)
     case 'elapsed':
-      return formatElapsedString(userDisplay, timeDisplay)
+      return formatElapsedString(userDisplay, timeDisplay, updatedText)
     default:
       return showDate ? timestamp ? fullDateDisplay() : text : fullTimeDisplay()
     }
