@@ -88,6 +88,7 @@ class PagesController < ApplicationController
       kit_examples[example_path.split("/").last.sub(".txt", "")] = formatted_example_txt
     end
     @kit_examples_json = kit_examples
+    render "pages/visual_guidelines_react", layout: "layouts/visual_guidelines"
   end
 
   # TODO: remove this method once all guidelines are completed

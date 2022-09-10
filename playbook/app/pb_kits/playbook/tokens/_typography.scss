@@ -1,5 +1,5 @@
 
-$font_family_base: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif;
+$font_family_base: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif !default;
 
 
 /* CLEAN UP AND REMOVE */
@@ -53,12 +53,12 @@ $lspace_super_loosest:    .2em;
 
 
 /* Standard Font Weights */
-$bold:          600;
-$regular:       400;
+$bold:          600 !default;
+$regular:       400 !default;
 
 /* Non_Standard Font Weights */
-$extrabold:     900;
-$boldest:       800;
-$bolder:        700;
-$light:         300;
-$lighter:       100;
+$extrabold:     900 !default;
+$boldest:       800 !default;
+$bolder:        700 !default;
+$light:         300 !default;
+$lighter:       100 !default;

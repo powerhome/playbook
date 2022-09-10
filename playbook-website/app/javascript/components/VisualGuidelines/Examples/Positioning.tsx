@@ -6,6 +6,7 @@ import {
   Body,
   Caption,
   Card,
+  Flex
 } from 'playbook-ui'
 
 import Example from '../Templates/Example'
@@ -38,10 +39,16 @@ const Positioning = ({ example, tokensExample }: {example: string, tokensExample
         example={tokensExample}
         tokens={TOKENS}
     >
-      <div className="zindex-wrapper">
+      <Flex
+        align='center'
+        flexWrap='wrap'
+        justifyContent='center'
+        orientation='row'
+      >
+
         {Object.keys(TOKENS).map((token) => (
           <Card
-              className="zIndex one-z-index-example"
+              className="zIndex zIndex-card"
               key={`token-example-${token}`}
               shadow="deeper"
               zIndex={TOKENS[token]}
@@ -50,7 +57,7 @@ const Positioning = ({ example, tokensExample }: {example: string, tokensExample
             <Caption size="md">{`value: ${TOKENS[token]}`}</Caption>
           </Card>
         ))}
-      </div>
+      </Flex>
     </Example>
   </React.Fragment>
 )

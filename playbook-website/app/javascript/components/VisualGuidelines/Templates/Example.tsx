@@ -40,7 +40,7 @@ const Example = ({
     exampleHtml = parsedExample.body.innerHTML
 
   return (
-    <div>
+    <div id={title?.replace(/\s+/g, '')}>
       {title && (
         <Title
             marginBottom="xs"
