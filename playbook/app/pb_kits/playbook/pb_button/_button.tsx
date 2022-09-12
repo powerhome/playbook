@@ -17,6 +17,7 @@ type ButtonPropTypes = {
   form?: string,
   fullWidth?: boolean,
   icon?: string,
+  iconRight?: boolean,
   id?: string,
   link?: string,
   loading?: boolean,
@@ -61,6 +62,7 @@ const Button = (props: ButtonPropTypes) => {
     data = {},
     disabled,
     icon = null,
+    iconRight = false,
     id,
     loading = false,
     onClick,
@@ -91,10 +93,13 @@ const Button = (props: ButtonPropTypes) => {
 
   const content = (
     <span className="pb_button_content">
-      {icon && (
+      {icon && !iconRight && (
         <i className={`pb_icon_kit far fa-${icon} fa-fw`} />
       )}
       <span>{text || children}</span>
+      {icon && iconRight && (
+        <i className={`pb_icon_kit far fa-${icon} fa-fw`} />
+      )}
     </span>
   )
 
