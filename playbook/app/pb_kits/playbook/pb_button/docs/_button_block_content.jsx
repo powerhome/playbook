@@ -8,6 +8,7 @@ const ButtonBlockContent = (props) => (
     >
       <Pill marginRight="xs"
           text="5"
+          variant="info"
       />
       <span>Button with Block Content</span>
     </Button>

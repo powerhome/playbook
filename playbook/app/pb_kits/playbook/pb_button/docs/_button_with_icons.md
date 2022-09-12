@@ -1,1 +1,1 @@
-Icons can also be added to a button if needed. By default icon will be displayed on the left of the text but if the user wants the icon on the right, an optional prop of `iconRight` can be used.
+Icons can also be added to a button if needed. By default, the icon will be displayed on the left of the text. To display the icon on the right, use the optional prop of `iconRight` in react or `icon_right` in rails.

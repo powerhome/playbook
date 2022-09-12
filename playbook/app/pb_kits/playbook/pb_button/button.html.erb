@@ -1,5 +1,12 @@
 <%= content_tag(object.tag,
     object.tag == "button" ? object.options : object.link_options) do %>
+        <% if object.icon && !object.icon_right %>
+            <%= pb_rails("icon", props: { icon: "#{icon}", fixed_width: true, margin_right: "xs" }) %>
+        <% end %>
     <%= pb_rails("icon", props: { icon: "spinner", pulse: true, fixed_width: true, classname: "loading-icon" }) %>
     <span class="pb_button_content"><%= content.presence || object.text %></span>
+    <% if object.icon && object.icon_right %>
+    <%= pb_rails("icon", props: { icon: "#{icon}", fixed_width: true, margin_left: "xs" }) %>
+<% end %>
+
 <% end %>
