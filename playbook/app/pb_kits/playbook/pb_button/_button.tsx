@@ -94,11 +94,11 @@ const Button = (props: ButtonPropTypes) => {
   const content = (
     <span className="pb_button_content">
       {icon && !iconRight && (
-        <i className={`pb_icon_kit far fa-${icon} fa-fw`} />
+        <i className={`pb_icon_kit far fa-${icon} fa-fw button_with_icon`} />
       )}
       <span>{text || children}</span>
       {icon && iconRight && (
-        <i className={`pb_icon_kit far fa-${icon} fa-fw`} />
+        <i className={`pb_icon_kit far fa-${icon} fa-fw button_with_icon_right`} />
       )}
     </span>
   )
