@@ -5,7 +5,7 @@ examples:
   - button_link: Button Links
   - button_loading: Button Loading
   - button_block_content: Button Block Content
-  - button_with_icons: Button With Icons
+  - button_icon_options: Button Icon Options
   - button_accessibility: Button Accessibility Options
   - button_options: Button Additional Options
   - button_size: Button Size
@@ -16,7 +16,7 @@ examples:
   - button_link: Button Links
   - button_loading: Button Loading
   - button_block_content: Button Block Content
-  - button_with_icons: Button With Icons
+  - button_icon_options: Button Icon Options
   - button_accessibility: Button Accessibility Options
   - button_options: Button Additional Options (onClick)
   - button_size: Button Size

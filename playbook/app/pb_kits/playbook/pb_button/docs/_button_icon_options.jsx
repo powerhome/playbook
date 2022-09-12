@@ -1,7 +1,7 @@
 import React from 'react'
 import { Button } from '../../'
 
-const ButtonWithIcons = (props) => (
+const ButtonIconOptions = (props) => (
     <div>
       <Button
           fixedWidth
@@ -20,4 +20,4 @@ const ButtonWithIcons = (props) => (
     </div>
   )
   
-  export default ButtonWithIcons
+  export default ButtonIconOptions
