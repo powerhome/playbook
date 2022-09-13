@@ -82,7 +82,7 @@ test("render all layout variants", () => {
   ]
 
   testValues.forEach(({ layout, expected }) => {
-    const { getByTestId, container } = render(
+    const { getByTestId } = render(
       <Layout data={{ testid: `test-${layout}` }}
           layout={layout}>
         <Layout.Body>
@@ -90,7 +90,6 @@ test("render all layout variants", () => {
         </Layout.Body>
       </Layout>
     )
-    console.log(container)
 
     expect(getByTestId(`test-${layout}`)).toHaveClass(expected)
     cleanup()
