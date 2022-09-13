@@ -5,10 +5,10 @@ import React from 'react'
 import Example from '../Templates/Example'
 
 import {
-  Body,
+  Title,
   Caption,
   Card,
-  Flex
+  Layout
 } from 'playbook-ui'
 
 const HEIGHTS = ['tightest', 'tighter', 'tight', 'normal', 'loose', 'looser', 'loosest']
@@ -36,18 +36,16 @@ const LineHeight = ({ example, tokensExample }: {example: string, tokensExample?
         example={tokensExample}
         tokens={TOKENS}
     >
-      <Flex
-        align='center'
-        flexWrap='wrap'
-        justifyContent='center'
-        orientation='row'
+      <Layout
+          layout="collection"   
       >
+        <Layout.Body>
         {Object.keys(TOKENS).map((token) => (
           <Card
               borderNone
               key={`token-example-${token}`}
           >
-            <Body
+            <Title
                 lineHeight={TOKENS[token]}
                 text="The quick brown fox jumps over the lazy dog"
             />
@@ -57,7 +55,8 @@ const LineHeight = ({ example, tokensExample }: {example: string, tokensExample?
             />
           </Card>
         ))}
-      </Flex>
+        </Layout.Body>
+      </Layout>
     </Example>
   </React.Fragment>
 )

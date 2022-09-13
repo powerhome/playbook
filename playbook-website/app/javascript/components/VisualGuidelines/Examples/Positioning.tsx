@@ -5,8 +5,7 @@ import React from 'react'
 import {
   Body,
   Caption,
-  Card,
-  Flex
+  Card
 } from 'playbook-ui'
 
 import Example from '../Templates/Example'
@@ -39,16 +38,10 @@ const Positioning = ({ example, tokensExample }: {example: string, tokensExample
         example={tokensExample}
         tokens={TOKENS}
     >
-      <Flex
-        align='center'
-        flexWrap='wrap'
-        justifyContent='center'
-        orientation='row'
-      >
-
+      <div className="zindex-wrapper">
         {Object.keys(TOKENS).map((token) => (
           <Card
-              className="zIndex zIndex-card"
+              className="zIndex one-z-index-example"
               key={`token-example-${token}`}
               shadow="deeper"
               zIndex={TOKENS[token]}
@@ -57,7 +50,7 @@ const Positioning = ({ example, tokensExample }: {example: string, tokensExample
             <Caption size="md">{`value: ${TOKENS[token]}`}</Caption>
           </Card>
         ))}
-      </Flex>
+      </div>
     </Example>
   </React.Fragment>
 )
