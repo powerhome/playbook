@@ -6,7 +6,6 @@ Rails.application.routes.draw do
   get "getting_started",    to: "pages#getting_started"
   get "kits",               to: "pages#kits"
   get "visual_guidelines",  to: "pages#visual_guidelines"
-  get "visual_guidelines_react", to: "pages#visual_guidelines_react" # TODO: remove once all visual guidelines are converted
   get "changelog", to: "pages#changelog"
 
   get "kits/:name",       to: "pages#kit_show_rails", as: "kit_show"
