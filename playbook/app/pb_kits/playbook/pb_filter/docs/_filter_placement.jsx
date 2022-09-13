@@ -17,10 +17,9 @@ const FilterPlacement = (props) => {
 
     <>
       <Filter
-          data={{ testid: "primary-test" }}
           double
           onSortChange={SortingChangeCallback}
-          placement={"bottom"}
+          placement={"right"}
           results={1}
           sortOptions={{
             popularity: 'Popularity',

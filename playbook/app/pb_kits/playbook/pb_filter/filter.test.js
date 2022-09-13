@@ -58,32 +58,19 @@ function FilterTest(props) {
 }
 
 test("triggers popover on filter button click", () => {
-  render(<FilterTest />);
+  render(<FilterTest data={{ testid: "render-test" }}/>);
 
   const btn = screen.getAllByRole("button")[0];
 
-  fireEvent.click(btn);
-
-  expect(screen.getByText("Example Text Field")).toBeInTheDocument() // check if popover displays correctly
-//   await waitFor(() =>
-//     {
-//         expect(screen.getByText("Example Text Field")).toBeInTheDocument() // check if popover displays correctly
-//         expect(screen.getByLabelText("sort-amount-down icon")).toBeInTheDocument()
-//         expect(screen.getByText('Popularity')).toBeInTheDocument() // check if filter/sort is rendered 
-//         expect(container.querySelector('[data-placement="bottom-start"]')).to() // check if filter/sort is rendered 
-
-//     }
-//   );
-
-});
-
-test("ren", () => {
-  render(<FilterTest />);
-
-  const btn = screen.getAllByRole("button")[0];
-
-  fireEvent.click(btn);
+  // checks if the sort menu rendered
   expect(screen.getByLabelText("sort-amount-down icon")).toBeInTheDocument()
+  expect(screen.getByText('Popularity')).toBeInTheDocument() // check if filter/sort is rendered 
+
+  // hits the filter button and triggers popover
+  fireEvent.click(btn);
+
+  // check if popover displays correctly by checking its tet
+  expect(screen.getByText("Example Text Field")).toBeInTheDocument() 
+
 
 });
-
