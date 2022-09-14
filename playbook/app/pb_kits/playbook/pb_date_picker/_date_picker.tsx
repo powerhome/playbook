@@ -9,7 +9,45 @@ import datePickerHelper from './date_picker_helper'
 import Icon from '../pb_icon/_icon'
 import TextInput from '../pb_text_input/_text_input'
 
-const DatePicker = (props: GlobalProps) => {
+type DatePickerProps = {
+  allowInput?: boolean,
+  aria?: {[key: string]: string},
+  className?: string,
+  dark?: boolean,
+  data?: object,
+  defaultDate?: string,
+  disableDate?: number[],
+  disableInput?: boolean,
+  disableRange?: number[],
+  disableWeekdays?: number[],
+  enableTime?: boolean,
+  error?: string,
+  format?: string,
+  hideIcon?: boolean,
+  hideLabel?: boolean,
+  id?: string,
+  inLine?: boolean,
+  inputAria?: object,
+  inputData?: object,
+  inputOnChange?: (arg: string) => void,
+  inputValue?: any,
+  label?: string,
+  maxDate: string,
+  minDate: string,
+  name: string,
+  pickerId?: ArrayLike<Node> | Node | string,
+  placeholder?: string,
+  positionElement?: HTMLElement | null,
+  scrollContainer?: string,
+  selectionType?: "month" | "week",
+  showTimezone?: boolean,
+  staticPosition: boolean,
+  timeFormat?: string,
+  type?: string,
+  yearRange?: number[],
+} & GlobalProps
+
+const DatePicker = (props: DatePickerProps) => {
   if (props.plugins) deprecatedProps('Date Picker', ['plugins'])
 
   const {
