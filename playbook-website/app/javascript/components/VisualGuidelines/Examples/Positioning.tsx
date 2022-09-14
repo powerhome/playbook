@@ -11,7 +11,6 @@ import {
 import Example from '../Templates/Example'
 
 const ZINDEX = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10] //TODO: investigate using types
-const zIndexClassPrefix = ['one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten']
 const TOKENS = {
   '$z_1': 100,
   '$z_2': 200,
@@ -40,9 +39,9 @@ const Positioning = ({ example, tokensExample }: {example: string, tokensExample
         tokens={TOKENS}
     >
       <div className="zindex-wrapper">
-        {Object.keys(TOKENS).map((token,i) => (
+        {Object.keys(TOKENS).map((token) => (
           <Card
-              className={`zIndex one-z-index-example ${zIndexClassPrefix[i]}-zIndex`}
+              className="zIndex"
               key={`token-example-${token}`}
               shadow="deeper"
               zIndex={TOKENS[token]}
