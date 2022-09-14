@@ -10,7 +10,7 @@ type TitleProps = {
   color?: "default" | "light" | "lighter" | "success" | "error" | "link",
   data?: {[key: string]: string},
   id?: string,
-  size?: 1 | 2 | 3 | 4,
+  size?: number | string,
   tag?: "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "div" | "span",
   text?: string,
   variant?: null | "link",
