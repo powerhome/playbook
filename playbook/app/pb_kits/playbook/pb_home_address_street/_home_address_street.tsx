@@ -21,6 +21,7 @@ type HomeAddressStreetProps = {
   homeId: string,
   houseStyle: string,
   homeUrl: string,
+  newWindow: boolean,
   state: string,
   zipcode: string,
   territory: string,
@@ -38,6 +39,7 @@ const HomeAddressStreet = (props: HomeAddressStreetProps) => {
     emphasis = 'street',
     homeId,
     homeUrl,
+    newWindow,
     houseStyle,
     state,
     zipcode,
@@ -108,6 +110,7 @@ const HomeAddressStreet = (props: HomeAddressStreetProps) => {
         <Hashtag
             classname="home-hashtag"
             dark={dark}
+            newWindow={newWindow}
             text={homeId}
             type="home"
             url={homeUrl || '#'}

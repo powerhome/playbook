@@ -59,6 +59,7 @@
 	// Local Variables
 	$gutter: $space_lg;
 	$small: 300px;
+	$status_size: 375px;
 	$medium: 500px;
 	$large: 800px;
 	$animation-duration: 0.2s;
@@ -77,6 +78,10 @@
 	animation-duration: $animation-duration;
 	outline: none;
 	animation-timing-function: $easeInOutQuint;
+
+	&[class*="_status_size"] {
+		width: $status_size;
+	}
 
 	&[class*="_sm"] {
 		width: $small;

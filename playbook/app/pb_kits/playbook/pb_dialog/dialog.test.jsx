@@ -1,23 +1,85 @@
-import React from 'react'
-import { render, screen } from '../utilities/test-utils'
-import { Dialog } from '../'
+import React, {useState} from 'react'
+import { render, cleanup, waitFor, fireEvent } from "../utilities/test-utils";
+import { Dialog, Button } from '../'
 
-/* eslint-disable jsx-control-statements/jsx-jcs-no-undef */
+const text="Hello Body Text, Nice to meet ya."
+const title="Header Title is the Title Prop"
+const size="sm"
+const confirmButton="Okay"
+const cancelButton="Cancel Button"
 
-/* See these resources for more testing info:
-  - https://github.com/testing-library/jest-dom#usage for useage and examples
-  - https://jestjs.io/docs/en/using-matchers
-*/
+function DialogTest() {
+  const [isOpen, setIsOpen] = useState(false)
+  const close = () => setIsOpen(false)
+  const open = () => setIsOpen(true)
+  const [isLoading, setIsLoading] = useState(false)
+  return (
+    <>
+      <Button onClick={open}>{'Open Dialog'}</Button>
+      <Dialog
+          cancelButton={cancelButton}
+          className="wrapper"
+          confirmButton={confirmButton}
+          loading={isLoading}
+          onCancel={close}
+          onClose={close}
+          onConfirm={() => setIsLoading(!isLoading)}
+          opened={isOpen}
+          portalClassName="portal"
+          size={size}
+          text={text}
+          title={title}
+      />
+    </>
+  );
+}
 
-test('Kit renders Dialog', () => {
-  const testId = 'test1'
+test('renders the component when clicked', async () => {
 
-  render(
-    <Dialog
-        data={{ testid: testId }}
-    />
-  )
+  const { queryByText } = render(<DialogTest />);
 
-  const kit = screen.getByTestId(testId)
-  expect(kit).toBeInTheDocument()
+  fireEvent.click(queryByText('Open Dialog'));
+
+  await waitFor(() => expect(queryByText("Header Title is the Title Prop")).toBeInTheDocument());
+
+  cleanup()
 })
+
+test("renders the title and body text", async () => {
+
+  const { queryByText } = render(<DialogTest />);
+
+  fireEvent.click(queryByText('Open Dialog'));
+
+  await waitFor(() => expect(queryByText("Header Title is the Title Prop")).toHaveTextContent(title));
+
+  await waitFor(() => expect(queryByText("Hello Body Text, Nice to meet ya.")).toHaveTextContent(text));
+
+  cleanup()
+});
+
+test("renders the title and body text", async () => {
+
+  const { queryByText } = render(<DialogTest />);
+
+  fireEvent.click(queryByText('Open Dialog'));
+
+  await waitFor(() => expect(queryByText("Header Title is the Title Prop")).toHaveTextContent(title));
+
+  await waitFor(() => expect(queryByText("Hello Body Text, Nice to meet ya.")).toHaveTextContent(text));
+
+  cleanup()
+});
+
+test("renders the buttons", async () => {
+
+  const { queryByText } = render(<DialogTest />);
+
+  fireEvent.click(queryByText('Open Dialog'));
+
+  await waitFor(() => expect(queryByText("Okay")).toHaveTextContent(confirmButton));
+
+  await waitFor(() => expect(queryByText("Cancel Button")).toHaveTextContent(cancelButton));
+
+  cleanup()
+});

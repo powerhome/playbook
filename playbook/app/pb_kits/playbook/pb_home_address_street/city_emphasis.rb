@@ -8,6 +8,8 @@ module Playbook
       prop :city_state
       prop :home_id, type: Playbook::Props::Number
       prop :home_url
+      prop :new_window, type: Playbook::Props::Boolean,
+                        default: false
       prop :territory
       prop :zip
       prop :dark, type: Playbook::Props::Boolean, default: false

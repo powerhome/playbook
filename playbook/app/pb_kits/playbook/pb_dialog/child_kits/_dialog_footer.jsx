@@ -9,17 +9,35 @@ import { globalProps } from '../../utilities/globalProps'
 import Flex from '../../pb_flex/_flex'
 import SectionSeparator from '../../pb_section_separator/_section_separator'
 
+
+type DialogFooterProps = {
+  aria?: object,
+  children: array<React.ReactNode> | React.ReactNode | string,
+  className?: string,
+  closeable: boolean,
+  data?: object,
+  id?: string,
+  padding?: string,
+  paddingBottom?: string,
+  paddingX?: string,
+  separator: boolean,
+  spacing?: string,
+}
+
 // Footer component
 const DialogFooter = (props: DialogFooterProps) => {
   const {
     children,
-    padding = 'sm',
+    padding = "sm",
+    paddingBottom = "sm",
+    paddingX = "sm",
     className,
-    spacing = 'between',
+    spacing = "between",
     separator = false,
   } = props
-  const footerCSS = buildCss('dialog_footer')
-  const footerSpacing = globalProps(props, { padding })
+
+  const footerCSS = buildCss("dialog_footer")
+  const footerSpacing = globalProps(props, { padding, paddingBottom, paddingX })
 
   return (
     <>

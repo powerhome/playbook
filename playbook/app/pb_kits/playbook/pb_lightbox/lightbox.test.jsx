@@ -1,5 +1,5 @@
 import React from 'react'
-import { fireEvent, render, screen, waitForElementToBeRemoved } from '../utilities/test-utils'
+import { cleanup, fireEvent, render, screen } from '../utilities/test-utils'
 
 import { Lightbox } from '../'
 
@@ -27,6 +27,7 @@ test('Kit renders', () => {
   const kit = screen.getByTestId(testId)
   expect(kit).toHaveClass(`${kitClass} customClass`)
   expect(kit).toBeInTheDocument()
+  cleanup()
 })
 
 test('Shows selected images', () => {
@@ -67,9 +68,12 @@ test('Shows selected images', () => {
   )
 
   expect(image).toHaveAttribute('src', TEST_PHOTOS[0])
+  cleanup()
 })
 
 test('Closes on escape key', async () => {
+  const mockClose = jest.fn()
+
   render(
     <Lightbox
         data={{ testid: testId }}
@@ -77,25 +81,29 @@ test('Closes on escape key', async () => {
         iconSize="3x"
         id="test1"
         initialPhoto={0}
-        onClose={() => {}}
+        onClose={mockClose}
         photos={TEST_PHOTOS}
     />
   )
 
-  const kit = screen.getByTestId(testId)
-
-  fireEvent(
-    document.body,
-    new KeyboardEvent('keydown', {
-      keyCode: 27, //escape
-    })
+  fireEvent.keyDown(
+    global.window,
+    {
+      bubbles: true,
+      key: "Escape",
+      code: "Escape",
+      keyCode: 27,
+      charCode: 27
+    }
   )
 
-  waitForElementToBeRemoved(kit)
-    .then(() => expect(kit).not.toBeInTheDocument())
+  expect(mockClose).toHaveBeenCalled()
+  cleanup()
 })
 
-test('Closes on close button', () => {
+test('Closes on close button', async () => {
+  const mockClose = jest.fn()
+
   render(
     <Lightbox
         data={{ testid: testId }}
@@ -103,7 +111,7 @@ test('Closes on close button', () => {
         iconSize="3x"
         id="test1"
         initialPhoto={0}
-        onClose={() => {}}
+        onClose={mockClose}
         photos={TEST_PHOTOS}
     />
   )
@@ -119,6 +127,6 @@ test('Closes on close button', () => {
     }),
   )
 
-  waitForElementToBeRemoved(kit)
-    .then(() => expect(kit).not.toBeInTheDocument())
+  expect(mockClose).toHaveBeenCalled()
+  cleanup()
 })

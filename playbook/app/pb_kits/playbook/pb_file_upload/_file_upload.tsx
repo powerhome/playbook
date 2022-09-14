@@ -1,5 +1,3 @@
-/* @flow */
-
 import React, { useCallback } from 'react'
 import { useDropzone } from 'react-dropzone'
 import classnames from 'classnames'
@@ -12,11 +10,11 @@ import Body from '../pb_body/_body'
 import Card from '../pb_card/_card'
 
 type FileUploadProps = {
-  accept?: array<string>,
+  accept?: string[],
   className?: string,
   data?: object,
   acceptedFilesDescription?: string,
-  onFilesAccepted: Callback,
+  onFilesAccepted: Callback<File, File>,
 }
 
 const FileUpload = (props: FileUploadProps) => {
@@ -27,10 +25,8 @@ const FileUpload = (props: FileUploadProps) => {
     data = {},
     onFilesAccepted = noop,
   } = props
-  const onDrop = useCallback((files) => {
-    onFilesAccepted(files)
-  })
 
+  const onDrop = useCallback((files) => onFilesAccepted(files), []);
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     accept,
     onDrop,
@@ -57,11 +53,11 @@ const FileUpload = (props: FileUploadProps) => {
       <Card>
         <input {...getInputProps()} />
         <Body color="light">
-          <If condition={isDragActive}>
+          {isDragActive ?
             <p>{'Drop the files here ...'}</p>
-            <Else />
+            :
             <p>{accept === null ? 'Choose a file or drag it here' : `Choose a file or drag it here. The accepted file types are: ${acceptedFilesDescription || acceptedFileTypes()}`}</p>
-          </If>
+          }
         </Body>
       </Card>
     </div>

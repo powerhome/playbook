@@ -8,6 +8,7 @@ import {
   Body,
   Caption,
   Card,
+  Flex
 } from 'playbook-ui'
 
 const HEIGHTS = ['tightest', 'tighter', 'tight', 'normal', 'loose', 'looser', 'loosest']
@@ -35,7 +36,12 @@ const LineHeight = ({ example, tokensExample }: {example: string, tokensExample?
         example={tokensExample}
         tokens={TOKENS}
     >
-      <div className="zindex-wrapper">
+      <Flex
+        align='center'
+        flexWrap='wrap'
+        justifyContent='center'
+        orientation='row'
+      >
         {Object.keys(TOKENS).map((token) => (
           <Card
               borderNone
@@ -51,7 +57,7 @@ const LineHeight = ({ example, tokensExample }: {example: string, tokensExample?
             />
           </Card>
         ))}
-      </div>
+      </Flex>
     </Example>
   </React.Fragment>
 )
