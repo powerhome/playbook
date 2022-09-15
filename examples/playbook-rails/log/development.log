@@ -506,3 +506,12 @@ Processing by PagesController#index as HTML
 Completed 200 OK in 446ms (Views: 441.1ms | ActiveRecord: 0.0ms | Allocations: 146010)
 
 
+Started GET "/" for 127.0.0.1 at 2022-09-15 15:40:31 -0300
+Processing by PagesController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering pages/index.html.erb within layouts/application
+  Rendered pages/index.html.erb within layouts/application (Duration: 26.5ms | Allocations: 9120)
+  Rendered layout layouts/application.html.erb (Duration: 5937.0ms | Allocations: 413821)
+Completed 200 OK in 5958ms (Views: 5945.3ms | ActiveRecord: 0.0ms | Allocations: 418391)
+
+
