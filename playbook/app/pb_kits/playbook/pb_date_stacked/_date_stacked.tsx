@@ -20,7 +20,7 @@ type DateStackedProps = {
   reverse?: boolean;
 };
 
-const sizes = {
+const sizes: {sm: 4, md: 3} = {
   sm: 4,
   md: 3,
 };
