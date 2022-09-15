@@ -75,7 +75,7 @@ const datePickerHelper = (config: DatePickerConfig, scrollContainer: string | HT
   const calendarResizer = () => {
     const cal = document.querySelector(`#cal-${pickerId}.open`) as HTMLElement
     const parentInput = cal.parentElement
-    if (cal.getBoundingClientRect().right > window.innerWidth) {
+    if (cal?.getBoundingClientRect().right > window.innerWidth) {
       parentInput.style.display = 'flex'
       parentInput.style.justifyContent = 'center'
     }
