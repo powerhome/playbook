@@ -25,16 +25,13 @@ import 'playbook-ui/dist/playbook.css';
 Our Icon kits use fontawesome. To install fontawesome free, follow the instructions on the [fontawesome website](https://fontawesome.com/v6/docs/web/use-with/react/). Commands to run:
 
 ```
-yarn add @fortawesome/fontawesome-svg-core
-yarn add @fortawesome/free-regular-svg-icons
-yarn add @fortawesome/react-fontawesome@latest
-
+yarn add @fortawesome/fontawesome-free
 ```
 
-In addition to the above, add the fontawesome CDN to the ```<head>``` of your your index.html file to gain access to all free icons/styles:
+Include fontawesome CSS input to top of index.js file
 
 ```
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+import '@fortawesome/fontawesome-free/css/all.css';
 
 ```
 
