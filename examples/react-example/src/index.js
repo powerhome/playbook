@@ -1,5 +1,3 @@
-import 'playbook-ui/dist/fonts/fontawesome-min';
-import 'playbook-ui/dist/fonts/regular-min';
 import 'playbook-ui/dist/playbook.css';
 
 import React from 'react';
