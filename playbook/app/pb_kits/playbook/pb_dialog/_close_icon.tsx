@@ -1,10 +1,8 @@
-/* @flow */
-
 import React from 'react'
 import Icon from '../pb_icon/_icon'
 
 type CloseIconProps = {
-  onClose: () => mixed,
+  onClose: () => any,
 }
 
 export const CloseIcon = (props: CloseIconProps) => {
