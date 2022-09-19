@@ -8,7 +8,7 @@ const HomeAddressStreetDefault = (props) => {
         address="70 Prospect Ave"
         addressCont="Apt M18"
         city="West Chester"
-        homeId={8250263}
+        homeId="8250263"
         homeUrl="https://powerhrg.com/"
         houseStyle="Colonial"
         state="PA"
