@@ -103,7 +103,6 @@ const TextInput = (props: TextInputProps, ref: React.LegacyRef<HTMLInputElement>
     <React.Fragment>
       <Flex
           className={`add-on-${addOnAlignment} ${borderCss}`}
-          inline
           vertical="center"
       >
         {addOnAlignment == 'left' && <>
