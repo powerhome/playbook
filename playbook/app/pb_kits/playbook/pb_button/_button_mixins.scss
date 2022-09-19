@@ -55,6 +55,13 @@ $pb_button_border_width: 0px;
     visibility: visible;
   }
 
+  .button_with_icon {
+    margin-right: $space_xs;
+  }
+  .button_with_icon_right {
+    margin-left: $space_xs;
+  }
+
   &:hover, &:focus {
     outline: none;
     
