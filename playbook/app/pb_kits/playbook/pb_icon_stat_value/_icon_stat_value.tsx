@@ -11,7 +11,7 @@ import IconCircle from '../pb_icon_circle/_icon_circle'
 import Title from '../pb_title/_title'
 
 type IconStatValueProps = {
-  aria?: { [key: string]: string; },
+  aria?: { [key: string]: string },
   className?: string,
   data?: object,
   icon: string,
