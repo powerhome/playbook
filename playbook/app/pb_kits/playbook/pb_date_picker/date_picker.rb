@@ -46,7 +46,8 @@ module Playbook
       prop :plugins, type: Playbook::Props::Boolean,
                      default: false,
                      deprecated: true
-      prop :position, type: Playbook::Props::String
+      prop :position, type: Playbook::Props::String,
+                      default: "auto"
       prop :position_element, type: Playbook::Props::String
       prop :scroll_container, type: Playbook::Props::String
       prop :selection_type, type: Playbook::Props::Enum,
