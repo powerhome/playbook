@@ -7,6 +7,9 @@ module Playbook
                       default: false
       prop :full_width, type: Playbook::Props::Boolean,
                         default: false
+      prop :icon
+      prop :icon_right, type: Playbook::Props::Boolean,
+                        default: false
       prop :link
       prop :loading, type: Playbook::Props::Boolean,
                      default: false

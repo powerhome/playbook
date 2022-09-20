@@ -1,5 +1,3 @@
-/* @flow */
-
 import React from 'react'
 import classnames from 'classnames'
 
@@ -13,7 +11,7 @@ import IconCircle from '../pb_icon_circle/_icon_circle'
 import Title from '../pb_title/_title'
 
 type IconStatValueProps = {
-  aria?: object,
+  aria?: { [key: string]: string },
   className?: string,
   data?: object,
   icon: string,
@@ -53,7 +51,7 @@ const IconStatValue = (props: IconStatValueProps) => {
     buildCss('pb_icon_stat_value_kit', orientation, size, variant), globalProps(props),
     className
   )
-  const titleSize = function(size) {
+  const titleSize = function(size: "sm" | "md" | "lg") {
     if (size == 'lg') {
       return (
         <Title

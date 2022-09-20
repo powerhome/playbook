@@ -10,3 +10,4 @@ node_modules
 .pnp.*
 yarn-error.log
 playbook/stats.json
+.npmrc

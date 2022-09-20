@@ -8,6 +8,7 @@ examples:
   - filter_only: Filter Only
   - sort_only: Sort Only
   - filter_min_width: Min Width for Popover Inside of Filter
+  - filter_placement: Filter Placement
 
   react:
   - filter_default: Default
@@ -18,3 +19,4 @@ examples:
   - sort_only: Sort Only
   - filter_min_width: Min Width for Popover Inside of Filter
   - filter_close_popover: Close Popover
+  - filter_placement: Filter Placement
