@@ -1,5 +1,3 @@
-/* @flow */
-
 import React from 'react'
 import classnames from 'classnames'
 
@@ -11,12 +9,12 @@ import Icon from '../pb_icon/_icon'
 
 type IconValueProps = {
   align?: "left" | "center" | "right",
-  aria?: object,
+  aria?: { [key: string]: string; },
   className?: string,
   dark?: boolean,
   data?: object,
   icon: string,
-  id?: number,
+  id?: string,
   text: string,
 }
 
