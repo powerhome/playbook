@@ -45,28 +45,6 @@ const Lightbox = (props: LightboxType): React.ReactNode => {
     title,
   } = props
   const [activePhoto, setActivePhoto] = useState(initialPhoto)
-  const [touchStart, setTouchStart] = useState(null)
-  const [touchEnd, setTouchEnd] = useState(null)
-
-const minSwipeDistance = 40 
-const onTouchStart = (e: React.TouchEvent) => {
-  setTouchEnd(null)
-  setTouchStart(e.targetTouches[0].clientX)
-}
-
-const onTouchMove = (e: React.TouchEvent) => setTouchEnd(e.targetTouches[0].clientX)
-
-const onTouchEnd = () => {
-  if (!touchStart || !touchEnd) return
-  const distance = touchStart - touchEnd
-  const isLeftSwipe = distance > minSwipeDistance
-  const isRightSwipe = distance < -minSwipeDistance
-  if (isLeftSwipe) {
-    setActivePhoto(activePhoto < photos.length - 1 ? activePhoto + 1 : photos.length - 1)
-  } else if (isRightSwipe) {
-    setActivePhoto(activePhoto > 0 ? activePhoto - 1 : 0)
-  }
-}
 
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
@@ -120,17 +98,12 @@ const onTouchEnd = () => {
               title={title}
           />
             {children}
-            <div
-            onTouchStart={onTouchStart} 
-            onTouchMove={onTouchMove} 
-            onTouchEnd={onTouchEnd}
-            >
             <Carousel
+                setIndex={setActivePhoto}
                 currentIndex={activePhoto}
                 onChange={handleOnSlide}
                 photos={photosMap}
             />
-            </div>
           </div>
         </div>
       </LightboxContext.Provider>

@@ -17,6 +17,7 @@ type CarouselType = {
   }[],
   onChange: (index: number) => void,
   onClick?: (index: number) => void,
+  setIndex?: (index: number)=> void,
 }
 
 export default function Carousel({
@@ -24,6 +25,7 @@ export default function Carousel({
   photos,
   onClick = noop,
   onChange = noop,
+  setIndex,
 }: CarouselType): React.ReactElement {
   useEffect(() => {
     document.body.style.overflow = 'hidden'
@@ -40,6 +42,7 @@ export default function Carousel({
   return (
     <div className="Lightbox">
       <Slides
+          setIndex={setIndex}
           current={currentIndex}
           onChange={handleChange}
           onClick={onClick}

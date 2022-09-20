@@ -151,6 +151,7 @@ $slides-margin: $space-md;
 
   @media only screen and (max-width: $screen-xs-max) {
     margin-top: 30px;
+    // height: 80%;
   }
 
   img {
@@ -196,6 +197,11 @@ $slides-margin: $space-md;
   left: 0;
   right: 0;
   bottom: 0;
+  padding-bottom: env(safe-area-inset-bottom);
+  
+  // @media only screen and (max-width: $screen-xs-max) {
+  //   bottom: 105px;
+  // }
   &.centered {
     justify-content: center;
   }
