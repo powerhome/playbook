@@ -49,12 +49,12 @@ const Lightbox = (props: LightboxType): React.ReactNode => {
   const [touchEnd, setTouchEnd] = useState(null)
 
 const minSwipeDistance = 40 
-const onTouchStart = (e: any) => {
+const onTouchStart = (e: React.TouchEvent) => {
   setTouchEnd(null)
   setTouchStart(e.targetTouches[0].clientX)
 }
 
-const onTouchMove = (e: any) => setTouchEnd(e.targetTouches[0].clientX)
+const onTouchMove = (e: React.TouchEvent) => setTouchEnd(e.targetTouches[0].clientX)
 
 const onTouchEnd = () => {
   if (!touchStart || !touchEnd) return
