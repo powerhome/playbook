@@ -7,22 +7,11 @@
           classname: "dark",
           text: "This page outlines the guiding principles that inform Playbook Design System's past, present, and future development.
           These core concepts are the basis upon which every higher order design element is built.  Some of these principles have been abstracted into sass variables listed below."
-        }) %>
+          }) %>
       </div>
     <% end %>
   <% end %>
   <%= pb_rails("background", props: { classname: "token-wrapper", background_color: "light", padding: "xl" }) do %>
-    <%= render "pages/visual_guidelines_partials/colors" %>
-    <%= render "pages/visual_guidelines_partials/max_width" %>
-    <%= render "pages/visual_guidelines_partials/number_spacing" %>
-    <%= render "pages/visual_guidelines_partials/positioning" %>
-    <%= render "pages/visual_guidelines_partials/line_height" %>
-    <%= render "pages/visual_guidelines_partials/spacing" %>
-    <%= render "pages/visual_guidelines_partials/border_radius" %>
-    <%= render "pages/visual_guidelines_partials/typography" %>
-    <%= render "pages/visual_guidelines_partials/shadows" %>
-    <%= render "pages/visual_guidelines_partials/display" %>
-    <%= render "pages/visual_guidelines_partials/cursor" %>
-    <%= render "pages/visual_guidelines_partials/flex_box_props" %>
+    <%= react_component("VisualGuidelines", examples: @kit_examples_json) %>
   <% end %>
 </div>

@@ -4,7 +4,7 @@ module Playbook
   module PbPopover
     class Popover < Playbook::KitBase
       prop :position, type: Playbook::Props::Enum,
-                      values: %w[top bottom left right],
+                      values: %w[top bottom left right top-start top-end bottom-start bottom-end right-start right-end left-start left-end],
                       default: "left"
       prop :trigger_element_id
       prop :tooltip_id

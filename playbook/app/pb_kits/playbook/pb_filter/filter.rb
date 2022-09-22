@@ -11,6 +11,9 @@ module Playbook
                       default: "default"
       prop :background, type: Playbook::Props::Boolean, default: true
       prop :min_width, default: "auto"
+      prop :placement, type: Playbook::Props::Enum,
+                       values: %w[top bottom left right top-start top-end bottom-start bottom-end right-start right-end left-start left-end],
+                       default: "bottom-start"
 
       def classname
         generate_classname("pb_filter_kit")

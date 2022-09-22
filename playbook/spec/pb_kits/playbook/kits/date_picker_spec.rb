@@ -26,7 +26,7 @@ RSpec.describe Playbook::PbDatePicker::DatePicker do
   it { is_expected.to define_prop(:picker_id).of_type(Playbook::Props::String).that_is_required }
   it { is_expected.to define_prop(:placeholder).of_type(Playbook::Props::String) }
   it { is_expected.to define_prop(:plugins).of_type(Playbook::Props::Boolean).with_default(false) }
-  it { is_expected.to define_prop(:position).of_type(Playbook::Props::String) }
+  it { is_expected.to define_prop(:position).of_type(Playbook::Props::String).with_default("auto") }
   it { is_expected.to define_prop(:position_element).of_type(Playbook::Props::String) }
   it { is_expected.to define_prop(:scroll_container).of_type(Playbook::Props::String) }
   it { is_expected.to define_prop(:static_position).of_type(Playbook::Props::Boolean).with_default(true) }

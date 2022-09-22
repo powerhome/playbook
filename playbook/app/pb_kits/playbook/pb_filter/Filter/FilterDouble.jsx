@@ -33,6 +33,7 @@ const FilterDouble = ({
   children,
   dark,
   minWidth,
+  placement,
   ...bgProps
 }: FilterDoubleProps) => (
   <FilterBackground
@@ -46,6 +47,7 @@ const FilterDouble = ({
       <FiltersPopover
           dark={dark}
           minWidth={minWidth}
+          placement={placement}
       >
         {children}
       </FiltersPopover>
