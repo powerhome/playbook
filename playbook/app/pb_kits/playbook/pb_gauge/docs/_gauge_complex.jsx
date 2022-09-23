@@ -10,7 +10,7 @@ import {
   Caption,
 } from "../..";
 
-const data = [{ name: "Name", value: 45 }];
+const data = [{ name: "Name", value: 10 }];
 
 const GaugeComplex = (props) => (
   <Flex
@@ -77,7 +77,7 @@ const GaugeComplex = (props) => (
             />
             <Flex wrap>
               <FlexItem
-                  fixedSize="125px"
+                  fixedSize="150px"
                   overflow="hidden"
                   shrink
               >

@@ -15,9 +15,9 @@
         <%= pb_rails("flex", props: {orientation: "column", wrap: true}) do %>
           <%= pb_rails("body", props: {color: "light", text: "% Abandoned"}) %>
           <%= pb_rails("flex", props: {wrap: true}) do %>
-            <%= pb_rails("flex/flex_item", props: {fixed_size: "125px", overflow: "hidden", shrink: true}) do %>
+            <%= pb_rails("flex/flex_item", props: {fixed_size: "150px", overflow: "hidden", shrink: true}) do %>
               <%= pb_rails("gauge", props: {
-                chart_data: [{ name: "Name", value: 45 }],
+                chart_data: [{ name: "Name", value: 10 }],
                 disable_animation: true,
                 height: '100%',
                 id: "gauge-complex",
