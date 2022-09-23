@@ -1,7 +1,6 @@
 /* eslint-disable jsx-control-statements/jsx-use-if-tag */
 import { noop } from 'lodash'
 import React, { useEffect } from 'react'
-
 import Slides from './Slides'
 import Thumbnails from './Thumbnails'
 

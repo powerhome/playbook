@@ -3,56 +3,7 @@
 
 $slides-margin: $space-md;
 
-.carousel {
-  .home-tour-main-content {
-    overflow-y: hidden;
-  }
-
-  .image-gallery-slide-wrapper {
-    width: 1024px;
-    height: 686px;
-  }
-
-  .image-gallery-slide div {
-    height: auto;
-  }
-
-  .image-gallery-slide .image-gallery-image {
-    max-height: 100% !important;
-    max-width: 100% !important;
-    height: 692px !important;
-    width: 100% !important;
-    object-fit: cover;
-  }
-
-  .image-gallery-left-nav .image-gallery-svg, .image-gallery-right-nav .image-gallery-svg {
-    height: 120px;
-    width: 30px;
-    opacity: 0.4;
-  }
-  .image-gallery-thumbnails {
-    overflow-x: auto;
-  }
-
-  .image-gallery-thumbnails-container {
-    width: 1024px;
-    padding-left: 4px;
-  }
-
-  .image-gallery-thumbnails {
-    padding-top: 3px;
-    background: #000;
-  }
-
-  .image-gallery-thumbnail-image {
-    height: 64px;
-    width: 93px;
-  }
-
-  .image-gallery-thumbnail + .image-gallery-thumbnail {
-    margin-left: 2px;
-    margin-top: 2px;
-  }
+ .carousel {
 
   .carousel-header {
     background: rgb(0, 0, 0);
@@ -92,12 +43,13 @@ $slides-margin: $space-md;
 
 .Lightbox {
   width: 100vw;
-  height: 100vh;
+  height: 100%;
   position: fixed;
   left: 0;
   top: 0;
   display: flex;
   align-items: center;
+  justify-content: space-between;
   flex-direction: column;
   background-color: black;
   z-index: 1;
@@ -151,7 +103,6 @@ $slides-margin: $space-md;
 
   @media only screen and (max-width: $screen-xs-max) {
     margin-top: 30px;
-    // height: 80%;
   }
 
   img {
@@ -190,24 +141,15 @@ $slides-margin: $space-md;
 
 .Thumbnails {
   display: flex;
+  width: 100vw;
   padding: 3px;
-  overflow: auto;
-  position: absolute;
-  z-index: 1;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  // @media only screen and (max-width: $screen-xs-max) {
-  //   bottom: 105px;
-  // }
+  overflow: scroll;
+  z-index: 20;
   &.centered {
     justify-content: center;
   }
 }
 
-.Thumbnails.draggable {
-  align-self: flex-start;
-}
 
 .Thumbnail {
   padding: 3px;
@@ -221,6 +163,8 @@ $slides-margin: $space-md;
 
 .Thumbnail.active {
   padding: 6px;
+  display: flex;
+  align-items: center;
   background-color: white;
   box-shadow: 0 0 6px white;
 }

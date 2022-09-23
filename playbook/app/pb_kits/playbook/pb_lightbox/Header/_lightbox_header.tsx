@@ -2,16 +2,16 @@
 /* @flow */
 import React, { useContext } from 'react'
 import classnames from 'classnames'
-import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
-import { globalProps, GlobalProps } from '../utilities/globalProps'
-import { LightboxContext } from './_lightbox_context'
+import { buildAriaProps, buildCss, buildDataProps } from '../../utilities/props'
+import { globalProps, GlobalProps } from '../../utilities/globalProps'
+import { LightboxContext } from '../_lightbox_context'
 import { LightboxHeaderIcon } from './_lightbox_header_icon'
-import { IconSizes } from '../pb_icon/_icon'
+import { IconSizes } from '../../pb_icon/_icon'
 
-import Caption from '../pb_caption/_caption'
-import Flex from '../pb_flex/_flex'
-import FlexItem from '../pb_flex/_flex_item'
-import Title from '../pb_title/_title'
+import Caption from '../../pb_caption/_caption'
+import Flex from '../../pb_flex/_flex'
+import FlexItem from '../../pb_flex/_flex_item'
+import Title from '../../pb_title/_title'
 
 type LightboxHeaderProps = {
   aria?: {[key: string]: string},

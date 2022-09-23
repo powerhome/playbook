@@ -28,10 +28,8 @@ export default function Thumbnails({
 }: ThumbnailsType): React.ReactElement {
   const viewportSize = useWindowSize()
   const thumbnailWidth = viewportSize.width / 8
-  const draggable = thumbnailWidth * urls.length > viewportSize.width
   const shouldBeCentered = (thumbnailWidth * urls.length) < (viewportSize.width * 0.9)
-  const css = classnames('Thumbnails', { draggable }, { centered: shouldBeCentered })
-
+  const css = classnames('Thumbnails', { centered: shouldBeCentered })
   const otherProps: { buttonRef?: React.RefObject<HTMLButtonElement> } = {}
 
   const thumbnailsRef: React.RefObject<HTMLDivElement>  = React.createRef()

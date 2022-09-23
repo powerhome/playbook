@@ -1,8 +1,8 @@
 /* @flow */
 
 import React from 'react'
-import Icon from '../pb_icon/_icon'
-import {IconSizes} from '../pb_icon/_icon'
+import Icon from '../../pb_icon/_icon'
+import {IconSizes} from '../../pb_icon/_icon'
 
 type LightboxHeaderIconProps = {
   onClose: () => void,
