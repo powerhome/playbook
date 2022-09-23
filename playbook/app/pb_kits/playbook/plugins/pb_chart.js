@@ -82,6 +82,11 @@ class pbChart {
 
     Highcharts.chart(this.defaults.id, {
       chart: {
+        events: {
+          load() {
+            setTimeout(this.reflow.bind(this), 0)
+          },
+        },
         type: this.defaults.style,
         height: this.defaults.height,
       },

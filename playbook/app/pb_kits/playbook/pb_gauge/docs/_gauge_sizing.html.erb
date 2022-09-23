@@ -1,4 +1,4 @@
-<%= pb_rails("flex", props: {wrap: true}) do %>
+<%= pb_rails("flex", props: {wrap: true, align: "center"}) do %>
   <%= pb_rails("flex/flex_item", props: {fixed_size: "400px", overflow: "hidden", shrink: true }) do %>
       <%= pb_rails("gauge", props: {
         id: "gauge-sizing4",
@@ -20,6 +20,7 @@
   <%= pb_rails("flex/flex_item", props: {fixed_size: "125px", overflow: "hidden", shrink: true }) do %>
       <%= pb_rails("gauge", props: {
         id: "gauge-sizing1",
+        height: '100%',
         chart_data: [{ name: "Point 4", value: 25 }],
       }) %>
   <% end %>

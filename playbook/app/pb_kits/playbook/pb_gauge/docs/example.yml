@@ -10,6 +10,7 @@ examples:
   - gauge_sizing: Sizing
   - gauge_height: Height
   - gauge_colors: Color Overrides
+  - gauge_complex: Complex
 
 
   react:
@@ -23,3 +24,4 @@ examples:
   - gauge_height: Height
   - gauge_live_data: Live Data
   - gauge_colors: Color Overrides
+  - gauge_complex: Complex
