@@ -83,7 +83,6 @@ const GaugeComplex = (props) => (
               >
                 <Gauge
                     chartData={data}
-                    className="abandonedCalls"
                     disableAnimation
                     height="100%"
                     id="gauge-complex"
