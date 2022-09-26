@@ -7,13 +7,13 @@ import { globalProps } from '../utilities/globalProps'
 import Caption from '../pb_caption/_caption'
 
 type SectionSeparatorProps = {
-  aria: { [key: string]: string; },
-  className: string,
+  aria?: { [key: string]: string; },
+  className?: string,
   dark?: boolean,
-  data: { [key: string]: string; },
-  id: string,
+  data?: { [key: string]: string; },
+  id?: string,
   orientation?: "horizontal" | "vertical",
-  text: string,
+  text?: string,
   variant?: "card" | "background",
 }
 

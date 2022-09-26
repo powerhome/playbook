@@ -22,6 +22,11 @@ RSpec.describe Playbook::PbFilter::Filter do
       .with_default("default")
       .with_values("default", "single", "filter_only", "sort_only")
   }
+  it {
+    is_expected.to define_enum_prop(:placement)
+      .with_default("bottom-start")
+      .with_values("top", "right", "bottom", "left", "top-start", "top-end", "bottom-start", "bottom-end", "right-start", "right-end", "left-start", "left-end")
+  }
 
   describe "#classname" do
     it "returns namespaced class name", :aggregate_failures do

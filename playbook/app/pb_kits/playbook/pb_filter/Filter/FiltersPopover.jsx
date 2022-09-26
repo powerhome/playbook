@@ -6,7 +6,7 @@ import CircleIconButton from '../../pb_circle_icon_button/_circle_icon_button'
 import PbReactPopover from '../../pb_popover/_popover'
 
 const FiltersPopoverProps = { children: Node }
-const FiltersPopover = ({ children, dark, minWidth }: FiltersPopoverProps) => {
+const FiltersPopover = ({ children, dark, minWidth, placement = "bottom-start" }: FiltersPopoverProps) => {
   const [hide, updateHide] = useState(true)
   const toggle = () => updateHide(!hide)
 
@@ -25,7 +25,7 @@ const FiltersPopover = ({ children, dark, minWidth }: FiltersPopoverProps) => {
     <PbReactPopover
         closeOnClick="outside"
         minWidth={minWidth}
-        placement="bottom"
+        placement={placement}
         reference={filterButton}
         shouldClosePopover={updateHide}
         show={!hide}

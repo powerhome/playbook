@@ -10,7 +10,7 @@ export const titleize = (sentence: string): string => (
 
 const notEmpty = (value: string | Record<string, unknown>): boolean => !isEmpty(value)
 
-export const joinPresent = (array: [], separator: string): string => (
+export const joinPresent = (array: string[], separator: string): string => (
   filter(array, notEmpty).join(separator)
 )
 
