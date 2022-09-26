@@ -8,7 +8,7 @@ const size="sm"
 const confirmButton="Okay"
 const cancelButton="Cancel Button"
 
-function DialogTest() {
+function DialogTest({ props }) {
   const [isOpen, setIsOpen] = useState(false)
   const close = () => setIsOpen(false)
   const open = () => setIsOpen(true)
@@ -29,6 +29,7 @@ function DialogTest() {
           size={size}
           text={text}
           title={title}
+          {...props}
       />
     </>
   );
@@ -71,6 +72,19 @@ test("renders the title and body text", async () => {
   cleanup()
 });
 
+test("renders the full height version", async () => {
+
+  const { queryByText } = render(<DialogTest fullHeight />);
+
+  fireEvent.click(queryByText('Open Dialog'));
+
+  await waitFor(() => expect(queryByText("Header Title is the Title Prop")).toHaveTextContent(title));
+
+  await waitFor(() => expect(queryByText("Hello Body Text, Nice to meet ya.")).toHaveTextContent(text));
+
+  cleanup()
+});
+
 test("renders the buttons", async () => {
 
   const { queryByText } = render(<DialogTest />);
@@ -83,3 +97,4 @@ test("renders the buttons", async () => {
 
   cleanup()
 });
+
