@@ -27,6 +27,7 @@ type DialogProps = {
   confirmButton?: string;
   data?: object;
   id?: string;
+  fullHeight?: boolean;
   loading?: boolean;
   onCancel?: () => void;
   onChange?: () => void;
@@ -34,8 +35,9 @@ type DialogProps = {
   onConfirm?: () => void;
   opened: boolean;
   portalClassName?: string;
+  placement?: "left" | "center" | "right";
   shouldCloseOnOverlayClick: boolean;
-  size?: "sm" | "md" | "lg" | "status_size" | "content";
+  size?: "sm" | "md" | "lg" | "xl" | "status_size" | "content";
   status?: "info" | "caution" | "delete" | "error" | "success";
   text?: string;
   title?: string;
@@ -54,10 +56,12 @@ const Dialog = (props: DialogProps) => {
     size = "md",
     children,
     loading = false,
+    fullHeight = false,
     opened,
     onCancel = () => {},
     onConfirm = () => {},
     onClose = () => {},
+    placement = "center",
     portalClassName,
     shouldCloseOnOverlayClick = true,
     status,
@@ -73,8 +77,14 @@ const Dialog = (props: DialogProps) => {
     beforeClose: "pb_dialog_before_close",
   };
 
+  const fullHeightClassNames = () => {
+    if(!fullHeight) return null
+    if(size === "xl") return `full_height_center`
+    return `full_height_${placement}`
+  }
+
   const overlayClassNames = {
-    base: "pb_dialog_overlay",
+    base: `pb_dialog_overlay ${fullHeight !== null && fullHeightClassNames() }`,
     afterOpen: "pb_dialog_overlay_after_open",
     beforeClose: "pb_dialog_overlay_before_close",
   };

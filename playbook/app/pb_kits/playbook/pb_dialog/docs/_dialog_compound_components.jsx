@@ -17,6 +17,7 @@ const DialogCompound = () => {
     <>
       <Button onClick={open}>{'Open a Complex Dialog'}</Button>
       <Dialog
+          fullHeight
           onClose={close}
           opened={isOpen}
           size="lg"
