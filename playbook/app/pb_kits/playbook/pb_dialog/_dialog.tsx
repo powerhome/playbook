@@ -46,7 +46,6 @@ type DialogProps = {
 
 const Dialog = (props: DialogProps) => {
   const {
-    // alertStyle = "default",
     aria = {},
     cancelButton,
     confirmButton,
@@ -167,7 +166,6 @@ const Dialog = (props: DialogProps) => {
     <DialogContext.Provider value={api}>
       <div {...ariaProps} {...dataProps} className={classes}>
         <Modal
-          // alertStyle={alertStyle}
           ariaHideApp={false}
           className={dialogClassNames}
           closeTimeoutMS={200}
@@ -178,7 +176,6 @@ const Dialog = (props: DialogProps) => {
           overlayClassName={overlayClassNames}
           portalClassName={portalClassName}
           shouldCloseOnOverlayClick={shouldCloseOnOverlayClick}
-          // status={status}
         >
           <>
             {title && !status ? <Dialog.Header>{title}</Dialog.Header> : null}
