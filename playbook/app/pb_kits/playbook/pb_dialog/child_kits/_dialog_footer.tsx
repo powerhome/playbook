@@ -39,7 +39,7 @@ const DialogFooter = (props: DialogFooterProps) => {
   return (
     <>
       {separator &&
-        <SectionSeparator aria={{dd: 'ff'}} className="dd" data={{dd: 'ff'}} id="d" text="ss"/>
+        <SectionSeparator />
       }
       <Flex
           className={classnames(footerCSS, footerSpacing, className)}
