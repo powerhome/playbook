@@ -1,10 +1,8 @@
-/* @flow */
-
 import React, { useEffect } from 'react'
 import classnames from 'classnames'
 
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
-import { deprecatedProps, globalProps } from '../utilities/globalProps'
+import { deprecatedProps, globalProps, GlobalProps } from '../utilities/globalProps'
 
 import datePickerHelper from './date_picker_helper'
 
@@ -12,46 +10,42 @@ import Icon from '../pb_icon/_icon'
 import TextInput from '../pb_text_input/_text_input'
 
 type DatePickerProps = {
-  allowInput?: Boolean,
-  aria?: object,
-  className?: String,
-  dark?: Boolean,
+  allowInput?: boolean,
+  aria?: {[key: string]: string},
+  className?: string,
+  dark?: boolean,
   data?: object,
-  defaultDate?: String,
-  disableDate?: Array,
-  disableInput?: Boolean,
-  disableRange?: Array,
-  disableWeekdays?: Array,
-  enableTime?: Boolean,
-  error?: String,
-  format?: String,
-  hideIcon?: Boolean,
-  hideLabel?: Boolean,
-  id?: String,
-  inLine?: Boolean,
+  defaultDate?: string,
+  disableDate?: number[],
+  disableInput?: boolean,
+  disableRange?: number[],
+  disableWeekdays?: number[],
+  enableTime?: boolean,
+  error?: string,
+  format?: string,
+  hideIcon?: boolean,
+  hideLabel?: boolean,
+  id?: string,
+  inLine?: boolean,
   inputAria?: object,
   inputData?: object,
-  inputOnChange?: (String) => void,
+  inputOnChange?: (arg: string) => void,
   inputValue?: any,
-  label?: String,
-  maxDate: String,
-  minDate: String,
-  mode?: String,
-  name: String,
-  onChange: (String) => void,
-  pickerId?: String,
-  placeholder?: String,
-  plugins: Boolean,
-  position: String,
+  label?: string,
+  maxDate: string,
+  minDate: string,
+  name: string,
+  pickerId?: ArrayLike<Node> | Node | string,
+  placeholder?: string,
   positionElement?: HTMLElement | null,
-  scrollContainer?: String,
+  scrollContainer?: string,
   selectionType?: "month" | "week",
-  showTimezone?: Boolean,
-  staticPosition: Boolean,
-  timeFormat?: String,
-  type?: String,
-  yearRange?: Array,
-}
+  showTimezone?: boolean,
+  staticPosition: boolean,
+  timeFormat?: string,
+  type?: string,
+  yearRange?: number[],
+} & GlobalProps
 
 const DatePicker = (props: DatePickerProps) => {
   if (props.plugins) deprecatedProps('Date Picker', ['plugins'])
@@ -128,6 +122,7 @@ const DatePicker = (props: DatePickerProps) => {
       showTimezone,
       staticPosition,
       yearRange,
+      required: false,
     }, scrollContainer)
   })
 
@@ -168,38 +163,35 @@ const DatePicker = (props: DatePickerProps) => {
             value={inputValue}
         />
 
-        <If condition={!hideIcon}>
+        {!hideIcon &&
           <div
-              className={iconWrapperClass()}
-              id={`cal-icon-${pickerId}`}
-          >
-            <Icon
-                className="cal_icon"
-                icon="calendar-alt"
-            />
-          </div>
-        </If>
+          className={iconWrapperClass()}
+          id={`cal-icon-${pickerId}`}
+      >
+        <Icon
+            className="cal_icon"
+            icon="calendar-alt"
+        />
+      </div>
+        }
+          
 
-        <If condition={hideIcon && inLine}>
-          <div
-              className={iconWrapperClass()}
-              id={`${pickerId}-icon-plus`}
-          >
+        { hideIcon && inLine ? <><div
+          className={iconWrapperClass()}
+          id={`${pickerId}-icon-plus`}
+        >
+          <Icon
+            className="date-picker-plus-icon"
+            icon="plus" />
+        </div><div
+          className={iconWrapperClass()}
+          id={`${pickerId}-angle-down`}
+        >
             <Icon
-                className="date-picker-plus-icon"
-                icon="plus"
-            />
-          </div>
-          <div
-              className={iconWrapperClass()}
-              id={`${pickerId}-angle-down`}
-          >
-            <Icon
-                className="angle_down_icon"
-                icon="angle-down"
-            />
-          </div>
-        </If>
+              className="angle_down_icon"
+              icon="angle-down" />
+          </div></> : null}
+          
 
       </div>
     </div>
