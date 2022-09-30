@@ -40,7 +40,7 @@ module Playbook
     end
 
     def spacing_values
-      %w[none xs sm md lg xl]
+      %w[none xxs xs sm md lg xl]
     end
 
     def spacing_props
