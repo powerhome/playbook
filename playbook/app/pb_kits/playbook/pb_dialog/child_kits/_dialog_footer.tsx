@@ -1,10 +1,8 @@
-/* @flow */
-
 import React from 'react'
 import classnames from 'classnames'
 
 import { buildCss } from '../../utilities/props'
-import { globalProps } from '../../utilities/globalProps'
+import { GlobalProps, globalProps } from '../../utilities/globalProps'
 
 import Flex from '../../pb_flex/_flex'
 import SectionSeparator from '../../pb_section_separator/_section_separator'
@@ -12,17 +10,16 @@ import SectionSeparator from '../../pb_section_separator/_section_separator'
 
 type DialogFooterProps = {
   aria?: object,
-  children: array<React.ReactNode> | React.ReactNode | string,
+  children: React.ReactChild[] | React.ReactChild | string,
   className?: string,
-  closeable: boolean,
   data?: object,
   id?: string,
   padding?: string,
   paddingBottom?: string,
   paddingX?: string,
-  separator: boolean,
-  spacing?: string,
-}
+  separator?: boolean,
+  spacing?: "none" | "between" | "around" | "evenly",
+} & GlobalProps
 
 // Footer component
 const DialogFooter = (props: DialogFooterProps) => {
@@ -41,9 +38,9 @@ const DialogFooter = (props: DialogFooterProps) => {
 
   return (
     <>
-      <If condition={separator}>
-        <SectionSeparator />
-      </If>
+      {separator &&
+        <SectionSeparator aria={{dd: 'ff'}} className="dd" data={{dd: 'ff'}} id="d" text="ss"/>
+      }
       <Flex
           className={classnames(footerCSS, footerSpacing, className)}
           spacing={spacing}
