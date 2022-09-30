@@ -3,7 +3,7 @@ import { useKbdControls } from './hooks/useKbdControls'
 import classnames from 'classnames'
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
 import { globalProps } from '../utilities/globalProps'
-import LightboxHeader from './_lightbox_header'
+import LightboxHeader from './Header/_lightbox_header'
 import { LightboxContext } from './_lightbox_context'
 import { IconSizes } from '../pb_icon/_icon'
 
@@ -99,6 +99,7 @@ const Lightbox = (props: LightboxType): React.ReactNode => {
           />
             {children}
             <Carousel
+                setIndex={setActivePhoto}
                 currentIndex={activePhoto}
                 onChange={handleOnSlide}
                 photos={photosMap}
