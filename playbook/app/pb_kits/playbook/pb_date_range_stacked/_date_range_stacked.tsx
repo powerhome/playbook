@@ -1,9 +1,7 @@
-/* @flow */
-
 import React from 'react'
 import classnames from 'classnames'
 
-import { buildCss } from '../utilities/props'
+import { buildCss, buildDataProps } from '../utilities/props'
 import { globalProps } from '../utilities/globalProps'
 
 import Body from '../pb_body/_body'
@@ -13,7 +11,7 @@ import DateYearStacked from '../pb_date_year_stacked/_date_year_stacked'
 import Icon from '../pb_icon/_icon'
 
 type DateRangeStackedProps = {
-  className?: string | array<string>,
+  className?: string | string[],
   data?: string,
   dark?: boolean,
   endDate: string,
@@ -22,15 +20,16 @@ type DateRangeStackedProps = {
 }
 
 const DateRangeStacked = (props: DateRangeStackedProps) => {
-  const { className, dark = false, endDate, startDate } = props
+  const { className, dark = false, endDate, startDate, data={} } = props
   const css = classnames(
     buildCss('pb_date_range_stacked'),
     globalProps(props),
     className
   )
+  const dataProps = buildDataProps(data)
 
   return (
-    <div className={css}>
+    <div {...dataProps} className={css}>
       <Flex vertical="center">
         <FlexItem>
           <DateYearStacked
