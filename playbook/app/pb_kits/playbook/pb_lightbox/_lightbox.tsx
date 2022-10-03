@@ -5,7 +5,6 @@ import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
 import { globalProps } from '../utilities/globalProps'
 import LightboxHeader from './Header/_lightbox_header'
 import { LightboxContext } from './_lightbox_context'
-import { IconSizes } from '../pb_icon/_icon'
 
 import Carousel from './Carousel/index'
 
@@ -14,17 +13,17 @@ type LightboxType = {
   children: React.ReactNode[] | React.ReactNode | string,
   className?: string,
   data?: {[key: string]: string | number},
-  description?: string,
+  description?: string | any,
   id?: string,
   photos: [],
   initialPhoto?: number,
-  onClose: () => void,
+  onClickRight?: () => void,
+  onClose?: () => void,
   icon: string,
-  iconSize: IconSizes,
   showCount?: boolean,
-  textRight?: string,
+  navRight?: string,
   trigger?: string,
-  title?: string,
+  title?: string | any,
 }
 
 const Lightbox = (props: LightboxType): React.ReactNode => {
@@ -38,10 +37,9 @@ const Lightbox = (props: LightboxType): React.ReactNode => {
     initialPhoto = 0,
     photos,
     onClose,
+    onClickRight,
     icon = 'times',
-    iconSize = '2x',
-    showCount = true,
-    textRight = 'All Photos',
+    navRight,
     title,
   } = props
   const [activePhoto, setActivePhoto] = useState(initialPhoto)
@@ -77,7 +75,6 @@ const Lightbox = (props: LightboxType): React.ReactNode => {
 
   const lightboxRef: any = useRef()
 
-  const headerTextRight = showCount ? `${activePhoto + 1} / ${photos.length}` : textRight
 
   return (
     <Fragment>
@@ -92,9 +89,10 @@ const Lightbox = (props: LightboxType): React.ReactNode => {
           <div className="carousel">
           <Lightbox.Header
               icon={icon}
-              iconSize={iconSize}
+              onClose={onClose}
+              onClickRight={onClickRight}
               text={description}
-              textRight={headerTextRight}
+              navRight={navRight}
               title={title}
           />
             {children}

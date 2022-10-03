@@ -4,3 +4,4 @@ examples:
   - lightbox_default: Default
   - lightbox_multiple: Multiple
   - lightbox_compound_component: Compound Component
+  - lightbox_custom_header: Custom Header
