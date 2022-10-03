@@ -72,13 +72,21 @@ const LightboxHeader = (props: LightboxHeaderProps): React.ReactElement => {
               {typeof title === "string" ? (
                 <Title dark paddingBottom="xxs" size={4} text={title} />
               ) : (
-                <Flex justify="center">{title}</Flex>
+                <Flex justify="center"
+                   className="custom-header"
+                >
+                  {title}
+                  </Flex>
               )}
 
               {typeof text === "string" ? (
                 <Caption dark>{text}</Caption>
               ) : (
-                <Flex justify="center">{text}</Flex>
+                <Flex justify="center"
+                className="custom-header"
+                >
+                  {text}
+                </Flex>
               )}
             </Flex>
           </Flex>
@@ -87,6 +95,7 @@ const LightboxHeader = (props: LightboxHeaderProps): React.ReactElement => {
       <FlexItem flex="1">
         <Flex justify="end">
           <Button
+            className="nav-right-btn"
             htmlType="button"
             onClick={onClickRight}
             dark

@@ -16,6 +16,13 @@ $slides-margin: $space-md;
     z-index: 9999999;
     align-items: center;
     transition: all .5s;
+
+    .nav-right-btn {
+      padding-left: $space_xs !important;
+    }
+    .custom-header {
+      text-align: center;
+    }
   }
 }
 
@@ -77,6 +84,26 @@ $slides-margin: $space-md;
     }
   }
 
+  .carousel-arrow-left {
+    display: block;
+    position: absolute;
+    z-index: 4;
+    top: 50%;
+    @media only screen and (max-width: $screen-xs-max) {
+      display: none;
+    }
+  }
+
+  .carousel-arrow-right {
+    display: block;
+    position: absolute;
+    z-index: 4;
+    top: 50%;
+    right: 0;
+    @media only screen and (max-width: $screen-xs-max) {
+      display: none;
+    }
+  }
 }
 
 .Slide,
@@ -106,33 +133,6 @@ $slides-margin: $space-md;
     height: 100vh;
     object-fit: contain;
   }
-}
-
-.BackBtn,
-.NextBtn {
-  z-index: 2;
-  color: black;
-  position: absolute;
-  width: 50px;
-  height: 50px;
-  top: calc(50vh - 5px);
-  border: none;
-  border-radius: 50%;
-  background-color: white;
-}
-
-.BackBtn::before,
-.NextBtn::before {
-  content: "▸";
-}
-
-.BackBtn {
-  left: 30px;
-  transform: rotate(180deg);
-}
-
-.NextBtn {
-  right: 30px;
 }
 
 .Thumbnails {
