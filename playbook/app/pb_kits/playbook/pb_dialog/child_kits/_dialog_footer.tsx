@@ -9,10 +9,10 @@ import SectionSeparator from '../../pb_section_separator/_section_separator'
 
 
 type DialogFooterProps = {
-  aria?: object,
+  aria?: {[key: string]: string},
   children: React.ReactChild[] | React.ReactChild | string,
   className?: string,
-  data?: object,
+  data?: {[key: string]: string},
   id?: string,
   padding?: string,
   paddingBottom?: string,

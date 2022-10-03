@@ -6,7 +6,7 @@ window.pbChart = pbChart
 import './pb_form/pb_form_validation'
 
 // Date Picker
-import datePickerHelper from './pb_date_picker/date_picker_helper.js'
+import datePickerHelper from './pb_date_picker/date_picker_helper'
 window.datePickerHelper = datePickerHelper
 
 // Lazy image loading

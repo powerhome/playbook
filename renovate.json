@@ -16,7 +16,8 @@
         "react",
         "react-dom",
         "react-select",
-        "yarn"
+        "yarn",
+        "typescript"
       ],
       "packagePatterns": [
         "^(@babel|babel|webpacker|webpack|node)"

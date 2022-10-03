@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    playbook_ui (11.6.0)
+    playbook_ui (11.7.0)
       actionpack (>= 5.2.4.5)
       actionview (>= 5.2.4.5)
       activesupport (>= 5.2.4.5)
@@ -89,7 +89,7 @@ GEM
     builder (3.2.4)
     byebug (11.0.0)
     concurrent-ruby (1.1.10)
-    connection_pool (2.2.5)
+    connection_pool (2.3.0)
     crass (1.0.6)
     diff-lcs (1.4.4)
     digest (3.1.0)
