@@ -17,7 +17,6 @@ test('Kit renders', () => {
         className="customClass"
         data={{ testid: testId }}
         icon="close"
-        iconSize="3x"
         id="test1"
         initialPhoto={1}
         onClose={() => {}}
@@ -35,7 +34,6 @@ test('Shows selected images', () => {
     <Lightbox
         data={{ testid: testId }}
         icon="close"
-        iconSize="3x"
         id="test1"
         initialPhoto={1}
         onClose={() => {}}
@@ -78,7 +76,6 @@ test('Closes on escape key', async () => {
     <Lightbox
         data={{ testid: testId }}
         icon="close"
-        iconSize="3x"
         id="test1"
         initialPhoto={0}
         onClose={mockClose}
@@ -108,7 +105,6 @@ test('Closes on close button', async () => {
     <Lightbox
         data={{ testid: testId }}
         icon="close"
-        iconSize="3x"
         id="test1"
         initialPhoto={0}
         onClose={mockClose}
@@ -117,7 +113,7 @@ test('Closes on close button', async () => {
   )
 
   const kit = screen.getByTestId(testId)
-  const closeIcon = kit.getElementsByClassName('close-icon')[0]
+  const closeIcon = kit.getElementsByClassName('pb_button_kit_link_inline_enabled')[0]
 
   fireEvent(
     closeIcon,
