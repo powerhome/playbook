@@ -48,7 +48,7 @@ const LightboxCompoundComponent = (props) => {
               {photos.map((photo, index) => {
                 return (
                   <div
-                      key={photo[index]}
+                      key={index}
                       onClick={() => onPhotoClick(index)}
                   >
                     <Image

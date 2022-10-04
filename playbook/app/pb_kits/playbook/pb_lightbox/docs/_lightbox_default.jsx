@@ -27,11 +27,9 @@ const LightboxDefault = (props) => {
         {showLightbox ? (
           <Lightbox
               icon="times"
-              iconSize="2x"
               initialPhoto={selectedPhoto}
               onClose={handleCloseLightbox}
               photos={photos}
-              showCount={false}
               {...props}
           />
         ) : (

@@ -70,7 +70,7 @@ const LightboxCustomHeader = (props) => {
             <Flex>
               {photos.map((photo, index) => {
                 return (
-                  <div key={photo[index]} 
+                  <div key={index} 
                       onClick={() => onPhotoClick(index)}
                   >
                     <Image marginRight="xl" 

@@ -8,7 +8,6 @@ type CarouselType = {
   initialPhoto?: string,
   onClose?: () => void,
   icon?: string,
-  iconSize?: number,
   currentIndex: number,
   photos: {
     url: string,
