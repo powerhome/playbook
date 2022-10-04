@@ -31,6 +31,7 @@ const LightboxCustomHeader = (props) => {
   const customTitle = (
     <Title dark 
         paddingBottom="xxs"
+        size={4}
     >
     My Custom Title
     </Title>

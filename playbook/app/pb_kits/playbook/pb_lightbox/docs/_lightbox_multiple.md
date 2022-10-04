@@ -1,0 +1,1 @@
+When multiple images are passed to the Lightbox kit, it will display scrollable thumbnails at the bottom of the screen. On larger screens, there are arrow buttons on the left and right for easier scrolling while on mobile devices the kit allows for swiping. 
