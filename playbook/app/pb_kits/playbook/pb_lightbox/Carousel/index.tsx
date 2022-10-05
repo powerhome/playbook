@@ -1,5 +1,4 @@
 /* eslint-disable jsx-control-statements/jsx-use-if-tag */
-import { noop } from 'lodash'
 import React, { useEffect } from 'react'
 import Slides from './Slides'
 import Thumbnails from './Thumbnails'
@@ -21,8 +20,8 @@ type CarouselType = {
 export default function Carousel({
   currentIndex,
   photos,
-  onClick = noop,
-  onChange = noop,
+  onClick = ()=>{},
+  onChange = ()=>{},
   setIndex,
 }: CarouselType): React.ReactElement {
   useEffect(() => {

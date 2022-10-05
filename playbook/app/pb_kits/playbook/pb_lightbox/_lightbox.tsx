@@ -1,5 +1,4 @@
 import React, { Fragment, useMemo, useRef, useState, useEffect } from 'react'
-import { noop } from 'lodash'
 import { useKbdControls } from './hooks/useKbdControls'
 import classnames from 'classnames'
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
@@ -18,11 +17,10 @@ type LightboxType = {
   id?: string,
   photos: [],
   initialPhoto?: number,
-  onChangeIndex?: (index: number) => {},
+  onChange?: (index: number)=> {},
   onClickRight?: () => void,
   onClose?: () => void,
   icon: string,
-  showCount?: boolean,
   navRight?: string,
   trigger?: string,
   title?: string | any,
@@ -38,17 +36,18 @@ const Lightbox = (props: LightboxType): React.ReactNode => {
     id = '',
     initialPhoto = 0,
     photos,
-    onChangeIndex = noop,
+    onChange = ()=>{},
     onClose,
     onClickRight,
     icon = 'times',
     navRight,
     title,
   } = props
+
   const [activePhoto, setActivePhoto] = useState(initialPhoto)
 
   useEffect(() => {
-    onChangeIndex(activePhoto)
+    onChange(activePhoto)
   },[activePhoto])
 
   const ariaProps = buildAriaProps(aria)
