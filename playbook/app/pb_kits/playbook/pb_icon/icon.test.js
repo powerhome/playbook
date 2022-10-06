@@ -138,13 +138,13 @@ describe("Icon Kit", () => {
         }) 
     })
 
-    test("renders style prop", () => {
+    test("renders fontStyle prop", () => {
         render(
             <Icon
                 data={{ testid: testId }}
                 fixedWidth
+                fontStyle="fas"
                 icon="user"
-                style="fas"
       />
         )
 
