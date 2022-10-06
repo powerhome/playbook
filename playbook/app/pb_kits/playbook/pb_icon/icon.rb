@@ -32,13 +32,16 @@ module Playbook
       prop :size, type: Playbook::Props::Enum,
                   values: ["lg", "xs", "sm", "1x", "2x", "3x", "4x", "5x", "6x", "7x", "8x", "9x", "10x", nil],
                   default: nil
+      prop :style, type: Playbook::Props::Enum,
+                   values: %w[far fas fab],
+                   default: "far"
       prop :spin, type: Playbook::Props::Boolean,
                   default: false
 
       def classname
         generate_classname(
           "pb_icon_kit",
-          "far",
+          style_class,
           icon_class,
           border_class,
           fixed_width_class,
@@ -129,6 +132,10 @@ module Playbook
 
       def size_class
         size ? "fa-#{size}" : nil
+      end
+
+      def style_class
+        style ? style.to_s : "far"
       end
 
       def spin_class
