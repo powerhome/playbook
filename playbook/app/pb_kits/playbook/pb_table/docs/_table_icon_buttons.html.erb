@@ -15,7 +15,7 @@
       <td>Value 3</td>
       <td>Value 4</td>
       <td>
-        <%= pb_rails("flex") do %>
+        <%= pb_rails("flex", props: { justify: "end" }) do %>
             <%= pb_rails("body", props: {classname: "flex-item"}) do %>  
                 <%= pb_rails("circle_icon_button", props: { variant: "link", icon: "pencil" }) %>
             <% end %>
@@ -31,7 +31,7 @@
       <td>Value 3</td>
       <td>Value 4</td>
       <td>
-        <%= pb_rails("flex") do %>
+        <%= pb_rails("flex", props: { justify: "end" }) do %>
             <%= pb_rails("body", props: {classname: "flex-item"}) do %>  
                 <%= pb_rails("circle_icon_button", props: { variant: "link", icon: "pencil" }) %>
             <% end %>
@@ -46,8 +46,8 @@
       <td>Value 2</td>
       <td>Value 3</td>
       <td>Value 4</td>
-      <td>
-        <%= pb_rails("flex") do %>
+      <td align="right">
+        <%= pb_rails("flex", props: { justify: "end" }) do %>
             <%= pb_rails("body", props: {classname: "flex-item"}) do %>  
                 <%= pb_rails("circle_icon_button", props: { variant: "link", icon: "pencil" }) %>
             <% end %>

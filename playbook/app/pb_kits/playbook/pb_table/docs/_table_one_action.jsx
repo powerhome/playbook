@@ -24,7 +24,7 @@ const TableOneAction = (props) => {
           <td>{'Value 2'}</td>
           <td>{'Value 3'}</td>
           <td>{'Value 4'}</td>
-          <td>
+          <td align="right">
             {' '}
             <Button
                 onClick={() => alert('button clicked!')}
@@ -40,7 +40,7 @@ const TableOneAction = (props) => {
           <td>{'Value 2'}</td>
           <td>{'Value 3'}</td>
           <td>{'Value 4'}</td>
-          <td>
+          <td align="right">
             {' '}
             <Button
                 onClick={() => alert('button clicked!')}
@@ -56,7 +56,7 @@ const TableOneAction = (props) => {
           <td>{'Value 2'}</td>
           <td>{'Value 3'}</td>
           <td>{'Value 4'}</td>
-          <td>
+          <td align="right">
             {' '}
             <Button
                 onClick={() => alert('button clicked!')}
