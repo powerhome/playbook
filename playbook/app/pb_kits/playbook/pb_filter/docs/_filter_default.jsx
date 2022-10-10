@@ -11,7 +11,7 @@ const FilterDefault = (props) => {
     { value: 'Canada' },
     { value: 'Brazil' },
     { value: 'Philippines' },
-    { value: 'A Galaxy Far Far Away Like Really Far Away' },
+    { value: 'A galaxy far far away, like really far away...' },
   ]
   return (
 
@@ -22,6 +22,7 @@ const FilterDefault = (props) => {
             'Full Name': 'John Wick',
             'City': 'San Francisco',
           }}
+          minWidth="375px"
           onSortChange={SortingChangeCallback}
           results={1}
           sortOptions={{
@@ -43,6 +44,7 @@ const FilterDefault = (props) => {
         <Select
             blankSelection="Select One..."
             label="Territory"
+            maxWidth="sm"
             name="location"
             options={options}
             {...props}
@@ -67,6 +69,7 @@ const FilterDefault = (props) => {
 
       <Filter
           double
+          minWidth="375px"
           onSortChange={SortingChangeCallback}
           results={1}
           sortOptions={{
