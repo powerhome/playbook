@@ -54,7 +54,7 @@
   <%= react_component("KitSearch", classname: "mobile-kit-search", id: "mobile-kit-search", kits: search_list()) %>
 </div>
 
-<%= pb_rails("section_separator")%>
+<%= pb_rails("section_separator", props: {z_index: "5"})%>
 <% flash.each do |name, msg| %>
   <% name = "success" if name == "notice" %>
   <%= pb_rails("fixed_confirmation_toast", props: { text: msg, status: name }) %>
