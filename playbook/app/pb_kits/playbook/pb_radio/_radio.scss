@@ -32,6 +32,7 @@
   input {
     position: relative;
     width: 0;
+    left: $offscreen;
     &:checked, &:focus {
       & ~ .pb_radio_button {
         border: 6px solid $primary;
