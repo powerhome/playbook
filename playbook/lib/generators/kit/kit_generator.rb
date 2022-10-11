@@ -73,7 +73,7 @@ class KitGenerator < Rails::Generators::NamedBase
       # Ask user if React version should be generated ======
       if yes?("Create REACT #{@kit_name_pascal} kit? (y/N)")
         @react_kit = true
-        template "kit_tsx.erb", "#{full_kit_directory}/_#{@kit_name_underscore}.tsx"
+        template "kit_jsx.erb", "#{full_kit_directory}/_#{@kit_name_underscore}.tsx"
         template "kit_jsx_test.erb", "#{full_kit_directory}/#{@kit_name_underscore}.test.jsx"
         template "kit_example_react.erb", "#{full_kit_directory}/docs/_#{@kit_name_underscore}_default.jsx"
         template "kit_js.erb", "#{full_kit_directory}/docs/index.js"
