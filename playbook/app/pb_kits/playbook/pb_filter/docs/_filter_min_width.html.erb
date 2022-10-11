@@ -1,6 +1,6 @@
 <%=
   pb_rails("filter", props: {
-    min_width: "600px",
+    min_width: "375px",
     id: "25",
     position: "top",
     filters: [
@@ -17,17 +17,12 @@
   }) do
 %>
   <%
-    example_collection = [
-      OpenStruct.new(name: "Alabama", value: 1),
-      OpenStruct.new(name: "Alaska", value: 2),
-      OpenStruct.new(name: "Arizona", value: 3),
-      OpenStruct.new(name: "Arkansas", value: 4),
-      OpenStruct.new(name: "California", value: 5),
-      OpenStruct.new(name: "Colorado", value: 6),
-      OpenStruct.new(name: "Connecticut", value: 7),
-      OpenStruct.new(name: "Delaware", value: 8),
-      OpenStruct.new(name: "Florida", value: 9),
-      OpenStruct.new(name: "Georgia", value: 10),
+   example_collection = [
+      OpenStruct.new(name: "USA", value: 1),
+      OpenStruct.new(name: "Canada", value: 2),
+      OpenStruct.new(name: "Brazil", value: 3),
+      OpenStruct.new(name: "Philippines", value: 4),
+      OpenStruct.new(name: "A galaxy far far away, like really far away...", value: 5)
     ]
   %>
   <%= pb_rails("form", props: { form_system_options: { scope: :example, method: :get } }) do |form| %>

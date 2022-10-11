@@ -7,13 +7,14 @@ const FilterNoSort = (props) => {
     { value: 'Canada' },
     { value: 'Brazil' },
     { value: 'Philippines' },
-    { value: 'A Galaxy Far Far Away Like Really Far Away' },
+    { value: 'A galaxy far far away, like really far away...' },
   ]
   return (
     <Filter
         filters={{
           'Full Name': 'John Wick',
         }}
+        minWidth="375px"
         results={546}
         sortValue={[{ name: 'popularity', dir: 'desc' }]}
         {...props}

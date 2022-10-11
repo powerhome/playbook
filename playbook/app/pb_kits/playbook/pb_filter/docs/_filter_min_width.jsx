@@ -7,7 +7,7 @@ const FilterMinWidth = (props) => {
     { value: 'Canada' },
     { value: 'Brazil' },
     { value: 'Philippines' },
-    { value: 'A Galaxy Far Far Away Like Really Far Away' },
+    { value: 'A galaxy far far away, like really far away...' },
   ]
   return (
     <Filter
@@ -17,7 +17,7 @@ const FilterMinWidth = (props) => {
           'Full Name': 'John Wick',
           'City': 'San Francisco',
         }}
-        minWidth="600px"
+        minWidth="375px"
         results={1}
         sortOptions={{
           popularity: 'Popularity',
