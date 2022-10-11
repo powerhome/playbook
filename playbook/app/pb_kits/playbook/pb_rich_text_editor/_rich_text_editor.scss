@@ -95,6 +95,12 @@
     a {
       cursor: pointer;
     }
+    ol,
+    ul {
+      li {
+        margin-left: $space_sm;
+      }
+    }
   }
   trix-toolbar {
     .trix-button--icon {
