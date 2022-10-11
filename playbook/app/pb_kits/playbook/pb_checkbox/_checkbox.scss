@@ -51,7 +51,6 @@ $transition: $transition_cubic;
     opacity: 0;
     position: relative;
     width: 0;
-    left: $offscreen;
     &:focus ~ .pb_checkbox_checkmark {
       border-color: $primary_action;
     }
