@@ -1,5 +1,4 @@
 import React from 'react'
-import { noop } from 'lodash'
 import classnames from 'classnames'
 import Image from '../../pb_image/_image'
 
@@ -17,7 +16,7 @@ export default function Thumbnail({
   alt,
   width,
   url,
-  onClick = noop,
+  onClick = ()=>{},
   buttonRef,
 }: ThumbnailType): React.ReactElement {
   const activeClasses = classnames('Thumbnail', { active })

@@ -1,0 +1,1 @@
+`title` and `description` props also accept custom components if needed. The optional `navRight` prop only accepts a string that translates into a clickable button. `onClickRight` prop can be used to pass in click function for `navRight`.

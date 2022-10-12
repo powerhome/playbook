@@ -23,6 +23,11 @@ const LightboxCompoundComponent = (props) => {
     setSelectedPhoto(photo)
   }
 
+  const exampleStyles = {
+    width: "100%",
+    overflow: "auto"
+  }
+
   return (
     <>
       <div>
@@ -36,12 +41,14 @@ const LightboxCompoundComponent = (props) => {
               {...props}
           />
         ) : (
-          <div className="PhotoViewer">
+          <div className="PhotoViewer"
+              style={exampleStyles}
+          >
             <Flex>
               {photos.map((photo, index) => {
                 return (
                   <div
-                      key={photo[index]}
+                      key={index}
                       onClick={() => onPhotoClick(index)}
                   >
                     <Image

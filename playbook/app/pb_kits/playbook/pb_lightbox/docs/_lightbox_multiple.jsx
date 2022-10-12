@@ -52,8 +52,8 @@ const LightboxMultiple = (props) => {
       {light ? (
         <Lightbox
             icon="times"
-            iconSize="2x"
             initialPhoto={selectedPhoto}
+            onChange={(index) => console.log(`current photo index: ${index}`)}
             onClose={handleCloseLightbox}
             photos={photos}
             {...props}
@@ -67,7 +67,7 @@ const LightboxMultiple = (props) => {
             {photos.map((photo, index) => {
               return (
                 <div
-                    key={photos[index]}
+                    key={index}
                     onClick={() => onPhotoClick(index)}
                 >
                   <Image
