@@ -43,7 +43,10 @@ const DialogSizes = () => {
 
   return (
     <div>
-      <Flex>
+      <Flex 
+          rowGap="xs" 
+          wrap
+      >
         <Button
             id="sm"
             marginRight="xl"

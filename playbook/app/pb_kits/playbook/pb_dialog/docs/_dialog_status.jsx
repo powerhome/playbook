@@ -81,7 +81,10 @@ const DialogStatus = () => {
 
   return (
     <div>
-      <Flex>
+      <Flex 
+          rowGap="xs" 
+          wrap
+        >
         <Button
             marginRight="md"
             onClick={toggleDefaultAlert}
