@@ -44,6 +44,7 @@ const LightboxDefault = (props) => {
                       onClick={() => onPhotoClick(index)}
                   >
                     <Image
+                        cursor="pointer"
                         marginRight="xl"
                         rounded
                         size="lg"
