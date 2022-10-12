@@ -9,7 +9,6 @@
   .markdown {
     code {
       // override
-      background: none;
       @at-root pre {
         background: $bg_dark;
         padding: $space_sm;
