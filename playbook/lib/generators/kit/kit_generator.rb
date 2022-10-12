@@ -41,10 +41,7 @@ class KitGenerator < Rails::Generators::NamedBase
                   :red
       nil
     else
-      # Add kit to Playbook menu ==========================
-      open("app/pb_kits/playbook/data/menu.yml", "a") do |f|
-        f.puts "  - #{@kit_name_underscore}"
-      end
+
       say_status  "complete",
                   "#{@kit_name_capitalize} kit added to Playbook menu.",
                   :green
@@ -101,6 +98,11 @@ class KitGenerator < Rails::Generators::NamedBase
       template "kit_example_yml.erb", "#{full_kit_directory}/docs/example.yml"
 
       `rubocop --safe-auto-correct #{full_kit_directory}`
+
+      # Add kit to Playbook menu ==========================
+      open("app/pb_kits/playbook/data/menu.yml", "a") do |f|
+        f.puts "  - #{@kit_name_underscore}"
+      end
     end
   end
 
