@@ -42,10 +42,6 @@ class KitGenerator < Rails::Generators::NamedBase
       nil
     else
 
-      say_status  "complete",
-                  "#{@kit_name_capitalize} kit added to Playbook menu.",
-                  :green
-
       # Generate SCSS files ==============================
       template "kit_scss.erb", "#{full_kit_directory}/_#{@kit_name_underscore}.scss"
       open("app/pb_kits/playbook/_playbook.scss", "a") do |f|
@@ -103,6 +99,10 @@ class KitGenerator < Rails::Generators::NamedBase
       open("app/pb_kits/playbook/data/menu.yml", "a") do |f|
         f.puts "  - #{@kit_name_underscore}"
       end
+
+      say_status  "complete",
+                  "#{@kit_name_capitalize} kit added to Playbook menu.",
+                  :green
     end
   end
 
