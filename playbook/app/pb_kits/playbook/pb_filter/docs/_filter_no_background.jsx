@@ -17,6 +17,7 @@ const FilterNoBackground = (props) => {
           'Full Name': 'John Wick',
           'City': 'Las Vegas',
         }}
+          marginBottom="xl"
           minWidth="375px"
           results={3}
           sortOptions={{
