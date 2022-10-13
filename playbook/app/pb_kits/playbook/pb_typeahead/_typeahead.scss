@@ -157,8 +157,34 @@
   .placeholder+.input-wrapper .typeahead-plus-icon {
     display: none;
   }
-  .typeahead-kit-select__control--is-focused .typeahead-plus-icon {
-    display: none;
+  .typeahead-kit-select {
+    &__single-value{
+      color: $text_lt_default;
+    }
+    &__control {
+      &--is-focused {
+        @include pb_textarea_focus;
+        @include transition_default;
+        border-color: $primary;
+        background-color: rgba($focus_input_light,$opacity_5);
+        box-shadow: none;
+        .typeahead-plus-icon {
+          display: none;
+        }
+      }
+    }
+  }
+  
+ 
+  .typeahead-kit-select__menu {
+    .typeahead-kit-select__option {
+      &.typeahead-kit-select__option--is-focused {
+        background-color: $hover_light;
+      }
+      &.typeahead-kit-select__option--is-selected {
+        background-color: $primary;
+      }
+    }
   }
   .typeahead-plus-icon {
     color: $text_lt_lighter;
@@ -178,3 +204,4 @@
     }
   }
 }
+
