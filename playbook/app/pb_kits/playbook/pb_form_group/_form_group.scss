@@ -27,8 +27,13 @@
       border-bottom-right-radius: 0;
       border-top-right-radius: 0;
       border-right-width: 0;
-    }
+    
+    &:focus {
+       outline: $primary solid 1px;
+       outline-offset: -1px;
   }
+}
+}
 
   & > [class^=pb_text_input_kit]:not(:first-child) {
     .text_input_wrapper input, [class^=pb_text_input_kit] .text_input_wrapper .text_input {
