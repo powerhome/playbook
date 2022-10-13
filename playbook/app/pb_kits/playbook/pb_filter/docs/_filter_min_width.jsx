@@ -28,28 +28,34 @@ const FilterMinWidth = (props) => {
         }}
         sortValue={[{ name: 'popularity', dir: 'desc' }]}
     >
-      <TextInput
-          label="Full Name"
-          placeholder="Enter name"
-      />
+    {({ closePopover }) => (
+      <form>
 
-      <Select
-          blankSelection="Select One..."
-          label="Territory"
-          name="location"
-          options={options}
-      />
-      <Flex
-          spacing="between"
-      >
-        <Button
-            text="Apply"
+        <TextInput
+            label="Full Name"
+            placeholder="Enter name"
         />
-        <Button
-            text="Clear"
-            variant="secondary"
+
+        <Select
+            blankSelection="Select One..."
+            label="Territory"
+            name="location"
+            options={options}
         />
-      </Flex>
+        <Flex
+            spacing="between"
+        >
+          <Button
+              onClick={closePopover}
+              text="Apply"
+          />
+          <Button
+              text="Clear"
+              variant="secondary"
+          />
+        </Flex>
+      </form>
+    )}
     </Filter>
   )
 }
