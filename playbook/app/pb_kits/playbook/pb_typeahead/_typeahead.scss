@@ -157,23 +157,36 @@
   .placeholder+.input-wrapper .typeahead-plus-icon {
     display: none;
   }
-  .typeahead-kit-select {
-    &__single-value{
-      color: $text_lt_default;
+  // .text_input {
+  //   .typeahead-kit-select__single-value {
+      
+  //   }
+  // }
+  .text_input {
+    .typeahead-kit-select {
+      &__single-value{
+        color: $text_lt_default;
+      }
     }
-    &__control {
-      &--is-focused {
-        @include pb_textarea_focus;
-        @include transition_default;
-        border-color: $primary;
-        background-color: rgba($focus_input_light,$opacity_5);
-        box-shadow: none;
-        .typeahead-plus-icon {
-          display: none;
+    &.typeahead-kit-select {
+      &__single-value{
+        color: $text_lt_default;
+      }
+      &__control {
+        &--is-focused {
+          @include pb_textarea_focus;
+          @include transition_default;
+          border-color: $primary;
+          background-color: rgba($focus_input_light,$opacity_5);
+          box-shadow: none;
+          .typeahead-plus-icon {
+            display: none;
+          }
         }
       }
     }
   }
+
   
  
   .typeahead-kit-select__menu {
