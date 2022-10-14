@@ -1,6 +1,6 @@
 /* @flow */
 
-import React, { type Node } from 'react'
+import React, { useEffect, type Node } from 'react'
 import classnames from 'classnames'
 import { buildAriaProps, buildDataProps } from '../utilities/props'
 import { globalProps } from '../utilities/globalProps'
@@ -45,8 +45,10 @@ const Table = (props: TableProps) => {
   const dataProps = buildDataProps(data)
   const tableCollapseCss = responsive !== 'none' ? `table-collapse-${collapse}` : ''
 
-  const instance = new PbTable()
-  instance.connect()
+  useEffect(() => {
+    const instance = new PbTable()
+    instance.connect()
+  }, [])
 
   return (
     <table
