@@ -24,10 +24,11 @@ const Icon = ({ collapsed }: IconProps) => {
 
   return (
     <div
+        className="icon_wrapper"
         key={direction}
         style={{ verticalAlign: 'middle' }}
     >
-      <i className={`far fa-chevron-${direction} fa-fw`} />
+      <i className={`far fa-chevron-${direction} fa-fw icon_wrapper`} />
     </div>
   )
 }

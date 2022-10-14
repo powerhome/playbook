@@ -53,7 +53,7 @@ const Collapsible = ({
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
   const classes = classnames(
-    buildCss('pb_collapsible'),
+    buildCss('pb_collapsible_kit'),
     className,
     globalProps(props, { padding })
   )
