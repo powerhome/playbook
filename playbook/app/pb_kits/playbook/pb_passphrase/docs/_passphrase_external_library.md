@@ -1,0 +1,1 @@
+You can combine the `Passphrase` kit with external libraries. The example below shows an implementation with the `zxcvbn` library for password strength checking. 

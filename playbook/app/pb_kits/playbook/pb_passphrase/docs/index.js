@@ -1,7 +1,4 @@
 export { default as PassphraseDefault } from './_passphrase_default.jsx'
-export { default as PassphraseMeterSettings } from './_passphrase_meter_settings'
 export { default as PassphraseInputProps } from './_passphrase_input_props'
 export { default as PassphraseTips } from './_passphrase_tips'
-export { default as PassphraseStrengthChange } from './_passphrase_strength_change'
-export { default as PassphraseCommon } from './_passphrase_common'
-export { default as PassphraseBreached } from './_passphrase_breached'
+export { default as PassphraseExternalLibrary } from './_passphrase_external_library'

@@ -1,14 +1,11 @@
 /* @flow */
 /* eslint-disable react-hooks/rules-of-hooks */
 
-import React, { useCallback, useEffect, useMemo, useState } from 'react'
+import React, { useCallback, useMemo, useState } from 'react'
 import classnames from 'classnames'
 
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
 import { globalProps } from '../utilities/globalProps'
-
-import useZxcvbn from './useZxcvbn'
-import useHaveIBeenPwned from './useHaveIBeenPwned'
 
 import Body from '../pb_body/_body'
 import Caption from '../pb_caption/_caption'
@@ -16,7 +13,6 @@ import CircleIconButton from '../pb_circle_icon_button/_circle_icon_button'
 import Flex from '../pb_flex/_flex'
 import Icon from '../pb_icon/_icon'
 import PbReactPopover from '../pb_popover/_popover'
-import ProgressSimple from '../pb_progress_simple/_progress_simple'
 import TextInput from '../pb_text_input/_text_input'
 
 type PassphraseProps = {
@@ -44,21 +40,15 @@ type PassphraseProps = {
 const Passphrase = (props: PassphraseProps) => {
   const {
     aria = {},
-    averageThreshold = 2,
-    checkPwned = false,
     className,
-    common = false,
     confirmation = false,
     dark = false,
     data = {},
     id,
     inputProps = {},
     label = confirmation ? 'Confirm Passphrase' : 'Passphrase',
-    minLength = 12,
     onChange = () => {},
     showTipsBelow = 'always',
-    onStrengthChange,
-    strongThreshold = 3,
     tips = [],
     uncontrolled = false,
     value = '',
@@ -91,23 +81,13 @@ const Passphrase = (props: PassphraseProps) => {
 
   const classes = classnames(buildCss('pb_passphrase'), globalProps(props), className)
 
-  const isPwned = checkPwned ? useHaveIBeenPwned(displayValue, minLength) : false
-
-  const { percent: progressPercent, variant: progressVariant, text: strengthLabel, strength } = useZxcvbn({ passphrase: displayValue, common, isPwned, confirmation, averageThreshold, minLength, strongThreshold })
-
-  useEffect(() => {
-    if (typeof onStrengthChange === 'function') {
-      onStrengthChange(strength)
-    }
-  }, [strength])
-
   const tipClass = classnames(
     'passphrase-popover',
     (showTipsBelow === 'always' ? null : `show-below-${showTipsBelow}`),
   )
   const dataProps = useMemo(
-    () => (buildDataProps(Object.assign({}, data, { strength }))),
-    [data, strength]
+    () => (buildDataProps(Object.assign({}, data))),
+    [data]
   )
 
   const popoverReference = (
@@ -203,19 +183,6 @@ const Passphrase = (props: PassphraseProps) => {
           </span>
         </div>
       </label>
-      <If condition={!confirmation}>
-        <ProgressSimple
-            className={displayValue.length === 0 ? 'progress-empty-input' : null}
-            dark={dark}
-            percent={progressPercent}
-            variant={progressVariant}
-        />
-        <Caption
-            dark={dark}
-            size="xs"
-            text={strengthLabel}
-        />
-      </If>
     </div>
   )
 }

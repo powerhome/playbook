@@ -1,3 +1,0 @@
-Use `checkPwned | checked_pwned` prop to enable checking against <a href='https://haveibeenpwned.com/Passwords'>HaveIBeenPwned's</a> API. As the passphrase is typed, it is checked against more than half a billion breached passwords, to help ensure its not compromised.
-Should it fail, the feedback will express the passphrase is too common, prompting the user to change.
-This uses their k-Anonymity model, so only the first 5 characters of a hashed copy of the passphrase are sent.

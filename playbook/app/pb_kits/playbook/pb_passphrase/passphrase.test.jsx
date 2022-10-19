@@ -64,40 +64,6 @@ test('passes input props to input element', () => {
   expect(input).toBeDisabled()
 })
 
-test('progress bar is invisible when value is empty', () => {
-  render(
-    <Passphrase
-        data={{ testid: testId }}
-    />
-  )
-
-  const kit = screen.getByTestId(testId)
-  expect(kit.querySelector('[class^=pb_progress_simple_wrapper]')).toHaveClass('progress-empty-input')
-})
-
-test('progress bar is visible when value is not empty', () => {
-  render(
-    <Passphrase
-        data={{ testid: testId }}
-        value="test_password_input"
-    />
-  )
-
-  const kit = screen.getByTestId(testId)
-  expect(kit.querySelector('[class^=pb_progress_simple_wrapper]')).not.toHaveClass('progress-empty-input')
-})
-
-test('no progress bar is show when confirmation is true', () => {
-  render(
-    <Passphrase
-        confirmation
-        data={{ testid: testId }}
-    />
-  )
-
-  const kit = screen.getByTestId(testId)
-  expect(kit.querySelector('[class^=pb_progress_simple_wrapper]')).toBeNull()
-})
 
 test('popover target shows when tips are given', () => {
   render(
@@ -120,16 +86,4 @@ test('popover target does not show when tips are not given', () => {
 
   const kit = screen.getByTestId(testId)
   expect(kit.querySelector('[class^=pb_popover_reference_wrapper]')).toBeNull()
-})
-
-test('data-strength attribute exposes strength of password', () => {
-  render(
-    <Passphrase
-        data={{ testid: testId }}
-        value="correct horse battery staple"
-    />
-  )
-
-  const kit = screen.getByTestId(testId)
-  expect(parseInt(kit.getAttribute('data-strength'))).toBeGreaterThan(0)
 })
