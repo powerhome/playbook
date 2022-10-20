@@ -5,6 +5,7 @@ import React from 'react'
 
 import { Title } from 'playbook-ui'
 import Example from './Example'
+import StatusExample from './StatusExample'
 
 import {
   ACTIONS,
@@ -17,7 +18,8 @@ import {
   PRODUCTS,
   SHADOW,
   STATUS,
-  TEXT_COLORS
+  STATUS_SUBTLE,
+  TEXT_COLORS,
 } from './variables'
 
 const Colors = (): React.ReactElement => (
@@ -41,10 +43,15 @@ const Colors = (): React.ReactElement => (
         colors={CARDS}
         title="Cards"
     />
-    <Example
-        colors={STATUS}
+    <StatusExample
+        statusColors={STATUS}
+        subtleColors={STATUS_SUBTLE}
         title="Status"
     />
+    {/* <Example
+        colors={STATUS_SUBTLE}
+        title="Status Subtle"
+    /> */}
     <Example
         colors={DATA}
         title="Data"
