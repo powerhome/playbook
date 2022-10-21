@@ -48,10 +48,6 @@ const Colors = (): React.ReactElement => (
         subtleColors={STATUS_SUBTLE}
         title="Status"
     />
-    {/* <Example
-        colors={STATUS_SUBTLE}
-        title="Status Subtle"
-    /> */}
     <Example
         colors={DATA}
         title="Data"

@@ -4,7 +4,7 @@
 import React from 'react'
 import cn from 'classnames'
 
-import { Background, Body, Card, SectionSeparator, Title } from 'playbook-ui'
+import { Body, Card, SectionSeparator, Title } from 'playbook-ui'
 import { StatusExample as StatusExampleType } from '../types'
 
 const StatusExample = ({
@@ -15,9 +15,10 @@ const StatusExample = ({
   <React.Fragment>
     <Title size="4">{ title }</Title>
     <Card
-        padding="md"
+        className="pb--utilities-card"
+        padding="none"
     >
-      <ul className="pb--utlities-color">
+      <ul className="pb--utlities-color pb--utilities-status-1">
         {statusColors.map(({ dark, name, variable }) => (
           <li
               className={cn({ dark })}
@@ -39,10 +40,12 @@ const StatusExample = ({
           </li>
         ))}
       </ul>
-      <SectionSeparator
-          text="Subtle Variations"
-      />
-      <ul className="pb--utlities-color">
+      <div className="pb--utilities-seperator">
+        <SectionSeparator
+            text="Subtle Variations"
+        />
+      </div>
+      <ul className="pb--utlities-color pb--utilities-status-2">
         {subtleColors.map(({ dark, name, variable }) => (
           <li
               className={cn({ dark })}
@@ -53,7 +56,13 @@ const StatusExample = ({
                 className={cn({ dark, name: 'name' })}
                 tag="p"
             >
-              {name}
+              {name.split('Subtle')}
+            </Body>
+            <Body
+                className={cn({ dark, name: 'name' })}
+                tag="p"
+            >
+              {'Subtle'}
             </Body>
             <Body
                 className={cn({ dark, var: 'var' })}
