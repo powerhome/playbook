@@ -110,6 +110,7 @@ const HomeAddressStreet = (props: HomeAddressStreetProps) => {
         <Hashtag
             classname="home-hashtag"
             dark={dark}
+            marginRight="xxs"
             newWindow={newWindow}
             text={homeId}
             type="home"

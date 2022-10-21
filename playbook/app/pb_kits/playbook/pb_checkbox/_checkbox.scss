@@ -87,9 +87,19 @@ $transition: $transition_cubic;
         border-color: $error_dark;
       }
     }
+    &.pb_checkbox_kit_error {
+      > .pb_checkbox_checkmark {
+        border-color: $error_dark;
+      }
+    }
   }
 
   &.error {
+    > .pb_checkbox_checkmark {
+      border-color: $error;
+    }
+  }
+  &.pb_checkbox_kit_error {
     > .pb_checkbox_checkmark {
       border-color: $error;
     }
