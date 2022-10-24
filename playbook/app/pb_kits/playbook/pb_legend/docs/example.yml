@@ -4,8 +4,10 @@ examples:
   - legend_default: Default
   - legend_prefix: With Prefix Text
   - legend_colors: Colors
+  - legend_custom_colors: Custom Colors
 
   react:
   - legend_default: Default
   - legend_prefix: With Prefix Text
   - legend_colors: Colors
+  - legend_custom_colors: Custom Colors

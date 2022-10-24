@@ -34,8 +34,16 @@ const Legend = (props: LegendProps) => {
 
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
+
+  const customColor = color.charAt(0) === '#' && color
+
+  const customColorStyle = {
+  background: customColor
+}
+
+ 
   const bodyCss = classnames(
-    buildCss('pb_legend_kit', color),
+    buildCss('pb_legend_kit', customColor ? "" : color),
     globalProps(props),
     className
   )
@@ -48,7 +56,9 @@ const Legend = (props: LegendProps) => {
         id={id}
     >
       <Body color={dark ? 'lighter' : 'light'}>
-        <span className="pb_legend_indicator_circle" />
+        <span className={`${customColor ? "pb_legend_indicator_circle_custom" : "pb_legend_indicator_circle"}`}
+            style={customColorStyle} 
+        />
         <If condition={prefixText}>
           <Title
               dark={dark}
