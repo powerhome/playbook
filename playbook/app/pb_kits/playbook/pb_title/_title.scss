@@ -26,4 +26,8 @@
   &.dark {
     @include pb_title_dark;
   }
+
+  &[class*=_bold] {
+    @include pb_title_bold;
+  }
 }

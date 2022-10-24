@@ -1,8 +1,10 @@
 examples:
   rails:
   - title_light: Light UI
+  - title_bold: Bold UI
   - title_colors: Colors
 
   react:
   - title_light: Light UI
+  - title_bold: Bold UI
   - title_colors: Colors

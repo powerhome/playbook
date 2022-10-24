@@ -31,8 +31,14 @@
 
 @mixin pb_title_4 {
   @include pb_title($heading_4, $bolder);
+  letter-spacing: -0.03em !important;
 }
 
 @mixin pb_title_dark {
   color: $text_dk_default;
+}
+
+@mixin pb_title_bold {
+  font-weight: $bolder;
+  letter-spacing: 0;
 }
