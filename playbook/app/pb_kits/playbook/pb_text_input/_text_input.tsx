@@ -65,12 +65,12 @@ const TextInput = (props: TextInputProps, ref: React.LegacyRef<HTMLInputElement>
   const borderCss = `border_${borderToChange}_${borderToggle}`
 
   const shouldShowAddOn = icon !== null
-  const addOnCss = shouldShowAddOn ? 'text_input_wrapper_add_on' : null
-  const addOnDarkModeCardCss = (shouldShowAddOn && dark) ? 'add-on-card-dark' : null
+  const addOnCss = shouldShowAddOn ? 'text_input_wrapper_add_on' : ""
+  const addOnDarkModeCardCss = (shouldShowAddOn && dark) ? 'add-on-card-dark' : ""
   const css = classnames([
     'pb_text_input_kit',
-    inline ? 'inline' : null,
-    error ? 'error' : null,
+    inline ? 'inline' : "",
+    error ? 'error' : "",
     globalProps(props),
     className,
   ])

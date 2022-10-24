@@ -9,8 +9,10 @@
         <%= content.presence %>
       <% end %>
       <%= pb_rails("flex/flex_item") do %>
-        <i class="far fa-chevron-down icon_wrapper"></i>
-        <i class="far fa-chevron-up icon_wrapper" style="display: none"></i>
+        <div style="color: <%= object.icon_color %>">
+          <i class="far fa-chevron-down <%= object.icon_size %>"></i>
+          <i class="far fa-chevron-up <%= object.icon_size %>"></i>
+        </div>
       <% end %>
     <% end %>
 <% end %>
