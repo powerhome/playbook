@@ -72,7 +72,7 @@
 	background-color: $white;
 	box-shadow: $shadow_deepest;
 	border: 0;
-	border-radius: 0;
+	border-radius: $border_radius_md;
 	max-height: calc(100vh - #{$gutter * 2});
 	max-width: calc(100vw - #{$gutter * 2});
 	overflow: auto;
@@ -138,7 +138,6 @@
 			opacity: $opacity_hidden;
 		}
 		&[class*="full_height"] {
-
 			&[class*="_left"]{
 				justify-content: flex-start;
 			}
@@ -152,6 +151,7 @@
 			}
 
 			.pb_dialog {
+				border-radius: 0;
 				height: 100%;
 				max-height: 100%;
 				max-width: none;
