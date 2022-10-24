@@ -23,6 +23,12 @@
   @include indicator-colors($data_colors);
   @include indicator-colors($status_colors);
   @include indicator-colors($product_colors);
-  @include indicator-colors($category_colors)
+  @include indicator-colors($category_colors);
 
+  .pb_legend_indicator_circle_custom {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 5px;
+  }
 }
