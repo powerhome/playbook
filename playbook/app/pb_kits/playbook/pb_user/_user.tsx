@@ -1,3 +1,4 @@
+/* @flow */
 
 import React from 'react'
 import classnames from 'classnames'
@@ -21,7 +22,7 @@ type UserProps = {
   name?: string,
   orientation?: "horiztonal" | "vertical",
   size?: "sm" | "md" | "lg",
-  subtitle?: string,
+  subtitle?: string | Array<Node> | Node,
   territory?: string,
   title?: string,
 } & GlobalProps
@@ -83,12 +84,19 @@ const User = (props: UserProps) => {
         >
           {territory === '' ? title : `${territory} • ${title}`}
         </Body>
-        <Body
-            color="light"
-            dark={dark}
-            text={subtitle}
-            variant={null}
-        />
+        { typeof(subtitle) === 'string' &&
+          <Body
+              color="light"
+              dark={dark}
+              text={subtitle}
+              variant={null}
+          />
+        }
+        { typeof(subtitle) !== 'string' &&
+          <>
+            {subtitle}
+          </>
+        }
       </div>
     </div>
   )

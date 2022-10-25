@@ -10,18 +10,21 @@
       image_url: object.avatar_url
     }) %>
   <% end %>
-  <%= content_tag(:div,
-      class: "content_wrapper") do %>
+  <%= content_tag(:div, class: "content_wrapper") do %>
     <%= pb_rails("title", props: { text: object.name, size: object.title_size, dark: object.dark }) %>
     <%= pb_rails("body", props: {
       text: "#{object.details}",
       dark: object.dark,
       color: "light"
     }) %>
-    <%= pb_rails("body", props: {
-      text: "#{object.subtitle}",
-      dark: object.dark,
-      color: "light"
-    }) %>
+    <% if content %>
+      <%= content.presence %>
+    <% else %>
+      <%= pb_rails("body", props: {
+        text: "#{object.subtitle}",
+        dark: object.dark,
+        color: "light"
+      }) %>
+    <% end %>
   <% end %>
 <% end %>
