@@ -85,3 +85,30 @@ ul {
     }
   }
 }
+
+ul {
+  &.pb--utilities-status-1 {
+    margin-bottom: 0px;
+    border: none;
+  }
+}
+ul {
+  &.pb--utilities-status-2 {
+    border: none;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    padding-top: 0px;
+    p.name {
+     line-height: 1;
+    }
+  }
+}
+
+.pb--utilities-seperator {
+  padding-left: 25px;
+  padding-right: 25px;
+}
+
+.pb--utilities-card{
+  margin-bottom: 20px;
+}

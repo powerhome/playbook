@@ -1,3 +1,5 @@
+@import "./tokens/colors";
+
 [class^=pb_collapsible_kit] {
   .toggle-content {
     display: none;
@@ -11,5 +13,8 @@
   .toggle-content.is-visible {
     display: block;
     height: auto;
+  }
+  .icon_wrapper:hover {
+      color: $primary
   }
 }

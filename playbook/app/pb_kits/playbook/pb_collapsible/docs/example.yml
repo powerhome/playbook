@@ -1,9 +1,11 @@
 examples:
 
   rails:
-  - collapsible_default: Light
+  - collapsible_default: Default
+  - collapsible_size: Size
+  - collapsible_color: Color
 
   react:
-  - collapsible_default: Light
-  
-  
+  - collapsible_default: Default
+  - collapsible_size: Size
+  - collapsible_color: Color

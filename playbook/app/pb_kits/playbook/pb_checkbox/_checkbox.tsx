@@ -45,7 +45,7 @@ const Checkbox = (props: CheckboxProps): JSX.Element => {
   const ariaProps = buildAriaProps(aria)
   const classes = classnames(
     buildCss('pb_checkbox_kit', checked ? 'checked' : null, error ? 'error' : null, indeterminate? 'indeterminate' : null),
-    globalProps(props),        
+    globalProps(props),
     className
   )
 
@@ -59,7 +59,7 @@ const Checkbox = (props: CheckboxProps): JSX.Element => {
   const checkboxChildren = () => {
     if (children)
       return (children)
-    else 
+    else
     return (
     <input
         defaultChecked={checked}

@@ -7,45 +7,51 @@ const FilterNoSort = (props) => {
     { value: 'Canada' },
     { value: 'Brazil' },
     { value: 'Philippines' },
-    { value: 'A galaxy far far away, like really far away...' },
+    { value: 'A galaxy far far away...' },
   ]
   return (
     <Filter
         filters={{
           'Full Name': 'John Wick',
         }}
-        minWidth="375px"
+        minWidth="360px"
         results={546}
         sortValue={[{ name: 'popularity', dir: 'desc' }]}
         {...props}
     >
-      <TextInput
-          label="Full Name"
-          placeholder="Enter name"
-          {...props}
-      />
+    {({ closePopover }) => (
+      <form>
+        <TextInput
+            label="Full Name"
+            placeholder="Enter name"
+            {...props}
+        />
 
-      <Select
-          blankSelection="Select One..."
-          label="Territory"
-          name="location"
-          options={options}
-          {...props}
-      />
-      <Flex
-          spacing="between"
-          {...props}
-      >
-        <Button
-            text="Apply"
+        <Select
+            blankSelection="Select One..."
+            label="Territory"
+            name="location"
+            options={options}
             {...props}
         />
-        <Button
-            text="Clear"
-            variant="secondary"
+        <Flex
+            spacing="between"
             {...props}
-        />
-      </Flex>
+        >
+          <Button
+              onClick={closePopover}
+              text="Apply"
+              {...props}
+          />
+          <Button
+              text="Clear"
+              variant="secondary"
+              {...props}
+          />
+        </Flex>
+      </form>
+    )}
+    
     </Filter>
   )
 }

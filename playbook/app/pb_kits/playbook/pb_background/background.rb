@@ -63,6 +63,11 @@ module Playbook
                                 data_8
                                 border_light
                                 border_dark
+                                success_subtle
+                                warning_subtle
+                                error_subtle
+                                info_subtle
+                                neutral_subtle
                               ],
                               default: "light"
 
