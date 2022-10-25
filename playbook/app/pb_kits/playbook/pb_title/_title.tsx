@@ -21,7 +21,7 @@ const Title = (props: TitleProps): React.ReactElement => {
   if (props.variant) deprecatedProps('Title', ['variant']) //variant prop is deprecated, use color instead
   const {
     aria = {},
-    bold = false,
+    bold = true,
     children,
     className,
     color,

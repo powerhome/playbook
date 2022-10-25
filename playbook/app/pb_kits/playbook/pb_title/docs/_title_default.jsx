@@ -2,7 +2,7 @@ import React from 'react'
 
 import Title from '../_title'
 
-const TitleLight = (props) => {
+const TitleDefault = (props) => {
   return (
     <div>
       <Title
@@ -38,4 +38,4 @@ const TitleLight = (props) => {
   )
 }
 
-export default TitleLight
+export default TitleDefault
