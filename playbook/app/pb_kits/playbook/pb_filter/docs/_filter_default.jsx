@@ -22,6 +22,7 @@ const FilterDefault = (props) => {
             'Full Name': 'John Wick',
             'City': 'San Francisco',
           }}
+          marginBottom="xl"
           minWidth="375px"
           onSortChange={SortingChangeCallback}
           results={1}
@@ -72,7 +73,6 @@ const FilterDefault = (props) => {
 
       </Filter>
 
-      <br />
 
       <Filter
           double
