@@ -19,7 +19,7 @@ const BackgroundStatus = (props) => (
         padding="xl"
         {...props}
     />
-     <br />
+    <br />
     <Background
         backgroundColor="warning"
         padding="xl"
