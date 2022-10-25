@@ -1,13 +1,13 @@
 import React from 'react'
 import { Button, Filter, Flex, Select, TextInput } from '../../'
 
-const FilterMinWidth = (props) => {
+const FilterMaxWidth = (props) => {
   const options = [
     { value: 'USA' },
     { value: 'Canada' },
     { value: 'Brazil' },
     { value: 'Philippines' },
-    { value: 'A galaxy far far away, like really far away...' },
+    { value: 'A galaxy far far away, like really far far far far far far far far far far far far far far far far far far far far far far far far far far far far far far far far far far far far far far far far far far far far far far far far away...' },
   ]
   return (
     <Filter
@@ -17,7 +17,7 @@ const FilterMinWidth = (props) => {
           'Full Name': 'John Wick',
           'City': 'San Francisco',
         }}
-        minWidth="375px"
+        minWidth="360px"
         results={1}
         sortOptions={{
           popularity: 'Popularity',
@@ -36,6 +36,7 @@ const FilterMinWidth = (props) => {
       <Select
           blankSelection="Select One..."
           label="Territory"
+          maxWidth="sm"
           name="location"
           options={options}
       />
@@ -54,4 +55,4 @@ const FilterMinWidth = (props) => {
   )
 }
 
-export default FilterMinWidth
+export default FilterMaxWidth
