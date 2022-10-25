@@ -32,33 +32,39 @@ const FilterPlacement = (props) => {
           sortValue={[{ name: 'popularity', dir: 'desc' }]}
           {...props}
       >
-        <TextInput
-            label="Example Text Field"
-            placeholder="Enter Text"
-            {...props}
-        />
+      {({ closePopover }) => (
+        <form>
 
-        <Select
-            blankSelection="Select One..."
-            label="Example Collection Select"
-            name="Collection Select"
-            options={options}
-            {...props}
-        />
-        <Flex
-            spacing="between"
-            {...props}
-        >
-          <Button
-              text="Apply"
+          <TextInput
+              label="Example Text Field"
+              placeholder="Enter Text"
               {...props}
           />
-          <Button
-              text="Clear"
-              variant="secondary"
+
+          <Select
+              blankSelection="Select One..."
+              label="Example Collection Select"
+              name="Collection Select"
+              options={options}
               {...props}
           />
-        </Flex>
+          <Flex
+              spacing="between"
+              {...props}
+          >
+            <Button
+                onClick={closePopover}
+                text="Apply"
+                {...props}
+            />
+            <Button
+                text="Clear"
+                variant="secondary"
+                {...props}
+            />
+          </Flex>
+        </form>
+      )}
       </Filter>
     </>
   )

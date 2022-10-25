@@ -15,33 +15,40 @@ const FilterOnly = (props) => {
         minWidth="360px"
         {...props}
     >
-      <TextInput
-          label="Full Name"
-          placeholder="Enter name"
-          {...props}
-      />
+    {({ closePopover }) => (
+      <form>
 
-      <Select
-          blankSelection="Select One..."
-          label="Territory"
-          name="location"
-          options={options}
-          {...props}
-      />
-      <Flex
-          spacing="between"
-          {...props}
-      >
-        <Button
-            text="Apply"
+        <TextInput
+            label="Full Name"
+            placeholder="Enter name"
             {...props}
         />
-        <Button
-            text="Clear"
-            variant="secondary"
+
+        <Select
+            blankSelection="Select One..."
+            label="Territory"
+            name="location"
+            options={options}
             {...props}
         />
-      </Flex>
+        <Flex
+            spacing="between"
+            {...props}
+        >
+          <Button
+              onClick={closePopover}
+              text="Apply"
+              {...props}
+          />
+          <Button
+              text="Clear"
+              variant="secondary"
+              {...props}
+          />
+        </Flex>
+      </form>
+    )}
+
     </Filter>
   )
 }

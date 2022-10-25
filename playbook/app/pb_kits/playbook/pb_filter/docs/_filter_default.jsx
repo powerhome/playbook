@@ -11,7 +11,7 @@ const FilterDefault = (props) => {
     { value: 'Canada' },
     { value: 'Brazil' },
     { value: 'Philippines' },
-    { value: 'A galaxy far far away...' },
+    { value: 'A galaxy far far away, like really far away...' },
   ]
   return (
 
@@ -22,7 +22,7 @@ const FilterDefault = (props) => {
             'Full Name': 'John Wick',
             'City': 'San Francisco',
           }}
-          minWidth="360px"
+          minWidth="375px"
           onSortChange={SortingChangeCallback}
           results={1}
           sortOptions={{
@@ -35,40 +35,48 @@ const FilterDefault = (props) => {
           sortValue={[{ name: 'popularity', dir: 'desc' }]}
           {...props}
       >
-        <TextInput
-            label="Full Name"
-            placeholder="Enter name"
-            {...props}
-        />
+      {({ closePopover }) => (
+        <form>
 
-        <Select
-            blankSelection="Select One..."
-            label="Territory"
-            name="location"
-            options={options}
-            {...props}
-        />
-        <Flex
-            spacing="between"
-            {...props}
-        >
-          <Button
-              text="Apply"
+          <TextInput
+              label="Full Name"
+              placeholder="Enter name"
               {...props}
           />
-          <Button
-              text="Clear"
-              variant="secondary"
+
+          <Select
+              blankSelection="Select One..."
+              label="Territory"
+              maxWidth="sm"
+              name="location"
+              options={options}
               {...props}
           />
-        </Flex>
+          <Flex
+              spacing="between"
+              {...props}
+          >
+            <Button
+                onClick={closePopover}
+                text="Apply"
+                {...props}
+            />
+            <Button
+                text="Clear"
+                variant="secondary"
+                {...props}
+            />
+          </Flex>
+        </form>
+      )}
+
       </Filter>
 
       <br />
 
       <Filter
           double
-          minWidth="360px"
+          minWidth="375px"
           onSortChange={SortingChangeCallback}
           results={1}
           sortOptions={{
@@ -81,33 +89,39 @@ const FilterDefault = (props) => {
           sortValue={[{ name: 'popularity', dir: 'desc' }]}
           {...props}
       >
-        <TextInput
-            label="Example Text Field"
-            placeholder="Enter Text"
-            {...props}
-        />
+      {({ closePopover }) => (
+        <form>
 
-        <Select
-            blankSelection="Select One..."
-            label="Example Collection Select"
-            name="Collection Select"
-            options={options}
-            {...props}
-        />
-        <Flex
-            spacing="between"
-            {...props}
-        >
-          <Button
-              text="Apply"
+          <TextInput
+              label="Example Text Field"
+              placeholder="Enter Text"
               {...props}
           />
-          <Button
-              text="Clear"
-              variant="secondary"
+
+          <Select
+              blankSelection="Select One..."
+              label="Example Collection Select"
+              name="Collection Select"
+              options={options}
               {...props}
           />
-        </Flex>
+          <Flex
+              spacing="between"
+              {...props}
+          >
+            <Button
+                onClick={closePopover}
+                text="Apply"
+                {...props}
+            />
+            <Button
+                text="Clear"
+                variant="secondary"
+                {...props}
+            />
+          </Flex>
+        </form>
+      )}
       </Filter>
     </>
   )

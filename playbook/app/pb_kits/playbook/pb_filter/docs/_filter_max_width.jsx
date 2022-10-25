@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, Filter, Flex, Select, TextInput } from '../../'
+import { Button, Filter, Flex, Select } from '../../'
 
 const FilterMaxWidth = (props) => {
   const options = [
@@ -28,10 +28,8 @@ const FilterMaxWidth = (props) => {
         }}
         sortValue={[{ name: 'popularity', dir: 'desc' }]}
     >
-      <TextInput
-          label="Full Name"
-          placeholder="Enter name"
-      />
+    {({ closePopover }) => (
+      <form>
 
       <Select
           blankSelection="Select One..."
@@ -40,17 +38,30 @@ const FilterMaxWidth = (props) => {
           name="location"
           options={options}
       />
-      <Flex
-          spacing="between"
-      >
         <Button
             text="Apply"
         />
-        <Button
-            text="Clear"
-            variant="secondary"
+
+        <Select
+            blankSelection="Select One..."
+            label="Territory"
+            name="location"
+            options={options}
         />
-      </Flex>
+        <Flex
+            spacing="between"
+        >
+          <Button
+              onClick={closePopover}
+              text="Apply"
+          />
+          <Button
+              text="Clear"
+              variant="secondary"
+          />
+        </Flex>
+      </form>
+    )}
     </Filter>
   )
 }
