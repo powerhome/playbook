@@ -50,6 +50,7 @@ const Icon = ({ collapsed, iconSize, iconColor }: IconProps) => {
 
   return (
     <div
+        className="icon_wrapper"
         key={direction}
         style={{ verticalAlign: 'middle', color: color }}
     >

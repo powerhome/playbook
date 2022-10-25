@@ -16,7 +16,7 @@ afterEach(() => {
 })
 
 const testId = 'collapsible1',
-  kitClass = 'pb_collapsible'
+  kitClass = 'pb_collapsible_kit'
 
 test('throws error if incorrect # of children', () => {
   expect(() => {
