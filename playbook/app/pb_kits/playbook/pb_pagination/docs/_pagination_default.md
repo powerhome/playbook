@@ -1,0 +1,1 @@
+To apply our pagination CSS styles in rails, wrap the `will_paginate` component in our pagination component.
