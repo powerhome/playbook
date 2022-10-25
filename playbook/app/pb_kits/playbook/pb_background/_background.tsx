@@ -14,7 +14,7 @@ type BackgroundProps = {
   'text_lt_default' | 'text_lt_light' | 'text_lt_lighter' | 'text_dk_default' | 'text_dk_light' | 'text_dk_lighter' |
   'card_light' | 'card_dark' | 'data_1' | 'data_2' | 'data_3' | 'data_4' | 'data_5' | 'data_6' | 'data_7' | 'data_8' |
   'border_light' | 'border_dark' | 'success_secondary' | 'error_secondary' | 'info_secondary' | 'warning_secondary' |
-  'neutral_secondary' | 'primary_secondary',
+  'neutral_secondary' | 'primary_secondary' | 'success_subtle' | 'warning_subtle' | 'error_subtle' | 'info_subtle' | 'neutral_subtle',
   backgroundRepeat?: 'repeat' | 'repeat-x' | 'repeat-y' | 'no-repeat' | 'space' | 'round' | 'initial' | 'inherit',
   backgroundSize?: 'auto' | 'cover' | 'contain',
   children?: React.ReactChild[] | React.ReactNode,

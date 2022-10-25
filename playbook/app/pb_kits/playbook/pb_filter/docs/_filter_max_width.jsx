@@ -1,27 +1,24 @@
 import React from 'react'
+import { Button, Filter, Flex, Select } from '../../'
 
-import Filter from '../_filter'
-
-import Button from '../../pb_button/_button'
-import Flex from '../../pb_flex/_flex'
-import Select from '../../pb_select/_select'
-import TextInput from '../../pb_text_input/_text_input'
-
-const FilterSingle = (props) => {
+const FilterMaxWidth = (props) => {
   const options = [
     { value: 'USA' },
     { value: 'Canada' },
     { value: 'Brazil' },
     { value: 'Philippines' },
-    { value: 'A galaxy far far away...' },
+    { value: 'A galaxy far far away, like really far far far far far far far far far far far far far far far far far far far far far far far far far far far far far far far far far far far far far far far far far far far far far far far far away...' },
   ]
   return (
     <Filter
+        {...props}
+        double
         filters={{
           'Full Name': 'John Wick',
+          'City': 'San Francisco',
         }}
         minWidth="360px"
-        results={546}
+        results={1}
         sortOptions={{
           popularity: 'Popularity',
           // eslint-disable-next-line
@@ -30,14 +27,19 @@ const FilterSingle = (props) => {
           manager_name: 'Manager\'s Name',
         }}
         sortValue={[{ name: 'popularity', dir: 'desc' }]}
-        {...props}
     >
     {({ closePopover }) => (
       <form>
-        <TextInput
-            label="Full Name"
-            placeholder="Enter name"
-            {...props}
+
+      <Select
+          blankSelection="Select One..."
+          label="Territory"
+          maxWidth="sm"
+          name="location"
+          options={options}
+      />
+        <Button
+            text="Apply"
         />
 
         <Select
@@ -45,21 +47,17 @@ const FilterSingle = (props) => {
             label="Territory"
             name="location"
             options={options}
-            {...props}
         />
         <Flex
             spacing="between"
-            {...props}
         >
           <Button
               onClick={closePopover}
               text="Apply"
-              {...props}
           />
           <Button
               text="Clear"
               variant="secondary"
-              {...props}
           />
         </Flex>
       </form>
@@ -68,4 +66,4 @@ const FilterSingle = (props) => {
   )
 }
 
-export default FilterSingle
+export default FilterMaxWidth
