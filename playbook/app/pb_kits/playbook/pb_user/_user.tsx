@@ -21,6 +21,7 @@ type UserProps = {
   name?: string,
   orientation?: "horiztonal" | "vertical",
   size?: "sm" | "md" | "lg",
+  subtitle?: string,
   territory?: string,
   title?: string,
 } & GlobalProps
@@ -38,6 +39,7 @@ const User = (props: UserProps) => {
     name,
     orientation = 'horizontal',
     size = 'sm',
+    subtitle,
     territory = '',
     title = '',
   } = props
@@ -81,6 +83,12 @@ const User = (props: UserProps) => {
         >
           {territory === '' ? title : `${territory} • ${title}`}
         </Body>
+        <Body
+            color="light"
+            dark={dark}
+            text={subtitle}
+            variant={null}
+        />
       </div>
     </div>
   )
