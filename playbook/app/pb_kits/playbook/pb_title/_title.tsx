@@ -35,7 +35,7 @@ const Title = (props: TitleProps): React.ReactElement => {
 
   const ariaProps: {[key: string]: string | number} = buildAriaProps(aria)
   const dataProps: {[key: string]: string | number} = buildDataProps(data)
-  const getBold = bold ? 'bold' : ""
+  const getBold = bold ? '' : 'thin'
   const classes = classnames(
     buildCss('pb_title_kit', `size_${size}`, variant, color, getBold),
     globalProps(props),

@@ -24,7 +24,7 @@ module Playbook
       end
 
       def is_bold
-        bold ? "bold" : nil
+        bold ? nil : "thin"
       end
     end
   end

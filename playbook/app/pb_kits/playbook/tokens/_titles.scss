@@ -40,5 +40,10 @@
 
 @mixin pb_title_bold {
   font-weight: $bolder;
-  letter-spacing: 0;
+  letter-spacing: 0em;
+}
+
+@mixin pb_title_thin {
+  font-weight: $lighter;
+  letter-spacing: $lspace_tight;
 }
