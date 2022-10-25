@@ -7,7 +7,7 @@ const FilterNoBackground = (props) => {
     { value: 'Canada' },
     { value: 'Brazil' },
     { value: 'Philippines' },
-    { value: 'A galaxy far far away, like really far away...' },
+    { value: 'A galaxy far far away...' },
   ]
   return (
     <>
@@ -17,7 +17,7 @@ const FilterNoBackground = (props) => {
           'Full Name': 'John Wick',
           'City': 'Las Vegas',
         }}
-          minWidth="375px"
+          minWidth="360px"
           results={3}
           sortOptions={{
           popularity: 'Popularity',
@@ -72,7 +72,7 @@ const FilterNoBackground = (props) => {
           'Full Name': 'John Wick',
           'City': 'Las Vegas',
         }}
-          minWidth="375px"
+          minWidth="360px"
           results={3}
           sortOptions={{
           popularity: 'Popularity',

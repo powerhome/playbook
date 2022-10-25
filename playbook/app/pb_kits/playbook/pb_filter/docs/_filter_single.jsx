@@ -13,14 +13,14 @@ const FilterSingle = (props) => {
     { value: 'Canada' },
     { value: 'Brazil' },
     { value: 'Philippines' },
-    { value: 'A galaxy far far away, like really far away...' },
+    { value: 'A galaxy far far away...' },
   ]
   return (
     <Filter
         filters={{
           'Full Name': 'John Wick',
         }}
-        minWidth="375px"
+        minWidth="360px"
         results={546}
         sortOptions={{
           popularity: 'Popularity',

@@ -11,14 +11,14 @@ const FilterPlacement = (props) => {
     { value: 'Canada' },
     { value: 'Brazil' },
     { value: 'Philippines' },
-    { value: 'A galaxy far far away, like really far away...' },
+    { value: 'A galaxy far far away...' },
   ]
   return (
 
     <>
       <Filter
           double
-          minWidth="375px"
+          minWidth="360px"
           onSortChange={SortingChangeCallback}
           placement={"right"}
           results={1}
