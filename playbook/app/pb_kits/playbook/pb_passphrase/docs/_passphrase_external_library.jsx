@@ -1,84 +1,82 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect } from "react"
 
-import Passphrase from '../_passphrase'
-import zxcvbn from 'zxcvbn'
-import { ProgressSimple, Caption} from '../..'
-
+import Passphrase from "../_passphrase"
+import zxcvbn from "zxcvbn"
+import { ProgressSimple, Caption, TextInput } from "../.."
 
 function useZxcvbn({ passphrase }) {
-
-  const [passphraseStrenght, setPassphraseStrength] = useState({}) //nbsp to keep height constant
-  
+  const [passphraseStrength, setPassphraseStrength] = useState({}) //nbsp to keep height constant
   const { score } = zxcvbn(passphrase)
-
   useEffect(() => {
     switch (score) {
       case 1:
         setPassphraseStrength({
           strength: 25,
           message: "This passphrase is too common",
-          variant: "negative"
+          variant: "negative",
         })
-        break;
+        break
       case 2:
         setPassphraseStrength({
           strength: 50,
           message: "Too Weak",
-          variant: "warning"
+          variant: "warning",
         })
-        break;
+        break
       case 3:
         setPassphraseStrength({
           strength: 75,
           message: "Almost there, keep going!",
-          variant: "positive"
+          variant: "positive",
         })
-        break;
+        break
       case 4:
         setPassphraseStrength({
           strength: 100,
           message: "Success! Strong passphrase",
-          variant: "positive"
+          variant: "positive",
         })
-        break;
+        break
     }
-  }, [passphrase, score]
-  )
-  return passphraseStrenght
+  }, [passphrase, score])
+  return { passphraseStrength, score }
 }
 
 const PassphraseExternalLibrary = (props) => {
-  const [input, setInput] = useState("");
+  const [input, setInput] = useState("")
 
   const handleChange = (e) => {
-    setInput(e.target.value);
-  };
+    setInput(e.target.value)
+  }
 
-  const { strength, message, variant } = useZxcvbn({ passphrase: input });
-  
+  const { passphraseStrength, score } = useZxcvbn({ passphrase: input })
+
   return (
     <>
       <Passphrase
-          label="Password Strength Checker"
+          label='Password Strength Checker'
           onChange={(e) => handleChange(e)}
           value={input}
           {...props}
       />
-      {strength && (
+      {passphraseStrength.strength && (
         <>
           <ProgressSimple
               className={input.length === 0 ? "progress-empty-input" : null}
-              percent={strength}
-              variant={variant}
+              percent={passphraseStrength.strength}
+              variant={passphraseStrength.variant}
           />
-          <Caption 
-              size="xs" 
-              text={message} 
-          />
+          <Caption size='xs'
+              text={passphraseStrength.message} />
         </>
       )}
+      <TextInput disabled
+          label='Passphrase Strength'
+          marginTop="md"
+          readOnly
+          value={score} />
     </>
-  );
-};
+  )
+}
 
 export default PassphraseExternalLibrary
