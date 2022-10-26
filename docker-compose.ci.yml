@@ -1,0 +1,9 @@
+services:
+  web:
+    build:
+      target: prod
+    volumes: []
+  webpacker:
+    build:
+      target: prod
+    volumes: []

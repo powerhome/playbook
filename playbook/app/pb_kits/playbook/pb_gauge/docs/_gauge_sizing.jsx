@@ -4,6 +4,7 @@ import { Flex, FlexItem, Gauge } from '../../'
 const GaugeSizing = (props) => (
   <div>
     <Flex
+        align="center"
         wrap
         {...props}
     >
@@ -51,6 +52,7 @@ const GaugeSizing = (props) => (
       >
         <Gauge
             chartData={[ { name: 'Point 4', value: 25 } ]}
+            height="100%"
             id="gauge-sizing1"
             {...props}
         />

@@ -8,15 +8,16 @@ import Icon from '../pb_icon/_icon'
 type EventHandler = (React.MouseEventHandler<HTMLElement>)
 
 type ButtonPropTypes = {
-  aria?: {[key: string]: string},
+  aria?: { [key: string]: string },
   children?: React.ReactChild[] | React.ReactChild,
   className?: string | string[],
-  data?: {[key: string]: string},
+  data?: { [key: string]: string },
   disabled?: boolean,
   fixedWidth?: boolean,
   form?: string,
   fullWidth?: boolean,
   icon?: string,
+  iconRight?: boolean,
   id?: string,
   link?: string,
   loading?: boolean,
@@ -24,11 +25,11 @@ type ButtonPropTypes = {
   onClick?: EventHandler,
   size?: 'sm' | 'md' | 'lg',
   text?: string,
-  type: 'inline' | null,
+  type?: 'inline' | null,
   htmlType: 'submit' | 'reset' | 'button' | undefined,
   value?: string | null,
   variant: 'primary' | 'secondary' | 'link',
-  wrapperClass: string,
+  wrapperClass?: string,
 } & GlobalProps
 
 const buttonClassName = (props: ButtonPropTypes) => {
@@ -61,6 +62,7 @@ const Button = (props: ButtonPropTypes) => {
     data = {},
     disabled,
     icon = null,
+    iconRight = false,
     id,
     loading = false,
     onClick,
@@ -91,16 +93,19 @@ const Button = (props: ButtonPropTypes) => {
 
   const content = (
     <span className="pb_button_content">
-      {icon && (
-        <i className={`pb_icon_kit far fa-${icon} fa-fw`} />
+      {icon && !iconRight && (
+        <i className={`pb_icon_kit far fa-${icon} fa-fw button_with_icon`} />
       )}
       <span>{text || children}</span>
+      {icon && iconRight && (
+        <i className={`pb_icon_kit far fa-${icon} fa-fw button_with_icon_right`} />
+      )}
     </span>
   )
 
   const ifLoading = () => {
-    if (loading){
-      return(
+    if (loading) {
+      return (
         <>
           {loadingIcon}
         </>

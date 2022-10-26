@@ -1,0 +1,2 @@
+When multiple images are passed to the Lightbox kit, it will also display scrollable thumbnails at the bottom of the screen for easier access to all images. In addition to the scrollable thumbnails, larger screens provide arrow buttons on the left and right of the image itself for easier scrolling while on mobile devices the kit allows for swiping. 
+This example also highlights the use of the optional `onChange` prop which is an event handler prop that tracks the index of the image being viewed and exposes it for use by the developer. 

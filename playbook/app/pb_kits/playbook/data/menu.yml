@@ -52,6 +52,7 @@ kits:
   - layouts:
     - flex
     - layout
+  - lightbox
   - list
   - loading_inline
   - nav

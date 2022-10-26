@@ -46,11 +46,17 @@ module Playbook
       prop :plugins, type: Playbook::Props::Boolean,
                      default: false,
                      deprecated: true
+      prop :position, type: Playbook::Props::String,
+                      default: "auto"
+      prop :position_element, type: Playbook::Props::String
+      prop :scroll_container, type: Playbook::Props::String
       prop :selection_type, type: Playbook::Props::Enum,
                             values: %w[week month none],
                             default: "none"
       prop :show_timezone, type: Playbook::Props::Boolean,
                            default: false
+      prop :static_position, type: Playbook::Props::Boolean,
+                             default: true
       prop :required, type: Playbook::Props::Boolean,
                       default: false
       prop :year_range, type: Playbook::Props::Array,
@@ -76,9 +82,12 @@ module Playbook
           mode: mode,
           pickerId: picker_id,
           plugins: plugins,
+          position: position,
+          positionElement: position_element,
           required: required,
           selectionType: selection_type,
           showTimezone: show_timezone,
+          staticPosition: static_position,
           yearRange: year_range,
         }.to_json.html_safe
       end

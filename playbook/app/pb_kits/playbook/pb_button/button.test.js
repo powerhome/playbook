@@ -11,14 +11,12 @@ const htmlType = 'submit',
 
 test('passes type, text, and value props to button', () => {
   render(
-    <>
-      <Button
-          data={{ testid: 'primary-test' }}
-          htmlType={htmlType}
-          text={text}
-          value={value}
-      />
-    </>
+    <Button
+        data={{ testid: 'primary-test' }}
+        htmlType={htmlType}
+        text={text}
+        value={value}
+    />
   )
 
   const kit = screen.getByTestId('primary-test')

@@ -10,6 +10,7 @@ $nav_breakpoint: breakpoint("lg");
 body {
   overflow-x: hidden;
   position: relative;
+  &.visual_guidelines,
   &.kits {
     overflow-y: hidden;
   }
@@ -20,6 +21,7 @@ body {
     flex: 0 0;
     padding: $space_sm $space_md $space_xs $space_md;
     background: $white;
+    border-bottom: $border_light 1px solid;
     h1 {
       display: flex;
       align-items: center;
@@ -95,6 +97,12 @@ body {
       }
       &.height-override {
         height: auto;
+      }
+      &.padding-override {
+        padding: 0;
+      }
+      &.smooth-scroll {
+        scroll-behavior: smooth;
       }
     }
   }

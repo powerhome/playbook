@@ -1,5 +1,5 @@
 import React from 'react'
-import DateStacked from '../_date_stacked.jsx'
+import DateStacked from '../_date_stacked'
 
 const DateStackedNotCurrentYear = (props) => {
   return (

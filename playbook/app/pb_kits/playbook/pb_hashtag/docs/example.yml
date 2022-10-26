@@ -2,6 +2,8 @@ examples:
 
   rails:
   - hashtag_default: Hashtag Types
+  - hashtag_link: Hashtag Links
 
   react:
   - hashtag_default: Hashtag Types
+  - hashtag_link: Hashtag Links

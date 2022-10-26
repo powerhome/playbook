@@ -1,0 +1,166 @@
+@import "../tokens/spacing";
+@import "../tokens/screen_sizes";
+
+$slides-margin: $space-md;
+
+ .carousel {
+
+  .carousel-header {
+    background: rgb(0, 0, 0);
+    border-radius: 0px;
+    min-height: 51px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 9999999;
+    align-items: center;
+    transition: all .5s;
+
+    .nav-right-btn {
+      padding-left: $space_xs !important;
+    }
+    .custom-header {
+      text-align: center;
+    }
+  }
+}
+
+.photo-cards {
+  .overlay {
+    width: 100% !important;
+    height: 50% !important;
+    bottom: 0;
+    position: absolute !important;
+    border-radius: 0px 0px 5px 5px;
+    background: linear-gradient(-180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.77) 100%);
+  }
+
+  .overlay,
+  .overlay ~ .key-photo-icon,
+  .overlay ~ .tag-counter {
+    pointer-events: none;
+  }
+}
+
+
+.Lightbox {
+  width: 100vw;
+  height: 100%;
+  position: fixed;
+  left: 0;
+  top: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: column;
+  background-color: black;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.Slides {
+  display: flex;
+  height: calc(100% - 120px);
+  width: 100%;
+  z-index: 1;
+
+  [class^="react-transform-wrapper"] {
+    flex-shrink: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  [class^="react-transform-content"] {
+    width: 100%;
+    height: 100%;
+  }
+
+  [class^="react-transform-component"] {
+    width: 100%;
+    height: 100%;
+    img {
+      height: 100%;
+    }
+  }
+
+  .carousel-arrow-left {
+    display: block;
+    position: absolute;
+    z-index: 4;
+    top: 50%;
+    @media only screen and (max-width: $screen-xs-max) {
+      display: none;
+    }
+  }
+
+  .carousel-arrow-right {
+    display: block;
+    position: absolute;
+    z-index: 4;
+    top: 50%;
+    right: 0;
+    @media only screen and (max-width: $screen-xs-max) {
+      display: none;
+    }
+  }
+}
+
+.Slide,
+.Thumbnail {
+  flex-shrink: 0;
+  border: none;
+  margin: 0;
+  padding: 0;
+  cursor: pointer;
+  background-color: transparent;
+}
+
+.Slide {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+
+  @media only screen and (max-width: $screen-xs-max) {
+    margin-top: 30px;
+  }
+
+  img {
+    width: 100vw;
+    height: 100vh;
+    object-fit: contain;
+  }
+}
+
+.Thumbnails {
+  display: flex;
+  width: 100vw;
+  padding: 3px;
+  overflow: scroll;
+  z-index: 20;
+  &.centered {
+    justify-content: center;
+  }
+}
+
+
+.Thumbnail {
+  padding: 3px;
+  height: 100%;
+
+  img {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.Thumbnail.active {
+  padding: 6px;
+  display: flex;
+  align-items: center;
+  background-color: white;
+  box-shadow: 0 0 6px white;
+}

@@ -5,7 +5,7 @@ import React from 'react'
 import {
   Body,
   Caption,
-  Card,
+  Card
 } from 'playbook-ui'
 
 import Example from '../Templates/Example'
@@ -41,7 +41,7 @@ const Positioning = ({ example, tokensExample }: {example: string, tokensExample
       <div className="zindex-wrapper">
         {Object.keys(TOKENS).map((token) => (
           <Card
-              className="zIndex one-z-index-example"
+              className="zIndex"
               key={`token-example-${token}`}
               shadow="deeper"
               zIndex={TOKENS[token]}

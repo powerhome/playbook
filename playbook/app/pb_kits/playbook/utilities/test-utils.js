@@ -37,9 +37,8 @@ export const renderKit = (Kit, props = {}, newProps = {}) => {
 
 export const ensureAccessible = async (Kit, props = {}, newProps = {}) => {
   const kitProps = { ...props, ...newProps }
-  const render = () => <Kit {...kitProps} />
-  const html = render()
-  expect(await axe(html)).toHaveNoViolations()
+  render(<Kit {...kitProps} />)
+  expect(await axe(screen.getByTestId(kitProps.data.testid))).toHaveNoViolations()
 }
 
 export const appendAlert = (message) => {

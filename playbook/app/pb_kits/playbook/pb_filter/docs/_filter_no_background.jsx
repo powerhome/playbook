@@ -7,7 +7,7 @@ const FilterNoBackground = (props) => {
     { value: 'Canada' },
     { value: 'Brazil' },
     { value: 'Philippines' },
-    { value: 'A Galaxy Far Far Away Like Really Far Away' },
+    { value: 'A galaxy far far away...' },
   ]
   return (
     <>
@@ -17,6 +17,8 @@ const FilterNoBackground = (props) => {
           'Full Name': 'John Wick',
           'City': 'Las Vegas',
         }}
+          marginBottom="xl"
+          minWidth="360px"
           results={3}
           sortOptions={{
           popularity: 'Popularity',
@@ -28,33 +30,40 @@ const FilterNoBackground = (props) => {
           sortValue={[{ name: 'popularity', dir: 'desc' }]}
           {...props}
       >
-        <TextInput
-            label="Full Name"
-            placeholder="Enter name"
-            {...props}
-        />
+      {({ closePopover }) => (
+        <form>
 
-        <Select
-            blankSelection="Select One..."
-            label="Territory"
-            name="location"
-            options={options}
-            {...props}
-        />
-        <Flex
-            spacing="between"
-            {...props}
-        >
-          <Button
-              text="Apply"
+          <TextInput
+              label="Full Name"
+              placeholder="Enter name"
               {...props}
           />
-          <Button
-              text="Clear"
-              variant="secondary"
+
+          <Select
+              blankSelection="Select One..."
+              label="Territory"
+              name="location"
+              options={options}
               {...props}
           />
-        </Flex>
+          <Flex
+              spacing="between"
+              {...props}
+          >
+            <Button
+                onClick={closePopover}
+                text="Apply"
+                {...props}
+            />
+            <Button
+                text="Clear"
+                variant="secondary"
+                {...props}
+            />
+          </Flex>
+        </form>
+      )}
+
       </Filter>
 
       <Filter
@@ -64,6 +73,7 @@ const FilterNoBackground = (props) => {
           'Full Name': 'John Wick',
           'City': 'Las Vegas',
         }}
+          minWidth="360px"
           results={3}
           sortOptions={{
           popularity: 'Popularity',
@@ -75,33 +85,39 @@ const FilterNoBackground = (props) => {
           sortValue={[{ name: 'popularity', dir: 'desc' }]}
           {...props}
       >
-        <TextInput
-            label="Full Name"
-            placeholder="Enter name"
-            {...props}
-        />
+      {({ closePopover }) => (
+        <form>
 
-        <Select
-            blankSelection="Select One..."
-            label="Territory"
-            name="location"
-            options={options}
-            {...props}
-        />
-        <Flex
-            spacing="between"
-            {...props}
-        >
-          <Button
-              text="Apply"
+          <TextInput
+              label="Full Name"
+              placeholder="Enter name"
               {...props}
           />
-          <Button
-              text="Clear"
-              variant="secondary"
+
+          <Select
+              blankSelection="Select One..."
+              label="Territory"
+              name="location"
+              options={options}
               {...props}
           />
-        </Flex>
+          <Flex
+              spacing="between"
+              {...props}
+          >
+            <Button
+                onClick={closePopover}
+                text="Apply"
+                {...props}
+            />
+            <Button
+                text="Clear"
+                variant="secondary"
+                {...props}
+            />
+          </Flex>
+        </form>
+      )}
       </Filter>
     </>
   )

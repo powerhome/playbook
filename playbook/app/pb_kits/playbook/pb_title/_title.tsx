@@ -5,12 +5,12 @@ import { deprecatedProps, GlobalProps, globalProps } from '../utilities/globalPr
 
 type TitleProps = {
   aria?: {[key: string]: string},
-  children?: React.ReactChild[],
+  children?: React.ReactChild[] | React.ReactChild,
   className?: string,
   color?: "default" | "light" | "lighter" | "success" | "error" | "link",
   data?: {[key: string]: string},
   id?: string,
-  size?: 1 | 2 | 3 | 4,
+  size?: 1 | 2| 3| 4 | "1" | "2" | "3" | "4",
   tag?: "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "div" | "span",
   text?: string,
   variant?: null | "link",

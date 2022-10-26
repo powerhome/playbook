@@ -59,8 +59,10 @@
 	// Local Variables
 	$gutter: $space_lg;
 	$small: 300px;
+	$status_size: 375px;
 	$medium: 500px;
 	$large: 800px;
+	$xlarge: 1150px;
 	$animation-duration: 0.2s;
 	$z-index: 100;
 	$opacity_visible: 1;
@@ -70,6 +72,7 @@
 	background-color: $white;
 	box-shadow: $shadow_deepest;
 	border: 0;
+	border-radius: $border_radius_md;
 	max-height: calc(100vh - #{$gutter * 2});
 	max-width: calc(100vw - #{$gutter * 2});
 	overflow: auto;
@@ -77,6 +80,10 @@
 	animation-duration: $animation-duration;
 	outline: none;
 	animation-timing-function: $easeInOutQuint;
+	
+	&[class*="_status_size"] {
+		width: $status_size;
+	}
 
 	&[class*="_sm"] {
 		width: $small;
@@ -129,6 +136,35 @@
 			animation-name: overlayFadeOut;
 			animation-duration: $animation-duration;
 			opacity: $opacity_hidden;
+		}
+		&[class*="full_height"] {
+			&[class*="_left"]{
+				justify-content: flex-start;
+			}
+			
+			&[class*="_center"]{
+				justify-content: center;
+			}
+
+			&[class*="_right"]{
+				justify-content: flex-end;
+			}
+
+			.pb_dialog {
+				border-radius: 0;
+				height: 100%;
+				max-height: 100%;
+				max-width: none;
+				&[class*="_sm"] {
+					width: $medium;
+				}
+				&[class*="_md"] {
+					width: $large;
+				}
+				&[class*="_lg"] {
+					width: $xlarge;
+				}
+			} 
 		}
 	}
 }

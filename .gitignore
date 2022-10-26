@@ -9,3 +9,5 @@ node_modules
 !.yarn/versions
 .pnp.*
 yarn-error.log
+playbook/stats.json
+.npmrc

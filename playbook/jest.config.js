@@ -4,6 +4,14 @@
  */
 
 module.exports = {
+  preset: 'ts-jest',
+  testEnvironment: 'jest-environment-jsdom',
+  transform: {
+    '^.+\\.ts?$': 'ts-jest',
+    '^.+\\.tsx?$': 'ts-jest',
+    '^.+\\.js?$': 'babel-jest',
+    '^.+\\.jsx?$': 'babel-jest',
+  },
   // All imported modules in your tests should be mocked automatically
   // automock: false,
 
@@ -54,7 +62,7 @@ module.exports = {
   // forceCoverageMatch: [],
 
   // A path to a module which exports an async function that is triggered once before all test suites
-  // globalSetup: undefined,
+  globalSetup: "<rootDir>/global-jest-setup.js",
 
   // A path to a module which exports an async function that is triggered once after all test suites
   // globalTeardown: undefined,
@@ -63,7 +71,7 @@ module.exports = {
   // globals: {},
 
   // The maximum amount of workers used to run your tests. Can be specified as % or a number. E.g. maxWorkers: 10% will use 10% of your CPU amount + 1 as the maximum worker number. maxWorkers: 2 will use a maximum of 2 workers.
-  // maxWorkers: "50%",
+  maxWorkers: "2",
 
   // An array of directory names to be searched recursively up from the requiring module's location
   moduleDirectories: [
@@ -174,7 +182,7 @@ module.exports = {
   // testURL: "http://localhost",
 
   // Setting this value to "fake" allows the use of fake timers for functions such as "setTimeout"
-  // timers: "real",
+  timers: "modern",
 
   // A map from regular expressions to paths to transformers
   // transform: undefined,

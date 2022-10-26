@@ -27,8 +27,11 @@ const TableIconButtons = (props) => {
           <td>{'Value 2'}</td>
           <td>{'Value 3'}</td>
           <td>{'Value 4'}</td>
-          <td>
-            <Flex orientation="row">
+          <td align="right">
+            <Flex
+                justifyContent="end"
+                orientation="row"
+            >
               <FlexItem>
                 <CircleIconButton
                     icon="trash-alt"
@@ -51,8 +54,11 @@ const TableIconButtons = (props) => {
           <td>{'Value 2'}</td>
           <td>{'Value 3'}</td>
           <td>{'Value 4'}</td>
-          <td>
-            <Flex orientation="row">
+          <td align="right">
+            <Flex 
+                justifyContent="end"
+                orientation="row"
+            >
               <FlexItem>
                 <CircleIconButton
                     icon="trash-alt"
@@ -74,9 +80,12 @@ const TableIconButtons = (props) => {
           <td>{'Value 1'}</td>
           <td>{'Value 2'}</td>
           <td>{'Value 3'}</td>
-          <td>{'Value 4'}</td>
-          <td>
-            <Flex orientation="row">
+          <td>{'Value lk'}</td>
+          <td align="right">
+            <Flex 
+                justifyContent="end"
+                orientation="row"
+            >
               <FlexItem>
                 <CircleIconButton
                     icon="trash-alt"

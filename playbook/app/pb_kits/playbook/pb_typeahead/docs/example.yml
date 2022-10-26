@@ -3,6 +3,7 @@ examples:
     - typeahead_default: Default
     - typeahead_with_context: With Context
     - typeahead_with_pills: With Pills
+    - typeahead_without_pills: Without Pills (Single Select)
     - typeahead_with_pills_async: With Pills (Async Data)
     - typeahead_with_pills_async_users: With Pills (Async Data w/ Users)
     - typeahead_inline: Inline

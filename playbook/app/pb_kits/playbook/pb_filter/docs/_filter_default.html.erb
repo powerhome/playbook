@@ -1,6 +1,8 @@
 <%=
   pb_rails("filter", props: {
+    min_width: "360px",
     id: "1",
+    margin_bottom: "xl",
     filters: [
       { name: "name", value: "John Wick" },
       { name: "city", value: "San Francisco"}
@@ -16,16 +18,11 @@
 %>
   <%
     example_collection = [
-      OpenStruct.new(name: "Alabama", value: 1),
-      OpenStruct.new(name: "Alaska", value: 2),
-      OpenStruct.new(name: "Arizona", value: 3),
-      OpenStruct.new(name: "Arkansas", value: 4),
-      OpenStruct.new(name: "California", value: 5),
-      OpenStruct.new(name: "Colorado", value: 6),
-      OpenStruct.new(name: "Connecticut", value: 7),
-      OpenStruct.new(name: "Delaware", value: 8),
-      OpenStruct.new(name: "Florida", value: 9),
-      OpenStruct.new(name: "Georgia", value: 10),
+      OpenStruct.new(name: "USA", value: 1),
+      OpenStruct.new(name: "Canada", value: 2),
+      OpenStruct.new(name: "Brazil", value: 3),
+      OpenStruct.new(name: "Philippines", value: 4),
+      OpenStruct.new(name: "A galaxy far far away...", value: 5)
     ]
   %>
   <%= pb_rails("form", props: { form_system_options: { scope: :example, method: :get } }) do |form| %>
@@ -39,13 +36,11 @@
   <% end %>
 <% end %>
 
-<br>
-<br>
 
 <%=
   pb_rails("filter", props: {
+    min_width: "360px",
     id: "def2",
-
     sort_menu: [
       { item: "Popularity", link: "?q[sorts]=managers_popularity+asc", active: true, direction: "desc" },
       { item: "Mananger's Title", link: "?q[sorts]=managers_title+asc", active: false },
@@ -57,16 +52,11 @@
 %>
   <%
     example_collection = [
-      OpenStruct.new(name: "Alabama", value: 1),
-      OpenStruct.new(name: "Alaska", value: 2),
-      OpenStruct.new(name: "Arizona", value: 3),
-      OpenStruct.new(name: "Arkansas", value: 4),
-      OpenStruct.new(name: "California", value: 5),
-      OpenStruct.new(name: "Colorado", value: 6),
-      OpenStruct.new(name: "Connecticut", value: 7),
-      OpenStruct.new(name: "Delaware", value: 8),
-      OpenStruct.new(name: "Florida", value: 9),
-      OpenStruct.new(name: "Georgia", value: 10),
+      OpenStruct.new(name: "USA", value: 1),
+      OpenStruct.new(name: "Canada", value: 2),
+      OpenStruct.new(name: "Brazil", value: 3),
+      OpenStruct.new(name: "Philippines", value: 4),
+      OpenStruct.new(name: "A galaxy far far away...", value: 5)
     ]
   %>
   <%= pb_rails("form", props: { form_system_options: { scope: :example, method: :get } }) do |form| %>

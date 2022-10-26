@@ -24,7 +24,7 @@ const TableTwoPlusActions = (props) => {
           <td>{'Value 2'}</td>
           <td>{'Value 3'}</td>
           <td>{'Value 4'}</td>
-          <td>
+          <td align="right">
             {' '}
             <CircleIconButton
                 icon="ellipsis-h"
@@ -38,7 +38,7 @@ const TableTwoPlusActions = (props) => {
           <td>{'Value 2'}</td>
           <td>{'Value 3'}</td>
           <td>{'Value 4'}</td>
-          <td>
+          <td align="right">
             {' '}
             <CircleIconButton
                 icon="ellipsis-h"
@@ -53,7 +53,7 @@ const TableTwoPlusActions = (props) => {
           <td>{'Value 2'}</td>
           <td>{'Value 3'}</td>
           <td>{'Value 4'}</td>
-          <td>
+          <td align="right">
             {' '}
             <CircleIconButton
                 icon="ellipsis-h"

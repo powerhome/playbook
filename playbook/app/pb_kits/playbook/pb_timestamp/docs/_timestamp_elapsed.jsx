@@ -28,6 +28,16 @@ const TimestampElapsed = (props) => {
           variant="elapsed"
           {...props}
       />
+
+      <br />
+
+      <Timestamp
+          hideUpdated
+          showUser={false}
+          timestamp={customDate}
+          variant="elapsed"
+          {...props}
+      />
     </div>
   )
 }

@@ -10,51 +10,53 @@ import {
 } from 'playbook-ui'
 
 import Example from '../Templates/Example'
+import SpacingProps from '../Templates/SpacingProps'
 
-const PROPVALUES = ['none', 'xs', 'sm', 'md', 'lg', 'xl']
-
-const PROPS = {
-  margin: PROPVALUES,
-  marginLeft: PROPVALUES,
-  marginBottom: PROPVALUES,
-  marginRight: PROPVALUES,
-  marginTop: PROPVALUES,
-  marginX: PROPVALUES,
-  marginY: PROPVALUES,
-  padding: PROPVALUES,
-  paddingLeft: PROPVALUES,
-  paddingBottom: PROPVALUES,
-  paddingRight: PROPVALUES,
-  paddingTop: PROPVALUES,
-  paddingX: PROPVALUES,
-  paddingY: PROPVALUES,
-}
+const PROPVALUES = ['none', 'xxs', 'xs', 'sm', 'md', 'lg', 'xl']
+const PROPNAMES = [
+  'margin', 
+  'marginLeft', 
+  'marginBottom', 
+  'marginRight', 
+  'marginTop', 
+  'marginX', 
+  'marginY', 
+  'padding', 
+  'paddingBottom', 
+  'paddingTop', 
+  'paddingLeft', 
+  'paddingRight', 
+  'paddingX', 
+  'paddingY' ]
 
 const TOKENS = {
-  'Extra Small': 'space_xs',
+  'XX Small': 'space_xxs',
+  'X Small': 'space_xs',
   'Small': 'space_sm',
   'Medium': 'space_md',
   'Large': 'space_lg',
-  'Extra Large': 'space_xl',
+  'X Large': 'space_xl',
 }
 
 const Spacing = ({ example, tokensExample }: {example: string, tokensExample?: string}) => (
   <React.Fragment>
     <Example
-        description="Used for building Kits: Spacing is sized by 8px which serves as the starting point and base that all spacing options follow."
-        example={example}
-        globalProps={PROPS}
-        title="Spacing"
-    />
+      description="Used for building Kits: Spacing is sized by 8px which serves as the starting point and base that all spacing options follow."
+      example={example}
+      title="Spacing"
+    >
+      <SpacingProps propValues={PROPVALUES} propNames={PROPNAMES} />
+    </Example>
     <Example
         example={tokensExample}
         tokens={TOKENS}
     >
-      <Flex justify="evenly">
+      <Flex justify="evenly" wrap>
         { Object.keys(TOKENS).map((token) => (
           <Flex
               key={token}
               orientation="column"
+              align="center"
           >
             <FlexItem>
               <div className="pb--tokens-spacing-token-example">

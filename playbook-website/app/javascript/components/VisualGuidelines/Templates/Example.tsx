@@ -40,7 +40,7 @@ const Example = ({
     exampleHtml = parsedExample.body.innerHTML
 
   return (
-    <div>
+    <div id={title?.replace(/\s+/g, '')}>
       {title && (
         <Title
             marginBottom="xs"
@@ -125,7 +125,7 @@ const Example = ({
           />
           <div className="pb--codeCopy">
             <pre
-                className="highlight pt_sm"
+                className="highlight pt_sm codeSnippetGuidelines"
                 style={{ margin: '0px' }}
             >
               <span dangerouslySetInnerHTML={{ __html: exampleHtml }} />

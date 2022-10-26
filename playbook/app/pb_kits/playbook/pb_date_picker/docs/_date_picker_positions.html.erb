@@ -1,0 +1,44 @@
+<%= pb_rails("flex") do %>
+  <%= pb_rails("flex/flex_item", props: {fixed_size: "50%"}) do %>
+    <%= pb_rails("date_picker", props: {
+      label: "Datepicker (opens on the right)",
+      picker_id: "date-picker-positions1",
+      position: "auto right",
+      scroll_container: ".pb--page--content--main",
+      static_position: false
+    }) %>
+  <% end %>
+<% end %>
+<%= pb_rails("flex") do %>
+  <%= pb_rails("flex/flex_item", props: {fixed_size: "50%"}) do %>
+    <%= pb_rails("date_picker", props: {
+      label: "Datepicker (opens on the left)",
+      picker_id: "date-picker-positions2",
+      position: "auto left",
+      scroll_container: ".pb--page--content--main",
+      static_position: false
+    }) %>
+  <% end %>
+<% end %>
+<%= pb_rails("flex") do %>
+  <%= pb_rails("flex/flex_item", props: {fixed_size: "50%"}) do %>
+    <%= pb_rails("date_picker", props: {
+      label: "Datepicker (opens above on the left)",
+      picker_id: "date-picker-positions3",
+      position: "above left",
+      scroll_container: ".pb--page--content--main",
+      static_position: false
+    }) %>
+  <% end %>
+<% end %>
+<%= pb_rails("flex") do %>
+  <%= pb_rails("flex/flex_item", props: {fixed_size: "50%"}) do %>
+    <%= pb_rails("date_picker", props: {
+      label: "Datepicker (opens below on the right)",
+      picker_id: "date-picker-positions4",
+      position: "below right",
+      scroll_container: ".pb--page--content--main",
+      static_position: false
+    }) %>
+  <% end %>
+<% end %>

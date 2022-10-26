@@ -12,89 +12,114 @@ const useDialog = (visible = false) => {
 }
 
 const DialogStatus = () => {
-  const [infoAlertOpened, toggleInfoAlert] = useDialog()
+  const [defaultAlertOpened, toggleDefaultAlert] = useDialog()
   const [cautionAlertOpened, toggleCautionAlert] = useDialog()
+  const [deleteAlertOpened, toggleDeleteAlert] = useDialog()
+  const [infoAlertOpened, toggleInfoAlert] = useDialog()
   const [successAlertOpened, toggleSuccessAlert] = useDialog()
   const [errorAlertOpened, toggleErrorAlert] = useDialog()
-  const [deleteAlertOpened, toggleDeleteAlert] = useDialog()
 
   const dialogs = [
     {
-      status: "info",
+      size: "status_size",
+      status: "default",
       text: "Text explaining why there is an alert",
-      title: "Are you Sure?",
-      toggle: toggleInfoAlert,
-      visible: infoAlertOpened,
-      buttonOneText:"No, Cancel",
-      buttonTwoText: "Yes, Action"
+      title: "Are you sure?",
+      toggle: toggleDefaultAlert,
+      visible: defaultAlertOpened,
+      buttonOneText:"Yes, Action",
+      buttonTwoText: "No, Cancel"
     },
     {
+      size: "status_size",
       status: "caution",
       text: "This is the action you will be taking",
-      title: "Are you Sure?",
+      title: "Are you sure?",
       toggle: toggleCautionAlert,
       visible: cautionAlertOpened,
-      buttonOneText:"No, Cancel",
-      buttonTwoText: "Yes, Action"
+      buttonOneText:"Yes, Action",
+      buttonTwoText: "No, Cancel"
     },
     {
+      size: "status_size",
       status: "delete",
       text: "You are about to delete ...",
       title: "Delete",
       toggle: toggleDeleteAlert,
       visible: deleteAlertOpened,
-      buttonOneText:"No, Cancel",
-      buttonTwoText: "Yes, Delete"
+      buttonOneText:"Yes, Delete",
+      buttonTwoText: "No, Cancel"
     },
     {
-      status: "error",
-      text: "Text explaining the error",
-      title: "Error Message",
-      toggle: toggleErrorAlert,
-      visible: errorAlertOpened,
-      buttonOneText:"No, Cancel",
-      buttonTwoText: "Ok, Thanks"
+      size: "sm",
+      status: "info",
+      text: "Text explaining why there is an alert",
+      title: "Information",
+      toggle: toggleInfoAlert,
+      visible: infoAlertOpened,
+      buttonOneText:"Ok, Thanks!",
     },
     {
+      size: "sm",
       status: "success",
       text: "Text explaining what is successful",
       title: "Success!",
       toggle: toggleSuccessAlert,
       visible: successAlertOpened,
-      buttonOneText:"No, Cancel",
-      buttonTwoText: "Ok, Thanks"
+      buttonOneText: "Great!",
+    },
+    {
+      size: "sm",
+      status: "error",
+      text: "Text explaining the error",
+      title: "Error Message",
+      toggle: toggleErrorAlert,
+      visible: errorAlertOpened,
+      buttonOneText:"Oh no!",
     },
   ]
 
   return (
     <div>
-      <Flex>
-        <Button
-            marginX="md"
-            onClick={toggleInfoAlert}
+      <Flex 
+          rowGap="xs" 
+          wrap
         >
-          {"Information Status"}
+        <Button
+            marginRight="md"
+            onClick={toggleDefaultAlert}
+        >
+          {"Default Status"}
         </Button>
         <Button
-            marginX="md"
+            marginRight="md"
             onClick={toggleCautionAlert}
         >
           {"Caution Status"}
         </Button>
         <Button
-            marginX="md"
+            marginRight="md"
+            onClick={toggleDeleteAlert}
+        >
+          {"Delete Status"}
+        </Button>
+        <Button
+            marginRight="md"
+            onClick={toggleInfoAlert}
+        >
+          {"Information Status"}
+        </Button>
+        <Button
+            marginRight="md"
             onClick={toggleSuccessAlert}
         >
           {"Success Status"}
         </Button>
-        <Button onClick={toggleErrorAlert}>
-          {"Error Status"}
-        </Button>
-        <Button
-            marginX="md"
-            onClick={toggleDeleteAlert}
+        <Button 
+            marginRight="md"
+            onClick={toggleErrorAlert}
         >
-          {"Delete Status"}
+          {"Error Status"}
         </Button>
       </Flex>
       <Flex>
@@ -103,22 +128,37 @@ const DialogStatus = () => {
               key={dialog.status}
               onClose={dialog.toggle}
               opened={dialog.visible}
+              size={dialog.size}
               status={dialog.status}
               text={dialog.text}
               title={dialog.title}
           >
-          <Dialog.Footer>
-            <Button
-                onClick={dialog.toggle}
-                variant="secondary"
-            >
-            {dialog.buttonOneText}
-            </Button>
-            <Button
-                onClick={dialog.toggle}
-            >
-            {dialog.buttonTwoText}
-            </Button>
+          <Dialog.Footer
+              paddingBottom="md"
+              paddingX="md"
+          >
+            <If condition={!dialog.buttonTwoText}>
+              <Button
+                  fullWidth
+                  onClick={dialog.toggle}
+              >
+              {dialog.buttonOneText}
+              </Button>
+            </If>
+            <If condition={dialog.buttonTwoText}>
+              <Button
+                  onClick={dialog.toggle}
+                  paddingRight="xl"
+              >
+              {dialog.buttonOneText}
+              </Button>
+              <Button
+                  onClick={dialog.toggle}
+                  variant="secondary"
+              >
+              {dialog.buttonTwoText}
+              </Button>
+            </If>
           </Dialog.Footer>
           </Dialog>
         ))}
