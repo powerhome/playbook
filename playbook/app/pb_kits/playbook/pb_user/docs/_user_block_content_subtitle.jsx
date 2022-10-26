@@ -6,7 +6,7 @@ const MentorSubtitle = (
     <Icon icon="users" />
     <Caption
         paddingLeft="xs"
-        text="Mentor"
+        text="Admin"
     />
   </Flex>
 )
