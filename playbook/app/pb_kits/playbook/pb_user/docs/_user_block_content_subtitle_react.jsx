@@ -1,5 +1,5 @@
 import React from "react"
-import { Caption, Contact, Flex, Icon, User } from "../../"
+import { Caption, Contact, Flex, Icon, User } from "../.."
 
 const MentorSubtitle = (
   <Flex>
@@ -27,7 +27,7 @@ const ContactSubtitle = (
   </>
 )
 
-const UserBlockContentSubtitle = (props) => {
+const UserBlockContentSubtitleReact = (props) => {
   return (
     <div className="pb--doc-demo-row">
       <User
@@ -53,4 +53,4 @@ const UserBlockContentSubtitle = (props) => {
   )
 }
 
-export default UserBlockContentSubtitle
+export default UserBlockContentSubtitleReact

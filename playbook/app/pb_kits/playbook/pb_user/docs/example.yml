@@ -7,7 +7,7 @@ examples:
   - user_size: Horizontal Size
   - user_vertical_size: Vertical Size
   - user_subtitle: Subtitle
-  - user_block_content_subtitle: Block Content Subtitle
+  - user_block_content_subtitle_rails: Block Content Subtitle
 
   react:
   - user_default: Default
@@ -16,4 +16,4 @@ examples:
   - user_size: Horizontal Size
   - user_vertical_size: Vertical Size
   - user_subtitle: Subtitle
-  - user_block_content_subtitle: Block Content Subtitle
+  - user_block_content_subtitle_react: Block Content Subtitle
