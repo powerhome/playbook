@@ -2,7 +2,7 @@ apiVersion: backstage.io/v1alpha1
 kind: System
 metadata:
   name: playbook
-  title: Playbook
+  title: Playbook. Arbitrary change
   description: Playbook is the first design system built for both Rails & React interfaces.
   links:
     - url: https://playbook.powerapp.cloud/
