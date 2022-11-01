@@ -3,6 +3,9 @@ examples:
   rails:
   - dialog_default: Simple
   - dialog_compound_components: Complex
+  - dialog_sizes: Sizes
+  - dialog_scrollable: Scrollable
+  - dialog_should_close_on_overlay_click: Overlay Click
 
   react:
   - dialog_default: Simple

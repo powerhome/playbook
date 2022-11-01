@@ -54,7 +54,7 @@ module Playbook
           placement: placement,
           shouldCloseOnOverlayClick: should_close_on_overlay_click,
           status: status,
-        }.compact
+        }
       end
     end
   end

@@ -1,9 +1,21 @@
-<%= pb_rails("button", props: { text: "Open Dialog", link: "" }) %>
+<%= pb_rails("button", props: { text: "Open Dialog", data: {dialog: "#dialog-1"} }) %>
 
 <%= pb_rails("dialog", props:{text: "Hello Body Text, Nice to meet ya.", 
 title: "Header Title is the Title Prop",
 cancel_button: "Cancel Button",
 confirm_button: "Confirm",
-classname: "wrapper",
-size: "sm"
+id: "dialog-1",
+size: "sm",
 }) %>
+
+<script type="text/javascript">
+  const dialogRails = document.querySelector("#dialog-1")
+  let innerDialog = document.querySelector('[data-react-class="Dialog"]')
+  const button = document.querySelector("button[data-dialog]")
+
+    button.onclick = () => {
+        console.log("click")
+        console.log(innerDialog)
+    }
+    
+</script>

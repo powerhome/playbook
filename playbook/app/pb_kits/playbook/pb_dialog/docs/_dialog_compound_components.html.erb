@@ -9,5 +9,18 @@ size: "lg",
 full_height: true,
 }) do %>
 
-
+    <%= pb_rails("caption", props: { text: "Description" }) %>
+    <%= pb_rails("rich_text_editor", props: {id: "default", value: "Add your text here. You can format your text, add links, quotes, and bullets."}) %>
+    <%= pb_rails("caption", props: { text: "Type in a word or term to help find tickets later" }) %>
+    <%= pb_rails("typeahead", props: {
+  name: :foo,
+  data: { typeahead_example: true },
+  input_options: {
+    classname: "my-typeahead-class",
+    data: {
+      typeahead_testing: "data field test"
+    },
+    id: "typeahead-input-id-test",
+  },
+})%>
 <% end %>
