@@ -1,0 +1,42 @@
+<%= pb_rails("button", props: { text: "Small Dialog", data:{dialogs: "#dialog-sm"} }) %>
+<%= pb_rails("button", props: { text: "Medium Dialog", data:{dialogs: "#dialog-md"} }) %>
+<%= pb_rails("button", props: { text: "Large Dialog", data:{dialogs: "#dialog-lg"} }) %>
+
+<%= pb_rails("dialog", props: { id:"dialog-sm", 
+title: "This is a header", 
+text: "I am a small dialog",
+cancel_button: "Cancel",
+confirm_button: "Confirm",
+size: "sm" }) %>
+
+<%= pb_rails("dialog", props: { id:"dialog-md", 
+title: "This is a header", 
+text: "I am a medium dialog",
+cancel_button: "Cancel",
+confirm_button: "Confirm",
+size: "md" }) %>
+
+<%= pb_rails("dialog", props: { id:"dialog-lg", 
+title: "This is a header", 
+text: "I am a large dialog",
+cancel_button: "Cancel",
+confirm_button: "Confirm",
+size: "lg" }) %>
+
+<script type="text/javascript">
+const buttons = document.querySelectorAll("button[data-dialogs]")
+const confirmButtons = document.querySelectorAll("#confirm-button")
+
+buttons.forEach((button) => {
+   button.onclick = ()  => {
+  document.querySelector(button.getAttribute("data-dialogs")).showModal();
+}; 
+})
+
+confirmButtons.forEach((confirm) => {
+confirm.onclick = () => {
+    console.log("clicked")
+}
+})
+
+</script>

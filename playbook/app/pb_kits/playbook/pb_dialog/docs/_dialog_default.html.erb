@@ -1,0 +1,20 @@
+<%= pb_rails("button", props: { text: "Open Dialog", data:{dialog: "#dialog-button"} }) %>
+<%= pb_rails("dialog", props: { id:"dialog-1", 
+title: "This is a header", 
+text: "I am a dialog",
+cancel_button: "Cancel",
+confirm_button: "Confirm",
+size: "sm" }) %>
+
+<script type="text/javascript">
+const button = document.querySelector("button[data-dialog]")
+const confirmButton = document.querySelector("#confirm-button")
+
+button.onclick = ()  => {
+  document.querySelector("#dialog-1").showModal();
+};
+
+confirmButton.onclick = () => {
+    console.log("clicked")
+}
+</script>

@@ -1,6 +1,8 @@
 examples:
 
   rails:
+  - dialog_default: Simple
+  - dialog_sizes: Sizes
 
   react:
   - dialog_default: Simple

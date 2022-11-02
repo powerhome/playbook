@@ -2,45 +2,17 @@
 
 module Playbook
   module PbDialog
-    class Dialog
-      include Playbook::Props
-
-      partial "pb_dialog/dialog"
-
-      prop :ref
-      prop :cancel_button
-      prop :closeable, type: Playbook::Props::Boolean, default: true
-      prop :confirm_button
-      prop :oncancel
-      prop :onchange
-      prop :onclose
-      prop :onconfirm
-      prop :opened, type: Playbook::Props::Boolean, default: false
-      prop :size, type: Playbook::Props::Enum,
-                  values: %w[sm md lg content],
-                  default: "md"
-      prop :text
+    class Dialog < ::Playbook::KitBase
       prop :title
-      prop :trigger
+      prop :text
+      prop :cancel_button
+      prop :confirm_button
+      prop :size, type: Playbook::Props::Enum,
+                  values: %w[sm md lg xl status_size content],
+                  default: "md"
 
-      def dialog_options
-        {
-          id: id,
-          ref: ref,
-          trigger: trigger,
-          className: classname,
-          cancelButton: cancel_button,
-          closeable: closeable,
-          confirmButton: confirm_button,
-          onCancel: oncancel,
-          onChange: onchange,
-          onClose: onclose,
-          onConfirm: onconfirm,
-          opened: opened,
-          size: size,
-          text: text,
-          title: title,
-        }
+      def classname
+        generate_classname("pb_dialog pb_dialog_sm pb_dialog_#{size}")
       end
     end
   end

@@ -68,7 +68,7 @@
 	$opacity_visible: 1;
 	$opacity_hidden: 0;
 
-	@include pb_card;
+	// @include pb_card;
 	background-color: $white;
 	box-shadow: $shadow_deepest;
 	border: 0;
@@ -80,6 +80,7 @@
 	animation-duration: $animation-duration;
 	outline: none;
 	animation-timing-function: $easeInOutQuint;
+	margin: auto;
 	
 	&[class*="_status_size"] {
 		width: $status_size;
@@ -167,4 +168,27 @@
 			} 
 		}
 	}
+
+	.dialog-button-class {
+		background-color: unset;
+		border: none;
+		cursor: pointer;
+	}
+	
+}
+
+.pb_dialog_wrapper_rails {
+dialog::backdrop {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background-color: rgba($bg_dark, $opacity_4);
+	animation-name: overlayFade;
+	animation-duration: 0.2s;	
+}
 }
