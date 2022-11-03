@@ -4,17 +4,6 @@
         data: object.data,
         id: object.id,
         class: object.classname) do %>
-        <%= pb_rails("flex", props: {classname:"dialog_header", spacing:"between", padding:"sm"}) do %>
-                <%= object.title %>
-                <form method="dialog"><button class="dialog-button-class"><%= pb_rails("icon", props:{icon: "times"}) %></button></form>
-        <% end %>
-        <%= pb_rails("section_separator") %>
-        <div class="dialog_body p_sm"><%= object.text %></div>
-                <form method=dialog>
-                        <%= pb_rails("flex", props: {classname: "dialog_footer", spacing:"between", padding_x:"sm", padding:"sm", padding_bottom:"sm"}) do %>
-                            <%= pb_rails("button", props: { type: "submit", id: "confirm-button"}) do %><%= object.confirm_button %><% end %>
-                            <%= pb_rails("button") do %><%= object.cancel_button %><% end %>
-                        <% end %>
-                </form>
+            <%= content %>
     <% end %>
 </div>
