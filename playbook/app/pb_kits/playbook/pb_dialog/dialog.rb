@@ -8,7 +8,7 @@ module Playbook
                   default: "md"
 
       def classname
-        generate_classname("pb_dialog pb_dialog_sm pb_dialog_#{size}")
+        generate_classname("pb_dialog pb_dialog_#{size}")
       end
     end
   end
