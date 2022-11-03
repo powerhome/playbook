@@ -31,7 +31,7 @@
 
 @mixin pb_title_4 {
   @include pb_title($heading_4, $bolder);
-  letter-spacing: -0.03em !important;
+  letter-spacing: -0.03em;
 }
 
 @mixin pb_title_dark {
