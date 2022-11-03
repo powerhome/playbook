@@ -1,0 +1,27 @@
+<% data_1 = [{
+      name: 'Bugs',
+      value: 8,
+
+    },
+    {
+      name: 'Chores',
+      value: 1,
+
+    },
+    {
+      name: 'Stories',
+      value: 12,
+    }
+  ] %>
+
+<%= pb_rails("circle_chart", props: {
+    style: "pie",
+    chart_data: data_1,
+    legend: true,
+    id: "legend-position",
+    align: 'center',
+    vertical_align: 'top',
+    layout: 'vertical',
+    x: 50,
+    y: 50,
+}) %>
