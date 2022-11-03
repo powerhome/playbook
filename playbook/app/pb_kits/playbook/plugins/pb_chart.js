@@ -255,6 +255,11 @@ class pbChart {
       },
       legend: {
         enabled: this.defaults.legend,
+        align: this.defaults.align,
+        verticalAlign: this.defaults.verticalAlign,
+        layout: this.defaults.layout,
+        x: this.defaults.x,
+        y: this.defaults.y,
       },
       colors: options.colors !== undefined && options.colors.length > 0 ? mapColors(options.colors) : highchartsTheme.colors,
       plotOptions: {
