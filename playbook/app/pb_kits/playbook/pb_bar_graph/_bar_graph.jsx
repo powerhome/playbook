@@ -73,7 +73,7 @@ export default class BarGraph extends React.Component<BarGraphProps> {
     } = this.props
 
     new pbChart(`.${className}`, {
-      align: align,
+      align,
       axisTitle: axisTitle,
       dark,
       chartData: chartData,
@@ -86,13 +86,13 @@ export default class BarGraph extends React.Component<BarGraphProps> {
       xAxisCategories: xAxisCategories,
       yAxisMin: yAxisMin,
       yAxisMax: yAxisMax,
-      legend: legend,
+      legend,
       toggleLegendClick: toggleLegendClick,
       height: height,
       layout,
-      verticalAlign: verticalAlign,
-      x: x,
-      y: y,
+      verticalAlign,
+      x,
+      y,
     })
   }
 

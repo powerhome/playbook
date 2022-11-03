@@ -75,7 +75,7 @@ export default class LineGraph extends React.Component<LineGraphProps> {
     } = this.props
 
     new pbChart(`.${className}`, {
-      align: align,
+      align,
       axisTitle: axisTitle,
       chartData: chartData,
       colors: colors,
@@ -92,9 +92,9 @@ export default class LineGraph extends React.Component<LineGraphProps> {
       toggleLegendClick: toggleLegendClick,
       height: height,
       layout,
-      verticalAlign: verticalAlign,
-      x: x,
-      y: y,
+      verticalAlign,
+      x,
+      y,
     })
   }
 

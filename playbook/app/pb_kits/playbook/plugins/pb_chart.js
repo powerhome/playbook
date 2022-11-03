@@ -167,6 +167,14 @@ class pbChart {
         },
       },
 
+      legend: {
+        align: this.defaults.align,
+        verticalAlign: this.defaults.verticalAlign,
+        layout: this.defaults.layout,
+        x: this.defaults.x,
+        y: this.defaults.y,
+      },
+
       plotOptions: {
         pie: {
           colors: options.colors.length > 0 ? mapColors(options.colors) : highchartsTheme.colors,
