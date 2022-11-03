@@ -3,6 +3,9 @@
 module Playbook
   module PbBarGraph
     class BarGraph < Playbook::KitBase
+      prop :align, type: Playbook::Props::Enum,
+                   values: %w[left right center],
+                   default: "center"
       prop :axis_title
       prop :chart_data, type: Playbook::Props::Array,
                         default: []
@@ -23,6 +26,14 @@ module Playbook
       prop :height
       prop :colors, type: Playbook::Props::Array,
                     default: []
+      prop :layout, type: Playbook::Props::Enum,
+                    values: %w[horizontal vertical proximate],
+                    default: "horizontal"
+      prop :vertical_align, type: Playbook::Props::Enum,
+                            values: %w[top middle bottom],
+                            default: "bottom"
+      prop :x, type: Playbook::Props::Numeric
+      prop :y, type: Playbook::Props::Numeric
 
       def chart_type
         orientation == "horizontal" ? "bar" : "column"
@@ -30,6 +41,7 @@ module Playbook
 
       def chart_options
         {
+          align: align,
           id: id,
           className: classname,
           chartData: chart_data,
@@ -46,6 +58,10 @@ module Playbook
           toggleLegendClick: toggle_legend_click,
           height: height,
           colors: colors,
+          layout: layout,
+          verticalAlign: vertical_align,
+          x: x,
+          y: y,
         }
       end
 

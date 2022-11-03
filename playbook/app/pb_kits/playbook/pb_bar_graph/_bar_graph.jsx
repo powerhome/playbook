@@ -7,6 +7,7 @@ import { globalProps } from '../utilities/globalProps'
 import pbChart from '../plugins/pb_chart'
 
 type BarGraphProps = {
+  align?: "left" | "right" | "center",
   axisTitle: string,
   dark?: Boolean,
   xAxisCategories: array,
@@ -26,19 +27,29 @@ type BarGraphProps = {
   toggleLegendClick?: boolean,
   height?: string,
   colors: array,
+  layout?: "horizontal" | "vertical" | "proximate",
+  verticalAlign?: "top" | "middle" | "bottom",
+  x?: number,
+  y?: number,
 }
 
 export default class BarGraph extends React.Component<BarGraphProps> {
   static defaultProps = {
+    align: "center",
     className: 'pb_bar_graph',
     dark: false,
     type: 'column',
     legend: false,
     toggleLegendClick: true,
+    layout: "horizontal",
+    verticalAlign: "bottom",
+    x: 0,
+    y: 0,
   }
 
   componentDidMount() {
     const {
+      align,
       axisTitle,
       dark,
       xAxisCategories,
@@ -55,9 +66,14 @@ export default class BarGraph extends React.Component<BarGraphProps> {
       height,
       toggleLegendClick,
       colors  = [],
+      layout,
+      verticalAlign,
+      x,
+      y,
     } = this.props
 
     new pbChart(`.${className}`, {
+      align: align,
       axisTitle: axisTitle,
       dark,
       chartData: chartData,
@@ -73,6 +89,10 @@ export default class BarGraph extends React.Component<BarGraphProps> {
       legend: legend,
       toggleLegendClick: toggleLegendClick,
       height: height,
+      layout,
+      verticalAlign: verticalAlign,
+      x: x,
+      y: y,
     })
   }
 
