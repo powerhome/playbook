@@ -1,5 +1,5 @@
 import React from 'react'
-import { LineGraph } from '../..'
+import { LineGraph, Title } from '../..'
 
 const data = [{
   name: 'Installation',
@@ -20,18 +20,60 @@ const data = [{
 
 const LineGraphLegendPosition = (props) => (
   <div>
+    <Title
+        paddingBottom="sm"
+        paddingTop="sm"
+        size={4}
+        tag="h4"
+        text="align | verticalAlign"
+    />
     <LineGraph
-        align='left'
+        align='right'
         axisTitle="Number of Employees"
         chartData={data}
         id="legend-position"
+        legend
+        title="Horizontal and Vertical Alignment of Legend"
+        verticalAlign="top"
+        xAxisCategories={['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug']}
+        yAxisMin={0}
+        {...props}
+    />
+    <Title
+        paddingBottom="sm"
+        paddingTop="sm"
+        size={4}
+        tag="h4"
+        text="layout"
+    />
+    <LineGraph
+        axisTitle="Number of Employees"
+        chartData={data}
+        id="legend-position-1"
         layout="vertical"
         legend
-        title="Line Graph with Legend"
-        verticalAlign="top"
-        x={10}
+        title="Layout of Legend Items"
         xAxisCategories={['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug']}
-        y={100}
+        yAxisMin={0}
+        {...props}
+    />
+    <Title
+        paddingBottom="sm"
+        paddingTop="sm"
+        size={4}
+        tag="h4"
+        text="x | y"
+    />
+    <LineGraph
+        axisTitle="Number of Employees"
+        chartData={data}
+        id="legend-position-2"
+        layout="vertical"
+        legend
+        title="X and Y Offset of Legend"
+        x={100}
+        xAxisCategories={['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug']}
+        y={10}
         yAxisMin={0}
         {...props}
     />

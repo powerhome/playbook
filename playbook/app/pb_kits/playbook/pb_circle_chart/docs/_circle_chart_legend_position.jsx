@@ -88,7 +88,7 @@ const CircleChartLegendPosition = (props) => (
         legend
         paddingBottom="sm"
         paddingTop="sm"
-        title="Bar Graph with Legend"
+        title="Layout of Legend Items"
         {...props}
     />
     <Title

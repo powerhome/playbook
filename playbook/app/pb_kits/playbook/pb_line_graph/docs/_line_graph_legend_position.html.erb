@@ -15,17 +15,48 @@
     data: [12908, 5948, 8105, 11248, 8989, 11816, 18274, 18111]
 }] %>
 
+<%= pb_rails("title", props: {size: 4, text: "align | vertical_align", padding_top: "sm", padding_bottom: "sm"})%>
+
 <%= pb_rails("line_graph", props: {
     id: "legend-position",
     gradient: false,
     chart_data: data,
     x_axis_categories:['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug'],
-    title: 'Line Graph with Legend',
+    title: 'Horizontal and Vertical Alignment of Legend',
     axis_title: 'Number of Employees',
     legend: true,
-    align: 'left',
+    align: 'right',
     vertical_align: 'top',
+    padding_bottom: "sm",
+}) %>
+
+<%= pb_rails("title", props: {size: 4, text: "layout", padding_top: "sm", padding_bottom: "sm"})%>
+
+<%= pb_rails("line_graph", props: {
+    id: "legend-position-1",
+    gradient: false,
+    chart_data: data,
+    x_axis_categories:['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug'],
+    title: 'Layout of Legend Items',
+    axis_title: 'Number of Employees',
+    legend: true,
     layout: 'vertical',
-    x: 10,
-    y: 100,
+    padding_top: "sm",
+    padding_bottom: "sm",
+}) %>
+
+<%= pb_rails("title", props: {size: 4, text: "x | y", padding_top: "sm", padding_bottom: "sm"})%>
+
+<%= pb_rails("line_graph", props: {
+    id: "legend-position-2",
+    gradient: false,
+    chart_data: data,
+    x_axis_categories:['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug'],
+    title: 'X and Y Offset of Legend',
+    axis_title: 'Number of Employees',
+    legend: true,
+    layout: "vertical",
+    x: 100,
+    y: 10,
+    padding_top: "sm",
 }) %>

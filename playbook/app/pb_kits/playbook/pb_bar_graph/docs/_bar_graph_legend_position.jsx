@@ -55,7 +55,7 @@ const BarGraphLegendPosition = (props) => (
         legend
         paddingBottom="sm"
         paddingTop="sm"
-        title="Bar Graph with Legend"
+        title="Layout of Legend Items"
         xAxisCategories={['Jan']}
         yAxisMin={0}
         {...props}
