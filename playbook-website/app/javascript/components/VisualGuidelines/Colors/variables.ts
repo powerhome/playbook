@@ -22,7 +22,15 @@ export const TEXT_COLORS = [
   {name: "Warning", variable: "warning"},
   {name: "Error", variable: "error"},
   {name: "Info", variable: "info"},
-  {name: "Neutral", variable: "neutral"}
+  {name: "Neutral", variable: "neutral"},
+ ]
+
+ export const STATUS_SUBTLE = [
+  {name: "Success Subtle", variable: "success_subtle"},
+  {name: "Warning Subtle", variable: "warning_subtle"},
+  {name: "Error Subtle", variable: "error_subtle"},
+  {name: "Info Subtle", variable: "info_subtle"},
+  {name: "Neutral Subtle", variable: "neutral_subtle"}
  ]
 
  export const DATA = [

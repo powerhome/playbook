@@ -19,7 +19,7 @@ $selector: ".pb_nav_list";
   }
 
   [class*=pb_nav_list_title] {
-    padding: 0 $space_md $space_sm;
+    padding: 0 $space_md $space_sm $space_sm;
   }
 
   // Normal Variant

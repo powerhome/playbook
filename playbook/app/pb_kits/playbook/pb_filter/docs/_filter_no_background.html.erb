@@ -1,7 +1,8 @@
 <%=
   pb_rails("filter", props: {
-    min_width: "375px",
+    min_width: "360px",
     id: "3",
+    margin_bottom: "xl",
     background: false,
     filters: [
       { name: "name", value: "John Wick" },
@@ -22,7 +23,7 @@
       OpenStruct.new(name: "Canada", value: 2),
       OpenStruct.new(name: "Brazil", value: 3),
       OpenStruct.new(name: "Philippines", value: 4),
-      OpenStruct.new(name: "A galaxy far far away, like really far away...", value: 5)
+      OpenStruct.new(name: "A galaxy far far away...", value: 5)
     ]
   %>
 
@@ -37,11 +38,9 @@
   <% end %>
 <% end %>
 
-<br>
-
 <%=
   pb_rails("filter", props: {
-    min_width: "375px",
+    min_width: "360px",
     id: "4",
     background: false,
     filters: [
@@ -62,7 +61,7 @@
       OpenStruct.new(name: "Canada", value: 2),
       OpenStruct.new(name: "Brazil", value: 3),
       OpenStruct.new(name: "Philippines", value: 4),
-      OpenStruct.new(name: "A galaxy far far away, like really far away...", value: 5)
+      OpenStruct.new(name: "A galaxy far far away...", value: 5)
     ]
   %>
   <%= pb_rails("form", props: { form_system_options: { scope: :example, method: :get } }) do |form| %>

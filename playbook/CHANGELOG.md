@@ -1,4 +1,73 @@
 
+
+## [11.11.0](https://github.com/powerhome/playbook/tree/11.11.0) (2022-10-28)
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/11.10.0...11.11.0)
+
+**Kit Enhancements:**
+
+- Add Subtitle Prop to User Kit [\#2159](https://github.com/powerhome/playbook/pull/2159) ([stephenmckeon](https://github.com/stephenmckeon))
+
+**Improvements:**
+
+- Update dependency @types/react to v17.0.51 [\#2158](https://github.com/powerhome/playbook/pull/2158) ([renovate[bot]](https://github.com/apps/renovate))
+
+
+
+## [11.10.0](https://github.com/powerhome/playbook/tree/11.10.0) (2022-10-25)
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/11.9.0...11.10.0)
+
+**Kit Enhancements:**
+
+- Tokens for subtle Status and Background Kit colors [\#2151](https://github.com/powerhome/playbook/pull/2151) ([Israel-Molestina](https://github.com/Israel-Molestina))
+- Legend Kit to Take Custom Colors [\#2150](https://github.com/powerhome/playbook/pull/2150) ([nidaqg](https://github.com/nidaqg))
+
+**Fixed Bugs:**
+
+- Collapsible kit missing hover for button icon [\#2140](https://github.com/powerhome/playbook/pull/2140) ([jasperfurniss](https://github.com/jasperfurniss))
+- Fixed Form Group Kit Highlight Missing Border [\#2139](https://github.com/powerhome/playbook/pull/2139) ([nidaqg](https://github.com/nidaqg))
+- Filter kit doc cleanup [\#2138](https://github.com/powerhome/playbook/pull/2138) ([Israel-Molestina](https://github.com/Israel-Molestina))
+- Collapsible kit icon size and color [\#2137](https://github.com/powerhome/playbook/pull/2137) ([Israel-Molestina](https://github.com/Israel-Molestina))
+-Filter Kit Doc Spacing [\#2136](https://github.com/powerhome/playbook/pull/2136) ([nidaqg](https://github.com/nidaqg))
+- Filter Doc Popover Close On Click [\#2134](https://github.com/powerhome/playbook/pull/2134) ([nidaqg](https://github.com/nidaqg))
+- Typeahead kit doesn’t align to Playbook color rules for forms [\#2133](https://github.com/powerhome/playbook/pull/2133) ([augustomallmann](https://github.com/augustomallmann))
+- Fixes For Broken Kit Generator [\#2132](https://github.com/powerhome/playbook/pull/2132) ([nidaqg](https://github.com/nidaqg))
+- Fixed Selectable Card Kit Border Issue on Error [\#2130](https://github.com/powerhome/playbook/pull/2130) ([nidaqg](https://github.com/nidaqg))
+- Selectable List Radios have extra padding [\#2124](https://github.com/powerhome/playbook/pull/2124) ([Israel-Molestina](https://github.com/Israel-Molestina))
+
+**Improvements:**
+
+- Upgrade ci-kubed to 5.8.1 [\#2149](https://github.com/powerhome/playbook/pull/2149) ([TeamTeaTime](https://github.com/TeamTeaTime))
+- Bump nokogiri from 1.13.7 to 1.13.9 in /playbook-website [\#2147](https://github.com/powerhome/playbook/pull/2147) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump nokogiri from 1.13.7 to 1.13.9 in /playbook [\#2146](https://github.com/powerhome/playbook/pull/2146) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump nokogiri from 1.13.8 to 1.13.9 in /examples/playbook-rails [\#2145](https://github.com/powerhome/playbook/pull/2145) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump nokogiri from 1.13.8 to 1.13.9 in /examples/playbook-rails-webpack [\#2144](https://github.com/powerhome/playbook/pull/2144) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump nokogiri from 1.13.8 to 1.13.9 in /examples/rails-react-example [\#2143](https://github.com/powerhome/playbook/pull/2143) ([dependabot[bot]](https://github.com/apps/dependabot))
+
+
+
+## [11.9.0](https://github.com/powerhome/playbook/tree/11.9.0) (2022-10-19)
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/11.8.1...11.9.0)
+
+**Fixed Bugs:**
+
+- Fixed Issue Where Typeahead Kit Was Returning Null Classes [\#2135](https://github.com/powerhome/playbook/pull/2135) ([nidaqg](https://github.com/nidaqg))
+- Home Address Kit Spacing Bug Fix [\#2128](https://github.com/powerhome/playbook/pull/2128) ([nidaqg](https://github.com/nidaqg))
+- Checkbox kit checkbox is not red when error state is selected [\#2125](https://github.com/powerhome/playbook/pull/2125) ([Israel-Molestina](https://github.com/Israel-Molestina))
+- Nav Title Spacing Fix [\#2123](https://github.com/powerhome/playbook/pull/2123) ([nidaqg](https://github.com/nidaqg))
+- Timeline Kit Errors Fix [\#2122](https://github.com/powerhome/playbook/pull/2122) ([nidaqg](https://github.com/nidaqg))
+- Rich Text Editor bullet pointing styling misaligned [\#2121](https://github.com/powerhome/playbook/pull/2121) ([augustomallmann](https://github.com/augustomallmann))
+- Table Kit \(React\) doesn’t have responsive js code [\#2120](https://github.com/powerhome/playbook/pull/2120) ([Israel-Molestina](https://github.com/Israel-Molestina))
+- Filter Kit Style Bleed Fix [\#2117](https://github.com/powerhome/playbook/pull/2117) ([nidaqg](https://github.com/nidaqg))
+- Fixed Hover State on Selectable List Rails Kit [\#2116](https://github.com/powerhome/playbook/pull/2116) ([nidaqg](https://github.com/nidaqg))
+
+**Improvements:**
+
+- Update dependency flow-bin to v0.190.0 [\#2131](https://github.com/powerhome/playbook/pull/2131) ([renovate[bot]](https://github.com/apps/renovate))
+
+
 ## [11.8.1](https://github.com/powerhome/playbook/tree/11.8.1) (2022-10-13)
 
 [Full Changelog](https://github.com/powerhome/playbook/compare/11.8.0...11.8.1)
@@ -2825,6 +2894,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 \* *This Changelog was automatically generated by [github_changelog_generator](https://github.com/github-changelog-generator/github-changelog-generator)*
 
+
+
+\* *This Changelog was automatically generated by [github_changelog_generator](https://github.com/github-changelog-generator/github-changelog-generator)*
+
+
+\* *This Changelog was automatically generated by [github_changelog_generator](https://github.com/github-changelog-generator/github-changelog-generator)*
+
+
+\* *This Changelog was automatically generated by [github_changelog_generator](https://github.com/github-changelog-generator/github-changelog-generator)*
 
 
 \* *This Changelog was automatically generated by [github_changelog_generator](https://github.com/github-changelog-generator/github-changelog-generator)*
