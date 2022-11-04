@@ -1,39 +1,33 @@
 import React, { useState } from 'react'
 
-import {Body, Passphrase} from '../..'
+import Passphrase from '../_passphrase'
 
 const PassphraseConfirmation = (props) => {
   const [input, setInput] = useState('')
   const [confirmationInput, setConfirmationInput] = useState('')
   
-  const handleChange = (e) => setInput(e.target.value)
-  const handleConfirmationChange = (e) => setConfirmationInput(e.target.value)    
-  
+
+  const handleChange = (e) => {
+    console.log(e.target.id);
+    e.target.id !== "confirmation"
+      ? setInput(e.target.value)
+      : setConfirmationInput(e.target.value);
+  }
+
   return (
     <>
       <div>
         <Passphrase
             confirmation
+            confirmationValue={confirmationInput}
             onChange={handleChange}
             value={input}
             {...props}
+            id="my-passphrase"
         />
-        <Passphrase
-            onChange={handleConfirmationChange}
-            value={confirmationInput}
-            {...props}
-        />
-        {input && confirmationInput && (
-          <Body
-              text={
-                input === confirmationInput ? "They match!" : "They don't match!"
-              }
-              {...props}
-          />
-        )}
       </div>
     </>
-  );
+  )
 }
 
 export default PassphraseConfirmation
