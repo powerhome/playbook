@@ -18,9 +18,6 @@ import {
 
 type PassphraseProps = {
   aria?: object,
-  averageThreshold?: number,
-  checkPwned?: boolean,
-  common?: boolean,
   confirmation?: boolean,
   className?: string,
   data?: object,
@@ -28,11 +25,8 @@ type PassphraseProps = {
   id?: string,
   inputProps?: {},
   label?: string,
-  minLength?: number,
   onChange: (String) => void,
   showTipsBelow?: "always" | "xs" | "sm" | "md" | "lg" | "xl",
-  onStrengthChange?: (number) => void,
-  strongThreshold?: number,
   tips?: Array<string>,
   uncontrolled?: boolean,
   value: string,
