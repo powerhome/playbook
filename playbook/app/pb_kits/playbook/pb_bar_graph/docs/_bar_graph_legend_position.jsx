@@ -34,7 +34,7 @@ const BarGraphLegendPosition = (props) => (
         id="legend-position"
         legend
         paddingBottom="sm"
-        title="Horizontal and Vertical Alignment of Legend"
+        title="Alignment of Legend"
         verticalAlign="top"
         xAxisCategories={['Jan']}
         yAxisMin={0}
@@ -55,7 +55,7 @@ const BarGraphLegendPosition = (props) => (
         legend
         paddingBottom="sm"
         paddingTop="sm"
-        title="Layout of Legend Items"
+        title="Layout of Legend"
         xAxisCategories={['Jan']}
         yAxisMin={0}
         {...props}
@@ -73,7 +73,7 @@ const BarGraphLegendPosition = (props) => (
         id="legend-position-2"
         layout="vertical"
         legend
-        title="X and Y Offset of Legend"
+        title="Offset of Legend"
         x={100}
         xAxisCategories={['Jan']}
         y={10}
