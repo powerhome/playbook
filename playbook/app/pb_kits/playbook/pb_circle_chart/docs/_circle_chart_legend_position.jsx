@@ -70,7 +70,7 @@ const CircleChartLegendPosition = (props) => (
         id="legend-position"
         legend
         paddingBottom="sm"
-        title="Horizontal and Vertical Alignment of Legend"
+        title="Alignment of Legend"
         verticalAlign="top"
         {...props}
     />
@@ -88,7 +88,7 @@ const CircleChartLegendPosition = (props) => (
         legend
         paddingBottom="sm"
         paddingTop="sm"
-        title="Layout of Legend Items"
+        title="Layout of Legend"
         {...props}
     />
     <Title
@@ -103,7 +103,7 @@ const CircleChartLegendPosition = (props) => (
         id="legend-position-2"
         layout="vertical"
         legend
-        title="X and Y Offset of Legend"
+        title="Offset of Legend"
         x={100}
         y={10}
         {...props}
