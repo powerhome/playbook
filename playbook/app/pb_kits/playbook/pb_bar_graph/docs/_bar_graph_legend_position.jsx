@@ -51,7 +51,7 @@ const BarGraphLegendPosition = (props) => (
         axisTitle="Number of Employees"
         chartData={chartData}
         id="legend-position-1"
-        layout="Layout of Legend"
+        layout="vertical"
         legend
         paddingBottom="sm"
         paddingTop="sm"
