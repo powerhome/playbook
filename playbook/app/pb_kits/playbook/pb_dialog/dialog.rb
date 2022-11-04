@@ -2,7 +2,7 @@
 
 module Playbook
   module PbDialog
-    class Dialog < ::Playbook::KitBase
+    class Dialog < Playbook::KitBase
       prop :size, type: Playbook::Props::Enum,
                   values: %w[sm md lg xl status_size content],
                   default: "md"
