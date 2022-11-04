@@ -33,7 +33,7 @@ const LineGraphLegendPosition = (props) => (
         chartData={data}
         id="legend-position"
         legend
-        title="Horizontal and Vertical Alignment of Legend"
+        title="Alignment of Legend"
         verticalAlign="top"
         xAxisCategories={['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug']}
         yAxisMin={0}
@@ -52,7 +52,7 @@ const LineGraphLegendPosition = (props) => (
         id="legend-position-1"
         layout="vertical"
         legend
-        title="Layout of Legend Items"
+        title="Layout of Legend"
         xAxisCategories={['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug']}
         yAxisMin={0}
         {...props}
@@ -70,7 +70,7 @@ const LineGraphLegendPosition = (props) => (
         id="legend-position-2"
         layout="vertical"
         legend
-        title="X and Y Offset of Legend"
+        title="Offset of Legend"
         x={100}
         xAxisCategories={['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug']}
         y={10}

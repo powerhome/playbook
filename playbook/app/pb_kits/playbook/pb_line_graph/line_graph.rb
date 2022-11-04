@@ -47,7 +47,7 @@ module Playbook
           dark: dark ? "dark" : "",
           type: chart_type,
           title: title,
-          subtitle: subtitle,
+          subTitle: subtitle,
           axisTitle: axis_title,
           pointStart: point_start,
           xAxisCategories: x_axis_categories,

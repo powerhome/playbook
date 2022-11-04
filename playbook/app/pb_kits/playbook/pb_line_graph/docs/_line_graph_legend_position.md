@@ -1,10 +1,10 @@
 ##### Prop
 
-`align` **Type**: String | **Values**: left | center | right | **Default**: center
-`verticalAlign` **Type**: String | **Values**: top | middle | bottom | **Default**: middle
-`layout` **Type**: String | **Values**: horizontal | vertical | proximate | **Default**: horizontal
-`x` **Type**: Number | **Default**: 0
-`y` **Type**: Number | **Default**: 0
+`align` **Type**: String | **Values**: left | center | right (defaults to center)
+`verticalAlign` **Type**: String | **Values**: top | middle | bottom (defaults middle)
+`layout` **Type**: String | **Values**: horizontal | vertical | proximate (defaults to horizontal)
+`x` **Type**: Number (defaults to 0)
+`y` **Type**: Number (defaults to 0)
 
 - 
 
