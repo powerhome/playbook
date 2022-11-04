@@ -1,37 +1,82 @@
 import React from 'react'
-import { BarGraph } from '../..'
+import { BarGraph, Title } from '../..'
 
 const chartData = [{
   name: 'Installation',
-  data: [1475, 200, 3000, 654, 656],
+  data: [1475],
 }, {
   name: 'Manufacturing',
-  data: [4434, 524, 2320, 440, 500],
+  data: [4434],
 }, {
   name: 'Sales & Distribution',
-  data: [3387, 743, 1344, 434, 440],
+  data: [3387],
 }, {
   name: 'Project Development',
-  data: [3227, 878, 999, 780, 1000],
+  data: [3227],
 }, {
   name: 'Other',
-  data: [1111, 677, 3245, 500, 200],
+  data: [1111],
 }]
 
 const BarGraphLegendPosition = (props) => (
   <div>
+    <Title
+        paddingBottom="sm"
+        paddingTop="sm"
+        size={4}
+        tag="h4"
+        text="align | verticalAlign"
+    />
     <BarGraph
-        align='left'
+        align='right'
         axisTitle="Number of Employees"
         chartData={chartData}
         id="legend-position"
+        legend
+        paddingBottom="sm"
+        title="Horizontal and Vertical Alignment of Legend"
+        verticalAlign="top"
+        xAxisCategories={['Jan']}
+        yAxisMin={0}
+        {...props}
+    />
+    <Title
+        paddingBottom="sm"
+        paddingTop="sm"
+        size={4}
+        tag="h4"
+        text="layout"
+    />
+    <BarGraph
+        axisTitle="Number of Employees"
+        chartData={chartData}
+        id="legend-position-1"
+        layout="Layout of Legend"
+        legend
+        paddingBottom="sm"
+        paddingTop="sm"
+        title="Bar Graph with Legend"
+        xAxisCategories={['Jan']}
+        yAxisMin={0}
+        {...props}
+    />
+    <Title
+        paddingBottom="sm"
+        paddingTop="sm"
+        size={4}
+        tag="h4"
+        text="x | y"
+    />
+    <BarGraph
+        axisTitle="Number of Employees"
+        chartData={chartData}
+        id="legend-position-2"
         layout="vertical"
         legend
-        title="Bar Graph with Legend"
-        verticalAlign="middle"
-        x={10}
-        xAxisCategories={['Jan', 'Feb', 'Mar', 'Apr', 'May']}
-        y={50}
+        title="X and Y Offset of Legend"
+        x={100}
+        xAxisCategories={['Jan']}
+        y={10}
         yAxisMin={0}
         {...props}
     />
