@@ -6,15 +6,13 @@ import classnames from "classnames"
 import { buildAriaProps, buildCss, buildDataProps } from "../utilities/props"
 import { globalProps } from "../utilities/globalProps"
 
-import {
-  Body,
-  Caption,
-  CircleIconButton,
-  Flex,
-  Icon,
-  PbReactPopover,
-  TextInput,
-} from ".."
+import Body from '../pb_body/_body'
+import Caption from '../pb_caption/_caption'
+import CircleIconButton from '../pb_circle_icon_button/_circle_icon_button'
+import Flex from '../pb_flex/_flex'
+import Icon from '../pb_icon/_icon'
+import PbReactPopover from '../pb_popover/_popover'
+import TextInput from '../pb_text_input/_text_input'
 
 type PassphraseProps = {
   aria?: object,
