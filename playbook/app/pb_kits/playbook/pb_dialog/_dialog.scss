@@ -179,11 +179,6 @@
 }
 
 .pb_dialog_wrapper_rails {
-	.pb_dialog {
-		button > * {
-			pointer-events: none;
-		}
-    }
 	dialog::backdrop {
 		position: fixed;
 		top: 0;
