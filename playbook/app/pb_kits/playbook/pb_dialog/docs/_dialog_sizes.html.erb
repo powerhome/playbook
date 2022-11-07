@@ -1,45 +1,29 @@
-<%= pb_rails("button", props: { text: "Small Dialog", data:{dialogs: "#dialog-sm"} }) %>
-<%= pb_rails("button", props: { text: "Medium Dialog", data:{dialogs: "#dialog-md"} }) %>
-<%= pb_rails("button", props: { text: "Large Dialog", data:{dialogs: "#dialog-lg"} }) %>
+<%= pb_rails("button", props: { text: "Small Dialog", data:{"open-dialog": "dialog-sm"} }) %>
+<%= pb_rails("button", props: { text: "Medium Dialog", data:{"open-dialog": "dialog-md"} }) %>
+<%= pb_rails("button", props: { text: "Large Dialog", data:{"open-dialog": "dialog-lg"} }) %>
 
-<%= pb_rails("dialog", props: { id:"dialog-sm", size: "sm" }) do %>
-  <%= pb_rails("dialog/dialog_header", props: {title: "This is a header"}) %>
-  <%= pb_rails("dialog/dialog_body", props: { text: "I am a small dialog"}) %>
-  <%= pb_rails("dialog/dialog_footer", props: {cancel_button: "Cancel", confirm_button: "Confirm", confirm_button_id:"confirm-sm"}) %>
-<% end %>
-
-<%= pb_rails("dialog", props: { id:"dialog-md", size: "md" }) do %>
-  <%= pb_rails("dialog/dialog_header", props: {title: "This is a header"}) %>
-  <%= pb_rails("dialog/dialog_body", props: { text: "I am a medium dialog"}) %>
-  <%= pb_rails("dialog/dialog_footer", props: {cancel_button: "Cancel", confirm_button: "Confirm", confirm_button_id:"confirm-md"}) %>
-<% end %>
-
-<%= pb_rails("dialog", props: { id:"dialog-lg", size: "lg" }) do %>
-  <%= pb_rails("dialog/dialog_header", props: {title: "This is a header"}) %>
-  <%= pb_rails("dialog/dialog_body", props: { text: "I am a large dialog"}) %>
-  <%= pb_rails("dialog/dialog_footer", props: {cancel_button: "Cancel", confirm_button: "Confirm", confirm_button_id:"confirm-lg"}) %>
-<% end %>
+<%= pb_rails("dialog", props: { 
+    id:"dialog-sm", 
+    size: "sm", 
+    title: "This is a header",
+    text: "I am a small dialog",
+    cancel_button: "Cancel", 
+    confirm_button: "Confirm", 
+   }) %>
 
 
-<script type="text/javascript">
-const buttons = document.querySelectorAll("button[data-dialogs]")
-
-const confirmSm = document.querySelector("#confirm-sm")
-const confirmMd = document.querySelector("#confirm-md")
-const confirmLg = document.querySelector("#confirm-lg")
-
-const confirmButtons = [confirmSm, confirmMd, confirmLg]
-
-
-buttons.forEach((button) => {
-   button.onclick = ()  => {
-     document.querySelector(button.getAttribute("data-dialogs")).showModal();
-   }; 
-})
-
-confirmButtons.forEach((btn) => {
-  btn.onclick = () => {
-    console.log( btn.id, "clicked")
-  }
-})
-</script>
+<%= pb_rails("dialog", props: { 
+    id:"dialog-md", 
+    size: "md",
+    title: "This is a header",
+    text: "I am a medium dialog",
+    cancel_button: "Cancel", confirm_button: "Confirm", 
+     })  %>
+     
+<%= pb_rails("dialog", props: { 
+    id:"dialog-lg", size: "lg",
+    title: "This is a header",
+    text: "I am a large dialog",
+    cancel_button: "Cancel", 
+    confirm_button: "Confirm"
+     }) %>

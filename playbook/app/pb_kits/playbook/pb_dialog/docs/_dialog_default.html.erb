@@ -3,24 +3,9 @@
 <%= pb_rails("dialog", props: { 
     id:"dialog-1", 
     size: "sm", 
-    title: "Test", 
-    text: "Default Test", 
+    title: "This is a header", 
+    text: "This is a dialog.", 
     cancel_button: "Cancel", 
     confirm_button: "Confirm", 
     confirm_button_id: "confirm-button-1"
 }) %>
-
-<script type="text/javascript">
-
-document.addEventListener("DOMContentLoaded", function() {
-  const openTrigger = document.querySelector('[data-open-dialog]');
-  const closeTrigger = document.querySelector('[data-close-dialog]');
-  openTrigger.addEventListener("click", (event) => {
-      document.getElementById(event.target.dataset.openDialog).showModal()
-  });
-  closeTrigger.addEventListener("click", (event) => {
-      document.getElementById(event.target.dataset.closeDialog).close()
-  });
-});
-
-</script>

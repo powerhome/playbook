@@ -173,22 +173,28 @@
 		background-color: unset;
 		border: none;
 		cursor: pointer;
+		color: black;
 	}
 	
 }
 
 .pb_dialog_wrapper_rails {
-dialog::backdrop {
-	position: fixed;
-	top: 0;
-	left: 0;
-	right: 0;
-	bottom: 0;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	background-color: rgba($bg_dark, $opacity_4);
-	animation-name: overlayFade;
-	animation-duration: 0.2s;	
-}
+	.pb_dialog {
+		button > * {
+			pointer-events: none;
+		}
+    }
+	dialog::backdrop {
+		position: fixed;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		background-color: rgba($bg_dark, $opacity_4);
+		animation-name: overlayFade;
+		animation-duration: 0.2s;	
+	}
 }
