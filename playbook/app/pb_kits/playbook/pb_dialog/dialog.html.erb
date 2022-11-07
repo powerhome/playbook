@@ -4,6 +4,19 @@
         data: object.data,
         id: object.id,
         class: object.classname) do %>
+            <% if object.title %>
+                <%= pb_rails("dialog/dialog_header", props: {title: object.title }) %>
+            <% end %>
+            <% if object.text %>
+                <%= pb_rails("dialog/dialog_body", props: { text: object.text }) %>
+            <% end %>
+            <% if object.cancel_button && object.confirm_button %>
+                <%= pb_rails("dialog/dialog_footer", props: {
+                    cancel_button: "Cancel", 
+                    confirm_button: "Confirm",
+                    id: object.id
+                }) %>
+            <% end %>
             <%= content %>
     <% end %>
 </div>

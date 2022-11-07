@@ -2,10 +2,12 @@
     id: object.id,
     data: object.data,
     aria: object.aria) do %>
-        <form method=dialog>
-            <%= pb_rails("flex", props: {classname:object.classname, spacing:"between", padding_x:"sm", padding:"sm", padding_bottom:"sm"}) do %>
-                <%= pb_rails("button", props: { type: "submit", id: object.confirm_button_id}) do %><%= object.confirm_button %><% end %>
-                <%= pb_rails("button", props: {id:object.cancel_button_id}) do %><%= object.cancel_button %><% end %>
-            <% end %>
-        </form>
+    <%= pb_rails("flex", props: { classname:object.classname, spacing:"between", padding_x:"sm", padding:"sm", padding_bottom:"sm" }) do %>
+        <%= pb_rails("button", props: { type: "submit", id: object.confirm_button_id }) do %>
+            <%= object.confirm_button %>
+        <% end %>
+        <%= pb_rails("button", props: { data: {"close-dialog": "#{object.id}" }}) do %>
+            <%= object.cancel_button %>
+        <% end %>
+    <% end %>
 <% end %>

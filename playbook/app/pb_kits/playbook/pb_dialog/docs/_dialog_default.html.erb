@@ -1,20 +1,26 @@
-<%= pb_rails("button", props: { text: "Open Dialog", data:{dialog: "#dialog-button"} }) %>
+<%= pb_rails("button", props: { text: "Open Dialog", data: {"open-dialog": "dialog-1"} }) %>
 
-<%= pb_rails("dialog", props: { id:"dialog-1", size: "sm" }) do %>
-  <%= pb_rails("dialog/dialog_header", props: {title: "This is a header"}) %>
-  <%= pb_rails("dialog/dialog_body", props: { text: "I am a dialog"}) %>
-  <%= pb_rails("dialog/dialog_footer", props: {cancel_button: "Cancel", confirm_button: "Confirm", confirm_button_id:"confirm-1"}) %>
-<% end %>
+<%= pb_rails("dialog", props: { 
+    id:"dialog-1", 
+    size: "sm", 
+    title: "Test", 
+    text: "Default Test", 
+    cancel_button: "Cancel", 
+    confirm_button: "Confirm", 
+    confirm_button_id: "confirm-button-1"
+}) %>
 
 <script type="text/javascript">
-const button = document.querySelector("button[data-dialog]")
-const confirmButton = document.querySelector("#confirm-1")
 
-button.onclick = ()  => {
-  document.querySelector("#dialog-1").showModal();
-};
+document.addEventListener("DOMContentLoaded", function() {
+  const openTrigger = document.querySelector('[data-open-dialog]');
+  const closeTrigger = document.querySelector('[data-close-dialog]');
+  openTrigger.addEventListener("click", (event) => {
+      document.getElementById(event.target.dataset.openDialog).showModal()
+  });
+  closeTrigger.addEventListener("click", (event) => {
+      document.getElementById(event.target.dataset.closeDialog).close()
+  });
+});
 
-confirmButton.onclick = () => {
-    console.log("clicked")
-}
 </script>

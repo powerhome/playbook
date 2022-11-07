@@ -11,9 +11,9 @@ const DialogDefault = () => {
     <>
       <Button onClick={open}>{'Open Dialog'}</Button>
       <Dialog
-          cancelButton="Cancel Button"
+          // cancelButton="Cancel Button"
           className="wrapper"
-          confirmButton="Okay"
+          // confirmButton="Okay"
           loading={isLoading}
           onCancel={close}
           onClose={close}
@@ -23,7 +23,11 @@ const DialogDefault = () => {
           size="sm"
           text="Hello Body Text, Nice to meet ya."
           title="Header Title is the Title Prop"
-      />
+      >
+        <Dialog.Footer>
+asdflkasdf
+        </Dialog.Footer>
+      </Dialog>
     </>
   )
 }

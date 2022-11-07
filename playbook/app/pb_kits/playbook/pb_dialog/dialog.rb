@@ -6,6 +6,10 @@ module Playbook
       prop :size, type: Playbook::Props::Enum,
                   values: %w[sm md lg xl status_size content],
                   default: "md"
+      prop :title
+      prop :text
+      prop :confirm_button
+      prop :cancel_button
 
       def classname
         generate_classname("pb_dialog pb_dialog_#{size}")
