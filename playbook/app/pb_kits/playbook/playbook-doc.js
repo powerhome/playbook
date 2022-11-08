@@ -60,6 +60,7 @@ import * as MultipleUsers from 'pb_multiple_users/docs'
 import * as MultipleUsersStacked from 'pb_multiple_users_stacked/docs'
 import * as Nav from 'pb_nav/docs'
 import * as OnlineStatus from 'pb_online_status/docs'
+import * as Pagination from 'pb_pagination/docs'
 import * as Passphrase from 'pb_passphrase/docs'
 import * as PbReactPopover from 'pb_popover/docs'
 import * as Person from 'pb_person/docs'
@@ -157,6 +158,7 @@ WebpackerReact.setup({
   ...MultipleUsersStacked,
   ...Nav,
   ...OnlineStatus,
+  ...Pagination,
   ...Passphrase,
   ...PbReactPopover,
   ...Person,
