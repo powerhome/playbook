@@ -1,5 +1,5 @@
 import React from 'react'
-import Pagination from '../_Pagination'
+import Pagination from '../_pagination'
 
 const PaginationDefault = (props) => (
   <div>
