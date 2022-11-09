@@ -12,7 +12,7 @@ module Playbook
       prop :cancel_button
 
       def classname
-        generate_classname("pb_dialog pb_dialog_#{size}")
+        generate_classname("pb_dialog pb_dialog_rails pb_dialog_#{size}")
       end
     end
   end

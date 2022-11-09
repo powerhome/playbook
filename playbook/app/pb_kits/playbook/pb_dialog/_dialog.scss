@@ -80,7 +80,6 @@
 	animation-duration: $animation-duration;
 	outline: none;
 	animation-timing-function: $easeInOutQuint;
-	margin: auto;
 	
 	&[class*="_status_size"] {
 		width: $status_size;
@@ -178,6 +177,12 @@
 }
 
 .pb_dialog_wrapper_rails {
+	.pb_dialog_rails {
+		top: 0 !important;
+		padding: unset !important;
+		margin: auto;
+	
+	}
 	dialog::backdrop {
 		position: fixed;
 		top: 0;
