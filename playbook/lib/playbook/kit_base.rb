@@ -19,7 +19,6 @@ require "playbook/flex"
 require "playbook/flex_grow"
 require "playbook/flex_shrink"
 require "playbook/order"
-require "playbook/pagination_renderer"
 
 module Playbook
   class KitBase < ViewComponent::Base
@@ -44,7 +43,6 @@ module Playbook
     include Playbook::FlexGrow
     include Playbook::FlexShrink
     include Playbook::Order
-    include Playbook::LinkRenderer
 
     prop :id
     prop :data, type: Playbook::Props::Hash, default: {}
