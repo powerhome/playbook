@@ -1,1 +1,0 @@
-Use the `confirmation` prop to only include the label and show/hide icon.
