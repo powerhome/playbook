@@ -20,3 +20,9 @@
             <%= content %>
     <% end %>
 </div>
+
+<%= javascript_tag do %>
+    window.addEventListener("DOMContentLoaded", () => {      
+        dialogHelper()
+    })
+  <% end %>
