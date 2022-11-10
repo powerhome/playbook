@@ -1,5 +1,5 @@
 /* @flow */
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import classnames from 'classnames'
 
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
@@ -30,28 +30,27 @@ const SelectableList = (props: SelectableListProps) => {
   const classes = classnames(buildCss('pb_selectable_list_kit'), globalProps(props), className)
   const dataProps = buildDataProps(data)
   const isRadio = props.variant === "radio"
-  const [selectedRadioValue, setSelectedRadioValue] = useState()
+  const defaultCheckedRadioValue = children.filter(item => item.props.defaultChecked)[0]?.props?.value
+  const [selectedRadioValue, setSelectedRadioValue] = useState(defaultCheckedRadioValue)
   
-  const onChangeRadioValue = (event) => {
-    setSelectedRadioValue(event.target.value)
+  const onChangeRadioValue = ({ target }) => {
+    setSelectedRadioValue(target.value)
   }
 
-  let newChildren = children
+  let selectableListItems = children
 
-  useEffect(() => {
-    if (isRadio) {
-      newChildren = children.map(({props}) => {
-        return (
-          <SelectableListItem
-              {...props}
-              className={classnames(selectedRadioValue === props.value ? "checked_item" : "", props.className)}
-              key={props.value}
-              onChange={(evt) => { onChangeRadioValue(evt); props?.onChange?.(evt); }}
-          />
-        )
-      })
-    }
-  }, []);
+  if (isRadio) {
+    selectableListItems = children.map(({ props }) => {
+      return (
+        <SelectableListItem
+            {...props}
+            className={classnames(selectedRadioValue === props.value ? "checked_item" : "", props.className)}
+            key={props.value}
+            onChange={evt => { onChangeRadioValue(evt); props?.onChange?.(evt); }}
+        />
+      )
+    })
+  }
   
   return (
     <div
@@ -61,7 +60,7 @@ const SelectableList = (props: SelectableListProps) => {
         id={id}
     >
       <List {...props}>
-        {newChildren}
+        {selectableListItems}
       </List>
     </div>
   )
