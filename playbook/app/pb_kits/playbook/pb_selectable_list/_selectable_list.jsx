@@ -1,5 +1,5 @@
 /* @flow */
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import classnames from 'classnames'
 
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
@@ -29,7 +29,30 @@ const SelectableList = (props: SelectableListProps) => {
   const ariaProps = buildAriaProps(aria)
   const classes = classnames(buildCss('pb_selectable_list_kit'), globalProps(props), className)
   const dataProps = buildDataProps(data)
+  const isRadio = props.variant === "radio"
+  const [selectedRadioValue, setSelectedRadioValue] = useState()
+  
+  const onChangeRadioValue = (event) => {
+    setSelectedRadioValue(event.target.value)
+  }
 
+  let newChildren = children
+
+  useEffect(() => {
+    if (isRadio) {
+      newChildren = children.map(({props}) => {
+        return (
+          <SelectableListItem
+              {...props}
+              className={classnames(selectedRadioValue === props.value ? "checked_item" : "", props.className)}
+              key={props.value}
+              onChange={(evt) => { onChangeRadioValue(evt); props?.onChange?.(evt); }}
+          />
+        )
+      })
+    }
+  }, []);
+  
   return (
     <div
         {...ariaProps}
@@ -38,7 +61,7 @@ const SelectableList = (props: SelectableListProps) => {
         id={id}
     >
       <List {...props}>
-        {children}
+        {newChildren}
       </List>
     </div>
   )
