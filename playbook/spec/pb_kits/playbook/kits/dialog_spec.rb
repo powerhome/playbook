@@ -12,8 +12,8 @@ RSpec.describe Playbook::PbDialog::Dialog do
   }
   describe "#classname" do
     it "returns namespaced class name", :aggregate_failures do
-      expect(subject.new({}).classname).to eq "pb_dialog pb_dialog_md"
-      expect(subject.new(size: "sm").classname).to eq "pb_dialog pb_dialog_sm"
+      expect(subject.new({}).classname).to eq "pb_dialog pb_dialog_rails pb_dialog_md"
+      expect(subject.new(size: "sm").classname).to eq "pb_dialog pb_dialog_rails pb_dialog_sm"
     end
   end
 end
