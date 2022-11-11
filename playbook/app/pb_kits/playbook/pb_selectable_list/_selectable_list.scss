@@ -8,7 +8,7 @@
       background-color: $bg_light;
     }
     &[class*=checked_item] {
-      background-color: #f7fbff;
+      background-color: $bg_light;
     }
   }
   [class^=pb_radio_kit] {
