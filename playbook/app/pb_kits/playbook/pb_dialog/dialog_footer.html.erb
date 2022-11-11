@@ -6,7 +6,7 @@
         <%= pb_rails("button", props: { type: "submit", id: object.confirm_button_id }) do %>
             <%= object.confirm_button %>
         <% end %>
-        <%= pb_rails("button", props: { data: {"close-dialog": "#{object.id}" }, id: object.cancel_button_id}) do %>
+        <%= pb_rails("button", props: { data: {"close-dialog": "#{object.id}" }, id: object.cancel_button_id, variant: "link"}) do %>
             <%= object.cancel_button %>
         <% end %>
     <% end %>
