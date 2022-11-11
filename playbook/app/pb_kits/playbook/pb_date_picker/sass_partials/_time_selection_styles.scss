@@ -16,6 +16,10 @@
         background-color: rgba($primary, 0.03);
         color: $primary;
       }
+      &:focus{
+        background-color: unset;
+        color: $primary;
+      }
     }
     .numInputWrapper {
       width: auto;
