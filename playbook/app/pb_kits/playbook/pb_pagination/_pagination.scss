@@ -27,26 +27,26 @@
     margin-left: 1px;
     margin-right: 1px;
 
-  &:hover {
-    background-color: $active_light;
-    color: $primary !important;
-    border-radius: $border_rad_light;
-  }
-
-  &:focus {
-    outline: 1px solid $primary !important;
-    border-radius: $border_rad_light;
-    outline-offset: -1px;
-  }
-  }
-    .active > span {
-      background-color: $primary;
+    &:hover {
+      background-color: $active_light;
+      color: $primary !important;
       border-radius: $border_rad_light;
-      margin-left: 1px;
-      margin-right: 1px;
-
-      &:hover {
-        box-shadow: $shadow_deeper;
-      }
     }
+
+    &:focus {
+      outline: 1px solid $primary !important;
+      border-radius: $border_rad_light;
+      outline-offset: -1px;
+    }
+  }
+  .active > span {
+    background-color: $primary !important;
+    border-radius: $border_rad_light;
+    margin-left: 1px;
+    margin-right: 1px;
+
+    &:hover {
+      box-shadow: $shadow_deeper;
+    }
+  }
 }
