@@ -14,11 +14,12 @@
       color: $primary;
       &:hover{
         background-color: rgba($primary, 0.03);
-        color: $primary;
       }
       &:focus{
         background-color: unset;
-        color: $primary;
+        &:hover{
+          background-color: rgba($primary, 0.03);
+        }
       }
     }
     .numInputWrapper {
