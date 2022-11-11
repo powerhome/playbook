@@ -7,6 +7,16 @@
     color: inherit;
     text-align: left;
     margin-left: $space_sm;
+
+    span.flatpickr-am-pm {
+      margin-left: $space_sm;
+      border-radius: 5px;
+      color: $primary;
+      &:hover{
+        background-color: rgba($primary, 0.03);
+        color: $primary;
+      }
+    }
     .numInputWrapper {
       width: auto;
       input.numInput {
