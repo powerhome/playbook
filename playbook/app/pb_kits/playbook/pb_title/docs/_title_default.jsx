@@ -11,15 +11,9 @@ const TitleDefault = (props) => {
       />
       <br />
       <Title
-          size={4}
-          tag="h4"
-          text="Title 4"
-          {...props}
-      />
-      <Title
-          size={3}
-          tag="h3"
-          text="Title 3"
+          size={1}
+          tag="h1"
+          text="Title 1"
           {...props}
       />
       <Title
@@ -29,9 +23,15 @@ const TitleDefault = (props) => {
           {...props}
       />
       <Title
-          size={1}
-          tag="h1"
-          text="Title 1"
+          size={3}
+          tag="h3"
+          text="Title 3"
+          {...props}
+      />
+      <Title
+          size={4}
+          tag="h4"
+          text="Title 4"
           {...props}
       />
     </div>
