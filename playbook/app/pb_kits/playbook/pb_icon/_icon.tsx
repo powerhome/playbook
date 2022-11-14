@@ -34,6 +34,7 @@ type IconProps = {
   pulse?: boolean,
   rotation?: 90 | 180 | 270,
   size?: IconSizes,
+  fontStyle?: 'far' | 'fas' | 'fab',
   spin?: boolean,
 } & GlobalProps
 
@@ -61,6 +62,7 @@ const Icon = (props: IconProps) => {
     pulse = false,
     rotation,
     size,
+    fontStyle = 'far',
     spin = false,
   } = props
 
@@ -85,7 +87,7 @@ const Icon = (props: IconProps) => {
   const classes = classnames(
     flipMap[flip],
     'pb_icon_kit',
-    customIcon ? '' : 'far',
+    customIcon ? '' : fontStyle,
     faClasses,
     globalProps(props),
     className
