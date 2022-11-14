@@ -1,8 +1,10 @@
 examples:
   rails:
-  - title_light: Light UI
+  - title_default: Default UI
+  - title_light_weight: Light Weight UI
   - title_colors: Colors
 
   react:
-  - title_light: Light UI
+  - title_default: Default UI
+  - title_light_weight: Light Weight UI
   - title_colors: Colors

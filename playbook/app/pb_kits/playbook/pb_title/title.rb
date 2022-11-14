@@ -17,9 +17,14 @@ module Playbook
                      values: [nil, "link"],
                      default: nil,
                      deprecated: true
+      prop :bold, type: Playbook::Props::Boolean, default: true
 
       def classname
-        generate_classname("pb_title_kit", size, variant, color)
+        generate_classname("pb_title_kit", size, variant, color, is_bold)
+      end
+
+      def is_bold
+        bold ? nil : "thin"
       end
     end
   end
