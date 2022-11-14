@@ -40,7 +40,7 @@
     }
   }
 
-  &.vertical {
+  &[class*=vertical] {
     flex-direction: column;
     align-items: center;
     .pb_radio_button {
