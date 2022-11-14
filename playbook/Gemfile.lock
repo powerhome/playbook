@@ -10,6 +10,7 @@ PATH
       rouge (~> 3.15)
       view_component (= 2.55.0)
       webpacker-react (~> 0.3.2)
+      will_paginate (~> 3.3)
 
 GEM
   remote: https://rubygems.org/
@@ -288,6 +289,7 @@ GEM
     websocket-driver (0.7.5)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
+    will_paginate (3.3.1)
     zeitwerk (2.5.4)
 
 PLATFORMS
