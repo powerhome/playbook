@@ -27,3 +27,32 @@ test('color prop', () => {
   const kit = screen.getByTestId('primary-test')
   expect(kit).toHaveClass('pb_legend_kit_category_17')
 })
+
+test('prefixText prop renders', () => {
+  render(
+    <Legend
+        color="category_17"
+        data={{ testid: 'primary-test' }}
+        prefixText="10"
+        text="Test colors"
+    />
+  )
+
+  const kit = screen.getByTestId('primary-test')
+  const prefix = kit.querySelector(".pb_title_kit_size_4")
+  expect(prefix).toBeInTheDocument()
+})
+
+test('Color prop renders with custom HEX value', () => {
+  render(
+    <Legend
+        color="#dc418a"
+        data={{ testid: 'primary-test' }}
+        text="Test colors"
+    />
+  )
+
+  const kit = screen.getByTestId('primary-test')
+  const circle = kit.querySelector(".pb_legend_indicator_circle_custom")
+  expect(circle).toHaveStyle('background: rgb(220, 65, 138);')
+})
