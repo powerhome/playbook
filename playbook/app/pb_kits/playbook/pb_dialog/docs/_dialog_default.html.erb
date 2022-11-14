@@ -1,0 +1,11 @@
+<%= pb_rails("button", props: { text: "Open Dialog", data: {"open-dialog": "dialog-1"} }) %>
+
+<%= pb_rails("dialog", props: { 
+    id:"dialog-1", 
+    size: "sm", 
+    title: "This is a header", 
+    text: "This is a dialog.", 
+    cancel_button: "Cancel", 
+    confirm_button: "Confirm", 
+    confirm_button_id: "confirm-button-1"
+}) %>

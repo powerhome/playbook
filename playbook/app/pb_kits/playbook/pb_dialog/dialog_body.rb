@@ -2,11 +2,11 @@
 
 module Playbook
   module PbDialog
-    class DialogHeader < Playbook::KitBase
-      prop :title
+    class DialogBody < Playbook::KitBase
+      prop :text
 
       def classname
-        generate_classname("dialog_header")
+        generate_classname("dialog_body p_sm")
       end
     end
   end

@@ -9,6 +9,10 @@ import './pb_form/pb_form_validation'
 import datePickerHelper from './pb_date_picker/date_picker_helper'
 window.datePickerHelper = datePickerHelper
 
+// Dialog
+import dialogHelper from './pb_dialog/dialogHelper'
+window.dialogHelper = dialogHelper
+
 // Lazy image loading
 import 'lazysizes'
 
