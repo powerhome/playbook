@@ -7,6 +7,8 @@ RSpec.describe Playbook::PbLineGraph::LineGraph do
 
   it { is_expected.to define_string_prop(:axis_title) }
   it { is_expected.to define_prop(:point_start).of_type(Playbook::Props::Numeric) }
+  it { is_expected.to define_prop(:x).of_type(Playbook::Props::Numeric) }
+  it { is_expected.to define_prop(:y).of_type(Playbook::Props::Numeric) }
   it { is_expected.to define_string_prop(:subtitle) }
   it { is_expected.to define_string_prop(:title) }
   it { is_expected.to define_prop(:chart_data).of_type(Playbook::Props::Array).with_default([]) }
@@ -14,6 +16,21 @@ RSpec.describe Playbook::PbLineGraph::LineGraph do
   it { is_expected.to define_prop(:legend).of_type(Playbook::Props::Boolean).with_default(false) }
   it { is_expected.to define_prop(:toggle_legend_click).of_type(Playbook::Props::Boolean).with_default(true) }
   it { is_expected.to define_prop(:colors).of_type(Playbook::Props::Array).with_default([]) }
+  it {
+    is_expected.to define_enum_prop(:align)
+      .with_default("center")
+      .with_values("left", "right", "center")
+  }
+  it {
+    is_expected.to define_enum_prop(:layout)
+      .with_default("horizontal")
+      .with_values("horizontal", "vertical", "proximate")
+  }
+  it {
+    is_expected.to define_enum_prop(:vertical_align)
+      .with_default("bottom")
+      .with_values("top", "middle", "bottom")
+  }
 
   describe "#classname" do
     it "returns namespaced class name", :aggregate_failures do
