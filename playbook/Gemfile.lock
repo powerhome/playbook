@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    playbook_ui (11.11.0)
+    playbook_ui (11.12.0)
       actionpack (>= 5.2.4.5)
       actionview (>= 5.2.4.5)
       activesupport (>= 5.2.4.5)
@@ -171,7 +171,7 @@ GEM
     public_suffix (4.0.6)
     racc (1.6.0)
     rack (2.2.3.1)
-    rack-proxy (0.7.2)
+    rack-proxy (0.7.4)
       rack
     rack-test (1.1.0)
       rack (>= 1.0, < 3)
