@@ -67,7 +67,7 @@ const CircleChartLegendPosition = (props) => (
     <CircleChart
         align='right'
         chartData={data}
-        id="legend-position"
+        id="legend-position-circle"
         legend
         paddingBottom="sm"
         title="Alignment of Legend"
@@ -83,7 +83,7 @@ const CircleChartLegendPosition = (props) => (
     />
     <CircleChart
         chartData={dataFirst}
-        id="legend-position-1"
+        id="legend-position-circle-1"
         layout="vertical"
         legend
         paddingBottom="sm"
@@ -100,7 +100,7 @@ const CircleChartLegendPosition = (props) => (
     />
     <CircleChart
         chartData={dataSecond}
-        id="legend-position-2"
+        id="legend-position-circle-2"
         layout="vertical"
         legend
         title="Offset of Legend"

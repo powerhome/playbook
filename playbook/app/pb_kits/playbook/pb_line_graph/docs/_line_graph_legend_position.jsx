@@ -31,7 +31,7 @@ const LineGraphLegendPosition = (props) => (
         align='right'
         axisTitle="Number of Employees"
         chartData={data}
-        id="legend-position"
+        id="legend-position-line"
         legend
         title="Alignment of Legend"
         verticalAlign="top"
@@ -49,7 +49,7 @@ const LineGraphLegendPosition = (props) => (
     <LineGraph
         axisTitle="Number of Employees"
         chartData={data}
-        id="legend-position-1"
+        id="legend-position-line-1"
         layout="vertical"
         legend
         title="Layout of Legend"
@@ -67,7 +67,7 @@ const LineGraphLegendPosition = (props) => (
     <LineGraph
         axisTitle="Number of Employees"
         chartData={data}
-        id="legend-position-2"
+        id="legend-position-line-2"
         layout="vertical"
         legend
         title="Offset of Legend"

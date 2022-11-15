@@ -31,7 +31,7 @@ const BarGraphLegendPosition = (props) => (
         align='right'
         axisTitle="Number of Employees"
         chartData={chartData}
-        id="legend-position"
+        id="legend-position-bar"
         legend
         paddingBottom="sm"
         title="Alignment of Legend"
@@ -50,7 +50,7 @@ const BarGraphLegendPosition = (props) => (
     <BarGraph
         axisTitle="Number of Employees"
         chartData={chartData}
-        id="legend-position-1"
+        id="legend-position-bar-1"
         layout="vertical"
         legend
         paddingBottom="sm"
@@ -70,7 +70,7 @@ const BarGraphLegendPosition = (props) => (
     <BarGraph
         axisTitle="Number of Employees"
         chartData={chartData}
-        id="legend-position-2"
+        id="legend-position-bar-2"
         layout="vertical"
         legend
         title="Offset of Legend"
