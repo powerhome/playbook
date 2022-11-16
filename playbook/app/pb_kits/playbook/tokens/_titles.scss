@@ -18,7 +18,6 @@
 
 @mixin pb_title_1 {
   @include pb_title($heading_1);
-  letter-spacing: -0.03em;
 }
 
 @mixin pb_title_2 {
@@ -31,8 +30,18 @@
 
 @mixin pb_title_4 {
   @include pb_title($heading_4, $bolder);
+  letter-spacing: -0.03em;
 }
 
 @mixin pb_title_dark {
   color: $text_dk_default;
+}
+
+@mixin pb_title_bold {
+  font-weight: $bolder;
+}
+
+@mixin pb_title_thin {
+  font-weight: $lighter;
+  letter-spacing: $lspace_tight;
 }

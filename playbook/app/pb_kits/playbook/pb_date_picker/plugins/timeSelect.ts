@@ -41,96 +41,96 @@ export const getTimezoneText = (inputDate: {
 
 function timeSelectPlugin(props: { caption: string; showTimezone: boolean }) {
   return function (fp: FpTypes) {
-    const generateMeridiemCard = (text: string) => {
-      const selectableCard = document.createElement("div");
-      selectableCard.className = "pb_selectable_card_kit_enabled";
+    // const generateMeridiemCard = (text: string) => {
+    //   const selectableCard = document.createElement("div");
+    //   selectableCard.className = "pb_selectable_card_kit_enabled";
 
-      const cardInput = document.createElement("input"),
-        cardInputId = `datePicker${text}`;
+    //   const cardInput = document.createElement("input"),
+    //     cardInputId = `datePicker${text}`;
 
-      cardInput.id = cardInputId;
-      cardInput.name = "datepicker-ampm";
-      cardInput.type = "radio";
-      cardInput.value = text;
+    //   cardInput.id = cardInputId;
+    //   cardInput.name = "datepicker-ampm";
+    //   cardInput.type = "radio";
+    //   cardInput.value = text;
 
-      const cardLabel = document.createElement("label"),
-        cardLabelBuffer = document.createElement("div");
-      cardLabel.className = `label-${text.toLowerCase()}`;
-      cardLabel.setAttribute("for", cardInputId);
-      cardLabelBuffer.className = "buffer";
-      cardLabelBuffer.innerHTML = text;
+    //   const cardLabel = document.createElement("label"),
+    //     cardLabelBuffer = document.createElement("div");
+    //   cardLabel.className = `label-${text.toLowerCase()}`;
+    //   cardLabel.setAttribute("for", cardInputId);
+    //   cardLabelBuffer.className = "buffer";
+    //   cardLabelBuffer.innerHTML = text;
 
-      cardLabel.append(cardLabelBuffer);
-      selectableCard.prepend(cardInput);
-      selectableCard.append(cardLabel);
+    //   cardLabel.append(cardLabelBuffer);
+    //   selectableCard.prepend(cardInput);
+    //   selectableCard.append(cardLabel);
 
-      return selectableCard;
-    };
+    //   return selectableCard;
+    // };
 
-    const generateMeridiemToggle = () => {
-      fp.amPM.style.display = "none";
-      const formGroupKit = document.createElement("div");
-      formGroupKit.className = "pb_form_group_kit";
+    // const generateMeridiemToggle = () => {
+    //   fp.amPM.style.display = "none";
+    //   const formGroupKit = document.createElement("div");
+    //   formGroupKit.className = "pb_form_group_kit";
 
-      const amCard = generateMeridiemCard("AM");
-      amCard.addEventListener("click", () => {
-        fp.selectedDates[0].setHours(
-          (fp.selectedDates[0].getHours() % 12) + 12 * 0
-        );
-        fp.setDate(fp.selectedDates[0], true);
-      });
+    //   const amCard = generateMeridiemCard("AM");
+    //   amCard.addEventListener("click", () => {
+    //     fp.selectedDates[0].setHours(
+    //       (fp.selectedDates[0].getHours() % 12) + 12 * 0
+    //     );
+    //     fp.setDate(fp.selectedDates[0], true);
+    //   });
 
-      const pmCard = generateMeridiemCard("PM");
-      pmCard.addEventListener("click", () => {
-        fp.selectedDates[0].setHours(
-          (fp.selectedDates[0].getHours() % 12) + 12 * 1
-        );
-        fp.setDate(fp.selectedDates[0], true);
-      });
+    //   const pmCard = generateMeridiemCard("PM");
+    //   pmCard.addEventListener("click", () => {
+    //     fp.selectedDates[0].setHours(
+    //       (fp.selectedDates[0].getHours() % 12) + 12 * 1
+    //     );
+    //     fp.setDate(fp.selectedDates[0], true);
+    //   });
 
-      formGroupKit.prepend(amCard);
-      formGroupKit.append(pmCard);
+    //   formGroupKit.prepend(amCard);
+    //   formGroupKit.append(pmCard);
 
-      const meridiemContainer = document.createElement("div");
-      meridiemContainer.className = "meridiem";
-      meridiemContainer.append(formGroupKit);
-      document.querySelector(".pb_time_selection").append(meridiemContainer);
-    };
+    //   const meridiemContainer = document.createElement("div");
+    //   meridiemContainer.className = "meridiem";
+    //   meridiemContainer.append(formGroupKit);
+    //   document.querySelector(".pb_time_selection").append(meridiemContainer);
+    // };
 
-    const getMeridiem = (dateObj: string | any[]) => {
-      return dateObj[0].getHours() < 12 ? "AM" : "PM";
-    };
+    // const getMeridiem = (dateObj: string | any[]) => {
+    //   return dateObj[0].getHours() < 12 ? "AM" : "PM";
+    // };
 
-    const updateMeridiemToggle = (forceClick: boolean) => {
-      if (!fp.selectedDates.length) return;
+    // const updateMeridiemToggle = (forceClick: boolean) => {
+    //   if (!fp.selectedDates.length) return;
 
-      const uncheckedClass = "pb_selectable_card_kit_enabled",
-        checkedClass = "pb_selectable_card_kit_checked_enabled",
-        pickerAM: HTMLElement & { [x: string]: any } =
-          document.getElementById("datePickerAM"),
-        pickerPM: HTMLElement & { [x: string]: any } =
-          document.getElementById("datePickerPM"),
-        meridiem = getMeridiem(fp.selectedDates);
+    //   const uncheckedClass = "pb_selectable_card_kit_enabled",
+    //     checkedClass = "pb_selectable_card_kit_checked_enabled",
+    //     pickerAM: HTMLElement & { [x: string]: any } =
+    //       document.getElementById("datePickerAM"),
+    //     pickerPM: HTMLElement & { [x: string]: any } =
+    //       document.getElementById("datePickerPM"),
+    //     meridiem = getMeridiem(fp.selectedDates);
 
-      if (forceClick) {
-        pickerAM.checked = false;
-        pickerPM.checked = false;
-        pickerPM.checked = meridiem === "PM";
-        pickerAM.checked = meridiem === "AM";
-      }
+    //   if (forceClick) {
+    //     pickerAM.checked = false;
+    //     pickerPM.checked = false;
+    //     pickerPM.checked = meridiem === "PM";
+    //     pickerAM.checked = meridiem === "AM";
+    //   }
 
-      if (meridiem === "PM") {
-        pickerPM.parentElement.className = checkedClass;
-        pickerAM.parentElement.className = uncheckedClass;
-      } else if (meridiem === "AM") {
-        pickerAM.parentElement.className = checkedClass;
-        pickerPM.parentElement.className = uncheckedClass;
-      }
-    };
+    //   if (meridiem === "PM") {
+    //     pickerPM.parentElement.className = checkedClass;
+    //     pickerAM.parentElement.className = uncheckedClass;
+    //   } else if (meridiem === "AM") {
+    //     pickerAM.parentElement.className = checkedClass;
+    //     pickerPM.parentElement.className = uncheckedClass;
+    //   }
+    // };
 
     return {
       onValueUpdate() {
-        updateMeridiemToggle(true);
+        // updateMeridiemToggle(true);
       },
       onReady() {
         const id = fp.input.id;
@@ -151,8 +151,8 @@ function timeSelectPlugin(props: { caption: string; showTimezone: boolean }) {
         }
 
         // add meridiem toggle
-        generateMeridiemToggle();
-        updateMeridiemToggle(true);
+        // generateMeridiemToggle();
+        // updateMeridiemToggle(true);
 
         // add timezone text
         if (props.showTimezone) {

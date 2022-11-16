@@ -41,13 +41,6 @@ class KitGenerator < Rails::Generators::NamedBase
                   :red
       nil
     else
-      # Add kit to Playbook menu ==========================
-      open("app/pb_kits/playbook/data/menu.yml", "a") do |f|
-        f.puts "  - #{@kit_name_underscore}"
-      end
-      say_status  "complete",
-                  "#{@kit_name_capitalize} kit added to Playbook menu.",
-                  :green
 
       # Generate SCSS files ==============================
       template "kit_scss.erb", "#{full_kit_directory}/_#{@kit_name_underscore}.scss"
@@ -73,7 +66,7 @@ class KitGenerator < Rails::Generators::NamedBase
       # Ask user if React version should be generated ======
       if yes?("Create REACT #{@kit_name_pascal} kit? (y/N)")
         @react_kit = true
-        template "kit_jsx.erb", "#{full_kit_directory}/_#{@kit_name_underscore}.jsx"
+        template "kit_jsx.erb", "#{full_kit_directory}/_#{@kit_name_underscore}.tsx"
         template "kit_jsx_test.erb", "#{full_kit_directory}/#{@kit_name_underscore}.test.jsx"
         template "kit_example_react.erb", "#{full_kit_directory}/docs/_#{@kit_name_underscore}_default.jsx"
         template "kit_js.erb", "#{full_kit_directory}/docs/index.js"
@@ -87,7 +80,7 @@ class KitGenerator < Rails::Generators::NamedBase
 
         react_export_page(
           path: REACT_INDEX_PATH.to_s,
-          export_statement: "export #{@kit_name_pascal} from './pb_#{@kit_name_underscore}/_#{@kit_name_underscore}.jsx'\n",
+          export_statement: "export { default as #{@kit_name_pascal}} from './pb_#{@kit_name_underscore}/_#{@kit_name_underscore}'\n",
           start_comment: "// vvv React Component JSX Imports from the React Kits vvv\n",
           end_comment: "// ^^^ React Component JSX Imports from the React Kits ^^^\n"
         )
@@ -101,6 +94,15 @@ class KitGenerator < Rails::Generators::NamedBase
       template "kit_example_yml.erb", "#{full_kit_directory}/docs/example.yml"
 
       `rubocop --safe-auto-correct #{full_kit_directory}`
+
+      # Add kit to Playbook menu ==========================
+      open("app/pb_kits/playbook/data/menu.yml", "a") do |f|
+        f.puts "  - #{@kit_name_underscore}"
+      end
+
+      say_status  "complete",
+                  "#{@kit_name_capitalize} kit added to Playbook menu.",
+                  :green
     end
   end
 

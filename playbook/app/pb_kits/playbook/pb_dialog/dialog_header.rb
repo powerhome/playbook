@@ -2,28 +2,11 @@
 
 module Playbook
   module PbDialog
-    class DialogHeader
-      include Playbook::Props
-
-      partial "pb_dialog/child_kits/dialog_header"
-
-      prop :closeable, type: Playbook::Props::Boolean, default: true
-      prop :padding
-      prop :separator, type: Playbook::Props::Boolean, default: true
-      prop :spacing
-      prop :text
+    class DialogHeader < Playbook::KitBase
       prop :title
 
-      def dialog_header_options
-        {
-          id: id,
-          closeable: closeable,
-          padding: padding,
-          separator: separator,
-          spacing: spacing,
-          text: text,
-          title: title,
-        }
+      def classname
+        generate_classname("dialog_header")
       end
     end
   end

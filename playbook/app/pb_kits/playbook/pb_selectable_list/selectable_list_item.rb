@@ -17,7 +17,7 @@ module Playbook
                            default: {}
 
       def classname
-        generate_classname("pb_selectable_list_item_kit")
+        generate_classname("pb_item_kit")
       end
     end
   end

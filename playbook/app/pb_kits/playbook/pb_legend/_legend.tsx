@@ -1,5 +1,3 @@
-/* @flow */
-
 import React from 'react'
 import classnames from 'classnames'
 
@@ -10,7 +8,7 @@ import Body from '../pb_body/_body'
 import Title from '../pb_title/_title'
 
 type LegendProps = {
-  aria?: object,
+  aria?: { [key: string]: string },
   className?: string,
   color?: string,
   dark?: boolean,
@@ -34,8 +32,16 @@ const Legend = (props: LegendProps) => {
 
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
+
+  const customColor = color.charAt(0) === '#' && color
+
+  const customColorStyle = {
+  background: customColor
+}
+
+ 
   const bodyCss = classnames(
-    buildCss('pb_legend_kit', color),
+    buildCss('pb_legend_kit', customColor ? "" : color),
     globalProps(props),
     className
   )
@@ -48,15 +54,19 @@ const Legend = (props: LegendProps) => {
         id={id}
     >
       <Body color={dark ? 'lighter' : 'light'}>
-        <span className="pb_legend_indicator_circle" />
-        <If condition={prefixText}>
-          <Title
+        <span className={`${customColor ? "pb_legend_indicator_circle_custom" : "pb_legend_indicator_circle"}`}
+            style={customColorStyle} 
+        />
+        {
+          prefixText && (
+            <Title
               dark={dark}
               size={4}
               tag="span"
               text={` ${prefixText} `}
           />
-        </If>
+          )
+        }
         {` ${text} `}
       </Body>
     </div>

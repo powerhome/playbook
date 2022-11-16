@@ -6,6 +6,7 @@
   &[class*=_1] {
     @include pb_title_1;
     @include title_colors;
+    @include pb_title_bold;
   }
 
   &[class*=_2] {
@@ -25,5 +26,9 @@
 
   &.dark {
     @include pb_title_dark;
+  }
+
+  &[class*=_thin] {
+    @include pb_title_thin;
   }
 }

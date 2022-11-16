@@ -7,6 +7,8 @@ import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
 import CollapsibleContent from './child_kits/CollapsibleContent'
 import CollapsibleMain from './child_kits/CollapsibleMain'
 import CollapsibleContext from './context'
+import IconSizes from "../pb_icon/_icon"
+
 
 type CollapsibleProps = {
   children?: JSX.Element | [],
@@ -14,10 +16,11 @@ type CollapsibleProps = {
   className?: string,
   collapsed?: boolean,
   data?: object,
+  iconColor?: 'default' | 'light' | 'lighter' | 'link' | 'error' | 'success',
+  iconSize?: typeof IconSizes
   id?: string,
   padding?: string,
 }
-
 
 const useCollapsible = (initial = false) => {
   const [collapsed, setCollapsed] = useState(initial)
@@ -34,6 +37,8 @@ const Collapsible = ({
   children = [],
   collapsed = true,
   data = {},
+  iconColor = 'default',
+  iconSize,
   id,
   padding = 'md',
   ...props
@@ -53,13 +58,13 @@ const Collapsible = ({
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
   const classes = classnames(
-    buildCss('pb_collapsible'),
+    buildCss('pb_collapsible_kit'),
     className,
     globalProps(props, { padding })
   )
 
   return (
-    <CollapsibleContext.Provider value={{ collapsed: isCollapsed, collapse }}>
+    <CollapsibleContext.Provider value={{ collapsed: isCollapsed, collapse, iconSize, iconColor }}>
       <div
           {...ariaProps}
           {...dataProps}

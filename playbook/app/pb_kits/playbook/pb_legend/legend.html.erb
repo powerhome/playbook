@@ -4,7 +4,7 @@
     data: object.data,
     class: object.classname) do %>
   <%= pb_rails("body", props: {color: object.body_color}) do %>
-    <span class="pb_legend_indicator_circle"></span>
+    <span style="<%= object.custom_color %>" class=<%= object.custom_color_class %>></span>
     <%= pb_rails("title", props: { dark: object.dark, text: object.prefix_text, tag: "span", size: 4 }) %>
     <%= object.text %>
   <% end %>

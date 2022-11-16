@@ -6,6 +6,7 @@ examples:
   - background_gradient: Gradient
   - background_image: Image
   - background_status: Status
+  - background_status_subtle: Status Subtle
   - background_category: Category
   - background_size: Size
 
@@ -15,5 +16,6 @@ examples:
   - background_gradient: Gradient
   - background_image: Image
   - background_status: Status
+  - background_status_subtle: Status Subtle
   - background_category: Category
   - background_size: Size

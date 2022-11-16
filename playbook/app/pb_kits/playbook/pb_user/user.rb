@@ -16,6 +16,7 @@ module Playbook
       prop :size, type: Playbook::Props::Enum,
                   values: %w[lg md sm],
                   default: "sm"
+      prop :subtitle
       prop :title
       prop :territory
 

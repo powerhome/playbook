@@ -1,0 +1,36 @@
+<div class="pb--doc-demo-row">
+  <%= pb_rails("user", props: {
+    align: "left",
+    avatar_url: "https://randomuser.me/api/portraits/women/44.jpg",
+    name: "Anna Black",
+    orientation: "horizontal",
+    size: "md",
+    territory: "PHL",
+    title: "Remodeling Consultant"
+  }) do %>
+    <%= pb_rails("flex", props: { align: "center" }) do %>
+      <%= pb_rails("icon", props: { icon: "users" }) %>
+      <%= pb_rails("caption", props: { padding_left: "xs", text: "Admin" }) %>
+    <% end %>
+  <% end %>
+
+  <%= pb_rails("user", props: {
+    align: "left",
+    avatar_url: "https://randomuser.me/api/portraits/women/44.jpg",
+    name: "Anna Black",
+    orientation: "horizontal",
+    size: "md",
+  }) do %>
+    <%= pb_rails("contact", props: {
+      contact_type: "cell",
+      contact_value: "349-185-9988"
+    }) %>
+    <%= pb_rails("contact", props: {
+      contact_value: 5555555555
+    }) %>
+    <%= pb_rails("contact", props: {
+      contact_type: "email",
+      contact_value: "email@example.com"
+    }) %>
+  <% end %>
+</div>

@@ -7,7 +7,7 @@ examples:
   - filter_no_sort: No Sort
   - filter_only: Filter Only
   - sort_only: Sort Only
-  - filter_min_width: Min Width for Popover Inside of Filter
+  - filter_max_width: Max Width for Popover Inside of Filter
   - filter_placement: Filter Placement
 
   react:
@@ -17,6 +17,5 @@ examples:
   - filter_no_sort: No Sort
   - filter_only: Filter Only
   - sort_only: Sort Only
-  - filter_min_width: Min Width for Popover Inside of Filter
-  - filter_close_popover: Close Popover
+  - filter_max_width: Max Width for Popover Inside of Filter
   - filter_placement: Filter Placement
