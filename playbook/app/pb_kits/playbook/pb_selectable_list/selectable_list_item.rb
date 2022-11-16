@@ -16,7 +16,7 @@ module Playbook
                            default: {}
 
       def classname
-        generate_classname("pb_item_kit", checked_class)
+        generate_classname("pb_item_kit") + checked_class
       end
 
     private
