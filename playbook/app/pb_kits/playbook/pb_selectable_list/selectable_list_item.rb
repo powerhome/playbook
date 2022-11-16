@@ -16,13 +16,13 @@ module Playbook
                            default: {}
 
       def classname
-        generate_classname("pb_item_kit", checked_class, separator: " ")
+        generate_classname("pb_item_kit", checked_class)
       end
 
     private
 
       def checked_class
-        checked ? "checked_item" : ""
+        checked ? " checked_item" : ""
       end
     end
   end
