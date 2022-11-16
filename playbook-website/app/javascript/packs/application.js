@@ -4,8 +4,8 @@ import WebpackerReact from 'webpacker-react'
 
 import 'playbook-ui/dist/playbook-rails'
 import 'playbook-ui/dist/playbook-doc' // playbook-react doc components
-import 'playbook-ui/dist/fonts/fontawesome-min'
-import 'playbook-ui/dist/fonts/regular-min'
+import '@fortawesome/fontawesome-pro/css/all'
+import '@fortawesome/fontawesome-pro/js/all'
 
 import '../site_styles/main.scss'
 
