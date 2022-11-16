@@ -29,6 +29,10 @@ RUN apt-get update -y \
 
 WORKDIR /home/app/src
 
+ARG FONT_AWESOME_AUTH_TOKEN=""
+RUN npm config set "@fortawesome:registry" https://npm.fontawesome.com/
+RUN npm config set "//npm.fontawesome.com/:_authToken" $FONT_AWESOME_AUTH_TOKEN
+
 # Build Library
 COPY playbook-website/package.json playbook-website/
 COPY playbook/package.json playbook/
@@ -39,9 +43,7 @@ RUN curl https://github.com/sass/node-sass/releases/download/v4.13.0/linux-x64-6
 
 COPY --chown=app:app playbook /home/app/src/playbook
 
-ARG FONT_AWESOME_AUTH_TOKEN=""
-RUN npm config set "@fortawesome:registry" https://npm.fontawesome.com/
-RUN npm config set "//npm.fontawesome.com/:_authToken" $FONT_AWESOME_AUTH_TOKEN
+
 # Bundle website
 COPY --chown=app:app playbook-website /home/app/src/playbook-website
 RUN cd playbook-website && bundle install --frozen
