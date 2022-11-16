@@ -14,4 +14,20 @@
       <%= content %>
     <% end %>
   <% end %>
+
+  <% if object.variant == "checkbox"%>
+    <script>
+      var checkboxElement = document.querySelector("#<%=object.id%> input[type=checkbox]")
+      
+      checkboxElement.addEventListener("change", (evt) => {
+        var listItemElement = document.querySelector("#<%=object.id%>")
+        
+        if (evt.target.checked) {
+          listItemElement.classList.add("checked_item");
+        } else {
+          listItemElement.classList.remove("checked_item")
+        }
+      })
+    </script>
+  <% end %>
 <% end %>
