@@ -29,5 +29,21 @@
         }
       })
     </script>
+  <% else %>
+    <script>
+      var radioElement = document.querySelector("#<%=object.id%> input[type=radio]")
+
+      radioElement.addEventListener("change", () => {        
+        var radios = radioElement.closest("ul").querySelectorAll("input[type=radio]")
+        
+        radios.forEach((radio) => {
+          if (radio.checked) {
+            radio.closest("li").classList.add("checked_item");
+          } else {
+            radio.closest("li").classList.remove("checked_item")
+          }
+        });
+      })
+    </script>
   <% end %>
 <% end %>
