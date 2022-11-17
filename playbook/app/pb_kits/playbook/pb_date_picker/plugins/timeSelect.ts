@@ -132,6 +132,9 @@ function timeSelectPlugin(props: { caption: string; showTimezone: boolean }) {
       onValueUpdate() {
         updateMeridiemToggle(true);
       },
+      onOpen() {
+        updateMeridiemToggle(true);
+      },
       onReady() {
         const id = fp.input.id;
 
