@@ -4,6 +4,8 @@ examples:
   - dialog_default: Simple
   - dialog_compound_components: Complex
   - dialog_sizes: Sizes
+  - dialog_scrollable: Scrollable
+  - dialog_status: Status Alert
 
   react:
   - dialog_default: Simple

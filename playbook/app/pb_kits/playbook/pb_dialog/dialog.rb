@@ -10,9 +10,24 @@ module Playbook
       prop :text
       prop :confirm_button
       prop :cancel_button
+      prop :status, type: Playbook::Props::Enum,
+                    values: ["info", "caution", "delete", "error", "success", "default", ""],
+                    default: ""
 
       def classname
         generate_classname("pb_dialog pb_dialog_rails pb_dialog_#{size}")
+      end
+
+      def status_alerts
+        alerts = {
+          "info" => %w[info-circle default],
+          "default" => %w[exclamation-circle default],
+          "caution" => %w[exclamation-triangle yellow],
+          "delete" => %w[trash-alt red],
+          "error" => %w[times-circle red],
+          "success" => %w[check-circle green],
+        }
+        alerts[status]
       end
     end
   end
