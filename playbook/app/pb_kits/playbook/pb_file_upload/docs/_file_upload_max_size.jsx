@@ -16,13 +16,27 @@ const AcceptedFilesList = ({ files }: FileList) => (
     ))}
   </List>
 )
+const RejectedFilesList = ({ files }: FileList) => (
+  <List>
+    {files.map((file) => (
+      <ListItem key={file.name}><Body color="error">{`${file.name} (file too large)`}</Body></ListItem>
+    ))}
+  </List>
+)
 
 const FileUploadMaxSize = (props) => {
   const [filesToUpload, setFilesToUpload] = useState([])
+  const [filesRejected, setFilesRejected] = useState([])
   const [error, setError] = useState()
 
   const handleOnFilesAccepted = (files) => {
+    if (files.length) setError()
     setFilesToUpload([...filesToUpload, ...files])
+  }
+
+  const handleOnFilesRejected = (error, files) => {
+    setError(error)
+    setFilesRejected([...filesRejected, ...files])
   }
 
   return (
@@ -31,18 +45,24 @@ const FileUploadMaxSize = (props) => {
           files={filesToUpload}
           {...props}
       />
+      <RejectedFilesList
+          files={filesRejected}
+          {...props}
+      />
       <FileUpload
           acceptedFilesDescription="Choose a file or drag it here. 1 MB size limit."
           maxSize={1000000}
           onFilesAccepted={handleOnFilesAccepted}
-          onFilesRejected={(errorMessage) => setError(errorMessage)}
+          onFilesRejected={handleOnFilesRejected}
           {...props}
       />
       { error && (
         <Body
             color="error"
             marginY="md"
-        >{error}</Body>
+        >
+          {error}
+        </Body>
       )}
     </div>
   )

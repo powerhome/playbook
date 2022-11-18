@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react'
+import React, { useEffect, useCallback, useRef } from 'react'
 import { useDropzone } from 'react-dropzone'
 import classnames from 'classnames'
 
@@ -16,7 +16,7 @@ type FileUploadProps = {
   acceptedFilesDescription?: string,
   maxSize?: number,
   onFilesAccepted: Callback<File, File>,
-  onFilesRejected: Callback<string, string>,
+  onFilesRejected: (error: string, files: File[]) => void,
 }
 
 const getFormattedFileSize = (fileSize: number): string => {
@@ -37,16 +37,25 @@ const FileUpload = (props: FileUploadProps): React.ReactElement => {
   const onDrop = useCallback((files) => {
     onFilesAccepted(files)
   }, [onFilesAccepted])
+
   const { getRootProps, getInputProps, isDragActive, rejectedFiles } = useDropzone({
     accept,
     maxSize,
     onDrop,
   })
 
-  const getMaxFileSizeText = () => `Max file size is ${getFormattedFileSize(maxSize)}.`
+  const prevRejected: any = useRef();
 
-  const isFileTooLarge = maxSize && rejectedFiles.length > 0 && rejectedFiles[0].size > maxSize;
-  if (isFileTooLarge) onFilesRejected(`File size is too large! ${getMaxFileSizeText()}`)
+  const maxFileSizeText = `Max file size is ${getFormattedFileSize(maxSize)}.`
+
+  useEffect(() => {
+    if (rejectedFiles === prevRejected.current) return
+    const isFileTooLarge = maxSize && rejectedFiles.length > 0 && rejectedFiles[0].size > maxSize;
+    if (isFileTooLarge) {
+      onFilesRejected(`File size is too large! ${maxFileSizeText}`, rejectedFiles)
+    }
+    prevRejected.current = rejectedFiles
+  }, [maxFileSizeText, maxSize, onFilesRejected, rejectedFiles])
 
   const acceptedFileTypes = () => {
     return accept.map((fileType) => {
@@ -63,7 +72,7 @@ const FileUpload = (props: FileUploadProps): React.ReactElement => {
   const getDescription = () => {
     let msg = ""
     accept === null ? msg += 'Choose a file or drag it here.' : msg += `Choose a file or drag it here. The accepted file types are: ${acceptedFilesDescription || acceptedFileTypes()}.`
-    if (maxSize) msg += ` ${getMaxFileSizeText()}`
+    if (maxSize) msg += ` ${maxFileSizeText}`
     return msg
   }
 
