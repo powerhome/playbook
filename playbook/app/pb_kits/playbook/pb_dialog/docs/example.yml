@@ -6,6 +6,7 @@ examples:
   - dialog_sizes: Sizes
   - dialog_scrollable: Scrollable
   - dialog_status: Status Alert
+  - dialog_stacked_alert: Stacked Button Alert
 
   react:
   - dialog_default: Simple

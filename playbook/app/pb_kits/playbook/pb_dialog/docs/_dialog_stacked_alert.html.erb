@@ -1,0 +1,49 @@
+<%= pb_rails("button", props: { text: "Default Status", data: {"open-dialog": "dialog-stacked-default"} }) %>
+<%= pb_rails("button", props: { text: "Info Status", data: {"open-dialog": "dialog-stacked-caution"} }) %>
+<%= pb_rails("button", props: { text: "Caution Status", data: {"open-dialog": "dialog-stacked-delete"} }) %>
+
+
+<%= pb_rails("dialog", props: { 
+    id:"dialog-stacked-default", 
+    status: "default",
+    size: "sm", 
+    title: "Are you Sure?", 
+    text: "Text explaining why this is an alert", 
+}) do %>
+    <%= pb_rails("dialog/dialog_footer") do %>
+        <%= pb_rails("flex", props: { orientation: "column", padding_x:"md", padding: "sm" }) do %>
+            <%= pb_rails("button", props: { text: "Yes, Action", full_width: true }) %>
+            <%= pb_rails("button", props: { text: "No, Cancel", variant: "secondary", full_width: true, margin_top: "sm", data: {"close-dialog": "dialog-stacked-default" } }) %>
+        <% end %>
+    <% end %>
+<% end %>
+
+<%= pb_rails("dialog", props: { 
+    id:"dialog-stacked-caution", 
+    status: "caution",
+    size: "sm", 
+    title: "Are you Sure?", 
+    text: "Text explaining why this is an alert", 
+}) do %>
+    <%= pb_rails("dialog/dialog_footer") do %>
+        <%= pb_rails("flex", props: { orientation: "column", padding_x:"md", padding: "sm" }) do %>
+            <%= pb_rails("button", props: { text: "Yes, Action", full_width: true }) %>
+            <%= pb_rails("button", props: { text: "No, Cancel", variant: "secondary", full_width: true, margin_top: "sm", data: {"close-dialog": "dialog-stacked-caution" } }) %>
+        <% end %>
+    <% end %>
+<% end %>
+
+<%= pb_rails("dialog", props: { 
+    id:"dialog-stacked-delete", 
+    status: "delete",
+    size: "sm", 
+    title: "Are you Sure?", 
+    text: "Text explaining why this is an alert", 
+}) do %>
+    <%= pb_rails("dialog/dialog_footer") do %>
+        <%= pb_rails("flex", props: { orientation: "column", padding_x:"md", padding: "sm" }) do %>
+            <%= pb_rails("button", props: { text: "Yes, Action", full_width: true }) %>
+            <%= pb_rails("button", props: { text: "No, Cancel", variant: "secondary", full_width: true, margin_top: "sm", data: {"close-dialog": "dialog-stacked-delete" } }) %>
+        <% end %>
+    <% end %>
+<% end %>
