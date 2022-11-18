@@ -14,10 +14,14 @@
     size: "status_size", 
     title: "Are you Sure?", 
     text: "Text explaining why this is an alert", 
-    cancel_button: "No, Cancel", 
-    confirm_button: "Yes, Action", 
-    confirm_button_id: "confirm-button-1"
-}) %>
+}) do %>
+    <%= pb_rails("dialog/dialog_footer") do %>
+        <%= pb_rails("flex", props: { spacing:"between", padding_x:"md", padding_bottom:"md", padding: "sm" }) do %>
+            <%= pb_rails("button", props: { text: "Yes, Action" }) %>
+        <%= pb_rails("button", props: { text: "No, Cancel", variant: "secondary", data: {"close-dialog": "dialog-status-default" } }) %>
+        <% end %>
+    <% end %>
+<% end %>
 
 <%= pb_rails("dialog", props: { 
     id:"dialog-status-info", 
@@ -25,10 +29,13 @@
     size: "status_size", 
     title: "Are you Sure?", 
     text: "Text explaining why this is an alert", 
-    cancel_button: "No, Cancel", 
-    confirm_button: "Yes, Action", 
-    confirm_button_id: "confirm-button-1"
-}) %>
+}) do %>
+    <%= pb_rails("dialog/dialog_footer") do %>
+        <%= pb_rails("flex", props: { spacing:"between", padding_x:"md", padding_bottom:"md", padding: "sm" }) do %>
+            <%= pb_rails("button", props: { text: "Ok, Thanks!", full_width: true, data: {"close-dialog": "dialog-status-info" } }) %>
+        <% end %>
+    <% end %>
+<% end %>
 
 <%= pb_rails("dialog", props: { 
     id:"dialog-status-caution", 
@@ -36,10 +43,14 @@
     size: "status_size", 
     title: "Are you Sure?", 
     text: "Text explaining why this is an alert", 
-    cancel_button: "No, Cancel", 
-    confirm_button: "Yes, Action", 
-    confirm_button_id: "confirm-button-1"
-}) %>
+}) do %>
+    <%= pb_rails("dialog/dialog_footer") do %>
+        <%= pb_rails("flex", props: { spacing:"between", padding_x:"md", padding_bottom:"md", padding: "sm" }) do %>
+            <%= pb_rails("button", props: { text: "Yes, Action" }) %>
+            <%= pb_rails("button", props: { text: "No, Cancel", variant: "secondary", data: {"close-dialog": "dialog-status-caution" } }) %>
+        <% end %>
+    <% end %>
+<% end %>
 
 <%= pb_rails("dialog", props: { 
     id:"dialog-status-delete", 
@@ -47,10 +58,14 @@
     size: "status_size", 
     title: "Are you Sure?", 
     text: "Text explaining why this is an alert", 
-    cancel_button: "No, Cancel", 
-    confirm_button: "Yes, Action", 
-    confirm_button_id: "confirm-button-1"
-}) %>
+}) do %>
+    <%= pb_rails("dialog/dialog_footer") do %>
+        <%= pb_rails("flex", props: { spacing:"between", padding_x:"md", padding_bottom:"md", padding: "sm" }) do %>
+            <%= pb_rails("button", props: { text: "Yes, Delete" }) %>
+            <%= pb_rails("button", props: { text: "No, Cancel", variant: "secondary", data: {"close-dialog": "dialog-status-delete" } }) %>
+        <% end %>
+    <% end %>
+<% end %>
 
 <%= pb_rails("dialog", props: { 
     id:"dialog-status-error", 
@@ -58,10 +73,13 @@
     size: "status_size", 
     title: "Are you Sure?", 
     text: "Text explaining why this is an alert", 
-    cancel_button: "No, Cancel", 
-    confirm_button: "Yes, Action", 
-    confirm_button_id: "confirm-button-1"
-}) %>
+}) do %>
+    <%= pb_rails("dialog/dialog_footer") do %>
+        <%= pb_rails("flex", props: { spacing:"between", padding_x:"md", padding_bottom:"md", padding: "sm" }) do %>
+            <%= pb_rails("button", props: { text: "Oh no!", full_width: true, data: {"close-dialog": "dialog-status-error" } }) %>
+        <% end %>
+    <% end %>
+<% end %>
 
 <%= pb_rails("dialog", props: { 
     id:"dialog-status-success", 
@@ -69,7 +87,10 @@
     size: "status_size", 
     title: "Are you Sure?", 
     text: "Text explaining why this is an alert", 
-    cancel_button: "No, Cancel", 
-    confirm_button: "Yes, Action", 
-    confirm_button_id: "confirm-button-1"
-}) %>
+}) do %>
+    <%= pb_rails("dialog/dialog_footer") do %>
+        <%= pb_rails("flex", props: { spacing:"between", padding_x:"md", padding_bottom:"md", padding: "sm" }) do %>
+            <%= pb_rails("button", props: { text: "Great!", full_width: true, data: {"close-dialog": "dialog-status-success" } }) %>
+        <% end %>
+    <% end %>
+<% end %>
