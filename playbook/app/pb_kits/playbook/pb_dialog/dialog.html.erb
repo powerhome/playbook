@@ -8,7 +8,7 @@
                 <%= pb_rails("dialog/dialog_header", props: {title: object.title, id: object.id }) %>
             <% end %>
             <% if object.status === "" && object.text %>
-                <%= pb_rails("dialog/dialog_body", props: { text: object.text, margin_top: "sm" }) %>
+                <%= pb_rails("dialog/dialog_body", props: { text: object.text }) %>
             <% end %>
             <% if object.status != "" %>
                 <%= pb_rails("dialog/dialog_body", props: {padding: "md"}) do %>
@@ -19,7 +19,7 @@
                                 size: "lg"
                             }) %>
                         <%= pb_rails("title", props: { text: object.title, tag: "h1", size: 3, margin_top: "sm" }) %>
-                        <%= pb_rails("body", props: {text: "Text on why alert given", margin_top: "sm"}) %>
+                        <%= pb_rails("body", props: {text: object.text, margin_top: "sm"}) %>
                     <% end %>
                 <% end %>
             <% end %>

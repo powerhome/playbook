@@ -1,9 +1,9 @@
 
 <%= pb_rails("flex", props:{ gap: "xs", wrap:true}) do %>
 <%= pb_rails("button", props: { text: "Default Status", data: {"open-dialog": "dialog-status-default"} }) %>
-<%= pb_rails("button", props: { text: "Info Status", data: {"open-dialog": "dialog-status-info"} }) %>
 <%= pb_rails("button", props: { text: "Caution Status", data: {"open-dialog": "dialog-status-caution"} }) %>
 <%= pb_rails("button", props: { text: "Delete Status", data: {"open-dialog": "dialog-status-delete"} }) %>
+<%= pb_rails("button", props: { text: "Information Status", data: {"open-dialog": "dialog-status-info"} }) %>
 <%= pb_rails("button", props: { text: "Error Status", data: {"open-dialog": "dialog-status-error"} }) %>
 <%= pb_rails("button", props: { text: "Success Status", data: {"open-dialog": "dialog-status-success"} }) %>
 <% end %>
@@ -12,13 +12,13 @@
     id:"dialog-status-default", 
     status: "default",
     size: "status_size", 
-    title: "Are you Sure?", 
-    text: "Text explaining why this is an alert", 
+    title: "Are you sure?", 
+    text: "Text explaining why there is an alert", 
 }) do %>
     <%= pb_rails("dialog/dialog_footer") do %>
         <%= pb_rails("flex", props: { spacing:"between", padding_x:"md", padding_bottom:"md", padding: "sm" }) do %>
             <%= pb_rails("button", props: { text: "Yes, Action" }) %>
-        <%= pb_rails("button", props: { text: "No, Cancel", variant: "secondary", data: {"close-dialog": "dialog-status-default" } }) %>
+            <%= pb_rails("button", props: { text: "No, Cancel", variant: "secondary", data: {"close-dialog": "dialog-status-default" } }) %>
         <% end %>
     <% end %>
 <% end %>
@@ -27,8 +27,8 @@
     id:"dialog-status-info", 
     status: "info",
     size: "status_size", 
-    title: "Are you Sure?", 
-    text: "Text explaining why this is an alert", 
+    title: "Information", 
+    text: "Text explaining why there is an alert", 
 }) do %>
     <%= pb_rails("dialog/dialog_footer") do %>
         <%= pb_rails("flex", props: { spacing:"between", padding_x:"md", padding_bottom:"md", padding: "sm" }) do %>
@@ -42,7 +42,7 @@
     status: "caution",
     size: "status_size", 
     title: "Are you Sure?", 
-    text: "Text explaining why this is an alert", 
+    text: "This is the action you will be taking", 
 }) do %>
     <%= pb_rails("dialog/dialog_footer") do %>
         <%= pb_rails("flex", props: { spacing:"between", padding_x:"md", padding_bottom:"md", padding: "sm" }) do %>
@@ -56,8 +56,8 @@
     id:"dialog-status-delete", 
     status: "delete",
     size: "status_size", 
-    title: "Are you Sure?", 
-    text: "Text explaining why this is an alert", 
+    title: "Delete", 
+    text: "You are about to delete ...", 
 }) do %>
     <%= pb_rails("dialog/dialog_footer") do %>
         <%= pb_rails("flex", props: { spacing:"between", padding_x:"md", padding_bottom:"md", padding: "sm" }) do %>
@@ -71,8 +71,8 @@
     id:"dialog-status-error", 
     status: "error",
     size: "status_size", 
-    title: "Are you Sure?", 
-    text: "Text explaining why this is an alert", 
+    title: "Error Message", 
+    text: "Text explaining the error", 
 }) do %>
     <%= pb_rails("dialog/dialog_footer") do %>
         <%= pb_rails("flex", props: { spacing:"between", padding_x:"md", padding_bottom:"md", padding: "sm" }) do %>
@@ -85,8 +85,8 @@
     id:"dialog-status-success", 
     status: "success",
     size: "status_size", 
-    title: "Are you Sure?", 
-    text: "Text explaining why this is an alert", 
+    title: "Success!", 
+    text: "Text explaining what is successful", 
 }) do %>
     <%= pb_rails("dialog/dialog_footer") do %>
         <%= pb_rails("flex", props: { spacing:"between", padding_x:"md", padding_bottom:"md", padding: "sm" }) do %>
