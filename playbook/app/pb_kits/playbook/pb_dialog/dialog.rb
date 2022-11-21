@@ -10,6 +10,7 @@ module Playbook
       prop :placement, type: Playbook::Props::Enum,
                        values: %w[left right center],
                        default: "center"
+      prop :should_close_on_overlay_click, type: Playbook::Props::Boolean, default: true
       prop :title
       prop :text
       prop :confirm_button
@@ -28,6 +29,10 @@ module Playbook
         elsif full_height && size != "xl"
           "full_height_#{placement}"
         end
+      end
+
+      def overlay_close
+        !should_close_on_overlay_click ? "overlay_close" : ""
       end
 
       def status_alerts
