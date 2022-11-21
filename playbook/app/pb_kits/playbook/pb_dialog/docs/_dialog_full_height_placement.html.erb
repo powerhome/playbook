@@ -1,0 +1,53 @@
+<%= pb_rails("button", props: { text: "Left Dialog", data:{"open-dialog": "dialog-fullheight-left"} }) %>
+<%= pb_rails("button", props: { text: "Center Dialog", data:{"open-dialog": "dialog-fullheight-center"} }) %>
+<%= pb_rails("button", props: { text: "Right Dialog", data:{"open-dialog": "dialog-fullheight-right"} }) %>
+
+<%= pb_rails("dialog", props: { 
+    id:"dialog-fullheight-left", 
+    size: "md", 
+    full_height: true,
+    placement: "left",
+   }) do %>
+        <%= pb_rails("dialog/dialog_header", props: { id: "dialog-fullheight-left" } ) do %>
+            <%= pb_rails("caption", props: { text: "This is a left aligned dialog" }) %>
+        <% end %>
+        <%= pb_rails("dialog/dialog_body") do %>
+            <%= pb_rails("caption", props: { text: "Description", margin_bottom: "xs" }) %>
+            <%= pb_rails("rich_text_editor", props: {id: "default", value: "Add your text here"}) %>
+        <% end %>
+        <%= pb_rails("dialog/dialog_footer", props: {cancel_button: "Cancel", confirm_button: "Confirm", id: "dialog-fullheight-left"}) %>
+<% end %>
+
+
+<%= pb_rails("dialog", props: { 
+    id:"dialog-fullheight-center", 
+    size: "md",
+    full_height: true,
+    placement: "center",
+     })  do %>
+        <%= pb_rails("dialog/dialog_header", props: { id: "dialog-fullheight-center" } ) do %>
+            <%= pb_rails("caption", props: { text: "This is a center aligned dialog" }) %>
+        <% end %>
+        <%= pb_rails("dialog/dialog_body") do %>
+            <%= pb_rails("caption", props: { text: "Description", margin_bottom: "xs" }) %>
+            <%= pb_rails("rich_text_editor", props: {id: "default", value: "Add your text here"}) %>
+        <% end %>
+        <%= pb_rails("dialog/dialog_footer", props: {cancel_button: "Cancel", confirm_button: "Confirm", id: "dialog-fullheight-center"}) %>
+<% end %>
+     
+<%= pb_rails("dialog", props: { 
+    id:"dialog-fullheight-right", 
+    size: "md",
+    full_height: true,
+    placement: "right",
+     }) do %>
+        <%= pb_rails("dialog/dialog_header", props: { id: "dialog-fullheight-right" } ) do %>
+            <%= pb_rails("caption", props: { text: "This is a right aligned dialog" }) %>
+        <% end %>
+        <%= pb_rails("dialog/dialog_body") do %>
+            <%= pb_rails("caption", props: { text: "Description", margin_bottom: "xs" }) %>
+            <%= pb_rails("rich_text_editor", props: {id: "default", value: "Add your text here"}) %>
+        <% end %>
+        <%= pb_rails("dialog/dialog_footer", props: {cancel_button: "Cancel", confirm_button: "Confirm", id: "dialog-fullheight-right"}) %>
+
+    <% end %>

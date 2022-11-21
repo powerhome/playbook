@@ -7,6 +7,9 @@ examples:
   - dialog_scrollable: Scrollable
   - dialog_status: Status Alert
   - dialog_stacked_alert: Stacked Button Alert
+  - dialog_full_height: Full Height
+  - dialog_full_height_placement: Full Height Placement
+
 
   react:
   - dialog_default: Simple

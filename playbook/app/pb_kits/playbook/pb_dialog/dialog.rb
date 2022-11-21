@@ -6,6 +6,10 @@ module Playbook
       prop :size, type: Playbook::Props::Enum,
                   values: %w[sm md lg xl status_size content],
                   default: "md"
+      prop :full_height, type: Playbook::Props::Boolean, default: false
+      prop :placement, type: Playbook::Props::Enum,
+                       values: %w[left right center],
+                       default: "center"
       prop :title
       prop :text
       prop :confirm_button
@@ -16,6 +20,14 @@ module Playbook
 
       def classname
         generate_classname("pb_dialog pb_dialog_rails pb_dialog_#{size}")
+      end
+
+      def full_height_style
+        if full_height && size === "xl"
+          "full_height_center"
+        elsif full_height && size != "xl"
+          "full_height_#{placement}"
+        end
       end
 
       def status_alerts

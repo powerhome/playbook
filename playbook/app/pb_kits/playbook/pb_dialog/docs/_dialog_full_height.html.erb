@@ -1,0 +1,35 @@
+<%= pb_rails("button", props: { text: "Small Dialog", data:{"open-dialog": "dialog-fullheight-sm"} }) %>
+<%= pb_rails("button", props: { text: "Medium Dialog", data:{"open-dialog": "dialog-fullheight-md"} }) %>
+<%= pb_rails("button", props: { text: "Large Dialog", data:{"open-dialog": "dialog-fullheight-lg"} }) %>
+
+<%= pb_rails("dialog", props: { 
+    id:"dialog-fullheight-sm", 
+    size: "sm", 
+    title: "This is a header",
+    text: "I am a small dialog",
+    cancel_button: "Cancel", 
+    confirm_button: "Confirm", 
+    full_height: true,
+   }) %>
+
+
+<%= pb_rails("dialog", props: { 
+    id:"dialog-fullheight-md", 
+    size: "md",
+    title: "This is a header",
+    text: "I am a medium dialog",
+    cancel_button: "Cancel", 
+    confirm_button: "Confirm", 
+    full_height: true,
+
+     })  %>
+     
+<%= pb_rails("dialog", props: { 
+    id:"dialog-fullheight-lg", 
+    size: "lg",
+    title: "This is a header",
+    text: "I am a large dialog",
+    cancel_button: "Cancel", 
+    confirm_button: "Confirm",
+    full_height: true,
+     }) %>
