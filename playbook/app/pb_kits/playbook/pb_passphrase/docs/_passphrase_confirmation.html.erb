@@ -1,6 +1,6 @@
-<%= pb_rails("passphrase", props: { classname: "pass_input_1", value: "hello 5"}) %>
+<%= pb_rails("passphrase", props: { input_class: true}) %>
 
-<%= pb_rails("passphrase", props: { confirmation: true, classname: "pass_input_2"}) %>
+<%= pb_rails("passphrase", props: { confirmation: true }) %>
 
 <%= javascript_tag do %>
     window.addEventListener("DOMContentLoaded", () => {      

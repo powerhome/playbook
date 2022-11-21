@@ -4,7 +4,8 @@ module Playbook
   module PbPassphrase
     class Passphrase < Playbook::KitBase
       prop :confirmation, type: Playbook::Props::Boolean, default: false
-      prop :input_class, type: Playbook::Props::String
+      prop :input_class, type: Playbook::Props::Boolean,
+                         default: false
       prop :input_props, type: Playbook::Props::Hash, default: {}
       prop :label
       prop :show_tips_below, type: Playbook::Props::Enum,
@@ -14,7 +15,11 @@ module Playbook
       prop :value, type: Playbook::Props::String
 
       def classname
-        generate_classname("pb_passphrase", input_class)
+        generate_classname("pb_passphrase", input_class_name)
+      end
+
+      def input_class_name
+        input_class ? "hello" : nil
       end
 
       def passphrase_options
