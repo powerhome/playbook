@@ -10,7 +10,6 @@ PATH
       rouge (~> 3.15)
       view_component (= 2.55.0)
       webpacker-react (~> 0.3.2)
-      will_paginate (~> 3.3)
 
 GEM
   remote: https://rubygems.org/
@@ -307,6 +306,7 @@ DEPENDENCIES
   spring (= 2.0.2)
   spring-watcher-listen (= 2.0.1)
   tzinfo-data (= 1.2018.9)
+  will_paginate (~> 3.3)
 
 BUNDLED WITH
    2.2.31
