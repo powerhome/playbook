@@ -13,12 +13,12 @@ const PassphraseConfirmation = (props) => {
     <>
       <div>
         <Passphrase
-            confirmation
             onChange={handleChange}
             value={input}
             {...props}
         />
         <Passphrase
+            confirmation
             onChange={handleConfirmationChange}
             value={confirmationInput}
             {...props}

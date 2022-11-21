@@ -1,4 +1,4 @@
-This example shows how to enhance the passphrase strenght by setting diferent tresholds and lengths. 
+This example shows how to enhance the passphrase strenght by setting diferent thresholds and lengths. 
 
 The `meterSettings` array contains different settings for each rendered input. The `handleStrengthCalculation` handles the strength calculation using those settings, showing different results for the same `passphrase` input.
 
