@@ -15,13 +15,6 @@ const DatePickerTime = (props) => (
         showTimezone
         {...props}
     />
-    <DatePicker
-        defaultDate={DEFAULT_DATE}
-        enableTime
-        pickerId="date-picker-time2"
-        showTimezone
-        {...props}
-    />
 
   </div>
 )
