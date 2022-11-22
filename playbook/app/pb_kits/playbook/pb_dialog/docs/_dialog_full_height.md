@@ -1,2 +1,1 @@
-The full height dialog can be size small, medium, or large
-The dialog may be left, center or right aligned. Except for the large dialog which should only be center aligned.
+To render a full height Dialog, use the `fullHeight` (react) or `full_height` (rails) prop. A full height Dialog can be size small, medium, or large. By default it will be center aligned. 
