@@ -1,10 +1,54 @@
-<%= pb_rails("passphrase", props: { input_class: true}) %>
+<%= pb_rails("passphrase", props: { classname: "pass_input_1" }) %>
 
-<%= pb_rails("passphrase", props: { confirmation: true }) %>
+<%= pb_rails("passphrase", props: { confirmation: true, classname: "pass_input_2"}) %>
+
+<div id="match"> </div>
 
 <%= javascript_tag do %>
-    window.addEventListener("DOMContentLoaded", () => {      
-        input = querySelector(".pass_input_1").value
-        console.log(input)
+    window.addEventListener("DOMContentLoaded", () => {   
+
+      const useState = (defaultValue) => {
+          let value = defaultValue;
+          const getValue = () => value
+          const setValue = (newValue) => {
+              return value = newValue
+          }
+          return [getValue, setValue];
+      }
+
+      const [input, setInput] = useState('')
+      const [confirmationInput, setConfirmationInput] = useState('')
+
+      const handleChange = (e) => setInput(e.target.value)
+      const handleConfirmationChange = (e) => setConfirmationInput(e.target.value)  
+
+      const match = document.querySelector("#match")
+
+      const input1 = document.querySelector(".pass_input_1").childNodes[0].childNodes[0].lastChild.firstChild.lastChild.firstChild
+      const input2 = document.querySelector(".pass_input_2").childNodes[0].childNodes[0].lastChild.firstChild.lastChild.firstChild
+
+      input1.addEventListener('input', (e) => {
+          handleChange(e)
+          setMatchText()
+      });
+
+      input2.addEventListener('input', (e) => {
+          handleConfirmationChange(e)
+          setMatchText()
+      });
+
+      const setMatchText = () => {
+
+        if (input() && confirmationInput()) {
+          if (input() === confirmationInput()) {
+              match.textContent = "They match!"
+          } else {
+              match.textContent = "They don't match!"
+          }
+        } else {
+          match.textContent = ""
+        }
+
+      }
     })
 <% end %>
