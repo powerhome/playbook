@@ -49,7 +49,7 @@ const DialogSizes = () => {
       >
         <Button
             id="sm"
-            marginRight="xl"
+            marginRight="md"
             onClick={toggleSmDialog}
         >
           {'Small Dialog'}
