@@ -8,10 +8,6 @@
 
 - Fix Button Hover Bug [\#2183](https://github.com/powerhome/playbook/pull/2183) ([nidaqg](https://github.com/nidaqg))
 
-**Merged pull requests:**
-
-- Playbook Version Bump to 11.12.0 [\#2178](https://github.com/powerhome/playbook/pull/2178) ([nidaqg](https://github.com/nidaqg))
-
 
 
 ## [11.12.0](https://github.com/powerhome/playbook/tree/11.12.0) (2022-11-15)
