@@ -1,9 +1,11 @@
 import colors from '../tokens/exports/_colors.scss'
 import typography from '../tokens/exports/_typography.scss'
 
+import { ThemeProps } from './themeTypes'
+
 import Highcharts from 'highcharts'
 
-const highchartsTheme = {
+const highchartsTheme: ThemeProps = {
   lang: {
     thousandsSep: ',',
   },
@@ -246,6 +248,9 @@ const highchartsTheme = {
         position: { y: -40 },
       }
     },
+  },
+  credits: {
+    enabled: false
   },
 }
 
