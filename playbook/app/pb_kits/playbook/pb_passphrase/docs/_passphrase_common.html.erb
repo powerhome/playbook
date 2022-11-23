@@ -1,21 +1,25 @@
-<%= pb_rails("passphrase", props: { label: "Default Settings", classname: "passphrase_change" }) %>
+<%= pb_rails("body", props: {
+  margin_bottom: "md",
+  id: "body_common"
+}) %>
 
-<%= pb_rails("progress_simple", props: { percent: 0, id: "bar_change" }) %>
+<%= pb_rails("passphrase", props: { label: "Default Settings", classname: "passphrase_common" }) %>
 
-<%= pb_rails("caption", props: { size: 'xs', text: "hello", id: "caption_change" }) %>
+<%= pb_rails("progress_simple", props: { percent: 0, id: "bar_common" }) %>
 
-<%= pb_rails("text_input", props: { label: "Calculated Strength", value: "0", disabled: true, id: "calc_strength_change" }) %>
+<%= pb_rails("caption", props: { size: 'xs', text: "hello", id: "caption_common" }) %>
 
 
 <%= javascript_tag do %>
     window.addEventListener("DOMContentLoaded", () => {
 
+    const commonText = document.querySelector("#body_common")
+
     // variables for the kits you are targeting 
-    const passphrase = document.querySelector(".passphrase_change").querySelector("input")
-    const calcStrength = document.querySelector("#calc_strength_change")
-    const barVariant = document.getElementById("bar_change")
-    const barPercent = document.getElementById("bar_change").querySelector("div")
-    const caption = document.getElementById("caption_change")
+    const passphrase = document.querySelector(".passphrase_common").querySelector("input")
+    const barVariant = document.getElementById("bar_common")
+    const barPercent = document.getElementById("bar_common").querySelector("div")
+    const caption = document.getElementById("caption_common")
 
     // hide the bar and captions
     barVariant.style.display = 'none';
@@ -82,15 +86,24 @@
       }
     }
 
+    // array that holds the common passwords you wish to target
+    const COMMON_PASSPHRASES = ['passphrase', 'apple', 'password', 'p@55w0rd']
+
+    commonText.textContent = `Try typing any of the following: ${COMMON_PASSPHRASES.join(', ')}`
+
+    // function that checks if the user password is in the common password list
+    const isCommon = (passphrase) => {
+      if (COMMON_PASSPHRASES.includes(passphrase))
+        return true
+      return false
+    }
+
     // event listeners attached to the input field
     passphrase.addEventListener('input', (e) => {
       const passphrase = e.target.value;
 
       // pass in passphrase to the handleStrengthCalculation and set that equal to result variable
-      const result = handleStrengthCalculation({passphrase: passphrase})
-
-      // set the value of the text_input to the score
-      calcStrength.value = result.score
+      const result = handleStrengthCalculation({ passphrase: passphrase, common: isCommon(passphrase) })
 
       // conditional statment to show or hide progress_simple bar and caption if user has entered a password
       if (passphrase) {

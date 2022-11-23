@@ -89,8 +89,9 @@ const PassphraseCommon = (props) => {
   return (
     <>
       <div>
-        <Body text={`Try typing any of the following: ${COMMON_PASSPHRASES.join(' ')}`} />
-        <br />
+        <Body 
+            marginBottom='md'
+            text={`Try typing any of the following: ${COMMON_PASSPHRASES.join(', ')}`} />
         <Passphrase
             onChange={handleChange}
             value={input}

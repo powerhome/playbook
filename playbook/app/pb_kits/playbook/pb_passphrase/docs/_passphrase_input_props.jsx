@@ -36,7 +36,7 @@ const PassphraseInputProps = (props) => {
             {...props}
         />
         <Passphrase
-            inputProps={{ name: 'my-value-name', id: 'my-value-id' }}
+            inputProps={{ name: 'my-value-name', id: 'my-value-id-2' }}
             label="Set name and ID for use in form libraries"
             onChange={handleChange}
             value={input}
