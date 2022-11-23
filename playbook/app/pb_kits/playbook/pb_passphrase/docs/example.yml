@@ -6,6 +6,7 @@ examples:
   - passphrase_meter_settings: Meter Settings
   - passphrase_input_props: Input Props
   - passphrase_tips: Tips
+  - passphrase_strength_change: Strength Change
   - passphrase_breached: Breached Passphrases
 
   react:
