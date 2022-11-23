@@ -9,6 +9,7 @@ const getPositionElement = (element: string | Element) => {
 }
 
 type DatePickerConfig = {
+  closeOnSelect?: boolean,
   disableDate?: number[],
   disableRange?: number[],
   disableWeekdays?: number[],
@@ -29,6 +30,7 @@ type DatePickerConfig = {
 const datePickerHelper = (config: DatePickerConfig, scrollContainer: string | HTMLElement) => {
   const {
     allowInput,
+    closeOnSelect = true,
     defaultDate,
     disableDate,
     disableRange,
@@ -110,6 +112,7 @@ const datePickerHelper = (config: DatePickerConfig, scrollContainer: string | HT
   // ===========================================================
 
   flatpickr(`#${pickerId}`, {
+    closeOnSelect,
     disableMobile: true,
     dateFormat: getDateFormat(),
     defaultDate: defaultDateGetter(),
