@@ -1,3 +1,5 @@
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-nocheck
 import ElementObserver from './element_observer'
 
 export default class PbEnhancedElement {
@@ -63,5 +65,6 @@ export default class PbEnhancedElement {
     console.warn('Redefine the connect function in a subclass.', this)
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
   disconnect(): void {}
 }
