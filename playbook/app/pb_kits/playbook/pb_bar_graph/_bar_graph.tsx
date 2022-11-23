@@ -1,91 +1,87 @@
-import React, {useState, useEffect} from 'react'
-import { globalProps } from '../utilities/globalProps'
-import { buildAriaProps, buildDataProps } from '../utilities/props'
+import React, { useState, useEffect } from "react";
+import { globalProps } from "../utilities/globalProps";
+import { buildAriaProps, buildDataProps } from "../utilities/props";
 
-import HighchartsReact from "highcharts-react-official"
-import Highcharts from "highcharts"
-import { highchartsTheme } from "../pb_dashboard/pbChartsLightTheme"
-import { highchartsDarkTheme } from '../pb_dashboard/pbChartsDarkTheme'
- import colors from "../tokens/exports/_colors.scss"
+import HighchartsReact from "highcharts-react-official";
+import Highcharts from "highcharts";
+import { highchartsTheme } from "../pb_dashboard/pbChartsLightTheme";
+import { highchartsDarkTheme } from "../pb_dashboard/pbChartsDarkTheme";
+import colors from "../tokens/exports/_colors.scss";
 
-
-import classnames from 'classnames'
+import classnames from "classnames";
 
 type BarGraphProps = {
-  align?: "left" | "right" | "center",
-  axisTitle: string,
-  dark?: Boolean,
-  xAxisCategories: [],
-  yAxisMin: number,
-  yAxisMax: number,
-  chartData: {name: string, data: number[],}[],
-  className?: string,
-  id: any,
-  pointStart: number | any,
-  subTitle?: string,
-  title: string,
-  type?: string,
-  legend?: boolean,
-  toggleLegendClick?: boolean,
-  height?: string,
-  colors: string[],
-  layout?: "horizontal" | "vertical" | "proximate",
-  verticalAlign?: "top" | "middle" | "bottom",
-  x?: number,
-  y?: number,
-  aria?:{[key: string]: string},
-  data?: {[key: string]: string}
-}
+  align?: "left" | "right" | "center";
+  axisTitle: string;
+  dark?: Boolean;
+  xAxisCategories: [];
+  yAxisMin: number;
+  yAxisMax: number;
+  chartData: { name: string; data: number[] }[];
+  className?: string;
+  id: any;
+  pointStart: number | any;
+  subTitle?: string;
+  title: string;
+  type?: string;
+  legend?: boolean;
+  toggleLegendClick?: boolean;
+  height?: string;
+  colors: string[];
+  layout?: "horizontal" | "vertical" | "proximate";
+  verticalAlign?: "top" | "middle" | "bottom";
+  x?: number;
+  y?: number;
+  aria?: { [key: string]: string };
+  data?: { [key: string]: string };
+};
 
 // Map Data Color String Props to our SCSS Variables
-
 const mapColors = (array: string[]) => {
-  const regex = /(data)\-[1-8]/ //eslint-disable-line
+  const regex = /(data)\-[1-8]/; //eslint-disable-line
 
   const newArray = array.map((item) => {
     return regex.test(item)
       ? `${colors[`data_${item[item.length - 1]}`]}`
-      : item
-  })
-  return newArray
-}
-
-
-
+      : item;
+  });
+  return newArray;
+};
 
 const BarGraph = ({
   aria = {},
   data = {},
-  align= "center",
+  align = "center",
   axisTitle,
-  dark= false,
+  dark = false,
   chartData,
-  className= 'pb_bar_graph',
+  className = "pb_bar_graph",
   colors,
   id,
   pointStart,
   subTitle,
-  type = 'column',
+  type = "column",
   title = "Title",
   xAxisCategories,
   yAxisMin,
   yAxisMax,
-  legend= false,
-  toggleLegendClick= true,
+  legend = false,
+  toggleLegendClick = true,
   height,
   layout = "horizontal",
-  verticalAlign= "bottom",
+  verticalAlign = "bottom",
   x = 0,
   y = 0,
   ...props
 }: BarGraphProps) => {
-
-  const ariaProps = buildAriaProps(aria)
-  const dataProps = buildDataProps(data)
+  const ariaProps = buildAriaProps(aria);
+  const dataProps = buildDataProps(data);
   const setupTheme = () => {
-    dark ? Highcharts.setOptions(highchartsDarkTheme) :  Highcharts.setOptions(highchartsTheme)
-  }
-  setupTheme()
+    dark
+      ? Highcharts.setOptions(highchartsDarkTheme)
+      : Highcharts.setOptions(highchartsTheme);
+  };
+  setupTheme();
 
   const staticOptions = {
     title: {
@@ -116,11 +112,14 @@ const BarGraph = ({
       x: x,
       y: y,
     },
-    colors: colors !== undefined && colors.length > 0 ? mapColors(colors) : highchartsTheme.colors,
+    colors:
+      colors !== undefined && colors.length > 0
+        ? mapColors(colors)
+        : highchartsTheme.colors,
     plotOptions: {
       series: {
         pointStart: pointStart,
-        events:{},
+        events: {},
         dataLabels: {
           enabled: false,
         },
@@ -128,27 +127,30 @@ const BarGraph = ({
     },
     series: chartData,
     credits: false,
-  }
+  };
 
   if (!toggleLegendClick) {
-    staticOptions.plotOptions.series.events = { legendItemClick: () => false }
+    staticOptions.plotOptions.series.events = { legendItemClick: () => false };
   }
 
-const [options, setOptions] = useState({})
+  const [options, setOptions] = useState({});
 
-useEffect(() => {
-  setOptions({...staticOptions})
-},[chartData])
+  useEffect(() => {
+    setOptions({ ...staticOptions });
+  }, [chartData]);
 
-
-return (
-      <HighchartsReact 
-      containerProps = {{ className: classnames(globalProps(props), className), id: id, ...ariaProps, ...dataProps }}
+  return (
+    <HighchartsReact
+      containerProps={{
+        className: classnames(globalProps(props), className),
+        id: id,
+        ...ariaProps,
+        ...dataProps,
+      }}
       highcharts={Highcharts}
       options={options}
-          />
-    )
-      
-}
+    />
+  );
+};
 
-export default BarGraph
+export default BarGraph;
