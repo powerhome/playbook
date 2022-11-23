@@ -1,10 +1,323 @@
+<%= pb_rails("passphrase", props: { label: "Default Settings", classname: "def_passphrase" }) %>
 
-<%= pb_rails("passphrase", props: { label: "Default Settings"}) %>
+<%= pb_rails("progress_simple", props: { percent: 0, id: "def_bar" }) %>
 
-<%= pb_rails("passphrase", props: { label: "Min length = 5", min_length: 5}) %>
+<%= pb_rails("caption", props: { size: 'xs', text: "hello", id: "def_caption" }) %>
 
-<%= pb_rails("passphrase", props: { label: "Min length = 30", min_length: 30}) %>
+<%= pb_rails("text_input", props: { label: "Calculated Strength", value: "0", disabled: true, id: "calc_strength" }) %>
 
-<%= pb_rails("passphrase", props: { average_threshold: 1, label: "Average Threshold = 1"}) %>
+<%= pb_rails("passphrase", props: { label: "Min length = 5", classname: "min_5" }) %>
 
-<%= pb_rails("passphrase", props: { label: "Strong Threshold = 4", strong_threshold: 4}) %>
+<%= pb_rails("progress_simple", props: { percent: 0, id: "min_5_bar" }) %>
+
+<%= pb_rails("caption", props: { size: 'xs', text: "hello", id: "min_5_caption" }) %>
+
+<%= pb_rails("passphrase", props: { label: "Min length = 30", classname: "min_30" }) %>
+
+<%= pb_rails("progress_simple", props: { percent: 0, id: "min_30_bar" }) %>
+
+<%= pb_rails("caption", props: { size: 'xs', text: "hello", id: "min_30_caption" }) %>
+
+<%= pb_rails("passphrase", props: { label: "Average Threshold = 1", classname: "avg_1" }) %>
+
+<%= pb_rails("progress_simple", props: { percent: 0, id: "avg_1_bar" }) %>
+
+<%= pb_rails("caption", props: { size: 'xs', text: "hello", id: "avg_1_caption" }) %>
+
+<%= pb_rails("passphrase", props: { label: "Strong Threshold = 4", classname: "strong_4" }) %>
+
+<%= pb_rails("progress_simple", props: { percent: 0, id: "strong_4_bar" }) %>
+
+<%= pb_rails("caption", props: { size: 'xs', text: "hello", id: "strong_4_caption" }) %>
+
+
+
+<%= javascript_tag do %>
+    window.addEventListener("DOMContentLoaded", () => {
+
+
+    // variables for the passphrase kits you are targeting 
+    const defPassphrase = document.querySelector(".def_passphrase").querySelector("input")
+    const min5 = document.querySelector(".min_5").querySelector("input")
+    const min30 = document.querySelector(".min_30").querySelector("input")
+    const avg1 = document.querySelector(".avg_1").querySelector("input")
+    const strong4 = document.querySelector(".strong_4").querySelector("input")
+
+    // variable for the text_input kit you are targeting 
+    const calcStrength = document.querySelector("#calc_strength")
+
+    // variables for the progress_simple kits you are targeting 
+    const defBarVariant = document.getElementById("def_bar")
+    const defBarPercent = document.getElementById("def_bar").querySelector("div")
+    const min5BarVariant = document.getElementById("min_5_bar")
+    const min5BarPercent = document.getElementById("min_5_bar").querySelector("div")
+    const min30BarVariant = document.getElementById("min_30_bar")
+    const min30BarPercent = document.getElementById("min_30_bar").querySelector("div")
+    const avg1BarVariant = document.getElementById("avg_1_bar")
+    const avg1BarPercent = document.getElementById("avg_1_bar").querySelector("div")
+    const strong4BarVariant = document.getElementById("strong_4_bar")
+    const strong4BarPercent = document.getElementById("strong_4_bar").querySelector("div")
+
+    // hide all the progress_simple bars
+    defBarVariant.style.display = 'none';
+    defBarPercent.style.display = 'none';
+    min5BarVariant.style.display = 'none';
+    min5BarPercent.style.display = 'none';
+    min30BarVariant.style.display = 'none';
+    min30BarPercent.style.display = 'none';
+    avg1BarVariant.style.display = 'none';
+    avg1BarPercent.style.display = 'none';
+    strong4BarVariant.style.display = 'none';
+    strong4BarPercent.style.display = 'none';
+
+    // variables for the caption kits you are targeting 
+    const defCaption = document.getElementById("def_caption")
+    const min5Caption = document.getElementById("min_5_caption")
+    const min30Caption = document.getElementById("min_30_caption")
+    const avg1Caption = document.getElementById("avg_1_caption")
+    const strong4Caption = document.getElementById("strong_4_caption")
+
+    // hide all the progress_simple bars
+    defCaption.style.display = 'none';
+    min5Caption.style.display = 'none';
+    min30Caption.style.display = 'none';
+    avg1Caption.style.display = 'none';
+    strong4Caption.style.display = 'none';
+
+    // funtion that determines strenght of user passowrd using zxcvbn
+    const handleStrengthCalculation = (settings) => {
+
+      // define the settings object with its defaults
+      const {
+        passphrase = "",
+        common = false,
+        isPwned = false,
+        averageThreshold = 2,
+        minLength = 12,
+        strongThreshold = 3,
+      } = settings
+
+      // define the resultsByScore objects, these return an object with a variant and percentage,
+      // depending on the score of the password
+      const resultByScore = {
+        0: {
+          variant: 'negative',
+          label: '',
+          percent: 0,
+        },
+        1: {
+          variant: 'negative',
+          label: 'This passphrase is too common',
+          percent: 25,
+        },
+        2: {
+          variant: 'negative',
+          label: 'Too weak',
+          percent: 25,
+        },
+        3: {
+          variant: 'warning',
+          label: 'Almost there, keep going!',
+          percent: 50,
+        },
+        4: {
+          variant: 'positive',
+          label: 'Success! Strong passphrase',
+          percent: 100,
+        }
+      }
+
+      const { score } = zxcvbn(passphrase);
+
+      const noPassphrase = passphrase.length <= 0
+      const commonPassphrase = common || isPwned
+      const weakPassphrase = passphrase.length < minLength || score < averageThreshold
+      const averagePassphrase = score < strongThreshold
+      const strongPassphrase = score >= strongThreshold
+
+      // conditional that returns the score of the password, along with the resultByScore object 
+      // so we can change the percantage and variant of the progress_simple kit
+      if (noPassphrase) {
+        return {...resultByScore[0], score}
+      } else if (commonPassphrase) {
+        return {...resultByScore[1], score}
+      } else if (weakPassphrase) {
+        return {...resultByScore[2], score}
+      } else if (averagePassphrase){
+        return {...resultByScore[3], score}
+      } else if (strongPassphrase) {
+        return {...resultByScore[4], score}
+      }
+    }
+
+
+    // event listeners attached to the input field
+    min5.addEventListener('input', (e) => {
+      const passphrase = e.target.value;
+
+      // defining setting object to spread into handleStrengthCalculation
+      setting = {
+        minLength: 5,
+      }
+
+      // pass in passphrase and setting object to handleStrengthCalculation and set that equal to result variable
+      const result = handleStrengthCalculation({passphrase, ...setting})
+
+      // set the value of the text_input to the score
+      calcStrength.value = result.score
+
+      // conditional statment to show or hide progress_simple bar and caption if user has entered a password
+      if (passphrase) {
+        min5BarVariant.style.display = 'block';
+
+        min5BarPercent.style.display = 'block';
+
+        min5Caption.style.display = 'block';
+      } else {
+        min5BarVariant.style.display = 'none';
+
+        min5BarPercent.style.display = 'none';
+
+        min5Caption.style.display = 'none';
+      }
+
+      // set the width of the progress_simple kit
+      min5BarPercent.style.width = result.percent.toString()+ "%"
+
+
+      // set the variant of the progress_simple kit
+      min5BarVariant.setAttribute("class", "pb_progress_simple_kit_"+ result.variant +"_left");
+
+
+      // set the text of the caption kit
+      min5Caption.textContent = result.label
+    });
+
+    defPassphrase.addEventListener('input', (e) => {
+      const passphrase = e.target.value;
+
+      const result = handleStrengthCalculation({passphrase})
+
+      calcStrength.value = result.score
+
+      if (passphrase) {
+        defBarVariant.style.display = 'block';
+
+        defBarPercent.style.display = 'block';
+
+        defCaption.style.display = 'block';
+      } else {
+        defBarVariant.style.display = 'none';
+
+        defBarPercent.style.display = 'none';
+
+        defCaption.style.display = 'none';
+      }
+
+      defBarPercent.style.width = result.percent.toString()+ "%"
+
+      defBarVariant.setAttribute("class", "pb_progress_simple_kit_"+ result.variant +"_left");
+
+      defCaption.textContent = result.label
+
+    });
+
+    min30.addEventListener('input', (e) => {
+      const passphrase = e.target.value;
+
+      setting = {
+        minLength: 30,
+      }
+
+      const result = handleStrengthCalculation({passphrase, ...setting})
+
+      calcStrength.value = result.score
+
+      if (passphrase) {
+        min30BarVariant.style.display = 'block';
+
+        min30BarPercent.style.display = 'block';
+
+        min30Caption.style.display = 'block';
+      } else {
+        min30BarVariant.style.display = 'none';
+
+        min30BarPercent.style.display = 'none';
+
+        min30Caption.style.display = 'none';
+      }
+
+      min30BarPercent.style.width = result.percent.toString()+ "%"
+
+      min30BarVariant.setAttribute("class", "pb_progress_simple_kit_"+ result.variant +"_left");
+
+      min30Caption.textContent = result.label
+    });
+
+    avg1.addEventListener('input', (e) => {
+      const passphrase = e.target.value;
+
+      setting =   {
+        averageThreshold: 1,
+      }
+
+      const result = handleStrengthCalculation({passphrase, ...setting})
+
+      calcStrength.value = result.score
+
+      if (passphrase) {
+        avg1BarVariant.style.display = 'block';
+
+        avg1BarPercent.style.display = 'block';
+
+        avg1Caption.style.display = 'block';
+      } else {
+        avg1BarVariant.style.display = 'none';
+
+        avg1BarPercent.style.display = 'none';
+
+        avg1Caption.style.display = 'none';
+      }
+
+      avg1BarPercent.style.width = result.percent.toString()+ "%"
+
+      avg1BarVariant.setAttribute("class", "pb_progress_simple_kit_"+ result.variant +"_left");
+
+      avg1Caption.textContent = result.label
+    });
+    
+    strong4.addEventListener('input', (e) => {
+      const passphrase = e.target.value;
+
+      setting =   {
+        strongThreshold: 4,
+      }
+
+      const result = handleStrengthCalculation({passphrase, ...setting})
+
+      calcStrength.value = result.score
+
+      if (passphrase) {
+        strong4BarVariant.style.display = 'block';
+
+        strong4BarPercent.style.display = 'block';
+
+        strong4Caption.style.display = 'block';
+      } else {
+        strong4BarVariant.style.display = 'none';
+
+        strong4BarPercent.style.display = 'none';
+
+        strong4Caption.style.display = 'none';
+      }
+
+      strong4BarPercent.style.width = result.percent.toString()+ "%"
+
+      strong4BarVariant.setAttribute("class", "pb_progress_simple_kit_"+ result.variant +"_left");
+
+      strong4Caption.textContent = result.label
+    });
+
+  
+  })
+<% end %>

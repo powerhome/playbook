@@ -1,6 +1,8 @@
 /* eslint no-console:0 */
 
 import WebpackerReact from 'webpacker-react'
+import zxcvbn from 'zxcvbn'
+window.zxcvbn = zxcvbn
 
 import 'playbook-ui/dist/playbook-rails'
 import 'playbook-ui/dist/playbook-doc' // playbook-react doc components

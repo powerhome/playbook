@@ -19,21 +19,18 @@
       const [input, setInput] = useState('')
       const [confirmationInput, setConfirmationInput] = useState('')
 
-      const handleChange = (e) => setInput(e.target.value)
-      const handleConfirmationChange = (e) => setConfirmationInput(e.target.value)  
-
       const match = document.querySelector("#match")
 
-      const input1 = document.querySelector(".pass_input_1").childNodes[0].childNodes[0].lastChild.firstChild.lastChild.firstChild
-      const input2 = document.querySelector(".pass_input_2").childNodes[0].childNodes[0].lastChild.firstChild.lastChild.firstChild
+      const input1 = document.querySelector(".pass_input_1").querySelector("input")
+      const input2 = document.querySelector(".pass_input_2").querySelector("input")
 
       input1.addEventListener('input', (e) => {
-          handleChange(e)
+          setInput(e.target.value)
           setMatchText()
       });
 
       input2.addEventListener('input', (e) => {
-          handleConfirmationChange(e)
+          setConfirmationInput(e.target.value)
           setMatchText()
       });
 
