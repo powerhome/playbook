@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-# rubocop:disable Style/HashLikeCase
-
 module Playbook
   module PbCircleChart
     class CircleChart < Playbook::KitBase
@@ -13,7 +11,6 @@ module Playbook
       prop :style, type: Playbook::Props::Enum,
                    values: %w[pie],
                    default: "pie"
-
       prop :data_labels, type: Playbook::Props::Boolean, default: false
       prop :min_point_size, type: Playbook::Props::Numeric
       prop :max_point_size, type: Playbook::Props::Numeric
@@ -43,49 +40,17 @@ module Playbook
       prop :x, type: Playbook::Props::Numeric
       prop :y, type: Playbook::Props::Numeric
 
-      def chart_type
-        style == "variablepie" ? "variablepie" : "pie"
-      end
-
-      def chart_data_formatted
-        chart_data.map { |hash| hash[:y] = hash.delete :value }
-        chart_data
-      end
-
-      def inner_size_format
-        case inner_size
-        when "lg"
-          "85%"
-        when "sm"
-          "35%"
-        when "none"
-          "0%"
-        when "md"
-          "50%"
-        end
-      end
-
-      def rounded_border_width
-        rounded ? 20 : nil
-      end
-
-      def rounded_border_color
-        rounded == true ? "null" : nil
-      end
-
       def chart_options
         {
           align: align,
           id: id,
           colors: colors,
-          borderColor: rounded_border_color,
-          borderWidth: rounded_border_width,
-          chartData: chart_data_formatted,
+          chartData: chart_data,
           dark: dark ? "dark" : "",
           title: title,
           height: height,
-          type: chart_type,
-          showInLegend: legend,
+          type: style,
+          legend: legend,
           dataLabelHtml: data_label_html,
           dataLabels: data_labels,
           headerFormat: header_format,
@@ -93,14 +58,15 @@ module Playbook
           useHTML: use_html,
           minPointSize: min_point_size,
           maxPointSize: max_point_size,
-          innerSize: inner_size_format,
+          innerSize: inner_size,
           zMin: z_min,
           startAngle: start_angle,
+          rounded: rounded,
           layout: layout,
           verticalAlign: vertical_align,
           x: x,
           y: y,
-        }.to_json.html_safe
+        }
       end
 
       def classname
@@ -109,5 +75,3 @@ module Playbook
     end
   end
 end
-
-# rubocop:enable Style/HashLikeCase
