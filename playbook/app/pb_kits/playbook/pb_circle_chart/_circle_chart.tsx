@@ -6,8 +6,7 @@ import Highcharts from "highcharts";
 
 import { highchartsTheme } from "../pb_dashboard/pbChartsLightTheme";
 import { highchartsDarkTheme } from "../pb_dashboard/pbChartsDarkTheme";
-import colors from "../tokens/exports/_colors.scss";
-
+import mapColors from "../pb_dashboard/pbChartsColorsHelper";
 import { globalProps } from "../utilities/globalProps";
 import { buildAriaProps, buildDataProps } from "../utilities/props";
 
@@ -44,17 +43,6 @@ type CircleChartProps = {
   borderWidth?: number;
 };
 
-// Map Data Color String Props to our SCSS Variables
-const mapColors = (array: string[]) => {
-  const regex = /(data)\-[1-8]/; //eslint-disable-line
-
-  const newArray = array.map((item) => {
-    return regex.test(item)
-      ? `${colors[`data_${item[item.length - 1]}`]}`
-      : item;
-  });
-  return newArray;
-};
 
 // Adjust Circle Chart Block Kit Dimensions to Match the Chart for Centering
 const alignBlockElement = (event: any) => {

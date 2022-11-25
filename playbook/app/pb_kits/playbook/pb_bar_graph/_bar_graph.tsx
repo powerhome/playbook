@@ -6,7 +6,7 @@ import HighchartsReact from "highcharts-react-official";
 import Highcharts from "highcharts";
 import { highchartsTheme } from "../pb_dashboard/pbChartsLightTheme";
 import { highchartsDarkTheme } from "../pb_dashboard/pbChartsDarkTheme";
-import colors from "../tokens/exports/_colors.scss";
+import mapColors from "../pb_dashboard/pbChartsColorsHelper";
 
 import classnames from "classnames";
 
@@ -36,17 +36,6 @@ type BarGraphProps = {
   data?: { [key: string]: string };
 };
 
-// Map Data Color String Props to our SCSS Variables
-const mapColors = (array: string[]) => {
-  const regex = /(data)\-[1-8]/; //eslint-disable-line
-
-  const newArray = array.map((item) => {
-    return regex.test(item)
-      ? `${colors[`data_${item[item.length - 1]}`]}`
-      : item;
-  });
-  return newArray;
-};
 
 const BarGraph = ({
   aria = {},
