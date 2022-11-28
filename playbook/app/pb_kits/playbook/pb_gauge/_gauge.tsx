@@ -62,14 +62,15 @@ const Gauge = ({
 }: GaugeProps) => {
   const ariaProps = buildAriaProps(aria);
   const dataProps = buildDataProps(data);
+  highchartsMore(Highcharts);
+  solidGauge(Highcharts);
   const setupTheme = () => {
     dark
       ? Highcharts.setOptions(highchartsDarkTheme)
       : Highcharts.setOptions(highchartsTheme);
   };
   setupTheme();
-  highchartsMore(Highcharts);
-  solidGauge(Highcharts);
+  
 
   const css = buildCss({
     pb_gauge_kit: true,
@@ -131,7 +132,6 @@ const Gauge = ({
         },
       },
       tooltip: {
-        headerFormat: "",
         pointFormat: tooltipHtml,
         followPointer: true,
       },
@@ -170,7 +170,7 @@ const Gauge = ({
       },
     };
 
-    setOptions({ ...staticOptions });
+    setOptions({ ...staticOptions});
     
     document
       .querySelectorAll(".gauge-pane")
