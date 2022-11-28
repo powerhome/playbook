@@ -95,6 +95,13 @@ const CircleChart = ({
   };
   setupTheme();
 
+  Highcharts.setOptions({tooltip: {
+    headerFormat: null,
+    pointFormat: '<span style="font-weight: bold; color:{point.color};">●</span>{point.name}: ' +
+    '<b>{point.y}</b>',
+    useHTML: useHtml,
+  }})
+
   const innerSizes = { sm: "35%", md: "50%", lg: "85%", none: "0%" };
   const innerSizeFormat = (size: "sm" | "md" | "lg" | "none") =>
     innerSizes[size];
@@ -142,11 +149,6 @@ const CircleChart = ({
           },
           showInLegend: legend,
         },
-      },
-
-      tooltip: {
-        formatter: function () {return `<span style="font-weight: bold; color:${this.point.color};">●</span>${this.point.name}: <b>${this.point.y}</b)>`},
-        useHTML: useHtml,
       },
       series: [
         {

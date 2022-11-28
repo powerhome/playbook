@@ -70,8 +70,13 @@ const Gauge = ({
       : Highcharts.setOptions(highchartsTheme);
   };
   setupTheme();
-  
 
+  //set tooltip directly to prevent being overriden by Highcharts defaults
+  Highcharts.setOptions({tooltip: {
+    pointFormat: tooltipHtml,
+    followPointer: true,
+  },})
+  
   const css = buildCss({
     pb_gauge_kit: true,
   });
@@ -130,10 +135,6 @@ const Gauge = ({
           shape: "arc",
           className: "gauge-pane",
         },
-      },
-      tooltip: {
-        pointFormat: tooltipHtml,
-        followPointer: true,
       },
       colors:
         colors !== undefined && colors.length > 0

@@ -27,7 +27,7 @@ type TreemapChartProps = {
   height?: string;
   id: number | string;
   title?: string;
-  tooltipHtml: () => {};
+  tooltipHtml: string;
   type?: string;
   aria?: { [key: string]: string };
   data?: { [key: string]: string };
@@ -44,7 +44,8 @@ const TreemapChart = ({
   height,
   id,
   title = "",
-  tooltipHtml = function () {return `<span style="font-weight: bold; color: ${this.point.color};">&#9679; </span> ${this.point.name}: <b>${this.point.value}</b>`},
+  tooltipHtml = '<span style="font-weight: bold; color:{point.color};">●</span>{point.name}: ' +
+  '<b>{point.y}</b>',
   type = "treemap",
   ...props
 }: TreemapChartProps) => {
@@ -58,6 +59,12 @@ const TreemapChart = ({
   setupTheme();
   treemap(Highcharts)
 
+    //set tooltip directly to prevent being overriden by Highcharts defaults
+    Highcharts.setOptions({tooltip: {
+      pointFormat: tooltipHtml,
+      useHTML: true,
+    },})
+  
 
   const staticOptions = {
     title: {
@@ -82,10 +89,6 @@ const TreemapChart = ({
             ? mapColors(colors)
             : highchartsTheme.colors,
       },
-    },
-    tooltip: {
-      formatter: tooltipHtml,
-      useHTML: true,
     },
   };
 
