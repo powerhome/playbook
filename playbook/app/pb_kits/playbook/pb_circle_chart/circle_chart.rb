@@ -19,11 +19,8 @@ module Playbook
                         default: "md"
       prop :z_min, type: Playbook::Props::Numeric
       prop :start_angle, type: Playbook::Props::Numeric
-      prop :header_format
       prop :data_label_html, default: "<div>{point.name}</div>"
-      prop :tooltip_html, default: '<span style="font-weight: bold; color:{point.color};">●</span>
-                                      {point.name}: ' + '<b>{point.y}
-                                    </b>'
+      prop :tooltip_html
       prop :use_html, type: Playbook::Props::Boolean, default: false
       prop :legend, type: Playbook::Props::Boolean, default: false
       prop :title, default: ""
@@ -53,7 +50,6 @@ module Playbook
           legend: legend,
           dataLabelHtml: data_label_html,
           dataLabels: data_labels,
-          headerFormat: header_format,
           tooltipHtml: tooltip_html,
           useHTML: use_html,
           minPointSize: min_point_size,

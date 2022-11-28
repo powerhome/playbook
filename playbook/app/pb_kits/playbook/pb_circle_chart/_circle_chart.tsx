@@ -21,7 +21,6 @@ type CircleChartProps = {
   data?: Object;
   dataLabelHtml?: string;
   dataLabels?: boolean;
-  headerFormat?: string;
   height?: string;
   id?: string;
   innerSize?: "sm" | "md" | "lg" | "none";
@@ -32,7 +31,6 @@ type CircleChartProps = {
   startAngle?: number;
   style?: string;
   title?: string;
-  tooltipHtml?: string;
   useHtml?: boolean;
   zMin?: number;
   layout?: "horizontal" | "vertical" | "proximate";
@@ -71,7 +69,6 @@ const CircleChart = ({
   data = {},
   dataLabelHtml = "<div>{point.name}</div>",
   dataLabels = false,
-  headerFormat = null,
   height,
   id,
   innerSize = "md",
@@ -81,8 +78,6 @@ const CircleChart = ({
   startAngle = null,
   style = "pie",
   title,
-  tooltipHtml = '<span style="font-weight: bold; color:{point.color};">●</span>{point.name}: ' +
-    "<b>{point.y}</b)>",
   useHtml = false,
   zMin = null,
   layout = "horizontal",
@@ -150,8 +145,7 @@ const CircleChart = ({
       },
 
       tooltip: {
-        headerFormat: headerFormat,
-        pointFormat: tooltipHtml,
+        formatter: function () {return `<span style="font-weight: bold; color:${this.point.color};">●</span>${this.point.name}: <b>${this.point.y}</b)>`},
         useHTML: useHtml,
       },
       series: [
