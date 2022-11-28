@@ -27,7 +27,7 @@ type TreemapChartProps = {
   height?: string;
   id: number | string;
   title?: string;
-  tooltipHtml: string;
+  tooltipHtml: () => {};
   type?: string;
   aria?: { [key: string]: string };
   data?: { [key: string]: string };
@@ -44,7 +44,7 @@ const TreemapChart = ({
   height,
   id,
   title = "",
-  tooltipHtml = '<span style="font-weight: bold; color: {point.color};">&#9679; </span> {point.name}: <b>{point.value}</b>',
+  tooltipHtml = function () {return `<span style="font-weight: bold; color: ${this.point.color};">&#9679; </span> ${this.point.name}: <b>${this.point.value}</b>`},
   type = "treemap",
   ...props
 }: TreemapChartProps) => {
@@ -84,7 +84,7 @@ const TreemapChart = ({
       },
     },
     tooltip: {
-      pointFormat: tooltipHtml,
+      formatter: tooltipHtml,
       useHTML: true,
     },
   };
