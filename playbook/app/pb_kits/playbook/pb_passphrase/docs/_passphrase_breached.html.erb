@@ -1,1 +1,145 @@
-<%= pb_rails("passphrase", props: { check_pwned: true }) %>
+<%= pb_rails("passphrase", props: { label: "Passphrase", classname: "passphrase_breached" }) %>
+
+<%= pb_rails("progress_simple", props: { percent: 0, id: "bar_breached" }) %>
+
+<%= pb_rails("caption", props: { size: 'xs', text: "hello", id: "caption_breached" }) %>
+
+<%= javascript_tag do %>
+    window.addEventListener("DOMContentLoaded", () => {
+
+    // variables for the kits you are targeting 
+    const passphrase = document.querySelector(".passphrase_breached").querySelector("input")
+    const barVariant = document.getElementById("bar_breached")
+    const barPercent = document.getElementById("bar_breached").querySelector("div")
+    const caption = document.getElementById("caption_breached")
+
+    // hide the bar and captions
+    barVariant.style.display = 'none';
+    barPercent.style.display = 'none';
+    caption.style.display = 'none';
+
+
+  const handleStrengthCalculation = (settings) => {
+    const {
+        passphrase = "",
+        common = false,
+        isPwned = false,
+        averageThreshold = 2,
+        minLength = 12,
+        strongThreshold = 3,
+      } = settings
+
+    const resultByScore = {
+      0: {
+        variant: 'negative',
+        label: '',
+        percent: 0,
+      },
+      1: {
+        variant: 'negative',
+        label: 'This passphrase is too common',
+        percent: 25,
+      },
+      2: {
+        variant: 'negative',
+        label: 'Too weak',
+        percent: 25,
+      },
+      3: {
+        variant: 'warning',
+        label: 'Almost there, keep going!',
+        percent: 50,
+      },
+      4: {
+        variant: 'positive',
+        label: 'Success! Strong passphrase',
+        percent: 100,
+      }
+    }
+
+    const { score } = zxcvbn(passphrase);
+
+    const noPassphrase = passphrase.length <= 0
+    const commonPassphrase = common || isPwned
+    const weakPassphrase = passphrase.length < minLength || score < averageThreshold
+    const averagePassphrase = score < strongThreshold
+    const strongPassphrase = score >= strongThreshold
+
+    if (noPassphrase) {
+      return {...resultByScore[0], score}
+    } else if (commonPassphrase) {
+      return {...resultByScore[1], score}
+    } else if (weakPassphrase) {
+      return {...resultByScore[2], score}
+    } else if (averagePassphrase){
+      return {...resultByScore[3], score}
+    } else if (strongPassphrase) {
+      return {...resultByScore[4], score}
+    }
+  }
+
+    // event listeners attached to the input field
+    passphrase.addEventListener('input', (e) => {
+      const passphrase = e.target.value;
+
+      let pwndMatch = false
+
+      const checkHaveIBeenPwned = async function (passphrase) {
+        const buffer = new TextEncoder('utf-8').encode(passphrase)
+        const digest = await crypto.subtle.digest('SHA-1', buffer)
+        const hashArray = Array.from(new Uint8Array(digest))
+        const hashHex = hashArray.map((b) => b.toString(16).padStart(2, '0')).join('')
+      
+        const firstFive = hashHex.slice(0, 5)
+        const endOfHash = hashHex.slice(5)
+      
+        const resp = await fetch(`https://api.pwnedpasswords.com/range/${firstFive}`)
+        const text = await resp.text()
+    
+        if (passphrase.length < 5) {
+          pwndMatch = false
+        }
+        else {
+          pwndMatch = text.split('\n').some((line) => {
+          return line.split(':')[0] === endOfHash.toUpperCase()
+          })
+        }
+
+        // pass in passphrase and isPwnd match to the handleStrengthCalculation and set that equal to result variable
+        const result = handleStrengthCalculation({ passphrase: passphrase, isPwned: pwndMatch });
+
+
+        // conditional statment to show or hide progress_simple bar and caption if user has entered a password
+        if (passphrase) {
+          barVariant.style.display = 'block';
+
+          barPercent.style.display = 'block';
+
+          caption.style.display = 'block';
+        } else {
+          barVariant.style.display = 'none';
+
+          barPercent.style.display = 'none';
+
+          caption.style.display = 'none';
+        }
+
+        // set the width of the progress_simple kit
+        barPercent.style.width = result.percent.toString()+ "%"
+
+
+        // set the variant of the progress_simple kit
+        barVariant.setAttribute("class", "pb_progress_simple_kit_"+ result.variant +"_left");
+
+
+        // set the text of the caption kit
+        caption.textContent = result.label
+      }
+
+      checkHaveIBeenPwned(passphrase)
+
+
+    });
+
+  })
+<% end %>

@@ -1,10 +1,10 @@
-<%= pb_rails("passphrase", props: { label: "Default Settings", classname: "passphrase_change" }) %>
+<%= pb_rails("passphrase", props: { label: "Passphrase", classname: "passphrase_change" }) %>
 
 <%= pb_rails("progress_simple", props: { percent: 0, id: "bar_change" }) %>
 
 <%= pb_rails("caption", props: { size: 'xs', text: "hello", id: "caption_change" }) %>
 
-<%= pb_rails("text_input", props: { label: "Calculated Strength", value: "0", disabled: true, id: "calc_strength_change" }) %>
+<%= pb_rails("text_input", props: { label: "Passphrase Strength", value: "0", disabled: true, id: "calc_strength_change" }) %>
 
 
 <%= javascript_tag do %>
