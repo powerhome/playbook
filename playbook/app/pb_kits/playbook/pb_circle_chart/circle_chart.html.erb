@@ -1,6 +1,10 @@
-<div id=wrapper-circle-chart-<%= object.id %>>
-<%= react_component('CircleChart', object.chart_options) %>
-<div class="pb-circle-chart-block">
-<%= content %>
-</div>
-</div>
+<% if content.present? %>
+    <div id=wrapper-circle-chart-<%= object.id %> >
+        <%= react_component('CircleChart', object.chart_options) %>
+        <div class="pb-circle-chart-block">
+            <%= content %>
+        </div>
+    </div>
+<% else %>
+    <%= react_component('CircleChart', object.chart_options) %>
+<% end %>

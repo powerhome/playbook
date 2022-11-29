@@ -41,7 +41,6 @@ type CircleChartProps = {
   borderWidth?: number;
 };
 
-
 // Adjust Circle Chart Block Kit Dimensions to Match the Chart for Centering
 const alignBlockElement = (event: any) => {
   const itemToMove = document.querySelector(
@@ -95,12 +94,15 @@ const CircleChart = ({
   };
   setupTheme();
 
-  Highcharts.setOptions({tooltip: {
-    headerFormat: null,
-    pointFormat: '<span style="font-weight: bold; color:{point.color};">●</span>{point.name}: ' +
-    '<b>{point.y}</b>',
-    useHTML: useHtml,
-  }})
+  Highcharts.setOptions({
+    tooltip: {
+      headerFormat: null,
+      pointFormat:
+        '<span style="font-weight: bold; color:{point.color};">●</span>{point.name}: ' +
+        "<b>{point.y}</b>",
+      useHTML: useHtml,
+    },
+  });
 
   const innerSizes = { sm: "35%", md: "50%", lg: "85%", none: "0%" };
   const innerSizeFormat = (size: "sm" | "md" | "lg" | "none") =>
@@ -180,21 +182,34 @@ const CircleChart = ({
   }, [chartData]);
 
   return (
-    <div id={`wrapper-circle-chart-${id}`}>
-      <HighchartsReact
-        containerProps={{
-          className: classnames("pb_circle_chart", globalProps(props)),
-          id: id,
-          ...ariaProps,
-          ...dataProps,
-        }}
-        highcharts={Highcharts}
-        options={options}
-      />
-        {children ? (
+    <>
+      {children ? (
+        <div id={`wrapper-circle-chart-${id}`}>
+          <HighchartsReact
+            containerProps={{
+              className: classnames("pb_circle_chart", globalProps(props)),
+              id: id,
+              ...ariaProps,
+              ...dataProps,
+            }}
+            highcharts={Highcharts}
+            options={options}
+          />
           <div className="pb-circle-chart-block">{children}</div>
-        ) : null}
-    </div>
+        </div>
+      ) : (
+        <HighchartsReact
+          containerProps={{
+            className: classnames("pb_circle_chart", globalProps(props)),
+            id: id,
+            ...ariaProps,
+            ...dataProps,
+          }}
+          highcharts={Highcharts}
+          options={options}
+        />
+      )}
+    </>
   );
 };
 
