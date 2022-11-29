@@ -3,8 +3,6 @@ services:
     build:
       target: prod
     volumes: []
-    env_file:
-      - ci.env
   webpacker:
     build:
       target: prod
