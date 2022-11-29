@@ -62,12 +62,7 @@ module Playbook
           verticalAlign: vertical_align,
           x: x,
           y: y,
-          children: block_content,
         }
-      end
-
-      def block_content
-        content.presence
       end
 
       def classname
