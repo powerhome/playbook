@@ -12,4 +12,8 @@
   rect.highcharts-background {
     fill: #0000 !important;
   }
+
+  .gauge-pane {
+    stroke-linejoin: round;
+  }
 }

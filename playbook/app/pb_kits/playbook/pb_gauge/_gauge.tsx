@@ -72,11 +72,13 @@ const Gauge = ({
   setupTheme();
 
   //set tooltip directly to prevent being overriden by Highcharts defaults
-  Highcharts.setOptions({tooltip: {
-    pointFormat: tooltipHtml,
-    followPointer: true,
-  },})
-  
+  Highcharts.setOptions({
+    tooltip: {
+      pointFormat: tooltipHtml,
+      followPointer: true,
+    },
+  });
+
   const css = buildCss({
     pb_gauge_kit: true,
   });
@@ -171,19 +173,17 @@ const Gauge = ({
       },
     };
 
-    setOptions({ ...staticOptions});
-    
-    document
-      .querySelectorAll(".gauge-pane")
-      .forEach((pane) => pane.setAttribute("stroke-linejoin", "round"));
+    setOptions({ ...staticOptions });
+
     if (document.querySelector(".prefix")) {
-      document
-        .querySelectorAll(".prefix")
-        .forEach((prefix) => prefix.setAttribute("y", "28"));
+      document.querySelectorAll(".prefix").forEach((prefix) => {
+        prefix.setAttribute("y", "28");
+      });
       document
         .querySelectorAll(".fix")
         .forEach((fix) => fix.setAttribute("y", "38"));
     }
+
     if (componentDidMount.current) {
       Highcharts.charts.forEach((chart: any) => {
         if (chart && chart.renderTo.id === id) {
