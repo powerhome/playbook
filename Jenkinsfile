@@ -16,6 +16,20 @@ app.build(
     appRepo: "image-registry.powerapp.cloud/playbook/playbook",
     files: ["docker-compose.yml", "docker-compose.ci.yml"]
   ) { compose ->
+
+    withCredentials([
+      usernamePassword(
+        credentialsId: 'playbook-ci-build-aws-creds',
+        usernameVariable: 'AWS_ACCESS_KEY_ID',
+        passwordVariable: 'AWS_SECRET_ACCESS_KEY'
+      )
+    ]) {
+      sh "mkdir -p ~/.kube"
+      sh "bin/container/deployer  sops --config .sops.yaml \
+            --decrypt ./config/ci/secrets.yaml \
+            > ./config/ci/secrets.dec.yaml"
+    }
+
     stage('Image Build') {
       compose.buildAndPush()
     }
