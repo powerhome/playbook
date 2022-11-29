@@ -44,8 +44,7 @@ const TreemapChart = ({
   height,
   id,
   title = "",
-  tooltipHtml = '<span style="font-weight: bold; color:{point.color};">●</span>{point.name}: ' +
-  '<b>{point.y}</b>',
+  tooltipHtml = '<span style="font-weight: bold; color:{point.color};">●</span>{point.name}: <b>{point.value}</b>',
   type = "treemap",
   ...props
 }: TreemapChartProps) => {
@@ -55,16 +54,9 @@ const TreemapChart = ({
     dark
       ? Highcharts.setOptions(highchartsDarkTheme)
       : Highcharts.setOptions(highchartsTheme);
-  };
-  setupTheme();
+  };  
   treemap(Highcharts)
-
-    //set tooltip directly to prevent being overriden by Highcharts defaults
-    Highcharts.setOptions({tooltip: {
-      pointFormat: tooltipHtml,
-      useHTML: true,
-    },})
-  
+  setupTheme();  
 
   const staticOptions = {
     title: {
@@ -82,6 +74,9 @@ const TreemapChart = ({
     ],
     plotOptions: {
       treemap: {
+        tooltip: {
+          pointFormat: tooltipHtml,
+        },
         allowTraversingTree: drillable,
         colorByPoint: !grouped,
         colors:
