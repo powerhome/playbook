@@ -12,39 +12,44 @@ $transition-speed: 0.2s;
         tr {
           box-shadow: 0 0 0 $white;
           transition: box-shadow $transition-speed ease;
-
           td {
             border-top-color: transparent;
-            border-top-width: 1px !important;
-            transition: all $transition-speed ease;
+            border-top-width: 0;
+            transition: all $transition-speed ease; 
           }
-
-          @media (hover:hover) {
+          @media (hover:hover) { 
+            td {
+              position: relative;
+              
+              &:after {
+                transition: background-color $transition-speed ease, height $transition-speed ease;
+                content: "";
+                position: absolute;
+                display: block;
+                top: -1px;
+                left: 0;
+                right: 0;
+                height: 0;
+                background-color: transparent;
+              }
+            }
             &:hover {
               box-shadow: 0 2px 10px 0 rgba($slate, $opacity-6);
-
               td {
                 background: $white;
                 border-color: darken($border_light, 10%);
-                border-top-width: 1px;
+                border-top-width: 0;
                 border-top-color: transparent;
-              }
-            }
-          }
-        }
-      }
-      &.as-cards {
-        tbody {
-          tr {
-            td {
-              border-top-color: $border_light;
-              border-top-width: 1px;
-            }
-            @media (hover:hover) {
-              &:hover {
-                td {
-                  border-top-width: 1px;
-                  border-top-color: $border_light;
+                &:after {
+                  transition: background-color $transition-speed ease, height $transition-speed ease;
+                  content: "";
+                  position: absolute;
+                  top: -1px;
+                  left: 0;
+                  right: 0;
+                  display: block;
+                  background-color: darken($border_light, 10%);
+                  height: 1px;
                 }
               }
             }

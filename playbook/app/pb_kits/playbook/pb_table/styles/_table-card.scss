@@ -57,33 +57,6 @@
           }
         }
       }
-
-      &.as-cards {
-        border: 1px solid $border_light;
-        border-radius: 4px;
-
-        thead {
-          tr {
-            margin: $space-xs 0 0;
-            padding: 0 $space-xs;
-            border-bottom: 1px solid $border_light;
-
-            th {
-              border-width: 0;
-            }
-          }
-        }
-        tbody {
-          tr {
-            margin: $space-xs;
-            width: calc(100% - #{$space-xs}*2);
-
-            td {
-              border-top-width: 1px;
-            }
-          }
-        }
-      }
     }
   }
 }
