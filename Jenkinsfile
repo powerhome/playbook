@@ -25,9 +25,7 @@ app.build(
       )
     ]) {
       sh "mkdir -p ~/.kube"
-      sh "bin/container/deployer  sops --config .sops.yaml \
-            --decrypt ./config/ci/secrets.yaml \
-            > ./config/ci/secrets.dec.yaml"
+      sh "bin/container/deployer sops --config .sops.yaml --decrypt ./config/ci/secrets.yaml > ./config/ci/secrets.dec.yaml"
     }
 
     stage('Image Build') {

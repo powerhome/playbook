@@ -29,9 +29,6 @@ RUN apt-get update -y \
 
 WORKDIR /home/app/src
 
-ARG FONT_AWESOME_AUTH_TOKEN=""
-RUN npm config set "@fortawesome:registry" https://npm.fontawesome.com/
-RUN npm config set "//npm.fontawesome.com/:_authToken" $FONT_AWESOME_AUTH_TOKEN
 
 # Build Library
 COPY playbook-website/package.json playbook-website/
