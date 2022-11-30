@@ -20,7 +20,6 @@ $transition-speed: 0.2s;
           @media (hover:hover) { 
             td {
               position: relative;
-              
               &:after {
                 transition: background-color $transition-speed ease, height $transition-speed ease;
                 content: "";
@@ -42,12 +41,6 @@ $transition-speed: 0.2s;
                 border-top-color: transparent;
                 &:after {
                   transition: background-color $transition-speed ease, height $transition-speed ease;
-                  content: "";
-                  position: absolute;
-                  top: -1px;
-                  left: 0;
-                  right: 0;
-                  display: block;
                   background-color: darken($border_light, 10%);
                   height: 1px;
                 }
