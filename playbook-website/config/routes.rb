@@ -10,7 +10,9 @@ Rails.application.routes.draw do
 
   get "kits/:name",       to: "pages#kit_show_rails", as: "kit_show"
   get "kits/:name/rails", to: "pages#kit_show_rails", as: "kit_show_rails"
+  get "kits/:name/rails/new", to: "pages#kit_show_rails_new", as: "kit_show_rails_new"
   get "kits/:name/react", to: "pages#kit_show_react", as: "kit_show_reacts"
+  get "kits/:name/react/new", to: "pages#kit_show_react_new", as: "kit_show_reacts_new"
   get "all_kit_examples", to: "pages#all_kit_examples"
 
   get "kit_category/:name",       to: "pages#kit_category_show_rails", as: "kit_category_show"

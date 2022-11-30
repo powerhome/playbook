@@ -1,0 +1,11 @@
+  <% if (action_name == "kit_show_rails_new") %>
+    <%= pb_rails("background", props: { classname: "token-wrapper", background_color: "light", padding: "xl" }) do %>
+      <%= pb_rails("title", props: { text: "There should be another title below this that says 'Rails'", tag: "h1", size: 1 }) %>
+      <%= react_component("PbKitRails") %>
+    <% end %>
+  <% else %>
+    <%= pb_rails("background", props: { classname: "token-wrapper", background_color: "light", padding: "xl" }) do %>
+      <%= pb_rails("title", props: { text: "There should be another title below this that says 'React'", tag: "h1", size: 1 }) %>
+      <%= react_component("PbKitReact") %>
+    <% end %>
+  <% end %>

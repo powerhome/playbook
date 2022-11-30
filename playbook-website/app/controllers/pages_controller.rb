@@ -74,6 +74,16 @@ class PagesController < ApplicationController
     render template: "pages/kit_show", layout: "layouts/kits"
   end
 
+  def kit_show_rails_new
+    @type = "rails"
+    render "pages/kit_show_react", layout: "layouts/kits"
+  end
+
+  def kit_show_react_new
+    @type = "react"
+    render template: "pages/kit_show_react", layout: "layouts/kits"
+  end
+
   def principles; end
 
   # TODO: rename this method once all guidelines are completed
