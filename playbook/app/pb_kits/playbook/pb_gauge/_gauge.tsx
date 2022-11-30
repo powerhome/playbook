@@ -7,7 +7,7 @@ import { highchartsDarkTheme } from "../pb_dashboard/pbChartsDarkTheme";
 import mapColors from "../pb_dashboard/pbChartsColorsHelper";
 import highchartsMore from "highcharts/highcharts-more";
 import solidGauge from "highcharts/modules/solid-gauge";
-import themecolors from "../tokens/exports/_colors.scss";
+import defaultColors from "../tokens/exports/_colors.scss";
 import typography from "../tokens/exports/_typography.scss";
 
 import { buildAriaProps, buildCss, buildDataProps } from "../utilities/props";
@@ -156,7 +156,7 @@ const Gauge = ({
           innerRadius: "90%",
           dataLabels: {
             borderWidth: 0,
-            color: themecolors.text_lt_default,
+            color: defaultColors.text_lt_default,
             enabled: true,
             format:
               `<span class="prefix">${prefix}</span>` +
