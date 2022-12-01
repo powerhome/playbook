@@ -75,11 +75,23 @@ class PagesController < ApplicationController
   end
 
   def kit_show_rails_new
+    menu = MENU["kits"].map { |link| link.is_a?(Hash) ? link.first.last : link }
+    if menu.flatten.include?(params[:name])
+      @kit = params[:name]
+    else
+      redirect_to root_path, flash: { error: "That kit does not exist" }
+    end
     @type = "rails"
     render "pages/kit_show_react", layout: "layouts/kits"
   end
 
   def kit_show_react_new
+    menu = MENU["kits"].map { |link| link.is_a?(Hash) ? link.first.last : link }
+    if menu.flatten.include?(params[:name])
+      @kit = params[:name]
+    else
+      redirect_to root_path, flash: { error: "That kit does not exist" }
+    end
     @type = "react"
     render template: "pages/kit_show_react", layout: "layouts/kits"
   end
