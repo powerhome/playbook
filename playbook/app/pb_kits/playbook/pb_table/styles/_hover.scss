@@ -26,6 +26,7 @@ $transition-speed: 0.2s;
                 position: absolute;
                 display: block;
                 top: -1px;
+                z-index: 1;
                 left: 0;
                 right: 0;
                 height: 0;
