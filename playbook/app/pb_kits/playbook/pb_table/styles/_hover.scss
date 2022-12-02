@@ -32,6 +32,12 @@ $transition-speed: 0.2s;
                 height: 0;
                 background-color: transparent;
               }
+              &:first-child:after {
+                left: -1px;
+              }
+              &:last-child:after {
+                right: -1px;
+              }
             }
             &:hover {
               box-shadow: 0 2px 10px 0 rgba($slate, $opacity-6);
