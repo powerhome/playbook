@@ -13,7 +13,6 @@ import DarkModeToggle from '../components/DarkModeToggle'
 import KitSearch from '../components/KitSearch'
 import SnippetToggle from '../components/SnippetToggle'
 import Sidebar from '../components/Sidebar'
-import PbKitRails from '../components/PbKitRails'
 import PbKitReact from '../components/PbKitReact'
 
 WebpackerReact.setup({
@@ -21,7 +20,6 @@ WebpackerReact.setup({
   KitSearch,
   SnippetToggle,
   Sidebar,
-  PbKitRails,
   PbKitReact,
 })
 

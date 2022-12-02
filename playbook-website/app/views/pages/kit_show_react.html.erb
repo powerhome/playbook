@@ -1,9 +1,1 @@
-  <% if (action_name == "kit_show_rails_new") %>
-    <%= pb_rails("background", props: { classname: "token-wrapper", background_color: "light", padding: "xl" }) do %>
-      <%= react_component("PbKitRails", kit: @kit) %>
-    <% end %>
-  <% else %>
-    <%= pb_rails("background", props: { classname: "token-wrapper", background_color: "light", padding: "xl" }) do %>
-      <%= react_component("PbKitReact", kit: @kit) %>
-    <% end %>
-  <% end %>
+<%= react_component("PbKitReact", kit: @kit) %>
