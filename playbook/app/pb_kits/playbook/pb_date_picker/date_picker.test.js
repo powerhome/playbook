@@ -108,54 +108,54 @@ describe('DatePicker Kit', () => {
     })
   })
 
-  // test('shows DatePicker meridiem toggle', async () => {
-  //   const testId = 'datepicker-meridiem'
-  //   render(
-  //     <DatePicker
-  //         data={{ testid: testId }}
-  //         defaultDate={DEFAULT_DATE}
-  //         enableTime
-  //         pickerId="date-picker-meridiem"
-  //     />
-  //   )
+  test('shows DatePicker meridiem toggle', async () => {
+    const testId = 'datepicker-meridiem'
+    render(
+      <DatePicker
+          data={{ testid: testId }}
+          defaultDate={DEFAULT_DATE}
+          enableTime
+          pickerId="date-picker-meridiem"
+      />
+    )
 
-  //   const kit = screen.getByTestId(testId)
-  //   const input = within(kit).getByPlaceholderText('Select Date')
+    const kit = screen.getByTestId(testId)
+    const input = within(kit).getByPlaceholderText('Select Date')
 
-  //   fireEvent(
-  //     input,
-  //     new MouseEvent('click', {
-  //       bubbles: true,
-  //       cancelable: true,
-  //     }),
-  //   )
-  //   const meridiemToggleAM = within(kit).getByLabelText('AM')
-  //   const meridiemTogglePM = within(kit).getByLabelText('PM')
-  //   await waitFor(() => {
-  //     expect(meridiemToggleAM).toBeInTheDocument()
-  //     expect(meridiemTogglePM).toBeInTheDocument()
-  //   })
+    fireEvent(
+      input,
+      new MouseEvent('click', {
+        bubbles: true,
+        cancelable: true,
+      }),
+    )
+    const meridiemToggleAM = within(kit).getByLabelText('AM')
+    const meridiemTogglePM = within(kit).getByLabelText('PM')
+    await waitFor(() => {
+      expect(meridiemToggleAM).toBeInTheDocument()
+      expect(meridiemTogglePM).toBeInTheDocument()
+    })
 
-  //   fireEvent(
-  //     meridiemToggleAM,
-  //     new MouseEvent('click', {
-  //       bubbles: true,
-  //       cancelable: true,
-  //     }),
-  //   )
-  //   await waitFor(() => {
-  //     expect(input).toHaveValue('01/01/2020 at 12:00 AM')
-  //   })
+    fireEvent(
+      meridiemToggleAM,
+      new MouseEvent('click', {
+        bubbles: true,
+        cancelable: true,
+      }),
+    )
+    await waitFor(() => {
+      expect(input).toHaveValue('01/01/2020 at 12:00 AM')
+    })
 
-  //   fireEvent(
-  //     meridiemTogglePM,
-  //     new MouseEvent('click', {
-  //       bubbles: true,
-  //       cancelable: true,
-  //     }),
-  //   )
-  //   await waitFor(() => {
-  //     expect(input).toHaveValue('01/01/2020 at 12:00 PM')
-  //   })
-  // })
+    fireEvent(
+      meridiemTogglePM,
+      new MouseEvent('click', {
+        bubbles: true,
+        cancelable: true,
+      }),
+    )
+    await waitFor(() => {
+      expect(input).toHaveValue('01/01/2020 at 12:00 PM')
+    })
+  })
 })
