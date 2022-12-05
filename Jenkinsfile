@@ -26,7 +26,7 @@ app.build(
       ]) {
         sh "mkdir -p ~/.kube"
         dir("playbook-website") {
-          sh "bin/deployer sops --config .sops.yaml --decrypt ./config/ci/secrets.yaml > ./config/ci/secrets.dec.yaml"
+          sh "bin/deployer sops --decrypt ./config/ci/secrets.yaml > ./config/ci/secrets.dec.yaml"
         }
       }
 
