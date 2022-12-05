@@ -14,4 +14,36 @@
       <%= content %>
     <% end %>
   <% end %>
+
+  <% if object.variant == "checkbox"%>
+    <script>
+      var checkboxElement = document.querySelector("#<%=object.id%> input[type=checkbox]")
+      
+      checkboxElement.addEventListener("change", (evt) => {
+        var listItemElement = document.querySelector("#<%=object.id%>")
+        
+        if (evt.target.checked) {
+          listItemElement.classList.add("checked_item");
+        } else {
+          listItemElement.classList.remove("checked_item")
+        }
+      })
+    </script>
+  <% else %>
+    <script>
+      var radioElement = document.querySelector("#<%=object.id%> input[type=radio]")
+
+      radioElement.addEventListener("change", () => {        
+        var radios = radioElement.closest("ul").querySelectorAll("input[type=radio]")
+        
+        radios.forEach((radio) => {
+          if (radio.checked) {
+            radio.closest("li").classList.add("checked_item");
+          } else {
+            radio.closest("li").classList.remove("checked_item")
+          }
+        });
+      })
+    </script>
+  <% end %>
 <% end %>

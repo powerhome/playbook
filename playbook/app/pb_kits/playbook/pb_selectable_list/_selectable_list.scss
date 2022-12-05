@@ -7,6 +7,9 @@
     &:hover {
       background-color: $bg_light;
     }
+    &[class*=checked_item] {
+      background-color: $bg_light;
+    }
   }
   [class^=pb_radio_kit] {
     margin-left: $space_xs;
