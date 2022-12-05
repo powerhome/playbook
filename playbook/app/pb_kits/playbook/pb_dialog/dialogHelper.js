@@ -5,8 +5,24 @@ const dialogHelper = () => {
   openTrigger.forEach((open) => {
     open.addEventListener("click", () => {
       var openTriggerData = open.dataset.openDialog;
-      if (document.getElementById(openTriggerData).open) return;
-      document.getElementById(openTriggerData).showModal();
+      var targetDialog = document.getElementById(openTriggerData)
+      if (targetDialog.open) return;
+      targetDialog.showModal();
+
+      //the following allows you to close dialog by clicking on overlay
+      targetDialog.addEventListener('click',((event) => {
+        var dialogContainerData = targetDialog.parentElement.dataset
+         if (dialogContainerData.overlayClick === "overlay_close") return;
+          let rect = event.target.getBoundingClientRect();
+                if (rect.left > event.clientX ||
+              rect.right < event.clientX ||
+              rect.top > event.clientY ||
+              rect.bottom < event.clientY
+          ) {
+              targetDialog.close();
+          }
+        })
+      );
     });
   });
 
