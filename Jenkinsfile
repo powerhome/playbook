@@ -25,7 +25,9 @@ app.build(
         )
       ]) {
         sh "mkdir -p ~/.kube"
-        sh "cd playbook-website; bin/deployer sops --config .sops.yaml --decrypt ./config/ci/secrets.yaml > ./config/ci/secrets.dec.yaml"
+        dir("playbook-website") {
+          sh "bin/deployer sops --config .sops.yaml --decrypt ./config/ci/secrets.yaml > ./config/ci/secrets.dec.yaml"
+        }
       }
 
       compose.buildAndPush()
