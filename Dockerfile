@@ -29,7 +29,6 @@ RUN apt-get update -y \
 
 WORKDIR /home/app/src
 
-
 # Build Library
 COPY playbook-website/package.json playbook-website/
 COPY playbook/package.json playbook/
@@ -39,7 +38,6 @@ RUN yarn install
 RUN curl https://github.com/sass/node-sass/releases/download/v4.13.0/linux-x64-64_binding.node -o node_modules/node-sass/vendor/linux-x64-64_binding.node
 
 COPY --chown=app:app playbook /home/app/src/playbook
-
 
 # Bundle website
 COPY --chown=app:app playbook-website /home/app/src/playbook-website
