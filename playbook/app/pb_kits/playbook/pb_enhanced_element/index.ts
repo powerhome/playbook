@@ -1,21 +1,31 @@
-import ElementObserver from './element_observer.js'
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-nocheck
+import ElementObserver from './element_observer'
 
 export default class PbEnhancedElement {
-  static get elements() {
+  static _elements: Map<Element, PbEnhancedElement>
+  static _observer: ElementObserver
+  element: Element
+
+  constructor(element: Element) {
+    this.element = element
+  }
+
+  static get elements(): Map<Element, PbEnhancedElement> {
     return this._elements = (this._elements || new Map)
   }
 
-  static get observer() {
+  static get observer(): ElementObserver {
     return this._observer = (this._observer || new ElementObserver(this))
   }
 
-  static get selector() {
+  static get selector(): string {
     // eslint-disable-next-line no-console
     console.warn('Define a static property for selector or redefine the matches function in a subclass.', this)
     return null
   }
 
-  static matches(node) {
+  static matches(node: Element): Array<Element> {
     if (!this.selector) return []
 
     const matches = []
@@ -25,7 +35,7 @@ export default class PbEnhancedElement {
     return (matches)
   }
 
-  static addMatch(element) {
+  static addMatch(element: Element): void {
     if (element._pbEnhanced || this.elements.has(element)) return
 
     const enhansedElement = new this(element)
@@ -34,7 +44,7 @@ export default class PbEnhancedElement {
     element._pbEnhanced = enhansedElement
   }
 
-  static removeMatch(element) {
+  static removeMatch(element: Element): void {
     if (!this.elements.has(element)) return
 
     const enhansedElement = this.elements.get(element)
@@ -42,22 +52,19 @@ export default class PbEnhancedElement {
     this.elements.delete(element)
   }
 
-  static start() {
+  static start(): void {
     this.observer.start()
   }
 
-  static stop() {
+  static stop(): void {
     this.mutationObserver.stop()
   }
 
-  constructor(element) {
-    this.element = element
-  }
-
-  connect() {
+  connect(): void {
     // eslint-disable-next-line no-console
     console.warn('Redefine the connect function in a subclass.', this)
   }
 
-  disconnect() { }
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  disconnect(): void {}
 }
