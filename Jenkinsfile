@@ -25,7 +25,7 @@ app.build(
         )
       ]) {
         sh "mkdir -p ~/.kube"
-        sh "make placeYarnConfig"
+        sh "playbook-website/bin/deployer sops --decrypt --output yarn.secrets.dec.env yarn.secrets.env"
       }
 
       compose.buildAndPush()
