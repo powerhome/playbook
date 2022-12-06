@@ -13,6 +13,7 @@ start:
 	docker-compose up
 
 build:
+	(cd playbook-website; bin/deployer sops --output ./config/ci/fontawesome-auth-token.dec.txt --extract '["font_awesome_auth_token"]' --decrypt ./config/ci/secrets.yaml)
 	docker-compose build
 
 bundle:
