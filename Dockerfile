@@ -36,7 +36,7 @@ COPY playbook-website/package.json playbook-website/
 COPY playbook/package.json playbook/
 COPY package.json .rubocop.yml .eslintrc.json .yarnrc.yml yarn.lock .npmrc ./
 COPY .yarn ./.yarn
-RUN --mount=type=secret,id=faauthtoken,required FONTAWESOME_NPM_AUTH_TOKEN=$(cat /run/secrets/faauthtoken) yarn install
+RUN --mount=type=secret,id=yarnenv,required env $(cat /run/secrets/yarnenv | xargs) yarn install
 RUN curl https://github.com/sass/node-sass/releases/download/v4.13.0/linux-x64-64_binding.node -o node_modules/node-sass/vendor/linux-x64-64_binding.node
 
 COPY --chown=app:app playbook /home/app/src/playbook
@@ -51,5 +51,5 @@ RUN mkdir /etc/service/puma && ln -s /home/app/src/playbook-website/services/pum
 
 FROM base AS prod
 
-RUN --mount=type=secret,id=faauthtoken,required cd playbook; FONTAWESOME_NPM_AUTH_TOKEN=$(cat /run/secrets/faauthtoken) yarn release
-RUN --mount=type=secret,id=faauthtoken,required cd playbook-website; FONTAWESOME_NPM_AUTH_TOKEN=$(cat /run/secrets/faauthtoken) yarn release
+RUN --mount=type=secret,id=yarnenv,required cd playbook; env $(cat /run/secrets/yarnenv | xargs) yarn release
+RUN --mount=type=secret,id=yarnenv,required cd playbook-website; env $(cat /run/secrets/yarnenv | xargs) yarn release

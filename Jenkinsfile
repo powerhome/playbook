@@ -25,9 +25,7 @@ app.build(
         )
       ]) {
         sh "mkdir -p ~/.kube"
-        dir("playbook-website") {
-          sh "bin/deployer sops --output ./config/ci/fontawesome-auth-token.dec.txt --extract '[\"font_awesome_auth_token\"]' --decrypt ./config/ci/secrets.yaml"
-        }
+        sh "make placeYarnConfig"
       }
 
       compose.buildAndPush()

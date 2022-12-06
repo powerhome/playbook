@@ -3,8 +3,8 @@ volumes:
   bundle:
   database:
 secrets:
-  faauthtoken:
-    file: ./playbook-website/config/ci/fontawesome-auth-token.dec.txt
+  yarnenv:
+    file: yarn.secrets.env
 services:
   web:
     working_dir: /home/app/src/playbook-website
@@ -15,10 +15,12 @@ services:
       args:
         BUILDKIT_INLINE_CACHE: "1"
       secrets:
-        - faauthtoken
+        - yarnenv
       cache_from:
         - image-registry.powerapp.cloud/playbook/playbook:${CACHE_TAG:-local}
         - image-registry.powerapp.cloud/playbook/playbook:main
+    env_file:
+      - yarn.secrets.env
     volumes:
       - .:/home/app/src
       - bundle:/usr/local/bundle
@@ -36,6 +38,7 @@ services:
           memory: 2G
     env_file:
       - '.env.docker'
+      - yarn.secrets.env
     command: bash -c "yarn watch-all"
     volumes:
       - .:/home/app/src
