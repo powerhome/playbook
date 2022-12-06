@@ -1,3 +1,5 @@
+# syntax = docker/dockerfile:1.4.2
+
 FROM phusion/passenger-customizable:1.0.19 AS base
 
 RUN mv /etc/apt/sources.list.d /etc/apt/sources.list.d.bak && \
@@ -32,9 +34,9 @@ WORKDIR /home/app/src
 # Build Library
 COPY playbook-website/package.json playbook-website/
 COPY playbook/package.json playbook/
-COPY package.json .rubocop.yml .eslintrc.json .yarnrc.yml yarn.lock ./
+COPY package.json .rubocop.yml .eslintrc.json .yarnrc.yml yarn.lock .npmrc ./
 COPY .yarn ./.yarn
-RUN yarn install
+RUN --mount=type=secret,id=faauthtoken FONTAWESOME_NPM_AUTH_TOKEN=$(cat /run/secrets/faauthtoken) yarn install
 RUN curl https://github.com/sass/node-sass/releases/download/v4.13.0/linux-x64-64_binding.node -o node_modules/node-sass/vendor/linux-x64-64_binding.node
 
 COPY --chown=app:app playbook /home/app/src/playbook

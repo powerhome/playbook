@@ -26,7 +26,7 @@ app.build(
       ]) {
         sh "mkdir -p ~/.kube"
         dir("playbook-website") {
-          sh "bin/deployer sops --decrypt ./config/ci/secrets.yaml > ./config/ci/secrets.dec.yaml"
+          sh "bin/deployer sops --output ./config/ci/fontawesome-auth-token.dec.txt --extract '[\"font_awesome_auth_token\"]' --decrypt ./config/ci/secrets.yaml
         }
       }
 
