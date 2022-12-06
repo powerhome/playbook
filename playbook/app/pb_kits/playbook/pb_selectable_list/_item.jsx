@@ -1,6 +1,6 @@
 /* @flow */
 
-import React, { Node } from 'react'
+import React, { Node, useState } from 'react'
 import classnames from 'classnames'
 
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
@@ -50,8 +50,19 @@ const SelectableListItem = ({
     className
   )
 
+  const initialCheckedState = checked
+  const [checkedState, setCheckedState] = useState(initialCheckedState)
+
+  const handleChecked = (event) => {
+    onChange(event)
+    setCheckedState(event.target.checked)
+  }
+
   return (
-    <ListItem {...props}>
+    <ListItem 
+        {...props}
+        className={classnames(checkedState ? "checked_item" : "", className)}
+    >
       <div
           {...ariaProps}
           {...dataProps}
@@ -60,10 +71,10 @@ const SelectableListItem = ({
         <Choose>
           <When condition={variant == 'checkbox'}>
             <Checkbox
-                checked={checked}
+                checked={checkedState}
                 id={id}
                 name={name}
-                onChange={onChange}
+                onChange={handleChecked}
                 // eslint suppressor, text is needed to display on screen
                 text={label || (text && false)}
                 type="checkbox"

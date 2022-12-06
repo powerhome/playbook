@@ -13,12 +13,14 @@ import DarkModeToggle from '../components/DarkModeToggle'
 import KitSearch from '../components/KitSearch'
 import SnippetToggle from '../components/SnippetToggle'
 import Sidebar from '../components/Sidebar'
+import PbKitReact from '../components/PbKitReact'
 
 WebpackerReact.setup({
   DarkModeToggle,
   KitSearch,
   SnippetToggle,
   Sidebar,
+  PbKitReact,
 })
 
 // Produce image assets

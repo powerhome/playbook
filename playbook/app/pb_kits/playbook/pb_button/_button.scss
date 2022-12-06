@@ -31,7 +31,7 @@ $pb_button_sizes: (
     @include pb_button_link;
     @media (hover:hover) {
       &:hover {
-        @include pb_button_hover(mix($primary_action, $white, 3%));
+        color: $text_lt_default;
       }
     } 
   }
