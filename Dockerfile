@@ -51,5 +51,5 @@ RUN mkdir /etc/service/puma && ln -s /home/app/src/playbook-website/services/pum
 
 FROM base AS prod
 
-RUN (cd playbook; yarn release)
-RUN (cd playbook-website; yarn release)
+RUN --mount=type=secret,id=faauthtoken,required cd playbook; FONTAWESOME_NPM_AUTH_TOKEN=$(cat /run/secrets/faauthtoken) yarn release
+RUN --mount=type=secret,id=faauthtoken,required cd playbook-website; FONTAWESOME_NPM_AUTH_TOKEN=$(cat /run/secrets/faauthtoken) yarn release
