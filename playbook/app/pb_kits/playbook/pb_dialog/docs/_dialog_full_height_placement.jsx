@@ -47,7 +47,7 @@ const DialogFullHeightPlacement = () => {
     <>
       <Flex wrap>
         <Button id="sm"
-            marginRight="xl"
+            marginRight="md"
             onClick={toggleHeaderSeparatorDialog}>
           {"Left Dialog"}
         </Button>

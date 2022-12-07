@@ -9,6 +9,7 @@ import { buildAriaProps, buildDataProps } from '../utilities/props'
 
 import pbChart from '../plugins/pb_chart'
 type CircleChartProps = {
+  align?: "left" | "right" | "center",
   aria: Object,
   chartData?: array,
   children: Node,
@@ -32,10 +33,15 @@ type CircleChartProps = {
   tooltipHtml: string,
   useHtml: boolean,
   zMin: number,
+  layout?: "horizontal" | "vertical" | "proximate",
+  verticalAlign?: "top" | "middle" | "bottom",
+  x?: number,
+  y?: number,
 }
 
 const CircleChart = (props: CircleChartProps) => {
   const {
+    align = 'center',
     aria = {},
     chartData = [{}],
     children,
@@ -60,6 +66,10 @@ const CircleChart = (props: CircleChartProps) => {
       '<b>{point.y}</b>',
     useHtml = false,
     zMin = null,
+    layout = 'horizontal',
+    verticalAlign = 'bottom',
+    x = 0,
+    y = 0,
   } = props
 
   const ariaProps = buildAriaProps(aria)
@@ -78,6 +88,7 @@ const CircleChart = (props: CircleChartProps) => {
     })
 
     new pbChart('.selector', {
+      align,
       id,
       colors,
       borderColor: roundedBorderColor,
@@ -98,6 +109,10 @@ const CircleChart = (props: CircleChartProps) => {
       innerSize: innerSizeFormat(innerSize),
       zMin,
       startAngle,
+      layout,
+      verticalAlign,
+      x,
+      y,
     })
   }, [])
 

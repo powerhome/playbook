@@ -5,6 +5,9 @@
 module Playbook
   module PbCircleChart
     class CircleChart < Playbook::KitBase
+      prop :align, type: Playbook::Props::Enum,
+                   values: %w[left right center],
+                   default: "center"
       prop :chart_data, type: Playbook::Props::Array,
                         default: []
       prop :style, type: Playbook::Props::Enum,
@@ -31,6 +34,14 @@ module Playbook
       prop :rounded, type: Playbook::Props::Boolean, default: false
       prop :colors, type: Playbook::Props::Array,
                     default: []
+      prop :layout, type: Playbook::Props::Enum,
+                    values: %w[horizontal vertical proximate],
+                    default: "horizontal"
+      prop :vertical_align, type: Playbook::Props::Enum,
+                            values: %w[top middle bottom],
+                            default: "bottom"
+      prop :x, type: Playbook::Props::Numeric
+      prop :y, type: Playbook::Props::Numeric
 
       def chart_type
         style == "variablepie" ? "variablepie" : "pie"
@@ -64,6 +75,7 @@ module Playbook
 
       def chart_options
         {
+          align: align,
           id: id,
           colors: colors,
           borderColor: rounded_border_color,
@@ -84,6 +96,10 @@ module Playbook
           innerSize: inner_size_format,
           zMin: z_min,
           startAngle: start_angle,
+          layout: layout,
+          verticalAlign: vertical_align,
+          x: x,
+          y: y,
         }.to_json.html_safe
       end
 

@@ -27,14 +27,14 @@ test('shows default drag text', () => {
   expect(kit).toHaveTextContent('Choose a file or drag it here')
 })
 
-test('shows type-specific drag text', () => {
+test('displays max file size text', () => {
   render(
     <FileUpload
-        accept={['image/svg+xml']}
         data={{ testid: testid }}
+        maxSize={1e+6}
     />
   )
 
   const kit = screen.getByTestId(testid)
-  expect(kit).toHaveTextContent('Choose a file or drag it here. The accepted file types are: svg+xml')
+  expect(kit).toHaveTextContent('Choose a file or drag it here. Max file size is 1 MB.')
 })

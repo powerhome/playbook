@@ -2,45 +2,49 @@
 
 module Playbook
   module PbDialog
-    class Dialog
-      include Playbook::Props
-
-      partial "pb_dialog/dialog"
-
-      prop :ref
-      prop :cancel_button
-      prop :closeable, type: Playbook::Props::Boolean, default: true
-      prop :confirm_button
-      prop :oncancel
-      prop :onchange
-      prop :onclose
-      prop :onconfirm
-      prop :opened, type: Playbook::Props::Boolean, default: false
+    class Dialog < Playbook::KitBase
       prop :size, type: Playbook::Props::Enum,
-                  values: %w[sm md lg content],
+                  values: %w[sm md lg xl status_size content],
                   default: "md"
-      prop :text
+      prop :full_height, type: Playbook::Props::Boolean, default: false
+      prop :placement, type: Playbook::Props::Enum,
+                       values: %w[left right center],
+                       default: "center"
+      prop :should_close_on_overlay_click, type: Playbook::Props::Boolean, default: true
       prop :title
-      prop :trigger
+      prop :text
+      prop :confirm_button
+      prop :cancel_button
+      prop :status, type: Playbook::Props::Enum,
+                    values: ["info", "caution", "delete", "error", "success", "default", ""],
+                    default: ""
 
-      def dialog_options
-        {
-          id: id,
-          ref: ref,
-          trigger: trigger,
-          className: classname,
-          cancelButton: cancel_button,
-          closeable: closeable,
-          confirmButton: confirm_button,
-          onCancel: oncancel,
-          onChange: onchange,
-          onClose: onclose,
-          onConfirm: onconfirm,
-          opened: opened,
-          size: size,
-          text: text,
-          title: title,
+      def classname
+        generate_classname("pb_dialog pb_dialog_rails pb_dialog_#{size}")
+      end
+
+      def full_height_style
+        if full_height && size === "xl"
+          "full_height_center"
+        elsif full_height && size != "xl"
+          "full_height_#{placement}"
+        end
+      end
+
+      def overlay_close
+        !should_close_on_overlay_click ? "overlay_close" : ""
+      end
+
+      def status_alerts
+        alerts = {
+          "info" => %w[info-circle default],
+          "default" => %w[exclamation-circle default],
+          "caution" => %w[exclamation-triangle yellow],
+          "delete" => %w[trash-alt red],
+          "error" => %w[times-circle red],
+          "success" => %w[check-circle green],
         }
+        alerts[status]
       end
     end
   end

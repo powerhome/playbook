@@ -1,0 +1,58 @@
+<%= pb_rails("button", props: { text: "Left Dialog", data:{"open-dialog": "dialog-fullheight-left"}, margin_right: "md" }) %>
+<%= pb_rails("button", props: { text: "Center Dialog", data:{"open-dialog": "dialog-fullheight-center"}, margin_right: "md" }) %>
+<%= pb_rails("button", props: { text: "Right Dialog", data:{"open-dialog": "dialog-fullheight-right"}, margin_right: "md" }) %>
+
+<%= pb_rails("dialog", props: { 
+    id:"dialog-fullheight-left", 
+    size: "md", 
+    full_height: true,
+    placement: "left",
+   }) do %>
+    <%= pb_rails("dialog/dialog_header", props: { id: "dialog-fullheight-left" } ) do %>
+        <%= pb_rails("body", props: { text: "What do you need us to take care of?" }) %>
+    <% end %>
+    <%= pb_rails("dialog/dialog_body") do %>
+        <%= pb_rails("caption", props: { text: "Description", margin_bottom: "xs" }) %>
+        <%= pb_rails("rich_text_editor", props: {id: "default", value: "Add your text here"}) %>
+        <%= pb_rails("caption", props: { text: "Type in a word or term too help find tickets later. ex. training, phone setup, hr", margin_bottom: "xs", margin_top: "sm" }) %>
+        <%= pb_rails("typeahead", props: { placeholder: "Tags.."}) %>
+    <% end %>
+    <%= pb_rails("dialog/dialog_footer", props: {cancel_button: "Back", confirm_button: "Send my Issue", confirm_button_id:"confirm-complex", id: "dialog-fullheight-left"}) %>
+<% end %>
+
+
+<%= pb_rails("dialog", props: { 
+    id:"dialog-fullheight-center", 
+    size: "md",
+    full_height: true,
+    placement: "center",
+     })  do %>
+        <%= pb_rails("dialog/dialog_header", props: { id: "dialog-fullheight-center" } ) do %>
+            <%= pb_rails("body", props: { text: "What do you need us to take care of?" }) %>
+        <% end %>
+        <%= pb_rails("dialog/dialog_body") do %>
+            <%= pb_rails("caption", props: { text: "Description", margin_bottom: "xs" }) %>
+            <%= pb_rails("rich_text_editor", props: {id: "default", value: "Add your text here"}) %>
+            <%= pb_rails("caption", props: { text: "Type in a word or term too help find tickets later. ex. training, phone setup, hr", margin_bottom: "xs", margin_top: "sm" }) %>
+            <%= pb_rails("typeahead", props: { placeholder: "Tags.."}) %>
+        <% end %>
+        <%= pb_rails("dialog/dialog_footer", props: {cancel_button: "Back", confirm_button: "Send my Issue", confirm_button_id:"confirm-complex", id: "dialog-fullheight-center"}) %>   
+<% end %>
+     
+<%= pb_rails("dialog", props: { 
+    id:"dialog-fullheight-right", 
+    size: "md",
+    full_height: true,
+    placement: "right",
+     }) do %>
+        <%= pb_rails("dialog/dialog_header", props: { id: "dialog-fullheight-right" } ) do %>
+            <%= pb_rails("body", props: { text: "What do you need us to take care of?" }) %>
+        <% end %>
+        <%= pb_rails("dialog/dialog_body") do %>
+            <%= pb_rails("caption", props: { text: "Description", margin_bottom: "xs" }) %>
+            <%= pb_rails("rich_text_editor", props: {id: "default", value: "Add your text here"}) %>
+            <%= pb_rails("caption", props: { text: "Type in a word or term too help find tickets later. ex. training, phone setup, hr", margin_bottom: "xs", margin_top: "sm" }) %>
+            <%= pb_rails("typeahead", props: { placeholder: "Tags.."}) %>
+        <% end %>
+        <%= pb_rails("dialog/dialog_footer", props: {cancel_button: "Back", confirm_button: "Send my Issue", confirm_button_id:"confirm-complex", id: "dialog-fullheight-right"}) %>    
+    <% end %>
