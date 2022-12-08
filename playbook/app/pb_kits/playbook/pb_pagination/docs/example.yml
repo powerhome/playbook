@@ -4,6 +4,6 @@ examples:
   - pagination_default: Default
   
   
-  react:
-  - pagination_default: Default
+  # react:
+  # - pagination_default: Default
   

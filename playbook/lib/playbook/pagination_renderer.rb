@@ -31,12 +31,12 @@ module Playbook
 
       def previous_page
         num = @collection.current_page > 1 && @collection.current_page - 1
-        previous_or_next_page(num, "<i class='far fa-chevron-left'></i>", "prev")
+        previous_or_next_page(num, "<i class='far fa-chevron-left fa-xs'></i>", "prev")
       end
 
       def next_page
         num = @collection.current_page < @collection.total_pages && @collection.current_page + 1
-        previous_or_next_page(num, "<i class='far fa-chevron-right'></i>", "next")
+        previous_or_next_page(num, "<i class='far fa-chevron-right fa-xs'></i>", "next")
       end
     end
   end
