@@ -15,6 +15,19 @@ test('returns namespaced class name', () => {
   expect(kit).toHaveClass('pb_title_kit_size_3')
 })
 
+test('with thin font weight', () => {
+  render(
+    <Title
+        bold={false}
+        data={{ testid: 'primary-test' }}
+        text="Test thin font weight"
+    />
+  )
+
+  const kit = screen.getByTestId('primary-test')
+  expect(kit).toHaveClass('pb_title_kit_size_3_thin')
+})
+
 test('with colors', () => {
   render(
     <Title

@@ -1,1 +1,1 @@
-This is designed to show you how the buttons can stack with different alert styles. It also has a link style for the buttons for the mobile views.
+These examples highlight how the buttons within the Dialog can be stacked when using the Status Alert variant. It also has a link style for the buttons for the mobile views.

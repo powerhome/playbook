@@ -68,7 +68,7 @@
 	$opacity_visible: 1;
 	$opacity_hidden: 0;
 
-	@include pb_card;
+	// @include pb_card;
 	background-color: $white;
 	box-shadow: $shadow_deepest;
 	border: 0;
@@ -166,5 +166,74 @@
 				}
 			} 
 		}
+	}	
+}
+
+//styles specific to rails version of kit
+.pb_dialog_wrapper_rails {
+	$medium: 500px;
+    $large: 800px;
+    $xlarge: 1150px;
+
+	&[class*="full_height"] {
+		&[class*="_left"]{
+			.pb_dialog_rails {
+				margin: unset !important;
+				margin-right: auto !important;
+			}
+		}
+		
+		&[class*="_center"]{
+			justify-content: center;
+		}
+
+		&[class*="_right"]{
+			.pb_dialog_rails {
+				margin: unset !important;
+				margin-left: auto !important;
+			}
+		}
+
+		.pb_dialog {
+			border-radius: 0;
+			height: 100% !important;
+			max-height: 100% !important;
+			max-width: 100%;
+			&[class*="_sm"] {
+				width: $medium;
+			}
+			&[class*="_md"] {
+				width: $large;
+			}
+			&[class*="_lg"] {
+				width: $xlarge;
+			}
+		} 
+	}
+
+	.pb_dialog_rails {
+		top: 0 !important;
+		padding: unset !important;
+		margin: auto;
+	
+	}
+	dialog::backdrop {
+		position: fixed;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		background-color: rgba($bg_dark, $opacity_4);
+		animation-name: overlayFade;
+		animation-duration: 0.2s;	
+	}
+
+	.dialog-button-class {
+		background-color: unset;
+		border: none;
+		cursor: pointer;
 	}
 }

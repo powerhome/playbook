@@ -7,6 +7,7 @@
     color: inherit;
     text-align: left;
     margin-left: $space_sm;
+
     .numInputWrapper {
       width: auto;
       input.numInput {
@@ -44,7 +45,7 @@
         margin-left: $space_sm;
       }
 
-      #datePickerAM, #datePickerPM {
+      .datePicker-AMPM {
         display: none;
       }
       &:focus, &:hover {
