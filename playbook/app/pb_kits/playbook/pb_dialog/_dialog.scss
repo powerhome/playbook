@@ -68,6 +68,12 @@
 	$opacity_visible: 1;
 	$opacity_hidden: 0;
 
+	.dialog_sticky_header {
+	position: sticky;
+	top: 0;
+	background-color: $white;
+	}
+
 	// @include pb_card;
 	background-color: $white;
 	box-shadow: $shadow_deepest;
@@ -170,6 +176,7 @@
 }
 
 //styles specific to rails version of kit
+// rails version has own wrapper because of the way the overlay functions for the HTML dialog used to create this
 .pb_dialog_wrapper_rails {
 	$medium: 500px;
     $large: 800px;
@@ -211,6 +218,8 @@
 		} 
 	}
 
+	// fixes for stylesheets in nitro that were conflicting with our kit. DO NOT REMOVE. 
+	//conflicts were only apparent in nitro, not in playbook local env
 	.pb_dialog_rails {
 		top: 0 !important;
 		padding: unset !important;
