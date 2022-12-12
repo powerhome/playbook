@@ -161,28 +161,27 @@
 				height: 100%;
 				max-height: 100%;
 				max-width: none;
+				.dialog_footer {
+					position:fixed;
+					bottom: 0;
+					background-color: $white;
+				}
 				
 				&[class*="_sm"] {
 					width: $medium;
 					.dialog_footer {
-						position:fixed;
-						bottom: 0;
 						width: $medium;
 					}
 				}
 				&[class*="_md"] {
 					width: $large;
 					.dialog_footer {
-						position:fixed;
-						bottom: 0;
 						width: $large;
 					}
 				}
 				&[class*="_lg"] {
 					width: $xlarge;
 					.dialog_footer {
-						position:fixed;
-						bottom: 0;
 						width: $xlarge;
 					}
 				}
@@ -222,27 +221,26 @@
 			height: 100% !important;
 			max-height: 100% !important;
 			max-width: 100%;
+			.dialog_footer {
+				position:fixed;
+				bottom: 0;
+				background-color: $white;
+			}
 			&[class*="_sm"] {
 				width: $medium;
 				.dialog_footer {
-					position:fixed;
-					bottom: 0;
 					width: $medium;
 				}
 			}
 			&[class*="_md"] {
 				width: $large;
 				.dialog_footer {
-					position:fixed;
-					bottom: 0;
 					width: $large;
 				}
 			}
 			&[class*="_lg"] {
 				width: $xlarge;
 				.dialog_footer {
-					position:fixed;
-					bottom: 0;
 					width: $xlarge;
 				}
 			}
