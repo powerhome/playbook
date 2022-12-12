@@ -1,1 +1,35 @@
-<%= pb_rails("pagination") %>
+<% data = [{
+    first_name: 'Jon',
+    last_name: 'Ron',
+    email: "jon@mail.com",
+    id: 1,
+}, {
+    first_name: 'Sam',
+    last_name: 'Bob',
+    email: "sam@mail.com",
+    id: 2,
+}, {
+    first_name: 'Nick',
+    last_name: 'Jack',
+    email: "nick@mail.com",
+    id: 3,
+}, {
+    first_name: 'Jake',
+    last_name: 'Wade',
+    email: "jon@mail.com",
+    id: 4,
+}, {
+    first_name: 'Blake',
+    last_name: 'Chad',
+    email: "jon@mail.com",
+    id: 5,
+}] %>
+
+
+
+<%= pb_rails("pagination", props: { data: data}) %>
+
+<%# <%= data.each do |key, value|%> %>
+    <%# <%= pb_rails("body", props: {text: key}) %> %>
+    <%# <%= pb_rails("body", props: {text: value}) %> %>
+<%# <% end %> %>
