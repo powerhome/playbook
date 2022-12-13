@@ -4,7 +4,6 @@ module Playbook
   module PbSelectableList
     class SelectableListItem < Playbook::KitBase
       prop :tabindex
-
       prop :checked, type: Playbook::Props::Boolean,
                      default: false
       prop :name, type: Playbook::Props::String
@@ -17,7 +16,13 @@ module Playbook
                            default: {}
 
       def classname
-        generate_classname("pb_item_kit")
+        generate_classname("pb_item_kit") + checked_class
+      end
+
+    private
+
+      def checked_class
+        checked ? " checked_item" : ""
       end
     end
   end
