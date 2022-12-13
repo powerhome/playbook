@@ -1,8 +1,5 @@
-// @flow
-
 import React from 'react'
 import ReactDOM from 'react-dom'
-
 import {
   Popper,
   Manager as PopperManager,
@@ -13,19 +10,24 @@ import {
 import { buildAriaProps, buildCss, buildDataProps, noop } from '../utilities/props'
 
 import classnames from 'classnames'
-import { globalProps } from '../utilities/globalProps'
+import { globalProps, GlobalProps } from '../utilities/globalProps'
 
 type PbPopoverProps = {
-  aria?: object,
+  aria?: { [key: string]: string },
   className?: string,
-  closeOnClick?: "outside" | "inside",
+  closeOnClick?: "outside" | "inside" | "any",
   data?: object,
-  id?: String,
+  id?: string,
   offset?: boolean,
   reference: PopperReference,
   show?: boolean,
-  shouldClosePopover?: () => boolean,
-} & PopperProps
+  shouldClosePopover?: () => boolean | boolean
+  zIndex?: number,
+  maxHeight?: number,
+  maxWidth?: number,
+  minHeight?: number,
+  minWidth?: number,
+} & GlobalProps
 
 // Prop enabled default modifiers here
 // https://popper.js.org/docs/v2/modifiers
@@ -42,7 +44,7 @@ const POPOVER_MODIFIERS = {
   },
 }
 
-const popoverModifiers = ({ modifiers, offset }) => {
+const popoverModifiers = ({ modifiers, offset }: {modifiers: {}[], offset: {}}) => {
   return offset ? modifiers.concat([POPOVER_MODIFIERS.offset]) : modifiers
 }
 
@@ -144,7 +146,7 @@ export default class PbReactPopover extends React.Component<PbPopoverProps> {
 
     if (!closeOnClick) return
 
-    document.body.addEventListener('click', ({ target }) => {
+    document.body.addEventListener('click', ({ target } ) => {
       const targetIsPopover =
         target.closest('[class^=pb_popover_tooltip]') !== null
       const targetIsReference =
