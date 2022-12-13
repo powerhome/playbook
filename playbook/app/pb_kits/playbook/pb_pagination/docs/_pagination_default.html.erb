@@ -1,4 +1,4 @@
-<% data = [{
+<% @data = [{
     first_name: 'Jon',
     last_name: 'Ron',
     email: "jon@mail.com",
@@ -25,11 +25,4 @@
     id: 5,
 }] %>
 
-
-
-<%= pb_rails("pagination", props: { data: data}) %>
-
-<%# <%= data.each do |key, value|%> %>
-    <%# <%= pb_rails("body", props: {text: key}) %> %>
-    <%# <%= pb_rails("body", props: {text: value}) %> %>
-<%# <% end %> %>
+<%= pb_rails("pagination", props: { data: @data}) %>
