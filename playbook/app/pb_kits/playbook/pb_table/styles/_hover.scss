@@ -41,7 +41,6 @@ $transition-speed: 0.2s;
             &:hover {
               box-shadow: 0 2px 10px 0 rgba($slate, $opacity-6);
               td {
-                background: $white;
                 border-color: darken($border_light, 10%);
                 border-top-width: 0;
                 border-top-color: transparent;
