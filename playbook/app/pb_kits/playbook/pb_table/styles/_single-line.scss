@@ -9,7 +9,7 @@
         td {
           white-space: nowrap;
           text-overflow: ellipsis;
-          overflow: hidden;
+          //overflow: hidden;
 
           & > * {
             &:not(.btn, br) {
