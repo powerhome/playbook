@@ -1,33 +1,38 @@
-import React from 'react'
-import ReactDOM from 'react-dom'
+import React from "react";
+import ReactDOM from "react-dom";
 import {
   Popper,
   Manager as PopperManager,
   PopperProps,
   Reference as PopperReference,
-} from 'react-popper'
+} from "react-popper";
+import {
+  buildAriaProps,
+  buildCss,
+  buildDataProps,
+  noop,
+} from "../utilities/props";
 
-import { buildAriaProps, buildCss, buildDataProps, noop } from '../utilities/props'
-
-import classnames from 'classnames'
-import { globalProps, GlobalProps } from '../utilities/globalProps'
+import classnames from "classnames";
+import { globalProps, GlobalProps } from "../utilities/globalProps";
 
 type PbPopoverProps = {
-  aria?: { [key: string]: string },
-  className?: string,
-  closeOnClick?: "outside" | "inside" | "any",
-  data?: object,
-  id?: string,
-  offset?: boolean,
-  reference: PopperReference,
-  show?: boolean,
-  shouldClosePopover?: () => boolean | boolean
-  zIndex?: number,
-  maxHeight?: number,
-  maxWidth?: number,
-  minHeight?: number,
-  minWidth?: number,
-} & GlobalProps
+  aria?: { [key: string]: string };
+  className?: string;
+  closeOnClick?: "outside" | "inside" | "any";
+  data?: object;
+  id?: string;
+  offset?: boolean;
+  reference: PopperReference & any;
+  show?: boolean;
+  shouldClosePopover?: (arg0: boolean) => boolean | boolean;
+  zIndex?: number;
+  maxHeight?: number;
+  maxWidth?: number;
+  minHeight?: number;
+  minWidth?: number;
+} & GlobalProps &
+  PopperProps<any>;
 
 // Prop enabled default modifiers here
 // https://popper.js.org/docs/v2/modifiers
@@ -36,17 +41,23 @@ const POPOVER_MODIFIERS = {
   offset: {
     //https://popper.js.org/docs/v2/modifiers/offset/
     enabled: true,
-    name: 'offset',
+    name: "offset",
     options: {
       offset: [0, 20],
     },
-    phase: 'main',
+    phase: "main",
   },
-}
+};
 
-const popoverModifiers = ({ modifiers, offset }: {modifiers: {}[], offset: {}}) => {
-  return offset ? modifiers.concat([POPOVER_MODIFIERS.offset]) : modifiers
-}
+const popoverModifiers = ({
+  modifiers,
+  offset,
+}: {
+  modifiers: any;
+  offset: {};
+}) => {
+  return offset ? modifiers.concat([POPOVER_MODIFIERS.offset]) : modifiers;
+};
 
 const Popover = (props: PbPopoverProps) => {
   const {
@@ -64,11 +75,14 @@ const Popover = (props: PbPopoverProps) => {
     maxWidth,
     minHeight,
     minWidth,
-  } = props
+  } = props;
 
-  const popoverSpacing = globalProps(props).includes('dark') || !globalProps(props) ? 'p_sm' : globalProps(props)
-  const overflowHandling = maxHeight || maxWidth ? 'overflow_handling' : ''
-  const zIndexStyle = zIndex ? { zIndex: zIndex } : {}
+  const popoverSpacing =
+    globalProps(props).includes("dark") || !globalProps(props)
+      ? "p_sm"
+      : globalProps(props);
+  const overflowHandling = maxHeight || maxWidth ? "overflow_handling" : "";
+  const zIndexStyle = zIndex ? { zIndex: zIndex } : {};
   const widthHeightStyles = () => {
     return Object.assign(
       {},
@@ -76,101 +90,96 @@ const Popover = (props: PbPopoverProps) => {
       maxWidth ? { maxWidth: maxWidth } : {},
       minHeight ? { minHeight: minHeight } : {},
       minWidth ? { minWidth: minWidth } : {}
-    )
-  }
-  const ariaProps = buildAriaProps(aria)
-  const dataProps = buildDataProps(data)
+    );
+  };
+  const ariaProps = buildAriaProps(aria);
+  const dataProps = buildDataProps(data);
   const classes = classnames(
-    buildCss('pb_popover_kit'),
+    buildCss("pb_popover_kit"),
     globalProps(props),
     className
-  )
+  );
 
   return (
     <Popper
-        modifiers={popoverModifiers({ modifiers, offset })}
-        placement={placement}
-        referenceElement={referenceElement}
+      modifiers={popoverModifiers({ modifiers, offset })}
+      placement={placement}
+      referenceElement={referenceElement}
     >
       {({ placement, ref, style }) => {
         return (
           <div
-              {...ariaProps}
-              {...dataProps}
-              className={classes}
-              data-placement={placement}
-              id={id}
-              ref={ref}
-              style={Object.assign(
-                {},
-                style,
-                zIndexStyle
-              )}
+            {...ariaProps}
+            {...dataProps}
+            className={classes}
+            data-placement={placement}
+            id={id}
+            ref={ref}
+            style={Object.assign({}, style, zIndexStyle)}
           >
             <div
-                className={classnames(
-                `${buildCss('pb_popover_tooltip')} show`
-              )}
+              className={classnames(`${buildCss("pb_popover_tooltip")} show`)}
             >
               <div
-                  className={classnames(
-                  'pb_popover_body',
+                className={classnames(
+                  "pb_popover_body",
                   popoverSpacing,
                   overflowHandling
                 )}
-                  style={widthHeightStyles()}
+                style={widthHeightStyles()}
               >
                 {children}
               </div>
             </div>
           </div>
-        )
+        );
       }}
     </Popper>
-  )
-}
+  );
+};
 
 export default class PbReactPopover extends React.Component<PbPopoverProps> {
   static defaultProps = {
-    modifiers: [],
+    modifiers: [] as {}[],
     offset: false,
-    placement: 'left',
-    portal: 'body',
+    placement: "left",
+    portal: "body",
     show: false,
     shouldClosePopover: noop,
     usePortal: true,
-  }
+  };
 
   componentDidMount() {
-    const { closeOnClick, shouldClosePopover } = this.props
+    const { closeOnClick, shouldClosePopover } = this.props;
 
-    if (!closeOnClick) return
+    if (!closeOnClick) return;
 
-    document.body.addEventListener('click', ({ target } ) => {
+    document.body.addEventListener("click", ({ target }) => {
       const targetIsPopover =
-        target.closest('[class^=pb_popover_tooltip]') !== null
+        (target as HTMLElement).closest("[class^=pb_popover_tooltip]") !== null;
       const targetIsReference =
-        target.closest('.pb_popover_reference_wrapper') !== null
+        (target as HTMLElement).closest(".pb_popover_reference_wrapper") !==
+        null;
 
       switch (closeOnClick) {
-      case 'outside':
-        if (!targetIsPopover || targetIsReference) {
-          shouldClosePopover(true)
-        }
-        break
-      case 'inside':
-        if (targetIsPopover || targetIsReference) {
-          shouldClosePopover(true)
-        }
-        break
-      case 'any':
-        shouldClosePopover(true)
-        break
+        case "outside":
+          if (!targetIsPopover || targetIsReference) {
+            shouldClosePopover(true);
+          }
+          break;
+        case "inside":
+          if (targetIsPopover || targetIsReference) {
+            shouldClosePopover(true);
+          }
+          break;
+        case "any":
+          shouldClosePopover(true);
+          break;
       }
-    })
+    });
   }
 
-  props: PbPopoverProps
+  props: PbPopoverProps;
 
   render() {
     const {
@@ -189,51 +198,51 @@ export default class PbReactPopover extends React.Component<PbPopoverProps> {
       maxWidth,
       minHeight,
       minWidth,
-    } = this.props
+    } = this.props;
 
     const popoverComponent = (
       <Popover
-          {...this.props}
-          className={className}
-          maxHeight={maxHeight}
-          maxWidth={maxWidth}
-          minHeight={minHeight}
-          minWidth={minWidth}
-          modifiers={modifiers}
-          offset={offset}
-          placement={placement}
-          referenceElement={referenceElement}
-          zIndex={zIndex}
+        {...this.props}
+        className={className}
+        maxHeight={maxHeight}
+        maxWidth={maxWidth}
+        minHeight={minHeight}
+        minWidth={minWidth}
+        modifiers={modifiers}
+        offset={offset}
+        placement={placement}
+        referenceElement={referenceElement}
+        zIndex={zIndex}
       >
         {children}
       </Popover>
-    )
+    );
 
     return (
       <PopperManager>
-        <If condition={reference && !referenceElement}>
-          <PopperReference>
-            {({ ref }) => (
-              <span
-                  className="pb_popover_reference_wrapper"
-                  ref={ref}
-              >
-                <reference.type {...reference.props} />
-              </span>
-            )}
-          </PopperReference>
-        </If>
-        <If condition={show}>
-          <If condition={usePortal}>
-            {ReactDOM.createPortal(
-              popoverComponent,
-              document.querySelector(portal)
-            )}
-            <Else />
-            {popoverComponent}
-          </If>
-        </If>
+        <>
+          {reference && !referenceElement && (
+            <PopperReference>
+              {({ ref }) => (
+                <span className="pb_popover_reference_wrapper" ref={ref}>
+                  <reference.type {...reference.props} />
+                </span>
+              )}
+            </PopperReference>
+          )}
+          {show &&
+            (usePortal ? (
+              <>
+                {ReactDOM.createPortal(
+                  popoverComponent,
+                  document.querySelector(portal)
+                )}
+              </>
+            ) : (
+              { popoverComponent }
+            ))}
+        </>
       </PopperManager>
-    )
+    );
   }
 }
