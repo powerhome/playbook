@@ -5,6 +5,7 @@ import {
   Manager as PopperManager,
   PopperProps,
   Reference as PopperReference,
+  Modifier
 } from "react-popper";
 import {
   buildAriaProps,
@@ -53,7 +54,7 @@ const popoverModifiers = ({
   modifiers,
   offset,
 }: {
-  modifiers: any;
+  modifiers: Modifier<any> & any;
   offset: {};
 }) => {
   return offset ? modifiers.concat([POPOVER_MODIFIERS.offset]) : modifiers;
