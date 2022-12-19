@@ -3,5 +3,5 @@
     class: object.classname,
     data: object.data,
     id: object.id) do %>
-     <%= will_paginate object.page_data, renderer: Playbook::Pagination::LinkRenderer %>
+     <%= will_paginate object.page_data, renderer: Playbook::Pagination::Rails %>
 <% end %>

@@ -8,11 +8,11 @@
   border-radius: $border_rad_light;
   border: 1px solid $border_light;
   background-color: $white;
-  padding: 3px 0px 3px 0px;
+  padding: 3px 0px 3.6px 0px;
   li {
     display: inline;  
     > a, li > span {
-    padding: 7px 10px;
+    padding: 7px 13px;
     text-decoration: none;
     margin-left: -1px;
     border: 0 !important;
@@ -63,5 +63,6 @@
   }
   .disabled > span {
     padding: 7px 10px;
+    font-size: $text_small;
   }
 }

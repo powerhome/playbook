@@ -4,7 +4,7 @@ require "will_paginate/view_helpers/action_view"
 
 module Playbook
   module Pagination
-    class LinkRenderer < WillPaginate::ActionView::LinkRenderer
+    class Rails < WillPaginate::ActionView::LinkRenderer
       def container_attributes
         { class: "pb_pagination pagination" }
       end
