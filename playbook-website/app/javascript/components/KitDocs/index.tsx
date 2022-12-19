@@ -2,7 +2,7 @@ import React from 'react'
 
 import { Title } from 'playbook-ui'
 
-const PbKitReact = ({ kit }) => {
+const KitDocs = ({ kit }) => {
   return (
     <>
       <Title
@@ -14,4 +14,4 @@ const PbKitReact = ({ kit }) => {
   )
 }
 
-export default PbKitReact
+export default KitDocs
