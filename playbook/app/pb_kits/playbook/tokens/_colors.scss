@@ -8,7 +8,7 @@ Colors -----------------------------*/
 $royal:               #0056CF !default;
 $purple:              #9E64E9 !default;
 $teal:                #00C4D7 !default;
-$red:                 #FF2229 !default;
+$red:                 #DA0014 !default;
 $red_dark:            #ff4a50 !default;
 $yellow:              #F9BB00 !default;
 $green:               #00CA74 !default;
@@ -160,7 +160,7 @@ $warning_secondary:   lighten($warning, 10%);
 $warning_subtle:      rgba($warning, $opacity_1);
 $error:               $red !default;
 $error_dark:          $red_dark !default;
-$error_dark_body:     lighten($error_dark, 2%);
+$error_dark_body:     $error_dark;
 $error_secondary:     lighten($error, 10%);
 $error_subtle:        rgba($error, $opacity_1);
 $info:                $teal !default;
