@@ -1,5 +1,5 @@
 import classnames from 'classnames'
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import AnimateHeight from 'react-animate-height'
 import { buildCss } from '../../utilities/props'
 import { globalProps } from '../../utilities/globalProps'
@@ -20,7 +20,19 @@ const CollapsibleContent = ({
 }: CollapsibleContentProps) => {
   const context: {[key: string]: boolean | string} = useContext(CollapsibleContext)
   const contentCSS = buildCss('pb_collapsible_content_kit')
-  const contentSpacing = globalProps(props, { padding })
+  const [contentSpacing, setContentSpacing] = useState(globalProps(props, {}));
+
+  const insertPadding = () => {
+    if (!context.collapsed) {
+      setContentSpacing(globalProps(props, { padding }))
+    }
+  }
+
+  const removePadding = () => {
+    if (context.collapsed) {
+      setContentSpacing(globalProps(props, {}))
+    }
+  }
 
   return (
     <div className={classnames(contentCSS, className, contentSpacing)}>
@@ -28,6 +40,8 @@ const CollapsibleContent = ({
           duration={300}
           height={context.collapsed ? 0 : 'auto'}
           id="bottom-section"
+          onAnimationStart={insertPadding}
+          onAnimationEnd={removePadding}
       >
         {children}
       </AnimateHeight>
