@@ -139,11 +139,10 @@ export default class PbReactPopover extends React.Component<PbPopoverProps> {
     usePortal: true,
   }
 
-  componentDidMount() {
+  UNSAFE_componentDidMount() {
     const { closeOnClick, shouldClosePopover } = this.props
 
     if (!closeOnClick) return
-
     document.body.addEventListener('click', ({ target }) => {
       const targetIsPopover =
         target.closest('[class^=pb_popover_tooltip]') !== null
