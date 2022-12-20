@@ -6,7 +6,7 @@ module Playbook
   module Pagination
     class Rails < WillPaginate::ActionView::LinkRenderer
       def container_attributes
-        { class: "pb_pagination pagination" }
+        { class: "pb_pagination" }
       end
 
       def page_number(page)
@@ -25,9 +25,7 @@ module Playbook
         end
       end
 
-      def gap
-        tag("li", tag("span", "&hellip;"), class: "disabled")
-      end
+      def gap; end
 
       def previous_page
         num = @collection.current_page > 1 && @collection.current_page - 1
