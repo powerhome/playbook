@@ -40,6 +40,8 @@ const CollapsibleContent = ({
           duration={300}
           height={context.collapsed ? 0 : 'auto'}
           id="bottom-section"
+          //TODO If we upgrade react-animate-height, we will need to change the callback names below
+          //Reference: https://github.com/Stanko/react-animate-height#version-3
           onAnimationStart={insertPadding}
           onAnimationEnd={removePadding}
       >
