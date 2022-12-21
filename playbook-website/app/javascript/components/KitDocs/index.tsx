@@ -3,8 +3,7 @@ import { Title } from 'playbook-ui'
 import { Sandpack } from '@codesandbox/sandpack-react'
 import TableSmCode from 'playbook-ui/app/pb_kits/playbook/pb_table/docs/_table_sm'
 
-const PbKitReact = ({ kit }) => {
-
+const KitDocs = ({ kit }) => {
   return (
     <>
       <Title
@@ -41,4 +40,4 @@ const PbKitReact = ({ kit }) => {
   )
 }
 
-export default PbKitReact
+export default KitDocs
