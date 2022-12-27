@@ -1,7 +1,7 @@
 /* eslint-disable react/no-multi-comp */
 // @flow
 
-import React from "react";
+import React, {useEffect} from "react";
 import ReactDOM from "react-dom";
 
 import {
@@ -135,7 +135,6 @@ const PbReactPopover = (props: PbPopoverProps) => {
   const {
     className,
     children,
-    closeOnClick,
     modifiers = [],
     offset = false,
     placement = "left",
@@ -143,7 +142,6 @@ const PbReactPopover = (props: PbPopoverProps) => {
     reference,
     referenceElement,
     show = false,
-    shouldClosePopover = noop,
     usePortal = true,
     zIndex,
     maxHeight,
@@ -152,27 +150,34 @@ const PbReactPopover = (props: PbPopoverProps) => {
     minWidth,
   } = props;
 
-  document.body.addEventListener("click", (e) => {
-    const targetIsPopover = document.querySelector(".pb_popover_tooltip");
-    const targetIsReference = e.target.closest(".pb_popover_reference_wrapper");
+  useEffect(() => {
+    const { closeOnClick, shouldClosePopover = noop } = props
 
-    const isClickInside = targetIsPopover?.contains(e.target);
-    const isClickOutside = !targetIsPopover?.contains(e.target);
+    if (!closeOnClick) return
 
-    if (closeOnClick === "inside") {
-      if (isClickInside && !targetIsReference) {
-        shouldClosePopover(true);
+    document.body.addEventListener('click', ({ target }) => {
+      const targetIsPopover =
+        target.closest('[class^=pb_popover_tooltip]') !== null
+      const targetIsReference =
+        target.closest('.pb_popover_reference_wrapper') !== null
+
+      switch (closeOnClick) {
+        case 'outside':
+          if (!targetIsPopover || targetIsReference) {
+            shouldClosePopover(true)
+          }
+          break
+        case 'inside':
+          if (targetIsPopover || targetIsReference) {
+            shouldClosePopover(true)
+          }
+          break
+        case 'any':
+          shouldClosePopover(true)
+          break
       }
-    } else if (closeOnClick === "outside") {
-      if (!targetIsReference && isClickOutside) {
-        shouldClosePopover(true);
-      }
-    } else if (closeOnClick === "any") {
-      if (!targetIsReference) {
-        shouldClosePopover(true);
-      }
-    }
-  });
+    }, { capture: true })
+  }, [])
 
   const popoverComponent = (
     <Popover
