@@ -37,7 +37,7 @@ const CollapsibleContent = ({
   return (
     <div className={classnames(contentCSS, className, contentSpacing)}>
       <AnimateHeight
-          duration={300}
+          duration={400}
           height={context.collapsed ? 0 : 'auto'}
           id="bottom-section"
           //TODO If we upgrade react-animate-height, we will need to change the callback names below
