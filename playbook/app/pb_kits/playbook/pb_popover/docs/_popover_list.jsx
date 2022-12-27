@@ -29,7 +29,7 @@ const PopoverWithButton = (props) => {
           <Icon 
               fixedWidth 
               icon="angle-down" 
-              margin-left="sm" 
+              margin-left="xxs" 
           />
         </Flex>
       </Flex>
