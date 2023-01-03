@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import classnames from "classnames";
 import HighchartsReact from "highcharts-react-official";
 import Highcharts from "highcharts";
@@ -83,7 +83,6 @@ const Gauge = ({
     pb_gauge_kit: true,
   });
 
-  const componentDidMount = useRef(false);
   const [options, setOptions] = useState({});
 
   useEffect(() => {
@@ -184,16 +183,6 @@ const Gauge = ({
         .forEach((fix) => fix.setAttribute("y", "38"));
     }
 
-    if (componentDidMount.current) {
-      Highcharts.charts.forEach((chart: any) => {
-        if (chart && chart.renderTo.id === id) {
-          chart.series[0].setData([chartData[0].value]);
-          chart.series[0].data[0].name = chartData[0].name;
-        }
-      });
-    } else {
-      componentDidMount.current = true;
-    }
   }, [chartData]);
 
   return (

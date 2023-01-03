@@ -1,6 +1,7 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import classnames from "classnames";
 import HighchartsReact from "highcharts-react-official";
+import highchartsMore from "highcharts/highcharts-more";
 
 import Highcharts from "highcharts";
 
@@ -87,6 +88,8 @@ const CircleChart = ({
 }: CircleChartProps) => {
   const ariaProps = buildAriaProps(aria);
   const dataProps = buildDataProps(data);
+  highchartsMore(Highcharts);
+
   const setupTheme = () => {
     dark
       ? Highcharts.setOptions(highchartsDarkTheme)
@@ -108,7 +111,6 @@ const CircleChart = ({
   const innerSizeFormat = (size: "sm" | "md" | "lg" | "none") =>
     innerSizes[size];
 
-  const componentDidMount = useRef(false);
 
   const [options, setOptions] = useState({});
 
@@ -167,19 +169,8 @@ const CircleChart = ({
       credits: false,
     };
     setOptions({ ...staticOptions });
-    if (componentDidMount.current) {
-      Highcharts.charts.forEach((chart: any) => {
-        if (chart && chart.renderTo.id === id) {
-          const updatedValueArray = chartData.map((obj: any) => {
-            return obj.value;
-          });
-          chart.series[0].setData(updatedValueArray);
-        }
-      });
-    } else {
-      componentDidMount.current = true;
-    }
   }, [chartData]);
+
 
   return (
     <>
