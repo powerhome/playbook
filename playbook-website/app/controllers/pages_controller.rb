@@ -74,6 +74,11 @@ class PagesController < ApplicationController
     render template: "pages/kit_show", layout: "layouts/kits"
   end
 
+  def kit_show_new
+    @kit = params[:name]
+    render "pages/kit_show_new", layout: "layouts/kits"
+  end
+
   def principles; end
 
   # TODO: rename this method once all guidelines are completed

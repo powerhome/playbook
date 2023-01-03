@@ -68,6 +68,12 @@
 	$opacity_visible: 1;
 	$opacity_hidden: 0;
 
+	.dialog_sticky_header {
+	position: sticky;
+	top: 0;
+	background-color: $white;
+	}
+
 	// @include pb_card;
 	background-color: $white;
 	box-shadow: $shadow_deepest;
@@ -155,34 +161,101 @@
 				height: 100%;
 				max-height: 100%;
 				max-width: none;
+				.dialog_footer {
+					position:fixed;
+					bottom: 0;
+					background-color: $white;
+				}
+				
 				&[class*="_sm"] {
 					width: $medium;
+					.dialog_footer {
+						width: $medium;
+					}
 				}
 				&[class*="_md"] {
 					width: $large;
+					.dialog_footer {
+						width: $large;
+					}
 				}
 				&[class*="_lg"] {
 					width: $xlarge;
+					.dialog_footer {
+						width: $xlarge;
+					}
 				}
 			} 
 		}
-	}
-
-	.dialog-button-class {
-		background-color: unset;
-		border: none;
-		cursor: pointer;
-	}
-	
+	}	
 }
 
+//styles specific to rails version of kit
+// rails version has own wrapper because of the way the overlay functions for the HTML dialog used to create this
 .pb_dialog_wrapper_rails {
+	$medium: 500px;
+    $large: 800px;
+    $xlarge: 1150px;
+
+	&[class*="full_height"] {
+		&[class*="_left"]{
+			.pb_dialog_rails {
+				margin: unset !important;
+				margin-right: auto !important;
+			}
+		}
+		
+		&[class*="_center"]{
+			justify-content: center;
+		}
+
+		&[class*="_right"]{
+			.pb_dialog_rails {
+				margin: unset !important;
+				margin-left: auto !important;
+			}
+		}
+
+		.pb_dialog {
+			border-radius: 0;
+			height: 100% !important;
+			max-height: 100% !important;
+			max-width: 100%;
+			.dialog_footer {
+				position:fixed;
+				bottom: 0;
+				background-color: $white;
+			}
+			&[class*="_sm"] {
+				width: $medium;
+				.dialog_footer {
+					width: $medium;
+				}
+			}
+			&[class*="_md"] {
+				width: $large;
+				.dialog_footer {
+					width: $large;
+				}
+			}
+			&[class*="_lg"] {
+				width: $xlarge;
+				.dialog_footer {
+					width: $xlarge;
+				}
+			}
+		} 
+	}
+
+	// fixes for stylesheets in nitro that were conflicting with our kit. DO NOT REMOVE. 
+	//conflicts were only apparent in nitro, not in playbook local env
 	.pb_dialog_rails {
 		top: 0 !important;
 		padding: unset !important;
 		margin: auto;
 	
 	}
+	//overlay for rails kit
 	dialog::backdrop {
 		position: fixed;
 		top: 0;
@@ -195,5 +268,11 @@
 		background-color: rgba($bg_dark, $opacity_4);
 		animation-name: overlayFade;
 		animation-duration: 0.2s;	
+	}
+
+	.dialog-button-class {
+		background-color: unset;
+		border: none;
+		cursor: pointer;
 	}
 }

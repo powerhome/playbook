@@ -49,19 +49,19 @@ const DialogSizes = () => {
       >
         <Button
             id="sm"
-            marginRight="xl"
+            marginRight="md"
             onClick={toggleSmDialog}
         >
           {'Small Dialog'}
         </Button>
         <Button
-            marginRight="xl"
+            marginRight="md"
             onClick={toggleMdDialog}
         >
           {'Medium Dialog'}
         </Button>
         <Button
-            marginRight="xl"
+            marginRight="md"
             onClick={toggleLgDialog}
         >
           {'Large Dialog'}
