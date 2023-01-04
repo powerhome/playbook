@@ -11,7 +11,7 @@ module Playbook
         data.each do |user|
           new_user_array.push(user)
         end
-        new_user_array.paginate(page: params[:page], per_page: 1)
+        new_user_array.paginate(page: params[:page], per_page: 3)
       end
     end
   end
