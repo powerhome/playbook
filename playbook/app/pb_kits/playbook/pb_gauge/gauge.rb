@@ -22,15 +22,10 @@ module Playbook
       prop :max, type: Playbook::Props::Numeric, default: 100
       prop :colors, type: Playbook::Props::Array, default: []
 
-      def chart_data_formatted
-        chart_data.map { |hash| hash[:y] = hash.delete :value }
-        chart_data
-      end
-
       def chart_options
         {
           id: id,
-          chartData: chart_data_formatted,
+          chartData: chart_data,
           circumference: full_circle ? [0, 360] : [-100, 100],
           dark: dark ? "dark" : "",
           disableAnimation: disable_animation,
@@ -43,9 +38,9 @@ module Playbook
           showLabels: show_labels,
           style: style,
           tooltipHtml: tooltip_html,
-          type: "gauge",
+          type: style,
           colors: colors,
-        }.to_json.html_safe
+        }
       end
 
       def classname
