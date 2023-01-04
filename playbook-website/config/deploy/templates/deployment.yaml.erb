@@ -8,10 +8,10 @@ metadata:
     krane.shopify.io/required-rollout: "maxUnavailable"
 spec:
   replicas: 2
-  strategy:                                                                                                                                                                       │
-    rollingUpdate:                                                                                                                                                                │
-      maxSurge: 50%                                                                                                                                                               │
-      maxUnavailable: 50%                                                                                                                                                         │
+  strategy:
+    rollingUpdate:
+      maxSurge: 50%
+      maxUnavailable: 50%
     type: RollingUpdate
   selector:
     matchLabels:
