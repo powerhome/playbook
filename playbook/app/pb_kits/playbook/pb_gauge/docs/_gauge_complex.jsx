@@ -71,26 +71,26 @@ const GaugeComplex = (props) => (
               orientation="column"
               wrap
           >
-            <Body
-                color="light"
-                text="% Abandoned"
-            />
+              <Body
+                  color="light"
+                  text="% Abandoned"
+               />
             <Flex wrap>
               <FlexItem
                   fixedSize="150px"
                   overflow="hidden"
                   shrink
-              >
+              > 
                 <Gauge
                     chartData={data}
                     disableAnimation
-                    height="100%"
+                    height="150"
                     id="gauge-complex"
                     suffix="%"
                     {...props}
                 />
-              </FlexItem>
-            </Flex>
+               </FlexItem>
+            </Flex>  
           </Flex>
         </Flex>
       </Card>
