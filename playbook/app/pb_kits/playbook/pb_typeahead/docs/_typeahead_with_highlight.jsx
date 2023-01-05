@@ -34,13 +34,14 @@ const USERS = [
     name: "Jasper Furniss",
     title: "Senior User Experience Engineer",
     territory: "PHL",
-  }
+  },
 ];
 
 const TypeaheadWithPillsHighlight = (props) => {
   const [selectedUser, setSelectedUser] = useState()
 
   const formatOptionLabel = ({name, territory, title}, {inputValue}) => {
+
     const highlighted = (text: string) => {
       if (!inputValue.length) return text
       return text.replace(
@@ -83,7 +84,7 @@ const TypeaheadWithPillsHighlight = (props) => {
           components={customComponents}
           formatOptionLabel={formatOptionLabel}
           getOptionLabel={(option) => option.name}
-          getOptionValue={(option) => option.title}
+          getOptionValue={({name, title}) => `${name} ${title}`}
           label="Users"
           onChange={(user) => setSelectedUser(user)}
           options={USERS.filter((option) => option.name != selectedUser?.name)}
