@@ -1,5 +1,15 @@
 
 
+## [11.17.0](https://github.com/powerhome/playbook/tree/11.17.0) (2023-01-06)
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/11.16.0...11.17.0)
+
+**Improvements:**
+
+- Update React to v17 [\#2230](https://github.com/powerhome/playbook/pull/2230) ([nidaqg](https://github.com/nidaqg))
+
+
+
 ## [11.16.0](https://github.com/powerhome/playbook/tree/11.16.0) (2023-01-03)
 
 [Full Changelog](https://github.com/powerhome/playbook/compare/11.15.0...11.16.0)
