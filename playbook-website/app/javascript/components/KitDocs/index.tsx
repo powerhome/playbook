@@ -1,64 +1,80 @@
-import React, { useState } from 'react'
-import { Title, CircleIconButton } from 'playbook-ui'
+import React, { useState } from "react"
 import {
   SandpackProvider,
   SandpackLayout,
   SandpackCodeEditor,
   SandpackPreview,
 } from "@codesandbox/sandpack-react"
-import TableSmCode from 'playbook-ui/app/pb_kits/playbook/pb_table/docs/_table_sm'
 
-const KitDocs = ({ kit }) => {
-  const [showCode, setShowCode] = useState(false);
+import { CircleIconButton, Card, Caption } from "playbook-ui"
+
+const code = `import React from "react";
+import ReactDOM from "react-dom";
+import App from "./App";
+import "playbook-ui/dist/reset.css";
+import "playbook-ui/dist/playbook.css";
+import "playbook-ui/dist/fonts/fontawesome-min";
+import "playbook-ui/dist/fonts/regular-min";
+const rootElement = document.getElementById("root");
+ReactDOM.render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>,
+  rootElement
+);
+`
+
+const KitDocs = ({ kit, source, path, exampleTitle }) => {
+  const [showCode, setShowCode] = useState(true)
+  const updatedFileContent = source.replace("'../../'", "'playbook-ui'")
+  const files = {
+    "/App.js": {
+      code: updatedFileContent,
+    },
+    "/index.js": {
+      code: code,
+      hidden: true,
+    },
+  }
+
   return (
     <>
-      <Title
-          size={1}
-          tag="h1"
-          text={kit}
-      />
-
-      <SandpackProvider
-        theme="dark" //https://sandpack.codesandbox.io/docs/getting-started/themes
-        template="react" //https://sandpack.codesandbox.io/docs/getting-started/custom-content#templates
-        files={{
-          "/App.js": TableSmCode, //https://sandpack.codesandbox.io/docs/getting-started/custom-content#custom-file-contents
-        }}
-        customSetup={{
-          dependencies: { //https://sandpack.codesandbox.io/docs/getting-started/custom-content#npm-dependencies
-            'playbook-ui': 'latest',
-          },
-        }}
-        options={{ //https://sandpack.codesandbox.io/docs/getting-started/custom-ui#editor-settings
-          externalResources: [ 
-            /* https://sandpack.codesandbox.io/docs/getting-started/custom-content#static-external-resources
-              We can use this config to get all the CSS we would need from Playbook
-              'playbook-ui/dist/reset.css',
-              'playbook-ui/dist/playbook.css',
-              'playbook-ui/dist/fonts/fontawesome-min',
-              'playbook-ui/dist/fonts/regular-min',
-            */
-          ],
-        }}>
-        <SandpackLayout>
-          <div style={{ width:'100%' }}>
-            <SandpackPreview
-              showOpenInCodeSandbox={false}
-              showRefreshButton={false}
-              actionsChildren={
-                <CircleIconButton
-                  icon="pen"
-                  variant="secondary"
-                  onClick={() => setShowCode(!showCode)}
+      <Card className='pb--doc' padding='none' background="white">
+        <SandpackProvider
+          theme='dark' //https://sandpack.codesandbox.io/docs/getting-started/themes
+          template='react' //https://sandpack.codesandbox.io/docs/getting-started/custom-content#templates
+          files={files}
+          customSetup={{
+            dependencies: {
+              //https://sandpack.codesandbox.io/docs/getting-started/custom-content#npm-dependencies
+              "playbook-ui": "latest",
+            },
+          }}
+        >
+          <SandpackLayout style={{background: "#fff", border: "none"}}>
+            <div style={{ width: "100%", height: "100%" }}>
+              <div className='pb--kit-example'>
+                <Caption text={exampleTitle}></Caption>
+                <SandpackPreview
+                  style={{background: "#fff"}}
+                  showOpenInCodeSandbox={false}
+                  showRefreshButton={false}
+                  // actionsChildren={
+                  //   <CircleIconButton
+                  //     icon='pen'
+                  //     variant='secondary'
+                  //     onClick={() => setShowCode(!showCode)}
+                  //   />
+                  // }
                 />
-              } />
-          </div>
-          { showCode && <SandpackCodeEditor /> }
-        </SandpackLayout>
-      </SandpackProvider>
+              </div>
+            </div>
+            <SandpackCodeEditor />
+          </SandpackLayout>
+        </SandpackProvider>
+      </Card>
     </>
   )
 }
 
 export default KitDocs
-

@@ -16,6 +16,10 @@ body {
   }
 }
 
+iframe body {
+  background-color: white !important;
+}
+
 .pb--page {
   &--topNav {
     flex: 0 0;

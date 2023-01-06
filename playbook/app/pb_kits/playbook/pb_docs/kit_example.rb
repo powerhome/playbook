@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-# rubocop:disable Style/CaseLikeIf
-
 module Playbook
   module PbDocs
     class KitExample < Playbook::KitBase
@@ -15,11 +13,7 @@ module Playbook
       prop :dark, type: Playbook::Props::Boolean, default: false
 
       def example
-        if type == "rails"
-          render inline: source
-        elsif type == "react"
-          react_component example_key.camelize, { dark: dark }
-        end
+        render inline: source if type == "rails"
       end
 
       def description
@@ -46,5 +40,3 @@ module Playbook
     end
   end
 end
-
-# rubocop:enable Style/CaseLikeIf
