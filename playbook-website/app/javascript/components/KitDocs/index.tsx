@@ -25,8 +25,11 @@ ReactDOM.render(
 `
 
 const KitDocs = ({ kit, source, path, exampleTitle }) => {
-  const [showCode, setShowCode] = useState(true)
-  const updatedFileContent = source.replace("'../../'", "'playbook-ui'")
+  const [showCode, setShowCode] = useState(false)
+  // The code below is not final. I am working on it.
+  // There are some other scenarios that need to be mapped and implemented.
+  // Perhaps the best solution in this case is to use Regular Expressions.
+  const updatedFileContent = source.replaceAll("'../../'", "'playbook-ui'").replaceAll('"../../"', "'playbook-ui'").replaceAll("'../..'", "'playbook-ui'")
   const files = {
     "/App.js": {
       code: updatedFileContent,
@@ -39,7 +42,7 @@ const KitDocs = ({ kit, source, path, exampleTitle }) => {
 
   return (
     <>
-      <Card className='pb--doc' padding='none' background="white">
+      <Card className='pb--doc' padding='none'>
         <SandpackProvider
           theme='dark' //https://sandpack.codesandbox.io/docs/getting-started/themes
           template='react' //https://sandpack.codesandbox.io/docs/getting-started/custom-content#templates
@@ -51,25 +54,25 @@ const KitDocs = ({ kit, source, path, exampleTitle }) => {
             },
           }}
         >
-          <SandpackLayout style={{background: "#fff", border: "none"}}>
-            <div style={{ width: "100%", height: "100%" }}>
+          <SandpackLayout style={{backgroundColor: "white", border: "none"}}>
+            <div style={{ width: "100%"}}>
               <div className='pb--kit-example'>
                 <Caption text={exampleTitle}></Caption>
                 <SandpackPreview
-                  style={{background: "#fff"}}
+                  style={{height: "500px"}} // Working on it to remove the fixed height
                   showOpenInCodeSandbox={false}
                   showRefreshButton={false}
-                  // actionsChildren={
-                  //   <CircleIconButton
-                  //     icon='pen'
-                  //     variant='secondary'
-                  //     onClick={() => setShowCode(!showCode)}
-                  //   />
-                  // }
+                  actionsChildren={
+                    <CircleIconButton
+                      icon='pen'
+                      variant='secondary'
+                      onClick={() => setShowCode(!showCode)}
+                    />
+                  }
                 />
               </div>
             </div>
-            <SandpackCodeEditor />
+            { showCode && <SandpackCodeEditor /> }
           </SandpackLayout>
         </SandpackProvider>
       </Card>
