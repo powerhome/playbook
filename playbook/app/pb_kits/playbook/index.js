@@ -115,7 +115,6 @@ export { default as barGraphSettings } from './pb_bar_graph/barGraphSettings'
 export { default as dashboardValueSettings } from './pb_dashboard_value/dashboardValueSettings'
 
 // Other JS/Plugins
-export { default as pbChart } from './plugins/pb_chart.js'
 export { default as datePickerHelper } from './pb_date_picker/date_picker_helper'
 export { default as PbPopover } from './pb_popover'
 export { default as PbTable } from './pb_table'
