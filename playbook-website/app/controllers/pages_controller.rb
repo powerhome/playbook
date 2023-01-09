@@ -76,7 +76,7 @@ class PagesController < ApplicationController
 
   def kit_show_new
     @kit = params[:name]
-    render "pages/kit_show_react", layout: "layouts/kits"
+    render "pages/kit_show_new", layout: "layouts/kits"
   end
 
   def principles; end

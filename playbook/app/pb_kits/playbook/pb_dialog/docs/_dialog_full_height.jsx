@@ -52,11 +52,11 @@ const DialogFullHeight = () => {
             onClick={toggleHeaderSeparatorDialog}>
           {"Small Dialog"}
         </Button>
-        <Button marginRight="xl"
+        <Button marginRight="md"
             onClick={toggleFooterSeparatorDialog}>
           {"Medium Dialog"}
         </Button>
-        <Button marginRight="xl"
+        <Button marginRight="md"
             onClick={toggleBothSeparatorsDialog}>
           {"Large Dialog"}
         </Button>
