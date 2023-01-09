@@ -9,14 +9,15 @@ But even so, in the end, we would have to change the document a little bit to tu
 
 For example: for this one, I had to remove the parameter "props" (because we were not using it) and change the way that we import the component Table from Playbook.
 */
-const TableSmCode = `import React from 'react'
+import React from 'react'
 
-import { Table } from 'playbook-ui'
+import Table from '../_table'
 
-const TableSm = () => {
+const TableSm = (props) => {
   return (
     <Table
         size="sm"
+        {...props}
     >
       <thead>
         <tr>
@@ -54,6 +55,4 @@ const TableSm = () => {
   )
 }
 
-export default TableSm`
-
-export default TableSmCode
+export default TableSm
