@@ -3,6 +3,9 @@ import React from 'react'
 import classnames from 'classnames'
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
 import { globalProps } from '../utilities/globalProps'
+import Veteran from './badges/veteran.jsx';
+import MillionDollar from './badges/million-dollar.jsx';
+
 
 type UserBadgeProps = {
   aria?: object,
@@ -23,7 +26,7 @@ const UserBadge = (props: UserBadgeProps) => {
     size = 'md',
   } = props
 
-  const image = require(`./badges/${badge}.svg`)
+  const image = badge === "million-dollar" ? <MillionDollar /> : <Veteran />
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
   const classes = classnames(
@@ -40,7 +43,7 @@ const UserBadge = (props: UserBadgeProps) => {
         id={id}
     >
       <div className="pb_user_badge_wrapper">
-        <img src={image} />
+        {image}
       </div>
     </div>
   )
