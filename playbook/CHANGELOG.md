@@ -7,11 +7,11 @@
 **Kit Enhancements:**
 
 - Update Error Color Token [\#2226](https://github.com/powerhome/playbook/pull/2226) ([nidaqg](https://github.com/nidaqg))
-- New psuedo border on hover: + Table.scss file cleanup [\#2189](https://github.com/powerhome/playbook/pull/2189) ([jasoncypret](https://github.com/jasoncypret))
+- New psuedo border on hover: + Table.scss file cleanup [\#2189](https://github.com/powerhome/playbook/pull/2189) ([jasoncypret](https://github.com/jasoncypret), [carloslimasd](https://github.com/carloslimasd), [Israel-Molestina](https://github.com/Israel-Molestina)), 
 
 **Fixed Bugs:**
 
-- Fixed SVG-loader Error in Badge Kit [\#2244](https://github.com/powerhome/playbook/pull/2244) ([nidaqg](https://github.com/nidaqg))
+- Fixed SVG-loader Error in User Badge Kit [\#2244](https://github.com/powerhome/playbook/pull/2244) ([nidaqg](https://github.com/nidaqg))
 
 **Improvements:**
 
