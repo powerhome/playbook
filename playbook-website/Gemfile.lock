@@ -119,7 +119,7 @@ GEM
       concurrent-ruby (~> 1.0)
     io-like (0.3.1)
     json (2.6.2)
-    listen (3.7.1)
+    listen (3.8.0)
       rb-fsevent (~> 0.10, >= 0.10.3)
       rb-inotify (~> 0.9, >= 0.9.10)
     loofah (2.18.0)
@@ -278,7 +278,7 @@ DEPENDENCIES
   capybara (>= 2.15)
   chromedriver-helper
   health_check
-  listen (>= 3.0.5, < 3.7.2)
+  listen (>= 3.0.5, < 3.8.1)
   playbook_ui!
   psych (< 4)
   puma (~> 5.6)
