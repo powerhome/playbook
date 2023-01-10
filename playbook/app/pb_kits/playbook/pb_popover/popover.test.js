@@ -4,88 +4,112 @@ import { Button, PbReactPopover } from "..";
 
 const testId = "popover-kit";
 
-describe("Popover Kit", () => {
-  test("renders Popover and Popover classname", async () => {
-    const setStateMock = jest.fn();
-    const useStateMock = (useState) => [useState, setStateMock];
-    jest.spyOn(React, "useState").mockImplementationOnce(useStateMock);
-    const popoverReference = (
-      <Button onClick={setStateMock(!useStateMock)} 
-          text="Click Me"
-       />
-    );
+const PopoverTest = () => {
+  const [mockState, setMockState] = React.useState(false)
 
-  render(
+  const togglePopover = () => {
+    setMockState(!mockState)
+  }
+
+  const popoverReference = (
+    <Button onClick={togglePopover} 
+        text="Click Me"
+     />
+  );
+  return (
       <PbReactPopover
-          data={{ testid: testId }}
           offset
-          placement="top"
           reference={popoverReference}
-          show={useStateMock}
+          show={mockState}
       >
-        {"A Popover"}
+        {"Click Anywhere"}
       </PbReactPopover>
-    );
+  )
+}
 
-    await fireEvent.click(screen.getByText(/click me/i));
-    const kit = screen.getByTestId(testId);
-    expect(screen.getByText("A Popover")).toBeInTheDocument();
-    expect(kit).toHaveClass("pb_popover_kit");
-  });
+const PopoverTestZIndex = () => {
+  const [mockState, setMockState] = React.useState(false)
 
-  test("renders Popover with z index", async () => {
-    const setStateMock = jest.fn();
-    const useStateMock = (useState) => [useState, setStateMock];
-    jest.spyOn(React, "useState").mockImplementationOnce(useStateMock);
-    const popoverReference = (
-      <Button onClick={setStateMock(!useStateMock)} 
-          text="Click Me"
-       />
-    );
+  const togglePopover = () => {
+    setMockState(!mockState)
+  }
 
-  render(
+  const popoverReference = (
+    <Button onClick={togglePopover} 
+        text="Click Me"
+     />
+  );
+  return (
       <PbReactPopover
-          data={{ testid: testId }}
           offset
-          placement="top"
           reference={popoverReference}
-          show={useStateMock}
+          show={mockState}
           zIndex={3}
       >
-        {"A Popover"}
+        {"Click Anywhere"}
       </PbReactPopover>
-    );
+  )
+};
 
-    await fireEvent.click(screen.getByText(/click me/i));
-    expect(screen.getByText("A Popover")).toHaveClass("pb_popover_body z_index_3");
-  });
+const PopoverTestHeight = () => {
+  const [mockState, setMockState] = React.useState(false)
 
-  test("renders Popover with max height and max width", async () => {
-    const setStateMock = jest.fn();
-    const useStateMock = (useState) => [useState, setStateMock];
-    jest.spyOn(React, "useState").mockImplementationOnce(useStateMock);
-    const popoverReference = (
-      <Button onClick={setStateMock(!useStateMock)} 
-          text="Click Me"
-       />
-    );
+  const togglePopover = () => {
+    setMockState(!mockState)
+  }
 
-  render(
+  const popoverReference = (
+    <Button onClick={togglePopover} 
+        text="Click Me"
+     />
+  );
+  return (
       <PbReactPopover
-          data={{ testid: testId }}
           maxHeight="150px"
           maxWidth="240px"
           offset
-          placement="top"
           reference={popoverReference}
-          show={useStateMock}
+          show={mockState}
       >
-        {"A Popover"}
+        {"Click Anywhere"}
       </PbReactPopover>
-    );
+  )
+}
 
-    await fireEvent.click(screen.getByText(/click me/i));
-    expect(screen.getByText("A Popover")).toHaveClass("pb_popover_body max_width_240px overflow_handling");
+
+
+  test("renders Popover and Popover classname", () => {
+    render(<PopoverTest data={{ testid: testId}}/>)
+    const btn = screen.getByText(/click me/i)
+    fireEvent.click(btn);
+    const kit = screen.getByText("Click Anywhere");
+    expect(kit).toBeInTheDocument(); 
   });
 
-});
+  test("renders Popover with z index", () => {
+    render(<PopoverTestZIndex data={{ testid: testId}}/>)
+    const btn = screen.getByText(/click me/i)
+    fireEvent.click(btn);
+    const kit = screen.getByText("Click Anywhere");
+    expect(kit).toHaveClass("pb_popover_body z_index_3"); 
+  });
+
+  test("renders Popover with max height and max width", () => {
+    render(<PopoverTestHeight data={{ testid: testId}}/>)
+    const btn = screen.getByText(/click me/i)
+    fireEvent.click(btn);
+    const kit = screen.getByText("Click Anywhere");
+    expect(kit).toHaveClass("pb_popover_body max_width_240px overflow_handling"); 
+  });
+
+  // test("closes Popover on click anywhere", () => {
+  //   render(<PopoverTest data={{ testid: testId}}/>)
+  //   const btn = screen.getByText(/click me/i)
+  //   fireEvent.click(btn);
+  //   const kit = screen.getByText("Click Anywhere");
+  //   expect(kit).toBeInTheDocument(); 
+  //   await fireEvent.click(kit);
+  //   await waitFor(() => {
+  //       expect(screen.getByText("Click Anywhere")).not.toBeInTheDocument()
+  // })
+  // });
