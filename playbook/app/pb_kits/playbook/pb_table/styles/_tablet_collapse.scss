@@ -81,6 +81,10 @@
               border-left-width: 1px !important;
               border-right-width: 1px !important;
               border-top-width: 1px !important;
+              &:after {
+                height: 0;
+                background-color: transparent;
+              }
 
               &:first-child {
                 border-radius: $border_rad_light $border_rad_light 0 0 !important;
