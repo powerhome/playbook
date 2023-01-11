@@ -8,21 +8,21 @@ import {
 
 import { CircleIconButton, Card, Caption } from "playbook-ui"
 
-// const code = `import React from "react";
-// import ReactDOM from "react-dom";
-// import App from "./App";
-// import "playbook-ui/dist/reset.css";
-// import "playbook-ui/dist/playbook.css";
-// import "playbook-ui/dist/fonts/fontawesome-min";
-// import "playbook-ui/dist/fonts/regular-min";
-// const rootElement = document.getElementById("root");
-// ReactDOM.render(
-//   <React.StrictMode>
-//     <App />
-//   </React.StrictMode>,
-//   rootElement
-// );
-// `
+const code = `import React from "react";
+import ReactDOM from "react-dom";
+import App from "./App";
+import "playbook-ui/dist/reset.css";
+import "playbook-ui/dist/playbook.css";
+import "playbook-ui/dist/fonts/fontawesome-min";
+import "playbook-ui/dist/fonts/regular-min";
+const rootElement = document.getElementById("root");
+ReactDOM.render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>,
+  rootElement
+);
+`
 
 const KitDocs = ({ kit, source, path, exampleTitle }) => {
   const [showCode, setShowCode] = useState(false)
@@ -34,10 +34,10 @@ const KitDocs = ({ kit, source, path, exampleTitle }) => {
     "/App.js": {
       code: updatedFileContent,
     },
-    // "/index.js": {
-    //   code: code,
-    //   hidden: true,
-    // },
+    "/index.js": {
+      code: code,
+      hidden: true,
+    },
   }
 
   return (
