@@ -37,7 +37,7 @@ const USERS = [
   },
 ];
 
-const TypeaheadWithPillsHighlight = (props) => {
+const TypeaheadWithHighlight = (props) => {
   const [selectedUser, setSelectedUser] = useState()
 
   const formatOptionLabel = ({name, territory, title}, {inputValue}) => {
@@ -95,4 +95,4 @@ const TypeaheadWithPillsHighlight = (props) => {
   )
 }
 
-export default TypeaheadWithPillsHighlight
+export default TypeaheadWithHighlight
