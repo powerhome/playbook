@@ -12,13 +12,22 @@
       }
     }
   }
-
   @each $dark_color_name, $dark_color_value in $pb_dark_body_colors{
     &[class*=_#{$dark_color_name}][class*=dark]{
       @include pb_body($dark_color_value);
     }
   }
+  b, strong {
+    letter-spacing: -.03em;
+    font-weight: 700;
+  }
 
+  a {
+    &:hover {
+      color: $text_lt_default;
+    }
+    color: $primary;
+  }
   @each $status_name, $status_value in $pb_body_status {
     &[class*=#{$status_name}] {
       @include pb_body($status_value);
