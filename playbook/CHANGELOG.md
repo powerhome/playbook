@@ -1,5 +1,35 @@
 
 
+## [11.18.0](https://github.com/powerhome/playbook/tree/11.18.0) (2023-01-10)
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/11.17.0...11.18.0)
+
+**Kit Enhancements:**
+
+- Update Error Color Token [\#2226](https://github.com/powerhome/playbook/pull/2226) ([nidaqg](https://github.com/nidaqg))
+- New psuedo border on hover: + Table.scss file cleanup [\#2189](https://github.com/powerhome/playbook/pull/2189) ([jasoncypret](https://github.com/jasoncypret), [carloslimasd](https://github.com/carloslimasd), [Israel-Molestina](https://github.com/Israel-Molestina)), 
+
+**Fixed Bugs:**
+
+- Fixed SVG-loader Error in User Badge Kit [\#2244](https://github.com/powerhome/playbook/pull/2244) ([nidaqg](https://github.com/nidaqg))
+
+**Improvements:**
+
+- Fixes loader-utils security vulnerability [\#2241](https://github.com/powerhome/playbook/pull/2241) ([jasperfurniss](https://github.com/jasperfurniss))
+- Popover Kit Updates for Dropdown Doc Example [\#2235](https://github.com/powerhome/playbook/pull/2235) ([nidaqg](https://github.com/nidaqg))
+
+
+
+## [11.17.0](https://github.com/powerhome/playbook/tree/11.17.0) (2023-01-06)
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/11.16.0...11.17.0)
+
+**Improvements:**
+
+- Update React to v17 [\#2230](https://github.com/powerhome/playbook/pull/2230) ([nidaqg](https://github.com/nidaqg))
+
+
+
 ## [11.16.0](https://github.com/powerhome/playbook/tree/11.16.0) (2023-01-03)
 
 [Full Changelog](https://github.com/powerhome/playbook/compare/11.15.0...11.16.0)
