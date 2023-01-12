@@ -132,6 +132,20 @@
 	outline: none;
 	animation-timing-function: $easeInOutQuint;
 	
+	&[class*="_left"] {
+		animation-name: modalFadeInLeft;
+		&_before_close {
+			animation-name: modalFadeOutLeft;
+		}
+	}
+
+	&[class*="_right"] {
+		animation-name: modalFadeInRight;
+		&_before_close {
+			animation-name: modalFadeOutRight;
+		}
+	}
+	
 	&[class*="_status_size"] {
 		width: $status_size;
 	}
@@ -143,6 +157,7 @@
 	&[class*="_md"] {
 		width: $medium;
 	}
+	
 
 	&[class*="_lg"] {
 		width: $large;
