@@ -20,7 +20,7 @@ module Playbook
                     default: ""
 
       def classname
-        generate_classname("pb_dialog pb_dialog_rails pb_dialog_#{size}")
+        generate_classname("pb_dialog pb_dialog_rails pb_dialog_#{size}_#{placement}")
       end
 
       def full_height_style
