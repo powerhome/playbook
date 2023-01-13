@@ -9,6 +9,7 @@
   border: 1px solid $border_light;
   background-color: $white;
   padding: 3px 0px 3.6px 0px;
+  margin: 10px 0;
   li {
     display: inline;  
     > a, li > span {
@@ -51,7 +52,7 @@
     background-color: $primary !important;
     border-radius: $border_rad_light;
     color: #fff;
-    padding: 7px 10px;
+    padding: 7px 13px;
     border: 0 !important;
     text-decoration: none;
     font-weight: $bold;
