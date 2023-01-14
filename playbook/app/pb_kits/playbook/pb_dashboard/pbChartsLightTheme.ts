@@ -1,9 +1,11 @@
 import colors from '../tokens/exports/_colors.scss'
 import typography from '../tokens/exports/_typography.scss'
 
+import { ThemeProps } from './themeTypes'
+
 import Highcharts from 'highcharts'
 
-const highchartsTheme = {
+const highchartsTheme: ThemeProps = {
   lang: {
     thousandsSep: ',',
   },
@@ -150,26 +152,6 @@ const highchartsTheme = {
       },
       threshold: null,
     },
-
-    // GAUGE STYLES
-    solidgauge: {
-      borderColor: colors.primary,
-      borderWidth: 20,
-      radius: 90,
-      innerRadius: '90%',
-      dataLabels: {
-        borderWidth: 0,
-        color: colors.text_lt_default,
-        enabled: true,
-        style: {
-          fontFamily: typography.font_family_base,
-          fontWeight: typography.regular,
-          fontSize: typography.heading_2,
-        },
-        y: -26,
-      },
-    },
-
     // PIE STYLES
     pie: {
       colors: [
@@ -246,6 +228,9 @@ const highchartsTheme = {
         position: { y: -40 },
       }
     },
+  },
+  credits: {
+    enabled: false
   },
 }
 
