@@ -1,32 +1,28 @@
-<% if type == "react"%>
-  <%= react_component("KitDocs", exampleTitle: example_title, kit: kit, source: source, path: ::Playbook.kit_path(kit, "docs")) %>
-<% else %>
-  <%= pb_rails("card", props: { classname: "pb--doc", padding: "none", dark: dark }) do %>
-    <div class="pb--kit-example">
-      <%= pb_rails("caption", props: { text: example_title }) %>
-      <br />
-      <%= example %>
-      <br>
-    </div>
+<%= pb_rails("card", props: { classname: "pb--doc", padding: "none", dark: dark }) do %>
+  <div class="pb--kit-example">
+    <%= pb_rails("caption", props: { text: example_title }) %>
+    <br />
+    <%= example %>
+    <br>
+  </div>
 
-    <% if show_code %>
-      <div class="markdown pb--kit-example-markdown <%= dark ? "dark" : "" %>">
-        <%= markdown(description) %>
+  <% if show_code %>
+    <div class="markdown pb--kit-example-markdown <%= dark ? "dark" : "" %>">
+      <%= markdown(description) %>
+    </div>
+    <div id="code-wrapper">
+      <div class="pb--codeControls">
+        <ul>
+          <li>
+            <a href="#" id="toggle-open" data-toggle="code_example">Code Example</a>
+          </li>
+        </ul>
       </div>
-      <div id="code-wrapper">
-        <div class="pb--codeControls">
-          <ul>
-            <li>
-              <a href="#" id="toggle-open" data-toggle="code_example">Code Example</a>
-            </li>
-          </ul>
-        </div>
-        <div class="pb--codeCopy" data-action="toggle" data-togglable="code_example" style="display: none" >
-          <%= pb_rails("section_separator", props: { dark: dark })%>
-          <a href="#" id="toggle-close" data-toggle="false" class="pb--close-toggle">Close</a>
-            <pre class="highlight"><%= raw rouge(source, highlighter) %></pre>
-        </div>
+      <div class="pb--codeCopy" data-action="toggle" data-togglable="code_example" style="display: none" >
+        <%= pb_rails("section_separator", props: { dark: dark })%>
+        <a href="#" id="toggle-close" data-toggle="false" class="pb--close-toggle">Close</a>
+        <pre class="highlight"><%= raw rouge(source, highlighter) %></pre>
       </div>
-    <% end %>
+    </div>
   <% end %>
 <% end %>

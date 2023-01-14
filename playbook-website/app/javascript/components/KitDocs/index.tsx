@@ -24,12 +24,9 @@ ReactDOM.render(
 );
 `
 
-const KitDocs = ({ kit, source, path, exampleTitle }) => {
+const KitDocs = ({ kit, source, exampleTitle }) => {
   const [showCode, setShowCode] = useState(false)
-  // The code below is not final. I am working on it.
-  // There are some other scenarios that need to be mapped and implemented.
-  // Perhaps the best solution in this case is to use Regular Expressions.
-  const updatedFileContent = source.replaceAll("'../../'", "'playbook-ui'").replaceAll('"../../"', "'playbook-ui'").replaceAll("'../..'", "'playbook-ui'")
+  const updatedFileContent = source.replace(/\'..\/..\/?\'/g, "'playbook-ui'").replace(/\"..\/..\/?\"/g, "'playbook-ui'")
   const files = {
     "/App.js": {
       code: updatedFileContent,
