@@ -10,7 +10,7 @@ type RadioProps = {
   aria?: {[key: string]: string},
   alignment?: string,
   checked?: boolean,
-  children?: Node,
+  children: React.ReactChild[] | React.ReactChild,
   className?: string,
   dark?: boolean,
   data?: {[key: string]: string},

@@ -8,7 +8,7 @@ import { globalProps, GlobalProps } from '../utilities/globalProps'
 type CheckboxProps = {
   aria?: {[key: string]: string},
   checked?: boolean,
-  children: Node,
+  children: React.ReactChild[] | React.ReactChild,
   className?: string,
   dark?: boolean,
   data?: {[key: string]: string},
