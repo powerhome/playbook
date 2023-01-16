@@ -56,7 +56,7 @@ const KitDocs = ({ kit, source, exampleTitle }) => {
               <div className='pb--kit-example'>
                 <Caption text={exampleTitle}></Caption>
                 <SandpackPreview
-                  style={{height: "500px"}} // Working on it to remove the fixed height
+                  style={{height: "450px"}}
                   showOpenInCodeSandbox={false}
                   showRefreshButton={false}
                   actionsChildren={
