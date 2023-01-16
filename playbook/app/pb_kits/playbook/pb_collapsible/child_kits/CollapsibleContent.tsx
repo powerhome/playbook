@@ -23,15 +23,15 @@ const CollapsibleContent = ({
   const contentSpacing = globalProps(props, { padding })
 
   return (
-    <div className={classnames(contentCSS, className, contentSpacing)}>
-      <AnimateHeight
-          duration={300}
-          height={context.collapsed ? 0 : 'auto'}
-          id="bottom-section"
-      >
+    <AnimateHeight
+        duration={400}
+        height={context.collapsed ? 0 : 'auto'}
+        id="bottom-section"
+    >
+      <div className={classnames(contentCSS, className, contentSpacing)}>
         {children}
-      </AnimateHeight>
-    </div>
+      </div>
+    </AnimateHeight>
   )
 }
 
