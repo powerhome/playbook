@@ -10,7 +10,6 @@ PATH
       rouge (~> 3.15)
       view_component (= 2.55.0)
       webpacker-react (~> 0.3.2)
-      will_paginate (~> 3.3)
 
 GEM
   remote: https://rubygems.org/
@@ -88,6 +87,8 @@ GEM
       erubi (>= 1.0.0)
       rack (>= 0.9.0)
     bindex (0.8.1)
+    binding_of_caller (1.0.0)
+      debug_inspector (>= 0.0.1)
     bootsnap (1.12.0)
       msgpack (~> 1.2)
     builder (3.2.4)
@@ -109,8 +110,11 @@ GEM
     concurrent-ruby (1.1.10)
     connection_pool (2.3.0)
     crass (1.0.6)
+    debug_inspector (1.1.0)
     erubi (1.10.0)
     execjs (2.8.1)
+    faker (3.1.0)
+      i18n (>= 1.8.11, < 2)
     ffi (1.15.5)
     globalid (1.0.0)
       activesupport (>= 5.0)
@@ -275,10 +279,12 @@ PLATFORMS
 
 DEPENDENCIES
   better_errors (= 2.9.1)
+  binding_of_caller
   bootsnap (>= 1.1.0)
   byebug
   capybara (>= 2.15)
   chromedriver-helper
+  faker
   health_check
   listen (>= 3.0.5, < 3.7.2)
   playbook_ui!
@@ -294,6 +300,7 @@ DEPENDENCIES
   tzinfo-data
   web-console (>= 3.3.0)
   webpacker (= 4.3.0)
+  will_paginate
 
 RUBY VERSION
    ruby 3.1.2p20

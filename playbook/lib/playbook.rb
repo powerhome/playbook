@@ -12,7 +12,8 @@ require "playbook/pb_doc_helper"
 require "playbook/kit_base"
 require "playbook/kit_resolver"
 require "playbook/markdown"
-require "playbook/pagination_renderer"
+# require "playbook/pagination_renderer"
+# REMOVED TO MAKE THIS AN OPTIONAL INCLUDE FOR CLIENTS
 
 module Playbook
   ROOT_PATH = Pathname.new(File.join(__dir__, ".."))

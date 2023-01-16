@@ -1,0 +1,6 @@
+examples:
+  
+  rails:
+  - paginate_default: Default
+  
+  
