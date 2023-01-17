@@ -1,4 +1,5 @@
 export { default as TypeaheadDefault } from './_typeahead_default.jsx'
+export { default as TypeaheadWithHighlight } from './_typeahead_with_highlight.jsx'
 export { default as TypeaheadWithPills } from './_typeahead_with_pills.jsx'
 export { default as TypeaheadWithPillsAsync } from './_typeahead_with_pills_async.jsx'
 export { default as TypeaheadWithPillsAsyncUsers } from './_typeahead_with_pills_async_users.jsx'

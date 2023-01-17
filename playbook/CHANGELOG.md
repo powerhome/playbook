@@ -1,5 +1,25 @@
 
 
+## [11.19.0](https://github.com/powerhome/playbook/tree/11.19.0) (2023-01-16)
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/11.18.0...11.19.0)
+
+**Kit Enhancements:**
+
+- Convert List Kit to Typescript [\#2234](https://github.com/powerhome/playbook/pull/2234) ([nidaqg](https://github.com/nidaqg))
+- Provide Text Highlight Example in Typeahead Kit [\#2231](https://github.com/powerhome/playbook/pull/2231) ([thestephenmarshall](https://github.com/thestephenmarshall))
+- TS Conversion Popover [\#2219](https://github.com/powerhome/playbook/pull/2219) ([nidaqg](https://github.com/nidaqg))
+
+**Fixed Bugs:**
+
+- Fixing Collapsible Kit Content Spacing Issue [\#2229](https://github.com/powerhome/playbook/pull/2229) ([carloslimasd](https://github.com/carloslimasd))
+
+**Improvements:**
+
+- Make Dev Dependencies Actually Dev Dependencies [\#2236](https://github.com/powerhome/playbook/pull/2236) ([drborges](https://github.com/drborges))
+
+
+
 ## [11.18.0](https://github.com/powerhome/playbook/tree/11.18.0) (2023-01-10)
 
 [Full Changelog](https://github.com/powerhome/playbook/compare/11.17.0...11.18.0)
