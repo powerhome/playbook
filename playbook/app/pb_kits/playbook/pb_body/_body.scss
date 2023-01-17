@@ -1,4 +1,5 @@
 @import "./body_mixins";
+@import "../tokens/titles";
 
 [class^=pb_body_kit]{
   @include pb_body($text_lt_default);
@@ -18,8 +19,7 @@
     }
   }
   b, strong {
-    letter-spacing: -.03em;
-    font-weight: 700;
+    @include pb_title_4
   }
 
   a {
