@@ -12,6 +12,7 @@ import Card from '../pb_card/_card'
 type FileUploadProps = {
   accept?: string[],
   className?: string,
+  customMessage?: string,
   data?: {[key: string]: string | number},
   acceptedFilesDescription?: string,
   maxSize?: number,
@@ -28,6 +29,7 @@ const FileUpload = (props: FileUploadProps): React.ReactElement => {
     accept = null,
     acceptedFilesDescription = '',
     className,
+    customMessage,
     data = {},
     maxSize,
     onFilesAccepted = noop,
@@ -78,8 +80,14 @@ const FileUpload = (props: FileUploadProps): React.ReactElement => {
 
   const getDescription = () => {
     let msg = ""
-    accept === null ? msg += 'Choose a file or drag it here.' : msg += `Choose a file or drag it here. The accepted file types are: ${acceptedFilesDescription || acceptedFileTypes()}.`
-    if (maxSize) msg += ` ${maxFileSizeText}`
+
+    if (customMessage) {
+      msg = customMessage
+    } else {
+      accept === null ? msg += 'Choose a file or drag it here.' : msg += `Choose a file or drag it here. The accepted file types are: ${acceptedFilesDescription || acceptedFileTypes()}.`
+      if (maxSize) msg += ` ${maxFileSizeText}`
+    }
+
     return msg
   }
 
