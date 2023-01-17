@@ -58,10 +58,7 @@ const SelectableIcon = ({
   const inputType = multi === false ? 'radio' : 'checkbox'
   const inputIdPresent = inputId !== null ? inputId : name
 
-  console.log("ariaProps", ariaProps)
-  console.log("dataProps", dataProps)
-  console.log("globalProps", globalProps(props))
-  console.log("props", props)
+  console.log(props)
 
   return (
     <div
