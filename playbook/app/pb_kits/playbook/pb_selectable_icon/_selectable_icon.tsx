@@ -58,25 +58,23 @@ const SelectableIcon = ({
   const inputType = multi === false ? 'radio' : 'checkbox'
   const inputIdPresent = inputId !== null ? inputId : name
 
-  console.log(props)
-
   return (
     <div
-        {...ariaProps}
-        {...dataProps}
-        className={classes}
+      {...ariaProps}
+      {...dataProps}
+      className={classes}
     >
       {inputs === 'disabled' && (
         <>
           <Icon
-          customIcon={customIcon}
-          icon={icon}
-          size="2x"
+            customIcon={customIcon}
+            icon={icon}
+            size="2x"
           />
           <Title
-              size={4}
-              tag="h4"
-              text={text}
+            size={4}
+            tag="h4"
+            text={text}
           />
         </>
       )}
@@ -84,24 +82,24 @@ const SelectableIcon = ({
       {inputs === 'enabled' && (
         <>
           <input
-              {...props}
-              checked={checked}
-              disabled={disabled}
-              id={inputIdPresent}
-              name={name}
-              type={inputType}
-              value={value}
+            {...props}
+            checked={checked}
+            disabled={disabled}
+            id={inputIdPresent}
+            name={name}
+            type={inputType}
+            value={value}
           />
           <label htmlFor={inputIdPresent}>
             <Icon
-                customIcon={customIcon}
-                icon={icon}
-                size="2x"
+              customIcon={customIcon}
+              icon={icon}
+              size="2x"
             />
             <Title
-                size={4}
-                tag="h4"
-                text={text}
+              size={4}
+              tag="h4"
+              text={text}
             />
           </label>
         </>
