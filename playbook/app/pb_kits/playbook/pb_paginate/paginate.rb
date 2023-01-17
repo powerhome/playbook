@@ -3,7 +3,7 @@
 module Playbook
   module PbPaginate
     class Paginate < ::Playbook::KitBase
-      prop :stragety # Need to add protection
+      prop :strategy # Need to add protection
       prop :model # Need to add protection
 
       def classname
