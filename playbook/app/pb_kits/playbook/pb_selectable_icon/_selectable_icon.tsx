@@ -1,23 +1,20 @@
 /* @flow */
-
 import React from 'react'
 import classnames from 'classnames'
-
 import { globalProps } from '../utilities/globalProps'
 import {
   buildAriaProps,
   buildCss,
   buildDataProps,
 } from '../utilities/props'
-
 import Icon from '../pb_icon/_icon'
 import Title from '../pb_title/_title'
 
 type SelectableIconProps = {
-  aria?: Object,
+  aria?: {[key: string]: string},
   checked?: boolean,
   className?: string,
-  customIcon?: SVGElement,
+  customIcon?: {[key: string] :SVGElement},
   disabled?: boolean,
   data?: Object,
   icon: string,
@@ -59,8 +56,12 @@ const SelectableIcon = ({
   )
 
   const inputType = multi === false ? 'radio' : 'checkbox'
-
   const inputIdPresent = inputId !== null ? inputId : name
+
+  console.log("ariaProps", ariaProps)
+  console.log("dataProps", dataProps)
+  console.log("globalProps", globalProps(props))
+  console.log("props", props)
 
   return (
     <div
@@ -68,12 +69,12 @@ const SelectableIcon = ({
         {...dataProps}
         className={classes}
     >
-      <If condition={inputs === 'disabled'}>
+      {inputs === 'disabled' && (
         <>
           <Icon
-              customIcon={customIcon}
-              icon={icon}
-              size="2x"
+          customIcon={customIcon}
+          icon={icon}
+          size="2x"
           />
           <Title
               size={4}
@@ -81,8 +82,9 @@ const SelectableIcon = ({
               text={text}
           />
         </>
-      </If>
-      <If condition={inputs === 'enabled'}>
+      )}
+          
+      {inputs === 'enabled' && (
         <>
           <input
               {...props}
@@ -106,7 +108,7 @@ const SelectableIcon = ({
             />
           </label>
         </>
-      </If>
+      )}
     </div>
   )
 }
