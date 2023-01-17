@@ -1,5 +1,5 @@
 import React, { useEffect, useCallback, useRef } from 'react'
-import { useDropzone } from 'react-dropzone'
+import { useDropzone, DropzoneInputProps, DropzoneRootProps } from 'react-dropzone'
 import classnames from 'classnames'
 
 import { buildCss, buildDataProps, noop } from '../utilities/props'
@@ -38,13 +38,20 @@ const FileUpload = (props: FileUploadProps): React.ReactElement => {
     onFilesAccepted(files)
   }, [onFilesAccepted])
 
-  const { getRootProps, getInputProps, isDragActive, rejectedFiles } = useDropzone({
+  type DropZoneProps = {
+    getRootProps: () => DropzoneRootProps & any;
+    getInputProps: () => DropzoneInputProps & any;
+    isDragActive: boolean;
+    rejectedFiles: File[];
+  }
+
+  const { getRootProps, getInputProps, isDragActive, rejectedFiles }: DropZoneProps = useDropzone({
     accept,
     maxSize,
     onDrop,
   })
 
-  const prevRejected: any = useRef();
+  const prevRejected = useRef<File[] | null>(null);
 
   const maxFileSizeText = `Max file size is ${getFormattedFileSize(maxSize)}.`
 
