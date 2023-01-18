@@ -29,7 +29,7 @@ const FileUploadCustomMessage = (props) => {
           {...props}
       />
       <FileUpload
-          customMessage={"Playbook is awesome!"}
+          customMessage="Playbook is awesome!"
           onFilesAccepted={handleOnFilesAccepted}
           {...props}
       />
