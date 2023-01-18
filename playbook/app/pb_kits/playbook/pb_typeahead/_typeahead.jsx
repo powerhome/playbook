@@ -28,10 +28,11 @@ import { noop } from '../utilities/props'
  */
 
 type TypeaheadProps = {
-  id?: string,
   async?: boolean,
+  components?: object,
   createable?: boolean,
   dark?: boolean,
+  id?: string,
   label?: string,
   loadOptions?: string,
   getOptionLabel?: string | (() => any),
@@ -44,7 +45,16 @@ type TypeaheadProps = {
  * @param {TypeaheadProps} props - props as described at https://react-select.com/props
  */
 
-const Typeahead = ({ loadOptions = noop, getOptionLabel, id, getOptionValue, createable, async, ...props }: TypeaheadProps) => {
+const Typeahead = ({
+  async,
+  components = {},
+  createable,
+  getOptionLabel,
+  getOptionValue,
+  id,
+  loadOptions = noop,
+  ...props
+}: TypeaheadProps) => {
   const selectProps = {
     cacheOptions: true,
     components: {
@@ -57,6 +67,7 @@ const Typeahead = ({ loadOptions = noop, getOptionLabel, id, getOptionValue, cre
       Option,
       Placeholder,
       ValueContainer,
+      ...components
     },
     loadOptions: isString(loadOptions) ? get(window, loadOptions) : loadOptions,
     getOptionLabel: isString(getOptionLabel) ? get(window, getOptionLabel) : getOptionLabel,
