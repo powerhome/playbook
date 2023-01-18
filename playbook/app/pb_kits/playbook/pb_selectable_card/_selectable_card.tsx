@@ -3,7 +3,6 @@
 import React, {useRef} from 'react'
 import classnames from 'classnames'
 
-import type { InputCallback } from '../types'
 import { globalProps, GlobalProps } from '../utilities/globalProps'
 import {
   buildAriaProps,
