@@ -80,6 +80,12 @@ class PagesController < ApplicationController
     render "pages/kit_show_new", layout: "layouts/kits"
   end
 
+  def kit_show_demo
+    @kit = params[:name]
+    @examples = kit_examples
+    render "pages/kit_show_demo", layout: "layouts/kits"
+  end
+
   def principles; end
 
   # TODO: rename this method once all guidelines are completed

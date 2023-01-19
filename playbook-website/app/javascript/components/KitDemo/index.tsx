@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React from "react"
 import {
   SandpackProvider,
   SandpackLayout,
@@ -6,7 +6,7 @@ import {
   SandpackPreview,
 } from "@codesandbox/sandpack-react"
 
-import { CircleIconButton, Card, Caption } from "playbook-ui"
+import { Card, Caption } from "playbook-ui"
 
 const code = `import React from "react";
 import ReactDOM from "react-dom";
@@ -24,8 +24,7 @@ ReactDOM.render(
 );
 `
 
-const KitDocs = ({ kit, source, exampleTitle }) => {
-  const [showCode, setShowCode] = useState(false)
+const KitDemo = ({ kit, source, exampleTitle }) => {
   const updatedFileContent = source.replace(/\'..\/..\/?\'/g, "'playbook-ui'").replace(/\"..\/..\/?\"/g, "'playbook-ui'")
   const files = {
     "/App.js": {
@@ -33,7 +32,6 @@ const KitDocs = ({ kit, source, exampleTitle }) => {
     },
     "/index.js": {
       code: code,
-      hidden: true,
     },
   }
 
@@ -54,21 +52,14 @@ const KitDocs = ({ kit, source, exampleTitle }) => {
             <div style={{ width: '100%'}}>
               <div className='pb--kit-example'>
                 <Caption text={exampleTitle}></Caption>
+                <SandpackCodeEditor style={{height: '300px'}}/>
                 <SandpackPreview
                   style={{height: '450px'}}
                   showOpenInCodeSandbox={false}
                   showRefreshButton={false}
-                  actionsChildren={
-                    <CircleIconButton
-                      icon='pen'
-                      variant='secondary'
-                      onClick={() => setShowCode(!showCode)}
-                    />
-                  }
                 />
               </div>
             </div>
-            { showCode && <SandpackCodeEditor /> }
           </SandpackLayout>
         </SandpackProvider>
       </Card>
@@ -76,4 +67,4 @@ const KitDocs = ({ kit, source, exampleTitle }) => {
   )
 }
 
-export default KitDocs
+export default KitDemo
