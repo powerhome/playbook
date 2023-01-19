@@ -24,7 +24,6 @@ const SelectableCardDefault = (props) => {
 
       <SelectableCard
           checked={selectedNoIcon}
-          icon={false}
           inputId="selectedWithoutIcon"
           name="selectedWithoutIcon"
           onChange={() => setSelectedNoIcon(!selectedNoIcon)}

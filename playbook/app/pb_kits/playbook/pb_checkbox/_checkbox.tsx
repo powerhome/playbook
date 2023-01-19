@@ -8,18 +8,18 @@ import { globalProps, GlobalProps } from '../utilities/globalProps'
 type CheckboxProps = {
   aria?: {[key: string]: string},
   checked?: boolean,
-  children: React.ReactChild[] | React.ReactChild,
+  children?: React.ReactChild[] | React.ReactChild,
   className?: string,
   dark?: boolean,
   data?: {[key: string]: string},
   error?: boolean,
   id?: string,
   indeterminate?: boolean,
-  name: string,
-  onChange: (event: React.FormEvent<HTMLInputElement>) => void,
-  tabIndex: number,
-  text: string,
-  value: string,
+  name?: string,
+  onChange?: (event: React.FormEvent<HTMLInputElement>) => void,
+  tabIndex?: number,
+  text?: string,
+  value?: string,
 } & GlobalProps
 
 const Checkbox = (props: CheckboxProps): JSX.Element => {
@@ -34,7 +34,7 @@ const Checkbox = (props: CheckboxProps): JSX.Element => {
     id,
     indeterminate = false,
     name = '',
-    onChange = () => {},
+    onChange = () => { void 0 },
     tabIndex,
     text = '',
     value = '',

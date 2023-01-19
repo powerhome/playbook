@@ -1,6 +1,6 @@
 /* @flow */
 
-import React, {useRef} from 'react'
+import React, {ReactElement, useRef} from 'react'
 import classnames from 'classnames'
 
 import { globalProps, GlobalProps } from '../utilities/globalProps'
@@ -42,7 +42,6 @@ const SelectableCard = (props: SelectableCardProps) => {
   const {
     aria = {},
     checked = false,
-    children,
     className,
     customIcon,
     dark = false,
@@ -96,7 +95,14 @@ const SelectableCard = (props: SelectableCardProps) => {
   const inputType = multi ? 'checkbox' : 'radio'
   const inputIdPresent = inputId !== null ? inputId : name
   const Input = multi ? Checkbox : Radio
-  const labelProps = variant === 'displayInput' ? Object.assign(props, { padding: 'none' }) : props
+
+  const filteredProps = {...props}
+  if (filteredProps.inputId) delete filteredProps.inputId
+  if (filteredProps?.children) delete filteredProps.children
+  if (filteredProps?.icon) delete filteredProps.icon
+  if (filteredProps?.error) delete filteredProps.error
+
+  const labelProps = variant === 'displayInput' ? { ...filteredProps, padding: 'none' } : { ...filteredProps }
 
   return (
     <div
@@ -105,7 +111,6 @@ const SelectableCard = (props: SelectableCardProps) => {
         className={classes}
     >
       <input
-          {...props}
           checked={checked}
           disabled={disabled}
           id={inputIdPresent}
@@ -114,6 +119,7 @@ const SelectableCard = (props: SelectableCardProps) => {
           ref={inputRef}
           type={inputType}
           value={value}
+          {...filteredProps}
       />
 
       <label
@@ -129,7 +135,9 @@ const SelectableCard = (props: SelectableCardProps) => {
                     paddingRight="xs"
                     vertical="center"
                 >
-                  <Input dark={dark}>
+                  <Input
+                      dark={dark}
+                  >
                     <input
                         checked={checked}
                         disabled={disabled}
@@ -145,11 +153,11 @@ const SelectableCard = (props: SelectableCardProps) => {
                     padding="sm"
                     status={error ? 'negative' : null}
                 >
-                  {text || children}
+                  {text ||props.children}
                 </Card.Body>
               </Flex>
               :
-            text || children
+            text || props.children
               }
           {displayIcon()}
         </div>
