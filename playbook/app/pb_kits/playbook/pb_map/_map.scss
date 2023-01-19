@@ -1,0 +1,20 @@
+@import "../tokens/typography";
+@import "../tokens/colors";
+
+.pb_map {
+  font-family: $font_family_base;
+
+  .leaflet-control-attribution a {
+    color: $primary !important;
+  }
+
+  .custom-icon {
+    background:$primary;
+    border:5px solid rgba(255,255,255,0.5);
+    color:$primary;
+    font-weight:bold;
+    text-align:center;
+    border-radius:50%;
+    line-height:100px;
+  }
+}

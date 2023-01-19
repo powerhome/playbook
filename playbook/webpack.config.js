@@ -178,6 +178,19 @@ module.exports = {
           SASS_LOADER,
         ],
       },
+      {
+        test: /\.css$/,
+        use: [
+          'style-loader',
+          'css-loader'
+        ]
+      },
+      {
+        test: /\.png$/,
+        use: [
+          'file-loader'
+        ]
+      },
       TS_LOADER,
       JS_LOADER,
       SVG_URL_LOADER,
