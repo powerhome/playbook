@@ -1,17 +1,15 @@
-/* @flow */
-
-import React, { type Node } from 'react'
+import React from 'react'
 import classnames from 'classnames'
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
 import { globalProps } from '../utilities/globalProps'
 
 type ListItemProps = {
-  aria?: object,
-  children: array<Node> | Node,
+  aria?: { [key: string]: string },
+  children: React.ReactNode[] | React.ReactNode,
   className?: string,
   data?: object,
   id?: string,
-  tabIndex?: string,
+  tabIndex?: number,
 }
 
 const ListItem = (props: ListItemProps) => {
