@@ -1,7 +1,5 @@
 @import "../tokens/typography";
 @import "../tokens/colors";
-//must bring leaflet css in via cdn to avoid webpack parsing issues
-@import url("https://unpkg.com/leaflet@1.9.3/dist/leaflet.css");
 
 .pb_map {
     font-family: $font_family_base;

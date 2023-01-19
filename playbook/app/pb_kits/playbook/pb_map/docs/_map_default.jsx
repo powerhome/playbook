@@ -1,5 +1,5 @@
 import React from "react"
-import Map from "../_Map"
+import Map from "../_map"
 import { Title } from "../.."
 import {
   MapContainer,
