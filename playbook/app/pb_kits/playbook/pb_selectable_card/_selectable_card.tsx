@@ -96,10 +96,12 @@ const SelectableCard = (props: SelectableCardProps) => {
   const Input = multi ? Checkbox : Radio
 
   const filteredProps = {...props}
-  if (filteredProps.inputId) delete filteredProps.inputId
-  if (filteredProps?.children) delete filteredProps.children
-  if (filteredProps?.icon) delete filteredProps.icon
-  if (filteredProps?.error) delete filteredProps.error
+  delete filteredProps?.inputId
+  delete filteredProps?.children
+  delete filteredProps?.icon
+  delete filteredProps?.error
+  delete filteredProps?.dark
+  delete filteredProps?.multi
   const labelProps: GlobalProps = variant === 'displayInput' ? { ...filteredProps, padding: 'none' } : { ...filteredProps }
 
   return (
