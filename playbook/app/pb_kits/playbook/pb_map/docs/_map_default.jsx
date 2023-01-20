@@ -28,12 +28,6 @@ const MapDefault = () => {
         //add controls
         map.addControl(new maplibregl.NavigationControl())
 
-        //add scale control
-        const scale = new maplibregl.ScaleControl({
-            maxWidth: 80,
-            unit: 'metric'
-        })
-        map.addControl(scale)
       }
     }, [])
 return ( 
