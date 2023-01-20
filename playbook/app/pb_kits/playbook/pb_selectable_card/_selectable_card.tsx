@@ -57,7 +57,6 @@ const SelectableCard = (props: SelectableCardProps) => {
     value,
     variant = 'default',
 } = props
-// }: SelectableCardProps) => {
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
 
@@ -101,7 +100,6 @@ const SelectableCard = (props: SelectableCardProps) => {
   if (filteredProps?.children) delete filteredProps.children
   if (filteredProps?.icon) delete filteredProps.icon
   if (filteredProps?.error) delete filteredProps.error
-
   const labelProps = variant === 'displayInput' ? { ...filteredProps, padding: 'none' } : { ...filteredProps }
 
   return (
