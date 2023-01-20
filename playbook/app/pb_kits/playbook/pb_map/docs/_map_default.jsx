@@ -22,7 +22,7 @@ const MapDefault = () => {
         const marker = new maplibregl.Marker({
           color: "#0056CF",
         }).setLngLat([-75.379143, 39.831200])
-        .setPopup(new maplibregl.Popup().setHTML("<p>Hello World!</p>")) // add popup
+        .setPopup(new maplibregl.Popup({className: 'map_popup'}).setHTML(`<h4 class="pb_title_kit_size_4">Hello World!</h4>`)) // add popup
         .addTo(map);
 
         //add controls
