@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@rails/webpacker": "5.2.1",
+    "maplibre-gl": "^2.4.0",
     "playbook-ui": ">= 1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",

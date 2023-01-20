@@ -4,6 +4,7 @@
 @import "playbook-ui/dist/tokens/border_radius";
 @import "playbook-ui/dist/tokens/shadows";
 
+@import url("https://unpkg.com/maplibre-gl@2.4.0/dist/maplibre-gl.css");
 $selector: ".pb--page";
 $nav_breakpoint: breakpoint("lg");
 
