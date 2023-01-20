@@ -56,7 +56,7 @@ const SelectableCard = (props: SelectableCardProps) => {
     text,
     value,
     variant = 'default',
-} = props
+  } = props
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
 
@@ -100,7 +100,7 @@ const SelectableCard = (props: SelectableCardProps) => {
   if (filteredProps?.children) delete filteredProps.children
   if (filteredProps?.icon) delete filteredProps.icon
   if (filteredProps?.error) delete filteredProps.error
-  const labelProps = variant === 'displayInput' ? Object.assign(props, { padding: 'none' }) : props
+  const labelProps: GlobalProps = variant === 'displayInput' ? { ...filteredProps, padding: 'none' } : { ...filteredProps }
 
   return (
     <div
