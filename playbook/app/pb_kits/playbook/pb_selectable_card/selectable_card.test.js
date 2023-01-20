@@ -50,3 +50,35 @@ test('should start with a checked item', () => {
   const kit = screen.getByLabelText('Selected')
   expect(kit).toBeChecked()
 })
+
+test('should start with a disabled item', () => {
+  render(<SelectableCardMultiSelect />)
+
+  const kit = screen.getByLabelText('Disabled')
+  expect(kit).toBeDisabled()
+})
+
+test('should click and check an item', () => {
+  render(<SelectableCardMultiSelect />)
+
+  const kit = screen.getByLabelText('Unselected')
+  expect(kit).not.toBeChecked()
+  kit.click()
+  expect(kit).toBeChecked()
+})
+
+test('should check multiple items', () => {
+  render(<SelectableCardMultiSelect />)
+
+  const checkedItem = screen.getByLabelText('Selected')
+  expect(checkedItem).toBeChecked()
+
+  const uncheckedItem = screen.getByLabelText('Unselected')
+  expect(uncheckedItem).not.toBeChecked()
+
+  uncheckedItem.click()
+
+  expect(checkedItem).toBeChecked
+  expect(uncheckedItem).toBeChecked
+
+})

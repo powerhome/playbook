@@ -100,7 +100,7 @@ const SelectableCard = (props: SelectableCardProps) => {
   if (filteredProps?.children) delete filteredProps.children
   if (filteredProps?.icon) delete filteredProps.icon
   if (filteredProps?.error) delete filteredProps.error
-  const labelProps = variant === 'displayInput' ? { ...filteredProps, padding: 'none' } : { ...filteredProps }
+  const labelProps = variant === 'displayInput' ? Object.assign(props, { padding: 'none' }) : props
 
   return (
     <div
