@@ -1,3 +1,10 @@
-.pb_map {
+@import "../tokens/typography";
+@import "../tokens/colors";
 
+.pb_map {
+  font-family: $font_family_base;
+
+  .pigeon-attribution a {
+    color: $primary !important;
+  }
 }
