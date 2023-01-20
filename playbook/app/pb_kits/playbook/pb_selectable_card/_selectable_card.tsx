@@ -1,6 +1,6 @@
 /* @flow */
 
-import React, {ReactElement, useRef} from 'react'
+import React, {useRef} from 'react'
 import classnames from 'classnames'
 
 import { globalProps, GlobalProps } from '../utilities/globalProps'
