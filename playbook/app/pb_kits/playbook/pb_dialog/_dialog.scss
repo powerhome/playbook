@@ -9,7 +9,7 @@
 
 
 // Dialog Animations
-
+// Dialog Animations for fading in and out from the center
 @keyframes modalFadeIn {
 	from {
 		transform: translate3d(0, -100%, 0);
@@ -28,6 +28,53 @@
 	}
 	to {
 		transform: translate3d(0, -50%, 0);
+		opacity: 0;
+	}
+}
+
+// Dialog Animations for fading in and out from the left side
+@keyframes modalFadeInLeft {
+	from {
+		transform: translate3d(-100%, 0, 0);
+		opacity: 0;
+	}
+	to {
+		transform: translate3d(0, 0, 0);
+		opacity: 1;
+	}
+}
+
+@keyframes modalFadeOutLeft {
+	from {
+		transform: translate3d(0, 0, 0);
+		opacity: 1;
+	}
+	to {
+		transform: translate3d(-50%, 0, 0);
+		opacity: 0;
+	}
+}
+
+
+// Dialog Animations for fading in and out from the right side
+@keyframes modalFadeInRight {
+	from {
+		transform: translate3d(100%, 0, 0);
+		opacity: 0;
+	}
+	to {
+		transform: translate3d(0, 0, 0);
+		opacity: 1;
+	}
+}
+
+@keyframes modalFadeOutRight {
+	from {
+		transform: translate3d(0, 0, 0);
+		opacity: 1;
+	}
+	to {
+		transform: translate3d(50%, 0, 0);
 		opacity: 0;
 	}
 }
@@ -63,7 +110,7 @@
 	$medium: 500px;
 	$large: 800px;
 	$xlarge: 1150px;
-	$animation-duration: 0.2s;
+	$animation-duration: .2s;
 	$z-index: 100;
 	$opacity_visible: 1;
 	$opacity_hidden: 0;
@@ -87,6 +134,24 @@
 	outline: none;
 	animation-timing-function: $easeInOutQuint;
 	
+	&[class*="_left"] {
+		animation-name: modalFadeInLeft;
+		&[class*="_before_close"] {
+			animation-name: modalFadeOutLeft;
+			animation-duration: $animation-duration;
+			opacity: $opacity_hidden;
+		}
+	}
+
+	&[class*="_right"] {
+		animation-name: modalFadeInRight;
+		&[class*="_before_close"] {
+			animation-name: modalFadeOutRight;
+			animation-duration: $animation-duration;
+			opacity: $opacity_hidden;
+		}
+	}
+	
 	&[class*="_status_size"] {
 		width: $status_size;
 	}
@@ -98,6 +163,7 @@
 	&[class*="_md"] {
 		width: $medium;
 	}
+	
 
 	&[class*="_lg"] {
 		width: $large;
@@ -111,7 +177,7 @@
 		opacity: $opacity_visible;
 	}
 
-	&_before_close {
+	&[class*="_before_close"] {
 		animation-name: modalFadeOut;
 		animation-duration: $animation-duration;
 		opacity: $opacity_hidden;
