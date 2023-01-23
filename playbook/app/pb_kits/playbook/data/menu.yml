@@ -55,6 +55,7 @@ kits:
   - lightbox
   - list
   - loading_inline
+  - map
   - nav
   - tags:
     - badge
@@ -104,4 +105,3 @@ kits:
     - title_detail
   - user_badge
   - walkthrough
-  - map

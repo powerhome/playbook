@@ -5,7 +5,7 @@ import { globalProps } from '../utilities/globalProps'
 
 type MapProps = {
   aria?: { [key: string]: string },
-  children?: any,
+  children?: React.ReactChild[] | React.ReactNode,
   className?: string,
   data?: { [key: string]: string },
   id?: string,
@@ -13,8 +13,8 @@ type MapProps = {
 
 const Map = (props: MapProps) => {
   const {
-    aria = {},
-    children,
+  aria = {},
+  children,
   className,
   data = {},
   id,
