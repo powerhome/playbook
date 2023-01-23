@@ -78,7 +78,7 @@ const FileUpload = (props: FileUploadProps): React.ReactElement => {
 
   const dataProps = buildDataProps(data)
 
-  const getDescription = (): string => {
+  const getDescription = () => {
     return customMessage
       ? customMessage
       : `Choose a file or drag it here.${accept === null ? '' : ` The accepted file types are: ${acceptedFilesDescription || acceptedFileTypes()}.`}${maxSize ? ` ${maxFileSizeText}` : ''}`;
