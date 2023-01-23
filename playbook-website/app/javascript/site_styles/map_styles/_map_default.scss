@@ -1,0 +1,20 @@
+@import "playbook-ui/dist/tokens/colors";
+@import "playbook-ui/dist/tokens/spacing";
+
+.pb_map {
+  height: 400px;
+
+  .map_popup {
+    .maplibregl-popup-content {
+      padding: $space_sm;
+      border-radius: $space_sm;
+      .maplibregl-popup-close-button {
+        top: $space_xxs;
+        right: $space_xxs;
+      }
+      .maplibregl-popup-close-button:focus {
+        outline: none;
+      }
+    }
+  }
+}
