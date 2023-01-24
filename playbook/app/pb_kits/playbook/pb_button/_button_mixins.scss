@@ -10,7 +10,7 @@ $pb_button_size: 40px;
 $pb_button_v_padding: 7px;
 $pb_button_h_padding: 34px;
 $pb_button_hover_darken: 4%;
-$pb_button_border_width: 0px;
+$pb_button_border_width: 2px;
 
 @mixin pb_button_variant($bg: $primary_action, $color: $text_dk_default, $border: transparent) {
   background-color: $bg;
@@ -36,7 +36,7 @@ $pb_button_border_width: 0px;
   line-height: 1.5;
   padding: $pb_button_v_padding $pb_button_h_padding;
   cursor: pointer;
-  outline: none;
+  outline: 2px;
   transition: background $transition_default ease, color $transition_default ease;
   box-sizing: border-box;
   display: inline-flex;
@@ -62,9 +62,13 @@ $pb_button_border_width: 0px;
     margin-left: $space_xs;
   }
 
-  &:hover, &:focus {
+  &:hover {
     outline: none;
     
+  }
+  &:focus {
+    outline: $primary solid 2px;
+    outline-offset: 2px;
   }
 
   &:active {
