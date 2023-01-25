@@ -5,12 +5,13 @@
 @import "../tokens/spacing";
 @import "../tokens/transition";
 @import "../tokens/typography";
+@import "../tokens/accessibility";
 
 $pb_button_size: 40px;
 $pb_button_v_padding: 7px;
 $pb_button_h_padding: 34px;
 $pb_button_hover_darken: 4%;
-$pb_button_border_width: 2px;
+$pb_button_border_width: 0px;
 
 @mixin pb_button_variant($bg: $primary_action, $color: $text_dk_default, $border: transparent) {
   background-color: $bg;
@@ -36,7 +37,7 @@ $pb_button_border_width: 2px;
   line-height: 1.5;
   padding: $pb_button_v_padding $pb_button_h_padding;
   cursor: pointer;
-  outline: 2px;
+  outline: none;
   transition: background $transition_default ease, color $transition_default ease;
   box-sizing: border-box;
   display: inline-flex;
@@ -64,12 +65,9 @@ $pb_button_border_width: 2px;
 
   &:hover {
     outline: none;
-    
   }
-  &:focus-visible {
-    outline: $focus_color solid 2px;
-    outline-offset: 2px;
-  }
+
+  @include focus;
 
   &:active {
     outline: none;
