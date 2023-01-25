@@ -93,7 +93,7 @@ const Typeahead = ({
   const handleOnChange = (_data, { action, option, removedValue }) => {
     if (action === 'select-option') {
       if (selectProps.onMultiValueClick) selectProps.onMultiValueClick(option)
-      const multiValueClearEvent = new CustomEvent(`pb-typeahead-kit-${selectProps.id}-result-option-select`, { detail: option })
+      const multiValueClearEvent = new CustomEvent(`pb-typeahead-kit-${selectProps.id}-result-option-select`, { detail: option ? option : _data })
       document.dispatchEvent(multiValueClearEvent)
     }
     if (action === 'remove-value' || action === 'pop-value') {
