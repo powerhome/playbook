@@ -1,5 +1,126 @@
 
 
+## [11.20.0](https://github.com/powerhome/playbook/tree/11.20.0) (2023-01-23)
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/11.19.0...11.20.0)
+
+**Kit Enhancements:**
+
+- Converting Selectable Icon kit to Typescript [\#2259](https://github.com/powerhome/playbook/pull/2259) ([carloslimasd](https://github.com/carloslimasd))
+- Typescript Conversion Selectable Card [\#2258](https://github.com/powerhome/playbook/pull/2258) ([Israel-Molestina](https://github.com/Israel-Molestina))
+- Add Custom Message to FileUpload kit [\#2256](https://github.com/powerhome/playbook/pull/2256) ([gavhuang](https://github.com/gavhuang))
+- Dialog Kit Animation [\#2248](https://github.com/powerhome/playbook/pull/2248) ([Israel-Molestina](https://github.com/Israel-Molestina))
+- Body kit style \<b\>, \<strong\>, and \<a\> [\#2247](https://github.com/powerhome/playbook/pull/2247) ([Israel-Molestina](https://github.com/Israel-Molestina))
+
+**Fixed Bugs:**
+
+- Fixing Select Icon Position in Error State [\#2253](https://github.com/powerhome/playbook/pull/2253) ([carloslimasd](https://github.com/carloslimasd))
+
+**Improvements:**
+
+- Update dependency react-highlight-words to ^0.20.0 [\#2275](https://github.com/powerhome/playbook/pull/2275) ([renovate[bot]](https://github.com/apps/renovate))
+- Update dependency flow-bin to v0.198.1 [\#2274](https://github.com/powerhome/playbook/pull/2274) ([renovate[bot]](https://github.com/apps/renovate))
+- Bump ci-kubed to v6.0.0 [\#2272](https://github.com/powerhome/playbook/pull/2272) ([TeamTeaTime](https://github.com/TeamTeaTime))
+- Bump globalid from 1.0.0 to 1.0.1 in /examples/playbook-rails [\#2267](https://github.com/powerhome/playbook/pull/2267) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump rack from 2.2.4 to 2.2.6.2 in /examples/playbook-rails [\#2264](https://github.com/powerhome/playbook/pull/2264) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump rack from 2.2.4 to 2.2.6.2 in /examples/playbook-rails-webpack [\#2262](https://github.com/powerhome/playbook/pull/2262) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump rack from 2.2.4 to 2.2.6.2 in /examples/rails-react-example [\#2261](https://github.com/powerhome/playbook/pull/2261) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Update dependency @types/react to v17.0.53 [\#2257](https://github.com/powerhome/playbook/pull/2257) ([renovate[bot]](https://github.com/apps/renovate))
+
+
+
+
+## [11.19.0](https://github.com/powerhome/playbook/tree/11.19.0) (2023-01-16)
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/11.18.0...11.19.0)
+
+**Kit Enhancements:**
+
+- Convert List Kit to Typescript [\#2234](https://github.com/powerhome/playbook/pull/2234) ([nidaqg](https://github.com/nidaqg))
+- Provide Text Highlight Example in Typeahead Kit [\#2231](https://github.com/powerhome/playbook/pull/2231) ([thestephenmarshall](https://github.com/thestephenmarshall))
+- TS Conversion Popover [\#2219](https://github.com/powerhome/playbook/pull/2219) ([nidaqg](https://github.com/nidaqg))
+
+**Fixed Bugs:**
+
+- Fixing Collapsible Kit Content Spacing Issue [\#2229](https://github.com/powerhome/playbook/pull/2229) ([carloslimasd](https://github.com/carloslimasd))
+
+**Improvements:**
+
+- Make Dev Dependencies Actually Dev Dependencies [\#2236](https://github.com/powerhome/playbook/pull/2236) ([drborges](https://github.com/drborges))
+
+
+
+## [11.18.0](https://github.com/powerhome/playbook/tree/11.18.0) (2023-01-10)
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/11.17.0...11.18.0)
+
+**Kit Enhancements:**
+
+- Update Error Color Token [\#2226](https://github.com/powerhome/playbook/pull/2226) ([nidaqg](https://github.com/nidaqg))
+- New psuedo border on hover: + Table.scss file cleanup [\#2189](https://github.com/powerhome/playbook/pull/2189) ([jasoncypret](https://github.com/jasoncypret), [carloslimasd](https://github.com/carloslimasd), [Israel-Molestina](https://github.com/Israel-Molestina)), 
+
+**Fixed Bugs:**
+
+- Fixed SVG-loader Error in User Badge Kit [\#2244](https://github.com/powerhome/playbook/pull/2244) ([nidaqg](https://github.com/nidaqg))
+
+**Improvements:**
+
+- Fixes loader-utils security vulnerability [\#2241](https://github.com/powerhome/playbook/pull/2241) ([jasperfurniss](https://github.com/jasperfurniss))
+- Popover Kit Updates for Dropdown Doc Example [\#2235](https://github.com/powerhome/playbook/pull/2235) ([nidaqg](https://github.com/nidaqg))
+
+
+
+## [11.17.0](https://github.com/powerhome/playbook/tree/11.17.0) (2023-01-06)
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/11.16.0...11.17.0)
+
+**Improvements:**
+
+- Update React to v17 [\#2230](https://github.com/powerhome/playbook/pull/2230) ([nidaqg](https://github.com/nidaqg))
+
+
+
+## [11.16.0](https://github.com/powerhome/playbook/tree/11.16.0) (2023-01-03)
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/11.15.0...11.16.0)
+
+**Fixed Bugs:**
+
+- Circle Chart Fix for Live Update Variant [\#2237](https://github.com/powerhome/playbook/pull/2237) ([nidaqg](https://github.com/nidaqg))
+
+**Improvements:**
+
+- Rebuild Charts to Use React-Highcharts [\#2191](https://github.com/powerhome/playbook/pull/2191) ([nidaqg](https://github.com/nidaqg))
+
+
+
+## [11.15.0](https://github.com/powerhome/playbook/tree/11.15.0) (2022-12-19)
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/11.14.0...11.15.0)
+
+**Kit Enhancements:**
+
+- Dialog Sticky Header Footer [\#2207](https://github.com/powerhome/playbook/pull/2207) ([nidaqg](https://github.com/nidaqg))
+
+**Fixed Bugs:**
+
+- Nav Kit Wiggle Fix [\#2223](https://github.com/powerhome/playbook/pull/2223) ([nidaqg](https://github.com/nidaqg))
+
+**Improvements:**
+
+- Updating new kit architecture names [\#2217](https://github.com/powerhome/playbook/pull/2217) ([carloslimasd](https://github.com/carloslimasd))
+
+
+
+## [11.14.0](https://github.com/powerhome/playbook/tree/11.14.0) (2022-12-13)
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/11.13.0...11.14.0)
+
+**Kit Enhancements:**
+
+- Passphrase kit dependency and documentation [\#2172](https://github.com/powerhome/playbook/pull/2172) ([augustomallmann](https://github.com/augustomallmann), [Israel-Molestina](https://github.com/Israel-Molestina) )
+
+
 ## [11.13.0](https://github.com/powerhome/playbook/tree/11.13.0) (2022-12-05)
 
 [Full Changelog](https://github.com/powerhome/playbook/compare/11.12.1...11.13.0)
@@ -2955,28 +3076,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Rails PbLayout prop `dark` dropped (https://github.com/powerhome/playbook/commit/b16da50914e110c75c6d96c985fa02781c9e2040#diff-377fda563d148f7b3ad33f904b7b0cdbL13)
 
 
-
-
-\* *This Changelog was automatically generated by [github_changelog_generator](https://github.com/github-changelog-generator/github-changelog-generator)*
-
-
-
-\* *This Changelog was automatically generated by [github_changelog_generator](https://github.com/github-changelog-generator/github-changelog-generator)*
-
-
-\* *This Changelog was automatically generated by [github_changelog_generator](https://github.com/github-changelog-generator/github-changelog-generator)*
-
-
-\* *This Changelog was automatically generated by [github_changelog_generator](https://github.com/github-changelog-generator/github-changelog-generator)*
-
-
-\* *This Changelog was automatically generated by [github_changelog_generator](https://github.com/github-changelog-generator/github-changelog-generator)*
-
-
-\* *This Changelog was automatically generated by [github_changelog_generator](https://github.com/github-changelog-generator/github-changelog-generator)*
-
-
-\* *This Changelog was automatically generated by [github_changelog_generator](https://github.com/github-changelog-generator/github-changelog-generator)*
 
 
 \* *This Changelog was automatically generated by [github_changelog_generator](https://github.com/github-changelog-generator/github-changelog-generator)*

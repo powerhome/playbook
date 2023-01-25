@@ -3,15 +3,14 @@
 module Playbook
   module PbPassphrase
     class Passphrase < Playbook::KitBase
-      prop :average_threshold
-      prop :check_pwned
       prop :confirmation, type: Playbook::Props::Boolean, default: false
       prop :input_props, type: Playbook::Props::Hash, default: {}
       prop :label
-      prop :min_length
-      prop :show_tips_below
-      prop :strong_threshold
+      prop :show_tips_below, type: Playbook::Props::Enum,
+                             values: %w[always xs sm md lg xl],
+                             default: "always"
       prop :tips, type: Playbook::Props::Array, default: []
+      prop :value, type: Playbook::Props::String
 
       def classname
         generate_classname("pb_passphrase")
@@ -19,18 +18,15 @@ module Playbook
 
       def passphrase_options
         {
-          checkPwned: check_pwned,
           dark: dark,
           id: id,
-          averageThreshold: average_threshold,
           confirmation: confirmation,
           inputProps: input_props,
           label: label,
-          minLength: min_length,
           showTipsBelow: show_tips_below,
-          strongThreshold: strong_threshold,
           tips: tips,
           uncontrolled: true,
+          value: value,
         }.compact
       end
     end

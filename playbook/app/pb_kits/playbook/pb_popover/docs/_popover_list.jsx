@@ -5,6 +5,7 @@ import {
   List,
   ListItem,
   PbReactPopover,
+  Flex,
 } from '../..'
 
 const PopoverWithButton = (props) => {
@@ -19,11 +20,19 @@ const PopoverWithButton = (props) => {
         onClick={handleTogglePopover}
         variant="secondary"
     >
-      {'Filter By'}
-      <Icon
-          fixedWidth
-          icon="angle-down"
-      />
+      <Flex align="center">
+        {"Filter By"}
+        <Flex
+            className={showPopover ? "fa-flip-vertical" : ""}
+            display="inline_flex"
+        >
+          <Icon 
+              fixedWidth 
+              icon="angle-down" 
+              margin-left="xxs" 
+          />
+        </Flex>
+      </Flex>
     </Button>
   )
 

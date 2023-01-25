@@ -1,6 +1,6 @@
 #!/usr/bin/env groovy
 
-library 'github.com/powerhome/ci-kubed@v5.8.1'
+library 'github.com/powerhome/ci-kubed@v6.0.0'
 
 app.build(
   resources: [
@@ -11,8 +11,6 @@ app.build(
   ]
 ) {
   app.composeBuild(
-    workflow: this,
-    projectName: "playbook",
     appRepo: "image-registry.powerapp.cloud/playbook/playbook",
     files: ["docker-compose.yml", "docker-compose.ci.yml"]
   ) { compose ->

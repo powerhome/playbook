@@ -1,9 +1,13 @@
 import PbEnhancedElement from '../pb_enhanced_element'
-import { createPopper } from '@popperjs/core'
+import { createPopper, Instance, Placement } from '@popperjs/core'
 
 const POPOVER_OFFSET_Y = [0, 20]
 
 export default class PbPopover extends PbEnhancedElement {
+  popper: Instance
+  _triggerElement: HTMLElement
+  _tooltip: HTMLElement
+  element: HTMLElement
   static get selector() {
     return '[data-pb-popover-kit]'
   }
@@ -14,8 +18,8 @@ export default class PbPopover extends PbEnhancedElement {
 
   connect() {
     this.moveTooltip()
-    this.popper = createPopper(this.triggerElement, this.tooltip, {
-      placement: this.position,
+    this.popper = createPopper (this.triggerElement, this.tooltip, {
+      placement: this.position as Placement,
       strategy: 'fixed',
       modifiers: [
         {
@@ -27,7 +31,7 @@ export default class PbPopover extends PbEnhancedElement {
       ],
     })
 
-    this.triggerElement.addEventListener('click', (event) => {
+    this.triggerElement.addEventListener('click', (event: Event) => {
       event.preventDefault()
       event.stopPropagation()
 
@@ -43,8 +47,8 @@ export default class PbPopover extends PbEnhancedElement {
   }
 
   checkCloseTooltip() {
-    document.querySelector('body').addEventListener('click', ({ target }) => {
-      const isTooltipElement = target.closest(`#${this.tooltipId}`) !== null
+    document.querySelector('body').addEventListener('click', ({ target } ) => {
+      const isTooltipElement = (target as HTMLElement).closest(`#${this.tooltipId}`) !== null
 
       switch (this.closeOnClick) {
       case 'any':
