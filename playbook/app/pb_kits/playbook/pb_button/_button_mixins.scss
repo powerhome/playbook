@@ -89,6 +89,7 @@ $pb_button_border_width: 0px;
       @include pb_button_hover;
     }
     &:active {
+      transition: none;
       @include pb_button_variant($primary_action);
     }
   }
@@ -103,6 +104,7 @@ $pb_button_border_width: 0px;
       @include pb_button_hover(rgba($primary_action, $opacity_3));
     }
     &:active {
+      transition: none;
       @include pb_button_variant(rgba($primary_action, 0.05), $primary_action);
     }
   } 
@@ -118,6 +120,7 @@ $pb_button_border_width: 0px;
       color: $text_lt_default;
     }
     &:active {
+      transition: none;
       @include pb_button_variant($transparent, $primary_action);
     }
   }
@@ -161,6 +164,7 @@ $pb_button_border_width: 0px;
       @include pb_button_hover($bg: darken($primary_action, $pb_button_hover_darken));
     }
     &:active {
+      transition: none;
       @include pb_button_variant($primary_action);
     }
   }
@@ -175,6 +179,7 @@ $pb_button_border_width: 0px;
       @include pb_button_hover(rgba($primary_action, $opacity_2));
     }
     &:active {
+      transition: none;
       @include pb_button_variant(rgba($white, 0.2), $white);
     }
   }
@@ -190,6 +195,7 @@ $pb_button_border_width: 0px;
       color: rgba($white, $opacity_6)
     }
     &:active {
+      transition: none;
       @include pb_button_variant($transparent, $white);
     }
   }
