@@ -6,6 +6,7 @@ const ButtonIconOptions = (props) => (
       <Button
           fixedWidth
           icon='plus'
+          marginRight='lg'
           text="Icon on Left"
           {...props}
       />
@@ -14,6 +15,7 @@ const ButtonIconOptions = (props) => (
           fixedWidth
           icon='chevron-right'
           iconRight
+          marginRight='lg'
           text="Icon on Right"
           {...props}
       />

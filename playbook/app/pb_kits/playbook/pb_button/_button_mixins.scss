@@ -67,7 +67,7 @@ $pb_button_border_width: 2px;
     
   }
   &:focus {
-    outline: $primary solid 2px;
+    outline: $focus_color solid 2px;
     outline-offset: 2px;
   }
 
@@ -120,6 +120,9 @@ $pb_button_border_width: 2px;
   $disabled_color: rgba($charcoal, $opacity_5);
   @include pb_button_variant(rgba($slate, $opacity_4), $disabled_color);
   pointer-events: none;
+  &:focus {
+    outline: none;
+  }
 }
 
 // Block =======================

@@ -6,6 +6,7 @@ const ButtonLoading = (props) => (
     <Button
         aria={{ label: 'Loading' }}
         loading
+        marginRight='lg'
         text="Button Primary"
         {...props}
     />
@@ -13,6 +14,7 @@ const ButtonLoading = (props) => (
     <Button
         aria={{ label: 'Loading' }}
         loading
+        marginRight='lg'
         text="Button Secondary"
         variant="secondary"
         {...props}
@@ -21,6 +23,7 @@ const ButtonLoading = (props) => (
     <Button
         aria={{ label: 'Loading' }}
         loading
+        marginRight='lg'
         text="A Tag Button Disabled"
         variant="link"
         {...props}
