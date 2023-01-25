@@ -227,6 +227,9 @@
 				height: 100%;
 				max-height: 100%;
 				max-width: none;
+				.dialog_body {
+					padding-bottom: $space_xl * 2 !important;
+				}	
 				.dialog_footer {
 					position:fixed;
 					bottom: 0;
@@ -287,6 +290,9 @@
 			height: 100% !important;
 			max-height: 100% !important;
 			max-width: 100%;
+			.dialog_body {
+				padding-bottom: $space_xl * 2 !important;
+			}
 			.dialog_footer {
 				position:fixed;
 				bottom: 0;
