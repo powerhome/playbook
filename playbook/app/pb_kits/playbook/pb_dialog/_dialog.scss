@@ -316,6 +316,7 @@
 	// fixes for stylesheets in nitro that were conflicting with our kit. DO NOT REMOVE. 
 	//conflicts were only apparent in nitro, not in playbook local env
 	.pb_dialog_rails {
+		position: fixed !important;
 		top: 0 !important;
 		padding: unset !important;
 		margin: auto;
