@@ -168,6 +168,9 @@
         color: $text_lt_default;
       }
       &__control {
+        &[class*=error] {
+          border-color: $error;
+        }
         &--is-focused {
           @include pb_textarea_focus;
           @include transition_default;
@@ -181,8 +184,6 @@
       }
     }
   }
-
-  
  
   .typeahead-kit-select__menu {
     .typeahead-kit-select__option {

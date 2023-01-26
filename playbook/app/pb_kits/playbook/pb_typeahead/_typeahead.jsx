@@ -17,6 +17,7 @@ import MultiValue from './components/MultiValue'
 import Option from './components/Option'
 import Placeholder from './components/Placeholder'
 import ValueContainer from './components/ValueContainer'
+import { Caption } from '../'
 
 import { noop } from '../utilities/props'
 
@@ -32,6 +33,7 @@ type TypeaheadProps = {
   components?: object,
   createable?: boolean,
   dark?: boolean,
+  error?: string,
   id?: string,
   label?: string,
   loadOptions?: string,
@@ -49,6 +51,7 @@ const Typeahead = ({
   async,
   components = {},
   createable,
+  error = "",
   getOptionLabel,
   getOptionValue,
   id,
@@ -108,14 +111,22 @@ const Typeahead = ({
 
   const classes = `pb_typeahead_kit react-select ${globalProps(props)}`
   const inlineClass = selectProps.inline ? 'inline' : null
+  const errorClass = error !== "" ? "error" : null
 
   return (
     <div className={classnames(classes, inlineClass)}>
       <Tag
-          classNamePrefix="typeahead-kit-select"
+          classNamePrefix={errorClass + " " + "typeahead-kit-select"}
           onChange={handleOnChange}
           {...selectProps}
       />
+      {error !== "" ? 
+        <>
+          <Caption size='xs'
+              text={error} 
+          />
+        </>
+      : null}
     </div>
   )
 }
