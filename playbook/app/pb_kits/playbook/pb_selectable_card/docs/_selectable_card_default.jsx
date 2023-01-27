@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import SelectableCard from '../_selectable_card.jsx'
+import SelectableCard from '../_selectable_card.tsx'
 
 const SelectableCardDefault = (props) => {
   const [selectedWithIcon, setSelectedWithIcon] = useState(true)
@@ -24,7 +24,6 @@ const SelectableCardDefault = (props) => {
 
       <SelectableCard
           checked={selectedNoIcon}
-          icon={false}
           inputId="selectedWithoutIcon"
           name="selectedWithoutIcon"
           onChange={() => setSelectedNoIcon(!selectedNoIcon)}

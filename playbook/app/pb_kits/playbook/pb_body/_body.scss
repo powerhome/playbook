@@ -1,4 +1,5 @@
 @import "./body_mixins";
+@import "../tokens/titles";
 
 [class^=pb_body_kit]{
   @include pb_body($text_lt_default);
@@ -12,13 +13,21 @@
       }
     }
   }
-
   @each $dark_color_name, $dark_color_value in $pb_dark_body_colors{
     &[class*=_#{$dark_color_name}][class*=dark]{
       @include pb_body($dark_color_value);
     }
   }
+  b, strong {
+    @include pb_title_4
+  }
 
+  a {
+    color: $primary;
+    &:hover {
+      color: $text_lt_default;
+    }
+  }
   @each $status_name, $status_value in $pb_body_status {
     &[class*=#{$status_name}] {
       @include pb_body($status_value);

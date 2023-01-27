@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 
 import SelectableIcon from '../_selectable_icon'
 
-const SelectableIconSingleSelect = (props) => {
+const SelectableIconSingleSelect = () => {
   const [ selectedFormat, toggleFormat ] = useState(null)
 
   return (
@@ -17,7 +17,6 @@ const SelectableIconSingleSelect = (props) => {
           onChange={() => toggleFormat('Cassette')}
           text="Cassette"
           value="Cassette"
-          {...props}
       />
 
       <SelectableIcon
@@ -29,7 +28,6 @@ const SelectableIconSingleSelect = (props) => {
           onChange={() => toggleFormat('CD')}
           text="CD"
           value="CD"
-          {...props}
       />
 
       <SelectableIcon
@@ -41,7 +39,6 @@ const SelectableIconSingleSelect = (props) => {
           onChange={() => toggleFormat('Vinyl')}
           text="Vinyl"
           value="Vinyl"
-          {...props}
       />
     </div>
   )

@@ -38,3 +38,15 @@ test('displays max file size text', () => {
   const kit = screen.getByTestId(testid)
   expect(kit).toHaveTextContent('Choose a file or drag it here. Max file size is 1 MB.')
 })
+
+test('displays custom message', () => {
+  render(
+    <FileUpload
+        customMessage={'Hello world!'}
+        data={{ testid: testid }}
+    />
+  )
+
+  const kit = screen.getByTestId(testid)
+  expect(kit).toHaveTextContent('Hello world!')
+})

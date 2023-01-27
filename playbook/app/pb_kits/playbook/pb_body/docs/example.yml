@@ -2,6 +2,8 @@ examples:
   rails:
   - body_light: Default
   - body_block: Block
+  - body_styled: Styled b/strong/a tags
   react:
   - body_light: Default
   - body_block: Block
+  - body_styled: Styled b/strong/a tags
