@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import SelectableCard from '../_selectable_card.jsx'
+import SelectableCard from '../_selectable_card.tsx'
 
 const SelectableCardSingleSelect = (props) => {
   const [selected, setSelected] = useState(null)

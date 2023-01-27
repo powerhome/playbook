@@ -1,5 +1,35 @@
 
 
+## [11.20.0](https://github.com/powerhome/playbook/tree/11.20.0) (2023-01-23)
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/11.19.0...11.20.0)
+
+**Kit Enhancements:**
+
+- Converting Selectable Icon kit to Typescript [\#2259](https://github.com/powerhome/playbook/pull/2259) ([carloslimasd](https://github.com/carloslimasd))
+- Typescript Conversion Selectable Card [\#2258](https://github.com/powerhome/playbook/pull/2258) ([Israel-Molestina](https://github.com/Israel-Molestina))
+- Add Custom Message to FileUpload kit [\#2256](https://github.com/powerhome/playbook/pull/2256) ([gavhuang](https://github.com/gavhuang))
+- Dialog Kit Animation [\#2248](https://github.com/powerhome/playbook/pull/2248) ([Israel-Molestina](https://github.com/Israel-Molestina))
+- Body kit style \<b\>, \<strong\>, and \<a\> [\#2247](https://github.com/powerhome/playbook/pull/2247) ([Israel-Molestina](https://github.com/Israel-Molestina))
+
+**Fixed Bugs:**
+
+- Fixing Select Icon Position in Error State [\#2253](https://github.com/powerhome/playbook/pull/2253) ([carloslimasd](https://github.com/carloslimasd))
+
+**Improvements:**
+
+- Update dependency react-highlight-words to ^0.20.0 [\#2275](https://github.com/powerhome/playbook/pull/2275) ([renovate[bot]](https://github.com/apps/renovate))
+- Update dependency flow-bin to v0.198.1 [\#2274](https://github.com/powerhome/playbook/pull/2274) ([renovate[bot]](https://github.com/apps/renovate))
+- Bump ci-kubed to v6.0.0 [\#2272](https://github.com/powerhome/playbook/pull/2272) ([TeamTeaTime](https://github.com/TeamTeaTime))
+- Bump globalid from 1.0.0 to 1.0.1 in /examples/playbook-rails [\#2267](https://github.com/powerhome/playbook/pull/2267) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump rack from 2.2.4 to 2.2.6.2 in /examples/playbook-rails [\#2264](https://github.com/powerhome/playbook/pull/2264) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump rack from 2.2.4 to 2.2.6.2 in /examples/playbook-rails-webpack [\#2262](https://github.com/powerhome/playbook/pull/2262) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump rack from 2.2.4 to 2.2.6.2 in /examples/rails-react-example [\#2261](https://github.com/powerhome/playbook/pull/2261) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Update dependency @types/react to v17.0.53 [\#2257](https://github.com/powerhome/playbook/pull/2257) ([renovate[bot]](https://github.com/apps/renovate))
+
+
+
+
 ## [11.19.0](https://github.com/powerhome/playbook/tree/11.19.0) (2023-01-16)
 
 [Full Changelog](https://github.com/powerhome/playbook/compare/11.18.0...11.19.0)
