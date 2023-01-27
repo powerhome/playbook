@@ -75,7 +75,7 @@ class PagesController < ApplicationController
 
   def kit_show_rails
     @type = "rails"
-    @users = Array.new(9) { Faker::Name.name }.paginate(page: 2, per_page: 1)
+    @users = Array.new(9) { Faker::Name.name }.paginate(page: params[:page], per_page: 2)
     render "pages/kit_show", layout: "layouts/kits"
   end
 
