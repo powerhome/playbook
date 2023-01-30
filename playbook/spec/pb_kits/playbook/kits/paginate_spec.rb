@@ -8,7 +8,6 @@ RSpec.describe Playbook::PbPaginate::Paginate do
   subject { Playbook::PbPaginate::Paginate }
 
   it { is_expected.to define_prop(:model) }
-  it { is_expected.to define_prop(:strategy) }
   it { is_expected.to define_prop(:view) }
 
   describe "#classname" do
